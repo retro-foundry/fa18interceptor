@@ -29,5 +29,11 @@ same arithmetic pattern but negates its initial inputs and final candidate;
 the routine is consequently documented as a polarity variant, not as a
 geometric or display operation.
 
+Both helpers use the shared `$C2EC36-$C2EC67` tail, reconstructed in
+`source_amiga/observed/classify_adjusted_display_pair_bounds.asm`. It snapshots
+`D0-D2` to `$C45AC6`, accepts only a non-negative `D2` bound with both signed
+components within that bound, restores the saved registers, and returns status
+zero for acceptance or one for rejection.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
