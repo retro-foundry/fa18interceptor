@@ -22,3 +22,8 @@ The second branch, `$C0D8BE-$C0D90B`, is reconstructed in
 record count five and selects an ordered set of the same leaf calls from bit 1
 of `$C458CA`; the extended form initializes a second count-three record at an
 eight-byte offset before its final leaf.
+
+The third branch, `$C0D90C-$C0D959`, is reconstructed in
+`source_amiga/observed/emit_third_display_record_pair.asm`. It has the same
+count-five setup and flag test, but a different ordered leaf sequence; only its
+extended form appends the second count-three record and final leaf.
