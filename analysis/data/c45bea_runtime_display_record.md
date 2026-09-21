@@ -4,7 +4,7 @@ The Golden Gate pre-cull sheet formerly labelled `$C45BEA` has a recognisably
 aircraft- or missile-like silhouette. Follow-up caller capture shows that
 `$C45BEA` is its active transform/display context, while the actual face
 records are `$C34C06-$C34C48`. The plot is now catalogued as the
-[`$C34C` aircraft-detail family](c34c_aircraft_detail_face_family.md), not as
+[`$C34C` flight-object detail candidate](c34c_aircraft_detail_face_family.md), not as
 a `$C45BEA` model.
 
 ## Evidence
@@ -33,5 +33,5 @@ a `$C45BEA` model.
 ## Conclusion
 
 `$C45BEA` is renderer-consumable runtime data. It changes the pose/display of
-the linked `$C34C` aircraft-detail faces but is not itself an exportable static
+the linked `$C34C` detail faces but is not itself an exportable static
 mesh. Keep it separate from static-model export candidates.

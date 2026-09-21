@@ -19,7 +19,8 @@ def font(size: int):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--input", type=Path, action="append", default=None,
+                        help="polygon/pre-clip report; may be repeated to assemble one observed frame")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--context", action="append")
     parser.add_argument("--line-input", type=Path,
@@ -33,32 +34,35 @@ def main() -> None:
     parser.add_argument("--title", default="External-aircraft model candidate: $C3515E -> $C34A9A")
     parser.add_argument("--fit", action="store_true", help="centre and scale each view to its observed geometry")
     args = parser.parse_args()
-    args.input = args.input.resolve()
+    inputs = args.input or [DEFAULT_INPUT]
+    inputs = [path.resolve() for path in inputs]
     args.output = args.output.resolve()
     contexts = args.context or ["$C34A9A"]
-    report = json.loads(args.input.read_text(encoding="utf-8"))
     embedded_lines = []
-    if "instances" in report:
-        if not args.instance_source:
-            raise ValueError("--instance-source is required for instance-geometry input")
-        requested_sources = {source.upper() for source in args.instance_source}
-        instances = [item for item in report["instances"]
-                     if item["source"].upper() in requested_sources]
-        if args.occurrence is not None:
-            instances = [item for item in instances if item.get("occurrence") == args.occurrence]
-        if not instances:
-            raise ValueError(f"instance source(s) {sorted(requested_sources)} not found")
-        polygons = [submission["triples"] for instance in instances for submission in instance["polygons"]
-                    if submission["context_a5"] in contexts]
-        line_contexts = args.line_context or contexts
-        embedded_lines = [tuple(tuple(point) for point in segment["triples"])
-                          for instance in instances for submission in instance["lines"] if submission["context_a5"] in line_contexts
-                          for segment in submission["segments"]]
-    else:
-        polygons = [submission["triples"] for submission in report["submissions"]
-                    if submission["context"]["a5"] in contexts]
+    polygons = []
+    for input_path in inputs:
+        report = json.loads(input_path.read_text(encoding="utf-8"))
+        if "instances" in report:
+            if not args.instance_source:
+                raise ValueError("--instance-source is required for instance-geometry input")
+            requested_sources = {source.upper() for source in args.instance_source}
+            instances = [item for item in report["instances"]
+                         if item["source"].upper() in requested_sources]
+            if args.occurrence is not None:
+                instances = [item for item in instances if item.get("occurrence") == args.occurrence]
+            if not instances:
+                raise ValueError(f"instance source(s) {sorted(requested_sources)} not found")
+            polygons.extend(submission["triples"] for instance in instances for submission in instance["polygons"]
+                            if submission["context_a5"] in contexts)
+            line_contexts = args.line_context or contexts
+            embedded_lines.extend(tuple(tuple(point) for point in segment["triples"])
+                                  for instance in instances for submission in instance["lines"] if submission["context_a5"] in line_contexts
+                                  for segment in submission["segments"])
+        else:
+            polygons.extend(submission["triples"] for submission in report["submissions"]
+                            if submission["context"]["a5"] in contexts)
     if not polygons:
-        raise ValueError(f"no selected-context polygons in {args.input}")
+        raise ValueError(f"no selected-context polygons in {', '.join(str(path) for path in inputs)}")
     line_segments = list(embedded_lines)
     if args.line_input:
         line_report = json.loads(args.line_input.resolve().read_text(encoding="utf-8"))

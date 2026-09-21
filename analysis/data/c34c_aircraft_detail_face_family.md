@@ -1,12 +1,12 @@
-# `$C34C06-$C34C48`: aircraft-detail face family
+# `$C34C06-$C34C48`: flight-object detail candidate
 
 [Open the orthographic sheet](../plots/c34c_aircraft_detail_preclip_unique_face_sheet.png).
 
 At the Golden Gate checkpoint, five distinct records in this range reach the
 pre-clip polygon routine through `$C203C4`. They contain 26 total polygon
 edges and are rendered with `$C45BEA` as the active transform/display context.
-The tight-fit plots show a tapered fuselage/nose-like component, corroborating
-the external-aircraft identification without assigning a new object name.
+The tight-fit plots show a tapered fuselage/nose-like component. This is a
+visual candidate only; no object name is assigned.
 
 The sampled records are `$C34C06`, `$C34C18`, `$C34C2A`, `$C34C38`, and
 `$C34C48`. They repeat unchanged as a family over the capture. `$C45BEA` is
@@ -21,6 +21,7 @@ candidate. This establishes a shared immutable *resource region*, although a
 direct transform trace from `$C3515E` to these five records has not yet been
 captured.
 
-This family is therefore kept as a linked aircraft component, separate from
-the `$C3515E -> $C34A9A/$C34A9C` static-vertex candidate until their shared
-upstream source is directly traced.
+The `$C3515E` transform trace and this family occur in the same bounded
+rendering pass, but a same-frame overlay shows their captured transformed
+coordinates are not co-located. They must therefore remain separate object
+instances until a shared transform/output range is directly proved.
