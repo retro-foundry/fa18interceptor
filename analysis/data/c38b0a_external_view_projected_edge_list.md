@@ -37,3 +37,9 @@ The selected source triples are resolved relative to `$C48390` by `$C212B0`.
 The record is a candidate for geometry visible in the external-aircraft frame,
 but no individual pair is named as an aircraft edge until a matched screen and
 pixel/line correlation is obtained.
+
+The first four `$C2FA7E` entries in the same trace receive short screen-space
+segments around `(196,44)`: `(196,44)->(198,44)`,
+`(197,44)->(197,43)`, `(197,43)->(197,44)`, and
+`(196,44)->(197,44)`. These coordinates are an implementation-level endpoint
+record, not yet a pixel correlation or named aircraft feature.

@@ -32,3 +32,6 @@ this packet is not evidence that the complete bridge is one primitive.
 `$C212B0` resolves those offsets through `$C48390` and copies the resulting
 triples to `$C4C592` before projection. The endpoint pair is a candidate for
 geometry visible in the bridge-silhouette frame, not a named bridge component.
+Its `$C2FA7E` setup receives the screen-space segment `(280,67)->(282,67)`.
+That short, distant segment is an endpoint record for later screenshot/pixel
+correlation; it does not identify a bridge member on its own.
