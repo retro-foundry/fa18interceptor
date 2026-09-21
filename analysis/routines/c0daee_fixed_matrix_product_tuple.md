@@ -15,3 +15,10 @@ In the captured call, `$C2EC9C` rejects the tuple through the shared
 `source_amiga/observed/reject_matrix_product_tuple.asm`: it returns `D0=0` and
 writes longword `-1` to `$C45958`. This is a runtime-backed state/return
 contract, not an assigned semantic result.
+
+The observed child entry's `$C2EC9C-$C2ECC5` validation prefix is reconstructed
+in `source_amiga/observed/validate_matrix_product_tuple.asm`. It sets `D7=-4`,
+requires both `D0` and `D1` to be strictly within signed `D2` bounds, and sends
+failures to the documented rejection return. A non-positive `D2` branches to
+another entry at `$C2EC70`; the following projection path was not observed and
+is deliberately outside this contract.
