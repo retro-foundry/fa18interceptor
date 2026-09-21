@@ -39,3 +39,23 @@ run029 Chip-RAM planes.  The broad per-frame redraw means this result alone
 does not isolate the glyph rectangle or identify its source record.  It does
 reject the earlier inactive-buffer explanation and establishes the exact
 buffers that the next renderer trace must watch.
+
+## Renderer handoff at the changed-number frame
+
+The no-input stepped interval for chipset frame 994 records
+`$C0D730 -> $C2FD8C`.  Its four `BLTSIZE` triggers use these live destination
+values:
+
+| Trigger PC | Blitter destination | Corresponding active plane |
+| ---: | ---: | ---: |
+| `$C2FDF0` | `$053918` | plane 4 base `$0538F0` plus `$28` |
+| `$C2FE3A` | `$0519D8` | plane 3 base `$0519B0` plus `$28` |
+| `$C2FE90` | `$04FA98` | plane 2 base `$04FA70` plus `$28` |
+| `$C2FEDA` | `$04DB58` | plane 1 base `$04DB30` plus `$28` |
+
+The same interval executes `$C30668-$C306AE` twice; its prepared jobs use
+`$04DB58` and `$04DB7F`.  A CPU watch of `$04DB30` through normal replay does
+not hit, consistent with these data changes being blitter DMA rather than CPU
+stores.  This does not identify the numeric source record, but it proves the
+changed HUD is produced through the active-plane blitter pipeline rather than
+the inactive attract buffers.

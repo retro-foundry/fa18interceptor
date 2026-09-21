@@ -49,7 +49,10 @@ five-plane display set.  Those active planes change by 2,760, 3,870, 438, and
 `analysis/run029_active_cockpit_bitplanes.md`.
 
 The stepped trace still programs the earlier four-plane packet and ends before
-the active five-plane presentation is reflected in its exported RAM.  It must
-not be used to attribute `$C4597C` through `$C45984`, or any other
-simultaneously changing state word, to KTS.  The next trace must follow the
-producer of the active `$057858` Copper list and its five backing buffers.
+the active five-plane presentation is reflected in its exported RAM.  In the
+frame-994 interval, however, its live destination registers resolve the packet
+to the active plane-1 through plane-4 bases at `$04DB30-$05582F`, each plus
+`$28`; see `analysis/run029_active_cockpit_bitplanes.md`.  It must still not
+be used to attribute `$C4597C` through `$C45984`, or any other simultaneously
+changing state word, to KTS.  The next trace must follow the prepared source
+records consumed by this active-plane pipeline.
