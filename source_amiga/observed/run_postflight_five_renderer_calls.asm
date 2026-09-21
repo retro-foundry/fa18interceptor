@@ -1,4 +1,5 @@
-; Byte-exact static-only postflight renderer sequence $C332FE-$C3336F.
+; Byte-exact runtime-observed postflight renderer sequence $C332FE-$C3336F.
+; Run024 frame-23000 continuation executes the complete helper body.
 
                 org     $C332FE
 

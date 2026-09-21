@@ -1,7 +1,9 @@
 # `$C31226` postflight renderer-variant dispatcher
 
-Classification: **static-only dataflow**. The parent postflight stage calls
-this entry, but no available P-code export covers its body.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation executes `$C31226-$C31262`, establishing the bounds
+setup and the dispatch branch. Its selected variant body is not covered by
+that trace.
 
 `source_amiga/observed/dispatch_postflight_renderer_variants.asm` reproduces
 `$C31226-$C31289` (100 bytes). It initializes inputs for `$C310E2`, then uses

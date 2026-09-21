@@ -1,7 +1,7 @@
 # `$C332FE` postflight five-call renderer sequence
 
-Classification: **static-only dataflow**. This local postflight helper is not
-covered by current P-code exports.
+Classification: **runtime-observed dataflow**. The run024 frame-23000
+continuation executes the complete `$C332FE-$C3336F` helper body.
 
 `source_amiga/observed/run_postflight_five_renderer_calls.asm` reproduces
 `$C332FE-$C3336F` (114 bytes). It bounds an offset horizontal value, sets

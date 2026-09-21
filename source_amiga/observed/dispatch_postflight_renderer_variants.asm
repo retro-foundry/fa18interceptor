@@ -1,4 +1,6 @@
-; Byte-exact static-only postflight renderer dispatcher $C31226-$C31289.
+; Byte-exact postflight renderer dispatcher $C31226-$C31289.
+; Run024 frame-23000 continuation executes $C31226-$C31262, then branches
+; into a variant; the variant bodies remain separately unobserved.
 
                 org     $C31226
 

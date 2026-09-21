@@ -1,4 +1,6 @@
-; Byte-exact static-only postflight auxiliary stage entry $C332BC-$C332FB.
+; Byte-exact postflight auxiliary stage entry $C332BC-$C332FB.
+; Run024 frame-23000 continuation executes the entry through $C332EC and
+; takes its guarded re-entry; the normal stage chain remains unobserved.
 
                 org     $C332BC
 
