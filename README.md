@@ -146,6 +146,23 @@ and brackets zoom. The full manual says `J` for ECM; a later fan sheet says
 See [analysis/memory_map.md](analysis/memory_map.md) for the observed runtime
 memory map and its evidence rules.
 
+## Pilot-log experiment
+
+Rookie (`R`) is the controlled persistent-state baseline: its supplied flight
+log has the first three combat missions complete. Create a disposable,
+write-enabled copy—never alter `local/media/fa18.adf`—then save Rookie and one
+single-variable pilot change. For example:
+
+```powershell
+python scripts/prepare_pilot_log_experiment.py --name rookie_baseline
+python scripts/compare_pilot_log_adf.py captures/pilot_log_experiments/rookie_baseline/baseline.adf captures/pilot_log_experiments/rookie_baseline/pilot_log_working.adf --output analysis/pilot_log_rookie_diff.json
+```
+
+The resulting UAE config is in that experiment directory. Use the raw-byte
+diff as an evidence lead, then identify the changed filesystem record and
+cross-check its live RAM writers/readers before assigning qualification or
+mission-completion semantics.
+
 ## Local dependencies
 
 Python 3.13 with Pillow and Capstone; Java; local Ghidra 12.0.4 DEV; and the
