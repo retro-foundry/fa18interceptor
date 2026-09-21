@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight renderer submission tail $C316C0-$C31721.
+; Byte-exact partially runtime-observed postflight renderer submission tail $C316C0-$C31721.
 
                 org     $C316C0
 

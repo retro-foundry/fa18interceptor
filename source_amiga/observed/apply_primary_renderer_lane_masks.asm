@@ -1,4 +1,4 @@
-; Byte-exact static-only renderer lane-mask targets $C2F826-$C2F8CF.
+; Byte-exact partially runtime-observed renderer lane-mask targets $C2F826-$C2F8CF.
 
                 org     $C2F826
 

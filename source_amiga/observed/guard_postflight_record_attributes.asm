@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight record-attribute guards $C3149C-$C31517.
+; Byte-exact partially runtime-observed postflight record-attribute guards $C3149C-$C31517.
 
                 org     $C3149C
 

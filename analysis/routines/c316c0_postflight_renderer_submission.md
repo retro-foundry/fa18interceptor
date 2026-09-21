@@ -1,7 +1,8 @@
 # `$C316C0` postflight renderer submission tail
 
-Classification: **static-only dataflow**. This is the final submission tail of
-the untraced postflight loop.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation executes the submission path through its return;
+alternate table/renderer branches remain unobserved.
 
 `source_amiga/observed/submit_postflight_renderer_record.asm` reproduces
 `$C316C0-$C31721` (98 bytes). It chooses one of two table limits, appends a

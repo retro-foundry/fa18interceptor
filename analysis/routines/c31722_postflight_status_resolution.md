@@ -1,7 +1,8 @@
 # `$C31722` postflight status resolution
 
-Classification: **static-only dataflow**. This slice follows the larger
-postflight loop and falls through to the terminal record scan.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation reaches both an entry path and a late path in this
+slice; the intervening alternatives remain unobserved.
 
 `source_amiga/observed/resolve_postflight_status_bits.asm` reproduces
 `$C31722-$C3180B` (234 bytes). It terminates the selected table, compares

@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight renderer selection $C31612-$C316BF.
+; Byte-exact partially runtime-observed postflight renderer selection $C31612-$C316BF.
 
                 org     $C31612
 

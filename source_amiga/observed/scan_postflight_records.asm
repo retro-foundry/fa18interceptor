@@ -1,4 +1,4 @@
-; Byte-exact static-only terminal postflight record scan $C3180C-$C318F5.
+; Byte-exact partially runtime-observed terminal postflight record scan $C3180C-$C318F5.
 
                 org     $C3180C
 

@@ -1,7 +1,8 @@
 # `$C3149C` postflight record-attribute guards
 
-Classification: **static-only dataflow**. This middle portion of the
-postflight loop is not covered by current P-code exports.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation executes a guard path in this middle portion; the
+remaining branches are not covered.
 
 `source_amiga/observed/guard_postflight_record_attributes.asm` reproduces
 `$C3149C-$C31517` (124 bytes). It filters a mode byte, absolute magnitudes of

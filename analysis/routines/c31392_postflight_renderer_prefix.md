@@ -1,7 +1,8 @@
 # `$C31392` postflight renderer prefix
 
-Classification: **static-only structural/dataflow**. This common target is
-not reached by current P-code exports.
+Classification: **partially runtime-observed structural/dataflow**. The
+run024 frame-23000 continuation executes the common prefix through its
+observed table path; unselected branches remain unobserved.
 
 `source_amiga/observed/run_postflight_renderer_prefix.asm` is byte-exact for
 `$C31392-$C3141D` (140 bytes). It gates on `$C45838`, selects one of two

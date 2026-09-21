@@ -1,7 +1,8 @@
 # `$C31518` postflight record-status classification
 
-Classification: **static-only dataflow**. This block is part of the untraced
-postflight loop.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation reaches a suffix path in this block; other branches
+remain unobserved.
 
 `source_amiga/observed/classify_postflight_record_status.asm` reproduces
 `$C31518-$C315BF` (168 bytes). It evaluates record bits and bytes relative to

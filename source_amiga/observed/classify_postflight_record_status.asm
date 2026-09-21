@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight record-status classification $C31518-$C315BF.
+; Byte-exact partially runtime-observed postflight record-status classification $C31518-$C315BF.
 
                 org     $C31518
 

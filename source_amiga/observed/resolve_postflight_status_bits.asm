@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight status resolution $C31722-$C3180B.
+; Byte-exact partially runtime-observed postflight status resolution $C31722-$C3180B.
 
                 org     $C31722
 

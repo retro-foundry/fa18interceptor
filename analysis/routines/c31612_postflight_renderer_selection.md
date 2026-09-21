@@ -1,7 +1,8 @@
 # `$C31612` postflight renderer selection
 
-Classification: **static-only dataflow**. This block precedes the final
-postflight renderer submission and is not covered by current P-code exports.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation executes a selection path before final submission;
+other category branches remain unobserved.
 
 `source_amiga/observed/select_postflight_renderer_submission.asm` reproduces
 `$C31612-$C316BF` (174 bytes). It bounds offset coordinates, loads a selected

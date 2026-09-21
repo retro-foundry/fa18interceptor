@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight normalization/rejection slice $C3141E-$C3149B.
+; Byte-exact partially runtime-observed postflight normalization/rejection slice $C3141E-$C3149B.
 
                 org     $C3141E
 

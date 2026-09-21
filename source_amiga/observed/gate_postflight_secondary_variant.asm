@@ -1,4 +1,4 @@
-; Byte-exact static-only secondary variant gate $C33DC8-$C33DFD.
+; Byte-exact partially runtime-observed secondary variant gate $C33DC8-$C33DFD.
                 org     $C33DC8
 POSTFLIGHT_STATE_WORD_A         equ $C459C0
 POSTFLIGHT_RECORD_BASE          equ $C46184

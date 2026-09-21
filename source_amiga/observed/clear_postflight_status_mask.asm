@@ -1,4 +1,4 @@
-; Byte-exact static-only status-mask gate $C33DA4-$C33DC7.
+; Byte-exact partially runtime-observed status-mask gate $C33DA4-$C33DC7.
                 org     $C33DA4
 POSTFLIGHT_STATUS_SOURCE        equ $C45B50
 POSTFLIGHT_STATUS_FLAGS         equ $C45B54

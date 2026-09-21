@@ -1,7 +1,8 @@
 # `$C3141E` postflight record normalization
 
-Classification: **static-only dataflow**. This middle slice belongs to the
-larger postflight loop and is not covered by current P-code exports.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation executes the normalization path through its first
+rejection branch; the remaining control flow is not covered.
 
 `source_amiga/observed/normalize_postflight_record_delta.asm` reproduces
 `$C3141E-$C3149B` (126 bytes). It exchanges and right-shifts two fixed-point

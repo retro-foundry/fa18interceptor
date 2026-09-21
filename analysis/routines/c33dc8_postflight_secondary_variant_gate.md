@@ -1,7 +1,8 @@
 # `$C33DC8` postflight secondary variant gate
 
-Classification: **static structural/dataflow**. This range is not covered by
-the current P-code exports.
+Classification: **partially runtime-observed structural/dataflow**. The
+run024 frame-23000 continuation reaches the initial guard; alternate branches
+remain unobserved.
 
 It returns to `$C33DA4` when `$C459C0` is negative, when the high nibble of
 selected-record byte `$63` equals `$10`, or when the first word of

@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight renderer prefix $C31392-$C3141D.
+; Byte-exact partially runtime-observed postflight renderer prefix $C31392-$C3141D.
 
                 org     $C31392
 
