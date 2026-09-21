@@ -13,5 +13,5 @@
     {"record": "$C34C38", "indices": [13, 14, 31, 35]},
     {"record": "$C34C48", "indices": [0, 5, 3, 4, 25]}
   ],
-  "qualification": "Face index lists are renderer-observed. Vertices 0-21 have a bounded C3515E transform trace; 22-35 are contiguous immutable Hunk-41 triples matching the remaining required indices, but their transform producer is untraced."
+  "qualification": "Face index lists are renderer-observed. Vertices 0-21 have a bounded C3515E transform trace. Slots 22-35 are derived in the C46228 workspace by C0D384-C0D521; the contiguous C351E2 Hunk-41 triples are a related reference pattern, not the observed producer input."
 }

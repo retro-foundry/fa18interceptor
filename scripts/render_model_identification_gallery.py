@@ -15,7 +15,7 @@ ITEMS = (
      "external_aircraft_c34a9_preclip_complete_face_sheet.png"),
     ("Trace-proven aircraft detail: C3515E -> C34C (5 pre-clip faces)",
      "c3515e_c34c_aircraft_detail_isometric_sheet.png"),
-    ("Flight-object static topology: C3515E-C35234 (5 observed faces)",
+    ("Flight-object topology: 22 static + 14 derived vertices (5 faces)",
      "c351_c34c_static_topology_candidate.png"),
     ("Long deck/road/craft candidate: C39D2A -> C3925C/C3925E (10 faces)",
      "c39d2a_c3925_preclip_complete_face_sheet.png"),

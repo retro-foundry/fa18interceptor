@@ -357,5 +357,5 @@
     }
   ],
   "matching_rows": 12,
-  "qualification": "This compares snapshots after a replay frame. It corroborates a source-to-output transform relationship but does not identify the CPU instruction that wrote the output or explain rows outside tolerance."
+  "qualification": "This compares snapshots after a replay frame. The subsequent C0D384-C0D521 trace identifies a workspace-derived writer, so the match is a related-coordinate pattern rather than direct source-to-output provenance."
 }

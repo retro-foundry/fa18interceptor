@@ -37,13 +37,12 @@ renderer result, not a missing-line inference.
 `$C2035A` reads the actual static face offsets against `$C46228`. The five
 faces reference vertex indices `0` through `35` (36 slots total). The bounded
 `$C3515E` transform supplies slots `0` through `21` only, ending at
-`$C462AC`. Slots `22` through `35` are already populated in the restored
-state. Their first observed joint transition is replay frame 1966. A
-fixed-point snapshot check maps 12 of their 14 triples to the contiguous
-immutable `$C351E2-$C35234` source run; the two symmetric exceptions retain a
-+40 Z residual. [The alignment report](c351e2_c462ac_frame1966_transform_alignment.md)
-records the arithmetic and qualification. The direct writer is still untraced,
-so the two exception rows and output producer remain open.
+`$C462AC`. Slots `22` through `35` first initialize together at replay frame
+1966. Their direct writer is now traced: `$C0D384-$C0D521` calculates and
+stores the tail from earlier `$C46228` workspace values, beginning with
+`$C0D396: movem.w d3-d5,$84(a3)` when `A3=$C46228`. See [the routine evidence](../routines/c0d384_derived_vertex_tail.md).
+The contiguous `$C351E2-$C35234` triples have a related numerical pattern but
+are not the observed input of that writer.
 
 This model has renderer-proven topology and a partial static-vertex path, but
 is not yet a complete source-model export. The fourteen unresolved indices
