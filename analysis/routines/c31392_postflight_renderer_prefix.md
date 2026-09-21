@@ -9,5 +9,18 @@ not reached by current P-code exports.
 shared renderer entries, resets/increments three state bytes, and loads three
 longs from `$C4E2BC` for a zero guard into `$C31722`.
 
-The table's content and the later state-machine role remain unproven. This
-prefix is deliberately separated before the larger branch-heavy body.
+The full contiguous routine through its return at `$C318F5` is now covered by
+the following byte-exact static-only slices:
+
+- `$C3141E-$C3149B`: fixed-point normalization and record rejection.
+- `$C3149C-$C31517`: record-attribute guards.
+- `$C31518-$C315BF`: record-status classification.
+- `$C315C0-$C31611`: second normalization pass.
+- `$C31612-$C316BF`: renderer selector classification.
+- `$C316C0-$C31721`: submission and loop-back.
+- `$C31722-$C3180B`: status resolution.
+- `$C3180C-$C318F5`: terminal record scan and return.
+
+The table's content and the routine's gameplay role remain unproven. The
+individual slices retain structural/dataflow naming until a capture executes
+this postflight path.
