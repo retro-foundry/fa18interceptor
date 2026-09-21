@@ -21,3 +21,33 @@ contract and is not assigned a subsystem name beyond its observed placement.
 The capped trace repeatedly enters the verified Hunk-36 range around
 `$C2FCxx-$C304xx`, which includes known renderer code. That execution overlap
 does not establish that `$C1CB14` owns rendering or its data.
+
+## Observed scene-table handoff
+
+The executed `$C1CB74-$C1CCB6` loop walks 24-byte records selected through the
+word offset at `$C459AA`; `$C4E9AA` is used as its base when `$C45865` is zero.
+Each selected record supplies a descriptor pointer in `A1`. After the loop
+copies the selected record's three initial words into `$C45B2A/$C45B30`, it
+consumes longwords from that descriptor in order:
+
+| Descriptor field order | Destination / use |
+| --- | --- |
+| first | loaded into `A2`, then called indirectly |
+| second | loaded into `A0` |
+| third | stored at `$C45A36` |
+| fourth | stored at `$C45A3A` |
+
+The third of these is the exact producer of the control-stream pointer used
+by `$C1F6F8` and then by the projected-edge path. This proves that scene table
+records, rather than the projection tail, select the stream. The names,
+ownership, and visual identity of individual records remain unassigned until
+the run024 landmark packets are captured.
+
+A normal replay breakpoint at `$C1CC70`, armed immediately before run024 frame
+23,000 (the user-identified San Francisco / distant Golden Gate view), proves
+that the loop is active in that visible scene. Its first observed descriptor is
+`$C22A8C`, whose first five longwords are
+`$00C454F4, $00C454F4, $00000000, $00C096CA, $00C4558C`. In particular, its
+third longword would write zero to `$C45A36`; it is therefore a non-geometry
+descriptor. The sample proves traversal of the selection system in the
+landmark frame, not the descriptor or edge list that draws the bridge.
