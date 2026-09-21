@@ -29,3 +29,10 @@ The runtime-backed `$C2F6D8-$C2F717` mask phase is reconstructed in
 `source_amiga/observed/mask_renderer_register_pairs.asm`. Each clear bit in
 `$C456E7` replaces the corresponding `D0-D3` word with `-1` and clears its
 paired `D4-D7` word. The meaning of the paired values remains unassigned.
+
+The runtime-backed `$C2F718-$C2F765` output phase is reconstructed in
+`source_amiga/observed/apply_renderer_output_mask.asm`. When `$C456E8` is
+non-negative, each set bit in `$C456EB` XORs a paired register word through
+one of the adjusted pointers (`A3,A2,A1,A0`); any such write makes `D0=-1` and
+returns. With no write, or a negative enable word, it tail-jumps through `A4`.
+This proves pointer writes and control flow, not a pixel/object interpretation.
