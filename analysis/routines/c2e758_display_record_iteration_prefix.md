@@ -29,6 +29,14 @@ same arithmetic pattern but negates its initial inputs and final candidate;
 the routine is consequently documented as a polarity variant, not as a
 geometric or display operation.
 
+`$C2EB4C-$C2EBBF`, reconstructed in
+`source_amiga/observed/adjust_transposed_display_record_pair.asm`, is a
+statically decoded third helper form, reached by the surrounding selector but
+not entered in this trace. It uses the same signed
+multiply/divide-and-rounding pattern while deriving its candidate through
+`D1/D4` and returns through the shared bound classifier. Its role is likewise
+kept at arithmetic/dataflow level.
+
 Both helpers use the shared `$C2EC36-$C2EC67` tail, reconstructed in
 `source_amiga/observed/classify_adjusted_display_pair_bounds.asm`. It snapshots
 `D0-D2` to `$C45AC6`, accepts only a non-negative `D2` bound with both signed
