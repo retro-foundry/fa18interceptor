@@ -10,6 +10,7 @@ byte-exact. It doubles the prepared row byte for a word-offset lookup at
 rejects an odd result, chooses `$0B0A` or `$0BFA` from bit 3 of `$C45955`, ORs
 the table's second word into the mask, and calls `$C330FE`.
 
-This proves the transform path feeds the existing strided-long mask-update
-packet. Table semantics and the visual meaning of individual lanes remain
-unproven.
+`$C330FE` consumes `D4` as a byte-stream pointer, so the `$C3D790` lookup
+proves this path selects a glyph stream before feeding the existing
+strided-long font compositor. The coordinate-table semantics and the visual
+field remain unproven.
