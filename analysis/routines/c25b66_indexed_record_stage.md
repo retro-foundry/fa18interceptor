@@ -18,3 +18,7 @@ The frame-6000 trace's entry fragments are byte-exact source:
 `gate_indexed_update_control_path.asm`. They establish the selected-index,
 event-byte, record-flag, and control-bit gates without claiming untraced
 alternatives.
+
+The later zero-index path now also has byte-exact gates and the direct
+`$C25E24 -> $C149BE` transform call in `gate_zero_indexed_transform.asm`,
+`gate_indexed_transform_control.asm`, and `run_indexed_update_transform.asm`.
