@@ -27,3 +27,8 @@ The third branch, `$C0D90C-$C0D959`, is reconstructed in
 `source_amiga/observed/emit_third_display_record_pair.asm`. It has the same
 count-five setup and flag test, but a different ordered leaf sequence; only its
 extended form appends the second count-three record and final leaf.
+
+The fourth branch, `$C0D95A-$C0D9A7`, is reconstructed in
+`source_amiga/observed/emit_fourth_display_record_pair.asm`. It follows the
+same flag split, calling the fixed leaves in another order and appending a
+count-three, eight-byte-offset record only on its extended path.
