@@ -22,3 +22,9 @@ The bounded entry `$C2F66E-$C2F687` is reconstructed in
 `source_amiga/observed/enter_bounded_renderer_table_helper.asm`. It redirects
 to `$C2F60A` when `D1` meets/exceeds `$C45984`; otherwise it selects the
 `$C2F7C6/$C2F7E6` table pair and falls into the same shared body.
+
+The remaining `$C2F63A-$C2F66D` wrapper is reconstructed in
+`source_amiga/observed/submit_offset_renderer_values.asm`. It offsets `D0/D1`
+by `$C45988/$C458D8`, rejects out-of-range X through `$C2F622`, preserves the
+adjusted pair on the stack while calling the alternate-table shared body, then
+restores them. This range is static-only in the current captures.
