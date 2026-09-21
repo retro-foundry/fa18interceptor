@@ -7,5 +7,7 @@ cockpit-plane trigger. It preserves three further Custom-chip submissions at
 
 Acceptance evidence: `python scripts/verify_reconstructions.py` assembled all
 139 non-overlapping source slices and matched 16,612 bytes against the
-preserved baseline slow-RAM snapshot. This adds static-plus-trace coverage
-only; the enclosing packet still lacks a return-bounded execution contract.
+preserved baseline slow-RAM snapshot. A subsequent frame-4 breakpoint at
+`$C2FEDE` returns to `$C0D742` in 2,439 no-future-input instructions, proving
+the following `$C2FEDE-$C2FF45` routine separately; its raw P-code and
+byte-exact source are retained in the corresponding cockpit-C2FEDE artifacts.

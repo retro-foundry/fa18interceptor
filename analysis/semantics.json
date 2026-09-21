@@ -5,7 +5,7 @@
   "structural_call_targets": 36,
   "behavioral_routines": 31,
   "scenario_contracts": 10,
-  "symbolic_reconstructed_bytes": 16612,
+  "symbolic_reconstructed_bytes": 16716,
   "coverage_denominator": 285976,
   "unknowns": [
     "Exact game/OS allocation boundaries and complete code extent",
@@ -31,5 +31,5 @@
       ]
     }
   },
-  "symbolic_code_coverage_percent": 5.808
+  "symbolic_code_coverage_percent": 5.845
 }
