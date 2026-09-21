@@ -35,5 +35,13 @@ Both helpers use the shared `$C2EC36-$C2EC67` tail, reconstructed in
 components within that bound, restores the saved registers, and returns status
 zero for acceptance or one for rejection.
 
+When one of the selector paths reaches `$C2E9F8-$C2EA59`, reconstructed in
+`source_amiga/observed/project_adjusted_display_pair.asm`, the shared triplet
+at `$C45AC6` is converted to a pair using signed divide, carry-sensitive
+rounding, offsets `$A0/$5A`, and clamps `$000..$13F` and `$000..$B3`.
+The pair is stored through `A3`, then the enclosing eight-entry loop advances.
+This proves the numerical transform and bounds, while the screen/display role
+of the output remains unassigned.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
