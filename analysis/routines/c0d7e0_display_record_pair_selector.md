@@ -10,3 +10,9 @@ zero/nonzero tests either select one of six pairs from offsets `{8,10,12,14}`
 into `D0/D1`, or branch to one of the rejection/alternate setup paths. The
 selected pair and later state fields have no assigned display or gameplay
 meaning; this is a verified dataflow and branch-selection contract only.
+
+The first selected-pair branch, `$C0D872-$C0D8BD`, is reconstructed in
+`source_amiga/observed/emit_first_display_record_pair.asm`. It writes record
+count four at `$C4B390`, then dispatches an ordered sequence of the existing
+record-write leaves. `$C45785` and bit 1 of `$C458CA` select the shorter or
+extended sequence; both continue to the known `$C0DA70` success return.
