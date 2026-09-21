@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500">
 <rect width="100%" height="100%" fill="#101419"/>
-<text x="24" y="30" fill="#f1f5f9" font-family="sans-serif" font-size="20">External-view static vertex candidate $C3515E-$C351DC</text>
-<text x="24" y="54" fill="#aab7c4" font-family="sans-serif" font-size="13">23 trace-proven local input triples · no edges inferred · labels are source-order indices</text>
+<text x="24" y="30" fill="#f1f5f9" font-family="sans-serif" font-size="20">Static local-vertex run $C3515E-$C35234</text>
+<text x="24" y="54" fill="#aab7c4" font-family="sans-serif" font-size="13">36 immutable Hunk-41 triples; indices 0-21 transform-traced, 22-35 contiguous continuation candidate; no edges inferred</text>
 <rect x="30" y="105" width="360" height="360" fill="#151c24" stroke="#506070"/>
 <line x1="78" y1="285.0" x2="342" y2="285.0" stroke="#536579"/>
 <line x1="210.0" y1="153" x2="210.0" y2="417" stroke="#536579"/>
@@ -50,6 +50,34 @@
 <text x="216.00" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">20</text>
 <circle cx="171.50" cy="285.00" r="4" fill="#65d5ff"/>
 <text x="177.50" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">21</text>
+<circle cx="210.00" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="216.00" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">22</text>
+<circle cx="215.16" cy="290.16" r="4" fill="#65d5ff"/>
+<text x="221.16" y="284.16" fill="#f1f5f9" font-family="monospace" font-size="12">23</text>
+<circle cx="204.84" cy="290.16" r="4" fill="#65d5ff"/>
+<text x="210.84" y="284.16" fill="#f1f5f9" font-family="monospace" font-size="12">24</text>
+<circle cx="199.00" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="205.00" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">25</text>
+<circle cx="215.16" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="221.16" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">26</text>
+<circle cx="204.84" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="210.84" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">27</text>
+<circle cx="210.00" cy="290.16" r="4" fill="#65d5ff"/>
+<text x="216.00" y="284.16" fill="#f1f5f9" font-family="monospace" font-size="12">28</text>
+<circle cx="210.00" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="216.00" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">29</text>
+<circle cx="226.50" cy="254.75" r="4" fill="#65d5ff"/>
+<text x="232.50" y="248.75" fill="#f1f5f9" font-family="monospace" font-size="12">30</text>
+<circle cx="193.50" cy="254.75" r="4" fill="#65d5ff"/>
+<text x="199.50" y="248.75" fill="#f1f5f9" font-family="monospace" font-size="12">31</text>
+<circle cx="278.75" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="284.75" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">32</text>
+<circle cx="141.25" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="147.25" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">33</text>
+<circle cx="217.56" cy="281.56" r="4" fill="#65d5ff"/>
+<text x="223.56" y="275.56" fill="#f1f5f9" font-family="monospace" font-size="12">34</text>
+<circle cx="202.44" cy="281.56" r="4" fill="#65d5ff"/>
+<text x="208.44" y="275.56" fill="#f1f5f9" font-family="monospace" font-size="12">35</text>
 <rect x="420" y="105" width="360" height="360" fill="#151c24" stroke="#506070"/>
 <line x1="468" y1="285.0" x2="732" y2="285.0" stroke="#536579"/>
 <line x1="600.0" y1="153" x2="600.0" y2="417" stroke="#536579"/>
@@ -98,6 +126,34 @@
 <text x="606.00" y="243.25" fill="#f1f5f9" font-family="monospace" font-size="12">20</text>
 <circle cx="561.50" cy="345.50" r="4" fill="#65d5ff"/>
 <text x="567.50" y="339.50" fill="#f1f5f9" font-family="monospace" font-size="12">21</text>
+<circle cx="600.00" cy="348.25" r="4" fill="#65d5ff"/>
+<text x="606.00" y="342.25" fill="#f1f5f9" font-family="monospace" font-size="12">22</text>
+<circle cx="605.16" cy="348.25" r="4" fill="#65d5ff"/>
+<text x="611.16" y="342.25" fill="#f1f5f9" font-family="monospace" font-size="12">23</text>
+<circle cx="594.84" cy="348.25" r="4" fill="#65d5ff"/>
+<text x="600.84" y="342.25" fill="#f1f5f9" font-family="monospace" font-size="12">24</text>
+<circle cx="589.00" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="595.00" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">25</text>
+<circle cx="605.16" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="611.16" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">26</text>
+<circle cx="594.84" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="600.84" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">27</text>
+<circle cx="600.00" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="606.00" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">28</text>
+<circle cx="600.00" cy="304.25" r="4" fill="#65d5ff"/>
+<text x="606.00" y="298.25" fill="#f1f5f9" font-family="monospace" font-size="12">29</text>
+<circle cx="616.50" cy="334.50" r="4" fill="#65d5ff"/>
+<text x="622.50" y="328.50" fill="#f1f5f9" font-family="monospace" font-size="12">30</text>
+<circle cx="583.50" cy="334.50" r="4" fill="#65d5ff"/>
+<text x="589.50" y="328.50" fill="#f1f5f9" font-family="monospace" font-size="12">31</text>
+<circle cx="668.75" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="674.75" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">32</text>
+<circle cx="531.25" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="537.25" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">33</text>
+<circle cx="607.56" cy="295.31" r="4" fill="#65d5ff"/>
+<text x="613.56" y="289.31" fill="#f1f5f9" font-family="monospace" font-size="12">34</text>
+<circle cx="592.44" cy="295.31" r="4" fill="#65d5ff"/>
+<text x="598.44" y="289.31" fill="#f1f5f9" font-family="monospace" font-size="12">35</text>
 <rect x="810" y="105" width="360" height="360" fill="#151c24" stroke="#506070"/>
 <line x1="858" y1="285.0" x2="1122" y2="285.0" stroke="#536579"/>
 <line x1="990.0" y1="153" x2="990.0" y2="417" stroke="#536579"/>
@@ -146,4 +202,32 @@
 <text x="996.00" y="243.25" fill="#f1f5f9" font-family="monospace" font-size="12">20</text>
 <circle cx="990.00" cy="345.50" r="4" fill="#65d5ff"/>
 <text x="996.00" y="339.50" fill="#f1f5f9" font-family="monospace" font-size="12">21</text>
+<circle cx="990.00" cy="348.25" r="4" fill="#65d5ff"/>
+<text x="996.00" y="342.25" fill="#f1f5f9" font-family="monospace" font-size="12">22</text>
+<circle cx="984.84" cy="348.25" r="4" fill="#65d5ff"/>
+<text x="990.84" y="342.25" fill="#f1f5f9" font-family="monospace" font-size="12">23</text>
+<circle cx="984.84" cy="348.25" r="4" fill="#65d5ff"/>
+<text x="990.84" y="342.25" fill="#f1f5f9" font-family="monospace" font-size="12">24</text>
+<circle cx="990.00" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="996.00" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">25</text>
+<circle cx="990.00" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="996.00" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">26</text>
+<circle cx="990.00" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="996.00" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">27</text>
+<circle cx="984.84" cy="263.00" r="4" fill="#65d5ff"/>
+<text x="990.84" y="257.00" fill="#f1f5f9" font-family="monospace" font-size="12">28</text>
+<circle cx="990.00" cy="304.25" r="4" fill="#65d5ff"/>
+<text x="996.00" y="298.25" fill="#f1f5f9" font-family="monospace" font-size="12">29</text>
+<circle cx="1020.25" cy="334.50" r="4" fill="#65d5ff"/>
+<text x="1026.25" y="328.50" fill="#f1f5f9" font-family="monospace" font-size="12">30</text>
+<circle cx="1020.25" cy="334.50" r="4" fill="#65d5ff"/>
+<text x="1026.25" y="328.50" fill="#f1f5f9" font-family="monospace" font-size="12">31</text>
+<circle cx="990.00" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="996.00" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">32</text>
+<circle cx="990.00" cy="285.00" r="4" fill="#65d5ff"/>
+<text x="996.00" y="279.00" fill="#f1f5f9" font-family="monospace" font-size="12">33</text>
+<circle cx="993.44" cy="295.31" r="4" fill="#65d5ff"/>
+<text x="999.44" y="289.31" fill="#f1f5f9" font-family="monospace" font-size="12">34</text>
+<circle cx="993.44" cy="295.31" r="4" fill="#65d5ff"/>
+<text x="999.44" y="289.31" fill="#f1f5f9" font-family="monospace" font-size="12">35</text>
 </svg>

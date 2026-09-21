@@ -40,7 +40,9 @@ flight-update entry. Their upstream immutable sourceâ€”or live-object producerâ€
 is therefore still untraced.
 
 This model has renderer-proven topology and a partial static-vertex path, but
-is not yet a complete source-model export. The offset collector is
+is not yet a complete source-model export. The fourteen unresolved indices
+align with the contiguous static `$C351E2-$C35234` triple run, making that
+range the next source-trace target rather than inferred geometry. The offset collector is
 `scripts/collect_c203_face_indices.py` and its frame-12000 report is the
 authoritative topology capture.
 

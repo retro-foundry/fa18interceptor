@@ -1,8 +1,8 @@
-# `$C3515E-$C351DC`: external-aircraft local-vertex candidate
+# `$C3515E-$C35234`: external-aircraft local-vertex candidate
 
 Classification: **trace-proven static local-coordinate input set with `$C34C` face topology**.
 
-During a bounded no-future-input step from the external-camera frame-7,500 update entry `$C0F090`, `$C1F100/$C1F21C` read 22 consecutive three-word values from `$C3515E` through `$C351DC`. They write their transformed results consecutively to `$C46228-$C462A6`. The source range is in byte-stable Hunk 41 and is separate from the mutable `$C48390` projection workspace.
+During a bounded no-future-input step from the external-camera frame-7,500 update entry `$C0F090`, `$C1F100/$C1F21C` read 22 consecutive three-word values from `$C3515E` through `$C351DC`. They write their transformed results consecutively to `$C46228-$C462A6`. Fourteen additional consecutive triples at `$C351E2-$C35234` fill the remaining source-order indices used by the `$C34C` faces, but their transform producer is not yet directly traced. The full 36-triple run is in byte-stable Hunk 41 and is separate from the mutable `$C48390` projection workspace.
 
 The triples form a symmetric, low-height local-coordinate cloud. A bounded
 frame-12,000 trace now supplies the source-to-face join: `$C1F100` enters with
@@ -17,7 +17,7 @@ The remaining 14 slots in `$C462AC-$C46301` were populated before the recorded
 replay and their immutable source remains untraced; this is not yet a complete
 source-model export.
 
-[Orthographic static-vertex plot](../plots/external_aircraft_c3515e_static_vertices.svg) shows all 22 source points in X-Y, X-Z, and Y-Z. It intentionally draws points only: source order is not proof of an edge or polygon, and the renderer's real topology must be recovered from its face records rather than guessed from nearest neighbours.
+[Orthographic static-vertex plot](../plots/external_aircraft_c3515e_static_vertices.svg) shows all 36 contiguous source-order points in X-Y, X-Z, and Y-Z. Indices 0-21 are transform-traced; 22-35 are the untraced continuation candidate. It intentionally draws points only: source order is not proof of an edge or polygon, and the renderer's real topology must be recovered from its face records rather than guessed from nearest neighbours.
 
 Reproduce from the saved transform capture:
 
