@@ -1,19 +1,21 @@
 {
-  "scope": "Menu and human-run structural evidence plus bounded display, keyboard, joystick, and math paths",
+  "scope": "Menu, attract, and recorded-run structural evidence plus bounded display, message-sequence, keyboard, joystick, math, matrix, and postflight paths",
   "observed_ram_instructions": 443,
   "observed_ram_instruction_bytes": 1756,
   "structural_call_targets": 36,
   "behavioral_routines": 31,
   "scenario_contracts": 10,
-  "symbolic_reconstructed_bytes": 28360,
+  "symbolic_reconstructed_bytes": 34586,
   "coverage_generated_by": "scripts/verify_reconstructions.py -> analysis/coverage.json",
-  "coverage_denominator": 227536,
-  "coverage_denominator_note": "All CODE hunk bytes (285976) minus 58440 bytes in segments with positive data evidence: never executed in any P-code export, and referenced by reconstructed source only as data operands, never as branch or call targets.",
+  "pcode_exports": 122,
+  "reconstructed_slices": 323,
+  "coverage_denominator": 226320,
+  "coverage_denominator_note": "All CODE hunk bytes (285976) minus 59656 bytes in segments with positive data evidence: never executed in any P-code export, and referenced by reconstructed source only as data operands, never as branch or call targets.",
   "all_code_bytes": 285976,
-  "observed_executed_bytes": 31946,
-  "reconstructed_runtime_backed_bytes": 11250,
-  "reconstructed_static_only_bytes": 17110,
-  "unclassified_bytes": 52364,
+  "observed_executed_bytes": 44218,
+  "reconstructed_runtime_backed_bytes": 19156,
+  "reconstructed_static_only_bytes": 15430,
+  "unclassified_bytes": 44920,
   "unknowns": [
     "Exact game/OS allocation boundaries and complete code extent",
     "Keyboard dispatcher semantics and display callers up to the main loop",
@@ -38,7 +40,7 @@
       ]
     }
   },
-  "coverage_of_observed_percent": 35.22,
-  "coverage_of_instructions_percent": 12.46,
-  "game_exercised_percent": 12.36
+  "coverage_of_observed_percent": 43.32,
+  "coverage_of_instructions_percent": 15.28,
+  "game_exercised_percent": 17.11
 }

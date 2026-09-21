@@ -12,3 +12,13 @@ meaning of this transition are not established.
 
 The native `F` key was not dispatched from the available free-flight state, so
 the static raw-key route is not promoted to a behavioral control claim.
+
+## Rejected top-level frontend-F probe
+
+`build/run029_keyf_variant.e9k` changes only the frame-266/269 digit-5 events
+in sealed run029 to frontend key/character 70 (`F`), then
+`build/run029_keyf_prefix.e9k` retains no later input. Breakpoints armed from
+frame 250 at both `$C1AD74` and `$C06BF0` did not hit through frame 400.
+Consequently this frontend event does not establish that the dispatcher's raw
+`$46` comparison is a normal top-level `F` binding, and it supplies no live
+contract for this transition. The entry remains static-only.

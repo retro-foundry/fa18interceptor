@@ -1,0 +1,96 @@
+{
+  "authority": "build/run024_flight_return_trace/slow.bin",
+  "sequence_base": "$C4574A",
+  "relative_table": "$C3ED0A",
+  "entries": [
+    {
+      "sequence_offset": "$00",
+      "code": 6,
+      "table_address": "$C3ED14",
+      "descriptor": "$C3F237",
+      "header": "00 02 03 52",
+      "payload": "           F/A-18 INTERCEPTOR$^"
+    },
+    {
+      "sequence_offset": "$02",
+      "code": 100,
+      "table_address": "$C3EDD0",
+      "descriptor": "$C3F25D",
+      "header": "14 02 00 a3",
+      "payload": "SELECT:"
+    },
+    {
+      "sequence_offset": "$04",
+      "code": 101,
+      "table_address": "$C3EDD2",
+      "descriptor": "$C3F26B",
+      "header": "28 02 00 42",
+      "payload": "1 ... DEMO"
+    },
+    {
+      "sequence_offset": "$06",
+      "code": 102,
+      "table_address": "$C3EDD4",
+      "descriptor": "$C3F27C",
+      "header": "34 02 00 42",
+      "payload": "2 ... FREE FLIGHT, NO ENEMY CONFRONTATION"
+    },
+    {
+      "sequence_offset": "$08",
+      "code": 103,
+      "table_address": "$C3EDD6",
+      "descriptor": "$C3F2AC",
+      "header": "46 02 00 52",
+      "payload": "3 ... TRAINING:  DEMO OF MANEUVERS"
+    },
+    {
+      "sequence_offset": "$0A",
+      "code": 104,
+      "table_address": "$C3EDD8",
+      "descriptor": "$C3F2D5",
+      "header": "52 02 00 52",
+      "payload": "4 ... TRAINING:  PRACTICE MANEUVERS"
+    },
+    {
+      "sequence_offset": "$0C",
+      "code": 105,
+      "table_address": "$C3EDDA",
+      "descriptor": "$C3F2FF",
+      "header": "5e 02 00 52",
+      "payload": "5 ... QUALIFICATION: REQUIRED FOR MISSIONS"
+    },
+    {
+      "sequence_offset": "$0E",
+      "code": 106,
+      "table_address": "$C3EDDC",
+      "descriptor": "$C3F330",
+      "header": "70 02 00 12",
+      "payload": "6 ... SELECTABLE MISSIONS"
+    },
+    {
+      "sequence_offset": "$10",
+      "code": 107,
+      "table_address": "$C3EDDE",
+      "descriptor": "$C3F350",
+      "header": "7c 02 00 12",
+      "payload": "7 ... NEXT ACTIVE ADVANCED MISSION"
+    },
+    {
+      "sequence_offset": "$12",
+      "code": 108,
+      "table_address": "$C3EDE0",
+      "descriptor": "$C3F379",
+      "header": "8e 02 00 b2",
+      "payload": "8 ... YOUR CURRENT FLIGHT LOG STATISTICS"
+    },
+    {
+      "sequence_offset": "$14",
+      "code": 109,
+      "table_address": "$C3EDE2",
+      "descriptor": "$C3F3A7",
+      "header": "a5 02 00 a2",
+      "payload": "ESC ......... RESTARTS YOUR SELECTION"
+    }
+  ],
+  "terminator_offset": "$16"
+}

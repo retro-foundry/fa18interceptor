@@ -186,7 +186,7 @@ Rules for reconstruction:
 | `$C45898` | byte | signed entry guard of static `$C0F5F8`; negative joins its observed tail. |
 | `$C4582A/$C4582B` | bytes | static `$C0F5F8` phase and associated flag fields; phase values `$FF`, 1, 2, and 3 select documented routes. |
 | `$C45904/$C45908/$C4590C/$C45910/$C45914` | longwords | static `$C0F5F8` offset inputs combined with `$C45AF2`; gameplay meaning unassigned. |
-| `$C1AB74` | long pointer | static `$C0F5F8` reads this pointer and may add its calculated offset at `8(a0)`. |
+| `$C1AB74` | long pointer | `$C15C4E` stores the result of a static 78-byte allocation here; `$C0F5F8` and `$C1017E` consume pointer-relative state. The allocation entry is not yet directly traced. |
 | `$C457C5` | byte | set to one after the static `$C0F5F8` in-range offset route. |
 | `$C4599E` | word | set to `$003F` before `$C0F5F8` calls `$C06C02` on an out-of-range calculated offset. |
 | `$C458C0` | word | copied to `$C45AD6` by static `$C0F5F8` phase-three route. |

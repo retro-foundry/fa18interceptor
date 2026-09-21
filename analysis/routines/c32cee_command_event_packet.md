@@ -5,6 +5,12 @@ parent calls `$C32CEE` from `$C0F3BA` and returns to `$C0F3C0` after 24
 instructions. P-code is `pcode/raw/training_600_c32cee/` (24 instruction
 starts, 98 operations).
 
+The exact entry prefix `$C32CEE-$C32D1D` is reconstructed in
+`source_amiga/observed/consume_message_sequence_selector_prefix.asm`. It
+contains the inhibit test, selector-word load, head-word publication, and the
+initial active-sequence branch. Its raw return targets and divergent
+continuations are intentionally outside this slice.
+
 The observed route tests `$C45871`, loads a word from the table at `$C4574A`
 using byte offset `$C457C6`, and stores it at `$C45772`. It then follows
 observed guards at `$C457C3`, `$C45744`, `$C457E0`, and `$C457F5`, finally

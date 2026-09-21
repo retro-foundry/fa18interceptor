@@ -1,0 +1,890 @@
+{
+  "authority": "captures/baseline_menu/slow.bin",
+  "relative_table": "$C3ED0A",
+  "selector_codes": [
+    1,
+    110
+  ],
+  "records": [
+    {
+      "code": 1,
+      "table_address": "$C3ED0A",
+      "descriptor": "$C3F12E",
+      "header": "10 04 03 26",
+      "payload_hex": "57 45 4c 43 4f 4d 45 20 54 4f 20 59 4f 55 52 20 46 49 52 53 54 20 54 4f 55 52 20 4f 46 20 44 55 54 59 2e",
+      "payload_ascii": "WELCOME TO YOUR FIRST TOUR OF DUTY."
+    },
+    {
+      "code": 2,
+      "table_address": "$C3ED0C",
+      "descriptor": "$C3F1E1",
+      "header": "24 04 03 26",
+      "payload_hex": "57 45 4c 43 4f 4d 45 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20",
+      "payload_ascii": "WELCOME                                "
+    },
+    {
+      "code": 3,
+      "table_address": "$C3ED0E",
+      "descriptor": "$C3F190",
+      "header": "82 04 03 56",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20",
+      "payload_ascii": "                                   "
+    },
+    {
+      "code": 4,
+      "table_address": "$C3ED10",
+      "descriptor": "$C3EFDE",
+      "header": "48 22 03 96",
+      "payload_hex": "20 20 20 20 20 20 20",
+      "payload_ascii": "       "
+    },
+    {
+      "code": 5,
+      "table_address": "$C3ED12",
+      "descriptor": "$C3F12E",
+      "header": "10 04 03 26",
+      "payload_hex": "57 45 4c 43 4f 4d 45 20 54 4f 20 59 4f 55 52 20 46 49 52 53 54 20 54 4f 55 52 20 4f 46 20 44 55 54 59 2e",
+      "payload_ascii": "WELCOME TO YOUR FIRST TOUR OF DUTY."
+    },
+    {
+      "code": 6,
+      "table_address": "$C3ED14",
+      "descriptor": "$C3F237",
+      "header": "00 02 03 52",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 46 2f 41 2d 31 38 20 49 4e 54 45 52 43 45 50 54 4f 52 24 5e",
+      "payload_ascii": "           F/A-18 INTERCEPTOR$^"
+    },
+    {
+      "code": 7,
+      "table_address": "$C3ED16",
+      "descriptor": "$C3F0F8",
+      "header": "b6 0a 03 d3",
+      "payload_hex": "53 45 4c 45 43 54 20 59 4f 55 52 20 46 52 45 45 20 46 4c 49 47 48 54",
+      "payload_ascii": "SELECT YOUR FREE FLIGHT"
+    },
+    {
+      "code": 8,
+      "table_address": "$C3ED18",
+      "descriptor": "$C3F0F8",
+      "header": "b6 0a 03 d3",
+      "payload_hex": "53 45 4c 45 43 54 20 59 4f 55 52 20 46 52 45 45 20 46 4c 49 47 48 54",
+      "payload_ascii": "SELECT YOUR FREE FLIGHT"
+    },
+    {
+      "code": 9,
+      "table_address": "$C3ED1A",
+      "descriptor": "$C3F7A6",
+      "header": "0f 02 03 96",
+      "payload_hex": "20 20 20 20 20 20 42 41 53 49 43 20 46 4c 49 47 48 54 20 4d 41 4e 45 55 56 45 52 53 20 2d 20 50 41 52 54 20 31",
+      "payload_ascii": "      BASIC FLIGHT MANEUVERS - PART 1"
+    },
+    {
+      "code": 10,
+      "table_address": "$C3ED1C",
+      "descriptor": "$C3F924",
+      "header": "06 00 03 96",
+      "payload_hex": "20 20 20 20 20 20 42 41 53 49 43 20 46 4c 49 47 48 54 20 4d 41 4e 45 55 56 45 52 53 20 2d 20 50 41 52 54 20 32",
+      "payload_ascii": "      BASIC FLIGHT MANEUVERS - PART 2"
+    },
+    {
+      "code": 11,
+      "table_address": "$C3ED1E",
+      "descriptor": "$C41050",
+      "header": "04 00 03 d4",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 12,
+      "table_address": "$C3ED20",
+      "descriptor": "$C41057",
+      "header": "04 00 03 d4",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 13,
+      "table_address": "$C3ED22",
+      "descriptor": "$C4105E",
+      "header": "04 00 03 d4",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 14,
+      "table_address": "$C3ED24",
+      "descriptor": "$C40E34",
+      "header": "36 02 03 96",
+      "payload_hex": "20 20 20 20 59 4f 55 20 48 41 56 45 20 53 55 52 56 49 56 45 44 20 59 4f 55 52 20 42 41 49 4c 4f 55 54",
+      "payload_ascii": "    YOU HAVE SURVIVED YOUR BAILOUT"
+    },
+    {
+      "code": 15,
+      "table_address": "$C3ED26",
+      "descriptor": "$C40ED9",
+      "header": "08 02 03 52",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 46 2f 41 2d 31 38 20 49 4e 54 45 52 43 45 50 54 4f 52 24 5e",
+      "payload_ascii": "         F/A-18 INTERCEPTOR$^"
+    },
+    {
+      "code": 16,
+      "table_address": "$C3ED28",
+      "descriptor": "$C40EBF",
+      "header": "ff ff ff ff",
+      "payload_hex": "2a 0c 03 94 20 20 20 4b 45 59 20 50 20 53 54 41 52 54 53",
+      "payload_ascii": "*\f\u0003\ufffd   KEY P STARTS"
+    },
+    {
+      "code": 17,
+      "table_address": "$C3ED2A",
+      "descriptor": "$C40EC0",
+      "header": "ff ff ff 2a",
+      "payload_hex": "0c 03 94 20 20 20 4b 45 59 20 50 20 53 54 41 52 54 53",
+      "payload_ascii": "\f\u0003\ufffd   KEY P STARTS"
+    },
+    {
+      "code": 18,
+      "table_address": "$C3ED2C",
+      "descriptor": "$C40EC1",
+      "header": "ff ff 2a 0c",
+      "payload_hex": "03 94 20 20 20 4b 45 59 20 50 20 53 54 41 52 54 53",
+      "payload_ascii": "\u0003\ufffd   KEY P STARTS"
+    },
+    {
+      "code": 19,
+      "table_address": "$C3ED2E",
+      "descriptor": "$C40EC2",
+      "header": "ff 2a 0c 03",
+      "payload_hex": "94 20 20 20 4b 45 59 20 50 20 53 54 41 52 54 53",
+      "payload_ascii": "\ufffd   KEY P STARTS"
+    },
+    {
+      "code": 20,
+      "table_address": "$C3ED30",
+      "descriptor": "$C40EC3",
+      "header": "2a 0c 03 94",
+      "payload_hex": "20 20 20 4b 45 59 20 50 20 53 54 41 52 54 53",
+      "payload_ascii": "   KEY P STARTS"
+    },
+    {
+      "code": 21,
+      "table_address": "$C3ED32",
+      "descriptor": "$C3ED0A",
+      "header": "04 24 04 d7",
+      "payload_hex": "04 86 02 d4 04 24 05 2d 03 ee 03 ee 0a 9c 0c 1a 23 46 23 4d 23 54 21 2a 21 cf 21 b5 21 b6 21 b7 21 b8 21 b9",
+      "payload_ascii": "\u0004\ufffd\u0002\ufffd\u0004$\u0005-\u0003\ufffd\u0003\ufffd\n\ufffd\f\u001a#F#M#T!*!\ufffd!\ufffd!\ufffd!\ufffd!\ufffd!\ufffd"
+    },
+    {
+      "code": 22,
+      "table_address": "$C3ED34",
+      "descriptor": "$C3EE30",
+      "header": "06 02 ff 06",
+      "payload_hex": "04",
+      "payload_ascii": "\u0004"
+    },
+    {
+      "code": 23,
+      "table_address": "$C3ED36",
+      "descriptor": "$C3FDBF",
+      "header": "4a 04 03 96",
+      "payload_hex": "56 49 53 55 41 4c 20 43 4f 4e 46 49 52 4d 41 54 49 4f 4e 20 4f 50 45 52 41 54 49 4f 4e",
+      "payload_ascii": "VISUAL CONFIRMATION OPERATION"
+    },
+    {
+      "code": 24,
+      "table_address": "$C3ED38",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 25,
+      "table_address": "$C3ED3A",
+      "descriptor": "$C3F0F7",
+      "header": "ff b6 0a 03",
+      "payload_hex": "d3 53 45 4c 45 43 54 20 59 4f 55 52 20 46 52 45 45 20 46 4c 49 47 48 54",
+      "payload_ascii": "\ufffdSELECT YOUR FREE FLIGHT"
+    },
+    {
+      "code": 26,
+      "table_address": "$C3ED3C",
+      "descriptor": "$C3FDBF",
+      "header": "4a 04 03 96",
+      "payload_hex": "56 49 53 55 41 4c 20 43 4f 4e 46 49 52 4d 41 54 49 4f 4e 20 4f 50 45 52 41 54 49 4f 4e",
+      "payload_ascii": "VISUAL CONFIRMATION OPERATION"
+    },
+    {
+      "code": 27,
+      "table_address": "$C3ED3E",
+      "descriptor": "$C3FE44",
+      "header": "4a 04 03 95",
+      "payload_hex": "56 49 53 55 41 4c 20 43 4f 4e 46 49 52 4d 41 54 49 4f 4e 20 4f 50 45 52 41 54 49 4f 4e",
+      "payload_ascii": "VISUAL CONFIRMATION OPERATION"
+    },
+    {
+      "code": 28,
+      "table_address": "$C3ED40",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 29,
+      "table_address": "$C3ED42",
+      "descriptor": "$C3FF12",
+      "header": "68 02 03 96",
+      "payload_hex": "20 53 43 52 41 4d 42 4c 45 20 49 4d 4d 45 44 49 41 54 45 4c 59",
+      "payload_ascii": " SCRAMBLE IMMEDIATELY"
+    },
+    {
+      "code": 30,
+      "table_address": "$C3ED44",
+      "descriptor": "$C3FFDF",
+      "header": "01 06 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 31,
+      "table_address": "$C3ED46",
+      "descriptor": "$C40029",
+      "header": "4a 02 03 95",
+      "payload_hex": "20 20 45 4d 45 52 47 45 4e 43 59 20 44 45 46 45 4e 53 45 20 53 54 41 54 55 53 3a",
+      "payload_ascii": "  EMERGENCY DEFENSE STATUS:"
+    },
+    {
+      "code": 32,
+      "table_address": "$C3ED48",
+      "descriptor": "$C400E5",
+      "header": "4a 04 03 96",
+      "payload_hex": "45 4d 45 52 47 45 4e 43 59 20 44 45 46 45 4e 53 45 20 53 54 41 54 55 53 3a",
+      "payload_ascii": "EMERGENCY DEFENSE STATUS:"
+    },
+    {
+      "code": 33,
+      "table_address": "$C3ED4A",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 34,
+      "table_address": "$C3ED4C",
+      "descriptor": "$C40181",
+      "header": "77 02 03 96",
+      "payload_hex": "20 53 43 52 41 4d 42 4c 45 20 49 4d 4d 45 44 49 41 54 45 4c 59",
+      "payload_ascii": " SCRAMBLE IMMEDIATELY"
+    },
+    {
+      "code": 35,
+      "table_address": "$C3ED4E",
+      "descriptor": "$C401FA",
+      "header": "06 06 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 36,
+      "table_address": "$C3ED50",
+      "descriptor": "$C40293",
+      "header": "06 06 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 37,
+      "table_address": "$C3ED52",
+      "descriptor": "$C40347",
+      "header": "06 06 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 38,
+      "table_address": "$C3ED54",
+      "descriptor": "$C40E5D",
+      "header": "2b 10 03 96",
+      "payload_hex": "2d 20 50 41 55 53 45 44 20 2d",
+      "payload_ascii": "- PAUSED -"
+    },
+    {
+      "code": 39,
+      "table_address": "$C3ED56",
+      "descriptor": "$C4043B",
+      "header": "4a 02 03 95",
+      "payload_hex": "41 4c 45 52 54 20 53 54 41 54 55 53 3a",
+      "payload_ascii": "ALERT STATUS:"
+    },
+    {
+      "code": 40,
+      "table_address": "$C3ED58",
+      "descriptor": "$C4043B",
+      "header": "4a 02 03 95",
+      "payload_hex": "41 4c 45 52 54 20 53 54 41 54 55 53 3a",
+      "payload_ascii": "ALERT STATUS:"
+    },
+    {
+      "code": 41,
+      "table_address": "$C3ED5A",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 42,
+      "table_address": "$C3ED5C",
+      "descriptor": "$C40502",
+      "header": "6a 02 03 96",
+      "payload_hex": "53 43 52 41 4d 42 4c 45 20 49 4d 4d 45 44 49 41 54 45 4c 59",
+      "payload_ascii": "SCRAMBLE IMMEDIATELY"
+    },
+    {
+      "code": 43,
+      "table_address": "$C3ED5E",
+      "descriptor": "$C40CFD",
+      "header": "2b 06 03 97",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 57 45 4c 4c 20 44 4f 4e 45 21",
+      "payload_ascii": "           WELL DONE!"
+    },
+    {
+      "code": 44,
+      "table_address": "$C3ED60",
+      "descriptor": "$C405F1",
+      "header": "06 02 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 45,
+      "table_address": "$C3ED62",
+      "descriptor": "$C405EA",
+      "header": "06 02 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 46,
+      "table_address": "$C3ED64",
+      "descriptor": "$C4064F",
+      "header": "4a 02 03 95",
+      "payload_hex": "52 45 53 43 55 45 20 4f 50 45 52 41 54 49 4f 4e 3a",
+      "payload_ascii": "RESCUE OPERATION:"
+    },
+    {
+      "code": 47,
+      "table_address": "$C3ED66",
+      "descriptor": "$C406FC",
+      "header": "4a 04 03 96",
+      "payload_hex": "52 45 53 43 55 45 20 4f 50 45 52 41 54 49 4f 4e 3a",
+      "payload_ascii": "RESCUE OPERATION:"
+    },
+    {
+      "code": 48,
+      "table_address": "$C3ED68",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 49,
+      "table_address": "$C3ED6A",
+      "descriptor": "$C40779",
+      "header": "6a 02 03 96",
+      "payload_hex": "53 43 52 41 4d 42 4c 45 20 49 4d 4d 45 44 49 41 54 45 4c 59 20 46 4f 52 20 52 45 53 43 55 45 20 4f 50 45 52 41 54 49 4f 4e",
+      "payload_ascii": "SCRAMBLE IMMEDIATELY FOR RESCUE OPERATION"
+    },
+    {
+      "code": 50,
+      "table_address": "$C3ED6C",
+      "descriptor": "$C4085F",
+      "header": "0a 06 03 97",
+      "payload_hex": "20 45 4d 45 52 59 47 45 4e 43 59 20 52 45 53 43 55 45 20 50 4f 44",
+      "payload_ascii": " EMERYGENCY RESCUE POD"
+    },
+    {
+      "code": 51,
+      "table_address": "$C3ED6E",
+      "descriptor": "$C408C2",
+      "header": "0a 06 03 97",
+      "payload_hex": "20 45 4d 45 52 59 47 45 4e 43 59 20 52 45 53 43 55 45 20 50 4f 44",
+      "payload_ascii": " EMERYGENCY RESCUE POD"
+    },
+    {
+      "code": 52,
+      "table_address": "$C3ED70",
+      "descriptor": "$C40906",
+      "header": "4a 02 03 96",
+      "payload_hex": "41 4c 45 52 54 3a 20 4e 4f 52 41 44 20 48 41 53 20 45 4e 54 45 52 45 44 20 44 45 46 43 4f 4e 20 33",
+      "payload_ascii": "ALERT: NORAD HAS ENTERED DEFCON 3"
+    },
+    {
+      "code": 53,
+      "table_address": "$C3ED72",
+      "descriptor": "$C409D6",
+      "header": "4a 04 03 96",
+      "payload_hex": "41 4c 45 52 54 3a 20 4e 4f 52 41 44 20 48 41 53 20 45 4e 54 45 52 45 44 20 44 45 46 43 4f 4e 20 32",
+      "payload_ascii": "ALERT: NORAD HAS ENTERED DEFCON 2"
+    },
+    {
+      "code": 54,
+      "table_address": "$C3ED74",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 55,
+      "table_address": "$C3ED76",
+      "descriptor": "$C40A46",
+      "header": "6c 02 03 96",
+      "payload_hex": "53 43 52 41 4d 42 4c 45 20 49 4d 4d 45 44 49 41 54 45 4c 59 20 46 4f 52 20 49 4e 54 45 52 43 45 50 54 49 4f 4e",
+      "payload_ascii": "SCRAMBLE IMMEDIATELY FOR INTERCEPTION"
+    },
+    {
+      "code": 56,
+      "table_address": "$C3ED78",
+      "descriptor": "$C40CFD",
+      "header": "2b 06 03 97",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 57 45 4c 4c 20 44 4f 4e 45 21",
+      "payload_ascii": "           WELL DONE!"
+    },
+    {
+      "code": 57,
+      "table_address": "$C3ED7A",
+      "descriptor": "$C40ACD",
+      "header": "06 02 03 07",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 58,
+      "table_address": "$C3ED7C",
+      "descriptor": "$C40B20",
+      "header": "06 02 03 07",
+      "payload_hex": "20 20 20 20 4e 55 43 4c 45 41 52 20 44 45 53 54 52 55 43 54 49 4f 4e 20 57 49 44 45 53 50 52 45 41 44 2e",
+      "payload_ascii": "    NUCLEAR DESTRUCTION WIDESPREAD."
+    },
+    {
+      "code": 59,
+      "table_address": "$C3ED7E",
+      "descriptor": "$C40BAD",
+      "header": "4a 04 03 96",
+      "payload_hex": "41 4c 45 52 54 3a 20 53 48 41 44 4f 57 20 53 55 42 20 44 45 54 45 43 54 49 4f 4e 3a",
+      "payload_ascii": "ALERT: SHADOW SUB DETECTION:"
+    },
+    {
+      "code": 60,
+      "table_address": "$C3ED80",
+      "descriptor": "$C40BAD",
+      "header": "4a 04 03 96",
+      "payload_hex": "41 4c 45 52 54 3a 20 53 48 41 44 4f 57 20 53 55 42 20 44 45 54 45 43 54 49 4f 4e 3a",
+      "payload_ascii": "ALERT: SHADOW SUB DETECTION:"
+    },
+    {
+      "code": 61,
+      "table_address": "$C3ED82",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 62,
+      "table_address": "$C3ED84",
+      "descriptor": "$C40C56",
+      "header": "6c 02 03 96",
+      "payload_hex": "53 43 52 41 4d 42 4c 45 20 41 4e 44 20 49 4e 54 45 52 43 45 50 54 20 53 48 41 44 4f 57 20 53 55 42",
+      "payload_ascii": "SCRAMBLE AND INTERCEPT SHADOW SUB"
+    },
+    {
+      "code": 63,
+      "table_address": "$C3ED86",
+      "descriptor": "$C40CFD",
+      "header": "2b 06 03 97",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 57 45 4c 4c 20 44 4f 4e 45 21",
+      "payload_ascii": "           WELL DONE!"
+    },
+    {
+      "code": 64,
+      "table_address": "$C3ED88",
+      "descriptor": "$C3F3FD",
+      "header": "0c 04 03 d3",
+      "payload_hex": "20 20 20 20 20 20 20 53 45 4c 45 43 54 41 42 4c 45 20 4d 49 53 53 49 4f 4e 53",
+      "payload_ascii": "       SELECTABLE MISSIONS"
+    },
+    {
+      "code": 65,
+      "table_address": "$C3ED8A",
+      "descriptor": "$C3FFD8",
+      "header": "0a 06 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 66,
+      "table_address": "$C3ED8C",
+      "descriptor": "$C405EA",
+      "header": "06 02 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 67,
+      "table_address": "$C3ED8E",
+      "descriptor": "$C3EFEC",
+      "header": "11 08 03 97",
+      "payload_hex": "55 4e 41 55 54 48 4f 52 49 5a 45 44 20 43 4c 45 41 52 41 4e 43 45",
+      "payload_ascii": "UNAUTHORIZED CLEARANCE"
+    },
+    {
+      "code": 68,
+      "table_address": "$C3ED90",
+      "descriptor": "$C3EE33",
+      "header": "06 04 00 23",
+      "payload_hex": "4e 4f 20 4c 4f 47 20 44 49 53 4b 20 50 52 45 53 45 4e 54 20 49 4e 20 44 46 30 3a",
+      "payload_ascii": "NO LOG DISK PRESENT IN DF0:"
+    },
+    {
+      "code": 69,
+      "table_address": "$C3ED92",
+      "descriptor": "$C3EE55",
+      "header": "06 04 00 23",
+      "payload_hex": "55 4e 49 4e 49 54 49 41 4c 49 5a 45 44 20 4c 4f 47 20 44 49 53 4b 20 49 4e 20 44 46 30 3a",
+      "payload_ascii": "UNINITIALIZED LOG DISK IN DF0:"
+    },
+    {
+      "code": 70,
+      "table_address": "$C3ED94",
+      "descriptor": "$C3EE7A",
+      "header": "06 04 00 23",
+      "payload_hex": "4c 4f 47 20 44 49 53 4b 20 44 46 30 3a 20 4e 4f 54 20 57 52 49 54 45 20 45 4e 41 42 4c 45 44",
+      "payload_ascii": "LOG DISK DF0: NOT WRITE ENABLED"
+    },
+    {
+      "code": 71,
+      "table_address": "$C3ED96",
+      "descriptor": "$C3EFB4",
+      "header": "48 02 03 96",
+      "payload_hex": "20 20 20 43 52 41 43 4b 45 44 20 42 59 20 41 2d 48 41 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20",
+      "payload_ascii": "   CRACKED BY A-HA                 "
+    },
+    {
+      "code": 72,
+      "table_address": "$C3ED98",
+      "descriptor": "$C40D19",
+      "header": "06 02 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 73,
+      "table_address": "$C3ED9A",
+      "descriptor": "$C3FAEE",
+      "header": "06 02 03 96",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 20 20 51 55 41 4c 49 46 49 43 41 54 49 4f 4e",
+      "payload_ascii": "             QUALIFICATION"
+    },
+    {
+      "code": 74,
+      "table_address": "$C3ED9C",
+      "descriptor": "$C3FC38",
+      "header": "1e 04 03 95",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 4c 41 4e 44 49 4e 47 20 53 55 43 43 45 53 53 46 55 4c",
+      "payload_ascii": "         LANDING SUCCESSFUL"
+    },
+    {
+      "code": 75,
+      "table_address": "$C3ED9E",
+      "descriptor": "$C40DEB",
+      "header": "20 02 03 95",
+      "payload_hex": "20 20 20 20 53 45 4c 45 43 54",
+      "payload_ascii": "    SELECT"
+    },
+    {
+      "code": 76,
+      "table_address": "$C3EDA0",
+      "descriptor": "$C403C7",
+      "header": "06 04 03 97",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 77,
+      "table_address": "$C3EDA2",
+      "descriptor": "$C3F46C",
+      "header": "4c 04 00 13",
+      "payload_hex": "20 46 32 20 2d 20 45 4d 45 52 47 45 4e 43 59 20 44 45 46 45 4e 53 45 20 4f 50 45 52 41 54 49 4f 4e",
+      "payload_ascii": " F2 - EMERGENCY DEFENSE OPERATION"
+    },
+    {
+      "code": 78,
+      "table_address": "$C3EDA4",
+      "descriptor": "$C3F494",
+      "header": "60 04 00 13",
+      "payload_hex": "20 46 33 20 2d 20 49 4e 54 45 52 43 45 50 54 20 53 54 4f 4c 45 4e 20 41 49 52 43 52 41 46 54",
+      "payload_ascii": " F3 - INTERCEPT STOLEN AIRCRAFT"
+    },
+    {
+      "code": 79,
+      "table_address": "$C3EDA6",
+      "descriptor": "$C3F4BA",
+      "header": "74 04 00 13",
+      "payload_hex": "20 46 34 20 2d 20 53 45 41 52 43 48 20 41 4e 44 20 52 45 53 43 55 45 20 4f 50 45 52 41 54 49 4f 4e",
+      "payload_ascii": " F4 - SEARCH AND RESCUE OPERATION"
+    },
+    {
+      "code": 80,
+      "table_address": "$C3EDA8",
+      "descriptor": "$C3F4E2",
+      "header": "88 04 00 13",
+      "payload_hex": "20 46 35 20 2d 20 49 4e 54 45 52 43 45 50 54 20 49 4e 43 4f 4d 49 4e 47 20 43 52 55 49 53 45 20 4d 49 53 53 49 4c 45",
+      "payload_ascii": " F5 - INTERCEPT INCOMING CRUISE MISSILE"
+    },
+    {
+      "code": 81,
+      "table_address": "$C3EDAA",
+      "descriptor": "$C3F510",
+      "header": "9c 04 00 13",
+      "payload_hex": "20 46 36 20 2d 20 43 41 52 52 49 45 52 20 53 55 42 20 4d 49 53 53 49 4f 4e",
+      "payload_ascii": " F6 - CARRIER SUB MISSION"
+    },
+    {
+      "code": 82,
+      "table_address": "$C3EDAC",
+      "descriptor": "$C3F749",
+      "header": "b0 04 03 93",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 83,
+      "table_address": "$C3EDAE",
+      "descriptor": "$C3F778",
+      "header": "b0 04 03 93",
+      "payload_hex": "",
+      "payload_ascii": ""
+    },
+    {
+      "code": 84,
+      "table_address": "$C3EDB0",
+      "descriptor": "$C3FCB0",
+      "header": "1d 04 03 95",
+      "payload_hex": "20 20 20 20 20 20 20 59 4f 55 52 20 4c 4f 47 20 4e 4f 57 20 52 45 46 4c 45 43 54 53",
+      "payload_ascii": "       YOUR LOG NOW REFLECTS"
+    },
+    {
+      "code": 85,
+      "table_address": "$C3EDB2",
+      "descriptor": "$C3FD17",
+      "header": "1e 04 03 97",
+      "payload_hex": "20 20 20 20 20 20 20 20 52 45 54 55 52 4e 20 54 4f 20 42 41 53 45",
+      "payload_ascii": "        RETURN TO BASE"
+    },
+    {
+      "code": 86,
+      "table_address": "$C3EDB4",
+      "descriptor": "$C3FD34",
+      "header": "1e 04 03 97",
+      "payload_hex": "20 20 20 20 20 20 20 20 52 45 54 55 52 4e 20 54 4f 20 43 41 52 52 49 45 52",
+      "payload_ascii": "        RETURN TO CARRIER"
+    },
+    {
+      "code": 87,
+      "table_address": "$C3EDB6",
+      "descriptor": "$C3F530",
+      "header": "00 02 03 b2",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 46 4c 49 47 48 54 20 4c 4f 47 20 53 54 41 54 49 53 54 49 43 53",
+      "payload_ascii": "         FLIGHT LOG STATISTICS"
+    },
+    {
+      "code": 88,
+      "table_address": "$C3EDB8",
+      "descriptor": "$C40E6E",
+      "header": "1a 08 03 96",
+      "payload_hex": "20 59 4f 55 52 20 56 45 43 54 4f 52 20 58 58 58 20 46 4f 52 20 42 4f 47 45 59",
+      "payload_ascii": " YOUR VECTOR XXX FOR BOGEY"
+    },
+    {
+      "code": 89,
+      "table_address": "$C3EDBA",
+      "descriptor": "$C40E8F",
+      "header": "30 0c 03 96",
+      "payload_hex": "20 52 45 41 44 59 20 46 4f 52 20 54 41 4b 45 4f 46 46",
+      "payload_ascii": " READY FOR TAKEOFF"
+    },
+    {
+      "code": 90,
+      "table_address": "$C3EDBC",
+      "descriptor": "$C40EA8",
+      "header": "30 0c 03 96",
+      "payload_hex": "20 52 45 41 44 59 20 54 4f 20 4c 41 55 4e 43 48",
+      "payload_ascii": " READY TO LAUNCH"
+    },
+    {
+      "code": 91,
+      "table_address": "$C3EDBE",
+      "descriptor": "$C3FD54",
+      "header": "06 04 03 95",
+      "payload_hex": "20 20 20 20 20 20 4e 4f 52 41 44 20 53 54 52 41 54 45 47 49 43 20 43 4f 4d 4d 41 4e 44",
+      "payload_ascii": "      NORAD STRATEGIC COMMAND"
+    },
+    {
+      "code": 92,
+      "table_address": "$C3EDC0",
+      "descriptor": "$C40B86",
+      "header": "06 06 03 07",
+      "payload_hex": "20 20 4e 4f 20 4e 55 43 4c 45 41 52 20 44 45 54 4f 4e 41 54 49 4f 4e 20 4f 43 43 55 52 45 44 2e",
+      "payload_ascii": "  NO NUCLEAR DETONATION OCCURED."
+    },
+    {
+      "code": 93,
+      "table_address": "$C3EDC2",
+      "descriptor": "$C3FEEC",
+      "header": "56 02 03 97",
+      "payload_hex": "20 20 20 20 20 20 20 20 2d 20 43 4c 45 41 52 41 4e 43 45 20 43 4f 4e 46 49 52 4d 45 44 20 2d",
+      "payload_ascii": "        - CLEARANCE CONFIRMED -"
+    },
+    {
+      "code": 94,
+      "table_address": "$C3EDC4",
+      "descriptor": "$C3EEA0",
+      "header": "1c 04 00 23",
+      "payload_hex": "49 46 20 59 4f 55 20 57 49 53 48 20 54 4f 20 4b 45 45 50 20 41 20 4c 4f 47 2c",
+      "payload_ascii": "IF YOU WISH TO KEEP A LOG,"
+    },
+    {
+      "code": 95,
+      "table_address": "$C3EDC6",
+      "descriptor": "$C3EF34",
+      "header": "11 06 03 95",
+      "payload_hex": "20 53 45 43 55 52 49 54 59 20 48 41 53 20 42 45 45 4e 20 43 4f 4d 50 52 4f 4d 49 53 45 44",
+      "payload_ascii": " SECURITY HAS BEEN COMPROMISED"
+    },
+    {
+      "code": 96,
+      "table_address": "$C3EDC8",
+      "descriptor": "$C3EF94",
+      "header": "1c 08 03 95",
+      "payload_hex": "44 45 46 45 4e 53 45 4e 45 54 20 53 45 43 55 52 49 54 59 20 43 48 45 43 4b",
+      "payload_ascii": "DEFENSENET SECURITY CHECK"
+    },
+    {
+      "code": 97,
+      "table_address": "$C3EDCA",
+      "descriptor": "$C3F040",
+      "header": "2a 0a 03 13",
+      "payload_hex": "43 48 45 43 4b 53 55 4d 20 45 52 52 4f 52 20 2d 20 20 20 20 20 20 20 20",
+      "payload_ascii": "CHECKSUM ERROR -        "
+    },
+    {
+      "code": 98,
+      "table_address": "$C3EDCC",
+      "descriptor": "$C3F05F",
+      "header": "40 04 03 14",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 20 48 45 59 20 52 4f 4f 4b 49 45 2c",
+      "payload_ascii": "            HEY ROOKIE,"
+    },
+    {
+      "code": 99,
+      "table_address": "$C3EDCE",
+      "descriptor": "$C3F0AB",
+      "header": "40 04 03 13",
+      "payload_hex": "20 20 20 20 20 20 20 20 20 20 20 20 48 45 59 20 52 4f 4f 4b 49 45 2c",
+      "payload_ascii": "            HEY ROOKIE,"
+    },
+    {
+      "code": 100,
+      "table_address": "$C3EDD0",
+      "descriptor": "$C3F25D",
+      "header": "14 02 00 a3",
+      "payload_hex": "53 45 4c 45 43 54 3a",
+      "payload_ascii": "SELECT:"
+    },
+    {
+      "code": 101,
+      "table_address": "$C3EDD2",
+      "descriptor": "$C3F26B",
+      "header": "28 02 00 42",
+      "payload_hex": "31 20 2e 2e 2e 20 44 45 4d 4f",
+      "payload_ascii": "1 ... DEMO"
+    },
+    {
+      "code": 102,
+      "table_address": "$C3EDD4",
+      "descriptor": "$C3F27C",
+      "header": "34 02 00 42",
+      "payload_hex": "32 20 2e 2e 2e 20 46 52 45 45 20 46 4c 49 47 48 54 2c 20 4e 4f 20 45 4e 45 4d 59 20 43 4f 4e 46 52 4f 4e 54 41 54 49 4f 4e",
+      "payload_ascii": "2 ... FREE FLIGHT, NO ENEMY CONFRONTATION"
+    },
+    {
+      "code": 103,
+      "table_address": "$C3EDD6",
+      "descriptor": "$C3F2AC",
+      "header": "46 02 00 52",
+      "payload_hex": "33 20 2e 2e 2e 20 54 52 41 49 4e 49 4e 47 3a 20 20 44 45 4d 4f 20 4f 46 20 4d 41 4e 45 55 56 45 52 53",
+      "payload_ascii": "3 ... TRAINING:  DEMO OF MANEUVERS"
+    },
+    {
+      "code": 104,
+      "table_address": "$C3EDD8",
+      "descriptor": "$C3F2D5",
+      "header": "52 02 00 52",
+      "payload_hex": "34 20 2e 2e 2e 20 54 52 41 49 4e 49 4e 47 3a 20 20 50 52 41 43 54 49 43 45 20 4d 41 4e 45 55 56 45 52 53",
+      "payload_ascii": "4 ... TRAINING:  PRACTICE MANEUVERS"
+    },
+    {
+      "code": 105,
+      "table_address": "$C3EDDA",
+      "descriptor": "$C3F2FF",
+      "header": "5e 02 00 52",
+      "payload_hex": "35 20 2e 2e 2e 20 51 55 41 4c 49 46 49 43 41 54 49 4f 4e 3a 20 52 45 51 55 49 52 45 44 20 46 4f 52 20 4d 49 53 53 49 4f 4e 53",
+      "payload_ascii": "5 ... QUALIFICATION: REQUIRED FOR MISSIONS"
+    },
+    {
+      "code": 106,
+      "table_address": "$C3EDDC",
+      "descriptor": "$C3F330",
+      "header": "70 02 00 12",
+      "payload_hex": "36 20 2e 2e 2e 20 53 45 4c 45 43 54 41 42 4c 45 20 4d 49 53 53 49 4f 4e 53",
+      "payload_ascii": "6 ... SELECTABLE MISSIONS"
+    },
+    {
+      "code": 107,
+      "table_address": "$C3EDDE",
+      "descriptor": "$C3F350",
+      "header": "7c 02 00 12",
+      "payload_hex": "37 20 2e 2e 2e 20 4e 45 58 54 20 41 43 54 49 56 45 20 41 44 56 41 4e 43 45 44 20 4d 49 53 53 49 4f 4e",
+      "payload_ascii": "7 ... NEXT ACTIVE ADVANCED MISSION"
+    },
+    {
+      "code": 108,
+      "table_address": "$C3EDE0",
+      "descriptor": "$C3F379",
+      "header": "8e 02 00 b2",
+      "payload_hex": "38 20 2e 2e 2e 20 59 4f 55 52 20 43 55 52 52 45 4e 54 20 46 4c 49 47 48 54 20 4c 4f 47 20 53 54 41 54 49 53 54 49 43 53",
+      "payload_ascii": "8 ... YOUR CURRENT FLIGHT LOG STATISTICS"
+    },
+    {
+      "code": 109,
+      "table_address": "$C3EDE2",
+      "descriptor": "$C3F3A7",
+      "header": "a5 02 00 a2",
+      "payload_hex": "45 53 43 20 2e 2e 2e 2e 2e 2e 2e 2e 2e 20 52 45 53 54 41 52 54 53 20 59 4f 55 52 20 53 45 4c 45 43 54 49 4f 4e",
+      "payload_ascii": "ESC ......... RESTARTS YOUR SELECTION"
+    },
+    {
+      "code": 110,
+      "table_address": "$C3EDE4",
+      "descriptor": "$C3F725",
+      "header": "00 04 03 93",
+      "payload_hex": "",
+      "payload_ascii": ""
+    }
+  ]
+}

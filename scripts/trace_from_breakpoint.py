@@ -13,7 +13,8 @@ from profile_window import read_events
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--restore', type=Path, required=True)
-    parser.add_argument('--playback', type=Path, required=True)
+    parser.add_argument('--playback', type=Path,
+                        help='optional E9K input stream; omit when restoring a post-step state')
     parser.add_argument('--address', type=lambda x: int(x, 0), required=True)
     parser.add_argument('--arm-frame', type=int, required=True)
     parser.add_argument('--return-pc', type=lambda x: int(x, 0), required=True)
@@ -26,7 +27,7 @@ def main():
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
-    events = read_events(args.playback)
+    events = read_events(args.playback) if args.playback else {}
     engine = Engine(args.config.resolve(), args.output / 'saves')
     engine.core.retro_run()
     payload = args.restore.read_bytes()
@@ -65,7 +66,8 @@ def main():
     (args.output / 'state.bin').write_bytes(engine.state())
     (args.output / 'snapshot.json').write_text(json.dumps({'frame': hit_frame, 'registers': engine.regs(), 'memory': banks,
         'debug_writes': writes,
-        'authority': {'initial_state_sha256': sha(args.restore.read_bytes()), 'recording_sha256': sha(args.playback.read_bytes()),
+        'authority': {'initial_state_sha256': sha(args.restore.read_bytes()),
+                      'recording_sha256': sha(args.playback.read_bytes()) if args.playback else None,
                       'snapshot_sha256': sha((args.output / 'state.bin').read_bytes())}}, indent=2) + '\n')
     decoder = capstone.Cs(capstone.CS_ARCH_M68K, capstone.CS_MODE_BIG_ENDIAN | capstone.CS_MODE_M68K_000)
     rows = []
@@ -91,6 +93,23 @@ def main():
         'return_pc': f'{args.return_pc:06x}', 'instructions': len(rows),
         'termination': 'return_pc' if reached_return else 'max_instructions',
         'limitation': 'Input was delivered during normal replay before breakpoint; no future input occurred while stepping.'}, indent=2) + '\n')
+    final_banks = []
+    for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
+        data = engine.memory(address, size)
+        filename = f'final_{name}.bin'
+        (args.output / filename).write_bytes(data)
+        final_banks.append({'name': name, 'start': address, 'size': size,
+                            'file': filename, 'sha256': sha(data)})
+    final_state = engine.state()
+    (args.output / 'final_state.bin').write_bytes(final_state)
+    (args.output / 'final_snapshot.json').write_text(json.dumps({
+        'frame': hit_frame,
+        'registers': engine.regs(),
+        'memory': final_banks,
+        'state_sha256': sha(final_state),
+        'stepped_instructions': len(rows),
+        'termination': 'return_pc' if reached_return else 'max_instructions',
+    }, indent=2) + '\n')
     engine.core.retro_unload_game()
     engine.core.retro_deinit()
     if not reached_return:

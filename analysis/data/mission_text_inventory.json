@@ -1,0 +1,1142 @@
+{
+  "authority": "captures\\baseline_menu\\slow.bin",
+  "runtime_range": "$C3F000-$C41127",
+  "minimum_printable_run_length": 4,
+  "runs": [
+    {
+      "address": "$C3F000",
+      "length": 6,
+      "text": "ARANCE"
+    },
+    {
+      "address": "$C3F00A",
+      "length": 28,
+      "text": "DUE TO THREE FAILED ATTEMPTS"
+    },
+    {
+      "address": "$C3F02E",
+      "length": 15,
+      "text": "     - REBOOT -"
+    },
+    {
+      "address": "$C3F044",
+      "length": 24,
+      "text": "CHECKSUM ERROR -        "
+    },
+    {
+      "address": "$C3F063",
+      "length": 23,
+      "text": "            HEY ROOKIE,"
+    },
+    {
+      "address": "$C3F082",
+      "length": 38,
+      "text": "F/A-16'S  DON'T GROW ON TREES, YA KNOW"
+    },
+    {
+      "address": "$C3F0AF",
+      "length": 23,
+      "text": "            HEY ROOKIE,"
+    },
+    {
+      "address": "$C3F0CE",
+      "length": 38,
+      "text": "F/A-18'S  DON'T GROW ON TREES, YA KNOW"
+    },
+    {
+      "address": "$C3F0FC",
+      "length": 23,
+      "text": "SELECT YOUR FREE FLIGHT"
+    },
+    {
+      "address": "$C3F117",
+      "length": 20,
+      "text": "   STARTING LOCATION"
+    },
+    {
+      "address": "$C3F131",
+      "length": 36,
+      "text": "&WELCOME TO YOUR FIRST TOUR OF DUTY."
+    },
+    {
+      "address": "$C3F15C",
+      "length": 21,
+      "text": "&ENTER YOUR CALLSIGN:"
+    },
+    {
+      "address": "$C3F174",
+      "length": 21,
+      "text": "& (END WITH \"RETURN\")"
+    },
+    {
+      "address": "$C3F193",
+      "length": 36,
+      "text": "V                                   "
+    },
+    {
+      "address": "$C3F1BE",
+      "length": 32,
+      "text": "&YOU ARE NOW OFFICIALLY ENLISTED"
+    },
+    {
+      "address": "$C3F1E4",
+      "length": 40,
+      "text": "&WELCOME                                "
+    },
+    {
+      "address": "$C3F213",
+      "length": 33,
+      "text": "&TO YOUR CONTINUING TOUR OF DUTY."
+    },
+    {
+      "address": "$C3F23A",
+      "length": 32,
+      "text": "R           F/A-18 INTERCEPTOR$^"
+    },
+    {
+      "address": "$C3F261",
+      "length": 7,
+      "text": "SELECT:"
+    },
+    {
+      "address": "$C3F26E",
+      "length": 11,
+      "text": "B1 ... DEMO"
+    },
+    {
+      "address": "$C3F27F",
+      "length": 42,
+      "text": "B2 ... FREE FLIGHT, NO ENEMY CONFRONTATION"
+    },
+    {
+      "address": "$C3F2AF",
+      "length": 35,
+      "text": "R3 ... TRAINING:  DEMO OF MANEUVERS"
+    },
+    {
+      "address": "$C3F2D8",
+      "length": 36,
+      "text": "R4 ... TRAINING:  PRACTICE MANEUVERS"
+    },
+    {
+      "address": "$C3F302",
+      "length": 43,
+      "text": "R5 ... QUALIFICATION: REQUIRED FOR MISSIONS"
+    },
+    {
+      "address": "$C3F334",
+      "length": 25,
+      "text": "6 ... SELECTABLE MISSIONS"
+    },
+    {
+      "address": "$C3F354",
+      "length": 34,
+      "text": "7 ... NEXT ACTIVE ADVANCED MISSION"
+    },
+    {
+      "address": "$C3F37D",
+      "length": 40,
+      "text": "8 ... YOUR CURRENT FLIGHT LOG STATISTICS"
+    },
+    {
+      "address": "$C3F3AB",
+      "length": 37,
+      "text": "ESC ......... RESTARTS YOUR SELECTION"
+    },
+    {
+      "address": "$C3F3D4",
+      "length": 38,
+      "text": "SHIFT ESC ... RETURNS YOU TO THIS MENU"
+    },
+    {
+      "address": "$C3F401",
+      "length": 26,
+      "text": "       SELECTABLE MISSIONS"
+    },
+    {
+      "address": "$C3F41E",
+      "length": 30,
+      "text": "S     (REQUIRES QUALIFICATION)"
+    },
+    {
+      "address": "$C3F448",
+      "length": 33,
+      "text": " F1 - VISUAL CONFIRMATION MISSION"
+    },
+    {
+      "address": "$C3F470",
+      "length": 33,
+      "text": " F2 - EMERGENCY DEFENSE OPERATION"
+    },
+    {
+      "address": "$C3F498",
+      "length": 31,
+      "text": " F3 - INTERCEPT STOLEN AIRCRAFT"
+    },
+    {
+      "address": "$C3F4BE",
+      "length": 33,
+      "text": " F4 - SEARCH AND RESCUE OPERATION"
+    },
+    {
+      "address": "$C3F4E6",
+      "length": 39,
+      "text": " F5 - INTERCEPT INCOMING CRUISE MISSILE"
+    },
+    {
+      "address": "$C3F514",
+      "length": 25,
+      "text": " F6 - CARRIER SUB MISSION"
+    },
+    {
+      "address": "$C3F534",
+      "length": 30,
+      "text": "         FLIGHT LOG STATISTICS"
+    },
+    {
+      "address": "$C3F559",
+      "length": 40,
+      "text": "BTOTAL MISSIONS STARTED ............    "
+    },
+    {
+      "address": "$C3F584",
+      "length": 40,
+      "text": "BMISSIONS SUCCESSFULLY COMPLETED ...    "
+    },
+    {
+      "address": "$C3F5B4",
+      "length": 35,
+      "text": "                      FIRED    HITS"
+    },
+    {
+      "address": "$C3F5DB",
+      "length": 36,
+      "text": "M61     CANNON ROUNDS               "
+    },
+    {
+      "address": "$C3F603",
+      "length": 36,
+      "text": "AIM-120 AMRAAMS                     "
+    },
+    {
+      "address": "$C3F62B",
+      "length": 36,
+      "text": "AIM-9L  SIDEWINDERS                 "
+    },
+    {
+      "address": "$C3F656",
+      "length": 39,
+      "text": "RACCUM. FLIGHT TIME         HRS,    MIN"
+    },
+    {
+      "address": "$C3F680",
+      "length": 27,
+      "text": "RCRASHES ..............    "
+    },
+    {
+      "address": "$C3F69E",
+      "length": 27,
+      "text": "RHITS FROM MISSILES ...    "
+    },
+    {
+      "address": "$C3F6C5",
+      "length": 24,
+      "text": "     ESC .. TO MAIN MENU"
+    },
+    {
+      "address": "$C3F6E1",
+      "length": 40,
+      "text": "      1 ... UPDATE CURRENT LOG ONTO DISK"
+    },
+    {
+      "address": "$C3F70D",
+      "length": 21,
+      "text": "SHIFT 2 ... RESET LOG"
+    },
+    {
+      "address": "$C3F72D",
+      "length": 25,
+      "text": "       ESC - TO MAIN MENU"
+    },
+    {
+      "address": "$C3F751",
+      "length": 36,
+      "text": " (SHIFT ESC)  TO RETURN TO MAIN MENU"
+    },
+    {
+      "address": "$C3F780",
+      "length": 35,
+      "text": "(SHIFT ESC)  TO RETURN TO MAIN MENU"
+    },
+    {
+      "address": "$C3F7AA",
+      "length": 37,
+      "text": "      BASIC FLIGHT MANEUVERS - PART 1"
+    },
+    {
+      "address": "$C3F7D7",
+      "length": 31,
+      "text": "OBSERVE THE FOLLOWING MANEUVERS"
+    },
+    {
+      "address": "$C3F7FE",
+      "length": 34,
+      "text": "THEY WILL CYCLE THROUGH REPEATEDLY"
+    },
+    {
+      "address": "$C3F824",
+      "length": 39,
+      "text": "UNTIL YOU ARE PREPARED TO PERFORM THEM."
+    },
+    {
+      "address": "$C3F857",
+      "length": 39,
+      "text": "USE KEYPAD TO CHANGE POINT OF VIEW/DIST"
+    },
+    {
+      "address": "$C3F882",
+      "length": 37,
+      "text": "USE (RETURN) TO SKIP TO NEXT MANEUVER"
+    },
+    {
+      "address": "$C3F8AF",
+      "length": 30,
+      "text": "WHEN YOU ARE READY TO PRACTICE"
+    },
+    {
+      "address": "$C3F8D1",
+      "length": 36,
+      "text": "  THE MANEUVERS, PRESS THE (ESC) KEY"
+    },
+    {
+      "address": "$C3F8F9",
+      "length": 40,
+      "text": "  OR (SHIFT ESC)  TO RETURN TO MAIN MENU"
+    },
+    {
+      "address": "$C3F928",
+      "length": 37,
+      "text": "      BASIC FLIGHT MANEUVERS - PART 2"
+    },
+    {
+      "address": "$C3F959",
+      "length": 20,
+      "text": " BRING THRUST TO 80%"
+    },
+    {
+      "address": "$C3F971",
+      "length": 21,
+      "text": " FOLLOW LEAD AIRCRAFT"
+    },
+    {
+      "address": "$C3F98E",
+      "length": 13,
+      "text": " THEN PERFORM"
+    },
+    {
+      "address": "$C3F99F",
+      "length": 22,
+      "text": "   THE SAME MANEUVERS."
+    },
+    {
+      "address": "$C3F9BD",
+      "length": 21,
+      "text": " AFTER EACH MANEUVER:"
+    },
+    {
+      "address": "$C3F9D6",
+      "length": 43,
+      "text": "  YOU WILL BE SIGNALED TO TRIGGER THE NEXT."
+    },
+    {
+      "address": "$C3FA05",
+      "length": 40,
+      "text": "  POSITION YOURSELF BEHIND LEAD AIRCRAFT"
+    },
+    {
+      "address": "$C3FA31",
+      "length": 40,
+      "text": "  OR PRESS (RETURN) TO BE RE-POSITIONED."
+    },
+    {
+      "address": "$C3FA5D",
+      "length": 42,
+      "text": "  EACH NEXT (RETURN) WILL SKIP A MANEUVER."
+    },
+    {
+      "address": "$C3FA8B",
+      "length": 43,
+      "text": "  PRESS (S) TO TURN ON/OFF HIS SMOKE TRAIL."
+    },
+    {
+      "address": "$C3FABD",
+      "length": 46,
+      "text": "H YOUR MESSAGE DISPLAY INDICATES THE MANEUVER."
+    },
+    {
+      "address": "$C3FAF2",
+      "length": 26,
+      "text": "             QUALIFICATION"
+    },
+    {
+      "address": "$C3FB14",
+      "length": 32,
+      "text": " TO QUALIFY FOR ACTIVE MISSIONS,"
+    },
+    {
+      "address": "$C3FB38",
+      "length": 36,
+      "text": " YOU MUST FIRST PERFORM A SUCCESSFUL"
+    },
+    {
+      "address": "$C3FB60",
+      "length": 17,
+      "text": " CARRIER LANDING."
+    },
+    {
+      "address": "$C3FB79",
+      "length": 28,
+      "text": " FOR F/A-18 CARRIER LAUNCHES"
+    },
+    {
+      "address": "$C3FB99",
+      "length": 28,
+      "text": " ATTAIN AT LEAST 90% THRUST."
+    },
+    {
+      "address": "$C3FBB9",
+      "length": 42,
+      "text": " FLY AROUND, RETURN, THEN LAND ON CARRIER."
+    },
+    {
+      "address": "$C3FBEB",
+      "length": 37,
+      "text": "       (ESC)  RE-POSITION ON CATAPULT"
+    },
+    {
+      "address": "$C3FC14",
+      "length": 33,
+      "text": " (SHIFT ESC)  RETURN TO MAIN MENU"
+    },
+    {
+      "address": "$C3FC3C",
+      "length": 27,
+      "text": "         LANDING SUCCESSFUL"
+    },
+    {
+      "address": "$C3FC5F",
+      "length": 35,
+      "text": " YOU ARE NOW QUALIFIED FOR MISSIONS"
+    },
+    {
+      "address": "$C3FC8E",
+      "length": 31,
+      "text": "     PREPARE TO BE RE-LAUNCHED."
+    },
+    {
+      "address": "$C3FCB4",
+      "length": 28,
+      "text": "       YOUR LOG NOW REFLECTS"
+    },
+    {
+      "address": "$C3FCD4",
+      "length": 30,
+      "text": "       THIS COMPLETED MISSION."
+    },
+    {
+      "address": "$C3FCFA",
+      "length": 26,
+      "text": "          CONGRATULATIONS!"
+    },
+    {
+      "address": "$C3FD1B",
+      "length": 22,
+      "text": "        RETURN TO BASE"
+    },
+    {
+      "address": "$C3FD38",
+      "length": 25,
+      "text": "        RETURN TO CARRIER"
+    },
+    {
+      "address": "$C3FD58",
+      "length": 29,
+      "text": "      NORAD STRATEGIC COMMAND"
+    },
+    {
+      "address": "$C3FD7D",
+      "length": 23,
+      "text": "LOCATION: SAN FRANCISCO"
+    },
+    {
+      "address": "$C3FD98",
+      "length": 28,
+      "text": "DATE:     SEPTEMBER  6, 1994"
+    },
+    {
+      "address": "$C3FDC3",
+      "length": 29,
+      "text": "VISUAL CONFIRMATION OPERATION"
+    },
+    {
+      "address": "$C3FDE4",
+      "length": 13,
+      "text": "ALERT STATUS:"
+    },
+    {
+      "address": "$C3FDF9",
+      "length": 32,
+      "text": " UNKNOWN AIRCRAFT IN YOUR SECTOR"
+    },
+    {
+      "address": "$C3FE1D",
+      "length": 36,
+      "text": " INBOUND BOGEY CLOSING ON ENTERPRISE"
+    },
+    {
+      "address": "$C3FE48",
+      "length": 29,
+      "text": "VISUAL CONFIRMATION OPERATION"
+    },
+    {
+      "address": "$C3FE69",
+      "length": 13,
+      "text": "ALERT STATUS:"
+    },
+    {
+      "address": "$C3FE7E",
+      "length": 33,
+      "text": "CONTACT: MULTIPLE BOGEYS DETECTED"
+    },
+    {
+      "address": "$C3FEA3",
+      "length": 35,
+      "text": "WARNING: THERE ARE MIGS IN THE AREA"
+    },
+    {
+      "address": "$C3FECA",
+      "length": 31,
+      "text": "CONFIDENCE OF HOSTILITY IS HIGH"
+    },
+    {
+      "address": "$C3FEF0",
+      "length": 31,
+      "text": "        - CLEARANCE CONFIRMED -"
+    },
+    {
+      "address": "$C3FF16",
+      "length": 21,
+      "text": " SCRAMBLE IMMEDIATELY"
+    },
+    {
+      "address": "$C3FF2F",
+      "length": 36,
+      "text": " INTERCEPT AIRCRAFT FOR AERIAL RECON"
+    },
+    {
+      "address": "$C3FF57",
+      "length": 25,
+      "text": " CONFIRM IF FRIEND OR FOE"
+    },
+    {
+      "address": "$C3FF74",
+      "length": 19,
+      "text": " AND RETURN TO BASE"
+    },
+    {
+      "address": "$C3FF8B",
+      "length": 32,
+      "text": " DO NOT ENGAGE UNLESS FIRED UPON"
+    },
+    {
+      "address": "$C3FFAF",
+      "length": 38,
+      "text": " REPEAT: DO NOT FIRE UNLESS FIRED UPON"
+    },
+    {
+      "address": "$C3FFE7",
+      "length": 33,
+      "text": " YOU NOW HAVE CONFIRMED SIGNATURE"
+    },
+    {
+      "address": "$C4000C",
+      "length": 26,
+      "text": "       OF UNKNOWN AIRCRAFT"
+    },
+    {
+      "address": "$C4002D",
+      "length": 27,
+      "text": "  EMERGENCY DEFENSE STATUS:"
+    },
+    {
+      "address": "$C40050",
+      "length": 39,
+      "text": "WE HAVE HOSTILE AIRCRAFT IN YOUR SECTOR"
+    },
+    {
+      "address": "$C4007B",
+      "length": 40,
+      "text": "AIR FORCE ONE CURRENTLY ON COURSE TO SFO"
+    },
+    {
+      "address": "$C400AB",
+      "length": 38,
+      "text": "INBOUND BOGEY CLOSING ON AIR FORCE ONE"
+    },
+    {
+      "address": "$C400D5",
+      "length": 12,
+      "text": "AT 630 KNOTS"
+    },
+    {
+      "address": "$C400E9",
+      "length": 25,
+      "text": "EMERGENCY DEFENSE STATUS:"
+    },
+    {
+      "address": "$C4010A",
+      "length": 33,
+      "text": " AIR FORCE ONE DAMAGED BY MISSILE"
+    },
+    {
+      "address": "$C4012F",
+      "length": 36,
+      "text": " ATTEMPTING EMERGENCY LANDING AT SFO"
+    },
+    {
+      "address": "$C4015B",
+      "length": 35,
+      "text": " ESCORT AIRCRAFT HAS BEEN DESTROYED"
+    },
+    {
+      "address": "$C40185",
+      "length": 21,
+      "text": " SCRAMBLE IMMEDIATELY"
+    },
+    {
+      "address": "$C4019E",
+      "length": 42,
+      "text": " INTERCEPT AND DESTROY ATTACKING AIRCRAFT."
+    },
+    {
+      "address": "$C401CC",
+      "length": 43,
+      "text": "REPEAT: THIS IS A TKO, ENGAGE AND TERMINATE"
+    },
+    {
+      "address": "$C40202",
+      "length": 33,
+      "text": "  AIR FORCE ONE HAS SAFELY LANDED"
+    },
+    {
+      "address": "$C4022B",
+      "length": 32,
+      "text": "  AT SAN FRANCISCO INTERNATIONAL"
+    },
+    {
+      "address": "$C40253",
+      "length": 28,
+      "text": "  THE PRESIDENT IS UNHARMED."
+    },
+    {
+      "address": "$C4027B",
+      "length": 21,
+      "text": "           WELL DONE!"
+    },
+    {
+      "address": "$C4029B",
+      "length": 34,
+      "text": "  AIR FORCE ONE HAS BEEN DESTROYED"
+    },
+    {
+      "address": "$C402C5",
+      "length": 34,
+      "text": "  BY TERRORIST AIR-TO-AIR MISSILE."
+    },
+    {
+      "address": "$C402EF",
+      "length": 29,
+      "text": "  THE PRESIDENT WAS ON BOARD."
+    },
+    {
+      "address": "$C40318",
+      "length": 25,
+      "text": "  GOOD THING THIS IS ONLY"
+    },
+    {
+      "address": "$C40335",
+      "length": 15,
+      "text": "  A SIMULATION!"
+    },
+    {
+      "address": "$C4034F",
+      "length": 34,
+      "text": "  AIR FORCE ONE HAS BEEN DESTROYED"
+    },
+    {
+      "address": "$C40379",
+      "length": 34,
+      "text": "  BY TERRORIST AIR-TO-AIR MISSILE."
+    },
+    {
+      "address": "$C403A3",
+      "length": 33,
+      "text": "  THE PRESIDENT WAS NOT ON BOARD."
+    },
+    {
+      "address": "$C403CF",
+      "length": 37,
+      "text": "    YOU HAVE DESTROYED AIR FORCE ONE."
+    },
+    {
+      "address": "$C403FC",
+      "length": 31,
+      "text": "    LUCKY FOR YOU THE PRESIDENT"
+    },
+    {
+      "address": "$C40423",
+      "length": 21,
+      "text": "    WAS NOT ON BOARD."
+    },
+    {
+      "address": "$C4043F",
+      "length": 13,
+      "text": "ALERT STATUS:"
+    },
+    {
+      "address": "$C40454",
+      "length": 41,
+      "text": "TWO AMERICAN F-16 TEST AIRCRAFT HAVE BEEN"
+    },
+    {
+      "address": "$C40481",
+      "length": 39,
+      "text": "STOLEN FROM MOFFETT FIELD BY TERRORISTS"
+    },
+    {
+      "address": "$C404AC",
+      "length": 39,
+      "text": "CURRENTLY ON COURSE TOWARD SOVIET UNION"
+    },
+    {
+      "address": "$C404DB",
+      "length": 36,
+      "text": "THEY HAVE AIR SUPPORT:  PAIR OF MIGS"
+    },
+    {
+      "address": "$C40506",
+      "length": 20,
+      "text": "SCRAMBLE IMMEDIATELY"
+    },
+    {
+      "address": "$C4051E",
+      "length": 37,
+      "text": "INTERCEPT STOLEN AIRCRAFT AND ATTEMPT"
+    },
+    {
+      "address": "$C40547",
+      "length": 38,
+      "text": "TO FORCE THEIR RETURN WITHOUT CONFLICT"
+    },
+    {
+      "address": "$C40571",
+      "length": 29,
+      "text": "DO NOT FIRE UNLESS FIRED UPON"
+    },
+    {
+      "address": "$C40592",
+      "length": 42,
+      "text": "F-16S EQUIPPED WITH TOP SECRET ECM SYSTEMS"
+    },
+    {
+      "address": "$C405C0",
+      "length": 39,
+      "text": "SAFE RETURN OF HARDWARE IS TOP PRIORITY"
+    },
+    {
+      "address": "$C405F9",
+      "length": 30,
+      "text": "STOLEN AIRCRAFT ARE NOW BEYOND"
+    },
+    {
+      "address": "$C4061F",
+      "length": 15,
+      "text": "RECOVERY RANGE."
+    },
+    {
+      "address": "$C40636",
+      "length": 22,
+      "text": "BETTER LUCK NEXT TIME."
+    },
+    {
+      "address": "$C40653",
+      "length": 17,
+      "text": "RESCUE OPERATION:"
+    },
+    {
+      "address": "$C4066C",
+      "length": 23,
+      "text": "WE HAVE MULTIPLE BOGEYS"
+    },
+    {
+      "address": "$C40687",
+      "length": 29,
+      "text": "AT 25 MILES 480 KNOTS CLOSURE"
+    },
+    {
+      "address": "$C406A8",
+      "length": 41,
+      "text": "ONE OF OUR PILOTS HAS BEEN HIT AND DOWNED"
+    },
+    {
+      "address": "$C406D5",
+      "length": 36,
+      "text": "BAILED OUT NEAR THE FARALLON ISLANDS"
+    },
+    {
+      "address": "$C40700",
+      "length": 17,
+      "text": "RESCUE OPERATION:"
+    },
+    {
+      "address": "$C40719",
+      "length": 25,
+      "text": "CONTACT - MULTIPLE BOGEYS"
+    },
+    {
+      "address": "$C40736",
+      "length": 28,
+      "text": " DOWNED PILOT IN YOUR SECTOR"
+    },
+    {
+      "address": "$C40756",
+      "length": 32,
+      "text": " POSITION SHOWN ON SATELLITE MAP"
+    },
+    {
+      "address": "$C4077D",
+      "length": 41,
+      "text": "SCRAMBLE IMMEDIATELY FOR RESCUE OPERATION"
+    },
+    {
+      "address": "$C407AA",
+      "length": 24,
+      "text": "WARNING: TENSION IS HIGH"
+    },
+    {
+      "address": "$C407C6",
+      "length": 27,
+      "text": "ENGAGE BANDITS IF NECESSARY"
+    },
+    {
+      "address": "$C407E5",
+      "length": 31,
+      "text": "   THEN SEARCH FOR DOWNED PILOT"
+    },
+    {
+      "address": "$C40808",
+      "length": 42,
+      "text": "   AND DEPLOY EMERGENCY RESCUE POD AT SITE"
+    },
+    {
+      "address": "$C40836",
+      "length": 38,
+      "text": "WARNING: DOWNED PILOT HAS LIMITED TIME"
+    },
+    {
+      "address": "$C40863",
+      "length": 22,
+      "text": " EMERYGENCY RESCUE POD"
+    },
+    {
+      "address": "$C4087D",
+      "length": 38,
+      "text": " DEPLOYED CLOSE ENOUGH TO DOWNED PILOT"
+    },
+    {
+      "address": "$C408AB",
+      "length": 20,
+      "text": "          WELL DONE!"
+    },
+    {
+      "address": "$C408C6",
+      "length": 22,
+      "text": " EMERYGENCY RESCUE POD"
+    },
+    {
+      "address": "$C408E0",
+      "length": 35,
+      "text": " DEPLOYED TOO FAR FROM DOWNED PILOT"
+    },
+    {
+      "address": "$C4090A",
+      "length": 33,
+      "text": "ALERT: NORAD HAS ENTERED DEFCON 3"
+    },
+    {
+      "address": "$C40933",
+      "length": 31,
+      "text": "WE HAVE INCOMING CRUISE MISSILE"
+    },
+    {
+      "address": "$C40956",
+      "length": 31,
+      "text": "REPEAT: INCOMING CRUISE MISSILE"
+    },
+    {
+      "address": "$C4097D",
+      "length": 41,
+      "text": "BEARING 170 AT 30 MILES 680 KNOTS CLOSURE"
+    },
+    {
+      "address": "$C409AA",
+      "length": 41,
+      "text": "ETA DELIVERY AT MOFFETT FIELD:  9 MINUTES"
+    },
+    {
+      "address": "$C409DA",
+      "length": 33,
+      "text": "ALERT: NORAD HAS ENTERED DEFCON 2"
+    },
+    {
+      "address": "$C40A03",
+      "length": 33,
+      "text": "   CRUISE MISSILE LAUNCH DETECTED"
+    },
+    {
+      "address": "$C40A28",
+      "length": 27,
+      "text": "   CLOSING ON MOFFETT FIELD"
+    },
+    {
+      "address": "$C40A4A",
+      "length": 37,
+      "text": "SCRAMBLE IMMEDIATELY FOR INTERCEPTION"
+    },
+    {
+      "address": "$C40A73",
+      "length": 8,
+      "text": "WARNING:"
+    },
+    {
+      "address": "$C40A7F",
+      "length": 40,
+      "text": "  MULTIPLE BANDITS PROVIDING AIR SUPPORT"
+    },
+    {
+      "address": "$C40AAF",
+      "length": 27,
+      "text": "ENGAGE BANDITS IF NECESSARY"
+    },
+    {
+      "address": "$C40AD5",
+      "length": 37,
+      "text": "    ENEMY CRUISE MISSILE HAS EXPLODED"
+    },
+    {
+      "address": "$C40B02",
+      "length": 27,
+      "text": "    NORTH OF MOFFETT FIELD."
+    },
+    {
+      "address": "$C40B24",
+      "length": 35,
+      "text": "    NUCLEAR DESTRUCTION WIDESPREAD."
+    },
+    {
+      "address": "$C40B53",
+      "length": 27,
+      "text": "    GOOD THING THIS IS ONLY"
+    },
+    {
+      "address": "$C40B72",
+      "length": 17,
+      "text": "    A SIMULATION!"
+    },
+    {
+      "address": "$C40B8A",
+      "length": 32,
+      "text": "  NO NUCLEAR DETONATION OCCURED."
+    },
+    {
+      "address": "$C40BB1",
+      "length": 28,
+      "text": "ALERT: SHADOW SUB DETECTION:"
+    },
+    {
+      "address": "$C40BD5",
+      "length": 26,
+      "text": "C-19 INTELLIGENCE REPORTS:"
+    },
+    {
+      "address": "$C40BF3",
+      "length": 29,
+      "text": " SUBMERSIBLE AIRCRAFT CARRIER"
+    },
+    {
+      "address": "$C40C14",
+      "length": 33,
+      "text": " DETERMINED TO BE POINT OF ORIGIN"
+    },
+    {
+      "address": "$C40C39",
+      "length": 26,
+      "text": "    OF ALL ENEMY AIRCRAFT."
+    },
+    {
+      "address": "$C40C5A",
+      "length": 33,
+      "text": "SCRAMBLE AND INTERCEPT SHADOW SUB"
+    },
+    {
+      "address": "$C40C7F",
+      "length": 34,
+      "text": "FLY IN BELOW 100 FT TO AVOID RADAR"
+    },
+    {
+      "address": "$C40CA5",
+      "length": 30,
+      "text": "DESTROY SUB WHILE NOW SURFACED"
+    },
+    {
+      "address": "$C40CC7",
+      "length": 8,
+      "text": "WARNING:"
+    },
+    {
+      "address": "$C40CD3",
+      "length": 39,
+      "text": " MULTIPLE BANDITS PROVIDING AIR SUPPORT"
+    },
+    {
+      "address": "$C40D01",
+      "length": 21,
+      "text": "           WELL DONE!"
+    },
+    {
+      "address": "$C40D21",
+      "length": 37,
+      "text": "THE LEAD AIRCRAFT HAS BEEN DESTROYED."
+    },
+    {
+      "address": "$C40D4E",
+      "length": 33,
+      "text": "THE PILOT HAS SURVIVED BUT IS NOT"
+    },
+    {
+      "address": "$C40D77",
+      "length": 28,
+      "text": "PLEASED ABOUT THE COLLISION."
+    },
+    {
+      "address": "$C40D9F",
+      "length": 36,
+      "text": "THESE AIRCRAFT ARE VERY EXPENSIVE !!"
+    },
+    {
+      "address": "$C40DC7",
+      "length": 33,
+      "text": "PLEASE BE MORE CAREFUL NEXT TIME."
+    },
+    {
+      "address": "$C40DEF",
+      "length": 10,
+      "text": "    SELECT"
+    },
+    {
+      "address": "$C40E01",
+      "length": 20,
+      "text": "1 ... F/A-18  HORNET"
+    },
+    {
+      "address": "$C40E1D",
+      "length": 20,
+      "text": "2 ..... F-16  FALCON"
+    },
+    {
+      "address": "$C40E38",
+      "length": 34,
+      "text": "    YOU HAVE SURVIVED YOUR BAILOUT"
+    },
+    {
+      "address": "$C40E61",
+      "length": 10,
+      "text": "- PAUSED -"
+    },
+    {
+      "address": "$C40E72",
+      "length": 26,
+      "text": " YOUR VECTOR XXX FOR BOGEY"
+    },
+    {
+      "address": "$C40E93",
+      "length": 18,
+      "text": " READY FOR TAKEOFF"
+    },
+    {
+      "address": "$C40EAC",
+      "length": 16,
+      "text": " READY TO LAUNCH"
+    },
+    {
+      "address": "$C40EC7",
+      "length": 15,
+      "text": "   KEY P STARTS"
+    },
+    {
+      "address": "$C40EDC",
+      "length": 30,
+      "text": "R         F/A-18 INTERCEPTOR$^"
+    },
+    {
+      "address": "$C40EFD",
+      "length": 28,
+      "text": "T          &1988 INTELLISOFT"
+    },
+    {
+      "address": "$C40F21",
+      "length": 33,
+      "text": "      DESIGNED AND PROGRAMMED BY:"
+    },
+    {
+      "address": "$C40F46",
+      "length": 25,
+      "text": "            BOB DINNERMAN"
+    },
+    {
+      "address": "$C40F67",
+      "length": 30,
+      "text": "         DESIGN ASSISTANCE BY:"
+    },
+    {
+      "address": "$C40F89",
+      "length": 22,
+      "text": "              MOSES MA"
+    },
+    {
+      "address": "$C40FA7",
+      "length": 29,
+      "text": "         SOUNDS AND MUSIC BY:"
+    },
+    {
+      "address": "$C40FC8",
+      "length": 24,
+      "text": "             DAVE WARHOL"
+    },
+    {
+      "address": "$C40FE8",
+      "length": 25,
+      "text": "            PUBLISHED BY:"
+    },
+    {
+      "address": "$C41005",
+      "length": 35,
+      "text": "    ELECTRONIC ARTS, SAN MATEO, CA."
+    },
+    {
+      "address": "$C41033",
+      "length": 26,
+      "text": "T            PRESS ANY KEY"
+    }
+  ]
+}

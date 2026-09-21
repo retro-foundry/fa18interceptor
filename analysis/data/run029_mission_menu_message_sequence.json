@@ -1,0 +1,7 @@
+{
+  "authority": "build/run029_mission_menu_100/slow.bin",
+  "sequence_base": "$C4574A",
+  "relative_table": "$C3ED0A",
+  "entries": [],
+  "terminator_offset": "$00"
+}

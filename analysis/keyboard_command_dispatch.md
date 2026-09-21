@@ -41,3 +41,6 @@ publishes the observed level byte at `$C45870`.
 The table intentionally does not treat every static raw-key comparison as a
 working control. Use an isolated no-future-input trace for each new binding,
 then add the result to the corresponding routine note and memory-map entry.
+For example, a controlled top-level run029 frontend `F` event did not reach
+`$C1AD74` or its `$C06BF0` transfer through frame 400; frontend key identity
+and the dispatcher's raw `$46` value must remain separate evidence domains.
