@@ -63,5 +63,12 @@ helper `$C2EAD0`, and on its zero result increments `$C4E85A`, writes `D0` to
 `$C4E862`, then enters the shared projection tail. These are dataflow facts;
 the counters and slots remain unassigned.
 
+The adjacent `$C2E7FC-$C2E833` case is reconstructed in
+`source_amiga/observed/dispatch_second_display_record_case.asm`. It derives a
+negated bound from `D3`, reads two words from the selected neighbour record,
+and routes through `$C2EAD0` and conditionally `$C2EA5A` under the `$C45ACA`
+signed gate. Its branch destinations and dataflow are exact; record meaning is
+not assigned.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
