@@ -16,3 +16,9 @@ The first selected-pair branch, `$C0D872-$C0D8BD`, is reconstructed in
 count four at `$C4B390`, then dispatches an ordered sequence of the existing
 record-write leaves. `$C45785` and bit 1 of `$C458CA` select the shorter or
 extended sequence; both continue to the known `$C0DA70` success return.
+
+The second branch, `$C0D8BE-$C0D90B`, is reconstructed in
+`source_amiga/observed/emit_second_display_record_pair.asm`. It initializes
+record count five and selects an ordered set of the same leaf calls from bit 1
+of `$C458CA`; the extended form initializes a second count-three record at an
+eight-byte offset before its final leaf.
