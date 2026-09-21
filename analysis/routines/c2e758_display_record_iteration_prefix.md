@@ -94,6 +94,12 @@ The `$C2E916-$C2E94B` case is reconstructed in
 `$C2EB4C`; every continuation is a known iterator case, projection path, or
 shared failure tail. The source carries no geometry inference.
 
+The `$C2E94C-$C2E993` D3-signed case is reconstructed in
+`source_amiga/observed/dispatch_seventh_display_record_case.asm`. It combines
+the negated and standard helpers under signed bounds, then publishes accepted
+results through `$C4E856/$C4E85E` before projection. All names remain
+dataflow-scoped.
+
 The shared `$C2E9D8-$C2E9F7` continuation is reconstructed in
 `source_amiga/observed/continue_display_record_iteration.asm`. A negative `D5`
 clears the current eight-byte workspace slot and word 14 of the selected
