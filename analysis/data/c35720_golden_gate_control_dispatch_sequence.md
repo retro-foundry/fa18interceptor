@@ -13,17 +13,18 @@ dispatched by `$C1F942`.
 | `$801C` | `$C2159E` | `$C35728` | conditional three-point preparation |
 | `$802C` | `$C211DC` | `$C35734` | counted projection-record submission (13 records) |
 | `$8034` | `$C212B0` | `$C3573A` | offset-pair segment submission |
-| `$803C` | `$C2139E` | `$C35756` | unresolved projection variant |
-| `$8040` | `$C21412` | `$C35762` | unresolved projection variant |
-| `$8028` | `$C21500` | `$C3576C` | unresolved projection variant |
-| `$8020` | `$C2168A` | `$C35772` | unresolved projection variant |
-| `$8030` | `$C2122A` | `$C35780` | unresolved projection variant |
-| `$8038` | `$C2131C` | `$C35788` | unresolved projection variant |
+| `$803C` | `$C2139E` | `$C35756` | direct four-point preparation |
+| `$8040` | `$C21412` | `$C35762` | mixed-relative four-point preparation |
+| `$8028` | `$C21500` | `$C3576C` | conditional four-point preparation |
+| `$8020` | `$C2168A` | `$C35772` | long-cross-term three-point preparation |
+| `$8030` | `$C2122A` | `$C35780` | counted offset-record submission |
+| `$8038` | `$C2131C` | `$C35788` | variable offset-pair submission |
 
 All selector words have bit 15 set and use the `$C1FCE8` dispatch table after
 `$C1F910` masks them to their low 14 bits. The trace establishes that the
 table is an active scene-control packet, but it does not establish a one-to-one
-mapping from an entry to a particular visible bridge member.
+mapping from an entry to a particular visible bridge member. All ten handler
+formats in this observed dispatch sequence are reconstructed byte-exactly.
 
 ## Evidence
 
