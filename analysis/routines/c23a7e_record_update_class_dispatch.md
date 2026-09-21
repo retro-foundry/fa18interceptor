@@ -8,3 +8,8 @@ It first rejects a nonzero `$C457AE` event byte, then masks the high nibble of
 the current record's `+$62` byte. Observed comparisons route zero to `$C23F4A`
 and `$30` to `$C23D82`; `$20` returns through `$C23A7A`. The captured generic
 path continues after these gates. Record class meanings remain unassigned.
+
+The traced generic route now has byte-exact source through `$C23BA3`: it
+decrements the local `+$4C` word, applies event/flag gates, calls `$C24568`,
+and derives a selected 512-byte record pointer from the `+$38` byte when that
+selector is valid.
