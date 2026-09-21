@@ -89,6 +89,10 @@ with an explicit unknown meaning rather than inventing a symbolic explanation.
 - Two independent 120-frame restores compare RAM, registers, cycles, video and
   audio in about one second total.
 - `python scripts/check_breakpoint.py` checks one observed runtime breakpoint.
+- `python scripts/verify_reconstructions.py` is the byte gate: it assembles every
+  slice in `source_amiga/observed/`, compares it with the runtime bank at its
+  `ORG`, warns on overlapping slices, and writes `analysis/coverage.json`. About
+  two seconds. Run it after every source reconstruction change.
 - A two-frame menu instruction trace takes about 1.6 seconds; Ghidra import and
   export take roughly four seconds. Do not run full-session instruction stepping
   as a routine test.
@@ -98,6 +102,35 @@ with an explicit unknown meaning rather than inventing a symbolic explanation.
 Single-stepping repeatedly polls the core frontend. Held-key/autorepeat parity
 needs validation before using stepped input traces as definitive evidence.
 Normal human recording and full-frame replay do not use instruction stepping.
+
+## Coverage
+
+Coverage is reported against three denominators, because no single one is
+honest. The gate prints all three and writes them to `analysis/coverage.json`:
+
+- **Of observed-executed code.** Bytes some capture has actually run. Only these
+  can carry a behavioural claim under this project's evidence rules.
+- **Of plausible instruction bytes.** All CODE hunk bytes minus segments with
+  positive data evidence: never executed in any P-code export, and referenced by
+  reconstructed source only as data operands, never as branch or call targets.
+  AmigaDOS Hunks do not separate code from initialised data the linker emitted
+  as CODE, so the raw CODE total understates progress.
+- **Of the whole game ever exercised.** How much resolved CODE has executed at
+  all. This is the real constraint: a routine no capture has entered cannot be
+  reconstructed under these rules, only guessed at.
+
+A segment that has never executed is *not* thereby data. It is equally likely to
+be a subsystem no recording has reached, and that ambiguity is preserved rather
+than resolved by assumption.
+
+```powershell
+python scripts/plan_captures.py
+```
+
+This ranks what is still dark into `analysis/capture_targets.md`: segments
+reached by a reconstructed branch but never run, segments under half exercised,
+and segments never touched at all. It aims recording sessions at measured gaps
+instead of guesses. Reconstruction cannot outrun scenario coverage.
 
 ## Controls recorded as documentation
 
