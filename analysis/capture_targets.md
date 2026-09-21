@@ -71,7 +71,6 @@ Never executed and never referenced by reconstructed source. Each is either a su
 | 80 | `$C503E8-$C50884` | 1,180 |
 | 120 | `$C519C0-$C51DB0` | 1,008 |
 | 166 | `$C532A0-$C53634` | 916 |
-| 61 | `$C3D790-$C3DAF8` | 872 |
 | 83 | `$C50890-$C50B6C` | 732 |
 | 105 | `$C50F00-$C511C8` | 712 |
 | 126 | `$C51F30-$C521B4` | 644 |
@@ -79,5 +78,6 @@ Never executed and never referenced by reconstructed source. Each is either a su
 | 62 | `$012988-$012B50` | 456 |
 | 123 | `$C51DB8-$C51F24` | 364 |
 | 77 | `$C50288-$C503E0` | 344 |
+| 86 | `$C50B78-$C50CD0` | 344 |
 
-Total: 54 segments, 52,364 bytes (showing largest 25).
+Total: 53 segments, 51,492 bytes (showing largest 25).
