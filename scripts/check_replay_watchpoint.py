@@ -27,8 +27,13 @@ def main():
     parser.add_argument('--frames', type=int, required=True)
     parser.add_argument('--expect', choices=['hit', 'miss'], required=True)
     parser.add_argument('--any-source', action='store_true')
+    parser.add_argument('--source', choices=['cpu', 'dma', 'blitter', 'copper', 'audio', 'video', 'peripheral', 'disk'])
+    parser.add_argument('--address-mask', type=lambda x: int(x, 0), default=0xffffff,
+                        help='24-bit address compare mask (default: exact address)')
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
+    if args.any_source and args.source:
+        parser.error('--any-source and --source cannot be combined')
     events = read_events(args.playback)
     engine = Engine(args.config.resolve(), ROOT / 'local/saves')
     engine.core.retro_run()
@@ -40,13 +45,18 @@ def main():
     hit = None
     for frame in range(1, args.frames + 1):
         if frame == args.arm_frame:
-            # CPU access at the exact address; optional exact access value.
+            # e9k-lib.h v0.62-alpha: source 1=CPU, 2=DMA, 3=blitter,
+            # 4=copper, 5=audio, 6=video, 7=peripheral, 8=disk.
             op_mask = (1 if args.access == 'read' else 2) | 64
+            source_values = {'cpu': 1, 'dma': 2, 'blitter': 3, 'copper': 4,
+                             'audio': 5, 'video': 6, 'peripheral': 7, 'disk': 8}
             if not args.any_source:
                 op_mask |= 128
             if args.value is not None:
                 op_mask |= 8
-            index = add(args.address, op_mask, 0, args.value or 0, 0, 0, 0xffffff, 1)
+            source = source_values.get(args.source, 1)
+            index = add(args.address, op_mask, 0, args.value or 0, 0, 0,
+                        args.address_mask, source)
             if index < 0:
                 raise RuntimeError('Could not install watchpoint')
         for kind, values in events.get(frame, []):
@@ -58,7 +68,9 @@ def main():
                    'watch': {name: getattr(watch, name) for name, _ in Watchbreak._fields_}}
             break
     actual = 'hit' if hit else 'miss'
-    report = {'address': f'{args.address:06x}', 'access': args.access, 'value': args.value, 'arm_frame': args.arm_frame,
+    report = {'address': f'{args.address:06x}', 'address_mask': f'{args.address_mask:06x}',
+              'access': args.access, 'value': args.value, 'source': args.source or ('any' if args.any_source else 'cpu'),
+              'arm_frame': args.arm_frame,
               'expect': args.expect, 'actual': actual, 'hit': hit}
     print(json.dumps(report, indent=2))
     if actual != args.expect:

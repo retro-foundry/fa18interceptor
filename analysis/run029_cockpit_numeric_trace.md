@@ -51,14 +51,18 @@ Three ordinary-replay write watchpoints were placed at bytes proven different
 between the normal frame-993 and frame-994 active-plane snapshots:
 `$04DB58`, `$051FAB`, and `$053EEB`.  Each missed with `--any-source`.
 The same helper also misses a trace-proven CPU store at `$C45968`; it therefore
-does not yet have a validated Engine9000 watchpoint ABI contract.  These misses
-are a helper boundary, not evidence that the active-plane bytes did not change.
-The normal snapshot comparison remains the authority for the visible change.
+does not reproduce instruction-stepped execution under ordinary full-frame
+replay.  Exact CPU watches have separately been validated at `$C02D06`, but a
+broad source-filtered blitter watch misses over frames 1--1000.  The relevant
+blitter writes are therefore absent from this runtime's watchbreak stream.
+These misses are an instrumentation boundary, not evidence that the
+active-plane bytes did not change.  The normal snapshot comparison remains the
+authority for the visible change; see
+`analysis/engine9000_watchpoint_abi.md` for the ABI and validation details.
 
 The next renderer experiment needs a blitter-completion/write log (or a
 capture that exposes the pending blitter state and destination before the
-frontend snapshot), or a separately validated watchpoint ABI, rather than
-further use of the current helper.
+frontend snapshot), rather than further blitter watchpoint probes.
 
 ## First changed-number boundary
 
