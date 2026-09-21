@@ -16,3 +16,14 @@ selector. In the frame-602 projected-edge packet, the live walker had
 `A5=$C392A8` and its dispatched `$C212B0` callee received
 `A2=$C3985A`. This establishes the control-stream ancestry of the stable edge
 list, while leaving the writer/owner of `$C45A36` for the next step.
+
+## Frame-boundary qualification
+
+The sealed run024 frame-23,000 checkpoint has `$C45A36=$C4553E`, but a separate
+no-input replay from that checkpoint hits `$C1F6F8` on its next chipset frame
+and returns to `$C1CFA8` after only 14 instructions. Its first fetched control
+word is terminal `$FFFF`. Thus the pointer visible in a completed-frame
+snapshot is not automatically the input of the next invocation: preceding
+normal-frame work may replace it. This terminal packet is useful negative
+evidence only; it neither identifies nor excludes the Golden Gate Bridge's
+geometry stream.
