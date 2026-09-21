@@ -1,4 +1,4 @@
-; Byte-exact matrix-side record header-flag clear and gate $C134A2-$C134BD.
+; Byte-exact matrix-side record header-flag clear and gate $C134A2-$C134BB.
 
                 org     $C134A2
 

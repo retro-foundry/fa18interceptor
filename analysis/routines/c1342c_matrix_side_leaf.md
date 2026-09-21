@@ -16,8 +16,14 @@ Three contiguous exercised fragments are now byte-exact source:
   512-byte record and derives local pointers at `+$02/$56/$58/$5A`.
 - `select_zero_matrix_side_table.asm` (`$C13490-$C13499`) publishes the
   zero-index table local.
-- `clear_matrix_side_record_flags.asm` (`$C134A2-$C134BD`) clears record-header
+- `clear_matrix_side_record_flags.asm` (`$C134A2-$C134BB`) clears record-header
   mask `$0040` and gates on `$C458CC` bit 6.
+- The four `matrix_side_*threshold` and `clear_matrix_side_status_mask` slices
+  retain the observed positive-index path at `$C134BC`, `$C1350A`, `$C1353A`,
+  and `$C1356A` without filling the alternate-branch gaps.
+- `load_matrix_side_component_prefix.asm` and
+  `gate_matrix_side_first_component.asm` sign-extend the selected record's
+  `+$28/$29/$2A` bytes and preserve the two exercised zero-component fragments.
 
 The enclosing static routine remains substantially wider than the live packet.
 Untraced branch gaps and later paths are deliberately not reconstructed.
