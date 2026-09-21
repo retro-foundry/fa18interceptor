@@ -1,0 +1,14 @@
+00c1f6f8  23fc000fffff00c456e6     move.l #0xfffff,(0x00c456e6).l
+00c1f702  42b900c456ea             clr.l (0x00c456ea).l
+00c1f708  2a7900c45a36             movea.l (0x00c45a36).l,A5
+00c1f70e  426eff9a                 clr.w (-0x66,A6)
+00c1f712  426eff84                 clr.w (-0x7c,A6)
+00c1f716  4a6eff9a                 tst.w (-0x66,A6)
+00c1f71a  66000128                 bne.w 0x00c1f844
+00c1f71e  301d                     move.w (A5)+,D0w
+00c1f720  6d00007e                 blt.w 0x00c1f7a0
+00c1f79a  4e5e                     unlk A6
+00c1f79c  7000                     moveq 0x0,D0
+00c1f79e  4e75                     rts
+00c1f7a0  0c40ffff                 cmpi.w #-0x1,D0w
+00c1f7a4  67f4                     beq.b 0x00c1f79a
