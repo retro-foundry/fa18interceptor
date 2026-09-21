@@ -44,3 +44,7 @@ then add the result to the corresponding routine note and memory-map entry.
 For example, a controlled top-level run029 frontend `F` event did not reach
 `$C1AD74` or its `$C06BF0` transfer through frame 400; frontend key identity
 and the dispatcher's raw `$46` value must remain separate evidence domains.
+The same result holds in the controlled run003 free-flight differential: six
+recorded frontend `H` events replaced with frontend `F` do not reach `$C06BF0`
+through frame 2,200.  Neither context establishes a frontend binding for the
+raw dispatcher byte.

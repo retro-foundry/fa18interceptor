@@ -13,6 +13,15 @@ meaning of this transition are not established.
 The native `F` key was not dispatched from the available free-flight state, so
 the static raw-key route is not promoted to a behavioral control claim.
 
+## Rejected flight-state frontend-F probe
+
+`build/run003_f_key_variant.e9k` replaces all six frontend `H` events in the
+sealed run003 recording with frontend key/character 70 (`F`) while preserving
+every other event.  A `$C06BF0` breakpoint armed at frame 1,900 did not hit
+through frame 2,200 (`build/run003_f_key_c06bf0_probe/`).  This independently
+rejects frontend `F` as a direct route to the raw `$46` dispatcher case during
+that free-flight replay; it does not identify the actual raw input producer.
+
 ## Rejected top-level frontend-F probe
 
 `build/run029_keyf_variant.e9k` changes only the frame-266/269 digit-5 events
