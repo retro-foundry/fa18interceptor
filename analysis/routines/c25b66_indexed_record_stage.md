@@ -30,3 +30,6 @@ normalization and writes at `+$0C/$0E/$10`, without assigning coordinate axes.
 Finally, the `$C25FEE-$C2601B` slices form relative `D2/D3/D4` inputs from the
 record and saved delta tuple, then call the established candidate-record scan
 at `$C26EBE`.
+The observed zero-result continuation at `$C26294-$C26321` is also sourced as
+separate gates: it tests record bits/classes, clears two record flag bits on
+the traced route, and returns to the shared indexed-update continuation.
