@@ -30,8 +30,15 @@ the merge loop establish a concrete font-glyph-to-framebuffer bridge.
 
 ## Scope
 
-This path does not yet prove that `$C45B22` is speed, altitude, or another
-cockpit readout. It does prove that the game has a packed-nibble formatter
-feeding a glyph table and CPU compositor. To name a cockpit value, replay a
-readable numeric transition and establish that the transition invokes this
-path with a changed `$C45B22` value or changed glyph selection.
+This path does not prove that `$C45B22` is speed, altitude, or another cockpit
+readout. Existing static-only reconstruction uses the same workspace in
+postflight arithmetic paths (`$C3341A` onward), so it is not a leading cockpit
+candidate. Normal snapshots also show `$C45B22` changing from `$00001227` at
+frame 992 to `$00000040` at frame 993, then remaining `$00000040` at frame
+994 while the readable speed changes from `161 KTS` to `171 KTS`.
+
+It therefore establishes a live general/postflight-capable packed-nibble
+formatter feeding a glyph table and CPU compositor, but not the desired
+cockpit numeric formatter. The cockpit investigation must locate a distinct
+glyph selection or renderer path whose source changes at a readable KTS/FT
+boundary.

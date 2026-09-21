@@ -35,11 +35,12 @@ field just because that field changes in the same interval.
 
 ## Font-renderer bridge
 
-Run029 renderer tracing identifies a general packed-nibble font path at
+Run029 renderer tracing identifies a general/postflight-capable packed-nibble font path at
 `$C32740-$C328A5`: it converts a packed value from `$C45B22` to character
 bytes, indexes glyph offsets at `$C3D790`, and composites glyph bytes through
 the `$C32858` strided-long loop. This is the first direct glyph-source to
-framebuffer bridge, but it has not yet been shown to render KTS or FT. See
+framebuffer bridge, but `$C45B22` remains `$00000040` across the frame-993 to
+frame-994 `161 KTS` to `171 KTS` change, so it is not assigned to KTS or FT. See
 `analysis/routines/c32740_packed_nibble_font_renderer.md`.
 
 ## Next evidence
