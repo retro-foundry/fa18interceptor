@@ -12,3 +12,8 @@ its inputs and output ownership remain unassigned.
 `source_amiga/observed/submit_adjacent_renderer_values.asm` is the byte-exact
 24-byte static wrapper `$C2F60A-$C2F621`. For low-nibble-zero `D0`, it calls
 `$C2F5F4` twice with adjacent values; the nonzero branch enters `$C2F626`.
+
+`$C2F626-$C2F639` is now byte-exact source in
+`source_amiga/observed/enter_alternate_renderer_table_helper.asm`. It loads
+the same pointer block and second table as the primary entry, but selects the
+alternate word table at `$C2F7C6` before joining `$C2F688`.
