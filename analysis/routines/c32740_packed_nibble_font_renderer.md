@@ -1,7 +1,8 @@
 # `$C32740-$C328A5`: packed-nibble font-rendering path
 
-Classification: **runtime-backed graphics dataflow** for the observed run029
-path; the caller's field semantics remain unassigned.
+Classification: **scenario-backed formatter-to-framebuffer dataflow** for the
+observed run029 path.  The workspace is proved reusable; the gameplay-state
+producer and final screen placement remain unassigned.
 
 ## Observed path
 
@@ -23,22 +24,35 @@ word-offset table at `$C3D790`. That resolves `A0` to the glyph byte stream.
 The routine then calls `$C32806`, whose observed body delegates to the
 byte-stream/strided-long merge loop at `$C32858`.
 
-The first observed glyph stream starts at `$C3D847`; its destination starts
-at `$0186F6` and advances by `$28` for six scanlines. The second starts at
+The first stepped glyph stream starts at `$C3D847`; its destination starts at
+`$0186F6` and advances by `$28` for six scanlines. The second starts at
 `$C3D842` and writes the adjacent destination sequence. These addresses and
 the merge loop establish a concrete font-glyph-to-framebuffer bridge.
 
+An authentic normal replay gives the stronger four-character case. At
+chipset frame 991, a breakpoint at `$C32740` finds `$C45B22=$00000171` and
+enters with `D0=3`. The repeated low-nibble conversion writes, after the
+backward scratch stores settle, ASCII `$30 $31 $37 $31` (`"0171"`) at
+`$C45800-$C45803`. Its screen still shows `161 KTS`; the later frame-994
+screen shows `171 KTS`. Thus the formatter is preparing buffered cockpit text
+ahead of its presentation phase, rather than necessarily formatting the value
+visible in that same screenshot.
+
 ## Scope
 
-This path does not prove that `$C45B22` is speed, altitude, or another cockpit
-readout. Existing static-only reconstruction uses the same workspace in
-postflight arithmetic paths (`$C3341A` onward), so it is not a leading cockpit
-candidate. Normal snapshots also show `$C45B22` changing from `$00001227` at
-frame 992 to `$00000040` at frame 993, then remaining `$00000040` at frame
-994 while the readable speed changes from `161 KTS` to `171 KTS`.
+This does not establish `$C45B22` as a persistent speed, altitude, or other
+cockpit-state field. Static-only postflight code (`$C3341A` onward) also uses
+the workspace, and endpoint snapshots show it as `$00000040` at frames 993
+and 994. The differing contents are evidence of reuse at different times in
+the frame, not a contradiction of the normal formatter observation.
 
-It therefore establishes a live general/postflight-capable packed-nibble
-formatter feeding a glyph table and CPU compositor, but not the desired
-cockpit numeric formatter. The cockpit investigation must locate a distinct
-glyph selection or renderer path whose source changes at a readable KTS/FT
-boundary.
+`$C25A08` is now separately proven to fill this workspace from the raw-long
+input at `$C45B1E`; see
+`analysis/routines/c25a08_workspace_packed_bcd_conversion.md`. That conversion
+is shared infrastructure, so its caller still determines the field semantics.
+
+The proved contract is therefore a reusable packed-decimal formatting
+workspace feeding the glyph table and CPU compositor. The normal `0171`
+invocation is a strong KTS correspondence, but tracing its writer and the
+coordinate/record consumer is still required before assigning a cockpit live
+variable or a fixed screen field name.

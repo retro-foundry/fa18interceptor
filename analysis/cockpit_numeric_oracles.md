@@ -35,17 +35,21 @@ field just because that field changes in the same interval.
 
 ## Font-renderer bridge
 
-Run029 renderer tracing identifies a general/postflight-capable packed-nibble font path at
-`$C32740-$C328A5`: it converts a packed value from `$C45B22` to character
-bytes, indexes glyph offsets at `$C3D790`, and composites glyph bytes through
-the `$C32858` strided-long loop. This is the first direct glyph-source to
-framebuffer bridge, but `$C45B22` remains `$00000040` across the frame-993 to
-frame-994 `161 KTS` to `171 KTS` change, so it is not assigned to KTS or FT. See
+Run029 renderer tracing identifies a reusable packed-nibble font path at
+`$C32740-$C328A5`: it converts a value from `$C45B22` to character bytes,
+indexes glyph offsets at `$C3D790`, and composites glyph bytes through the
+`$C32858` strided-long loop. In an authentic frame-991 invocation,
+`$C45B22=$00000171` is converted to ASCII `0171`; the screen is still showing
+`161 KTS` at that phase and shows `171 KTS` by frame 994. This directly ties
+the formatter to buffered cockpit-number production, while also explaining
+why endpoint snapshots of `$C45B22=$00000040` at frames 993 and 994 cannot be
+used to reject it: the workspace is reused later in the frame and also by
+postflight code. It is not yet assigned as the persistent KTS or FT state. See
 `analysis/routines/c32740_packed_nibble_font_renderer.md`.
 
 ## Next evidence
 
-Capture a bounded renderer trace that connects a changed numeric-glyph
-rectangle to its formatter/record writer, then trace that input back to the
-state producer.  That producer/state/consumer chain is required before naming
-the corresponding cockpit live variable.
+Trace the frame-991 `$C45B22` writer and the formatter's coordinate/record
+consumer, then connect that buffered glyph submission to the changed numeric
+rectangle. That producer/state/consumer chain is required before naming the
+corresponding cockpit live variable.
