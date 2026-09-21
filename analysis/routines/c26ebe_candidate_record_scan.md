@@ -20,3 +20,8 @@ byte differing from the initial record.  Its class rejects `$30`, has a special
 `$20` path with `$A0000` in `A1`, and otherwise reaches raw class-specific code.
 The observed common path loads three longs at relative `$14/$18/$1C`, subtracts
 the caller's `D2` from the first, and applies the `A1` bound before scanning on.
+
+The observed scan-limit exit at `$C27504` re-forms the selected record pointer
+from `$C46184 + $C459B6` and tests signed long `$10` against `$7FFF` before
+entering the next stage.  The relation of that terminal record to candidates is
+not yet assigned.
