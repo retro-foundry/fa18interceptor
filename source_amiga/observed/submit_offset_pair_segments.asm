@@ -1,5 +1,6 @@
 ; Byte-exact observed-entry routine $C212B0-$C2131B.
-; A2 supplies signed endpoint-offset pairs terminated by a negative first word.
+; A2 supplies endpoint-offset pairs; a negative second word marks the final
+; pair while its masked low 15 bits remain a usable endpoint offset.
 ; Each endpoint selects a three-word record in C48390; the pair is projected.
 
 DISPLAY_EDGE_SELECTOR          equ     $C45954

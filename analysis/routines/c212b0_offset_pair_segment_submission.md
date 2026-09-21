@@ -8,8 +8,9 @@ Classification: **scenario-backed edge-list to projection dataflow**.
 After its selector word, `A2` supplies pairs of word offsets. Each offset
 indexes `$C48390`; the routine copies three words from each selected record
 into the two-record workspace `$C4C592`, rejects the pair if the bitwise AND
-of their third words is negative, then calls `$C2EE4A`. The first word's sign
-terminates the list; its partner remains usable after masking with `$7FFF`.
+of their third words is negative, then calls `$C2EE4A`. The second word's sign
+marks the final pair; it is masked with `$7FFF` and remains usable before the
+loop terminates.
 
 The bounded packet performs ten accepted pair submissions and returns the OR
 of their projection/line-submission statuses. Combined with the exact

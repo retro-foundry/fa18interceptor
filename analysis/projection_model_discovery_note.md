@@ -9,6 +9,8 @@ matrix-product projection path at `$C2ECC6`, and now the runtime-connected
 `$C2F03A` perspective tail. The latter proves the exact 320×180 projection
 formula from `$C45AC6` through `$C2FA7E` line submission. Model/table ownership
 remains unproven; the paired-triple producer is now `$C212B0`, which resolves
-offset pairs through `$C48390`. The next step is to trace the caller's A2
-edge-list source and distinguish static model tables from per-frame transformed
-instance data at `$C48390`.
+offset pairs through `$C48390`. Its frame-602 caller supplies the stable
+ten-segment candidate list at `$C3985A`, documented in
+`analysis/data/c3985a_projected_edge_list.md`. The next step is to trace the
+caller that chooses this list and distinguish static model tables from
+per-frame transformed instance data at `$C48390`.
