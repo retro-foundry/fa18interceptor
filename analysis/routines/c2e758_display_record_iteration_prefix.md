@@ -82,6 +82,12 @@ opposite signed comparison order, invokes `$C2EB4C` and conditionally
 `$C2EBC2`, then increments `$C4E858` and stores the result at `$C4E860` on the
 passing path. Meaning remains dataflow-only.
 
+The `$C2E8DA-$C2E915` case is reconstructed in
+`source_amiga/observed/dispatch_fifth_display_record_case.asm`. It is another
+transposed-helper selection that conditionally routes through `$C2EB4C` and
+`$C2EBC2`, publishing via `$C4E858/$C4E860` on its accepted path. Its branch
+conditions are preserved without assigning record semantics.
+
 The shared `$C2E9D8-$C2E9F7` continuation is reconstructed in
 `source_amiga/observed/continue_display_record_iteration.asm`. A negative `D5`
 clears the current eight-byte workspace slot and word 14 of the selected
