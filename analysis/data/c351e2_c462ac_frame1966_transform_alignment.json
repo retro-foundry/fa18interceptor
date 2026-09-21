@@ -1,0 +1,361 @@
+{
+  "scope": "fixed-point 3x3 static-source to sampled-output alignment",
+  "samples": "build\\run031_frame1966_c462ac_and_matrix_samples.json",
+  "memory": "captures\\baseline_menu\\slow.bin",
+  "source": "$C351E2",
+  "output": "$C462AC",
+  "matrix": "$C45BC6",
+  "matrix_words": [
+    255,
+    0,
+    11,
+    0,
+    256,
+    0,
+    -12,
+    0,
+    255
+  ],
+  "count": 14,
+  "tolerance": 4,
+  "rows": [
+    {
+      "index": 0,
+      "source": [
+        0,
+        0,
+        -184
+      ],
+      "actual": [
+        -9,
+        0,
+        -184
+      ],
+      "expected": [
+        -8,
+        0,
+        -184
+      ],
+      "residual": [
+        -1,
+        0,
+        0
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 1,
+      "source": [
+        15,
+        -15,
+        -184
+      ],
+      "actual": [
+        5,
+        -15,
+        -185
+      ],
+      "expected": [
+        7,
+        -15,
+        -184
+      ],
+      "residual": [
+        -2,
+        0,
+        -1
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 2,
+      "source": [
+        -15,
+        -15,
+        -184
+      ],
+      "actual": [
+        -25,
+        -15,
+        -184
+      ],
+      "expected": [
+        -23,
+        -15,
+        -183
+      ],
+      "residual": [
+        -2,
+        0,
+        -1
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 3,
+      "source": [
+        -32,
+        0,
+        64
+      ],
+      "actual": [
+        -29,
+        0,
+        65
+      ],
+      "expected": [
+        -30,
+        0,
+        65
+      ],
+      "residual": [
+        1,
+        0,
+        0
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 4,
+      "source": [
+        15,
+        0,
+        64
+      ],
+      "actual": [
+        18,
+        0,
+        62
+      ],
+      "expected": [
+        17,
+        0,
+        63
+      ],
+      "residual": [
+        1,
+        0,
+        -1
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 5,
+      "source": [
+        -15,
+        0,
+        64
+      ],
+      "actual": [
+        -14,
+        0,
+        64
+      ],
+      "expected": [
+        -13,
+        0,
+        64
+      ],
+      "residual": [
+        -1,
+        0,
+        0
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 6,
+      "source": [
+        0,
+        -15,
+        64
+      ],
+      "actual": [
+        1,
+        -15,
+        62
+      ],
+      "expected": [
+        2,
+        -15,
+        63
+      ],
+      "residual": [
+        -1,
+        0,
+        -1
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 7,
+      "source": [
+        0,
+        0,
+        -56
+      ],
+      "actual": [
+        -3,
+        0,
+        -57
+      ],
+      "expected": [
+        -3,
+        0,
+        -56
+      ],
+      "residual": [
+        0,
+        0,
+        -1
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 8,
+      "source": [
+        48,
+        88,
+        -144
+      ],
+      "actual": [
+        43,
+        88,
+        -106
+      ],
+      "expected": [
+        41,
+        88,
+        -146
+      ],
+      "residual": [
+        2,
+        0,
+        40
+      ],
+      "within_tolerance": false
+    },
+    {
+      "index": 9,
+      "source": [
+        -48,
+        88,
+        -144
+      ],
+      "actual": [
+        -52,
+        88,
+        -102
+      ],
+      "expected": [
+        -54,
+        88,
+        -142
+      ],
+      "residual": [
+        2,
+        0,
+        40
+      ],
+      "within_tolerance": false
+    },
+    {
+      "index": 10,
+      "source": [
+        200,
+        0,
+        0
+      ],
+      "actual": [
+        199,
+        0,
+        -6
+      ],
+      "expected": [
+        199,
+        0,
+        -10
+      ],
+      "residual": [
+        0,
+        0,
+        4
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 11,
+      "source": [
+        -200,
+        0,
+        0
+      ],
+      "actual": [
+        -199,
+        0,
+        13
+      ],
+      "expected": [
+        -200,
+        0,
+        9
+      ],
+      "residual": [
+        1,
+        0,
+        4
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 12,
+      "source": [
+        22,
+        10,
+        -30
+      ],
+      "actual": [
+        21,
+        10,
+        -29
+      ],
+      "expected": [
+        20,
+        10,
+        -31
+      ],
+      "residual": [
+        1,
+        0,
+        2
+      ],
+      "within_tolerance": true
+    },
+    {
+      "index": 13,
+      "source": [
+        -22,
+        10,
+        -30
+      ],
+      "actual": [
+        -23,
+        10,
+        -27
+      ],
+      "expected": [
+        -24,
+        10,
+        -29
+      ],
+      "residual": [
+        1,
+        0,
+        2
+      ],
+      "within_tolerance": true
+    }
+  ],
+  "matching_rows": 12,
+  "qualification": "This compares snapshots after a replay frame. It corroborates a source-to-output transform relationship but does not identify the CPU instruction that wrote the output or explain rows outside tolerance."
+}

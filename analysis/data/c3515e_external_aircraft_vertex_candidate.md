@@ -12,10 +12,14 @@ five `$C34C06-$C34C48` records via `$C203C4 -> $C2469E`. This is a
 trace-proven model candidate; the remaining uncertainty is its user-facing
 identity, not whether the static vertices and those five faces are connected.
 
-That path covers only the first 22 of 36 vertex slots used by the five faces.
-The remaining 14 slots in `$C462AC-$C46301` were populated before the recorded
-replay and their immutable source remains untraced; this is not yet a complete
-source-model export.
+That path directly traces only the first 22 of 36 vertex slots used by the five
+faces. The remaining 14 slots in `$C462AC-$C46301` first initialize together
+at replay frame 1966. A matrix-snapshot check corroborates `$C351E2-$C35234`
+as their source: 12 of 14 triples match the contemporaneous `$C45BC6` fixed-
+point transform within four units, while the two symmetric rows 30/31 differ
+by +40 Z. See [the alignment evidence](c351e2_c462ac_frame1966_transform_alignment.md).
+The direct writer remains untraced, so this is still not a complete source-
+model export.
 
 [Orthographic static-vertex plot](../plots/external_aircraft_c3515e_static_vertices.svg) shows all 36 contiguous source-order points in X-Y, X-Z, and Y-Z. Indices 0-21 are transform-traced; 22-35 are the untraced continuation candidate. It intentionally draws points only: source order is not proof of an edge or polygon, and the renderer's real topology must be recovered from its face records rather than guessed from nearest neighbours.
 

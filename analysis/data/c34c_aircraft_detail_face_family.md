@@ -38,10 +38,12 @@ renderer result, not a missing-line inference.
 faces reference vertex indices `0` through `35` (36 slots total). The bounded
 `$C3515E` transform supplies slots `0` through `21` only, ending at
 `$C462AC`. Slots `22` through `35` are already populated in the restored
-state. Replay samples show `$C462B0` changes from zero to nonzero near frame
-2001 and continues to vary; its producer runs before the observed `$C0F090`
-flight-update entry. Their upstream immutable source—or live-object producer—
-is therefore still untraced.
+state. Their first observed joint transition is replay frame 1966. A
+fixed-point snapshot check maps 12 of their 14 triples to the contiguous
+immutable `$C351E2-$C35234` source run; the two symmetric exceptions retain a
++40 Z residual. [The alignment report](c351e2_c462ac_frame1966_transform_alignment.md)
+records the arithmetic and qualification. The direct writer is still untraced,
+so the two exception rows and output producer remain open.
 
 This model has renderer-proven topology and a partial static-vertex path, but
 is not yet a complete source-model export. The fourteen unresolved indices
