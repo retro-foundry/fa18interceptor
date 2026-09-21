@@ -33,6 +33,15 @@ Therefore KTS, FT, G-load, fuel, Mach, and weapon/ammunition readouts are
 currently **screen-observed only**.  They must not be assigned to a `$C4xxxx`
 field just because that field changes in the same interval.
 
+## Font-renderer bridge
+
+Run029 renderer tracing identifies a general packed-nibble font path at
+`$C32740-$C328A5`: it converts a packed value from `$C45B22` to character
+bytes, indexes glyph offsets at `$C3D790`, and composites glyph bytes through
+the `$C32858` strided-long loop. This is the first direct glyph-source to
+framebuffer bridge, but it has not yet been shown to render KTS or FT. See
+`analysis/routines/c32740_packed_nibble_font_renderer.md`.
+
 ## Next evidence
 
 Capture a bounded renderer trace that connects a changed numeric-glyph
