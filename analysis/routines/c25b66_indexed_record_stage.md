@@ -25,3 +25,5 @@ The later zero-index path now also has byte-exact gates and the direct
 The next traced slices set up, gate, and publish the two observed bounded
 coordinate deltas at `+$14` and `+$1C`; no physical coordinate meaning is
 assigned to those fields.
+The subsequent `$C25E86-$C25F01` slices preserve the observed fixed-point
+normalization and writes at `+$0C/$0E/$10`, without assigning coordinate axes.
