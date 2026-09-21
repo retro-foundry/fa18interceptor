@@ -50,6 +50,38 @@ def changed_row_ranges(before: bytes, after: bytes) -> tuple[int, list[list[int]
     return sum(a != b for a, b in zip(before, after)), ranges
 
 
+def changed_composite_components(before: bytes, after: bytes, pointers: list[int]) -> list[dict[str, int]]:
+    """Return four-connected changed-pixel components across every active plane."""
+    changed: set[tuple[int, int]] = set()
+    for y in range(ROWS):
+        for x in range(WIDTH):
+            offset = y * BYTES_PER_ROW + (x >> 3)
+            mask = 0x80 >> (x & 7)
+            before_value = sum(((before[pointer + offset] & mask) != 0) << plane
+                               for plane, pointer in enumerate(pointers))
+            after_value = sum(((after[pointer + offset] & mask) != 0) << plane
+                              for plane, pointer in enumerate(pointers))
+            if before_value != after_value:
+                changed.add((x, y))
+    components: list[dict[str, int]] = []
+    while changed:
+        seed = changed.pop()
+        pending = [seed]
+        pixels = [seed]
+        while pending:
+            x, y = pending.pop()
+            for neighbor in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)):
+                if neighbor in changed:
+                    changed.remove(neighbor)
+                    pending.append(neighbor)
+                    pixels.append(neighbor)
+        xs = [x for x, _ in pixels]
+        ys = [y for _, y in pixels]
+        components.append({'pixels': len(pixels), 'x_min': min(xs), 'y_min': min(ys),
+                           'x_max': max(xs), 'y_max': max(ys)})
+    return sorted(components, key=lambda component: (-component['pixels'], component['y_min'], component['x_min']))
+
+
 def render(labelled_captures: list[tuple[str, bytes, list[int]]], output: Path) -> None:
     panel_height = ROWS + 20
     panel_count = len(labelled_captures[0][2]) + 1
@@ -65,9 +97,11 @@ def render(labelled_captures: list[tuple[str, bytes, list[int]]], output: Path) 
                 values.append(sum(((plane[offset] & mask) != 0) << number for number, plane in enumerate(planes)))
         for panel in range(panel_count):
             x0, y0 = panel * WIDTH, capture_index * panel_height
-            draw.text((x0 + 4, y0 + 3), f"{label} " + ("composite" if panel == 4 else f"plane {panel + 1}"), fill="white")
+            draw.text((x0 + 4, y0 + 3), f"{label} " +
+                      ("composite" if panel == len(planes) else f"plane {panel + 1}"), fill="white")
             bitmap = Image.new("L", (WIDTH, ROWS))
-            bitmap.putdata([value * 17 if panel == 4 else (255 if value & (1 << panel) else 0) for value in values])
+            bitmap.putdata([value * 17 if panel == len(planes) else (255 if value & (1 << panel) else 0)
+                            for value in values])
             image.paste(bitmap.convert("RGB"), (x0, y0 + 20))
     image.save(output)
 
@@ -108,8 +142,8 @@ def main() -> None:
             "plane": number,
             "start": f"${pointer:06X}",
             "end_exclusive": f"${pointer + PLANE_BYTES:06X}",
-            "sha256_frame_600": hashlib.sha256(before).hexdigest(),
-            "sha256_frame_1800": hashlib.sha256(after).hexdigest(),
+            "sha256_before": hashlib.sha256(before).hexdigest(),
+            "sha256_after": hashlib.sha256(after).hexdigest(),
             "changed_bytes": changed_bytes,
             "changed_row_ranges": changed_rows,
         })
@@ -120,6 +154,7 @@ def main() -> None:
         "bytes_per_row": BYTES_PER_ROW,
         "width": WIDTH,
         "planes": planes,
+        "changed_composite_components": changed_composite_components(captures[0][1], captures[1][1], pointers),
     }
     args.json.parent.mkdir(parents=True, exist_ok=True)
     args.image.parent.mkdir(parents=True, exist_ok=True)

@@ -40,6 +40,16 @@ does not isolate the glyph rectangle or identify its source record.  It does
 reject the earlier inactive-buffer explanation and establishes the exact
 buffers that the next renderer trace must watch.
 
+`scripts/analyze_cockpit_bitplanes.py` now also compares all active planes as
+one composite and reports four-connected changed-pixel components.  For this
+boundary it finds one redraw component spanning `$x=0..319`, `$y=1..144`, plus
+small isolated components.  The 7-pixel component at `$x=106..108`,
+`$y=92..96` and adjacent 6-pixel component at `$x=102..103`, `$y=92..96`
+overlap the left speed-readout glyph region in the composite inspection image.
+They are useful coordinates for a future source/destination trace, but are
+not by themselves an attribution of a particular digit: the giant component
+still reaches the same display rows.
+
 ## Renderer handoff at the changed-number frame
 
 The no-input stepped interval for chipset frame 994 records
