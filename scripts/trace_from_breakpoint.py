@@ -19,6 +19,9 @@ def main():
     parser.add_argument('--return-pc', type=lambda x: int(x, 0), required=True)
     parser.add_argument('--frames', type=int, required=True)
     parser.add_argument('--max-instructions', type=int, default=10000)
+    parser.add_argument('--write-memory', action='append', nargs=3,
+                        metavar=('ADDRESS', 'VALUE', 'SIZE'), default=[],
+                        help='write VALUE at ADDRESS using SIZE bytes after the breakpoint pauses')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
@@ -44,6 +47,16 @@ def main():
     future = [frame for frame in events if frame > hit_frame]
     if future:
         raise ValueError(f'Future input after breakpoint frame {hit_frame}: {future}')
+    writes = []
+    write_memory = engine.bind('e9k_debug_write_memory', C.c_int, C.c_uint32,
+                               C.c_uint32, C.c_size_t)
+    for address_text, value_text, size_text in args.write_memory:
+        address, value, size = int(address_text, 0), int(value_text, 0), int(size_text, 0)
+        if size not in (1, 2, 4):
+            raise ValueError(f'unsupported write size {size}; expected 1, 2, or 4')
+        if not write_memory(address, value, size):
+            raise RuntimeError(f'debug write failed at {address:06x}')
+        writes.append({'address': address, 'value': value, 'size': size})
     banks = []
     for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
         data = engine.memory(address, size)
@@ -51,6 +64,7 @@ def main():
         banks.append({'name': name, 'start': address, 'size': size, 'file': f'{name}.bin', 'sha256': sha(data)})
     (args.output / 'state.bin').write_bytes(engine.state())
     (args.output / 'snapshot.json').write_text(json.dumps({'frame': hit_frame, 'registers': engine.regs(), 'memory': banks,
+        'debug_writes': writes,
         'authority': {'initial_state_sha256': sha(args.restore.read_bytes()), 'recording_sha256': sha(args.playback.read_bytes()),
                       'snapshot_sha256': sha((args.output / 'state.bin').read_bytes())}}, indent=2) + '\n')
     decoder = capstone.Cs(capstone.CS_ARCH_M68K, capstone.CS_MODE_BIG_ENDIAN | capstone.CS_MODE_M68K_000)
