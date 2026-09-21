@@ -2,8 +2,9 @@
 
 Classification: **behavioural display submission**. This complete run001 packet
 reduces an observed list of word pairs to bounds and, on its observed path,
-submits one line to the established blitter-line emitter. The list's primitive
-and object ownership remain unknown.
+submits one line to the established blitter-line emitter. Run031 now proves
+that this list format is also the screen-pair output of the polygon projection
+tail at `$C24CFE`; individual object ownership remains unknown.
 
 ## Runtime packet
 
@@ -20,6 +21,23 @@ bounds in `D0/D2` and `D1/D3`, compares the vertical range with the word at
 The observed path temporarily replaces `$C456E6` with `$000FFFFF` when
 `$C457A2` is zero, calls the line emitter, restores the longword, and returns
 `D0 = 1`.
+
+## Run031 polygon evidence
+
+A no-input Golden Gate-frame probe reaches `$C2FF48` with `$C4B390` beginning
+`$0004, (211,60), (216,60), (227,67), (223,66)`. These are the exact
+projected pairs from the `$C24CFE` polygon tail, captured in
+`analysis/data/run031_frame12000_polygon_projection_sample.md`. The trace
+then enters `$C301F6`, so the concrete run031 path is:
+
+```text
+clipped triples → $C24CFE → $C4B390 polygon screen pairs
+→ $C2FF48 → $C301F6 bounds reduction → $C2FA7E blitter line path
+```
+
+The renderer may reduce a list to bounds or choose a small-extent variant;
+this evidence does not assert that every input pair becomes a separate visible
+line.
 
 `source_amiga/observed/submit_bounded_tuple_list.asm` is the byte-exact
 206-byte observed-entry slice `$C301F6-$C302C3`. Static branches to
