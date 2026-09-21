@@ -8,5 +8,7 @@ Current evidence bounds projected-segment preparation at `$C2EE4A`, the
 matrix-product projection path at `$C2ECC6`, and now the runtime-connected
 `$C2F03A` perspective tail. The latter proves the exact 320×180 projection
 formula from `$C45AC6` through `$C2FA7E` line submission. Model/table ownership
-remains unproven; the next step is to trace the producer of the paired triples
-at `$C4C592` and identify repeatable vertex/edge table structure.
+remains unproven; the paired-triple producer is now `$C212B0`, which resolves
+offset pairs through `$C48390`. The next step is to trace the caller's A2
+edge-list source and distinguish static model tables from per-frame transformed
+instance data at `$C48390`.
