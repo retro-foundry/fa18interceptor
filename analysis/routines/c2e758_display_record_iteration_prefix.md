@@ -88,6 +88,12 @@ transposed-helper selection that conditionally routes through `$C2EB4C` and
 `$C2EBC2`, publishing via `$C4E858/$C4E860` on its accepted path. Its branch
 conditions are preserved without assigning record semantics.
 
+The `$C2E916-$C2E94B` case is reconstructed in
+`source_amiga/observed/dispatch_sixth_display_record_case.asm`. It negates the
+`D4` bound, calls `$C2EBC2`, checks `$C45ACA`, and conditionally calls
+`$C2EB4C`; every continuation is a known iterator case, projection path, or
+shared failure tail. The source carries no geometry inference.
+
 The shared `$C2E9D8-$C2E9F7` continuation is reconstructed in
 `source_amiga/observed/continue_display_record_iteration.asm`. A negative `D5`
 clears the current eight-byte workspace slot and word 14 of the selected
