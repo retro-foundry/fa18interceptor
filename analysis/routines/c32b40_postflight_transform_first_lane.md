@@ -1,7 +1,8 @@
 # `$C32B40` first postflight transform-lane submission
 
-Classification: **runtime-observed dataflow**. The run024 frame-23000
-continuation executes this complete `$C32B40-$C32B71` first-lane path.
+Classification: **partially runtime-observed dataflow**. The run024
+frame-23000 continuation executes the normal `$C32B40-$C32B71` submission
+path; the odd-result rejection branch at `$C32B58` is unobserved.
 
 `source_amiga/observed/submit_first_postflight_transform_lane.asm` is
 byte-exact. It doubles the prepared row byte for a word-offset lookup at

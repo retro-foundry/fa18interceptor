@@ -1,4 +1,5 @@
-; Byte-exact runtime-observed first transform-lane submission $C32B40-$C32B71.
+; Byte-exact partially runtime-observed first transform-lane submission $C32B40-$C32B71.
+; Run024 takes the normal submission path; its odd-result rejection is unobserved.
 
                 org     $C32B40
 
