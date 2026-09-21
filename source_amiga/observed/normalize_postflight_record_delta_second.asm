@@ -1,4 +1,4 @@
-; Byte-exact static-only second postflight normalization $C315C0-$C31611.
+; Byte-exact runtime-observed second postflight normalization $C315C0-$C31611.
 
                 org     $C315C0
 

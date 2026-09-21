@@ -1,4 +1,4 @@
-; Byte-exact static-only postflight tuple consumer $C3129A-$C31311.
+; Byte-exact runtime-observed postflight tuple consumer $C3129A-$C31311.
 
                 org     $C3129A
 

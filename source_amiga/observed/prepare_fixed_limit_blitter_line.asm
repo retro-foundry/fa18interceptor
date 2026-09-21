@@ -1,4 +1,4 @@
-; Byte-exact static-only alternate blitter-line entry $C2FA78-$C2FA7D.
+; Byte-exact runtime-observed alternate blitter-line entry $C2FA78-$C2FA7D.
 
                 org     $C2FA78
 

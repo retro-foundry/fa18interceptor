@@ -1,4 +1,4 @@
-; Byte-exact static-only adjusted renderer wrapper $C2F5C0-$C2F5F3.
+; Byte-exact runtime-observed adjusted renderer wrapper $C2F5C0-$C2F5F3.
 
                 org     $C2F5C0
 

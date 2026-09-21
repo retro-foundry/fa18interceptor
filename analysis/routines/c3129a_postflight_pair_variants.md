@@ -1,7 +1,7 @@
 # `$C3129A` postflight tuple-pair variant
 
-Classification: **static-only dataflow**. This is a target of the bounded
-postflight dispatcher, but it is not covered by current P-code exports.
+Classification: **runtime-observed dataflow**. The run024 frame-23000
+continuation executes this complete bounded-dispatch target.
 
 `source_amiga/observed/submit_postflight_pair_variants.asm` reproduces
 `$C3129A-$C31311` (120 bytes). It loads two consecutive four-word tuples from

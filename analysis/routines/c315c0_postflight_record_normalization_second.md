@@ -1,7 +1,7 @@
 # `$C315C0` second postflight record normalization
 
-Classification: **static-only dataflow**. This arithmetic span is part of the
-untraced postflight loop.
+Classification: **runtime-observed dataflow**. The run024 frame-23000
+continuation executes the complete arithmetic span.
 
 `source_amiga/observed/normalize_postflight_record_delta_second.asm`
 reproduces `$C315C0-$C31611` (82 bytes). It obtains a shift count from byte

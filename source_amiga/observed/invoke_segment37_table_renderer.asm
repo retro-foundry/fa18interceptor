@@ -1,4 +1,4 @@
-; Byte-exact static-only segment-37 table renderer wrapper $C309B6-$C309E1.
+; Byte-exact runtime-observed segment-37 table renderer wrapper $C309B6-$C309E1.
 
                 org     $C309B6
 
