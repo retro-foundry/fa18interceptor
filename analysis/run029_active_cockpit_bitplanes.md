@@ -22,6 +22,14 @@ At `$057858`, both snapshots contain:
 wait at `$057880`.  This is a run029 runtime list, distinct from the
 four-plane attract list at `$00A400` documented elsewhere.
 
+Across ordinary snapshots, the renderer-table publisher changes `$C456B6`
+from `$C4567E` at frame 992 to `$C4566E` at frame 993. A return-bounded normal
+frame-993 trace proves `$C2F558` performs that publication; `$C4566E` contains
+the four-plane subset `$0538F0,$0519B0,$04FA70,$04DB30`. This connects the
+normal renderer's table selection to the Copper-visible family, while leaving
+the individual glyph producer unassigned. See
+`analysis/routines/c2f558_outer_pointer_selector.md`.
+
 ## Changed-number evidence
 
 Across normal frames 993 to 994, the five displayed planes change by:
