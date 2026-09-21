@@ -150,6 +150,10 @@ lists the traced source/controller paths and links every X-Y/X-Z/Y-Z sheet.
 [The contact gallery](analysis/plots/model_identification_gallery.png) is the
 quick visual entry point.
 
+[Model-data export boundaries](analysis/data/model_export_boundaries.md)
+separates traced immutable geometry from unresolved renderer families and
+mutable workspaces that must not be exported as source models.
+
 Filled faces are captured at `$C2FF48` and, where needed, before orientation
 or clip rejection at `$C2005C`/`$C2469E`; line segments are captured at
 `$C212B0`. Coordinates are mutable renderer workspaces, so every sheet states
