@@ -18,6 +18,8 @@ def main():
     parser.add_argument('--size', type=int, default=2)
     parser.add_argument('--max-instructions', type=int, default=10000)
     parser.add_argument('--stop-pc', type=lambda text: int(text, 0))
+    parser.add_argument('--allow-future-input', action='store_true',
+                        help='permit a breakpoint before later recorded events; they are not delivered while stepping')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
@@ -42,13 +44,14 @@ def main():
             break
     if hit_frame is None or engine.regs()['pc'] != args.breakpoint:
         raise RuntimeError('Breakpoint not reached')
-    if any(frame > hit_frame for frame in events):
+    if not args.allow_future_input and any(frame > hit_frame for frame in events):
         raise ValueError('Future input after breakpoint')
 
     before = engine.memory(args.address, args.size)
     result = None
     for index in range(args.max_instructions):
-        pc = engine.regs()['pc']
+        registers_before = engine.regs()
+        pc = registers_before['pc']
         raw = engine.memory(pc, 10)
         engine.core.e9k_debug_step_instr()
         engine.core.retro_run()
@@ -56,7 +59,9 @@ def main():
         if after != before:
             result = {'kind': 'transition', 'instruction': index, 'pc': f'{pc:06x}',
                       'raw': raw.hex(), 'before': before.hex(), 'after': after.hex(),
-                      'next_pc': f'{engine.regs()["pc"]:06x}'}
+                      'next_pc': f'{engine.regs()["pc"]:06x}',
+                      'registers_before': registers_before,
+                      'registers_after': engine.regs()}
             break
         if args.stop_pc is not None and engine.regs()['pc'] == args.stop_pc:
             result = {'kind': 'stop_pc', 'instruction': index, 'pc': f'{args.stop_pc:06x}',
@@ -69,7 +74,8 @@ def main():
     report = {'breakpoint': f'{args.breakpoint:06x}', 'hit_frame': hit_frame,
               'address': f'{args.address:06x}', 'size': args.size,
               'max_instructions': args.max_instructions, 'result': result,
-              'limitation': 'Input was delivered in normal replay before breakpoint; no future input was stepped.'}
+              'limitation': 'Input was delivered in normal replay before breakpoint; no future input was stepped.',
+              'future_input_permitted': args.allow_future_input}
     args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(report))
     engine.core.retro_unload_game()

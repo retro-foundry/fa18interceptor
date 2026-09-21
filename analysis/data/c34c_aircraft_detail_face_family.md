@@ -34,9 +34,10 @@ renderer result, not a missing-line inference.
 faces reference vertex indices `0` through `35` (36 slots total). The bounded
 `$C3515E` transform supplies slots `0` through `21` only, ending at
 `$C462AC`. Slots `22` through `35` are already populated in the restored
-state; a CPU write watch at `$C462B0` misses across the full recorded replay
-from the initial state through frame 12000. Their upstream immutable source is
-therefore still untraced.
+state. Replay samples show `$C462B0` changes from zero to nonzero near frame
+2001 and continues to vary; its producer runs before the observed `$C0F090`
+flight-update entry. Their upstream immutable source—or live-object producer—
+is therefore still untraced.
 
 This model has renderer-proven topology and a partial static-vertex path, but
 is not yet a complete source-model export. The offset collector is
