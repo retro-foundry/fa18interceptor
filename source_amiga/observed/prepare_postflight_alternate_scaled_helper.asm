@@ -60,4 +60,3 @@ postflight_alternate_packed_ready:
                 move.l  d5,-(a7)
                 bsr.w   POSTFLIGHT_SCALED_HELPER
                 move.l  (a7)+,d5
-                move.l  #5,POSTFLIGHT_STATUS_LONG.l
