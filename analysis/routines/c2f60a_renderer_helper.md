@@ -17,3 +17,8 @@ its inputs and output ownership remain unassigned.
 `source_amiga/observed/enter_alternate_renderer_table_helper.asm`. It loads
 the same pointer block and second table as the primary entry, but selects the
 alternate word table at `$C2F7C6` before joining `$C2F688`.
+
+The bounded entry `$C2F66E-$C2F687` is reconstructed in
+`source_amiga/observed/enter_bounded_renderer_table_helper.asm`. It redirects
+to `$C2F60A` when `D1` meets/exceeds `$C45984`; otherwise it selects the
+`$C2F7C6/$C2F7E6` table pair and falls into the same shared body.
