@@ -16,3 +16,8 @@ three rounded shifted products into five records beginning at `$C4B390` with a
 
 This establishes arithmetic/dataflow only. The source values, matrix role,
 output records, scratch block, and display semantics remain unassigned.
+
+Its `$C2E758` child now has a separately captured, byte-exact initialization
+prefix in `source_amiga/observed/initialize_display_record_iteration.asm`.
+That prefix establishes an eight-entry iteration over these prepared records;
+it does not assign display semantics.

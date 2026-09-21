@@ -1,0 +1,21 @@
+# `$C2E758-$C2E7D3`: display-record iteration prefix
+
+Authority: `build/attract_cockpit_c2e758_trace/`, captured with no future
+input from the established attract cockpit state. The breakpoint at `$C2E758`
+hits on frame 4, executes 579 instructions, and returns to `$C0D7E0`. The raw
+P-code authority is committed at `pcode/raw/attract_cockpit_c2e758/`.
+
+This byte-exact prefix initializes `A0=$C4B990`, `A1=$C4B390`, and an eight
+entry (`D0=0..7`) loop. Each pass selects two wrapped neighbour indices based
+on the parity of `D0`, scales the indices by `$10`, and derives an eight-byte
+workspace slot at `$C4B990 + 8*D0`.
+
+The observed path clears the local byte flag, loads three words from the
+selected `$10`-stride record, adjusts two of them, checks the selected
+neighbour record, and calls `$C2EA5A` on the passing path. The following
+control-flow and the helper's display meaning remain unassigned. In
+particular, this does not establish that the records represent screen objects
+or pixels.
+
+The static prefix ends immediately after the direct helper call so that the
+unexecuted selector tail remains outside this bounded reconstruction.
