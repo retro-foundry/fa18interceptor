@@ -20,3 +20,10 @@ the signed matrix-product stage `$C2DEE0`.  On return, the dispatcher clears
 bit 4 of byte `$03(a1)` and branches on its prior state.  This is a direct
 record-triple-to-matrix handoff, not a claim about the substructure's object
 type.
+
+The post-matrix path then proves a guard sequence: byte `$05(a1)` equals `$0A`,
+bit 6 of `$03(a1)` is set, `$C45784` is nonzero, bit 7 of `$03(a1)` is clear,
+and the record remains class `$10`.  It halves word `$66`, rejects values below
+`$1C20` into raw code, and otherwise computes a threshold from `$66` and `$22`.
+When that threshold is below `$6E(a1)`, it clears word `$26(a1)`; the following
+path clears bit 2 of `$20(a1)`.  These are field/branch contracts only.
