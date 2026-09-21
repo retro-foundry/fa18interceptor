@@ -5,17 +5,17 @@
   "structural_call_targets": 36,
   "behavioral_routines": 31,
   "scenario_contracts": 10,
-  "symbolic_reconstructed_bytes": 35982,
+  "symbolic_reconstructed_bytes": 36110,
   "coverage_generated_by": "scripts/verify_reconstructions.py -> analysis/coverage.json",
   "pcode_exports": 122,
-  "reconstructed_slices": 369,
-  "coverage_denominator": 226320,
-  "coverage_denominator_note": "All CODE hunk bytes (285976) minus 59656 bytes in segments with positive data evidence: never executed in any P-code export, and referenced by reconstructed source only as data operands, never as branch or call targets.",
+  "reconstructed_slices": 372,
+  "coverage_denominator": 226072,
+  "coverage_denominator_note": "All CODE hunk bytes (285976) minus 59904 bytes in segments with positive data evidence: never executed in any P-code export, and referenced by reconstructed source only as data operands, never as branch or call targets.",
   "all_code_bytes": 285976,
   "observed_executed_bytes": 44218,
-  "reconstructed_runtime_backed_bytes": 20532,
+  "reconstructed_runtime_backed_bytes": 20660,
   "reconstructed_static_only_bytes": 15450,
-  "unclassified_bytes": 44920,
+  "unclassified_bytes": 44672,
   "unknowns": [
     "Exact game/OS allocation boundaries and complete code extent",
     "Keyboard dispatcher semantics and display callers up to the main loop",
@@ -40,7 +40,7 @@
       ]
     }
   },
-  "coverage_of_observed_percent": 46.43,
-  "coverage_of_instructions_percent": 15.9,
+  "coverage_of_observed_percent": 46.72,
+  "coverage_of_instructions_percent": 15.97,
   "game_exercised_percent": 17.11
 }
