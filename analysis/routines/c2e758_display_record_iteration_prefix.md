@@ -100,6 +100,13 @@ the negated and standard helpers under signed bounds, then publishes accepted
 results through `$C4E856/$C4E85E` before projection. All names remain
 dataflow-scoped.
 
+The final `$C2E994-$C2E9D7` case is reconstructed in
+`source_amiga/observed/dispatch_eighth_display_record_case.asm`. It reverses
+the seventh case's helper order and publishes through `$C4E85A/$C4E862` on
+acceptance. Together with the adjacent slices, this closes the whole
+`$C2E758-$C2EC67` child range as byte-exact source; its record semantics remain
+unassigned.
+
 The shared `$C2E9D8-$C2E9F7` continuation is reconstructed in
 `source_amiga/observed/continue_display_record_iteration.asm`. A negative `D5`
 clears the current eight-byte workspace slot and word 14 of the selected
