@@ -56,5 +56,12 @@ The pair is stored through `A3`, then the enclosing eight-entry loop advances.
 This proves the numerical transform and bounds, while the screen/display role
 of the output remains unassigned.
 
+The first continuation case, `$C2E7D4-$C2E7FB`, is reconstructed in
+`source_amiga/observed/dispatch_first_display_record_case.asm`. It branches on
+the preceding helper status, tests `$C45ACA`, conditionally calls the negated
+helper `$C2EAD0`, and on its zero result increments `$C4E85A`, writes `D0` to
+`$C4E862`, then enters the shared projection tail. These are dataflow facts;
+the counters and slots remain unassigned.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
