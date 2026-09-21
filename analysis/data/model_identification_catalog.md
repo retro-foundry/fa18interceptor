@@ -22,4 +22,6 @@ Each sheet is a tight-fit orthographic X-Y / X-Z / Y-Z plot. A coloured closed o
 
 The catalogue deliberately keeps the last entries separate from the static-model candidates. `$C45BEA` is especially important: `$C0D74A` selects it as an alternate display-record base and the matrix-update route writes that cache. The aircraft-like plot previously associated with it is actually the linked `$C34C` face family. `$C38F98` and `$C3A94E` remain drawable renderer families whose upstream static source/ownership is not yet established.
 
+The raster static-topology sheets are [the partial `$C3515E-$C35234` flight-object candidate](../plots/c351_c34c_static_topology_candidate.png) and [the `$C39D2A` long-component candidate](../plots/c39d2a_c3925_static_topology_candidate.png). The latter has competing carrier-deck and road/bridge-segment readings; its renderer evidence proves neither semantic label.
+
 Pre-cull-sheet qualification: `$C2005C` supplies selected faces before their orientation and clipping gates. The sheets retain one observed transformed sample for each distinct static face-record address, which recovers faces absent from `$C2FF48` without inventing topology. `$C212B0` line sheets remain supplementary because their endpoint lists may describe scene detail as well as model outlines.
