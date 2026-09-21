@@ -13,3 +13,6 @@ The traced generic route now has byte-exact source through `$C23BA3`: it
 decrements the local `+$4C` word, applies event/flag gates, calls `$C24568`,
 and derives a selected 512-byte record pointer from the `+$38` byte when that
 selector is valid.
+
+The next traced fragments load the selected record's `+$6C` word, apply the
+`+$02/$04/$05` record gates, and select the observed `$1D40` default threshold.
