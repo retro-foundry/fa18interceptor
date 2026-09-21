@@ -17,10 +17,10 @@ The words, in ascending address order, are:
 
 `$C33F8A` passes the table base in `A1`, with count/configuration `$1A/2/2`,
 to `$C32AA6`; `$C33F70` passes `$C33264`, 12 bytes into the same table, with
-`$A/2/2`. `$C32B00` consumes pairs from `A1`, while its `A2` byte selects a
-glyph through `$C3D790` and `$C330FE` composites that glyph. This proves the
-table supplies font-render coordinate pairs, but not its coordinate convention,
-visual field, or caller-visible effect.
+`$A/2/2`. `$C32B00` consumes each pair as `D5` (added to a renderer-pointer
+destination) and `D3` (ORed into the mask passed to `$C330FE`), while its `A2`
+byte selects a glyph through `$C3D790`. This proves a font-compositor
+offset/mask-pair table, not an x/y coordinate convention or a visual field.
 
 The enclosing segment is correctly still classified as executed code because
 its later `$C332B4` entry runs; current coverage accounting is segment-grained,

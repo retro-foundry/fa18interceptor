@@ -12,5 +12,5 @@ the table's second word into the mask, and calls `$C330FE`.
 
 `$C330FE` consumes `D4` as a byte-stream pointer, so the `$C3D790` lookup
 proves this path selects a glyph stream before feeding the existing
-strided-long font compositor. The coordinate-table semantics and the visual
-field remain unproven.
+strided-long font compositor. The `$C33258` table's destination-offset and
+mask semantics, and the visual field, remain unproven.
