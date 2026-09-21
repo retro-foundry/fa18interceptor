@@ -6,7 +6,7 @@ Each sheet is a tight-fit orthographic X-Y / X-Z / Y-Z plot. A coloured closed o
 
 | Candidate / family | Renderer evidence | Current identification | Sheet |
 | --- | --- | --- | --- |
-| `$C3515E` to `$C34C06-$C34C48` | 22 immutable input triples -> `$C46228-$C462A6` -> 5 pre-clip faces / 26 edges; one bounded no-future-input trace | trace-proven tapered external-aircraft detail model; user-facing name remains provisional | [evidence](c34c_aircraft_detail_face_family.md) Â· [sheet](../plots/c34c_aircraft_detail_preclip_unique_face_sheet.png) |
+| `$C3515E` to `$C34C06-$C34C48` | 22 immutable input triples -> `$C46228-$C462A6` -> 5 pre-clip faces / 26 edges; one bounded no-future-input trace | trace-proven tapered external-aircraft detail model; user-facing name remains provisional | [evidence](c34c_aircraft_detail_face_family.md) Â· [orthographic + isometric](../plots/c3515e_c34c_aircraft_detail_isometric_sheet.png) |
 | `$C34A9A/$C34A9C` | 42 unique pre-cull faces, 156 polygon edges; uses separate `$C48390` workspace in sampled frame | aircraft-like renderer family; immutable source linkage pending | [complete pre-cull sheet](../plots/external_aircraft_c34a9_preclip_complete_face_sheet.png) |
 | `$C39D2A` to `$C3925C/$C3925E` | 10 unique pre-cull faces, 45 polygon edges; static transform and both face contexts traced | **user-identified aircraft-carrier deck/island** candidate | [complete pre-cull sheet](../plots/c39d2a_c3925_preclip_complete_face_sheet.png) |
 | `$C35932` / `$C3B720` batches | 25 polygons, 86 polygon edges, 36 line segments; bounded transform-batch capture | broadest partial Golden Gate bridge composite | [assembled sheet](../plots/golden_gate_assembled_transform_batches_model_sheet.png) |

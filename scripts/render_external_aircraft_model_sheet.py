@@ -33,6 +33,8 @@ def main() -> None:
                         help="select one occurrence within an instance-source batch")
     parser.add_argument("--title", default="External-aircraft model candidate: $C3515E -> $C34A9A")
     parser.add_argument("--fit", action="store_true", help="centre and scale each view to its observed geometry")
+    parser.add_argument("--isometric", action="store_true",
+                        help="append an isometric projection using the same observed polygon vertices")
     args = parser.parse_args()
     inputs = args.input or [DEFAULT_INPUT]
     inputs = [path.resolve() for path in inputs]
@@ -75,7 +77,8 @@ def main() -> None:
     points.extend(point for segment in line_segments for point in segment)
     edge_count = sum(len(polygon) for polygon in polygons)
     extent = max(abs(value) for point in points for value in point)
-    width, height, panel, margin = 1800, 760, 520, 60
+    panel, margin = 520, 60
+    width, height = (2390 if args.isometric else 1800), 760
     image = Image.new("RGB", (width, height), "#101419")
     draw = ImageDraw.Draw(image)
     title_font, text_font, small_font = font(28), font(18), font(15)
@@ -86,15 +89,20 @@ def main() -> None:
         fill="#aab7c4",
         font=text_font,
     )
-    views = (("X-Y", 0, 1), ("X-Z", 0, 2), ("Y-Z", 1, 2))
+    views = [("X-Y", lambda point: (point[0], point[1])),
+             ("X-Z", lambda point: (point[0], point[2])),
+             ("Y-Z", lambda point: (point[1], point[2]))]
+    if args.isometric:
+        views.append(("isometric", lambda point: (point[0] - point[1], point[2] - (point[0] + point[1]) / 2)))
     colours = ("#65d5ff", "#ffcc66", "#8ee28e", "#ff8fab", "#c9a7ff", "#f7e36b",
                "#70e0c4", "#ffad70", "#a4c2f4", "#f4a4d7", "#d8f4a4")
-    for index, (label, horizontal, vertical) in enumerate(views):
+    for index, (label, project) in enumerate(views):
         left, top = 40 + index * 590, 150
         centre_x, centre_y = left + panel / 2, top + panel / 2
+        projected_points = [project(point) for point in points]
         if args.fit:
-            values_x = [point[horizontal] for point in points]
-            values_y = [point[vertical] for point in points]
+            values_x = [point[0] for point in projected_points]
+            values_y = [point[1] for point in projected_points]
             model_x = (min(values_x) + max(values_x)) / 2
             model_y = (min(values_y) + max(values_y)) / 2
             view_extent = max(1, max(max(values_x) - min(values_x), max(values_y) - min(values_y)) / 2)
@@ -111,18 +119,19 @@ def main() -> None:
         draw.text((left + 12, top + 12), label, fill="#f1f5f9", font=title_font)
         draw.text((left + 12, top + panel - 30), f"view span {view_extent * 2:.0f}", fill="#aab7c4", font=small_font)
         for polygon_index, polygon in enumerate(polygons):
-            projected = [(centre_x + (point[horizontal] - model_x) * scale,
-                          centre_y - (point[vertical] - model_y) * scale)
-                         for point in polygon]
+            projected = [(centre_x + (point[0] - model_x) * scale,
+                          centre_y - (point[1] - model_y) * scale)
+                         for point in (project(vertex) for vertex in polygon)]
             projected.append(projected[0])
             draw.line(projected, fill=colours[polygon_index % len(colours)], width=3, joint="curve")
             for x, y in projected[:-1]:
                 draw.ellipse((x - 3, y - 3, x + 3, y + 3), fill="#ffffff")
         for first, second in line_segments:
-            draw.line((centre_x + (first[horizontal] - model_x) * scale,
-                       centre_y - (first[vertical] - model_y) * scale,
-                       centre_x + (second[horizontal] - model_x) * scale,
-                       centre_y - (second[vertical] - model_y) * scale),
+            first_projected, second_projected = project(first), project(second)
+            draw.line((centre_x + (first_projected[0] - model_x) * scale,
+                       centre_y - (first_projected[1] - model_y) * scale,
+                       centre_x + (second_projected[0] - model_x) * scale,
+                       centre_y - (second_projected[1] - model_y) * scale),
                       fill="#e8edf3", width=2)
     draw.text((32, 705), "Connectivity is renderer-observed; coloured outlines are polygons and white strokes are C212B0 lines. No missing faces or links are inferred.", fill="#aab7c4", font=text_font)
     args.output.parent.mkdir(exist_ok=True)

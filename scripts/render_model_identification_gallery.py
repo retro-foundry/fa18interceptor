@@ -14,7 +14,7 @@ ITEMS = (
     ("Aircraft-like face family: C34A9A/C34A9C (42 pre-cull faces)",
      "external_aircraft_c34a9_preclip_complete_face_sheet.png"),
     ("Trace-proven aircraft detail: C3515E -> C34C (5 pre-clip faces)",
-     "c34c_aircraft_detail_preclip_unique_face_sheet.png"),
+     "c3515e_c34c_aircraft_detail_isometric_sheet.png"),
     ("Carrier/deck candidate: C39D2A -> C3925C/C3925E (10 pre-cull faces)",
      "c39d2a_c3925_preclip_complete_face_sheet.png"),
     ("Golden Gate assembled batches: C35932 + C3B720", "golden_gate_assembled_transform_batches_model_sheet.png"),
