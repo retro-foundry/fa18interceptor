@@ -21,3 +21,11 @@ Its `$C2E758` child now has a separately captured, byte-exact initialization
 prefix in `source_amiga/observed/initialize_display_record_iteration.asm`.
 That prefix establishes an eight-entry iteration over these prepared records;
 it does not assign display semantics.
+
+The complete `$C0D752-$C0DA9F` caller range is now reconstructed as adjacent
+byte-exact slices: this preparation prefix; the `$C0D7E0` workspace-pair
+selector; six selected record-emission branches; one fallback branch; and the
+`$C0DA70` success/rejection returns. A verifier coverage check claims all 846
+bytes in that range with no gaps. The split source files preserve readable
+branch-level contracts without promoting the record data to a visual or
+gameplay interpretation.
