@@ -10,5 +10,5 @@ are replaced with zero after a four-bit shift.
 
 The resulting value is adjusted by a conditional `-$64`, divided by 5,
 negated, offset by `$9F`, written to `$C4598C`, then used to index from
-`$C33A16` before invoking `$C33F54`. `$C338AB` is the next boundary. The
+`$C33A16` before invoking `$C33F54`. `$C338AA` is the next boundary. The
 record fields, packed representation, and helper effects remain unproven.
