@@ -28,3 +28,12 @@ enters `$C2FF48`, clears the blitter interrupt state, and passes this list to
 This proves a concrete record-to-projected-pair handoff. It is not yet a
 pixel-to-landmark attribution: checkpoint screenshots are not a valid visual
 oracle, and the particular source control entry has not been isolated.
+
+## Active control context
+
+At the `$C2FF48` entry, the active control-stream pointer is `$C355A6` in
+`$C45A36`; `A5` is `$C355D8`, and the selector workspace `$C45954` is `$000C`.
+These values keep the sample within the frame-12,000 Golden Gate stream, but
+`A5` has already advanced through walker control data. They therefore do not
+prove which individual `$C35720` dispatch entry produced this particular
+four-point list.
