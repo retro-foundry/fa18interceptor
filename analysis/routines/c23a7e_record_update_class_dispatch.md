@@ -16,3 +16,5 @@ selector is valid.
 
 The next traced fragments load the selected record's `+$6C` word, apply the
 `+$02/$04/$05` record gates, and select the observed `$1D40` default threshold.
+The next measured gates test the pending event and `+$05 == 8`, selecting the
+observed non-mode-eight continuation at `$C23D3C`.
