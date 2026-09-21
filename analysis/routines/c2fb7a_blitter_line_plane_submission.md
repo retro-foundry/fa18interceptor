@@ -30,3 +30,11 @@ These belong to the older four-plane working family, not the run029
 Copper-visible five-plane ranges beginning `$04DB30`.  Therefore a normal
 renderer line submission can prepare buffered content ahead of the visible
 display; it cannot alone attribute a changed visible cockpit glyph.
+
+The subsequent normal invocation reaches frame 995 through a different call
+chain (`$C302B6 -> ... -> $C2FB7A`) and returns to `$C302BA` after 30 traced
+instructions. Only its bit-2 mask path is enabled; `$C2FCB6` triggers a
+`$00C2` job with C/D pointer `$052CCB`. That address is inside the run029
+Copper-visible plane-3 range `$0519B0-$0538EF`. This proves the selected-table
+transition can move ordinary line rendering into the visible family, while
+still not associating this particular line with a numeric glyph.

@@ -73,6 +73,11 @@ four-plane working family.  This independently confirms the buffered cadence:
 the normal renderer is drawing a phase ahead of the Copper-visible five-plane
 cockpit buffers.  See `analysis/routines/c2fb7a_blitter_line_plane_submission.md`.
 
+After the frame-993 `$C456B6` publication, a normal frame-995 `$C2FB7A`
+invocation reaches `$052CCB` in Copper-visible plane 3. The same primitive
+therefore spans the off-screen and visible phases as the selected table changes;
+it is renderer timing evidence only, not a KTS/FT formatter identification.
+
 ## First changed-number boundary
 
 Adjacent normal-playback screenshots establish a real output transition:
