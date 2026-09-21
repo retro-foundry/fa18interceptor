@@ -17,5 +17,11 @@ control-flow and the helper's display meaning remain unassigned. In
 particular, this does not establish that the records represent screen objects
 or pixels.
 
+`$C2EA5A-$C2EACF` is separately reconstructed in
+`source_amiga/observed/adjust_display_record_pair.asm`. It saves `D0-D6`,
+loads a three-word neighbour tuple, performs signed multiply/divide adjustment
+with remainder-sensitive rounding, then branches to the common status tail at
+`$C2EC36` or `$C2EC58`. This establishes arithmetic and control flow only.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
