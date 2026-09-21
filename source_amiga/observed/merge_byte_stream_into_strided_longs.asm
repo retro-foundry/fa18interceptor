@@ -17,5 +17,5 @@ merge_byte_stream_into_strided_longs:
                 or.l    d0,d1
                 move.l  d1,(a3)
                 addq.w  #1,a0
-                adda.w  #$28,a3
+                dc.w    $D6FC,$0028 ; adda.w #$28,a3; retain original non-relaxed opcode
                 dbra    d6,merge_byte_stream_into_strided_longs
