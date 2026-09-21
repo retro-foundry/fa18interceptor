@@ -13,6 +13,9 @@ The traced generic route now has byte-exact source through `$C23BA3`: it
 decrements the local `+$4C` word, applies event/flag gates, calls `$C24568`,
 and derives a selected 512-byte record pointer from the `+$38` byte when that
 selector is valid.
+The selected generic continuation at `$C24056` gates record `+$7A`, validates
+bit 6 of the target `+$01` byte, sets source bit 0, and distinguishes the base
+record pointer from the alternate path.
 
 The next traced fragments load the selected record's `+$6C` word, apply the
 `+$02/$04/$05` record gates, and select the observed `$1D40` default threshold.
