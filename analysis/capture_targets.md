@@ -10,9 +10,9 @@ A reconstructed slice branches or calls into these, so the entry is already loca
 
 | Segment | Runtime range | Bytes | Call/branch references |
 |---:|---|---:|---:|
-| 40 | `$C33258-$C34A44` | 6,124 | 1 |
-| 38 | `$C31128-$C318F8` | 2,000 | 2 |
-| 7 | `$C06BF0-$C06C04` | 20 | 4 |
+| 40 | `$C33258-$C34A44` | 6,124 | 59 |
+| 38 | `$C31128-$C318F8` | 2,000 | 45 |
+| 7 | `$C06BF0-$C06C04` | 20 | 13 |
 
 Total: 3 segments, 8,144 bytes.
 
