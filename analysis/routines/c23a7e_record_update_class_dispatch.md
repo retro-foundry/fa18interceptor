@@ -18,3 +18,5 @@ The next traced fragments load the selected record's `+$6C` word, apply the
 `+$02/$04/$05` record gates, and select the observed `$1D40` default threshold.
 The next measured gates test the pending event and `+$05 == 8`, selecting the
 observed non-mode-eight continuation at `$C23D3C`.
+Its traced generic successor builds `A3 = $C46184 + ((record +$38 & $7F) << 9)`
+and transfers to `$C24056`; the `$FF` selector follows a separate route.
