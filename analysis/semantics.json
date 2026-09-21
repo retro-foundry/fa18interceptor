@@ -5,7 +5,7 @@
   "structural_call_targets": 36,
   "behavioral_routines": 31,
   "scenario_contracts": 10,
-  "symbolic_reconstructed_bytes": 16936,
+  "symbolic_reconstructed_bytes": 16944,
   "coverage_generated_by": "scripts/verify_reconstructions.py -> analysis/coverage.json",
   "coverage_denominator": 227536,
   "coverage_denominator_note": "All CODE hunk bytes (285976) minus 58440 bytes in segments with positive data evidence: never executed in any P-code export, and referenced by reconstructed source only as data operands, never as branch or call targets.",

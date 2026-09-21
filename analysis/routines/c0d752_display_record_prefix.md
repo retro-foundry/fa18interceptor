@@ -4,6 +4,10 @@ Authority: the return-bounded attract cockpit trace at
 `pcode/raw/attract_cockpit_c2fede/`. `$C2FEDE` calls `$C0D752`, which returns
 to `$C2FEF2`; this prefix executes before its `$C2E758` child.
 
+`$C0D74A` is a separate observed entry that loads `$C45BEA` into `A2` and
+branches into the common prefix at `$C0D758`; `$C0D752` instead loads
+`$C45BD8`. The alternate selection's meaning remains unassigned.
+
 The prefix takes five consecutive two-word inputs from `$C0D720`, combines each
 with a shifted part of `$C45A66` and three-word groups at `$C45BD8`, and writes
 three rounded shifted products into five records beginning at `$C4B390` with a
