@@ -13,3 +13,10 @@ them against `$1E00`.
 
 This proves record selection and class filtering, but not a collision/object
 identity interpretation for the scan or its relative triple.
+
+Each candidate advances the offset by `$200` and stops above `$1E00`.  An
+eligible candidate needs header bit `$40`, no `$600` header bits, and a `$5E`
+byte differing from the initial record.  Its class rejects `$30`, has a special
+`$20` path with `$A0000` in `A1`, and otherwise reaches raw class-specific code.
+The observed common path loads three longs at relative `$14/$18/$1C`, subtracts
+the caller's `D2` from the first, and applies the `A1` bound before scanning on.
