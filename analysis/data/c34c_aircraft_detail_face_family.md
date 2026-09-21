@@ -15,6 +15,12 @@ transformed display. The coordinates captured at `$C2469E` are likewise
 transformed workspace coordinates, so this establishes renderer topology and
 component ownership—not immutable vertex coordinates.
 
+The face records reside in the byte-stable `$C34A50-$C3555F` Hunk-41 payload,
+the same loaded data region that contains the `$C3515E` static aircraft-vertex
+candidate. This establishes a shared immutable *resource region*, although a
+direct transform trace from `$C3515E` to these five records has not yet been
+captured.
+
 This family is therefore kept as a linked aircraft component, separate from
 the `$C3515E -> $C34A9A/$C34A9C` static-vertex candidate until their shared
 upstream source is directly traced.

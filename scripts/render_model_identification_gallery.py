@@ -23,7 +23,6 @@ ITEMS = (
     ("Unidentified bridge-checkpoint family: C3B4FE", "bridge_checkpoint_c3b4fe_model_sheet.png"),
     ("Unidentified bridge-checkpoint family: C3B50A", "bridge_checkpoint_c3b50a_model_sheet.png"),
     ("Unidentified external-scene family: C38F98", "external_scene_c38f98_preclip_face_sheet.png"),
-    ("Unidentified Golden Gate checkpoint family: C45BEA", "golden_gate_c45bea_preclip_face_sheet.png"),
     ("Compact polyhedral family: C3A94C/C3A94E (6 pre-cull faces)",
      "frame12600_c3a94e_preclip_face_sheet.png"),
 )
