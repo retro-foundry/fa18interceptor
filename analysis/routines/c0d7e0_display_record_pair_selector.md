@@ -32,3 +32,9 @@ The fourth branch, `$C0D95A-$C0D9A7`, is reconstructed in
 `source_amiga/observed/emit_fourth_display_record_pair.asm`. It follows the
 same flag split, calling the fixed leaves in another order and appending a
 count-three, eight-byte-offset record only on its extended path.
+
+The fifth branch, `$C0D9A8-$C0D9E9`, is reconstructed in
+`source_amiga/observed/emit_threshold_display_record_pair.asm`. It initializes
+count four and compares `$C45A92` with `$3840`; the lower path adds two leaf
+calls through `$C4B39A`, while the greater-or-equal path uses the shorter
+sequence. The threshold's domain is unassigned.
