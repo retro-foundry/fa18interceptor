@@ -25,6 +25,10 @@ def triple(engine: Engine, offset: int) -> list[int]:
     return [signed_word(engine, VERTICES + offset + axis * 2) for axis in range(3)]
 
 
+def longword(engine: Engine, address: int) -> int:
+    return int.from_bytes(engine.memory(address, 4), "big", signed=False)
+
+
 def face(engine: Engine, address: int) -> tuple[list[int], list[list[int]]]:
     offsets = []
     for index in range(16):
@@ -65,10 +69,12 @@ def main() -> None:
                     raise RuntimeError(f"unexpected breakpoint PC {registers['pc']:06X}")
                 a2 = registers["a2"] & 0xFFFFFF
                 offsets, triples = face(engine, a2)
+                stack_pointer = registers["a7"] & 0xFFFFFF
                 submissions.append({
                     "submission": len(submissions), "host_frame": engine.frame,
                     "count": len(triples), "offsets": offsets, "triples": triples,
                     "context": {name: f"${registers[name] & 0xFFFFFF:06X}" for name in ("a5", "a2", "a3", "a4")},
+                    "return_pc": f"${longword(engine, stack_pointer) & 0xFFFFFF:06X}",
                 })
                 if len(submissions) >= args.max_faces:
                     break
