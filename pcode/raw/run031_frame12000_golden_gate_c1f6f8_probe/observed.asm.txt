@@ -1,0 +1,611 @@
+00c1f6f8  23fc000fffff00c456e6     move.l #0xfffff,(0x00c456e6).l
+00c1f702  42b900c456ea             clr.l (0x00c456ea).l
+00c1f708  2a7900c45a36             movea.l (0x00c45a36).l,A5
+00c1f70e  426eff9a                 clr.w (-0x66,A6)
+00c1f712  426eff84                 clr.w (-0x7c,A6)
+00c1f716  4a6eff9a                 tst.w (-0x66,A6)
+00c1f71a  66000128                 bne.w 0x00c1f844
+00c1f71e  301d                     move.w (A5)+,D0w
+00c1f720  6d00007e                 blt.w 0x00c1f7a0
+00c1f724  3e1d                     move.w (A5)+,D7w
+00c1f726  3207                     move.w D7w,D1w
+00c1f728  0241fc00                 andi.w #-0x400,D1w
+00c1f72c  0c41fc00                 cmpi.w #-0x400,D1w
+00c1f730  675c                     beq.b 0x00c1f78e
+00c1f732  02410c00                 andi.w #0xc00,D1w
+00c1f736  6644                     bne.b 0x00c1f77c
+00c1f77c  610004c4                 bsr.w 0x00c1fc42
+00c1f780  670c                     beq.b 0x00c1f78e
+00c1f78e  266effd4                 movea.l (-0x2c,A6),A3
+00c1f792  d6d5                     adda.w (A5),A3
+00c1f794  4bd3                     lea (A3),A5
+00c1f796  6000ff7e                 bra.w 0x00c1f716
+00c1f7a0  0c40ffff                 cmpi.w #-0x1,D0w
+00c1f7a4  67f4                     beq.b 0x00c1f79a
+00c1f7a6  426eff94                 clr.w (-0x6c,A6)
+00c1f7aa  426eff86                 clr.w (-0x7a,A6)
+00c1f7ae  3200                     move.w D0w,D1w
+00c1f7b0  02412000                 andi.w #0x2000,D1w
+00c1f7b4  671c                     beq.b 0x00c1f7d2
+00c1f7b6  526eff94                 addq.w #0x1,(-0x6c,A6)
+00c1f7ba  3200                     move.w D0w,D1w
+00c1f7bc  02411000                 andi.w #0x1000,D1w
+00c1f7c0  6706                     beq.b 0x00c1f7c8
+00c1f7c8  266effd4                 movea.l (-0x2c,A6),A3
+00c1f7cc  02400fff                 andi.w #0xfff,D0w
+00c1f7d0  6048                     bra.b 0x00c1f81a
+00c1f81a  3200                     move.w D0w,D1w
+00c1f81c  02411000                 andi.w #0x1000,D1w
+00c1f820  6706                     beq.b 0x00c1f828
+00c1f828  02400fff                 andi.w #0xfff,D0w
+00c1f82c  266effd4                 movea.l (-0x2c,A6),A3
+00c1f830  45f30000                 lea (0x0,A3,D0w*0x1),A2
+00c1f834  600000d0                 bra.w 0x00c1f906
+00c1f906  426eff96                 clr.w (-0x6a,A6)
+00c1f90a  4a6eff96                 tst.w (-0x6a,A6)
+00c1f90e  66dc                     bne.b 0x00c1f8ec
+00c1f910  301a                     move.w (A2)+,D0w
+00c1f912  6c3a                     bge.b 0x00c1f94e
+00c1f914  0c40ffff                 cmpi.w #-0x1,D0w
+00c1f918  660e                     bne.b 0x00c1f928
+00c1f928  3200                     move.w D0w,D1w
+00c1f92a  02414000                 andi.w #0x4000,D1w
+00c1f92e  6704                     beq.b 0x00c1f934
+00c1f934  02403fff                 andi.w #0x3fff,D0w
+00c1f938  41f900c1fce8             lea (0xc1fce8).l,A0
+00c1f93e  20700000                 movea.l (0x0,A0,D0w*0x1),A0
+00c1f942  4e90                     jsr (A0)
+00c1f944  6d00feb4                 blt.w 0x00c1f7fa
+00c1f948  816eff84                 or.w D0w,(-0x7c,A6)
+00c1f94c  60bc                     bra.b 0x00c1f90a
+00c1fc42  207900c45a32             movea.l (0x00c45a32).l,A0
+00c1fc48  3207                     move.w D7w,D1w
+00c1fc4a  02470c00                 andi.w #0xc00,D7w
+00c1fc4e  e047                     asr.w #0x8,D7w
+00c1fc50  e447                     asr.w #0x2,D7w
+00c1fc52  5347                     subq.w #0x1,D7w
+00c1fc54  6758                     beq.b 0x00c1fcae
+00c1fc56  5347                     subq.w #0x1,D7w
+00c1fc58  672a                     beq.b 0x00c1fc84
+00c1fc84  1a280006                 move.b (0x6,A0),D5b
+00c1fc88  0245000f                 andi.w #0xf,D5w
+00c1fc8c  3430000a                 move.w (0xa,A0,D0w*0x1),D2w
+00c1fc90  ea62                     asr.w D5,D2w
+00c1fc92  3e3900c45a72             move.w (0x00c45a72).l,D7w
+00c1fc98  4447                     neg.w D7w
+00c1fc9a  3c3900c45b2a             move.w (0x00c45b2a).l,D6w
+00c1fca0  3a3900c45ab8             move.w (0x00c45ab8).l,D5w
+00c1fca6  eb66                     asl.w D5,D6w
+00c1fca8  d446                     add.w D6w,D2w
+00c1fcaa  be42                     cmp.w D2w,D7w
+00c1fcac  601a                     bra.b 0x00c1fcc8
+00c1fcc8  6d06                     blt.b 0x00c1fcd0
+00c1fcca  0801000c                 btst.l #0xc,D1
+00c1fcce  4e75                     rts
+00c211dc  301a                     move.w (A2)+,D0w
+00c211de  3200                     move.w D0w,D1w
+00c211e0  0241003f                 andi.w #0x3f,D1w
+00c211e4  33c100c45954             move.w D1w,(0x00c45954).l
+00c211ea  e048                     lsr.w #0x8,D0w
+00c211ec  3d40ffd0                 move.w D0w,(-0x30,A6)
+00c211f0  47f900c48390             lea (0xc48390).l,A3
+00c211f6  d6da                     adda.w (A2)+,A3
+00c211f8  48e70064                 movem.l {  A5 A2 A1},-(SP)
+00c211fc  426eff82                 clr.w (-0x7e,A6)
+00c21200  4c9b003f                 movem.w (A3)+,{ D0 D1 D2 D3 D4 D5}
+00c21204  48b9003f00c4c592         movem.w { D0w D1w D2w D3w D4w D5w},(0xc4c592).l
+00c2120c  2f0b                     move.l A3,-(SP)
+00c2120e  4eb900c2ee4a             jsr 0x00c2ee4a.l
+00c21214  816eff82                 or.w D0w,(-0x7e,A6)
+00c21218  265f                     movea.l (SP)+,A3
+00c2121a  536effd0                 subq.w #0x1,(-0x30,A6)
+00c2121e  6ee0                     bgt.b 0x00c21200
+00c21220  4cdf2600                 movem.l (SP)+,{  A1 A2 A5}
+00c21224  302eff82                 move.w (-0x7e,A6),D0w
+00c21228  4e75                     rts
+00c2122a  301a                     move.w (A2)+,D0w
+00c2122c  3200                     move.w D0w,D1w
+00c2122e  0241003f                 andi.w #0x3f,D1w
+00c21232  33c100c45954             move.w D1w,(0x00c45954).l
+00c21238  e048                     lsr.w #0x8,D0w
+00c2123a  3d40ffd0                 move.w D0w,(-0x30,A6)
+00c2123e  301a                     move.w (A2)+,D0w
+00c21240  47f900c48390             lea (0xc48390).l,A3
+00c21246  4cb300fc0000             movem.w (0x0,A3,D0w*0x1),{  D2 D3 D4 D5 D6 D7}
+00c2124c  9a42                     sub.w D2w,D5w
+00c2124e  9c43                     sub.w D3w,D6w
+00c21250  9e44                     sub.w D4w,D7w
+00c21252  3845                     movea.w D5w,A4
+00c21254  d6da                     adda.w (A2)+,A3
+00c21256  48e70064                 movem.l {  A5 A2 A1},-(SP)
+00c2125a  426eff82                 clr.w (-0x7e,A6)
+00c2125e  4c9b003f                 movem.w (A3)+,{ D0 D1 D2 D3 D4 D5}
+00c21262  904c                     sub.w A4w,D0w
+00c21264  9246                     sub.w D6w,D1w
+00c21266  9447                     sub.w D7w,D2w
+00c21268  964c                     sub.w A4w,D3w
+00c2126a  9846                     sub.w D6w,D4w
+00c2126c  9a47                     sub.w D7w,D5w
+00c2126e  48b9003f00c4c592         movem.w { D0w D1w D2w D3w D4w D5w},(0xc4c592).l
+00c21276  2f0b                     move.l A3,-(SP)
+00c21278  48a70308                 movem.w {  A4w D7w D6w},-(SP)
+00c2127c  4eb900c2ee4a             jsr 0x00c2ee4a.l
+00c21282  816eff82                 or.w D0w,(-0x7e,A6)
+00c21286  4c9f10c0                 movem.w (SP)+,{  D6 D7 A4}
+00c2128a  265f                     movea.l (SP)+,A3
+00c2128c  536effd0                 subq.w #0x1,(-0x30,A6)
+00c21290  6ecc                     bgt.b 0x00c2125e
+00c21292  4cdf2600                 movem.l (SP)+,{  A1 A2 A5}
+00c21296  302eff82                 move.w (-0x7e,A6),D0w
+00c2129a  4e75                     rts
+00c212b0  48e70044                 movem.l {  A5 A1},-(SP)
+00c212b4  23fcffffffff00c456e6     move.l #-0x1,(0x00c456e6).l
+00c212be  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c212c4  426eff82                 clr.w (-0x7e,A6)
+00c212c8  426eff92                 clr.w (-0x6e,A6)
+00c212cc  4a6eff92                 tst.w (-0x6e,A6)
+00c212d0  6640                     bne.b 0x00c21312
+00c212d2  321a                     move.w (A2)+,D1w
+00c212d4  341a                     move.w (A2)+,D2w
+00c212d6  6c08                     bge.b 0x00c212e0
+00c212d8  526eff92                 addq.w #0x1,(-0x6e,A6)
+00c212dc  02427fff                 andi.w #0x7fff,D2w
+00c212e0  47f900c48390             lea (0xc48390).l,A3
+00c212e6  41f900c4c592             lea (0xc4c592).l,A0
+00c212ec  49f31000                 lea (0x0,A3,D1w*0x1),A4
+00c212f0  20dc                     move.l (A4)+,(A0)+
+00c212f2  3c14                     move.w (A4),D6w
+00c212f4  30c6                     move.w D6w,(A0)+
+00c212f6  49f32000                 lea (0x0,A3,D2w*0x1),A4
+00c212fa  20dc                     move.l (A4)+,(A0)+
+00c212fc  cc54                     and.w (A4),D6w
+00c212fe  6d10                     blt.b 0x00c21310
+00c21300  3094                     move.w (A4),(A0)
+00c21302  2f0a                     move.l A2,-(SP)
+00c21304  4eb900c2ee4a             jsr 0x00c2ee4a.l
+00c2130a  816eff82                 or.w D0w,(-0x7e,A6)
+00c2130e  245f                     movea.l (SP)+,A2
+00c21310  60ba                     bra.b 0x00c212cc
+00c21312  4cdf2200                 movem.l (SP)+,{  A1 A5}
+00c21316  302eff82                 move.w (-0x7e,A6),D0w
+00c2131a  4e75                     rts
+00c2131c  48e70044                 movem.l {  A5 A1},-(SP)
+00c21320  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c21326  301a                     move.w (A2)+,D0w
+00c21328  426eff82                 clr.w (-0x7e,A6)
+00c2132c  426eff92                 clr.w (-0x6e,A6)
+00c21330  4a6eff92                 tst.w (-0x6e,A6)
+00c21334  665e                     bne.b 0x00c21394
+00c21336  321a                     move.w (A2)+,D1w
+00c21338  4a52                     tst.w (A2)
+00c2133a  6c04                     bge.b 0x00c21340
+00c21340  47f900c48390             lea (0xc48390).l,A3
+00c21346  4cb300fc0000             movem.w (0x0,A3,D0w*0x1),{  D2 D3 D4 D5 D6 D7}
+00c2134c  9a42                     sub.w D2w,D5w
+00c2134e  9c43                     sub.w D3w,D6w
+00c21350  9e44                     sub.w D4w,D7w
+00c21352  41f900c4c592             lea (0xc4c592).l,A0
+00c21358  4cb3001c1000             movem.w (0x0,A3,D1w*0x1),{  D2 D3 D4}
+00c2135e  9445                     sub.w D5w,D2w
+00c21360  9646                     sub.w D6w,D3w
+00c21362  9847                     sub.w D7w,D4w
+00c21364  4890001c                 movem.w {  D2w D3w D4w},(A0)
+00c21368  321a                     move.w (A2)+,D1w
+00c2136a  02417fff                 andi.w #0x7fff,D1w
+00c2136e  4cb3001c1000             movem.w (0x0,A3,D1w*0x1),{  D2 D3 D4}
+00c21374  9445                     sub.w D5w,D2w
+00c21376  9646                     sub.w D6w,D3w
+00c21378  9847                     sub.w D7w,D4w
+00c2137a  48a8001c0006             movem.w {  D2w D3w D4w},(0x6, A0)
+00c21380  2f0a                     move.l A2,-(SP)
+00c21382  3f00                     move.w D0w,-(SP)
+00c21384  4eb900c2ee4a             jsr 0x00c2ee4a.l
+00c2138a  816eff82                 or.w D0w,(-0x7e,A6)
+00c2138e  301f                     move.w (SP)+,D0w
+00c21390  245f                     movea.l (SP)+,A2
+00c21392  609c                     bra.b 0x00c21330
+00c2139e  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c213a4  4c9a0087                 movem.w (A2)+,{ D0 D1 D2 D7}
+00c213a8  47f900c48390             lea (0xc48390).l,A3
+00c213ae  41f900c4bf90             lea (0xc4bf90).l,A0
+00c213b4  4258                     clr.w (A0)+
+00c213b6  30fc0004                 move.w #0x4,(A0)+
+00c213ba  20f31000                 move.l (0x0,A3,D1w*0x1),(A0)+
+00c213be  30f31004                 move.w (0x4,A3,D1w*0x1),(A0)+
+00c213c2  3c28fffe                 move.w (-0x2,A0),D6w
+00c213c6  20f32000                 move.l (0x0,A3,D2w*0x1),(A0)+
+00c213ca  30f32004                 move.w (0x4,A3,D2w*0x1),(A0)+
+00c213ce  cc68fffe                 and.w (-0x2,A0),D6w
+00c213d2  20f37000                 move.l (0x0,A3,D7w*0x1),(A0)+
+00c213d6  30f37004                 move.w (0x4,A3,D7w*0x1),(A0)+
+00c213da  cc68fffe                 and.w (-0x2,A0),D6w
+00c213de  4cb3003f0000             movem.w (0x0,A3,D0w*0x1),{ D0 D1 D2 D3 D4 D5}
+00c213e4  9640                     sub.w D0w,D3w
+00c213e6  9841                     sub.w D1w,D4w
+00c213e8  9a42                     sub.w D2w,D5w
+00c213ea  4cb300077000             movem.w (0x0,A3,D7w*0x1),{ D0 D1 D2}
+00c213f0  9043                     sub.w D3w,D0w
+00c213f2  9244                     sub.w D4w,D1w
+00c213f4  9445                     sub.w D5w,D2w
+00c213f6  48900007                 movem.w { D0w D1w D2w},(A0)
+00c213fa  cc42                     and.w D2w,D6w
+00c213fc  6d10                     blt.b 0x00c2140e
+00c213fe  48e70064                 movem.l {  A5 A2 A1},-(SP)
+00c21402  4eb900c2469e             jsr 0x00c2469e.l
+00c21408  4cdf2600                 movem.l (SP)+,{  A1 A2 A5}
+00c2140c  4e75                     rts
+00c21412  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c21418  3e1a                     move.w (A2)+,D7w
+00c2141a  47f900c48390             lea (0xc48390).l,A3
+00c21420  41f900c4bf90             lea (0xc4bf90).l,A0
+00c21426  4258                     clr.w (A0)+
+00c21428  30fc0004                 move.w #0x4,(A0)+
+00c2142c  20f37000                 move.l (0x0,A3,D7w*0x1),(A0)+
+00c21430  30f37004                 move.w (0x4,A3,D7w*0x1),(A0)+
+00c21434  3c28fffe                 move.w (-0x2,A0),D6w
+00c21438  301a                     move.w (A2)+,D0w
+00c2143a  4cb3003f0000             movem.w (0x0,A3,D0w*0x1),{ D0 D1 D2 D3 D4 D5}
+00c21440  9640                     sub.w D0w,D3w
+00c21442  9841                     sub.w D1w,D4w
+00c21444  9a42                     sub.w D2w,D5w
+00c21446  4cb300077000             movem.w (0x0,A3,D7w*0x1),{ D0 D1 D2}
+00c2144c  9043                     sub.w D3w,D0w
+00c2144e  9244                     sub.w D4w,D1w
+00c21450  9445                     sub.w D5w,D2w
+00c21452  30c0                     move.w D0w,(A0)+
+00c21454  30c1                     move.w D1w,(A0)+
+00c21456  30c2                     move.w D2w,(A0)+
+00c21458  cc42                     and.w D2w,D6w
+00c2145a  3e1a                     move.w (A2)+,D7w
+00c2145c  4cb300077000             movem.w (0x0,A3,D7w*0x1),{ D0 D1 D2}
+00c21462  9043                     sub.w D3w,D0w
+00c21464  9244                     sub.w D4w,D1w
+00c21466  9445                     sub.w D5w,D2w
+00c21468  30c0                     move.w D0w,(A0)+
+00c2146a  30c1                     move.w D1w,(A0)+
+00c2146c  30c2                     move.w D2w,(A0)+
+00c2146e  cc42                     and.w D2w,D6w
+00c21470  20f37000                 move.l (0x0,A3,D7w*0x1),(A0)+
+00c21474  30b37004                 move.w (0x4,A3,D7w*0x1),(A0)
+00c21478  cc50                     and.w (A0),D6w
+00c2147a  6d10                     blt.b 0x00c2148c
+00c2148c  7000                     moveq 0x0,D0
+00c2148e  4e75                     rts
+00c21490  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c21496  47f900c48390             lea (0xc48390).l,A3
+00c2149c  d6da                     adda.w (A2)+,A3
+00c2149e  0cb9ffffff8000c45a78     cmpi.l #-0x80,(0x00c45a78).l
+00c214a8  6d52                     blt.b 0x00c214fc
+00c214fc  7000                     moveq 0x0,D0
+00c214fe  4e75                     rts
+00c21500  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c21506  47f900c48390             lea (0xc48390).l,A3
+00c2150c  d6da                     adda.w (A2)+,A3
+00c2150e  0cb9ffffff8000c45a78     cmpi.l #-0x80,(0x00c45a78).l
+00c21518  6de2                     blt.b 0x00c214fc
+00c2159e  47f900c48390             lea (0xc48390).l,A3
+00c215a4  41f900c4bf92             lea (0xc4bf92).l,A0
+00c215aa  30fc0003                 move.w #0x3,(A0)+
+00c215ae  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c215b4  287900c45a32             movea.l (0x00c45a32).l,A4
+00c215ba  301a                     move.w (A2)+,D0w
+00c215bc  3234000a                 move.w (0xa,A4,D0w*0x1),D1w
+00c215c0  3434000e                 move.w (0xe,A4,D0w*0x1),D2w
+00c215c4  3601                     move.w D1w,D3w
+00c215c6  3802                     move.w D2w,D4w
+00c215c8  301a                     move.w (A2)+,D0w
+00c215ca  3c00                     move.w D0w,D6w
+00c215cc  0880000f                 bclr.l #0xf,D0
+00c215d0  9274000a                 sub.w (0xa,A4,D0w*0x1),D1w
+00c215d4  9474000e                 sub.w (0xe,A4,D0w*0x1),D2w
+00c215d8  1e2c0006                 move.b (0x6,A4),D7b
+00c215dc  0247000f                 andi.w #0xf,D7w
+00c215e0  ee63                     asr.w D7,D3w
+00c215e2  ee64                     asr.w D7,D4w
+00c215e4  d67900c45b2a             add.w (0x00c45b2a).l,D3w
+00c215ea  d87900c45b2e             add.w (0x00c45b2e).l,D4w
+00c215f0  3e3900c45ab8             move.w (0x00c45ab8).l,D7w
+00c215f6  ef63                     asl.w D7,D3w
+00c215f8  ef64                     asl.w D7,D4w
+00c215fa  d67900c45a72             add.w (0x00c45a72).l,D3w
+00c21600  d87900c45a76             add.w (0x00c45a76).l,D4w
+00c21606  c7c1                     muls.w D1w,D3
+00c21608  c9c2                     muls.w D2w,D4
+00c2160a  301a                     move.w (A2)+,D0w
+00c2160c  20f30000                 move.l (0x0,A3,D0w*0x1),(A0)+
+00c21610  30f30004                 move.w (0x4,A3,D0w*0x1),(A0)+
+00c21614  d6da                     adda.w (A2)+,A3
+00c21616  48e70064                 movem.l {  A5 A2 A1},-(SP)
+00c2161a  d883                     add.l D3,D4
+00c2161c  6c06                     bge.b 0x00c21624
+00c2161e  4a46                     tst.w D6w
+00c21620  6d06                     blt.b 0x00c21628
+00c21628  20d3                     move.l (A3),(A0)+
+00c2162a  30eb0004                 move.w (0x4,A3),(A0)+
+00c2162e  20eb000c                 move.l (0xc,A3),(A0)+
+00c21632  30ab0010                 move.w (0x10,A3),(A0)
+00c21636  3e28fff4                 move.w (-0xc,A0),D7w
+00c2163a  ce68fffa                 and.w (-0x6,A0),D7w
+00c2163e  ce50                     and.w (A0),D7w
+00c21640  6d40                     blt.b 0x00c21682
+00c21682  4cdf2600                 movem.l (SP)+,{  A1 A2 A5}
+00c21686  7000                     moveq 0x0,D0
+00c21688  4e75                     rts
+00c2168a  47f900c48390             lea (0xc48390).l,A3
+00c21690  41f900c4bf92             lea (0xc4bf92).l,A0
+00c21696  30fc0003                 move.w #0x3,(A0)+
+00c2169a  33da00c45954             move.w (A2)+,(0x00c45954).l
+00c216a0  301a                     move.w (A2)+,D0w
+00c216a2  4cb300fc0000             movem.w (0x0,A3,D0w*0x1),{  D2 D3 D4 D5 D6 D7}
+00c216a8  9a42                     sub.w D2w,D5w
+00c216aa  9c43                     sub.w D3w,D6w
+00c216ac  9e44                     sub.w D4w,D7w
+00c216ae  4846                     swap D6
+00c216b0  4847                     swap D7
+00c216b2  287900c45a32             movea.l (0x00c45a32).l,A4
+00c216b8  301a                     move.w (A2)+,D0w
+00c216ba  3234000a                 move.w (0xa,A4,D0w*0x1),D1w
+00c216be  3434000e                 move.w (0xe,A4,D0w*0x1),D2w
+00c216c2  3601                     move.w D1w,D3w
+00c216c4  3802                     move.w D2w,D4w
+00c216c6  301a                     move.w (A2)+,D0w
+00c216c8  3c00                     move.w D0w,D6w
+00c216ca  0880000f                 bclr.l #0xf,D0
+00c216ce  9274000a                 sub.w (0xa,A4,D0w*0x1),D1w
+00c216d2  9474000e                 sub.w (0xe,A4,D0w*0x1),D2w
+00c216d6  1e2c0006                 move.b (0x6,A4),D7b
+00c216da  0247000f                 andi.w #0xf,D7w
+00c216de  ee63                     asr.w D7,D3w
+00c216e0  ee64                     asr.w D7,D4w
+00c216e2  d67900c45b2a             add.w (0x00c45b2a).l,D3w
+00c216e8  d87900c45b2e             add.w (0x00c45b2e).l,D4w
+00c216ee  3e3900c45ab8             move.w (0x00c45ab8).l,D7w
+00c216f4  ef63                     asl.w D7,D3w
+00c216f6  ef64                     asl.w D7,D4w
+00c216f8  d67900c45a72             add.w (0x00c45a72).l,D3w
+00c216fe  d87900c45a76             add.w (0x00c45a76).l,D4w
+00c21704  c7c1                     muls.w D1w,D3
+00c21706  c9c2                     muls.w D2w,D4
+00c21708  d883                     add.l D3,D4
+00c2170a  4846                     swap D6
+00c2170c  4847                     swap D7
+00c2170e  301a                     move.w (A2)+,D0w
+00c21710  4cb3000e0000             movem.w (0x0,A3,D0w*0x1),{  D1 D2 D3}
+00c21716  9245                     sub.w D5w,D1w
+00c21718  9446                     sub.w D6w,D2w
+00c2171a  9647                     sub.w D7w,D3w
+00c2171c  30c1                     move.w D1w,(A0)+
+00c2171e  30c2                     move.w D2w,(A0)+
+00c21720  30c3                     move.w D3w,(A0)+
+00c21722  d6da                     adda.w (A2)+,A3
+00c21724  48e70064                 movem.l {  A5 A2 A1},-(SP)
+00c21728  4a84                     tst.l D4
+00c2172a  6c0e                     bge.b 0x00c2173a
+00c2172c  4a86                     tst.l D6
+00c2172e  6d0e                     blt.b 0x00c2173e
+00c21732  4cdf2600                 movem.l (SP)+,{  A1 A2 A5}
+00c21736  7000                     moveq 0x0,D0
+00c21738  4e75                     rts
+00c2173e  4c9300fc                 movem.w (A3),{  D2 D3 D4 D5 D6 D7}
+00c21742  9a42                     sub.w D2w,D5w
+00c21744  9c43                     sub.w D3w,D6w
+00c21746  9e44                     sub.w D4w,D7w
+00c21748  4cab00070012             movem.w (0x12, A3),{ D0 D1 D2}
+00c2174e  30c0                     move.w D0w,(A0)+
+00c21750  30c1                     move.w D1w,(A0)+
+00c21752  30c2                     move.w D2w,(A0)+
+00c21754  d045                     add.w D5w,D0w
+00c21756  d246                     add.w D6w,D1w
+00c21758  d447                     add.w D7w,D2w
+00c2175a  3442                     movea.w D2w,A2
+00c2175c  4cab00fc0006             movem.w (0x6, A3),{  D2 D3 D4 D5 D6 D7}
+00c21762  9a42                     sub.w D2w,D5w
+00c21764  9c43                     sub.w D3w,D6w
+00c21766  9e44                     sub.w D4w,D7w
+00c21768  340a                     move.w A2w,D2w
+00c2176a  d045                     add.w D5w,D0w
+00c2176c  d246                     add.w D6w,D1w
+00c2176e  d447                     add.w D7w,D2w
+00c21770  48900007                 movem.w { D0w D1w D2w},(A0)
+00c21774  c468fff8                 and.w (-0x8,A0),D2w
+00c21778  c468fffe                 and.w (-0x2,A0),D2w
+00c2177c  6db4                     blt.b 0x00c21732
+00c2469e  4e71                     nop
+00c246a0  4e56fffa                 link.w A6,-0x6
+00c246a4  4247                     clr.w D7w
+00c246a6  41f900c4bf90             lea (0xc4bf90).l,A0
+00c246ac  3d58fffe                 move.w (A0)+,(-0x2,A6)
+00c246b0  3018                     move.w (A0)+,D0w
+00c246b2  0c400003                 cmpi.w #0x3,D0w
+00c246b6  6dd4                     blt.b 0x00c2468c
+00c246b8  3d40fffc                 move.w D0w,(-0x4,A6)
+00c246bc  43f900c4b990             lea (0xc4b990).l,A1
+00c246c2  45f900c4e91a             lea (0xc4e91a).l,A2
+00c246c8  47f900c4e910             lea (0xc4e910).l,A3
+00c246ce  49f900c4e874             lea (0xc4e874).l,A4
+00c246d4  4294                     clr.l (A4)
+00c246d6  42ac0004                 clr.l (0x4,A4)
+00c246da  7001                     moveq 0x1,D0
+00c246dc  67aa                     beq.b 0x00c24688
+00c246de  536efffc                 subq.w #0x1,(-0x4,A6)
+00c246e2  6d0003b0                 blt.w 0x00c24a94
+00c246e6  4c980007                 movem.w (A0)+,{ D0 D1 D2}
+00c246ea  362efffe                 move.w (-0x2,A6),D3w
+00c246ee  e7a0                     asl.l D3,D0
+00c246f0  e7a1                     asl.l D3,D1
+00c246f2  e7a2                     asl.l D3,D2
+00c246f4  4a14                     tst.b (A4)
+00c246f6  660c                     bne.b 0x00c24704
+00c246f8  48aa00070006             movem.w { D0w D1w D2w},(0x6, A2)
+00c246fe  5214                     addq.b #0x1,(A4)
+00c24700  60000090                 bra.w 0x00c24792
+00c24704  4c920038                 movem.w (A2),{  D3 D4 D5}
+00c24708  b242                     cmp.w D2w,D1w
+00c2470a  6e08                     bgt.b 0x00c24714
+00c2470c  b845                     cmp.w D5w,D4w
+00c2470e  6f000082                 ble.w 0x00c24792
+00c24714  b845                     cmp.w D5w,D4w
+00c24716  6e00007a                 bgt.w 0x00c24792
+00c2471a  48a7e000                 movem.w {  D2w D1w D0w},-(SP)
+00c2471e  9244                     sub.w D4w,D1w
+00c24720  4442                     neg.w D2w
+00c24722  d445                     add.w D5w,D2w
+00c24724  d441                     add.w D1w,D2w
+00c24726  6768                     beq.b 0x00c24790
+00c24728  9a44                     sub.w D4w,D5w
+00c2472a  c3c5                     muls.w D5w,D1
+00c2472c  3c02                     move.w D2w,D6w
+00c2472e  6c02                     bge.b 0x00c24732
+00c24732  e246                     asr.w #0x1,D6w
+00c24734  83c2                     divs.w D2w,D1
+00c24736  4841                     swap D1
+00c24738  4a41                     tst.w D1w
+00c2473a  6c02                     bge.b 0x00c2473e
+00c2473c  4441                     neg.w D1w
+00c2473e  bc41                     cmp.w D1w,D6w
+00c24740  6e0e                     bgt.b 0x00c24750
+00c24750  4841                     swap D1
+00c24752  d244                     add.w D4w,D1w
+00c24754  9043                     sub.w D3w,D0w
+00c24756  c1c5                     muls.w D5w,D0
+00c24758  81c2                     divs.w D2w,D0
+00c2475a  4840                     swap D0
+00c2475c  4a40                     tst.w D0w
+00c2475e  6c02                     bge.b 0x00c24762
+00c24762  bc40                     cmp.w D0w,D6w
+00c24764  6e0e                     bgt.b 0x00c24774
+00c24774  4840                     swap D0
+00c24776  d043                     add.w D3w,D0w
+00c24778  3401                     move.w D1w,D2w
+00c2477a  48930007                 movem.w { D0w D1w D2w},(A3)
+00c2477e  4c9f0007                 movem.w (SP)+,{ D0 D1 D2}
+00c24782  48920007                 movem.w { D0w D1w D2w},(A2)
+00c24786  61000038                 bsr.w 0x00c247c0
+00c2478a  522c0004                 addq.b #0x1,(0x4,A4)
+00c2478e  6006                     bra.b 0x00c24796
+00c24792  48920007                 movem.w { D0w D1w D2w},(A2)
+00c24796  b242                     cmp.w D2w,D1w
+00c24798  6e0e                     bgt.b 0x00c247a8
+00c2479a  48930007                 movem.w { D0w D1w D2w},(A3)
+00c2479e  61000020                 bsr.w 0x00c247c0
+00c247a2  670a                     beq.b 0x00c247ae
+00c247a4  522c0004                 addq.b #0x1,(0x4,A4)
+00c247a8  7001                     moveq 0x1,D0
+00c247aa  6000ff30                 bra.w 0x00c246dc
+00c247c0  48a7e000                 movem.w {  D2w D1w D0w},-(SP)
+00c247c4  4c930007                 movem.w (A3),{ D0 D1 D2}
+00c247c8  4a2c0001                 tst.b (0x1,A4)
+00c247cc  660e                     bne.b 0x00c247dc
+00c247ce  48aa00070016             movem.w { D0w D1w D2w},(0x16, A2)
+00c247d4  522c0001                 addq.b #0x1,(0x1,A4)
+00c247d8  600000a0                 bra.w 0x00c2487a
+00c247dc  4caa00380010             movem.w (0x10, A2),{  D3 D4 D5}
+00c247e2  4441                     neg.w D1w
+00c247e4  4444                     neg.w D4w
+00c247e6  b242                     cmp.w D2w,D1w
+00c247e8  6e08                     bgt.b 0x00c247f2
+00c247ea  b845                     cmp.w D5w,D4w
+00c247ec  6f00008a                 ble.w 0x00c24878
+00c24878  4441                     neg.w D1w
+00c2487a  48aa00070010             movem.w { D0w D1w D2w},(0x10, A2)
+00c24880  4441                     neg.w D1w
+00c24882  b242                     cmp.w D2w,D1w
+00c24884  6e10                     bgt.b 0x00c24896
+00c24886  4441                     neg.w D1w
+00c24888  48930007                 movem.w { D0w D1w D2w},(A3)
+00c2488c  61000024                 bsr.w 0x00c248b2
+00c24890  670c                     beq.b 0x00c2489e
+00c24892  522c0005                 addq.b #0x1,(0x5,A4)
+00c24896  7001                     moveq 0x1,D0
+00c24898  4c9f0007                 movem.w (SP)+,{ D0 D1 D2}
+00c2489c  4e75                     rts
+00c248b2  48a7e000                 movem.w {  D2w D1w D0w},-(SP)
+00c248b6  4c930007                 movem.w (A3),{ D0 D1 D2}
+00c248ba  4a2c0002                 tst.b (0x2,A4)
+00c248be  660e                     bne.b 0x00c248ce
+00c248c0  48aa00070026             movem.w { D0w D1w D2w},(0x26, A2)
+00c248c6  522c0002                 addq.b #0x1,(0x2,A4)
+00c248ca  60000096                 bra.w 0x00c24962
+00c248ce  4caa00380020             movem.w (0x20, A2),{  D3 D4 D5}
+00c248d4  3c02                     move.w D2w,D6w
+00c248d6  b042                     cmp.w D2w,D0w
+00c248d8  6e08                     bgt.b 0x00c248e2
+00c248e2  b645                     cmp.w D5w,D3w
+00c248e4  6e00007c                 bgt.w 0x00c24962
+00c24962  48aa00070020             movem.w { D0w D1w D2w},(0x20, A2)
+00c24968  b042                     cmp.w D2w,D0w
+00c2496a  6e0e                     bgt.b 0x00c2497a
+00c2497a  7001                     moveq 0x1,D0
+00c2497c  4c9f0007                 movem.w (SP)+,{ D0 D1 D2}
+00c24980  4e75                     rts
+00c24a94  4a2c0004                 tst.b (0x4,A4)
+00c24a98  6700008e                 beq.w 0x00c24b28
+00c24a9c  4c92003f                 movem.w (A2),{ D0 D1 D2 D3 D4 D5}
+00c24aa0  b242                     cmp.w D2w,D1w
+00c24aa2  6e1a                     bgt.b 0x00c24abe
+00c24abe  b845                     cmp.w D5w,D4w
+00c24ac0  6e000066                 bgt.w 0x00c24b28
+00c24ac4  9244                     sub.w D4w,D1w
+00c24ac6  4442                     neg.w D2w
+00c24ac8  d445                     add.w D5w,D2w
+00c24aca  d441                     add.w D1w,D2w
+00c24acc  67de                     beq.b 0x00c24aac
+00c24ace  9a44                     sub.w D4w,D5w
+00c24ad0  c3c5                     muls.w D5w,D1
+00c24ad2  3c02                     move.w D2w,D6w
+00c24ad4  6c02                     bge.b 0x00c24ad8
+00c24ad8  e246                     asr.w #0x1,D6w
+00c24ada  83c2                     divs.w D2w,D1
+00c24adc  4841                     swap D1
+00c24ade  4a41                     tst.w D1w
+00c24ae0  6c02                     bge.b 0x00c24ae4
+00c24ae2  4441                     neg.w D1w
+00c24ae4  bc41                     cmp.w D1w,D6w
+00c24ae6  6e0e                     bgt.b 0x00c24af6
+00c24af6  4841                     swap D1
+00c24af8  d244                     add.w D4w,D1w
+00c24afa  9043                     sub.w D3w,D0w
+00c24afc  c1c5                     muls.w D5w,D0
+00c24afe  81c2                     divs.w D2w,D0
+00c24b00  4840                     swap D0
+00c24b02  4a40                     tst.w D0w
+00c24b04  6c02                     bge.b 0x00c24b08
+00c24b08  bc40                     cmp.w D0w,D6w
+00c24b0a  6e0e                     bgt.b 0x00c24b1a
+00c24b1a  4840                     swap D0
+00c24b1c  d043                     add.w D3w,D0w
+00c24b1e  3401                     move.w D1w,D2w
+00c24b20  48930007                 movem.w { D0w D1w D2w},(A3)
+00c24b24  6100fc9a                 bsr.w 0x00c247c0
+00c24b28  4a2c0005                 tst.b (0x5,A4)
+00c24b2c  6700009a                 beq.w 0x00c24bc8
+00c24b30  4caa003f0010             movem.w (0x10, A2),{ D0 D1 D2 D3 D4 D5}
+00c24b36  4441                     neg.w D1w
+00c24b38  4444                     neg.w D4w
+00c24b3a  b242                     cmp.w D2w,D1w
+00c24b3c  6e1a                     bgt.b 0x00c24b58
+00c24b3e  b845                     cmp.w D5w,D4w
+00c24b40  6f000086                 ble.w 0x00c24bc8
+00c24bc8  4a2c0006                 tst.b (0x6,A4)
+00c24bcc  67000090                 beq.w 0x00c24c5e
+00c24c5e  4a2c0007                 tst.b (0x7,A4)
+00c24c62  6700009a                 beq.w 0x00c24cfe
+00c24cfe  4a47                     tst.w D7w
+00c24d00  67000070                 beq.w 0x00c24d72
+00c24d72  4e5e                     unlk A6
+00c24d74  7000                     moveq 0x0,D0
+00c24d76  4e75                     rts
+00c2ee44  4e5e                     unlk A6
+00c2ee46  7000                     moveq 0x0,D0
+00c2ee48  4e75                     rts
+00c2ee4a  4e56fffc                 link.w A6,-0x4
+00c2ee4e  43f900c4c592             lea (0xc4c592).l,A1
+00c2ee54  41f900c4b390             lea (0xc4b390).l,A0
+00c2ee5a  3d7c0001fffe             move.w #0x1,(-0x2,A6)
+00c2ee60  4c910038                 movem.w (A1),{  D3 D4 D5}
+00c2ee64  b645                     cmp.w D5w,D3w
+00c2ee66  6d2c                     blt.b 0x00c2ee94
+00c2ee68  34290006                 move.w (0x6,A1),D2w
+00c2ee6c  3c29000a                 move.w (0xa,A1),D6w
+00c2ee70  bc42                     cmp.w D2w,D6w
+00c2ee72  6fd0                     ble.b 0x00c2ee44
