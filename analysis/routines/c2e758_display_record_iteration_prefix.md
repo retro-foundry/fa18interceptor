@@ -70,5 +70,11 @@ and routes through `$C2EAD0` and conditionally `$C2EA5A` under the `$C45ACA`
 signed gate. Its branch destinations and dataflow are exact; record meaning is
 not assigned.
 
+The `$C2E834-$C2E887` case is reconstructed in
+`source_amiga/observed/dispatch_third_display_record_case.asm`. It gates on
+signed `D4`, runs the two transposed helpers (`$C2EBC2` then `$C2EB4C`), and on
+the passing result increments `$C4E854` and stores `D0` at `$C4E85C` before
+projection. These counter/slot roles are dataflow-only.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
