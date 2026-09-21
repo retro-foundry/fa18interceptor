@@ -84,3 +84,11 @@ store_normalized_components:
 finish_record_vector_normalization:
                 unlk    a6
                 rts
+
+; The zero-input continuation is reached both from the signed-magnitude test
+; and from the scale-bound helper's zero result.
+zero_magnitude_continuation:
+                clr.w   d5
+                clr.w   d6
+                clr.w   d7
+                bra.b   store_normalized_components
