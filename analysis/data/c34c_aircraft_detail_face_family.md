@@ -28,6 +28,21 @@ The same 64-frame checkpoint capture observes no `$C212B0` line submission
 with `A5=$C45BEA`. The sheet's zero line count is therefore an observed
 renderer result, not a missing-line inference.
 
+## Completeness boundary
+
+`$C2035A` reads the actual static face offsets against `$C46228`. The five
+faces reference vertex indices `0` through `35` (36 slots total). The bounded
+`$C3515E` transform supplies slots `0` through `21` only, ending at
+`$C462AC`. Slots `22` through `35` are already populated in the restored
+state; a CPU write watch at `$C462B0` misses across the full recorded replay
+from the initial state through frame 12000. Their upstream immutable source is
+therefore still untraced.
+
+This model has renderer-proven topology and a partial static-vertex path, but
+is not yet a complete source-model export. The offset collector is
+`scripts/collect_c203_face_indices.py` and its frame-12000 report is the
+authoritative topology capture.
+
 The `$C34A9A/$C34A9C` polygon family is not merged into this model: it uses
 the separate `$C48390` workspace in the sampled frame. Similar silhouette and
 shared Hunk residency are insufficient to claim a shared object instance.

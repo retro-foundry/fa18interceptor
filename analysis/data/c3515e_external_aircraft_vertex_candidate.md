@@ -12,6 +12,11 @@ five `$C34C06-$C34C48` records via `$C203C4 -> $C2469E`. This is a
 trace-proven model candidate; the remaining uncertainty is its user-facing
 identity, not whether the static vertices and those five faces are connected.
 
+That path covers only the first 22 of 36 vertex slots used by the five faces.
+The remaining 14 slots in `$C462AC-$C46301` were populated before the recorded
+replay and their immutable source remains untraced; this is not yet a complete
+source-model export.
+
 [Orthographic static-vertex plot](../plots/external_aircraft_c3515e_static_vertices.svg) shows all 22 source points in X-Y, X-Z, and Y-Z. It intentionally draws points only: source order is not proof of an edge or polygon, and the renderer's real topology must be recovered from its face records rather than guessed from nearest neighbours.
 
 Reproduce from the saved transform capture:
