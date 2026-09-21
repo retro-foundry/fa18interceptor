@@ -1,12 +1,19 @@
 # Renderer helper at `$C2F5F4`
 
-Classification: **structural**. The direct run001 edge `$C2F616 -> $C2F5F4 ->
+Classification: **dataflow**. The direct run001 edge `$C2F616 -> $C2F5F4 ->
 $C2F618` completes in 66 instructions at replay frame 12. It has no nested
 call target.
 
 P-code: `pcode/raw/run001_c2f5f4_renderer_helper/`, 66 observed starts /
 351 operations. The observed path is retained as arithmetic and data-flow
 evidence only; its input tuple and output ownership are not yet assigned.
+
+The complete `$C2F5F4-$C2F765` cluster is now byte-exact source. Its proven
+contract is: select one of the fixed word-table bases, load and offset four
+pointers, derive paired register values, apply two independent four-bit masks,
+XOR enabled pairs through those pointers, then either return or tail-dispatch
+through an indexed `A4` pointer. This is dataflow evidence only; it does not
+establish the memory's pixel, plane, or object ownership.
 
 The runtime-backed entry prefix `$C2F5F4-$C2F609` is now byte-exact source in
 `source_amiga/observed/enter_renderer_table_helper.asm`. It loads the pointer
