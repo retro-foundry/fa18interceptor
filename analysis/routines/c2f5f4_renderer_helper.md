@@ -17,3 +17,10 @@ That shared body routes nonpositive `D1` to the byte-exact
 `$C2F622-$C2F625` return in
 `source_amiga/observed/reject_renderer_nonpositive_span.asm`, which sets
 `D2=-1` and returns. This is a register-level contract only.
+
+The runtime-backed `$C2F688-$C2F6D7` shared prefix is reconstructed in
+`source_amiga/observed/prepare_renderer_table_offsets.asm`. After the
+nonpositive-span exit, it indexes a mode-selected pointer table and a word
+table, derives a scaled offset, applies it to four pointers loaded through
+`A1`, then seeds `D1-D6` from the table results. This proves pointer/table
+dataflow, not pixels or object ownership.
