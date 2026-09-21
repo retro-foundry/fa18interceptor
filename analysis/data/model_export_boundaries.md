@@ -14,8 +14,10 @@ both its static data boundary and its renderer consumption path are traced.
 ## Renderer families not yet exportable as models
 
 - `$C34A9A/$C34A9C`: 42 pre-cull faces are useful topology evidence, but the
-  sampled frame reads the separate `$C48390` workspace. Do not attach them to
-  `$C3515E` without their own immutable-source trace.
+  sampled frame reads the separate `$C48390` workspace. At frame 12000 the
+  captured points for `$C34A9A` collapse to an X-axis-only state, unlike the
+  richer frame-7500 view. Do not attach them to `$C3515E` or export them as
+  static coordinates without their own immutable-source trace.
 - `$C3A94C/$C3A94E` and `$C38F98`: renderer-resident face/control families;
   their upstream immutable vertex sources are not established.
 
