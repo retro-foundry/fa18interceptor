@@ -1,6 +1,6 @@
 # `$C2F558` outer-loop pointer selector
 
-Classification: **complete per-iteration structural child** of the outer loop.
+Classification: **dataflow**: complete per-iteration child of the outer loop.
 
 - Restore: `captures/baseline_menu/state.bin`; playback `local/start_demo.e9k`.
 - Breakpoint `$C2F558`, armed at frame 600, hit at frame 607.
@@ -12,6 +12,11 @@ The selector chooses base pointers at `$C4566E/$C4568E`, adding `$10/$14`
 when `$C4566C` is non-zero, then publishes them at `$C456B6/$C456BA`.
 `source_amiga/observed/select_outer_loop_pointer_pair.asm` is byte-exact for
 the complete `$C2F558-$C2F581` routine (42 bytes).
+
+The runtime-backed renderer entry at `$C2F5F4` loads the first published
+pointer from `$C456B6` before deriving its four adjusted output pointers. This
+proves the selector is a producer for that renderer pointer block. It does not
+by itself assign a graphics or object meaning to either pointer pair.
 
 ### Pointer publisher trace from cockpit state
 
