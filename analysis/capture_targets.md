@@ -10,7 +10,7 @@ A reconstructed slice branches or calls into these, so the entry is already loca
 
 | Segment | Runtime range | Bytes | Call/branch references |
 |---:|---|---:|---:|
-| 7 | `$C06BF0-$C06C04` | 20 | 13 |
+| 7 | `$C06BF0-$C06C04` | 20 | 14 |
 
 Total: 1 segments, 20 bytes.
 
