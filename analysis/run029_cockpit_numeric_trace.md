@@ -50,15 +50,15 @@ a speed/altitude formatter attribution.
 Three ordinary-replay write watchpoints were placed at bytes proven different
 between the normal frame-993 and frame-994 active-plane snapshots:
 `$04DB58`, `$051FAB`, and `$053EEB`.  Each missed with `--any-source`.
-The same tool had already missed a CPU-only watch at `$04DB30`.  The Engine9000
-watch facility therefore does not report the relevant asynchronous Chip-RAM
-blitter writes; these misses are a tool boundary, not evidence that the bytes
-did not change.  The normal snapshot comparison remains the authority for the
-visible change.
+The same helper also misses a trace-proven CPU store at `$C45968`; it therefore
+does not yet have a validated Engine9000 watchpoint ABI contract.  These misses
+are a helper boundary, not evidence that the active-plane bytes did not change.
+The normal snapshot comparison remains the authority for the visible change.
 
 The next renderer experiment needs a blitter-completion/write log (or a
 capture that exposes the pending blitter state and destination before the
-frontend snapshot), rather than further CPU memory watchpoints.
+frontend snapshot), or a separately validated watchpoint ABI, rather than
+further use of the current helper.
 
 ## First changed-number boundary
 
