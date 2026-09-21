@@ -39,13 +39,18 @@ def window(pid, timeout=15):
     raise RuntimeError(f'No Engine9000 window for PID {pid}')
 
 
-def key(hwnd, vk):
+def key(hwnd, vk, *, shift=False):
     user = C.windll.user32
     scan = user.MapVirtualKeyW(vk, 0)
     user.PostMessageW.argtypes = [W.HWND, W.UINT, W.WPARAM, W.LPARAM]
+    if shift:
+        shift_scan = user.MapVirtualKeyW(0x10, 0)
+        user.PostMessageW(hwnd, 0x100, 0x10, 1 | (shift_scan << 16))
     user.PostMessageW(hwnd, 0x100, vk, 1 | (scan << 16))
     time.sleep(.05)
     user.PostMessageW(hwnd, 0x101, vk, 1 | (scan << 16) | (3 << 30))
+    if shift:
+        user.PostMessageW(hwnd, 0x101, 0x10, 1 | (shift_scan << 16) | (3 << 30))
 
 
 def main():
@@ -60,11 +65,21 @@ def main():
     run.mkdir(parents=True, exist_ok=False)
     for sub in ['saves', 'appdata']:
         (run / sub).mkdir()
-    # Preserve the original known-good baseline restore pairing. Function-key
-    # coverage uses build_scripted_flight_run.py's native replay format.
+    # Keep plain F-keys available to F/A-18. Restart moves to Shift+F10 because
+    # Shift+F8 restores the initial baseline.
     (run / 'appdata/e9k-debugger.cfg').write_text(
-        'comp.config.hotkey.restart=unbound\n'
-        'comp.config.hotkey.restore_state=F8\n')
+        'comp.config.hotkey.help=Shift+F1\n'
+        'comp.config.hotkey.screenshot=Shift+F2\n'
+        'comp.config.hotkey.cycle_core_restart=Shift+F3\n'
+        'comp.config.hotkey.rolling_save_toggle=Shift+F4\n'
+        'comp.config.hotkey.warp=Shift+F5\n'
+        'comp.config.hotkey.audio_toggle=Shift+F6\n'
+        'comp.config.hotkey.save_state=Shift+F7\n'
+        'comp.config.hotkey.restore_state=Shift+F8\n'
+        'comp.config.hotkey.reset_core=Shift+F9\n'
+        'comp.config.hotkey.restart=Shift+F10\n'
+        'comp.config.hotkey.hotkeys_toggle=Shift+F11\n'
+        'comp.config.hotkey.settings=Shift+F12\n')
     initial_state = args.initial_state.resolve()
     if not initial_state.is_file():
         raise FileNotFoundError(initial_state)
@@ -88,7 +103,7 @@ def main():
     (run / 'run.json').write_text(json.dumps(manifest, indent=2) + '\n')
     hwnd = window(process.pid)
     time.sleep(2)  # Let core initialization finish before its Restore hotkey.
-    key(hwnd, 0x77)  # F8, the isolated Engine9000 Restore binding.
+    key(hwnd, 0x77, shift=True)  # Shift+F8, the isolated Restore binding.
     time.sleep(.2)
     manifest.update(status='recording', hwnd=int(hwnd),
                     prelude_bytes=(run / 'inputs.e9k').stat().st_size)
