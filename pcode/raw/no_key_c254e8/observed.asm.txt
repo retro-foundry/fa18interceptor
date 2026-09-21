@@ -1,0 +1,14 @@
+00c254e8  4a3900c45785             tst.b (0x00c45785).l
+00c254ee  6708                     beq.b 0x00c254f8
+00c254f0  303900c45a96             move.w (0x00c45a96).l,D0w
+00c254f6  6006                     bra.b 0x00c254fe
+00c254fe  0c403840                 cmpi.w #0x3840,D0w
+00c25502  6c22                     bge.b 0x00c25526
+00c25504  0c401c20                 cmpi.w #0x1c20,D0w
+00c25508  6c0e                     bge.b 0x00c25518
+00c2550a  0c400e10                 cmpi.w #0xe10,D0w
+00c2550e  6c04                     bge.b 0x00c25514
+00c25514  7201                     moveq 0x1,D1
+00c25516  602e                     bra.b 0x00c25546
+00c25546  13c100c45854             move.b D1b,(0x00c45854).l
+00c2554c  4e75                     rts

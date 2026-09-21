@@ -1,0 +1,87 @@
+{
+  "initial_state": "build\\run003_post_f10_first\\state.bin",
+  "frames_per_probe": 12,
+  "events": "K <native function key> 0 16 press/release",
+  "rows": [
+    {
+      "native_key": 282,
+      "function_key": "F1",
+      "function_level_byte": "0c",
+      "scaled_control_words": "00580000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 283,
+      "function_key": "F2",
+      "function_level_byte": "18",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 284,
+      "function_key": "F3",
+      "function_level_byte": "24",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 285,
+      "function_key": "F4",
+      "function_level_byte": "30",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 286,
+      "function_key": "F5",
+      "function_level_byte": "3c",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 287,
+      "function_key": "F6",
+      "function_level_byte": "48",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 288,
+      "function_key": "F7",
+      "function_level_byte": "54",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 289,
+      "function_key": "F8",
+      "function_level_byte": "60",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 290,
+      "function_key": "F9",
+      "function_level_byte": "6c",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    },
+    {
+      "native_key": 291,
+      "function_key": "F10",
+      "function_level_byte": "79",
+      "scaled_control_words": "00680000",
+      "command_pending": "00",
+      "raw_queue": "40020100252525372037"
+    }
+  ]
+}

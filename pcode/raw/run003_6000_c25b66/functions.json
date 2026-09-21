@@ -1,0 +1,176 @@
+[
+  {
+    "address": 12583416,
+    "name": "thunk_EXT_FUN_00fc1436",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583422,
+    "name": "thunk_EXT_FUN_00fc1428",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12592056,
+    "name": "thunk_EXT_FUN_00fe44f2",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12661804,
+    "name": "observed_call_00c1342c",
+    "body_bytes": 394,
+    "meaning": "structural"
+  },
+  {
+    "address": 12664196,
+    "name": "observed_call_00c13d84",
+    "body_bytes": 866,
+    "meaning": "structural"
+  },
+  {
+    "address": 12667106,
+    "name": "observed_call_00c148e2",
+    "body_bytes": 184,
+    "meaning": "structural"
+  },
+  {
+    "address": 12667326,
+    "name": "observed_call_00c149be",
+    "body_bytes": 628,
+    "meaning": "structural"
+  },
+  {
+    "address": 12669240,
+    "name": "observed_call_00c15138",
+    "body_bytes": 74,
+    "meaning": "structural"
+  },
+  {
+    "address": 12677518,
+    "name": "observed_call_00c1718e",
+    "body_bytes": 334,
+    "meaning": "structural"
+  },
+  {
+    "address": 12694142,
+    "name": "observed_call_00c1b27e",
+    "body_bytes": 184,
+    "meaning": "structural"
+  },
+  {
+    "address": 12694736,
+    "name": "observed_call_00c1b4d0",
+    "body_bytes": 24,
+    "meaning": "structural"
+  },
+  {
+    "address": 12704116,
+    "name": "observed_call_00c1d974",
+    "body_bytes": 84,
+    "meaning": "structural"
+  },
+  {
+    "address": 12734440,
+    "name": "observed_call_00c24fe8",
+    "body_bytes": 10,
+    "meaning": "structural"
+  },
+  {
+    "address": 12736340,
+    "name": "observed_call_00c25754",
+    "body_bytes": 124,
+    "meaning": "structural"
+  },
+  {
+    "address": 12737130,
+    "name": "observed_call_00c25a6a",
+    "body_bytes": 10,
+    "meaning": "structural"
+  },
+  {
+    "address": 12739624,
+    "name": "observed_call_00c26428",
+    "body_bytes": 186,
+    "meaning": "structural"
+  },
+  {
+    "address": 12739870,
+    "name": "observed_call_00c2651e",
+    "body_bytes": 16,
+    "meaning": "structural"
+  },
+  {
+    "address": 12742334,
+    "name": "observed_call_00c26ebe",
+    "body_bytes": 324,
+    "meaning": "structural"
+  },
+  {
+    "address": 12768264,
+    "name": "observed_call_00c2d408",
+    "body_bytes": 392,
+    "meaning": "structural"
+  },
+  {
+    "address": 12770638,
+    "name": "observed_call_00c2dd4e",
+    "body_bytes": 202,
+    "meaning": "structural"
+  },
+  {
+    "address": 12770966,
+    "name": "observed_call_00c2de96",
+    "body_bytes": 12,
+    "meaning": "structural"
+  },
+  {
+    "address": 12771040,
+    "name": "observed_call_00c2dee0",
+    "body_bytes": 630,
+    "meaning": "structural"
+  },
+  {
+    "address": 12772474,
+    "name": "observed_call_00c2e47a",
+    "body_bytes": 154,
+    "meaning": "structural"
+  },
+  {
+    "address": 12772628,
+    "name": "observed_call_00c2e514",
+    "body_bytes": 152,
+    "meaning": "structural"
+  },
+  {
+    "address": 12772854,
+    "name": "observed_call_00c2e5f6",
+    "body_bytes": 162,
+    "meaning": "structural"
+  },
+  {
+    "address": 12773082,
+    "name": "observed_call_00c2e6da",
+    "body_bytes": 68,
+    "meaning": "structural"
+  },
+  {
+    "address": 12910936,
+    "name": "observed_call_00c50158",
+    "body_bytes": 120,
+    "meaning": "structural"
+  },
+  {
+    "address": 12911072,
+    "name": "observed_call_00c501e0",
+    "body_bytes": 40,
+    "meaning": "structural"
+  },
+  {
+    "address": 12911122,
+    "name": "observed_call_00c50212",
+    "body_bytes": 12,
+    "meaning": "structural"
+  }
+]

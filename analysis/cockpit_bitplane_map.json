@@ -1,0 +1,89 @@
+{
+  "copper_list": "$00A400",
+  "plane_bytes": 8000,
+  "rows": 200,
+  "bytes_per_row": 40,
+  "width": 320,
+  "planes": [
+    {
+      "plane": 1,
+      "start": "$012BC0",
+      "end_exclusive": "$014B00",
+      "sha256_frame_600": "0c849e245f400519de88bfb93f81cd76fed7f4af9102f7fc466d777c2d16a465",
+      "sha256_frame_1800": "58283b38e6fcc841ea947874923748a7bdfc54d0ca6ba125361a96e7037b95ec",
+      "changed_bytes": 4066,
+      "changed_row_ranges": [
+        [
+          37,
+          199
+        ]
+      ]
+    },
+    {
+      "plane": 2,
+      "start": "$014B00",
+      "end_exclusive": "$016A40",
+      "sha256_frame_600": "1edf90d2e3ed40d96494117e2fe77e50477fdf2028956bca586b8e5e8184a2ac",
+      "sha256_frame_1800": "4274e2fb831bfd337418fb3341913de54155417c9a1c3e7eedce889769795496",
+      "changed_bytes": 3846,
+      "changed_row_ranges": [
+        [
+          37,
+          37
+        ],
+        [
+          63,
+          199
+        ]
+      ]
+    },
+    {
+      "plane": 3,
+      "start": "$016A40",
+      "end_exclusive": "$018980",
+      "sha256_frame_600": "df1fb4ac1c3de050a406883414363b5adec56ecc96771c85a352d77de8632b15",
+      "sha256_frame_1800": "b9b6c795f7cf41ea0a30ca90953595194e2f9ed8995aede4ffc6b06beb652a29",
+      "changed_bytes": 3700,
+      "changed_row_ranges": [
+        [
+          37,
+          199
+        ]
+      ]
+    },
+    {
+      "plane": 4,
+      "start": "$018980",
+      "end_exclusive": "$01A8C0",
+      "sha256_frame_600": "f6acaf9590df2d599ff5e1517f2f068fa1a36a7f8b8a2e9bacf16fab88ab9eef",
+      "sha256_frame_1800": "db1ebb5b12acb394b1d923da0da75d88c58bf60f821e55efb560191f7e391fb3",
+      "changed_bytes": 1800,
+      "changed_row_ranges": [
+        [
+          37,
+          45
+        ],
+        [
+          53,
+          57
+        ],
+        [
+          60,
+          61
+        ],
+        [
+          63,
+          107
+        ],
+        [
+          121,
+          125
+        ],
+        [
+          129,
+          199
+        ]
+      ]
+    }
+  ]
+}

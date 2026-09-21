@@ -1,0 +1,11 @@
+tools/engine9000-src/
+tools/engine9000/
+tools/engine9000-public/
+runtime_project/
+build/
+local/
+captures/
+*.adf
+*.rom
+__pycache__/
+E9K_INPUT_V1

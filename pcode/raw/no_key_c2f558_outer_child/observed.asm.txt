@@ -1,0 +1,9 @@
+00c2f558  41f900c4566e             lea (0xc4566e).l,A0
+00c2f55e  43f900c4568e             lea (0xc4568e).l,A1
+00c2f564  4a7900c4566c             tst.w (0x00c4566c).l
+00c2f56a  6708                     beq.b 0x00c2f574
+00c2f56c  d0fc0010                 adda.w #0x10,A0
+00c2f570  d2fc0014                 adda.w #0x14,A1
+00c2f574  23c800c456b6             move.l A0,(0x00c456b6).l
+00c2f57a  23c900c456ba             move.l A1,(0x00c456ba).l
+00c2f580  4e75                     rts

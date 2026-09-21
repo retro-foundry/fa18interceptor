@@ -1,0 +1,124 @@
+# F/A-18 Interceptor: runtime reconstruction
+
+Read **[STATUS.md](STATUS.md)** first when continuing this project.
+
+GAME.md has information about the game itself.
+
+The authority is the supplied 1988 Amiga disk, executed by the pinned
+[Engine9000 v0.62-alpha](https://github.com/alpine9000/engine9000-public/tree/v0.62-alpha)
+Amiga core. The goal is readable, byte-exact 68000 assembly backed by recorded
+play, real frames and observed routine contracts. Raw Ghidra P-code is an
+address-linked analysis aid, not the final source or proof of a routine's meaning.
+
+## Record a session
+
+The first bounded run is the scripted demonstration. It records the one menu
+selection needed to enter Demonstration Flight and then supplies no flight
+controls:
+
+```powershell
+python scripts/capture_attract.py --name attract_run001 --frames 9000
+```
+
+`9000` PAL frames is three minutes. This is the initial display, timing,
+renderer and scripted-control oracle. Its output is sealed and replayable.
+
+For later human runs:
+
+```powershell
+python scripts/record_run.py --name run001
+```
+
+The launcher opens the stock Engine9000 window, restores the preserved menu,
+and records keyboard, mouse and controller events. Click the emulated screen
+to give the game input. Choose **2: Free flight** for the first short session.
+Play for about 2–3 minutes: fly, steer, change views, and try controls you know.
+Then close Engine9000 and tell the agent the run is finished. Breadth matters
+more than a successful flight. Later sessions can target training, missions,
+weapons, landing and failure paths according to measured gaps.
+
+The interactive recorder uses **F8** only to restore the initial savestate and
+disables bare-F8 Restart. Function-key coverage is generated through the native
+Engine9000 replay script, not Windows keyboard injection. Avoid Restore,
+Rewind, Reset, Warp and configuration changes during an interactive recording.
+To release captured mouse input, upstream's binding is Ctrl+Alt+Left Alt.
+
+Seal a closed run, then replay a chosen window:
+
+```powershell
+python scripts/finalize_run.py captures/run001
+python scripts/engine9000_bridge.py --restore captures/run001/initial_state.bin `
+  --config captures/run001/config.uae --playback captures/run001/playback.e9k `
+  --frames 300 --output build/run001_first300
+```
+
+`last_input_frame` in `run.json` is the last recorded event, not a guessed exit
+frame. Every run retains its own initial state, exact configuration, raw events
+and tool hashes. The originals are never edited. Play uses a write-protected
+private ADF; the game's optional flight-log disk request is skipped.
+
+## Focused evidence and P-code
+
+```powershell
+python scripts/engine9000_bridge.py --restore captures/baseline_menu/state.bin `
+  --frames 120 --trace-frames 2 --output build/menu_focus_new
+./scripts/import_ghidra.ps1 -Capture build/menu_focus_new -Project Fa18FocusNew
+```
+
+Output directories and new Ghidra project names must be unused. The bridge uses
+the release's unmodified `ami9000.dll`, not a replacement CPU implementation.
+`trace.jsonl` keeps each instruction's PC, bytes, registers, next PC, chipset
+frame and cycle counter. `custom_writes.jsonl` keeps CPU/Copper provenance.
+The importer checks every observed RAM instruction against the snapshot, then
+disassembles only those starts. Call targets remain structural until explained.
+
+`pcode/raw/menu/` is the first stable export. Every instruction has its runtime
+address, RAM bank/file offset, bytes, function, flows and raw P-code varnodes.
+See its authority manifest for the exact snapshot and trace. Ghidra's installed
+68000 family language is a 68040 superset; decoded lengths are cross-checked
+against Capstone's 68000 mode. This is not a claim of complete instruction
+semantics validation.
+
+For each routine, work from a small packet: snapshot + frame + entry/exit +
+callers + registers/state + hardware effect + a narrow assertion. Promote names
+only after static and runtime evidence agree. Preserve literal unknown values
+with an explicit unknown meaning rather than inventing a symbolic explanation.
+
+## Keep checks cheap
+
+- Two independent 120-frame restores compare RAM, registers, cycles, video and
+  audio in about one second total.
+- `python scripts/check_breakpoint.py` checks one observed runtime breakpoint.
+- A two-frame menu instruction trace takes about 1.6 seconds; Ghidra import and
+  export take roughly four seconds. Do not run full-session instruction stepping
+  as a routine test.
+- Compare assembled bytes only for the routine/bank changed. Extend checks when
+  a real uncertainty calls for it.
+
+Single-stepping repeatedly polls the core frontend. Held-key/autorepeat parity
+needs validation before using stepped input traces as definitive evidence.
+Normal human recording and full-frame replay do not use instruction stepping.
+
+## Controls recorded as documentation
+
+`GAME.md` is the authority until raw-keycode tracing confirms each mapping:
+F1-F10 throttle (repeat F10 for afterburner), `=`/`-` incremental throttle,
+Backspace airbrake, cursor keys pitch/roll, comma/period rudder, `G` gear,
+`A` hook, `H` HUD, `J` ECM, `C` chaff, `F` flare, `M` map, `R` radar range,
+`T` target, Return weapon select, Space fire, Shift+F rescue pod, Shift+E
+eject, `P` pause, Esc restart, Shift+Esc return to menu, keypad camera views,
+and brackets zoom. The full manual says `J` for ECM; a later fan sheet says
+`K`, so that one is explicitly unverified.
+
+See [analysis/memory_map.md](analysis/memory_map.md) for the observed runtime
+memory map and its evidence rules.
+
+## Local dependencies
+
+Python 3.13 with Pillow and Capstone; Java; local Ghidra 12.0.4 DEV; and the
+downloaded Windows Engine9000 release. `scripts/setup_capture.py` creates the
+private config/media and records hashes in `local/toolchain.json`. Before
+running it, set `FA18_KICKSTART_ROM` to the path of a legally obtained
+Kickstart 1.3 ROM image.
+`AMIGA.md` supplies hardware context; original bytes and traces decide game
+behavior. `../quest` is the reference workflow. No native port is being built.

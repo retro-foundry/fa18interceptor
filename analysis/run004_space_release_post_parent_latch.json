@@ -1,0 +1,14 @@
+{
+  "breakpoint": "c15da2",
+  "hit_frame": 6,
+  "address": "c458c6",
+  "size": 2,
+  "max_instructions": 200000,
+  "result": {
+    "kind": "limit",
+    "instruction": 200000,
+    "pc": "fc5ed4",
+    "value": "0008"
+  },
+  "limitation": "Input was delivered in normal replay before breakpoint; no future input was stepped."
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "address": 12583080,
+    "name": "thunk_EXT_FUN_00fc0706",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583164,
+    "name": "thunk_EXT_FUN_00fc1c18",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583170,
+    "name": "thunk_EXT_FUN_00fc1bea",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583176,
+    "name": "thunk_EXT_FUN_00fc1b70",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583218,
+    "name": "thunk_EXT_FUN_00fc1e84",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583416,
+    "name": "thunk_EXT_FUN_00fc1436",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583422,
+    "name": "thunk_EXT_FUN_00fc1428",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12593926,
+    "name": "thunk_EXT_FUN_00fe4cb8",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12676082,
+    "name": "observed_call_00c16bf2",
+    "body_bytes": 72,
+    "meaning": "structural"
+  },
+  {
+    "address": 12676182,
+    "name": "observed_call_00c16c56",
+    "body_bytes": 106,
+    "meaning": "structural"
+  },
+  {
+    "address": 12676782,
+    "name": "observed_call_00c16eae",
+    "body_bytes": 40,
+    "meaning": "structural"
+  },
+  {
+    "address": 12676892,
+    "name": "observed_call_00c16f1c",
+    "body_bytes": 128,
+    "meaning": "structural"
+  },
+  {
+    "address": 12677468,
+    "name": "observed_call_00c1715c",
+    "body_bytes": 46,
+    "meaning": "structural"
+  },
+  {
+    "address": 12692852,
+    "name": "observed_call_00c1ad74",
+    "body_bytes": 418,
+    "meaning": "structural"
+  },
+  {
+    "address": 12925960,
+    "name": "observed_call_00c53c08",
+    "body_bytes": 20,
+    "meaning": "structural"
+  },
+  {
+    "address": 12926092,
+    "name": "observed_call_00c53c8c",
+    "body_bytes": 20,
+    "meaning": "structural"
+  }
+]

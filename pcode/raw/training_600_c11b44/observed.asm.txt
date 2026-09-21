@@ -1,0 +1,9 @@
+00c11b44  103900c45890             move.b (0x00c45890).l,D0b
+00c11b4a  5300                     subq.b #0x1,D0b
+00c11b4c  13c000c45890             move.b D0b,(0x00c45890).l
+00c11b52  4a00                     tst.b D0b
+00c11b54  6e12                     bgt.b 0x00c11b68
+00c11b56  13fc000800c45890         move.b #0x8,(0x00c45890).l
+00c11b5e  13fc008600c4588e         move.b #-0x7a,(0x00c4588e).l
+00c11b66  6046                     bra.b 0x00c11bae
+00c11bae  4e75                     rts

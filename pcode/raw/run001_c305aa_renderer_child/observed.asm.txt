@@ -1,0 +1,4 @@
+00c30328  385f                     movea.w (SP)+,A4
+00c305aa  b641                     cmp.w D1w,D3w
+00c305ac  6726                     beq.b 0x00c305d4
+00c305d4  4e75                     rts

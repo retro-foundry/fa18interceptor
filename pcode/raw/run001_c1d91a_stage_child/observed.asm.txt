@@ -1,0 +1,53 @@
+00c1d91a  48e70500                 movem.l {  D7 D5},-(SP)
+00c1d91e  323900c45a72             move.w (0x00c45a72).l,D1w
+00c1d924  2c3900c45a78             move.l (0x00c45a78).l,D6
+00c1d92a  3e3900c45a76             move.w (0x00c45a76).l,D7w
+00c1d930  3a3900c45ab8             move.w (0x00c45ab8).l,D5w
+00c1d936  ea61                     asr.w D5,D1w
+00c1d938  eaa6                     asr.l D5,D6
+00c1d93a  ea67                     asr.w D5,D7w
+00c1d93c  d441                     add.w D1w,D2w
+00c1d93e  6a02                     bpl.b 0x00c1d942
+00c1d940  4442                     neg.w D2w
+00c1d942  4a3900c458bb             tst.b (0x00c458bb).l
+00c1d948  670a                     beq.b 0x00c1d954
+00c1d954  48c3                     ext.l D3
+00c1d956  d686                     add.l D6,D3
+00c1d958  6a02                     bpl.b 0x00c1d95c
+00c1d95a  4483                     neg.l D3
+00c1d95c  0c830007fff0             cmpi.l #0x7fff0,D3
+00c1d962  6ca6                     bge.b 0x00c1d90a
+00c1d964  d847                     add.w D7w,D4w
+00c1d966  6a02                     bpl.b 0x00c1d96a
+00c1d96a  e842                     asr.w #0x4,D2w
+00c1d96c  e883                     asr.l #0x4,D3
+00c1d96e  e844                     asr.w #0x4,D4w
+00c1d970  4cdf00a0                 movem.l (SP)+,{  D5 D7}
+00c1d974  48e70480                 movem.l {  A0 D5},-(SP)
+00c1d978  7a0e                     moveq 0xe,D5
+00c1d97a  41f900c1d9d8             lea (0xc1d9d8).l,A0
+00c1d980  b642                     cmp.w D2w,D3w
+00c1d982  6f02                     ble.b 0x00c1d986
+00c1d986  48c3                     ext.l D3
+00c1d988  670e                     beq.b 0x00c1d998
+00c1d998  36303000                 move.w (0x0,A0,D3w*0x1),D3w
+00c1d99c  c4c3                     mulu.w D3w,D2
+00c1d99e  48c4                     ext.l D4
+00c1d9a0  eba4                     asl.l D5,D4
+00c1d9a2  b882                     cmp.l D2,D4
+00c1d9a4  6f02                     ble.b 0x00c1d9a8
+00c1d9a6  c544                     exg D2,D4
+00c1d9a8  eaa2                     asr.l D5,D2
+00c1d9aa  4a42                     tst.w D2w
+00c1d9ac  6604                     bne.b 0x00c1d9b2
+00c1d9b2  88c2                     divu.w D2w,D4
+00c1d9b4  ec44                     asr.w #0x6,D4w
+00c1d9b6  d844                     add.w D4w,D4w
+00c1d9b8  32304000                 move.w (0x0,A0,D4w*0x1),D1w
+00c1d9bc  c2c2                     mulu.w D2w,D1
+00c1d9be  eaa1                     asr.l D5,D1
+00c1d9c0  4cdf0120                 movem.l (SP)+,{  D5 A0}
+00c1d9c4  0c8100007fff             cmpi.l #0x7fff,D1
+00c1d9ca  6f04                     ble.b 0x00c1d9d0
+00c1d9d0  33c100c45b40             move.w D1w,(0x00c45b40).l
+00c1d9d6  4e75                     rts

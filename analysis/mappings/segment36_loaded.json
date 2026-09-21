@@ -1,0 +1,52 @@
+{
+  "segment": 36,
+  "kind": "CODE",
+  "runtime_base": "c2f490",
+  "size_bytes": 4644,
+  "non_relocated_byte_mismatches": 0,
+  "reloc32_count": 223,
+  "target_bases": {
+    "36": {
+      "candidates": [
+        12776592
+      ],
+      "consistent": true,
+      "references": 42
+    },
+    "71": {
+      "candidates": [
+        12867120
+      ],
+      "consistent": true,
+      "references": 168
+    },
+    "72": {
+      "candidates": [
+        12878736
+      ],
+      "consistent": true,
+      "references": 8
+    },
+    "62": {
+      "candidates": [
+        76168
+      ],
+      "consistent": true,
+      "references": 2
+    },
+    "33": {
+      "candidates": [
+        12637984
+      ],
+      "consistent": true,
+      "references": 2
+    },
+    "37": {
+      "candidates": [
+        12781248
+      ],
+      "consistent": true,
+      "references": 1
+    }
+  }
+}

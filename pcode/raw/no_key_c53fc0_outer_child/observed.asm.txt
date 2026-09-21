@@ -1,0 +1,6 @@
+00c02728  4ef900fc64d4             jmp 0x00fc64d4.l
+00c53fc0  2f0e                     move.l A6,-(SP)
+00c53fc2  2c7900c182ca             movea.l (0x00c182ca).l,A6
+00c53fc8  4eaefe32                 jsr (-0x1ce,A6)
+00c53fcc  2c5f                     movea.l (SP)+,A6
+00c53fce  4e75                     rts

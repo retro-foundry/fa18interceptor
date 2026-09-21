@@ -1,0 +1,561 @@
+{
+  "edge_count": 48,
+  "edges": [
+    {
+      "source_pc": "c1f942",
+      "target_pc": "c2005c",
+      "source": {
+        "offset": 3082,
+        "segment": 10,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 884,
+        "segment": 13,
+        "status": "verified"
+      },
+      "hits": 15
+    },
+    {
+      "source_pc": "c21304",
+      "target_pc": "c2ee4a",
+      "source": {
+        "offset": 676,
+        "segment": 14,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 474,
+        "segment": 35,
+        "status": "verified"
+      },
+      "hits": 12
+    },
+    {
+      "source_pc": "c2f088",
+      "target_pc": "c2fa7e",
+      "source": {
+        "offset": 1048,
+        "segment": 35,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 1518,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 12
+    },
+    {
+      "source_pc": "c200b8",
+      "target_pc": "c1fb82",
+      "source": {
+        "offset": 976,
+        "segment": 13,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 3658,
+        "segment": 10,
+        "status": "verified"
+      },
+      "hits": 7
+    },
+    {
+      "source_pc": "c2479e",
+      "target_pc": "c247c0",
+      "source": {
+        "offset": 278,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 312,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 6
+    },
+    {
+      "source_pc": "c2488c",
+      "target_pc": "c248b2",
+      "source": {
+        "offset": 516,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 554,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 5
+    },
+    {
+      "source_pc": "c30324",
+      "target_pc": "c305aa",
+      "source": {
+        "offset": 3732,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 4378,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 5
+    },
+    {
+      "source_pc": "c5017c",
+      "target_pc": "c50212",
+      "source": null,
+      "target": null,
+      "hits": 4
+    },
+    {
+      "source_pc": "c50186",
+      "target_pc": "c501e0",
+      "source": null,
+      "target": null,
+      "hits": 4
+    },
+    {
+      "source_pc": "c24970",
+      "target_pc": "c24996",
+      "source": {
+        "offset": 744,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 782,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 4
+    },
+    {
+      "source_pc": "fe5830",
+      "target_pc": "fe5854",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe5892",
+      "target_pc": "fe5a96",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe5a96",
+      "target_pc": "fe5a80",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe584a",
+      "target_pc": "c023b8",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe44fc",
+      "target_pc": "c001fe",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe451c",
+      "target_pc": "c001f8",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fc134a",
+      "target_pc": "fe935a",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe93f4",
+      "target_pc": "fe9422",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe9444",
+      "target_pc": "fe94fa",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe93fc",
+      "target_pc": "fe94b4",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fe93e4",
+      "target_pc": "fe940a",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fc134a",
+      "target_pc": "c1718e",
+      "source": null,
+      "target": {
+        "offset": 37598,
+        "segment": 0,
+        "status": "verified"
+      },
+      "hits": 2
+    },
+    {
+      "source_pc": "c17446",
+      "target_pc": "c24fe8",
+      "source": {
+        "offset": 38294,
+        "segment": 0,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 568,
+        "segment": 20,
+        "status": "verified"
+      },
+      "hits": 2
+    },
+    {
+      "source_pc": "fc134a",
+      "target_pc": "f00920",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "fc134a",
+      "target_pc": "c50158",
+      "source": null,
+      "target": null,
+      "hits": 2
+    },
+    {
+      "source_pc": "c1f77c",
+      "target_pc": "c1fc42",
+      "source": {
+        "offset": 2628,
+        "segment": 10,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 3850,
+        "segment": 10,
+        "status": "verified"
+      },
+      "hits": 2
+    },
+    {
+      "source_pc": "c24786",
+      "target_pc": "c247c0",
+      "source": {
+        "offset": 254,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 312,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 2
+    },
+    {
+      "source_pc": "c2486c",
+      "target_pc": "c248b2",
+      "source": {
+        "offset": 484,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 554,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 2
+    },
+    {
+      "source_pc": "c1f942",
+      "target_pc": "c212b0",
+      "source": {
+        "offset": 3082,
+        "segment": 10,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 592,
+        "segment": 14,
+        "status": "verified"
+      },
+      "hits": 2
+    },
+    {
+      "source_pc": "c1f76a",
+      "target_pc": "c1fb8c",
+      "source": {
+        "offset": 2610,
+        "segment": 10,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 3668,
+        "segment": 10,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c1f942",
+      "target_pc": "c207fe",
+      "source": {
+        "offset": 3082,
+        "segment": 10,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 2838,
+        "segment": 13,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c200e6",
+      "target_pc": "c2469e",
+      "source": {
+        "offset": 1022,
+        "segment": 13,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 22,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c24956",
+      "target_pc": "c24996",
+      "source": {
+        "offset": 718,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 782,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c24c5a",
+      "target_pc": "c24996",
+      "source": {
+        "offset": 1490,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 782,
+        "segment": 19,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c24d60",
+      "target_pc": "c2ff48",
+      "source": {
+        "offset": 1752,
+        "segment": 19,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 2744,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c2ff52",
+      "target_pc": "c301f6",
+      "source": {
+        "offset": 2754,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 3430,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c3033c",
+      "target_pc": "c305aa",
+      "source": {
+        "offset": 3756,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 4378,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c2ff90",
+      "target_pc": "c30466",
+      "source": {
+        "offset": 2816,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 4054,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "fc134a",
+      "target_pc": "fc6d48",
+      "source": null,
+      "target": null,
+      "hits": 1
+    },
+    {
+      "source_pc": "fc134a",
+      "target_pc": "fe5824",
+      "source": null,
+      "target": null,
+      "hits": 1
+    },
+    {
+      "source_pc": "fe582a",
+      "target_pc": "fe5854",
+      "source": null,
+      "target": null,
+      "hits": 1
+    },
+    {
+      "source_pc": "fe5892",
+      "target_pc": "fe5a50",
+      "source": null,
+      "target": null,
+      "hits": 1
+    },
+    {
+      "source_pc": "fe5a50",
+      "target_pc": "fe5a80",
+      "source": null,
+      "target": null,
+      "hits": 1
+    },
+    {
+      "source_pc": "c2ffc2",
+      "target_pc": "c30466",
+      "source": {
+        "offset": 2866,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 4054,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c2fff4",
+      "target_pc": "c30466",
+      "source": {
+        "offset": 2916,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 4054,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c30026",
+      "target_pc": "c30466",
+      "source": {
+        "offset": 2966,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 4054,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c3002a",
+      "target_pc": "c304b2",
+      "source": {
+        "offset": 2970,
+        "segment": 36,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 4130,
+        "segment": 36,
+        "status": "verified"
+      },
+      "hits": 1
+    },
+    {
+      "source_pc": "c2eeac",
+      "target_pc": "c2f0f4",
+      "source": {
+        "offset": 572,
+        "segment": 35,
+        "status": "verified"
+      },
+      "target": {
+        "offset": 1156,
+        "segment": 35,
+        "status": "verified"
+      },
+      "hits": 1
+    }
+  ]
+}

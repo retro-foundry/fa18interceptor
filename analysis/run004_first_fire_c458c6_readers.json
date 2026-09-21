@@ -1,0 +1,48 @@
+{
+  "restore": "build\\run004_focus_2595\\state.bin",
+  "playback": "build\\run004_first_fire_single.e9k",
+  "arm_frame": 1,
+  "frames": 1200,
+  "results": [
+    {
+      "address": "c09f9a",
+      "hit": null
+    },
+    {
+      "address": "c0a29a",
+      "hit": null
+    },
+    {
+      "address": "c120d4",
+      "hit": null
+    },
+    {
+      "address": "c120ea",
+      "hit": null
+    },
+    {
+      "address": "c121ea",
+      "hit": null
+    },
+    {
+      "address": "c121fa",
+      "hit": null
+    },
+    {
+      "address": "c1521a",
+      "hit": null
+    },
+    {
+      "address": "c1b6b2",
+      "hit": null
+    },
+    {
+      "address": "c241f6",
+      "hit": null
+    },
+    {
+      "address": "c2953c",
+      "hit": null
+    }
+  ]
+}

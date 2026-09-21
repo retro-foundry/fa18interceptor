@@ -1,0 +1,3 @@
+00c2b3c0  4e75                     rts
+00c2b3c2  0c39000100c458a6         cmpi.b #0x1,(0x00c458a6).l
+00c2b3ca  66f4                     bne.b 0x00c2b3c0

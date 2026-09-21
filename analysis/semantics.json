@@ -1,0 +1,35 @@
+{
+  "scope": "Menu and human-run structural evidence plus bounded display, keyboard, joystick, and math paths",
+  "observed_ram_instructions": 443,
+  "observed_ram_instruction_bytes": 1756,
+  "structural_call_targets": 36,
+  "behavioral_routines": 31,
+  "scenario_contracts": 10,
+  "symbolic_reconstructed_bytes": 16378,
+  "coverage_denominator": 285976,
+  "unknowns": [
+    "Exact game/OS allocation boundaries and complete code extent",
+    "Keyboard dispatcher semantics and display callers up to the main loop",
+    "Additional disk DMA in flight/mission/scenario transitions",
+    "Held-input equivalence during instruction stepping",
+    "Cheap complete execution coverage over long recordings"
+  ],
+  "memory_layouts": {
+    "attract_cockpit_active_plane_table": {
+      "address": "$C4567E",
+      "entry_width": "long",
+      "entries": [
+        "$018980",
+        "$016A40",
+        "$014B00",
+        "$012BC0"
+      ],
+      "meaning": "Copper planes 4, 3, 2, 1 selected by C2F558 in the bounded attract cockpit trace",
+      "evidence": [
+        "build/attract_cockpit_c2f558_trace/trace.jsonl",
+        "build/attract_cockpit_1800_tenframe_trace/trace.jsonl"
+      ]
+    }
+  },
+  "symbolic_code_coverage_percent": 5.727
+}

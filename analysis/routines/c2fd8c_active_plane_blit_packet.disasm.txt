@@ -1,0 +1,91 @@
+C2FD8C: 247900c456b6     movea.l $c456b6.l, a2
+C2FD92: 41f900dff000     lea.l $dff000.l, a0
+C2FD98: 3c3900c45984     move.w $c45984.l, d6
+C2FD9E: ed46             asl.w #$6, d6
+C2FDA0: 06460014         addi.w #$14, d6
+C2FDA4: 2812             move.l (a2), d4
+C2FDA6: 068400000028     addi.l #$28, d4
+C2FDAC: 343c0100         move.w #$100, d2
+C2FDB0: 7aff             moveq #$ff, d5
+C2FDB2: 082800060002     btst.b #$6, $2(a0)
+C2FDB8: 6706             beq.b $c2fdc0
+C2FDBA: 4e71             nop 
+C2FDBC: 4e71             nop 
+C2FDBE: 60f2             bra.b $c2fdb2
+C2FDC0: 31420040         move.w d2, $40(a0)
+C2FDC4: 317c00000042     move.w #$0, $42(a0)
+C2FDCA: 31450074         move.w d5, $74(a0)
+C2FDCE: 31450044         move.w d5, $44(a0)
+C2FDD2: 31450046         move.w d5, $46(a0)
+C2FDD6: 317c00010062     move.w #$1, $62(a0)
+C2FDDC: 317c00010060     move.w #$1, $60(a0)
+C2FDE2: 317c00010066     move.w #$1, $66(a0)
+C2FDE8: 21440048         move.l d4, $48(a0)
+C2FDEC: 21440054         move.l d4, $54(a0)
+C2FDF0: 31460058         move.w d6, $58(a0)
+C2FDF4: 282a0004         move.l $4(a2), d4
+C2FDF8: 068400000028     addi.l #$28, d4
+C2FDFE: 343c03fa         move.w #$3fa, d2
+C2FE02: 082800060002     btst.b #$6, $2(a0)
+C2FE08: 6708             beq.b $c2fe12
+C2FE0A: 527900c4591c     addq.w #$1, $c4591c.l
+C2FE10: 60f0             bra.b $c2fe02
+C2FE12: 203900c4591c     move.l $c4591c.l, d0
+C2FE18: 3600             move.w d0, d3
+C2FE1A: 4840             swap d0
+C2FE1C: b043             cmp.w d3, d0
+C2FE1E: 6f02             ble.b $c2fe22
+C2FE20: 3600             move.w d0, d3
+C2FE22: 4240             clr.w d0
+C2FE24: 4840             swap d0
+C2FE26: 3003             move.w d3, d0
+C2FE28: 23c000c4591c     move.l d0, $c4591c.l
+C2FE2E: 31420040         move.w d2, $40(a0)
+C2FE32: 21440048         move.l d4, $48(a0)
+C2FE36: 21440054         move.l d4, $54(a0)
+C2FE3A: 31460058         move.w d6, $58(a0)
+C2FE3E: 282a0008         move.l $8(a2), d4
+C2FE42: 068400000028     addi.l #$28, d4
+C2FE48: 343c0100         move.w #$100, d2
+C2FE4C: 4a3900c4589b     tst.b $c4589b.l
+C2FE52: 6704             beq.b $c2fe58
+C2FE54: 343c03fa         move.w #$3fa, d2
+C2FE58: 082800060002     btst.b #$6, $2(a0)
+C2FE5E: 6708             beq.b $c2fe68
+C2FE60: 527900c45920     addq.w #$1, $c45920.l
+C2FE66: 60f0             bra.b $c2fe58
+C2FE68: 203900c45920     move.l $c45920.l, d0
+C2FE6E: 3600             move.w d0, d3
+C2FE70: 4840             swap d0
+C2FE72: b043             cmp.w d3, d0
+C2FE74: 6f02             ble.b $c2fe78
+C2FE76: 3600             move.w d0, d3
+C2FE78: 4240             clr.w d0
+C2FE7A: 4840             swap d0
+C2FE7C: 3003             move.w d3, d0
+C2FE7E: 23c000c45920     move.l d0, $c45920.l
+C2FE84: 31420040         move.w d2, $40(a0)
+C2FE88: 21440048         move.l d4, $48(a0)
+C2FE8C: 21440054         move.l d4, $54(a0)
+C2FE90: 31460058         move.w d6, $58(a0)
+C2FE94: 282a000c         move.l $c(a2), d4
+C2FE98: 068400000028     addi.l #$28, d4
+C2FE9E: 343c0100         move.w #$100, d2
+C2FEA2: 082800060002     btst.b #$6, $2(a0)
+C2FEA8: 6708             beq.b $c2feb2
+C2FEAA: 527900c45924     addq.w #$1, $c45924.l
+C2FEB0: 60f0             bra.b $c2fea2
+C2FEB2: 203900c45924     move.l $c45924.l, d0
+C2FEB8: 3600             move.w d0, d3
+C2FEBA: 4840             swap d0
+C2FEBC: b043             cmp.w d3, d0
+C2FEBE: 6f02             ble.b $c2fec2
+C2FEC0: 3600             move.w d0, d3
+C2FEC2: 4240             clr.w d0
+C2FEC4: 4840             swap d0
+C2FEC6: 3003             move.w d3, d0
+C2FEC8: 23c000c45924     move.l d0, $c45924.l
+C2FECE: 31420040         move.w d2, $40(a0)
+C2FED2: 21440048         move.l d4, $48(a0)
+C2FED6: 21440054         move.l d4, $54(a0)
+C2FEDA: 31460058         move.w d6, $58(a0)

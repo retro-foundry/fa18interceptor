@@ -1,0 +1,39 @@
+00c00252  4ef900fc0e9c             jmp 0x00fc0e9c.l
+00c0f4a6  42a7                     clr.l -(SP)
+00c0f4a8  4eb900c17b08             jsr 0x00c17b08.l
+00c0f4ae  588f                     addq.l #0x4,SP
+00c0f4b0  7001                     moveq 0x1,D0
+00c0f4b2  2f00                     move.l D0,-(SP)
+00c0f4b4  4eb900c17b08             jsr 0x00c17b08.l
+00c17b08  4e560000                 link.w A6,0x0
+00c17b0c  202e0008                 move.l (0x8,A6),D0
+00c17b10  e580                     asl.l #0x2,D0
+00c17b12  2040                     movea.l D0,A0
+00c17b14  d1fc00c4fe38             adda.l #0xc4fe38,A0
+00c17b1a  4290                     clr.l (A0)
+00c17b1c  2f2e0008                 move.l (0x8,A6),-(SP)
+00c17b20  4eb900c4ffb0             jsr 0x00c4ffb0.l
+00c17b26  588f                     addq.l #0x4,SP
+00c17b28  4e5e                     unlk A6
+00c17b2a  4e75                     rts
+00c4ffb0  202f0004                 move.l (0x4,SP),D0
+00c4ffb4  e580                     asl.l #0x2,D0
+00c4ffb6  41f900c4fe28             lea (0xc4fe28).l,A0
+00c4ffbc  20700000                 movea.l (0x0,A0,D0w*0x1),A0
+00c4ffc0  33e8001400dff09c         move.w (0x14,A0),(0x00dff09c).l
+00c4ffc8  4e75                     rts
+00c500d8  48e7f0f8                 movem.l {  A4 A3 A2 A1 A0 D3 D2 D1 D0},-(SP)
+00c500dc  33e9001600dff09c         move.w (0x16,A1),(0x00dff09c).l
+00c500e4  20690000                 movea.l (0x0,A1),A0
+00c500e8  24690004                 movea.l (0x4,A1),A2
+00c500ec  266a0000                 movea.l (0x0,A2),A3
+00c500f0  b7fc00000000             cmpa.l #0x0,A3
+00c500f6  673c                     beq.b 0x00c50134
+00c50134  317c00000008             move.w #0x0,(0x8,A0)
+00c5013a  317c007c0006             move.w #0x7c,(0x6,A0)
+00c50140  33e9001200dff096         move.w (0x12,A1),(0x00dff096).l
+00c50148  303c0190                 move.w #0x190,D0w
+00c5014c  04400001                 subi.w #0x1,D0w
+00c50150  66fa                     bne.b 0x00c5014c
+00c50152  4cdf1f0f                 movem.l (SP)+,{ D0 D1 D2 D3 A0 A1 A2 A3 A4}
+00c50156  4e75                     rts

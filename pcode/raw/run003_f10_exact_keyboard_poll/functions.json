@@ -1,0 +1,68 @@
+[
+  {
+    "address": 12583080,
+    "name": "thunk_EXT_FUN_00fc0706",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583170,
+    "name": "thunk_EXT_FUN_00fc1bea",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583176,
+    "name": "thunk_EXT_FUN_00fc1b70",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583416,
+    "name": "thunk_EXT_FUN_00fc1436",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12583422,
+    "name": "thunk_EXT_FUN_00fc1428",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12593926,
+    "name": "thunk_EXT_FUN_00fe4cb8",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12676082,
+    "name": "observed_call_00c16bf2",
+    "body_bytes": 66,
+    "meaning": "structural"
+  },
+  {
+    "address": 12676182,
+    "name": "observed_call_00c16c56",
+    "body_bytes": 80,
+    "meaning": "structural"
+  },
+  {
+    "address": 12692852,
+    "name": "observed_call_00c1ad74",
+    "body_bytes": 744,
+    "meaning": "structural"
+  },
+  {
+    "address": 12925960,
+    "name": "observed_call_00c53c08",
+    "body_bytes": 20,
+    "meaning": "structural"
+  },
+  {
+    "address": 12926092,
+    "name": "observed_call_00c53c8c",
+    "body_bytes": 20,
+    "meaning": "structural"
+  }
+]

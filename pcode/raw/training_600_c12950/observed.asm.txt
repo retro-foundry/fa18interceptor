@@ -1,0 +1,27 @@
+00c12950  4e56ffe2                 link.w A6,-0x1e
+00c12954  48e72000                 movem.l {  D2},-(SP)
+00c12958  303900c458dc             move.w (0x00c458dc).l,D0w
+00c1295e  7209                     moveq 0x9,D1
+00c12960  48c0                     ext.l D0
+00c12962  e3a0                     asl.l D1,D0
+00c12964  2040                     movea.l D0,A0
+00c12966  d1fc00c46184             adda.l #0xc46184,A0
+00c1296c  2008                     move.l A0,D0
+00c1296e  23c000c18210             move.l D0,(0x00c18210).l
+00c12974  1d7900c458b0ffef         move.b (0x00c458b0).l,(-0x11,A6)
+00c1297c  2040                     movea.l D0,A0
+00c1297e  5488                     addq.l #0x2,A0
+00c12980  103900c458ae             move.b (0x00c458ae).l,D0b
+00c12986  2d48fff0                 move.l A0,(-0x10,A6)
+00c1298a  4a00                     tst.b D0b
+00c1298c  660007e0                 bne.w 0x00c1316e
+00c12990  103900c457ad             move.b (0x00c457ad).l,D0b
+00c12996  123900c457ae             move.b (0x00c457ae).l,D1b
+00c1299c  8001                     or.b D1b,D0b
+00c1299e  4a00                     tst.b D0b
+00c129a0  660007cc                 bne.w 0x00c1316e
+00c129a4  4a3900c45795             tst.b (0x00c45795).l
+00c129aa  670007c2                 beq.w 0x00c1316e
+00c1316e  4cdf0004                 movem.l (SP)+,{  D2}
+00c13172  4e5e                     unlk A6
+00c13174  4e75                     rts

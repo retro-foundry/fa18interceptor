@@ -1,0 +1,13 @@
+{
+  "runtime_address": "c2fb4e",
+  "length": 12,
+  "bytes": "41f900dff000082800060002",
+  "matches": [
+    {
+      "segment_index": 36,
+      "kind": "CODE",
+      "file_offset": 168458,
+      "segment_offset": 1726
+    }
+  ]
+}

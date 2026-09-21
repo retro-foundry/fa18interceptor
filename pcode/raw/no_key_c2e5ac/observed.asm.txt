@@ -1,0 +1,28 @@
+00c2e5ac  4cb9000700c45a3e         movem.w (0xc45a3e).l,{ D0 D1 D2}
+00c2e5b4  4c910038                 movem.w (A1),{  D3 D4 D5}
+00c2e5b8  c7c0                     muls.w D0w,D3
+00c2e5ba  c9c0                     muls.w D0w,D4
+00c2e5bc  cbc0                     muls.w D0w,D5
+00c2e5be  e083                     asr.l #0x8,D3
+00c2e5c0  e084                     asr.l #0x8,D4
+00c2e5c2  e085                     asr.l #0x8,D5
+00c2e5c4  48910038                 movem.w {  D3w D4w D5w},(A1)
+00c2e5c8  5c49                     addq.w #0x6,A1
+00c2e5ca  4c910038                 movem.w (A1),{  D3 D4 D5}
+00c2e5ce  c7c1                     muls.w D1w,D3
+00c2e5d0  c9c1                     muls.w D1w,D4
+00c2e5d2  cbc1                     muls.w D1w,D5
+00c2e5d4  e083                     asr.l #0x8,D3
+00c2e5d6  e084                     asr.l #0x8,D4
+00c2e5d8  e085                     asr.l #0x8,D5
+00c2e5da  48910038                 movem.w {  D3w D4w D5w},(A1)
+00c2e5de  5c49                     addq.w #0x6,A1
+00c2e5e0  4c910038                 movem.w (A1),{  D3 D4 D5}
+00c2e5e4  c7c2                     muls.w D2w,D3
+00c2e5e6  c9c2                     muls.w D2w,D4
+00c2e5e8  cbc2                     muls.w D2w,D5
+00c2e5ea  e083                     asr.l #0x8,D3
+00c2e5ec  e084                     asr.l #0x8,D4
+00c2e5ee  e085                     asr.l #0x8,D5
+00c2e5f0  48910038                 movem.w {  D3w D4w D5w},(A1)
+00c2e5f4  4e75                     rts

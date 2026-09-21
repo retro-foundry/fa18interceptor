@@ -1,0 +1,8 @@
+{
+  "trace_instructions": 12902,
+  "observed_ram_instruction_starts": 1527,
+  "observed_ram_instruction_bytes": 4546,
+  "observed_ram_call_targets": 26,
+  "behavioral_names": 0,
+  "scope": "RAM includes operating-system code; ownership not yet separated"
+}

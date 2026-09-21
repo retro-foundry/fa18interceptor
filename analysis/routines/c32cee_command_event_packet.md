@@ -1,0 +1,13 @@
+# Command-event packet at `$C32CEE`
+
+Classification: **behavioural packet**. The deterministic training frame-600
+parent calls `$C32CEE` from `$C0F3BA` and returns to `$C0F3C0` after 24
+instructions. P-code is `pcode/raw/training_600_c32cee/` (24 instruction
+starts, 98 operations).
+
+The observed route tests `$C45871`, loads a word from the table at `$C4574A`
+using byte offset `$C457C6`, and stores it at `$C45772`. It then follows
+observed guards at `$C457C3`, `$C45744`, `$C457E0`, and `$C457F5`, finally
+reads one byte from the raw command-event array `$C457E1` using index
+`$C457F8`. That byte is zero in this packet, causing the shared `$C32CEC`
+return. The table and queue’s wider ownership remain unassigned.

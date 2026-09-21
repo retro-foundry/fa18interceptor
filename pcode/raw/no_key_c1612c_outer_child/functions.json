@@ -1,0 +1,32 @@
+[
+  {
+    "address": 12592996,
+    "name": "thunk_EXT_FUN_00fc5e58",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12593014,
+    "name": "thunk_EXT_FUN_00fc5ece",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12593176,
+    "name": "thunk_EXT_FUN_00fc63cc",
+    "body_bytes": 6,
+    "meaning": "structural"
+  },
+  {
+    "address": 12926768,
+    "name": "observed_call_00c53f30",
+    "body_bytes": 20,
+    "meaning": "structural"
+  },
+  {
+    "address": 12926856,
+    "name": "observed_call_00c53f88",
+    "body_bytes": 20,
+    "meaning": "structural"
+  }
+]

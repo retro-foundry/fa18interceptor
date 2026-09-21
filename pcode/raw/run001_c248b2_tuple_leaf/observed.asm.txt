@@ -1,0 +1,13 @@
+00c248b2  48a7e000                 movem.w {  D2w D1w D0w},-(SP)
+00c248b6  4c930007                 movem.w (A3),{ D0 D1 D2}
+00c248ba  4a2c0002                 tst.b (0x2,A4)
+00c248be  660e                     bne.b 0x00c248ce
+00c248c0  48aa00070026             movem.w { D0w D1w D2w},(0x26, A2)
+00c248c6  522c0002                 addq.b #0x1,(0x2,A4)
+00c248ca  60000096                 bra.w 0x00c24962
+00c24962  48aa00070020             movem.w { D0w D1w D2w},(0x20, A2)
+00c24968  b042                     cmp.w D2w,D0w
+00c2496a  6e0e                     bgt.b 0x00c2497a
+00c2497a  7001                     moveq 0x1,D0
+00c2497c  4c9f0007                 movem.w (SP)+,{ D0 D1 D2}
+00c24980  4e75                     rts

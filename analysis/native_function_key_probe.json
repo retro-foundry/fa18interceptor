@@ -1,0 +1,106 @@
+{
+  "initial_state": "build\\free_flight_600\\state.bin",
+  "dispatch": "$C1AD74",
+  "rows": [
+    {
+      "native_key": 282,
+      "function_key": "F1",
+      "keyboard_dispatch": {
+        "frame": 1,
+        "pc": "$C1AD74",
+        "raw_amiga_key": 80
+      },
+      "non_dispatch_stop": null
+    },
+    {
+      "native_key": 283,
+      "function_key": "F2",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 284,
+      "function_key": "F3",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 285,
+      "function_key": "F4",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 286,
+      "function_key": "F5",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 287,
+      "function_key": "F6",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 288,
+      "function_key": "F7",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 289,
+      "function_key": "F8",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 290,
+      "function_key": "F9",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    },
+    {
+      "native_key": 291,
+      "function_key": "F10",
+      "keyboard_dispatch": null,
+      "non_dispatch_stop": {
+        "frame": 1,
+        "pc": "$FE5A6C",
+        "raw_amiga_key": 0
+      }
+    }
+  ]
+}
