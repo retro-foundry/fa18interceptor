@@ -64,6 +64,15 @@ The next renderer experiment needs a blitter-completion/write log (or a
 capture that exposes the pending blitter state and destination before the
 frontend snapshot), rather than further blitter watchpoint probes.
 
+## Normal line-submission buffer evidence
+
+A breakpoint trace of `$C2FB7A` during ordinary replay (frame 990) reaches the
+routine from `$C312D4`, not through the stepped `$C0D730` packet.  Its four
+line blits target `$0142C9`, `$016209`, `$018149`, and `$01A089`, an off-screen
+four-plane working family.  This independently confirms the buffered cadence:
+the normal renderer is drawing a phase ahead of the Copper-visible five-plane
+cockpit buffers.  See `analysis/routines/c2fb7a_blitter_line_plane_submission.md`.
+
 ## First changed-number boundary
 
 Adjacent normal-playback screenshots establish a real output transition:
