@@ -18,3 +18,8 @@ This supersedes the earlier stack-only association between `$C1CC86` and the
 JOY0DAT callback. `$C1718E` remains independently proven as a registered
 hardware callback, but this particular dynamic indirect call target is
 `$C1EE14`.
+
+The adjacent observed Ghidra entry `$C1ED48` is a four-byte `BRA.W` trampoline
+to this stage. Its exact source is
+`source_amiga/observed/branch_to_indirect_stage.asm`; it adds only this direct
+structural edge and does not change the stage's classification.
