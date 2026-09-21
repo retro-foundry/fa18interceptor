@@ -38,3 +38,9 @@ The fifth branch, `$C0D9A8-$C0D9E9`, is reconstructed in
 count four and compares `$C45A92` with `$3840`; the lower path adds two leaf
 calls through `$C4B39A`, while the greater-or-equal path uses the shorter
 sequence. The threshold's domain is unassigned.
+
+The sixth branch, `$C0D9EA-$C0DA37`, is reconstructed in
+`source_amiga/observed/emit_sixth_display_record_pair.asm`. It is the final
+bit-1-controlled form: both paths write count five and invoke four leaves, and
+the extended path appends the offset count-three record before calling the
+remaining leaf.
