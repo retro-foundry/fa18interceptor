@@ -1,0 +1,6 @@
+{
+  "instructions": 676,
+  "mapped": 574,
+  "unmapped": 102,
+  "mapping_source": "analysis\\hunk_runtime_resolved.json"
+}
