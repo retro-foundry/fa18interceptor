@@ -24,6 +24,11 @@ Three contiguous exercised fragments are now byte-exact source:
 - `load_matrix_side_component_prefix.asm` and
   `gate_matrix_side_first_component.asm` sign-extend the selected record's
   `+$28/$29/$2A` bytes and preserve the two exercised zero-component fragments.
+- The `matrix_side_*component*` slices at `$C136BE-$C137C9` preserve the
+  observed first/second output clears and all subsequent zero-component jumps,
+  without claiming their skipped nonzero alternatives.
+- The `$C13952-$C13A29` slices clear the third output, apply the trace's final
+  selected-record/status gates, and retain the observed epilogue.
 
 The enclosing static routine remains substantially wider than the live packet.
 Untraced branch gaps and later paths are deliberately not reconstructed.
