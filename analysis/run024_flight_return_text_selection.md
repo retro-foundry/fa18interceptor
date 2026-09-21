@@ -46,7 +46,7 @@ bytes.  Thus this is stronger than an address-ordered string inventory: it is
 the actual ordered batch available to the compositor in the flight-return
 scenario.
 
-| Cursor offset | Code | Descriptor | Payload | 
+| Cursor offset | Code | Descriptor | Payload |
 |---:|---:|---:|---|
 | `$00` | 6 | `$C3F237` | `F/A-18 INTERCEPTOR` |
 | `$02` | 100 | `$C3F25D` | `SELECT:` |
