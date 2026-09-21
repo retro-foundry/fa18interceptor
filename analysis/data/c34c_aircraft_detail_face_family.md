@@ -22,6 +22,10 @@ trace proves the stronger link: `$C1F100` begins with `A1=$C3515E` and
 uses `A4=$C46228` while stepping through the `$C34C` records, and `$C203C4`
 calls `$C2469E` for their polygons.
 
+The same 64-frame checkpoint capture observes no `$C212B0` line submission
+with `A5=$C45BEA`. The sheet's zero line count is therefore an observed
+renderer result, not a missing-line inference.
+
 The `$C34A9A/$C34A9C` polygon family is not merged into this model: it uses
 the separate `$C48390` workspace in the sampled frame. Similar silhouette and
 shared Hunk residency are insufficient to claim a shared object instance.
