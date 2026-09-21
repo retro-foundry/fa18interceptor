@@ -11,3 +11,10 @@ the established current-record selector `$C13D84`, matrix helper `$C2D408`,
 and multiple nested record/update helpers. Its record ownership and aggregate
 semantics are not yet assigned. This is a complete caller-return packet, not a
 claim that `$C25B66` is a standalone source-level function.
+
+The frame-6000 trace's entry fragments are byte-exact source:
+`initialize_indexed_update_gate.asm`, `gate_indexed_update_event.asm`,
+`route_zero_indexed_update.asm`, `gate_indexed_update_record_flag.asm`, and
+`gate_indexed_update_control_path.asm`. They establish the selected-index,
+event-byte, record-flag, and control-bit gates without claiming untraced
+alternatives.
