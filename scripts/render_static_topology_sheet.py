@@ -22,6 +22,10 @@ def main() -> None:
     parser.add_argument("--title", required=True)
     parser.add_argument("--subtitle", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--sampled-words", type=Path,
+                        help="sample_replay_memory JSON supplying displayed output triples")
+    parser.add_argument("--sampled-start", type=lambda text: int(text, 0),
+                        help="first sampled triple address; required with --sampled-words")
     parser.add_argument("--overwrite", action="store_true",
                         help="replace an existing explicitly named output")
     parser.add_argument("--traced-last", type=int,
@@ -29,14 +33,25 @@ def main() -> None:
     args = parser.parse_args()
     args.topology = args.topology.resolve()
     args.output = args.output.resolve()
+    if (args.sampled_words is None) != (args.sampled_start is None):
+        parser.error("--sampled-words and --sampled-start must be supplied together")
     if args.output.exists() and not args.overwrite:
         raise FileExistsError(args.output)
     topology = json.loads(args.topology.read_text(encoding="utf-8"))
     source = topology["vertex_source"]
     start, count = int(source["start"][1:], 16), source["count"]
-    memory = MEMORY.read_bytes()
-    points = [tuple(int.from_bytes(memory[start - 0xC00000 + index * 6 + axis * 2:start - 0xC00000 + index * 6 + axis * 2 + 2], "big", signed=True)
-                    for axis in range(3)) for index in range(count)]
+    if args.sampled_words is None:
+        memory = MEMORY.read_bytes()
+        points = [tuple(int.from_bytes(memory[start - 0xC00000 + index * 6 + axis * 2:start - 0xC00000 + index * 6 + axis * 2 + 2], "big", signed=True)
+                        for axis in range(3)) for index in range(count)]
+    else:
+        report = json.loads(args.sampled_words.read_text(encoding="utf-8"))
+        words = report["records"][-1]["words"]
+        def sampled_word(address: int) -> int:
+            value = words[f"{address:06x}"]
+            return value - 0x10000 if value >= 0x8000 else value
+        points = [tuple(sampled_word(args.sampled_start + index * 6 + axis * 2)
+                        for axis in range(3)) for index in range(count)]
     views = (("X-Y", lambda point: (point[0], point[1])), ("X-Z", lambda point: (point[0], point[2])),
              ("Y-Z", lambda point: (point[1], point[2])), ("isometric", lambda point: (point[0] - point[1], point[2] - (point[0] + point[1]) / 2)))
     image = Image.new("RGB", (2390, 760), "#101419")
@@ -63,7 +78,10 @@ def main() -> None:
             x, y = position(point)
             colour = "#65d5ff" if args.traced_last is None or index <= args.traced_last else "#f7e36b"
             draw.ellipse((x - 3, y - 3, x + 3, y + 3), fill=colour)
-    draw.text((28, 710), "Coloured outlines are renderer-observed faces mapped to static source-order triples; no unseen faces or links are inferred.", font=font(16), fill="#aab7c4")
+    footer = ("Coloured outlines are renderer-observed faces mapped to sampled runtime workspace triples; no unseen faces or links are inferred."
+              if args.sampled_words is not None else
+              "Coloured outlines are renderer-observed faces mapped to static source-order triples; no unseen faces or links are inferred.")
+    draw.text((28, 710), footer, font=font(16), fill="#aab7c4")
     args.output.parent.mkdir(exist_ok=True)
     image.save(args.output)
     print(f"wrote {args.output.relative_to(ROOT)} ({count} vertices, {len(topology['faces'])} faces)")

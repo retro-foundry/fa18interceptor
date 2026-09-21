@@ -17,6 +17,8 @@ ITEMS = (
      "c3515e_c34c_aircraft_detail_isometric_sheet.png"),
     ("Flight-object topology: 22 static + 14 derived vertices (5 faces)",
      "c351_c34c_static_topology_candidate.png"),
+    ("Flight-object workspace: C46228 at frame 1966 (5 faces)",
+     "c351_c34c_workspace_topology_frame1966.png"),
     ("Long deck/road/craft candidate: C39D2A -> C3925C/C3925E (10 faces)",
      "c39d2a_c3925_preclip_complete_face_sheet.png"),
     ("Long-component static topology: C39D2A (10 observed faces)",

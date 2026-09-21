@@ -16,9 +16,13 @@ def main():
     parser.add_argument('--restore', type=Path, required=True)
     parser.add_argument('--playback', type=Path, required=True)
     parser.add_argument('--frames', type=int, required=True)
-    parser.add_argument('--word', action='append', required=True,
+    parser.add_argument('--word', action='append',
                         type=lambda text: int(text, 0),
                         help='Runtime word address; may be repeated.')
+    parser.add_argument('--word-range', action='append', nargs=2,
+                        metavar=('START', 'END'), default=[],
+                        type=lambda text: int(text, 0),
+                        help='Inclusive even-address word interval; may be repeated.')
     parser.add_argument('--input-kind', default='J',
                         help='Only sample frames containing this recording event kind.')
     parser.add_argument('--sample-every', type=int,
@@ -30,6 +34,14 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
+    words = list(args.word or [])
+    for start, end in args.word_range:
+        if end < start or start % 2 or end % 2:
+            raise ValueError('Word ranges must be ordered even addresses')
+        words.extend(range(start, end + 1, 2))
+    words = list(dict.fromkeys(words))
+    if not words:
+        raise ValueError('At least one --word or --word-range is required')
     if args.frames < 1:
         raise ValueError('--frames must be positive')
     if args.sample_every is not None and args.sample_every < 1:
@@ -60,7 +72,7 @@ def main():
             records.append({
                 'frame': frame,
                 'events': matching,
-                'words': {f'{address:06x}': read_word(engine, address) for address in args.word},
+                'words': {f'{address:06x}': read_word(engine, address) for address in words},
                 'pc_after_frame': f'{engine.regs()["pc"]:06x}',
             })
 
@@ -71,7 +83,7 @@ def main():
         'input_kind': args.input_kind,
         'periodic_interval': ([args.sample_first, sample_last, args.sample_every]
                               if args.sample_every is not None else None),
-        'word_addresses': [f'{address:06x}' for address in args.word],
+        'word_addresses': [f'{address:06x}' for address in words],
         'records': records,
     }
     args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')

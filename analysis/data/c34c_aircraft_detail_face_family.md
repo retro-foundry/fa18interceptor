@@ -8,6 +8,8 @@
 
 [Open the static-coordinate topology PNG sheet](../plots/c351_c34c_static_topology_candidate.png).
 
+[Open the complete frame-1966 renderer-workspace topology sheet](../plots/c351_c34c_workspace_topology_frame1966.png).
+
 At the Golden Gate checkpoint, five distinct records in this range reach the
 pre-clip polygon routine through `$C203C4`. They contain 26 total polygon
 edges and are rendered with `$C45BEA` as the active transform/display context.
