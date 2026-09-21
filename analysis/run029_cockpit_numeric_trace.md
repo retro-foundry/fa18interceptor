@@ -64,6 +64,13 @@ The next renderer experiment needs a blitter-completion/write log (or a
 capture that exposes the pending blitter state and destination before the
 frontend snapshot), rather than further blitter watchpoint probes.
 
+`scripts/engine9000_bridge.py --normal-custom-log` now provides the first of
+those alternatives for CPU/Copper blitter programming under authentic normal
+replay. Its run029 frame-993/994 output confirms the working-family and
+visible-family submissions with the unmodified normal video hash; see
+`analysis/run029_normal_custom_log.md`. It is a register-programming oracle,
+not a DMA-memory-write log.
+
 ## Normal line-submission buffer evidence
 
 A breakpoint trace of `$C2FB7A` during ordinary replay (frame 990) reaches the

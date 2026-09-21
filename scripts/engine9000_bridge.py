@@ -274,7 +274,11 @@ def main():
     parser.add_argument('--start-frame', type=int, default=0)
     parser.add_argument('--trace-frames', type=int, default=0,
                         help='Single-step this many video frames after the normal replay window')
+    parser.add_argument('--normal-custom-log', action='store_true',
+                        help='Record Custom-register writes during ordinary full-frame replay')
     args = parser.parse_args()
+    if args.trace_frames and args.normal_custom_log:
+        parser.error('--normal-custom-log cannot be combined with --trace-frames')
     args.output.mkdir(parents=True, exist_ok=False)
     saves = args.output / 'saves'
     saves.mkdir()
@@ -308,6 +312,12 @@ def main():
     engine.frame = args.start_frame
     engine.hardware_frame = args.start_frame
     samples = []
+    normal_custom = None
+    if args.normal_custom_log:
+        # e9k-lib.h: E9K_DEBUG_OPTION_AMIGA_CUSTOM_LOGGER = 38.
+        engine.bind('e9k_debug_set_debug_option', None, U, U, P)(38, 1, None)
+        normal_custom = (args.output / 'normal_custom_writes.jsonl').open('w', encoding='utf8')
+        engine.custom_log = normal_custom
     for frame in range(args.start_frame + 1, args.start_frame + args.frames + 1):
         for kind, values in events.get(frame, []):
             engine.event(kind, values)
@@ -316,6 +326,9 @@ def main():
             raise RuntimeError(f'Expected video frame {frame}, actual {engine.frame}')
         if frame % 100 == 0:
             samples.append({'frame': frame, 'pc': engine.regs()['pc']})
+    if normal_custom is not None:
+        engine.custom_log = None
+        normal_custom.close()
     (args.output / 'state.bin').write_bytes(engine.state())
     maps = []
     for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
