@@ -76,5 +76,11 @@ signed `D4`, runs the two transposed helpers (`$C2EBC2` then `$C2EB4C`), and on
 the passing result increments `$C4E854` and stores `D0` at `$C4E85C` before
 projection. These counter/slot roles are dataflow-only.
 
+The `$C2E888-$C2E8D9` case is reconstructed in
+`source_amiga/observed/dispatch_fourth_display_record_case.asm`. It applies the
+opposite signed comparison order, invokes `$C2EB4C` and conditionally
+`$C2EBC2`, then increments `$C4E858` and stores the result at `$C4E860` on the
+passing path. Meaning remains dataflow-only.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
