@@ -9,4 +9,5 @@ signed words from `$C45BD8` as three multiply-and-accumulate groups. The
 three resulting words are supplied in `d0:d2` to `$C2EC90`.
 
 This proves a fixed-point vector/coefficients dataflow but not coordinate or
-gameplay semantics. `$C33D3A` begins the transform's state-publication tail.
+gameplay semantics. `$C33D3A–$C33DA3` publishes the output and rotates the
+two three-long vector blocks.
