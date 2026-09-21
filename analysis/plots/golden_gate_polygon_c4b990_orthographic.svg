@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460">
+<rect width="100%" height="100%" fill="#101419"/>
+<text x="24" y="30" fill="#f1f5f9" font-family="sans-serif" font-size="20">Golden Gate polygon tuple $C4B990</text>
+<text x="24" y="54" fill="#aab7c4" font-family="sans-serif" font-size="13">run031 frame 12000, $C24CFE → $C2FF48 · 4 traced segment(s) · workspace coordinates, not asserted source mesh</text>
+<rect x="30" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="75" y1="280.0" x2="345" y2="280.0" stroke="#536579"/>
+<line x1="210.0" y1="145" x2="210.0" y2="415" stroke="#536579"/>
+<text x="38" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">X-Y</text>
+<text x="38" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±3478</text>
+<line x1="178.99" y1="249.22" x2="176.39" y2="249.49" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="178.99" cy="249.22" r="2.5" fill="#ffffff"/>
+<circle cx="176.39" cy="249.49" r="2.5" fill="#ffffff"/>
+<text x="181.69" y="245.36" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="176.39" y1="249.49" x2="152.79" y2="245.76" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="176.39" cy="249.49" r="2.5" fill="#ffffff"/>
+<circle cx="152.79" cy="245.76" r="2.5" fill="#ffffff"/>
+<text x="168.59" y="243.63" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<line x1="152.79" y1="245.76" x2="155.39" y2="245.49" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="152.79" cy="245.76" r="2.5" fill="#ffffff"/>
+<circle cx="155.39" cy="245.49" r="2.5" fill="#ffffff"/>
+<text x="158.09" y="241.63" fill="#65d5ff" font-family="monospace" font-size="11">2</text>
+<line x1="155.39" y1="245.49" x2="178.99" y2="249.22" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="155.39" cy="245.49" r="2.5" fill="#ffffff"/>
+<circle cx="178.99" cy="249.22" r="2.5" fill="#ffffff"/>
+<text x="171.19" y="243.36" fill="#ffcc66" font-family="monospace" font-size="11">3</text>
+<rect x="420" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="465" y1="280.0" x2="735" y2="280.0" stroke="#536579"/>
+<line x1="600.0" y1="145" x2="600.0" y2="415" stroke="#536579"/>
+<text x="428" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">X-Z</text>
+<text x="428" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±3478</text>
+<line x1="568.99" y1="185.14" x2="566.39" y2="186.03" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="568.99" cy="185.14" r="2.5" fill="#ffffff"/>
+<circle cx="566.39" cy="186.03" r="2.5" fill="#ffffff"/>
+<text x="571.69" y="181.58" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="566.39" y1="186.03" x2="542.79" y2="145.89" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="566.39" cy="186.03" r="2.5" fill="#ffffff"/>
+<circle cx="542.79" cy="145.89" r="2.5" fill="#ffffff"/>
+<text x="558.59" y="161.96" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<line x1="542.79" y1="145.89" x2="545.39" y2="145.00" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="542.79" cy="145.89" r="2.5" fill="#ffffff"/>
+<circle cx="545.39" cy="145.00" r="2.5" fill="#ffffff"/>
+<text x="548.09" y="141.45" fill="#65d5ff" font-family="monospace" font-size="11">2</text>
+<line x1="545.39" y1="145.00" x2="568.99" y2="185.14" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="545.39" cy="145.00" r="2.5" fill="#ffffff"/>
+<circle cx="568.99" cy="185.14" r="2.5" fill="#ffffff"/>
+<text x="561.19" y="161.07" fill="#ffcc66" font-family="monospace" font-size="11">3</text>
+<rect x="810" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="855" y1="280.0" x2="1125" y2="280.0" stroke="#536579"/>
+<line x1="990.0" y1="145" x2="990.0" y2="415" stroke="#536579"/>
+<text x="818" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">Y-Z</text>
+<text x="818" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±3478</text>
+<line x1="1020.78" y1="185.14" x2="1020.51" y2="186.03" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="1020.78" cy="185.14" r="2.5" fill="#ffffff"/>
+<circle cx="1020.51" cy="186.03" r="2.5" fill="#ffffff"/>
+<text x="1024.64" y="181.58" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="1020.51" y1="186.03" x2="1024.24" y2="145.89" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="1020.51" cy="186.03" r="2.5" fill="#ffffff"/>
+<circle cx="1024.24" cy="145.89" r="2.5" fill="#ffffff"/>
+<text x="1026.37" y="161.96" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<line x1="1024.24" y1="145.89" x2="1024.51" y2="145.00" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="1024.24" cy="145.89" r="2.5" fill="#ffffff"/>
+<circle cx="1024.51" cy="145.00" r="2.5" fill="#ffffff"/>
+<text x="1028.37" y="141.45" fill="#65d5ff" font-family="monospace" font-size="11">2</text>
+<line x1="1024.51" y1="145.00" x2="1020.78" y2="185.14" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="1024.51" cy="145.00" r="2.5" fill="#ffffff"/>
+<circle cx="1020.78" cy="185.14" r="2.5" fill="#ffffff"/>
+<text x="1026.64" y="161.07" fill="#ffcc66" font-family="monospace" font-size="11">3</text>
+</svg>

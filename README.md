@@ -132,6 +132,29 @@ reached by a reconstructed branch but never run, segments under half exercised,
 and segments never touched at all. It aims recording sessions at measured gaps
 instead of guesses. Reconstruction cannot outrun scenario coverage.
 
+## Code, data, and display boundaries
+
+Run `python scripts/inventory_runtime_regions.py` to regenerate the auditable
+[runtime-region inventory](analysis/runtime_region_inventory.md) and its
+machine-readable companion. It preserves original `HUNK_CODE`, `HUNK_DATA`,
+and `HUNK_BSS` ownership, separately records exact inline data ranges proved
+inside executable hunks, and lists Copper-visible buffers as mutable display
+targets. It deliberately does not call a never-executed CODE hunk data, or a
+visible bitplane buffer a static graphics asset.
+
+## Renderer-observed model identification
+
+The model-discovery output is deliberately based on the game renderer rather
+than inferred mesh links. [The model identification catalogue](analysis/data/model_identification_catalog.md)
+lists the traced source/controller paths and links every X-Y/X-Z/Y-Z sheet.
+[The contact gallery](analysis/plots/model_identification_gallery.png) is the
+quick visual entry point.
+
+Filled faces are captured at `$C2FF48` and, where needed, before orientation
+or clip rejection at `$C2005C`/`$C2469E`; line segments are captured at
+`$C212B0`. Coordinates are mutable renderer workspaces, so every sheet states
+its scenario and only connects vertices within an observed renderer record.
+
 ## Controls recorded as documentation
 
 `GAME.md` is the authority until raw-keycode tracing confirms each mapping:

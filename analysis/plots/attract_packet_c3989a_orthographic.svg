@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460">
+<rect width="100%" height="100%" fill="#101419"/>
+<text x="24" y="30" fill="#f1f5f9" font-family="sans-serif" font-size="20">Attract packet $C3989A</text>
+<text x="24" y="54" fill="#aab7c4" font-family="sans-serif" font-size="13">attract HUD trace frame 450, $C3989A → $C212B0 · 2 traced segment(s) · workspace coordinates, not asserted source mesh</text>
+<rect x="30" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="75" y1="280.0" x2="345" y2="280.0" stroke="#536579"/>
+<line x1="210.0" y1="145" x2="210.0" y2="415" stroke="#536579"/>
+<text x="38" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">X-Y</text>
+<text x="38" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±5268</text>
+<line x1="314.97" y1="280.00" x2="219.02" y2="282.46" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="314.97" cy="280.00" r="2.5" fill="#ffffff"/>
+<circle cx="219.02" cy="282.46" r="2.5" fill="#ffffff"/>
+<text x="270.99" y="277.23" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="203.82" y1="282.46" x2="233.99" y2="282.46" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="203.82" cy="282.46" r="2.5" fill="#ffffff"/>
+<circle cx="233.99" cy="282.46" r="2.5" fill="#ffffff"/>
+<text x="222.91" y="278.46" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<rect x="420" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="465" y1="280.0" x2="735" y2="280.0" stroke="#536579"/>
+<line x1="600.0" y1="145" x2="600.0" y2="415" stroke="#536579"/>
+<text x="428" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">X-Z</text>
+<text x="428" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±5268</text>
+<line x1="704.97" y1="175.03" x2="609.02" y2="282.20" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="704.97" cy="175.03" r="2.5" fill="#ffffff"/>
+<circle cx="609.02" cy="282.20" r="2.5" fill="#ffffff"/>
+<text x="660.99" y="224.62" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="593.82" y1="415.00" x2="623.99" y2="283.82" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="593.82" cy="415.00" r="2.5" fill="#ffffff"/>
+<circle cx="623.99" cy="283.82" r="2.5" fill="#ffffff"/>
+<text x="612.91" y="345.41" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<rect x="810" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="855" y1="280.0" x2="1125" y2="280.0" stroke="#536579"/>
+<line x1="990.0" y1="145" x2="990.0" y2="415" stroke="#536579"/>
+<text x="818" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">Y-Z</text>
+<text x="818" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±5268</text>
+<line x1="990.00" y1="175.03" x2="987.54" y2="282.20" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="990.00" cy="175.03" r="2.5" fill="#ffffff"/>
+<circle cx="987.54" cy="282.20" r="2.5" fill="#ffffff"/>
+<text x="992.77" y="224.62" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="987.54" y1="415.00" x2="987.54" y2="283.82" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="987.54" cy="415.00" r="2.5" fill="#ffffff"/>
+<circle cx="987.54" cy="283.82" r="2.5" fill="#ffffff"/>
+<text x="991.54" y="345.41" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+</svg>

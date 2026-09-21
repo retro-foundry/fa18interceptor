@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460">
+<rect width="100%" height="100%" fill="#101419"/>
+<text x="24" y="30" fill="#f1f5f9" font-family="sans-serif" font-size="20">Run001 packet $C3751A</text>
+<text x="24" y="54" fill="#aab7c4" font-family="sans-serif" font-size="13">run001 record-walker trace, $C3751A → $C212B0 · 5 traced segment(s) · workspace coordinates, not asserted source mesh</text>
+<rect x="30" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="75" y1="280.0" x2="345" y2="280.0" stroke="#536579"/>
+<line x1="210.0" y1="145" x2="210.0" y2="415" stroke="#536579"/>
+<text x="38" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">X-Y</text>
+<text x="38" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±774</text>
+<line x1="216.63" y1="288.55" x2="216.63" y2="288.55" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="216.63" cy="288.55" r="2.5" fill="#ffffff"/>
+<circle cx="216.63" cy="288.55" r="2.5" fill="#ffffff"/>
+<text x="220.63" y="284.55" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="216.63" y1="288.55" x2="201.98" y2="288.55" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="216.63" cy="288.55" r="2.5" fill="#ffffff"/>
+<circle cx="201.98" cy="288.55" r="2.5" fill="#ffffff"/>
+<text x="213.30" y="284.55" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<line x1="201.98" y1="288.55" x2="201.98" y2="288.55" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="201.98" cy="288.55" r="2.5" fill="#ffffff"/>
+<circle cx="201.98" cy="288.55" r="2.5" fill="#ffffff"/>
+<text x="205.98" y="284.55" fill="#65d5ff" font-family="monospace" font-size="11">2</text>
+<line x1="201.98" y1="288.55" x2="216.63" y2="288.55" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="201.98" cy="288.55" r="2.5" fill="#ffffff"/>
+<circle cx="216.63" cy="288.55" r="2.5" fill="#ffffff"/>
+<text x="213.30" y="284.55" fill="#ffcc66" font-family="monospace" font-size="11">3</text>
+<line x1="216.63" y1="288.55" x2="202.15" y2="288.55" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="216.63" cy="288.55" r="2.5" fill="#ffffff"/>
+<circle cx="202.15" cy="288.55" r="2.5" fill="#ffffff"/>
+<text x="213.39" y="284.55" fill="#65d5ff" font-family="monospace" font-size="11">4</text>
+<rect x="420" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="465" y1="280.0" x2="735" y2="280.0" stroke="#536579"/>
+<line x1="600.0" y1="145" x2="600.0" y2="415" stroke="#536579"/>
+<text x="428" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">X-Z</text>
+<text x="428" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±774</text>
+<line x1="606.63" y1="167.33" x2="606.63" y2="145.00" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="606.63" cy="167.33" r="2.5" fill="#ffffff"/>
+<circle cx="606.63" cy="145.00" r="2.5" fill="#ffffff"/>
+<text x="610.63" y="152.16" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="606.63" y1="145.00" x2="591.98" y2="145.00" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="606.63" cy="145.00" r="2.5" fill="#ffffff"/>
+<circle cx="591.98" cy="145.00" r="2.5" fill="#ffffff"/>
+<text x="603.30" y="141.00" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<line x1="591.98" y1="145.00" x2="591.98" y2="156.16" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="591.98" cy="145.00" r="2.5" fill="#ffffff"/>
+<circle cx="591.98" cy="156.16" r="2.5" fill="#ffffff"/>
+<text x="595.98" y="146.58" fill="#65d5ff" font-family="monospace" font-size="11">2</text>
+<line x1="591.98" y1="156.16" x2="606.63" y2="156.16" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="591.98" cy="156.16" r="2.5" fill="#ffffff"/>
+<circle cx="606.63" cy="156.16" r="2.5" fill="#ffffff"/>
+<text x="603.30" y="152.16" fill="#ffcc66" font-family="monospace" font-size="11">3</text>
+<line x1="606.63" y1="156.16" x2="592.15" y2="167.33" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="606.63" cy="156.16" r="2.5" fill="#ffffff"/>
+<circle cx="592.15" cy="167.33" r="2.5" fill="#ffffff"/>
+<text x="603.39" y="157.74" fill="#65d5ff" font-family="monospace" font-size="11">4</text>
+<rect x="810" y="100" width="360" height="360" fill="#151c24" stroke="#506070"/>
+<line x1="855" y1="280.0" x2="1125" y2="280.0" stroke="#536579"/>
+<line x1="990.0" y1="145" x2="990.0" y2="415" stroke="#536579"/>
+<text x="818" y="122" fill="#f1f5f9" font-family="sans-serif" font-size="16">Y-Z</text>
+<text x="818" y="450" fill="#aab7c4" font-family="sans-serif" font-size="11">range ±774</text>
+<line x1="981.45" y1="167.33" x2="981.45" y2="145.00" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="981.45" cy="167.33" r="2.5" fill="#ffffff"/>
+<circle cx="981.45" cy="145.00" r="2.5" fill="#ffffff"/>
+<text x="985.45" y="152.16" fill="#65d5ff" font-family="monospace" font-size="11">0</text>
+<line x1="981.45" y1="145.00" x2="981.45" y2="145.00" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="981.45" cy="145.00" r="2.5" fill="#ffffff"/>
+<circle cx="981.45" cy="145.00" r="2.5" fill="#ffffff"/>
+<text x="985.45" y="141.00" fill="#ffcc66" font-family="monospace" font-size="11">1</text>
+<line x1="981.45" y1="145.00" x2="981.45" y2="156.16" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="981.45" cy="145.00" r="2.5" fill="#ffffff"/>
+<circle cx="981.45" cy="156.16" r="2.5" fill="#ffffff"/>
+<text x="985.45" y="146.58" fill="#65d5ff" font-family="monospace" font-size="11">2</text>
+<line x1="981.45" y1="156.16" x2="981.45" y2="156.16" stroke="#ffcc66" stroke-width="2"/>
+<circle cx="981.45" cy="156.16" r="2.5" fill="#ffffff"/>
+<circle cx="981.45" cy="156.16" r="2.5" fill="#ffffff"/>
+<text x="985.45" y="152.16" fill="#ffcc66" font-family="monospace" font-size="11">3</text>
+<line x1="981.45" y1="156.16" x2="981.45" y2="167.33" stroke="#65d5ff" stroke-width="2"/>
+<circle cx="981.45" cy="156.16" r="2.5" fill="#ffffff"/>
+<circle cx="981.45" cy="167.33" r="2.5" fill="#ffffff"/>
+<text x="985.45" y="157.74" fill="#65d5ff" font-family="monospace" font-size="11">4</text>
+</svg>
