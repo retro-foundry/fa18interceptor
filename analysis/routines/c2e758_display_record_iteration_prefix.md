@@ -82,5 +82,11 @@ opposite signed comparison order, invokes `$C2EB4C` and conditionally
 `$C2EBC2`, then increments `$C4E858` and stores the result at `$C4E860` on the
 passing path. Meaning remains dataflow-only.
 
+The shared `$C2E9D8-$C2E9F7` continuation is reconstructed in
+`source_amiga/observed/continue_display_record_iteration.asm`. A negative `D5`
+clears the current eight-byte workspace slot and word 14 of the selected
+16-byte record; otherwise, odd `D0` sets the local byte at `-2(A6)`. Both
+paths return to the common loop increment at `$C2EA38`.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
