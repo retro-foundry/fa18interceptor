@@ -20,6 +20,8 @@ def main():
     parser.add_argument('--return-pc', type=lambda x: int(x, 0), required=True)
     parser.add_argument('--frames', type=int, required=True)
     parser.add_argument('--max-instructions', type=int, default=10000)
+    parser.add_argument('--ignore-future-input', action='store_true',
+                        help='trace after the breakpoint without delivering later replay events')
     parser.add_argument('--write-memory', action='append', nargs=3,
                         metavar=('ADDRESS', 'VALUE', 'SIZE'), default=[],
                         help='write VALUE at ADDRESS using SIZE bytes after the breakpoint pauses')
@@ -46,7 +48,7 @@ def main():
     if hit_frame is None or engine.regs()['pc'] != args.address:
         raise RuntimeError(f'Breakpoint {args.address:06x} not reached')
     future = [frame for frame in events if frame > hit_frame]
-    if future:
+    if future and not args.ignore_future_input:
         raise ValueError(f'Future input after breakpoint frame {hit_frame}: {future}')
     writes = []
     write_memory = engine.bind('e9k_debug_write_memory', C.c_int, C.c_uint32,
@@ -92,7 +94,9 @@ def main():
     (args.output / 'trace_summary.json').write_text(json.dumps({'breakpoint': f'{args.address:06x}', 'hit_frame': hit_frame,
         'return_pc': f'{args.return_pc:06x}', 'instructions': len(rows),
         'termination': 'return_pc' if reached_return else 'max_instructions',
-        'limitation': 'Input was delivered during normal replay before breakpoint; no future input occurred while stepping.'}, indent=2) + '\n')
+        'limitation': ('Input was delivered during normal replay before breakpoint; '
+                       + ('later replay events were deliberately not delivered while stepping.'
+                          if future else 'no future input occurred while stepping.'))}, indent=2) + '\n')
     final_banks = []
     for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
         data = engine.memory(address, size)

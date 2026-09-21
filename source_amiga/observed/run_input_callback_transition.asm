@@ -1,5 +1,5 @@
-; Byte-exact static-only input callback transition $C06BF0-$C06C03.
-; Reached by the input dispatcher at $C1C2B8; no available capture executes it.
+; Byte-exact bounded input callback transition $C06BF0-$C06C03.
+; Native Delete reaches it through the raw-$46 input route at $C1C2B8.
 
                 org     $C06BF0
 
