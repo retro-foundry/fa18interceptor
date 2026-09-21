@@ -23,5 +23,11 @@ loads a three-word neighbour tuple, performs signed multiply/divide adjustment
 with remainder-sensitive rounding, then branches to the common status tail at
 `$C2EC36` or `$C2EC58`. This establishes arithmetic and control flow only.
 
+The second observed helper call is `$C2EAD0-$C2EB4B`, reconstructed in
+`source_amiga/observed/adjust_negated_display_record_pair.asm`. It follows the
+same arithmetic pattern but negates its initial inputs and final candidate;
+the routine is consequently documented as a polarity variant, not as a
+geometric or display operation.
+
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
