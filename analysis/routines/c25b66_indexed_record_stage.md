@@ -33,3 +33,5 @@ at `$C26EBE`.
 The observed zero-result continuation at `$C26294-$C26321` is also sourced as
 separate gates: it tests record bits/classes, clears two record flag bits on
 the traced route, and returns to the shared indexed-update continuation.
+That continuation is the byte-exact `$C2627E` helper-call tail, which invokes
+the existing selected-record-offset guard at `$C2651E` and returns.
