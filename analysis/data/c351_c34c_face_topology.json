@@ -1,0 +1,17 @@
+{
+  "scope": "C2035A source offsets grouped at C203BA pre-clip calls",
+  "vertex_source": {
+    "start": "$C3515E",
+    "count": 36,
+    "traced_indices": [0, 21],
+    "continuation_candidate_indices": [22, 35]
+  },
+  "faces": [
+    {"record": "$C34C06", "indices": [1, 2, 33, 20, 32]},
+    {"record": "$C34C18", "indices": [7, 22, 10, 21, 29, 6]},
+    {"record": "$C34C2A", "indices": [0, 16, 34, 30, 12, 23]},
+    {"record": "$C34C38", "indices": [13, 14, 31, 35]},
+    {"record": "$C34C48", "indices": [0, 5, 3, 4, 25]}
+  ],
+  "qualification": "Face index lists are renderer-observed. Vertices 0-21 have a bounded C3515E transform trace; 22-35 are contiguous immutable Hunk-41 triples matching the remaining required indices, but their transform producer is untraced."
+}

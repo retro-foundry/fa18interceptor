@@ -4,6 +4,8 @@
 
 [Open the orthographic + isometric sheet](../plots/c3515e_c34c_aircraft_detail_isometric_sheet.png).
 
+[Open the static-coordinate topology candidate](../plots/c351_c34c_static_topology_candidate.svg).
+
 At the Golden Gate checkpoint, five distinct records in this range reach the
 pre-clip polygon routine through `$C203C4`. They contain 26 total polygon
 edges and are rendered with `$C45BEA` as the active transform/display context.
