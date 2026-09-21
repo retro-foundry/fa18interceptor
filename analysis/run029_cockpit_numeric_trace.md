@@ -32,6 +32,34 @@ trace the corresponding blit source.  That experiment should retain normal
 full-frame playback until the changed frame; only a no-future-input interval
 may be instruction-stepped.
 
+## Frame-latency and watchpoint boundary
+
+The trace beginning after normal frame 992, stepping chipset frame 993,
+does **not** repeat the frame-994 packet.  Its eight `BLTSIZE` triggers are
+from `$C30D1C`, `$C30E40`, `$C2FBE6`, `$C2FC4E`, `$C2FCB6`, and `$C2FD1C`.
+Their C/D pointers are in the alternate/working ranges beginning `$014600`
+and `$0147FE`, rather than the Copper-visible run029 planes beginning
+`$04DB30`.  Conversely, the frame-994 trace has the four self-addressed
+active-plane maintenance submissions and two line jobs described above.
+
+This establishes a buffered renderer cadence: the normal screenshot boundary
+is not a safe assumption about which instruction-stepped chipset frame
+produced its visible pixels.  In particular, neither trace may be promoted to
+a speed/altitude formatter attribution.
+
+Three ordinary-replay write watchpoints were placed at bytes proven different
+between the normal frame-993 and frame-994 active-plane snapshots:
+`$04DB58`, `$051FAB`, and `$053EEB`.  Each missed with `--any-source`.
+The same tool had already missed a CPU-only watch at `$04DB30`.  The Engine9000
+watch facility therefore does not report the relevant asynchronous Chip-RAM
+blitter writes; these misses are a tool boundary, not evidence that the bytes
+did not change.  The normal snapshot comparison remains the authority for the
+visible change.
+
+The next renderer experiment needs a blitter-completion/write log (or a
+capture that exposes the pending blitter state and destination before the
+frontend snapshot), rather than further CPU memory watchpoints.
+
 ## First changed-number boundary
 
 Adjacent normal-playback screenshots establish a real output transition:
