@@ -37,6 +37,11 @@ multiply/divide-and-rounding pattern while deriving its candidate through
 `D1/D4` and returns through the shared bound classifier. Its role is likewise
 kept at arithmetic/dataflow level.
 
+The final static sibling `$C2EBC2-$C2EC35` is reconstructed in
+`source_amiga/observed/adjust_negated_transposed_display_record_pair.asm`.
+It negates the transposed inputs and final candidate, then falls through to the
+same `$C2EC36` classifier. This helper was not entered by the focused trace.
+
 Both helpers use the shared `$C2EC36-$C2EC67` tail, reconstructed in
 `source_amiga/observed/classify_adjusted_display_pair_bounds.asm`. It snapshots
 `D0-D2` to `$C45AC6`, accepts only a non-negative `D2` bound with both signed
