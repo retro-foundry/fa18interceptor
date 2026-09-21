@@ -41,16 +41,15 @@ Adjacent normal-playback screenshots establish a real output transition:
 | 993 | `161 KTS` | `145 FT` |
 | 994 | `171 KTS` | `145 FT` |
 
-The ordinary frame-993 and frame-994 snapshots have identical bytes in the
-four Copper-list plane ranges.  The frame-994 stepped trace also programs the
-same active-plane and prepared-job blitters but ends with no changed bytes in
-those ranges.  This is a timing/buffer-observability discrepancy, not evidence
-that the visible speed change lacks a renderer.  Do not attribute `$C4597C`
-through `$C45984`, or any other simultaneously changing state word, to KTS on
-this result alone.
+The initial comparison was against the older attract-style plane set at
+`$012BC0` onward.  That set is inactive in run029.  The Copper-source rows in
+the trace identify the active run029 list at `$057858`; it points at a separate
+five-plane display set.  Those active planes change by 2,760, 3,870, 438, and
+352 bytes respectively across the 993-to-994 boundary.  See
+`analysis/run029_active_cockpit_bitplanes.md`.
 
-The required next experiment is a capture hook at the video-refresh boundary
-that exports the exact displayed bitplane backing store (or a validated raster
-readback) alongside the corresponding Chip-RAM snapshot.  That will tell
-whether the bridge's post-frame exported map lags or differs from the video
-surface before writer-PC tracing resumes.
+The stepped trace still programs the earlier four-plane packet and ends before
+the active five-plane presentation is reflected in its exported RAM.  It must
+not be used to attribute `$C4597C` through `$C45984`, or any other
+simultaneously changing state word, to KTS.  The next trace must follow the
+producer of the active `$057858` Copper list and its five backing buffers.
