@@ -1,6 +1,6 @@
-# Run031 dynamic counted-projection record probe
+# Run031 counted-projection record snapshot discrepancy probe
 
-Classification: **runtime-backed dynamic-data observation with negative mutation result**.
+Classification: **runtime-backed snapshot discrepancy with negative mutation result**.
 
 At ordinary full replay frame 12,001, execution reaches `$C211DC` with `A2`
 at `$C35734` and the expected header `$0D01,$002A`. The first six-word record
@@ -11,9 +11,13 @@ at `$C483BA` is then:
 ```
 
 This differs from the `$C483BA` sample captured at the restored frame-12,000
-checkpoint (`027D 0081 0026 027D 00A7 0023`). Thus `$C483BA` is not an
-immutable model-data blob: it contains per-frame transformed or otherwise
-runtime-dependent projection-record data.
+checkpoint (`027D 0081 0026 027D 00A7 0023`). It establishes a discrepancy
+between the two execution/snapshot contexts, but does not by itself establish
+that `$C483BA` is refreshed every frame.
+
+Subsequent CPU-only and all-source write-watchpoint probes over replay frames
+1–12,001 observed no write to `$C483BA`. No writer or dynamic-workspace role
+is therefore assigned to this address yet.
 
 ## Controlled mutation
 
