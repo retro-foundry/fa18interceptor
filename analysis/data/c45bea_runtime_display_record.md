@@ -1,9 +1,11 @@
 # `$C45BEA`: runtime display record, not an exportable static mesh
 
-The Golden Gate pre-cull sheet for `$C45BEA` has a recognisably aircraft- or
-missile-like silhouette. It is retained in the model-identification gallery as
-an on-screen recognition aid, but it must not be treated as immutable model
-data.
+The Golden Gate pre-cull sheet formerly labelled `$C45BEA` has a recognisably
+aircraft- or missile-like silhouette. Follow-up caller capture shows that
+`$C45BEA` is its active transform/display context, while the actual face
+records are `$C34C06-$C34C48`. The plot is now catalogued as the
+[`$C34C` aircraft-detail family](c34c_aircraft_detail_face_family.md), not as
+a `$C45BEA` model.
 
 ## Evidence
 
@@ -23,10 +25,13 @@ data.
   12000 checkpoint. Thus it is a persistent transformed/display record at
   that moment, rather than short-lived scratch space, but it varies with the
   scene/control state.
+- The expanded `$C2469E` capture records five recurring pre-clip calls through
+  `$C203C4` with `A5=$C45BEA`, but with `A2` equal to `$C34C06`, `$C34C18`,
+  `$C34C2A`, `$C34C38`, and `$C34C48`. Therefore `A5` identifies a mutable
+  transform/display context, not the polygon-face source.
 
 ## Conclusion
 
-`$C45BEA` is renderer-consumable runtime data. Its plot may identify a plane,
-missile, or a related display object only at the sampled scene state; the
-evidence does not establish a static source mesh or an object type. Keep it
-separate from the static-model export candidates.
+`$C45BEA` is renderer-consumable runtime data. It changes the pose/display of
+the linked `$C34C` aircraft-detail faces but is not itself an exportable static
+mesh. Keep it separate from static-model export candidates.

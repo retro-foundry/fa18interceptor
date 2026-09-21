@@ -21,6 +21,10 @@ def signed_word(engine: Engine, address: int) -> int:
     return int.from_bytes(engine.memory(address, 2), "big", signed=True)
 
 
+def longword(engine: Engine, address: int) -> int:
+    return int.from_bytes(engine.memory(address, 4), "big", signed=False)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--restore", type=Path, required=True)
@@ -52,10 +56,12 @@ def main() -> None:
                 raw = engine.memory(WORKSPACE + 4, count * 6)
                 triples = [[int.from_bytes(raw[index + axis * 2:index + axis * 2 + 2], "big", signed=True)
                             for axis in range(3)] for index in range(0, len(raw), 6)]
+                stack_pointer = registers["a7"] & 0xFFFFFF
                 submissions.append({
                     "submission": len(submissions), "host_frame": engine.frame,
                     "count": count, "triples": triples,
                     "context": {name: f"${registers[name] & 0xFFFFFF:06X}" for name in ("a5", "a2", "a3", "a4")},
+                    "return_pc": f"${longword(engine, stack_pointer) & 0xFFFFFF:06X}",
                 })
                 if len(submissions) >= args.max_faces:
                     break

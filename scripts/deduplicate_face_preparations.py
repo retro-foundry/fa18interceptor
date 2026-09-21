@@ -1,4 +1,4 @@
-"""Select one observed pre-cull C2005C face per static record address."""
+"""Select one observed face per renderer context and record address."""
 from __future__ import annotations
 
 import argparse
@@ -29,9 +29,9 @@ def main() -> None:
     if not selected:
         raise ValueError("no selected face records")
     output = {
-        "scope": "one C2005C face per observed static record address before orientation/clipping",
+        "scope": "one observed face per renderer context and record address",
         "input": str(args.input), "submission_count": len(selected), "submissions": selected,
-        "qualification": "Faces are selected before orientation and clip rejection. One first-observed transformed coordinate sample is retained per record; coordinates are mutable workspace values.",
+        "qualification": "One first-observed transformed coordinate sample is retained per record. Coordinates are mutable renderer-workspace values; the input report's scope determines whether a face was captured before or after an orientation gate.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")

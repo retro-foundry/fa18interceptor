@@ -7,6 +7,7 @@ Each sheet is a tight-fit orthographic X-Y / X-Z / Y-Z plot. A coloured closed o
 | Candidate / family | Renderer evidence | Current identification | Sheet |
 | --- | --- | --- | --- |
 | `$C3515E` to `$C34A9A/$C34A9C` | 42 unique pre-cull faces, 156 polygon edges; static source and both renderer families bounded | external aircraft candidate, including hidden/back-facing faces | [complete pre-cull sheet](../plots/external_aircraft_c34a9_preclip_complete_face_sheet.png) |
+| `$C34C06-$C34C48` under `$C45BEA` | 5 unique pre-clip faces, 26 polygon edges; face records and `$C203C4` caller captured | tapered fuselage/nose-like external-aircraft detail family | [evidence](c34c_aircraft_detail_face_family.md) Â· [sheet](../plots/c34c_aircraft_detail_preclip_unique_face_sheet.png) |
 | `$C39D2A` to `$C3925C/$C3925E` | 10 unique pre-cull faces, 45 polygon edges; static transform and both face contexts traced | **user-identified aircraft-carrier deck/island** candidate | [complete pre-cull sheet](../plots/c39d2a_c3925_preclip_complete_face_sheet.png) |
 | `$C35932` / `$C3B720` batches | 25 polygons, 86 polygon edges, 36 line segments; bounded transform-batch capture | broadest partial Golden Gate bridge composite | [assembled sheet](../plots/golden_gate_assembled_transform_batches_model_sheet.png) |
 | `$C355D8/$C355D6` | 12 unique pre-clip faces, 42 polygon edges, 39 line segments | bridge face-family component, including faces not finally submitted | [pre-clip faces + lines](../plots/golden_gate_c355_preclip_complete_combined_sheet.png) |

@@ -13,6 +13,8 @@ OUTPUT = PLOTS / "model_identification_gallery.png"
 ITEMS = (
     ("External aircraft: C3515E -> C34A9A/C34A9C (42 pre-cull faces)",
      "external_aircraft_c34a9_preclip_complete_face_sheet.png"),
+    ("Aircraft detail / nose family: C34C06-C34C48 (5 pre-clip faces)",
+     "c34c_aircraft_detail_preclip_unique_face_sheet.png"),
     ("Carrier/deck candidate: C39D2A -> C3925C/C3925E (10 pre-cull faces)",
      "c39d2a_c3925_preclip_complete_face_sheet.png"),
     ("Golden Gate assembled batches: C35932 + C3B720", "golden_gate_assembled_transform_batches_model_sheet.png"),
