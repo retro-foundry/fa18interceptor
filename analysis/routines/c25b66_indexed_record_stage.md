@@ -27,3 +27,6 @@ coordinate deltas at `+$14` and `+$1C`; no physical coordinate meaning is
 assigned to those fields.
 The subsequent `$C25E86-$C25F01` slices preserve the observed fixed-point
 normalization and writes at `+$0C/$0E/$10`, without assigning coordinate axes.
+Finally, the `$C25FEE-$C2601B` slices form relative `D2/D3/D4` inputs from the
+record and saved delta tuple, then call the established candidate-record scan
+at `$C26EBE`.
