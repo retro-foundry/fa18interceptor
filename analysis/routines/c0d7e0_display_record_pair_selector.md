@@ -44,3 +44,10 @@ The sixth branch, `$C0D9EA-$C0DA37`, is reconstructed in
 bit-1-controlled form: both paths write count five and invoke four leaves, and
 the extended path appends the offset count-three record before calling the
 remaining leaf.
+
+The fallback `$C0DA38-$C0DA6F` is reconstructed in
+`source_amiga/observed/emit_fallback_display_record_pair.asm`. It emits a
+count-four record through four leaves, selects one of two source words by
+`$C45785`, and compares it to `$3840`: greater selects the success return and
+otherwise selects rejection. The state fields and threshold domain remain
+unassigned.
