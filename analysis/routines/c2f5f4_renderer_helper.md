@@ -24,3 +24,8 @@ nonpositive-span exit, it indexes a mode-selected pointer table and a word
 table, derives a scaled offset, applies it to four pointers loaded through
 `A1`, then seeds `D1-D6` from the table results. This proves pointer/table
 dataflow, not pixels or object ownership.
+
+The runtime-backed `$C2F6D8-$C2F717` mask phase is reconstructed in
+`source_amiga/observed/mask_renderer_register_pairs.asm`. Each clear bit in
+`$C456E7` replaces the corresponding `D0-D3` word with `-1` and clears its
+paired `D4-D7` word. The meaning of the paired values remains unassigned.
