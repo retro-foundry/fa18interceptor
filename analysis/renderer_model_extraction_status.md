@@ -1,0 +1,39 @@
+# Renderer model extraction status
+
+Updated: 2026-09-22.
+
+## Flight object and `$C45BEA`
+
+`$C45BEA` is not model data. It is mutable display state used while the five
+`$C34C06-$C34C48` detail faces enter the pre-clip renderer. The complete
+procedural flight-object boundary is `$C3515E -> $C34A9A/$C34A9C`:
+
+- 22 immutable coordinate triples;
+- 22 distinct static face records / 82 observed polygon edges;
+- direct slots 0--21 plus code-derived slots 22--39;
+- separate C34A and C34C face layers with separate transform lanes.
+
+Use [the payload](data/c351_flight_object_static_payload.json) and
+[the export manifest](data/c351_flight_object_export_manifest.json). Do not
+export `$C48390`, `$C46228`, or `$C45BEA` as source geometry.
+
+The complete family is visibly F/A-18-like in the external-camera oracle.
+That is visual identification, not a decoded original name; the C34C detail
+layer is not proven to be a missile or an LOD mesh.
+
+## Golden Gate pylon/deck candidate
+
+`$C39D2A -> $C3925C/$C3925E` is separately extractable as 43 static triples
+and ten observed faces. Its tall source aspect ratio and upright-block plus
+deck topology favour a bridge pylon/deck component over the former carrier
+interpretation. Semantic name and instancing are still unproven. See
+[the candidate evidence](data/c39d2a_c3925_static_model_candidate.md) and
+[static payload](data/c39d2a_c3925_static_payload.json).
+
+## Remaining bridge batches
+
+The `$C1F4AC` route reuses `$C48390` and mixes raw source triples with control
+packets. Consult [the packet inventory](data/c1f4ac_golden_gate_source_packet_inventory.md)
+before extracting any of its inputs. In particular, `$C35932` and `$C361E4`
+are mixed packets, while `$C3AD0E`, `$C3B0CE`, `$C3B720`, `$C3B9B2`, and
+`$C3A96E` are direct triple blocks for the sampled route.

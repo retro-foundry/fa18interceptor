@@ -154,6 +154,10 @@ quick visual entry point.
 separates traced immutable geometry from unresolved renderer families and
 mutable workspaces that must not be exported as source models.
 
+[Renderer model extraction status](analysis/renderer_model_extraction_status.md)
+is the concise current handoff for the `$C45BEA` flight-object result, the
+Golden Gate pylon/deck candidate, and remaining mixed bridge packets.
+
 Filled faces are captured at `$C2FF48` and, where needed, before orientation
 or clip rejection at `$C2005C`/`$C2469E`; line segments are captured at
 `$C212B0`. Coordinates are mutable renderer workspaces, so every sheet states
