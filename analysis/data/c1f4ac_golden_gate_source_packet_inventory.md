@@ -18,6 +18,8 @@ Counts below include the initial `$C1F4AC` triple plus `$C1F528` loop entries.
 | `$C3A96E` | 1 | `$C3A974` | raw triple block, but this trace returns through the early matrix gate before a sampled renderer submission |
 | `$C3A9A8` | 2 | `$C3A9B4` | raw triple block in the red Golden Gate window |
 | `$C3B108` | 3 | `$C3B11A` | raw triple block in the red Golden Gate window |
+| `$C35BAA` | 2 | `$C35BB6` | mixed: two triples, then signed control word; walker begins `$C35BB8` |
+| `$C35BC2` | 2 | `$C35BCE` | mixed: two triples, then signed control word; walker begins `$C35BD0` |
 
 This table does not say that a raw block is a complete model. It establishes
 only which bytes are direct immutable coordinate input at this matrix entry,
@@ -33,3 +35,6 @@ first `$C1F6F8` entry advances `A1` to `$C3AF74` and `A3` to `$C483A2`.
 The `$C3A9A8` and `$C3B108` boundaries are likewise established in their
 respective run033 frame-5,250 following traces, whose first `$C1F6F8`
 entries advance to `$C3A9B4/$C4839C` and `$C3B11A/$C483A2`.
+The `$C35Bxx` traces show two `movem.w (a1)+,d2-d4` transforms each, followed
+by `$C1F58A` consuming the signed word at `$C35BB6` or `$C35BCE`; the first
+walker entries are `$C35BB8/$C4839C` and `$C35BD0/$C4839C` respectively.
