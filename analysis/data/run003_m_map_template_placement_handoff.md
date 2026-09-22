@@ -31,6 +31,9 @@ retains every source address, source byte/words, workspace cell, descriptor,
 and emitted triple. Its [readable table](workspace_template_copies_run003_m_appearance_25f.md)
 and [X/Z plot](../plots/workspace_template_placements_xz_run003_m_appearance_25f.svg)
 are a visual/auditable slice of the active flat placement layer.
+The compact [target catalog](run003_m_map_template_target_catalog.md) groups
+the 103 emitted placements into 83 descriptor `+8` field candidates with
+their source membership and observed X/Z bounds.
 
 This is the strongest direct dataflow connection yet obtained in the `M`
 display scenario:

@@ -1,0 +1,1605 @@
+{
+  "authority": {
+    "input": "analysis/data/workspace_template_copies_run003_m_appearance_25f.json"
+  },
+  "classification": "scenario_backed_template_to_descriptor_field_candidates_not_complete_map_or_renderer_submission",
+  "targets": [
+    {
+      "descriptor_plus_8_field": "$C08718",
+      "placement_count": 3,
+      "static_sources": [
+        "$C42BE1",
+        "$C42BE7",
+        "$C42BF9"
+      ],
+      "descriptors": [
+        "$C223F4"
+      ],
+      "x_range": [
+        409,
+        414
+      ],
+      "z_range": [
+        -165,
+        -155
+      ],
+      "zero_middle_count": 3
+    },
+    {
+      "descriptor_plus_8_field": "$C08758",
+      "placement_count": 3,
+      "static_sources": [
+        "$C42AE7",
+        "$C42AED",
+        "$C42AFF"
+      ],
+      "descriptors": [
+        "$C227C8"
+      ],
+      "x_range": [
+        -175,
+        -172
+      ],
+      "z_range": [
+        -596,
+        -584
+      ],
+      "zero_middle_count": 3
+    },
+    {
+      "descriptor_plus_8_field": "$C08798",
+      "placement_count": 4,
+      "static_sources": [
+        "$C42C11",
+        "$C42C1D",
+        "$C42C23",
+        "$C42C29"
+      ],
+      "descriptors": [
+        "$C22570"
+      ],
+      "x_range": [
+        402,
+        422
+      ],
+      "z_range": [
+        -164,
+        -153
+      ],
+      "zero_middle_count": 4
+    },
+    {
+      "descriptor_plus_8_field": "$C087AC",
+      "placement_count": 2,
+      "static_sources": [
+        "$C42C0B",
+        "$C42C17"
+      ],
+      "descriptors": [
+        "$C223A4"
+      ],
+      "x_range": [
+        402,
+        425
+      ],
+      "z_range": [
+        -160,
+        -147
+      ],
+      "zero_middle_count": 2
+    },
+    {
+      "descriptor_plus_8_field": "$C087FE",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BC1"
+      ],
+      "descriptors": [
+        "$C226D8"
+      ],
+      "x_range": [
+        132,
+        132
+      ],
+      "z_range": [
+        78,
+        78
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C0883E",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BA9"
+      ],
+      "descriptors": [
+        "$C226EC"
+      ],
+      "x_range": [
+        142,
+        142
+      ],
+      "z_range": [
+        100,
+        100
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C08892",
+      "placement_count": 2,
+      "static_sources": [
+        "$C42B91",
+        "$C42B97"
+      ],
+      "descriptors": [
+        "$C226C4"
+      ],
+      "x_range": [
+        143,
+        155
+      ],
+      "z_range": [
+        41,
+        51
+      ],
+      "zero_middle_count": 2
+    },
+    {
+      "descriptor_plus_8_field": "$C08928",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BD5"
+      ],
+      "descriptors": [
+        "$C223E0"
+      ],
+      "x_range": [
+        412,
+        412
+      ],
+      "z_range": [
+        -156,
+        -156
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C0DB50",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42AE1"
+      ],
+      "descriptors": [
+        "$C2278C"
+      ],
+      "x_range": [
+        -167,
+        -167
+      ],
+      "z_range": [
+        -571,
+        -571
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C0DB7C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42AF9"
+      ],
+      "descriptors": [
+        "$C227A0"
+      ],
+      "x_range": [
+        -167,
+        -167
+      ],
+      "z_range": [
+        -583,
+        -583
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C0DD30",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42ADB"
+      ],
+      "descriptors": [
+        "$C227B4"
+      ],
+      "x_range": [
+        -172,
+        -172
+      ],
+      "z_range": [
+        -592,
+        -592
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C35568",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4264D"
+      ],
+      "descriptors": [
+        "$C22408"
+      ],
+      "x_range": [
+        588,
+        588
+      ],
+      "z_range": [
+        300,
+        300
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C355A0",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42653"
+      ],
+      "descriptors": [
+        "$C2241C"
+      ],
+      "x_range": [
+        588,
+        588
+      ],
+      "z_range": [
+        276,
+        276
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C35BD0",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42707"
+      ],
+      "descriptors": [
+        "$C22714"
+      ],
+      "x_range": [
+        128,
+        128
+      ],
+      "z_range": [
+        -200,
+        -200
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C35BFC",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42713"
+      ],
+      "descriptors": [
+        "$C22494"
+      ],
+      "x_range": [
+        197,
+        197
+      ],
+      "z_range": [
+        -252,
+        -252
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C35D88",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4270D"
+      ],
+      "descriptors": [
+        "$C224A8"
+      ],
+      "x_range": [
+        157,
+        157
+      ],
+      "z_range": [
+        -224,
+        -224
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C35E9E",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42719"
+      ],
+      "descriptors": [
+        "$C224BC"
+      ],
+      "x_range": [
+        78,
+        78
+      ],
+      "z_range": [
+        -197,
+        -197
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C36208",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42671"
+      ],
+      "descriptors": [
+        "$C22728"
+      ],
+      "x_range": [
+        400,
+        400
+      ],
+      "z_range": [
+        274,
+        274
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C36212",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4266B"
+      ],
+      "descriptors": [
+        "$C22584"
+      ],
+      "x_range": [
+        400,
+        400
+      ],
+      "z_range": [
+        274,
+        274
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C3623E",
+      "placement_count": 4,
+      "static_sources": [
+        "$C42677",
+        "$C426AD",
+        "$C426B3",
+        "$C426B9"
+      ],
+      "descriptors": [
+        "$C22430"
+      ],
+      "x_range": [
+        401,
+        434
+      ],
+      "z_range": [
+        229,
+        263
+      ],
+      "zero_middle_count": 4
+    },
+    {
+      "descriptor_plus_8_field": "$C366E6",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42689"
+      ],
+      "descriptors": [
+        "$C2246C"
+      ],
+      "x_range": [
+        352,
+        352
+      ],
+      "z_range": [
+        292,
+        292
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C368D0",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4268F"
+      ],
+      "descriptors": [
+        "$C22480"
+      ],
+      "x_range": [
+        350,
+        350
+      ],
+      "z_range": [
+        293,
+        293
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C36A28",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42695"
+      ],
+      "descriptors": [
+        "$C22444"
+      ],
+      "x_range": [
+        376,
+        376
+      ],
+      "z_range": [
+        284,
+        284
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C36E6A",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42683"
+      ],
+      "descriptors": [
+        "$C22458"
+      ],
+      "x_range": [
+        364,
+        364
+      ],
+      "z_range": [
+        288,
+        288
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37218",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BF3"
+      ],
+      "descriptors": [
+        "$C223B8"
+      ],
+      "x_range": [
+        421,
+        421
+      ],
+      "z_range": [
+        -170,
+        -170
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C3723E",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BDB"
+      ],
+      "descriptors": [
+        "$C22598"
+      ],
+      "x_range": [
+        421,
+        421
+      ],
+      "z_range": [
+        -177,
+        -177
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C3737C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4279B"
+      ],
+      "descriptors": [
+        "$C224F8"
+      ],
+      "x_range": [
+        439,
+        439
+      ],
+      "z_range": [
+        -140,
+        -140
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C373A2",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42C2F"
+      ],
+      "descriptors": [
+        "$C225AC"
+      ],
+      "x_range": [
+        434,
+        434
+      ],
+      "z_range": [
+        -147,
+        -147
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37680",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427A1"
+      ],
+      "descriptors": [
+        "$C224E4"
+      ],
+      "x_range": [
+        390,
+        390
+      ],
+      "z_range": [
+        -170,
+        -170
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C376AC",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42C05"
+      ],
+      "descriptors": [
+        "$C225D4"
+      ],
+      "x_range": [
+        388,
+        388
+      ],
+      "z_range": [
+        -167,
+        -167
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37854",
+      "placement_count": 2,
+      "static_sources": [
+        "$C42AF3",
+        "$C42B05"
+      ],
+      "descriptors": [
+        "$C227DC"
+      ],
+      "x_range": [
+        -180,
+        -176
+      ],
+      "z_range": [
+        -609,
+        -608
+      ],
+      "zero_middle_count": 2
+    },
+    {
+      "descriptor_plus_8_field": "$C37990",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BC7"
+      ],
+      "descriptors": [
+        "$C22660"
+      ],
+      "x_range": [
+        121,
+        121
+      ],
+      "z_range": [
+        74,
+        74
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C379BC",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BCD"
+      ],
+      "descriptors": [
+        "$C22674"
+      ],
+      "x_range": [
+        119,
+        119
+      ],
+      "z_range": [
+        80,
+        80
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37B4C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BBB"
+      ],
+      "descriptors": [
+        "$C22638"
+      ],
+      "x_range": [
+        134,
+        134
+      ],
+      "z_range": [
+        85,
+        85
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37B78",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BB5"
+      ],
+      "descriptors": [
+        "$C2264C"
+      ],
+      "x_range": [
+        143,
+        143
+      ],
+      "z_range": [
+        82,
+        82
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37CF8",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BA3"
+      ],
+      "descriptors": [
+        "$C22688"
+      ],
+      "x_range": [
+        143,
+        143
+      ],
+      "z_range": [
+        106,
+        106
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37D94",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BAF"
+      ],
+      "descriptors": [
+        "$C2269C"
+      ],
+      "x_range": [
+        140,
+        140
+      ],
+      "z_range": [
+        95,
+        95
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37E56",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42B85"
+      ],
+      "descriptors": [
+        "$C225E8"
+      ],
+      "x_range": [
+        150,
+        150
+      ],
+      "z_range": [
+        47,
+        47
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37EA6",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42B7F"
+      ],
+      "descriptors": [
+        "$C225FC"
+      ],
+      "x_range": [
+        130,
+        130
+      ],
+      "z_range": [
+        80,
+        80
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C37F80",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42B8B"
+      ],
+      "descriptors": [
+        "$C22624"
+      ],
+      "x_range": [
+        131,
+        131
+      ],
+      "z_range": [
+        31,
+        31
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C380D8",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42B9D"
+      ],
+      "descriptors": [
+        "$C22610"
+      ],
+      "x_range": [
+        167,
+        167
+      ],
+      "z_range": [
+        61,
+        61
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C381FC",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BED"
+      ],
+      "descriptors": [
+        "$C223CC"
+      ],
+      "x_range": [
+        402,
+        402
+      ],
+      "z_range": [
+        -143,
+        -143
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C38228",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42BFF"
+      ],
+      "descriptors": [
+        "$C225C0"
+      ],
+      "x_range": [
+        408,
+        408
+      ],
+      "z_range": [
+        -146,
+        -146
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C3A858",
+      "placement_count": 3,
+      "static_sources": [
+        "$C4295D",
+        "$C4298B",
+        "$C42991"
+      ],
+      "descriptors": [
+        "$C2250C"
+      ],
+      "x_range": [
+        -320,
+        -48
+      ],
+      "z_range": [
+        -576,
+        80
+      ],
+      "zero_middle_count": 3
+    },
+    {
+      "descriptor_plus_8_field": "$C3B4F8",
+      "placement_count": 3,
+      "static_sources": [
+        "$C427C9",
+        "$C427CF",
+        "$C42B67"
+      ],
+      "descriptors": [
+        "$C22700"
+      ],
+      "x_range": [
+        240,
+        600
+      ],
+      "z_range": [
+        272,
+        328
+      ],
+      "zero_middle_count": 3
+    },
+    {
+      "descriptor_plus_8_field": "$C3B6A6",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42789"
+      ],
+      "descriptors": [
+        "$C224D0"
+      ],
+      "x_range": [
+        496,
+        496
+      ],
+      "z_range": [
+        -16,
+        -16
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C3B960",
+      "placement_count": 1,
+      "static_sources": [
+        "$C426A7"
+      ],
+      "descriptors": [
+        "$C22AAC"
+      ],
+      "x_range": [
+        444,
+        444
+      ],
+      "z_range": [
+        220,
+        220
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C3BBD0",
+      "placement_count": 1,
+      "static_sources": [
+        "$C429ED"
+      ],
+      "descriptors": [
+        "$C22840"
+      ],
+      "x_range": [
+        128,
+        128
+      ],
+      "z_range": [
+        49,
+        49
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44500",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427D5"
+      ],
+      "descriptors": [
+        "$C22764"
+      ],
+      "x_range": [
+        461,
+        461
+      ],
+      "z_range": [
+        256,
+        256
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C4455A",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427E1"
+      ],
+      "descriptors": [
+        "$C22778"
+      ],
+      "x_range": [
+        428,
+        428
+      ],
+      "z_range": [
+        212,
+        212
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C445A2",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42665"
+      ],
+      "descriptors": [
+        "$C22318"
+      ],
+      "x_range": [
+        400,
+        400
+      ],
+      "z_range": [
+        304,
+        304
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C445DC",
+      "placement_count": 3,
+      "static_sources": [
+        "$C42647",
+        "$C42B6D",
+        "$C42B73"
+      ],
+      "descriptors": [
+        "$C2232C"
+      ],
+      "x_range": [
+        112,
+        512
+      ],
+      "z_range": [
+        240,
+        384
+      ],
+      "zero_middle_count": 3
+    },
+    {
+      "descriptor_plus_8_field": "$C44612",
+      "placement_count": 2,
+      "static_sources": [
+        "$C4267D",
+        "$C42B79"
+      ],
+      "descriptors": [
+        "$C227F0"
+      ],
+      "x_range": [
+        192,
+        496
+      ],
+      "z_range": [
+        152,
+        304
+      ],
+      "zero_middle_count": 2
+    },
+    {
+      "descriptor_plus_8_field": "$C4466E",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4269B"
+      ],
+      "descriptors": [
+        "$C22354"
+      ],
+      "x_range": [
+        576,
+        576
+      ],
+      "z_range": [
+        192,
+        192
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44732",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42659"
+      ],
+      "descriptors": [
+        "$C22804"
+      ],
+      "x_range": [
+        576,
+        576
+      ],
+      "z_range": [
+        320,
+        320
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C4477C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C426A1"
+      ],
+      "descriptors": [
+        "$C22368"
+      ],
+      "x_range": [
+        448,
+        448
+      ],
+      "z_range": [
+        192,
+        192
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C447C6",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4265F"
+      ],
+      "descriptors": [
+        "$C22818"
+      ],
+      "x_range": [
+        448,
+        448
+      ],
+      "z_range": [
+        320,
+        320
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44812",
+      "placement_count": 1,
+      "static_sources": [
+        "$C426BF"
+      ],
+      "descriptors": [
+        "$C2237C"
+      ],
+      "x_range": [
+        576,
+        576
+      ],
+      "z_range": [
+        64,
+        64
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C4483C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C426C5"
+      ],
+      "descriptors": [
+        "$C22390"
+      ],
+      "x_range": [
+        448,
+        448
+      ],
+      "z_range": [
+        64,
+        64
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C448B6",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4276F"
+      ],
+      "descriptors": [
+        "$C2287C"
+      ],
+      "x_range": [
+        224,
+        224
+      ],
+      "z_range": [
+        -320,
+        -320
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44970",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427AD"
+      ],
+      "descriptors": [
+        "$C22890"
+      ],
+      "x_range": [
+        320,
+        320
+      ],
+      "z_range": [
+        -320,
+        -320
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44A3A",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4272F"
+      ],
+      "descriptors": [
+        "$C228CC"
+      ],
+      "x_range": [
+        -64,
+        -64
+      ],
+      "z_range": [
+        -576,
+        -576
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44AA4",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42735"
+      ],
+      "descriptors": [
+        "$C228E0"
+      ],
+      "x_range": [
+        -192,
+        -192
+      ],
+      "z_range": [
+        -640,
+        -640
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44B78",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4274B"
+      ],
+      "descriptors": [
+        "$C2291C"
+      ],
+      "x_range": [
+        -64,
+        -64
+      ],
+      "z_range": [
+        -64,
+        -64
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44C10",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42751"
+      ],
+      "descriptors": [
+        "$C22930"
+      ],
+      "x_range": [
+        -96,
+        -96
+      ],
+      "z_range": [
+        -128,
+        -128
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44C7A",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42757"
+      ],
+      "descriptors": [
+        "$C22944"
+      ],
+      "x_range": [
+        0,
+        0
+      ],
+      "z_range": [
+        -160,
+        -160
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44CE4",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4275D"
+      ],
+      "descriptors": [
+        "$C22958"
+      ],
+      "x_range": [
+        -32,
+        -32
+      ],
+      "z_range": [
+        -160,
+        -160
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44D4E",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42763"
+      ],
+      "descriptors": [
+        "$C2296C"
+      ],
+      "x_range": [
+        -128,
+        -128
+      ],
+      "z_range": [
+        -160,
+        -160
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44DB8",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42769"
+      ],
+      "descriptors": [
+        "$C22980"
+      ],
+      "x_range": [
+        -160,
+        -160
+      ],
+      "z_range": [
+        -224,
+        -224
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44E22",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42775"
+      ],
+      "descriptors": [
+        "$C22994"
+      ],
+      "x_range": [
+        -192,
+        -192
+      ],
+      "z_range": [
+        -320,
+        -320
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44E8C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4277B"
+      ],
+      "descriptors": [
+        "$C229A8"
+      ],
+      "x_range": [
+        160,
+        160
+      ],
+      "z_range": [
+        -416,
+        -416
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44EF6",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42781"
+      ],
+      "descriptors": [
+        "$C22908"
+      ],
+      "x_range": [
+        64,
+        64
+      ],
+      "z_range": [
+        -480,
+        -480
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C44F8E",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42743"
+      ],
+      "descriptors": [
+        "$C229BC"
+      ],
+      "x_range": [
+        -320,
+        -320
+      ],
+      "z_range": [
+        -448,
+        -448
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C45026",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42721"
+      ],
+      "descriptors": [
+        "$C229D0"
+      ],
+      "x_range": [
+        -320,
+        -320
+      ],
+      "z_range": [
+        -576,
+        -576
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C45128",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427B5"
+      ],
+      "descriptors": [
+        "$C229F8"
+      ],
+      "x_range": [
+        192,
+        192
+      ],
+      "z_range": [
+        192,
+        192
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C45192",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427BB"
+      ],
+      "descriptors": [
+        "$C22A0C"
+      ],
+      "x_range": [
+        96,
+        96
+      ],
+      "z_range": [
+        160,
+        160
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C451FC",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427C1"
+      ],
+      "descriptors": [
+        "$C22A20"
+      ],
+      "x_range": [
+        64,
+        64
+      ],
+      "z_range": [
+        64,
+        64
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C45294",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427DB"
+      ],
+      "descriptors": [
+        "$C22A34"
+      ],
+      "x_range": [
+        288,
+        288
+      ],
+      "z_range": [
+        288,
+        288
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C4532C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4278F"
+      ],
+      "descriptors": [
+        "$C22A48"
+      ],
+      "x_range": [
+        448,
+        448
+      ],
+      "z_range": [
+        -64,
+        -64
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C453C4",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42795"
+      ],
+      "descriptors": [
+        "$C22A5C"
+      ],
+      "x_range": [
+        448,
+        448
+      ],
+      "z_range": [
+        -192,
+        -192
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C4545C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427A7"
+      ],
+      "descriptors": [
+        "$C22A70"
+      ],
+      "x_range": [
+        352,
+        352
+      ],
+      "z_range": [
+        -224,
+        -224
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C454F4",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427E7"
+      ],
+      "descriptors": [
+        "$C22A84"
+      ],
+      "x_range": [
+        448,
+        448
+      ],
+      "z_range": [
+        160,
+        160
+      ],
+      "zero_middle_count": 1
+    },
+    {
+      "descriptor_plus_8_field": "$C4558C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427ED"
+      ],
+      "descriptors": [
+        "$C22A98"
+      ],
+      "x_range": [
+        448,
+        448
+      ],
+      "z_range": [
+        64,
+        64
+      ],
+      "zero_middle_count": 1
+    }
+  ]
+}
