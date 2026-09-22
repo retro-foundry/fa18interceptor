@@ -49,6 +49,11 @@ descriptor/control stream to the map bitplanes. It also does not turn the
 bounded active set into a complete global map, assign the two stored source
 words a global-coordinate meaning, or prove a universal no-elevation rule.
 
+A separate no-input map-mode collector does reach the `$C1F6F8` projection
+walker with static segment-42/43 control streams. That establishes map-mode
+3D control activity, but not ownership of one of the placements above; see
+[the control-stream entries](run003_m_map_control_streams.md).
+
 Authority: sealed `captures/run003`; `build/run003_m_visual_5/state.bin`; the
 deterministic `build/run003_m_map_appearance_25f_trace` trace/snapshots; and
 the independently normal-frame `build/run003_m5_noinput_25` snapshot. The
