@@ -15,7 +15,11 @@ def address(value: int) -> str:
 
 
 def parse_stream(slow: bytes, start: int) -> list[dict]:
-    cursor = start
+    # `$C1D442` consumes the stream's leading selector/control byte before
+    # `$C1D488` reaches its first six-byte template record.  The observed
+    # `$C42646 -> $C42647` and `$C42BD4 -> $C42BD5` pairs establish this
+    # one-byte preamble for the active copy path.
+    cursor = start + 1
     records = []
     while True:
         offset = cursor - SLOW_BASE
@@ -36,7 +40,8 @@ def markdown(streams: list[dict], cells: list[dict]) -> str:
         "# Immutable templates referenced by the selector lattice",
         "",
         "Classification: **static template-payload export for a bounded selector lattice**.",
-        "These are exact header/two-word records consumed by `$C1D442-$C1D4C2` before",
+        "These are exact header/two-word records consumed after `$C1D442` advances past",
+        "each stream's leading control byte, and before",
         "their mutable workspace expansion. They are not global placement coordinates,",
         "terrain vertices, elevation values, or a complete world mesh.",
         "",
@@ -51,7 +56,8 @@ def markdown(streams: list[dict], cells: list[dict]) -> str:
         lines.append(f"| {stream['stream']} | {len(stream['records'])} | {len(stream['selector_cells'])} |")
     lines += [
         "",
-        "The exact record format is scenario-backed by the direct copy trace. A stream's",
+        "The exact record format and one-byte stream preamble are scenario-backed by the",
+        "direct copy trace. A stream's",
         "presence in a selector bin is page-content evidence only: downstream code combines",
         "these reusable records with mutable placement context, so its words must not be",
         "drawn as absolute map points.",

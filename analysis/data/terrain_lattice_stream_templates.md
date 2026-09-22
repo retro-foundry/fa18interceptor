@@ -1,7 +1,8 @@
 # Immutable templates referenced by the selector lattice
 
 Classification: **static template-payload export for a bounded selector lattice**.
-These are exact header/two-word records consumed by `$C1D442-$C1D4C2` before
+These are exact header/two-word records consumed after `$C1D442` advances past
+each stream's leading control byte, and before
 their mutable workspace expansion. They are not global placement coordinates,
 terrain vertices, elevation values, or a complete world mesh.
 
@@ -33,7 +34,8 @@ reference its stream; a zero-record stream is an observed immediate `$FF` termin
 | $C42B66 | 18 | 14 |
 | $C42BD4 | 16 | 14 |
 
-The exact record format is scenario-backed by the direct copy trace. A stream's
+The exact record format and one-byte stream preamble are scenario-backed by the
+direct copy trace. A stream's
 presence in a selector bin is page-content evidence only: downstream code combines
 these reusable records with mutable placement context, so its words must not be
 drawn as absolute map points.
