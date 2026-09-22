@@ -44,6 +44,10 @@ trace has 6 direct entries, all with `D7 = 0` and the inline route.  This
 proves the alternate stream is a live renderer variant.  It does not make it
 distance LOD: the appearance and stable captures differ in transition/control
 state as well as any possible map scale or viewing variables.
+
+The exact route, header, and consumed-pair evidence is retained in the
+[run035 appearance inventory](../data/run035_m_map_polygon_static_packets.md)
+and [run035 stable inventory](../data/run035_m_map_stable_polygon_static_packets.md).
 The accompanying [raw-coordinate sheet](../plots/run003_m_map_static_pair_packets.png)
 is a visual inspection aid only; it preserves read order without inferring
 closed faces or screen/world alignment.

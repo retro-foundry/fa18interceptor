@@ -1,0 +1,496 @@
+{
+  "scope": "completed C2AF9C/C2AF9E transform batches in the bounded map-page trace",
+  "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+  "slow": "build\\run035_m_map_stable_1f_trace\\slow.bin",
+  "source_segment": 68,
+  "source_range": "$C42CA8-$C444F7",
+  "direct_packet_entries": 6,
+  "packet_stream_selection": {
+    "inline": 6,
+    "alternate": 0
+  },
+  "packet_streams": [
+    {
+      "frame": 1,
+      "trace_index": 3457,
+      "header": "$C43D1A",
+      "inline_stream": "$C43D1E",
+      "alternate_stream": "$C43D1E",
+      "d7": 0,
+      "selected_stream": "$C43D1E",
+      "route": "inline"
+    },
+    {
+      "frame": 1,
+      "trace_index": 4745,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "d7": 0,
+      "selected_stream": "$C43B1E",
+      "route": "inline"
+    },
+    {
+      "frame": 1,
+      "trace_index": 6074,
+      "header": "$C439CC",
+      "inline_stream": "$C439D0",
+      "alternate_stream": "$C439D0",
+      "d7": 0,
+      "selected_stream": "$C439D0",
+      "route": "inline"
+    },
+    {
+      "frame": 1,
+      "trace_index": 6537,
+      "header": "$C439CC",
+      "inline_stream": "$C439D0",
+      "alternate_stream": "$C439D0",
+      "d7": 0,
+      "selected_stream": "$C439D0",
+      "route": "inline"
+    },
+    {
+      "frame": 1,
+      "trace_index": 7000,
+      "header": "$C439A8",
+      "inline_stream": "$C439AC",
+      "alternate_stream": "$C439AC",
+      "d7": 0,
+      "selected_stream": "$C439AC",
+      "route": "inline"
+    },
+    {
+      "frame": 1,
+      "trace_index": 7697,
+      "header": "$C43994",
+      "inline_stream": "$C43998",
+      "alternate_stream": "$C43998",
+      "d7": 0,
+      "selected_stream": "$C43998",
+      "route": "inline"
+    }
+  ],
+  "transform_batches": 8,
+  "consumed_pairs": 41,
+  "batches": [
+    {
+      "trace_index": 1843,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43DE4",
+          "xy": [
+            1104,
+            2480
+          ]
+        },
+        {
+          "address": "$C43DE8",
+          "xy": [
+            592,
+            1984
+          ]
+        },
+        {
+          "address": "$C43DEC",
+          "xy": [
+            0,
+            2240
+          ]
+        },
+        {
+          "address": "$C43DF0",
+          "xy": [
+            0,
+            2048
+          ]
+        },
+        {
+          "address": "$C43DF4",
+          "xy": [
+            192,
+            1920
+          ]
+        },
+        {
+          "address": "$C43DF8",
+          "xy": [
+            0,
+            1840
+          ]
+        },
+        {
+          "address": "$C43DFC",
+          "xy": [
+            0,
+            1584
+          ]
+        },
+        {
+          "address": "$C43E00",
+          "xy": [
+            512,
+            1792
+          ]
+        },
+        {
+          "address": "$C43E04",
+          "xy": [
+            1104,
+            1712
+          ]
+        },
+        {
+          "address": "$C43E08",
+          "xy": [
+            1792,
+            1936
+          ]
+        },
+        {
+          "address": "$C43E0C",
+          "xy": [
+            1632,
+            2240
+          ]
+        }
+      ],
+      "first_pair": "$C43DE4",
+      "last_pair": "$C43E0C",
+      "display_stage_return": "$C43E10",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 2986,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43E12",
+          "xy": [
+            0,
+            3488
+          ]
+        },
+        {
+          "address": "$C43E16",
+          "xy": [
+            1280,
+            2560
+          ]
+        },
+        {
+          "address": "$C43E1A",
+          "xy": [
+            1040,
+            2448
+          ]
+        },
+        {
+          "address": "$C43E1E",
+          "xy": [
+            0,
+            3312
+          ]
+        }
+      ],
+      "first_pair": "$C43E12",
+      "last_pair": "$C43E1E",
+      "display_stage_return": "$C43E22",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 3629,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": "$C43D1A",
+      "first_longword": "$00C43D1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43D20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43D2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43D20",
+      "last_pair": "$C43D2C",
+      "display_stage_return": "$C43D30",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 4917,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": "$C43B1A",
+      "first_longword": "$00C43B1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43B2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
+      "display_stage_return": "$C43B30",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 6246,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": "$C439CC",
+      "first_longword": "$00C439D0",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C439D2",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C439D6",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C439DA",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C439DE",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C439D2",
+      "last_pair": "$C439DE",
+      "display_stage_return": "$C439E2",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 6709,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": "$C439CC",
+      "first_longword": "$00C439D0",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C439D2",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C439D6",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C439DA",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C439DE",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C439D2",
+      "last_pair": "$C439DE",
+      "display_stage_return": "$C439E2",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 7277,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": "$C439A8",
+      "first_longword": "$00C439AC",
+      "following_words": [
+        "$0007",
+        "$0890"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C439AE",
+          "xy": [
+            2192,
+            4096
+          ]
+        },
+        {
+          "address": "$C439B2",
+          "xy": [
+            1920,
+            2880
+          ]
+        },
+        {
+          "address": "$C439B6",
+          "xy": [
+            1584,
+            2304
+          ]
+        },
+        {
+          "address": "$C439BA",
+          "xy": [
+            1904,
+            320
+          ]
+        },
+        {
+          "address": "$C439BE",
+          "xy": [
+            1792,
+            0
+          ]
+        },
+        {
+          "address": "$C439C2",
+          "xy": [
+            4224,
+            0
+          ]
+        },
+        {
+          "address": "$C439C6",
+          "xy": [
+            4224,
+            4224
+          ]
+        }
+      ],
+      "first_pair": "$C439AE",
+      "last_pair": "$C439C6",
+      "display_stage_return": "$C439CA",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 7834,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": "$C43994",
+      "first_longword": "$00C43998",
+      "following_words": [
+        "$0003",
+        "$0580"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C4399A",
+          "xy": [
+            1408,
+            4096
+          ]
+        },
+        {
+          "address": "$C4399E",
+          "xy": [
+            384,
+            4160
+          ]
+        },
+        {
+          "address": "$C439A2",
+          "xy": [
+            832,
+            3840
+          ]
+        }
+      ],
+      "first_pair": "$C4399A",
+      "last_pair": "$C439A2",
+      "display_stage_return": "$C439A6",
+      "polygon_submissions": 0
+    }
+  ],
+  "qualification": "Each row ends at a traced C2AFE2 display-stage entry and retains the preceding C2AF9C/C2AF9E fixed-point source-pair reads since the prior display-stage entry. Every such pair is in verified original segment 68. Only batches with an observed direct C2AEFC-to-C2AF00 entry expose a packet header; the first batch begins after the trace starts. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map."
+}

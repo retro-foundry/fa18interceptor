@@ -6,6 +6,7 @@ Each row ends at a traced C2AFE2 display-stage entry and retains the preceding C
 
 - Original source segment: 68 `$C42CA8-$C444F7`
 - Direct `$C2AF00` packet entries: 26
+- Direct inline/alternate selections: 26 inline, 0 alternate
 - Completed transform batches at `$C2AFE2`: 55
 - Exact immutable coordinate pairs consumed: 353
 
@@ -71,7 +72,37 @@ Each row ends at a traced C2AFE2 display-stage entry and retains the preceding C
 
 The JSON companion retains every exact consumed signed pair and its static address.
 
-The same 353 pairs are available as 55 grouped `l` primitives in the
-[OBJ inspection export](../exports/run003_m_map_static_pair_batches.obj).
-It writes `(source_x, 0, source_y)` solely as a viewer convention, with no
-faces, path closure, global placement, or game-axis semantics inferred.
+## Direct packet stream selections
+
+`$C2AF40` chooses the inline source at `header + 4` when `D7` is zero, otherwise the header longword.
+
+| Frame | Header | Inline stream | Header pointer | `D7` | Selected stream | Route |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 2 | `$C42DFC` | `$C42E00` | `$C42E00` | 0 | `$C42E00` | inline |
+| 2 | `$C42E1A` | `$C42E1E` | `$C42E1E` | 0 | `$C42E1E` | inline |
+| 2 | `$C42DC4` | `$C42DC8` | `$C42DC8` | 0 | `$C42DC8` | inline |
+| 2 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 2 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 2 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 2 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 2 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 2 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 2 | `$C43ECA` | `$C43ECE` | `$C43F3A` | 0 | `$C43ECE` | inline |
+| 3 | `$C43E24` | `$C43E28` | `$C43E9A` | 0 | `$C43E28` | inline |
+| 3 | `$C43D84` | `$C43D88` | `$C43D88` | 0 | `$C43D88` | inline |
+| 4 | `$C43BAC` | `$C43BB0` | `$C43C70` | 0 | `$C43BB0` | inline |
+| 5 | `$C43B34` | `$C43B38` | `$C43B94` | 0 | `$C43B38` | inline |
+| 6 | `$C43A78` | `$C43A7C` | `$C43AF0` | 0 | `$C43A7C` | inline |
+| 6 | `$C439E8` | `$C439EC` | `$C43A44` | 0 | `$C439EC` | inline |
+| 7 | `$C4409E` | `$C440A2` | `$C440A2` | 0 | `$C440A2` | inline |
+| 7 | `$C4407C` | `$C44080` | `$C44080` | 0 | `$C44080` | inline |
+| 7 | `$C44066` | `$C4406A` | `$C4406A` | 0 | `$C4406A` | inline |
+| 7 | `$C43F5E` | `$C43F62` | `$C43FAE` | 0 | `$C43F62` | inline |
+| 7 | `$C43D34` | `$C43D38` | `$C43D38` | 0 | `$C43D38` | inline |
+| 8 | `$C43CBE` | `$C43CC2` | `$C43CFA` | 0 | `$C43CC2` | inline |
+| 8 | `$C43B1A` | `$C43B1E` | `$C43B1E` | 0 | `$C43B1E` | inline |
+| 8 | `$C439CC` | `$C439D0` | `$C439D0` | 0 | `$C439D0` | inline |
+| 8 | `$C439A8` | `$C439AC` | `$C439AC` | 0 | `$C439AC` | inline |
+| 8 | `$C43994` | `$C43998` | `$C43998` | 0 | `$C43998` | inline |
+
+The same coordinate pairs are available as grouped `l` primitives in the [OBJ inspection export](../exports/run003_m_map_static_pair_batches.obj) for run003 only. It writes `(source_x, 0, source_y)` solely as a viewer convention, with no faces, path closure, global placement, or game-axis semantics inferred.

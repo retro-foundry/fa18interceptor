@@ -12,6 +12,8 @@ PAIR_X = 0xC2AF9C
 PAIR_Y = 0xC2AF9E
 DISPLAY_STAGE = 0xC2AFE2
 POLYGON_SUBMIT = 0xC2FF48
+STREAM_GATE = 0xC2AF40
+STREAM_START = 0xC2AF46
 SOURCE_SEGMENT = 68
 SOURCE_START = 0xC42CA8
 SOURCE_END = 0xC444F8
@@ -42,6 +44,8 @@ def write_report(output: Path, report: dict[str, object]) -> None:
         "",
         f"- Original source segment: {report['source_segment']} `{report['source_range']}`",
         f"- Direct `$C2AF00` packet entries: {report['direct_packet_entries']}",
+        f"- Direct inline/alternate selections: {report['packet_stream_selection']['inline']} inline, "
+        f"{report['packet_stream_selection']['alternate']} alternate",
         f"- Completed transform batches at `$C2AFE2`: {report['transform_batches']}",
         f"- Exact immutable coordinate pairs consumed: {report['consumed_pairs']}",
         "",
@@ -59,6 +63,25 @@ def write_report(output: Path, report: dict[str, object]) -> None:
     lines.extend([
         "",
         "The JSON companion retains every exact consumed signed pair and its static address.",
+        "",
+        "## Direct packet stream selections",
+        "",
+        "`$C2AF40` chooses the inline source at `header + 4` when `D7` is zero, otherwise the header longword.",
+        "",
+        "| Frame | Header | Inline stream | Header pointer | `D7` | Selected stream | Route |",
+        "| ---: | --- | --- | --- | ---: | --- | --- |",
+    ])
+    for row in report["packet_streams"]:
+        lines.append(
+            f"| {row['frame']} | `{row['header']}` | `{row['inline_stream']}` | "
+            f"`{row['alternate_stream']}` | {row['d7']} | `{row['selected_stream']}` | "
+            f"{row['route']} |")
+    lines.extend([
+        "",
+        "The same coordinate pairs are available as grouped `l` primitives in the "
+        "[OBJ inspection export](../exports/run003_m_map_static_pair_batches.obj) for run003 only. "
+        "It writes `(source_x, 0, source_y)` solely as a viewer convention, with no faces, "
+        "path closure, global placement, or game-axis semantics inferred.",
         "",
     ])
     output.with_suffix(".md").write_text("\n".join(lines), encoding="utf-8")
@@ -85,6 +108,33 @@ def main() -> None:
         raise ValueError(f"expected a 512 KiB slow-RAM image, got {len(slow)} bytes")
     entries = {index for index, row in enumerate(trace)
                if row["pc"] == ENTRY and index and trace[index - 1]["pc"] == ENTRY_PRELUDE}
+    packet_streams = []
+    for entry_index in sorted(entries):
+        entry = trace[entry_index]
+        header = entry["registers"]["a3"] & 0xFFFFFF
+        if not SOURCE_START <= header <= SOURCE_END - 8:
+            raise ValueError(f"packet header outside segment {SOURCE_SEGMENT}: {address(header)}")
+        end = next((cursor for cursor in sorted(entries) if cursor > entry_index), len(trace))
+        gate_index = next((cursor for cursor in range(entry_index, end)
+                           if trace[cursor]["pc"] == STREAM_GATE), None)
+        stream_index = next((cursor for cursor in range(entry_index, end)
+                             if trace[cursor]["pc"] == STREAM_START), None)
+        if gate_index is None or stream_index is None:
+            raise ValueError(f"packet {address(header)} lacks C2AF40/C2AF46 stream selection")
+        alternate = long(slow, header)
+        selected = trace[stream_index]["registers"]["a3"] & 0xFFFFFF
+        inline = header + 4
+        if selected == inline:
+            route = "inline"
+        elif selected == alternate:
+            route = "alternate"
+        else:
+            raise ValueError(f"packet {address(header)} selected unexpected stream {address(selected)}")
+        packet_streams.append({"frame": entry["frame"], "trace_index": entry["index"],
+                               "header": address(header), "inline_stream": address(inline),
+                               "alternate_stream": address(alternate),
+                               "d7": trace[gate_index]["registers"]["d7"] & 0xFFFF,
+                               "selected_stream": address(selected), "route": route})
     stages = [index for index, row in enumerate(trace) if row["pc"] == DISPLAY_STAGE]
     batches = []
     previous_stage = 0
@@ -134,7 +184,10 @@ def main() -> None:
         "slow": str(args.slow),
         "source_segment": SOURCE_SEGMENT,
         "source_range": f"{address(SOURCE_START)}-{address(SOURCE_END - 1)}",
-        "direct_packet_entries": sum(row["packet"] is not None for row in batches),
+        "direct_packet_entries": len(packet_streams),
+        "packet_stream_selection": {"inline": sum(row["route"] == "inline" for row in packet_streams),
+                                    "alternate": sum(row["route"] == "alternate" for row in packet_streams)},
+        "packet_streams": packet_streams,
         "transform_batches": len(batches),
         "consumed_pairs": sum(len(row["consumed_pairs"]) for row in batches),
         "batches": batches,
