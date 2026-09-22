@@ -13,6 +13,7 @@ PROBES = (
     ("mutation", "(17,17)", "both components +1"),
     ("row_zero", "(0,16)", "first component zero"),
     ("group_zero", "(16,0)", "second component zero"),
+    ("row_08", "(8,16)", "first component 8"),
     ("row_ff", "(255,16)", "first component 255"),
 )
 

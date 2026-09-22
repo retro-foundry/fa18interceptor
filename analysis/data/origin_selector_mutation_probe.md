@@ -123,6 +123,14 @@ not prove clamp behavior, wrapping behavior outside this trace, or global map
 extent. See the [upper-bin group inventory](static_template_selector_groups_origin_row_ff.md)
 and [upper-bin copy inventory](workspace_template_copies_origin_row_ff.md).
 
+An interior row-bin probe (`$C45C3E=$08000000`) returns normally after 36,572
+stepped instructions and reaches 6 streams, with 13 copies and 7 later
+builder reads. It is therefore distinct from both the four-stream outer-bin
+subset and the 16-stream control window. The row axis is a stepped selector
+window in this sample, not an all-or-nothing outer plateau. See the
+[bin-8 group inventory](static_template_selector_groups_origin_row_08.md)
+and [bin-8 copy inventory](workspace_template_copies_origin_row_08.md).
+
 ### Decoded static group-record directory
 
 The accepted group records have a directly observed compact directory format.
