@@ -80,6 +80,11 @@ as a fixed global-position table.  See the
 See the measured face/input overlap and its limits in the
 [close-range LOD probe](data/golden_gate_close_range_lod_probe.md).
 
+The sealed user-supplied Golden Gate approach `run035` adds two later
+checkpoints for batch member `$C3B0CE`, both reaching projection/submission.
+It does not tie that individual source to `$C355D8`, so its longer/shorter
+bounded paths are not interpreted as LOD. See [run035 approach context](data/run035_golden_gate_approach_lod_context.md).
+
 ## Next evidence required to find the authoritative map
 
 1. Capture a deterministic `M`-entry and map-exit scenario with screenshots,
