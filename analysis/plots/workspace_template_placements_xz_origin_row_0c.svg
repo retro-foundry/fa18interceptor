@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760">
+<rect width="100%" height="100%" fill="#10151b"/>
+<style>text{font-family:monospace;fill:#dbe7f3}.dim{fill:#9fb2c4}.axis{stroke:#506475}.grid{stroke:#293845}.point{stroke:#10151b;stroke-width:1}</style>
+<text x="92" y="36" font-size="20">Trace-derived static-template placement diagnostic — X/Z plane</text>
+<text class="dim" x="92" y="62" font-size="14">14 segment-66, 67 entries emitted as placements; all sampled middle words = 0</text>
+<rect x="92" y="115" width="570" height="570" fill="#161e27" stroke="#63788b"/>
+<line class="grid" x1="206.0" y1="115" x2="206.0" y2="685"/>
+<line class="grid" x1="92" y1="229.0" x2="662" y2="229.0"/>
+<line class="grid" x1="320.0" y1="115" x2="320.0" y2="685"/>
+<line class="grid" x1="92" y1="343.0" x2="662" y2="343.0"/>
+<line class="grid" x1="434.0" y1="115" x2="434.0" y2="685"/>
+<line class="grid" x1="92" y1="457.0" x2="662" y2="457.0"/>
+<line class="grid" x1="548.0" y1="115" x2="548.0" y2="685"/>
+<line class="grid" x1="92" y1="571.0" x2="662" y2="571.0"/>
+<line class="axis" x1="92" y1="685" x2="662" y2="685"/>
+<line class="axis" x1="92" y1="115" x2="92" y2="685"/>
+<circle class="point" cx="197.4" cy="204.8" r="5" fill="#ffcb6b"><title>$C42957 -> $C4E9C2 $C2232C; X=160, middle=0, Z=368</title></circle>
+<text class="dim" x="205.4" y="197.8" font-size="12">2957</text>
+<circle class="point" cx="211.2" cy="115.0" r="5" fill="#ffcb6b"><title>$C4295D -> $C4E9AA $C2250C; X=192, middle=0, Z=576</title></circle>
+<text class="dim" x="219.2" y="108.0" font-size="12">295D</text>
+<circle class="point" cx="100.6" cy="280.8" r="5" fill="#ffcb6b"><title>$C42963 -> $C4E9DA $C22750; X=-64, middle=0, Z=192</title></circle>
+<text class="dim" x="108.6" y="273.8" font-size="12">2963</text>
+<circle class="point" cx="432.3" cy="463.9" r="5" fill="#ffcb6b"><title>$C42951 -> $C4EA0A $C227F0; X=704, middle=0, Z=-232</title></circle>
+<text class="dim" x="440.3" y="456.9" font-size="12">2951</text>
+<circle class="point" cx="418.5" cy="425.9" r="5" fill="#ffcb6b"><title>$C42957 -> $C4EA22 $C2232C; X=672, middle=0, Z=-144</title></circle>
+<text class="dim" x="426.5" y="418.9" font-size="12">2957</text>
+<circle class="point" cx="432.3" cy="336.1" r="5" fill="#ffcb6b"><title>$C4295D -> $C4E9F2 $C2250C; X=704, middle=0, Z=64</title></circle>
+<text class="dim" x="440.3" y="329.1" font-size="12">295D</text>
+<circle class="point" cx="321.7" cy="501.9" r="5" fill="#ffcb6b"><title>$C42963 -> $C4EA3A $C22750; X=448, middle=0, Z=-320</title></circle>
+<text class="dim" x="329.7" y="494.9" font-size="12">2963</text>
+<circle class="point" cx="211.2" cy="685.0" r="5" fill="#ffcb6b"><title>$C42951 -> $C4EA6A $C227F0; X=192, middle=0, Z=-744</title></circle>
+<text class="dim" x="219.2" y="678.0" font-size="12">2951</text>
+<circle class="point" cx="197.4" cy="647.0" r="5" fill="#ffcb6b"><title>$C42957 -> $C4EA82 $C2232C; X=160, middle=0, Z=-656</title></circle>
+<text class="dim" x="205.4" y="640.0" font-size="12">2957</text>
+<circle class="point" cx="211.2" cy="557.2" r="5" fill="#ffcb6b"><title>$C4295D -> $C4EA52 $C2250C; X=192, middle=0, Z=-448</title></circle>
+<text class="dim" x="219.2" y="550.2" font-size="12">295D</text>
+<circle class="point" cx="92.0" cy="376.7" r="5" fill="#ffcb6b"><title>$C429D1 -> $C4F6FA $C22840; X=-84, middle=0, Z=-30</title></circle>
+<text class="dim" x="100.0" y="369.7" font-size="12">29D1</text>
+<circle class="point" cx="97.2" cy="387.9" r="5" fill="#ffcb6b"><title>$C429D7 -> $C4F6CA $C22750; X=-72, middle=0, Z=-56</title></circle>
+<text class="dim" x="105.2" y="380.9" font-size="12">29D7</text>
+<circle class="point" cx="121.4" cy="315.4" r="5" fill="#ffcb6b"><title>$C429DF -> $C4F72A $C224D0; X=-16, middle=0, Z=112</title></circle>
+<text class="dim" x="129.4" y="308.4" font-size="12">29DF</text>
+<circle class="point" cx="97.2" cy="360.3" r="5" fill="#ffcb6b"><title>$C429E5 -> $C4F712 $C22750; X=-72, middle=0, Z=8</title></circle>
+<text class="dim" x="105.2" y="353.3" font-size="12">29E5</text>
+<text class="dim" x="92" y="715" font-size="14">X range [-84, 704]</text>
+<text class="dim" x="482" y="715" font-size="14">Z range [-744, 576]</text>
+<text class="dim" x="92" y="730" font-size="13">Points prove this replay path only. They do not establish terrain triangles, a complete world map, global axes, or LOD selection.</text>
+</svg>

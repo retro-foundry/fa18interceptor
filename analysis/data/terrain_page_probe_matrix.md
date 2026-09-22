@@ -12,6 +12,7 @@ Classification: **controlled selector-causality summary**. Each probe restores t
 | (16,0) | second component zero | 41 | 4 | 3 | 6 | 4 |
 | (16,8) | second component 8 | 41 | 4 | 3 | 6 | 4 |
 | (8,16) | first component 8 | 41 | 6 | 5 | 13 | 7 |
+| (12,16) | first component 12 | 41 | 8 | 7 | 18 | 14 |
 | (255,16) | first component 255 | 41 | 4 | 3 | 6 | 4 |
 
 The control window selects 16 streams. The independent +1 probes demonstrate the two directory axes, while all three sampled outer bins retain the same four-stream subset. This supports a bounded active page window but cannot establish a global map edge, coordinate scale, or LOD scheme without more origin bins and a distance-controlled renderer experiment.

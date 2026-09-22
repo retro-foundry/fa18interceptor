@@ -166,6 +166,25 @@
       ]
     },
     {
+      "probe": "row_0c",
+      "origin_bins": "(12,16)",
+      "perturbation": "first component 12",
+      "selector_calls": 41,
+      "selected_streams": 8,
+      "distinct_group_records": 7,
+      "static_copies": 18,
+      "later_builder_reads": 14,
+      "streams": [
+        "$C42742",
+        "$C42950",
+        "$C42956",
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B5C"
+      ]
+    },
+    {
       "probe": "row_ff",
       "origin_bins": "(255,16)",
       "perturbation": "first component 255",

@@ -140,6 +140,13 @@ selector-window evidence, not a statement about physical axis scale. See the
 [group-bin-8 inventory](static_template_selector_groups_origin_group_08.md)
 and [group-bin-8 copy inventory](workspace_template_copies_origin_group_08.md).
 
+Row bin 12 (`$C45C3E=$0C000000`) returns normally after 38,056 stepped
+instructions and selects 8 streams, 18 copies, and 14 later builder reads.
+Together with bins 0, 8, and 16, this is a local stepped expansion
+(`4 -> 6 -> 8 -> 16` streams), not a claim of a global monotonic map rule.
+See the [bin-12 group inventory](static_template_selector_groups_origin_row_0c.md)
+and [bin-12 copy inventory](workspace_template_copies_origin_row_0c.md).
+
 ### Decoded static group-record directory
 
 The accepted group records have a directly observed compact directory format.
