@@ -127,6 +127,11 @@ nonzero middle component, including `$C3B720`'s fifth local triple
 separately observed flat X/0/Z *placement* layer; neither coordinate convention
 may be promoted to a global elevation rule without a producer/consumer proof.
 
+The trace-proven source-order component can be inspected in the
+[orthographic/isometric sheet](../plots/c3b720_shared_bridge_pylon_static_topology.png).
+It contains only the four renderer-observed triangular sides; no base face or
+missing topology is drawn.
+
 Authority: deterministic no-input renders
 `build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
 `build/run003_m_map_appearance_trace/{trace.jsonl,custom_writes.jsonl}` from
