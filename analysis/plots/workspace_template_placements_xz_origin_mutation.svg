@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760">
+<rect width="100%" height="100%" fill="#10151b"/>
+<style>text{font-family:monospace;fill:#dbe7f3}.dim{fill:#9fb2c4}.axis{stroke:#506475}.grid{stroke:#293845}.point{stroke:#10151b;stroke-width:1}</style>
+<text x="92" y="36" font-size="20">Trace-derived static-template placement diagnostic — X/Z plane</text>
+<text class="dim" x="92" y="62" font-size="14">35 segment-66, 67 entries emitted as placements; all sampled middle words = 0</text>
+<rect x="92" y="115" width="570" height="570" fill="#161e27" stroke="#63788b"/>
+<line class="grid" x1="206.0" y1="115" x2="206.0" y2="685"/>
+<line class="grid" x1="92" y1="229.0" x2="662" y2="229.0"/>
+<line class="grid" x1="320.0" y1="115" x2="320.0" y2="685"/>
+<line class="grid" x1="92" y1="343.0" x2="662" y2="343.0"/>
+<line class="grid" x1="434.0" y1="115" x2="434.0" y2="685"/>
+<line class="grid" x1="92" y1="457.0" x2="662" y2="457.0"/>
+<line class="grid" x1="548.0" y1="115" x2="548.0" y2="685"/>
+<line class="grid" x1="92" y1="571.0" x2="662" y2="571.0"/>
+<line class="axis" x1="92" y1="685" x2="662" y2="685"/>
+<line class="axis" x1="92" y1="115" x2="92" y2="685"/>
+<circle class="point" cx="662.0" cy="681.8" r="5" fill="#ffcb6b"><title>$C42B47 -> $C4E9AA $C2282C; X=514, middle=0, Z=-341</title></circle>
+<circle class="point" cx="194.1" cy="526.3" r="5" fill="#ffcb6b"><title>$C42647 -> $C4E9C2 $C2232C; X=-512, middle=0, Z=0</title></circle>
+<circle class="point" cx="228.8" cy="564.6" r="5" fill="#ffcb6b"><title>$C4264D -> $C4E9DA $C22408; X=-436, middle=0, Z=-84</title></circle>
+<circle class="point" cx="228.8" cy="575.6" r="5" fill="#ffcb6b"><title>$C42653 -> $C4E9F2 $C2241C; X=-436, middle=0, Z=-108</title></circle>
+<circle class="point" cx="223.3" cy="555.5" r="5" fill="#ffcb6b"><title>$C42659 -> $C4EA0A $C22804; X=-448, middle=0, Z=-64</title></circle>
+<circle class="point" cx="165.0" cy="555.5" r="5" fill="#ffcb6b"><title>$C4265F -> $C4EA22 $C22818; X=-576, middle=0, Z=-64</title></circle>
+<circle class="point" cx="143.1" cy="562.8" r="5" fill="#ffcb6b"><title>$C42665 -> $C4EA3A $C22318; X=-624, middle=0, Z=-80</title></circle>
+<circle class="point" cx="143.1" cy="576.5" r="5" fill="#ffcb6b"><title>$C4266B -> $C4EA52 $C22584; X=-624, middle=0, Z=-110</title></circle>
+<circle class="point" cx="143.1" cy="576.5" r="5" fill="#ffcb6b"><title>$C42671 -> $C4EA6A $C22728; X=-624, middle=0, Z=-110</title></circle>
+<circle class="point" cx="143.5" cy="581.5" r="5" fill="#ffcb6b"><title>$C42677 -> $C4EA82 $C22430; X=-623, middle=0, Z=-121</title></circle>
+<circle class="point" cx="186.8" cy="562.8" r="5" fill="#ffcb6b"><title>$C4267D -> $C4EA9A $C227F0; X=-528, middle=0, Z=-80</title></circle>
+<circle class="point" cx="126.7" cy="570.1" r="5" fill="#ffcb6b"><title>$C42683 -> $C4EAB2 $C22458; X=-660, middle=0, Z=-96</title></circle>
+<circle class="point" cx="121.2" cy="568.3" r="5" fill="#ffcb6b"><title>$C42689 -> $C4EACA $C2246C; X=-672, middle=0, Z=-92</title></circle>
+<circle class="point" cx="120.3" cy="567.8" r="5" fill="#ffcb6b"><title>$C4268F -> $C4EAE2 $C22480; X=-674, middle=0, Z=-91</title></circle>
+<circle class="point" cx="132.1" cy="571.9" r="5" fill="#ffcb6b"><title>$C42695 -> $C4EAFA $C22444; X=-648, middle=0, Z=-100</title></circle>
+<circle class="point" cx="223.3" cy="613.9" r="5" fill="#ffcb6b"><title>$C4269B -> $C4EB12 $C22354; X=-448, middle=0, Z=-192</title></circle>
+<circle class="point" cx="165.0" cy="613.9" r="5" fill="#ffcb6b"><title>$C426A1 -> $C4EB2A $C22368; X=-576, middle=0, Z=-192</title></circle>
+<circle class="point" cx="163.1" cy="601.1" r="5" fill="#ffcb6b"><title>$C426A7 -> $C4EB42 $C22AAC; X=-580, middle=0, Z=-164</title></circle>
+<circle class="point" cx="158.6" cy="597.0" r="5" fill="#ffcb6b"><title>$C426AD -> $C4EB5A $C22430; X=-590, middle=0, Z=-155</title></circle>
+<circle class="point" cx="153.6" cy="592.0" r="5" fill="#ffcb6b"><title>$C426B3 -> $C4EB72 $C22430; X=-601, middle=0, Z=-144</title></circle>
+<circle class="point" cx="148.5" cy="587.0" r="5" fill="#ffcb6b"><title>$C426B9 -> $C4EB8A $C22430; X=-612, middle=0, Z=-133</title></circle>
+<circle class="point" cx="223.3" cy="672.2" r="5" fill="#ffcb6b"><title>$C426BF -> $C4EBA2 $C2237C; X=-448, middle=0, Z=-320</title></circle>
+<circle class="point" cx="165.0" cy="672.2" r="5" fill="#ffcb6b"><title>$C426C5 -> $C4EBBA $C22390; X=-576, middle=0, Z=-320</title></circle>
+<circle class="point" cx="653.8" cy="685.0" r="5" fill="#ffcb6b"><title>$C42B3F -> $C4F03A $C22868; X=496, middle=0, Z=-348</title></circle>
+<circle class="point" cx="234.3" cy="551.8" r="5" fill="#ffcb6b"><title>$C427C9 -> $C4F052 $C22700; X=-424, middle=0, Z=-56</title></circle>
+<circle class="point" cx="140.3" cy="577.4" r="5" fill="#ffcb6b"><title>$C427CF -> $C4F06A $C22700; X=-630, middle=0, Z=-112</title></circle>
+<circle class="point" cx="170.9" cy="584.7" r="5" fill="#ffcb6b"><title>$C427D5 -> $C4F082 $C22764; X=-563, middle=0, Z=-128</title></circle>
+<circle class="point" cx="92.0" cy="570.1" r="5" fill="#ffcb6b"><title>$C427DB -> $C4F09A $C22A34; X=-736, middle=0, Z=-96</title></circle>
+<circle class="point" cx="155.8" cy="604.7" r="5" fill="#ffcb6b"><title>$C427E1 -> $C4F0B2 $C22778; X=-596, middle=0, Z=-172</title></circle>
+<circle class="point" cx="165.0" cy="628.5" r="5" fill="#ffcb6b"><title>$C427E7 -> $C4F0CA $C22A84; X=-576, middle=0, Z=-224</title></circle>
+<circle class="point" cx="165.0" cy="672.2" r="5" fill="#ffcb6b"><title>$C427ED -> $C4F0E2 $C22A98; X=-576, middle=0, Z=-320</title></circle>
+<circle class="point" cx="389.3" cy="540.0" r="5" fill="#ffcb6b"><title>$C429D1 -> $C4F6FA $C22840; X=-84, middle=0, Z=-30</title></circle>
+<circle class="point" cx="394.8" cy="551.8" r="5" fill="#ffcb6b"><title>$C429D7 -> $C4F6CA $C22750; X=-72, middle=0, Z=-56</title></circle>
+<circle class="point" cx="420.3" cy="475.2" r="5" fill="#ffcb6b"><title>$C429DF -> $C4F72A $C224D0; X=-16, middle=0, Z=112</title></circle>
+<circle class="point" cx="394.8" cy="522.7" r="5" fill="#ffcb6b"><title>$C429E5 -> $C4F712 $C22750; X=-72, middle=0, Z=8</title></circle>
+<text class="dim" x="92" y="715" font-size="14">X range [-736, 514]</text>
+<text class="dim" x="482" y="715" font-size="14">Z range [-348, 112]</text>
+<text class="dim" x="92" y="730" font-size="13">Points prove this replay path only. They do not establish terrain triangles, a complete world map, global axes, or LOD selection.</text>
+</svg>

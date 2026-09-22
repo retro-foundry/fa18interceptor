@@ -56,7 +56,7 @@ def builder_records(trace: list[dict]) -> list[dict]:
             continue
         coordinate_values = [stores[pc]["registers"]["d0"] & 0xFFFF for pc in COORDINATE_STORE_PCS]
         records.append({
-            "frame": header["frame"],
+            "frame": header.get("frame"),
             "trace_index": header["index"],
             "cell": header["registers"]["a3"],
             "runtime_record": stores[SELECTOR_STORE_PC]["registers"]["a2"],
@@ -66,9 +66,9 @@ def builder_records(trace: list[dict]) -> list[dict]:
     return records
 
 
-def first_later_consumer(builders: list[dict], frame: int, cell: int) -> dict | None:
+def first_later_consumer(builders: list[dict], trace_index: int, cell: int) -> dict | None:
     for row in builders:
-        if row["frame"] > frame and row["cell"] == cell:
+        if row["trace_index"] > trace_index and row["cell"] == cell:
             return row
     return None
 
@@ -86,12 +86,12 @@ def inventory() -> list[dict]:
         offset = source - SLOW_BASE
         header = memory[offset]
         first_word, second_word = struct.unpack_from(">HH", memory, offset + 1)
-        consumer = first_later_consumer(builders, row["frame"], cell)
+        consumer = first_later_consumer(builders, row["index"], cell)
         # C1D48C retains source bit 7, C1D490 stores it in the high byte of
         # the destination word, and C1D492/C1D496 retain source bits 0..6.
         workspace_header = ((header & 0x80) << 8) | (header & 0x7F)
         rows.append({
-            "copy_frame": row["frame"],
+            "copy_frame": row.get("frame"),
             "copy_trace_index": row["index"],
             "static_source": hex_address(source),
             "source_segment": source_segment(source),
@@ -110,7 +110,7 @@ def inventory() -> list[dict]:
 
 
 def markdown(rows: list[dict]) -> str:
-    consumed = [row for row in rows if row["observed_later_builder_frame"] is not None]
+    consumed = [row for row in rows if row["observed_later_builder_trace_index"] is not None]
     lines = [
         "# Traced static-template workspace copies",
         "",
@@ -144,7 +144,7 @@ def markdown(rows: list[dict]) -> str:
             emitted = (f"{row['runtime_placement_record']} / {row['runtime_descriptor']} / "
                        f"({words})")
         lines.append(
-            f"| {row['copy_frame']} | {row['static_source']} | {segment} | "
+            f"| {row['copy_frame'] if row['copy_frame'] is not None else 'stepped'} | {row['static_source']} | {segment} | "
             f"{row['source_header_byte']} -> {row['workspace_header_word']} | "
             f"{' '.join(row['source_words'])} | {row['workspace_cell']} | {emitted} |"
         )
@@ -261,7 +261,7 @@ def main() -> None:
     json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     markdown_path.write_text(markdown(rows), encoding="utf-8")
     svg_path.write_text(svg(rows), encoding="utf-8")
-    consumed = sum(row["observed_later_builder_frame"] is not None for row in rows)
+    consumed = sum(row["observed_later_builder_trace_index"] is not None for row in rows)
     print(f"wrote {json_path.relative_to(ROOT)}, {markdown_path.relative_to(ROOT)}, and {svg_path.relative_to(ROOT)} "
           f"({len(rows)} copies, {consumed} later builder reads)")
 
