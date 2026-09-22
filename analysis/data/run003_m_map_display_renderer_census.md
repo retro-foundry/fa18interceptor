@@ -2,7 +2,7 @@
 
 Classification: **scenario-backed prepared-map-page renderer output**.
 
-The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction.
+The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. Polygon routes are bounded from wrapper entry to its observed `$C24D66` return; control rows are bounded to the next walker entry (or trace end). This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction.
 
 - Polygon wrapper entries (`$C2FF48`): 42
 - Line emitter entries (`$C2FA7E`): 19
@@ -12,7 +12,7 @@ The supplied job inventory identifies CPU blits whose pointers fall in the prepa
 
 ## Polygon wrapper entries by frame
 
-| Frame | Entries | `$C2FA7E` seen before next wrapper entry | `$C304F4` seen before next wrapper entry |
+| Frame | Entries | `$C2FA7E` within wrapper return path | `$C304F4` within wrapper return path |
 | ---: | ---: | ---: | ---: |
 | 1 | 4 | 0 | 4 |
 | 2 | 3 | 0 | 3 |
@@ -21,8 +21,19 @@ The supplied job inventory identifies CPU blits whose pointers fall in the prepa
 | 5 | 5 | 0 | 5 |
 | 6 | 5 | 0 | 5 |
 | 7 | 6 | 0 | 6 |
-| 8 | 5 | 1 | 5 |
-| 10 | 4 | 3 | 2 |
+| 8 | 5 | 0 | 5 |
+| 10 | 4 | 2 | 2 |
+
+## Static control entries and bounded primitive outputs
+
+| Trace frame | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |
+| ---: | --- | ---: | ---: | ---: |
+| 9 | `$C35BF0` | 2 | 0 | 0 |
+| 9 | `$C35BB8` | 1 | 0 | 0 |
+| 9 | `$C35BD0` | 1 | 0 | 0 |
+| 9 | `$C36232` | 2 | 0 | 0 |
+| 9 | `$C36232` | 2 | 0 | 0 |
+| 9 | `$C3B73E` | 9 | 2 | 2 |
 
 ## `$C2FF48` entry contexts
 

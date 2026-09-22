@@ -45,12 +45,12 @@
     },
     "8": {
       "entries": 5,
-      "line_routes": 1,
+      "line_routes": 0,
       "span_routes": 5
     },
     "10": {
       "entries": 4,
-      "line_routes": 3,
+      "line_routes": 2,
       "span_routes": 2
     }
   },
@@ -68,5 +68,55 @@
     "$C4BFE2": 1,
     "$C4BFE8": 1
   },
-  "qualification": "The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction."
+  "control_to_primitive": [
+    {
+      "trace_index": 83635,
+      "frame": 9,
+      "control_entry": "$C35BF0",
+      "line_entries": 2,
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "trace_index": 85262,
+      "frame": 9,
+      "control_entry": "$C35BB8",
+      "line_entries": 1,
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "trace_index": 85960,
+      "frame": 9,
+      "control_entry": "$C35BD0",
+      "line_entries": 1,
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "trace_index": 86922,
+      "frame": 9,
+      "control_entry": "$C36232",
+      "line_entries": 2,
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "trace_index": 87843,
+      "frame": 9,
+      "control_entry": "$C36232",
+      "line_entries": 2,
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "trace_index": 91104,
+      "frame": 9,
+      "control_entry": "$C3B73E",
+      "line_entries": 9,
+      "polygon_line_routes": 2,
+      "polygon_span_routes": 2
+    }
+  ],
+  "qualification": "The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. Polygon routes are bounded from wrapper entry to its observed `$C24D66` return; control rows are bounded to the next walker entry (or trace end). This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction."
 }

@@ -10,6 +10,8 @@ from pathlib import Path
 POLYGON_SUBMIT = 0xC2FF48
 LINE_EMIT = 0xC2FA7E
 SPAN_BLIT = 0xC304F4
+POLYGON_RETURN = 0xC24D66
+CONTROL_WALK = 0xC1F6F8
 LINE_PLANE_BLITS = {0xC2FBE6, 0xC2FC4E, 0xC2FCB6, 0xC2FD1C}
 
 
@@ -34,11 +36,22 @@ def write_report(output: Path, report: dict[str, object]) -> None:
         "",
         "## Polygon wrapper entries by frame",
         "",
-        "| Frame | Entries | `$C2FA7E` seen before next wrapper entry | `$C304F4` seen before next wrapper entry |",
+        "| Frame | Entries | `$C2FA7E` within wrapper return path | `$C304F4` within wrapper return path |",
         "| ---: | ---: | ---: | ---: |",
     ]
     for frame, values in report["polygon_route_by_frame"].items():
         lines.append(f"| {frame} | {values['entries']} | {values['line_routes']} | {values['span_routes']} |")
+    lines.extend([
+        "",
+        "## Static control entries and bounded primitive outputs",
+        "",
+        "| Trace frame | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |",
+        "| ---: | --- | ---: | ---: | ---: |",
+    ])
+    for row in report["control_to_primitive"]:
+        lines.append(
+            f"| {row['frame']} | `{row['control_entry']}` | {row['line_entries']} | "
+            f"{row['polygon_line_routes']} | {row['polygon_span_routes']} |")
     lines.extend([
         "",
         "## `$C2FF48` entry contexts",
@@ -65,6 +78,7 @@ def main() -> None:
     jobs = json.loads(args.blitter_jobs.read_text(encoding="utf-8"))["jobs"]
     polygon_indices = [index for index, row in enumerate(trace) if row["pc"] == POLYGON_SUBMIT]
     line_indices = [index for index, row in enumerate(trace) if row["pc"] == LINE_EMIT]
+    control_indices = [index for index, row in enumerate(trace) if row["pc"] == CONTROL_WALK]
     route_by_frame: dict[int, dict[str, int]] = collections.defaultdict(
         lambda: {"entries": 0, "line_routes": 0, "span_routes": 0})
     contexts: collections.Counter[str] = collections.Counter()
@@ -73,7 +87,8 @@ def main() -> None:
         frame = row["frame"]
         route_by_frame[frame]["entries"] += 1
         contexts[hex_address(row["registers"]["a5"])] += 1
-        end = polygon_indices[item + 1] if item + 1 < len(polygon_indices) else len(trace)
+        end = next((cursor for cursor in range(index + 1, len(trace))
+                    if trace[cursor]["pc"] == POLYGON_RETURN), len(trace))
         route = {entry["pc"] for entry in trace[index + 1:end]}
         route_by_frame[frame]["line_routes"] += int(LINE_EMIT in route)
         route_by_frame[frame]["span_routes"] += int(SPAN_BLIT in route)
@@ -81,6 +96,25 @@ def main() -> None:
     span_jobs = [job for job in active_jobs if int(job["trigger_pc"][1:], 16) == SPAN_BLIT]
     line_jobs = [job for job in active_jobs
                  if int(job["trigger_pc"][1:], 16) in LINE_PLANE_BLITS]
+    control_to_primitive = []
+    for item, index in enumerate(control_indices):
+        end = control_indices[item + 1] if item + 1 < len(control_indices) else len(trace)
+        interval = trace[index:end]
+        polygon_routes = []
+        for polygon_index in (cursor for cursor in range(index, end)
+                              if trace[cursor]["pc"] == POLYGON_SUBMIT):
+            return_index = next((cursor for cursor in range(polygon_index + 1, end)
+                                 if trace[cursor]["pc"] == POLYGON_RETURN), end)
+            route = {entry["pc"] for entry in trace[polygon_index + 1:return_index]}
+            polygon_routes.append(route)
+        control_to_primitive.append({
+            "trace_index": trace[index]["index"],
+            "frame": trace[index]["frame"],
+            "control_entry": hex_address(trace[index]["registers"]["a1"]),
+            "line_entries": sum(entry["pc"] == LINE_EMIT for entry in interval),
+            "polygon_line_routes": sum(LINE_EMIT in route for route in polygon_routes),
+            "polygon_span_routes": sum(SPAN_BLIT in route for route in polygon_routes),
+        })
     report = {
         "scope": "trace entries and CPU blitter jobs while the map transition prepares the pending map page",
         "trace": str(args.trace),
@@ -92,9 +126,12 @@ def main() -> None:
         "line_plane_blitter_jobs": len(line_jobs),
         "polygon_route_by_frame": {str(frame): values for frame, values in sorted(route_by_frame.items())},
         "polygon_contexts": dict(sorted(contexts.items())),
+        "control_to_primitive": control_to_primitive,
         "qualification": (
             "The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; "
-            "the trace identifies renderer entries in the same bounded transition. This proves renderer output "
+            "the trace identifies renderer entries in the same bounded transition. Polygon routes are bounded "
+            "from wrapper entry to its observed `$C24D66` return; control rows are bounded to the next walker "
+            "entry (or trace end). This proves renderer output "
             "to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, "
             "or a complete world-map extraction."
         ),

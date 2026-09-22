@@ -102,6 +102,15 @@ an immutable input record or extract the complete terrain model. The counts,
 contexts, and exact reproduction inputs are in the [map display renderer
 census](run003_m_map_display_renderer_census.md).
 
+The census also supplies a bounded static-control-to-primitive handoff. At
+trace frame 9, `$C1F6F8` enters with `A1=$C3B73E` in immutable scene-family
+storage. Before the trace returns to another walker entry, it reaches four
+`$C2FF48` wrappers with static `A5=$C3B6B0`: two complete through the line
+route and two through the direct span route. This is the strongest currently
+traced map-mode 3D control contribution to the prepared map page. It is not a
+complete `$C3B73E` model export: the input vertices and individual coastline
+pixels remain unassigned.
+
 Authority: deterministic no-input renders
 `build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
 `build/run003_m_map_appearance_trace/{trace.jsonl,custom_writes.jsonl}` from
