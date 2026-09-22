@@ -42,3 +42,22 @@ are mixed packets, while `$C3AD0E`, `$C3B0CE`, `$C3B720`, `$C3B9B2`, and
 now covers the overhead frame-11,850 and low-altitude frame-11,925 views.
 The same `$C355D8` face family remains active in both, so no simple
 close-range LOD-family replacement is observed.
+
+The user-identified red Golden Gate view in run033 frame 5,250 adds a
+distance-specific renderer fact: `$C3559A` and `$C355D2` submit 24 total
+`$C212B0` line segments through static record `$C358B2` (selector 1; workspace
+offsets 0 and 6).  The endpoints are selected from mutable `$C48390`; retain
+the static record as bridge line topology but do not export those workspace
+coordinates as source geometry.  The co-visible `$C3B6B0` and `$C3B504`
+polygons remain separately classified terrain/pyramid components.  See the
+[line-family evidence](data/c35932_c355d8_bridge_model_candidate.md).
+
+## Other separated external component
+
+`$C39072-$C390EF` is a 21-triple immutable slender-flight-object input.  A
+source-bounded capture associates each observed instance with the eleven
+`$C38F98` external-scene polygons before the next matrix input begins.  The
+face records can still select mutable bases, so this is an associated source
+packet plus renderer family—not a flattened static-mesh export.  See
+[its boundary](data/c39072_slender_flight_object_boundary.md) and the
+[`$C38F98` contract](data/c38f98_external_face_control_boundary.md).
