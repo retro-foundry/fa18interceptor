@@ -171,6 +171,17 @@ def markdown(rows: list[dict]) -> str:
 
 def svg(rows: list[dict]) -> str:
     points = [row for row in rows if row["runtime_coordinate_words_signed"] is not None]
+    if not points:
+        return "\n".join([
+            '<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="180" viewBox="0 0 1120 180">',
+            '<rect width="100%" height="100%" fill="#10151b"/>',
+            '<style>text{font-family:monospace;fill:#dbe7f3}.dim{fill:#9fb2c4}</style>',
+            '<text x="40" y="55" font-size="20">Trace-derived static-template placement diagnostic — no emitted placements</text>',
+            '<text class="dim" x="40" y="90" font-size="14">The bounded trace did not execute a $C1D488 copy followed by a $C1DD36 builder read.</text>',
+            '<text class="dim" x="40" y="120" font-size="14">This is a trace-window limit, not evidence of absent terrain, absent geometry, or absent LOD.</text>',
+            '</svg>',
+            '',
+        ])
     coordinates = [row["runtime_coordinate_words_signed"] for row in points]
     xs = [value[0] for value in coordinates]
     zs = [value[2] for value in coordinates]

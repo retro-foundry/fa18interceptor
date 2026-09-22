@@ -1,0 +1,136 @@
+{
+  "scope": "C1F4AC static-input matrix transforms during one flight-update entry",
+  "breakpoint": "$C0F090",
+  "hit_frame": 30003,
+  "max_instructions": 30000,
+  "transform_count": 9,
+  "records": [
+    {
+      "instruction": 5891,
+      "entry": "$C1F4AC",
+      "entry_kind": "alternate_record",
+      "source": "$C3B720",
+      "source_triple": [
+        2112,
+        0,
+        -896
+      ],
+      "destination": "$C48390",
+      "destination_register": "a3",
+      "matrix": "$C45BD8"
+    },
+    {
+      "instruction": 5929,
+      "entry": "$C1F524",
+      "entry_kind": "alternate_loop",
+      "source": "$C3B726",
+      "source_triple": [
+        -2080,
+        0,
+        -2048
+      ],
+      "destination": "$C48396",
+      "destination_register": "a3",
+      "matrix": "$C45BD8"
+    },
+    {
+      "instruction": 12509,
+      "entry": "$C1F4AC",
+      "entry_kind": "alternate_record",
+      "source": "$C3AD0E",
+      "source_triple": [
+        0,
+        0,
+        0
+      ],
+      "destination": "$C48390",
+      "destination_register": "a3",
+      "matrix": "$C45BD8"
+    },
+    {
+      "instruction": 13073,
+      "entry": "$C1F4AC",
+      "entry_kind": "alternate_record",
+      "source": "$C3BE4C",
+      "source_triple": [
+        576,
+        4224,
+        -576
+      ],
+      "destination": "$C48390",
+      "destination_register": "a3",
+      "matrix": "$C45BD8"
+    },
+    {
+      "instruction": 13423,
+      "entry": "$C1F100",
+      "entry_kind": "record_vector",
+      "source": "$C3513C",
+      "source_triple": [
+        0,
+        -10,
+        384
+      ],
+      "destination": "$C46228",
+      "destination_register": "a0",
+      "matrix": "$C45BD8"
+    },
+    {
+      "instruction": 14603,
+      "entry": "$C1F21C",
+      "entry_kind": "next_record_vector",
+      "source": "$C35142",
+      "source_triple": [
+        200,
+        0,
+        -56
+      ],
+      "destination": "$C4622E",
+      "destination_register": "a0",
+      "matrix": "$FFFF4A"
+    },
+    {
+      "instruction": 14679,
+      "entry": "$C1F21C",
+      "entry_kind": "next_record_vector",
+      "source": "$C35148",
+      "source_triple": [
+        -200,
+        0,
+        -56
+      ],
+      "destination": "$C46234",
+      "destination_register": "a0",
+      "matrix": "$0000CB"
+    },
+    {
+      "instruction": 14755,
+      "entry": "$C1F21C",
+      "entry_kind": "next_record_vector",
+      "source": "$C3514E",
+      "source_triple": [
+        32,
+        0,
+        -184
+      ],
+      "destination": "$C4623A",
+      "destination_register": "a0",
+      "matrix": "$FFFF69"
+    },
+    {
+      "instruction": 14831,
+      "entry": "$C1F21C",
+      "entry_kind": "next_record_vector",
+      "source": "$C35154",
+      "source_triple": [
+        0,
+        18,
+        36
+      ],
+      "destination": "$C46240",
+      "destination_register": "a0",
+      "matrix": "$000073"
+    }
+  ],
+  "qualification": "Each row proves an input triple and transformed destination. It does not by itself prove a complete model boundary or face topology."
+}

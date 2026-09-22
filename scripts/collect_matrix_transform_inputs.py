@@ -27,7 +27,8 @@ def signed_words(engine: Engine, address: int, count: int = 3) -> list[int]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--restore", type=Path, required=True)
-    parser.add_argument("--playback", type=Path, required=True)
+    parser.add_argument("--playback", type=Path,
+                        help="optional input stream before the update breakpoint")
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     parser.add_argument("--arm-frame", type=int, default=1)
     parser.add_argument("--frames", type=int, default=8)
@@ -37,7 +38,7 @@ def main() -> None:
     if args.output.exists():
         raise FileExistsError(args.output)
 
-    events = read_events(args.playback)
+    events = read_events(args.playback) if args.playback else {}
     engine = Engine(args.config.resolve(), args.output.parent / "matrix_transform_saves")
     try:
         engine.core.retro_run()
