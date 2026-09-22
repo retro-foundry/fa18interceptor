@@ -6,6 +6,8 @@ C2ADC0 doubles the live X index, C2ADC2 shifts the live Y index by four, and C2A
 
 The exported prefix is `8x8`, rooted at `$C42CA8` with `16`-byte rows. The trace reads 12 unique cells. Two targets account for 59 of the 64 cells; the remaining five targets occur once each.
 
+The same static structure is available as a [colour-coded directory grid](../plots/run003_m_map_segment68_directory.png): colour denotes the recovered static target and white insets identify the twelve cells actually selected in run003. It is a selector/reuse view, not a map-space layout or LOD visualisation.
+
 | y / x | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | `$C42E6A` | `$C42E6A` | `$C42E52` | `$C42E52` | `$C42E52` | `$C42E52` | `$C42E52` | `$C42E52` |

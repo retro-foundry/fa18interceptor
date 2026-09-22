@@ -19,6 +19,8 @@ static reuse evidence; it does not identify either repeated target as empty,
 terrain, a detail level, or a global map boundary.
 
 The full 64-cell static directory and the twelve observed accesses are in the
-[segment-68 directory inventory](../data/run003_m_map_segment68_directory.md).
+[segment-68 directory inventory](../data/run003_m_map_segment68_directory.md),
+with a [colour-coded selector grid](../plots/run003_m_map_segment68_directory.png)
+for visual inspection.
 This proves a local two-dimensional packet selector, not global world axes,
 physical cell size, complete terrain coverage, or LOD.
