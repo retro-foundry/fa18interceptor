@@ -8,7 +8,7 @@ both its static data boundary and its renderer consumption path are traced.
 | --- | --- | --- | --- |
 | `$C351xx` / `$C34C06-$C34C48` and `$C34A9A/$C34A9C` face layers | local triples plus Hunk-41 face records | `$C1F100/$C1F21C` emits `$C46228` through `$C45BC6` and `$C48390` through `$C45BD8`; `$C0D384-$C0D521` derives tails; both reach pre-clip renderers | **exportable procedural flight-object template** with two separately transformed renderer layers; retain face-context choices and derivation, not mutable outputs |
 | `$C39D2A` / `$C3925C,$C3925E` | 43 static source triples and ten observed face records in the traced candidate block | observed matrix transform -> `$C48390` -> `$C2005C` -> polygon path | exportable tall bridge-pylon/deck candidate topology; semantic name and instancing remain unproven |
-| Golden Gate batches `$C35932`, `$C3B720` | separately transformed immutable source batches and their record streams; `$C3B720-$C3B73D` is five raw triples | batch transforms -> `$C355D8/$C355D6/$C3B6B0` face families | exportable **components**, not a single complete bridge mesh; `$C35932` remains mixed data/control |
+| Golden Gate `$C1F4AC` batches | separately transformed immutable source batches and their record streams; raw/mixed boundaries are inventoried | batch transforms -> `$C355D8/$C355D6/$C3B6B0` face families | exportable **components**, not a single complete bridge mesh; see [packet inventory](c1f4ac_golden_gate_source_packet_inventory.md) |
 | `$C362A2` / `$C36298` | static source candidate and face stream | observed alternate transform -> final polygon submission | exportable unnamed bridge-like component candidate |
 
 ## Renderer families not yet exportable as models
