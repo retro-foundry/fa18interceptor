@@ -107,6 +107,26 @@
           112
         ]
       ],
+      "line_submissions": [
+        {
+          "context_a5": "$C35BD4",
+          "endpoints": [
+            148,
+            123,
+            152,
+            118
+          ]
+        },
+        {
+          "context_a5": "$C35BD4",
+          "endpoints": [
+            152,
+            118,
+            173,
+            112
+          ]
+        }
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -136,6 +156,17 @@
           60
         ]
       ],
+      "line_submissions": [
+        {
+          "context_a5": "$C3559A",
+          "endpoints": [
+            97,
+            56,
+            97,
+            60
+          ]
+        }
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -164,6 +195,17 @@
           97,
           59
         ]
+      ],
+      "line_submissions": [
+        {
+          "context_a5": "$C355D2",
+          "endpoints": [
+            97,
+            63,
+            97,
+            59
+          ]
+        }
       ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
@@ -205,6 +247,26 @@
           59
         ]
       ],
+      "line_submissions": [
+        {
+          "context_a5": "$C36216",
+          "endpoints": [
+            118,
+            66,
+            125,
+            60
+          ]
+        },
+        {
+          "context_a5": "$C36216",
+          "endpoints": [
+            125,
+            60,
+            132,
+            59
+          ]
+        }
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -244,6 +306,26 @@
           132,
           59
         ]
+      ],
+      "line_submissions": [
+        {
+          "context_a5": "$C36212",
+          "endpoints": [
+            118,
+            66,
+            125,
+            60
+          ]
+        },
+        {
+          "context_a5": "$C36212",
+          "endpoints": [
+            125,
+            60,
+            132,
+            59
+          ]
+        }
       ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
@@ -336,6 +418,89 @@
           34,
           132
         ]
+      ],
+      "line_submissions": [
+        {
+          "context_a5": "$C3B6B0",
+          "endpoints": [
+            107,
+            94,
+            111,
+            95
+          ]
+        },
+        {
+          "context_a5": "$C3B6B0",
+          "endpoints": [
+            110,
+            92,
+            111,
+            95
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            211,
+            0,
+            211,
+            179
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            89,
+            0,
+            89,
+            179
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            0,
+            140,
+            319,
+            140
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            0,
+            11,
+            319,
+            11
+          ]
+        },
+        {
+          "context_a5": "$C4C598",
+          "endpoints": [
+            31,
+            130,
+            31,
+            130
+          ]
+        },
+        {
+          "context_a5": "$C4C598",
+          "endpoints": [
+            25,
+            131,
+            35,
+            131
+          ]
+        },
+        {
+          "context_a5": "$C4C598",
+          "endpoints": [
+            26,
+            132,
+            34,
+            132
+          ]
+        }
       ],
       "polygon_line_routes": 2,
       "polygon_span_routes": 2

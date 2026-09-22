@@ -49,12 +49,12 @@ def write_report(output: Path, report: dict[str, object]) -> None:
         "",
         "## Static control entries and bounded primitive outputs",
         "",
-        "| Trace frame | Transform input (`A1`) | Raw triples | Control entry (`A1`) | Line endpoints to next control entry | Polygon line routes | Polygon span routes |",
+        "| Trace frame | Transform input (`A1`) | Raw triples | Control entry (`A1`) | Line records/endpoints to next control entry | Polygon line routes | Polygon span routes |",
         "| ---: | --- | --- | --- | --- | ---: | ---: |",
     ])
     for row in report["control_to_primitive"]:
         lines.append(
-            f"| {row['frame']} | `{row['transform_input']}` | `{row['raw_triples']}` | `{row['control_entry']}` | `{row['line_endpoints']}` | "
+            f"| {row['frame']} | `{row['transform_input']}` | `{row['raw_triples']}` | `{row['control_entry']}` | `{row['line_submissions']}` | "
             f"{row['polygon_line_routes']} | {row['polygon_span_routes']} |")
     lines.extend([
         "",
@@ -107,9 +107,12 @@ def main() -> None:
     for item, index in enumerate(control_indices):
         end = control_indices[item + 1] if item + 1 < len(control_indices) else len(trace)
         interval = trace[index:end]
-        line_endpoints = [[entry["registers"][f"d{component}"] & 0xFFFF
-                           for component in range(4)]
-                          for entry in interval if entry["pc"] == LINE_EMIT]
+        line_submissions = [
+            {"context_a5": hex_address(entry["registers"]["a5"]),
+             "endpoints": [entry["registers"][f"d{component}"] & 0xFFFF
+                           for component in range(4)]}
+            for entry in interval if entry["pc"] == LINE_EMIT]
+        line_endpoints = [submission["endpoints"] for submission in line_submissions]
         polygon_routes = []
         for polygon_index in (cursor for cursor in range(index, end)
                               if trace[cursor]["pc"] == POLYGON_SUBMIT):
@@ -140,6 +143,7 @@ def main() -> None:
             "raw_triples": triples,
             "line_entries": len(line_endpoints),
             "line_endpoints": line_endpoints,
+            "line_submissions": line_submissions,
             "polygon_line_routes": sum(LINE_EMIT in route for route in polygon_routes),
             "polygon_span_routes": sum(SPAN_BLIT in route for route in polygon_routes),
         })
