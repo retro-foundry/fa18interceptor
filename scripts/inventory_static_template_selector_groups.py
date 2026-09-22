@@ -76,6 +76,7 @@ def inventory(trace_path: Path, slow_path: Path) -> list[dict]:
             "workspace_band": address(entry["registers"]["a3"]),
             "table_base": "$C42390",
             "selector_index": input_index,
+            "selector_live_row_term": f"${entry['registers']['d1'] & 0xFFFF:04X}",
             "selector_table_word_address": address(0xC42390 + input_index * 2),
             "group_record": address(group_address),
             "bit_gate_taken": bool(bit_test and bit_test["next_pc"] != 0xC1D4DA),
@@ -114,8 +115,8 @@ def markdown(rows: list[dict], trace_path: Path) -> str:
         "template stream before returning.  Entries without a stream either take a gate/exit "
         "path in this trace or lack an observed stream before the next helper entry.",
         "",
-        "| Frame | workspace band | selector index | table word | static group record | row thresholds / live key / selected index | first stream byte |",
-        "| ---: | --- | ---: | --- | --- | --- | --- |",
+        "| Frame | workspace band | selector index | call-time row key | table word | static group record | row thresholds / live key / selected index | first stream byte |",
+        "| ---: | --- | ---: | --- | --- | --- | --- | --- |",
     ]
     for row in rows:
         stream = row["first_template_stream_byte"] or ""
@@ -127,7 +128,7 @@ def markdown(rows: list[dict], trace_path: Path) -> str:
                              f"{row['selected_row_index']}")
         lines.append(
             f"| {frame} | {row['workspace_band']} | `${row['selector_index']:04X}` | "
-            f"{row['selector_table_word_address']} | {row['group_record']} | "
+            f"{row['selector_live_row_term']} | {row['selector_table_word_address']} | {row['group_record']} | "
             f"{row_selection} | {stream} |"
         )
     lines += [

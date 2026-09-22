@@ -105,6 +105,23 @@ not establish how the static group-selector index itself maps to world-page
 coordinates. The full decoded threshold and pointer arrays are retained in the
 linked JSON inventories.
 
+### Independent directory axes
+
+The newly retained call-time values identify how the two controlled origin
+components enter that directory. Across the 41 corresponding selector calls,
+the first component (`$C45C3E`) increment changes **0** static group-selector
+indices and increments the live row key in **28** calls. The second component
+(`$C45C46`) increments the static group-selector index in **28** calls and
+changes **0** live row keys. The combined perturbation composes both effects.
+The remaining 13 calls retain their respective value in each experiment.
+
+Thus the observed terrain page directory is two-dimensional in dataflow, not
+merely in its resulting placement displacement: one origin component selects
+the static group/column-like directory entry, while the other selects the
+threshold-searched row/stream within it. “Column” and “row” here describe the
+directory axes only; no global cardinal-direction or absolute coordinate
+meaning is assigned.
+
 ## Chunk selection versus LOD
 
 The joins also distinguish a page/subsection selector from a demonstrated LOD
