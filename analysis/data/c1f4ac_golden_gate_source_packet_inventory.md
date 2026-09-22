@@ -16,6 +16,8 @@ Counts below include the initial `$C1F4AC` triple plus `$C1F528` loop entries.
 | `$C3B720` | 5 | `$C3B73E` | raw triple block; `$C3B6B0` static face/control stream follows |
 | `$C3B9B2` | 2 | `$C3B9BE` | raw triple block in sampled route |
 | `$C3A96E` | 1 | `$C3A974` | raw triple block, but this trace returns through the early matrix gate before a sampled renderer submission |
+| `$C3A9A8` | 2 | `$C3A9B4` | raw triple block in the red Golden Gate window |
+| `$C3B108` | 3 | `$C3B11A` | raw triple block in the red Golden Gate window |
 
 This table does not say that a raw block is a complete model. It establishes
 only which bytes are direct immutable coordinate input at this matrix entry,
@@ -28,3 +30,6 @@ Authorities: `build/run031_frame12000_{c35932,c361e4,c3ad0e,c3b0ce,c3b720,c3b9b2
 `$C3AF62` boundary is additionally confirmed by
 `build/run033_frame05250_c3af62_following_trace/trace.jsonl`, where the
 first `$C1F6F8` entry advances `A1` to `$C3AF74` and `A3` to `$C483A2`.
+The `$C3A9A8` and `$C3B108` boundaries are likewise established in their
+respective run033 frame-5,250 following traces, whose first `$C1F6F8`
+entries advance to `$C3A9B4/$C4839C` and `$C3B11A/$C483A2`.
