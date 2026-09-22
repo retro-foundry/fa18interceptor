@@ -19,4 +19,11 @@ $C36214 static control word/list
 
 The triples remain mutable transformed workspace values, not immutable source vertices. The trace does not match this segment to a coastline pixel, establish that `$C36214` represents a named landmark, or extract the complete segment-43 model.
 
+The two traced `$C2FA7E` calls have endpoints `(118,66)->(125,60)` and
+`(125,60)->(132,59)`. Both endpoints hold final map-display bitplane index 6
+in the independently video-hash-matched frame-25 bitmap; see the
+[endpoint bitplane check](run003_m_map_c36214_line_endpoints.md). This is
+display-space overlap, not proof that either specific line invocation wrote
+those pixels.
+
 Authority: sealed `captures/run003`; `build/run003_m_visual_5/state.bin`; and ignored `build/run003_m_map_c36214_stream_trace/selected_stream_trace.jsonl` (800 instructions from the exact `$C36214` entry).

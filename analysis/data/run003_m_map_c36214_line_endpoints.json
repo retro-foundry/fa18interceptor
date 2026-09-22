@@ -1,0 +1,49 @@
+{
+  "authority": {
+    "trace": "build\\run003_m_map_c36214_stream_trace\\selected_stream_trace.jsonl",
+    "chip": "build\\run003_m_map_appearance_25f_trace\\trace_final_chip.bin",
+    "copper_plane_pointers": [
+      "$012BC0",
+      "$014B00",
+      "$016A40",
+      "$018980"
+    ]
+  },
+  "qualification": "An endpoint's final bitplane index establishes display-space overlap only. It does not prove this individual line call wrote that pixel or identify the source mesh.",
+  "lines": [
+    {
+      "trace_index": 152,
+      "endpoints": [
+        [
+          118,
+          66
+        ],
+        [
+          125,
+          60
+        ]
+      ],
+      "final_bitplane_indices": [
+        6,
+        6
+      ]
+    },
+    {
+      "trace_index": 406,
+      "endpoints": [
+        [
+          125,
+          60
+        ],
+        [
+          132,
+          59
+        ]
+      ],
+      "final_bitplane_indices": [
+        6,
+        6
+      ]
+    }
+  ]
+}
