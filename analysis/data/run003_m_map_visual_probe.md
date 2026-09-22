@@ -43,6 +43,14 @@ digest of its respective frame-2213 plane. The stable screenshot hash thus
 comes from equivalent display pages at distinct Chip-RAM addresses. This is
 direct evidence of display-page swapping/double buffering for the `M` view.
 
+Both this snapshot and the independently reproduced run035 map view use the
+same active RGB4 palette entries: in particular land green is
+`COLOR04=$0151` and water blue is `COLOR06=$0036`. The complete 16-entry
+sequence matches the shared `pix/frnt5`/`pix/inst5` disk palette catalogued in
+`disk_graphics_assets.json`. This establishes shared mutable palette state;
+it does not make either cockpit image file the coastline source. The disk
+inventory contains no dedicated map/coastline asset.
+
 The displayed planes are mutable: the first page's four plane digests differ
 between the pre-`M` snapshot and frame 2213. Therefore the visible map is a
 useful rendering oracle and an identified screen target, but neither its

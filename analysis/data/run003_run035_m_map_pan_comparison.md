@@ -20,7 +20,9 @@ it is not a fixed decorative screen.
 The result does **not** identify the static coastline producer, establish a
 map-to-3D coordinate transform, or prove that the presentation asset is the
 same data as the 3D terrain template lattice. It is a stronger visual oracle
-for those future joins.
+for those future joins. Both views use the same standard RGB4 map palette
+(`COLOR04=$0151` green and `COLOR06=$0036` blue); this is palette reuse, not
+source-asset evidence.
 
 Authority: sealed `captures/run003` and `captures/run035`; ignored
 reproduction artifacts `build/run003_m_visual_30/` and
