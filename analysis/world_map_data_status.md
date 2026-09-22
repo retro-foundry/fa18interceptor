@@ -48,6 +48,15 @@ a *simple whole-family close-range replacement* for that one landmark and
 scenario.  It does not reject culling, clipping, per-instance detail, or a
 different range selector elsewhere in the world.
 
+The terrain-placement builder does contain a dynamic output-shift table: it
+chooses a shift from live magnitude terms before emitting placement words.
+This is adaptive coordinate precision/range handling, not LOD evidence, since
+no different mesh, face list, or template topology is selected by that path.
+The same static template has observed shift counts 7 and 2 in two replay
+windows.  It further rules out decoding template words or final cache tuples
+as a fixed global-position table.  See the
+[placement builder's shift boundary](routines/c1dc1c_scene_placement_record_builder.md).
+
 See the measured face/input overlap and its limits in the
 [close-range LOD probe](data/golden_gate_close_range_lod_probe.md).
 

@@ -90,6 +90,30 @@ upstream writer of that workspace remains the relevant terrain-source path.
 The static `$C37990` descriptor field is a separate linked candidate that
 requires a branch where it is actually consumed.
 
+## Dynamic output-shift selection is not yet LOD
+
+Before the three output stores, `$C1DE94-$C1DF3C` derives a nonnegative
+threshold from three live magnitude terms, halves and caps it at `$EF`, then
+uses it to index the static byte table at `$C1DF46`.  The loaded byte becomes
+the arithmetic shift count used by all three `$C1E04A/$C1E054/$C1E05E` output
+stores.  This is a proved adaptive coordinate-precision step, not a proved
+choice of geometry.
+
+The joined template source `$C4264D` shows why it matters to map extraction.
+In the frames-404--426 window it reaches the final stores with shift count 7
+and emits `(76, 0, 428)`; in the frames-5253--5255 window it reaches them
+with shift count 2 and emits `(11008, 0, 6400)`.  The source words are the
+same in both cases (`$0980,$0580`), while the descriptor and workspace cell
+also differ.  Therefore those final placement words cannot be treated as a
+verbatim decode of the static template.
+
+An adaptive shift can be compatible with distance-dependent precision,
+clipping preparation, or another dynamic range policy.  It is not sufficient
+evidence of LOD: no branch in this slice substitutes a different static mesh,
+face list, or template topology for the same instance at a measured distance.
+The comparison is retained in
+[placement refresh-window comparison](../data/placement_refresh_window_comparison.md).
+
 The next valid step is a focused call/return trace that records `A1`, the
 three `D0` coordinate words, and the source reads immediately before this
 builder's first `$C1DD54` entry.
