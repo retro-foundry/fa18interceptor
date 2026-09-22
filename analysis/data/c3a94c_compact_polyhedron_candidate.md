@@ -49,3 +49,9 @@ can therefore reuse a pre-existing workspace record during that interval; its
 first writer predates the checkpoint or belongs to an unobserved initialization
 route. The next capture must begin before scene/entity initialization, not
 inside this already-populated renderer loop.
+
+The same exact CPU write watch is also a miss from the sealed `run031` initial
+state through replay frame 12,600. This eliminates the available full recorded
+run as an earlier writer source: `$C483A8` already predates its initial state.
+The remaining valid evidence source is a new capture from original boot/load
+through scene initialization (or a future state archived before that stage).
