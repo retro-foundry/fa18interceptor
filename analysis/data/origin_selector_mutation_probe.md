@@ -131,6 +131,15 @@ window in this sample, not an all-or-nothing outer plateau. See the
 [bin-8 group inventory](static_template_selector_groups_origin_row_08.md)
 and [bin-8 copy inventory](workspace_template_copies_origin_row_08.md).
 
+The matching group-axis interior-bin probe (`$C45C46=$08000000`) returns
+normally after 35,466 stepped instructions but reaches only the four-stream
+outer subset (6 copies and 4 later builder reads). Thus the two directory axes
+are not interchangeable: row bin 8 retains a six-stream intermediate window,
+while group bin 8 has already collapsed to the four-stream subset. This is
+selector-window evidence, not a statement about physical axis scale. See the
+[group-bin-8 inventory](static_template_selector_groups_origin_group_08.md)
+and [group-bin-8 copy inventory](workspace_template_copies_origin_group_08.md).
+
 ### Decoded static group-record directory
 
 The accepted group records have a directly observed compact directory format.

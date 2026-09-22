@@ -132,6 +132,22 @@
       ]
     },
     {
+      "probe": "group_08",
+      "origin_bins": "(16,8)",
+      "perturbation": "second component 8",
+      "selector_calls": 41,
+      "selected_streams": 4,
+      "distinct_group_records": 3,
+      "static_copies": 6,
+      "later_builder_reads": 4,
+      "streams": [
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B5C"
+      ]
+    },
+    {
       "probe": "row_08",
       "origin_bins": "(8,16)",
       "perturbation": "first component 8",
