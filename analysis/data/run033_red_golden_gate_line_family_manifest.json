@@ -8,6 +8,12 @@
   },
   "static_control_contexts": ["$C3559A", "$C355D2"],
   "observed_submission_counts": {"$C3559A": 12, "$C355D2": 12, "total": 24},
+  "immutable_input": {
+    "source": "$C3B9B2",
+    "end": "$C3B9BD",
+    "triples": [[272, 0, -270], [-270, 172, 272]],
+    "transform_entry": "$C1F4AC"
+  },
   "runtime_endpoint_contract": {
     "workspace": "$C48390",
     "slot_stride_bytes": 6,
