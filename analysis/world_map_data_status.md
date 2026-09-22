@@ -110,7 +110,8 @@ user's approach changes camera state. See the [line-detail candidate](data/run03
 4. For an LOD claim, hold an instance/camera orientation as constant as
    possible, vary measured distance, and trace the selector plus the chosen
    static family.  Face counts alone are insufficient because culling changes
-   them.
+   them. The ready-to-record Golden Gate protocol is in
+   [`golden_gate_lod_capture_protocol.md`](golden_gate_lod_capture_protocol.md).
 5. Correlate a **filled-face** raster submission to the measured red Golden
    Gate viewport region, then trace it upstream to its face/control record.
    The `$C3559A/$C355D2` line-family correlation is complete, but it cannot
