@@ -6,20 +6,16 @@ both its static data boundary and its renderer consumption path are traced.
 
 | Family | Immutable data to retain | Renderer path | Export status |
 | --- | --- | --- | --- |
-| `$C351xx` / `$C34C06-$C34C48` and `$C34A9A` face layer | local triples plus Hunk-41 face records | `$C1F100/$C1F21C` emits `$C46228` through `$C45BC6` and `$C48390` through `$C45BD8`; `$C0D384-$C0D521` derives tails; both reach pre-clip renderers | **shared procedural flight-object template** with two separately transformed renderer layers; not a flattened immutable mesh or proven world-instance placement |
+| `$C351xx` / `$C34C06-$C34C48` and `$C34A9A/$C34A9C` face layers | local triples plus Hunk-41 face records | `$C1F100/$C1F21C` emits `$C46228` through `$C45BC6` and `$C48390` through `$C45BD8`; `$C0D384-$C0D521` derives tails; both reach pre-clip renderers | **exportable procedural flight-object template** with two separately transformed renderer layers; retain face-context choices and derivation, not mutable outputs |
 | `$C39D2A` / `$C3925C,$C3925E` | static source triples and face records in the traced candidate block | observed matrix transform -> `$C48390` -> `$C2005C` -> polygon path | exportable candidate topology; named aircraft-carrier deck/island only as the user's visual identification |
 | Golden Gate batches `$C35932`, `$C3B720` | separately transformed immutable source batches and their record streams | batch transforms -> `$C355D8/$C355D6/$C3B6B0` face families | exportable **components**, not a single complete bridge mesh |
 | `$C362A2` / `$C36298` | static source candidate and face stream | observed alternate transform -> final polygon submission | exportable unnamed bridge-like component candidate |
 
 ## Renderer families not yet exportable as models
 
-- `$C34A9A/$C34A9C`: the frame-7500 capture has 22 distinct pre-cull face
-  records (21 submitted by each context, with 20 shared). They are useful
-  topology evidence, but the sampled frame reads the separate `$C48390`
-  workspace. At frame 12000 the
-  captured points for `$C34A9A` collapse to an X-axis-only state, unlike the
-  richer frame-7500 view. Do not attach them to `$C3515E` or export them as
-  static coordinates without their own immutable-source trace.
+- `$C34A9A/$C34A9C` is no longer in this category: its complete 0--39 slot
+  construction is traced from `$C351xx` plus `$C0D384`; see
+  [the full face-family evidence](c34a_full_flight_object_face_family.md).
 - `$C3A94C/$C3A94E` and `$C38F98`: renderer-resident face/control families;
   their upstream immutable vertex sources are not established.
 

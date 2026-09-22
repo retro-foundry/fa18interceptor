@@ -59,10 +59,14 @@ The layer is not independently invoked at this checkpoint: the
 face records to `$C203C4`.  This associates C34C with the same object-control
 context while retaining the separate workspace and face-record boundaries.
 
-The `$C34A9A/$C34A9C` polygon family is not merged into this model: it uses
-the separate `$C48390` workspace in the sampled frame. Similar silhouette and
-shared Hunk residency are insufficient to claim a shared object instance.
-They are nevertheless [co-rendered in one composite candidate pass](c34c_c34a_co_rendered_composite.md): that association is useful for visual identification, while the separate immutable-source boundaries remain mandatory.
+The `$C34A9A/$C34A9C` polygon family remains a separate face layer using the
+`$C48390` workspace in the sampled frame. It is no longer linked only by
+silhouette or Hunk residency: its complete 0--39 workspace construction now
+traces through the same `$C351xx` input and `$C0D384` tail procedure; see
+[the full face-family evidence](c34a_full_flight_object_face_family.md).
+The two layers nevertheless retain distinct matrices and static face records,
+so an export must preserve their separate coordinate lanes rather than flatten
+them into a guessed mesh.
 
 ## Reduced-detail interpretation
 
