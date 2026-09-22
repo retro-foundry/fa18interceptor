@@ -71,6 +71,7 @@ the live row-key search admits a different subset of static template streams:
 | X-only `(17,16)` | 10 | 7 | 10 shared; 6 control-only |
 | Z-only `(16,17)` | 14 | 7 | 14 shared; 2 control-only |
 | both `(17,17)` | 10 | 7 | 10 shared; 6 control-only |
+| first component zero, second unchanged `(0,16)` | 4 | 3 | 4 shared; 12 control-only |
 
 No perturbed run reaches a stream absent from the control in this bounded
 experiment. This directly locates the observed page/subsection filtering at
@@ -82,6 +83,25 @@ show LOD replacement. The per-run evidence inventories are
 [X-only](static_template_selector_groups_origin_x_plus.md),
 [Z-only](static_template_selector_groups_origin_z_plus.md), and
 [both-axis](static_template_selector_groups_origin_mutation.md).
+
+## Row-axis zero-bin boundary probe
+
+The same breakpoint procedure also set only `$C45C3E` to zero, retaining
+`$C45C46=$10C00000` and the alternate selector mode. The trace returns
+normally after 35,730 stepped instructions. It copies 6 static records, with
+4 later builder reads, and reaches 4 template streams (control: 106 / 91 /
+16 respectively). Those four streams are all present in the control; no new
+wraparound stream was reached.
+
+Across corresponding calls, static group selector indices remain unchanged.
+The first-component-dependent row keys either decrease by 16 or remain in a
+separate unchanged phase; the four surviving streams are in that unchanged
+high-key phase. This is evidence that the observed low-key page window is
+suppressed at row bin zero, rather than wrapping into a new low-key template
+set. It does not establish a global terrain-map edge because the second phase
+and all untraced origin bins remain outside the probe. See the
+[zero-bin group inventory](static_template_selector_groups_origin_row_zero.md)
+and [zero-bin copy inventory](workspace_template_copies_origin_row_zero.md).
 
 ### Decoded static group-record directory
 
