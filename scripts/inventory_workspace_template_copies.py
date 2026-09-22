@@ -179,12 +179,17 @@ def svg(rows: list[dict]) -> str:
     span = max(maximum_x - minimum_x, maximum_z - minimum_z, 1)
     width, height, margin, plot = 1120, 760, 92, 570
     left, top = margin, 115
+    copy_frames = sorted({row["copy_frame"] for row in points})
+    palette = ("#ffcb6b", "#82d6ff", "#f28db2", "#9ee493", "#c5a3ff", "#ff9f68")
+    frame_colors = {frame: palette[index % len(palette)] for index, frame in enumerate(copy_frames)}
+    segments = ", ".join(str(segment) for segment in sorted({row["source_segment"] for row in points}))
+    show_labels = len(points) <= 30
     lines = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760">',
         '<rect width="100%" height="100%" fill="#10151b"/>',
-        '<style>text{font-family:monospace;fill:#dbe7f3}.dim{fill:#9fb2c4}.axis{stroke:#506475}.grid{stroke:#293845}.point{fill:#ffcb6b;stroke:#10151b;stroke-width:1}</style>',
+        '<style>text{font-family:monospace;fill:#dbe7f3}.dim{fill:#9fb2c4}.axis{stroke:#506475}.grid{stroke:#293845}.point{stroke:#10151b;stroke-width:1}</style>',
         '<text x="92" y="36" font-size="20">Trace-derived static-template placement diagnostic — X/Z plane</text>',
-        '<text class="dim" x="92" y="62" font-size="14">22 segment-66 entries copied into workspace then emitted as runtime placements; all sampled middle words = 0</text>',
+        f'<text class="dim" x="92" y="62" font-size="14">{len(points)} segment-{segments} entries emitted as placements; all sampled middle words = 0</text>',
         f'<rect x="{left}" y="{top}" width="{plot}" height="{plot}" fill="#161e27" stroke="#63788b"/>',
     ]
     for fraction in range(1, 5):
@@ -193,6 +198,12 @@ def svg(rows: list[dict]) -> str:
             f'<line class="grid" x1="{left + position:.1f}" y1="{top}" x2="{left + position:.1f}" y2="{top + plot}"/>',
             f'<line class="grid" x1="{left}" y1="{top + position:.1f}" x2="{left + plot}" y2="{top + position:.1f}"/>',
         ]
+    if len(copy_frames) > 1:
+        for index, frame in enumerate(copy_frames):
+            x = 710 + (index % 3) * 130
+            y = 94 + (index // 3) * 18
+            lines.append(f'<circle cx="{x}" cy="{y - 4}" r="4" fill="{frame_colors[frame]}"/>')
+            lines.append(f'<text class="dim" x="{x + 9}" y="{y}" font-size="12">copy frame {frame}</text>')
     lines += [
         f'<line class="axis" x1="{left}" y1="{top + plot}" x2="{left + plot}" y2="{top + plot}"/>',
         f'<line class="axis" x1="{left}" y1="{top}" x2="{left}" y2="{top + plot}"/>',
@@ -205,9 +216,10 @@ def svg(rows: list[dict]) -> str:
         title = (f'{label} -> {row["runtime_placement_record"]} {row["runtime_descriptor"]}; '
                  f'X={x}, middle=0, Z={z}')
         lines += [
-            f'<circle class="point" cx="{px:.1f}" cy="{py:.1f}" r="5"><title>{title}</title></circle>',
-            f'<text class="dim" x="{px + 8:.1f}" y="{py - 7:.1f}" font-size="12">{label[3:]}</text>',
+            f'<circle class="point" cx="{px:.1f}" cy="{py:.1f}" r="5" fill="{frame_colors[row["copy_frame"]]}"><title>{title}</title></circle>',
         ]
+        if show_labels:
+            lines.append(f'<text class="dim" x="{px + 8:.1f}" y="{py - 7:.1f}" font-size="12">{label[3:]}</text>')
     lines += [
         f'<text class="dim" x="{left}" y="{top + plot + 30}" font-size="14">X range [{minimum_x}, {maximum_x}]</text>',
         f'<text class="dim" x="{left + plot - 180}" y="{top + plot + 30}" font-size="14">Z range [{minimum_z}, {maximum_z}]</text>',
