@@ -32,18 +32,24 @@ tail before the next record starts at `$C4ED46`:
 | `$C1E04A/$C1E054/$C1E05E` | three `MOVE.W D0,(A2)+` stores | `$C4ED40`, `$C4ED42`, `$C4ED44` |
 | `$C1E098-$C1E0B0` | long/word/byte stores and clears | `$C4ED46-$C4ED4E` |
 
-The next pass repeats the same store shape with `A2=$C4ED52`.  The 24-byte
-spacing and sampled bulk mutations establish that this slice builds/refreshes
-the runtime placement records rather than merely reading them.
+The next pass repeats the same store shape with `A2=$C4ED52`.  A second
+observed iteration makes the record field order explicit: at `$C4F03A`,
+`$C1DD54` writes the selector word; `$C1DD88` writes `A1=$C22700` as the
+descriptor pointer; and `$C1E04A/$C1E054/$C1E05E` then write the three
+coordinate-bearing words.  The 24-byte spacing and sampled bulk mutations
+establish that this slice builds/refreshes the runtime placement records rather
+than merely reading them.
 
 ## What this proves about terrain data
 
 The flat coordinate-bearing record layer is generated or refreshed by game
 code before the `$C1CB74` selector consumes it.  It is therefore a runtime
-scene-placement cache, not the immutable terrain source.  The builder's
-input provenance is not yet established: `A1` is stored into each record but
-the trace has not followed its producer back to the original scene descriptor
-or any static world-placement table.
+scene-placement cache, not the immutable terrain source.  The stored `A1`
+value is an exact pointer into the `$C22000-$C22FFF` scene-descriptor family
+in this observed iteration, joining the runtime record to the relocation-backed
+static scene table.  The three coordinate words' producer is still unproven:
+the trace has not followed their `D0` values back to the original world
+placement table or a coordinate-generation rule.
 
 The next valid step is a focused call/return trace that records `A1`, the
 three `D0` coordinate words, and the source reads immediately before this
