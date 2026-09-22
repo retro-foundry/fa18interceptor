@@ -72,6 +72,7 @@ the live row-key search admits a different subset of static template streams:
 | Z-only `(16,17)` | 14 | 7 | 14 shared; 2 control-only |
 | both `(17,17)` | 10 | 7 | 10 shared; 6 control-only |
 | first component zero, second unchanged `(0,16)` | 4 | 3 | 4 shared; 12 control-only |
+| first unchanged, second component zero `(16,0)` | 4 | 3 | 4 shared; 12 control-only |
 
 No perturbed run reaches a stream absent from the control in this bounded
 experiment. This directly locates the observed page/subsection filtering at
@@ -102,6 +103,16 @@ set. It does not establish a global terrain-map edge because the second phase
 and all untraced origin bins remain outside the probe. See the
 [zero-bin group inventory](static_template_selector_groups_origin_row_zero.md)
 and [zero-bin copy inventory](workspace_template_copies_origin_row_zero.md).
+
+The companion group-axis probe sets only `$C45C46` to zero. It likewise
+returns normally (35,514 stepped instructions), copies 6 records with 4
+later builder reads, and reaches the same four high-key streams. In the 41
+corresponding selector calls it changes group indices in 28 calls while
+leaving all row keys unchanged; the row-axis zero probe has the converse
+effect. Thus both directory axes exhibit the same local non-wrapping
+low-bin cutoff in this window. This is still not a global map-extent claim;
+see the [group-zero inventory](static_template_selector_groups_origin_group_zero.md)
+and [group-zero copy inventory](workspace_template_copies_origin_group_zero.md).
 
 ### Decoded static group-record directory
 
