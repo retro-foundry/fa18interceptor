@@ -91,6 +91,12 @@ the sealed `build/run003_m_visual_5/state.bin` checkpoint; complete
 transaction reconstruction is
 `build/run003_m_map_appearance_blitter_jobs.json`.
 
+The frame in which the prepared map page first becomes visible also runs the
+established static terrain-template selector and reaches six static template
+streams. This is shared transition-window activity, not a coastline-source
+claim: the trace includes ordinary world update/render work and still lacks a
+source-to-map-plane connection. See the [terrain-selector overlap](run003_m_map_terrain_selector_overlap.md).
+
 ## Boundary
 
 The raw `M` entry at `$C1BF8C` is traced only through its request and capped helper boundary. Its static post-helper tail initializes transition state, but the producing pixel/asset path has not been traced. Therefore this screenshot is a valuable visual oracle for future map-data work, not evidence that the flat template-placement cache, a particular static hunk, or the screen bitmap is the authoritative terrain model.
