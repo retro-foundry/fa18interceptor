@@ -41,6 +41,17 @@ source from the `$C45C3E/$C45C46` pair. The exact mode and source values for
 the captured frame-1 call still require a bounded execution trace; this
 static writer contract alone must not be promoted to a coordinate claim.
 
+Two longer sealed `run033` windows now execute both alternatives. In the
+frames-404--426 trace, frame 421 reaches `$C1C8B8` with the display-state
+guard `$C45785` nonzero; it reads `$C45C3E/$C45C46` and stores selector terms
+`$0010/$0010` at `$C1C8F2/$C1C8F8`. In the pre-5254 refresh trace, frame 5254
+reaches `$C1C8B0` with that guard clear; it resolves the active
+`$C46184+$C458DE` record and stores `$0010/$FFF1`. The first trace's source
+pair is also used by the separately reconstructed map-transition state, which
+is a reason not to relabel it as aircraft position without a controlled
+scenario. These observations prove mode-dependent selector inputs, not a
+global map-cell coordinate convention.
+
 For the second pack only, the observed `$C1C63E` path gives an immediate runtime producer. Provided `$C45785` is clear, it establishes `A3=$C46184 + word($C458DE)`, calls `$C1C7F6`, then writes:
 
 ```
