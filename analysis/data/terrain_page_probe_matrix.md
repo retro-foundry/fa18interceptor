@@ -14,6 +14,7 @@ Classification: **controlled selector-causality summary**. Each probe restores t
 | (16,12) | second component 12 | 41 | 5 | 4 | 10 | 4 |
 | (16,14) | second component 14 | 41 | 11 | 8 | 58 | 10 |
 | (16,15) | second component 15 | 41 | 15 | 10 | 108 | 75 |
+| (16,255) | second component 255 | 41 | 4 | 3 | 6 | 4 |
 | (8,16) | first component 8 | 41 | 6 | 5 | 13 | 7 |
 | (12,16) | first component 12 | 41 | 8 | 7 | 18 | 14 |
 | (255,16) | first component 255 | 41 | 4 | 3 | 6 | 4 |
