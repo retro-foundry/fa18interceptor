@@ -23,6 +23,9 @@ immutable static template streams:
 
 The rows are mechanically exported in the companion
 [selector inventory](static_template_selector_groups_run003_m_appearance.md).
+The selector's static-to-workspace copy reads 71 exact six-byte template
+records from those streams; their source addresses and bytes are retained in
+the companion [template-record inventory](active_terrain_template_stream_records_run003_m_appearance.md).
 Three streams (`$C42ADA`, `$C42BD4`, `$C42706`) are also independently
 observed in a live flight page-refresh window.  This supports their being
 active world-page inputs, rather than an `M`-only bitmap asset.

@@ -1,6 +1,7 @@
 """Join selected static streams to the template records the copier actually reads."""
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -19,8 +20,17 @@ def address(value: int) -> str:
 
 
 def main() -> None:
-    trace = [json.loads(line) for line in TRACE.read_text(encoding="utf-8").splitlines()]
-    slow = SLOW.read_bytes()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--trace-directory", type=Path, default=TRACE.parent,
+                        help="directory containing trace.jsonl and slow.bin")
+    parser.add_argument("--output-suffix", default="",
+                        help="suffix appended to both output basenames")
+    args = parser.parse_args()
+    trace_directory = args.trace_directory.resolve()
+    trace_path = trace_directory / "trace.jsonl"
+    slow_path = trace_directory / "slow.bin"
+    trace = [json.loads(line) for line in trace_path.read_text(encoding="utf-8").splitlines()]
+    slow = slow_path.read_bytes()
     starts = [index for index, row in enumerate(trace) if row["pc"] == SELECTOR_ENTRY_PC]
     rows = []
     for start, end in zip(starts, starts[1:] + [len(trace)]):
@@ -54,8 +64,8 @@ def main() -> None:
         })
     payload = {
         "authority": {
-            "trace": str(TRACE.relative_to(ROOT)).replace("\\", "/"),
-            "slow_snapshot": str(SLOW.relative_to(ROOT)).replace("\\", "/"),
+            "trace": str(trace_path.relative_to(ROOT)).replace("\\", "/"),
+            "slow_snapshot": str(slow_path.relative_to(ROOT)).replace("\\", "/"),
             "selector_entry_pc": address(SELECTOR_ENTRY_PC),
             "stream_start_pc": address(STREAM_START_PC),
             "copy_header_read_pc": address(COPY_HEADER_READ_PC),
@@ -63,8 +73,8 @@ def main() -> None:
         "classification": "scenario_backed_static_stream_to_template_record_inventory_not_global_map_export",
         "active_streams": rows,
     }
-    json_path = ROOT / "analysis/data/active_terrain_template_stream_records.json"
-    markdown_path = ROOT / "analysis/data/active_terrain_template_stream_records.md"
+    json_path = ROOT / f"analysis/data/active_terrain_template_stream_records{args.output_suffix}.json"
+    markdown_path = ROOT / f"analysis/data/active_terrain_template_stream_records{args.output_suffix}.md"
     json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     lines = [
         "# Active terrain-template stream records",
@@ -74,7 +84,7 @@ def main() -> None:
         "that `$C1D442-$C1D4C2` copied into a mutable workspace. It is not a complete "
         "global map or raw vertex export.",
         "",
-        "Authority: `build/run033_origin_control_trace/trace.jsonl` and `slow.bin`. "
+        f"Authority: `{trace_path.relative_to(ROOT).as_posix()}` and its `slow.bin`. "
         "The stream address is captured at `$C1D442`; each listed source is captured before "
         "the `(A5)+` header read at `$C1D488`.",
         "",
