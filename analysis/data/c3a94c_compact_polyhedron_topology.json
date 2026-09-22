@@ -1,0 +1,19 @@
+{
+  "schema": "fa18interceptor.renderer-observed-topology/v1",
+  "family": "$C3A94C/$C3A94E",
+  "classification": "trace-proven procedural compact polyhedral component",
+  "vertex_source": {
+    "start": "$C3A96E",
+    "count": 4,
+    "role": "immutable input triples to C1F4AC/C1F528; vertices 4-9 are derived"
+  },
+  "faces": [
+    {"context": "$C3A94E", "record": "$C3ABBA", "indices": [1, 8, 9, 6]},
+    {"context": "$C3A94E", "record": "$C3AC1A", "indices": [1, 2, 4, 0]},
+    {"context": "$C3A94E", "record": "$C3AC26", "indices": [2, 6, 7, 4]},
+    {"context": "$C3A94E", "record": "$C3AC74", "indices": [6, 3, 5, 7]},
+    {"context": "$C3A94E", "record": "$C3ACA0", "indices": [3, 1, 0, 5]},
+    {"context": "$C3A94E", "record": "$C3ACAC", "indices": [0, 4, 7, 5]}
+  ],
+  "qualification": "Indices 0-3 are static source triples. Indices 4-9 are renderer-derived slots, not stored triples; face links are observed from the C2005C preparation trace."
+}

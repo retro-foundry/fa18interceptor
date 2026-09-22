@@ -1,0 +1,106 @@
+{
+  "schema": "fa18interceptor.static-topology-payload/v1",
+  "source_snapshot": "build\\run031_frame12600_golden_gate_external_checkpoint\\slow.bin",
+  "topology_source": "analysis\\data\\c3a94c_compact_polyhedron_topology.json",
+  "immutable_coordinate_triples": [
+    {
+      "index": 0,
+      "address": "$C3A96E",
+      "xyz": [
+        200,
+        280,
+        -240
+      ]
+    },
+    {
+      "index": 1,
+      "address": "$C3A974",
+      "xyz": [
+        200,
+        0,
+        -240
+      ]
+    },
+    {
+      "index": 2,
+      "address": "$C3A97A",
+      "xyz": [
+        -200,
+        0,
+        -240
+      ]
+    },
+    {
+      "index": 3,
+      "address": "$C3A980",
+      "xyz": [
+        200,
+        0,
+        240
+      ]
+    }
+  ],
+  "renderer_observed_faces": [
+    {
+      "context": "$C3A94E",
+      "record": "$C3ABBA",
+      "indices": [
+        1,
+        8,
+        9,
+        6
+      ]
+    },
+    {
+      "context": "$C3A94E",
+      "record": "$C3AC1A",
+      "indices": [
+        1,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "context": "$C3A94E",
+      "record": "$C3AC26",
+      "indices": [
+        2,
+        6,
+        7,
+        4
+      ]
+    },
+    {
+      "context": "$C3A94E",
+      "record": "$C3AC74",
+      "indices": [
+        6,
+        3,
+        5,
+        7
+      ]
+    },
+    {
+      "context": "$C3A94E",
+      "record": "$C3ACA0",
+      "indices": [
+        3,
+        1,
+        0,
+        5
+      ]
+    },
+    {
+      "context": "$C3A94E",
+      "record": "$C3ACAC",
+      "indices": [
+        0,
+        4,
+        7,
+        5
+      ]
+    }
+  ],
+  "qualification": "Triples are copied from the trace-proven static source range. Face edges are only the renderer-observed topology supplied by the input JSON; no unseen geometry is inferred."
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "fa18interceptor.model-export-boundary/v1",
+  "family": "$C3A94C/$C3A94E",
+  "classification": "trace-proven procedural compact polyhedral component",
+  "immutable_data": {
+    "coordinate_triples": {
+      "triple_start_range": "$C3A96E-$C3A980",
+      "raw_byte_range_inclusive": "$C3A96E-$C3A985",
+      "triple_count": 4,
+      "role": "direct matrix-transform input, supplying workspace slots 0-3"
+    },
+    "face_records": {
+      "records": ["$C3ABBA", "$C3AC1A", "$C3AC26", "$C3AC74", "$C3ACA0", "$C3ACAC"],
+      "record_count": 6,
+      "role": "renderer-observed four-point face topology using slots 0-9"
+    },
+    "control_stream": {
+      "controller": "$C3A94C/$C3A94E",
+      "stream_base_resolution": "$C3A942 -> $C3A958",
+      "face_dispatch": "$C3ABB2"
+    }
+  },
+  "required_code": [
+    {"range": "$C1F4AC-$C1F6F8", "role": "transform four immutable triples into C48390 slots 0-3"},
+    {"range": "$C20EC4-$C20F6E", "role": "derive workspace slots 4-9 from the transformed direct block"},
+    {"range": "$C2005C-$C200F5", "role": "resolve face offsets against completed workspace slots"}
+  ],
+  "workspace_contract": {
+    "workspace": "$C48390 slots 0-9",
+    "direct_slots": "0-3",
+    "derived_slots": "4-9",
+    "explicitly_not_source_data": ["$C48390", "$C483A8"]
+  },
+  "evidence": {
+    "transform_and_controller_handoff": "build/run031_frame12600_c3a96e_occ2_trace/trace.jsonl",
+    "face_preparation": "build/run031_frame12600_face_preparations_64f/face_preparations.json",
+    "topology": "analysis/data/c3a94c_compact_polyhedron_topology.json"
+  },
+  "limitations": [
+    "This is not a contiguous static mesh: reproductions must apply the original derivation routine or an equivalent verified implementation.",
+    "No game-object name, scene placement, or instance count is established."
+  ]
+}
