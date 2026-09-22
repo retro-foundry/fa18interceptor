@@ -4,6 +4,11 @@ Classification: **trace-proven static vertex-transform and renderer-face path; p
 
 At the Golden Gate checkpoint, `build/run031_frame12000_c35932_following_trace_v2/trace.jsonl` starts the alternate matrix path at `$C1F4AC` with `A1=$C35932`. Its vertex loop at `$C1F524` feeds the transformed workspace. The same bounded trace subsequently selects the static face/control context `$C355D8` at the renderer walker and reaches clipping (`$C2469E`), perspective projection (`$C24CFE`), and final polygon consumption (`$C2FF48`).
 
+The input is not a plain mesh table: the leading seven triples are followed by
+a mode word and conditional control stream. See [the exact mixed-stream
+boundary](c35932_mixed_transform_control_stream.md); it must be preserved with
+the code path rather than exported as a contiguous vertex payload.
+
 The independent 48-frame Golden Gate polygon collector records 15 finalized `$C355D8` polygons containing 53 renderer-observed edges. [The tight-fit orthographic sheet](../plots/golden_gate_c35932_c355d8_model_sheet.png) draws exactly those submitted outlines in X-Y, X-Z, and Y-Z; it adds neither inferred links nor missing faces.
 
 The checkpoint's scenario label and the plotted structure make this a bridge **face-family** candidate, not a complete landmark reconstruction. The checkpoint contains additional independently transformed source blocks and renderer contexts. It is therefore incorrect to treat this sheet as comparable in completeness to the `$C3515E -> $C34A9A` aircraft sheet; it proves one source-to-face path only.
