@@ -37,3 +37,8 @@ packets. Consult [the packet inventory](data/c1f4ac_golden_gate_source_packet_in
 before extracting any of its inputs. In particular, `$C35932` and `$C361E4`
 are mixed packets, while `$C3AD0E`, `$C3B0CE`, `$C3B720`, `$C3B9B2`, and
 `$C3A96E` are direct triple blocks for the sampled route.
+
+[Close-range Golden Gate evidence](data/golden_gate_close_range_lod_probe.md)
+now covers the overhead frame-11,850 and low-altitude frame-11,925 views.
+The same `$C355D8` face family remains active in both, so no simple
+close-range LOD-family replacement is observed.
