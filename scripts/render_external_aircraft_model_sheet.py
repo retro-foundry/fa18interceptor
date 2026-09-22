@@ -63,8 +63,6 @@ def main() -> None:
         else:
             polygons.extend(submission["triples"] for submission in report["submissions"]
                             if submission["context"]["a5"] in contexts)
-    if not polygons:
-        raise ValueError(f"no selected-context polygons in {', '.join(str(path) for path in inputs)}")
     line_segments = list(embedded_lines)
     if args.line_input:
         line_report = json.loads(args.line_input.resolve().read_text(encoding="utf-8"))
@@ -73,6 +71,8 @@ def main() -> None:
             if submission["context"]["a5"] in line_contexts:
                 line_segments.extend(tuple(tuple(point) for point in segment["triples"])
                                      for segment in submission["segments"])
+    if not polygons and not line_segments:
+        raise ValueError(f"no selected-context polygons or line segments in {', '.join(str(path) for path in inputs)}")
     points = [tuple(point) for polygon in polygons for point in polygon]
     points.extend(point for segment in line_segments for point in segment)
     edge_count = sum(len(polygon) for polygon in polygons)
