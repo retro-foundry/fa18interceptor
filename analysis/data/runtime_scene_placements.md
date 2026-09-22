@@ -1,15 +1,16 @@
 # Runtime coordinate-bearing scene placements
 
-Classification: **scenario/dataflow evidence**. These are mutable runtime placement records, not an extracted static map mesh or a proven LOD table.
+Classification: **scenario/dataflow evidence**. These are mutable runtime placement records, not an extracted static map mesh or a proven LOD table.  Records are selected solely by their leading relocated descriptor pointer; coordinate values are not a selection criterion.
 
-`$C1CB74-$C1CCB6` selects records from the `$C4E9AA` anchor. In all three run033 checkpoints, the first aligned populated record starts at `$C4E9AC` and has this 24-byte shape:
+`$C1CB74-$C1CCB6` selects records from `$C4E9AA`. In all three run033 checkpoints, the first populated record starts at that address and has this 24-byte shape:
 
 | Bytes | Observed role |
 | --- | --- |
-| `+0..3` | relocated descriptor pointer in `$C22000-$C22FFF` |
-| `+4..9` | three signed coordinate-bearing words; the middle word is zero in every exported record |
-| `+10..11` | additional record field (role unknown) |
-| `+12..23` | mutable per-frame words |
+| `+0..1` | selector word, copied to `$C4585B` and split for downstream control |
+| `+2..5` | relocated descriptor pointer in `$C22000-$C22FFF` |
+| `+6..11` | three signed coordinate-bearing words; the middle word is zero in every exported record |
+| `+12..13` | additional record field (role unknown) |
+| `+14..23` | mutable per-frame words |
 
 The selector-loop report proves that the descriptor then selects renderer/control data. The coordinate words therefore locate scene instances before the renderer; they must not be merged with the immutable per-model vertex streams.
 
@@ -25,4 +26,4 @@ The selector-loop report proves that the descriptor then selects renderer/contro
 
 ## Limits
 
-The populated records and their coordinates change between checkpoints, so the captures establish a runtime scene-placement layer but not the original static source table, a terrain mesh, or a distance-selected LOD rule. Proving any of those needs a trace of the writer/refill path into `$C4E9AC` and a source-to-renderer association for individual descriptors.
+The populated records and their coordinates change between checkpoints, so the captures establish a runtime scene-placement layer but not the original static source table, a terrain mesh, or a distance-selected LOD rule. Proving any of those needs a trace of the writer/refill path into `$C4E9AA` and a source-to-renderer association for individual descriptors.

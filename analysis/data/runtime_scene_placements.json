@@ -1,10 +1,10 @@
 {
   "authority": {
     "selector_loop": "analysis/routines/c1cb14_flight_update_stage.md",
-    "runtime_anchor": "$C4E9AA",
-    "first_aligned_record": "$C4E9AC"
+    "runtime_record_base": "$C4E9AA"
   },
   "classification": "mutable_runtime_scene_placement_candidates_not_static_map_meshes",
+  "selection": "first 300 aligned records whose leading longword is in the relocated $C22000-$C22FFF descriptor range; coordinate values are not selection criteria",
   "record_size_bytes": 24,
   "scenes": [
     {
@@ -13,7 +13,8 @@
       "records": [
         {
           "index": 0,
-          "address": "$C4E9AC",
+          "address": "$C4E9AA",
+          "selector": "$1502",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             8192,
@@ -30,14 +31,13 @@
             "$4045",
             "$0246",
             "$02F9",
-            "$FFFF",
-            "$0000",
-            "$2002"
+            "$FFFF"
           ]
         },
         {
           "index": 1,
-          "address": "$C4E9C4",
+          "address": "$C4E9C2",
+          "selector": "$2002",
           "descriptor": "$C22408",
           "coordinate_words_unsigned": [
             10624,
@@ -54,14 +54,13 @@
             "$4045",
             "$0252",
             "$03E9",
-            "$0001",
-            "$0000",
-            "$2102"
+            "$0001"
           ]
         },
         {
           "index": 2,
-          "address": "$C4E9DC",
+          "address": "$C4E9DA",
+          "selector": "$2102",
           "descriptor": "$C2241C",
           "coordinate_words_unsigned": [
             10624,
@@ -78,14 +77,13 @@
             "$4045",
             "$023E",
             "$02E9",
-            "$0001",
-            "$0000",
-            "$5302"
+            "$0001"
           ]
         },
         {
           "index": 3,
-          "address": "$C4E9F4",
+          "address": "$C4E9F2",
+          "selector": "$5302",
           "descriptor": "$C22804",
           "coordinate_words_unsigned": [
             10240,
@@ -102,14 +100,13 @@
             "$4045",
             "$0252",
             "$01E9",
-            "$0001",
-            "$0000",
-            "$1902"
+            "$0001"
           ]
         },
         {
           "index": 4,
-          "address": "$C4EA0C",
+          "address": "$C4EA0A",
+          "selector": "$1902",
           "descriptor": "$C2237C",
           "coordinate_words_unsigned": [
             10240,
@@ -126,14 +123,13 @@
             "$4045",
             "$0218",
             "$00E9",
-            "$0001",
-            "$0000",
-            "$1702"
+            "$0001"
           ]
         },
         {
           "index": 5,
-          "address": "$C4EA24",
+          "address": "$C4EA22",
+          "selector": "$1702",
           "descriptor": "$C22354",
           "coordinate_words_unsigned": [
             10240,
@@ -150,14 +146,13 @@
             "$4045",
             "$01F9",
             "$03E9",
-            "$0001",
-            "$0000",
-            "$5401"
+            "$0001"
           ]
         },
         {
           "index": 6,
-          "address": "$C4EA3C",
+          "address": "$C4EA3A",
+          "selector": "$5401",
           "descriptor": "$C22818",
           "coordinate_words_unsigned": [
             12288,
@@ -174,14 +169,13 @@
             "$4045",
             "$0325",
             "$02E9",
-            "$0001",
-            "$0000",
-            "$1401"
+            "$0001"
           ]
         },
         {
           "index": 7,
-          "address": "$C4EA54",
+          "address": "$C4EA52",
+          "selector": "$1401",
           "descriptor": "$C22318",
           "coordinate_words_unsigned": [
             9216,
@@ -198,14 +192,13 @@
             "$4045",
             "$0287",
             "$01E9",
-            "$0001",
-            "$0000",
-            "$3301"
+            "$0001"
           ]
         },
         {
           "index": 8,
-          "address": "$C4EA6C",
+          "address": "$C4EA6A",
+          "selector": "$3301",
           "descriptor": "$C22584",
           "coordinate_words_unsigned": [
             9216,
@@ -222,14 +215,13 @@
             "$4045",
             "$0000",
             "$00E9",
-            "$FFFF",
-            "$0000",
-            "$4801"
+            "$FFFF"
           ]
         },
         {
           "index": 9,
-          "address": "$C4EA84",
+          "address": "$C4EA82",
+          "selector": "$4801",
           "descriptor": "$C22728",
           "coordinate_words_unsigned": [
             9216,
@@ -246,14 +238,13 @@
             "$4045",
             "$0220",
             "$01FA",
-            "$FFFF",
-            "$0000",
-            "$2201"
+            "$FFFF"
           ]
         },
         {
           "index": 10,
-          "address": "$C4EA9C",
+          "address": "$C4EA9A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             9280,
@@ -270,14 +261,13 @@
             "$4045",
             "$019F",
             "$02E9",
-            "$0001",
-            "$0000",
-            "$5201"
+            "$0001"
           ]
         },
         {
           "index": 11,
-          "address": "$C4EAB4",
+          "address": "$C4EAB2",
+          "selector": "$5201",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             15360,
@@ -294,14 +284,13 @@
             "$4045",
             "$037B",
             "$03F9",
-            "$FFFF",
-            "$0000",
-            "$1A01"
+            "$FFFF"
           ]
         },
         {
           "index": 12,
-          "address": "$C4EACC",
+          "address": "$C4EACA",
+          "selector": "$1A01",
           "descriptor": "$C22390",
           "coordinate_words_unsigned": [
             12288,
@@ -318,14 +307,13 @@
             "$4045",
             "$0270",
             "$02F0",
-            "$FFFF",
-            "$0000",
-            "$1801"
+            "$FFFF"
           ]
         },
         {
           "index": 13,
-          "address": "$C4EAE4",
+          "address": "$C4EAE2",
+          "selector": "$1801",
           "descriptor": "$C22368",
           "coordinate_words_unsigned": [
             12288,
@@ -342,14 +330,13 @@
             "$4045",
             "$0193",
             "$03E9",
-            "$0001",
-            "$0000",
-            "$7501"
+            "$0001"
           ]
         },
         {
           "index": 14,
-          "address": "$C4EAFC",
+          "address": "$C4EAFA",
+          "selector": "$7501",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             12032,
@@ -366,14 +353,13 @@
             "$4045",
             "$0214",
             "$02E9",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 15,
-          "address": "$C4EB14",
+          "address": "$C4EB12",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             11440,
@@ -390,14 +376,13 @@
             "$4045",
             "$0205",
             "$01E9",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 16,
-          "address": "$C4EB2C",
+          "address": "$C4EB2A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10720,
@@ -414,14 +399,13 @@
             "$4045",
             "$0191",
             "$00E9",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 17,
-          "address": "$C4EB44",
+          "address": "$C4EB42",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -438,14 +422,13 @@
             "$4045",
             "$0194",
             "$03E9",
-            "$0001",
-            "$0000",
-            "$2401"
+            "$0001"
           ]
         },
         {
           "index": 18,
-          "address": "$C4EB5C",
+          "address": "$C4EB5A",
+          "selector": "$2401",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -462,14 +445,13 @@
             "$4045",
             "$0219",
             "$00FA",
-            "$FFFF",
-            "$0000",
-            "$2501"
+            "$FFFF"
           ]
         },
         {
           "index": 19,
-          "address": "$C4EB74",
+          "address": "$C4EB72",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -486,14 +468,13 @@
             "$4045",
             "$021C",
             "$03F9",
-            "$FFFF",
-            "$0000",
-            "$2601"
+            "$FFFF"
           ]
         },
         {
           "index": 20,
-          "address": "$C4EB8C",
+          "address": "$C4EB8A",
+          "selector": "$2601",
           "descriptor": "$C22480",
           "coordinate_words_unsigned": [
             6064,
@@ -510,14 +491,13 @@
             "$4045",
             "$021D",
             "$02F9",
-            "$FFFF",
-            "$0000",
-            "$2301"
+            "$FFFF"
           ]
         },
         {
           "index": 21,
-          "address": "$C4EBA4",
+          "address": "$C4EBA2",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -534,14 +514,13 @@
             "$4045",
             "$0216",
             "$00F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 22,
-          "address": "$C4EBBC",
+          "address": "$C4EBBA",
+          "selector": "$FFFF",
           "descriptor": "$C22318",
           "coordinate_words_unsigned": [
             9216,
@@ -558,14 +537,13 @@
             "$4044",
             "$0396",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$3301"
+            "$0001"
           ]
         },
         {
           "index": 23,
-          "address": "$C4EBD4",
+          "address": "$C4EBD2",
+          "selector": "$3301",
           "descriptor": "$C22584",
           "coordinate_words_unsigned": [
             9216,
@@ -582,14 +560,13 @@
             "$4044",
             "$0000",
             "$01FA",
-            "$FFFF",
-            "$0000",
-            "$4801"
+            "$FFFF"
           ]
         },
         {
           "index": 24,
-          "address": "$C4EBEC",
+          "address": "$C4EBEA",
+          "selector": "$4801",
           "descriptor": "$C22728",
           "coordinate_words_unsigned": [
             9216,
@@ -606,14 +583,13 @@
             "$4044",
             "$033B",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$2201"
+            "$FFFF"
           ]
         },
         {
           "index": 25,
-          "address": "$C4EC04",
+          "address": "$C4EC02",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             9280,
@@ -630,14 +606,13 @@
             "$4044",
             "$031E",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$5202"
+            "$0001"
           ]
         },
         {
           "index": 26,
-          "address": "$C4EC1C",
+          "address": "$C4EC1A",
+          "selector": "$5202",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             7680,
@@ -654,14 +629,13 @@
             "$4044",
             "$0255",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$1902"
+            "$FFFF"
           ]
         },
         {
           "index": 27,
-          "address": "$C4EC34",
+          "address": "$C4EC32",
+          "selector": "$1902",
           "descriptor": "$C2237C",
           "coordinate_words_unsigned": [
             10240,
@@ -678,14 +652,13 @@
             "$4044",
             "$0289",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$1801"
+            "$0001"
           ]
         },
         {
           "index": 28,
-          "address": "$C4EC4C",
+          "address": "$C4EC4A",
+          "selector": "$1801",
           "descriptor": "$C22368",
           "coordinate_words_unsigned": [
             12288,
@@ -702,14 +675,13 @@
             "$4044",
             "$0329",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$7501"
+            "$0001"
           ]
         },
         {
           "index": 29,
-          "address": "$C4EC64",
+          "address": "$C4EC62",
+          "selector": "$7501",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             12032,
@@ -726,14 +698,13 @@
             "$4044",
             "$0346",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 30,
-          "address": "$C4EC7C",
+          "address": "$C4EC7A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             11440,
@@ -750,14 +721,13 @@
             "$4044",
             "$0338",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 31,
-          "address": "$C4EC94",
+          "address": "$C4EC92",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10720,
@@ -774,14 +744,13 @@
             "$4044",
             "$032B",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 32,
-          "address": "$C4ECAC",
+          "address": "$C4ECAA",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -798,14 +767,13 @@
             "$4044",
             "$0321",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$2401"
+            "$0001"
           ]
         },
         {
           "index": 33,
-          "address": "$C4ECC4",
+          "address": "$C4ECC2",
+          "selector": "$2401",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -822,14 +790,13 @@
             "$4044",
             "$0310",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$2501"
+            "$0001"
           ]
         },
         {
           "index": 34,
-          "address": "$C4ECDC",
+          "address": "$C4ECDA",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -846,14 +813,13 @@
             "$4044",
             "$0304",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$2601"
+            "$0001"
           ]
         },
         {
           "index": 35,
-          "address": "$C4ECF4",
+          "address": "$C4ECF2",
+          "selector": "$2601",
           "descriptor": "$C22480",
           "coordinate_words_unsigned": [
             6064,
@@ -870,14 +836,13 @@
             "$4044",
             "$0303",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$2301"
+            "$0001"
           ]
         },
         {
           "index": 36,
-          "address": "$C4ED0C",
+          "address": "$C4ED0A",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -894,14 +859,13 @@
             "$4044",
             "$031C",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$1A01"
+            "$0001"
           ]
         },
         {
           "index": 37,
-          "address": "$C4ED24",
+          "address": "$C4ED22",
+          "selector": "$1A01",
           "descriptor": "$C22390",
           "coordinate_words_unsigned": [
             12288,
@@ -918,14 +882,13 @@
             "$4044",
             "$0321",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$FFFF"
+            "$0001"
           ]
         },
         {
           "index": 38,
-          "address": "$C4ED3C",
+          "address": "$C4ED3A",
+          "selector": "$FFFF",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             3584,
@@ -942,14 +905,13 @@
             "$3F44",
             "$018B",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$1501"
+            "$FFFF"
           ]
         },
         {
           "index": 39,
-          "address": "$C4ED54",
+          "address": "$C4ED52",
+          "selector": "$1501",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             2048,
@@ -966,14 +928,13 @@
             "$3F44",
             "$0250",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$5200"
+            "$FFFF"
           ]
         },
         {
           "index": 40,
-          "address": "$C4ED6C",
+          "address": "$C4ED6A",
+          "selector": "$5200",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             8192,
@@ -990,14 +951,13 @@
             "$3F44",
             "$0221",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$3901"
+            "$FFFF"
           ]
         },
         {
           "index": 41,
-          "address": "$C4ED84",
+          "address": "$C4ED82",
+          "selector": "$3901",
           "descriptor": "$C225FC",
           "coordinate_words_unsigned": [
             128,
@@ -1014,14 +974,13 @@
             "$3F44",
             "$0213",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3801"
+            "$FFFF"
           ]
         },
         {
           "index": 42,
-          "address": "$C4ED9C",
+          "address": "$C4ED9A",
+          "selector": "$3801",
           "descriptor": "$C225E8",
           "coordinate_words_unsigned": [
             1440,
@@ -1038,14 +997,13 @@
             "$3F44",
             "$01FC",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$3B01"
+            "$FFFF"
           ]
         },
         {
           "index": 43,
-          "address": "$C4EDB4",
+          "address": "$C4EDB2",
+          "selector": "$3B01",
           "descriptor": "$C22624",
           "coordinate_words_unsigned": [
             224,
@@ -1062,14 +1020,13 @@
             "$3F44",
             "$0202",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4301"
+            "$FFFF"
           ]
         },
         {
           "index": 44,
-          "address": "$C4EDCC",
+          "address": "$C4EDCA",
+          "selector": "$4301",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             1004,
@@ -1086,14 +1043,13 @@
             "$3F44",
             "$0200",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$4301"
+            "$FFFF"
           ]
         },
         {
           "index": 45,
-          "address": "$C4EDE4",
+          "address": "$C4EDE2",
+          "selector": "$4301",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             1756,
@@ -1110,14 +1066,13 @@
             "$3F44",
             "$01EC",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3A00"
+            "$FFFF"
           ]
         },
         {
           "index": 46,
-          "address": "$C4EDFC",
+          "address": "$C4EDFA",
+          "selector": "$3A00",
           "descriptor": "$C22610",
           "coordinate_words_unsigned": [
             5012,
@@ -1134,14 +1089,13 @@
             "$3F44",
             "$034D",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$4001"
+            "$FFFF"
           ]
         },
         {
           "index": 47,
-          "address": "$C4EE14",
+          "address": "$C4EE12",
+          "selector": "$4001",
           "descriptor": "$C22688",
           "coordinate_words_unsigned": [
             1020,
@@ -1158,14 +1112,13 @@
             "$3F44",
             "$01BA",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4501"
+            "$FFFF"
           ]
         },
         {
           "index": 48,
-          "address": "$C4EE2C",
+          "address": "$C4EE2A",
+          "selector": "$4501",
           "descriptor": "$C226EC",
           "coordinate_words_unsigned": [
             900,
@@ -1182,14 +1135,13 @@
             "$3F44",
             "$01CE",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$4101"
+            "$FFFF"
           ]
         },
         {
           "index": 49,
-          "address": "$C4EE44",
+          "address": "$C4EE42",
+          "selector": "$4101",
           "descriptor": "$C2269C",
           "coordinate_words_unsigned": [
             792,
@@ -1206,14 +1158,13 @@
             "$3F44",
             "$01DA",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3D01"
+            "$FFFF"
           ]
         },
         {
           "index": 50,
-          "address": "$C4EE5C",
+          "address": "$C4EE5A",
+          "selector": "$3D01",
           "descriptor": "$C2264C",
           "coordinate_words_unsigned": [
             1014,
@@ -1230,14 +1181,13 @@
             "$3F44",
             "$01DC",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$3C01"
+            "$FFFF"
           ]
         },
         {
           "index": 51,
-          "address": "$C4EE74",
+          "address": "$C4EE72",
+          "selector": "$3C01",
           "descriptor": "$C22638",
           "coordinate_words_unsigned": [
             442,
@@ -1254,14 +1204,13 @@
             "$3F44",
             "$01EF",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4401"
+            "$FFFF"
           ]
         },
         {
           "index": 52,
-          "address": "$C4EE8C",
+          "address": "$C4EE8A",
+          "selector": "$4401",
           "descriptor": "$C226D8",
           "coordinate_words_unsigned": [
             302,
@@ -1278,14 +1227,13 @@
             "$3F44",
             "$0201",
             "$00F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 53,
-          "address": "$C4EEA4",
+          "address": "$C4EEA2",
+          "selector": "$FFFF",
           "descriptor": "$C22674",
           "coordinate_words_unsigned": [
             65527,
@@ -1302,14 +1250,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$1507"
+            "$0000"
           ]
         },
         {
           "index": 54,
-          "address": "$C4EEBC",
+          "address": "$C4EEBA",
+          "selector": "$1507",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             32,
@@ -1326,14 +1273,13 @@
             "$3F44",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$5207"
+            "$FFFF"
           ]
         },
         {
           "index": 55,
-          "address": "$C4EED4",
+          "address": "$C4EED2",
+          "selector": "$5207",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             64,
@@ -1350,14 +1296,13 @@
             "$3F44",
             "$0060",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$3907"
+            "$FFFF"
           ]
         },
         {
           "index": 56,
-          "address": "$C4EEEC",
+          "address": "$C4EEEA",
+          "selector": "$3907",
           "descriptor": "$C225FC",
           "coordinate_words_unsigned": [
             2,
@@ -1374,14 +1319,13 @@
             "$3F44",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$3807"
+            "$FFFF"
           ]
         },
         {
           "index": 57,
-          "address": "$C4EF04",
+          "address": "$C4EF02",
+          "selector": "$3807",
           "descriptor": "$C225E8",
           "coordinate_words_unsigned": [
             22,
@@ -1398,14 +1342,13 @@
             "$3F44",
             "$0060",
             "$02FE",
-            "$FFFF",
-            "$0000",
-            "$3B07"
+            "$FFFF"
           ]
         },
         {
           "index": 58,
-          "address": "$C4EF1C",
+          "address": "$C4EF1A",
+          "selector": "$3B07",
           "descriptor": "$C22624",
           "coordinate_words_unsigned": [
             3,
@@ -1422,14 +1365,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4307"
+            "$0000"
           ]
         },
         {
           "index": 59,
-          "address": "$C4EF34",
+          "address": "$C4EF32",
+          "selector": "$4307",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             15,
@@ -1446,14 +1388,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$4307"
+            "$0000"
           ]
         },
         {
           "index": 60,
-          "address": "$C4EF4C",
+          "address": "$C4EF4A",
+          "selector": "$4307",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             27,
@@ -1470,14 +1411,13 @@
             "$3F44",
             "$0000",
             "$0000",
-            "$0000",
-            "$0000",
-            "$3A07"
+            "$0000"
           ]
         },
         {
           "index": 61,
-          "address": "$C4EF64",
+          "address": "$C4EF62",
+          "selector": "$3A07",
           "descriptor": "$C22610",
           "coordinate_words_unsigned": [
             39,
@@ -1494,14 +1434,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$4007"
+            "$0000"
           ]
         },
         {
           "index": 62,
-          "address": "$C4EF7C",
+          "address": "$C4EF7A",
+          "selector": "$4007",
           "descriptor": "$C22688",
           "coordinate_words_unsigned": [
             15,
@@ -1518,14 +1457,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4507"
+            "$0000"
           ]
         },
         {
           "index": 63,
-          "address": "$C4EF94",
+          "address": "$C4EF92",
+          "selector": "$4507",
           "descriptor": "$C226EC",
           "coordinate_words_unsigned": [
             14,
@@ -1542,14 +1480,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$4107"
+            "$0000"
           ]
         },
         {
           "index": 64,
-          "address": "$C4EFAC",
+          "address": "$C4EFAA",
+          "selector": "$4107",
           "descriptor": "$C2269C",
           "coordinate_words_unsigned": [
             12,
@@ -1566,14 +1503,13 @@
             "$3F44",
             "$0000",
             "$0000",
-            "$0000",
-            "$0000",
-            "$3D07"
+            "$0000"
           ]
         },
         {
           "index": 65,
-          "address": "$C4EFC4",
+          "address": "$C4EFC2",
+          "selector": "$3D07",
           "descriptor": "$C2264C",
           "coordinate_words_unsigned": [
             15,
@@ -1590,14 +1526,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$3C07"
+            "$0000"
           ]
         },
         {
           "index": 66,
-          "address": "$C4EFDC",
+          "address": "$C4EFDA",
+          "selector": "$3C07",
           "descriptor": "$C22638",
           "coordinate_words_unsigned": [
             6,
@@ -1614,14 +1549,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4407"
+            "$0000"
           ]
         },
         {
           "index": 67,
-          "address": "$C4EFF4",
+          "address": "$C4EFF2",
+          "selector": "$4407",
           "descriptor": "$C226D8",
           "coordinate_words_unsigned": [
             4,
@@ -1638,14 +1572,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$FFFF"
+            "$0000"
           ]
         },
         {
           "index": 68,
-          "address": "$C4F00C",
+          "address": "$C4F00A",
+          "selector": "$FFFF",
           "descriptor": "$C22494",
           "coordinate_words_unsigned": [
             2224,
@@ -1662,14 +1595,13 @@
             "$3F43",
             "$01FF",
             "$00FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 70,
-          "address": "$C4F03C",
+          "address": "$C4F03A",
+          "selector": "$2A01",
           "descriptor": "$C224D0",
           "coordinate_words_unsigned": [
             15360,
@@ -1686,14 +1618,13 @@
             "$4044",
             "$03D5",
             "$02F9",
-            "$FFFF",
-            "$0000",
-            "$7002"
+            "$FFFF"
           ]
         },
         {
           "index": 71,
-          "address": "$C4F054",
+          "address": "$C4F052",
+          "selector": "$7002",
           "descriptor": "$C22A48",
           "coordinate_words_unsigned": [
             6144,
@@ -1710,14 +1641,13 @@
             "$4044",
             "$01FE",
             "$01FA",
-            "$FFFF",
-            "$0000",
-            "$4602"
+            "$FFFF"
           ]
         },
         {
           "index": 72,
-          "address": "$C4F06C",
+          "address": "$C4F06A",
+          "selector": "$4602",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             11008,
@@ -1734,14 +1664,13 @@
             "$4045",
             "$0282",
             "$00FA",
-            "$FFFF",
-            "$0000",
-            "$4601"
+            "$FFFF"
           ]
         },
         {
           "index": 73,
-          "address": "$C4F084",
+          "address": "$C4F082",
+          "selector": "$4601",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             8864,
@@ -1758,14 +1687,13 @@
             "$4045",
             "$020D",
             "$01E9",
-            "$0001",
-            "$0000",
-            "$4B01"
+            "$0001"
           ]
         },
         {
           "index": 74,
-          "address": "$C4F09C",
+          "address": "$C4F09A",
+          "selector": "$4B01",
           "descriptor": "$C22764",
           "coordinate_words_unsigned": [
             13120,
@@ -1782,14 +1710,13 @@
             "$4045",
             "$0297",
             "$02F9",
-            "$FFFF",
-            "$0000",
-            "$7401"
+            "$FFFF"
           ]
         },
         {
           "index": 75,
-          "address": "$C4F0B4",
+          "address": "$C4F0B2",
+          "selector": "$7401",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             12288,
@@ -1806,14 +1733,13 @@
             "$4045",
             "$0270",
             "$01FA",
-            "$FFFF",
-            "$0000",
-            "$4C01"
+            "$FFFF"
           ]
         },
         {
           "index": 76,
-          "address": "$C4F0CC",
+          "address": "$C4F0CA",
+          "selector": "$4C01",
           "descriptor": "$C22778",
           "coordinate_words_unsigned": [
             11024,
@@ -1830,14 +1756,13 @@
             "$4045",
             "$0160",
             "$02E9",
-            "$0001",
-            "$0000",
-            "$7301"
+            "$0001"
           ]
         },
         {
           "index": 77,
-          "address": "$C4F0E4",
+          "address": "$C4F0E2",
+          "selector": "$7301",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             12288,
@@ -1854,14 +1779,13 @@
             "$4045",
             "$0187",
             "$01E9",
-            "$0001",
-            "$0000",
-            "$6F01"
+            "$0001"
           ]
         },
         {
           "index": 78,
-          "address": "$C4F0FC",
+          "address": "$C4F0FA",
+          "selector": "$6F01",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             2048,
@@ -1878,14 +1802,13 @@
             "$4045",
             "$0212",
             "$02F9",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 79,
-          "address": "$C4F114",
+          "address": "$C4F112",
+          "selector": "$FFFF",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             12288,
@@ -1902,14 +1825,13 @@
             "$4044",
             "$0308",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$6F01"
+            "$0001"
           ]
         },
         {
           "index": 80,
-          "address": "$C4F12C",
+          "address": "$C4F12A",
+          "selector": "$6F01",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             2048,
@@ -1926,14 +1848,13 @@
             "$4044",
             "$029A",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$7401"
+            "$FFFF"
           ]
         },
         {
           "index": 81,
-          "address": "$C4F144",
+          "address": "$C4F142",
+          "selector": "$7401",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             12288,
@@ -1950,14 +1871,13 @@
             "$4044",
             "$0321",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$FFFF"
+            "$0001"
           ]
         },
         {
           "index": 82,
-          "address": "$C4F15C",
+          "address": "$C4F15A",
+          "selector": "$FFFF",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             10240,
@@ -1974,14 +1894,13 @@
             "$4044",
             "$01C6",
             "$00E3",
-            "$0001",
-            "$0000",
-            "$6C01"
+            "$0001"
           ]
         },
         {
           "index": 83,
-          "address": "$C4F174",
+          "address": "$C4F172",
+          "selector": "$6C01",
           "descriptor": "$C229F8",
           "coordinate_words_unsigned": [
             4096,
@@ -1998,14 +1917,13 @@
             "$3F44",
             "$0172",
             "$03F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 84,
-          "address": "$C4F18C",
+          "address": "$C4F18A",
+          "selector": "$FFFF",
           "descriptor": "$C22958",
           "coordinate_words_unsigned": [
             65376,
@@ -2022,14 +1940,13 @@
             "$3F43",
             "$0062",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6507"
+            "$FFFF"
           ]
         },
         {
           "index": 85,
-          "address": "$C4F1A4",
+          "address": "$C4F1A2",
+          "selector": "$6507",
           "descriptor": "$C2296C",
           "coordinate_words_unsigned": [
             65280,
@@ -2046,14 +1963,13 @@
             "$3F43",
             "$0063",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$6607"
+            "$FFFF"
           ]
         },
         {
           "index": 86,
-          "address": "$C4F1BC",
+          "address": "$C4F1BA",
+          "selector": "$6607",
           "descriptor": "$C22980",
           "coordinate_words_unsigned": [
             65248,
@@ -2070,14 +1986,13 @@
             "$3F43",
             "$0064",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$6107"
+            "$FFFF"
           ]
         },
         {
           "index": 87,
-          "address": "$C4F1D4",
+          "address": "$C4F1D2",
+          "selector": "$6107",
           "descriptor": "$C2291C",
           "coordinate_words_unsigned": [
             65344,
@@ -2094,14 +2009,13 @@
             "$3F43",
             "$0061",
             "$02FE",
-            "$FFFF",
-            "$0000",
-            "$6207"
+            "$FFFF"
           ]
         },
         {
           "index": 88,
-          "address": "$C4F1EC",
+          "address": "$C4F1EA",
+          "selector": "$6207",
           "descriptor": "$C22930",
           "coordinate_words_unsigned": [
             65312,
@@ -2118,14 +2032,13 @@
             "$3F43",
             "$0061",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6907"
+            "$FFFF"
           ]
         },
         {
           "index": 89,
-          "address": "$C4F204",
+          "address": "$C4F202",
+          "selector": "$6907",
           "descriptor": "$C229BC",
           "coordinate_words_unsigned": [
             65088,
@@ -2142,14 +2055,13 @@
             "$3E43",
             "$006A",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$7407"
+            "$FFFF"
           ]
         },
         {
           "index": 90,
-          "address": "$C4F21C",
+          "address": "$C4F21A",
+          "selector": "$7407",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             320,
@@ -2166,14 +2078,13 @@
             "$4044",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$4C07"
+            "$FFFF"
           ]
         },
         {
           "index": 91,
-          "address": "$C4F234",
+          "address": "$C4F232",
+          "selector": "$4C07",
           "descriptor": "$C22778",
           "coordinate_words_unsigned": [
             300,
@@ -2190,14 +2101,13 @@
             "$4044",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$7307"
+            "$0000"
           ]
         },
         {
           "index": 92,
-          "address": "$C4F24C",
+          "address": "$C4F24A",
+          "selector": "$7307",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             320,
@@ -2214,14 +2124,13 @@
             "$4044",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$4607"
+            "$FFFF"
           ]
         },
         {
           "index": 93,
-          "address": "$C4F264",
+          "address": "$C4F262",
+          "selector": "$4607",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             472,
@@ -2238,14 +2147,13 @@
             "$4044",
             "$0062",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$4607"
+            "$FFFF"
           ]
         },
         {
           "index": 94,
-          "address": "$C4F27C",
+          "address": "$C4F27A",
+          "selector": "$4607",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             266,
@@ -2262,14 +2170,13 @@
             "$4044",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$4B07"
+            "$FFFF"
           ]
         },
         {
           "index": 95,
-          "address": "$C4F294",
+          "address": "$C4F292",
+          "selector": "$4B07",
           "descriptor": "$C22764",
           "coordinate_words_unsigned": [
             333,
@@ -2286,14 +2193,13 @@
             "$4044",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$6F07"
+            "$0000"
           ]
         },
         {
           "index": 96,
-          "address": "$C4F2AC",
+          "address": "$C4F2AA",
+          "selector": "$6F07",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             160,
@@ -2310,14 +2216,13 @@
             "$4044",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6D07"
+            "$FFFF"
           ]
         },
         {
           "index": 97,
-          "address": "$C4F2C4",
+          "address": "$C4F2C2",
+          "selector": "$6D07",
           "descriptor": "$C22A0C",
           "coordinate_words_unsigned": [
             65504,
@@ -2334,14 +2239,13 @@
             "$3F44",
             "$0060",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$6E07"
+            "$FFFF"
           ]
         },
         {
           "index": 98,
-          "address": "$C4F2DC",
+          "address": "$C4F2DA",
+          "selector": "$6E07",
           "descriptor": "$C22A20",
           "coordinate_words_unsigned": [
             65472,
@@ -2358,14 +2262,13 @@
             "$3F44",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$6C07"
+            "$FFFF"
           ]
         },
         {
           "index": 99,
-          "address": "$C4F2F4",
+          "address": "$C4F2F2",
+          "selector": "$6C07",
           "descriptor": "$C229F8",
           "coordinate_words_unsigned": [
             64,
@@ -2382,14 +2285,13 @@
             "$3F44",
             "$0060",
             "$02FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 100,
-          "address": "$C4F30C",
+          "address": "$C4F30A",
+          "selector": "$FFFF",
           "descriptor": "$C22944",
           "coordinate_words_unsigned": [
             61440,
@@ -2406,14 +2308,13 @@
             "$3F43",
             "$01B5",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$5902"
+            "$FFFF"
           ]
         },
         {
           "index": 101,
-          "address": "$C4F324",
+          "address": "$C4F322",
+          "selector": "$5902",
           "descriptor": "$C2287C",
           "coordinate_words_unsigned": [
             3072,
@@ -2430,14 +2331,13 @@
             "$3F43",
             "$0288",
             "$00FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 102,
-          "address": "$C4F33C",
+          "address": "$C4F33A",
+          "selector": "$FFFF",
           "descriptor": "$C22944",
           "coordinate_words_unsigned": [
             0,
@@ -2454,14 +2354,13 @@
             "$3E43",
             "$01DF",
             "$00FF",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 140,
-          "address": "$C4F6CC",
+          "address": "$C4F6CA",
+          "selector": "$3001",
           "descriptor": "$C22548",
           "coordinate_words_unsigned": [
             14080,
@@ -2478,14 +2377,13 @@
             "$4146",
             "$02D2",
             "$03F9",
-            "$FFFF",
-            "$0000",
-            "$4601"
+            "$FFFF"
           ]
         },
         {
           "index": 141,
-          "address": "$C4F6E4",
+          "address": "$C4F6E2",
+          "selector": "$4601",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             8864,
@@ -2502,14 +2400,13 @@
             "$4146",
             "$020D",
             "$03EA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 142,
-          "address": "$C4F6FC",
+          "address": "$C4F6FA",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             9280,
@@ -2526,14 +2423,13 @@
             "$4146",
             "$019F",
             "$02EA",
-            "$0001",
-            "$0000",
-            "$2501"
+            "$0001"
           ]
         },
         {
           "index": 143,
-          "address": "$C4F714",
+          "address": "$C4F712",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -2550,14 +2446,13 @@
             "$4046",
             "$021C",
             "$00EA",
-            "$0001",
-            "$0000",
-            "$2401"
+            "$0001"
           ]
         },
         {
           "index": 144,
-          "address": "$C4F72C",
+          "address": "$C4F72A",
+          "selector": "$2401",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -2574,14 +2469,13 @@
             "$4046",
             "$0219",
             "$01EA",
-            "$0001",
-            "$0000",
-            "$2601"
+            "$0001"
           ]
         },
         {
           "index": 145,
-          "address": "$C4F744",
+          "address": "$C4F742",
+          "selector": "$2601",
           "descriptor": "$C22480",
           "coordinate_words_unsigned": [
             6064,
@@ -2598,14 +2492,13 @@
             "$4046",
             "$021D",
             "$03EA",
-            "$0001",
-            "$0000",
-            "$2301"
+            "$0001"
           ]
         },
         {
           "index": 146,
-          "address": "$C4F75C",
+          "address": "$C4F75A",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -2622,14 +2515,13 @@
             "$4046",
             "$0216",
             "$02EA",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 147,
-          "address": "$C4F774",
+          "address": "$C4F772",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             14592,
@@ -2646,14 +2538,13 @@
             "$4145",
             "$02AD",
             "$01EA",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 148,
-          "address": "$C4F78C",
+          "address": "$C4F78A",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             14368,
@@ -2670,14 +2561,13 @@
             "$4145",
             "$02AB",
             "$00EA",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 149,
-          "address": "$C4F7A4",
+          "address": "$C4F7A2",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             15872,
@@ -2694,14 +2584,13 @@
             "$4145",
             "$02E4",
             "$03EA",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 150,
-          "address": "$C4F7BC",
+          "address": "$C4F7BA",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             14592,
@@ -2718,14 +2607,13 @@
             "$4145",
             "$02A1",
             "$02EA",
-            "$0001",
-            "$0000",
-            "$2E01"
+            "$0001"
           ]
         },
         {
           "index": 151,
-          "address": "$C4F7D4",
+          "address": "$C4F7D2",
+          "selector": "$2E01",
           "descriptor": "$C22520",
           "coordinate_words_unsigned": [
             13312,
@@ -2742,14 +2630,13 @@
             "$4145",
             "$0280",
             "$01EA",
-            "$0001",
-            "$0000",
-            "$2F01"
+            "$0001"
           ]
         },
         {
           "index": 152,
-          "address": "$C4F7EC",
+          "address": "$C4F7EA",
+          "selector": "$2F01",
           "descriptor": "$C22534",
           "coordinate_words_unsigned": [
             13568,
@@ -2766,14 +2653,13 @@
             "$4145",
             "$027B",
             "$00EA",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 153,
-          "address": "$C4F804",
+          "address": "$C4F802",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             12416,
@@ -2790,14 +2676,13 @@
             "$4145",
             "$0250",
             "$03EA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 154,
-          "address": "$C4F81C",
+          "address": "$C4F81A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             11440,
@@ -2814,14 +2699,13 @@
             "$4145",
             "$0205",
             "$02EA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 155,
-          "address": "$C4F834",
+          "address": "$C4F832",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10720,
@@ -2838,14 +2722,13 @@
             "$4145",
             "$0191",
             "$01EA",
-            "$0001",
-            "$0000",
-            "$7501"
+            "$0001"
           ]
         },
         {
           "index": 156,
-          "address": "$C4F84C",
+          "address": "$C4F84A",
+          "selector": "$7501",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             11947,
@@ -2862,14 +2745,13 @@
             "$4145",
             "$0211",
             "$00EA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 157,
-          "address": "$C4F864",
+          "address": "$C4F862",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -2886,14 +2768,13 @@
             "$4145",
             "$0194",
             "$03EA",
-            "$0001",
-            "$0000",
-            "$0010"
+            "$0001"
           ]
         },
         {
           "index": 158,
-          "address": "$C4F87C",
+          "address": "$C4F87A",
+          "selector": "$0010",
           "descriptor": "$C22188",
           "coordinate_words_unsigned": [
             8192,
@@ -2910,8 +2791,6 @@
             "$0000",
             "$0001",
             "$02EA",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         }
@@ -2920,22 +2799,22 @@
         {
           "first_index": 0,
           "last_index": 68,
-          "start": "$C4E9AC",
-          "end": "$C4F023",
+          "start": "$C4E9AA",
+          "end": "$C4F021",
           "records": 69
         },
         {
           "first_index": 70,
           "last_index": 102,
-          "start": "$C4F03C",
-          "end": "$C4F353",
+          "start": "$C4F03A",
+          "end": "$C4F351",
           "records": 33
         },
         {
           "first_index": 140,
           "last_index": 158,
-          "start": "$C4F6CC",
-          "end": "$C4F893",
+          "start": "$C4F6CA",
+          "end": "$C4F891",
           "records": 19
         }
       ],
@@ -2947,7 +2826,8 @@
       "records": [
         {
           "index": 0,
-          "address": "$C4E9AC",
+          "address": "$C4E9AA",
+          "selector": "$1502",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             8192,
@@ -2964,14 +2844,13 @@
             "$4045",
             "$020D",
             "$00F9",
-            "$FFFF",
-            "$0000",
-            "$2002"
+            "$FFFF"
           ]
         },
         {
           "index": 1,
-          "address": "$C4E9C4",
+          "address": "$C4E9C2",
+          "selector": "$2002",
           "descriptor": "$C22408",
           "coordinate_words_unsigned": [
             10624,
@@ -2988,14 +2867,13 @@
             "$4045",
             "$0214",
             "$03E7",
-            "$0001",
-            "$0000",
-            "$2102"
+            "$0001"
           ]
         },
         {
           "index": 2,
-          "address": "$C4E9DC",
+          "address": "$C4E9DA",
+          "selector": "$2102",
           "descriptor": "$C2241C",
           "coordinate_words_unsigned": [
             10624,
@@ -3012,14 +2890,13 @@
             "$4045",
             "$01FF",
             "$02E7",
-            "$0001",
-            "$0000",
-            "$5302"
+            "$0001"
           ]
         },
         {
           "index": 3,
-          "address": "$C4E9F4",
+          "address": "$C4E9F2",
+          "selector": "$5302",
           "descriptor": "$C22804",
           "coordinate_words_unsigned": [
             10240,
@@ -3036,14 +2913,13 @@
             "$4045",
             "$0214",
             "$01E7",
-            "$0001",
-            "$0000",
-            "$1902"
+            "$0001"
           ]
         },
         {
           "index": 4,
-          "address": "$C4EA0C",
+          "address": "$C4EA0A",
+          "selector": "$1902",
           "descriptor": "$C2237C",
           "coordinate_words_unsigned": [
             10240,
@@ -3060,14 +2936,13 @@
             "$4045",
             "$01F2",
             "$03ED",
-            "$FFFF",
-            "$0000",
-            "$1702"
+            "$FFFF"
           ]
         },
         {
           "index": 5,
-          "address": "$C4EA24",
+          "address": "$C4EA22",
+          "selector": "$1702",
           "descriptor": "$C22354",
           "coordinate_words_unsigned": [
             10240,
@@ -3084,14 +2959,13 @@
             "$4045",
             "$01C0",
             "$03E7",
-            "$0001",
-            "$0000",
-            "$5401"
+            "$0001"
           ]
         },
         {
           "index": 6,
-          "address": "$C4EA3C",
+          "address": "$C4EA3A",
+          "selector": "$5401",
           "descriptor": "$C22818",
           "coordinate_words_unsigned": [
             12288,
@@ -3108,14 +2982,13 @@
             "$4045",
             "$02B6",
             "$02E7",
-            "$0001",
-            "$0000",
-            "$1401"
+            "$0001"
           ]
         },
         {
           "index": 7,
-          "address": "$C4EA54",
+          "address": "$C4EA52",
+          "selector": "$1401",
           "descriptor": "$C22318",
           "coordinate_words_unsigned": [
             9216,
@@ -3132,14 +3005,13 @@
             "$4045",
             "$0226",
             "$03F4",
-            "$FFFF",
-            "$0000",
-            "$3301"
+            "$FFFF"
           ]
         },
         {
           "index": 8,
-          "address": "$C4EA6C",
+          "address": "$C4EA6A",
+          "selector": "$3301",
           "descriptor": "$C22584",
           "coordinate_words_unsigned": [
             9216,
@@ -3156,14 +3028,13 @@
             "$4045",
             "$0000",
             "$00E7",
-            "$FFFF",
-            "$0000",
-            "$4801"
+            "$FFFF"
           ]
         },
         {
           "index": 9,
-          "address": "$C4EA84",
+          "address": "$C4EA82",
+          "selector": "$4801",
           "descriptor": "$C22728",
           "coordinate_words_unsigned": [
             9216,
@@ -3180,14 +3051,13 @@
             "$4045",
             "$0163",
             "$03F9",
-            "$FFFF",
-            "$0000",
-            "$2201"
+            "$FFFF"
           ]
         },
         {
           "index": 10,
-          "address": "$C4EA9C",
+          "address": "$C4EA9A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             9280,
@@ -3204,14 +3074,13 @@
             "$4045",
             "$013B",
             "$03EC",
-            "$FFFF",
-            "$0000",
-            "$5201"
+            "$FFFF"
           ]
         },
         {
           "index": 11,
-          "address": "$C4EAB4",
+          "address": "$C4EAB2",
+          "selector": "$5201",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             15360,
@@ -3228,14 +3097,13 @@
             "$4045",
             "$0303",
             "$01F9",
-            "$FFFF",
-            "$0000",
-            "$1A01"
+            "$FFFF"
           ]
         },
         {
           "index": 12,
-          "address": "$C4EACC",
+          "address": "$C4EACA",
+          "selector": "$1A01",
           "descriptor": "$C22390",
           "coordinate_words_unsigned": [
             12288,
@@ -3252,14 +3120,13 @@
             "$4045",
             "$0247",
             "$00F9",
-            "$FFFF",
-            "$0000",
-            "$1801"
+            "$FFFF"
           ]
         },
         {
           "index": 13,
-          "address": "$C4EAE4",
+          "address": "$C4EAE2",
+          "selector": "$1801",
           "descriptor": "$C22368",
           "coordinate_words_unsigned": [
             12288,
@@ -3276,14 +3143,13 @@
             "$4045",
             "$011A",
             "$03E7",
-            "$0001",
-            "$0000",
-            "$7501"
+            "$0001"
           ]
         },
         {
           "index": 14,
-          "address": "$C4EAFC",
+          "address": "$C4EAFA",
+          "selector": "$7501",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             12032,
@@ -3300,14 +3166,13 @@
             "$4045",
             "$011C",
             "$02E7",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 15,
-          "address": "$C4EB14",
+          "address": "$C4EB12",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             11440,
@@ -3324,14 +3189,13 @@
             "$4045",
             "$011A",
             "$01E7",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 16,
-          "address": "$C4EB2C",
+          "address": "$C4EB2A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10720,
@@ -3348,14 +3212,13 @@
             "$4045",
             "$0117",
             "$00E7",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 17,
-          "address": "$C4EB44",
+          "address": "$C4EB42",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -3372,14 +3235,13 @@
             "$4045",
             "$0123",
             "$03E7",
-            "$0001",
-            "$0000",
-            "$2401"
+            "$0001"
           ]
         },
         {
           "index": 18,
-          "address": "$C4EB5C",
+          "address": "$C4EB5A",
+          "selector": "$2401",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -3396,14 +3258,13 @@
             "$4045",
             "$0196",
             "$02F9",
-            "$FFFF",
-            "$0000",
-            "$2501"
+            "$FFFF"
           ]
         },
         {
           "index": 19,
-          "address": "$C4EB74",
+          "address": "$C4EB72",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -3420,14 +3281,13 @@
             "$4045",
             "$01AC",
             "$01F9",
-            "$FFFF",
-            "$0000",
-            "$2601"
+            "$FFFF"
           ]
         },
         {
           "index": 20,
-          "address": "$C4EB8C",
+          "address": "$C4EB8A",
+          "selector": "$2601",
           "descriptor": "$C22480",
           "coordinate_words_unsigned": [
             6064,
@@ -3444,14 +3304,13 @@
             "$4045",
             "$01B2",
             "$00F9",
-            "$FFFF",
-            "$0000",
-            "$2301"
+            "$FFFF"
           ]
         },
         {
           "index": 21,
-          "address": "$C4EBA4",
+          "address": "$C4EBA2",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -3468,14 +3327,13 @@
             "$4045",
             "$017B",
             "$03F9",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 22,
-          "address": "$C4EBBC",
+          "address": "$C4EBBA",
+          "selector": "$FFFF",
           "descriptor": "$C22318",
           "coordinate_words_unsigned": [
             9216,
@@ -3492,14 +3350,13 @@
             "$4044",
             "$0396",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$3301"
+            "$0001"
           ]
         },
         {
           "index": 23,
-          "address": "$C4EBD4",
+          "address": "$C4EBD2",
+          "selector": "$3301",
           "descriptor": "$C22584",
           "coordinate_words_unsigned": [
             9216,
@@ -3516,14 +3373,13 @@
             "$4044",
             "$0000",
             "$01FA",
-            "$FFFF",
-            "$0000",
-            "$4801"
+            "$FFFF"
           ]
         },
         {
           "index": 24,
-          "address": "$C4EBEC",
+          "address": "$C4EBEA",
+          "selector": "$4801",
           "descriptor": "$C22728",
           "coordinate_words_unsigned": [
             9216,
@@ -3540,14 +3396,13 @@
             "$4044",
             "$033B",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$2201"
+            "$FFFF"
           ]
         },
         {
           "index": 25,
-          "address": "$C4EC04",
+          "address": "$C4EC02",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             9280,
@@ -3564,14 +3419,13 @@
             "$4044",
             "$031E",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$5202"
+            "$0001"
           ]
         },
         {
           "index": 26,
-          "address": "$C4EC1C",
+          "address": "$C4EC1A",
+          "selector": "$5202",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             7680,
@@ -3588,14 +3442,13 @@
             "$4044",
             "$0255",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$1902"
+            "$FFFF"
           ]
         },
         {
           "index": 27,
-          "address": "$C4EC34",
+          "address": "$C4EC32",
+          "selector": "$1902",
           "descriptor": "$C2237C",
           "coordinate_words_unsigned": [
             10240,
@@ -3612,14 +3465,13 @@
             "$4044",
             "$0289",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$1801"
+            "$0001"
           ]
         },
         {
           "index": 28,
-          "address": "$C4EC4C",
+          "address": "$C4EC4A",
+          "selector": "$1801",
           "descriptor": "$C22368",
           "coordinate_words_unsigned": [
             12288,
@@ -3636,14 +3488,13 @@
             "$4044",
             "$0329",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$7501"
+            "$0001"
           ]
         },
         {
           "index": 29,
-          "address": "$C4EC64",
+          "address": "$C4EC62",
+          "selector": "$7501",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             12032,
@@ -3660,14 +3511,13 @@
             "$4044",
             "$0346",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 30,
-          "address": "$C4EC7C",
+          "address": "$C4EC7A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             11440,
@@ -3684,14 +3534,13 @@
             "$4044",
             "$0338",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 31,
-          "address": "$C4EC94",
+          "address": "$C4EC92",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10720,
@@ -3708,14 +3557,13 @@
             "$4044",
             "$032B",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 32,
-          "address": "$C4ECAC",
+          "address": "$C4ECAA",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -3732,14 +3580,13 @@
             "$4044",
             "$0321",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$2401"
+            "$0001"
           ]
         },
         {
           "index": 33,
-          "address": "$C4ECC4",
+          "address": "$C4ECC2",
+          "selector": "$2401",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -3756,14 +3603,13 @@
             "$4044",
             "$0310",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$2501"
+            "$0001"
           ]
         },
         {
           "index": 34,
-          "address": "$C4ECDC",
+          "address": "$C4ECDA",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -3780,14 +3626,13 @@
             "$4044",
             "$0304",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$2601"
+            "$0001"
           ]
         },
         {
           "index": 35,
-          "address": "$C4ECF4",
+          "address": "$C4ECF2",
+          "selector": "$2601",
           "descriptor": "$C22480",
           "coordinate_words_unsigned": [
             6064,
@@ -3804,14 +3649,13 @@
             "$4044",
             "$0303",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$2301"
+            "$0001"
           ]
         },
         {
           "index": 36,
-          "address": "$C4ED0C",
+          "address": "$C4ED0A",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -3828,14 +3672,13 @@
             "$4044",
             "$031C",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$1A01"
+            "$0001"
           ]
         },
         {
           "index": 37,
-          "address": "$C4ED24",
+          "address": "$C4ED22",
+          "selector": "$1A01",
           "descriptor": "$C22390",
           "coordinate_words_unsigned": [
             12288,
@@ -3852,14 +3695,13 @@
             "$4044",
             "$0321",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$FFFF"
+            "$0001"
           ]
         },
         {
           "index": 38,
-          "address": "$C4ED3C",
+          "address": "$C4ED3A",
+          "selector": "$FFFF",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             3584,
@@ -3876,14 +3718,13 @@
             "$3F44",
             "$018B",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$1501"
+            "$FFFF"
           ]
         },
         {
           "index": 39,
-          "address": "$C4ED54",
+          "address": "$C4ED52",
+          "selector": "$1501",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             2048,
@@ -3900,14 +3741,13 @@
             "$3F44",
             "$0250",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$5200"
+            "$FFFF"
           ]
         },
         {
           "index": 40,
-          "address": "$C4ED6C",
+          "address": "$C4ED6A",
+          "selector": "$5200",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             8192,
@@ -3924,14 +3764,13 @@
             "$3F44",
             "$0221",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$3901"
+            "$FFFF"
           ]
         },
         {
           "index": 41,
-          "address": "$C4ED84",
+          "address": "$C4ED82",
+          "selector": "$3901",
           "descriptor": "$C225FC",
           "coordinate_words_unsigned": [
             128,
@@ -3948,14 +3787,13 @@
             "$3F44",
             "$0213",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3801"
+            "$FFFF"
           ]
         },
         {
           "index": 42,
-          "address": "$C4ED9C",
+          "address": "$C4ED9A",
+          "selector": "$3801",
           "descriptor": "$C225E8",
           "coordinate_words_unsigned": [
             1440,
@@ -3972,14 +3810,13 @@
             "$3F44",
             "$01FC",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$3B01"
+            "$FFFF"
           ]
         },
         {
           "index": 43,
-          "address": "$C4EDB4",
+          "address": "$C4EDB2",
+          "selector": "$3B01",
           "descriptor": "$C22624",
           "coordinate_words_unsigned": [
             224,
@@ -3996,14 +3833,13 @@
             "$3F44",
             "$0202",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4301"
+            "$FFFF"
           ]
         },
         {
           "index": 44,
-          "address": "$C4EDCC",
+          "address": "$C4EDCA",
+          "selector": "$4301",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             1004,
@@ -4020,14 +3856,13 @@
             "$3F44",
             "$0200",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$4301"
+            "$FFFF"
           ]
         },
         {
           "index": 45,
-          "address": "$C4EDE4",
+          "address": "$C4EDE2",
+          "selector": "$4301",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             1756,
@@ -4044,14 +3879,13 @@
             "$3F44",
             "$01EC",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3A00"
+            "$FFFF"
           ]
         },
         {
           "index": 46,
-          "address": "$C4EDFC",
+          "address": "$C4EDFA",
+          "selector": "$3A00",
           "descriptor": "$C22610",
           "coordinate_words_unsigned": [
             5012,
@@ -4068,14 +3902,13 @@
             "$3F44",
             "$034D",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$4001"
+            "$FFFF"
           ]
         },
         {
           "index": 47,
-          "address": "$C4EE14",
+          "address": "$C4EE12",
+          "selector": "$4001",
           "descriptor": "$C22688",
           "coordinate_words_unsigned": [
             1020,
@@ -4092,14 +3925,13 @@
             "$3F44",
             "$01BA",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4501"
+            "$FFFF"
           ]
         },
         {
           "index": 48,
-          "address": "$C4EE2C",
+          "address": "$C4EE2A",
+          "selector": "$4501",
           "descriptor": "$C226EC",
           "coordinate_words_unsigned": [
             900,
@@ -4116,14 +3948,13 @@
             "$3F44",
             "$01CE",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$4101"
+            "$FFFF"
           ]
         },
         {
           "index": 49,
-          "address": "$C4EE44",
+          "address": "$C4EE42",
+          "selector": "$4101",
           "descriptor": "$C2269C",
           "coordinate_words_unsigned": [
             792,
@@ -4140,14 +3971,13 @@
             "$3F44",
             "$01DA",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3D01"
+            "$FFFF"
           ]
         },
         {
           "index": 50,
-          "address": "$C4EE5C",
+          "address": "$C4EE5A",
+          "selector": "$3D01",
           "descriptor": "$C2264C",
           "coordinate_words_unsigned": [
             1014,
@@ -4164,14 +3994,13 @@
             "$3F44",
             "$01DC",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$3C01"
+            "$FFFF"
           ]
         },
         {
           "index": 51,
-          "address": "$C4EE74",
+          "address": "$C4EE72",
+          "selector": "$3C01",
           "descriptor": "$C22638",
           "coordinate_words_unsigned": [
             442,
@@ -4188,14 +4017,13 @@
             "$3F44",
             "$01EF",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4401"
+            "$FFFF"
           ]
         },
         {
           "index": 52,
-          "address": "$C4EE8C",
+          "address": "$C4EE8A",
+          "selector": "$4401",
           "descriptor": "$C226D8",
           "coordinate_words_unsigned": [
             302,
@@ -4212,14 +4040,13 @@
             "$3F44",
             "$0201",
             "$00F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 53,
-          "address": "$C4EEA4",
+          "address": "$C4EEA2",
+          "selector": "$FFFF",
           "descriptor": "$C22674",
           "coordinate_words_unsigned": [
             65527,
@@ -4236,14 +4063,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$1507"
+            "$0000"
           ]
         },
         {
           "index": 54,
-          "address": "$C4EEBC",
+          "address": "$C4EEBA",
+          "selector": "$1507",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             32,
@@ -4260,14 +4086,13 @@
             "$3F44",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$5207"
+            "$FFFF"
           ]
         },
         {
           "index": 55,
-          "address": "$C4EED4",
+          "address": "$C4EED2",
+          "selector": "$5207",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             64,
@@ -4284,14 +4109,13 @@
             "$3F44",
             "$0060",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$3907"
+            "$FFFF"
           ]
         },
         {
           "index": 56,
-          "address": "$C4EEEC",
+          "address": "$C4EEEA",
+          "selector": "$3907",
           "descriptor": "$C225FC",
           "coordinate_words_unsigned": [
             2,
@@ -4308,14 +4132,13 @@
             "$3F44",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$3807"
+            "$FFFF"
           ]
         },
         {
           "index": 57,
-          "address": "$C4EF04",
+          "address": "$C4EF02",
+          "selector": "$3807",
           "descriptor": "$C225E8",
           "coordinate_words_unsigned": [
             22,
@@ -4332,14 +4155,13 @@
             "$3F44",
             "$0060",
             "$02FE",
-            "$FFFF",
-            "$0000",
-            "$3B07"
+            "$FFFF"
           ]
         },
         {
           "index": 58,
-          "address": "$C4EF1C",
+          "address": "$C4EF1A",
+          "selector": "$3B07",
           "descriptor": "$C22624",
           "coordinate_words_unsigned": [
             3,
@@ -4356,14 +4178,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4307"
+            "$0000"
           ]
         },
         {
           "index": 59,
-          "address": "$C4EF34",
+          "address": "$C4EF32",
+          "selector": "$4307",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             15,
@@ -4380,14 +4201,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$4307"
+            "$0000"
           ]
         },
         {
           "index": 60,
-          "address": "$C4EF4C",
+          "address": "$C4EF4A",
+          "selector": "$4307",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             27,
@@ -4404,14 +4224,13 @@
             "$3F44",
             "$0000",
             "$0000",
-            "$0000",
-            "$0000",
-            "$3A07"
+            "$0000"
           ]
         },
         {
           "index": 61,
-          "address": "$C4EF64",
+          "address": "$C4EF62",
+          "selector": "$3A07",
           "descriptor": "$C22610",
           "coordinate_words_unsigned": [
             39,
@@ -4428,14 +4247,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$4007"
+            "$0000"
           ]
         },
         {
           "index": 62,
-          "address": "$C4EF7C",
+          "address": "$C4EF7A",
+          "selector": "$4007",
           "descriptor": "$C22688",
           "coordinate_words_unsigned": [
             15,
@@ -4452,14 +4270,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4507"
+            "$0000"
           ]
         },
         {
           "index": 63,
-          "address": "$C4EF94",
+          "address": "$C4EF92",
+          "selector": "$4507",
           "descriptor": "$C226EC",
           "coordinate_words_unsigned": [
             14,
@@ -4476,14 +4293,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$4107"
+            "$0000"
           ]
         },
         {
           "index": 64,
-          "address": "$C4EFAC",
+          "address": "$C4EFAA",
+          "selector": "$4107",
           "descriptor": "$C2269C",
           "coordinate_words_unsigned": [
             12,
@@ -4500,14 +4316,13 @@
             "$3F44",
             "$0000",
             "$0000",
-            "$0000",
-            "$0000",
-            "$3D07"
+            "$0000"
           ]
         },
         {
           "index": 65,
-          "address": "$C4EFC4",
+          "address": "$C4EFC2",
+          "selector": "$3D07",
           "descriptor": "$C2264C",
           "coordinate_words_unsigned": [
             15,
@@ -4524,14 +4339,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$3C07"
+            "$0000"
           ]
         },
         {
           "index": 66,
-          "address": "$C4EFDC",
+          "address": "$C4EFDA",
+          "selector": "$3C07",
           "descriptor": "$C22638",
           "coordinate_words_unsigned": [
             6,
@@ -4548,14 +4362,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4407"
+            "$0000"
           ]
         },
         {
           "index": 67,
-          "address": "$C4EFF4",
+          "address": "$C4EFF2",
+          "selector": "$4407",
           "descriptor": "$C226D8",
           "coordinate_words_unsigned": [
             4,
@@ -4572,14 +4385,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$FFFF"
+            "$0000"
           ]
         },
         {
           "index": 68,
-          "address": "$C4F00C",
+          "address": "$C4F00A",
+          "selector": "$FFFF",
           "descriptor": "$C22494",
           "coordinate_words_unsigned": [
             2224,
@@ -4596,14 +4408,13 @@
             "$3F43",
             "$01FF",
             "$00FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 70,
-          "address": "$C4F03C",
+          "address": "$C4F03A",
+          "selector": "$2A01",
           "descriptor": "$C224D0",
           "coordinate_words_unsigned": [
             15360,
@@ -4620,14 +4431,13 @@
             "$4044",
             "$03B8",
             "$00F9",
-            "$FFFF",
-            "$0000",
-            "$7002"
+            "$FFFF"
           ]
         },
         {
           "index": 71,
-          "address": "$C4F054",
+          "address": "$C4F052",
+          "selector": "$7002",
           "descriptor": "$C22A48",
           "coordinate_words_unsigned": [
             6144,
@@ -4644,14 +4454,13 @@
             "$4044",
             "$0201",
             "$03F9",
-            "$FFFF",
-            "$0000",
-            "$4602"
+            "$FFFF"
           ]
         },
         {
           "index": 72,
-          "address": "$C4F06C",
+          "address": "$C4F06A",
+          "selector": "$4602",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             11008,
@@ -4668,14 +4477,13 @@
             "$4045",
             "$0245",
             "$02F9",
-            "$FFFF",
-            "$0000",
-            "$4601"
+            "$FFFF"
           ]
         },
         {
           "index": 73,
-          "address": "$C4F084",
+          "address": "$C4F082",
+          "selector": "$4601",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             8864,
@@ -4692,14 +4500,13 @@
             "$4045",
             "$0157",
             "$01E7",
-            "$0001",
-            "$0000",
-            "$4B01"
+            "$0001"
           ]
         },
         {
           "index": 74,
-          "address": "$C4F09C",
+          "address": "$C4F09A",
+          "selector": "$4B01",
           "descriptor": "$C22764",
           "coordinate_words_unsigned": [
             13120,
@@ -4716,14 +4523,13 @@
             "$4045",
             "$021D",
             "$00F9",
-            "$FFFF",
-            "$0000",
-            "$7401"
+            "$FFFF"
           ]
         },
         {
           "index": 75,
-          "address": "$C4F0B4",
+          "address": "$C4F0B2",
+          "selector": "$7401",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             12288,
@@ -4740,14 +4546,13 @@
             "$4045",
             "$0247",
             "$03F9",
-            "$FFFF",
-            "$0000",
-            "$4C01"
+            "$FFFF"
           ]
         },
         {
           "index": 76,
-          "address": "$C4F0CC",
+          "address": "$C4F0CA",
+          "selector": "$4C01",
           "descriptor": "$C22778",
           "coordinate_words_unsigned": [
             11024,
@@ -4764,14 +4569,13 @@
             "$4045",
             "$00E1",
             "$02E7",
-            "$0001",
-            "$0000",
-            "$7301"
+            "$0001"
           ]
         },
         {
           "index": 77,
-          "address": "$C4F0E4",
+          "address": "$C4F0E2",
+          "selector": "$7301",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             12288,
@@ -4788,14 +4592,13 @@
             "$4045",
             "$0127",
             "$01E7",
-            "$0001",
-            "$0000",
-            "$6F01"
+            "$0001"
           ]
         },
         {
           "index": 78,
-          "address": "$C4F0FC",
+          "address": "$C4F0FA",
+          "selector": "$6F01",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             2048,
@@ -4812,14 +4615,13 @@
             "$4045",
             "$0208",
             "$01F9",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 79,
-          "address": "$C4F114",
+          "address": "$C4F112",
+          "selector": "$FFFF",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             12288,
@@ -4836,14 +4638,13 @@
             "$4044",
             "$0308",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$6F01"
+            "$0001"
           ]
         },
         {
           "index": 80,
-          "address": "$C4F12C",
+          "address": "$C4F12A",
+          "selector": "$6F01",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             2048,
@@ -4860,14 +4661,13 @@
             "$4044",
             "$029A",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$7401"
+            "$FFFF"
           ]
         },
         {
           "index": 81,
-          "address": "$C4F144",
+          "address": "$C4F142",
+          "selector": "$7401",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             12288,
@@ -4884,14 +4684,13 @@
             "$4044",
             "$0321",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$FFFF"
+            "$0001"
           ]
         },
         {
           "index": 82,
-          "address": "$C4F15C",
+          "address": "$C4F15A",
+          "selector": "$FFFF",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             10240,
@@ -4908,14 +4707,13 @@
             "$4044",
             "$01C6",
             "$00E3",
-            "$0001",
-            "$0000",
-            "$6C01"
+            "$0001"
           ]
         },
         {
           "index": 83,
-          "address": "$C4F174",
+          "address": "$C4F172",
+          "selector": "$6C01",
           "descriptor": "$C229F8",
           "coordinate_words_unsigned": [
             4096,
@@ -4932,14 +4730,13 @@
             "$3F44",
             "$0172",
             "$03F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 84,
-          "address": "$C4F18C",
+          "address": "$C4F18A",
+          "selector": "$FFFF",
           "descriptor": "$C22958",
           "coordinate_words_unsigned": [
             65376,
@@ -4956,14 +4753,13 @@
             "$3F43",
             "$0062",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6507"
+            "$FFFF"
           ]
         },
         {
           "index": 85,
-          "address": "$C4F1A4",
+          "address": "$C4F1A2",
+          "selector": "$6507",
           "descriptor": "$C2296C",
           "coordinate_words_unsigned": [
             65280,
@@ -4980,14 +4776,13 @@
             "$3F43",
             "$0063",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$6607"
+            "$FFFF"
           ]
         },
         {
           "index": 86,
-          "address": "$C4F1BC",
+          "address": "$C4F1BA",
+          "selector": "$6607",
           "descriptor": "$C22980",
           "coordinate_words_unsigned": [
             65248,
@@ -5004,14 +4799,13 @@
             "$3F43",
             "$0064",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$6107"
+            "$FFFF"
           ]
         },
         {
           "index": 87,
-          "address": "$C4F1D4",
+          "address": "$C4F1D2",
+          "selector": "$6107",
           "descriptor": "$C2291C",
           "coordinate_words_unsigned": [
             65344,
@@ -5028,14 +4822,13 @@
             "$3F43",
             "$0061",
             "$02FE",
-            "$FFFF",
-            "$0000",
-            "$6207"
+            "$FFFF"
           ]
         },
         {
           "index": 88,
-          "address": "$C4F1EC",
+          "address": "$C4F1EA",
+          "selector": "$6207",
           "descriptor": "$C22930",
           "coordinate_words_unsigned": [
             65312,
@@ -5052,14 +4845,13 @@
             "$3F43",
             "$0061",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6907"
+            "$FFFF"
           ]
         },
         {
           "index": 89,
-          "address": "$C4F204",
+          "address": "$C4F202",
+          "selector": "$6907",
           "descriptor": "$C229BC",
           "coordinate_words_unsigned": [
             65088,
@@ -5076,14 +4868,13 @@
             "$3E43",
             "$006A",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$7407"
+            "$FFFF"
           ]
         },
         {
           "index": 90,
-          "address": "$C4F21C",
+          "address": "$C4F21A",
+          "selector": "$7407",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             320,
@@ -5100,14 +4891,13 @@
             "$4044",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$4C07"
+            "$FFFF"
           ]
         },
         {
           "index": 91,
-          "address": "$C4F234",
+          "address": "$C4F232",
+          "selector": "$4C07",
           "descriptor": "$C22778",
           "coordinate_words_unsigned": [
             300,
@@ -5124,14 +4914,13 @@
             "$4044",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$7307"
+            "$0000"
           ]
         },
         {
           "index": 92,
-          "address": "$C4F24C",
+          "address": "$C4F24A",
+          "selector": "$7307",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             320,
@@ -5148,14 +4937,13 @@
             "$4044",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$4607"
+            "$FFFF"
           ]
         },
         {
           "index": 93,
-          "address": "$C4F264",
+          "address": "$C4F262",
+          "selector": "$4607",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             472,
@@ -5172,14 +4960,13 @@
             "$4044",
             "$0062",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$4607"
+            "$FFFF"
           ]
         },
         {
           "index": 94,
-          "address": "$C4F27C",
+          "address": "$C4F27A",
+          "selector": "$4607",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             266,
@@ -5196,14 +4983,13 @@
             "$4044",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$4B07"
+            "$FFFF"
           ]
         },
         {
           "index": 95,
-          "address": "$C4F294",
+          "address": "$C4F292",
+          "selector": "$4B07",
           "descriptor": "$C22764",
           "coordinate_words_unsigned": [
             333,
@@ -5220,14 +5006,13 @@
             "$4044",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$6F07"
+            "$0000"
           ]
         },
         {
           "index": 96,
-          "address": "$C4F2AC",
+          "address": "$C4F2AA",
+          "selector": "$6F07",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             160,
@@ -5244,14 +5029,13 @@
             "$4044",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6D07"
+            "$FFFF"
           ]
         },
         {
           "index": 97,
-          "address": "$C4F2C4",
+          "address": "$C4F2C2",
+          "selector": "$6D07",
           "descriptor": "$C22A0C",
           "coordinate_words_unsigned": [
             65504,
@@ -5268,14 +5052,13 @@
             "$3F44",
             "$0060",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$6E07"
+            "$FFFF"
           ]
         },
         {
           "index": 98,
-          "address": "$C4F2DC",
+          "address": "$C4F2DA",
+          "selector": "$6E07",
           "descriptor": "$C22A20",
           "coordinate_words_unsigned": [
             65472,
@@ -5292,14 +5075,13 @@
             "$3F44",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$6C07"
+            "$FFFF"
           ]
         },
         {
           "index": 99,
-          "address": "$C4F2F4",
+          "address": "$C4F2F2",
+          "selector": "$6C07",
           "descriptor": "$C229F8",
           "coordinate_words_unsigned": [
             64,
@@ -5316,14 +5098,13 @@
             "$3F44",
             "$0060",
             "$02FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 100,
-          "address": "$C4F30C",
+          "address": "$C4F30A",
+          "selector": "$FFFF",
           "descriptor": "$C22944",
           "coordinate_words_unsigned": [
             61440,
@@ -5340,14 +5121,13 @@
             "$3F43",
             "$01B5",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$5902"
+            "$FFFF"
           ]
         },
         {
           "index": 101,
-          "address": "$C4F324",
+          "address": "$C4F322",
+          "selector": "$5902",
           "descriptor": "$C2287C",
           "coordinate_words_unsigned": [
             3072,
@@ -5364,14 +5144,13 @@
             "$3F43",
             "$0288",
             "$00FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 102,
-          "address": "$C4F33C",
+          "address": "$C4F33A",
+          "selector": "$FFFF",
           "descriptor": "$C22944",
           "coordinate_words_unsigned": [
             0,
@@ -5388,14 +5167,13 @@
             "$3E43",
             "$01DF",
             "$00FF",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 140,
-          "address": "$C4F6CC",
+          "address": "$C4F6CA",
+          "selector": "$3001",
           "descriptor": "$C22548",
           "coordinate_words_unsigned": [
             15552,
@@ -5412,14 +5190,13 @@
             "$4146",
             "$0315",
             "$01F9",
-            "$FFFF",
-            "$0000",
-            "$4A01"
+            "$FFFF"
           ]
         },
         {
           "index": 141,
-          "address": "$C4F6E4",
+          "address": "$C4F6E2",
+          "selector": "$4A01",
           "descriptor": "$C22750",
           "coordinate_words_unsigned": [
             15296,
@@ -5436,14 +5213,13 @@
             "$4146",
             "$02FF",
             "$02E8",
-            "$0001",
-            "$0000",
-            "$3001"
+            "$0001"
           ]
         },
         {
           "index": 142,
-          "address": "$C4F6FC",
+          "address": "$C4F6FA",
+          "selector": "$3001",
           "descriptor": "$C22548",
           "coordinate_words_unsigned": [
             15040,
@@ -5460,14 +5236,13 @@
             "$4146",
             "$02EB",
             "$00FA",
-            "$FFFF",
-            "$0000",
-            "$3001"
+            "$FFFF"
           ]
         },
         {
           "index": 143,
-          "address": "$C4F714",
+          "address": "$C4F712",
+          "selector": "$3001",
           "descriptor": "$C22548",
           "coordinate_words_unsigned": [
             14080,
@@ -5484,14 +5259,13 @@
             "$4146",
             "$0257",
             "$02F9",
-            "$FFFF",
-            "$0000",
-            "$4601"
+            "$FFFF"
           ]
         },
         {
           "index": 144,
-          "address": "$C4F72C",
+          "address": "$C4F72A",
+          "selector": "$4601",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             8864,
@@ -5508,14 +5282,13 @@
             "$4146",
             "$0157",
             "$03F4",
-            "$FFFF",
-            "$0000",
-            "$2201"
+            "$FFFF"
           ]
         },
         {
           "index": 145,
-          "address": "$C4F744",
+          "address": "$C4F742",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             9280,
@@ -5532,14 +5305,13 @@
             "$4146",
             "$013B",
             "$03E8",
-            "$0001",
-            "$0000",
-            "$2501"
+            "$0001"
           ]
         },
         {
           "index": 146,
-          "address": "$C4F75C",
+          "address": "$C4F75A",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -5556,14 +5328,13 @@
             "$4046",
             "$01AC",
             "$01E8",
-            "$0001",
-            "$0000",
-            "$2401"
+            "$0001"
           ]
         },
         {
           "index": 147,
-          "address": "$C4F774",
+          "address": "$C4F772",
+          "selector": "$2401",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -5580,14 +5351,13 @@
             "$4046",
             "$0196",
             "$02E8",
-            "$0001",
-            "$0000",
-            "$2301"
+            "$0001"
           ]
         },
         {
           "index": 148,
-          "address": "$C4F78C",
+          "address": "$C4F78A",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -5604,14 +5374,13 @@
             "$4046",
             "$017B",
             "$00E8",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 149,
-          "address": "$C4F7A4",
+          "address": "$C4F7A2",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             14592,
@@ -5628,14 +5397,13 @@
             "$4145",
             "$0231",
             "$03E8",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 150,
-          "address": "$C4F7BC",
+          "address": "$C4F7BA",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             14368,
@@ -5652,14 +5420,13 @@
             "$4145",
             "$0230",
             "$02E8",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 151,
-          "address": "$C4F7D4",
+          "address": "$C4F7D2",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             15872,
@@ -5676,14 +5443,13 @@
             "$4145",
             "$026C",
             "$01E8",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 152,
-          "address": "$C4F7EC",
+          "address": "$C4F7EA",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             14592,
@@ -5700,14 +5466,13 @@
             "$4145",
             "$0227",
             "$00E8",
-            "$0001",
-            "$0000",
-            "$2E01"
+            "$0001"
           ]
         },
         {
           "index": 153,
-          "address": "$C4F804",
+          "address": "$C4F802",
+          "selector": "$2E01",
           "descriptor": "$C22520",
           "coordinate_words_unsigned": [
             13312,
@@ -5724,14 +5489,13 @@
             "$4145",
             "$0204",
             "$03E8",
-            "$0001",
-            "$0000",
-            "$2F01"
+            "$0001"
           ]
         },
         {
           "index": 154,
-          "address": "$C4F81C",
+          "address": "$C4F81A",
+          "selector": "$2F01",
           "descriptor": "$C22534",
           "coordinate_words_unsigned": [
             13568,
@@ -5748,14 +5512,13 @@
             "$4145",
             "$0183",
             "$02E8",
-            "$0001",
-            "$0000",
-            "$2D01"
+            "$0001"
           ]
         },
         {
           "index": 155,
-          "address": "$C4F834",
+          "address": "$C4F832",
+          "selector": "$2D01",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             12416,
@@ -5772,14 +5535,13 @@
             "$4145",
             "$015A",
             "$01E8",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 156,
-          "address": "$C4F84C",
+          "address": "$C4F84A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             11440,
@@ -5796,14 +5558,13 @@
             "$4145",
             "$011A",
             "$00E8",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 157,
-          "address": "$C4F864",
+          "address": "$C4F862",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10720,
@@ -5820,14 +5581,13 @@
             "$4145",
             "$0117",
             "$03E8",
-            "$0001",
-            "$0000",
-            "$7501"
+            "$0001"
           ]
         },
         {
           "index": 158,
-          "address": "$C4F87C",
+          "address": "$C4F87A",
+          "selector": "$7501",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             11947,
@@ -5844,14 +5604,13 @@
             "$4145",
             "$011A",
             "$02E8",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 159,
-          "address": "$C4F894",
+          "address": "$C4F892",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -5868,14 +5627,13 @@
             "$4145",
             "$0123",
             "$01E8",
-            "$0001",
-            "$0000",
-            "$0010"
+            "$0001"
           ]
         },
         {
           "index": 160,
-          "address": "$C4F8AC",
+          "address": "$C4F8AA",
+          "selector": "$0010",
           "descriptor": "$C22188",
           "coordinate_words_unsigned": [
             12288,
@@ -5892,8 +5650,6 @@
             "$0000",
             "$0001",
             "$00E8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         }
@@ -5902,22 +5658,22 @@
         {
           "first_index": 0,
           "last_index": 68,
-          "start": "$C4E9AC",
-          "end": "$C4F023",
+          "start": "$C4E9AA",
+          "end": "$C4F021",
           "records": 69
         },
         {
           "first_index": 70,
           "last_index": 102,
-          "start": "$C4F03C",
-          "end": "$C4F353",
+          "start": "$C4F03A",
+          "end": "$C4F351",
           "records": 33
         },
         {
           "first_index": 140,
           "last_index": 160,
-          "start": "$C4F6CC",
-          "end": "$C4F8C3",
+          "start": "$C4F6CA",
+          "end": "$C4F8C1",
           "records": 21
         }
       ],
@@ -5929,7 +5685,8 @@
       "records": [
         {
           "index": 0,
-          "address": "$C4E9AC",
+          "address": "$C4E9AA",
+          "selector": "$1501",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             8192,
@@ -5946,14 +5703,13 @@
             "$4145",
             "$02A9",
             "$00F5",
-            "$0001",
-            "$0000",
-            "$2001"
+            "$0001"
           ]
         },
         {
           "index": 1,
-          "address": "$C4E9C4",
+          "address": "$C4E9C2",
+          "selector": "$2001",
           "descriptor": "$C22408",
           "coordinate_words_unsigned": [
             13056,
@@ -5970,14 +5726,13 @@
             "$4145",
             "$0275",
             "$03F5",
-            "$0001",
-            "$0000",
-            "$2101"
+            "$0001"
           ]
         },
         {
           "index": 2,
-          "address": "$C4E9DC",
+          "address": "$C4E9DA",
+          "selector": "$2101",
           "descriptor": "$C2241C",
           "coordinate_words_unsigned": [
             13056,
@@ -5994,14 +5749,13 @@
             "$4145",
             "$024E",
             "$02F5",
-            "$0001",
-            "$0000",
-            "$5301"
+            "$0001"
           ]
         },
         {
           "index": 3,
-          "address": "$C4E9F4",
+          "address": "$C4E9F2",
+          "selector": "$5301",
           "descriptor": "$C22804",
           "coordinate_words_unsigned": [
             12288,
@@ -6018,14 +5772,13 @@
             "$4145",
             "$0277",
             "$01F5",
-            "$0001",
-            "$0000",
-            "$1901"
+            "$0001"
           ]
         },
         {
           "index": 4,
-          "address": "$C4EA0C",
+          "address": "$C4EA0A",
+          "selector": "$1901",
           "descriptor": "$C2237C",
           "coordinate_words_unsigned": [
             12288,
@@ -6042,14 +5795,13 @@
             "$4145",
             "$0334",
             "$02FC",
-            "$FFFF",
-            "$0000",
-            "$5401"
+            "$FFFF"
           ]
         },
         {
           "index": 5,
-          "address": "$C4EA24",
+          "address": "$C4EA22",
+          "selector": "$5401",
           "descriptor": "$C22818",
           "coordinate_words_unsigned": [
             4096,
@@ -6066,14 +5818,13 @@
             "$4145",
             "$0168",
             "$03F5",
-            "$0001",
-            "$0000",
-            "$1401"
+            "$0001"
           ]
         },
         {
           "index": 6,
-          "address": "$C4EA3C",
+          "address": "$C4EA3A",
+          "selector": "$1401",
           "descriptor": "$C22318",
           "coordinate_words_unsigned": [
             1024,
@@ -6090,14 +5841,13 @@
             "$4145",
             "$0177",
             "$00FD",
-            "$FFFF",
-            "$0000",
-            "$3300"
+            "$FFFF"
           ]
         },
         {
           "index": 7,
-          "address": "$C4EA54",
+          "address": "$C4EA52",
+          "selector": "$3300",
           "descriptor": "$C22584",
           "coordinate_words_unsigned": [
             2048,
@@ -6114,14 +5864,13 @@
             "$4145",
             "$0000",
             "$01F5",
-            "$FFFF",
-            "$0000",
-            "$4800"
+            "$FFFF"
           ]
         },
         {
           "index": 8,
-          "address": "$C4EA6C",
+          "address": "$C4EA6A",
+          "selector": "$4800",
           "descriptor": "$C22728",
           "coordinate_words_unsigned": [
             2048,
@@ -6138,14 +5887,13 @@
             "$4145",
             "$0246",
             "$03FC",
-            "$FFFF",
-            "$0000",
-            "$2200"
+            "$FFFF"
           ]
         },
         {
           "index": 9,
-          "address": "$C4EA84",
+          "address": "$C4EA82",
+          "selector": "$2200",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             2176,
@@ -6162,14 +5910,13 @@
             "$4145",
             "$020F",
             "$03F6",
-            "$0001",
-            "$0000",
-            "$5201"
+            "$0001"
           ]
         },
         {
           "index": 10,
-          "address": "$C4EA9C",
+          "address": "$C4EA9A",
+          "selector": "$5201",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             7168,
@@ -6186,14 +5933,13 @@
             "$4145",
             "$014A",
             "$02F6",
-            "$0001",
-            "$0000",
-            "$1701"
+            "$0001"
           ]
         },
         {
           "index": 11,
-          "address": "$C4EAB4",
+          "address": "$C4EAB2",
+          "selector": "$1701",
           "descriptor": "$C22354",
           "coordinate_words_unsigned": [
             12288,
@@ -6210,14 +5956,13 @@
             "$4145",
             "$020C",
             "$01F6",
-            "$0001",
-            "$0000",
-            "$1A01"
+            "$0001"
           ]
         },
         {
           "index": 12,
-          "address": "$C4EACC",
+          "address": "$C4EACA",
+          "selector": "$1A01",
           "descriptor": "$C22390",
           "coordinate_words_unsigned": [
             4096,
@@ -6234,14 +5979,13 @@
             "$4145",
             "$0285",
             "$03FC",
-            "$FFFF",
-            "$0000",
-            "$1800"
+            "$FFFF"
           ]
         },
         {
           "index": 13,
-          "address": "$C4EAE4",
+          "address": "$C4EAE2",
+          "selector": "$1800",
           "descriptor": "$C22368",
           "coordinate_words_unsigned": [
             8192,
@@ -6258,14 +6002,13 @@
             "$4145",
             "$013F",
             "$03F6",
-            "$0001",
-            "$0000",
-            "$7500"
+            "$0001"
           ]
         },
         {
           "index": 14,
-          "address": "$C4EAFC",
+          "address": "$C4EAFA",
+          "selector": "$7500",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             7680,
@@ -6282,14 +6025,13 @@
             "$4145",
             "$009C",
             "$02F6",
-            "$0001",
-            "$0000",
-            "$2200"
+            "$0001"
           ]
         },
         {
           "index": 15,
-          "address": "$C4EB14",
+          "address": "$C4EB12",
+          "selector": "$2200",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             6496,
@@ -6306,14 +6048,13 @@
             "$4145",
             "$00CA",
             "$01F6",
-            "$0001",
-            "$0000",
-            "$2200"
+            "$0001"
           ]
         },
         {
           "index": 16,
-          "address": "$C4EB2C",
+          "address": "$C4EB2A",
+          "selector": "$2200",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             5056,
@@ -6330,14 +6071,13 @@
             "$4145",
             "$0123",
             "$00F6",
-            "$0001",
-            "$0000",
-            "$2200"
+            "$0001"
           ]
         },
         {
           "index": 17,
-          "address": "$C4EB44",
+          "address": "$C4EB42",
+          "selector": "$2200",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             3616,
@@ -6354,14 +6094,13 @@
             "$4145",
             "$0196",
             "$03F6",
-            "$0001",
-            "$0000",
-            "$FFFF"
+            "$0001"
           ]
         },
         {
           "index": 18,
-          "address": "$C4EB5C",
+          "address": "$C4EB5A",
+          "selector": "$FFFF",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -6378,14 +6117,13 @@
             "$4045",
             "$018F",
             "$00F9",
-            "$FFFF",
-            "$0000",
-            "$2501"
+            "$FFFF"
           ]
         },
         {
           "index": 19,
-          "address": "$C4EB74",
+          "address": "$C4EB72",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -6402,14 +6140,13 @@
             "$4045",
             "$01AC",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$2601"
+            "$FFFF"
           ]
         },
         {
           "index": 20,
-          "address": "$C4EB8C",
+          "address": "$C4EB8A",
+          "selector": "$2601",
           "descriptor": "$C22480",
           "coordinate_words_unsigned": [
             6064,
@@ -6426,14 +6163,13 @@
             "$4045",
             "$01AE",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$2301"
+            "$FFFF"
           ]
         },
         {
           "index": 21,
-          "address": "$C4EBA4",
+          "address": "$C4EBA2",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -6450,14 +6186,13 @@
             "$4045",
             "$017B",
             "$01F9",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 22,
-          "address": "$C4EBBC",
+          "address": "$C4EBBA",
+          "selector": "$FFFF",
           "descriptor": "$C22318",
           "coordinate_words_unsigned": [
             9216,
@@ -6474,14 +6209,13 @@
             "$4044",
             "$0396",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$3301"
+            "$0001"
           ]
         },
         {
           "index": 23,
-          "address": "$C4EBD4",
+          "address": "$C4EBD2",
+          "selector": "$3301",
           "descriptor": "$C22584",
           "coordinate_words_unsigned": [
             9216,
@@ -6498,14 +6232,13 @@
             "$4044",
             "$0000",
             "$01FA",
-            "$FFFF",
-            "$0000",
-            "$4801"
+            "$FFFF"
           ]
         },
         {
           "index": 24,
-          "address": "$C4EBEC",
+          "address": "$C4EBEA",
+          "selector": "$4801",
           "descriptor": "$C22728",
           "coordinate_words_unsigned": [
             9216,
@@ -6522,14 +6255,13 @@
             "$4044",
             "$033B",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$2201"
+            "$FFFF"
           ]
         },
         {
           "index": 25,
-          "address": "$C4EC04",
+          "address": "$C4EC02",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             9280,
@@ -6546,14 +6278,13 @@
             "$4044",
             "$031E",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$5202"
+            "$0001"
           ]
         },
         {
           "index": 26,
-          "address": "$C4EC1C",
+          "address": "$C4EC1A",
+          "selector": "$5202",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             7680,
@@ -6570,14 +6301,13 @@
             "$4044",
             "$0255",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$1902"
+            "$FFFF"
           ]
         },
         {
           "index": 27,
-          "address": "$C4EC34",
+          "address": "$C4EC32",
+          "selector": "$1902",
           "descriptor": "$C2237C",
           "coordinate_words_unsigned": [
             10240,
@@ -6594,14 +6324,13 @@
             "$4044",
             "$0289",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$1801"
+            "$0001"
           ]
         },
         {
           "index": 28,
-          "address": "$C4EC4C",
+          "address": "$C4EC4A",
+          "selector": "$1801",
           "descriptor": "$C22368",
           "coordinate_words_unsigned": [
             12288,
@@ -6618,14 +6347,13 @@
             "$4044",
             "$0329",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$7501"
+            "$0001"
           ]
         },
         {
           "index": 29,
-          "address": "$C4EC64",
+          "address": "$C4EC62",
+          "selector": "$7501",
           "descriptor": "$C22AAC",
           "coordinate_words_unsigned": [
             12032,
@@ -6642,14 +6370,13 @@
             "$4044",
             "$0346",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 30,
-          "address": "$C4EC7C",
+          "address": "$C4EC7A",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             11440,
@@ -6666,14 +6393,13 @@
             "$4044",
             "$0338",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 31,
-          "address": "$C4EC94",
+          "address": "$C4EC92",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10720,
@@ -6690,14 +6416,13 @@
             "$4044",
             "$032B",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$2201"
+            "$0001"
           ]
         },
         {
           "index": 32,
-          "address": "$C4ECAC",
+          "address": "$C4ECAA",
+          "selector": "$2201",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -6714,14 +6439,13 @@
             "$4044",
             "$0321",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$2401"
+            "$0001"
           ]
         },
         {
           "index": 33,
-          "address": "$C4ECC4",
+          "address": "$C4ECC2",
+          "selector": "$2401",
           "descriptor": "$C22458",
           "coordinate_words_unsigned": [
             6960,
@@ -6738,14 +6462,13 @@
             "$4044",
             "$0310",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$2501"
+            "$0001"
           ]
         },
         {
           "index": 34,
-          "address": "$C4ECDC",
+          "address": "$C4ECDA",
+          "selector": "$2501",
           "descriptor": "$C2246C",
           "coordinate_words_unsigned": [
             6144,
@@ -6762,14 +6485,13 @@
             "$4044",
             "$0304",
             "$02FA",
-            "$0001",
-            "$0000",
-            "$2601"
+            "$0001"
           ]
         },
         {
           "index": 35,
-          "address": "$C4ECF4",
+          "address": "$C4ECF2",
+          "selector": "$2601",
           "descriptor": "$C22480",
           "coordinate_words_unsigned": [
             6064,
@@ -6786,14 +6508,13 @@
             "$4044",
             "$0303",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$2301"
+            "$0001"
           ]
         },
         {
           "index": 36,
-          "address": "$C4ED0C",
+          "address": "$C4ED0A",
+          "selector": "$2301",
           "descriptor": "$C22444",
           "coordinate_words_unsigned": [
             7680,
@@ -6810,14 +6531,13 @@
             "$4044",
             "$031C",
             "$00FA",
-            "$0001",
-            "$0000",
-            "$1A01"
+            "$0001"
           ]
         },
         {
           "index": 37,
-          "address": "$C4ED24",
+          "address": "$C4ED22",
+          "selector": "$1A01",
           "descriptor": "$C22390",
           "coordinate_words_unsigned": [
             12288,
@@ -6834,14 +6554,13 @@
             "$4044",
             "$0321",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$FFFF"
+            "$0001"
           ]
         },
         {
           "index": 38,
-          "address": "$C4ED3C",
+          "address": "$C4ED3A",
+          "selector": "$FFFF",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             3584,
@@ -6858,14 +6577,13 @@
             "$3F44",
             "$018B",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$1501"
+            "$FFFF"
           ]
         },
         {
           "index": 39,
-          "address": "$C4ED54",
+          "address": "$C4ED52",
+          "selector": "$1501",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             2048,
@@ -6882,14 +6600,13 @@
             "$3F44",
             "$0250",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$5200"
+            "$FFFF"
           ]
         },
         {
           "index": 40,
-          "address": "$C4ED6C",
+          "address": "$C4ED6A",
+          "selector": "$5200",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             8192,
@@ -6906,14 +6623,13 @@
             "$3F44",
             "$0221",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$3901"
+            "$FFFF"
           ]
         },
         {
           "index": 41,
-          "address": "$C4ED84",
+          "address": "$C4ED82",
+          "selector": "$3901",
           "descriptor": "$C225FC",
           "coordinate_words_unsigned": [
             128,
@@ -6930,14 +6646,13 @@
             "$3F44",
             "$0213",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3801"
+            "$FFFF"
           ]
         },
         {
           "index": 42,
-          "address": "$C4ED9C",
+          "address": "$C4ED9A",
+          "selector": "$3801",
           "descriptor": "$C225E8",
           "coordinate_words_unsigned": [
             1440,
@@ -6954,14 +6669,13 @@
             "$3F44",
             "$01FC",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$3B01"
+            "$FFFF"
           ]
         },
         {
           "index": 43,
-          "address": "$C4EDB4",
+          "address": "$C4EDB2",
+          "selector": "$3B01",
           "descriptor": "$C22624",
           "coordinate_words_unsigned": [
             224,
@@ -6978,14 +6692,13 @@
             "$3F44",
             "$0202",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4301"
+            "$FFFF"
           ]
         },
         {
           "index": 44,
-          "address": "$C4EDCC",
+          "address": "$C4EDCA",
+          "selector": "$4301",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             1004,
@@ -7002,14 +6715,13 @@
             "$3F44",
             "$0200",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$4301"
+            "$FFFF"
           ]
         },
         {
           "index": 45,
-          "address": "$C4EDE4",
+          "address": "$C4EDE2",
+          "selector": "$4301",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             1756,
@@ -7026,14 +6738,13 @@
             "$3F44",
             "$01EC",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3A00"
+            "$FFFF"
           ]
         },
         {
           "index": 46,
-          "address": "$C4EDFC",
+          "address": "$C4EDFA",
+          "selector": "$3A00",
           "descriptor": "$C22610",
           "coordinate_words_unsigned": [
             5012,
@@ -7050,14 +6761,13 @@
             "$3F44",
             "$034D",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$4001"
+            "$FFFF"
           ]
         },
         {
           "index": 47,
-          "address": "$C4EE14",
+          "address": "$C4EE12",
+          "selector": "$4001",
           "descriptor": "$C22688",
           "coordinate_words_unsigned": [
             1020,
@@ -7074,14 +6784,13 @@
             "$3F44",
             "$01BA",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4501"
+            "$FFFF"
           ]
         },
         {
           "index": 48,
-          "address": "$C4EE2C",
+          "address": "$C4EE2A",
+          "selector": "$4501",
           "descriptor": "$C226EC",
           "coordinate_words_unsigned": [
             900,
@@ -7098,14 +6807,13 @@
             "$3F44",
             "$01CE",
             "$00F8",
-            "$FFFF",
-            "$0000",
-            "$4101"
+            "$FFFF"
           ]
         },
         {
           "index": 49,
-          "address": "$C4EE44",
+          "address": "$C4EE42",
+          "selector": "$4101",
           "descriptor": "$C2269C",
           "coordinate_words_unsigned": [
             792,
@@ -7122,14 +6830,13 @@
             "$3F44",
             "$01DA",
             "$03F8",
-            "$FFFF",
-            "$0000",
-            "$3D01"
+            "$FFFF"
           ]
         },
         {
           "index": 50,
-          "address": "$C4EE5C",
+          "address": "$C4EE5A",
+          "selector": "$3D01",
           "descriptor": "$C2264C",
           "coordinate_words_unsigned": [
             1014,
@@ -7146,14 +6853,13 @@
             "$3F44",
             "$01DC",
             "$02F8",
-            "$FFFF",
-            "$0000",
-            "$3C01"
+            "$FFFF"
           ]
         },
         {
           "index": 51,
-          "address": "$C4EE74",
+          "address": "$C4EE72",
+          "selector": "$3C01",
           "descriptor": "$C22638",
           "coordinate_words_unsigned": [
             442,
@@ -7170,14 +6876,13 @@
             "$3F44",
             "$01EF",
             "$01F8",
-            "$FFFF",
-            "$0000",
-            "$4401"
+            "$FFFF"
           ]
         },
         {
           "index": 52,
-          "address": "$C4EE8C",
+          "address": "$C4EE8A",
+          "selector": "$4401",
           "descriptor": "$C226D8",
           "coordinate_words_unsigned": [
             302,
@@ -7194,14 +6899,13 @@
             "$3F44",
             "$0201",
             "$00F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 53,
-          "address": "$C4EEA4",
+          "address": "$C4EEA2",
+          "selector": "$FFFF",
           "descriptor": "$C22674",
           "coordinate_words_unsigned": [
             65527,
@@ -7218,14 +6922,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$1507"
+            "$0000"
           ]
         },
         {
           "index": 54,
-          "address": "$C4EEBC",
+          "address": "$C4EEBA",
+          "selector": "$1507",
           "descriptor": "$C2232C",
           "coordinate_words_unsigned": [
             32,
@@ -7242,14 +6945,13 @@
             "$3F44",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$5207"
+            "$FFFF"
           ]
         },
         {
           "index": 55,
-          "address": "$C4EED4",
+          "address": "$C4EED2",
+          "selector": "$5207",
           "descriptor": "$C227F0",
           "coordinate_words_unsigned": [
             64,
@@ -7266,14 +6968,13 @@
             "$3F44",
             "$0060",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$3907"
+            "$FFFF"
           ]
         },
         {
           "index": 56,
-          "address": "$C4EEEC",
+          "address": "$C4EEEA",
+          "selector": "$3907",
           "descriptor": "$C225FC",
           "coordinate_words_unsigned": [
             2,
@@ -7290,14 +6991,13 @@
             "$3F44",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$3807"
+            "$FFFF"
           ]
         },
         {
           "index": 57,
-          "address": "$C4EF04",
+          "address": "$C4EF02",
+          "selector": "$3807",
           "descriptor": "$C225E8",
           "coordinate_words_unsigned": [
             22,
@@ -7314,14 +7014,13 @@
             "$3F44",
             "$0060",
             "$02FE",
-            "$FFFF",
-            "$0000",
-            "$3B07"
+            "$FFFF"
           ]
         },
         {
           "index": 58,
-          "address": "$C4EF1C",
+          "address": "$C4EF1A",
+          "selector": "$3B07",
           "descriptor": "$C22624",
           "coordinate_words_unsigned": [
             3,
@@ -7338,14 +7037,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4307"
+            "$0000"
           ]
         },
         {
           "index": 59,
-          "address": "$C4EF34",
+          "address": "$C4EF32",
+          "selector": "$4307",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             15,
@@ -7362,14 +7060,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$4307"
+            "$0000"
           ]
         },
         {
           "index": 60,
-          "address": "$C4EF4C",
+          "address": "$C4EF4A",
+          "selector": "$4307",
           "descriptor": "$C226C4",
           "coordinate_words_unsigned": [
             27,
@@ -7386,14 +7083,13 @@
             "$3F44",
             "$0000",
             "$0000",
-            "$0000",
-            "$0000",
-            "$3A07"
+            "$0000"
           ]
         },
         {
           "index": 61,
-          "address": "$C4EF64",
+          "address": "$C4EF62",
+          "selector": "$3A07",
           "descriptor": "$C22610",
           "coordinate_words_unsigned": [
             39,
@@ -7410,14 +7106,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$4007"
+            "$0000"
           ]
         },
         {
           "index": 62,
-          "address": "$C4EF7C",
+          "address": "$C4EF7A",
+          "selector": "$4007",
           "descriptor": "$C22688",
           "coordinate_words_unsigned": [
             15,
@@ -7434,14 +7129,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4507"
+            "$0000"
           ]
         },
         {
           "index": 63,
-          "address": "$C4EF94",
+          "address": "$C4EF92",
+          "selector": "$4507",
           "descriptor": "$C226EC",
           "coordinate_words_unsigned": [
             14,
@@ -7458,14 +7152,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$4107"
+            "$0000"
           ]
         },
         {
           "index": 64,
-          "address": "$C4EFAC",
+          "address": "$C4EFAA",
+          "selector": "$4107",
           "descriptor": "$C2269C",
           "coordinate_words_unsigned": [
             12,
@@ -7482,14 +7175,13 @@
             "$3F44",
             "$0000",
             "$0000",
-            "$0000",
-            "$0000",
-            "$3D07"
+            "$0000"
           ]
         },
         {
           "index": 65,
-          "address": "$C4EFC4",
+          "address": "$C4EFC2",
+          "selector": "$3D07",
           "descriptor": "$C2264C",
           "coordinate_words_unsigned": [
             15,
@@ -7506,14 +7198,13 @@
             "$3F44",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$3C07"
+            "$0000"
           ]
         },
         {
           "index": 66,
-          "address": "$C4EFDC",
+          "address": "$C4EFDA",
+          "selector": "$3C07",
           "descriptor": "$C22638",
           "coordinate_words_unsigned": [
             6,
@@ -7530,14 +7221,13 @@
             "$3F44",
             "$0000",
             "$0200",
-            "$0000",
-            "$0000",
-            "$4407"
+            "$0000"
           ]
         },
         {
           "index": 67,
-          "address": "$C4EFF4",
+          "address": "$C4EFF2",
+          "selector": "$4407",
           "descriptor": "$C226D8",
           "coordinate_words_unsigned": [
             4,
@@ -7554,14 +7244,13 @@
             "$3F44",
             "$0000",
             "$0100",
-            "$0000",
-            "$0000",
-            "$FFFF"
+            "$0000"
           ]
         },
         {
           "index": 68,
-          "address": "$C4F00C",
+          "address": "$C4F00A",
+          "selector": "$FFFF",
           "descriptor": "$C22494",
           "coordinate_words_unsigned": [
             2224,
@@ -7578,14 +7267,13 @@
             "$3F43",
             "$01FF",
             "$00FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 70,
-          "address": "$C4F03C",
+          "address": "$C4F03A",
+          "selector": "$4601",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             13824,
@@ -7602,14 +7290,13 @@
             "$4145",
             "$02D9",
             "$00F6",
-            "$0001",
-            "$0000",
-            "$4600"
+            "$0001"
           ]
         },
         {
           "index": 71,
-          "address": "$C4F054",
+          "address": "$C4F052",
+          "selector": "$4600",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             1344,
@@ -7626,14 +7313,13 @@
             "$4145",
             "$0262",
             "$03F6",
-            "$0001",
-            "$0000",
-            "$4B00"
+            "$0001"
           ]
         },
         {
           "index": 72,
-          "address": "$C4F06C",
+          "address": "$C4F06A",
+          "selector": "$4B00",
           "descriptor": "$C22764",
           "coordinate_words_unsigned": [
             9856,
@@ -7650,14 +7336,13 @@
             "$4145",
             "$00CA",
             "$02F6",
-            "$FFFF",
-            "$0000",
-            "$7401"
+            "$FFFF"
           ]
         },
         {
           "index": 73,
-          "address": "$C4F084",
+          "address": "$C4F082",
+          "selector": "$7401",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             4096,
@@ -7674,14 +7359,13 @@
             "$4145",
             "$0285",
             "$00FD",
-            "$FFFF",
-            "$0000",
-            "$4C00"
+            "$FFFF"
           ]
         },
         {
           "index": 74,
-          "address": "$C4F09C",
+          "address": "$C4F09A",
+          "selector": "$4C00",
           "descriptor": "$C22778",
           "coordinate_words_unsigned": [
             5664,
@@ -7698,14 +7382,13 @@
             "$4145",
             "$011B",
             "$03FC",
-            "$FFFF",
-            "$0000",
-            "$7301"
+            "$FFFF"
           ]
         },
         {
           "index": 75,
-          "address": "$C4F0B4",
+          "address": "$C4F0B2",
+          "selector": "$7301",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             4096,
@@ -7722,14 +7405,13 @@
             "$4145",
             "$0116",
             "$02FD",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 76,
-          "address": "$C4F0CC",
+          "address": "$C4F0CA",
+          "selector": "$FFFF",
           "descriptor": "$C22778",
           "coordinate_words_unsigned": [
             11024,
@@ -7746,14 +7428,13 @@
             "$4045",
             "$00CA",
             "$02E5",
-            "$0001",
-            "$0000",
-            "$7301"
+            "$0001"
           ]
         },
         {
           "index": 77,
-          "address": "$C4F0E4",
+          "address": "$C4F0E2",
+          "selector": "$7301",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             12288,
@@ -7770,14 +7451,13 @@
             "$4045",
             "$0127",
             "$01E5",
-            "$0001",
-            "$0000",
-            "$6F01"
+            "$0001"
           ]
         },
         {
           "index": 78,
-          "address": "$C4F0FC",
+          "address": "$C4F0FA",
+          "selector": "$6F01",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             2048,
@@ -7794,14 +7474,13 @@
             "$4045",
             "$0208",
             "$02F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 79,
-          "address": "$C4F114",
+          "address": "$C4F112",
+          "selector": "$FFFF",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             12288,
@@ -7818,14 +7497,13 @@
             "$4044",
             "$0308",
             "$03FA",
-            "$0001",
-            "$0000",
-            "$6F01"
+            "$0001"
           ]
         },
         {
           "index": 80,
-          "address": "$C4F12C",
+          "address": "$C4F12A",
+          "selector": "$6F01",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             2048,
@@ -7842,14 +7520,13 @@
             "$4044",
             "$029A",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$7401"
+            "$FFFF"
           ]
         },
         {
           "index": 81,
-          "address": "$C4F144",
+          "address": "$C4F142",
+          "selector": "$7401",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             12288,
@@ -7866,14 +7543,13 @@
             "$4044",
             "$0321",
             "$01FA",
-            "$0001",
-            "$0000",
-            "$FFFF"
+            "$0001"
           ]
         },
         {
           "index": 82,
-          "address": "$C4F15C",
+          "address": "$C4F15A",
+          "selector": "$FFFF",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             10240,
@@ -7890,14 +7566,13 @@
             "$4044",
             "$01C6",
             "$00E3",
-            "$0001",
-            "$0000",
-            "$6C01"
+            "$0001"
           ]
         },
         {
           "index": 83,
-          "address": "$C4F174",
+          "address": "$C4F172",
+          "selector": "$6C01",
           "descriptor": "$C229F8",
           "coordinate_words_unsigned": [
             4096,
@@ -7914,14 +7589,13 @@
             "$3F44",
             "$0172",
             "$03F8",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 84,
-          "address": "$C4F18C",
+          "address": "$C4F18A",
+          "selector": "$FFFF",
           "descriptor": "$C22958",
           "coordinate_words_unsigned": [
             65376,
@@ -7938,14 +7612,13 @@
             "$3F43",
             "$0062",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6507"
+            "$FFFF"
           ]
         },
         {
           "index": 85,
-          "address": "$C4F1A4",
+          "address": "$C4F1A2",
+          "selector": "$6507",
           "descriptor": "$C2296C",
           "coordinate_words_unsigned": [
             65280,
@@ -7962,14 +7635,13 @@
             "$3F43",
             "$0063",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$6607"
+            "$FFFF"
           ]
         },
         {
           "index": 86,
-          "address": "$C4F1BC",
+          "address": "$C4F1BA",
+          "selector": "$6607",
           "descriptor": "$C22980",
           "coordinate_words_unsigned": [
             65248,
@@ -7986,14 +7658,13 @@
             "$3F43",
             "$0064",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$6107"
+            "$FFFF"
           ]
         },
         {
           "index": 87,
-          "address": "$C4F1D4",
+          "address": "$C4F1D2",
+          "selector": "$6107",
           "descriptor": "$C2291C",
           "coordinate_words_unsigned": [
             65344,
@@ -8010,14 +7681,13 @@
             "$3F43",
             "$0061",
             "$02FE",
-            "$FFFF",
-            "$0000",
-            "$6207"
+            "$FFFF"
           ]
         },
         {
           "index": 88,
-          "address": "$C4F1EC",
+          "address": "$C4F1EA",
+          "selector": "$6207",
           "descriptor": "$C22930",
           "coordinate_words_unsigned": [
             65312,
@@ -8034,14 +7704,13 @@
             "$3F43",
             "$0061",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6907"
+            "$FFFF"
           ]
         },
         {
           "index": 89,
-          "address": "$C4F204",
+          "address": "$C4F202",
+          "selector": "$6907",
           "descriptor": "$C229BC",
           "coordinate_words_unsigned": [
             65088,
@@ -8058,14 +7727,13 @@
             "$3E43",
             "$006A",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$7407"
+            "$FFFF"
           ]
         },
         {
           "index": 90,
-          "address": "$C4F21C",
+          "address": "$C4F21A",
+          "selector": "$7407",
           "descriptor": "$C22A98",
           "coordinate_words_unsigned": [
             320,
@@ -8082,14 +7750,13 @@
             "$4044",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$4C07"
+            "$FFFF"
           ]
         },
         {
           "index": 91,
-          "address": "$C4F234",
+          "address": "$C4F232",
+          "selector": "$4C07",
           "descriptor": "$C22778",
           "coordinate_words_unsigned": [
             300,
@@ -8106,14 +7773,13 @@
             "$4044",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$7307"
+            "$0000"
           ]
         },
         {
           "index": 92,
-          "address": "$C4F24C",
+          "address": "$C4F24A",
+          "selector": "$7307",
           "descriptor": "$C22A84",
           "coordinate_words_unsigned": [
             320,
@@ -8130,14 +7796,13 @@
             "$4044",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$4607"
+            "$FFFF"
           ]
         },
         {
           "index": 93,
-          "address": "$C4F264",
+          "address": "$C4F262",
+          "selector": "$4607",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             472,
@@ -8154,14 +7819,13 @@
             "$4044",
             "$0062",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$4607"
+            "$FFFF"
           ]
         },
         {
           "index": 94,
-          "address": "$C4F27C",
+          "address": "$C4F27A",
+          "selector": "$4607",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             266,
@@ -8178,14 +7842,13 @@
             "$4044",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$4B07"
+            "$FFFF"
           ]
         },
         {
           "index": 95,
-          "address": "$C4F294",
+          "address": "$C4F292",
+          "selector": "$4B07",
           "descriptor": "$C22764",
           "coordinate_words_unsigned": [
             333,
@@ -8202,14 +7865,13 @@
             "$4044",
             "$0000",
             "$0300",
-            "$0000",
-            "$0000",
-            "$6F07"
+            "$0000"
           ]
         },
         {
           "index": 96,
-          "address": "$C4F2AC",
+          "address": "$C4F2AA",
+          "selector": "$6F07",
           "descriptor": "$C22A34",
           "coordinate_words_unsigned": [
             160,
@@ -8226,14 +7888,13 @@
             "$4044",
             "$0060",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$6D07"
+            "$FFFF"
           ]
         },
         {
           "index": 97,
-          "address": "$C4F2C4",
+          "address": "$C4F2C2",
+          "selector": "$6D07",
           "descriptor": "$C22A0C",
           "coordinate_words_unsigned": [
             65504,
@@ -8250,14 +7911,13 @@
             "$3F44",
             "$0060",
             "$00FE",
-            "$FFFF",
-            "$0000",
-            "$6E07"
+            "$FFFF"
           ]
         },
         {
           "index": 98,
-          "address": "$C4F2DC",
+          "address": "$C4F2DA",
+          "selector": "$6E07",
           "descriptor": "$C22A20",
           "coordinate_words_unsigned": [
             65472,
@@ -8274,14 +7934,13 @@
             "$3F44",
             "$0060",
             "$03FD",
-            "$FFFF",
-            "$0000",
-            "$6C07"
+            "$FFFF"
           ]
         },
         {
           "index": 99,
-          "address": "$C4F2F4",
+          "address": "$C4F2F2",
+          "selector": "$6C07",
           "descriptor": "$C229F8",
           "coordinate_words_unsigned": [
             64,
@@ -8298,14 +7957,13 @@
             "$3F44",
             "$0060",
             "$02FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 100,
-          "address": "$C4F30C",
+          "address": "$C4F30A",
+          "selector": "$FFFF",
           "descriptor": "$C22944",
           "coordinate_words_unsigned": [
             61440,
@@ -8322,14 +7980,13 @@
             "$3F43",
             "$01B5",
             "$01FE",
-            "$FFFF",
-            "$0000",
-            "$5902"
+            "$FFFF"
           ]
         },
         {
           "index": 101,
-          "address": "$C4F324",
+          "address": "$C4F322",
+          "selector": "$5902",
           "descriptor": "$C2287C",
           "coordinate_words_unsigned": [
             3072,
@@ -8346,14 +8003,13 @@
             "$3F43",
             "$0288",
             "$00FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 102,
-          "address": "$C4F33C",
+          "address": "$C4F33A",
+          "selector": "$FFFF",
           "descriptor": "$C22944",
           "coordinate_words_unsigned": [
             0,
@@ -8370,14 +8026,13 @@
             "$3E43",
             "$01DF",
             "$00FF",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 140,
-          "address": "$C4F6CC",
+          "address": "$C4F6CA",
+          "selector": "$4601",
           "descriptor": "$C22700",
           "coordinate_words_unsigned": [
             13824,
@@ -8394,14 +8049,13 @@
             "$4246",
             "$02D9",
             "$00F6",
-            "$0001",
-            "$0000",
-            "$2001"
+            "$0001"
           ]
         },
         {
           "index": 141,
-          "address": "$C4F6E4",
+          "address": "$C4F6E2",
+          "selector": "$2001",
           "descriptor": "$C22408",
           "coordinate_words_unsigned": [
             13056,
@@ -8418,14 +8072,13 @@
             "$4246",
             "$0275",
             "$03F6",
-            "$0001",
-            "$0000",
-            "$2101"
+            "$0001"
           ]
         },
         {
           "index": 142,
-          "address": "$C4F6FC",
+          "address": "$C4F6FA",
+          "selector": "$2101",
           "descriptor": "$C2241C",
           "coordinate_words_unsigned": [
             13056,
@@ -8442,14 +8095,13 @@
             "$4246",
             "$024D",
             "$02F6",
-            "$0001",
-            "$0000",
-            "$3101"
+            "$0001"
           ]
         },
         {
           "index": 143,
-          "address": "$C4F714",
+          "address": "$C4F712",
+          "selector": "$3101",
           "descriptor": "$C2255C",
           "coordinate_words_unsigned": [
             11264,
@@ -8466,14 +8118,13 @@
             "$4245",
             "$020A",
             "$00FD",
-            "$FFFF",
-            "$0000",
-            "$3001"
+            "$FFFF"
           ]
         },
         {
           "index": 144,
-          "address": "$C4F72C",
+          "address": "$C4F72A",
+          "selector": "$3001",
           "descriptor": "$C22548",
           "coordinate_words_unsigned": [
             7360,
@@ -8490,14 +8141,13 @@
             "$4146",
             "$015A",
             "$00F6",
-            "$0001",
-            "$0000",
-            "$4A01"
+            "$0001"
           ]
         },
         {
           "index": 145,
-          "address": "$C4F744",
+          "address": "$C4F742",
+          "selector": "$4A01",
           "descriptor": "$C22750",
           "coordinate_words_unsigned": [
             7104,
@@ -8514,14 +8164,13 @@
             "$4146",
             "$0146",
             "$02F6",
-            "$0001",
-            "$0000",
-            "$3001"
+            "$0001"
           ]
         },
         {
           "index": 146,
-          "address": "$C4F75C",
+          "address": "$C4F75A",
+          "selector": "$3001",
           "descriptor": "$C22548",
           "coordinate_words_unsigned": [
             6848,
@@ -8538,14 +8187,13 @@
             "$4146",
             "$0134",
             "$02F7",
-            "$FFFF",
-            "$0000",
-            "$3000"
+            "$FFFF"
           ]
         },
         {
           "index": 147,
-          "address": "$C4F774",
+          "address": "$C4F772",
+          "selector": "$3000",
           "descriptor": "$C22548",
           "coordinate_words_unsigned": [
             11776,
@@ -8562,14 +8210,13 @@
             "$4146",
             "$0114",
             "$01F6",
-            "$0001",
-            "$0000",
-            "$2D00"
+            "$0001"
           ]
         },
         {
           "index": 148,
-          "address": "$C4F78C",
+          "address": "$C4F78A",
+          "selector": "$2D00",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             15360,
@@ -8586,14 +8233,13 @@
             "$4145",
             "$01A3",
             "$03FC",
-            "$FFFF",
-            "$0000",
-            "$2D00"
+            "$FFFF"
           ]
         },
         {
           "index": 149,
-          "address": "$C4F7A4",
+          "address": "$C4F7A2",
+          "selector": "$2D00",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             12800,
@@ -8610,14 +8256,13 @@
             "$4145",
             "$00E6",
             "$02FD",
-            "$FFFF",
-            "$0000",
-            "$2D00"
+            "$FFFF"
           ]
         },
         {
           "index": 150,
-          "address": "$C4F7BC",
+          "address": "$C4F7BA",
+          "selector": "$2D00",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             12800,
@@ -8634,14 +8279,13 @@
             "$4145",
             "$00CB",
             "$02F6",
-            "$FFFF",
-            "$0000",
-            "$2D00"
+            "$FFFF"
           ]
         },
         {
           "index": 151,
-          "address": "$C4F7D4",
+          "address": "$C4F7D2",
+          "selector": "$2D00",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             12352,
@@ -8658,14 +8302,13 @@
             "$4145",
             "$00AA",
             "$01F6",
-            "$0001",
-            "$0000",
-            "$2D00"
+            "$0001"
           ]
         },
         {
           "index": 152,
-          "address": "$C4F7EC",
+          "address": "$C4F7EA",
+          "selector": "$2D00",
           "descriptor": "$C2250C",
           "coordinate_words_unsigned": [
             8448,
@@ -8682,14 +8325,13 @@
             "$4145",
             "$0071",
             "$01FD",
-            "$FFFF",
-            "$0000",
-            "$2E00"
+            "$FFFF"
           ]
         },
         {
           "index": 153,
-          "address": "$C4F804",
+          "address": "$C4F802",
+          "selector": "$2E00",
           "descriptor": "$C22520",
           "coordinate_words_unsigned": [
             10240,
@@ -8706,14 +8348,13 @@
             "$4145",
             "$0056",
             "$00F6",
-            "$0001",
-            "$0000",
-            "$2F00"
+            "$0001"
           ]
         },
         {
           "index": 154,
-          "address": "$C4F81C",
+          "address": "$C4F81A",
+          "selector": "$2F00",
           "descriptor": "$C22534",
           "coordinate_words_unsigned": [
             10752,
@@ -8730,14 +8371,13 @@
             "$4145",
             "$004B",
             "$03F6",
-            "$0001",
-            "$0000",
-            "$0010"
+            "$0001"
           ]
         },
         {
           "index": 155,
-          "address": "$C4F834",
+          "address": "$C4F832",
+          "selector": "$0010",
           "descriptor": "$C22188",
           "coordinate_words_unsigned": [
             8192,
@@ -8754,14 +8394,13 @@
             "$0000",
             "$0001",
             "$01F6",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 156,
-          "address": "$C4F84C",
+          "address": "$C4F84A",
+          "selector": "$FFFF",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             5056,
@@ -8778,14 +8417,13 @@
             "$4145",
             "$00E9",
             "$02FF",
-            "$FFFF",
-            "$0000",
-            "$2200"
+            "$FFFF"
           ]
         },
         {
           "index": 157,
-          "address": "$C4F864",
+          "address": "$C4F862",
+          "selector": "$2200",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             6496,
@@ -8802,14 +8440,13 @@
             "$4145",
             "$0072",
             "$03FE",
-            "$FFFF",
-            "$0000",
-            "$0010"
+            "$FFFF"
           ]
         },
         {
           "index": 158,
-          "address": "$C4F87C",
+          "address": "$C4F87A",
+          "selector": "$0010",
           "descriptor": "$C22188",
           "coordinate_words_unsigned": [
             4096,
@@ -8826,14 +8463,13 @@
             "$0000",
             "$0001",
             "$02FE",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         },
         {
           "index": 159,
-          "address": "$C4F894",
+          "address": "$C4F892",
+          "selector": "$FFFF",
           "descriptor": "$C22430",
           "coordinate_words_unsigned": [
             10000,
@@ -8850,14 +8486,13 @@
             "$4145",
             "$0111",
             "$01E5",
-            "$0001",
-            "$0000",
-            "$0010"
+            "$0001"
           ]
         },
         {
           "index": 160,
-          "address": "$C4F8AC",
+          "address": "$C4F8AA",
+          "selector": "$0010",
           "descriptor": "$C22188",
           "coordinate_words_unsigned": [
             12288,
@@ -8874,8 +8509,6 @@
             "$0000",
             "$0001",
             "$00E5",
-            "$FFFF",
-            "$0000",
             "$FFFF"
           ]
         }
@@ -8884,22 +8517,22 @@
         {
           "first_index": 0,
           "last_index": 68,
-          "start": "$C4E9AC",
-          "end": "$C4F023",
+          "start": "$C4E9AA",
+          "end": "$C4F021",
           "records": 69
         },
         {
           "first_index": 70,
           "last_index": 102,
-          "start": "$C4F03C",
-          "end": "$C4F353",
+          "start": "$C4F03A",
+          "end": "$C4F351",
           "records": 33
         },
         {
           "first_index": 140,
           "last_index": 160,
-          "start": "$C4F6CC",
-          "end": "$C4F8C3",
+          "start": "$C4F6CA",
+          "end": "$C4F8C1",
           "records": 21
         }
       ],
