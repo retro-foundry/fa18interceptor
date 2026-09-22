@@ -155,6 +155,11 @@ state and the bin-16 control state. See the
 [group-bin-14 inventory](static_template_selector_groups_origin_group_0e.md)
 and [group-bin-14 copy inventory](workspace_template_copies_origin_group_0e.md).
 
+Group bin 15 reaches 15 streams, 108 copies, and 75 later builder reads,
+immediately below the bin-16 control's 16-stream window. This resolves the
+sampled local transition through bins 14, 15, and 16 without assigning those
+bins an absolute map coordinate meaning.
+
 Row bin 12 (`$C45C3E=$0C000000`) returns normally after 38,056 stepped
 instructions and selects 8 streams, 18 copies, and 14 later builder reads.
 Together with bins 0, 8, and 16, this is a local stepped expansion

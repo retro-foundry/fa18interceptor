@@ -188,6 +188,33 @@
       ]
     },
     {
+      "probe": "group_0f",
+      "origin_bins": "(16,15)",
+      "perturbation": "second component 15",
+      "selector_calls": 41,
+      "selected_streams": 15,
+      "distinct_group_records": 10,
+      "static_copies": 108,
+      "later_builder_reads": 75,
+      "streams": [
+        "$C42646",
+        "$C42706",
+        "$C4272E",
+        "$C4274A",
+        "$C42788",
+        "$C427B4",
+        "$C427C8",
+        "$C42950",
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42ADA",
+        "$C42B5C",
+        "$C42B66",
+        "$C42BD4"
+      ]
+    },
+    {
       "probe": "row_08",
       "origin_bins": "(8,16)",
       "perturbation": "first component 8",
