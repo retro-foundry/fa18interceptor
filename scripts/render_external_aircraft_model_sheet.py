@@ -36,7 +36,10 @@ def main() -> None:
     parser.add_argument("--isometric", action="store_true",
                         help="append an isometric projection using the same observed polygon vertices")
     args = parser.parse_args()
-    inputs = args.input or [DEFAULT_INPUT]
+    # A line-only sheet must not silently acquire the historical aircraft
+    # default polygons.  Retain that default only for the legacy no-argument
+    # invocation.
+    inputs = args.input if args.input is not None else ([] if args.line_input else [DEFAULT_INPUT])
     inputs = [path.resolve() for path in inputs]
     args.output = args.output.resolve()
     contexts = args.context or ["$C34A9A"]

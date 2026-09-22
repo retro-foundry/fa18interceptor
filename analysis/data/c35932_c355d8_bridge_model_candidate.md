@@ -34,3 +34,19 @@ Regenerate the sheet with:
 ```powershell
 python scripts/render_external_aircraft_model_sheet.py --input build/run031_frame12000_golden_gate_polygon_submissions_48f/polygon_submissions.json --context '$C355D8' --fit --title 'Golden Gate bridge-model candidate: $C35932 -> $C355D8' --output analysis/plots/golden_gate_c35932_c355d8_model_sheet.png
 ```
+
+## Run033 red-distance line family
+
+The sealed run033 frame-5,250 checkpoint is the user-identified red Golden
+Gate view.  Its 128-frame `$C212B0` capture contains twelve `$C3559A` and
+twelve `$C355D2` line-list submissions: 24 renderer-observed line segments
+in total.  No `$C355xx` polygon preparation is present in the same capture;
+the co-visible polygons are the separately classified `$C3B6B0` terrain and
+`$C3B504` shared-pyramid families.  This establishes that the distant red
+bridge presentation is primarily this `$C355xx` **line** family, without
+merging the terrain components into the bridge.
+
+[The line-only orthographic sheet](../plots/run033_frame05250_golden_gate_line_family_sheet.png)
+contains no default polygon overlay or inferred connectivity.  Its repeated
+parallel X-Z strokes and narrow Y-Z tower/span profile are renderer-observed
+view-dependent coordinates, not a static-coordinate export.
