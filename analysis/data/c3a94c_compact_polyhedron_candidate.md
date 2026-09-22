@@ -42,3 +42,10 @@ writer: across eight sampled invocations it enters with `A5=$C3B9D6` (then two
 with `$C3B9D0`), never `$C3A94C`, and its bounded follow-on trace reaches
 `$C1F6F8` with `A1=$C3515A`, `A3=$C483A8`, and the C3B9 controller context.
 Shared workspace position alone is therefore not source provenance.
+
+An exact CPU write watch on `$C483A8` is an observed miss for 64 ordinary
+frames from the sealed frame-12600 external checkpoint. The compact controller
+can therefore reuse a pre-existing workspace record during that interval; its
+first writer predates the checkpoint or belongs to an unobserved initialization
+route. The next capture must begin before scene/entity initialization, not
+inside this already-populated renderer loop.
