@@ -78,6 +78,9 @@ Across the three bounded inventories, the
 [segment-68 trace-coverage report](../data/m_map_segment68_trace_coverage.md)
 records 23 distinct packet headers, 27 selected streams, and 384 unique
 coordinate pairs (24.68% of the segment's bytes as exact pair payload).
+The immutable packet payload is explicitly
+[two-dimensional](../data/m_map_packet_source_dimensionality.md); its third
+renderer workspace component is computed, not read as source elevation.
 The depth-metric producer is byte-exact in
 [`prepare_map_depth_detail_metric.asm`](../../source_amiga/observed/prepare_map_depth_detail_metric.asm).
 For the four headers observed on both routes, the
