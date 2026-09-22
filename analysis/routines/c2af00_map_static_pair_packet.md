@@ -55,12 +55,23 @@ directly ties the route to the renderer's threshold metric and mode state;
 it is strong evidence for map display/detail scaling or transition behavior,
 but still not a flight-world-distance measurement.
 
+The metric is no longer opaque: `$C2AAD2` loads the current projection-depth
+longword at `$C45A78`, negates it, and `$C2AB0C` stores the result (or its
+optional scale-normalized form) at `-$28(A6)`.  `$C2AD00` then applies its
+`$400`/`$C80` detail bands to that exact field.  The alternate-stream choice
+is therefore **projection-depth driven**.  This establishes a depth LOD-style
+mechanism for map packet geometry; it does not by itself establish that the
+depth is physical flight-world distance rather than the M-map renderer's own
+camera/scale depth.
+
 The exact route, header, and consumed-pair evidence is retained in the
 [run035 appearance inventory](../data/run035_m_map_polygon_static_packets.md)
 and [run035 stable inventory](../data/run035_m_map_stable_polygon_static_packets.md).
 The live selector samples are in the
 [appearance state](../data/run035_m_map_appearance_packet_runtime_state.md)
 and [stable state](../data/run035_m_map_stable_packet_runtime_state.md).
+The depth-metric producer is byte-exact in
+[`prepare_map_depth_detail_metric.asm`](../../source_amiga/observed/prepare_map_depth_detail_metric.asm).
 For the four headers observed on both routes, the
 [inline/alternate comparison](../data/run003_run035_map_packet_variant_comparison.md)
 shows distinct source ranges and reduced first-batch pair counts for three
