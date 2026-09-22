@@ -1,0 +1,244 @@
+{
+  "scope": "exact-colour pixels within a supplied outside-world viewport",
+  "source": "build\\run035_viewport_scan",
+  "colour_rgb": [
+    136,
+    0,
+    0
+  ],
+  "viewport": {
+    "left": 40,
+    "top": 18,
+    "right_exclusive": 680,
+    "bottom_exclusive": 160
+  },
+  "frames": [
+    {
+      "frame": 1250,
+      "pixels": 0
+    },
+    {
+      "frame": 1500,
+      "pixels": 0
+    },
+    {
+      "frame": 1750,
+      "pixels": 0
+    },
+    {
+      "frame": 2000,
+      "pixels": 0
+    },
+    {
+      "frame": 2250,
+      "pixels": 0
+    },
+    {
+      "frame": 2500,
+      "pixels": 0
+    },
+    {
+      "frame": 2750,
+      "pixels": 0
+    },
+    {
+      "frame": 3000,
+      "pixels": 0
+    },
+    {
+      "frame": 3250,
+      "pixels": 0
+    },
+    {
+      "frame": 3500,
+      "pixels": 0
+    },
+    {
+      "frame": 3750,
+      "pixels": 0
+    },
+    {
+      "frame": 4000,
+      "pixels": 0
+    },
+    {
+      "frame": 4250,
+      "pixels": 54,
+      "bounds": {
+        "left": 316,
+        "top": 127,
+        "right": 369,
+        "bottom": 127
+      }
+    },
+    {
+      "frame": 4500,
+      "pixels": 60,
+      "bounds": {
+        "left": 312,
+        "top": 116,
+        "right": 371,
+        "bottom": 116
+      }
+    },
+    {
+      "frame": 4750,
+      "pixels": 54,
+      "bounds": {
+        "left": 308,
+        "top": 107,
+        "right": 371,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 5000,
+      "pixels": 58,
+      "bounds": {
+        "left": 304,
+        "top": 107,
+        "right": 371,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 5250,
+      "pixels": 64,
+      "bounds": {
+        "left": 300,
+        "top": 107,
+        "right": 373,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 5500,
+      "pixels": 68,
+      "bounds": {
+        "left": 296,
+        "top": 107,
+        "right": 373,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 5750,
+      "pixels": 72,
+      "bounds": {
+        "left": 292,
+        "top": 107,
+        "right": 373,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 6000,
+      "pixels": 74,
+      "bounds": {
+        "left": 300,
+        "top": 106,
+        "right": 375,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 6250,
+      "pixels": 84,
+      "bounds": {
+        "left": 292,
+        "top": 106,
+        "right": 375,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 6500,
+      "pixels": 98,
+      "bounds": {
+        "left": 268,
+        "top": 106,
+        "right": 365,
+        "bottom": 108
+      }
+    },
+    {
+      "frame": 6750,
+      "pixels": 90,
+      "bounds": {
+        "left": 288,
+        "top": 106,
+        "right": 377,
+        "bottom": 107
+      }
+    },
+    {
+      "frame": 7000,
+      "pixels": 180,
+      "bounds": {
+        "left": 256,
+        "top": 104,
+        "right": 379,
+        "bottom": 108
+      }
+    },
+    {
+      "frame": 7250,
+      "pixels": 268,
+      "bounds": {
+        "left": 234,
+        "top": 103,
+        "right": 383,
+        "bottom": 108
+      }
+    },
+    {
+      "frame": 7500,
+      "pixels": 424,
+      "bounds": {
+        "left": 188,
+        "top": 101,
+        "right": 389,
+        "bottom": 109
+      }
+    },
+    {
+      "frame": 7750,
+      "pixels": 672,
+      "bounds": {
+        "left": 86,
+        "top": 99,
+        "right": 431,
+        "bottom": 112
+      }
+    },
+    {
+      "frame": 8000,
+      "pixels": 1160,
+      "bounds": {
+        "left": 40,
+        "top": 102,
+        "right": 469,
+        "bottom": 125
+      }
+    },
+    {
+      "frame": 8250,
+      "pixels": 2730,
+      "bounds": {
+        "left": 40,
+        "top": 113,
+        "right": 583,
+        "bottom": 151
+      }
+    },
+    {
+      "frame": 8500,
+      "pixels": 0
+    },
+    {
+      "frame": 8750,
+      "pixels": 0
+    }
+  ],
+  "qualification": "A colour landmark bounds a visual interval; it does not assign pixels to a renderer face or source model."
+}

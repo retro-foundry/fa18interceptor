@@ -162,6 +162,9 @@ Filled faces are captured at `$C2FF48` and, where needed, before orientation
 or clip rejection at `$C2005C`/`$C2469E`; line segments are captured at
 `$C212B0`. Coordinates are mutable renderer workspaces, so every sheet states
 its scenario and only connects vertices within an observed renderer record.
+The [run035 Golden Gate viewport interval](analysis/data/run035_golden_gate_red_viewport_interval.md)
+is an explicitly cockpit-free raster landmark for future face-to-pixel
+correlation; it is not yet a terrain-model or LOD identification.
 
 ## Controls recorded as documentation
 

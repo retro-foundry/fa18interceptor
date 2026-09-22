@@ -83,7 +83,11 @@ See the measured face/input overlap and its limits in the
 The sealed user-supplied Golden Gate approach `run035` adds two later
 checkpoints for batch member `$C3B0CE`, both reaching projection/submission.
 It does not tie that individual source to `$C355D8`, so its longer/shorter
-bounded paths are not interpreted as LOD. See [run035 approach context](data/run035_golden_gate_approach_lod_context.md).
+bounded paths are not interpreted as LOD. The user-defined red Golden Gate
+landmark is independently visible only in the outside-world viewport at the
+sampled frames 4,250--8,250; this excludes cockpit/HUD pixels and the other
+bridge from the landmark definition. See the [viewport interval measurement](data/run035_golden_gate_red_viewport_interval.md)
+and [run035 approach context](data/run035_golden_gate_approach_lod_context.md).
 
 ## Next evidence required to find the authoritative map
 
@@ -100,6 +104,9 @@ bounded paths are not interpreted as LOD. See [run035 approach context](data/run
    possible, vary measured distance, and trace the selector plus the chosen
    static family.  Face counts alone are insufficient because culling changes
    them.
+5. Correlate a raster submission to the measured red Golden Gate viewport
+   region, then trace it upstream to its face/control record. Only that join
+   can distinguish Golden Gate geometry from the co-visible bridge.
 
 Until those conditions are met, the project has a proven scene-control index
 and immutable scene-family candidates, not a complete extracted 3D world map

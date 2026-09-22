@@ -10,6 +10,9 @@ and are explicitly excluded. The scene also contains another bridge. The
 landmark assignment is therefore specifically the red Golden Gate raster
 pixels in the world viewport, not every rendered bridge face or every static
 face context collected during the approach.
+The independently reproduced red-pixel scan bounds the sampled visible
+interval to frames 4,250--8,250; see
+`run035_golden_gate_red_viewport_interval.md`.
 Deterministic keyframes at 2,500, 4,000, 5,500, and 7,000 retain a continuous
 cockpit approach over the coast; the first sampled frame (1,000) is the map
 display and is excluded from the flight comparison. The local contact sheet is
