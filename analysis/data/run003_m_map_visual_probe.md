@@ -41,6 +41,28 @@ useful rendering oracle and an identified screen target, but neither its
 current Chip-RAM bytes nor the Copper-list page is an immutable authoritative
 terrain dataset.
 
+## When the map becomes visible
+
+A no-future-input continuation from the five-frame post-`M` checkpoint keeps
+the cockpit image through continuation frame 12.  The coastline image first
+becomes the displayed image at continuation frame 13 (equivalent to replay
+frame 2201), and stays byte-identical through frame 25.  The transition is
+therefore a prepared back-page becoming visible, rather than a gradual
+coastline draw into the already displayed page.
+
+The 13-frame Custom-chip trace records substantial CPU-originated display
+work during frames 1--12 (between 100 and 792 writes per frame); the common
+write sources include `$C30678-$C3069C`, and later `$C2FB72-$C2FD0A` and
+`$C304E2-$C304F0`.  Frame 13 has only eight CPU-originated writes before the
+Copper page setup.  This supports the page-presentation interpretation, but
+these are generic renderer/blitter code addresses, not a recovered coastline
+asset reader or an association with the 3D terrain-template directory.
+
+Authority: deterministic no-input renders
+`build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
+`build/run003_m_map_appearance_trace/{trace.jsonl,custom_writes.jsonl}` from
+the sealed `build/run003_m_visual_5/state.bin` checkpoint.
+
 ## Boundary
 
 The raw `M` entry at `$C1BF8C` is traced only through its request and capped helper boundary. Its static post-helper tail initializes transition state, but the producing pixel/asset path has not been traced. Therefore this screenshot is a valuable visual oracle for future map-data work, not evidence that the flat template-placement cache, a particular static hunk, or the screen bitmap is the authoritative terrain model.
