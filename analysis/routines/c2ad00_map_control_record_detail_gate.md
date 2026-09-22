@@ -28,10 +28,12 @@ There is, however, direct downstream dataflow into the static polygon path:
 `$C2AE6A` tests `-$24(A6)` to force its visibility result, `$C2AE70` tests
 `-$22(A6)` before executing the metric-scaled culling calculation, and
 `$C2AF92` loads `-$20(A6)` into `D3` immediately before `$C2AF9C/$C2AF9E`
-consume immutable map coordinate pairs.  The latter path can reach the
-polygon display stage.  Thus the three bands alter polygon-path preparation
-and visibility, but no evidence yet says that they replace a polygon with a
-line primitive or select a different mesh.
+consume immutable map coordinate pairs.  `$C2AFB2`, `$C2AFC6`, and `$C2AFD6`
+then use that value as the variable `ASL.W` count on each prepared coordinate.
+The three possible values therefore implement quantized polygon-coordinate
+scales of `x1`, `x2`, and `x4`, not a primitive-kind switch.  Thus the bands
+alter polygon-path scale/preparation and visibility, but no evidence yet says
+that they replace a polygon with a line primitive or select a different mesh.
 
 The bounded M-map traces exercise both alternatives: after `$C2ADBE`, the
 zero branch reaches `$C2ADC0` and the non-zero branch reaches `$C2ADC6`.
@@ -46,3 +48,5 @@ decoded from the verified runtime image; trace PCs `$C2AD00`, `$C2AD2A`, and
 
 The visibility/culling consumer slice is byte-exact in
 [`apply_map_control_detail_fields.asm`](../../source_amiga/observed/apply_map_control_detail_fields.asm).
+The pair-scale loop is byte-exact in
+[`transform_map_packet_pairs.asm`](../../source_amiga/observed/transform_map_packet_pairs.asm).
