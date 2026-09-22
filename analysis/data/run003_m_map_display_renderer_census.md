@@ -2,7 +2,7 @@
 
 Classification: **scenario-backed prepared-map-page renderer output**.
 
-The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. Polygon routes are bounded from wrapper entry to its observed `$C24D66` return; control rows are bounded to the next walker entry (or trace end). This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction.
+The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. Polygon routes are bounded from wrapper entry to its observed `$C24D66` return; control rows are bounded to the next walker entry (or trace end), so the final control row can include later unrelated line work. This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction.
 
 - Polygon wrapper entries (`$C2FF48`): 42
 - Line emitter entries (`$C2FA7E`): 19
@@ -26,14 +26,14 @@ The supplied job inventory identifies CPU blits whose pointers fall in the prepa
 
 ## Static control entries and bounded primitive outputs
 
-| Trace frame | Transform input (`A1`) | Raw triples | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |
-| ---: | --- | --- | --- | ---: | ---: | ---: |
-| 9 | `$C35BDE` | `[[11136, 0, -9088], [6656, 0, -3840], [-13568, 0, 2944]]` | `$C35BF0` | 2 | 0 | 0 |
-| 9 | `$C35BAA` | `[[0, 0, 3744], [0, 416, -3168]]` | `$C35BB8` | 1 | 0 | 0 |
-| 9 | `$C35BC2` | `[[0, 0, -3744], [0, 416, 3168]]` | `$C35BD0` | 1 | 0 | 0 |
-| 9 | `$C36220` | `[[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]]` | `$C36232` | 2 | 0 | 0 |
-| 9 | `$C36220` | `[[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]]` | `$C36232` | 2 | 0 | 0 |
-| 9 | `$C3B720` | `[[2112, 0, -896], [-2080, 0, -2048], [-1600, 0, 1280], [1088, 0, 1568], [-640, 1024, 0]]` | `$C3B73E` | 9 | 2 | 2 |
+| Trace frame | Transform input (`A1`) | Raw triples | Control entry (`A1`) | Line endpoints to next control entry | Polygon line routes | Polygon span routes |
+| ---: | --- | --- | --- | --- | ---: | ---: |
+| 9 | `$C35BDE` | `[[11136, 0, -9088], [6656, 0, -3840], [-13568, 0, 2944]]` | `$C35BF0` | `[[148, 123, 152, 118], [152, 118, 173, 112]]` | 0 | 0 |
+| 9 | `$C35BAA` | `[[0, 0, 3744], [0, 416, -3168]]` | `$C35BB8` | `[[97, 56, 97, 60]]` | 0 | 0 |
+| 9 | `$C35BC2` | `[[0, 0, -3744], [0, 416, 3168]]` | `$C35BD0` | `[[97, 63, 97, 59]]` | 0 | 0 |
+| 9 | `$C36220` | `[[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]]` | `$C36232` | `[[118, 66, 125, 60], [125, 60, 132, 59]]` | 0 | 0 |
+| 9 | `$C36220` | `[[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]]` | `$C36232` | `[[118, 66, 125, 60], [125, 60, 132, 59]]` | 0 | 0 |
+| 9 | `$C3B720` | `[[2112, 0, -896], [-2080, 0, -2048], [-1600, 0, 1280], [1088, 0, 1568], [-640, 1024, 0]]` | `$C3B73E` | `[[107, 94, 111, 95], [110, 92, 111, 95], [211, 0, 211, 179], [89, 0, 89, 179], [0, 140, 319, 140], [0, 11, 319, 11], [31, 130, 31, 130], [25, 131, 35, 131], [26, 132, 34, 132]]` | 2 | 2 |
 
 ## `$C2FF48` entry contexts
 

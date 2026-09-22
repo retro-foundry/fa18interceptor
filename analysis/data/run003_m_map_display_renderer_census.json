@@ -93,6 +93,20 @@
         ]
       ],
       "line_entries": 2,
+      "line_endpoints": [
+        [
+          148,
+          123,
+          152,
+          118
+        ],
+        [
+          152,
+          118,
+          173,
+          112
+        ]
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -114,6 +128,14 @@
         ]
       ],
       "line_entries": 1,
+      "line_endpoints": [
+        [
+          97,
+          56,
+          97,
+          60
+        ]
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -135,6 +157,14 @@
         ]
       ],
       "line_entries": 1,
+      "line_endpoints": [
+        [
+          97,
+          63,
+          97,
+          59
+        ]
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -161,6 +191,20 @@
         ]
       ],
       "line_entries": 2,
+      "line_endpoints": [
+        [
+          118,
+          66,
+          125,
+          60
+        ],
+        [
+          125,
+          60,
+          132,
+          59
+        ]
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -187,6 +231,20 @@
         ]
       ],
       "line_entries": 2,
+      "line_endpoints": [
+        [
+          118,
+          66,
+          125,
+          60
+        ],
+        [
+          125,
+          60,
+          132,
+          59
+        ]
+      ],
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
     },
@@ -223,9 +281,65 @@
         ]
       ],
       "line_entries": 9,
+      "line_endpoints": [
+        [
+          107,
+          94,
+          111,
+          95
+        ],
+        [
+          110,
+          92,
+          111,
+          95
+        ],
+        [
+          211,
+          0,
+          211,
+          179
+        ],
+        [
+          89,
+          0,
+          89,
+          179
+        ],
+        [
+          0,
+          140,
+          319,
+          140
+        ],
+        [
+          0,
+          11,
+          319,
+          11
+        ],
+        [
+          31,
+          130,
+          31,
+          130
+        ],
+        [
+          25,
+          131,
+          35,
+          131
+        ],
+        [
+          26,
+          132,
+          34,
+          132
+        ]
+      ],
       "polygon_line_routes": 2,
       "polygon_span_routes": 2
     }
   ],
-  "qualification": "The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. Polygon routes are bounded from wrapper entry to its observed `$C24D66` return; control rows are bounded to the next walker entry (or trace end). This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction."
+  "qualification": "The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. Polygon routes are bounded from wrapper entry to its observed `$C24D66` return; control rows are bounded to the next walker entry (or trace end), so the final control row can include later unrelated line work. This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction."
 }
