@@ -47,9 +47,23 @@ code before the `$C1CB74` selector consumes it.  It is therefore a runtime
 scene-placement cache, not the immutable terrain source.  The stored `A1`
 value is an exact pointer into the `$C22000-$C22FFF` scene-descriptor family
 in this observed iteration, joining the runtime record to the relocation-backed
-static scene table.  The three coordinate words' producer is still unproven:
-the trace has not followed their `D0` values back to the original world
-placement table or a coordinate-generation rule.
+static scene table.  The three coordinate words are not copied directly from
+that descriptor: immediately before each store, the observed path loads and
+arithmetically shifts mutable coordinate state:
+
+| Store | Input | Operation |
+| --- | --- | --- |
+| `$C1E04A` | `$C456EE` | `MOVE.L` then `ASR.L D6,D0`, low word stored |
+| `$C1E054` | `$C456F2` | `MOVE.W` then `ASR.W D6,D0`, stored |
+| `$C1E05E` | `$C456F6` | `MOVE.L` then `ASR.L D6,D0`, low word stored |
+
+Their immediate writers are now observed in the same bulk trace:
+`$C1DDCA` stores `D6` to `$C456EE`, `$C1DE04` clears `$C456F2`, and
+`$C1DE38` stores `D6` to `$C456F6`.  These are per-record scratch values—the
+stores repeat before each following `$C1E04A/$C1E054/$C1E05E` triplet—rather
+than a single global player position.  The `D6` producer and its relationship
+to the static descriptor still need tracing before this can be called the
+original world-placement table.
 
 The next valid step is a focused call/return trace that records `A1`, the
 three `D0` coordinate words, and the source reads immediately before this
