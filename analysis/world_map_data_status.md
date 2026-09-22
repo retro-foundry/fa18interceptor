@@ -12,18 +12,21 @@ called the complete world map.
 | Is there a static scene-selection dataset? | Yes.  The inline `$C223A8-$C227EB` table in original CODE segment 16 contains relocation-backed pointer triplets into scene-family segments 41--50. | [scene pointer triplets](data/c223a8_scene_pointer_triplets.md) |
 | Which candidates survive runtime unchanged? | Hunks 41--47, 49, and 50 are byte-stable across the recorded snapshots after complete relocation operands are excluded.  They are immutable scene-family candidates, not reclassified data hunks or complete models. | [geometry boundary report](model_geometry_boundaries.md) |
 | Where does the active scene path select a stream? | The capped flight-update packet walks 24-byte records and copies a descriptor's third longword to `$C45A36`; `$C1F6F8` then consumes that control-stream pointer on the projection path. | [`$C1CB14` handoff](routines/c1cb14_flight_update_stage.md) |
+| Is there a flat placement layer? | Yes, for the sampled runtime scene-placement records.  Every descriptor-qualified 24-byte record in three run033 checkpoints has a zero middle coordinate word, with signed first/third words varying across the X/Z diagnostic. | [runtime placements](data/runtime_scene_placements.md) |
 | Are the renderer's projected triples the source map? | No. `$C45630-$C48383` and `$C48390-$C4E76B` are mutable workspaces; static source extraction from either would be wrong. | [geometry boundary report](model_geometry_boundaries.md) |
 | Does `M` identify map data? | Not yet. Raw `$37` reaches `$C1BF8C`, sets a request bit, and enters a long helper.  The post-helper static tail initializes display-transition state, but the helper has no completed return trace and no traced asset/data consumer. | [`M` command contract](routines/c1bf8c_map_command.md) |
 
 ## Flatness is not yet a data invariant
 
-The displayed flight area may be operationally flat, but no current trace
-establishes a single world-up axis, a terrain-height field, or an all-zero
-height coordinate in the source dataset.  In fact, renderer-observed local
-triples from scene-family inputs contain nonzero values in all three stored
-components.  Those values may be model-local coordinates, transformed scene
-inputs, or another coordinate convention; they must not be used to contradict
-or confirm the gameplay-level flatness claim.
+The sampled runtime placement layer supplies positive, scenario-backed support
+for a flat world plane: its middle coordinate word is zero for all 121, 123,
+and 123 descriptor-qualified records at the three run033 checkpoints.  This
+does not yet establish the original static source table, prove that this word
+is a global height axis under every game mode, or rule out separate terrain
+geometry.  Renderer-observed local triples from scene-family inputs still
+contain nonzero values in all three stored components.  Those values may be
+model-local coordinates, transformed scene inputs, or another coordinate
+convention; they must not be conflated with placement height.
 
 Consequently, a map export must retain all three stored components until a
 producer-to-consumer trace proves which components encode global placement and
