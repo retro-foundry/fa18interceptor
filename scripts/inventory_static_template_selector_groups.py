@@ -28,6 +28,26 @@ def address(value: int) -> str:
     return f"${value:06X}"
 
 
+def decode_group_record(slow: bytes, group_address: int) -> dict[str, object] | None:
+    """Decode the observed count/threshold/pointer layout of an accepted group."""
+    offset = group_address - SLOW_BASE
+    header = int.from_bytes(slow[offset:offset + 2], "big", signed=True)
+    if header < 0 or header & 1:
+        return None
+    count = header // 2
+    thresholds = [int.from_bytes(slow[offset + 2 + index * 2:offset + 4 + index * 2], "big")
+                  for index in range(count)]
+    pointer_offset = offset + header + 2
+    streams = [int.from_bytes(slow[pointer_offset + index * 4:pointer_offset + index * 4 + 4], "big")
+               for index in range(count)]
+    return {
+        "threshold_count": count,
+        "threshold_words": [f"${value:04X}" for value in thresholds],
+        "stream_pointer_table": address(group_address + header + 2),
+        "stream_pointers": [address(value) for value in streams],
+    }
+
+
 def load_trace(trace_path: Path) -> list[dict]:
     return [json.loads(line) for line in trace_path.read_text(encoding="utf-8").splitlines()]
 
@@ -49,7 +69,7 @@ def inventory(trace_path: Path, slow_path: Path) -> list[dict]:
             continue
         input_index = entry["registers"]["d0"] & 0xFFFF
         group_address = table_read["registers"]["a0"]
-        group_header = int.from_bytes(slow[group_address - SLOW_BASE:group_address - SLOW_BASE + 2], "big")
+        group_layout = decode_group_record(slow, group_address)
         rows.append({
             "frame": entry.get("frame"),
             "trace_index": entry["index"],
@@ -59,7 +79,9 @@ def inventory(trace_path: Path, slow_path: Path) -> list[dict]:
             "selector_table_word_address": address(0xC42390 + input_index * 2),
             "group_record": address(group_address),
             "bit_gate_taken": bool(bit_test and bit_test["next_pc"] != 0xC1D4DA),
-            "row_threshold_count": group_header >> 1 if row_search_call else None,
+            "group_layout": group_layout,
+            "row_threshold_count": (group_layout["threshold_count"]
+                                    if row_search_call and group_layout else None),
             "live_row_search_key": f"${row_search_call['registers']['d1'] & 0xFFFF:04X}" if row_search_call else None,
             "selected_row_index": row_search_return["registers"]["d0"] & 0xFFFF if row_search_return else None,
             "first_template_stream_byte": address(stream["registers"]["a5"]) if stream else None,
@@ -83,7 +105,10 @@ def markdown(rows: list[dict], trace_path: Path) -> str:
         "observed accepted path, `$C1D426` passes a bit gate, `$C1D43A` resolves a stream "
         "pointer, and `$C1D442` begins the byte stream consumed by the workspace copier.  "
         "Between those steps, `$C1D4E4-$C1D50C` binary-searches the group's static sorted "
-        "word list using live `D1`, returning the pointer-table index used at `$C1D43A`.",
+        "word list using live `D1`, returning the pointer-table index used at `$C1D43A`. "
+        "For accepted records, the first word is an even byte offset equal to twice the "
+        "threshold count; it is followed by that many threshold words and then a same-sized "
+        "long-pointer table. The JSON inventory preserves this exact decoded layout.",
         "",
         f"The trace executes **{len(rows)}** group selections; **{len(reached)}** reach a "
         "template stream before returning.  Entries without a stream either take a gate/exit "

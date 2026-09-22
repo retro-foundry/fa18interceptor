@@ -17,6 +17,7 @@
       "selector_table_word_address": "$C423B4",
       "group_record": "$C42704",
       "bit_gate_taken": false,
+      "group_layout": null,
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -31,6 +32,7 @@
       "selector_table_word_address": "$C423B4",
       "group_record": "$C42704",
       "bit_gate_taken": false,
+      "group_layout": null,
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -45,6 +47,7 @@
       "selector_table_word_address": "$C423B4",
       "group_record": "$C42704",
       "bit_gate_taken": false,
+      "group_layout": null,
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -59,6 +62,20 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
       "row_threshold_count": 3,
       "live_row_search_key": "$0012",
       "selected_row_index": 2,
@@ -73,6 +90,20 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -87,6 +118,20 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -101,6 +146,20 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
       "row_threshold_count": 3,
       "live_row_search_key": "$0010",
       "selected_row_index": 1,
@@ -115,6 +174,20 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
       "row_threshold_count": 3,
       "live_row_search_key": "$000F",
       "selected_row_index": 0,
@@ -129,6 +202,20 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -143,6 +230,20 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
       "row_threshold_count": 3,
       "live_row_search_key": "$000F",
       "selected_row_index": 1,
@@ -157,6 +258,18 @@
       "selector_table_word_address": "$C423AE",
       "group_record": "$C426CE",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C426D4",
+        "stream_pointers": [
+          "$C42720",
+          "$C4272E"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -171,6 +284,18 @@
       "selector_table_word_address": "$C423AE",
       "group_record": "$C426CE",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C426D4",
+        "stream_pointers": [
+          "$C42720",
+          "$C4272E"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -185,6 +310,18 @@
       "selector_table_word_address": "$C423AE",
       "group_record": "$C426CE",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C426D4",
+        "stream_pointers": [
+          "$C42720",
+          "$C4272E"
+        ]
+      },
       "row_threshold_count": 2,
       "live_row_search_key": "$000F",
       "selected_row_index": 1,
@@ -199,6 +336,20 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
       "row_threshold_count": 3,
       "live_row_search_key": "$0010",
       "selected_row_index": 2,
@@ -213,6 +364,16 @@
       "selector_table_word_address": "$C42412",
       "group_record": "$C4288E",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 1,
+        "threshold_words": [
+          "$003F"
+        ],
+        "stream_pointer_table": "$C42892",
+        "stream_pointers": [
+          "$C4296A"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -227,6 +388,16 @@
       "selector_table_word_address": "$C42412",
       "group_record": "$C4288E",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 1,
+        "threshold_words": [
+          "$003F"
+        ],
+        "stream_pointer_table": "$C42892",
+        "stream_pointers": [
+          "$C4296A"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -241,6 +412,18 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -255,6 +438,18 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -269,6 +464,18 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
       "row_threshold_count": 2,
       "live_row_search_key": "$0041",
       "selected_row_index": 1,
@@ -283,6 +490,18 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -297,6 +516,18 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -311,6 +542,18 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
       "row_threshold_count": 2,
       "live_row_search_key": "$0041",
       "selected_row_index": 0,
@@ -325,6 +568,18 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -339,6 +594,30 @@
       "selector_table_word_address": "$C42418",
       "group_record": "$C428B2",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 8,
+        "threshold_words": [
+          "$0031",
+          "$0034",
+          "$0037",
+          "$003A",
+          "$003D",
+          "$003F",
+          "$0042",
+          "$0049"
+        ],
+        "stream_pointer_table": "$C428C4",
+        "stream_pointers": [
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4298A",
+          "$C429EC",
+          "$C4298A",
+          "$C42B36"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -353,6 +632,30 @@
       "selector_table_word_address": "$C42418",
       "group_record": "$C428B2",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 8,
+        "threshold_words": [
+          "$0031",
+          "$0034",
+          "$0037",
+          "$003A",
+          "$003D",
+          "$003F",
+          "$0042",
+          "$0049"
+        ],
+        "stream_pointer_table": "$C428C4",
+        "stream_pointers": [
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4298A",
+          "$C429EC",
+          "$C4298A",
+          "$C42B36"
+        ]
+      },
       "row_threshold_count": 8,
       "live_row_search_key": "$0042",
       "selected_row_index": 6,
@@ -367,6 +670,30 @@
       "selector_table_word_address": "$C42418",
       "group_record": "$C428B2",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 8,
+        "threshold_words": [
+          "$0031",
+          "$0034",
+          "$0037",
+          "$003A",
+          "$003D",
+          "$003F",
+          "$0042",
+          "$0049"
+        ],
+        "stream_pointer_table": "$C428C4",
+        "stream_pointers": [
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4298A",
+          "$C429EC",
+          "$C4298A",
+          "$C42B36"
+        ]
+      },
       "row_threshold_count": null,
       "live_row_search_key": null,
       "selected_row_index": null,
@@ -381,6 +708,18 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
       "row_threshold_count": 2,
       "live_row_search_key": "$0042",
       "selected_row_index": 1,

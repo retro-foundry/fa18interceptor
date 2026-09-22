@@ -83,6 +83,28 @@ show LOD replacement. The per-run evidence inventories are
 [Z-only](static_template_selector_groups_origin_z_plus.md), and
 [both-axis](static_template_selector_groups_origin_mutation.md).
 
+### Decoded static group-record directory
+
+The accepted group records have a directly observed compact directory format.
+Their first word is an even byte offset, equal to twice the number of sorted
+row-threshold words that follow. The routine uses it both as the binary-search
+count and to locate the subsequent same-length long-pointer table. The selected
+row index selects one of those static stream pointers at `$C1D43A`.
+
+| group record | sorted row thresholds | pointer-table address | example selected stream |
+| --- | --- | --- | --- |
+| `$C42622` | `000A, 000C, 000F, 0010, 0012` | `$C4262E` | `$C42B46` for key `$0012` |
+| `$C42608` | `0009, 000D, 000F, 0010` | `$C42612` | `$C42BD4` for key `$0010` |
+| `$C426F0` | `000F, 0010, 0012` | `$C426F8` | `$C42B3E` for key `$0012` |
+| `$C428B2` | `0031, 0034, 0037, 003A, 003D, 003F, 0042, 0049` | `$C428C4` | `$C4298A` for key `$0042` |
+
+This establishes a static **row-key-to-template-stream directory**, a concrete
+component of the terrain-page system. It is not yet a global `(X,Z)` cell
+directory: the experiment observes only a bounded set of origin bins and does
+not establish how the static group-selector index itself maps to world-page
+coordinates. The full decoded threshold and pointer arrays are retained in the
+linked JSON inventories.
+
 ## Chunk selection versus LOD
 
 The joins also distinguish a page/subsection selector from a demonstrated LOD
