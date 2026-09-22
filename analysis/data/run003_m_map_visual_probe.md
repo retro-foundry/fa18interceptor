@@ -140,6 +140,15 @@ nonzero middle component, including `$C3B720`'s fifth local triple
 separately observed flat X/0/Z *placement* layer; neither coordinate convention
 may be promoted to a global elevation rule without a producer/consumer proof.
 
+The common `$C1F4AC/$C1F524` path is not an opaque copy: its byte-exact
+[record transform](../../source_amiga/observed/transform_c1ee14_alt_branch_record.asm)
+and [loop](../../source_amiga/observed/transform_c1ee14_alt_branch_loop.asm)
+load each signed source triple, apply the live shift/offset terms, multiply
+against three matrix rows, and write a three-word transformed result through
+`A3`. This is the fixed-point source-to-workspace contract used by each of the
+bounded map inputs; the matrix and offsets remain live state, so it does not
+turn those local triples into global coordinates.
+
 The trace-proven source-order component can be inspected in the
 [orthographic/isometric sheet](../plots/c3b720_shared_bridge_pylon_static_topology.png).
 It contains only the four renderer-observed triangular sides; no base face or
