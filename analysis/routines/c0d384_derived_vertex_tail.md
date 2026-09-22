@@ -14,4 +14,6 @@ With `A3=$C46228`, that is `$C462AC`, slot 22. The following stores fill derived
 
 The values are calculated from earlier workspace offsets using word arithmetic, additions/subtractions, and shifts. The trace begins with the tail still zero and ends with the `$C462AC-$C46301` records populated. The direct trace is `build/run031_frame1965_c0d396_tail_derivation_trace/trace.jsonl`; it is bounded by the caller's `$FC0D14` breakpoint and returns to `$C0D380`.
 
+`$C0D334` establishes the two observed calls: first a selected subrecord in the `$C46184` record bank (which resolves to `$C46228` in this frame), then `$C48390` plus an offset from `(A2)+`. Thus the helper is shared renderer geometry construction, not a loader dedicated to the C34C flight-object family. Its first stores demonstrate the construction pattern: it derives offset `$84` from prior register values, derives `$8A` after loading `$36(A3)`, then stores `$90`, `$96`, and later midpoint/difference combinations at the subsequent tail offsets.
+
 Consequently, the coordinate resemblance between the `$C351E2` static continuation and this runtime tail cannot be promoted to a static vertex-transform claim. It may encode a related template, but it is not the observed producer path.

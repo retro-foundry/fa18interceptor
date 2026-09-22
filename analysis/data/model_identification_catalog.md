@@ -24,4 +24,6 @@ The catalogue deliberately keeps the last entries separate from the static-model
 
 The raster static-topology sheets are [the partial `$C3515E-$C35234` flight-object candidate](../plots/c351_c34c_static_topology_candidate.png) and [the `$C39D2A` long-component candidate](../plots/c39d2a_c3925_static_topology_candidate.png). The latter has competing carrier-deck and road/bridge-segment readings; its renderer evidence proves neither semantic label.
 
+The C34C frame-1966 [renderer-workspace sheet](../plots/c351_c34c_workspace_topology_frame1966.png) is the complete 36-slot geometric reference for the five observed faces. Only slots 0-21 come from `$C3515E`; `$C0D384-$C0D521` derives slots 22-35. Therefore its flight-object silhouette is renderer-proven, but it is not a complete immutable mesh export.
+
 Pre-cull-sheet qualification: `$C2005C` supplies selected faces before their orientation and clipping gates. The sheets retain one observed transformed sample for each distinct static face-record address, which recovers faces absent from `$C2FF48` without inventing topology. `$C212B0` line sheets remain supplementary because their endpoint lists may describe scene detail as well as model outlines.
