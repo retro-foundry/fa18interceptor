@@ -10,6 +10,11 @@ The 32×32 lattice reaches 21 distinct static streams and 116 non-terminator
 static records. The JSON carries every record plus the selector-bin cells that
 reference its stream; a zero-record stream is an observed immediate `$FF` terminator.
 
+96 of those records have a descriptor reached in the same
+origin-control trace and are annotated in JSON. This is a control-window association
+only: the separate refresh-window comparison proves that a reused static source can
+select a different descriptor in another scene context.
+
 | Static stream | records | selector-bin cells |
 | --- | ---: | ---: |
 | $C42644 | 0 | 61 |

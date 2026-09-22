@@ -1,6 +1,83 @@
 {
   "classification": "bounded_selector_lattice_static_templates_not_world_mesh",
   "lattice": "analysis/data/terrain_template_selector_lattice.json",
+  "descriptor_authority": "analysis/data/workspace_template_copies_origin_control.json",
+  "control_window_header_descriptors": {
+    "$15": "$C2232C",
+    "$20": "$C22408",
+    "$21": "$C2241C",
+    "$53": "$C22804",
+    "$54": "$C22818",
+    "$14": "$C22318",
+    "$33": "$C22584",
+    "$48": "$C22728",
+    "$22": "$C22430",
+    "$52": "$C227F0",
+    "$24": "$C22458",
+    "$25": "$C2246C",
+    "$26": "$C22480",
+    "$23": "$C22444",
+    "$17": "$C22354",
+    "$18": "$C22368",
+    "$75": "$C22AAC",
+    "$19": "$C2237C",
+    "$1A": "$C22390",
+    "$46": "$C22700",
+    "$39": "$C225FC",
+    "$38": "$C225E8",
+    "$3B": "$C22624",
+    "$43": "$C226C4",
+    "$3A": "$C22610",
+    "$40": "$C22688",
+    "$45": "$C226EC",
+    "$41": "$C2269C",
+    "$3D": "$C2264C",
+    "$3C": "$C22638",
+    "$44": "$C226D8",
+    "$3E": "$C22660",
+    "$3F": "$C22674",
+    "$47": "$C22714",
+    "$28": "$C224A8",
+    "$27": "$C22494",
+    "$29": "$C224BC",
+    "$1E": "$C223E0",
+    "$34": "$C22598",
+    "$1F": "$C223F4",
+    "$1D": "$C223CC",
+    "$1C": "$C223B8",
+    "$36": "$C225C0",
+    "$37": "$C225D4",
+    "$1B": "$C223A4",
+    "$32": "$C22570",
+    "$35": "$C225AC",
+    "$4B": "$C22764",
+    "$6F": "$C22A34",
+    "$4C": "$C22778",
+    "$73": "$C22A84",
+    "$74": "$C22A98",
+    "$6C": "$C229F8",
+    "$6D": "$C22A0C",
+    "$6E": "$C22A20",
+    "$61": "$C2291C",
+    "$62": "$C22930",
+    "$63": "$C22944",
+    "$64": "$C22958",
+    "$65": "$C2296C",
+    "$66": "$C22980",
+    "$59": "$C2287C",
+    "$67": "$C22994",
+    "$68": "$C229A8",
+    "$60": "$C22908",
+    "$2A": "$C224D0",
+    "$70": "$C22A48",
+    "$71": "$C22A5C",
+    "$2C": "$C224F8",
+    "$2B": "$C224E4",
+    "$72": "$C22A70",
+    "$5A": "$C22890",
+    "$56": "$C22840",
+    "$4A": "$C22750"
+  },
   "streams": [
     {
       "stream": "$C42644",
@@ -259,133 +336,155 @@
           "source": "$C42647",
           "header": "$15",
           "word_1": "$0000",
-          "word_2": "$0000"
+          "word_2": "$0000",
+          "control_window_descriptor": "$C2232C"
         },
         {
           "source": "$C4264D",
           "header": "$20",
           "word_1": "$0980",
-          "word_2": "$0580"
+          "word_2": "$0580",
+          "control_window_descriptor": "$C22408"
         },
         {
           "source": "$C42653",
           "header": "$21",
           "word_1": "$0980",
-          "word_2": "$0280"
+          "word_2": "$0280",
+          "control_window_descriptor": "$C2241C"
         },
         {
           "source": "$C42659",
           "header": "$53",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22804"
         },
         {
           "source": "$C4265F",
           "header": "$54",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22818"
         },
         {
           "source": "$C42665",
           "header": "$14",
           "word_1": "$0200",
-          "word_2": "$0600"
+          "word_2": "$0600",
+          "control_window_descriptor": "$C22318"
         },
         {
           "source": "$C4266B",
           "header": "$33",
           "word_1": "$0200",
-          "word_2": "$0240"
+          "word_2": "$0240",
+          "control_window_descriptor": "$C22584"
         },
         {
           "source": "$C42671",
           "header": "$48",
           "word_1": "$0200",
-          "word_2": "$0240"
+          "word_2": "$0240",
+          "control_window_descriptor": "$C22728"
         },
         {
           "source": "$C42677",
           "header": "$22",
           "word_1": "$0220",
-          "word_2": "$00E0"
+          "word_2": "$00E0",
+          "control_window_descriptor": "$C22430"
         },
         {
           "source": "$C4267D",
           "header": "$52",
           "word_1": "$0E00",
-          "word_2": "$0600"
+          "word_2": "$0600",
+          "control_window_descriptor": "$C227F0"
         },
         {
           "source": "$C42683",
           "header": "$24",
           "word_1": "$0D98",
-          "word_2": "$0414"
+          "word_2": "$0414",
+          "control_window_descriptor": "$C22458"
         },
         {
           "source": "$C42689",
           "header": "$25",
           "word_1": "$0C00",
-          "word_2": "$0498"
+          "word_2": "$0498",
+          "control_window_descriptor": "$C2246C"
         },
         {
           "source": "$C4268F",
           "header": "$26",
           "word_1": "$0BD8",
-          "word_2": "$04A8"
+          "word_2": "$04A8",
+          "control_window_descriptor": "$C22480"
         },
         {
           "source": "$C42695",
           "header": "$23",
           "word_1": "$0F00",
-          "word_2": "$0380"
+          "word_2": "$0380",
+          "control_window_descriptor": "$C22444"
         },
         {
           "source": "$C4269B",
           "header": "$17",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22354"
         },
         {
           "source": "$C426A1",
           "header": "$18",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22368"
         },
         {
           "source": "$C426A7",
           "header": "$75",
           "word_1": "$0780",
-          "word_2": "$0B80"
+          "word_2": "$0B80",
+          "control_window_descriptor": "$C22AAC"
         },
         {
           "source": "$C426AD",
           "header": "$22",
           "word_1": "$0658",
-          "word_2": "$0CA8"
+          "word_2": "$0CA8",
+          "control_window_descriptor": "$C22430"
         },
         {
           "source": "$C426B3",
           "header": "$22",
           "word_1": "$04F0",
-          "word_2": "$0E10"
+          "word_2": "$0E10",
+          "control_window_descriptor": "$C22430"
         },
         {
           "source": "$C426B9",
           "header": "$22",
           "word_1": "$0388",
-          "word_2": "$0F78"
+          "word_2": "$0F78",
+          "control_window_descriptor": "$C22430"
         },
         {
           "source": "$C426BF",
           "header": "$19",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C2237C"
         },
         {
           "source": "$C426C5",
           "header": "$1A",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22390"
         }
       ],
       "selector_cells": [
@@ -454,25 +553,29 @@
           "source": "$C42707",
           "header": "$47",
           "word_1": "$0000",
-          "word_2": "$0700"
+          "word_2": "$0700",
+          "control_window_descriptor": "$C22714"
         },
         {
           "source": "$C4270D",
           "header": "$28",
           "word_1": "$03A0",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C224A8"
         },
         {
           "source": "$C42713",
           "header": "$27",
           "word_1": "$08B0",
-          "word_2": "$0090"
+          "word_2": "$0090",
+          "control_window_descriptor": "$C22494"
         },
         {
           "source": "$C42719",
           "header": "$29",
           "word_1": "$09C0",
-          "word_2": "$0760"
+          "word_2": "$0760",
+          "control_window_descriptor": "$C224BC"
         }
       ],
       "selector_cells": [
@@ -766,61 +869,71 @@
           "source": "$C4274B",
           "header": "$61",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C2291C"
         },
         {
           "source": "$C42751",
           "header": "$62",
           "word_1": "$0400",
-          "word_2": "$0000"
+          "word_2": "$0000",
+          "control_window_descriptor": "$C22930"
         },
         {
           "source": "$C42757",
           "header": "$63",
           "word_1": "$0000",
-          "word_2": "$0C00"
+          "word_2": "$0C00",
+          "control_window_descriptor": "$C22944"
         },
         {
           "source": "$C4275D",
           "header": "$64",
           "word_1": "$0C00",
-          "word_2": "$0C00"
+          "word_2": "$0C00",
+          "control_window_descriptor": "$C22958"
         },
         {
           "source": "$C42763",
           "header": "$65",
           "word_1": "$0000",
-          "word_2": "$0C00"
+          "word_2": "$0C00",
+          "control_window_descriptor": "$C2296C"
         },
         {
           "source": "$C42769",
           "header": "$66",
           "word_1": "$0C00",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22980"
         },
         {
           "source": "$C4276F",
           "header": "$59",
           "word_1": "$0C00",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C2287C"
         },
         {
           "source": "$C42775",
           "header": "$67",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22994"
         },
         {
           "source": "$C4277B",
           "header": "$68",
           "word_1": "$0400",
-          "word_2": "$0C00"
+          "word_2": "$0C00",
+          "control_window_descriptor": "$C229A8"
         },
         {
           "source": "$C42781",
           "header": "$60",
           "word_1": "$0800",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22908"
         }
       ],
       "selector_cells": [
@@ -889,43 +1002,50 @@
           "source": "$C42789",
           "header": "$2A",
           "word_1": "$0E00",
-          "word_2": "$0E00"
+          "word_2": "$0E00",
+          "control_window_descriptor": "$C224D0"
         },
         {
           "source": "$C4278F",
           "header": "$70",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22A48"
         },
         {
           "source": "$C42795",
           "header": "$71",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22A5C"
         },
         {
           "source": "$C4279B",
           "header": "$2C",
           "word_1": "$06F6",
-          "word_2": "$0E9A"
+          "word_2": "$0E9A",
+          "control_window_descriptor": "$C224F8"
         },
         {
           "source": "$C427A1",
           "header": "$2B",
           "word_1": "$00C4",
-          "word_2": "$0AC8"
+          "word_2": "$0AC8",
+          "control_window_descriptor": "$C224E4"
         },
         {
           "source": "$C427A7",
           "header": "$72",
           "word_1": "$0C00",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22A70"
         },
         {
           "source": "$C427AD",
           "header": "$5A",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22890"
         }
       ],
       "selector_cells": [
@@ -994,19 +1114,22 @@
           "source": "$C427B5",
           "header": "$6C",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C229F8"
         },
         {
           "source": "$C427BB",
           "header": "$6D",
           "word_1": "$0C00",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22A0C"
         },
         {
           "source": "$C427C1",
           "header": "$6E",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22A20"
         }
       ],
       "selector_cells": [
@@ -1075,43 +1198,50 @@
           "source": "$C427C9",
           "header": "$46",
           "word_1": "$0B00",
-          "word_2": "$0900"
+          "word_2": "$0900",
+          "control_window_descriptor": "$C22700"
         },
         {
           "source": "$C427CF",
           "header": "$46",
           "word_1": "$0150",
-          "word_2": "$0200"
+          "word_2": "$0200",
+          "control_window_descriptor": "$C22700"
         },
         {
           "source": "$C427D5",
           "header": "$4B",
           "word_1": "$09A0",
-          "word_2": "$0000"
+          "word_2": "$0000",
+          "control_window_descriptor": "$C22764"
         },
         {
           "source": "$C427DB",
           "header": "$6F",
           "word_1": "$0400",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22A34"
         },
         {
           "source": "$C427E1",
           "header": "$4C",
           "word_1": "$0588",
-          "word_2": "$0A80"
+          "word_2": "$0A80",
+          "control_window_descriptor": "$C22778"
         },
         {
           "source": "$C427E7",
           "header": "$73",
           "word_1": "$0800",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22A84"
         },
         {
           "source": "$C427ED",
           "header": "$74",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22A98"
         }
       ],
       "selector_cells": [
@@ -1180,13 +1310,15 @@
           "source": "$C42951",
           "header": "$52",
           "word_1": "$0800",
-          "word_2": "$0300"
+          "word_2": "$0300",
+          "control_window_descriptor": "$C227F0"
         },
         {
           "source": "$C42957",
           "header": "$15",
           "word_1": "$0400",
-          "word_2": "$0E00"
+          "word_2": "$0E00",
+          "control_window_descriptor": "$C2232C"
         },
         {
           "source": "$C4295D",
@@ -1198,7 +1330,8 @@
           "source": "$C42963",
           "header": "$4A",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22750"
         }
       ],
       "selector_cells": [
@@ -1527,7 +1660,8 @@
           "source": "$C42957",
           "header": "$15",
           "word_1": "$0400",
-          "word_2": "$0E00"
+          "word_2": "$0E00",
+          "control_window_descriptor": "$C2232C"
         },
         {
           "source": "$C4295D",
@@ -1539,7 +1673,8 @@
           "source": "$C42963",
           "header": "$4A",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C22750"
         }
       ],
       "selector_cells": [
@@ -5955,13 +6090,15 @@
           "source": "$C429D1",
           "header": "$56",
           "word_1": "$0600",
-          "word_2": "$0100"
+          "word_2": "$0100",
+          "control_window_descriptor": "$C22840"
         },
         {
           "source": "$C429D7",
           "header": "$4A",
           "word_1": "$0C00",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22750"
         }
       ],
       "selector_cells": [
@@ -10070,13 +10207,15 @@
           "source": "$C429DF",
           "header": "$2A",
           "word_1": "$0800",
-          "word_2": "$0800"
+          "word_2": "$0800",
+          "control_window_descriptor": "$C224D0"
         },
         {
           "source": "$C429E5",
           "header": "$4A",
           "word_1": "$0C00",
-          "word_2": "$0400"
+          "word_2": "$0400",
+          "control_window_descriptor": "$C22750"
         }
       ],
       "selector_cells": [
@@ -18536,109 +18675,127 @@
           "source": "$C42B67",
           "header": "$46",
           "word_1": "$0E00",
-          "word_2": "$0600"
+          "word_2": "$0600",
+          "control_window_descriptor": "$C22700"
         },
         {
           "source": "$C42B6D",
           "header": "$15",
           "word_1": "$0E00",
-          "word_2": "$0600"
+          "word_2": "$0600",
+          "control_window_descriptor": "$C2232C"
         },
         {
           "source": "$C42B73",
           "header": "$15",
           "word_1": "$0400",
-          "word_2": "$0E00"
+          "word_2": "$0E00",
+          "control_window_descriptor": "$C2232C"
         },
         {
           "source": "$C42B79",
           "header": "$52",
           "word_1": "$0800",
-          "word_2": "$0300"
+          "word_2": "$0300",
+          "control_window_descriptor": "$C227F0"
         },
         {
           "source": "$C42B7F",
           "header": "$39",
           "word_1": "$0040",
-          "word_2": "$0A00"
+          "word_2": "$0A00",
+          "control_window_descriptor": "$C225FC"
         },
         {
           "source": "$C42B85",
           "header": "$38",
           "word_1": "$02D0",
-          "word_2": "$05F0"
+          "word_2": "$05F0",
+          "control_window_descriptor": "$C225E8"
         },
         {
           "source": "$C42B8B",
           "header": "$3B",
           "word_1": "$0070",
-          "word_2": "$03F0"
+          "word_2": "$03F0",
+          "control_window_descriptor": "$C22624"
         },
         {
           "source": "$C42B91",
           "header": "$43",
           "word_1": "$01F6",
-          "word_2": "$0538"
+          "word_2": "$0538",
+          "control_window_descriptor": "$C226C4"
         },
         {
           "source": "$C42B97",
           "header": "$43",
           "word_1": "$036E",
-          "word_2": "$0675"
+          "word_2": "$0675",
+          "control_window_descriptor": "$C226C4"
         },
         {
           "source": "$C42B9D",
           "header": "$3A",
           "word_1": "$04E5",
-          "word_2": "$07B1"
+          "word_2": "$07B1",
+          "control_window_descriptor": "$C22610"
         },
         {
           "source": "$C42BA3",
           "header": "$40",
           "word_1": "$01FE",
-          "word_2": "$0D4B"
+          "word_2": "$0D4B",
+          "control_window_descriptor": "$C22688"
         },
         {
           "source": "$C42BA9",
           "header": "$45",
           "word_1": "$01C2",
-          "word_2": "$0C99"
+          "word_2": "$0C99",
+          "control_window_descriptor": "$C226EC"
         },
         {
           "source": "$C42BAF",
           "header": "$41",
           "word_1": "$018C",
-          "word_2": "$0BE8"
+          "word_2": "$0BE8",
+          "control_window_descriptor": "$C2269C"
         },
         {
           "source": "$C42BB5",
           "header": "$3D",
           "word_1": "$01FB",
-          "word_2": "$0A4C"
+          "word_2": "$0A4C",
+          "control_window_descriptor": "$C2264C"
         },
         {
           "source": "$C42BBB",
           "header": "$3C",
           "word_1": "$00DD",
-          "word_2": "$0AB1"
+          "word_2": "$0AB1",
+          "control_window_descriptor": "$C22638"
         },
         {
           "source": "$C42BC1",
           "header": "$44",
           "word_1": "$0097",
-          "word_2": "$09CA"
+          "word_2": "$09CA",
+          "control_window_descriptor": "$C226D8"
         },
         {
           "source": "$C42BC7",
           "header": "$3E",
           "word_1": "$0F33",
-          "word_2": "$0949"
+          "word_2": "$0949",
+          "control_window_descriptor": "$C22660"
         },
         {
           "source": "$C42BCD",
           "header": "$3F",
           "word_1": "$0EF8",
-          "word_2": "$0A00"
+          "word_2": "$0A00",
+          "control_window_descriptor": "$C22674"
         }
       ],
       "selector_cells": [
@@ -18707,97 +18864,113 @@
           "source": "$C42BD5",
           "header": "$1E",
           "word_1": "$0380",
-          "word_2": "$0C80"
+          "word_2": "$0C80",
+          "control_window_descriptor": "$C223E0"
         },
         {
           "source": "$C42BDB",
           "header": "$34",
           "word_1": "$04A0",
-          "word_2": "$09E0"
+          "word_2": "$09E0",
+          "control_window_descriptor": "$C22598"
         },
         {
           "source": "$C42BE1",
           "header": "$1F",
           "word_1": "$03D2",
-          "word_2": "$0B64"
+          "word_2": "$0B64",
+          "control_window_descriptor": "$C223F4"
         },
         {
           "source": "$C42BE7",
           "header": "$1F",
           "word_1": "$0327",
-          "word_2": "$0CA6"
+          "word_2": "$0CA6",
+          "control_window_descriptor": "$C223F4"
         },
         {
           "source": "$C42BED",
           "header": "$1D",
           "word_1": "$025E",
-          "word_2": "$0E21"
+          "word_2": "$0E21",
+          "control_window_descriptor": "$C223CC"
         },
         {
           "source": "$C42BF3",
           "header": "$1C",
           "word_1": "$04AA",
-          "word_2": "$0ACE"
+          "word_2": "$0ACE",
+          "control_window_descriptor": "$C223B8"
         },
         {
           "source": "$C42BF9",
           "header": "$1F",
           "word_1": "$03D8",
-          "word_2": "$0C5A"
+          "word_2": "$0C5A",
+          "control_window_descriptor": "$C223F4"
         },
         {
           "source": "$C42BFF",
           "header": "$36",
           "word_1": "$030F",
-          "word_2": "$0DD4"
+          "word_2": "$0DD4",
+          "control_window_descriptor": "$C225C0"
         },
         {
           "source": "$C42C05",
           "header": "$37",
           "word_1": "$0090",
-          "word_2": "$0B35"
+          "word_2": "$0B35",
+          "control_window_descriptor": "$C225D4"
         },
         {
           "source": "$C42C0B",
           "header": "$1B",
           "word_1": "$0244",
-          "word_2": "$0C1C"
+          "word_2": "$0C1C",
+          "control_window_descriptor": "$C223A4"
         },
         {
           "source": "$C42C11",
           "header": "$32",
           "word_1": "$03BF",
-          "word_2": "$0CE5"
+          "word_2": "$0CE5",
+          "control_window_descriptor": "$C22570"
         },
         {
           "source": "$C42C17",
           "header": "$1B",
           "word_1": "$0538",
-          "word_2": "$0DAD"
+          "word_2": "$0DAD",
+          "control_window_descriptor": "$C223A4"
         },
         {
           "source": "$C42C1D",
           "header": "$32",
           "word_1": "$0240",
-          "word_2": "$0B92"
+          "word_2": "$0B92",
+          "control_window_descriptor": "$C22570"
         },
         {
           "source": "$C42C23",
           "header": "$32",
           "word_1": "$0386",
-          "word_2": "$0C3F"
+          "word_2": "$0C3F",
+          "control_window_descriptor": "$C22570"
         },
         {
           "source": "$C42C29",
           "header": "$32",
           "word_1": "$04C8",
-          "word_2": "$0CEA"
+          "word_2": "$0CEA",
+          "control_window_descriptor": "$C22570"
         },
         {
           "source": "$C42C2F",
           "header": "$35",
           "word_1": "$0650",
-          "word_2": "$0DBA"
+          "word_2": "$0DBA",
+          "control_window_descriptor": "$C225AC"
         }
       ],
       "selector_cells": [

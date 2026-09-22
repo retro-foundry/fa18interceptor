@@ -14,7 +14,7 @@ def address(value: int) -> str:
     return f"${value:06X}"
 
 
-def parse_stream(slow: bytes, start: int) -> list[dict]:
+def parse_stream(slow: bytes, start: int, descriptors: dict[str, str]) -> list[dict]:
     # `$C1D442` consumes the stream's leading selector/control byte before
     # `$C1D488` reaches its first six-byte template record.  The observed
     # `$C42646 -> $C42647` and `$C42BD4 -> $C42BD5` pairs establish this
@@ -28,14 +28,20 @@ def parse_stream(slow: bytes, start: int) -> list[dict]:
             return records
         if offset + 6 > len(slow):
             raise ValueError(f"unterminated stream at {address(start)}")
-        records.append({"source": address(cursor), "header": f"${header:02X}",
-                        "word_1": f"${int.from_bytes(slow[offset + 1:offset + 3], 'big'):04X}",
-                        "word_2": f"${int.from_bytes(slow[offset + 3:offset + 5], 'big'):04X}"})
+        header_text = f"${header:02X}"
+        record = {"source": address(cursor), "header": header_text,
+                  "word_1": f"${int.from_bytes(slow[offset + 1:offset + 3], 'big'):04X}",
+                  "word_2": f"${int.from_bytes(slow[offset + 3:offset + 5], 'big'):04X}"}
+        if header_text in descriptors:
+            record["control_window_descriptor"] = descriptors[header_text]
+        records.append(record)
         cursor += 6
 
 
 def markdown(streams: list[dict], cells: list[dict]) -> str:
     total = sum(len(stream["records"]) for stream in streams)
+    descriptor_records = sum("control_window_descriptor" in record
+                             for stream in streams for record in stream["records"])
     lines = [
         "# Immutable templates referenced by the selector lattice",
         "",
@@ -48,6 +54,11 @@ def markdown(streams: list[dict], cells: list[dict]) -> str:
         f"The 32×32 lattice reaches {len(streams)} distinct static streams and {total} non-terminator",
         "static records. The JSON carries every record plus the selector-bin cells that",
         "reference its stream; a zero-record stream is an observed immediate `$FF` terminator.",
+        "",
+        f"{descriptor_records} of those records have a descriptor reached in the same",
+        "origin-control trace and are annotated in JSON. This is a control-window association",
+        "only: the separate refresh-window comparison proves that a reused static source can",
+        "select a different descriptor in another scene context.",
         "",
         "| Static stream | records | selector-bin cells |",
         "| --- | ---: | ---: |",
@@ -75,15 +86,26 @@ def main() -> None:
     args = parser.parse_args()
     lattice = json.loads((ROOT / "analysis/data/terrain_template_selector_lattice.json").read_text(encoding="utf-8"))
     slow = (ROOT / "build/run033_origin_control_trace/slow.bin").read_bytes()
+    control = json.loads((ROOT / "analysis/data/workspace_template_copies_origin_control.json").read_text(encoding="utf-8"))
+    descriptors: dict[str, str] = {}
+    for copy in control["copies"]:
+        header, descriptor = copy["source_header_byte"], copy["runtime_descriptor"]
+        if descriptor is None:
+            continue
+        prior = descriptors.setdefault(header, descriptor)
+        if prior != descriptor:
+            raise AssertionError(f"control header {header} reaches more than one descriptor")
     refs: dict[str, list[list[int]]] = {}
     for cell in lattice["cells"]:
         for stream in cell["unique_streams"]:
             refs.setdefault(stream, []).append([cell["group_bin"], cell["row_bin"]])
-    streams = [{"stream": stream, "records": parse_stream(slow, int(stream[1:], 16)),
+    streams = [{"stream": stream, "records": parse_stream(slow, int(stream[1:], 16), descriptors),
                 "selector_cells": refs[stream]}
                for stream in sorted(refs)]
     payload = {"classification": "bounded_selector_lattice_static_templates_not_world_mesh",
                "lattice": "analysis/data/terrain_template_selector_lattice.json",
+               "descriptor_authority": "analysis/data/workspace_template_copies_origin_control.json",
+               "control_window_header_descriptors": descriptors,
                "streams": streams}
     args.output_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     args.output_markdown.write_text(markdown(streams, lattice["cells"]), encoding="utf-8")
