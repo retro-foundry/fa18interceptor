@@ -1,0 +1,1211 @@
+{
+  "scope": "segments 41-50 adjacent to verified scene-table placement",
+  "policy": "Candidate table evidence is not a code-to-data reclassification.",
+  "rows": [
+    {
+      "segment": 41,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 2832,
+      "runtime_status": "verified",
+      "runtime_start": "$C34A50",
+      "static_incoming_relocation_count": 7,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$5C",
+          "runtime_extension_address": "$C220A4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$54",
+          "runtime_extension_address": "$C2209C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$58",
+          "runtime_extension_address": "$C220A0"
+        },
+        {
+          "source_segment": 41,
+          "payload_offset": "$A9A",
+          "runtime_extension_address": "$C354EA"
+        },
+        {
+          "source_segment": 41,
+          "payload_offset": "$A96",
+          "runtime_extension_address": "$C354E6"
+        },
+        {
+          "source_segment": 41,
+          "payload_offset": "$A92",
+          "runtime_extension_address": "$C354E2"
+        },
+        {
+          "source_segment": 41,
+          "payload_offset": "$590",
+          "runtime_extension_address": "$C34FE0"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 3,
+        "41": 4
+      },
+      "segment16_pointer_relocation_site_count": 0,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 42,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 3224,
+      "runtime_status": "verified",
+      "runtime_start": "$C35568",
+      "static_incoming_relocation_count": 21,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$478",
+          "runtime_extension_address": "$C224C0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$47C",
+          "runtime_extension_address": "$C224C4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$480",
+          "runtime_extension_address": "$C224C8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$464",
+          "runtime_extension_address": "$C224AC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$468",
+          "runtime_extension_address": "$C224B0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$46C",
+          "runtime_extension_address": "$C224B4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$450",
+          "runtime_extension_address": "$C22498"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$454",
+          "runtime_extension_address": "$C2249C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$458",
+          "runtime_extension_address": "$C224A0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6D0",
+          "runtime_extension_address": "$C22718"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6D4",
+          "runtime_extension_address": "$C2271C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6D8",
+          "runtime_extension_address": "$C22720"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3D8",
+          "runtime_extension_address": "$C22420"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3DC",
+          "runtime_extension_address": "$C22424"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3E0",
+          "runtime_extension_address": "$C22428"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3C4",
+          "runtime_extension_address": "$C2240C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3C8",
+          "runtime_extension_address": "$C22410"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3CC",
+          "runtime_extension_address": "$C22414"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$518",
+          "runtime_extension_address": "$C22560"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$51C",
+          "runtime_extension_address": "$C22564"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$520",
+          "runtime_extension_address": "$C22568"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 21
+      },
+      "segment16_pointer_relocation_site_count": 21,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 43,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 2068,
+      "runtime_status": "verified",
+      "runtime_start": "$C36208",
+      "static_incoming_relocation_count": 15,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$43C",
+          "runtime_extension_address": "$C22484"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$440",
+          "runtime_extension_address": "$C22488"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$444",
+          "runtime_extension_address": "$C2248C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$428",
+          "runtime_extension_address": "$C22470"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$42C",
+          "runtime_extension_address": "$C22474"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$430",
+          "runtime_extension_address": "$C22478"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3EC",
+          "runtime_extension_address": "$C22434"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3F0",
+          "runtime_extension_address": "$C22438"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3F4",
+          "runtime_extension_address": "$C2243C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6E4",
+          "runtime_extension_address": "$C2272C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6E8",
+          "runtime_extension_address": "$C22730"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6EC",
+          "runtime_extension_address": "$C22734"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$540",
+          "runtime_extension_address": "$C22588"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$544",
+          "runtime_extension_address": "$C2258C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$548",
+          "runtime_extension_address": "$C22590"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 15
+      },
+      "segment16_pointer_relocation_site_count": 15,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 44,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 2024,
+      "runtime_status": "verified",
+      "runtime_start": "$C36A28",
+      "static_incoming_relocation_count": 6,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$414",
+          "runtime_extension_address": "$C2245C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$418",
+          "runtime_extension_address": "$C22460"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$41C",
+          "runtime_extension_address": "$C22464"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$400",
+          "runtime_extension_address": "$C22448"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$404",
+          "runtime_extension_address": "$C2244C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$408",
+          "runtime_extension_address": "$C22450"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 6
+      },
+      "segment16_pointer_relocation_site_count": 6,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 45,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 724,
+      "runtime_status": "verified",
+      "runtime_start": "$C08718",
+      "static_incoming_relocation_count": 28,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$3A8",
+          "runtime_extension_address": "$C223F0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6A8",
+          "runtime_extension_address": "$C226F0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6AC",
+          "runtime_extension_address": "$C226F4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$6B0",
+          "runtime_extension_address": "$C226F8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$680",
+          "runtime_extension_address": "$C226C8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$684",
+          "runtime_extension_address": "$C226CC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$688",
+          "runtime_extension_address": "$C226D0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$66C",
+          "runtime_extension_address": "$C226B4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$670",
+          "runtime_extension_address": "$C226B8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$674",
+          "runtime_extension_address": "$C226BC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$694",
+          "runtime_extension_address": "$C226DC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$698",
+          "runtime_extension_address": "$C226E0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$69C",
+          "runtime_extension_address": "$C226E4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$784",
+          "runtime_extension_address": "$C227CC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$788",
+          "runtime_extension_address": "$C227D0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$78C",
+          "runtime_extension_address": "$C227D4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$360",
+          "runtime_extension_address": "$C223A8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$364",
+          "runtime_extension_address": "$C223AC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$368",
+          "runtime_extension_address": "$C223B0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$52C",
+          "runtime_extension_address": "$C22574"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$530",
+          "runtime_extension_address": "$C22578"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$534",
+          "runtime_extension_address": "$C2257C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3B0",
+          "runtime_extension_address": "$C223F8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3B4",
+          "runtime_extension_address": "$C223FC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3B8",
+          "runtime_extension_address": "$C22400"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$39C",
+          "runtime_extension_address": "$C223E4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3A0",
+          "runtime_extension_address": "$C223E8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$3A4",
+          "runtime_extension_address": "$C223EC"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 28
+      },
+      "segment16_pointer_relocation_site_count": 28,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 46,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 1120,
+      "runtime_status": "verified",
+      "runtime_start": "$C37218",
+      "static_incoming_relocation_count": 71,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$568",
+          "runtime_extension_address": "$C225B0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$56C",
+          "runtime_extension_address": "$C225B4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$570",
+          "runtime_extension_address": "$C225B8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$4B4",
+          "runtime_extension_address": "$C224FC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$4B8",
+          "runtime_extension_address": "$C22500"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$4BC",
+          "runtime_extension_address": "$C22504"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$554",
+          "runtime_extension_address": "$C2259C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$558",
+          "runtime_extension_address": "$C225A0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$55C",
+          "runtime_extension_address": "$C225A4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$374",
+          "runtime_extension_address": "$C223BC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$378",
+          "runtime_extension_address": "$C223C0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$37C",
+          "runtime_extension_address": "$C223C4"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$1A0",
+          "runtime_extension_address": "$C37820"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$184",
+          "runtime_extension_address": "$C37804"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$192",
+          "runtime_extension_address": "$C37812"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$176",
+          "runtime_extension_address": "$C377F6"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$14",
+          "runtime_extension_address": "$C37694"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$40",
+          "runtime_extension_address": "$C376C0"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$1E8",
+          "runtime_extension_address": "$C37868"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$17E",
+          "runtime_extension_address": "$C377FE"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$19A",
+          "runtime_extension_address": "$C3781A"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$2CE",
+          "runtime_extension_address": "$C3794E"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$170",
+          "runtime_extension_address": "$C377F0"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$18C",
+          "runtime_extension_address": "$C3780C"
+        },
+        {
+          "source_segment": 47,
+          "payload_offset": "$2C8",
+          "runtime_extension_address": "$C37948"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$190",
+          "runtime_extension_address": "$C0DCE0"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$174",
+          "runtime_extension_address": "$C0DCC4"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$182",
+          "runtime_extension_address": "$C0DCD2"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$166",
+          "runtime_extension_address": "$C0DCB6"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$14",
+          "runtime_extension_address": "$C0DB64"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$40",
+          "runtime_extension_address": "$C0DB90"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$16E",
+          "runtime_extension_address": "$C0DCBE"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$18A",
+          "runtime_extension_address": "$C0DCDA"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$160",
+          "runtime_extension_address": "$C0DCB0"
+        },
+        {
+          "source_segment": 48,
+          "payload_offset": "$17C",
+          "runtime_extension_address": "$C0DCCC"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$194",
+          "runtime_extension_address": "$C37B24"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$344",
+          "runtime_extension_address": "$C37CD4"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$178",
+          "runtime_extension_address": "$C37B08"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$328",
+          "runtime_extension_address": "$C37CB8"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$186",
+          "runtime_extension_address": "$C37B16"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$336",
+          "runtime_extension_address": "$C37CC6"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$16A",
+          "runtime_extension_address": "$C37AFA"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$31A",
+          "runtime_extension_address": "$C37CAA"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$18E",
+          "runtime_extension_address": "$C37B1E"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$322",
+          "runtime_extension_address": "$C37CB2"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$180",
+          "runtime_extension_address": "$C37B10"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$314",
+          "runtime_extension_address": "$C37CA4"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$14",
+          "runtime_extension_address": "$C379A4"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$40",
+          "runtime_extension_address": "$C379D0"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$1D0",
+          "runtime_extension_address": "$C37B60"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$1FC",
+          "runtime_extension_address": "$C37B8C"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$172",
+          "runtime_extension_address": "$C37B02"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$33E",
+          "runtime_extension_address": "$C37CCE"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$164",
+          "runtime_extension_address": "$C37AF4"
+        },
+        {
+          "source_segment": 49,
+          "payload_offset": "$330",
+          "runtime_extension_address": "$C37CC0"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$40C",
+          "runtime_extension_address": "$C3838C"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$3F0",
+          "runtime_extension_address": "$C38370"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$3FE",
+          "runtime_extension_address": "$C3837E"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$3E2",
+          "runtime_extension_address": "$C38362"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$14",
+          "runtime_extension_address": "$C37F94"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$16C",
+          "runtime_extension_address": "$C380EC"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$290",
+          "runtime_extension_address": "$C38210"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$2BC",
+          "runtime_extension_address": "$C3823C"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$124",
+          "runtime_extension_address": "$C380A4"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$264",
+          "runtime_extension_address": "$C381E4"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$3EA",
+          "runtime_extension_address": "$C3836A"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$406",
+          "runtime_extension_address": "$C38386"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$11C",
+          "runtime_extension_address": "$C3809C"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$25C",
+          "runtime_extension_address": "$C381DC"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$3DC",
+          "runtime_extension_address": "$C3835C"
+        },
+        {
+          "source_segment": 50,
+          "payload_offset": "$3F8",
+          "runtime_extension_address": "$C38378"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 12,
+        "47": 13,
+        "48": 10,
+        "49": 20,
+        "50": 16
+      },
+      "segment16_pointer_relocation_site_count": 12,
+      "cross_scene_incoming_relocation_counts": {
+        "47": 13,
+        "48": 10,
+        "49": 20,
+        "50": 16
+      },
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 47,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 772,
+      "runtime_status": "verified",
+      "runtime_start": "$C37680",
+      "static_incoming_relocation_count": 9,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$798",
+          "runtime_extension_address": "$C227E0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$79C",
+          "runtime_extension_address": "$C227E4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$7A0",
+          "runtime_extension_address": "$C227E8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$590",
+          "runtime_extension_address": "$C225D8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$594",
+          "runtime_extension_address": "$C225DC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$598",
+          "runtime_extension_address": "$C225E0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$4A0",
+          "runtime_extension_address": "$C224E8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$4A4",
+          "runtime_extension_address": "$C224EC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$4A8",
+          "runtime_extension_address": "$C224F0"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 9
+      },
+      "segment16_pointer_relocation_site_count": 9,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 48,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 608,
+      "runtime_status": "verified",
+      "runtime_start": "$C0DB50",
+      "static_incoming_relocation_count": 10,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$77C",
+          "runtime_extension_address": "$C227C4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$75C",
+          "runtime_extension_address": "$C227A4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$760",
+          "runtime_extension_address": "$C227A8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$764",
+          "runtime_extension_address": "$C227AC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$748",
+          "runtime_extension_address": "$C22790"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$74C",
+          "runtime_extension_address": "$C22794"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$750",
+          "runtime_extension_address": "$C22798"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$770",
+          "runtime_extension_address": "$C227B8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$774",
+          "runtime_extension_address": "$C227BC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$778",
+          "runtime_extension_address": "$C227C0"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 10
+      },
+      "segment16_pointer_relocation_site_count": 10,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 49,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 1512,
+      "runtime_status": "verified",
+      "runtime_start": "$C37990",
+      "static_incoming_relocation_count": 26,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$5C4",
+          "runtime_extension_address": "$C2260C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5B0",
+          "runtime_extension_address": "$C225F8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$658",
+          "runtime_extension_address": "$C226A0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$65C",
+          "runtime_extension_address": "$C226A4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$660",
+          "runtime_extension_address": "$C226A8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$644",
+          "runtime_extension_address": "$C2268C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$648",
+          "runtime_extension_address": "$C22690"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$64C",
+          "runtime_extension_address": "$C22694"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$630",
+          "runtime_extension_address": "$C22678"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$634",
+          "runtime_extension_address": "$C2267C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$638",
+          "runtime_extension_address": "$C22680"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$61C",
+          "runtime_extension_address": "$C22664"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$620",
+          "runtime_extension_address": "$C22668"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$624",
+          "runtime_extension_address": "$C2266C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$608",
+          "runtime_extension_address": "$C22650"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$60C",
+          "runtime_extension_address": "$C22654"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$610",
+          "runtime_extension_address": "$C22658"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5F4",
+          "runtime_extension_address": "$C2263C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5F8",
+          "runtime_extension_address": "$C22640"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5FC",
+          "runtime_extension_address": "$C22644"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5B8",
+          "runtime_extension_address": "$C22600"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5BC",
+          "runtime_extension_address": "$C22604"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5C0",
+          "runtime_extension_address": "$C22608"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5A4",
+          "runtime_extension_address": "$C225EC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5A8",
+          "runtime_extension_address": "$C225F0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5AC",
+          "runtime_extension_address": "$C225F4"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 26
+      },
+      "segment16_pointer_relocation_site_count": 26,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    },
+    {
+      "segment": 50,
+      "original_hunk_kind": "CODE",
+      "size_bytes": 1124,
+      "runtime_status": "verified",
+      "runtime_start": "$C37F80",
+      "static_incoming_relocation_count": 12,
+      "incoming_relocation_sites": [
+        {
+          "source_segment": 16,
+          "payload_offset": "$5E0",
+          "runtime_extension_address": "$C22628"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5E4",
+          "runtime_extension_address": "$C2262C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5E8",
+          "runtime_extension_address": "$C22630"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5CC",
+          "runtime_extension_address": "$C22614"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5D0",
+          "runtime_extension_address": "$C22618"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$5D4",
+          "runtime_extension_address": "$C2261C"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$57C",
+          "runtime_extension_address": "$C225C4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$580",
+          "runtime_extension_address": "$C225C8"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$584",
+          "runtime_extension_address": "$C225CC"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$388",
+          "runtime_extension_address": "$C223D0"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$38C",
+          "runtime_extension_address": "$C223D4"
+        },
+        {
+          "source_segment": 16,
+          "payload_offset": "$390",
+          "runtime_extension_address": "$C223D8"
+        }
+      ],
+      "incoming_source_counts": {
+        "16": 12
+      },
+      "segment16_pointer_relocation_site_count": 12,
+      "cross_scene_incoming_relocation_counts": {},
+      "classification": "candidate_scene_table_hunk",
+      "qualification": "Original CODE kind retained: relocation linkage without execution or decoded consumer semantics does not prove data."
+    }
+  ]
+}

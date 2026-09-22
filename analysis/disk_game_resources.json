@@ -1,0 +1,143 @@
+{
+  "authority_disk": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\local\\media\\fa18.adf",
+  "authority_disk_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "scope": "game-owned executable, graphics, text, configuration, and icon files; excludes AmigaOS support tree",
+  "resources": [
+    {
+      "adf_path": "F-18 Interceptor",
+      "classification": "hunk_executable",
+      "size_bytes": 331232,
+      "sha256": "d7301e20958548f9b5f1ba744f8ff91fef476306c220eb886e7c90bac2802ffa"
+    },
+    {
+      "adf_path": "F-18 Interceptor.info",
+      "classification": "workbench_icon_container",
+      "size_bytes": 7756,
+      "sha256": "e2e60b3ec2d527a768746ba03ae5d9354d26acd14917d263b929fbafbd482e5f",
+      "format": "Amiga DiskObject",
+      "format_magic": "E310",
+      "format_version": 1,
+      "separation": "Workbench desktop icon container; not one of the game's pix/ ILBM resources and not evidence for a game renderer input."
+    },
+    {
+      "adf_path": "config",
+      "classification": "game_configuration_data",
+      "size_bytes": 78,
+      "sha256": "f268dc8e925a020dadce6bae12b6158fed9020ec6d82729bbe816a0cd7d3d063"
+    },
+    {
+      "adf_path": "pix/frnt5",
+      "classification": "ILBM_graphics",
+      "size_bytes": 988,
+      "sha256": "7cf5300d75a10f0f7727506a91f2eb46968a625fdbbc9f13e13c88b26a52d012"
+    },
+    {
+      "adf_path": "pix/inst5",
+      "classification": "ILBM_graphics",
+      "size_bytes": 7230,
+      "sha256": "870329e081934311588fe90d28897a82c775a39e22f6f4525f163502a008889c"
+    },
+    {
+      "adf_path": "pix/splsh",
+      "classification": "ILBM_graphics",
+      "size_bytes": 23224,
+      "sha256": "d64e541d3e91808dd10a9e934216f1f28601f7e2c7c7a8db8b9d4845a47e1c70"
+    },
+    {
+      "adf_path": "text/text201",
+      "classification": "text_resource",
+      "size_bytes": 568,
+      "sha256": "f1ea05f80960ff2d7006fd6210f51dde104c78d1f10c4ecbb2776687e931f47f"
+    },
+    {
+      "adf_path": "text/textcpt",
+      "classification": "text_resource",
+      "size_bytes": 13202,
+      "sha256": "ca7a3d917c8c4a7b9145f8c98bcbee3741127a04470c481eb586f1d94e668ad7"
+    },
+    {
+      "adf_path": "text/textctl",
+      "classification": "text_resource",
+      "size_bytes": 14704,
+      "sha256": "0b7b6fdcf833113fc2ca02a89263a23b7eb890f414bb724414a15f143f5c2003"
+    },
+    {
+      "adf_path": "text/textegn",
+      "classification": "text_resource",
+      "size_bytes": 13818,
+      "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0"
+    },
+    {
+      "adf_path": "text/textegn2",
+      "classification": "text_resource",
+      "size_bytes": 7818,
+      "sha256": "4cbd5a5cd77d55290916afe8b6924f21f5c147e906e39052106fd346844f3fe8"
+    },
+    {
+      "adf_path": "text/textger",
+      "classification": "text_resource",
+      "size_bytes": 4124,
+      "sha256": "ab4352391a8f282bc93e9a6b1ae267e27d253b545c4e5daab99992484d7166b8"
+    },
+    {
+      "adf_path": "text/texti0a",
+      "classification": "text_resource",
+      "size_bytes": 2044,
+      "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565"
+    },
+    {
+      "adf_path": "text/texti0b",
+      "classification": "text_resource",
+      "size_bytes": 2012,
+      "sha256": "775bc74d2647b2ea8445ece027d199d926b0b484f2be89747aaf5241cc93816b"
+    },
+    {
+      "adf_path": "text/texti1",
+      "classification": "text_resource",
+      "size_bytes": 32770,
+      "sha256": "4cb22150b61d37935cb3a0c7ad0688b3a82fbc2cd59ffe143fa4e24290223a1e"
+    },
+    {
+      "adf_path": "text/texti2",
+      "classification": "text_resource",
+      "size_bytes": 32786,
+      "sha256": "9b90b44e6b185554f19b33cc3a6d60f34f4d984578f978d92b7a10c10a89f6a2"
+    },
+    {
+      "adf_path": "text/texti3",
+      "classification": "text_resource",
+      "size_bytes": 32914,
+      "sha256": "7e1cb735642c0f75c3fdc35625e05fe4590ed05539241f686f20e161f4126777"
+    },
+    {
+      "adf_path": "text/texti4",
+      "classification": "text_resource",
+      "size_bytes": 32720,
+      "sha256": "bdbfc8d95be0694f900f693148170e800d62139a38db244566415a5dc074653c"
+    },
+    {
+      "adf_path": "text/texti5",
+      "classification": "text_resource",
+      "size_bytes": 65590,
+      "sha256": "8e97c62afa76e4ae66c6f2e631d2efb49e774f45213d996349d28f880aeb5b1b"
+    },
+    {
+      "adf_path": "text/textply",
+      "classification": "text_resource",
+      "size_bytes": 3676,
+      "sha256": "a4c8b947d4ba0efa71d260f17045b3496fffb340909c5df133136c40a44a6745"
+    },
+    {
+      "adf_path": "text/texttre",
+      "classification": "text_resource",
+      "size_bytes": 3462,
+      "sha256": "86e1ce8814647948d4a6b245a46eb0eab35bf73cf68bf2c6ad9041219e0c7c0a"
+    },
+    {
+      "adf_path": "text/textwnd",
+      "classification": "text_resource",
+      "size_bytes": 20000,
+      "sha256": "518bf5f40c1228eb6ea1b9b98ac00836682682ffad0d4d49e1c0ca5ab213111f"
+    }
+  ]
+}

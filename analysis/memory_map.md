@@ -155,11 +155,11 @@ unexecuted branches remain static evidence only. See
 | `$DFF0E0-$DFF0EE` | bitplane pointer registers | the frame-602 Copper list loads four pointers: `$00012BC0`, `$00014B00`, `$00016A40`, `$00018980`. |
 | `$DFF040` | word | `BLTCON0`; `$C304B2` writes `$0D0C` on the observed path, with static `$0D3C` alternative. |
 | `$DFF042` | word | `BLTCON1`; `$C304B2` writes `$0002`. |
-| `$DFF04C` | long | `BLTCPT`; `$C304B2` writes its `D1` pointer. |
-| `$DFF050` | long | `BLTBPT`; `$C304B2` writes its `D2` pointer. |
-| `$DFF054` | long | `BLTAPT`; `$C304B2` writes its `D1` pointer. |
+| `$DFF04C` | long | `BLTBPT`; `$C304B2` writes its `D1` pointer. |
+| `$DFF050` | long | `BLTAPT`; `$C304B2` writes its `D2` pointer. |
+| `$DFF054` | long | `BLTDPT`; `$C304B2` writes its `D1` pointer. |
 | `$DFF058` | word | `BLTSIZE`; `$C304B2` writes the word loaded from `$C4596E`. |
-| `$C45960` | long | renderer setup source pointer loaded into `D2` by `$C304B2`. |
+| `$C45960` | long | mutable renderer lane pointer loaded into `D2` by `$C304B2`; `$C303A4` repopulates it during the observed lane-state build. |
 | `$C4596E` | word | renderer setup size word loaded into `D0` by `$C304B2`. |
 
 These field names follow the OCS custom-register map. Their source-buffer and

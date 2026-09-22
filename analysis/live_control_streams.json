@@ -1,0 +1,567 @@
+{
+  "scope": "static control streams observed at C1F6F8",
+  "streams": [
+    {
+      "stream": "$C34A56",
+      "segment": 41,
+      "segment_range": "$C34A50-$C35560",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 17,
+          "first_words": [
+            "$FFFF",
+            "$0012",
+            "$0012",
+            "$46FC",
+            "$0006",
+            "$0100",
+            "$0012",
+            "$0000",
+            "$0034",
+            "$0044",
+            "$0030",
+            "$0024"
+          ],
+          "caller_a5": "$C36278"
+        }
+      ]
+    },
+    {
+      "stream": "$C34A5E",
+      "segment": 41,
+      "segment_range": "$C34A50-$C35560",
+      "observations": [
+        {
+          "capture": "external aircraft frame 7500",
+          "host_frame": 3,
+          "first_words": [
+            "$0006",
+            "$0100",
+            "$0012",
+            "$0000",
+            "$0034",
+            "$0044",
+            "$0030",
+            "$0024",
+            "$06FC",
+            "$0006",
+            "$0100",
+            "$0012"
+          ],
+          "caller_a5": "$C384CE"
+        },
+        {
+          "capture": "external aircraft frame 7500",
+          "host_frame": 18,
+          "first_words": [
+            "$0006",
+            "$0100",
+            "$0012",
+            "$0000",
+            "$0034",
+            "$0044",
+            "$0030",
+            "$0024",
+            "$06FC",
+            "$0006",
+            "$0100",
+            "$0012"
+          ],
+          "caller_a5": "$C384CE"
+        },
+        {
+          "capture": "Golden Gate frame 12000",
+          "host_frame": 4,
+          "first_words": [
+            "$0006",
+            "$0100",
+            "$0012",
+            "$0000",
+            "$0034",
+            "$0044",
+            "$0030",
+            "$0024",
+            "$06FC",
+            "$0006",
+            "$0100",
+            "$0012"
+          ],
+          "caller_a5": "$C355A0"
+        }
+      ]
+    },
+    {
+      "stream": "$C3556E",
+      "segment": 42,
+      "segment_range": "$C35568-$C36200",
+      "observations": [
+        {
+          "capture": "Golden Gate frame 12000",
+          "host_frame": 3,
+          "first_words": [
+            "$0006",
+            "$0800",
+            "$000E",
+            "$0032",
+            "$0000",
+            "$0800",
+            "$0036",
+            "$0034",
+            "$4140",
+            "$4430",
+            "$A258",
+            "$4200"
+          ],
+          "caller_a5": "$FFFFFEE0"
+        }
+      ]
+    },
+    {
+      "stream": "$C36038",
+      "segment": 42,
+      "segment_range": "$C35568-$C36200",
+      "observations": [
+        {
+          "capture": "Golden Gate frame 12000",
+          "host_frame": 22,
+          "first_words": [
+            "$A102",
+            "$8034",
+            "$0002",
+            "$0006",
+            "$0012",
+            "$001E",
+            "$002A",
+            "$0036",
+            "$0042",
+            "$004E",
+            "$005A",
+            "$0066"
+          ],
+          "caller_a5": "$FFFFFFBB"
+        }
+      ]
+    },
+    {
+      "stream": "$C36210",
+      "segment": 43,
+      "segment_range": "$C36208-$C36A1C",
+      "observations": [
+        {
+          "capture": "external aircraft frame 7500",
+          "host_frame": 12,
+          "first_words": [
+            "$A02A",
+            "$E004",
+            "$A020",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0000",
+            "$0300",
+            "$1000",
+            "$00AC",
+            "$EB80",
+            "$F500"
+          ],
+          "caller_a5": "$FFFFFE04"
+        }
+      ]
+    },
+    {
+      "stream": "$C36244",
+      "segment": 43,
+      "segment_range": "$C36208-$C36A1C",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 12,
+          "first_words": [
+            "$0000",
+            "$2000",
+            "$016A",
+            "$00AC",
+            "$FE96",
+            "$024C",
+            "$0000",
+            "$024C",
+            "$001A",
+            "$0054",
+            "$0000",
+            "$2000"
+          ],
+          "caller_a5": "$FFFFFEA2"
+        }
+      ]
+    },
+    {
+      "stream": "$C36276",
+      "segment": 43,
+      "segment_range": "$C36208-$C36A1C",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 15,
+          "first_words": [
+            "$A3F4",
+            "$4150",
+            "$416A",
+            "$A444",
+            "$4210",
+            "$41A4",
+            "$A478",
+            "$4600",
+            "$21A4",
+            "$A494",
+            "$4800",
+            "$21C8"
+          ],
+          "caller_a5": "$FFFFFEA2"
+        }
+      ]
+    },
+    {
+      "stream": "$C3672A",
+      "segment": 43,
+      "segment_range": "$C36208-$C36A1C",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 6,
+          "first_words": [
+            "$A1E2",
+            "$FFFF",
+            "$A0E0",
+            "$A11E",
+            "$A15C",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0300",
+            "$FF4D",
+            "$00A0"
+          ],
+          "caller_a5": "$FFFFFF51"
+        },
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 26,
+          "first_words": [
+            "$A1E2",
+            "$FFFF",
+            "$A0E0",
+            "$A11E",
+            "$A15C",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0300",
+            "$FF4D",
+            "$00A0"
+          ],
+          "caller_a5": "$FFFFFF57"
+        }
+      ]
+    },
+    {
+      "stream": "$C36914",
+      "segment": 43,
+      "segment_range": "$C36208-$C36A1C",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 7,
+          "first_words": [
+            "$A144",
+            "$FFFF",
+            "$A092",
+            "$A0BE",
+            "$A0EA",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0100",
+            "$0008",
+            "$00A0"
+          ],
+          "caller_a5": "$FFFFFF51"
+        },
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 27,
+          "first_words": [
+            "$A144",
+            "$FFFF",
+            "$A092",
+            "$A0BE",
+            "$A0EA",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0100",
+            "$0008",
+            "$00A0"
+          ],
+          "caller_a5": "$FFFFFF57"
+        }
+      ]
+    },
+    {
+      "stream": "$C36A70",
+      "segment": 44,
+      "segment_range": "$C36A28-$C37210",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 8,
+          "first_words": [
+            "$A432",
+            "$A178",
+            "$A20E",
+            "$A2A4",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0700",
+            "$FE9F",
+            "$0000",
+            "$0079"
+          ],
+          "caller_a5": "$FFFFFEA2"
+        },
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 28,
+          "first_words": [
+            "$A432",
+            "$A178",
+            "$A20E",
+            "$A2A4",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0700",
+            "$FE9F",
+            "$0000",
+            "$0079"
+          ],
+          "caller_a5": "$FFFFFEAF"
+        }
+      ]
+    },
+    {
+      "stream": "$C36EB2",
+      "segment": 44,
+      "segment_range": "$C36A28-$C37210",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 5,
+          "first_words": [
+            "$A39C",
+            "$A14E",
+            "$A1CA",
+            "$A246",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0500",
+            "$FFDE",
+            "$0000",
+            "$FFC0"
+          ],
+          "caller_a5": "$FFFFFEA2"
+        },
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 25,
+          "first_words": [
+            "$A39C",
+            "$A14E",
+            "$A1CA",
+            "$A246",
+            "$FFFF",
+            "$00C0",
+            "$0180",
+            "$0008",
+            "$0500",
+            "$FFDE",
+            "$0000",
+            "$FFC0"
+          ],
+          "caller_a5": "$FFFFFEAF"
+        }
+      ]
+    },
+    {
+      "stream": "$C37E60",
+      "segment": 49,
+      "segment_range": "$C37990-$C37F78",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 3,
+          "first_words": [
+            "$A048",
+            "$FFFF",
+            "$FFFF",
+            "$0000",
+            "$0200",
+            "$1206",
+            "$0200",
+            "$2DFA",
+            "$2512",
+            "$2C5E",
+            "$26FC",
+            "$0001"
+          ],
+          "caller_a5": "$000005"
+        },
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 23,
+          "first_words": [
+            "$A048",
+            "$FFFF",
+            "$FFFF",
+            "$0000",
+            "$0200",
+            "$1206",
+            "$0200",
+            "$2DFA",
+            "$2512",
+            "$2C5E",
+            "$26FC",
+            "$0001"
+          ],
+          "caller_a5": "$000004"
+        }
+      ]
+    },
+    {
+      "stream": "$C384CC",
+      "segment": 51,
+      "segment_range": "$C383F0-$C39160",
+      "observations": [
+        {
+          "capture": "external aircraft frame 7500",
+          "host_frame": 2,
+          "first_words": [
+            "$A666",
+            "$89AC",
+            "$A690",
+            "$C03C",
+            "$C05A",
+            "$C078",
+            "$C08A",
+            "$00E6",
+            "$04E2",
+            "$0284",
+            "$0290",
+            "$03C4"
+          ],
+          "caller_a5": "$C39260"
+        },
+        {
+          "capture": "external aircraft frame 7500",
+          "host_frame": 16,
+          "first_words": [
+            "$A666",
+            "$89AC",
+            "$A690",
+            "$C03C",
+            "$C05A",
+            "$C078",
+            "$C08A",
+            "$00E6",
+            "$04E2",
+            "$0284",
+            "$0290",
+            "$03C4"
+          ],
+          "caller_a5": "$C39260"
+        }
+      ]
+    },
+    {
+      "stream": "$C3925A",
+      "segment": 52,
+      "segment_range": "$C39168-$C39E3C",
+      "observations": [
+        {
+          "capture": "external aircraft frame 7500",
+          "host_frame": 14,
+          "first_words": [
+            "$80F4",
+            "$80FE",
+            "$C108",
+            "$5200",
+            "$0BE0",
+            "$A780",
+            "$FFFF",
+            "$00EA",
+            "$0400",
+            "$0036",
+            "$0042",
+            "$0006"
+          ],
+          "caller_a5": "$C3B6B0"
+        },
+        {
+          "capture": "Golden Gate frame 12000",
+          "host_frame": 16,
+          "first_words": [
+            "$80F4",
+            "$80FE",
+            "$C108",
+            "$5200",
+            "$0BE0",
+            "$A780",
+            "$FFFF",
+            "$00EA",
+            "$0400",
+            "$0036",
+            "$0042",
+            "$0006"
+          ],
+          "caller_a5": "$FFFFF5F4"
+        }
+      ]
+    },
+    {
+      "stream": "$C39264",
+      "segment": 52,
+      "segment_range": "$C39168-$C39E3C",
+      "observations": [
+        {
+          "capture": "later bridge frame 14500",
+          "host_frame": 10,
+          "first_words": [
+            "$A780",
+            "$FFFF",
+            "$00EA",
+            "$0400",
+            "$0036",
+            "$0042",
+            "$0006",
+            "$0000",
+            "$0078",
+            "$0066",
+            "$0066",
+            "$0074"
+          ],
+          "caller_a5": "$FFFFF192"
+        }
+      ]
+    }
+  ],
+  "qualification": "These are renderer-control entries, not vertex/model ownership claims. Dynamic C3Bxxx/C4BFxx entries are intentionally excluded."
+}

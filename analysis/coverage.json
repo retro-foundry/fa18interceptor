@@ -6,13 +6,13 @@
   "reconstructed_runtime_backed_bytes": 25164,
   "reconstructed_static_only_bytes": 15456,
   "confirmed_data_bytes": 59904,
-  "unclassified_bytes": 44672,
-  "resolved_code_bytes": 258392,
+  "unclassified_bytes": 60680,
+  "resolved_code_bytes": 274400,
   "all_code_bytes": 285976,
   "coverage_denominator": 226072,
   "coverage_of_observed_percent": 56.91,
   "coverage_of_instructions_percent": 17.97,
-  "game_exercised_percent": 17.11,
+  "game_exercised_percent": 16.11,
   "assembled_total_bytes": 40620,
   "overlapping_slice_pairs": []
 }

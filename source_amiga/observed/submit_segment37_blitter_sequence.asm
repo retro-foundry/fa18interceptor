@@ -13,7 +13,7 @@ CUSTOM_BLTALWM                   equ $46
 CUSTOM_BLTAMOD                   equ $64
 CUSTOM_BLTBMOD                   equ $66
 CUSTOM_BLTAPTH                   equ $50
-CUSTOM_BLTBPTH                   equ $54
+CUSTOM_BLTDPTH                   equ $54
 CUSTOM_BLTSIZE                   equ $58
 INITIAL_BLTCON0                  equ $09F0
 INITIAL_BLTSIZE                  equ $0014
@@ -60,6 +60,6 @@ submit_segment37_blitter_sequence:
                 move.w  d2,CUSTOM_BLTCON0(a0)
 .store:
                 move.l  d0,CUSTOM_BLTAPTH(a0)
-                move.l  d4,CUSTOM_BLTBPTH(a0)
+                move.l  d4,CUSTOM_BLTDPTH(a0)
                 move.w  d6,CUSTOM_BLTSIZE(a0)
                 rts

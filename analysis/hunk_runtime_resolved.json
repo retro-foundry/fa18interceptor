@@ -114,7 +114,7 @@
       "runtime_payload_base": 12722248,
       "bank": "slow",
       "size_bytes": 3116,
-      "non_relocated_byte_mismatches": 39
+      "non_relocated_byte_mismatches": 12
     },
     "17": {
       "status": "verified",
@@ -284,6 +284,76 @@
       "size_bytes": 6124,
       "non_relocated_byte_mismatches": 0
     },
+    "41": {
+      "status": "verified",
+      "runtime_payload_base": 12798544,
+      "bank": "slow",
+      "size_bytes": 2832,
+      "non_relocated_byte_mismatches": 0
+    },
+    "42": {
+      "status": "verified",
+      "runtime_payload_base": 12801384,
+      "bank": "slow",
+      "size_bytes": 3224,
+      "non_relocated_byte_mismatches": 0
+    },
+    "43": {
+      "status": "verified",
+      "runtime_payload_base": 12804616,
+      "bank": "slow",
+      "size_bytes": 2068,
+      "non_relocated_byte_mismatches": 0
+    },
+    "44": {
+      "status": "verified",
+      "runtime_payload_base": 12806696,
+      "bank": "slow",
+      "size_bytes": 2024,
+      "non_relocated_byte_mismatches": 0
+    },
+    "45": {
+      "status": "verified",
+      "runtime_payload_base": 12617496,
+      "bank": "slow",
+      "size_bytes": 724,
+      "non_relocated_byte_mismatches": 0
+    },
+    "46": {
+      "status": "verified",
+      "runtime_payload_base": 12808728,
+      "bank": "slow",
+      "size_bytes": 1120,
+      "non_relocated_byte_mismatches": 0
+    },
+    "47": {
+      "status": "verified",
+      "runtime_payload_base": 12809856,
+      "bank": "slow",
+      "size_bytes": 772,
+      "non_relocated_byte_mismatches": 0
+    },
+    "48": {
+      "status": "verified",
+      "runtime_payload_base": 12639056,
+      "bank": "slow",
+      "size_bytes": 608,
+      "non_relocated_byte_mismatches": 0
+    },
+    "49": {
+      "status": "verified",
+      "runtime_payload_base": 12810640,
+      "bank": "slow",
+      "size_bytes": 1512,
+      "non_relocated_byte_mismatches": 0
+    },
+    "50": {
+      "status": "verified",
+      "runtime_payload_base": 12812160,
+      "bank": "slow",
+      "size_bytes": 1124,
+      "non_relocated_byte_mismatches": 0
+    },
     "51": {
       "status": "verified",
       "runtime_payload_base": 12813296,
@@ -341,11 +411,11 @@
       "non_relocated_byte_mismatches": 0
     },
     "64": {
-      "status": "mutated_or_unmapped",
+      "status": "verified",
       "runtime_payload_base": 12840192,
       "bank": "slow",
       "size_bytes": 9256,
-      "non_relocated_byte_mismatches": 4
+      "non_relocated_byte_mismatches": 0
     },
     "65": {
       "status": "verified",
@@ -387,28 +457,28 @@
       "runtime_payload_base": 12867120,
       "bank": "slow",
       "size_bytes": 11604,
-      "non_relocated_byte_mismatches": 1390
+      "non_relocated_byte_mismatches": 481
     },
     "72": {
       "status": "mutated_or_unmapped",
       "runtime_payload_base": 12878736,
       "bank": "slow",
       "size_bytes": 25564,
-      "non_relocated_byte_mismatches": 2234
+      "non_relocated_byte_mismatches": 1000
     },
     "73": {
       "status": "mutated_or_unmapped",
       "runtime_payload_base": 12904312,
       "bank": "slow",
       "size_bytes": 5800,
-      "non_relocated_byte_mismatches": 1477
+      "non_relocated_byte_mismatches": 473
     },
     "74": {
       "status": "mutated_or_unmapped",
       "runtime_payload_base": 12910120,
       "bank": "slow",
       "size_bytes": 260,
-      "non_relocated_byte_mismatches": 24
+      "non_relocated_byte_mismatches": 25
     },
     "75": {
       "status": "verified",
@@ -824,5 +894,5 @@
     }
   },
   "conflicts": [],
-  "verified_count": 101
+  "verified_count": 112
 }

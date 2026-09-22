@@ -5,14 +5,14 @@
                 org     $C304B2
 
 BLIT_SIZE_WORD                 equ $C4596E
-BLIT_SOURCE_POINTER            equ $C45960
+BLIT_LANE_POINTER              equ $C45960
 CUSTOM_BASE                    equ $DFF000
 CUSTOM_DMACONR                 equ $002
 BLTCON0                        equ $040
 BLTCON1                        equ $042
-BLTCPT                         equ $04C
-BLTBPT                         equ $050
-BLTAPT                         equ $054
+BLTBPT                         equ $04C
+BLTAPT                         equ $050
+BLTDPT                         equ $054
 BLTSIZE                        equ $058
 BLITTER_BUSY_BIT               equ 6
 BLTCON0_MODE_A                 equ $0D0C
@@ -21,7 +21,7 @@ BLTCON1_LINE                  equ $0002
 
 setup_blitter_operation:
                 move.w  BLIT_SIZE_WORD.l,d0
-                move.l  BLIT_SOURCE_POINTER.l,d2
+                move.l  BLIT_LANE_POINTER.l,d2
                 move.l  d2,d1
                 lea     CUSTOM_BASE.l,a0
 .wait_for_blitter:
@@ -36,8 +36,8 @@ setup_blitter_operation:
                 move.w  #BLTCON0_MODE_B,BLTCON0(a0)
 .write_common_setup:
                 move.w  #BLTCON1_LINE,BLTCON1(a0)
-                move.l  d2,BLTBPT(a0)
-                move.l  d1,BLTCPT(a0)
-                move.l  d1,BLTAPT(a0)
+                move.l  d2,BLTAPT(a0)
+                move.l  d1,BLTBPT(a0)
+                move.l  d1,BLTDPT(a0)
                 move.w  d0,BLTSIZE(a0)
                 rts

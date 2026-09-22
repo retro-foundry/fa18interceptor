@@ -29,6 +29,12 @@ $C355A6 active control stream
 
 ## Proven links
 
+- The external-camera `$C3925A` trace now proves the same path at face-record
+  granularity: static offset record -> transformed triples -> orientation gate
+  -> clipped/projected polygon -> screen-pair blitter submission. See
+  `analysis/data/model_face_renderer_path.md`. This is the current model-draw
+  contract; it remains separate from immutable local-model extraction.
+
 - `$C35720` dispatches ten observed record formats in this frame; all ten
   handlers are reconstructed byte-exactly. See
   `analysis/data/c35720_golden_gate_control_dispatch_sequence.md`.
@@ -41,6 +47,10 @@ $C355A6 active control stream
 - A no-input renderer probe captured four triples becoming exact `$C4B390`
   pairs at `$C2FF48`; `$C301F6` then consumes the same list. See
   `analysis/data/run031_frame12000_polygon_projection_sample.md`.
+- A bounded 12-frame collector records 27 `$C2FF48` submissions. Two closed
+  polygons retain the verified Golden Gate stream continuation `$C355D8`; the
+  remaining submissions switch context and are not merged into bridge data.
+  See `analysis/data/run031_frame12000_polygon_submission_inventory.md`.
 
 ## Remaining boundary
 

@@ -1,0 +1,321 @@
+{
+  "authority_disk": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\local\\media\\fa18.adf",
+  "authority_disk_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "classification": "immutable_disk_graphics_assets",
+  "assets": [
+    {
+      "width": 288,
+      "height": 12,
+      "x": 0,
+      "y": 0,
+      "planes": 5,
+      "masking": 2,
+      "compression": 1,
+      "transparent_color": 6,
+      "pixel_aspect": [
+        10,
+        11
+      ],
+      "page_size": [
+        320,
+        200
+      ],
+      "palette_entries": 32,
+      "palette_rgb4_words": [
+        "$0000",
+        "$0800",
+        "$0888",
+        "$0111",
+        "$0151",
+        "$0447",
+        "$0036",
+        "$0444",
+        "$0555",
+        "$0030",
+        "$0666",
+        "$0D92",
+        "$0333",
+        "$0777",
+        "$0777",
+        "$0333",
+        "$0000",
+        "$0800",
+        "$0888",
+        "$0111",
+        "$0151",
+        "$0447",
+        "$0036",
+        "$0444",
+        "$0555",
+        "$0030",
+        "$0666",
+        "$0D92",
+        "$0333",
+        "$0777",
+        "$0777",
+        "$0333"
+      ],
+      "body_bytes": 824,
+      "chunks": [
+        {
+          "id": "BMHD",
+          "bytes": 20
+        },
+        {
+          "id": "CMAP",
+          "bytes": 96
+        },
+        {
+          "id": "GRAB",
+          "bytes": 4
+        },
+        {
+          "id": "BODY",
+          "bytes": 824
+        }
+      ],
+      "adf_path": "pix/frnt5",
+      "size_bytes": 988,
+      "sha256": "7cf5300d75a10f0f7727506a91f2eb46968a625fdbbc9f13e13c88b26a52d012",
+      "executable_path_string_file_offsets": [
+        "$D5E1"
+      ],
+      "hunk_data_locations": [
+        {
+          "segment": 1,
+          "kind": "DATA",
+          "payload_offset": "$8D",
+          "runtime_payload_base": "$C07F38"
+        }
+      ],
+      "baseline_runtime_path_string_addresses": [
+        "$C07FC5"
+      ],
+      "static_loader_result": {
+        "call": "$C0E59E",
+        "store": "$C0E5A6",
+        "slot": "$C1AB38"
+      },
+      "baseline_runtime_palette_addresses": [
+        "$C1AA9C"
+      ],
+      "static_full_path_references": [
+        {
+          "source_segment": 0,
+          "source_kind": "CODE",
+          "source_payload_offset": "$6EA",
+          "runtime_extension_address": "$C0E59A"
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "height": 55,
+      "x": 0,
+      "y": 0,
+      "planes": 5,
+      "masking": 2,
+      "compression": 1,
+      "transparent_color": 9,
+      "pixel_aspect": [
+        10,
+        11
+      ],
+      "page_size": [
+        320,
+        200
+      ],
+      "palette_entries": 32,
+      "palette_rgb4_words": [
+        "$0000",
+        "$0800",
+        "$0888",
+        "$0111",
+        "$0151",
+        "$0447",
+        "$0036",
+        "$0444",
+        "$0555",
+        "$0030",
+        "$0666",
+        "$0D92",
+        "$0333",
+        "$0777",
+        "$0777",
+        "$0333",
+        "$0000",
+        "$0800",
+        "$0888",
+        "$0111",
+        "$0151",
+        "$0447",
+        "$0036",
+        "$0444",
+        "$0555",
+        "$0030",
+        "$0666",
+        "$0D92",
+        "$0333",
+        "$0777",
+        "$0777",
+        "$0333"
+      ],
+      "body_bytes": 7065,
+      "chunks": [
+        {
+          "id": "BMHD",
+          "bytes": 20
+        },
+        {
+          "id": "CMAP",
+          "bytes": 96
+        },
+        {
+          "id": "GRAB",
+          "bytes": 4
+        },
+        {
+          "id": "BODY",
+          "bytes": 7065
+        }
+      ],
+      "adf_path": "pix/inst5",
+      "size_bytes": 7230,
+      "sha256": "870329e081934311588fe90d28897a82c775a39e22f6f4525f163502a008889c",
+      "executable_path_string_file_offsets": [
+        "$D5D3"
+      ],
+      "hunk_data_locations": [
+        {
+          "segment": 1,
+          "kind": "DATA",
+          "payload_offset": "$7F",
+          "runtime_payload_base": "$C07F38"
+        }
+      ],
+      "baseline_runtime_path_string_addresses": [
+        "$C07FB7"
+      ],
+      "static_loader_result": {
+        "call": "$C0E57E",
+        "store": "$C0E586",
+        "slot": "$C1AB08"
+      },
+      "baseline_runtime_palette_addresses": [
+        "$C1AA9C"
+      ],
+      "static_full_path_references": [
+        {
+          "source_segment": 0,
+          "source_kind": "CODE",
+          "source_payload_offset": "$6CA",
+          "runtime_extension_address": "$C0E57A"
+        }
+      ]
+    },
+    {
+      "width": 320,
+      "height": 200,
+      "x": 0,
+      "y": 0,
+      "planes": 5,
+      "masking": 2,
+      "compression": 1,
+      "transparent_color": 0,
+      "pixel_aspect": [
+        10,
+        11
+      ],
+      "page_size": [
+        320,
+        200
+      ],
+      "palette_entries": 32,
+      "palette_rgb4_words": [
+        "$0000",
+        "$023F",
+        "$046F",
+        "$045F",
+        "$045E",
+        "$0778",
+        "$034F",
+        "$047F",
+        "$07AF",
+        "$0667",
+        "$069F",
+        "$0556",
+        "$058F",
+        "$0AAB",
+        "$099A",
+        "$0DDE",
+        "$0889",
+        "$0CCD",
+        "$0334",
+        "$0FD6",
+        "$0CCE",
+        "$0BBC",
+        "$0FE9",
+        "$0FFD",
+        "$0540",
+        "$0651",
+        "$0764",
+        "$0875",
+        "$0986",
+        "$0BA7",
+        "$0F91",
+        "$0F40"
+      ],
+      "body_bytes": 23060,
+      "chunks": [
+        {
+          "id": "BMHD",
+          "bytes": 20
+        },
+        {
+          "id": "CMAP",
+          "bytes": 96
+        },
+        {
+          "id": "GRAB",
+          "bytes": 4
+        },
+        {
+          "id": "BODY",
+          "bytes": 23060
+        }
+      ],
+      "adf_path": "pix/splsh",
+      "size_bytes": 23224,
+      "sha256": "d64e541d3e91808dd10a9e934216f1f28601f7e2c7c7a8db8b9d4845a47e1c70",
+      "executable_path_string_file_offsets": [
+        "$D5C5"
+      ],
+      "hunk_data_locations": [
+        {
+          "segment": 1,
+          "kind": "DATA",
+          "payload_offset": "$71",
+          "runtime_payload_base": "$C07F38"
+        }
+      ],
+      "baseline_runtime_path_string_addresses": [
+        "$C07FA9"
+      ],
+      "static_loader_result": {
+        "call": "$C0E2EE",
+        "store": "$C0E2F6",
+        "slot": "$C1AADC"
+      },
+      "baseline_runtime_palette_addresses": [],
+      "static_full_path_references": [
+        {
+          "source_segment": 0,
+          "source_kind": "CODE",
+          "source_payload_offset": "$43A",
+          "runtime_extension_address": "$C0E2EA"
+        }
+      ]
+    }
+  ],
+  "extraction_command": "python scripts/inventory_disk_graphics.py --extract-dir <directory>"
+}

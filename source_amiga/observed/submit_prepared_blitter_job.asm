@@ -9,8 +9,8 @@ BLTCON1                 equ $042
 BLTAFWM                 equ $044
 BLTALWM                 equ $046
 BLTCPT                  equ $048
-BLTBPT                  equ $052
-BLTAPT                  equ $054
+BLTAPTL                 equ $052
+BLTDPT                  equ $054
 BLTSIZE                 equ $058
 BLTCMOD                 equ $060
 BLTBMOD                 equ $062
@@ -37,8 +37,8 @@ submit_prepared_blitter_job:
                 move.w  d5,BLTAMOD(a0)
                 move.w  #BLIT_MODULO,BLTDMOD(a0)
                 move.w  #BLIT_MODULO,BLTCMOD(a0)
-                move.w  d2,BLTBPT(a0)
-                move.l  d7,BLTAPT(a0)
+                move.w  d2,BLTAPTL(a0)
+                move.l  d7,BLTDPT(a0)
                 move.l  d7,BLTCPT(a0)
                 move.l  d0,BLTAFWM(a0)
                 move.w  d0,BLTBDAT(a0)

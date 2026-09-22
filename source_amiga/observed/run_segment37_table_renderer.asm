@@ -11,8 +11,8 @@ CUSTOM_BLTCON1                    equ $42
 CUSTOM_BLTAFWM                    equ $44
 CUSTOM_BLTALWM                    equ $46
 CUSTOM_BLTCPTH                    equ $48
-CUSTOM_BLTAPTH                    equ $4C
-CUSTOM_BLTBPTH                    equ $50
+CUSTOM_BLTBPTH                    equ $4C
+CUSTOM_BLTAPTH                    equ $50
 CUSTOM_BLTDPTH                    equ $54
 CUSTOM_BLTSIZE                    equ $58
 CUSTOM_BLTCMOD                    equ $60
@@ -82,8 +82,8 @@ segment37_table_renderer_next:
                 jsr     EXTERNAL_BLIT_HELPER.l
 segment37_table_renderer_store:
                 move.w  d2,$40(a0)
-                move.l  d0,CUSTOM_BLTBPTH(a0)
-                move.l  d3,CUSTOM_BLTAPTH(a0)
+                move.l  d0,CUSTOM_BLTAPTH(a0)
+                move.l  d3,CUSTOM_BLTBPTH(a0)
                 move.l  d4,CUSTOM_BLTCPTH(a0)
                 move.l  d4,CUSTOM_BLTDPTH(a0)
                 move.w  d6,CUSTOM_BLTSIZE(a0)

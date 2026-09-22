@@ -25,15 +25,23 @@ def main():
     parser.add_argument('--inventory', type=Path, required=True)
     parser.add_argument('--chip', type=Path, required=True)
     parser.add_argument('--slow', type=Path, required=True)
-    parser.add_argument('--seed', action='append', required=True,
+    parser.add_argument('--seed', action='append',
                         help='segment=runtime_payload_base, e.g. 36=0xc2f490')
+    parser.add_argument('--seed-file', type=Path,
+                        help='JSON manifest containing evidence-backed seed entries')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     inventory = json.loads(args.inventory.read_text())
     disk, chip, slow = args.executable.read_bytes(), args.chip.read_bytes(), args.slow.read_bytes()
     bases = {}
     queue = deque()
-    for seed in args.seed:
+    seed_values = list(args.seed or [])
+    if args.seed_file:
+        seed_values.extend(f"{row['segment']}={row['runtime_payload_base']}"
+                           for row in json.loads(args.seed_file.read_text())["seeds"])
+    if not seed_values:
+        parser.error('supply at least one --seed or --seed-file')
+    for seed in seed_values:
         segment, base = seed.split('=', 1)
         bases[int(segment)] = int(base, 0)
         queue.append(int(segment))

@@ -1,0 +1,374 @@
+{
+  "status": "pass",
+  "checks": [
+    {
+      "check": "disk ILBM set matches detailed graphics inventory",
+      "assets": [
+        "pix/frnt5",
+        "pix/inst5",
+        "pix/splsh"
+      ]
+    },
+    {
+      "check": "desktop icon remains outside game ILBM graphics",
+      "path": "F-18 Interceptor.info",
+      "format": "Amiga DiskObject"
+    },
+    {
+      "check": "all original DATA hunks retain their container classification",
+      "hunks": 32,
+      "bytes": 1500
+    },
+    {
+      "check": "all original BSS hunks retain their container classification",
+      "hunks": 27,
+      "bytes": 11512
+    },
+    {
+      "check": "runtime display state belongs to BSS",
+      "range": "$C1AA9C-$C1AB07",
+      "segment": 2
+    },
+    {
+      "check": "mutable geometry workspace remains separated from model inputs",
+      "range": "$C45630-$C48383",
+      "segment": 71
+    },
+    {
+      "check": "mutable geometry workspace remains separated from model inputs",
+      "range": "$C48390-$C4E76B",
+      "segment": 72
+    },
+    {
+      "check": "byte-stable scene-family candidates remain distinct from geometry workspaces",
+      "segments": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50
+      ],
+      "snapshot_comparisons": 5
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C2209C-$C220A7",
+      "segment": 16
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C223A8-$C227EB",
+      "segment": 16
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C33258-$C332B3",
+      "segment": 40
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C37EA0-$C37EA5",
+      "segment": 49
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C38B0A-$C38B1F",
+      "segment": 51
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C35584-$C35589",
+      "segment": 42
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C355D8-$C355DD",
+      "segment": 42
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C3925A-$C3925F",
+      "segment": 52
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C3751A-$C3752F",
+      "segment": 46
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C393C4-$C393D1",
+      "segment": 52
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C3985A-$C39883",
+      "segment": 52
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C39886-$C3988F",
+      "segment": 52
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C3989A-$C398A3",
+      "segment": 52
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C483BA-$C48455",
+      "segment": 72
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C34A56-$C34A6D",
+      "segment": 41
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C34A5E-$C34A75",
+      "segment": 41
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C3556E-$C35585",
+      "segment": 42
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C36038-$C3604F",
+      "segment": 42
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C36210-$C36227",
+      "segment": 43
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C36244-$C3625B",
+      "segment": 43
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C36276-$C3628D",
+      "segment": 43
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C3672A-$C36741",
+      "segment": 43
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C36914-$C3692B",
+      "segment": 43
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C36A70-$C36A87",
+      "segment": 44
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C36EB2-$C36EC9",
+      "segment": 44
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C37E60-$C37E77",
+      "segment": 49
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C384CC-$C384E3",
+      "segment": 51
+    },
+    {
+      "check": "inline data remains bounded inside CODE",
+      "range": "$C39264-$C3927B",
+      "segment": 52
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C34A56-$C34A6D",
+      "segment": 41
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C34A5E-$C34A75",
+      "segment": 41
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C3556E-$C35585",
+      "segment": 42
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C36038-$C3604F",
+      "segment": 42
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C36210-$C36227",
+      "segment": 43
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C36244-$C3625B",
+      "segment": 43
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C36276-$C3628D",
+      "segment": 43
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C3672A-$C36741",
+      "segment": 43
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C36914-$C3692B",
+      "segment": 43
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C36A70-$C36A87",
+      "segment": 44
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C36EB2-$C36EC9",
+      "segment": 44
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C37E60-$C37E77",
+      "segment": 49
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C384CC-$C384E3",
+      "segment": 51
+    },
+    {
+      "check": "live renderer control prefix is original static data inside CODE",
+      "range": "$C39264-$C3927B",
+      "segment": 52
+    },
+    {
+      "check": "projected edge list is static structured data inside CODE",
+      "range": "$C37EA0-$C37EA5",
+      "pairs": 1,
+      "snapshots": 5,
+      "segment": 49
+    },
+    {
+      "check": "projected edge list is static structured data inside CODE",
+      "range": "$C38B0A-$C38B1F",
+      "pairs": 5,
+      "snapshots": 5,
+      "segment": 51
+    },
+    {
+      "check": "projected edge list is static structured data inside CODE",
+      "range": "$C3751A-$C3752F",
+      "pairs": 5,
+      "snapshots": 5,
+      "segment": 46
+    },
+    {
+      "check": "projected edge list is static structured data inside CODE",
+      "range": "$C393C4-$C393D1",
+      "pairs": 3,
+      "snapshots": 5,
+      "segment": 52
+    },
+    {
+      "check": "projected edge list is static structured data inside CODE",
+      "range": "$C3985A-$C39883",
+      "pairs": 10,
+      "snapshots": 5,
+      "segment": 52
+    },
+    {
+      "check": "projected edge list is static structured data inside CODE",
+      "range": "$C39886-$C3988F",
+      "pairs": 2,
+      "snapshots": 5,
+      "segment": 52
+    },
+    {
+      "check": "projected edge list is static structured data inside CODE",
+      "range": "$C3989A-$C398A3",
+      "pairs": 2,
+      "snapshots": 5,
+      "segment": 52
+    },
+    {
+      "check": "scene pointer table has relocation triplets",
+      "range": "$C223A8-$C227EB",
+      "relocation_sites": 139,
+      "adjacent_triplets": 49
+    },
+    {
+      "check": "asset identifier DATA and loader reference CODE",
+      "asset": "pix/frnt5"
+    },
+    {
+      "check": "loader result slot belongs to BSS",
+      "asset": "pix/frnt5",
+      "slot": "$C1AB38",
+      "segment": 2
+    },
+    {
+      "check": "loader call and result store are byte-backed",
+      "asset": "pix/frnt5"
+    },
+    {
+      "check": "asset identifier DATA and loader reference CODE",
+      "asset": "pix/inst5"
+    },
+    {
+      "check": "loader result slot belongs to BSS",
+      "asset": "pix/inst5",
+      "slot": "$C1AB08",
+      "segment": 2
+    },
+    {
+      "check": "loader call and result store are byte-backed",
+      "asset": "pix/inst5"
+    },
+    {
+      "check": "asset identifier DATA and loader reference CODE",
+      "asset": "pix/splsh"
+    },
+    {
+      "check": "loader result slot belongs to BSS",
+      "asset": "pix/splsh",
+      "slot": "$C1AADC",
+      "segment": 2
+    },
+    {
+      "check": "loader call and result store are byte-backed",
+      "asset": "pix/splsh"
+    },
+    {
+      "check": "active display targets are in Chip RAM",
+      "capture": "attract frame 1800"
+    },
+    {
+      "check": "active display targets are in Chip RAM",
+      "capture": "run029 frame 993/994"
+    }
+  ],
+  "scope": "Hunk ownership, ILBM identifier/reference placement, and Chip-RAM display target ranges"
+}

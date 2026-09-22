@@ -5,6 +5,14 @@ identity is not yet user-confirmed for this frame.
 
 ## Evidence
 
+The six list bytes match original Hunk `CODE` segment 49 at payload offset
+`$510`. Its resulting runtime payload base is `$C37990`. Comparing the entire
+1,512-byte payload with `captures/baseline_menu/slow.bin` gives zero
+non-relocation mismatches; all 20 relocation sites consistently resolve their
+target segment 46 to `$C37218`. This is therefore a verified runtime placement
+of the enclosing CODE Hunk, while this six-byte range remains separately
+classified as inline data.
+
 The sealed run031 frame-14,500 checkpoint has a cockpit view with a visible
 bridge silhouette. In its following no-input invocation,
 `build/run031_frame14500_c1f6f8_probe/` reaches:

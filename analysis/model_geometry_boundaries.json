@@ -1,0 +1,520 @@
+{
+  "scope": "model-input versus transformed-geometry boundary",
+  "projection_consumer_workspace": {
+    "range": "$C48390-$C4E76B",
+    "segment": 72,
+    "classification": "mutable_geometry_working_table_not_immutable_model",
+    "consumer": "$C212B0 copies selected triples to $C4C592, then $C2EE4A projects them",
+    "writer": "$C21C2E writes midpoint-derived triples at selected C48390-record offsets +$1E and +$24",
+    "snapshot_comparisons": [
+      {
+        "capture": "baseline menu",
+        "path": "captures\\baseline_menu\\slow.bin",
+        "non_relocation_difference_bytes": 1000,
+        "captured_sha256": "9841b548a6587206eb7618f364856862f388166eb28c0f9745c914db6cdecacb"
+      },
+      {
+        "capture": "attract frame 600",
+        "path": "build\\attract_focus_600\\slow.bin",
+        "non_relocation_difference_bytes": 2234,
+        "captured_sha256": "e7986da3970c9531455e0fa8b578ed0ef085ad880d73c3c124006c00e8b30411"
+      },
+      {
+        "capture": "attract frame 1800",
+        "path": "build\\attract_focus_1800\\slow.bin",
+        "non_relocation_difference_bytes": 2398,
+        "captured_sha256": "6436743b4ef08b5436663ea3d6fa07d082621d089580f875b6ff306ae35e5b12"
+      },
+      {
+        "capture": "Golden Gate frame 12000",
+        "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+        "non_relocation_difference_bytes": 3703,
+        "captured_sha256": "08f9d9c954830d59441eb351f5069b0214148bc3214495e3fa202ecdb4065ea4"
+      },
+      {
+        "capture": "bridge silhouette frame 14500",
+        "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+        "non_relocation_difference_bytes": 4006,
+        "captured_sha256": "3a364091ab4b4b407005e59cd36523022202307c0cce738f4d47bd229cde56f7"
+      }
+    ]
+  },
+  "preprojection_record_workspace": {
+    "range": "$C45630-$C48383",
+    "segment": 71,
+    "classification": "mutable_geometry_record_workspace_not_immutable_model",
+    "observed_member": "$C47628 is selected by C21C2E in the external-frame trace",
+    "snapshot_comparisons": [
+      {
+        "capture": "baseline menu",
+        "path": "captures\\baseline_menu\\slow.bin",
+        "non_relocation_difference_bytes": 481,
+        "captured_sha256": "118a32753b4072dbc25964b5da5786c6d509291c24b3155f024fdcea8af88350"
+      },
+      {
+        "capture": "attract frame 600",
+        "path": "build\\attract_focus_600\\slow.bin",
+        "non_relocation_difference_bytes": 1390,
+        "captured_sha256": "0923ae63a1adc755bb350b8b06b099eb779d4704983acc8ad312963e0b422a29"
+      },
+      {
+        "capture": "attract frame 1800",
+        "path": "build\\attract_focus_1800\\slow.bin",
+        "non_relocation_difference_bytes": 1455,
+        "captured_sha256": "cd4b71512aff5e9151d0f9d783c9fe9ae7532785e2c05dceda462a7963222af6"
+      },
+      {
+        "capture": "Golden Gate frame 12000",
+        "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+        "non_relocation_difference_bytes": 1802,
+        "captured_sha256": "fb3a7f054d88aa7ddf36a6a796fe8aaa1e70ee48bf8a754c39ec678b67b91963"
+      },
+      {
+        "capture": "bridge silhouette frame 14500",
+        "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+        "non_relocation_difference_bytes": 1845,
+        "captured_sha256": "7db57dd340d564970f866ec6e15ff9029d42860d2ce4311aaba4c927fe4f4e07"
+      }
+    ],
+    "ordinary_replay_cpu_write_watch": {
+      "address": "$C47628",
+      "scenario": "sealed run031, frames 1-7500",
+      "result": "miss",
+      "qualification": "No CPU write occurs during ordinary replay from the saved initial state. The earlier no-input stepping trace writes derived midpoint fields, so population precedes this sealed replay or follows another unobserved path."
+    }
+  },
+  "immutable_upstream_candidates": {
+    "verified_byte_stable_scene_hunks": [
+      {
+        "segment": 41,
+        "range": "$C34A50-$C3555F",
+        "size_bytes": 2832,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "3b66b7f8049c72cd59b8346a0f133e4db7c2ec36773ed311d45f6e01db0fa50b"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "3b66b7f8049c72cd59b8346a0f133e4db7c2ec36773ed311d45f6e01db0fa50b"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "3b66b7f8049c72cd59b8346a0f133e4db7c2ec36773ed311d45f6e01db0fa50b"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "3b66b7f8049c72cd59b8346a0f133e4db7c2ec36773ed311d45f6e01db0fa50b"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "3b66b7f8049c72cd59b8346a0f133e4db7c2ec36773ed311d45f6e01db0fa50b"
+          }
+        ]
+      },
+      {
+        "segment": 42,
+        "range": "$C35568-$C361FF",
+        "size_bytes": 3224,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+          }
+        ]
+      },
+      {
+        "segment": 43,
+        "range": "$C36208-$C36A1B",
+        "size_bytes": 2068,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ab66cc094aa840555d380df2de5c73a59d9f1aca033adcb97e04c4aa65232333"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ab66cc094aa840555d380df2de5c73a59d9f1aca033adcb97e04c4aa65232333"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ab66cc094aa840555d380df2de5c73a59d9f1aca033adcb97e04c4aa65232333"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ab66cc094aa840555d380df2de5c73a59d9f1aca033adcb97e04c4aa65232333"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ab66cc094aa840555d380df2de5c73a59d9f1aca033adcb97e04c4aa65232333"
+          }
+        ]
+      },
+      {
+        "segment": 44,
+        "range": "$C36A28-$C3720F",
+        "size_bytes": 2024,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "b7dfa3071cb155c55338b6b18009ccafa31df3249bfad4dc9222f0e7f205e3fe"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "b7dfa3071cb155c55338b6b18009ccafa31df3249bfad4dc9222f0e7f205e3fe"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "b7dfa3071cb155c55338b6b18009ccafa31df3249bfad4dc9222f0e7f205e3fe"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "b7dfa3071cb155c55338b6b18009ccafa31df3249bfad4dc9222f0e7f205e3fe"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "b7dfa3071cb155c55338b6b18009ccafa31df3249bfad4dc9222f0e7f205e3fe"
+          }
+        ]
+      },
+      {
+        "segment": 45,
+        "range": "$C08718-$C089EB",
+        "size_bytes": 724,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "bda35555cc3dea00ac48cd32d2c76f6204a62099d27ab1baafe45739bfd8eed4"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "bda35555cc3dea00ac48cd32d2c76f6204a62099d27ab1baafe45739bfd8eed4"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "bda35555cc3dea00ac48cd32d2c76f6204a62099d27ab1baafe45739bfd8eed4"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "bda35555cc3dea00ac48cd32d2c76f6204a62099d27ab1baafe45739bfd8eed4"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "bda35555cc3dea00ac48cd32d2c76f6204a62099d27ab1baafe45739bfd8eed4"
+          }
+        ]
+      },
+      {
+        "segment": 46,
+        "range": "$C37218-$C37677",
+        "size_bytes": 1120,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "edf633d8971239f2f7dfc2e524329b26a7bd2f32696afdd7437ee9da84903701"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "edf633d8971239f2f7dfc2e524329b26a7bd2f32696afdd7437ee9da84903701"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "edf633d8971239f2f7dfc2e524329b26a7bd2f32696afdd7437ee9da84903701"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "edf633d8971239f2f7dfc2e524329b26a7bd2f32696afdd7437ee9da84903701"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "edf633d8971239f2f7dfc2e524329b26a7bd2f32696afdd7437ee9da84903701"
+          }
+        ]
+      },
+      {
+        "segment": 47,
+        "range": "$C37680-$C37983",
+        "size_bytes": 772,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "74bc9e837b823322531641635246fe84de3b8dd2b0f8279d69c4204c77348d61"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "74bc9e837b823322531641635246fe84de3b8dd2b0f8279d69c4204c77348d61"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "74bc9e837b823322531641635246fe84de3b8dd2b0f8279d69c4204c77348d61"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "74bc9e837b823322531641635246fe84de3b8dd2b0f8279d69c4204c77348d61"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "74bc9e837b823322531641635246fe84de3b8dd2b0f8279d69c4204c77348d61"
+          }
+        ]
+      },
+      {
+        "segment": 49,
+        "range": "$C37990-$C37F77",
+        "size_bytes": 1512,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "faed9c134a7aee489f1854c0536b883dc052b435c0ac4e25243cb6041d959f6e"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "faed9c134a7aee489f1854c0536b883dc052b435c0ac4e25243cb6041d959f6e"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "faed9c134a7aee489f1854c0536b883dc052b435c0ac4e25243cb6041d959f6e"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "faed9c134a7aee489f1854c0536b883dc052b435c0ac4e25243cb6041d959f6e"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "faed9c134a7aee489f1854c0536b883dc052b435c0ac4e25243cb6041d959f6e"
+          }
+        ]
+      },
+      {
+        "segment": 50,
+        "range": "$C37F80-$C383E3",
+        "size_bytes": 1124,
+        "comparisons": [
+          {
+            "capture": "baseline menu",
+            "path": "captures\\baseline_menu\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ebb3aaaf6982a3835aa0a3520edbf499728444829b8f7ca47fcf48e9c767d243"
+          },
+          {
+            "capture": "attract frame 600",
+            "path": "build\\attract_focus_600\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ebb3aaaf6982a3835aa0a3520edbf499728444829b8f7ca47fcf48e9c767d243"
+          },
+          {
+            "capture": "attract frame 1800",
+            "path": "build\\attract_focus_1800\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ebb3aaaf6982a3835aa0a3520edbf499728444829b8f7ca47fcf48e9c767d243"
+          },
+          {
+            "capture": "Golden Gate frame 12000",
+            "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ebb3aaaf6982a3835aa0a3520edbf499728444829b8f7ca47fcf48e9c767d243"
+          },
+          {
+            "capture": "bridge silhouette frame 14500",
+            "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+            "non_relocation_difference_bytes": 0,
+            "captured_sha256": "ebb3aaaf6982a3835aa0a3520edbf499728444829b8f7ca47fcf48e9c767d243"
+          }
+        ]
+      }
+    ],
+    "verified_scene_control_hunk": {
+      "range": "$C35568-$C361FF",
+      "segment": 42,
+      "classification": "verified_static_scene_control_candidate",
+      "qualification": "Control records select projection handlers and payloads; this does not identify a model by itself.",
+      "snapshot_comparisons": [
+        {
+          "capture": "baseline menu",
+          "path": "captures\\baseline_menu\\slow.bin",
+          "non_relocation_difference_bytes": 0,
+          "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+        },
+        {
+          "capture": "attract frame 600",
+          "path": "build\\attract_focus_600\\slow.bin",
+          "non_relocation_difference_bytes": 0,
+          "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+        },
+        {
+          "capture": "attract frame 1800",
+          "path": "build\\attract_focus_1800\\slow.bin",
+          "non_relocation_difference_bytes": 0,
+          "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+        },
+        {
+          "capture": "Golden Gate frame 12000",
+          "path": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+          "non_relocation_difference_bytes": 0,
+          "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+        },
+        {
+          "capture": "bridge silhouette frame 14500",
+          "path": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+          "non_relocation_difference_bytes": 0,
+          "captured_sha256": "d29975d0313101880b038c4d375138a86ec1337c7c3546e8fde3879cdf77b313"
+        }
+      ]
+    },
+    "exact_inline_edge_lists": [
+      {
+        "range": "$C37EA0-$C37EA5",
+        "evidence": "analysis/data/c37ea0_bridge_silhouette_projected_edge_list.md"
+      },
+      {
+        "range": "$C38B0A-$C38B1F",
+        "evidence": "analysis/data/c38b0a_external_view_projected_edge_list.md"
+      },
+      {
+        "range": "$C3985A-$C39883",
+        "evidence": "analysis/data/c3985a_projected_edge_list.md"
+      }
+    ]
+  },
+  "observed_external_frame_subdivision": {
+    "trace": "build\\run031_frame7500_c1f6f8_probe\\trace.jsonl",
+    "control_cursor_before_second_offset": "$C38B06",
+    "first_record": {
+      "address": "$C47628",
+      "words": [
+        47,
+        9,
+        -301,
+        -25,
+        -5,
+        158
+      ]
+    },
+    "second_record": {
+      "address": "$C48390",
+      "words": [
+        -537,
+        1126,
+        2207,
+        -525,
+        1109,
+        2181
+      ]
+    }
+  },
+  "exact_static_record_source_scan": [
+    {
+      "label": "external-frame subdivision endpoint",
+      "snapshot": "build\\attract_focus_1800\\slow.bin",
+      "runtime_address": "$C48390",
+      "six_words_hex": "0E1000C222A0100000001000",
+      "matches": [],
+      "qualification": "An empty exact-byte match list does not exclude transformed, packed, or generated upstream coordinates."
+    },
+    {
+      "label": "Golden Gate consecutive projection record 0",
+      "snapshot": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+      "runtime_address": "$C483BA",
+      "six_words_hex": "027D00810026027D00A70023",
+      "matches": [],
+      "qualification": "An empty exact-byte match list does not exclude transformed, packed, or generated upstream coordinates."
+    }
+  ],
+  "conclusion": "No named 3D model is asserted. The next valid model-identification trace must observe an immutable upstream coordinate source feeding the mutable C48390 geometry table, then correlate its projected edges with a frame."
+}

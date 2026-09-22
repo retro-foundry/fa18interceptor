@@ -5,7 +5,7 @@
 RENDERER_POINTER_BLOCK          equ $C456B6
 RENDERER_BLIT_SIZE              equ $C4596E
 RENDERER_BLIT_OFFSET             equ $C45968
-RENDERER_BLIT_SOURCE             equ $C45964
+RENDERER_BLIT_LANE_POINTER       equ $C45964
 RENDERER_VERTICAL_INPUT          equ $C45982
 RENDERER_VERTICAL_OFFSET         equ $C458D8
 RENDERER_MODE_WORD               equ $C4597C
@@ -17,8 +17,8 @@ CUSTOM_BLTCON1                   equ $42
 CUSTOM_BLTAPTH                   equ $50
 CUSTOM_BLTCPTH                   equ $48
 CUSTOM_BLTAMOD                   equ $60
-CUSTOM_BLTDPTH                   equ $4C
-CUSTOM_BLTBPTH                   equ $54
+CUSTOM_BLTBPTH                   equ $4C
+CUSTOM_BLTDPTH                   equ $54
 CUSTOM_BLTSIZE                   equ $58
 SUBI_W_D4_OPCODE                  equ $0444
 SUBI_W_D4_IMMEDIATE               equ $0003
@@ -29,7 +29,7 @@ submit_adjusted_renderer_lane_blit:
                 move.w  RENDERER_BLIT_SIZE.l,d0
                 move.l  RENDERER_BLIT_OFFSET.l,d1
                 add.l   d2,d1
-                move.l  RENDERER_BLIT_SOURCE.l,d2
+                move.l  RENDERER_BLIT_LANE_POINTER.l,d2
                 move.w  RENDERER_VERTICAL_INPUT.l,d6
                 sub.w   RENDERER_VERTICAL_OFFSET.l,d6
                 subi.w  #$B7,d6
@@ -73,7 +73,7 @@ submit_adjusted_renderer_lane_blit:
                 move.l  d2,CUSTOM_BLTAPTH(a0)
                 move.l  d5,CUSTOM_BLTCPTH(a0)
                 move.w  d4,CUSTOM_BLTAMOD(a0)
-                move.l  d1,CUSTOM_BLTDPTH(a0)
                 move.l  d1,CUSTOM_BLTBPTH(a0)
+                move.l  d1,CUSTOM_BLTDPTH(a0)
                 move.w  d0,CUSTOM_BLTSIZE(a0)
                 rts

@@ -1,0 +1,16 @@
+{
+  "authority": "Original executable and captures/baseline_menu/slow.bin",
+  "seeds": [
+    {"segment": 36, "runtime_payload_base": "0xC2F490", "evidence": "analysis/hunk_runtime_mapping.md"},
+    {"segment": 41, "runtime_payload_base": "0xC34A50", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 42, "runtime_payload_base": "0xC35568", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 43, "runtime_payload_base": "0xC36208", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 44, "runtime_payload_base": "0xC36A28", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 45, "runtime_payload_base": "0xC08718", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 46, "runtime_payload_base": "0xC37218", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 47, "runtime_payload_base": "0xC37680", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 48, "runtime_payload_base": "0xC0DB50", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 49, "runtime_payload_base": "0xC37990", "evidence": "analysis/data/c37ea0_bridge_silhouette_projected_edge_list.md"},
+    {"segment": 50, "runtime_payload_base": "0xC37F80", "evidence": "analysis/mappings/segments41_47_50_loaded.md"}
+  ]
+}

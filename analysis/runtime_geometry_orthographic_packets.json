@@ -1,0 +1,2850 @@
+{
+  "scope": "traced mutable C48390 workspace geometry",
+  "packets": [
+    {
+      "packet": "attract_packet_c3985a",
+      "title": "Attract packet $C3985A",
+      "source": "attract frame 600, $C3985A \u2192 $C212B0",
+      "snapshot": "build\\attract_focus_600\\slow.bin",
+      "plot": "analysis\\plots\\attract_packet_c3985a_orthographic.svg",
+      "edge_count": 10,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -205,
+            570,
+            2334
+          ],
+          "second": [
+            -59,
+            570,
+            2334
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -59,
+            570,
+            2334
+          ],
+          "second": [
+            -57,
+            492,
+            2082
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -57,
+            492,
+            2082
+          ],
+          "second": [
+            -203,
+            492,
+            2082
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -203,
+            492,
+            2082
+          ],
+          "second": [
+            -204,
+            531,
+            2208
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            -204,
+            531,
+            2208
+          ],
+          "second": [
+            -58,
+            531,
+            2208
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            -434,
+            571,
+            2334
+          ],
+          "second": [
+            -288,
+            571,
+            2334
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            -288,
+            571,
+            2334
+          ],
+          "second": [
+            -2,
+            -6,
+            291
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            -2,
+            -6,
+            291
+          ],
+          "second": [
+            -2,
+            -11,
+            293
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            -2,
+            -11,
+            293
+          ],
+          "second": [
+            -2,
+            -3,
+            294
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            -2,
+            -3,
+            294
+          ],
+          "second": [
+            -2,
+            2,
+            290
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "attract_packet_c39886",
+      "title": "Attract packet $C39886",
+      "source": "attract frame 600, $C39886 \u2192 $C212B0",
+      "snapshot": "build\\attract_focus_600\\slow.bin",
+      "plot": "analysis\\plots\\attract_packet_c39886_orthographic.svg",
+      "edge_count": 2,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -4,
+            -82,
+            228
+          ],
+          "second": [
+            -17,
+            560,
+            2302
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -629,
+            -60,
+            290
+          ],
+          "second": [
+            -496,
+            572,
+            2334
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "attract_packet_c3989a",
+      "title": "Attract packet $C3989A",
+      "source": "attract HUD trace frame 450, $C3989A \u2192 $C212B0",
+      "snapshot": "build\\attract_hud_trace_450\\slow.bin",
+      "plot": "analysis\\plots\\attract_packet_c3989a_orthographic.svg",
+      "edge_count": 2,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            4096,
+            0,
+            4096
+          ],
+          "second": [
+            352,
+            -96,
+            -86
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -241,
+            -96,
+            -5268
+          ],
+          "second": [
+            936,
+            -96,
+            -149
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "attract_packet_c393c4",
+      "title": "Attract packet $C393C4",
+      "source": "attract HUD trace frame 450, $C393C4 \u2192 $C212B0",
+      "snapshot": "build\\attract_hud_trace_450\\slow.bin",
+      "plot": "analysis\\plots\\attract_packet_c393c4_orthographic.svg",
+      "edge_count": 3,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -1009,
+            786,
+            -2494
+          ],
+          "second": [
+            -1009,
+            1322,
+            -2494
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -1092,
+            1322,
+            -2494
+          ],
+          "second": [
+            -925,
+            1322,
+            -2494
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -1133,
+            1227,
+            -2494
+          ],
+          "second": [
+            -883,
+            1227,
+            -2494
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "run001_packet_c3751a",
+      "title": "Run001 packet $C3751A",
+      "source": "run001 record-walker trace, $C3751A \u2192 $C212B0",
+      "snapshot": "build\\run001_c1f6f8_record_walk_stage\\slow.bin",
+      "plot": "analysis\\plots\\run001_packet_c3751a_orthographic.svg",
+      "edge_count": 5,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            38,
+            -49,
+            646
+          ],
+          "second": [
+            38,
+            -49,
+            774
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            38,
+            -49,
+            774
+          ],
+          "second": [
+            -46,
+            -49,
+            774
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -46,
+            -49,
+            774
+          ],
+          "second": [
+            -46,
+            -49,
+            710
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -46,
+            -49,
+            710
+          ],
+          "second": [
+            38,
+            -49,
+            710
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            38,
+            -49,
+            710
+          ],
+          "second": [
+            -45,
+            -49,
+            646
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "external_view_packet",
+      "title": "External-view edge packet $C38B0A",
+      "source": "run031 frame 7500, $C38B0A \u2192 $C212B0",
+      "snapshot": "build\\run031_frame7500_c1f6f8_probe\\slow.bin",
+      "plot": "analysis\\plots\\external_view_packet_orthographic.svg",
+      "edge_count": 5,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -516,
+            1116,
+            2190
+          ],
+          "second": [
+            -540,
+            1109,
+            2184
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -525,
+            1109,
+            2181
+          ],
+          "second": [
+            -525,
+            1120,
+            2176
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -525,
+            1120,
+            2176
+          ],
+          "second": [
+            250,
+            1511,
+            4312
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -516,
+            1116,
+            2190
+          ],
+          "second": [
+            232,
+            1568,
+            4410
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            -540,
+            1109,
+            2184
+          ],
+          "second": [
+            232,
+            1568,
+            4410
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "golden_gate_packet",
+      "title": "Golden Gate consecutive packet $C483BA",
+      "source": "run031 frame 12000, $C35734 \u2192 $C211DC",
+      "snapshot": "build\\run031_frame12000_golden_gate_c1f6f8_probe\\slow.bin",
+      "plot": "analysis\\plots\\golden_gate_packet_orthographic.svg",
+      "edge_count": 13,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            637,
+            129,
+            38
+          ],
+          "second": [
+            637,
+            167,
+            35
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            718,
+            71,
+            -97
+          ],
+          "second": [
+            719,
+            160,
+            -105
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            799,
+            14,
+            -231
+          ],
+          "second": [
+            801,
+            152,
+            -245
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            881,
+            -43,
+            -366
+          ],
+          "second": [
+            883,
+            178,
+            -388
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            962,
+            -100,
+            -500
+          ],
+          "second": [
+            965,
+            204,
+            -530
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            1043,
+            -158,
+            -635
+          ],
+          "second": [
+            1047,
+            230,
+            -673
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            1124,
+            -215,
+            -769
+          ],
+          "second": [
+            1128,
+            292,
+            -819
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            1206,
+            -272,
+            -904
+          ],
+          "second": [
+            1210,
+            355,
+            -965
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            1287,
+            -329,
+            -1038
+          ],
+          "second": [
+            1292,
+            417,
+            -1110
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            1368,
+            -387,
+            -1173
+          ],
+          "second": [
+            1371,
+            196,
+            -1227
+          ]
+        },
+        {
+          "index": 10,
+          "first": [
+            1449,
+            -444,
+            -1307
+          ],
+          "second": [
+            1450,
+            -24,
+            -1344
+          ]
+        },
+        {
+          "index": 11,
+          "first": [
+            1531,
+            -501,
+            -1442
+          ],
+          "second": [
+            1530,
+            -244,
+            -1461
+          ]
+        },
+        {
+          "index": 12,
+          "first": [
+            1612,
+            -558,
+            -1576
+          ],
+          "second": [
+            1611,
+            -430,
+            -1586
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "golden_gate_polygon_c4b990",
+      "title": "Golden Gate polygon tuple $C4B990",
+      "source": "run031 frame 12000, $C24CFE \u2192 $C2FF48",
+      "snapshot": "build\\run031_frame12000_c2ff48_noinput_probe\\slow.bin",
+      "plot": "analysis\\plots\\golden_gate_polygon_c4b990_orthographic.svg",
+      "edge_count": 4,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -799,
+            793,
+            2444
+          ],
+          "second": [
+            -866,
+            786,
+            2421
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -866,
+            786,
+            2421
+          ],
+          "second": [
+            -1474,
+            882,
+            3455
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -1474,
+            882,
+            3455
+          ],
+          "second": [
+            -1407,
+            889,
+            3478
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -1407,
+            889,
+            3478
+          ],
+          "second": [
+            -799,
+            793,
+            2444
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "golden_gate_c355d8_polygons",
+      "title": "Golden Gate stream polygons $C355D8",
+      "source": "run031 frame 12000, two C2FF48 submissions before the stream changes",
+      "snapshot": "build\\run031_frame12000_polygon_submissions_12f\\polygon_submissions.json",
+      "plot": "analysis\\plots\\golden_gate_c355d8_polygons_orthographic.svg",
+      "edge_count": 7,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -799,
+            793,
+            2444
+          ],
+          "second": [
+            -866,
+            786,
+            2421
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -866,
+            786,
+            2421
+          ],
+          "second": [
+            -1474,
+            882,
+            3455
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -1474,
+            882,
+            3455
+          ],
+          "second": [
+            -1407,
+            889,
+            3478
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -1407,
+            889,
+            3478
+          ],
+          "second": [
+            -799,
+            793,
+            2444
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            -465,
+            1365,
+            1684
+          ],
+          "second": [
+            -447,
+            304,
+            1753
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            -447,
+            304,
+            1753
+          ],
+          "second": [
+            -497,
+            316,
+            1788
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            -497,
+            316,
+            1788
+          ],
+          "second": [
+            -465,
+            1365,
+            1684
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "golden_gate_external_c35584_polygons",
+      "title": "Golden Gate external stream polygons $C35584",
+      "source": "run031 frame 12600, two C2FF48 submissions in the C355xx scene family",
+      "snapshot": "build\\run031_frame12600_external_polygon_submissions_v2\\polygon_submissions.json",
+      "plot": "analysis\\plots\\golden_gate_external_c35584_polygons_orthographic.svg",
+      "edge_count": 7,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -1528,
+            -592,
+            4334
+          ],
+          "second": [
+            -1541,
+            -589,
+            4389
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -1541,
+            -589,
+            4389
+          ],
+          "second": [
+            -3109,
+            -1501,
+            4189
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -3109,
+            -1501,
+            4189
+          ],
+          "second": [
+            -3096,
+            -1504,
+            4134
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -3096,
+            -1504,
+            4134
+          ],
+          "second": [
+            -1528,
+            -592,
+            4334
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            -920,
+            505,
+            4399
+          ],
+          "second": [
+            -712,
+            -511,
+            4449
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            -712,
+            -511,
+            4449
+          ],
+          "second": [
+            -767,
+            -537,
+            4422
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            -767,
+            -537,
+            4422
+          ],
+          "second": [
+            -920,
+            505,
+            4399
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "external_view_c3925c_polygons",
+      "title": "External-view candidate polygons $C3925C",
+      "source": "run031 frame 12600, three C2FF48 submissions",
+      "snapshot": "build\\run031_frame12600_external_polygon_submissions_v2\\polygon_submissions.json",
+      "plot": "analysis\\plots\\external_view_c3925c_polygons_orthographic.svg",
+      "edge_count": 17,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            3969,
+            2179,
+            4781
+          ],
+          "second": [
+            4260,
+            2298,
+            4804
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            4260,
+            2298,
+            4804
+          ],
+          "second": [
+            4263,
+            2271,
+            4808
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            4263,
+            2271,
+            4808
+          ],
+          "second": [
+            3985,
+            2158,
+            4794
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            3985,
+            2158,
+            4794
+          ],
+          "second": [
+            3969,
+            2179,
+            4781
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            3966,
+            2180,
+            4801
+          ],
+          "second": [
+            3969,
+            2179,
+            4781
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            3969,
+            2179,
+            4781
+          ],
+          "second": [
+            3985,
+            2158,
+            4794
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            3985,
+            2158,
+            4794
+          ],
+          "second": [
+            3966,
+            2180,
+            4801
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            4261,
+            2302,
+            4833
+          ],
+          "second": [
+            4260,
+            2298,
+            4804
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            4260,
+            2298,
+            4804
+          ],
+          "second": [
+            4200,
+            2271,
+            4787
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            4200,
+            2271,
+            4787
+          ],
+          "second": [
+            4070,
+            2218,
+            4774
+          ]
+        },
+        {
+          "index": 10,
+          "first": [
+            4070,
+            2218,
+            4774
+          ],
+          "second": [
+            4049,
+            2211,
+            4785
+          ]
+        },
+        {
+          "index": 11,
+          "first": [
+            4049,
+            2211,
+            4785
+          ],
+          "second": [
+            3969,
+            2179,
+            4781
+          ]
+        },
+        {
+          "index": 12,
+          "first": [
+            3969,
+            2179,
+            4781
+          ],
+          "second": [
+            3966,
+            2180,
+            4801
+          ]
+        },
+        {
+          "index": 13,
+          "first": [
+            3966,
+            2180,
+            4801
+          ],
+          "second": [
+            4051,
+            2216,
+            4813
+          ]
+        },
+        {
+          "index": 14,
+          "first": [
+            4051,
+            2216,
+            4813
+          ],
+          "second": [
+            4052,
+            2218,
+            4828
+          ]
+        },
+        {
+          "index": 15,
+          "first": [
+            4052,
+            2218,
+            4828
+          ],
+          "second": [
+            4215,
+            2286,
+            4843
+          ]
+        },
+        {
+          "index": 16,
+          "first": [
+            4215,
+            2286,
+            4843
+          ],
+          "second": [
+            4261,
+            2302,
+            4833
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "external_view_c3925e_polygons",
+      "title": "External-view candidate polygons $C3925E",
+      "source": "run031 frame 12600, four C2FF48 submissions",
+      "snapshot": "build\\run031_frame12600_external_polygon_submissions_v2\\polygon_submissions.json",
+      "plot": "analysis\\plots\\external_view_c3925e_polygons_orthographic.svg",
+      "edge_count": 16,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            4156,
+            2284,
+            4797
+          ],
+          "second": [
+            4159,
+            2283,
+            4783
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            4159,
+            2283,
+            4783
+          ],
+          "second": [
+            4141,
+            2276,
+            4781
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            4141,
+            2276,
+            4781
+          ],
+          "second": [
+            4139,
+            2277,
+            4795
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            4139,
+            2277,
+            4795
+          ],
+          "second": [
+            4156,
+            2284,
+            4797
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            4162,
+            2264,
+            4784
+          ],
+          "second": [
+            4145,
+            2257,
+            4782
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            4145,
+            2257,
+            4782
+          ],
+          "second": [
+            4141,
+            2276,
+            4781
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            4141,
+            2276,
+            4781
+          ],
+          "second": [
+            4159,
+            2283,
+            4783
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            4159,
+            2283,
+            4783
+          ],
+          "second": [
+            4162,
+            2264,
+            4784
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            4145,
+            2257,
+            4782
+          ],
+          "second": [
+            4142,
+            2258,
+            4796
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            4142,
+            2258,
+            4796
+          ],
+          "second": [
+            4139,
+            2277,
+            4795
+          ]
+        },
+        {
+          "index": 10,
+          "first": [
+            4139,
+            2277,
+            4795
+          ],
+          "second": [
+            4141,
+            2276,
+            4781
+          ]
+        },
+        {
+          "index": 11,
+          "first": [
+            4141,
+            2276,
+            4781
+          ],
+          "second": [
+            4145,
+            2257,
+            4782
+          ]
+        },
+        {
+          "index": 12,
+          "first": [
+            4142,
+            2258,
+            4796
+          ],
+          "second": [
+            4159,
+            2265,
+            4797
+          ]
+        },
+        {
+          "index": 13,
+          "first": [
+            4159,
+            2265,
+            4797
+          ],
+          "second": [
+            4156,
+            2284,
+            4797
+          ]
+        },
+        {
+          "index": 14,
+          "first": [
+            4156,
+            2284,
+            4797
+          ],
+          "second": [
+            4139,
+            2277,
+            4795
+          ]
+        },
+        {
+          "index": 15,
+          "first": [
+            4139,
+            2277,
+            4795
+          ],
+          "second": [
+            4142,
+            2258,
+            4796
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "external_aircraft_c3925c_frame7500",
+      "title": "External-aircraft candidate polygons $C3925C",
+      "source": "run031 frame 7500, three C2FF48 submissions",
+      "snapshot": "build\\run031_frame7500_external_polygon_submissions\\polygon_submissions.json",
+      "plot": "analysis\\plots\\external_aircraft_c3925c_frame7500_orthographic.svg",
+      "edge_count": 17,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            288,
+            1454,
+            4217
+          ],
+          "second": [
+            314,
+            1455,
+            4219
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            314,
+            1455,
+            4219
+          ],
+          "second": [
+            299,
+            1433,
+            4231
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            299,
+            1433,
+            4231
+          ],
+          "second": [
+            288,
+            1454,
+            4217
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            246,
+            1584,
+            4438
+          ],
+          "second": [
+            288,
+            1454,
+            4217
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            288,
+            1454,
+            4217
+          ],
+          "second": [
+            299,
+            1433,
+            4231
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            299,
+            1433,
+            4231
+          ],
+          "second": [
+            248,
+            1554,
+            4437
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            248,
+            1554,
+            4437
+          ],
+          "second": [
+            246,
+            1584,
+            4438
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            246,
+            1584,
+            4438
+          ],
+          "second": [
+            284,
+            1583,
+            4437
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            284,
+            1583,
+            4437
+          ],
+          "second": [
+            307,
+            1556,
+            4392
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            307,
+            1556,
+            4392
+          ],
+          "second": [
+            324,
+            1499,
+            4294
+          ]
+        },
+        {
+          "index": 10,
+          "first": [
+            324,
+            1499,
+            4294
+          ],
+          "second": [
+            309,
+            1490,
+            4279
+          ]
+        },
+        {
+          "index": 11,
+          "first": [
+            309,
+            1490,
+            4279
+          ],
+          "second": [
+            314,
+            1455,
+            4219
+          ]
+        },
+        {
+          "index": 12,
+          "first": [
+            314,
+            1455,
+            4219
+          ],
+          "second": [
+            288,
+            1454,
+            4217
+          ]
+        },
+        {
+          "index": 13,
+          "first": [
+            288,
+            1454,
+            4217
+          ],
+          "second": [
+            271,
+            1491,
+            4281
+          ]
+        },
+        {
+          "index": 14,
+          "first": [
+            271,
+            1491,
+            4281
+          ],
+          "second": [
+            252,
+            1492,
+            4281
+          ]
+        },
+        {
+          "index": 15,
+          "first": [
+            252,
+            1492,
+            4281
+          ],
+          "second": [
+            232,
+            1564,
+            4404
+          ]
+        },
+        {
+          "index": 16,
+          "first": [
+            232,
+            1564,
+            4404
+          ],
+          "second": [
+            246,
+            1584,
+            4438
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "external_aircraft_c3925e_frame7500",
+      "title": "External-aircraft candidate polygons $C3925E",
+      "source": "run031 frame 7500, three C2FF48 submissions",
+      "snapshot": "build\\run031_frame7500_external_polygon_submissions\\polygon_submissions.json",
+      "plot": "analysis\\plots\\external_aircraft_c3925e_frame7500_orthographic.svg",
+      "edge_count": 12,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            292,
+            1566,
+            4359
+          ],
+          "second": [
+            310,
+            1567,
+            4361
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            310,
+            1567,
+            4361
+          ],
+          "second": [
+            313,
+            1559,
+            4348
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            313,
+            1559,
+            4348
+          ],
+          "second": [
+            294,
+            1558,
+            4346
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            294,
+            1558,
+            4346
+          ],
+          "second": [
+            292,
+            1566,
+            4359
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            313,
+            1540,
+            4351
+          ],
+          "second": [
+            294,
+            1539,
+            4349
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            294,
+            1539,
+            4349
+          ],
+          "second": [
+            294,
+            1558,
+            4346
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            294,
+            1558,
+            4346
+          ],
+          "second": [
+            313,
+            1559,
+            4348
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            313,
+            1559,
+            4348
+          ],
+          "second": [
+            313,
+            1540,
+            4351
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            294,
+            1539,
+            4349
+          ],
+          "second": [
+            292,
+            1547,
+            4362
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            292,
+            1547,
+            4362
+          ],
+          "second": [
+            292,
+            1566,
+            4359
+          ]
+        },
+        {
+          "index": 10,
+          "first": [
+            292,
+            1566,
+            4359
+          ],
+          "second": [
+            294,
+            1558,
+            4346
+          ]
+        },
+        {
+          "index": 11,
+          "first": [
+            294,
+            1558,
+            4346
+          ],
+          "second": [
+            294,
+            1539,
+            4349
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "external_aircraft_c3925a_controller_family",
+      "title": "External-aircraft controller family $C3925A",
+      "source": "run031 frame 7500, six C2FF48 polygons reached during the traced $C3925A controller path; external-view entity candidate",
+      "snapshot": "build\\run031_frame7500_external_polygon_submissions\\polygon_submissions.json",
+      "plot": "analysis\\plots\\external_aircraft_c3925a_controller_family_orthographic.svg",
+      "edge_count": 29,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            288,
+            1454,
+            4217
+          ],
+          "second": [
+            314,
+            1455,
+            4219
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            314,
+            1455,
+            4219
+          ],
+          "second": [
+            299,
+            1433,
+            4231
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            299,
+            1433,
+            4231
+          ],
+          "second": [
+            288,
+            1454,
+            4217
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            246,
+            1584,
+            4438
+          ],
+          "second": [
+            288,
+            1454,
+            4217
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            288,
+            1454,
+            4217
+          ],
+          "second": [
+            299,
+            1433,
+            4231
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            299,
+            1433,
+            4231
+          ],
+          "second": [
+            248,
+            1554,
+            4437
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            248,
+            1554,
+            4437
+          ],
+          "second": [
+            246,
+            1584,
+            4438
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            246,
+            1584,
+            4438
+          ],
+          "second": [
+            284,
+            1583,
+            4437
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            284,
+            1583,
+            4437
+          ],
+          "second": [
+            307,
+            1556,
+            4392
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            307,
+            1556,
+            4392
+          ],
+          "second": [
+            324,
+            1499,
+            4294
+          ]
+        },
+        {
+          "index": 10,
+          "first": [
+            324,
+            1499,
+            4294
+          ],
+          "second": [
+            309,
+            1490,
+            4279
+          ]
+        },
+        {
+          "index": 11,
+          "first": [
+            309,
+            1490,
+            4279
+          ],
+          "second": [
+            314,
+            1455,
+            4219
+          ]
+        },
+        {
+          "index": 12,
+          "first": [
+            314,
+            1455,
+            4219
+          ],
+          "second": [
+            288,
+            1454,
+            4217
+          ]
+        },
+        {
+          "index": 13,
+          "first": [
+            288,
+            1454,
+            4217
+          ],
+          "second": [
+            271,
+            1491,
+            4281
+          ]
+        },
+        {
+          "index": 14,
+          "first": [
+            271,
+            1491,
+            4281
+          ],
+          "second": [
+            252,
+            1492,
+            4281
+          ]
+        },
+        {
+          "index": 15,
+          "first": [
+            252,
+            1492,
+            4281
+          ],
+          "second": [
+            232,
+            1564,
+            4404
+          ]
+        },
+        {
+          "index": 16,
+          "first": [
+            232,
+            1564,
+            4404
+          ],
+          "second": [
+            246,
+            1584,
+            4438
+          ]
+        },
+        {
+          "index": 17,
+          "first": [
+            292,
+            1566,
+            4359
+          ],
+          "second": [
+            310,
+            1567,
+            4361
+          ]
+        },
+        {
+          "index": 18,
+          "first": [
+            310,
+            1567,
+            4361
+          ],
+          "second": [
+            313,
+            1559,
+            4348
+          ]
+        },
+        {
+          "index": 19,
+          "first": [
+            313,
+            1559,
+            4348
+          ],
+          "second": [
+            294,
+            1558,
+            4346
+          ]
+        },
+        {
+          "index": 20,
+          "first": [
+            294,
+            1558,
+            4346
+          ],
+          "second": [
+            292,
+            1566,
+            4359
+          ]
+        },
+        {
+          "index": 21,
+          "first": [
+            313,
+            1540,
+            4351
+          ],
+          "second": [
+            294,
+            1539,
+            4349
+          ]
+        },
+        {
+          "index": 22,
+          "first": [
+            294,
+            1539,
+            4349
+          ],
+          "second": [
+            294,
+            1558,
+            4346
+          ]
+        },
+        {
+          "index": 23,
+          "first": [
+            294,
+            1558,
+            4346
+          ],
+          "second": [
+            313,
+            1559,
+            4348
+          ]
+        },
+        {
+          "index": 24,
+          "first": [
+            313,
+            1559,
+            4348
+          ],
+          "second": [
+            313,
+            1540,
+            4351
+          ]
+        },
+        {
+          "index": 25,
+          "first": [
+            294,
+            1539,
+            4349
+          ],
+          "second": [
+            292,
+            1547,
+            4362
+          ]
+        },
+        {
+          "index": 26,
+          "first": [
+            292,
+            1547,
+            4362
+          ],
+          "second": [
+            292,
+            1566,
+            4359
+          ]
+        },
+        {
+          "index": 27,
+          "first": [
+            292,
+            1566,
+            4359
+          ],
+          "second": [
+            294,
+            1558,
+            4346
+          ]
+        },
+        {
+          "index": 28,
+          "first": [
+            294,
+            1558,
+            4346
+          ],
+          "second": [
+            294,
+            1539,
+            4349
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "external_aircraft_c3515e_c34a9a_polygons",
+      "title": "External-aircraft model candidate $C3515E \u2192 $C34A9A",
+      "source": "run031 frame 7500: static local vertices C3515E-C351DC transform, then the traced C34A9A face stream emits these polygons",
+      "snapshot": "build\\run031_frame7500_external_polygon_submissions\\polygon_submissions.json",
+      "plot": "analysis\\plots\\external_aircraft_c3515e_c34a9a_polygons_orthographic.svg",
+      "edge_count": 45,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            128,
+            20,
+            267
+          ],
+          "second": [
+            -132,
+            -45,
+            264
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -132,
+            -45,
+            264
+          ],
+          "second": [
+            -134,
+            -36,
+            292
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -134,
+            -36,
+            292
+          ],
+          "second": [
+            -6,
+            12,
+            345
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -6,
+            12,
+            345
+          ],
+          "second": [
+            126,
+            29,
+            295
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            126,
+            29,
+            295
+          ],
+          "second": [
+            128,
+            20,
+            267
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            74,
+            -19,
+            187
+          ],
+          "second": [
+            21,
+            -27,
+            202
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            21,
+            -27,
+            202
+          ],
+          "second": [
+            -2,
+            -13,
+            265
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            -2,
+            -13,
+            265
+          ],
+          "second": [
+            73,
+            -13,
+            206
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            73,
+            -13,
+            206
+          ],
+          "second": [
+            74,
+            -19,
+            187
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            -20,
+            -38,
+            201
+          ],
+          "second": [
+            -72,
+            -56,
+            185
+          ]
+        },
+        {
+          "index": 10,
+          "first": [
+            -72,
+            -56,
+            185
+          ],
+          "second": [
+            -73,
+            -50,
+            204
+          ]
+        },
+        {
+          "index": 11,
+          "first": [
+            -73,
+            -50,
+            204
+          ],
+          "second": [
+            -2,
+            -13,
+            265
+          ]
+        },
+        {
+          "index": 12,
+          "first": [
+            -2,
+            -13,
+            265
+          ],
+          "second": [
+            -20,
+            -38,
+            201
+          ]
+        },
+        {
+          "index": 13,
+          "first": [
+            -16,
+            -18,
+            229
+          ],
+          "second": [
+            -19,
+            -3,
+            276
+          ]
+        },
+        {
+          "index": 14,
+          "first": [
+            -19,
+            -3,
+            276
+          ],
+          "second": [
+            -42,
+            56,
+            233
+          ]
+        },
+        {
+          "index": 15,
+          "first": [
+            -42,
+            56,
+            233
+          ],
+          "second": [
+            -41,
+            50,
+            214
+          ]
+        },
+        {
+          "index": 16,
+          "first": [
+            -41,
+            50,
+            214
+          ],
+          "second": [
+            -16,
+            -18,
+            229
+          ]
+        },
+        {
+          "index": 17,
+          "first": [
+            9,
+            -16,
+            201
+          ],
+          "second": [
+            0,
+            -33,
+            201
+          ]
+        },
+        {
+          "index": 18,
+          "first": [
+            0,
+            -33,
+            201
+          ],
+          "second": [
+            -11,
+            49,
+            362
+          ]
+        },
+        {
+          "index": 19,
+          "first": [
+            -11,
+            49,
+            362
+          ],
+          "second": [
+            9,
+            -16,
+            201
+          ]
+        },
+        {
+          "index": 20,
+          "first": [
+            0,
+            -33,
+            201
+          ],
+          "second": [
+            -11,
+            -21,
+            200
+          ]
+        },
+        {
+          "index": 21,
+          "first": [
+            -11,
+            -21,
+            200
+          ],
+          "second": [
+            -11,
+            49,
+            362
+          ]
+        },
+        {
+          "index": 22,
+          "first": [
+            -11,
+            49,
+            362
+          ],
+          "second": [
+            0,
+            -33,
+            201
+          ]
+        },
+        {
+          "index": 23,
+          "first": [
+            9,
+            -16,
+            201
+          ],
+          "second": [
+            -11,
+            49,
+            362
+          ]
+        },
+        {
+          "index": 24,
+          "first": [
+            -11,
+            49,
+            362
+          ],
+          "second": [
+            -4,
+            54,
+            398
+          ]
+        },
+        {
+          "index": 25,
+          "first": [
+            -4,
+            54,
+            398
+          ],
+          "second": [
+            15,
+            11,
+            325
+          ]
+        },
+        {
+          "index": 26,
+          "first": [
+            15,
+            11,
+            325
+          ],
+          "second": [
+            21,
+            -27,
+            202
+          ]
+        },
+        {
+          "index": 27,
+          "first": [
+            21,
+            -27,
+            202
+          ],
+          "second": [
+            9,
+            -16,
+            201
+          ]
+        },
+        {
+          "index": 28,
+          "first": [
+            -11,
+            -21,
+            200
+          ],
+          "second": [
+            -20,
+            -38,
+            201
+          ]
+        },
+        {
+          "index": 29,
+          "first": [
+            -20,
+            -38,
+            201
+          ],
+          "second": [
+            -26,
+            0,
+            324
+          ]
+        },
+        {
+          "index": 30,
+          "first": [
+            -26,
+            0,
+            324
+          ],
+          "second": [
+            -19,
+            50,
+            398
+          ]
+        },
+        {
+          "index": 31,
+          "first": [
+            -19,
+            50,
+            398
+          ],
+          "second": [
+            -11,
+            49,
+            362
+          ]
+        },
+        {
+          "index": 32,
+          "first": [
+            -11,
+            49,
+            362
+          ],
+          "second": [
+            -11,
+            -21,
+            200
+          ]
+        },
+        {
+          "index": 33,
+          "first": [
+            13,
+            -11,
+            229
+          ],
+          "second": [
+            10,
+            4,
+            276
+          ]
+        },
+        {
+          "index": 34,
+          "first": [
+            10,
+            4,
+            276
+          ],
+          "second": [
+            20,
+            71,
+            234
+          ]
+        },
+        {
+          "index": 35,
+          "first": [
+            20,
+            71,
+            234
+          ],
+          "second": [
+            21,
+            65,
+            215
+          ]
+        },
+        {
+          "index": 36,
+          "first": [
+            21,
+            65,
+            215
+          ],
+          "second": [
+            13,
+            -11,
+            229
+          ]
+        },
+        {
+          "index": 37,
+          "first": [
+            21,
+            -27,
+            202
+          ],
+          "second": [
+            11,
+            -45,
+            202
+          ]
+        },
+        {
+          "index": 38,
+          "first": [
+            11,
+            -45,
+            202
+          ],
+          "second": [
+            0,
+            -33,
+            201
+          ]
+        },
+        {
+          "index": 39,
+          "first": [
+            0,
+            -33,
+            201
+          ],
+          "second": [
+            9,
+            -16,
+            201
+          ]
+        },
+        {
+          "index": 40,
+          "first": [
+            9,
+            -16,
+            201
+          ],
+          "second": [
+            21,
+            -27,
+            202
+          ]
+        },
+        {
+          "index": 41,
+          "first": [
+            0,
+            -33,
+            201
+          ],
+          "second": [
+            -9,
+            -50,
+            201
+          ]
+        },
+        {
+          "index": 42,
+          "first": [
+            -9,
+            -50,
+            201
+          ],
+          "second": [
+            -20,
+            -38,
+            201
+          ]
+        },
+        {
+          "index": 43,
+          "first": [
+            -20,
+            -38,
+            201
+          ],
+          "second": [
+            -11,
+            -21,
+            200
+          ]
+        },
+        {
+          "index": 44,
+          "first": [
+            -11,
+            -21,
+            200
+          ],
+          "second": [
+            0,
+            -33,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "later_bridge_c36298_polygons",
+      "title": "Later bridge stream polygons $C36298",
+      "source": "run031 frame 14500, three C2FF48 submissions in static scene Hunk 43",
+      "snapshot": "build\\run031_frame14500_bridge_polygon_submissions\\polygon_submissions.json",
+      "plot": "analysis\\plots\\later_bridge_c36298_polygons_orthographic.svg",
+      "edge_count": 10,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -584,
+            275,
+            782
+          ],
+          "second": [
+            -599,
+            -131,
+            806
+          ]
+        },
+        {
+          "index": 1,
+          "first": [
+            -599,
+            -131,
+            806
+          ],
+          "second": [
+            -586,
+            -131,
+            807
+          ]
+        },
+        {
+          "index": 2,
+          "first": [
+            -586,
+            -131,
+            807
+          ],
+          "second": [
+            -584,
+            275,
+            782
+          ]
+        },
+        {
+          "index": 3,
+          "first": [
+            -720,
+            24,
+            720
+          ],
+          "second": [
+            -54,
+            88,
+            1104
+          ]
+        },
+        {
+          "index": 4,
+          "first": [
+            -54,
+            88,
+            1104
+          ],
+          "second": [
+            -32,
+            82,
+            1081
+          ]
+        },
+        {
+          "index": 5,
+          "first": [
+            -32,
+            82,
+            1081
+          ],
+          "second": [
+            -698,
+            19,
+            698
+          ]
+        },
+        {
+          "index": 6,
+          "first": [
+            -698,
+            19,
+            698
+          ],
+          "second": [
+            -720,
+            24,
+            720
+          ]
+        },
+        {
+          "index": 7,
+          "first": [
+            -562,
+            269,
+            759
+          ],
+          "second": [
+            -576,
+            -137,
+            782
+          ]
+        },
+        {
+          "index": 8,
+          "first": [
+            -576,
+            -137,
+            782
+          ],
+          "second": [
+            -563,
+            -137,
+            783
+          ]
+        },
+        {
+          "index": 9,
+          "first": [
+            -563,
+            -137,
+            783
+          ],
+          "second": [
+            -562,
+            269,
+            759
+          ]
+        }
+      ]
+    },
+    {
+      "packet": "bridge_silhouette_packet",
+      "title": "Bridge-silhouette edge packet $C37EA0",
+      "source": "run031 frame 14500, $C37EA0 \u2192 $C212B0",
+      "snapshot": "build\\run031_frame14500_c1f6f8_probe\\slow.bin",
+      "plot": "analysis\\plots\\bridge_silhouette_packet_orthographic.svg",
+      "edge_count": 1,
+      "edges": [
+        {
+          "index": 0,
+          "first": [
+            -3316,
+            1087,
+            4356
+          ],
+          "second": [
+            -4004,
+            1312,
+            5182
+          ]
+        }
+      ]
+    }
+  ]
+}
