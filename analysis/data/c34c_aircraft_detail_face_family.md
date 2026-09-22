@@ -1,4 +1,4 @@
-# `$C3515E -> $C34C06-$C34C48`: external-aircraft detail model
+# `$C3515E -> $C34C06-$C34C48`: reduced flight-object face-layer candidate
 
 [Open the orthographic sheet](../plots/c34c_aircraft_detail_preclip_unique_face_sheet.png).
 
@@ -57,3 +57,13 @@ The `$C34A9A/$C34A9C` polygon family is not merged into this model: it uses
 the separate `$C48390` workspace in the sampled frame. Similar silhouette and
 shared Hunk residency are insufficient to claim a shared object instance.
 They are nevertheless [co-rendered in one composite candidate pass](c34c_c34a_co_rendered_composite.md): that association is useful for visual identification, while the separate immutable-source boundaries remain mandatory.
+
+## Reduced-detail interpretation
+
+The shared `$C351xx` transform path means C34C and C34A reuse one flight-
+object template, while the C34C layer has only five observed faces compared
+with 42 for C34A. The independent external-camera frame shows an unmistakably
+F/A-18-like aircraft when the C34A family is active. Together with the
+spatially separate C34C instance at frame 12000, this supports a **reduced-
+detail alternate layer for another flight-object instance**. It is not proof
+of a distance/LOD selector, and it does not support naming C34C a missile.

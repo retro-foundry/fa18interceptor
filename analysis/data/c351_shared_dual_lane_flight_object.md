@@ -8,4 +8,4 @@ The next loop entry `$C1F21C` consumes the next `$C351xx` triple and repeats the
 
 This is stronger than simple co-rendering: the two face families share the static template-transform pass. They are still represented by distinct static face records and matrices. Their frame-12000 coordinates are spatially separated, so export must preserve them as **separate instances of a procedural flight-object template**, rather than flattening their captured mutable coordinates into one guessed mesh. See [the measured separation](c34a_c34c_frame12000_instance_separation.md).
 
-Evidence boundary: the trace establishes the shared `$C351xx` input stream and its two output lanes. It does not name the in-game entity beyond a flight-object candidate; “aircraft” and “missile” remain visual interpretations.
+Evidence boundary: the trace establishes the shared `$C351xx` input stream and its two output lanes. The C34A external-camera oracle supports an F/A-18-like aircraft template. C34C's five-face layer is a reduced-detail alternate-instance candidate; a distance/LOD selection rule and any missile identity remain unproven.
