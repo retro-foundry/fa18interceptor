@@ -2,7 +2,7 @@
 
 Classification: **trace-proven static local-coordinate input set with `$C34C` face topology**.
 
-During a bounded no-future-input step from the external-camera frame-7,500 update entry `$C0F090`, `$C1F100/$C1F21C` read 22 consecutive three-word values from `$C3515E` through `$C351DC`. They write their transformed results consecutively to `$C46228-$C462A6`. Fourteen additional consecutive triples at `$C351E2-$C35234` fill the remaining source-order indices used by the `$C34C` faces, but their transform producer is not yet directly traced. The full 36-triple run is in byte-stable Hunk 41 and is separate from the mutable `$C48390` projection workspace.
+During a bounded no-future-input step from the external-camera frame-7,500 update entry `$C0F090`, `$C1F100/$C1F21C` read 22 consecutive three-word values from `$C3515E` through `$C351DC`. They write their transformed results consecutively to `$C46228-$C462A6`. The `$C34C` faces additionally use 14 workspace slots derived by `$C0D384-$C0D521` from that transformed block. The adjacent `$C351E2-$C35234` triples have a related reference pattern but are not the observed source of the derived tail. The static 22-triple run is in byte-stable Hunk 41 and is separate from the mutable `$C48390` projection workspace.
 
 The triples form a symmetric, low-height local-coordinate cloud. A bounded
 frame-12,000 trace now supplies the source-to-face join: `$C1F100` enters with
