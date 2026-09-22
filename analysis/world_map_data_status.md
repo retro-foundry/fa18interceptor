@@ -100,6 +100,12 @@ then 17 `$C3558A` submissions as the red raster expands. This is a genuine
 range/detail-selection candidate, not distance-only LOD proof, because the
 user's approach changes camera state. See the [line-detail candidate](data/run035_golden_gate_line_detail_candidate.md).
 
+The leading primitive-selection hypothesis is **distant line lists followed by
+nearer filled polygons**, rather than a replacement mesh. It is not yet
+established: the red Golden Gate line family is correlated, but a closer red
+Golden Gate filled-face family is not. Run036's measured small/middle/large
+red spans are the next direct test of that primitive transition.
+
 ## Next evidence required to find the authoritative map
 
 1. Capture a deterministic `M`-entry and map-exit scenario with screenshots,
