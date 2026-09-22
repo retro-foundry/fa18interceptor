@@ -18,6 +18,11 @@ This directly supports a flat **M-map source layer**.  It does not prove that
 every flight-world object, placement record, or separate terrain system lacks
 elevation; those use different source paths and coordinate conventions.
 
+The corresponding live rendered map page is available in the
+[run003 M-map display](../visuals/run003_m_map_display.png).  That image is a
+separate renderer-output observation; it is not used to infer source-pair
+ownership beyond the traced packet path.
+
 Authority: the byte-exact
 [`transform_map_packet_pairs.asm`](../../source_amiga/observed/transform_map_packet_pairs.asm)
 slice, verified against runtime `$C2AF92-$C2AFF7`, and the exact pair
