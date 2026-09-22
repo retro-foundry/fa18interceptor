@@ -37,6 +37,23 @@ stronger lifecycle boundary for the cache, but it does **not** prove that
 The first writer for the relevant band, and its immutable input range, remain
 the required evidence for an original terrain/map-data claim.
 
+## Observed cell-marker reset
+
+The same traced update phase has a direct writer for the band cells before the
+walk.  `$C1D266` selects `$C411F0`, `$C1D272` saves that table-derived pointer,
+and `$C1D276-$C1D280` establishes `A1=$C48390`, `D0=$FFFF`, `D1=$60`, and
+`D2=$0D`.  `$C1D282` calls `$C1D722`, whose unrolled stores at
+`$C1D722-$C1D75E` write the word `$FFFF` at 16 consecutive `$60`-byte cell
+starts.  The `DBRA` at `$C1D286` repeats this for 14 bands: 224 marked cells
+from the `$C48390` workspace family.
+
+This marker has a direct downstream meaning in the placement builder:
+`$C1DD2C` compares the leading cell byte with `$FF` and branches out of the
+record-producing path when it matches.  Therefore this is a proved workspace
+cell rejection-marker reset, not coordinate population.  It explains why the
+later selector stream only produces placement records for a subset of cells;
+it does not reveal immutable terrain coordinates.
+
 ## Static selector-input boundary
 
 `$C412EC` is payload offset `$1BC` of original CODE segment 65
