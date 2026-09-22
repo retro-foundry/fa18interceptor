@@ -165,6 +165,29 @@
       ]
     },
     {
+      "probe": "group_0e",
+      "origin_bins": "(16,14)",
+      "perturbation": "second component 14",
+      "selector_calls": 41,
+      "selected_streams": 11,
+      "distinct_group_records": 8,
+      "static_copies": 58,
+      "later_builder_reads": 10,
+      "streams": [
+        "$C42706",
+        "$C4272E",
+        "$C4274A",
+        "$C42788",
+        "$C42950",
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42ADA",
+        "$C42B5C",
+        "$C42BD4"
+      ]
+    },
+    {
       "probe": "row_08",
       "origin_bins": "(8,16)",
       "perturbation": "first component 8",

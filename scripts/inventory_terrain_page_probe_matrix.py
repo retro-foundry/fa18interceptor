@@ -15,6 +15,7 @@ PROBES = (
     ("group_zero", "(16,0)", "second component zero"),
     ("group_08", "(16,8)", "second component 8"),
     ("group_0c", "(16,12)", "second component 12"),
+    ("group_0e", "(16,14)", "second component 14"),
     ("row_08", "(8,16)", "first component 8"),
     ("row_0c", "(12,16)", "first component 12"),
     ("row_ff", "(255,16)", "first component 255"),

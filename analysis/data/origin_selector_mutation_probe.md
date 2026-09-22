@@ -148,6 +148,13 @@ profiles remain selector behavior, not physical scale evidence. See the
 [group-bin-12 inventory](static_template_selector_groups_origin_group_0c.md)
 and [group-bin-12 copy inventory](workspace_template_copies_origin_group_0c.md).
 
+Group bin 14 (`$C45C46=$0E000000`) returns normally after 42,113 stepped
+instructions and jumps to 11 streams, 58 copies, and 10 later builder reads.
+This locates a strong group-axis transition between the bin-12 intermediate
+state and the bin-16 control state. See the
+[group-bin-14 inventory](static_template_selector_groups_origin_group_0e.md)
+and [group-bin-14 copy inventory](workspace_template_copies_origin_group_0e.md).
+
 Row bin 12 (`$C45C3E=$0C000000`) returns normally after 38,056 stepped
 instructions and selects 8 streams, 18 copies, and 14 later builder reads.
 Together with bins 0, 8, and 16, this is a local stepped expansion
