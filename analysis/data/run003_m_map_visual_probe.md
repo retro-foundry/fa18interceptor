@@ -12,6 +12,12 @@ python scripts/engine9000_bridge.py --restore build/run003_pre_m_2183/state.bin 
 
 At frame 2188 (five replay frames), the screenshot retains the flight cockpit. At frame 2213 (30 replay frames), the image is a full-screen green/blue coastline-style map display with a grid and navigation readouts. Its recorded video hash is `1828e0c0717c86ddb8ee3d4afa1ce15b2f0c9b028b8a0201cbae65cdc462f9f3`. The same hash is present again at frames 2243 and 2363, so this is a stable post-transition display rather than a partial redraw.
 
+[Open the reproducible frame-2,213 map screenshot](../visuals/run003_m_map_display.png).
+The tracked PNG is copied byte-for-byte from
+`build/run003_m_visual_30/screen.png` (SHA-256
+`933d6071fbc3b56f7f01bf2f1bee824799647a510327fc22f79d98b7bb7b0200`).
+It is a visual verification artifact, not an extracted 3D terrain dataset.
+
 The local visual captures are:
 
 - `build/run003_m_visual_5/screen.png` — cockpit before the transition.
