@@ -1,0 +1,2060 @@
+{
+  "authority": {
+    "slow_snapshot": "build/run033_origin_control_trace/slow.bin",
+    "table_base": "$C42390",
+    "table_end_exclusive": "$C42590",
+    "entry_count": 256,
+    "consumer": "$C1D400-$C1D408"
+  },
+  "classification": "static_relative_selector_directory_not_global_coordinate_or_lod_table",
+  "entries": [
+    {
+      "selector_index": "$00",
+      "table_word": "$C42390",
+      "relative_word": "$033C",
+      "target": "$C426CC",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$01",
+      "table_word": "$C42392",
+      "relative_word": "$033C",
+      "target": "$C426CE",
+      "target_first_word_signed": 4,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$02",
+      "table_word": "$C42394",
+      "relative_word": "$033C",
+      "target": "$C426D0",
+      "target_first_word_signed": 14,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$03",
+      "table_word": "$C42396",
+      "relative_word": "$033C",
+      "target": "$C426D2",
+      "target_first_word_signed": 15,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$04",
+      "table_word": "$C42398",
+      "relative_word": "$033C",
+      "target": "$C426D4",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$05",
+      "table_word": "$C4239A",
+      "relative_word": "$033C",
+      "target": "$C426D6",
+      "target_first_word_signed": 10016,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$06",
+      "table_word": "$C4239C",
+      "relative_word": "$033C",
+      "target": "$C426D8",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$07",
+      "table_word": "$C4239E",
+      "relative_word": "$033C",
+      "target": "$C426DA",
+      "target_first_word_signed": 10030,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$08",
+      "table_word": "$C423A0",
+      "relative_word": "$033C",
+      "target": "$C426DC",
+      "target_first_word_signed": 6,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$09",
+      "table_word": "$C423A2",
+      "relative_word": "$033C",
+      "target": "$C426DE",
+      "target_first_word_signed": 14,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$0A",
+      "table_word": "$C423A4",
+      "relative_word": "$033C",
+      "target": "$C426E0",
+      "target_first_word_signed": 15,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$0B",
+      "table_word": "$C423A6",
+      "relative_word": "$033C",
+      "target": "$C426E2",
+      "target_first_word_signed": 16,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$0C",
+      "table_word": "$C423A8",
+      "relative_word": "$033C",
+      "target": "$C426E4",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$0D",
+      "table_word": "$C423AA",
+      "relative_word": "$033C",
+      "target": "$C426E6",
+      "target_first_word_signed": 10050,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$0E",
+      "table_word": "$C423AC",
+      "relative_word": "$033C",
+      "target": "$C426E8",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$0F",
+      "table_word": "$C423AE",
+      "relative_word": "$033E",
+      "target": "$C426EC",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$10",
+      "table_word": "$C423B0",
+      "relative_word": "$034C",
+      "target": "$C426FC",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$11",
+      "table_word": "$C423B2",
+      "relative_word": "$0360",
+      "target": "$C42712",
+      "target_first_word_signed": 1063,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$12",
+      "table_word": "$C423B4",
+      "relative_word": "$0374",
+      "target": "$C42728",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$13",
+      "table_word": "$C423B6",
+      "relative_word": "$0374",
+      "target": "$C4272A",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$14",
+      "table_word": "$C423B8",
+      "relative_word": "$0374",
+      "target": "$C4272C",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$15",
+      "table_word": "$C423BA",
+      "relative_word": "$0374",
+      "target": "$C4272E",
+      "target_first_word_signed": 605,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$16",
+      "table_word": "$C423BC",
+      "relative_word": "$0374",
+      "target": "$C42730",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$17",
+      "table_word": "$C423BE",
+      "relative_word": "$0374",
+      "target": "$C42732",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$18",
+      "table_word": "$C423C0",
+      "relative_word": "$0374",
+      "target": "$C42734",
+      "target_first_word_signed": 862,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$19",
+      "table_word": "$C423C2",
+      "relative_word": "$0374",
+      "target": "$C42736",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$1A",
+      "table_word": "$C423C4",
+      "relative_word": "$0374",
+      "target": "$C42738",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$1B",
+      "table_word": "$C423C6",
+      "relative_word": "$0374",
+      "target": "$C4273A",
+      "target_first_word_signed": 1887,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$1C",
+      "table_word": "$C423C8",
+      "relative_word": "$0374",
+      "target": "$C4273C",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$1D",
+      "table_word": "$C423CA",
+      "relative_word": "$0374",
+      "target": "$C4273E",
+      "target_first_word_signed": 4095,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$1E",
+      "table_word": "$C423CC",
+      "relative_word": "$0374",
+      "target": "$C42740",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$1F",
+      "table_word": "$C423CE",
+      "relative_word": "$0374",
+      "target": "$C42742",
+      "target_first_word_signed": 3177,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$20",
+      "table_word": "$C423D0",
+      "relative_word": "$0374",
+      "target": "$C42744",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$21",
+      "table_word": "$C423D2",
+      "relative_word": "$0374",
+      "target": "$C42746",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$22",
+      "table_word": "$C423D4",
+      "relative_word": "$0374",
+      "target": "$C42748",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$23",
+      "table_word": "$C423D6",
+      "relative_word": "$0374",
+      "target": "$C4274A",
+      "target_first_word_signed": 609,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$24",
+      "table_word": "$C423D8",
+      "relative_word": "$0374",
+      "target": "$C4274C",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$25",
+      "table_word": "$C423DA",
+      "relative_word": "$0374",
+      "target": "$C4274E",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$26",
+      "table_word": "$C423DC",
+      "relative_word": "$0374",
+      "target": "$C42750",
+      "target_first_word_signed": 610,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$27",
+      "table_word": "$C423DE",
+      "relative_word": "$0374",
+      "target": "$C42752",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$28",
+      "table_word": "$C423E0",
+      "relative_word": "$0374",
+      "target": "$C42754",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$29",
+      "table_word": "$C423E2",
+      "relative_word": "$0374",
+      "target": "$C42756",
+      "target_first_word_signed": 1379,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$2A",
+      "table_word": "$C423E4",
+      "relative_word": "$0374",
+      "target": "$C42758",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$2B",
+      "table_word": "$C423E6",
+      "relative_word": "$0374",
+      "target": "$C4275A",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$2C",
+      "table_word": "$C423E8",
+      "relative_word": "$0374",
+      "target": "$C4275C",
+      "target_first_word_signed": 1636,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$2D",
+      "table_word": "$C423EA",
+      "relative_word": "$0374",
+      "target": "$C4275E",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$2E",
+      "table_word": "$C423EC",
+      "relative_word": "$0374",
+      "target": "$C42760",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$2F",
+      "table_word": "$C423EE",
+      "relative_word": "$0374",
+      "target": "$C42762",
+      "target_first_word_signed": 1637,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$30",
+      "table_word": "$C423F0",
+      "relative_word": "$0374",
+      "target": "$C42764",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$31",
+      "table_word": "$C423F2",
+      "relative_word": "$0374",
+      "target": "$C42766",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$32",
+      "table_word": "$C423F4",
+      "relative_word": "$0374",
+      "target": "$C42768",
+      "target_first_word_signed": 1894,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$33",
+      "table_word": "$C423F6",
+      "relative_word": "$0374",
+      "target": "$C4276A",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$34",
+      "table_word": "$C423F8",
+      "relative_word": "$0374",
+      "target": "$C4276C",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$35",
+      "table_word": "$C423FA",
+      "relative_word": "$0374",
+      "target": "$C4276E",
+      "target_first_word_signed": 2137,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$36",
+      "table_word": "$C423FC",
+      "relative_word": "$0374",
+      "target": "$C42770",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$37",
+      "table_word": "$C423FE",
+      "relative_word": "$0374",
+      "target": "$C42772",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$38",
+      "table_word": "$C42400",
+      "relative_word": "$0374",
+      "target": "$C42774",
+      "target_first_word_signed": 2919,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$39",
+      "table_word": "$C42402",
+      "relative_word": "$0374",
+      "target": "$C42776",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$3A",
+      "table_word": "$C42404",
+      "relative_word": "$0374",
+      "target": "$C42778",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$3B",
+      "table_word": "$C42406",
+      "relative_word": "$0374",
+      "target": "$C4277A",
+      "target_first_word_signed": 3176,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$3C",
+      "table_word": "$C42408",
+      "relative_word": "$0374",
+      "target": "$C4277C",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$3D",
+      "table_word": "$C4240A",
+      "relative_word": "$0374",
+      "target": "$C4277E",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$3E",
+      "table_word": "$C4240C",
+      "relative_word": "$0374",
+      "target": "$C42780",
+      "target_first_word_signed": 3424,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$3F",
+      "table_word": "$C4240E",
+      "relative_word": "$0374",
+      "target": "$C42782",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$40",
+      "table_word": "$C42410",
+      "relative_word": "$0374",
+      "target": "$C42784",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$41",
+      "table_word": "$C42412",
+      "relative_word": "$0374",
+      "target": "$C42786",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$42",
+      "table_word": "$C42414",
+      "relative_word": "$0374",
+      "target": "$C42788",
+      "target_first_word_signed": 554,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$43",
+      "table_word": "$C42416",
+      "relative_word": "$0374",
+      "target": "$C4278A",
+      "target_first_word_signed": 3584,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$44",
+      "table_word": "$C42418",
+      "relative_word": "$0374",
+      "target": "$C4278C",
+      "target_first_word_signed": 3584,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$45",
+      "table_word": "$C4241A",
+      "relative_word": "$0374",
+      "target": "$C4278E",
+      "target_first_word_signed": 624,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$46",
+      "table_word": "$C4241C",
+      "relative_word": "$0374",
+      "target": "$C42790",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$47",
+      "table_word": "$C4241E",
+      "relative_word": "$0374",
+      "target": "$C42792",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$48",
+      "table_word": "$C42420",
+      "relative_word": "$0374",
+      "target": "$C42794",
+      "target_first_word_signed": 1649,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$49",
+      "table_word": "$C42422",
+      "relative_word": "$0374",
+      "target": "$C42796",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$4A",
+      "table_word": "$C42424",
+      "relative_word": "$0374",
+      "target": "$C42798",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$4B",
+      "table_word": "$C42426",
+      "relative_word": "$0374",
+      "target": "$C4279A",
+      "target_first_word_signed": 1580,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$4C",
+      "table_word": "$C42428",
+      "relative_word": "$0374",
+      "target": "$C4279C",
+      "target_first_word_signed": 1782,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$4D",
+      "table_word": "$C4242A",
+      "relative_word": "$0374",
+      "target": "$C4279E",
+      "target_first_word_signed": 3738,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$4E",
+      "table_word": "$C4242C",
+      "relative_word": "$0374",
+      "target": "$C427A0",
+      "target_first_word_signed": 1579,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$4F",
+      "table_word": "$C4242E",
+      "relative_word": "$0374",
+      "target": "$C427A2",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$50",
+      "table_word": "$C42430",
+      "relative_word": "$0374",
+      "target": "$C427A4",
+      "target_first_word_signed": 2760,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$51",
+      "table_word": "$C42432",
+      "relative_word": "$0374",
+      "target": "$C427A6",
+      "target_first_word_signed": 1906,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$52",
+      "table_word": "$C42434",
+      "relative_word": "$0374",
+      "target": "$C427A8",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$53",
+      "table_word": "$C42436",
+      "relative_word": "$0374",
+      "target": "$C427AA",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$54",
+      "table_word": "$C42438",
+      "relative_word": "$0374",
+      "target": "$C427AC",
+      "target_first_word_signed": 2906,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$55",
+      "table_word": "$C4243A",
+      "relative_word": "$0374",
+      "target": "$C427AE",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$56",
+      "table_word": "$C4243C",
+      "relative_word": "$0374",
+      "target": "$C427B0",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$57",
+      "table_word": "$C4243E",
+      "relative_word": "$0374",
+      "target": "$C427B2",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$58",
+      "table_word": "$C42440",
+      "relative_word": "$0374",
+      "target": "$C427B4",
+      "target_first_word_signed": 2156,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$59",
+      "table_word": "$C42442",
+      "relative_word": "$0374",
+      "target": "$C427B6",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$5A",
+      "table_word": "$C42444",
+      "relative_word": "$0374",
+      "target": "$C427B8",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$5B",
+      "table_word": "$C42446",
+      "relative_word": "$0374",
+      "target": "$C427BA",
+      "target_first_word_signed": 2413,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$5C",
+      "table_word": "$C42448",
+      "relative_word": "$0374",
+      "target": "$C427BC",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$5D",
+      "table_word": "$C4244A",
+      "relative_word": "$0374",
+      "target": "$C427BE",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$5E",
+      "table_word": "$C4244C",
+      "relative_word": "$0374",
+      "target": "$C427C0",
+      "target_first_word_signed": 3438,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$5F",
+      "table_word": "$C4244E",
+      "relative_word": "$0374",
+      "target": "$C427C2",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$60",
+      "table_word": "$C42450",
+      "relative_word": "$0374",
+      "target": "$C427C4",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$61",
+      "table_word": "$C42452",
+      "relative_word": "$0374",
+      "target": "$C427C6",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$62",
+      "table_word": "$C42454",
+      "relative_word": "$0374",
+      "target": "$C427C8",
+      "target_first_word_signed": 1350,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$63",
+      "table_word": "$C42456",
+      "relative_word": "$0374",
+      "target": "$C427CA",
+      "target_first_word_signed": 2816,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$64",
+      "table_word": "$C42458",
+      "relative_word": "$0374",
+      "target": "$C427CC",
+      "target_first_word_signed": 2304,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$65",
+      "table_word": "$C4245A",
+      "relative_word": "$0374",
+      "target": "$C427CE",
+      "target_first_word_signed": 1606,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$66",
+      "table_word": "$C4245C",
+      "relative_word": "$0374",
+      "target": "$C427D0",
+      "target_first_word_signed": 336,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$67",
+      "table_word": "$C4245E",
+      "relative_word": "$0374",
+      "target": "$C427D2",
+      "target_first_word_signed": 512,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$68",
+      "table_word": "$C42460",
+      "relative_word": "$0374",
+      "target": "$C427D4",
+      "target_first_word_signed": 1611,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$69",
+      "table_word": "$C42462",
+      "relative_word": "$0374",
+      "target": "$C427D6",
+      "target_first_word_signed": 2464,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$6A",
+      "table_word": "$C42464",
+      "relative_word": "$0374",
+      "target": "$C427D8",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$6B",
+      "table_word": "$C42466",
+      "relative_word": "$0374",
+      "target": "$C427DA",
+      "target_first_word_signed": 1903,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$6C",
+      "table_word": "$C42468",
+      "relative_word": "$0374",
+      "target": "$C427DC",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$6D",
+      "table_word": "$C4246A",
+      "relative_word": "$0374",
+      "target": "$C427DE",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$6E",
+      "table_word": "$C4246C",
+      "relative_word": "$0374",
+      "target": "$C427E0",
+      "target_first_word_signed": 2636,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$6F",
+      "table_word": "$C4246E",
+      "relative_word": "$0374",
+      "target": "$C427E2",
+      "target_first_word_signed": 1416,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$70",
+      "table_word": "$C42470",
+      "relative_word": "$0374",
+      "target": "$C427E4",
+      "target_first_word_signed": 2688,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$71",
+      "table_word": "$C42472",
+      "relative_word": "$0374",
+      "target": "$C427E6",
+      "target_first_word_signed": 2675,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$72",
+      "table_word": "$C42474",
+      "relative_word": "$0374",
+      "target": "$C427E8",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$73",
+      "table_word": "$C42476",
+      "relative_word": "$0374",
+      "target": "$C427EA",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$74",
+      "table_word": "$C42478",
+      "relative_word": "$0374",
+      "target": "$C427EC",
+      "target_first_word_signed": 3700,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$75",
+      "table_word": "$C4247A",
+      "relative_word": "$0374",
+      "target": "$C427EE",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$76",
+      "table_word": "$C4247C",
+      "relative_word": "$0374",
+      "target": "$C427F0",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$77",
+      "table_word": "$C4247E",
+      "relative_word": "$0374",
+      "target": "$C427F2",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$78",
+      "table_word": "$C42480",
+      "relative_word": "$0374",
+      "target": "$C427F4",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$79",
+      "table_word": "$C42482",
+      "relative_word": "$0374",
+      "target": "$C427F6",
+      "target_first_word_signed": 12,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$7A",
+      "table_word": "$C42484",
+      "relative_word": "$0374",
+      "target": "$C427F8",
+      "target_first_word_signed": 41,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$7B",
+      "table_word": "$C42486",
+      "relative_word": "$0374",
+      "target": "$C427FA",
+      "target_first_word_signed": 44,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$7C",
+      "table_word": "$C42488",
+      "relative_word": "$0374",
+      "target": "$C427FC",
+      "target_first_word_signed": 47,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$7D",
+      "table_word": "$C4248A",
+      "relative_word": "$0374",
+      "target": "$C427FE",
+      "target_first_word_signed": 50,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$7E",
+      "table_word": "$C4248C",
+      "relative_word": "$0374",
+      "target": "$C42800",
+      "target_first_word_signed": 53,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$7F",
+      "table_word": "$C4248E",
+      "relative_word": "$0374",
+      "target": "$C42802",
+      "target_first_word_signed": 56,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$80",
+      "table_word": "$C42490",
+      "relative_word": "$0364",
+      "target": "$C427F4",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$81",
+      "table_word": "$C42492",
+      "relative_word": "$0364",
+      "target": "$C427F6",
+      "target_first_word_signed": 12,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$82",
+      "table_word": "$C42494",
+      "relative_word": "$0364",
+      "target": "$C427F8",
+      "target_first_word_signed": 41,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$83",
+      "table_word": "$C42496",
+      "relative_word": "$0364",
+      "target": "$C427FA",
+      "target_first_word_signed": 44,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$84",
+      "table_word": "$C42498",
+      "relative_word": "$0364",
+      "target": "$C427FC",
+      "target_first_word_signed": 47,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$85",
+      "table_word": "$C4249A",
+      "relative_word": "$0364",
+      "target": "$C427FE",
+      "target_first_word_signed": 50,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$86",
+      "table_word": "$C4249C",
+      "relative_word": "$0364",
+      "target": "$C42800",
+      "target_first_word_signed": 53,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$87",
+      "table_word": "$C4249E",
+      "relative_word": "$0364",
+      "target": "$C42802",
+      "target_first_word_signed": 56,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$88",
+      "table_word": "$C424A0",
+      "relative_word": "$0364",
+      "target": "$C42804",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$89",
+      "table_word": "$C424A2",
+      "relative_word": "$0364",
+      "target": "$C42806",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$8A",
+      "table_word": "$C424A4",
+      "relative_word": "$0364",
+      "target": "$C42808",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$8B",
+      "table_word": "$C424A6",
+      "relative_word": "$0364",
+      "target": "$C4280A",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$8C",
+      "table_word": "$C424A8",
+      "relative_word": "$0364",
+      "target": "$C4280C",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$8D",
+      "table_word": "$C424AA",
+      "relative_word": "$0364",
+      "target": "$C4280E",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$8E",
+      "table_word": "$C424AC",
+      "relative_word": "$0364",
+      "target": "$C42810",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$8F",
+      "table_word": "$C424AE",
+      "relative_word": "$0364",
+      "target": "$C42812",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$90",
+      "table_word": "$C424B0",
+      "relative_word": "$0364",
+      "target": "$C42814",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$91",
+      "table_word": "$C424B2",
+      "relative_word": "$0364",
+      "target": "$C42816",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$92",
+      "table_word": "$C424B4",
+      "relative_word": "$0364",
+      "target": "$C42818",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$93",
+      "table_word": "$C424B6",
+      "relative_word": "$0364",
+      "target": "$C4281A",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$94",
+      "table_word": "$C424B8",
+      "relative_word": "$0364",
+      "target": "$C4281C",
+      "target_first_word_signed": 16,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$95",
+      "table_word": "$C424BA",
+      "relative_word": "$0364",
+      "target": "$C4281E",
+      "target_first_word_signed": 41,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$96",
+      "table_word": "$C424BC",
+      "relative_word": "$0364",
+      "target": "$C42820",
+      "target_first_word_signed": 44,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$97",
+      "table_word": "$C424BE",
+      "relative_word": "$0364",
+      "target": "$C42822",
+      "target_first_word_signed": 47,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$98",
+      "table_word": "$C424C0",
+      "relative_word": "$0364",
+      "target": "$C42824",
+      "target_first_word_signed": 50,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$99",
+      "table_word": "$C424C2",
+      "relative_word": "$0364",
+      "target": "$C42826",
+      "target_first_word_signed": 53,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$9A",
+      "table_word": "$C424C4",
+      "relative_word": "$0364",
+      "target": "$C42828",
+      "target_first_word_signed": 56,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$9B",
+      "table_word": "$C424C6",
+      "relative_word": "$0364",
+      "target": "$C4282A",
+      "target_first_word_signed": 59,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$9C",
+      "table_word": "$C424C8",
+      "relative_word": "$0364",
+      "target": "$C4282C",
+      "target_first_word_signed": 62,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$9D",
+      "table_word": "$C424CA",
+      "relative_word": "$0364",
+      "target": "$C4282E",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$9E",
+      "table_word": "$C424CC",
+      "relative_word": "$0364",
+      "target": "$C42830",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$9F",
+      "table_word": "$C424CE",
+      "relative_word": "$0364",
+      "target": "$C42832",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A0",
+      "table_word": "$C424D0",
+      "relative_word": "$0364",
+      "target": "$C42834",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A1",
+      "table_word": "$C424D2",
+      "relative_word": "$0364",
+      "target": "$C42836",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A2",
+      "table_word": "$C424D4",
+      "relative_word": "$0364",
+      "target": "$C42838",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A3",
+      "table_word": "$C424D6",
+      "relative_word": "$0364",
+      "target": "$C4283A",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A4",
+      "table_word": "$C424D8",
+      "relative_word": "$0364",
+      "target": "$C4283C",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A5",
+      "table_word": "$C424DA",
+      "relative_word": "$0364",
+      "target": "$C4283E",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A6",
+      "table_word": "$C424DC",
+      "relative_word": "$0364",
+      "target": "$C42840",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A7",
+      "table_word": "$C424DE",
+      "relative_word": "$0364",
+      "target": "$C42842",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A8",
+      "table_word": "$C424E0",
+      "relative_word": "$0364",
+      "target": "$C42844",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$A9",
+      "table_word": "$C424E2",
+      "relative_word": "$0364",
+      "target": "$C42846",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$AA",
+      "table_word": "$C424E4",
+      "relative_word": "$0364",
+      "target": "$C42848",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$AB",
+      "table_word": "$C424E6",
+      "relative_word": "$0364",
+      "target": "$C4284A",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$AC",
+      "table_word": "$C424E8",
+      "relative_word": "$0366",
+      "target": "$C4284E",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$AD",
+      "table_word": "$C424EA",
+      "relative_word": "$0366",
+      "target": "$C42850",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$AE",
+      "table_word": "$C424EC",
+      "relative_word": "$0366",
+      "target": "$C42852",
+      "target_first_word_signed": 14,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$AF",
+      "table_word": "$C424EE",
+      "relative_word": "$0366",
+      "target": "$C42854",
+      "target_first_word_signed": 41,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B0",
+      "table_word": "$C424F0",
+      "relative_word": "$0366",
+      "target": "$C42856",
+      "target_first_word_signed": 44,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B1",
+      "table_word": "$C424F2",
+      "relative_word": "$0366",
+      "target": "$C42858",
+      "target_first_word_signed": 47,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B2",
+      "table_word": "$C424F4",
+      "relative_word": "$0366",
+      "target": "$C4285A",
+      "target_first_word_signed": 50,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B3",
+      "table_word": "$C424F6",
+      "relative_word": "$0366",
+      "target": "$C4285C",
+      "target_first_word_signed": 53,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B4",
+      "table_word": "$C424F8",
+      "relative_word": "$0366",
+      "target": "$C4285E",
+      "target_first_word_signed": 56,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B5",
+      "table_word": "$C424FA",
+      "relative_word": "$0366",
+      "target": "$C42860",
+      "target_first_word_signed": 59,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B6",
+      "table_word": "$C424FC",
+      "relative_word": "$0366",
+      "target": "$C42862",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B7",
+      "table_word": "$C424FE",
+      "relative_word": "$0366",
+      "target": "$C42864",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$B8",
+      "table_word": "$C42500",
+      "relative_word": "$038C",
+      "target": "$C4288C",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$B9",
+      "table_word": "$C42502",
+      "relative_word": "$038C",
+      "target": "$C4288E",
+      "target_first_word_signed": 2,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$BA",
+      "table_word": "$C42504",
+      "relative_word": "$038C",
+      "target": "$C42890",
+      "target_first_word_signed": 63,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$BB",
+      "table_word": "$C42506",
+      "relative_word": "$038C",
+      "target": "$C42892",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$BC",
+      "table_word": "$C42508",
+      "relative_word": "$038C",
+      "target": "$C42894",
+      "target_first_word_signed": 10602,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$BD",
+      "table_word": "$C4250A",
+      "relative_word": "$03C2",
+      "target": "$C428CC",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$BE",
+      "table_word": "$C4250C",
+      "relative_word": "$03C2",
+      "target": "$C428CE",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$BF",
+      "table_word": "$C4250E",
+      "relative_word": "$03EE",
+      "target": "$C428FC",
+      "target_first_word_signed": 10588,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C0",
+      "table_word": "$C42510",
+      "relative_word": "$03FC",
+      "target": "$C4290C",
+      "target_first_word_signed": 10674,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C1",
+      "table_word": "$C42512",
+      "relative_word": "$03FE",
+      "target": "$C42910",
+      "target_first_word_signed": 11356,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C2",
+      "table_word": "$C42514",
+      "relative_word": "$0406",
+      "target": "$C4291A",
+      "target_first_word_signed": 52,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C3",
+      "table_word": "$C42516",
+      "relative_word": "$0414",
+      "target": "$C4292A",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C4",
+      "table_word": "$C42518",
+      "relative_word": "$0422",
+      "target": "$C4293A",
+      "target_first_word_signed": 196,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C5",
+      "table_word": "$C4251A",
+      "relative_word": "$0454",
+      "target": "$C4296E",
+      "target_first_word_signed": 256,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C6",
+      "table_word": "$C4251C",
+      "relative_word": "$0486",
+      "target": "$C429A2",
+      "target_first_word_signed": 608,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C7",
+      "table_word": "$C4251E",
+      "relative_word": "$04BE",
+      "target": "$C429DC",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$C8",
+      "table_word": "$C42520",
+      "relative_word": "$04BE",
+      "target": "$C429DE",
+      "target_first_word_signed": 42,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$C9",
+      "table_word": "$C42522",
+      "relative_word": "$04BE",
+      "target": "$C429E0",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$CA",
+      "table_word": "$C42524",
+      "relative_word": "$04BE",
+      "target": "$C429E2",
+      "target_first_word_signed": 2048,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$CB",
+      "table_word": "$C42526",
+      "relative_word": "$04BE",
+      "target": "$C429E4",
+      "target_first_word_signed": 3658,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$CC",
+      "table_word": "$C42528",
+      "relative_word": "$04BE",
+      "target": "$C429E6",
+      "target_first_word_signed": 3072,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$CD",
+      "table_word": "$C4252A",
+      "relative_word": "$04BE",
+      "target": "$C429E8",
+      "target_first_word_signed": 1024,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$CE",
+      "table_word": "$C4252C",
+      "relative_word": "$04BE",
+      "target": "$C429EA",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$CF",
+      "table_word": "$C4252E",
+      "relative_word": "$04BE",
+      "target": "$C429EC",
+      "target_first_word_signed": 2902,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D0",
+      "table_word": "$C42530",
+      "relative_word": "$04BE",
+      "target": "$C429EE",
+      "target_first_word_signed": 80,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D1",
+      "table_word": "$C42532",
+      "relative_word": "$04BE",
+      "target": "$C429F0",
+      "target_first_word_signed": 2176,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D2",
+      "table_word": "$C42534",
+      "relative_word": "$04BE",
+      "target": "$C429F2",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$D3",
+      "table_word": "$C42536",
+      "relative_word": "$04BE",
+      "target": "$C429F4",
+      "target_first_word_signed": 2647,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D4",
+      "table_word": "$C42538",
+      "relative_word": "$04BE",
+      "target": "$C429F6",
+      "target_first_word_signed": 1536,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D5",
+      "table_word": "$C4253A",
+      "relative_word": "$04BE",
+      "target": "$C429F8",
+      "target_first_word_signed": 1536,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D6",
+      "table_word": "$C4253C",
+      "relative_word": "$04BE",
+      "target": "$C429FA",
+      "target_first_word_signed": 1837,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D7",
+      "table_word": "$C4253E",
+      "relative_word": "$04BE",
+      "target": "$C429FC",
+      "target_first_word_signed": 1280,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D8",
+      "table_word": "$C42540",
+      "relative_word": "$04BE",
+      "target": "$C429FE",
+      "target_first_word_signed": 16,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$D9",
+      "table_word": "$C42542",
+      "relative_word": "$04BE",
+      "target": "$C42A00",
+      "target_first_word_signed": -1,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$DA",
+      "table_word": "$C42544",
+      "relative_word": "$04BE",
+      "target": "$C42A02",
+      "target_first_word_signed": 16,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$DB",
+      "table_word": "$C42546",
+      "relative_word": "$04BE",
+      "target": "$C42A04",
+      "target_first_word_signed": 16,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$DC",
+      "table_word": "$C42548",
+      "relative_word": "$04BE",
+      "target": "$C42A06",
+      "target_first_word_signed": 6,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$DD",
+      "table_word": "$C4254A",
+      "relative_word": "$04BE",
+      "target": "$C42A08",
+      "target_first_word_signed": 1184,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$DE",
+      "table_word": "$C4254C",
+      "relative_word": "$04BE",
+      "target": "$C42A0A",
+      "target_first_word_signed": 2528,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$DF",
+      "table_word": "$C4254E",
+      "relative_word": "$04BE",
+      "target": "$C42A0C",
+      "target_first_word_signed": 7570,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$E0",
+      "table_word": "$C42550",
+      "relative_word": "$04BE",
+      "target": "$C42A0E",
+      "target_first_word_signed": -14257,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$E1",
+      "table_word": "$C42552",
+      "relative_word": "$04BE",
+      "target": "$C42A10",
+      "target_first_word_signed": 28,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$E2",
+      "table_word": "$C42554",
+      "relative_word": "$04BE",
+      "target": "$C42A12",
+      "target_first_word_signed": 15,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$E3",
+      "table_word": "$C42556",
+      "relative_word": "$04BE",
+      "target": "$C42A14",
+      "target_first_word_signed": 17,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$E4",
+      "table_word": "$C42558",
+      "relative_word": "$04BE",
+      "target": "$C42A16",
+      "target_first_word_signed": 12,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$E5",
+      "table_word": "$C4255A",
+      "relative_word": "$04BE",
+      "target": "$C42A18",
+      "target_first_word_signed": 112,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$E6",
+      "table_word": "$C4255C",
+      "relative_word": "$04BE",
+      "target": "$C42A1A",
+      "target_first_word_signed": 1008,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$E7",
+      "table_word": "$C4255E",
+      "relative_word": "$04BE",
+      "target": "$C42A1C",
+      "target_first_word_signed": -11063,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$E8",
+      "table_word": "$C42560",
+      "relative_word": "$04BE",
+      "target": "$C42A1E",
+      "target_first_word_signed": -9313,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$E9",
+      "table_word": "$C42562",
+      "relative_word": "$04BE",
+      "target": "$C42A20",
+      "target_first_word_signed": 310,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$EA",
+      "table_word": "$C42564",
+      "relative_word": "$04BE",
+      "target": "$C42A22",
+      "target_first_word_signed": 15,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$EB",
+      "table_word": "$C42566",
+      "relative_word": "$04BE",
+      "target": "$C42A24",
+      "target_first_word_signed": 15,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$EC",
+      "table_word": "$C42568",
+      "relative_word": "$04BE",
+      "target": "$C42A26",
+      "target_first_word_signed": 3,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$ED",
+      "table_word": "$C4256A",
+      "relative_word": "$04BE",
+      "target": "$C42A28",
+      "target_first_word_signed": 2448,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$EE",
+      "table_word": "$C4256C",
+      "relative_word": "$04BE",
+      "target": "$C42A2A",
+      "target_first_word_signed": 1055,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$EF",
+      "table_word": "$C4256E",
+      "relative_word": "$04BE",
+      "target": "$C42A2C",
+      "target_first_word_signed": -5000,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$F0",
+      "table_word": "$C42570",
+      "relative_word": "$04BE",
+      "target": "$C42A2E",
+      "target_first_word_signed": -13697,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$F1",
+      "table_word": "$C42572",
+      "relative_word": "$04BE",
+      "target": "$C42A30",
+      "target_first_word_signed": 340,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$F2",
+      "table_word": "$C42574",
+      "relative_word": "$04BE",
+      "target": "$C42A32",
+      "target_first_word_signed": -32754,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$F3",
+      "table_word": "$C42576",
+      "relative_word": "$04BE",
+      "target": "$C42A34",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$F4",
+      "table_word": "$C42578",
+      "relative_word": "$04BE",
+      "target": "$C42A36",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$F5",
+      "table_word": "$C4257A",
+      "relative_word": "$04BE",
+      "target": "$C42A38",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$F6",
+      "table_word": "$C4257C",
+      "relative_word": "$04BE",
+      "target": "$C42A3A",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$F7",
+      "table_word": "$C4257E",
+      "relative_word": "$04BE",
+      "target": "$C42A3C",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$F8",
+      "table_word": "$C42580",
+      "relative_word": "$04BE",
+      "target": "$C42A3E",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$F9",
+      "table_word": "$C42582",
+      "relative_word": "$04BE",
+      "target": "$C42A40",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$FA",
+      "table_word": "$C42584",
+      "relative_word": "$04BE",
+      "target": "$C42A42",
+      "target_first_word_signed": -32753,
+      "target_gate": "reject"
+    },
+    {
+      "selector_index": "$FB",
+      "table_word": "$C42586",
+      "relative_word": "$04BE",
+      "target": "$C42A44",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$FC",
+      "table_word": "$C42588",
+      "relative_word": "$04BE",
+      "target": "$C42A46",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$FD",
+      "table_word": "$C4258A",
+      "relative_word": "$04BE",
+      "target": "$C42A48",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$FE",
+      "table_word": "$C4258C",
+      "relative_word": "$04BE",
+      "target": "$C42A4A",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    },
+    {
+      "selector_index": "$FF",
+      "table_word": "$C4258E",
+      "relative_word": "$04BE",
+      "target": "$C42A4C",
+      "target_first_word_signed": 0,
+      "target_gate": "nonnegative_candidate"
+    }
+  ]
+}
