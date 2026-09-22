@@ -110,8 +110,10 @@ def main() -> None:
                "selection": "first 300 aligned records whose leading longword is in the relocated $C22000-$C22FFF descriptor range; coordinate values are not selection criteria",
                "record_size_bytes": RECORD_SIZE, "scenes": scenes}
     target = ROOT / "analysis/data/runtime_scene_placements.json"
-    target.write_text(json.dumps(payload, indent=2) + "\n")
-    (ROOT / "analysis/plots/runtime_scene_placements_xz.svg").write_text(svg(scenes))
+    target.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "analysis/plots/runtime_scene_placements_xz.svg").write_text(
+        svg(scenes), encoding="utf-8"
+    )
     lines = ["# Runtime coordinate-bearing scene placements", "",
              "Classification: **scenario/dataflow evidence**. These are mutable runtime placement records, not an extracted static map mesh or a proven LOD table.  Records are selected solely by their leading relocated descriptor pointer; coordinate values are not a selection criterion.", "",
              "`$C1CB74-$C1CCB6` selects records from `$C4E9AA`. In all three run033 checkpoints, the first populated record starts at that address and has this 24-byte shape:", "",
@@ -123,7 +125,9 @@ def main() -> None:
         lines.append(f"| {scene['capture']} | {len(scene['records'])} | {blocks} | {scene['all_middle_coordinate_words_zero']} |")
     lines += ["", "[Top-down X/Z diagnostic](../plots/runtime_scene_placements_xz.svg) uses the same coordinate scale in all three panels. It is a placement scatter plot only: points do not imply terrain triangles, roads, or missing links.", "",
               "## Limits", "", "The populated records and their coordinates change between checkpoints, so the captures establish a runtime scene-placement layer but not the original static source table, a terrain mesh, or a distance-selected LOD rule. Proving any of those needs a trace of the writer/refill path into `$C4E9AA` and a source-to-renderer association for individual descriptors.", ""]
-    (ROOT / "analysis/data/runtime_scene_placements.md").write_text("\n".join(lines))
+    (ROOT / "analysis/data/runtime_scene_placements.md").write_text(
+        "\n".join(lines), encoding="utf-8"
+    )
     print(f"wrote {target.relative_to(ROOT)} ({sum(len(scene['records']) for scene in scenes)} placements)")
 
 

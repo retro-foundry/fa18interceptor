@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1500" height="540" viewBox="0 0 1500 540">
 <rect width="100%" height="100%" fill="#10151b"/>
 <style>text{font-family:monospace;fill:#dbe7f3}.dim{fill:#9fb2c4}.axis{stroke:#506475}.point{fill:#ffcb6b}</style>
-<text x="42" y="28" font-size="18">Runtime scene-placement diagnostic — X/Z plane; Y word is zero for every plotted record</text>
+<text x="42" y="28" font-size="18">Runtime scene-placement diagnostic â€” X/Z plane; Y word is zero for every plotted record</text>
 <rect x="42.0" y="68" width="410" height="410" fill="#161e27" stroke="#63788b"/>
 <text x="52.0" y="92" font-size="15">run033_frame05250: 121 placements</text>
 <line class="axis" x1="54.0" y1="466" x2="440.0" y2="466"/>
