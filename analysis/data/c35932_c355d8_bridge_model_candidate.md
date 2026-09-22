@@ -46,6 +46,14 @@ the co-visible polygons are the separately classified `$C3B6B0` terrain and
 bridge presentation is primarily this `$C355xx` **line** family, without
 merging the terrain components into the bridge.
 
+Every one of those submissions selects the same static line record
+`$C358B2`, whose selector is `1` and whose terminal offset pair is `(0, 6)`.
+`$C3559A` resolves that record against transient base `$C35568`; `$C355D2`
+resolves it against `$C355A0`.  Those bases and their transformed triples are
+renderer state, whereas `$C358B2` is static topology/control data.  This is
+the direct data/control split for the distant bridge stroke; it does not turn
+either base into an immutable vertex source.
+
 [The line-only orthographic sheet](../plots/run033_frame05250_golden_gate_line_family_sheet.png)
 contains no default polygon overlay or inferred connectivity.  Its repeated
 parallel X-Z strokes and narrow Y-Z tower/span profile are renderer-observed
