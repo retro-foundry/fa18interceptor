@@ -46,6 +46,23 @@
     "derived_slots": "22-39",
     "explicitly_not_source_data": ["$C48390", "$C4BF90", "$C4E910", "$C45BEA"]
   },
+  "c34c_detail_layer": {
+    "static_face_records": ["$C34C06", "$C34C18", "$C34C2A", "$C34C38", "$C34C48"],
+    "workspace": "$C46228 slots 0-35",
+    "direct_slots": "0-21 from the same C3515E-C351DC triple stream",
+    "derived_slots": "22-35 from C0D384-C0D521",
+    "selection": {
+      "descriptor": "$C34BF6",
+      "observed_context": "$C34A9A",
+      "behavior": "conditional reject gate; accepted path reaches C2035A/C203C4"
+    },
+    "renderer": {
+      "face_walker": "$C2035A-$C203C4",
+      "preclip_consumer": "$C2469E",
+      "display_context": "$C45BEA",
+      "qualification": "$C45BEA is mutable runtime display state, never static mesh data"
+    }
+  },
   "evidence": {
     "face_topology": "build/run031_frame7500_external_face_preparations_64f/face_preparations.json",
     "direct_transform": "build/run031_frame12000_c3515e_transform_trace/trace.jsonl",
