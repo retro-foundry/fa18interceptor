@@ -1,0 +1,268 @@
+{
+  "scope": "unique source/control components observed in the bounded run003 M-map preparation trace",
+  "source_census": "analysis\\data\\run003_m_map_display_renderer_census.json",
+  "component_count": 5,
+  "components": [
+    {
+      "transform_input": "$C35BDE",
+      "raw_local_triples": [
+        [
+          11136,
+          0,
+          -9088
+        ],
+        [
+          6656,
+          0,
+          -3840
+        ],
+        [
+          -13568,
+          0,
+          2944
+        ]
+      ],
+      "control_entry": "$C35BF0",
+      "line_records": [
+        {
+          "context_a5": "$C35BD4",
+          "endpoints": [
+            148,
+            123,
+            152,
+            118
+          ]
+        },
+        {
+          "context_a5": "$C35BD4",
+          "endpoints": [
+            152,
+            118,
+            173,
+            112
+          ]
+        }
+      ],
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "transform_input": "$C35BAA",
+      "raw_local_triples": [
+        [
+          0,
+          0,
+          3744
+        ],
+        [
+          0,
+          416,
+          -3168
+        ]
+      ],
+      "control_entry": "$C35BB8",
+      "line_records": [
+        {
+          "context_a5": "$C3559A",
+          "endpoints": [
+            97,
+            56,
+            97,
+            60
+          ]
+        }
+      ],
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "transform_input": "$C35BC2",
+      "raw_local_triples": [
+        [
+          0,
+          0,
+          -3744
+        ],
+        [
+          0,
+          416,
+          3168
+        ]
+      ],
+      "control_entry": "$C35BD0",
+      "line_records": [
+        {
+          "context_a5": "$C355D2",
+          "endpoints": [
+            97,
+            63,
+            97,
+            59
+          ]
+        }
+      ],
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "transform_input": "$C36220",
+      "raw_local_triples": [
+        [
+          4096,
+          172,
+          -5248
+        ],
+        [
+          -2816,
+          172,
+          1152
+        ],
+        [
+          -8960,
+          0,
+          2816
+        ]
+      ],
+      "control_entry": "$C36232",
+      "line_records": [
+        {
+          "context_a5": "$C36216",
+          "endpoints": [
+            118,
+            66,
+            125,
+            60
+          ]
+        },
+        {
+          "context_a5": "$C36216",
+          "endpoints": [
+            125,
+            60,
+            132,
+            59
+          ]
+        }
+      ],
+      "polygon_line_routes": 0,
+      "polygon_span_routes": 0
+    },
+    {
+      "transform_input": "$C3B720",
+      "raw_local_triples": [
+        [
+          2112,
+          0,
+          -896
+        ],
+        [
+          -2080,
+          0,
+          -2048
+        ],
+        [
+          -1600,
+          0,
+          1280
+        ],
+        [
+          1088,
+          0,
+          1568
+        ],
+        [
+          -640,
+          1024,
+          0
+        ]
+      ],
+      "control_entry": "$C3B73E",
+      "line_records": [
+        {
+          "context_a5": "$C3B6B0",
+          "endpoints": [
+            107,
+            94,
+            111,
+            95
+          ]
+        },
+        {
+          "context_a5": "$C3B6B0",
+          "endpoints": [
+            110,
+            92,
+            111,
+            95
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            211,
+            0,
+            211,
+            179
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            89,
+            0,
+            89,
+            179
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            0,
+            140,
+            319,
+            140
+          ]
+        },
+        {
+          "context_a5": "$C4C59E",
+          "endpoints": [
+            0,
+            11,
+            319,
+            11
+          ]
+        },
+        {
+          "context_a5": "$C4C598",
+          "endpoints": [
+            31,
+            130,
+            31,
+            130
+          ]
+        },
+        {
+          "context_a5": "$C4C598",
+          "endpoints": [
+            25,
+            131,
+            35,
+            131
+          ]
+        },
+        {
+          "context_a5": "$C4C598",
+          "endpoints": [
+            26,
+            132,
+            34,
+            132
+          ]
+        }
+      ],
+      "polygon_line_routes": 2,
+      "polygon_span_routes": 2
+    }
+  ],
+  "qualification": "Triples are immutable local transform inputs, not global world coordinates. Line records are bounded to the next control-walker entry; the final component's interval ends at the trace cap and can include later unrelated line work. Polygon route counts are bounded to each wrapper's observed return. This is a partial renderer-input export, not the complete terrain map, a global placement table, or LOD data."
+}

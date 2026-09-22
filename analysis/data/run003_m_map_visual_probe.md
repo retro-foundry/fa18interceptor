@@ -134,6 +134,12 @@ analysis annotations, not game pixels. The image is a display-space check of
 the captured endpoints; it does not by itself attribute a particular original
 pixel write or provide global world coordinates.
 
+The five unique bounded source/control components are also available as a
+machine-readable [partial geometry export](run003_m_map_partial_geometry_export.json)
+with a [compact table](run003_m_map_partial_geometry_export.md). Its scope and
+trace-end qualification are preserved in the export; it is intentionally not
+presented as a complete terrain map or LOD table.
+
 Their signed raw triples are retained in the renderer census. Several have a
 nonzero middle component, including `$C3B720`'s fifth local triple
 `(-640,1024,0)`. This is local component geometry and does not contradict the
