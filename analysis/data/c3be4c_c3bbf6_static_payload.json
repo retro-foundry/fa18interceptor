@@ -1,0 +1,105 @@
+{
+  "schema": "fa18interceptor.static-topology-payload/v1",
+  "source_snapshot": "build\\run034_retreat_9500_checkpoint\\slow.bin",
+  "topology_source": "analysis\\data\\c3be4c_c3bbf6_topology.json",
+  "immutable_coordinate_triples": [
+    {
+      "index": 0,
+      "address": "$C3BE4C",
+      "xyz": [
+        576,
+        4224,
+        -576
+      ]
+    },
+    {
+      "index": 1,
+      "address": "$C3BE52",
+      "xyz": [
+        448,
+        3584,
+        -448
+      ]
+    },
+    {
+      "index": 2,
+      "address": "$C3BE58",
+      "xyz": [
+        448,
+        0,
+        -448
+      ]
+    },
+    {
+      "index": 3,
+      "address": "$C3BE5E",
+      "xyz": [
+        -448,
+        0,
+        -448
+      ]
+    },
+    {
+      "index": 4,
+      "address": "$C3BE64",
+      "xyz": [
+        448,
+        0,
+        448
+      ]
+    }
+  ],
+  "renderer_observed_faces": [
+    {
+      "context": "$C3BBF6",
+      "record": "$C3BCC8",
+      "indices": [
+        2,
+        3,
+        5,
+        1
+      ]
+    },
+    {
+      "context": "$C3BBF6",
+      "record": "$C3BCD6",
+      "indices": [
+        3,
+        7,
+        8,
+        5
+      ]
+    },
+    {
+      "context": "$C3BBF6",
+      "record": "$C3BCE4",
+      "indices": [
+        7,
+        4,
+        6,
+        8
+      ]
+    },
+    {
+      "context": "$C3BBF6",
+      "record": "$C3BCF2",
+      "indices": [
+        4,
+        2,
+        1,
+        6
+      ]
+    },
+    {
+      "context": "$C3BBF6",
+      "record": "$C3BD00",
+      "indices": [
+        1,
+        5,
+        8,
+        6
+      ]
+    }
+  ],
+  "qualification": "Triples are copied from the trace-proven static source range. Face edges are only the renderer-observed topology supplied by the input JSON; no unseen geometry is inferred."
+}

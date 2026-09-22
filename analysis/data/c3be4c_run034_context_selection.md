@@ -14,6 +14,15 @@ The new source-interval trace begins exactly at the retreat `$C1F4AC` entry and 
 
 The three final submissions have static `A5=$C3BBF6` and are four-point polygons. This proves a partial immutable source/control/face path for the retreat checkpoint, not a complete standalone mesh.
 
+The direct source boundary is exactly `$C3BE4C-$C3BE69` (five triples, 30
+bytes): `$C1F4AC` consumes the first triple and `$C1F528` consumes the next
+four before `A1=$C3BE6A` at `$C1F6F8`. Five pre-clip quad records are now
+observed at `$C3BCC8`, `$C3BCD6`, `$C3BCE4`, `$C3BCF2`, and `$C3BD00`.
+Their offset lists use slots 0--8 of the mutable workspace; only slots 0--4
+are currently source-traced. The persisted
+[`topology`](c3be4c_c3bbf6_topology.json) deliberately labels slots 5--8 as
+untraced derived/unknown rather than manufacturing static vertices.
+
 ## Transform-space gate before the control stream
 
 The matched traces identify why the far sample lacks this source-to-face path.

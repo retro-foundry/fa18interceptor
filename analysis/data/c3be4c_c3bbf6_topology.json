@@ -1,0 +1,18 @@
+{
+  "schema": "fa18interceptor.renderer-observed-topology/v1",
+  "family": "$C3BE4C/$C3BBF6",
+  "classification": "trace-proven five-triple input with partial renderer-derived quad topology",
+  "vertex_source": {
+    "start": "$C3BE4C",
+    "count": 5,
+    "role": "immutable direct triples consumed by C1F4AC/C1F528; slots 5-8 are not yet source-traced"
+  },
+  "faces": [
+    {"context": "$C3BBF6", "record": "$C3BCC8", "indices": [2, 3, 5, 1]},
+    {"context": "$C3BBF6", "record": "$C3BCD6", "indices": [3, 7, 8, 5]},
+    {"context": "$C3BBF6", "record": "$C3BCE4", "indices": [7, 4, 6, 8]},
+    {"context": "$C3BBF6", "record": "$C3BCF2", "indices": [4, 2, 1, 6]},
+    {"context": "$C3BBF6", "record": "$C3BD00", "indices": [1, 5, 8, 6]}
+  ],
+  "qualification": "Indices 0-4 are the five direct immutable input triples. Indices 5-8 are selected by the observed face records but are not static source triples until their writer is traced; no missing faces or vertices are inferred."
+}
