@@ -1,0 +1,308 @@
+{
+  "authority": {
+    "trace": "build/run033_placement_bulk_404_trace/trace.jsonl",
+    "selector_entry_pc": "$C1D3F4",
+    "static_table_base": "$C42390",
+    "stream_start_pc": "$C1D442"
+  },
+  "classification": "traced_static_template_selector_not_world_grid_or_lod_table",
+  "groups": [
+    {
+      "frame": 1,
+      "trace_index": 10963,
+      "workspace_band": "$C48390",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42704",
+      "bit_gate_taken": false,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 11014,
+      "workspace_band": "$C48990",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42704",
+      "bit_gate_taken": false,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 11065,
+      "workspace_band": "$C48F90",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42704",
+      "bit_gate_taken": false,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 11116,
+      "workspace_band": "$C49590",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C42B3E"
+    },
+    {
+      "frame": 1,
+      "trace_index": 11258,
+      "workspace_band": "$C49B90",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 11321,
+      "workspace_band": "$C4A190",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 11384,
+      "workspace_band": "$C4A790",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C427C8"
+    },
+    {
+      "frame": 1,
+      "trace_index": 11709,
+      "workspace_band": "$C4AD90",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C427B4"
+    },
+    {
+      "frame": 1,
+      "trace_index": 11927,
+      "workspace_band": "$C4B390",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 11990,
+      "workspace_band": "$C4B990",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C4274A"
+    },
+    {
+      "frame": 1,
+      "trace_index": 12429,
+      "workspace_band": "$C4BF90",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C426CE",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 12492,
+      "workspace_band": "$C4C590",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C426CE",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 1,
+      "trace_index": 12555,
+      "workspace_band": "$C4CB90",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C426CE",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C4272E"
+    },
+    {
+      "frame": 1,
+      "trace_index": 12760,
+      "workspace_band": "$C4D190",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C42788"
+    },
+    {
+      "frame": 3,
+      "trace_index": 30094,
+      "workspace_band": "$C48390",
+      "table_base": "$C42390",
+      "selector_index": 65,
+      "selector_table_word_address": "$C42412",
+      "group_record": "$C4288E",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 30365,
+      "workspace_band": "$C48990",
+      "table_base": "$C42390",
+      "selector_index": 65,
+      "selector_table_word_address": "$C42412",
+      "group_record": "$C4288E",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 30634,
+      "workspace_band": "$C48F90",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 30903,
+      "workspace_band": "$C49590",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 31172,
+      "workspace_band": "$C49B90",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C429D0"
+    },
+    {
+      "frame": 3,
+      "trace_index": 31969,
+      "workspace_band": "$C4A190",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 32236,
+      "workspace_band": "$C4A790",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 32503,
+      "workspace_band": "$C4AD90",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C429DE"
+    },
+    {
+      "frame": 3,
+      "trace_index": 33297,
+      "workspace_band": "$C4B390",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 33564,
+      "workspace_band": "$C4B990",
+      "table_base": "$C42390",
+      "selector_index": 68,
+      "selector_table_word_address": "$C42418",
+      "group_record": "$C428B2",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 33831,
+      "workspace_band": "$C4BF90",
+      "table_base": "$C42390",
+      "selector_index": 68,
+      "selector_table_word_address": "$C42418",
+      "group_record": "$C428B2",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C4298A"
+    },
+    {
+      "frame": 3,
+      "trace_index": 34404,
+      "workspace_band": "$C4C590",
+      "table_base": "$C42390",
+      "selector_index": 68,
+      "selector_table_word_address": "$C42418",
+      "group_record": "$C428B2",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": 3,
+      "trace_index": 34671,
+      "workspace_band": "$C4CB90",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "first_template_stream_byte": "$C42B5C"
+    }
+  ]
+}
