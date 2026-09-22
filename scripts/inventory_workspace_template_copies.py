@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import struct
+import argparse
 from pathlib import Path
 
 
@@ -117,13 +118,13 @@ def markdown(rows: list[dict]) -> str:
         "The rows describe static bytes copied into mutable workspace cells; "
         "they are not an extracted terrain mesh, global position table, or LOD table.",
         "",
-        "Authority: `build/run033_placement_bulk_404_trace/trace.jsonl` and its "
+        f"Authority: `{TRACE.relative_to(ROOT).as_posix()}` and its "
         "frame-0 slow-RAM snapshot.  `$C1D488` supplies each static header; "
         "`$C1D4BC` copies its following two words; `$C1DD36` is the later cell-header reader.",
         "",
         f"The bounded trace has **{len(rows)}** observed static-entry copies.  "
         f"**{len(consumed)}** are later read at `$C1DD36` before the trace ends.  "
-        "An absent later read means only that this three-frame trace did not reach one; "
+        "An absent later read means only that this bounded trace did not reach one; "
         "it is not rejection evidence.",
         "",
         "`$C1D48C-$C1D496` transforms the source header byte rather than copying it "
@@ -217,6 +218,20 @@ def svg(rows: list[dict]) -> str:
 
 
 def main() -> None:
+    global TRACE, SLOW
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--trace-directory", type=Path,
+                        default=TRACE.parent,
+                        help="directory containing trace.jsonl and slow.bin")
+    parser.add_argument("--output-suffix", default="",
+                        help="suffix inserted before generated file extensions (for example _404_426)")
+    args = parser.parse_args()
+    TRACE = (args.trace_directory / "trace.jsonl").resolve()
+    SLOW = (args.trace_directory / "slow.bin").resolve()
+    if not TRACE.is_file() or not SLOW.is_file():
+        parser.error("--trace-directory must contain trace.jsonl and slow.bin")
+    if args.output_suffix and not args.output_suffix.startswith("_"):
+        parser.error("--output-suffix must be empty or begin with '_'")
     rows = inventory()
     payload = {
         "authority": {
@@ -228,9 +243,9 @@ def main() -> None:
         "classification": "traced_static_template_to_mutable_workspace_not_map_mesh",
         "copies": rows,
     }
-    json_path = ROOT / "analysis/data/workspace_template_copies.json"
-    markdown_path = ROOT / "analysis/data/workspace_template_copies.md"
-    svg_path = ROOT / "analysis/plots/workspace_template_placements_xz.svg"
+    json_path = ROOT / f"analysis/data/workspace_template_copies{args.output_suffix}.json"
+    markdown_path = ROOT / f"analysis/data/workspace_template_copies{args.output_suffix}.md"
+    svg_path = ROOT / f"analysis/plots/workspace_template_placements_xz{args.output_suffix}.svg"
     json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     markdown_path.write_text(markdown(rows), encoding="utf-8")
     svg_path.write_text(svg(rows), encoding="utf-8")

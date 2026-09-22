@@ -4,7 +4,7 @@ Classification: **scenario-backed producer-to-consumer inventory**. The rows des
 
 Authority: `build/run033_placement_bulk_404_trace/trace.jsonl` and its frame-0 slow-RAM snapshot.  `$C1D488` supplies each static header; `$C1D4BC` copies its following two words; `$C1DD36` is the later cell-header reader.
 
-The bounded trace has **37** observed static-entry copies.  **22** are later read at `$C1DD36` before the trace ends.  An absent later read means only that this three-frame trace did not reach one; it is not rejection evidence.
+The bounded trace has **37** observed static-entry copies.  **22** are later read at `$C1DD36` before the trace ends.  An absent later read means only that this bounded trace did not reach one; it is not rejection evidence.
 
 `$C1D48C-$C1D496` transforms the source header byte rather than copying it directly: source bit 7 becomes destination word bit 15, while source bits 0..6 remain the low seven bits.  The two displayed source words are copied to the next four workspace bytes by `$C1D4BC`.
 
