@@ -4942,5 +4942,107 @@
       ],
       "authority": "build/run033_row_axis_bin31_single/selector_axis_samples.json"
     }
+  ],
+  "group_axis_outer_periodicity": [
+    {
+      "bin": 32,
+      "expected_low_five_bits_bin": 0,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_group_axis_bin032_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 33,
+      "expected_low_five_bits_bin": 1,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_group_axis_bin033_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 63,
+      "expected_low_five_bits_bin": 31,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_group_axis_bin063_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 64,
+      "expected_low_five_bits_bin": 0,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_group_axis_bin064_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 127,
+      "expected_low_five_bits_bin": 31,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_group_axis_bin127_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 128,
+      "expected_low_five_bits_bin": 0,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_group_axis_bin128_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 255,
+      "expected_low_five_bits_bin": 31,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_group_axis_bin255_outer/selector_axis_samples.json"
+    }
+  ],
+  "row_axis_outer_periodicity": [
+    {
+      "bin": 32,
+      "expected_low_five_bits_bin": 0,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_row_axis_bin032_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 33,
+      "expected_low_five_bits_bin": 1,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_row_axis_bin033_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 63,
+      "expected_low_five_bits_bin": 31,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_row_axis_bin063_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 64,
+      "expected_low_five_bits_bin": 0,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_row_axis_bin064_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 127,
+      "expected_low_five_bits_bin": 31,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_row_axis_bin127_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 128,
+      "expected_low_five_bits_bin": 0,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_row_axis_bin128_outer/selector_axis_samples.json"
+    },
+    {
+      "bin": 255,
+      "expected_low_five_bits_bin": 31,
+      "changed_axis_sequence_matches": true,
+      "other_axis_sequence_matches": true,
+      "authority": "build/run033_row_axis_bin255_outer/selector_axis_samples.json"
+    }
   ]
 }

@@ -50,6 +50,12 @@ but has fewer changed call positions because portions of the call sequence reach
 the observed zero-valued boundary behavior. The unmodified final 13 calls retain
 their selector inputs throughout this 0--31 sweep.
 
+Outer samples at bins 32, 33, 63, 64, 127, 128, and 255 exactly match
+the corresponding `bin & $1F` sequence on their own axis and on the untouched
+axis. Thus both inputs are observed modulo 32 before this selector packet. This
+proves a 32 by 32 **selector-bin lattice** for this path; it does not establish
+a 32 by 32 physical terrain grid, a map edge, or an absolute unit scale.
+
 The exact per-call value sequences, including the boundary values, are in the
 machine-readable companion JSON. The static `$C42390` directory remains the
 authoritative group lookup; this result proves its two input axes in this packet,

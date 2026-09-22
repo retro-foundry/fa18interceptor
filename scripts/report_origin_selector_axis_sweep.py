@@ -41,7 +41,26 @@ def compact_axis(samples: list[dict], changed_field: str) -> list[dict]:
     return output
 
 
-def markdown(group: list[dict], row: list[dict]) -> str:
+def outer_periodicity(axis: str, field: str, inner: list[dict]) -> list[dict]:
+    results = []
+    for value in (32, 33, 63, 64, 127, 128, 255):
+        path = ROOT / "build" / f"run033_{axis}_axis_bin{value:03d}_outer" / "selector_axis_samples.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        sample = payload["samples"][0]
+        expected = inner[value & 0x1F]["calls"]
+        values = [call[field] for call in sample["calls"]]
+        expected_values = [call[field] for call in expected]
+        other = "live_row_key" if field == "selector_index" else "selector_index"
+        other_values = [call[other] for call in sample["calls"]]
+        expected_other = [call[other] for call in expected]
+        results.append({"bin": value, "expected_low_five_bits_bin": value & 0x1F,
+                        "changed_axis_sequence_matches": values == expected_values,
+                        "other_axis_sequence_matches": other_values == expected_other,
+                        "authority": str(path.relative_to(ROOT)).replace("\\", "/")})
+    return results
+
+
+def markdown(group: list[dict], row: list[dict], group_outer: list[dict], row_outer: list[dict]) -> str:
     lines = [
         "# Controlled terrain-directory axis sweep",
         "",
@@ -70,6 +89,12 @@ def markdown(group: list[dict], row: list[dict]) -> str:
         "the observed zero-valued boundary behavior. The unmodified final 13 calls retain",
         "their selector inputs throughout this 0--31 sweep.",
         "",
+        "Outer samples at bins 32, 33, 63, 64, 127, 128, and 255 exactly match",
+        "the corresponding `bin & $1F` sequence on their own axis and on the untouched",
+        "axis. Thus both inputs are observed modulo 32 before this selector packet. This",
+        "proves a 32 by 32 **selector-bin lattice** for this path; it does not establish",
+        "a 32 by 32 physical terrain grid, a map edge, or an absolute unit scale.",
+        "",
         "The exact per-call value sequences, including the boundary values, are in the",
         "machine-readable companion JSON. The static `$C42390` directory remains the",
         "authoritative group lookup; this result proves its two input axes in this packet,",
@@ -90,11 +115,15 @@ def main() -> None:
     group_raw, row_raw = load("group", bins), load("row", bins)
     group = compact_axis(group_raw, "selector_index")
     row = compact_axis(row_raw, "live_row_key")
+    group_outer = outer_periodicity("group", "selector_index", group_raw)
+    row_outer = outer_periodicity("row", "live_row_key", row_raw)
     payload = {"classification": "controlled_selector_input_sweep_not_global_map_or_lod",
                "bins": list(bins), "call_count": 41,
-               "group_axis": group, "row_axis": row}
+               "group_axis": group, "row_axis": row,
+               "group_axis_outer_periodicity": group_outer,
+               "row_axis_outer_periodicity": row_outer}
     args.output_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    args.output_markdown.write_text(markdown(group, row), encoding="utf-8")
+    args.output_markdown.write_text(markdown(group, row, group_outer, row_outer), encoding="utf-8")
     print(f"wrote {args.output_json.relative_to(ROOT)} and {args.output_markdown.relative_to(ROOT)}")
 
 
