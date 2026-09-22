@@ -48,11 +48,13 @@ merging the terrain components into the bridge.
 
 Every one of those submissions selects the same static line record
 `$C358B2`, whose selector is `1` and whose terminal offset pair is `(0, 6)`.
-`$C3559A` resolves that record against transient base `$C35568`; `$C355D2`
-resolves it against `$C355A0`.  Those bases and their transformed triples are
-renderer state, whereas `$C358B2` is static topology/control data.  This is
-the direct data/control split for the distant bridge stroke; it does not turn
-either base into an immutable vertex source.
+`$C212B0` resolves those offsets against the fixed mutable `$C48390`
+workspace; that is confirmed by the line collector's decoder.  `$C35568` and
+`$C355A0` are only the observed parent `A3` values for the `$C3559A` and
+`$C355D2` calls, respectively—not line-vertex bases.  `$C358B2` is static
+topology/control data while its endpoint triples are transient workspace
+state.  This is the direct data/control split for the distant bridge stroke;
+it does not turn either parent value into an immutable vertex source.
 
 [The line-only orthographic sheet](../plots/run033_frame05250_golden_gate_line_family_sheet.png)
 contains no default polygon overlay or inferred connectivity.  Its repeated
