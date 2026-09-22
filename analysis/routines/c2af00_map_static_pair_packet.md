@@ -45,9 +45,22 @@ proves the alternate stream is a live renderer variant.  It does not make it
 distance LOD: the appearance and stable captures differ in transition/control
 state as well as any possible map scale or viewing variables.
 
+Live state sampling at `$C2AF40` sharpens that qualification.  The run035
+appearance state produces 12 inline and 12 alternate samples over three
+passes; its metric is `1113`, `1118`, then `1124` (all below `$C80`).  Its
+alternate selections occur only with the non-zero alternate-mode word.  The
+stable state produces 31 inline and zero alternate samples, with metric
+`196608`, including samples whose alternate-mode word is non-zero.  This
+directly ties the route to the renderer's threshold metric and mode state;
+it is strong evidence for map display/detail scaling or transition behavior,
+but still not a flight-world-distance measurement.
+
 The exact route, header, and consumed-pair evidence is retained in the
 [run035 appearance inventory](../data/run035_m_map_polygon_static_packets.md)
 and [run035 stable inventory](../data/run035_m_map_stable_polygon_static_packets.md).
+The live selector samples are in the
+[appearance state](../data/run035_m_map_appearance_packet_runtime_state.md)
+and [stable state](../data/run035_m_map_stable_packet_runtime_state.md).
 For the four headers observed on both routes, the
 [inline/alternate comparison](../data/run003_run035_map_packet_variant_comparison.md)
 shows distinct source ranges and reduced first-batch pair counts for three

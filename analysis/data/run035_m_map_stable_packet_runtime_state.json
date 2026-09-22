@@ -1,0 +1,353 @@
+{
+  "scope": "live C2AF40 map packet selector samples from a sealed state without replay input",
+  "state": "build\\run035_m_map_stable_1f_trace\\state.bin",
+  "max_instructions": 180000,
+  "samples": [
+    {
+      "instruction": 46953,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "selected_stream": "$C42E56",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 47320,
+      "header": "$C42E3E",
+      "inline_stream": "$C42E42",
+      "alternate_stream": "$C42E42",
+      "selected_stream": "$C42E42",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 47678,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "selected_stream": "$C42E56",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 48855,
+      "header": "$C42D28",
+      "inline_stream": "$C42D2C",
+      "alternate_stream": "$C42D2C",
+      "selected_stream": "$C42D2C",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 59125,
+      "header": "$C42DFC",
+      "inline_stream": "$C42E00",
+      "alternate_stream": "$C42E00",
+      "selected_stream": "$C42E00",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 59556,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "selected_stream": "$C42E56",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 60165,
+      "header": "$C42E1A",
+      "inline_stream": "$C42E1E",
+      "alternate_stream": "$C42E1E",
+      "selected_stream": "$C42E1E",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 61417,
+      "header": "$C42DC4",
+      "inline_stream": "$C42DC8",
+      "alternate_stream": "$C42DC8",
+      "selected_stream": "$C42DC8",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 62638,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "selected_stream": "$C42E56",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 63097,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "selected_stream": "$C42E56",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 63556,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "selected_stream": "$C42E56",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 0
+    },
+    {
+      "instruction": 64109,
+      "header": "$C43F5E",
+      "inline_stream": "$C43F62",
+      "alternate_stream": "$C43FAE",
+      "selected_stream": "$C43F62",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 69584,
+      "header": "$C43ECA",
+      "inline_stream": "$C43ECE",
+      "alternate_stream": "$C43F3A",
+      "selected_stream": "$C43ECE",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 76118,
+      "header": "$C43E24",
+      "inline_stream": "$C43E28",
+      "alternate_stream": "$C43E9A",
+      "selected_stream": "$C43E28",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 83480,
+      "header": "$C43CBE",
+      "inline_stream": "$C43CC2",
+      "alternate_stream": "$C43CFA",
+      "selected_stream": "$C43CC2",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 86872,
+      "header": "$C43BAC",
+      "inline_stream": "$C43BB0",
+      "alternate_stream": "$C43C70",
+      "selected_stream": "$C43BB0",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 100842,
+      "header": "$C43B34",
+      "inline_stream": "$C43B38",
+      "alternate_stream": "$C43B94",
+      "selected_stream": "$C43B38",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 106218,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "selected_stream": "$C43B1E",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 107510,
+      "header": "$C43A78",
+      "inline_stream": "$C43A7C",
+      "alternate_stream": "$C43AF0",
+      "selected_stream": "$C43A7C",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 114991,
+      "header": "$C439E8",
+      "inline_stream": "$C439EC",
+      "alternate_stream": "$C43A44",
+      "selected_stream": "$C439EC",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 120354,
+      "header": "$C440BC",
+      "inline_stream": "$C440C0",
+      "alternate_stream": "$C440C0",
+      "selected_stream": "$C440C0",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 124673,
+      "header": "$C4409E",
+      "inline_stream": "$C440A2",
+      "alternate_stream": "$C440A2",
+      "selected_stream": "$C440A2",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 126082,
+      "header": "$C4407C",
+      "inline_stream": "$C44080",
+      "alternate_stream": "$C44080",
+      "selected_stream": "$C44080",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 127964,
+      "header": "$C43FD0",
+      "inline_stream": "$C43FD4",
+      "alternate_stream": "$C43FD4",
+      "selected_stream": "$C43FD4",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 135702,
+      "header": "$C43D84",
+      "inline_stream": "$C43D88",
+      "alternate_stream": "$C43D88",
+      "selected_stream": "$C43D88",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 143257,
+      "header": "$C43D1A",
+      "inline_stream": "$C43D1E",
+      "alternate_stream": "$C43D1E",
+      "selected_stream": "$C43D1E",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 144550,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "selected_stream": "$C43B1E",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 145879,
+      "header": "$C439CC",
+      "inline_stream": "$C439D0",
+      "alternate_stream": "$C439D0",
+      "selected_stream": "$C439D0",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 146342,
+      "header": "$C439CC",
+      "inline_stream": "$C439D0",
+      "alternate_stream": "$C439D0",
+      "selected_stream": "$C439D0",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 146805,
+      "header": "$C439A8",
+      "inline_stream": "$C439AC",
+      "alternate_stream": "$C439AC",
+      "selected_stream": "$C439AC",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    },
+    {
+      "instruction": 147502,
+      "header": "$C43994",
+      "inline_stream": "$C43998",
+      "alternate_stream": "$C43998",
+      "selected_stream": "$C43998",
+      "route": "inline",
+      "d7": 0,
+      "metric": 196608,
+      "alternate_mode": 1
+    }
+  ],
+  "route_counts": {
+    "inline": 31,
+    "alternate": 0
+  },
+  "qualification": "Metric and alternate-mode values are live frame values read at C2AF40. They establish the immediate selector state only; their higher-level physical meaning requires separate dataflow evidence."
+}
