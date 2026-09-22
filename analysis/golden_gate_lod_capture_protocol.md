@@ -17,9 +17,12 @@ the game's Save, Restore, Rewind, Reset, or Warp controls while recording.
    preserve. Close the recording session normally when finished.
 
 The useful result contains the same red landmark at visibly small, medium, and
-large extents while the horizon and bridge bearing stay stable. The existing
-analysis will compare `$C355xx` line contexts, filled-face contexts, selected
-terrain-template streams, and projected screen bounds at those extents.
+large extents while the horizon and bridge bearing stay stable.  A hands-off
+recording alone is insufficient: `run036` has no control events in its sampled
+interval, but its bridge midpoint drifts 83 pixels by frame 7,000.  The
+existing analysis will compare `$C355xx` line contexts, filled-face contexts,
+selected terrain-template streams, and projected screen bounds at those
+extents.
 
 `run035` already establishes the red Golden Gate line sequence
 `$C3559A/$C355D2 -> $C355CE -> $C3558A`, but its heading and attitude vary.
