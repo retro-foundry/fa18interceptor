@@ -1,5 +1,5 @@
 {
-  "classification": "trace-proven static transform input for an unnamed later-bridge component",
+  "classification": "trace-proven static transform input for an unnamed shared bridge-scene component",
   "input_range": "$C3B588-$C3B5A5",
   "triples": [
     [512, 0, -1024],
@@ -18,6 +18,6 @@
   "exclusions": [
     "$C3B5A6 and following are not included as source triples",
     "$C48390 and all submitted/projected triples are mutable renderer state",
-    "this payload does not claim to be a complete later-bridge mesh"
+    "this payload does not claim to be a complete landmark mesh"
   ]
 }

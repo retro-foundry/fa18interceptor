@@ -1,8 +1,8 @@
-# `$C3B588-$C3B5A5`: later-bridge component input boundary
+# `$C3B588-$C3B5A5`: shared bridge-scene component input boundary
 
 Classification: **trace-proven five-triple transform input with two static
-renderer face/control families**.  This is an exportable component boundary,
-not a complete later-bridge reconstruction.
+renderer face/control families**.  This is an exportable shared bridge-scene
+component boundary, not a complete landmark reconstruction.
 
 The alternate matrix entry `$C1F4AC` reads five consecutive triples beginning
 at `$C3B588`, then reaches `$C1F6F8` with `A1=$C3B5A6` and
@@ -34,10 +34,13 @@ Focused no-input traces confirm the ownership on the two alternate instances:
   `$C2FF48` and `$C212B0` with `A2=$C3B568`.
 
 The direct input is therefore connected to both renderer families without
-merging their separate face records or mutable `$C48390` poses.  These
-families occur in the later-bridge checkpoint; this establishes a drawable
-bridge component, but not its full landmark identity, instancing count, or
-unseen faces.
+merging their separate face records or mutable `$C48390` poses.  It occurs in
+the later-bridge checkpoint **and**, independently, in run033's frame-5,500
+red Golden Gate window: the first bounded `$C3B588` occurrence there reaches
+`$C3B50A` (ten polygons and four line submissions before the next transform).
+The input is consequently a shared bridge-scene component, not evidence for a
+landmark-specific mesh.  Its full scene identity, instancing count, and unseen
+faces remain unproven.
 
 [The static orthographic sheet](../plots/c3b588_later_bridge_component_static_topology.png)
 maps the five observed face-offset records directly onto the five local input
@@ -49,6 +52,7 @@ Authorities:
 
 - `build/run031_frame14500_c3b588_{following_trace,occ2_following_trace}/trace.jsonl`;
 - `build/run031_frame14500_c3b588_instance_geometry/instance_geometry.json`;
+- `build/run033_frame05500_c3b588_instance_geometry/instance_geometry.json`;
 - `analysis/data/c3b588_later_bridge_component_face_topology.json`;
 - `build/run031_frame14500_bridge_checkpoint/slow.bin` and the run033
   `frame{05250,05500,06000,06250}` checkpoint `slow.bin` snapshots.
