@@ -19,9 +19,12 @@ bytes): `$C1F4AC` consumes the first triple and `$C1F528` consumes the next
 four before `A1=$C3BE6A` at `$C1F6F8`. Five pre-clip quad records are now
 observed at `$C3BCC8`, `$C3BCD6`, `$C3BCE4`, `$C3BCF2`, and `$C3BD00`.
 Their offset lists use slots 0--8 of the mutable workspace; only slots 0--4
-are currently source-traced. The persisted
-[`topology`](c3be4c_c3bbf6_topology.json) deliberately labels slots 5--8 as
-untraced derived/unknown rather than manufacturing static vertices.
+are direct static inputs. The `$C3BBF4` stream dispatches `$C20F10`; its
+`$C20F1C-$C20F76` body reads the transformed block and writes slots 5--8 at
+`$C483AE/$C483B4/$C483BA/$C483C0` before `$C2005C` resolves the faces. The
+persisted [`topology`](c3be4c_c3bbf6_topology.json) consequently identifies
+the component as procedural: slots 5--8 are derived, not copied static
+vertices.
 
 ## Transform-space gate before the control stream
 
