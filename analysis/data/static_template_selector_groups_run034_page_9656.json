@@ -1,0 +1,41 @@
+{
+  "authority": {
+    "trace": "build/run034_page_9656_trace/trace.jsonl",
+    "slow_snapshot": "build/run034_page_9656_trace/slow.bin",
+    "selector_entry_pc": "$C1D3F4",
+    "static_table_base": "$C42390",
+    "stream_start_pc": "$C1D442"
+  },
+  "classification": "traced_static_template_selector_not_world_grid_or_lod_table",
+  "groups": [
+    {
+      "frame": null,
+      "trace_index": 0,
+      "workspace_band": "$C48390",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_live_row_term": "$000F",
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C425F4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000C",
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C425FC",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42ADA"
+        ]
+      },
+      "row_threshold_count": 3,
+      "live_row_search_key": "$000F",
+      "selected_row_index": 2,
+      "first_template_stream_byte": "$C42ADA"
+    }
+  ]
+}
