@@ -64,6 +64,10 @@ mechanism for map packet geometry; it does not by itself establish that the
 depth is physical flight-world distance rather than the M-map renderer's own
 camera/scale depth.
 
+Upstream, `$C1C636` publishes `$C45A78` from the shifted `D1` element of a
+transformed coordinate triple, as documented in the
+[projection-component publisher](c1c5e0_projection_component_publish.md).
+
 The exact route, header, and consumed-pair evidence is retained in the
 [run035 appearance inventory](../data/run035_m_map_polygon_static_packets.md)
 and [run035 stable inventory](../data/run035_m_map_stable_polygon_static_packets.md).
