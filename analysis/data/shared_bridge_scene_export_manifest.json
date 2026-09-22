@@ -11,16 +11,6 @@
       "observed_faces": 5,
       "contexts": ["$C3B4FE", "$C3B50A"],
       "identity": "unnamed shared bridge-scene component"
-    },
-    {
-      "id": "c3b720_shared_bridge_pylon",
-      "source_triples": "c3b720_shared_bridge_pylon_static_payload.json",
-      "topology": "c3b720_shared_bridge_pylon_face_topology.json",
-      "source_range": "$C3B720-$C3B73D",
-      "triple_count": 5,
-      "observed_faces": 4,
-      "contexts": ["$C3B6B0"],
-      "identity": "unnamed shared bridge-scene pylon; base face unobserved"
     }
   ],
   "exclude_as_mutable_renderer_state": [

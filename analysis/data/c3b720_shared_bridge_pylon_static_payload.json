@@ -1,5 +1,5 @@
 {
-  "classification": "trace-proven partial shared bridge-scene component",
+  "classification": "trace-proven partial terrain/mountain component candidate",
   "input_range": "$C3B720-$C3B73D",
   "triples": [
     [2112, 0, -896],

@@ -1,8 +1,8 @@
-# `$C3B720-$C3B73D`: shared bridge-scene pylon component
+# `$C3B720-$C3B73D`: terrain/mountain component candidate
 
 Classification: **trace-proven five-triple input and four static triangular
-faces**.  It is an exportable partial bridge-scene component, not a complete
-landmark mesh.
+faces**.  It is an exportable partial terrain component candidate, not a
+complete landmark mesh.
 
 The run033 frame-5,250 red Golden Gate checkpoint enters `$C1F4AC` with
 `A1=$C3B720` and transforms five consecutive triples.  `$C1F6F8` is then
@@ -24,8 +24,9 @@ Their offset lists map exactly to source slots:
 This proves four triangular sides around slot 4.  No record selecting a base
 polygon was observed, so the [local-coordinate sheet](../plots/c3b720_shared_bridge_pylon_static_topology.png)
 does not invent one.  The component is active in the user-identified red
-Golden Gate window and is kept semantically unnamed despite its pylon-like
-topology.
+Golden Gate window, but its four-sided low mound topology and the user's
+identification make it a **mountain/terrain candidate**, not bridge structure.
+That is a visual classification; its original semantic name remains unknown.
 
 The source triples and control contract are available in
 [the portable payload](c3b720_shared_bridge_pylon_static_payload.json).
