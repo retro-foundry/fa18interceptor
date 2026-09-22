@@ -12,7 +12,9 @@
     "source": "$C3B9B2",
     "end": "$C3B9BD",
     "triples": [[272, 0, -270], [-270, 172, 272]],
-    "transform_entry": "$C1F4AC"
+    "transform_entry": "$C1F4AC",
+    "observed_line_context": "$C3559A",
+    "qualification": "This is the bounded frame-7 transform to frame-8 C3559A join only; it is not a claimed immutable producer for the adjacent C355D2 call."
   },
   "runtime_endpoint_contract": {
     "workspace": "$C48390",
@@ -20,5 +22,5 @@
     "selected_slots": [0, 1],
     "explicitly_not_source_geometry": ["$C48390", "$C48396"]
   },
-  "qualification": "C212B0 decodes C358B2 offsets against fixed mutable C48390. C35568/C355A0 seen in callers are not vertex bases. The static record is retained as topology/control only."
+  "qualification": "C212B0 decodes C358B2 offsets against fixed mutable C48390. C35568/C355A0 seen in callers are not vertex bases. The static record is retained as topology/control only; C355D2's immediate immutable producer remains unresolved."
 }
