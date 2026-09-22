@@ -53,6 +53,12 @@ range the next source-trace target rather than inferred geometry. The offset col
 `scripts/collect_c203_face_indices.py` and its frame-12000 report is the
 authoritative topology capture.
 
+The layer is not independently invoked at this checkpoint: the
+[`$C34BF6` selector trace](c34bf6_c34c_selector_trace.md) enters with
+`A5=$C34A9A`, conditionally chooses `$C46228`, and then feeds the five C34C
+face records to `$C203C4`.  This associates C34C with the same object-control
+context while retaining the separate workspace and face-record boundaries.
+
 The `$C34A9A/$C34A9C` polygon family is not merged into this model: it uses
 the separate `$C48390` workspace in the sampled frame. Similar silhouette and
 shared Hunk residency are insufficient to claim a shared object instance.
@@ -66,5 +72,7 @@ with 42 for C34A. The independent external-camera frame shows a recognizably
 F/A-18-like aircraft when the C34A family is active. Together with the
 separately transformed C34C layer at frame 12000, this supports a **reduced-
 detail alternate-layer hypothesis**. The two coordinate lanes cannot prove
-world-instance separation. This is not proof of a distance/LOD selector, and
-it does not support naming C34C a missile.
+world-instance separation. A selector has now been traced for the sampled
+C34C path, but its compared value and alternate paths have not been decoded;
+this is not yet proof of a distance/LOD rule, and it does not support naming
+C34C a missile.
