@@ -1,8 +1,8 @@
-# `$C3B588-$C3B5A5`: shared bridge-scene component input boundary
+# `$C3B588-$C3B5A5`: shared scene pyramid component input boundary
 
 Classification: **trace-proven five-triple transform input with two static
-renderer face/control families**.  This is an exportable shared bridge-scene
-component boundary, not a complete landmark reconstruction.
+renderer face/control families**.  This is an exportable shared scene-component
+boundary, not a complete landmark reconstruction.
 
 The alternate matrix entry `$C1F4AC` reads five consecutive triples beginning
 at `$C3B588`, then reaches `$C1F6F8` with `A1=$C3B5A6` and
@@ -38,9 +38,10 @@ merging their separate face records or mutable `$C48390` poses.  It occurs in
 the later-bridge checkpoint **and**, independently, in run033's frame-5,500
 red Golden Gate window: the first bounded `$C3B588` occurrence there reaches
 `$C3B50A` (ten polygons and four line submissions before the next transform).
-The input is consequently a shared bridge-scene component, not evidence for a
-landmark-specific mesh.  Its full scene identity, instancing count, and unseen
-faces remain unproven.
+The input is consequently a shared scene component, not evidence for a
+landmark-specific mesh.  Its pyramid topology is compatible with terrain as
+well as a constructed object; its full scene identity, instancing count, and
+unseen faces remain unproven.
 
 [The static orthographic sheet](../plots/c3b588_later_bridge_component_static_topology.png)
 maps the five observed face-offset records directly onto the five local input

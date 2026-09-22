@@ -1,6 +1,6 @@
 {
-  "schema": "fa18interceptor.bridge-scene-component-export.v1",
-  "scope": "renderer-traced local bridge components present in the user-identified Golden Gate replay window",
+  "schema": "fa18interceptor.shared-scene-component-export.v1",
+  "scope": "renderer-traced local scene components present in the user-identified Golden Gate replay window",
   "components": [
     {
       "id": "c3b588_shared_bridge_component",
@@ -10,7 +10,7 @@
       "triple_count": 5,
       "observed_faces": 5,
       "contexts": ["$C3B4FE", "$C3B50A"],
-      "identity": "unnamed shared bridge-scene component"
+      "identity": "unnamed shared scene pyramid component; terrain versus constructed-object identity unresolved"
     }
   ],
   "exclude_as_mutable_renderer_state": [

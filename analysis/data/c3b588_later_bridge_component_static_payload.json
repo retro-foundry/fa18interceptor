@@ -1,5 +1,5 @@
 {
-  "classification": "trace-proven static transform input for an unnamed shared bridge-scene component",
+  "classification": "trace-proven static transform input for an unnamed shared scene component",
   "input_range": "$C3B588-$C3B5A5",
   "triples": [
     [512, 0, -1024],
