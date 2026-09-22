@@ -3,8 +3,10 @@
 Classification: **scenario-backed static-packet-to-polygon-workspace path**.
 
 During preparation of the pending `M`-map page, direct entries from
-`$C2AEFC` to `$C2AF00` begin with `A3` in the byte-stable `$C42Dxx` or
-`$C43xxx` source ranges. The routine reads its source through `A3`, applies
+`$C2AEFC` to `$C2AF00` begin with `A3` in verified original Hunk 68,
+`$C42CA8-$C444F7`; all captured packet and pair reads are within that same
+6,224-byte segment. It has zero non-relocation byte differences from the
+original executable in the resolved runtime mapping. The routine reads its source through `A3`, applies
 the live fixed-point display matrix rooted at `$C45BDA`, and writes only
 mutable `$C4BFxx` polygon-input workspace. `$C246A0` consumes that workspace;
 its projected results reach `$C2FF48` on observed packets.

@@ -2,8 +2,9 @@
 
 Classification: **bounded immutable input to map-page polygon transforms**.
 
-Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in immutable slow RAM. The listed pairs are only those read at the C2AF9C/C2AF9E fixed-point transform pair before the next direct packet entry. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map.
+Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in verified original segment 68. The listed pairs are only those read at the C2AF9C/C2AF9E fixed-point transform pair before the next direct packet entry. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map.
 
+- Original source segment: 68 `$C42CA8-$C444F7`
 - Direct `$C2AF00` packet entries: 26
 - Entries completing at `$C2AFE2`: 26
 - Exact immutable coordinate pairs consumed: 327
@@ -40,13 +41,3 @@ Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in immutable
 | 8 | `$C43994` | `$00C43998` | `['$0003', '$0580']` | 3 | 5 |
 
 The JSON companion retains every exact consumed signed pair and its static address.
-
-## Raw-coordinate visual check
-
-The [static-pair sheet](../plots/run003_m_map_static_pair_packets.png) renders
-each packet's consumed pairs in the observed read order on the shared
-`0..4352` envelope (teal for `$C42xxx`, orange for `$C43xxx`). It deliberately
-does not close paths, infer faces, align the axes to the screen map, or claim
-that every packet is coastline terrain. It is a qualitative check that the
-newly traced source input is structured map-scale coordinate data rather than
-the mutable renderer workspaces.

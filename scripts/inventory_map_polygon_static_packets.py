@@ -12,6 +12,9 @@ PAIR_X = 0xC2AF9C
 PAIR_Y = 0xC2AF9E
 DISPLAY_STAGE = 0xC2AFE2
 POLYGON_SUBMIT = 0xC2FF48
+SOURCE_SEGMENT = 68
+SOURCE_START = 0xC42CA8
+SOURCE_END = 0xC444F8
 
 
 def address(value: int) -> str:
@@ -37,6 +40,7 @@ def write_report(output: Path, report: dict[str, object]) -> None:
         "",
         report["qualification"],
         "",
+        f"- Original source segment: {report['source_segment']} `{report['source_range']}`",
         f"- Direct `$C2AF00` packet entries: {report['packet_entries']}",
         f"- Entries completing at `$C2AFE2`: {report['display_stage_returns']}",
         f"- Exact immutable coordinate pairs consumed: {report['consumed_pairs']}",
@@ -63,10 +67,16 @@ def main() -> None:
     parser.add_argument("--trace", type=Path, required=True)
     parser.add_argument("--slow", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--replace", action="store_true",
+                        help="replace existing generated JSON and Markdown")
     args = parser.parse_args()
     markdown = args.output.with_suffix(".md")
-    if args.output.exists() or markdown.exists():
+    if (args.output.exists() or markdown.exists()) and not args.replace:
         raise FileExistsError(args.output)
+    if args.replace:
+        for path in (args.output, markdown):
+            if path.exists():
+                path.unlink()
     trace = [json.loads(line) for line in args.trace.read_text(encoding="utf-8").splitlines()]
     slow = args.slow.read_bytes()
     if len(slow) != 0x80000:
@@ -78,16 +88,16 @@ def main() -> None:
         end = entries[item + 1] if item + 1 < len(entries) else len(trace)
         entry = trace[start]
         source = entry["registers"]["a3"] & 0xFFFFFF
-        if not 0xC00000 <= source <= 0xC7FFF8:
-            raise ValueError(f"non-slow packet source {address(source)}")
+        if not SOURCE_START <= source <= SOURCE_END - 8:
+            raise ValueError(f"packet source outside segment {SOURCE_SEGMENT}: {address(source)}")
         pairs = []
         for cursor in range(start, end - 1):
             row = trace[cursor]
             if row["pc"] != PAIR_X or trace[cursor + 1]["pc"] != PAIR_Y:
                 continue
             pair_source = row["registers"]["a3"] & 0xFFFFFF
-            if not 0xC00000 <= pair_source <= 0xC7FFFE:
-                raise ValueError(f"non-slow pair source {address(pair_source)}")
+            if not SOURCE_START <= pair_source <= SOURCE_END - 4:
+                raise ValueError(f"pair source outside segment {SOURCE_SEGMENT}: {address(pair_source)}")
             pairs.append({"address": address(pair_source),
                           "xy": [word(slow, pair_source, signed=True),
                                  word(slow, pair_source + 2, signed=True)]})
@@ -96,6 +106,7 @@ def main() -> None:
         packets.append({
             "trace_index": entry["index"],
             "frame": entry["frame"],
+            "source_segment": SOURCE_SEGMENT,
             "packet": address(source),
             "first_longword": f"${long(slow, source):08X}",
             "following_words": [f"${word(slow, source + offset):04X}" for offset in (4, 6)],
@@ -109,12 +120,14 @@ def main() -> None:
         "scope": "direct C2AEFC-to-C2AF00 entries in the bounded map-page trace",
         "trace": str(args.trace),
         "slow": str(args.slow),
+        "source_segment": SOURCE_SEGMENT,
+        "source_range": f"{address(SOURCE_START)}-{address(SOURCE_END - 1)}",
         "packet_entries": len(packets),
         "display_stage_returns": sum(row["display_stage_return"] is not None for row in packets),
         "consumed_pairs": sum(len(row["consumed_pairs"]) for row in packets),
         "packets": packets,
         "qualification": (
-            "Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in immutable slow RAM. "
+            "Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in verified original segment 68. "
             "The listed pairs are only those read at the C2AF9C/C2AF9E fixed-point transform pair before the "
             "next direct packet entry. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not "
             "exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not "

@@ -2,6 +2,8 @@
   "scope": "direct C2AEFC-to-C2AF00 entries in the bounded map-page trace",
   "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
   "slow": "build\\run003_m_map_appearance_trace\\slow.bin",
+  "source_segment": 68,
+  "source_range": "$C42CA8-$C444F7",
   "packet_entries": 26,
   "display_stage_returns": 26,
   "consumed_pairs": 327,
@@ -9,6 +11,7 @@
     {
       "trace_index": 9443,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42DFC",
       "first_longword": "$00C42E00",
       "following_words": [
@@ -58,6 +61,7 @@
     {
       "trace_index": 9920,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42E1A",
       "first_longword": "$00C42E1E",
       "following_words": [
@@ -121,6 +125,7 @@
     {
       "trace_index": 11734,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42DC4",
       "first_longword": "$00C42DC8",
       "following_words": [
@@ -219,6 +224,7 @@
     {
       "trace_index": 12863,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42E52",
       "first_longword": "$00C42E56",
       "following_words": [
@@ -261,6 +267,7 @@
     {
       "trace_index": 13230,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42E52",
       "first_longword": "$00C42E56",
       "following_words": [
@@ -303,6 +310,7 @@
     {
       "trace_index": 13839,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42E52",
       "first_longword": "$00C42E56",
       "following_words": [
@@ -345,6 +353,7 @@
     {
       "trace_index": 14448,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42E52",
       "first_longword": "$00C42E56",
       "following_words": [
@@ -387,6 +396,7 @@
     {
       "trace_index": 14907,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42E52",
       "first_longword": "$00C42E56",
       "following_words": [
@@ -429,6 +439,7 @@
     {
       "trace_index": 15366,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C42E52",
       "first_longword": "$00C42E56",
       "following_words": [
@@ -471,6 +482,7 @@
     {
       "trace_index": 15916,
       "frame": 2,
+      "source_segment": 68,
       "packet": "$C43ECA",
       "first_longword": "$00C43F3A",
       "following_words": [
@@ -660,6 +672,7 @@
     {
       "trace_index": 23123,
       "frame": 3,
+      "source_segment": 68,
       "packet": "$C43E24",
       "first_longword": "$00C43E9A",
       "following_words": [
@@ -856,6 +869,7 @@
     {
       "trace_index": 27464,
       "frame": 3,
+      "source_segment": 68,
       "packet": "$C43D84",
       "first_longword": "$00C43D88",
       "following_words": [
@@ -1122,6 +1136,7 @@
     {
       "trace_index": 34696,
       "frame": 4,
+      "source_segment": 68,
       "packet": "$C43BAC",
       "first_longword": "$00C43C70",
       "following_words": [
@@ -1451,6 +1466,7 @@
     {
       "trace_index": 46695,
       "frame": 5,
+      "source_segment": 68,
       "packet": "$C43B34",
       "first_longword": "$00C43B94",
       "following_words": [
@@ -1612,6 +1628,7 @@
     {
       "trace_index": 52552,
       "frame": 6,
+      "source_segment": 68,
       "packet": "$C43A78",
       "first_longword": "$00C43AF0",
       "following_words": [
@@ -1815,6 +1832,7 @@
     {
       "trace_index": 59494,
       "frame": 6,
+      "source_segment": 68,
       "packet": "$C439E8",
       "first_longword": "$00C43A44",
       "following_words": [
@@ -1969,6 +1987,7 @@
     {
       "trace_index": 65358,
       "frame": 7,
+      "source_segment": 68,
       "packet": "$C4409E",
       "first_longword": "$00C440A2",
       "following_words": [
@@ -2018,6 +2037,7 @@
     {
       "trace_index": 65784,
       "frame": 7,
+      "source_segment": 68,
       "packet": "$C4407C",
       "first_longword": "$00C44080",
       "following_words": [
@@ -2074,6 +2094,7 @@
     {
       "trace_index": 66354,
       "frame": 7,
+      "source_segment": 68,
       "packet": "$C44066",
       "first_longword": "$00C4406A",
       "following_words": [
@@ -2109,6 +2130,7 @@
     {
       "trace_index": 66670,
       "frame": 7,
+      "source_segment": 68,
       "packet": "$C43F5E",
       "first_longword": "$00C43FAE",
       "following_words": [
@@ -2242,6 +2264,7 @@
     {
       "trace_index": 69637,
       "frame": 7,
+      "source_segment": 68,
       "packet": "$C43D34",
       "first_longword": "$00C43D38",
       "following_words": [
@@ -2375,6 +2398,7 @@
     {
       "trace_index": 73234,
       "frame": 8,
+      "source_segment": 68,
       "packet": "$C43CBE",
       "first_longword": "$00C43CFA",
       "following_words": [
@@ -2480,6 +2504,7 @@
     {
       "trace_index": 76651,
       "frame": 8,
+      "source_segment": 68,
       "packet": "$C43B1A",
       "first_longword": "$00C43B1E",
       "following_words": [
@@ -2522,6 +2547,7 @@
     {
       "trace_index": 77950,
       "frame": 8,
+      "source_segment": 68,
       "packet": "$C439CC",
       "first_longword": "$00C439D0",
       "following_words": [
@@ -2564,6 +2590,7 @@
     {
       "trace_index": 79163,
       "frame": 8,
+      "source_segment": 68,
       "packet": "$C439A8",
       "first_longword": "$00C439AC",
       "following_words": [
@@ -2627,6 +2654,7 @@
     {
       "trace_index": 80973,
       "frame": 8,
+      "source_segment": 68,
       "packet": "$C43994",
       "first_longword": "$00C43998",
       "following_words": [
@@ -2660,5 +2688,5 @@
       "polygon_submissions": 5
     }
   ],
-  "qualification": "Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in immutable slow RAM. The listed pairs are only those read at the C2AF9C/C2AF9E fixed-point transform pair before the next direct packet entry. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map."
+  "qualification": "Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in verified original segment 68. The listed pairs are only those read at the C2AF9C/C2AF9E fixed-point transform pair before the next direct packet entry. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map."
 }
