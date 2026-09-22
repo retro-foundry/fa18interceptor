@@ -22,6 +22,15 @@ select bounded static page/template streams. The 8,040 no-stream result is a
 row-threshold outcome in this invocation, not a proven map boundary or a
 missing terrain region.
 
+The selected pointers have independently decoded immutable contents. `$C42BD4`
+is the 16-record stream whose source records begin at `$C42BD5`; `$C42ADA` is
+the eight-record stream whose records begin at `$C42ADB`. In the earlier
+static-to-workspace trace, `$C1D442-$C1D4C2` copies those header/two-word
+template records into mutable cells before the placement builder consumes
+them. Thus run034 ties these actual static template sets to live page changes,
+but does not turn either stream's reusable template words into global map
+coordinates or terrain vertices.
+
 No same-item alternate model or face topology is selected by these short
 selector calls. The result therefore strengthens the terrain chunk/page model
 while adding no positive LOD evidence.
@@ -32,3 +41,4 @@ Authorities:
 - `build/run034_page_8040_trace/trace.jsonl`;
 - `build/run034_page_9656_trace/trace.jsonl`;
 - `static_template_selector_groups_run034_page_{4252,8040,9656}.json`.
+- [`active terrain-template stream records`](active_terrain_template_stream_records.md).
