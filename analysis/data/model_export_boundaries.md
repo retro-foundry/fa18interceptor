@@ -17,8 +17,8 @@ both its static data boundary and its renderer consumption path are traced.
 - `$C34A9A/$C34A9C` is no longer in this category: its complete 0--39 slot
   construction is traced from `$C351xx` plus `$C0D384`; see
   [the full face-family evidence](c34a_full_flight_object_face_family.md).
-- `$C38F98`: renderer-resident face/control family; its upstream immutable
-  vertex source is not established.
+- `$C38F98`: renderer-resident [face/control family](c38f98_external_face_control_boundary.md);
+  its upstream immutable vertex source is not established.
 
 ## Runtime data explicitly excluded
 
