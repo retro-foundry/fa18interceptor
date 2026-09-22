@@ -53,6 +53,29 @@ distance all differ together. A valid LOD test must hold the source page and
 item context fixed while varying only a measured distance, then connect the
 descriptor substitution to a changed static model/face family.
 
+## Descriptor-target comparison
+
+The descriptor records are not aliases with only different record addresses.
+In the control snapshot each descriptor repeats a target longword at offsets
+`+4`, `+8`, and `+12`; the substitutions above change that repeated target:
+
+| static template | early descriptor target | later descriptor target |
+| --- | --- | --- |
+| `$C4264D` | `$C22408 -> $C35568` | `$C22700 -> $C3B4F8` |
+| `$C4265F` | `$C22818 -> $C447C6` | `$C22700 -> $C3B4F8` |
+| `$C42665` | `$C22318 -> $C445A2` | `$C22764 -> $C44500` |
+| `$C42683` | `$C22458 -> $C36E6A` | `$C22A34 -> $C45294` |
+| `$C426A1` | `$C22368 -> $C4477C` | `$C22778 -> $C4455A` |
+| `$C426A7` | `$C22AAC -> $C3B960` | `$C22A84 -> $C454F4` |
+| `$C426C5` | `$C22390 -> $C4483C` | `$C22A98 -> $C4558C` |
+
+This proves context-dependent selection of different descriptor targets. Some
+targets are already known immutable scene-family candidates (for example
+`$C35568`); the semantic role and mutability of every target in this table has
+not yet been established. Consequently the result strengthens the need for a
+controlled same-page distance experiment, but it does not identify any target
+pair as an LOD pair.
+
 For visual checks, the two diagnostics are
 [frames 404--426 X/Z plot](../plots/workspace_template_placements_xz_404_426.svg)
 and
