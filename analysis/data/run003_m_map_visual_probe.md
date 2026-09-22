@@ -121,6 +121,11 @@ of its six `$C1F6F8` entries: `$C35BDE -> $C35BF0`, `$C35BAA -> $C35BB8`,
 claim that the five source blocks or their repeated control entry are the
 complete world terrain.
 
+The repeated `$C36220 -> $C36232` input/control pair is independently bounded
+through two visible map line segments; see the [three-triple line
+component](c36220_c36232_map_line_component.md). It remains separate from the
+five-triple `$C3B720` component.
+
 Their signed raw triples are retained in the renderer census. Several have a
 nonzero middle component, including `$C3B720`'s fifth local triple
 `(-640,1024,0)`. This is local component geometry and does not contradict the
