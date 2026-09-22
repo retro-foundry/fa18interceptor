@@ -126,6 +126,14 @@ through two visible map line segments; see the [three-triple line
 component](c36220_c36232_map_line_component.md). It remains separate from the
 five-triple `$C3B720` component.
 
+For visual review, the [bounded component-line overlay](../visuals/run003_m_map_component_lines_overlay.png)
+draws the four distinct leading control intervals over the original map frame:
+magenta `$C35BDE -> $C35BF0`, yellow `$C35BAA -> $C35BB8`, cyan
+`$C35BC2 -> $C35BD0`, and orange `$C36220 -> $C36232`. These colours are
+analysis annotations, not game pixels. The image is a display-space check of
+the captured endpoints; it does not by itself attribute a particular original
+pixel write or provide global world coordinates.
+
 Their signed raw triples are retained in the renderer census. Several have a
 nonzero middle component, including `$C3B720`'s fifth local triple
 `(-640,1024,0)`. This is local component geometry and does not contradict the
