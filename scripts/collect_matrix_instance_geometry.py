@@ -79,14 +79,24 @@ def main() -> None:
         state = args.restore.read_bytes()
         if not engine.core.retro_unserialize(state, len(state)):
             raise RuntimeError("Core rejected save state")
-        engine.core.e9k_debug_add_breakpoint(args.entry)
+        # Renderer entries must be breakpoints too.  Without them, retro_run()
+        # can execute an entire line/polygon submission between two matrix
+        # breakpoints and the source-bounded loop never observes it.
+        for address in {args.entry, POLYGON, LINE}:
+            engine.core.e9k_debug_add_breakpoint(address)
         instances: list[dict[str, object]] = []
         for _ in range(args.frames):
             engine.core.retro_run()
             while engine.core.e9k_debug_is_paused():
                 registers = engine.regs()
                 if registers["pc"] != args.entry:
-                    raise RuntimeError(f"unexpected breakpoint PC {registers['pc']:06X}")
+                    # A renderer submission outside a wanted source interval
+                    # is not evidence for that source.  Step past it and keep
+                    # looking for the next matrix entry.
+                    engine.core.e9k_debug_step_instr()
+                    engine.core.e9k_debug_resume()
+                    engine.core.retro_run()
+                    continue
                 source = registers["a1"] & 0xFFFFFF
                 occurrence_count = sum(item["source"] == f"${source:06X}" for item in instances)
                 if source not in wanted or occurrence_count >= args.occurrences:
