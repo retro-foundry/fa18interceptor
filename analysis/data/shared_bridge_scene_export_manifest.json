@@ -1,0 +1,33 @@
+{
+  "schema": "fa18interceptor.bridge-scene-component-export.v1",
+  "scope": "renderer-traced local bridge components present in the user-identified Golden Gate replay window",
+  "components": [
+    {
+      "id": "c3b588_shared_bridge_component",
+      "source_triples": "c3b588_later_bridge_component_static_payload.json",
+      "topology": "c3b588_later_bridge_component_face_topology.json",
+      "source_range": "$C3B588-$C3B5A5",
+      "triple_count": 5,
+      "observed_faces": 5,
+      "contexts": ["$C3B4FE", "$C3B50A"],
+      "identity": "unnamed shared bridge-scene component"
+    },
+    {
+      "id": "c3b720_shared_bridge_pylon",
+      "source_triples": "c3b720_shared_bridge_pylon_static_payload.json",
+      "topology": "c3b720_shared_bridge_pylon_face_topology.json",
+      "source_range": "$C3B720-$C3B73D",
+      "triple_count": 5,
+      "observed_faces": 4,
+      "contexts": ["$C3B6B0"],
+      "identity": "unnamed shared bridge-scene pylon; base face unobserved"
+    }
+  ],
+  "exclude_as_mutable_renderer_state": [
+    "$C45BEA",
+    "$C48390-$C4E76B",
+    "$C4BF90",
+    "$C4E910"
+  ],
+  "qualification": "The component payloads preserve only direct static input triples and observed static face records. They do not reconstruct whole landmarks, infer unseen topology, or export transformed workspace coordinates."
+}
