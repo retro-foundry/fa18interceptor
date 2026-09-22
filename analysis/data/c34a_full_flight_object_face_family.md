@@ -2,6 +2,9 @@
 
 Classification: **trace-proven procedural source-to-face model path**.
 
+Machine-readable separation contract:
+[`c351_flight_object_export_manifest.json`](c351_flight_object_export_manifest.json).
+
 At the frame-7,500 external-camera checkpoint, the two related object-control
 contexts `$C34A9A` and `$C34A9C` submit 21 pre-cull records each through
 `$C2005C`.  They share 20 records; `$C34A9A` uniquely submits `$C34D02` and

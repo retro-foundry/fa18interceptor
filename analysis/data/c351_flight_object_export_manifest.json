@@ -1,0 +1,60 @@
+{
+  "schema": "fa18interceptor.model-export-boundary/v1",
+  "family": "$C3515E -> $C34A9A/$C34A9C",
+  "classification": "trace-proven procedural flight-object template",
+  "immutable_data": {
+    "coordinate_triples": {
+      "triple_start_range": "$C3515E-$C351DC",
+      "raw_byte_range_inclusive": "$C3515E-$C351E1",
+      "triple_count": 22,
+      "role": "input to the direct transform stage; not renderer output"
+    },
+    "face_records": {
+      "address_range": "$C34C8A-$C34E66",
+      "distinct_record_count": 22,
+      "contexts": {
+        "$C34A9A": {"record_count": 21, "unique_record": "$C34D02"},
+        "$C34A9C": {"record_count": 21, "unique_record": "$C34D0E"},
+        "shared_record_count": 20
+      },
+      "records": [
+        "$C34C8A", "$C34C9A", "$C34CA8", "$C34CDA", "$C34CE8",
+        "$C34D02", "$C34D0E", "$C34D26", "$C34D40", "$C34D5E",
+        "$C34D6A", "$C34DCE", "$C34DE2", "$C34DEC", "$C34E0A",
+        "$C34E14", "$C34E1E", "$C34E28", "$C34E3C", "$C34E50",
+        "$C34E5A", "$C34E66"
+      ]
+    }
+  },
+  "required_code": [
+    {
+      "range": "$C1F100-$C1F2E4",
+      "role": "transform 22 immutable triples into paired C46228 and C48390 lanes"
+    },
+    {
+      "range": "$C0D384-$C0D521",
+      "role": "derive C48390 tail slots 22-39 from transformed lane values"
+    },
+    {
+      "range": "$C2005C-$C200F5",
+      "role": "resolve variable-length static face offsets against C48390 before renderer gates"
+    }
+  ],
+  "workspace_contract": {
+    "c34a_lane": "$C48390 slots 0-39",
+    "direct_slots": "0-21",
+    "derived_slots": "22-39",
+    "explicitly_not_source_data": ["$C48390", "$C4BF90", "$C4E910", "$C45BEA"]
+  },
+  "evidence": {
+    "face_topology": "build/run031_frame7500_external_face_preparations_64f/face_preparations.json",
+    "direct_transform": "build/run031_frame12000_c3515e_transform_trace/trace.jsonl",
+    "tail_derivation": "build/run031_frame1965_c0d396_tail_derivation_trace/trace.jsonl",
+    "tail_before_after": "build/run031_frame1965_c0d396_tail_derivation_trace/{slow.bin,final_slow.bin}"
+  },
+  "limitations": [
+    "The transform matrices and face-context choices must be retained for faithful reconstruction.",
+    "The visible F/A-18-like identification is visual evidence, not a decoded original object name.",
+    "This manifest does not identify the C34C five-face layer as a missile or prove an LOD rule."
+  ]
+}
