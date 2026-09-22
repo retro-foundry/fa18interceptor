@@ -1,0 +1,29 @@
+{
+  "schema": "fa18interceptor.static-transform-input/v1",
+  "source_snapshot": "build/run031_frame7500_external_checkpoint/slow.bin",
+  "source_range": {"start": "$C39072", "end": "$C390EF", "triple_count": 21},
+  "immutable_coordinate_triples": [
+    {"index": 0, "address": "$C39072", "xyz": [-22, 0, -378]},
+    {"index": 1, "address": "$C39078", "xyz": [-22, 0, 396]},
+    {"index": 2, "address": "$C3907E", "xyz": [22, 0, 396]},
+    {"index": 3, "address": "$C39084", "xyz": [22, 0, -378]},
+    {"index": 4, "address": "$C3908A", "xyz": [0, 22, -378]},
+    {"index": 5, "address": "$C39090", "xyz": [0, 22, 396]},
+    {"index": 6, "address": "$C39096", "xyz": [0, -22, 396]},
+    {"index": 7, "address": "$C3909C", "xyz": [0, -22, -378]},
+    {"index": 8, "address": "$C390A2", "xyz": [0, 0, 486]},
+    {"index": 9, "address": "$C390A8", "xyz": [-103, 0, -378]},
+    {"index": 10, "address": "$C390AE", "xyz": [103, 0, -378]},
+    {"index": 11, "address": "$C390B4", "xyz": [0, 103, -378]},
+    {"index": 12, "address": "$C390BA", "xyz": [0, -103, -378]},
+    {"index": 13, "address": "$C390C0", "xyz": [0, 0, -234]},
+    {"index": 14, "address": "$C390C6", "xyz": [-126, 0, 0]},
+    {"index": 15, "address": "$C390CC", "xyz": [126, 0, 0]},
+    {"index": 16, "address": "$C390D2", "xyz": [0, 126, 0]},
+    {"index": 17, "address": "$C390D8", "xyz": [0, -126, 0]},
+    {"index": 18, "address": "$C390DE", "xyz": [0, 0, 117]},
+    {"index": 19, "address": "$C390E4", "xyz": [0, 0, -1530]},
+    {"index": 20, "address": "$C390EA", "xyz": [-1, 4, 36]}
+  ],
+  "qualification": "Every triple is within the bounded C1F100-to-C1F6F8 static input run. No face topology is included because this trace did not reach an individual C2005C record before the bounded instruction cap."
+}
