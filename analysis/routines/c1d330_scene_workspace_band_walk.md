@@ -15,7 +15,9 @@ slice writes every band on the observed branch.
 
 ## Observed band contract
 
-At `$C1D32C`, the active trace adjusts an `A0` stream cursor to `$C412EC`.
+At `$C1D322`, the active trace has `A0=$C4124E` and uses the word at
+`$C41250` (`$009E`) as an offset.  `$C1D32C` consequently adjusts the active
+stream cursor to `$C412EC`.
 `$C1D330` then establishes `A3=$C48390` and `$C1D336` initializes `D4=$0E`.
 Each accepted stream item reaches `$C1D3B2`, copies the current band base to
 `A1`, and calls `$C1D3F4`.  `$C1D3BE` advances `A3` by `$600` before returning
@@ -34,3 +36,18 @@ stronger lifecycle boundary for the cache, but it does **not** prove that
 `$C1D5D8`, which returns without a traced write while `$C45864` is clear.
 The first writer for the relevant band, and its immutable input range, remain
 the required evidence for an original terrain/map-data claim.
+
+## Static selector-input boundary
+
+`$C412EC` is payload offset `$1BC` of original CODE segment 65
+(`$C41130-$C42287`).  That 4,440-byte segment has no relocations and is
+byte-identical to its original payload in the resolved runtime mapping.  The
+traced read therefore proves that the band walk is controlled by immutable
+program data rather than by the `$C48390` workspace alone.
+
+The observed stream is byte-oriented: `$C1D338` reads a signed control byte,
+and the nearby `$C1D34A-$C1D370` path maps it through `$C411F0` and
+`$C1D764` before selecting its per-band helper parameters.  No direct read of
+a three-word terrain coordinate from segment 65 is observed in this slice.
+Treat segment 65 as a static scene-workspace selector/configuration candidate,
+not as extracted map geometry or a placement-coordinate table.
