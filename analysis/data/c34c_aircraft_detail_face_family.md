@@ -56,3 +56,4 @@ authoritative topology capture.
 The `$C34A9A/$C34A9C` polygon family is not merged into this model: it uses
 the separate `$C48390` workspace in the sampled frame. Similar silhouette and
 shared Hunk residency are insufficient to claim a shared object instance.
+They are nevertheless [co-rendered in one composite candidate pass](c34c_c34a_co_rendered_composite.md): that association is useful for visual identification, while the separate immutable-source boundaries remain mandatory.
