@@ -74,6 +74,20 @@ and mutable-workspace input contract, but not which upstream table originally
 populates `A3` or whether `$C37990` supplies source placements, topology, or
 another scene-control stream.
 
+The builder's mutable geometry input is now bounded more closely.  At the
+start of the traced pass, `$C1DC3E` loads `A4=$C48390`; after the byte-driven
+selector at `$C1DCD0-$C1DCE8`, `$C1DD02-$C1DD08` calculates a 96-byte offset
+(`index * $60`), and `$C1DD0A` forms `A3=A4+offset`.  `$C1DD14` sets the
+matching exclusive limit to `A3+$60`.  The subsequent loop reads its header
+at `$C1DD36` and coordinate words beginning at `$C1DD98`.  The first captured
+cell is therefore `$C4B270-$C4B2CF`; its `$C4B272` payload read produces the
+`$C22660` descriptor record.  `$C48390` is independently established as a
+mutable geometry workspace (for example, the two-lane transform evidence in
+[`c351_shared_dual_lane_flight_object.md`](../data/c351_shared_dual_lane_flight_object.md)).
+This excludes the `A3` cell stream itself as immutable terrain data; the
+upstream writer of that workspace and the static `$C37990` control stream
+remain the relevant terrain-source candidates.
+
 The next valid step is a focused call/return trace that records `A1`, the
 three `D0` coordinate words, and the source reads immediately before this
 builder's first `$C1DD54` entry.
