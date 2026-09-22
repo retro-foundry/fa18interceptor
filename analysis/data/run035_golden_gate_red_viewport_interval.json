@@ -240,5 +240,19 @@
       "pixels": 0
     }
   ],
-  "qualification": "A colour landmark bounds a visual interval; it does not assign pixels to a renderer face or source model."
+  "qualification": "A colour landmark bounds a visual interval; it does not assign pixels to a renderer face or source model.",
+  "bitplane_encoding": {
+    "chip": "build\\run035_red_4250\\chip.bin",
+    "frame": 4250,
+    "screen_to_bitmap": {
+      "x": "(screen_x - 40) / 2",
+      "y": "screen_y - 16"
+    },
+    "matching_screen_pixels": 54,
+    "bitplane_index_counts": {
+      "1": 54
+    },
+    "colour_register": "COLOR01",
+    "rgb4_word": "$800"
+  }
 }

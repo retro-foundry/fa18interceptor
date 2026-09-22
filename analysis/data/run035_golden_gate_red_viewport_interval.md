@@ -22,6 +22,15 @@ frame 4,250 through 8,250. Its absence at 8,500 is consistent with the
 recorded turn-away, but the 250-frame sampling does not locate the precise
 first or last visible frame.
 
+## Display encoding at frame 4,250
+
+The matching 54 screen pixels decode through the active Copper bitplanes as
+index 1 only. The measured screen-to-bitmap relation is
+`bitmap_x=(screen_x-40)/2`, `bitmap_y=screen_y-16`; all red pixels therefore
+select `COLOR01=$0800`, the RGB4 palette value rendered by the host as
+`#880000`. This establishes the relevant visible plane/index and excludes the
+red cockpit instrument pixels from the measurement.
+
 The scan measures raster output only. It does **not** identify a particular
 face record, terrain/control-stream record, bridge component, or LOD level.
 Those require a renderer submission correlated to this world-viewport region.
@@ -34,5 +43,7 @@ measurements in `run035_golden_gate_red_viewport_interval.json`.
 python scripts/analyze_viewport_landmark.py \
   --images build/run035_viewport_scan --colour 880000 \
   --left 40 --top 18 --right 680 --bottom 160 \
+  --chip build/run035_red_4250/chip.bin --chip-frame 4250 \
+  --bitmap-x-origin 40 --bitmap-y-origin 16 --bitmap-x-scale 2 \
   --output analysis/data/run035_golden_gate_red_viewport_interval.json
 ```

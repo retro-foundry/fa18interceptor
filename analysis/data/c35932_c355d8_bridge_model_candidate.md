@@ -72,3 +72,11 @@ is obtained.
 contains no default polygon overlay or inferred connectivity.  Its repeated
 parallel X-Z strokes and narrow Y-Z tower/span profile are renderer-observed
 view-dependent coordinates, not a static-coordinate export.
+
+The later sealed run035 replay independently measures the red Golden Gate
+pixels only inside the outside-world viewport. At its first sampled red frame,
+the two immediately following `$C2FA7E` bridge-line inputs have combined
+bitmap bounds `x=138..164`, `y=110..111`, matching the red landmark's
+`x=138..164`, `y=111` span. This joins the named red landmark to this existing
+line family without assigning the mixed co-visible filled faces. See
+[`run035_golden_gate_red_line_correlation.md`](run035_golden_gate_red_line_correlation.md).

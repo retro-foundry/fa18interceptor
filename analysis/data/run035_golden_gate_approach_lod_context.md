@@ -53,22 +53,25 @@ contexts change across the approach:
 This establishes only that multiple static face contexts are active while the
 recorded red Golden Gate pixels and the other bridge share the scene.  It does
 not establish which context owns the Golden Gate, which owns the other bridge,
-or whether `$C355D8` is absent from Golden Gate rendering rather than outside
-these bounded windows.  It does not identify an alternative bridge model or
-LOD level. The changing face contexts can result from ordinary page/instance
-selection and culling.
+or whether `$C355D8` is absent from Golden Gate *filled-face* rendering rather
+than outside these bounded windows. It does not identify an alternative bridge
+model or LOD level. The changing face contexts can result from ordinary
+page/instance selection and culling.
+
+The independent `$C2FA7E` line capture correlates the red Golden Gate span to
+the `$C3559A/$C355D2` line family. That identifies the landmark's line
+rendering, not ownership of the co-visible filled-face contexts; see
+`run035_golden_gate_red_line_correlation.md`.
 
 ## Required landmark correlation
 
 `$C2005C` captures selected face records before orientation/clipping, and
 `$C2FF48` captures finalized projected tuples. Neither capture records the
-colour/bitplane selection used by the subsequent raster path. Consequently,
-the red Golden Gate world-viewport-pixel landmark cannot yet be assigned to a
-face record. The next evidence must join that world-viewport screen region to
-the colour-bearing renderer
-submission and then to its upstream face/control context. Until that join is
-captured, this document calls the collection a mixed bridge scene rather than
-a Golden Gate face sample.
+colour/bitplane selection used by the subsequent raster path. The new line
+capture supplies that join for `$C3559A/$C355D2`, but not for a filled face.
+The remaining requirement is to join any Golden Gate filled-face pixel to its
+upstream face/control context; until then, the face collection remains a mixed
+bridge scene rather than a Golden Gate face sample.
 
 Authority: sealed `captures/run035`, replay checkpoints
 `build/run035_keyframes/frame_{5500,7000}/state.bin`, and bounded no-input

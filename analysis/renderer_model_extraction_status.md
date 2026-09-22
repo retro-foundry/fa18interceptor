@@ -52,6 +52,12 @@ coordinates as source geometry.  The co-visible `$C3B6B0` and `$C3B504`
 polygons remain separately classified terrain/pyramid components.  See the
 [line-family evidence](data/c35932_c355d8_bridge_model_candidate.md).
 
+The independent run035 outside-viewport red-pixel measurement now spatially
+correlates that same `$C3559A/$C355D2` line family with the user-defined
+Golden Gate landmark at its first sampled appearance. This is a line-family
+identification, not an export of its mutable endpoint workspace or an LOD
+result; see the [red-pixel line correlation](data/run035_golden_gate_red_line_correlation.md).
+
 ## Other separated external component
 
 `$C39072-$C390EF` is a 21-triple immutable slender-flight-object input.  A

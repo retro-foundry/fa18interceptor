@@ -13,6 +13,8 @@ from pathlib import Path
 
 from PIL import Image
 
+from analyze_cockpit_bitplanes import BYTES_PER_ROW, copper_registers, plane_pointers
+
 
 FRAME_NAME = re.compile(r"frame_(\d+)\.png$")
 
@@ -35,10 +37,21 @@ def main() -> None:
     parser.add_argument("--top", type=int, required=True)
     parser.add_argument("--right", type=int, required=True, help="exclusive")
     parser.add_argument("--bottom", type=int, required=True, help="exclusive")
+    parser.add_argument("--chip", type=Path,
+                        help="optional Chip-RAM snapshot for one scanned frame")
+    parser.add_argument("--chip-frame", type=int,
+                        help="replay frame represented by --chip")
+    parser.add_argument("--bitmap-x-origin", type=int, default=0)
+    parser.add_argument("--bitmap-y-origin", type=int, default=0)
+    parser.add_argument("--bitmap-x-scale", type=int, default=1)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if not (args.left < args.right and args.top < args.bottom):
         raise ValueError("viewport bounds must have positive area")
+    if bool(args.chip) != bool(args.chip_frame):
+        raise ValueError("--chip and --chip-frame must be supplied together")
+    if args.bitmap_x_scale < 1:
+        raise ValueError("--bitmap-x-scale must be positive")
 
     rows = []
     for path in sorted(args.images.glob("frame_*.png")):
@@ -69,6 +82,44 @@ def main() -> None:
         "frames": rows,
         "qualification": "A colour landmark bounds a visual interval; it does not assign pixels to a renderer face or source model.",
     }
+    if args.chip:
+        target = next((row for row in rows if row["frame"] == args.chip_frame), None)
+        if target is None:
+            raise ValueError("--chip-frame is not one of the scanned images")
+        chip = args.chip.read_bytes()
+        registers = copper_registers(chip)
+        pointers = plane_pointers(registers)
+        image_path = args.images / f"frame_{args.chip_frame:05d}.png"
+        if not image_path.exists():
+            image_path = args.images / f"frame_{args.chip_frame}.png"
+        image = Image.open(image_path).convert("RGB")
+        indices = []
+        for y in range(args.top, args.bottom):
+            for x in range(args.left, args.right):
+                if image.getpixel((x, y)) != args.colour:
+                    continue
+                bitmap_x = (x - args.bitmap_x_origin) // args.bitmap_x_scale
+                bitmap_y = y - args.bitmap_y_origin
+                if not (0 <= bitmap_x < 320 and 0 <= bitmap_y < 200):
+                    raise ValueError("matching pixel is outside supplied bitmap mapping")
+                offset = bitmap_y * BYTES_PER_ROW + (bitmap_x >> 3)
+                mask = 0x80 >> (bitmap_x & 7)
+                indices.append(sum(((chip[pointer + offset] & mask) != 0) << plane
+                                   for plane, pointer in enumerate(pointers)))
+        if not indices:
+            raise ValueError("chip frame has no matching landmark pixels")
+        counts = {str(index): indices.count(index) for index in sorted(set(indices))}
+        if len(counts) != 1:
+            raise ValueError(f"matching pixels have multiple bitplane indices: {counts}")
+        index = int(next(iter(counts)))
+        report["bitplane_encoding"] = {
+            "chip": str(args.chip), "frame": args.chip_frame,
+            "screen_to_bitmap": {"x": f"(screen_x - {args.bitmap_x_origin}) / {args.bitmap_x_scale}",
+                                 "y": f"screen_y - {args.bitmap_y_origin}"},
+            "matching_screen_pixels": len(indices), "bitplane_index_counts": counts,
+            "colour_register": f"COLOR{index:02d}",
+            "rgb4_word": f"${registers[0x180 + index * 2]:03X}",
+        }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"frames": len(rows), "matching_frames": sum(row["pixels"] > 0 for row in rows)}))

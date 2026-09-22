@@ -87,6 +87,7 @@ bounded paths are not interpreted as LOD. The user-defined red Golden Gate
 landmark is independently visible only in the outside-world viewport at the
 sampled frames 4,250--8,250; this excludes cockpit/HUD pixels and the other
 bridge from the landmark definition. See the [viewport interval measurement](data/run035_golden_gate_red_viewport_interval.md)
+the [red-pixel line correlation](data/run035_golden_gate_red_line_correlation.md),
 and [run035 approach context](data/run035_golden_gate_approach_lod_context.md).
 
 ## Next evidence required to find the authoritative map
@@ -104,9 +105,10 @@ and [run035 approach context](data/run035_golden_gate_approach_lod_context.md).
    possible, vary measured distance, and trace the selector plus the chosen
    static family.  Face counts alone are insufficient because culling changes
    them.
-5. Correlate a raster submission to the measured red Golden Gate viewport
-   region, then trace it upstream to its face/control record. Only that join
-   can distinguish Golden Gate geometry from the co-visible bridge.
+5. Correlate a **filled-face** raster submission to the measured red Golden
+   Gate viewport region, then trace it upstream to its face/control record.
+   The `$C3559A/$C355D2` line-family correlation is complete, but it cannot
+   assign the co-visible filled faces.
 
 Until those conditions are met, the project has a proven scene-control index
 and immutable scene-family candidates, not a complete extracted 3D world map
