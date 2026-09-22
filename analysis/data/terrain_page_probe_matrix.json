@@ -1,0 +1,151 @@
+{
+  "classification": "controlled_terrain_page_selector_probe_matrix_not_global_map_extent",
+  "rows": [
+    {
+      "probe": "control",
+      "origin_bins": "(16,16)",
+      "perturbation": "unchanged",
+      "selector_calls": 41,
+      "selected_streams": 16,
+      "distinct_group_records": 9,
+      "static_copies": 106,
+      "later_builder_reads": 91,
+      "streams": [
+        "$C42646",
+        "$C42706",
+        "$C4272E",
+        "$C4274A",
+        "$C42788",
+        "$C427B4",
+        "$C427C8",
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42ADA",
+        "$C42B3E",
+        "$C42B46",
+        "$C42B5C",
+        "$C42B66",
+        "$C42BD4"
+      ]
+    },
+    {
+      "probe": "x_plus",
+      "origin_bins": "(17,16)",
+      "perturbation": "first component +1",
+      "selector_calls": 41,
+      "selected_streams": 10,
+      "distinct_group_records": 7,
+      "static_copies": 60,
+      "later_builder_reads": 53,
+      "streams": [
+        "$C42646",
+        "$C42788",
+        "$C427C8",
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B3E",
+        "$C42B46",
+        "$C42B5C",
+        "$C42BD4"
+      ]
+    },
+    {
+      "probe": "z_plus",
+      "origin_bins": "(16,17)",
+      "perturbation": "second component +1",
+      "selector_calls": 41,
+      "selected_streams": 14,
+      "distinct_group_records": 7,
+      "static_copies": 95,
+      "later_builder_reads": 79,
+      "streams": [
+        "$C42646",
+        "$C42706",
+        "$C4274A",
+        "$C42788",
+        "$C427B4",
+        "$C427C8",
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B3E",
+        "$C42B46",
+        "$C42B5C",
+        "$C42B66",
+        "$C42BD4"
+      ]
+    },
+    {
+      "probe": "mutation",
+      "origin_bins": "(17,17)",
+      "perturbation": "both components +1",
+      "selector_calls": 41,
+      "selected_streams": 10,
+      "distinct_group_records": 7,
+      "static_copies": 60,
+      "later_builder_reads": 35,
+      "streams": [
+        "$C42646",
+        "$C42788",
+        "$C427C8",
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B3E",
+        "$C42B46",
+        "$C42B5C",
+        "$C42BD4"
+      ]
+    },
+    {
+      "probe": "row_zero",
+      "origin_bins": "(0,16)",
+      "perturbation": "first component zero",
+      "selector_calls": 41,
+      "selected_streams": 4,
+      "distinct_group_records": 3,
+      "static_copies": 6,
+      "later_builder_reads": 4,
+      "streams": [
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B5C"
+      ]
+    },
+    {
+      "probe": "group_zero",
+      "origin_bins": "(16,0)",
+      "perturbation": "second component zero",
+      "selector_calls": 41,
+      "selected_streams": 4,
+      "distinct_group_records": 3,
+      "static_copies": 6,
+      "later_builder_reads": 4,
+      "streams": [
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B5C"
+      ]
+    },
+    {
+      "probe": "row_ff",
+      "origin_bins": "(255,16)",
+      "perturbation": "first component 255",
+      "selector_calls": 41,
+      "selected_streams": 4,
+      "distinct_group_records": 3,
+      "static_copies": 6,
+      "later_builder_reads": 4,
+      "streams": [
+        "$C4298A",
+        "$C429D0",
+        "$C429DE",
+        "$C42B5C"
+      ]
+    }
+  ]
+}
