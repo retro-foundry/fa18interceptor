@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from engine9000_bridge import Engine, ROOT
+from profile_window import read_events
 
 
 SUBMIT = 0xC2FF48
@@ -27,6 +28,10 @@ def words(engine: Engine, address: int, count: int) -> list[int]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--restore", type=Path, required=True)
+    parser.add_argument("--playback", type=Path,
+                        help="optional input recording delivered before collection")
+    parser.add_argument("--arm-frame", type=int, default=1,
+                        help="install the C2FF48 breakpoint immediately before this replay frame")
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     parser.add_argument("--frames", type=int, default=2)
     parser.add_argument("--max-submissions", type=int, default=64)
@@ -34,9 +39,10 @@ def main() -> None:
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError(args.output)
-    if args.frames < 1 or args.max_submissions < 1:
-        raise ValueError("frames and max-submissions must be positive")
+    if args.arm_frame < 1 or args.frames < args.arm_frame or args.max_submissions < 1:
+        raise ValueError("invalid replay frame or submission limit")
     args.output.mkdir(parents=True)
+    events = read_events(args.playback) if args.playback else {}
 
     engine = Engine(args.config.resolve(), args.output / "saves")
     try:
@@ -44,9 +50,12 @@ def main() -> None:
         state = args.restore.read_bytes()
         if not engine.core.retro_unserialize(state, len(state)):
             raise RuntimeError("Core rejected save state")
-        engine.core.e9k_debug_add_breakpoint(SUBMIT)
         submissions = []
-        for _ in range(args.frames):
+        for frame in range(1, args.frames + 1):
+            if frame == args.arm_frame:
+                engine.core.e9k_debug_add_breakpoint(SUBMIT)
+            for kind, values in events.get(frame, []):
+                engine.event(kind, values)
             engine.core.retro_run()
             while engine.core.e9k_debug_is_paused():
                 if engine.regs()["pc"] != SUBMIT:
@@ -75,7 +84,9 @@ def main() -> None:
             if len(submissions) >= args.max_submissions:
                 break
         report = {"scope": "finalized polygon tuples at C2FF48", "restore": str(args.restore),
-                  "frames": args.frames, "submission_count": len(submissions), "submissions": submissions,
+                  "playback": str(args.playback) if args.playback else None,
+                  "arm_frame": args.arm_frame, "frames": args.frames,
+                  "submission_count": len(submissions), "submissions": submissions,
                   "qualification": "C4B990/C4B390 are mutable finalized workspaces; polygon owner requires upstream control-stream correlation."}
         (args.output / "polygon_submissions.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"submissions": len(submissions), "output": str(args.output)}))
