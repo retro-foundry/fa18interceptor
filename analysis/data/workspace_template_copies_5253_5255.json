@@ -1,0 +1,1566 @@
+{
+  "authority": {
+    "trace": "build/run033_frame05250_placement_thirtyframe_trace/trace.jsonl",
+    "slow_snapshot": "build/run033_frame05250_placement_thirtyframe_trace/slow.bin",
+    "copy_pc": "$C1D488",
+    "later_builder_header_read_pc": "$C1DD36"
+  },
+  "classification": "traced_static_template_to_mutable_workspace_not_map_mesh",
+  "copies": [
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27187,
+      "static_source": "$C42BD5",
+      "source_segment": 67,
+      "source_header_byte": "$1E",
+      "source_words": [
+        "$0380",
+        "$0C80"
+      ],
+      "workspace_cell": "$C49DD0",
+      "workspace_header_word": "$001E",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27209,
+      "static_source": "$C42BDB",
+      "source_segment": 67,
+      "source_header_byte": "$34",
+      "source_words": [
+        "$04A0",
+        "$09E0"
+      ],
+      "workspace_cell": "$C49DD6",
+      "workspace_header_word": "$0034",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27231,
+      "static_source": "$C42BE1",
+      "source_segment": 67,
+      "source_header_byte": "$1F",
+      "source_words": [
+        "$03D2",
+        "$0B64"
+      ],
+      "workspace_cell": "$C49DDC",
+      "workspace_header_word": "$001F",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27253,
+      "static_source": "$C42BE7",
+      "source_segment": 67,
+      "source_header_byte": "$1F",
+      "source_words": [
+        "$0327",
+        "$0CA6"
+      ],
+      "workspace_cell": "$C49DE2",
+      "workspace_header_word": "$001F",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27275,
+      "static_source": "$C42BED",
+      "source_segment": 67,
+      "source_header_byte": "$1D",
+      "source_words": [
+        "$025E",
+        "$0E21"
+      ],
+      "workspace_cell": "$C49DE8",
+      "workspace_header_word": "$001D",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27297,
+      "static_source": "$C42BF3",
+      "source_segment": 67,
+      "source_header_byte": "$1C",
+      "source_words": [
+        "$04AA",
+        "$0ACE"
+      ],
+      "workspace_cell": "$C49DEE",
+      "workspace_header_word": "$001C",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27319,
+      "static_source": "$C42BF9",
+      "source_segment": 67,
+      "source_header_byte": "$1F",
+      "source_words": [
+        "$03D8",
+        "$0C5A"
+      ],
+      "workspace_cell": "$C49DF4",
+      "workspace_header_word": "$001F",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27341,
+      "static_source": "$C42BFF",
+      "source_segment": 67,
+      "source_header_byte": "$36",
+      "source_words": [
+        "$030F",
+        "$0DD4"
+      ],
+      "workspace_cell": "$C49DFA",
+      "workspace_header_word": "$0036",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27363,
+      "static_source": "$C42C05",
+      "source_segment": 67,
+      "source_header_byte": "$37",
+      "source_words": [
+        "$0090",
+        "$0B35"
+      ],
+      "workspace_cell": "$C49E00",
+      "workspace_header_word": "$0037",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27385,
+      "static_source": "$C42C0B",
+      "source_segment": 67,
+      "source_header_byte": "$1B",
+      "source_words": [
+        "$0244",
+        "$0C1C"
+      ],
+      "workspace_cell": "$C49E06",
+      "workspace_header_word": "$001B",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27407,
+      "static_source": "$C42C11",
+      "source_segment": 67,
+      "source_header_byte": "$32",
+      "source_words": [
+        "$03BF",
+        "$0CE5"
+      ],
+      "workspace_cell": "$C49E0C",
+      "workspace_header_word": "$0032",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27429,
+      "static_source": "$C42C17",
+      "source_segment": 67,
+      "source_header_byte": "$1B",
+      "source_words": [
+        "$0538",
+        "$0DAD"
+      ],
+      "workspace_cell": "$C49E12",
+      "workspace_header_word": "$001B",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27451,
+      "static_source": "$C42C1D",
+      "source_segment": 67,
+      "source_header_byte": "$32",
+      "source_words": [
+        "$0240",
+        "$0B92"
+      ],
+      "workspace_cell": "$C49E18",
+      "workspace_header_word": "$0032",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27473,
+      "static_source": "$C42C23",
+      "source_segment": 67,
+      "source_header_byte": "$32",
+      "source_words": [
+        "$0386",
+        "$0C3F"
+      ],
+      "workspace_cell": "$C49E1E",
+      "workspace_header_word": "$0032",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27495,
+      "static_source": "$C42C29",
+      "source_segment": 67,
+      "source_header_byte": "$32",
+      "source_words": [
+        "$04C8",
+        "$0CEA"
+      ],
+      "workspace_cell": "$C49E24",
+      "workspace_header_word": "$0032",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27517,
+      "static_source": "$C42C2F",
+      "source_segment": 67,
+      "source_header_byte": "$35",
+      "source_words": [
+        "$0650",
+        "$0DBA"
+      ],
+      "workspace_cell": "$C49E2A",
+      "workspace_header_word": "$0035",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27672,
+      "static_source": "$C42647",
+      "source_segment": 66,
+      "source_header_byte": "$15",
+      "source_words": [
+        "$0000",
+        "$0000"
+      ],
+      "workspace_cell": "$C4A1F0",
+      "workspace_header_word": "$0015",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27710,
+      "static_source": "$C4264D",
+      "source_segment": 66,
+      "source_header_byte": "$20",
+      "source_words": [
+        "$0980",
+        "$0580"
+      ],
+      "workspace_cell": "$C4A370",
+      "workspace_header_word": "$0020",
+      "observed_later_builder_frame": 5254,
+      "observed_later_builder_trace_index": 38651,
+      "runtime_placement_record": "$C4F06A",
+      "runtime_descriptor": "$C22700",
+      "runtime_coordinate_words_unsigned": [
+        11008,
+        0,
+        6400
+      ],
+      "runtime_coordinate_words_signed": [
+        11008,
+        0,
+        6400
+      ]
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27732,
+      "static_source": "$C42653",
+      "source_segment": 66,
+      "source_header_byte": "$21",
+      "source_words": [
+        "$0980",
+        "$0280"
+      ],
+      "workspace_cell": "$C4A376",
+      "workspace_header_word": "$0021",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27754,
+      "static_source": "$C42659",
+      "source_segment": 66,
+      "source_header_byte": "$53",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C4A37C",
+      "workspace_header_word": "$0053",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27792,
+      "static_source": "$C4265F",
+      "source_segment": 66,
+      "source_header_byte": "$54",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C4A3D0",
+      "workspace_header_word": "$0054",
+      "observed_later_builder_frame": 5254,
+      "observed_later_builder_trace_index": 38987,
+      "runtime_placement_record": "$C4F082",
+      "runtime_descriptor": "$C22700",
+      "runtime_coordinate_words_unsigned": [
+        8864,
+        0,
+        9216
+      ],
+      "runtime_coordinate_words_signed": [
+        8864,
+        0,
+        9216
+      ]
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27814,
+      "static_source": "$C42665",
+      "source_segment": 66,
+      "source_header_byte": "$14",
+      "source_words": [
+        "$0200",
+        "$0600"
+      ],
+      "workspace_cell": "$C4A3D6",
+      "workspace_header_word": "$0014",
+      "observed_later_builder_frame": 5254,
+      "observed_later_builder_trace_index": 39159,
+      "runtime_placement_record": "$C4F09A",
+      "runtime_descriptor": "$C22764",
+      "runtime_coordinate_words_unsigned": [
+        13120,
+        0,
+        8192
+      ],
+      "runtime_coordinate_words_signed": [
+        13120,
+        0,
+        8192
+      ]
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27836,
+      "static_source": "$C4266B",
+      "source_segment": 66,
+      "source_header_byte": "$33",
+      "source_words": [
+        "$0200",
+        "$0240"
+      ],
+      "workspace_cell": "$C4A3DC",
+      "workspace_header_word": "$0033",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27858,
+      "static_source": "$C42671",
+      "source_segment": 66,
+      "source_header_byte": "$48",
+      "source_words": [
+        "$0200",
+        "$0240"
+      ],
+      "workspace_cell": "$C4A3E2",
+      "workspace_header_word": "$0048",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27880,
+      "static_source": "$C42677",
+      "source_segment": 66,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$0220",
+        "$00E0"
+      ],
+      "workspace_cell": "$C4A3E8",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27902,
+      "static_source": "$C4267D",
+      "source_segment": 66,
+      "source_header_byte": "$52",
+      "source_words": [
+        "$0E00",
+        "$0600"
+      ],
+      "workspace_cell": "$C4A3EE",
+      "workspace_header_word": "$0052",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27940,
+      "static_source": "$C42683",
+      "source_segment": 66,
+      "source_header_byte": "$24",
+      "source_words": [
+        "$0D98",
+        "$0414"
+      ],
+      "workspace_cell": "$C4A430",
+      "workspace_header_word": "$0024",
+      "observed_later_builder_frame": 5254,
+      "observed_later_builder_trace_index": 39979,
+      "runtime_placement_record": "$C4F0FA",
+      "runtime_descriptor": "$C22A34",
+      "runtime_coordinate_words_unsigned": [
+        2048,
+        0,
+        10240
+      ],
+      "runtime_coordinate_words_signed": [
+        2048,
+        0,
+        10240
+      ]
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27962,
+      "static_source": "$C42689",
+      "source_segment": 66,
+      "source_header_byte": "$25",
+      "source_words": [
+        "$0C00",
+        "$0498"
+      ],
+      "workspace_cell": "$C4A436",
+      "workspace_header_word": "$0025",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 27984,
+      "static_source": "$C4268F",
+      "source_segment": 66,
+      "source_header_byte": "$26",
+      "source_words": [
+        "$0BD8",
+        "$04A8"
+      ],
+      "workspace_cell": "$C4A43C",
+      "workspace_header_word": "$0026",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28006,
+      "static_source": "$C42695",
+      "source_segment": 66,
+      "source_header_byte": "$23",
+      "source_words": [
+        "$0F00",
+        "$0380"
+      ],
+      "workspace_cell": "$C4A442",
+      "workspace_header_word": "$0023",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28044,
+      "static_source": "$C4269B",
+      "source_segment": 66,
+      "source_header_byte": "$17",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C4A4F0",
+      "workspace_header_word": "$0017",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28082,
+      "static_source": "$C426A1",
+      "source_segment": 66,
+      "source_header_byte": "$18",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C4A550",
+      "workspace_header_word": "$0018",
+      "observed_later_builder_frame": 5254,
+      "observed_later_builder_trace_index": 39603,
+      "runtime_placement_record": "$C4F0CA",
+      "runtime_descriptor": "$C22778",
+      "runtime_coordinate_words_unsigned": [
+        11024,
+        0,
+        5376
+      ],
+      "runtime_coordinate_words_signed": [
+        11024,
+        0,
+        5376
+      ]
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28104,
+      "static_source": "$C426A7",
+      "source_segment": 66,
+      "source_header_byte": "$75",
+      "source_words": [
+        "$0780",
+        "$0B80"
+      ],
+      "workspace_cell": "$C4A556",
+      "workspace_header_word": "$0075",
+      "observed_later_builder_frame": 5254,
+      "observed_later_builder_trace_index": 39774,
+      "runtime_placement_record": "$C4F0E2",
+      "runtime_descriptor": "$C22A84",
+      "runtime_coordinate_words_unsigned": [
+        12288,
+        0,
+        2048
+      ],
+      "runtime_coordinate_words_signed": [
+        12288,
+        0,
+        2048
+      ]
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28126,
+      "static_source": "$C426AD",
+      "source_segment": 66,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$0658",
+        "$0CA8"
+      ],
+      "workspace_cell": "$C4A55C",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28148,
+      "static_source": "$C426B3",
+      "source_segment": 66,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$04F0",
+        "$0E10"
+      ],
+      "workspace_cell": "$C4A562",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28170,
+      "static_source": "$C426B9",
+      "source_segment": 66,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$0388",
+        "$0F78"
+      ],
+      "workspace_cell": "$C4A568",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28208,
+      "static_source": "$C426BF",
+      "source_segment": 66,
+      "source_header_byte": "$19",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C4A670",
+      "workspace_header_word": "$0019",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5253,
+      "copy_trace_index": 28246,
+      "static_source": "$C426C5",
+      "source_segment": 66,
+      "source_header_byte": "$1A",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C4A6D0",
+      "workspace_header_word": "$001A",
+      "observed_later_builder_frame": 5254,
+      "observed_later_builder_trace_index": 39397,
+      "runtime_placement_record": "$C4F0B2",
+      "runtime_descriptor": "$C22A98",
+      "runtime_coordinate_words_unsigned": [
+        12288,
+        0,
+        61440
+      ],
+      "runtime_coordinate_words_signed": [
+        12288,
+        0,
+        -4096
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36106,
+      "static_source": "$C42789",
+      "source_segment": 66,
+      "source_header_byte": "$2A",
+      "source_words": [
+        "$0E00",
+        "$0E00"
+      ],
+      "workspace_cell": "$C49C50",
+      "workspace_header_word": "$002A",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36128,
+      "static_source": "$C4278F",
+      "source_segment": 66,
+      "source_header_byte": "$70",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C49C56",
+      "workspace_header_word": "$0070",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36166,
+      "static_source": "$C42795",
+      "source_segment": 66,
+      "source_header_byte": "$71",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C49DD0",
+      "workspace_header_word": "$0071",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36188,
+      "static_source": "$C4279B",
+      "source_segment": 66,
+      "source_header_byte": "$2C",
+      "source_words": [
+        "$06F6",
+        "$0E9A"
+      ],
+      "workspace_cell": "$C49DD6",
+      "workspace_header_word": "$002C",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36210,
+      "static_source": "$C427A1",
+      "source_segment": 66,
+      "source_header_byte": "$2B",
+      "source_words": [
+        "$00C4",
+        "$0AC8"
+      ],
+      "workspace_cell": "$C49DDC",
+      "workspace_header_word": "$002B",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36248,
+      "static_source": "$C427A7",
+      "source_segment": 66,
+      "source_header_byte": "$72",
+      "source_words": [
+        "$0C00",
+        "$0400"
+      ],
+      "workspace_cell": "$C49E30",
+      "workspace_header_word": "$0072",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36286,
+      "static_source": "$C427AD",
+      "source_segment": 66,
+      "source_header_byte": "$5A",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C49FB0",
+      "workspace_header_word": "$005A",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36415,
+      "static_source": "$C427C9",
+      "source_segment": 66,
+      "source_header_byte": "$46",
+      "source_words": [
+        "$0B00",
+        "$0900"
+      ],
+      "workspace_cell": "$C4A370",
+      "workspace_header_word": "$0046",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36453,
+      "static_source": "$C427CF",
+      "source_segment": 66,
+      "source_header_byte": "$46",
+      "source_words": [
+        "$0150",
+        "$0200"
+      ],
+      "workspace_cell": "$C4A3D0",
+      "workspace_header_word": "$0046",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36475,
+      "static_source": "$C427D5",
+      "source_segment": 66,
+      "source_header_byte": "$4B",
+      "source_words": [
+        "$09A0",
+        "$0000"
+      ],
+      "workspace_cell": "$C4A3D6",
+      "workspace_header_word": "$004B",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36513,
+      "static_source": "$C427DB",
+      "source_segment": 66,
+      "source_header_byte": "$6F",
+      "source_words": [
+        "$0400",
+        "$0400"
+      ],
+      "workspace_cell": "$C4A430",
+      "workspace_header_word": "$006F",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36551,
+      "static_source": "$C427E1",
+      "source_segment": 66,
+      "source_header_byte": "$4C",
+      "source_words": [
+        "$0588",
+        "$0A80"
+      ],
+      "workspace_cell": "$C4A550",
+      "workspace_header_word": "$004C",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36573,
+      "static_source": "$C427E7",
+      "source_segment": 66,
+      "source_header_byte": "$73",
+      "source_words": [
+        "$0800",
+        "$0400"
+      ],
+      "workspace_cell": "$C4A556",
+      "workspace_header_word": "$0073",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 36611,
+      "static_source": "$C427ED",
+      "source_segment": 66,
+      "source_header_byte": "$74",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C4A6D0",
+      "workspace_header_word": "$0074",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 40908,
+      "static_source": "$C42C37",
+      "source_segment": 67,
+      "source_header_byte": "$30",
+      "source_words": [
+        "$0980",
+        "$0980"
+      ],
+      "workspace_cell": "$C48690",
+      "workspace_header_word": "$0030",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 40930,
+      "static_source": "$C42C3D",
+      "source_segment": 67,
+      "source_header_byte": "$30",
+      "source_words": [
+        "$0580",
+        "$0640"
+      ],
+      "workspace_cell": "$C48696",
+      "workspace_header_word": "$0030",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 40952,
+      "static_source": "$C42C43",
+      "source_segment": 67,
+      "source_header_byte": "$4A",
+      "source_words": [
+        "$0780",
+        "$07C0"
+      ],
+      "workspace_cell": "$C4869C",
+      "workspace_header_word": "$004A",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 41197,
+      "static_source": "$C42C49",
+      "source_segment": 67,
+      "source_header_byte": "$30",
+      "source_words": [
+        "$0E00",
+        "$0200"
+      ],
+      "workspace_cell": "$C48870",
+      "workspace_header_word": "$0030",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 41442,
+      "static_source": "$C42C4F",
+      "source_segment": 67,
+      "source_header_byte": "$46",
+      "source_words": [
+        "$0540",
+        "$0800"
+      ],
+      "workspace_cell": "$C48930",
+      "workspace_header_word": "$0046",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 41464,
+      "static_source": "$C42C55",
+      "source_segment": 67,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$0880",
+        "$0380"
+      ],
+      "workspace_cell": "$C48936",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 42045,
+      "static_source": "$C42999",
+      "source_segment": 66,
+      "source_header_byte": "$24",
+      "source_words": [
+        "$0660",
+        "$0050"
+      ],
+      "workspace_cell": "$C48C90",
+      "workspace_header_word": "$0024",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 47760,
+      "runtime_placement_record": "$C4F75A",
+      "runtime_descriptor": "$C22458",
+      "runtime_coordinate_words_unsigned": [
+        6960,
+        0,
+        10280
+      ],
+      "runtime_coordinate_words_signed": [
+        6960,
+        0,
+        10280
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 42067,
+      "static_source": "$C4299F",
+      "source_segment": 66,
+      "source_header_byte": "$25",
+      "source_words": [
+        "$0000",
+        "$0260"
+      ],
+      "workspace_cell": "$C48C96",
+      "workspace_header_word": "$0025",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 47928,
+      "runtime_placement_record": "$C4F772",
+      "runtime_descriptor": "$C2246C",
+      "runtime_coordinate_words_unsigned": [
+        6144,
+        0,
+        10544
+      ],
+      "runtime_coordinate_words_signed": [
+        6144,
+        0,
+        10544
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 42314,
+      "static_source": "$C429A5",
+      "source_segment": 66,
+      "source_header_byte": "$26",
+      "source_words": [
+        "$0F60",
+        "$02A0"
+      ],
+      "workspace_cell": "$C48CF0",
+      "workspace_header_word": "$0026",
+      "observed_later_builder_frame": null,
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 42561,
+      "static_source": "$C429AB",
+      "source_segment": 66,
+      "source_header_byte": "$23",
+      "source_words": [
+        "$0C00",
+        "$0E00"
+      ],
+      "workspace_cell": "$C48E10",
+      "workspace_header_word": "$0023",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 48138,
+      "runtime_placement_record": "$C4F78A",
+      "runtime_descriptor": "$C22444",
+      "runtime_coordinate_words_unsigned": [
+        7680,
+        0,
+        9984
+      ],
+      "runtime_coordinate_words_signed": [
+        7680,
+        0,
+        9984
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 43389,
+      "static_source": "$C42C5D",
+      "source_segment": 67,
+      "source_header_byte": "$2D",
+      "source_words": [
+        "$0200",
+        "$0040"
+      ],
+      "workspace_cell": "$C49590",
+      "workspace_header_word": "$002D",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 48779,
+      "runtime_placement_record": "$C4F7A2",
+      "runtime_descriptor": "$C2250C",
+      "runtime_coordinate_words_unsigned": [
+        14592,
+        0,
+        6176
+      ],
+      "runtime_coordinate_words_signed": [
+        14592,
+        0,
+        6176
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 43411,
+      "static_source": "$C42C63",
+      "source_segment": 67,
+      "source_header_byte": "$2D",
+      "source_words": [
+        "$0040",
+        "$0400"
+      ],
+      "workspace_cell": "$C49596",
+      "workspace_header_word": "$002D",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 48946,
+      "runtime_placement_record": "$C4F7BA",
+      "runtime_descriptor": "$C2250C",
+      "runtime_coordinate_words_unsigned": [
+        14368,
+        0,
+        6656
+      ],
+      "runtime_coordinate_words_signed": [
+        14368,
+        0,
+        6656
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 43656,
+      "static_source": "$C42C69",
+      "source_segment": 67,
+      "source_header_byte": "$2E",
+      "source_words": [
+        "$0800",
+        "$0800"
+      ],
+      "workspace_cell": "$C495F0",
+      "workspace_header_word": "$002E",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 49530,
+      "runtime_placement_record": "$C4F802",
+      "runtime_descriptor": "$C22520",
+      "runtime_coordinate_words_unsigned": [
+        13312,
+        0,
+        7168
+      ],
+      "runtime_coordinate_words_signed": [
+        13312,
+        0,
+        7168
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 43678,
+      "static_source": "$C42C6F",
+      "source_segment": 67,
+      "source_header_byte": "$2F",
+      "source_words": [
+        "$0A00",
+        "$0300"
+      ],
+      "workspace_cell": "$C495F6",
+      "workspace_header_word": "$002F",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 49697,
+      "runtime_placement_record": "$C4F81A",
+      "runtime_descriptor": "$C22534",
+      "runtime_coordinate_words_unsigned": [
+        13568,
+        0,
+        6528
+      ],
+      "runtime_coordinate_words_signed": [
+        13568,
+        0,
+        6528
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 43700,
+      "static_source": "$C42C75",
+      "source_segment": 67,
+      "source_header_byte": "$2D",
+      "source_words": [
+        "$0100",
+        "$0840"
+      ],
+      "workspace_cell": "$C495FC",
+      "workspace_header_word": "$002D",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 49864,
+      "runtime_placement_record": "$C4F832",
+      "runtime_descriptor": "$C2250C",
+      "runtime_coordinate_words_unsigned": [
+        12416,
+        0,
+        7200
+      ],
+      "runtime_coordinate_words_signed": [
+        12416,
+        0,
+        7200
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 43945,
+      "static_source": "$C42C7B",
+      "source_segment": 67,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$0960",
+        "$02A0"
+      ],
+      "workspace_cell": "$C49650",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 50228,
+      "runtime_placement_record": "$C4F84A",
+      "runtime_descriptor": "$C22430",
+      "runtime_coordinate_words_unsigned": [
+        11440,
+        0,
+        6480
+      ],
+      "runtime_coordinate_words_signed": [
+        11440,
+        0,
+        6480
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 43967,
+      "static_source": "$C42C81",
+      "source_segment": 67,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$03C0",
+        "$0840"
+      ],
+      "workspace_cell": "$C49656",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 50396,
+      "runtime_placement_record": "$C4F862",
+      "runtime_descriptor": "$C22430",
+      "runtime_coordinate_words_unsigned": [
+        10720,
+        0,
+        7200
+      ],
+      "runtime_coordinate_words_signed": [
+        10720,
+        0,
+        7200
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 44212,
+      "static_source": "$C42C87",
+      "source_segment": 67,
+      "source_header_byte": "$22",
+      "source_words": [
+        "$0E20",
+        "$0DE0"
+      ],
+      "workspace_cell": "$C496B0",
+      "workspace_header_word": "$0022",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 50927,
+      "runtime_placement_record": "$C4F892",
+      "runtime_descriptor": "$C22430",
+      "runtime_coordinate_words_unsigned": [
+        10000,
+        0,
+        7920
+      ],
+      "runtime_coordinate_words_signed": [
+        10000,
+        0,
+        7920
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 44457,
+      "static_source": "$C42C8D",
+      "source_segment": 67,
+      "source_header_byte": "$2D",
+      "source_words": [
+        "$0C00",
+        "$0800"
+      ],
+      "workspace_cell": "$C49710",
+      "workspace_header_word": "$002D",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 49154,
+      "runtime_placement_record": "$C4F7D2",
+      "runtime_descriptor": "$C2250C",
+      "runtime_coordinate_words_unsigned": [
+        15872,
+        0,
+        5120
+      ],
+      "runtime_coordinate_words_signed": [
+        15872,
+        0,
+        5120
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 44479,
+      "static_source": "$C42C93",
+      "source_segment": 67,
+      "source_header_byte": "$2D",
+      "source_words": [
+        "$0200",
+        "$0C00"
+      ],
+      "workspace_cell": "$C49716",
+      "workspace_header_word": "$002D",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 49321,
+      "runtime_placement_record": "$C4F7EA",
+      "runtime_descriptor": "$C2250C",
+      "runtime_coordinate_words_unsigned": [
+        14592,
+        0,
+        5632
+      ],
+      "runtime_coordinate_words_signed": [
+        14592,
+        0,
+        5632
+      ]
+    },
+    {
+      "copy_frame": 5254,
+      "copy_trace_index": 44724,
+      "static_source": "$C42C99",
+      "source_segment": 67,
+      "source_header_byte": "$75",
+      "source_words": [
+        "$0D56",
+        "$0ED2"
+      ],
+      "workspace_cell": "$C497D0",
+      "workspace_header_word": "$0075",
+      "observed_later_builder_frame": 5255,
+      "observed_later_builder_trace_index": 50643,
+      "runtime_placement_record": "$C4F87A",
+      "runtime_descriptor": "$C22AAC",
+      "runtime_coordinate_words_unsigned": [
+        11947,
+        0,
+        5993
+      ],
+      "runtime_coordinate_words_signed": [
+        11947,
+        0,
+        5993
+      ]
+    }
+  ]
+}
