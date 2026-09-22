@@ -1,0 +1,16 @@
+{
+  "schema": "fa18interceptor.red-golden-gate-transform-inputs/v1",
+  "scope": "Immutable direct triples selected at C1F4AC in the sealed run033 frame-5250 red Golden Gate checkpoint.",
+  "checkpoint": "build/run033_frame05250_checkpoint/slow.bin",
+  "renderer_workspace_excluded": "$C48390 and subsequent transformed workspaces",
+  "packets": [
+    {"source": "$C3AD0E", "end": "$C3AD19", "next_pointer": "$C3AD1A", "triples": [[0,0,0],[0,512,0]], "classification": "active raw input; bridge-family association not individually proven"},
+    {"source": "$C3AF62", "end": "$C3AF73", "next_pointer": "$C3AF74", "triples": [[0,0,0],[0,1376,0],[208,0,304]], "classification": "active raw input; bridge-family association not individually proven"},
+    {"source": "$C3B0CE", "end": "$C3B0E5", "next_pointer": "$C3B0E6", "triples": [[208,1280,-160],[208,0,-160],[-208,0,-160],[208,0,160]], "classification": "active raw input; bridge-family association not individually proven"},
+    {"source": "$C3B9B2", "end": "$C3B9BD", "next_pointer": "$C3B9BE", "triples": [[272,0,-270],[-270,172,272]], "classification": "active raw input; bridge-family association not individually proven"},
+    {"source": "$C3A9A8", "end": "$C3A9B3", "next_pointer": "$C3A9B4", "triples": [[0,0,0],[0,280,0]], "classification": "active raw input; bridge-family association not individually proven"},
+    {"source": "$C3B108", "end": "$C3B119", "next_pointer": "$C3B11A", "triples": [[0,0,0],[0,1280,0],[288,0,576]], "classification": "active raw input; bridge-family association not individually proven"},
+    {"source": "$C3B720", "end": "$C3B73D", "next_pointer": "$C3B73E", "triples": [[2112,0,-896],[-2080,0,-2048],[-1600,0,1280],[1088,0,1568],[-640,1024,0]], "classification": "trace-proven terrain/mountain component; explicitly excluded from Golden Gate bridge mesh"}
+  ],
+  "qualification": "The frame contains user-identified red Golden Gate pixels. Packet activity alone does not assign every packet to the bridge; only renderer-context/source joins establish a mesh family."
+}
