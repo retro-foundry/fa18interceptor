@@ -126,6 +126,10 @@ through two visible map line segments; see the [three-triple line
 component](c36220_c36232_map_line_component.md). It remains separate from the
 five-triple `$C3B720` component.
 
+The magenta `$C35BDE -> $C35BF0` overlay component is a decoded local
+three-vertex polyline rather than merely a pair of screen segments; see its
+[offset-pair topology contract](c35bde_c35bf0_map_polyline_component.md).
+
 For visual review, the [bounded component-line overlay](../visuals/run003_m_map_component_lines_overlay.png)
 draws the four distinct leading control intervals over the original map frame:
 magenta `$C35BDE -> $C35BF0`, yellow `$C35BAA -> $C35BB8`, cyan

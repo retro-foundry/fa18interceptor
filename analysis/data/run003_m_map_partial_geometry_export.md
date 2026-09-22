@@ -14,3 +14,7 @@ The `$C3B720` component is the only entry in this export with an independently
 observed face-slot mapping, so it is also available as a four-triangle
 [minimal OBJ](../exports/c3b720_trace_proven_partial_component.obj). The other
 entries remain input/control/line exports rather than guessed surface meshes.
+
+`$C35BDE -> $C35BF0` additionally has a decoded static offset-pair list, so
+its two selected local edges (`0 -> 1 -> 2`) are documented in the
+[polyline component contract](c35bde_c35bf0_map_polyline_component.md).
