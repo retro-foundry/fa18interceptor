@@ -48,7 +48,11 @@ called the complete world map.
 
 The sampled runtime placement layer supplies positive, scenario-backed support
 for a flat world plane: its middle coordinate word is zero for all 121, 123,
-and 123 descriptor-qualified records at the three run033 checkpoints.  This
+and 123 descriptor-qualified records at the three run033 checkpoints. The
+separate run035 Golden Gate/coast approach repeats that result for 123 records
+at each of frames 5,500, 7,000, and 8,500; see the
+[run035 placement diagnostic](data/run035_runtime_scene_placements.md).
+This
 does not yet establish the original static source table, prove that this word
 is a global height axis under every game mode, or rule out separate terrain
 geometry.  Renderer-observed local triples from scene-family inputs still

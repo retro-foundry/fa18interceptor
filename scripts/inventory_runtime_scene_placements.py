@@ -8,6 +8,7 @@ top-down diagnostic of the word-1/word-3 coordinate plane.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import struct
 from pathlib import Path
@@ -98,8 +99,19 @@ def svg(scenes: list[dict]) -> str:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--capture", nargs=2, action="append", metavar=("NAME", "SLOW_BIN"),
+                        help="optional named slow-RAM snapshot; default is the three run033 checkpoints")
+    parser.add_argument("--output-json", type=Path,
+                        default=ROOT / "analysis/data/runtime_scene_placements.json")
+    parser.add_argument("--output-markdown", type=Path,
+                        default=ROOT / "analysis/data/runtime_scene_placements.md")
+    parser.add_argument("--output-svg", type=Path,
+                        default=ROOT / "analysis/plots/runtime_scene_placements_xz.svg")
+    args = parser.parse_args()
+    captures = tuple((name, Path(path).resolve()) for name, path in args.capture) if args.capture else CAPTURES
     scenes = []
-    for capture, path in CAPTURES:
+    for capture, path in captures:
         rows = records(path)
         scenes.append({"capture": capture, "slow_snapshot": str(path.relative_to(ROOT)).replace("\\", "/"),
                        "records": rows, "contiguous_blocks": contiguous_blocks(rows),
@@ -109,9 +121,11 @@ def main() -> None:
                "classification": "mutable_runtime_scene_placement_candidates_not_static_map_meshes",
                "selection": "first 300 aligned records whose leading longword is in the relocated $C22000-$C22FFF descriptor range; coordinate values are not selection criteria",
                "record_size_bytes": RECORD_SIZE, "scenes": scenes}
-    target = ROOT / "analysis/data/runtime_scene_placements.json"
+    target = args.output_json
+    target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    (ROOT / "analysis/plots/runtime_scene_placements_xz.svg").write_text(
+    args.output_svg.parent.mkdir(parents=True, exist_ok=True)
+    args.output_svg.write_text(
         svg(scenes), encoding="utf-8"
     )
     lines = ["# Runtime coordinate-bearing scene placements", "",
@@ -123,12 +137,13 @@ def main() -> None:
     for scene in scenes:
         blocks = ", ".join(f"{row['first_index']}-{row['last_index']} ({row['records']})" for row in scene["contiguous_blocks"])
         lines.append(f"| {scene['capture']} | {len(scene['records'])} | {blocks} | {scene['all_middle_coordinate_words_zero']} |")
-    lines += ["", "[Top-down X/Z diagnostic](../plots/runtime_scene_placements_xz.svg) uses the same coordinate scale in all three panels. It is a placement scatter plot only: points do not imply terrain triangles, roads, or missing links.", "",
+    lines += ["", f"[Top-down X/Z diagnostic](../plots/{args.output_svg.name}) uses the same coordinate scale in all three panels. It is a placement scatter plot only: points do not imply terrain triangles, roads, or missing links.", "",
               "## Limits", "", "The populated records and their coordinates change between checkpoints, so the captures establish a runtime scene-placement layer but not the original static source table, a terrain mesh, or a distance-selected LOD rule. Proving any of those needs a trace of the writer/refill path into `$C4E9AA` and a source-to-renderer association for individual descriptors.", ""]
-    (ROOT / "analysis/data/runtime_scene_placements.md").write_text(
+    args.output_markdown.parent.mkdir(parents=True, exist_ok=True)
+    args.output_markdown.write_text(
         "\n".join(lines), encoding="utf-8"
     )
-    print(f"wrote {target.relative_to(ROOT)} ({sum(len(scene['records']) for scene in scenes)} placements)")
+    print(f"wrote {target} ({sum(len(scene['records']) for scene in scenes)} placements)")
 
 
 if __name__ == "__main__":
