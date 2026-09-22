@@ -35,6 +35,15 @@ their inline stream.  At every one of those 26 entries, the trace reaches
 Thus the run003 map visibly exercises only the inline route.  The eight
 distinct alternate streams are static candidates for a detail/visibility
 variant, but none is dynamically selected by this evidence.
+
+The later run035 M-map appearance trace supplies the missing dynamic half:
+of its 18 direct packet entries, 10 reach `$C2AF40` with non-zero `D7` and
+then reach `$C2AF46` with `A3` equal to the packet header's alternate pointer.
+The other 8 take the inline route.  By contrast, its sealed stable M-map
+trace has 6 direct entries, all with `D7 = 0` and the inline route.  This
+proves the alternate stream is a live renderer variant.  It does not make it
+distance LOD: the appearance and stable captures differ in transition/control
+state as well as any possible map scale or viewing variables.
 The accompanying [raw-coordinate sheet](../plots/run003_m_map_static_pair_packets.png)
 is a visual inspection aid only; it preserves read order without inferring
 closed faces or screen/world alignment.
