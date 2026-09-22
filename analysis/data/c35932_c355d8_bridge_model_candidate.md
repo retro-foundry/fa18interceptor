@@ -56,14 +56,17 @@ topology/control data while its endpoint triples are transient workspace
 state.  This is the direct data/control split for the distant bridge stroke;
 it does not turn either parent value into an immutable vertex source.
 
-There is also a bounded upstream join for the first red-frame line pair.
+There is a **time-adjacent candidate** upstream join for the first red-frame
+line pair.
 `$C3B9B2` enters `$C1F4AC` at host frame 7 and transforms exactly two direct
 triples, writing consecutive `$C48390` slots 0 and 1.  The `$C3559A` line
 submission at frame 8 then selects `$C358B2` offsets 0 and 6, before the next
-matrix entry (`$C35BAA`, frame 14).  Thus `$C3B9B2-$C3B9BD` is a trace-proven
-immutable two-endpoint input for this observed distant bridge stroke.  This
-does not claim that its two vertices are the entire Golden Gate model, only
-that they feed this one renderer-observed line segment.
+matrix entry (`$C35BAA`, frame 14).  This makes `$C3B9B2-$C3B9BD` the leading
+immutable two-endpoint candidate for that observed distant bridge stroke, but
+it is not yet a single uninterrupted source-to-`$C212B0` trace: a
+100,000-instruction focused trace did not reach the submission.  Do not treat
+the candidate as a completed exporter join until that missing trace evidence
+is obtained.
 
 [The line-only orthographic sheet](../plots/run033_frame05250_golden_gate_line_family_sheet.png)
 contains no default polygon overlay or inferred connectivity.  Its repeated

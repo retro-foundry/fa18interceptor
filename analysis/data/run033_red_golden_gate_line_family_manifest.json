@@ -14,7 +14,7 @@
     "triples": [[272, 0, -270], [-270, 172, 272]],
     "transform_entry": "$C1F4AC",
     "observed_line_context": "$C3559A",
-    "qualification": "This is the bounded frame-7 transform to frame-8 C3559A join only; it is not a claimed immutable producer for the adjacent C355D2 call."
+    "qualification": "This is a frame-7 transform / frame-8 C3559A time-adjacent, slot-compatible candidate, not an uninterrupted source-to-C212B0 trace; it is not a claimed immutable producer for the adjacent C355D2 call."
   },
   "runtime_endpoint_contract": {
     "workspace": "$C48390",
