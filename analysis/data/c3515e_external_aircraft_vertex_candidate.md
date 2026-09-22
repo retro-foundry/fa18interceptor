@@ -31,6 +31,10 @@ python scripts\plot_runtime_geometry.py
 ```
 
 The `$C34A9A/$C34A9C` renderer family remains a useful aircraft-like
-orthographic plot, but its source linkage must be kept separate: the
-frame-12,000 trace uses `$C48390` for that family, not the `$C46228` output
-proved above. Its 42-face sheet is catalogued separately.
+orthographic plot. Its face data must remain separate: the frame-12,000 trace
+uses `$C48390` for that family, not the `$C46228` output proved above. The
+shared `$C351xx` transform pass nevertheless emits both lanes, and the
+[`$C34BF6` trace](c34bf6_c34c_selector_trace.md) shows C34C being admitted
+from the same `$C34A9A` control context. Its 42-face sheet is catalogued
+separately; this does not authorize flattening the two mutable coordinate
+lanes into one static mesh.
