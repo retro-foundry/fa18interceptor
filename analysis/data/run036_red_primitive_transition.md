@@ -48,6 +48,12 @@ positive evidence that this particular polygon is unrelated—not evidence for
 or against co-visible filled bridge detail.  See the [polygon span-path
 probe](run036_polygon_span_path_probe.md).
 
+The exact one-frame replay census strengthens the separation: it observes
+three direct-span `$C2FF48` submissions with non-bridge `A5=$FFFFF2`, while
+the eight red-raster-correlated line calls retain `$C35596/$C355CE` contexts.
+It supports coexistence of both primitive routes without supporting a
+line-to-polygon bridge transition.
+
 Authority: sealed `captures/run036`; keyframes in ignored
 `build/run036_keyframes`; replay-preserved ignored collector outputs
 `build/run036_{4999,5999,6999,7000}_polygon_submissions` and

@@ -41,6 +41,21 @@ Authority: sealed `captures/run036`; the replay-preserved ignored trace
 `build/run036_7000_c2ff48_submission_trace_no_future/` (entry snapshot SHA-256
 `42e066a43e21d0225ea536c6217523789ac613a97277d6532956beb007dfcbb1`).
 
+## Same-frame primitive census
+
+A one-chipset-frame instruction trace from the real replay boundary provides a
+non-collector cross-check.  Frame 7,000 contains exactly three `$C2FF48`
+entries (trace indices 5,103, 6,464, and 8,120).  Each takes the same
+`$C302DE -> $C302EC` direct-blitter route and has `A5=$FFFFF2`, rather than a
+static `$C355xx` bridge control address.  Earlier in that *same* trace are
+exactly eight `$C2FA7E` calls: four with `A5=$C35596` and four with
+`A5=$C355CE`; their endpoints exactly reproduce the red-raster-correlated line
+groups in the primitive-transition probe.
+
+Thus the live frame has both renderer routes, but its bridge-correlated work is
+the line route.  This still does not prove that no other off-trace polygon can
+ever represent the bridge, nor does it establish LOD.
+
 Reproduce:
 
 ```text
@@ -51,4 +66,15 @@ python scripts/trace_from_breakpoint.py \
   --address 0xC2FF48 --arm-frame 7000 --return-pc 0xC24D66 \
   --frames 7002 --max-instructions 10000 --ignore-future-input \
   --output build/run036_7000_c2ff48_submission_trace_no_future
+```
+
+The same-frame census is reproduced with:
+
+```text
+python scripts/engine9000_bridge.py \
+  --restore captures/run036/initial_state.bin \
+  --config captures/run036/config.uae \
+  --playback captures/run036/playback.e9k \
+  --frames 6999 --trace-frames 1 \
+  --output build/run036_frame7000_instruction_trace
 ```
