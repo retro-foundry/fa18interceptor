@@ -74,4 +74,8 @@ and the nearby `$C1D34A-$C1D370` path maps it through `$C411F0` and
 `$C1D764` before selecting its per-band helper parameters.  No direct read of
 a three-word terrain coordinate from segment 65 is observed in this slice.
 Treat segment 65 as a static scene-workspace selector/configuration candidate,
-not as extracted map geometry or a placement-coordinate table.
+not as extracted map geometry or a placement-coordinate table.  The traced
+control-byte-to-group-index rows are retained in the
+[workspace-band selector stream](../data/workspace_band_selector_stream.md);
+they show the live bound terms explicitly rather than promoting the byte
+stream to a world-grid claim.
