@@ -24,6 +24,11 @@ the upstream control stream; it does not establish a first writer for the
 selected triple bases.  In particular, `$C48390`, `$C45970`, and the sampled
 `A3` values remain mutable renderer state and are excluded from source data.
 
+Nearby `$C38E2C-$C38E4F` and `$C38E54` are independently trace-proven static
+matrix-input packets, but their focused traces only establish the `$C39260` /
+`$C384CC` path.  They do not reach this `$C38F98` context in the bounded
+window, so they remain [separate transform-packet evidence](c38e_external_transform_packets.md).
+
 ## Status
 
 Retain `$C38F98-$C3900E` as static **face/control data** and retain the

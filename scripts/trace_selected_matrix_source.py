@@ -26,6 +26,8 @@ def main() -> None:
                         help="matrix-transform entry to search (default: C1F100)")
     parser.add_argument("--frames", type=int, default=12)
     parser.add_argument("--instructions", type=int, default=12000)
+    parser.add_argument("--ignore-future-input", action="store_true",
+                        help="trace without replay events after the selected entry")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.occurrence < 1:
@@ -43,7 +45,9 @@ def main() -> None:
         engine.core.e9k_debug_add_breakpoint(args.entry)
         found = None
         matching_occurrences = 0
-        for _ in range(args.frames):
+        for frame in range(1, args.frames + 1):
+            for kind, values in events.get(frame, []):
+                engine.event(kind, values)
             engine.core.retro_run()
             while engine.core.e9k_debug_is_paused():
                 registers = engine.regs()
@@ -65,7 +69,8 @@ def main() -> None:
                 break
         if found is None:
             raise RuntimeError(f"selected matrix source was not reached {args.occurrence} times")
-        if any(frame > found["host_frame"] for frame in events):
+        future_input_omitted = any(frame > found["host_frame"] for frame in events)
+        if future_input_omitted and not args.ignore_future_input:
             raise ValueError("future input after selected source")
 
         decoder = capstone.Cs(capstone.CS_ARCH_M68K,
@@ -91,7 +96,8 @@ def main() -> None:
             "scope": "no-future-input trace beginning at selected C1F100 source",
             "source": f"${args.source:06X}", "found": found,
             "requested_occurrence": args.occurrence,
-            "instructions": len(rows), "termination": "instruction_cap"}, indent=2) + "\n", encoding="utf-8")
+            "instructions": len(rows), "termination": "instruction_cap",
+            "future_input_omitted": future_input_omitted}, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"source": f"${args.source:06X}", "instructions": len(rows), "output": str(args.output)}))
     finally:
         engine.core.retro_unload_game()
