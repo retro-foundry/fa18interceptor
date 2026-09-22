@@ -72,7 +72,7 @@ with 42 for C34A. The independent external-camera frame shows a recognizably
 F/A-18-like aircraft when the C34A family is active. Together with the
 separately transformed C34C layer at frame 12000, this supports a **reduced-
 detail alternate-layer hypothesis**. The two coordinate lanes cannot prove
-world-instance separation. A selector has now been traced for the sampled
-C34C path, but its compared value and alternate paths have not been decoded;
-this is not yet proof of a distance/LOD rule, and it does not support naming
-C34C a missile.
+world-instance separation. A conditional reject gate has now been traced for
+the sampled C34C path; its compared value has no decoded physical meaning and
+the reject path returns rather than choosing an alternate mesh. This is not
+proof of a distance/LOD rule, and it does not support naming C34C a missile.
