@@ -29,6 +29,16 @@ Line collection independently sees `$C355D8` eight times at frame 11,850,
 versus seven times in the frame-12,000 window.  This supports persistence of
 the same bridge render family across the close pass.
 
+## Static face-record overlap
+
+The `$C355D8` pre-clip controller selects `$C35732`, `$C35760`, and
+`$C3576A` in all three windows.  These are exact static-record addresses, not
+workspace coordinates or a visual similarity measure.  Frame 12,000 also
+selects `$C35726`; the close windows select additional low-address transient
+records.  Thus the visible/cull-accepted subset varies, but there is positive
+evidence that the close passes retain part of the same static bridge face
+family rather than replacing it wholesale.
+
 ## Result and limit
 
 This probe finds **no evidence of a simple close-range LOD swap** between the
