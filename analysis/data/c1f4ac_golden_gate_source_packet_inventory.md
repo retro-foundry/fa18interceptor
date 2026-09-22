@@ -38,3 +38,9 @@ entries advance to `$C3A9B4/$C4839C` and `$C3B11A/$C483A2`.
 The `$C35Bxx` traces show two `movem.w (a1)+,d2-d4` transforms each, followed
 by `$C1F58A` consuming the signed word at `$C35BB6` or `$C35BCE`; the first
 walker entries are `$C35BB8/$C4839C` and `$C35BD0/$C4839C` respectively.
+
+In the red frame, a source-bounded `$C3B9B2` capture reaches five polygon
+submissions before the next `$C35BAA` transform begins.  Their contexts are
+the transient `$C4BFBE/$C4BFD0/$C4BFD6` final-renderer state, so this proves
+the packet participates in that rendered batch but does not provide static
+face topology or authorize a standalone mesh export.
