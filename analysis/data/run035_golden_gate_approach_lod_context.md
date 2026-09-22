@@ -1,10 +1,15 @@
-# run035 Golden Gate approach context
+# run035 bridge-approach rendering context
 
 Classification: **sealed visual approach with a bounded two-checkpoint source comparison**.
 This is additional Golden Gate-range evidence, not a completed LOD test.
 
 `captures/run035` is sealed with 392 input events through replay frame 8,855.
-The supplied approach begins when the Golden Gate's red pixels are visible.
+The supplied approach begins when the Golden Gate's red pixels are visible in
+the outside-world viewport. Cockpit/HUD pixels are a separate display layer
+and are explicitly excluded. The scene also contains another bridge. The
+landmark assignment is therefore specifically the red Golden Gate raster
+pixels in the world viewport, not every rendered bridge face or every static
+face context collected during the approach.
 Deterministic keyframes at 2,500, 4,000, 5,500, and 7,000 retain a continuous
 cockpit approach over the coast; the first sampled frame (1,000) is the map
 display and is excluded from the flight comparison. The local contact sheet is
@@ -42,11 +47,25 @@ contexts change across the approach:
 | 4,000--5,000 | 231 | `$C3B6B0` (128), `$C3B50A` (103) |
 | 6,000--8,000 | 512 capped | `$C3B016` (168), `$C3ADCC` (76), `$C3B50A` (59), `$C3A864` (53) |
 
-This establishes that the recorded red-bridge approach is rendered through a
-different observed static face-context family than the prior `$C355D8` Golden
-Gate probe, or that its `$C355D8` path falls outside these bounded windows.
-It does not identify an alternative bridge model or LOD level. The changing
-face contexts can result from ordinary page/instance selection and culling.
+This establishes only that multiple static face contexts are active while the
+recorded red Golden Gate pixels and the other bridge share the scene.  It does
+not establish which context owns the Golden Gate, which owns the other bridge,
+or whether `$C355D8` is absent from Golden Gate rendering rather than outside
+these bounded windows.  It does not identify an alternative bridge model or
+LOD level. The changing face contexts can result from ordinary page/instance
+selection and culling.
+
+## Required landmark correlation
+
+`$C2005C` captures selected face records before orientation/clipping, and
+`$C2FF48` captures finalized projected tuples. Neither capture records the
+colour/bitplane selection used by the subsequent raster path. Consequently,
+the red Golden Gate world-viewport-pixel landmark cannot yet be assigned to a
+face record. The next evidence must join that world-viewport screen region to
+the colour-bearing renderer
+submission and then to its upstream face/control context. Until that join is
+captured, this document calls the collection a mixed bridge scene rather than
+a Golden Gate face sample.
 
 Authority: sealed `captures/run035`, replay checkpoints
 `build/run035_keyframes/frame_{5500,7000}/state.bin`, and bounded no-input
@@ -56,8 +75,8 @@ Replay-preserved face authority is
 
 ## Result
 
-The capture is useful as a Golden Gate approach oracle and confirms that an
-established batch member continues into projection at two later approach
-checkpoints. It does not yet supply the required same-bridge-face,
+The capture is useful as a Golden Gate red-pixel approach oracle and confirms
+that an established batch member continues into projection at two later
+approach checkpoints. It does not yet supply the required red-Golden-Gate-face,
 distance-only comparison for LOD. The prior conclusion remains: no LOD is
 currently demonstrated.
