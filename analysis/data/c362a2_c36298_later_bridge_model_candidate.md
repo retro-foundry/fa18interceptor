@@ -20,3 +20,13 @@ a seventeenth triple.  The trace subsequently enters `$C2469E` with
 `A5=$C36298`, but its static face-record format has not yet been decoded back
 to those sixteen slot indices.  Preserve the direct triple block separately
 from the `$C36298` control stream until that mapping is traced.
+
+The first traced `$C36298` face-control sequence also proves that the direct
+block alone is insufficient for a static-mesh export.  At `$C215CC-$C21642`,
+the handler reads `$000C` from static `$C36544`, masks it to workspace offset
+`$78`, and copies the triple at `$C48390+$78` before calling `$C2469E`.
+`$78 / 6 = 20`, so this first submitted face uses slot 20—outside direct slots
+0--15.  The later bridge family therefore has an untraced procedural or
+intermediate slot-construction stage between its 16 static inputs and its face
+records.  Do not flatten `$C362A2-$C36301` into a standalone mesh until that
+stage is recovered.
