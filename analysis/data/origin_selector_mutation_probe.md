@@ -35,3 +35,26 @@ For 33 static sources that reach output records in both runs, the resulting plac
 This proves a live origin pair causally drives the static-template paging and the generated placement cache. It supports a paged/tiled terrain representation as an inference, but no source table that maps world coordinates to all pages has yet been traced. The all-zero middle outputs remain scenario evidence for a flat placement plane, not a universal terrain-height invariant.
 
 Visual diagnostics: [control X/Z plot](../plots/workspace_template_placements_xz_origin_control.svg) and [mutation X/Z plot](../plots/workspace_template_placements_xz_origin_mutation.svg).
+
+## Independent axis probes
+
+The same breakpoint procedure was repeated with only one origin component
+incremented at a time. The selector reduces each high-word component to a
+live bin term, so the control is `(16,16)` and each individual perturbation
+changes exactly one term to `17`.
+
+| input change | copied sources | later builder reads | joined one-to-one common sources | dominant output delta |
+| --- | ---: | ---: | ---: | --- |
+| `$C45C3E`: `$10800000 -> $11800000` | 60 | 53 | 51 | 47 × `(-512, 0)`; 4 × `(0, 0)` |
+| `$C45C46`: `$10C00000 -> $11800000` | 95 | 79 | 79 | 75 × `(0, -512)`; 4 × `(0, 0)` |
+| both components | 60 | 35 | 33 | 29 × `(-512, -512)`; 4 × `(0, 0)` |
+
+The independent deltas are separable and compose in the combined probe. This
+proves a two-axis terrain-template paging lattice with a **512-unit pitch in
+the generated placement cache**. The unchanged minority is expected to need
+separate source/descriptor analysis; it does not invalidate the dominant,
+controlled effect. It remains incorrect to call the cache pitch an absolute
+world-unit scale or to infer an all-page source table until the static
+coordinate-to-stream control data is traced.
+
+The corresponding diagnostics are [X-only](../plots/workspace_template_placements_xz_origin_x_plus.svg) and [Z-only](../plots/workspace_template_placements_xz_origin_z_plus.svg).
