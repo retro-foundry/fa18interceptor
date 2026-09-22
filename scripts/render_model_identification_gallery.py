@@ -11,7 +11,7 @@ PLOTS = ROOT / "analysis" / "plots"
 OUTPUT = PLOTS / "model_identification_gallery.png"
 
 ITEMS = (
-    ("Aircraft-like face family: C34A9A/C34A9C (42 pre-cull faces)",
+    ("Aircraft-like face family: C34A9A/C34A9C (22 distinct pre-cull faces)",
      "external_aircraft_c34a9_preclip_complete_face_sheet.png"),
     ("Trace-proven aircraft detail: C3515E -> C34C (5 pre-clip faces)",
      "c3515e_c34c_aircraft_detail_isometric_sheet.png"),

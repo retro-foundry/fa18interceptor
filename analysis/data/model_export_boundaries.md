@@ -13,8 +13,10 @@ both its static data boundary and its renderer consumption path are traced.
 
 ## Renderer families not yet exportable as models
 
-- `$C34A9A/$C34A9C`: 42 pre-cull faces are useful topology evidence, but the
-  sampled frame reads the separate `$C48390` workspace. At frame 12000 the
+- `$C34A9A/$C34A9C`: the frame-7500 capture has 22 distinct pre-cull face
+  records (21 submitted by each context, with 20 shared). They are useful
+  topology evidence, but the sampled frame reads the separate `$C48390`
+  workspace. At frame 12000 the
   captured points for `$C34A9A` collapse to an X-axis-only state, unlike the
   richer frame-7500 view. Do not attach them to `$C3515E` or export them as
   static coordinates without their own immutable-source trace.
