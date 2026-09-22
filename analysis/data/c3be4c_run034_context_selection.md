@@ -1,24 +1,25 @@
 # `$C3BE4C` run034 renderer-context comparison
 
-Classification: **scenario-backed shared static-input / divergent renderer batch observation**. It is a candidate scene-or-range selection boundary, not a demonstrated LOD rule.
+Classification: **scenario-backed retreat-path source-to-face join plus a rejected far-path batch association**. It is not LOD evidence.
 
 ## Matched static input
 
 No-input `$C0F090` windows restored from run034 checkpoints at replay frames 4,200 and 9,500 both execute `$C1F4AC` with the same immutable input `$C3BE4C = (576, 4224, -576)`, destination `$C48390`, and matrix `$C45BD8`. `$C48390` is a mutable transform workspace, so this does not export a terrain vertex or establish a world position.
 
-## Source-bounded renderer batches
+## Retreat source-to-face join
 
-`collect_matrix_instance_geometry.py` captures submissions from that `$C1F4AC` entry up to the next entry (`$C3A96E` in both samples):
+The new source-interval trace begins exactly at the retreat `$C1F4AC` entry and records 4,061 instructions to the next matrix entry. It establishes this bounded path:
 
-| Checkpoint | bounded interval | observed output |
-| --- | ---: | --- |
-| far 4,200 | 50,949 stepped instructions | Three polygons (3-, 4-, and 5-point) plus three two-segment line lists (selectors 7 and 12); polygon state was mutable `$C4BFCA` / `$0001B6`. |
-| retreat 9,500 | 4,061 stepped instructions | Three four-point polygons, all with static `A5=$C3BBF6`; no line-list submission. |
+`$C3BE4C` → `$C3BE6A` at `$C1F6F8` → `$C3BBF4/$C3BBF6` renderer context → five `$C2005C` face preparations → three `$C2FF48` polygon submissions.
 
-A shared transform input therefore enters materially different renderer contexts across this flight. It does not identify a terrain cell, city object, or LOD level: position, heading, clipping, and distance all differ, and the far batch has mutable final-renderer contexts.
+The three final submissions have static `A5=$C3BBF6` and are four-point polygons. This proves a partial immutable source/control/face path for the retreat checkpoint, not a complete standalone mesh.
+
+## Rejected far association
+
+The far interval runs 50,944 instructions before the next matrix entry. Its first `$C1F6F8` belongs to `$C3515A`, and its later `$C1F6F8/$C1F910` records use `$C089A8`; neither follows `$C3BE4C`. The previous observation of three polygons and three line lists in that broad interval is therefore **not** a source-to-renderer association and must not be compared with the retreat `$C3BBF6` result.
 
 ## Consequence
 
-The next trace must walk from `$C3BE4C` to the branch selecting `$C3BBF6` or the far alternative, and record that branch's live selector inputs. Only an independent distance tie could promote this to LOD evidence.
+The next trace must isolate the far `$C3BE4C` control handoff before attributing any static face family to it. Only after that, and an independent distance tie, could this become LOD evidence.
 
-Authorities: `analysis/data/run034_{far,retreat}_matrix_inputs.json` and `build/run034_{far,retreat}_c3be4c_instance_geometry/instance_geometry.json`.
+Authorities: `analysis/data/run034_{far,retreat}_matrix_inputs.json`; `build/run034_retreat_c3be4c_interval_trace/trace.jsonl`; and `build/run034_far_c3be4c_interval_trace/trace.jsonl`.
