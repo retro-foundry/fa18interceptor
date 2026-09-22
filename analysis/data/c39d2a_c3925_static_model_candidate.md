@@ -16,6 +16,11 @@ The independent external-camera frame-7,500 final-polygon collector records thre
 
 The source set is substantially larger-scale than the `$C3515E` flight-object candidate. Its source-coordinate spans are X=3520, Y=2336, and Z=14976: it is a tall component, not a broad flat hull. The five `$C3925E` faces form the observed sides/end of a narrow eight-vertex upright block (indices 31--38), while the `$C3925C` records provide a lower slab/deck-like group (indices 0--20). In the Golden Gate context, a **bridge pylon/tower plus deck component** is therefore the best current visual reading.
 
-This remains an identification hypothesis rather than a decoded object name. The bounded capture observes one `$C39D2A` transform per simulation update, so it does not establish whether another controller instantiates a mirrored tower or repeated road segment. It does, however, make an aircraft-carrier interpretation substantially less consistent with the recovered aspect ratio and observed topology.
+This remains an identification hypothesis rather than a decoded object name.
+[The bounded cadence capture](c39d2a_transform_cadence.md) observes one
+`$C39D2A` transform per simulation update, so it does not establish whether
+another controller instantiates a mirrored tower or repeated road segment. It
+does, however, make an aircraft-carrier interpretation substantially less
+consistent with the recovered aspect ratio and observed topology.
 
 [The static-coordinate topology candidate (SVG)](../plots/c39d2a_c3925_static_topology_candidate.svg) and [PNG sheet](../plots/c39d2a_c3925_static_topology_candidate.png) bind the ten observed face-offset lists directly to the 43 traced `$C39D2A` triples. They retain only those renderer-observed edges and make no extra deck, hull, island, or road connections.
