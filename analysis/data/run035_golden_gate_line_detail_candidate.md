@@ -24,6 +24,10 @@ potential state changes all vary in the user recording. It also concerns line
 detail only; no filled-face/terrain mesh replacement has been tied to the red
 bridge pixels.
 
+The contexts and their line-list records are static inline scene-control data
+inside the verified segment-42 `$C35568-$C361FF` range. They must remain
+control/topology evidence, not be decoded as a contiguous map-vertex table.
+
 Authority: sealed `captures/run035`; red-pixel measurements in
 `run035_golden_gate_red_viewport_interval.json`; and ignored replay-preserved
 collector outputs `build/run035_red_{4251,6999,7999}_line_entries/`.
