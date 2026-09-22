@@ -17,6 +17,7 @@ from profile_window import read_events
 
 STAGE = 0xC1C860
 SELECTOR = 0xC1D3F4
+TABLE_TARGET = 0xC1D406
 RETURN = 0xC0F048
 ORIGIN_X = 0xC45C3E
 ORIGIN_Z = 0xC45C46
@@ -69,6 +70,7 @@ def sample_one(config: Path, restore: Path, events: dict[int, list], args: argpa
         write(engine, ORIGIN_MODE, 1, 1)
         write(engine, ORIGIN_X if args.axis == "row" else ORIGIN_Z, bin_value << 24, 4)
         engine.core.e9k_debug_add_breakpoint(SELECTOR)
+        engine.core.e9k_debug_add_breakpoint(TABLE_TARGET)
         engine.core.e9k_debug_add_breakpoint(RETURN)
         calls = []
         for _ in range(args.max_resumes):
@@ -82,10 +84,13 @@ def sample_one(config: Path, restore: Path, events: dict[int, list], args: argpa
                 return {"bin": bin_value, "hit_frame": hit_frame, "calls": calls,
                         "termination": "return"}
             if pc != SELECTOR:
-                raise RuntimeError(f"unexpected breakpoint ${pc:06X}")
-            calls.append({"selector_index": registers["d0"] & 0xFFFF,
-                          "live_row_key": registers["d1"] & 0xFFFF,
-                          "workspace_band": registers["a3"] & 0xFFFFFF})
+                if pc != TABLE_TARGET or not calls or "group_record" in calls[-1]:
+                    raise RuntimeError(f"unexpected breakpoint ${pc:06X}")
+                calls[-1]["group_record"] = registers["a0"] & 0xFFFFFF
+            else:
+                calls.append({"selector_index": registers["d0"] & 0xFFFF,
+                              "live_row_key": registers["d1"] & 0xFFFF,
+                              "workspace_band": registers["a3"] & 0xFFFFFF})
             engine.core.e9k_debug_step_instr()
         raise RuntimeError("resume cap before stage return")
     finally:

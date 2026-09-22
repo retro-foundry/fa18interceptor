@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def load(axis: str, bins: range) -> list[dict]:
     samples = []
     for value in bins:
-        path = ROOT / "build" / f"run033_{axis}_axis_bin{value:02d}_single" / "selector_axis_samples.json"
+        path = ROOT / "build" / f"run033_{axis}_axis_bin{value:02d}_target" / "selector_axis_samples.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
         sample = payload["samples"][0]
         if payload["axis"] != axis or sample["bin"] != value or sample["termination"] != "return":
@@ -37,6 +37,7 @@ def compact_axis(samples: list[dict], changed_field: str) -> list[dict]:
         output.append({"bin": sample["bin"], "changed_call_indices": changed,
                        "unexpected_other_axis_changes": untouched,
                        "values": [call[changed_field] for call in calls],
+                       "group_records": [f"${call['group_record']:06X}" for call in calls],
                        "authority": sample["authority"]})
     return output
 
