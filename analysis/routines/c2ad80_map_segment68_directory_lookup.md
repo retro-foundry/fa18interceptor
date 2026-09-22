@@ -1,0 +1,19 @@
+# `$C2AD80` segment-68 map packet directory lookup
+
+Classification: **traced two-dimensional static packet selector**.
+
+In the map-page renderer, `$C2ADBA` supplies `$C42CA8` as the selected static
+base. `$C2ADC0` doubles the live X term; `$C2ADC2` multiplies the live Y term
+by 16; `$C2ADCE` reads a 16-bit relative offset at their sum from that base;
+and `$C2ADD4` adds the offset to recover the packet pointer in `A3`.
+
+The prefix `$C42CA8-$C42D27` is therefore an 8-column, 8-row relative-offset
+directory with a 16-byte row stride. In the bounded run003 map build, twelve
+selector cells, with both terms in `3..6`, are observed. They select packet
+starts including `$C42DC4`, `$C42DFC`, and `$C42E1A`, which subsequently enter
+the static pair-transform/display path.
+
+The full 64-cell static directory and the twelve observed accesses are in the
+[segment-68 directory inventory](../data/run003_m_map_segment68_directory.md).
+This proves a local two-dimensional packet selector, not global world axes,
+physical cell size, complete terrain coverage, or LOD.

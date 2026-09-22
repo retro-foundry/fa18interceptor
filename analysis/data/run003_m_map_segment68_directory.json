@@ -1,0 +1,612 @@
+{
+  "scope": "C2AD C0/C2/CE lookup contract in the bounded run003 M-map renderer trace",
+  "directory": {
+    "base": "$C42CA8",
+    "rows": 8,
+    "columns": 8,
+    "row_stride_bytes": 16,
+    "end_exclusive": "$C42D28"
+  },
+  "cells": [
+    {
+      "x": 0,
+      "y": 0,
+      "table_address": "$C42CA8",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "table_address": "$C42CAA",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "table_address": "$C42CAC",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "table_address": "$C42CAE",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "table_address": "$C42CB0",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "table_address": "$C42CB2",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "table_address": "$C42CB4",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "table_address": "$C42CB6",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "table_address": "$C42CB8",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "table_address": "$C42CBA",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "table_address": "$C42CBC",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "table_address": "$C42CBE",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "table_address": "$C42CC0",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "table_address": "$C42CC2",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "table_address": "$C42CC4",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "table_address": "$C42CC6",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "table_address": "$C42CC8",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "table_address": "$C42CCA",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "table_address": "$C42CCC",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "table_address": "$C42CCE",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "table_address": "$C42CD0",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "table_address": "$C42CD2",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "table_address": "$C42CD4",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "table_address": "$C42CD6",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "table_address": "$C42CD8",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "table_address": "$C42CDA",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "table_address": "$C42CDC",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "table_address": "$C42CDE",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "table_address": "$C42CE0",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "table_address": "$C42CE2",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "table_address": "$C42CE4",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "table_address": "$C42CE6",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "table_address": "$C42CE8",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "table_address": "$C42CEA",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "table_address": "$C42CEC",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "table_address": "$C42CEE",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "table_address": "$C42CF0",
+      "relative_offset": "$011C",
+      "target": "$C42DC4",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "table_address": "$C42CF2",
+      "relative_offset": "$0172",
+      "target": "$C42E1A",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "table_address": "$C42CF4",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "table_address": "$C42CF6",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "table_address": "$C42CF8",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "table_address": "$C42CFA",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "table_address": "$C42CFC",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "table_address": "$C42CFE",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "table_address": "$C42D00",
+      "relative_offset": "$0154",
+      "target": "$C42DFC",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "table_address": "$C42D02",
+      "relative_offset": "$0080",
+      "target": "$C42D28",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "table_address": "$C42D04",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "table_address": "$C42D06",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "table_address": "$C42D08",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "table_address": "$C42D0A",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "table_address": "$C42D0C",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "table_address": "$C42D0E",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "table_address": "$C42D10",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "table_address": "$C42D12",
+      "relative_offset": "$0196",
+      "target": "$C42E3E",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "table_address": "$C42D14",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "table_address": "$C42D16",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "table_address": "$C42D18",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "table_address": "$C42D1A",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "table_address": "$C42D1C",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 3,
+      "y": 7,
+      "table_address": "$C42D1E",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "table_address": "$C42D20",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "table_address": "$C42D22",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_word": "$FFFF"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "table_address": "$C42D24",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "table_address": "$C42D26",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_word": "$00C4"
+    }
+  ],
+  "observed_reads": [
+    {
+      "frame": 2,
+      "trace_index": 9396,
+      "x": 4,
+      "y": 5,
+      "target": "$C42DFC"
+    },
+    {
+      "frame": 2,
+      "trace_index": 9827,
+      "x": 3,
+      "y": 5,
+      "target": "$C42E6A"
+    },
+    {
+      "frame": 2,
+      "trace_index": 9873,
+      "x": 5,
+      "y": 4,
+      "target": "$C42E1A"
+    },
+    {
+      "frame": 2,
+      "trace_index": 11687,
+      "x": 4,
+      "y": 4,
+      "target": "$C42DC4"
+    },
+    {
+      "frame": 2,
+      "trace_index": 12770,
+      "x": 3,
+      "y": 4,
+      "target": "$C42E6A"
+    },
+    {
+      "frame": 2,
+      "trace_index": 12816,
+      "x": 6,
+      "y": 6,
+      "target": "$C42E52"
+    },
+    {
+      "frame": 2,
+      "trace_index": 13183,
+      "x": 6,
+      "y": 5,
+      "target": "$C42E52"
+    },
+    {
+      "frame": 2,
+      "trace_index": 13792,
+      "x": 6,
+      "y": 4,
+      "target": "$C42E52"
+    },
+    {
+      "frame": 2,
+      "trace_index": 14401,
+      "x": 6,
+      "y": 3,
+      "target": "$C42E52"
+    },
+    {
+      "frame": 2,
+      "trace_index": 14860,
+      "x": 5,
+      "y": 3,
+      "target": "$C42E52"
+    },
+    {
+      "frame": 2,
+      "trace_index": 15319,
+      "x": 4,
+      "y": 3,
+      "target": "$C42E52"
+    },
+    {
+      "frame": 2,
+      "trace_index": 15780,
+      "x": 3,
+      "y": 3,
+      "target": "$C42E6A"
+    }
+  ],
+  "observed_unique_cells": 12,
+  "qualification": "C2ADC0 doubles the live X index, C2ADC2 shifts the live Y index by four, and C2ADCE reads a word at C42CA8 plus their sum before C2ADD4 adds it to the base. This proves the 8-word row stride and exports the 8x8 prefix used by the observed path. It does not establish absolute world coordinates, cardinal orientation, that every cell is terrain, or LOD."
+}
