@@ -73,6 +73,7 @@
       "trace_index": 83635,
       "frame": 9,
       "control_entry": "$C35BF0",
+      "transform_input": "$C35BDE",
       "line_entries": 2,
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
@@ -81,6 +82,7 @@
       "trace_index": 85262,
       "frame": 9,
       "control_entry": "$C35BB8",
+      "transform_input": "$C35BAA",
       "line_entries": 1,
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
@@ -89,6 +91,7 @@
       "trace_index": 85960,
       "frame": 9,
       "control_entry": "$C35BD0",
+      "transform_input": "$C35BC2",
       "line_entries": 1,
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
@@ -97,6 +100,7 @@
       "trace_index": 86922,
       "frame": 9,
       "control_entry": "$C36232",
+      "transform_input": "$C36220",
       "line_entries": 2,
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
@@ -105,6 +109,7 @@
       "trace_index": 87843,
       "frame": 9,
       "control_entry": "$C36232",
+      "transform_input": "$C36220",
       "line_entries": 2,
       "polygon_line_routes": 0,
       "polygon_span_routes": 0
@@ -113,6 +118,7 @@
       "trace_index": 91104,
       "frame": 9,
       "control_entry": "$C3B73E",
+      "transform_input": "$C3B720",
       "line_entries": 9,
       "polygon_line_routes": 2,
       "polygon_span_routes": 2

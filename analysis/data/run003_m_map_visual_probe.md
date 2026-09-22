@@ -114,6 +114,13 @@ recorded in the [static component boundary](c3b720_c3b6b0_static_component_bound
 It is not a complete map export, and individual coastline pixels remain
 unassigned.
 
+The same bounded trace records the transform/control sequence for every one
+of its six `$C1F6F8` entries: `$C35BDE -> $C35BF0`, `$C35BAA -> $C35BB8`,
+`$C35BC2 -> $C35BD0`, `$C36220 -> $C36232` twice, and
+`$C3B720 -> $C3B73E`. This is a small map-mode geometry-input index, not a
+claim that the five source blocks or their repeated control entry are the
+complete world terrain.
+
 Authority: deterministic no-input renders
 `build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
 `build/run003_m_map_appearance_trace/{trace.jsonl,custom_writes.jsonl}` from

@@ -26,14 +26,14 @@ The supplied job inventory identifies CPU blits whose pointers fall in the prepa
 
 ## Static control entries and bounded primitive outputs
 
-| Trace frame | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |
-| ---: | --- | ---: | ---: | ---: |
-| 9 | `$C35BF0` | 2 | 0 | 0 |
-| 9 | `$C35BB8` | 1 | 0 | 0 |
-| 9 | `$C35BD0` | 1 | 0 | 0 |
-| 9 | `$C36232` | 2 | 0 | 0 |
-| 9 | `$C36232` | 2 | 0 | 0 |
-| 9 | `$C3B73E` | 9 | 2 | 2 |
+| Trace frame | Preceding transform input (`A1`) | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |
+| ---: | --- | --- | ---: | ---: | ---: |
+| 9 | `$C35BDE` | `$C35BF0` | 2 | 0 | 0 |
+| 9 | `$C35BAA` | `$C35BB8` | 1 | 0 | 0 |
+| 9 | `$C35BC2` | `$C35BD0` | 1 | 0 | 0 |
+| 9 | `$C36220` | `$C36232` | 2 | 0 | 0 |
+| 9 | `$C36220` | `$C36232` | 2 | 0 | 0 |
+| 9 | `$C3B720` | `$C3B73E` | 9 | 2 | 2 |
 
 ## `$C2FF48` entry contexts
 

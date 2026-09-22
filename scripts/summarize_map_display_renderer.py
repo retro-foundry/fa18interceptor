@@ -45,12 +45,12 @@ def write_report(output: Path, report: dict[str, object]) -> None:
         "",
         "## Static control entries and bounded primitive outputs",
         "",
-        "| Trace frame | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |",
-        "| ---: | --- | ---: | ---: | ---: |",
+        "| Trace frame | Preceding transform input (`A1`) | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |",
+        "| ---: | --- | --- | ---: | ---: | ---: |",
     ])
     for row in report["control_to_primitive"]:
         lines.append(
-            f"| {row['frame']} | `{row['control_entry']}` | {row['line_entries']} | "
+            f"| {row['frame']} | `{row['transform_input']}` | `{row['control_entry']}` | {row['line_entries']} | "
             f"{row['polygon_line_routes']} | {row['polygon_span_routes']} |")
     lines.extend([
         "",
@@ -107,10 +107,15 @@ def main() -> None:
                                  if trace[cursor]["pc"] == POLYGON_RETURN), end)
             route = {entry["pc"] for entry in trace[polygon_index + 1:return_index]}
             polygon_routes.append(route)
+        preceding_transforms = [entry for entry in trace[:index]
+                                if entry["pc"] == 0xC1F4AC]
+        transform_input = (hex_address(preceding_transforms[-1]["registers"]["a1"])
+                           if preceding_transforms else None)
         control_to_primitive.append({
             "trace_index": trace[index]["index"],
             "frame": trace[index]["frame"],
             "control_entry": hex_address(trace[index]["registers"]["a1"]),
+            "transform_input": transform_input,
             "line_entries": sum(entry["pc"] == LINE_EMIT for entry in interval),
             "polygon_line_routes": sum(LINE_EMIT in route for route in polygon_routes),
             "polygon_span_routes": sum(SPAN_BLIT in route for route in polygon_routes),
