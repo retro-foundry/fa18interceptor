@@ -62,7 +62,7 @@ They are nevertheless [co-rendered in one composite candidate pass](c34c_c34a_co
 
 The shared `$C351xx` transform path means C34C and C34A reuse one flight-
 object template, while the C34C layer has only five observed faces compared
-with 42 for C34A. The independent external-camera frame shows an unmistakably
+with 42 for C34A. The independent external-camera frame shows a recognizably
 F/A-18-like aircraft when the C34A family is active. Together with the
 spatially separate C34C instance at frame 12000, this supports a **reduced-
 detail alternate layer for another flight-object instance**. It is not proof
