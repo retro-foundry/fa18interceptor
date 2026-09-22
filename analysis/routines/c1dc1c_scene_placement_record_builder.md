@@ -61,9 +61,18 @@ Their immediate writers are now observed in the same bulk trace:
 `$C1DDCA` stores `D6` to `$C456EE`, `$C1DE04` clears `$C456F2`, and
 `$C1DE38` stores `D6` to `$C456F6`.  These are per-record scratch values—the
 stores repeat before each following `$C1E04A/$C1E054/$C1E05E` triplet—rather
-than a single global player position.  The `D6` producer and its relationship
-to the static descriptor still need tracing before this can be called the
-original world-placement table.
+than a single global player position.
+
+In the sampled `$C22660` descriptor iteration, the `D6` value written at
+`$C1DDCA` is calculated from the next signed word of mutable `A3=$C4B274`
+at `$C1DD98`, a signed indexed word loaded from `$C1D7E2` at `$C1DDBA`, and
+the live `D4`/`D2` terms (`ASL.L #2`, subtract, then two additions at
+`$C1DDC2-$C1DDC8`).  The descriptor is not ignored: `$C1DE00` reads its
+second longword and obtains `A1=$C37990`, inside static scene Hunk 49, before
+the next coordinate calculation starts.  This proves a mixed static-descriptor
+and mutable-workspace input contract, but not which upstream table originally
+populates `A3` or whether `$C37990` supplies source placements, topology, or
+another scene-control stream.
 
 The next valid step is a focused call/return trace that records `A1`, the
 three `D0` coordinate words, and the source reads immediately before this
