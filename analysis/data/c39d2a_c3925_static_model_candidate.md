@@ -23,16 +23,25 @@ another controller instantiates a mirrored tower or repeated road segment. It
 does, however, make an aircraft-carrier interpretation substantially less
 consistent with the recovered aspect ratio and observed topology.
 
-## External-camera correlation limit
+## External-camera correlation and limit
 
-The sealed frame-7,500 screenshot visibly contains the F/A-18 while the
-`$C3925C/$C3925E` controller family submits polygons.  That confirms the
-controller is active in an external-aircraft view, but it does **not** by
-itself identify `$C39D2A` as the player aircraft: the direct
-`$C39D2A -> C3925x` source trace is from the separate frame-12,000 Golden
-Gate checkpoint.  Keep the camera observation and the source-to-controller
-dataflow as separate evidence until one bounded replay connects them in the
-same window.  In particular, do not rename this component as a carrier,
+The sealed frame-7,500 external-camera replay now supplies that same-window
+source correlation: its `$C1F100` inventory contains six `$C39D2A`
+transforms, and the first bounded source trace reaches `$C1F6F8` with
+`A1=$C39E2C`, `A3=$C4848C`, and `A5=$C3B6B0`.  Thus the 43-triple source is
+live in the external-aircraft view and then dispatches through `$C3B6B0`.
+
+That is still **not an object-name proof**.  `$C3B6B0` is a reusable
+four-triangle controller: the separate `$C3B720` five-triple terrain/mountain
+component also dispatches through it.  Controller reuse means this observation
+does not merge `$C39D2A` with that mountain component, nor does it establish
+that the full 43-triple source is the player aircraft.  Keep the external-view
+correlation, the Golden Gate `$C3925x` face evidence, and the visual bridge
+reading as distinct evidence; do not rename the component as a carrier,
 bridge tower, or aircraft solely from the screenshot.
+
+Authorities: `build/run031_frame7500_c1f100_matrix_inventory/` and
+`build/run031_frame7500_c39d2a_following_trace/` (sealed replay), plus the
+previous Golden Gate bounded trace cited above.
 
 [The static-coordinate topology candidate (SVG)](../plots/c39d2a_c3925_static_topology_candidate.svg) and [PNG sheet](../plots/c39d2a_c3925_static_topology_candidate.png) bind the ten observed face-offset lists directly to the 43 traced `$C39D2A` triples. They retain only those renderer-observed edges and make no extra deck, hull, island, or road connections.
