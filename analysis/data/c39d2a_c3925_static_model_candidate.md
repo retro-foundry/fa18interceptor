@@ -2,6 +2,14 @@
 
 Classification: **trace-proven static vertex transform followed by renderer polygon contexts; long-component visual identity unresolved**.
 
+The 43 immutable triples and ten renderer-observed faces are separately
+extractable as [`c39d2a_c3925_static_payload.json`](c39d2a_c3925_static_payload.json).
+Regenerate that payload with:
+
+```powershell
+python scripts\export_static_topology_payload.py --topology analysis\data\c39d2a_c3925_face_topology.json --slow build\run031_frame12000_golden_gate_checkpoint\slow.bin --output analysis\data\c39d2a_c3925_static_payload.json
+```
+
 At the Golden Gate checkpoint, `build/run031_frame12000_c39d2a_following_trace/trace.jsonl` begins at `$C1F100` with `A1=$C39D2A`. The same transform pass consumes 43 consecutive source triples in the `$C39Dxx` range. It then enters the renderer walker, selecting static contexts `$C3925C` and `$C3925E`; their face records reach `$C2469E` and `$C24CFE`.
 
 The independent external-camera frame-7,500 final-polygon collector records three `$C3925C` and three `$C3925E` submissions. The pre-cull face collector observes five unique static face-record addresses in each context; [the complete pre-cull PNG sheet](../plots/c39d2a_c3925_preclip_complete_face_sheet.png) draws all ten selected faces. It is deliberately named a candidate: the Golden checkpoint trace proves the source-to-face contexts, while the external checkpoint supplies the transformed face geometry under a different camera/scenario.

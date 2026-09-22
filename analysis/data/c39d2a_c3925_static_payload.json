@@ -1,0 +1,502 @@
+{
+  "schema": "fa18interceptor.static-topology-payload/v1",
+  "source_snapshot": "build\\run031_frame12000_golden_gate_checkpoint\\slow.bin",
+  "topology_source": "analysis\\data\\c39d2a_c3925_face_topology.json",
+  "immutable_coordinate_triples": [
+    {
+      "index": 0,
+      "address": "$C39D2A",
+      "xyz": [
+        832,
+        896,
+        -7296
+      ]
+    },
+    {
+      "index": 1,
+      "address": "$C39D30",
+      "xyz": [
+        -960,
+        896,
+        -6976
+      ]
+    },
+    {
+      "index": 2,
+      "address": "$C39D36",
+      "xyz": [
+        -960,
+        896,
+        -5120
+      ]
+    },
+    {
+      "index": 3,
+      "address": "$C39D3C",
+      "xyz": [
+        -1280,
+        896,
+        -5120
+      ]
+    },
+    {
+      "index": 4,
+      "address": "$C39D42",
+      "xyz": [
+        -1280,
+        896,
+        -3904
+      ]
+    },
+    {
+      "index": 5,
+      "address": "$C39D48",
+      "xyz": [
+        -1728,
+        896,
+        -3840
+      ]
+    },
+    {
+      "index": 6,
+      "address": "$C39D4E",
+      "xyz": [
+        -1728,
+        896,
+        2752
+      ]
+    },
+    {
+      "index": 7,
+      "address": "$C39D54",
+      "xyz": [
+        -896,
+        896,
+        3712
+      ]
+    },
+    {
+      "index": 8,
+      "address": "$C39D5A",
+      "xyz": [
+        -640,
+        896,
+        7680
+      ]
+    },
+    {
+      "index": 9,
+      "address": "$C39D60",
+      "xyz": [
+        640,
+        896,
+        7680
+      ]
+    },
+    {
+      "index": 10,
+      "address": "$C39D66",
+      "xyz": [
+        896,
+        896,
+        3328
+      ]
+    },
+    {
+      "index": 11,
+      "address": "$C39D6C",
+      "xyz": [
+        1792,
+        896,
+        3200
+      ]
+    },
+    {
+      "index": 12,
+      "address": "$C39D72",
+      "xyz": [
+        1792,
+        896,
+        -5120
+      ]
+    },
+    {
+      "index": 13,
+      "address": "$C39D78",
+      "xyz": [
+        1344,
+        896,
+        -5504
+      ]
+    },
+    {
+      "index": 14,
+      "address": "$C39D7E",
+      "xyz": [
+        1344,
+        896,
+        -6400
+      ]
+    },
+    {
+      "index": 15,
+      "address": "$C39D84",
+      "xyz": [
+        832,
+        896,
+        -6400
+      ]
+    },
+    {
+      "index": 16,
+      "address": "$C39D8A",
+      "xyz": [
+        768,
+        0,
+        -6912
+      ]
+    },
+    {
+      "index": 17,
+      "address": "$C39D90",
+      "xyz": [
+        -768,
+        0,
+        -6912
+      ]
+    },
+    {
+      "index": 18,
+      "address": "$C39D96",
+      "xyz": [
+        -768,
+        0,
+        -3840
+      ]
+    },
+    {
+      "index": 19,
+      "address": "$C39D9C",
+      "xyz": [
+        -768,
+        0,
+        3328
+      ]
+    },
+    {
+      "index": 20,
+      "address": "$C39DA2",
+      "xyz": [
+        0,
+        0,
+        7040
+      ]
+    },
+    {
+      "index": 21,
+      "address": "$C39DA8",
+      "xyz": [
+        768,
+        0,
+        3328
+      ]
+    },
+    {
+      "index": 22,
+      "address": "$C39DAE",
+      "xyz": [
+        768,
+        0,
+        -5120
+      ]
+    },
+    {
+      "index": 23,
+      "address": "$C39DB4",
+      "xyz": [
+        -896,
+        896,
+        -1792
+      ]
+    },
+    {
+      "index": 24,
+      "address": "$C39DBA",
+      "xyz": [
+        -1536,
+        896,
+        -1792
+      ]
+    },
+    {
+      "index": 25,
+      "address": "$C39DC0",
+      "xyz": [
+        -1536,
+        896,
+        -1280
+      ]
+    },
+    {
+      "index": 26,
+      "address": "$C39DC6",
+      "xyz": [
+        -896,
+        896,
+        -1280
+      ]
+    },
+    {
+      "index": 27,
+      "address": "$C39DCC",
+      "xyz": [
+        -896,
+        1152,
+        -1792
+      ]
+    },
+    {
+      "index": 28,
+      "address": "$C39DD2",
+      "xyz": [
+        -1536,
+        1152,
+        -1792
+      ]
+    },
+    {
+      "index": 29,
+      "address": "$C39DD8",
+      "xyz": [
+        -1536,
+        1152,
+        -1280
+      ]
+    },
+    {
+      "index": 30,
+      "address": "$C39DDE",
+      "xyz": [
+        -896,
+        1152,
+        -1280
+      ]
+    },
+    {
+      "index": 31,
+      "address": "$C39DE4",
+      "xyz": [
+        -768,
+        1152,
+        -1984
+      ]
+    },
+    {
+      "index": 32,
+      "address": "$C39DEA",
+      "xyz": [
+        -1664,
+        1152,
+        -1984
+      ]
+    },
+    {
+      "index": 33,
+      "address": "$C39DF0",
+      "xyz": [
+        -1664,
+        1152,
+        -1120
+      ]
+    },
+    {
+      "index": 34,
+      "address": "$C39DF6",
+      "xyz": [
+        -768,
+        1152,
+        -1120
+      ]
+    },
+    {
+      "index": 35,
+      "address": "$C39DFC",
+      "xyz": [
+        -768,
+        1792,
+        -1984
+      ]
+    },
+    {
+      "index": 36,
+      "address": "$C39E02",
+      "xyz": [
+        -1664,
+        1792,
+        -1984
+      ]
+    },
+    {
+      "index": 37,
+      "address": "$C39E08",
+      "xyz": [
+        -1664,
+        1792,
+        -1120
+      ]
+    },
+    {
+      "index": 38,
+      "address": "$C39E0E",
+      "xyz": [
+        -768,
+        1792,
+        -1120
+      ]
+    },
+    {
+      "index": 39,
+      "address": "$C39E14",
+      "xyz": [
+        -1216,
+        1792,
+        -1536
+      ]
+    },
+    {
+      "index": 40,
+      "address": "$C39E1A",
+      "xyz": [
+        -1216,
+        2336,
+        -1536
+      ]
+    },
+    {
+      "index": 41,
+      "address": "$C39E20",
+      "xyz": [
+        -64,
+        896,
+        -7136
+      ]
+    },
+    {
+      "index": 42,
+      "address": "$C39E26",
+      "xyz": [
+        -1,
+        192,
+        384
+      ]
+    }
+  ],
+  "renderer_observed_faces": [
+    {
+      "context": "$C3925C",
+      "record": "$C39376",
+      "indices": [
+        1,
+        0,
+        16,
+        17
+      ]
+    },
+    {
+      "context": "$C3925C",
+      "record": "$C39382",
+      "indices": [
+        8,
+        1,
+        17,
+        20
+      ]
+    },
+    {
+      "context": "$C3925C",
+      "record": "$C3938E",
+      "indices": [
+        9,
+        8,
+        20
+      ]
+    },
+    {
+      "context": "$C3925C",
+      "record": "$C39398",
+      "indices": [
+        0,
+        9,
+        20,
+        16
+      ]
+    },
+    {
+      "context": "$C3925C",
+      "record": "$C39352",
+      "indices": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "context": "$C3925E",
+      "record": "$C39720",
+      "indices": [
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "context": "$C3925E",
+      "record": "$C3972C",
+      "indices": [
+        31,
+        32,
+        36,
+        35
+      ]
+    },
+    {
+      "context": "$C3925E",
+      "record": "$C393AC",
+      "indices": [
+        32,
+        33,
+        37,
+        36
+      ]
+    },
+    {
+      "context": "$C3925E",
+      "record": "$C39776",
+      "indices": [
+        33,
+        34,
+        38,
+        37
+      ]
+    },
+    {
+      "context": "$C3925E",
+      "record": "$C393B8",
+      "indices": [
+        34,
+        31,
+        35,
+        38
+      ]
+    }
+  ],
+  "qualification": "Triples are copied from the trace-proven static source range. Face edges are only the renderer-observed topology supplied by the input JSON; no unseen geometry is inferred."
+}
