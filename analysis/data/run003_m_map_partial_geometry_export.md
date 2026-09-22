@@ -9,3 +9,8 @@ Triples are immutable local transform inputs, not global world coordinates. Line
 | `$C35BC2` | `[[0, 0, -3744], [0, 416, 3168]]` | `$C35BD0` | 1 | 0/0 |
 | `$C36220` | `[[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]]` | `$C36232` | 2 | 0/0 |
 | `$C3B720` | `[[2112, 0, -896], [-2080, 0, -2048], [-1600, 0, 1280], [1088, 0, 1568], [-640, 1024, 0]]` | `$C3B73E` | 9 | 2/2 |
+
+The `$C3B720` component is the only entry in this export with an independently
+observed face-slot mapping, so it is also available as a four-triangle
+[minimal OBJ](../exports/c3b720_trace_proven_partial_component.obj). The other
+entries remain input/control/line exports rather than guessed surface meshes.

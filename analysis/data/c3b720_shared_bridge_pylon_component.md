@@ -30,6 +30,9 @@ That is a visual classification; its original semantic name remains unknown.
 
 The source triples and control contract are available in
 [the portable payload](c3b720_shared_bridge_pylon_static_payload.json).
+The same five vertices and only the four observed triangular sides are
+available as a [minimal OBJ export](../exports/c3b720_trace_proven_partial_component.obj)
+for inspection in standard 3D tools. It intentionally has no base face.
 
 Authorities:
 
