@@ -59,6 +59,30 @@ coordinate-to-stream control data is traced.
 
 The corresponding diagnostics are [X-only](../plots/workspace_template_placements_xz_origin_x_plus.svg) and [Z-only](../plots/workspace_template_placements_xz_origin_z_plus.svg).
 
+## Static group/stream page evidence
+
+The same four sealed traces were also joined at the upstream `$C1D3F4`
+static-group selector. Every run executes the same 41 selector entries, but
+the live row-key search admits a different subset of static template streams:
+
+| origin bins | template streams reached | distinct group records with a reached stream | relative to control |
+| --- | ---: | ---: | --- |
+| control `(16,16)` | 16 | 9 | baseline |
+| X-only `(17,16)` | 10 | 7 | 10 shared; 6 control-only |
+| Z-only `(16,17)` | 14 | 7 | 14 shared; 2 control-only |
+| both `(17,17)` | 10 | 7 | 10 shared; 6 control-only |
+
+No perturbed run reaches a stream absent from the control in this bounded
+experiment. This directly locates the observed page/subsection filtering at
+the static group record plus live row-key stage, upstream of the mutable
+workspace and placement cache. It remains a local selector-window result: it
+does not enumerate all map cells, recover a global page coordinate table, or
+show LOD replacement. The per-run evidence inventories are
+[control](static_template_selector_groups_origin_control.md),
+[X-only](static_template_selector_groups_origin_x_plus.md),
+[Z-only](static_template_selector_groups_origin_z_plus.md), and
+[both-axis](static_template_selector_groups_origin_mutation.md).
+
 ## Chunk selection versus LOD
 
 The joins also distinguish a page/subsection selector from a demonstrated LOD
