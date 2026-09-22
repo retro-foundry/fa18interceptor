@@ -1,0 +1,13 @@
+# Trace-proven local map polylines; no faces, placement, or stitching inferred.
+o C35BDE_trace_proven_polyline
+v 11136 0 -9088
+v 6656 0 -3840
+v -13568 0 2944
+l 1 2
+l 2 3
+o C36220_trace_proven_polyline
+v 4096 172 -5248
+v -2816 172 1152
+v -8960 0 2816
+l 4 5
+l 5 6

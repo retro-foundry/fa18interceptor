@@ -21,3 +21,7 @@ its two selected local edges (`0 -> 1 -> 2`) are documented in the
 
 `$C36220 -> $C36232` has the same decoded two-edge local polyline topology;
 see the [three-triple line component](c36220_c36232_map_line_component.md).
+
+Those two topology-backed local polylines are available together as grouped
+OBJ `l` primitives in the [polyline OBJ export](../exports/run003_map_trace_proven_local_polylines.obj).
+They are separate objects with no global placement or connecting faces.
