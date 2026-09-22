@@ -23,4 +23,16 @@ another controller instantiates a mirrored tower or repeated road segment. It
 does, however, make an aircraft-carrier interpretation substantially less
 consistent with the recovered aspect ratio and observed topology.
 
+## External-camera correlation limit
+
+The sealed frame-7,500 screenshot visibly contains the F/A-18 while the
+`$C3925C/$C3925E` controller family submits polygons.  That confirms the
+controller is active in an external-aircraft view, but it does **not** by
+itself identify `$C39D2A` as the player aircraft: the direct
+`$C39D2A -> C3925x` source trace is from the separate frame-12,000 Golden
+Gate checkpoint.  Keep the camera observation and the source-to-controller
+dataflow as separate evidence until one bounded replay connects them in the
+same window.  In particular, do not rename this component as a carrier,
+bridge tower, or aircraft solely from the screenshot.
+
 [The static-coordinate topology candidate (SVG)](../plots/c39d2a_c3925_static_topology_candidate.svg) and [PNG sheet](../plots/c39d2a_c3925_static_topology_candidate.png) bind the ten observed face-offset lists directly to the 43 traced `$C39D2A` triples. They retain only those renderer-observed edges and make no extra deck, hull, island, or road connections.
