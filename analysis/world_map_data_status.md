@@ -44,6 +44,23 @@ called the complete world map.
 | Does `M` identify map data? | Partly. Raw `$37` reaches `$C1BF8C`; its now-completed 5,619-instruction command helper is transition/page-control work and does not execute the terrain template selector/copy path. The later map-display renderer has both a bounded transform/control index (`$C35BDE -> $C35BF0`, `$C35BAA -> $C35BB8`, `$C35BC2 -> $C35BD0`, `$C36220 -> $C36232` twice, and `$C3B720 -> $C3B73E`) and a separate static-packet path inside verified original segment 68 (`$C42CA8-$C444F7`): its `$C42CA8-$C42D27` prefix is a traced 8×8 relative-offset directory, 12 cells of which select map packets in run003; 55 completed transforms consume 353 exact signed pairs before the polygon display stage. This is not a complete world-terrain extraction or a coastline-pixel mapping. | [`M` command contract](routines/c1bf8c_map_command.md), [partial export](data/run003_m_map_partial_geometry_export.md), [renderer census](data/run003_m_map_display_renderer_census.md), [directory lookup](routines/c2ad80_map_segment68_directory_lookup.md), [static packet path](routines/c2af00_map_static_pair_packet.md), [line component](data/c36220_c36232_map_line_component.md), and [component boundary](data/c3b720_c3b6b0_static_component_boundary.md) |
 | Does `M` visibly show an in-game map? | Yes. The sealed run003 `M` event changes the cockpit to a stable green/blue coastline-style grid display within 30 frames. A controlled run035 end-of-flight `M` view shows the same coastline panned by `(142,36)` screen pixels with 98.8008% blue-raster agreement. Copper evidence identifies it as a 320x200, four-bitplane, double-buffered Chip-RAM display. Its prepared pending page receives 124 direct CPU blitter jobs during the transition (44 span jobs and 76 line-plane jobs), while the instruction trace reaches 42 finalized polygon wrappers and 19 line emitters. Thus this map bitmap is renderer-produced, not an identified dedicated coastline asset. The stable map interval also runs terrain-template selection and sends 103 copied static records to X/0/Z placement outputs, grouped into 83 descriptor-field candidates; a separate map-mode collector reaches static 3D control streams at the projection walker. This is map-mode terrain/control dataflow, not yet a placement-to-coastline-pixel proof or complete extraction. | [`M` visual probe](data/run003_m_map_visual_probe.md), [renderer census](data/run003_m_map_display_renderer_census.md), [template-placement handoff](data/run003_m_map_template_placement_handoff.md), [target catalog](data/run003_m_map_template_target_catalog.md), [control streams](data/run003_m_map_control_streams.md), [pan comparison](data/run003_run035_m_map_pan_comparison.md), and [screenshots](visuals/run003_m_map_display.png) |
 
+## M-map packet detail result
+
+The separately traced segment-68 static packet renderer has a real,
+depth-driven geometry-variant mechanism.  `$C2AAD2-$C2AB0C` derives its metric
+from the transformed projection component `$C45A78`; `$C2AD00` applies the
+`$400`/`$C80` bands; and `$C2AF40` selects either the inline packet stream or
+the header's alternate stream.  The run035 appearance trace dynamically takes
+both routes, and matched headers prove different immutable coordinate data
+(three matched alternate first batches reduce from `13` to `7`, `9` to `8`,
+and `6` to `3` pairs).  This establishes an LOD-style geometry mechanism for
+the M-map renderer.  Its depth is a transformed renderer component, so it
+does not prove that physical flight-world distance selects a terrain model.
+
+Authority: [packet path and depth provenance](routines/c2af00_map_static_pair_packet.md),
+[variant comparison](data/run003_run035_map_packet_variant_comparison.md), and
+[raw coordinate visual](plots/run003_run035_map_packet_variants.png).
+
 ## Flatness is not yet a data invariant
 
 The sampled runtime placement layer supplies positive, scenario-backed support
