@@ -1,15 +1,267 @@
 {
-  "scope": "direct C2AEFC-to-C2AF00 entries in the bounded map-page trace",
+  "scope": "completed C2AF9C/C2AF9E transform batches in the bounded map-page trace",
   "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
   "slow": "build\\run003_m_map_appearance_trace\\slow.bin",
   "source_segment": 68,
   "source_range": "$C42CA8-$C444F7",
-  "packet_entries": 26,
-  "display_stage_returns": 26,
-  "consumed_pairs": 327,
-  "packets": [
+  "direct_packet_entries": 26,
+  "transform_batches": 55,
+  "consumed_pairs": 353,
+  "batches": [
     {
-      "trace_index": 9443,
+      "trace_index": 664,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D4A",
+          "xy": [
+            592,
+            592
+          ]
+        },
+        {
+          "address": "$C42D4E",
+          "xy": [
+            584,
+            640
+          ]
+        },
+        {
+          "address": "$C42D52",
+          "xy": [
+            216,
+            384
+          ]
+        },
+        {
+          "address": "$C42D56",
+          "xy": [
+            192,
+            256
+          ]
+        },
+        {
+          "address": "$C42D5A",
+          "xy": [
+            224,
+            80
+          ]
+        },
+        {
+          "address": "$C42D5E",
+          "xy": [
+            160,
+            0
+          ]
+        },
+        {
+          "address": "$C42D62",
+          "xy": [
+            4096,
+            -256
+          ]
+        }
+      ],
+      "first_pair": "$C42D4A",
+      "last_pair": "$C42D62",
+      "display_stage_return": "$C42D66",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 3494,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D6A",
+          "xy": [
+            80,
+            384
+          ]
+        },
+        {
+          "address": "$C42D6E",
+          "xy": [
+            -96,
+            232
+          ]
+        },
+        {
+          "address": "$C42D72",
+          "xy": [
+            -144,
+            56
+          ]
+        },
+        {
+          "address": "$C42D76",
+          "xy": [
+            72,
+            200
+          ]
+        }
+      ],
+      "first_pair": "$C42D6A",
+      "last_pair": "$C42D76",
+      "display_stage_return": "$C42D7A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 4811,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D7E",
+          "xy": [
+            96,
+            768
+          ]
+        },
+        {
+          "address": "$C42D82",
+          "xy": [
+            176,
+            628
+          ]
+        },
+        {
+          "address": "$C42D86",
+          "xy": [
+            96,
+            568
+          ]
+        },
+        {
+          "address": "$C42D8A",
+          "xy": [
+            -16,
+            664
+          ]
+        }
+      ],
+      "first_pair": "$C42D7E",
+      "last_pair": "$C42D8A",
+      "display_stage_return": "$C42D8E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 6087,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D92",
+          "xy": [
+            224,
+            384
+          ]
+        },
+        {
+          "address": "$C42D96",
+          "xy": [
+            160,
+            408
+          ]
+        },
+        {
+          "address": "$C42D9A",
+          "xy": [
+            112,
+            496
+          ]
+        },
+        {
+          "address": "$C42D9E",
+          "xy": [
+            40,
+            480
+          ]
+        },
+        {
+          "address": "$C42DA2",
+          "xy": [
+            48,
+            344
+          ]
+        },
+        {
+          "address": "$C42DA6",
+          "xy": [
+            112,
+            408
+          ]
+        },
+        {
+          "address": "$C42DAA",
+          "xy": [
+            232,
+            368
+          ]
+        }
+      ],
+      "first_pair": "$C42D92",
+      "last_pair": "$C42DAA",
+      "display_stage_return": "$C42DAE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 7882,
+      "frame": 1,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42DB2",
+          "xy": [
+            136,
+            600
+          ]
+        },
+        {
+          "address": "$C42DB6",
+          "xy": [
+            192,
+            536
+          ]
+        },
+        {
+          "address": "$C42DBA",
+          "xy": [
+            128,
+            472
+          ]
+        },
+        {
+          "address": "$C42DBE",
+          "xy": [
+            88,
+            512
+          ]
+        }
+      ],
+      "first_pair": "$C42DB2",
+      "last_pair": "$C42DBE",
+      "display_stage_return": "$C42DC2",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 9656,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42DFC",
@@ -55,11 +307,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E04",
+      "last_pair": "$C42E14",
       "display_stage_return": "$C42E18",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 9920,
+      "trace_index": 10194,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42E1A",
@@ -119,11 +373,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E20",
+      "last_pair": "$C42E38",
       "display_stage_return": "$C42E3C",
       "polygon_submissions": 1
     },
     {
-      "trace_index": 11734,
+      "trace_index": 12183,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42DC4",
@@ -218,11 +474,13 @@
           ]
         }
       ],
+      "first_pair": "$C42DCA",
+      "last_pair": "$C42DF6",
       "display_stage_return": "$C42DFA",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 12863,
+      "trace_index": 13032,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42E52",
@@ -261,11 +519,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
       "display_stage_return": "$C42E68",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 13230,
+      "trace_index": 13399,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42E52",
@@ -304,11 +564,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
       "display_stage_return": "$C42E68",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 13839,
+      "trace_index": 14008,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42E52",
@@ -347,11 +609,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
       "display_stage_return": "$C42E68",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 14448,
+      "trace_index": 14617,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42E52",
@@ -390,11 +654,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
       "display_stage_return": "$C42E68",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 14907,
+      "trace_index": 15076,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42E52",
@@ -433,11 +699,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
       "display_stage_return": "$C42E68",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 15366,
+      "trace_index": 15535,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C42E52",
@@ -476,11 +744,13 @@
           ]
         }
       ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
       "display_stage_return": "$C42E68",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 15916,
+      "trace_index": 16263,
       "frame": 2,
       "source_segment": 68,
       "packet": "$C43ECA",
@@ -552,7 +822,21 @@
             1712,
             288
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43ED0",
+      "last_pair": "$C43EF0",
+      "display_stage_return": "$C43EF4",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 18510,
+      "frame": 2,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43EF6",
           "xy": [
@@ -615,7 +899,21 @@
             2944,
             2048
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43EF6",
+      "last_pair": "$C43F16",
+      "display_stage_return": "$C43F1A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 21987,
+      "frame": 3,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43F1C",
           "xy": [
@@ -666,11 +964,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43EF4",
-      "polygon_submissions": 3
+      "first_pair": "$C43F1C",
+      "last_pair": "$C43F34",
+      "display_stage_return": "$C43F38",
+      "polygon_submissions": 1
     },
     {
-      "trace_index": 23123,
+      "trace_index": 23330,
       "frame": 3,
       "source_segment": 68,
       "packet": "$C43E24",
@@ -714,7 +1014,21 @@
             4160,
             1824
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43E2A",
+      "last_pair": "$C43E3A",
+      "display_stage_return": "$C43E3E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 24451,
+      "frame": 3,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43E40",
           "xy": [
@@ -770,7 +1084,21 @@
             4016,
             3616
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43E40",
+      "last_pair": "$C43E5C",
+      "display_stage_return": "$C43E60",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 24933,
+      "frame": 3,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43E62",
           "xy": [
@@ -826,7 +1154,21 @@
             3232,
             2544
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43E62",
+      "last_pair": "$C43E7E",
+      "display_stage_return": "$C43E82",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 26547,
+      "frame": 3,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43E84",
           "xy": [
@@ -863,11 +1205,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43E3E",
-      "polygon_submissions": 3
+      "first_pair": "$C43E84",
+      "last_pair": "$C43E94",
+      "display_stage_return": "$C43E98",
+      "polygon_submissions": 1
     },
     {
-      "trace_index": 27464,
+      "trace_index": 27601,
       "frame": 3,
       "source_segment": 68,
       "packet": "$C43D84",
@@ -897,7 +1241,21 @@
             4128,
             3248
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43D8A",
+      "last_pair": "$C43D92",
+      "display_stage_return": "$C43D96",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 27948,
+      "frame": 3,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43D98",
           "xy": [
@@ -946,7 +1304,21 @@
             4096,
             2432
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43D98",
+      "last_pair": "$C43DB0",
+      "display_stage_return": "$C43DB4",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 29087,
+      "frame": 3,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43DB6",
           "xy": [
@@ -1023,7 +1395,21 @@
             3328,
             2320
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43DB6",
+      "last_pair": "$C43DDE",
+      "display_stage_return": "$C43DE2",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 31771,
+      "frame": 4,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43DE4",
           "xy": [
@@ -1100,7 +1486,21 @@
             1632,
             2240
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43DE4",
+      "last_pair": "$C43E0C",
+      "display_stage_return": "$C43E10",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 34497,
+      "frame": 4,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43E12",
           "xy": [
@@ -1130,11 +1530,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43D96",
-      "polygon_submissions": 3
+      "first_pair": "$C43E12",
+      "last_pair": "$C43E1E",
+      "display_stage_return": "$C43E22",
+      "polygon_submissions": 0
     },
     {
-      "trace_index": 34696,
+      "trace_index": 34973,
       "frame": 4,
       "source_segment": 68,
       "packet": "$C43BAC",
@@ -1192,7 +1594,21 @@
             4288,
             0
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43BB2",
+      "last_pair": "$C43BCA",
+      "display_stage_return": "$C43BCE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 36884,
+      "frame": 4,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43BD0",
           "xy": [
@@ -1262,7 +1678,21 @@
             2944,
             3392
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43BD0",
+      "last_pair": "$C43BF4",
+      "display_stage_return": "$C43BF8",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 39457,
+      "frame": 4,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43BFA",
           "xy": [
@@ -1339,7 +1769,21 @@
             2608,
             4000
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43BFA",
+      "last_pair": "$C43C22",
+      "display_stage_return": "$C43C26",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 42700,
+      "frame": 5,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43C28",
           "xy": [
@@ -1409,7 +1853,21 @@
             1920,
             2240
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43C28",
+      "last_pair": "$C43C4C",
+      "display_stage_return": "$C43C50",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 45080,
+      "frame": 5,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43C52",
           "xy": [
@@ -1460,11 +1918,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43BCE",
-      "polygon_submissions": 5
+      "first_pair": "$C43C52",
+      "last_pair": "$C43C6A",
+      "display_stage_return": "$C43C6E",
+      "polygon_submissions": 1
     },
     {
-      "trace_index": 46695,
+      "trace_index": 47007,
       "frame": 5,
       "source_segment": 68,
       "packet": "$C43B34",
@@ -1529,7 +1989,21 @@
             4224,
             896
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43B3A",
+      "last_pair": "$C43B56",
+      "display_stage_return": "$C43B5A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 49022,
+      "frame": 5,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43B5C",
           "xy": [
@@ -1585,7 +2059,21 @@
             4224,
             0
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43B5C",
+      "last_pair": "$C43B78",
+      "display_stage_return": "$C43B7C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 50869,
+      "frame": 5,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43B7E",
           "xy": [
@@ -1622,11 +2110,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43B5A",
-      "polygon_submissions": 3
+      "first_pair": "$C43B7E",
+      "last_pair": "$C43B8E",
+      "display_stage_return": "$C43B92",
+      "polygon_submissions": 1
     },
     {
-      "trace_index": 52552,
+      "trace_index": 52899,
       "frame": 6,
       "source_segment": 68,
       "packet": "$C43A78",
@@ -1698,7 +2188,21 @@
             4224,
             0
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43A7E",
+      "last_pair": "$C43A9E",
+      "display_stage_return": "$C43AA2",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 55160,
+      "frame": 6,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43AA4",
           "xy": [
@@ -1761,7 +2265,21 @@
             0,
             4096
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43AA4",
+      "last_pair": "$C43AC4",
+      "display_stage_return": "$C43AC8",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 57415,
+      "frame": 6,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43ACA",
           "xy": [
@@ -1826,11 +2344,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43AA2",
-      "polygon_submissions": 3
+      "first_pair": "$C43ACA",
+      "last_pair": "$C43AEA",
+      "display_stage_return": "$C43AEE",
+      "polygon_submissions": 1
     },
     {
-      "trace_index": 59494,
+      "trace_index": 59771,
       "frame": 6,
       "source_segment": 68,
       "packet": "$C439E8",
@@ -1888,7 +2408,21 @@
             4096,
             2048
           ]
-        },
+        }
+      ],
+      "first_pair": "$C439EE",
+      "last_pair": "$C43A06",
+      "display_stage_return": "$C43A0A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 61490,
+      "frame": 6,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43A0C",
           "xy": [
@@ -1923,7 +2457,21 @@
             2944,
             1536
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43A0C",
+      "last_pair": "$C43A1C",
+      "display_stage_return": "$C43A20",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 63451,
+      "frame": 7,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43A22",
           "xy": [
@@ -1981,11 +2529,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43A0A",
-      "polygon_submissions": 3
+      "first_pair": "$C43A22",
+      "last_pair": "$C43A3E",
+      "display_stage_return": "$C43A42",
+      "polygon_submissions": 1
     },
     {
-      "trace_index": 65358,
+      "trace_index": 65565,
       "frame": 7,
       "source_segment": 68,
       "packet": "$C4409E",
@@ -2031,11 +2581,13 @@
           ]
         }
       ],
+      "first_pair": "$C440A4",
+      "last_pair": "$C440B4",
       "display_stage_return": "$C440B8",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 65784,
+      "trace_index": 65921,
       "frame": 7,
       "source_segment": 68,
       "packet": "$C4407C",
@@ -2065,7 +2617,21 @@
             4096,
             176
           ]
-        },
+        }
+      ],
+      "first_pair": "$C44082",
+      "last_pair": "$C4408A",
+      "display_stage_return": "$C4408E",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 66128,
+      "frame": 7,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C44090",
           "xy": [
@@ -2088,11 +2654,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C4408E",
+      "first_pair": "$C44090",
+      "last_pair": "$C44098",
+      "display_stage_return": "$C4409C",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 66354,
+      "trace_index": 66491,
       "frame": 7,
       "source_segment": 68,
       "packet": "$C44066",
@@ -2124,11 +2692,13 @@
           ]
         }
       ],
+      "first_pair": "$C4406C",
+      "last_pair": "$C44074",
       "display_stage_return": "$C44078",
       "polygon_submissions": 0
     },
     {
-      "trace_index": 66670,
+      "trace_index": 66912,
       "frame": 7,
       "source_segment": 68,
       "packet": "$C43F5E",
@@ -2179,7 +2749,21 @@
             4160,
             0
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43F64",
+      "last_pair": "$C43F78",
+      "display_stage_return": "$C43F7C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 68355,
+      "frame": 7,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43F7E",
           "xy": [
@@ -2200,7 +2784,21 @@
             1536,
             0
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43F7E",
+      "last_pair": "$C43F86",
+      "display_stage_return": "$C43F8A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 69358,
+      "frame": 7,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43F8C",
           "xy": [
@@ -2258,11 +2856,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43F7C",
-      "polygon_submissions": 2
+      "first_pair": "$C43F8C",
+      "last_pair": "$C43FA8",
+      "display_stage_return": "$C43FAC",
+      "polygon_submissions": 0
     },
     {
-      "trace_index": 69637,
+      "trace_index": 69844,
       "frame": 7,
       "source_segment": 68,
       "packet": "$C43D34",
@@ -2306,7 +2906,21 @@
             3712,
             4096
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43D3A",
+      "last_pair": "$C43D4A",
+      "display_stage_return": "$C43D4E",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 70231,
+      "frame": 7,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43D50",
           "xy": [
@@ -2355,7 +2969,21 @@
             3328,
             3104
           ]
-        },
+        }
+      ],
+      "first_pair": "$C43D50",
+      "last_pair": "$C43D68",
+      "display_stage_return": "$C43D6C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 71468,
+      "frame": 7,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
         {
           "address": "$C43D6E",
           "xy": [
@@ -2392,11 +3020,13 @@
           ]
         }
       ],
-      "display_stage_return": "$C43D4E",
-      "polygon_submissions": 2
+      "first_pair": "$C43D6E",
+      "last_pair": "$C43D7E",
+      "display_stage_return": "$C43D82",
+      "polygon_submissions": 1
     },
     {
-      "trace_index": 73234,
+      "trace_index": 73721,
       "frame": 8,
       "source_segment": 68,
       "packet": "$C43CBE",
@@ -2498,11 +3128,13 @@
           ]
         }
       ],
+      "first_pair": "$C43CC4",
+      "last_pair": "$C43CF4",
       "display_stage_return": "$C43CF8",
       "polygon_submissions": 1
     },
     {
-      "trace_index": 76651,
+      "trace_index": 76823,
       "frame": 8,
       "source_segment": 68,
       "packet": "$C43B1A",
@@ -2541,11 +3173,13 @@
           ]
         }
       ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
       "display_stage_return": "$C43B30",
       "polygon_submissions": 1
     },
     {
-      "trace_index": 77950,
+      "trace_index": 78122,
       "frame": 8,
       "source_segment": 68,
       "packet": "$C439CC",
@@ -2584,11 +3218,13 @@
           ]
         }
       ],
+      "first_pair": "$C439D2",
+      "last_pair": "$C439DE",
       "display_stage_return": "$C439E2",
       "polygon_submissions": 1
     },
     {
-      "trace_index": 79163,
+      "trace_index": 79440,
       "frame": 8,
       "source_segment": 68,
       "packet": "$C439A8",
@@ -2648,11 +3284,13 @@
           ]
         }
       ],
+      "first_pair": "$C439AE",
+      "last_pair": "$C439C6",
       "display_stage_return": "$C439CA",
       "polygon_submissions": 1
     },
     {
-      "trace_index": 80973,
+      "trace_index": 81110,
       "frame": 8,
       "source_segment": 68,
       "packet": "$C43994",
@@ -2684,9 +3322,11 @@
           ]
         }
       ],
+      "first_pair": "$C4399A",
+      "last_pair": "$C439A2",
       "display_stage_return": "$C439A6",
       "polygon_submissions": 5
     }
   ],
-  "qualification": "Each row begins at the traced direct C2AEFC-to-C2AF00 entry with A3 in verified original segment 68. The listed pairs are only those read at the C2AF9C/C2AF9E fixed-point transform pair before the next direct packet entry. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map."
+  "qualification": "Each row ends at a traced C2AFE2 display-stage entry and retains the preceding C2AF9C/C2AF9E fixed-point source-pair reads since the prior display-stage entry. Every such pair is in verified original segment 68. Only batches with an observed direct C2AEFC-to-C2AF00 entry expose a packet header; the first batch begins after the trace starts. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map."
 }

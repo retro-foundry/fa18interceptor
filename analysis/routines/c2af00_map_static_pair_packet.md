@@ -11,10 +11,12 @@ the live fixed-point display matrix rooted at `$C45BDA`, and writes only
 mutable `$C4BFxx` polygon-input workspace. `$C246A0` consumes that workspace;
 its projected results reach `$C2FF48` on observed packets.
 
-The bounded map trace contains 26 such direct packet entries. All 26 reach
-the `$C2AFE2 -> $C246A0` display-stage call after their transform, and the
-transform loop reads 327 exact signed two-word source pairs at
-`$C2AF9C/$C2AF9E`. The packet source/header fields and every consumed pair
+The bounded map trace contains 26 such direct packet entries and 55 completed
+transform batches. The transform loop reads 353 exact signed two-word source
+pairs at `$C2AF9C/$C2AF9E`; all 55 batches reach the `$C2AFE2 -> $C246A0`
+display-stage call. The direct header is only captured on 26 batches because
+the remaining batches resume through an enclosing packet path. The packet
+source/header fields and every consumed pair
 are retained in the [static-packet inventory](../data/run003_m_map_polygon_static_packets.md).
 The accompanying [raw-coordinate sheet](../plots/run003_m_map_static_pair_packets.png)
 is a visual inspection aid only; it preserves read order without inferring

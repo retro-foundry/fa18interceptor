@@ -127,9 +127,10 @@ component](c36220_c36232_map_line_component.md). It remains separate from the
 five-triple `$C3B720` component.
 
 The map page also has a second, separate immutable input path. Twenty-six
-direct `$C2AEFC -> $C2AF00` entries read packet data from `$C42Dxx/$C43xxx`;
-their fixed-point loop consumes 327 exact signed source pairs at
-`$C2AF9C/$C2AF9E` before `$C2AFE2` invokes the polygon display stage. This
+55 completed fixed-point transforms read 353 exact signed source pairs from
+verified original segment 68 at `$C2AF9C/$C2AF9E` before `$C2AFE2` invokes the
+polygon display stage; 26 batches have direct `$C2AEFC -> $C2AF00` packet
+headers. This
 identifies static source input behind the otherwise mutable `$C4BFxx` polygon
 workspace. Its packet inventory and limitations are retained in the
 [static-packet report](run003_m_map_polygon_static_packets.md); it is not yet
