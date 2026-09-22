@@ -17,6 +17,8 @@ The tracked PNG is copied byte-for-byte from
 `build/run003_m_visual_30/screen.png` (SHA-256
 `933d6071fbc3b56f7f01bf2f1bee824799647a510327fc22f79d98b7bb7b0200`).
 It is a visual verification artifact, not an extracted 3D terrain dataset.
+An independent run035 end-of-flight map view shows this coastline panning with
+flight state; see the [two-position comparison](run003_run035_m_map_pan_comparison.md).
 
 The local visual captures are:
 
