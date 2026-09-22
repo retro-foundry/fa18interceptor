@@ -58,3 +58,24 @@ world-unit scale or to infer an all-page source table until the static
 coordinate-to-stream control data is traced.
 
 The corresponding diagnostics are [X-only](../plots/workspace_template_placements_xz_origin_x_plus.svg) and [Z-only](../plots/workspace_template_placements_xz_origin_z_plus.svg).
+
+## Chunk selection versus LOD
+
+The joins also distinguish a page/subsection selector from a demonstrated LOD
+selector. For every static source that reaches a later builder record in both
+the control and a perturbed run, its emitted descriptor association is
+unchanged:
+
+| perturbation | common joined static sources | sources with a changed descriptor association |
+| --- | ---: | ---: |
+| X-only bin increment | 51 | 0 |
+| Z-only bin increment | 79 | 0 |
+| both bin increments | 33 | 0 |
+
+At the same time, the selector removes entries from the active source set
+(control: 106 copied entries; X-only: 60; Z-only: 95; both: 60). This is
+behavioral evidence for a two-dimensional chunk/page selection stage: a page
+controls which reusable static templates become active. It is **not** evidence
+for LOD. A LOD claim still needs a test that holds the page/instance constant,
+varies a measured camera distance, and observes a different descriptor, mesh,
+face family, or template topology selected for that same item.
