@@ -1,0 +1,14 @@
+{
+  "vertex_source": {
+    "start": "$C3B720",
+    "count": 5,
+    "classification": "five direct triples consumed by C1F4AC/C1F524"
+  },
+  "faces": [
+    {"context": "$C3B6B0", "record": "$C3B6BA", "indices": [0, 1, 4]},
+    {"context": "$C3B6B0", "record": "$C3B6C6", "indices": [1, 2, 4]},
+    {"context": "$C3B6B0", "record": "$C3B6E0", "indices": [2, 3, 4]},
+    {"context": "$C3B6B0", "record": "$C3B6FA", "indices": [3, 0, 4]}
+  ],
+  "qualification": "Only renderer-observed triangular side records are mapped. No base face or unseen topology is inferred."
+}

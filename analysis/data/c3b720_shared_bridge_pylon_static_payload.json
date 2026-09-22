@@ -1,0 +1,22 @@
+{
+  "classification": "trace-proven partial shared bridge-scene component",
+  "input_range": "$C3B720-$C3B73D",
+  "triples": [
+    [2112, 0, -896],
+    [-2080, 0, -2048],
+    [-1600, 0, 1280],
+    [1088, 0, 1568],
+    [-640, 1024, 0]
+  ],
+  "renderer_contract": {
+    "transform": "$C1F4AC/$C1F524",
+    "workspace": "$C48390 slots 0-4",
+    "face_context": "$C3B6B0",
+    "observed_face_records": ["$C3B6BA", "$C3B6C6", "$C3B6E0", "$C3B6FA"]
+  },
+  "exclusions": [
+    "$C3B73E and following are not source triples",
+    "no base face is inferred",
+    "$C48390 and all transformed/projected coordinates are mutable renderer state"
+  ]
+}
