@@ -22,5 +22,10 @@ The full 64-cell static directory and the twelve observed accesses are in the
 [segment-68 directory inventory](../data/run003_m_map_segment68_directory.md),
 with a [colour-coded selector grid](../plots/run003_m_map_segment68_directory.png)
 for visual inspection.
+
+The immediately preceding control walker has a separate, explicit
+threshold-based detail gate at [`$C2AD00`](c2ad00_map_control_record_detail_gate.md).
+It changes record fields before this lookup, but has not been correlated to a
+line-versus-polygon primitive replacement.
 This proves a local two-dimensional packet selector, not global world axes,
 physical cell size, complete terrain coverage, or LOD.
