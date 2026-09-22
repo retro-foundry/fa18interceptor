@@ -20,12 +20,16 @@ def main() -> None:
     parser.add_argument("--playback", type=Path, required=True)
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     parser.add_argument("--source", type=lambda value: int(value, 0), required=True)
+    parser.add_argument("--occurrence", type=int, default=1,
+                        help="select this 1-based occurrence of --source (default: 1)")
     parser.add_argument("--entry", type=lambda value: int(value, 0), default=DEFAULT_TRANSFORM_ENTRY,
                         help="matrix-transform entry to search (default: C1F100)")
     parser.add_argument("--frames", type=int, default=12)
     parser.add_argument("--instructions", type=int, default=12000)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.occurrence < 1:
+        parser.error("--occurrence must be positive")
     if args.output.exists():
         raise FileExistsError(args.output)
     args.output.mkdir(parents=True)
@@ -38,6 +42,7 @@ def main() -> None:
             raise RuntimeError("Core rejected save state")
         engine.core.e9k_debug_add_breakpoint(args.entry)
         found = None
+        matching_occurrences = 0
         for _ in range(args.frames):
             engine.core.retro_run()
             while engine.core.e9k_debug_is_paused():
@@ -48,15 +53,18 @@ def main() -> None:
                     engine.core.retro_run()
                     continue
                 if (registers["a1"] & 0xFFFFFF) == args.source:
-                    found = {"host_frame": engine.frame, "registers": registers}
-                    break
+                    matching_occurrences += 1
+                    if matching_occurrences == args.occurrence:
+                        found = {"host_frame": engine.frame, "registers": registers,
+                                 "occurrence": matching_occurrences}
+                        break
                 engine.core.e9k_debug_step_instr()
                 engine.core.e9k_debug_resume()
                 engine.core.retro_run()
             if found:
                 break
         if found is None:
-            raise RuntimeError("selected matrix source was not reached")
+            raise RuntimeError(f"selected matrix source was not reached {args.occurrence} times")
         if any(frame > found["host_frame"] for frame in events):
             raise ValueError("future input after selected source")
 
@@ -82,6 +90,7 @@ def main() -> None:
         (args.output / "trace_summary.json").write_text(json.dumps({
             "scope": "no-future-input trace beginning at selected C1F100 source",
             "source": f"${args.source:06X}", "found": found,
+            "requested_occurrence": args.occurrence,
             "instructions": len(rows), "termination": "instruction_cap"}, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"source": f"${args.source:06X}", "instructions": len(rows), "output": str(args.output)}))
     finally:

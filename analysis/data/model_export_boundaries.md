@@ -16,8 +16,10 @@ both its static data boundary and its renderer consumption path are traced.
 - `$C34A9A/$C34A9C` is no longer in this category: its complete 0--39 slot
   construction is traced from `$C351xx` plus `$C0D384`; see
   [the full face-family evidence](c34a_full_flight_object_face_family.md).
-- `$C3A94C/$C3A94E` and `$C38F98`: renderer-resident face/control families;
-  their upstream immutable vertex sources are not established.
+- `$C38F98`: renderer-resident face/control family; its upstream immutable
+  vertex source is not established. `$C3A94C/$C3A94E` is now exportable as a
+  procedural four-input-triple plus six-derived-slot compact component; see
+  [its source-to-face evidence](c3a94c_compact_polyhedron_candidate.md).
 
 ## Runtime data explicitly excluded
 

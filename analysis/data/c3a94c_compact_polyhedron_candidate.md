@@ -6,7 +6,7 @@ orientation. No object name is assigned.
 
 [Open the pre-cull orthographic sheet](../plots/frame12600_c3a94e_preclip_face_sheet.png).
 
-## Renderer boundary
+## Complete source-to-face boundary
 
 - The live record walker enters control stream `$C3A94C` four times during the
   checkpoint capture.
@@ -16,42 +16,32 @@ orientation. No object name is assigned.
   `$C3ABBA`, `$C3AC1A`, `$C3AC26`, `$C3AC74`, `$C3ACA0`, and `$C3ACAC`.
   Every observed face is a four-point polygon, yielding 24 renderer-observed
   polygon edges.
-- `$C2005C` reads the points from the mutable `$C48390` transformed-vertex
-  workspace. Consequently the sheet recovers topology before culling, but not
-  immutable source coordinates.
-- The bounded control trace enters `$C1F6F8` with `A1=$C3A986`,
-  `A3=$C483A8`, and then loads `A5=$C3A94C`. `$C3A94C` resolves its stream
-  base through `$C3A942` to `$C3A958`; that stream dispatches face control at
-  `$C3ABB2`. The selected handler `$C20EC4` additionally writes derived
-  workspace values at `$30(A3)`. Thus `$C483A8` is already a mutable input to
-  the family and `$C20EC4` is a downstream workspace derivation, not its
-  immutable model source.
+- A later `$C3A96E` transform occurrence proves the immutable input range:
+  four triples at `$C3A96E-$C3A985` are transformed by `$C1F4AC/$C1F528`
+  through `$C45BD8` into `$C48390-$C483A7` (slots 0--3). `A3=$C483A8` at
+  `$C1F6F8` is the next free destination, not a pre-existing input record.
+- `$C1F708` then loads `A5=$C3A94C`. `$C3A94C` resolves its stream base
+  through `$C3A942` to `$C3A958`; that stream dispatches face control at
+  `$C3ABB2`.
+- The selected `$C20EC4` handler derives slots 4--9 from the direct block.
+  Its stores are `$30/$36($C48390)` for slots 8/9, followed by stores at
+  `$6($C483A2)`, `$6/$C($C483A8)`, and `$12($C483A8)` for slots 4--7.
+- `$C2005C` reads the completed slots 0--9. The six static face records use
+  every one of those slots; their pre-cull sheet is therefore a complete
+  renderer-topology reference for this procedural component.
 
 ## Status
 
-The control stream and face records are a distinct, separable renderer input
-family, not code. Their upstream immutable vertex source and game-object
-ownership remain untraced. Treat this as a compact polyhedral component
-candidate rather than a named model export. The next valid source trace must
-find the writer that populates `$C483A8` before this `$C1F6F8` entry; tracing
-`$C3A942`, `$C3A958`, or `$C20EC4` backwards alone would only rediscover
-control or derived workspace state.
+The four static input triples, `$C20EC4` derivation, static control/face
+records, and `$C2005C` consumer are now connected. This is an exportable
+**procedural compact polyhedral component**, not a contiguous static mesh:
+retain the four triples, face/control streams, matrix transform, and derivation
+routine; never export `$C48390` as source geometry. Its game-object identity
+remains unnamed.
 
-The nearby `$C3513C` dual-lane transform is explicitly excluded as that
-writer: across eight sampled invocations it enters with `A5=$C3B9D6` (then two
-with `$C3B9D0`), never `$C3A94C`, and its bounded follow-on trace reaches
-`$C1F6F8` with `A1=$C3515A`, `A3=$C483A8`, and the C3B9 controller context.
-Shared workspace position alone is therefore not source provenance.
+The nearby `$C3513C` dual-lane transform remains a separate C3B9 controller
+path despite sharing the mutable workspace; it is not this component's source.
 
-An exact CPU write watch on `$C483A8` is an observed miss for 64 ordinary
-frames from the sealed frame-12600 external checkpoint. The compact controller
-can therefore reuse a pre-existing workspace record during that interval; its
-first writer predates the checkpoint or belongs to an unobserved initialization
-route. The next capture must begin before scene/entity initialization, not
-inside this already-populated renderer loop.
-
-The same exact CPU write watch is also a miss from the sealed `run031` initial
-state through replay frame 12,600. This eliminates the available full recorded
-run as an earlier writer source: `$C483A8` already predates its initial state.
-The remaining valid evidence source is a new capture from original boot/load
-through scene initialization (or a future state archived before that stage).
+Authority: `build/run031_frame12600_c3a96e_occ2_trace/trace.jsonl`,
+instructions 0--290, plus
+`build/run031_frame12600_face_preparations_64f/face_preparations.json`.
