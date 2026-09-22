@@ -5,13 +5,16 @@ changes present in `run035`. This is one continuous recording; do **not** use
 the game's Save, Restore, Rewind, Reset, or Warp controls while recording.
 
 1. Start a normal free-flight recording and fly until the Golden Gate is the
-   red structure in the **outside viewport**. Ignore red cockpit/HUD pixels.
+   red structure in the **forward world viewport**. The normal cockpit view is
+   sufficient: do **not** use the numpad or try to select an outside camera.
+   Ignore red cockpit/HUD pixels.
 2. Put the bridge approximately in the centre of the viewport, level the
    aircraft, then leave pitch, roll, and heading controls untouched.
 3. Hold a constant throttle and fly straight toward it for roughly 20--30
    seconds. Do not turn away after the closest view; stop the recording then.
-4. Close the recording session normally. It already contains every frame; no
-   intermediate save is needed or wanted.
+4. Do **not** press the game's Save command: the recording is already
+   automatic and pressing Save can overwrite the state you were trying to
+   preserve. Close the recording session normally when finished.
 
 The useful result contains the same red landmark at visibly small, medium, and
 large extents while the horizon and bridge bearing stay stable. The existing
