@@ -67,12 +67,13 @@ In the sampled `$C22660` descriptor iteration, the `D6` value written at
 `$C1DDCA` is calculated from the next signed word of mutable `A3=$C4B274`
 at `$C1DD98`, a signed indexed word loaded from `$C1D7E2` at `$C1DDBA`, and
 the live `D4`/`D2` terms (`ASL.L #2`, subtract, then two additions at
-`$C1DDC2-$C1DDC8`).  The descriptor is not ignored: `$C1DE00` reads its
-second longword and obtains `A1=$C37990`, inside static scene Hunk 49, before
-the next coordinate calculation starts.  This proves a mixed static-descriptor
-and mutable-workspace input contract, but not which upstream table originally
-populates `A3` or whether `$C37990` supplies source placements, topology, or
-another scene-control stream.
+`$C1DDC2-$C1DDC8`).  `$C1DE00` also reads the descriptor's second longword,
+obtaining `A1=$C37990` inside static scene Hunk 49.  On this observed branch,
+however, `$C1DE18` replaces `A1` with `$C1D7E2` before any dereference of
+`$C37990`.  That read establishes a linked descriptor field but does not prove
+that Hunk 49 supplies this record's placement, topology, or control stream.
+The source calculation demonstrated here is the mutable workspace plus live
+translation state; the upstream producer of `A3` remains untraced.
 
 The builder's mutable geometry input is now bounded more closely.  At the
 start of the traced pass, `$C1DC3E` loads `A4=$C48390`; after the byte-driven
@@ -85,8 +86,9 @@ cell is therefore `$C4B270-$C4B2CF`; its `$C4B272` payload read produces the
 mutable geometry workspace (for example, the two-lane transform evidence in
 [`c351_shared_dual_lane_flight_object.md`](../data/c351_shared_dual_lane_flight_object.md)).
 This excludes the `A3` cell stream itself as immutable terrain data; the
-upstream writer of that workspace and the static `$C37990` control stream
-remain the relevant terrain-source candidates.
+upstream writer of that workspace remains the relevant terrain-source path.
+The static `$C37990` descriptor field is a separate linked candidate that
+requires a branch where it is actually consumed.
 
 The next valid step is a focused call/return trace that records `A1`, the
 three `D0` coordinate words, and the source reads immediately before this
