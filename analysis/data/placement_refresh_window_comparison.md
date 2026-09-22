@@ -76,6 +76,17 @@ not yet been established. Consequently the result strengthens the need for a
 controlled same-page distance experiment, but it does not identify any target
 pair as an LOD pair.
 
+### Target stability check
+
+The 24-byte windows beginning at all 13 targets in the table above are
+byte-identical across five independent run033 snapshots: the frame-404
+placement trace, frame-5250 placement trace, and checkpoints/traces at frames
+5500, 6000, and 6250. Thus none of these sampled targets behaves like a
+changing terrain workspace over that interval. This promotes them to
+**byte-stable descriptor-target candidates** for this run033 scope, not to
+decoded meshes or LOD levels: relocation ownership, full record format, and
+the target-to-renderer path must still be established individually.
+
 For visual checks, the two diagnostics are
 [frames 404--426 X/Z plot](../plots/workspace_template_placements_xz_404_426.svg)
 and
