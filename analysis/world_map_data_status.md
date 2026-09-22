@@ -109,6 +109,12 @@ association. This retains possible coexisting filled detail as an open
 question, but rejects presenting a line-to-polygon transition as a result.
 See the [run036 primitive-transition probe](data/run036_red_primitive_transition.md).
 
+One traced frame-7,000 finalized polygon takes a direct-blitter span-style
+route rather than `$C2FA7E`, but its fully converted bounds are disjoint from
+the red Golden Gate raster. It proves that the renderer has a non-line route
+without linking it to the landmark or LOD; see the [polygon span-path
+probe](data/run036_polygon_span_path_probe.md).
+
 ## Next evidence required to find the authoritative map
 
 1. Capture a deterministic `M`-entry and map-exit scenario with screenshots,

@@ -41,6 +41,13 @@ still has a direct line-renderer correlation.  A filled primitive may coexist,
 but needs a face-to-raster match before it can be called a detail transition or
 LOD.
 
+A completed trace of the first frame-7,000 `$C2FF48` submission now separates
+one direct-blitter polygon route from `$C2FA7E` line emission.  Its reflected
+projected bounds are entirely outside the red Golden Gate raster, so it is
+positive evidence that this particular polygon is unrelated—not evidence for
+or against co-visible filled bridge detail.  See the [polygon span-path
+probe](run036_polygon_span_path_probe.md).
+
 Authority: sealed `captures/run036`; keyframes in ignored
 `build/run036_keyframes`; replay-preserved ignored collector outputs
 `build/run036_{4999,5999,6999,7000}_polygon_submissions` and
