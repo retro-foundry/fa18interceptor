@@ -1,0 +1,72 @@
+{
+  "scope": "trace entries and CPU blitter jobs while the map transition prepares the pending map page",
+  "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+  "blitter_jobs": "build\\run003_m_map_appearance_pending_page_blitter_jobs.json",
+  "polygon_wrapper_entries": 42,
+  "line_emitter_entries": 19,
+  "map_page_blitter_jobs": 124,
+  "span_blitter_jobs": 44,
+  "line_plane_blitter_jobs": 76,
+  "polygon_route_by_frame": {
+    "1": {
+      "entries": 4,
+      "line_routes": 0,
+      "span_routes": 4
+    },
+    "2": {
+      "entries": 3,
+      "line_routes": 0,
+      "span_routes": 3
+    },
+    "3": {
+      "entries": 6,
+      "line_routes": 2,
+      "span_routes": 4
+    },
+    "4": {
+      "entries": 4,
+      "line_routes": 0,
+      "span_routes": 4
+    },
+    "5": {
+      "entries": 5,
+      "line_routes": 0,
+      "span_routes": 5
+    },
+    "6": {
+      "entries": 5,
+      "line_routes": 0,
+      "span_routes": 5
+    },
+    "7": {
+      "entries": 6,
+      "line_routes": 0,
+      "span_routes": 6
+    },
+    "8": {
+      "entries": 5,
+      "line_routes": 1,
+      "span_routes": 5
+    },
+    "10": {
+      "entries": 4,
+      "line_routes": 3,
+      "span_routes": 2
+    }
+  },
+  "polygon_contexts": {
+    "$C3B6B0": 4,
+    "$C4BFA6": 2,
+    "$C4BFAC": 5,
+    "$C4BFB2": 5,
+    "$C4BFB8": 1,
+    "$C4BFBE": 9,
+    "$C4BFC4": 4,
+    "$C4BFCA": 5,
+    "$C4BFD0": 2,
+    "$C4BFD6": 3,
+    "$C4BFE2": 1,
+    "$C4BFE8": 1
+  },
+  "qualification": "The supplied job inventory identifies CPU blits whose pointers fall in the prepared map page; the trace identifies renderer entries in the same bounded transition. This proves renderer output to that mutable display page, not an immutable terrain mesh, a coastline-pixel-to-record match, or a complete world-map extraction."
+}

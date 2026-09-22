@@ -84,6 +84,24 @@ immutable coastline resource there.  No enabled input channel has yet been
 traced from a separately proven static map/terrain range to the completed map
 planes.
 
+## Renderer production of the prepared map page
+
+The same trace and Custom-chip log now establish the immediate bitmap
+producer. In frames 1--12, while the pending `$04DB30-$05582F` four-plane page
+is prepared, 124 CPU `BLTSIZE` jobs have a pointer in that page. Forty-four
+are direct span jobs at `$C304F4` and 76 are the four-plane line-job sites
+`$C2FBE6/$C2FC4E/$C2FCB6/$C2FD1C`. The synchronized instruction trace also
+reaches `$C2FF48` 42 times and `$C2FA7E` 19 times during the bounded
+transition.
+
+This is direct evidence that the page later presented as the map is produced
+by the game's polygon/span and line renderer paths—not copied as a dedicated
+coastline bitmap in this interval. It connects map-mode 3D renderer output to
+the display target, but still does not assign an individual coastline pixel to
+an immutable input record or extract the complete terrain model. The counts,
+contexts, and exact reproduction inputs are in the [map display renderer
+census](run003_m_map_display_renderer_census.md).
+
 Authority: deterministic no-input renders
 `build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
 `build/run003_m_map_appearance_trace/{trace.jsonl,custom_writes.jsonl}` from
@@ -99,4 +117,4 @@ source-to-map-plane connection. See the [terrain-selector overlap](run003_m_map_
 
 ## Boundary
 
-The raw `M` entry at `$C1BF8C` is traced only through its request and capped helper boundary. Its static post-helper tail initializes transition state, but the producing pixel/asset path has not been traced. Therefore this screenshot is a valuable visual oracle for future map-data work, not evidence that the flat template-placement cache, a particular static hunk, or the screen bitmap is the authoritative terrain model.
+The raw `M` entry at `$C1BF8C` is traced only through its request and capped helper boundary. Its static post-helper tail initializes transition state. The later pending-page renderer producer is now traced, but its immutable input source is not. Therefore this screenshot is a valuable visual oracle for future map-data work, not evidence that the flat template-placement cache, a particular static hunk, or the screen bitmap is the authoritative terrain model.
