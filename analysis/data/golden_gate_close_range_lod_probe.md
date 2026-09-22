@@ -39,6 +39,21 @@ records.  Thus the visible/cull-accepted subset varies, but there is positive
 evidence that the close passes retain part of the same static bridge face
 family rather than replacing it wholesale.
 
+## Matrix-input batch overlap
+
+Direct inventories at `$C1F4AC` provide the upstream comparison.  The close
+and frame-12,000 windows all transform `$C35932`, `$C361E4`, `$C3B720`,
+`$C3B9B2`, `$C3B0CE`, `$C3AD0E`, `$C3A96E`, `$C3AF62`, `$C3B588`, and
+`$C358C2` at least once.  These are the existing composed Golden Gate batch
+families, so the close pass does not replace the established core input set.
+
+The close windows additionally contain `$C363EC`, `$C36410`, `$C367B8`,
+`$C36954`, `$C36B8C`, and `$C36FAA` inputs.  They are all in the adjacent
+`$C362xx-$C36fxx` static scene region and are a concrete next lead for a
+possible range-specific component.  The current traces do not connect those
+inputs to `$C355D8` or another accepted bridge-face context, so they are not
+called an LOD level or exported as Golden Gate geometry.
+
 ## Result and limit
 
 This probe finds **no evidence of a simple close-range LOD swap** between the
@@ -57,3 +72,4 @@ Authority:
 - `build/run031_frame12000_golden_gate_preclip_faces_64f/preclip_faces.json`;
 - `build/run031_frame11850_golden_gate_close_line_submissions_64f/line_submissions.json`;
 - `build/run031_frame12000_golden_gate_line_submissions_64f/line_submissions.json`.
+- `build/run031_frame{11850,11925,12000}_c1f4ac_matrix_input_inventory/matrix_transform_entries.json`.
