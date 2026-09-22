@@ -63,6 +63,11 @@ the `$C3559A/$C355D2` line family. That identifies the landmark's line
 rendering, not ownership of the co-visible filled-face contexts; see
 `run035_golden_gate_red_line_correlation.md`.
 
+Across the red-visible interval, the line contexts progress from
+`$C3559A/$C355D2` to `$C355CE` and then `$C3558A`. This is a concrete
+line-detail selection candidate, but changing camera state prevents calling it
+distance-only LOD; see `run035_golden_gate_line_detail_candidate.md`.
+
 ## Required landmark correlation
 
 `$C2005C` captures selected face records before orientation/clipping, and

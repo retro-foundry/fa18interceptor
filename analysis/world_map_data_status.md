@@ -90,6 +90,12 @@ bridge from the landmark definition. See the [viewport interval measurement](dat
 the [red-pixel line correlation](data/run035_golden_gate_red_line_correlation.md),
 and [run035 approach context](data/run035_golden_gate_approach_lod_context.md).
 
+Within that measured interval, the Golden Gate line contexts change from the
+two distant `$C3559A/$C355D2` submissions to four `$C355CE` submissions and
+then 17 `$C3558A` submissions as the red raster expands. This is a genuine
+range/detail-selection candidate, not distance-only LOD proof, because the
+user's approach changes camera state. See the [line-detail candidate](data/run035_golden_gate_line_detail_candidate.md).
+
 ## Next evidence required to find the authoritative map
 
 1. Capture a deterministic `M`-entry and map-exit scenario with screenshots,
