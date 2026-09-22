@@ -1,0 +1,22 @@
+{
+  "schema": "fa18interceptor.static-line-component-payload/v1",
+  "classification": "trace-proven unnamed close-range line component",
+  "immutable_coordinate_triples": [
+    {"index": 0, "address": "$C363EC", "xyz": [724, 172, -724]},
+    {"index": 1, "address": "$C363F2", "xyz": [-724, 172, 724]},
+    {"index": 2, "address": "$C363F8", "xyz": [0, 416, 0]},
+    {"index": 3, "address": "$C363FE", "xyz": [0, 0, -1]}
+  ],
+  "renderer_observed_line_record": {
+    "controller": "$C3628A",
+    "record": "$C366D4",
+    "selector": 8,
+    "segments": [[0, 1], [2, 3]]
+  },
+  "required_code": [
+    {"range": "$C1F4AC-$C1F6F8", "role": "transform direct source triples into C48390 slots 0-3"},
+    {"range": "$C212B0", "role": "consume the static offset-pair line record"}
+  ],
+  "explicitly_not_source_data": ["$C48390"],
+  "qualification": "The static source-to-line path is trace-proven at frame 11850. Scene identity and LOD role are not established."
+}
