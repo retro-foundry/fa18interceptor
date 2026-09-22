@@ -1,0 +1,44 @@
+# `$C1D10C`: scene-selector context setup
+
+Classification: **scenario-backed selector-input setup**. This routine prepares the live inputs that the `$C1D330-$C1D3E6` band walk later combines with the immutable segment-65 control stream. The observations establish two context packs; they do not identify either pack as a camera position, world coordinates, terrain cells, or LOD state.
+
+## Authority
+
+- Sealed `run033` replay restored before replay frame 404 and traced for the next three chipset frames: `build/run033_placement_bulk_404_trace/trace.jsonl`.
+- The downstream byte-control-to-static-group records are retained in the [workspace-band selector stream](../data/workspace_band_selector_stream.md).
+- The related static `C1C63E` slice is independently observed in `pcode/raw/attract_cockpit_1800_tenframe_trace/observed.asm.txt`.
+
+## Proven context packs
+
+`$C1D10C` creates an `A6` frame and selects one of two observed setup paths. Both populate the common selector pointers:
+
+| local | value written | downstream role observed |
+| --- | --- | --- |
+| `-4(A6)` | `$C42390` | static group-offset base |
+| `-8(A6)` | `$C19A9C` | static bit-gate table base |
+| `-14(A6)` | `$C4F03A` | runtime placement-cache base |
+| `-24(A6)` | `$C459AE` | helper context pointer |
+| `-18(A6)` | `$C1D78E` | helper table pointer |
+| `-1C(A6)` | `$C1D7E2` | helper table pointer |
+
+On the frame-1 route, `$C1D21C`, `$C1D224`, and `$C1D22C` copy `$C45948`, `$C4594A`, and `$C45850` respectively into `-26(A6)`, `-28(A6)`, and `-2A(A6)`. On the frame-3 route, the nonzero test at `$C1D116` branches to `$C1D186`; `$C1D16A`, `$C1D172`, and `$C1D17A` instead copy `$C4594C`, `$C4594E`, and `$C45851` into those same locals. The subsequent shared path begins at `$C1D234`.
+
+At `$C1D376` the shared band walk loads `-26(A6)` into `D1`; at `$C1D388` it loads `-28(A6)` into `D0`. The selector path then applies its static control-byte transforms and calls `$C1D3F4` with a static group index plus the live row term. This accounts for the two different ranges in the trace: the frame-1 calls have row terms `$000F-$0012`, while frame-3 calls have `$0040-$0043`.
+
+## One upstream producer is proven
+
+For the second pack only, the observed `$C1C63E` path gives an immediate runtime producer. Provided `$C45785` is clear, it establishes `A3=$C46184 + word($C458DE)`, calls `$C1C7F6`, then writes:
+
+```
+$C1C6D4: word(A3 + $06) -> $C4594C
+$C1C6DC: word(A3 + $08) -> $C4594E
+$C1C6E4: byte(A3 + $0A) -> $C45851
+```
+
+`$C1C6EC-$C1C70C` also derives `$C45850` from the low two bits of the two words. The alternative observed path at `$C1C716` derives comparable values from `$C45C3E/$C45C46`, then compares them against `$C4594C/$C4594E` at `$C1C7CE/$C1C7DE` before setting a request bit in `$C45858`.
+
+This is evidence that the second selector pack is fed by mutable runtime state and a table/workspace rooted at `$C46184`, not directly by the byte-stable segment-65 control stream. It does not yet prove what the words mean spatially, where `$C458DE` originates, or that `$C46184` is authoritative terrain data. No writer for the first pack (`$C45948/$C4594A`) is established by these bounded traces.
+
+## Consequence for map and LOD claims
+
+The selector has a measurable two-input shape: immutable control bytes choose candidate static groups, while mutable terms choose rows within them. That shape is compatible with several designs (spatial paging, scene mode, or a detail policy), so it is deliberately not named a grid or LOD system. The next required proof is a producer trace for `$C458DE` and for the first pack, correlated with a controlled change in aircraft/world position.

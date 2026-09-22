@@ -16,6 +16,7 @@ called the complete world map.
 | Is that layer live data rather than an immutable mesh? | Yes.  A traced `$C1DC1C-$C1E0B0` bulk pass writes successive 24-byte placement records through `A2`; it precedes the `$C1CB74` selector. | [placement record builder](routines/c1dc1c_scene_placement_record_builder.md) |
 | What feeds the placement builder's workspace scan? | The traced update sequence resets leading cell words to `$FFFF` at `$60`-byte stride between captured builder passes; `$C1D330-$C1D3E6` traverses `$C48390` in `$600`-byte bands and enters the next builder pass.  This proves mutable-cell lifecycle, not the original source. | [band-walk contract](routines/c1d330_scene_workspace_band_walk.md) |
 | Is a static input known for that traversal? | Yes: the active cursor resolves to byte-stable, relocation-free segment 65 at `$C412EC`.  Its byte controls, combined with live row terms, select static template groups for workspace bands; no terrain-coordinate read from it is proven. | [band selector stream](data/workspace_band_selector_stream.md) |
+| Where do the live row terms come from? | `$C1D10C` loads one of two mutable selector-context packs into its frame before the shared band walk. One pack is immediately produced from `$C46184 + word($C458DE)` in the observed `$C1C63E` path. Its spatial meaning remains unproven. | [selector-context setup](routines/c1d10c_scene_selector_context.md) |
 | Is the template stream itself statically selected? | Yes.  `$C1D3F4` resolves relative offsets from `$C42390` to static group records, passes an observed bit gate, and selects static template streams that enter `$C1D442`.  The index is not yet tied to player position or distance. | [static selector groups](data/static_template_selector_groups.md) |
 | Does a static path reach coordinate-bearing placements? | Yes.  The trace copies 37 static entries from verified segments 66--67 into cells; 22 are later read by the builder and emitted as descriptor-qualified three-word placements before the trace ends.  In this joined sample every middle word is zero.  This is still not a raw global-coordinate or mesh record. | [copy inventory and X/Z diagnostic](data/workspace_template_copies.md) |
 | Are the renderer's projected triples the source map? | No. `$C45630-$C48383` and `$C48390-$C4E76B` are mutable workspaces; static source extraction from either would be wrong. | [geometry boundary report](model_geometry_boundaries.md) |
@@ -52,8 +53,9 @@ See the measured face/input overlap and its limits in the
 
 1. Capture a deterministic `M`-entry and map-exit scenario with screenshots,
    final RAM, and a bounded no-input trace after the long helper completes.
-2. Record the first reads of the static scene pointer triplets and correlate
-   each selected descriptor with the player/scene position state at that frame.
+2. Trace the producers of `$C458DE` and the first selector pack
+   (`$C45948/$C4594A`), then correlate both context packs with controlled
+   player/scene position changes.
 3. For two widely separated positions, trace the selected static source range
    through the mutable `$C45630`/`$C48390` workspaces to projection.  Compare
    descriptor identity, source triples, and position state.
