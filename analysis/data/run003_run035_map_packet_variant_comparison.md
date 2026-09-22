@@ -2,6 +2,8 @@
 
 Each row compares the first directly entered transform batch for the same immutable packet header. Pair counts are source-coordinate consumption counts, not face counts or a global terrain complexity measure. The alternate route is dynamically proven, but these captures do not isolate physical distance from other map transition/control state, so the comparison establishes a live geometry variant rather than distance-only LOD.
 
+The [inline/alternate coordinate sheet](../plots/run003_run035_map_packet_variants.png) shows these exact batches at a common local scale per packet. It is a raw source-pair view, not globally placed terrain or reconstructed faces.
+
 | Packet header | Inline pairs | Alternate pairs | Delta | Inline pair range | Alternate pair range |
 | --- | ---: | ---: | ---: | --- | --- |
 | `$C43BAC` | 7 | 7 | +0 | `$C43BB2`--`$C43BCA` | `$C43C72`--`$C43C8A` |
