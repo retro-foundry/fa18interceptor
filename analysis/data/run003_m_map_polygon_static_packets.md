@@ -70,3 +70,8 @@ Each row ends at a traced C2AFE2 display-stage entry and retains the preceding C
 | 8 | `$C4399A`--`$C439A2` | `$C43994 / $00C43998` | 3 | 5 |
 
 The JSON companion retains every exact consumed signed pair and its static address.
+
+The same 353 pairs are available as 55 grouped `l` primitives in the
+[OBJ inspection export](../exports/run003_m_map_static_pair_batches.obj).
+It writes `(source_x, 0, source_y)` solely as a viewer convention, with no
+faces, path closure, global placement, or game-axis semantics inferred.
