@@ -19,10 +19,20 @@ orientation. No object name is assigned.
 - `$C2005C` reads the points from the mutable `$C48390` transformed-vertex
   workspace. Consequently the sheet recovers topology before culling, but not
   immutable source coordinates.
+- The bounded control trace enters `$C1F6F8` with `A1=$C3A986`,
+  `A3=$C483A8`, and then loads `A5=$C3A94C`. `$C3A94C` resolves its stream
+  base through `$C3A942` to `$C3A958`; that stream dispatches face control at
+  `$C3ABB2`. The selected handler `$C20EC4` additionally writes derived
+  workspace values at `$30(A3)`. Thus `$C483A8` is already a mutable input to
+  the family and `$C20EC4` is a downstream workspace derivation, not its
+  immutable model source.
 
 ## Status
 
 The control stream and face records are a distinct, separable renderer input
 family, not code. Their upstream immutable vertex source and game-object
 ownership remain untraced. Treat this as a compact polyhedral component
-candidate rather than a named model export.
+candidate rather than a named model export. The next valid source trace must
+find the writer that populates `$C483A8` before this `$C1F6F8` entry; tracing
+`$C3A942`, `$C3A958`, or `$C20EC4` backwards alone would only rediscover
+control or derived workspace state.
