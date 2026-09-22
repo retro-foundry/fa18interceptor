@@ -36,3 +36,9 @@ candidate rather than a named model export. The next valid source trace must
 find the writer that populates `$C483A8` before this `$C1F6F8` entry; tracing
 `$C3A942`, `$C3A958`, or `$C20EC4` backwards alone would only rediscover
 control or derived workspace state.
+
+The nearby `$C3513C` dual-lane transform is explicitly excluded as that
+writer: across eight sampled invocations it enters with `A5=$C3B9D6` (then two
+with `$C3B9D0`), never `$C3A94C`, and its bounded follow-on trace reaches
+`$C1F6F8` with `A1=$C3515A`, `A3=$C483A8`, and the C3B9 controller context.
+Shared workspace position alone is therefore not source provenance.
