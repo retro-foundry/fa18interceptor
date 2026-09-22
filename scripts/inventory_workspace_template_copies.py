@@ -17,6 +17,9 @@ SLOW = ROOT / "build/run033_placement_bulk_404_trace/slow.bin"
 SLOW_BASE = 0xC00000
 COPY_PC = 0xC1D488
 BUILDER_HEADER_PC = 0xC1DD36
+SELECTOR_STORE_PC = 0xC1DD54
+DESCRIPTOR_STORE_PC = 0xC1DD88
+COORDINATE_STORE_PCS = (0xC1E04A, 0xC1E054, 0xC1E05E)
 
 
 def hex_address(value: int) -> str:
@@ -35,9 +38,36 @@ def load_trace() -> list[dict]:
     return [json.loads(line) for line in TRACE.read_text(encoding="utf-8").splitlines()]
 
 
+def signed_word(value: int) -> int:
+    return value - 0x10000 if value & 0x8000 else value
+
+
+def builder_records(trace: list[dict]) -> list[dict]:
+    starts = [index for index, row in enumerate(trace) if row["pc"] == BUILDER_HEADER_PC]
+    records = []
+    for start_index, end_index in zip(starts, starts[1:] + [len(trace)]):
+        header = trace[start_index]
+        stores = {}
+        for row in trace[start_index:end_index]:
+            if row["pc"] in (SELECTOR_STORE_PC, DESCRIPTOR_STORE_PC, *COORDINATE_STORE_PCS):
+                stores.setdefault(row["pc"], row)
+        if not all(pc in stores for pc in (SELECTOR_STORE_PC, DESCRIPTOR_STORE_PC, *COORDINATE_STORE_PCS)):
+            continue
+        coordinate_values = [stores[pc]["registers"]["d0"] & 0xFFFF for pc in COORDINATE_STORE_PCS]
+        records.append({
+            "frame": header["frame"],
+            "trace_index": header["index"],
+            "cell": header["registers"]["a3"],
+            "runtime_record": stores[SELECTOR_STORE_PC]["registers"]["a2"],
+            "descriptor": stores[DESCRIPTOR_STORE_PC]["registers"]["a1"],
+            "coordinate_words": coordinate_values,
+        })
+    return records
+
+
 def first_later_consumer(builders: list[dict], frame: int, cell: int) -> dict | None:
     for row in builders:
-        if row["frame"] > frame and row["registers"]["a3"] == cell:
+        if row["frame"] > frame and row["cell"] == cell:
             return row
     return None
 
@@ -45,7 +75,7 @@ def first_later_consumer(builders: list[dict], frame: int, cell: int) -> dict | 
 def inventory() -> list[dict]:
     trace = load_trace()
     memory = SLOW.read_bytes()
-    builders = [row for row in trace if row["pc"] == BUILDER_HEADER_PC]
+    builders = builder_records(trace)
     rows = []
     for row in trace:
         if row["pc"] != COPY_PC:
@@ -69,7 +99,11 @@ def inventory() -> list[dict]:
             "workspace_cell": hex_address(cell),
             "workspace_header_word": f"${workspace_header:04X}",
             "observed_later_builder_frame": consumer["frame"] if consumer else None,
-            "observed_later_builder_trace_index": consumer["index"] if consumer else None,
+            "observed_later_builder_trace_index": consumer["trace_index"] if consumer else None,
+            "runtime_placement_record": hex_address(consumer["runtime_record"]) if consumer else None,
+            "runtime_descriptor": hex_address(consumer["descriptor"]) if consumer else None,
+            "runtime_coordinate_words_unsigned": consumer["coordinate_words"] if consumer else None,
+            "runtime_coordinate_words_signed": [signed_word(word) for word in consumer["coordinate_words"]] if consumer else None,
         })
     return rows
 
@@ -97,16 +131,21 @@ def markdown(rows: list[dict]) -> str:
         "0..6 remain the low seven bits.  The two displayed source words are copied "
         "to the next four workspace bytes by `$C1D4BC`.",
         "",
-        "| Copy frame | static source | segment | header -> workspace header | copied words | workspace cell | later `$C1DD36` frame |",
-        "| ---: | --- | ---: | --- | --- | --- | ---: |",
+        "| Copy frame | static source | segment | header -> workspace header | copied words | workspace cell | emitted runtime placement |",
+        "| ---: | --- | ---: | --- | --- | --- | --- |",
     ]
     for row in rows:
-        later = "" if row["observed_later_builder_frame"] is None else str(row["observed_later_builder_frame"])
         segment = "unknown" if row["source_segment"] is None else str(row["source_segment"])
+        if row["runtime_placement_record"] is None:
+            emitted = "not reached before trace end"
+        else:
+            words = ", ".join(str(value) for value in row["runtime_coordinate_words_signed"])
+            emitted = (f"{row['runtime_placement_record']} / {row['runtime_descriptor']} / "
+                       f"({words})")
         lines.append(
             f"| {row['copy_frame']} | {row['static_source']} | {segment} | "
             f"{row['source_header_byte']} -> {row['workspace_header_word']} | "
-            f"{' '.join(row['source_words'])} | {row['workspace_cell']} | {later} |"
+            f"{' '.join(row['source_words'])} | {row['workspace_cell']} | {emitted} |"
         )
     lines += [
         "",
@@ -114,6 +153,12 @@ def markdown(rows: list[dict]) -> str:
         "`$C429D0-$C42C9F`.  The inventory records only source addresses reached by "
         "the captured path.  It does not claim that either entire segment is terrain data.",
         "",
+        "For every emitted row, the final tuple is the runtime record address, descriptor, "
+        "and three signed emitted placement words.  These words are generated by the builder, "
+        "not copied verbatim from the source words.  A zero middle word in this small joined "
+        "sample is consistent with the wider runtime-placement diagnostic, but does not prove "
+        "a universal height convention.  [The joined X/Z diagnostic](../plots/workspace_template_placements_xz.svg) "
+        "plots only these 22 source-to-placement paths.\n",
         "See [the single-entry copy contract](../routines/c1d442_workspace_cell_template_copy.md) "
         "for the instruction-level `$C427C1 -> $C4B270` example and "
         "[the placement builder](../routines/c1dc1c_scene_placement_record_builder.md) "
@@ -121,6 +166,54 @@ def markdown(rows: list[dict]) -> str:
         "",
     ]
     return "\n".join(lines)
+
+
+def svg(rows: list[dict]) -> str:
+    points = [row for row in rows if row["runtime_coordinate_words_signed"] is not None]
+    coordinates = [row["runtime_coordinate_words_signed"] for row in points]
+    xs = [value[0] for value in coordinates]
+    zs = [value[2] for value in coordinates]
+    minimum_x, maximum_x = min(xs), max(xs)
+    minimum_z, maximum_z = min(zs), max(zs)
+    span = max(maximum_x - minimum_x, maximum_z - minimum_z, 1)
+    width, height, margin, plot = 1120, 760, 92, 570
+    left, top = margin, 115
+    lines = [
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="760" viewBox="0 0 1120 760">',
+        '<rect width="100%" height="100%" fill="#10151b"/>',
+        '<style>text{font-family:monospace;fill:#dbe7f3}.dim{fill:#9fb2c4}.axis{stroke:#506475}.grid{stroke:#293845}.point{fill:#ffcb6b;stroke:#10151b;stroke-width:1}</style>',
+        '<text x="92" y="36" font-size="20">Trace-derived static-template placement diagnostic — X/Z plane</text>',
+        '<text class="dim" x="92" y="62" font-size="14">22 segment-66 entries copied into workspace then emitted as runtime placements; all sampled middle words = 0</text>',
+        f'<rect x="{left}" y="{top}" width="{plot}" height="{plot}" fill="#161e27" stroke="#63788b"/>',
+    ]
+    for fraction in range(1, 5):
+        position = fraction * plot / 5
+        lines += [
+            f'<line class="grid" x1="{left + position:.1f}" y1="{top}" x2="{left + position:.1f}" y2="{top + plot}"/>',
+            f'<line class="grid" x1="{left}" y1="{top + position:.1f}" x2="{left + plot}" y2="{top + position:.1f}"/>',
+        ]
+    lines += [
+        f'<line class="axis" x1="{left}" y1="{top + plot}" x2="{left + plot}" y2="{top + plot}"/>',
+        f'<line class="axis" x1="{left}" y1="{top}" x2="{left}" y2="{top + plot}"/>',
+    ]
+    for row in points:
+        x, _, z = row["runtime_coordinate_words_signed"]
+        px = left + (x - minimum_x) / span * plot
+        py = top + plot - (z - minimum_z) / span * plot
+        label = row["static_source"]
+        title = (f'{label} -> {row["runtime_placement_record"]} {row["runtime_descriptor"]}; '
+                 f'X={x}, middle=0, Z={z}')
+        lines += [
+            f'<circle class="point" cx="{px:.1f}" cy="{py:.1f}" r="5"><title>{title}</title></circle>',
+            f'<text class="dim" x="{px + 8:.1f}" y="{py - 7:.1f}" font-size="12">{label[3:]}</text>',
+        ]
+    lines += [
+        f'<text class="dim" x="{left}" y="{top + plot + 30}" font-size="14">X range [{minimum_x}, {maximum_x}]</text>',
+        f'<text class="dim" x="{left + plot - 180}" y="{top + plot + 30}" font-size="14">Z range [{minimum_z}, {maximum_z}]</text>',
+        '<text class="dim" x="92" y="730" font-size="13">Points prove this replay path only. They do not establish terrain triangles, a complete world map, global axes, or LOD selection.</text>',
+        '</svg>',
+    ]
+    return "\n".join(lines) + "\n"
 
 
 def main() -> None:
@@ -137,10 +230,12 @@ def main() -> None:
     }
     json_path = ROOT / "analysis/data/workspace_template_copies.json"
     markdown_path = ROOT / "analysis/data/workspace_template_copies.md"
+    svg_path = ROOT / "analysis/plots/workspace_template_placements_xz.svg"
     json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     markdown_path.write_text(markdown(rows), encoding="utf-8")
+    svg_path.write_text(svg(rows), encoding="utf-8")
     consumed = sum(row["observed_later_builder_frame"] is not None for row in rows)
-    print(f"wrote {json_path.relative_to(ROOT)} and {markdown_path.relative_to(ROOT)} "
+    print(f"wrote {json_path.relative_to(ROOT)}, {markdown_path.relative_to(ROOT)}, and {svg_path.relative_to(ROOT)} "
           f"({len(rows)} copies, {consumed} later builder reads)")
 
 

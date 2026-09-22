@@ -20,7 +20,11 @@
       "workspace_cell": "$C49AD0",
       "workspace_header_word": "$0058",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 1,
@@ -35,7 +39,19 @@
       "workspace_cell": "$C4A970",
       "workspace_header_word": "$0046",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 18038
+      "observed_later_builder_trace_index": 18038,
+      "runtime_placement_record": "$C4F03A",
+      "runtime_descriptor": "$C22700",
+      "runtime_coordinate_words_unsigned": [
+        88,
+        0,
+        456
+      ],
+      "runtime_coordinate_words_signed": [
+        88,
+        0,
+        456
+      ]
     },
     {
       "copy_frame": 1,
@@ -50,7 +66,19 @@
       "workspace_cell": "$C4A9D0",
       "workspace_header_word": "$0046",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 18243
+      "observed_later_builder_trace_index": 18243,
+      "runtime_placement_record": "$C4F052",
+      "runtime_descriptor": "$C22700",
+      "runtime_coordinate_words_unsigned": [
+        65418,
+        0,
+        400
+      ],
+      "runtime_coordinate_words_signed": [
+        -118,
+        0,
+        400
+      ]
     },
     {
       "copy_frame": 1,
@@ -65,7 +93,19 @@
       "workspace_cell": "$C4A9D6",
       "workspace_header_word": "$004B",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 18415
+      "observed_later_builder_trace_index": 18415,
+      "runtime_placement_record": "$C4F06A",
+      "runtime_descriptor": "$C22764",
+      "runtime_coordinate_words_unsigned": [
+        65485,
+        0,
+        384
+      ],
+      "runtime_coordinate_words_signed": [
+        -51,
+        0,
+        384
+      ]
     },
     {
       "copy_frame": 1,
@@ -80,7 +120,19 @@
       "workspace_cell": "$C4AA30",
       "workspace_header_word": "$006F",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 18620
+      "observed_later_builder_trace_index": 18620,
+      "runtime_placement_record": "$C4F082",
+      "runtime_descriptor": "$C22A34",
+      "runtime_coordinate_words_unsigned": [
+        65312,
+        0,
+        416
+      ],
+      "runtime_coordinate_words_signed": [
+        -224,
+        0,
+        416
+      ]
     },
     {
       "copy_frame": 1,
@@ -95,7 +147,19 @@
       "workspace_cell": "$C4AB50",
       "workspace_header_word": "$004C",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 18891
+      "observed_later_builder_trace_index": 18891,
+      "runtime_placement_record": "$C4F09A",
+      "runtime_descriptor": "$C22778",
+      "runtime_coordinate_words_unsigned": [
+        65452,
+        0,
+        340
+      ],
+      "runtime_coordinate_words_signed": [
+        -84,
+        0,
+        340
+      ]
     },
     {
       "copy_frame": 1,
@@ -110,7 +174,19 @@
       "workspace_cell": "$C4AB56",
       "workspace_header_word": "$0073",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 19064
+      "observed_later_builder_trace_index": 19064,
+      "runtime_placement_record": "$C4F0B2",
+      "runtime_descriptor": "$C22A84",
+      "runtime_coordinate_words_unsigned": [
+        65472,
+        0,
+        288
+      ],
+      "runtime_coordinate_words_signed": [
+        -64,
+        0,
+        288
+      ]
     },
     {
       "copy_frame": 1,
@@ -125,7 +201,19 @@
       "workspace_cell": "$C4ACD0",
       "workspace_header_word": "$0074",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 19368
+      "observed_later_builder_trace_index": 19368,
+      "runtime_placement_record": "$C4F0CA",
+      "runtime_descriptor": "$C22A98",
+      "runtime_coordinate_words_unsigned": [
+        65472,
+        0,
+        192
+      ],
+      "runtime_coordinate_words_signed": [
+        -64,
+        0,
+        192
+      ]
     },
     {
       "copy_frame": 1,
@@ -140,7 +228,19 @@
       "workspace_cell": "$C4B090",
       "workspace_header_word": "$006C",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 19837
+      "observed_later_builder_trace_index": 19837,
+      "runtime_placement_record": "$C4F0E2",
+      "runtime_descriptor": "$C229F8",
+      "runtime_coordinate_words_unsigned": [
+        65216,
+        0,
+        320
+      ],
+      "runtime_coordinate_words_signed": [
+        -320,
+        0,
+        320
+      ]
     },
     {
       "copy_frame": 1,
@@ -155,7 +255,19 @@
       "workspace_cell": "$C4B0F0",
       "workspace_header_word": "$006D",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 20040
+      "observed_later_builder_trace_index": 20040,
+      "runtime_placement_record": "$C4F0FA",
+      "runtime_descriptor": "$C22A0C",
+      "runtime_coordinate_words_unsigned": [
+        65120,
+        0,
+        288
+      ],
+      "runtime_coordinate_words_signed": [
+        -416,
+        0,
+        288
+      ]
     },
     {
       "copy_frame": 1,
@@ -170,7 +282,19 @@
       "workspace_cell": "$C4B270",
       "workspace_header_word": "$006E",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 20343
+      "observed_later_builder_trace_index": 20343,
+      "runtime_placement_record": "$C4F112",
+      "runtime_descriptor": "$C22A20",
+      "runtime_coordinate_words_unsigned": [
+        65088,
+        0,
+        192
+      ],
+      "runtime_coordinate_words_signed": [
+        -448,
+        0,
+        192
+      ]
     },
     {
       "copy_frame": 1,
@@ -185,7 +309,19 @@
       "workspace_cell": "$C4BA50",
       "workspace_header_word": "$0061",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 21272
+      "observed_later_builder_trace_index": 21272,
+      "runtime_placement_record": "$C4F12A",
+      "runtime_descriptor": "$C2291C",
+      "runtime_coordinate_words_unsigned": [
+        64960,
+        0,
+        64
+      ],
+      "runtime_coordinate_words_signed": [
+        -576,
+        0,
+        64
+      ]
     },
     {
       "copy_frame": 1,
@@ -200,7 +336,19 @@
       "workspace_cell": "$C4BA56",
       "workspace_header_word": "$0062",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 21442
+      "observed_later_builder_trace_index": 21442,
+      "runtime_placement_record": "$C4F142",
+      "runtime_descriptor": "$C22930",
+      "runtime_coordinate_words_unsigned": [
+        64928,
+        0,
+        0
+      ],
+      "runtime_coordinate_words_signed": [
+        -608,
+        0,
+        0
+      ]
     },
     {
       "copy_frame": 1,
@@ -215,7 +363,19 @@
       "workspace_cell": "$C4BB70",
       "workspace_header_word": "$0063",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 21711
+      "observed_later_builder_trace_index": 21711,
+      "runtime_placement_record": "$C4F15A",
+      "runtime_descriptor": "$C22944",
+      "runtime_coordinate_words_unsigned": [
+        65024,
+        0,
+        65504
+      ],
+      "runtime_coordinate_words_signed": [
+        -512,
+        0,
+        -32
+      ]
     },
     {
       "copy_frame": 1,
@@ -230,7 +390,19 @@
       "workspace_cell": "$C4BBD0",
       "workspace_header_word": "$0064",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 21916
+      "observed_later_builder_trace_index": 21916,
+      "runtime_placement_record": "$C4F172",
+      "runtime_descriptor": "$C22958",
+      "runtime_coordinate_words_unsigned": [
+        64992,
+        0,
+        65504
+      ],
+      "runtime_coordinate_words_signed": [
+        -544,
+        0,
+        -32
+      ]
     },
     {
       "copy_frame": 1,
@@ -245,7 +417,19 @@
       "workspace_cell": "$C4BBD6",
       "workspace_header_word": "$0065",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 22087
+      "observed_later_builder_trace_index": 22087,
+      "runtime_placement_record": "$C4F18A",
+      "runtime_descriptor": "$C2296C",
+      "runtime_coordinate_words_unsigned": [
+        64896,
+        0,
+        65504
+      ],
+      "runtime_coordinate_words_signed": [
+        -640,
+        0,
+        -32
+      ]
     },
     {
       "copy_frame": 1,
@@ -260,7 +444,19 @@
       "workspace_cell": "$C4BC30",
       "workspace_header_word": "$0066",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 22291
+      "observed_later_builder_trace_index": 22291,
+      "runtime_placement_record": "$C4F1A2",
+      "runtime_descriptor": "$C22980",
+      "runtime_coordinate_words_unsigned": [
+        64864,
+        0,
+        65440
+      ],
+      "runtime_coordinate_words_signed": [
+        -672,
+        0,
+        -96
+      ]
     },
     {
       "copy_frame": 1,
@@ -275,7 +471,19 @@
       "workspace_cell": "$C4BC90",
       "workspace_header_word": "$0059",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 22495
+      "observed_later_builder_trace_index": 22495,
+      "runtime_placement_record": "$C4F1BA",
+      "runtime_descriptor": "$C2287C",
+      "runtime_coordinate_words_unsigned": [
+        65248,
+        0,
+        65344
+      ],
+      "runtime_coordinate_words_signed": [
+        -288,
+        0,
+        -192
+      ]
     },
     {
       "copy_frame": 1,
@@ -290,7 +498,19 @@
       "workspace_cell": "$C4BDB0",
       "workspace_header_word": "$0067",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 22766
+      "observed_later_builder_trace_index": 22766,
+      "runtime_placement_record": "$C4F1D2",
+      "runtime_descriptor": "$C22994",
+      "runtime_coordinate_words_unsigned": [
+        64832,
+        0,
+        65344
+      ],
+      "runtime_coordinate_words_signed": [
+        -704,
+        0,
+        -192
+      ]
     },
     {
       "copy_frame": 1,
@@ -305,7 +525,19 @@
       "workspace_cell": "$C4BE10",
       "workspace_header_word": "$0068",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 22970
+      "observed_later_builder_trace_index": 22970,
+      "runtime_placement_record": "$C4F1EA",
+      "runtime_descriptor": "$C229A8",
+      "runtime_coordinate_words_unsigned": [
+        65184,
+        0,
+        65248
+      ],
+      "runtime_coordinate_words_signed": [
+        -352,
+        0,
+        -288
+      ]
     },
     {
       "copy_frame": 1,
@@ -320,7 +552,19 @@
       "workspace_cell": "$C4BE70",
       "workspace_header_word": "$0060",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 23174
+      "observed_later_builder_trace_index": 23174,
+      "runtime_placement_record": "$C4F202",
+      "runtime_descriptor": "$C22908",
+      "runtime_coordinate_words_unsigned": [
+        65088,
+        0,
+        65184
+      ],
+      "runtime_coordinate_words_signed": [
+        -448,
+        0,
+        -352
+      ]
     },
     {
       "copy_frame": 1,
@@ -335,7 +579,11 @@
       "workspace_cell": "$C4CC50",
       "workspace_header_word": "$005D",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 1,
@@ -350,7 +598,11 @@
       "workspace_cell": "$C4CCB0",
       "workspace_header_word": "$005E",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 1,
@@ -365,7 +617,11 @@
       "workspace_cell": "$C4CE30",
       "workspace_header_word": "$005F",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 1,
@@ -380,7 +636,19 @@
       "workspace_cell": "$C4D250",
       "workspace_header_word": "$002A",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 25423
+      "observed_later_builder_trace_index": 25423,
+      "runtime_placement_record": "$C4F292",
+      "runtime_descriptor": "$C224D0",
+      "runtime_coordinate_words_unsigned": [
+        65520,
+        0,
+        112
+      ],
+      "runtime_coordinate_words_signed": [
+        -16,
+        0,
+        112
+      ]
     },
     {
       "copy_frame": 1,
@@ -395,7 +663,19 @@
       "workspace_cell": "$C4D256",
       "workspace_header_word": "$0070",
       "observed_later_builder_frame": 2,
-      "observed_later_builder_trace_index": 25595
+      "observed_later_builder_trace_index": 25595,
+      "runtime_placement_record": "$C4F2AA",
+      "runtime_descriptor": "$C22A48",
+      "runtime_coordinate_words_unsigned": [
+        65472,
+        0,
+        64
+      ],
+      "runtime_coordinate_words_signed": [
+        -64,
+        0,
+        64
+      ]
     },
     {
       "copy_frame": 2,
@@ -410,7 +690,11 @@
       "workspace_cell": "$C4D3D0",
       "workspace_header_word": "$0071",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 2,
@@ -425,7 +709,11 @@
       "workspace_cell": "$C4D3D6",
       "workspace_header_word": "$002C",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 2,
@@ -440,7 +728,11 @@
       "workspace_cell": "$C4D3DC",
       "workspace_header_word": "$002B",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 2,
@@ -455,7 +747,11 @@
       "workspace_cell": "$C4D430",
       "workspace_header_word": "$0072",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 2,
@@ -470,7 +766,11 @@
       "workspace_cell": "$C4D5B0",
       "workspace_header_word": "$005A",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 3,
@@ -485,7 +785,11 @@
       "workspace_cell": "$C49C50",
       "workspace_header_word": "$0056",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 3,
@@ -500,7 +804,11 @@
       "workspace_cell": "$C49DD0",
       "workspace_header_word": "$004A",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 3,
@@ -515,7 +823,11 @@
       "workspace_cell": "$C4AD90",
       "workspace_header_word": "$002A",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 3,
@@ -530,7 +842,11 @@
       "workspace_cell": "$C4B2D0",
       "workspace_header_word": "$004A",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 3,
@@ -545,7 +861,11 @@
       "workspace_cell": "$C4C170",
       "workspace_header_word": "$002D",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     },
     {
       "copy_frame": 3,
@@ -560,7 +880,11 @@
       "workspace_cell": "$C4C176",
       "workspace_header_word": "$002D",
       "observed_later_builder_frame": null,
-      "observed_later_builder_trace_index": null
+      "observed_later_builder_trace_index": null,
+      "runtime_placement_record": null,
+      "runtime_descriptor": null,
+      "runtime_coordinate_words_unsigned": null,
+      "runtime_coordinate_words_signed": null
     }
   ]
 }
