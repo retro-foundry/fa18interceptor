@@ -17,6 +17,15 @@ reads 103 of those cells at `$C1DD36`, emitting a descriptor-qualified runtime
 placement record for each. Every one of those 103 emitted triples has a zero
 middle coordinate word.
 
+The export also preserves the selected descriptor's immutable `+8` field for
+every emitted record. On the established generic route this is the value
+copied to `$C45A36`, the later projection control-stream input. In this
+map-mode set those fields include `$C0DD30`, `$C0DB50`, `$C08758`, `$C37854`,
+`$C3A858`, and scene-family addresses such as `$C3723E`/`$C37218`. They are
+therefore concrete descriptor-to-control candidates tied to active flat map
+placements. A descriptor type gate can bypass the generic route, so the table
+does not assert that each candidate was projected or rasterized.
+
 The machine-readable [copy-to-placement inventory](workspace_template_copies_run003_m_appearance_25f.json)
 retains every source address, source byte/words, workspace cell, descriptor,
 and emitted triple. Its [readable table](workspace_template_copies_run003_m_appearance_25f.md)
