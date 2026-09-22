@@ -33,21 +33,25 @@ axis or an entire-map extent.
 Seven static sources are joined to emitted placements in both windows. Each
 has a different output tuple:
 
-| static source | frames 404--426 output | frames 5253--5255 output |
+| static source | frames 404--426 descriptor / output | frames 5253--5255 descriptor / output |
 | --- | --- | --- |
-| `$C4264D` | `(76, 0, 428)` | `(11008, 0, 6400)` |
-| `$C4265F` | `(-64, 0, 448)` | `(8864, 0, 9216)` |
-| `$C42665` | `(-112, 0, 432)` | `(13120, 0, 8192)` |
-| `$C42683` | `(-148, 0, 416)` | `(2048, 0, 10240)` |
-| `$C426A1` | `(-64, 0, 320)` | `(11024, 0, 5376)` |
-| `$C426A7` | `(-68, 0, 348)` | `(12288, 0, 2048)` |
-| `$C426C5` | `(-64, 0, 192)` | `(12288, 0, -4096)` |
+| `$C4264D` | `$C22408` / `(76, 0, 428)` | `$C22700` / `(11008, 0, 6400)` |
+| `$C4265F` | `$C22818` / `(-64, 0, 448)` | `$C22700` / `(8864, 0, 9216)` |
+| `$C42665` | `$C22318` / `(-112, 0, 432)` | `$C22764` / `(13120, 0, 8192)` |
+| `$C42683` | `$C22458` / `(-148, 0, 416)` | `$C22A34` / `(2048, 0, 10240)` |
+| `$C426A1` | `$C22368` / `(-64, 0, 320)` | `$C22778` / `(11024, 0, 5376)` |
+| `$C426A7` | `$C22AAC` / `(-68, 0, 348)` | `$C22A84` / `(12288, 0, 2048)` |
+| `$C426C5` | `$C22390` / `(-64, 0, 192)` | `$C22A98` / `(12288, 0, -4096)` |
 
 Therefore the source entries in segments 66--67 are reusable templates, not
 fixed global terrain-position records. The placement builder combines each
-template with mutable context before writing its runtime tuple. This is
-consistent with a tiled or paged world representation, but does not by itself
-prove a grid, identify map-cell coordinates, or establish LOD.
+template with mutable context before writing its runtime tuple. The seven
+matched sources also select different descriptor records between these widely
+separated windows. This is a real context-dependent descriptor substitution,
+but not LOD evidence: page selection, flight/control state, and camera
+distance all differ together. A valid LOD test must hold the source page and
+item context fixed while varying only a measured distance, then connect the
+descriptor substitution to a changed static model/face family.
 
 For visual checks, the two diagnostics are
 [frames 404--426 X/Z plot](../plots/workspace_template_placements_xz_404_426.svg)
