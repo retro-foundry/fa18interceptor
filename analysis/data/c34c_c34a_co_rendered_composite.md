@@ -10,3 +10,5 @@ The C34C five-face component and the much larger `$C34A9A/$C34A9C` face family s
 This makes a common composite renderer pass plausible. It is compatible with the C34C detail being a forward/nose-like or other supplemental part of the aircraft-like C34A family. It does **not** prove that the static vertex sources belong to one immutable model, because `$C34A9A` still lacks its own source transform and uses a distinct mutable workspace.
 
 The discriminating evidence is deliberately retained as dataflow rather than an object-name claim: C34C faces use `$C46228` and `$C45BEA`; C34A faces use `$C48390` and `$C34A9A`.
+
+A captured `$C1F99A` lane beginning at `$C48390` resolves to `$C485E2`, not the `$C483xx-$C484xx` C34A face records. [That rejected source candidate](../routines/c1f99a_descriptor_lane.md) prevents this common pass from becoming an unsupported shared-static-mesh claim.
