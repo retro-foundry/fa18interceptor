@@ -58,10 +58,22 @@ Copper page setup.  This supports the page-presentation interpretation, but
 these are generic renderer/blitter code addresses, not a recovered coastline
 asset reader or an association with the 3D terrain-template directory.
 
+The transition's reconstructed blitter jobs also rule out a tempting false
+asset boundary.  During frames 1--8, `$C304F4` jobs read and write addresses
+within `$006000-$007FFF`, while paired jobs write the same family of addresses
+as `B`/`D` destinations.  Other jobs in those pairs use the pending map page
+as `B`/`D`.  The `$006000-$007FFF` range is therefore mutable renderer scratch
+in this scenario; matching bytes in separated snapshots do not establish an
+immutable coastline resource there.  No enabled input channel has yet been
+traced from a separately proven static map/terrain range to the completed map
+planes.
+
 Authority: deterministic no-input renders
 `build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
 `build/run003_m_map_appearance_trace/{trace.jsonl,custom_writes.jsonl}` from
-the sealed `build/run003_m_visual_5/state.bin` checkpoint.
+the sealed `build/run003_m_visual_5/state.bin` checkpoint; complete
+transaction reconstruction is
+`build/run003_m_map_appearance_blitter_jobs.json`.
 
 ## Boundary
 
