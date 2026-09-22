@@ -1,0 +1,15 @@
+{
+  "vertex_source": {
+    "start": "$C3B588",
+    "count": 5,
+    "classification": "five direct triples consumed by C1F4AC/C1F524"
+  },
+  "faces": [
+    {"context": "$C3B4FE", "record": "$C3B516", "indices": [0, 1, 4]},
+    {"context": "$C3B4FE", "record": "$C3B522", "indices": [1, 2, 4]},
+    {"context": "$C3B4FE", "record": "$C3B53C", "indices": [2, 3, 4]},
+    {"context": "$C3B4FE", "record": "$C3B556", "indices": [3, 0, 4]},
+    {"context": "$C3B50A", "record": "$C3B574", "indices": [0, 1, 2, 3]}
+  ],
+  "qualification": "Faces map only static C2005C offset records whose offsets are 0, 6, 12, 18, or 24; no unseen faces or links are inferred."
+}

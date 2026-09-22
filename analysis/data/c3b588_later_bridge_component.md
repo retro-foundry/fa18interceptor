@@ -39,9 +39,16 @@ families occur in the later-bridge checkpoint; this establishes a drawable
 bridge component, but not its full landmark identity, instancing count, or
 unseen faces.
 
+[The static orthographic sheet](../plots/c3b588_later_bridge_component_static_topology.png)
+maps the five observed face-offset records directly onto the five local input
+triples.  It is a five-face pyramid/wedge topology in source coordinates;
+that geometric description is evidence-based, while its scene identity is
+still intentionally unnamed.
+
 Authorities:
 
 - `build/run031_frame14500_c3b588_{following_trace,occ2_following_trace}/trace.jsonl`;
 - `build/run031_frame14500_c3b588_instance_geometry/instance_geometry.json`;
+- `analysis/data/c3b588_later_bridge_component_face_topology.json`;
 - `build/run031_frame14500_bridge_checkpoint/slow.bin` and the run033
   `frame{05250,05500,06000,06250}` checkpoint `slow.bin` snapshots.
