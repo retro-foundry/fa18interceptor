@@ -25,7 +25,21 @@ On the frame-1 route, `$C1D21C`, `$C1D224`, and `$C1D22C` copy `$C45948`, `$C459
 
 At `$C1D376` the shared band walk loads `-26(A6)` into `D1`; at `$C1D388` it loads `-28(A6)` into `D0`. The selector path then applies its static control-byte transforms and calls `$C1D3F4` with a static group index plus the live row term. This accounts for the two different ranges in the trace: the frame-1 calls have row terms `$000F-$0012`, while frame-3 calls have `$0040-$0043`.
 
-## One upstream producer is proven
+## Upstream producers
+
+The snapshot-valid static writer at `$C1C8B0-$C1C8F8` produces the first
+pack before the calls to `$C1D10C` at `$C1C920` and `$C1C946`. If `$C45785`
+is clear, it resolves `A1=$C46184 + word($C458DE)`, reads words at `A1+$06`
+and `A1+$08`, arithmetic-shifts each right by two, and stores the results to
+`$C45948` and `$C4594A` at `$C1C8F2/$C1C8F8`. If `$C45785` is set, it
+instead derives the two words from the high words of `$C45C3E` and `$C45C46`
+with an arithmetic right shift by eight before joining the same stores.
+
+Thus, the first pack is not an untraced mystery source: it is either a
+coarsened view of two current-control-record words, or an alternate dynamic
+source from the `$C45C3E/$C45C46` pair. The exact mode and source values for
+the captured frame-1 call still require a bounded execution trace; this
+static writer contract alone must not be promoted to a coordinate claim.
 
 For the second pack only, the observed `$C1C63E` path gives an immediate runtime producer. Provided `$C45785` is clear, it establishes `A3=$C46184 + word($C458DE)`, calls `$C1C7F6`, then writes:
 
@@ -37,7 +51,7 @@ $C1C6E4: byte(A3 + $0A) -> $C45851
 
 `$C1C6EC-$C1C70C` also derives `$C45850` from the low two bits of the two words. The alternative observed path at `$C1C716` derives comparable values from `$C45C3E/$C45C46`, then compares them against `$C4594C/$C4594E` at `$C1C7CE/$C1C7DE` before setting a request bit in `$C45858`.
 
-This is evidence that the second selector pack is fed by mutable runtime state and a record family rooted at `$C46184`, not directly by the byte-stable segment-65 control stream. Other independently reconstructed consumers call `$C458DE` the current control-record byte offset: `$C2DAF2` adds it to `$C46184` before reading that record's angle at `+$68`, and the bounded raw `R` command uses the selected record's radar-range field. That makes a terrain-source reading less likely, but does not prove what the two selector words mean spatially, where `$C458DE` originates, or that the control-record family is authoritative terrain data. No writer for the first pack (`$C45948/$C4594A`) is established by these bounded traces.
+This is evidence that both selector packs are fed by mutable runtime state and a record family rooted at `$C46184`, not directly by the byte-stable segment-65 control stream. Other independently reconstructed consumers call `$C458DE` the current control-record byte offset: `$C2DAF2` adds it to `$C46184` before reading that record's angle at `+$68`, and the bounded raw `R` command uses the selected record's radar-range field. That makes a terrain-source reading less likely, but does not prove what the selector words mean spatially, where `$C458DE` originates, or that the control-record family is authoritative terrain data.
 
 ## Consequence for map and LOD claims
 
