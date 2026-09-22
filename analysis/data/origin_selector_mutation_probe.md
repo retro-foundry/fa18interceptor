@@ -140,6 +140,14 @@ selector-window evidence, not a statement about physical axis scale. See the
 [group-bin-8 inventory](static_template_selector_groups_origin_group_08.md)
 and [group-bin-8 copy inventory](workspace_template_copies_origin_group_08.md).
 
+Group bin 12 (`$C45C46=$0C000000`) returns normally after 35,811 stepped
+instructions and selects 5 streams, 10 copies, and 4 later builder reads.
+This supplies a group-axis intermediate threshold between bin 8's four-stream
+subset and the bin-16 control window. The different row/group threshold
+profiles remain selector behavior, not physical scale evidence. See the
+[group-bin-12 inventory](static_template_selector_groups_origin_group_0c.md)
+and [group-bin-12 copy inventory](workspace_template_copies_origin_group_0c.md).
+
 Row bin 12 (`$C45C3E=$0C000000`) returns normally after 38,056 stepped
 instructions and selects 8 streams, 18 copies, and 14 later builder reads.
 Together with bins 0, 8, and 16, this is a local stepped expansion
