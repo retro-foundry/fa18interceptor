@@ -17,6 +17,21 @@ control-walker entries at indices 86,922 and 87,843 have `A1=$C36232`.
 The direct source boundary is therefore `$C36220-$C36231` (18 bytes). The
 following `$C36232` begins static control data, not a fourth triple.
 
+The `$C36232` control word reaches the reconstructed `$C212B0` offset-pair
+submitter with `A2=$C36234`. Its static payload is:
+
+```text
+selector $0008
+pair     $0000, $0006
+pair     $0006, $800C  ; negative second word terminates the list
+```
+
+With `$C48390`'s six-byte transformed-triple stride, this selects exact local
+edges `slot 0 -> slot 1` and `slot 1 -> slot 2`. The static line context is
+`A5=$C36216` in the first trace interval and `$C36212` in the repeated one.
+Thus the component has decoded source-order polyline topology, not only
+screen-space endpoint evidence.
+
 Each walker interval reaches two `$C2FA7E` calls. The first uses static
 `A5=$C36216`, the second `A5=$C36212`; both intervals produce the same two
 logical screen segments:
@@ -45,4 +60,5 @@ not evidence against the separately proven flat placement layer.
 
 Authority: sealed `captures/run003`; ignored
 `build/run003_m_map_appearance_trace/{trace.jsonl,slow.bin}`; and the
-[reproducible renderer census](run003_m_map_display_renderer_census.md).
+[reproducible renderer census](run003_m_map_display_renderer_census.md), with
+the byte-exact [`$C212B0` source](../../source_amiga/observed/submit_offset_pair_segments.asm).

@@ -18,3 +18,6 @@ entries remain input/control/line exports rather than guessed surface meshes.
 `$C35BDE -> $C35BF0` additionally has a decoded static offset-pair list, so
 its two selected local edges (`0 -> 1 -> 2`) are documented in the
 [polyline component contract](c35bde_c35bf0_map_polyline_component.md).
+
+`$C36220 -> $C36232` has the same decoded two-edge local polyline topology;
+see the [three-triple line component](c36220_c36232_map_line_component.md).
