@@ -74,6 +74,10 @@ and [run035 stable inventory](../data/run035_m_map_stable_polygon_static_packets
 The live selector samples are in the
 [appearance state](../data/run035_m_map_appearance_packet_runtime_state.md)
 and [stable state](../data/run035_m_map_stable_packet_runtime_state.md).
+Across the three bounded inventories, the
+[segment-68 trace-coverage report](../data/m_map_segment68_trace_coverage.md)
+records 23 distinct packet headers, 27 selected streams, and 384 unique
+coordinate pairs (24.68% of the segment's bytes as exact pair payload).
 The depth-metric producer is byte-exact in
 [`prepare_map_depth_detail_metric.asm`](../../source_amiga/observed/prepare_map_depth_detail_metric.asm).
 For the four headers observed on both routes, the
