@@ -10,7 +10,7 @@
       "triple_count": 5,
       "observed_faces": 5,
       "contexts": ["$C3B4FE", "$C3B50A"],
-      "identity": "unnamed shared scene pyramid component; terrain versus constructed-object identity unresolved"
+      "identity": "green terrain/mountain component behind the red Golden Gate bridge in run033; not bridge geometry"
     }
   ],
   "exclude_as_mutable_renderer_state": [

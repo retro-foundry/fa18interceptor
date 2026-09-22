@@ -1,4 +1,4 @@
-# `$C3B588-$C3B5A5`: shared scene pyramid component input boundary
+# `$C3B588-$C3B5A5`: shared terrain/mountain component input boundary
 
 Classification: **trace-proven five-triple transform input with two static
 renderer face/control families**.  This is an exportable shared scene-component
@@ -39,15 +39,16 @@ the later-bridge checkpoint **and**, independently, in run033's frame-5,500
 red Golden Gate window: the first bounded `$C3B588` occurrence there reaches
 `$C3B50A` (ten polygons and four line submissions before the next transform).
 The input is consequently a shared scene component, not evidence for a
-landmark-specific mesh.  Its pyramid topology is compatible with terrain as
-well as a constructed object; its full scene identity, instancing count, and
-unseen faces remain unproven.
+landmark-specific mesh.  The user's visual identification resolves its scene
+role: it is a **green mountain behind the red Golden Gate bridge** in the
+run033 view.  It is therefore terrain, not bridge geometry.  Its instancing
+count and unseen faces remain unproven.
 
 [The static orthographic sheet](../plots/c3b588_later_bridge_component_static_topology.png)
 maps the five observed face-offset records directly onto the five local input
-triples.  It is a five-face pyramid/wedge topology in source coordinates;
-that geometric description is evidence-based, while its scene identity is
-still intentionally unnamed.
+triples.  It is a five-face pyramid/wedge terrain topology in source
+coordinates; the user supplies the scene identification, while the geometry
+and topology remain trace-proven.
 
 Authorities:
 
