@@ -20,6 +20,9 @@ The first words of each stream are retained in the ignored raw collector
 output. `$C1F6F8` is the proven projection-path control walker, so this
 observation joins the map-mode scenario to immutable 3D scene-control inputs,
 in addition to its already traced static-template-to-flat-placement chain.
+The observed `$C36214` entry is followed into its offset-selected
+transformed-triple and projected-segment handler in the
+[bounded control trace](run003_m_map_c36214_control_trace.md).
 
 This does not identify any stream as the full map, Golden Gate, coastline, or
 terrain mesh. The collector single-steps through a full host frame after each

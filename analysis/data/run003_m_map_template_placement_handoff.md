@@ -52,7 +52,9 @@ words a global-coordinate meaning, or prove a universal no-elevation rule.
 A separate no-input map-mode collector does reach the `$C1F6F8` projection
 walker with static segment-42/43 control streams. That establishes map-mode
 3D control activity, but not ownership of one of the placements above; see
-[the control-stream entries](run003_m_map_control_streams.md).
+[the control-stream entries](run003_m_map_control_streams.md). One map-mode
+segment-43 stream is followed through its transformed-triple and
+projected-segment route in [the `$C36214` control trace](run003_m_map_c36214_control_trace.md).
 
 Authority: sealed `captures/run003`; `build/run003_m_visual_5/state.bin`; the
 deterministic `build/run003_m_map_appearance_25f_trace` trace/snapshots; and
