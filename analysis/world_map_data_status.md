@@ -26,6 +26,7 @@ called the complete world map.
 | Where does that live origin come from? | `$C29042` derives it through the active `$C46184+$C458DE` control record's matrix/transform path, stores all three components at `$C45C3E/$C45C42/$C45C46`, and later adjusts them through an accumulator. It is live derived state, not a static template copy. | [active-origin update](routines/c29042_active_origin_update.md) |
 | Are the renderer's projected triples the source map? | No. `$C45630-$C48383` and `$C48390-$C4E76B` are mutable workspaces; static source extraction from either would be wrong. | [geometry boundary report](model_geometry_boundaries.md) |
 | Does `M` identify map data? | Not yet. Raw `$37` reaches `$C1BF8C`, sets a request bit, and enters a long helper.  The post-helper static tail initializes display-transition state, but the helper has no completed return trace and no traced asset/data consumer. | [`M` command contract](routines/c1bf8c_map_command.md) |
+| Does `M` visibly show an in-game map? | Yes. The sealed run003 `M` event changes the cockpit to a stable green/blue coastline-style grid display within 30 frames. Its bitmap producer is still untraced, so the screen is a visual oracle rather than extracted terrain data. | [`M` visual probe](data/run003_m_map_visual_probe.md) |
 
 ## Flatness is not yet a data invariant
 
