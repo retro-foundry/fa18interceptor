@@ -1,0 +1,23 @@
+{
+  "classification": "trace-proven static transform input for an unnamed later-bridge component",
+  "input_range": "$C3B588-$C3B5A5",
+  "triples": [
+    [512, 0, -1024],
+    [-1280, 0, -768],
+    [0, -768, -2048],
+    [0, 0, 1408],
+    [1408, 0, 512]
+  ],
+  "renderer_contract": {
+    "transform": "$C1F4AC/$C1F524",
+    "workspace": "$C48390 slots 0-4",
+    "face_contexts": ["$C3B4FE", "$C3B50A"],
+    "observed_face_records": ["$C3B516", "$C3B522", "$C3B53C", "$C3B556", "$C3B574"],
+    "observed_line_record": "$C3B568"
+  },
+  "exclusions": [
+    "$C3B5A6 and following are not included as source triples",
+    "$C48390 and all submitted/projected triples are mutable renderer state",
+    "this payload does not claim to be a complete later-bridge mesh"
+  ]
+}
