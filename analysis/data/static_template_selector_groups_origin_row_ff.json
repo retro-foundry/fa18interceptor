@@ -1,0 +1,1147 @@
+{
+  "authority": {
+    "trace": "build/run033_origin_row_ff_trace/trace.jsonl",
+    "slow_snapshot": "build/run033_origin_row_ff_trace/slow.bin",
+    "selector_entry_pc": "$C1D3F4",
+    "static_table_base": "$C42390",
+    "stream_start_pc": "$C1D442"
+  },
+  "classification": "traced_static_template_selector_not_world_grid_or_lod_table",
+  "groups": [
+    {
+      "frame": null,
+      "trace_index": 661,
+      "workspace_band": "$C48390",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42642",
+      "bit_gate_taken": false,
+      "group_layout": null,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 714,
+      "workspace_band": "$C48990",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42642",
+      "bit_gate_taken": false,
+      "group_layout": null,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 765,
+      "workspace_band": "$C48F90",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42642",
+      "bit_gate_taken": false,
+      "group_layout": null,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 818,
+      "workspace_band": "$C49590",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C42622",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 5,
+        "threshold_words": [
+          "$000A",
+          "$000C",
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C4262E",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42B66",
+          "$C42646",
+          "$C42B46"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 883,
+      "workspace_band": "$C49B90",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C42608",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 4,
+        "threshold_words": [
+          "$0009",
+          "$000D",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C42612",
+        "stream_pointers": [
+          "$C42956",
+          "$C42950",
+          "$C42706",
+          "$C42BD4"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 948,
+      "workspace_band": "$C4A190",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C42622",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 5,
+        "threshold_words": [
+          "$000A",
+          "$000C",
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C4262E",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42B66",
+          "$C42646",
+          "$C42B46"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1013,
+      "workspace_band": "$C4A790",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C42622",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 5,
+        "threshold_words": [
+          "$000A",
+          "$000C",
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C4262E",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42B66",
+          "$C42646",
+          "$C42B46"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1076,
+      "workspace_band": "$C4AD90",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C42622",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 5,
+        "threshold_words": [
+          "$000A",
+          "$000C",
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C4262E",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42B66",
+          "$C42646",
+          "$C42B46"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1141,
+      "workspace_band": "$C4B390",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C42608",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 4,
+        "threshold_words": [
+          "$0009",
+          "$000D",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C42612",
+        "stream_pointers": [
+          "$C42956",
+          "$C42950",
+          "$C42706",
+          "$C42BD4"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1204,
+      "workspace_band": "$C4B990",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C42608",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 4,
+        "threshold_words": [
+          "$0009",
+          "$000D",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C42612",
+        "stream_pointers": [
+          "$C42956",
+          "$C42950",
+          "$C42706",
+          "$C42BD4"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1269,
+      "workspace_band": "$C4BF90",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C425F4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000C",
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C425FC",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42ADA"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1334,
+      "workspace_band": "$C4C590",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C425F4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000C",
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C425FC",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42ADA"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1397,
+      "workspace_band": "$C4CB90",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C425F4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000C",
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C425FC",
+        "stream_pointers": [
+          "$C42950",
+          "$C42956",
+          "$C42ADA"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 1462,
+      "workspace_band": "$C4D190",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C42608",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 4,
+        "threshold_words": [
+          "$0009",
+          "$000D",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C42612",
+        "stream_pointers": [
+          "$C42956",
+          "$C42950",
+          "$C42706",
+          "$C42BD4"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10292,
+      "workspace_band": "$C48390",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42704",
+      "bit_gate_taken": false,
+      "group_layout": null,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10345,
+      "workspace_band": "$C48990",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42704",
+      "bit_gate_taken": false,
+      "group_layout": null,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10396,
+      "workspace_band": "$C48F90",
+      "table_base": "$C42390",
+      "selector_index": 18,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423B4",
+      "group_record": "$C42704",
+      "bit_gate_taken": false,
+      "group_layout": null,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10449,
+      "workspace_band": "$C49590",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10514,
+      "workspace_band": "$C49B90",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10579,
+      "workspace_band": "$C4A190",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10644,
+      "workspace_band": "$C4A790",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10707,
+      "workspace_band": "$C4AD90",
+      "table_base": "$C42390",
+      "selector_index": 17,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423B2",
+      "group_record": "$C426F0",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000F",
+          "$0010",
+          "$0012"
+        ],
+        "stream_pointer_table": "$C426F8",
+        "stream_pointers": [
+          "$C427B4",
+          "$C427C8",
+          "$C42B3E"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10772,
+      "workspace_band": "$C4B390",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10835,
+      "workspace_band": "$C4B990",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10900,
+      "workspace_band": "$C4BF90",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C426CE",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C426D4",
+        "stream_pointers": [
+          "$C42720",
+          "$C4272E"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 10965,
+      "workspace_band": "$C4C590",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C426CE",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C426D4",
+        "stream_pointers": [
+          "$C42720",
+          "$C4272E"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 11028,
+      "workspace_band": "$C4CB90",
+      "table_base": "$C42390",
+      "selector_index": 15,
+      "selector_live_row_term": "$001E",
+      "selector_table_word_address": "$C423AE",
+      "group_record": "$C426CE",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$000E",
+          "$000F"
+        ],
+        "stream_pointer_table": "$C426D4",
+        "stream_pointers": [
+          "$C42720",
+          "$C4272E"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 11093,
+      "workspace_band": "$C4D190",
+      "table_base": "$C42390",
+      "selector_index": 16,
+      "selector_live_row_term": "$0000",
+      "selector_table_word_address": "$C423B0",
+      "group_record": "$C426DC",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 3,
+        "threshold_words": [
+          "$000E",
+          "$000F",
+          "$0010"
+        ],
+        "stream_pointer_table": "$C426E4",
+        "stream_pointers": [
+          "$C42742",
+          "$C4274A",
+          "$C42788"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 19921,
+      "workspace_band": "$C48390",
+      "table_base": "$C42390",
+      "selector_index": 65,
+      "selector_live_row_term": "$0041",
+      "selector_table_word_address": "$C42412",
+      "group_record": "$C4288E",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 1,
+        "threshold_words": [
+          "$003F"
+        ],
+        "stream_pointer_table": "$C42892",
+        "stream_pointers": [
+          "$C4296A"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 20192,
+      "workspace_band": "$C48990",
+      "table_base": "$C42390",
+      "selector_index": 65,
+      "selector_live_row_term": "$0042",
+      "selector_table_word_address": "$C42412",
+      "group_record": "$C4288E",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 1,
+        "threshold_words": [
+          "$003F"
+        ],
+        "stream_pointer_table": "$C42892",
+        "stream_pointers": [
+          "$C4296A"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 20461,
+      "workspace_band": "$C48F90",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_live_row_term": "$0040",
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 20730,
+      "workspace_band": "$C49590",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_live_row_term": "$0040",
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 20999,
+      "workspace_band": "$C49B90",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_live_row_term": "$0041",
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
+      "row_threshold_count": 2,
+      "live_row_search_key": "$0041",
+      "selected_row_index": 1,
+      "first_template_stream_byte": "$C429D0"
+    },
+    {
+      "frame": null,
+      "trace_index": 21796,
+      "workspace_band": "$C4A190",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_live_row_term": "$0042",
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 22063,
+      "workspace_band": "$C4A790",
+      "table_base": "$C42390",
+      "selector_index": 66,
+      "selector_live_row_term": "$0043",
+      "selector_table_word_address": "$C42414",
+      "group_record": "$C42896",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$003D",
+          "$0041"
+        ],
+        "stream_pointer_table": "$C4289C",
+        "stream_pointers": [
+          "$C4298A",
+          "$C429D0"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 22330,
+      "workspace_band": "$C4AD90",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_live_row_term": "$0041",
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
+      "row_threshold_count": 2,
+      "live_row_search_key": "$0041",
+      "selected_row_index": 0,
+      "first_template_stream_byte": "$C429DE"
+    },
+    {
+      "frame": null,
+      "trace_index": 23124,
+      "workspace_band": "$C4B390",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_live_row_term": "$0043",
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 23391,
+      "workspace_band": "$C4B990",
+      "table_base": "$C42390",
+      "selector_index": 68,
+      "selector_live_row_term": "$0041",
+      "selector_table_word_address": "$C42418",
+      "group_record": "$C428B2",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 8,
+        "threshold_words": [
+          "$0031",
+          "$0034",
+          "$0037",
+          "$003A",
+          "$003D",
+          "$003F",
+          "$0042",
+          "$0049"
+        ],
+        "stream_pointer_table": "$C428C4",
+        "stream_pointers": [
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4298A",
+          "$C429EC",
+          "$C4298A",
+          "$C42B36"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 23658,
+      "workspace_band": "$C4BF90",
+      "table_base": "$C42390",
+      "selector_index": 68,
+      "selector_live_row_term": "$0042",
+      "selector_table_word_address": "$C42418",
+      "group_record": "$C428B2",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 8,
+        "threshold_words": [
+          "$0031",
+          "$0034",
+          "$0037",
+          "$003A",
+          "$003D",
+          "$003F",
+          "$0042",
+          "$0049"
+        ],
+        "stream_pointer_table": "$C428C4",
+        "stream_pointers": [
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4298A",
+          "$C429EC",
+          "$C4298A",
+          "$C42B36"
+        ]
+      },
+      "row_threshold_count": 8,
+      "live_row_search_key": "$0042",
+      "selected_row_index": 6,
+      "first_template_stream_byte": "$C4298A"
+    },
+    {
+      "frame": null,
+      "trace_index": 24231,
+      "workspace_band": "$C4C590",
+      "table_base": "$C42390",
+      "selector_index": 68,
+      "selector_live_row_term": "$0043",
+      "selector_table_word_address": "$C42418",
+      "group_record": "$C428B2",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 8,
+        "threshold_words": [
+          "$0031",
+          "$0034",
+          "$0037",
+          "$003A",
+          "$003D",
+          "$003F",
+          "$0042",
+          "$0049"
+        ],
+        "stream_pointer_table": "$C428C4",
+        "stream_pointers": [
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4295C",
+          "$C4298A",
+          "$C429EC",
+          "$C4298A",
+          "$C42B36"
+        ]
+      },
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
+      "first_template_stream_byte": null
+    },
+    {
+      "frame": null,
+      "trace_index": 24498,
+      "workspace_band": "$C4CB90",
+      "table_base": "$C42390",
+      "selector_index": 67,
+      "selector_live_row_term": "$0042",
+      "selector_table_word_address": "$C42416",
+      "group_record": "$C428A4",
+      "bit_gate_taken": true,
+      "group_layout": {
+        "threshold_count": 2,
+        "threshold_words": [
+          "$0041",
+          "$0042"
+        ],
+        "stream_pointer_table": "$C428AA",
+        "stream_pointers": [
+          "$C429DE",
+          "$C42B5C"
+        ]
+      },
+      "row_threshold_count": 2,
+      "live_row_search_key": "$0042",
+      "selected_row_index": 1,
+      "first_template_stream_byte": "$C42B5C"
+    }
+  ]
+}

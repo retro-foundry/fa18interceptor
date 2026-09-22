@@ -114,6 +114,15 @@ low-bin cutoff in this window. This is still not a global map-extent claim;
 see the [group-zero inventory](static_template_selector_groups_origin_group_zero.md)
 and [group-zero copy inventory](workspace_template_copies_origin_group_zero.md).
 
+A row-axis upper-bin probe (`$C45C3E=$FF000000`, with the group axis unchanged)
+also returns normally after 35,770 stepped instructions and reaches 4 streams,
+with 6 copies and 4 later builder reads. Its reached stream set is the same
+four-stream subset as both zero-bin probes. This establishes only that the
+sampled low-key stream window is absent at both tested outer row bins; it does
+not prove clamp behavior, wrapping behavior outside this trace, or global map
+extent. See the [upper-bin group inventory](static_template_selector_groups_origin_row_ff.md)
+and [upper-bin copy inventory](workspace_template_copies_origin_row_ff.md).
+
 ### Decoded static group-record directory
 
 The accepted group records have a directly observed compact directory format.
