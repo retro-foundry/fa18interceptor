@@ -107,9 +107,12 @@ trace frame 9, `$C1F6F8` enters with `A1=$C3B73E` in immutable scene-family
 storage. Before the trace returns to another walker entry, it reaches four
 `$C2FF48` wrappers with static `A5=$C3B6B0`: two complete through the line
 route and two through the direct span route. This is the strongest currently
-traced map-mode 3D control contribution to the prepared map page. It is not a
-complete `$C3B73E` model export: the input vertices and individual coastline
-pixels remain unassigned.
+traced map-mode 3D control contribution to the prepared map page. The
+immediately preceding map trace also transforms the known five-triple
+immutable input `$C3B720-$C3B73D`; the complete bounded component chain is
+recorded in the [static component boundary](c3b720_c3b6b0_static_component_boundary.md).
+It is not a complete map export, and individual coastline pixels remain
+unassigned.
 
 Authority: deterministic no-input renders
 `build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
