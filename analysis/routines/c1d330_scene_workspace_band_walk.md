@@ -55,7 +55,11 @@ it follows the frame-1 builder activity and precedes the next builder entry at
 frame 2, so it establishes a refresh boundary but not an unconditional
 ``reset then build'' ordering for every game update.  It explains why the
 selector stream only produces placement records for a subset of cells; it does
-not reveal immutable terrain coordinates.
+not reveal immutable terrain coordinates.  One relevant cell is subsequently
+repopulated from a verified static segment-66 template stream; see the
+[workspace template copy](c1d442_workspace_cell_template_copy.md).  That
+selective copy proves an upstream static input without changing the boundary:
+the workspace itself remains mutable and is not terrain source data.
 
 ## Static selector-input boundary
 
