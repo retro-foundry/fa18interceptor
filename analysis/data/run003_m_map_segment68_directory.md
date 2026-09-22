@@ -4,7 +4,7 @@ Classification: **traced 2-D map packet selector**.
 
 C2ADC0 doubles the live X index, C2ADC2 shifts the live Y index by four, and C2ADCE reads a word at C42CA8 plus their sum before C2ADD4 adds it to the base. This proves the 8-word row stride and exports the 8x8 prefix used by the observed path. It does not establish absolute world coordinates, cardinal orientation, that every cell is terrain, or LOD.
 
-The exported prefix is `8x8`, rooted at `$C42CA8` with `16`-byte rows. The trace reads 12 unique cells.
+The exported prefix is `8x8`, rooted at `$C42CA8` with `16`-byte rows. The trace reads 12 unique cells. Two targets account for 59 of the 64 cells; the remaining five targets occur once each.
 
 | y / x | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |

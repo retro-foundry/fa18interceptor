@@ -13,6 +13,11 @@ selector cells, with both terms in `3..6`, are observed. They select packet
 starts including `$C42DC4`, `$C42DFC`, and `$C42E1A`, which subsequently enter
 the static pair-transform/display path.
 
+The directory has seven distinct targets: `$C42E6A` occurs in 31 cells and
+`$C42E52` in 28, while five additional targets occur once each. This is direct
+static reuse evidence; it does not identify either repeated target as empty,
+terrain, a detail level, or a global map boundary.
+
 The full 64-cell static directory and the twelve observed accesses are in the
 [segment-68 directory inventory](../data/run003_m_map_segment68_directory.md).
 This proves a local two-dimensional packet selector, not global world axes,
