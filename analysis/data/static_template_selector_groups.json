@@ -1,6 +1,7 @@
 {
   "authority": {
     "trace": "build/run033_placement_bulk_404_trace/trace.jsonl",
+    "slow_snapshot": "build/run033_placement_bulk_404_trace/slow.bin",
     "selector_entry_pc": "$C1D3F4",
     "static_table_base": "$C42390",
     "stream_start_pc": "$C1D442"
@@ -16,6 +17,9 @@
       "selector_table_word_address": "$C423B4",
       "group_record": "$C42704",
       "bit_gate_taken": false,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -27,6 +31,9 @@
       "selector_table_word_address": "$C423B4",
       "group_record": "$C42704",
       "bit_gate_taken": false,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -38,6 +45,9 @@
       "selector_table_word_address": "$C423B4",
       "group_record": "$C42704",
       "bit_gate_taken": false,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -49,6 +59,9 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "row_threshold_count": 3,
+      "live_row_search_key": "$0012",
+      "selected_row_index": 2,
       "first_template_stream_byte": "$C42B3E"
     },
     {
@@ -60,6 +73,9 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -71,6 +87,9 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -82,6 +101,9 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "row_threshold_count": 3,
+      "live_row_search_key": "$0010",
+      "selected_row_index": 1,
       "first_template_stream_byte": "$C427C8"
     },
     {
@@ -93,6 +115,9 @@
       "selector_table_word_address": "$C423B2",
       "group_record": "$C426F0",
       "bit_gate_taken": true,
+      "row_threshold_count": 3,
+      "live_row_search_key": "$000F",
+      "selected_row_index": 0,
       "first_template_stream_byte": "$C427B4"
     },
     {
@@ -104,6 +129,9 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -115,6 +143,9 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "row_threshold_count": 3,
+      "live_row_search_key": "$000F",
+      "selected_row_index": 1,
       "first_template_stream_byte": "$C4274A"
     },
     {
@@ -126,6 +157,9 @@
       "selector_table_word_address": "$C423AE",
       "group_record": "$C426CE",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -137,6 +171,9 @@
       "selector_table_word_address": "$C423AE",
       "group_record": "$C426CE",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -148,6 +185,9 @@
       "selector_table_word_address": "$C423AE",
       "group_record": "$C426CE",
       "bit_gate_taken": true,
+      "row_threshold_count": 2,
+      "live_row_search_key": "$000F",
+      "selected_row_index": 1,
       "first_template_stream_byte": "$C4272E"
     },
     {
@@ -159,6 +199,9 @@
       "selector_table_word_address": "$C423B0",
       "group_record": "$C426DC",
       "bit_gate_taken": true,
+      "row_threshold_count": 3,
+      "live_row_search_key": "$0010",
+      "selected_row_index": 2,
       "first_template_stream_byte": "$C42788"
     },
     {
@@ -170,6 +213,9 @@
       "selector_table_word_address": "$C42412",
       "group_record": "$C4288E",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -181,6 +227,9 @@
       "selector_table_word_address": "$C42412",
       "group_record": "$C4288E",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -192,6 +241,9 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -203,6 +255,9 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -214,6 +269,9 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "row_threshold_count": 2,
+      "live_row_search_key": "$0041",
+      "selected_row_index": 1,
       "first_template_stream_byte": "$C429D0"
     },
     {
@@ -225,6 +283,9 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -236,6 +297,9 @@
       "selector_table_word_address": "$C42414",
       "group_record": "$C42896",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -247,6 +311,9 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "row_threshold_count": 2,
+      "live_row_search_key": "$0041",
+      "selected_row_index": 0,
       "first_template_stream_byte": "$C429DE"
     },
     {
@@ -258,6 +325,9 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -269,6 +339,9 @@
       "selector_table_word_address": "$C42418",
       "group_record": "$C428B2",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -280,6 +353,9 @@
       "selector_table_word_address": "$C42418",
       "group_record": "$C428B2",
       "bit_gate_taken": true,
+      "row_threshold_count": 8,
+      "live_row_search_key": "$0042",
+      "selected_row_index": 6,
       "first_template_stream_byte": "$C4298A"
     },
     {
@@ -291,6 +367,9 @@
       "selector_table_word_address": "$C42418",
       "group_record": "$C428B2",
       "bit_gate_taken": true,
+      "row_threshold_count": null,
+      "live_row_search_key": null,
+      "selected_row_index": null,
       "first_template_stream_byte": null
     },
     {
@@ -302,6 +381,9 @@
       "selector_table_word_address": "$C42416",
       "group_record": "$C428A4",
       "bit_gate_taken": true,
+      "row_threshold_count": 2,
+      "live_row_search_key": "$0042",
+      "selected_row_index": 1,
       "first_template_stream_byte": "$C42B5C"
     }
   ]
