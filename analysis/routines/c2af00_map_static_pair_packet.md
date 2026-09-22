@@ -18,6 +18,23 @@ display-stage call. The direct header is only captured on 26 batches because
 the remaining batches resume through an enclosing packet path. The packet
 source/header fields and every consumed pair
 are retained in the [static-packet inventory](../data/run003_m_map_polygon_static_packets.md).
+
+Each packet begins with a signed longword.  `$C2AF40` tests the culling/detail
+result in `D7`: zero retains the inline stream immediately after that header;
+non-zero replaces `A3` with the header longword before reading the next count.
+This is a real two-stream selection point.  The selection condition is driven
+by the preceding visibility/detail preparation, but it has not been tied to a
+physical distance or to a specific LOD representation.  In particular, some
+observed packet headers point at their own inline stream, so the two routes
+need not differ.
+
+Of the 26 directly entered headers in the bounded run003 trace, 8 have a
+header pointer different from `header + 4`; the other 18 point straight to
+their inline stream.  At every one of those 26 entries, the trace reaches
+`$C2AF40` with `D7 = 0` and then reaches `$C2AF46` with `A3 = header + 4`.
+Thus the run003 map visibly exercises only the inline route.  The eight
+distinct alternate streams are static candidates for a detail/visibility
+variant, but none is dynamically selected by this evidence.
 The accompanying [raw-coordinate sheet](../plots/run003_m_map_static_pair_packets.png)
 is a visual inspection aid only; it preserves read order without inferring
 closed faces or screen/world alignment.
@@ -39,3 +56,6 @@ python scripts/inventory_map_polygon_static_packets.py \
   --slow build/run003_m_map_appearance_trace/slow.bin \
   --output analysis/data/run003_m_map_polygon_static_packets.json
 ```
+
+The header/stream selection is reconstructed exactly in
+[`select_map_packet_stream_variant.asm`](../../source_amiga/observed/select_map_packet_stream_variant.asm).
