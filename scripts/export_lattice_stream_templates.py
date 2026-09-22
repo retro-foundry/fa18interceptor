@@ -14,7 +14,7 @@ def address(value: int) -> str:
     return f"${value:06X}"
 
 
-def parse_stream(slow: bytes, start: int, descriptors: dict[str, str]) -> list[dict]:
+def parse_stream(slow: bytes, start: int, descriptors: dict[str, str], targets: dict[str, str]) -> list[dict]:
     # `$C1D442` consumes the stream's leading selector/control byte before
     # `$C1D488` reaches its first six-byte template record.  The observed
     # `$C42646 -> $C42647` and `$C42BD4 -> $C42BD5` pairs establish this
@@ -34,6 +34,7 @@ def parse_stream(slow: bytes, start: int, descriptors: dict[str, str]) -> list[d
                   "word_2": f"${int.from_bytes(slow[offset + 3:offset + 5], 'big'):04X}"}
         if header_text in descriptors:
             record["control_window_descriptor"] = descriptors[header_text]
+            record["control_window_descriptor_target"] = targets[descriptors[header_text]]
         records.append(record)
         cursor += 6
 
@@ -59,6 +60,9 @@ def markdown(streams: list[dict], cells: list[dict]) -> str:
         "origin-control trace and are annotated in JSON. This is a control-window association",
         "only: the separate refresh-window comparison proves that a reused static source can",
         "select a different descriptor in another scene context.",
+        "The same annotation includes the descriptor's repeated `+4/+8/+12` static target",
+        "when those three control-window fields agree; this is a renderer-control candidate,",
+        "not an unconditional mesh or LOD assignment.",
         "",
         "| Static stream | records | selector-bin cells |",
         "| --- | ---: | ---: |",
@@ -95,17 +99,26 @@ def main() -> None:
         prior = descriptors.setdefault(header, descriptor)
         if prior != descriptor:
             raise AssertionError(f"control header {header} reaches more than one descriptor")
+    targets: dict[str, str] = {}
+    for descriptor in set(descriptors.values()):
+        offset = int(descriptor[1:], 16) - SLOW_BASE
+        values = [int.from_bytes(slow[offset + delta:offset + delta + 4], "big")
+                  for delta in (4, 8, 12)]
+        if len(set(values)) != 1:
+            raise AssertionError(f"control descriptor {descriptor} has non-repeated target fields")
+        targets[descriptor] = address(values[0])
     refs: dict[str, list[list[int]]] = {}
     for cell in lattice["cells"]:
         for stream in cell["unique_streams"]:
             refs.setdefault(stream, []).append([cell["group_bin"], cell["row_bin"]])
-    streams = [{"stream": stream, "records": parse_stream(slow, int(stream[1:], 16), descriptors),
+    streams = [{"stream": stream, "records": parse_stream(slow, int(stream[1:], 16), descriptors, targets),
                 "selector_cells": refs[stream]}
                for stream in sorted(refs)]
     payload = {"classification": "bounded_selector_lattice_static_templates_not_world_mesh",
                "lattice": "analysis/data/terrain_template_selector_lattice.json",
                "descriptor_authority": "analysis/data/workspace_template_copies_origin_control.json",
                "control_window_header_descriptors": descriptors,
+               "control_window_descriptor_targets": targets,
                "streams": streams}
     args.output_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     args.output_markdown.write_text(markdown(streams, lattice["cells"]), encoding="utf-8")

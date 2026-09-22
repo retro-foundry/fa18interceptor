@@ -78,6 +78,82 @@
     "$56": "$C22840",
     "$4A": "$C22750"
   },
+  "control_window_descriptor_targets": {
+    "$C22A98": "$C4558C",
+    "$C2246C": "$C366E6",
+    "$C22368": "$C4477C",
+    "$C22660": "$C37990",
+    "$C22318": "$C445A2",
+    "$C22994": "$C44E22",
+    "$C22778": "$C4455A",
+    "$C224D0": "$C3B6A6",
+    "$C22764": "$C44500",
+    "$C22598": "$C3723E",
+    "$C22A34": "$C45294",
+    "$C22908": "$C44EF6",
+    "$C22408": "$C35568",
+    "$C229A8": "$C44E8C",
+    "$C22458": "$C36E6A",
+    "$C22610": "$C380D8",
+    "$C22674": "$C379BC",
+    "$C223CC": "$C381FC",
+    "$C22570": "$C08798",
+    "$C22A0C": "$C45192",
+    "$C22480": "$C368D0",
+    "$C224A8": "$C35D88",
+    "$C22A70": "$C4545C",
+    "$C225FC": "$C37EA6",
+    "$C22A20": "$C451FC",
+    "$C22494": "$C35BFC",
+    "$C22444": "$C36A28",
+    "$C22700": "$C3B4F8",
+    "$C22818": "$C447C6",
+    "$C226D8": "$C087FE",
+    "$C22714": "$C35BD0",
+    "$C223F4": "$C08718",
+    "$C22624": "$C37F80",
+    "$C2291C": "$C44B78",
+    "$C22980": "$C44DB8",
+    "$C224E4": "$C37680",
+    "$C22840": "$C3BBD0",
+    "$C224F8": "$C3737C",
+    "$C22638": "$C37B4C",
+    "$C224BC": "$C35E9E",
+    "$C2296C": "$C44D4E",
+    "$C2232C": "$C445DC",
+    "$C2237C": "$C44812",
+    "$C223E0": "$C08928",
+    "$C225C0": "$C38228",
+    "$C225E8": "$C37E56",
+    "$C2241C": "$C355A0",
+    "$C226C4": "$C08892",
+    "$C227F0": "$C44612",
+    "$C226EC": "$C0883E",
+    "$C22804": "$C44732",
+    "$C22430": "$C3623E",
+    "$C22354": "$C4466E",
+    "$C229F8": "$C45128",
+    "$C22958": "$C44CE4",
+    "$C2287C": "$C448B6",
+    "$C22728": "$C36208",
+    "$C22AAC": "$C3B960",
+    "$C225D4": "$C376AC",
+    "$C22A5C": "$C453C4",
+    "$C22890": "$C44970",
+    "$C22930": "$C44C10",
+    "$C22944": "$C44C7A",
+    "$C22390": "$C4483C",
+    "$C22A48": "$C4532C",
+    "$C2269C": "$C37D94",
+    "$C223B8": "$C37218",
+    "$C2264C": "$C37B78",
+    "$C22688": "$C37CF8",
+    "$C22584": "$C36212",
+    "$C22A84": "$C454F4",
+    "$C225AC": "$C373A2",
+    "$C223A4": "$C087AC",
+    "$C22750": "$C3A942"
+  },
   "streams": [
     {
       "stream": "$C42644",
@@ -337,154 +413,176 @@
           "header": "$15",
           "word_1": "$0000",
           "word_2": "$0000",
-          "control_window_descriptor": "$C2232C"
+          "control_window_descriptor": "$C2232C",
+          "control_window_descriptor_target": "$C445DC"
         },
         {
           "source": "$C4264D",
           "header": "$20",
           "word_1": "$0980",
           "word_2": "$0580",
-          "control_window_descriptor": "$C22408"
+          "control_window_descriptor": "$C22408",
+          "control_window_descriptor_target": "$C35568"
         },
         {
           "source": "$C42653",
           "header": "$21",
           "word_1": "$0980",
           "word_2": "$0280",
-          "control_window_descriptor": "$C2241C"
+          "control_window_descriptor": "$C2241C",
+          "control_window_descriptor_target": "$C355A0"
         },
         {
           "source": "$C42659",
           "header": "$53",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22804"
+          "control_window_descriptor": "$C22804",
+          "control_window_descriptor_target": "$C44732"
         },
         {
           "source": "$C4265F",
           "header": "$54",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22818"
+          "control_window_descriptor": "$C22818",
+          "control_window_descriptor_target": "$C447C6"
         },
         {
           "source": "$C42665",
           "header": "$14",
           "word_1": "$0200",
           "word_2": "$0600",
-          "control_window_descriptor": "$C22318"
+          "control_window_descriptor": "$C22318",
+          "control_window_descriptor_target": "$C445A2"
         },
         {
           "source": "$C4266B",
           "header": "$33",
           "word_1": "$0200",
           "word_2": "$0240",
-          "control_window_descriptor": "$C22584"
+          "control_window_descriptor": "$C22584",
+          "control_window_descriptor_target": "$C36212"
         },
         {
           "source": "$C42671",
           "header": "$48",
           "word_1": "$0200",
           "word_2": "$0240",
-          "control_window_descriptor": "$C22728"
+          "control_window_descriptor": "$C22728",
+          "control_window_descriptor_target": "$C36208"
         },
         {
           "source": "$C42677",
           "header": "$22",
           "word_1": "$0220",
           "word_2": "$00E0",
-          "control_window_descriptor": "$C22430"
+          "control_window_descriptor": "$C22430",
+          "control_window_descriptor_target": "$C3623E"
         },
         {
           "source": "$C4267D",
           "header": "$52",
           "word_1": "$0E00",
           "word_2": "$0600",
-          "control_window_descriptor": "$C227F0"
+          "control_window_descriptor": "$C227F0",
+          "control_window_descriptor_target": "$C44612"
         },
         {
           "source": "$C42683",
           "header": "$24",
           "word_1": "$0D98",
           "word_2": "$0414",
-          "control_window_descriptor": "$C22458"
+          "control_window_descriptor": "$C22458",
+          "control_window_descriptor_target": "$C36E6A"
         },
         {
           "source": "$C42689",
           "header": "$25",
           "word_1": "$0C00",
           "word_2": "$0498",
-          "control_window_descriptor": "$C2246C"
+          "control_window_descriptor": "$C2246C",
+          "control_window_descriptor_target": "$C366E6"
         },
         {
           "source": "$C4268F",
           "header": "$26",
           "word_1": "$0BD8",
           "word_2": "$04A8",
-          "control_window_descriptor": "$C22480"
+          "control_window_descriptor": "$C22480",
+          "control_window_descriptor_target": "$C368D0"
         },
         {
           "source": "$C42695",
           "header": "$23",
           "word_1": "$0F00",
           "word_2": "$0380",
-          "control_window_descriptor": "$C22444"
+          "control_window_descriptor": "$C22444",
+          "control_window_descriptor_target": "$C36A28"
         },
         {
           "source": "$C4269B",
           "header": "$17",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22354"
+          "control_window_descriptor": "$C22354",
+          "control_window_descriptor_target": "$C4466E"
         },
         {
           "source": "$C426A1",
           "header": "$18",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22368"
+          "control_window_descriptor": "$C22368",
+          "control_window_descriptor_target": "$C4477C"
         },
         {
           "source": "$C426A7",
           "header": "$75",
           "word_1": "$0780",
           "word_2": "$0B80",
-          "control_window_descriptor": "$C22AAC"
+          "control_window_descriptor": "$C22AAC",
+          "control_window_descriptor_target": "$C3B960"
         },
         {
           "source": "$C426AD",
           "header": "$22",
           "word_1": "$0658",
           "word_2": "$0CA8",
-          "control_window_descriptor": "$C22430"
+          "control_window_descriptor": "$C22430",
+          "control_window_descriptor_target": "$C3623E"
         },
         {
           "source": "$C426B3",
           "header": "$22",
           "word_1": "$04F0",
           "word_2": "$0E10",
-          "control_window_descriptor": "$C22430"
+          "control_window_descriptor": "$C22430",
+          "control_window_descriptor_target": "$C3623E"
         },
         {
           "source": "$C426B9",
           "header": "$22",
           "word_1": "$0388",
           "word_2": "$0F78",
-          "control_window_descriptor": "$C22430"
+          "control_window_descriptor": "$C22430",
+          "control_window_descriptor_target": "$C3623E"
         },
         {
           "source": "$C426BF",
           "header": "$19",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C2237C"
+          "control_window_descriptor": "$C2237C",
+          "control_window_descriptor_target": "$C44812"
         },
         {
           "source": "$C426C5",
           "header": "$1A",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22390"
+          "control_window_descriptor": "$C22390",
+          "control_window_descriptor_target": "$C4483C"
         }
       ],
       "selector_cells": [
@@ -554,28 +652,32 @@
           "header": "$47",
           "word_1": "$0000",
           "word_2": "$0700",
-          "control_window_descriptor": "$C22714"
+          "control_window_descriptor": "$C22714",
+          "control_window_descriptor_target": "$C35BD0"
         },
         {
           "source": "$C4270D",
           "header": "$28",
           "word_1": "$03A0",
           "word_2": "$0400",
-          "control_window_descriptor": "$C224A8"
+          "control_window_descriptor": "$C224A8",
+          "control_window_descriptor_target": "$C35D88"
         },
         {
           "source": "$C42713",
           "header": "$27",
           "word_1": "$08B0",
           "word_2": "$0090",
-          "control_window_descriptor": "$C22494"
+          "control_window_descriptor": "$C22494",
+          "control_window_descriptor_target": "$C35BFC"
         },
         {
           "source": "$C42719",
           "header": "$29",
           "word_1": "$09C0",
           "word_2": "$0760",
-          "control_window_descriptor": "$C224BC"
+          "control_window_descriptor": "$C224BC",
+          "control_window_descriptor_target": "$C35E9E"
         }
       ],
       "selector_cells": [
@@ -870,70 +972,80 @@
           "header": "$61",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C2291C"
+          "control_window_descriptor": "$C2291C",
+          "control_window_descriptor_target": "$C44B78"
         },
         {
           "source": "$C42751",
           "header": "$62",
           "word_1": "$0400",
           "word_2": "$0000",
-          "control_window_descriptor": "$C22930"
+          "control_window_descriptor": "$C22930",
+          "control_window_descriptor_target": "$C44C10"
         },
         {
           "source": "$C42757",
           "header": "$63",
           "word_1": "$0000",
           "word_2": "$0C00",
-          "control_window_descriptor": "$C22944"
+          "control_window_descriptor": "$C22944",
+          "control_window_descriptor_target": "$C44C7A"
         },
         {
           "source": "$C4275D",
           "header": "$64",
           "word_1": "$0C00",
           "word_2": "$0C00",
-          "control_window_descriptor": "$C22958"
+          "control_window_descriptor": "$C22958",
+          "control_window_descriptor_target": "$C44CE4"
         },
         {
           "source": "$C42763",
           "header": "$65",
           "word_1": "$0000",
           "word_2": "$0C00",
-          "control_window_descriptor": "$C2296C"
+          "control_window_descriptor": "$C2296C",
+          "control_window_descriptor_target": "$C44D4E"
         },
         {
           "source": "$C42769",
           "header": "$66",
           "word_1": "$0C00",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22980"
+          "control_window_descriptor": "$C22980",
+          "control_window_descriptor_target": "$C44DB8"
         },
         {
           "source": "$C4276F",
           "header": "$59",
           "word_1": "$0C00",
           "word_2": "$0800",
-          "control_window_descriptor": "$C2287C"
+          "control_window_descriptor": "$C2287C",
+          "control_window_descriptor_target": "$C448B6"
         },
         {
           "source": "$C42775",
           "header": "$67",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22994"
+          "control_window_descriptor": "$C22994",
+          "control_window_descriptor_target": "$C44E22"
         },
         {
           "source": "$C4277B",
           "header": "$68",
           "word_1": "$0400",
           "word_2": "$0C00",
-          "control_window_descriptor": "$C229A8"
+          "control_window_descriptor": "$C229A8",
+          "control_window_descriptor_target": "$C44E8C"
         },
         {
           "source": "$C42781",
           "header": "$60",
           "word_1": "$0800",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22908"
+          "control_window_descriptor": "$C22908",
+          "control_window_descriptor_target": "$C44EF6"
         }
       ],
       "selector_cells": [
@@ -1003,49 +1115,56 @@
           "header": "$2A",
           "word_1": "$0E00",
           "word_2": "$0E00",
-          "control_window_descriptor": "$C224D0"
+          "control_window_descriptor": "$C224D0",
+          "control_window_descriptor_target": "$C3B6A6"
         },
         {
           "source": "$C4278F",
           "header": "$70",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22A48"
+          "control_window_descriptor": "$C22A48",
+          "control_window_descriptor_target": "$C4532C"
         },
         {
           "source": "$C42795",
           "header": "$71",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22A5C"
+          "control_window_descriptor": "$C22A5C",
+          "control_window_descriptor_target": "$C453C4"
         },
         {
           "source": "$C4279B",
           "header": "$2C",
           "word_1": "$06F6",
           "word_2": "$0E9A",
-          "control_window_descriptor": "$C224F8"
+          "control_window_descriptor": "$C224F8",
+          "control_window_descriptor_target": "$C3737C"
         },
         {
           "source": "$C427A1",
           "header": "$2B",
           "word_1": "$00C4",
           "word_2": "$0AC8",
-          "control_window_descriptor": "$C224E4"
+          "control_window_descriptor": "$C224E4",
+          "control_window_descriptor_target": "$C37680"
         },
         {
           "source": "$C427A7",
           "header": "$72",
           "word_1": "$0C00",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22A70"
+          "control_window_descriptor": "$C22A70",
+          "control_window_descriptor_target": "$C4545C"
         },
         {
           "source": "$C427AD",
           "header": "$5A",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22890"
+          "control_window_descriptor": "$C22890",
+          "control_window_descriptor_target": "$C44970"
         }
       ],
       "selector_cells": [
@@ -1115,21 +1234,24 @@
           "header": "$6C",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C229F8"
+          "control_window_descriptor": "$C229F8",
+          "control_window_descriptor_target": "$C45128"
         },
         {
           "source": "$C427BB",
           "header": "$6D",
           "word_1": "$0C00",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22A0C"
+          "control_window_descriptor": "$C22A0C",
+          "control_window_descriptor_target": "$C45192"
         },
         {
           "source": "$C427C1",
           "header": "$6E",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22A20"
+          "control_window_descriptor": "$C22A20",
+          "control_window_descriptor_target": "$C451FC"
         }
       ],
       "selector_cells": [
@@ -1199,49 +1321,56 @@
           "header": "$46",
           "word_1": "$0B00",
           "word_2": "$0900",
-          "control_window_descriptor": "$C22700"
+          "control_window_descriptor": "$C22700",
+          "control_window_descriptor_target": "$C3B4F8"
         },
         {
           "source": "$C427CF",
           "header": "$46",
           "word_1": "$0150",
           "word_2": "$0200",
-          "control_window_descriptor": "$C22700"
+          "control_window_descriptor": "$C22700",
+          "control_window_descriptor_target": "$C3B4F8"
         },
         {
           "source": "$C427D5",
           "header": "$4B",
           "word_1": "$09A0",
           "word_2": "$0000",
-          "control_window_descriptor": "$C22764"
+          "control_window_descriptor": "$C22764",
+          "control_window_descriptor_target": "$C44500"
         },
         {
           "source": "$C427DB",
           "header": "$6F",
           "word_1": "$0400",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22A34"
+          "control_window_descriptor": "$C22A34",
+          "control_window_descriptor_target": "$C45294"
         },
         {
           "source": "$C427E1",
           "header": "$4C",
           "word_1": "$0588",
           "word_2": "$0A80",
-          "control_window_descriptor": "$C22778"
+          "control_window_descriptor": "$C22778",
+          "control_window_descriptor_target": "$C4455A"
         },
         {
           "source": "$C427E7",
           "header": "$73",
           "word_1": "$0800",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22A84"
+          "control_window_descriptor": "$C22A84",
+          "control_window_descriptor_target": "$C454F4"
         },
         {
           "source": "$C427ED",
           "header": "$74",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22A98"
+          "control_window_descriptor": "$C22A98",
+          "control_window_descriptor_target": "$C4558C"
         }
       ],
       "selector_cells": [
@@ -1311,14 +1440,16 @@
           "header": "$52",
           "word_1": "$0800",
           "word_2": "$0300",
-          "control_window_descriptor": "$C227F0"
+          "control_window_descriptor": "$C227F0",
+          "control_window_descriptor_target": "$C44612"
         },
         {
           "source": "$C42957",
           "header": "$15",
           "word_1": "$0400",
           "word_2": "$0E00",
-          "control_window_descriptor": "$C2232C"
+          "control_window_descriptor": "$C2232C",
+          "control_window_descriptor_target": "$C445DC"
         },
         {
           "source": "$C4295D",
@@ -1331,7 +1462,8 @@
           "header": "$4A",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22750"
+          "control_window_descriptor": "$C22750",
+          "control_window_descriptor_target": "$C3A942"
         }
       ],
       "selector_cells": [
@@ -1661,7 +1793,8 @@
           "header": "$15",
           "word_1": "$0400",
           "word_2": "$0E00",
-          "control_window_descriptor": "$C2232C"
+          "control_window_descriptor": "$C2232C",
+          "control_window_descriptor_target": "$C445DC"
         },
         {
           "source": "$C4295D",
@@ -1674,7 +1807,8 @@
           "header": "$4A",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C22750"
+          "control_window_descriptor": "$C22750",
+          "control_window_descriptor_target": "$C3A942"
         }
       ],
       "selector_cells": [
@@ -6091,14 +6225,16 @@
           "header": "$56",
           "word_1": "$0600",
           "word_2": "$0100",
-          "control_window_descriptor": "$C22840"
+          "control_window_descriptor": "$C22840",
+          "control_window_descriptor_target": "$C3BBD0"
         },
         {
           "source": "$C429D7",
           "header": "$4A",
           "word_1": "$0C00",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22750"
+          "control_window_descriptor": "$C22750",
+          "control_window_descriptor_target": "$C3A942"
         }
       ],
       "selector_cells": [
@@ -10208,14 +10344,16 @@
           "header": "$2A",
           "word_1": "$0800",
           "word_2": "$0800",
-          "control_window_descriptor": "$C224D0"
+          "control_window_descriptor": "$C224D0",
+          "control_window_descriptor_target": "$C3B6A6"
         },
         {
           "source": "$C429E5",
           "header": "$4A",
           "word_1": "$0C00",
           "word_2": "$0400",
-          "control_window_descriptor": "$C22750"
+          "control_window_descriptor": "$C22750",
+          "control_window_descriptor_target": "$C3A942"
         }
       ],
       "selector_cells": [
@@ -18676,126 +18814,144 @@
           "header": "$46",
           "word_1": "$0E00",
           "word_2": "$0600",
-          "control_window_descriptor": "$C22700"
+          "control_window_descriptor": "$C22700",
+          "control_window_descriptor_target": "$C3B4F8"
         },
         {
           "source": "$C42B6D",
           "header": "$15",
           "word_1": "$0E00",
           "word_2": "$0600",
-          "control_window_descriptor": "$C2232C"
+          "control_window_descriptor": "$C2232C",
+          "control_window_descriptor_target": "$C445DC"
         },
         {
           "source": "$C42B73",
           "header": "$15",
           "word_1": "$0400",
           "word_2": "$0E00",
-          "control_window_descriptor": "$C2232C"
+          "control_window_descriptor": "$C2232C",
+          "control_window_descriptor_target": "$C445DC"
         },
         {
           "source": "$C42B79",
           "header": "$52",
           "word_1": "$0800",
           "word_2": "$0300",
-          "control_window_descriptor": "$C227F0"
+          "control_window_descriptor": "$C227F0",
+          "control_window_descriptor_target": "$C44612"
         },
         {
           "source": "$C42B7F",
           "header": "$39",
           "word_1": "$0040",
           "word_2": "$0A00",
-          "control_window_descriptor": "$C225FC"
+          "control_window_descriptor": "$C225FC",
+          "control_window_descriptor_target": "$C37EA6"
         },
         {
           "source": "$C42B85",
           "header": "$38",
           "word_1": "$02D0",
           "word_2": "$05F0",
-          "control_window_descriptor": "$C225E8"
+          "control_window_descriptor": "$C225E8",
+          "control_window_descriptor_target": "$C37E56"
         },
         {
           "source": "$C42B8B",
           "header": "$3B",
           "word_1": "$0070",
           "word_2": "$03F0",
-          "control_window_descriptor": "$C22624"
+          "control_window_descriptor": "$C22624",
+          "control_window_descriptor_target": "$C37F80"
         },
         {
           "source": "$C42B91",
           "header": "$43",
           "word_1": "$01F6",
           "word_2": "$0538",
-          "control_window_descriptor": "$C226C4"
+          "control_window_descriptor": "$C226C4",
+          "control_window_descriptor_target": "$C08892"
         },
         {
           "source": "$C42B97",
           "header": "$43",
           "word_1": "$036E",
           "word_2": "$0675",
-          "control_window_descriptor": "$C226C4"
+          "control_window_descriptor": "$C226C4",
+          "control_window_descriptor_target": "$C08892"
         },
         {
           "source": "$C42B9D",
           "header": "$3A",
           "word_1": "$04E5",
           "word_2": "$07B1",
-          "control_window_descriptor": "$C22610"
+          "control_window_descriptor": "$C22610",
+          "control_window_descriptor_target": "$C380D8"
         },
         {
           "source": "$C42BA3",
           "header": "$40",
           "word_1": "$01FE",
           "word_2": "$0D4B",
-          "control_window_descriptor": "$C22688"
+          "control_window_descriptor": "$C22688",
+          "control_window_descriptor_target": "$C37CF8"
         },
         {
           "source": "$C42BA9",
           "header": "$45",
           "word_1": "$01C2",
           "word_2": "$0C99",
-          "control_window_descriptor": "$C226EC"
+          "control_window_descriptor": "$C226EC",
+          "control_window_descriptor_target": "$C0883E"
         },
         {
           "source": "$C42BAF",
           "header": "$41",
           "word_1": "$018C",
           "word_2": "$0BE8",
-          "control_window_descriptor": "$C2269C"
+          "control_window_descriptor": "$C2269C",
+          "control_window_descriptor_target": "$C37D94"
         },
         {
           "source": "$C42BB5",
           "header": "$3D",
           "word_1": "$01FB",
           "word_2": "$0A4C",
-          "control_window_descriptor": "$C2264C"
+          "control_window_descriptor": "$C2264C",
+          "control_window_descriptor_target": "$C37B78"
         },
         {
           "source": "$C42BBB",
           "header": "$3C",
           "word_1": "$00DD",
           "word_2": "$0AB1",
-          "control_window_descriptor": "$C22638"
+          "control_window_descriptor": "$C22638",
+          "control_window_descriptor_target": "$C37B4C"
         },
         {
           "source": "$C42BC1",
           "header": "$44",
           "word_1": "$0097",
           "word_2": "$09CA",
-          "control_window_descriptor": "$C226D8"
+          "control_window_descriptor": "$C226D8",
+          "control_window_descriptor_target": "$C087FE"
         },
         {
           "source": "$C42BC7",
           "header": "$3E",
           "word_1": "$0F33",
           "word_2": "$0949",
-          "control_window_descriptor": "$C22660"
+          "control_window_descriptor": "$C22660",
+          "control_window_descriptor_target": "$C37990"
         },
         {
           "source": "$C42BCD",
           "header": "$3F",
           "word_1": "$0EF8",
           "word_2": "$0A00",
-          "control_window_descriptor": "$C22674"
+          "control_window_descriptor": "$C22674",
+          "control_window_descriptor_target": "$C379BC"
         }
       ],
       "selector_cells": [
@@ -18865,112 +19021,128 @@
           "header": "$1E",
           "word_1": "$0380",
           "word_2": "$0C80",
-          "control_window_descriptor": "$C223E0"
+          "control_window_descriptor": "$C223E0",
+          "control_window_descriptor_target": "$C08928"
         },
         {
           "source": "$C42BDB",
           "header": "$34",
           "word_1": "$04A0",
           "word_2": "$09E0",
-          "control_window_descriptor": "$C22598"
+          "control_window_descriptor": "$C22598",
+          "control_window_descriptor_target": "$C3723E"
         },
         {
           "source": "$C42BE1",
           "header": "$1F",
           "word_1": "$03D2",
           "word_2": "$0B64",
-          "control_window_descriptor": "$C223F4"
+          "control_window_descriptor": "$C223F4",
+          "control_window_descriptor_target": "$C08718"
         },
         {
           "source": "$C42BE7",
           "header": "$1F",
           "word_1": "$0327",
           "word_2": "$0CA6",
-          "control_window_descriptor": "$C223F4"
+          "control_window_descriptor": "$C223F4",
+          "control_window_descriptor_target": "$C08718"
         },
         {
           "source": "$C42BED",
           "header": "$1D",
           "word_1": "$025E",
           "word_2": "$0E21",
-          "control_window_descriptor": "$C223CC"
+          "control_window_descriptor": "$C223CC",
+          "control_window_descriptor_target": "$C381FC"
         },
         {
           "source": "$C42BF3",
           "header": "$1C",
           "word_1": "$04AA",
           "word_2": "$0ACE",
-          "control_window_descriptor": "$C223B8"
+          "control_window_descriptor": "$C223B8",
+          "control_window_descriptor_target": "$C37218"
         },
         {
           "source": "$C42BF9",
           "header": "$1F",
           "word_1": "$03D8",
           "word_2": "$0C5A",
-          "control_window_descriptor": "$C223F4"
+          "control_window_descriptor": "$C223F4",
+          "control_window_descriptor_target": "$C08718"
         },
         {
           "source": "$C42BFF",
           "header": "$36",
           "word_1": "$030F",
           "word_2": "$0DD4",
-          "control_window_descriptor": "$C225C0"
+          "control_window_descriptor": "$C225C0",
+          "control_window_descriptor_target": "$C38228"
         },
         {
           "source": "$C42C05",
           "header": "$37",
           "word_1": "$0090",
           "word_2": "$0B35",
-          "control_window_descriptor": "$C225D4"
+          "control_window_descriptor": "$C225D4",
+          "control_window_descriptor_target": "$C376AC"
         },
         {
           "source": "$C42C0B",
           "header": "$1B",
           "word_1": "$0244",
           "word_2": "$0C1C",
-          "control_window_descriptor": "$C223A4"
+          "control_window_descriptor": "$C223A4",
+          "control_window_descriptor_target": "$C087AC"
         },
         {
           "source": "$C42C11",
           "header": "$32",
           "word_1": "$03BF",
           "word_2": "$0CE5",
-          "control_window_descriptor": "$C22570"
+          "control_window_descriptor": "$C22570",
+          "control_window_descriptor_target": "$C08798"
         },
         {
           "source": "$C42C17",
           "header": "$1B",
           "word_1": "$0538",
           "word_2": "$0DAD",
-          "control_window_descriptor": "$C223A4"
+          "control_window_descriptor": "$C223A4",
+          "control_window_descriptor_target": "$C087AC"
         },
         {
           "source": "$C42C1D",
           "header": "$32",
           "word_1": "$0240",
           "word_2": "$0B92",
-          "control_window_descriptor": "$C22570"
+          "control_window_descriptor": "$C22570",
+          "control_window_descriptor_target": "$C08798"
         },
         {
           "source": "$C42C23",
           "header": "$32",
           "word_1": "$0386",
           "word_2": "$0C3F",
-          "control_window_descriptor": "$C22570"
+          "control_window_descriptor": "$C22570",
+          "control_window_descriptor_target": "$C08798"
         },
         {
           "source": "$C42C29",
           "header": "$32",
           "word_1": "$04C8",
           "word_2": "$0CEA",
-          "control_window_descriptor": "$C22570"
+          "control_window_descriptor": "$C22570",
+          "control_window_descriptor_target": "$C08798"
         },
         {
           "source": "$C42C2F",
           "header": "$35",
           "word_1": "$0650",
           "word_2": "$0DBA",
-          "control_window_descriptor": "$C225AC"
+          "control_window_descriptor": "$C225AC",
+          "control_window_descriptor_target": "$C373A2"
         }
       ],
       "selector_cells": [

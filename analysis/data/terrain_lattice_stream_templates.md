@@ -14,6 +14,9 @@ reference its stream; a zero-record stream is an observed immediate `$FF` termin
 origin-control trace and are annotated in JSON. This is a control-window association
 only: the separate refresh-window comparison proves that a reused static source can
 select a different descriptor in another scene context.
+The same annotation includes the descriptor's repeated `+4/+8/+12` static target
+when those three control-window fields agree; this is a renderer-control candidate,
+not an unconditional mesh or LOD assignment.
 
 | Static stream | records | selector-bin cells |
 | --- | ---: | ---: |
