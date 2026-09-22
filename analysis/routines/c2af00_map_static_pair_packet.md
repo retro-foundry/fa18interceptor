@@ -14,6 +14,9 @@ the `$C2AFE2 -> $C246A0` display-stage call after their transform, and the
 transform loop reads 327 exact signed two-word source pairs at
 `$C2AF9C/$C2AF9E`. The packet source/header fields and every consumed pair
 are retained in the [static-packet inventory](../data/run003_m_map_polygon_static_packets.md).
+The accompanying [raw-coordinate sheet](../plots/run003_m_map_static_pair_packets.png)
+is a visual inspection aid only; it preserves read order without inferring
+closed faces or screen/world alignment.
 
 This establishes that `$C4BFxx` workspace records are derived from immutable
 map-mode packet input. It does **not** decode the packet's full grammar, prove
