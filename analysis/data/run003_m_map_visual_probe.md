@@ -126,6 +126,15 @@ through two visible map line segments; see the [three-triple line
 component](c36220_c36232_map_line_component.md). It remains separate from the
 five-triple `$C3B720` component.
 
+The map page also has a second, separate immutable input path. Twenty-six
+direct `$C2AEFC -> $C2AF00` entries read packet data from `$C42Dxx/$C43xxx`;
+their fixed-point loop consumes 327 exact signed source pairs at
+`$C2AF9C/$C2AF9E` before `$C2AFE2` invokes the polygon display stage. This
+identifies static source input behind the otherwise mutable `$C4BFxx` polygon
+workspace. Its packet inventory and limitations are retained in the
+[static-packet report](run003_m_map_polygon_static_packets.md); it is not yet
+a complete coastline or global-terrain export.
+
 The magenta `$C35BDE -> $C35BF0` overlay component is a decoded local
 three-vertex polyline rather than merely a pair of screen segments; see its
 [offset-pair topology contract](c35bde_c35bf0_map_polyline_component.md).
