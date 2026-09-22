@@ -76,6 +76,16 @@ not yet been established. Consequently the result strengthens the need for a
 controlled same-page distance experiment, but it does not identify any target
 pair as an LOD pair.
 
+The repeated target is also functionally significant. `$C1CB74-$C1CCB6`
+consumes descriptor `+4` as an `A0` input, writes descriptor `+8` to
+`$C45A36`, and writes descriptor `+12` to `$C45A3A`. The compared descriptors
+repeat the same target at all three offsets, so every substitution in the
+table changes the `$C45A36` static control-stream pointer consumed by
+`$C1F6F8` on the projection path. This is direct dataflow evidence for
+context-dependent renderer control-stream selection; it remains insufficient
+to call the selection LOD because the controlling context is not isolated to
+distance.
+
 ### Target stability check
 
 The 24-byte windows beginning at all 13 targets in the table above are
