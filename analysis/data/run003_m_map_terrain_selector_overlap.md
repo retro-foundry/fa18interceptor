@@ -30,6 +30,10 @@ Three streams (`$C42ADA`, `$C42BD4`, `$C42706`) are also independently
 observed in a live flight page-refresh window.  This supports their being
 active world-page inputs, rather than an `M`-only bitmap asset.
 
+An extended, video-hash-matched map-mode trace follows the copied records to
+103 descriptor-qualified X/0/Z placement outputs. See the
+[template-placement handoff](run003_m_map_template_placement_handoff.md).
+
 This does **not** identify the coastline pixels' producer or prove that any
 of the six streams rasterizes the `M` display.  The transition trace also
 executes ordinary update/render work, and its display-plane writes are still
