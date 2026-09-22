@@ -19,6 +19,10 @@ def hex_address(value: int) -> str:
     return f"${value & 0xFFFFFF:06X}"
 
 
+def signed_word(payload: bytes, offset: int) -> int:
+    return int.from_bytes(payload[offset:offset + 2], "big", signed=True)
+
+
 def write_report(output: Path, report: dict[str, object]) -> None:
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     lines = [
@@ -45,12 +49,12 @@ def write_report(output: Path, report: dict[str, object]) -> None:
         "",
         "## Static control entries and bounded primitive outputs",
         "",
-        "| Trace frame | Preceding transform input (`A1`) | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |",
-        "| ---: | --- | --- | ---: | ---: | ---: |",
+        "| Trace frame | Transform input (`A1`) | Raw triples | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |",
+        "| ---: | --- | --- | --- | ---: | ---: | ---: |",
     ])
     for row in report["control_to_primitive"]:
         lines.append(
-            f"| {row['frame']} | `{row['transform_input']}` | `{row['control_entry']}` | {row['line_entries']} | "
+            f"| {row['frame']} | `{row['transform_input']}` | `{row['raw_triples']}` | `{row['control_entry']}` | {row['line_entries']} | "
             f"{row['polygon_line_routes']} | {row['polygon_span_routes']} |")
     lines.extend([
         "",
@@ -68,6 +72,8 @@ def write_report(output: Path, report: dict[str, object]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--trace", type=Path, required=True)
+    parser.add_argument("--slow", type=Path, required=True,
+                        help="slow-RAM snapshot matching the trace start")
     parser.add_argument("--blitter-jobs", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -75,6 +81,7 @@ def main() -> None:
         raise FileExistsError(args.output)
 
     trace = [json.loads(line) for line in args.trace.read_text(encoding="utf-8").splitlines()]
+    slow = args.slow.read_bytes()
     jobs = json.loads(args.blitter_jobs.read_text(encoding="utf-8"))["jobs"]
     polygon_indices = [index for index, row in enumerate(trace) if row["pc"] == POLYGON_SUBMIT]
     line_indices = [index for index, row in enumerate(trace) if row["pc"] == LINE_EMIT]
@@ -107,15 +114,27 @@ def main() -> None:
                                  if trace[cursor]["pc"] == POLYGON_RETURN), end)
             route = {entry["pc"] for entry in trace[polygon_index + 1:return_index]}
             polygon_routes.append(route)
-        preceding_transforms = [entry for entry in trace[:index]
-                                if entry["pc"] == 0xC1F4AC]
-        transform_input = (hex_address(preceding_transforms[-1]["registers"]["a1"])
-                           if preceding_transforms else None)
+        preceding_transform_indices = [cursor for cursor, entry in enumerate(trace[:index])
+                                       if entry["pc"] == 0xC1F4AC]
+        transform_index = preceding_transform_indices[-1] if preceding_transform_indices else None
+        transform_input_value = (trace[transform_index]["registers"]["a1"] & 0xFFFFFF
+                                 if transform_index is not None else None)
+        transform_input = (hex_address(transform_input_value)
+                           if transform_input_value is not None else None)
+        vertex_count = (1 + sum(entry["pc"] == 0xC1F528
+                                for entry in trace[transform_index + 1:index])
+                        if transform_index is not None else 0)
+        source_offset = transform_input_value - 0xC00000 if transform_input_value is not None else -1
+        if source_offset < 0 or source_offset + vertex_count * 6 > len(slow):
+            raise ValueError(f"transform source outside supplied slow RAM: {transform_input}")
+        triples = [[signed_word(slow, source_offset + vertex * 6 + component * 2)
+                    for component in range(3)] for vertex in range(vertex_count)]
         control_to_primitive.append({
             "trace_index": trace[index]["index"],
             "frame": trace[index]["frame"],
             "control_entry": hex_address(trace[index]["registers"]["a1"]),
             "transform_input": transform_input,
+            "raw_triples": triples,
             "line_entries": sum(entry["pc"] == LINE_EMIT for entry in interval),
             "polygon_line_routes": sum(LINE_EMIT in route for route in polygon_routes),
             "polygon_span_routes": sum(SPAN_BLIT in route for route in polygon_routes),
@@ -123,6 +142,7 @@ def main() -> None:
     report = {
         "scope": "trace entries and CPU blitter jobs while the map transition prepares the pending map page",
         "trace": str(args.trace),
+        "slow": str(args.slow),
         "blitter_jobs": str(args.blitter_jobs),
         "polygon_wrapper_entries": len(polygon_indices),
         "line_emitter_entries": len(line_indices),

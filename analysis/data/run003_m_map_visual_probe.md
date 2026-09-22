@@ -121,6 +121,12 @@ of its six `$C1F6F8` entries: `$C35BDE -> $C35BF0`, `$C35BAA -> $C35BB8`,
 claim that the five source blocks or their repeated control entry are the
 complete world terrain.
 
+Their signed raw triples are retained in the renderer census. Several have a
+nonzero middle component, including `$C3B720`'s fifth local triple
+`(-640,1024,0)`. This is local component geometry and does not contradict the
+separately observed flat X/0/Z *placement* layer; neither coordinate convention
+may be promoted to a global elevation rule without a producer/consumer proof.
+
 Authority: deterministic no-input renders
 `build/run003_m5_noinput_1` through `build/run003_m5_noinput_25`, and
 `build/run003_m_map_appearance_trace/{trace.jsonl,custom_writes.jsonl}` from

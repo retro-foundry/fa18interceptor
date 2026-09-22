@@ -26,14 +26,14 @@ The supplied job inventory identifies CPU blits whose pointers fall in the prepa
 
 ## Static control entries and bounded primitive outputs
 
-| Trace frame | Preceding transform input (`A1`) | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |
-| ---: | --- | --- | ---: | ---: | ---: |
-| 9 | `$C35BDE` | `$C35BF0` | 2 | 0 | 0 |
-| 9 | `$C35BAA` | `$C35BB8` | 1 | 0 | 0 |
-| 9 | `$C35BC2` | `$C35BD0` | 1 | 0 | 0 |
-| 9 | `$C36220` | `$C36232` | 2 | 0 | 0 |
-| 9 | `$C36220` | `$C36232` | 2 | 0 | 0 |
-| 9 | `$C3B720` | `$C3B73E` | 9 | 2 | 2 |
+| Trace frame | Transform input (`A1`) | Raw triples | Control entry (`A1`) | Lines to next control entry | Polygon line routes | Polygon span routes |
+| ---: | --- | --- | --- | ---: | ---: | ---: |
+| 9 | `$C35BDE` | `[[11136, 0, -9088], [6656, 0, -3840], [-13568, 0, 2944]]` | `$C35BF0` | 2 | 0 | 0 |
+| 9 | `$C35BAA` | `[[0, 0, 3744], [0, 416, -3168]]` | `$C35BB8` | 1 | 0 | 0 |
+| 9 | `$C35BC2` | `[[0, 0, -3744], [0, 416, 3168]]` | `$C35BD0` | 1 | 0 | 0 |
+| 9 | `$C36220` | `[[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]]` | `$C36232` | 2 | 0 | 0 |
+| 9 | `$C36220` | `[[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]]` | `$C36232` | 2 | 0 | 0 |
+| 9 | `$C3B720` | `[[2112, 0, -896], [-2080, 0, -2048], [-1600, 0, 1280], [1088, 0, 1568], [-640, 1024, 0]]` | `$C3B73E` | 9 | 2 | 2 |
 
 ## `$C2FF48` entry contexts
 
