@@ -29,9 +29,30 @@ replaced across these two distances. Their different interval lengths may
 reflect unrelated scene work, visibility, or control flow; it is not LOD
 evidence.
 
+## Replay-preserved face contexts
+
+Unlike the earlier no-input checkpoint probes, a new collector preserves the
+recorded input until each requested window before breaking at `$C2005C`. It
+finds **no** `$C355D8` face preparation in the approach windows. The observed
+contexts change across the approach:
+
+| replay collection window | faces | dominant static face contexts |
+| --- | ---: | --- |
+| 2,000--3,000 | 308 | `$C3BC20` (130), `$C3B6B0` (100), `$C3BC1C` (52), `$C3BC18` (26) |
+| 4,000--5,000 | 231 | `$C3B6B0` (128), `$C3B50A` (103) |
+| 6,000--8,000 | 512 capped | `$C3B016` (168), `$C3ADCC` (76), `$C3B50A` (59), `$C3A864` (53) |
+
+This establishes that the recorded red-bridge approach is rendered through a
+different observed static face-context family than the prior `$C355D8` Golden
+Gate probe, or that its `$C355D8` path falls outside these bounded windows.
+It does not identify an alternative bridge model or LOD level. The changing
+face contexts can result from ordinary page/instance selection and culling.
+
 Authority: sealed `captures/run035`, replay checkpoints
 `build/run035_keyframes/frame_{5500,7000}/state.bin`, and bounded no-input
 traces `build/run035_{5500,7000}_c3b0ce_interval/trace.jsonl`.
+Replay-preserved face authority is
+`build/run035_faces_replay_{2000_3000,4000_5000,6000_8000}/face_preparations.json`.
 
 ## Result
 
