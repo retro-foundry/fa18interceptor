@@ -1,0 +1,88 @@
+{
+  "scope": "same-header direct map packet batches observed inline in run003 and alternate in run035",
+  "inline_inventory": "analysis\\data\\run003_m_map_polygon_static_packets.json",
+  "alternate_inventory": "analysis\\data\\run035_m_map_polygon_static_packets.json",
+  "comparisons": [
+    {
+      "header": "$C43BAC",
+      "inline": {
+        "pair_count": 7,
+        "pair_range": [
+          "$C43BB2",
+          "$C43BCA"
+        ],
+        "observations": 1
+      },
+      "alternate": {
+        "pair_count": 7,
+        "pair_range": [
+          "$C43C72",
+          "$C43C8A"
+        ],
+        "observations": 3
+      },
+      "pair_count_delta": 0
+    },
+    {
+      "header": "$C43CBE",
+      "inline": {
+        "pair_count": 13,
+        "pair_range": [
+          "$C43CC4",
+          "$C43CF4"
+        ],
+        "observations": 1
+      },
+      "alternate": {
+        "pair_count": 7,
+        "pair_range": [
+          "$C43CFC",
+          "$C43D14"
+        ],
+        "observations": 3
+      },
+      "pair_count_delta": -6
+    },
+    {
+      "header": "$C43ECA",
+      "inline": {
+        "pair_count": 9,
+        "pair_range": [
+          "$C43ED0",
+          "$C43EF0"
+        ],
+        "observations": 1
+      },
+      "alternate": {
+        "pair_count": 8,
+        "pair_range": [
+          "$C43F3C",
+          "$C43F58"
+        ],
+        "observations": 2
+      },
+      "pair_count_delta": -1
+    },
+    {
+      "header": "$C43F5E",
+      "inline": {
+        "pair_count": 6,
+        "pair_range": [
+          "$C43F64",
+          "$C43F78"
+        ],
+        "observations": 1
+      },
+      "alternate": {
+        "pair_count": 3,
+        "pair_range": [
+          "$C43FB0",
+          "$C43FB8"
+        ],
+        "observations": 2
+      },
+      "pair_count_delta": -3
+    }
+  ],
+  "qualification": "Each row compares the first directly entered transform batch for the same immutable packet header. Pair counts are source-coordinate consumption counts, not face counts or a global terrain complexity measure. The alternate route is dynamically proven, but these captures do not isolate physical distance from other map transition/control state, so the comparison establishes a live geometry variant rather than distance-only LOD."
+}

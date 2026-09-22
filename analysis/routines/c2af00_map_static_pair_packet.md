@@ -48,6 +48,10 @@ state as well as any possible map scale or viewing variables.
 The exact route, header, and consumed-pair evidence is retained in the
 [run035 appearance inventory](../data/run035_m_map_polygon_static_packets.md)
 and [run035 stable inventory](../data/run035_m_map_stable_polygon_static_packets.md).
+For the four headers observed on both routes, the
+[inline/alternate comparison](../data/run003_run035_map_packet_variant_comparison.md)
+shows distinct source ranges and reduced first-batch pair counts for three
+of them (`13→7`, `9→8`, and `6→3`).
 The accompanying [raw-coordinate sheet](../plots/run003_m_map_static_pair_packets.png)
 is a visual inspection aid only; it preserves read order without inferring
 closed faces or screen/world alignment.
