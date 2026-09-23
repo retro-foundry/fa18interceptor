@@ -70,6 +70,28 @@ def parse_stream(data: bytes, start: int) -> dict:
         cursor = payload_end
 
 
+def candidate_headers(data: bytes, observed: set[int]) -> list[dict]:
+    """Find grammar-compatible headers; compatibility is not execution evidence."""
+    rows = []
+    for header in range(START, END - 8, 2):
+        alternate, inline = long(data, header), header + 4
+        if not START <= alternate < END or alternate & 1:
+            continue
+        try:
+            inline_stream = parse_stream(data, inline)
+            alternate_stream = parse_stream(data, alternate)
+        except ValueError:
+            continue
+        rows.append({"header": address(header), "inline_stream": address(inline),
+                     "alternate_stream": address(alternate),
+                     "observed_direct_entry": header in observed,
+                     "inline_pair_count": sum(batch["count"] for batch in inline_stream["batches"]),
+                     "alternate_pair_count": sum(batch["count"] for batch in alternate_stream["batches"]),
+                     "inline_terminator": inline_stream["terminator"],
+                     "alternate_terminator": alternate_stream["terminator"]})
+    return rows
+
+
 def markdown(report: dict) -> str:
     streams = report["streams"]
     return "\n".join([
@@ -101,6 +123,18 @@ def markdown(report: dict) -> str:
         "",
         "Authority: direct-header inventories generated from sealed traces and the",
         "byte-exact `$C2AEFC-$C2AFF7` reader/stream selector reconstruction.",
+        "",
+        "## Grammar-compatible header candidates",
+        "",
+        f"A conservative even-address scan finds {report['candidate_header_count']} locations",
+        f"whose leading longword points inside segment 68 and whose inline and alternate",
+        f"streams both complete under the exact count/threshold grammar. {report['observed_candidate_count']}",
+        "are direct renderer entries in the sealed traces. The remaining candidates are",
+        "not promoted to packet headers: coordinate payload can coincidentally satisfy a",
+        "small grammar, so dynamic entry or a static producer reference is still required.",
+        "",
+        "The JSON retains every candidate and marks direct-entry status for use as a",
+        "targeted trace list rather than as an unverified map export.",
         "",
     ])
 
@@ -155,10 +189,15 @@ def main() -> None:
               "header_count": len(headers), "headers": [address(value) for value in sorted(headers)],
               "streams": rows, "pair_count": len(pair_addresses), "pair_bytes": len(pair_addresses) * 4,
               "pair_byte_fraction": len(pair_addresses) * 4 / (END - START)}
+    candidates = candidate_headers(data, set(headers))
+    report["candidate_header_count"] = len(candidates)
+    report["observed_candidate_count"] = sum(row["observed_direct_entry"] for row in candidates)
+    report["header_candidates"] = candidates
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     args.output_markdown.write_text(markdown(report), encoding="utf-8")
-    print(json.dumps({"headers": len(headers), "streams": len(rows), "pairs": len(pair_addresses)}))
+    print(json.dumps({"headers": len(headers), "streams": len(rows), "pairs": len(pair_addresses),
+                      "header_candidates": len(candidates)}))
 
 
 if __name__ == "__main__":

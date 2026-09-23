@@ -2878,5 +2878,719 @@
   ],
   "pair_count": 424,
   "pair_bytes": 1696,
-  "pair_byte_fraction": 0.27249357326478146
+  "pair_byte_fraction": 0.27249357326478146,
+  "candidate_header_count": 71,
+  "observed_candidate_count": 24,
+  "header_candidates": [
+    {
+      "header": "$C42D28",
+      "inline_stream": "$C42D2C",
+      "alternate_stream": "$C42D2C",
+      "observed_direct_entry": true,
+      "inline_pair_count": 33,
+      "alternate_pair_count": 33,
+      "inline_terminator": "$C42DC2",
+      "alternate_terminator": "$C42DC2"
+    },
+    {
+      "header": "$C42DC4",
+      "inline_stream": "$C42DC8",
+      "alternate_stream": "$C42DC8",
+      "observed_direct_entry": true,
+      "inline_pair_count": 12,
+      "alternate_pair_count": 12,
+      "inline_terminator": "$C42DFA",
+      "alternate_terminator": "$C42DFA"
+    },
+    {
+      "header": "$C42DFC",
+      "inline_stream": "$C42E00",
+      "alternate_stream": "$C42E00",
+      "observed_direct_entry": true,
+      "inline_pair_count": 5,
+      "alternate_pair_count": 5,
+      "inline_terminator": "$C42E18",
+      "alternate_terminator": "$C42E18"
+    },
+    {
+      "header": "$C42E1A",
+      "inline_stream": "$C42E1E",
+      "alternate_stream": "$C42E1E",
+      "observed_direct_entry": true,
+      "inline_pair_count": 7,
+      "alternate_pair_count": 7,
+      "inline_terminator": "$C42E3C",
+      "alternate_terminator": "$C42E3C"
+    },
+    {
+      "header": "$C42E3E",
+      "inline_stream": "$C42E42",
+      "alternate_stream": "$C42E42",
+      "observed_direct_entry": true,
+      "inline_pair_count": 3,
+      "alternate_pair_count": 3,
+      "inline_terminator": "$C42E50",
+      "alternate_terminator": "$C42E50"
+    },
+    {
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "observed_direct_entry": true,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C42E68",
+      "alternate_terminator": "$C42E68"
+    },
+    {
+      "header": "$C4366E",
+      "inline_stream": "$C43672",
+      "alternate_stream": "$C43672",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43684",
+      "alternate_terminator": "$C43684"
+    },
+    {
+      "header": "$C43688",
+      "inline_stream": "$C4368C",
+      "alternate_stream": "$C4368C",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4369E",
+      "alternate_terminator": "$C4369E"
+    },
+    {
+      "header": "$C436A2",
+      "inline_stream": "$C436A6",
+      "alternate_stream": "$C436A6",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C436B8",
+      "alternate_terminator": "$C436B8"
+    },
+    {
+      "header": "$C436BC",
+      "inline_stream": "$C436C0",
+      "alternate_stream": "$C436C0",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C436D2",
+      "alternate_terminator": "$C436D2"
+    },
+    {
+      "header": "$C436D6",
+      "inline_stream": "$C436DA",
+      "alternate_stream": "$C436DA",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C436EC",
+      "alternate_terminator": "$C436EC"
+    },
+    {
+      "header": "$C436F0",
+      "inline_stream": "$C436F4",
+      "alternate_stream": "$C436F4",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43706",
+      "alternate_terminator": "$C43706"
+    },
+    {
+      "header": "$C4370A",
+      "inline_stream": "$C4370E",
+      "alternate_stream": "$C4370E",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43720",
+      "alternate_terminator": "$C43720"
+    },
+    {
+      "header": "$C43724",
+      "inline_stream": "$C43728",
+      "alternate_stream": "$C43728",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4373A",
+      "alternate_terminator": "$C4373A"
+    },
+    {
+      "header": "$C4373E",
+      "inline_stream": "$C43742",
+      "alternate_stream": "$C43742",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43754",
+      "alternate_terminator": "$C43754"
+    },
+    {
+      "header": "$C43758",
+      "inline_stream": "$C4375C",
+      "alternate_stream": "$C4375C",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4376E",
+      "alternate_terminator": "$C4376E"
+    },
+    {
+      "header": "$C43772",
+      "inline_stream": "$C43776",
+      "alternate_stream": "$C43776",
+      "observed_direct_entry": false,
+      "inline_pair_count": 6,
+      "alternate_pair_count": 6,
+      "inline_terminator": "$C43790",
+      "alternate_terminator": "$C43790"
+    },
+    {
+      "header": "$C43792",
+      "inline_stream": "$C43796",
+      "alternate_stream": "$C43796",
+      "observed_direct_entry": false,
+      "inline_pair_count": 10,
+      "alternate_pair_count": 10,
+      "inline_terminator": "$C437C0",
+      "alternate_terminator": "$C437C0"
+    },
+    {
+      "header": "$C437C2",
+      "inline_stream": "$C437C6",
+      "alternate_stream": "$C437C6",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C437D8",
+      "alternate_terminator": "$C437D8"
+    },
+    {
+      "header": "$C437DC",
+      "inline_stream": "$C437E0",
+      "alternate_stream": "$C437E0",
+      "observed_direct_entry": false,
+      "inline_pair_count": 17,
+      "alternate_pair_count": 17,
+      "inline_terminator": "$C43828",
+      "alternate_terminator": "$C43828"
+    },
+    {
+      "header": "$C4382A",
+      "inline_stream": "$C4382E",
+      "alternate_stream": "$C4382E",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43840",
+      "alternate_terminator": "$C43840"
+    },
+    {
+      "header": "$C43844",
+      "inline_stream": "$C43848",
+      "alternate_stream": "$C43848",
+      "observed_direct_entry": false,
+      "inline_pair_count": 20,
+      "alternate_pair_count": 20,
+      "inline_terminator": "$C4389C",
+      "alternate_terminator": "$C4389C"
+    },
+    {
+      "header": "$C4389E",
+      "inline_stream": "$C438A2",
+      "alternate_stream": "$C438A2",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C438B4",
+      "alternate_terminator": "$C438B4"
+    },
+    {
+      "header": "$C438B8",
+      "inline_stream": "$C438BC",
+      "alternate_stream": "$C438BC",
+      "observed_direct_entry": false,
+      "inline_pair_count": 7,
+      "alternate_pair_count": 7,
+      "inline_terminator": "$C438DA",
+      "alternate_terminator": "$C438DA"
+    },
+    {
+      "header": "$C438DC",
+      "inline_stream": "$C438E0",
+      "alternate_stream": "$C438E0",
+      "observed_direct_entry": false,
+      "inline_pair_count": 12,
+      "alternate_pair_count": 12,
+      "inline_terminator": "$C43912",
+      "alternate_terminator": "$C43912"
+    },
+    {
+      "header": "$C43914",
+      "inline_stream": "$C43918",
+      "alternate_stream": "$C43918",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4392A",
+      "alternate_terminator": "$C4392A"
+    },
+    {
+      "header": "$C4392E",
+      "inline_stream": "$C43932",
+      "alternate_stream": "$C43932",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43944",
+      "alternate_terminator": "$C43944"
+    },
+    {
+      "header": "$C43946",
+      "inline_stream": "$C4394A",
+      "alternate_stream": "$C4394A",
+      "observed_direct_entry": false,
+      "inline_pair_count": 11,
+      "alternate_pair_count": 11,
+      "inline_terminator": "$C43978",
+      "alternate_terminator": "$C43978"
+    },
+    {
+      "header": "$C4397A",
+      "inline_stream": "$C4397E",
+      "alternate_stream": "$C4397E",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43990",
+      "alternate_terminator": "$C43990"
+    },
+    {
+      "header": "$C43994",
+      "inline_stream": "$C43998",
+      "alternate_stream": "$C43998",
+      "observed_direct_entry": true,
+      "inline_pair_count": 3,
+      "alternate_pair_count": 3,
+      "inline_terminator": "$C439A6",
+      "alternate_terminator": "$C439A6"
+    },
+    {
+      "header": "$C439A8",
+      "inline_stream": "$C439AC",
+      "alternate_stream": "$C439AC",
+      "observed_direct_entry": true,
+      "inline_pair_count": 7,
+      "alternate_pair_count": 7,
+      "inline_terminator": "$C439CA",
+      "alternate_terminator": "$C439CA"
+    },
+    {
+      "header": "$C439CC",
+      "inline_stream": "$C439D0",
+      "alternate_stream": "$C439D0",
+      "observed_direct_entry": true,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C439E2",
+      "alternate_terminator": "$C439E2"
+    },
+    {
+      "header": "$C439E8",
+      "inline_stream": "$C439EC",
+      "alternate_stream": "$C43A44",
+      "observed_direct_entry": true,
+      "inline_pair_count": 20,
+      "alternate_pair_count": 12,
+      "inline_terminator": "$C43A42",
+      "alternate_terminator": "$C43A76"
+    },
+    {
+      "header": "$C43A78",
+      "inline_stream": "$C43A7C",
+      "alternate_stream": "$C43AF0",
+      "observed_direct_entry": true,
+      "inline_pair_count": 27,
+      "alternate_pair_count": 9,
+      "inline_terminator": "$C43AEE",
+      "alternate_terminator": "$C43B18"
+    },
+    {
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "observed_direct_entry": true,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43B30",
+      "alternate_terminator": "$C43B30"
+    },
+    {
+      "header": "$C43B34",
+      "inline_stream": "$C43B38",
+      "alternate_stream": "$C43B94",
+      "observed_direct_entry": true,
+      "inline_pair_count": 21,
+      "alternate_pair_count": 5,
+      "inline_terminator": "$C43B92",
+      "alternate_terminator": "$C43BAA"
+    },
+    {
+      "header": "$C43BAC",
+      "inline_stream": "$C43BB0",
+      "alternate_stream": "$C43C70",
+      "observed_direct_entry": true,
+      "inline_pair_count": 45,
+      "alternate_pair_count": 18,
+      "inline_terminator": "$C43C6E",
+      "alternate_terminator": "$C43CBC"
+    },
+    {
+      "header": "$C43CBE",
+      "inline_stream": "$C43CC2",
+      "alternate_stream": "$C43CFA",
+      "observed_direct_entry": true,
+      "inline_pair_count": 13,
+      "alternate_pair_count": 7,
+      "inline_terminator": "$C43CF8",
+      "alternate_terminator": "$C43D18"
+    },
+    {
+      "header": "$C43D1A",
+      "inline_stream": "$C43D1E",
+      "alternate_stream": "$C43D1E",
+      "observed_direct_entry": true,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C43D30",
+      "alternate_terminator": "$C43D30"
+    },
+    {
+      "header": "$C43D34",
+      "inline_stream": "$C43D38",
+      "alternate_stream": "$C43D38",
+      "observed_direct_entry": true,
+      "inline_pair_count": 17,
+      "alternate_pair_count": 17,
+      "inline_terminator": "$C43D82",
+      "alternate_terminator": "$C43D82"
+    },
+    {
+      "header": "$C43D84",
+      "inline_stream": "$C43D88",
+      "alternate_stream": "$C43D88",
+      "observed_direct_entry": true,
+      "inline_pair_count": 36,
+      "alternate_pair_count": 36,
+      "inline_terminator": "$C43E22",
+      "alternate_terminator": "$C43E22"
+    },
+    {
+      "header": "$C43E24",
+      "inline_stream": "$C43E28",
+      "alternate_stream": "$C43E9A",
+      "observed_direct_entry": true,
+      "inline_pair_count": 26,
+      "alternate_pair_count": 11,
+      "inline_terminator": "$C43E98",
+      "alternate_terminator": "$C43EC8"
+    },
+    {
+      "header": "$C43ECA",
+      "inline_stream": "$C43ECE",
+      "alternate_stream": "$C43F3A",
+      "observed_direct_entry": true,
+      "inline_pair_count": 25,
+      "alternate_pair_count": 8,
+      "inline_terminator": "$C43F38",
+      "alternate_terminator": "$C43F5C"
+    },
+    {
+      "header": "$C43F5E",
+      "inline_stream": "$C43F62",
+      "alternate_stream": "$C43FAE",
+      "observed_direct_entry": true,
+      "inline_pair_count": 17,
+      "alternate_pair_count": 7,
+      "inline_terminator": "$C43FAC",
+      "alternate_terminator": "$C43FCE"
+    },
+    {
+      "header": "$C43FD0",
+      "inline_stream": "$C43FD4",
+      "alternate_stream": "$C43FD4",
+      "observed_direct_entry": false,
+      "inline_pair_count": 28,
+      "alternate_pair_count": 28,
+      "inline_terminator": "$C4404A",
+      "alternate_terminator": "$C4404A"
+    },
+    {
+      "header": "$C4404C",
+      "inline_stream": "$C44050",
+      "alternate_stream": "$C44050",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C44062",
+      "alternate_terminator": "$C44062"
+    },
+    {
+      "header": "$C44066",
+      "inline_stream": "$C4406A",
+      "alternate_stream": "$C4406A",
+      "observed_direct_entry": true,
+      "inline_pair_count": 3,
+      "alternate_pair_count": 3,
+      "inline_terminator": "$C44078",
+      "alternate_terminator": "$C44078"
+    },
+    {
+      "header": "$C4407C",
+      "inline_stream": "$C44080",
+      "alternate_stream": "$C44080",
+      "observed_direct_entry": true,
+      "inline_pair_count": 6,
+      "alternate_pair_count": 6,
+      "inline_terminator": "$C4409C",
+      "alternate_terminator": "$C4409C"
+    },
+    {
+      "header": "$C4409E",
+      "inline_stream": "$C440A2",
+      "alternate_stream": "$C440A2",
+      "observed_direct_entry": true,
+      "inline_pair_count": 5,
+      "alternate_pair_count": 5,
+      "inline_terminator": "$C440B8",
+      "alternate_terminator": "$C440B8"
+    },
+    {
+      "header": "$C440BC",
+      "inline_stream": "$C440C0",
+      "alternate_stream": "$C440C0",
+      "observed_direct_entry": false,
+      "inline_pair_count": 37,
+      "alternate_pair_count": 37,
+      "inline_terminator": "$C4415E",
+      "alternate_terminator": "$C4415E"
+    },
+    {
+      "header": "$C44160",
+      "inline_stream": "$C44164",
+      "alternate_stream": "$C44164",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C44176",
+      "alternate_terminator": "$C44176"
+    },
+    {
+      "header": "$C4417A",
+      "inline_stream": "$C4417E",
+      "alternate_stream": "$C4417E",
+      "observed_direct_entry": false,
+      "inline_pair_count": 33,
+      "alternate_pair_count": 33,
+      "inline_terminator": "$C44208",
+      "alternate_terminator": "$C44208"
+    },
+    {
+      "header": "$C4420C",
+      "inline_stream": "$C44210",
+      "alternate_stream": "$C44210",
+      "observed_direct_entry": false,
+      "inline_pair_count": 13,
+      "alternate_pair_count": 13,
+      "inline_terminator": "$C44248",
+      "alternate_terminator": "$C44248"
+    },
+    {
+      "header": "$C4424A",
+      "inline_stream": "$C4424E",
+      "alternate_stream": "$C4424E",
+      "observed_direct_entry": false,
+      "inline_pair_count": 13,
+      "alternate_pair_count": 13,
+      "inline_terminator": "$C44284",
+      "alternate_terminator": "$C44284"
+    },
+    {
+      "header": "$C44286",
+      "inline_stream": "$C4428A",
+      "alternate_stream": "$C4428A",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4429C",
+      "alternate_terminator": "$C4429C"
+    },
+    {
+      "header": "$C442A0",
+      "inline_stream": "$C442A4",
+      "alternate_stream": "$C442A4",
+      "observed_direct_entry": false,
+      "inline_pair_count": 8,
+      "alternate_pair_count": 8,
+      "inline_terminator": "$C442C6",
+      "alternate_terminator": "$C442C6"
+    },
+    {
+      "header": "$C442CA",
+      "inline_stream": "$C442CE",
+      "alternate_stream": "$C442CE",
+      "observed_direct_entry": false,
+      "inline_pair_count": 15,
+      "alternate_pair_count": 15,
+      "inline_terminator": "$C4430E",
+      "alternate_terminator": "$C4430E"
+    },
+    {
+      "header": "$C44310",
+      "inline_stream": "$C44314",
+      "alternate_stream": "$C44314",
+      "observed_direct_entry": false,
+      "inline_pair_count": 10,
+      "alternate_pair_count": 10,
+      "inline_terminator": "$C4433E",
+      "alternate_terminator": "$C4433E"
+    },
+    {
+      "header": "$C44340",
+      "inline_stream": "$C44344",
+      "alternate_stream": "$C44344",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C44356",
+      "alternate_terminator": "$C44356"
+    },
+    {
+      "header": "$C4435A",
+      "inline_stream": "$C4435E",
+      "alternate_stream": "$C4435E",
+      "observed_direct_entry": false,
+      "inline_pair_count": 17,
+      "alternate_pair_count": 17,
+      "inline_terminator": "$C443A6",
+      "alternate_terminator": "$C443A6"
+    },
+    {
+      "header": "$C443AA",
+      "inline_stream": "$C443AE",
+      "alternate_stream": "$C443AE",
+      "observed_direct_entry": false,
+      "inline_pair_count": 16,
+      "alternate_pair_count": 16,
+      "inline_terminator": "$C443F2",
+      "alternate_terminator": "$C443F2"
+    },
+    {
+      "header": "$C443F4",
+      "inline_stream": "$C443F8",
+      "alternate_stream": "$C443F8",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4440A",
+      "alternate_terminator": "$C4440A"
+    },
+    {
+      "header": "$C4440E",
+      "inline_stream": "$C44412",
+      "alternate_stream": "$C44412",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C44424",
+      "alternate_terminator": "$C44424"
+    },
+    {
+      "header": "$C44428",
+      "inline_stream": "$C4442C",
+      "alternate_stream": "$C4442C",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4443E",
+      "alternate_terminator": "$C4443E"
+    },
+    {
+      "header": "$C44442",
+      "inline_stream": "$C44446",
+      "alternate_stream": "$C44446",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C44458",
+      "alternate_terminator": "$C44458"
+    },
+    {
+      "header": "$C4445C",
+      "inline_stream": "$C44460",
+      "alternate_stream": "$C44460",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C44472",
+      "alternate_terminator": "$C44472"
+    },
+    {
+      "header": "$C44476",
+      "inline_stream": "$C4447A",
+      "alternate_stream": "$C4447A",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C4448C",
+      "alternate_terminator": "$C4448C"
+    },
+    {
+      "header": "$C44490",
+      "inline_stream": "$C44494",
+      "alternate_stream": "$C44494",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C444A6",
+      "alternate_terminator": "$C444A6"
+    },
+    {
+      "header": "$C444AA",
+      "inline_stream": "$C444AE",
+      "alternate_stream": "$C444AE",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C444C0",
+      "alternate_terminator": "$C444C0"
+    },
+    {
+      "header": "$C444C4",
+      "inline_stream": "$C444C8",
+      "alternate_stream": "$C444C8",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C444DA",
+      "alternate_terminator": "$C444DA"
+    },
+    {
+      "header": "$C444DE",
+      "inline_stream": "$C444E2",
+      "alternate_stream": "$C444E2",
+      "observed_direct_entry": false,
+      "inline_pair_count": 4,
+      "alternate_pair_count": 4,
+      "inline_terminator": "$C444F4",
+      "alternate_terminator": "$C444F4"
+    }
+  ]
 }

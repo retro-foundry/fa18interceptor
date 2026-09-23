@@ -55,3 +55,15 @@ remain signed two-word source values; depth is computed later by the renderer.
 
 Authority: direct-header inventories generated from sealed traces and the
 byte-exact `$C2AEFC-$C2AFF7` reader/stream selector reconstruction.
+
+## Grammar-compatible header candidates
+
+A conservative even-address scan finds 71 locations
+whose leading longword points inside segment 68 and whose inline and alternate
+streams both complete under the exact count/threshold grammar. 24
+are direct renderer entries in the sealed traces. The remaining candidates are
+not promoted to packet headers: coordinate payload can coincidentally satisfy a
+small grammar, so dynamic entry or a static producer reference is still required.
+
+The JSON retains every candidate and marks direct-entry status for use as a
+targeted trace list rather than as an unverified map export.
