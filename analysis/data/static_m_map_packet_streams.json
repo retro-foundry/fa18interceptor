@@ -11,7 +11,7 @@
     "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
     "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
   ],
-  "header_count": 26,
+  "header_count": 71,
   "headers": [
     "$C42D28",
     "$C42DC4",
@@ -19,6 +19,29 @@
     "$C42E1A",
     "$C42E3E",
     "$C42E52",
+    "$C4366E",
+    "$C43688",
+    "$C436A2",
+    "$C436BC",
+    "$C436D6",
+    "$C436F0",
+    "$C4370A",
+    "$C43724",
+    "$C4373E",
+    "$C43758",
+    "$C43772",
+    "$C43792",
+    "$C437C2",
+    "$C437DC",
+    "$C4382A",
+    "$C43844",
+    "$C4389E",
+    "$C438B8",
+    "$C438DC",
+    "$C43914",
+    "$C4392E",
+    "$C43946",
+    "$C4397A",
     "$C43994",
     "$C439A8",
     "$C439CC",
@@ -35,10 +58,32 @@
     "$C43ECA",
     "$C43F5E",
     "$C43FD0",
+    "$C4404C",
     "$C44066",
     "$C4407C",
     "$C4409E",
-    "$C440BC"
+    "$C440BC",
+    "$C44160",
+    "$C4417A",
+    "$C4420C",
+    "$C4424A",
+    "$C44286",
+    "$C442A0",
+    "$C442CA",
+    "$C44310",
+    "$C44340",
+    "$C4435A",
+    "$C443AA",
+    "$C443F4",
+    "$C4440E",
+    "$C44428",
+    "$C44442",
+    "$C4445C",
+    "$C44476",
+    "$C44490",
+    "$C444AA",
+    "$C444C4",
+    "$C444DE"
   ],
   "streams": [
     {
@@ -524,6 +569,1210 @@
       ]
     },
     {
+      "start": "$C43672",
+      "batches": [
+        {
+          "prefix": "$C43672",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43674",
+          "pair_end_exclusive": "$C43684",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43684",
+      "end_exclusive": "$C43686",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4366E"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4368C",
+      "batches": [
+        {
+          "prefix": "$C4368C",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4368E",
+          "pair_end_exclusive": "$C4369E",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4369E",
+      "end_exclusive": "$C436A0",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43688"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C436A6",
+      "batches": [
+        {
+          "prefix": "$C436A6",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C436A8",
+          "pair_end_exclusive": "$C436B8",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C436B8",
+      "end_exclusive": "$C436BA",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C436A2"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C436C0",
+      "batches": [
+        {
+          "prefix": "$C436C0",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C436C2",
+          "pair_end_exclusive": "$C436D2",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C436D2",
+      "end_exclusive": "$C436D4",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C436BC"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C436DA",
+      "batches": [
+        {
+          "prefix": "$C436DA",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C436DC",
+          "pair_end_exclusive": "$C436EC",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C436EC",
+      "end_exclusive": "$C436EE",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C436D6"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C436F4",
+      "batches": [
+        {
+          "prefix": "$C436F4",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C436F6",
+          "pair_end_exclusive": "$C43706",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43706",
+      "end_exclusive": "$C43708",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C436F0"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4370E",
+      "batches": [
+        {
+          "prefix": "$C4370E",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43710",
+          "pair_end_exclusive": "$C43720",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43720",
+      "end_exclusive": "$C43722",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4370A"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C43728",
+      "batches": [
+        {
+          "prefix": "$C43728",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4372A",
+          "pair_end_exclusive": "$C4373A",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4373A",
+      "end_exclusive": "$C4373C",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43724"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C43742",
+      "batches": [
+        {
+          "prefix": "$C43742",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43744",
+          "pair_end_exclusive": "$C43754",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43754",
+      "end_exclusive": "$C43756",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4373E"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4375C",
+      "batches": [
+        {
+          "prefix": "$C4375C",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4375E",
+          "pair_end_exclusive": "$C4376E",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4376E",
+      "end_exclusive": "$C43770",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43758"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C43776",
+      "batches": [
+        {
+          "prefix": "$C43776",
+          "threshold_word": null,
+          "count": 6,
+          "pair_start": "$C43778",
+          "pair_end_exclusive": "$C43790",
+          "pairs": [
+            [
+              4096,
+              1984
+            ],
+            [
+              3840,
+              1600
+            ],
+            [
+              3520,
+              1408
+            ],
+            [
+              2688,
+              160
+            ],
+            [
+              2688,
+              0
+            ],
+            [
+              4160,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43790",
+      "end_exclusive": "$C43792",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43772"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C43796",
+      "batches": [
+        {
+          "prefix": "$C43796",
+          "threshold_word": null,
+          "count": 10,
+          "pair_start": "$C43798",
+          "pair_end_exclusive": "$C437C0",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2560,
+              4096
+            ],
+            [
+              2672,
+              3968
+            ],
+            [
+              2480,
+              3904
+            ],
+            [
+              2304,
+              3632
+            ],
+            [
+              1408,
+              2640
+            ],
+            [
+              896,
+              2560
+            ],
+            [
+              0,
+              1984
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C437C0",
+      "end_exclusive": "$C437C2",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43792"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C437C6",
+      "batches": [
+        {
+          "prefix": "$C437C6",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C437C8",
+          "pair_end_exclusive": "$C437D8",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C437D8",
+      "end_exclusive": "$C437DA",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C437C2"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C437E0",
+      "batches": [
+        {
+          "prefix": "$C437E0",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C437E2",
+          "pair_end_exclusive": "$C43806",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              3136,
+              4096
+            ],
+            [
+              3024,
+              3920
+            ],
+            [
+              3200,
+              3712
+            ],
+            [
+              3424,
+              3776
+            ],
+            [
+              3200,
+              3280
+            ],
+            [
+              3296,
+              3200
+            ],
+            [
+              2896,
+              1840
+            ],
+            [
+              4224,
+              1840
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43806",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43808",
+          "pair_end_exclusive": "$C43828",
+          "pairs": [
+            [
+              4160,
+              1920
+            ],
+            [
+              2896,
+              1840
+            ],
+            [
+              2848,
+              1584
+            ],
+            [
+              2704,
+              1440
+            ],
+            [
+              2752,
+              768
+            ],
+            [
+              2560,
+              448
+            ],
+            [
+              2560,
+              0
+            ],
+            [
+              4160,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43828",
+      "end_exclusive": "$C4382A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C437DC"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4382E",
+      "batches": [
+        {
+          "prefix": "$C4382E",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43830",
+          "pair_end_exclusive": "$C43840",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43840",
+      "end_exclusive": "$C43842",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4382A"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C43848",
+      "batches": [
+        {
+          "prefix": "$C43848",
+          "threshold_word": null,
+          "count": 10,
+          "pair_start": "$C4384A",
+          "pair_end_exclusive": "$C43872",
+          "pairs": [
+            [
+              4096,
+              1296
+            ],
+            [
+              3472,
+              1216
+            ],
+            [
+              3616,
+              752
+            ],
+            [
+              3712,
+              784
+            ],
+            [
+              3744,
+              656
+            ],
+            [
+              3392,
+              288
+            ],
+            [
+              3360,
+              384
+            ],
+            [
+              3072,
+              272
+            ],
+            [
+              3136,
+              0
+            ],
+            [
+              4160,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43872",
+          "threshold_word": null,
+          "count": 10,
+          "pair_start": "$C43874",
+          "pair_end_exclusive": "$C4389C",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              1184,
+              4096
+            ],
+            [
+              1328,
+              2928
+            ],
+            [
+              1952,
+              1344
+            ],
+            [
+              2560,
+              1104
+            ],
+            [
+              2608,
+              1328
+            ],
+            [
+              3040,
+              1680
+            ],
+            [
+              3200,
+              1664
+            ],
+            [
+              3392,
+              1200
+            ],
+            [
+              4096,
+              1248
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4389C",
+      "end_exclusive": "$C4389E",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43844"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C438A2",
+      "batches": [
+        {
+          "prefix": "$C438A2",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C438A4",
+          "pair_end_exclusive": "$C438B4",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C438B4",
+      "end_exclusive": "$C438B6",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4389E"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C438BC",
+      "batches": [
+        {
+          "prefix": "$C438BC",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C438BE",
+          "pair_end_exclusive": "$C438DA",
+          "pairs": [
+            [
+              4096,
+              3408
+            ],
+            [
+              3728,
+              3296
+            ],
+            [
+              3136,
+              3712
+            ],
+            [
+              2528,
+              3456
+            ],
+            [
+              1056,
+              800
+            ],
+            [
+              1184,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C438DA",
+      "end_exclusive": "$C438DC",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C438B8"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C438E0",
+      "batches": [
+        {
+          "prefix": "$C438E0",
+          "threshold_word": null,
+          "count": 12,
+          "pair_start": "$C438E2",
+          "pair_end_exclusive": "$C43912",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2624,
+              4096
+            ],
+            [
+              2176,
+              3696
+            ],
+            [
+              2080,
+              3712
+            ],
+            [
+              1936,
+              3520
+            ],
+            [
+              1536,
+              3344
+            ],
+            [
+              640,
+              3200
+            ],
+            [
+              336,
+              3216
+            ],
+            [
+              352,
+              3392
+            ],
+            [
+              0,
+              3408
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43912",
+      "end_exclusive": "$C43914",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C438DC"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C43918",
+      "batches": [
+        {
+          "prefix": "$C43918",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4391A",
+          "pair_end_exclusive": "$C4392A",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4392A",
+      "end_exclusive": "$C4392C",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43914"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C43932",
+      "batches": [
+        {
+          "prefix": "$C43932",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43934",
+          "pair_end_exclusive": "$C43944",
+          "pairs": [
+            [
+              4096,
+              1840
+            ],
+            [
+              3200,
+              448
+            ],
+            [
+              2624,
+              0
+            ],
+            [
+              4160,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43944",
+      "end_exclusive": "$C43946",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4392E"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4394A",
+      "batches": [
+        {
+          "prefix": "$C4394A",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C4394C",
+          "pair_end_exclusive": "$C43978",
+          "pairs": [
+            [
+              1792,
+              4096
+            ],
+            [
+              1536,
+              3248
+            ],
+            [
+              1312,
+              3264
+            ],
+            [
+              1056,
+              2688
+            ],
+            [
+              720,
+              2480
+            ],
+            [
+              640,
+              1984
+            ],
+            [
+              464,
+              2112
+            ],
+            [
+              0,
+              1840
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4160,
+              0
+            ],
+            [
+              4224,
+              4224
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43978",
+      "end_exclusive": "$C4397A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43946"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4397E",
+      "batches": [
+        {
+          "prefix": "$C4397E",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43980",
+          "pair_end_exclusive": "$C43990",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43990",
+      "end_exclusive": "$C43992",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4397A"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
       "start": "$C43998",
       "batches": [
         {
@@ -562,7 +1811,8 @@
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -620,7 +1870,8 @@
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -666,7 +1917,8 @@
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -792,7 +2044,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -868,7 +2121,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1022,7 +2276,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1095,7 +2350,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1141,7 +2397,8 @@
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1271,7 +2528,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1319,7 +2577,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1566,7 +2825,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1678,7 +2938,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1761,7 +3022,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1820,7 +3082,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1863,7 +3126,8 @@
       ],
       "inventories": [
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
-        "analysis\\data\\run035_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -1977,7 +3241,8 @@
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2186,7 +3451,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2345,7 +3611,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2417,7 +3684,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2566,7 +3834,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2629,7 +3898,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2746,7 +4016,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2814,7 +4085,8 @@
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -2970,7 +4242,50 @@
         "$C43FD0"
       ],
       "inventories": [
-        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json"
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44050",
+      "batches": [
+        {
+          "prefix": "$C44050",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C44052",
+          "pair_end_exclusive": "$C44062",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44062",
+      "end_exclusive": "$C44064",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4404C"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -3010,7 +4325,8 @@
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -3072,7 +4388,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -3121,7 +4438,8 @@
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
         "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run037_m_map_packet_long_window.json",
-        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     },
     {
@@ -3331,15 +4649,1324 @@
         "$C440BC"
       ],
       "inventories": [
-        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json"
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44164",
+      "batches": [
+        {
+          "prefix": "$C44164",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C44166",
+          "pair_end_exclusive": "$C44176",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44176",
+      "end_exclusive": "$C44178",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44160"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4417E",
+      "batches": [
+        {
+          "prefix": "$C4417E",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C44180",
+          "pair_end_exclusive": "$C441A4",
+          "pairs": [
+            [
+              3728,
+              4160
+            ],
+            [
+              2976,
+              4096
+            ],
+            [
+              2560,
+              3392
+            ],
+            [
+              2720,
+              3024
+            ],
+            [
+              3216,
+              3264
+            ],
+            [
+              3328,
+              3648
+            ],
+            [
+              3248,
+              3696
+            ],
+            [
+              3328,
+              3728
+            ],
+            [
+              3456,
+              3664
+            ]
+          ]
+        },
+        {
+          "prefix": "$C441A4",
+          "threshold_word": null,
+          "count": 12,
+          "pair_start": "$C441A6",
+          "pair_end_exclusive": "$C441D6",
+          "pairs": [
+            [
+              3216,
+              3168
+            ],
+            [
+              2496,
+              3216
+            ],
+            [
+              2240,
+              3072
+            ],
+            [
+              2192,
+              2752
+            ],
+            [
+              2304,
+              2688
+            ],
+            [
+              2400,
+              2832
+            ],
+            [
+              2336,
+              3056
+            ],
+            [
+              2592,
+              2752
+            ],
+            [
+              2656,
+              2976
+            ],
+            [
+              2848,
+              2304
+            ],
+            [
+              2912,
+              2736
+            ],
+            [
+              3072,
+              3072
+            ]
+          ]
+        },
+        {
+          "prefix": "$C441D6",
+          "threshold_word": null,
+          "count": 12,
+          "pair_start": "$C441D8",
+          "pair_end_exclusive": "$C44208",
+          "pairs": [
+            [
+              1936,
+              2896
+            ],
+            [
+              1904,
+              2688
+            ],
+            [
+              1360,
+              2464
+            ],
+            [
+              1584,
+              2432
+            ],
+            [
+              1744,
+              2112
+            ],
+            [
+              1776,
+              2544
+            ],
+            [
+              1936,
+              2560
+            ],
+            [
+              2000,
+              2800
+            ],
+            [
+              2224,
+              2624
+            ],
+            [
+              2304,
+              2304
+            ],
+            [
+              2304,
+              2688
+            ],
+            [
+              2208,
+              2816
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44208",
+      "end_exclusive": "$C4420A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4417A"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44210",
+      "batches": [
+        {
+          "prefix": "$C44210",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C44212",
+          "pair_end_exclusive": "$C44232",
+          "pairs": [
+            [
+              4096,
+              1984
+            ],
+            [
+              3744,
+              1568
+            ],
+            [
+              3376,
+              1488
+            ],
+            [
+              3296,
+              1344
+            ],
+            [
+              3312,
+              1168
+            ],
+            [
+              3504,
+              1392
+            ],
+            [
+              3584,
+              1280
+            ],
+            [
+              4160,
+              1248
+            ]
+          ]
+        },
+        {
+          "prefix": "$C44232",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C44234",
+          "pair_end_exclusive": "$C44248",
+          "pairs": [
+            [
+              4160,
+              1344
+            ],
+            [
+              3584,
+              1280
+            ],
+            [
+              3504,
+              1296
+            ],
+            [
+              2816,
+              0
+            ],
+            [
+              4096,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44248",
+      "end_exclusive": "$C4424A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4420C"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4424E",
+      "batches": [
+        {
+          "prefix": "$C4424E",
+          "threshold_word": null,
+          "count": 13,
+          "pair_start": "$C44250",
+          "pair_end_exclusive": "$C44284",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2496,
+              4096
+            ],
+            [
+              2288,
+              3856
+            ],
+            [
+              2384,
+              3728
+            ],
+            [
+              2304,
+              3584
+            ],
+            [
+              1904,
+              3424
+            ],
+            [
+              1920,
+              3296
+            ],
+            [
+              1408,
+              2944
+            ],
+            [
+              1168,
+              2576
+            ],
+            [
+              960,
+              2576
+            ],
+            [
+              0,
+              1984
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44284",
+      "end_exclusive": "$C44286",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4424A"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4428A",
+      "batches": [
+        {
+          "prefix": "$C4428A",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4428C",
+          "pair_end_exclusive": "$C4429C",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4429C",
+      "end_exclusive": "$C4429E",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44286"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C442A4",
+      "batches": [
+        {
+          "prefix": "$C442A4",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C442A6",
+          "pair_end_exclusive": "$C442C6",
+          "pairs": [
+            [
+              3776,
+              1456
+            ],
+            [
+              3712,
+              1344
+            ],
+            [
+              2976,
+              0
+            ],
+            [
+              3712,
+              0
+            ],
+            [
+              4224,
+              512
+            ],
+            [
+              4224,
+              896
+            ],
+            [
+              4016,
+              576
+            ],
+            [
+              3840,
+              896
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C442C6",
+      "end_exclusive": "$C442C8",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C442A0"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C442CE",
+      "batches": [
+        {
+          "prefix": "$C442CE",
+          "threshold_word": null,
+          "count": 6,
+          "pair_start": "$C442D0",
+          "pair_end_exclusive": "$C442E8",
+          "pairs": [
+            [
+              4096,
+              2240
+            ],
+            [
+              3632,
+              1712
+            ],
+            [
+              3728,
+              1552
+            ],
+            [
+              3520,
+              1472
+            ],
+            [
+              3296,
+              992
+            ],
+            [
+              4224,
+              960
+            ]
+          ]
+        },
+        {
+          "prefix": "$C442E8",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C442EA",
+          "pair_end_exclusive": "$C4430E",
+          "pairs": [
+            [
+              4224,
+              1024
+            ],
+            [
+              3296,
+              992
+            ],
+            [
+              2880,
+              384
+            ],
+            [
+              2752,
+              336
+            ],
+            [
+              2768,
+              256
+            ],
+            [
+              2864,
+              256
+            ],
+            [
+              2688,
+              64
+            ],
+            [
+              2496,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4430E",
+      "end_exclusive": "$C44310",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C442CA"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44314",
+      "batches": [
+        {
+          "prefix": "$C44314",
+          "threshold_word": null,
+          "count": 10,
+          "pair_start": "$C44316",
+          "pair_end_exclusive": "$C4433E",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              1920,
+              4096
+            ],
+            [
+              1920,
+              3840
+            ],
+            [
+              1568,
+              3760
+            ],
+            [
+              1376,
+              3424
+            ],
+            [
+              960,
+              3152
+            ],
+            [
+              720,
+              2624
+            ],
+            [
+              0,
+              2240
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4433E",
+      "end_exclusive": "$C44340",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44310"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44344",
+      "batches": [
+        {
+          "prefix": "$C44344",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C44346",
+          "pair_end_exclusive": "$C44356",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44356",
+      "end_exclusive": "$C44358",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44340"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4435E",
+      "batches": [
+        {
+          "prefix": "$C4435E",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C44360",
+          "pair_end_exclusive": "$C4437C",
+          "pairs": [
+            [
+              2240,
+              3056
+            ],
+            [
+              1680,
+              3056
+            ],
+            [
+              1520,
+              2896
+            ],
+            [
+              1536,
+              2464
+            ],
+            [
+              1808,
+              2352
+            ],
+            [
+              2128,
+              2560
+            ],
+            [
+              1984,
+              2720
+            ]
+          ]
+        },
+        {
+          "prefix": "$C4437C",
+          "threshold_word": null,
+          "count": 10,
+          "pair_start": "$C4437E",
+          "pair_end_exclusive": "$C443A6",
+          "pairs": [
+            [
+              1392,
+              2672
+            ],
+            [
+              896,
+              2416
+            ],
+            [
+              864,
+              2240
+            ],
+            [
+              640,
+              2032
+            ],
+            [
+              656,
+              1888
+            ],
+            [
+              880,
+              1984
+            ],
+            [
+              912,
+              2176
+            ],
+            [
+              1120,
+              2048
+            ],
+            [
+              1472,
+              2128
+            ],
+            [
+              1696,
+              2512
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C443A6",
+      "end_exclusive": "$C443A8",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4435A"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C443AE",
+      "batches": [
+        {
+          "prefix": "$C443AE",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C443B0",
+          "pair_end_exclusive": "$C443CC",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              3072,
+              4096
+            ],
+            [
+              3200,
+              3200
+            ],
+            [
+              3648,
+              2496
+            ],
+            [
+              3552,
+              2304
+            ],
+            [
+              3728,
+              2464
+            ],
+            [
+              4096,
+              2448
+            ]
+          ]
+        },
+        {
+          "prefix": "$C443CC",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C443CE",
+          "pair_end_exclusive": "$C443F2",
+          "pairs": [
+            [
+              4224,
+              2512
+            ],
+            [
+              3808,
+              2496
+            ],
+            [
+              3616,
+              2112
+            ],
+            [
+              3600,
+              1792
+            ],
+            [
+              3392,
+              1744
+            ],
+            [
+              2624,
+              864
+            ],
+            [
+              2624,
+              640
+            ],
+            [
+              1920,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C443F2",
+      "end_exclusive": "$C443F4",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C443AA"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C443F8",
+      "batches": [
+        {
+          "prefix": "$C443F8",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C443FA",
+          "pair_end_exclusive": "$C4440A",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4440A",
+      "end_exclusive": "$C4440C",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C443F4"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44412",
+      "batches": [
+        {
+          "prefix": "$C44412",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C44414",
+          "pair_end_exclusive": "$C44424",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44424",
+      "end_exclusive": "$C44426",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4440E"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4442C",
+      "batches": [
+        {
+          "prefix": "$C4442C",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4442E",
+          "pair_end_exclusive": "$C4443E",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4443E",
+      "end_exclusive": "$C44440",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44428"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44446",
+      "batches": [
+        {
+          "prefix": "$C44446",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C44448",
+          "pair_end_exclusive": "$C44458",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44458",
+      "end_exclusive": "$C4445A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44442"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44460",
+      "batches": [
+        {
+          "prefix": "$C44460",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C44462",
+          "pair_end_exclusive": "$C44472",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44472",
+      "end_exclusive": "$C44474",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4445C"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C4447A",
+      "batches": [
+        {
+          "prefix": "$C4447A",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4447C",
+          "pair_end_exclusive": "$C4448C",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4448C",
+      "end_exclusive": "$C4448E",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44476"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C44494",
+      "batches": [
+        {
+          "prefix": "$C44494",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C44496",
+          "pair_end_exclusive": "$C444A6",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C444A6",
+      "end_exclusive": "$C444A8",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44490"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C444AE",
+      "batches": [
+        {
+          "prefix": "$C444AE",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C444B0",
+          "pair_end_exclusive": "$C444C0",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C444C0",
+      "end_exclusive": "$C444C2",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C444AA"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C444C8",
+      "batches": [
+        {
+          "prefix": "$C444C8",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C444CA",
+          "pair_end_exclusive": "$C444DA",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C444DA",
+      "end_exclusive": "$C444DC",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C444C4"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
+      ]
+    },
+    {
+      "start": "$C444E2",
+      "batches": [
+        {
+          "prefix": "$C444E2",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C444E4",
+          "pair_end_exclusive": "$C444F4",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C444F4",
+      "end_exclusive": "$C444F6",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C444DE"
+      ],
+      "inventories": [
+        "analysis\\data\\wide_m_map_packet_directory.json"
       ]
     }
   ],
-  "pair_count": 489,
-  "pair_bytes": 1956,
-  "pair_byte_fraction": 0.31426735218509,
+  "pair_count": 817,
+  "pair_bytes": 3268,
+  "pair_byte_fraction": 0.5250642673521851,
   "candidate_header_count": 71,
-  "observed_candidate_count": 26,
+  "observed_candidate_count": 71,
   "header_candidates": [
     {
       "header": "$C42D28",
@@ -3419,7 +6046,7 @@
       "alternate_stream": "$C43672",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43684",
@@ -3431,7 +6058,7 @@
       "alternate_stream": "$C4368C",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4369E",
@@ -3443,7 +6070,7 @@
       "alternate_stream": "$C436A6",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C436B8",
@@ -3455,7 +6082,7 @@
       "alternate_stream": "$C436C0",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C436D2",
@@ -3467,7 +6094,7 @@
       "alternate_stream": "$C436DA",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C436EC",
@@ -3479,7 +6106,7 @@
       "alternate_stream": "$C436F4",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43706",
@@ -3491,7 +6118,7 @@
       "alternate_stream": "$C4370E",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43720",
@@ -3503,7 +6130,7 @@
       "alternate_stream": "$C43728",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4373A",
@@ -3515,7 +6142,7 @@
       "alternate_stream": "$C43742",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43754",
@@ -3527,7 +6154,7 @@
       "alternate_stream": "$C4375C",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4376E",
@@ -3539,7 +6166,7 @@
       "alternate_stream": "$C43776",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 6,
       "alternate_pair_count": 6,
       "inline_terminator": "$C43790",
@@ -3551,7 +6178,7 @@
       "alternate_stream": "$C43796",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 10,
       "alternate_pair_count": 10,
       "inline_terminator": "$C437C0",
@@ -3563,7 +6190,7 @@
       "alternate_stream": "$C437C6",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C437D8",
@@ -3575,7 +6202,7 @@
       "alternate_stream": "$C437E0",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 17,
       "alternate_pair_count": 17,
       "inline_terminator": "$C43828",
@@ -3587,7 +6214,7 @@
       "alternate_stream": "$C4382E",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43840",
@@ -3599,7 +6226,7 @@
       "alternate_stream": "$C43848",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 20,
       "alternate_pair_count": 20,
       "inline_terminator": "$C4389C",
@@ -3611,7 +6238,7 @@
       "alternate_stream": "$C438A2",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C438B4",
@@ -3623,7 +6250,7 @@
       "alternate_stream": "$C438BC",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 7,
       "alternate_pair_count": 7,
       "inline_terminator": "$C438DA",
@@ -3635,7 +6262,7 @@
       "alternate_stream": "$C438E0",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 12,
       "alternate_pair_count": 12,
       "inline_terminator": "$C43912",
@@ -3647,7 +6274,7 @@
       "alternate_stream": "$C43918",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4392A",
@@ -3659,7 +6286,7 @@
       "alternate_stream": "$C43932",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43944",
@@ -3671,7 +6298,7 @@
       "alternate_stream": "$C4394A",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 11,
       "alternate_pair_count": 11,
       "inline_terminator": "$C43978",
@@ -3683,7 +6310,7 @@
       "alternate_stream": "$C4397E",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43990",
@@ -3695,7 +6322,7 @@
       "alternate_stream": "$C43998",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 3,
       "alternate_pair_count": 3,
       "inline_terminator": "$C439A6",
@@ -3707,7 +6334,7 @@
       "alternate_stream": "$C439AC",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 7,
       "alternate_pair_count": 7,
       "inline_terminator": "$C439CA",
@@ -3719,7 +6346,7 @@
       "alternate_stream": "$C439D0",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C439E2",
@@ -3731,7 +6358,7 @@
       "alternate_stream": "$C43A44",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 20,
       "alternate_pair_count": 12,
       "inline_terminator": "$C43A42",
@@ -3743,7 +6370,7 @@
       "alternate_stream": "$C43AF0",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 27,
       "alternate_pair_count": 9,
       "inline_terminator": "$C43AEE",
@@ -3755,7 +6382,7 @@
       "alternate_stream": "$C43B1E",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43B30",
@@ -3767,7 +6394,7 @@
       "alternate_stream": "$C43B94",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 21,
       "alternate_pair_count": 5,
       "inline_terminator": "$C43B92",
@@ -3779,7 +6406,7 @@
       "alternate_stream": "$C43C70",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 45,
       "alternate_pair_count": 18,
       "inline_terminator": "$C43C6E",
@@ -3791,7 +6418,7 @@
       "alternate_stream": "$C43CFA",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 13,
       "alternate_pair_count": 7,
       "inline_terminator": "$C43CF8",
@@ -3803,7 +6430,7 @@
       "alternate_stream": "$C43D1E",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43D30",
@@ -3815,7 +6442,7 @@
       "alternate_stream": "$C43D38",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 17,
       "alternate_pair_count": 17,
       "inline_terminator": "$C43D82",
@@ -3827,7 +6454,7 @@
       "alternate_stream": "$C43D88",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 36,
       "alternate_pair_count": 36,
       "inline_terminator": "$C43E22",
@@ -3839,7 +6466,7 @@
       "alternate_stream": "$C43E9A",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 26,
       "alternate_pair_count": 11,
       "inline_terminator": "$C43E98",
@@ -3851,7 +6478,7 @@
       "alternate_stream": "$C43F3A",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 25,
       "alternate_pair_count": 8,
       "inline_terminator": "$C43F38",
@@ -3863,7 +6490,7 @@
       "alternate_stream": "$C43FAE",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 17,
       "alternate_pair_count": 7,
       "inline_terminator": "$C43FAC",
@@ -3875,7 +6502,7 @@
       "alternate_stream": "$C43FD4",
       "observed_direct_entry": false,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 28,
       "alternate_pair_count": 28,
       "inline_terminator": "$C4404A",
@@ -3887,7 +6514,7 @@
       "alternate_stream": "$C44050",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44062",
@@ -3899,7 +6526,7 @@
       "alternate_stream": "$C4406A",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 3,
       "alternate_pair_count": 3,
       "inline_terminator": "$C44078",
@@ -3911,7 +6538,7 @@
       "alternate_stream": "$C44080",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 6,
       "alternate_pair_count": 6,
       "inline_terminator": "$C4409C",
@@ -3923,7 +6550,7 @@
       "alternate_stream": "$C440A2",
       "observed_direct_entry": true,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 5,
       "alternate_pair_count": 5,
       "inline_terminator": "$C440B8",
@@ -3935,7 +6562,7 @@
       "alternate_stream": "$C440C0",
       "observed_direct_entry": false,
       "observed_selector_sample": true,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 37,
       "alternate_pair_count": 37,
       "inline_terminator": "$C4415E",
@@ -3947,7 +6574,7 @@
       "alternate_stream": "$C44164",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44176",
@@ -3959,7 +6586,7 @@
       "alternate_stream": "$C4417E",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 33,
       "alternate_pair_count": 33,
       "inline_terminator": "$C44208",
@@ -3971,7 +6598,7 @@
       "alternate_stream": "$C44210",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 13,
       "alternate_pair_count": 13,
       "inline_terminator": "$C44248",
@@ -3983,7 +6610,7 @@
       "alternate_stream": "$C4424E",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 13,
       "alternate_pair_count": 13,
       "inline_terminator": "$C44284",
@@ -3995,7 +6622,7 @@
       "alternate_stream": "$C4428A",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4429C",
@@ -4007,7 +6634,7 @@
       "alternate_stream": "$C442A4",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 8,
       "alternate_pair_count": 8,
       "inline_terminator": "$C442C6",
@@ -4019,7 +6646,7 @@
       "alternate_stream": "$C442CE",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 15,
       "alternate_pair_count": 15,
       "inline_terminator": "$C4430E",
@@ -4031,7 +6658,7 @@
       "alternate_stream": "$C44314",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 10,
       "alternate_pair_count": 10,
       "inline_terminator": "$C4433E",
@@ -4043,7 +6670,7 @@
       "alternate_stream": "$C44344",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44356",
@@ -4055,7 +6682,7 @@
       "alternate_stream": "$C4435E",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 17,
       "alternate_pair_count": 17,
       "inline_terminator": "$C443A6",
@@ -4067,7 +6694,7 @@
       "alternate_stream": "$C443AE",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 16,
       "alternate_pair_count": 16,
       "inline_terminator": "$C443F2",
@@ -4079,7 +6706,7 @@
       "alternate_stream": "$C443F8",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4440A",
@@ -4091,7 +6718,7 @@
       "alternate_stream": "$C44412",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44424",
@@ -4103,7 +6730,7 @@
       "alternate_stream": "$C4442C",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4443E",
@@ -4115,7 +6742,7 @@
       "alternate_stream": "$C44446",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44458",
@@ -4127,7 +6754,7 @@
       "alternate_stream": "$C44460",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44472",
@@ -4139,7 +6766,7 @@
       "alternate_stream": "$C4447A",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4448C",
@@ -4151,7 +6778,7 @@
       "alternate_stream": "$C44494",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444A6",
@@ -4163,7 +6790,7 @@
       "alternate_stream": "$C444AE",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444C0",
@@ -4175,7 +6802,7 @@
       "alternate_stream": "$C444C8",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444DA",
@@ -4187,7 +6814,7 @@
       "alternate_stream": "$C444E2",
       "observed_direct_entry": false,
       "observed_selector_sample": false,
-      "proven_directory_target": false,
+      "proven_directory_target": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444F4",
@@ -4196,5 +6823,5 @@
   ],
   "direct_header_count": 24,
   "selector_only_header_count": 2,
-  "directory_only_header_count": 0
+  "directory_only_header_count": 45
 }

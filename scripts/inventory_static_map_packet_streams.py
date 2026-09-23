@@ -100,7 +100,7 @@ def markdown(report: dict) -> str:
         "# Static segment-68 streams reachable from traced M-map headers",
         "",
         "Classification: **structurally decoded static packet payload rooted at",
-        "scenario-observed headers**. The decoder follows the byte-exact count/threshold",
+        "scenario-observed headers and byte-exact directory targets**. The decoder follows the byte-exact count/threshold",
         "grammar used by `$C2AF46`; it does not claim every reachable stream rendered in",
         "one frame, represents terrain, or has global flight-map placement.",
         "",
@@ -132,18 +132,18 @@ def markdown(report: dict) -> str:
         "(../exports/static_m_map_packet_streams.obj). The OBJ writes `(x, 0, y)`",
         "solely as a viewer carrier and does not infer faces or game-space elevation.",
         "",
-        "## Grammar-compatible header candidates",
+        "## Directory-backed header coverage",
         "",
         f"A conservative even-address scan finds {report['candidate_header_count']} locations",
         f"whose leading longword points inside segment 68 and whose inline and alternate",
         f"streams both complete under the exact count/threshold grammar. {report['observed_candidate_count']}",
         "have dynamic renderer evidence or a non-reject static directory target in the sealed runs.",
-        "The remaining candidates are",
-        "not promoted to packet headers: coordinate payload can coincidentally satisfy a",
-        "small grammar, so dynamic entry or a static producer reference is still required.",
+        "The wide 32×32 directory supplies a byte-exact producer path for the 45",
+        "otherwise unexecuted headers. Therefore no grammar-compatible header remains",
+        "unrooted in the current scan; this promotes packet structure, not terrain identity",
+        "or evidence that every stream rendered in one draw.",
         "",
-        "The JSON retains every candidate and marks live-evidence status for use as a",
-        "targeted trace list rather than as an unverified map export.",
+        "The JSON retains every header and its direct, selector, and directory evidence.",
         "",
     ])
 
@@ -187,7 +187,9 @@ def main() -> None:
         source = str(directory_path.resolve().relative_to(ROOT))
         directory = json.loads(directory_path.read_text(encoding="utf-8"))
         for row in directory["cells"]:
-            if row["entry_classification"] != "nonnegative_packet_entry_candidate":
+            normal_target = row.get("entry_classification") == "nonnegative_packet_entry_candidate"
+            wide_target = row.get("classification") == "nonnegative_target_word"
+            if not (normal_target or wide_target):
                 continue
             directory_headers.setdefault(int(row["target"][1:], 16), set()).add(source)
     headers: dict[int, set[str]] = {}
