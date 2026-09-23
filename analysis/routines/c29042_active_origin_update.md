@@ -29,8 +29,10 @@ or map-page table.
   reconstructed as [`select_terrain_origin_control_record.asm`](../../source_amiga/observed/select_terrain_origin_control_record.asm).
 - The active-record candidate blend `$C2940A-$C29487` is byte-exactly
   reconstructed as [`blend_terrain_origin_candidate.asm`](../../source_amiga/observed/blend_terrain_origin_candidate.asm).
-  The common threshold-exit range `$C29506-$C29547` remains outside the bounded
-  source slices.
+- The threshold-exit range `$C29506-$C29547` is byte-exactly reconstructed as
+  [`finalize_terrain_origin_adjustment_mode.asm`](../../source_amiga/observed/finalize_terrain_origin_adjustment_mode.asm).
+  Together with the prior slices, this completes byte-exact reconstruction of
+  the producer continuation `$C291D4-$C295D0`.
 
 ## Observed producer path
 
