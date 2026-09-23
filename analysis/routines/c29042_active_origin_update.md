@@ -27,8 +27,10 @@ or map-page table.
   (`$C294AC-$C29505`).
 - The control-record candidate scan `$C29368-$C29408` is byte-exactly
   reconstructed as [`select_terrain_origin_control_record.asm`](../../source_amiga/observed/select_terrain_origin_control_record.asm).
-  The remaining blend path `$C2940A-$C29487` remains outside the bounded source
-  slices.
+- The active-record candidate blend `$C2940A-$C29487` is byte-exactly
+  reconstructed as [`blend_terrain_origin_candidate.asm`](../../source_amiga/observed/blend_terrain_origin_candidate.asm).
+  The common threshold-exit range `$C29506-$C29547` remains outside the bounded
+  source slices.
 
 ## Observed producer path
 
@@ -85,6 +87,12 @@ live list pointer `$C4573A`, seeking a `$C46184` record with a high-nibble
 `$10` class and bit 6 set. Its selected `$14/$1C` values and a derived middle
 component publish another candidate triple. The list ownership, record
 semantics, and any terrain relationship remain unassigned.
+
+The selected blend path combines the live origin with `$14/$18/$1C` of the
+active `$C46184 + word($C458DE)` record, then performs four rounds of
+component-wise arithmetic right-shift averaging before writing `$C45C56`.
+That proves a smoothed candidate construction, not world coordinates or a
+terrain-cell address.
 
 ## Terrain-selection consequence
 
