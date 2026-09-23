@@ -1,0 +1,10 @@
+{
+  "authority": {
+    "trace": "build/run037_m_map_stable_13f_trace/trace.jsonl",
+    "slow_snapshot": "build/run037_m_map_stable_13f_trace/slow.bin",
+    "copy_pc": "$C1D488",
+    "later_builder_header_read_pc": "$C1DD36"
+  },
+  "classification": "traced_static_template_to_mutable_workspace_not_map_mesh",
+  "copies": []
+}
