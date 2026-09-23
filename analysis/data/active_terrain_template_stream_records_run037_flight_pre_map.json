@@ -1,0 +1,11 @@
+{
+  "authority": {
+    "trace": "build/run037_flight_pre_map_selector_trace/trace.jsonl",
+    "slow_snapshot": "build/run037_flight_pre_map_selector_trace/slow.bin",
+    "selector_entry_pc": "$C1D3F4",
+    "stream_start_pc": "$C1D442",
+    "copy_header_read_pc": "$C1D488"
+  },
+  "classification": "scenario_backed_static_stream_to_template_record_inventory_not_global_map_export",
+  "active_streams": []
+}
