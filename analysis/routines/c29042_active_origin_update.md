@@ -21,6 +21,10 @@ or map-page table.
   reconstructed as [`select_terrain_origin_adjustment_mode.asm`](../../source_amiga/observed/select_terrain_origin_adjustment_mode.asm).
 - Its static jump-table threshold cases `$C29226-$C29367` are byte-exactly
   reconstructed as [`dispatch_terrain_origin_adjustment_thresholds.asm`](../../source_amiga/observed/dispatch_terrain_origin_adjustment_thresholds.asm).
+- Two candidate-preparation targets reached by those cases are byte-exactly
+  reconstructed as [`load_terrain_origin_candidate_preset.asm`](../../source_amiga/observed/load_terrain_origin_candidate_preset.asm)
+  (`$C29488-$C294AB`) and [`transform_terrain_origin_candidate_small_mode.asm`](../../source_amiga/observed/transform_terrain_origin_candidate_small_mode.asm)
+  (`$C294AC-$C29505`).
   The remaining downstream cases `$C29368-$C29547` remain outside the bounded
   source slices.
 
@@ -67,6 +71,12 @@ subsequent mode, route to a candidate-preparation path, or return after a
 matrix helper. This demonstrates a static multi-tier threshold policy, but
 does not establish mode semantics, a rendered primitive change, or a
 same-instance physical-distance transition.
+
+Two selected paths now have a bounded candidate contract: `$C29488` publishes
+one of the static triples at `$C46198/$C46998` to `$C45C56`; `$C294AC` or
+`$C294D2` instead calls `$C091CE` with small signed constants selected by
+`$C45848`, then publishes that output. Neither source triple is a whole-world
+terrain mesh, and the preset-selection context is not yet live-traced.
 
 ## Terrain-selection consequence
 
