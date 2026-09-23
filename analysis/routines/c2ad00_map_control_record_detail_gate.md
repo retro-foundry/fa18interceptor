@@ -41,6 +41,15 @@ Both destinations occur in run003 and run035 M-map traces.  That proves the
 mode split is live in this renderer family, but not which values of the
 metric were present at each capture point.
 
+The later live selector samples separate the two controls. Both run035 map
+states retain non-zero `-$3E(A6)` (the 64-byte selector stride), while their
+metrics differ sharply: `1113..1124` during appearance and `196608` when
+stable. The former selects alternate streams for the relevant packets; the
+latter retains inline streams even where the alternate-mode word is non-zero.
+Thus the sampled metric drives the stream/detail result *within* the wide
+layout, rather than selecting the 16- versus 64-byte layout itself. This is
+still renderer/map-state detail evidence, not physical-flight-distance LOD.
+
 Authority: byte-exact reconstruction in
 [`map_control_record_detail_gate.asm`](../../source_amiga/observed/map_control_record_detail_gate.asm),
 decoded from the verified runtime image; trace PCs `$C2AD00`, `$C2AD2A`, and
