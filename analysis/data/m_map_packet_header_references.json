@@ -1,0 +1,12 @@
+{
+  "classification": "stable_runtime_longword_reference_scan_for_m_map_packet_header_candidates",
+  "snapshots": {
+    "baseline": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\captures\\baseline_menu\\slow.bin",
+    "comparison": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run037_m_map_stable_13f_trace\\slow.bin"
+  },
+  "scan": "all even-aligned slow-RAM longwords identical in both snapshots; segment-68 self-references excluded",
+  "candidate_count": 71,
+  "referenced_candidate_count": 0,
+  "references": [],
+  "qualification": "A match proves only a stable longword equal to a candidate header. It does not prove the referencer executes, is a map selector, or that an unreferenced candidate is invalid; relative-offset tables and computed pointers are outside this scan."
+}
