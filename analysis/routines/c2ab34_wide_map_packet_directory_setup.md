@@ -38,4 +38,12 @@ not yet a physical-world distance or mesh-LOD claim. See the [stable branch
 sample](../data/run035_m_map_stable_wide_depth_branches.md) and [middle-band
 probe](../data/run035_m_map_stable_wide_depth_mid_probe.md).
 
+The selected bases are static control-byte streams consumed by the `$C2AD00`
+walker, not geometry blocks. Their first `$FF`-terminated records differ:
+`$C2A072` contains selector codes `0..8` (9 entries), while `$C2A0C2`
+contains `0..24` (25 entries). This is concrete depth-driven control-set
+variation before the directory/pair-packet path; it supports an LOD-style
+renderer mechanism but does not establish physical world distance, primitive
+replacement, or terrain mesh ownership.
+
 Authority: byte-exact [wide initializer](../../source_amiga/observed/initialize_wide_map_packet_directory.asm), byte-exact [normal initializer](../../source_amiga/observed/initialize_normal_map_packet_directory.asm), and [selector stride samples](../data/m_map_selector_modes.md).
