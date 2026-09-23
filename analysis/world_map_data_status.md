@@ -5,6 +5,10 @@ separates the observed *scene-selection and render inputs* from an as-yet
 unidentified authoritative world/map dataset.  No extracted range below is
 called the complete world map.
 
+The current source-backed path from live selector origin through immutable
+template streams to the flat placement cache is summarized in the
+[terrain template pipeline reconstruction](routines/terrain_template_pipeline_reconstruction.md).
+
 ## What is established
 
 | Question | Evidence-backed answer | Authority |
