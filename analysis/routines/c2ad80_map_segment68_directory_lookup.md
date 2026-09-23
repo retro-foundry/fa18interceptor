@@ -45,6 +45,14 @@ is scenario-backed evidence for a 5×5 local selector stencil. It does not
 prove `$C29F32` is a table boundary, map-cell size, global orientation, or
 physical terrain extent. See the [observed byte-pair inventory](../data/m_map_selector_byte_pairs.md).
 
+Joining each observed selector entry to the first `$C2AEFC` packet-header setup
+before the next selector entry accounts for 77 of 104 entries. All 25 signed
+pair offsets appear in that join; an individual offset can resolve to multiple
+static headers in different sampled frames/scenarios. This is expected for a
+local state-dependent lookup and rejects treating the pair as a fixed global
+coordinate. The 27 bounded misses only show that no packet setup was reached
+in that trace interval. See the [selector-to-header join](../data/m_map_selector_pair_header_join.md).
+
 The immediately preceding control walker has a separate, explicit
 threshold-based detail gate at [`$C2AD00`](c2ad00_map_control_record_detail_gate.md).
 It changes record fields before this lookup, but has not been correlated to a

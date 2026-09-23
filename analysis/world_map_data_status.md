@@ -63,6 +63,7 @@ called the complete world map.
 
 | Is the M-map packet selector itself reconstructed? | Yes, for `$C2AD80-$C2AE59`. It indexes signed byte-pair controls at `$C29F00`, bounds them, chooses a 16- or 64-byte row stride, and resolves a positive 16-bit offset from the caller-supplied static base into `A3`. The adjacent 18-word detail-limit lookup is also byte-exact. This proves selector mechanics, not global axes, terrain ownership, or LOD. | [relative-offset selector](routines/c2ad80_map_segment68_directory_lookup.md) |
 | Does the M-map selector use a local neighborhood stencil? | Yes, in the sampled renderer path. All 25 observed `$C29F00` selector entries are the full signed offset lattice `{-2..2} × {-2..2}` before the bounded relative-offset lookup. This supports local page-neighborhood selection, not a map-size, world-axis, or LOD claim. | [selector byte-pair inventory](data/m_map_selector_byte_pairs.md) |
+| Do those local offsets resolve to static packet families? | Yes, in the joined map traces: all 25 observed signed offsets occur, and 77 of 104 selector entries reach `$C2AEFC` and a static packet header before the next selector entry. Individual offsets select different headers across frames/scenarios, consistent with local, state-dependent selection rather than a fixed global coordinate table. A bounded miss is not evidence of empty content. | [selector-to-header join](data/m_map_selector_pair_header_join.md) |
 
 ## M-map packet detail result
 

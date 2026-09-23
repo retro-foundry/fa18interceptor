@@ -1,0 +1,989 @@
+{
+  "classification": "scenario_join_of_local_m_map_selector_pairs_to_packet_headers",
+  "traces": [
+    "build\\run003_m_map_appearance_trace\\trace.jsonl",
+    "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+    "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+    "build\\run037_m_map_stable_13f_trace\\trace.jsonl"
+  ],
+  "selector_entries": 104,
+  "entries_reaching_packet_header": 77,
+  "entries": [
+    {
+      "selector": 0,
+      "pair": [
+        1,
+        1
+      ],
+      "headers": [
+        {
+          "header": "$C42E3A",
+          "observations": [
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5690,
+              "trace_index": 18575
+            }
+          ]
+        },
+        {
+          "header": "$C43EC6",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 15849
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 34950
+            }
+          ]
+        },
+        {
+          "header": "$C43F5A",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8860,
+              "trace_index": 47292
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8865,
+              "trace_index": 95076
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 1,
+      "pair": [
+        0,
+        1
+      ],
+      "headers": [
+        {
+          "header": "$C43E20",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 3,
+              "trace_index": 23056
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5692,
+              "trace_index": 42166
+            }
+          ]
+        },
+        {
+          "header": "$C43EC6",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8860,
+              "trace_index": 49208
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8865,
+              "trace_index": 97012
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5690,
+          "trace_index": 18887
+        }
+      ]
+    },
+    {
+      "selector": 2,
+      "pair": [
+        -1,
+        1
+      ],
+      "headers": [
+        {
+          "header": "$C43D80",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 3,
+              "trace_index": 27397
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5693,
+              "trace_index": 50081
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5690,
+          "trace_index": 18933
+        }
+      ]
+    },
+    {
+      "selector": 3,
+      "pair": [
+        1,
+        0
+      ],
+      "headers": [
+        {
+          "header": "$C42D24",
+          "observations": [
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5690,
+              "trace_index": 18979
+            }
+          ]
+        },
+        {
+          "header": "$C43BA8",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 4,
+              "trace_index": 34629
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5694,
+              "trace_index": 60304
+            }
+          ]
+        },
+        {
+          "header": "$C43CBA",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8861,
+              "trace_index": 51274
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8865,
+              "trace_index": 98533
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 4,
+      "pair": [
+        0,
+        0
+      ],
+      "headers": [
+        {
+          "header": "$C42D24",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8859,
+              "trace_index": 40872
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8864,
+              "trace_index": 88626
+            }
+          ]
+        },
+        {
+          "header": "$C42DF8",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 9375
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 28622
+            }
+          ]
+        },
+        {
+          "header": "$C43B30",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 5,
+              "trace_index": 46628
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5695,
+              "trace_index": 72113
+            }
+          ]
+        },
+        {
+          "header": "$C43BA8",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8856,
+              "trace_index": 2644
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8861,
+              "trace_index": 53538
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8866,
+              "trace_index": 101313
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 5,
+      "pair": [
+        -1,
+        0
+      ],
+      "headers": [
+        {
+          "header": "$C42DF8",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8860,
+              "trace_index": 44980
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8865,
+              "trace_index": 92754
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 9806
+        },
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 6,
+          "trace_index": 52438
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 29053
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5695,
+          "trace_index": 77428
+        }
+      ]
+    },
+    {
+      "selector": 6,
+      "pair": [
+        1,
+        -1
+      ],
+      "headers": [
+        {
+          "header": "$C42E16",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 9852
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 29099
+            }
+          ]
+        },
+        {
+          "header": "$C43A74",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 6,
+              "trace_index": 52485
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5695,
+              "trace_index": 77475
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 7,
+      "pair": [
+        0,
+        -1
+      ],
+      "headers": [
+        {
+          "header": "$C42DC0",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 11666
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 30759
+            }
+          ]
+        },
+        {
+          "header": "$C42E16",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8860,
+              "trace_index": 45091
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8865,
+              "trace_index": 92865
+            }
+          ]
+        },
+        {
+          "header": "$C439E4",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 6,
+              "trace_index": 59427
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5696,
+              "trace_index": 84900
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 8,
+      "pair": [
+        -1,
+        -1
+      ],
+      "headers": [
+        {
+          "header": "$C42DC0",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8860,
+              "trace_index": 46413
+            },
+            {
+              "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+              "frame": 8865,
+              "trace_index": 94197
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 12749
+        },
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 65197
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 31842
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5696,
+          "trace_index": 90178
+        }
+      ]
+    },
+    {
+      "selector": 9,
+      "pair": [
+        2,
+        2
+      ],
+      "headers": [],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 65244
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5696,
+          "trace_index": 90225
+        }
+      ]
+    },
+    {
+      "selector": 10,
+      "pair": [
+        1,
+        2
+      ],
+      "headers": [
+        {
+          "header": "$C4409A",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 7,
+              "trace_index": 65291
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5696,
+              "trace_index": 90272
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 11,
+      "pair": [
+        0,
+        2
+      ],
+      "headers": [
+        {
+          "header": "$C44078",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 7,
+              "trace_index": 65717
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5697,
+              "trace_index": 91195
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 12,
+      "pair": [
+        -1,
+        2
+      ],
+      "headers": [],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 66240
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5697,
+          "trace_index": 91718
+        }
+      ]
+    },
+    {
+      "selector": 13,
+      "pair": [
+        -2,
+        2
+      ],
+      "headers": [
+        {
+          "header": "$C44062",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 7,
+              "trace_index": 66287
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5697,
+              "trace_index": 91765
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 14,
+      "pair": [
+        2,
+        1
+      ],
+      "headers": [
+        {
+          "header": "$C42E4E",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 12795
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 31888
+            }
+          ]
+        },
+        {
+          "header": "$C43F5A",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 7,
+              "trace_index": 66603
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5697,
+              "trace_index": 92081
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 15,
+      "pair": [
+        -2,
+        1
+      ],
+      "headers": [
+        {
+          "header": "$C43D30",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 7,
+              "trace_index": 69570
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5697,
+              "trace_index": 96586
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 16,
+      "pair": [
+        2,
+        0
+      ],
+      "headers": [
+        {
+          "header": "$C42E4E",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 13162
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 32255
+            }
+          ]
+        },
+        {
+          "header": "$C43CBA",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 8,
+              "trace_index": 73167
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5697,
+              "trace_index": 101037
+            }
+          ]
+        },
+        {
+          "header": "$C43D16",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+              "frame": 1,
+              "trace_index": 3390
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 17,
+      "pair": [
+        -2,
+        0
+      ],
+      "headers": [],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 76537
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 4631
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 104939
+        }
+      ]
+    },
+    {
+      "selector": 18,
+      "pair": [
+        2,
+        -1
+      ],
+      "headers": [
+        {
+          "header": "$C42E4E",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 13771
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 32868
+            }
+          ]
+        },
+        {
+          "header": "$C43B16",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 8,
+              "trace_index": 76584
+            },
+            {
+              "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+              "frame": 1,
+              "trace_index": 4678
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5698,
+              "trace_index": 104986
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 19,
+      "pair": [
+        -2,
+        -1
+      ],
+      "headers": [],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 77836
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 5960
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 106267
+        }
+      ]
+    },
+    {
+      "selector": 20,
+      "pair": [
+        2,
+        -2
+      ],
+      "headers": [
+        {
+          "header": "$C42E4E",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 14380
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 33481
+            }
+          ]
+        },
+        {
+          "header": "$C439C8",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 8,
+              "trace_index": 77883
+            },
+            {
+              "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+              "frame": 1,
+              "trace_index": 6007
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5698,
+              "trace_index": 106314
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 21,
+      "pair": [
+        1,
+        -2
+      ],
+      "headers": [
+        {
+          "header": "$C42E4E",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 14839
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 33940
+            }
+          ]
+        },
+        {
+          "header": "$C439A4",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 8,
+              "trace_index": 79096
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5698,
+              "trace_index": 107486
+            }
+          ]
+        },
+        {
+          "header": "$C439C8",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+              "frame": 1,
+              "trace_index": 6470
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 22,
+      "pair": [
+        0,
+        -2
+      ],
+      "headers": [
+        {
+          "header": "$C42E4E",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 2,
+              "trace_index": 15298
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5691,
+              "trace_index": 34399
+            }
+          ]
+        },
+        {
+          "header": "$C43990",
+          "observations": [
+            {
+              "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+              "frame": 8,
+              "trace_index": 80906
+            },
+            {
+              "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+              "frame": 5698,
+              "trace_index": 108965
+            }
+          ]
+        },
+        {
+          "header": "$C439A4",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+              "frame": 1,
+              "trace_index": 6933
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": []
+    },
+    {
+      "selector": 23,
+      "pair": [
+        -1,
+        -2
+      ],
+      "headers": [
+        {
+          "header": "$C43990",
+          "observations": [
+            {
+              "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+              "frame": 1,
+              "trace_index": 7630
+            }
+          ]
+        }
+      ],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 15759
+        },
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 81911
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 34860
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 109970
+        }
+      ]
+    },
+    {
+      "selector": 24,
+      "pair": [
+        -2,
+        -2
+      ],
+      "headers": [],
+      "no_packet_observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 81958
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 8015
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 110017
+        }
+      ]
+    }
+  ],
+  "qualification": "The join searches only until the next C2AD80 selector entry. A missing packet header means this bounded trace returned/rejected before C2AEFC; it is not a claim that the local offset has no map content. Pair components remain local selector offsets, not global axes."
+}
