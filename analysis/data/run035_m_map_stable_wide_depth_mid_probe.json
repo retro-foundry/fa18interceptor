@@ -1,0 +1,26 @@
+{
+  "scope": "live C2AC1A wide-pass depth branch samples from sealed no-input state",
+  "state": "build\\run035_m_map_stable_1f_trace\\state.bin",
+  "metric_override": 40960,
+  "samples": [
+    {
+      "instruction": 64002,
+      "pc": "$C2AC1A",
+      "metric": 40960,
+      "a0": "$C2A032"
+    },
+    {
+      "instruction": 64006,
+      "pc": "$C2AC2E",
+      "metric": 40960,
+      "a0": "$C2A032"
+    }
+  ],
+  "branch_names": {
+    "$C2AC1A": "threshold_test",
+    "$C2AC3E": "low_filter",
+    "$C2AC2E": "mid_base_C2A072",
+    "$C2AC36": "high_base_C2A0C2"
+  },
+  "qualification": "Samples prove only the reached branch and live metric in this state. An override, when present, is a reversible paused-state control probe; it does not establish physical-world distance or a mesh LOD."
+}

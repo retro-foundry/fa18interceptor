@@ -31,8 +31,11 @@ metric at `-$28(A6)`: values above `$10000` choose `$C2A0C2`, values in
 further record-filter path at `$C2AC3E`. The run035 appearance trace takes
 the latter low-metric branch twice, while a no-input continuation from the
 sealed run035 stable state reaches `$C2AC36` at metric `196608`. This proves
-live low and high depth branches of the wide-pass control-stream selector; it
-is not yet a physical-world distance or mesh-LOD claim. See the [stable branch
-sample](../data/run035_m_map_stable_wide_depth_branches.md).
+live low and high depth branches. A reversible paused-state probe changing
+only `-$28(A6)` to `$A000` reaches `$C2AC2E`, confirming the middle `$C2A072`
+selection. Thus all three wide-pass threshold outcomes are verified; this is
+not yet a physical-world distance or mesh-LOD claim. See the [stable branch
+sample](../data/run035_m_map_stable_wide_depth_branches.md) and [middle-band
+probe](../data/run035_m_map_stable_wide_depth_mid_probe.md).
 
 Authority: byte-exact [wide initializer](../../source_amiga/observed/initialize_wide_map_packet_directory.asm), byte-exact [normal initializer](../../source_amiga/observed/initialize_normal_map_packet_directory.asm), and [selector stride samples](../data/m_map_selector_modes.md).
