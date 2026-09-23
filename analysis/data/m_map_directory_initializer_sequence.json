@@ -1,0 +1,61 @@
+{
+  "classification": "scenario_backed_map_directory_initializer_sequence",
+  "normal_then_wide_pairs": 3,
+  "traces": [
+    {
+      "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+      "events": [
+        {
+          "trace_index": 15798,
+          "frame": 2,
+          "initializer": "wide"
+        }
+      ]
+    },
+    {
+      "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+      "events": [
+        {
+          "trace_index": 40807,
+          "frame": 8859,
+          "initializer": "normal"
+        },
+        {
+          "trace_index": 47213,
+          "frame": 8860,
+          "initializer": "wide"
+        },
+        {
+          "trace_index": 88561,
+          "frame": 8864,
+          "initializer": "normal"
+        },
+        {
+          "trace_index": 94997,
+          "frame": 8865,
+          "initializer": "wide"
+        }
+      ]
+    },
+    {
+      "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+      "events": []
+    },
+    {
+      "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+      "events": [
+        {
+          "trace_index": 18513,
+          "frame": 5690,
+          "initializer": "normal"
+        },
+        {
+          "trace_index": 34899,
+          "frame": 5691,
+          "initializer": "wide"
+        }
+      ]
+    }
+  ],
+  "qualification": "An adjacent normal/wide event pair proves ordering only within the bounded trace. It establishes sequential renderer preparation passes, not terrain ownership, physical map extent, or LOD."
+}

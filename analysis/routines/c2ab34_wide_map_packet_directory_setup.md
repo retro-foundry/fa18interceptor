@@ -18,8 +18,10 @@ It clears `-$44(A6)` and branches to the shared coordinate/bin setup at
 layout. Thus the two observed directories are intentional layouts initialized
 by code, rather than inferred from packet offsets.
 
-The captured run035 map traces execute the wide layout; run003 and run037
-also execute the normal sibling layout. Which caller/context selects a layout
-is not yet a physical-distance or terrain-cell claim.
+The bounded run035 and run037 traces show the normal sibling executing first,
+then this wide initializer in the next frame. They are therefore sequential
+map-render preparation passes in those scenarios, not mutually exclusive map
+modes. Their caller/context remains neither a physical-distance nor a
+terrain-cell claim. See the [initializer sequence](../data/m_map_directory_initializer_sequence.md).
 
 Authority: byte-exact [wide initializer](../../source_amiga/observed/initialize_wide_map_packet_directory.asm), byte-exact [normal initializer](../../source_amiga/observed/initialize_normal_map_packet_directory.asm), and [selector stride samples](../data/m_map_selector_modes.md).
