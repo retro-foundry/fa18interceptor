@@ -74,10 +74,14 @@ and [run035 stable inventory](../data/run035_m_map_stable_polygon_static_packets
 The live selector samples are in the
 [appearance state](../data/run035_m_map_appearance_packet_runtime_state.md)
 and [stable state](../data/run035_m_map_stable_packet_runtime_state.md).
-Across the three bounded inventories, the
+Across the four bounded inventories, the
 [segment-68 trace-coverage report](../data/m_map_segment68_trace_coverage.md)
-records 23 distinct packet headers, 27 selected streams, and 384 unique
-coordinate pairs (24.68% of the segment's bytes as exact pair payload).
+records 24 distinct packet headers, 28 selected streams, and 387 unique
+coordinate pairs (24.87% of the segment's bytes as exact pair payload). The
+same observed headers structurally expose 32 inline/alternate streams and 424
+pair records (27.25% payload coverage); those additional records are reachable
+format data, not a claim that they were rendered. See the [static stream
+inventory](../data/static_m_map_packet_streams.md).
 The immutable packet payload is explicitly
 [two-dimensional](../data/m_map_packet_source_dimensionality.md); its third
 renderer workspace component is computed, not read as source elevation.

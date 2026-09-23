@@ -1,0 +1,2882 @@
+{
+  "classification": "static_segment68_streams_reachable_from_traced_headers_not_complete_map",
+  "segment": {
+    "start": "$C42CA8",
+    "end_exclusive": "$C444F8",
+    "bytes": 6224
+  },
+  "inventories": [
+    "analysis\\data\\run003_m_map_polygon_static_packets.json",
+    "analysis\\data\\run035_m_map_polygon_static_packets.json",
+    "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+    "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+  ],
+  "header_count": 24,
+  "headers": [
+    "$C42D28",
+    "$C42DC4",
+    "$C42DFC",
+    "$C42E1A",
+    "$C42E3E",
+    "$C42E52",
+    "$C43994",
+    "$C439A8",
+    "$C439CC",
+    "$C439E8",
+    "$C43A78",
+    "$C43B1A",
+    "$C43B34",
+    "$C43BAC",
+    "$C43CBE",
+    "$C43D1A",
+    "$C43D34",
+    "$C43D84",
+    "$C43E24",
+    "$C43ECA",
+    "$C43F5E",
+    "$C44066",
+    "$C4407C",
+    "$C4409E"
+  ],
+  "streams": [
+    {
+      "start": "$C42D2C",
+      "batches": [
+        {
+          "prefix": "$C42D2C",
+          "threshold_word": null,
+          "count": 14,
+          "pair_start": "$C42D2E",
+          "pair_end_exclusive": "$C42D66",
+          "pairs": [
+            [
+              4352,
+              4352
+            ],
+            [
+              1600,
+              4096
+            ],
+            [
+              1536,
+              2432
+            ],
+            [
+              1280,
+              1664
+            ],
+            [
+              768,
+              1088
+            ],
+            [
+              600,
+              768
+            ],
+            [
+              664,
+              592
+            ],
+            [
+              592,
+              592
+            ],
+            [
+              584,
+              640
+            ],
+            [
+              216,
+              384
+            ],
+            [
+              192,
+              256
+            ],
+            [
+              224,
+              80
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              4096,
+              -256
+            ]
+          ]
+        },
+        {
+          "prefix": "$C42D66",
+          "threshold_word": 768,
+          "count": 4,
+          "pair_start": "$C42D6A",
+          "pair_end_exclusive": "$C42D7A",
+          "pairs": [
+            [
+              80,
+              384
+            ],
+            [
+              -96,
+              232
+            ],
+            [
+              -144,
+              56
+            ],
+            [
+              72,
+              200
+            ]
+          ]
+        },
+        {
+          "prefix": "$C42D7A",
+          "threshold_word": 832,
+          "count": 4,
+          "pair_start": "$C42D7E",
+          "pair_end_exclusive": "$C42D8E",
+          "pairs": [
+            [
+              96,
+              768
+            ],
+            [
+              176,
+              628
+            ],
+            [
+              96,
+              568
+            ],
+            [
+              -16,
+              664
+            ]
+          ]
+        },
+        {
+          "prefix": "$C42D8E",
+          "threshold_word": 864,
+          "count": 7,
+          "pair_start": "$C42D92",
+          "pair_end_exclusive": "$C42DAE",
+          "pairs": [
+            [
+              224,
+              384
+            ],
+            [
+              160,
+              408
+            ],
+            [
+              112,
+              496
+            ],
+            [
+              40,
+              480
+            ],
+            [
+              48,
+              344
+            ],
+            [
+              112,
+              408
+            ],
+            [
+              232,
+              368
+            ]
+          ]
+        },
+        {
+          "prefix": "$C42DAE",
+          "threshold_word": 896,
+          "count": 4,
+          "pair_start": "$C42DB2",
+          "pair_end_exclusive": "$C42DC2",
+          "pairs": [
+            [
+              136,
+              600
+            ],
+            [
+              192,
+              536
+            ],
+            [
+              128,
+              472
+            ],
+            [
+              88,
+              512
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C42DC2",
+      "end_exclusive": "$C42DC4",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C42D28"
+      ],
+      "inventories": [
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C42DC8",
+      "batches": [
+        {
+          "prefix": "$C42DC8",
+          "threshold_word": null,
+          "count": 12,
+          "pair_start": "$C42DCA",
+          "pair_end_exclusive": "$C42DFA",
+          "pairs": [
+            [
+              4096,
+              3640
+            ],
+            [
+              3920,
+              3488
+            ],
+            [
+              3760,
+              3536
+            ],
+            [
+              3664,
+              3360
+            ],
+            [
+              3728,
+              3160
+            ],
+            [
+              3792,
+              3192
+            ],
+            [
+              3840,
+              3104
+            ],
+            [
+              3760,
+              2752
+            ],
+            [
+              2944,
+              1792
+            ],
+            [
+              2880,
+              1280
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4352,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C42DFA",
+      "end_exclusive": "$C42DFC",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C42DC4"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C42E00",
+      "batches": [
+        {
+          "prefix": "$C42E00",
+          "threshold_word": 1024,
+          "count": 5,
+          "pair_start": "$C42E04",
+          "pair_end_exclusive": "$C42E18",
+          "pairs": [
+            [
+              4071,
+              1356
+            ],
+            [
+              4004,
+              1217
+            ],
+            [
+              4020,
+              1190
+            ],
+            [
+              4040,
+              1259
+            ],
+            [
+              4088,
+              1308
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C42E18",
+      "end_exclusive": "$C42E1A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C42DFC"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C42E1E",
+      "batches": [
+        {
+          "prefix": "$C42E1E",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C42E20",
+          "pair_end_exclusive": "$C42E3C",
+          "pairs": [
+            [
+              4352,
+              4352
+            ],
+            [
+              160,
+              4096
+            ],
+            [
+              112,
+              3976
+            ],
+            [
+              136,
+              3840
+            ],
+            [
+              0,
+              3640
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4096,
+              -256
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C42E3C",
+      "end_exclusive": "$C42E3E",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C42E1A"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C42E42",
+      "batches": [
+        {
+          "prefix": "$C42E42",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C42E44",
+          "pair_end_exclusive": "$C42E50",
+          "pairs": [
+            [
+              4352,
+              4352
+            ],
+            [
+              1600,
+              0
+            ],
+            [
+              4096,
+              -256
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C42E50",
+      "end_exclusive": "$C42E52",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C42E3E"
+      ],
+      "inventories": [
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C42E56",
+      "batches": [
+        {
+          "prefix": "$C42E56",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C42E58",
+          "pair_end_exclusive": "$C42E68",
+          "pairs": [
+            [
+              4352,
+              4352
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C42E68",
+      "end_exclusive": "$C42E6A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C42E52"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43998",
+      "batches": [
+        {
+          "prefix": "$C43998",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C4399A",
+          "pair_end_exclusive": "$C439A6",
+          "pairs": [
+            [
+              1408,
+              4096
+            ],
+            [
+              384,
+              4160
+            ],
+            [
+              832,
+              3840
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C439A6",
+      "end_exclusive": "$C439A8",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43994"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C439AC",
+      "batches": [
+        {
+          "prefix": "$C439AC",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C439AE",
+          "pair_end_exclusive": "$C439CA",
+          "pairs": [
+            [
+              2192,
+              4096
+            ],
+            [
+              1920,
+              2880
+            ],
+            [
+              1584,
+              2304
+            ],
+            [
+              1904,
+              320
+            ],
+            [
+              1792,
+              0
+            ],
+            [
+              4224,
+              0
+            ],
+            [
+              4224,
+              4224
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C439CA",
+      "end_exclusive": "$C439CC",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C439A8"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C439D0",
+      "batches": [
+        {
+          "prefix": "$C439D0",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C439D2",
+          "pair_end_exclusive": "$C439E2",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C439E2",
+      "end_exclusive": "$C439E4",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C439CC"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C439EC",
+      "batches": [
+        {
+          "prefix": "$C439EC",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C439EE",
+          "pair_end_exclusive": "$C43A0A",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2608,
+              4096
+            ],
+            [
+              2128,
+              2240
+            ],
+            [
+              2752,
+              1440
+            ],
+            [
+              3072,
+              1440
+            ],
+            [
+              3520,
+              1856
+            ],
+            [
+              4096,
+              2048
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43A0A",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43A0C",
+          "pair_end_exclusive": "$C43A20",
+          "pairs": [
+            [
+              2128,
+              2240
+            ],
+            [
+              1552,
+              784
+            ],
+            [
+              1728,
+              624
+            ],
+            [
+              2848,
+              1216
+            ],
+            [
+              2944,
+              1536
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43A20",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43A22",
+          "pair_end_exclusive": "$C43A42",
+          "pairs": [
+            [
+              1808,
+              720
+            ],
+            [
+              1552,
+              784
+            ],
+            [
+              800,
+              672
+            ],
+            [
+              704,
+              128
+            ],
+            [
+              0,
+              192
+            ],
+            [
+              64,
+              64
+            ],
+            [
+              448,
+              0
+            ],
+            [
+              1408,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43A42",
+      "end_exclusive": "$C43A44",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C439E8"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43A44",
+      "batches": [
+        {
+          "prefix": "$C43A44",
+          "threshold_word": null,
+          "count": 12,
+          "pair_start": "$C43A46",
+          "pair_end_exclusive": "$C43A76",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2608,
+              4096
+            ],
+            [
+              1552,
+              784
+            ],
+            [
+              800,
+              672
+            ],
+            [
+              704,
+              128
+            ],
+            [
+              0,
+              192
+            ],
+            [
+              64,
+              64
+            ],
+            [
+              448,
+              0
+            ],
+            [
+              1408,
+              0
+            ],
+            [
+              1808,
+              720
+            ],
+            [
+              3520,
+              1856
+            ],
+            [
+              4096,
+              2048
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43A76",
+      "end_exclusive": "$C43A78",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C439E8"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43A7C",
+      "batches": [
+        {
+          "prefix": "$C43A7C",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C43A7E",
+          "pair_end_exclusive": "$C43AA2",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2960,
+              4096
+            ],
+            [
+              3072,
+              2432
+            ],
+            [
+              3296,
+              2432
+            ],
+            [
+              3328,
+              1376
+            ],
+            [
+              2960,
+              640
+            ],
+            [
+              2688,
+              800
+            ],
+            [
+              2240,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43AA2",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C43AA4",
+          "pair_end_exclusive": "$C43AC8",
+          "pairs": [
+            [
+              1408,
+              4192
+            ],
+            [
+              1296,
+              3792
+            ],
+            [
+              1504,
+              3712
+            ],
+            [
+              1280,
+              3648
+            ],
+            [
+              1312,
+              3392
+            ],
+            [
+              1488,
+              3360
+            ],
+            [
+              1280,
+              3072
+            ],
+            [
+              976,
+              2960
+            ],
+            [
+              0,
+              4096
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43AC8",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C43ACA",
+          "pair_end_exclusive": "$C43AEE",
+          "pairs": [
+            [
+              1040,
+              3088
+            ],
+            [
+              1136,
+              2880
+            ],
+            [
+              960,
+              2768
+            ],
+            [
+              1024,
+              2672
+            ],
+            [
+              1216,
+              2752
+            ],
+            [
+              1280,
+              2608
+            ],
+            [
+              1024,
+              2368
+            ],
+            [
+              0,
+              2048
+            ],
+            [
+              0,
+              4096
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43AEE",
+      "end_exclusive": "$C43AF0",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C43A78"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43AF0",
+      "batches": [
+        {
+          "prefix": "$C43AF0",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43AF2",
+          "pair_end_exclusive": "$C43B06",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2960,
+              4096
+            ],
+            [
+              3328,
+              1376
+            ],
+            [
+              2240,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43B06",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43B08",
+          "pair_end_exclusive": "$C43B18",
+          "pairs": [
+            [
+              1408,
+              4192
+            ],
+            [
+              1024,
+              2368
+            ],
+            [
+              0,
+              2048
+            ],
+            [
+              0,
+              4096
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43B18",
+      "end_exclusive": "$C43B1A",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C43A78"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43B1E",
+      "batches": [
+        {
+          "prefix": "$C43B1E",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43B20",
+          "pair_end_exclusive": "$C43B30",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43B30",
+      "end_exclusive": "$C43B32",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43B1A"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43B38",
+      "batches": [
+        {
+          "prefix": "$C43B38",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43B3A",
+          "pair_end_exclusive": "$C43B5A",
+          "pairs": [
+            [
+              4160,
+              1408
+            ],
+            [
+              3424,
+              1120
+            ],
+            [
+              3200,
+              1296
+            ],
+            [
+              2928,
+              976
+            ],
+            [
+              3008,
+              864
+            ],
+            [
+              3520,
+              1072
+            ],
+            [
+              3808,
+              864
+            ],
+            [
+              4224,
+              896
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43B5A",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43B5C",
+          "pair_end_exclusive": "$C43B7C",
+          "pairs": [
+            [
+              4160,
+              928
+            ],
+            [
+              3712,
+              928
+            ],
+            [
+              3376,
+              560
+            ],
+            [
+              3456,
+              576
+            ],
+            [
+              3488,
+              528
+            ],
+            [
+              3056,
+              176
+            ],
+            [
+              3024,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43B7C",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43B7E",
+          "pair_end_exclusive": "$C43B92",
+          "pairs": [
+            [
+              3056,
+              176
+            ],
+            [
+              2992,
+              240
+            ],
+            [
+              2992,
+              384
+            ],
+            [
+              2608,
+              0
+            ],
+            [
+              3056,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43B92",
+      "end_exclusive": "$C43B94",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C43B34"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43B94",
+      "batches": [
+        {
+          "prefix": "$C43B94",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43B96",
+          "pair_end_exclusive": "$C43BAA",
+          "pairs": [
+            [
+              4160,
+              1408
+            ],
+            [
+              2928,
+              976
+            ],
+            [
+              3872,
+              832
+            ],
+            [
+              2816,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43BAA",
+      "end_exclusive": "$C43BAC",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C43B34"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43BB0",
+      "batches": [
+        {
+          "prefix": "$C43BB0",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C43BB2",
+          "pair_end_exclusive": "$C43BCE",
+          "pairs": [
+            [
+              4096,
+              3072
+            ],
+            [
+              3424,
+              2304
+            ],
+            [
+              2512,
+              2496
+            ],
+            [
+              2752,
+              1728
+            ],
+            [
+              3200,
+              1664
+            ],
+            [
+              2960,
+              0
+            ],
+            [
+              4288,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43BCE",
+          "threshold_word": null,
+          "count": 10,
+          "pair_start": "$C43BD0",
+          "pair_end_exclusive": "$C43BF8",
+          "pairs": [
+            [
+              3024,
+              3712
+            ],
+            [
+              2432,
+              3264
+            ],
+            [
+              2112,
+              3456
+            ],
+            [
+              1440,
+              1792
+            ],
+            [
+              2688,
+              2112
+            ],
+            [
+              2656,
+              2464
+            ],
+            [
+              2592,
+              2608
+            ],
+            [
+              2688,
+              3008
+            ],
+            [
+              3280,
+              3472
+            ],
+            [
+              2944,
+              3392
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43BF8",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C43BFA",
+          "pair_end_exclusive": "$C43C26",
+          "pairs": [
+            [
+              2912,
+              4288
+            ],
+            [
+              1408,
+              4096
+            ],
+            [
+              1520,
+              3888
+            ],
+            [
+              640,
+              3968
+            ],
+            [
+              336,
+              3616
+            ],
+            [
+              544,
+              3552
+            ],
+            [
+              288,
+              3248
+            ],
+            [
+              512,
+              3328
+            ],
+            [
+              2048,
+              3376
+            ],
+            [
+              2672,
+              3888
+            ],
+            [
+              2608,
+              4000
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43C26",
+          "threshold_word": null,
+          "count": 10,
+          "pair_start": "$C43C28",
+          "pair_end_exclusive": "$C43C50",
+          "pairs": [
+            [
+              2112,
+              3456
+            ],
+            [
+              512,
+              3328
+            ],
+            [
+              400,
+              3024
+            ],
+            [
+              256,
+              3152
+            ],
+            [
+              128,
+              2512
+            ],
+            [
+              592,
+              2400
+            ],
+            [
+              592,
+              2336
+            ],
+            [
+              320,
+              2336
+            ],
+            [
+              1280,
+              1728
+            ],
+            [
+              1920,
+              2240
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43C50",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C43C52",
+          "pair_end_exclusive": "$C43C6E",
+          "pairs": [
+            [
+              1408,
+              1856
+            ],
+            [
+              768,
+              2080
+            ],
+            [
+              528,
+              2096
+            ],
+            [
+              608,
+              1648
+            ],
+            [
+              0,
+              1424
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1472,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43C6E",
+      "end_exclusive": "$C43C70",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C43BAC"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43C70",
+      "batches": [
+        {
+          "prefix": "$C43C70",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C43C72",
+          "pair_end_exclusive": "$C43C8E",
+          "pairs": [
+            [
+              4096,
+              3072
+            ],
+            [
+              3424,
+              2304
+            ],
+            [
+              2512,
+              2496
+            ],
+            [
+              2752,
+              1728
+            ],
+            [
+              3200,
+              1664
+            ],
+            [
+              2960,
+              0
+            ],
+            [
+              4288,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43C8E",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C43C90",
+          "pair_end_exclusive": "$C43CBC",
+          "pairs": [
+            [
+              2912,
+              4288
+            ],
+            [
+              1408,
+              4096
+            ],
+            [
+              288,
+              3248
+            ],
+            [
+              608,
+              1648
+            ],
+            [
+              0,
+              1424
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1472,
+              0
+            ],
+            [
+              1440,
+              1792
+            ],
+            [
+              2688,
+              2112
+            ],
+            [
+              2688,
+              3008
+            ],
+            [
+              2112,
+              3456
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43CBC",
+      "end_exclusive": "$C43CBE",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C43BAC"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43CC2",
+      "batches": [
+        {
+          "prefix": "$C43CC2",
+          "threshold_word": null,
+          "count": 13,
+          "pair_start": "$C43CC4",
+          "pair_end_exclusive": "$C43CF8",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2144,
+              4096
+            ],
+            [
+              2128,
+              4016
+            ],
+            [
+              1680,
+              3792
+            ],
+            [
+              1488,
+              3968
+            ],
+            [
+              1536,
+              4096
+            ],
+            [
+              1232,
+              4096
+            ],
+            [
+              976,
+              3888
+            ],
+            [
+              1408,
+              3968
+            ],
+            [
+              912,
+              3776
+            ],
+            [
+              0,
+              3072
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43CF8",
+      "end_exclusive": "$C43CFA",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C43CBE"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43CFA",
+      "batches": [
+        {
+          "prefix": "$C43CFA",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C43CFC",
+          "pair_end_exclusive": "$C43D18",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2144,
+              4096
+            ],
+            [
+              1728,
+              3712
+            ],
+            [
+              1536,
+              4096
+            ],
+            [
+              0,
+              3072
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43D18",
+      "end_exclusive": "$C43D1A",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C43CBE"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43D1E",
+      "batches": [
+        {
+          "prefix": "$C43D1E",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43D20",
+          "pair_end_exclusive": "$C43D30",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              0,
+              4224
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43D30",
+      "end_exclusive": "$C43D32",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43D1A"
+      ],
+      "inventories": [
+        "analysis\\data\\run035_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43D38",
+      "batches": [
+        {
+          "prefix": "$C43D38",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43D3A",
+          "pair_end_exclusive": "$C43D4E",
+          "pairs": [
+            [
+              3824,
+              4144
+            ],
+            [
+              4128,
+              3328
+            ],
+            [
+              4096,
+              3312
+            ],
+            [
+              3712,
+              3840
+            ],
+            [
+              3712,
+              4096
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43D4E",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C43D50",
+          "pair_end_exclusive": "$C43D6C",
+          "pairs": [
+            [
+              3568,
+              3200
+            ],
+            [
+              3712,
+              2608
+            ],
+            [
+              4128,
+              2208
+            ],
+            [
+              4096,
+              2048
+            ],
+            [
+              3584,
+              2496
+            ],
+            [
+              3520,
+              3088
+            ],
+            [
+              3328,
+              3104
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43D6C",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43D6E",
+          "pair_end_exclusive": "$C43D82",
+          "pairs": [
+            [
+              4096,
+              1840
+            ],
+            [
+              3792,
+              1920
+            ],
+            [
+              3696,
+              1744
+            ],
+            [
+              3904,
+              1584
+            ],
+            [
+              4128,
+              1600
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43D82",
+      "end_exclusive": "$C43D84",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43D34"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43D88",
+      "batches": [
+        {
+          "prefix": "$C43D88",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C43D8A",
+          "pair_end_exclusive": "$C43D96",
+          "pairs": [
+            [
+              4096,
+              3936
+            ],
+            [
+              3840,
+              3456
+            ],
+            [
+              4128,
+              3248
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43D96",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C43D98",
+          "pair_end_exclusive": "$C43DB4",
+          "pairs": [
+            [
+              4160,
+              3024
+            ],
+            [
+              3552,
+              2784
+            ],
+            [
+              2880,
+              2944
+            ],
+            [
+              2752,
+              2784
+            ],
+            [
+              2912,
+              2544
+            ],
+            [
+              3328,
+              2320
+            ],
+            [
+              4096,
+              2432
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43DB4",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C43DB6",
+          "pair_end_exclusive": "$C43DE2",
+          "pairs": [
+            [
+              3152,
+              2464
+            ],
+            [
+              2512,
+              2384
+            ],
+            [
+              1808,
+              2816
+            ],
+            [
+              1104,
+              2480
+            ],
+            [
+              1184,
+              2384
+            ],
+            [
+              1760,
+              2576
+            ],
+            [
+              1664,
+              2112
+            ],
+            [
+              1792,
+              1936
+            ],
+            [
+              1840,
+              2512
+            ],
+            [
+              2400,
+              2176
+            ],
+            [
+              3328,
+              2320
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43DE2",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C43DE4",
+          "pair_end_exclusive": "$C43E10",
+          "pairs": [
+            [
+              1104,
+              2480
+            ],
+            [
+              592,
+              1984
+            ],
+            [
+              0,
+              2240
+            ],
+            [
+              0,
+              2048
+            ],
+            [
+              192,
+              1920
+            ],
+            [
+              0,
+              1840
+            ],
+            [
+              0,
+              1584
+            ],
+            [
+              512,
+              1792
+            ],
+            [
+              1104,
+              1712
+            ],
+            [
+              1792,
+              1936
+            ],
+            [
+              1632,
+              2240
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43E10",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43E12",
+          "pair_end_exclusive": "$C43E22",
+          "pairs": [
+            [
+              0,
+              3488
+            ],
+            [
+              1280,
+              2560
+            ],
+            [
+              1040,
+              2448
+            ],
+            [
+              0,
+              3312
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43E22",
+      "end_exclusive": "$C43E24",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43D84"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43E28",
+      "batches": [
+        {
+          "prefix": "$C43E28",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43E2A",
+          "pair_end_exclusive": "$C43E3E",
+          "pairs": [
+            [
+              4096,
+              3136
+            ],
+            [
+              3824,
+              2688
+            ],
+            [
+              3552,
+              2688
+            ],
+            [
+              3520,
+              2496
+            ],
+            [
+              4160,
+              1824
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43E3E",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43E40",
+          "pair_end_exclusive": "$C43E60",
+          "pairs": [
+            [
+              4112,
+              4112
+            ],
+            [
+              3808,
+              4096
+            ],
+            [
+              3904,
+              3648
+            ],
+            [
+              3152,
+              2512
+            ],
+            [
+              3536,
+              2512
+            ],
+            [
+              3632,
+              2688
+            ],
+            [
+              3472,
+              2848
+            ],
+            [
+              4016,
+              3616
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43E60",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43E62",
+          "pair_end_exclusive": "$C43E82",
+          "pairs": [
+            [
+              3216,
+              2640
+            ],
+            [
+              2592,
+              2736
+            ],
+            [
+              2272,
+              2272
+            ],
+            [
+              1664,
+              2304
+            ],
+            [
+              1472,
+              2224
+            ],
+            [
+              2048,
+              1888
+            ],
+            [
+              2608,
+              2416
+            ],
+            [
+              3232,
+              2544
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43E82",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C43E84",
+          "pair_end_exclusive": "$C43E98",
+          "pairs": [
+            [
+              1792,
+              2288
+            ],
+            [
+              880,
+              3664
+            ],
+            [
+              0,
+              3968
+            ],
+            [
+              0,
+              2432
+            ],
+            [
+              1472,
+              2224
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43E98",
+      "end_exclusive": "$C43E9A",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C43E24"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43E9A",
+      "batches": [
+        {
+          "prefix": "$C43E9A",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C43E9C",
+          "pair_end_exclusive": "$C43EC8",
+          "pairs": [
+            [
+              4112,
+              4112
+            ],
+            [
+              3808,
+              4096
+            ],
+            [
+              3216,
+              2640
+            ],
+            [
+              1792,
+              2288
+            ],
+            [
+              0,
+              3968
+            ],
+            [
+              0,
+              2432
+            ],
+            [
+              2048,
+              1888
+            ],
+            [
+              3520,
+              2496
+            ],
+            [
+              4160,
+              1824
+            ],
+            [
+              4096,
+              3136
+            ],
+            [
+              3472,
+              2848
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43EC8",
+      "end_exclusive": "$C43ECA",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C43E24"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43ECE",
+      "batches": [
+        {
+          "prefix": "$C43ECE",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C43ED0",
+          "pair_end_exclusive": "$C43EF4",
+          "pairs": [
+            [
+              2192,
+              1296
+            ],
+            [
+              2336,
+              1136
+            ],
+            [
+              2480,
+              1200
+            ],
+            [
+              2816,
+              848
+            ],
+            [
+              2688,
+              512
+            ],
+            [
+              3136,
+              448
+            ],
+            [
+              2640,
+              0
+            ],
+            [
+              1408,
+              0
+            ],
+            [
+              1712,
+              288
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43EF4",
+          "threshold_word": null,
+          "count": 9,
+          "pair_start": "$C43EF6",
+          "pair_end_exclusive": "$C43F1A",
+          "pairs": [
+            [
+              2720,
+              2816
+            ],
+            [
+              1088,
+              1856
+            ],
+            [
+              976,
+              1264
+            ],
+            [
+              1504,
+              896
+            ],
+            [
+              1328,
+              512
+            ],
+            [
+              1712,
+              768
+            ],
+            [
+              2080,
+              912
+            ],
+            [
+              2192,
+              1296
+            ],
+            [
+              2944,
+              2048
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43F1A",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C43F1C",
+          "pair_end_exclusive": "$C43F38",
+          "pairs": [
+            [
+              1536,
+              4160
+            ],
+            [
+              0,
+              3136
+            ],
+            [
+              0,
+              1792
+            ],
+            [
+              768,
+              1536
+            ],
+            [
+              2720,
+              2816
+            ],
+            [
+              2816,
+              3392
+            ],
+            [
+              2160,
+              3552
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43F38",
+      "end_exclusive": "$C43F3A",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C43ECA"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43F3A",
+      "batches": [
+        {
+          "prefix": "$C43F3A",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43F3C",
+          "pair_end_exclusive": "$C43F5C",
+          "pairs": [
+            [
+              2640,
+              0
+            ],
+            [
+              2192,
+              1296
+            ],
+            [
+              2816,
+              3392
+            ],
+            [
+              1536,
+              4160
+            ],
+            [
+              0,
+              3136
+            ],
+            [
+              0,
+              1792
+            ],
+            [
+              2080,
+              912
+            ],
+            [
+              1408,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43F5C",
+      "end_exclusive": "$C43F5E",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C43ECA"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43F62",
+      "batches": [
+        {
+          "prefix": "$C43F62",
+          "threshold_word": null,
+          "count": 6,
+          "pair_start": "$C43F64",
+          "pair_end_exclusive": "$C43F7C",
+          "pairs": [
+            [
+              4096,
+              1920
+            ],
+            [
+              3040,
+              1088
+            ],
+            [
+              2800,
+              512
+            ],
+            [
+              2176,
+              144
+            ],
+            [
+              2144,
+              0
+            ],
+            [
+              4160,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43F7C",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C43F7E",
+          "pair_end_exclusive": "$C43F8A",
+          "pairs": [
+            [
+              1632,
+              320
+            ],
+            [
+              1232,
+              0
+            ],
+            [
+              1536,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43F8A",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C43F8C",
+          "pair_end_exclusive": "$C43FAC",
+          "pairs": [
+            [
+              4128,
+              3904
+            ],
+            [
+              3968,
+              3632
+            ],
+            [
+              3856,
+              3632
+            ],
+            [
+              3872,
+              3488
+            ],
+            [
+              3744,
+              3504
+            ],
+            [
+              3488,
+              3136
+            ],
+            [
+              3552,
+              2912
+            ],
+            [
+              4096,
+              3648
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43FAC",
+      "end_exclusive": "$C43FAE",
+      "roles": [
+        "inline"
+      ],
+      "headers": [
+        "$C43F5E"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43FAE",
+      "batches": [
+        {
+          "prefix": "$C43FAE",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C43FB0",
+          "pair_end_exclusive": "$C43FBC",
+          "pairs": [
+            [
+              4096,
+              1920
+            ],
+            [
+              2144,
+              0
+            ],
+            [
+              4160,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C43FBC",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C43FBE",
+          "pair_end_exclusive": "$C43FCE",
+          "pairs": [
+            [
+              4128,
+              3904
+            ],
+            [
+              3488,
+              3136
+            ],
+            [
+              3552,
+              2912
+            ],
+            [
+              4096,
+              3648
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C43FCE",
+      "end_exclusive": "$C43FD0",
+      "roles": [
+        "alternate"
+      ],
+      "headers": [
+        "$C43F5E"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C4406A",
+      "batches": [
+        {
+          "prefix": "$C4406A",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C4406C",
+          "pair_end_exclusive": "$C44078",
+          "pairs": [
+            [
+              3312,
+              816
+            ],
+            [
+              3712,
+              0
+            ],
+            [
+              3840,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C44078",
+      "end_exclusive": "$C4407A",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C44066"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C44080",
+      "batches": [
+        {
+          "prefix": "$C44080",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C44082",
+          "pair_end_exclusive": "$C4408E",
+          "pairs": [
+            [
+              4128,
+              672
+            ],
+            [
+              4016,
+              576
+            ],
+            [
+              4096,
+              176
+            ]
+          ]
+        },
+        {
+          "prefix": "$C4408E",
+          "threshold_word": null,
+          "count": 3,
+          "pair_start": "$C44090",
+          "pair_end_exclusive": "$C4409C",
+          "pairs": [
+            [
+              4128,
+              192
+            ],
+            [
+              3808,
+              0
+            ],
+            [
+              4128,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4409C",
+      "end_exclusive": "$C4409E",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4407C"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C440A2",
+      "batches": [
+        {
+          "prefix": "$C440A2",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C440A4",
+          "pair_end_exclusive": "$C440B8",
+          "pairs": [
+            [
+              0,
+              672
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              112,
+              160
+            ],
+            [
+              80,
+              464
+            ],
+            [
+              448,
+              688
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C440B8",
+      "end_exclusive": "$C440BA",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C4409E"
+      ],
+      "inventories": [
+        "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    }
+  ],
+  "pair_count": 424,
+  "pair_bytes": 1696,
+  "pair_byte_fraction": 0.27249357326478146
+}

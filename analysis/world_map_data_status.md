@@ -54,6 +54,7 @@ called the complete world map.
 | Are the newly linked controls a position-specific terrain mesh? | No evidence supports that. Run037 replays the same bounded `$C35BAA`, `$C35BC2`, and `$C36220` map-display components seen at an earlier map position, each through `$C1F4AC -> $C48390 -> $C212B0/$C2FA7E`. Their repeat identifies reusable map-renderer control data, not terrain-cell geometry. | [run037 control-component repeat](data/run037_m_map_control_component_repeat.md) |
 
 | Is there a visual inspection export of the traced planar map source? | Yes. The cumulative source-pair visual preserves 59 deduplicated ordered packet paths across four sealed M-map traces, containing 387 exact pair addresses (24.87% of segment-68 bytes as pair payload). It joins only points from the same traced batch and makes no terrain-mesh, placement, or LOD claim. | [cumulative packet source visual](data/m_map_packet_source_coverage.md) |
+| Can unrendered packet data be structurally separated from unknown bytes? | Partly. The 24 directly observed headers have 32 inline/alternate streams whose count/threshold grammar decodes to 424 pair records and `$FFFF` terminators, covering 27.25% of segment 68 as pair payload. These are statically reachable from observed headers, not evidence that every pair was rendered or is terrain. | [static reachable packet streams](data/static_m_map_packet_streams.md) |
 
 ## M-map packet detail result
 
