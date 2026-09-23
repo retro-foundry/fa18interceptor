@@ -15,8 +15,10 @@ or map-page table.
   [origin-selector mutation probe](../data/origin_selector_mutation_probe.md).
 - The direct producer prefix `$C29042-$C291D3` is byte-exactly reconstructed
   as [`publish_terrain_selector_origin.asm`](../../source_amiga/observed/publish_terrain_selector_origin.asm).
-  Its later `$C291D4-$C295D0` adjustment/dispatch continuation remains outside
-  this bounded source slice.
+- The common static adjustment/publish tail `$C29548-$C295D0` is byte-exactly
+  reconstructed as [`adjust_terrain_selector_origin.asm`](../../source_amiga/observed/adjust_terrain_selector_origin.asm).
+  The dispatch and threshold-policy range `$C291D4-$C29547` remains outside
+  the bounded source slices.
 
 ## Observed producer path
 
@@ -36,10 +38,17 @@ D6 -> $C45C42
 D7 -> $C45C46
 ```
 
-The path later updates these values again through the `$C45C4A` accumulator
-at `$C29574-$C295AE`, and writes masked/negated companions to
+The reconstructed common tail later updates these values again through the
+`$C45C4A` accumulator at `$C29574-$C295AE`, and writes masked/negated companions to
 `$C45C32-$C45C3A`. Thus `$C45C3E/$C45C46` are derived mutable origin state,
 not bytes copied directly from a static terrain template.
+
+The tail repeatedly quarters a candidate while its supplied magnitude `D3` is
+at least `$4800`, obtains a variable shift from `$C2574A`, and averages a
+nonzero candidate with the previous `$C45C4A` triple before adding it to the
+live origin. This proves an adjustment/smoothing dataflow. It does not prove
+what physical quantity `D3` represents, nor that any preceding threshold is a
+distance LOD decision.
 
 ## Terrain-selection consequence
 

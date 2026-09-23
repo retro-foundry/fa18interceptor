@@ -48,8 +48,10 @@ The byte-exact reconstructed parts are:
 
 ## Explicit limits
 
-The selector-origin producer's later `$C291D4-$C295D0` continuation is not
-yet reconstructed. Its static threshold branches must not be called a terrain
-LOD scheme without a controlled same-instance distance trace. The 32×32
+The selector-origin producer's common adjustment/publish tail
+`$C29548-$C295D0` is reconstructed; the preceding dispatch/threshold-policy
+range `$C291D4-$C29547` is not. Neither the reconstructed smoothing tail nor
+the static threshold branches must be called a terrain LOD scheme without a
+controlled same-instance distance trace. The 32×32
 selector lattice wraps in the observed bounded inputs, but no evidence maps
 those bins to absolute global coordinates or total physical flight-map size.
