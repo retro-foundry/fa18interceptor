@@ -1,0 +1,272 @@
+{
+  "authority": {
+    "trace": "build/run037_flight_pre_map_band_walk_trace/trace.jsonl",
+    "slow_snapshot": "build/run037_flight_pre_map_band_walk_trace/slow.bin",
+    "selector_entry_pc": "$C1D3F4",
+    "stream_start_pc": "$C1D442",
+    "copy_header_read_pc": "$C1D488"
+  },
+  "classification": "scenario_backed_static_stream_to_template_record_inventory_not_global_map_export",
+  "active_streams": [
+    {
+      "selector_trace_index": 136,
+      "workspace_band": "$C48F90",
+      "selector_index": "$0011",
+      "row_key": "$000F",
+      "static_stream": "$C42B66",
+      "copied_record_count": 18,
+      "records": [
+        {
+          "static_source": "$C42B67",
+          "header": "$46",
+          "word_1": "$0E00",
+          "word_2": "$0600"
+        },
+        {
+          "static_source": "$C42B6D",
+          "header": "$15",
+          "word_1": "$0E00",
+          "word_2": "$0600"
+        },
+        {
+          "static_source": "$C42B73",
+          "header": "$15",
+          "word_1": "$0400",
+          "word_2": "$0E00"
+        },
+        {
+          "static_source": "$C42B79",
+          "header": "$52",
+          "word_1": "$0800",
+          "word_2": "$0300"
+        },
+        {
+          "static_source": "$C42B7F",
+          "header": "$39",
+          "word_1": "$0040",
+          "word_2": "$0A00"
+        },
+        {
+          "static_source": "$C42B85",
+          "header": "$38",
+          "word_1": "$02D0",
+          "word_2": "$05F0"
+        },
+        {
+          "static_source": "$C42B8B",
+          "header": "$3B",
+          "word_1": "$0070",
+          "word_2": "$03F0"
+        },
+        {
+          "static_source": "$C42B91",
+          "header": "$43",
+          "word_1": "$01F6",
+          "word_2": "$0538"
+        },
+        {
+          "static_source": "$C42B97",
+          "header": "$43",
+          "word_1": "$036E",
+          "word_2": "$0675"
+        },
+        {
+          "static_source": "$C42B9D",
+          "header": "$3A",
+          "word_1": "$04E5",
+          "word_2": "$07B1"
+        },
+        {
+          "static_source": "$C42BA3",
+          "header": "$40",
+          "word_1": "$01FE",
+          "word_2": "$0D4B"
+        },
+        {
+          "static_source": "$C42BA9",
+          "header": "$45",
+          "word_1": "$01C2",
+          "word_2": "$0C99"
+        },
+        {
+          "static_source": "$C42BAF",
+          "header": "$41",
+          "word_1": "$018C",
+          "word_2": "$0BE8"
+        },
+        {
+          "static_source": "$C42BB5",
+          "header": "$3D",
+          "word_1": "$01FB",
+          "word_2": "$0A4C"
+        },
+        {
+          "static_source": "$C42BBB",
+          "header": "$3C",
+          "word_1": "$00DD",
+          "word_2": "$0AB1"
+        },
+        {
+          "static_source": "$C42BC1",
+          "header": "$44",
+          "word_1": "$0097",
+          "word_2": "$09CA"
+        },
+        {
+          "static_source": "$C42BC7",
+          "header": "$3E",
+          "word_1": "$0F33",
+          "word_2": "$0949"
+        },
+        {
+          "static_source": "$C42BCD",
+          "header": "$3F",
+          "word_1": "$0EF8",
+          "word_2": "$0A00"
+        }
+      ]
+    },
+    {
+      "selector_trace_index": 754,
+      "workspace_band": "$C49B90",
+      "selector_index": "$0011",
+      "row_key": "$0010",
+      "static_stream": "$C42646",
+      "copied_record_count": 22,
+      "records": [
+        {
+          "static_source": "$C42647",
+          "header": "$15",
+          "word_1": "$0000",
+          "word_2": "$0000"
+        },
+        {
+          "static_source": "$C4264D",
+          "header": "$20",
+          "word_1": "$0980",
+          "word_2": "$0580"
+        },
+        {
+          "static_source": "$C42653",
+          "header": "$21",
+          "word_1": "$0980",
+          "word_2": "$0280"
+        },
+        {
+          "static_source": "$C42659",
+          "header": "$53",
+          "word_1": "$0800",
+          "word_2": "$0800"
+        },
+        {
+          "static_source": "$C4265F",
+          "header": "$54",
+          "word_1": "$0800",
+          "word_2": "$0800"
+        },
+        {
+          "static_source": "$C42665",
+          "header": "$14",
+          "word_1": "$0200",
+          "word_2": "$0600"
+        },
+        {
+          "static_source": "$C4266B",
+          "header": "$33",
+          "word_1": "$0200",
+          "word_2": "$0240"
+        },
+        {
+          "static_source": "$C42671",
+          "header": "$48",
+          "word_1": "$0200",
+          "word_2": "$0240"
+        },
+        {
+          "static_source": "$C42677",
+          "header": "$22",
+          "word_1": "$0220",
+          "word_2": "$00E0"
+        },
+        {
+          "static_source": "$C4267D",
+          "header": "$52",
+          "word_1": "$0E00",
+          "word_2": "$0600"
+        },
+        {
+          "static_source": "$C42683",
+          "header": "$24",
+          "word_1": "$0D98",
+          "word_2": "$0414"
+        },
+        {
+          "static_source": "$C42689",
+          "header": "$25",
+          "word_1": "$0C00",
+          "word_2": "$0498"
+        },
+        {
+          "static_source": "$C4268F",
+          "header": "$26",
+          "word_1": "$0BD8",
+          "word_2": "$04A8"
+        },
+        {
+          "static_source": "$C42695",
+          "header": "$23",
+          "word_1": "$0F00",
+          "word_2": "$0380"
+        },
+        {
+          "static_source": "$C4269B",
+          "header": "$17",
+          "word_1": "$0800",
+          "word_2": "$0800"
+        },
+        {
+          "static_source": "$C426A1",
+          "header": "$18",
+          "word_1": "$0800",
+          "word_2": "$0800"
+        },
+        {
+          "static_source": "$C426A7",
+          "header": "$75",
+          "word_1": "$0780",
+          "word_2": "$0B80"
+        },
+        {
+          "static_source": "$C426AD",
+          "header": "$22",
+          "word_1": "$0658",
+          "word_2": "$0CA8"
+        },
+        {
+          "static_source": "$C426B3",
+          "header": "$22",
+          "word_1": "$04F0",
+          "word_2": "$0E10"
+        },
+        {
+          "static_source": "$C426B9",
+          "header": "$22",
+          "word_1": "$0388",
+          "word_2": "$0F78"
+        },
+        {
+          "static_source": "$C426BF",
+          "header": "$19",
+          "word_1": "$0800",
+          "word_2": "$0800"
+        },
+        {
+          "static_source": "$C426C5",
+          "header": "$1A",
+          "word_1": "$0800",
+          "word_2": "$0800"
+        }
+      ]
+    }
+  ]
+}
