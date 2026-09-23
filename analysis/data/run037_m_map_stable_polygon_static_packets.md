@@ -1,0 +1,111 @@
+# Map polygon static-packet inventory
+
+Classification: **bounded immutable input to map-page polygon transforms**.
+
+Each row ends at a traced C2AFE2 display-stage entry and retains the preceding C2AF9C/C2AF9E fixed-point source-pair reads since the prior display-stage entry. Every such pair is in verified original segment 68. Only batches with an observed direct C2AEFC-to-C2AF00 entry expose a packet header; the first batch begins after the trace starts. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map.
+
+- Original source segment: 68 `$C42CA8-$C444F7`
+- Direct `$C2AF00` packet entries: 28
+- Direct inline/alternate selections: 28 inline, 0 alternate
+- Completed transform batches at `$C2AFE2`: 56
+- Exact immutable coordinate pairs consumed: 363
+
+## Transform batches
+
+| Trace frame | Pair-address range | Direct packet header | Pairs | `$C2FF48` before next pair transform |
+| ---: | --- | --- | ---: | ---: |
+| 5690 | `$C42E44`--`$C42E4C` | `$C42E3E / $00C42E42` | 3 | 0 |
+| 5690 | `$C42D2E`--`$C42D62` | `$C42D28 / $00C42D2C` | 14 | 1 |
+| 5690 | `$C42D6A`--`$C42D76` | not entered directly in this batch | 4 | 1 |
+| 5690 | `$C42D7E`--`$C42D8A` | not entered directly in this batch | 4 | 1 |
+| 5690 | `$C42D92`--`$C42DAA` | not entered directly in this batch | 7 | 1 |
+| 5691 | `$C42DB2`--`$C42DBE` | not entered directly in this batch | 4 | 1 |
+| 5691 | `$C42E04`--`$C42E14` | `$C42DFC / $00C42E00` | 5 | 0 |
+| 5691 | `$C42E20`--`$C42E38` | `$C42E1A / $00C42E1E` | 7 | 1 |
+| 5691 | `$C42DCA`--`$C42DF6` | `$C42DC4 / $00C42DC8` | 12 | 0 |
+| 5691 | `$C42E58`--`$C42E64` | `$C42E52 / $00C42E56` | 4 | 0 |
+| 5691 | `$C42E58`--`$C42E64` | `$C42E52 / $00C42E56` | 4 | 0 |
+| 5691 | `$C42E58`--`$C42E64` | `$C42E52 / $00C42E56` | 4 | 0 |
+| 5691 | `$C42E58`--`$C42E64` | `$C42E52 / $00C42E56` | 4 | 0 |
+| 5691 | `$C42E58`--`$C42E64` | `$C42E52 / $00C42E56` | 4 | 0 |
+| 5691 | `$C42E58`--`$C42E64` | `$C42E52 / $00C42E56` | 4 | 0 |
+| 5691 | `$C43ED0`--`$C43EF0` | `$C43ECA / $00C43F3A` | 9 | 1 |
+| 5692 | `$C43EF6`--`$C43F16` | not entered directly in this batch | 9 | 1 |
+| 5692 | `$C43F1C`--`$C43F34` | not entered directly in this batch | 7 | 1 |
+| 5692 | `$C43E2A`--`$C43E3A` | `$C43E24 / $00C43E9A` | 5 | 1 |
+| 5692 | `$C43E40`--`$C43E5C` | not entered directly in this batch | 8 | 1 |
+| 5692 | `$C43E62`--`$C43E7E` | not entered directly in this batch | 8 | 1 |
+| 5693 | `$C43E84`--`$C43E94` | not entered directly in this batch | 5 | 1 |
+| 5693 | `$C43D8A`--`$C43D92` | `$C43D84 / $00C43D88` | 3 | 1 |
+| 5693 | `$C43D98`--`$C43DB0` | not entered directly in this batch | 7 | 1 |
+| 5693 | `$C43DB6`--`$C43DDE` | not entered directly in this batch | 11 | 1 |
+| 5693 | `$C43DE4`--`$C43E0C` | not entered directly in this batch | 11 | 1 |
+| 5694 | `$C43E12`--`$C43E1E` | not entered directly in this batch | 4 | 1 |
+| 5694 | `$C43BB2`--`$C43BCA` | `$C43BAC / $00C43C70` | 7 | 1 |
+| 5694 | `$C43BD0`--`$C43BF4` | not entered directly in this batch | 10 | 1 |
+| 5694 | `$C43BFA`--`$C43C22` | not entered directly in this batch | 11 | 1 |
+| 5694 | `$C43C28`--`$C43C4C` | not entered directly in this batch | 10 | 1 |
+| 5695 | `$C43C52`--`$C43C6A` | not entered directly in this batch | 7 | 1 |
+| 5695 | `$C43B3A`--`$C43B56` | `$C43B34 / $00C43B94` | 8 | 1 |
+| 5695 | `$C43B5C`--`$C43B78` | not entered directly in this batch | 8 | 1 |
+| 5695 | `$C43B7E`--`$C43B8E` | not entered directly in this batch | 5 | 1 |
+| 5695 | `$C43A7E`--`$C43A9E` | `$C43A78 / $00C43AF0` | 9 | 1 |
+| 5696 | `$C43AA4`--`$C43AC4` | not entered directly in this batch | 9 | 1 |
+| 5696 | `$C43ACA`--`$C43AEA` | not entered directly in this batch | 9 | 1 |
+| 5696 | `$C439EE`--`$C43A06` | `$C439E8 / $00C43A44` | 7 | 1 |
+| 5696 | `$C43A0C`--`$C43A1C` | not entered directly in this batch | 5 | 1 |
+| 5696 | `$C43A22`--`$C43A3E` | not entered directly in this batch | 8 | 1 |
+| 5697 | `$C440A4`--`$C440B4` | `$C4409E / $00C440A2` | 5 | 0 |
+| 5697 | `$C44082`--`$C4408A` | `$C4407C / $00C44080` | 3 | 0 |
+| 5697 | `$C44090`--`$C44098` | not entered directly in this batch | 3 | 0 |
+| 5697 | `$C4406C`--`$C44074` | `$C44066 / $00C4406A` | 3 | 0 |
+| 5697 | `$C43F64`--`$C43F78` | `$C43F5E / $00C43FAE` | 6 | 1 |
+| 5697 | `$C43F7E`--`$C43F86` | not entered directly in this batch | 3 | 1 |
+| 5697 | `$C43F8C`--`$C43FA8` | not entered directly in this batch | 8 | 1 |
+| 5697 | `$C43D3A`--`$C43D4A` | `$C43D34 / $00C43D38` | 5 | 1 |
+| 5697 | `$C43D50`--`$C43D68` | not entered directly in this batch | 7 | 1 |
+| 5697 | `$C43D6E`--`$C43D7E` | not entered directly in this batch | 5 | 1 |
+| 5698 | `$C43CC4`--`$C43CF4` | `$C43CBE / $00C43CFA` | 13 | 1 |
+| 5698 | `$C43B20`--`$C43B2C` | `$C43B1A / $00C43B1E` | 4 | 1 |
+| 5698 | `$C439D2`--`$C439DE` | `$C439CC / $00C439D0` | 4 | 1 |
+| 5698 | `$C439AE`--`$C439C6` | `$C439A8 / $00C439AC` | 7 | 1 |
+| 5698 | `$C4399A`--`$C439A2` | `$C43994 / $00C43998` | 3 | 5 |
+
+The JSON companion retains every exact consumed signed pair and its static address.
+
+## Direct packet stream selections
+
+`$C2AF40` chooses the inline source at `header + 4` when `D7` is zero, otherwise the header longword.
+
+| Frame | Header | Inline stream | Header pointer | `D7` | Selected stream | Route |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 5690 | `$C42E3E` | `$C42E42` | `$C42E42` | 0 | `$C42E42` | inline |
+| 5690 | `$C42D28` | `$C42D2C` | `$C42D2C` | 0 | `$C42D2C` | inline |
+| 5691 | `$C42DFC` | `$C42E00` | `$C42E00` | 0 | `$C42E00` | inline |
+| 5691 | `$C42E1A` | `$C42E1E` | `$C42E1E` | 0 | `$C42E1E` | inline |
+| 5691 | `$C42DC4` | `$C42DC8` | `$C42DC8` | 0 | `$C42DC8` | inline |
+| 5691 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 5691 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 5691 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 5691 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 5691 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 5691 | `$C42E52` | `$C42E56` | `$C42E56` | 0 | `$C42E56` | inline |
+| 5691 | `$C43ECA` | `$C43ECE` | `$C43F3A` | 0 | `$C43ECE` | inline |
+| 5692 | `$C43E24` | `$C43E28` | `$C43E9A` | 0 | `$C43E28` | inline |
+| 5693 | `$C43D84` | `$C43D88` | `$C43D88` | 0 | `$C43D88` | inline |
+| 5694 | `$C43BAC` | `$C43BB0` | `$C43C70` | 0 | `$C43BB0` | inline |
+| 5695 | `$C43B34` | `$C43B38` | `$C43B94` | 0 | `$C43B38` | inline |
+| 5695 | `$C43A78` | `$C43A7C` | `$C43AF0` | 0 | `$C43A7C` | inline |
+| 5696 | `$C439E8` | `$C439EC` | `$C43A44` | 0 | `$C439EC` | inline |
+| 5696 | `$C4409E` | `$C440A2` | `$C440A2` | 0 | `$C440A2` | inline |
+| 5697 | `$C4407C` | `$C44080` | `$C44080` | 0 | `$C44080` | inline |
+| 5697 | `$C44066` | `$C4406A` | `$C4406A` | 0 | `$C4406A` | inline |
+| 5697 | `$C43F5E` | `$C43F62` | `$C43FAE` | 0 | `$C43F62` | inline |
+| 5697 | `$C43D34` | `$C43D38` | `$C43D38` | 0 | `$C43D38` | inline |
+| 5697 | `$C43CBE` | `$C43CC2` | `$C43CFA` | 0 | `$C43CC2` | inline |
+| 5698 | `$C43B1A` | `$C43B1E` | `$C43B1E` | 0 | `$C43B1E` | inline |
+| 5698 | `$C439CC` | `$C439D0` | `$C439D0` | 0 | `$C439D0` | inline |
+| 5698 | `$C439A8` | `$C439AC` | `$C439AC` | 0 | `$C439AC` | inline |
+| 5698 | `$C43994` | `$C43998` | `$C43998` | 0 | `$C43998` | inline |
+
+The same coordinate pairs are available as grouped `l` primitives in the [OBJ inspection export](../exports/run003_m_map_static_pair_batches.obj) for run003 only. It writes `(source_x, 0, source_y)` solely as a viewer convention, with no faces, path closure, global placement, or game-axis semantics inferred.

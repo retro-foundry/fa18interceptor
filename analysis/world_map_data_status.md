@@ -57,6 +57,13 @@ and `6` to `3` pairs).  This establishes an LOD-style geometry mechanism for
 the M-map renderer.  Its depth is a transformed renderer component, so it
 does not prove that physical flight-world distance selects a terrain model.
 
+The independently recorded run037, after ordinary straight flight, visibly
+enters the same map and contributes one further direct packet header
+(`$C42E3E`) with three previously unobserved exact source pairs. It confirms
+position-sensitive bounded M-map packet content, while leaving the terrain
+cell and flight-distance interpretations unproven. See the
+[run037 packet comparison](data/run037_m_map_stable_packet_comparison.md).
+
 Authority: [packet path and depth provenance](routines/c2af00_map_static_pair_packet.md),
 [variant comparison](data/run003_run035_map_packet_variant_comparison.md), and
 [raw coordinate visual](plots/run003_run035_map_packet_variants.png).
