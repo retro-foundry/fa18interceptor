@@ -17,8 +17,10 @@ or map-page table.
   as [`publish_terrain_selector_origin.asm`](../../source_amiga/observed/publish_terrain_selector_origin.asm).
 - The common static adjustment/publish tail `$C29548-$C295D0` is byte-exactly
   reconstructed as [`adjust_terrain_selector_origin.asm`](../../source_amiga/observed/adjust_terrain_selector_origin.asm).
-  The dispatch and threshold-policy range `$C291D4-$C29547` remains outside
-  the bounded source slices.
+- The static adjustment-mode selector `$C291D4-$C29225` is byte-exactly
+  reconstructed as [`select_terrain_origin_adjustment_mode.asm`](../../source_amiga/observed/select_terrain_origin_adjustment_mode.asm).
+  Its downstream dispatch/threshold-policy range `$C29226-$C29547` remains
+  outside the bounded source slices.
 
 ## Observed producer path
 
@@ -49,6 +51,13 @@ nonzero candidate with the previous `$C45C4A` triple before adding it to the
 live origin. This proves an adjustment/smoothing dataflow. It does not prove
 what physical quantity `D3` represents, nor that any preceding threshold is a
 distance LOD decision.
+
+The reconstructed selector establishes `D3` before that tail: it computes the
+largest absolute component difference between candidate `$C45C56` and the
+live origin `$C45C3E`, then indexes the `$C28F2C` jump table with byte
+`$C457B6`. This is static/dataflow evidence for a component-delta adjustment
+mode. It does not establish what selected mode values mean or connect them to
+physical distance.
 
 ## Terrain-selection consequence
 

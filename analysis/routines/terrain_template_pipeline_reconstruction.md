@@ -49,8 +49,9 @@ The byte-exact reconstructed parts are:
 ## Explicit limits
 
 The selector-origin producer's common adjustment/publish tail
-`$C29548-$C295D0` is reconstructed; the preceding dispatch/threshold-policy
-range `$C291D4-$C29547` is not. Neither the reconstructed smoothing tail nor
+`$C29548-$C295D0` and component-delta mode selector `$C291D4-$C29225` are
+reconstructed; the downstream dispatch/threshold-policy range
+`$C29226-$C29547` is not. Neither the reconstructed smoothing tail nor
 the static threshold branches must be called a terrain LOD scheme without a
 controlled same-instance distance trace. The 32×32
 selector lattice wraps in the observed bounded inputs, but no evidence maps
