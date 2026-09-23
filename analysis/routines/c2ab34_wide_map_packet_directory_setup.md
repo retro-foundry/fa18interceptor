@@ -22,4 +22,4 @@ The captured run035 map traces execute the wide layout; run003 and run037
 also execute the normal sibling layout. Which caller/context selects a layout
 is not yet a physical-distance or terrain-cell claim.
 
-Authority: byte-exact [wide initializer](../../source_amiga/observed/initialize_wide_map_packet_directory.asm), the adjacent verified runtime bytes at `$C2AB5A`, and [selector stride samples](../data/m_map_selector_modes.md).
+Authority: byte-exact [wide initializer](../../source_amiga/observed/initialize_wide_map_packet_directory.asm), byte-exact [normal initializer](../../source_amiga/observed/initialize_normal_map_packet_directory.asm), and [selector stride samples](../data/m_map_selector_modes.md).
