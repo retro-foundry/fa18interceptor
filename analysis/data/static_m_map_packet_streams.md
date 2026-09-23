@@ -59,6 +59,11 @@ remain signed two-word source values; depth is computed later by the renderer.
 Authority: direct-header inventories generated from sealed traces and the
 byte-exact `$C2AEFC-$C2AFF7` reader/stream selector reconstruction.
 
+The exact decoded streams are also available as [raw-pair inspection image]
+(../plots/static_m_map_packet_streams.png) and [OBJ line groups]
+(../exports/static_m_map_packet_streams.obj). The OBJ writes `(x, 0, y)`
+solely as a viewer carrier and does not infer faces or game-space elevation.
+
 ## Grammar-compatible header candidates
 
 A conservative even-address scan finds 71 locations
