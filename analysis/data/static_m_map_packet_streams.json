@@ -11,7 +11,7 @@
     "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
     "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
   ],
-  "header_count": 24,
+  "header_count": 26,
   "headers": [
     "$C42D28",
     "$C42DC4",
@@ -34,9 +34,11 @@
     "$C43E24",
     "$C43ECA",
     "$C43F5E",
+    "$C43FD0",
     "$C44066",
     "$C4407C",
-    "$C4409E"
+    "$C4409E",
+    "$C440BC"
   ],
   "streams": [
     {
@@ -230,7 +232,11 @@
         "$C42D28"
       ],
       "inventories": [
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -306,7 +312,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -354,7 +364,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -410,7 +424,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -449,6 +467,8 @@
         "$C42E3E"
       ],
       "inventories": [
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -492,6 +512,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -531,7 +553,9 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -587,7 +611,9 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -631,7 +657,9 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -756,6 +784,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -830,6 +860,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -982,6 +1014,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1053,6 +1087,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1096,7 +1132,9 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1225,6 +1263,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1271,6 +1311,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1513,7 +1555,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1621,7 +1667,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1700,7 +1750,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1755,7 +1809,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1798,6 +1856,7 @@
         "$C43D1A"
       ],
       "inventories": [
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
         "analysis\\data\\run035_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -1911,6 +1970,7 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2118,6 +2178,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2275,6 +2337,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2345,6 +2409,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2489,7 +2555,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2548,7 +2618,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2661,7 +2735,11 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2725,8 +2803,168 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_appearance_packet_runtime_state.json",
+        "analysis\\data\\run035_m_map_packet_long_window.json",
         "analysis\\data\\run035_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C43FD4",
+      "batches": [
+        {
+          "prefix": "$C43FD4",
+          "threshold_word": null,
+          "count": 13,
+          "pair_start": "$C43FD6",
+          "pair_end_exclusive": "$C4400A",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              1152,
+              4096
+            ],
+            [
+              2016,
+              1664
+            ],
+            [
+              2176,
+              1584
+            ],
+            [
+              2128,
+              1472
+            ],
+            [
+              1328,
+              1392
+            ],
+            [
+              1664,
+              1616
+            ],
+            [
+              1296,
+              2080
+            ],
+            [
+              992,
+              2128
+            ],
+            [
+              832,
+              2048
+            ],
+            [
+              0,
+              1920
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C4400A",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C4400C",
+          "pair_end_exclusive": "$C44038",
+          "pairs": [
+            [
+              832,
+              3328
+            ],
+            [
+              896,
+              2688
+            ],
+            [
+              640,
+              2848
+            ],
+            [
+              896,
+              2176
+            ],
+            [
+              640,
+              2160
+            ],
+            [
+              576,
+              2464
+            ],
+            [
+              560,
+              2160
+            ],
+            [
+              288,
+              2096
+            ],
+            [
+              976,
+              2112
+            ],
+            [
+              1280,
+              2640
+            ],
+            [
+              1072,
+              2656
+            ]
+          ]
+        },
+        {
+          "prefix": "$C44038",
+          "threshold_word": null,
+          "count": 4,
+          "pair_start": "$C4403A",
+          "pair_end_exclusive": "$C4404A",
+          "pairs": [
+            [
+              384,
+              4128
+            ],
+            [
+              128,
+              4096
+            ],
+            [
+              0,
+              3888
+            ],
+            [
+              0,
+              3648
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4404A",
+      "end_exclusive": "$C4404C",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C43FD0"
+      ],
+      "inventories": [
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json"
       ]
     },
     {
@@ -2765,6 +3003,7 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2825,6 +3064,8 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
       ]
     },
@@ -2872,21 +3113,234 @@
       ],
       "inventories": [
         "analysis\\data\\run003_m_map_polygon_static_packets.json",
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json",
+        "analysis\\data\\run037_m_map_packet_long_window.json",
         "analysis\\data\\run037_m_map_stable_polygon_static_packets.json"
+      ]
+    },
+    {
+      "start": "$C440C0",
+      "batches": [
+        {
+          "prefix": "$C440C0",
+          "threshold_word": null,
+          "count": 7,
+          "pair_start": "$C440C2",
+          "pair_end_exclusive": "$C440DE",
+          "pairs": [
+            [
+              2576,
+              3520
+            ],
+            [
+              2224,
+              3152
+            ],
+            [
+              2432,
+              3152
+            ],
+            [
+              2528,
+              3008
+            ],
+            [
+              2432,
+              2944
+            ],
+            [
+              2496,
+              2896
+            ],
+            [
+              2640,
+              3072
+            ]
+          ]
+        },
+        {
+          "prefix": "$C440DE",
+          "threshold_word": null,
+          "count": 11,
+          "pair_start": "$C440E0",
+          "pair_end_exclusive": "$C4410C",
+          "pairs": [
+            [
+              4224,
+              4224
+            ],
+            [
+              2816,
+              4096
+            ],
+            [
+              2736,
+              3632
+            ],
+            [
+              2864,
+              3264
+            ],
+            [
+              2624,
+              2848
+            ],
+            [
+              2496,
+              2896
+            ],
+            [
+              1536,
+              1472
+            ],
+            [
+              1344,
+              736
+            ],
+            [
+              1104,
+              256
+            ],
+            [
+              1152,
+              0
+            ],
+            [
+              4224,
+              0
+            ]
+          ]
+        },
+        {
+          "prefix": "$C4410C",
+          "threshold_word": null,
+          "count": 8,
+          "pair_start": "$C4410E",
+          "pair_end_exclusive": "$C4412E",
+          "pairs": [
+            [
+              2496,
+              2992
+            ],
+            [
+              2432,
+              3104
+            ],
+            [
+              2240,
+              3104
+            ],
+            [
+              1840,
+              2816
+            ],
+            [
+              1360,
+              1888
+            ],
+            [
+              1440,
+              1664
+            ],
+            [
+              1856,
+              1824
+            ],
+            [
+              2496,
+              2896
+            ]
+          ]
+        },
+        {
+          "prefix": "$C4412E",
+          "threshold_word": null,
+          "count": 6,
+          "pair_start": "$C44130",
+          "pair_end_exclusive": "$C44148",
+          "pairs": [
+            [
+              1632,
+              1760
+            ],
+            [
+              1440,
+              1648
+            ],
+            [
+              1200,
+              1664
+            ],
+            [
+              1184,
+              1360
+            ],
+            [
+              864,
+              1232
+            ],
+            [
+              1056,
+              1088
+            ]
+          ]
+        },
+        {
+          "prefix": "$C44148",
+          "threshold_word": null,
+          "count": 5,
+          "pair_start": "$C4414A",
+          "pair_end_exclusive": "$C4415E",
+          "pairs": [
+            [
+              1056,
+              1088
+            ],
+            [
+              736,
+              1424
+            ],
+            [
+              672,
+              896
+            ],
+            [
+              48,
+              0
+            ],
+            [
+              384,
+              0
+            ]
+          ]
+        }
+      ],
+      "terminator": "$C4415E",
+      "end_exclusive": "$C44160",
+      "roles": [
+        "alternate",
+        "inline"
+      ],
+      "headers": [
+        "$C440BC"
+      ],
+      "inventories": [
+        "analysis\\data\\run035_m_map_stable_packet_runtime_state.json"
       ]
     }
   ],
-  "pair_count": 424,
-  "pair_bytes": 1696,
-  "pair_byte_fraction": 0.27249357326478146,
+  "pair_count": 489,
+  "pair_bytes": 1956,
+  "pair_byte_fraction": 0.31426735218509,
   "candidate_header_count": 71,
-  "observed_candidate_count": 24,
+  "observed_candidate_count": 26,
   "header_candidates": [
     {
       "header": "$C42D28",
       "inline_stream": "$C42D2C",
       "alternate_stream": "$C42D2C",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 33,
       "alternate_pair_count": 33,
       "inline_terminator": "$C42DC2",
@@ -2897,6 +3351,7 @@
       "inline_stream": "$C42DC8",
       "alternate_stream": "$C42DC8",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 12,
       "alternate_pair_count": 12,
       "inline_terminator": "$C42DFA",
@@ -2907,6 +3362,7 @@
       "inline_stream": "$C42E00",
       "alternate_stream": "$C42E00",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 5,
       "alternate_pair_count": 5,
       "inline_terminator": "$C42E18",
@@ -2917,6 +3373,7 @@
       "inline_stream": "$C42E1E",
       "alternate_stream": "$C42E1E",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 7,
       "alternate_pair_count": 7,
       "inline_terminator": "$C42E3C",
@@ -2927,6 +3384,7 @@
       "inline_stream": "$C42E42",
       "alternate_stream": "$C42E42",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 3,
       "alternate_pair_count": 3,
       "inline_terminator": "$C42E50",
@@ -2937,6 +3395,7 @@
       "inline_stream": "$C42E56",
       "alternate_stream": "$C42E56",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C42E68",
@@ -2947,6 +3406,7 @@
       "inline_stream": "$C43672",
       "alternate_stream": "$C43672",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43684",
@@ -2957,6 +3417,7 @@
       "inline_stream": "$C4368C",
       "alternate_stream": "$C4368C",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4369E",
@@ -2967,6 +3428,7 @@
       "inline_stream": "$C436A6",
       "alternate_stream": "$C436A6",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C436B8",
@@ -2977,6 +3439,7 @@
       "inline_stream": "$C436C0",
       "alternate_stream": "$C436C0",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C436D2",
@@ -2987,6 +3450,7 @@
       "inline_stream": "$C436DA",
       "alternate_stream": "$C436DA",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C436EC",
@@ -2997,6 +3461,7 @@
       "inline_stream": "$C436F4",
       "alternate_stream": "$C436F4",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43706",
@@ -3007,6 +3472,7 @@
       "inline_stream": "$C4370E",
       "alternate_stream": "$C4370E",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43720",
@@ -3017,6 +3483,7 @@
       "inline_stream": "$C43728",
       "alternate_stream": "$C43728",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4373A",
@@ -3027,6 +3494,7 @@
       "inline_stream": "$C43742",
       "alternate_stream": "$C43742",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43754",
@@ -3037,6 +3505,7 @@
       "inline_stream": "$C4375C",
       "alternate_stream": "$C4375C",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4376E",
@@ -3047,6 +3516,7 @@
       "inline_stream": "$C43776",
       "alternate_stream": "$C43776",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 6,
       "alternate_pair_count": 6,
       "inline_terminator": "$C43790",
@@ -3057,6 +3527,7 @@
       "inline_stream": "$C43796",
       "alternate_stream": "$C43796",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 10,
       "alternate_pair_count": 10,
       "inline_terminator": "$C437C0",
@@ -3067,6 +3538,7 @@
       "inline_stream": "$C437C6",
       "alternate_stream": "$C437C6",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C437D8",
@@ -3077,6 +3549,7 @@
       "inline_stream": "$C437E0",
       "alternate_stream": "$C437E0",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 17,
       "alternate_pair_count": 17,
       "inline_terminator": "$C43828",
@@ -3087,6 +3560,7 @@
       "inline_stream": "$C4382E",
       "alternate_stream": "$C4382E",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43840",
@@ -3097,6 +3571,7 @@
       "inline_stream": "$C43848",
       "alternate_stream": "$C43848",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 20,
       "alternate_pair_count": 20,
       "inline_terminator": "$C4389C",
@@ -3107,6 +3582,7 @@
       "inline_stream": "$C438A2",
       "alternate_stream": "$C438A2",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C438B4",
@@ -3117,6 +3593,7 @@
       "inline_stream": "$C438BC",
       "alternate_stream": "$C438BC",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 7,
       "alternate_pair_count": 7,
       "inline_terminator": "$C438DA",
@@ -3127,6 +3604,7 @@
       "inline_stream": "$C438E0",
       "alternate_stream": "$C438E0",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 12,
       "alternate_pair_count": 12,
       "inline_terminator": "$C43912",
@@ -3137,6 +3615,7 @@
       "inline_stream": "$C43918",
       "alternate_stream": "$C43918",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4392A",
@@ -3147,6 +3626,7 @@
       "inline_stream": "$C43932",
       "alternate_stream": "$C43932",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43944",
@@ -3157,6 +3637,7 @@
       "inline_stream": "$C4394A",
       "alternate_stream": "$C4394A",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 11,
       "alternate_pair_count": 11,
       "inline_terminator": "$C43978",
@@ -3167,6 +3648,7 @@
       "inline_stream": "$C4397E",
       "alternate_stream": "$C4397E",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43990",
@@ -3177,6 +3659,7 @@
       "inline_stream": "$C43998",
       "alternate_stream": "$C43998",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 3,
       "alternate_pair_count": 3,
       "inline_terminator": "$C439A6",
@@ -3187,6 +3670,7 @@
       "inline_stream": "$C439AC",
       "alternate_stream": "$C439AC",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 7,
       "alternate_pair_count": 7,
       "inline_terminator": "$C439CA",
@@ -3197,6 +3681,7 @@
       "inline_stream": "$C439D0",
       "alternate_stream": "$C439D0",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C439E2",
@@ -3207,6 +3692,7 @@
       "inline_stream": "$C439EC",
       "alternate_stream": "$C43A44",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 20,
       "alternate_pair_count": 12,
       "inline_terminator": "$C43A42",
@@ -3217,6 +3703,7 @@
       "inline_stream": "$C43A7C",
       "alternate_stream": "$C43AF0",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 27,
       "alternate_pair_count": 9,
       "inline_terminator": "$C43AEE",
@@ -3227,6 +3714,7 @@
       "inline_stream": "$C43B1E",
       "alternate_stream": "$C43B1E",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43B30",
@@ -3237,6 +3725,7 @@
       "inline_stream": "$C43B38",
       "alternate_stream": "$C43B94",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 21,
       "alternate_pair_count": 5,
       "inline_terminator": "$C43B92",
@@ -3247,6 +3736,7 @@
       "inline_stream": "$C43BB0",
       "alternate_stream": "$C43C70",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 45,
       "alternate_pair_count": 18,
       "inline_terminator": "$C43C6E",
@@ -3257,6 +3747,7 @@
       "inline_stream": "$C43CC2",
       "alternate_stream": "$C43CFA",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 13,
       "alternate_pair_count": 7,
       "inline_terminator": "$C43CF8",
@@ -3267,6 +3758,7 @@
       "inline_stream": "$C43D1E",
       "alternate_stream": "$C43D1E",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C43D30",
@@ -3277,6 +3769,7 @@
       "inline_stream": "$C43D38",
       "alternate_stream": "$C43D38",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 17,
       "alternate_pair_count": 17,
       "inline_terminator": "$C43D82",
@@ -3287,6 +3780,7 @@
       "inline_stream": "$C43D88",
       "alternate_stream": "$C43D88",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 36,
       "alternate_pair_count": 36,
       "inline_terminator": "$C43E22",
@@ -3297,6 +3791,7 @@
       "inline_stream": "$C43E28",
       "alternate_stream": "$C43E9A",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 26,
       "alternate_pair_count": 11,
       "inline_terminator": "$C43E98",
@@ -3307,6 +3802,7 @@
       "inline_stream": "$C43ECE",
       "alternate_stream": "$C43F3A",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 25,
       "alternate_pair_count": 8,
       "inline_terminator": "$C43F38",
@@ -3317,6 +3813,7 @@
       "inline_stream": "$C43F62",
       "alternate_stream": "$C43FAE",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 17,
       "alternate_pair_count": 7,
       "inline_terminator": "$C43FAC",
@@ -3327,6 +3824,7 @@
       "inline_stream": "$C43FD4",
       "alternate_stream": "$C43FD4",
       "observed_direct_entry": false,
+      "observed_selector_sample": true,
       "inline_pair_count": 28,
       "alternate_pair_count": 28,
       "inline_terminator": "$C4404A",
@@ -3337,6 +3835,7 @@
       "inline_stream": "$C44050",
       "alternate_stream": "$C44050",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44062",
@@ -3347,6 +3846,7 @@
       "inline_stream": "$C4406A",
       "alternate_stream": "$C4406A",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 3,
       "alternate_pair_count": 3,
       "inline_terminator": "$C44078",
@@ -3357,6 +3857,7 @@
       "inline_stream": "$C44080",
       "alternate_stream": "$C44080",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 6,
       "alternate_pair_count": 6,
       "inline_terminator": "$C4409C",
@@ -3367,6 +3868,7 @@
       "inline_stream": "$C440A2",
       "alternate_stream": "$C440A2",
       "observed_direct_entry": true,
+      "observed_selector_sample": true,
       "inline_pair_count": 5,
       "alternate_pair_count": 5,
       "inline_terminator": "$C440B8",
@@ -3377,6 +3879,7 @@
       "inline_stream": "$C440C0",
       "alternate_stream": "$C440C0",
       "observed_direct_entry": false,
+      "observed_selector_sample": true,
       "inline_pair_count": 37,
       "alternate_pair_count": 37,
       "inline_terminator": "$C4415E",
@@ -3387,6 +3890,7 @@
       "inline_stream": "$C44164",
       "alternate_stream": "$C44164",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44176",
@@ -3397,6 +3901,7 @@
       "inline_stream": "$C4417E",
       "alternate_stream": "$C4417E",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 33,
       "alternate_pair_count": 33,
       "inline_terminator": "$C44208",
@@ -3407,6 +3912,7 @@
       "inline_stream": "$C44210",
       "alternate_stream": "$C44210",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 13,
       "alternate_pair_count": 13,
       "inline_terminator": "$C44248",
@@ -3417,6 +3923,7 @@
       "inline_stream": "$C4424E",
       "alternate_stream": "$C4424E",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 13,
       "alternate_pair_count": 13,
       "inline_terminator": "$C44284",
@@ -3427,6 +3934,7 @@
       "inline_stream": "$C4428A",
       "alternate_stream": "$C4428A",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4429C",
@@ -3437,6 +3945,7 @@
       "inline_stream": "$C442A4",
       "alternate_stream": "$C442A4",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 8,
       "alternate_pair_count": 8,
       "inline_terminator": "$C442C6",
@@ -3447,6 +3956,7 @@
       "inline_stream": "$C442CE",
       "alternate_stream": "$C442CE",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 15,
       "alternate_pair_count": 15,
       "inline_terminator": "$C4430E",
@@ -3457,6 +3967,7 @@
       "inline_stream": "$C44314",
       "alternate_stream": "$C44314",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 10,
       "alternate_pair_count": 10,
       "inline_terminator": "$C4433E",
@@ -3467,6 +3978,7 @@
       "inline_stream": "$C44344",
       "alternate_stream": "$C44344",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44356",
@@ -3477,6 +3989,7 @@
       "inline_stream": "$C4435E",
       "alternate_stream": "$C4435E",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 17,
       "alternate_pair_count": 17,
       "inline_terminator": "$C443A6",
@@ -3487,6 +4000,7 @@
       "inline_stream": "$C443AE",
       "alternate_stream": "$C443AE",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 16,
       "alternate_pair_count": 16,
       "inline_terminator": "$C443F2",
@@ -3497,6 +4011,7 @@
       "inline_stream": "$C443F8",
       "alternate_stream": "$C443F8",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4440A",
@@ -3507,6 +4022,7 @@
       "inline_stream": "$C44412",
       "alternate_stream": "$C44412",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44424",
@@ -3517,6 +4033,7 @@
       "inline_stream": "$C4442C",
       "alternate_stream": "$C4442C",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4443E",
@@ -3527,6 +4044,7 @@
       "inline_stream": "$C44446",
       "alternate_stream": "$C44446",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44458",
@@ -3537,6 +4055,7 @@
       "inline_stream": "$C44460",
       "alternate_stream": "$C44460",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C44472",
@@ -3547,6 +4066,7 @@
       "inline_stream": "$C4447A",
       "alternate_stream": "$C4447A",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C4448C",
@@ -3557,6 +4077,7 @@
       "inline_stream": "$C44494",
       "alternate_stream": "$C44494",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444A6",
@@ -3567,6 +4088,7 @@
       "inline_stream": "$C444AE",
       "alternate_stream": "$C444AE",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444C0",
@@ -3577,6 +4099,7 @@
       "inline_stream": "$C444C8",
       "alternate_stream": "$C444C8",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444DA",
@@ -3587,10 +4110,13 @@
       "inline_stream": "$C444E2",
       "alternate_stream": "$C444E2",
       "observed_direct_entry": false,
+      "observed_selector_sample": false,
       "inline_pair_count": 4,
       "alternate_pair_count": 4,
       "inline_terminator": "$C444F4",
       "alternate_terminator": "$C444F4"
     }
-  ]
+  ],
+  "direct_header_count": 24,
+  "selector_only_header_count": 2
 }

@@ -70,7 +70,7 @@ def parse_stream(data: bytes, start: int) -> dict:
         cursor = payload_end
 
 
-def candidate_headers(data: bytes, observed: set[int]) -> list[dict]:
+def candidate_headers(data: bytes, direct: set[int], selector: set[int]) -> list[dict]:
     """Find grammar-compatible headers; compatibility is not execution evidence."""
     rows = []
     for header in range(START, END - 8, 2):
@@ -84,7 +84,8 @@ def candidate_headers(data: bytes, observed: set[int]) -> list[dict]:
             continue
         rows.append({"header": address(header), "inline_stream": address(inline),
                      "alternate_stream": address(alternate),
-                     "observed_direct_entry": header in observed,
+                      "observed_direct_entry": header in direct,
+                      "observed_selector_sample": header in selector,
                      "inline_pair_count": sum(batch["count"] for batch in inline_stream["batches"]),
                      "alternate_pair_count": sum(batch["count"] for batch in alternate_stream["batches"]),
                      "inline_terminator": inline_stream["terminator"],
@@ -102,8 +103,9 @@ def markdown(report: dict) -> str:
         "grammar used by `$C2AF46`; it does not claim every reachable stream rendered in",
         "one frame, represents terrain, or has global flight-map placement.",
         "",
-        f"{report['header_count']} direct headers observed across the listed sealed M-map",
-        f"inventories expose {len(streams)} distinct inline/alternate stream starts. Their",
+        f"{report['direct_header_count']} direct `$C2AF00` headers plus",
+        f"{report['selector_only_header_count']} additional `$C2AF40` selector-sampled",
+        f"headers expose {len(streams)} distinct inline/alternate stream starts. Their",
         f"complete structural walks contain {report['pair_count']} pair records occupying",
         f"{report['pair_bytes']} payload bytes ({report['pair_byte_fraction']:.2%} of the",
         "segment). This expands static *reachable-format* coverage beyond dynamically",
@@ -129,11 +131,12 @@ def markdown(report: dict) -> str:
         f"A conservative even-address scan finds {report['candidate_header_count']} locations",
         f"whose leading longword points inside segment 68 and whose inline and alternate",
         f"streams both complete under the exact count/threshold grammar. {report['observed_candidate_count']}",
-        "are direct renderer entries in the sealed traces. The remaining candidates are",
+        "have live renderer evidence (direct entry or selector sample) in the sealed runs.",
+        "The remaining candidates are",
         "not promoted to packet headers: coordinate payload can coincidentally satisfy a",
         "small grammar, so dynamic entry or a static producer reference is still required.",
         "",
-        "The JSON retains every candidate and marks direct-entry status for use as a",
+        "The JSON retains every candidate and marks live-evidence status for use as a",
         "targeted trace list rather than as an unverified map export.",
         "",
     ])
@@ -142,6 +145,8 @@ def markdown(report: dict) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inventory", type=Path, action="append", required=True)
+    parser.add_argument("--selector-samples", type=Path, action="append", default=[],
+                        help="C2AF40 sample JSON; proves a selected header but not necessarily a C2AF00 entry")
     parser.add_argument("--slow", type=Path, required=True)
     parser.add_argument("--output-json", type=Path,
                         default=ROOT / "analysis/data/static_m_map_packet_streams.json")
@@ -157,12 +162,21 @@ def main() -> None:
     data = args.slow.read_bytes()
     if len(data) != 0x80000:
         raise ValueError(f"expected 512 KiB slow RAM, got {len(data)} bytes")
-    headers: dict[int, set[str]] = {}
+    direct_headers: dict[int, set[str]] = {}
+    selector_headers: dict[int, set[str]] = {}
     for inventory in args.inventory:
         source = str(inventory.resolve().relative_to(ROOT))
         report = json.loads(inventory.read_text(encoding="utf-8"))
         for row in report["packet_streams"]:
-            headers.setdefault(int(row["header"][1:], 16), set()).add(source)
+            direct_headers.setdefault(int(row["header"][1:], 16), set()).add(source)
+    for samples_path in args.selector_samples:
+        source = str(samples_path.resolve().relative_to(ROOT))
+        samples = json.loads(samples_path.read_text(encoding="utf-8"))
+        for row in samples["samples"]:
+            selector_headers.setdefault(int(row["header"][1:], 16), set()).add(source)
+    headers: dict[int, set[str]] = {}
+    for header in set(direct_headers) | set(selector_headers):
+        headers[header] = direct_headers.get(header, set()) | selector_headers.get(header, set())
     streams: dict[int, dict] = {}
     for header, inventories in sorted(headers.items()):
         alternate, inline = long(data, header), header + 4
@@ -189,10 +203,13 @@ def main() -> None:
               "header_count": len(headers), "headers": [address(value) for value in sorted(headers)],
               "streams": rows, "pair_count": len(pair_addresses), "pair_bytes": len(pair_addresses) * 4,
               "pair_byte_fraction": len(pair_addresses) * 4 / (END - START)}
-    candidates = candidate_headers(data, set(headers))
+    candidates = candidate_headers(data, set(direct_headers), set(selector_headers))
     report["candidate_header_count"] = len(candidates)
-    report["observed_candidate_count"] = sum(row["observed_direct_entry"] for row in candidates)
+    report["observed_candidate_count"] = sum(row["observed_direct_entry"] or row["observed_selector_sample"]
+                                             for row in candidates)
     report["header_candidates"] = candidates
+    report["direct_header_count"] = len(direct_headers)
+    report["selector_only_header_count"] = len(set(selector_headers) - set(direct_headers))
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     args.output_markdown.write_text(markdown(report), encoding="utf-8")

@@ -5,10 +5,11 @@ scenario-observed headers**. The decoder follows the byte-exact count/threshold
 grammar used by `$C2AF46`; it does not claim every reachable stream rendered in
 one frame, represents terrain, or has global flight-map placement.
 
-24 direct headers observed across the listed sealed M-map
-inventories expose 32 distinct inline/alternate stream starts. Their
-complete structural walks contain 424 pair records occupying
-1696 payload bytes (27.25% of the
+24 direct `$C2AF00` headers plus
+2 additional `$C2AF40` selector-sampled
+headers expose 34 distinct inline/alternate stream starts. Their
+complete structural walks contain 489 pair records occupying
+1956 payload bytes (31.43% of the
 segment). This expands static *reachable-format* coverage beyond dynamically
 consumed pairs; it is deliberately reported separately from trace coverage.
 
@@ -43,9 +44,11 @@ consumed pairs; it is deliberately reported separately from trace coverage.
 | `$C43F3A` | alternate | 1 | 8 | `$C43F5C` |
 | `$C43F62` | inline | 3 | 17 | `$C43FAC` |
 | `$C43FAE` | alternate | 2 | 7 | `$C43FCE` |
+| `$C43FD4` | alternate, inline | 3 | 28 | `$C4404A` |
 | `$C4406A` | alternate, inline | 1 | 3 | `$C44078` |
 | `$C44080` | alternate, inline | 2 | 6 | `$C4409C` |
 | `$C440A2` | alternate, inline | 1 | 5 | `$C440B8` |
+| `$C440C0` | alternate, inline | 5 | 37 | `$C4415E` |
 
 A negative non-`$FFFF` prefix is retained as a threshold word because the
 renderer clears its sign bit, scales it by four, compares it with the live depth
@@ -60,10 +63,11 @@ byte-exact `$C2AEFC-$C2AFF7` reader/stream selector reconstruction.
 
 A conservative even-address scan finds 71 locations
 whose leading longword points inside segment 68 and whose inline and alternate
-streams both complete under the exact count/threshold grammar. 24
-are direct renderer entries in the sealed traces. The remaining candidates are
+streams both complete under the exact count/threshold grammar. 26
+have live renderer evidence (direct entry or selector sample) in the sealed runs.
+The remaining candidates are
 not promoted to packet headers: coordinate payload can coincidentally satisfy a
 small grammar, so dynamic entry or a static producer reference is still required.
 
-The JSON retains every candidate and marks direct-entry status for use as a
+The JSON retains every candidate and marks live-evidence status for use as a
 targeted trace list rather than as an unverified map export.
