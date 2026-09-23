@@ -46,6 +46,7 @@ called the complete world map.
 | Does the visible M-map reuse the flight terrain-template selector? | Yes, in one same-replay comparison. Run037's cockpit band walk selects two static streams / 40 records; after its `M` command the stable visible map band walk selects six streams / 71 records, retaining both cockpit streams and adding four. This establishes shared, state-dependent template input, not a pixel-to-template mapping, terrain-cell identity, or LOD cause. | [run037 flight-to-map selector comparison](data/run037_flight_to_m_map_template_selection.md) |
 | Does an independent M-map position reach flat terrain placements? | Yes. In run037's stable map frames 5,717--5,719, 100 of 110 traced immutable template copies reach `$C1DD36` and emit descriptor-qualified X/0/Z placements; all 100 middle words are zero and group into 82 descriptor `+8` control-field candidates. This is bounded map-mode placement/cache evidence, not a complete terrain mesh or a coastline-pixel mapping. | [run037 template-placement handoff](data/run037_m_map_template_placement_handoff.md) |
 | Does a full run037 M-map placement-cache snapshot remain flat? | In the bounded snapshot, yes: 111 descriptor-qualified `$C4E9AA` records have a zero middle word, spanning X `-1024..15872` and Z `-768..10576`. The cache is mutable, so this supports the sampled flat placement plane but does not measure the physical map extent or prove a universal elevation rule. | [run037 placement snapshot](data/run037_m_map_runtime_placement_snapshot.md) |
+| Are terrain entries coordinate pairs rather than triples? | For the sampled terrain/map placement source, yes: each immutable template supplies a header plus two words, and the independent segment-68 M-map packet reader consumes exactly two words. The builder produces an X/0/Z cache entry. Later renderer-local components remain three-word triples, so the pair source and triple geometry are distinct formats. | [planar tuple/local triple boundary](data/planar_tuple_and_local_triple_boundary.md) |
 | Do run037 map placements reach the renderer control interface? | Yes, at the descriptor-field boundary. In the stable map trace, 17 distinct descriptors execute `$C1CC70`, reading their `+8` longword and writing it to `$C45A36`; all 17 are independently present in the template-placement inventory. `$C1F6F8` later loads `$C45A36` as a control-stream pointer. Scheduling prevents a one-placement-to-one-walker assignment, so this is not pixel, model, or terrain-cell ownership. | [run037 descriptor-control handoff](data/run037_m_map_descriptor_control_handoff.md) |
 | Are any active run037 descriptor targets in a newly verified immutable Hunk? | Yes. Original Hunk 69 is byte-exactly located at `$C44500-$C44877`, resolving 11 targets from the run037 template-placement catalog; three execute the observed `$C1CC70` field-to-`$C45A36` write. This promotes their original/runtime provenance, not their meaning to mesh or terrain-cell data. | [run037 Hunk-69 target mapping](data/run037_segment69_descriptor_target_mapping.md) |
 | Does the adjacent partly mutable Hunk 70 contain stable active targets? | Yes, as bounded records only. All 24 catalog-selected 24-byte targets in `$C44880-$C45623` are snapshot-stable across five states and original-byte-identical outside their relocation operands. This identifies an immutable target-record subset inside a globally mutable/unclassified CODE Hunk; it is not a complete terrain mesh or LOD table. | [run037 Hunk-70 target inventory](data/run037_segment70_template_targets.md) |
@@ -95,6 +96,13 @@ convention; they must not be conflated with placement height.
 Consequently, a map export must retain all three stored components until a
 producer-to-consumer trace proves which components encode global placement and
 which (if any) encode elevation.
+
+The new format boundary refines that caution: the sampled immutable
+terrain/map placement **sources** themselves are two-word pairs, but they
+select separate renderer-local three-word components. A useful export should
+preserve that separation rather than pad source pairs into invented triples or
+drop a real component from local geometry. See the [planar tuple/local triple
+boundary](data/planar_tuple_and_local_triple_boundary.md).
 
 ## LOD result
 
