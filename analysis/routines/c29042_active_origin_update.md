@@ -25,8 +25,10 @@ or map-page table.
   reconstructed as [`load_terrain_origin_candidate_preset.asm`](../../source_amiga/observed/load_terrain_origin_candidate_preset.asm)
   (`$C29488-$C294AB`) and [`transform_terrain_origin_candidate_small_mode.asm`](../../source_amiga/observed/transform_terrain_origin_candidate_small_mode.asm)
   (`$C294AC-$C29505`).
-  The remaining downstream cases `$C29368-$C29547` remain outside the bounded
-  source slices.
+- The control-record candidate scan `$C29368-$C29408` is byte-exactly
+  reconstructed as [`select_terrain_origin_control_record.asm`](../../source_amiga/observed/select_terrain_origin_control_record.asm).
+  The remaining blend path `$C2940A-$C29487` remains outside the bounded source
+  slices.
 
 ## Observed producer path
 
@@ -77,6 +79,12 @@ one of the static triples at `$C46198/$C46998` to `$C45C56`; `$C294AC` or
 `$C294D2` instead calls `$C091CE` with small signed constants selected by
 `$C45848`, then publishes that output. Neither source triple is a whole-world
 terrain mesh, and the preset-selection context is not yet live-traced.
+
+The mode-7 control-record path scans signed-word-terminated entries from the
+live list pointer `$C4573A`, seeking a `$C46184` record with a high-nibble
+`$10` class and bit 6 set. Its selected `$14/$1C` values and a derived middle
+component publish another candidate triple. The list ownership, record
+semantics, and any terrain relationship remain unassigned.
 
 ## Terrain-selection consequence
 
