@@ -2,8 +2,8 @@
 
 An unchanged source set only characterizes these bounded stable-map windows. It does not establish whole-map coverage, terrain identity, or LOD behavior.
 
-Baseline: `build\run037_m_map_stable_13f_trace\trace.jsonl` — 133,001 instructions, 6 `$C1F4AC` entries.
-Extended: `build\run037_m_map_stable_20f_trace\trace.jsonl` — 198,208 instructions, 6 `$C1F4AC` entries.
+Baseline: `build\run003_m_map_appearance_trace\trace.jsonl` — 135,244 instructions, 6 `$C1F4AC` entries.
+Extended: `build\run037_m_map_stable_13f_trace\trace.jsonl` — 133,001 instructions, 6 `$C1F4AC` entries.
 
 | Immutable source | baseline entries | extended entries |
 | --- | ---: | ---: |

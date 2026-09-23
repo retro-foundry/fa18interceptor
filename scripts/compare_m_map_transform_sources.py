@@ -41,7 +41,7 @@ def main() -> None:
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    lines = ["# Stable M-map transform-source window comparison", "", report["qualification"], "",
+    lines = ["# M-map transform-source trace comparison", "", report["qualification"], "",
              f"Baseline: `{args.baseline}` — {baseline['instruction_count']:,} instructions, {baseline['entries']} `$C1F4AC` entries.",
              f"Extended: `{args.extended}` — {extended['instruction_count']:,} instructions, {extended['entries']} `$C1F4AC` entries.", "",
              "| Immutable source | baseline entries | extended entries |", "| --- | ---: | ---: |"]
