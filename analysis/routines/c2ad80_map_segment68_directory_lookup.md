@@ -38,6 +38,13 @@ the later visibility/pair-transform code. `$C2AE5A` independently constrains
 its lookup index to 0--17. This table is renderer detail support; it is not
 terrain elevation or an LOD map.
 
+Across the sealed run003, run035, and run037 map traces, `$C2AD80` reaches
+selector values 0--24 at `$C29F00-$C29F30`. Their signed byte pairs comprise
+every combination in the local `{-2,-1,0,1,2} × {-2,-1,0,1,2}` lattice. This
+is scenario-backed evidence for a 5×5 local selector stencil. It does not
+prove `$C29F32` is a table boundary, map-cell size, global orientation, or
+physical terrain extent. See the [observed byte-pair inventory](../data/m_map_selector_byte_pairs.md).
+
 The immediately preceding control walker has a separate, explicit
 threshold-based detail gate at [`$C2AD00`](c2ad00_map_control_record_detail_gate.md).
 It changes record fields before this lookup, but has not been correlated to a

@@ -62,6 +62,7 @@ called the complete world map.
 | Do candidate headers have a simple immutable external-pointer table? | No evidence of one. An even-aligned longword scan across the baseline and run037 stable snapshots finds zero stable external references to all 71 headers (segment-68 self-references excluded). Relative-offset tables and computed pointers remain outside this negative result. | [header-reference scan](data/m_map_packet_header_references.md) |
 
 | Is the M-map packet selector itself reconstructed? | Yes, for `$C2AD80-$C2AE59`. It indexes signed byte-pair controls at `$C29F00`, bounds them, chooses a 16- or 64-byte row stride, and resolves a positive 16-bit offset from the caller-supplied static base into `A3`. The adjacent 18-word detail-limit lookup is also byte-exact. This proves selector mechanics, not global axes, terrain ownership, or LOD. | [relative-offset selector](routines/c2ad80_map_segment68_directory_lookup.md) |
+| Does the M-map selector use a local neighborhood stencil? | Yes, in the sampled renderer path. All 25 observed `$C29F00` selector entries are the full signed offset lattice `{-2..2} × {-2..2}` before the bounded relative-offset lookup. This supports local page-neighborhood selection, not a map-size, world-axis, or LOD claim. | [selector byte-pair inventory](data/m_map_selector_byte_pairs.md) |
 
 ## M-map packet detail result
 
