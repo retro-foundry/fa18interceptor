@@ -25,6 +25,11 @@ def word(data: bytes, absolute: int) -> int:
     return int.from_bytes(data[offset:offset + 2], "big")
 
 
+def long(data: bytes, absolute: int) -> int:
+    offset = absolute - 0xC00000
+    return int.from_bytes(data[offset:offset + 4], "big")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--trace", type=Path, required=True)
@@ -47,9 +52,13 @@ def main() -> None:
             table_address = BASE + y * ROW_STRIDE + x * 2
             offset = word(slow, table_address)
             target = BASE + offset
+            first_longword = long(slow, target)
             cells.append({"x": x, "y": y, "table_address": address(table_address),
                           "relative_offset": f"${offset:04X}", "target": address(target),
-                          "target_first_word": f"${word(slow, target):04X}"})
+                          "target_first_longword": f"${first_longword:08X}",
+                          "entry_classification": ("immediate_C2AEFC_reject"
+                                                   if first_longword & 0x80000000
+                                                   else "nonnegative_packet_entry_candidate")})
     reads = []
     for index, row in enumerate(trace):
         if row["pc"] != INDEX_X:
@@ -66,6 +75,7 @@ def main() -> None:
         reads.append({"frame": row["frame"], "trace_index": row["index"],
                       "x": x, "y": y, "target": cell["target"]})
     target_counts = collections.Counter(cell["target"] for cell in cells)
+    reject_cells = sum(cell["entry_classification"] == "immediate_C2AEFC_reject" for cell in cells)
     report = {
         "scope": "C2AD C0/C2/CE lookup contract in the bounded run003 M-map renderer trace",
         "directory": {"base": address(BASE), "rows": ROWS, "columns": COLUMNS,
@@ -73,19 +83,23 @@ def main() -> None:
         "cells": cells, "observed_reads": reads,
         "observed_unique_cells": len({(row["x"], row["y"]) for row in reads}),
         "target_reuse": dict(sorted(target_counts.items())),
+        "immediate_reject_cells": reject_cells,
         "qualification": ("C2ADC0 doubles the live X index, C2ADC2 shifts the live Y index by four, and C2ADCE "
                           "reads a word at C42CA8 plus their sum before C2ADD4 adds it to the base. This proves the "
                           "8-word row stride and exports the 8x8 prefix used by the observed path. It does not establish "
-                          "absolute world coordinates, cardinal orientation, that every cell is terrain, or LOD."),
+                          "absolute world coordinates, cardinal orientation, that every non-reject cell is terrain, or LOD."),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     lines = ["# Map segment-68 relative-offset directory", "", "Classification: **traced 2-D map packet selector**.", "", report["qualification"], "",
              f"The exported prefix is `{report['directory']['rows']}x{report['directory']['columns']}`, rooted at `{report['directory']['base']}` with `{ROW_STRIDE}`-byte rows. The trace reads {report['observed_unique_cells']} unique cells. Two targets account for 59 of the 64 cells; the remaining five targets occur once each.", "",
+             f"{reject_cells} cells target `$C42E6A`, whose first longword is negative. The byte-exact `$C2AEFC` entry tests that longword with `BLT` and immediately rejects it, so these are proven no-packet selections for this directory. The other cells have non-negative entry longwords; that alone does not classify them as terrain or LOD.", "",
              "| y / x | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |", "| ---: | --- | --- | --- | --- | --- | --- | --- | --- |"]
     for y in range(ROWS):
         row = cells[y * COLUMNS:(y + 1) * COLUMNS]
-        lines.append("| " + str(y) + " | " + " | ".join(f"`{cell['target']}`" for cell in row) + " |")
+        lines.append("| " + str(y) + " | " + " | ".join(
+            f"`{cell['target']}`" + (" reject" if cell["entry_classification"] == "immediate_C2AEFC_reject" else "")
+            for cell in row) + " |")
     lines += ["", "Observed selector accesses: " + ", ".join(f"`({row['x']},{row['y']})`" for row in reads) + ".", ""]
     markdown.write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"cells": len(cells), "observed_unique_cells": report["observed_unique_cells"],

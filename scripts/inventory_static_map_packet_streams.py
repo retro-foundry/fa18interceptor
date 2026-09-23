@@ -70,7 +70,7 @@ def parse_stream(data: bytes, start: int) -> dict:
         cursor = payload_end
 
 
-def candidate_headers(data: bytes, direct: set[int], selector: set[int]) -> list[dict]:
+def candidate_headers(data: bytes, direct: set[int], selector: set[int], directory: set[int]) -> list[dict]:
     """Find grammar-compatible headers; compatibility is not execution evidence."""
     rows = []
     for header in range(START, END - 8, 2):
@@ -86,6 +86,7 @@ def candidate_headers(data: bytes, direct: set[int], selector: set[int]) -> list
                      "alternate_stream": address(alternate),
                       "observed_direct_entry": header in direct,
                       "observed_selector_sample": header in selector,
+                     "proven_directory_target": header in directory,
                      "inline_pair_count": sum(batch["count"] for batch in inline_stream["batches"]),
                      "alternate_pair_count": sum(batch["count"] for batch in alternate_stream["batches"]),
                      "inline_terminator": inline_stream["terminator"],
@@ -105,7 +106,7 @@ def markdown(report: dict) -> str:
         "",
         f"{report['direct_header_count']} direct `$C2AF00` headers plus",
         f"{report['selector_only_header_count']} additional `$C2AF40` selector-sampled",
-        f"headers expose {len(streams)} distinct inline/alternate stream starts. Their",
+        f"headers and {report['directory_only_header_count']} directory-only header targets expose {len(streams)} distinct inline/alternate stream starts. Their",
         f"complete structural walks contain {report['pair_count']} pair records occupying",
         f"{report['pair_bytes']} payload bytes ({report['pair_byte_fraction']:.2%} of the",
         "segment). This expands static *reachable-format* coverage beyond dynamically",
@@ -136,7 +137,7 @@ def markdown(report: dict) -> str:
         f"A conservative even-address scan finds {report['candidate_header_count']} locations",
         f"whose leading longword points inside segment 68 and whose inline and alternate",
         f"streams both complete under the exact count/threshold grammar. {report['observed_candidate_count']}",
-        "have live renderer evidence (direct entry or selector sample) in the sealed runs.",
+        "have dynamic renderer evidence or a non-reject static directory target in the sealed runs.",
         "The remaining candidates are",
         "not promoted to packet headers: coordinate payload can coincidentally satisfy a",
         "small grammar, so dynamic entry or a static producer reference is still required.",
@@ -152,6 +153,8 @@ def main() -> None:
     parser.add_argument("--inventory", type=Path, action="append", required=True)
     parser.add_argument("--selector-samples", type=Path, action="append", default=[],
                         help="C2AF40 sample JSON; proves a selected header but not necessarily a C2AF00 entry")
+    parser.add_argument("--directory", type=Path, action="append", default=[],
+                        help="decoded C2AD relative-offset directory JSON; non-reject targets are static header evidence")
     parser.add_argument("--slow", type=Path, required=True)
     parser.add_argument("--output-json", type=Path,
                         default=ROOT / "analysis/data/static_m_map_packet_streams.json")
@@ -169,6 +172,7 @@ def main() -> None:
         raise ValueError(f"expected 512 KiB slow RAM, got {len(data)} bytes")
     direct_headers: dict[int, set[str]] = {}
     selector_headers: dict[int, set[str]] = {}
+    directory_headers: dict[int, set[str]] = {}
     for inventory in args.inventory:
         source = str(inventory.resolve().relative_to(ROOT))
         report = json.loads(inventory.read_text(encoding="utf-8"))
@@ -179,9 +183,17 @@ def main() -> None:
         samples = json.loads(samples_path.read_text(encoding="utf-8"))
         for row in samples["samples"]:
             selector_headers.setdefault(int(row["header"][1:], 16), set()).add(source)
+    for directory_path in args.directory:
+        source = str(directory_path.resolve().relative_to(ROOT))
+        directory = json.loads(directory_path.read_text(encoding="utf-8"))
+        for row in directory["cells"]:
+            if row["entry_classification"] != "nonnegative_packet_entry_candidate":
+                continue
+            directory_headers.setdefault(int(row["target"][1:], 16), set()).add(source)
     headers: dict[int, set[str]] = {}
-    for header in set(direct_headers) | set(selector_headers):
-        headers[header] = direct_headers.get(header, set()) | selector_headers.get(header, set())
+    for header in set(direct_headers) | set(selector_headers) | set(directory_headers):
+        headers[header] = (direct_headers.get(header, set()) | selector_headers.get(header, set())
+                           | directory_headers.get(header, set()))
     streams: dict[int, dict] = {}
     for header, inventories in sorted(headers.items()):
         alternate, inline = long(data, header), header + 4
@@ -208,13 +220,14 @@ def main() -> None:
               "header_count": len(headers), "headers": [address(value) for value in sorted(headers)],
               "streams": rows, "pair_count": len(pair_addresses), "pair_bytes": len(pair_addresses) * 4,
               "pair_byte_fraction": len(pair_addresses) * 4 / (END - START)}
-    candidates = candidate_headers(data, set(direct_headers), set(selector_headers))
+    candidates = candidate_headers(data, set(direct_headers), set(selector_headers), set(directory_headers))
     report["candidate_header_count"] = len(candidates)
-    report["observed_candidate_count"] = sum(row["observed_direct_entry"] or row["observed_selector_sample"]
+    report["observed_candidate_count"] = sum(row["observed_direct_entry"] or row["observed_selector_sample"] or row["proven_directory_target"]
                                              for row in candidates)
     report["header_candidates"] = candidates
     report["direct_header_count"] = len(direct_headers)
     report["selector_only_header_count"] = len(set(selector_headers) - set(direct_headers))
+    report["directory_only_header_count"] = len(set(directory_headers) - set(direct_headers) - set(selector_headers))
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     args.output_markdown.write_text(markdown(report), encoding="utf-8")

@@ -7,7 +7,7 @@ one frame, represents terrain, or has global flight-map placement.
 
 24 direct `$C2AF00` headers plus
 2 additional `$C2AF40` selector-sampled
-headers expose 34 distinct inline/alternate stream starts. Their
+headers and 0 directory-only header targets expose 34 distinct inline/alternate stream starts. Their
 complete structural walks contain 489 pair records occupying
 1956 payload bytes (31.43% of the
 segment). This expands static *reachable-format* coverage beyond dynamically
@@ -69,7 +69,7 @@ solely as a viewer carrier and does not infer faces or game-space elevation.
 A conservative even-address scan finds 71 locations
 whose leading longword points inside segment 68 and whose inline and alternate
 streams both complete under the exact count/threshold grammar. 26
-have live renderer evidence (direct entry or selector sample) in the sealed runs.
+have dynamic renderer evidence or a non-reject static directory target in the sealed runs.
 The remaining candidates are
 not promoted to packet headers: coordinate payload can coincidentally satisfy a
 small grammar, so dynamic entry or a static producer reference is still required.

@@ -14,9 +14,12 @@ starts including `$C42DC4`, `$C42DFC`, and `$C42E1A`, which subsequently enter
 the static pair-transform/display path.
 
 The directory has seven distinct targets: `$C42E6A` occurs in 31 cells and
-`$C42E52` in 28, while five additional targets occur once each. This is direct
-static reuse evidence; it does not identify either repeated target as empty,
-terrain, a detail level, or a global map boundary.
+`$C42E52` in 28, while five additional targets occur once each. `$C42E6A`
+begins with the negative longword `$FFFF0800`; the byte-exact `$C2AEFC` entry
+tests that loaded longword and immediately branches to its rejection exit.
+Those 31 cells are therefore proven no-packet selections for this directory.
+The other targets have non-negative entry longwords, but remain unclassified
+as terrain, a detail level, or a global map boundary.
 
 The full 64-cell static directory and the twelve observed accesses are in the
 [segment-68 directory inventory](../data/run003_m_map_segment68_directory.md),
