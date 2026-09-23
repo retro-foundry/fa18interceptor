@@ -60,6 +60,7 @@ def main() -> None:
             engine.core.retro_deinit()
     report = {"scope": "live C2AF40 map packet selector samples from a sealed state without replay input",
               "state": str(args.state), "max_instructions": args.max_instructions, "samples": samples,
+              "unique_headers": sorted({row["header"] for row in samples}),
               "route_counts": {"inline": sum(row["route"] == "inline" for row in samples),
                                "alternate": sum(row["route"] == "alternate" for row in samples)},
               "qualification": ("Metric and alternate-mode values are live frame values read at C2AF40. They establish "
@@ -70,6 +71,8 @@ def main() -> None:
     lines = ["# Live map packet selector samples", "", report["qualification"], "",
              f"- Inline route samples: {report['route_counts']['inline']}",
              f"- Alternate route samples: {report['route_counts']['alternate']}", "",
+             f"- Instruction budget: {report['max_instructions']}",
+             f"- Distinct headers: {len(report['unique_headers'])}", "",
              "| Instruction | Header | Metric | Alternate mode | `D7` | Route | Selected stream |",
              "| ---: | --- | ---: | ---: | ---: | --- | --- |"]
     for row in samples:
