@@ -24,4 +24,13 @@ map-render preparation passes in those scenarios, not mutually exclusive map
 modes. Their caller/context remains neither a physical-distance nor a
 terrain-cell claim. See the [initializer sequence](../data/m_map_directory_initializer_sequence.md).
 
+After either initializer, shared setup at `$C2ABD8` branches on the mode.
+For the wide pass, `$C2AC1A` chooses a control-stream base from the depth
+metric at `-$28(A6)`: values above `$10000` choose `$C2A0C2`, values in
+`($9000,$10000]` choose `$C2A072`, and values at or below `$9000` enter the
+further record-filter path at `$C2AC3E`. The run035 appearance trace takes
+the latter low-metric branch twice. This proves a depth-threshold control
+stream selector within the wide pass, but only one threshold branch is
+scenario-observed here; it is not a physical-world distance or mesh-LOD claim.
+
 Authority: byte-exact [wide initializer](../../source_amiga/observed/initialize_wide_map_packet_directory.asm), byte-exact [normal initializer](../../source_amiga/observed/initialize_normal_map_packet_directory.asm), and [selector stride samples](../data/m_map_selector_modes.md).
