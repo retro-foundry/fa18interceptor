@@ -1,0 +1,164 @@
+{
+  "classification": "verified_original_hunk69_descriptor_target_subset_not_complete_mesh_or_code_classification",
+  "segment": {
+    "index": 69,
+    "runtime_start": "$C44500",
+    "runtime_end_exclusive": "$C44878",
+    "size_bytes": 888,
+    "original_payload_file_offset": "$3FC8C"
+  },
+  "authority": {
+    "runtime_mapping": "analysis/hunk_runtime_resolved.json",
+    "template_target_catalog": "analysis/data/run037_m_map_template_target_catalog.json",
+    "control_handoff": "analysis/data/run037_m_map_descriptor_control_handoff.json"
+  },
+  "targets": [
+    {
+      "target": "$C44500",
+      "segment": 69,
+      "segment_offset": "$0000",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427D5"
+      ],
+      "descriptors": [
+        "$C22764"
+      ],
+      "observed_c1cc70_control_write": false
+    },
+    {
+      "target": "$C4455A",
+      "segment": 69,
+      "segment_offset": "$005A",
+      "placement_count": 1,
+      "static_sources": [
+        "$C427E1"
+      ],
+      "descriptors": [
+        "$C22778"
+      ],
+      "observed_c1cc70_control_write": false
+    },
+    {
+      "target": "$C445A2",
+      "segment": 69,
+      "segment_offset": "$00A2",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42665"
+      ],
+      "descriptors": [
+        "$C22318"
+      ],
+      "observed_c1cc70_control_write": false
+    },
+    {
+      "target": "$C445DC",
+      "segment": 69,
+      "segment_offset": "$00DC",
+      "placement_count": 3,
+      "static_sources": [
+        "$C42647",
+        "$C42B6D",
+        "$C42B73"
+      ],
+      "descriptors": [
+        "$C2232C"
+      ],
+      "observed_c1cc70_control_write": true
+    },
+    {
+      "target": "$C44612",
+      "segment": 69,
+      "segment_offset": "$0112",
+      "placement_count": 2,
+      "static_sources": [
+        "$C4267D",
+        "$C42B79"
+      ],
+      "descriptors": [
+        "$C227F0"
+      ],
+      "observed_c1cc70_control_write": false
+    },
+    {
+      "target": "$C4466E",
+      "segment": 69,
+      "segment_offset": "$016E",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4269B"
+      ],
+      "descriptors": [
+        "$C22354"
+      ],
+      "observed_c1cc70_control_write": true
+    },
+    {
+      "target": "$C44732",
+      "segment": 69,
+      "segment_offset": "$0232",
+      "placement_count": 1,
+      "static_sources": [
+        "$C42659"
+      ],
+      "descriptors": [
+        "$C22804"
+      ],
+      "observed_c1cc70_control_write": true
+    },
+    {
+      "target": "$C4477C",
+      "segment": 69,
+      "segment_offset": "$027C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C426A1"
+      ],
+      "descriptors": [
+        "$C22368"
+      ],
+      "observed_c1cc70_control_write": false
+    },
+    {
+      "target": "$C447C6",
+      "segment": 69,
+      "segment_offset": "$02C6",
+      "placement_count": 1,
+      "static_sources": [
+        "$C4265F"
+      ],
+      "descriptors": [
+        "$C22818"
+      ],
+      "observed_c1cc70_control_write": false
+    },
+    {
+      "target": "$C44812",
+      "segment": 69,
+      "segment_offset": "$0312",
+      "placement_count": 1,
+      "static_sources": [
+        "$C426BF"
+      ],
+      "descriptors": [
+        "$C2237C"
+      ],
+      "observed_c1cc70_control_write": false
+    },
+    {
+      "target": "$C4483C",
+      "segment": 69,
+      "segment_offset": "$033C",
+      "placement_count": 1,
+      "static_sources": [
+        "$C426C5"
+      ],
+      "descriptors": [
+        "$C22390"
+      ],
+      "observed_c1cc70_control_write": false
+    }
+  ],
+  "qualification": "Every row is a descriptor +8 field present in the run037 template-placement catalog. A field is a renderer-control candidate; it is not by itself a vertex list, terrain-cell payload, or proof that a particular control stream was rasterized."
+}

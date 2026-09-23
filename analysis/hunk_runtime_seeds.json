@@ -11,6 +11,7 @@
     {"segment": 47, "runtime_payload_base": "0xC37680", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
     {"segment": 48, "runtime_payload_base": "0xC0DB50", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
     {"segment": 49, "runtime_payload_base": "0xC37990", "evidence": "analysis/data/c37ea0_bridge_silhouette_projected_edge_list.md"},
-    {"segment": 50, "runtime_payload_base": "0xC37F80", "evidence": "analysis/mappings/segments41_47_50_loaded.md"}
+    {"segment": 50, "runtime_payload_base": "0xC37F80", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},
+    {"segment": 69, "runtime_payload_base": "0xC44500", "evidence": "analysis/data/run037_segment69_descriptor_target_mapping.md"}
   ]
 }

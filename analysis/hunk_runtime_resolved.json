@@ -445,6 +445,13 @@
       "size_bytes": 6224,
       "non_relocated_byte_mismatches": 0
     },
+    "69": {
+      "status": "verified",
+      "runtime_payload_base": 12862720,
+      "bank": "slow",
+      "size_bytes": 888,
+      "non_relocated_byte_mismatches": 0
+    },
     "70": {
       "status": "mutated_or_unmapped",
       "runtime_payload_base": 12863616,
@@ -894,5 +901,5 @@
     }
   },
   "conflicts": [],
-  "verified_count": 112
+  "verified_count": 113
 }

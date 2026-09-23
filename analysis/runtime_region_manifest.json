@@ -1010,9 +1010,15 @@
       "hunk_kind": "CODE",
       "original_payload_file_offset": "0x3fc8c",
       "size_bytes": 888,
-      "runtime_status": "unresolved",
-      "classification": "code_hunk_unresolved",
-      "reason": "Original HUNK_CODE, no verified runtime placement"
+      "runtime_status": "verified",
+      "runtime_start": "$C44500",
+      "runtime_end_exclusive": "$C44878",
+      "runtime_bank": "slow",
+      "observed_executed_bytes": 0,
+      "reconstructed_data_references": 0,
+      "reconstructed_flow_references": 0,
+      "classification": "code_hunk_unclassified",
+      "reason": "No positive execution, flow, or data-reference evidence"
     },
     {
       "segment": 70,
