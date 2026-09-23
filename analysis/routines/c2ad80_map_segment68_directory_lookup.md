@@ -1,6 +1,6 @@
 # `$C2AD80` segment-68 map packet directory lookup
 
-Classification: **traced two-dimensional static packet selector**.
+Classification: **byte-exact, traced two-dimensional static packet selector**.
 
 In the map-page renderer, `$C2ADBA` supplies `$C42CA8` as the selected static
 base. `$C2ADC0` doubles the live X term; `$C2ADC2` multiplies the live Y term
@@ -23,9 +23,28 @@ The full 64-cell static directory and the twelve observed accesses are in the
 with a [colour-coded selector grid](../plots/run003_m_map_segment68_directory.png)
 for visual inspection.
 
+The complete selector slice is now byte-exact at `$C2AD80-$C2AE59`.
+`D2` indexes a signed two-byte control pair at `$C29F00`; each byte is added
+to the caller's row/column minima and checked against the corresponding
+maxima. The mode word at `-$3E(A6)` selects a 16-byte or 64-byte row stride
+before the 16-bit relative offset is read from the caller-supplied base in
+`-$34(A6)`. A positive offset becomes `A3`; a non-positive offset restarts the
+record walker after publishing status `$40`. Thus packet selection is a
+bounded relative-offset lookup, not an ordinary header-pointer table.
+
+The same source slice preserves the 18-word `$C2ADF8-$C2AE1B` detail-limit
+lookup immediately before `$C2AE1C` prepares the coordinate terms consumed by
+the later visibility/pair-transform code. `$C2AE5A` independently constrains
+its lookup index to 0--17. This table is renderer detail support; it is not
+terrain elevation or an LOD map.
+
 The immediately preceding control walker has a separate, explicit
 threshold-based detail gate at [`$C2AD00`](c2ad00_map_control_record_detail_gate.md).
 It changes record fields before this lookup, but has not been correlated to a
 line-versus-polygon primitive replacement.
 This proves a local two-dimensional packet selector, not global world axes,
 physical cell size, complete terrain coverage, or LOD.
+
+Authority: byte-exact
+[`select_map_packet_relative_offset.asm`](../../source_amiga/observed/select_map_packet_relative_offset.asm),
+the run003/run035 M-map traces, and the directory inventory above.

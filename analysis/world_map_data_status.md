@@ -61,6 +61,8 @@ called the complete world map.
 | Does the run035 map-appearance variant execute candidate-only headers? | No, in its matching 300,000-instruction no-input sample. Forty visits split 20 inline/20 alternate selections over eight already known headers, with no remaining candidate-only header. This strengthens depth-driven stream variation for an existing packet family, but does not establish flight-world LOD. | [run035 long selector sample](data/run035_m_map_packet_long_window.md) |
 | Do candidate headers have a simple immutable external-pointer table? | No evidence of one. An even-aligned longword scan across the baseline and run037 stable snapshots finds zero stable external references to all 71 headers (segment-68 self-references excluded). Relative-offset tables and computed pointers remain outside this negative result. | [header-reference scan](data/m_map_packet_header_references.md) |
 
+| Is the M-map packet selector itself reconstructed? | Yes, for `$C2AD80-$C2AE59`. It indexes signed byte-pair controls at `$C29F00`, bounds them, chooses a 16- or 64-byte row stride, and resolves a positive 16-bit offset from the caller-supplied static base into `A3`. The adjacent 18-word detail-limit lookup is also byte-exact. This proves selector mechanics, not global axes, terrain ownership, or LOD. | [relative-offset selector](routines/c2ad80_map_segment68_directory_lookup.md) |
+
 ## M-map packet detail result
 
 The separately traced segment-68 static packet renderer has a real,
