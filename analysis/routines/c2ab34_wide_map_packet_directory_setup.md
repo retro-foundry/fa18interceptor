@@ -46,4 +46,12 @@ variation before the directory/pair-packet path; it supports an LOD-style
 renderer mechanism but does not establish physical world distance, primitive
 replacement, or terrain mesh ownership.
 
+These byte codes feed `D2`, which `$C2AD80` uses to index `$C29F00`'s signed
+offset-pair table. The middle record's `0..8` indexes are exactly the inner
+`{-1,0,1} × {-1,0,1}` neighborhood, while the high record's `0..24` indexes
+cover the complete `{-2..2} × {-2..2}` neighborhood. Thus the verified depth
+selector changes the packet-selection neighborhood from 3×3 to 5×5. This is
+a concrete M-map detail/range mechanism; the metric is renderer projection
+depth, not yet a measured physical flight-world distance.
+
 Authority: byte-exact [wide initializer](../../source_amiga/observed/initialize_wide_map_packet_directory.asm), byte-exact [normal initializer](../../source_amiga/observed/initialize_normal_map_packet_directory.asm), and [selector stride samples](../data/m_map_selector_modes.md).
