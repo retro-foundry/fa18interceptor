@@ -1,0 +1,63 @@
+{
+  "classification": "scenario_backed_C2AD_selector_mode_inventory",
+  "visits": 104,
+  "rows": [
+    {
+      "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+      "slow": "build\\run003_m_map_appearance_trace\\slow.bin",
+      "base": "$C42CA8",
+      "mode": 0,
+      "row_stride_bytes": 16,
+      "visits": 12
+    },
+    {
+      "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+      "slow": "build\\run003_m_map_appearance_trace\\slow.bin",
+      "base": "$C42E6C",
+      "mode": 0,
+      "row_stride_bytes": 16,
+      "visits": 25
+    },
+    {
+      "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+      "slow": "build\\run035_m_map_appearance_13f_trace\\slow.bin",
+      "base": "$C42CA8",
+      "mode": 1,
+      "row_stride_bytes": 64,
+      "visits": 8
+    },
+    {
+      "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+      "slow": "build\\run035_m_map_appearance_13f_trace\\slow.bin",
+      "base": "$C42E6C",
+      "mode": 1,
+      "row_stride_bytes": 64,
+      "visits": 9
+    },
+    {
+      "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+      "slow": "build\\run035_m_map_stable_1f_trace\\slow.bin",
+      "base": "$C42E6C",
+      "mode": 1,
+      "row_stride_bytes": 64,
+      "visits": 9
+    },
+    {
+      "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+      "slow": "build\\run037_m_map_stable_13f_trace\\slow.bin",
+      "base": "$C42CA8",
+      "mode": 0,
+      "row_stride_bytes": 16,
+      "visits": 16
+    },
+    {
+      "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+      "slow": "build\\run037_m_map_stable_13f_trace\\slow.bin",
+      "base": "$C42E6C",
+      "mode": 0,
+      "row_stride_bytes": 16,
+      "visits": 25
+    }
+  ],
+  "qualification": "Mode is the signed word at -$3E(A6) read by the byte-exact selector. Zero chooses the 16-byte row stride and non-zero chooses the 64-byte stride. The paired snapshot supplies the frame-local word; this does not map either layout to global terrain coordinates or LOD."
+}

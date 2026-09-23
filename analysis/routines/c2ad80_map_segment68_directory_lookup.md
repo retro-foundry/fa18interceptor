@@ -64,6 +64,13 @@ second static packet-directory region used by the same selector. The recorded
 table slots do not yet establish world-cell dimensions, ordering, or terrain
 meaning. See the [observed directory-access inventory](../data/m_map_observed_directory_accesses.md).
 
+The mode word is dynamically exercised both ways: paired trace/snapshot reads
+show zero (16-byte rows) in run003 and run037 map draws, and non-zero
+(64-byte rows) in both run035 map traces. Both bases occur under the observed
+modes where reached. This is live alternative-layout evidence, not yet a
+physical-distance LOD result because the captures also differ in transition
+and map state. See the [selector-stride inventory](../data/m_map_selector_modes.md).
+
 The immediately preceding control walker has a separate, explicit
 threshold-based detail gate at [`$C2AD00`](c2ad00_map_control_record_detail_gate.md).
 It changes record fields before this lookup, but has not been correlated to a
