@@ -13,8 +13,10 @@ or map-page table.
   experiment establish that the X/Z components at `$C45C3E/$C45C46` causally
   change workspace template selection. See the
   [origin-selector mutation probe](../data/origin_selector_mutation_probe.md).
-- Instruction bytes are cross-checked against the sealed run033 slow-RAM
-  snapshot; the full unbounded routine is not reconstructed from this note.
+- The direct producer prefix `$C29042-$C291D3` is byte-exactly reconstructed
+  as [`publish_terrain_selector_origin.asm`](../../source_amiga/observed/publish_terrain_selector_origin.asm).
+  Its later `$C291D4-$C295D0` adjustment/dispatch continuation remains outside
+  this bounded source slice.
 
 ## Observed producer path
 
