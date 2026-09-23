@@ -86,6 +86,13 @@ rendered. See the [static stream inventory](../data/static_m_map_packet_streams.
 The immutable packet payload is explicitly
 [two-dimensional](../data/m_map_packet_source_dimensionality.md); its third
 renderer workspace component is computed, not read as source elevation.
+The run003 trace-state arithmetic calculation records all 353 source-pair to
+three-word workspace calculations, including instruction matrix/translation
+inputs and the six-byte `A5` output stride within every completed batch. Its
+calculated third word ranges from `384` to `6144` in this bounded draw; the
+source loop establishes transform depth rather than a stored map-height field.
+See the [pair-transform output
+inventory](../data/run003_m_map_pair_transform_outputs.md).
 The depth-metric producer is byte-exact in
 [`prepare_map_depth_detail_metric.asm`](../../source_amiga/observed/prepare_map_depth_detail_metric.asm).
 For the four headers observed on both routes, the
