@@ -1,0 +1,1023 @@
+{
+  "classification": "observed_C2ADCE_relative_offset_directory_accesses",
+  "traces": [
+    "build\\run003_m_map_appearance_trace\\trace.jsonl",
+    "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+    "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+    "build\\run037_m_map_stable_13f_trace\\trace.jsonl"
+  ],
+  "lookup_entries": 104,
+  "unique_slots": 44,
+  "bases": {
+    "$C42CA8": 16,
+    "$C42E6C": 28
+  },
+  "unique_reject_slots": 13,
+  "entries": [
+    {
+      "base": "$C42CA8",
+      "index": "$0036",
+      "table_address": "$C42CDE",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_longword": "$FFFF0800",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 15785
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 34886
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$0038",
+      "table_address": "$C42CE0",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_longword": "$00C42E56",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 15324
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 34425
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$003A",
+      "table_address": "$C42CE2",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_longword": "$00C42E56",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 14865
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 33966
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$003C",
+      "table_address": "$C42CE4",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_longword": "$00C42E56",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 14406
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 33507
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$0046",
+      "table_address": "$C42CEE",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_longword": "$FFFF0800",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 12775
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 31868
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$0048",
+      "table_address": "$C42CF0",
+      "relative_offset": "$011C",
+      "target": "$C42DC4",
+      "target_first_longword": "$00C42DC8",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 11692
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8860,
+          "trace_index": 46439
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8865,
+          "trace_index": 94223
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 30785
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$004A",
+      "table_address": "$C42CF2",
+      "relative_offset": "$0172",
+      "target": "$C42E1A",
+      "target_first_longword": "$00C42E1E",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 9878
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8860,
+          "trace_index": 45117
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8865,
+          "trace_index": 92891
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 29125
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$004C",
+      "table_address": "$C42CF4",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_longword": "$00C42E56",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 13797
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 32894
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$0056",
+      "table_address": "$C42CFE",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_longword": "$FFFF0800",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 9832
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 29079
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$0058",
+      "table_address": "$C42D00",
+      "relative_offset": "$0154",
+      "target": "$C42DFC",
+      "target_first_longword": "$00C42E00",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 9401
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8860,
+          "trace_index": 45006
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8865,
+          "trace_index": 92780
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 28648
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$005A",
+      "table_address": "$C42D02",
+      "relative_offset": "$0080",
+      "target": "$C42D28",
+      "target_first_longword": "$00C42D2C",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8859,
+          "trace_index": 40898
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8864,
+          "trace_index": 88652
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5690,
+          "trace_index": 19005
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$005C",
+      "table_address": "$C42D04",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_longword": "$00C42E56",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 13188
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 32281
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$0066",
+      "table_address": "$C42D0E",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_longword": "$FFFF0800",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5690,
+          "trace_index": 18959
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$0068",
+      "table_address": "$C42D10",
+      "relative_offset": "$01C2",
+      "target": "$C42E6A",
+      "target_first_longword": "$FFFF0800",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5690,
+          "trace_index": 18913
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$006A",
+      "table_address": "$C42D12",
+      "relative_offset": "$0196",
+      "target": "$C42E3E",
+      "target_first_longword": "$00C42E42",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5690,
+          "trace_index": 18601
+        }
+      ]
+    },
+    {
+      "base": "$C42CA8",
+      "index": "$006C",
+      "table_address": "$C42D14",
+      "relative_offset": "$01AA",
+      "target": "$C42E52",
+      "target_first_longword": "$00C42E56",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 12821
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 31914
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$03DA",
+      "table_address": "$C43246",
+      "relative_offset": "$0B26",
+      "target": "$C43992",
+      "target_first_longword": "$FFFF00C4",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 81983
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 110042
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$03DC",
+      "table_address": "$C43248",
+      "relative_offset": "$0B26",
+      "target": "$C43992",
+      "target_first_longword": "$FFFF00C4",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 81936
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 8040
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 109995
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$03DE",
+      "table_address": "$C4324A",
+      "relative_offset": "$0B28",
+      "target": "$C43994",
+      "target_first_longword": "$00C43998",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 80931
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 7655
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 108990
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$03E0",
+      "table_address": "$C4324C",
+      "relative_offset": "$0B3C",
+      "target": "$C439A8",
+      "target_first_longword": "$00C439AC",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 79121
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 6958
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 107511
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$03E2",
+      "table_address": "$C4324E",
+      "relative_offset": "$0B60",
+      "target": "$C439CC",
+      "target_first_longword": "$00C439D0",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 77908
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 6495
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 106339
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$03E4",
+      "table_address": "$C43250",
+      "relative_offset": "$0B60",
+      "target": "$C439CC",
+      "target_first_longword": "$00C439D0",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 6032
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$041A",
+      "table_address": "$C43286",
+      "relative_offset": "$0B78",
+      "target": "$C439E4",
+      "target_first_longword": "$FFFFFFFF",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 77861
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 106292
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$041C",
+      "table_address": "$C43288",
+      "relative_offset": "$0B7A",
+      "target": "$C439E6",
+      "target_first_longword": "$FFFF00C4",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 65222
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 5985
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5696,
+          "trace_index": 90203
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$041E",
+      "table_address": "$C4328A",
+      "relative_offset": "$0B7C",
+      "target": "$C439E8",
+      "target_first_longword": "$00C43A44",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 6,
+          "trace_index": 59452
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5696,
+          "trace_index": 84925
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$0420",
+      "table_address": "$C4328C",
+      "relative_offset": "$0C0C",
+      "target": "$C43A78",
+      "target_first_longword": "$00C43AF0",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 6,
+          "trace_index": 52510
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5695,
+          "trace_index": 77500
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$0422",
+      "table_address": "$C4328E",
+      "relative_offset": "$0CAE",
+      "target": "$C43B1A",
+      "target_first_longword": "$00C43B1E",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 76609
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 105011
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$0424",
+      "table_address": "$C43290",
+      "relative_offset": "$0CAE",
+      "target": "$C43B1A",
+      "target_first_longword": "$00C43B1E",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 4703
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$045A",
+      "table_address": "$C432C6",
+      "relative_offset": "$0CC6",
+      "target": "$C43B32",
+      "target_first_longword": "$FFFF00C4",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 76562
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5698,
+          "trace_index": 104964
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$045C",
+      "table_address": "$C432C8",
+      "relative_offset": "$0CC6",
+      "target": "$C43B32",
+      "target_first_longword": "$FFFF00C4",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 6,
+          "trace_index": 52463
+        },
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 4656
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5695,
+          "trace_index": 77453
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$045E",
+      "table_address": "$C432CA",
+      "relative_offset": "$0CC8",
+      "target": "$C43B34",
+      "target_first_longword": "$00C43B94",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 5,
+          "trace_index": 46653
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5695,
+          "trace_index": 72138
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$0460",
+      "table_address": "$C432CC",
+      "relative_offset": "$0D40",
+      "target": "$C43BAC",
+      "target_first_longword": "$00C43C70",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 4,
+          "trace_index": 34654
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8856,
+          "trace_index": 2669
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8861,
+          "trace_index": 53563
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8866,
+          "trace_index": 101338
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5694,
+          "trace_index": 60329
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$0462",
+      "table_address": "$C432CE",
+      "relative_offset": "$0E52",
+      "target": "$C43CBE",
+      "target_first_longword": "$00C43CFA",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 8,
+          "trace_index": 73192
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8861,
+          "trace_index": 51299
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8865,
+          "trace_index": 98558
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5697,
+          "trace_index": 101062
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$0464",
+      "table_address": "$C432D0",
+      "relative_offset": "$0EAE",
+      "target": "$C43D1A",
+      "target_first_longword": "$00C43D1E",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run035_m_map_stable_1f_trace\\trace.jsonl",
+          "frame": 1,
+          "trace_index": 3415
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$049A",
+      "table_address": "$C43306",
+      "relative_offset": "$0EC8",
+      "target": "$C43D34",
+      "target_first_longword": "$00C43D38",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 69595
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5697,
+          "trace_index": 96611
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$049C",
+      "table_address": "$C43308",
+      "relative_offset": "$0F18",
+      "target": "$C43D84",
+      "target_first_longword": "$00C43D88",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 3,
+          "trace_index": 27422
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5693,
+          "trace_index": 50106
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$049E",
+      "table_address": "$C4330A",
+      "relative_offset": "$0FB8",
+      "target": "$C43E24",
+      "target_first_longword": "$00C43E9A",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 3,
+          "trace_index": 23081
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5692,
+          "trace_index": 42191
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$04A0",
+      "table_address": "$C4330C",
+      "relative_offset": "$105E",
+      "target": "$C43ECA",
+      "target_first_longword": "$00C43F3A",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 2,
+          "trace_index": 15874
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8860,
+          "trace_index": 49233
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8865,
+          "trace_index": 97037
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5691,
+          "trace_index": 34975
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$04A2",
+      "table_address": "$C4330E",
+      "relative_offset": "$10F2",
+      "target": "$C43F5E",
+      "target_first_longword": "$00C43FAE",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 66628
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8860,
+          "trace_index": 47317
+        },
+        {
+          "trace": "build\\run035_m_map_appearance_13f_trace\\trace.jsonl",
+          "frame": 8865,
+          "trace_index": 95101
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5697,
+          "trace_index": 92106
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$04DA",
+      "table_address": "$C43346",
+      "relative_offset": "$11FA",
+      "target": "$C44066",
+      "target_first_longword": "$00C4406A",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 66312
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5697,
+          "trace_index": 91790
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$04DC",
+      "table_address": "$C43348",
+      "relative_offset": "$120E",
+      "target": "$C4407A",
+      "target_first_longword": "$FFFF00C4",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 66265
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5697,
+          "trace_index": 91743
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$04DE",
+      "table_address": "$C4334A",
+      "relative_offset": "$1210",
+      "target": "$C4407C",
+      "target_first_longword": "$00C44080",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 65742
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5697,
+          "trace_index": 91220
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$04E0",
+      "table_address": "$C4334C",
+      "relative_offset": "$1232",
+      "target": "$C4409E",
+      "target_first_longword": "$00C440A2",
+      "entry_classification": "nonnegative_packet_entry_candidate",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 65316
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5696,
+          "trace_index": 90297
+        }
+      ]
+    },
+    {
+      "base": "$C42E6C",
+      "index": "$04E2",
+      "table_address": "$C4334E",
+      "relative_offset": "$124E",
+      "target": "$C440BA",
+      "target_first_longword": "$FFFF00C4",
+      "entry_classification": "immediate_C2AEFC_reject",
+      "observations": [
+        {
+          "trace": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+          "frame": 7,
+          "trace_index": 65269
+        },
+        {
+          "trace": "build\\run037_m_map_stable_13f_trace\\trace.jsonl",
+          "frame": 5696,
+          "trace_index": 90250
+        }
+      ]
+    }
+  ],
+  "qualification": "Each row is an observed C2ADCE relative-offset read decoded from the paired slow-RAM snapshot. The alternate 64-byte stride is inferred from the byte-exact selector mode, but the frame-local mode word is not itself recorded here. Targets are packet-entry candidates, not terrain ownership or global world coordinates."
+}

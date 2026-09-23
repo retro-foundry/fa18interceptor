@@ -56,6 +56,14 @@ local state-dependent lookup and rejects treating the pair as a fixed global
 coordinate. The 27 bounded misses only show that no packet setup was reached
 in that trace interval. See the [selector-to-header join](../data/m_map_selector_pair_header_join.md).
 
+The 16-byte normal-stride prefix is not the only observed selector base.
+Across the four map traces, `$C2ADCE` reads 44 unique table slots from both
+`$C42CA8` and `$C42E6C`; the latter contributes 28 observed slots, including
+eight targets rejected immediately at `$C2AEFC`. This is direct evidence of a
+second static packet-directory region used by the same selector. The recorded
+table slots do not yet establish world-cell dimensions, ordering, or terrain
+meaning. See the [observed directory-access inventory](../data/m_map_observed_directory_accesses.md).
+
 The immediately preceding control walker has a separate, explicit
 threshold-based detail gate at [`$C2AD00`](c2ad00_map_control_record_detail_gate.md).
 It changes record fields before this lookup, but has not been correlated to a
