@@ -38,4 +38,12 @@ The trace executes **27** group selections; **10** reach a template stream befor
 
 The static group records and their selected streams are a stronger upstream boundary than the mutable workspace: the same path later reaches the static-to-workspace copy contract.  The selector index is not yet tied to a player world coordinate, distance, course cell, or visual LOD state, so none of those meanings are assigned here.  The two-stage static selector plus live search key resembles a two-axis lookup structure, but resemblance is not sufficient to call it a world-map grid.
 
+The full `$C1D3F4-$C1D51D` selector and in-range binary-search helper are now
+byte-exactly reconstructed as
+[`select_static_template_stream.asm`](../../source_amiga/observed/select_static_template_stream.asm).
+It preserves the static-relative group lookup, bitset gate, row-key search,
+stream pointer selection, and the observed source-to-mutable-workspace copy
+loop. External workspace-block and record-match helpers remain explicit calls;
+the source reconstruction does not promote its inputs into world coordinates.
+
 See [the workspace-template inventory](workspace_template_copies.md) for the copied records and their later placement outputs.
