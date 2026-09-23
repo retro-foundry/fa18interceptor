@@ -1,0 +1,816 @@
+{
+  "classification": "verified_relocation_backed_hunk70_descriptor_target_records_not_complete_terrain_mesh",
+  "segment": {
+    "index": 70,
+    "runtime_start": "$C44880",
+    "runtime_end_exclusive": "$C45624",
+    "size_bytes": 3492,
+    "original_payload_file_offset": "$40060"
+  },
+  "snapshots": [
+    "captures/baseline_menu/slow.bin",
+    "build/run003_m_map_appearance_trace/slow.bin",
+    "build/run033_placement_bulk_404_trace/slow.bin",
+    "build/run033_frame05250_placement_thirtyframe_trace/slow.bin",
+    "build/run037_m_map_stable_13f_trace/slow.bin"
+  ],
+  "authority": {
+    "catalog": "analysis/data/run037_m_map_template_target_catalog.json",
+    "inventory": "analysis/hunk_inventory.json"
+  },
+  "records": [
+    {
+      "target": "$C448B6",
+      "segment": 70,
+      "segment_offset": "$0036",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$490800C4",
+        "$49348034",
+        "$000C0012",
+        "$0018001E",
+        "$80248078"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C4276F"
+      ],
+      "descriptors": [
+        "$C2287C"
+      ]
+    },
+    {
+      "target": "$C44970",
+      "segment": 70,
+      "segment_offset": "$00F0",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$49C200C4",
+        "$49F68078",
+        "$000C000C",
+        "$8078000C",
+        "$002A8078"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427AD"
+      ],
+      "descriptors": [
+        "$C22890"
+      ]
+    },
+    {
+      "target": "$C44A3A",
+      "segment": 70,
+      "segment_offset": "$01BA",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4A6800C4",
+        "$4A888078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C4272F"
+      ],
+      "descriptors": [
+        "$C228CC"
+      ]
+    },
+    {
+      "target": "$C44AA4",
+      "segment": 70,
+      "segment_offset": "$0224",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4AD200C4",
+        "$4AF28078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42735"
+      ],
+      "descriptors": [
+        "$C228E0"
+      ]
+    },
+    {
+      "target": "$C44B78",
+      "segment": 70,
+      "segment_offset": "$02F8",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4BB800C4",
+        "$4BE08078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C4274B"
+      ],
+      "descriptors": [
+        "$C2291C"
+      ]
+    },
+    {
+      "target": "$C44C10",
+      "segment": 70,
+      "segment_offset": "$0390",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4C3E00C4",
+        "$4C5E8078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42751"
+      ],
+      "descriptors": [
+        "$C22930"
+      ]
+    },
+    {
+      "target": "$C44C7A",
+      "segment": 70,
+      "segment_offset": "$03FA",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4CA800C4",
+        "$4CC88078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42757"
+      ],
+      "descriptors": [
+        "$C22944"
+      ]
+    },
+    {
+      "target": "$C44CE4",
+      "segment": 70,
+      "segment_offset": "$0464",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4D1200C4",
+        "$4D328078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C4275D"
+      ],
+      "descriptors": [
+        "$C22958"
+      ]
+    },
+    {
+      "target": "$C44D4E",
+      "segment": 70,
+      "segment_offset": "$04CE",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4D7C00C4",
+        "$4D9C8078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42763"
+      ],
+      "descriptors": [
+        "$C2296C"
+      ]
+    },
+    {
+      "target": "$C44DB8",
+      "segment": 70,
+      "segment_offset": "$0538",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4DE600C4",
+        "$4E068078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42769"
+      ],
+      "descriptors": [
+        "$C22980"
+      ]
+    },
+    {
+      "target": "$C44E22",
+      "segment": 70,
+      "segment_offset": "$05A2",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4E5000C4",
+        "$4E708078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42775"
+      ],
+      "descriptors": [
+        "$C22994"
+      ]
+    },
+    {
+      "target": "$C44E8C",
+      "segment": 70,
+      "segment_offset": "$060C",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4EBA00C4",
+        "$4EDA8078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C4277B"
+      ],
+      "descriptors": [
+        "$C229A8"
+      ]
+    },
+    {
+      "target": "$C44EF6",
+      "segment": 70,
+      "segment_offset": "$0676",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4F3600C4",
+        "$4F5E8078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42781"
+      ],
+      "descriptors": [
+        "$C22908"
+      ]
+    },
+    {
+      "target": "$C44F8E",
+      "segment": 70,
+      "segment_offset": "$070E",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$4FCE00C4",
+        "$4FF68078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42743"
+      ],
+      "descriptors": [
+        "$C229BC"
+      ]
+    },
+    {
+      "target": "$C45026",
+      "segment": 70,
+      "segment_offset": "$07A6",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$505400C4",
+        "$50748078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42721"
+      ],
+      "descriptors": [
+        "$C229D0"
+      ]
+    },
+    {
+      "target": "$C45128",
+      "segment": 70,
+      "segment_offset": "$08A8",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$515600C4",
+        "$51768078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427B5"
+      ],
+      "descriptors": [
+        "$C229F8"
+      ]
+    },
+    {
+      "target": "$C45192",
+      "segment": 70,
+      "segment_offset": "$0912",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$51C000C4",
+        "$51E08078",
+        "$000C000C",
+        "$81280012",
+        "$0018000C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427BB"
+      ],
+      "descriptors": [
+        "$C22A0C"
+      ]
+    },
+    {
+      "target": "$C451FC",
+      "segment": 70,
+      "segment_offset": "$097C",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$523C00C4",
+        "$52648078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427C1"
+      ],
+      "descriptors": [
+        "$C22A20"
+      ]
+    },
+    {
+      "target": "$C45294",
+      "segment": 70,
+      "segment_offset": "$0A14",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$52D400C4",
+        "$52FC8078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427DB"
+      ],
+      "descriptors": [
+        "$C22A34"
+      ]
+    },
+    {
+      "target": "$C4532C",
+      "segment": 70,
+      "segment_offset": "$0AAC",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$536C00C4",
+        "$53948078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C4278F"
+      ],
+      "descriptors": [
+        "$C22A48"
+      ]
+    },
+    {
+      "target": "$C453C4",
+      "segment": 70,
+      "segment_offset": "$0B44",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$540400C4",
+        "$542C8078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C42795"
+      ],
+      "descriptors": [
+        "$C22A5C"
+      ]
+    },
+    {
+      "target": "$C4545C",
+      "segment": 70,
+      "segment_offset": "$0BDC",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$549C00C4",
+        "$54C48078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427A7"
+      ],
+      "descriptors": [
+        "$C22A70"
+      ]
+    },
+    {
+      "target": "$C454F4",
+      "segment": 70,
+      "segment_offset": "$0C74",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$553400C4",
+        "$555C8078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427E7"
+      ],
+      "descriptors": [
+        "$C22A84"
+      ]
+    },
+    {
+      "target": "$C4558C",
+      "segment": 70,
+      "segment_offset": "$0D0C",
+      "record_size": 24,
+      "relocated_byte_offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "all_snapshots_identical": true,
+      "all_non_relocated_bytes_match_original": true,
+      "runtime_longs": [
+        "$04D000C4",
+        "$55CC00C4",
+        "$55F48078",
+        "$000C000C",
+        "$8078000C",
+        "$002A812C"
+      ],
+      "placement_count": 1,
+      "static_sources": [
+        "$C427ED"
+      ],
+      "descriptors": [
+        "$C22A98"
+      ]
+    }
+  ],
+  "qualification": "The records are exact static descriptor targets selected by the run037 template-placement catalog. Their static provenance does not prove that they are vertex lists, terrain cells, or LOD levels."
+}
