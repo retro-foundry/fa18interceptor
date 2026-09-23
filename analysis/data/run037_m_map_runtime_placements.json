@@ -1,0 +1,2594 @@
+{
+  "authority": {
+    "selector_loop": "analysis/routines/c1cb14_flight_update_stage.md",
+    "runtime_record_base": "$C4E9AA"
+  },
+  "classification": "mutable_runtime_scene_placement_candidates_not_static_map_meshes",
+  "selection": "first 300 aligned records whose leading longword is in the relocated $C22000-$C22FFF descriptor range; coordinate values are not selection criteria",
+  "record_size_bytes": 24,
+  "scenes": [
+    {
+      "capture": "run037_m_map_stable",
+      "slow_snapshot": "build/run037_m_map_stable_13f_trace/slow.bin",
+      "records": [
+        {
+          "index": 0,
+          "address": "$C4E9AA",
+          "selector": "$4F07",
+          "descriptor": "$C227B4",
+          "coordinate_words_unsigned": [
+            65236,
+            0,
+            64816
+          ],
+          "coordinate_words_signed": [
+            -300,
+            0,
+            -720
+          ],
+          "field_3": "$0013",
+          "per_frame_words": [
+            "$3F43",
+            "$006D",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 1,
+          "address": "$C4E9C2",
+          "selector": "$4D07",
+          "descriptor": "$C2278C",
+          "coordinate_words_unsigned": [
+            65241,
+            0,
+            64837
+          ],
+          "coordinate_words_signed": [
+            -295,
+            0,
+            -699
+          ],
+          "field_3": "$0033",
+          "per_frame_words": [
+            "$3F43",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 2,
+          "address": "$C4E9DA",
+          "selector": "$5007",
+          "descriptor": "$C227C8",
+          "coordinate_words_unsigned": [
+            65236,
+            0,
+            64824
+          ],
+          "coordinate_words_signed": [
+            -300,
+            0,
+            -712
+          ],
+          "field_3": "$0033",
+          "per_frame_words": [
+            "$3F43",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 3,
+          "address": "$C4E9F2",
+          "selector": "$5007",
+          "descriptor": "$C227C8",
+          "coordinate_words_unsigned": [
+            65233,
+            0,
+            64813
+          ],
+          "coordinate_words_signed": [
+            -303,
+            0,
+            -723
+          ],
+          "field_3": "$0073",
+          "per_frame_words": [
+            "$3F43",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 4,
+          "address": "$C4EA0A",
+          "selector": "$5107",
+          "descriptor": "$C227DC",
+          "coordinate_words_unsigned": [
+            65228,
+            0,
+            64800
+          ],
+          "coordinate_words_signed": [
+            -308,
+            0,
+            -736
+          ],
+          "field_3": "$0073",
+          "per_frame_words": [
+            "$3F43",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 5,
+          "address": "$C4EA22",
+          "selector": "$4E07",
+          "descriptor": "$C227A0",
+          "coordinate_words_unsigned": [
+            65241,
+            0,
+            64825
+          ],
+          "coordinate_words_signed": [
+            -295,
+            0,
+            -711
+          ],
+          "field_3": "$0073",
+          "per_frame_words": [
+            "$3F43",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 6,
+          "address": "$C4EA3A",
+          "selector": "$5007",
+          "descriptor": "$C227C8",
+          "coordinate_words_unsigned": [
+            65236,
+            0,
+            64812
+          ],
+          "coordinate_words_signed": [
+            -300,
+            0,
+            -724
+          ],
+          "field_3": "$0073",
+          "per_frame_words": [
+            "$3F43",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 7,
+          "address": "$C4EA52",
+          "selector": "$5107",
+          "descriptor": "$C227DC",
+          "coordinate_words_unsigned": [
+            65232,
+            0,
+            64799
+          ],
+          "coordinate_words_signed": [
+            -304,
+            0,
+            -737
+          ],
+          "field_3": "$00F3",
+          "per_frame_words": [
+            "$3F43",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 8,
+          "address": "$C4EA6A",
+          "selector": "$2D07",
+          "descriptor": "$C2250C",
+          "coordinate_words_unsigned": [
+            65088,
+            0,
+            64832
+          ],
+          "coordinate_words_signed": [
+            -448,
+            0,
+            -704
+          ],
+          "field_3": "$0010",
+          "per_frame_words": [
+            "$3E43",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 9,
+          "address": "$C4EA82",
+          "selector": "$1E07",
+          "descriptor": "$C223E0",
+          "coordinate_words_unsigned": [
+            284,
+            0,
+            65252
+          ],
+          "coordinate_words_signed": [
+            284,
+            0,
+            -284
+          ],
+          "field_3": "$0016",
+          "per_frame_words": [
+            "$4044",
+            "$0062",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 10,
+          "address": "$C4EA9A",
+          "selector": "$3407",
+          "descriptor": "$C22598",
+          "coordinate_words_unsigned": [
+            293,
+            0,
+            65231
+          ],
+          "coordinate_words_signed": [
+            293,
+            0,
+            -305
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 11,
+          "address": "$C4EAB2",
+          "selector": "$1F07",
+          "descriptor": "$C223F4",
+          "coordinate_words_unsigned": [
+            286,
+            0,
+            65243
+          ],
+          "coordinate_words_signed": [
+            286,
+            0,
+            -293
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 12,
+          "address": "$C4EACA",
+          "selector": "$1F07",
+          "descriptor": "$C223F4",
+          "coordinate_words_unsigned": [
+            281,
+            0,
+            65253
+          ],
+          "coordinate_words_signed": [
+            281,
+            0,
+            -283
+          ],
+          "field_3": "$0076",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 13,
+          "address": "$C4EAE2",
+          "selector": "$1D07",
+          "descriptor": "$C223CC",
+          "coordinate_words_unsigned": [
+            274,
+            0,
+            65265
+          ],
+          "coordinate_words_signed": [
+            274,
+            0,
+            -271
+          ],
+          "field_3": "$0076",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 14,
+          "address": "$C4EAFA",
+          "selector": "$1C07",
+          "descriptor": "$C223B8",
+          "coordinate_words_unsigned": [
+            293,
+            0,
+            65238
+          ],
+          "coordinate_words_signed": [
+            293,
+            0,
+            -298
+          ],
+          "field_3": "$0076",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 15,
+          "address": "$C4EB12",
+          "selector": "$1F07",
+          "descriptor": "$C223F4",
+          "coordinate_words_unsigned": [
+            286,
+            0,
+            65250
+          ],
+          "coordinate_words_signed": [
+            286,
+            0,
+            -286
+          ],
+          "field_3": "$0076",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 16,
+          "address": "$C4EB2A",
+          "selector": "$3607",
+          "descriptor": "$C225C0",
+          "coordinate_words_unsigned": [
+            280,
+            0,
+            65262
+          ],
+          "coordinate_words_signed": [
+            280,
+            0,
+            -274
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 17,
+          "address": "$C4EB42",
+          "selector": "$3707",
+          "descriptor": "$C225D4",
+          "coordinate_words_unsigned": [
+            260,
+            0,
+            65241
+          ],
+          "coordinate_words_signed": [
+            260,
+            0,
+            -295
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 18,
+          "address": "$C4EB5A",
+          "selector": "$1B07",
+          "descriptor": "$C223A4",
+          "coordinate_words_unsigned": [
+            274,
+            0,
+            65248
+          ],
+          "coordinate_words_signed": [
+            274,
+            0,
+            -288
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 19,
+          "address": "$C4EB72",
+          "selector": "$3207",
+          "descriptor": "$C22570",
+          "coordinate_words_unsigned": [
+            285,
+            0,
+            65255
+          ],
+          "coordinate_words_signed": [
+            285,
+            0,
+            -281
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 20,
+          "address": "$C4EB8A",
+          "selector": "$1B07",
+          "descriptor": "$C223A4",
+          "coordinate_words_unsigned": [
+            297,
+            0,
+            65261
+          ],
+          "coordinate_words_signed": [
+            297,
+            0,
+            -275
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 21,
+          "address": "$C4EBA2",
+          "selector": "$3207",
+          "descriptor": "$C22570",
+          "coordinate_words_unsigned": [
+            274,
+            0,
+            65244
+          ],
+          "coordinate_words_signed": [
+            274,
+            0,
+            -292
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 22,
+          "address": "$C4EBBA",
+          "selector": "$3207",
+          "descriptor": "$C22570",
+          "coordinate_words_unsigned": [
+            284,
+            0,
+            65249
+          ],
+          "coordinate_words_signed": [
+            284,
+            0,
+            -287
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 23,
+          "address": "$C4EBD2",
+          "selector": "$3207",
+          "descriptor": "$C22570",
+          "coordinate_words_unsigned": [
+            294,
+            0,
+            65255
+          ],
+          "coordinate_words_signed": [
+            294,
+            0,
+            -281
+          ],
+          "field_3": "$00F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 24,
+          "address": "$C4EBEA",
+          "selector": "$3507",
+          "descriptor": "$C225AC",
+          "coordinate_words_unsigned": [
+            306,
+            0,
+            65261
+          ],
+          "coordinate_words_signed": [
+            306,
+            0,
+            -275
+          ],
+          "field_3": "$01F6",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 25,
+          "address": "$C4EC02",
+          "selector": "$4707",
+          "descriptor": "$C22714",
+          "coordinate_words_unsigned": [
+            0,
+            0,
+            65208
+          ],
+          "coordinate_words_signed": [
+            0,
+            0,
+            -328
+          ],
+          "field_3": "$0014",
+          "per_frame_words": [
+            "$3F44",
+            "$0000",
+            "$03EE",
+            "$0001"
+          ]
+        },
+        {
+          "index": 26,
+          "address": "$C4EC1A",
+          "selector": "$2807",
+          "descriptor": "$C224A8",
+          "coordinate_words_unsigned": [
+            29,
+            0,
+            65184
+          ],
+          "coordinate_words_signed": [
+            29,
+            0,
+            -352
+          ],
+          "field_3": "$0034",
+          "per_frame_words": [
+            "$3F44",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 27,
+          "address": "$C4EC32",
+          "selector": "$2707",
+          "descriptor": "$C22494",
+          "coordinate_words_unsigned": [
+            69,
+            0,
+            65156
+          ],
+          "coordinate_words_signed": [
+            69,
+            0,
+            -380
+          ],
+          "field_3": "$0034",
+          "per_frame_words": [
+            "$3F44",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 28,
+          "address": "$C4EC4A",
+          "selector": "$2907",
+          "descriptor": "$C224BC",
+          "coordinate_words_unsigned": [
+            65486,
+            0,
+            65211
+          ],
+          "coordinate_words_signed": [
+            -50,
+            0,
+            -325
+          ],
+          "field_3": "$0015",
+          "per_frame_words": [
+            "$3F44",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 29,
+          "address": "$C4EC62",
+          "selector": "$1907",
+          "descriptor": "$C2237C",
+          "coordinate_words_unsigned": [
+            448,
+            0,
+            65472
+          ],
+          "coordinate_words_signed": [
+            448,
+            0,
+            -64
+          ],
+          "field_3": "$001D",
+          "per_frame_words": [
+            "$4045",
+            "$0062",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 30,
+          "address": "$C4EC7A",
+          "selector": "$1A07",
+          "descriptor": "$C22390",
+          "coordinate_words_unsigned": [
+            320,
+            0,
+            65472
+          ],
+          "coordinate_words_signed": [
+            320,
+            0,
+            -64
+          ],
+          "field_3": "$001E",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 31,
+          "address": "$C4EC92",
+          "selector": "$1707",
+          "descriptor": "$C22354",
+          "coordinate_words_unsigned": [
+            448,
+            0,
+            64
+          ],
+          "coordinate_words_signed": [
+            448,
+            0,
+            64
+          ],
+          "field_3": "$0019",
+          "per_frame_words": [
+            "$4045",
+            "$0062",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 32,
+          "address": "$C4ECAA",
+          "selector": "$1807",
+          "descriptor": "$C22368",
+          "coordinate_words_unsigned": [
+            320,
+            0,
+            64
+          ],
+          "coordinate_words_signed": [
+            320,
+            0,
+            64
+          ],
+          "field_3": "$001A",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 33,
+          "address": "$C4ECC2",
+          "selector": "$7507",
+          "descriptor": "$C22AAC",
+          "coordinate_words_unsigned": [
+            316,
+            0,
+            92
+          ],
+          "coordinate_words_signed": [
+            316,
+            0,
+            92
+          ],
+          "field_3": "$003A",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 34,
+          "address": "$C4ECDA",
+          "selector": "$2207",
+          "descriptor": "$C22430",
+          "coordinate_words_unsigned": [
+            306,
+            0,
+            101
+          ],
+          "coordinate_words_signed": [
+            306,
+            0,
+            101
+          ],
+          "field_3": "$003A",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 35,
+          "address": "$C4ECF2",
+          "selector": "$2207",
+          "descriptor": "$C22430",
+          "coordinate_words_unsigned": [
+            295,
+            0,
+            112
+          ],
+          "coordinate_words_signed": [
+            295,
+            0,
+            112
+          ],
+          "field_3": "$007A",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 36,
+          "address": "$C4ED0A",
+          "selector": "$2207",
+          "descriptor": "$C22430",
+          "coordinate_words_unsigned": [
+            284,
+            0,
+            123
+          ],
+          "coordinate_words_signed": [
+            284,
+            0,
+            123
+          ],
+          "field_3": "$007A",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 37,
+          "address": "$C4ED22",
+          "selector": "$2007",
+          "descriptor": "$C22408",
+          "coordinate_words_unsigned": [
+            460,
+            0,
+            172
+          ],
+          "coordinate_words_signed": [
+            460,
+            0,
+            172
+          ],
+          "field_3": "$0015",
+          "per_frame_words": [
+            "$4045",
+            "$0062",
+            "$03EE",
+            "$0001"
+          ]
+        },
+        {
+          "index": 38,
+          "address": "$C4ED3A",
+          "selector": "$2107",
+          "descriptor": "$C2241C",
+          "coordinate_words_unsigned": [
+            460,
+            0,
+            148
+          ],
+          "coordinate_words_signed": [
+            460,
+            0,
+            148
+          ],
+          "field_3": "$0035",
+          "per_frame_words": [
+            "$4045",
+            "$0062",
+            "$02EE",
+            "$0001"
+          ]
+        },
+        {
+          "index": 39,
+          "address": "$C4ED52",
+          "selector": "$5307",
+          "descriptor": "$C22804",
+          "coordinate_words_unsigned": [
+            448,
+            0,
+            192
+          ],
+          "coordinate_words_signed": [
+            448,
+            0,
+            192
+          ],
+          "field_3": "$0035",
+          "per_frame_words": [
+            "$4045",
+            "$0062",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 40,
+          "address": "$C4ED6A",
+          "selector": "$5407",
+          "descriptor": "$C22818",
+          "coordinate_words_unsigned": [
+            320,
+            0,
+            192
+          ],
+          "coordinate_words_signed": [
+            320,
+            0,
+            192
+          ],
+          "field_3": "$0016",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 41,
+          "address": "$C4ED82",
+          "selector": "$1407",
+          "descriptor": "$C22318",
+          "coordinate_words_unsigned": [
+            272,
+            0,
+            176
+          ],
+          "coordinate_words_signed": [
+            272,
+            0,
+            176
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 42,
+          "address": "$C4ED9A",
+          "selector": "$3307",
+          "descriptor": "$C22584",
+          "coordinate_words_unsigned": [
+            272,
+            0,
+            146
+          ],
+          "coordinate_words_signed": [
+            272,
+            0,
+            146
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$02EE",
+            "$0001"
+          ]
+        },
+        {
+          "index": 43,
+          "address": "$C4EDB2",
+          "selector": "$4807",
+          "descriptor": "$C22728",
+          "coordinate_words_unsigned": [
+            272,
+            0,
+            146
+          ],
+          "coordinate_words_signed": [
+            272,
+            0,
+            146
+          ],
+          "field_3": "$0076",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$01EE",
+            "$0001"
+          ]
+        },
+        {
+          "index": 44,
+          "address": "$C4EDCA",
+          "selector": "$2207",
+          "descriptor": "$C22430",
+          "coordinate_words_unsigned": [
+            273,
+            0,
+            135
+          ],
+          "coordinate_words_signed": [
+            273,
+            0,
+            135
+          ],
+          "field_3": "$0076",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 45,
+          "address": "$C4EDE2",
+          "selector": "$5207",
+          "descriptor": "$C227F0",
+          "coordinate_words_unsigned": [
+            368,
+            0,
+            176
+          ],
+          "coordinate_words_signed": [
+            368,
+            0,
+            176
+          ],
+          "field_3": "$0076",
+          "per_frame_words": [
+            "$4045",
+            "$0061",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 46,
+          "address": "$C4EDFA",
+          "selector": "$2407",
+          "descriptor": "$C22458",
+          "coordinate_words_unsigned": [
+            236,
+            0,
+            160
+          ],
+          "coordinate_words_signed": [
+            236,
+            0,
+            160
+          ],
+          "field_3": "$0017",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 47,
+          "address": "$C4EE12",
+          "selector": "$2507",
+          "descriptor": "$C2246C",
+          "coordinate_words_unsigned": [
+            224,
+            0,
+            164
+          ],
+          "coordinate_words_signed": [
+            224,
+            0,
+            164
+          ],
+          "field_3": "$0037",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 48,
+          "address": "$C4EE2A",
+          "selector": "$2607",
+          "descriptor": "$C22480",
+          "coordinate_words_unsigned": [
+            222,
+            0,
+            165
+          ],
+          "coordinate_words_signed": [
+            222,
+            0,
+            165
+          ],
+          "field_3": "$0037",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 49,
+          "address": "$C4EE42",
+          "selector": "$2307",
+          "descriptor": "$C22444",
+          "coordinate_words_unsigned": [
+            248,
+            0,
+            156
+          ],
+          "coordinate_words_signed": [
+            248,
+            0,
+            156
+          ],
+          "field_3": "$0077",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 50,
+          "address": "$C4EE5A",
+          "selector": "$1507",
+          "descriptor": "$C2232C",
+          "coordinate_words_unsigned": [
+            384,
+            0,
+            256
+          ],
+          "coordinate_words_signed": [
+            384,
+            0,
+            256
+          ],
+          "field_3": "$0011",
+          "per_frame_words": [
+            "$4045",
+            "$0061",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 51,
+          "address": "$C4EE72",
+          "selector": "$1507",
+          "descriptor": "$C2232C",
+          "coordinate_words_unsigned": [
+            65520,
+            0,
+            176
+          ],
+          "coordinate_words_signed": [
+            -16,
+            0,
+            176
+          ],
+          "field_3": "$0015",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 52,
+          "address": "$C4EE8A",
+          "selector": "$4607",
+          "descriptor": "$C22700",
+          "coordinate_words_unsigned": [
+            112,
+            0,
+            176
+          ],
+          "coordinate_words_signed": [
+            112,
+            0,
+            176
+          ],
+          "field_3": "$0014",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 53,
+          "address": "$C4EEA2",
+          "selector": "$1507",
+          "descriptor": "$C2232C",
+          "coordinate_words_unsigned": [
+            32,
+            0,
+            112
+          ],
+          "coordinate_words_signed": [
+            32,
+            0,
+            112
+          ],
+          "field_3": "$0018",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 54,
+          "address": "$C4EEBA",
+          "selector": "$5207",
+          "descriptor": "$C227F0",
+          "coordinate_words_unsigned": [
+            64,
+            0,
+            24
+          ],
+          "coordinate_words_signed": [
+            64,
+            0,
+            24
+          ],
+          "field_3": "$0038",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 55,
+          "address": "$C4EED2",
+          "selector": "$3907",
+          "descriptor": "$C225FC",
+          "coordinate_words_unsigned": [
+            2,
+            0,
+            65488
+          ],
+          "coordinate_words_signed": [
+            2,
+            0,
+            -48
+          ],
+          "field_3": "$001C",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 56,
+          "address": "$C4EEEA",
+          "selector": "$3807",
+          "descriptor": "$C225E8",
+          "coordinate_words_unsigned": [
+            22,
+            0,
+            65455
+          ],
+          "coordinate_words_signed": [
+            22,
+            0,
+            -81
+          ],
+          "field_3": "$003C",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 57,
+          "address": "$C4EF02",
+          "selector": "$3B07",
+          "descriptor": "$C22624",
+          "coordinate_words_unsigned": [
+            3,
+            0,
+            65439
+          ],
+          "coordinate_words_signed": [
+            3,
+            0,
+            -97
+          ],
+          "field_3": "$003C",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 58,
+          "address": "$C4EF1A",
+          "selector": "$4307",
+          "descriptor": "$C226C4",
+          "coordinate_words_unsigned": [
+            15,
+            0,
+            65449
+          ],
+          "coordinate_words_signed": [
+            15,
+            0,
+            -87
+          ],
+          "field_3": "$007C",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 59,
+          "address": "$C4EF32",
+          "selector": "$4307",
+          "descriptor": "$C226C4",
+          "coordinate_words_unsigned": [
+            27,
+            0,
+            65459
+          ],
+          "coordinate_words_signed": [
+            27,
+            0,
+            -77
+          ],
+          "field_3": "$007C",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 60,
+          "address": "$C4EF4A",
+          "selector": "$3A07",
+          "descriptor": "$C22610",
+          "coordinate_words_unsigned": [
+            39,
+            0,
+            65469
+          ],
+          "coordinate_words_signed": [
+            39,
+            0,
+            -67
+          ],
+          "field_3": "$007C",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 61,
+          "address": "$C4EF62",
+          "selector": "$4007",
+          "descriptor": "$C22688",
+          "coordinate_words_unsigned": [
+            15,
+            0,
+            65514
+          ],
+          "coordinate_words_signed": [
+            15,
+            0,
+            -22
+          ],
+          "field_3": "$007C",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 62,
+          "address": "$C4EF7A",
+          "selector": "$4507",
+          "descriptor": "$C226EC",
+          "coordinate_words_unsigned": [
+            14,
+            0,
+            65508
+          ],
+          "coordinate_words_signed": [
+            14,
+            0,
+            -28
+          ],
+          "field_3": "$00FC",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 63,
+          "address": "$C4EF92",
+          "selector": "$4107",
+          "descriptor": "$C2269C",
+          "coordinate_words_unsigned": [
+            12,
+            0,
+            65503
+          ],
+          "coordinate_words_signed": [
+            12,
+            0,
+            -33
+          ],
+          "field_3": "$00FC",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 64,
+          "address": "$C4EFAA",
+          "selector": "$3D07",
+          "descriptor": "$C2264C",
+          "coordinate_words_unsigned": [
+            15,
+            0,
+            65490
+          ],
+          "coordinate_words_signed": [
+            15,
+            0,
+            -46
+          ],
+          "field_3": "$00FC",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 65,
+          "address": "$C4EFC2",
+          "selector": "$3C07",
+          "descriptor": "$C22638",
+          "coordinate_words_unsigned": [
+            6,
+            0,
+            65493
+          ],
+          "coordinate_words_signed": [
+            6,
+            0,
+            -43
+          ],
+          "field_3": "$00FC",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 66,
+          "address": "$C4EFDA",
+          "selector": "$4407",
+          "descriptor": "$C226D8",
+          "coordinate_words_unsigned": [
+            4,
+            0,
+            65486
+          ],
+          "coordinate_words_signed": [
+            4,
+            0,
+            -50
+          ],
+          "field_3": "$00FC",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 67,
+          "address": "$C4EFF2",
+          "selector": "$3E07",
+          "descriptor": "$C22660",
+          "coordinate_words_unsigned": [
+            65529,
+            0,
+            65482
+          ],
+          "coordinate_words_signed": [
+            -7,
+            0,
+            -54
+          ],
+          "field_3": "$001D",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 68,
+          "address": "$C4F00A",
+          "selector": "$3F07",
+          "descriptor": "$C22674",
+          "coordinate_words_unsigned": [
+            65527,
+            0,
+            65488
+          ],
+          "coordinate_words_signed": [
+            -9,
+            0,
+            -48
+          ],
+          "field_3": "$003D",
+          "per_frame_words": [
+            "$3F45",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 70,
+          "address": "$C4F03A",
+          "selector": "$5D07",
+          "descriptor": "$C228CC",
+          "coordinate_words_unsigned": [
+            65344,
+            0,
+            64832
+          ],
+          "coordinate_words_signed": [
+            -192,
+            0,
+            -704
+          ],
+          "field_3": "$0012",
+          "per_frame_words": [
+            "$3F43",
+            "$006B",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 71,
+          "address": "$C4F052",
+          "selector": "$5E07",
+          "descriptor": "$C228E0",
+          "coordinate_words_unsigned": [
+            65216,
+            0,
+            64768
+          ],
+          "coordinate_words_signed": [
+            -320,
+            0,
+            -768
+          ],
+          "field_3": "$0013",
+          "per_frame_words": [
+            "$3F43",
+            "$006E",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 72,
+          "address": "$C4F06A",
+          "selector": "$6A07",
+          "descriptor": "$C229D0",
+          "coordinate_words_unsigned": [
+            65088,
+            0,
+            64832
+          ],
+          "coordinate_words_signed": [
+            -448,
+            0,
+            -704
+          ],
+          "field_3": "$0010",
+          "per_frame_words": [
+            "$3E43",
+            "$006E",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 73,
+          "address": "$C4F082",
+          "selector": "$5A07",
+          "descriptor": "$C22890",
+          "coordinate_words_unsigned": [
+            192,
+            0,
+            65088
+          ],
+          "coordinate_words_signed": [
+            192,
+            0,
+            -448
+          ],
+          "field_3": "$001B",
+          "per_frame_words": [
+            "$4044",
+            "$0064",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 74,
+          "address": "$C4F09A",
+          "selector": "$7107",
+          "descriptor": "$C22A5C",
+          "coordinate_words_unsigned": [
+            320,
+            0,
+            65216
+          ],
+          "coordinate_words_signed": [
+            320,
+            0,
+            -320
+          ],
+          "field_3": "$0016",
+          "per_frame_words": [
+            "$4044",
+            "$0062",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 75,
+          "address": "$C4F0B2",
+          "selector": "$2C07",
+          "descriptor": "$C224F8",
+          "coordinate_words_unsigned": [
+            311,
+            0,
+            65268
+          ],
+          "coordinate_words_signed": [
+            311,
+            0,
+            -268
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 76,
+          "address": "$C4F0CA",
+          "selector": "$2B07",
+          "descriptor": "$C224E4",
+          "coordinate_words_unsigned": [
+            262,
+            0,
+            65238
+          ],
+          "coordinate_words_signed": [
+            262,
+            0,
+            -298
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$4044",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 77,
+          "address": "$C4F0E2",
+          "selector": "$7207",
+          "descriptor": "$C22A70",
+          "coordinate_words_unsigned": [
+            224,
+            0,
+            65184
+          ],
+          "coordinate_words_signed": [
+            224,
+            0,
+            -352
+          ],
+          "field_3": "$0017",
+          "per_frame_words": [
+            "$4044",
+            "$0062",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 78,
+          "address": "$C4F0FA",
+          "selector": "$2A07",
+          "descriptor": "$C224D0",
+          "coordinate_words_unsigned": [
+            368,
+            0,
+            65392
+          ],
+          "coordinate_words_signed": [
+            368,
+            0,
+            -144
+          ],
+          "field_3": "$0012",
+          "per_frame_words": [
+            "$4044",
+            "$0061",
+            "$00EE",
+            "$0001"
+          ]
+        },
+        {
+          "index": 79,
+          "address": "$C4F112",
+          "selector": "$7007",
+          "descriptor": "$C22A48",
+          "coordinate_words_unsigned": [
+            320,
+            0,
+            65344
+          ],
+          "coordinate_words_signed": [
+            320,
+            0,
+            -192
+          ],
+          "field_3": "$0032",
+          "per_frame_words": [
+            "$4044",
+            "$0060",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 80,
+          "address": "$C4F12A",
+          "selector": "$6807",
+          "descriptor": "$C229A8",
+          "coordinate_words_unsigned": [
+            32,
+            0,
+            64992
+          ],
+          "coordinate_words_signed": [
+            32,
+            0,
+            -544
+          ],
+          "field_3": "$001C",
+          "per_frame_words": [
+            "$3F44",
+            "$0066",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 81,
+          "address": "$C4F142",
+          "selector": "$6007",
+          "descriptor": "$C22908",
+          "coordinate_words_unsigned": [
+            65472,
+            0,
+            64928
+          ],
+          "coordinate_words_signed": [
+            -64,
+            0,
+            -608
+          ],
+          "field_3": "$001D",
+          "per_frame_words": [
+            "$3F44",
+            "$0067",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 82,
+          "address": "$C4F15A",
+          "selector": "$5907",
+          "descriptor": "$C2287C",
+          "coordinate_words_unsigned": [
+            96,
+            0,
+            65088
+          ],
+          "coordinate_words_signed": [
+            96,
+            0,
+            -448
+          ],
+          "field_3": "$0018",
+          "per_frame_words": [
+            "$3F44",
+            "$0064",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 83,
+          "address": "$C4F172",
+          "selector": "$6707",
+          "descriptor": "$C22994",
+          "coordinate_words_unsigned": [
+            65216,
+            0,
+            65088
+          ],
+          "coordinate_words_signed": [
+            -320,
+            0,
+            -448
+          ],
+          "field_3": "$001B",
+          "per_frame_words": [
+            "$3F44",
+            "$0067",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 84,
+          "address": "$C4F18A",
+          "selector": "$6307",
+          "descriptor": "$C22944",
+          "coordinate_words_unsigned": [
+            65408,
+            0,
+            65248
+          ],
+          "coordinate_words_signed": [
+            -128,
+            0,
+            -288
+          ],
+          "field_3": "$0015",
+          "per_frame_words": [
+            "$3F44",
+            "$0062",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 85,
+          "address": "$C4F1A2",
+          "selector": "$6407",
+          "descriptor": "$C22958",
+          "coordinate_words_unsigned": [
+            65376,
+            0,
+            65248
+          ],
+          "coordinate_words_signed": [
+            -160,
+            0,
+            -288
+          ],
+          "field_3": "$0016",
+          "per_frame_words": [
+            "$3F44",
+            "$0062",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 86,
+          "address": "$C4F1BA",
+          "selector": "$6507",
+          "descriptor": "$C2296C",
+          "coordinate_words_unsigned": [
+            65280,
+            0,
+            65248
+          ],
+          "coordinate_words_signed": [
+            -256,
+            0,
+            -288
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$3F44",
+            "$0064",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 87,
+          "address": "$C4F1D2",
+          "selector": "$6607",
+          "descriptor": "$C22980",
+          "coordinate_words_unsigned": [
+            65248,
+            0,
+            65184
+          ],
+          "coordinate_words_signed": [
+            -288,
+            0,
+            -352
+          ],
+          "field_3": "$0017",
+          "per_frame_words": [
+            "$3F44",
+            "$0064",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 88,
+          "address": "$C4F1EA",
+          "selector": "$6107",
+          "descriptor": "$C2291C",
+          "coordinate_words_unsigned": [
+            65344,
+            0,
+            65344
+          ],
+          "coordinate_words_signed": [
+            -192,
+            0,
+            -192
+          ],
+          "field_3": "$0012",
+          "per_frame_words": [
+            "$3F44",
+            "$0061",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 89,
+          "address": "$C4F202",
+          "selector": "$6207",
+          "descriptor": "$C22930",
+          "coordinate_words_unsigned": [
+            65312,
+            0,
+            65280
+          ],
+          "coordinate_words_signed": [
+            -224,
+            0,
+            -256
+          ],
+          "field_3": "$0032",
+          "per_frame_words": [
+            "$3F44",
+            "$0063",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 90,
+          "address": "$C4F21A",
+          "selector": "$6907",
+          "descriptor": "$C229BC",
+          "coordinate_words_unsigned": [
+            65088,
+            0,
+            64960
+          ],
+          "coordinate_words_signed": [
+            -448,
+            0,
+            -576
+          ],
+          "field_3": "$001C",
+          "per_frame_words": [
+            "$3E44",
+            "$006B",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 91,
+          "address": "$C4F232",
+          "selector": "$7407",
+          "descriptor": "$C22A98",
+          "coordinate_words_unsigned": [
+            320,
+            0,
+            65472
+          ],
+          "coordinate_words_signed": [
+            320,
+            0,
+            -64
+          ],
+          "field_3": "$001E",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 92,
+          "address": "$C4F24A",
+          "selector": "$4C07",
+          "descriptor": "$C22778",
+          "coordinate_words_unsigned": [
+            300,
+            0,
+            84
+          ],
+          "coordinate_words_signed": [
+            300,
+            0,
+            84
+          ],
+          "field_3": "$001A",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 93,
+          "address": "$C4F262",
+          "selector": "$7307",
+          "descriptor": "$C22A84",
+          "coordinate_words_unsigned": [
+            320,
+            0,
+            32
+          ],
+          "coordinate_words_signed": [
+            320,
+            0,
+            32
+          ],
+          "field_3": "$003A",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 94,
+          "address": "$C4F27A",
+          "selector": "$4607",
+          "descriptor": "$C22700",
+          "coordinate_words_unsigned": [
+            472,
+            0,
+            200
+          ],
+          "coordinate_words_signed": [
+            472,
+            0,
+            200
+          ],
+          "field_3": "$0015",
+          "per_frame_words": [
+            "$4045",
+            "$0062",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 95,
+          "address": "$C4F292",
+          "selector": "$4607",
+          "descriptor": "$C22700",
+          "coordinate_words_unsigned": [
+            266,
+            0,
+            144
+          ],
+          "coordinate_words_signed": [
+            266,
+            0,
+            144
+          ],
+          "field_3": "$0016",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 96,
+          "address": "$C4F2AA",
+          "selector": "$4B07",
+          "descriptor": "$C22764",
+          "coordinate_words_unsigned": [
+            333,
+            0,
+            128
+          ],
+          "coordinate_words_signed": [
+            333,
+            0,
+            128
+          ],
+          "field_3": "$0036",
+          "per_frame_words": [
+            "$4045",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 97,
+          "address": "$C4F2C2",
+          "selector": "$6F07",
+          "descriptor": "$C22A34",
+          "coordinate_words_unsigned": [
+            160,
+            0,
+            160
+          ],
+          "coordinate_words_signed": [
+            160,
+            0,
+            160
+          ],
+          "field_3": "$0017",
+          "per_frame_words": [
+            "$4045",
+            "$0060",
+            "$00FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 98,
+          "address": "$C4F2DA",
+          "selector": "$6C07",
+          "descriptor": "$C229F8",
+          "coordinate_words_unsigned": [
+            64,
+            0,
+            64
+          ],
+          "coordinate_words_signed": [
+            64,
+            0,
+            64
+          ],
+          "field_3": "$0018",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$03FA",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 99,
+          "address": "$C4F2F2",
+          "selector": "$6D07",
+          "descriptor": "$C22A0C",
+          "coordinate_words_unsigned": [
+            65504,
+            0,
+            32
+          ],
+          "coordinate_words_signed": [
+            -32,
+            0,
+            32
+          ],
+          "field_3": "$0019",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$02FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 100,
+          "address": "$C4F30A",
+          "selector": "$6E07",
+          "descriptor": "$C22A20",
+          "coordinate_words_unsigned": [
+            65472,
+            0,
+            65472
+          ],
+          "coordinate_words_signed": [
+            -64,
+            0,
+            -64
+          ],
+          "field_3": "$001D",
+          "per_frame_words": [
+            "$3F45",
+            "$0060",
+            "$01FB",
+            "$FFFF"
+          ]
+        },
+        {
+          "index": 101,
+          "address": "$C4F322",
+          "selector": "$FFFF",
+          "descriptor": "$C22890",
+          "coordinate_words_unsigned": [
+            64512,
+            0,
+            1024
+          ],
+          "coordinate_words_signed": [
+            -1024,
+            0,
+            1024
+          ],
+          "field_3": "$001B",
+          "per_frame_words": [
+            "$4141",
+            "$010F",
+            "$01FF",
+            "$0001"
+          ]
+        },
+        {
+          "index": 140,
+          "address": "$C4F6CA",
+          "selector": "$5607",
+          "descriptor": "$C22840",
+          "coordinate_words_unsigned": [
+            0,
+            0,
+            65457
+          ],
+          "coordinate_words_signed": [
+            0,
+            0,
+            -79
+          ],
+          "field_3": "$001B",
+          "per_frame_words": [
+            "$3F44",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 141,
+          "address": "$C4F6E2",
+          "selector": "$4607",
+          "descriptor": "$C22700",
+          "coordinate_words_unsigned": [
+            112,
+            0,
+            176
+          ],
+          "coordinate_words_signed": [
+            112,
+            0,
+            176
+          ],
+          "field_3": "$0038",
+          "per_frame_words": [
+            "$3F46",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 142,
+          "address": "$C4F6FA",
+          "selector": "$4A07",
+          "descriptor": "$C22750",
+          "coordinate_words_unsigned": [
+            126,
+            0,
+            163
+          ],
+          "coordinate_words_signed": [
+            126,
+            0,
+            163
+          ],
+          "field_3": "$0018",
+          "per_frame_words": [
+            "$3F46",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 143,
+          "address": "$C4F712",
+          "selector": "$2D07",
+          "descriptor": "$C2250C",
+          "coordinate_words_unsigned": [
+            80,
+            0,
+            208
+          ],
+          "coordinate_words_signed": [
+            80,
+            0,
+            208
+          ],
+          "field_3": "$0015",
+          "per_frame_words": [
+            "$3F46",
+            "$0000",
+            "$0100",
+            "$0000"
+          ]
+        },
+        {
+          "index": 144,
+          "address": "$C4F72A",
+          "selector": "$2D07",
+          "descriptor": "$C2250C",
+          "coordinate_words_unsigned": [
+            78,
+            0,
+            206
+          ],
+          "coordinate_words_signed": [
+            78,
+            0,
+            206
+          ],
+          "field_3": "$0035",
+          "per_frame_words": [
+            "$3F46",
+            "$0000",
+            "$0000",
+            "$0000"
+          ]
+        },
+        {
+          "index": 145,
+          "address": "$C4F742",
+          "selector": "$2D07",
+          "descriptor": "$C2250C",
+          "coordinate_words_unsigned": [
+            65516,
+            0,
+            172
+          ],
+          "coordinate_words_signed": [
+            -20,
+            0,
+            172
+          ],
+          "field_3": "$0018",
+          "per_frame_words": [
+            "$3E46",
+            "$0000",
+            "$0300",
+            "$0000"
+          ]
+        },
+        {
+          "index": 146,
+          "address": "$C4F75A",
+          "selector": "$0017",
+          "descriptor": "$C22188",
+          "coordinate_words_unsigned": [
+            96,
+            0,
+            32
+          ],
+          "coordinate_words_signed": [
+            96,
+            0,
+            32
+          ],
+          "field_3": "$8000",
+          "per_frame_words": [
+            "$0000",
+            "$0000",
+            "$0200",
+            "$0000"
+          ]
+        },
+        {
+          "index": 147,
+          "address": "$C4F772",
+          "selector": "$FFFF",
+          "descriptor": "$C22444",
+          "coordinate_words_unsigned": [
+            15872,
+            0,
+            9984
+          ],
+          "coordinate_words_signed": [
+            15872,
+            0,
+            9984
+          ],
+          "field_3": "$001C",
+          "per_frame_words": [
+            "$4046",
+            "$02DF",
+            "$01FA",
+            "$0001"
+          ]
+        },
+        {
+          "index": 148,
+          "address": "$C4F78A",
+          "selector": "$2601",
+          "descriptor": "$C22480",
+          "coordinate_words_unsigned": [
+            14256,
+            0,
+            10576
+          ],
+          "coordinate_words_signed": [
+            14256,
+            0,
+            10576
+          ],
+          "field_3": "$0019",
+          "per_frame_words": [
+            "$4046",
+            "$02B5",
+            "$00FA",
+            "$0001"
+          ]
+        },
+        {
+          "index": 149,
+          "address": "$C4F7A2",
+          "selector": "$0010",
+          "descriptor": "$C22188",
+          "coordinate_words_unsigned": [
+            12288,
+            0,
+            4096
+          ],
+          "coordinate_words_signed": [
+            12288,
+            0,
+            4096
+          ],
+          "field_3": "$8000",
+          "per_frame_words": [
+            "$0000",
+            "$0001",
+            "$03FA",
+            "$FFFF"
+          ]
+        }
+      ],
+      "contiguous_blocks": [
+        {
+          "first_index": 0,
+          "last_index": 68,
+          "start": "$C4E9AA",
+          "end": "$C4F021",
+          "records": 69
+        },
+        {
+          "first_index": 70,
+          "last_index": 101,
+          "start": "$C4F03A",
+          "end": "$C4F339",
+          "records": 32
+        },
+        {
+          "first_index": 140,
+          "last_index": 149,
+          "start": "$C4F6CA",
+          "end": "$C4F7B9",
+          "records": 10
+        }
+      ],
+      "all_middle_coordinate_words_zero": true
+    }
+  ]
+}
