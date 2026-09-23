@@ -10,6 +10,8 @@ import argparse
 import json
 from pathlib import Path
 
+from PIL import Image, ImageDraw, ImageFont
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SLOW_BASE = 0xC00000
@@ -99,6 +101,30 @@ def svg(cells: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def png(cells: list[dict]) -> Image.Image:
+    size, margin = 20, 58
+    maximum = max(cell["stream_selection_count"] for cell in cells)
+    lookup = {(cell["group_bin"], cell["row_bin"]): cell for cell in cells}
+    image = Image.new("RGB", (800, 770), "#10151b")
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.load_default()
+    draw.text((58, 18), "Static terrain-template selector lattice - selected stream count", fill="#dbe7f3", font=font)
+    draw.text((58, 38), "group-bin ->; row-bin down. Directory diagnostic, not a geographical terrain map.", fill="#9fb2c4", font=font)
+    for group_bin in range(32):
+        for row_bin in range(32):
+            count = lookup[(group_bin, row_bin)]["stream_selection_count"]
+            shade = int(24 + 190 * count / maximum) if maximum else 24
+            color = (shade // 3, shade, min(255, shade + 35))
+            x, y = margin + group_bin * size, margin + row_bin * size
+            draw.rectangle((x, y, x + size - 2, y + size - 2), fill=color)
+    for value in range(0, 32, 4):
+        draw.text((margin + value * size, margin - 14), str(value), fill="#9fb2c4", font=font)
+        draw.text((20, margin + value * size + 4), str(value), fill="#9fb2c4", font=font)
+    draw.text((58, 725), f"Maximum selected streams in a cell: {maximum}; each cell combines 41 traced selector-call positions.", fill="#9fb2c4", font=font)
+    draw.text((58, 744), "A cell identifies static template streams, not mesh ownership, elevation, or LOD.", fill="#9fb2c4", font=font)
+    return image
+
+
 def markdown(cells: list[dict], validation: dict) -> str:
     counts = [cell["stream_selection_count"] for cell in cells]
     return "\n".join([
@@ -116,7 +142,7 @@ def markdown(cells: list[dict], validation: dict) -> str:
         "independent runtime inventory.",
         "",
         f"All 1,024 selector-bin cells have been decoded. Their selected-stream counts range from {min(counts)} to {max(counts)}; ",
-        "the companion SVG visualizes these counts and the JSON retains every selected static stream address.",
+        "the companion SVG/PNG visualizes these counts and the JSON retains every selected static stream address.",
         "",
         "The lattice's group/row labels are directory-input axes only. It does not establish",
         "their cardinal orientation, physical spacing, full map extent, or whether every",
@@ -133,6 +159,8 @@ def main() -> None:
                         default=ROOT / "analysis/data/terrain_template_selector_lattice.md")
     parser.add_argument("--output-svg", type=Path,
                         default=ROOT / "analysis/plots/terrain_template_selector_lattice.svg")
+    parser.add_argument("--output-png", type=Path,
+                        default=ROOT / "analysis/plots/terrain_template_selector_lattice.png")
     args = parser.parse_args()
     sweep = json.loads((ROOT / "analysis/data/origin_selector_axis_sweep_00_1f.json").read_text(encoding="utf-8"))
     slow = (ROOT / "build/run033_origin_control_trace/slow.bin").read_bytes()
@@ -144,7 +172,8 @@ def main() -> None:
     args.output_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     args.output_markdown.write_text(markdown(cells, validation), encoding="utf-8")
     args.output_svg.write_text(svg(cells), encoding="utf-8")
-    print(f"wrote {args.output_json.relative_to(ROOT)}, {args.output_markdown.relative_to(ROOT)}, and {args.output_svg.relative_to(ROOT)}")
+    png(cells).save(args.output_png)
+    print(f"wrote {args.output_json.relative_to(ROOT)}, {args.output_markdown.relative_to(ROOT)}, {args.output_svg.relative_to(ROOT)}, and {args.output_png.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

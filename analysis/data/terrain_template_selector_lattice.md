@@ -12,7 +12,7 @@ combination exactly reproduces all 41 observed stream/no-stream choices in the
 independent runtime inventory.
 
 All 1,024 selector-bin cells have been decoded. Their selected-stream counts range from 4 to 18; 
-the companion SVG visualizes these counts and the JSON retains every selected static stream address.
+the companion SVG/PNG visualizes these counts and the JSON retains every selected static stream address.
 
 The lattice's group/row labels are directory-input axes only. It does not establish
 their cardinal orientation, physical spacing, full map extent, or whether every
