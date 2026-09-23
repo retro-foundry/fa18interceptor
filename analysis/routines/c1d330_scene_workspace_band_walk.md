@@ -79,3 +79,10 @@ control-byte-to-group-index rows are retained in the
 [workspace-band selector stream](../data/workspace_band_selector_stream.md);
 they show the live bound terms explicitly rather than promoting the byte
 stream to a world-grid claim.
+
+The full `$C1D330-$C1D3F3` band-walk slice is now byte-exactly reconstructed
+as [`walk_static_template_bands.asm`](../../source_amiga/observed/walk_static_template_bands.asm).
+Together with the adjacent static selector, it preserves the original
+control-byte translation, bounded live terms, `$600` workspace-band stride,
+and handoff to `$C1DC08` without assigning coordinate, page, or LOD meaning
+to those inputs.
