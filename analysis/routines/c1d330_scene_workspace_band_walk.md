@@ -61,6 +61,11 @@ repopulated from a verified static segment-66 template stream; see the
 selective copy proves an upstream static input without changing the boundary:
 the workspace itself remains mutable and is not terrain source data.
 
+The `$C1D722-$C1D763` unrolled sixteen-cell helper is now byte-exactly
+reconstructed as [`mark_workspace_cell_starts.asm`](../../source_amiga/observed/mark_workspace_cell_starts.asm).
+It preserves the generic `(D0 marker, D1 stride, A1 first cell)` contract;
+only this caller establishes the `$FFFF/$60` terrain-workspace use.
+
 ## Static selector-input boundary
 
 `$C412EC` is payload offset `$1BC` of original CODE segment 65
