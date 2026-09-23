@@ -1,0 +1,113 @@
+{
+  "scope": "sealed no-input M-map C1F4AC immutable transform-source comparison",
+  "entry": "$C1F4AC",
+  "baseline": {
+    "trace": "build\\run035_m_map_stable_20f_trace\\trace.jsonl",
+    "instruction_count": 201858,
+    "entries": 12,
+    "sources": {
+      "$C35BDE": [
+        {
+          "frame": 1,
+          "trace_index": 1348
+        },
+        {
+          "frame": 15,
+          "trace_index": 149025
+        }
+      ],
+      "$C36220": [
+        {
+          "frame": 1,
+          "trace_index": 3080
+        },
+        {
+          "frame": 1,
+          "trace_index": 4003
+        },
+        {
+          "frame": 16,
+          "trace_index": 150821
+        },
+        {
+          "frame": 16,
+          "trace_index": 151680
+        }
+      ],
+      "$C35BAA": [
+        {
+          "frame": 1,
+          "trace_index": 5248
+        },
+        {
+          "frame": 16,
+          "trace_index": 152685
+        }
+      ],
+      "$C35BC2": [
+        {
+          "frame": 1,
+          "trace_index": 5948
+        },
+        {
+          "frame": 16,
+          "trace_index": 153321
+        }
+      ],
+      "$C3B720": [
+        {
+          "frame": 1,
+          "trace_index": 7236
+        },
+        {
+          "frame": 16,
+          "trace_index": 154135
+        }
+      ]
+    }
+  },
+  "extended": {
+    "trace": "build\\run037_m_map_stable_20f_trace\\trace.jsonl",
+    "instruction_count": 198208,
+    "entries": 6,
+    "sources": {
+      "$C35BDE": [
+        {
+          "frame": 5699,
+          "trace_index": 111331
+        }
+      ],
+      "$C35BAA": [
+        {
+          "frame": 5699,
+          "trace_index": 112584
+        }
+      ],
+      "$C35BC2": [
+        {
+          "frame": 5699,
+          "trace_index": 113220
+        }
+      ],
+      "$C36220": [
+        {
+          "frame": 5699,
+          "trace_index": 113931
+        },
+        {
+          "frame": 5699,
+          "trace_index": 114790
+        }
+      ],
+      "$C3B720": [
+        {
+          "frame": 5699,
+          "trace_index": 116739
+        }
+      ]
+    }
+  },
+  "new_sources_in_extended_window": [],
+  "baseline_sources_absent_from_extended_window": [],
+  "qualification": "An unchanged source set only characterizes these bounded stable-map windows. It does not establish whole-map coverage, terrain identity, or LOD behavior."
+}
