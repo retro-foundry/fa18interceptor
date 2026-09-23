@@ -19,8 +19,10 @@ or map-page table.
   reconstructed as [`adjust_terrain_selector_origin.asm`](../../source_amiga/observed/adjust_terrain_selector_origin.asm).
 - The static adjustment-mode selector `$C291D4-$C29225` is byte-exactly
   reconstructed as [`select_terrain_origin_adjustment_mode.asm`](../../source_amiga/observed/select_terrain_origin_adjustment_mode.asm).
-  Its downstream dispatch/threshold-policy range `$C29226-$C29547` remains
-  outside the bounded source slices.
+- Its static jump-table threshold cases `$C29226-$C29367` are byte-exactly
+  reconstructed as [`dispatch_terrain_origin_adjustment_thresholds.asm`](../../source_amiga/observed/dispatch_terrain_origin_adjustment_thresholds.asm).
+  The remaining downstream cases `$C29368-$C29547` remain outside the bounded
+  source slices.
 
 ## Observed producer path
 
@@ -58,6 +60,13 @@ live origin `$C45C3E`, then indexes the `$C28F2C` jump table with byte
 `$C457B6`. This is static/dataflow evidence for a component-delta adjustment
 mode. It does not establish what selected mode values mean or connect them to
 physical distance.
+
+The decoded table has nine targets for mode bytes 0-8. Cases 0-5 and 7-8 use
+literal comparison thresholds (from `$8000` through `$1C00000`) to select a
+subsequent mode, route to a candidate-preparation path, or return after a
+matrix helper. This demonstrates a static multi-tier threshold policy, but
+does not establish mode semantics, a rendered primitive change, or a
+same-instance physical-distance transition.
 
 ## Terrain-selection consequence
 
