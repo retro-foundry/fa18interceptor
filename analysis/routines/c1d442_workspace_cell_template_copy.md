@@ -49,6 +49,13 @@ cell that the placement builder subsequently consumes.  It also resolves the
 apparent reset contradiction: `$C1D722` marks the cell rejected, then this
 copy path selectively replaces the prefix before the next builder pass.
 
+The selector's immediate `$C1D520` child is now byte-exactly reconstructed as
+[`append_template_workspace_matches.asm`](../../source_amiga/observed/append_template_workspace_matches.asm).
+It conditionally scans two bounded mutable record regions, clears a matched
+bit, and appends only `$10/$40`, index, `$FF` marker triplets through the same
+`A2` workspace cursor. This is auxiliary mutable-workspace dataflow, not an
+additional immutable terrain-template source.
+
 ## Boundary
 
 The source record supplies a selector-like header and two word inputs in this
