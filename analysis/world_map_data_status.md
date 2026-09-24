@@ -115,12 +115,13 @@ separate run035 Golden Gate/coast approach repeats that result for 123 records
 at each of frames 5,500, 7,000, and 8,500; see the
 [run035 placement diagnostic](data/run035_runtime_scene_placements.md).
 This
-does not yet establish the original static source table, prove that this word
-is a global height axis under every game mode, or rule out separate terrain
-geometry.  Renderer-observed local triples from scene-family inputs still
-contain nonzero values in all three stored components.  Those values may be
-model-local coordinates, transformed scene inputs, or another coordinate
-convention; they must not be conflated with placement height.
+does not yet establish the original static source table or prove that this
+word is a global height axis under every game mode. Separate terrain and
+landmark geometry is already proven three-dimensional: `$C3B588` is the
+traced five-face mountain pyramid/wedge, and `$C3B720` has a traced local
+vertex with middle component `1024`. Renderer-observed local triples from
+scene-family inputs therefore must not be conflated with the flat placement
+height.
 
 Consequently, a map export must retain all three stored components until a
 producer-to-consumer trace proves which components encode global placement and
