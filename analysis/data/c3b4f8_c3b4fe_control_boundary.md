@@ -20,6 +20,13 @@ but no live `$C1F6F8` entry for this target was reached in the sampled run003
 or run037 map windows. Its exact parser role and any individual 3D component
 association remain unresolved.
 
+The adjacent `$C3B4FE` family is independently associated with the five-triple
+`$C3B588` green-mountain component, including four triangular side records.
+That existing relationship does **not** promote `$C3B4F8` itself to a mountain
+instance pointer: the missing evidence is the live transition from this
+descriptor target into the `$C3B4FE` control stream.
+
 Authority: `captures/baseline_menu/slow.bin` at slow-RAM offset `$3B4F8`,
 `analysis/data/terrain_lattice_target_catalog.json`, and the run003/run037
-live control-stream inventories.
+live control-stream inventories; the separate face-family authority is
+`analysis/data/c3b588_later_bridge_component.md`.
