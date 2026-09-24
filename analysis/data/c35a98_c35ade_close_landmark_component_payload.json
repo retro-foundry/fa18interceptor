@@ -4,13 +4,13 @@
     {
       "direct_input_range": "$C35A98-$C35AAF",
       "triples": [[112, 440, 3168], [0, 440, 3168], [0, 0, -3744], [0, 0, 0]],
-      "count_contract": "four triples, selected by preceding count byte $04",
+      "count_contract": "four triples, selected by preceding count byte $04 and one C1F4AC plus three C1F528 transform entries",
       "observed_renderer_output": "seven polygon submissions, including $C4BFA6, and two $C355C2 line lists"
     },
     {
       "direct_input_range": "$C35ADE-$C35B0D",
       "triples": [[112, 440, -3168], [0, 440, -3168], [0, 0, 3744], [0, 0, 0], [0, 384, -1824], [0, 256, 1184], [0, 1088, 0], [0, 608, -1824]],
-      "count_contract": "eight triples, selected by preceding count byte $08",
+      "count_contract": "eight triples, selected by preceding count byte $08 and one C1F4AC plus seven C1F528 transform entries",
       "observed_renderer_output": "one $C35590 line-list submission"
     }
   ],
