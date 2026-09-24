@@ -1,4 +1,4 @@
-; Byte-exact alternate record-route setup $C1CE38-$C1CE9F.
+; Byte-exact alternate record-route setup $C1CE38-$C1CEA3.
                 org $C1CE38
 ALT_OFFSET equ $C459AA
 ALT_SOURCE_OFFSET equ $C459B0
