@@ -32,10 +32,12 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   remain structural. Its adjacent `$C1D10C` block is not entered by the
   current P-code exports; seek an observed scenario before source conversion.
 
-- Regenerated `analysis/capture_targets.md` from the current source map.
-  Exactly one reconstructed-reachable, unexecuted target remains:
-  `$C06BF0-$C06C04` (17 reconstructed flow references). The principal
-  completion gap remains scenario evidence, especially the controlled
+- Regenerated `analysis/capture_targets.md` from the current source map and
+  corrected it to report **P-code-export gaps**, not global execution. Its one
+  reconstructed-reachable P-code gap is `$C06BF0-$C06C04` (17 reconstructed
+  flow references); the separate bounded native-Delete trace already proves
+  that transition's narrow runtime contract. The principal completion gap
+  remains scenario evidence, especially the controlled
   Golden-Gate stable-bearing/range protocol in
   `analysis/golden_gate_lod_capture_protocol.md`; current run041 evidence is
   landmark-associated visual-detail selection, not physical-distance LOD.

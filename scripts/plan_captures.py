@@ -1,8 +1,10 @@
-"""Rank unexercised CODE segments as capture targets and write analysis/capture_targets.md.
+"""Rank CODE absent from P-code exports as capture targets and write analysis/capture_targets.md.
 
-Reconstruction cannot outrun scenario coverage: a segment that has never executed
-in any capture cannot be given a behavioural contract under this project's rules.
-This ranks what is still dark, so recording effort can be aimed rather than guessed.
+Reconstruction cannot outrun scenario coverage: a segment absent from all P-code
+exports needs a new export before this inventory can support a P-code-backed
+behavioural contract. Independent bounded traces can still prove narrow runtime
+facts, so this report must not call such a segment globally "unexecuted".
+This ranks P-code gaps so recording effort can be aimed rather than guessed.
 
 Segments are ordered by size. A segment reached by a reconstructed branch or call
 but never observed running is listed first: its caller is already understood, so
@@ -53,16 +55,17 @@ def main():
                  f'from {exports} P-code exports.')
     lines.append('')
     lines.append(f'{len(executed):,} bytes of the {sum(r["size"] for r in rows):,} resolved CODE '
-                 f'bytes have ever executed in any capture. Everything below is code the '
-                 f'project cannot yet make a behavioural claim about, because it has never '
-                 f'been observed running. Recording a scenario that reaches it is a '
-                 f'precondition for reconstructing it, not an alternative to it.')
+                 f'bytes occur in the {exports} imported P-code exports. Everything below '
+                 f'is a P-code coverage gap. A dedicated bounded trace may independently '
+                 f'prove a narrow runtime contract, but does not make the bytes part of this '
+                 f'P-code inventory.')
     lines.append('')
 
-    lines.append('## Reached by reconstructed code but never executed')
+    lines.append('## Reached by reconstructed code but absent from P-code exports')
     lines.append('')
     lines.append('A reconstructed slice branches or calls into these, so the entry is already '
-                 'located. Highest value per recording session.')
+                 'located. Check dedicated trace notes before calling one unexecuted; a '
+                 'new P-code export remains the highest-value capture target.')
     lines.append('')
     lines.append('| Segment | Runtime range | Bytes | Call/branch references |')
     lines.append('|---:|---|---:|---:|')
@@ -92,9 +95,10 @@ def main():
 
     lines.append('## Dark')
     lines.append('')
-    lines.append('Never executed and never referenced by reconstructed source. Each is either '
-                 'a subsystem no capture has entered, or data the linker emitted as CODE; '
-                 'the two are indistinguishable until something reaches them.')
+    lines.append('Absent from P-code exports and never referenced by reconstructed source. Each '
+                 'is either a subsystem no imported export has entered, or data the linker '
+                 'emitted as CODE; the two are indistinguishable until a relevant export '
+                 'or other evidence reaches it.')
     lines.append('')
     lines.append('| Segment | Runtime range | Bytes |')
     lines.append('|---:|---|---:|')
