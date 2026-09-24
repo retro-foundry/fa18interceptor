@@ -1,5 +1,7 @@
-; Byte-exact static-only $C2ECC6-$C2ED6B continuation of C2EC9C.
-; The observed C2EC9C entry rejected before reaching this projection/dispatch path.
+; Byte-exact $C2ECC6-$C2ED6B continuation of C2EC9C.
+; Run041's C35A98 source interval reaches this projection path through C2EC90.
+; Its observed negative-D7 path stores a reflected screen pair then returns;
+; child-dispatch semantics remain scenario-dependent.
                 org $C2ECC6
 PROJECTED_PAIR equ $C45958
 PROJECT_LIMIT equ $C45984
