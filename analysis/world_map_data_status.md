@@ -169,6 +169,14 @@ then 17 `$C3558A` submissions as the red raster expands. This is a genuine
 range/detail-selection candidate, not distance-only LOD proof, because the
 user's approach changes camera state. See the [line-detail candidate](data/run035_golden_gate_line_detail_candidate.md).
 
+The later sealed `run038` does not remove that limitation. Its cockpit-only
+red-landmark scan expands from 30 pixels at frame 4,000 to 790 at 6,750, but
+the landmark bearing moves materially across the viewport and disappears by
+the sampled frame 7,250. Its medium-distance trace also does not reach the
+known `$C1F4AC` Golden Gate batch entry. It is retained as an auditable
+negative distance-only probe, not LOD evidence. See the
+[run038 distance probe](data/run038_golden_gate_distance_probe.md).
+
 The earlier leading primitive-selection hypothesis was **distant line lists
 followed by nearer filled polygons**, rather than a replacement mesh. Run036
 does not establish it: at its largest controlled red Golden Gate span, the
