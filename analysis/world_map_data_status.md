@@ -182,9 +182,13 @@ Run041 supplies the first stable-bearing counterpart: as the centred red
 Golden Gate landmark expands from 72 pixels at frame 5,000 to 674 at 6,250,
 the `$C1F4AC` inputs change from ten source blocks to three disjoint blocks,
 while the reconstructed terrain-origin mode and origin triple remain exactly
-unchanged. This is strong **view/range-correlated detail-selection candidate**
-evidence, but does not prove LOD until a submitted face is correlated with the
-red viewport pixels. See the [run041 stable-bearing probe](data/run041_golden_gate_stable_bearing_detail_probe.md).
+unchanged. A close-window `$C35A98` polygon workspace produces an emitted
+screen edge entirely inside the measured red Golden Gate bitmap rectangle.
+Together with the earlier `$C3559A/$C355D2` Golden Gate line contexts at the
+small checkpoint, this confirms **landmark-associated visual-detail
+selection**. It remains short of distance-threshold LOD proof because no
+physical-distance input or selector threshold has been correlated with the
+change. See the [run041 stable-bearing probe](data/run041_golden_gate_stable_bearing_detail_probe.md).
 
 The earlier leading primitive-selection hypothesis was **distant line lists
 followed by nearer filled polygons**, rather than a replacement mesh. Run036
