@@ -29,7 +29,16 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   base. `$C1D0B6-$C1D10B` is now a complete runtime-observed helper: it uses
   the `$C46184` indexed fields with selector-derived shifts, changes `D2/D4`,
   writes `$C45B3C`, sets `$C458BB`, and returns. Field and record ownership
-  remain structural. Continue at its adjacent `$C1D10C` boundary.
+  remain structural. Its adjacent `$C1D10C` block is not entered by the
+  current P-code exports; seek an observed scenario before source conversion.
+
+- Regenerated `analysis/capture_targets.md` from the current source map.
+  Exactly one reconstructed-reachable, unexecuted target remains:
+  `$C06BF0-$C06C04` (17 reconstructed flow references). The principal
+  completion gap remains scenario evidence, especially the controlled
+  Golden-Gate stable-bearing/range protocol in
+  `analysis/golden_gate_lod_capture_protocol.md`; current run041 evidence is
+  landmark-associated visual-detail selection, not physical-distance LOD.
 
 ## Current map result
 

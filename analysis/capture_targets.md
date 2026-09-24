@@ -10,7 +10,7 @@ A reconstructed slice branches or calls into these, so the entry is already loca
 
 | Segment | Runtime range | Bytes | Call/branch references |
 |---:|---|---:|---:|
-| 7 | `$C06BF0-$C06C04` | 20 | 14 |
+| 7 | `$C06BF0-$C06C04` | 20 | 17 |
 
 Total: 1 segments, 20 bytes.
 
@@ -55,7 +55,6 @@ Never executed and never referenced by reconstructed source. Each is either a su
 | Segment | Runtime range | Bytes |
 |---:|---|---:|
 | 68 | `$C42CA8-$C444F8` | 6,224 |
-| 65 | `$C41130-$C42288` | 4,440 |
 | 70 | `$C44880-$C45624` | 3,492 |
 | 51 | `$C383F0-$C39160` | 3,440 |
 | 52 | `$C39168-$C39E3C` | 3,284 |
@@ -67,7 +66,6 @@ Never executed and never referenced by reconstructed source. Each is either a su
 | 43 | `$C36208-$C36A1C` | 2,068 |
 | 44 | `$C36A28-$C37210` | 2,024 |
 | 31 | `$C2CCA0-$C2D3FC` | 1,884 |
-| 66 | `$C42290-$C429C8` | 1,848 |
 | 117 | `$C513B0-$C519B8` | 1,544 |
 | 49 | `$C37990-$C37F78` | 1,512 |
 | 59 | `$C3D0A0-$C3D688` | 1,512 |
@@ -79,5 +77,7 @@ Never executed and never referenced by reconstructed source. Each is either a su
 | 69 | `$C44500-$C44878` | 888 |
 | 47 | `$C37680-$C37984` | 772 |
 | 83 | `$C50890-$C50B6C` | 732 |
+| 45 | `$C08718-$C089EC` | 724 |
+| 105 | `$C50F00-$C511C8` | 712 |
 
-Total: 60 segments, 61,568 bytes (showing largest 25).
+Total: 58 segments, 55,280 bytes (showing largest 25).
