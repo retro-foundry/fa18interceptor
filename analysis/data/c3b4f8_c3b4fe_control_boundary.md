@@ -33,6 +33,8 @@ samples; missing walkers are explicitly retained as trace boundaries.
 An explicitly non-scenario [debugger parser probe](run037_c3b4f8_debugger_parser_probe.md)
 shows that the prefix is syntactically consumable by `$C1F6F8`, but does not
 replace the missing natural transition evidence.
+Its exact first-record grammar is retained separately in the
+[debugger-prefix decode](c3b4f8_debugger_prefix_decode.md).
 
 The adjacent `$C3B4FE` family is independently associated with the five-triple
 `$C3B588` green-mountain component, including four triangular side records.

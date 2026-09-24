@@ -1,7 +1,10 @@
 ; Byte-exact static descriptor control prefix $C3B4F8-$C3B4FD.
 ; Observed as the +8 field selected from descriptor $C22708 in map-mode
-; traces. C1F6F8 can consume it in a debugger-only probe, but no unmodified
-; sampled map continuation reaches it at the walker; preserve raw fields.
+; traces. A debugger-only C1F6F8 probe proves the first word selects the
+; direct three-workspace-triple route; no unmodified sampled continuation
+; reaches it at the walker, so preserve unresolved field meaning.
                 org     $C3B4F8
 descriptor_control_prefix_c3b4f8:
-                dc.b    $42,$c0,$40,$86,$c0,$14
+                dc.w    $42c0           ; first workspace-triple offset
+                dc.w    $4086           ; direct triple-route control word
+                dc.w    $c014           ; first relative-control offset word
