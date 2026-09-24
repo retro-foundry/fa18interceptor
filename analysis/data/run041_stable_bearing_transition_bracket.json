@@ -1,0 +1,64 @@
+{
+  "classification": "stable_bearing_landmark_detail_transition_bracket_not_distance_threshold",
+  "samples": [
+    {
+      "replay_frame": 5000,
+      "red_pixels": 72,
+      "entry_count": 18,
+      "sources": [
+        "$C35BAA",
+        "$C35BC2",
+        "$C363EC",
+        "$C36954",
+        "$C3A9A8",
+        "$C3AD0E",
+        "$C3AF62",
+        "$C3B0CE",
+        "$C3B720",
+        "$C3B9B2"
+      ],
+      "authority": "build/run041_frame05000_12f_trace/trace.jsonl"
+    },
+    {
+      "replay_frame": 5750,
+      "red_pixels": 166,
+      "entry_count": 11,
+      "sources": [
+        "$C35B80",
+        "$C35BAA",
+        "$C3A96E",
+        "$C3ACD4",
+        "$C3AD0E",
+        "$C3B0CE",
+        "$C3B588"
+      ],
+      "authority": "build/run041_frame05750_matrix_entries/matrix_transform_entries.json"
+    },
+    {
+      "replay_frame": 6000,
+      "red_pixels": 296,
+      "entry_count": 13,
+      "sources": [
+        "$C35B56",
+        "$C35B80",
+        "$C363EC",
+        "$C3ACD4",
+        "$C3B588",
+        "$C3BB50"
+      ],
+      "authority": "build/run041_frame06000_matrix_entries/matrix_transform_entries.json"
+    },
+    {
+      "replay_frame": 6250,
+      "red_pixels": 674,
+      "entry_count": 6,
+      "sources": [
+        "$C35A98",
+        "$C35ADE",
+        "$C3B588"
+      ],
+      "authority": "build/run041_frame06250_12f_trace_retry/trace.jsonl"
+    }
+  ],
+  "qualification": "Run041 keeps the landmark near the viewport centre while it grows. These bounded source samples locate changing renderer input sets, but do not measure physical distance or isolate all camera variables; they are not physical-distance LOD proof."
+}

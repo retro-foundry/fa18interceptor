@@ -104,7 +104,9 @@ python scripts/compare_run042_map_packet_directory.py `
   variant mechanism. It is LOD-style renderer detail, not established
   physical-flight-distance terrain LOD.
 - Run041 proves landmark-associated visual-detail selection at stable Golden
-  Gate bearing, but no selector threshold is tied to measured physical distance.
+  Gate bearing. Its four checkpoints now bracket the mixed source-family change
+  from 72 to 674 red pixels, but no selector threshold is tied to measured
+  physical distance; see `analysis/data/run041_stable_bearing_transition_bracket.md`.
 - Do not call source-count changes, face counts, culling, or line/polygon
   coexistence an LOD scheme without a controlled selector/distance trace.
 

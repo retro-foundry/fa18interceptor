@@ -32,6 +32,13 @@ The terrain-origin policy endpoint is exactly identical across those windows:
 source switch does not coincide with a change in the reconstructed
 terrain-origin selector state.
 
+Two additional replay-preserved no-input samples bracket the transition. At
+frame 5,750 (166 red pixels), `$C1F4AC` has seven distinct sources; at frame
+6,000 (296 pixels), it has six. Both are mixed sets, whereas the frame-6,250
+endpoint has only `$C35A98/$C35ADE/$C3B588`. This narrows the source-family
+change across measured landmark growth but supplies no physical range or
+selector threshold. See the [transition bracket](run041_stable_bearing_transition_bracket.md).
+
 ## Landmark screen-space association
 
 The replay-preserved `$C2FA7E` collection armed at frame 6,250 observes a
