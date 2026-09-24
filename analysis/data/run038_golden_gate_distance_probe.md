@@ -44,6 +44,16 @@ but it coincides with material landmark-bearing motion; it is therefore
 compatible with camera-relative culling/detail and is not distance-only LOD
 evidence.
 
+The reconstructed terrain-origin policy state is identical in the final slow
+RAM snapshots of both 12-frame windows: `$C457B6=6`, `$C458AE=0`,
+`$C458A5=0`, selector origin `$C45C3E/$C45C42/$C45C46 =
+(273955354, 3029, 279186682)`, and smoothed delta
+`$C45C4A/$C45C4E/$C45C52 = (-594, -336, 764)`. Thus the differing transform
+sources are not accompanied by a change in the now-reconstructed
+terrain-origin mode or origin state. This further favours camera-relative
+culling/detail as an explanation for this particular difference, while not
+proving it.
+
 ## Result
 
 Run038 is valid visual evidence that the red landmark appears from the sampled
