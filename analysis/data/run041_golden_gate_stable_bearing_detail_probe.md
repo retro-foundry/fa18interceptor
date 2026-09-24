@@ -42,7 +42,28 @@ have not associated a specific `$C2469E`/`$C24CFE`/`$C2FF48` face with the
 measured viewport rectangle. It is therefore a **detail-selection candidate**,
 not a confirmed LOD level or extracted bridge/terrain mesh.
 
+## Source-bounded primitive comparison
+
+No-input source-bounded collectors from the two saved trace states confirm
+that the changing inputs feed different renderer primitive contexts rather
+than merely being unused transforms:
+
+| View checkpoint / source | Polygons | Lines | Observed static line context |
+| --- | ---: | ---: | --- |
+| frame 5,000 `$C35BAA` | 0 | 1 | `$C3559A` |
+| frame 5,000 `$C35BC2` | 10 | 2 | `$C355D2` (one other mutable/zero context) |
+| frame 5,000 `$C3B720` | 2 | 4 | mutable/zero contexts only |
+| frame 6,250 `$C35A98` | 7 | 2 | `$C355C2` |
+| frame 6,250 `$C35ADE` | 0 | 1 | `$C35590` |
+| frame 6,250 `$C3B588` | 2 | 0 | -- |
+
+This proves a source-bounded primitive-family change at the stable-bearing
+landmark growth. The result is still not an LOD claim: `$C35590/$C355C2` and
+the polygon contexts have not been projected onto, and compared with, the
+exact red viewport pixels.
+
 Authority: sealed `captures/run041`; ignored artifacts
 `build/run041_bridge_keyframes/`, `build/run041_bridge_red.json`,
 `build/run041_frame05000_12f_trace/`, and
-`build/run041_frame06250_12f_trace_retry/`.
+`build/run041_frame06250_12f_trace_retry/`,
+`build/run041_{small,large}_view_matrix_instances/`.
