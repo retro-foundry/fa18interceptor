@@ -110,6 +110,14 @@ current location-sensitive static M-map content comparison, still short of a
 global coordinate or LOD decode. See the
 [run042 packet comparison](data/run042_m_map_packet_comparison.md).
 
+Those eight newly observed headers now have an explicit static join: all are
+nonnegative targets in the byte-decoded wide directory (45 local cells in
+total), and their inline/alternate packet streams complete under the exact
+count/threshold grammar. Run042 takes the inline route at every direct entry;
+the listed alternate streams remain static reachable-format evidence only.
+The cell indices remain local selector indices, not map positions. See the
+[run042 header/directory/grammar join](data/run042_m_map_header_directory_grammar.md).
+
 Authority: [packet path and depth provenance](routines/c2af00_map_static_pair_packet.md),
 [variant comparison](data/run003_run035_map_packet_variant_comparison.md), and
 [raw coordinate visual](plots/run003_run035_map_packet_variants.png).

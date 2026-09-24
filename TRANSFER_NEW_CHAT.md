@@ -80,6 +80,21 @@ physical-distance LOD. Full report:
 The five-run cumulative source-pair coverage is 519 exact pairs:
 `analysis/plots/m_map_packet_source_coverage.png`.
 
+The eight run042-only direct headers now join to 45 nonnegative cells in the
+byte-decoded 32x32 wide directory. Each has a complete inline/alternate
+count-threshold stream decode; the bounded run042 entries all take inline.
+This is selector/grammar provenance only, not a world-position or terrain
+mapping result. Report and reproducible join:
+
+```powershell
+python scripts/compare_run042_map_packet_directory.py `
+  --run042 analysis/data/run042_m_map_polygon_static_packets.json `
+  --run037 analysis/data/run037_m_map_stable_polygon_static_packets.json `
+  --wide-directory analysis/data/wide_m_map_packet_directory.json `
+  --static-streams analysis/data/static_m_map_packet_streams.json `
+  --output analysis/data/run042_m_map_header_directory_grammar.json
+```
+
 ## LOD status
 
 - M-map renderer has a real projection-depth-driven inline/alternate packet
@@ -92,18 +107,16 @@ The five-run cumulative source-pair coverage is 519 exact pairs:
 
 ## Best next work
 
-1. Compare run042's new segment-68 headers with the static wide-directory
-   cells and packet grammar. Promote only header/stream structure, not world
-   positions.
-2. Trace a map scenario that activates a descriptor target other than the six
+1. Trace a map scenario that activates a descriptor target other than the six
    stable streams (`$C35BD2`, `$C35598`, `$C355D0`, `$C36214`, `$C36210`,
    `$C3B6AE`) before associating `$C3B4F8` with a runtime map component.
-3. For physical terrain LOD, keep one landmark/camera bearing stable while
+2. For physical terrain LOD, keep one landmark/camera bearing stable while
    varying range and trace the selector plus immutable family. Existing
    `analysis/data/golden_gate_lod_capture_protocol.md` is the protocol.
 
 ## Recent commits
 
+- `1c835de Join run042 map headers to directory grammar`
 - `de05086 Add run042 map packet source coverage`
 - `3648c51 Compare run042 map packet selection`
 - `d888b05 Separate mountain face family from control prefix`

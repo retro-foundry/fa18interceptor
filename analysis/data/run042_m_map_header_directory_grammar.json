@@ -1,0 +1,744 @@
+{
+  "classification": "run042_new_headers_joined_to_wide_directory_and_static_packet_grammar",
+  "run042_inventory": "analysis/data/run042_m_map_polygon_static_packets.json",
+  "run037_inventory": "analysis/data/run037_m_map_stable_polygon_static_packets.json",
+  "wide_directory": "analysis/data/wide_m_map_packet_directory.json",
+  "static_streams": "analysis/data/static_m_map_packet_streams.json",
+  "headers": [
+    {
+      "header": "$C43D1A",
+      "run042_entry_count": 3,
+      "run042_frames": [
+        34,
+        38,
+        48
+      ],
+      "route_counts": {
+        "inline": 3
+      },
+      "observations": [
+        {
+          "frame": 34,
+          "trace_index": 94878,
+          "route": "inline",
+          "selected_stream": "$C43D1E"
+        },
+        {
+          "frame": 38,
+          "trace_index": 130184,
+          "route": "inline",
+          "selected_stream": "$C43D1E"
+        },
+        {
+          "frame": 48,
+          "trace_index": 227313,
+          "route": "inline",
+          "selected_stream": "$C43D1E"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 18,
+          "y": 17,
+          "table_address": "$C432D0",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 19,
+          "y": 17,
+          "table_address": "$C432D2",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 20,
+          "y": 17,
+          "table_address": "$C432D4",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 21,
+          "y": 17,
+          "table_address": "$C432D6",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 22,
+          "y": 17,
+          "table_address": "$C432D8",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 23,
+          "y": 17,
+          "table_address": "$C432DA",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 24,
+          "y": 17,
+          "table_address": "$C432DC",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 25,
+          "y": 17,
+          "table_address": "$C432DE",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 26,
+          "y": 17,
+          "table_address": "$C432E0",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 27,
+          "y": 17,
+          "table_address": "$C432E2",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 28,
+          "y": 17,
+          "table_address": "$C432E4",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 29,
+          "y": 17,
+          "table_address": "$C432E6",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 30,
+          "y": 17,
+          "table_address": "$C432E8",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 31,
+          "y": 17,
+          "table_address": "$C432EA",
+          "relative_offset": 3758,
+          "target": "$C43D1A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43D1E",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C43D1E",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 1,
+          "pairs": 4,
+          "terminator": "$C43D30"
+        }
+      ]
+    },
+    {
+      "header": "$C43FD0",
+      "run042_entry_count": 2,
+      "run042_frames": [
+        32,
+        46
+      ],
+      "route_counts": {
+        "inline": 2
+      },
+      "observations": [
+        {
+          "frame": 32,
+          "trace_index": 75689,
+          "route": "inline",
+          "selected_stream": "$C43FD4"
+        },
+        {
+          "frame": 46,
+          "trace_index": 207982,
+          "route": "inline",
+          "selected_stream": "$C43FD4"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 18,
+          "y": 18,
+          "table_address": "$C43310",
+          "relative_offset": 4452,
+          "target": "$C43FD0",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C43FD4",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C43FD4",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 3,
+          "pairs": 28,
+          "terminator": "$C4404A"
+        }
+      ]
+    },
+    {
+      "header": "$C4404C",
+      "run042_entry_count": 1,
+      "run042_frames": [
+        37
+      ],
+      "route_counts": {
+        "inline": 1
+      },
+      "observations": [
+        {
+          "frame": 37,
+          "trace_index": 121855,
+          "route": "inline",
+          "selected_stream": "$C44050"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 19,
+          "y": 18,
+          "table_address": "$C43312",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 20,
+          "y": 18,
+          "table_address": "$C43314",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 21,
+          "y": 18,
+          "table_address": "$C43316",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 22,
+          "y": 18,
+          "table_address": "$C43318",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 23,
+          "y": 18,
+          "table_address": "$C4331A",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 24,
+          "y": 18,
+          "table_address": "$C4331C",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 25,
+          "y": 18,
+          "table_address": "$C4331E",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 26,
+          "y": 18,
+          "table_address": "$C43320",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 27,
+          "y": 18,
+          "table_address": "$C43322",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 28,
+          "y": 18,
+          "table_address": "$C43324",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 29,
+          "y": 18,
+          "table_address": "$C43326",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 30,
+          "y": 18,
+          "table_address": "$C43328",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 31,
+          "y": 18,
+          "table_address": "$C4332A",
+          "relative_offset": 4576,
+          "target": "$C4404C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44050",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C44050",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 1,
+          "pairs": 4,
+          "terminator": "$C44062"
+        }
+      ]
+    },
+    {
+      "header": "$C440BC",
+      "run042_entry_count": 2,
+      "run042_frames": [
+        31,
+        44
+      ],
+      "route_counts": {
+        "inline": 2
+      },
+      "observations": [
+        {
+          "frame": 31,
+          "trace_index": 64157,
+          "route": "inline",
+          "selected_stream": "$C440C0"
+        },
+        {
+          "frame": 44,
+          "trace_index": 195954,
+          "route": "inline",
+          "selected_stream": "$C440C0"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 18,
+          "y": 19,
+          "table_address": "$C43350",
+          "relative_offset": 4688,
+          "target": "$C440BC",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C440C0",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C440C0",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 5,
+          "pairs": 37,
+          "terminator": "$C4415E"
+        }
+      ]
+    },
+    {
+      "header": "$C44160",
+      "run042_entry_count": 1,
+      "run042_frames": [
+        36
+      ],
+      "route_counts": {
+        "inline": 1
+      },
+      "observations": [
+        {
+          "frame": 36,
+          "trace_index": 117676,
+          "route": "inline",
+          "selected_stream": "$C44164"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 19,
+          "y": 19,
+          "table_address": "$C43352",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 20,
+          "y": 19,
+          "table_address": "$C43354",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 21,
+          "y": 19,
+          "table_address": "$C43356",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 22,
+          "y": 19,
+          "table_address": "$C43358",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 23,
+          "y": 19,
+          "table_address": "$C4335A",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 24,
+          "y": 19,
+          "table_address": "$C4335C",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 25,
+          "y": 19,
+          "table_address": "$C4335E",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 26,
+          "y": 19,
+          "table_address": "$C43360",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 27,
+          "y": 19,
+          "table_address": "$C43362",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 28,
+          "y": 19,
+          "table_address": "$C43364",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 29,
+          "y": 19,
+          "table_address": "$C43366",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 30,
+          "y": 19,
+          "table_address": "$C43368",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        },
+        {
+          "x": 31,
+          "y": 19,
+          "table_address": "$C4336A",
+          "relative_offset": 4852,
+          "target": "$C44160",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44164",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C44164",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 1,
+          "pairs": 4,
+          "terminator": "$C44176"
+        }
+      ]
+    },
+    {
+      "header": "$C4417A",
+      "run042_entry_count": 1,
+      "run042_frames": [
+        36
+      ],
+      "route_counts": {
+        "inline": 1
+      },
+      "observations": [
+        {
+          "frame": 36,
+          "trace_index": 115626,
+          "route": "inline",
+          "selected_stream": "$C4417E"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 15,
+          "y": 20,
+          "table_address": "$C4338A",
+          "relative_offset": 4878,
+          "target": "$C4417A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C4417E",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C4417E",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 3,
+          "pairs": 33,
+          "terminator": "$C44208"
+        }
+      ]
+    },
+    {
+      "header": "$C4420C",
+      "run042_entry_count": 1,
+      "run042_frames": [
+        36
+      ],
+      "route_counts": {
+        "inline": 1
+      },
+      "observations": [
+        {
+          "frame": 36,
+          "trace_index": 113816,
+          "route": "inline",
+          "selected_stream": "$C44210"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 18,
+          "y": 20,
+          "table_address": "$C43390",
+          "relative_offset": 5024,
+          "target": "$C4420C",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C44210",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C44210",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 2,
+          "pairs": 13,
+          "terminator": "$C44248"
+        }
+      ]
+    },
+    {
+      "header": "$C4424A",
+      "run042_entry_count": 1,
+      "run042_frames": [
+        36
+      ],
+      "route_counts": {
+        "inline": 1
+      },
+      "observations": [
+        {
+          "frame": 36,
+          "trace_index": 112082,
+          "route": "inline",
+          "selected_stream": "$C4424E"
+        }
+      ],
+      "wide_cells": [
+        {
+          "x": 19,
+          "y": 20,
+          "table_address": "$C43392",
+          "relative_offset": 5086,
+          "target": "$C4424A",
+          "target_first_word": "$00C4",
+          "target_first_longword": "$00C4424E",
+          "classification": "nonnegative_target_word"
+        }
+      ],
+      "streams": [
+        {
+          "start": "$C4424E",
+          "roles": [
+            "alternate",
+            "inline"
+          ],
+          "batches": 1,
+          "pairs": 13,
+          "terminator": "$C44284"
+        }
+      ]
+    }
+  ],
+  "qualification": "Header selection, directory-cell provenance, and packet grammar are proven within their stated authorities. Local directory indices and signed packet pairs have no promoted world-position, terrain, coastline, or physical-distance LOD meaning."
+}
