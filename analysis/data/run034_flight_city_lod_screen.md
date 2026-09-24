@@ -51,6 +51,23 @@ flight path. They do **not** establish LOD: distance, world position, heading,
 and culling all change between checkpoints, and no traced selector has tied a
 measured distance to a replacement mesh/face family.
 
+## Grey-city overlay lead
+
+The user's visual observation that grey city shapes can lie flat over the
+ground is compatible with the established flat placement layer, but it does
+not identify a static source by itself. A no-input trace bounded from the city
+checkpoint's `$C36410` matrix entry reaches the next `$C1F4AC` entry after 708
+instructions without entering `$C2469E`, `$C2FF48`, `$C212B0`, or `$C2FA7E`.
+The existing source-bounded collectors independently record zero polygons and
+zero lines for `$C36410`; `$C35BAA` likewise records zero direct primitives in
+its interval. Consequently neither is assigned to the visible grey city
+overlay. They remain renderer input/control candidates only.
+
+The next city-specific test is to correlate the grey raster with a projected
+primitive or span submission, then trace that primitive back to its static
+source and placement record. That will distinguish a flat city footprint from
+a co-visible 3D building/landmark component.
+
 ## Result
 
 run034 is a valid and materially better LOD/map investigation capture: it
