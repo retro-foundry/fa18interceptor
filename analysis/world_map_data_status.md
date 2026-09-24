@@ -131,6 +131,12 @@ renderer-output views are in
 The face's controller remains mutable/unresolved, so this is supporting local
 3D evidence rather than a new terrain-mesh export or a grey-city attribution.
 
+Run037 independently joins a sampled static template pair through an X/0/Z
+placement and `$C3B6A6/$C3B6AE` control stream to repeated `$C3B6B0` polygon
+and line submissions. It confirms the same flat-placement/3D-shape layering
+from the renderer-control side; see the
+[placement-to-face-context join](data/run037_c3b6a6_placement_to_face_context.md).
+
 Consequently, a map export must retain all three stored components until a
 producer-to-consumer trace proves which components encode global placement and
 which (if any) encode elevation.
