@@ -33,6 +33,8 @@ ITEMS = (
     ("Unidentified external-scene family: C38F98", "external_scene_c38f98_preclip_face_sheet.png"),
     ("Compact polyhedral family: C3A94C/C3A94E (6 pre-cull faces)",
      "frame12600_c3a94e_preclip_face_sheet.png"),
+    ("Near terrain source C363EC: one source-bounded five-vertex face",
+     "run034_c363ec_interval_face_sheet.png"),
 )
 
 
