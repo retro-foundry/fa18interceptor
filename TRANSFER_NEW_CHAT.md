@@ -15,7 +15,7 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   python scripts/verify_reconstructions.py
   ```
 
-  Last checked result: 628 source slices / 51,016 bytes match the authority
+  Last checked result: 629 source slices / 51,102 bytes match the authority
   snapshot.
 
 - The source frontier in Hunk 8 now includes the independently returning
@@ -26,7 +26,10 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   behaviour is assigned. The `$C1D0A4-$C1D0B5` alternate helper entry is also
   reconstructed: its static selector-index arm starts from `$C48184`, then
   joins `$C1D0C6`; this must not be conflated with the runtime scan's `$C46184`
-  base. The next adjacent helper boundary is `$C1D0B6`.
+  base. `$C1D0B6-$C1D10B` is now a complete runtime-observed helper: it uses
+  the `$C46184` indexed fields with selector-derived shifts, changes `D2/D4`,
+  writes `$C45B3C`, sets `$C458BB`, and returns. Field and record ownership
+  remain structural. Continue at its adjacent `$C1D10C` boundary.
 
 ## Current map result
 
