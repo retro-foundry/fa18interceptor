@@ -46,8 +46,8 @@ polygon workspace produced while processing `$C35A98`. This joins one member
 of the close-window `$C1F4AC` source set to the measured Golden Gate raster.
 It is an edge emitted from a polygon workspace, not proof that the complete
 filled polygon is visible or a reconstruction of an immutable bridge mesh.
-The leading immutable input pairs, within the four-triple `$C35A98` and
-eight-triple `$C35ADE` direct-input runs, are exported separately in the
+The complete immutable four-triple `$C35A98` and eight-triple `$C35ADE`
+direct-input runs are exported separately in the
 [close-landmark component report](c35a98_c35ade_close_landmark_component.md).
 
 At the small-window checkpoint, `$C35BAA` and `$C35BC2` independently submit

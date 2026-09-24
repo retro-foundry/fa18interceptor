@@ -4,22 +4,22 @@ Classification: **trace-proven local immutable input pairs with
 landmark-associated close-window output**.
 
 In the sealed run041 close window, `$C1F4AC` enters independently at
-`$C35A98` and `$C35ADE`. The first `$C1F524` loop observation advances `A1`
-by six bytes, proving the leading pairs below. The transform loop's internal
-back-edge is `$C1F528`, so the one observed `$C1F524` entry must **not** be
-mistaken for the complete count. The preceding packet count bytes are `$04`
-and `$08`, giving four and eight directly transformed triples respectively:
+`$C35A98` and `$C35ADE`. The transform loop's internal back-edge is
+`$C1F528`, so its `$C1F524` entry alone does not delimit a packet. The
+preceding packet count bytes are `$04` and `$08`; decoding exactly that many
+big-endian signed-word triples gives the complete direct-input runs below:
 
-| Leading range | Leading immutable triples | Complete direct-input run | Bounded output |
+| Direct range | Immutable triples | Bounded output |
 | --- | --- | --- |
-| `$C35A98-$C35AA3` | `(112,440,3168)`, `(0,440,3168)` | `$C35A98-$C35AAF` (four triples) | seven polygon submissions and two `$C355C2` line lists |
-| `$C35ADE-$C35AE9` | `(112,440,-3168)`, `(0,440,-3168)` | `$C35ADE-$C35B0D` (eight triples) | one `$C35590` line list |
+| `$C35A98-$C35AAF` | `(112,440,3168)`, `(0,440,3168)`, `(0,0,-3744)`, `(0,0,0)` | seven polygon submissions and two `$C355C2` line lists |
+| `$C35ADE-$C35B0D` | `(112,440,-3168)`, `(0,440,-3168)`, `(0,0,3744)`, `(0,0,0)`, `(0,384,-1824)`, `(0,256,1184)`, `(0,1088,0)`, `(0,608,-1824)` | one `$C35590` line list |
 
-The two leading triples in each pair have the same Y and Z values, differing
-only in X. Their opposite Z signs make the leading pairs a mirrored local input
-arrangement; they do **not** establish map axes, world coordinates, or an
-elevation model. The remaining directly transformed triples are deliberately
-not exported here: the trace proves their count, but not their local topology.
+The first two triples in each run have the same Y and Z values, differing only
+in X. Their opposite Z signs make those leading pairs a mirrored local input
+arrangement. Several remaining triples have nonzero local Y, so the data does
+not support the stronger claim that every local component is two-dimensional.
+It still does **not** establish map axes, world coordinates, an elevation
+model, or face connectivity.
 
 `$C35A98` is the close-window member with direct raster evidence. Its bounded
 renderer interval produces polygon workspace `$C4BFA6`; the replay-preserved
