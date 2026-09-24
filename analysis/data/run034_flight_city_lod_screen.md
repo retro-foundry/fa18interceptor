@@ -68,6 +68,15 @@ primitive or span submission, then trace that primitive back to its static
 source and placement record. That will distinguish a flat city footprint from
 a co-visible 3D building/landmark component.
 
+An initial replay-preserved `$C2FF48` census armed at frame 8,000 records four
+finalized polygon tuples. One has static `A5=$C3B6B0`; the other three have
+`$FFFFFFF4` or `$FFFFFFE8` mutable/negative contexts. Their stored screen-pair
+bounds are respectively `x=109..133,y=79..100`, `x=18..31,y=51..69`,
+`x=0..20,y=41..51`, and `x=28..260,y=69..179`. The tuples are useful
+screen-space leads, but they are not a grey-city attribution: debugger
+single-stepping advances subsequent host frames, the recorded workspaces are
+mutable, and no tuple has yet been compared against an exact grey raster mask.
+
 ## Result
 
 run034 is a valid and materially better LOD/map investigation capture: it
