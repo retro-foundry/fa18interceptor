@@ -95,6 +95,20 @@ spatial correlation, not source or object ownership: the context is mutable,
 and the trace does not prove the final bitplane colour written by the line.
 The ignored authority is `build/run034_frame08000_normal_trace/trace.jsonl`.
 
+The `$FFFFFFE8` line list at `$C455C2` is not its same-frame producer: an
+all-source write watchpoint misses from replay frame 7,900 through 8,001, and
+also misses when armed at frame 1 through 8,001. It therefore predates the
+sealed run034 initial state or is populated outside observable CPU/DMA write
+traffic. This rules out locating the city source merely by tracing its final
+frame-8,000 submission backwards through that workspace.
+
+Separately, the source-bounded near interval for immutable `$C363EC` enters
+`$C2469E` and reaches `$C24D60 -> $C2FF48 -> $C301F6`, with `$C4B390` as the
+mutable projected-polygon workspace. That establishes a 3D terrain/landmark
+component feeding filled geometry in this view, but has no demonstrated link
+to either grey raster region or to `$FFFFFFE8`; it must not be relabelled as
+the city overlay.
+
 ## Result
 
 run034 is a valid and materially better LOD/map investigation capture: it
