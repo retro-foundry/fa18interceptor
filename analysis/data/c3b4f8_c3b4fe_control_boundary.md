@@ -13,6 +13,11 @@ $C3B4F8  42 C0 40 86 C0 14
 $C3B4FE  44 80 00 86 C0 14 ...
 ```
 
+It is preserved byte-exactly as
+[`descriptor_control_prefix_c3b4f8.asm`](../../source_amiga/observed/descriptor_control_prefix_c3b4f8.asm);
+the individual fields remain raw because their parser meaning is not yet
+scenario-proven.
+
 Thus `$C3B4F8` is a six-byte prefix immediately preceding `$C3B4FE`; it is
 not the start of the `$C3B4FE` byte sequence. Run037 now proves that it is a
 live descriptor `+8` value: `$C1CC70` reads it from `$C22708`. Before the next
