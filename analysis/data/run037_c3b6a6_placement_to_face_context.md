@@ -11,9 +11,12 @@ emits its descriptor-qualified cache tuple as `(368, 0, -144)`, with
 descriptor `$C224D0` and descriptor `+8` target `$C3B6A6`.
 
 At the live `$C1F6F8` control-stream entry, that target resolves to stream
-`$C3B6AE`. A 3,000-instruction bounded trace from that entry reaches three
-`$C2FF48` submissions at trace indices 513, 1,205, and 2,171, each with
-`A5=$C3B6B0`; it also reaches `$C2FA7E` at index 554 with the same context.
+`$C3B6AE`. A 6,000-instruction bounded trace from that entry reaches four
+`$C2FF48` submissions at trace indices 513, 1,205, 2,171, and 3,077, each
+with `A5=$C3B6B0`; it also reaches `$C2FA7E` at index 554 with the same
+context. No further `$C2FF48`, `$C212B0`, or `$C2FA7E` entry occurs before
+the 6,000-instruction bound. This is the complete observed polygon/line batch
+for this control-stream pass.
 The established `$C3B720 -> $C3B6B0` component boundary provides the separate
 immutable local-triple and face-topology authority for that context.
 
@@ -30,5 +33,5 @@ exact draw. It proves the descriptor target's renderer context; the local 3D
 component association remains grounded in its separate bounded authority.
 
 Authority: `analysis/data/workspace_template_copies_run037_m_map_template_to_placement_3f.md`,
-`build/run037_c3b6ae_control_trace/selected_stream_trace.jsonl`, and
+`build/run037_c3b6ae_control_trace_6000/selected_stream_trace.jsonl`, and
 `analysis/data/c3b720_c3b6b0_static_component_boundary.md`.
