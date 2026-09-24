@@ -178,6 +178,14 @@ with the bearing change, so it is not distance-only evidence. It is retained
 as an auditable negative distance-only probe, not LOD evidence. See the
 [run038 distance probe](data/run038_golden_gate_distance_probe.md).
 
+Run041 supplies the first stable-bearing counterpart: as the centred red
+Golden Gate landmark expands from 72 pixels at frame 5,000 to 674 at 6,250,
+the `$C1F4AC` inputs change from ten source blocks to three disjoint blocks,
+while the reconstructed terrain-origin mode and origin triple remain exactly
+unchanged. This is strong **view/range-correlated detail-selection candidate**
+evidence, but does not prove LOD until a submitted face is correlated with the
+red viewport pixels. See the [run041 stable-bearing probe](data/run041_golden_gate_stable_bearing_detail_probe.md).
+
 The earlier leading primitive-selection hypothesis was **distant line lists
 followed by nearer filled polygons**, rather than a replacement mesh. Run036
 does not establish it: at its largest controlled red Golden Gate span, the
