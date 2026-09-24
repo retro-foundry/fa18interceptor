@@ -1,0 +1,7543 @@
+{
+  "scope": "completed C2AF9C/C2AF9E transform batches in the bounded map-page trace",
+  "trace": "build\\run042_m_map_transition_trace\\trace.jsonl",
+  "slow": "build\\run042_m_map_transition_trace\\slow.bin",
+  "source_segment": 68,
+  "source_range": "$C42CA8-$C444F7",
+  "direct_packet_entries": 57,
+  "packet_stream_selection": {
+    "inline": 57,
+    "alternate": 0
+  },
+  "packet_streams": [
+    {
+      "frame": 25,
+      "trace_index": 4262,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "d7": 0,
+      "selected_stream": "$C43B1E",
+      "route": "inline"
+    },
+    {
+      "frame": 25,
+      "trace_index": 4725,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "d7": 0,
+      "selected_stream": "$C43B1E",
+      "route": "inline"
+    },
+    {
+      "frame": 25,
+      "trace_index": 5188,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "d7": 0,
+      "selected_stream": "$C43B1E",
+      "route": "inline"
+    },
+    {
+      "frame": 25,
+      "trace_index": 5651,
+      "header": "$C43A78",
+      "inline_stream": "$C43A7C",
+      "alternate_stream": "$C43AF0",
+      "d7": 0,
+      "selected_stream": "$C43A7C",
+      "route": "inline"
+    },
+    {
+      "frame": 25,
+      "trace_index": 7992,
+      "header": "$C439E8",
+      "inline_stream": "$C439EC",
+      "alternate_stream": "$C43A44",
+      "d7": 0,
+      "selected_stream": "$C439EC",
+      "route": "inline"
+    },
+    {
+      "frame": 29,
+      "trace_index": 48040,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 29,
+      "trace_index": 48407,
+      "header": "$C42E3E",
+      "inline_stream": "$C42E42",
+      "alternate_stream": "$C42E42",
+      "d7": 0,
+      "selected_stream": "$C42E42",
+      "route": "inline"
+    },
+    {
+      "frame": 29,
+      "trace_index": 48765,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 29,
+      "trace_index": 49445,
+      "header": "$C42D28",
+      "inline_stream": "$C42D2C",
+      "alternate_stream": "$C42D2C",
+      "d7": 0,
+      "selected_stream": "$C42D2C",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 59885,
+      "header": "$C42DFC",
+      "inline_stream": "$C42E00",
+      "alternate_stream": "$C42E00",
+      "d7": 0,
+      "selected_stream": "$C42E00",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 60316,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 60775,
+      "header": "$C42E1A",
+      "inline_stream": "$C42E1E",
+      "alternate_stream": "$C42E1E",
+      "d7": 0,
+      "selected_stream": "$C42E1E",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 61468,
+      "header": "$C42DC4",
+      "inline_stream": "$C42DC8",
+      "alternate_stream": "$C42DC8",
+      "d7": 0,
+      "selected_stream": "$C42DC8",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 62689,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 63148,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 63607,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 31,
+      "trace_index": 64157,
+      "header": "$C440BC",
+      "inline_stream": "$C440C0",
+      "alternate_stream": "$C440C0",
+      "d7": 0,
+      "selected_stream": "$C440C0",
+      "route": "inline"
+    },
+    {
+      "frame": 32,
+      "trace_index": 74283,
+      "header": "$C4409E",
+      "inline_stream": "$C440A2",
+      "alternate_stream": "$C440A2",
+      "d7": 0,
+      "selected_stream": "$C440A2",
+      "route": "inline"
+    },
+    {
+      "frame": 32,
+      "trace_index": 75689,
+      "header": "$C43FD0",
+      "inline_stream": "$C43FD4",
+      "alternate_stream": "$C43FD4",
+      "d7": 0,
+      "selected_stream": "$C43FD4",
+      "route": "inline"
+    },
+    {
+      "frame": 33,
+      "trace_index": 83411,
+      "header": "$C43F5E",
+      "inline_stream": "$C43F62",
+      "alternate_stream": "$C43FAE",
+      "d7": 0,
+      "selected_stream": "$C43F62",
+      "route": "inline"
+    },
+    {
+      "frame": 33,
+      "trace_index": 87844,
+      "header": "$C43ECA",
+      "inline_stream": "$C43ECE",
+      "alternate_stream": "$C43F3A",
+      "d7": 0,
+      "selected_stream": "$C43ECE",
+      "route": "inline"
+    },
+    {
+      "frame": 34,
+      "trace_index": 94878,
+      "header": "$C43D1A",
+      "inline_stream": "$C43D1E",
+      "alternate_stream": "$C43D1E",
+      "d7": 0,
+      "selected_stream": "$C43D1E",
+      "route": "inline"
+    },
+    {
+      "frame": 34,
+      "trace_index": 96145,
+      "header": "$C43CBE",
+      "inline_stream": "$C43CC2",
+      "alternate_stream": "$C43CFA",
+      "d7": 0,
+      "selected_stream": "$C43CC2",
+      "route": "inline"
+    },
+    {
+      "frame": 35,
+      "trace_index": 100033,
+      "header": "$C43BAC",
+      "inline_stream": "$C43BB0",
+      "alternate_stream": "$C43C70",
+      "d7": 0,
+      "selected_stream": "$C43BB0",
+      "route": "inline"
+    },
+    {
+      "frame": 36,
+      "trace_index": 112082,
+      "header": "$C4424A",
+      "inline_stream": "$C4424E",
+      "alternate_stream": "$C4424E",
+      "d7": 0,
+      "selected_stream": "$C4424E",
+      "route": "inline"
+    },
+    {
+      "frame": 36,
+      "trace_index": 113816,
+      "header": "$C4420C",
+      "inline_stream": "$C44210",
+      "alternate_stream": "$C44210",
+      "d7": 0,
+      "selected_stream": "$C44210",
+      "route": "inline"
+    },
+    {
+      "frame": 36,
+      "trace_index": 115626,
+      "header": "$C4417A",
+      "inline_stream": "$C4417E",
+      "alternate_stream": "$C4417E",
+      "d7": 0,
+      "selected_stream": "$C4417E",
+      "route": "inline"
+    },
+    {
+      "frame": 36,
+      "trace_index": 117676,
+      "header": "$C44160",
+      "inline_stream": "$C44164",
+      "alternate_stream": "$C44164",
+      "d7": 0,
+      "selected_stream": "$C44164",
+      "route": "inline"
+    },
+    {
+      "frame": 36,
+      "trace_index": 118976,
+      "header": "$C4407C",
+      "inline_stream": "$C44080",
+      "alternate_stream": "$C44080",
+      "d7": 0,
+      "selected_stream": "$C44080",
+      "route": "inline"
+    },
+    {
+      "frame": 37,
+      "trace_index": 121855,
+      "header": "$C4404C",
+      "inline_stream": "$C44050",
+      "alternate_stream": "$C44050",
+      "d7": 0,
+      "selected_stream": "$C44050",
+      "route": "inline"
+    },
+    {
+      "frame": 37,
+      "trace_index": 123170,
+      "header": "$C43E24",
+      "inline_stream": "$C43E28",
+      "alternate_stream": "$C43E9A",
+      "d7": 0,
+      "selected_stream": "$C43E28",
+      "route": "inline"
+    },
+    {
+      "frame": 38,
+      "trace_index": 130184,
+      "header": "$C43D1A",
+      "inline_stream": "$C43D1E",
+      "alternate_stream": "$C43D1E",
+      "d7": 0,
+      "selected_stream": "$C43D1E",
+      "route": "inline"
+    },
+    {
+      "frame": 38,
+      "trace_index": 131525,
+      "header": "$C43B34",
+      "inline_stream": "$C43B38",
+      "alternate_stream": "$C43B94",
+      "d7": 0,
+      "selected_stream": "$C43B38",
+      "route": "inline"
+    },
+    {
+      "frame": 38,
+      "trace_index": 135461,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "d7": 0,
+      "selected_stream": "$C43B1E",
+      "route": "inline"
+    },
+    {
+      "frame": 38,
+      "trace_index": 135924,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "d7": 0,
+      "selected_stream": "$C43B1E",
+      "route": "inline"
+    },
+    {
+      "frame": 38,
+      "trace_index": 136387,
+      "header": "$C43B1A",
+      "inline_stream": "$C43B1E",
+      "alternate_stream": "$C43B1E",
+      "d7": 0,
+      "selected_stream": "$C43B1E",
+      "route": "inline"
+    },
+    {
+      "frame": 38,
+      "trace_index": 136850,
+      "header": "$C43A78",
+      "inline_stream": "$C43A7C",
+      "alternate_stream": "$C43AF0",
+      "d7": 0,
+      "selected_stream": "$C43A7C",
+      "route": "inline"
+    },
+    {
+      "frame": 38,
+      "trace_index": 139191,
+      "header": "$C439E8",
+      "inline_stream": "$C439EC",
+      "alternate_stream": "$C43A44",
+      "d7": 0,
+      "selected_stream": "$C439EC",
+      "route": "inline"
+    },
+    {
+      "frame": 42,
+      "trace_index": 179863,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 42,
+      "trace_index": 180230,
+      "header": "$C42E3E",
+      "inline_stream": "$C42E42",
+      "alternate_stream": "$C42E42",
+      "d7": 0,
+      "selected_stream": "$C42E42",
+      "route": "inline"
+    },
+    {
+      "frame": 42,
+      "trace_index": 180588,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 43,
+      "trace_index": 181764,
+      "header": "$C42D28",
+      "inline_stream": "$C42D2C",
+      "alternate_stream": "$C42D2C",
+      "d7": 0,
+      "selected_stream": "$C42D2C",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 191682,
+      "header": "$C42DFC",
+      "inline_stream": "$C42E00",
+      "alternate_stream": "$C42E00",
+      "d7": 0,
+      "selected_stream": "$C42E00",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 192113,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 192572,
+      "header": "$C42E1A",
+      "inline_stream": "$C42E1E",
+      "alternate_stream": "$C42E1E",
+      "d7": 0,
+      "selected_stream": "$C42E1E",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 193265,
+      "header": "$C42DC4",
+      "inline_stream": "$C42DC8",
+      "alternate_stream": "$C42DC8",
+      "d7": 0,
+      "selected_stream": "$C42DC8",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 194486,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 194945,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 195404,
+      "header": "$C42E52",
+      "inline_stream": "$C42E56",
+      "alternate_stream": "$C42E56",
+      "d7": 0,
+      "selected_stream": "$C42E56",
+      "route": "inline"
+    },
+    {
+      "frame": 44,
+      "trace_index": 195954,
+      "header": "$C440BC",
+      "inline_stream": "$C440C0",
+      "alternate_stream": "$C440C0",
+      "d7": 0,
+      "selected_stream": "$C440C0",
+      "route": "inline"
+    },
+    {
+      "frame": 45,
+      "trace_index": 206079,
+      "header": "$C4409E",
+      "inline_stream": "$C440A2",
+      "alternate_stream": "$C440A2",
+      "d7": 0,
+      "selected_stream": "$C440A2",
+      "route": "inline"
+    },
+    {
+      "frame": 46,
+      "trace_index": 207982,
+      "header": "$C43FD0",
+      "inline_stream": "$C43FD4",
+      "alternate_stream": "$C43FD4",
+      "d7": 0,
+      "selected_stream": "$C43FD4",
+      "route": "inline"
+    },
+    {
+      "frame": 46,
+      "trace_index": 215356,
+      "header": "$C43F5E",
+      "inline_stream": "$C43F62",
+      "alternate_stream": "$C43FAE",
+      "d7": 0,
+      "selected_stream": "$C43F62",
+      "route": "inline"
+    },
+    {
+      "frame": 47,
+      "trace_index": 220282,
+      "header": "$C43ECA",
+      "inline_stream": "$C43ECE",
+      "alternate_stream": "$C43F3A",
+      "d7": 0,
+      "selected_stream": "$C43ECE",
+      "route": "inline"
+    },
+    {
+      "frame": 48,
+      "trace_index": 227313,
+      "header": "$C43D1A",
+      "inline_stream": "$C43D1E",
+      "alternate_stream": "$C43D1E",
+      "d7": 0,
+      "selected_stream": "$C43D1E",
+      "route": "inline"
+    },
+    {
+      "frame": 48,
+      "trace_index": 228580,
+      "header": "$C43CBE",
+      "inline_stream": "$C43CC2",
+      "alternate_stream": "$C43CFA",
+      "d7": 0,
+      "selected_stream": "$C43CC2",
+      "route": "inline"
+    },
+    {
+      "frame": 48,
+      "trace_index": 232006,
+      "header": "$C43BAC",
+      "inline_stream": "$C43BB0",
+      "alternate_stream": "$C43C70",
+      "d7": 0,
+      "selected_stream": "$C43BB0",
+      "route": "inline"
+    }
+  ],
+  "transform_batches": 110,
+  "consumed_pairs": 749,
+  "batches": [
+    {
+      "trace_index": 637,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43B42",
+          "xy": [
+            3200,
+            1296
+          ]
+        },
+        {
+          "address": "$C43B46",
+          "xy": [
+            2928,
+            976
+          ]
+        },
+        {
+          "address": "$C43B4A",
+          "xy": [
+            3008,
+            864
+          ]
+        },
+        {
+          "address": "$C43B4E",
+          "xy": [
+            3520,
+            1072
+          ]
+        },
+        {
+          "address": "$C43B52",
+          "xy": [
+            3808,
+            864
+          ]
+        },
+        {
+          "address": "$C43B56",
+          "xy": [
+            4224,
+            896
+          ]
+        }
+      ],
+      "first_pair": "$C43B42",
+      "last_pair": "$C43B56",
+      "display_stage_return": "$C43B5A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 2652,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43B5C",
+          "xy": [
+            4160,
+            928
+          ]
+        },
+        {
+          "address": "$C43B60",
+          "xy": [
+            3712,
+            928
+          ]
+        },
+        {
+          "address": "$C43B64",
+          "xy": [
+            3376,
+            560
+          ]
+        },
+        {
+          "address": "$C43B68",
+          "xy": [
+            3456,
+            576
+          ]
+        },
+        {
+          "address": "$C43B6C",
+          "xy": [
+            3488,
+            528
+          ]
+        },
+        {
+          "address": "$C43B70",
+          "xy": [
+            3056,
+            176
+          ]
+        },
+        {
+          "address": "$C43B74",
+          "xy": [
+            3024,
+            0
+          ]
+        },
+        {
+          "address": "$C43B78",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B5C",
+      "last_pair": "$C43B78",
+      "display_stage_return": "$C43B7C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 3928,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43B7E",
+          "xy": [
+            3056,
+            176
+          ]
+        },
+        {
+          "address": "$C43B82",
+          "xy": [
+            2992,
+            240
+          ]
+        },
+        {
+          "address": "$C43B86",
+          "xy": [
+            2992,
+            384
+          ]
+        },
+        {
+          "address": "$C43B8A",
+          "xy": [
+            2608,
+            0
+          ]
+        },
+        {
+          "address": "$C43B8E",
+          "xy": [
+            3056,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B7E",
+      "last_pair": "$C43B8E",
+      "display_stage_return": "$C43B92",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 4434,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": "$C43B1A",
+      "first_longword": "$00C43B1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43B2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
+      "display_stage_return": "$C43B30",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 4897,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": "$C43B1A",
+      "first_longword": "$00C43B1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43B2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
+      "display_stage_return": "$C43B30",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 5360,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": "$C43B1A",
+      "first_longword": "$00C43B1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43B2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
+      "display_stage_return": "$C43B30",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 5998,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": "$C43A78",
+      "first_longword": "$00C43AF0",
+      "following_words": [
+        "$0009",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43A7E",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43A82",
+          "xy": [
+            2960,
+            4096
+          ]
+        },
+        {
+          "address": "$C43A86",
+          "xy": [
+            3072,
+            2432
+          ]
+        },
+        {
+          "address": "$C43A8A",
+          "xy": [
+            3296,
+            2432
+          ]
+        },
+        {
+          "address": "$C43A8E",
+          "xy": [
+            3328,
+            1376
+          ]
+        },
+        {
+          "address": "$C43A92",
+          "xy": [
+            2960,
+            640
+          ]
+        },
+        {
+          "address": "$C43A96",
+          "xy": [
+            2688,
+            800
+          ]
+        },
+        {
+          "address": "$C43A9A",
+          "xy": [
+            2240,
+            0
+          ]
+        },
+        {
+          "address": "$C43A9E",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43A7E",
+      "last_pair": "$C43A9E",
+      "display_stage_return": "$C43AA2",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 6742,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43AA4",
+          "xy": [
+            1408,
+            4192
+          ]
+        },
+        {
+          "address": "$C43AA8",
+          "xy": [
+            1296,
+            3792
+          ]
+        },
+        {
+          "address": "$C43AAC",
+          "xy": [
+            1504,
+            3712
+          ]
+        },
+        {
+          "address": "$C43AB0",
+          "xy": [
+            1280,
+            3648
+          ]
+        },
+        {
+          "address": "$C43AB4",
+          "xy": [
+            1312,
+            3392
+          ]
+        },
+        {
+          "address": "$C43AB8",
+          "xy": [
+            1488,
+            3360
+          ]
+        },
+        {
+          "address": "$C43ABC",
+          "xy": [
+            1280,
+            3072
+          ]
+        },
+        {
+          "address": "$C43AC0",
+          "xy": [
+            976,
+            2960
+          ]
+        },
+        {
+          "address": "$C43AC4",
+          "xy": [
+            0,
+            4096
+          ]
+        }
+      ],
+      "first_pair": "$C43AA4",
+      "last_pair": "$C43AC4",
+      "display_stage_return": "$C43AC8",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 7486,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43ACA",
+          "xy": [
+            1040,
+            3088
+          ]
+        },
+        {
+          "address": "$C43ACE",
+          "xy": [
+            1136,
+            2880
+          ]
+        },
+        {
+          "address": "$C43AD2",
+          "xy": [
+            960,
+            2768
+          ]
+        },
+        {
+          "address": "$C43AD6",
+          "xy": [
+            1024,
+            2672
+          ]
+        },
+        {
+          "address": "$C43ADA",
+          "xy": [
+            1216,
+            2752
+          ]
+        },
+        {
+          "address": "$C43ADE",
+          "xy": [
+            1280,
+            2608
+          ]
+        },
+        {
+          "address": "$C43AE2",
+          "xy": [
+            1024,
+            2368
+          ]
+        },
+        {
+          "address": "$C43AE6",
+          "xy": [
+            0,
+            2048
+          ]
+        },
+        {
+          "address": "$C43AEA",
+          "xy": [
+            0,
+            4096
+          ]
+        }
+      ],
+      "first_pair": "$C43ACA",
+      "last_pair": "$C43AEA",
+      "display_stage_return": "$C43AEE",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 8269,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": "$C439E8",
+      "first_longword": "$00C43A44",
+      "following_words": [
+        "$0007",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C439EE",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C439F2",
+          "xy": [
+            2608,
+            4096
+          ]
+        },
+        {
+          "address": "$C439F6",
+          "xy": [
+            2128,
+            2240
+          ]
+        },
+        {
+          "address": "$C439FA",
+          "xy": [
+            2752,
+            1440
+          ]
+        },
+        {
+          "address": "$C439FE",
+          "xy": [
+            3072,
+            1440
+          ]
+        },
+        {
+          "address": "$C43A02",
+          "xy": [
+            3520,
+            1856
+          ]
+        },
+        {
+          "address": "$C43A06",
+          "xy": [
+            4096,
+            2048
+          ]
+        }
+      ],
+      "first_pair": "$C439EE",
+      "last_pair": "$C43A06",
+      "display_stage_return": "$C43A0A",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 8787,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43A0C",
+          "xy": [
+            2128,
+            2240
+          ]
+        },
+        {
+          "address": "$C43A10",
+          "xy": [
+            1552,
+            784
+          ]
+        },
+        {
+          "address": "$C43A14",
+          "xy": [
+            1728,
+            624
+          ]
+        },
+        {
+          "address": "$C43A18",
+          "xy": [
+            2848,
+            1216
+          ]
+        },
+        {
+          "address": "$C43A1C",
+          "xy": [
+            2944,
+            1536
+          ]
+        }
+      ],
+      "first_pair": "$C43A0C",
+      "last_pair": "$C43A1C",
+      "display_stage_return": "$C43A20",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 9324,
+      "frame": 25,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43A22",
+          "xy": [
+            1808,
+            720
+          ]
+        },
+        {
+          "address": "$C43A26",
+          "xy": [
+            1552,
+            784
+          ]
+        },
+        {
+          "address": "$C43A2A",
+          "xy": [
+            800,
+            672
+          ]
+        },
+        {
+          "address": "$C43A2E",
+          "xy": [
+            704,
+            128
+          ]
+        },
+        {
+          "address": "$C43A32",
+          "xy": [
+            0,
+            192
+          ]
+        },
+        {
+          "address": "$C43A36",
+          "xy": [
+            64,
+            64
+          ]
+        },
+        {
+          "address": "$C43A3A",
+          "xy": [
+            448,
+            0
+          ]
+        },
+        {
+          "address": "$C43A3E",
+          "xy": [
+            1408,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43A22",
+      "last_pair": "$C43A3E",
+      "display_stage_return": "$C43A42",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 48209,
+      "frame": 29,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 48541,
+      "frame": 29,
+      "source_segment": 68,
+      "packet": "$C42E3E",
+      "first_longword": "$00C42E42",
+      "following_words": [
+        "$0003",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E44",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E48",
+          "xy": [
+            1600,
+            0
+          ]
+        },
+        {
+          "address": "$C42E4C",
+          "xy": [
+            4096,
+            -256
+          ]
+        }
+      ],
+      "first_pair": "$C42E44",
+      "last_pair": "$C42E4C",
+      "display_stage_return": "$C42E50",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 48934,
+      "frame": 29,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 50460,
+      "frame": 30,
+      "source_segment": 68,
+      "packet": "$C42D28",
+      "first_longword": "$00C42D2C",
+      "following_words": [
+        "$000E",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42D2E",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42D32",
+          "xy": [
+            1600,
+            4096
+          ]
+        },
+        {
+          "address": "$C42D36",
+          "xy": [
+            1536,
+            2432
+          ]
+        },
+        {
+          "address": "$C42D3A",
+          "xy": [
+            1280,
+            1664
+          ]
+        },
+        {
+          "address": "$C42D3E",
+          "xy": [
+            768,
+            1088
+          ]
+        },
+        {
+          "address": "$C42D42",
+          "xy": [
+            600,
+            768
+          ]
+        },
+        {
+          "address": "$C42D46",
+          "xy": [
+            664,
+            592
+          ]
+        },
+        {
+          "address": "$C42D4A",
+          "xy": [
+            592,
+            592
+          ]
+        },
+        {
+          "address": "$C42D4E",
+          "xy": [
+            584,
+            640
+          ]
+        },
+        {
+          "address": "$C42D52",
+          "xy": [
+            216,
+            384
+          ]
+        },
+        {
+          "address": "$C42D56",
+          "xy": [
+            192,
+            256
+          ]
+        },
+        {
+          "address": "$C42D5A",
+          "xy": [
+            224,
+            80
+          ]
+        },
+        {
+          "address": "$C42D5E",
+          "xy": [
+            160,
+            0
+          ]
+        },
+        {
+          "address": "$C42D62",
+          "xy": [
+            4096,
+            -256
+          ]
+        }
+      ],
+      "first_pair": "$C42D2E",
+      "last_pair": "$C42D62",
+      "display_stage_return": "$C42D66",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 54271,
+      "frame": 30,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D6A",
+          "xy": [
+            80,
+            384
+          ]
+        },
+        {
+          "address": "$C42D6E",
+          "xy": [
+            -96,
+            232
+          ]
+        },
+        {
+          "address": "$C42D72",
+          "xy": [
+            -144,
+            56
+          ]
+        },
+        {
+          "address": "$C42D76",
+          "xy": [
+            72,
+            200
+          ]
+        }
+      ],
+      "first_pair": "$C42D6A",
+      "last_pair": "$C42D76",
+      "display_stage_return": "$C42D7A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 55254,
+      "frame": 30,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D7E",
+          "xy": [
+            96,
+            768
+          ]
+        },
+        {
+          "address": "$C42D82",
+          "xy": [
+            176,
+            628
+          ]
+        },
+        {
+          "address": "$C42D86",
+          "xy": [
+            96,
+            568
+          ]
+        },
+        {
+          "address": "$C42D8A",
+          "xy": [
+            -16,
+            664
+          ]
+        }
+      ],
+      "first_pair": "$C42D7E",
+      "last_pair": "$C42D8A",
+      "display_stage_return": "$C42D8E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 57046,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D92",
+          "xy": [
+            224,
+            384
+          ]
+        },
+        {
+          "address": "$C42D96",
+          "xy": [
+            160,
+            408
+          ]
+        },
+        {
+          "address": "$C42D9A",
+          "xy": [
+            112,
+            496
+          ]
+        },
+        {
+          "address": "$C42D9E",
+          "xy": [
+            40,
+            480
+          ]
+        },
+        {
+          "address": "$C42DA2",
+          "xy": [
+            48,
+            344
+          ]
+        },
+        {
+          "address": "$C42DA6",
+          "xy": [
+            112,
+            408
+          ]
+        },
+        {
+          "address": "$C42DAA",
+          "xy": [
+            232,
+            368
+          ]
+        }
+      ],
+      "first_pair": "$C42D92",
+      "last_pair": "$C42DAA",
+      "display_stage_return": "$C42DAE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 58820,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42DB2",
+          "xy": [
+            136,
+            600
+          ]
+        },
+        {
+          "address": "$C42DB6",
+          "xy": [
+            192,
+            536
+          ]
+        },
+        {
+          "address": "$C42DBA",
+          "xy": [
+            128,
+            472
+          ]
+        },
+        {
+          "address": "$C42DBE",
+          "xy": [
+            88,
+            512
+          ]
+        }
+      ],
+      "first_pair": "$C42DB2",
+      "last_pair": "$C42DBE",
+      "display_stage_return": "$C42DC2",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 60098,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C42DFC",
+      "first_longword": "$00C42E00",
+      "following_words": [
+        "$8400",
+        "$0005"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E04",
+          "xy": [
+            4071,
+            1356
+          ]
+        },
+        {
+          "address": "$C42E08",
+          "xy": [
+            4004,
+            1217
+          ]
+        },
+        {
+          "address": "$C42E0C",
+          "xy": [
+            4020,
+            1190
+          ]
+        },
+        {
+          "address": "$C42E10",
+          "xy": [
+            4040,
+            1259
+          ]
+        },
+        {
+          "address": "$C42E14",
+          "xy": [
+            4088,
+            1308
+          ]
+        }
+      ],
+      "first_pair": "$C42E04",
+      "last_pair": "$C42E14",
+      "display_stage_return": "$C42E18",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 60485,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 61049,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C42E1A",
+      "first_longword": "$00C42E1E",
+      "following_words": [
+        "$0007",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E20",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E24",
+          "xy": [
+            160,
+            4096
+          ]
+        },
+        {
+          "address": "$C42E28",
+          "xy": [
+            112,
+            3976
+          ]
+        },
+        {
+          "address": "$C42E2C",
+          "xy": [
+            136,
+            3840
+          ]
+        },
+        {
+          "address": "$C42E30",
+          "xy": [
+            0,
+            3640
+          ]
+        },
+        {
+          "address": "$C42E34",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E38",
+          "xy": [
+            4096,
+            -256
+          ]
+        }
+      ],
+      "first_pair": "$C42E20",
+      "last_pair": "$C42E38",
+      "display_stage_return": "$C42E3C",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 61917,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C42DC4",
+      "first_longword": "$00C42DC8",
+      "following_words": [
+        "$000C",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42DCA",
+          "xy": [
+            4096,
+            3640
+          ]
+        },
+        {
+          "address": "$C42DCE",
+          "xy": [
+            3920,
+            3488
+          ]
+        },
+        {
+          "address": "$C42DD2",
+          "xy": [
+            3760,
+            3536
+          ]
+        },
+        {
+          "address": "$C42DD6",
+          "xy": [
+            3664,
+            3360
+          ]
+        },
+        {
+          "address": "$C42DDA",
+          "xy": [
+            3728,
+            3160
+          ]
+        },
+        {
+          "address": "$C42DDE",
+          "xy": [
+            3792,
+            3192
+          ]
+        },
+        {
+          "address": "$C42DE2",
+          "xy": [
+            3840,
+            3104
+          ]
+        },
+        {
+          "address": "$C42DE6",
+          "xy": [
+            3760,
+            2752
+          ]
+        },
+        {
+          "address": "$C42DEA",
+          "xy": [
+            2944,
+            1792
+          ]
+        },
+        {
+          "address": "$C42DEE",
+          "xy": [
+            2880,
+            1280
+          ]
+        },
+        {
+          "address": "$C42DF2",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42DF6",
+          "xy": [
+            4352,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42DCA",
+      "last_pair": "$C42DF6",
+      "display_stage_return": "$C42DFA",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 62858,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 63317,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 63776,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 64434,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": "$C440BC",
+      "first_longword": "$00C440C0",
+      "following_words": [
+        "$0007",
+        "$0A10"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C440C2",
+          "xy": [
+            2576,
+            3520
+          ]
+        },
+        {
+          "address": "$C440C6",
+          "xy": [
+            2224,
+            3152
+          ]
+        },
+        {
+          "address": "$C440CA",
+          "xy": [
+            2432,
+            3152
+          ]
+        },
+        {
+          "address": "$C440CE",
+          "xy": [
+            2528,
+            3008
+          ]
+        },
+        {
+          "address": "$C440D2",
+          "xy": [
+            2432,
+            2944
+          ]
+        },
+        {
+          "address": "$C440D6",
+          "xy": [
+            2496,
+            2896
+          ]
+        },
+        {
+          "address": "$C440DA",
+          "xy": [
+            2640,
+            3072
+          ]
+        }
+      ],
+      "first_pair": "$C440C2",
+      "last_pair": "$C440DA",
+      "display_stage_return": "$C440DE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 66352,
+      "frame": 31,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C440E0",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C440E4",
+          "xy": [
+            2816,
+            4096
+          ]
+        },
+        {
+          "address": "$C440E8",
+          "xy": [
+            2736,
+            3632
+          ]
+        },
+        {
+          "address": "$C440EC",
+          "xy": [
+            2864,
+            3264
+          ]
+        },
+        {
+          "address": "$C440F0",
+          "xy": [
+            2624,
+            2848
+          ]
+        },
+        {
+          "address": "$C440F4",
+          "xy": [
+            2496,
+            2896
+          ]
+        },
+        {
+          "address": "$C440F8",
+          "xy": [
+            1536,
+            1472
+          ]
+        },
+        {
+          "address": "$C440FC",
+          "xy": [
+            1344,
+            736
+          ]
+        },
+        {
+          "address": "$C44100",
+          "xy": [
+            1104,
+            256
+          ]
+        },
+        {
+          "address": "$C44104",
+          "xy": [
+            1152,
+            0
+          ]
+        },
+        {
+          "address": "$C44108",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C440E0",
+      "last_pair": "$C44108",
+      "display_stage_return": "$C4410C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 69578,
+      "frame": 32,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4410E",
+          "xy": [
+            2496,
+            2992
+          ]
+        },
+        {
+          "address": "$C44112",
+          "xy": [
+            2432,
+            3104
+          ]
+        },
+        {
+          "address": "$C44116",
+          "xy": [
+            2240,
+            3104
+          ]
+        },
+        {
+          "address": "$C4411A",
+          "xy": [
+            1840,
+            2816
+          ]
+        },
+        {
+          "address": "$C4411E",
+          "xy": [
+            1360,
+            1888
+          ]
+        },
+        {
+          "address": "$C44122",
+          "xy": [
+            1440,
+            1664
+          ]
+        },
+        {
+          "address": "$C44126",
+          "xy": [
+            1856,
+            1824
+          ]
+        },
+        {
+          "address": "$C4412A",
+          "xy": [
+            2496,
+            2896
+          ]
+        }
+      ],
+      "first_pair": "$C4410E",
+      "last_pair": "$C4412A",
+      "display_stage_return": "$C4412E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 71522,
+      "frame": 32,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C44130",
+          "xy": [
+            1632,
+            1760
+          ]
+        },
+        {
+          "address": "$C44134",
+          "xy": [
+            1440,
+            1648
+          ]
+        },
+        {
+          "address": "$C44138",
+          "xy": [
+            1200,
+            1664
+          ]
+        },
+        {
+          "address": "$C4413C",
+          "xy": [
+            1184,
+            1360
+          ]
+        },
+        {
+          "address": "$C44140",
+          "xy": [
+            864,
+            1232
+          ]
+        },
+        {
+          "address": "$C44144",
+          "xy": [
+            1056,
+            1088
+          ]
+        }
+      ],
+      "first_pair": "$C44130",
+      "last_pair": "$C44144",
+      "display_stage_return": "$C44148",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 73032,
+      "frame": 32,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4414A",
+          "xy": [
+            1056,
+            1088
+          ]
+        },
+        {
+          "address": "$C4414E",
+          "xy": [
+            736,
+            1424
+          ]
+        },
+        {
+          "address": "$C44152",
+          "xy": [
+            672,
+            896
+          ]
+        },
+        {
+          "address": "$C44156",
+          "xy": [
+            48,
+            0
+          ]
+        },
+        {
+          "address": "$C4415A",
+          "xy": [
+            384,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C4414A",
+      "last_pair": "$C4415A",
+      "display_stage_return": "$C4415E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 74490,
+      "frame": 32,
+      "source_segment": 68,
+      "packet": "$C4409E",
+      "first_longword": "$00C440A2",
+      "following_words": [
+        "$0005",
+        "$0000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C440A4",
+          "xy": [
+            0,
+            672
+          ]
+        },
+        {
+          "address": "$C440A8",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C440AC",
+          "xy": [
+            112,
+            160
+          ]
+        },
+        {
+          "address": "$C440B0",
+          "xy": [
+            80,
+            464
+          ]
+        },
+        {
+          "address": "$C440B4",
+          "xy": [
+            448,
+            688
+          ]
+        }
+      ],
+      "first_pair": "$C440A4",
+      "last_pair": "$C440B4",
+      "display_stage_return": "$C440B8",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 76176,
+      "frame": 32,
+      "source_segment": 68,
+      "packet": "$C43FD0",
+      "first_longword": "$00C43FD4",
+      "following_words": [
+        "$000D",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43FD6",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43FDA",
+          "xy": [
+            1152,
+            4096
+          ]
+        },
+        {
+          "address": "$C43FDE",
+          "xy": [
+            2016,
+            1664
+          ]
+        },
+        {
+          "address": "$C43FE2",
+          "xy": [
+            2176,
+            1584
+          ]
+        },
+        {
+          "address": "$C43FE6",
+          "xy": [
+            2128,
+            1472
+          ]
+        },
+        {
+          "address": "$C43FEA",
+          "xy": [
+            1328,
+            1392
+          ]
+        },
+        {
+          "address": "$C43FEE",
+          "xy": [
+            1664,
+            1616
+          ]
+        },
+        {
+          "address": "$C43FF2",
+          "xy": [
+            1296,
+            2080
+          ]
+        },
+        {
+          "address": "$C43FF6",
+          "xy": [
+            992,
+            2128
+          ]
+        },
+        {
+          "address": "$C43FFA",
+          "xy": [
+            832,
+            2048
+          ]
+        },
+        {
+          "address": "$C43FFE",
+          "xy": [
+            0,
+            1920
+          ]
+        },
+        {
+          "address": "$C44002",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C44006",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43FD6",
+      "last_pair": "$C44006",
+      "display_stage_return": "$C4400A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 79929,
+      "frame": 33,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4400C",
+          "xy": [
+            832,
+            3328
+          ]
+        },
+        {
+          "address": "$C44010",
+          "xy": [
+            896,
+            2688
+          ]
+        },
+        {
+          "address": "$C44014",
+          "xy": [
+            640,
+            2848
+          ]
+        },
+        {
+          "address": "$C44018",
+          "xy": [
+            896,
+            2176
+          ]
+        },
+        {
+          "address": "$C4401C",
+          "xy": [
+            640,
+            2160
+          ]
+        },
+        {
+          "address": "$C44020",
+          "xy": [
+            576,
+            2464
+          ]
+        },
+        {
+          "address": "$C44024",
+          "xy": [
+            560,
+            2160
+          ]
+        },
+        {
+          "address": "$C44028",
+          "xy": [
+            288,
+            2096
+          ]
+        },
+        {
+          "address": "$C4402C",
+          "xy": [
+            976,
+            2112
+          ]
+        },
+        {
+          "address": "$C44030",
+          "xy": [
+            1280,
+            2640
+          ]
+        },
+        {
+          "address": "$C44034",
+          "xy": [
+            1072,
+            2656
+          ]
+        }
+      ],
+      "first_pair": "$C4400C",
+      "last_pair": "$C44034",
+      "display_stage_return": "$C44038",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 82342,
+      "frame": 33,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4403A",
+          "xy": [
+            384,
+            4128
+          ]
+        },
+        {
+          "address": "$C4403E",
+          "xy": [
+            128,
+            4096
+          ]
+        },
+        {
+          "address": "$C44042",
+          "xy": [
+            0,
+            3888
+          ]
+        },
+        {
+          "address": "$C44046",
+          "xy": [
+            0,
+            3648
+          ]
+        }
+      ],
+      "first_pair": "$C4403A",
+      "last_pair": "$C44046",
+      "display_stage_return": "$C4404A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 83653,
+      "frame": 33,
+      "source_segment": 68,
+      "packet": "$C43F5E",
+      "first_longword": "$00C43FAE",
+      "following_words": [
+        "$0006",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43F64",
+          "xy": [
+            4096,
+            1920
+          ]
+        },
+        {
+          "address": "$C43F68",
+          "xy": [
+            3040,
+            1088
+          ]
+        },
+        {
+          "address": "$C43F6C",
+          "xy": [
+            2800,
+            512
+          ]
+        },
+        {
+          "address": "$C43F70",
+          "xy": [
+            2176,
+            144
+          ]
+        },
+        {
+          "address": "$C43F74",
+          "xy": [
+            2144,
+            0
+          ]
+        },
+        {
+          "address": "$C43F78",
+          "xy": [
+            4160,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43F64",
+      "last_pair": "$C43F78",
+      "display_stage_return": "$C43F7C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 85092,
+      "frame": 33,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43F7E",
+          "xy": [
+            1632,
+            320
+          ]
+        },
+        {
+          "address": "$C43F82",
+          "xy": [
+            1232,
+            0
+          ]
+        },
+        {
+          "address": "$C43F86",
+          "xy": [
+            1536,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43F7E",
+      "last_pair": "$C43F86",
+      "display_stage_return": "$C43F8A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 86096,
+      "frame": 33,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43F8C",
+          "xy": [
+            4128,
+            3904
+          ]
+        },
+        {
+          "address": "$C43F90",
+          "xy": [
+            3968,
+            3632
+          ]
+        },
+        {
+          "address": "$C43F94",
+          "xy": [
+            3856,
+            3632
+          ]
+        },
+        {
+          "address": "$C43F98",
+          "xy": [
+            3872,
+            3488
+          ]
+        },
+        {
+          "address": "$C43F9C",
+          "xy": [
+            3744,
+            3504
+          ]
+        },
+        {
+          "address": "$C43FA0",
+          "xy": [
+            3488,
+            3136
+          ]
+        },
+        {
+          "address": "$C43FA4",
+          "xy": [
+            3552,
+            2912
+          ]
+        },
+        {
+          "address": "$C43FA8",
+          "xy": [
+            4096,
+            3648
+          ]
+        }
+      ],
+      "first_pair": "$C43F8C",
+      "last_pair": "$C43FA8",
+      "display_stage_return": "$C43FAC",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 88191,
+      "frame": 33,
+      "source_segment": 68,
+      "packet": "$C43ECA",
+      "first_longword": "$00C43F3A",
+      "following_words": [
+        "$0009",
+        "$0890"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43ED0",
+          "xy": [
+            2192,
+            1296
+          ]
+        },
+        {
+          "address": "$C43ED4",
+          "xy": [
+            2336,
+            1136
+          ]
+        },
+        {
+          "address": "$C43ED8",
+          "xy": [
+            2480,
+            1200
+          ]
+        },
+        {
+          "address": "$C43EDC",
+          "xy": [
+            2816,
+            848
+          ]
+        },
+        {
+          "address": "$C43EE0",
+          "xy": [
+            2688,
+            512
+          ]
+        },
+        {
+          "address": "$C43EE4",
+          "xy": [
+            3136,
+            448
+          ]
+        },
+        {
+          "address": "$C43EE8",
+          "xy": [
+            2640,
+            0
+          ]
+        },
+        {
+          "address": "$C43EEC",
+          "xy": [
+            1408,
+            0
+          ]
+        },
+        {
+          "address": "$C43EF0",
+          "xy": [
+            1712,
+            288
+          ]
+        }
+      ],
+      "first_pair": "$C43ED0",
+      "last_pair": "$C43EF0",
+      "display_stage_return": "$C43EF4",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 90934,
+      "frame": 34,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43EF6",
+          "xy": [
+            2720,
+            2816
+          ]
+        },
+        {
+          "address": "$C43EFA",
+          "xy": [
+            1088,
+            1856
+          ]
+        },
+        {
+          "address": "$C43EFE",
+          "xy": [
+            976,
+            1264
+          ]
+        },
+        {
+          "address": "$C43F02",
+          "xy": [
+            1504,
+            896
+          ]
+        },
+        {
+          "address": "$C43F06",
+          "xy": [
+            1328,
+            512
+          ]
+        },
+        {
+          "address": "$C43F0A",
+          "xy": [
+            1712,
+            768
+          ]
+        },
+        {
+          "address": "$C43F0E",
+          "xy": [
+            2080,
+            912
+          ]
+        },
+        {
+          "address": "$C43F12",
+          "xy": [
+            2192,
+            1296
+          ]
+        },
+        {
+          "address": "$C43F16",
+          "xy": [
+            2944,
+            2048
+          ]
+        }
+      ],
+      "first_pair": "$C43EF6",
+      "last_pair": "$C43F16",
+      "display_stage_return": "$C43F1A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 93177,
+      "frame": 34,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43F1C",
+          "xy": [
+            1536,
+            4160
+          ]
+        },
+        {
+          "address": "$C43F20",
+          "xy": [
+            0,
+            3136
+          ]
+        },
+        {
+          "address": "$C43F24",
+          "xy": [
+            0,
+            1792
+          ]
+        },
+        {
+          "address": "$C43F28",
+          "xy": [
+            768,
+            1536
+          ]
+        },
+        {
+          "address": "$C43F2C",
+          "xy": [
+            2720,
+            2816
+          ]
+        },
+        {
+          "address": "$C43F30",
+          "xy": [
+            2816,
+            3392
+          ]
+        },
+        {
+          "address": "$C43F34",
+          "xy": [
+            2160,
+            3552
+          ]
+        }
+      ],
+      "first_pair": "$C43F1C",
+      "last_pair": "$C43F34",
+      "display_stage_return": "$C43F38",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 95050,
+      "frame": 34,
+      "source_segment": 68,
+      "packet": "$C43D1A",
+      "first_longword": "$00C43D1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43D20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43D2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43D20",
+      "last_pair": "$C43D2C",
+      "display_stage_return": "$C43D30",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 96632,
+      "frame": 34,
+      "source_segment": 68,
+      "packet": "$C43CBE",
+      "first_longword": "$00C43CFA",
+      "following_words": [
+        "$000D",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43CC4",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43CC8",
+          "xy": [
+            2144,
+            4096
+          ]
+        },
+        {
+          "address": "$C43CCC",
+          "xy": [
+            2128,
+            4016
+          ]
+        },
+        {
+          "address": "$C43CD0",
+          "xy": [
+            1680,
+            3792
+          ]
+        },
+        {
+          "address": "$C43CD4",
+          "xy": [
+            1488,
+            3968
+          ]
+        },
+        {
+          "address": "$C43CD8",
+          "xy": [
+            1536,
+            4096
+          ]
+        },
+        {
+          "address": "$C43CDC",
+          "xy": [
+            1232,
+            4096
+          ]
+        },
+        {
+          "address": "$C43CE0",
+          "xy": [
+            976,
+            3888
+          ]
+        },
+        {
+          "address": "$C43CE4",
+          "xy": [
+            1408,
+            3968
+          ]
+        },
+        {
+          "address": "$C43CE8",
+          "xy": [
+            912,
+            3776
+          ]
+        },
+        {
+          "address": "$C43CEC",
+          "xy": [
+            0,
+            3072
+          ]
+        },
+        {
+          "address": "$C43CF0",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43CF4",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43CC4",
+      "last_pair": "$C43CF4",
+      "display_stage_return": "$C43CF8",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 100310,
+      "frame": 35,
+      "source_segment": 68,
+      "packet": "$C43BAC",
+      "first_longword": "$00C43C70",
+      "following_words": [
+        "$0007",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43BB2",
+          "xy": [
+            4096,
+            3072
+          ]
+        },
+        {
+          "address": "$C43BB6",
+          "xy": [
+            3424,
+            2304
+          ]
+        },
+        {
+          "address": "$C43BBA",
+          "xy": [
+            2512,
+            2496
+          ]
+        },
+        {
+          "address": "$C43BBE",
+          "xy": [
+            2752,
+            1728
+          ]
+        },
+        {
+          "address": "$C43BC2",
+          "xy": [
+            3200,
+            1664
+          ]
+        },
+        {
+          "address": "$C43BC6",
+          "xy": [
+            2960,
+            0
+          ]
+        },
+        {
+          "address": "$C43BCA",
+          "xy": [
+            4288,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43BB2",
+      "last_pair": "$C43BCA",
+      "display_stage_return": "$C43BCE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 102271,
+      "frame": 35,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43BD0",
+          "xy": [
+            3024,
+            3712
+          ]
+        },
+        {
+          "address": "$C43BD4",
+          "xy": [
+            2432,
+            3264
+          ]
+        },
+        {
+          "address": "$C43BD8",
+          "xy": [
+            2112,
+            3456
+          ]
+        },
+        {
+          "address": "$C43BDC",
+          "xy": [
+            1440,
+            1792
+          ]
+        },
+        {
+          "address": "$C43BE0",
+          "xy": [
+            2688,
+            2112
+          ]
+        },
+        {
+          "address": "$C43BE4",
+          "xy": [
+            2656,
+            2464
+          ]
+        },
+        {
+          "address": "$C43BE8",
+          "xy": [
+            2592,
+            2608
+          ]
+        },
+        {
+          "address": "$C43BEC",
+          "xy": [
+            2688,
+            3008
+          ]
+        },
+        {
+          "address": "$C43BF0",
+          "xy": [
+            3280,
+            3472
+          ]
+        },
+        {
+          "address": "$C43BF4",
+          "xy": [
+            2944,
+            3392
+          ]
+        }
+      ],
+      "first_pair": "$C43BD0",
+      "last_pair": "$C43BF4",
+      "display_stage_return": "$C43BF8",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 104844,
+      "frame": 35,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43BFA",
+          "xy": [
+            2912,
+            4288
+          ]
+        },
+        {
+          "address": "$C43BFE",
+          "xy": [
+            1408,
+            4096
+          ]
+        },
+        {
+          "address": "$C43C02",
+          "xy": [
+            1520,
+            3888
+          ]
+        },
+        {
+          "address": "$C43C06",
+          "xy": [
+            640,
+            3968
+          ]
+        },
+        {
+          "address": "$C43C0A",
+          "xy": [
+            336,
+            3616
+          ]
+        },
+        {
+          "address": "$C43C0E",
+          "xy": [
+            544,
+            3552
+          ]
+        },
+        {
+          "address": "$C43C12",
+          "xy": [
+            288,
+            3248
+          ]
+        },
+        {
+          "address": "$C43C16",
+          "xy": [
+            512,
+            3328
+          ]
+        },
+        {
+          "address": "$C43C1A",
+          "xy": [
+            2048,
+            3376
+          ]
+        },
+        {
+          "address": "$C43C1E",
+          "xy": [
+            2672,
+            3888
+          ]
+        },
+        {
+          "address": "$C43C22",
+          "xy": [
+            2608,
+            4000
+          ]
+        }
+      ],
+      "first_pair": "$C43BFA",
+      "last_pair": "$C43C22",
+      "display_stage_return": "$C43C26",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 107591,
+      "frame": 35,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43C28",
+          "xy": [
+            2112,
+            3456
+          ]
+        },
+        {
+          "address": "$C43C2C",
+          "xy": [
+            512,
+            3328
+          ]
+        },
+        {
+          "address": "$C43C30",
+          "xy": [
+            400,
+            3024
+          ]
+        },
+        {
+          "address": "$C43C34",
+          "xy": [
+            256,
+            3152
+          ]
+        },
+        {
+          "address": "$C43C38",
+          "xy": [
+            128,
+            2512
+          ]
+        },
+        {
+          "address": "$C43C3C",
+          "xy": [
+            592,
+            2400
+          ]
+        },
+        {
+          "address": "$C43C40",
+          "xy": [
+            592,
+            2336
+          ]
+        },
+        {
+          "address": "$C43C44",
+          "xy": [
+            320,
+            2336
+          ]
+        },
+        {
+          "address": "$C43C48",
+          "xy": [
+            1280,
+            1728
+          ]
+        },
+        {
+          "address": "$C43C4C",
+          "xy": [
+            1920,
+            2240
+          ]
+        }
+      ],
+      "first_pair": "$C43C28",
+      "last_pair": "$C43C4C",
+      "display_stage_return": "$C43C50",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 110467,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43C52",
+          "xy": [
+            1408,
+            1856
+          ]
+        },
+        {
+          "address": "$C43C56",
+          "xy": [
+            768,
+            2080
+          ]
+        },
+        {
+          "address": "$C43C5A",
+          "xy": [
+            528,
+            2096
+          ]
+        },
+        {
+          "address": "$C43C5E",
+          "xy": [
+            608,
+            1648
+          ]
+        },
+        {
+          "address": "$C43C62",
+          "xy": [
+            0,
+            1424
+          ]
+        },
+        {
+          "address": "$C43C66",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43C6A",
+          "xy": [
+            1472,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43C52",
+      "last_pair": "$C43C6A",
+      "display_stage_return": "$C43C6E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 112569,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": "$C4424A",
+      "first_longword": "$00C4424E",
+      "following_words": [
+        "$000D",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C44250",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C44254",
+          "xy": [
+            2496,
+            4096
+          ]
+        },
+        {
+          "address": "$C44258",
+          "xy": [
+            2288,
+            3856
+          ]
+        },
+        {
+          "address": "$C4425C",
+          "xy": [
+            2384,
+            3728
+          ]
+        },
+        {
+          "address": "$C44260",
+          "xy": [
+            2304,
+            3584
+          ]
+        },
+        {
+          "address": "$C44264",
+          "xy": [
+            1904,
+            3424
+          ]
+        },
+        {
+          "address": "$C44268",
+          "xy": [
+            1920,
+            3296
+          ]
+        },
+        {
+          "address": "$C4426C",
+          "xy": [
+            1408,
+            2944
+          ]
+        },
+        {
+          "address": "$C44270",
+          "xy": [
+            1168,
+            2576
+          ]
+        },
+        {
+          "address": "$C44274",
+          "xy": [
+            960,
+            2576
+          ]
+        },
+        {
+          "address": "$C44278",
+          "xy": [
+            0,
+            1984
+          ]
+        },
+        {
+          "address": "$C4427C",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C44280",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C44250",
+      "last_pair": "$C44280",
+      "display_stage_return": "$C44284",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 114128,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": "$C4420C",
+      "first_longword": "$00C44210",
+      "following_words": [
+        "$0008",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C44212",
+          "xy": [
+            4096,
+            1984
+          ]
+        },
+        {
+          "address": "$C44216",
+          "xy": [
+            3744,
+            1568
+          ]
+        },
+        {
+          "address": "$C4421A",
+          "xy": [
+            3376,
+            1488
+          ]
+        },
+        {
+          "address": "$C4421E",
+          "xy": [
+            3296,
+            1344
+          ]
+        },
+        {
+          "address": "$C44222",
+          "xy": [
+            3312,
+            1168
+          ]
+        },
+        {
+          "address": "$C44226",
+          "xy": [
+            3504,
+            1392
+          ]
+        },
+        {
+          "address": "$C4422A",
+          "xy": [
+            3584,
+            1280
+          ]
+        },
+        {
+          "address": "$C4422E",
+          "xy": [
+            4160,
+            1248
+          ]
+        }
+      ],
+      "first_pair": "$C44212",
+      "last_pair": "$C4422E",
+      "display_stage_return": "$C44232",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 114505,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C44234",
+          "xy": [
+            4160,
+            1344
+          ]
+        },
+        {
+          "address": "$C44238",
+          "xy": [
+            3584,
+            1280
+          ]
+        },
+        {
+          "address": "$C4423C",
+          "xy": [
+            3504,
+            1296
+          ]
+        },
+        {
+          "address": "$C44240",
+          "xy": [
+            2816,
+            0
+          ]
+        },
+        {
+          "address": "$C44244",
+          "xy": [
+            4096,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C44234",
+      "last_pair": "$C44244",
+      "display_stage_return": "$C44248",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 115973,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": "$C4417A",
+      "first_longword": "$00C4417E",
+      "following_words": [
+        "$0009",
+        "$0E90"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C44180",
+          "xy": [
+            3728,
+            4160
+          ]
+        },
+        {
+          "address": "$C44184",
+          "xy": [
+            2976,
+            4096
+          ]
+        },
+        {
+          "address": "$C44188",
+          "xy": [
+            2560,
+            3392
+          ]
+        },
+        {
+          "address": "$C4418C",
+          "xy": [
+            2720,
+            3024
+          ]
+        },
+        {
+          "address": "$C44190",
+          "xy": [
+            3216,
+            3264
+          ]
+        },
+        {
+          "address": "$C44194",
+          "xy": [
+            3328,
+            3648
+          ]
+        },
+        {
+          "address": "$C44198",
+          "xy": [
+            3248,
+            3696
+          ]
+        },
+        {
+          "address": "$C4419C",
+          "xy": [
+            3328,
+            3728
+          ]
+        },
+        {
+          "address": "$C441A0",
+          "xy": [
+            3456,
+            3664
+          ]
+        }
+      ],
+      "first_pair": "$C44180",
+      "last_pair": "$C441A0",
+      "display_stage_return": "$C441A4",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 116615,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C441A6",
+          "xy": [
+            3216,
+            3168
+          ]
+        },
+        {
+          "address": "$C441AA",
+          "xy": [
+            2496,
+            3216
+          ]
+        },
+        {
+          "address": "$C441AE",
+          "xy": [
+            2240,
+            3072
+          ]
+        },
+        {
+          "address": "$C441B2",
+          "xy": [
+            2192,
+            2752
+          ]
+        },
+        {
+          "address": "$C441B6",
+          "xy": [
+            2304,
+            2688
+          ]
+        },
+        {
+          "address": "$C441BA",
+          "xy": [
+            2400,
+            2832
+          ]
+        },
+        {
+          "address": "$C441BE",
+          "xy": [
+            2336,
+            3056
+          ]
+        },
+        {
+          "address": "$C441C2",
+          "xy": [
+            2592,
+            2752
+          ]
+        },
+        {
+          "address": "$C441C6",
+          "xy": [
+            2656,
+            2976
+          ]
+        },
+        {
+          "address": "$C441CA",
+          "xy": [
+            2848,
+            2304
+          ]
+        },
+        {
+          "address": "$C441CE",
+          "xy": [
+            2912,
+            2736
+          ]
+        },
+        {
+          "address": "$C441D2",
+          "xy": [
+            3072,
+            3072
+          ]
+        }
+      ],
+      "first_pair": "$C441A6",
+      "last_pair": "$C441D2",
+      "display_stage_return": "$C441D6",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 117317,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C441D8",
+          "xy": [
+            1936,
+            2896
+          ]
+        },
+        {
+          "address": "$C441DC",
+          "xy": [
+            1904,
+            2688
+          ]
+        },
+        {
+          "address": "$C441E0",
+          "xy": [
+            1360,
+            2464
+          ]
+        },
+        {
+          "address": "$C441E4",
+          "xy": [
+            1584,
+            2432
+          ]
+        },
+        {
+          "address": "$C441E8",
+          "xy": [
+            1744,
+            2112
+          ]
+        },
+        {
+          "address": "$C441EC",
+          "xy": [
+            1776,
+            2544
+          ]
+        },
+        {
+          "address": "$C441F0",
+          "xy": [
+            1936,
+            2560
+          ]
+        },
+        {
+          "address": "$C441F4",
+          "xy": [
+            2000,
+            2800
+          ]
+        },
+        {
+          "address": "$C441F8",
+          "xy": [
+            2224,
+            2624
+          ]
+        },
+        {
+          "address": "$C441FC",
+          "xy": [
+            2304,
+            2304
+          ]
+        },
+        {
+          "address": "$C44200",
+          "xy": [
+            2304,
+            2688
+          ]
+        },
+        {
+          "address": "$C44204",
+          "xy": [
+            2208,
+            2816
+          ]
+        }
+      ],
+      "first_pair": "$C441D8",
+      "last_pair": "$C44204",
+      "display_stage_return": "$C44208",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 117848,
+      "frame": 36,
+      "source_segment": 68,
+      "packet": "$C44160",
+      "first_longword": "$00C44164",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C44166",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C4416A",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C4416E",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C44172",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C44166",
+      "last_pair": "$C44172",
+      "display_stage_return": "$C44176",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 120157,
+      "frame": 37,
+      "source_segment": 68,
+      "packet": "$C4407C",
+      "first_longword": "$00C44080",
+      "following_words": [
+        "$0003",
+        "$1020"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C44082",
+          "xy": [
+            4128,
+            672
+          ]
+        },
+        {
+          "address": "$C44086",
+          "xy": [
+            4016,
+            576
+          ]
+        },
+        {
+          "address": "$C4408A",
+          "xy": [
+            4096,
+            176
+          ]
+        }
+      ],
+      "first_pair": "$C44082",
+      "last_pair": "$C4408A",
+      "display_stage_return": "$C4408E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 121053,
+      "frame": 37,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C44090",
+          "xy": [
+            4128,
+            192
+          ]
+        },
+        {
+          "address": "$C44094",
+          "xy": [
+            3808,
+            0
+          ]
+        },
+        {
+          "address": "$C44098",
+          "xy": [
+            4128,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C44090",
+      "last_pair": "$C44098",
+      "display_stage_return": "$C4409C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 122027,
+      "frame": 37,
+      "source_segment": 68,
+      "packet": "$C4404C",
+      "first_longword": "$00C44050",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C44052",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C44056",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C4405A",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C4405E",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C44052",
+      "last_pair": "$C4405E",
+      "display_stage_return": "$C44062",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 123377,
+      "frame": 37,
+      "source_segment": 68,
+      "packet": "$C43E24",
+      "first_longword": "$00C43E9A",
+      "following_words": [
+        "$0005",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43E2A",
+          "xy": [
+            4096,
+            3136
+          ]
+        },
+        {
+          "address": "$C43E2E",
+          "xy": [
+            3824,
+            2688
+          ]
+        },
+        {
+          "address": "$C43E32",
+          "xy": [
+            3552,
+            2688
+          ]
+        },
+        {
+          "address": "$C43E36",
+          "xy": [
+            3520,
+            2496
+          ]
+        },
+        {
+          "address": "$C43E3A",
+          "xy": [
+            4160,
+            1824
+          ]
+        }
+      ],
+      "first_pair": "$C43E2A",
+      "last_pair": "$C43E3A",
+      "display_stage_return": "$C43E3E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 124788,
+      "frame": 37,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43E40",
+          "xy": [
+            4112,
+            4112
+          ]
+        },
+        {
+          "address": "$C43E44",
+          "xy": [
+            3808,
+            4096
+          ]
+        },
+        {
+          "address": "$C43E48",
+          "xy": [
+            3904,
+            3648
+          ]
+        },
+        {
+          "address": "$C43E4C",
+          "xy": [
+            3152,
+            2512
+          ]
+        },
+        {
+          "address": "$C43E50",
+          "xy": [
+            3536,
+            2512
+          ]
+        },
+        {
+          "address": "$C43E54",
+          "xy": [
+            3632,
+            2688
+          ]
+        },
+        {
+          "address": "$C43E58",
+          "xy": [
+            3472,
+            2848
+          ]
+        },
+        {
+          "address": "$C43E5C",
+          "xy": [
+            4016,
+            3616
+          ]
+        }
+      ],
+      "first_pair": "$C43E40",
+      "last_pair": "$C43E5C",
+      "display_stage_return": "$C43E60",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 126796,
+      "frame": 37,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43E62",
+          "xy": [
+            3216,
+            2640
+          ]
+        },
+        {
+          "address": "$C43E66",
+          "xy": [
+            2592,
+            2736
+          ]
+        },
+        {
+          "address": "$C43E6A",
+          "xy": [
+            2272,
+            2272
+          ]
+        },
+        {
+          "address": "$C43E6E",
+          "xy": [
+            1664,
+            2304
+          ]
+        },
+        {
+          "address": "$C43E72",
+          "xy": [
+            1472,
+            2224
+          ]
+        },
+        {
+          "address": "$C43E76",
+          "xy": [
+            2048,
+            1888
+          ]
+        },
+        {
+          "address": "$C43E7A",
+          "xy": [
+            2608,
+            2416
+          ]
+        },
+        {
+          "address": "$C43E7E",
+          "xy": [
+            3232,
+            2544
+          ]
+        }
+      ],
+      "first_pair": "$C43E62",
+      "last_pair": "$C43E7E",
+      "display_stage_return": "$C43E82",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 128841,
+      "frame": 37,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43E84",
+          "xy": [
+            1792,
+            2288
+          ]
+        },
+        {
+          "address": "$C43E88",
+          "xy": [
+            880,
+            3664
+          ]
+        },
+        {
+          "address": "$C43E8C",
+          "xy": [
+            0,
+            3968
+          ]
+        },
+        {
+          "address": "$C43E90",
+          "xy": [
+            0,
+            2432
+          ]
+        },
+        {
+          "address": "$C43E94",
+          "xy": [
+            1472,
+            2224
+          ]
+        }
+      ],
+      "first_pair": "$C43E84",
+      "last_pair": "$C43E94",
+      "display_stage_return": "$C43E98",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 130356,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": "$C43D1A",
+      "first_longword": "$00C43D1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43D20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43D2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43D20",
+      "last_pair": "$C43D2C",
+      "display_stage_return": "$C43D30",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 131837,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": "$C43B34",
+      "first_longword": "$00C43B94",
+      "following_words": [
+        "$0008",
+        "$1040"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B3A",
+          "xy": [
+            4160,
+            1408
+          ]
+        },
+        {
+          "address": "$C43B3E",
+          "xy": [
+            3424,
+            1120
+          ]
+        },
+        {
+          "address": "$C43B42",
+          "xy": [
+            3200,
+            1296
+          ]
+        },
+        {
+          "address": "$C43B46",
+          "xy": [
+            2928,
+            976
+          ]
+        },
+        {
+          "address": "$C43B4A",
+          "xy": [
+            3008,
+            864
+          ]
+        },
+        {
+          "address": "$C43B4E",
+          "xy": [
+            3520,
+            1072
+          ]
+        },
+        {
+          "address": "$C43B52",
+          "xy": [
+            3808,
+            864
+          ]
+        },
+        {
+          "address": "$C43B56",
+          "xy": [
+            4224,
+            896
+          ]
+        }
+      ],
+      "first_pair": "$C43B3A",
+      "last_pair": "$C43B56",
+      "display_stage_return": "$C43B5A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 133851,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43B5C",
+          "xy": [
+            4160,
+            928
+          ]
+        },
+        {
+          "address": "$C43B60",
+          "xy": [
+            3712,
+            928
+          ]
+        },
+        {
+          "address": "$C43B64",
+          "xy": [
+            3376,
+            560
+          ]
+        },
+        {
+          "address": "$C43B68",
+          "xy": [
+            3456,
+            576
+          ]
+        },
+        {
+          "address": "$C43B6C",
+          "xy": [
+            3488,
+            528
+          ]
+        },
+        {
+          "address": "$C43B70",
+          "xy": [
+            3056,
+            176
+          ]
+        },
+        {
+          "address": "$C43B74",
+          "xy": [
+            3024,
+            0
+          ]
+        },
+        {
+          "address": "$C43B78",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B5C",
+      "last_pair": "$C43B78",
+      "display_stage_return": "$C43B7C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 135127,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43B7E",
+          "xy": [
+            3056,
+            176
+          ]
+        },
+        {
+          "address": "$C43B82",
+          "xy": [
+            2992,
+            240
+          ]
+        },
+        {
+          "address": "$C43B86",
+          "xy": [
+            2992,
+            384
+          ]
+        },
+        {
+          "address": "$C43B8A",
+          "xy": [
+            2608,
+            0
+          ]
+        },
+        {
+          "address": "$C43B8E",
+          "xy": [
+            3056,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B7E",
+      "last_pair": "$C43B8E",
+      "display_stage_return": "$C43B92",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 135633,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": "$C43B1A",
+      "first_longword": "$00C43B1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43B2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
+      "display_stage_return": "$C43B30",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 136096,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": "$C43B1A",
+      "first_longword": "$00C43B1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43B2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
+      "display_stage_return": "$C43B30",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 136559,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": "$C43B1A",
+      "first_longword": "$00C43B1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43B20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43B28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43B2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43B20",
+      "last_pair": "$C43B2C",
+      "display_stage_return": "$C43B30",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 137197,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": "$C43A78",
+      "first_longword": "$00C43AF0",
+      "following_words": [
+        "$0009",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43A7E",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43A82",
+          "xy": [
+            2960,
+            4096
+          ]
+        },
+        {
+          "address": "$C43A86",
+          "xy": [
+            3072,
+            2432
+          ]
+        },
+        {
+          "address": "$C43A8A",
+          "xy": [
+            3296,
+            2432
+          ]
+        },
+        {
+          "address": "$C43A8E",
+          "xy": [
+            3328,
+            1376
+          ]
+        },
+        {
+          "address": "$C43A92",
+          "xy": [
+            2960,
+            640
+          ]
+        },
+        {
+          "address": "$C43A96",
+          "xy": [
+            2688,
+            800
+          ]
+        },
+        {
+          "address": "$C43A9A",
+          "xy": [
+            2240,
+            0
+          ]
+        },
+        {
+          "address": "$C43A9E",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43A7E",
+      "last_pair": "$C43A9E",
+      "display_stage_return": "$C43AA2",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 137941,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43AA4",
+          "xy": [
+            1408,
+            4192
+          ]
+        },
+        {
+          "address": "$C43AA8",
+          "xy": [
+            1296,
+            3792
+          ]
+        },
+        {
+          "address": "$C43AAC",
+          "xy": [
+            1504,
+            3712
+          ]
+        },
+        {
+          "address": "$C43AB0",
+          "xy": [
+            1280,
+            3648
+          ]
+        },
+        {
+          "address": "$C43AB4",
+          "xy": [
+            1312,
+            3392
+          ]
+        },
+        {
+          "address": "$C43AB8",
+          "xy": [
+            1488,
+            3360
+          ]
+        },
+        {
+          "address": "$C43ABC",
+          "xy": [
+            1280,
+            3072
+          ]
+        },
+        {
+          "address": "$C43AC0",
+          "xy": [
+            976,
+            2960
+          ]
+        },
+        {
+          "address": "$C43AC4",
+          "xy": [
+            0,
+            4096
+          ]
+        }
+      ],
+      "first_pair": "$C43AA4",
+      "last_pair": "$C43AC4",
+      "display_stage_return": "$C43AC8",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 138685,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43ACA",
+          "xy": [
+            1040,
+            3088
+          ]
+        },
+        {
+          "address": "$C43ACE",
+          "xy": [
+            1136,
+            2880
+          ]
+        },
+        {
+          "address": "$C43AD2",
+          "xy": [
+            960,
+            2768
+          ]
+        },
+        {
+          "address": "$C43AD6",
+          "xy": [
+            1024,
+            2672
+          ]
+        },
+        {
+          "address": "$C43ADA",
+          "xy": [
+            1216,
+            2752
+          ]
+        },
+        {
+          "address": "$C43ADE",
+          "xy": [
+            1280,
+            2608
+          ]
+        },
+        {
+          "address": "$C43AE2",
+          "xy": [
+            1024,
+            2368
+          ]
+        },
+        {
+          "address": "$C43AE6",
+          "xy": [
+            0,
+            2048
+          ]
+        },
+        {
+          "address": "$C43AEA",
+          "xy": [
+            0,
+            4096
+          ]
+        }
+      ],
+      "first_pair": "$C43ACA",
+      "last_pair": "$C43AEA",
+      "display_stage_return": "$C43AEE",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 139468,
+      "frame": 38,
+      "source_segment": 68,
+      "packet": "$C439E8",
+      "first_longword": "$00C43A44",
+      "following_words": [
+        "$0007",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C439EE",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C439F2",
+          "xy": [
+            2608,
+            4096
+          ]
+        },
+        {
+          "address": "$C439F6",
+          "xy": [
+            2128,
+            2240
+          ]
+        },
+        {
+          "address": "$C439FA",
+          "xy": [
+            2752,
+            1440
+          ]
+        },
+        {
+          "address": "$C439FE",
+          "xy": [
+            3072,
+            1440
+          ]
+        },
+        {
+          "address": "$C43A02",
+          "xy": [
+            3520,
+            1856
+          ]
+        },
+        {
+          "address": "$C43A06",
+          "xy": [
+            4096,
+            2048
+          ]
+        }
+      ],
+      "first_pair": "$C439EE",
+      "last_pair": "$C43A06",
+      "display_stage_return": "$C43A0A",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 140482,
+      "frame": 39,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43A0C",
+          "xy": [
+            2128,
+            2240
+          ]
+        },
+        {
+          "address": "$C43A10",
+          "xy": [
+            1552,
+            784
+          ]
+        },
+        {
+          "address": "$C43A14",
+          "xy": [
+            1728,
+            624
+          ]
+        },
+        {
+          "address": "$C43A18",
+          "xy": [
+            2848,
+            1216
+          ]
+        },
+        {
+          "address": "$C43A1C",
+          "xy": [
+            2944,
+            1536
+          ]
+        }
+      ],
+      "first_pair": "$C43A0C",
+      "last_pair": "$C43A1C",
+      "display_stage_return": "$C43A20",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 141019,
+      "frame": 39,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43A22",
+          "xy": [
+            1808,
+            720
+          ]
+        },
+        {
+          "address": "$C43A26",
+          "xy": [
+            1552,
+            784
+          ]
+        },
+        {
+          "address": "$C43A2A",
+          "xy": [
+            800,
+            672
+          ]
+        },
+        {
+          "address": "$C43A2E",
+          "xy": [
+            704,
+            128
+          ]
+        },
+        {
+          "address": "$C43A32",
+          "xy": [
+            0,
+            192
+          ]
+        },
+        {
+          "address": "$C43A36",
+          "xy": [
+            64,
+            64
+          ]
+        },
+        {
+          "address": "$C43A3A",
+          "xy": [
+            448,
+            0
+          ]
+        },
+        {
+          "address": "$C43A3E",
+          "xy": [
+            1408,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43A22",
+      "last_pair": "$C43A3E",
+      "display_stage_return": "$C43A42",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 180032,
+      "frame": 42,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 180364,
+      "frame": 42,
+      "source_segment": 68,
+      "packet": "$C42E3E",
+      "first_longword": "$00C42E42",
+      "following_words": [
+        "$0003",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E44",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E48",
+          "xy": [
+            1600,
+            0
+          ]
+        },
+        {
+          "address": "$C42E4C",
+          "xy": [
+            4096,
+            -256
+          ]
+        }
+      ],
+      "first_pair": "$C42E44",
+      "last_pair": "$C42E4C",
+      "display_stage_return": "$C42E50",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 180757,
+      "frame": 42,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 182283,
+      "frame": 43,
+      "source_segment": 68,
+      "packet": "$C42D28",
+      "first_longword": "$00C42D2C",
+      "following_words": [
+        "$000E",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42D2E",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42D32",
+          "xy": [
+            1600,
+            4096
+          ]
+        },
+        {
+          "address": "$C42D36",
+          "xy": [
+            1536,
+            2432
+          ]
+        },
+        {
+          "address": "$C42D3A",
+          "xy": [
+            1280,
+            1664
+          ]
+        },
+        {
+          "address": "$C42D3E",
+          "xy": [
+            768,
+            1088
+          ]
+        },
+        {
+          "address": "$C42D42",
+          "xy": [
+            600,
+            768
+          ]
+        },
+        {
+          "address": "$C42D46",
+          "xy": [
+            664,
+            592
+          ]
+        },
+        {
+          "address": "$C42D4A",
+          "xy": [
+            592,
+            592
+          ]
+        },
+        {
+          "address": "$C42D4E",
+          "xy": [
+            584,
+            640
+          ]
+        },
+        {
+          "address": "$C42D52",
+          "xy": [
+            216,
+            384
+          ]
+        },
+        {
+          "address": "$C42D56",
+          "xy": [
+            192,
+            256
+          ]
+        },
+        {
+          "address": "$C42D5A",
+          "xy": [
+            224,
+            80
+          ]
+        },
+        {
+          "address": "$C42D5E",
+          "xy": [
+            160,
+            0
+          ]
+        },
+        {
+          "address": "$C42D62",
+          "xy": [
+            4096,
+            -256
+          ]
+        }
+      ],
+      "first_pair": "$C42D2E",
+      "last_pair": "$C42D62",
+      "display_stage_return": "$C42D66",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 186079,
+      "frame": 43,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D6A",
+          "xy": [
+            80,
+            384
+          ]
+        },
+        {
+          "address": "$C42D6E",
+          "xy": [
+            -96,
+            232
+          ]
+        },
+        {
+          "address": "$C42D72",
+          "xy": [
+            -144,
+            56
+          ]
+        },
+        {
+          "address": "$C42D76",
+          "xy": [
+            72,
+            200
+          ]
+        }
+      ],
+      "first_pair": "$C42D6A",
+      "last_pair": "$C42D76",
+      "display_stage_return": "$C42D7A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 187058,
+      "frame": 43,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D7E",
+          "xy": [
+            96,
+            768
+          ]
+        },
+        {
+          "address": "$C42D82",
+          "xy": [
+            176,
+            628
+          ]
+        },
+        {
+          "address": "$C42D86",
+          "xy": [
+            96,
+            568
+          ]
+        },
+        {
+          "address": "$C42D8A",
+          "xy": [
+            -16,
+            664
+          ]
+        }
+      ],
+      "first_pair": "$C42D7E",
+      "last_pair": "$C42D8A",
+      "display_stage_return": "$C42D8E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 188843,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42D92",
+          "xy": [
+            224,
+            384
+          ]
+        },
+        {
+          "address": "$C42D96",
+          "xy": [
+            160,
+            408
+          ]
+        },
+        {
+          "address": "$C42D9A",
+          "xy": [
+            112,
+            496
+          ]
+        },
+        {
+          "address": "$C42D9E",
+          "xy": [
+            40,
+            480
+          ]
+        },
+        {
+          "address": "$C42DA2",
+          "xy": [
+            48,
+            344
+          ]
+        },
+        {
+          "address": "$C42DA6",
+          "xy": [
+            112,
+            408
+          ]
+        },
+        {
+          "address": "$C42DAA",
+          "xy": [
+            232,
+            368
+          ]
+        }
+      ],
+      "first_pair": "$C42D92",
+      "last_pair": "$C42DAA",
+      "display_stage_return": "$C42DAE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 190617,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C42DB2",
+          "xy": [
+            136,
+            600
+          ]
+        },
+        {
+          "address": "$C42DB6",
+          "xy": [
+            192,
+            536
+          ]
+        },
+        {
+          "address": "$C42DBA",
+          "xy": [
+            128,
+            472
+          ]
+        },
+        {
+          "address": "$C42DBE",
+          "xy": [
+            88,
+            512
+          ]
+        }
+      ],
+      "first_pair": "$C42DB2",
+      "last_pair": "$C42DBE",
+      "display_stage_return": "$C42DC2",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 191895,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C42DFC",
+      "first_longword": "$00C42E00",
+      "following_words": [
+        "$8400",
+        "$0005"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E04",
+          "xy": [
+            4071,
+            1356
+          ]
+        },
+        {
+          "address": "$C42E08",
+          "xy": [
+            4004,
+            1217
+          ]
+        },
+        {
+          "address": "$C42E0C",
+          "xy": [
+            4020,
+            1190
+          ]
+        },
+        {
+          "address": "$C42E10",
+          "xy": [
+            4040,
+            1259
+          ]
+        },
+        {
+          "address": "$C42E14",
+          "xy": [
+            4088,
+            1308
+          ]
+        }
+      ],
+      "first_pair": "$C42E04",
+      "last_pair": "$C42E14",
+      "display_stage_return": "$C42E18",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 192282,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 192846,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C42E1A",
+      "first_longword": "$00C42E1E",
+      "following_words": [
+        "$0007",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E20",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E24",
+          "xy": [
+            160,
+            4096
+          ]
+        },
+        {
+          "address": "$C42E28",
+          "xy": [
+            112,
+            3976
+          ]
+        },
+        {
+          "address": "$C42E2C",
+          "xy": [
+            136,
+            3840
+          ]
+        },
+        {
+          "address": "$C42E30",
+          "xy": [
+            0,
+            3640
+          ]
+        },
+        {
+          "address": "$C42E34",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E38",
+          "xy": [
+            4096,
+            -256
+          ]
+        }
+      ],
+      "first_pair": "$C42E20",
+      "last_pair": "$C42E38",
+      "display_stage_return": "$C42E3C",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 193714,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C42DC4",
+      "first_longword": "$00C42DC8",
+      "following_words": [
+        "$000C",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42DCA",
+          "xy": [
+            4096,
+            3640
+          ]
+        },
+        {
+          "address": "$C42DCE",
+          "xy": [
+            3920,
+            3488
+          ]
+        },
+        {
+          "address": "$C42DD2",
+          "xy": [
+            3760,
+            3536
+          ]
+        },
+        {
+          "address": "$C42DD6",
+          "xy": [
+            3664,
+            3360
+          ]
+        },
+        {
+          "address": "$C42DDA",
+          "xy": [
+            3728,
+            3160
+          ]
+        },
+        {
+          "address": "$C42DDE",
+          "xy": [
+            3792,
+            3192
+          ]
+        },
+        {
+          "address": "$C42DE2",
+          "xy": [
+            3840,
+            3104
+          ]
+        },
+        {
+          "address": "$C42DE6",
+          "xy": [
+            3760,
+            2752
+          ]
+        },
+        {
+          "address": "$C42DEA",
+          "xy": [
+            2944,
+            1792
+          ]
+        },
+        {
+          "address": "$C42DEE",
+          "xy": [
+            2880,
+            1280
+          ]
+        },
+        {
+          "address": "$C42DF2",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42DF6",
+          "xy": [
+            4352,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42DCA",
+      "last_pair": "$C42DF6",
+      "display_stage_return": "$C42DFA",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 194655,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 195114,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 195573,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C42E52",
+      "first_longword": "$00C42E56",
+      "following_words": [
+        "$0004",
+        "$1100"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C42E58",
+          "xy": [
+            4352,
+            4352
+          ]
+        },
+        {
+          "address": "$C42E5C",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C42E60",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C42E64",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C42E58",
+      "last_pair": "$C42E64",
+      "display_stage_return": "$C42E68",
+      "polygon_submissions": 0
+    },
+    {
+      "trace_index": 196231,
+      "frame": 44,
+      "source_segment": 68,
+      "packet": "$C440BC",
+      "first_longword": "$00C440C0",
+      "following_words": [
+        "$0007",
+        "$0A10"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C440C2",
+          "xy": [
+            2576,
+            3520
+          ]
+        },
+        {
+          "address": "$C440C6",
+          "xy": [
+            2224,
+            3152
+          ]
+        },
+        {
+          "address": "$C440CA",
+          "xy": [
+            2432,
+            3152
+          ]
+        },
+        {
+          "address": "$C440CE",
+          "xy": [
+            2528,
+            3008
+          ]
+        },
+        {
+          "address": "$C440D2",
+          "xy": [
+            2432,
+            2944
+          ]
+        },
+        {
+          "address": "$C440D6",
+          "xy": [
+            2496,
+            2896
+          ]
+        },
+        {
+          "address": "$C440DA",
+          "xy": [
+            2640,
+            3072
+          ]
+        }
+      ],
+      "first_pair": "$C440C2",
+      "last_pair": "$C440DA",
+      "display_stage_return": "$C440DE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 198645,
+      "frame": 45,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C440E0",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C440E4",
+          "xy": [
+            2816,
+            4096
+          ]
+        },
+        {
+          "address": "$C440E8",
+          "xy": [
+            2736,
+            3632
+          ]
+        },
+        {
+          "address": "$C440EC",
+          "xy": [
+            2864,
+            3264
+          ]
+        },
+        {
+          "address": "$C440F0",
+          "xy": [
+            2624,
+            2848
+          ]
+        },
+        {
+          "address": "$C440F4",
+          "xy": [
+            2496,
+            2896
+          ]
+        },
+        {
+          "address": "$C440F8",
+          "xy": [
+            1536,
+            1472
+          ]
+        },
+        {
+          "address": "$C440FC",
+          "xy": [
+            1344,
+            736
+          ]
+        },
+        {
+          "address": "$C44100",
+          "xy": [
+            1104,
+            256
+          ]
+        },
+        {
+          "address": "$C44104",
+          "xy": [
+            1152,
+            0
+          ]
+        },
+        {
+          "address": "$C44108",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C440E0",
+      "last_pair": "$C44108",
+      "display_stage_return": "$C4410C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 201375,
+      "frame": 45,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4410E",
+          "xy": [
+            2496,
+            2992
+          ]
+        },
+        {
+          "address": "$C44112",
+          "xy": [
+            2432,
+            3104
+          ]
+        },
+        {
+          "address": "$C44116",
+          "xy": [
+            2240,
+            3104
+          ]
+        },
+        {
+          "address": "$C4411A",
+          "xy": [
+            1840,
+            2816
+          ]
+        },
+        {
+          "address": "$C4411E",
+          "xy": [
+            1360,
+            1888
+          ]
+        },
+        {
+          "address": "$C44122",
+          "xy": [
+            1440,
+            1664
+          ]
+        },
+        {
+          "address": "$C44126",
+          "xy": [
+            1856,
+            1824
+          ]
+        },
+        {
+          "address": "$C4412A",
+          "xy": [
+            2496,
+            2896
+          ]
+        }
+      ],
+      "first_pair": "$C4410E",
+      "last_pair": "$C4412A",
+      "display_stage_return": "$C4412E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 203318,
+      "frame": 45,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C44130",
+          "xy": [
+            1632,
+            1760
+          ]
+        },
+        {
+          "address": "$C44134",
+          "xy": [
+            1440,
+            1648
+          ]
+        },
+        {
+          "address": "$C44138",
+          "xy": [
+            1200,
+            1664
+          ]
+        },
+        {
+          "address": "$C4413C",
+          "xy": [
+            1184,
+            1360
+          ]
+        },
+        {
+          "address": "$C44140",
+          "xy": [
+            864,
+            1232
+          ]
+        },
+        {
+          "address": "$C44144",
+          "xy": [
+            1056,
+            1088
+          ]
+        }
+      ],
+      "first_pair": "$C44130",
+      "last_pair": "$C44144",
+      "display_stage_return": "$C44148",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 204828,
+      "frame": 45,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4414A",
+          "xy": [
+            1056,
+            1088
+          ]
+        },
+        {
+          "address": "$C4414E",
+          "xy": [
+            736,
+            1424
+          ]
+        },
+        {
+          "address": "$C44152",
+          "xy": [
+            672,
+            896
+          ]
+        },
+        {
+          "address": "$C44156",
+          "xy": [
+            48,
+            0
+          ]
+        },
+        {
+          "address": "$C4415A",
+          "xy": [
+            384,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C4414A",
+      "last_pair": "$C4415A",
+      "display_stage_return": "$C4415E",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 206286,
+      "frame": 45,
+      "source_segment": 68,
+      "packet": "$C4409E",
+      "first_longword": "$00C440A2",
+      "following_words": [
+        "$0005",
+        "$0000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C440A4",
+          "xy": [
+            0,
+            672
+          ]
+        },
+        {
+          "address": "$C440A8",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C440AC",
+          "xy": [
+            112,
+            160
+          ]
+        },
+        {
+          "address": "$C440B0",
+          "xy": [
+            80,
+            464
+          ]
+        },
+        {
+          "address": "$C440B4",
+          "xy": [
+            448,
+            688
+          ]
+        }
+      ],
+      "first_pair": "$C440A4",
+      "last_pair": "$C440B4",
+      "display_stage_return": "$C440B8",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 208469,
+      "frame": 46,
+      "source_segment": 68,
+      "packet": "$C43FD0",
+      "first_longword": "$00C43FD4",
+      "following_words": [
+        "$000D",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43FD6",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43FDA",
+          "xy": [
+            1152,
+            4096
+          ]
+        },
+        {
+          "address": "$C43FDE",
+          "xy": [
+            2016,
+            1664
+          ]
+        },
+        {
+          "address": "$C43FE2",
+          "xy": [
+            2176,
+            1584
+          ]
+        },
+        {
+          "address": "$C43FE6",
+          "xy": [
+            2128,
+            1472
+          ]
+        },
+        {
+          "address": "$C43FEA",
+          "xy": [
+            1328,
+            1392
+          ]
+        },
+        {
+          "address": "$C43FEE",
+          "xy": [
+            1664,
+            1616
+          ]
+        },
+        {
+          "address": "$C43FF2",
+          "xy": [
+            1296,
+            2080
+          ]
+        },
+        {
+          "address": "$C43FF6",
+          "xy": [
+            992,
+            2128
+          ]
+        },
+        {
+          "address": "$C43FFA",
+          "xy": [
+            832,
+            2048
+          ]
+        },
+        {
+          "address": "$C43FFE",
+          "xy": [
+            0,
+            1920
+          ]
+        },
+        {
+          "address": "$C44002",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C44006",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43FD6",
+      "last_pair": "$C44006",
+      "display_stage_return": "$C4400A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 211745,
+      "frame": 46,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4400C",
+          "xy": [
+            832,
+            3328
+          ]
+        },
+        {
+          "address": "$C44010",
+          "xy": [
+            896,
+            2688
+          ]
+        },
+        {
+          "address": "$C44014",
+          "xy": [
+            640,
+            2848
+          ]
+        },
+        {
+          "address": "$C44018",
+          "xy": [
+            896,
+            2176
+          ]
+        },
+        {
+          "address": "$C4401C",
+          "xy": [
+            640,
+            2160
+          ]
+        },
+        {
+          "address": "$C44020",
+          "xy": [
+            576,
+            2464
+          ]
+        },
+        {
+          "address": "$C44024",
+          "xy": [
+            560,
+            2160
+          ]
+        },
+        {
+          "address": "$C44028",
+          "xy": [
+            288,
+            2096
+          ]
+        },
+        {
+          "address": "$C4402C",
+          "xy": [
+            976,
+            2112
+          ]
+        },
+        {
+          "address": "$C44030",
+          "xy": [
+            1280,
+            2640
+          ]
+        },
+        {
+          "address": "$C44034",
+          "xy": [
+            1072,
+            2656
+          ]
+        }
+      ],
+      "first_pair": "$C4400C",
+      "last_pair": "$C44034",
+      "display_stage_return": "$C44038",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 214287,
+      "frame": 46,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C4403A",
+          "xy": [
+            384,
+            4128
+          ]
+        },
+        {
+          "address": "$C4403E",
+          "xy": [
+            128,
+            4096
+          ]
+        },
+        {
+          "address": "$C44042",
+          "xy": [
+            0,
+            3888
+          ]
+        },
+        {
+          "address": "$C44046",
+          "xy": [
+            0,
+            3648
+          ]
+        }
+      ],
+      "first_pair": "$C4403A",
+      "last_pair": "$C44046",
+      "display_stage_return": "$C4404A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 215598,
+      "frame": 46,
+      "source_segment": 68,
+      "packet": "$C43F5E",
+      "first_longword": "$00C43FAE",
+      "following_words": [
+        "$0006",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43F64",
+          "xy": [
+            4096,
+            1920
+          ]
+        },
+        {
+          "address": "$C43F68",
+          "xy": [
+            3040,
+            1088
+          ]
+        },
+        {
+          "address": "$C43F6C",
+          "xy": [
+            2800,
+            512
+          ]
+        },
+        {
+          "address": "$C43F70",
+          "xy": [
+            2176,
+            144
+          ]
+        },
+        {
+          "address": "$C43F74",
+          "xy": [
+            2144,
+            0
+          ]
+        },
+        {
+          "address": "$C43F78",
+          "xy": [
+            4160,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43F64",
+      "last_pair": "$C43F78",
+      "display_stage_return": "$C43F7C",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 217533,
+      "frame": 47,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43F7E",
+          "xy": [
+            1632,
+            320
+          ]
+        },
+        {
+          "address": "$C43F82",
+          "xy": [
+            1232,
+            0
+          ]
+        },
+        {
+          "address": "$C43F86",
+          "xy": [
+            1536,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43F7E",
+      "last_pair": "$C43F86",
+      "display_stage_return": "$C43F8A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 218537,
+      "frame": 47,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43F8C",
+          "xy": [
+            4128,
+            3904
+          ]
+        },
+        {
+          "address": "$C43F90",
+          "xy": [
+            3968,
+            3632
+          ]
+        },
+        {
+          "address": "$C43F94",
+          "xy": [
+            3856,
+            3632
+          ]
+        },
+        {
+          "address": "$C43F98",
+          "xy": [
+            3872,
+            3488
+          ]
+        },
+        {
+          "address": "$C43F9C",
+          "xy": [
+            3744,
+            3504
+          ]
+        },
+        {
+          "address": "$C43FA0",
+          "xy": [
+            3488,
+            3136
+          ]
+        },
+        {
+          "address": "$C43FA4",
+          "xy": [
+            3552,
+            2912
+          ]
+        },
+        {
+          "address": "$C43FA8",
+          "xy": [
+            4096,
+            3648
+          ]
+        }
+      ],
+      "first_pair": "$C43F8C",
+      "last_pair": "$C43FA8",
+      "display_stage_return": "$C43FAC",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 220629,
+      "frame": 47,
+      "source_segment": 68,
+      "packet": "$C43ECA",
+      "first_longword": "$00C43F3A",
+      "following_words": [
+        "$0009",
+        "$0890"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43ED0",
+          "xy": [
+            2192,
+            1296
+          ]
+        },
+        {
+          "address": "$C43ED4",
+          "xy": [
+            2336,
+            1136
+          ]
+        },
+        {
+          "address": "$C43ED8",
+          "xy": [
+            2480,
+            1200
+          ]
+        },
+        {
+          "address": "$C43EDC",
+          "xy": [
+            2816,
+            848
+          ]
+        },
+        {
+          "address": "$C43EE0",
+          "xy": [
+            2688,
+            512
+          ]
+        },
+        {
+          "address": "$C43EE4",
+          "xy": [
+            3136,
+            448
+          ]
+        },
+        {
+          "address": "$C43EE8",
+          "xy": [
+            2640,
+            0
+          ]
+        },
+        {
+          "address": "$C43EEC",
+          "xy": [
+            1408,
+            0
+          ]
+        },
+        {
+          "address": "$C43EF0",
+          "xy": [
+            1712,
+            288
+          ]
+        }
+      ],
+      "first_pair": "$C43ED0",
+      "last_pair": "$C43EF0",
+      "display_stage_return": "$C43EF4",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 222877,
+      "frame": 47,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43EF6",
+          "xy": [
+            2720,
+            2816
+          ]
+        },
+        {
+          "address": "$C43EFA",
+          "xy": [
+            1088,
+            1856
+          ]
+        },
+        {
+          "address": "$C43EFE",
+          "xy": [
+            976,
+            1264
+          ]
+        },
+        {
+          "address": "$C43F02",
+          "xy": [
+            1504,
+            896
+          ]
+        },
+        {
+          "address": "$C43F06",
+          "xy": [
+            1328,
+            512
+          ]
+        },
+        {
+          "address": "$C43F0A",
+          "xy": [
+            1712,
+            768
+          ]
+        },
+        {
+          "address": "$C43F0E",
+          "xy": [
+            2080,
+            912
+          ]
+        },
+        {
+          "address": "$C43F12",
+          "xy": [
+            2192,
+            1296
+          ]
+        },
+        {
+          "address": "$C43F16",
+          "xy": [
+            2944,
+            2048
+          ]
+        }
+      ],
+      "first_pair": "$C43EF6",
+      "last_pair": "$C43F16",
+      "display_stage_return": "$C43F1A",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 225121,
+      "frame": 47,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43F1C",
+          "xy": [
+            1536,
+            4160
+          ]
+        },
+        {
+          "address": "$C43F20",
+          "xy": [
+            0,
+            3136
+          ]
+        },
+        {
+          "address": "$C43F24",
+          "xy": [
+            0,
+            1792
+          ]
+        },
+        {
+          "address": "$C43F28",
+          "xy": [
+            768,
+            1536
+          ]
+        },
+        {
+          "address": "$C43F2C",
+          "xy": [
+            2720,
+            2816
+          ]
+        },
+        {
+          "address": "$C43F30",
+          "xy": [
+            2816,
+            3392
+          ]
+        },
+        {
+          "address": "$C43F34",
+          "xy": [
+            2160,
+            3552
+          ]
+        }
+      ],
+      "first_pair": "$C43F1C",
+      "last_pair": "$C43F34",
+      "display_stage_return": "$C43F38",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 227485,
+      "frame": 48,
+      "source_segment": 68,
+      "packet": "$C43D1A",
+      "first_longword": "$00C43D1E",
+      "following_words": [
+        "$0004",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43D20",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D24",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C43D28",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43D2C",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43D20",
+      "last_pair": "$C43D2C",
+      "display_stage_return": "$C43D30",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 229067,
+      "frame": 48,
+      "source_segment": 68,
+      "packet": "$C43CBE",
+      "first_longword": "$00C43CFA",
+      "following_words": [
+        "$000D",
+        "$1080"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43CC4",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43CC8",
+          "xy": [
+            2144,
+            4096
+          ]
+        },
+        {
+          "address": "$C43CCC",
+          "xy": [
+            2128,
+            4016
+          ]
+        },
+        {
+          "address": "$C43CD0",
+          "xy": [
+            1680,
+            3792
+          ]
+        },
+        {
+          "address": "$C43CD4",
+          "xy": [
+            1488,
+            3968
+          ]
+        },
+        {
+          "address": "$C43CD8",
+          "xy": [
+            1536,
+            4096
+          ]
+        },
+        {
+          "address": "$C43CDC",
+          "xy": [
+            1232,
+            4096
+          ]
+        },
+        {
+          "address": "$C43CE0",
+          "xy": [
+            976,
+            3888
+          ]
+        },
+        {
+          "address": "$C43CE4",
+          "xy": [
+            1408,
+            3968
+          ]
+        },
+        {
+          "address": "$C43CE8",
+          "xy": [
+            912,
+            3776
+          ]
+        },
+        {
+          "address": "$C43CEC",
+          "xy": [
+            0,
+            3072
+          ]
+        },
+        {
+          "address": "$C43CF0",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C43CF4",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43CC4",
+      "last_pair": "$C43CF4",
+      "display_stage_return": "$C43CF8",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 232283,
+      "frame": 48,
+      "source_segment": 68,
+      "packet": "$C43BAC",
+      "first_longword": "$00C43C70",
+      "following_words": [
+        "$0007",
+        "$1000"
+      ],
+      "consumed_pairs": [
+        {
+          "address": "$C43BB2",
+          "xy": [
+            4096,
+            3072
+          ]
+        },
+        {
+          "address": "$C43BB6",
+          "xy": [
+            3424,
+            2304
+          ]
+        },
+        {
+          "address": "$C43BBA",
+          "xy": [
+            2512,
+            2496
+          ]
+        },
+        {
+          "address": "$C43BBE",
+          "xy": [
+            2752,
+            1728
+          ]
+        },
+        {
+          "address": "$C43BC2",
+          "xy": [
+            3200,
+            1664
+          ]
+        },
+        {
+          "address": "$C43BC6",
+          "xy": [
+            2960,
+            0
+          ]
+        },
+        {
+          "address": "$C43BCA",
+          "xy": [
+            4288,
+            0
+          ]
+        }
+      ],
+      "first_pair": "$C43BB2",
+      "last_pair": "$C43BCA",
+      "display_stage_return": "$C43BCE",
+      "polygon_submissions": 1
+    },
+    {
+      "trace_index": 234244,
+      "frame": 48,
+      "source_segment": 68,
+      "packet": null,
+      "first_longword": null,
+      "following_words": null,
+      "consumed_pairs": [
+        {
+          "address": "$C43BD0",
+          "xy": [
+            3024,
+            3712
+          ]
+        },
+        {
+          "address": "$C43BD4",
+          "xy": [
+            2432,
+            3264
+          ]
+        },
+        {
+          "address": "$C43BD8",
+          "xy": [
+            2112,
+            3456
+          ]
+        },
+        {
+          "address": "$C43BDC",
+          "xy": [
+            1440,
+            1792
+          ]
+        },
+        {
+          "address": "$C43BE0",
+          "xy": [
+            2688,
+            2112
+          ]
+        },
+        {
+          "address": "$C43BE4",
+          "xy": [
+            2656,
+            2464
+          ]
+        },
+        {
+          "address": "$C43BE8",
+          "xy": [
+            2592,
+            2608
+          ]
+        },
+        {
+          "address": "$C43BEC",
+          "xy": [
+            2688,
+            3008
+          ]
+        },
+        {
+          "address": "$C43BF0",
+          "xy": [
+            3280,
+            3472
+          ]
+        },
+        {
+          "address": "$C43BF4",
+          "xy": [
+            2944,
+            3392
+          ]
+        }
+      ],
+      "first_pair": "$C43BD0",
+      "last_pair": "$C43BF4",
+      "display_stage_return": "$C43BF8",
+      "polygon_submissions": 0
+    }
+  ],
+  "qualification": "Each row ends at a traced C2AFE2 display-stage entry and retains the preceding C2AF9C/C2AF9E fixed-point source-pair reads since the prior display-stage entry. Every such pair is in verified original segment 68. Only batches with an observed direct C2AEFC-to-C2AF00 entry expose a packet header; the first batch begins after the trace starts. C4BFxx, C4B9xx, and C4B3xx outputs are mutable workspaces and are not exported as source geometry. This is an input-to-renderer inventory for the prepared map page, not a complete terrain mesh, a global coordinate system, or a coastline-pixel ownership map."
+}

@@ -5,9 +5,9 @@ deduplicated ordered pair paths consumed by the static segment-68 M-map
 packet loop across the listed sealed captures. It is not a complete terrain
 mesh, a world-coordinate export, or an LOD visualization.
 
-The image contains 59 distinct observed paths and
-387 exact immutable pair addresses. This is
-24.87% of the 6224
+The image contains 76 distinct observed paths and
+519 exact immutable pair addresses. This is
+33.35% of the 6224
 bytes in segment 68 when counted as four-byte pair payloads. Consecutive
 points are joined only within the same traced transform batch; no separate
 batches are stitched together.
@@ -20,6 +20,7 @@ batches are stitched together.
 | `analysis\data\run035_m_map_polygon_static_packets.json` | 21 | 73 |
 | `analysis\data\run035_m_map_stable_polygon_static_packets.json` | 8 | 37 |
 | `analysis\data\run037_m_map_stable_polygon_static_packets.json` | 56 | 343 |
+| `analysis\data\run042_m_map_polygon_static_packets.json` | 110 | 409 |
 
 Viewer convention: the image plots each signed source pair directly as `(x, y)`.
 The renderer computes its depth component later; this display does not assign

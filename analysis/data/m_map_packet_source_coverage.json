@@ -20,10 +20,15 @@
       "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
       "batches": 56,
       "unique_pairs": 343
+    },
+    {
+      "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+      "batches": 110,
+      "unique_pairs": 409
     }
   ],
-  "unique_batches": 59,
-  "unique_pair_count": 387,
+  "unique_batches": 76,
+  "unique_pair_count": 519,
   "unique_pair_addresses": [
     "$C42D2E",
     "$C42D32",
@@ -398,6 +403,38 @@
     "$C43FC2",
     "$C43FC6",
     "$C43FCA",
+    "$C43FD6",
+    "$C43FDA",
+    "$C43FDE",
+    "$C43FE2",
+    "$C43FE6",
+    "$C43FEA",
+    "$C43FEE",
+    "$C43FF2",
+    "$C43FF6",
+    "$C43FFA",
+    "$C43FFE",
+    "$C44002",
+    "$C44006",
+    "$C4400C",
+    "$C44010",
+    "$C44014",
+    "$C44018",
+    "$C4401C",
+    "$C44020",
+    "$C44024",
+    "$C44028",
+    "$C4402C",
+    "$C44030",
+    "$C44034",
+    "$C4403A",
+    "$C4403E",
+    "$C44042",
+    "$C44046",
+    "$C44052",
+    "$C44056",
+    "$C4405A",
+    "$C4405E",
     "$C4406C",
     "$C44070",
     "$C44074",
@@ -411,10 +448,110 @@
     "$C440A8",
     "$C440AC",
     "$C440B0",
-    "$C440B4"
+    "$C440B4",
+    "$C440C2",
+    "$C440C6",
+    "$C440CA",
+    "$C440CE",
+    "$C440D2",
+    "$C440D6",
+    "$C440DA",
+    "$C440E0",
+    "$C440E4",
+    "$C440E8",
+    "$C440EC",
+    "$C440F0",
+    "$C440F4",
+    "$C440F8",
+    "$C440FC",
+    "$C44100",
+    "$C44104",
+    "$C44108",
+    "$C4410E",
+    "$C44112",
+    "$C44116",
+    "$C4411A",
+    "$C4411E",
+    "$C44122",
+    "$C44126",
+    "$C4412A",
+    "$C44130",
+    "$C44134",
+    "$C44138",
+    "$C4413C",
+    "$C44140",
+    "$C44144",
+    "$C4414A",
+    "$C4414E",
+    "$C44152",
+    "$C44156",
+    "$C4415A",
+    "$C44166",
+    "$C4416A",
+    "$C4416E",
+    "$C44172",
+    "$C44180",
+    "$C44184",
+    "$C44188",
+    "$C4418C",
+    "$C44190",
+    "$C44194",
+    "$C44198",
+    "$C4419C",
+    "$C441A0",
+    "$C441A6",
+    "$C441AA",
+    "$C441AE",
+    "$C441B2",
+    "$C441B6",
+    "$C441BA",
+    "$C441BE",
+    "$C441C2",
+    "$C441C6",
+    "$C441CA",
+    "$C441CE",
+    "$C441D2",
+    "$C441D8",
+    "$C441DC",
+    "$C441E0",
+    "$C441E4",
+    "$C441E8",
+    "$C441EC",
+    "$C441F0",
+    "$C441F4",
+    "$C441F8",
+    "$C441FC",
+    "$C44200",
+    "$C44204",
+    "$C44212",
+    "$C44216",
+    "$C4421A",
+    "$C4421E",
+    "$C44222",
+    "$C44226",
+    "$C4422A",
+    "$C4422E",
+    "$C44234",
+    "$C44238",
+    "$C4423C",
+    "$C44240",
+    "$C44244",
+    "$C44250",
+    "$C44254",
+    "$C44258",
+    "$C4425C",
+    "$C44260",
+    "$C44264",
+    "$C44268",
+    "$C4426C",
+    "$C44270",
+    "$C44274",
+    "$C44278",
+    "$C4427C",
+    "$C44280"
   ],
   "segment_bytes": 6224,
-  "segment_pair_byte_fraction": 0.2487146529562982,
+  "segment_pair_byte_fraction": 0.33354755784061696,
   "plot_bounds": {
     "x": [
       -512,
@@ -559,6 +696,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5690,
           "trace_index": 19566
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 30,
+          "trace_index": 50460
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 43,
+          "trace_index": 182283
         }
       ]
     },
@@ -678,6 +825,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5690,
           "trace_index": 22544
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 30,
+          "trace_index": 54271
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 43,
+          "trace_index": 186079
         }
       ]
     },
@@ -728,6 +885,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5690,
           "trace_index": 23861
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 30,
+          "trace_index": 55254
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 43,
+          "trace_index": 187058
         }
       ]
     },
@@ -802,6 +969,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5690,
           "trace_index": 25333
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 57046
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 188843
         }
       ]
     },
@@ -852,6 +1029,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5691,
           "trace_index": 27620
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 58820
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 190617
         }
       ]
     },
@@ -976,6 +1163,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5691,
           "trace_index": 31276
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 61917
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 193714
         }
       ]
     },
@@ -1034,6 +1231,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5691,
           "trace_index": 28903
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 60098
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 191895
         }
       ]
     },
@@ -1118,6 +1325,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5691,
           "trace_index": 29441
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 61049
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 192846
         }
       ]
     },
@@ -1155,6 +1372,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5690,
           "trace_index": 18777
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 29,
+          "trace_index": 48541
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 42,
+          "trace_index": 180364
         }
       ]
     },
@@ -1255,6 +1482,66 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5691,
           "trace_index": 34636
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 29,
+          "trace_index": 48209
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 29,
+          "trace_index": 48934
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 60485
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 62858
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 63317
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 63776
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 42,
+          "trace_index": 180032
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 42,
+          "trace_index": 180757
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 192282
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 194655
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 195114
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 195573
         }
       ]
     },
@@ -1515,6 +1802,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5696,
           "trace_index": 85244
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 8269
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 139468
         }
       ]
     },
@@ -1573,6 +1870,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5696,
           "trace_index": 86967
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 8787
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 39,
+          "trace_index": 140482
         }
       ]
     },
@@ -1655,6 +1962,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5696,
           "trace_index": 88432
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 9324
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 39,
+          "trace_index": 141019
         }
       ]
     },
@@ -1745,6 +2062,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5695,
           "trace_index": 77889
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 5998
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 137197
         }
       ]
     },
@@ -1835,6 +2162,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5696,
           "trace_index": 80632
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 6742
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 137941
         }
       ]
     },
@@ -1925,6 +2262,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5696,
           "trace_index": 82888
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 7486
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 138685
         }
       ]
     },
@@ -1980,6 +2327,36 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5698,
           "trace_index": 105225
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 4434
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 4897
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 5360
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 135633
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 136096
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 136559
         }
       ]
     },
@@ -2062,6 +2439,72 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5695,
           "trace_index": 72492
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 131837
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C43B42",
+        "$C43B46",
+        "$C43B4A",
+        "$C43B4E",
+        "$C43B52",
+        "$C43B56"
+      ],
+      "pairs": [
+        {
+          "address": "$C43B42",
+          "xy": [
+            3200,
+            1296
+          ]
+        },
+        {
+          "address": "$C43B46",
+          "xy": [
+            2928,
+            976
+          ]
+        },
+        {
+          "address": "$C43B4A",
+          "xy": [
+            3008,
+            864
+          ]
+        },
+        {
+          "address": "$C43B4E",
+          "xy": [
+            3520,
+            1072
+          ]
+        },
+        {
+          "address": "$C43B52",
+          "xy": [
+            3808,
+            864
+          ]
+        },
+        {
+          "address": "$C43B56",
+          "xy": [
+            4224,
+            896
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 637
         }
       ]
     },
@@ -2144,6 +2587,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5695,
           "trace_index": 74506
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 2652
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 133851
         }
       ]
     },
@@ -2202,6 +2655,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5695,
           "trace_index": 76291
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 25,
+          "trace_index": 3928
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 135127
         }
       ]
     },
@@ -2276,6 +2739,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5694,
           "trace_index": 60648
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 35,
+          "trace_index": 100310
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 48,
+          "trace_index": 232283
         }
       ]
     },
@@ -2374,6 +2847,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5694,
           "trace_index": 62493
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 35,
+          "trace_index": 102271
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 48,
+          "trace_index": 234244
         }
       ]
     },
@@ -2480,6 +2963,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5694,
           "trace_index": 65067
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 35,
+          "trace_index": 104844
         }
       ]
     },
@@ -2578,6 +3066,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5694,
           "trace_index": 67751
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 35,
+          "trace_index": 107591
         }
       ]
     },
@@ -2652,6 +3145,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5695,
           "trace_index": 70628
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 110467
         }
       ]
     },
@@ -2964,6 +3462,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5698,
           "trace_index": 102088
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 34,
+          "trace_index": 96632
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 48,
+          "trace_index": 229067
         }
       ]
     },
@@ -3088,6 +3596,21 @@
           "inventory": "analysis\\data\\run035_m_map_stable_polygon_static_packets.json",
           "frame": 1,
           "trace_index": 3629
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 34,
+          "trace_index": 95050
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 38,
+          "trace_index": 130356
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 48,
+          "trace_index": 227485
         }
       ]
     },
@@ -3724,6 +4247,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5692,
           "trace_index": 42440
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 37,
+          "trace_index": 123377
         }
       ]
     },
@@ -3806,6 +4334,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5692,
           "trace_index": 43850
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 37,
+          "trace_index": 124788
         }
       ]
     },
@@ -3888,6 +4421,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5692,
           "trace_index": 45730
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 37,
+          "trace_index": 126796
         }
       ]
     },
@@ -3946,6 +4484,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5693,
           "trace_index": 48750
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 37,
+          "trace_index": 128841
         }
       ]
     },
@@ -4036,6 +4579,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5691,
           "trace_index": 35364
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 33,
+          "trace_index": 88191
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 47,
+          "trace_index": 220629
         }
       ]
     },
@@ -4126,6 +4679,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5692,
           "trace_index": 38109
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 34,
+          "trace_index": 90934
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 47,
+          "trace_index": 222877
         }
       ]
     },
@@ -4200,6 +4763,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5692,
           "trace_index": 40357
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 34,
+          "trace_index": 93177
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 47,
+          "trace_index": 225121
         }
       ]
     },
@@ -4348,6 +4921,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5697,
           "trace_index": 92390
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 33,
+          "trace_index": 83653
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 46,
+          "trace_index": 215598
         }
       ]
     },
@@ -4390,6 +4973,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5697,
           "trace_index": 93844
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 33,
+          "trace_index": 85092
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 47,
+          "trace_index": 217533
         }
       ]
     },
@@ -4472,6 +5065,16 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5697,
           "trace_index": 94848
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 33,
+          "trace_index": 86096
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 47,
+          "trace_index": 218537
         }
       ]
     },
@@ -4569,6 +5172,329 @@
     },
     {
       "addresses": [
+        "$C43FD6",
+        "$C43FDA",
+        "$C43FDE",
+        "$C43FE2",
+        "$C43FE6",
+        "$C43FEA",
+        "$C43FEE",
+        "$C43FF2",
+        "$C43FF6",
+        "$C43FFA",
+        "$C43FFE",
+        "$C44002",
+        "$C44006"
+      ],
+      "pairs": [
+        {
+          "address": "$C43FD6",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C43FDA",
+          "xy": [
+            1152,
+            4096
+          ]
+        },
+        {
+          "address": "$C43FDE",
+          "xy": [
+            2016,
+            1664
+          ]
+        },
+        {
+          "address": "$C43FE2",
+          "xy": [
+            2176,
+            1584
+          ]
+        },
+        {
+          "address": "$C43FE6",
+          "xy": [
+            2128,
+            1472
+          ]
+        },
+        {
+          "address": "$C43FEA",
+          "xy": [
+            1328,
+            1392
+          ]
+        },
+        {
+          "address": "$C43FEE",
+          "xy": [
+            1664,
+            1616
+          ]
+        },
+        {
+          "address": "$C43FF2",
+          "xy": [
+            1296,
+            2080
+          ]
+        },
+        {
+          "address": "$C43FF6",
+          "xy": [
+            992,
+            2128
+          ]
+        },
+        {
+          "address": "$C43FFA",
+          "xy": [
+            832,
+            2048
+          ]
+        },
+        {
+          "address": "$C43FFE",
+          "xy": [
+            0,
+            1920
+          ]
+        },
+        {
+          "address": "$C44002",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C44006",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 32,
+          "trace_index": 76176
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 46,
+          "trace_index": 208469
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C4400C",
+        "$C44010",
+        "$C44014",
+        "$C44018",
+        "$C4401C",
+        "$C44020",
+        "$C44024",
+        "$C44028",
+        "$C4402C",
+        "$C44030",
+        "$C44034"
+      ],
+      "pairs": [
+        {
+          "address": "$C4400C",
+          "xy": [
+            832,
+            3328
+          ]
+        },
+        {
+          "address": "$C44010",
+          "xy": [
+            896,
+            2688
+          ]
+        },
+        {
+          "address": "$C44014",
+          "xy": [
+            640,
+            2848
+          ]
+        },
+        {
+          "address": "$C44018",
+          "xy": [
+            896,
+            2176
+          ]
+        },
+        {
+          "address": "$C4401C",
+          "xy": [
+            640,
+            2160
+          ]
+        },
+        {
+          "address": "$C44020",
+          "xy": [
+            576,
+            2464
+          ]
+        },
+        {
+          "address": "$C44024",
+          "xy": [
+            560,
+            2160
+          ]
+        },
+        {
+          "address": "$C44028",
+          "xy": [
+            288,
+            2096
+          ]
+        },
+        {
+          "address": "$C4402C",
+          "xy": [
+            976,
+            2112
+          ]
+        },
+        {
+          "address": "$C44030",
+          "xy": [
+            1280,
+            2640
+          ]
+        },
+        {
+          "address": "$C44034",
+          "xy": [
+            1072,
+            2656
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 33,
+          "trace_index": 79929
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 46,
+          "trace_index": 211745
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C4403A",
+        "$C4403E",
+        "$C44042",
+        "$C44046"
+      ],
+      "pairs": [
+        {
+          "address": "$C4403A",
+          "xy": [
+            384,
+            4128
+          ]
+        },
+        {
+          "address": "$C4403E",
+          "xy": [
+            128,
+            4096
+          ]
+        },
+        {
+          "address": "$C44042",
+          "xy": [
+            0,
+            3888
+          ]
+        },
+        {
+          "address": "$C44046",
+          "xy": [
+            0,
+            3648
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 33,
+          "trace_index": 82342
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 46,
+          "trace_index": 214287
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C44052",
+        "$C44056",
+        "$C4405A",
+        "$C4405E"
+      ],
+      "pairs": [
+        {
+          "address": "$C44052",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C44056",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C4405A",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C4405E",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 37,
+          "trace_index": 122027
+        }
+      ]
+    },
+    {
+      "addresses": [
         "$C4406C",
         "$C44070",
         "$C44074"
@@ -4648,6 +5574,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5697,
           "trace_index": 91399
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 37,
+          "trace_index": 120157
         }
       ]
     },
@@ -4690,6 +5621,11 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5697,
           "trace_index": 91606
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 37,
+          "trace_index": 121053
         }
       ]
     },
@@ -4748,6 +5684,997 @@
           "inventory": "analysis\\data\\run037_m_map_stable_polygon_static_packets.json",
           "frame": 5697,
           "trace_index": 91043
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 32,
+          "trace_index": 74490
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 45,
+          "trace_index": 206286
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C440C2",
+        "$C440C6",
+        "$C440CA",
+        "$C440CE",
+        "$C440D2",
+        "$C440D6",
+        "$C440DA"
+      ],
+      "pairs": [
+        {
+          "address": "$C440C2",
+          "xy": [
+            2576,
+            3520
+          ]
+        },
+        {
+          "address": "$C440C6",
+          "xy": [
+            2224,
+            3152
+          ]
+        },
+        {
+          "address": "$C440CA",
+          "xy": [
+            2432,
+            3152
+          ]
+        },
+        {
+          "address": "$C440CE",
+          "xy": [
+            2528,
+            3008
+          ]
+        },
+        {
+          "address": "$C440D2",
+          "xy": [
+            2432,
+            2944
+          ]
+        },
+        {
+          "address": "$C440D6",
+          "xy": [
+            2496,
+            2896
+          ]
+        },
+        {
+          "address": "$C440DA",
+          "xy": [
+            2640,
+            3072
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 64434
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 44,
+          "trace_index": 196231
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C440E0",
+        "$C440E4",
+        "$C440E8",
+        "$C440EC",
+        "$C440F0",
+        "$C440F4",
+        "$C440F8",
+        "$C440FC",
+        "$C44100",
+        "$C44104",
+        "$C44108"
+      ],
+      "pairs": [
+        {
+          "address": "$C440E0",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C440E4",
+          "xy": [
+            2816,
+            4096
+          ]
+        },
+        {
+          "address": "$C440E8",
+          "xy": [
+            2736,
+            3632
+          ]
+        },
+        {
+          "address": "$C440EC",
+          "xy": [
+            2864,
+            3264
+          ]
+        },
+        {
+          "address": "$C440F0",
+          "xy": [
+            2624,
+            2848
+          ]
+        },
+        {
+          "address": "$C440F4",
+          "xy": [
+            2496,
+            2896
+          ]
+        },
+        {
+          "address": "$C440F8",
+          "xy": [
+            1536,
+            1472
+          ]
+        },
+        {
+          "address": "$C440FC",
+          "xy": [
+            1344,
+            736
+          ]
+        },
+        {
+          "address": "$C44100",
+          "xy": [
+            1104,
+            256
+          ]
+        },
+        {
+          "address": "$C44104",
+          "xy": [
+            1152,
+            0
+          ]
+        },
+        {
+          "address": "$C44108",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 31,
+          "trace_index": 66352
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 45,
+          "trace_index": 198645
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C4410E",
+        "$C44112",
+        "$C44116",
+        "$C4411A",
+        "$C4411E",
+        "$C44122",
+        "$C44126",
+        "$C4412A"
+      ],
+      "pairs": [
+        {
+          "address": "$C4410E",
+          "xy": [
+            2496,
+            2992
+          ]
+        },
+        {
+          "address": "$C44112",
+          "xy": [
+            2432,
+            3104
+          ]
+        },
+        {
+          "address": "$C44116",
+          "xy": [
+            2240,
+            3104
+          ]
+        },
+        {
+          "address": "$C4411A",
+          "xy": [
+            1840,
+            2816
+          ]
+        },
+        {
+          "address": "$C4411E",
+          "xy": [
+            1360,
+            1888
+          ]
+        },
+        {
+          "address": "$C44122",
+          "xy": [
+            1440,
+            1664
+          ]
+        },
+        {
+          "address": "$C44126",
+          "xy": [
+            1856,
+            1824
+          ]
+        },
+        {
+          "address": "$C4412A",
+          "xy": [
+            2496,
+            2896
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 32,
+          "trace_index": 69578
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 45,
+          "trace_index": 201375
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C44130",
+        "$C44134",
+        "$C44138",
+        "$C4413C",
+        "$C44140",
+        "$C44144"
+      ],
+      "pairs": [
+        {
+          "address": "$C44130",
+          "xy": [
+            1632,
+            1760
+          ]
+        },
+        {
+          "address": "$C44134",
+          "xy": [
+            1440,
+            1648
+          ]
+        },
+        {
+          "address": "$C44138",
+          "xy": [
+            1200,
+            1664
+          ]
+        },
+        {
+          "address": "$C4413C",
+          "xy": [
+            1184,
+            1360
+          ]
+        },
+        {
+          "address": "$C44140",
+          "xy": [
+            864,
+            1232
+          ]
+        },
+        {
+          "address": "$C44144",
+          "xy": [
+            1056,
+            1088
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 32,
+          "trace_index": 71522
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 45,
+          "trace_index": 203318
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C4414A",
+        "$C4414E",
+        "$C44152",
+        "$C44156",
+        "$C4415A"
+      ],
+      "pairs": [
+        {
+          "address": "$C4414A",
+          "xy": [
+            1056,
+            1088
+          ]
+        },
+        {
+          "address": "$C4414E",
+          "xy": [
+            736,
+            1424
+          ]
+        },
+        {
+          "address": "$C44152",
+          "xy": [
+            672,
+            896
+          ]
+        },
+        {
+          "address": "$C44156",
+          "xy": [
+            48,
+            0
+          ]
+        },
+        {
+          "address": "$C4415A",
+          "xy": [
+            384,
+            0
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 32,
+          "trace_index": 73032
+        },
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 45,
+          "trace_index": 204828
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C44166",
+        "$C4416A",
+        "$C4416E",
+        "$C44172"
+      ],
+      "pairs": [
+        {
+          "address": "$C44166",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C4416A",
+          "xy": [
+            0,
+            4224
+          ]
+        },
+        {
+          "address": "$C4416E",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C44172",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 117848
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C44180",
+        "$C44184",
+        "$C44188",
+        "$C4418C",
+        "$C44190",
+        "$C44194",
+        "$C44198",
+        "$C4419C",
+        "$C441A0"
+      ],
+      "pairs": [
+        {
+          "address": "$C44180",
+          "xy": [
+            3728,
+            4160
+          ]
+        },
+        {
+          "address": "$C44184",
+          "xy": [
+            2976,
+            4096
+          ]
+        },
+        {
+          "address": "$C44188",
+          "xy": [
+            2560,
+            3392
+          ]
+        },
+        {
+          "address": "$C4418C",
+          "xy": [
+            2720,
+            3024
+          ]
+        },
+        {
+          "address": "$C44190",
+          "xy": [
+            3216,
+            3264
+          ]
+        },
+        {
+          "address": "$C44194",
+          "xy": [
+            3328,
+            3648
+          ]
+        },
+        {
+          "address": "$C44198",
+          "xy": [
+            3248,
+            3696
+          ]
+        },
+        {
+          "address": "$C4419C",
+          "xy": [
+            3328,
+            3728
+          ]
+        },
+        {
+          "address": "$C441A0",
+          "xy": [
+            3456,
+            3664
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 115973
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C441A6",
+        "$C441AA",
+        "$C441AE",
+        "$C441B2",
+        "$C441B6",
+        "$C441BA",
+        "$C441BE",
+        "$C441C2",
+        "$C441C6",
+        "$C441CA",
+        "$C441CE",
+        "$C441D2"
+      ],
+      "pairs": [
+        {
+          "address": "$C441A6",
+          "xy": [
+            3216,
+            3168
+          ]
+        },
+        {
+          "address": "$C441AA",
+          "xy": [
+            2496,
+            3216
+          ]
+        },
+        {
+          "address": "$C441AE",
+          "xy": [
+            2240,
+            3072
+          ]
+        },
+        {
+          "address": "$C441B2",
+          "xy": [
+            2192,
+            2752
+          ]
+        },
+        {
+          "address": "$C441B6",
+          "xy": [
+            2304,
+            2688
+          ]
+        },
+        {
+          "address": "$C441BA",
+          "xy": [
+            2400,
+            2832
+          ]
+        },
+        {
+          "address": "$C441BE",
+          "xy": [
+            2336,
+            3056
+          ]
+        },
+        {
+          "address": "$C441C2",
+          "xy": [
+            2592,
+            2752
+          ]
+        },
+        {
+          "address": "$C441C6",
+          "xy": [
+            2656,
+            2976
+          ]
+        },
+        {
+          "address": "$C441CA",
+          "xy": [
+            2848,
+            2304
+          ]
+        },
+        {
+          "address": "$C441CE",
+          "xy": [
+            2912,
+            2736
+          ]
+        },
+        {
+          "address": "$C441D2",
+          "xy": [
+            3072,
+            3072
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 116615
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C441D8",
+        "$C441DC",
+        "$C441E0",
+        "$C441E4",
+        "$C441E8",
+        "$C441EC",
+        "$C441F0",
+        "$C441F4",
+        "$C441F8",
+        "$C441FC",
+        "$C44200",
+        "$C44204"
+      ],
+      "pairs": [
+        {
+          "address": "$C441D8",
+          "xy": [
+            1936,
+            2896
+          ]
+        },
+        {
+          "address": "$C441DC",
+          "xy": [
+            1904,
+            2688
+          ]
+        },
+        {
+          "address": "$C441E0",
+          "xy": [
+            1360,
+            2464
+          ]
+        },
+        {
+          "address": "$C441E4",
+          "xy": [
+            1584,
+            2432
+          ]
+        },
+        {
+          "address": "$C441E8",
+          "xy": [
+            1744,
+            2112
+          ]
+        },
+        {
+          "address": "$C441EC",
+          "xy": [
+            1776,
+            2544
+          ]
+        },
+        {
+          "address": "$C441F0",
+          "xy": [
+            1936,
+            2560
+          ]
+        },
+        {
+          "address": "$C441F4",
+          "xy": [
+            2000,
+            2800
+          ]
+        },
+        {
+          "address": "$C441F8",
+          "xy": [
+            2224,
+            2624
+          ]
+        },
+        {
+          "address": "$C441FC",
+          "xy": [
+            2304,
+            2304
+          ]
+        },
+        {
+          "address": "$C44200",
+          "xy": [
+            2304,
+            2688
+          ]
+        },
+        {
+          "address": "$C44204",
+          "xy": [
+            2208,
+            2816
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 117317
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C44212",
+        "$C44216",
+        "$C4421A",
+        "$C4421E",
+        "$C44222",
+        "$C44226",
+        "$C4422A",
+        "$C4422E"
+      ],
+      "pairs": [
+        {
+          "address": "$C44212",
+          "xy": [
+            4096,
+            1984
+          ]
+        },
+        {
+          "address": "$C44216",
+          "xy": [
+            3744,
+            1568
+          ]
+        },
+        {
+          "address": "$C4421A",
+          "xy": [
+            3376,
+            1488
+          ]
+        },
+        {
+          "address": "$C4421E",
+          "xy": [
+            3296,
+            1344
+          ]
+        },
+        {
+          "address": "$C44222",
+          "xy": [
+            3312,
+            1168
+          ]
+        },
+        {
+          "address": "$C44226",
+          "xy": [
+            3504,
+            1392
+          ]
+        },
+        {
+          "address": "$C4422A",
+          "xy": [
+            3584,
+            1280
+          ]
+        },
+        {
+          "address": "$C4422E",
+          "xy": [
+            4160,
+            1248
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 114128
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C44234",
+        "$C44238",
+        "$C4423C",
+        "$C44240",
+        "$C44244"
+      ],
+      "pairs": [
+        {
+          "address": "$C44234",
+          "xy": [
+            4160,
+            1344
+          ]
+        },
+        {
+          "address": "$C44238",
+          "xy": [
+            3584,
+            1280
+          ]
+        },
+        {
+          "address": "$C4423C",
+          "xy": [
+            3504,
+            1296
+          ]
+        },
+        {
+          "address": "$C44240",
+          "xy": [
+            2816,
+            0
+          ]
+        },
+        {
+          "address": "$C44244",
+          "xy": [
+            4096,
+            0
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 114505
+        }
+      ]
+    },
+    {
+      "addresses": [
+        "$C44250",
+        "$C44254",
+        "$C44258",
+        "$C4425C",
+        "$C44260",
+        "$C44264",
+        "$C44268",
+        "$C4426C",
+        "$C44270",
+        "$C44274",
+        "$C44278",
+        "$C4427C",
+        "$C44280"
+      ],
+      "pairs": [
+        {
+          "address": "$C44250",
+          "xy": [
+            4224,
+            4224
+          ]
+        },
+        {
+          "address": "$C44254",
+          "xy": [
+            2496,
+            4096
+          ]
+        },
+        {
+          "address": "$C44258",
+          "xy": [
+            2288,
+            3856
+          ]
+        },
+        {
+          "address": "$C4425C",
+          "xy": [
+            2384,
+            3728
+          ]
+        },
+        {
+          "address": "$C44260",
+          "xy": [
+            2304,
+            3584
+          ]
+        },
+        {
+          "address": "$C44264",
+          "xy": [
+            1904,
+            3424
+          ]
+        },
+        {
+          "address": "$C44268",
+          "xy": [
+            1920,
+            3296
+          ]
+        },
+        {
+          "address": "$C4426C",
+          "xy": [
+            1408,
+            2944
+          ]
+        },
+        {
+          "address": "$C44270",
+          "xy": [
+            1168,
+            2576
+          ]
+        },
+        {
+          "address": "$C44274",
+          "xy": [
+            960,
+            2576
+          ]
+        },
+        {
+          "address": "$C44278",
+          "xy": [
+            0,
+            1984
+          ]
+        },
+        {
+          "address": "$C4427C",
+          "xy": [
+            0,
+            0
+          ]
+        },
+        {
+          "address": "$C44280",
+          "xy": [
+            4224,
+            0
+          ]
+        }
+      ],
+      "observations": [
+        {
+          "inventory": "analysis\\data\\run042_m_map_polygon_static_packets.json",
+          "frame": 36,
+          "trace_index": 112569
         }
       ]
     }
