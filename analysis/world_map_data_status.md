@@ -102,6 +102,14 @@ position-sensitive bounded M-map packet content, while leaving the terrain
 cell and flight-distance interpretations unproven. See the
 [run037 packet comparison](data/run037_m_map_stable_packet_comparison.md).
 
+The later distinct-location run042 produces a visibly different M-map view
+and directly selects 25 static packet headers / 749 signed pairs during its
+post-key transition. Eight headers are absent from the earlier stable run037
+sample, while six run037 headers are absent from run042. This is the strongest
+current location-sensitive static M-map content comparison, still short of a
+global coordinate or LOD decode. See the
+[run042 packet comparison](data/run042_m_map_packet_comparison.md).
+
 Authority: [packet path and depth provenance](routines/c2af00_map_static_pair_packet.md),
 [variant comparison](data/run003_run035_map_packet_variant_comparison.md), and
 [raw coordinate visual](plots/run003_run035_map_packet_variants.png).
