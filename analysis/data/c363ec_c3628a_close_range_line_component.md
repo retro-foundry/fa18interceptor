@@ -36,6 +36,11 @@ workspace, not exported source geometry. The trace does not identify the
 resulting face with the user-described grey city region, nor does it show that
 the component alone selects a distance/LOD tier.
 
+The [three orthographic views of that one observed face](../plots/run034_c363ec_interval_face_sheet.png)
+make the non-planar transformed shape directly inspectable. They are a
+renderer-output visualization, not an export of the full terrain/landmark
+model.
+
 ## Status
 
 This is an exportable **unnamed static line component**: preserve the four
@@ -49,4 +54,6 @@ Authority: `build/run031_frame11850_c363ec_transform_trace/trace.jsonl` and
 The additional face-path authority is
 `build/run034_near_c363ec_source_interval/trace.jsonl` (not versioned; it is
 reproducible with `scripts/trace_matrix_source_interval.py` from the sealed
-run034 checkpoint).
+run034 checkpoint). `scripts/collect_source_interval_polygon_submissions.py`
+reproduces the finalized five-vertex workspace and writes the ignored input to
+the linked plot.
