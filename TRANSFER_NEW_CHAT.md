@@ -15,7 +15,7 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   python scripts/verify_reconstructions.py
   ```
 
-  Last checked result: 585 source slices / 45,930 bytes match the authority
+  Last checked result: 586 source slices / 46,108 bytes match the authority
   snapshot.
 
 ## Current map result
