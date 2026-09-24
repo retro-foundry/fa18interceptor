@@ -36,7 +36,10 @@ immutable terrain template pair -> mutable placement (X, 0, Z) -> descriptor/con
 - `$C3B588 -> $C3B4FE/$C3B50A` is the user-identified green mountain behind
   the Golden Gate: five local triples and observed pyramid/wedge topology.
   `$C3B4F8` is only a six-byte adjacent control prefix, not a mountain-instance
-  pointer; see `analysis/data/c3b4f8_c3b4fe_control_boundary.md`.
+  pointer. Run037 proves it is read as descriptor `$C22708`'s live `+8` field,
+  but eleven later stores overwrite `$C45A36` before the next walker enters at
+  `$C3B73E`; neither `$C3B4F8` nor `$C3B4FE` executes in that continuation.
+  See `analysis/data/c3b4f8_c3b4fe_control_boundary.md`.
 - `$C363EC` has an immutable four-triple input and one source-bounded observed
   five-vertex filled face. Its static face-controller boundary remains unknown.
   Inspect `analysis/plots/run034_c363ec_interval_face_sheet.png` and
@@ -107,9 +110,10 @@ python scripts/compare_run042_map_packet_directory.py `
 
 ## Best next work
 
-1. Trace a map scenario that activates a descriptor target other than the six
-   stable streams (`$C35BD2`, `$C35598`, `$C355D0`, `$C36214`, `$C36210`,
-   `$C3B6AE`) before associating `$C3B4F8` with a runtime map component.
+1. Capture or isolate a map continuation where `$C3B4F8` remains in `$C45A36`
+   through a `$C1F6F8` entry. The existing run037 no-input continuation proves
+   the target's store but shows it overwritten before the walker, so it is not
+   a `$C3B4FE` parser or mountain-component trace.
 2. For physical terrain LOD, keep one landmark/camera bearing stable while
    varying range and trace the selector plus immutable family. Existing
    `analysis/data/golden_gate_lod_capture_protocol.md` is the protocol.

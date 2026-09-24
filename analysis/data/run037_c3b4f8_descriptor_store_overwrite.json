@@ -1,0 +1,80 @@
+{
+  "classification": "selected_descriptor_target_store_and_next_walker_boundary",
+  "authority": {
+    "trace": "build\\run037_c3b4f8_descriptor_target_trace\\trace.jsonl",
+    "slow": "build\\run037_m_map_template_to_placement_3f_trace\\slow.bin"
+  },
+  "selected_target": "$C3B4F8",
+  "selected_store": {
+    "trace_index": 0,
+    "field": "$C22708",
+    "value": "$C3B4F8"
+  },
+  "stores_before_next_walker": [
+    {
+      "trace_index": 0,
+      "field": "$C22708",
+      "value": "$C3B4F8"
+    },
+    {
+      "trace_index": 170,
+      "field": "$C22334",
+      "value": "$C445DC"
+    },
+    {
+      "trace_index": 295,
+      "field": "$C227F8",
+      "value": "$C44612"
+    },
+    {
+      "trace_index": 420,
+      "field": "$C22604",
+      "value": "$C37EA6"
+    },
+    {
+      "trace_index": 580,
+      "field": "$C225F0",
+      "value": "$C37E56"
+    },
+    {
+      "trace_index": 1025,
+      "field": "$C228D4",
+      "value": "$C44A3A"
+    },
+    {
+      "trace_index": 1148,
+      "field": "$C228E8",
+      "value": "$C44AA4"
+    },
+    {
+      "trace_index": 1271,
+      "field": "$C229D8",
+      "value": "$C45026"
+    },
+    {
+      "trace_index": 1393,
+      "field": "$C22898",
+      "value": "$C44970"
+    },
+    {
+      "trace_index": 1515,
+      "field": "$C22A64",
+      "value": "$C453C4"
+    },
+    {
+      "trace_index": 1679,
+      "field": "$C22A78",
+      "value": "$C4545C"
+    },
+    {
+      "trace_index": 1801,
+      "field": "$C224D8",
+      "value": "$C3B6A6"
+    }
+  ],
+  "next_walker": {
+    "trace_index": 2107,
+    "entry_a1": "$C3B73E"
+  },
+  "qualification": "C1CC70 store ordering and the next observed C1F6F8 entry are proven. This does not establish that a stored target is executed, parsed, or a model/terrain pointer."
+}
