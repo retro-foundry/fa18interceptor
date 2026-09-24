@@ -15,7 +15,7 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   python scripts/verify_reconstructions.py
   ```
 
-  Last checked result: 627 source slices / 50,998 bytes match the authority
+  Last checked result: 628 source slices / 51,016 bytes match the authority
   snapshot.
 
 - The source frontier in Hunk 8 now includes the independently returning
@@ -23,8 +23,10 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   `source_amiga/observed/scan_record_delta_submission.asm`. Runtime execution
   confirms the stage, its indexed `$C46184` record walk, component-delta
   reduction, and call to `$C25876`; neither record ownership nor the callee's
-  behaviour is assigned. The next adjacent helper boundaries are `$C1D0A4`
-  and `$C1D0B6`.
+  behaviour is assigned. The `$C1D0A4-$C1D0B5` alternate helper entry is also
+  reconstructed: its static selector-index arm starts from `$C48184`, then
+  joins `$C1D0C6`; this must not be conflated with the runtime scan's `$C46184`
+  base. The next adjacent helper boundary is `$C1D0B6`.
 
 ## Current map result
 
