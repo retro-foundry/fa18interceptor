@@ -123,6 +123,14 @@ vertex with middle component `1024`. Renderer-observed local triples from
 scene-family inputs therefore must not be conflated with the flat placement
 height.
 
+Run034 adds a second independent local-geometry observation: immutable
+`$C363EC` enters the matrix path and, before the next matrix-source entry,
+reaches `$C2469E -> $C2FF48` once with a finalized five-vertex face. Its
+renderer-output views are in
+[the source-bounded face sheet](plots/run034_c363ec_interval_face_sheet.png).
+The face's controller remains mutable/unresolved, so this is supporting local
+3D evidence rather than a new terrain-mesh export or a grey-city attribution.
+
 Consequently, a map export must retain all three stored components until a
 producer-to-consumer trace proves which components encode global placement and
 which (if any) encode elevation.
