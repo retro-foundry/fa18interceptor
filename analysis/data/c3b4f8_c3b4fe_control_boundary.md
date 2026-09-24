@@ -25,6 +25,9 @@ See the [store/overwrite audit](run037_c3b4f8_descriptor_store_overwrite.md).
 The corresponding [multi-trace audit](c3b4f8_map_store_walker_audit.md)
 finds the same non-transition across run003, run035, and run037 bounded map
 samples; missing walkers are explicitly retained as trace boundaries.
+An explicitly non-scenario [debugger parser probe](run037_c3b4f8_debugger_parser_probe.md)
+shows that the prefix is syntactically consumable by `$C1F6F8`, but does not
+replace the missing natural transition evidence.
 
 The adjacent `$C3B4FE` family is independently associated with the five-triple
 `$C3B588` green-mountain component, including four triangular side records.

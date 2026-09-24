@@ -115,7 +115,9 @@ python scripts/compare_run042_map_packet_directory.py `
    the target's store but shows it overwritten before the walker, so it is not
    a `$C3B4FE` parser or mountain-component trace. The repeated run003/run035/
    run037 audit at `analysis/data/c3b4f8_map_store_walker_audit.md` rules out
-   treating any current bounded sample as that transition.
+   treating any current bounded sample as that transition. The debugger-only
+   parser probe confirms `$C1F6F8` can consume the prefix, but must never be
+   cited as an original scenario transition.
 2. For physical terrain LOD, keep one landmark/camera bearing stable while
    varying range and trace the selector plus immutable family. Existing
    `analysis/data/golden_gate_lod_capture_protocol.md` is the protocol.

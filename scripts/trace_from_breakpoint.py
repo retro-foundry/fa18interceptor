@@ -91,12 +91,15 @@ def main():
             reached_return = True
             break
     (args.output / 'trace.jsonl').write_text(''.join(json.dumps(row, separators=(',', ':')) + '\n' for row in rows))
+    input_limitation = ('No replay input was supplied; execution after restore was no-input.'
+                        if not args.playback else
+                        'Input was delivered during normal replay before breakpoint; '
+                        + ('later replay events were deliberately not delivered while stepping.'
+                           if future else 'no future input occurred while stepping.'))
     (args.output / 'trace_summary.json').write_text(json.dumps({'breakpoint': f'{args.address:06x}', 'hit_frame': hit_frame,
         'return_pc': f'{args.return_pc:06x}', 'instructions': len(rows),
         'termination': 'return_pc' if reached_return else 'max_instructions',
-        'limitation': ('Input was delivered during normal replay before breakpoint; '
-                       + ('later replay events were deliberately not delivered while stepping.'
-                          if future else 'no future input occurred while stepping.'))}, indent=2) + '\n')
+        'limitation': input_limitation}, indent=2) + '\n')
     final_banks = []
     for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
         data = engine.memory(address, size)
