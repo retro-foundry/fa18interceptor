@@ -1,0 +1,97 @@
+{
+  "classification": "sealed_map_samples_c3b4f8_store_not_next_walker_target",
+  "target": "$C3B4F8",
+  "samples": [
+    {
+      "trace": "build/run003_m_map_appearance_trace/trace.jsonl",
+      "frame": 9,
+      "store_index": 89009,
+      "field": "$C22708",
+      "next_walker": {
+        "frame": 9,
+        "index": 91104,
+        "entry_a1": "$C3B73E"
+      }
+    },
+    {
+      "trace": "build/run003_m_map_appearance_trace/trace.jsonl",
+      "frame": 10,
+      "store_index": 96691,
+      "field": "$C22708",
+      "next_walker": null
+    },
+    {
+      "trace": "build/run003_m_map_appearance_trace/trace.jsonl",
+      "frame": 10,
+      "store_index": 96858,
+      "field": "$C22708",
+      "next_walker": null
+    },
+    {
+      "trace": "build/run035_m_map_stable_1f_trace/trace.jsonl",
+      "frame": 1,
+      "store_index": 8217,
+      "field": "$C22708",
+      "next_walker": null
+    },
+    {
+      "trace": "build/run035_m_map_stable_20f_trace/trace.jsonl",
+      "frame": 2,
+      "store_index": 12289,
+      "field": "$C22708",
+      "next_walker": {
+        "frame": 15,
+        "index": 149144,
+        "entry_a1": "$C35BF0"
+      }
+    },
+    {
+      "trace": "build/run035_m_map_stable_20f_trace/trace.jsonl",
+      "frame": 2,
+      "store_index": 12479,
+      "field": "$C22708",
+      "next_walker": {
+        "frame": 15,
+        "index": 149144,
+        "entry_a1": "$C35BF0"
+      }
+    },
+    {
+      "trace": "build/run035_m_map_stable_20f_trace/trace.jsonl",
+      "frame": 15,
+      "store_index": 147941,
+      "field": "$C22708",
+      "next_walker": {
+        "frame": 15,
+        "index": 149144,
+        "entry_a1": "$C35BF0"
+      }
+    },
+    {
+      "trace": "build/run037_c3b4f8_descriptor_target_trace/trace.jsonl",
+      "frame": null,
+      "store_index": 0,
+      "field": "$C22708",
+      "next_walker": {
+        "frame": null,
+        "index": 2107,
+        "entry_a1": "$C3B73E"
+      }
+    },
+    {
+      "trace": "build/run037_c3b4f8_descriptor_target_trace/trace.jsonl",
+      "frame": null,
+      "store_index": 8164,
+      "field": "$C22708",
+      "next_walker": null
+    },
+    {
+      "trace": "build/run037_c3b4f8_descriptor_target_trace/trace.jsonl",
+      "frame": null,
+      "store_index": 8331,
+      "field": "$C22708",
+      "next_walker": null
+    }
+  ],
+  "qualification": "This audits only each trace window through its next observed walker. A missing walker is a trace boundary, not evidence of rejection. No observed next walker receives C3B4F8; this does not prove the target can never reach the walker."
+}

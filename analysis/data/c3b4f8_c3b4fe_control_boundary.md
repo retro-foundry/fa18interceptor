@@ -22,6 +22,9 @@ The bounded continuation executes neither `$C3B4F8` nor `$C3B4FE`. Its exact
 parser role and any individual 3D component association therefore remain
 unresolved; the store alone cannot be promoted to a mountain-instance link.
 See the [store/overwrite audit](run037_c3b4f8_descriptor_store_overwrite.md).
+The corresponding [multi-trace audit](c3b4f8_map_store_walker_audit.md)
+finds the same non-transition across run003, run035, and run037 bounded map
+samples; missing walkers are explicitly retained as trace boundaries.
 
 The adjacent `$C3B4FE` family is independently associated with the five-triple
 `$C3B588` green-mountain component, including four triangular side records.
