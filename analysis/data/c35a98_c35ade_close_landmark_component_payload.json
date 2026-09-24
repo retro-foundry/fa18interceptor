@@ -1,21 +1,21 @@
 {
-  "classification": "trace-proven immutable direct-input pairs for the run041 close Golden Gate primitive family",
+  "classification": "trace-proven leading immutable input pairs within the run041 close Golden Gate primitive family",
   "components": [
     {
-      "input_range": "$C35A98-$C35AA3",
-      "triples": [[112, 440, 3168], [0, 440, 3168]],
-      "matrix_contract": "$C1F4AC then one $C1F524 iteration",
+      "leading_pair_range": "$C35A98-$C35AA3",
+      "leading_triples": [[112, 440, 3168], [0, 440, 3168]],
+      "complete_direct_input_range": "$C35A98-$C35AAf (four triples, selected by preceding count byte $04)",
       "observed_renderer_output": "seven polygon submissions, including $C4BFA6, and two $C355C2 line lists"
     },
     {
-      "input_range": "$C35ADE-$C35AE9",
-      "triples": [[112, 440, -3168], [0, 440, -3168]],
-      "matrix_contract": "$C1F4AC then one $C1F524 iteration",
+      "leading_pair_range": "$C35ADE-$C35AE9",
+      "leading_triples": [[112, 440, -3168], [0, 440, -3168]],
+      "complete_direct_input_range": "$C35ADE-$C35B0D (eight triples, selected by preceding count byte $08)",
       "observed_renderer_output": "one $C35590 line-list submission"
     }
   ],
   "exclusions": [
-    "The control bytes beginning at $C35AA4 and $C35AEA are outside these two direct-input ranges.",
+    "The leading-pair ranges are not complete component boundaries; the remaining directly transformed triples are excluded pending their own topology evidence.",
     "C48390 and C4BFxx are mutable renderer workspaces, not exported source vertices.",
     "This local packet is not an absolute world position, a complete Golden Gate mesh, or a global terrain map cell."
   ]
