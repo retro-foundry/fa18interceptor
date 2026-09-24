@@ -31,10 +31,18 @@ This run therefore cannot prove or disprove a distance-only terrain or bridge
 LOD scheme.
 
 A twelve-frame trace at the medium visible checkpoint (frame 6,250) records
-121,278 instructions and a normal active renderer workload, including the
-projection/clip helpers, but no `$C1F4AC` entry. It therefore does not connect
-the red pixels to the existing Golden Gate transform-batch catalogue and must
-not be used to identify a mesh or a replacement detail family.
+121,278 instructions and reaches `$C1F4AC` 10 times, alongside clipping,
+projection, polygon submission, and line emission. Its transform sources are
+`$C35B56` (twice), `$C35B80`, `$C363EC` (twice), `$C367B8`, `$C36954`,
+`$C3A9A8`, `$C3ACD4`, and `$C3B588`.
+
+The nearby larger checkpoint at frame 6,500 likewise reaches `$C1F4AC` 11
+times. It shares `$C35B56`, `$C363EC`, `$C367B8`, `$C36954`, `$C3ACD4`, and
+`$C3B588`, while using `$C35B1A` and `$C3A96E` where the frame-6,250 sample
+uses `$C35B80` and `$C3A9A8`. This is a concrete source-family difference,
+but it coincides with material landmark-bearing motion; it is therefore
+compatible with camera-relative culling/detail and is not distance-only LOD
+evidence.
 
 ## Result
 
@@ -45,4 +53,4 @@ policy remains a candidate mechanism only.
 
 Authority: sealed `captures/run038`; ignored replay artifacts
 `build/run038_bridge_keyframes/`, `build/run038_bridge_red.json`, and
-`build/run038_frame06250_12f_trace/`.
+`build/run038_frame{06250,06500}_12f_trace/`.
