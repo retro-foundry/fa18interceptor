@@ -42,6 +42,13 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   `analysis/golden_gate_lod_capture_protocol.md`; current run041 evidence is
   landmark-associated visual-detail selection, not physical-distance LOD.
 
+- `scripts/summarize_run041_origin_invariance.py` now captures a stronger
+  negative result in `analysis/data/run041_origin_invariance.{md,json}`: all
+  four saved run041 checkpoints retain the same sampled selector-origin
+  triple/modes while `$C1D10C-$C1DC08` executes at both traced endpoints. This
+  rejects origin-state change as the observed family-switch explanation, but
+  still does not supply an aircraft-to-landmark range or an LOD threshold.
+
 ## Current map result
 
 The world path has two separate layers:

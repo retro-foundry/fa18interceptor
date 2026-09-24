@@ -1,0 +1,80 @@
+{
+  "classification": "scenario_backed_origin_invariance_not_physical_distance_or_lod",
+  "invariant": true,
+  "fields": [
+    "$C45C3E",
+    "$C45C42",
+    "$C45C46",
+    "$C457B6",
+    "$C458AE",
+    "$C458B2",
+    "$C45785"
+  ],
+  "rows": [
+    {
+      "frame": 5000,
+      "slow": "build\\run041_frame05000_12f_trace\\slow.bin",
+      "trace": "build\\run041_frame05000_12f_trace\\trace.jsonl",
+      "values": {
+        "$C45C3E": 264187402,
+        "$C45C42": 2928,
+        "$C45C46": 286094979,
+        "$C457B6": 6,
+        "$C458AE": 0,
+        "$C458B2": 0,
+        "$C45785": 0
+      },
+      "origin_producer_instruction_count": 0,
+      "template_selection_instruction_count": 561
+    },
+    {
+      "frame": 5750,
+      "slow": "build\\run041_frame05750_checkpoint\\slow.bin",
+      "trace": null,
+      "values": {
+        "$C45C3E": 264187402,
+        "$C45C42": 2928,
+        "$C45C46": 286094979,
+        "$C457B6": 6,
+        "$C458AE": 0,
+        "$C458B2": 0,
+        "$C45785": 0
+      },
+      "origin_producer_instruction_count": null,
+      "template_selection_instruction_count": null
+    },
+    {
+      "frame": 6000,
+      "slow": "build\\run041_frame06000_checkpoint\\slow.bin",
+      "trace": null,
+      "values": {
+        "$C45C3E": 264187402,
+        "$C45C42": 2928,
+        "$C45C46": 286094979,
+        "$C457B6": 6,
+        "$C458AE": 0,
+        "$C458B2": 0,
+        "$C45785": 0
+      },
+      "origin_producer_instruction_count": null,
+      "template_selection_instruction_count": null
+    },
+    {
+      "frame": 6250,
+      "slow": "build\\run041_frame06250_12f_trace_retry\\slow.bin",
+      "trace": "build\\run041_frame06250_12f_trace_retry\\trace.jsonl",
+      "values": {
+        "$C45C3E": 264187402,
+        "$C45C42": 2928,
+        "$C45C46": 286094979,
+        "$C457B6": 6,
+        "$C458AE": 0,
+        "$C458B2": 0,
+        "$C45785": 0
+      },
+      "origin_producer_instruction_count": 0,
+      "template_selection_instruction_count": 425
+    }
+  ],
+  "conclusion": "The observed run041 source-family transition occurs with identical sampled selector-origin state. This excludes an origin-state change as its explanation, but does not measure physical range or prove LOD."
+}

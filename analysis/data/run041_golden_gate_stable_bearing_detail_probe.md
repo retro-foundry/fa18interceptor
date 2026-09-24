@@ -32,6 +32,14 @@ The terrain-origin policy endpoint is exactly identical across those windows:
 source switch does not coincide with a change in the reconstructed
 terrain-origin selector state.
 
+The four saved checkpoints at frames 5,000, 5,750, 6,000, and 6,250 now
+independently confirm that the same origin triple, `$C457B6`, `$C458AE`,
+`$C458B2`, and `$C45785` remain invariant. The bounded endpoint traces execute
+the downstream `$C1D10C-$C1DC08` template-selection region but not the
+`$C29042-$C295D0` origin producer. This excludes a change in those sampled
+origin inputs as the family-switch explanation; it still does not measure
+physical range. See [the origin-invariance report](run041_origin_invariance.md).
+
 Two additional replay-preserved no-input samples bracket the transition. At
 frame 5,750 (166 red pixels), `$C1F4AC` has seven distinct sources; at frame
 6,000 (296 pixels), it has six. Both are mixed sets, whereas the frame-6,250
