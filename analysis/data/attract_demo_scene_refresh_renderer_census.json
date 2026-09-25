@@ -1,0 +1,1011 @@
+{
+  "classification": "demo_flight_renderer_address_census_not_placement_or_mesh_ownership",
+  "authority": {
+    "trace": "build/attract_demo_scene_refresh_500_30f_trace/trace.jsonl",
+    "slow": "build/attract_demo_scene_refresh_500_30f_trace/trace_final_slow.bin"
+  },
+  "events": {
+    "descriptor_field_store": [
+      {
+        "frame": 503,
+        "trace_index": 21125,
+        "descriptor": "$C22700",
+        "field": "$C3B4F8"
+      },
+      {
+        "frame": 515,
+        "trace_index": 125158,
+        "descriptor": "$C22764",
+        "field": "$C44500"
+      },
+      {
+        "frame": 525,
+        "trace_index": 217972,
+        "descriptor": "$C22700",
+        "field": "$C3B4F8"
+      }
+    ],
+    "stream_cursor_publish": [
+      {
+        "frame": 504,
+        "trace_index": 26737,
+        "a5": "$C3924C"
+      },
+      {
+        "frame": 506,
+        "trace_index": 45543,
+        "a5": "$C34A5E"
+      },
+      {
+        "frame": 515,
+        "trace_index": 130231,
+        "a5": "$C3924C"
+      },
+      {
+        "frame": 518,
+        "trace_index": 148214,
+        "a5": "$C34A5E"
+      },
+      {
+        "frame": 526,
+        "trace_index": 223658,
+        "a5": "$C3924C"
+      },
+      {
+        "frame": 528,
+        "trace_index": 241933,
+        "a5": "$C34A5E"
+      }
+    ],
+    "transform_source": [],
+    "control_walker_entry": [
+      {
+        "frame": 504,
+        "trace_index": 32083,
+        "entry_a1": "$C39B7C"
+      },
+      {
+        "frame": 507,
+        "trace_index": 47842,
+        "entry_a1": "$C351E2"
+      },
+      {
+        "frame": 516,
+        "trace_index": 136142,
+        "entry_a1": "$C39B7C"
+      },
+      {
+        "frame": 518,
+        "trace_index": 149948,
+        "entry_a1": "$C351E2"
+      },
+      {
+        "frame": 527,
+        "trace_index": 229569,
+        "entry_a1": "$C39B7C"
+      },
+      {
+        "frame": 529,
+        "trace_index": 244232,
+        "entry_a1": "$C351E2"
+      }
+    ],
+    "control_stream_load": [
+      {
+        "frame": 504,
+        "trace_index": 32086,
+        "a5": "$C3924C"
+      },
+      {
+        "frame": 507,
+        "trace_index": 47845,
+        "a5": "$C34A5E"
+      },
+      {
+        "frame": 516,
+        "trace_index": 136145,
+        "a5": "$C3924C"
+      },
+      {
+        "frame": 518,
+        "trace_index": 149951,
+        "a5": "$C34A5E"
+      },
+      {
+        "frame": 527,
+        "trace_index": 229572,
+        "a5": "$C3924C"
+      },
+      {
+        "frame": 529,
+        "trace_index": 244235,
+        "a5": "$C34A5E"
+      }
+    ],
+    "line_submit": [
+      {
+        "frame": 503,
+        "trace_index": 19450,
+        "a5": "$C4BFD6"
+      },
+      {
+        "frame": 503,
+        "trace_index": 22122,
+        "a5": "$0001AA"
+      },
+      {
+        "frame": 503,
+        "trace_index": 22784,
+        "a5": "$00026A"
+      },
+      {
+        "frame": 506,
+        "trace_index": 38686,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 38940,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 39193,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 39462,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 39716,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 39980,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 40239,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 40494,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 40758,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 41014,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 41304,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 506,
+        "trace_index": 41762,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 508,
+        "trace_index": 60144,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 61034,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 61924,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 62211,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 62465,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 62719,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 62975,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 63231,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 63487,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 64637,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 64893,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 69890,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 70162,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 78791,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 79042,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 79294,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 79547,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 515,
+        "trace_index": 123519,
+        "a5": "$C4BFD6"
+      },
+      {
+        "frame": 515,
+        "trace_index": 126181,
+        "a5": "$0001AA"
+      },
+      {
+        "frame": 515,
+        "trace_index": 126843,
+        "a5": "$00026A"
+      },
+      {
+        "frame": 517,
+        "trace_index": 141034,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 141288,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 141541,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 141795,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 142049,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 142303,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 142557,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 142812,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 143066,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 143322,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 517,
+        "trace_index": 143602,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 518,
+        "trace_index": 144565,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 519,
+        "trace_index": 160643,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 519,
+        "trace_index": 161533,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 519,
+        "trace_index": 162423,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 519,
+        "trace_index": 162710,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 163529,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 163783,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 164039,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 164295,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 164551,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 165136,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 165392,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 170404,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 170661,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 179275,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 179526,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 179778,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 180031,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 525,
+        "trace_index": 216376,
+        "a5": "$C4BFD6"
+      },
+      {
+        "frame": 525,
+        "trace_index": 219043,
+        "a5": "$0001AA"
+      },
+      {
+        "frame": 525,
+        "trace_index": 219705,
+        "a5": "$00026A"
+      },
+      {
+        "frame": 528,
+        "trace_index": 235071,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 235335,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 235588,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 235852,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 236106,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 236370,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 236629,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 236884,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 237148,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 237404,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 237694,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 528,
+        "trace_index": 238152,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 530,
+        "trace_index": 255526,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 256416,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 257306,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 257593,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 257847,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 258101,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 258357,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 258613,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 258869,
+        "a5": "$C34A9A"
+      }
+    ],
+    "polygon_submit": [
+      {
+        "frame": 502,
+        "trace_index": 13401,
+        "a5": "$C4BFE2"
+      },
+      {
+        "frame": 503,
+        "trace_index": 17326,
+        "a5": "$C4BFBE"
+      },
+      {
+        "frame": 503,
+        "trace_index": 19409,
+        "a5": "$C4BFD6"
+      },
+      {
+        "frame": 503,
+        "trace_index": 22082,
+        "a5": "$0001AA"
+      },
+      {
+        "frame": 503,
+        "trace_index": 22744,
+        "a5": "$00026A"
+      },
+      {
+        "frame": 505,
+        "trace_index": 36113,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 507,
+        "trace_index": 49273,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 507,
+        "trace_index": 50940,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 507,
+        "trace_index": 52793,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 507,
+        "trace_index": 54227,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 508,
+        "trace_index": 57703,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 508,
+        "trace_index": 60080,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 60967,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 508,
+        "trace_index": 61857,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 66518,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 68006,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 69198,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 70968,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 509,
+        "trace_index": 71973,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 73517,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 74740,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 76087,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 77413,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 80366,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 510,
+        "trace_index": 81475,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 514,
+        "trace_index": 117490,
+        "a5": "$C4BFE2"
+      },
+      {
+        "frame": 515,
+        "trace_index": 121430,
+        "a5": "$C4BFBE"
+      },
+      {
+        "frame": 515,
+        "trace_index": 123478,
+        "a5": "$C4BFD6"
+      },
+      {
+        "frame": 515,
+        "trace_index": 126141,
+        "a5": "$0001AA"
+      },
+      {
+        "frame": 515,
+        "trace_index": 126803,
+        "a5": "$00026A"
+      },
+      {
+        "frame": 516,
+        "trace_index": 139061,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 518,
+        "trace_index": 151379,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 518,
+        "trace_index": 153036,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 519,
+        "trace_index": 155379,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 519,
+        "trace_index": 156818,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 519,
+        "trace_index": 158197,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 519,
+        "trace_index": 160579,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 519,
+        "trace_index": 161466,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 519,
+        "trace_index": 162356,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 167017,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 168515,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 169707,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 171457,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 520,
+        "trace_index": 172462,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 174006,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 175229,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 176571,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 177897,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 180850,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 521,
+        "trace_index": 181959,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 524,
+        "trace_index": 210437,
+        "a5": "$C4BFE2"
+      },
+      {
+        "frame": 525,
+        "trace_index": 214247,
+        "a5": "$C4BFBE"
+      },
+      {
+        "frame": 525,
+        "trace_index": 216335,
+        "a5": "$C4BFD6"
+      },
+      {
+        "frame": 525,
+        "trace_index": 219003,
+        "a5": "$0001AA"
+      },
+      {
+        "frame": 525,
+        "trace_index": 219665,
+        "a5": "$00026A"
+      },
+      {
+        "frame": 527,
+        "trace_index": 232488,
+        "a5": "$C392A8"
+      },
+      {
+        "frame": 529,
+        "trace_index": 245663,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 529,
+        "trace_index": 247325,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 529,
+        "trace_index": 249178,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 530,
+        "trace_index": 251706,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 530,
+        "trace_index": 253085,
+        "a5": "$C45BEA"
+      },
+      {
+        "frame": 530,
+        "trace_index": 255462,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 256349,
+        "a5": "$C34A9A"
+      },
+      {
+        "frame": 530,
+        "trace_index": 257239,
+        "a5": "$C34A9A"
+      }
+    ]
+  },
+  "summary": {
+    "descriptor_field_store": {
+      "events": 3,
+      "distinct": [
+        {
+          "field": "$C3B4F8",
+          "count": 2
+        },
+        {
+          "field": "$C44500",
+          "count": 1
+        }
+      ]
+    },
+    "stream_cursor_publish": {
+      "events": 6,
+      "distinct": [
+        {
+          "a5": "$C34A5E",
+          "count": 3
+        },
+        {
+          "a5": "$C3924C",
+          "count": 3
+        }
+      ]
+    },
+    "transform_source": {
+      "events": 0,
+      "distinct": []
+    },
+    "control_walker_entry": {
+      "events": 6,
+      "distinct": [
+        {
+          "entry_a1": "$C351E2",
+          "count": 3
+        },
+        {
+          "entry_a1": "$C39B7C",
+          "count": 3
+        }
+      ]
+    },
+    "control_stream_load": {
+      "events": 6,
+      "distinct": [
+        {
+          "a5": "$C34A5E",
+          "count": 3
+        },
+        {
+          "a5": "$C3924C",
+          "count": 3
+        }
+      ]
+    },
+    "line_submit": {
+      "events": 88,
+      "distinct": [
+        {
+          "a5": "$0001AA",
+          "count": 3
+        },
+        {
+          "a5": "$00026A",
+          "count": 3
+        },
+        {
+          "a5": "$C34A9A",
+          "count": 43
+        },
+        {
+          "a5": "$C392A8",
+          "count": 36
+        },
+        {
+          "a5": "$C4BFD6",
+          "count": 3
+        }
+      ]
+    },
+    "polygon_submit": {
+      "events": 64,
+      "distinct": [
+        {
+          "a5": "$0001AA",
+          "count": 3
+        },
+        {
+          "a5": "$00026A",
+          "count": 3
+        },
+        {
+          "a5": "$C34A9A",
+          "count": 31
+        },
+        {
+          "a5": "$C392A8",
+          "count": 3
+        },
+        {
+          "a5": "$C45BEA",
+          "count": 15
+        },
+        {
+          "a5": "$C4BFBE",
+          "count": 3
+        },
+        {
+          "a5": "$C4BFD6",
+          "count": 3
+        },
+        {
+          "a5": "$C4BFE2",
+          "count": 3
+        }
+      ]
+    }
+  },
+  "qualification": "This is a renderer/control census of an ordinary demo-flight trace. It does not join a flight placement record to these addresses and therefore does not prove named buildings, landmarks, complete models, or per-instance primitive ownership."
+}
