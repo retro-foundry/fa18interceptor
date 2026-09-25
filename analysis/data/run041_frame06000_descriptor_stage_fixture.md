@@ -15,6 +15,7 @@ walker, before returning to `$C1CC88`:
 | --- | --- | --- | --- | --- | --- |
 | 5,395--6,941, frame 6,001 | `$C22410` | `$C35594` | `$C35B56` | `$C35594` | `$C1CC88` |
 | 7,000--9,147, frames 6,001--6,002 | `$C22424` | `$C355CC` | `$C35B80` | `$C355CC` | `$C1CC88` |
+| 7,189--7,821, frame 5,751 | `$C22410` | `$C35598` | `$C35BAA` | `$C35598` | `$C1CC88` |
 
 For the first fixture, the decisive instructions are: `$C1CC70` stores its
 selected control field at trace row 5,395; the caller enters `$C1EE14` at
@@ -27,7 +28,16 @@ control and immutable-source addresses. It reaches `$C1EE14` at row 7,006,
 publishes `$C355CC` at 7,092, uses `$C35B80` at `$C1F4AC` row 7,158, loads
 that cursor into `A5` at row 7,374, and returns at 9,147.
 
+The final row is the corresponding frame-5,750 checkpoint fixture from
+`build/run041_frame05750_12f_reverse_stack_trace/trace.jsonl`. It deliberately
+uses the same placement-loop field as the first row: `$C1CC70` selects
+`$C22410` at row 7,189, calls `$C1EE14` at 7,195, publishes `$C35598` at
+7,284, reads `$C35BAA` at `$C1F4AC` row 7,350, loads `$C35598` into `A5` at
+7,452, and returns at 7,821. Thus the common field and common stage structure
+do not make the derived cursor or immutable input constant across checkpoints.
+
 This joins placement-loop selection to both downstream renderer-input
 families in an uninterrupted replay interval. It does not establish that the
 two address families are a mesh, that either field owns the same object across
-frames, or what visible feature they represent.
+frames, what causes the within-family address change, or what visible feature
+they represent.
