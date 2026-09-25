@@ -12,6 +12,7 @@ requires a direct result-screen or persistent-state oracle.
 | run028 | raw recording | 377 | 10,526 | absent (five startup records) | active/near-blank cockpit | outcome unknown |
 | run029 | sealed | 266 | 14,298 | absent in existing bounded monitors | active cockpit after reported relaunch | leading success candidate |
 | run060 | sealed, deterministic boot-restore v1 | not re-audited here | 10,085 | not required for visual result | native frame 9,545: qualification-success text | **successful qualification** |
+| run062 | sealed, deterministic boot-restore v1 | not re-audited here | 2,470 | not required for terminal result | native frame 2,475: top-level menu | **failed qualification, returned to menu** |
 
 `run026`, `run027`, and `run028` were not sealed previously because they retain
 their terminal `F <frame> C` close marker. `scripts/profile_window.py` now
@@ -40,3 +41,10 @@ The native renderer's frame 9,545 directly shows `LANDING SUCCESSFUL` and
 not the text producer, qualification-status writer, or persistence rule; those
 still require an exact native checkpoint and bounded code trace. See
 `analysis/run060_qualification_success.md`.
+
+Run062 is the complementary failed-result scenario. A native checkpoint at its
+final recorded input frame 2,470, followed by five no-input frames in the
+direct-core tracer, RGB-pixel-matches native frame 2,475's top-level menu. It
+therefore supports a bounded failed-result-to-menu transition trace without
+assuming a particular crash, carrier, or qualification-status predicate. See
+`analysis/run062_failed_qualification.md`.
