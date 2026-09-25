@@ -50,12 +50,15 @@ causal paths and the qualification-status writer remain untraced.
 ## Scope of the claim
 
 This is a `scenario`-level result: a deterministic replay reaches the visible
-qualification-success screen. It is not yet a behavioral contract for the
-static payload at `$C3FC3C`, the text compositor, carrier-landing test, pilot
-log mutation, or mission-unlock state. The direct-core bridge previously used
-for screenshot extraction is not a visual oracle for run060 because it bypasses
-the native host input scheduler. Future bounded instruction analysis must begin
-from a native replay checkpoint at the message interval.
+qualification-success screen. A later bounded native-checkpoint trace now
+proves the active onset path selects bytes inside static payload `$C3FC3C`
+(`LANDING SUCCESSFUL`) and feeds them into the glyph compositor; see
+`analysis/run060_success_text_payload_trace.md`. It is not yet a behavioral
+contract for the producer that selected that payload, carrier-landing test,
+pilot-log mutation, or mission-unlock state. The direct-core bridge previously
+used for screenshot extraction is not a visual oracle for run060 because it
+bypasses the native host input scheduler. Future bounded instruction analysis
+must begin from a native replay checkpoint at the message interval.
 
 The current pixel-validated no-input continuation from native GUI frame 9,546
 to frame 9,550 executes the message-sequence idle path at `$C32CC4-$C32D08`.
