@@ -1,0 +1,23 @@
+{
+  "classification": "bounded_instance_asset_not_named_landmark",
+  "instance": {
+    "static_template": "$C4266B",
+    "runtime_placement_record": "$C4ED9A",
+    "placement_x_y_z": [272, 0, 146],
+    "descriptor": "$C22584",
+    "descriptor_field": "$C36212",
+    "cursor_published_stream": "$C36214",
+    "scaled_live_vector": [69632, 0, 37376]
+  },
+  "local_geometry": {
+    "source": "$C36220",
+    "triples": [[4096, 172, -5248], [-2816, 172, 1152], [-8960, 0, 2816]],
+    "line_context": "$C36216",
+    "bounded_line_trace_indices": [144191, 144445]
+  },
+  "authority": {
+    "trace": "build/run037_m_map_placement_to_control_20f_trace/trace.jsonl",
+    "handoff": "analysis/data/run037_m_map_placement_to_control_20f_handoff.json"
+  },
+  "qualification": "The instance's left-shifted placement vector, local triples, control stream, and two following line emissions are observed in one trace. This does not establish a name, global static vertex export, or complete topology."
+}
