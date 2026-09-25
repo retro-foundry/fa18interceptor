@@ -1,0 +1,19 @@
+{
+  "classification": "static_byte_decoded_signed_offset_line_list",
+  "address": "$C2B91E",
+  "bytes": "ff 01 01 00 fb 0b 01 fc 09 80",
+  "terminator": "$80",
+  "record_format": ["signed_dy", "signed_dx", "unsigned_width_minus_one"],
+  "records": [
+    {"address": "$C2B91E", "bytes": "ff 01 01", "dy": -1, "dx": 1, "width": 2},
+    {"address": "$C2B921", "bytes": "00 fb 0b", "dy": 0, "dx": -5, "width": 12},
+    {"address": "$C2B924", "bytes": "01 fc 09", "dy": 1, "dx": -4, "width": 10}
+  ],
+  "run003_origin": [30, 131],
+  "run003_segments": [
+    [[31, 130], [31, 130]],
+    [[25, 131], [35, 131]],
+    [[26, 132], [34, 132]]
+  ],
+  "qualification": "The static bytes and generic iterator establish the record grammar. The origin is live renderer state; this data does not identify the marker's game ownership."
+}

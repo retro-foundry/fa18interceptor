@@ -8,6 +8,10 @@ The black map symbol is a three-segment vector emitted through `$C2B93E`:
 | 2 | `(25,131) -> (35,131)` |
 | 3 | `(26,132) -> (34,132)` |
 
+Its exact `$C2B91E` input is now byte-decoded as three
+`(signed dy, signed dx, width-minus-one)` records followed by `$80`; see
+[`c2b91e_marker_line_records.json`](c2b91e_marker_line_records.json).
+
 Each reaches `$C2FA7E` with `A5=$C4C598`.  Immediately before the `$C2B93E`
 line-list loop, the run003 M-map trace returns from `$C2ED6A` with
 `A1=$C45BEA`.  `$C45BEA` is the known mutable display context for the
