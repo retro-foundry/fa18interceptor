@@ -99,6 +99,17 @@
       "canonical_submissions": 42,
       "start_submission": null,
       "bounded_submissions": null
+    },
+    {
+      "name": "run004",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run004_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        356,
+        170
+      ],
+      "canonical_submissions": 22,
+      "start_submission": 2,
+      "bounded_submissions": 22
     }
   ],
   "landmarks": [
@@ -132,5 +143,5 @@
       ]
     ]
   ],
-  "qualification": "The normalized mosaic places run042 at (0,0), run002 at +16,+131, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, run001 at +194,+121, run024 at +270,+96, and run003 at +272,+97 host pixels. Run001 is a 36-submission pass from an independent Base-1 free-flight checkpoint; its run001/run035 join is 97.9020% agreement across 67,968 water pixels. Run002 is a 43-submission pass from an independent Base-4 free-flight checkpoint; its run002/run035 join is 97.9792% agreement across 56,808 water pixels. Run024 is a 42-submission pass from the user-verified San Francisco cockpit checkpoint; its run024/run035 join is 98.1594% agreement across 71,500 water pixels. Run038 uses an explicit stable 58-submission pass beginning at collector submission 8; its run038/run035 join is 98.2684% agreement across 103,488 water pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. The reusable C3B720/C3B6B0 component is deliberately excluded as an unproven landmark. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded."
+  "qualification": "The normalized mosaic places run042 at (0,0), run002 at +16,+131, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, run001 at +194,+121, run024 at +270,+96, run003 at +272,+97, and run004 at +356,+170 host pixels. Run004 is an explicitly bounded 22-submission pass beginning at collector submission 2 from an independent Base-3 free-flight checkpoint; its run004/run035 join is 99.3979% agreement across 28,566 water pixels. Run001 is a 36-submission pass from an independent Base-1 free-flight checkpoint; its run001/run035 join is 97.9020% agreement across 67,968 water pixels. Run002 is a 43-submission pass from an independent Base-4 free-flight checkpoint; its run002/run035 join is 97.9792% agreement across 56,808 water pixels. Run024 is a 42-submission pass from the user-verified San Francisco cockpit checkpoint; its run024/run035 join is 98.1594% agreement across 71,500 water pixels. Run038 uses an explicit stable 58-submission pass beginning at collector submission 8; its run038/run035 join is 98.2684% agreement across 103,488 water pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. The reusable C3B720/C3B6B0 component is deliberately excluded as an unproven landmark. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded."
 }
