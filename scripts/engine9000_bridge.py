@@ -375,6 +375,15 @@ def main():
                 engine.core.e9k_debug_step_instr()
                 engine.core.retro_run()
                 row['next_pc'] = engine.regs()['pc']
+                # Capstone 5's 68000 decoder can overrun certain two-byte
+                # instructions (observed for SBCD predecrement forms).  A
+                # shorter sequential PC advance is CPU evidence of the exact
+                # executed length, whereas branch/call targets remain outside
+                # this narrow fall-through case.
+                executed_length = row['next_pc'] - pc
+                if 2 <= executed_length < ins.size and executed_length % 2 == 0:
+                    row['decoder_length'] = ins.size
+                    row['bytes'] = raw[:executed_length].hex()
                 out.write(json.dumps(row, separators=(',', ':')) + '\n')
                 count += 1
                 if count >= 1000000:
