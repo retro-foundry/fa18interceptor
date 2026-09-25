@@ -1,6 +1,6 @@
 # Run031 landmark-window M-map command rejection
 
-Classification: **state-gate evidence; no causal gate identified**.
+Classification: **upstream keyboard-context gate identified**.
 
 An isolated raw `M` event does not reach the visible map display from three
 run031 landmark-window states. Each current probe restores its sealed state,
@@ -22,22 +22,30 @@ Gate checkpoint.
 The byte-exact map-command prelude first tests `$C458AE`. It is zero in the
 successful Base-1, Base-3, Base-4, and run024 checkpoints **and** in the
 run031 frame-12,000/frame-14,500 snapshots, so that documented early gate
-does not explain the rejection. A correlated distinction is `$C4599C`: it is
+does not explain the rejection. The actual divergence is earlier: the
+keyboard command gate sees `$C4584B=$03` in the run031 landmark states and
+routes raw input to `$C1B030` rather than the direct-key table at `$C1AE28`;
+the accepted run033 checkpoint has `$C4584B=$00` and reaches `$C1BF8C`.
+Writing only `$C4584B=$00` in the Alcatraz-window diagnostic is sufficient for
+the same raw M event to enter the original M-map renderer. A remaining
+correlated distinction is `$C4599C`: it is
 `$00` in successful pre-map snapshots and `$FA` in all three inspected run031
 landmark snapshots. `$C1BF8C` sets bit 0 of this byte. A debugger-only
 Alcatraz control that writes this byte to zero before the same event produces
 the identical final video digest as the unmodified control. It is therefore
-not sufficient to enable M-map mode; another shared state field, demo-mode
-control, or later transition logic remains responsible.
+not sufficient to enable M-map mode. It is downstream of the actual observed
+keyboard-context gate.
 
-The safe conclusion is operational: map capture must begin from a verified
-free-flight state whose isolated M event visibly reaches the green/blue map.
-It is not valid to infer a landmark's M-map coordinate solely from an
-otherwise labelled flight-window snapshot.
+The safe conclusion is operational: an unmodified map capture must begin from
+a state whose command-mode latch permits the direct-key table. A latch-mutated
+capture can yield authentic renderer vectors but must remain diagnostic and
+cannot, by itself, identify a landmark's map primitive.
 
 Authority: byte-exact
 [`dispatch_map_command_prelude.asm`](../../source_amiga/observed/dispatch_map_command_prelude.asm),
 the sealed frame-12,000/frame-14,500 snapshots, rebuilt frame-13,200
 checkpoint, and ignored `build/run031_frame{12000,13200,14500}_m_map_control/`
 artifacts. The isolated mutated Alcatraz control is retained separately in
-`build/run031_frame13200_alcatraz_m_map_request_flags_zero/`.
+`build/run031_frame13200_alcatraz_m_map_request_flags_zero/`; the successful
+mode-latch diagnostic is documented in
+[`run031_frame13200_alcatraz_m_map_diagnostic.md`](run031_frame13200_alcatraz_m_map_diagnostic.md).

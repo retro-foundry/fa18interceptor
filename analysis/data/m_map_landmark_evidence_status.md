@@ -1,6 +1,6 @@
 # M-map landmark evidence status
 
-[Open the twelve-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic.png).
+[Open the thirteen-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic.png).
 
 | map annotation | status | evidence boundary |
 | --- | --- | --- |
@@ -10,7 +10,7 @@
 | `$C3B5B6` | excluded | The same four-triangle component repeats in widely separated joined map regions. |
 | C35BDE / C36220 lines | excluded | Direct source components, but no unique semantic or landmark join. |
 
-The mosaic contains twelve direct `$C4B390`-before-`$C2FF48` polygon captures
+The mosaic contains thirteen direct `$C4B390`-before-`$C2FF48` polygon captures
 from independent M-map states. Green/blue is source-vector land/sea inside
 observed viewports; black is uncaptured space. It is not a complete global map.
 
@@ -19,3 +19,5 @@ checkpoint with a separate visual landmark oracle and a direct renderer/map
 position join. Run033 now supplies that join for Golden Gate; its direct
 evidence is retained in
 [`run033_frame05250_m_map_landmark_join.md`](run033_frame05250_m_map_landmark_join.md).
+The Alcatraz-window state now supplies diagnostic map coverage, but its
+island/map primitive is not yet identified and is deliberately unlabelled.

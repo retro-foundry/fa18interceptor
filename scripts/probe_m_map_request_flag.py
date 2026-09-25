@@ -16,6 +16,7 @@ from profile_window import read_events
 
 
 REQUEST_FLAGS = 0xC4599C
+MODE_LATCH = 0xC4584B
 
 
 def main() -> None:
@@ -26,11 +27,14 @@ def main() -> None:
     parser.add_argument("--frames", type=int, default=160)
     parser.add_argument("--value", type=lambda text: int(text, 0),
                         help="diagnostic byte to write; omit for an unmodified control")
+    parser.add_argument("--mode-latch", type=lambda text: int(text, 0),
+                        help="diagnostic C4584B byte to write before the M command")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     args = parser.parse_args()
-    if args.value is not None and not 0 <= args.value <= 0xFF:
-        parser.error("--value must fit one byte")
+    for name, value in (("--value", args.value), ("--mode-latch", args.mode_latch)):
+        if value is not None and not 0 <= value <= 0xFF:
+            parser.error(f"{name} must fit one byte")
     if args.output.exists():
         raise FileExistsError(args.output)
     events = read_events(args.playback)
@@ -42,11 +46,16 @@ def main() -> None:
         if not engine.core.retro_unserialize(state, len(state)):
             raise RuntimeError("Core rejected save state")
         before = engine.memory(REQUEST_FLAGS, 1)[0]
-        if args.value is not None:
+        writes = []
+        if args.value is not None or args.mode_latch is not None:
             write = engine.bind("e9k_debug_write_memory", C.c_int, C.c_uint32,
                                 C.c_uint32, C.c_size_t)
-            if not write(REQUEST_FLAGS, args.value, 1):
-                raise RuntimeError("debug write failed")
+            for address, value in ((REQUEST_FLAGS, args.value), (MODE_LATCH, args.mode_latch)):
+                if value is None:
+                    continue
+                if not write(address, value, 1):
+                    raise RuntimeError(f"debug write failed at ${address:06X}")
+                writes.append({"address": f"${address:06X}", "value": value})
         after_write = engine.memory(REQUEST_FLAGS, 1)[0]
         engine.frame = args.start_frame
         engine.hardware_frame = args.start_frame
@@ -58,16 +67,17 @@ def main() -> None:
         final_state = engine.state()
         (args.output / "state.bin").write_bytes(final_state)
         report = {
-            "scope": ("unmodified isolated M-map command control" if args.value is None else
-                      "diagnostic mutation of C4599C before isolated M-map command"),
+            "scope": ("unmodified isolated M-map command control" if not writes else
+                      "diagnostic command-state mutation before isolated M-map command"),
             "restore": str(args.restore), "playback": str(args.playback),
             "start_frame": args.start_frame, "frames": args.frames,
             "address": f"${REQUEST_FLAGS:06X}", "before": before,
             "written": args.value, "after_write": after_write,
+            "debug_writes": writes,
             "final": engine.memory(REQUEST_FLAGS, 1)[0],
             "video_sha256": sha(engine.video[0]),
             "state_sha256": sha(final_state),
-            "qualification": ("This is an unmodified control." if args.value is None else
+            "qualification": ("This is an unmodified control." if not writes else
                               "This is a debugger-mutated probe, not original replay behavior. "
                               "A visible map can establish the candidate flag's sufficiency only, not its normal producer."),
         }

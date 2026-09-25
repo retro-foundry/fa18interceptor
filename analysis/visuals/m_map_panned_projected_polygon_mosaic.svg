@@ -10,6 +10,7 @@
 <rect x="130" y="61" width="640" height="180" fill="#115511"><title>run035: observed map viewport</title></rect>
 <rect x="154" y="71" width="640" height="180" fill="#115511"><title>run038: observed map viewport</title></rect>
 <rect x="172" y="72" width="640" height="180" fill="#115511"><title>run041: observed map viewport</title></rect>
+<rect x="172" y="67" width="640" height="180" fill="#115511"><title>run031_alcatraz_window: observed map viewport</title></rect>
 <rect x="210" y="79" width="640" height="180" fill="#115511"><title>run033_5250: observed map viewport</title></rect>
 <rect x="194" y="121" width="640" height="180" fill="#115511"><title>run001: observed map viewport</title></rect>
 <rect x="270" y="96" width="640" height="180" fill="#115511"><title>run024: observed map viewport</title></rect>
@@ -346,6 +347,57 @@
 <polygon points="494,192 492,189 490,190"><title>run041: $C3B6B0, submission 57</title></polygon>
 <polygon points="492,189 488,189 490,190"><title>run041: $C3B6B0, submission 58</title></polygon>
 <polygon points="488,189 486,191 490,190"><title>run041: $C3B6B0, submission 59</title></polygon>
+<polygon points="224,67 230,72 196,112 234,112 238,101 440,159 454,189 436,230 466,246 172,246 172,67"><title>run031_alcatraz_window: $C4BFE8, submission 0</title></polygon>
+<polygon points="512,159 610,195 634,235 516,202"><title>run031_alcatraz_window: $C4BFAC, submission 1</title></polygon>
+<polygon points="504,72 462,104 504,118 564,96"><title>run031_alcatraz_window: $C4BFAC, submission 2</title></polygon>
+<polygon points="436,159 470,155 494,135 534,138 530,169 494,155 430,163"><title>run031_alcatraz_window: $C4BFBE, submission 3</title></polygon>
+<polygon points="484,111 454,126 488,140 508,131"><title>run031_alcatraz_window: $C4BFAC, submission 4</title></polygon>
+<polygon points="172,240 370,246 172,246"><title>run031_alcatraz_window: $C4BFBE, submission 5</title></polygon>
+<polygon points="278,103 314,115 322,124 344,129 344,131 276,131"><title>run031_alcatraz_window: $C4BFB8, submission 6</title></polygon>
+<polygon points="362,126 376,131 364,131"><title>run031_alcatraz_window: $C4BFA6, submission 7</title></polygon>
+<polygon points="276,75 282,79 286,79 286,81 290,80 298,86 296,89 278,78"><title>run031_alcatraz_window: $C4BFC4, submission 8</title></polygon>
+<polygon points="482,112 478,115 472,114 462,119 466,124 450,124 468,131 508,131 496,127"><title>run031_alcatraz_window: $C4BFCA, submission 9</title></polygon>
+<polygon points="464,90 518,104 522,113 504,118 510,124 496,120 486,118 482,112 456,101"><title>run031_alcatraz_window: $C4BFCA, submission 10</title></polygon>
+<polygon points="502,71 556,86 556,105 530,109 464,90 462,82 484,80"><title>run031_alcatraz_window: $C4BFBE, submission 11</title></polygon>
+<polygon points="556,86 564,92 574,92 576,95 554,105"><title>run031_alcatraz_window: $C4BFB2, submission 12</title></polygon>
+<polygon points="554,72 566,72 562,78 588,95 574,95 572,92 576,90 558,79"><title>run031_alcatraz_window: $C4BFC4, submission 13</title></polygon>
+<polygon points="586,93 606,91 618,98 638,98 646,99 626,104 606,96 584,94"><title>run031_alcatraz_window: $C4BFC4, submission 14</title></polygon>
+<polygon points="634,98 666,78 696,74 696,96 646,99"><title>run031_alcatraz_window: $C4BFB2, submission 15</title></polygon>
+<polygon points="274,129 344,131 344,132 360,135 366,133 364,131 376,131 384,134 370,133 386,136 418,146 418,189 274,189"><title>run031_alcatraz_window: $C4BFE2, submission 16</title></polygon>
+<polygon points="418,146 440,156 472,154 464,164 448,165 456,189 410,189"><title>run031_alcatraz_window: $C4BFBE, submission 17</title></polygon>
+<polygon points="454,136 474,143 486,140 506,163 466,159 466,154 468,152 466,147 446,140 456,141"><title>run031_alcatraz_window: $C4BFD0, submission 18</title></polygon>
+<polygon points="458,128 508,131 504,134 534,133 544,138 536,139 546,143 538,142 488,141 466,134 468,132"><title>run031_alcatraz_window: $C4BFD6, submission 19</title></polygon>
+<polygon points="486,140 538,142 542,146 546,145 552,154 536,155 536,156 544,156 512,164 490,157"><title>run031_alcatraz_window: $C4BFD0, submission 20</title></polygon>
+<polygon points="508,162 530,159 538,159 534,165 556,168 556,189 506,189"><title>run031_alcatraz_window: $C4BFBE, submission 21</title></polygon>
+<polygon points="554,169 578,173 586,170 596,175 592,177 576,174 566,177 552,176"><title>run031_alcatraz_window: $C4BFC4, submission 22</title></polygon>
+<polygon points="554,176 568,176 580,181 578,181 576,181 590,186 592,189 552,189"><title>run031_alcatraz_window: $C4BFC4, submission 23</title></polygon>
+<polygon points="590,186 594,186 594,183 606,189 590,189"><title>run031_alcatraz_window: $C4BFB2, submission 24</title></polygon>
+<polygon points="274,187 418,187 418,246 274,246"><title>run031_alcatraz_window: $C4BFAC, submission 25</title></polygon>
+<polygon points="414,187 456,189 452,213 444,213 444,228 456,239 466,236 478,246 414,246"><title>run031_alcatraz_window: $C4BFCA, submission 26</title></polygon>
+<polygon points="508,188 512,193 504,194 512,195 510,199 504,200 512,204 522,205 556,189"><title>run031_alcatraz_window: $C4BFCA, submission 27</title></polygon>
+<polygon points="520,203 516,206 522,208 520,209 514,208 512,210 520,214 556,218 556,189"><title>run031_alcatraz_window: $C4BFCA, submission 28</title></polygon>
+<polygon points="552,187 606,189 622,216 602,227 590,227 576,221 556,218"><title>run031_alcatraz_window: $C4BFBE, submission 29</title></polygon>
+<polygon points="622,216 642,237 636,239 598,230 594,226"><title>run031_alcatraz_window: $C4BFB2, submission 30</title></polygon>
+<polygon points="634,238 642,237 668,238 672,246 688,246 696,245 696,246 644,246"><title>run031_alcatraz_window: $C4BFC4, submission 31</title></polygon>
+<polygon points="238,67 240,68 238,72 172,72 172,67"><title>run031_alcatraz_window: $C4BFD6, submission 32</title></polygon>
+<polygon points="266,67 276,72 264,72 256,67"><title>run031_alcatraz_window: $C4BFB2, submission 33</title></polygon>
+<polygon points="556,67 556,72 552,70 552,67"><title>run031_alcatraz_window: $C4BFB2, submission 34</title></polygon>
+<polygon points="556,67 556,69 554,67"><title>run031_alcatraz_window: $C4BFA6, submission 35</title></polygon>
+<polygon points="554,69 566,72 554,72"><title>run031_alcatraz_window: $C4BFA6, submission 36</title></polygon>
+<polygon points="172,71 238,72 208,107 204,108 204,110 232,111 220,108 234,101 244,100 248,101 278,103 278,131 172,131"><title>run031_alcatraz_window: $C4BFE2, submission 37</title></polygon>
+<polygon points="248,83 246,92 256,90 246,100 256,100 258,95 258,100 268,101 244,100 234,93 240,93"><title>run031_alcatraz_window: $C4BFD6, submission 38</title></polygon>
+<polygon points="264,71 274,72 278,75 278,78"><title>run031_alcatraz_window: $C4BFAC, submission 39</title></polygon>
+<polygon points="696,74 704,81 694,84"><title>run031_alcatraz_window: $C4BFA6, submission 40</title></polygon>
+<polygon points="694,87 714,91 736,88 742,91 736,94 722,97 696,96"><title>run031_alcatraz_window: $C4BFBE, submission 41</title></polygon>
+<polygon points="728,95 750,97 774,90 798,95 794,97 776,94 778,100 774,103 772,95 754,100 722,97"><title>run031_alcatraz_window: $C4BFD6, submission 42</title></polygon>
+<polygon points="798,95 810,100 810,106 798,106 774,103 780,99"><title>run031_alcatraz_window: $C4BFD6, submission 43</title></polygon>
+<polygon points="810,89 792,94 800,96 810,92"><title>run031_alcatraz_window: $C4BFAC, submission 44</title></polygon>
+<polygon points="172,129 278,129 278,189 172,189"><title>run031_alcatraz_window: $C4BFAC, submission 45</title></polygon>
+<polygon points="172,187 278,187 278,246 172,246"><title>run031_alcatraz_window: $C4BFAC, submission 46</title></polygon>
+<polygon points="488,192 494,193 492,191"><title>run031_alcatraz_window: $C3B6B0, submission 47</title></polygon>
+<polygon points="494,193 494,190 492,191"><title>run031_alcatraz_window: $C3B6B0, submission 48</title></polygon>
+<polygon points="494,190 490,189 492,191"><title>run031_alcatraz_window: $C3B6B0, submission 49</title></polygon>
+<polygon points="490,189 488,192 492,191"><title>run031_alcatraz_window: $C3B6B0, submission 50</title></polygon>
 <polygon points="222,79 210,93 210,111 232,111 236,100 438,159 452,188 434,228 468,247 210,254 210,79"><title>run033_5250: $C4BFE8, submission 0</title></polygon>
 <polygon points="512,159 608,194 632,234 516,201"><title>run033_5250: $C4BFAC, submission 1</title></polygon>
 <polygon points="494,79 460,103 504,117 562,95 524,79"><title>run033_5250: $C4BFAC, submission 2</title></polygon>
