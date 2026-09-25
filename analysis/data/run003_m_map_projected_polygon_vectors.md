@@ -14,9 +14,11 @@ derived from bitmap runs.  The generated JSON records the resulting agreement
 metric and exact evidence inputs.
 
 The small black symbol at host-crop bounds `x=50..70, y=130..132` is also
-drawn from three `$C4C598` renderer line vectors.  Its visual position is
-proven, but it remains deliberately unnamed: the current evidence does not
-distinguish aircraft, base, runway, or another map marker.
+drawn from three `$C4C598` renderer line vectors.  The immediately preceding
+projection tail has `A1=$C45BEA`, the mutable display context used by the
+traced F/A-18-like flight-object family, so the map labels it **FLIGHT OBJECT
+?**.  The question mark is material: current evidence does not establish that
+it is specifically the player aircraft rather than another flight object.
 
 Reproduce after collecting the bounded polygon capture:
 

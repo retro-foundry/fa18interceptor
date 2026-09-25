@@ -68,6 +68,13 @@ def main() -> None:
         points = " ".join(f"{x * 2},{y}" for x, y in pairs)
         svg.append(f'<polygon points="{points}"><title>{polygon["context_a5"]}, submission {polygon["submission"]}</title></polygon>')
     svg.append('</g>')
+    svg.extend([
+        '<g shape-rendering="geometricPrecision" font-family="monospace">',
+        '<path d="M 70 131 L 104 119" stroke="#111" stroke-width="1"/>',
+        '<rect x="105" y="112" width="104" height="13" fill="#000" fill-opacity=".78" stroke="#111" stroke-width=".5"/>',
+        '<text x="108" y="121" fill="#fff" font-size="8">FLIGHT OBJECT ?</text>',
+        '</g>',
+    ])
     svg.append(f'<g fill="none" stroke="{GRID}" stroke-width="1">')
     for line in lines:
         if line["context"] != "$C4C59E":
@@ -134,9 +141,10 @@ def main() -> None:
                                          "agreement": matches / compared if compared else None},
         "landmark": {"name": "Golden Gate", "anchor": [194, 59.5],
                      "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"},
-        "traced_map_symbol": {"anchor_bounds": [50, 130, 70, 132],
+        "traced_map_symbol": {"label": "flight-object marker candidate", "anchor_bounds": [50, 130, 70, 132],
                               "evidence": "three $C4C598 C2FA7E vector strokes",
-                              "semantic_status": "structural; not identified as aircraft, base, or airfield"},
+                              "producer_context": "$C2EDxx with A1=$C45BEA before C2B93E line-list emission",
+                              "semantic_status": "scenario-backed flight-object candidate; not proven to be player aircraft, base, or airfield"},
         "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

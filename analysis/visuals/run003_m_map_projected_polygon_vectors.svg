@@ -47,6 +47,11 @@
 <polygon points="222,92 216,92 220,94"><title>$C3B6B0, submission 40</title></polygon>
 <polygon points="216,92 214,94 220,94"><title>$C3B6B0, submission 41</title></polygon>
 </g>
+<g shape-rendering="geometricPrecision" font-family="monospace">
+<path d="M 70 131 L 104 119" stroke="#111" stroke-width="1"/>
+<rect x="105" y="112" width="104" height="13" fill="#000" fill-opacity=".78" stroke="#111" stroke-width=".5"/>
+<text x="108" y="121" fill="#fff" font-size="8">FLIGHT OBJECT ?</text>
+</g>
 <g fill="none" stroke="#555555" stroke-width="1">
 <line x1="422" y1="0" x2="422" y2="179"/>
 <line x1="178" y1="0" x2="178" y2="179"/>
