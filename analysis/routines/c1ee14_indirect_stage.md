@@ -15,6 +15,12 @@ unassigned.
   starts / 10,404 operations. 1,471 starts map to resolved Hunks; 52 remain
   unmapped.
 
+The deterministic qualification oracle now independently reaches the same
+target: normal run060 hits `$C1EE14` at replay frame 301 and returns to
+`$C1CC88` after 21,030 instructions. This confirms the stage boundary on the
+current canonical replay, while its branch/source-family interpretation remains
+bounded by the existing evidence.
+
 This supersedes the earlier stack-only association between `$C1CC86` and the
 JOY0DAT callback. `$C1718E` remains independently proven as a registered
 hardware callback, but this particular dynamic indirect call target is
