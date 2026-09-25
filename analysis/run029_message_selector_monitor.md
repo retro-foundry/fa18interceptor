@@ -14,9 +14,9 @@ selector. It observes these selector values and caller return addresses:
 
 `build/run029_selector74_after5000/report.json` observes no `$C32D24`
 invocation through the pre-close replay window. Selector 74 (`LANDING
-SUCCESSFUL`) is not observed by this particular message-record path. This is
-consistent with run029's completion now being unconfirmed; no success display
-may be attributed to `$C32D24` or to this capture.
+SUCCESSFUL`) is not observed by this particular message-record path. It cannot
+be attributed to `$C32D24`; this does not exclude another presentation route
+or a brief screen before the reported post-success relaunch.
 
 The monitor preserves the register state at a target selector without stepping
 after it. It establishes selector values and caller return addresses only; it

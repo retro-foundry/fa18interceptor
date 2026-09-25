@@ -13,7 +13,7 @@ routes:
 | 5,001--14,202 | `$C32FCE` glyph cursor in `$C3FC3C-$C3FCE0` | No glyph-reader hits. |
 
 This rules out the bounded selector and static-glyph paths as the observed
-presentation route in this recording. Together with the final cockpit frame,
-it means run029 cannot currently support a successful qualification claim. It
-does not prove that its flight failed; the actual successful recording must be
-identified separately. The qualification status writer remains unassigned.
+presentation route in the monitored windows. It does not contradict the
+operator-reported success: the success screen may use another route or occur
+between the bounded samples before the reported relaunch. The qualification
+status writer remains unassigned.
