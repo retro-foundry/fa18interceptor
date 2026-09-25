@@ -1,6 +1,6 @@
 # M-map landmark evidence status
 
-[Open the thirteen-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic.png).
+[Open the fourteen-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic.png).
 
 | map annotation | status | evidence boundary |
 | --- | --- | --- |
@@ -10,7 +10,7 @@
 | `$C3B5B6` | excluded | The same four-triangle component repeats in widely separated joined map regions. |
 | C35BDE / C36220 lines | excluded | Direct source components, but no unique semantic or landmark join. |
 
-The mosaic contains thirteen direct `$C4B390`-before-`$C2FF48` polygon captures
+The mosaic contains fourteen direct `$C4B390`-before-`$C2FF48` polygon captures
 from independent M-map states. Green/blue is source-vector land/sea inside
 observed viewports; black is uncaptured space. It is not a complete global map.
 

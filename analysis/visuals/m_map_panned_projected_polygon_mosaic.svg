@@ -11,6 +11,7 @@
 <rect x="154" y="71" width="640" height="180" fill="#115511"><title>run038: observed map viewport</title></rect>
 <rect x="172" y="72" width="640" height="180" fill="#115511"><title>run041: observed map viewport</title></rect>
 <rect x="172" y="67" width="640" height="180" fill="#115511"><title>run031_alcatraz_window: observed map viewport</title></rect>
+<rect x="194" y="70" width="640" height="180" fill="#115511"><title>run031_later_bridge: observed map viewport</title></rect>
 <rect x="210" y="79" width="640" height="180" fill="#115511"><title>run033_5250: observed map viewport</title></rect>
 <rect x="194" y="121" width="640" height="180" fill="#115511"><title>run001: observed map viewport</title></rect>
 <rect x="270" y="96" width="640" height="180" fill="#115511"><title>run024: observed map viewport</title></rect>
@@ -398,6 +399,60 @@
 <polygon points="494,193 494,190 492,191"><title>run031_alcatraz_window: $C3B6B0, submission 48</title></polygon>
 <polygon points="494,190 490,189 492,191"><title>run031_alcatraz_window: $C3B6B0, submission 49</title></polygon>
 <polygon points="490,189 488,192 492,191"><title>run031_alcatraz_window: $C3B6B0, submission 50</title></polygon>
+<polygon points="226,70 228,71 194,112 232,112 238,101 438,159 452,189 434,229 470,248 436,249 194,249 194,70"><title>run031_later_bridge: $C4BFE8, submission 0</title></polygon>
+<polygon points="512,159 608,194 634,235 516,202"><title>run031_later_bridge: $C4BFAC, submission 1</title></polygon>
+<polygon points="504,71 460,104 504,118 564,96"><title>run031_later_bridge: $C4BFAC, submission 2</title></polygon>
+<polygon points="434,159 470,155 496,134 534,138 528,168 496,155 430,163"><title>run031_later_bridge: $C4BFBE, submission 3</title></polygon>
+<polygon points="482,110 452,125 488,140 508,130"><title>run031_later_bridge: $C4BFAC, submission 4</title></polygon>
+<polygon points="194,241 470,248 470,249 194,249"><title>run031_later_bridge: $C4BFBE, submission 5</title></polygon>
+<polygon points="276,103 312,115 320,123 342,128 344,130 274,130"><title>run031_later_bridge: $C4BFB8, submission 6</title></polygon>
+<polygon points="360,126 374,130 364,130"><title>run031_later_bridge: $C4BFA6, submission 7</title></polygon>
+<polygon points="276,74 280,78 284,78 284,80 288,80 298,85 296,88 276,78"><title>run031_later_bridge: $C4BFC4, submission 8</title></polygon>
+<polygon points="482,112 476,114 472,113 460,118 464,123 450,124 466,130 508,130 498,126"><title>run031_later_bridge: $C4BFCA, submission 9</title></polygon>
+<polygon points="464,90 518,104 522,112 506,117 512,123 498,119 486,117 482,112 456,101"><title>run031_later_bridge: $C4BFCA, submission 10</title></polygon>
+<polygon points="504,70 554,85 554,105 528,108 464,90 460,81 482,79"><title>run031_later_bridge: $C4BFBE, submission 11</title></polygon>
+<polygon points="554,85 564,92 574,92 574,94 552,104"><title>run031_later_bridge: $C4BFB2, submission 12</title></polygon>
+<polygon points="554,71 564,71 562,78 586,94 574,94 570,92 576,89 558,78"><title>run031_later_bridge: $C4BFC4, submission 13</title></polygon>
+<polygon points="584,92 606,91 616,98 638,97 644,98 624,103 606,96 584,94"><title>run031_later_bridge: $C4BFC4, submission 14</title></polygon>
+<polygon points="634,97 664,78 694,73 694,95 644,98"><title>run031_later_bridge: $C4BFB2, submission 15</title></polygon>
+<polygon points="272,129 344,130 344,132 360,135 366,132 364,130 374,130 384,133 368,132 386,135 416,145 416,188 272,188"><title>run031_later_bridge: $C4BFE2, submission 16</title></polygon>
+<polygon points="416,145 440,156 470,153 462,164 448,164 456,188 410,188"><title>run031_later_bridge: $C4BFBE, submission 17</title></polygon>
+<polygon points="454,136 474,142 484,140 508,163 464,159 466,154 468,152 464,146 444,139 456,141"><title>run031_later_bridge: $C4BFD0, submission 18</title></polygon>
+<polygon points="458,128 508,130 504,133 532,132 544,137 536,138 544,143 538,141 486,141 466,133 468,132"><title>run031_later_bridge: $C4BFD6, submission 19</title></polygon>
+<polygon points="484,140 538,141 540,146 546,144 550,153 534,155 534,156 544,156 512,164 490,157"><title>run031_later_bridge: $C4BFD0, submission 20</title></polygon>
+<polygon points="508,162 528,159 536,159 534,165 554,168 554,188 506,188"><title>run031_later_bridge: $C4BFBE, submission 21</title></polygon>
+<polygon points="552,168 578,172 586,170 594,174 592,176 574,173 564,176 550,176"><title>run031_later_bridge: $C4BFC4, submission 22</title></polygon>
+<polygon points="552,175 568,175 580,180 576,180 576,181 590,186 592,188 550,188"><title>run031_later_bridge: $C4BFC4, submission 23</title></polygon>
+<polygon points="590,186 592,185 592,183 606,188 590,188"><title>run031_later_bridge: $C4BFB2, submission 24</title></polygon>
+<polygon points="272,187 416,187 416,247 272,247"><title>run031_later_bridge: $C4BFAC, submission 25</title></polygon>
+<polygon points="412,187 456,188 452,212 444,212 442,228 456,238 464,236 480,247 412,247"><title>run031_later_bridge: $C4BFCA, submission 26</title></polygon>
+<polygon points="508,187 512,193 506,194 512,195 512,199 506,199 512,203 522,205 554,188"><title>run031_later_bridge: $C4BFCA, submission 27</title></polygon>
+<polygon points="518,203 516,206 522,208 520,209 512,208 512,210 520,213 554,218 554,188"><title>run031_later_bridge: $C4BFCA, submission 28</title></polygon>
+<polygon points="550,187 606,188 622,215 600,227 590,227 574,221 554,218"><title>run031_later_bridge: $C4BFBE, submission 29</title></polygon>
+<polygon points="622,215 642,236 636,238 598,230 594,225"><title>run031_later_bridge: $C4BFB2, submission 30</title></polygon>
+<polygon points="632,237 642,236 668,238 670,246 694,245 692,247 680,247 646,247"><title>run031_later_bridge: $C4BFC4, submission 31</title></polygon>
+<polygon points="238,70 238,71 194,71 194,70"><title>run031_later_bridge: $C4BFD6, submission 32</title></polygon>
+<polygon points="272,70 274,71 264,71 260,70"><title>run031_later_bridge: $C4BFB2, submission 33</title></polygon>
+<polygon points="554,70 554,71 552,70"><title>run031_later_bridge: $C4BFB2, submission 34</title></polygon>
+<polygon points="558,70 564,71 554,71 554,70"><title>run031_later_bridge: $C4BFA6, submission 35</title></polygon>
+<polygon points="194,71 238,71 208,106 202,108 204,109 232,110 220,107 232,100 242,100 248,101 276,103 276,130 194,130"><title>run031_later_bridge: $C4BFE2, submission 36</title></polygon>
+<polygon points="248,82 246,92 254,89 246,99 254,99 256,95 258,99 266,100 244,100 232,92 240,92"><title>run031_later_bridge: $C4BFD6, submission 37</title></polygon>
+<polygon points="264,71 272,71 276,74 276,78"><title>run031_later_bridge: $C4BFAC, submission 38</title></polygon>
+<polygon points="694,74 704,81 694,84"><title>run031_later_bridge: $C4BFA6, submission 39</title></polygon>
+<polygon points="692,87 714,90 736,88 740,90 736,94 720,97 694,95"><title>run031_later_bridge: $C4BFBE, submission 40</title></polygon>
+<polygon points="726,95 748,96 772,90 796,95 794,96 774,93 778,100 774,102 772,94 752,99 720,97"><title>run031_later_bridge: $C4BFD6, submission 41</title></polygon>
+<polygon points="796,95 814,102 832,99 832,102 828,103 832,103 832,107 818,105 796,106 774,102 778,98"><title>run031_later_bridge: $C4BFD6, submission 42</title></polygon>
+<polygon points="832,81 790,93 798,95 832,84"><title>run031_later_bridge: $C4BFAC, submission 43</title></polygon>
+<polygon points="194,129 276,129 276,188 194,188"><title>run031_later_bridge: $C4BFAC, submission 44</title></polygon>
+<polygon points="194,187 276,187 276,247 194,247"><title>run031_later_bridge: $C4BFAC, submission 45</title></polygon>
+<polygon points="194,246 276,246 276,249 194,249"><title>run031_later_bridge: $C4BFAC, submission 46</title></polygon>
+<polygon points="272,246 416,246 416,249 272,249"><title>run031_later_bridge: $C4BFAC, submission 47</title></polygon>
+<polygon points="482,247 482,249 412,249 412,246"><title>run031_later_bridge: $C4BFBE, submission 48</title></polygon>
+<polygon points="646,247 682,247 676,249 652,249"><title>run031_later_bridge: $C4BFA6, submission 49</title></polygon>
+<polygon points="486,191 496,192 492,191"><title>run031_later_bridge: $C3B6B0, submission 50</title></polygon>
+<polygon points="496,192 496,189 492,191"><title>run031_later_bridge: $C3B6B0, submission 51</title></polygon>
+<polygon points="496,189 490,189 492,191"><title>run031_later_bridge: $C3B6B0, submission 52</title></polygon>
+<polygon points="490,189 486,191 492,191"><title>run031_later_bridge: $C3B6B0, submission 53</title></polygon>
 <polygon points="222,79 210,93 210,111 232,111 236,100 438,159 452,188 434,228 468,247 210,254 210,79"><title>run033_5250: $C4BFE8, submission 0</title></polygon>
 <polygon points="512,159 608,194 632,234 516,201"><title>run033_5250: $C4BFAC, submission 1</title></polygon>
 <polygon points="494,79 460,103 504,117 562,95 524,79"><title>run033_5250: $C4BFAC, submission 2</title></polygon>
