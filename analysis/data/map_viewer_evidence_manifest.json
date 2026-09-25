@@ -37,6 +37,13 @@
       "certainty": "exact placement-to-control-to-source-to-line path"
     }
   ],
+  "cross_scenario_candidates": [
+    {
+      "map_placement": "run037 descriptor field $C44500 at (333, 0, 128)",
+      "demo_execution": "$C44500 -> $C3924C -> $C392A8 polygon/line submissions",
+      "certainty": "shared descriptor field across scenarios only; M-map execution into C3924C and component source/topology are unproven"
+    }
+  ],
   "exclusions": [
     "untraced placement records", "unproven component topology", "named landmark labels", "static global vertex positions"
   ],
