@@ -13,6 +13,11 @@ the sealed display oracle; neither the SVG polygons nor their vertices are
 derived from bitmap runs.  The generated JSON records the resulting agreement
 metric and exact evidence inputs.
 
+The small black symbol at host-crop bounds `x=50..70, y=130..132` is also
+drawn from three `$C4C598` renderer line vectors.  Its visual position is
+proven, but it remains deliberately unnamed: the current evidence does not
+distinguish aircraft, base, runway, or another map marker.
+
 Reproduce after collecting the bounded polygon capture:
 
 ```powershell

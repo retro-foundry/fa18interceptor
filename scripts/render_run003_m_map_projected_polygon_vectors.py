@@ -75,6 +75,13 @@ def main() -> None:
         x1, y1, x2, y2 = line["endpoints"]
         svg.append(f'<line x1="{x1 * 2}" y1="{y1}" x2="{x2 * 2}" y2="{y2}"/>')
     svg.append('</g>')
+    svg.append('<g fill="none" stroke="#000000" stroke-width="1">')
+    for line in lines:
+        if line["context"] != "$C4C598":
+            continue
+        x1, y1, x2, y2 = line["endpoints"]
+        svg.append(f'<line x1="{x1 * 2}" y1="{y1}" x2="{x2 * 2}" y2="{y2}"/>')
+    svg.append('</g>')
     # This anchor is independently tied to the two Golden Gate bridge contexts.
     svg.extend([
         '<g shape-rendering="geometricPrecision" font-family="monospace">',
@@ -97,6 +104,10 @@ def main() -> None:
         if line["context"] == "$C4C59E":
             x1, y1, x2, y2 = line["endpoints"]
             draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill=GRID)
+    for line in lines:
+        if line["context"] == "$C4C598":
+            x1, y1, x2, y2 = line["endpoints"]
+            draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill="#000000")
     args.png.parent.mkdir(parents=True, exist_ok=True)
     image.save(args.png)
     oracle = Image.open(args.oracle).convert("RGB").crop((40, 16, 680, 216))
@@ -123,6 +134,9 @@ def main() -> None:
                                          "agreement": matches / compared if compared else None},
         "landmark": {"name": "Golden Gate", "anchor": [194, 59.5],
                      "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"},
+        "traced_map_symbol": {"anchor_bounds": [50, 130, 70, 132],
+                              "evidence": "three $C4C598 C2FA7E vector strokes",
+                              "semantic_status": "structural; not identified as aircraft, base, or airfield"},
         "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

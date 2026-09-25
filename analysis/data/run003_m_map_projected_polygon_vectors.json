@@ -26,9 +26,9 @@
   },
   "land_sea_oracle_validation": {
     "oracle": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\visuals\\run003_m_map_display.png",
-    "pixels_compared": 111054,
-    "matching_pixels": 109794,
-    "agreement": 0.9886541682424766
+    "pixels_compared": 111034,
+    "matching_pixels": 109774,
+    "agreement": 0.9886521245744547
   },
   "landmark": {
     "name": "Golden Gate",
@@ -37,6 +37,16 @@
       59.5
     ],
     "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"
+  },
+  "traced_map_symbol": {
+    "anchor_bounds": [
+      50,
+      130,
+      70,
+      132
+    ],
+    "evidence": "three $C4C598 C2FA7E vector strokes",
+    "semantic_status": "structural; not identified as aircraft, base, or airfield"
   },
   "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
 }
