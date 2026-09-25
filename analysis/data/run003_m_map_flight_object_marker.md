@@ -23,3 +23,8 @@ candidate**, rather than a screen-fixed reticle.
 It does not prove player ownership. The map may show another flight object, a
 base, city, or selected object, and neither the symbol producer nor a
 controlled identity trace has yet established that distinction.
+
+The three-state panning evidence is retained in
+[`run024_m_map_object_marker_trace.md`](run024_m_map_object_marker_trace.md)
+and
+[`run003_run035_m_map_marker_comparison.md`](run003_run035_m_map_marker_comparison.md).

@@ -23,6 +23,15 @@ another aircraft, a base, city, or selected object could all satisfy the
 present trace. The residual must not be read as a global coordinate delta;
 the measurement only compares screen-space map panning.
 
+The independent run024 San Francisco cockpit map confirms the same relation:
+its marker points are `(32,131)`, `(26,132)`, and `(27,133)`. The measured
+run024-to-run035 coastline translation `(140,35)` predicts `(204,166)`,
+`(192,167)`, and `(194,168)`, again leaving the same uniform two-host-pixel
+X residual to the direct run035 points. Run024 differs from run003 by exactly
+one logical pixel in each axis, matching the composed coastline translation.
+This third state makes map attachment repeatable, but still does not identify
+the object as a city, base, player, or aircraft.
+
 The visible evidence artifact is
 [`run035_m_map_projected_polygon_vectors_landmarks_traced_marker.svg`](../visuals/run035_m_map_projected_polygon_vectors_landmarks_traced_marker.svg)
 with its inspection PNG alongside it. Golden Gate uses the existing
