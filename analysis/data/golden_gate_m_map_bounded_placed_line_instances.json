@@ -1,0 +1,40 @@
+{
+  "classification": "verified_golden_gate_m_map_two_placed_line_instances_not_complete_bridge_mesh",
+  "landmark": "Golden Gate",
+  "scenario": "run003 video-hash-matched M-map appearance trace, whose C3559A/C355D2 strokes define the verified Golden Gate anchor",
+  "shared_line_topology": {"record": "$C358B2", "selector": 1, "edge": [0, 1]},
+  "instances": [
+    {
+      "static_template": "$C4264D",
+      "runtime_placement_record": "run003 placement cache record for descriptor $C22408",
+      "placement_x_y_z": [588, 0, 300],
+      "descriptor": "$C22408",
+      "descriptor_field": "$C35568",
+      "cursor_published_stream": "$C35598",
+      "local_source": "$C35BAA",
+      "local_triples": [[0, 0, 3744], [0, 416, -3168]],
+      "walker_entry": "$C35BB8",
+      "line_context": "$C3559A",
+      "trace_indices": {"descriptor_store": 85002, "cursor_publish": 85097, "matrix_source": 85163, "walker_entry": 85262, "walker_a5_load": 85265, "line_submit": 85416}
+    },
+    {
+      "static_template": "$C42653",
+      "runtime_placement_record": "run003 placement cache record for descriptor $C2241C",
+      "placement_x_y_z": [588, 0, 276],
+      "descriptor": "$C2241C",
+      "descriptor_field": "$C355A0",
+      "cursor_published_stream": "$C355D0",
+      "local_source": "$C35BC2",
+      "local_triples": [[0, 0, -3744], [0, 416, 3168]],
+      "walker_entry": "$C35BD0",
+      "line_context": "$C355D2",
+      "trace_indices": {"descriptor_store": 85700, "cursor_publish": 85795, "matrix_source": 85861, "walker_entry": 85960, "walker_a5_load": 85963, "line_submit": 86114}
+    }
+  ],
+  "authority": {
+    "trace": "build/run003_m_map_appearance_trace/trace.jsonl",
+    "template_catalog": "analysis/data/run003_m_map_template_target_catalog.json",
+    "landmark_context": "analysis/data/run035_golden_gate_red_line_correlation.md"
+  },
+  "qualification": "This joins the user-identified Golden Gate M-map scenario to two exact placement/control/source/line paths. The source triples are transformed with live state, so this does not export static global bridge vertices or a complete bridge mesh."
+}
