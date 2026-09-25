@@ -44,11 +44,16 @@ def find_window(pid: int, timeout: float = 15) -> int:
 def restore_saved_state(hwnd: int) -> None:
     user = C.windll.user32
     user.PostMessageW.argtypes = [W.HWND, W.UINT, W.WPARAM, W.LPARAM]
-    for key in (0x11, 0x12, 0x52):  # Ctrl, Alt, R
+    user.ShowWindow(hwnd, 9)  # SW_RESTORE
+    user.SetForegroundWindow(hwnd)
+    for key in (0x11, 0x12):  # Ctrl, Alt
         scan = user.MapVirtualKeyW(key, 0)
         user.PostMessageW(hwnd, 0x100, key, 1 | (scan << 16))
+    scan = user.MapVirtualKeyW(0x52, 0)
+    user.PostMessageW(hwnd, 0x100, 0x52, 1 | (scan << 16))
     time.sleep(0.05)
-    for key in (0x52, 0x12, 0x11):
+    user.PostMessageW(hwnd, 0x101, 0x52, 1 | (scan << 16) | (3 << 30))
+    for key in (0x12, 0x11):
         scan = user.MapVirtualKeyW(key, 0)
         user.PostMessageW(hwnd, 0x101, key, 1 | (scan << 16) | (3 << 30))
 
@@ -64,7 +69,13 @@ def main() -> None:
     missing = [name for name in required if not (run / name).exists()]
     if missing:
         raise FileNotFoundError(f"{run} missing: {', '.join(missing)}")
-    command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(run / "config.uae"),
+    original_config = ROOT / "local" / "fa18.uae"
+    if not original_config.is_file() or original_config.read_bytes() != (run / "config.uae").read_bytes():
+        raise ValueError("sealed config differs from local/fa18.uae; cannot resolve its historical save-slot name")
+    # Engine9000 keys the save slot from the UAE filename. Captures retain the
+    # original fa18.uae.e9k-save slot, even though their config copy is named
+    # config.uae for archival clarity.
+    command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(original_config),
                "--system-dir", str(ROOT / "local" / "system"), "--save-dir", str(run / "saves"),
                "--playback", str(run / "playback.e9k"), "--window-size", args.window_size]
     environment = os.environ.copy()
