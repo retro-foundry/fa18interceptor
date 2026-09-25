@@ -11,13 +11,23 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--restore', type=Path, required=True)
     parser.add_argument('--playback', type=Path, required=True)
-    parser.add_argument('--frames', type=int, nargs='+', required=True)
+    frame_group = parser.add_mutually_exclusive_group(required=True)
+    frame_group.add_argument('--frames', type=int, nargs='+')
+    frame_group.add_argument('--frame-range', type=int, nargs=3,
+                             metavar=('FIRST', 'LAST', 'STEP'),
+                             help='inclusive replay range sampled at STEP frames')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--resume', action='store_true',
                         help='reuse an incomplete output directory and capture only missing PNGs')
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
-    frames = sorted(set(args.frames))
+    if args.frame_range is not None:
+        first, last, step = args.frame_range
+        if step < 1 or last < first:
+            raise ValueError('frame-range requires FIRST <= LAST and positive STEP')
+        frames = list(range(first, last + 1, step))
+    else:
+        frames = sorted(set(args.frames))
     if not frames or frames[0] < 1:
         raise ValueError('Frame numbers must be positive')
     if args.output.exists() and not args.resume:

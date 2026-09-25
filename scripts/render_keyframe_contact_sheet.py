@@ -16,10 +16,21 @@ def main() -> None:
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--columns", type=int, default=5)
+    parser.add_argument("--stride", type=int, default=1,
+                        help="include every Nth chronological keyframe (default: 1)")
+    parser.add_argument("--first-frame", type=int,
+                        help="optional inclusive first replay frame")
+    parser.add_argument("--last-frame", type=int,
+                        help="optional inclusive last replay frame")
     parser.add_argument("--title", required=True)
     args = parser.parse_args()
     if args.columns < 1:
         parser.error("--columns must be positive")
+    if args.stride < 1:
+        parser.error("--stride must be positive")
+    if (args.first_frame is not None and args.last_frame is not None
+            and args.last_frame < args.first_frame):
+        parser.error("last-frame must not precede first-frame")
     if args.output.exists():
         raise FileExistsError(args.output)
     frames = []
@@ -28,6 +39,11 @@ def main() -> None:
         if matched:
             frames.append((int(matched.group(1)), path))
     frames.sort()
+    if args.first_frame is not None:
+        frames = [(frame, path) for frame, path in frames if frame >= args.first_frame]
+    if args.last_frame is not None:
+        frames = [(frame, path) for frame, path in frames if frame <= args.last_frame]
+    frames = frames[::args.stride]
     if not frames:
         raise ValueError("no frame_*.png files found")
     first = Image.open(frames[0][1]).convert("RGB")
