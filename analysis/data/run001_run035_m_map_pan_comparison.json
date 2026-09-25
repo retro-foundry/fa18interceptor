@@ -1,0 +1,22 @@
+{
+  "scope": "exact-colour viewport translation comparison",
+  "first": "build\\run001_m_map_oracle\\screen.png",
+  "second": "analysis\\visuals\\run035_m_map_display.png",
+  "colour_rgb": [
+    0,
+    51,
+    102
+  ],
+  "viewport": {
+    "left": 40,
+    "top": 18,
+    "right_exclusive": 680,
+    "bottom_exclusive": 196
+  },
+  "correspondence": "second(x + dx, y + dy) == first(x, y)",
+  "best_dx": 64,
+  "best_dy": 60,
+  "overlap_pixels": 67968,
+  "agreement": 0.979019538606403,
+  "qualification": "A shared translated raster establishes map-view panning, not the static asset producer or the 3-D terrain source."
+}
