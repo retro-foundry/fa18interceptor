@@ -14,12 +14,13 @@ The v4 mosaic contains seventeen direct `$C4B390`-before-`$C2FF48` polygon captu
 from independent M-map states. Green/blue is source-vector land/sea inside
 observed viewports; black is uncaptured space. It is not a complete global map.
 
-The remake terrain viewer intentionally consumes that same source-vector mosaic
-as a navigable WebGL terrain plane. Its `28 × 10.36` plane ratio preserves the
-`1000 × 370` joined map geometry, and its red ground mark is the verified
-`$C3559A/$C355D2` Golden Gate anchor at `(466,156.5)`. This makes the recovered
-terrain useful in a modern-renderer presentation without inventing a heightmap,
-global-distance scale, roads, buildings, or unproven landmark identities.
+The remake terrain viewer consumes an ordered direct-triangle mesh from that
+same source-vector mosaic, not its PNG or SVG rasterisation. Its `28 × 10.36`
+plane ratio preserves the `1000 × 370` joined map geometry, and its red ground
+segments are the verified `$C3559A/$C355D2` Golden Gate vectors at `(466,156.5)`.
+This makes the recovered terrain useful in a modern renderer without inventing
+a heightmap, global-distance scale, roads, buildings, or unproven landmark
+identities.
 
 One pass, run034, is explicitly diagnostic because its sealed input recording
 preserved the `M` release but not its key-down; its supplied one-frame press

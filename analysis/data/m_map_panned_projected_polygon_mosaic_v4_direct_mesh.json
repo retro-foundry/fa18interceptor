@@ -1,0 +1,272 @@
+{
+  "classification": "direct_c4b390_polygon_mesh_for_webgl",
+  "coordinate_system": {
+    "width": 1000,
+    "height": 370,
+    "viewport": [
+      640,
+      180
+    ]
+  },
+  "source_runs": [
+    {
+      "name": "run042",
+      "capture": "build/run042_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        0,
+        0
+      ],
+      "source_polygons": 40,
+      "triangles": {
+        "sea": 183,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run002",
+      "capture": "build/run002_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        16,
+        131
+      ],
+      "source_polygons": 43,
+      "triangles": {
+        "sea": 144,
+        "overlay": 0,
+        "line_loop": 5
+      }
+    },
+    {
+      "name": "run024_16075",
+      "capture": "build/run024_m16075_projected_polygons/projected_polygons.json",
+      "translation": [
+        12,
+        131
+      ],
+      "source_polygons": 43,
+      "triangles": {
+        "sea": 139,
+        "overlay": 4,
+        "line_loop": 6
+      }
+    },
+    {
+      "name": "run002_late",
+      "capture": "build/run002_late_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        10,
+        122
+      ],
+      "source_polygons": 43,
+      "triangles": {
+        "sea": 152,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run037",
+      "capture": "build/run037_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        14,
+        45
+      ],
+      "source_polygons": 47,
+      "triangles": {
+        "sea": 207,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run035",
+      "capture": "build/run035_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        130,
+        61
+      ],
+      "source_polygons": 49,
+      "triangles": {
+        "sea": 214,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run038",
+      "capture": "build/run038_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        154,
+        71
+      ],
+      "source_polygons": 58,
+      "triangles": {
+        "sea": 227,
+        "overlay": 0,
+        "line_loop": 4
+      }
+    },
+    {
+      "name": "run041",
+      "capture": "build/run041_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        172,
+        72
+      ],
+      "source_polygons": 50,
+      "triangles": {
+        "sea": 227,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run031_alcatraz_window",
+      "capture": "build/run031_frame13200_alcatraz_m_map_mode_latch_zero_projected_polygons/projected_polygons.json",
+      "translation": [
+        172,
+        67
+      ],
+      "source_polygons": 51,
+      "triangles": {
+        "sea": 224,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run031_later_bridge",
+      "capture": "build/run031_frame14500_later_bridge_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        194,
+        70
+      ],
+      "source_polygons": 54,
+      "triangles": {
+        "sea": 239,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run033_5250",
+      "capture": "build/run033_frame05250_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        210,
+        79
+      ],
+      "source_polygons": 49,
+      "triangles": {
+        "sea": 219,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run034_diagnostic",
+      "capture": "build/run034_diagnostic_m_map_projected_polygons_tagged/projected_polygons.json",
+      "translation": [
+        220,
+        99
+      ],
+      "source_polygons": 43,
+      "triangles": {
+        "sea": 176,
+        "overlay": 4,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run001",
+      "capture": "build/run001_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        194,
+        121
+      ],
+      "source_polygons": 36,
+      "triangles": {
+        "sea": 145,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run024",
+      "capture": "build/run024_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        270,
+        96
+      ],
+      "source_polygons": 42,
+      "triangles": {
+        "sea": 175,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    },
+    {
+      "name": "run024_23415",
+      "capture": "build/run024_m23415_projected_polygons/projected_polygons.json",
+      "translation": [
+        269,
+        95
+      ],
+      "source_polygons": 43,
+      "triangles": {
+        "sea": 175,
+        "overlay": 4,
+        "line_loop": 1
+      }
+    },
+    {
+      "name": "run003",
+      "capture": "build/run003_m_map_colour_polygon_probe/projected_polygons.json",
+      "translation": [
+        272,
+        97
+      ],
+      "source_polygons": 42,
+      "triangles": {
+        "sea": 168,
+        "overlay": 4,
+        "line_loop": 1
+      }
+    },
+    {
+      "name": "run004",
+      "capture": "build/run004_m_map_projected_polygons/projected_polygons.json",
+      "translation": [
+        356,
+        170
+      ],
+      "source_polygons": 22,
+      "triangles": {
+        "sea": 89,
+        "overlay": 0,
+        "line_loop": 0
+      }
+    }
+  ],
+  "vertex_counts": {
+    "land": 102,
+    "sea": 9309,
+    "overlay": 48
+  },
+  "triangle_counts": {
+    "land": 34,
+    "sea": 3103,
+    "overlay": 16
+  },
+  "draw_count": 771,
+  "sha256": {
+    "land": "d0f383d492d27506e216517651aac600c2f9610606e9afb4f1a01e14ca1a2f52",
+    "sea": "6801adb7840927b3413f81e67011bc271f5fcab5da5a7495155d5a2476ef55c5",
+    "overlay": "d7cda60248ff7733a8943d3e40cba820e5dcf34ec0134de04cf7da8939b94ba4"
+  },
+  "golden_gate_anchor": [
+    466,
+    156.5
+  ],
+  "qualification": "Each emitted triangle comes from direct C4B390 projected polygon vertices or an observed M-map viewport coverage rectangle. The vertices are in the joined 1000x370 M-map projection and do not encode a global height field, road/building mesh, or real-world-distance scale."
+}
