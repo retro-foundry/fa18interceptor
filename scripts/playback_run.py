@@ -63,6 +63,8 @@ def main() -> None:
     parser.add_argument("--run", type=Path, required=True,
                         help="Sealed capture directory containing config, saves, appdata, and playback.")
     parser.add_argument("--window-size", default="1400x900")
+    parser.add_argument("--restore-delay", type=float, default=0.0,
+                        help="seconds to wait after window creation before restoring the saved timeline")
     args = parser.parse_args()
     run = args.run.resolve()
     required = ("config.uae", "initial_state.bin", "playback.e9k", "saves", "appdata")
@@ -82,10 +84,14 @@ def main() -> None:
     environment["APPDATA"] = str(run / "appdata")
     process = subprocess.Popen(command, cwd=ENGINE, env=environment)
     hwnd = find_window(process.pid)
-    time.sleep(2)
+    if args.restore_delay < 0:
+        raise ValueError("restore-delay must be nonnegative")
+    if args.restore_delay:
+        time.sleep(args.restore_delay)
     restore_saved_state(hwnd)
     print(json.dumps({"pid": process.pid, "window": hwnd, "run": str(run),
-                      "frame_counter": "visible in Engine9000 status bar as FRAME:<n>"}))
+                      "frame_counter": "visible in Engine9000 status bar as FRAME:<n>",
+                      "restore_delay": args.restore_delay}))
 
 
 if __name__ == "__main__":
