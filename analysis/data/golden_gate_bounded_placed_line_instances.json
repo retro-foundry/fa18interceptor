@@ -1,0 +1,43 @@
+{
+  "classification": "verified_landmark_two_placed_line_instances_not_complete_bridge_mesh",
+  "landmark": "Golden Gate",
+  "shared_line_topology": {
+    "record": "$C358B2",
+    "selector": 1,
+    "edge": [0, 1]
+  },
+  "instances": [
+    {
+      "static_template": "$C4264D",
+      "runtime_placement_record": "$C4ED22",
+      "placement_x_y_z": [460, 0, 172],
+      "descriptor": "$C22408",
+      "descriptor_field": "$C35568",
+      "cursor_published_stream": "$C35598",
+      "local_source": "$C35BAA",
+      "local_triples": [[0, 0, 3744], [0, 416, -3168]],
+      "walker_entry": "$C35BB8",
+      "line_context": "$C3559A",
+      "trace_indices": {"descriptor_store": 142119, "cursor_publish": 142214, "matrix_source": 142280, "walker_entry": 142379, "walker_a5_load": 142382, "line_submit": 142533}
+    },
+    {
+      "static_template": "$C42653",
+      "runtime_placement_record": "$C4ED3A",
+      "placement_x_y_z": [460, 0, 148],
+      "descriptor": "$C2241C",
+      "descriptor_field": "$C355A0",
+      "cursor_published_stream": "$C355D0",
+      "local_source": "$C35BC2",
+      "local_triples": [[0, 0, -3744], [0, 416, 3168]],
+      "walker_entry": "$C35BD0",
+      "line_context": "$C355D2",
+      "trace_indices": {"descriptor_store": 142817, "cursor_publish": 142912, "matrix_source": 142978, "walker_entry": 143077, "walker_a5_load": 143080, "line_submit": 143231}
+    }
+  ],
+  "authority": {
+    "trace": "build/run037_m_map_placement_to_control_20f_trace/trace.jsonl",
+    "slow_snapshot": "build/run037_m_map_placement_to_control_20f_trace/slow.bin",
+    "map_anchor": "analysis/data/run035_golden_gate_red_line_correlation.md"
+  },
+  "qualification": "Both map placements, their independent descriptor/control streams, source pairs, selected line edge, and red line submissions occur in one uninterrupted trace. The existing M-map red-pixel correlation establishes their shared Golden Gate landmark identity. This is not a complete bridge mesh, a static global vertex export, or a general placement-to-mesh rule for other records."
+}

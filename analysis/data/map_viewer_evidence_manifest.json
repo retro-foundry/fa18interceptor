@@ -7,6 +7,11 @@
   },
   "placed_components": [
     {
+      "asset": "analysis/data/golden_gate_bounded_placed_line_instances.json",
+      "rendering": "two separately placed red landmark line instances",
+      "certainty": "verified landmark placement-to-control-to-source-to-line paths"
+    },
+    {
       "asset": "analysis/data/c3b6a6_bounded_instance_asset.json",
       "rendering": "four bounded filled-polygon primitives plus five local triples",
       "certainty": "exact placement-to-control-to-primitive path"
