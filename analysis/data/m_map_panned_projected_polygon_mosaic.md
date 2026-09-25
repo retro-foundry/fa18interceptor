@@ -3,6 +3,12 @@
 [Open the source SVG](../visuals/m_map_panned_projected_polygon_mosaic.svg) or
 [inspection PNG](../visuals/m_map_panned_projected_polygon_mosaic.png).
 
+In addition to the coastline fills, the run003 part of this mosaic now carries
+directly traced map-attached overlay geometry: dark-green `$C3B6B0` fill/line
+primitives, grey unlabelled line components, and the verified red Golden Gate
+strokes. Grid and the conditional map symbol remain excluded because they are
+view/state-relative rather than map-attached.
+
 This wider view joins the run042 40-polygon, run002 43-polygon, later run002
 43-polygon, run037 47-polygon, run035 49-polygon, run038 58-polygon, bounded
 moving run041 50-polygon, diagnostic run031 Alcatraz-window 51-polygon,
@@ -66,8 +72,9 @@ has no user-confirmed map primitive and is not labelled in the mosaic.
 The display grid and map-object marker are excluded: they are view/state
 dependent renderer output, not fixed coastline geometry.
 
-The reusable `$C3B720/$C3B6B0` component is also excluded: one observed map
-occurrence does not prove it is a unique mountain or landmark.
+The reusable `$C3B720/$C3B6B0` component is rendered as observed geometry but
+not named: one occurrence does not prove a unique mountain, building, road,
+or landmark identity.
 
 This is wider observed source coverage, **not** an absolute coordinate system,
 a complete world map, or a reconstructed global terrain model.

@@ -14,6 +14,8 @@ from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[1]
 LAND, SEA = "#115511", "#003366"
+FILL_MASK_COLOURS = {2: SEA, 15: "#003300"}
+OVERLAY_LINE_COLOURS = {"$C3559A": "#880000", "$C355D2": "#880000", "$C3B6B0": "#003300"}
 RUNS = (
     # Normalise at run042's upper-left. run042 = run035 + (130,61),
     # run035 = run037 + (116,16), and run035 = run003 + (142,36).
@@ -40,7 +42,7 @@ RUNS = (
     ("run001", ROOT / "build/run001_m_map_projected_polygons/projected_polygons.json", 194, 121, 36, 0, 36),
     # run035 = run024 + (140,35), measured from the exact blue-water join.
     ("run024", ROOT / "build/run024_m_map_projected_polygons/projected_polygons.json", 270, 96, 42, 0, 42),
-    ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 272, 97, 42, None, None),
+    ("run003", ROOT / "build/run003_m_map_colour_polygon_probe/projected_polygons.json", 272, 97, 42, 0, 42),
     # run035 = run004 + (226,109), measured from the exact blue-water join.
     ("run004", ROOT / "build/run004_m_map_projected_polygons/projected_polygons.json", 356, 170, 22, 2, 22),
 )
@@ -48,6 +50,9 @@ WIDTH, HEIGHT = 1000, 370
 VIEWPORT_WIDTH, VIEWPORT_HEIGHT = 640, 180
 ANCHORS = (("GOLDEN GATE", 466, 156.5, "#e53935"),)
 GOLDEN_GATE_LINES = (((466, 153), (466, 157)), ((466, 160), (466, 156)))
+# Only map-attached geometry is transferred. Grid and the conditional C4C598
+# symbol are view/state-relative and remain out of a coastline-joined mosaic.
+OVERLAY_LINES = ((ROOT / "analysis/data/run003_m_map_renderer_vectors.json", 272, 97),)
 
 
 def canonical_pass(polygons: list[dict]) -> list[dict]:
@@ -88,16 +93,31 @@ def main() -> None:
             if len(pairs) < 3:
                 continue
             points = [(x * 2 + tx, y + ty) for x, y in pairs]
-            polygon_svg.append('<polygon points="' + " ".join(f"{x},{y}" for x, y in points) + f'"><title>{name}: {polygon["context_a5"]}, submission {polygon["submission"]}</title></polygon>')
-            raster_polygons.append(points)
+            colour = FILL_MASK_COLOURS.get(polygon.get("active_fill_plane_mask"), SEA)
+            polygon_svg.append('<polygon fill="' + colour + '" points="' + " ".join(f"{x},{y}" for x, y in points) + f'"><title>{name}: {polygon["context_a5"]}, submission {polygon["submission"]}</title></polygon>')
+            raster_polygons.append((points, colour))
         report_runs.append({"name": name, "polygon_capture": str(path), "translation": [tx, ty], "canonical_submissions": len(polygons),
                             "start_submission": start, "bounded_submissions": count})
     svg.extend(coverage_svg)
-    svg.extend(['<g fill="#003366" stroke="none">', *polygon_svg, '</g>'])
+    svg.extend(['<g stroke="none">', *polygon_svg, '</g>'])
     for _, _, tx, ty, _, _, _ in RUNS:
         draw.rectangle((tx, ty, tx + VIEWPORT_WIDTH - 1, ty + VIEWPORT_HEIGHT - 1), fill=LAND)
-    for points in raster_polygons:
-        draw.polygon(points, fill=SEA)
+    for points, colour in raster_polygons:
+        draw.polygon(points, fill=colour)
+    overlay_rows = []
+    svg.append('<g fill="none" stroke-width="1">')
+    for path, tx, ty in OVERLAY_LINES:
+        for line in json.loads(path.read_text(encoding="utf-8"))["vectors"]:
+            if line["context"] in ("$C4C59E", "$C4C598"):
+                continue
+            x1, y1, x2, y2 = line["endpoints"]
+            colour = OVERLAY_LINE_COLOURS.get(line["context"], "#555555")
+            points = (x1 * 2 + tx, y1 + ty, x2 * 2 + tx, y2 + ty)
+            svg.append(f'<line x1="{points[0]}" y1="{points[1]}" x2="{points[2]}" y2="{points[3]}" stroke="{colour}"/>')
+            draw.line(((points[0], points[1]), (points[2], points[3])), fill=colour)
+            overlay_rows.append({"source": str(path), "translation": [tx, ty],
+                                 "context": line["context"], "endpoints": list(points), "colour": colour})
+    svg.append('</g>')
     svg.append('<g shape-rendering="geometricPrecision" font-family="monospace">')
     for (x1, y1), (x2, y2) in GOLDEN_GATE_LINES:
         svg.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#880000" stroke-width="2"/>')
@@ -119,6 +139,7 @@ def main() -> None:
         "runs": report_runs,
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
         "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
+        "overlay_lines": overlay_rows,
         "qualification": "Each green rectangle is one directly observed 640×180 M-map viewport; blue polygons are direct renderer vectors inside that observed coverage, while black is uncaptured space. The normalized mosaic places run042 at (0,0), run002 at +16,+131, later run002 at +10,+122, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, diagnostic run031 Alcatraz-window map state at +172,+67, diagnostic run031 later-bridge state at +194,+70, run033 frame 5,250 at +210,+79, run001 at +194,+121, run024 at +270,+96, run003 at +272,+97, and run004 at +356,+170 host pixels. Its red Golden Gate vectors are C3559A/C355D2 lines directly captured both in run033's user-identified bridge state and in the prior map state, agreeing through the red-pixel-validated join. The run031 map passes are produced by the original renderer after clearing only their upstream UI command-mode latch; they do not identify an Alcatraz or later-bridge map primitive. Reusable components are deliberately excluded as unproven landmarks. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
