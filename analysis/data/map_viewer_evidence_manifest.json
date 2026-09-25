@@ -1,0 +1,24 @@
+{
+  "classification": "evidence_bounded_viewer_inputs_not_complete_world_export",
+  "map_vectors": {
+    "svg": "analysis/visuals/m_map_panned_projected_polygon_mosaic.svg",
+    "metadata": "analysis/data/m_map_panned_projected_polygon_mosaic.json",
+    "content": "direct M-map land/sea fills and traced overlay vectors"
+  },
+  "placed_components": [
+    {
+      "asset": "analysis/data/c3b6a6_bounded_instance_asset.json",
+      "rendering": "four bounded filled-polygon primitives plus five local triples",
+      "certainty": "exact placement-to-control-to-primitive path"
+    },
+    {
+      "asset": "analysis/data/c36212_bounded_instance_asset.json",
+      "rendering": "two bounded line primitives plus three local triples",
+      "certainty": "exact placement-to-control-to-line path"
+    }
+  ],
+  "exclusions": [
+    "untraced placement records", "unproven component topology", "named landmark labels", "static global vertex positions"
+  ],
+  "qualification": "A viewer may draw these inputs as evidence layers. It must not present them as the complete game world or infer missing scenery."
+}
