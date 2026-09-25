@@ -28,6 +28,8 @@ index 2c50665..485a2d5 100644
 +++ b/e9k-debugger/runtime.c
 @@ -30,0 +31 @@
 +#include "snapshot.h"
+@@ -81,0 +83 @@ runtime_onVblank(void *user)
++    snapshot_dumpReplayFrameStateIfRequested();
 @@ -185,0 +187,10 @@ runtime_executeNextFrame(void)
 +    // A human capture restores from the visible runtime loop.  Advance through
 +    // its setup frames without replaying flight input, then restore before the
@@ -83,13 +85,17 @@ index b641e64..c23db35 100644
 +++ b/e9k-debugger/snapshot.c
 @@ -16,0 +17 @@
 +#include "debug.h"
-@@ -20,0 +22,82 @@
+@@ -20,0 +22,130 @@
 +// Legacy captures did not record the restore-hotkey frame.  New captures set
 +// E9K_BOOT_RESTORE_FRAME and use the same explicit runtime boundary on replay.
 +#define SNAPSHOT_LEGACY_REPLAY_RESTORE_FRAME 37
 +
 +static int snapshot_replayRestorePending;
 +static uint64_t snapshot_replayRestoreFrame;
++static int snapshot_replayFrameDumpConfigured;
++static int snapshot_replayFrameDumped;
++static uint64_t snapshot_replayFrameDumpFrame;
++static char snapshot_replayFrameDumpPath[1024];
 +
 +static int
 +snapshot_configureReplayRestore(void)
@@ -130,27 +136,26 @@ index b641e64..c23db35 100644
 +    fclose(file);
 +}
 +
-+void
-+snapshot_dumpReplayState(void)
++static int
++snapshot_dumpStateToPath(const char *path)
 +{
-+    const char *path = getenv("E9K_REPLAY_STATE_DUMP");
 +    if (!path || !*path) {
-+        return;
++        return 0;
 +    }
 +    size_t stateSize = 0;
 +    if (!libretro_host_getSerializeSize(&stateSize) || stateSize == 0) {
 +        debug_error("snapshot: cannot determine restored replay state size");
-+        return;
++        return 0;
 +    }
 +    uint8_t *state = (uint8_t*)malloc(stateSize);
 +    if (!state) {
 +        debug_error("snapshot: cannot allocate restored replay state dump");
-+        return;
++        return 0;
 +    }
 +    if (!libretro_host_serializeTo(state, stateSize)) {
 +        free(state);
 +        debug_error("snapshot: cannot serialize restored replay state");
-+        return;
++        return 0;
 +    }
 +    FILE *file = fopen(path, "wb");
 +    if (!file || fwrite(state, 1, stateSize, file) != stateSize) {
@@ -159,11 +164,56 @@ index b641e64..c23db35 100644
 +        }
 +        free(state);
 +        debug_error("snapshot: cannot write restored replay state dump");
-+        return;
++        return 0;
 +    }
 +    fclose(file);
 +    free(state);
-+    debug_printf("snapshot: wrote restored replay state dump bytes=%zu", stateSize);
++    return 1;
++}
++
++void
++snapshot_dumpReplayState(void)
++{
++    const char *path = getenv("E9K_REPLAY_STATE_DUMP");
++    if (snapshot_dumpStateToPath(path)) {
++        size_t stateSize = 0;
++        libretro_host_getSerializeSize(&stateSize);
++        debug_printf("snapshot: wrote restored replay state dump bytes=%zu", stateSize);
++    }
++}
++
++void
++snapshot_dumpReplayFrameStateIfRequested(void)
++{
++    if (!snapshot_replayFrameDumpConfigured) {
++        const char *frameText = getenv("E9K_REPLAY_FRAME_DUMP_FRAME");
++        const char *path = getenv("E9K_REPLAY_FRAME_DUMP");
++        snapshot_replayFrameDumpConfigured = 1;
++        if (!frameText || !*frameText || !path || !*path) {
++            return;
++        }
++        char *end = NULL;
++        unsigned long long frame = strtoull(frameText, &end, 10);
++        if (!end || *end) {
++            debug_error("snapshot: invalid E9K_REPLAY_FRAME_DUMP_FRAME");
++            return;
++        }
++        if (strlen(path) >= sizeof(snapshot_replayFrameDumpPath)) {
++            debug_error("snapshot: E9K_REPLAY_FRAME_DUMP path is too long");
++            return;
++        }
++        snapshot_replayFrameDumpFrame = (uint64_t)frame;
++        strcpy(snapshot_replayFrameDumpPath, path);
++    }
++    if (snapshot_replayFrameDumped || !snapshot_replayFrameDumpPath[0] ||
++        debugger.frameCounter != snapshot_replayFrameDumpFrame) {
++        return;
++    }
++    snapshot_replayFrameDumped = 1;
++    if (snapshot_dumpStateToPath(snapshot_replayFrameDumpPath)) {
++        debug_printf("snapshot: wrote replay frame state frame=%llu",
++                     (unsigned long long)debugger.frameCounter);
++    }
 +}
 +
 @@ -206,0 +290,5 @@ snapshot_loadSnapshotOnBoot(void)
@@ -210,7 +260,7 @@ diff --git a/e9k-debugger/snapshot.h b/e9k-debugger/snapshot.h
 index fce77b6..017467f 100644
 --- a/e9k-debugger/snapshot.h
 +++ b/e9k-debugger/snapshot.h
-@@ -15,0 +16,10 @@ snapshot_loadOnBoot(void);
+@@ -15,0 +16,14 @@ snapshot_loadOnBoot(void);
 +
 +/* Restore a playback snapshot at the same runtime boundary as its GUI restore. */
 +int
@@ -221,6 +271,10 @@ index fce77b6..017467f 100644
 +
 +void
 +snapshot_dumpReplayState(void);
++
++/* Optionally serialize the live replay state after a requested host frame. */
++void
++snapshot_dumpReplayFrameStateIfRequested(void);
 diff --git a/e9k-debugger/ui.c b/e9k-debugger/ui.c
 index ffee5ed..cc5a740 100644
 --- a/e9k-debugger/ui.c
