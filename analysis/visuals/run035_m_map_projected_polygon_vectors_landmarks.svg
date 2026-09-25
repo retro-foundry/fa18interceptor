@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="200" viewBox="0 0 640 200" shape-rendering="crispEdges">
+<title>Run003 M-map projected polygon vectors</title>
+<desc>Blue water polygons are captured at C4B390 before C2FF48, over the green land base.</desc>
+<rect width="640" height="200" fill="#115511"/>
+<g fill="#003366" stroke="none">
+<polygon points="598,34 620,35 638,31 638,35 624,38 592,36"><title>$C4BFD6, submission 0</title></polygon>
+<polygon points="4,68 148,68 148,128 4,128"><title>$C4BFAC, submission 1</title></polygon>
+<polygon points="4,126 148,126 148,179 4,179"><title>$C4BFAC, submission 2</title></polygon>
+<polygon points="356,130 364,132 362,130"><title>$C3B6B0, submission 3</title></polygon>
+<polygon points="364,132 364,128 362,130"><title>$C3B6B0, submission 4</title></polygon>
+<polygon points="364,128 358,128 362,130"><title>$C3B6B0, submission 5</title></polygon>
+<polygon points="358,128 356,130 362,130"><title>$C3B6B0, submission 6</title></polygon>
+<polygon points="86,0 100,11 66,51 104,51 108,40 310,98 322,128 306,168 324,179 0,179 0,0"><title>$C4BFE8, submission 7</title></polygon>
+<polygon points="382,98 480,133 506,174 388,141"><title>$C4BFAC, submission 8</title></polygon>
+<polygon points="374,11 330,43 374,57 436,35"><title>$C4BFAC, submission 9</title></polygon>
+<polygon points="306,98 340,93 366,74 404,77 400,107 366,93 302,102"><title>$C4BFBE, submission 10</title></polygon>
+<polygon points="352,49 322,64 358,79 378,70"><title>$C4BFAC, submission 11</title></polygon>
+<polygon points="0,178 14,179 0,179"><title>$C4BFBE, submission 12</title></polygon>
+<polygon points="148,42 184,54 192,62 214,68 214,70 146,70"><title>$C4BFB8, submission 13</title></polygon>
+<polygon points="232,65 246,70 236,70"><title>$C4BFA6, submission 14</title></polygon>
+<polygon points="146,13 152,17 156,17 156,19 160,19 168,24 166,28 148,17"><title>$C4BFC4, submission 15</title></polygon>
+<polygon points="352,51 346,53 342,52 330,57 334,62 318,63 336,70 378,70 368,65"><title>$C4BFCA, submission 16</title></polygon>
+<polygon points="334,29 388,43 392,51 374,57 380,62 368,59 354,56 352,51 326,40"><title>$C4BFCA, submission 17</title></polygon>
+<polygon points="374,10 426,24 426,44 400,47 334,29 330,21 352,18"><title>$C4BFBE, submission 18</title></polygon>
+<polygon points="426,24 436,31 444,31 446,34 424,43"><title>$C4BFB2, submission 19</title></polygon>
+<polygon points="426,10 436,11 432,17 458,33 446,33 442,31 448,29 428,17"><title>$C4BFC4, submission 20</title></polygon>
+<polygon points="456,32 478,30 488,37 510,36 516,38 496,42 476,35 456,33"><title>$C4BFC4, submission 21</title></polygon>
+<polygon points="504,37 536,17 566,12 566,35 516,38"><title>$C4BFB2, submission 22</title></polygon>
+<polygon points="144,68 214,70 216,71 230,74 238,71 236,70 246,70 254,73 240,71 256,74 288,84 288,128 144,128"><title>$C4BFE2, submission 23</title></polygon>
+<polygon points="288,84 310,94 340,92 332,103 318,104 324,128 282,128"><title>$C4BFBE, submission 24</title></polygon>
+<polygon points="322,75 342,82 354,79 376,102 334,97 336,92 338,90 334,85 316,79 326,80"><title>$C4BFD0, submission 25</title></polygon>
+<polygon points="326,67 378,70 374,73 404,71 414,77 408,77 416,82 408,81 356,80 334,73 336,71"><title>$C4BFD6, submission 26</title></polygon>
+<polygon points="354,79 408,81 412,85 418,83 422,91 406,93 406,94 416,94 382,103 360,95"><title>$C4BFD0, submission 27</title></polygon>
+<polygon points="378,101 400,98 408,97 406,104 426,107 426,128 376,128"><title>$C4BFBE, submission 28</title></polygon>
+<polygon points="424,107 448,112 456,109 466,114 464,115 446,112 436,115 422,115"><title>$C4BFC4, submission 29</title></polygon>
+<polygon points="424,114 440,114 450,120 448,119 446,120 462,125 462,128 422,128"><title>$C4BFC4, submission 30</title></polygon>
+<polygon points="462,125 464,124 464,122 476,128 462,128"><title>$C4BFB2, submission 31</title></polygon>
+<polygon points="144,126 288,126 288,179 144,179"><title>$C4BFAC, submission 32</title></polygon>
+<polygon points="284,126 324,128 322,152 316,152 314,167 324,178 334,175 338,179 284,179"><title>$C4BFCA, submission 33</title></polygon>
+<polygon points="378,126 382,132 374,133 382,134 382,138 376,138 382,142 392,144 426,128"><title>$C4BFCA, submission 34</title></polygon>
+<polygon points="390,142 388,145 394,147 392,148 384,147 382,149 392,153 426,157 426,128"><title>$C4BFCA, submission 35</title></polygon>
+<polygon points="422,126 476,128 494,154 472,166 462,166 446,160 426,157"><title>$C4BFBE, submission 36</title></polygon>
+<polygon points="494,154 512,175 506,178 468,169 466,165"><title>$C4BFB2, submission 37</title></polygon>
+<polygon points="504,176 512,175 538,177 540,179 508,179"><title>$C4BFC4, submission 38</title></polygon>
+<polygon points="102,0 102,0 110,7 108,11 4,11 4,0"><title>$C4BFD6, submission 39</title></polygon>
+<polygon points="128,0 146,11 134,11 118,0"><title>$C4BFB2, submission 40</title></polygon>
+<polygon points="426,1 426,11 422,8 424,4 410,1"><title>$C4BFB2, submission 41</title></polygon>
+<polygon points="424,1 428,2 426,8"><title>$C4BFA6, submission 42</title></polygon>
+<polygon points="424,8 436,11 424,11"><title>$C4BFA6, submission 43</title></polygon>
+<polygon points="4,9 108,11 80,46 74,47 76,48 102,50 92,46 104,40 114,39 120,40 148,42 148,70 4,70"><title>$C4BFE2, submission 44</title></polygon>
+<polygon points="120,22 118,31 126,29 118,38 126,38 128,34 128,38 138,39 114,39 104,32 112,31"><title>$C4BFD6, submission 45</title></polygon>
+<polygon points="134,10 144,11 148,14 148,17"><title>$C4BFAC, submission 46</title></polygon>
+<polygon points="566,13 574,20 564,23"><title>$C4BFA6, submission 47</title></polygon>
+<polygon points="564,26 584,29 608,27 612,29 606,33 592,36 566,35"><title>$C4BFBE, submission 48</title></polygon>
+</g>
+<g fill="none" stroke="#555555" stroke-width="1">
+</g>
+<g fill="none" stroke="#000000" stroke-width="1">
+</g>
+
+<g shape-rendering="geometricPrecision" font-family="monospace">
+<circle cx="52" cy="23.5" r="3.5" fill="#e53935" stroke="#fff" stroke-width=".8"/>
+<path d="M 55 21.5 L 93 8.5" stroke="#e53935" stroke-width="1.2"/>
+<rect x="94" y="1.5" width="82" height="13" fill="#000" fill-opacity=".78" stroke="#e53935" stroke-width=".5"/>
+<text x="97" y="10.5" fill="#fff" font-size="8">GOLDEN GATE</text>
+<circle cx="76" cy="58" r="3.5" fill="#f59e0b" stroke="#fff" stroke-width=".8"/>
+<path d="M 79 56 L 117 43" stroke="#f59e0b" stroke-width="1.2"/>
+<rect x="118" y="36" width="82" height="13" fill="#000" fill-opacity=".78" stroke="#f59e0b" stroke-width=".5"/>
+<text x="121" y="45" fill="#fff" font-size="8">MOUNTAIN ?</text>
+</g>
+</svg>
