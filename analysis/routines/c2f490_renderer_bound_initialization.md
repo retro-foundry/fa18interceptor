@@ -9,5 +9,6 @@ first selected `$C45C72`-stride record. This identifies `$C456E6` as a bound
 or sentinel initialized for that renderer-associated pass, without assigning a
 screen-space or gameplay meaning.
 
-Evidence: static bytes `$C2F490-$C2F49B` and
+Evidence: byte-exact source `source_amiga/observed/initialize_renderer_state_long.asm`,
+static bytes `$C2F490-$C2F49B`, and
 `build/run060_c1518c_continuous_forced_route/trace.jsonl` rows 131-149.
