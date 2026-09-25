@@ -4,7 +4,8 @@ Classification: **static dataflow**.
 
 The byte-exact source is in
 `source_amiga/observed/gate_c322ee_signed_state.asm` and
-`source_amiga/observed/gate_c322f8_control_timer.asm`.
+`source_amiga/observed/gate_c322f8_control_timer.asm`.  Its fall-through is
+now represented by `source_amiga/observed/select_postflight_message_slot.asm`.
 
 `$C322EE` loads word `$C459C0` into `D2`; a negative value branches to
 `$C32510`.  The fall-through at `$C322F8` masks `$C458CC` with `$0081` and
