@@ -9,3 +9,7 @@ pixels. The run035 source-vector coastline is independently extracted; this
 step only transfers fixed landmark positions, rather than claiming a new
 run035 bridge/terrain control trace. The corrected artifact also has the
 separately traced state-dependent flight-object marker.
+
+The corrected Golden Gate position is independently checked against the exact
+`#880000` bridge-pixel bounds in both run003 and run035; see
+[`m_map_golden_gate_anchor_validation.json`](m_map_golden_gate_anchor_validation.json).

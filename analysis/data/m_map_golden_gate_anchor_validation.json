@@ -1,0 +1,50 @@
+{
+  "classification": "Golden_Gate_anchor_to_red_M_map_pixel_validation",
+  "map_origin": [
+    40,
+    16
+  ],
+  "samples": [
+    {
+      "capture": "run003",
+      "map_anchor": [
+        194,
+        59.5
+      ],
+      "screen_anchor": [
+        234,
+        75.5
+      ],
+      "red_rgb": "#880000",
+      "red_pixel_count": 14,
+      "red_bounds": [
+        234,
+        73,
+        235,
+        79
+      ],
+      "anchor_hits_bounds": true
+    },
+    {
+      "capture": "run035",
+      "map_anchor": [
+        336,
+        95.5
+      ],
+      "screen_anchor": [
+        376,
+        111.5
+      ],
+      "red_rgb": "#880000",
+      "red_pixel_count": 14,
+      "red_bounds": [
+        376,
+        108,
+        377,
+        114
+      ],
+      "anchor_hits_bounds": true
+    }
+  ],
+  "qualification": "This validates the anchor against the displayed red bridge-line bounds. It does not identify all bridge geometry or convert the map to absolute world coordinates."
+}
