@@ -2,7 +2,7 @@
 
                 org     $C26EBE
 
-CANDIDATE_SCAN_STATUS           equ     $C4589F
+CANDIDATE_SCAN_STATUS           equ     $C4589F ; set by later broad-phase acceptance
 CANDIDATE_RECORD_BASE           equ     $C46184
 CANDIDATE_RECORD_OFFSET          equ     $C459B6
 RETURN_CLASS20_CANDIDATE_SCAN    equ     $C26EB8

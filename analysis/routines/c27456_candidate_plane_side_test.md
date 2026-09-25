@@ -4,6 +4,9 @@ Classification: **runtime-backed behavioral geometry, observed path
 memory-read-only**. This is a plane-side test inside the `$C26EBE` candidate
 record scan, not yet a proved collision, visibility, or model-identity rule.
 It is called at `$C27410`, and the caller branches on its returned Z flag.
+The focused `$C26EBE` trace establishes that `A3` is the broad-phase-selected
+`$C46184` record (observed: `$C47D84`), while `A4` is a static pointer stream
+selected by the follow-on phase; see `c26ebe_candidate_record_scan.md`.
 
 Each nonnegative long read from `(A4)+` points to a record whose words at
 `+2,+4,+6` select three signed offsets into the table at `A3` (the third
