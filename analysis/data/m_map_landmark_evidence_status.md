@@ -1,6 +1,6 @@
 # M-map landmark evidence status
 
-[Open the seventeen-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic_v4.png), or use the [rotatable land-and-sea evidence plane](../visuals/m_map_land_sea_3d_evidence.html).
+[Open the seventeen-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic_v4.png), the [rotatable land-and-sea evidence plane](../visuals/m_map_land_sea_3d_evidence.html), or the [free-look WebGL remake terrain viewer](../visuals/m_map_modern_remake_viewer.html).
 
 | map annotation | status | evidence boundary |
 | --- | --- | --- |
@@ -13,6 +13,13 @@
 The v4 mosaic contains seventeen direct `$C4B390`-before-`$C2FF48` polygon captures
 from independent M-map states. Green/blue is source-vector land/sea inside
 observed viewports; black is uncaptured space. It is not a complete global map.
+
+The remake terrain viewer intentionally consumes that same source-vector mosaic
+as a navigable WebGL terrain plane. Its `28 × 10.36` plane ratio preserves the
+`1000 × 370` joined map geometry, and its red ground mark is the verified
+`$C3559A/$C355D2` Golden Gate anchor at `(466,156.5)`. This makes the recovered
+terrain useful in a modern-renderer presentation without inventing a heightmap,
+global-distance scale, roads, buildings, or unproven landmark identities.
 
 One pass, run034, is explicitly diagnostic because its sealed input recording
 preserved the `M` release but not its key-down; its supplied one-frame press
