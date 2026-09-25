@@ -16,3 +16,7 @@ This establishes a CPU graphics-compositing path from a byte stream into a
 working buffer, so it is not yet evidence that this specific stream is KTS or
 altitude glyph data.  Its source-byte and caller contracts are the next
 appropriate targets.
+
+The helper's formerly static-only zero-selector tail and shared epilogue are
+now byte-exact in `source_amiga/observed/finish_c32806_mask_rows.asm` for
+`$C32880-$C328A5`, completing the `$C32806-$C328A5` helper range.

@@ -1,5 +1,5 @@
 ; Byte-exact observed dual mask-row update paths $C32806-$C3287F.
-; The zero-selector path at $C32880 is outside the captured execution.
+; The zero-selector tail is reconstructed separately at $C32880.
 
                 org     $C32806
 
