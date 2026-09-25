@@ -147,9 +147,10 @@ def main() -> None:
                 compared += 1
                 matches += actual == expected
     diagnostic_writes = captured.get("debug_writes", [])
+    diagnostic_capture = captured.get("classification", "").startswith("diagnostic_")
     report = {
         "classification": ("diagnostic_projected_renderer_vectors_before_area_blit"
-                           if diagnostic_writes else "scenario_backed_projected_renderer_vectors_before_area_blit"),
+                           if diagnostic_writes or diagnostic_capture else "scenario_backed_projected_renderer_vectors_before_area_blit"),
         "authority": {"polygon_capture": str(args.input),
                       "line_capture": None if args.no_lines else str(args.line_input)},
         "debug_writes": diagnostic_writes,
@@ -172,8 +173,8 @@ def main() -> None:
                      if not args.no_annotations else None),
         "qualification": (
             "Polygon vertices and line endpoints are direct renderer vectors, not bitplane runs. Where captured, each polygon retains its active fill-plane mask; mask 2 is water and mask 15 is a separately observed dark-green map overlay. Ordinary traced line overlays are drawn grey, the verified C3559A/C355D2 strokes red, and the conditional C4C598 symbol black. Their semantic identities remain unassigned except for Golden Gate. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
-            if not diagnostic_writes else
-            "Polygon vertices are direct renderer vectors, not bitplane runs. Their source replay has debugger writes recorded above, so this render proves "
+            if not diagnostic_writes and not diagnostic_capture else
+            "Polygon vertices are direct renderer vectors, not bitplane runs. Their source replay is marked diagnostic above, so this render proves "
             "the affected display-state dependency only; it is not a normal gameplay map view or a static global-coordinate decode."),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

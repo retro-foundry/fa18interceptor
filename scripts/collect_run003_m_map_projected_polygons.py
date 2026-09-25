@@ -33,6 +33,8 @@ def main() -> None:
                         help="optional events delivered after restore")
     parser.add_argument("--no-playback", action="store_true",
                         help="do not deliver the default run003 M-key event stream")
+    parser.add_argument("--diagnostic-input", action="store_true",
+                        help="mark supplied replay input as diagnostic rather than sealed-scenario evidence")
     parser.add_argument("--config", type=Path, default=ROOT / "local/fa18.uae")
     parser.add_argument("--frames", type=int, default=100)
     parser.add_argument("--max-polygons", type=int, default=128)
@@ -91,16 +93,21 @@ def main() -> None:
                 engine.core.retro_run()
             if len(polygons) >= args.max_polygons:
                 break
+        classification = ("diagnostic_projected_renderer_vectors_before_area_blit"
+                          if writes or args.diagnostic_input else
+                          "scenario_backed_projected_renderer_vectors_before_area_blit")
         report = {
-            "scope": ("C4B390 projected pairs immediately before C2FF48 in run003 M-map replay"
-                      if not writes else "C4B390 projected pairs immediately before C2FF48 in a debugger-mutated run003 M-map replay"),
+            "scope": "C4B390 projected pairs immediately before C2FF48 in supplied M-map replay",
+            "classification": classification,
+            "authority": {"restore": str(args.restore), "playback": None if args.no_playback else str(args.playback),
+                          "config": str(args.config)},
             "polygon_count": len(polygons), "polygons": polygons,
             "debug_writes": writes,
             "qualification": (
                 "Pairs are renderer-produced projected vectors. Context is a live renderer cursor; it is not by itself a static source-model identity."
-                if not writes else
-                "Pairs are renderer-produced projected vectors from a debugger-mutated emulator instance; the sealed checkpoint is unchanged. "
-                "The mutation establishes display-state causality only, not a normal gameplay map position or static source-model identity."),
+                if not writes and not args.diagnostic_input else
+                "Pairs are renderer-produced projected vectors from a diagnostic replay; the sealed checkpoint is unchanged. "
+                "The diagnostic input or debugger mutation establishes display-state causality only, not a normal gameplay map position or static source-model identity."),
         }
         (args.output / "projected_polygons.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"polygons": len(polygons), "output": str(args.output)}))
