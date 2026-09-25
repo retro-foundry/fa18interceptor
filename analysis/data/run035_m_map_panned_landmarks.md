@@ -17,6 +17,6 @@ The corrected map also renders the two corresponding `$C3559A/$C355D2` red
 bridge vectors at that anchor, rather than representing the bridge only with
 a callout marker.
 
-The Mountain ? callout likewise overlays the four direct run035 `$C3B6B0`
-projected triangles. This is trace-backed component geometry; `Mountain ?`
-remains a qualified visual reading rather than an original semantic label.
+The earlier Mountain ? callout was removed. `$C3B720/$C3B6B0` is a reusable
+trace-backed component path, so its occurrence near the city cannot establish
+a unique mountain landmark or an original semantic name.

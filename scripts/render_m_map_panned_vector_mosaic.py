@@ -24,12 +24,8 @@ RUNS = (
     ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 272, 97, 42, None, None),
 )
 WIDTH, HEIGHT = 912, 297
-ANCHORS = (("GOLDEN GATE", 466, 156.5, "#e53935"), ("MOUNTAIN ?", 490, 191, "#f59e0b"))
+ANCHORS = (("GOLDEN GATE", 466, 156.5, "#e53935"),)
 GOLDEN_GATE_LINES = (((466, 153), (466, 157)), ((466, 160), (466, 156)))
-MOUNTAIN_TRIANGLES = (
-    ((486, 191), (494, 193), (492, 191)), ((494, 193), (494, 189), (492, 191)),
-    ((494, 189), (488, 189), (492, 191)), ((488, 189), (486, 191), (492, 191)),
-)
 
 
 def canonical_pass(polygons: list[dict]) -> list[dict]:
@@ -83,9 +79,6 @@ def main() -> None:
         draw.line(((x + 4, y - 3), (x + 51, y - 18)), fill=colour, width=1)
         draw.rectangle((x + 52, y - 25, x + 144, y - 12), fill="black", outline=colour, width=1)
         draw.text((x + 55, y - 24), name, fill="white")
-    for triangle in MOUNTAIN_TRIANGLES:
-        svg.append('<polygon points="' + " ".join(f"{x},{y}" for x, y in triangle) + '" fill="none" stroke="#f59e0b" stroke-width="1"/>')
-        draw.line(tuple(triangle) + (triangle[0],), fill="#f59e0b", width=1)
     svg.append('</g></svg>')
     svg_path.write_text("\n".join(svg) + "\n", encoding="utf-8")
     image.save(png_path)
@@ -94,8 +87,7 @@ def main() -> None:
         "runs": report_runs,
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
         "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
-        "mountain_triangles": [[list(point) for point in triangle] for triangle in MOUNTAIN_TRIANGLES],
-        "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, run041 at +172,+72, and run003 at +272,+97 host pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. Its orange Mountain ? triangles are direct run035 C3B6B0 projected polygons; the human-readable label remains a candidate. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
+        "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, run041 at +172,+72, and run003 at +272,+97 host pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. The reusable C3B720/C3B6B0 component is deliberately excluded as an unproven landmark. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))

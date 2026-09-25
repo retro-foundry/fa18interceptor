@@ -18,11 +18,14 @@ their measurements are
 and
 [`run035_run042_m_map_pan_comparison.json`](run035_run042_m_map_pan_comparison.json).
 
-Golden Gate and Mountain ? retain their existing evidence-qualified anchors.
+Golden Gate retains its evidence-qualified anchor.
 The two red Golden Gate strokes are the transferred `$C3559A/$C355D2` map
 vectors and coincide with the red-pixel-validated bridge anchor.
 The display grid and flight-object marker are excluded: they are view/state
 dependent renderer output, not fixed coastline geometry.
+
+The reusable `$C3B720/$C3B6B0` component is also excluded: one observed map
+occurrence does not prove it is a unique mountain or landmark.
 
 This is wider observed source coverage, **not** an absolute coordinate system,
 a complete world map, or a reconstructed global terrain model. Green space

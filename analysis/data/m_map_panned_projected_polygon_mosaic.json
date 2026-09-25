@@ -64,13 +64,6 @@
         466,
         156.5
       ]
-    },
-    {
-      "name": "MOUNTAIN ?",
-      "anchor": [
-        490,
-        191
-      ]
     }
   ],
   "golden_gate_segments": [
@@ -95,63 +88,5 @@
       ]
     ]
   ],
-  "mountain_triangles": [
-    [
-      [
-        486,
-        191
-      ],
-      [
-        494,
-        193
-      ],
-      [
-        492,
-        191
-      ]
-    ],
-    [
-      [
-        494,
-        193
-      ],
-      [
-        494,
-        189
-      ],
-      [
-        492,
-        191
-      ]
-    ],
-    [
-      [
-        494,
-        189
-      ],
-      [
-        488,
-        189
-      ],
-      [
-        492,
-        191
-      ]
-    ],
-    [
-      [
-        488,
-        189
-      ],
-      [
-        486,
-        191
-      ],
-      [
-        492,
-        191
-      ]
-    ]
-  ],
-  "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, run041 at +172,+72, and run003 at +272,+97 host pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. Its orange Mountain ? triangles are direct run035 C3B6B0 projected polygons; the human-readable label remains a candidate. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
+  "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, run041 at +172,+72, and run003 at +272,+97 host pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. The reusable C3B720/C3B6B0 component is deliberately excluded as an unproven landmark. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
 }

@@ -239,12 +239,4 @@
 <path d="M 470 153.5 L 517 138.5" stroke="#e53935" stroke-width="1.5"/>
 <rect x="518" y="131.5" width="92" height="13" fill="#000" fill-opacity=".78" stroke="#e53935" stroke-width=".5"/>
 <text x="521" y="140.5" fill="#fff" font-size="8">GOLDEN GATE</text>
-<circle cx="490" cy="191" r="4" fill="#f59e0b" stroke="#fff" stroke-width="1"/>
-<path d="M 494 188 L 541 173" stroke="#f59e0b" stroke-width="1.5"/>
-<rect x="542" y="166" width="92" height="13" fill="#000" fill-opacity=".78" stroke="#f59e0b" stroke-width=".5"/>
-<text x="545" y="175" fill="#fff" font-size="8">MOUNTAIN ?</text>
-<polygon points="486,191 494,193 492,191" fill="none" stroke="#f59e0b" stroke-width="1"/>
-<polygon points="494,193 494,189 492,191" fill="none" stroke="#f59e0b" stroke-width="1"/>
-<polygon points="494,189 488,189 492,191" fill="none" stroke="#f59e0b" stroke-width="1"/>
-<polygon points="488,189 486,191 492,191" fill="none" stroke="#f59e0b" stroke-width="1"/>
 </g></svg>

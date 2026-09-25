@@ -76,64 +76,6 @@
       ]
     ]
   ],
-  "mountain_triangles": [
-    [
-      [
-        356,
-        130
-      ],
-      [
-        364,
-        132
-      ],
-      [
-        362,
-        130
-      ]
-    ],
-    [
-      [
-        364,
-        132
-      ],
-      [
-        364,
-        128
-      ],
-      [
-        362,
-        130
-      ]
-    ],
-    [
-      [
-        364,
-        128
-      ],
-      [
-        358,
-        128
-      ],
-      [
-        362,
-        130
-      ]
-    ],
-    [
-      [
-        358,
-        128
-      ],
-      [
-        356,
-        130
-      ],
-      [
-        362,
-        130
-      ]
-    ]
-  ],
   "labels": [
     {
       "name": "GOLDEN GATE",
@@ -146,18 +88,6 @@
         95.5
       ],
       "evidence": "trace-backed run003 bridge contexts"
-    },
-    {
-      "name": "MOUNTAIN ?",
-      "run003_anchor": [
-        218,
-        94
-      ],
-      "run035_anchor": [
-        360,
-        130
-      ],
-      "evidence": "run003 terrain candidate"
     },
     {
       "name": "FLIGHT OBJECT ?",
@@ -200,5 +130,5 @@
       "evidence": "run035_m_map_stable_20f_trace: C2FA7E with A5=$C4C598"
     }
   ],
-  "qualification": "Grid, FLIGHT OBJECT ?, and the four Mountain ? candidate triangles are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. The marker trace does not establish ownership or semantic game identity, and the Mountain ? label remains a visual candidate rather than an original semantic name."
+  "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. The reusable C3B720/C3B6B0 component is deliberately not labelled as a map landmark. The marker trace does not establish ownership or semantic game identity."
 }
