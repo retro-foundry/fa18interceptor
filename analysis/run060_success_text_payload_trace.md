@@ -18,6 +18,10 @@ then `LANDING SUCCESSFUL`.  `$C32CEE` obtains this head word from the live
 sequence `$C4574A` with cursor `$C457C6=$00`, clears `$C457F6`, and falls
 through into the selector.  The sequence writer remains unknown.
 
+Adjacent native checkpoints show the queue changing from an inactive zero head
+at frame 9,284 to `$004A,$8053,$0000` with active byte `$C457C3=1` at frame
+9,285.  See [run060 success-selector activation](run060_success_selector_activation.md).
+
 ## Direct selected payload evidence
 
 The breakpoint at `$C32EF6` hits on the second frame after native checkpoint
