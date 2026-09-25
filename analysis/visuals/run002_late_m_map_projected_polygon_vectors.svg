@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="200" viewBox="0 0 640 200" shape-rendering="crispEdges">
+<title>Run003 M-map projected polygon vectors</title>
+<desc>Blue water polygons are captured at C4B390 before C2FF48, over the green land base.</desc>
+<rect width="640" height="200" fill="#115511"/>
+<g fill="#003366" stroke="none">
+<polygon points="300,0 428,38 442,67 424,107 458,125 0,138 0,0"><title>$C4BFE8, submission 0</title></polygon>
+<polygon points="502,38 598,73 624,112 508,80"><title>$C4BFAC, submission 1</title></polygon>
+<polygon points="424,38 458,32 484,12 524,16 520,47 484,32 420,41"><title>$C4BFBE, submission 2</title></polygon>
+<polygon points="448,0 442,3 476,17 498,8 488,0"><title>$C4BFAC, submission 3</title></polygon>
+<polygon points="0,113 458,125 484,153 474,179 0,179"><title>$C4BFBE, submission 4</title></polygon>
+<polygon points="122,6 268,6 268,67 122,67"><title>$C4BFAC, submission 5</title></polygon>
+<polygon points="262,6 332,8 332,9 348,12 354,10 352,8 364,8 372,11 358,10 374,13 406,23 406,67 262,67"><title>$C4BFE2, submission 6</title></polygon>
+<polygon points="406,23 428,34 460,31 452,42 436,43 444,67 398,67"><title>$C4BFBE, submission 7</title></polygon>
+<polygon points="442,14 462,20 474,17 496,41 454,37 454,32 456,29 454,24 434,17 444,18"><title>$C4BFD0, submission 8</title></polygon>
+<polygon points="446,5 498,8 494,11 524,10 534,15 526,16 536,20 528,19 476,18 454,11 456,9"><title>$C4BFD6, submission 9</title></polygon>
+<polygon points="474,17 528,19 532,23 536,22 540,31 526,32 526,33 534,33 502,42 480,35"><title>$C4BFD0, submission 10</title></polygon>
+<polygon points="498,40 520,37 528,37 524,43 546,47 546,67 494,67"><title>$C4BFBE, submission 11</title></polygon>
+<polygon points="122,65 268,65 268,125 122,125"><title>$C4BFAC, submission 12</title></polygon>
+<polygon points="262,65 406,65 406,125 262,125"><title>$C4BFAC, submission 13</title></polygon>
+<polygon points="400,65 444,67 440,90 432,90 432,105 444,116 454,114 468,125 400,125"><title>$C4BFCA, submission 14</title></polygon>
+<polygon points="498,66 500,71 494,73 502,74 500,77 494,78 502,82 512,83 546,67"><title>$C4BFCA, submission 15</title></polygon>
+<polygon points="510,82 506,85 512,86 510,88 504,86 502,89 510,91 546,96 546,67"><title>$C4BFCA, submission 16</title></polygon>
+<polygon points="122,123 268,123 268,179 122,179"><title>$C4BFAC, submission 17</title></polygon>
+<polygon points="262,123 406,123 406,179 262,179"><title>$C4BFAC, submission 18</title></polygon>
+<polygon points="470,125 480,143 492,151 480,179 400,179 400,123"><title>$C4BFBE, submission 19</title></polygon>
+<polygon points="128,0 128,8 0,8 0,0"><title>$C4BFAC, submission 20</title></polygon>
+<polygon points="268,0 268,8 122,8 122,0"><title>$C4BFE2, submission 21</title></polygon>
+<polygon points="310,0 312,1 330,6 332,8 266,8 266,0"><title>$C4BFB8, submission 22</title></polygon>
+<polygon points="350,3 364,8 352,8"><title>$C4BFA6, submission 23</title></polygon>
+<polygon points="452,0 454,1 438,2 456,8 498,8 486,4 482,0"><title>$C4BFCA, submission 24</title></polygon>
+<polygon points="498,0 500,1 496,0"><title>$C4BFCA, submission 25</title></polygon>
+<polygon points="0,6 128,6 128,67 0,67"><title>$C4BFAC, submission 26</title></polygon>
+<polygon points="544,47 568,51 576,48 586,53 582,55 564,52 556,55 540,54"><title>$C4BFC4, submission 27</title></polygon>
+<polygon points="544,54 558,54 570,59 568,59 566,59 580,65 582,67 540,67"><title>$C4BFC4, submission 28</title></polygon>
+<polygon points="580,65 582,64 582,62 596,67 580,67"><title>$C4BFB2, submission 29</title></polygon>
+<polygon points="0,65 128,65 128,125 0,125"><title>$C4BFAC, submission 30</title></polygon>
+<polygon points="540,65 596,67 612,93 592,104 580,104 564,98 546,96"><title>$C4BFBE, submission 31</title></polygon>
+<polygon points="612,93 632,114 626,116 588,108 584,103"><title>$C4BFB2, submission 32</title></polygon>
+<polygon points="624,115 632,114 638,114 638,125"><title>$C4BFC4, submission 33</title></polygon>
+<polygon points="0,123 128,123 128,179 0,179"><title>$C4BFAC, submission 34</title></polygon>
+<polygon points="200,64 204,64 204,63"><title>$C3B5B6, submission 35</title></polygon>
+<polygon points="204,64 206,62 204,63"><title>$C3B5B6, submission 36</title></polygon>
+<polygon points="206,62 198,63 204,63"><title>$C3B5B6, submission 37</title></polygon>
+<polygon points="198,63 200,64 204,63"><title>$C3B5B6, submission 38</title></polygon>
+<polygon points="476,70 484,71 482,69"><title>$C3B6B0, submission 39</title></polygon>
+<polygon points="484,71 484,68 482,69"><title>$C3B6B0, submission 40</title></polygon>
+<polygon points="484,68 478,68 482,69"><title>$C3B6B0, submission 41</title></polygon>
+<polygon points="478,68 476,70 482,69"><title>$C3B6B0, submission 42</title></polygon>
+</g>
+<g fill="none" stroke="#555555" stroke-width="1">
+</g>
+<g fill="none" stroke="#000000" stroke-width="1">
+</g>
+</svg>

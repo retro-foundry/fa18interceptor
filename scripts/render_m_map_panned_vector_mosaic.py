@@ -20,6 +20,8 @@ RUNS = (
     ("run042", ROOT / "build/run042_m_map_projected_polygons/projected_polygons.json", 0, 0, 40, None, None),
     # run035 = run002 + (-114,70), measured from the exact blue-water join.
     ("run002", ROOT / "build/run002_m_map_projected_polygons/projected_polygons.json", 16, 131, 43, 0, 43),
+    # run035 = later run002 + (-120,61), measured from the exact blue-water join.
+    ("run002_late", ROOT / "build/run002_late_m_map_projected_polygons/projected_polygons.json", 10, 122, 43, 0, 43),
     ("run037", ROOT / "build/run037_m_map_projected_polygons/projected_polygons.json", 14, 45, 47, None, None),
     ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 130, 61, 49, None, None),
     # run035 = run038 + (24,10), measured from the exact blue-water join.

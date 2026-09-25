@@ -24,6 +24,17 @@
       "bounded_submissions": 43
     },
     {
+      "name": "run002_late",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run002_late_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        10,
+        122
+      ],
+      "canonical_submissions": 43,
+      "start_submission": 0,
+      "bounded_submissions": 43
+    },
+    {
       "name": "run037",
       "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run037_m_map_projected_polygons\\projected_polygons.json",
       "translation": [
