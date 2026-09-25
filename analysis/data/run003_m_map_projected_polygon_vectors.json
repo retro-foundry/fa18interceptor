@@ -1,9 +1,10 @@
 {
   "classification": "scenario_backed_projected_renderer_vectors_before_area_blit",
   "authority": {
-    "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run003_m_map_projected_polygons\\projected_polygons.json",
-    "line_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json"
+    "polygon_capture": "build\\run003_m_map_colour_polygon_probe\\projected_polygons.json",
+    "line_capture": "analysis\\data\\run003_m_map_renderer_vectors.json"
   },
+  "debug_writes": [],
   "canonical_polygon_submissions": 42,
   "polygon_context_counts": {
     "$C3B6B0": 4,
@@ -19,16 +20,33 @@
     "$C4BFE2": 1,
     "$C4BFE8": 1
   },
+  "fill_mask_counts": {
+    "2": 38,
+    "15": 4
+  },
+  "line_context_counts": {
+    "$C3559A": 1,
+    "$C355D2": 1,
+    "$C35BD4": 2,
+    "$C36212": 2,
+    "$C36216": 2,
+    "$C3B6B0": 2,
+    "$C4BFB2": 1,
+    "$C4BFBE": 1,
+    "$C4C598": 3,
+    "$C4C59E": 4
+  },
   "palette": {
     "land": "#115511",
     "sea": "#003366",
-    "grid": "#555555"
+    "grid": "#555555",
+    "mask_15_overlay": "#003300"
   },
   "land_sea_oracle_validation": {
-    "oracle": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\visuals\\run003_m_map_display.png",
-    "pixels_compared": 111034,
-    "matching_pixels": 109774,
-    "agreement": 0.9886521245744547
+    "oracle": "analysis\\visuals\\run003_m_map_display.png",
+    "pixels_compared": 110956,
+    "matching_pixels": 109728,
+    "agreement": 0.988932549839576
   },
   "annotations_included": true,
   "landmark": {
@@ -39,5 +57,5 @@
     ],
     "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"
   },
-  "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
+  "qualification": "Polygon vertices and line endpoints are direct renderer vectors, not bitplane runs. Where captured, each polygon retains its active fill-plane mask; mask 2 is water and mask 15 is a separately observed dark-green map overlay. Ordinary traced line overlays are drawn grey, the verified C3559A/C355D2 strokes red, and the conditional C4C598 symbol black. Their semantic identities remain unassigned except for Golden Gate. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
 }

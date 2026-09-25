@@ -17,7 +17,16 @@ ROOT = Path(__file__).resolve().parents[1]
 W, H = 320, 180
 HOST_W, HOST_H = 640, 200
 LAND, SEA, GRID = "#115511", "#003366", "#555555"
+# These are observed final palette colours for the run003 M-map pass.  Mask 2
+# is the water fill; mask 15 is a separate small filled map overlay.
+FILL_MASK_COLOURS = {2: SEA, 15: "#003300"}
 GOLDEN_GATE_CONTEXTS = {"$C3559A", "$C355D2"}
+LINE_COLOURS = {
+    "$C4C59E": GRID,
+    "$C4C598": "#000000",
+    "$C3559A": "#880000",
+    "$C355D2": "#880000",
+}
 
 
 def canonical_pass(polygons: list[dict], start: int) -> list[dict]:
@@ -80,37 +89,21 @@ def main() -> None:
         '<title>Run003 M-map projected polygon vectors</title>',
         '<desc>Blue water polygons are captured at C4B390 before C2FF48, over the green land base.</desc>',
         f'<rect width="{HOST_W}" height="{HOST_H}" fill="{LAND}"/>',
-        f'<g fill="{SEA}" stroke="none">',
+        '<g stroke="none">',
     ]
     for polygon in polygons:
         pairs = polygon["projected_pairs"]
         if len(pairs) < 3:
             continue
         points = " ".join(f"{x * 2},{y}" for x, y in pairs)
-        svg.append(f'<polygon points="{points}"><title>{polygon["context_a5"]}, submission {polygon["submission"]}</title></polygon>')
+        fill = FILL_MASK_COLOURS.get(polygon.get("active_fill_plane_mask"), SEA)
+        svg.append(f'<polygon points="{points}" fill="{fill}"><title>{polygon["context_a5"]}, submission {polygon["submission"]}</title></polygon>')
     svg.append('</g>')
-    if not args.no_annotations:
-        svg.extend([
-        '<g shape-rendering="geometricPrecision" font-family="monospace">',
-        '<path d="M 70 131 L 104 119" stroke="#111" stroke-width="1"/>',
-        '<rect x="105" y="112" width="104" height="13" fill="#000" fill-opacity=".78" stroke="#111" stroke-width=".5"/>',
-        '<text x="108" y="121" fill="#fff" font-size="8">MAP OBJECT ?</text>',
-        '</g>',
-        ])
-    svg.append(f'<g fill="none" stroke="{GRID}" stroke-width="1">')
     for line in lines:
-        if line["context"] != "$C4C59E":
-            continue
         x1, y1, x2, y2 = line["endpoints"]
-        svg.append(f'<line x1="{x1 * 2}" y1="{y1}" x2="{x2 * 2}" y2="{y2}"/>')
-    svg.append('</g>')
-    svg.append('<g fill="none" stroke="#000000" stroke-width="1">')
-    for line in lines:
-        if line["context"] != "$C4C598":
-            continue
-        x1, y1, x2, y2 = line["endpoints"]
-        svg.append(f'<line x1="{x1 * 2}" y1="{y1}" x2="{x2 * 2}" y2="{y2}"/>')
-    svg.append('</g>')
+        colour = LINE_COLOURS.get(line["context"], GRID)
+        svg.append(f'<line x1="{x1 * 2}" y1="{y1}" x2="{x2 * 2}" y2="{y2}" '
+                   f'stroke="{colour}" stroke-width="1"/>')
     # These anchors are independently tied to run003 contexts and cannot be
     # transferred to another panned map capture without a separate join.
     if not args.no_annotations:
@@ -132,15 +125,12 @@ def main() -> None:
     draw = ImageDraw.Draw(image)
     for polygon in polygons:
         if len(polygon["projected_pairs"]) >= 3:
-            draw.polygon([(x * 2, y) for x, y in polygon["projected_pairs"]], fill=SEA)
+            draw.polygon([(x * 2, y) for x, y in polygon["projected_pairs"]],
+                         fill=FILL_MASK_COLOURS.get(polygon.get("active_fill_plane_mask"), SEA))
     for line in lines:
-        if line["context"] == "$C4C59E":
-            x1, y1, x2, y2 = line["endpoints"]
-            draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill=GRID)
-    for line in lines:
-        if line["context"] == "$C4C598":
-            x1, y1, x2, y2 = line["endpoints"]
-            draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill="#000000")
+        x1, y1, x2, y2 = line["endpoints"]
+        draw.line(((x1 * 2, y1), (x2 * 2, y2)),
+                  fill=LINE_COLOURS.get(line["context"], GRID))
     args.png.parent.mkdir(parents=True, exist_ok=True)
     image.save(args.png)
     compared = matches = 0
@@ -166,7 +156,13 @@ def main() -> None:
         "canonical_polygon_submissions": len(polygons),
         "polygon_context_counts": {context: sum(item["context_a5"] == context for item in polygons)
                                    for context in sorted({item["context_a5"] for item in polygons})},
-        "palette": {"land": LAND, "sea": SEA, "grid": GRID},
+        "fill_mask_counts": {str(mask): sum(item.get("active_fill_plane_mask") == mask for item in polygons)
+                             for mask in sorted({item.get("active_fill_plane_mask") for item in polygons
+                                                 if item.get("active_fill_plane_mask") is not None})},
+        "line_context_counts": {context: sum(item["context"] == context for item in lines)
+                                for context in sorted({item["context"] for item in lines})},
+        "palette": {"land": LAND, "sea": SEA, "grid": GRID,
+                    "mask_15_overlay": FILL_MASK_COLOURS[15]},
         "land_sea_oracle_validation": (None if args.no_oracle_validation else
             {"oracle": str(args.oracle), "pixels_compared": compared,
              "matching_pixels": matches, "agreement": matches / compared if compared else None}),
@@ -175,7 +171,7 @@ def main() -> None:
                       "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"}
                      if not args.no_annotations else None),
         "qualification": (
-            "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
+            "Polygon vertices and line endpoints are direct renderer vectors, not bitplane runs. Where captured, each polygon retains its active fill-plane mask; mask 2 is water and mask 15 is a separately observed dark-green map overlay. Ordinary traced line overlays are drawn grey, the verified C3559A/C355D2 strokes red, and the conditional C4C598 symbol black. Their semantic identities remain unassigned except for Golden Gate. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
             if not diagnostic_writes else
             "Polygon vertices are direct renderer vectors, not bitplane runs. Their source replay has debugger writes recorded above, so this render proves "
             "the affected display-state dependency only; it is not a normal gameplay map view or a static global-coordinate decode."),

@@ -2,28 +2,28 @@
 
 [Open the source-vector M-map SVG](../visuals/run003_m_map_projected_polygon_vectors.svg).
 
-This is the map extraction requested for land and sea: it starts with the
-game's green land palette and draws the 42 captured blue water polygons from
-`$C4B390` immediately before `$C2FF48` submits them to the area renderer.  It
-also draws the captured grey grid vectors and the independently traced Golden
-Gate marker.
+This is the direct-vector map extraction: it starts with the game's green
+land palette and draws all 42 captured polygons from `$C4B390` immediately
+before `$C2FF48` submits them to the area renderer. Thirty-eight submissions
+use active fill mask `2` and are blue water; four `$C3B6B0` submissions use
+mask `15` and are the separately captured dark-green filled map overlay.
+It also draws every captured line submission: grey ordinary overlays, red
+`$C3559A/$C355D2` Golden Gate strokes, the grey grid, and the black conditional
+symbol.
 
 The paired PNG is only a local rasterisation used to measure agreement against
 the sealed display oracle; neither the SVG polygons nor their vertices are
 derived from bitmap runs.  The generated JSON records the resulting agreement
 metric and exact evidence inputs.
 
-The small black symbol at host-crop bounds `x=50..70, y=130..132` is also
-drawn from three `$C4C598` renderer line vectors.  The immediately preceding
-projection tail has `A1=$C45BEA`, the mutable display context used by the
-traced F/A-18-like flight-object family. The map labels it **MAP OBJECT ?**:
-it tracks the coastline pan between run003 and run035 to within two host
-pixels, but current evidence does not establish whether it is the player,
-another aircraft, a base, city, or selected object.
+The small black symbol at host-crop bounds `x=50..70, y=130..132` is drawn
+from three `$C4C598` renderer line vectors. Its producer context remains
+conditional and its game identity is unknown, so the visual carries no label.
 
-The reusable `$C3B720/$C3B6B0` geometry is deliberately not called out here.
-Its occurrence in this map pass does not establish a unique mountain, city,
-or landmark identity or placement.
+The dark-green `$C3B6B0` fill and its two line segments, along with the
+`$C35BD4`, `$C36212`, and `$C36216` line components, are rendered but not
+called buildings, roads, cities, or landmarks. Their direct renderer presence
+is proved; their semantic identities and global placements are not.
 
 Reproduce after collecting the bounded polygon capture:
 

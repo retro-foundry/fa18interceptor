@@ -18,6 +18,7 @@ from profile_window import read_events
 ENTRY = 0xC2FF48
 LIST = 0xC4B390
 MAX_PAIRS = 64
+ACTIVE_FILL_PLANE_MASK = 0xC456E7
 
 
 def signed_word(data: bytes, offset: int) -> int:
@@ -80,6 +81,7 @@ def main() -> None:
                 polygons.append({
                     "submission": len(polygons), "host_frame": engine.frame,
                     "context_a5": f"${registers['a5'] & 0xFFFFFF:06X}",
+                    "active_fill_plane_mask": engine.memory(ACTIVE_FILL_PLANE_MASK, 1)[0],
                     "projected_pairs": pairs,
                 })
                 if len(polygons) >= args.max_polygons:
