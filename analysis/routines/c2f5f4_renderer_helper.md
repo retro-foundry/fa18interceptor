@@ -1,19 +1,19 @@
 # Renderer helper at `$C2F5F4`
 
-Classification: **dataflow**. The direct run001 edge `$C2F616 -> $C2F5F4 ->
+Classification: **behavioral shared pixel primitive; wrapper dataflow**. The direct run001 edge `$C2F616 -> $C2F5F4 ->
 $C2F618` completes in 66 instructions at replay frame 12. It has no nested
 call target.
 
 P-code: `pcode/raw/run001_c2f5f4_renderer_helper/`, 66 observed starts /
-351 operations. The observed path is retained as arithmetic and data-flow
-evidence only; its input tuple and output ownership are not yet assigned.
+351 operations. Run060 now independently anchors the shared pixel-address
+and lane-write contract; the drawn object's ownership is not assigned.
 
 The complete `$C2F5F4-$C2F765` cluster is now byte-exact source. Its proven
 contract is: select one of the fixed word-table bases, load and offset four
 pointers, derive paired register values, apply two independent four-bit masks,
 XOR enabled pairs through those pointers, then either return or tail-dispatch
-through an indexed `A4` pointer. This is dataflow evidence only; it does not
-establish the memory's pixel, plane, or object ownership.
+through an indexed `A4` pointer. The destination is now established as four
+planar pixel words; the depicted object and active display buffer are not.
 
 The runtime-backed entry prefix `$C2F5F4-$C2F609` is now byte-exact source in
 `source_amiga/observed/enter_renderer_table_helper.asm`. It loads the pointer
@@ -29,13 +29,16 @@ The runtime-backed `$C2F688-$C2F6D7` shared prefix is reconstructed in
 `source_amiga/observed/prepare_renderer_table_offsets.asm`. After the
 nonpositive-span exit, it indexes a mode-selected pointer table and a word
 table, derives a scaled offset, applies it to four pointers loaded through
-`A1`, then seeds `D1-D6` from the table results. This proves pointer/table
-dataflow, not pixels or object ownership.
+`A1`, then seeds `D1-D6` from the table results. The one-hot mask table,
+40-byte row stride, four 8,000-byte-spaced Chip RAM lanes, and run060 lane
+writes now establish a planar pixel-word address contract. See
+`c2f688_planar_pixel_pipeline.md`. Displayed-buffer and depicted-object
+ownership remain separate questions.
 
 The runtime-backed `$C2F6D8-$C2F717` mask phase is reconstructed in
 `source_amiga/observed/mask_renderer_register_pairs.asm`. Each clear bit in
 `$C456E7` replaces the corresponding `D0-D3` word with `-1` and clears its
-paired `D4-D7` word. The meaning of the paired values remains unassigned.
+paired `D4-D7` word. These are the per-plane clear and set pixel masks.
 
 The runtime-backed `$C2F718-$C2F765` output phase is reconstructed in
 `source_amiga/observed/apply_renderer_output_mask.asm`. When `$C456E8` is

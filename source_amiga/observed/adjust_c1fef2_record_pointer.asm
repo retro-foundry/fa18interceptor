@@ -1,4 +1,5 @@
-; Byte-exact observed counted pointer adjustment $C1FEF2-$C1FF09.
+; Byte-exact record-stream skip $C1FEF2-$C1FF09.
+; DBF tests before ADDA: advances A2 by $34 * ($C458DA.w & $F), not count+1.
 
                 org     $C1FEF2
 

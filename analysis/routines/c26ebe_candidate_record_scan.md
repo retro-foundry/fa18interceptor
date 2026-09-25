@@ -14,6 +14,12 @@ them against `$1E00`.
 This proves record selection and class filtering, but not a collision/object
 identity interpretation for the scan or its relative triple.
 
+Its observed child at `$C27410 -> $C27456` is now a bounded indexed-triple
+plane-side scan: it repeats while the signed side score is below zero and
+returns `Z=1` on the first nonnegative candidate. See
+`c27456_candidate_plane_side_test.md`. This is geometry evidence within the
+candidate scan, not yet proof of collision or visibility ownership.
+
 Each candidate advances the offset by `$200` and stops above `$1E00`.  An
 eligible candidate needs header bit `$40`, no `$600` header bits, and a `$5E`
 byte differing from the initial record.  Its class rejects `$30`, has a special

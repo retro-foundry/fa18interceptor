@@ -1,5 +1,5 @@
-; Byte-exact observed inner-record prefix $C27456-$C27477.
-; It operates in the caller's shared frame and walks the A4 record stream.
+; Byte-exact indexed-triple plane-side scan prefix $C27456-$C27477.
+; It operates in the caller's shared frame and walks the A4 candidate stream.
 
                 org     $C27456
 

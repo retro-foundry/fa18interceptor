@@ -1,4 +1,7 @@
-; Byte-exact runtime-backed shared renderer body prefix $C2F688-$C2F6D7.
+; Byte-exact four-plane pixel address/mask prefix $C2F688-$C2F6D7.
+; Selects a one-hot 16-pixel word mask and, for in-range X, the
+; word-wrapped 40*y + 2*floor(x/16) byte offset.
+; The later output/dispatch phase writes Chip RAM; this prefix does not.
                 org $C2F688
 RENDER_MODE_WORD equ $C45954
 prepare_renderer_table_offsets:

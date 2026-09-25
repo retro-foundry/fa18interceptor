@@ -10,5 +10,7 @@ It selects the `$C456B6` pointer block and the primary renderer tables
 `$C2F766/$C2F786`, saves the adjusted pair, calls shared body `$C2F688`, and
 restores the pair before returning.
 
-This establishes the wrapper's arithmetic, range gate, and call/dataflow; the
-coordinate and buffer meanings remain unassigned.
+This establishes the wrapper's arithmetic and range gate. Its shared body
+now has a run060-backed four-plane pixel address/mask contract; see
+`c2f688_planar_pixel_pipeline.md`. Which buffer is currently displayed and
+what the pixels depict remain unassigned.

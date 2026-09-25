@@ -1,4 +1,4 @@
-; Byte-exact observed flagged-record scan path $C265E8-$C26605.
+; Byte-exact no-match path of a 20-slot, 64-byte-stride bit-0 scan.
 ; The matching-record branch destination is outside this observed path.
 
                 org     $C265E8

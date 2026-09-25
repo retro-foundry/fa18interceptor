@@ -18,7 +18,7 @@ Observed targets from this single dispatch site:
 | `$C2005C` | 13 + `$374` | 15 | 22 | structural only |
 | `$C207FE` | 13 + `$E86` | 1 | 1 | structural only |
 | `$C212B0` | 14 + `$250` | 2 | 1 | reaches the observed line-emission path |
-| `$C1FEF2` | 13 + `$1BA` | 0 | 1 | structural only |
+| `$C1FEF2` | 13 + `$1BA` | 0 | 1 | counted `$34`-byte stream skip; see `c1fef2_record_stream_stride_skip.md` |
 | `$C20002` | 13 + `$2CA` | 0 | 1 | structural only |
 
 This is an observed dispatch mechanism, not yet a proven object, primitive,

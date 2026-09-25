@@ -1,5 +1,6 @@
-; Byte-exact observed record-flag gates $C231A2-$C231C3.
-; The branch destinations are outside this observed entry slice.
+; Byte-exact paired-record rejection prefilter $C231A2-$C231C3.
+; The observed rejection continuation at $C2321A returns D0=0/Z=1;
+; success/alternate continuations may not share that return contract.
 
                 org     $C231A2
 

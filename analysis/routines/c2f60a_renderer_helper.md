@@ -1,12 +1,13 @@
 # Renderer helper at `$C2F60A`
 
-Classification: **structural**. The direct run001 edge `$C302D6 -> $C2F60A ->
+Classification: **behavioral pixel wrapper, object ownership unknown**. The direct run001 edge `$C302D6 -> $C2F60A ->
 $C302DA` completes in 69 instructions at replay frame 11. It has no nested
 call target.
 
 P-code: `pcode/raw/run001_c2f60a_renderer_helper/`, 69 observed starts /
-365 operations. It is retained as bounded arithmetic/data-flow evidence;
-its inputs and output ownership remain unassigned.
+365 operations. Its depicted-object ownership remains unassigned. The shared `$C2F688`
+body now has a run060-backed planar pixel address/mask contract; see
+`c2f688_planar_pixel_pipeline.md`.
 
 
 `source_amiga/observed/submit_adjacent_renderer_values.asm` is the byte-exact
