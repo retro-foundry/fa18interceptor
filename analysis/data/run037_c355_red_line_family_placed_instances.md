@@ -1,8 +1,10 @@
-# Run037 Golden Gate placed-line instances
+# Run037 `$C355xx` red-line-family placed instances
 
-Classification: **verified landmark placement-to-line ownership**. The two
-red Golden Gate map strokes each have a separate exact placement/control/source
-chain in one uninterrupted M-map trace.
+Classification: **scenario-correlated red-line-family placement-to-line
+ownership**. The two red contexts each have a separate exact
+placement/control/source chain in one uninterrupted M-map trace. The family is
+verified as Golden Gate only in the separately identified run003/run033 map
+scenario; this reuse does not yet provide an exact global landmark placement.
 
 | line context | template -> placement `(X,Y,Z)` | descriptor field -> stream | local source -> walker | line submit |
 | --- | --- | --- | --- | ---: |
@@ -20,6 +22,7 @@ The second instance has the matching independent sequence: `$C355A0` at
 `$C355D2` emission at 143231. It uses the same `$C358B2` edge selector.
 
 The red-pixel/map-context evidence separately identifies `$C3559A/$C355D2`
-as Golden Gate. This joins that verified landmark to its two observed map
-placements. It does not make the source triples immutable global vertices or
-claim a complete bridge model.
+as Golden Gate in run003/run033. The same family repeats in run037's different
+panned map view, so these two rows prove placed red-line-family execution but
+not a static/global Golden Gate coordinate. They do not make the source triples
+immutable global vertices or claim a complete bridge model.

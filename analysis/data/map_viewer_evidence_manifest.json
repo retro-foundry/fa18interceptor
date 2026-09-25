@@ -7,9 +7,9 @@
   },
   "placed_components": [
     {
-      "asset": "analysis/data/golden_gate_bounded_placed_line_instances.json",
-      "rendering": "two separately placed red landmark line instances",
-      "certainty": "verified landmark placement-to-control-to-source-to-line paths"
+      "asset": "analysis/data/c355_red_line_family_bounded_placed_instances.json",
+      "rendering": "two separately placed red-line-family instances",
+      "certainty": "exact placement-to-control-to-source-to-line paths; landmark identity remains scenario-correlated"
     },
     {
       "asset": "analysis/data/c3b6a6_bounded_instance_asset.json",

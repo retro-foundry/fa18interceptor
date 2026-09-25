@@ -1,6 +1,6 @@
 {
-  "classification": "verified_landmark_two_placed_line_instances_not_complete_bridge_mesh",
-  "landmark": "Golden Gate",
+  "classification": "scenario_correlated_red_line_family_two_placed_instances_not_named_landmark_placement",
+  "scenario_correlation": "C3559A/C355D2 are the verified Golden Gate line contexts in the run003/run033 M-map scenario; their run037 reuse is not by itself a global Golden Gate placement.",
   "shared_line_topology": {
     "record": "$C358B2",
     "selector": 1,
@@ -37,7 +37,8 @@
   "authority": {
     "trace": "build/run037_m_map_placement_to_control_20f_trace/trace.jsonl",
     "slow_snapshot": "build/run037_m_map_placement_to_control_20f_trace/slow.bin",
-    "map_anchor": "analysis/data/run035_golden_gate_red_line_correlation.md"
+    "map_anchor": "analysis/data/run035_golden_gate_red_line_correlation.md",
+    "reuse_boundary": "analysis/data/run037_m_map_control_component_repeat.md"
   },
-  "qualification": "Both map placements, their independent descriptor/control streams, source pairs, selected line edge, and red line submissions occur in one uninterrupted trace. The existing M-map red-pixel correlation establishes their shared Golden Gate landmark identity. This is not a complete bridge mesh, a static global vertex export, or a general placement-to-mesh rule for other records."
+  "qualification": "Both map placements, their independent descriptor/control streams, source pairs, selected line edge, and red line submissions occur in one uninterrupted trace. The C355xx family is Golden-Gate-correlated in the separately identified red-map scenario, but its run037 reuse at a different panned position cannot yet establish an exact global Golden Gate placement. This is not a complete bridge mesh, a static global vertex export, or a general placement-to-mesh rule for other records."
 }
