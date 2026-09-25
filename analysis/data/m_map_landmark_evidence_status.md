@@ -5,7 +5,7 @@
 | map annotation | status | evidence boundary |
 | --- | --- | --- |
 | Golden Gate | verified landmark | `$C3559A/$C355D2` M-map line contexts are tied to the user-identified red bridge, including a direct M-map capture from run033's Golden Gate state. |
-| MAP OBJECT ? | map-attached, identity unknown | The `$C2B93E` three-stroke symbol follows three independent coastline-map states; it is not a fixed reticle. Its identity can still be player, aircraft, base, city, or selected object. |
+| MAP OBJECT ? | map-attached, conditional, identity unknown | The `$C2B93E` three-stroke symbol follows three independent coastline-map states and is absent from the Alcatraz-window diagnostic map. It is not a fixed reticle or universal static city/island mark; its identity can still be player, aircraft, base, or selected object. |
 | `$C3B720/$C3B6B0` | excluded | A reusable local component; one map occurrence does not establish a mountain or landmark. |
 | `$C3B5B6` | excluded | The same four-triangle component repeats in widely separated joined map regions. |
 | C35BDE / C36220 lines | excluded | Direct source components, but no unique semantic or landmark join. |
