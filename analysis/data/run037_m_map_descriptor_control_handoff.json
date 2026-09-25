@@ -1,5 +1,5 @@
 {
-  "classification": "same_map_mode_trace_descriptor_control_handoff_not_pixel_or_mesh_ownership",
+  "classification": "cross_capture_scenario_correlated_template_placement_to_control_stream_ownership_not_yet_single_execution_mesh_or_pixel_ownership",
   "authority": {
     "trace": "build/run037_m_map_stable_13f_trace/trace.jsonl",
     "slow": "build/run037_m_map_stable_13f_trace/slow.bin",
@@ -149,32 +149,170 @@
     {
       "frame": 5699,
       "trace_index": 111450,
-      "entry_a1": "$C35BF0"
+      "entry_a1": "$C35BF0",
+      "preceding_descriptor_store": {
+        "frame": 5698,
+        "trace_index": 110728,
+        "descriptor": "$C22714",
+        "descriptor_plus_8_field": "$C35BD0",
+        "in_template_placement_inventory": true,
+        "field_in_template_placement_inventory": true
+      },
+      "placement_instances": [
+        {
+          "static_source": "$C42707",
+          "runtime_placement_record": "$C4EC02",
+          "coordinates": [
+            0,
+            0,
+            -328
+          ]
+        }
+      ],
+      "cursor_publication_trace_index": 110765,
+      "cursor_published_stream": "$C35BD2",
+      "walker_a5_after_load": "$C35BD2",
+      "a5_matches_published_stream": true
     },
     {
       "frame": 5699,
       "trace_index": 112683,
-      "entry_a1": "$C35BB8"
+      "entry_a1": "$C35BB8",
+      "preceding_descriptor_store": {
+        "frame": 5699,
+        "trace_index": 112423,
+        "descriptor": "$C22408",
+        "descriptor_plus_8_field": "$C35568",
+        "in_template_placement_inventory": true,
+        "field_in_template_placement_inventory": true
+      },
+      "placement_instances": [
+        {
+          "static_source": "$C4264D",
+          "runtime_placement_record": "$C4ED22",
+          "coordinates": [
+            460,
+            0,
+            172
+          ]
+        }
+      ],
+      "cursor_publication_trace_index": 112518,
+      "cursor_published_stream": "$C35598",
+      "walker_a5_after_load": "$C35598",
+      "a5_matches_published_stream": true
     },
     {
       "frame": 5699,
       "trace_index": 113319,
-      "entry_a1": "$C35BD0"
+      "entry_a1": "$C35BD0",
+      "preceding_descriptor_store": {
+        "frame": 5699,
+        "trace_index": 113059,
+        "descriptor": "$C2241C",
+        "descriptor_plus_8_field": "$C355A0",
+        "in_template_placement_inventory": true,
+        "field_in_template_placement_inventory": true
+      },
+      "placement_instances": [
+        {
+          "static_source": "$C42653",
+          "runtime_placement_record": "$C4ED3A",
+          "coordinates": [
+            460,
+            0,
+            148
+          ]
+        }
+      ],
+      "cursor_publication_trace_index": 113154,
+      "cursor_published_stream": "$C355D0",
+      "walker_a5_after_load": "$C355D0",
+      "a5_matches_published_stream": true
     },
     {
       "frame": 5699,
       "trace_index": 114050,
-      "entry_a1": "$C36232"
+      "entry_a1": "$C36232",
+      "preceding_descriptor_store": {
+        "frame": 5699,
+        "trace_index": 113825,
+        "descriptor": "$C22584",
+        "descriptor_plus_8_field": "$C36212",
+        "in_template_placement_inventory": true,
+        "field_in_template_placement_inventory": true
+      },
+      "placement_instances": [
+        {
+          "static_source": "$C4266B",
+          "runtime_placement_record": "$C4ED9A",
+          "coordinates": [
+            272,
+            0,
+            146
+          ]
+        }
+      ],
+      "cursor_publication_trace_index": 113862,
+      "cursor_published_stream": "$C36214",
+      "walker_a5_after_load": "$C36214",
+      "a5_matches_published_stream": true
     },
     {
       "frame": 5699,
       "trace_index": 114909,
-      "entry_a1": "$C36232"
+      "entry_a1": "$C36232",
+      "preceding_descriptor_store": {
+        "frame": 5699,
+        "trace_index": 114679,
+        "descriptor": "$C22728",
+        "descriptor_plus_8_field": "$C36208",
+        "in_template_placement_inventory": true,
+        "field_in_template_placement_inventory": true
+      },
+      "placement_instances": [
+        {
+          "static_source": "$C42671",
+          "runtime_placement_record": "$C4EDB2",
+          "coordinates": [
+            272,
+            0,
+            146
+          ]
+        }
+      ],
+      "cursor_publication_trace_index": 114724,
+      "cursor_published_stream": "$C36210",
+      "walker_a5_after_load": "$C36210",
+      "a5_matches_published_stream": true
     },
     {
       "frame": 5699,
       "trace_index": 116934,
-      "entry_a1": "$C3B73E"
+      "entry_a1": "$C3B73E",
+      "preceding_descriptor_store": {
+        "frame": 5699,
+        "trace_index": 116628,
+        "descriptor": "$C224D0",
+        "descriptor_plus_8_field": "$C3B6A6",
+        "in_template_placement_inventory": true,
+        "field_in_template_placement_inventory": true
+      },
+      "placement_instances": [
+        {
+          "static_source": "$C42789",
+          "runtime_placement_record": "$C4F0FA",
+          "coordinates": [
+            368,
+            0,
+            -144
+          ]
+        }
+      ],
+      "cursor_publication_trace_index": 116673,
+      "cursor_published_stream": "$C3B6AE",
+      "walker_a5_after_load": "$C3B6AE",
+      "a5_matches_published_stream": true
     }
   ],
   "summary": {
@@ -184,7 +322,8 @@
     "unique_fields": 17,
     "fields_in_template_inventory": 17,
     "walker_entries": 6,
-    "unique_walker_entry_a1": 5
+    "walkers_with_preceding_descriptor_store": 6,
+    "walkers_with_published_a5_match": 6
   },
-  "qualification": "C1CC70 stores a descriptor's third longword to C45A36. C1F6F8 later loads C45A36 into A5. The trace establishes descriptor-to-control activity in the same map mode, but does not assign an individual placement to a control-walker invocation, pixel, model, or terrain cell."
+  "qualification": "The placement inventory and control trace are separate sealed run037 captures. Their matching static template, runtime descriptor, and descriptor +8 field make this a scenario-correlated instance-class join. Within the control trace, each listed walker has a proven immediate C1CC70 store, C1EE14 cursor publication, and A5 load. A single uninterrupted trace from that exact runtime placement record through its mesh primitives is still required for literal per-instance mesh ownership."
 }
