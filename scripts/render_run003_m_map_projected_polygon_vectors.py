@@ -94,7 +94,7 @@ def main() -> None:
         '<g shape-rendering="geometricPrecision" font-family="monospace">',
         '<path d="M 70 131 L 104 119" stroke="#111" stroke-width="1"/>',
         '<rect x="105" y="112" width="104" height="13" fill="#000" fill-opacity=".78" stroke="#111" stroke-width=".5"/>',
-        '<text x="108" y="121" fill="#fff" font-size="8">FLIGHT OBJECT ?</text>',
+        '<text x="108" y="121" fill="#fff" font-size="8">MAP OBJECT ?</text>',
         '</g>',
         ])
     svg.append(f'<g fill="none" stroke="{GRID}" stroke-width="1">')

@@ -21,7 +21,7 @@ RUN003_ANCHORS = (
     ("GOLDEN GATE", (194, 59.5), "#e53935", "trace-backed run003 bridge contexts"),
 )
 RUN035_FLIGHT_OBJECT = {
-    "name": "FLIGHT OBJECT ?",
+    "name": "MAP OBJECT ?",
     "segments": (((103, 166), (103, 166)), ((97, 167), (107, 167)), ((98, 168), (106, 168))),
     "evidence": "run035_m_map_stable_20f_trace: C2FA7E with A5=$C4C598",
 }
@@ -109,7 +109,7 @@ def main() -> None:
         "grid_segments": [[list(start), list(end)] for start, end in RUN035_GRID],
         "golden_gate_segments": [[list(start), list(end)] for start, end in RUN035_GOLDEN_GATE_LINES],
         "labels": labels,
-        "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. The reusable C3B720/C3B6B0 component is deliberately not labelled as a map landmark. The marker trace does not establish ownership or semantic game identity.",
+        "qualification": "Grid and MAP OBJECT ? are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. The reusable C3B720/C3B6B0 component is deliberately not labelled as a map landmark. The marker tracks the coastline pan to within two host pixels, but its ownership and semantic game identity remain unproven.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

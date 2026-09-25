@@ -16,9 +16,10 @@ metric and exact evidence inputs.
 The small black symbol at host-crop bounds `x=50..70, y=130..132` is also
 drawn from three `$C4C598` renderer line vectors.  The immediately preceding
 projection tail has `A1=$C45BEA`, the mutable display context used by the
-traced F/A-18-like flight-object family, so the map labels it **FLIGHT OBJECT
-?**.  The question mark is material: current evidence does not establish that
-it is specifically the player aircraft rather than another flight object.
+traced F/A-18-like flight-object family. The map labels it **MAP OBJECT ?**:
+it tracks the coastline pan between run003 and run035 to within two host
+pixels, but current evidence does not establish whether it is the player,
+another aircraft, a base, city, or selected object.
 
 The reusable `$C3B720/$C3B6B0` geometry is deliberately not called out here.
 Its occurrence in this map pass does not establish a unique mountain, city,

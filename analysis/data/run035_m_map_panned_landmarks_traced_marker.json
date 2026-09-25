@@ -90,7 +90,7 @@
       "evidence": "trace-backed run003 bridge contexts"
     },
     {
-      "name": "FLIGHT OBJECT ?",
+      "name": "MAP OBJECT ?",
       "anchor": [
         206,
         166
@@ -130,5 +130,5 @@
       "evidence": "run035_m_map_stable_20f_trace: C2FA7E with A5=$C4C598"
     }
   ],
-  "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. The reusable C3B720/C3B6B0 component is deliberately not labelled as a map landmark. The marker trace does not establish ownership or semantic game identity."
+  "qualification": "Grid and MAP OBJECT ? are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. The reusable C3B720/C3B6B0 component is deliberately not labelled as a map landmark. The marker tracks the coastline pan to within two host pixels, but its ownership and semantic game identity remain unproven."
 }

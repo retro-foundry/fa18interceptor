@@ -1,4 +1,4 @@
-# Run003 M-map flight-object marker candidate
+# Run003 M-map object-marker candidate
 
 The black map symbol is a three-segment vector emitted through `$C2B93E`:
 
@@ -15,9 +15,11 @@ Its exact `$C2B91E` input is now byte-decoded as three
 Each reaches `$C2FA7E` with `A5=$C4C598`.  Immediately before the `$C2B93E`
 line-list loop, the run003 M-map trace returns from `$C2ED6A` with
 `A1=$C45BEA`.  `$C45BEA` is the known mutable display context for the
-F/A-18-like `$C34C` flight-object face family.  This promotes the symbol from
-an unclassified mark to a **scenario-backed flight-object marker candidate**.
+F/A-18-like `$C34C` flight-object face family. This ties the symbol to an
+aircraft-associated mutable context, but does not identify the marked entity.
+The cross-map pan comparison establishes a **map-attached object marker
+candidate**, rather than a screen-fixed reticle.
 
-It does not prove player ownership.  The map may show another flight object,
-and neither the symbol producer nor a controlled player/object identity trace
-has yet established that distinction.
+It does not prove player ownership. The map may show another flight object, a
+base, city, or selected object, and neither the symbol producer nor a
+controlled identity trace has yet established that distinction.
