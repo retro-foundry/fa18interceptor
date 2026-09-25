@@ -14,7 +14,9 @@ At native GUI frame 9,285, `$C32D24` receives `D0=$004A` (selector 74), reads
 the `$0F2E` relative word at `$C3ED9C`, and resolves descriptor `$C3FC38`.
 It publishes payload cursor `A2=$C3FC3C` at `$C32E0E`; the trace continues
 straight to `$C32FCE`.  This is the static payload beginning with nine spaces
-then `LANDING SUCCESSFUL`.  The selector's upstream producer remains unknown.
+then `LANDING SUCCESSFUL`.  `$C32CEE` obtains this head word from the live
+sequence `$C4574A` with cursor `$C457C6=$00`, clears `$C457F6`, and falls
+through into the selector.  The sequence writer remains unknown.
 
 ## Direct selected payload evidence
 

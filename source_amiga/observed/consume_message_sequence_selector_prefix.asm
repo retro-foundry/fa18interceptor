@@ -1,4 +1,5 @@
 ; Byte-exact observed message-sequence consumer prefix $C32CEE-$C32D1D.
+; Run060 passes head selector 74 through its direct fall-through to $C32D1E.
 ; Divergent continuations remain separately reconstructed or raw.
 
                 org     $C32CEE
