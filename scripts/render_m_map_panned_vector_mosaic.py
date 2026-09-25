@@ -15,14 +15,15 @@ from PIL import Image, ImageDraw
 ROOT = Path(__file__).resolve().parents[1]
 LAND, SEA = "#115511", "#003366"
 RUNS = (
-    # Normalise the common world view at run035's upper-left.  Run003 is at
-    # +142,+36 in this frame because run035 = run003 + (142,36) on screen.
-    ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 142, 36, 42),
-    ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 0, 0, 49),
+    # Normalise at run042's upper-left. run042 = run035 + (130,61), and
+    # run035 = run003 + (142,36), so add (130,61) to run035 and (272,97) to run003.
+    ("run042", ROOT / "build/run042_m_map_projected_polygons/projected_polygons.json", 0, 0, 40),
+    ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 130, 61, 49),
+    ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 272, 97, 42),
 )
-WIDTH, HEIGHT = 782, 236
-ANCHORS = (("GOLDEN GATE", 336, 95.5, "#e53935"), ("MOUNTAIN ?", 360, 130, "#f59e0b"))
-GOLDEN_GATE_LINES = (((336, 92), (336, 96)), ((336, 99), (336, 95)))
+WIDTH, HEIGHT = 912, 297
+ANCHORS = (("GOLDEN GATE", 466, 156.5, "#e53935"), ("MOUNTAIN ?", 490, 191, "#f59e0b"))
+GOLDEN_GATE_LINES = (((466, 153), (466, 157)), ((466, 160), (466, 156)))
 
 
 def canonical_pass(polygons: list[dict]) -> list[dict]:
@@ -82,7 +83,7 @@ def main() -> None:
         "runs": report_runs,
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
         "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
-        "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through that red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
+        "qualification": "The normalized mosaic places run042 at (0,0), run035 at +130,+61, and run003 at +272,+97 host pixels. The first translation is the 98.4816%-agreement run035/run042 water-pixel join; the latter composes it with run035 = run003 + (142,36). Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))

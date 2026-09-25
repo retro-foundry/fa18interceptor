@@ -2,61 +2,70 @@
   "classification": "two_capture_source_vector_coastline_mosaic",
   "runs": [
     {
-      "name": "run003",
-      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run003_m_map_projected_polygons\\projected_polygons.json",
+      "name": "run042",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run042_m_map_projected_polygons\\projected_polygons.json",
       "translation": [
-        142,
-        36
+        0,
+        0
       ],
-      "canonical_submissions": 42
+      "canonical_submissions": 40
     },
     {
       "name": "run035",
       "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run035_m_map_projected_polygons\\projected_polygons.json",
       "translation": [
-        0,
-        0
+        130,
+        61
       ],
       "canonical_submissions": 49
+    },
+    {
+      "name": "run003",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run003_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        272,
+        97
+      ],
+      "canonical_submissions": 42
     }
   ],
   "landmarks": [
     {
       "name": "GOLDEN GATE",
       "anchor": [
-        336,
-        95.5
+        466,
+        156.5
       ]
     },
     {
       "name": "MOUNTAIN ?",
       "anchor": [
-        360,
-        130
+        490,
+        191
       ]
     }
   ],
   "golden_gate_segments": [
     [
       [
-        336,
-        92
+        466,
+        153
       ],
       [
-        336,
-        96
+        466,
+        157
       ]
     ],
     [
       [
-        336,
-        99
+        466,
+        160
       ],
       [
-        336,
-        95
+        466,
+        156
       ]
     ]
   ],
-  "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through that red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
+  "qualification": "The normalized mosaic places run042 at (0,0), run035 at +130,+61, and run003 at +272,+97 host pixels. The first translation is the 98.4816%-agreement run035/run042 water-pixel join; the latter composes it with run035 = run003 + (142,36). Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
 }
