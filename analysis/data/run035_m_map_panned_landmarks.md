@@ -13,3 +13,6 @@ separately traced state-dependent flight-object marker.
 The corrected Golden Gate position is independently checked against the exact
 `#880000` bridge-pixel bounds in both run003 and run035; see
 [`m_map_golden_gate_anchor_validation.json`](m_map_golden_gate_anchor_validation.json).
+The corrected map also renders the two corresponding `$C3559A/$C355D2` red
+bridge vectors at that anchor, rather than representing the bridge only with
+a callout marker.

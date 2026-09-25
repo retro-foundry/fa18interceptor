@@ -54,6 +54,28 @@
       ]
     ]
   ],
+  "golden_gate_segments": [
+    [
+      [
+        336,
+        92
+      ],
+      [
+        336,
+        96
+      ]
+    ],
+    [
+      [
+        336,
+        99
+      ],
+      [
+        336,
+        95
+      ]
+    ]
+  ],
   "labels": [
     {
       "name": "GOLDEN GATE",
@@ -120,5 +142,5 @@
       "evidence": "run035_m_map_stable_20f_trace: C2FA7E with A5=$C4C598"
     }
   ],
-  "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. Golden Gate and Mountain ? are transferred fixed-world anchors using the measured coastline translation. The marker trace does not establish ownership or semantic game identity."
+  "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. Mountain ? is a transferred fixed-world anchor. The marker trace does not establish ownership or semantic game identity."
 }

@@ -26,6 +26,8 @@ RUN035_FLIGHT_OBJECT = {
     "segments": (((103, 166), (103, 166)), ((97, 167), (107, 167)), ((98, 168), (106, 168))),
     "evidence": "run035_m_map_stable_20f_trace: C2FA7E with A5=$C4C598",
 }
+# Direct run003 C3559A/C355D2 map vectors, transferred by the verified pan.
+RUN035_GOLDEN_GATE_LINES = (((336, 92), (336, 96)), ((336, 99), (336, 95)))
 RUN035_GRID = (
     ((283, 0), (283, 179)), ((160, 0), (160, 179)), ((39, 0), (39, 179)),
     ((0, 176), (319, 176)), ((0, 47), (319, 47)),
@@ -52,6 +54,8 @@ def main() -> None:
     fragments = ['<g shape-rendering="geometricPrecision" font-family="monospace">']
     for (x1, y1), (x2, y2) in RUN035_GRID:
         fragments.append(f'<line x1="{x1 * 2:g}" y1="{y1:g}" x2="{x2 * 2:g}" y2="{y2:g}" stroke="#555" stroke-width="1"/>')
+    for (x1, y1), (x2, y2) in RUN035_GOLDEN_GATE_LINES:
+        fragments.append(f'<line x1="{x1:g}" y1="{y1:g}" x2="{x2:g}" y2="{y2:g}" stroke="#880000" stroke-width="2"/>')
     for name, (x, y), colour, evidence in RUN003_ANCHORS:
         px, py = x + PAN[0], y + PAN[1]
         labels.append({"name": name, "run003_anchor": [x, y], "run035_anchor": [px, py], "evidence": evidence})
@@ -74,6 +78,9 @@ def main() -> None:
         f'<rect x="{marker_x + 44:g}" y="{marker_y - 27:g}" width="104" height="13" fill="#000" fill-opacity=".78" stroke="#111" stroke-width=".5"/>',
         f'<text x="{marker_x + 47:g}" y="{marker_y - 18:g}" fill="#fff" font-size="8">{RUN035_FLIGHT_OBJECT["name"]}</text>',
     ])
+    # Keep the source bridge strokes above the callout circle at map scale.
+    for (x1, y1), (x2, y2) in RUN035_GOLDEN_GATE_LINES:
+        fragments.append(f'<line x1="{x1:g}" y1="{y1:g}" x2="{x2:g}" y2="{y2:g}" stroke="#880000" stroke-width="2"/>')
     fragments.append('</g>')
     args.svg.parent.mkdir(parents=True, exist_ok=True)
     args.svg.write_text(svg.rsplit("</svg>", 1)[0] + "\n" + "\n".join(fragments) + "\n</svg>\n", encoding="utf-8")
@@ -81,6 +88,8 @@ def main() -> None:
     draw = ImageDraw.Draw(image)
     for (x1, y1), (x2, y2) in RUN035_GRID:
         draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill="#555555", width=1)
+    for (x1, y1), (x2, y2) in RUN035_GOLDEN_GATE_LINES:
+        draw.line(((x1, y1), (x2, y2)), fill="#880000", width=2)
     for name, (x, y), colour, _ in RUN003_ANCHORS:
         px, py = x + PAN[0], y + PAN[1]
         draw.ellipse((px - 3.5, py - 3.5, px + 3.5, py + 3.5), fill=colour, outline="white", width=1)
@@ -92,13 +101,16 @@ def main() -> None:
     draw.line(((marker_x - 3, marker_y - 3), (marker_x + 43, marker_y - 20)), fill="#111111", width=1)
     draw.rectangle((marker_x + 44, marker_y - 27, marker_x + 148, marker_y - 14), fill="black", outline="#111111", width=1)
     draw.text((marker_x + 47, marker_y - 26), RUN035_FLIGHT_OBJECT["name"], fill="white")
+    for (x1, y1), (x2, y2) in RUN035_GOLDEN_GATE_LINES:
+        draw.line(((x1, y1), (x2, y2)), fill="#880000", width=2)
     image.save(args.png)
     report = {
         "classification": "panning_transferred_fixed_landmarks_plus_directly_traced_flight_object_marker",
         "source_svg": str(args.input), "panning_relation": "run035 = run003 + (142, 36) host pixels",
         "grid_segments": [[list(start), list(end)] for start, end in RUN035_GRID],
+        "golden_gate_segments": [[list(start), list(end)] for start, end in RUN035_GOLDEN_GATE_LINES],
         "labels": labels,
-        "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. Golden Gate and Mountain ? are transferred fixed-world anchors using the measured coastline translation. The marker trace does not establish ownership or semantic game identity.",
+        "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. The two red Golden Gate segments are direct run003 C3559A/C355D2 map vectors transferred by the red-pixel-validated panning relation. Mountain ? is a transferred fixed-world anchor. The marker trace does not establish ownership or semantic game identity.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

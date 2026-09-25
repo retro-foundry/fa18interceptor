@@ -11,6 +11,8 @@ translated by `(142,36)` host pixels, matching the measured relation
 `run035 = run003 + (142,36)` on the shared coastline.
 
 Golden Gate and Mountain ? retain their existing evidence-qualified anchors.
+The two red Golden Gate strokes are the transferred `$C3559A/$C355D2` map
+vectors and coincide with the red-pixel-validated bridge anchor.
 The display grid and flight-object marker are excluded: they are view/state
 dependent renderer output, not fixed coastline geometry.
 

@@ -96,6 +96,8 @@
 <polygon points="566,13 574,20 564,23"><title>run035: $C4BFA6, submission 47</title></polygon>
 <polygon points="564,26 584,29 608,27 612,29 606,33 592,36 566,35"><title>run035: $C4BFBE, submission 48</title></polygon>
 </g><g shape-rendering="geometricPrecision" font-family="monospace">
+<line x1="336" y1="92" x2="336" y2="96" stroke="#880000" stroke-width="2"/>
+<line x1="336" y1="99" x2="336" y2="95" stroke="#880000" stroke-width="2"/>
 <circle cx="336" cy="95.5" r="4" fill="#e53935" stroke="#fff" stroke-width="1"/>
 <path d="M 340 92.5 L 387 77.5" stroke="#e53935" stroke-width="1.5"/>
 <rect x="388" y="70.5" width="92" height="13" fill="#000" fill-opacity=".78" stroke="#e53935" stroke-width=".5"/>

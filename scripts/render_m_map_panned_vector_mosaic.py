@@ -22,6 +22,7 @@ RUNS = (
 )
 WIDTH, HEIGHT = 782, 236
 ANCHORS = (("GOLDEN GATE", 336, 95.5, "#e53935"), ("MOUNTAIN ?", 360, 130, "#f59e0b"))
+GOLDEN_GATE_LINES = (((336, 92), (336, 96)), ((336, 99), (336, 95)))
 
 
 def canonical_pass(polygons: list[dict]) -> list[dict]:
@@ -61,6 +62,9 @@ def main() -> None:
             draw.polygon(points, fill=SEA)
         report_runs.append({"name": name, "polygon_capture": str(path), "translation": [tx, ty], "canonical_submissions": len(polygons)})
     svg.append('</g><g shape-rendering="geometricPrecision" font-family="monospace">')
+    for (x1, y1), (x2, y2) in GOLDEN_GATE_LINES:
+        svg.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#880000" stroke-width="2"/>')
+        draw.line(((x1, y1), (x2, y2)), fill="#880000", width=2)
     for name, x, y, colour in ANCHORS:
         svg.extend([f'<circle cx="{x}" cy="{y}" r="4" fill="{colour}" stroke="#fff" stroke-width="1"/>',
                     f'<path d="M {x + 4} {y - 3} L {x + 51} {y - 18}" stroke="{colour}" stroke-width="1.5"/>',
@@ -77,7 +81,8 @@ def main() -> None:
         "classification": "two_capture_source_vector_coastline_mosaic",
         "runs": report_runs,
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
-        "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
+        "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
+        "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through that red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))

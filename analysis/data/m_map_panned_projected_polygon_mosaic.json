@@ -36,5 +36,27 @@
       ]
     }
   ],
-  "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
+  "golden_gate_segments": [
+    [
+      [
+        336,
+        92
+      ],
+      [
+        336,
+        96
+      ]
+    ],
+    [
+      [
+        336,
+        99
+      ],
+      [
+        336,
+        95
+      ]
+    ]
+  ],
+  "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through that red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
 }
