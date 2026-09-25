@@ -1,6 +1,6 @@
 # M-map landmark evidence status
 
-[Open the fourteen-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic.png).
+[Open the fifteen-capture source-vector mosaic](../visuals/m_map_panned_projected_polygon_mosaic_v2.png).
 
 | map annotation | status | evidence boundary |
 | --- | --- | --- |
@@ -10,9 +10,14 @@
 | `$C3B5B6` | excluded | The same four-triangle component repeats in widely separated joined map regions. |
 | C35BDE / C36220 lines | excluded | Direct source components, but no unique semantic or landmark join. |
 
-The mosaic contains fourteen direct `$C4B390`-before-`$C2FF48` polygon captures
+The v2 mosaic contains fifteen direct `$C4B390`-before-`$C2FF48` polygon captures
 from independent M-map states. Green/blue is source-vector land/sea inside
 observed viewports; black is uncaptured space. It is not a complete global map.
+
+One pass, run034, is explicitly diagnostic because its sealed input recording
+preserved the `M` release but not its key-down; its supplied one-frame press
+has a 98.253% direct coastline registration match and is retained as coverage,
+not normal-replay landmark evidence.
 
 The next sound route to another named landmark is a map-capable free-flight
 checkpoint with a separate visual landmark oracle and a direct renderer/map
