@@ -26,7 +26,11 @@ def signed_word(data: bytes, offset: int) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--restore", type=Path, default=ROOT / "build/run003_pre_m_2183/state.bin")
-    parser.add_argument("--playback", type=Path, default=ROOT / "build/run003_m_press_only.e9k")
+    parser.add_argument("--playback", type=Path,
+                        default=ROOT / "build/run003_m_press_only.e9k",
+                        help="optional events delivered after restore")
+    parser.add_argument("--no-playback", action="store_true",
+                        help="do not deliver the default run003 M-key event stream")
     parser.add_argument("--config", type=Path, default=ROOT / "local/fa18.uae")
     parser.add_argument("--frames", type=int, default=100)
     parser.add_argument("--max-polygons", type=int, default=128)
@@ -35,7 +39,7 @@ def main() -> None:
     if args.output.exists():
         raise FileExistsError(args.output)
     args.output.mkdir(parents=True)
-    events = read_events(args.playback)
+    events = {} if args.no_playback else read_events(args.playback)
     engine = Engine(args.config.resolve(), args.output / "saves")
     polygons = []
     try:

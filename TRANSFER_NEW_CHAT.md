@@ -76,6 +76,11 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   111,054 comparable oracle land/sea pixels (98.8654%).  It has the trace-backed
   Golden Gate label but no invented additional landmarks.  This is now the
   primary map view, replacing the prior screen-derived review for RE claims.
+- The same collector supports already-map-visible states with `--no-playback`.
+  Run035 has a 49-polygon repeating pass and independently reaches 98.6315%
+  land/sea agreement: see `analysis/data/run035_m_map_projected_polygon_vectors.md`
+  and its SVG. The run003 landmark labels must not be copied onto run035
+  without a direct source/control or panning-identity join.
 
 The world path has two separate layers:
 

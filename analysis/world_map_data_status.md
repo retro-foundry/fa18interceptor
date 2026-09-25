@@ -22,6 +22,12 @@ the comparable land/sea pixels in the sealed display oracle.  This is a
 scenario-backed projected renderer export, not yet a static global-coordinate
 or complete-world dataset.
 
+The same extraction independently succeeds at the panned run035 map state:
+[49 source polygons](visuals/run035_m_map_projected_polygon_vectors.svg) reach
+98.6315% comparable land/sea agreement against that separate display oracle.
+This establishes renderer-vector extraction across two game states; it does
+not transfer run003 landmark identities to a new screen location.
+
 This is the evidence boundary for the game's large physical flight area.  It
 separates the observed *scene-selection and render inputs* from an as-yet
 unidentified authoritative world/map dataset.  No extracted range below is

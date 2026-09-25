@@ -20,12 +20,14 @@ LAND, SEA, GRID = "#115511", "#003366", "#555555"
 GOLDEN_GATE_CONTEXTS = {"$C3559A", "$C355D2"}
 
 
-def canonical_pass(polygons: list[dict]) -> list[dict]:
+def canonical_pass(polygons: list[dict], start: int) -> list[dict]:
     """Return entries before the first exact repeat of the opening polygon."""
-    first = (polygons[0]["context_a5"], polygons[0]["projected_pairs"])
-    for index, polygon in enumerate(polygons[1:], 1):
+    if not 0 <= start < len(polygons):
+        raise ValueError("start submission outside supplied capture")
+    first = (polygons[start]["context_a5"], polygons[start]["projected_pairs"])
+    for index, polygon in enumerate(polygons[start + 1:], start + 1):
         if (polygon["context_a5"], polygon["projected_pairs"]) == first:
-            return polygons[:index]
+            return polygons[start:index]
     raise RuntimeError("capture contains no repeated opening polygon to bound a map pass")
 
 
@@ -35,6 +37,14 @@ def main() -> None:
                         default=ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json")
     parser.add_argument("--line-input", type=Path,
                         default=ROOT / "analysis/data/run003_m_map_renderer_vectors.json")
+    parser.add_argument("--no-lines", action="store_true",
+                        help="omit run003-specific captured grid/symbol vectors")
+    parser.add_argument("--start-submission", type=int, default=0,
+                        help="skip an observed setup prefix before the repeating map pass")
+    parser.add_argument("--expected-submissions", type=int, default=42,
+                        help="fail if the bounded repeating pass has a different polygon count")
+    parser.add_argument("--no-annotations", action="store_true",
+                        help="omit run003-specific landmark annotations")
     parser.add_argument("--svg", type=Path,
                         default=ROOT / "analysis/visuals/run003_m_map_projected_polygon_vectors.svg")
     parser.add_argument("--png", type=Path,
@@ -48,10 +58,10 @@ def main() -> None:
     if any(path.exists() for path in (args.svg, args.png, args.output)):
         raise FileExistsError("refusing to overwrite vector-map evidence output")
     captured = json.loads(args.input.read_text(encoding="utf-8"))
-    polygons = canonical_pass(captured["polygons"])
-    lines = json.loads(args.line_input.read_text(encoding="utf-8"))["vectors"]
-    if len(polygons) != 42:
-        raise RuntimeError(f"expected 42 first-pass submissions, got {len(polygons)}")
+    polygons = canonical_pass(captured["polygons"], args.start_submission)
+    lines = [] if args.no_lines else json.loads(args.line_input.read_text(encoding="utf-8"))["vectors"]
+    if len(polygons) != args.expected_submissions:
+        raise RuntimeError(f"expected {args.expected_submissions} pass submissions, got {len(polygons)}")
 
     svg = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -68,13 +78,14 @@ def main() -> None:
         points = " ".join(f"{x * 2},{y}" for x, y in pairs)
         svg.append(f'<polygon points="{points}"><title>{polygon["context_a5"]}, submission {polygon["submission"]}</title></polygon>')
     svg.append('</g>')
-    svg.extend([
+    if not args.no_annotations:
+        svg.extend([
         '<g shape-rendering="geometricPrecision" font-family="monospace">',
         '<path d="M 70 131 L 104 119" stroke="#111" stroke-width="1"/>',
         '<rect x="105" y="112" width="104" height="13" fill="#000" fill-opacity=".78" stroke="#111" stroke-width=".5"/>',
         '<text x="108" y="121" fill="#fff" font-size="8">FLIGHT OBJECT ?</text>',
         '</g>',
-    ])
+        ])
     svg.append(f'<g fill="none" stroke="{GRID}" stroke-width="1">')
     for line in lines:
         if line["context"] != "$C4C59E":
@@ -89,8 +100,10 @@ def main() -> None:
         x1, y1, x2, y2 = line["endpoints"]
         svg.append(f'<line x1="{x1 * 2}" y1="{y1}" x2="{x2 * 2}" y2="{y2}"/>')
     svg.append('</g>')
-    # This anchor is independently tied to the two Golden Gate bridge contexts.
-    svg.extend([
+    # These anchors are independently tied to run003 contexts and cannot be
+    # transferred to another panned map capture without a separate join.
+    if not args.no_annotations:
+        svg.extend([
         '<g shape-rendering="geometricPrecision" font-family="monospace">',
         '<circle cx="194" cy="59.5" r="4" fill="#e53935" stroke="#fff" stroke-width="1"/>',
         '<path d="M 198 56.5 L 246 40.5" stroke="#e53935" stroke-width="1.5"/>',
@@ -101,7 +114,9 @@ def main() -> None:
         '<rect x="258" y="72" width="112" height="13" fill="#000" fill-opacity=".78" stroke="#f59e0b" stroke-width=".5"/>',
         '<text x="261" y="81" fill="#fff" font-size="8">MOUNTAIN ?</text>',
         '</g>', '</svg>',
-    ])
+        ])
+    else:
+        svg.append('</svg>')
     args.svg.parent.mkdir(parents=True, exist_ok=True)
     args.svg.write_text("\n".join(svg) + "\n", encoding="utf-8")
 
@@ -143,15 +158,10 @@ def main() -> None:
         "land_sea_oracle_validation": {"oracle": str(args.oracle), "pixels_compared": compared,
                                          "matching_pixels": matches,
                                          "agreement": matches / compared if compared else None},
-        "landmark": {"name": "Golden Gate", "anchor": [194, 59.5],
-                     "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"},
-        "terrain_landmark_candidate": {"label": "mountain candidate", "anchor": [218, 94],
-                                        "evidence": "$C3B720/$C3B6B0 map-mode component; Golden Gate-scene mountain classification",
-                                        "semantic_status": "scenario-backed terrain candidate; original proper name unknown"},
-        "traced_map_symbol": {"label": "flight-object marker candidate", "anchor_bounds": [50, 130, 70, 132],
-                              "evidence": "three $C4C598 C2FA7E vector strokes",
-                              "producer_context": "$C2EDxx with A1=$C45BEA before C2B93E line-list emission",
-                              "semantic_status": "scenario-backed flight-object candidate; not proven to be player aircraft, base, or airfield"},
+        "annotations_included": not args.no_annotations,
+        "landmark": ({"name": "Golden Gate", "anchor": [194, 59.5],
+                      "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"}
+                     if not args.no_annotations else None),
         "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
