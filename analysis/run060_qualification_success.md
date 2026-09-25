@@ -56,3 +56,10 @@ log mutation, or mission-unlock state. The direct-core bridge previously used
 for screenshot extraction is not a visual oracle for run060 because it bypasses
 the native host input scheduler. Future bounded instruction analysis must begin
 from a native replay checkpoint at the message interval.
+
+The current pixel-validated no-input continuation from native GUI frame 9,546
+to frame 9,550 executes the message-sequence idle path at `$C32CC4-$C32D08`.
+It contains no start in `$C31F4C-$C31FFF`, including the static
+qualification-record/line path. That is a boundary on this particular late
+checkpoint only: it neither proves that the earlier result transition skipped
+those routines nor supplies their branch outcomes.
