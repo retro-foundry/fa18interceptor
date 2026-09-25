@@ -4,6 +4,11 @@ Classification: **scenario-backed formatter-to-framebuffer dataflow** for the
 observed run029 path.  The workspace is proved reusable; the gameplay-state
 producer and final screen placement remain unassigned.
 
+The byte-exact prefix is now
+`source_amiga/observed/format_packed_font_text_prefix.asm` for
+`$C32740-$C3278B`. It joins the byte-exact `$C3278C/$C32794` entry and the
+`$C327A0` glyph loop, then the existing `$C32806` row compositor.
+
 ## Observed path
 
 In the chipset-frame-993 trace, `$C31B56` establishes a two-character render
