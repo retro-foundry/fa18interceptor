@@ -23,6 +23,11 @@ $C1119A  write $EF to $C45798
 
 Thus, with the observed frame-9284 mode `$C458A6=9`, this is the producer of
 the first success selector 74 and its immediately following `$8053` word.
+The direct checkpoint-to-instruction transition at `$C11186` is retained in
+[the run060 queue-writer fixture](../data/run060_success_queue_writer_transition.md):
+it observes `A0=$C4574A` and the `$004A` store after 224 instructions from
+the ordinary parent-update entry.
+
 It proves the postflight mode-9 message transition, not the condition that
 made mode 9 reachable, the semantic meaning of the external helper, or pilot
 qualification persistence.
