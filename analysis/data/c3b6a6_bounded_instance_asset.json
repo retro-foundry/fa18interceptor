@@ -24,12 +24,18 @@
     "matrix": "$C45BD8",
     "output_workspace": "$C48390",
     "formula_contract": "$C1F464 derives D0/D1/A5 from caller locals plus $C45B30/$C45B38/$C45B34; $C1F4AC adds those live terms to shifted local triples and applies three signed matrix dot products.",
-    "placement_relation": "No traced instruction yet proves that the placement tuple $C4F0FA supplies those live terms."
+    "ordered_live_vector_handoff": {
+      "write_trace_index": 147848,
+      "descriptor_store_trace_index": 147927,
+      "transform_live_vector_reads": [148024, 148025, 148026],
+      "statement": "The $C45B30/$C45B38/$C45B34 write precedes this instance's descriptor store and the next transform consumes those three fields without another observed writer."
+    },
+    "placement_relation": "This proves ordered per-record live-vector handoff into the transform. The arithmetic relation between raw placement tuple $C4F0FA and the scaled live vector remains unexpanded."
   },
   "authority": {
     "trace": "build/run037_m_map_placement_to_control_20f_trace/trace.jsonl",
     "slow_snapshot": "build/run037_m_map_placement_to_control_20f_trace/slow.bin",
     "handoff": "analysis/data/run037_m_map_placement_to_control_20f_handoff.json"
   },
-  "qualification": "The placement tuple and local triples are both observed. The renderer transform is known to use separate live vector state and a matrix, but the producer relation from this placement tuple to those live terms has not been proven. Consumers must retain placement and local spaces separately."
+  "qualification": "The placement tuple, ordered live-vector handoff, and local triples are observed. The renderer transform uses the live vector state and a matrix; the exact arithmetic conversion from raw placement tuple to that live vector remains unexpanded. Consumers must retain placement and local spaces separately."
 }
