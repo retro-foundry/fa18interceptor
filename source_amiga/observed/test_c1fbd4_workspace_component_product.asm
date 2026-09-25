@@ -1,5 +1,6 @@
 ; Byte-exact workspace component-product test $C1FBD4-$C1FC41.
-; Return contract is structural: D7/condition codes mirror the final sign test.
+; Returns Z=1 on the BLT arm, Z=0 otherwise. BLT tests the final ADD.L flags;
+; the CLR.W arm preserves D7's upper word, so D7 is not a Boolean on rejection.
 
                 org     $C1FBD4
 
