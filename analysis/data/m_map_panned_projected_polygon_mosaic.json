@@ -11,6 +11,15 @@
       "canonical_submissions": 40
     },
     {
+      "name": "run037",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run037_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        14,
+        45
+      ],
+      "canonical_submissions": 47
+    },
+    {
       "name": "run035",
       "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run035_m_map_projected_polygons\\projected_polygons.json",
       "translation": [
@@ -67,5 +76,5 @@
       ]
     ]
   ],
-  "qualification": "The normalized mosaic places run042 at (0,0), run035 at +130,+61, and run003 at +272,+97 host pixels. The first translation is the 98.4816%-agreement run035/run042 water-pixel join; the latter composes it with run035 = run003 + (142,36). Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
+  "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, and run003 at +272,+97 host pixels. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
 }

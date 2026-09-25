@@ -3,13 +3,16 @@
 [Open the source SVG](../visuals/m_map_panned_projected_polygon_mosaic.svg) or
 [inspection PNG](../visuals/m_map_panned_projected_polygon_mosaic.png).
 
-This wider view joins the run042 40-polygon, run035 49-polygon, and run003
-42-polygon canonical M-map passes. Every blue shape is a direct `$C4B390`
+This wider view joins the run042 40-polygon, run037 47-polygon, run035
+49-polygon, and run003 42-polygon canonical M-map passes. Every blue shape is a direct `$C4B390`
 projected polygon captured immediately before `$C2FF48`; the green base is the
 game’s observed land palette. In the normalized mosaic run042 starts at
-`(0,0)`, run035 is translated by `(130,61)`, and run003 by `(272,97)` host
-pixels. The run035/run042 join has 98.4816% blue-water agreement over 59,670
-pixels; its measurement is
+`(0,0)`, run037 is translated by `(14,45)`, run035 by `(130,61)`, and run003
+by `(272,97)` host pixels. The run037/run035 join has 97.9997% blue-water
+agreement over 84,888 pixels, while run035/run042 has 98.4816% over 59,670;
+their measurements are
+[`run037_run035_m_map_pan_comparison.json`](run037_run035_m_map_pan_comparison.json)
+and
 [`run035_run042_m_map_pan_comparison.json`](run035_run042_m_map_pan_comparison.json).
 
 Golden Gate and Mountain ? retain their existing evidence-qualified anchors.
