@@ -22,6 +22,9 @@ RUNS = (
     ("run042", ROOT / "build/run042_m_map_projected_polygons/projected_polygons.json", 0, 0, 40, None, None),
     # run035 = run002 + (-114,70), measured from the exact blue-water join.
     ("run002", ROOT / "build/run002_m_map_projected_polygons/projected_polygons.json", 16, 131, 43, 0, 43),
+    # A second, ordinary M-map press in sealed run024.  Direct coastline
+    # registration against v2 is (12,131) at 99.143% agreement.
+    ("run024_16075", ROOT / "build/run024_m16075_projected_polygons/projected_polygons.json", 12, 131, 43, None, None),
     # run035 = later run002 + (-120,61), measured from the exact blue-water join.
     ("run002_late", ROOT / "build/run002_late_m_map_projected_polygons/projected_polygons.json", 10, 122, 43, 0, 43),
     ("run037", ROOT / "build/run037_m_map_projected_polygons/projected_polygons.json", 14, 45, 47, None, None),
@@ -68,9 +71,9 @@ def canonical_pass(polygons: list[dict]) -> list[dict]:
 
 
 def main() -> None:
-    svg_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v2.svg"
-    png_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v2.png"
-    report_path = ROOT / "analysis/data/m_map_panned_projected_polygon_mosaic_v2.json"
+    svg_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v3.svg"
+    png_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v3.png"
+    report_path = ROOT / "analysis/data/m_map_panned_projected_polygon_mosaic_v3.json"
     if any(path.exists() for path in (svg_path, png_path, report_path)):
         raise FileExistsError("refusing to overwrite mosaic evidence output")
     svg = [
