@@ -25,6 +25,33 @@ the two auxiliary activation writes that the positive-header path performs.
 The table contains entries leading to text-record interiors across the
 main-menu, training, qualification, and mission briefing/result pool.
 
+## Run060 qualification-success record observation
+
+The sealed run060 native checkpoint at GUI frame 9,200 reaches this entry on
+the 85th following no-input frame, i.e. native GUI frame 9,285.  The interval
+contains no recorded input events.  The bounded trace at
+`build/run060_frame09200_c32d24_trace/trace.jsonl` records:
+
+```text
+incoming D0/D2:        $004A (selector 74)
+relative-table address: $C3ED9C
+relative word:          $0F2E
+record descriptor:      $C3FC38
+published text cursor:  $C3FC3C
+derived A4:             $04B4
+```
+
+The four descriptor bytes at `$C3FC38` are `$1E $04 $03 $95`; after the two
+metadata bytes, the published cursor is the static payload `         LANDING
+SUCCESSFUL`.  The trace continues directly to `$C32FCE`, which reads that
+cursor.  Together with the later `$C32EF6` trace, this proves the run060
+success text flows through this standard selector record path.
+
+This establishes the selector-to-record-to-compositor chain for the first
+success line.  It does **not** identify the caller or writer that supplied
+selector 74, prove the qualification decision, or attribute the next `YOU ARE
+NOW QUALIFIED FOR MISSIONS` line to this same selector packet.
+
 ## Flight-return selection observation
 
 `build/run024_flight_return_trace/trace.jsonl` executes this path at chipset

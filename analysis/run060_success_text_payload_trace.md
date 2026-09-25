@@ -1,10 +1,20 @@
 # Run060 success-text payload-to-compositor trace
 
-Authority: the sealed `captures/run060` native checkpoint at GUI frame 9,285
-and the bounded no-input trace
+Authority: sealed `captures/run060` native checkpoints at GUI frames 9,200 and
+9,285, plus bounded no-input traces
+`build/run060_frame09200_c32d24_trace/trace.jsonl` and
 `build/run060_frame09285_c32ef6_short_trace/trace.jsonl`. No recorded input
-occurs through GUI frame 9,290; the trace is used for control/dataflow, not as
-a pixel-equivalence oracle during active character drawing.
+occurs from GUI frame 9,023 through 9,290; the traces are used for
+control/dataflow, not as pixel-equivalence oracles during active character
+drawing.
+
+## Selector-to-payload chain
+
+At native GUI frame 9,285, `$C32D24` receives `D0=$004A` (selector 74), reads
+the `$0F2E` relative word at `$C3ED9C`, and resolves descriptor `$C3FC38`.
+It publishes payload cursor `A2=$C3FC3C` at `$C32E0E`; the trace continues
+straight to `$C32FCE`.  This is the static payload beginning with nine spaces
+then `LANDING SUCCESSFUL`.  The selector's upstream producer remains unknown.
 
 ## Direct selected payload evidence
 
@@ -28,15 +38,15 @@ $C32EF6  copy subtype / initialize message auxiliary state
   -> $C33058  submit four glyph mask-update lanes
 ```
 
-This proves that the active run060 onset path has selected the static
-`LANDING SUCCESSFUL` payload and feeds bytes from its record into the glyph
-compositor. It supersedes the earlier run029-only negative probe as evidence
-for this particular payload route.
+This proves that the active run060 onset path uses standard selector 74 to
+select the static `LANDING SUCCESSFUL` payload and feeds bytes from its record
+into the glyph compositor. It supersedes the earlier run029-only negative
+probe as evidence for this particular payload route.
 
 ## Limits
 
-The trace begins after the producer that established `A2=$C3FC46`; it does not
-identify the selector, qualification result test, landing/collision logic,
-status writer, pilot-log persistence, or the separate `YOU ARE NOW QUALIFIED
-FOR MISSIONS` record. It also does not establish the exact frame at which a
-particular glyph becomes visible.
+The traces begin after the producer that supplied selector 74; they do not
+identify the qualification result test, landing/collision logic, status writer,
+pilot-log persistence, or the separate `YOU ARE NOW QUALIFIED FOR MISSIONS`
+record. They also do not establish the exact frame at which a particular glyph
+becomes visible.

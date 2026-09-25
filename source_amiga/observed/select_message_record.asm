@@ -1,5 +1,5 @@
 ; Byte-exact message-record selector entry $C32D24-$C32E19.
-; Positive selector 109 and negative-form selector $806E are trace-backed.
+; Positive selectors 74/109 and negative-form selector $806E are trace-backed.
 
                 org     $C32D24
 
