@@ -16,6 +16,8 @@
       "header": "$C42DFC",
       "inline_stream": "$C42E00",
       "alternate_stream": "$C42E00",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E00",
       "route": "inline"
@@ -26,6 +28,8 @@
       "header": "$C42E1A",
       "inline_stream": "$C42E1E",
       "alternate_stream": "$C42E1E",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E1E",
       "route": "inline"
@@ -36,6 +40,8 @@
       "header": "$C42DC4",
       "inline_stream": "$C42DC8",
       "alternate_stream": "$C42DC8",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42DC8",
       "route": "inline"
@@ -46,6 +52,8 @@
       "header": "$C42E52",
       "inline_stream": "$C42E56",
       "alternate_stream": "$C42E56",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E56",
       "route": "inline"
@@ -56,6 +64,8 @@
       "header": "$C42E52",
       "inline_stream": "$C42E56",
       "alternate_stream": "$C42E56",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E56",
       "route": "inline"
@@ -66,6 +76,8 @@
       "header": "$C42E52",
       "inline_stream": "$C42E56",
       "alternate_stream": "$C42E56",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E56",
       "route": "inline"
@@ -76,6 +88,8 @@
       "header": "$C42E52",
       "inline_stream": "$C42E56",
       "alternate_stream": "$C42E56",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E56",
       "route": "inline"
@@ -86,6 +100,8 @@
       "header": "$C42E52",
       "inline_stream": "$C42E56",
       "alternate_stream": "$C42E56",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E56",
       "route": "inline"
@@ -96,6 +112,8 @@
       "header": "$C42E52",
       "inline_stream": "$C42E56",
       "alternate_stream": "$C42E56",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C42E56",
       "route": "inline"
@@ -106,6 +124,8 @@
       "header": "$C43ECA",
       "inline_stream": "$C43ECE",
       "alternate_stream": "$C43F3A",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43ECE",
       "route": "inline"
@@ -116,6 +136,8 @@
       "header": "$C43E24",
       "inline_stream": "$C43E28",
       "alternate_stream": "$C43E9A",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43E28",
       "route": "inline"
@@ -126,6 +148,8 @@
       "header": "$C43D84",
       "inline_stream": "$C43D88",
       "alternate_stream": "$C43D88",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43D88",
       "route": "inline"
@@ -136,6 +160,8 @@
       "header": "$C43BAC",
       "inline_stream": "$C43BB0",
       "alternate_stream": "$C43C70",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43BB0",
       "route": "inline"
@@ -146,6 +172,8 @@
       "header": "$C43B34",
       "inline_stream": "$C43B38",
       "alternate_stream": "$C43B94",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43B38",
       "route": "inline"
@@ -156,6 +184,8 @@
       "header": "$C43A78",
       "inline_stream": "$C43A7C",
       "alternate_stream": "$C43AF0",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43A7C",
       "route": "inline"
@@ -166,6 +196,8 @@
       "header": "$C439E8",
       "inline_stream": "$C439EC",
       "alternate_stream": "$C43A44",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C439EC",
       "route": "inline"
@@ -176,6 +208,8 @@
       "header": "$C4409E",
       "inline_stream": "$C440A2",
       "alternate_stream": "$C440A2",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C440A2",
       "route": "inline"
@@ -186,6 +220,8 @@
       "header": "$C4407C",
       "inline_stream": "$C44080",
       "alternate_stream": "$C44080",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C44080",
       "route": "inline"
@@ -196,6 +232,8 @@
       "header": "$C44066",
       "inline_stream": "$C4406A",
       "alternate_stream": "$C4406A",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C4406A",
       "route": "inline"
@@ -206,6 +244,8 @@
       "header": "$C43F5E",
       "inline_stream": "$C43F62",
       "alternate_stream": "$C43FAE",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43F62",
       "route": "inline"
@@ -216,6 +256,8 @@
       "header": "$C43D34",
       "inline_stream": "$C43D38",
       "alternate_stream": "$C43D38",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43D38",
       "route": "inline"
@@ -226,6 +268,8 @@
       "header": "$C43CBE",
       "inline_stream": "$C43CC2",
       "alternate_stream": "$C43CFA",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43CC2",
       "route": "inline"
@@ -236,6 +280,8 @@
       "header": "$C43B1A",
       "inline_stream": "$C43B1E",
       "alternate_stream": "$C43B1E",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43B1E",
       "route": "inline"
@@ -246,6 +292,8 @@
       "header": "$C439CC",
       "inline_stream": "$C439D0",
       "alternate_stream": "$C439D0",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C439D0",
       "route": "inline"
@@ -256,6 +304,8 @@
       "header": "$C439A8",
       "inline_stream": "$C439AC",
       "alternate_stream": "$C439AC",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C439AC",
       "route": "inline"
@@ -266,6 +316,8 @@
       "header": "$C43994",
       "inline_stream": "$C43998",
       "alternate_stream": "$C43998",
+      "live_base": "$C45C3E",
+      "live_term": 50331648,
       "d7": 0,
       "selected_stream": "$C43998",
       "route": "inline"

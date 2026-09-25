@@ -1,0 +1,31 @@
+{
+  "classification": "diagnostic_projected_renderer_vectors_before_area_blit",
+  "authority": {
+    "polygon_capture": "build\\run003_m_map_saved_vector_a_polygons\\projected_polygons.json",
+    "line_capture": null
+  },
+  "debug_writes": [
+    {
+      "address": "$C45664",
+      "value": 268435456,
+      "size": 4
+    }
+  ],
+  "canonical_polygon_submissions": 40,
+  "polygon_context_counts": {
+    "$C4BFAC": 15,
+    "$C4BFB2": 5,
+    "$C4BFBE": 10,
+    "$C4BFDC": 5,
+    "$C4BFE8": 5
+  },
+  "palette": {
+    "land": "#115511",
+    "sea": "#003366",
+    "grid": "#555555"
+  },
+  "land_sea_oracle_validation": null,
+  "annotations_included": false,
+  "landmark": null,
+  "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. Their source replay has debugger writes recorded above, so this render proves the affected display-state dependency only; it is not a normal gameplay map view or a static global-coordinate decode."
+}

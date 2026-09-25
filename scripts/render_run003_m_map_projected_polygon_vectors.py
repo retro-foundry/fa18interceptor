@@ -156,10 +156,13 @@ def main() -> None:
                     continue
                 compared += 1
                 matches += actual == expected
+    diagnostic_writes = captured.get("debug_writes", [])
     report = {
-        "classification": "scenario_backed_projected_renderer_vectors_before_area_blit",
+        "classification": ("diagnostic_projected_renderer_vectors_before_area_blit"
+                           if diagnostic_writes else "scenario_backed_projected_renderer_vectors_before_area_blit"),
         "authority": {"polygon_capture": str(args.input),
                       "line_capture": None if args.no_lines else str(args.line_input)},
+        "debug_writes": diagnostic_writes,
         "canonical_polygon_submissions": len(polygons),
         "polygon_context_counts": {context: sum(item["context_a5"] == context for item in polygons)
                                    for context in sorted({item["context_a5"] for item in polygons})},
@@ -171,7 +174,11 @@ def main() -> None:
         "landmark": ({"name": "Golden Gate", "anchor": [194, 59.5],
                       "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"}
                      if not args.no_annotations else None),
-        "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work.",
+        "qualification": (
+            "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
+            if not diagnostic_writes else
+            "Polygon vertices are direct renderer vectors, not bitplane runs. Their source replay has debugger writes recorded above, so this render proves "
+            "the affected display-state dependency only; it is not a normal gameplay map view or a static global-coordinate decode."),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

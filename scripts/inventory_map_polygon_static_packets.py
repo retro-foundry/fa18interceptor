@@ -33,6 +33,11 @@ def long(data: bytes, absolute: int) -> int:
     return int.from_bytes(data[offset:offset + 4], "big")
 
 
+def signed_long(data: bytes, absolute: int) -> int:
+    offset = absolute - 0xC00000
+    return int.from_bytes(data[offset:offset + 4], "big", signed=True)
+
+
 def write_report(output: Path, report: dict[str, object]) -> None:
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     lines = [
@@ -68,15 +73,20 @@ def write_report(output: Path, report: dict[str, object]) -> None:
         "",
         "`$C2AF40` chooses the inline source at `header + 4` when `D7` is zero, otherwise the header longword.",
         "",
-        "| Frame | Header | Inline stream | Header pointer | `D7` | Selected stream | Route |",
-        "| ---: | --- | --- | --- | ---: | --- | --- |",
+        "| Frame | Header | `A4` live-base pointer | `4(A4)` live term | Inline stream | Header pointer | `D7` | Selected stream | Route |",
+        "| ---: | --- | --- | ---: | --- | --- | ---: | --- | --- |",
     ])
     for row in report["packet_streams"]:
         lines.append(
-            f"| {row['frame']} | `{row['header']}` | `{row['inline_stream']}` | "
+            f"| {row['frame']} | `{row['header']}` | `{row['live_base']}` | "
+            f"{row['live_term']} | `{row['inline_stream']}` | "
             f"`{row['alternate_stream']}` | {row['d7']} | `{row['selected_stream']}` | "
             f"{row['route']} |")
     lines.extend([
+        "",
+        "`A4` is captured at the direct `$C2AF00` entry, before the routine reads `4(A4)` "
+        "as its per-packet projection-origin input.  The table records that live dataflow "
+        "without treating the value as a packet placement record or a global map coordinate.",
         "",
         "The same coordinate pairs are available as grouped `l` primitives in the "
         "[OBJ inspection export](../exports/run003_m_map_static_pair_batches.obj) for run003 only. "
@@ -122,6 +132,10 @@ def main() -> None:
         if gate_index is None or stream_index is None:
             raise ValueError(f"packet {address(header)} lacks C2AF40/C2AF46 stream selection")
         alternate = long(slow, header)
+        live_base = entry["registers"]["a4"] & 0xFFFFFF
+        if not 0xC00000 <= live_base <= 0xC7FFFB:
+            raise ValueError(f"packet {address(header)} has live base outside slow RAM: "
+                             f"{address(live_base)}")
         selected = trace[stream_index]["registers"]["a3"] & 0xFFFFFF
         inline = header + 4
         if selected == inline:
@@ -133,6 +147,8 @@ def main() -> None:
         packet_streams.append({"frame": entry["frame"], "trace_index": entry["index"],
                                "header": address(header), "inline_stream": address(inline),
                                "alternate_stream": address(alternate),
+                               "live_base": address(live_base),
+                               "live_term": signed_long(slow, live_base + 4),
                                "d7": trace[gate_index]["registers"]["d7"] & 0xFFFF,
                                "selected_stream": address(selected), "route": route})
     stages = [index for index, row in enumerate(trace) if row["pc"] == DISPLAY_STAGE]

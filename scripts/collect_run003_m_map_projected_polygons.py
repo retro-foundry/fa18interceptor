@@ -7,6 +7,7 @@ area-blit implementation; they are not decoded bitplane pixels.
 from __future__ import annotations
 
 import argparse
+import ctypes as C
 import json
 from pathlib import Path
 
@@ -34,6 +35,9 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=ROOT / "local/fa18.uae")
     parser.add_argument("--frames", type=int, default=100)
     parser.add_argument("--max-polygons", type=int, default=128)
+    parser.add_argument("--write-memory", action="append", nargs=3,
+                        metavar=("ADDRESS", "VALUE", "SIZE"), default=[],
+                        help="diagnostic pre-replay write (size 1, 2, or 4); does not modify the checkpoint")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
@@ -47,6 +51,17 @@ def main() -> None:
         state = args.restore.read_bytes()
         if not engine.core.retro_unserialize(state, len(state)):
             raise RuntimeError("Core rejected save state")
+        writes = []
+        if args.write_memory:
+            write = engine.bind("e9k_debug_write_memory", C.c_int, C.c_uint32,
+                                C.c_uint32, C.c_size_t)
+            for address_text, value_text, size_text in args.write_memory:
+                address, value, size = int(address_text, 0), int(value_text, 0), int(size_text, 0)
+                if size not in (1, 2, 4):
+                    raise ValueError("--write-memory size must be 1, 2, or 4")
+                if not write(address, value, size):
+                    raise RuntimeError(f"debug write failed at ${address:06X}")
+                writes.append({"address": f"${address:06X}", "value": value, "size": size})
         engine.core.e9k_debug_add_breakpoint(ENTRY)
         for frame in range(1, args.frames + 1):
             for kind, values in events.get(frame, []):
@@ -75,9 +90,15 @@ def main() -> None:
             if len(polygons) >= args.max_polygons:
                 break
         report = {
-            "scope": "C4B390 projected pairs immediately before C2FF48 in run003 M-map replay",
+            "scope": ("C4B390 projected pairs immediately before C2FF48 in run003 M-map replay"
+                      if not writes else "C4B390 projected pairs immediately before C2FF48 in a debugger-mutated run003 M-map replay"),
             "polygon_count": len(polygons), "polygons": polygons,
-            "qualification": "Pairs are renderer-produced projected vectors. Context is a live renderer cursor; it is not by itself a static source-model identity.",
+            "debug_writes": writes,
+            "qualification": (
+                "Pairs are renderer-produced projected vectors. Context is a live renderer cursor; it is not by itself a static source-model identity."
+                if not writes else
+                "Pairs are renderer-produced projected vectors from a debugger-mutated emulator instance; the sealed checkpoint is unchanged. "
+                "The mutation establishes display-state causality only, not a normal gameplay map position or static source-model identity."),
         }
         (args.output / "projected_polygons.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"polygons": len(polygons), "output": str(args.output)}))
