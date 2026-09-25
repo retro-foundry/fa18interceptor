@@ -38,6 +38,15 @@
     ],
     "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"
   },
+  "terrain_landmark_candidate": {
+    "label": "mountain candidate",
+    "anchor": [
+      218,
+      94
+    ],
+    "evidence": "$C3B720/$C3B6B0 map-mode component; Golden Gate-scene mountain classification",
+    "semantic_status": "scenario-backed terrain candidate; original proper name unknown"
+  },
   "traced_map_symbol": {
     "label": "flight-object marker candidate",
     "anchor_bounds": [

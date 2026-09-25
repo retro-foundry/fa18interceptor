@@ -20,6 +20,12 @@ traced F/A-18-like flight-object family, so the map labels it **FLIGHT OBJECT
 ?**.  The question mark is material: current evidence does not establish that
 it is specifically the player aircraft rather than another flight object.
 
+The orange **MOUNTAIN ?** callout marks the `$C3B720/$C3B6B0` component's
+map-mode output at `(109,94)` logical / `(218,94)` host-crop coordinates.
+Its five-vertex, four-sided mound topology is trace-proven and it is visually
+identified behind the Golden Gate in the run033 scene.  Its original proper
+name and global placement remain unknown.
+
 Reproduce after collecting the bounded polygon capture:
 
 ```powershell

@@ -96,6 +96,10 @@ def main() -> None:
         '<path d="M 198 56.5 L 246 40.5" stroke="#e53935" stroke-width="1.5"/>',
         '<rect x="247" y="32.5" width="78" height="13" fill="#000" fill-opacity=".78" stroke="#e53935" stroke-width=".5"/>',
         '<text x="250" y="41.5" fill="#fff" font-size="8">GOLDEN GATE</text>',
+        '<circle cx="218" cy="94" r="3.5" fill="#f59e0b" stroke="#fff" stroke-width=".8"/>',
+        '<path d="M 221 92 L 257 79" stroke="#f59e0b" stroke-width="1.2"/>',
+        '<rect x="258" y="72" width="112" height="13" fill="#000" fill-opacity=".78" stroke="#f59e0b" stroke-width=".5"/>',
+        '<text x="261" y="81" fill="#fff" font-size="8">MOUNTAIN ?</text>',
         '</g>', '</svg>',
     ])
     args.svg.parent.mkdir(parents=True, exist_ok=True)
@@ -141,6 +145,9 @@ def main() -> None:
                                          "agreement": matches / compared if compared else None},
         "landmark": {"name": "Golden Gate", "anchor": [194, 59.5],
                      "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"},
+        "terrain_landmark_candidate": {"label": "mountain candidate", "anchor": [218, 94],
+                                        "evidence": "$C3B720/$C3B6B0 map-mode component; Golden Gate-scene mountain classification",
+                                        "semantic_status": "scenario-backed terrain candidate; original proper name unknown"},
         "traced_map_symbol": {"label": "flight-object marker candidate", "anchor_bounds": [50, 130, 70, 132],
                               "evidence": "three $C4C598 C2FA7E vector strokes",
                               "producer_context": "$C2EDxx with A1=$C45BEA before C2B93E line-list emission",
