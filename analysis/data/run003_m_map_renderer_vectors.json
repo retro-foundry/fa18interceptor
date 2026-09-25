@@ -1,0 +1,248 @@
+{
+  "scope": "C2FA7E vector emissions in sealed run003 M-map transition",
+  "authority": "build\\run003_m_map_appearance_trace\\trace.jsonl",
+  "coordinate_space": "320x180 renderer screen coordinates",
+  "vector_count": 19,
+  "vectors": [
+    {
+      "trace_index": 27199,
+      "frame": 3,
+      "context": "$C4BFB2",
+      "endpoints": [
+        180,
+        0,
+        202,
+        1
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 28535,
+      "frame": 3,
+      "context": "$C4BFBE",
+      "endpoints": [
+        219,
+        0,
+        225,
+        0
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 83787,
+      "frame": 9,
+      "context": "$C35BD4",
+      "endpoints": [
+        148,
+        123,
+        152,
+        118
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 84041,
+      "frame": 9,
+      "context": "$C35BD4",
+      "endpoints": [
+        152,
+        118,
+        173,
+        112
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 85416,
+      "frame": 9,
+      "context": "$C3559A",
+      "endpoints": [
+        97,
+        56,
+        97,
+        60
+      ],
+      "golden_gate_context": true
+    },
+    {
+      "trace_index": 86114,
+      "frame": 9,
+      "context": "$C355D2",
+      "endpoints": [
+        97,
+        63,
+        97,
+        59
+      ],
+      "golden_gate_context": true
+    },
+    {
+      "trace_index": 87074,
+      "frame": 9,
+      "context": "$C36216",
+      "endpoints": [
+        118,
+        66,
+        125,
+        60
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 87328,
+      "frame": 9,
+      "context": "$C36216",
+      "endpoints": [
+        125,
+        60,
+        132,
+        59
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 87995,
+      "frame": 9,
+      "context": "$C36212",
+      "endpoints": [
+        118,
+        66,
+        125,
+        60
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 88249,
+      "frame": 9,
+      "context": "$C36212",
+      "endpoints": [
+        125,
+        60,
+        132,
+        59
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 92155,
+      "frame": 10,
+      "context": "$C3B6B0",
+      "endpoints": [
+        107,
+        94,
+        111,
+        95
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 92846,
+      "frame": 10,
+      "context": "$C3B6B0",
+      "endpoints": [
+        110,
+        92,
+        111,
+        95
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 109752,
+      "frame": 11,
+      "context": "$C4C59E",
+      "endpoints": [
+        211,
+        0,
+        211,
+        179
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 110667,
+      "frame": 11,
+      "context": "$C4C59E",
+      "endpoints": [
+        89,
+        0,
+        89,
+        179
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 115472,
+      "frame": 12,
+      "context": "$C4C59E",
+      "endpoints": [
+        0,
+        140,
+        319,
+        140
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 116812,
+      "frame": 12,
+      "context": "$C4C59E",
+      "endpoints": [
+        0,
+        11,
+        319,
+        11
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 120045,
+      "frame": 12,
+      "context": "$C4C598",
+      "endpoints": [
+        31,
+        130,
+        31,
+        130
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 120220,
+      "frame": 12,
+      "context": "$C4C598",
+      "endpoints": [
+        25,
+        131,
+        35,
+        131
+      ],
+      "golden_gate_context": false
+    },
+    {
+      "trace_index": 120396,
+      "frame": 12,
+      "context": "$C4C598",
+      "endpoints": [
+        26,
+        132,
+        34,
+        132
+      ],
+      "golden_gate_context": false
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "Golden Gate",
+      "evidence": "$C3559A/$C355D2 bridge contexts",
+      "map_anchor": [
+        97.0,
+        59.5
+      ],
+      "qualification": "Source/control identity is scenario-backed; anchor is this run003 M-map view only."
+    }
+  ],
+  "qualification": "The SVG is a direct vector-emission view, not a bitplane trace. It omits C304F4 polygon fills because their source-to-fill-colour contract remains unresolved. No other landmark position is claimed."
+}

@@ -1,5 +1,15 @@
 # World-map and LOD status
 
+## Renderer-vector display status
+
+The [run003 renderer-vector SVG](visuals/run003_m_map_renderer_vectors.svg)
+now draws 19 actual `$C2FA7E` M-map vector emissions, rather than tracing the
+completed bitmap.  Its scenario-backed Golden Gate callout is anchored by the
+`$C3559A/$C355D2` bridge contexts at `(97, 59.5)` in the run003 map view.  The
+map's green land fill remains an explicit open decoding task: the captured
+`$C304F4` line-mode jobs have not yet been reduced to source polygons and final
+palette indices, so no fake filled vector map is presented as extracted data.
+
 This is the evidence boundary for the game's large physical flight area.  It
 separates the observed *scene-selection and render inputs* from an as-yet
 unidentified authoritative world/map dataset.  No extracted range below is
