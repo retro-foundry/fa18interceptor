@@ -27,8 +27,12 @@ alongside the established table/wrapper and line-setup family. These are
 direct-child counts within the one completed stage call, not a claim about any
 descriptor's game-world identity.
 
-The same run060 invocation takes the control-stream branch: it publishes
-`$C45A36` at `$C1EF10` and enters `$C1F6F8`; it does not execute the
+The same run060 invocation takes the control-stream branch: it masks the
+control word to its low 12 bits, derives `$C45A32=$C35132` from the current
+descriptor base plus that offset, then publishes the post-word cursor
+`$C45A36=$C34A56` at `$C1EF10`. `$C1F6F8` subsequently loads that exact
+`$C45A36` value into `A5`; its first control word is `$FFFF`, so this walker
+visit exits without dispatching a record. The invocation does not execute the
 `$C1EE62` selector or `$C1F4AC` transform branch. This is a scenario-specific
 source-family result, not a universal descriptor rule.
 
