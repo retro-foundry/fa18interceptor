@@ -30,7 +30,7 @@ remain unassigned.  The small message-state changes are:
 | `$C45749` | `$05` | `$02` | Adjacent layout state changed; ownership unassigned. |
 | `$C45775` | `$FA` | `$FF` | Message workspace byte changed; meaning unassigned. |
 | `$C457C1` | `$FF` | `$0D` | Message workspace byte changed; meaning unassigned. |
-| `$C457DE` | `$01` | `$00` | The byte is decremented by reconstructed `$C32E7C-$C32EAD` when that consumer's positive path executes. This state delta alone does not prove that path executed in this interval. |
+| `$C457DE` | `$01` | `$00` | It is initialized by `$C32EF6` and decremented by multiple event paths. A bounded native-checkpoint trace proves `$C32EF6` writes it to 1 inside this interval, but does not identify which consumer produces the later zero. |
 
 This is an exact native pre/post state boundary around the first visible sampled
 text pixels.  It narrows future producer tracing to the changed state and its
