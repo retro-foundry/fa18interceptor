@@ -1,0 +1,32 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>F/A-18 M-map land and sea evidence plane</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; min-height: 100vh; overflow: hidden; background: #05080b; color: #d8e1ea; font: 14px monospace; }
+  header { position: fixed; z-index: 2; inset: 0 0 auto; padding: 14px 18px; background: #080b10e8; border-bottom: 1px solid #334; }
+  h1 { margin: 0 0 6px; font-size: 17px; }
+  p { max-width: 1000px; margin: 0; color: #aebdca; }
+  #stage { position: absolute; inset: 70px 0 0; display: grid; place-items: center; perspective: 1200px; overflow: hidden; }
+  #plane { width: min(92vw, 1120px); transform-style: preserve-3d; cursor: grab; user-select: none; touch-action: none; }
+  #plane:active { cursor: grabbing; }
+  #plane img { display: block; width: 100%; box-shadow: 0 28px 70px #000; border: 1px solid #4a6372; image-rendering: pixelated; }
+  #key { position: fixed; z-index: 2; right: 16px; bottom: 14px; padding: 9px 11px; background: #080b10e8; border: 1px solid #334; color: #aebdca; }
+  .land { color: #54b754; } .sea { color: #4b93d1; } .void { color: #a8a8a8; }
+</style>
+<header>
+  <h1>Traced M-map: land/sea evidence plane</h1>
+  <p>This is the game-produced source-vector M-map shown as a rotatable plane. <span class="land">Green = observed land</span>; <span class="sea">blue = observed sea</span>; <span class="void">black = uncaptured coverage</span>, not sea. It is deliberately not presented as a recovered 3D terrain-height model: the evidence currently proves projected coastline fills, not absolute world coordinates or elevations.</p>
+</header>
+<main id="stage"><div id="plane"><img src="m_map_panned_projected_polygon_mosaic_v4.png" alt="green land and blue sea source-vector M-map evidence"></div></main>
+<aside id="key">Drag: tilt/turn map<br>Wheel: zoom<br><a href="map_evidence_viewer.html">Component evidence inspector</a></aside>
+<script>
+  const plane = document.querySelector('#plane');
+  let pitch = 53, yaw = -8, zoom = 1, drag;
+  function render() { plane.style.transform = `rotateX(${pitch}deg) rotateZ(${yaw}deg) scale(${zoom})`; }
+  plane.addEventListener('pointerdown', event => { drag = [event.clientX, event.clientY, pitch, yaw]; plane.setPointerCapture(event.pointerId); });
+  plane.addEventListener('pointermove', event => { if (!drag) return; yaw = drag[3] + (event.clientX - drag[0]) * .16; pitch = Math.max(8, Math.min(82, drag[2] - (event.clientY - drag[1]) * .16)); render(); });
+  plane.addEventListener('pointerup', () => { drag = null; });
+  addEventListener('wheel', event => { zoom = Math.max(.55, Math.min(1.7, zoom * (event.deltaY > 0 ? .92 : 1.08))); render(); }, { passive: true });
+  render();
+</script>
