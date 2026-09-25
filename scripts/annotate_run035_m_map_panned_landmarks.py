@@ -26,6 +26,10 @@ RUN035_FLIGHT_OBJECT = {
     "segments": (((103, 166), (103, 166)), ((97, 167), (107, 167)), ((98, 168), (106, 168))),
     "evidence": "run035_m_map_stable_20f_trace: C2FA7E with A5=$C4C598",
 }
+RUN035_GRID = (
+    ((283, 0), (283, 179)), ((160, 0), (160, 179)), ((39, 0), (39, 179)),
+    ((0, 176), (319, 176)), ((0, 47), (319, 47)),
+)
 
 
 def main() -> None:
@@ -46,6 +50,8 @@ def main() -> None:
         raise RuntimeError("input is not a complete SVG")
     labels = []
     fragments = ['<g shape-rendering="geometricPrecision" font-family="monospace">']
+    for (x1, y1), (x2, y2) in RUN035_GRID:
+        fragments.append(f'<line x1="{x1 * 2:g}" y1="{y1:g}" x2="{x2 * 2:g}" y2="{y2:g}" stroke="#555" stroke-width="1"/>')
     for name, (x, y), colour, evidence in RUN003_ANCHORS:
         px, py = x - PAN[0], y - PAN[1]
         labels.append({"name": name, "run003_anchor": [x, y], "run035_anchor": [px, py], "evidence": evidence})
@@ -73,6 +79,8 @@ def main() -> None:
     args.svg.write_text(svg.rsplit("</svg>", 1)[0] + "\n" + "\n".join(fragments) + "\n</svg>\n", encoding="utf-8")
     image = Image.open(ROOT / "analysis/visuals/run035_m_map_projected_polygon_vectors.png").convert("RGB")
     draw = ImageDraw.Draw(image)
+    for (x1, y1), (x2, y2) in RUN035_GRID:
+        draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill="#555555", width=1)
     for name, (x, y), colour, _ in RUN003_ANCHORS:
         px, py = x - PAN[0], y - PAN[1]
         draw.ellipse((px - 3.5, py - 3.5, px + 3.5, py + 3.5), fill=colour, outline="white", width=1)
@@ -88,8 +96,9 @@ def main() -> None:
     report = {
         "classification": "panning_transferred_fixed_landmarks_plus_directly_traced_flight_object_marker",
         "source_svg": str(args.input), "panning_relation": "run035 = run003 - (142, 36) host pixels",
+        "grid_segments": [[list(start), list(end)] for start, end in RUN035_GRID],
         "labels": labels,
-        "qualification": "Golden Gate and Mountain ? are transferred fixed-world anchors using the measured coastline translation. FLIGHT OBJECT ? is a direct run035 renderer trace, but that trace does not establish ownership or semantic game identity.",
+        "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. Golden Gate and Mountain ? are transferred fixed-world anchors using the measured coastline translation. The marker trace does not establish ownership or semantic game identity.",
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")

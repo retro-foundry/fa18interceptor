@@ -2,6 +2,58 @@
   "classification": "panning_transferred_fixed_landmarks_plus_directly_traced_flight_object_marker",
   "source_svg": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\visuals\\run035_m_map_projected_polygon_vectors.svg",
   "panning_relation": "run035 = run003 - (142, 36) host pixels",
+  "grid_segments": [
+    [
+      [
+        283,
+        0
+      ],
+      [
+        283,
+        179
+      ]
+    ],
+    [
+      [
+        160,
+        0
+      ],
+      [
+        160,
+        179
+      ]
+    ],
+    [
+      [
+        39,
+        0
+      ],
+      [
+        39,
+        179
+      ]
+    ],
+    [
+      [
+        0,
+        176
+      ],
+      [
+        319,
+        176
+      ]
+    ],
+    [
+      [
+        0,
+        47
+      ],
+      [
+        319,
+        47
+      ]
+    ]
+  ],
   "labels": [
     {
       "name": "GOLDEN GATE",
@@ -68,5 +120,5 @@
       "evidence": "run035_m_map_stable_20f_trace: C2FA7E with A5=$C4C598"
     }
   ],
-  "qualification": "Golden Gate and Mountain ? are transferred fixed-world anchors using the measured coastline translation. FLIGHT OBJECT ? is a direct run035 renderer trace, but that trace does not establish ownership or semantic game identity."
+  "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. Golden Gate and Mountain ? are transferred fixed-world anchors using the measured coastline translation. The marker trace does not establish ownership or semantic game identity."
 }

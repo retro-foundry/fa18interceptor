@@ -23,5 +23,5 @@ measured coastline panning translation has different magnitude and direction.
 The visible evidence artifact is
 [`run035_m_map_projected_polygon_vectors_landmarks_traced_marker.svg`](../visuals/run035_m_map_projected_polygon_vectors_landmarks_traced_marker.svg)
 with its inspection PNG alongside it.  Golden Gate and Mountain ? use the
-existing fixed-coastline panning transfer; FLIGHT OBJECT ? is a direct run035
-line trace.
+existing fixed-coastline panning transfer; FLIGHT OBJECT ? and the five map
+grid lines are direct run035 line traces.
