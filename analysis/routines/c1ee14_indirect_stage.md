@@ -92,3 +92,10 @@ descriptor/control rendering-stage role. The stage's branch predicate, source
 family choice, and per-placement primitive ownership still need a continuous
 same-invocation trace; do not name a particular landmark or LOD rule from the
 stack alone.
+
+Two such complete same-invocation joins are now preserved for run041 frame
+6,000 in [`run041_frame06000_descriptor_stage_fixture.md`](../data/run041_frame06000_descriptor_stage_fixture.md).
+They connect selected placement-loop fields through `$C1EE14` to the exact
+cursor loaded by `$C1F6F8` and the immutable source read by `$C1F4AC`, with
+the enclosing return at `$C1CC88`. They remain bounded per-invocation
+dataflow evidence rather than object identity.
