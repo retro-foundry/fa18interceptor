@@ -197,6 +197,10 @@ translation to the mosaic. See
    marker vectors.  It is recorded in
    `analysis/data/run003_m_map_marker_joy5_control_probe.md` and must not be
    cited as a player-motion test.
+   Its complete shared drawing route is now byte-exact: `$C2B93E` selects the
+   `$C2B91E` three-record list, and `$C2BAA8-$C2BAEF` parses signed
+   `(dy,dx,width-minus-one)` records, clips them to 320x180, then calls
+   `$C2FA7E`. See `analysis/routines/c2baa8_signed_offset_line_iterator.md`.
    A run003/run035 trace comparison nevertheless proves the marker is not
    screen-fixed: its three `$C4C598` vectors move from around `(31,130)` to
    `(103,166)`.  This is state-dependent map position, not player identity or
