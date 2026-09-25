@@ -187,6 +187,12 @@ python scripts/compare_run042_map_packet_directory.py `
    marker vectors.  It is recorded in
    `analysis/data/run003_m_map_marker_joy5_control_probe.md` and must not be
    cited as a player-motion test.
+   A run003/run035 trace comparison nevertheless proves the marker is not
+   screen-fixed: its three `$C4C598` vectors move from around `(31,130)` to
+   `(103,166)`.  This is state-dependent map position, not player identity or
+   global-coordinate proof.  See
+   `analysis/data/run003_run035_m_map_marker_comparison.md` and the rendered
+   `analysis/visuals/run035_m_map_projected_polygon_vectors_landmarks_traced_marker.svg`.
 2. Capture or isolate a map continuation where `$C3B4F8` remains in `$C45A36`
    through a `$C1F6F8` entry. The existing run037 no-input continuation proves
    the target's store but shows it overwritten before the walker, so it is not
