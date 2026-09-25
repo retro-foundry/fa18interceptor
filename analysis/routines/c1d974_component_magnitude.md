@@ -20,6 +20,6 @@ scan alone.
 
 Evidence: exact code `$C1D974-$C1D9D6` in the run060 slow-memory authority,
 the P-code subsets `observed_call_00c1d974`, and
-`build/run060_c265e8_forced_match/trace.jsonl`. The contract has not yet been
-promoted to a byte-exact source slice; division-by-zero and table-bound edge
-cases need a dedicated fixture before that conversion.
+`build/run060_c265e8_forced_match/trace.jsonl`. Byte-exact source is
+`source_amiga/observed/calculate_c1d974_component_magnitude.asm`.
+Division-by-zero and table-bound edge cases remain open for a dedicated fixture.
