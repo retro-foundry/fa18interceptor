@@ -1,9 +1,9 @@
 {
   "pcode_exports": 122,
   "observed_executed_bytes": 44218,
-  "reconstructed_bytes": 53576,
-  "reconstructed_slices": 690,
-  "reconstructed_runtime_backed_bytes": 30882,
+  "reconstructed_bytes": 53610,
+  "reconstructed_slices": 691,
+  "reconstructed_runtime_backed_bytes": 30916,
   "reconstructed_static_only_bytes": 22694,
   "confirmed_data_bytes": 66192,
   "unclassified_bytes": 55280,
@@ -14,10 +14,10 @@
   "estimated_data_bytes": 76340,
   "estimated_instruction_denominator": 209636,
   "estimated_unclassified_bytes": 45132,
-  "coverage_of_observed_percent": 69.84,
-  "coverage_of_instructions_percent": 24.38,
+  "coverage_of_observed_percent": 69.92,
+  "coverage_of_instructions_percent": 24.39,
   "game_exercised_percent": 16.06,
-  "estimated_coverage_of_instructions_percent": 25.56,
-  "assembled_total_bytes": 53576,
+  "estimated_coverage_of_instructions_percent": 25.57,
+  "assembled_total_bytes": 53610,
   "overlapping_slice_pairs": []
 }
