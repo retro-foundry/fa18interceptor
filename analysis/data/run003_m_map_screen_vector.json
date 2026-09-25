@@ -1,0 +1,28 @@
+{
+  "classification": "scenario_backed_exact_screen_derived_vector_oracle_not_source_geometry",
+  "screen": "analysis\\visuals\\run003_m_map_display.png",
+  "screen_rectangle": [
+    40,
+    16,
+    680,
+    216
+  ],
+  "dimensions": [
+    640,
+    200
+  ],
+  "filled_rectangles": 1720,
+  "colours": [
+    "#000000",
+    "#003300",
+    "#003366",
+    "#111111",
+    "#115511",
+    "#555555",
+    "#666666",
+    "#880000",
+    "#888888"
+  ],
+  "svg_sha256": "9a5c99698640cb7efd5807567a49a53d965320e894f0df7a8eac6a91d190b77a",
+  "qualification": "Every visible pixel in the run003 M-map rectangle is represented by a same-colour filled SVG run. This is an exact visual target, not evidence of the original immutable coastline geometry or a global world map."
+}

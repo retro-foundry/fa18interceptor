@@ -1,0 +1,26 @@
+{
+  "classification": "scenario_backed_exact_m_map_display_page_decode_not_source_geometry",
+  "chip": "build\\run003_m_visual_30\\chip.bin",
+  "screen": "analysis\\visuals\\run003_m_map_display.png",
+  "planes": [
+    "$04DB30",
+    "$04FA70",
+    "$0519B0",
+    "$0538F0"
+  ],
+  "logical_dimensions": [
+    320,
+    200
+  ],
+  "host_screen_rectangle": [
+    40,
+    16,
+    680,
+    216
+  ],
+  "horizontal_scale": 2,
+  "palette_source": "analysis/disk_graphics_assets.json pix/frnt5 RGB4 entries 0-15",
+  "decoded_sha256": "fdbb1187e27918e644cd65225e4abbcdefcdbc234230dd153b6da3466dac2791",
+  "screen_pixel_mismatches": 28,
+  "qualification": "The decoded bitplane page supplies the filled land/water/grid display state. It differs from the final captured host rectangle at 28 pixels, so exact visual comparison must use the screen-derived SVG oracle. Neither artifact is a static coastline asset or a source-geometry reconstruction."
+}
