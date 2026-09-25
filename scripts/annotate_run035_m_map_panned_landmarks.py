@@ -53,7 +53,7 @@ def main() -> None:
     for (x1, y1), (x2, y2) in RUN035_GRID:
         fragments.append(f'<line x1="{x1 * 2:g}" y1="{y1:g}" x2="{x2 * 2:g}" y2="{y2:g}" stroke="#555" stroke-width="1"/>')
     for name, (x, y), colour, evidence in RUN003_ANCHORS:
-        px, py = x - PAN[0], y - PAN[1]
+        px, py = x + PAN[0], y + PAN[1]
         labels.append({"name": name, "run003_anchor": [x, y], "run035_anchor": [px, py], "evidence": evidence})
         fragments.extend([
             f'<circle cx="{px:g}" cy="{py:g}" r="3.5" fill="{colour}" stroke="#fff" stroke-width=".8"/>',
@@ -82,7 +82,7 @@ def main() -> None:
     for (x1, y1), (x2, y2) in RUN035_GRID:
         draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill="#555555", width=1)
     for name, (x, y), colour, _ in RUN003_ANCHORS:
-        px, py = x - PAN[0], y - PAN[1]
+        px, py = x + PAN[0], y + PAN[1]
         draw.ellipse((px - 3.5, py - 3.5, px + 3.5, py + 3.5), fill=colour, outline="white", width=1)
         draw.line(((px + 3, py - 2), (px + 41, py - 15)), fill=colour, width=1)
         draw.rectangle((px + 42, py - 22, px + 124, py - 9), fill="black", outline=colour, width=1)
@@ -95,7 +95,7 @@ def main() -> None:
     image.save(args.png)
     report = {
         "classification": "panning_transferred_fixed_landmarks_plus_directly_traced_flight_object_marker",
-        "source_svg": str(args.input), "panning_relation": "run035 = run003 - (142, 36) host pixels",
+        "source_svg": str(args.input), "panning_relation": "run035 = run003 + (142, 36) host pixels",
         "grid_segments": [[list(start), list(end)] for start, end in RUN035_GRID],
         "labels": labels,
         "qualification": "Grid and FLIGHT OBJECT ? are direct run035 renderer traces. Golden Gate and Mountain ? are transferred fixed-world anchors using the measured coastline translation. The marker trace does not establish ownership or semantic game identity.",

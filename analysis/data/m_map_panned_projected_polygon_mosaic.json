@@ -5,8 +5,8 @@
       "name": "run003",
       "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run003_m_map_projected_polygons\\projected_polygons.json",
       "translation": [
-        0,
-        0
+        142,
+        36
       ],
       "canonical_submissions": 42
     },
@@ -14,8 +14,8 @@
       "name": "run035",
       "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run035_m_map_projected_polygons\\projected_polygons.json",
       "translation": [
-        142,
-        36
+        0,
+        0
       ],
       "canonical_submissions": 49
     }
@@ -24,17 +24,17 @@
     {
       "name": "GOLDEN GATE",
       "anchor": [
-        194,
-        59.5
+        336,
+        95.5
       ]
     },
     {
       "name": "MOUNTAIN ?",
       "anchor": [
-        218,
-        94
+        360,
+        130
       ]
     }
   ],
-  "qualification": "The run035 polygon pass is translated +142,+36 host pixels by the measured shared-coastline panning relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
+  "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
 }

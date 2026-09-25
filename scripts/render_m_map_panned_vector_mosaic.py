@@ -15,11 +15,13 @@ from PIL import Image, ImageDraw
 ROOT = Path(__file__).resolve().parents[1]
 LAND, SEA = "#115511", "#003366"
 RUNS = (
-    ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 0, 0, 42),
-    ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 142, 36, 49),
+    # Normalise the common world view at run035's upper-left.  Run003 is at
+    # +142,+36 in this frame because run035 = run003 + (142,36) on screen.
+    ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 142, 36, 42),
+    ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 0, 0, 49),
 )
 WIDTH, HEIGHT = 782, 236
-ANCHORS = (("GOLDEN GATE", 194, 59.5, "#e53935"), ("MOUNTAIN ?", 218, 94, "#f59e0b"))
+ANCHORS = (("GOLDEN GATE", 336, 95.5, "#e53935"), ("MOUNTAIN ?", 360, 130, "#f59e0b"))
 
 
 def canonical_pass(polygons: list[dict]) -> list[dict]:
@@ -75,7 +77,7 @@ def main() -> None:
         "classification": "two_capture_source_vector_coastline_mosaic",
         "runs": report_runs,
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
-        "qualification": "The run035 polygon pass is translated +142,+36 host pixels by the measured shared-coastline panning relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
+        "qualification": "The normalized mosaic places run035 at (0,0) and run003 at +142,+36 host pixels, because run035 = run003 + (142,36) on the shared coastline. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))

@@ -1,7 +1,7 @@
 {
   "classification": "panning_transferred_fixed_landmarks_plus_directly_traced_flight_object_marker",
   "source_svg": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\visuals\\run035_m_map_projected_polygon_vectors.svg",
-  "panning_relation": "run035 = run003 - (142, 36) host pixels",
+  "panning_relation": "run035 = run003 + (142, 36) host pixels",
   "grid_segments": [
     [
       [
@@ -62,8 +62,8 @@
         59.5
       ],
       "run035_anchor": [
-        52,
-        23.5
+        336,
+        95.5
       ],
       "evidence": "trace-backed run003 bridge contexts"
     },
@@ -74,8 +74,8 @@
         94
       ],
       "run035_anchor": [
-        76,
-        58
+        360,
+        130
       ],
       "evidence": "run003 terrain candidate"
     },
