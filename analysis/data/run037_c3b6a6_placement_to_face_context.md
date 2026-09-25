@@ -6,9 +6,11 @@ connects one sampled flat map-placement descriptor to the already proven
 mesh, complete object ownership, or LOD.
 
 The placement inventory, descriptor handoff, walker, and submissions below
-are all in one uninterrupted sealed run037 trace. This proves this runtime
-placement record's control pass, but it does not establish that every primitive
-in the bounded pass belongs exclusively to that record.
+are all in one uninterrupted sealed run037 trace. Between the `$C3B6AE`
+walker and the first four submissions, no later `$C1F6F8` walker or `$C1F4AC`
+matrix-source entry occurs. Those four primitives are therefore bounded outputs
+of this placement record's control pass; this still does not identify a named
+world feature or complete model.
 
 In that trace, immutable template `$C42789`
 contains header `$2A` and source pair `($0E00,$0E00)`. The placement builder
@@ -21,9 +23,10 @@ publishes `$C3B6AE`; and `$C1F70E` loads `$C3B6AE` into `A5` for the live
 `$C1F6F8` walker. (`A1=$C3B73E` at walker entry is a separate cursor.) A
 The walker begins at trace index 148,233. Its first four following `$C2FF48`
 submissions occur at indices 148,747, 150,138, 151,104, and 152,010, each
-with `A5=$C3B6B0`. They prove renderer execution after this placement's
-control pass; the longer capture contains later submissions, so this does not
-claim a complete or exclusive primitive batch.
+with `A5=$C3B6B0`. No intervening walker or matrix-source entry occurs. They
+are the bounded primitive batch owned by this control pass; the longer capture
+contains later submissions, so this does not claim the component's complete
+model or all of its later draws.
 The established `$C3B720 -> $C3B6B0` component boundary provides the separate
 immutable local-triple and face-topology authority for that context.
 
