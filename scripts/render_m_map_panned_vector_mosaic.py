@@ -18,6 +18,8 @@ RUNS = (
     # Normalise at run042's upper-left. run042 = run035 + (130,61),
     # run035 = run037 + (116,16), and run035 = run003 + (142,36).
     ("run042", ROOT / "build/run042_m_map_projected_polygons/projected_polygons.json", 0, 0, 40, None, None),
+    # run035 = run002 + (-114,70), measured from the exact blue-water join.
+    ("run002", ROOT / "build/run002_m_map_projected_polygons/projected_polygons.json", 16, 131, 43, 0, 43),
     ("run037", ROOT / "build/run037_m_map_projected_polygons/projected_polygons.json", 14, 45, 47, None, None),
     ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 130, 61, 49, None, None),
     # run035 = run038 + (24,10), measured from the exact blue-water join.
@@ -27,7 +29,7 @@ RUNS = (
     ("run024", ROOT / "build/run024_m_map_projected_polygons/projected_polygons.json", 270, 96, 42, 0, 42),
     ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 272, 97, 42, None, None),
 )
-WIDTH, HEIGHT = 912, 297
+WIDTH, HEIGHT = 912, 340
 ANCHORS = (("GOLDEN GATE", 466, 156.5, "#e53935"),)
 GOLDEN_GATE_LINES = (((466, 153), (466, 157)), ((466, 160), (466, 156)))
 
@@ -91,7 +93,7 @@ def main() -> None:
         "runs": report_runs,
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
         "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
-        "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, run024 at +270,+96, and run003 at +272,+97 host pixels. Run024 is a 42-submission pass from the user-verified San Francisco cockpit checkpoint; its run024/run035 join is 98.1594% agreement across 71,500 water pixels. Run038 uses an explicit stable 58-submission pass beginning at collector submission 8; its run038/run035 join is 98.2684% agreement across 103,488 water pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. The reusable C3B720/C3B6B0 component is deliberately excluded as an unproven landmark. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
+        "qualification": "The normalized mosaic places run042 at (0,0), run002 at +16,+131, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, run024 at +270,+96, and run003 at +272,+97 host pixels. Run002 is a 43-submission pass from an independent Base-4 free-flight checkpoint; its run002/run035 join is 97.9792% agreement across 56,808 water pixels. Run024 is a 42-submission pass from the user-verified San Francisco cockpit checkpoint; its run024/run035 join is 98.1594% agreement across 71,500 water pixels. Run038 uses an explicit stable 58-submission pass beginning at collector submission 8; its run038/run035 join is 98.2684% agreement across 103,488 water pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. The reusable C3B720/C3B6B0 component is deliberately excluded as an unproven landmark. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))
