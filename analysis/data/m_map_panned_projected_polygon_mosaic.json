@@ -1,0 +1,40 @@
+{
+  "classification": "two_capture_source_vector_coastline_mosaic",
+  "runs": [
+    {
+      "name": "run003",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run003_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        0,
+        0
+      ],
+      "canonical_submissions": 42
+    },
+    {
+      "name": "run035",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run035_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        142,
+        36
+      ],
+      "canonical_submissions": 49
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "GOLDEN GATE",
+      "anchor": [
+        194,
+        59.5
+      ]
+    },
+    {
+      "name": "MOUNTAIN ?",
+      "anchor": [
+        218,
+        94
+      ]
+    }
+  ],
+  "qualification": "The run035 polygon pass is translated +142,+36 host pixels by the measured shared-coastline panning relation. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded."
+}

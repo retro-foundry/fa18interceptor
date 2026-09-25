@@ -174,6 +174,12 @@ python scripts/compare_run042_map_packet_directory.py `
 
 ## Best next work
 
+The current widest coloured source-vector coastline view is
+`analysis/visuals/m_map_panned_projected_polygon_mosaic.svg`: it joins direct
+run003/run035 projected-polygon passes with the measured `(142,36)` panning
+relation. It covers more coastline but must not be called a complete world map
+or absolute-coordinate export; uncovered green margins are not asserted land.
+
 1. Prove the owner of the small black M-map marker without assigning it by
    appearance.  `$C2B93E` is now a byte-exact 20-byte entry: on a
    nonnegative status it loads the three-record signed-offset stream at
