@@ -27,6 +27,11 @@
       "certainty": "exact placement-to-control-to-line path"
     },
     {
+      "asset": "analysis/data/c36208_bounded_instance_asset.json",
+      "rendering": "two bounded line primitives plus three local triples",
+      "certainty": "exact placement-to-control-to-source-to-line path"
+    },
+    {
       "asset": "analysis/data/c35bd0_bounded_instance_asset.json",
       "rendering": "two bounded line primitives plus three local triples",
       "certainty": "exact placement-to-control-to-source-to-line path"
