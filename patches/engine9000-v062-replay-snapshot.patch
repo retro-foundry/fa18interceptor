@@ -1,0 +1,53 @@
+diff --git a/e9k-debugger/snapshot.c b/e9k-debugger/snapshot.c
+index b641e64..75a806b 100644
+--- a/e9k-debugger/snapshot.c
++++ b/e9k-debugger/snapshot.c
+@@ -14,10 +14,16 @@
+ #include <sys/stat.h>
+ 
+ #include "snapshot.h"
++#include "debug.h"
+ #include "debugger.h"
+ #include "libretro_host.h"
+ #include "state_buffer.h"
+ 
++// The raw recording's setup prelude reaches frame 37 immediately before its
++// Ctrl+Alt+R restore.  Replaying that exact core-only interval makes the
++// boot-state restore occur at the same core phase as the human recording.
++#define SNAPSHOT_REPLAY_BOOT_WARMUP_FRAMES 37
++
+ static const char *
+ snapshot_basename(const char *path)
+ {
+@@ -199,11 +205,29 @@ snapshot_loadSnapshotOnBoot(void)
+     }
+     uint8_t *stateData = NULL;
+     size_t stateSize = 0;
+-    if (!state_buffer_getSnapshotState(&stateData, &stateSize, NULL)) {
++    uint64_t frameNo = 0;
++    if (!state_buffer_getSnapshotState(&stateData, &stateSize, &frameNo)) {
+         return;
+     }
++    // Reproduce the recorded pre-restore core interval before restoring the
++    // timeline; runtime input is not scheduled until debugger_main returns.
++    if (debugger.playbackPath[0]) {
++        for (int i = 0; i < SNAPSHOT_REPLAY_BOOT_WARMUP_FRAMES; ++i) {
++            _libretro_host_runOnce();
++        }
++        debug_printf("snapshot: replay boot warm-up frames=%d",
++                     SNAPSHOT_REPLAY_BOOT_WARMUP_FRAMES);
++    }
+     if (libretro_host_setStateData(stateData, stateSize)) {
+-        debugger.hasStateSnapshot = 1;
++        size_t restoredSize = 0;
++        if (libretro_host_restoreState(&restoredSize) && state_buffer_restoreSnapshot()) {
++            debugger.frameCounter = state_buffer_getCurrentFrameNo();
++            debugger.hasStateSnapshot = 1;
++            debug_printf("snapshot: restored boot state frame=%llu size=%zu",
++                         (unsigned long long)frameNo, restoredSize);
++        } else {
++            debug_error("snapshot: failed to restore boot state");
++        }
+     }
+     alloc_free(stateData);
+ }
