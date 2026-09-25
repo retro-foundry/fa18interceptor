@@ -16,6 +16,9 @@ def read_events(path):
         parts = line.split()
         if parts[0] != 'F':
             raise ValueError(line)
+        # A raw human recording ends with a close marker, not an input event.
+        if len(parts) == 3 and parts[2] == 'C':
+            continue
         events.setdefault(int(parts[1]), []).append((parts[2], list(map(int, parts[3:]))))
     return events
 
