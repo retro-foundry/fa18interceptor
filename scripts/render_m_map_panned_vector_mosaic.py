@@ -49,6 +49,9 @@ RUNS = (
     ("run001", ROOT / "build/run001_m_map_projected_polygons/projected_polygons.json", 194, 121, 36, 0, 36),
     # run035 = run024 + (140,35), measured from the exact blue-water join.
     ("run024", ROOT / "build/run024_m_map_projected_polygons/projected_polygons.json", 270, 96, 42, 0, 42),
+    # Ordinary run024 M-map state at frame 23,415. The capture is moving, so
+    # retain only its explicitly bounded first 43 submissions.
+    ("run024_23415", ROOT / "build/run024_m23415_projected_polygons/projected_polygons.json", 269, 95, 43, 0, 43),
     ("run003", ROOT / "build/run003_m_map_colour_polygon_probe/projected_polygons.json", 272, 97, 42, 0, 42),
     # run035 = run004 + (226,109), measured from the exact blue-water join.
     ("run004", ROOT / "build/run004_m_map_projected_polygons/projected_polygons.json", 356, 170, 22, 2, 22),
@@ -71,9 +74,9 @@ def canonical_pass(polygons: list[dict]) -> list[dict]:
 
 
 def main() -> None:
-    svg_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v3.svg"
-    png_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v3.png"
-    report_path = ROOT / "analysis/data/m_map_panned_projected_polygon_mosaic_v3.json"
+    svg_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v4.svg"
+    png_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v4.png"
+    report_path = ROOT / "analysis/data/m_map_panned_projected_polygon_mosaic_v4.json"
     if any(path.exists() for path in (svg_path, png_path, report_path)):
         raise FileExistsError("refusing to overwrite mosaic evidence output")
     svg = [
