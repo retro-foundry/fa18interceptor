@@ -34,7 +34,8 @@
   "authority": {
     "trace": "build/run003_m_map_appearance_trace/trace.jsonl",
     "template_catalog": "analysis/data/run003_m_map_template_target_catalog.json",
-    "landmark_context": "analysis/data/run035_golden_gate_red_line_correlation.md"
+    "landmark_context": "analysis/data/run035_golden_gate_red_line_correlation.md",
+    "view_space_pose": "analysis/data/run003_golden_gate_view_pose.json"
   },
   "qualification": "This joins the user-identified Golden Gate M-map scenario to two exact placement/control/source/line paths. The source triples are transformed with live state, so this does not export static global bridge vertices or a complete bridge mesh."
 }

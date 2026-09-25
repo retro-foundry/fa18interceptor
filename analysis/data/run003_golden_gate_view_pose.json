@@ -1,0 +1,116 @@
+{
+  "classification": "run003_golden_gate_view_space_pose_not_static_world_geometry",
+  "matrix_address": "$C45BD8",
+  "matrix_words": [
+    168,
+    0,
+    0,
+    0,
+    0,
+    252,
+    0,
+    -128,
+    0
+  ],
+  "instances": [
+    {
+      "context": "$C3559A",
+      "source": "$C35BAA",
+      "trace_index": 85163,
+      "local_shift": 8,
+      "live_terms": [
+        461,
+        -1536,
+        273
+      ],
+      "local_triples": [
+        [
+          0,
+          0,
+          3744
+        ],
+        [
+          0,
+          416,
+          -3168
+        ]
+      ],
+      "pre_matrix_triples": [
+        [
+          461,
+          -1536,
+          287
+        ],
+        [
+          461,
+          -1535,
+          260
+        ]
+      ],
+      "matrix_output_triples": [
+        [
+          302,
+          282,
+          768
+        ],
+        [
+          302,
+          255,
+          767
+        ]
+      ]
+    },
+    {
+      "context": "$C355D2",
+      "source": "$C35BC2",
+      "trace_index": 85861,
+      "local_shift": 8,
+      "live_terms": [
+        461,
+        -1536,
+        249
+      ],
+      "local_triples": [
+        [
+          0,
+          0,
+          -3744
+        ],
+        [
+          0,
+          416,
+          3168
+        ]
+      ],
+      "pre_matrix_triples": [
+        [
+          461,
+          -1536,
+          234
+        ],
+        [
+          461,
+          -1535,
+          261
+        ]
+      ],
+      "matrix_output_triples": [
+        [
+          302,
+          230,
+          768
+        ],
+        [
+          302,
+          256,
+          767
+        ]
+      ]
+    }
+  ],
+  "authority": {
+    "trace": "build/run003_m_map_appearance_trace/trace.jsonl",
+    "slow": "build/run003_m_map_appearance_trace/slow.bin"
+  },
+  "qualification": "Each pose applies the byte-exact C1F4AC local-shift, live-term addition, and signed matrix product. The output is view-dependent renderer workspace geometry, not static global bridge vertices."
+}

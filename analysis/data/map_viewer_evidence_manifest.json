@@ -8,7 +8,7 @@
   "placed_components": [
     {
       "asset": "analysis/data/golden_gate_m_map_bounded_placed_line_instances.json",
-      "rendering": "two verified Golden Gate red landmark line instances in run003",
+      "rendering": "two verified Golden Gate red landmark line instances in run003, with a separately retained view-space pose",
       "certainty": "verified landmark placement-to-control-to-source-to-line paths"
     },
     {
