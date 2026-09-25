@@ -17,10 +17,11 @@ LAND, SEA = "#115511", "#003366"
 RUNS = (
     # Normalise at run042's upper-left. run042 = run035 + (130,61),
     # run035 = run037 + (116,16), and run035 = run003 + (142,36).
-    ("run042", ROOT / "build/run042_m_map_projected_polygons/projected_polygons.json", 0, 0, 40),
-    ("run037", ROOT / "build/run037_m_map_projected_polygons/projected_polygons.json", 14, 45, 47),
-    ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 130, 61, 49),
-    ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 272, 97, 42),
+    ("run042", ROOT / "build/run042_m_map_projected_polygons/projected_polygons.json", 0, 0, 40, None, None),
+    ("run037", ROOT / "build/run037_m_map_projected_polygons/projected_polygons.json", 14, 45, 47, None, None),
+    ("run035", ROOT / "build/run035_m_map_projected_polygons/projected_polygons.json", 130, 61, 49, None, None),
+    ("run041", ROOT / "build/run041_m_map_projected_polygons/projected_polygons.json", 172, 72, 50, 10, 50),
+    ("run003", ROOT / "build/run003_m_map_projected_polygons/projected_polygons.json", 272, 97, 42, None, None),
 )
 WIDTH, HEIGHT = 912, 297
 ANCHORS = (("GOLDEN GATE", 466, 156.5, "#e53935"), ("MOUNTAIN ?", 490, 191, "#f59e0b"))
@@ -55,8 +56,9 @@ def main() -> None:
     image = Image.new("RGB", (WIDTH, HEIGHT), LAND)
     draw = ImageDraw.Draw(image)
     report_runs = []
-    for name, path, tx, ty, expected in RUNS:
-        polygons = canonical_pass(json.loads(path.read_text(encoding="utf-8"))["polygons"])
+    for name, path, tx, ty, expected, start, count in RUNS:
+        captured = json.loads(path.read_text(encoding="utf-8"))["polygons"]
+        polygons = canonical_pass(captured) if count is None else captured[start:start + count]
         if len(polygons) != expected:
             raise RuntimeError(f"{name}: expected {expected} polygons, got {len(polygons)}")
         for polygon in polygons:
@@ -66,7 +68,8 @@ def main() -> None:
             points = [(x * 2 + tx, y + ty) for x, y in pairs]
             svg.append('<polygon points="' + " ".join(f"{x},{y}" for x, y in points) + f'"><title>{name}: {polygon["context_a5"]}, submission {polygon["submission"]}</title></polygon>')
             draw.polygon(points, fill=SEA)
-        report_runs.append({"name": name, "polygon_capture": str(path), "translation": [tx, ty], "canonical_submissions": len(polygons)})
+        report_runs.append({"name": name, "polygon_capture": str(path), "translation": [tx, ty], "canonical_submissions": len(polygons),
+                            "start_submission": start, "bounded_submissions": count})
     svg.append('</g><g shape-rendering="geometricPrecision" font-family="monospace">')
     for (x1, y1), (x2, y2) in GOLDEN_GATE_LINES:
         svg.append(f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="#880000" stroke-width="2"/>')
@@ -92,7 +95,7 @@ def main() -> None:
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
         "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
         "mountain_triangles": [[list(point) for point in triangle] for triangle in MOUNTAIN_TRIANGLES],
-        "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, and run003 at +272,+97 host pixels. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. Its orange Mountain ? triangles are direct run035 C3B6B0 projected polygons; the human-readable label remains a candidate. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
+        "qualification": "The normalized mosaic places run042 at (0,0), run037 at +14,+45, run035 at +130,+61, run041 at +172,+72, and run003 at +272,+97 host pixels. Run041 uses an explicit moving 50-submission bounded pass beginning at collector submission 10. Its run041/run035 join is 98.2697% agreement across 99,866 water pixels and composes with run035/run042. The run037/run035 join is 97.9997% agreement across 84,888 water pixels; run035/run042 is 98.4816%, and run003 follows the established +142,+36 relation from run035. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. Its orange Mountain ? triangles are direct run035 C3B6B0 projected polygons; the human-readable label remains a candidate. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent flight-object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))
