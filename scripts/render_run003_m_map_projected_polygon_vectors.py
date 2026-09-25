@@ -158,7 +158,8 @@ def main() -> None:
                 matches += actual == expected
     report = {
         "classification": "scenario_backed_projected_renderer_vectors_before_area_blit",
-        "authority": {"polygon_capture": str(args.input), "line_capture": str(args.line_input)},
+        "authority": {"polygon_capture": str(args.input),
+                      "line_capture": None if args.no_lines else str(args.line_input)},
         "canonical_polygon_submissions": len(polygons),
         "polygon_context_counts": {context: sum(item["context_a5"] == context for item in polygons)
                                    for context in sorted({item["context_a5"] for item in polygons})},

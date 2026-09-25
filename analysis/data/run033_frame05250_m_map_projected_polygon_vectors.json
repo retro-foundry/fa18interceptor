@@ -1,0 +1,31 @@
+{
+  "classification": "scenario_backed_projected_renderer_vectors_before_area_blit",
+  "authority": {
+    "polygon_capture": "build\\run033_frame05250_m_map_projected_polygons\\projected_polygons.json",
+    "line_capture": null
+  },
+  "canonical_polygon_submissions": 49,
+  "polygon_context_counts": {
+    "$C3B6B0": 4,
+    "$C4BFA6": 3,
+    "$C4BFAC": 9,
+    "$C4BFB2": 4,
+    "$C4BFB8": 1,
+    "$C4BFBE": 8,
+    "$C4BFC4": 6,
+    "$C4BFCA": 5,
+    "$C4BFD0": 2,
+    "$C4BFD6": 4,
+    "$C4BFE2": 2,
+    "$C4BFE8": 1
+  },
+  "palette": {
+    "land": "#115511",
+    "sea": "#003366",
+    "grid": "#555555"
+  },
+  "land_sea_oracle_validation": null,
+  "annotations_included": false,
+  "landmark": null,
+  "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
+}

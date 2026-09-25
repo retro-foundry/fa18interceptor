@@ -27,6 +27,9 @@ RUNS = (
     # run035 = run038 + (24,10), measured from the exact blue-water join.
     ("run038", ROOT / "build/run038_m_map_projected_polygons/projected_polygons.json", 154, 71, 58, 8, 58),
     ("run041", ROOT / "build/run041_m_map_projected_polygons/projected_polygons.json", 172, 72, 50, 10, 50),
+    # run033 frame 5,250 = run035 + (80,18), measured from exact blue-water overlap.
+    # Its C3559A/C355D2 lines independently place the Golden Gate at this join.
+    ("run033_5250", ROOT / "build/run033_frame05250_m_map_projected_polygons/projected_polygons.json", 210, 79, 49, None, None),
     # run035 = run001 + (64,60), measured from the exact blue-water join.
     ("run001", ROOT / "build/run001_m_map_projected_polygons/projected_polygons.json", 194, 121, 36, 0, 36),
     # run035 = run024 + (140,35), measured from the exact blue-water join.
@@ -110,7 +113,7 @@ def main() -> None:
         "runs": report_runs,
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
         "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
-        "qualification": "Each green rectangle is one directly observed 640×180 M-map viewport; blue polygons are direct renderer vectors inside that observed coverage, while black is uncaptured space. The normalized mosaic places run042 at (0,0), run002 at +16,+131, later run002 at +10,+122, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, run001 at +194,+121, run024 at +270,+96, run003 at +272,+97, and run004 at +356,+170 host pixels. Its red Golden Gate vectors are C3559A/C355D2 lines transferred through the red-pixel-validated relation. Reusable components are deliberately excluded as unproven landmarks. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded.",
+        "qualification": "Each green rectangle is one directly observed 640×180 M-map viewport; blue polygons are direct renderer vectors inside that observed coverage, while black is uncaptured space. The normalized mosaic places run042 at (0,0), run002 at +16,+131, later run002 at +10,+122, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, run033 frame 5,250 at +210,+79, run001 at +194,+121, run024 at +270,+96, run003 at +272,+97, and run004 at +356,+170 host pixels. Its red Golden Gate vectors are C3559A/C355D2 lines directly captured both in run033's user-identified bridge state and in the prior map state, agreeing through the red-pixel-validated join. Reusable components are deliberately excluded as unproven landmarks. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))

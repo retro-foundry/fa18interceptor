@@ -1,0 +1,22 @@
+{
+  "scope": "exact-colour viewport translation comparison",
+  "first": "analysis\\visuals\\run035_m_map_display.png",
+  "second": "build\\run033_frame05250_m_request_flags_zero\\screen.png",
+  "colour_rgb": [
+    0,
+    51,
+    102
+  ],
+  "viewport": {
+    "left": 40,
+    "top": 18,
+    "right_exclusive": 680,
+    "bottom_exclusive": 196
+  },
+  "correspondence": "second(x + dx, y + dy) == first(x, y)",
+  "best_dx": -80,
+  "best_dy": -18,
+  "overlap_pixels": 89600,
+  "agreement": 0.9789508928571429,
+  "qualification": "A shared translated raster establishes map-view panning, not the static asset producer or the 3-D terrain source."
+}
