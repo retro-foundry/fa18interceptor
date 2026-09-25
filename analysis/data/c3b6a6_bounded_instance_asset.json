@@ -20,10 +20,16 @@
     "control_context": "$C3B6B0",
     "bounded_submission_trace_indices": [148747, 150138, 151104, 152010]
   },
+  "transform_boundary": {
+    "matrix": "$C45BD8",
+    "output_workspace": "$C48390",
+    "formula_contract": "$C1F464 derives D0/D1/A5 from caller locals plus $C45B30/$C45B38/$C45B34; $C1F4AC adds those live terms to shifted local triples and applies three signed matrix dot products.",
+    "placement_relation": "No traced instruction yet proves that the placement tuple $C4F0FA supplies those live terms."
+  },
   "authority": {
     "trace": "build/run037_m_map_placement_to_control_20f_trace/trace.jsonl",
     "slow_snapshot": "build/run037_m_map_placement_to_control_20f_trace/slow.bin",
     "handoff": "analysis/data/run037_m_map_placement_to_control_20f_handoff.json"
   },
-  "qualification": "The placement tuple and local triples are both observed, but their direct arithmetic composition into global vertices has not been proven. Consumers must retain them as separate local and placement spaces."
+  "qualification": "The placement tuple and local triples are both observed. The renderer transform is known to use separate live vector state and a matrix, but the producer relation from this placement tuple to those live terms has not been proven. Consumers must retain placement and local spaces separately."
 }
