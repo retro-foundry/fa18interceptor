@@ -174,7 +174,15 @@ python scripts/compare_run042_map_packet_directory.py `
 
 ## Best next work
 
-1. Capture or isolate a map continuation where `$C3B4F8` remains in `$C45A36`
+1. Prove the owner of the small black M-map marker without assigning it by
+   appearance.  `$C2B93E` is now a byte-exact 20-byte entry: on a
+   nonnegative status it loads the three-record signed-offset stream at
+   `$C2B91E` and joins the `$C2BAA8` clipped-line iterator.  In the M-map
+   trace this produces the three `$C4C598` line segments.  The producing
+   context is `$C45BEA`, but this is evidence for a flight-object candidate,
+   not yet proof that it is the player aircraft.  See
+   `analysis/routines/c2b93e_marker_line_list_entry.md`.
+2. Capture or isolate a map continuation where `$C3B4F8` remains in `$C45A36`
    through a `$C1F6F8` entry. The existing run037 no-input continuation proves
    the target's store but shows it overwritten before the walker, so it is not
    a `$C3B4FE` parser or mountain-component trace. The repeated run003/run035/
@@ -182,12 +190,18 @@ python scripts/compare_run042_map_packet_directory.py `
    treating any current bounded sample as that transition. The debugger-only
    parser probe confirms `$C1F6F8` can consume the prefix, but must never be
    cited as an original scenario transition.
-2. For physical terrain LOD, keep one landmark/camera bearing stable while
+3. For physical terrain LOD, keep one landmark/camera bearing stable while
    varying range and trace the selector plus immutable family. Existing
    `analysis/data/golden_gate_lod_capture_protocol.md` is the protocol.
 
 ## Recent commits
 
+- `9a03749 Transfer fixed landmarks to panned M-map`
+- `d3ea517 Validate panned M-map polygon vector extraction`
+- `7979645 Annotate traced M-map terrain candidate`
+- `b9e0186 Identify M-map flight-object marker candidate`
+- `302d779 Include traced M-map symbol in vector render`
+- `654b92c Render M-map from projected polygon vectors`
 - `1c835de Join run042 map headers to directory grammar`
 - `de05086 Add run042 map packet source coverage`
 - `3648c51 Compare run042 map packet selection`
