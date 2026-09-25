@@ -1,0 +1,86 @@
+"""Capture `$C4B390` projected polygon pairs at each run003 M-map submission.
+
+The capture stops at `$C2FF48`, before the renderer consumes the list.  These
+are its own projected vector pairs, after clipping/projection and before the
+area-blit implementation; they are not decoded bitplane pixels.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+from engine9000_bridge import Engine, ROOT
+from profile_window import read_events
+
+
+ENTRY = 0xC2FF48
+LIST = 0xC4B390
+MAX_PAIRS = 64
+
+
+def signed_word(data: bytes, offset: int) -> int:
+    return int.from_bytes(data[offset:offset + 2], "big", signed=True)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--restore", type=Path, default=ROOT / "build/run003_pre_m_2183/state.bin")
+    parser.add_argument("--playback", type=Path, default=ROOT / "build/run003_m_press_only.e9k")
+    parser.add_argument("--config", type=Path, default=ROOT / "local/fa18.uae")
+    parser.add_argument("--frames", type=int, default=100)
+    parser.add_argument("--max-polygons", type=int, default=128)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    if args.output.exists():
+        raise FileExistsError(args.output)
+    args.output.mkdir(parents=True)
+    events = read_events(args.playback)
+    engine = Engine(args.config.resolve(), args.output / "saves")
+    polygons = []
+    try:
+        engine.core.retro_run()
+        state = args.restore.read_bytes()
+        if not engine.core.retro_unserialize(state, len(state)):
+            raise RuntimeError("Core rejected save state")
+        engine.core.e9k_debug_add_breakpoint(ENTRY)
+        for frame in range(1, args.frames + 1):
+            for kind, values in events.get(frame, []):
+                engine.event(kind, values)
+            engine.core.retro_run()
+            while engine.core.e9k_debug_is_paused():
+                registers = engine.regs()
+                if registers["pc"] != ENTRY:
+                    raise RuntimeError(f"unexpected breakpoint PC ${registers['pc']:06X}")
+                payload = engine.memory(LIST, 2 + MAX_PAIRS * 4)
+                count = signed_word(payload, 0)
+                if not 0 <= count <= MAX_PAIRS:
+                    raise RuntimeError(f"invalid projected-pair count {count}")
+                pairs = [[signed_word(payload, 2 + pair * 4), signed_word(payload, 4 + pair * 4)]
+                         for pair in range(count)]
+                polygons.append({
+                    "submission": len(polygons), "host_frame": engine.frame,
+                    "context_a5": f"${registers['a5'] & 0xFFFFFF:06X}",
+                    "projected_pairs": pairs,
+                })
+                if len(polygons) >= args.max_polygons:
+                    break
+                engine.core.e9k_debug_step_instr()
+                engine.core.e9k_debug_resume()
+                engine.core.retro_run()
+            if len(polygons) >= args.max_polygons:
+                break
+        report = {
+            "scope": "C4B390 projected pairs immediately before C2FF48 in run003 M-map replay",
+            "polygon_count": len(polygons), "polygons": polygons,
+            "qualification": "Pairs are renderer-produced projected vectors. Context is a live renderer cursor; it is not by itself a static source-model identity.",
+        }
+        (args.output / "projected_polygons.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        print(json.dumps({"polygons": len(polygons), "output": str(args.output)}))
+    finally:
+        engine.core.retro_unload_game()
+        engine.core.retro_deinit()
+
+
+if __name__ == "__main__":
+    main()

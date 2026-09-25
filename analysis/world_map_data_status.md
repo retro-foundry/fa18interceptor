@@ -14,6 +14,14 @@ The corrected next boundary is now documented by the
 descending area-blit submit, and its mutable input state can be recaptured
 exactly before every `BLTSIZE` trigger.
 
+The [projected-polygon vector map](visuals/run003_m_map_projected_polygon_vectors.svg)
+now supplies the corresponding filled land/sea view without screen tracing:
+the first bounded pass has 42 `$C4B390` polygon submissions captured immediately
+before `$C2FF48`; blue polygons over the green palette base match 98.8654% of
+the comparable land/sea pixels in the sealed display oracle.  This is a
+scenario-backed projected renderer export, not yet a static global-coordinate
+or complete-world dataset.
+
 This is the evidence boundary for the game's large physical flight area.  It
 separates the observed *scene-selection and render inputs* from an as-yet
 unidentified authoritative world/map dataset.  No extracted range below is

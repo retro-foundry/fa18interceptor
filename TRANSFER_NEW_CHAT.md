@@ -67,6 +67,15 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   source masks.  Use those exact snapshots to replay area operations and
   extract operation spans; do not mistake `$006000-$007FFF` inputs for static
   coastline data.  See `analysis/data/run003_m_map_span_input_probe.md`.
+- Major map-rendering result: `$C24CFE`'s exact projected-pair list at `$C4B390`
+  can be captured at the `$C2FF48` wrapper before the area renderer consumes it.
+  `scripts/collect_run003_m_map_projected_polygons.py` captures 42 first-pass
+  polygons; `scripts/render_run003_m_map_projected_polygon_vectors.py` turns
+  them into `analysis/visuals/run003_m_map_projected_polygon_vectors.svg`.
+  The source-vector blue-water-over-green-land result agrees with 109,794 of
+  111,054 comparable oracle land/sea pixels (98.8654%).  It has the trace-backed
+  Golden Gate label but no invented additional landmarks.  This is now the
+  primary map view, replacing the prior screen-derived review for RE claims.
 
 The world path has two separate layers:
 
