@@ -22,13 +22,17 @@ MODE_LATCH = 0xC4584B
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--restore", type=Path, required=True)
-    parser.add_argument("--playback", type=Path, required=True)
+    parser.add_argument("--playback", type=Path,
+                        help="relative events delivered after restore")
     parser.add_argument("--start-frame", type=int, required=True)
     parser.add_argument("--frames", type=int, default=160)
     parser.add_argument("--value", type=lambda text: int(text, 0),
                         help="diagnostic byte to write; omit for an unmodified control")
     parser.add_argument("--mode-latch", type=lambda text: int(text, 0),
                         help="diagnostic C4584B byte to write before the M command")
+    parser.add_argument("--write-memory", action="append", nargs=3,
+                        metavar=("ADDRESS", "VALUE", "SIZE"), default=[],
+                        help="additional debugger write (size 1, 2, or 4)")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     args = parser.parse_args()
@@ -37,7 +41,7 @@ def main() -> None:
             parser.error(f"{name} must fit one byte")
     if args.output.exists():
         raise FileExistsError(args.output)
-    events = read_events(args.playback)
+    events = read_events(args.playback) if args.playback else {}
     args.output.mkdir(parents=True)
     engine = Engine(args.config.resolve(), args.output / "saves")
     try:
@@ -47,7 +51,7 @@ def main() -> None:
             raise RuntimeError("Core rejected save state")
         before = engine.memory(REQUEST_FLAGS, 1)[0]
         writes = []
-        if args.value is not None or args.mode_latch is not None:
+        if args.value is not None or args.mode_latch is not None or args.write_memory:
             write = engine.bind("e9k_debug_write_memory", C.c_int, C.c_uint32,
                                 C.c_uint32, C.c_size_t)
             for address, value in ((REQUEST_FLAGS, args.value), (MODE_LATCH, args.mode_latch)):
@@ -56,6 +60,13 @@ def main() -> None:
                 if not write(address, value, 1):
                     raise RuntimeError(f"debug write failed at ${address:06X}")
                 writes.append({"address": f"${address:06X}", "value": value})
+            for address_text, value_text, size_text in args.write_memory:
+                address, value, size = int(address_text, 0), int(value_text, 0), int(size_text, 0)
+                if size not in (1, 2, 4):
+                    raise ValueError("--write-memory size must be 1, 2, or 4")
+                if not write(address, value, size):
+                    raise RuntimeError(f"debug write failed at ${address:06X}")
+                writes.append({"address": f"${address:06X}", "value": value, "size": size})
         after_write = engine.memory(REQUEST_FLAGS, 1)[0]
         engine.frame = args.start_frame
         engine.hardware_frame = args.start_frame
@@ -69,7 +80,7 @@ def main() -> None:
         report = {
             "scope": ("unmodified isolated M-map command control" if not writes else
                       "diagnostic command-state mutation before isolated M-map command"),
-            "restore": str(args.restore), "playback": str(args.playback),
+            "restore": str(args.restore), "playback": str(args.playback) if args.playback else None,
             "start_frame": args.start_frame, "frames": args.frames,
             "address": f"${REQUEST_FLAGS:06X}", "before": before,
             "written": args.value, "after_write": after_write,
