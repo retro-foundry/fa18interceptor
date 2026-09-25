@@ -67,6 +67,10 @@
 <line x1="0" y1="47" x2="638" y2="47" stroke="#555" stroke-width="1"/>
 <line x1="336" y1="92" x2="336" y2="96" stroke="#880000" stroke-width="2"/>
 <line x1="336" y1="99" x2="336" y2="95" stroke="#880000" stroke-width="2"/>
+<polygon points="356,130 364,132 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
+<polygon points="364,132 364,128 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
+<polygon points="364,128 358,128 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
+<polygon points="358,128 356,130 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
 <circle cx="336" cy="95.5" r="3.5" fill="#e53935" stroke="#fff" stroke-width=".8"/>
 <path d="M 339 93.5 L 377 80.5" stroke="#e53935" stroke-width="1.2"/>
 <rect x="378" y="73.5" width="82" height="13" fill="#000" fill-opacity=".78" stroke="#e53935" stroke-width=".5"/>
@@ -83,5 +87,9 @@
 <text x="253" y="148" fill="#fff" font-size="8">FLIGHT OBJECT ?</text>
 <line x1="336" y1="92" x2="336" y2="96" stroke="#880000" stroke-width="2"/>
 <line x1="336" y1="99" x2="336" y2="95" stroke="#880000" stroke-width="2"/>
+<polygon points="356,130 364,132 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
+<polygon points="364,132 364,128 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
+<polygon points="364,128 358,128 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
+<polygon points="358,128 356,130 362,130" fill="none" stroke="#f59e0b" stroke-width="1"/>
 </g>
 </svg>

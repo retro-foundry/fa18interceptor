@@ -16,3 +16,7 @@ The corrected Golden Gate position is independently checked against the exact
 The corrected map also renders the two corresponding `$C3559A/$C355D2` red
 bridge vectors at that anchor, rather than representing the bridge only with
 a callout marker.
+
+The Mountain ? callout likewise overlays the four direct run035 `$C3B6B0`
+projected triangles. This is trace-backed component geometry; `Mountain ?`
+remains a qualified visual reading rather than an original semantic label.
