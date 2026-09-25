@@ -38,6 +38,14 @@ text-compositor entry is reached once there, but its traced byte read is a
 negative/end control byte rather than a direct read of the visible crash text.
 Consequently this trace must not be cited as the crash-payload producer.
 
+The earlier frame-2,250 checkpoint is deliberately rejected as a glyph-draw
+oracle: its four-frame direct-core continuation does **not** RGB-pixel-match
+native frame 2,255 while the message is adding characters. Although its
+instruction trace reaches `$C32FCE` ten times, it cannot support a
+payload-to-pixel or timing claim. Native checkpointing is therefore an exact
+state boundary, not by itself proof that stepped/direct-core execution remains
+visually equivalent during active text presentation.
+
 ## Scope of the claim
 
 Run062 proves a deterministic failed-qualification outcome followed by a menu
