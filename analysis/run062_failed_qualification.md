@@ -10,8 +10,10 @@ input frame 2,470, and uses the same canonical boot state as run060:
 
 Two native restore probes reproduce that state exactly. Rendering with
 `scripts/render_run.py --run captures/run062 --output <new-directory> --every 5`
-produces 495 frames through 2,475. The terminal native frame is the top-level
-F/A-18 menu, not an active cockpit or a qualification-success message.
+produces 495 frames through 2,475. Frame 2,200 is the solid yellow crash
+display; frame 2,300 visibly reads `HEY ROOKIE. F/A-18'S DON'T GROW ON TREES,
+YA KNOW`; frame 2,400 is already the top-level F/A-18 menu. The terminal frame
+is therefore not an active cockpit or a qualification-success message.
 
 ## Checkpoint-to-menu oracle
 
@@ -29,6 +31,12 @@ The bounded 53,576-instruction trace is at
 `build/run062_frame2470_noinput_trace/trace.jsonl`. This validates its frame
 window as a result-to-menu analysis oracle; it does not prove that every
 instruction in the window belongs to the failure predicate.
+
+A separate native checkpoint at frame 2,300 has a four-frame no-input
+continuation that RGB-pixel-matches native frame 2,305. The shared `$C32FCE`
+text-compositor entry is reached once there, but its traced byte read is a
+negative/end control byte rather than a direct read of the visible crash text.
+Consequently this trace must not be cited as the crash-payload producer.
 
 ## Scope of the claim
 
