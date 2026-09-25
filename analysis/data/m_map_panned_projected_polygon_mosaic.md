@@ -10,6 +10,8 @@ This wider view joins the run042 40-polygon, run002 43-polygon, later run002
 bounded run004 22-polygon M-map passes. Every blue shape is a direct `$C4B390`
 projected polygon captured immediately before `$C2FF48`; the green base is the
 game’s observed land palette. In the normalized mosaic run042 starts at
+Each visible green rectangle is an observed 640×180 viewport; black space is
+uncaptured map area, not sea or land. In the normalized mosaic run042 starts at
 `(0,0)`, run002 is translated by `(16,131)`, later run002 by `(10,122)`,
 run037 by `(14,45)`, run035 by
 `(130,61)`, run038 by `(154,71)`, run041 by `(172,72)`, run001 by `(194,121)`,
@@ -47,6 +49,4 @@ The reusable `$C3B720/$C3B6B0` component is also excluded: one observed map
 occurrence does not prove it is a unique mountain or landmark.
 
 This is wider observed source coverage, **not** an absolute coordinate system,
-a complete world map, or a reconstructed global terrain model. Green space
-outside either captured map rectangle represents absent capture coverage, not
-asserted land.
+a complete world map, or a reconstructed global terrain model.

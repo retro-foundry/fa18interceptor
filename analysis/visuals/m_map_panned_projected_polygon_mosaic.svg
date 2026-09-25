@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="370" viewBox="0 0 1000 370" shape-rendering="crispEdges">
 <title>M-map source-vector panned mosaic</title>
-<desc>Two C4B390-before-C2FF48 polygon captures joined by the measured run035-to-run003 coastline translation.</desc>
-<rect width="1000" height="370" fill="#115511"/>
+<desc>Direct C4B390-before-C2FF48 polygon captures joined by measured coastline translations. Black is uncaptured space.</desc>
+<rect width="1000" height="370" fill="#000"/>
+<rect x="0" y="0" width="640" height="180" fill="#115511"><title>run042: observed map viewport</title></rect>
+<rect x="16" y="131" width="640" height="180" fill="#115511"><title>run002: observed map viewport</title></rect>
+<rect x="10" y="122" width="640" height="180" fill="#115511"><title>run002_late: observed map viewport</title></rect>
+<rect x="14" y="45" width="640" height="180" fill="#115511"><title>run037: observed map viewport</title></rect>
+<rect x="130" y="61" width="640" height="180" fill="#115511"><title>run035: observed map viewport</title></rect>
+<rect x="154" y="71" width="640" height="180" fill="#115511"><title>run038: observed map viewport</title></rect>
+<rect x="172" y="72" width="640" height="180" fill="#115511"><title>run041: observed map viewport</title></rect>
+<rect x="194" y="121" width="640" height="180" fill="#115511"><title>run001: observed map viewport</title></rect>
+<rect x="270" y="96" width="640" height="180" fill="#115511"><title>run024: observed map viewport</title></rect>
+<rect x="272" y="97" width="640" height="180" fill="#115511"><title>run003: observed map viewport</title></rect>
+<rect x="356" y="170" width="640" height="180" fill="#115511"><title>run004: observed map viewport</title></rect>
 <g fill="#003366" stroke="none">
 <polygon points="138,0 228,72 194,111 234,111 238,100 438,159 446,179 0,179 0,0"><title>run042: $C4BFE8, submission 0</title></polygon>
 <polygon points="512,159 564,179 512,179"><title>run042: $C4BFAC, submission 1</title></polygon>
@@ -476,7 +487,8 @@
 <polygon points="356,187 416,187 416,248 356,248"><title>run004: $C4BFAC, submission 21</title></polygon>
 <polygon points="356,246 416,246 416,306 356,306"><title>run004: $C4BFAC, submission 22</title></polygon>
 <polygon points="356,304 416,304 416,349 356,349"><title>run004: $C4BFAC, submission 23</title></polygon>
-</g><g shape-rendering="geometricPrecision" font-family="monospace">
+</g>
+<g shape-rendering="geometricPrecision" font-family="monospace">
 <line x1="466" y1="153" x2="466" y2="157" stroke="#880000" stroke-width="2"/>
 <line x1="466" y1="160" x2="466" y2="156" stroke="#880000" stroke-width="2"/>
 <circle cx="466" cy="156.5" r="4" fill="#e53935" stroke="#fff" stroke-width="1"/>
