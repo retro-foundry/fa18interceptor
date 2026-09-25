@@ -1,0 +1,7 @@
+{
+  "instructions": 636,
+  "pcode_ops": 3262,
+  "functions": 39,
+  "language": "68000:BE:32:default",
+  "caution": "Ghidra uses its 68040 superset language; observed lengths are cross-checked against Capstone 68000. No automatic unobserved disassembly."
+}
