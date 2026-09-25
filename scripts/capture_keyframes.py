@@ -1,4 +1,9 @@
-"""Save screenshots and lightweight state metadata at chosen replay frames."""
+"""Capture direct-core diagnostic probes, not deterministic replay images.
+
+The bridge bypasses Engine9000's host-frame scheduler.  Its PNGs are useful for
+CPU/state inspection only and must never be used as visual evidence for a
+sealed flight recording; use render_run.py for that.
+"""
 import argparse
 import json
 from pathlib import Path
@@ -17,10 +22,14 @@ def main():
                              metavar=('FIRST', 'LAST', 'STEP'),
                              help='inclusive replay range sampled at STEP frames')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--direct-core', action='store_true',
+                        help='acknowledge that this is a diagnostic direct-core capture')
     parser.add_argument('--resume', action='store_true',
                         help='reuse an incomplete output directory and capture only missing PNGs')
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
+    if not args.direct_core:
+        parser.error('direct-core output is not valid replay rendering; use scripts/render_run.py')
     if args.frame_range is not None:
         first, last, step = args.frame_range
         if step < 1 or last < first:

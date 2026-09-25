@@ -39,6 +39,44 @@ index 2c50665..485a2d5 100644
 +        runtime_executeFrame(DEBUGGER_RUNMODE_CAPTURE, 0);
 +        return;
 +    }
+@@ -324,2 +335,9 @@ runtime_runLoop(void)
+-                                input_record_applyFrame(debugger.frameCounter + 1);
+-                                runtime_executeFrame(DEBUGGER_RUNMODE_CAPTURE, 0);
++                                // A replay restore is queued against the host frame clock.
++                                // Do not bypass it while running accelerated smoke captures:
++                                // doing so advances a cold boot with recorded flight inputs.
++                                if (snapshot_replayRestoreIsPending()) {
++                                    runtime_executeNextFrame();
++                                } else {
++                                    input_record_applyFrame(debugger.frameCounter + 1);
++                                    runtime_executeFrame(DEBUGGER_RUNMODE_CAPTURE, 0);
++                                }
+diff --git a/e9k-debugger/smoke_test.c b/e9k-debugger/smoke_test.c
+index a771cc5..437f103 100644
+--- a/e9k-debugger/smoke_test.c
++++ b/e9k-debugger/smoke_test.c
+@@ -14,0 +15 @@
++#include <stdlib.h>
+@@ -29,0 +31 @@ static uint64_t smoke_test_frameBase = 0;
++static uint64_t smoke_test_frameStep = 1;
+@@ -325,0 +328,11 @@ smoke_test_init(void)
++    const char *stepText = getenv("E9K_FRAME_CAPTURE_STEP");
++    smoke_test_frameStep = 1;
++    if (stepText && *stepText) {
++        char *end = NULL;
++        unsigned long long step = strtoull(stepText, &end, 10);
++        if (!end || *end || step == 0) {
++            debug_error("smoke-test: E9K_FRAME_CAPTURE_STEP must be a positive integer");
++            return 0;
++        }
++        smoke_test_frameStep = (uint64_t)step;
++    }
+@@ -772,0 +786,5 @@ smoke_test_captureFrame(uint64_t frame)
++    if ((smoke_test_mode == SMOKE_TEST_MODE_RECORD ||
++         smoke_test_mode == SMOKE_TEST_MODE_REMAKE) &&
++        frame % smoke_test_frameStep != 0) {
++        return 0;
++    }
 diff --git a/e9k-debugger/snapshot.c b/e9k-debugger/snapshot.c
 index b641e64..c23db35 100644
 --- a/e9k-debugger/snapshot.c
