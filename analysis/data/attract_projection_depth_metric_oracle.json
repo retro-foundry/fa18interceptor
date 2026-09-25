@@ -1,0 +1,153 @@
+{
+  "classification": "same-replay producer-to-consumer projection-depth handoff; no physical-distance claim",
+  "authority": "build/attract_cockpit_1800_tenframe_trace/trace.jsonl",
+  "publisher": {
+    "index": 38158,
+    "frame": 4,
+    "pc": "$C1C636",
+    "d1_long_unsigned": 4294967171,
+    "d1_long_signed": -125,
+    "a2": "$C46184",
+    "input_field_offsets": [
+      "+$14",
+      "+$18",
+      "+$1C"
+    ]
+  },
+  "consumer": {
+    "index": 45022,
+    "frame": 5,
+    "pc": "$C2AAD2",
+    "d0_after_unsigned": 4294967171,
+    "d0_after_signed": -125
+  },
+  "depth_accesses": [
+    {
+      "index": 38158,
+      "frame": 4,
+      "pc": "$C1C636",
+      "asm": "move.l d1, $c45a78.l"
+    },
+    {
+      "index": 38629,
+      "frame": 4,
+      "pc": "$C1E898",
+      "asm": "move.l $c45a78.l, d1"
+    },
+    {
+      "index": 38667,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38704,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38741,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38790,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38827,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38874,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38911,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38948,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 38991,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39040,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39077,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39114,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39157,
+      "frame": 4,
+      "pc": "$C1E924",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39246,
+      "frame": 4,
+      "pc": "$C1EA26",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39327,
+      "frame": 4,
+      "pc": "$C1EA26",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39408,
+      "frame": 4,
+      "pc": "$C1EA26",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39489,
+      "frame": 4,
+      "pc": "$C1EA26",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 39570,
+      "frame": 4,
+      "pc": "$C1EA26",
+      "asm": "add.l $c45a78.l, d3"
+    },
+    {
+      "index": 45022,
+      "frame": 5,
+      "pc": "$C2AAD2",
+      "asm": "move.l $c45a78.l, d0"
+    }
+  ],
+  "intervening_depth_writes": []
+}

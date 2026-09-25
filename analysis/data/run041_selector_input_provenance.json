@@ -1,0 +1,1014 @@
+{
+  "classification": "same-invocation register/store provenance; no physical-coordinate claim",
+  "authority": "analysis/data/run041_descriptor_stage_invocations.json",
+  "traces": [
+    {
+      "trace": "build/run041_frame05000_12f_trace/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 5005,
+          "entry_index": 46129,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 46095,
+            "d0_word": 2,
+            "a0": "$C4E9C4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 46119,
+            "d1_word": 545,
+            "a0": "$C4E9CE",
+            "active_record": "$C4E9C2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2002",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              10624,
+              0,
+              5504
+            ],
+            "limit_field_plus_16": 545,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35BAA"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5005,
+          "entry_index": 46796,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 46762,
+            "d0_word": 2,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 46786,
+            "d1_word": 523,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2102",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              10624,
+              0,
+              4736
+            ],
+            "limit_field_plus_16": 523,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35BC2"
+          ],
+          "termination": "verified_return"
+        }
+      ]
+    },
+    {
+      "trace": "build/run041_frame05750_12f_reverse_stack_trace/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 5751,
+          "entry_index": 7195,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 7161,
+            "d0_word": 1,
+            "a0": "$C4E9C4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 7185,
+            "d1_word": 656,
+            "a0": "$C4E9CE",
+            "active_record": "$C4E9C2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2001",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              11008
+            ],
+            "limit_field_plus_16": 656,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35BAA"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5751,
+          "entry_index": 7877,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 7843,
+            "d0_word": 1,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 7867,
+            "d1_word": 611,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2101",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              9472
+            ],
+            "limit_field_plus_16": 611,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35B80"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5755,
+          "entry_index": 38910,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 38863,
+            "d0_word": 1,
+            "a0": "$C4F714"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 38899,
+            "d1_word": 656,
+            "a0": "$C4F71E",
+            "active_record": "$C4F712"
+          },
+          "snapshot_record": {
+            "selector_word": "$2001",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              11008
+            ],
+            "limit_field_plus_16": 656,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5755,
+          "entry_index": 39053,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 39006,
+            "d0_word": 1,
+            "a0": "$C4F72C"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 39042,
+            "d1_word": 610,
+            "a0": "$C4F736",
+            "active_record": "$C4F72A"
+          },
+          "snapshot_record": {
+            "selector_word": "$2101",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              9440
+            ],
+            "limit_field_plus_16": 610,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5761,
+          "entry_index": 100634,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 100600,
+            "d0_word": 1,
+            "a0": "$C4E9C4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 100624,
+            "d1_word": 656,
+            "a0": "$C4E9CE",
+            "active_record": "$C4E9C2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2001",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              11008
+            ],
+            "limit_field_plus_16": 656,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35BAA"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5761,
+          "entry_index": 101316,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 101282,
+            "d0_word": 1,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 101306,
+            "d1_word": 611,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2101",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              9472
+            ],
+            "limit_field_plus_16": 611,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35B80"
+          ],
+          "termination": "verified_return"
+        }
+      ]
+    },
+    {
+      "trace": "build/run041_frame06000_12f_reverse_stack_trace/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 6001,
+          "entry_index": 5401,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 5367,
+            "d0_word": 1,
+            "a0": "$C4E9C4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 5391,
+            "d1_word": 512,
+            "a0": "$C4E9CE",
+            "active_record": "$C4E9C2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2001",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              11008
+            ],
+            "limit_field_plus_16": 512,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35B56"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6001,
+          "entry_index": 7006,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 6963,
+            "d0_word": 1,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 6996,
+            "d1_word": 419,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2101",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              9472
+            ],
+            "limit_field_plus_16": 419,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35B80"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6005,
+          "entry_index": 34859,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 34812,
+            "d0_word": 1,
+            "a0": "$C4F6E4"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 34848,
+            "d1_word": 512,
+            "a0": "$C4F6EE",
+            "active_record": "$C4F6E2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2001",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              11008
+            ],
+            "limit_field_plus_16": 512,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6005,
+          "entry_index": 35008,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 34952,
+            "d0_word": 1,
+            "a0": "$C4F6FC"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 34997,
+            "d1_word": 418,
+            "a0": "$C4F706",
+            "active_record": "$C4F6FA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2101",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              9440
+            ],
+            "limit_field_plus_16": 418,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6008,
+          "entry_index": 73363,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 73329,
+            "d0_word": 1,
+            "a0": "$C4E9C4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 73353,
+            "d1_word": 512,
+            "a0": "$C4E9CE",
+            "active_record": "$C4E9C2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2001",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              11008
+            ],
+            "limit_field_plus_16": 512,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35B56"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6009,
+          "entry_index": 75583,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 75481,
+            "d0_word": 1,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 75573,
+            "d1_word": 398,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2101",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              9472
+            ],
+            "limit_field_plus_16": 419,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": false,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": {
+            "fixed_point_call_pc": "$C1CC2E",
+            "fixed_point_call_trace_index": 75510,
+            "record_write_pc": "$C1CC34",
+            "record_write_trace_index": 75567,
+            "record_write_d1_word": 398
+          },
+          "selected_transform_sources": [
+            "$C35B80"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6012,
+          "entry_index": 103487,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 103440,
+            "d0_word": 1,
+            "a0": "$C4F6E4"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 103476,
+            "d1_word": 512,
+            "a0": "$C4F6EE",
+            "active_record": "$C4F6E2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2001",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              11008
+            ],
+            "limit_field_plus_16": 512,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6012,
+          "entry_index": 103695,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 103580,
+            "d0_word": 1,
+            "a0": "$C4F6FC"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 103684,
+            "d1_word": 397,
+            "a0": "$C4F706",
+            "active_record": "$C4F6FA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2101",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              13056,
+              0,
+              9440
+            ],
+            "limit_field_plus_16": 418,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": false,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": {
+            "fixed_point_call_pc": "$C1CF2C",
+            "fixed_point_call_trace_index": 103617,
+            "record_write_pc": "$C1CF32",
+            "record_write_trace_index": 103674,
+            "record_write_d1_word": 397
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        }
+      ]
+    },
+    {
+      "trace": "build/run041_frame06250_12f_trace_retry/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 6253,
+          "entry_index": 26145,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 26044,
+            "d0_word": 0,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 26135,
+            "d1_word": 524,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2000",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              5632
+            ],
+            "limit_field_plus_16": 566,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": false,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": {
+            "fixed_point_call_pc": "$C1CC2E",
+            "fixed_point_call_trace_index": 26072,
+            "record_write_pc": "$C1CC34",
+            "record_write_trace_index": 26129,
+            "record_write_d1_word": 524
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6253,
+          "entry_index": 26278,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 26235,
+            "d0_word": 0,
+            "a0": "$C4E9F4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 26268,
+            "d1_word": 457,
+            "a0": "$C4E9FE",
+            "active_record": "$C4E9F2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2100",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              2560
+            ],
+            "limit_field_plus_16": 457,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6255,
+          "entry_index": 37687,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 37573,
+            "d0_word": 0,
+            "a0": "$C4F6E4"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 37676,
+            "d1_word": 524,
+            "a0": "$C4F6EE",
+            "active_record": "$C4F6E2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2000",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              5632
+            ],
+            "limit_field_plus_16": 566,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": false,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": {
+            "fixed_point_call_pc": "$C1CF2C",
+            "fixed_point_call_trace_index": 37609,
+            "record_write_pc": "$C1CF32",
+            "record_write_trace_index": 37666,
+            "record_write_d1_word": 524
+          },
+          "selected_transform_sources": [
+            "$C35ADE"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6255,
+          "entry_index": 40295,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 40239,
+            "d0_word": 0,
+            "a0": "$C4F6FC"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 40284,
+            "d1_word": 455,
+            "a0": "$C4F706",
+            "active_record": "$C4F6FA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2100",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              2496
+            ],
+            "limit_field_plus_16": 455,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35A98"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6261,
+          "entry_index": 98112,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 98069,
+            "d0_word": 0,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 98102,
+            "d1_word": 524,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2000",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              5632
+            ],
+            "limit_field_plus_16": 566,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": false,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6261,
+          "entry_index": 98245,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 98202,
+            "d0_word": 0,
+            "a0": "$C4E9F4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 98235,
+            "d1_word": 457,
+            "a0": "$C4E9FE",
+            "active_record": "$C4E9F2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2100",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              2560
+            ],
+            "limit_field_plus_16": 457,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6262,
+          "entry_index": 108634,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 108578,
+            "d0_word": 0,
+            "a0": "$C4F6E4"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 108623,
+            "d1_word": 524,
+            "a0": "$C4F6EE",
+            "active_record": "$C4F6E2"
+          },
+          "snapshot_record": {
+            "selector_word": "$2000",
+            "descriptor": "$C22408",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              5632
+            ],
+            "limit_field_plus_16": 566,
+            "descriptor_control_field_plus_8": "$C35568",
+            "matches_observed_call": {
+              "limit_field_plus_16": false,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35ADE"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6262,
+          "entry_index": 111255,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 111199,
+            "d0_word": 0,
+            "a0": "$C4F6FC"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 111244,
+            "d1_word": 455,
+            "a0": "$C4F706",
+            "active_record": "$C4F6FA"
+          },
+          "snapshot_record": {
+            "selector_word": "$2100",
+            "descriptor": "$C2241C",
+            "coordinate_words_signed": [
+              9728,
+              0,
+              2496
+            ],
+            "limit_field_plus_16": 455,
+            "descriptor_control_field_plus_8": "$C355A0",
+            "matches_observed_call": {
+              "limit_field_plus_16": true,
+              "selector_low_nibble": true,
+              "descriptor_control_field_plus_8": true
+            }
+          },
+          "same_record_limit_update": null,
+          "selected_transform_sources": [
+            "$C35A98"
+          ],
+          "termination": "trace_end"
+        }
+      ]
+    }
+  ]
+}

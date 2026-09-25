@@ -1,0 +1,239 @@
+{
+  "classification": "same-invocation register/store provenance; no physical-coordinate claim",
+  "authority": "analysis/data/run041_5736_5760_descriptor_stage_invocations.json",
+  "traces": [
+    {
+      "trace": "build/run041_frame05736_builder_to_selector_trace/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 5737,
+          "entry_index": 5382,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 5335,
+            "d0_word": 1,
+            "a0": "$C4F714"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 5371,
+            "d1_word": 656,
+            "a0": "$C4F71E",
+            "active_record": "$C4F712"
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5737,
+          "entry_index": 5525,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 5478,
+            "d0_word": 1,
+            "a0": "$C4F72C"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 5514,
+            "d1_word": 610,
+            "a0": "$C4F736",
+            "active_record": "$C4F72A"
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5743,
+          "entry_index": 65820,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 65786,
+            "d0_word": 1,
+            "a0": "$C4E9C4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 65810,
+            "d1_word": 656,
+            "a0": "$C4E9CE",
+            "active_record": "$C4E9C2"
+          },
+          "selected_transform_sources": [
+            "$C35BAA"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5743,
+          "entry_index": 66502,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 66468,
+            "d0_word": 1,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 66492,
+            "d1_word": 611,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "selected_transform_sources": [
+            "$C35B80"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5746,
+          "entry_index": 94239,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 94192,
+            "d0_word": 1,
+            "a0": "$C4F714"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 94228,
+            "d1_word": 656,
+            "a0": "$C4F71E",
+            "active_record": "$C4F712"
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5746,
+          "entry_index": 94382,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 94335,
+            "d0_word": 1,
+            "a0": "$C4F72C"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 94371,
+            "d1_word": 610,
+            "a0": "$C4F736",
+            "active_record": "$C4F72A"
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5752,
+          "entry_index": 156897,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 156863,
+            "d0_word": 1,
+            "a0": "$C4E9C4"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 156887,
+            "d1_word": 656,
+            "a0": "$C4E9CE",
+            "active_record": "$C4E9C2"
+          },
+          "selected_transform_sources": [
+            "$C35BAA"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5752,
+          "entry_index": 157579,
+          "call_site": "$C1CC86",
+          "route": "primary placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CBA8",
+            "trace_index": 157545,
+            "d0_word": 1,
+            "a0": "$C4E9DC"
+          },
+          "limit_store": {
+            "pc": "$C1CC60",
+            "trace_index": 157569,
+            "d1_word": 611,
+            "a0": "$C4E9E6",
+            "active_record": "$C4E9DA"
+          },
+          "selected_transform_sources": [
+            "$C35B80"
+          ],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5756,
+          "entry_index": 188577,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C35568",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 188530,
+            "d0_word": 1,
+            "a0": "$C4F714"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 188566,
+            "d1_word": 656,
+            "a0": "$C4F71E",
+            "active_record": "$C4F712"
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5756,
+          "entry_index": 188720,
+          "call_site": "$C1CFA6",
+          "route": "alternate placement-record loop",
+          "control_pointer": "$C355A0",
+          "shift_store": {
+            "pc": "$C1CE66",
+            "trace_index": 188673,
+            "d0_word": 1,
+            "a0": "$C4F72C"
+          },
+          "limit_store": {
+            "pc": "$C1CF6A",
+            "trace_index": 188709,
+            "d1_word": 610,
+            "a0": "$C4F736",
+            "active_record": "$C4F72A"
+          },
+          "selected_transform_sources": [],
+          "termination": "verified_return"
+        }
+      ]
+    }
+  ]
+}

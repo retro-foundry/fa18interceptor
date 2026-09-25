@@ -116,7 +116,7 @@
       "runtime_bank": "slow",
       "observed_executed_bytes": 0,
       "reconstructed_data_references": 0,
-      "reconstructed_flow_references": 14,
+      "reconstructed_flow_references": 17,
       "classification": "code_hunk_branch_target",
       "reason": "Reconstructed branch/call target"
     },
@@ -131,7 +131,7 @@
       "runtime_bank": "slow",
       "observed_executed_bytes": 2012,
       "reconstructed_data_references": 2,
-      "reconstructed_flow_references": 9,
+      "reconstructed_flow_references": 22,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -145,8 +145,8 @@
       "runtime_end_exclusive": "$C1ED2C",
       "runtime_bank": "slow",
       "observed_executed_bytes": 1516,
-      "reconstructed_data_references": 0,
-      "reconstructed_flow_references": 0,
+      "reconstructed_data_references": 1,
+      "reconstructed_flow_references": 2,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -160,7 +160,7 @@
       "runtime_end_exclusive": "$C1FCE0",
       "runtime_bank": "slow",
       "observed_executed_bytes": 2792,
-      "reconstructed_data_references": 2,
+      "reconstructed_data_references": 4,
       "reconstructed_flow_references": 21,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
@@ -191,7 +191,7 @@
       "runtime_bank": "slow",
       "observed_executed_bytes": 162,
       "reconstructed_data_references": 0,
-      "reconstructed_flow_references": 0,
+      "reconstructed_flow_references": 2,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -250,7 +250,7 @@
       "runtime_end_exclusive": "$C22C74",
       "runtime_bank": "slow",
       "observed_executed_bytes": 36,
-      "reconstructed_data_references": 2,
+      "reconstructed_data_references": 3,
       "reconstructed_flow_references": 0,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
@@ -401,7 +401,7 @@
       "runtime_bank": "slow",
       "observed_executed_bytes": 274,
       "reconstructed_data_references": 0,
-      "reconstructed_flow_references": 0,
+      "reconstructed_flow_references": 1,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -430,7 +430,7 @@
       "runtime_end_exclusive": "$C2B3B4",
       "runtime_bank": "slow",
       "observed_executed_bytes": 942,
-      "reconstructed_data_references": 0,
+      "reconstructed_data_references": 1,
       "reconstructed_flow_references": 1,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
@@ -445,8 +445,8 @@
       "runtime_end_exclusive": "$C2BAF0",
       "runtime_bank": "slow",
       "observed_executed_bytes": 22,
-      "reconstructed_data_references": 0,
-      "reconstructed_flow_references": 2,
+      "reconstructed_data_references": 1,
+      "reconstructed_flow_references": 3,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -535,8 +535,8 @@
       "runtime_end_exclusive": "$C2F484",
       "runtime_bank": "slow",
       "observed_executed_bytes": 442,
-      "reconstructed_data_references": 0,
-      "reconstructed_flow_references": 11,
+      "reconstructed_data_references": 2,
+      "reconstructed_flow_references": 76,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -551,7 +551,7 @@
       "runtime_bank": "slow",
       "observed_executed_bytes": 3252,
       "reconstructed_data_references": 2,
-      "reconstructed_flow_references": 92,
+      "reconstructed_flow_references": 119,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -610,8 +610,8 @@
       "runtime_end_exclusive": "$C34A44",
       "runtime_bank": "slow",
       "observed_executed_bytes": 1256,
-      "reconstructed_data_references": 3,
-      "reconstructed_flow_references": 59,
+      "reconstructed_data_references": 13,
+      "reconstructed_flow_references": 100,
       "classification": "code_hunk_executed",
       "reason": "Observed instruction bytes in a P-code export"
     },
@@ -955,10 +955,10 @@
       "runtime_end_exclusive": "$C42288",
       "runtime_bank": "slow",
       "observed_executed_bytes": 0,
-      "reconstructed_data_references": 0,
+      "reconstructed_data_references": 1,
       "reconstructed_flow_references": 0,
-      "classification": "code_hunk_unclassified",
-      "reason": "No positive execution, flow, or data-reference evidence"
+      "classification": "data_in_code_hunk",
+      "reason": "Positive reconstructed data operands and no flow reference"
     },
     {
       "segment": 66,
@@ -970,10 +970,10 @@
       "runtime_end_exclusive": "$C429C8",
       "runtime_bank": "slow",
       "observed_executed_bytes": 0,
-      "reconstructed_data_references": 0,
+      "reconstructed_data_references": 6,
       "reconstructed_flow_references": 0,
-      "classification": "code_hunk_unclassified",
-      "reason": "No positive execution, flow, or data-reference evidence"
+      "classification": "data_in_code_hunk",
+      "reason": "Positive reconstructed data operands and no flow reference"
     },
     {
       "segment": 67,
@@ -1045,7 +1045,7 @@
       "runtime_end_exclusive": "$C48384",
       "runtime_bank": "slow",
       "observed_executed_bytes": 0,
-      "reconstructed_data_references": 1523,
+      "reconstructed_data_references": 1876,
       "reconstructed_flow_references": 0,
       "classification": "data_in_code_hunk",
       "reason": "Positive reconstructed data operands and no flow reference"
@@ -1060,7 +1060,7 @@
       "runtime_end_exclusive": "$C4E76C",
       "runtime_bank": "slow",
       "observed_executed_bytes": 0,
-      "reconstructed_data_references": 72,
+      "reconstructed_data_references": 74,
       "reconstructed_flow_references": 0,
       "classification": "data_in_code_hunk",
       "reason": "Positive reconstructed data operands and no flow reference"
@@ -1075,7 +1075,7 @@
       "runtime_end_exclusive": "$C4FE20",
       "runtime_bank": "slow",
       "observed_executed_bytes": 0,
-      "reconstructed_data_references": 44,
+      "reconstructed_data_references": 52,
       "reconstructed_flow_references": 0,
       "classification": "data_in_code_hunk",
       "reason": "Positive reconstructed data operands and no flow reference"

@@ -1,0 +1,44 @@
+{
+  "authority": "build/run041_c35a98_source_interval/trace.jsonl",
+  "classification": "two trace-backed call/return fixtures; no pixel or physical-coordinate claim",
+  "accepted": {
+    "caller": "$C33D34",
+    "entry": "$C2EC90",
+    "return_to": "$C33D3A",
+    "trace_rows": [
+      22753,
+      22800
+    ],
+    "signed_input_d0_d1_d2": [
+      -19,
+      1452,
+      7990
+    ],
+    "unreflected_xy": [
+      160,
+      106
+    ],
+    "projected_pair_C45958": [
+      159,
+      74
+    ],
+    "return_d7": -1
+  },
+  "rejected": {
+    "caller": "$C0DB3A",
+    "entry": "$C2EC9C",
+    "return_to": "$C0DB40",
+    "trace_rows": [
+      53092,
+      53098
+    ],
+    "signed_input_d0_d1_d2": [
+      2120,
+      14176,
+      -5536
+    ],
+    "first_bound_comparison": "signed D0 >= signed D2",
+    "return_d0": 0,
+    "longword_C45958": "FFFFFFFF"
+  }
+}

@@ -2,12 +2,16 @@
 
 Coverage is reported against three denominators because no single one is honest:
 
-1. Observed-executed bytes  - code any capture has actually run. This is what the
-   project's evidence rules allow a behavioural claim about.
+1. Trace-observed bytes - the union of instructions present in the available
+   P-code exports. This is what the project's evidence rules allow a
+   behavioural claim about. It is a capture-set metric, not a claim about how
+   much of the game's real logic has been exercised.
 2. CODE bytes minus confirmed data - plausible instruction bytes in the loaded
    executable.
 3. All CODE hunk bytes - the raw AmigaDOS Hunk total, which includes large
-   initialised-data regions the linker emitted as CODE.
+   initialised-data regions the linker emitted as CODE. Ghidra's CODE
+   classification is intentionally retained as a conservative upper bound;
+   neither denominator proves that its remainder is executable game logic.
 
 A segment is only called data on positive evidence: it has never executed in any
 P-code export AND every reconstructed reference to it is a data operand, never a
@@ -30,6 +34,17 @@ EQUATE = re.compile(r'^\s*(?P<name>[A-Za-z_][\w.]*)\s+equ\s+\$(?P<value>[0-9a-fA
                     re.MULTILINE | re.IGNORECASE)
 EQUATE_LINE = re.compile(r'^\s*\S+\s+equ\b', re.IGNORECASE)
 FLOW_MNEMONIC = re.compile(r'^\s*(jsr|jmp|bsr|bra|b[a-z]{2})\b', re.IGNORECASE)
+
+# A separate working estimate, not a strict data classification. Each hunk is
+# byte-stable after relocation across five snapshots, has observed scene-control
+# consumers, and has no observed instruction starts. A complete reference audit
+# is still required before these bytes leave the strict denominator.
+CANDIDATE_DATA_SEGMENTS = {
+    41: "analysis/model_geometry_boundaries.md",
+    42: "analysis/model_geometry_boundaries.md",
+    43: "analysis/model_geometry_boundaries.md",
+    44: "analysis/model_geometry_boundaries.md",
+}
 
 
 def observed_bytes(pcode_root=None):
@@ -115,6 +130,8 @@ def classify_segments(segments, executed, data_refs, flow_refs):
             row['verdict'] = 'data'
         else:
             row['verdict'] = 'unclassified'
+        if row['verdict'] == 'unclassified' and row['segment'] in CANDIDATE_DATA_SEGMENTS:
+            row['candidate_data_evidence'] = CANDIDATE_DATA_SEGMENTS[row['segment']]
         rows.append(row)
     return rows
 

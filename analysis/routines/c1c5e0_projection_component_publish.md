@@ -19,6 +19,15 @@ component.  This disproves interpreting it as a stored terrain-elevation
 field, but does not establish a global game axis or prove that this component
 is physical aircraft-to-terrain distance.
 
+The bounded attract-mode oracle now proves one unmodified handoff: `$C1C636`
+stores `D1=-125` at trace frame 4, then `$C2AAD2` consumes `D0=-125` in frame
+5, after 19 intervening reads and no intervening `$C45A78` write. See
+[`attract_projection_depth_metric_oracle.md`](../data/attract_projection_depth_metric_oracle.md).
+The publisher's `A2` is `$C46184` in that invocation, and its direct arm reads
+the mutable control-record-bank fields `+$14/+$18/+$1C`; this excludes treating
+the publisher input as a direct immutable terrain-template triple, but does
+not identify the selected record's physical role.
+
 Authority: byte-exact reconstruction in
 [`publish_projection_depth_component.asm`](../../source_amiga/observed/publish_projection_depth_component.asm),
 plus live run035 M-map state samples where `$C1C636` updates `$C45A78` before

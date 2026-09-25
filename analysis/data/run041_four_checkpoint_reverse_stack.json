@@ -1,0 +1,5169 @@
+{
+  "classification": "observed calls only; branches share their enclosing frame",
+  "anchors": [
+    "$C1CC70",
+    "$C1EF10",
+    "$C1F4AC",
+    "$C1F6F8",
+    "$C2FF48",
+    "$C2FA7E"
+  ],
+  "focus_targets": [
+    "$C1EE14",
+    "$C1ED3C",
+    "$C1ED4C"
+  ],
+  "traces": [
+    {
+      "trace": "build/run041_frame05000_12f_trace/trace.jsonl",
+      "instruction_rows": 124447,
+      "stack_filter": "Slow-RAM calls in the anchor A7 64-KiB region; excludes separate interrupt stack",
+      "checks": {
+        "returns_without_in_window_call": 39,
+        "verified_call_pushes": 2113,
+        "frames_unwound_above_return": 20,
+        "verified_returns": 2088,
+        "anchor_hits": 154
+      },
+      "focus_calls": [
+        {
+          "site": "$C1CFA6",
+          "target": "$C1ED4C",
+          "entry_index": 2670,
+          "entry_frame": 5001,
+          "return_index": 3179,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F6F8": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 46129,
+          "entry_frame": 5005,
+          "return_index": 46740,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 46796,
+          "entry_frame": 5005,
+          "return_index": 47407,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1ED3C",
+          "entry_index": 59121,
+          "entry_frame": 5006,
+          "return_index": 59125,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 67088,
+          "entry_frame": 5007,
+          "return_index": 68384,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 68520,
+          "entry_frame": 5007,
+          "return_index": 68563,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1ED4C",
+          "entry_index": 93292,
+          "entry_frame": 5010,
+          "return_index": 93801,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F6F8": 1
+          }
+        }
+      ],
+      "anchors": {
+        "$C1CC70": {
+          "hits": 20,
+          "distinct_call_chains": 2,
+          "chains": [
+            {
+              "hits": 14,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                }
+              ],
+              "example": {
+                "trace_index": 46045,
+                "frame": 5005,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 6,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                }
+              ],
+              "example": {
+                "trace_index": 67082,
+                "frame": 5007,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1EF10": {
+          "hits": 21,
+          "distinct_call_chains": 8,
+          "chains": [
+            {
+              "hits": 9,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 85087,
+                "frame": 5009,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 63434,
+                "frame": 5007,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 962,
+                "frame": 5001,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 46218,
+                "frame": 5005,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 2728,
+                "frame": 5001,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 67127,
+                "frame": 5007,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 68812,
+                "frame": 5007,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 93350,
+                "frame": 5010,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F4AC": {
+          "hits": 18,
+          "distinct_call_chains": 5,
+          "chains": [
+            {
+              "hits": 9,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 85156,
+                "frame": 5009,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 63500,
+                "frame": 5007,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 1031,
+                "frame": 5001,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 46284,
+                "frame": 5005,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 67193,
+                "frame": 5007,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F6F8": {
+          "hits": 20,
+          "distinct_call_chains": 8,
+          "chains": [
+            {
+              "hits": 9,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 85252,
+                "frame": 5009,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 63675,
+                "frame": 5007,
+                "predecessor_pc": "$C1F58E",
+                "predecessor_asm": "blt.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 1127,
+                "frame": 5001,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 46383,
+                "frame": 5005,
+                "predecessor_pc": "$C1F58E",
+                "predecessor_asm": "blt.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 3165,
+                "frame": 5001,
+                "predecessor_pc": "$C1F2EA",
+                "predecessor_asm": "bra.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 67388,
+                "frame": 5007,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 69032,
+                "frame": 5007,
+                "predecessor_pc": "$C1F45A",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 93787,
+                "frame": 5010,
+                "predecessor_pc": "$C1F2EA",
+                "predecessor_asm": "bra.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C2FA7E": {
+          "hits": 57,
+          "distinct_call_chains": 21,
+          "chains": [
+            {
+              "hits": 7,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C20D68"
+                },
+                {
+                  "site": "$C20E1C",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 69206,
+                "frame": 5007,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8A"
+              }
+            },
+            {
+              "hits": 7,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C1FF9C"
+                },
+                {
+                  "site": "$C1FFF6",
+                  "target": "$C2ED70"
+                },
+                {
+                  "site": "$C2EE36",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 85381,
+                "frame": 5009,
+                "predecessor_pc": "$C2EE36",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F96"
+              }
+            },
+            {
+              "hits": 6,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 63827,
+                "frame": 5007,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C342B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 6602,
+                "frame": 5001,
+                "predecessor_pc": "$C342B6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 49355,
+                "frame": 5005,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F88"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C342B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 96419,
+                "frame": 5010,
+                "predecessor_pc": "$C342B6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C2129C"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 75779,
+                "frame": 5008,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 46537,
+                "frame": 5005,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C099F6"
+                },
+                {
+                  "site": "$C09A5A",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 48265,
+                "frame": 5005,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F88"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 62180,
+                "frame": 5007,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 76830,
+                "frame": 5008,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C1FF9C"
+                },
+                {
+                  "site": "$C1FFF6",
+                  "target": "$C2ED70"
+                },
+                {
+                  "site": "$C2EE36",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 1256,
+                "frame": 5001,
+                "predecessor_pc": "$C2EE36",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F96"
+              }
+            }
+          ],
+          "omitted_chains": 9
+        },
+        "$C2FF48": {
+          "hits": 18,
+          "distinct_call_chains": 5,
+          "chains": [
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 35013,
+                "frame": 5004,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54FDE"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C099F6"
+                },
+                {
+                  "site": "$C09A5A",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 48212,
+                "frame": 5005,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 49289,
+                "frame": 5005,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C20E4E"
+                },
+                {
+                  "site": "$C20EB0",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 74114,
+                "frame": 5008,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C203D0"
+                },
+                {
+                  "site": "$C20492",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 90340,
+                "frame": 5009,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        }
+      }
+    },
+    {
+      "trace": "build/run041_frame05750_12f_reverse_stack_trace/trace.jsonl",
+      "instruction_rows": 113258,
+      "stack_filter": "Slow-RAM calls in the anchor A7 64-KiB region; excludes separate interrupt stack",
+      "checks": {
+        "verified_call_pushes": 2261,
+        "frames_unwound_above_return": 21,
+        "verified_returns": 2233,
+        "returns_without_in_window_call": 36,
+        "anchor_hits": 132
+      },
+      "focus_calls": [
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 7195,
+          "entry_frame": 5751,
+          "return_index": 7821,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 7877,
+          "entry_frame": 5751,
+          "return_index": 9958,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 4
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1ED3C",
+          "entry_index": 16202,
+          "entry_frame": 5752,
+          "return_index": 16206,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 16275,
+          "entry_frame": 5752,
+          "return_index": 16300,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 30177,
+          "entry_frame": 5754,
+          "return_index": 31394,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FF48": 1,
+            "$C2FA7E": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 31457,
+          "entry_frame": 5754,
+          "return_index": 31489,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 38795,
+          "entry_frame": 5755,
+          "return_index": 38847,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 38910,
+          "entry_frame": 5755,
+          "return_index": 38990,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 39053,
+          "entry_frame": 5755,
+          "return_index": 39130,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1ED4C",
+          "entry_index": 61396,
+          "entry_frame": 5757,
+          "return_index": 61905,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F6F8": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 100634,
+          "entry_frame": 5761,
+          "return_index": 101260,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 101316,
+          "entry_frame": 5761,
+          "return_index": 102841,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 4
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1ED3C",
+          "entry_index": 108588,
+          "entry_frame": 5762,
+          "return_index": 108592,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        }
+      ],
+      "anchors": {
+        "$C1CC70": {
+          "hits": 27,
+          "distinct_call_chains": 3,
+          "chains": [
+            {
+              "hits": 16,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                }
+              ],
+              "example": {
+                "trace_index": 5748,
+                "frame": 5751,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 8,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                }
+              ],
+              "example": {
+                "trace_index": 99191,
+                "frame": 5761,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                }
+              ],
+              "example": {
+                "trace_index": 30171,
+                "frame": 5754,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1EF10": {
+          "hits": 13,
+          "distinct_call_chains": 6,
+          "chains": [
+            {
+              "hits": 6,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 38566,
+                "frame": 5755,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 7284,
+                "frame": 5751,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 100723,
+                "frame": 5761,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 30238,
+                "frame": 5754,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 31731,
+                "frame": 5754,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 61454,
+                "frame": 5757,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F4AC": {
+          "hits": 11,
+          "distinct_call_chains": 4,
+          "chains": [
+            {
+              "hits": 6,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 38635,
+                "frame": 5755,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 7350,
+                "frame": 5751,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 100789,
+                "frame": 5761,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 30304,
+                "frame": 5754,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F6F8": {
+          "hits": 12,
+          "distinct_call_chains": 6,
+          "chains": [
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 39623,
+                "frame": 5755,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 7449,
+                "frame": 5751,
+                "predecessor_pc": "$C1F58E",
+                "predecessor_asm": "blt.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 100888,
+                "frame": 5761,
+                "predecessor_pc": "$C1F58E",
+                "predecessor_asm": "blt.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 30514,
+                "frame": 5754,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 31948,
+                "frame": 5754,
+                "predecessor_pc": "$C1F45A",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 61891,
+                "frame": 5757,
+                "predecessor_pc": "$C1F2EA",
+                "predecessor_asm": "bra.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C2FA7E": {
+          "hits": 32,
+          "distinct_call_chains": 15,
+          "chains": [
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 7603,
+                "frame": 5751,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 42002,
+                "frame": 5755,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F80"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C342B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 64379,
+                "frame": 5758,
+                "predecessor_pc": "$C342B6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 101042,
+                "frame": 5761,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 28819,
+                "frame": 5754,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C099AA"
+                },
+                {
+                  "site": "$C099E8",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 6972,
+                "frame": 5751,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F88"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096BC"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C099AA"
+                },
+                {
+                  "site": "$C099E8",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 17424,
+                "frame": 5752,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F88"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 23248,
+                "frame": 5753,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F88"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 31158,
+                "frame": 5754,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F80"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C1FFB4"
+                },
+                {
+                  "site": "$C1FFF6",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 55840,
+                "frame": 5757,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341AC",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 63889,
+                "frame": 5758,
+                "predecessor_pc": "$C341AC",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341E6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 64049,
+                "frame": 5758,
+                "predecessor_pc": "$C341E6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            }
+          ],
+          "omitted_chains": 3
+        },
+        "$C2FF48": {
+          "hits": 37,
+          "distinct_call_chains": 12,
+          "chains": [
+            {
+              "hits": 15,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 40902,
+                "frame": 5755,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            },
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C099F6"
+                },
+                {
+                  "site": "$C09A5A",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 10763,
+                "frame": 5752,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 12084,
+                "frame": 5752,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C099F6"
+                },
+                {
+                  "site": "$C09A5A",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 104194,
+                "frame": 5762,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 2207,
+                "frame": 5751,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54FDE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 95646,
+                "frame": 5761,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54FDE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 105447,
+                "frame": 5762,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C099AA"
+                },
+                {
+                  "site": "$C099E8",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 6930,
+                "frame": 5751,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096BC"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C099AA"
+                },
+                {
+                  "site": "$C099E8",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 17370,
+                "frame": 5752,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 31104,
+                "frame": 5754,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C099AA"
+                },
+                {
+                  "site": "$C099E8",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 100369,
+                "frame": 5761,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096BC"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C099AA"
+                },
+                {
+                  "site": "$C099E8",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 109861,
+                "frame": 5762,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        }
+      }
+    },
+    {
+      "trace": "build/run041_frame06000_12f_reverse_stack_trace/trace.jsonl",
+      "instruction_rows": 112009,
+      "stack_filter": "Slow-RAM calls in the anchor A7 64-KiB region; excludes separate interrupt stack",
+      "checks": {
+        "returns_without_in_window_call": 38,
+        "verified_call_pushes": 1662,
+        "frames_unwound_above_return": 22,
+        "verified_returns": 1635,
+        "anchor_hits": 122
+      },
+      "focus_calls": [
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 5401,
+          "entry_frame": 6001,
+          "return_index": 6941,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 4
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 7006,
+          "entry_frame": 6001,
+          "return_index": 9147,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 4
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1ED3C",
+          "entry_index": 14320,
+          "entry_frame": 6002,
+          "return_index": 14324,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 26930,
+          "entry_frame": 6004,
+          "return_index": 28365,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FF48": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 28428,
+          "entry_frame": 6004,
+          "return_index": 28471,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 34744,
+          "entry_frame": 6005,
+          "return_index": 34796,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 34859,
+          "entry_frame": 6005,
+          "return_index": 34936,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 35008,
+          "entry_frame": 6005,
+          "return_index": 35085,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1ED4C",
+          "entry_index": 36305,
+          "entry_frame": 6005,
+          "return_index": 36814,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F6F8": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 73363,
+          "entry_frame": 6008,
+          "return_index": 75459,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 4
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 75583,
+          "entry_frame": 6009,
+          "return_index": 77198,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 4
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1ED3C",
+          "entry_index": 83101,
+          "entry_frame": 6009,
+          "return_index": 83105,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 83174,
+          "entry_frame": 6009,
+          "return_index": 83199,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 95635,
+          "entry_frame": 6011,
+          "return_index": 96897,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FF48": 1,
+            "$C2FA7E": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 96960,
+          "entry_frame": 6011,
+          "return_index": 97003,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 103372,
+          "entry_frame": 6012,
+          "return_index": 103424,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 103487,
+          "entry_frame": 6012,
+          "return_index": 103564,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 103695,
+          "entry_frame": 6012,
+          "return_index": 103772,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1ED4C",
+          "entry_index": 105053,
+          "entry_frame": 6012,
+          "return_index": 105562,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F6F8": 1
+          }
+        }
+      ],
+      "anchors": {
+        "$C1CC70": {
+          "hits": 31,
+          "distinct_call_chains": 4,
+          "chains": [
+            {
+              "hits": 13,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                }
+              ],
+              "example": {
+                "trace_index": 72295,
+                "frame": 6008,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 12,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                }
+              ],
+              "example": {
+                "trace_index": 5395,
+                "frame": 6001,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                }
+              ],
+              "example": {
+                "trace_index": 26924,
+                "frame": 6004,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                }
+              ],
+              "example": {
+                "trace_index": 95629,
+                "frame": 6011,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1EF10": {
+          "hits": 16,
+          "distinct_call_chains": 10,
+          "chains": [
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 14539,
+                "frame": 6002,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 5487,
+                "frame": 6001,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 35408,
+                "frame": 6005,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 73449,
+                "frame": 6008,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 104042,
+                "frame": 6012,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 26991,
+                "frame": 6004,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 36363,
+                "frame": 6005,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 95696,
+                "frame": 6011,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 97262,
+                "frame": 6011,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 105111,
+                "frame": 6012,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F4AC": {
+          "hits": 13,
+          "distinct_call_chains": 7,
+          "chains": [
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 14605,
+                "frame": 6002,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 5553,
+                "frame": 6001,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 35477,
+                "frame": 6005,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 73515,
+                "frame": 6008,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 104111,
+                "frame": 6012,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 27057,
+                "frame": 6004,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 95762,
+                "frame": 6011,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F6F8": {
+          "hits": 9,
+          "distinct_call_chains": 7,
+          "chains": [
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 5766,
+                "frame": 6001,
+                "predecessor_pc": "$C1F58E",
+                "predecessor_asm": "blt.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 73728,
+                "frame": 6008,
+                "predecessor_pc": "$C1F58E",
+                "predecessor_asm": "blt.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 27267,
+                "frame": 6004,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 36800,
+                "frame": 6005,
+                "predecessor_pc": "$C1F2EA",
+                "predecessor_asm": "bra.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 95972,
+                "frame": 6011,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1ED48"
+                }
+              ],
+              "example": {
+                "trace_index": 97479,
+                "frame": 6011,
+                "predecessor_pc": "$C1F45A",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 105548,
+                "frame": 6012,
+                "predecessor_pc": "$C1F2EA",
+                "predecessor_asm": "bra.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C2FA7E": {
+          "hits": 33,
+          "distinct_call_chains": 11,
+          "chains": [
+            {
+              "hits": 8,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 5918,
+                "frame": 6001,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 8,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 73880,
+                "frame": 6008,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C342B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 40023,
+                "frame": 6005,
+                "predecessor_pc": "$C342B6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C342B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 107480,
+                "frame": 6012,
+                "predecessor_pc": "$C342B6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341AC",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 39533,
+                "frame": 6005,
+                "predecessor_pc": "$C341AC",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341E6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 39693,
+                "frame": 6005,
+                "predecessor_pc": "$C341E6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C34218",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 39852,
+                "frame": 6005,
+                "predecessor_pc": "$C34218",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 96616,
+                "frame": 6011,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54F80"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341AC",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 106990,
+                "frame": 6012,
+                "predecessor_pc": "$C341AC",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341E6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 107150,
+                "frame": 6012,
+                "predecessor_pc": "$C341E6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C34218",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 107309,
+                "frame": 6012,
+                "predecessor_pc": "$C34218",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C2FF48": {
+          "hits": 20,
+          "distinct_call_chains": 8,
+          "chains": [
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C099F6"
+                },
+                {
+                  "site": "$C09A5A",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 9952,
+                "frame": 6002,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C0984A",
+                  "target": "$C099F6"
+                },
+                {
+                  "site": "$C09A5A",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 78003,
+                "frame": 6009,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 11533,
+                "frame": 6002,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 79619,
+                "frame": 6009,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 1915,
+                "frame": 6001,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54FDE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 68805,
+                "frame": 6008,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54FDE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 27857,
+                "frame": 6004,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 96562,
+                "frame": 6011,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        }
+      }
+    },
+    {
+      "trace": "build/run041_frame06250_12f_trace_retry/trace.jsonl",
+      "instruction_rows": 112062,
+      "stack_filter": "Slow-RAM calls in the anchor A7 64-KiB region; excludes separate interrupt stack",
+      "checks": {
+        "returns_without_in_window_call": 36,
+        "verified_call_pushes": 1793,
+        "frames_unwound_above_return": 20,
+        "verified_returns": 1767,
+        "anchor_hits": 97
+      },
+      "focus_calls": [
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 26145,
+          "entry_frame": 6253,
+          "return_index": 26213,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 26278,
+          "entry_frame": 6253,
+          "return_index": 26335,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 29567,
+          "entry_frame": 6254,
+          "return_index": 29610,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 34030,
+          "entry_frame": 6254,
+          "return_index": 37557,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FF48": 2
+          }
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 37687,
+          "entry_frame": 6255,
+          "return_index": 40223,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 7
+          }
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 40295,
+          "entry_frame": 6255,
+          "return_index": 47862,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 22
+          }
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1ED4C",
+          "entry_index": 48012,
+          "entry_frame": 6256,
+          "return_index": 48521,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F6F8": 1
+          }
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 98112,
+          "entry_frame": 6261,
+          "return_index": 98180,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 98245,
+          "entry_frame": 6261,
+          "return_index": 98302,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CC86",
+          "target": "$C1EE14",
+          "entry_index": 101010,
+          "entry_frame": 6261,
+          "return_index": 101053,
+          "return_pc": "$C1CC88",
+          "termination": "verified_return",
+          "anchor_counts": {}
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 106134,
+          "entry_frame": 6262,
+          "return_index": 108562,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FF48": 2
+          }
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 108634,
+          "entry_frame": 6262,
+          "return_index": 111183,
+          "return_pc": "$C1CFA8",
+          "termination": "verified_return",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 7
+          }
+        },
+        {
+          "site": "$C1CFA6",
+          "target": "$C1EE14",
+          "entry_index": 111255,
+          "entry_frame": 6262,
+          "return_index": null,
+          "return_pc": null,
+          "termination": "trace_end",
+          "anchor_counts": {
+            "$C1EF10": 1,
+            "$C1F4AC": 1,
+            "$C1F6F8": 1,
+            "$C2FA7E": 1
+          }
+        }
+      ],
+      "anchors": {
+        "$C1CC70": {
+          "hits": 10,
+          "distinct_call_chains": 4,
+          "chains": [
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                }
+              ],
+              "example": {
+                "trace_index": 22082,
+                "frame": 6253,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 4,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                }
+              ],
+              "example": {
+                "trace_index": 93551,
+                "frame": 6260,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                }
+              ],
+              "example": {
+                "trace_index": 29561,
+                "frame": 6254,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0B4",
+                  "target": "$C1CB26"
+                }
+              ],
+              "example": {
+                "trace_index": 101004,
+                "frame": 6261,
+                "predecessor_pc": "$C1CC6E",
+                "predecessor_asm": "movea.l (a1)+, a0",
+                "a7": "$C5504E"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1EF10": {
+          "hits": 7,
+          "distinct_call_chains": 3,
+          "chains": [
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 34082,
+                "frame": 6254,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 106186,
+                "frame": 6262,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 48070,
+                "frame": 6256,
+                "predecessor_pc": "$C1EF0A",
+                "predecessor_asm": "move.l a1, $c45a32.l",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F4AC": {
+          "hits": 6,
+          "distinct_call_chains": 2,
+          "chains": [
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 34153,
+                "frame": 6254,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 106257,
+                "frame": 6262,
+                "predecessor_pc": "$C1F4A8",
+                "predecessor_asm": "bne.w $c1f34a",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C1F6F8": {
+          "hits": 7,
+          "distinct_call_chains": 3,
+          "chains": [
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 34363,
+                "frame": 6254,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 3,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                }
+              ],
+              "example": {
+                "trace_index": 106467,
+                "frame": 6262,
+                "predecessor_pc": "$C1F580",
+                "predecessor_asm": "beq.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1ED4C"
+                }
+              ],
+              "example": {
+                "trace_index": 48507,
+                "frame": 6256,
+                "predecessor_pc": "$C1F2EA",
+                "predecessor_asm": "bra.w $c1f6f8",
+                "a7": "$C54FAE"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        },
+        "$C2FA7E": {
+          "hits": 49,
+          "distinct_call_chains": 13,
+          "chains": [
+            {
+              "hits": 12,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 38305,
+                "frame": 6255,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 7,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2131C"
+                },
+                {
+                  "site": "$C21384",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 40050,
+                "frame": 6255,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8C"
+              }
+            },
+            {
+              "hits": 6,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C212B0"
+                },
+                {
+                  "site": "$C21304",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 109252,
+                "frame": 6262,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8E"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2122A"
+                },
+                {
+                  "site": "$C2127C",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 41082,
+                "frame": 6255,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F84"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C211DC"
+                },
+                {
+                  "site": "$C2120E",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 44921,
+                "frame": 6255,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8A"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C342B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 51804,
+                "frame": 6256,
+                "predecessor_pc": "$C342B6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 8128,
+                "frame": 6251,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54FD2"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                },
+                {
+                  "site": "$C2FF52",
+                  "target": "$C301F6"
+                },
+                {
+                  "site": "$C302B6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 79787,
+                "frame": 6259,
+                "predecessor_pc": "$C302B6",
+                "predecessor_asm": "bsr.w $c2fa7e",
+                "a7": "$C54FD2"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341AC",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 51314,
+                "frame": 6256,
+                "predecessor_pc": "$C341AC",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C341E6",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 51474,
+                "frame": 6256,
+                "predecessor_pc": "$C341E6",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C0F18E",
+                  "target": "$C332BC"
+                },
+                {
+                  "site": "$C332D2",
+                  "target": "$C34146"
+                },
+                {
+                  "site": "$C34218",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 51633,
+                "frame": 6256,
+                "predecessor_pc": "$C34218",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C55046"
+              }
+            },
+            {
+              "hits": 1,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2131C"
+                },
+                {
+                  "site": "$C21384",
+                  "target": "$C2EE4A"
+                },
+                {
+                  "site": "$C2F088",
+                  "target": "$C2FA7E"
+                }
+              ],
+              "example": {
+                "trace_index": 111010,
+                "frame": 6262,
+                "predecessor_pc": "$C2F088",
+                "predecessor_asm": "jsr $c2fa7e.l",
+                "a7": "$C54F8C"
+              }
+            }
+          ],
+          "omitted_chains": 1
+        },
+        "$C2FF48": {
+          "hits": 18,
+          "distinct_call_chains": 6,
+          "chains": [
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 8086,
+                "frame": 6251,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54FDE"
+              }
+            },
+            {
+              "hits": 5,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F07C",
+                  "target": "$C2AA9C"
+                },
+                {
+                  "site": "$C2AB2C",
+                  "target": "$C2AB34"
+                },
+                {
+                  "site": "$C2AFE2",
+                  "target": "$C246A0"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 79745,
+                "frame": 6259,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54FDE"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 24172,
+                "frame": 6253,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 34877,
+                "frame": 6254,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F0A6",
+                  "target": "$C1CB14"
+                },
+                {
+                  "site": "$C1CC86",
+                  "target": "$C096CA"
+                },
+                {
+                  "site": "$C098B8",
+                  "target": "$C09952"
+                },
+                {
+                  "site": "$C0999C",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 96193,
+                "frame": 6261,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F94"
+              }
+            },
+            {
+              "hits": 2,
+              "calls": [
+                {
+                  "site": "$C15DA2",
+                  "target": "$C0EFD4"
+                },
+                {
+                  "site": "$C0F110",
+                  "target": "$C1CCBC"
+                },
+                {
+                  "site": "$C1CFA6",
+                  "target": "$C1EE14"
+                },
+                {
+                  "site": "$C1F942",
+                  "target": "$C2005C"
+                },
+                {
+                  "site": "$C200E6",
+                  "target": "$C2469E"
+                },
+                {
+                  "site": "$C24D60",
+                  "target": "$C2FF48"
+                }
+              ],
+              "example": {
+                "trace_index": 106981,
+                "frame": 6262,
+                "predecessor_pc": "$C24D60",
+                "predecessor_asm": "jsr $c2ff48.l",
+                "a7": "$C54F8C"
+              }
+            }
+          ],
+          "omitted_chains": 0
+        }
+      }
+    }
+  ]
+}

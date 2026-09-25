@@ -8,8 +8,8 @@ A CODE hunk that has not run is **not** called data: it remains unclassified.
 
 - Original segments: 185.
 - Initialized DATA hunks: 32 (1,500 bytes); BSS hunks: 27 (11,512 bytes).
-- CODE hunks with positive data-only evidence: 11.
-- Executed CODE hunks: 38; unresolved/ambiguous CODE hunks: 76.
+- CODE hunks with positive data-only evidence: 13.
+- Executed CODE hunks: 38; unresolved/ambiguous CODE hunks: 74.
 - Known visual memory is listed as mutable display targets, not immutable graphics assets.
 
 ## Separation rules

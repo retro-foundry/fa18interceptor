@@ -33,16 +33,21 @@ def report_coverage(covered, slices):
 
     data_bytes = sum(row['size'] for row in classified if row['verdict'] == 'data')
     unclassified_bytes = sum(row['size'] for row in classified if row['verdict'] == 'unclassified')
+    candidate_data_bytes = sum(row['size'] for row in classified
+                               if 'candidate_data_evidence' in row)
     all_code = cov.total_code_bytes()
     instruction_denominator = all_code - data_bytes
     resolved_bytes = sum(row['size'] for row in classified)
+    estimated_data_bytes = data_bytes + candidate_data_bytes
+    estimated_instruction_denominator = all_code - estimated_data_bytes
+    estimated_unclassified_bytes = unclassified_bytes - candidate_data_bytes
 
     # Only slow/chip RAM execution is ours; Kickstart ROM is excluded by the exports.
     runtime_backed = len(covered & executed)
     static_only = len(covered - executed)
 
     print()
-    print(f'observed execution: {len(executed):,} bytes across {exports} P-code exports')
+    print(f'trace-observed instructions: {len(executed):,} bytes across {exports} P-code exports')
     print(f'reconstructed:      {len(covered):,} distinct bytes '
           f'({runtime_backed:,} runtime-backed, {static_only:,} static-only)')
     print()
@@ -53,9 +58,13 @@ def report_coverage(covered, slices):
           f'({len(covered):,} / {instruction_denominator:,}; CODE minus {data_bytes:,} confirmed data)')
     print(f'  of all CODE hunk bytes      {len(covered) / all_code * 100:5.1f}%  '
           f'({len(covered):,} / {all_code:,})')
-    print(f'  game ever exercised         {len(executed) / resolved_bytes * 100:5.1f}%  '
-          f'({len(executed):,} / {resolved_bytes:,} resolved CODE bytes)')
+    print(f'  captured trace / resolved CODE {len(executed) / resolved_bytes * 100:5.1f}%  '
+          f'({len(executed):,} / {resolved_bytes:,}; not a game-logic coverage claim)')
     print(f'  {unclassified_bytes:,} bytes remain unclassified (never executed, never referenced)')
+    print('  working scene-data estimate '
+          f'{len(covered) / estimated_instruction_denominator * 100:5.1f}%  '
+          f'({len(covered):,} / {estimated_instruction_denominator:,}; includes '
+          f'{candidate_data_bytes:,} candidate scene bytes, not strict coverage)')
 
     return {
         'pcode_exports': exports,
@@ -69,9 +78,15 @@ def report_coverage(covered, slices):
         'resolved_code_bytes': resolved_bytes,
         'all_code_bytes': all_code,
         'coverage_denominator': instruction_denominator,
+        'candidate_data_bytes': candidate_data_bytes,
+        'estimated_data_bytes': estimated_data_bytes,
+        'estimated_instruction_denominator': estimated_instruction_denominator,
+        'estimated_unclassified_bytes': estimated_unclassified_bytes,
         'coverage_of_observed_percent': round(runtime_backed / len(executed) * 100, 2),
         'coverage_of_instructions_percent': round(len(covered) / instruction_denominator * 100, 2),
         'game_exercised_percent': round(len(executed) / resolved_bytes * 100, 2),
+        'estimated_coverage_of_instructions_percent': round(
+            len(covered) / estimated_instruction_denominator * 100, 2),
     }
 
 

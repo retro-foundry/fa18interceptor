@@ -20,5 +20,7 @@ The observed child entry's `$C2EC9C-$C2ECC5` validation prefix is reconstructed
 in `source_amiga/observed/validate_matrix_product_tuple.asm`. It sets `D7=-4`,
 requires both `D0` and `D1` to be strictly within signed `D2` bounds, and sends
 failures to the documented rejection return. A non-positive `D2` branches to
-another entry at `$C2EC70`; the following projection path was not observed and
-is deliberately outside this contract.
+another entry at `$C2EC70`. A separate run041 call through `$C2EC90` takes the
+accepted projection path, documented in
+`analysis/routines/c2ecc6_matrix_product_projection.md`; it does not turn this
+routine's observed rejected call into an accepted one.

@@ -1,0 +1,1558 @@
+{
+  "classification": "same-invocation scaled-word threshold and source selection; no physical-range claim",
+  "authority": "analysis/data/run041_descriptor_stage_invocations.json",
+  "traces": [
+    {
+      "trace": "build/run041_frame05000_12f_trace/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 5005,
+          "entry_index": 46129,
+          "call_site": "$C1CC86",
+          "descriptor": "$C22408",
+          "control_pointer": "$C35568",
+          "threshold": 545,
+          "shift": 2,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 46139,
+              "scaled": 52,
+              "limit": 545,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 46153,
+              "scaled": 80,
+              "limit": 545,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 46164,
+              "scaled": 128,
+              "limit": 545,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 46175,
+              "scaled": 184,
+              "limit": 545,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 46186,
+              "scaled": 320,
+              "limit": 545,
+              "shift": 2,
+              "above_limit": false
+            }
+          ],
+          "selected_record": {
+            "address": "$C35596",
+            "word": "$A638",
+            "trace_index": 46199
+          },
+          "transform_sources": [
+            "$C35BAA"
+          ],
+          "walker_streams": [
+            "$C35598"
+          ],
+          "polygons": 0,
+          "lines": 1,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5005,
+          "entry_index": 46796,
+          "call_site": "$C1CC86",
+          "descriptor": "$C2241C",
+          "control_pointer": "$C355A0",
+          "threshold": 523,
+          "shift": 2,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 46806,
+              "scaled": 52,
+              "limit": 523,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 46820,
+              "scaled": 80,
+              "limit": 523,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 46831,
+              "scaled": 128,
+              "limit": 523,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 46842,
+              "scaled": 184,
+              "limit": 523,
+              "shift": 2,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 46853,
+              "scaled": 320,
+              "limit": 523,
+              "shift": 2,
+              "above_limit": false
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CE",
+            "word": "$A618",
+            "trace_index": 46866
+          },
+          "transform_sources": [
+            "$C35BC2"
+          ],
+          "walker_streams": [
+            "$C355D0"
+          ],
+          "polygons": 0,
+          "lines": 1,
+          "termination": "verified_return"
+        }
+      ]
+    },
+    {
+      "trace": "build/run041_frame05750_12f_reverse_stack_trace/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 5751,
+          "entry_index": 7195,
+          "call_site": "$C1CC86",
+          "descriptor": "$C22408",
+          "control_pointer": "$C35568",
+          "threshold": 656,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 7205,
+              "scaled": 104,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 7219,
+              "scaled": 160,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 7230,
+              "scaled": 256,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 7241,
+              "scaled": 368,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 7252,
+              "scaled": 640,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            }
+          ],
+          "selected_record": {
+            "address": "$C35596",
+            "word": "$A638",
+            "trace_index": 7265
+          },
+          "transform_sources": [
+            "$C35BAA"
+          ],
+          "walker_streams": [
+            "$C35598"
+          ],
+          "polygons": 0,
+          "lines": 1,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5751,
+          "entry_index": 7877,
+          "call_site": "$C1CC86",
+          "descriptor": "$C2241C",
+          "control_pointer": "$C355A0",
+          "threshold": 611,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 7887,
+              "scaled": 104,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 7901,
+              "scaled": 160,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 7912,
+              "scaled": 256,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 7923,
+              "scaled": 368,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 7934,
+              "scaled": 640,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CA",
+            "word": "$25D6",
+            "trace_index": 7944
+          },
+          "transform_sources": [
+            "$C35B80"
+          ],
+          "walker_streams": [
+            "$C355CC"
+          ],
+          "polygons": 0,
+          "lines": 4,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5755,
+          "entry_index": 38910,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C35568",
+          "threshold": 656,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 38920,
+              "scaled": 104,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 38934,
+              "scaled": 160,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 38945,
+              "scaled": 256,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 38956,
+              "scaled": 368,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 38967,
+              "scaled": 640,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            }
+          ],
+          "selected_record": {
+            "address": "$C35596",
+            "word": "$A638",
+            "trace_index": 38980
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5755,
+          "entry_index": 39053,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C355A0",
+          "threshold": 610,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 39063,
+              "scaled": 104,
+              "limit": 610,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 39077,
+              "scaled": 160,
+              "limit": 610,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 39088,
+              "scaled": 256,
+              "limit": 610,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 39099,
+              "scaled": 368,
+              "limit": 610,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 39110,
+              "scaled": 640,
+              "limit": 610,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CA",
+            "word": "$25D6",
+            "trace_index": 39120
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5761,
+          "entry_index": 100634,
+          "call_site": "$C1CC86",
+          "descriptor": "$C22408",
+          "control_pointer": "$C35568",
+          "threshold": 656,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 100644,
+              "scaled": 104,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 100658,
+              "scaled": 160,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 100669,
+              "scaled": 256,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 100680,
+              "scaled": 368,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 100691,
+              "scaled": 640,
+              "limit": 656,
+              "shift": 1,
+              "above_limit": false
+            }
+          ],
+          "selected_record": {
+            "address": "$C35596",
+            "word": "$A638",
+            "trace_index": 100704
+          },
+          "transform_sources": [
+            "$C35BAA"
+          ],
+          "walker_streams": [
+            "$C35598"
+          ],
+          "polygons": 0,
+          "lines": 1,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 5761,
+          "entry_index": 101316,
+          "call_site": "$C1CC86",
+          "descriptor": "$C2241C",
+          "control_pointer": "$C355A0",
+          "threshold": 611,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 101326,
+              "scaled": 104,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 101340,
+              "scaled": 160,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 101351,
+              "scaled": 256,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 101362,
+              "scaled": 368,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 101373,
+              "scaled": 640,
+              "limit": 611,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CA",
+            "word": "$25D6",
+            "trace_index": 101383
+          },
+          "transform_sources": [
+            "$C35B80"
+          ],
+          "walker_streams": [
+            "$C355CC"
+          ],
+          "polygons": 0,
+          "lines": 4,
+          "termination": "verified_return"
+        }
+      ]
+    },
+    {
+      "trace": "build/run041_frame06000_12f_reverse_stack_trace/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 6001,
+          "entry_index": 5401,
+          "call_site": "$C1CC86",
+          "descriptor": "$C22408",
+          "control_pointer": "$C35568",
+          "threshold": 512,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 5411,
+              "scaled": 104,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 5425,
+              "scaled": 160,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 5436,
+              "scaled": 256,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 5447,
+              "scaled": 368,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 5458,
+              "scaled": 640,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C35592",
+            "word": "$25E4",
+            "trace_index": 5468
+          },
+          "transform_sources": [
+            "$C35B56"
+          ],
+          "walker_streams": [
+            "$C35594"
+          ],
+          "polygons": 0,
+          "lines": 4,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6001,
+          "entry_index": 7006,
+          "call_site": "$C1CC86",
+          "descriptor": "$C2241C",
+          "control_pointer": "$C355A0",
+          "threshold": 419,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 7016,
+              "scaled": 104,
+              "limit": 419,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 7030,
+              "scaled": 160,
+              "limit": 419,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 7041,
+              "scaled": 256,
+              "limit": 419,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 7052,
+              "scaled": 368,
+              "limit": 419,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 7063,
+              "scaled": 640,
+              "limit": 419,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CA",
+            "word": "$25D6",
+            "trace_index": 7073
+          },
+          "transform_sources": [
+            "$C35B80"
+          ],
+          "walker_streams": [
+            "$C355CC"
+          ],
+          "polygons": 0,
+          "lines": 4,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6005,
+          "entry_index": 34859,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C35568",
+          "threshold": 512,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 34869,
+              "scaled": 104,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 34883,
+              "scaled": 160,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 34894,
+              "scaled": 256,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 34905,
+              "scaled": 368,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 34916,
+              "scaled": 640,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C35592",
+            "word": "$25E4",
+            "trace_index": 34926
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6005,
+          "entry_index": 35008,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C355A0",
+          "threshold": 418,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 35018,
+              "scaled": 104,
+              "limit": 418,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 35032,
+              "scaled": 160,
+              "limit": 418,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 35043,
+              "scaled": 256,
+              "limit": 418,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 35054,
+              "scaled": 368,
+              "limit": 418,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 35065,
+              "scaled": 640,
+              "limit": 418,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CA",
+            "word": "$25D6",
+            "trace_index": 35075
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6008,
+          "entry_index": 73363,
+          "call_site": "$C1CC86",
+          "descriptor": "$C22408",
+          "control_pointer": "$C35568",
+          "threshold": 512,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 73373,
+              "scaled": 104,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 73387,
+              "scaled": 160,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 73398,
+              "scaled": 256,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 73409,
+              "scaled": 368,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 73420,
+              "scaled": 640,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C35592",
+            "word": "$25E4",
+            "trace_index": 73430
+          },
+          "transform_sources": [
+            "$C35B56"
+          ],
+          "walker_streams": [
+            "$C35594"
+          ],
+          "polygons": 0,
+          "lines": 4,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6009,
+          "entry_index": 75583,
+          "call_site": "$C1CC86",
+          "descriptor": "$C2241C",
+          "control_pointer": "$C355A0",
+          "threshold": 398,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 75593,
+              "scaled": 104,
+              "limit": 398,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 75607,
+              "scaled": 160,
+              "limit": 398,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 75618,
+              "scaled": 256,
+              "limit": 398,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 75629,
+              "scaled": 368,
+              "limit": 398,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 75640,
+              "scaled": 640,
+              "limit": 398,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CA",
+            "word": "$25D6",
+            "trace_index": 75650
+          },
+          "transform_sources": [
+            "$C35B80"
+          ],
+          "walker_streams": [
+            "$C355CC"
+          ],
+          "polygons": 0,
+          "lines": 4,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6012,
+          "entry_index": 103487,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C35568",
+          "threshold": 512,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 103497,
+              "scaled": 104,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 103511,
+              "scaled": 160,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 103522,
+              "scaled": 256,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 103533,
+              "scaled": 368,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C35590",
+              "raw": "$4500",
+              "trace_index": 103544,
+              "scaled": 640,
+              "limit": 512,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C35592",
+            "word": "$25E4",
+            "trace_index": 103554
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6012,
+          "entry_index": 103695,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C355A0",
+          "threshold": 397,
+          "shift": 1,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 103705,
+              "scaled": 104,
+              "limit": 397,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 103719,
+              "scaled": 160,
+              "limit": 397,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 103730,
+              "scaled": 256,
+              "limit": 397,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C2",
+              "raw": "$42E0",
+              "trace_index": 103741,
+              "scaled": 368,
+              "limit": 397,
+              "shift": 1,
+              "above_limit": false
+            },
+            {
+              "address": "$C355C8",
+              "raw": "$4500",
+              "trace_index": 103752,
+              "scaled": 640,
+              "limit": 397,
+              "shift": 1,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355CA",
+            "word": "$25D6",
+            "trace_index": 103762
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        }
+      ]
+    },
+    {
+      "trace": "build/run041_frame06250_12f_trace_retry/trace.jsonl",
+      "calls": [
+        {
+          "entry_frame": 6253,
+          "entry_index": 26145,
+          "call_site": "$C1CC86",
+          "descriptor": "$C22408",
+          "control_pointer": "$C35568",
+          "threshold": 524,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 26155,
+              "scaled": 208,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 26169,
+              "scaled": 320,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 26180,
+              "scaled": 512,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 26191,
+              "scaled": 736,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C3558C",
+            "word": "$056C",
+            "trace_index": 26201
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6253,
+          "entry_index": 26278,
+          "call_site": "$C1CC86",
+          "descriptor": "$C2241C",
+          "control_pointer": "$C355A0",
+          "threshold": 457,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 26288,
+              "scaled": 208,
+              "limit": 457,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 26302,
+              "scaled": 320,
+              "limit": 457,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 26313,
+              "scaled": 512,
+              "limit": 457,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355BE",
+            "word": "$44EE",
+            "trace_index": 26323
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6255,
+          "entry_index": 37687,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C35568",
+          "threshold": 524,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 37697,
+              "scaled": 208,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 37711,
+              "scaled": 320,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 37722,
+              "scaled": 512,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 37733,
+              "scaled": 736,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C3558C",
+            "word": "$056C",
+            "trace_index": 37743
+          },
+          "transform_sources": [
+            "$C35ADE"
+          ],
+          "walker_streams": [
+            "$C3558E"
+          ],
+          "polygons": 0,
+          "lines": 7,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6255,
+          "entry_index": 40295,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C355A0",
+          "threshold": 455,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 40305,
+              "scaled": 208,
+              "limit": 455,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 40319,
+              "scaled": 320,
+              "limit": 455,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 40330,
+              "scaled": 512,
+              "limit": 455,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355BE",
+            "word": "$44EE",
+            "trace_index": 40340
+          },
+          "transform_sources": [
+            "$C35A98"
+          ],
+          "walker_streams": [
+            "$C355C0"
+          ],
+          "polygons": 0,
+          "lines": 22,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6261,
+          "entry_index": 98112,
+          "call_site": "$C1CC86",
+          "descriptor": "$C22408",
+          "control_pointer": "$C35568",
+          "threshold": 524,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 98122,
+              "scaled": 208,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 98136,
+              "scaled": 320,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 98147,
+              "scaled": 512,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 98158,
+              "scaled": 736,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C3558C",
+            "word": "$056C",
+            "trace_index": 98168
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6261,
+          "entry_index": 98245,
+          "call_site": "$C1CC86",
+          "descriptor": "$C2241C",
+          "control_pointer": "$C355A0",
+          "threshold": 457,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 98255,
+              "scaled": 208,
+              "limit": 457,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 98269,
+              "scaled": 320,
+              "limit": 457,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 98280,
+              "scaled": 512,
+              "limit": 457,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355BE",
+            "word": "$44EE",
+            "trace_index": 98290
+          },
+          "transform_sources": [],
+          "walker_streams": [],
+          "polygons": 0,
+          "lines": 0,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6262,
+          "entry_index": 108634,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C35568",
+          "threshold": 524,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C35568",
+              "raw": "$00D0",
+              "trace_index": 108644,
+              "scaled": 208,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3557E",
+              "raw": "$4140",
+              "trace_index": 108658,
+              "scaled": 320,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C35584",
+              "raw": "$4200",
+              "trace_index": 108669,
+              "scaled": 512,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C3558A",
+              "raw": "$42E0",
+              "trace_index": 108680,
+              "scaled": 736,
+              "limit": 524,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C3558C",
+            "word": "$056C",
+            "trace_index": 108690
+          },
+          "transform_sources": [
+            "$C35ADE"
+          ],
+          "walker_streams": [
+            "$C3558E"
+          ],
+          "polygons": 0,
+          "lines": 7,
+          "termination": "verified_return"
+        },
+        {
+          "entry_frame": 6262,
+          "entry_index": 111255,
+          "call_site": "$C1CFA6",
+          "descriptor": null,
+          "control_pointer": "$C355A0",
+          "threshold": 455,
+          "shift": 0,
+          "comparisons": [
+            {
+              "address": "$C355A0",
+              "raw": "$00D0",
+              "trace_index": 111265,
+              "scaled": 208,
+              "limit": 455,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355B6",
+              "raw": "$4140",
+              "trace_index": 111279,
+              "scaled": 320,
+              "limit": 455,
+              "shift": 0,
+              "above_limit": false
+            },
+            {
+              "address": "$C355BC",
+              "raw": "$4200",
+              "trace_index": 111290,
+              "scaled": 512,
+              "limit": 455,
+              "shift": 0,
+              "above_limit": true
+            }
+          ],
+          "selected_record": {
+            "address": "$C355BE",
+            "word": "$44EE",
+            "trace_index": 111300
+          },
+          "transform_sources": [
+            "$C35A98"
+          ],
+          "walker_streams": [
+            "$C355C0"
+          ],
+          "polygons": 0,
+          "lines": 1,
+          "termination": "trace_end"
+        }
+      ]
+    }
+  ]
+}
