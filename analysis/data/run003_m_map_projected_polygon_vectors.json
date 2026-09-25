@@ -30,6 +30,7 @@
     "matching_pixels": 109774,
     "agreement": 0.9886521245744547
   },
+  "annotations_included": true,
   "landmark": {
     "name": "Golden Gate",
     "anchor": [
@@ -37,27 +38,6 @@
       59.5
     ],
     "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"
-  },
-  "terrain_landmark_candidate": {
-    "label": "mountain candidate",
-    "anchor": [
-      218,
-      94
-    ],
-    "evidence": "$C3B720/$C3B6B0 map-mode component; Golden Gate-scene mountain classification",
-    "semantic_status": "scenario-backed terrain candidate; original proper name unknown"
-  },
-  "traced_map_symbol": {
-    "label": "flight-object marker candidate",
-    "anchor_bounds": [
-      50,
-      130,
-      70,
-      132
-    ],
-    "evidence": "three $C4C598 C2FA7E vector strokes",
-    "producer_context": "$C2EDxx with A1=$C45BEA before C2B93E line-list emission",
-    "semantic_status": "scenario-backed flight-object candidate; not proven to be player aircraft, base, or airfield"
   },
   "qualification": "Polygon vertices are direct renderer vectors, not bitplane runs. The exact hardware area-fill edge rules are still separately retained for pixel-parity work."
 }
