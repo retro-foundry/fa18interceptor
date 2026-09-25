@@ -1,0 +1,29 @@
+{
+  "classification": "bounded_instance_asset_not_global_world_mesh",
+  "instance": {
+    "static_template": "$C42789",
+    "runtime_placement_record": "$C4F0FA",
+    "placement_x_y_z": [368, 0, -144],
+    "descriptor": "$C224D0",
+    "descriptor_field": "$C3B6A6",
+    "cursor_published_stream": "$C3B6AE"
+  },
+  "local_geometry": {
+    "source": "$C3B720",
+    "triples": [
+      [2112, 0, -896],
+      [-2080, 0, -2048],
+      [-1600, 0, 1280],
+      [1088, 0, 1568],
+      [-640, 1024, 0]
+    ],
+    "control_context": "$C3B6B0",
+    "bounded_submission_trace_indices": [148747, 150138, 151104, 152010]
+  },
+  "authority": {
+    "trace": "build/run037_m_map_placement_to_control_20f_trace/trace.jsonl",
+    "slow_snapshot": "build/run037_m_map_placement_to_control_20f_trace/slow.bin",
+    "handoff": "analysis/data/run037_m_map_placement_to_control_20f_handoff.json"
+  },
+  "qualification": "The placement tuple and local triples are both observed, but their direct arithmetic composition into global vertices has not been proven. Consumers must retain them as separate local and placement spaces."
+}
