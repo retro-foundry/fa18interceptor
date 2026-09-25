@@ -11,6 +11,8 @@ case. The tuple is loaded into `D2-D4`, while the following long is published
 to `$C45932`; `$C1D0B6` consumes the header and tuple immediately afterward.
 
 This is a descriptor data-layout contract, not a gameplay identity for the
-handler or record. Authority: byte-exact
+handler or record. The special handler `$C1ED48` is separately proven to be a
+trampoline into `$C1EE14`, so this descriptor field can select that indirect
+stage without making `$C1ED48` a distinct gameplay behavior. Authority: byte-exact
 `source_amiga/observed/prepare_alternate_flight_record.asm` and normal run060
 trace `build/run060_c1ccbc_normal_full/trace.jsonl`.
