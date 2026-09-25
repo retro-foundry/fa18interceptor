@@ -22,6 +22,20 @@ if handle:
     if ok and code.value==259:
         raise RuntimeError('Engine9000 is still recording. Close its window before finalizing.')
 raw=(a.run/'inputs.e9k').read_bytes()
+if m.get('recording_protocol') == 'engine9000-boot-restore-v1':
+    marker_name=m.get('restore_marker')
+    state_name=m.get('restored_state')
+    if not isinstance(marker_name,str) or not isinstance(state_name,str):
+        raise ValueError('deterministic capture is missing restore evidence')
+    marker=json.loads((a.run/marker_name).read_text())
+    if marker.get('restore_frame') != m.get('restore_frame') or marker.get('restored_frame') != 0:
+        raise ValueError('deterministic capture has an invalid restore marker')
+    if not (a.run/state_name).is_file():
+        raise ValueError('deterministic capture is missing its restored state')
+    recorded_hash=m.get('restored_state_sha256')
+    actual_hash=hashlib.sha256((a.run/state_name).read_bytes()).hexdigest()
+    if recorded_hash != actual_hash:
+        raise ValueError(f'deterministic capture restored-state hash mismatch: expected {recorded_hash!r}, got {actual_hash}')
 lines=raw[m['prelude_bytes']:].decode('ascii').splitlines()
 previous=0
 events=0
@@ -46,6 +60,8 @@ playback='E9K_INPUT_V1\n'+'\n'.join(playback_lines)+'\n'
 (a.run/'playback.e9k').write_text(playback,encoding='ascii')
 m.update(status='sealed',event_count=events,last_input_frame=previous,
          hashes={f:hashlib.sha256((a.run/f).read_bytes()).hexdigest()
-                 for f in ['initial_state.bin','config.uae','inputs.e9k','playback.e9k','toolchain.json']})
+                 for f in ['initial_state.bin','config.uae','inputs.e9k','playback.e9k','toolchain.json']
+                 + ([m['restore_marker'],m['restored_state']]
+                    if m.get('recording_protocol') == 'engine9000-boot-restore-v1' else [])})
 (a.run/'run.json').write_text(json.dumps(m,indent=2)+'\n')
 print(json.dumps({'run':str(a.run),'events':events,'last_input_frame':previous},indent=2))

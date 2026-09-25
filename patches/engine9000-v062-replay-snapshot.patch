@@ -1,3 +1,27 @@
+diff --git a/e9k-debugger/libretro_host.c b/e9k-debugger/libretro_host.c
+index 328044d..347930f 100644
+--- a/e9k-debugger/libretro_host.c
++++ b/e9k-debugger/libretro_host.c
+@@ -2029,0 +2030,11 @@ libretro_host_clearJoypadState(void)
++void
++libretro_host_resetInputState(void)
++{
++    memset(libretro_host.inputMask, 0, sizeof(libretro_host.inputMask));
++    memset(libretro_host.mousePendingX, 0, sizeof(libretro_host.mousePendingX));
++    memset(libretro_host.mousePendingY, 0, sizeof(libretro_host.mousePendingY));
++    memset(libretro_host.mouseFrameX, 0, sizeof(libretro_host.mouseFrameX));
++    memset(libretro_host.mouseFrameY, 0, sizeof(libretro_host.mouseFrameY));
++    memset(libretro_host.mouseButtonMask, 0, sizeof(libretro_host.mouseButtonMask));
++}
++
+diff --git a/e9k-debugger/libretro_host.h b/e9k-debugger/libretro_host.h
+index 349dcf5..a735d6d 100644
+--- a/e9k-debugger/libretro_host.h
++++ b/e9k-debugger/libretro_host.h
+@@ -75,0 +76,3 @@ libretro_host_clearJoypadState(void);
++void
++libretro_host_resetInputState(void);
++
 diff --git a/e9k-debugger/runtime.c b/e9k-debugger/runtime.c
 index 2c50665..485a2d5 100644
 --- a/e9k-debugger/runtime.c
@@ -16,26 +40,101 @@ index 2c50665..485a2d5 100644
 +        return;
 +    }
 diff --git a/e9k-debugger/snapshot.c b/e9k-debugger/snapshot.c
-index b641e64..bd64b71 100644
+index b641e64..c23db35 100644
 --- a/e9k-debugger/snapshot.c
 +++ b/e9k-debugger/snapshot.c
 @@ -16,0 +17 @@
 +#include "debug.h"
-@@ -20,0 +22,7 @@
-+// The raw recording's setup prelude reaches frame 37 immediately before its
-+// Ctrl+Alt+R restore.  Restore on that runtime boundary, rather than during
-+// initialisation, so the core, vblank counter and state history all match.
-+#define SNAPSHOT_REPLAY_BOOT_WARMUP_FRAMES 37
+@@ -20,0 +22,82 @@
++// Legacy captures did not record the restore-hotkey frame.  New captures set
++// E9K_BOOT_RESTORE_FRAME and use the same explicit runtime boundary on replay.
++#define SNAPSHOT_LEGACY_REPLAY_RESTORE_FRAME 37
 +
 +static int snapshot_replayRestorePending;
++static uint64_t snapshot_replayRestoreFrame;
 +
-@@ -206,0 +215,5 @@ snapshot_loadSnapshotOnBoot(void)
-+        if (debugger.playbackPath[0]) {
-+            snapshot_replayRestorePending = 1;
-+            debug_printf("snapshot: replay restore queued at frame=%d",
-+                         SNAPSHOT_REPLAY_BOOT_WARMUP_FRAMES);
++static int
++snapshot_configureReplayRestore(void)
++{
++    const char *text = getenv("E9K_BOOT_RESTORE_FRAME");
++    if (text && *text) {
++        char *end = NULL;
++        unsigned long long frame = strtoull(text, &end, 10);
++        if (end && !*end) {
++            snapshot_replayRestoreFrame = (uint64_t)frame;
++            return 1;
 +        }
-@@ -210,0 +224,26 @@ snapshot_loadSnapshotOnBoot(void)
++        debug_error("snapshot: invalid E9K_BOOT_RESTORE_FRAME");
++        return 0;
++    }
++    if (debugger.playbackPath[0]) {
++        snapshot_replayRestoreFrame = SNAPSHOT_LEGACY_REPLAY_RESTORE_FRAME;
++        return 1;
++    }
++    return 0;
++}
++
++static void
++snapshot_writeReplayRestoreMarker(void)
++{
++    const char *path = getenv("E9K_BOOT_RESTORE_MARKER");
++    if (!path || !*path) {
++        return;
++    }
++    FILE *file = fopen(path, "wb");
++    if (!file) {
++        debug_error("snapshot: cannot write boot restore marker");
++        return;
++    }
++    fprintf(file, "{\"restore_frame\":%llu,\"restored_frame\":%llu}\n",
++            (unsigned long long)snapshot_replayRestoreFrame,
++            (unsigned long long)debugger.frameCounter);
++    fclose(file);
++}
++
++void
++snapshot_dumpReplayState(void)
++{
++    const char *path = getenv("E9K_REPLAY_STATE_DUMP");
++    if (!path || !*path) {
++        return;
++    }
++    size_t stateSize = 0;
++    if (!libretro_host_getSerializeSize(&stateSize) || stateSize == 0) {
++        debug_error("snapshot: cannot determine restored replay state size");
++        return;
++    }
++    uint8_t *state = (uint8_t*)malloc(stateSize);
++    if (!state) {
++        debug_error("snapshot: cannot allocate restored replay state dump");
++        return;
++    }
++    if (!libretro_host_serializeTo(state, stateSize)) {
++        free(state);
++        debug_error("snapshot: cannot serialize restored replay state");
++        return;
++    }
++    FILE *file = fopen(path, "wb");
++    if (!file || fwrite(state, 1, stateSize, file) != stateSize) {
++        if (file) {
++            fclose(file);
++        }
++        free(state);
++        debug_error("snapshot: cannot write restored replay state dump");
++        return;
++    }
++    fclose(file);
++    free(state);
++    debug_printf("snapshot: wrote restored replay state dump bytes=%zu", stateSize);
++}
++
+@@ -206,0 +290,5 @@ snapshot_loadSnapshotOnBoot(void)
++        if (snapshot_configureReplayRestore()) {
++            snapshot_replayRestorePending = 1;
++            debug_printf("snapshot: boot restore queued at frame=%llu",
++                         (unsigned long long)snapshot_replayRestoreFrame);
++        }
+@@ -210,0 +299,33 @@ snapshot_loadSnapshotOnBoot(void)
 +int
 +snapshot_replayRestoreIsPending(void)
 +{
@@ -46,27 +145,34 @@ index b641e64..bd64b71 100644
 +snapshot_restoreReplayAtRuntime(void)
 +{
 +    if (!snapshot_replayRestorePending ||
-+        debugger.frameCounter < SNAPSHOT_REPLAY_BOOT_WARMUP_FRAMES) {
++        debugger.frameCounter < snapshot_replayRestoreFrame) {
 +        return 0;
 +    }
 +    snapshot_replayRestorePending = 0;
 +    size_t restoredSize = 0;
-+    if (!libretro_host_restoreState(&restoredSize) || !state_buffer_restoreSnapshot()) {
++    if (!libretro_host_restoreState(&restoredSize)) {
 +        debug_error("snapshot: failed to restore queued replay boot state");
++        return 1;
++    }
++    libretro_host_resetInputState();
++    snapshot_dumpReplayState();
++    if (!state_buffer_restoreSnapshot()) {
++        debug_error("snapshot: failed to restore queued replay state history");
 +        return 1;
 +    }
 +    debugger.frameCounter = state_buffer_getCurrentFrameNo();
 +    debugger.hasStateSnapshot = 1;
 +    debug_printf("snapshot: restored replay boot state frame=%llu size=%zu",
 +                 (unsigned long long)debugger.frameCounter, restoredSize);
++    snapshot_writeReplayRestoreMarker();
 +    return 1;
 +}
 +
 diff --git a/e9k-debugger/snapshot.h b/e9k-debugger/snapshot.h
-index fce77b6..c07da40 100644
+index fce77b6..017467f 100644
 --- a/e9k-debugger/snapshot.h
 +++ b/e9k-debugger/snapshot.h
-@@ -15,0 +16,7 @@ snapshot_loadOnBoot(void);
+@@ -15,0 +16,10 @@ snapshot_loadOnBoot(void);
 +
 +/* Restore a playback snapshot at the same runtime boundary as its GUI restore. */
 +int
@@ -74,3 +180,12 @@ index fce77b6..c07da40 100644
 +
 +int
 +snapshot_replayRestoreIsPending(void);
++
++void
++snapshot_dumpReplayState(void);
+diff --git a/e9k-debugger/ui.c b/e9k-debugger/ui.c
+index ffee5ed..cc5a740 100644
+--- a/e9k-debugger/ui.c
++++ b/e9k-debugger/ui.c
+@@ -1160,0 +1161 @@ ui_restoreState(e9ui_context_t *ctx, void *user)
++        snapshot_dumpReplayState();
