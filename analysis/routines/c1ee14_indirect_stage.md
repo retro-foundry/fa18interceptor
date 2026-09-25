@@ -27,6 +27,11 @@ alongside the established table/wrapper and line-setup family. These are
 direct-child counts within the one completed stage call, not a claim about any
 descriptor's game-world identity.
 
+The same run060 invocation takes the control-stream branch: it publishes
+`$C45A36` at `$C1EF10` and enters `$C1F6F8`; it does not execute the
+`$C1EE62` selector or `$C1F4AC` transform branch. This is a scenario-specific
+source-family result, not a universal descriptor rule.
+
 This supersedes the earlier stack-only association between `$C1CC86` and the
 JOY0DAT callback. `$C1718E` remains independently proven as a registered
 hardware callback, but this particular dynamic indirect call target is
