@@ -182,6 +182,11 @@ python scripts/compare_run042_map_packet_directory.py `
    context is `$C45BEA`, but this is evidence for a flight-object candidate,
    not yet proof that it is the player aircraft.  See
    `analysis/routines/c2b93e_marker_line_list_entry.md`.
+   The controlled run003 `J 0 5` probe is explicitly negative: from the
+   pre-map state it changes neither the observed control accumulators nor the
+   marker vectors.  It is recorded in
+   `analysis/data/run003_m_map_marker_joy5_control_probe.md` and must not be
+   cited as a player-motion test.
 2. Capture or isolate a map continuation where `$C3B4F8` remains in `$C45A36`
    through a `$C1F6F8` entry. The existing run037 no-input continuation proves
    the target's store but shows it overwritten before the walker, so it is not
