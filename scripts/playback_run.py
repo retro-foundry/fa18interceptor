@@ -1,4 +1,4 @@
-"""Open a sealed capture in visible Engine9000 playback with its saved state."""
+"""Open a sealed capture in visible Engine9000 playback from its boot state."""
 
 from __future__ import annotations
 
@@ -8,12 +8,14 @@ from ctypes import wintypes as W
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
+import tempfile
 import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ENGINE = ROOT / "tools" / "engine9000" / "e9k-debugger"
+ENGINE = ROOT / "build" / "engine9000-replay"
 
 
 def find_window(pid: int, timeout: float = 15) -> int:
@@ -41,40 +43,14 @@ def find_window(pid: int, timeout: float = 15) -> int:
     raise RuntimeError("Engine9000 window did not appear")
 
 
-def restore_saved_state(hwnd: int) -> None:
-    user = C.windll.user32
-    user.PostMessageW.argtypes = [W.HWND, W.UINT, W.WPARAM, W.LPARAM]
-    user.ShowWindow(hwnd, 9)  # SW_RESTORE
-    user.SetForegroundWindow(hwnd)
-    for key in (0x11, 0x12):  # Ctrl, Alt
-        scan = user.MapVirtualKeyW(key, 0)
-        user.PostMessageW(hwnd, 0x100, key, 1 | (scan << 16))
-    scan = user.MapVirtualKeyW(0x52, 0)
-    user.PostMessageW(hwnd, 0x100, 0x52, 1 | (scan << 16))
-    time.sleep(0.05)
-    user.PostMessageW(hwnd, 0x101, 0x52, 1 | (scan << 16) | (3 << 30))
-    for key in (0x12, 0x11):
-        scan = user.MapVirtualKeyW(key, 0)
-        user.PostMessageW(hwnd, 0x101, key, 1 | (scan << 16) | (3 << 30))
-
-
-def delayed_playback(run: Path, delay: int) -> Path:
-    """Create a derived playback whose input starts after GUI timeline restore."""
-    source = run / "playback.e9k"
-    lines = source.read_text(encoding="ascii").splitlines()
-    if not lines or lines[0] != "E9K_INPUT_V1":
-        raise ValueError(f"{source} is not an E9K playback")
-    shifted = [lines[0]]
-    for line in lines[1:]:
-        fields = line.split()
-        if len(fields) < 3 or fields[0] != "F":
-            raise ValueError(f"invalid playback row: {line!r}")
-        fields[1] = str(int(fields[1]) + delay)
-        shifted.append(" ".join(fields))
-    output = ROOT / "build" / "playback" / f"{run.name}_delay_{delay}.e9k"
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text("\n".join(shifted) + "\n", encoding="ascii")
-    return output
+def working_copy(run: Path) -> Path:
+    """Copy mutable Engine9000 state so playback never edits sealed evidence."""
+    work_root = ROOT / "build" / "playback"
+    work_root.mkdir(parents=True, exist_ok=True)
+    work = Path(tempfile.mkdtemp(prefix=f"{run.name}_", dir=work_root))
+    shutil.copytree(run / "saves", work / "saves")
+    shutil.copytree(run / "appdata", work / "appdata")
+    return work
 
 
 def main() -> None:
@@ -82,10 +58,8 @@ def main() -> None:
     parser.add_argument("--run", type=Path, required=True,
                         help="Sealed capture directory containing config, saves, appdata, and playback.")
     parser.add_argument("--window-size", default="1400x900")
-    parser.add_argument("--restore-delay", type=float, default=2.0,
-                        help="seconds to wait after window creation before restoring the saved timeline")
-    parser.add_argument("--input-delay-frames", type=int, default=180,
-                        help="delay all replay events so timeline restore happens before input begins")
+    parser.add_argument("--engine", type=Path, default=ENGINE / "e9k-debugger.exe",
+                        help="Engine9000 binary with boot-time snapshot restoration.")
     args = parser.parse_args()
     run = args.run.resolve()
     required = ("config.uae", "initial_state.bin", "playback.e9k", "saves", "appdata")
@@ -98,26 +72,22 @@ def main() -> None:
     # Engine9000 keys the save slot from the UAE filename. Captures retain the
     # original fa18.uae.e9k-save slot, even though their config copy is named
     # config.uae for archival clarity.
-    if args.input_delay_frames < 0:
-        raise ValueError("input-delay-frames must be nonnegative")
-    playback = delayed_playback(run, args.input_delay_frames)
-    command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(original_config),
-               "--system-dir", str(ROOT / "local" / "system"), "--save-dir", str(run / "saves"),
+    engine = args.engine.resolve()
+    if not engine.is_file():
+        raise FileNotFoundError(engine)
+    work = working_copy(run)
+    playback = run / "playback.e9k"
+    command = [str(engine), "--amiga", "--uae", str(original_config),
+               "--system-dir", str(ROOT / "local" / "system"), "--save-dir", str(work / "saves"),
                "--playback", str(playback), "--window-size", args.window_size]
     environment = os.environ.copy()
-    environment["APPDATA"] = str(run / "appdata")
-    process = subprocess.Popen(command, cwd=ENGINE, env=environment)
+    environment["APPDATA"] = str(work / "appdata")
+    process = subprocess.Popen(command, cwd=engine.parent, env=environment)
     hwnd = find_window(process.pid)
-    if args.restore_delay < 0:
-        raise ValueError("restore-delay must be nonnegative")
-    if args.restore_delay:
-        time.sleep(args.restore_delay)
-    restore_saved_state(hwnd)
     print(json.dumps({"pid": process.pid, "window": hwnd, "run": str(run),
                       "frame_counter": "visible in Engine9000 status bar as FRAME:<n>",
-                      "restore_delay": args.restore_delay,
-                      "input_delay_frames": args.input_delay_frames,
-                      "derived_playback": str(playback)}))
+                      "engine": str(engine), "working_copy": str(work),
+                      "playback": str(playback), "restored_at_boot": True}))
 
 
 if __name__ == "__main__":
