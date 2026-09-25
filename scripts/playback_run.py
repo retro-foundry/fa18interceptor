@@ -58,13 +58,34 @@ def restore_saved_state(hwnd: int) -> None:
         user.PostMessageW(hwnd, 0x101, key, 1 | (scan << 16) | (3 << 30))
 
 
+def delayed_playback(run: Path, delay: int) -> Path:
+    """Create a derived playback whose input starts after GUI timeline restore."""
+    source = run / "playback.e9k"
+    lines = source.read_text(encoding="ascii").splitlines()
+    if not lines or lines[0] != "E9K_INPUT_V1":
+        raise ValueError(f"{source} is not an E9K playback")
+    shifted = [lines[0]]
+    for line in lines[1:]:
+        fields = line.split()
+        if len(fields) < 3 or fields[0] != "F":
+            raise ValueError(f"invalid playback row: {line!r}")
+        fields[1] = str(int(fields[1]) + delay)
+        shifted.append(" ".join(fields))
+    output = ROOT / "build" / "playback" / f"{run.name}_delay_{delay}.e9k"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text("\n".join(shifted) + "\n", encoding="ascii")
+    return output
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, required=True,
                         help="Sealed capture directory containing config, saves, appdata, and playback.")
     parser.add_argument("--window-size", default="1400x900")
-    parser.add_argument("--restore-delay", type=float, default=0.0,
+    parser.add_argument("--restore-delay", type=float, default=2.0,
                         help="seconds to wait after window creation before restoring the saved timeline")
+    parser.add_argument("--input-delay-frames", type=int, default=180,
+                        help="delay all replay events so timeline restore happens before input begins")
     args = parser.parse_args()
     run = args.run.resolve()
     required = ("config.uae", "initial_state.bin", "playback.e9k", "saves", "appdata")
@@ -77,9 +98,12 @@ def main() -> None:
     # Engine9000 keys the save slot from the UAE filename. Captures retain the
     # original fa18.uae.e9k-save slot, even though their config copy is named
     # config.uae for archival clarity.
+    if args.input_delay_frames < 0:
+        raise ValueError("input-delay-frames must be nonnegative")
+    playback = delayed_playback(run, args.input_delay_frames)
     command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(original_config),
                "--system-dir", str(ROOT / "local" / "system"), "--save-dir", str(run / "saves"),
-               "--playback", str(run / "playback.e9k"), "--window-size", args.window_size]
+               "--playback", str(playback), "--window-size", args.window_size]
     environment = os.environ.copy()
     environment["APPDATA"] = str(run / "appdata")
     process = subprocess.Popen(command, cwd=ENGINE, env=environment)
@@ -91,7 +115,9 @@ def main() -> None:
     restore_saved_state(hwnd)
     print(json.dumps({"pid": process.pid, "window": hwnd, "run": str(run),
                       "frame_counter": "visible in Engine9000 status bar as FRAME:<n>",
-                      "restore_delay": args.restore_delay}))
+                      "restore_delay": args.restore_delay,
+                      "input_delay_frames": args.input_delay_frames,
+                      "derived_playback": str(playback)}))
 
 
 if __name__ == "__main__":
