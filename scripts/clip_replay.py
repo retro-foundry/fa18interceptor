@@ -1,4 +1,4 @@
-"""Write an E9K playback prefix containing events through a requested frame."""
+"""Write an E9K playback prefix or a frame-rebased suffix."""
 
 import argparse
 import re
@@ -11,7 +11,11 @@ EVENT_FRAME = re.compile(r"^F\s+(\d+)\s+")
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path)
-    parser.add_argument("--through-frame", type=int, required=True)
+    bounds = parser.add_mutually_exclusive_group(required=True)
+    bounds.add_argument("--through-frame", type=int,
+                        help="Keep events through this absolute source frame.")
+    bounds.add_argument("--from-frame", type=int,
+                        help="Keep later events and subtract this frame from their timestamps.")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -24,12 +28,19 @@ def main():
         match = EVENT_FRAME.match(line)
         if not match:
             raise ValueError(f"unrecognized playback row: {line!r}")
-        if int(match.group(1)) <= args.through_frame:
-            output.append(line)
+        frame = int(match.group(1))
+        if args.through_frame is not None:
+            if frame <= args.through_frame:
+                output.append(line)
+                kept += 1
+        elif frame > args.from_frame:
+            output.append(EVENT_FRAME.sub(f"F {frame - args.from_frame} ", line, count=1))
             kept += 1
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text("\n".join(output) + "\n")
-    print(f"wrote {args.output}: {kept} events through frame {args.through_frame}")
+    description = (f"through frame {args.through_frame}" if args.through_frame is not None
+                   else f"rebased after frame {args.from_frame}")
+    print(f"wrote {args.output}: {kept} events {description}")
 
 
 if __name__ == "__main__":
