@@ -41,6 +41,8 @@ def main() -> None:
                         help="omit run003-specific captured grid/symbol vectors")
     parser.add_argument("--start-submission", type=int, default=0,
                         help="skip an observed setup prefix before the repeating map pass")
+    parser.add_argument("--submissions", type=int,
+                        help="use exactly this many submissions after --start-submission; for a moving pass without an exact repeat")
     parser.add_argument("--expected-submissions", type=int, default=42,
                         help="fail if the bounded repeating pass has a different polygon count")
     parser.add_argument("--no-annotations", action="store_true",
@@ -60,7 +62,14 @@ def main() -> None:
     if any(path.exists() for path in (args.svg, args.png, args.output)):
         raise FileExistsError("refusing to overwrite vector-map evidence output")
     captured = json.loads(args.input.read_text(encoding="utf-8"))
-    polygons = canonical_pass(captured["polygons"], args.start_submission)
+    if args.submissions is None:
+        polygons = canonical_pass(captured["polygons"], args.start_submission)
+    else:
+        if args.submissions <= 0:
+            raise ValueError("--submissions must be positive")
+        polygons = captured["polygons"][args.start_submission:args.start_submission + args.submissions]
+        if len(polygons) != args.submissions:
+            raise RuntimeError("capture ends before requested bounded submission count")
     lines = [] if args.no_lines else json.loads(args.line_input.read_text(encoding="utf-8"))["vectors"]
     if len(polygons) != args.expected_submissions:
         raise RuntimeError(f"expected {args.expected_submissions} pass submissions, got {len(polygons)}")
