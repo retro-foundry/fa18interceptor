@@ -1,0 +1,384 @@
+{
+  "classification": "multi_capture_source_vector_coastline_mosaic",
+  "runs": [
+    {
+      "name": "run042",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run042_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        0,
+        0
+      ],
+      "canonical_submissions": 40,
+      "start_submission": null,
+      "bounded_submissions": null
+    },
+    {
+      "name": "run002",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run002_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        16,
+        131
+      ],
+      "canonical_submissions": 43,
+      "start_submission": 0,
+      "bounded_submissions": 43
+    },
+    {
+      "name": "run002_late",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run002_late_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        10,
+        122
+      ],
+      "canonical_submissions": 43,
+      "start_submission": 0,
+      "bounded_submissions": 43
+    },
+    {
+      "name": "run037",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run037_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        14,
+        45
+      ],
+      "canonical_submissions": 47,
+      "start_submission": null,
+      "bounded_submissions": null
+    },
+    {
+      "name": "run035",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run035_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        130,
+        61
+      ],
+      "canonical_submissions": 49,
+      "start_submission": null,
+      "bounded_submissions": null
+    },
+    {
+      "name": "run038",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run038_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        154,
+        71
+      ],
+      "canonical_submissions": 58,
+      "start_submission": 8,
+      "bounded_submissions": 58
+    },
+    {
+      "name": "run041",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run041_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        172,
+        72
+      ],
+      "canonical_submissions": 50,
+      "start_submission": 10,
+      "bounded_submissions": 50
+    },
+    {
+      "name": "run031_alcatraz_window",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run031_frame13200_alcatraz_m_map_mode_latch_zero_projected_polygons\\projected_polygons.json",
+      "translation": [
+        172,
+        67
+      ],
+      "canonical_submissions": 51,
+      "start_submission": 0,
+      "bounded_submissions": 51
+    },
+    {
+      "name": "run031_later_bridge",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run031_frame14500_later_bridge_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        194,
+        70
+      ],
+      "canonical_submissions": 54,
+      "start_submission": 0,
+      "bounded_submissions": 54
+    },
+    {
+      "name": "run033_5250",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run033_frame05250_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        210,
+        79
+      ],
+      "canonical_submissions": 49,
+      "start_submission": null,
+      "bounded_submissions": null
+    },
+    {
+      "name": "run034_diagnostic",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run034_diagnostic_m_map_projected_polygons_tagged\\projected_polygons.json",
+      "translation": [
+        220,
+        99
+      ],
+      "canonical_submissions": 43,
+      "start_submission": null,
+      "bounded_submissions": null
+    },
+    {
+      "name": "run001",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run001_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        194,
+        121
+      ],
+      "canonical_submissions": 36,
+      "start_submission": 0,
+      "bounded_submissions": 36
+    },
+    {
+      "name": "run024",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run024_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        270,
+        96
+      ],
+      "canonical_submissions": 42,
+      "start_submission": 0,
+      "bounded_submissions": 42
+    },
+    {
+      "name": "run003",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run003_m_map_colour_polygon_probe\\projected_polygons.json",
+      "translation": [
+        272,
+        97
+      ],
+      "canonical_submissions": 42,
+      "start_submission": 0,
+      "bounded_submissions": 42
+    },
+    {
+      "name": "run004",
+      "polygon_capture": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\run004_m_map_projected_polygons\\projected_polygons.json",
+      "translation": [
+        356,
+        170
+      ],
+      "canonical_submissions": 22,
+      "start_submission": 2,
+      "bounded_submissions": 22
+    }
+  ],
+  "landmarks": [
+    {
+      "name": "GOLDEN GATE",
+      "anchor": [
+        466,
+        156.5
+      ]
+    }
+  ],
+  "golden_gate_segments": [
+    [
+      [
+        466,
+        153
+      ],
+      [
+        466,
+        157
+      ]
+    ],
+    [
+      [
+        466,
+        160
+      ],
+      [
+        466,
+        156
+      ]
+    ]
+  ],
+  "overlay_lines": [
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C4BFB2",
+      "endpoints": [
+        632,
+        97,
+        676,
+        98
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C4BFBE",
+      "endpoints": [
+        710,
+        97,
+        722,
+        97
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C35BD4",
+      "endpoints": [
+        568,
+        220,
+        576,
+        215
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C35BD4",
+      "endpoints": [
+        576,
+        215,
+        618,
+        209
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C3559A",
+      "endpoints": [
+        466,
+        153,
+        466,
+        157
+      ],
+      "colour": "#880000"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C355D2",
+      "endpoints": [
+        466,
+        160,
+        466,
+        156
+      ],
+      "colour": "#880000"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C36216",
+      "endpoints": [
+        508,
+        163,
+        522,
+        157
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C36216",
+      "endpoints": [
+        522,
+        157,
+        536,
+        156
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C36212",
+      "endpoints": [
+        508,
+        163,
+        522,
+        157
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C36212",
+      "endpoints": [
+        522,
+        157,
+        536,
+        156
+      ],
+      "colour": "#555555"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C3B6B0",
+      "endpoints": [
+        486,
+        191,
+        494,
+        192
+      ],
+      "colour": "#003300"
+    },
+    {
+      "source": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\analysis\\data\\run003_m_map_renderer_vectors.json",
+      "translation": [
+        272,
+        97
+      ],
+      "context": "$C3B6B0",
+      "endpoints": [
+        492,
+        189,
+        494,
+        192
+      ],
+      "colour": "#003300"
+    }
+  ],
+  "qualification": "Each green rectangle is one directly observed 640\u00d7180 M-map viewport; blue polygons are direct renderer vectors inside that observed coverage, while black is uncaptured space. The normalized mosaic places run042 at (0,0), run002 at +16,+131, later run002 at +10,+122, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, diagnostic run031 Alcatraz-window map state at +172,+67, diagnostic run031 later-bridge state at +194,+70, run033 frame 5,250 at +210,+79, diagnostic run034 at +220,+99, run001 at +194,+121, run024 at +270,+96, run003 at +272,+97, and run004 at +356,+170 host pixels. Run034's placement is measured from 111,694/113,680 matching comparable direct land/sea pixels (98.253%) after its supplied diagnostic M-key-down; it remains diagnostic, not a normal replay claim. Its red Golden Gate vectors are C3559A/C355D2 lines directly captured both in run033's user-identified bridge state and in the prior map state, agreeing through the red-pixel-validated join. The run031 map passes are produced by the original renderer after clearing only their upstream UI command-mode latch; they do not identify an Alcatraz or later-bridge map primitive. Reusable components are deliberately excluded as unproven landmarks. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded."
+}

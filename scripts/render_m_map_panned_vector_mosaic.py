@@ -38,6 +38,10 @@ RUNS = (
     # run033 frame 5,250 = run035 + (80,18), measured from exact blue-water overlap.
     # Its C3559A/C355D2 lines independently place the Golden Gate at this join.
     ("run033_5250", ROOT / "build/run033_frame05250_m_map_projected_polygons/projected_polygons.json", 210, 79, 49, None, None),
+    # Run034 needs a supplied one-frame M-key-down because its sealed recording
+    # preserved the release but not the press. Its coastline registration is
+    # direct but remains explicitly diagnostic coverage.
+    ("run034_diagnostic", ROOT / "build/run034_diagnostic_m_map_projected_polygons_tagged/projected_polygons.json", 220, 99, 43, None, None),
     # run035 = run001 + (64,60), measured from the exact blue-water join.
     ("run001", ROOT / "build/run001_m_map_projected_polygons/projected_polygons.json", 194, 121, 36, 0, 36),
     # run035 = run024 + (140,35), measured from the exact blue-water join.
@@ -64,9 +68,9 @@ def canonical_pass(polygons: list[dict]) -> list[dict]:
 
 
 def main() -> None:
-    svg_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic.svg"
-    png_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic.png"
-    report_path = ROOT / "analysis/data/m_map_panned_projected_polygon_mosaic.json"
+    svg_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v2.svg"
+    png_path = ROOT / "analysis/visuals/m_map_panned_projected_polygon_mosaic_v2.png"
+    report_path = ROOT / "analysis/data/m_map_panned_projected_polygon_mosaic_v2.json"
     if any(path.exists() for path in (svg_path, png_path, report_path)):
         raise FileExistsError("refusing to overwrite mosaic evidence output")
     svg = [
@@ -140,7 +144,7 @@ def main() -> None:
         "landmarks": [{"name": name, "anchor": [x, y]} for name, x, y, _ in ANCHORS],
         "golden_gate_segments": [[list(start), list(end)] for start, end in GOLDEN_GATE_LINES],
         "overlay_lines": overlay_rows,
-        "qualification": "Each green rectangle is one directly observed 640×180 M-map viewport; blue polygons are direct renderer vectors inside that observed coverage, while black is uncaptured space. The normalized mosaic places run042 at (0,0), run002 at +16,+131, later run002 at +10,+122, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, diagnostic run031 Alcatraz-window map state at +172,+67, diagnostic run031 later-bridge state at +194,+70, run033 frame 5,250 at +210,+79, run001 at +194,+121, run024 at +270,+96, run003 at +272,+97, and run004 at +356,+170 host pixels. Its red Golden Gate vectors are C3559A/C355D2 lines directly captured both in run033's user-identified bridge state and in the prior map state, agreeing through the red-pixel-validated join. The run031 map passes are produced by the original renderer after clearing only their upstream UI command-mode latch; they do not identify an Alcatraz or later-bridge map primitive. Reusable components are deliberately excluded as unproven landmarks. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded.",
+        "qualification": "Each green rectangle is one directly observed 640×180 M-map viewport; blue polygons are direct renderer vectors inside that observed coverage, while black is uncaptured space. The normalized mosaic places run042 at (0,0), run002 at +16,+131, later run002 at +10,+122, run037 at +14,+45, run035 at +130,+61, run038 at +154,+71, run041 at +172,+72, diagnostic run031 Alcatraz-window map state at +172,+67, diagnostic run031 later-bridge state at +194,+70, run033 frame 5,250 at +210,+79, diagnostic run034 at +220,+99, run001 at +194,+121, run024 at +270,+96, run003 at +272,+97, and run004 at +356,+170 host pixels. Run034's placement is measured from 111,694/113,680 matching comparable direct land/sea pixels (98.253%) after its supplied diagnostic M-key-down; it remains diagnostic, not a normal replay claim. Its red Golden Gate vectors are C3559A/C355D2 lines directly captured both in run033's user-identified bridge state and in the prior map state, agreeing through the red-pixel-validated join. The run031 map passes are produced by the original renderer after clearing only their upstream UI command-mode latch; they do not identify an Alcatraz or later-bridge map primitive. Reusable components are deliberately excluded as unproven landmarks. This is a joined observed coverage view, not absolute global coordinates, a complete world map, or a full terrain-model extraction. Screen-relative grid and state-dependent object symbols are excluded.",
     }
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"runs": len(report_runs), "svg": str(svg_path), "png": str(png_path)}))
