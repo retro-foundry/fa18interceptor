@@ -21,6 +21,12 @@ target: normal run060 hits `$C1EE14` at replay frame 301 and returns to
 current canonical replay, while its branch/source-family interpretation remains
 bounded by the existing evidence.
 
+Its run060 call census confirms that this invocation is renderer-heavy:
+`$C2F688` is entered 22 times, `$C2F5F4` 14 times, and `$C2FA7E` eight times,
+alongside the established table/wrapper and line-setup family. These are
+direct-child counts within the one completed stage call, not a claim about any
+descriptor's game-world identity.
+
 This supersedes the earlier stack-only association between `$C1CC86` and the
 JOY0DAT callback. `$C1718E` remains independently proven as a registered
 hardware callback, but this particular dynamic indirect call target is
