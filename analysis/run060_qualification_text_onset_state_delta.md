@@ -30,9 +30,9 @@ remain unassigned.  The small message-state changes are:
 | `$C45749` | `$05` | `$02` | Adjacent layout state changed; ownership unassigned. |
 | `$C45775` | `$FA` | `$FF` | Message workspace byte changed; meaning unassigned. |
 | `$C457C1` | `$FF` | `$0D` | Message workspace byte changed; meaning unassigned. |
-| `$C457DE` | `$01` | `$00` | It is initialized by `$C32EF6` and decremented by multiple event paths. A bounded native-checkpoint trace proves `$C32EF6` writes it to 1 inside this interval, but does not identify which consumer produces the later zero. |
+| `$C457DE` | `$01` | `$00` | `$C32EF6` writes it to 1 inside this interval. A bounded native-checkpoint trace then hits `$C32EE4` on the first following frame and executes its positive `SUBQ.B`, identifying the observed zero transition in this window. |
 
 This is an exact native pre/post state boundary around the first visible sampled
-text pixels.  It narrows future producer tracing to the changed state and its
+text pixels. It narrows future producer tracing to the changed state and its
 writers, but does not identify the qualification predicate, success writer,
 text payload, or rendered-character timing.

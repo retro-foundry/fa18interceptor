@@ -10,8 +10,16 @@ Two byte-exact slices extend the event dispatcher:
 - `$C32EE4-$C32EF5` tests `$C457DE`, returns through `$C32CEC` when
   nonpositive, otherwise decrements it and enters `$C32F54` static-text setup.
 
-The second path is a second static consumer of the byte that changes from 1 to
-0 across run060's native 9,285--9,290 text-onset checkpoint boundary.  That
-state comparison cannot decide whether this path or `$C32E7C` executed, and
-does not establish either helper's role, the event's origin, or the success
-predicate.
+## Run060 onset consumer observation
+
+The bounded no-input trace
+`build/run060_frame09285_c32ee4_short_trace/trace.jsonl` restores the fresh
+native GUI-frame-9,285 checkpoint and hits `$C32EE4` on its first following
+frame.  Its positive test path executes `SUBQ.B #1,$C457DE` and then branches
+to `$C32F54`.  Since the checkpoint value is one, this identifies `$C32EE4`
+as the observed `1 -> 0` consumer across the 9,285--9,290 onset boundary.
+
+A matching five-frame no-input breakpoint test does not reach `$C32E7C`.
+This is bounded to this checkpoint window: it does not establish either
+helper's role, the event's origin, the broad lifetime of the byte, or the
+success predicate.
