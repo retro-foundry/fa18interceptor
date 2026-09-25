@@ -179,6 +179,10 @@ The current widest coloured source-vector coastline view is
 run003/run035 projected-polygon passes with the measured `(142,36)` panning
 relation. It covers more coastline but must not be called a complete world map
 or absolute-coordinate export; uncovered green margins are not asserted land.
+Run042 now supplies a separately validated, visibly distinct 40-polygon
+source-vector M-map view at 97.9934% land/sea agreement; it has no established
+translation to the mosaic. See
+`analysis/data/run042_m_map_projected_polygon_vectors.md`.
 
 1. Prove the owner of the small black M-map marker without assigning it by
    appearance.  `$C2B93E` is now a byte-exact 20-byte entry: on a

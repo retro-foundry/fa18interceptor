@@ -54,6 +54,8 @@ def main() -> None:
     parser.add_argument("--oracle", type=Path,
                         default=ROOT / "analysis/visuals/run003_m_map_display.png",
                         help="captured screen used only to score land/sea agreement")
+    parser.add_argument("--no-oracle-validation", action="store_true",
+                        help="render without making an invalid cross-capture pixel comparison")
     args = parser.parse_args()
     if any(path.exists() for path in (args.svg, args.png, args.output)):
         raise FileExistsError("refusing to overwrite vector-map evidence output")
@@ -136,18 +138,19 @@ def main() -> None:
             draw.line(((x1 * 2, y1), (x2 * 2, y2)), fill="#000000")
     args.png.parent.mkdir(parents=True, exist_ok=True)
     image.save(args.png)
-    oracle = Image.open(args.oracle).convert("RGB").crop((40, 16, 680, 216))
     compared = matches = 0
-    for y in range(H):
-        for x in range(HOST_W):
-            expected = oracle.getpixel((x, y))
-            if expected not in ((17, 85, 17), (0, 51, 102)):
-                continue
-            actual = image.getpixel((x, y))
-            if actual not in ((17, 85, 17), (0, 51, 102)):
-                continue
-            compared += 1
-            matches += actual == expected
+    if not args.no_oracle_validation:
+        oracle = Image.open(args.oracle).convert("RGB").crop((40, 16, 680, 216))
+        for y in range(H):
+            for x in range(HOST_W):
+                expected = oracle.getpixel((x, y))
+                if expected not in ((17, 85, 17), (0, 51, 102)):
+                    continue
+                actual = image.getpixel((x, y))
+                if actual not in ((17, 85, 17), (0, 51, 102)):
+                    continue
+                compared += 1
+                matches += actual == expected
     report = {
         "classification": "scenario_backed_projected_renderer_vectors_before_area_blit",
         "authority": {"polygon_capture": str(args.input), "line_capture": str(args.line_input)},
@@ -155,9 +158,9 @@ def main() -> None:
         "polygon_context_counts": {context: sum(item["context_a5"] == context for item in polygons)
                                    for context in sorted({item["context_a5"] for item in polygons})},
         "palette": {"land": LAND, "sea": SEA, "grid": GRID},
-        "land_sea_oracle_validation": {"oracle": str(args.oracle), "pixels_compared": compared,
-                                         "matching_pixels": matches,
-                                         "agreement": matches / compared if compared else None},
+        "land_sea_oracle_validation": (None if args.no_oracle_validation else
+            {"oracle": str(args.oracle), "pixels_compared": compared,
+             "matching_pixels": matches, "agreement": matches / compared if compared else None}),
         "annotations_included": not args.no_annotations,
         "landmark": ({"name": "Golden Gate", "anchor": [194, 59.5],
                       "evidence": "$C3559A/$C355D2 bridge contexts in captured line vectors"}
