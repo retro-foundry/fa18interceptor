@@ -19,6 +19,11 @@ path, a mode byte of at least 2 takes the event-guard path, and a zero event
 byte at `$C457E1 + sign_extend($C457F8)` returns without an event. The
 nonzero-event and negative-guard continuations remain raw.
 
+The shared six-byte fall-through at `$C32D1E-$C32D23` is separately
+reconstructed as `clear_message_control_before_record_selection.asm`.  It
+clears byte `$C457F6` before entering `$C32D24`; its caller and control-byte
+ownership remain unassigned.
+
 The observed route tests `$C45871`, loads a word from the table at `$C4574A`
 using byte offset `$C457C6`, and stores it at `$C45772`. It then follows
 observed guards at `$C457C3`, `$C45744`, `$C457E0`, and `$C457F5`, finally
