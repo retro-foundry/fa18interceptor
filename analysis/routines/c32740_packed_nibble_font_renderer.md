@@ -56,3 +56,13 @@ workspace feeding the glyph table and CPU compositor. The normal `0171`
 invocation is a strong KTS correspondence, but tracing its writer and the
 coordinate/record consumer is still required before assigning a cockpit live
 variable or a fixed screen field name.
+
+## Postflight entry linkage
+
+The static postflight message route now reaches the same compositor through
+the distinct `$C3278C/$C32794` entries: see
+`analysis/routines/c3278c_postflight_glyph_renderer_entries.md`. Its
+`$C325A6` caller supplies the postflight text buffers and style-controlled
+parameters. This joins that route to the compositor implementation, but does
+not make the run029 glyph trace evidence an oracle for a postflight or
+qualification screen.
