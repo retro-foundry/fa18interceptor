@@ -24,11 +24,12 @@ def main() -> None:
     parser.add_argument("--playback", type=Path, required=True)
     parser.add_argument("--start-frame", type=int, required=True)
     parser.add_argument("--frames", type=int, default=160)
-    parser.add_argument("--value", type=lambda text: int(text, 0), required=True)
+    parser.add_argument("--value", type=lambda text: int(text, 0),
+                        help="diagnostic byte to write; omit for an unmodified control")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     args = parser.parse_args()
-    if not 0 <= args.value <= 0xFF:
+    if args.value is not None and not 0 <= args.value <= 0xFF:
         parser.error("--value must fit one byte")
     if args.output.exists():
         raise FileExistsError(args.output)
@@ -41,10 +42,11 @@ def main() -> None:
         if not engine.core.retro_unserialize(state, len(state)):
             raise RuntimeError("Core rejected save state")
         before = engine.memory(REQUEST_FLAGS, 1)[0]
-        write = engine.bind("e9k_debug_write_memory", C.c_int, C.c_uint32,
-                            C.c_uint32, C.c_size_t)
-        if not write(REQUEST_FLAGS, args.value, 1):
-            raise RuntimeError("debug write failed")
+        if args.value is not None:
+            write = engine.bind("e9k_debug_write_memory", C.c_int, C.c_uint32,
+                                C.c_uint32, C.c_size_t)
+            if not write(REQUEST_FLAGS, args.value, 1):
+                raise RuntimeError("debug write failed")
         after_write = engine.memory(REQUEST_FLAGS, 1)[0]
         engine.frame = args.start_frame
         engine.hardware_frame = args.start_frame
@@ -56,7 +58,8 @@ def main() -> None:
         final_state = engine.state()
         (args.output / "state.bin").write_bytes(final_state)
         report = {
-            "scope": "diagnostic mutation of C4599C before isolated M-map command",
+            "scope": ("unmodified isolated M-map command control" if args.value is None else
+                      "diagnostic mutation of C4599C before isolated M-map command"),
             "restore": str(args.restore), "playback": str(args.playback),
             "start_frame": args.start_frame, "frames": args.frames,
             "address": f"${REQUEST_FLAGS:06X}", "before": before,
@@ -64,7 +67,8 @@ def main() -> None:
             "final": engine.memory(REQUEST_FLAGS, 1)[0],
             "video_sha256": sha(engine.video[0]),
             "state_sha256": sha(final_state),
-            "qualification": ("This is a debugger-mutated probe, not original replay behavior. "
+            "qualification": ("This is an unmodified control." if args.value is None else
+                              "This is a debugger-mutated probe, not original replay behavior. "
                               "A visible map can establish the candidate flag's sufficiency only, not its normal producer."),
         }
         (args.output / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
