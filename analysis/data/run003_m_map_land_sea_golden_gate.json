@@ -1,0 +1,26 @@
+{
+  "classification": "coloured_screen_oracle_with_separately_trace_backed_landmark_overlay",
+  "screen": "analysis\\visuals\\run003_m_map_display.png",
+  "screen_rectangle": [
+    40,
+    16,
+    680,
+    216
+  ],
+  "dimensions": [
+    640,
+    200
+  ],
+  "filled_colour_runs": 1720,
+  "landmarks": [
+    {
+      "name": "Golden Gate",
+      "screen_anchor": [
+        194.0,
+        59.5
+      ],
+      "evidence": "$C3559A/$C355D2 traced bridge contexts"
+    }
+  ],
+  "qualification": "Land/sea fill is a visual oracle; the callout is renderer-vector evidence. This is not a static coastline-polygon export."
+}
