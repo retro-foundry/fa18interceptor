@@ -67,6 +67,8 @@ def main() -> None:
             "bltsize": f"${row['value']:04X}",
             "bltcon0": f"${registers.get(0x040, 0):04X}",
             "bltcon1": f"${registers.get(0x042, 0):04X}",
+            "state_registers": {f"${offset:03X}": f"${registers.get(offset, 0):04X}"
+                                for offset in STATE_REGISTERS},
             "pointers": {channel: f"${address:06X}" for channel, address in pointers.items()},
             "pointer_last_writers": {
                 channel: {"high": last_writers.get(high), "low": last_writers.get(low)}

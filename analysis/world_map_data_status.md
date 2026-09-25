@@ -9,6 +9,10 @@ completed bitmap.  Its scenario-backed Golden Gate callout is anchored by the
 map's green land fill remains an explicit open decoding task: the captured
 `$C304F4` line-mode jobs have not yet been reduced to source polygons and final
 palette indices, so no fake filled vector map is presented as extracted data.
+The corrected next boundary is now documented by the
+[area-blit input probe](data/run003_m_map_span_input_probe.md): `$C304F4` is a
+descending area-blit submit, and its mutable input state can be recaptured
+exactly before every `BLTSIZE` trigger.
 
 This is the evidence boundary for the game's large physical flight area.  It
 separates the observed *scene-selection and render inputs* from an as-yet

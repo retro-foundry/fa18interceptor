@@ -60,6 +60,13 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   This is only a partial vector emission view.  Do not add screen-derived land
   fills: decode the 44 `$C304F4` pending-page line-mode jobs into source
   polygon/fill primitives and palette-index semantics first.
+- Correction to retain: `$C304F4` is not line mode.  Captured `BLTCON1=$0002`
+  selects descending area-blit progression; bit zero selects OCS line mode.
+  `scripts/collect_run003_m_map_span_inputs.py` reproducibly takes a Chip-RAM
+  snapshot immediately before each C304F4 trigger, including mutable A/C
+  source masks.  Use those exact snapshots to replay area operations and
+  extract operation spans; do not mistake `$006000-$007FFF` inputs for static
+  coastline data.  See `analysis/data/run003_m_map_span_input_probe.md`.
 
 The world path has two separate layers:
 
