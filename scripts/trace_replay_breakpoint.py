@@ -66,6 +66,7 @@ def main() -> None:
             rows.append(row)
         (args.output / "trace.jsonl").write_text(
             "".join(json.dumps(row, separators=(",", ":")) + "\n" for row in rows), encoding="utf-8")
+        (args.output / "trace_final_slow.bin").write_bytes(engine.memory(0xC00000, 0x80000))
         (args.output / "report.json").write_text(json.dumps({
             "scope": "event-faithful replay to breakpoint then bounded instruction trace",
             "breakpoint": f"${args.address:06X}", "hit": hit,
