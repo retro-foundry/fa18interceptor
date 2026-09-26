@@ -95,6 +95,17 @@ int main(void) {
         fputs("RGB4 palette contract failed\n", stderr);
         return 1;
     }
+    memset(&page, 0, sizeof page);
+    assert(fa18_apply_run060_frame7991_fill(&page) == 0);
+    fa18_decode_planar_page(&page, &indices);
+    assert((indices.pixels[94 * FA18_WIDTH + 144] & 1u) == 0u);
+    assert((indices.pixels[94 * FA18_WIDTH + 145] & 1u) != 0u);
+    assert((indices.pixels[94 * FA18_WIDTH + 208] & 1u) != 0u);
+    assert((indices.pixels[94 * FA18_WIDTH + 209] & 1u) == 0u);
+    assert((indices.pixels[115 * FA18_WIDTH + 2] & 1u) == 0u);
+    assert((indices.pixels[115 * FA18_WIDTH + 3] & 1u) != 0u);
+    assert((indices.pixels[144 * FA18_WIDTH + 319] & 1u) != 0u);
+    assert((indices.pixels[145 * FA18_WIDTH] & 1u) == 0u);
     indices.pixels[0] = 16u;
     if (fa18_apply_palette(&indices, &palette, rgb444) != -1) {
         fputs("invalid palette index contract failed\n", stderr);

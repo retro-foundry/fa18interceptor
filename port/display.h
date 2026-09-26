@@ -44,6 +44,10 @@ int fa18_execute_planar_blit(const FA18PlanarPage *source,
                              uint8_t logic_function,
                              uint16_t first_mask, uint16_t last_mask);
 
+/* Run060 frame 7991's proven descending fill, expressed as a semantic page
+ * operation. The captured destination is plane 0, word 19, row 144. */
+int fa18_apply_run060_frame7991_fill(FA18PlanarPage *page);
+
 /* Amiga RGB4 words, held as palette state rather than COLORxx registers. */
 typedef struct {
     uint16_t rgb4[16];

@@ -1039,3 +1039,9 @@ game loop.
   `analysis/data/run060_frame7991_renderer_pointer_state.md`; the native
   page model can now consume this mapping without retaining original
   addresses.
+- Connected the proven frame-7991 destination to `FA18PlanarPage` through
+  `fa18_apply_run060_frame7991_fill`. The semantic operation writes plane 0
+  using the captured descending fill spans and the display contract checks the
+  exact edge pixels after deplanarization. This is the first run060 fill
+  operation connected to the native page model; it remains a frame-7991
+  boundary until the next run060+ fill supplies a general edge rule.
