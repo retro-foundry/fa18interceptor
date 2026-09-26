@@ -56,6 +56,8 @@ void fa18_render_run075_frame200_menu(FA18IndexedFrameBuffer *framebuffer,
                                       uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT]);
 void fa18_render_run075_frame234_menu(FA18IndexedFrameBuffer *framebuffer,
                                       uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT]);
+void fa18_render_run075_frame235_clear(FA18IndexedFrameBuffer *framebuffer,
+                                       uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT]);
 
 /* $C1BD78's proved run075 branch after the frontend input dispatcher has
  * recognized the recorded first menu command. The raw key-to-command mapping

@@ -168,7 +168,7 @@ static int stream_rgb444(const uint16_t *chunky) {
 
 static int apply_native_frame_gate(FrameStream *stream, uint32_t frame,
                                    FA18MenuState *menu_state) {
-    if (frame < 200u || frame > 234u) return 0;
+    if (frame < 200u || frame > 235u) return 0;
     if (frame == 230u && fa18_select_run075_demo_mode(menu_state) != 0) {
         fprintf(stderr, "Native frame-230 menu selection failed\n");
         return -1;
@@ -180,6 +180,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame,
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
     if (frame == 234u) fa18_render_run075_frame234_menu(&native_indexed, native_rgb444);
+    else if (frame == 235u) fa18_render_run075_frame235_clear(&native_indexed, native_rgb444);
     else fa18_render_run075_frame200_menu(&native_indexed, native_rgb444);
     for (size_t i = 0; i < PIXELS; ++i) {
         if (native_rgb444[i] != stream->chunky[i]) {
