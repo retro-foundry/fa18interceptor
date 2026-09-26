@@ -2,6 +2,7 @@
 
 #include "menu_frame200_data.h"
 #include "menu_frame234_data.h"
+#include "menu_frame236_data.h"
 
 #include <string.h>
 
@@ -43,6 +44,13 @@ void fa18_render_run075_frame235_clear(FA18IndexedFrameBuffer *framebuffer,
     if (!framebuffer || !rgb444) return;
     memset(framebuffer->pixels, 0, sizeof framebuffer->pixels);
     memset(rgb444, 0, sizeof(uint16_t) * FA18_WIDTH * FA18_HEIGHT);
+}
+
+void fa18_render_run075_frame236_demo_label(FA18IndexedFrameBuffer *framebuffer,
+                                            uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT]) {
+    if (!framebuffer || !rgb444) return;
+    render_menu_runs(framebuffer, rgb444, fa18_menu_frame236_runs,
+                     FA18_MENU_FRAME236_RUNS);
 }
 
 int fa18_select_run075_demo_mode(FA18MenuState *state) {
