@@ -37,15 +37,16 @@ typedef struct {
     uint16_t bltcon1;
     uint16_t first_mask;
     uint16_t last_mask;
-    uint32_t a_source;
-    uint32_t b_source;
-    uint32_t c_source;
-    uint32_t d_destination;
+    uint8_t destination_plane;
+    uint16_t destination_word;
+    uint16_t destination_row;
+    uint8_t source_asset_index;
     uint16_t a_modulus;
     uint16_t b_modulus;
     uint16_t c_modulus;
     uint16_t d_modulus;
-    uint16_t width_height;
+    uint16_t width_words;
+    uint16_t height_rows;
 } FA18LineBlitJob;
 
 /* Four live run060 frame-7992 segment-37 jobs, retained as semantic packet

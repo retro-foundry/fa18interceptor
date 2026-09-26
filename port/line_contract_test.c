@@ -9,12 +9,12 @@
 int main(void) {
     FA18LineBlitJob jobs[4];
     assert(fa18_build_run060_frame7992_line_jobs(jobs) == 0);
-    assert(jobs[0].bltcon0 == 0x0fce && jobs[0].a_source == 0x00a230);
-    assert(jobs[0].b_source == 0x00b038 && jobs[0].c_source == 0x019e4a);
-    assert(jobs[1].b_source == 0x00ae88 && jobs[1].c_source == 0x017f0a);
-    assert(jobs[2].b_source == 0x00acd8 && jobs[2].c_source == 0x015fca);
-    assert(jobs[3].b_source == 0x00ab28 && jobs[3].c_source == 0x01408a);
-    assert(jobs[3].width_height == 0x0312);
+    assert(jobs[0].bltcon0 == 0x0fce && jobs[0].destination_plane == 3);
+    assert(jobs[0].destination_word == 1 && jobs[0].destination_row == 101);
+    assert(jobs[1].destination_plane == 2 && jobs[1].source_asset_index == 1);
+    assert(jobs[2].destination_plane == 1 && jobs[2].source_asset_index == 2);
+    assert(jobs[3].destination_plane == 0 && jobs[3].source_asset_index == 3);
+    assert(jobs[3].width_words == 18 && jobs[3].height_rows == 12);
     assert(jobs[0].a_modulus == 1 && jobs[0].b_modulus == 1 &&
            jobs[0].c_modulus == 5 && jobs[0].d_modulus == 5);
     assert(FA18_RUN075_FRAME395_LINES == 12);

@@ -11,6 +11,11 @@ BLTAMOD = 1       BLTBMOD = 1
 BLTCMOD = 5       BLTDMOD = 5
 ```
 
+The live custom image confirms that the first packet has the same setup even
+though the breakpoint is before its register writes. The three subsequent
+images read directly at the repeated preparation entries all contain this
+same control, mask, modulo, and size tuple.
+
 The per job B and C/D pointers are:
 
 ```text
