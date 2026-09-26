@@ -38,6 +38,25 @@ In cockpit play the pose can be the aircraft, camera, or a deliberately
 coincident aircraft/camera context. The root is selected by the live control
 stage, which supports (but does not prove) player ownership.
 
+## Early run060 initialization event
+
+The deterministic per-frame sampler over root `+$14/+18/+1C` finds exactly
+one mutation in frames 1--300: replay frame 189. There is no recorded input
+event from frames 160--210. The mutation changes all three components
+together:
+
+```text
++$14  $10545920 -> $11982C00
++$18  $00000708 -> $00007708   (5 -> 145 under the cockpit-altitude scale)
++$1C  $10A404F0 -> $1059A000
+```
+
+That is an initialization/placement-shaped transition rather than ordinary
+per-frame render scratch. The current watchpoint ABI does not report the bulk
+writer even with all-source mode, so the writer PC remains unknown. This is
+still not enough to choose aircraft pose over a coincident camera pose, but it
+strengthens the root pose interpretation.
+
 ## Not yet proven
 
 - Which horizontal component is which world axis.
