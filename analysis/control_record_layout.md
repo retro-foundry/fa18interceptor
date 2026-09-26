@@ -19,6 +19,7 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | `$28-$2A` | bytes | read by `$C1342C` into local signed words | `$C1342C` packet |
 | `$2B` | byte | input comparison byte | `prepare_indexed_control_record_context.asm`, `$C1B27E` packet |
 | `$39` | byte | masked low nibble used by `$C1B27E` | `$C1B27E` packet |
+| `$3E/$42/$46` | longs | signed scaled motion-delta terms; `+$42` is the active-route vertical displacement added to `+$18` | `data/run060_root_motion_delta_terms.md` |
 | `$62` | byte | high nibble is a normal-update record-type discriminator | `prepare_normal_update_state.asm` |
 | `$65` | byte | record control byte | `prepare_indexed_control_record_context.asm`, `$C1B27E` packet |
 | `$66/$68/$6A` | three words | active orientation-angle state: `$C2D94E` republishes the triple then `$C2E514` composes root `+$92..+$A2`; `$66` is pitch-like in the initial run060 basis and also feeds an observed trigonometric path | `publish_record_matrix_update_triple.asm`; `data/run060_root_attitude_matrix.md`; `data/run060_root_axis_orientation_inference.md` |

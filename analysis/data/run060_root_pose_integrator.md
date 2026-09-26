@@ -48,6 +48,10 @@ alternative did occur, so a single temporary write must not be interpreted as
 motion without the paired final state. The frame-925 trace proves the
 committed descent path.
 
+The same update publishes the negated displacement at root `+$42`, making it
+the signed vertical motion-delta term on this route; see
+`data/run060_root_motion_delta_terms.md`.
+
 ## Horizontal pair
 
 The active indexed-update publication at `$C25E6E-$C25E72` writes:
