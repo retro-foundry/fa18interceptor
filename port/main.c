@@ -244,14 +244,18 @@ static int apply_run075_static_text(uint32_t frame,
     const uint8_t frame471_glyph[7] = {0xf8, 0x88, 0x80, 0xc0, 0xc0, 0xc8, 0xf8};
     const uint8_t frame473_glyph[7] = {0xf8, 0x20, 0x20, 0x30, 0x30, 0x30, 0x30};
     const uint8_t frame475_glyph[7] = {0xf8, 0x98, 0x88, 0x88, 0x88, 0x88, 0xf8};
+    const uint8_t frame477_glyph[7] = {0xf0, 0x90, 0x90, 0xf8, 0xc8, 0xc8, 0xc8};
     const uint8_t *glyph = frame == 469u ? frame469_glyph :
                            frame == 471u ? frame471_glyph :
-                           frame == 473u ? frame473_glyph : frame475_glyph;
+                           frame == 473u ? frame473_glyph :
+                           frame == 475u ? frame475_glyph : frame477_glyph;
     const uint16_t mask = frame == 469u ? 0x1000u :
                           frame == 471u ? 0x8000u :
-                          frame == 473u ? 0xf000u : 0x6000u;
-    const size_t destination = frame == 475u ? 0x0420u : 0x041eu;
-    if ((frame != 469u && frame != 471u && frame != 473u && frame != 475u) ||
+                          frame == 473u ? 0xf000u :
+                          frame == 475u ? 0x6000u : 0xd000u;
+    const size_t destination = (frame == 475u || frame == 477u) ? 0x0420u : 0x041eu;
+    if ((frame != 469u && frame != 471u && frame != 473u &&
+         frame != 475u && frame != 477u) ||
         !previous || !output) return -1;
     FA18IndexedFrameBuffer indexed;
     for (size_t pixel = 0; pixel < PIXELS; ++pixel) {
@@ -440,7 +444,8 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                                               0x003, 0x333, 0x777, 0x444,
                                               0x800, 0x888, 0x666, 0x555 };
         for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
-    } else if (frame == 469u || frame == 471u || frame == 473u || frame == 475u) {
+    } else if (frame == 469u || frame == 471u || frame == 473u ||
+               frame == 475u || frame == 477u) {
         if (apply_run075_static_text(frame, stream->chunky, native_rgb444) != 0) {
             return -1;
         }

@@ -796,3 +796,6 @@ game loop.
 - Frame 475 is also native: its traced glyph bytes, `$0420` destination, and
   `$6000` mask are applied through the same page conversion. The complete
   replay verifier remains exact.
+- Frame 477 is native as well, using the traced `$0420` destination and
+  `$D000` mask. This extends the live compositor path through the next text
+  update.
