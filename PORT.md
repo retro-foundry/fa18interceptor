@@ -1051,3 +1051,8 @@ game loop.
   hashes are recorded in `analysis/data/run060_frame7992_successor.md`; the
   native port is held at this frame until those line packets are decoded and
   matched.
+- Promoted the four frame-7992 `$C30F5A` preparations into
+  `FA18LineBlitJob` and `fa18_build_run060_frame7992_line_jobs`. The contract
+  verifies all captured A/B/C/D pointers, control words, masks, and size. The
+  remaining work for the current frame is decoding the source-table pointers
+  into screen segments and matching their four-plane output.

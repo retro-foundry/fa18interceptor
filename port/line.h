@@ -32,6 +32,22 @@ typedef struct {
     uint8_t active_plane_mask;
 } FA18LinePacket;
 
+typedef struct {
+    uint16_t bltcon0;
+    uint16_t bltcon1;
+    uint16_t first_mask;
+    uint16_t last_mask;
+    uint32_t a_source;
+    uint32_t b_source;
+    uint32_t c_source;
+    uint32_t d_destination;
+    uint16_t width_height;
+} FA18LineBlitJob;
+
+/* Four live run060 frame-7992 segment-37 jobs, retained as semantic packet
+ * fields rather than an Amiga memory image. */
+int fa18_build_run060_frame7992_line_jobs(FA18LineBlitJob jobs[4]);
+
 /* Frame-395 `$C2FB7A` packet values after CPU line preparation. */
 int fa18_validate_line_packet(const FA18LinePacket *packet);
 

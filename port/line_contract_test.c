@@ -7,6 +7,14 @@
 #include <string.h>
 
 int main(void) {
+    FA18LineBlitJob jobs[4];
+    assert(fa18_build_run060_frame7992_line_jobs(jobs) == 0);
+    assert(jobs[0].bltcon0 == 0x0fce && jobs[0].a_source == 0x00a230);
+    assert(jobs[0].b_source == 0x00b038 && jobs[0].c_source == 0x019e4a);
+    assert(jobs[1].b_source == 0x00ae88 && jobs[1].c_source == 0x017f0a);
+    assert(jobs[2].b_source == 0x00acd8 && jobs[2].c_source == 0x015fca);
+    assert(jobs[3].b_source == 0x00ab28 && jobs[3].c_source == 0x01408a);
+    assert(jobs[3].width_height == 0x0312);
     assert(FA18_RUN075_FRAME395_LINES == 12);
     assert(fa18_run075_frame395_lines[0].x0 == 175);
     assert(fa18_run075_frame395_lines[11].x1 == 199);

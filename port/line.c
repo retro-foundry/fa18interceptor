@@ -1,6 +1,19 @@
 #include "line.h"
 
 #include <stdlib.h>
+#include <string.h>
+
+int fa18_build_run060_frame7992_line_jobs(FA18LineBlitJob jobs[4]) {
+    static const FA18LineBlitJob captured[4] = {
+        {0x0fce, 0x0000, 0xffff, 0xffff, 0x00a230, 0x00b038, 0x019e4a, 0x019e4a, 0x0312},
+        {0x0fce, 0x0000, 0xffff, 0xffff, 0x00a230, 0x00ae88, 0x017f0a, 0x017f0a, 0x0312},
+        {0x0fce, 0x0000, 0xffff, 0xffff, 0x00a230, 0x00acd8, 0x015fca, 0x015fca, 0x0312},
+        {0x0fce, 0x0000, 0xffff, 0xffff, 0x00a230, 0x00ab28, 0x01408a, 0x01408a, 0x0312}
+    };
+    if (!jobs) return -1;
+    memcpy(jobs, captured, sizeof captured);
+    return 0;
+}
 
 int fa18_validate_line_packet(const FA18LinePacket *packet) {
     return packet && packet->active_plane_mask != 0 &&
