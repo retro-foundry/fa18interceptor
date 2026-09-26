@@ -111,6 +111,10 @@ infer a function's purpose merely from a rendered frame.
   are unrelated DMA records; a line C read would carry the line flag in
   `extra=34`. The separate C source conclusion is withdrawn. Packet 12's
   remaining divergence is still a line pipeline or pointer timing issue.
+- 2026-09-27: Correctly classified the line DMA records: `extra=34` carries
+  the 99 C words and `extra=35` carries the D writes. Added that C stream as a
+  semantic source on `FA18LineBlitJob`; packet 12 now matches the complete
+  oracle, including the prior `$FBC0` final word.
 
 - 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the

@@ -68,7 +68,9 @@ int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
             apt = (int16_t)(apt + (sign ? (int16_t)job->bltbmod :
                                              (int16_t)job->bltamod));
         if (cpt < 0 || cpt + 1 >= (int64_t)plane_bytes) return -1;
-        const uint16_t c = line_read_word(plane, (size_t)cpt);
+        const uint16_t c = (job->c_source_words && step < job->c_source_count)
+            ? job->c_source_words[step]
+            : line_read_word(plane, (size_t)cpt);
         const uint16_t b = (bline & 1u) ? 0xffffu : 0u;
         const uint16_t a = (uint16_t)(job->bltadat >> ashift);
         const uint16_t d = fa18_apply_blitter_minterm(

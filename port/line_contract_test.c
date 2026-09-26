@@ -3,6 +3,7 @@
 #include "run075_frame395_line_packet.h"
 #include "run060_frame7992_line_packets.h"
 #include "run060_frame7991_line_oracle.h"
+#include "run060_packet12_c_source.h"
 
 #include <stdio.h>
 #include <assert.h>
@@ -57,6 +58,20 @@ int main(void) {
              write < fa18_run060_line_oracle_write_counts[i]; ++write) {
             const FA18LineOracleWrite expected =
                 fa18_run060_line_oracle_writes[i][write];
+            const uint16_t actual = (uint16_t)(((uint16_t)snapshot[expected.offset] << 8) |
+                                               snapshot[expected.offset + 1]);
+            assert(actual == expected.value);
+        }
+    }
+    FA18LineBlitJob packet12 = fa18_run060_frame7992_line_packets[12];
+    packet12.c_source_words = fa18_run060_packet12_c_source;
+    packet12.c_source_count = 99;
+    {
+        uint8_t snapshot[FA18_RUN060_LINE_PLANE_BYTES];
+        memcpy(snapshot, fa18_run060_frame7991_line_planes[0], sizeof snapshot);
+        assert(fa18_execute_line_blit_job(snapshot, sizeof snapshot, &packet12) == 0);
+        for (size_t write = 0; write < fa18_run060_line_oracle_write_counts[12]; ++write) {
+            const FA18LineOracleWrite expected = fa18_run060_line_oracle_writes[12][write];
             const uint16_t actual = (uint16_t)(((uint16_t)snapshot[expected.offset] << 8) |
                                                snapshot[expected.offset + 1]);
             assert(actual == expected.value);

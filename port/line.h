@@ -59,6 +59,8 @@ typedef struct {
     uint16_t width_words, height_rows;
     uint8_t destination_plane;
     uint16_t destination_byte_offset;
+    const uint16_t *c_source_words;
+    uint16_t c_source_count;
 } FA18LineBlitJob;
 
 int fa18_validate_line_blit_job(const FA18LineBlitJob *job);
