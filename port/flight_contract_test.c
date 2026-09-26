@@ -25,6 +25,8 @@ int main(void) {
            adjusted == -2);
     assert(fa18_flight_adjust_signed_word_pair(2, 0, &adjusted) == 0 &&
            adjusted == 2);
+    assert(fa18_flight_prepare_scaled_motion(10, -3, 18, 0x4000, &terms) == 0);
+    assert(terms.first == -72 && terms.second == -16 && terms.third == -0x10000);
 
     FA18FlightPose pose = {0};
     pose.altitude = 0x72301;

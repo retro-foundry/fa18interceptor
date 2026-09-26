@@ -339,6 +339,11 @@ The `$C15138` signed pair helper is now ported as
 68000 arithmetic right shift behavior, and adjusted-first-word result used by
 the scaled motion preparation.
 
+`fa18_flight_prepare_scaled_motion` now composes the `$C15138` adjustment
+with the `$C14B16` scaled-term preparation in the observed caller order. Its
+four word inputs and three positional outputs remain explicit until the
+record fields are fully assigned.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,

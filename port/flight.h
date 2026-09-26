@@ -41,6 +41,14 @@ int fa18_flight_scale_motion_words(int16_t first, int16_t second,
 int fa18_flight_adjust_signed_word_pair(int16_t first, int16_t second,
                                         int16_t *adjusted_first);
 
+/* Caller-shaped `$C14B26` preparation: adjust the first pair, then scale the
+ * resulting first word and the two independent prepared words. */
+int fa18_flight_prepare_scaled_motion(int16_t first_word,
+                                      int16_t adjustment_word,
+                                      int16_t second_word,
+                                      int16_t third_word,
+                                      FA18FlightMotionTerms *terms);
+
 /* `$C14D32`: the signed vertical delta is committed to the active pose. */
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);
 

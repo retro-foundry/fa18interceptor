@@ -54,6 +54,20 @@ int fa18_flight_adjust_signed_word_pair(int16_t first, int16_t second,
     return 0;
 }
 
+int fa18_flight_prepare_scaled_motion(int16_t first_word,
+                                      int16_t adjustment_word,
+                                      int16_t second_word,
+                                      int16_t third_word,
+                                      FA18FlightMotionTerms *terms) {
+    if (!terms) return -1;
+    int16_t adjusted = 0;
+    if (fa18_flight_adjust_signed_word_pair(first_word, adjustment_word,
+                                             &adjusted) != 0) return -1;
+    /* The original locals are ordered -$10, -$14, -$18 after the helper. */
+    return fa18_flight_scale_motion_words(second_word, adjusted, third_word,
+                                          terms);
+}
+
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta) {
     if (!pose) return -1;
     pose->altitude += delta;
