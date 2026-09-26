@@ -960,6 +960,9 @@ game loop.
   invoking the bounded semantic planar copy. It is ready for the recovered
   temporary workspace to active page operation once the source workspace
   coordinates are established.
+- The complete `$C2FD8C` active page packet is recorded in
+  `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
+  144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
