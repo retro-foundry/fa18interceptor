@@ -3,6 +3,7 @@
 #include "run075_frame398_data.h"
 #include "run075_frame402_data.h"
 #include "run075_frame405_data.h"
+#include "run075_frame408_data.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -91,6 +92,11 @@ int main(void) {
     if (FA18_RUN075_FRAME405_SPANS != 1850 ||
         fa18_render_run075_frame405_scene(&scene, &previous) != 0) {
         fputs("run075 frame-405 scene contract failed\n", stderr);
+        return 1;
+    }
+    if (FA18_RUN075_FRAME408_SPANS != 1732 ||
+        fa18_render_run075_frame408_scene(&previous, &scene) != 0) {
+        fputs("run075 frame-408 scene contract failed\n", stderr);
         return 1;
     }
     puts("run075 two-row pixel contract passed");

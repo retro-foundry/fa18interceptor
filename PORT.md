@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 407. Frames
+The native live gate currently covers run075 frames 200 through 413. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -274,6 +274,10 @@ then repeats at frames 406 and 407. The native scene stores 1,850 changed row
 runs and the replay comparison passes through frame 407. Its producer remains
 unassigned after the frame-405 breakpoint probes, so the next investigation is
 the display writer that owns this boundary.
+
+Frame 408 changes 38,047 pixels and repeats through frame 413. The native
+scene stores 1,732 changed row runs and the replay comparison passes through
+frame 413. The frame-408 producer is still open in the function map.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
