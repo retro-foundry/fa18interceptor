@@ -909,6 +909,10 @@ game loop.
   call set is recorded in
   `analysis/data/run075_frame559_c2f688_call_set.md` and is the next native
   geometry reconstruction target.
+- The full `$C2FF48` trace now identifies the source pair chain and its
+  `$C3031C/$C305AA` consumer. The records and the `$C30678-$C306AE` display
+  packet setup are documented in
+  `analysis/data/run075_frame559_c2ff48_polygon_records.md`.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
