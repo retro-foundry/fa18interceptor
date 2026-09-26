@@ -19,7 +19,7 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | `$65` | byte | record control byte | `prepare_indexed_control_record_context.asm`, `$C1B27E` packet |
 | `$66` | word | input to the observed trigonometric table path | `update_indexed_shared_record_fields.asm` |
 | `$6C` | word | input to the observed limit-table path | `update_indexed_shared_record_fields.asm` |
-| `$6E` | word | input to the observed secondary limit-table path | `update_indexed_shared_record_fields.asm` |
+| `$6E` | word | input to the observed secondary limit-table path; in run062 the selected base record supplies `$0A1B` to the postflight flag path's `>$03C0` gate | `update_indexed_shared_record_fields.asm`; `data/run062_c26102_postflight_record_transition.md` |
 | `$72` | long | nonzero gate in the indexed-control selector | `prepare_indexed_control_record_context.asm` |
 | `$76` | word | output of the secondary limit-table path | `update_indexed_shared_record_fields.asm` |
 | `$78` | word | output of the trigonometric/limit path | `update_indexed_shared_record_fields.asm` |
