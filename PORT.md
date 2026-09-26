@@ -986,6 +986,9 @@ game loop.
 - Added `fa18_apply_blitter_minterm`, using the Amiga truth-table bit order;
   the contract verifies `$FC` as `A OR B`, the logic function programmed by
   the final `$0DFC` fill control word.
+- Added `fa18_execute_blitter_words`, which applies the semantic minterm over
+  word arrays and preserves first/last word masks. This is the tested native
+  execution boundary for wiring the final fill into the planar page.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.

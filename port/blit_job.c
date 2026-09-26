@@ -73,6 +73,27 @@ uint16_t fa18_apply_blitter_minterm(uint8_t logic_function,
     return result;
 }
 
+int fa18_execute_blitter_words(uint8_t logic_function,
+                               const uint16_t *a_words,
+                               const uint16_t *b_words,
+                               const uint16_t *c_words,
+                               uint16_t *d_words,
+                               size_t word_count,
+                               uint16_t first_mask,
+                               uint16_t last_mask) {
+    if (!a_words || !b_words || !c_words || !d_words || word_count == 0)
+        return -1;
+    for (size_t index = 0; index < word_count; ++index) {
+        const uint16_t mask = index == 0 ? first_mask :
+                              index + 1 == word_count ? last_mask : 0xffffu;
+        const uint16_t result = fa18_apply_blitter_minterm(
+            logic_function, a_words[index], b_words[index], c_words[index]);
+        d_words[index] = (uint16_t)((d_words[index] & (uint16_t)~mask) |
+                                    (result & mask));
+    }
+    return 0;
+}
+
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation) {
     if (!operation) return;
     operation->bltcon0 = 0x0d0c; operation->bltcon1 = 2;

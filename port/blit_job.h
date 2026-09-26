@@ -1,6 +1,7 @@
 #ifndef FA18_BLIT_JOB_H
 #define FA18_BLIT_JOB_H
 #include <stdint.h>
+#include <stddef.h>
 typedef struct {
     uint16_t bltcon0, bltcon1;
     uint16_t bltafwm, bltalwm;
@@ -52,6 +53,14 @@ int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
                               FA18BlitOperation *operation);
 uint16_t fa18_apply_blitter_minterm(uint8_t logic_function,
                                     uint16_t a, uint16_t b, uint16_t c);
+int fa18_execute_blitter_words(uint8_t logic_function,
+                               const uint16_t *a_words,
+                               const uint16_t *b_words,
+                               const uint16_t *c_words,
+                               uint16_t *d_words,
+                               size_t word_count,
+                               uint16_t first_mask,
+                               uint16_t last_mask);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 

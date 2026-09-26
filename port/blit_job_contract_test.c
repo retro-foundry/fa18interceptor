@@ -25,6 +25,13 @@ int main(void) {
     assert(final_fill.c_modulus == 0x28 && final_fill.d_modulus == 1);
     assert(fa18_apply_blitter_minterm(0xfc, 0x0f0f, 0x00ff, 0xaaaa) == 0x0fff);
     assert(fa18_apply_blitter_minterm(0xc0, 0xffff, 0x00ff, 0xaaaa) == 0x00ff);
+    const uint16_t a_words[2] = { 0xffff, 0x0000 };
+    const uint16_t b_words[2] = { 0x0000, 0xffff };
+    const uint16_t c_words[2] = { 0, 0 };
+    uint16_t d_words[2] = { 0xaaaa, 0xaaaa };
+    assert(fa18_execute_blitter_words(0xfc, a_words, b_words, c_words,
+                                      d_words, 2, 0xff00, 0x00ff) == 0);
+    assert(d_words[0] == 0xffaa && d_words[1] == 0xaaff);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&
