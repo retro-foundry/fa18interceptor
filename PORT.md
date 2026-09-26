@@ -1068,3 +1068,9 @@ game loop.
   destination stride. The display contract now executes all four jobs; exact
   comparison against the captured successor page is the next verification
   step.
+- The line packet capture now also saves Chip RAM and A/B source bytes at each
+  repeated `$C30F5A` entry. The first semantic execution comparison shows
+  residual words changed by interleaved renderer work, so the frame-7992
+  operation is not yet promoted to an exact output gate. The next isolation
+  target is the interval between the completed `WaitBlit()` return and the
+  following packet entry.

@@ -17,12 +17,17 @@ def main():
             e.core.retro_run()
             while armed and e.core.e9k_debug_is_paused() and len(hits)<a.count:
                 regs=e.regs()
+                a.output.parent.mkdir(parents=True, exist_ok=True)
+                (a.output.parent / f'{a.output.stem}_hit{len(hits)}.chip').write_bytes(
+                    e.memory(0, 0x80000))
                 hits.append({'hit':len(hits),'frame':f,'registers':regs,
                              'record_words':e.memory(0xC4B390,0x100).hex(),
                              'a1_bytes':e.memory(regs['a1'],16).hex(),
                              'a2_bytes':e.memory(regs['a2'],16).hex(),
                              'a3_bytes':e.memory(regs['a3'],16).hex(),
-                             'custom_bytes':e.memory(0xDFF040,0x2A).hex()})
+                             'custom_bytes':e.memory(0xDFF040,0x2A).hex(),
+                             'a_source_rows':e.memory(regs['d0'],12 * 37).hex(),
+                             'b_source_rows':e.memory(regs['d3'],12 * 37).hex()})
                 e.core.e9k_debug_step_instr(); e.core.e9k_debug_resume(); e.core.retro_run()
             if len(hits)>=a.count: break
         if len(hits)!=a.count: raise RuntimeError(f'only captured {len(hits)} of {a.count} hits')

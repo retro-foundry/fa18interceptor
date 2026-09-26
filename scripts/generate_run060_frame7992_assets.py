@@ -1,15 +1,14 @@
 """Generate semantic source byte streams for the captured frame 7992 blits."""
 from pathlib import Path
+import json
 
 ROOT = Path(__file__).resolve().parents[1]
-CHIP = ROOT / 'build/run060_chip_frames/frame7992.chip'
+CAPTURE = ROOT / 'build/run060_line_packet_hits7992.json'
 OUT = ROOT / 'port/run060_frame7992_area_assets.h'
-POINTERS = [0xB038, 0xAE88, 0xACD8, 0xAB28]
 ROWS, ROW_BYTES = 12, 37
 
-def read_asset(chip: bytes, start: int) -> list[list[int]]:
-    return [list(chip[start + row * ROW_BYTES:start + (row + 1) * ROW_BYTES])
-            for row in range(ROWS)]
+def read_asset(raw: bytes) -> list[list[int]]:
+    return [list(raw[row * ROW_BYTES:(row + 1) * ROW_BYTES]) for row in range(ROWS)]
 
 def emit(name: str, rows: list[list[int]]) -> str:
     return 'static const uint8_t %s[%d][%d] = {\n%s\n};\n' % (
@@ -17,8 +16,9 @@ def emit(name: str, rows: list[list[int]]) -> str:
         ',\n'.join('    {' + ', '.join(f'0x{x:02x}' for x in row) + '}' for row in rows))
 
 def main() -> None:
-    chip = CHIP.read_bytes()
-    assets = [read_asset(chip, 0xA230)] + [read_asset(chip, p) for p in POINTERS]
+    capture = json.loads(CAPTURE.read_text(encoding='utf-8'))['hits']
+    assets = [read_asset(bytes.fromhex(capture[0]['a_source_rows']))]
+    assets += [read_asset(bytes.fromhex(hit['b_source_rows'])) for hit in capture]
     text = ('#ifndef FA18_RUN060_FRAME7992_AREA_ASSETS_H\n'
             '#define FA18_RUN060_FRAME7992_AREA_ASSETS_H\n\n'
             '#include <stdint.h>\n\n'
