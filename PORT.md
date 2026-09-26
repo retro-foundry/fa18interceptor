@@ -964,6 +964,11 @@ game loop.
   `$0E30`, which decodes to planar word 16 at row 90. The display boundary
   now exposes `fa18_decode_planar_word_offset` for this address free offset
   conversion; further lane offsets can use the same contract.
+- A new run060 `$C2FF48` probe recovered a six pair area input:
+  `(319,100),(208,93),(145,93),(0,115),(0,179),(319,179)`. `$C301F6`
+  consumes this list before the renderer path. The geometry is recorded in
+  `analysis/data/run060_c2ff48_fill_probe.md`; the settled delta still needs
+  isolation at `$C304F4` before the native fill can be wired.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.
