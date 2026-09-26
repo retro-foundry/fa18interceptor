@@ -11,6 +11,8 @@ int main(void) {
     assert(fa18_run075_frame395_lines[0].x0 == 175);
     assert(fa18_run075_frame395_lines[11].x1 == 199);
     assert(fa18_validate_line_packet(&fa18_run075_frame395_line_packet));
+    assert(fa18_run075_frame395_line_packet.bltsize == 0x005d);
+    assert(fa18_run075_frame395_line_packet.destination_byte_offset == 0x0ec5);
     /* Generic raster contract. A settled run060+ visual fixture is still
      * required before this primitive can be promoted to port parity. */
     FA18IndexedFrameBuffer framebuffer;

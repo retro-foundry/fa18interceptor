@@ -28,7 +28,7 @@ typedef struct {
     uint16_t bltbmod;
     uint16_t bltamod;
     uint16_t bltsize;
-    uint32_t destination_offset;
+    uint32_t destination_byte_offset;
     uint8_t active_plane_mask;
 } FA18LinePacket;
 

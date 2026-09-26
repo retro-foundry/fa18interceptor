@@ -8,8 +8,8 @@ static const FA18LinePacket fa18_run075_frame395_line_packet = {
     .bltcon1 = 85,
     .bltbmod = 0xfff8,
     .bltamod = 0,
-    .bltsize = 0,
-    .destination_offset = 94u * FA18_WIDTH + 21u,
+    .bltsize = 0x005d,
+    .destination_byte_offset = 0x0ec5,
     .active_plane_mask = 0x0f
 };
 

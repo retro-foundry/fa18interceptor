@@ -4,7 +4,7 @@
 
 int fa18_validate_line_packet(const FA18LinePacket *packet) {
     return packet && packet->active_plane_mask != 0 &&
-           packet->destination_offset < 320u * 200u;
+           packet->destination_byte_offset < 40u * 200u;
 }
 
 static int set_line_pixel(FA18IndexedFrameBuffer *framebuffer,
