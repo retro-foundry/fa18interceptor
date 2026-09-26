@@ -32,3 +32,22 @@ Three contiguous exercised fragments are now byte-exact source:
 
 The enclosing static routine remains substantially wider than the live packet.
 Untraced branch gaps and later paths are deliberately not reconstructed.
+
+## run060 first-angle source instance
+
+At replay frame 949, the active root record is class `$10` and `$C458CC` has
+bit 6 set. `$C2D5FC` therefore calls this leaf before loading its matrix-product
+input triple. The bounded trace returns to `$C2D6C6` after 176 instructions;
+the immediately following `$C2D620/$C2D624/$C2D628` loads give:
+
+```text
+A1 = $C46184
+D0/D2/D4 = $FFF1 / $0000 / $0000
+```
+
+That tuple is passed through `$C2D6FC` into `$C2DEE0`, which normalizes its
+negative first component before deriving the first run060 pitch-like output.
+This establishes `$C1342C` as the preceding generator/update stage for this
+specific matrix-product input. It does not establish that record `+$56` has a
+persistent angle meaning: the pre/post snapshots of the larger bounded packet
+need not retain the temporary value read at `$C2D620`.
