@@ -15,3 +15,8 @@ the active `$C457AD` gate, and writes root control byte `$C461E9: $00->$08`
 at `$C1B586`. `$C1B410` interprets bits 3:2 as the third signed control lane
 (`+$2A`); `$08` is its decrement code. This proves a second input-controlled
 lane, while its eventual orientation or motion role is not yet assigned.
+
+The complementary sealed run060 `J 0 7 1` event reaches `$C16F1C` at frame
+2073 and takes `$C1B55C`. It selects `D2=$04` and writes `$C461E9: $20->$24`
+at `$C1B586`. `$C1B410` defines `$04` as the increment code for signed
+`+$2A`, establishing `$04/$08` as the observed opposing third-lane commands.
