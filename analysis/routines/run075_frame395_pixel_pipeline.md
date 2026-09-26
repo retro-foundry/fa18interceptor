@@ -121,3 +121,20 @@ captured invocation is clipped at `(-25,-25)`, but the next valid invocation
 has `(D0.w,D1.w)=(156,156)`, mode `D2.w=10`, alternate mask table `$C2F7C6`,
 handler table `$C2F786`, and `D4=$40002`, `D5=2`, `D6=2`, `D7=2`. This is a
 two-row renderer input and matches the native `FA18_PIXEL_TWO_ROWS` contract.
+
+## Enclosing walker entry
+
+The frame-395 replay reaches `$C31392` at the normal boundary. Its entry
+state includes `D0=-1`, `D1=21`, `D2=30`, `D3=60`, `D4=263170`,
+`D5=6922`, `D6=6912`, and `D7=348198`. The prefix selects the 40-byte table
+region at `$C4E71C`, observes `$C4566C=0`, clears the renderer mode at
+`$C45954`, and starts with a ten-entry limit. It then loads the scene record
+stream from `$C4E2BC` and applies the fixed-point normalization before the
+record guards.
+
+The bounded trace later reaches the adjacent renderer call at instruction
+144. Before that branch it writes renderer mode `13` and normalizes the first
+record's source values into the screen coordinates captured above. This
+establishes the semantic boundary for a future `FA18PostflightScene` struct:
+table selection, record cursor/limit, normalization state, and renderer mode.
+The original table addresses remain implementation evidence only.
