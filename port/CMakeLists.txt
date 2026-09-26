@@ -15,7 +15,7 @@ FetchContent_Declare(SDL2
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
 
-add_executable(fa18_port main.c menu.c renderer.c line.c postflight.c demo.c display.c glyph.c projection.c polygon_submission.c transform.c projection_packet.c projection_seed.c replay.c flight.c)
+add_executable(fa18_port main.c menu.c renderer.c line.c postflight.c demo.c display.c glyph.c projection.c polygon_submission.c blit_job.c transform.c projection_packet.c projection_seed.c replay.c flight.c)
 target_compile_definitions(fa18_port PRIVATE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_port PRIVATE SDL2-static)
 if(MSVC)
@@ -45,6 +45,8 @@ add_executable(fa18_projection_contract_test projection_contract_test.c projecti
 add_test(NAME fa18_projection_contract COMMAND fa18_projection_contract_test)
 add_executable(fa18_polygon_submission_contract_test polygon_submission_contract_test.c polygon_submission.c projection.c line.c)
 add_test(NAME fa18_polygon_submission_contract COMMAND fa18_polygon_submission_contract_test)
+add_executable(fa18_blit_job_contract_test blit_job_contract_test.c blit_job.c)
+add_test(NAME fa18_blit_job_contract COMMAND fa18_blit_job_contract_test)
 add_executable(fa18_transform_contract_test transform_contract_test.c transform.c)
 add_test(NAME fa18_transform_contract COMMAND fa18_transform_contract_test)
 add_executable(fa18_projection_packet_contract_test projection_packet_contract_test.c projection_packet.c)
