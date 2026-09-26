@@ -28,6 +28,13 @@ the mutable control-record-bank fields `+$14/+$18/+$1C`; this excludes treating
 the publisher input as a direct immutable terrain-template triple, but does
 not identify the selected record's physical role.
 
+A second sealed packet in the qualification oracle reaches the same direct arm
+at run060 replay frame 8,246, with `A2=$C46184`, and returns to `$C0F036` in
+the `$C0EFD4` parent update sequence. It measures the exact root triple and
+the published tuple, linking the live root record to this renderer-transform
+stage without assigning player/camera ownership. See
+[`run060_root_projection_packet.md`](../data/run060_root_projection_packet.md).
+
 Authority: byte-exact reconstruction in
 [`publish_projection_depth_component.asm`](../../source_amiga/observed/publish_projection_depth_component.asm),
 plus live run035 M-map state samples where `$C1C636` updates `$C45A78` before
