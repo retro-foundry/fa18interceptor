@@ -22,3 +22,8 @@ from `build/run075_frame464_c33058_trace`. The trace also confirms that the
 current native function is the four-lane `$C33058` caller contract; the table
 lookup and layout cursor update after the lane writes remain separate caller
 work.
+
+The next changed text boundary is Engine frame 467. It advances the source
+entry and destination by two bytes, uses source bytes `C8 C8 C8 C8 D8 50 70`,
+mask `$A000`, and the same plane mode mask `$09`. The same contract now checks
+that second packet as well, preserving the observed per-frame cursor advance.

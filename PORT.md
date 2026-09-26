@@ -776,3 +776,7 @@ game loop.
   contract; source-table selection and layout cursor ownership remain caller
   work. See
   [the frame-465 static glyph note](analysis/data/run075_frame465_c33058_static_glyph.md).
+- The following changed text boundary, frame 467, is also checked through the
+  same compositor with its traced source advance, `$041C` destination, and
+  `$A000` mask. This extends the frame order without assuming a general text
+  layout rule before the caller state is decoded.
