@@ -115,3 +115,9 @@ new = old - ((old - target) >> 1) = 19 = $0013
 
 The upstream producer of `$C45B62` is not yet bounded to root control lane
 `+$2A`; this derivation establishes the exact local working-output arithmetic.
+
+The upstream lane is now bounded for this packet: root signed `+$2A=-3` is
+loaded at `$C1382A`, converted to absolute word-table offset `+$0006`, and
+`$C1383E` reads `$003F` from `$C3D690`. `$C13840-$C13842` negate that value to
+`$C45B62=-63`, the source consumed by the calculation above. This completes
+the executed third-lane table-to-working-third-input path in run060.
