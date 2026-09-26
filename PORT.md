@@ -1032,3 +1032,10 @@ game loop.
   hardware idle wait. The profile is recorded in
   `analysis/data/run060_frame7991_profile.md`; the next native connection is
   the synchronous `$C30668` semantic submission after page mapping is proved.
+- Captured the live renderer pointer tables at the frame-7991 `$C304F4`
+  breakpoint. `$C4567E` selects `$018980/$016A40/$014B00/$012BC0` in lane
+  order 4/3/2/1, so the changed `$012BC0` settled range maps to semantic
+  plane 0. The complete pointer state is in
+  `analysis/data/run060_frame7991_renderer_pointer_state.md`; the native
+  page model can now consume this mapping without retaining original
+  addresses.
