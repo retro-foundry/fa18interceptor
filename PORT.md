@@ -875,3 +875,6 @@ game loop.
   `F8 20 20 30 30 30 30`, with mask `$F000` and destination `$0792`; the
   resulting glyph appears at the oracle's `(145,48)` placement. The complete
   frame gate remains exact through this newly routed boundary.
+- Frame 525 now uses the native compositor with traced source
+  `80 80 80 C0 C0 C0 F8`, mask `$6000`, and destination `$0794`; its oracle
+  placement is `(152,48)`.
