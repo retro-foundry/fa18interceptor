@@ -908,3 +908,7 @@ game loop.
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
   the display chunky buffer.
+- `FA18PlanarPage` now provides that bounded semantic temporary page: four
+  logical planes, word updates with AND/OR masks, and conversion to the
+  chunky indexed target. The implementation and contract test are in
+  `port/display.h`, `port/renderer.c`, and `port/renderer_contract_test.c`.
