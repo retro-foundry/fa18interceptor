@@ -26,6 +26,15 @@ int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,
     return 0;
 }
 
+int fa18_flight_scale_motion_words(int16_t first, int16_t second,
+                                   int16_t third, FA18FlightMotionTerms *terms) {
+    if (!terms) return -1;
+    terms->first = -(int32_t)first * 4;
+    terms->second = -(int32_t)second * 4;
+    terms->third = -(int32_t)third * 4;
+    return 0;
+}
+
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta) {
     if (!pose) return -1;
     pose->altitude += delta;

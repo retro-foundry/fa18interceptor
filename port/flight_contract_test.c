@@ -14,6 +14,10 @@ int main(void) {
     assert(lanes.lane[0] == 20 && lanes.lane[1] == 1 && lanes.lane[2] == 60);
     assert(fa18_flight_update_control_lanes(&lanes, 0x08u) == 0);
     assert(lanes.lane[2] == -3);
+    FA18FlightMotionTerms terms;
+    assert(fa18_flight_scale_motion_words(0x0012, (int16_t)-3, 0x4000,
+                                          &terms) == 0);
+    assert(terms.first == -0x48 && terms.second == 12 && terms.third == -0x10000);
 
     FA18FlightPose pose = {0};
     pose.altitude = 0x72301;

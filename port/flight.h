@@ -22,9 +22,20 @@ typedef struct {
     int8_t lane[3];
 } FA18FlightControlLanes;
 
+typedef struct {
+    int32_t first;
+    int32_t second;
+    int32_t third;
+} FA18FlightMotionTerms;
+
 /* `$C1B410`: decode the packed control byte at the observed `$65` boundary. */
 int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,
                                      uint8_t packed_control);
+
+/* `$C14B16-$C14B7D`: sign extend three prepared words, scale by four, and
+ * retain their negated longword terms for the active record. */
+int fa18_flight_scale_motion_words(int16_t first, int16_t second,
+                                   int16_t third, FA18FlightMotionTerms *terms);
 
 /* `$C14D32`: the signed vertical delta is committed to the active pose. */
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);

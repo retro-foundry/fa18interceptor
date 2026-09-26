@@ -328,6 +328,12 @@ the computed lateral and forward terms update `$14/$1C`, while the signed
 vertical term is added to `$18`. The input-to-term calculation remains a
 separate unresolved stage.
 
+The preceding `$C14B16-$C14BE7` scaling is now represented by
+`FA18FlightMotionTerms` and `fa18_flight_scale_motion_words`: each prepared
+signed word is widened, multiplied by four, and negated before publication.
+The three terms remain positionally named until the caller proves their axis
+meaning.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,
