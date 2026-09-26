@@ -88,3 +88,7 @@ same native compositor path.
 Engine frame 497 retains `$042C`, resolves source bytes `F8 80 80 F0 C0 C0 F8`,
 and supplies mask `$8000`. This packet is live in the same native compositor
 path.
+
+Engine frame 499 retains `$042C`, resolves source bytes `88 88 88 F8 30 30 30`,
+and supplies mask `$F000`. This packet is live in the same native compositor
+path.
