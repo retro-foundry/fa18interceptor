@@ -65,6 +65,19 @@ int main(void) {
         fputs("replay frame advance contract failed\n", stderr);
         return 1;
     }
+    FA18ReplayEvent motion_events[] = {
+        {10, FA18_REPLAY_FRAME_EVENT, {4, -12, 3, 0}},
+        {10, FA18_REPLAY_FRAME_EVENT, {4, 2, -1, 0}}
+    };
+    memset(&state, 0, sizeof state);
+    next = 0;
+    if (fa18_replay_advance_frame(&state, motion_events, 2, &next, 10) != 0 ||
+        state.motion[0][0] != -10 || state.motion[3][1] != 2 ||
+        fa18_replay_advance_frame(&state, motion_events, 2, &next, 11) != 0 ||
+        state.motion[0][0] != 0 || state.motion[3][1] != 0) {
+        fputs("per-frame motion lifetime contract failed\n", stderr);
+        return 1;
+    }
     puts("run075 deterministic replay contract passed");
     return 0;
 }

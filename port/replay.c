@@ -102,6 +102,10 @@ int fa18_replay_advance_frame(FA18ReplayControlState *state,
                               size_t *next_event, uint32_t frame) {
     if (!state || (!events && event_count != 0) || !next_event ||
         *next_event > event_count) return -1;
+    /* Engine9000 publishes relative motion during input_poll and clears the
+     * pending sample immediately afterward. Preserve that per-frame lifetime
+     * while allowing all events at this frame to add to the same sample. */
+    memset(state->motion, 0, sizeof state->motion);
     while (*next_event < event_count && events[*next_event].frame <= frame) {
         if (fa18_replay_apply_event(state, &events[*next_event]) != 0) return -1;
         ++*next_event;

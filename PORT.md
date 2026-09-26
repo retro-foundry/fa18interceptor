@@ -350,6 +350,9 @@ The native playback loop now applies port-0 `J` events to a semantic packed
 flight-control byte and updates `FA18FlightControlLanes` at the event frame.
 This connects the proven run060 input path to native state without inventing
 axis names or motion formulas.
+Relative `m` input is now reset at each frame advance, matching Engine9000's
+input-poll lifetime; same-frame motion records still accumulate before the
+flight consumer reads them.
 
 `fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
 the computed lateral and forward terms update `$14/$1C`, while the signed
