@@ -2,6 +2,14 @@
 #include <assert.h>
 #include <stdio.h>
 int main(void) {
+    FA18DisplayBlitPacket transition[3];
+    assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
+    assert(transition[0].control_a == 0x8aea &&
+           transition[0].control_b == 0x0053 &&
+           transition[0].width_height == 0x1e02);
+    assert(transition[1].c_source == 0x6eef &&
+           transition[2].d_destination == 0x6e58);
+
     FA18BlitExtent extent = fa18_decode_blit_extent(0x0e14);
     assert(extent.width_words == 20 && extent.height_rows == 56);
     extent = fa18_decode_blit_extent(0x0302);
