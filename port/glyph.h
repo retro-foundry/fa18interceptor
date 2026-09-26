@@ -147,6 +147,11 @@ int fa18_render_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
                       size_t destination_offset, uint8_t shift_count,
                       uint16_t row_count);
 
+int fa18_render_placed_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
+                             uint8_t character,
+                             const FA18PlaneGlyphPlacement *placement,
+                             uint8_t shift_count, uint16_t row_count);
+
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the
  * source packet's mode/shift word; the byte stream and selected plane replace
  * the original untyped registers and address values. */

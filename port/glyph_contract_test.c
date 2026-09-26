@@ -164,6 +164,13 @@ int main(void) {
         fputs("run075 glyph render contract failed\n", stderr);
         return 1;
     }
+    memset(&merge_page, 0, sizeof merge_page);
+    if (fa18_render_placed_glyph(&merge_page, &run075_font, (uint8_t)'1',
+                                 &plane_placement, 0u, 6u) != 0 ||
+        (merge_page.plane[2][0x18ce] | merge_page.plane[2][0x18ce + 1u]) == 0u) {
+        fputs("placed glyph render contract failed\n", stderr);
+        return 1;
+    }
 
     FA18GlyphPlacement placement;
     if (fa18_prepare_glyph_placement(2, 4, 3, 0x100, 0x20, 7, &placement) != 0 ||

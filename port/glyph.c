@@ -214,6 +214,16 @@ int fa18_render_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
                                    glyph_stream, row_count, shift_count);
 }
 
+int fa18_render_placed_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
+                             uint8_t character,
+                             const FA18PlaneGlyphPlacement *placement,
+                             uint8_t shift_count, uint16_t row_count) {
+    if (!placement || placement->destination_offset < 0) return -1;
+    return fa18_render_glyph(page, table, character, placement->plane_index,
+                             (size_t)placement->destination_offset,
+                             shift_count, row_count);
+}
+
 static uint16_t rol16(uint16_t value, unsigned count) {
     count &= 15u;
     if (!count) return value;

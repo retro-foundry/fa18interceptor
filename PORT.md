@@ -143,6 +143,10 @@ infer a function's purpose merely from a rendered frame.
   bounded native destination offset. It preserves the `$28` visibility gate,
   even destination check, and coordinate mask without retaining Amiga
   addresses.
+- 2026-09-26: Connected placement to the existing bounded glyph stream with
+  `fa18_render_placed_glyph`. The native operation now selects the glyph,
+  applies the observed row stride, and writes the selected plane at the
+  computed offset under the same page bounds checks.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).
