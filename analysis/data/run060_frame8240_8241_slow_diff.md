@@ -19,8 +19,10 @@ other transient workspace.
 
 | Range | Frame 8,240 | Frame 8,241 | Classification |
 | --- | --- | --- | --- |
-| `$C45775` | `$E5` | `$E6` | callback/update counter candidate |
-| `$C4582E/$C45831` | `$00/$00` | `$20/$01` | mode/flag candidates |
+| `$C45775` | `$E5` | `$E6` | input-callback count/adjacent state; not a spatial candidate |
+| `$C4582E/$C45831` | `$00/$00` | `$20/$01` | input/control latches; not spatial candidates |
+| `$C456E7` | `$07` | `$01` | renderer active-plane mask; excluded |
+| `$C45B5E` | `$0000` | `$FFE5` | matrix-side helper output; structural only |
 | `$C45960-$C45982` | multiple | multiple | transient blitter lane-state block; excluded from flight-state candidates |
 | `$C45A64-$C45A87` | multiple | multiple | projection/intermediate workspace; excluded as direct player-state evidence |
 | `$C4B390-$C4B3D1`, `$C4B990-$C4B9CB` | multiple | multiple | renderer/workspace candidates; excluded as direct player-state evidence |
@@ -40,6 +42,12 @@ and [`finalize_renderer_pair_blit.asm`](../../source_amiga/observed/finalize_ren
 It is renderer workspace, not a player position/orientation/velocity
 candidate. The compact changes are expected address/size updates for the
 per-frame blits.
+
+The other non-stack rows are likewise not player-state evidence. `$C456E7`
+selects active planar renderer lanes, while `$C4582E` and `$C45831` are
+documented control-latch fields. `$C45B5E` is a bounded `$C1342C` matrix-side
+leaf output; its component meaning remains unknown, but the update does not
+tie it to a camera, a world coordinate, or aircraft ownership.
 
 ## Exclusions
 
