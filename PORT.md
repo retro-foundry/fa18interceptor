@@ -120,6 +120,10 @@ infer a function's purpose merely from a rendered frame.
 - 2026-09-27: Corrected the frame 7992 area destination mapping. All four
   captured D pointers resolve to plane-specific row 133, word 1; the first
   semantic job had retained row 101 from an earlier pointer interpretation.
+- 2026-09-27: Completed the frame 7992 area oracle. A/B sources are packed as
+  captured words across the odd 37 byte source stride, and the destination
+  uses the effective 40 byte row advance produced by the odd D pointer. All
+  four area submissions now match their traced destination words.
 
 - 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the

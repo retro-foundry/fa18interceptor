@@ -1,9 +1,12 @@
 #include "line.h"
+#include "display.h"
 #include "run075_frame395_lines.h"
 #include "run075_frame395_line_packet.h"
 #include "run060_frame7992_line_packets.h"
 #include "run060_frame7991_line_oracle.h"
 #include "run060_line_c_sources.h"
+#include "run060_frame7992_area_assets.h"
+#include "run060_area_oracle.h"
 
 #include <stdio.h>
 #include <assert.h>
@@ -19,7 +22,7 @@ int main(void) {
     assert(jobs[3].destination_plane == 0 && jobs[3].source_asset_index == 3);
     assert(jobs[3].width_words == 18 && jobs[3].height_rows == 12);
     assert(jobs[0].a_modulus == 1 && jobs[0].b_modulus == 1 &&
-           jobs[0].c_modulus == 5 && jobs[0].d_modulus == 5);
+           jobs[0].c_modulus == 5 && jobs[0].d_modulus == 4);
     assert(FA18_RUN075_FRAME395_LINES == 12);
     assert(fa18_run075_frame395_lines[0].x0 == 175);
     assert(fa18_run075_frame395_lines[11].x1 == 199);
@@ -61,6 +64,24 @@ int main(void) {
             const uint16_t actual = (uint16_t)(((uint16_t)snapshot[expected.offset] << 8) |
                                                snapshot[expected.offset + 1]);
             assert(actual == expected.value);
+        }
+    }
+    {
+        FA18PlanarPage page;
+        memcpy(page.plane, fa18_run060_frame7991_line_planes, sizeof page.plane);
+        assert(fa18_build_run060_frame7992_area_jobs(jobs) == 0);
+        for (size_t i = 0; i < 4; ++i)
+            assert(fa18_execute_area_blit_job(
+                &page, &jobs[i], &fa18_run060_frame7992_a_source[0][0], 37,
+                &fa18_run060_frame7992_b_source[i][0][0], 37) == 0);
+        for (size_t i = 0; i < 4; ++i) {
+            for (size_t write = 0; write < fa18_run060_area_oracle_counts[i]; ++write) {
+                const FA18AreaOracleWrite expected = fa18_run060_area_oracle_writes[i][write];
+                const uint8_t plane = jobs[i].destination_plane;
+                const uint16_t actual = (uint16_t)(((uint16_t)page.plane[plane][expected.offset] << 8) |
+                                                   page.plane[plane][expected.offset + 1]);
+                assert(actual == expected.value);
+            }
         }
     }
     /* Generic raster contract. */
