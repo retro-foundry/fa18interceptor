@@ -50,7 +50,7 @@ int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
     int16_t apt = (int16_t)job->bltapt_low;
     const unsigned ashift = (job->bltcon0 >> 12) & 15u;
     unsigned bshift = (con1 >> 12) & 15u;
-    uint16_t bline = job->bltbdat;
+    uint16_t bline = job->bltb_source_word;
     if (bshift != 0u) {
         const unsigned rotate = (bshift + 15u) & 15u;
         bline = (uint16_t)((job->bltbdat >> rotate) |
