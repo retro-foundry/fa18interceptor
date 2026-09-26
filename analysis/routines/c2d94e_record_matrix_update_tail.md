@@ -12,6 +12,16 @@ values initialized to zero or `$7080 - D5/D6/D7`, and calls `$C2E514`.
 This proves a record triple publication followed by two distinct matrix/transform
 consumers.  Their coordinate convention and field ownership remain unassigned.
 
+## run003 second-lane publication
+
+The sealed run003 comma hold reaches the publisher's `$C2D954` `MOVEM.W` at
+absolute frame 5,360 with `A1=$C46184` and
+`D4/D5/D6=$6D40/$60E8/$0000`. Thus it writes that triple to root
+`+$66/+68/+6A`. The immediately preceding `$C2DEE0` return has the same three
+words and its input was the matrix-side leaf's `$0000/$FFFC/$0000` working
+triple. This is scenario-backed publication dataflow; it does not identify
+the physical meaning of the second lane or each coupled output word.
+
 ## run060 root-attitude instance
 
 The sealed run060 frame-948 pre-turn trace observes this exact `MOVEM.W` at

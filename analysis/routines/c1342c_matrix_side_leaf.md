@@ -121,3 +121,24 @@ loaded at `$C1382A`, converted to absolute word-table offset `+$0006`, and
 `$C1383E` reads `$003F` from `$C3D690`. `$C13840-$C13842` negate that value to
 `$C45B62=-63`, the source consumed by the calculation above. This completes
 the executed third-lane table-to-working-third-input path in run060.
+
+## run003 second-lane working output
+
+The sealed run003 comma-hold update supplies the previously unexercised second
+lane. At absolute frame 5,360, this leaf returns to `$C2D61E` after 165
+instructions with root `+$29=-1`, written earlier in the same frame by
+`$C1B410`. The relevant packet is fully bounded:
+
+```text
++$29 = -1
+  -> abs(-1) * 2 = C3D690 word offset +2
+  -> read $001B (27), negate to target -27 at $C45B60
+  -> ($C13C0A): (-27 >> 1) + (-27 >> 3) = -14 + -4 = -18
+  -> quarter relaxation of root +$58: 0 - ((0 - -18) >> 2) = -4
+```
+
+The initial and final root working triple is `$0000/$0000/$0000` to
+`$0000/$FFFC/$0000`; only `+$58` changes. The later `$C13CDE` correction
+enters with that `-4` value but supplies a zero adjustment on this packet, so
+it remains `-4`. This is a table-to-working-second-input contract, not a
+physical-coordinate claim.
