@@ -20,3 +20,10 @@ following `$C2E514` call writes root `+$92..+$A2`. On this bounded route the
 first word advances `$7070 -> $7048 -> $7018 -> $6FE0 -> $6F88`; the other two
 are zero. This establishes a live orientation-transform instance for the root
 record without claiming a general record-owner meaning.
+
+Later in the same sealed replay, the frame-1754 publisher entry writes
+`$7038/$0000/$0010` to the same root triple. This occurs in the update window
+where the independent `$C1B410` packet changes third control lane `+$2A` from
+zero to −3. The non-zero third angle is direct publication evidence; the
+intermediate transform that would establish `+$2A` as its sole cause remains
+to be bounded.
