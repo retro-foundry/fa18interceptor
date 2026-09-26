@@ -265,6 +265,11 @@ Frame 395 also has a typed 12-segment `FA18LineSegment` fixture from the
 the source plane state and complete line list are still required before the
 fixture can drive the live frame.
 
+The native `FA18LinePacket` contract now records the frame-395 `$C2FB7A`
+derived control, modulo, destination, and active-plane fields. Its validator
+and the complete native contract suite pass; it remains an adapter boundary
+until the chunky color mapping for the hardware packet is proven.
+
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
 python scripts/pack_port_frames.py --oracle build/port_run075_demo_oracle --last-frame 20987 --output build/port_run075_demo.fa18
