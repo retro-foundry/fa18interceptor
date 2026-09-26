@@ -21,7 +21,7 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | `$39` | byte | masked low nibble used by `$C1B27E` | `$C1B27E` packet |
 | `$62` | byte | high nibble is a normal-update record-type discriminator | `prepare_normal_update_state.asm` |
 | `$65` | byte | record control byte | `prepare_indexed_control_record_context.asm`, `$C1B27E` packet |
-| `$66` | word | input to the observed trigonometric table path | `update_indexed_shared_record_fields.asm` |
+| `$66/$68/$6A` | three words | active orientation-angle state: `$C2D94E` republishes the triple then `$C2E514` composes root `+$92..+$A2`; `$66` also feeds an observed trigonometric path | `publish_record_matrix_update_triple.asm`; `data/run060_root_attitude_matrix.md` |
 | `$6C` | word | input to the observed limit-table path | `update_indexed_shared_record_fields.asm` |
 | `$6E` | word | input to the observed secondary limit-table path; in run062 the selected base record supplies `$0A1B` to the postflight flag path's `>$03C0` gate | `update_indexed_shared_record_fields.asm`; `data/run062_c26102_postflight_record_transition.md` |
 | `$72` | long | nonzero gate in the indexed-control selector | `prepare_indexed_control_record_context.asm` |
@@ -29,7 +29,7 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | `$78` | word | output of the trigonometric/limit path | `update_indexed_shared_record_fields.asm` |
 | `$7C` | byte | signed control byte tested by the trigonometric path | `update_indexed_shared_record_fields.asm` |
 | `$7D` | byte | low nibble selects the arithmetic shift applied to three candidate component words | `check_candidate_shifted_component_bounds.asm`; `data/run062_c26102_postflight_record_transition.md` |
-| `$92-$A2` | nine words | pose-orientation candidate matrix: transforms a selected seed before its three components are added to `+$14/+18/+1C` | `select_record_matrix_component_seed.asm`; `data/root_record_pose_candidate.md` |
+| `$92-$A2` | nine words | active flight orientation-transform matrix: `$C2E514` composes it from root angle state and it transforms a selected seed before its three components are added to `+$14/+18/+1C` | `select_record_matrix_component_seed.asm`; `data/root_record_pose_candidate.md`; `data/run060_root_attitude_matrix.md` |
 | `$A6/$AC/$B2` | words | candidate component inputs individually shifted by `+$7D` and added to the `+$10`-derived accumulator before the negative-candidate return | `check_candidate_shifted_component_bounds.asm`; run062 transition trace |
 
 Do not treat absent offsets as unused or the entries above as a complete object

@@ -30,9 +30,10 @@ D0,D1,D2 = -D0,-D1,-D2
 Because the middle member is altitude and the adjacent first/third members are
 used as matching components of the same projection vector, root `+$14` and
 `+$1C` are strong **horizontal pose-coordinate candidates**. The root
-`+$92..+$A2` nine-word transform matrix is a strong **pose-orientation
-candidate**: it transforms a selected local seed before that result is added
-to the position-like triple.
+`+$92..+$A2` nine-word transform matrix is an active **flight
+orientation-transform matrix**: live `$C2E514` calls update it from root
+`+$66/+68/+6A` angle state during the run060 turn segment; see
+`data/run060_root_attitude_matrix.md`.
 
 The root tuple is sampled moving coherently during run060's qualification
 flight and returns to its start value on the replay's reset event; see
@@ -72,8 +73,8 @@ root pose interpretation.
 - Which horizontal component is which world axis.
 - Whether root position is aircraft world position, camera position, or a
   shared player/camera pose.
-- Whether the matrix is aircraft attitude, camera attitude, or an adjacent
-  rendering transform.
+- Whether the matrix is aircraft attitude, camera attitude, or a shared
+  aircraft/camera orientation transform.
 - The fixed-point units, wrap behavior, and writer/integrator for the two
   horizontal components and matrix.
 
