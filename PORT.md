@@ -827,3 +827,7 @@ game loop.
 - Frame 521 is native with the repeated later-layout `$078C` packet. The full
   replay verifier remains byte exact after routing this boundary through the
   semantic compositor.
+- Frames 465 and 467 are now also routed through the native compositor using
+  their previously captured `$041A`/`$041C` destinations, `$C000`/`$A000`
+  masks, and source streams. The first decoded text packets no longer depend
+  on the HUD fixture path.

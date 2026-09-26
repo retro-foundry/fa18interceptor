@@ -240,6 +240,8 @@ static int run075_frame_scene_index(uint16_t colour) {
 static int apply_run075_static_text(uint32_t frame,
                                     const uint16_t *previous,
                                     uint16_t *output) {
+    const uint8_t frame465_glyph[7] = {0xf0, 0x90, 0x90, 0xf8, 0xc8, 0xc8, 0xc8};
+    const uint8_t frame467_glyph[7] = {0xc8, 0xc8, 0xc8, 0xc8, 0xd8, 0x50, 0x70};
     const uint8_t frame469_glyph[7] = {0xf8, 0x80, 0x80, 0xf0, 0xc0, 0xc0, 0xf8};
     const uint8_t frame471_glyph[7] = {0xf8, 0x88, 0x80, 0xc0, 0xc0, 0xc8, 0xf8};
     const uint8_t frame473_glyph[7] = {0xf8, 0x20, 0x20, 0x30, 0x30, 0x30, 0x30};
@@ -258,7 +260,9 @@ static int apply_run075_static_text(uint32_t frame,
     const uint8_t frame499_glyph[7] = {0x88, 0x88, 0x88, 0xf8, 0x30, 0x30, 0x30};
     const uint8_t frame511_glyph[7] = {0xf0, 0x90, 0x90, 0xf8, 0xc8, 0xc8, 0xc8};
     const uint8_t frame521_glyph[7] = {0xf0, 0x90, 0x90, 0xf8, 0xc8, 0xc8, 0xc8};
-    const uint8_t *glyph = frame == 469u ? frame469_glyph :
+    const uint8_t *glyph = frame == 465u ? frame465_glyph :
+                           frame == 467u ? frame467_glyph :
+                           frame == 469u ? frame469_glyph :
                            frame == 471u ? frame471_glyph :
                            frame == 473u ? frame473_glyph :
                            frame == 475u ? frame475_glyph :
@@ -275,7 +279,9 @@ static int apply_run075_static_text(uint32_t frame,
                            frame == 497u ? frame497_glyph :
                            frame == 499u ? frame499_glyph :
                            frame == 511u ? frame511_glyph : frame521_glyph;
-    const uint16_t mask = frame == 469u ? 0x1000u :
+    const uint16_t mask = frame == 465u ? 0xc000u :
+                          frame == 467u ? 0xa000u :
+                          frame == 469u ? 0x1000u :
                           frame == 471u ? 0x8000u :
                           frame == 473u ? 0xf000u :
                           frame == 475u ? 0x6000u :
@@ -291,7 +297,9 @@ static int apply_run075_static_text(uint32_t frame,
                           frame == 495u ? 0x1000u :
                           frame == 497u ? 0x8000u :
                           frame == 499u ? 0xf000u : 0x7000u;
-    const size_t destination = (frame == 511u || frame == 521u) ? 0x078cu : frame >= 475u ?
+    const size_t destination = frame == 465u ? 0x041au :
+        frame == 467u ? 0x041cu :
+        (frame == 511u || frame == 521u) ? 0x078cu : frame >= 475u ?
         (frame == 479u ? 0x0422u :
          frame == 481u ? 0x0424u : frame == 483u ? 0x0424u :
          frame == 485u ? 0x0426u : frame == 487u ? 0x0426u :
@@ -302,7 +310,8 @@ static int apply_run075_static_text(uint32_t frame,
          frame != 475u && frame != 477u && frame != 479u && frame != 481u &&
          frame != 483u && frame != 485u && frame != 487u && frame != 489u &&
          frame != 491u && frame != 493u && frame != 495u && frame != 497u &&
-         frame != 499u && frame != 511u && frame != 521u) ||
+         frame != 499u && frame != 511u && frame != 521u &&
+         frame != 465u && frame != 467u) ||
         !previous || !output) return -1;
     FA18IndexedFrameBuffer indexed;
     for (size_t pixel = 0; pixel < PIXELS; ++pixel) {
@@ -491,12 +500,13 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                                               0x003, 0x333, 0x777, 0x444,
                                               0x800, 0x888, 0x666, 0x555 };
         for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
-    } else if (frame == 469u || frame == 471u || frame == 473u ||
+    } else if (frame >= 465u && frame <= 521u && (frame == 465u || frame == 467u ||
+               frame == 469u || frame == 471u || frame == 473u ||
                frame == 475u || frame == 477u || frame == 479u ||
                frame == 481u || frame == 483u || frame == 485u ||
                frame == 487u || frame == 489u || frame == 491u ||
                frame == 493u || frame == 495u || frame == 497u ||
-               frame == 499u || frame == 511u || frame == 521u) {
+               frame == 499u || frame == 511u || frame == 521u)) {
         if (apply_run075_static_text(frame, stream->chunky, native_rgb444) != 0) {
             return -1;
         }
