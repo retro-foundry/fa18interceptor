@@ -198,3 +198,10 @@ The bounded entries alternate source states `$FD18005D`, `$FFD8005E`,
 `$FB1C005D`, and repeat line-mode values `D5=1720/1847/1974`, `D6=96`.
 The observed list is enough to start a native line submission fixture, but
 the complete line count and plane mapping remain open.
+
+The frame-395 saved Slow-RAM snapshot resolves part of that state:
+`$C456E7=$FF` enables all four line planes, `$C45954=$000A` supplies the
+line mode, and `$C45984=$0090` supplies the row limit. The native line style
+can therefore use `active_plane_mask=0x0F` for this call family. The source
+plane bit value and control-plane value still need to be recovered from the
+line setup writes before assigning the remaining `FA18LineStyle` fields.
