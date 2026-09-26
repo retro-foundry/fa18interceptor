@@ -1,9 +1,14 @@
 #include "line.h"
+#include "run075_frame395_lines.h"
 
 #include <stdio.h>
+#include <assert.h>
 #include <string.h>
 
 int main(void) {
+    assert(FA18_RUN075_FRAME395_LINES == 12);
+    assert(fa18_run075_frame395_lines[0].x0 == 175);
+    assert(fa18_run075_frame395_lines[11].x1 == 199);
     /* Generic raster contract. A settled run060+ visual fixture is still
      * required before this primitive can be promoted to port parity. */
     FA18IndexedFrameBuffer framebuffer;
