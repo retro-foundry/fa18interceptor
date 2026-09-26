@@ -11,6 +11,7 @@ enum { FA18_PLANES = 4, FA18_PLANAR_ROW_BYTES = FA18_WIDTH / 8,
 /* `$C2FD8C` receives visible plane destinations in lane order 4, 3, 2, 1. */
 int fa18_visible_lane_plane(unsigned lane);
 uint8_t fa18_visible_lane_mask_to_plane_mask(uint8_t lane_mask);
+int fa18_decode_planar_word_offset(uint16_t byte_offset, int *word_x, int *y);
 
 /* Native four-plane page used only at the display boundary. It has no Chip-RAM
  * addresses, Copper list, or hardware register state. Plane zero is the low

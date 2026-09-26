@@ -12,6 +12,10 @@ int main(void) {
     assert(fa18_visible_lane_plane(4) == -1);
     assert(fa18_visible_lane_mask_to_plane_mask(0x01) == 0x08);
     assert(fa18_visible_lane_mask_to_plane_mask(0x0a) == 0x05);
+    int word_x = -1, y = -1;
+    assert(fa18_decode_planar_word_offset(0x0e30, &word_x, &y) == 0);
+    assert(word_x == 16 && y == 90);
+    assert(fa18_decode_planar_word_offset(0x0e31, &word_x, &y) == -1);
     FA18PlanarPage source_page, destination_page;
     memset(&source_page, 0, sizeof source_page);
     memset(&destination_page, 0, sizeof destination_page);

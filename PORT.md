@@ -960,6 +960,10 @@ game loop.
   invoking the bounded semantic planar copy. It is ready for the recovered
   temporary workspace to active page operation once the source workspace
   coordinates are established.
+- The first `$C2FBE6` pointer correlates to active plane 0 plus byte offset
+  `$0E30`, which decodes to planar word 16 at row 90. The display boundary
+  now exposes `fa18_decode_planar_word_offset` for this address free offset
+  conversion; further lane offsets can use the same contract.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.

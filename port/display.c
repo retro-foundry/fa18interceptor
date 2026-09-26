@@ -17,6 +17,16 @@ uint8_t fa18_visible_lane_mask_to_plane_mask(uint8_t lane_mask) {
     return plane_mask;
 }
 
+int fa18_decode_planar_word_offset(uint16_t byte_offset, int *word_x, int *y) {
+    if (!word_x || !y || (byte_offset & 1u) != 0) return -1;
+    const int row = byte_offset / FA18_PLANAR_ROW_BYTES;
+    const int byte_x = byte_offset % FA18_PLANAR_ROW_BYTES;
+    if (row >= FA18_HEIGHT || byte_x / 2 >= FA18_WIDTH / 16) return -1;
+    *word_x = byte_x / 2;
+    *y = row;
+    return 0;
+}
+
 const FA18PlanarPage *fa18_select_display_page(const FA18DisplayPagePair *pair,
                                                 int adjusted) {
     if (!pair) return NULL;
