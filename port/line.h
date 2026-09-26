@@ -5,7 +5,6 @@
 
 #include "renderer.h"
 
-enum { FA18_PLANAR_PAGE_BYTES = (FA18_WIDTH / 8) * FA18_HEIGHT };
 
 /* Caller-level endpoints proved at $C2FA7E. They are screen coordinates, not
  * pointers or Amiga register values. */
