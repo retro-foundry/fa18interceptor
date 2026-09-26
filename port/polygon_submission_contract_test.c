@@ -21,6 +21,16 @@ int main(void) {
     assert(fa18_prepare_projected_submission(vertices, 4, &converted, &bounds) == 0);
     assert(converted.count == 4 && bounds.min_x == 0 && bounds.max_x == 0);
     assert(fa18_reduce_screen_pair_bounds(NULL, &bounds) < 0);
+    FA18SubmissionDecision decision;
+    bounds = (FA18ScreenPairBounds){10, 12, 30, 32};
+    assert(fa18_choose_submission_route(&bounds, 199, &decision) == 0 &&
+           decision.route == FA18_SUBMISSION_NEAR_LINE && decision.line.y0 == 31);
+    bounds = (FA18ScreenPairBounds){10, 20, 30, 34};
+    assert(fa18_choose_submission_route(&bounds, 199, &decision) == 0 &&
+           decision.route == FA18_SUBMISSION_FAR_VERTICAL);
+    bounds = (FA18ScreenPairBounds){10, 13, 20, 22};
+    assert(fa18_choose_submission_route(&bounds, 199, &decision) == 0 &&
+           decision.route == FA18_SUBMISSION_FAR_HORIZONTAL);
     puts("screen pair bounds contract passed");
     return 0;
 }

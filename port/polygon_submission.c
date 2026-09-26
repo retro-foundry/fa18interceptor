@@ -1,5 +1,10 @@
 #include "polygon_submission.h"
 
+static int absolute_difference(int16_t first, int16_t second) {
+    int difference = (int)second - first;
+    return difference < 0 ? -difference : difference;
+}
+
 int fa18_screen_polygon_to_pair_list(const FA18ScreenPolygon *polygon,
                                      FA18ScreenPairList *list) {
     if (!polygon || !list || polygon->count > FA18_POLYGON_MAX_VERTICES) return -1;
@@ -22,6 +27,40 @@ int fa18_reduce_screen_pair_bounds(const FA18ScreenPairList *list,
         if (point.x > bounds->max_x) bounds->max_x = point.x;
         if (point.y < bounds->min_y) bounds->min_y = point.y;
         if (point.y > bounds->max_y) bounds->max_y = point.y;
+    }
+    return 0;
+}
+
+int fa18_choose_submission_route(const FA18ScreenPairBounds *bounds,
+                                 int16_t display_bound_y,
+                                 FA18SubmissionDecision *decision) {
+    if (!bounds || !decision) return -1;
+    decision->line = (FA18LineSegment){bounds->min_x, bounds->min_y,
+                                       bounds->max_x, bounds->max_y};
+    if (bounds->min_y > display_bound_y) {
+        decision->route = FA18_SUBMISSION_SUCCESS;
+        return 0;
+    }
+    const int vertical = absolute_difference(bounds->min_y, bounds->max_y);
+    if (vertical > 2) {
+        decision->route = FA18_SUBMISSION_FAR_VERTICAL;
+        return 0;
+    }
+    const int horizontal = absolute_difference(bounds->min_x, bounds->max_x);
+    if (vertical > 1) {
+        if (horizontal > 2) decision->route = FA18_SUBMISSION_FAR_HORIZONTAL;
+        else {
+            decision->route = FA18_SUBMISSION_NEAR_LINE;
+            decision->line.y0++;
+        }
+    } else if (horizontal <= 1) {
+        decision->route = FA18_SUBMISSION_OUTSIDE_SLICE;
+    } else {
+        decision->route = FA18_SUBMISSION_NEAR_LINE;
+    }
+    if (decision->route == FA18_SUBMISSION_NEAR_LINE &&
+        decision->line.y0 > display_bound_y) {
+        decision->route = FA18_SUBMISSION_SUCCESS;
     }
     return 0;
 }
