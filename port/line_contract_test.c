@@ -31,6 +31,15 @@ int main(void) {
     assert(fa18_run075_frame395_line_packets[3].destination_byte_offset == 0x0ec6);
     for (size_t i = 0; i < FA18_RUN060_FRAME7992_LINE_PACKET_COUNT; ++i)
         assert(fa18_validate_line_blit_job(&fa18_run060_frame7992_line_packets[i]) == 0);
+    /* The first line packet reads its existing C words. These values are the
+     * settled run060 frame-7991 state at the packet destination. */
+    uint8_t line_plane[FA18_WIDTH / 8 * FA18_HEIGHT] = {0};
+    line_plane[0x0b7a] = 0xff;
+    line_plane[0x0b7b] = 0xff;
+    line_plane[0x0b7c] = 0xff;
+    line_plane[0x0b7d] = 0xff;
+    assert(fa18_execute_line_blit_job(
+        line_plane, sizeof line_plane, &fa18_run060_frame7992_line_packets[0]) == 0);
     /* Generic raster contract. A settled run060+ visual fixture is still
      * required before this primitive can be promoted to port parity. */
     FA18IndexedFrameBuffer framebuffer;
