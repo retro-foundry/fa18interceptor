@@ -19,6 +19,42 @@ uint16_t fa18_rgb4_colour(uint16_t rgb4) {
     return (uint16_t)(rgb4 & 0x0fffu);
 }
 
+int fa18_blit_planar_words(const FA18PlanarPage *source, FA18PlanarPage *destination,
+                           int source_word_x, int source_y, int destination_word_x,
+                           int destination_y, int width_words, int height_rows,
+                           uint16_t first_mask, uint16_t last_mask,
+                           uint8_t plane_mask) {
+    if (!source || !destination || width_words <= 0 || height_rows <= 0 ||
+        source_word_x < 0 || destination_word_x < 0 || source_y < 0 ||
+        destination_y < 0 || source_word_x + width_words > FA18_WIDTH / 16 ||
+        destination_word_x + width_words > FA18_WIDTH / 16 ||
+        source_y + height_rows > FA18_HEIGHT ||
+        destination_y + height_rows > FA18_HEIGHT) return -1;
+    for (int plane = 0; plane < FA18_PLANES; ++plane) {
+        if (!(plane_mask & (uint8_t)(1u << plane))) continue;
+        for (int row = 0; row < height_rows; ++row) {
+            for (int word = 0; word < width_words; ++word) {
+                uint16_t mask = 0xffffu;
+                if (word == 0) mask = (uint16_t)(mask & first_mask);
+                if (word == width_words - 1) mask = (uint16_t)(mask & last_mask);
+                const size_t source_offset = (size_t)(source_y + row) * FA18_PLANAR_ROW_BYTES +
+                                             (size_t)(source_word_x + word) * 2u;
+                const size_t destination_offset = (size_t)(destination_y + row) * FA18_PLANAR_ROW_BYTES +
+                                                  (size_t)(destination_word_x + word) * 2u;
+                uint16_t source_word = (uint16_t)(((uint16_t)source->plane[plane][source_offset] << 8) |
+                                                  source->plane[plane][source_offset + 1u]);
+                uint16_t destination_word = (uint16_t)(((uint16_t)destination->plane[plane][destination_offset] << 8) |
+                                                       destination->plane[plane][destination_offset + 1u]);
+                destination_word = (uint16_t)((destination_word & (uint16_t)~mask) |
+                                              (source_word & mask));
+                destination->plane[plane][destination_offset] = (uint8_t)(destination_word >> 8);
+                destination->plane[plane][destination_offset + 1u] = (uint8_t)destination_word;
+            }
+        }
+    }
+    return 0;
+}
+
 void fa18_decode_planar_page(const FA18PlanarPage *page,
                              FA18IndexedFrameBuffer *framebuffer) {
     if (!page || !framebuffer) return;

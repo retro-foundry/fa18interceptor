@@ -20,6 +20,11 @@ int fa18_apply_planar_word(FA18PlanarPage *page, int plane, int word_x,
                            int y, uint16_t and_mask, uint16_t or_mask);
 void fa18_planar_page_to_indexed(const FA18PlanarPage *page,
                                  FA18IndexedFrameBuffer *framebuffer);
+int fa18_blit_planar_words(const FA18PlanarPage *source, FA18PlanarPage *destination,
+                           int source_word_x, int source_y, int destination_word_x,
+                           int destination_y, int width_words, int height_rows,
+                           uint16_t first_mask, uint16_t last_mask,
+                           uint8_t plane_mask);
 
 /* Amiga RGB4 words, held as palette state rather than COLORxx registers. */
 typedef struct {

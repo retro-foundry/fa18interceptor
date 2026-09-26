@@ -2,8 +2,17 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 
 int main(void) {
+    FA18PlanarPage source_page, destination_page;
+    memset(&source_page, 0, sizeof source_page);
+    memset(&destination_page, 0, sizeof destination_page);
+    source_page.plane[0][2 * FA18_PLANAR_ROW_BYTES + 2] = 0xA5;
+    assert(fa18_blit_planar_words(&source_page, &destination_page, 1, 2, 3, 4,
+                                  1, 1, 0xffff, 0xffff, 1) == 0);
+    assert(destination_page.plane[0][4 * FA18_PLANAR_ROW_BYTES + 6] == 0xA5);
+
     /* The first byte encodes index 0..7 from left to right in the Amiga's
      * MSB-first bit order. The next byte proves the high palette bit. */
     FA18PlanarPage page;
