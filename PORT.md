@@ -896,3 +896,7 @@ game loop.
   `$C457xx` state before branching to `$C330F4`; it does not directly submit
   a glyph or blit. The trace is recorded in
   `analysis/data/run075_frame537_c32fce_control_scan.md`.
+- The next large HUD transition reaches `$C2FF48` at frame 560. Its packet is
+  a bounded 20 record coordinate sort, followed by `$C2F688` and `$C2F8B4`
+  display operations. The entry packet is recorded in
+  `analysis/data/run075_frame559_c2ff48_sort_packet.md`.
