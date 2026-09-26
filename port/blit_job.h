@@ -50,6 +50,8 @@ int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet);
 int fa18_build_run060_frame7991_final_fill(FA18AreaFillPacket *packet);
 int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
                               FA18BlitOperation *operation);
+uint16_t fa18_apply_blitter_minterm(uint8_t logic_function,
+                                    uint16_t a, uint16_t b, uint16_t c);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 

@@ -60,6 +60,19 @@ int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
     return 0;
 }
 
+uint16_t fa18_apply_blitter_minterm(uint8_t logic_function,
+                                    uint16_t a, uint16_t b, uint16_t c) {
+    uint16_t result = 0;
+    for (unsigned bit = 0; bit < 16; ++bit) {
+        const unsigned index = (((a >> bit) & 1u) << 2) |
+                               (((b >> bit) & 1u) << 1) |
+                               ((c >> bit) & 1u);
+        if (logic_function & (uint8_t)(1u << index))
+            result = (uint16_t)(result | (uint16_t)(1u << bit));
+    }
+    return result;
+}
+
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation) {
     if (!operation) return;
     operation->bltcon0 = 0x0d0c; operation->bltcon1 = 2;

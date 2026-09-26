@@ -983,6 +983,9 @@ game loop.
   packet separately from the `$C304B2` setup packet: `$0DFC`, A `$76EE`, B/D
   `$14266`, C `$0037`, and 20 words by 52 rows. Its register contract passes;
   execution against the semantic display page remains the next boundary.
+- Added `fa18_apply_blitter_minterm`, using the Amiga truth-table bit order;
+  the contract verifies `$FC` as `A OR B`, the logic function programmed by
+  the final `$0DFC` fill control word.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.

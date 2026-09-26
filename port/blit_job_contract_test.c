@@ -23,6 +23,8 @@ int main(void) {
     assert(final_fill.a_source == 0x76ee && final_fill.b_source == 0x14266);
     assert(final_fill.c_source == 0x37 && final_fill.d_destination == 0x14266);
     assert(final_fill.c_modulus == 0x28 && final_fill.d_modulus == 1);
+    assert(fa18_apply_blitter_minterm(0xfc, 0x0f0f, 0x00ff, 0xaaaa) == 0x0fff);
+    assert(fa18_apply_blitter_minterm(0xc0, 0xffff, 0x00ff, 0xaaaa) == 0x00ff);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&
