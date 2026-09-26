@@ -94,6 +94,17 @@ int fa18_prepare_feet_display(int32_t record_value, int alternate_mode,
     return 0;
 }
 
+int fa18_decode_feet_coordinate_table(const uint16_t words[12],
+                                      FA18FeetCoordinateTable *table) {
+    if (!words || !table) return -1;
+    table->count = 6;
+    for (uint8_t index = 0; index < table->count; ++index) {
+        table->pair[index].position = (int16_t)words[index * 2u];
+        table->pair[index].mask = words[index * 2u + 1u];
+    }
+    return 0;
+}
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;

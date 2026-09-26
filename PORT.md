@@ -134,6 +134,10 @@ infer a function's purpose merely from a rendered frame.
   `FA18FeetDisplayValue`: normal `$18CE/$1E/$FCA/$4` and alternate
   `$1CDA/$1A/$F3A/$C`. These are typed compositor inputs recovered at
   `$C32740`; the coordinate table and final plane destination remain open.
+- 2026-09-26: Decoded the run060 `$C31928` table into six typed
+  `FA18GlyphCoordinatePair` entries. The words are retained as signed
+  position and compositor mask pairs; they are deliberately not called x/y
+  coordinates until the final plane mapping is proven.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).

@@ -63,6 +63,16 @@ typedef struct {
     uint16_t lane_parameter;
 } FA18FeetDisplayValue;
 
+typedef struct {
+    int16_t position;
+    uint16_t mask;
+} FA18GlyphCoordinatePair;
+
+typedef struct {
+    uint8_t count;
+    FA18GlyphCoordinatePair pair[6];
+} FA18FeetCoordinateTable;
+
 /* `$C32178`: signed record byte preprocessing before its shared gate. */
 int fa18_scale_record_byte(int8_t source_byte, FA18ThreeDigitScale *scale);
 
@@ -70,6 +80,9 @@ int fa18_scale_record_byte(int8_t source_byte, FA18ThreeDigitScale *scale);
 int fa18_prepare_feet_display(int32_t record_value, int alternate_mode,
                               int override_active, int32_t override_value,
                               FA18FeetDisplayValue *display);
+
+int fa18_decode_feet_coordinate_table(const uint16_t words[12],
+                                      FA18FeetCoordinateTable *table);
 
 /* The draw loop's leading-zero check, retaining one digit for zero. */
 const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,

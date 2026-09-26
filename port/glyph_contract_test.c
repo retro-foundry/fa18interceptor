@@ -68,6 +68,19 @@ int main(void) {
         fputs("feet display contract failed\n", stderr);
         return 1;
     }
+    static const uint16_t feet_words[12] = {
+        0, 0, 0, 64, 0x4000, 0, 0, 128, 0x8000, 0,
+        0, 224
+    };
+    FA18FeetCoordinateTable coordinates;
+    if (fa18_decode_feet_coordinate_table(feet_words, &coordinates) != 0 ||
+        coordinates.count != 6 || coordinates.pair[1].position != 0 ||
+        coordinates.pair[1].mask != 64 ||
+        coordinates.pair[2].position != 0x4000 ||
+        coordinates.pair[2].mask != 0) {
+        fputs("feet coordinate table contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {
