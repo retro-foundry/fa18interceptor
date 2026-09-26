@@ -1056,3 +1056,8 @@ game loop.
   verifies all captured A/B/C/D pointers, control words, masks, and size. The
   remaining work for the current frame is decoding the source-table pointers
   into screen segments and matching their four-plane output.
+- Captured the complete custom-register image for the frame-7992 line mode.
+  The native job now includes the proven modulo tuple
+  `BLTAMOD/BLTBMOD/BLTCMOD/BLTDMOD = 1/1/5/5`, along with the control words,
+  masks, pointers, and size. The remaining frame work is the source-data to
+  screen-segment conversion.

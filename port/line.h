@@ -41,6 +41,10 @@ typedef struct {
     uint32_t b_source;
     uint32_t c_source;
     uint32_t d_destination;
+    uint16_t a_modulus;
+    uint16_t b_modulus;
+    uint16_t c_modulus;
+    uint16_t d_modulus;
     uint16_t width_height;
 } FA18LineBlitJob;
 

@@ -7,6 +7,8 @@ job shape:
 BLTCON0 = $0FCE   BLTCON1 = $0000
 BLTAFWM = $FFFF   BLTALWM = $FFFF
 A       = $00A230 BLTSIZE = $0312
+BLTAMOD = 1       BLTBMOD = 1
+BLTCMOD = 5       BLTDMOD = 5
 ```
 
 The per job B and C/D pointers are:

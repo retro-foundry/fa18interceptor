@@ -21,7 +21,8 @@ def main():
                              'record_words':e.memory(0xC4B390,0x100).hex(),
                              'a1_bytes':e.memory(regs['a1'],16).hex(),
                              'a2_bytes':e.memory(regs['a2'],16).hex(),
-                             'a3_bytes':e.memory(regs['a3'],16).hex()})
+                             'a3_bytes':e.memory(regs['a3'],16).hex(),
+                             'custom_bytes':e.memory(0xDFF040,0x2A).hex()})
                 e.core.e9k_debug_step_instr(); e.core.e9k_debug_resume(); e.core.retro_run()
             if len(hits)>=a.count: break
         if len(hits)!=a.count: raise RuntimeError(f'only captured {len(hits)} of {a.count} hits')
