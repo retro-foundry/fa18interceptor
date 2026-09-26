@@ -8,7 +8,7 @@ events in order. The bridge breakpoint reached the routine at debugger frame
 
 ## Entry evidence
 
-At entry, `A1=$C49B04` and the caller stack returns through `$C25C76`,
+At entry, `A1=$C46184` and the caller stack returns through `$C25C76`,
 `$C0F016`, `$C1C6B6`, `$C22D88`, and `$C25C70`. The first instruction reads
 `$65(A1)`. The observed byte is `$01`, so all three two-bit fields are zero.
 The routine therefore writes zero to `$28(A1)`, `$29(A1)`, and `$2A(A1)` and
