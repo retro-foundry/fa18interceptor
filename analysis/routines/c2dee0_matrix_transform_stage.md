@@ -64,3 +64,13 @@ The other two returned components are zero on this route. The offset comes
 from the preceding signed matrix-product classification path; this evidence
 does not assign a physical unit or game-level meaning to either its table or
 the `$0E10` reference value.
+
+## run060 third-component handoff
+
+At frame 1754, this same routine enters with active root context
+`A1=$C46184`, `A4=$C46204`, and caller input triple
+`D0/D2/D4=$0000/$0000/$0013`. It returns to `$C2D704` after 293 instructions
+with `D4/D5/D6=$7038/$0000/$0010`, exactly matching the subsequent
+`$C2D954` root-angle publication. This bounds the third non-zero orientation
+component to the matrix-product producer, but does not yet prove which
+record/control lane is responsible for its `$0013` input.
