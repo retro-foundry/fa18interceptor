@@ -3,6 +3,10 @@
 #include <stddef.h>
 #include <string.h>
 
+int fa18_visible_lane_plane(unsigned lane) {
+    return lane < FA18_PLANES ? (FA18_PLANES - 1 - (int)lane) : -1;
+}
+
 const FA18PlanarPage *fa18_select_display_page(const FA18DisplayPagePair *pair,
                                                 int adjusted) {
     if (!pair) return NULL;

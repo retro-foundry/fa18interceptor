@@ -5,6 +5,11 @@
 #include <assert.h>
 
 int main(void) {
+    assert(fa18_visible_lane_plane(0) == 3);
+    assert(fa18_visible_lane_plane(1) == 2);
+    assert(fa18_visible_lane_plane(2) == 1);
+    assert(fa18_visible_lane_plane(3) == 0);
+    assert(fa18_visible_lane_plane(4) == -1);
     FA18PlanarPage source_page, destination_page;
     memset(&source_page, 0, sizeof source_page);
     memset(&destination_page, 0, sizeof destination_page);

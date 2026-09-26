@@ -8,6 +8,9 @@
 enum { FA18_PLANES = 4, FA18_PLANAR_ROW_BYTES = FA18_WIDTH / 8,
        FA18_PLANAR_PAGE_BYTES = FA18_PLANAR_ROW_BYTES * FA18_HEIGHT };
 
+/* `$C2FD8C` receives visible plane destinations in lane order 4, 3, 2, 1. */
+int fa18_visible_lane_plane(unsigned lane);
+
 /* Native four-plane page used only at the display boundary. It has no Chip-RAM
  * addresses, Copper list, or hardware register state. Plane zero is the low
  * bit of the resulting chunky colour index. */

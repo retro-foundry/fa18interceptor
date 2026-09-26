@@ -951,6 +951,11 @@ game loop.
   `$C2FD8C` submission boundary. The next trace target is therefore the
   bounded `$C2FD8C` packet, which should provide the four destination pointers
   needed to execute the active-page copy semantically.
+- The `$C2FD8C` trace now proves the active page lane order. `$C4566E` holds
+  the four plane bases in lane order 4, 3, 2, 1; each visible submission adds
+  the 40-byte row offset before programming the blitter. The native display
+  boundary now exposes `fa18_visible_lane_plane`, which converts that proven
+  order to semantic plane indices without storing addresses.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
