@@ -48,6 +48,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--restore", type=Path, required=True)
     parser.add_argument("--playback", type=Path, required=True)
+    parser.add_argument("--playback-frame-offset", type=int, default=0,
+                        help="global replay frame represented by restored frame zero")
     parser.add_argument("--address", type=parse_hex, required=True)
     parser.add_argument("--size", type=parse_hex, required=True)
     parser.add_argument("--frames", type=int, required=True)
@@ -76,17 +78,19 @@ def main() -> None:
         initial_digest = hashlib.sha256(previous).hexdigest()
         mutations = []
         for frame in range(1, args.frames + 1):
-            for kind, values in events.get(frame, []):
+            global_frame = args.playback_frame_offset + frame
+            for kind, values in events.get(global_frame, []):
                 engine.event(kind, values)
             engine.core.retro_run()
             current = sampled_bytes(engine, args.address, args.size, args.stride, args.sample_size)
             if current != previous:
-                mutations.append({"frame": frame,
+                mutations.append({"frame": frame, "global_frame": global_frame,
                                   "changed": changed_ranges(previous, current, args.stride, args.sample_size),
                                   "before_sha256": hashlib.sha256(previous).hexdigest(),
                                   "after_sha256": hashlib.sha256(current).hexdigest()})
                 previous = current
-        payload = {"authority": {"restore": str(args.restore), "playback": str(args.playback)},
+        payload = {"authority": {"restore": str(args.restore), "playback": str(args.playback),
+                                  "playback_frame_offset": args.playback_frame_offset},
                    "address": f"${args.address:06X}", "size": args.size,
                    "stride": args.stride, "sample_size": args.sample_size,
                    "frames": args.frames, "initial_sha256": initial_digest,
