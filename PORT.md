@@ -245,6 +245,14 @@ The native live gate currently covers run075 frames 200 through 394. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
+The postflight submission tail now has a native semantic contract in
+`port/postflight.h` and `port/postflight.c`. `FA18PostflightRecord` stores a
+screen pair and renderer flag, while `FA18PostflightState` stores the signed
+vertical offset and table cursor/limit. The contract preserves the observed
+shared versus adjacent renderer choice and table rejection behavior without
+recreating Amiga addresses. It is validated by `fa18_postflight_contract`;
+the run075 frame-395 record stream is still to be connected.
+
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
 python scripts/pack_port_frames.py --oracle build/port_run075_demo_oracle --last-frame 20987 --output build/port_run075_demo.fa18
