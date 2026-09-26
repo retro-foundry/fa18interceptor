@@ -900,3 +900,7 @@ game loop.
   a bounded 20 record coordinate sort, followed by `$C2F688` and `$C2F8B4`
   display operations. The entry packet is recorded in
   `analysis/data/run075_frame559_c2ff48_sort_packet.md`.
+- The frame559 transition's `$C2F688` leaf is now reduced to a semantic plane
+  packet: coordinates `(140,105)`, four plane lanes separated by `$1F40`,
+  and the first word update's OR/AND masks. The evidence is recorded in
+  `analysis/data/run075_frame559_c2f688_plane_packet.md`.
