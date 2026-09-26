@@ -1086,6 +1086,12 @@ game loop.
   the evidence is recorded in
   `analysis/data/run060_frame7992_c30668_entries.md`. The next port boundary is
   a typed prepared line packet joining these controls to their screen endpoints.
+- The byte-exact `$C305D6-$C30667` continuation and `$C30668-$C306B3`
+  submission leaf are now the authoritative construction path for the later
+  frame-7992 jobs: the caller derives the line deltas, destination row/byte
+  offset, error modulus, and `BLTSIZE`; the leaf supplies the fixed `$28`
+  C/D stride and writes the inherited A low word. The native packet must join
+  those values at the semantic page boundary.
 - Reconstructed all 36 ordered `$DFF058` submissions in frame 7992. The first
   four are the validated `$FCE/$0312` area jobs; the remaining 32 are grouped
   four-plane operations with distinct control and size modes. The inventory is
