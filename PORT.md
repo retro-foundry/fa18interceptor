@@ -225,6 +225,8 @@ infer a function's purpose merely from a rendered frame.
   and publishes a stable typed control snapshot on every simulation frame.
   The live playback loop now uses this boundary before menu or cockpit state
   consumes input; the contract test covers event frames and no-input frames.
+  The parser now reads signed joystick components as signed values; run075's
+  frame-440 control sample and final negative mouse deltas are preserved.
   It parses all 87 run075 events, preserving joystick frame samples and
   keyboard transitions in a typed control latch. The latch is intentionally
   independent of flight dynamics; its consumer starts when cockpit rendering

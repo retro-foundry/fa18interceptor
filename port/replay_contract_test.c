@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef struct { FA18ReplayEvent event[4]; size_t count; } Events;
+typedef struct { FA18ReplayEvent event[128]; size_t count; } Events;
 
 static int collect(const FA18ReplayEvent *event, void *user) {
     Events *events = user;
-    if (events->count >= 4) return 0;
+    if (events->count >= 128) return 0;
     events->event[events->count++] = *event;
     return 0;
 }
@@ -24,9 +24,15 @@ int main(void) {
     size_t count = 0;
     if (fa18_replay_read_events("../../captures/run075/playback.e9k", collect,
                                 &events, &count) != 0 || count != 87 ||
-        events.count != 4 || events.event[0].frame != 41 ||
+        events.count != 87 || events.event[0].frame != 41 ||
         events.event[0].kind != FA18_REPLAY_FRAME_EVENT) {
         fputs("run075 replay parse contract failed\n", stderr);
+        return 1;
+    }
+    if (events.event[events.count - 1].frame != 21069 ||
+        events.event[events.count - 1].value[1] != 7 ||
+        events.event[events.count - 1].value[2] != -25) {
+        fputs("signed replay parse contract failed\n", stderr);
         return 1;
     }
     FA18ReplayControlState state;

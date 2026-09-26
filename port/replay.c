@@ -23,7 +23,8 @@ int fa18_replay_read_events(const char *path, FA18ReplayEventSink sink, void *us
         }
         FA18ReplayEvent event;
         memset(&event, 0, sizeof event);
-        unsigned frame, a, b, c, d = 0;
+        unsigned frame;
+        int a, b, c, d = 0;
         char kind;
         int fields = sscanf(line, "F %u %c %u %u %u %u", &frame, &kind,
                             &a, &b, &c, &d);
@@ -45,10 +46,10 @@ int fa18_replay_read_events(const char *path, FA18ReplayEventSink sink, void *us
             fclose(file);
             return -1;
         }
-        event.value[0] = (int32_t)a;
-        event.value[1] = (int32_t)b;
-        event.value[2] = (int32_t)c;
-        event.value[3] = (int32_t)d;
+        event.value[0] = a;
+        event.value[1] = b;
+        event.value[2] = c;
+        event.value[3] = d;
         if (sink(&event, user) != 0) {
             fclose(file);
             return -1;
