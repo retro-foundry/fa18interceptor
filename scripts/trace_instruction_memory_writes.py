@@ -21,6 +21,8 @@ def main() -> None:
     parser.add_argument("--restore", type=Path, required=True)
     parser.add_argument("--playback", type=Path,
                         help="replay input used while seeking a breakpoint")
+    parser.add_argument("--playback-frame-offset", type=int, default=0,
+                        help="global replay frame represented by restored frame zero")
     parser.add_argument("--breakpoint", type=parse_int,
                         help="PC at which to pause before stepping")
     parser.add_argument("--arm-frame", type=int,
@@ -58,7 +60,8 @@ def main() -> None:
             for frame in range(1, args.frames + 1):
                 if frame == args.arm_frame:
                     engine.core.e9k_debug_add_breakpoint(args.breakpoint)
-                for kind, values in events.get(frame, []):
+                global_frame = args.playback_frame_offset + frame
+                for kind, values in events.get(global_frame, []):
                     engine.event(kind, values)
                 engine.core.retro_run()
                 if engine.core.e9k_debug_is_paused():
@@ -93,6 +96,7 @@ def main() -> None:
             context.append(row)
         report = {"breakpoint": f"${args.breakpoint:06X}" if args.breakpoint is not None else None,
                   "start_immediately": args.start_immediately, "hit_frame": hit_frame,
+                  "playback_frame_offset": args.playback_frame_offset,
                   "watch_address": f"${args.watch_address:06X}", "watch_size": args.watch_size,
                   "instructions": args.max_instructions, "writes": writes,
                   "limitation": "Future replay input is not delivered while instruction stepping."}
