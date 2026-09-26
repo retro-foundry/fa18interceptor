@@ -63,3 +63,26 @@ callback's second accumulator to control-stage state. The accumulator is still
 not named as pitch, roll, or another flight axis: this one event does not
 separate those possibilities. The broader static routine has many unobserved
 branches, so no source reconstruction is claimed from this packet.
+
+## run060 saturated-control check
+
+- Restored state: sealed `run060`, breakpoint armed before replay frame 940.
+  The instruction breakpoint hits at replay frame 942 and execution reaches
+  the real caller return `$C25D84` after 260 instructions.  Future replay
+  input is deliberately not delivered while that bounded interval is stepped.
+- `$C13E10` reads `$C45778 = $03C0`, and the observed route writes that same
+  word to `$C4577C` at `$C14114`.  The three sampled values (`$C45776`,
+  `$C45778`, `$C4577C`) are respectively `$01BF`, `$03C0`, and `$03C0` both
+  before and after the interval.  This is a held/saturated control-state
+  observation, not proof of the physical control axis.
+- The selected record remains `$C46184`.  Comparing the entry and return RAM
+  images shows no change in its pose coordinates `+$14..+$1F`, angle tuple
+  `+$66..+$6B`, or attitude matrix `+$92..+$A3`.  The only changed bytes in
+  the 512-byte record are `+$39: $02->$01`, `+$6D: $78->$AE`,
+  `+$6F: $78->$AE`, and `+$74: $23->$1D`.
+
+Therefore this live control-stage invocation is upstream state preparation or
+auxiliary record maintenance, not a direct publisher of the measured flight
+pose, orientation-angle tuple, or attitude matrix.  That conclusion is
+limited to this invocation; later stages in the enclosing update chain can
+consume its changed fields.
