@@ -94,6 +94,14 @@ infer a function's purpose merely from a rendered frame.
 
 ## Progress
 
+- 2026-09-27: Matched the Engine9000 line executor's separate C and D pointer
+  timing, odd word alignment, shift overflow, sign update, and write order in
+  `port/line.c`. The first run060 frame-7992 line submission now has an exact
+  oracle in `port/line_contract_test.c`, producing `0xFFF8` and `0x3FFF` at
+  the traced destination. Later line submissions require the complete frame
+  7991 plane snapshot because their C reads depend on more than the final
+  destination words; isolated two-word seeds are not valid fixtures.
+
 - 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the
   observed adjusted versus unadjusted page choice while leaving raw table
