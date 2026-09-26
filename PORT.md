@@ -852,3 +852,8 @@ game loop.
   line mode `$0002`, and triggers the caller supplied extent. The skipped
   `$0D3C` branch and unresolved page ownership remain explicit evidence until
   the caller trace assigns those roles.
+- A later run075 `$C330FE` packet is now recorded at frame 584. Its trace
+  supplies the six-row class of strided byte-mask update, with one byte of
+  source advance and `$28` bytes of destination advance per row. This extends
+  the native glyph mask evidence to the later HUD path while keeping the
+  original CPU addresses outside the semantic page model.
