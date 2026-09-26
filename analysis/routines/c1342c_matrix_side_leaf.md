@@ -51,3 +51,18 @@ This establishes `$C1342C` as the preceding generator/update stage for this
 specific matrix-product input. It does not establish that record `+$56` has a
 persistent angle meaning: the pre/post snapshots of the larger bounded packet
 need not retain the temporary value read at `$C2D620`.
+
+The same frame-949 packet identifies the update arithmetic for its first
+working input. At `$C13BDC`, the leaf addresses root `+$56`; the local target
+at `+$0A(A6)` is `$FFD3` (signed −45). The exercised instructions
+`$C13BE6-$C13BF8` perform:
+
+```text
+old = $FFFA  (−6)
+delta = arithmetic_shift_right(old − target, 2) = (39 >> 2) = 9
+new = old − delta = $FFF1  (−15)
+```
+
+Thus the first component is a one-quarter relaxation toward a leaf-computed
+target for this packet. The target's upstream source and its physical/control
+meaning are still unassigned.
