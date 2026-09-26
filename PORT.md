@@ -971,8 +971,10 @@ game loop.
   isolation at `$C304F4` before the native fill can be wired.
 - The `$C304F4` isolation is complete. Its one-frame settled delta changes
   only active plane 1 and yields exact spans for rows 94--144. The contract is
-  recorded in `analysis/data/run060_c304f4_isolated_fill.md`; this is now the
-  evidence source for implementing the integer area edge rule.
+  recorded in `analysis/data/run060_c304f4_isolated_fill.md`. A `$C304B2`
+  entry capture now supplies the caller masks/modulos and the helper writes;
+  `FA18AreaFillPacket` records that complete run060 packet and has a contract
+  test. The packet is not yet connected to the live renderer.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.

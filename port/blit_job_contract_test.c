@@ -2,6 +2,13 @@
 #include <assert.h>
 #include <stdio.h>
 int main(void) {
+    FA18AreaFillPacket fill;
+    assert(fa18_build_run060_frame7991_area_fill(&fill) == 0);
+    assert(fill.control_a == 0x0d0c && fill.control_b == 2);
+    assert(fill.first_mask == 0x00ff && fill.last_mask == 0x00ff);
+    assert(fill.c_modulus == 0x28 && fill.b_modulus == 1);
+    assert(fill.a_modulus == 1 && fill.d_modulus == 0);
+    assert(fill.width_words == 20 && fill.height_rows == 13);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&

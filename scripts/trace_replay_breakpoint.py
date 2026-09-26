@@ -69,6 +69,11 @@ def main() -> None:
                 raise RuntimeError("skipped breakpoint did not reach another matching entry")
         hit = {"frame": engine.frame, "registers": engine.regs(), "skipped_hits": args.skip_hits}
         (args.output / "slow.bin").write_bytes(engine.memory(0xC00000, 0x80000))
+        # Preserve the custom-register image at the exact breakpoint entry.
+        # This is needed for helpers whose caller supplies blitter masks or
+        # modulos before the helper writes its final control and pointer words.
+        (args.output / "custom_at_breakpoint.bin").write_bytes(
+            engine.memory(0xDFF000, 0x100))
         if args.chip:
             (args.output / "chip.bin").write_bytes(engine.memory(0, 0x80000))
         rows = []

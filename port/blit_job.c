@@ -18,6 +18,17 @@ int fa18_decode_display_blit_geometry(const FA18DisplayBlitPacket *packet,
     return 0;
 }
 
+int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet) {
+    if (!packet) return -1;
+    *packet = (FA18AreaFillPacket){
+        0x0d0c, 0x0002, 0x00ff, 0x00ff,
+        0x0028, 0x0001, 0x0001, 0x0000,
+        0x000076ee, 0x000076ee, 0x00010026, 0x000176ee,
+        20, 13
+    };
+    return 0;
+}
+
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation) {
     if (!operation) return;
     operation->bltcon0 = 0x0d0c; operation->bltcon1 = 2; operation->bltamod = 0;

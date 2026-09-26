@@ -26,9 +26,21 @@ typedef struct {
     uint8_t source_plane_mask;
 } FA18DisplayBlitGeometry;
 
+/* Caller state plus the writes made by `$C304B2` for the isolated run060
+ * descending area operation.  This is a semantic packet, not an Amiga
+ * address image. */
+typedef struct {
+    uint16_t control_a, control_b;
+    uint16_t first_mask, last_mask;
+    uint16_t c_modulus, b_modulus, a_modulus, d_modulus;
+    uint32_t a_source, b_source, c_source, d_destination;
+    uint16_t width_words, height_rows;
+} FA18AreaFillPacket;
+
 FA18BlitExtent fa18_decode_blit_extent(uint16_t bltsize);
 int fa18_decode_display_blit_geometry(const FA18DisplayBlitPacket *packet,
                                       FA18DisplayBlitGeometry *geometry);
+int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 
