@@ -52,6 +52,30 @@ record-update continuation. The preceding helper's byte-exact checks show
 that this is its negative accumulated-candidate return, but do not assign the
 candidate components physical axes or a landing meaning.
 
+### Exact first-component failure arithmetic
+
+A replay from the same frame-2,000 checkpoint, with `$C27968` armed only
+from replay frame 120, reaches this failure invocation at frame 125. The
+retained 20-instruction trace is
+`build/run062_frame2000_c27968_failure_candidate_trace/trace.jsonl`.
+
+It establishes the exact first failed comparison:
+
+```text
+$10(A3)       = +11                  -> D2
+$62(A3)&$F0   = $10                  (takes the three-component check)
+$7B(A3)&$0F   = 0                    (passes its low-nibble gate)
+$A6(A3)       = $FF03 = -253
+$7D(A3)&$0F   = 3
+ASR.W #3,-253 = -32
+-32 + D2      = -21                  -> BLT $C279C2
+```
+
+The first `+$A6` component alone is sufficient in this invocation: the
+second and third component checks are not executed. This promotes the failure
+route to an exact signed fixed-point comparison, but neither the component's
+physical axis nor its relationship to runway geometry is proven.
+
 At that live `$C279C2` entry, `A3=$C46184`: the candidate is the same selected
 base record later restored into `A1` at `$C26014` and modified by
 `$C26102/$C26178`. The preceding check reads that record's `+$A6`, `+$AC`, and
