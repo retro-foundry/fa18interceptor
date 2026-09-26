@@ -50,3 +50,17 @@ shows the enclosing packet reaching `$C2D954` with that tuple and publishing
 numeric producer of the first run060 pitch-like angle tuple, while `$C2D94E`
 is its record publisher.  This proves the handoff, not an interpretation of
 the inputs, lookup table, or the real-world control axis.
+
+The live producer calculation is also bounded for that invocation. The
+matrix-product route reaches `$C2E07C`, selects signed table offset `+$0002`,
+and reads `$0002` from the word table rooted at `$C3DD92`. It then executes:
+
+```text
+$C2E0A4..$C2E0AA: D4 = $0E10 - $0002 = $0E0E
+$C2E334..$C2E336: D4 = sign_extend($0E0E) << 3 = $00007070
+```
+
+The other two returned components are zero on this route. The offset comes
+from the preceding signed matrix-product classification path; this evidence
+does not assign a physical unit or game-level meaning to either its table or
+the `$0E10` reference value.
