@@ -205,3 +205,12 @@ line mode, and `$C45984=$0090` supplies the row limit. The native line style
 can therefore use `active_plane_mask=0x0F` for this call family. The source
 plane bit value and control-plane value still need to be recovered from the
 line setup writes before assigning the remaining `FA18LineStyle` fields.
+
+The frame-395 submission tail `$C2FB7A` supplies the remaining computed line
+packet for the first segment: `D0=-1`, `D1=85`, `D2=$FFF8`, `D3=0`,
+`D4=$FD18005D`, `D5=$FFD0`, `D6=$FB00`, and `D7=$0EC5`. It writes the same
+line control and destination address for each enabled bit of `$C456E7`, with
+`BLTADAT=$8000`; the subsequent per-plane paths adjust the modulo word and
+destination pointer. These are hardware packet values, not native palette
+indices, so they belong in the line adapter's derived state rather than in
+`FA18LineStyle.plane_bits` until the chunky color mapping is proven.
