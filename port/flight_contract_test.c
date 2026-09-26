@@ -24,6 +24,10 @@ int main(void) {
     pose.forward = 20;
     assert(fa18_flight_publish_horizontal(&pose, 30, 40) == 0);
     assert(pose.lateral == 30 && pose.forward == 40);
+    assert(fa18_flight_apply_motion_terms(&pose, -5, -0x20, 7) == 0);
+    assert(pose.lateral == 25 && pose.forward == 47 &&
+           pose.altitude == 0x6fd31 && pose.lateral_delta == -5 &&
+           pose.forward_delta == 7 && pose.vertical_delta == -0x20);
     puts("flight pose contract passed");
     return 0;
 }

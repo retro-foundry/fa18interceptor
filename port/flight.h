@@ -34,4 +34,11 @@ int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);
 int fa18_flight_publish_horizontal(FA18FlightPose *pose,
                                    int32_t lateral, int32_t forward);
 
+/* Apply the three already computed local motion terms to the active pose.
+ * This models the observed `$14/$18/$1C` commit boundary. */
+int fa18_flight_apply_motion_terms(FA18FlightPose *pose,
+                                   int32_t lateral_delta,
+                                   int32_t vertical_delta,
+                                   int32_t forward_delta);
+
 #endif

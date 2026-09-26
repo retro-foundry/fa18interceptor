@@ -42,3 +42,14 @@ int fa18_flight_publish_horizontal(FA18FlightPose *pose,
     pose->forward = forward;
     return 0;
 }
+
+int fa18_flight_apply_motion_terms(FA18FlightPose *pose,
+                                   int32_t lateral_delta,
+                                   int32_t vertical_delta,
+                                   int32_t forward_delta) {
+    if (!pose) return -1;
+    if (fa18_flight_publish_horizontal(pose,
+            pose->lateral + lateral_delta,
+            pose->forward + forward_delta) != 0) return -1;
+    return fa18_flight_commit_vertical(pose, vertical_delta);
+}

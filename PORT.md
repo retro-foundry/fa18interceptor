@@ -323,6 +323,11 @@ The bounded control consumer `$C1B410` is now ported as
 the three semantic lanes to `[-20,20]`, `[-20,20]`, and `[-60,60]`. The lanes
 remain unnamed until a caller proves their physical flight meaning.
 
+`fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
+the computed lateral and forward terms update `$14/$1C`, while the signed
+vertical term is added to `$18`. The input-to-term calculation remains a
+separate unresolved stage.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,
