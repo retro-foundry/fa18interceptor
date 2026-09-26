@@ -22,7 +22,7 @@ MODE_INDEX_STATE                equ $C458A4
 MODE_INDEX_SOURCE               equ $C4566C
 MODE_INDEX_BUFFER               equ $C08510
 MODE_INDEX_COPY_DESTINATION     equ $C45660
-MODE_INDEX_CALLBACK_BUFFER      equ $C1822A
+MODE_INDEX_VIEWPORT_STATE       equ $C1822A
 MODE_INDEX_CALLBACK_LEFT        equ $C1821C
 MODE_INDEX_CALLBACK_RIGHT       equ $C18232
 MODE_INDEX_LEFT_TABLE           equ $C182BA
@@ -169,7 +169,7 @@ joystick_delta_callback:
                 moveq   #COPY_LONGWORDS,d0
                 move.l  d0,-(a7)
                 move.l  a0,-(a7)
-                pea     MODE_INDEX_CALLBACK_BUFFER.l
+                pea     MODE_INDEX_VIEWPORT_STATE.l
                 move.l  a0,-16(a6)
                 jsr     COPY_MODE_BUFFER.l
                 lea     12(a7),a7
@@ -191,7 +191,7 @@ joystick_delta_callback:
                 moveq   #COPY_LONGWORDS,d0
                 move.l  d0,-(a7)
                 move.l  -16(a6),-(a7)
-                pea     MODE_INDEX_CALLBACK_BUFFER.l
+                pea     MODE_INDEX_VIEWPORT_STATE.l
                 jsr     COPY_MODE_BUFFER.l
                 lea     12(a7),a7
                 move.w  -22(a6),d0
@@ -232,7 +232,7 @@ joystick_delta_callback:
                 moveq   #COPY_LONGWORDS,d0
                 move.l  d0,-(a7)
                 move.l  MODE_INDEX_COPY_DESTINATION.l,-(a7)
-                pea     MODE_INDEX_CALLBACK_BUFFER.l
+                pea     MODE_INDEX_VIEWPORT_STATE.l
                 jsr     COPY_MODE_BUFFER.l
                 lea     12(a7),a7
 

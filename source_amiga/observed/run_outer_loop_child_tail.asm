@@ -2,7 +2,7 @@
 
                 org     $C1617E
 
-OUTER_SHARED_POINTER            equ $C1822A
+DISPLAY_VIEWPORT                equ $C1822A
 OUTER_ACTIVITY_COUNTER          equ $C45899
 OUTER_SECONDARY_COUNTER         equ $C458A4
 OUTER_SELECTED_INDEX             equ $C4566C
@@ -18,7 +18,7 @@ run_outer_loop_child_tail:
                 tst.b   OUTER_ACTIVITY_COUNTER.l
                 beq.w   .secondary_counter
 .activity_loop:
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_SETUP.l
                 addq.l  #4,a7
                 jsr     OUTER_ACTIVITY_HELPER.l
@@ -29,25 +29,25 @@ run_outer_loop_child_tail:
                 moveq   #$20,d0
                 move.l  d0,-(a7)
                 pea.l   OUTER_STATIC_POINTER.l
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_OPERATION.l
                 lea.l   $C(a7),a7
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_SETUP.l
                 addq.l  #4,a7
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_SETUP.l
                 addq.l  #4,a7
                 moveq   #$20,d0
                 move.l  d0,-(a7)
                 move.l  OUTER_DYNAMIC_POINTER.l,-(a7)
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_OPERATION.l
                 lea.l   $C(a7),a7
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_SETUP.l
                 addq.l  #4,a7
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_SETUP.l
                 addq.l  #4,a7
                 move.b  OUTER_ACTIVITY_COUNTER.l,d0
@@ -63,13 +63,13 @@ run_outer_loop_child_tail:
                 move.w  OUTER_STATUS_WORD.l,d0
                 btst    #8,d0
                 bne.s   .finish
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_SETUP.l
                 addq.l  #4,a7
                 moveq   #$20,d0
                 move.l  d0,-(a7)
                 move.l  OUTER_DYNAMIC_POINTER.l,-(a7)
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_OPERATION.l
                 lea.l   $C(a7),a7
 .finish:

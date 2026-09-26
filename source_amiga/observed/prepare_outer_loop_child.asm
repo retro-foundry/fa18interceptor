@@ -3,7 +3,7 @@
 
                 org     $C1612C
 
-OUTER_SHARED_POINTER            equ $C1822A
+DISPLAY_VIEWPORT                equ $C1822A
 OUTER_SELECTED_INDEX             equ $C4566C
 OUTER_POINTER_TABLE_1            equ $C182BA
 OUTER_POINTER_TABLE_2            equ $C182C2
@@ -17,7 +17,7 @@ OUTER_POINTER_SETUP_2            equ $C53F30
 
 prepare_outer_loop_child:
                 link.w  a6,#-2
-                pea.l   OUTER_SHARED_POINTER.l
+                pea.l   DISPLAY_VIEWPORT.l
                 jsr     OUTER_POINTER_SETUP_1.l
                 addq.l  #4,a7
                 move.w  OUTER_SELECTED_INDEX.l,d0
