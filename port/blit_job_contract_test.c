@@ -52,8 +52,13 @@ int main(void) {
     FA18BlitOperation operation;
     fa18_prepare_lane_blit(0x0302, 0x007b6a, &operation);
     assert(operation.bltcon0 == 0x0d0c && operation.bltcon1 == 2);
+
     assert(operation.bltapt == 0x007b6a && operation.bltbpt == 0x007b6a && operation.bltdpt == 0x007b6a);
     assert(operation.bltsize == 0x0302);
+    operation.bltapt = 0x00120000u;
+    assert(fa18_prepare_c30668_submit(0x3456, 0x00abcd, &operation) == 0);
+    assert(operation.bltapt == 0x00123456u);
+    assert(operation.bltcpt == 0x00abcdu && operation.bltdpt == 0x00abcdu);
     assert(fa18_choose_lane_control(1, 1) == FA18_LANE_CONTROL_C);
     assert(fa18_choose_lane_control(0, 0) == FA18_LANE_CONTROL_B);
     assert(fa18_choose_lane_control(0, 1) == FA18_LANE_CONTROL_A);

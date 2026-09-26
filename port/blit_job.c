@@ -60,6 +60,15 @@ int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
     return 0;
 }
 
+int fa18_prepare_c30668_submit(uint16_t a_low_word, uint32_t destination,
+                               FA18BlitOperation *operation) {
+    if (!operation) return -1;
+    operation->bltapt = (operation->bltapt & 0xffff0000u) | a_low_word;
+    operation->bltcpt = destination;
+    operation->bltdpt = destination;
+    return 0;
+}
+
 uint16_t fa18_apply_blitter_minterm(uint8_t logic_function,
                                     uint16_t a, uint16_t b, uint16_t c) {
     uint16_t result = 0;

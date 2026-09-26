@@ -51,6 +51,11 @@ int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet);
 int fa18_build_run060_frame7991_final_fill(FA18AreaFillPacket *packet);
 int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
                               FA18BlitOperation *operation);
+/* `$C30668-$C306B3`: retain the caller's A high word, replace BLTAPTL,
+ * point C and D at the prepared semantic destination, and leave the other
+ * inherited channels unchanged until the final BLTSIZE write. */
+int fa18_prepare_c30668_submit(uint16_t a_low_word, uint32_t destination,
+                               FA18BlitOperation *operation);
 uint16_t fa18_apply_blitter_minterm(uint8_t logic_function,
                                     uint16_t a, uint16_t b, uint16_t c);
 int fa18_execute_blitter_words(uint8_t logic_function,
