@@ -1074,3 +1074,10 @@ game loop.
   operation is not yet promoted to an exact output gate. The next isolation
   target is the interval between the completed `WaitBlit()` return and the
   following packet entry.
+- Widened the frame-7992 DMA capture to the entire active page range and
+  validated the exposed destination writes against the native `$FCE` area
+  executor. The remaining differences are later renderer writes to the same
+  pages; the bus validation is recorded in
+  `analysis/data/run060_frame7992_area_bus_validation.md`. Frame 7992 still
+  requires the complete ordered renderer stream before it can pass its exact
+  output gate.
