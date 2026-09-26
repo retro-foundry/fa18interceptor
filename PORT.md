@@ -843,3 +843,7 @@ game loop.
 - The same note now records the enclosing `$C304B2` setup: `$0D0C/$0002`
   blitter control, `$0E14` size, and `$76EE` computed pointer word. The typed
   page-copy implementation remains gated on resolving its page roles.
+- The C blit contract now decodes the observed `BLTSIZE` into semantic
+  `FA18BlitExtent` dimensions. The frame553 `$0E14` operation is therefore
+  recorded as 20 words wide by 56 rows high. This captures the proven geometry
+  without treating the original Chip pointer as a port address.

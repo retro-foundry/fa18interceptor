@@ -2,6 +2,15 @@
 #define FA18_BLIT_JOB_H
 #include <stdint.h>
 typedef struct { uint16_t bltcon0, bltcon1, bltamod; uint32_t bltapt, bltbpt, bltcpt, bltdpt; uint16_t bltsize; } FA18BlitOperation;
+/* The port keeps the operation's visible geometry separately from the
+ * original register encoding.  BLTSIZE stores rows in bits 15..6 and words
+ * in bits 5..0. */
+typedef struct {
+    uint16_t width_words;
+    uint16_t height_rows;
+} FA18BlitExtent;
+
+FA18BlitExtent fa18_decode_blit_extent(uint16_t bltsize);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 

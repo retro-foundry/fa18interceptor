@@ -2,6 +2,10 @@
 #include <assert.h>
 #include <stdio.h>
 int main(void) {
+    FA18BlitExtent extent = fa18_decode_blit_extent(0x0e14);
+    assert(extent.width_words == 20 && extent.height_rows == 56);
+    extent = fa18_decode_blit_extent(0x0302);
+    assert(extent.width_words == 2 && extent.height_rows == 12);
     FA18BlitOperation operation;
     fa18_prepare_lane_blit(0x0302, 0x007b6a, &operation);
     assert(operation.bltcon0 == 0x0d0c && operation.bltcon1 == 2);

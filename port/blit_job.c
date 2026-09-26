@@ -1,4 +1,11 @@
 #include "blit_job.h"
+FA18BlitExtent fa18_decode_blit_extent(uint16_t bltsize) {
+    FA18BlitExtent extent;
+    extent.width_words = (uint16_t)(bltsize & 0x003fu);
+    extent.height_rows = (uint16_t)(bltsize >> 6);
+    return extent;
+}
+
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation) {
     if (!operation) return;
     operation->bltcon0 = 0x0d0c; operation->bltcon1 = 2; operation->bltamod = 0;
