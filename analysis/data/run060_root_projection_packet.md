@@ -63,6 +63,33 @@ measured publisher inputs `(0,$500,$1400)`. This proves that the same root
 record supplies both a three-component base triple and a nine-word transform
 matrix to the projection path.
 
+## Turn-era matrix consumption
+
+The earlier packet establishes the identity-matrix case. A separate bounded
+trace at `$C1C54E`, armed at replay frame 948 and hit on frame 949, captures
+the same root-selected path while the pitch-like update has made the matrix
+non-identity:
+
+```text
++$92..+$A2 = 4000,0000,0000, 0000,4000,0039, 0000,FFC7,4000
+record +$62 = $11  -> seed = (0,5,$14)
+```
+
+The 41-instruction packet performs all nine signed multiplications, shifts
+the three sums, adds them to root `+$14/+18/+1C`, and stores the intermediate
+tuple at `$C45A7C`. Its first component remains `$11982C00`; its latter two
+change during this exact packet:
+
+```text
++$C45A80  $00007250 -> $00006FED
++$C45A84  $105CAAD8 -> $105CCC77
+```
+
+The changed components are direct runtime evidence that the root matrix's
+vertical/forward-plane terms are consumed by this projection-bound transform,
+not just retained as a passive orientation cache. The packet still does not
+distinguish aircraft attitude from a coincident camera/reference attitude.
+
 ## Meaning boundary
 
 This proves that the root record's `+$14/+18/+1C` longwords are live inputs to
