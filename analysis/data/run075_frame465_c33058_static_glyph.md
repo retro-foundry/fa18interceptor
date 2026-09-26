@@ -76,3 +76,7 @@ same native compositor path.
 Engine frame 491 advances the destination to `$042A`, resolves source bytes
 `F0 90 90 F8 C8 C8 F8`, and supplies mask `$3000`. This packet is live in the
 same native compositor path.
+
+Engine frame 493 retains `$042A`, resolves source bytes `F8 98 88 88 88 88 F8`,
+and supplies mask `$A000`. This packet is live in the same native compositor
+path.
