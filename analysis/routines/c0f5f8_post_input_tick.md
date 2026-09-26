@@ -32,6 +32,16 @@ the same bounded run060 walk identifies `$C0F7FA` as the zero-to-negative
 store.  It does not identify the earlier writer that selected this callback
 and timing state.
 
+An aligned suffix replay from the sealed global-frame-9,200 checkpoint closes
+that local selection chain at global frame 9,263.  The complete 80-instruction
+`$C0F5F8` invocation observes `$C45798=$FF`, `$C4582A=3`, and signed
+`$C4582C=$FF`.  Its phase-three branch clears `$C4582A`, copies the zero word
+at `$C458C0` to `$C45AD6`, and installs `$C11078` in `$C1820C`.  The shared
+tail immediately decrements that zero to `$FFFF`, dispatches `$C11078`, and
+the callback installs `$C110A4` with a delay of two.  The bounded fixture is
+`build/run060_frame09200_posttick_to_c11078_trace/`.  These are scheduler
+state values and branch facts, not a decoded qualification predicate.
+
 ## Static branches awaiting a matching packet
 
 When the entry guards permit it, the routine calculates an offset from
