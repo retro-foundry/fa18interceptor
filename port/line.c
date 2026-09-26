@@ -81,18 +81,20 @@ int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
         if (!sign && !(con1 & 0x10u)) {
             if (con1 & 0x08u) {
                 if (ashift == 0u) cpt -= 2;
+                overflow = -1;
             } else {
                 if (ashift == 15u) cpt += 2;
+                overflow = 1;
             }
-            overflow = (con1 & 0x08u) ? -1 : 1;
         }
         if (con1 & 0x10u) {
             if (con1 & 0x04u) {
                 if (ashift == 0u) cpt -= 2;
+                overflow = -1;
             } else {
                 if (ashift == 15u) cpt += 2;
+                overflow = 1;
             }
-            overflow = (con1 & 0x08u) ? -1 : 1;
         }
         aold = (aold << 16) | (job->bltadat & job->first_mask);
         aold >>= ashift;

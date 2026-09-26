@@ -45,7 +45,7 @@ int main(void) {
     assert(line_plane[0x0b7c] == 0x3f && line_plane[0x0b7d] == 0xff);
 
     /* The complete snapshot and captured C streams validate every line job. */
-    for (size_t i = 0; i < 16; ++i) {
+    for (size_t i = 0; i < FA18_RUN060_FRAME7992_LINE_PACKET_COUNT; ++i) {
         uint8_t snapshot[FA18_RUN060_LINE_PLANE_BYTES];
         const uint8_t plane_index = fa18_run060_line_oracle_planes[i];
         memcpy(snapshot, fa18_run060_frame7991_line_planes[plane_index],
