@@ -42,3 +42,7 @@ Engine frame 473 retains the destination again, resolves source bytes
 `F8 20 20 30 30 30 30`, and supplies mask `$F000`. The live native gate now
 executes this packet through the semantic page conversion and four-lane
 compositor; the full replay verifier confirms its RGB444 result.
+
+Engine frame 475 advances the destination to `$0420`, resolves source bytes
+`F8 98 88 88 88 88 F8`, and supplies mask `$6000`. This packet is also routed
+through the native compositor in the live gate.

@@ -793,3 +793,6 @@ game loop.
 - Frame 473 is now routed through the same native path with its traced source
   bytes and `$F000` mask. The complete run075 verifier remains byte exact
   after adding this third live boundary.
+- Frame 475 is also native: its traced glyph bytes, `$0420` destination, and
+  `$6000` mask are applied through the same page conversion. The complete
+  replay verifier remains exact.
