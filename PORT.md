@@ -349,6 +349,11 @@ be consumed by native flight input state.
 The `$C2FF48` renderer boundary also has run060 settled traces now documented
 in `analysis/routines/c2ff48_run060_settled_boundary.md`; their small
 asynchronous deltas do not yet prove a general chunky fill contract.
+The proven `$C301F6` bounds stage is now represented by
+`FA18ScreenPairList`, `FA18ScreenPairBounds`, and
+`fa18_reduce_screen_pair_bounds`. The run031 sample
+`(211,60),(216,60),(227,67),(223,66)` is covered; pair-to-primitive selection
+remains separate.
 The native playback loop now applies port-0 `J` events to a semantic packed
 flight-control byte and updates `FA18FlightControlLanes` at the event frame.
 This connects the proven run060 input path to native state without inventing
