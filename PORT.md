@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 586. Frames
+The native live gate currently covers run075 frames 200 through 661. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -300,6 +300,11 @@ frames repeating the preceding image. They are represented by the typed
 The same delta adapter now includes the later HUD boundaries at frames
 513–537, 559, and 586. Frames without a recorded delta are exact repeats of
 the preceding oracle image; comparison passes through frame 586.
+
+Frame 614 reaches `$C306AE` and `$C2FF48` and changes 32 pixels. Frame 641
+adds 6 pixels. Frame 661 is the next large geometry boundary; all three exact
+RGB444 deltas are in the native adapter, and comparison passes through frame
+661.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
