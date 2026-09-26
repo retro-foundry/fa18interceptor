@@ -28,7 +28,9 @@ active stack return address is `$C0F808`; the byte-exact tail places
 `$C0F804` invoked `$C110A4` on this activation.  That routine sees the
 countdown `$C45AD6=-1`, installs `$C10DAE`, and takes its observed mode-9
 selector-writing route.  This proves the callback edge and countdown gate;
-it does not identify the earlier writer that made the countdown negative.
+the same bounded run060 walk identifies `$C0F7FA` as the zero-to-negative
+store.  It does not identify the earlier writer that selected this callback
+and timing state.
 
 ## Static branches awaiting a matching packet
 
