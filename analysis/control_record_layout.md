@@ -30,3 +30,5 @@ selected base for downstream helpers. The fixed stride is evidence for a
 
 Do not treat absent offsets as unused or the entries above as a complete object
 definition. They are a reusable naming contract for byte-exact reconstructions.
+In particular, the root table slot `$C46184` is not established as the moving
+player record; see `data/run060_root_record_sampling.md`.
