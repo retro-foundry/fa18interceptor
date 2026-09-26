@@ -328,6 +328,10 @@ The bounded control consumer `$C1B410` is now ported as
 `$0C`, applies the observed signed one-unit or three-unit updates, and clamps
 the three semantic lanes to `[-20,20]`, `[-20,20]`, and `[-60,60]`. The lanes
 remain unnamed until a caller proves their physical flight meaning.
+The run075 demo invocation is recorded in
+`analysis/routines/c1b410_run075_demo_consumer.md`; its `$65=$01` packet
+clears all three lanes and returns through the ordinary update chain. The
+replay joystick to packed-control conversion remains unproved.
 
 `fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
 the computed lateral and forward terms update `$14/$1C`, while the signed
