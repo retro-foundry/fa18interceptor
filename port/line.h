@@ -47,11 +47,11 @@ typedef struct {
     uint16_t d_modulus;
     uint16_t width_words;
     uint16_t height_rows;
-} FA18LineBlitJob;
+} FA18AreaBlitJob;
 
 /* Four live run060 frame-7992 segment-37 jobs, retained as semantic packet
  * fields rather than an Amiga memory image. */
-int fa18_build_run060_frame7992_line_jobs(FA18LineBlitJob jobs[4]);
+int fa18_build_run060_frame7992_area_jobs(FA18AreaBlitJob jobs[4]);
 
 /* Frame-395 `$C2FB7A` packet values after CPU line preparation. */
 int fa18_validate_line_packet(const FA18LinePacket *packet);

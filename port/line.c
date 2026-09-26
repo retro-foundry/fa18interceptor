@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int fa18_build_run060_frame7992_line_jobs(FA18LineBlitJob jobs[4]) {
-    static const FA18LineBlitJob captured[4] = {
+int fa18_build_run060_frame7992_area_jobs(FA18AreaBlitJob jobs[4]) {
+    static const FA18AreaBlitJob captured[4] = {
         {0x0fce, 0x0000, 0xffff, 0xffff, 3, 1, 101, 0, 1, 1, 5, 5, 18, 12},
         {0x0fce, 0x0000, 0xffff, 0xffff, 2, 1, 133, 1, 1, 1, 5, 5, 18, 12},
         {0x0fce, 0x0000, 0xffff, 0xffff, 1, 1, 133, 2, 1, 1, 5, 5, 18, 12},

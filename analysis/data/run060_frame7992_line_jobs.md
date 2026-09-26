@@ -1,7 +1,8 @@
-# run060 frame 7992 line jobs
+# run060 frame 7992 area blit jobs
 
-The four `$C30F5A` entries captured in frame 7992 build the same typed line
-job shape:
+The four `$C30F5A` entries captured in frame 7992 build the same typed area
+blit shape. `BLTCON1=$0000`, so this is an area operation; the earlier line
+classification was incorrect.
 
 ```text
 BLTCON0 = $0FCE   BLTCON1 = $0000
@@ -54,7 +55,7 @@ coordinates. `$C53F44` is the observed `WaitBlit()` library wrapper, so the
 native implementation should consume the resolved asset words and submit a
 synchronous line operation at the semantic page boundary.
 
-`FA18LineBlitJob` and `fa18_build_run060_frame7992_line_jobs` preserve these
+`FA18AreaBlitJob` and `fa18_build_run060_frame7992_area_jobs` preserve these
 values as a semantic packet. The packet builder is the current native boundary
-for this frame. The conversion from these source-table pointers to screen
-segments and the resulting four-plane pixels remains the next frame-7992 task.
+for this frame. The conversion from the source asset words and row strides to
+the resulting four-plane pixels remains the next frame-7992 task.

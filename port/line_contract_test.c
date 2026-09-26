@@ -7,8 +7,8 @@
 #include <string.h>
 
 int main(void) {
-    FA18LineBlitJob jobs[4];
-    assert(fa18_build_run060_frame7992_line_jobs(jobs) == 0);
+    FA18AreaBlitJob jobs[4];
+    assert(fa18_build_run060_frame7992_area_jobs(jobs) == 0);
     assert(jobs[0].bltcon0 == 0x0fce && jobs[0].destination_plane == 3);
     assert(jobs[0].destination_word == 1 && jobs[0].destination_row == 101);
     assert(jobs[1].destination_plane == 2 && jobs[1].source_asset_index == 1);

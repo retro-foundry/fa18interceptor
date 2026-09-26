@@ -1052,11 +1052,11 @@ game loop.
   native port is held at this frame until those line packets are decoded and
   matched.
 - Promoted the four frame-7992 `$C30F5A` preparations into
-  `FA18LineBlitJob` and `fa18_build_run060_frame7992_line_jobs`. The contract
+  `FA18AreaBlitJob` and `fa18_build_run060_frame7992_area_jobs`. The contract
   verifies all captured A/B/C/D pointers, control words, masks, and size. The
   remaining work for the current frame is decoding the source-table pointers
-  into screen segments and matching their four-plane output.
-- Captured the complete custom-register image for the frame-7992 line mode.
+  into semantic area sources and matching their four-plane output.
+- Captured the complete custom-register image for the frame-7992 area blit.
   The native job now includes the proven modulo tuple
   `BLTAMOD/BLTBMOD/BLTCMOD/BLTDMOD = 1/1/5/5`, along with the control words,
   masks, pointers, and size. The remaining frame work is the source-data to
