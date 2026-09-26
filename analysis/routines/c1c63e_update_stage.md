@@ -37,3 +37,12 @@ display, audio, or interrupt-management interpretation for the whole routine.
 This routine returns before `$C0EFD4` writes its next observed marker `$0020`
 to `$C45AD4`. It is a suitable parent boundary for separating the earlier input
 phase from the later update sequence.
+
+## run060 active-root instance
+
+The sealed run060 long context enters this stage from `$C0F016` and follows
+`$C1C6B6 -> $C22C80 -> $C25B66`. That instance selects root `$C46184`, updates
+its moving pose fields, publishes its angle tuple, and composes its orientation
+matrix. This promotes that **instance** to a flight-pose update boundary, while
+the routine as a whole remains a generic multi-record update stage. See
+`../data/run060_active_flight_update_chain.md`.
