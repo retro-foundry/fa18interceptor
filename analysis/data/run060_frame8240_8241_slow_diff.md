@@ -21,19 +21,25 @@ other transient workspace.
 | --- | --- | --- | --- |
 | `$C45775` | `$E5` | `$E6` | callback/update counter candidate |
 | `$C4582E/$C45831` | `$00/$00` | `$20/$01` | mode/flag candidates |
-| `$C45961-$C45963` | `$007B1A` | `$04E4B6` | compact three-byte changing-state candidate |
-| `$C45965-$C45967` | `$007B1A` | `$04E4B6` | paired compact changing-state candidate |
-| `$C4596A-$C4596B` | `$1AD2` | `$0986` | paired word candidate |
-| `$C4596E-$C4596F` | `$0282` | `$0F54` | paired word candidate |
-| `$C4597D-$C4597F` | `$C000DE` | `$00013F` | compact three-byte changing-state candidate |
+| `$C45960-$C45982` | multiple | multiple | transient blitter lane-state block; excluded from flight-state candidates |
 | `$C45A64-$C45A87` | multiple | multiple | projection/intermediate workspace; excluded as direct player-state evidence |
 | `$C4B390-$C4B3D1`, `$C4B990-$C4B9CB` | multiple | multiple | renderer/workspace candidates; excluded as direct player-state evidence |
 
 The known root transform triple `$C46198-$C461A3` is unchanged in this
-comparison, agreeing with the independent late-run write watches. The diff
-therefore supplies a finite next target: trace writers and consumers of the
-`$C45961-$C4597F` cluster before assigning position, orientation, velocity,
-or aircraft ownership.
+comparison, agreeing with the independent late-run write watches.
+
+## Resolved renderer exclusion
+
+Static and prior live evidence now resolve the initially notable
+`$C45961-$C4597F` subrange. It is part of the `$C45960-$C45982` blitter
+lane-state block built by `$C30306-$C3040A`: it contains lane pointers,
+offsets, pair count, and `BLTSIZE` setup which are consumed by the subsequent
+Custom-chip blit submission. See
+[`c30306_renderer_lane_state_builder.md`](../routines/c30306_renderer_lane_state_builder.md)
+and [`finalize_renderer_pair_blit.asm`](../../source_amiga/observed/finalize_renderer_pair_blit.asm).
+It is renderer workspace, not a player position/orientation/velocity
+candidate. The compact changes are expected address/size updates for the
+per-frame blits.
 
 ## Exclusions
 
