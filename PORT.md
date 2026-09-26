@@ -892,3 +892,7 @@ game loop.
   word update: one lane AND `$FFFD`, the next OR `$0002`, and the third OR
   zero. This is recorded in the native plane word contract while its caller
   supplied screen coordinate remains unresolved.
+- Frame 537 reaches `$C32FCE`, which scans a HUD/control record and updates
+  `$C457xx` state before branching to `$C330F4`; it does not directly submit
+  a glyph or blit. The trace is recorded in
+  `analysis/data/run075_frame537_c32fce_control_scan.md`.

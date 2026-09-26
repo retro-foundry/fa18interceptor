@@ -117,6 +117,7 @@ class Engine:
         self.bind('e9k_debug_read_cycle_count', C.c_uint64)
         self.bind('e9k_debug_is_paused', C.c_int)
         self.bind('e9k_debug_add_breakpoint', None, U)
+        self.bind('e9k_debug_remove_breakpoint', None, U)
         self.core.retro_init()
         game = Game(str(config).encode(), None, 0, None)
         if not self.core.retro_load_game(C.byref(game)):

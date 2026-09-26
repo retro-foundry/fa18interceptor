@@ -44,6 +44,10 @@ def main() -> None:
         hit = None
         for frame in range(1, args.frames + 1):
             if frame == args.arm_frame:
+                # Restored checkpoints can retain breakpoints from the trace
+                # that created them. Remove this target before arming it so
+                # the reported hit belongs to this replay window.
+                engine.core.e9k_debug_remove_breakpoint(args.address)
                 engine.core.e9k_debug_add_breakpoint(args.address)
             for kind, values in events.get(frame, []):
                 engine.event(kind, values)
