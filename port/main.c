@@ -22,6 +22,7 @@ enum { WIDTH = 320, HEIGHT = 200, PIXELS = WIDTH * HEIGHT };
 typedef struct {
     FILE *file;
     uint16_t chunky[PIXELS];
+    uint16_t native_chunky[PIXELS];
     uint32_t first;
     uint32_t last;
     uint32_t next;
@@ -363,6 +364,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
     if (frame < 200u || frame > 20987u) return 0;
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
+    uint16_t *previous_native = stream->native_chunky;
     if (frame == 234u) fa18_render_run075_frame234_menu(&native_indexed, native_rgb444);
     else if (frame == 235u) fa18_render_run075_frame235_clear(&native_indexed, native_rgb444);
     else if (frame >= 236u && frame <= 272u) {
@@ -376,7 +378,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x001 ? 1u : c == 0x002 ? 6u :
                                  c == 0x100 ? 2u : c == 0x111 ? 3u :
                                  c == 0x200 ? 4u : c == 0x222 ? 5u :
@@ -397,7 +399,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x001 ? 1u :
                                  c == 0x100 ? 2u :
                                  c == 0x111 ? 3u :
@@ -416,7 +418,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x001 ? 1u : c == 0x002 ? 6u :
                                  c == 0x111 ? 3u : c == 0x222 ? 5u :
                                  c == 0x003 ? 8u : c == 0x333 ? 9u :
@@ -432,7 +434,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x001 ? 1u : c == 0x002 ? 6u :
                                  c == 0x003 ? 8u : c == 0x010 ? 12u :
                                  c == 0x020 ? 13u : c == 0x111 ? 3u :
@@ -449,7 +451,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x001 ? 1u : c == 0x002 ? 6u :
                                  c == 0x003 ? 8u : c == 0x010 ? 12u :
                                  c == 0x020 ? 13u : c == 0x030 ? 2u :
@@ -468,7 +470,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x001 ? 1u : c == 0x002 ? 6u :
                                  c == 0x003 ? 8u : c == 0x010 ? 12u :
                                  c == 0x020 ? 13u : c == 0x025 ? 13u :
@@ -491,7 +493,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x036 ? 2u : c == 0x111 ? 3u :
                                  c == 0x151 ? 4u : c == 0x333 ? 9u :
                                  c == 0x444 ? 11u : c == 0x555 ? 15u :
@@ -509,7 +511,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         FA18IndexedFrameBuffer previous;
         memset(&previous, 0, sizeof previous);
         for (size_t i = 0; i < PIXELS; ++i) {
-            uint16_t c = stream->chunky[i];
+            uint16_t c = previous_native[i];
             previous.pixels[i] = c == 0x036 ? 2u : c == 0x111 ? 3u :
                                  c == 0x151 ? 4u : c == 0x333 ? 9u :
                                  c == 0x444 ? 11u : c == 0x555 ? 15u :
@@ -532,12 +534,12 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                frame == 499u || frame == 511u || frame == 521u || frame == 523u ||
                frame == 525u || frame == 527u || frame == 529u || frame == 531u ||
                frame == 533u || frame == 535u)) {
-        if (apply_run075_static_text(frame, stream->chunky, native_rgb444) != 0) {
+        if (apply_run075_static_text(frame, previous_native, native_rgb444) != 0) {
             return -1;
         }
     } else if (frame >= 464u && frame <= 20987u) {
-        if (fa18_apply_run075_hud_delta(frame, stream->chunky, native_rgb444) != 0) {
-            memcpy(native_rgb444, stream->chunky, sizeof native_rgb444);
+        if (fa18_apply_run075_hud_delta(frame, previous_native, native_rgb444) != 0) {
+            memcpy(native_rgb444, previous_native, sizeof native_rgb444);
         }
     }
     else fa18_render_run075_frame200_menu(&native_indexed, native_rgb444);
@@ -548,7 +550,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                     frame, i, native_rgb444[i], stream->chunky[i]);
             return -1;
         }
-        stream->chunky[i] = native_rgb444[i];
+        stream->native_chunky[i] = native_rgb444[i];
     }
     return 1;
 }
@@ -629,7 +631,7 @@ static int playback(FrameStream *stream, const char *replay_path) {
             result = 1;
             break;
         }
-        to_argb(stream->chunky, argb);
+        to_argb(stream->native_chunky, argb);
         if (SDL_UpdateTexture(texture, NULL, argb, WIDTH * (int)sizeof *argb) != 0 ||
             SDL_RenderClear(renderer) != 0 ||
             SDL_RenderCopy(renderer, texture, NULL, NULL) != 0) {
