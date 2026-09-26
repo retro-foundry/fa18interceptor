@@ -430,6 +430,13 @@ the four glyph records are consumed. The trace proves this producer input but
 does not yet identify the caller's screen coordinates or all other frame-398
 pixel writers.
 
+The exact before/after Chip RAM pair from the sealed frame-398 `$C2F688`
+prefix trace changes five bytes in the third display plane: offsets
+`$1CDE,$1D06,$1D2E,$1D56,$1D7E` change from `00,00,00,00,02` to
+`10,10,10,10,12`. Their 40-byte spacing agrees with the `$C32858` glyph-row
+stride and confirms this bounded writer result; the 320-instruction trace does
+not cover the rest of the frame's pixel producers.
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The
