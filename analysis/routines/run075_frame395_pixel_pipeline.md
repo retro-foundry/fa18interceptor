@@ -104,3 +104,14 @@ the earlier inventory. This is sufficient to define a bounded native
 `FA18PostflightRecord` fixture for this call family, but the complete frame
 still includes other rendering work; this record set alone must not unlock
 frame 395.
+
+## Shared renderer bridge
+
+The first shared-renderer entry `$C2F5F4` has `(D0.w,D1.w)=(158,167)` and
+reads the renderer mode as `D2.w=5` from `$C45954`. It selects the primary
+mask table `$C2F766` and handler table `$C2F786`. The entry carries
+`D4=$00041C00`, `D5=32`, `D6=2`, and `D7=24`; the table lookup selects handler
+index 2 before the shared body at `$C2F688`. This is the first frame-395
+record with a complete native renderer-state bridge. The remaining lane
+fields and all adjacent entries still need the same bounded capture before
+the record fixture can drive pixels.
