@@ -78,3 +78,16 @@ int fa18_replay_apply_event(FA18ReplayControlState *state,
     }
     return -1;
 }
+
+int fa18_replay_advance_frame(FA18ReplayControlState *state,
+                              const FA18ReplayEvent *events, size_t event_count,
+                              size_t *next_event, uint32_t frame) {
+    if (!state || (!events && event_count != 0) || !next_event ||
+        *next_event > event_count) return -1;
+    while (*next_event < event_count && events[*next_event].frame <= frame) {
+        if (fa18_replay_apply_event(state, &events[*next_event]) != 0) return -1;
+        ++*next_event;
+    }
+    state->frame = frame;
+    return 0;
+}

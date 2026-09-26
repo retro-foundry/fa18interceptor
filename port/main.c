@@ -52,10 +52,13 @@ static int native_replay_open(NativeReplay *replay, const char *path) {
 
 static int native_replay_apply_frame(NativeReplay *replay, uint32_t frame,
                                      FA18MenuState *menu_state) {
-    while (replay->next < replay->count &&
-           replay->events[replay->next].frame <= frame) {
-        const FA18ReplayEvent *event = &replay->events[replay->next++];
-        if (fa18_replay_apply_event(&replay->controls, event) != 0) return -1;
+    size_t first = replay->next;
+    if (fa18_replay_advance_frame(&replay->controls, replay->events,
+                                  replay->count, &replay->next, frame) != 0) {
+        return -1;
+    }
+    for (size_t index = first; index < replay->next; ++index) {
+        const FA18ReplayEvent *event = &replay->events[index];
         if (event->frame == 230u && event->kind == FA18_REPLAY_KEY_EVENT &&
             event->value[0] == 49 && event->value[3] != 0) {
             if (fa18_select_run075_demo_mode(menu_state) != 0) return -1;

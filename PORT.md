@@ -221,6 +221,10 @@ infer a function's purpose merely from a rendered frame.
   matrix products, six-bit fixed-point shift, and wrapped base addition in
   named structs. Active-record lookup and caller routing remain open.
 - 2026-09-26: Added the native `E9K_INPUT_V1` deterministic replay boundary.
+  Added `fa18_replay_advance_frame`, which consumes each scheduled event once
+  and publishes a stable typed control snapshot on every simulation frame.
+  The live playback loop now uses this boundary before menu or cockpit state
+  consumes input; the contract test covers event frames and no-input frames.
   It parses all 87 run075 events, preserving joystick frame samples and
   keyboard transitions in a typed control latch. The latch is intentionally
   independent of flight dynamics; its consumer starts when cockpit rendering

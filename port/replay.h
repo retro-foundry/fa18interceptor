@@ -32,4 +32,10 @@ int fa18_replay_read_events(const char *path, FA18ReplayEventSink sink, void *us
 int fa18_replay_apply_event(FA18ReplayControlState *state,
                             const FA18ReplayEvent *event);
 
+/* Apply all events scheduled for one simulation frame. Events are consumed
+ * exactly once and the latch remains stable on frames without input. */
+int fa18_replay_advance_frame(FA18ReplayControlState *state,
+                              const FA18ReplayEvent *events, size_t event_count,
+                              size_t *next_event, uint32_t frame);
+
 #endif

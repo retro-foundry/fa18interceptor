@@ -37,6 +37,21 @@ int main(void) {
         fputs("replay control latch contract failed\n", stderr);
         return 1;
     }
+    FA18ReplayEvent events_for_frame[] = {
+        {230, FA18_REPLAY_KEY_EVENT, {49, 49, 16, 1}},
+        {234, FA18_REPLAY_KEY_EVENT, {49, 49, 16, 0}}
+    };
+    memset(&state, 0, sizeof state);
+    size_t next = 0;
+    if (fa18_replay_advance_frame(&state, events_for_frame, 2, &next, 230) != 0 ||
+        next != 1 || state.frame != 230 || !state.keyboard_down[49] ||
+        fa18_replay_advance_frame(&state, events_for_frame, 2, &next, 233) != 0 ||
+        next != 1 || !state.keyboard_down[49] ||
+        fa18_replay_advance_frame(&state, events_for_frame, 2, &next, 234) != 0 ||
+        next != 2 || state.keyboard_down[49]) {
+        fputs("replay frame advance contract failed\n", stderr);
+        return 1;
+    }
     puts("run075 deterministic replay contract passed");
     return 0;
 }
