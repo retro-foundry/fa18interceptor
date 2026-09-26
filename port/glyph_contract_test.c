@@ -51,7 +51,10 @@ int main(void) {
         return 1;
     }
     FA18FeetDisplayValue feet;
-    if (fa18_prepare_feet_display(0x400, 0, 0, 0, &feet) != 0 ||
+    if (fa18_prepare_feet_display(0x7708, 1, 0, 0, &feet) != 0 ||
+        feet.scaled_value != 145 || feet.append_feet_suffix != 1 ||
+        memcmp(feet.digits, "000145", 6u) != 0 ||
+        fa18_prepare_feet_display(0x400, 0, 0, 0, &feet) != 0 ||
         feet.scaled_value != 5 || feet.append_feet_suffix != 0 ||
         memcmp(feet.digits, "000005", 6u) != 0 ||
         fa18_prepare_feet_display(0, 1, 1, 0x20000, &feet) != 0 ||

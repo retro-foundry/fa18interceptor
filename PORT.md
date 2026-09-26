@@ -126,6 +126,10 @@ infer a function's purpose merely from a rendered frame.
   `FA18FeetDisplayValue` and `fa18_prepare_feet_display`. It preserves the
   record `>>10` then `*5` conversion, six-character packed formatting, the
   `$1869F` override clamp, and the observed optional `FT` suffix.
+- 2026-09-26: Promoted the run060 frame-8244 formatter fixture into the
+  glyph contract: selected-record `+$18=$7708` produces `145` and the
+  alternate request carries `145 FT`. The trace and endpoint evidence are
+  recorded in `analysis/data/run060_root_altitude_formatter.md`.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).
