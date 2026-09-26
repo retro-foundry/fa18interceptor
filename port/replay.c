@@ -92,6 +92,22 @@ int fa18_replay_apply_event(FA18ReplayControlState *state,
         event->value[1] >= 0 && event->value[1] < 8) {
         state->joystick[event->value[0]][event->value[1]] =
             (uint8_t)(event->value[2] != 0);
+        if (event->value[0] == 0) {
+            uint8_t field_mask = 0;
+            uint8_t command = 0;
+            switch (event->value[1]) {
+            case 4: field_mask = 0x30; command = 0x10; break;
+            case 5: field_mask = 0x30; command = 0x20; break;
+            case 6: field_mask = 0x0c; command = 0x08; break;
+            case 7: field_mask = 0x0c; command = 0x04; break;
+            default: break;
+            }
+            if (field_mask) {
+                state->packed_flight_control = (uint8_t)(
+                    (state->packed_flight_control & (uint8_t)~field_mask) |
+                    (event->value[2] ? command : 0));
+            }
+        }
         return 0;
     }
     return -1;

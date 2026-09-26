@@ -30,7 +30,6 @@ typedef struct {
     size_t count;
     size_t next;
     FA18ReplayControlState controls;
-    uint8_t packed_flight_control;
     FA18FlightControlLanes flight_lanes;
 } NativeReplay;
 
@@ -64,11 +63,9 @@ static int native_replay_apply_frame(NativeReplay *replay, uint32_t frame,
         const FA18ReplayEvent *event = &replay->events[index];
         if (event->kind == FA18_REPLAY_JOYSTICK_EVENT &&
             event->value[0] == 0) {
-            if (fa18_flight_apply_joystick_direction(
-                    (uint8_t)event->value[1], event->value[2] != 0,
-                    &replay->packed_flight_control) != 0) return -1;
             if (fa18_flight_update_control_lanes(
-                    &replay->flight_lanes, replay->packed_flight_control) != 0) {
+                    &replay->flight_lanes,
+                    replay->controls.packed_flight_control) != 0) {
                 return -1;
             }
         }

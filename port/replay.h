@@ -20,6 +20,7 @@ typedef struct {
     uint32_t frame;
     int32_t motion[4][2];
     uint8_t joystick[4][8];
+    uint8_t packed_flight_control;
     uint8_t keyboard_down[256];
 } FA18ReplayControlState;
 

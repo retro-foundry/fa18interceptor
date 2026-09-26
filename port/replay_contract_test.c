@@ -46,7 +46,7 @@ int main(void) {
     const FA18ReplayEvent joystick = {939, FA18_REPLAY_JOYSTICK_EVENT,
                                       {0, 5, 1, 0}};
     if (fa18_replay_apply_event(&state, &joystick) != 0 ||
-        !state.joystick[0][5]) {
+        !state.joystick[0][5] || state.packed_flight_control != 0x20) {
         fputs("joystick control latch contract failed\n", stderr);
         return 1;
     }
