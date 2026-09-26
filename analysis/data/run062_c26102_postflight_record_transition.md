@@ -52,6 +52,14 @@ record-update continuation. The preceding helper's byte-exact checks show
 that this is its negative accumulated-candidate return, but do not assign the
 candidate components physical axes or a landing meaning.
 
+At that live `$C279C2` entry, `A3=$C46184`: the candidate is the same selected
+base record later restored into `A1` at `$C26014` and modified by
+`$C26102/$C26178`. The preceding check reads that record's `+$A6`, `+$AC`, and
+`+$B2` words, shifts them by the low nibble at `+$7D`, and combines each with
+the accumulated value prepared from its `+$10` long. This closes the
+candidate-to-flagged-record identity for this run062 path. It does not prove
+the base record is the player record or identify any component as an axis.
+
 `$C45798=$04` is later the saved callback code that routes run062 through the
 non-success-side `$C10DAE` continuation. This establishes a negative-candidate
 return -> record flag/update -> postflight-callback dataflow chain. It does
