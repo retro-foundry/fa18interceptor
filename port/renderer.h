@@ -55,5 +55,7 @@ int fa18_render_run075_frame408_scene(const FA18IndexedFrameBuffer *previous,
                                       FA18IndexedFrameBuffer *framebuffer);
 int fa18_render_run075_frame414_scene(const FA18IndexedFrameBuffer *previous,
                                       FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame460_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
 
 #endif
