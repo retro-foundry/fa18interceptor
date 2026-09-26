@@ -253,6 +253,13 @@ shared versus adjacent renderer choice and table rejection behavior without
 recreating Amiga addresses. It is validated by `fa18_postflight_contract`;
 the run075 frame-395 record stream is still to be connected.
 
+The frame-395 scene model now also contains `FA18PostflightScene`,
+`FA18PostflightComponent`, and `FA18PostflightGroup`. Their contracts cover
+the `$C31392`, `$C332FE`, and `$C31312` state recovered from Engine9000,
+including coordinate normalization, clamping, renderer modes, and lane
+selection. The full frame-395 draw stream remains locked until these semantic
+records are connected to the native pixel buffer and compared frame by frame.
+
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
 python scripts/pack_port_frames.py --oracle build/port_run075_demo_oracle --last-frame 20987 --output build/port_run075_demo.fa18
