@@ -24,7 +24,12 @@ JOY0DAT callback -> $C45778 -> $C13D84 current root record
 ```
 
 The callback's two hardware delta axes have not yet been assigned to pitch,
-roll, or another control, so this does not name a physical stick axis.
+roll, or another control, so this does not name a physical stick axis. More
+importantly, run060 frames 930--1050 show the root pitch-like angle changing
+while `$C45776/$C45778/$C4577C` remain unchanged across recorded `J` events.
+The route above is therefore a structural input-to-motion path, **not** proof
+that it causes that particular run060 turn; see
+`data/run060_input_angle_separation.md`.
 
 ## Vertical component
 
@@ -78,4 +83,5 @@ Authority:
 `source_amiga/observed/update_c13d84_record_offset18.asm`, and
 `source_amiga/observed/publish_indexed_update_delta_pair.asm`; the input
 bridge is independently bounded in `analysis/routines/c13e10_control_state_stage.md`
-and `analysis/routines/c25b66_indexed_update_stage.md`.
+and `analysis/routines/c25b66_indexed_update_stage.md`; its run060 limitation
+is recorded in `data/run060_input_angle_separation.md`.
