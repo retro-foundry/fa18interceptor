@@ -7,3 +7,11 @@ clears bits 5–4 of `$C461E9` and merges the selection.
 
 The route is a precise byte-level state update. Its control-name binding is
 deferred until isolated raw-key traces are available.
+
+## run060 turn-window exclusion
+
+A direct breakpoint on `$C1B4F4`, armed before frame 900 and replayed through
+frame 960 of sealed run060, is not reached. The root control byte nevertheless
+contains its `$20` bits during the frame-949 three-axis update. Thus that
+direction is held state in this window, not a fresh invocation of this
+high-field publisher; its earlier origin remains to be traced.
