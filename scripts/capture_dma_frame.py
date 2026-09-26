@@ -38,6 +38,8 @@ def main() -> None:
     p.add_argument('--playback', type=Path, required=True)
     p.add_argument('--frame', type=int, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--narrow', action='store_true',
+                   help='export only blitter registers and active page records')
     args = p.parse_args()
     events = read_events(args.playback)
     engine = Engine((ROOT / 'local/fa18.uae').resolve(), args.output.parent / 'saves')
@@ -62,10 +64,11 @@ def main() -> None:
         rows = C.cast(view.contents.records, C.POINTER(Record * info.recordCount)).contents
         selected = []
         for i, r in enumerate(rows):
-            if ((0xC304B0 <= r.addr <= 0xC30500) or
-                    (0xDFF040 <= r.addr <= 0xDFF076) or
-                    (0x12BC0 <= r.addr < 0x1A8C0) or
-                    r.addr in (0x76EE, 0x14266, 0x12BC0, 0x10026, 0x37) or r.type != 0):
+            narrow_match = ((0xC304B0 <= r.addr <= 0xC30500) or
+                            (0xDFF040 <= r.addr <= 0xDFF076) or
+                            (0x12BC0 <= r.addr < 0x1A8C0) or
+                            r.addr in (0x76EE, 0x14266, 0x12BC0, 0x10026, 0x37))
+            if narrow_match or (not args.narrow and r.type != 0):
                 selected.append({'index': i, 'hpos': r.hpos, 'vpos': r.vpos, 'reg': f'{r.reg:04X}',
                                  'dat': f'{r.dat:X}', 'size': r.size, 'addr': f'{r.addr:06X}',
                                  'evt': r.evt, 'evt2': r.evt2, 'evtdata': r.evtdata,
