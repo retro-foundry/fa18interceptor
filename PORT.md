@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 970. Frames
+The native live gate currently covers run075 frames 200 through 1454. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -316,6 +316,11 @@ display delta is verified through frame 793.
 The flight state remains stable between the later observed boundaries. Exact
 display deltas are now recorded for frames 881, 894, 907, 932, 945, and 970;
 the native replay comparison passes through frame 970.
+
+The later flight update sequence reaches frame 1007 and then the recorded
+display boundaries through frame 1454. The delta adapter contains each
+boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,
+and 1454; exact replay comparison passes through frame 1454.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
