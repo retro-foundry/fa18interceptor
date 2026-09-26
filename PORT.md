@@ -1081,3 +1081,8 @@ game loop.
   `analysis/data/run060_frame7992_area_bus_validation.md`. Frame 7992 still
   requires the complete ordered renderer stream before it can pass its exact
   output gate.
+- Reconstructed all 36 ordered `$DFF058` submissions in frame 7992. The first
+  four are the validated `$FCE/$0312` area jobs; the remaining 32 are grouped
+  four-plane operations with distinct control and size modes. The inventory is
+  in `analysis/data/run060_frame7992_blit_inventory.md`, and the native next
+  step is resolving those groups into semantic source assets and page jobs.
