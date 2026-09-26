@@ -138,3 +138,12 @@ record's source values into the screen coordinates captured above. This
 establishes the semantic boundary for a future `FA18PostflightScene` struct:
 table selection, record cursor/limit, normalization state, and renderer mode.
 The original table addresses remain implementation evidence only.
+
+The 1,200-instruction continuation confirms the walker order. After the
+initial clipped call, it submits shared records `(158,167)`, `(157,168)`,
+`(159,168)`, and `(158,168)`, then submits adjacent `(156,156)`, followed by
+shared `(158,167)`. The shared calls use modes `5`, `0`, `0`, `0`, and `9`;
+the adjacent call uses mode `10`. The loop calls `$C31312` between record
+groups. A later pass repeats the first scene group and reaches `$C332BC` and
+`$C332FE`, which are the next continuation helpers after this postflight
+record family.
