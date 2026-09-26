@@ -13,6 +13,11 @@ int main(void) {
     assert(fa18_validate_line_packet(&fa18_run075_frame395_line_packet));
     assert(fa18_run075_frame395_line_packet.bltsize == 0x005d);
     assert(fa18_run075_frame395_line_packet.destination_byte_offset == 0x0ec5);
+    assert(FA18_RUN075_FRAME395_LINE_PACKETS == 4);
+    assert(fa18_run075_frame395_line_packets[1].bltcon1 == 81);
+    assert(fa18_run075_frame395_line_packets[2].bltbmod == 0xffe6);
+    assert(fa18_run075_frame395_line_packets[2].bltsize == 0x0382);
+    assert(fa18_run075_frame395_line_packets[3].destination_byte_offset == 0x0ec6);
     /* Generic raster contract. A settled run060+ visual fixture is still
      * required before this primitive can be promoted to port parity. */
     FA18IndexedFrameBuffer framebuffer;

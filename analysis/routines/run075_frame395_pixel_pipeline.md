@@ -220,3 +220,19 @@ the computed modulo value without taking the optional negative/XOR branch.
 The `$C45957` bit-0 test branches to the normal setup path for this call.
 Together with `$C456E7=$FF`, this proves the first frame-395 line packet uses
 all four planes with no optional plane suppression or XOR modification.
+
+Three further `$C2FB7A` breakpoint captures extend the packet sequence. The
+captures were made by skipping one, two, and three earlier hits; Engine9000
+reports them at frames 396, 397, and 398 because the breakpoint run settles
+after the source frame. Their register inputs are:
+
+```text
+hit 1: D1=$51 D2=$FFFE D3=$0000 D4=$FFD80082 D5=$FFFC D6=$3B00 D7=$0EC4
+hit 2: D1=$51 D2=$FFE6 D3=$0000 D4=$FFD80382 D5=$FFCC D6=$4B00 D7=$0EEC
+hit 3: D1=$51 D2=$FFFE D3=$0000 D4=$FB1C0082 D5=$FFFC D6=$0B00 D7=$0EC6
+```
+
+The typed native packet fixture records the low word of `D4` as `BLTSIZE`,
+the destination offset from `D7`, and the shared four-plane mask. The upper
+words and the other source registers remain trace evidence until the line
+adapter has a proven mapping for them.
