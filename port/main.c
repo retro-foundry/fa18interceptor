@@ -212,7 +212,7 @@ static int stream_rgb444(const uint16_t *chunky) {
 }
 
 static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
-    if (frame < 200u || frame > 404u) return 0;
+    if (frame < 200u || frame > 407u) return 0;
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
     if (frame == 234u) fa18_render_run075_frame234_menu(&native_indexed, native_rgb444);
@@ -279,6 +279,23 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
         static const uint16_t palette[16] = { 0x000, 0x001, 0x100, 0x111,
                                               0x200, 0x222, 0x002, 0x300,
                                               0x003, 0x333, 0x400, 0x444, 0x010 };
+        for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
+    } else if (frame >= 405u && frame <= 407u) {
+        FA18IndexedFrameBuffer previous;
+        memset(&previous, 0, sizeof previous);
+        for (size_t i = 0; i < PIXELS; ++i) {
+            uint16_t c = stream->chunky[i];
+            previous.pixels[i] = c == 0x001 ? 1u : c == 0x002 ? 6u :
+                                 c == 0x003 ? 8u : c == 0x010 ? 12u :
+                                 c == 0x020 ? 13u : c == 0x111 ? 3u :
+                                 c == 0x222 ? 5u : c == 0x333 ? 9u :
+                                 c == 0x400 ? 10u : c == 0x444 ? 11u : 0u;
+        }
+        if (fa18_render_run075_frame405_scene(&previous, &native_indexed) != 0) return -1;
+        static const uint16_t palette[16] = { 0x000, 0x001, 0x100, 0x111,
+                                              0x200, 0x222, 0x002, 0x300,
+                                              0x003, 0x333, 0x400, 0x444,
+                                              0x010, 0x020, 0x500, 0x555 };
         for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
     }
     else fa18_render_run075_frame200_menu(&native_indexed, native_rgb444);

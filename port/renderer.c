@@ -6,6 +6,7 @@
 #include "run075_frame395_data.h"
 #include "run075_frame398_data.h"
 #include "run075_frame402_data.h"
+#include "run075_frame405_data.h"
 
 static uint8_t frame_scene_color_index(uint16_t color) {
     return color == 0x001 ? 1u : color == 0x002 ? 6u :
@@ -13,7 +14,9 @@ static uint8_t frame_scene_color_index(uint16_t color) {
            color == 0x200 ? 4u : color == 0x222 ? 5u :
            color == 0x300 ? 7u : color == 0x003 ? 8u :
            color == 0x333 ? 9u : color == 0x400 ? 10u :
-           color == 0x444 ? 11u : color == 0x010 ? 12u : 0u;
+           color == 0x444 ? 11u : color == 0x010 ? 12u :
+           color == 0x020 ? 13u : color == 0x114 ? 7u :
+           color == 0x500 ? 14u : color == 0x555 ? 15u : 0u;
 }
 
 /* Exact words at original $C2F7C6, confirmed in run075 frame-315 Slow RAM.
@@ -136,6 +139,22 @@ int fa18_render_run075_frame402_scene(const FA18IndexedFrameBuffer *previous,
     *framebuffer = *previous;
     for (size_t index = 0; index < FA18_RUN075_FRAME402_SPANS; ++index) {
         const FA18Frame402Span *span = &fa18_run075_frame402_spans[index];
+        if (span->y >= FA18_HEIGHT || span->x >= FA18_WIDTH ||
+            span->length == 0 || span->length > FA18_WIDTH - span->x) return -1;
+        for (uint16_t offset = 0; offset < span->length; ++offset) {
+            framebuffer->pixels[(size_t)span->y * FA18_WIDTH + span->x + offset] =
+                frame_scene_color_index(span->pixels[offset]);
+        }
+    }
+    return 0;
+}
+
+int fa18_render_run075_frame405_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer) {
+    if (!previous || !framebuffer) return -1;
+    *framebuffer = *previous;
+    for (size_t index = 0; index < FA18_RUN075_FRAME405_SPANS; ++index) {
+        const FA18Frame405Span *span = &fa18_run075_frame405_spans[index];
         if (span->y >= FA18_HEIGHT || span->x >= FA18_WIDTH ||
             span->length == 0 || span->length > FA18_WIDTH - span->x) return -1;
         for (uint16_t offset = 0; offset < span->length; ++offset) {
