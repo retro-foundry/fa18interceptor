@@ -65,6 +65,15 @@ int fa18_choose_submission_route(const FA18ScreenPairBounds *bounds,
     return 0;
 }
 
+int fa18_submit_near_line(const FA18SubmissionDecision *decision,
+                          FA18IndexedFrameBuffer *framebuffer,
+                          const FA18LineStyle *style,
+                          int16_t row_limit) {
+    if (!decision || !framebuffer || !style) return -1;
+    if (decision->route != FA18_SUBMISSION_NEAR_LINE) return 1;
+    return fa18_draw_line(framebuffer, style, decision->line, row_limit);
+}
+
 int fa18_prepare_projected_submission(const FA18ViewVertex *vertices,
                                       uint16_t count,
                                       FA18ScreenPairList *list,

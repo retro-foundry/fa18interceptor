@@ -48,4 +48,9 @@ int fa18_choose_submission_route(const FA18ScreenPairBounds *bounds,
                                  int16_t display_bound_y,
                                  FA18SubmissionDecision *decision);
 
+int fa18_submit_near_line(const FA18SubmissionDecision *decision,
+                          FA18IndexedFrameBuffer *framebuffer,
+                          const FA18LineStyle *style,
+                          int16_t row_limit);
+
 #endif

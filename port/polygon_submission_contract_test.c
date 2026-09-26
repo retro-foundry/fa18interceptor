@@ -31,6 +31,13 @@ int main(void) {
     bounds = (FA18ScreenPairBounds){10, 13, 20, 22};
     assert(fa18_choose_submission_route(&bounds, 199, &decision) == 0 &&
            decision.route == FA18_SUBMISSION_FAR_HORIZONTAL);
+    FA18IndexedFrameBuffer framebuffer = {{0}};
+    const FA18LineStyle style = {0x0f, -1, 0, 6};
+    assert(fa18_submit_near_line(&decision, &framebuffer, &style, 199) == 1);
+    bounds = (FA18ScreenPairBounds){180, 202, 0, 1};
+    assert(fa18_choose_submission_route(&bounds, 199, &decision) == 0 &&
+           decision.route == FA18_SUBMISSION_NEAR_LINE);
+    assert(fa18_submit_near_line(&decision, &framebuffer, &style, 199) == 0);
     puts("screen pair bounds contract passed");
     return 0;
 }
