@@ -212,12 +212,12 @@ static int stream_rgb444(const uint16_t *chunky) {
 }
 
 static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
-    if (frame < 200u || frame > 241u) return 0;
+    if (frame < 200u || frame > 242u) return 0;
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
     if (frame == 234u) fa18_render_run075_frame234_menu(&native_indexed, native_rgb444);
     else if (frame == 235u) fa18_render_run075_frame235_clear(&native_indexed, native_rgb444);
-    else if (frame >= 236u && frame <= 241u) {
+    else if (frame >= 236u && frame <= 242u) {
         fa18_render_run075_frame236_demo_label(&native_indexed, native_rgb444);
     }
     else fa18_render_run075_frame200_menu(&native_indexed, native_rgb444);
