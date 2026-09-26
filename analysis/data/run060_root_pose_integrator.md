@@ -5,6 +5,27 @@ identify the active update paths that commit the moving root pose tuple in the
 qualification replay. They do not yet assign physical axis names or derive
 the joystick-to-delta formula.
 
+## Control-loop context
+
+The root update is not merely adjacent to input code. The complete observed
+indexed-update stage calls `$C13D84` at `$C25D7E`; `$C13D84` selects the
+512-byte record and publishes it through `$C18210`. On the root route that
+pointer is `$C46184`. Its measured stage directly consumes `$C45778`, the
+second accumulator updated by the registered `JOY0DAT` callback. The later
+`$C13D84` code produces the scaled local displacement used by the vertical
+commit below, and the enclosing indexed stage reaches the horizontal pair
+publication.
+
+This is an evidence-backed control chain:
+
+```text
+JOY0DAT callback -> $C45778 -> $C13D84 current root record
+  -> scaled local displacement -> root +$14/+18/+1C commits
+```
+
+The callback's two hardware delta axes have not yet been assigned to pitch,
+roll, or another control, so this does not name a physical stick axis.
+
 ## Vertical component
 
 At the descent boundary (checkpoint frame 925), each observed `$C14D32`
@@ -51,4 +72,6 @@ Authority:
 `build/run060_frame00700_root_motion_writer/memory_writes.json`,
 `build/run060_frame00925_root_descent_writer/memory_writes.json`,
 `source_amiga/observed/update_c13d84_record_offset18.asm`, and
-`source_amiga/observed/publish_indexed_update_delta_pair.asm`.
+`source_amiga/observed/publish_indexed_update_delta_pair.asm`; the input
+bridge is independently bounded in `analysis/routines/c13e10_control_state_stage.md`
+and `analysis/routines/c25b66_indexed_update_stage.md`.
