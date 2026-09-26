@@ -81,6 +81,11 @@ int main(void) {
         fputs("run075 frame-398 scene contract failed\n", stderr);
         return 1;
     }
+    if (FA18_RUN075_FRAME402_SPANS != 1396 ||
+        fa18_render_run075_frame402_scene(&previous, &scene) != 0) {
+        fputs("run075 frame-402 scene contract failed\n", stderr);
+        return 1;
+    }
     puts("run075 two-row pixel contract passed");
     return 0;
 }

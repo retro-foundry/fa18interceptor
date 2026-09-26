@@ -256,3 +256,12 @@ with `D0=3` and packed source `$C45B22`. `$C32740` expands four nibbles to
 ASCII digits, and `$C327A0/$C32806` selects glyph rows and composites them.
 The bounded trace therefore identifies the frame-398 change as the packed
 font compositor path rather than another postflight polygon submission.
+
+## Frame 402 boundary
+
+Frame 402 changes 20,304 pixels after frames 399 through 401 repeat frame
+398. Breakpoint probes for `$C2F688`, `$C32740`, `$C33058`, `$C306AE`,
+`$C2FA7E`, and `$C2FF48` do not reach those entries at this boundary. The
+native scene fixture therefore records 1,396 changed row runs from frame 400
+to frame 402 while the display writer is isolated. Frames 403 and 404 are
+pixel-identical repeats in the run075 oracle.

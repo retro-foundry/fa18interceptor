@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 400. Frames
+The native live gate currently covers run075 frames 200 through 404. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -261,6 +261,13 @@ including coordinate normalization, clamping, renderer modes, and lane
 selection. The exact frame-395 chunky scene is now connected to the native
 pixel buffer; the semantic record stream remains the next reconstruction
 target.
+
+Frame 402 is the next exact display boundary. The normal replay does not reach
+the already traced postflight, line, polygon, or glyph entry points in this
+boundary, so its writer remains open in the function map. The native gate
+stores 1,396 changed row runs from frame 400 to frame 402 and reuses that
+scene for identical frames 403 and 404. Replay comparison passes through
+frame 404.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
