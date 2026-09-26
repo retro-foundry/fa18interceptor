@@ -12,7 +12,10 @@ def main():
         if not e.core.retro_unserialize(state,len(state)): raise RuntimeError('restore failed')
         events=read_events(a.playback); hits=[]; armed=False
         for f in range(1,a.frame+1):
-            if f==a.frame: e.core.e9k_debug_add_breakpoint(a.address); armed=True
+            if f==a.frame:
+                e.core.e9k_debug_remove_breakpoint(a.address)
+                e.core.e9k_debug_add_breakpoint(a.address)
+                armed=True
             for k,v in events.get(f,[]): e.event(k,v)
             e.core.retro_run()
             while armed and e.core.e9k_debug_is_paused() and len(hits)<a.count:
