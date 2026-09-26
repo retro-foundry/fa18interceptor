@@ -346,6 +346,9 @@ to branch polarity table has not yet been captured.
 port, direction identifier, and pressed state; frame events retain signed
 motion deltas separately. This allows the proven run060 direction mapping to
 be consumed by native flight input state.
+The `$C2FF48` renderer boundary also has run060 settled traces now documented
+in `analysis/routines/c2ff48_run060_settled_boundary.md`; their small
+asynchronous deltas do not yet prove a general chunky fill contract.
 The native playback loop now applies port-0 `J` events to a semantic packed
 flight-control byte and updates `FA18FlightControlLanes` at the event frame.
 This connects the proven run060 input path to native state without inventing
