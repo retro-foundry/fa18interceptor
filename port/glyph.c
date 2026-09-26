@@ -31,6 +31,14 @@ int fa18_prepare_cockpit_numeric(uint32_t raw_value, uint8_t digit_count,
     return 0;
 }
 
+int fa18_prepare_scaled_record_numeric(int32_t record_value,
+                                       FA18CockpitNumericValue *value) {
+    const int64_t shifted = ((int64_t)record_value - 0x10000000ll) >> 8;
+    const int32_t scaled = (int32_t)(shifted / 0x7000ll) + 0x177;
+    if (scaled < 0) return 1;
+    return fa18_prepare_cockpit_numeric((uint32_t)scaled, 4u, value);
+}
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;

@@ -19,6 +19,14 @@ int main(void) {
         fputs("cockpit numeric composition contract failed\n", stderr);
         return 1;
     }
+    if (fa18_prepare_scaled_record_numeric(0x10000000, &numeric) != 0 ||
+        numeric.raw_value != 375u || numeric.packed_value != 0x375u ||
+        memcmp(numeric.digits, "0375", 4u) != 0 ||
+        fa18_prepare_scaled_record_numeric(0, &numeric) != 0 ||
+        numeric.raw_value != 339u) {
+        fputs("scaled record numeric contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {

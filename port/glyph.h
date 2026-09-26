@@ -26,6 +26,10 @@ typedef struct {
 int fa18_prepare_cockpit_numeric(uint32_t raw_value, uint8_t digit_count,
                                  FA18CockpitNumericValue *value);
 
+/* `$C321D2`: scale a selected record long before the four-digit render. */
+int fa18_prepare_scaled_record_numeric(int32_t record_value,
+                                       FA18CockpitNumericValue *value);
+
 /* The draw loop's leading-zero check, retaining one digit for zero. */
 const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
                                              uint8_t digit_count);
