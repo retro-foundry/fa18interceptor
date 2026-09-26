@@ -167,3 +167,9 @@ coordinate to `1..$13D`, adds the fixed vertical base `$81` plus
 lane masks, including the `$C456E7` per-plane suppression checks. The native
 component struct therefore needs horizontal/vertical offsets, clamp bounds,
 renderer mode, and lane suppression state.
+
+`$C31312` is the corresponding group constructor. In frame 395 it computes
+`x=157` from base `$9D` plus `$C45988`, computes `y=168` from base `$A8` plus
+`$C458D8`, sets renderer mode `12`, and submits through `$C2F5F4`. It then
+continues to the next shared records. The native scene model should represent
+this as a parameterized record group rather than another raw memory region.
