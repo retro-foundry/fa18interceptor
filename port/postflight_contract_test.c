@@ -44,6 +44,12 @@ int main(void) {
     assert(x == 160 && y == 129 && component.renderer_mode == 8);
     component.horizontal_offset = -200;
     assert(fa18_postflight_component_coordinates(&component, &x, &y) == 1);
+    FA18PostflightGroup group = {.base_x = 0x9d, .base_y = 0xa8,
+                                 .renderer_mode = 12};
+    group.horizontal_offset = 0;
+    group.vertical_offset = 0;
+    assert(fa18_postflight_group_coordinates(&group, &x, &y) == 0);
+    assert(x == 157 && y == 168 && group.renderer_mode == 12);
     FA18PostflightState state = {.vertical_offset = 10, .table_limit = 2};
     Capture capture_state = {0};
     assert(fa18_postflight_submit(&state, (FA18PostflightRecord){158, 167, 0},

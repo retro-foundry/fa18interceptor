@@ -26,6 +26,16 @@ int fa18_postflight_component_coordinates(
     return 0;
 }
 
+int fa18_postflight_group_coordinates(const FA18PostflightGroup *group,
+                                      int16_t *x, int16_t *y) {
+    if (!group || !x || !y) return -1;
+    *x = (int16_t)((uint16_t)group->base_x +
+                   (uint16_t)group->horizontal_offset);
+    *y = (int16_t)((uint16_t)group->base_y +
+                   (uint16_t)group->vertical_offset);
+    return 0;
+}
+
 int fa18_postflight_submit(FA18PostflightState *state,
                            FA18PostflightRecord record,
                            FA18PostflightSubmit submit, void *context) {
