@@ -50,3 +50,7 @@ through the native compositor in the live gate.
 Engine frame 477 keeps `$0420`, resolves source bytes `F0 90 90 F8 C8 C8 C8`,
 and supplies mask `$D000`. The live gate applies this packet through the same
 semantic four-plane operation.
+
+Engine frame 479 advances the destination to `$0422`, resolves source bytes
+`F0 90 10 78 18 98 F8`, and supplies mask `$B000`. This packet is also live
+in the native gate.

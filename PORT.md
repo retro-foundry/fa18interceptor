@@ -799,3 +799,5 @@ game loop.
 - Frame 477 is native as well, using the traced `$0420` destination and
   `$D000` mask. This extends the live compositor path through the next text
   update.
+- Frame 479 is native with its traced `$0422` destination, source bytes, and
+  `$B000` mask. The complete replay verifier remains byte exact.
