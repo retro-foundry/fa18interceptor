@@ -92,3 +92,8 @@ path.
 Engine frame 499 retains `$042C`, resolves source bytes `88 88 88 F8 30 30 30`,
 and supplies mask `$F000`. This packet is live in the same native compositor
 path.
+
+The next breakpoint window reaches the later run075 text packet at frame 511.
+It resolves source bytes `F0 90 90 F8 C8 C8 C8`, destination `$078C`, and mask
+`$7000`. The native gate applies this packet through the same semantic page
+conversion, confirming the transition away from the earlier `$042x` cursor.
