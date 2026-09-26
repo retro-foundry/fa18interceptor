@@ -3,7 +3,7 @@
 #include "run075_frame395_line_packet.h"
 #include "run060_frame7992_line_packets.h"
 #include "run060_frame7991_line_oracle.h"
-#include "run060_packet12_c_source.h"
+#include "run060_line_c_sources.h"
 
 #include <stdio.h>
 #include <assert.h>
@@ -44,34 +44,20 @@ int main(void) {
     assert(line_plane[0x0b7a] == 0xff && line_plane[0x0b7b] == 0xf8);
     assert(line_plane[0x0b7c] == 0x3f && line_plane[0x0b7d] == 0xff);
 
-    /* The complete snapshot validates the four short line groups. The first
-     * long group (packet 12) remains the active recurrence investigation. */
-    for (size_t i = 0; i < 12; ++i) {
+    /* The complete snapshot and captured C streams validate every line job. */
+    for (size_t i = 0; i < 16; ++i) {
         uint8_t snapshot[FA18_RUN060_LINE_PLANE_BYTES];
         const uint8_t plane_index = fa18_run060_line_oracle_planes[i];
         memcpy(snapshot, fa18_run060_frame7991_line_planes[plane_index],
                sizeof snapshot);
-        assert(fa18_execute_line_blit_job(
-            snapshot, sizeof snapshot,
-            &fa18_run060_frame7992_line_packets[i]) == 0);
+        FA18LineBlitJob job = fa18_run060_frame7992_line_packets[i];
+        job.c_source_words = fa18_run060_line_c_sources[i];
+        job.c_source_count = fa18_run060_line_c_source_counts[i];
+        assert(fa18_execute_line_blit_job(snapshot, sizeof snapshot, &job) == 0);
         for (size_t write = 0;
              write < fa18_run060_line_oracle_write_counts[i]; ++write) {
             const FA18LineOracleWrite expected =
                 fa18_run060_line_oracle_writes[i][write];
-            const uint16_t actual = (uint16_t)(((uint16_t)snapshot[expected.offset] << 8) |
-                                               snapshot[expected.offset + 1]);
-            assert(actual == expected.value);
-        }
-    }
-    FA18LineBlitJob packet12 = fa18_run060_frame7992_line_packets[12];
-    packet12.c_source_words = fa18_run060_packet12_c_source;
-    packet12.c_source_count = 99;
-    {
-        uint8_t snapshot[FA18_RUN060_LINE_PLANE_BYTES];
-        memcpy(snapshot, fa18_run060_frame7991_line_planes[0], sizeof snapshot);
-        assert(fa18_execute_line_blit_job(snapshot, sizeof snapshot, &packet12) == 0);
-        for (size_t write = 0; write < fa18_run060_line_oracle_write_counts[12]; ++write) {
-            const FA18LineOracleWrite expected = fa18_run060_line_oracle_writes[12][write];
             const uint16_t actual = (uint16_t)(((uint16_t)snapshot[expected.offset] << 8) |
                                                snapshot[expected.offset + 1]);
             assert(actual == expected.value);

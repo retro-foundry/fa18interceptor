@@ -113,8 +113,10 @@ infer a function's purpose merely from a rendered frame.
   remaining divergence is still a line pipeline or pointer timing issue.
 - 2026-09-27: Correctly classified the line DMA records: `extra=34` carries
   the 99 C words and `extra=35` carries the D writes. Added that C stream as a
-  semantic source on `FA18LineBlitJob`; packet 12 now matches the complete
-  oracle, including the prior `$FBC0` final word.
+  semantic source on `FA18LineBlitJob`; packets 0 through 15 now match the
+  complete oracle, including the prior packet 12 `$FBC0` final word. Packet 16
+  is the next gate, with its first mismatch at `$05FA`: native `$FFFD`,
+  emulator `$FFF7`.
 
 - 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the
