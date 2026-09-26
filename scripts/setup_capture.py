@@ -7,6 +7,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE = ROOT / 'tools/engine9000/e9k-debugger'
+ENGINE_SOURCE_REMOTE = 'git@github.com:retro-foundry/engine9000-public.git'
+ENGINE_SOURCE_BRANCH = 'fa18-interceptor'
+ENGINE_SOURCE_COMMIT = 'ace4c3a9553e7005ed32c6fee8817126a53a8887'
 ROM = Path(os.environ['FA18_KICKSTART_ROM']) if 'FA18_KICKSTART_ROM' in os.environ else None
 
 
@@ -62,7 +65,11 @@ puae_joyport=joystick
 '''
     (ROOT / 'local/fa18.uae').write_text(config, encoding='ascii')
     files = [disk, ROM, ENGINE / 'e9k-debugger.exe', ENGINE / 'system/ami9000.dll', ROOT / 'local/fa18.uae']
-    manifest = {'engine_release': 'v0.62-alpha', 'engine_source_commit': 'f9ca09b',
+    manifest = {'engine_release': 'v0.62-alpha',
+                'engine_source_repository': ENGINE_SOURCE_REMOTE,
+                'engine_source_branch': ENGINE_SOURCE_BRANCH,
+                'engine_source_commit': ENGINE_SOURCE_COMMIT,
+                'engine_upstream_commit': 'f9ca09b449866cba22ee9891757e8e6982f68600',
                 'hardware': 'A500 PAL OCS 68000, 512 KiB Chip + 512 KiB slow, RTC absent',
                 'files': [{'path': str(p), 'size': p.stat().st_size, 'sha256': sha(p)} for p in files]}
     (ROOT / 'local/toolchain.json').write_text(json.dumps(manifest, indent=2) + '\n')

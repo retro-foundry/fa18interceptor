@@ -2,10 +2,13 @@
 
 ## Authority
 
-`build/engine9000-v062-source/` is a shallow checkout of upstream
-`alpine9000/engine9000-public` tag `v0.62-alpha`, commit
-`f9ca09b449866cba22ee9891757e8e6982f68600`.  It is an analysis dependency
-only; the runtime authority remains the unmodified DLL pinned by this project.
+`tools/engine9000-src/` is a Git submodule pinned to the RetroFoundry fork
+[`fa18-interceptor` commit `ace4c3a`](https://github.com/retro-foundry/engine9000-public/tree/ace4c3a9553e7005ed32c6fee8817126a53a8887).
+It derives from upstream `alpine9000/engine9000-public` tag `v0.62-alpha`,
+commit `f9ca09b449866cba22ee9891757e8e6982f68600`. The fork only changes the
+debugger's function-key defaults, leaving F1--F12 available to the emulated
+F/A-18 runtime. It is an analysis dependency; the runtime DLL hash remains
+recorded in `local/toolchain.json`.
 
 `e9k-lib/e9k-lib.h` defines the watchpoint source identifiers used by the
 DLL ABI: CPU `1`, DMA `2`, blitter `3`, Copper `4`, audio `5`, video `6`,

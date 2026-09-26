@@ -1,0 +1,4 @@
+[submodule "tools/engine9000-src"]
+	path = tools/engine9000-src
+	url = git@github.com:retro-foundry/engine9000-public.git
+	branch = fa18-interceptor
