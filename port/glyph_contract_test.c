@@ -53,9 +53,13 @@ int main(void) {
     FA18FeetDisplayValue feet;
     if (fa18_prepare_feet_display(0x7708, 1, 0, 0, &feet) != 0 ||
         feet.scaled_value != 145 || feet.append_feet_suffix != 1 ||
+        feet.geometry_base != 0x1cda || feet.lane_base != 0x1a ||
+        feet.compositor_shift != 0x0f3a || feet.lane_parameter != 0x000c ||
         memcmp(feet.digits, "000145", 6u) != 0 ||
         fa18_prepare_feet_display(0x400, 0, 0, 0, &feet) != 0 ||
         feet.scaled_value != 5 || feet.append_feet_suffix != 0 ||
+        feet.geometry_base != 0x18ce || feet.lane_base != 0x1e ||
+        feet.compositor_shift != 0x0fca || feet.lane_parameter != 4 ||
         memcmp(feet.digits, "000005", 6u) != 0 ||
         fa18_prepare_feet_display(0, 1, 1, 0x20000, &feet) != 0 ||
         feet.scaled_value != 0x1869f || feet.append_feet_suffix != 1 ||

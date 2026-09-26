@@ -130,6 +130,10 @@ infer a function's purpose merely from a rendered frame.
   glyph contract: selected-record `+$18=$7708` produces `145` and the
   alternate request carries `145 FT`. The trace and endpoint evidence are
   recorded in `analysis/data/run060_root_altitude_formatter.md`.
+- 2026-09-26: Added the changed-value run060 layout fields to
+  `FA18FeetDisplayValue`: normal `$18CE/$1E/$FCA/$4` and alternate
+  `$1CDA/$1A/$F3A/$C`. These are typed compositor inputs recovered at
+  `$C32740`; the coordinate table and final plane destination remain open.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).

@@ -57,6 +57,10 @@ typedef struct {
     uint8_t append_feet_suffix;
     uint8_t digits[6];
     uint8_t suffix[2];
+    int16_t geometry_base;
+    int16_t lane_base;
+    uint16_t compositor_shift;
+    uint16_t lane_parameter;
 } FA18FeetDisplayValue;
 
 /* `$C32178`: signed record byte preprocessing before its shared gate. */

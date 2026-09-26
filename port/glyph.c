@@ -87,6 +87,10 @@ int fa18_prepare_feet_display(int32_t record_value, int alternate_mode,
     display->append_feet_suffix = alternate_mode != 0;
     display->suffix[0] = 'F';
     display->suffix[1] = 'T';
+    display->geometry_base = alternate_mode ? 0x1cda : 0x18ce;
+    display->lane_base = alternate_mode ? 0x1a : 0x1e;
+    display->compositor_shift = alternate_mode ? 0x0f3a : 0x0fca;
+    display->lane_parameter = alternate_mode ? 0x000c : 0x0004;
     return 0;
 }
 
