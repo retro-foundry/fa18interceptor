@@ -81,6 +81,21 @@ frame-8,246 packet. This is limited negative evidence: the direct publisher
 does not reflect that input event in its values over this interval, so it is
 not by itself a moving-aircraft position publisher.
 
+## Late-run writer exclusion
+
+Two CPU-write watches over the full replay interval from frame 8,000 through
+8,700 find no write to either root `+$14` (`$C46198`) or the first matrix word
+at `+$92` (`$C46216`). In the same replay window, a write watch on `$C45778`
+hits immediately at `$C1723E`, inside the already bounded JOY0DAT delta
+callback. That callback is the proven per-frame writer of the constrained
+control accumulator, whereas this root transform data is stable over the
+late-run landing input sequence.
+
+This excludes the sampled root base triple and matrix as the *late-run
+per-frame integrated* flight state. It does not exclude their use as a fixed
+camera/reference transform or as initialization state outside the watched
+window, and it does not locate the actual moving aircraft state.
+
 The next decisive trace is a controlled input-differential packet followed to
 the producer of the `$C1C5E0` incoming `D0-D2`, then through camera/render
 consumers. That distinguishes a fixed reference origin from a moving aircraft
