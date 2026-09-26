@@ -212,7 +212,7 @@ static int stream_rgb444(const uint16_t *chunky) {
 }
 
 static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
-    if (frame < 200u || frame > 413u) return 0;
+    if (frame < 200u || frame > 420u) return 0;
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
     if (frame == 234u) fa18_render_run075_frame234_menu(&native_indexed, native_rgb444);
@@ -315,6 +315,29 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                                               0x014, 0x222, 0x002, 0x225,
                                               0x003, 0x333, 0x600, 0x444,
                                               0x010, 0x020, 0x666, 0x555 };
+        for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
+    } else if (frame >= 414u && frame <= 420u) {
+        FA18IndexedFrameBuffer previous;
+        memset(&previous, 0, sizeof previous);
+        for (size_t i = 0; i < PIXELS; ++i) {
+            uint16_t c = stream->chunky[i];
+            previous.pixels[i] = c == 0x001 ? 1u : c == 0x002 ? 6u :
+                                 c == 0x003 ? 8u : c == 0x010 ? 12u :
+                                 c == 0x020 ? 13u : c == 0x025 ? 13u :
+                                 c == 0x030 ? 2u : c == 0x040 ? 13u :
+                                 c == 0x111 ? 3u : c == 0x222 ? 5u :
+                                 c == 0x333 ? 9u : c == 0x336 ? 9u :
+                                 c == 0x400 ? 10u : c == 0x444 ? 11u :
+                                 c == 0x500 ? 14u : c == 0x555 ? 15u :
+                                 c == 0x666 ? 14u : c == 0x700 ? 10u :
+                                 c == 0x777 ? 10u : c == 0x800 ? 12u :
+                                 c == 0x888 ? 13u : c == 0x114 ? 7u : 0u;
+        }
+        if (fa18_render_run075_frame414_scene(&previous, &native_indexed) != 0) return -1;
+        static const uint16_t palette[16] = { 0x000, 0x001, 0x036, 0x111,
+                                              0x151, 0x222, 0x002, 0x447,
+                                              0x003, 0x333, 0x777, 0x444,
+                                              0x800, 0x888, 0x666, 0x555 };
         for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
     }
     else fa18_render_run075_frame200_menu(&native_indexed, native_rgb444);
