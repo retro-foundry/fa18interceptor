@@ -73,6 +73,23 @@ int fa18_scale_record_byte(int8_t source_byte, FA18ThreeDigitScale *scale) {
     return 0;
 }
 
+int fa18_prepare_feet_display(int32_t record_value, int alternate_mode,
+                              int override_active, int32_t override_value,
+                              FA18FeetDisplayValue *display) {
+    if (!display) return -1;
+    int32_t selected = override_active ? override_value : (record_value >> 10) * 5;
+    if (override_active && selected > 0x1869f) selected = 0x1869f;
+    if (selected < 0) return 1;
+    uint32_t packed = 0;
+    if (fa18_pack_decimal_workspace((uint32_t)selected, &packed) != 0 ||
+        fa18_format_packed_decimal(packed, 6u, display->digits) != 0) return -1;
+    display->scaled_value = selected;
+    display->append_feet_suffix = alternate_mode != 0;
+    display->suffix[0] = 'F';
+    display->suffix[1] = 'T';
+    return 0;
+}
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;

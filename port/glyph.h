@@ -52,8 +52,20 @@ typedef struct {
     uint8_t negative;
 } FA18ThreeDigitScale;
 
+typedef struct {
+    int32_t scaled_value;
+    uint8_t append_feet_suffix;
+    uint8_t digits[6];
+    uint8_t suffix[2];
+} FA18FeetDisplayValue;
+
 /* `$C32178`: signed record byte preprocessing before its shared gate. */
 int fa18_scale_record_byte(int8_t source_byte, FA18ThreeDigitScale *scale);
+
+/* `$C3201A`: convert selected-record +$18 into the six-digit feet display. */
+int fa18_prepare_feet_display(int32_t record_value, int alternate_mode,
+                              int override_active, int32_t override_value,
+                              FA18FeetDisplayValue *display);
 
 /* The draw loop's leading-zero check, retaining one digit for zero. */
 const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,

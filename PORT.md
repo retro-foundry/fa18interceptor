@@ -122,6 +122,10 @@ infer a function's purpose merely from a rendered frame.
 - 2026-09-26: Ported the `$C32178` signed-byte preprocessing as
   `FA18ThreeDigitScale` and `fa18_scale_record_byte`, preserving magnitude,
   sign, eight-bit scaling, and `$133` division before the shared draw gate.
+- 2026-09-26: Added the run060-backed `$C3201A` feet display boundary as
+  `FA18FeetDisplayValue` and `fa18_prepare_feet_display`. It preserves the
+  record `>>10` then `*5` conversion, six-character packed formatting, the
+  `$1869F` override clamp, and the observed optional `FT` suffix.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).

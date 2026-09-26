@@ -50,6 +50,17 @@ int main(void) {
         fputs("three-digit scale contract failed\n", stderr);
         return 1;
     }
+    FA18FeetDisplayValue feet;
+    if (fa18_prepare_feet_display(0x400, 0, 0, 0, &feet) != 0 ||
+        feet.scaled_value != 5 || feet.append_feet_suffix != 0 ||
+        memcmp(feet.digits, "000005", 6u) != 0 ||
+        fa18_prepare_feet_display(0, 1, 1, 0x20000, &feet) != 0 ||
+        feet.scaled_value != 0x1869f || feet.append_feet_suffix != 1 ||
+        memcmp(feet.suffix, "FT", 2u) != 0 ||
+        fa18_prepare_feet_display(-0x400, 0, 0, 0, &feet) != 1) {
+        fputs("feet display contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {
