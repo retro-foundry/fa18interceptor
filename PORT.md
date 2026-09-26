@@ -1081,6 +1081,11 @@ game loop.
   `analysis/data/run060_frame7992_area_bus_validation.md`. Frame 7992 still
   requires the complete ordered renderer stream before it can pass its exact
   output gate.
+- A live breakpoint at `$C30668` captures all 36 frame-7992 preparation entries.
+  They form nine semantic preparation shapes repeated across four plane passes;
+  the evidence is recorded in
+  `analysis/data/run060_frame7992_c30668_entries.md`. The next port boundary is
+  a typed prepared line packet joining these controls to their screen endpoints.
 - Reconstructed all 36 ordered `$DFF058` submissions in frame 7992. The first
   four are the validated `$FCE/$0312` area jobs; the remaining 32 are grouped
   four-plane operations with distinct control and size modes. The inventory is
