@@ -4,6 +4,15 @@
 #include <stdio.h>
 
 int main(void) {
+    FA18PairSource source = {2, {0x0100, 0x0200}, {0x0100, 0x0080}};
+    FA18ScreenPairList built;
+    assert(fa18_build_renderer_pair_list(&source, 3, -2, &built) == 0);
+    assert(built.count == 2);
+    assert(built.pair[0].x == 0xc1 + 0x18 + 3);
+    assert(built.pair[0].y == 0xa2 + 0x1f - 2);
+    assert(built.pair[1].x == 0xc1 + 0x30 + 3);
+    assert(built.pair[1].y == 0xa2 + 0x0f - 2);
+
     const FA18ScreenPairList list = {
         4, {{211, 60}, {216, 60}, {227, 67}, {223, 66}}
     };

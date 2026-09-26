@@ -354,6 +354,10 @@ The proven `$C301F6` bounds stage is now represented by
 `fa18_reduce_screen_pair_bounds`. The run031 sample
 `(211,60),(216,60),(227,67),(223,66)` is covered; pair-to-primitive selection
 remains separate.
+The observed `$C3019C` caller is now represented by `FA18PairSource` and
+`fa18_build_renderer_pair_list`. Its unsigned `$18`/`$1F` fixed point scales,
+`$C1`/`$A2` origins, and signed screen offsets are covered before bounds
+reduction, so the native route decision can consume a constructed pair list.
 `fa18_screen_polygon_to_pair_list` now connects the native projection polygon
 to this packet without copying any original memory layout.
 `fa18_prepare_projected_submission` composes projection, packet conversion,
