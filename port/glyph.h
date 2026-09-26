@@ -46,6 +46,15 @@ int fa18_update_scaled_numeric(FA18ScaledNumericState *state,
                                int32_t record_value,
                                FA18NumericDrawRequest requests[2]);
 
+typedef struct {
+    int8_t source_byte;
+    uint16_t scaled_magnitude;
+    uint8_t negative;
+} FA18ThreeDigitScale;
+
+/* `$C32178`: signed record byte preprocessing before its shared gate. */
+int fa18_scale_record_byte(int8_t source_byte, FA18ThreeDigitScale *scale);
+
 /* The draw loop's leading-zero check, retaining one digit for zero. */
 const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
                                              uint8_t digit_count);

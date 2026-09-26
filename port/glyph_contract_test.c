@@ -41,6 +41,15 @@ int main(void) {
         fputs("scaled numeric redraw contract failed\n", stderr);
         return 1;
     }
+    FA18ThreeDigitScale three_digit;
+    if (fa18_scale_record_byte(19, &three_digit) != 0 ||
+        three_digit.source_byte != 19 || three_digit.negative != 0 ||
+        three_digit.scaled_magnitude != (uint16_t)((19u << 8) / 0x133u) ||
+        fa18_scale_record_byte(-19, &three_digit) != 0 ||
+        three_digit.negative != 1 || three_digit.scaled_magnitude != (uint16_t)((19u << 8) / 0x133u)) {
+        fputs("three-digit scale contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {

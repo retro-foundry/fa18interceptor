@@ -119,6 +119,9 @@ infer a function's purpose merely from a rendered frame.
   `fa18_update_scaled_numeric` for the observed `$C321D2` previous-value and
   two-pass redraw gate. It emits typed compositor requests with masks `$4`
   and `$C`, while coordinate ownership remains unresolved.
+- 2026-09-26: Ported the `$C32178` signed-byte preprocessing as
+  `FA18ThreeDigitScale` and `fa18_scale_record_byte`, preserving magnitude,
+  sign, eight-bit scaling, and `$133` division before the shared draw gate.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).

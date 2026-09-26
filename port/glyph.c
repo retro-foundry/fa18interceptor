@@ -62,6 +62,17 @@ int fa18_update_scaled_numeric(FA18ScaledNumericState *state,
     return 1;
 }
 
+int fa18_scale_record_byte(int8_t source_byte, FA18ThreeDigitScale *scale) {
+    if (!scale) return -1;
+    const int32_t signed_value = source_byte;
+    const uint32_t magnitude = signed_value < 0 ? (uint32_t)-signed_value :
+                                                        (uint32_t)signed_value;
+    scale->source_byte = source_byte;
+    scale->negative = signed_value < 0;
+    scale->scaled_magnitude = (uint16_t)((magnitude << 8) / 0x133u);
+    return 0;
+}
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;
