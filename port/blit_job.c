@@ -29,6 +29,17 @@ int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet) {
     return 0;
 }
 
+int fa18_build_run060_frame7991_final_fill(FA18AreaFillPacket *packet) {
+    if (!packet) return -1;
+    *packet = (FA18AreaFillPacket){
+        0x0dfc, 0x0002, 0x00ff, 0x00ff,
+        0x0028, 0x0001, 0x0001, 0x0001,
+        0x000076ee, 0x00014266, 0x00000037, 0x00014266,
+        20, 52
+    };
+    return 0;
+}
+
 int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
                               FA18BlitOperation *operation) {
     if (!packet || !operation) return -1;

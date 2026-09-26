@@ -17,6 +17,12 @@ int main(void) {
     assert(setup.bltamod == 1 && setup.bltbmod == 1 &&
            setup.bltcmod == 0x28 && setup.bltdmod == 0);
     assert(setup.bltsize == 0x0d14);
+    FA18AreaFillPacket final_fill;
+    assert(fa18_build_run060_frame7991_final_fill(&final_fill) == 0);
+    assert(final_fill.control_a == 0x0dfc && final_fill.control_b == 2);
+    assert(final_fill.a_source == 0x76ee && final_fill.b_source == 0x14266);
+    assert(final_fill.c_source == 0x37 && final_fill.d_destination == 0x14266);
+    assert(final_fill.c_modulus == 0x28 && final_fill.d_modulus == 1);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&

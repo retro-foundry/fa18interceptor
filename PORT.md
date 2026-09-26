@@ -979,6 +979,10 @@ game loop.
   register image, including `$00FC` at `BLTCON0`; the return bounded trace
   proves the programmed word is `$0DFC`. It is recorded in
   `analysis/data/run060_c304f4_final_register_image.md`.
+- `fa18_build_run060_frame7991_final_fill` now records the final submitted
+  packet separately from the `$C304B2` setup packet: `$0DFC`, A `$76EE`, B/D
+  `$14266`, C `$0037`, and 20 words by 52 rows. Its register contract passes;
+  execution against the semantic display page remains the next boundary.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.

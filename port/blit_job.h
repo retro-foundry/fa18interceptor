@@ -47,6 +47,7 @@ FA18BlitExtent fa18_decode_blit_extent(uint16_t bltsize);
 int fa18_decode_display_blit_geometry(const FA18DisplayBlitPacket *packet,
                                       FA18DisplayBlitGeometry *geometry);
 int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet);
+int fa18_build_run060_frame7991_final_fill(FA18AreaFillPacket *packet);
 int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
                               FA18BlitOperation *operation);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
