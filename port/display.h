@@ -10,6 +10,7 @@ enum { FA18_PLANES = 4, FA18_PLANAR_ROW_BYTES = FA18_WIDTH / 8,
 
 /* `$C2FD8C` receives visible plane destinations in lane order 4, 3, 2, 1. */
 int fa18_visible_lane_plane(unsigned lane);
+uint8_t fa18_visible_lane_mask_to_plane_mask(uint8_t lane_mask);
 
 /* Native four-plane page used only at the display boundary. It has no Chip-RAM
  * addresses, Copper list, or hardware register state. Plane zero is the low
@@ -28,6 +29,11 @@ int fa18_blit_planar_words(const FA18PlanarPage *source, FA18PlanarPage *destina
                            int destination_y, int width_words, int height_rows,
                            uint16_t first_mask, uint16_t last_mask,
                            uint8_t plane_mask);
+int fa18_blit_visible_lanes(const FA18PlanarPage *source, FA18PlanarPage *destination,
+                            int source_word_x, int source_y, int destination_word_x,
+                            int destination_y, int width_words, int height_rows,
+                            uint16_t first_mask, uint16_t last_mask,
+                            uint8_t lane_mask);
 
 /* Amiga RGB4 words, held as palette state rather than COLORxx registers. */
 typedef struct {

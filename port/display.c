@@ -7,6 +7,16 @@ int fa18_visible_lane_plane(unsigned lane) {
     return lane < FA18_PLANES ? (FA18_PLANES - 1 - (int)lane) : -1;
 }
 
+uint8_t fa18_visible_lane_mask_to_plane_mask(uint8_t lane_mask) {
+    uint8_t plane_mask = 0;
+    for (unsigned lane = 0; lane < FA18_PLANES; ++lane) {
+        if (lane_mask & (uint8_t)(1u << lane)) {
+            plane_mask |= (uint8_t)(1u << fa18_visible_lane_plane(lane));
+        }
+    }
+    return plane_mask;
+}
+
 const FA18PlanarPage *fa18_select_display_page(const FA18DisplayPagePair *pair,
                                                 int adjusted) {
     if (!pair) return NULL;
@@ -57,6 +67,17 @@ int fa18_blit_planar_words(const FA18PlanarPage *source, FA18PlanarPage *destina
         }
     }
     return 0;
+}
+
+int fa18_blit_visible_lanes(const FA18PlanarPage *source, FA18PlanarPage *destination,
+                            int source_word_x, int source_y, int destination_word_x,
+                            int destination_y, int width_words, int height_rows,
+                            uint16_t first_mask, uint16_t last_mask,
+                            uint8_t lane_mask) {
+    return fa18_blit_planar_words(source, destination, source_word_x, source_y,
+                                  destination_word_x, destination_y, width_words,
+                                  height_rows, first_mask, last_mask,
+                                  fa18_visible_lane_mask_to_plane_mask(lane_mask));
 }
 
 void fa18_decode_planar_page(const FA18PlanarPage *page,

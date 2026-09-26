@@ -10,6 +10,8 @@ int main(void) {
     assert(fa18_visible_lane_plane(2) == 1);
     assert(fa18_visible_lane_plane(3) == 0);
     assert(fa18_visible_lane_plane(4) == -1);
+    assert(fa18_visible_lane_mask_to_plane_mask(0x01) == 0x08);
+    assert(fa18_visible_lane_mask_to_plane_mask(0x0a) == 0x05);
     FA18PlanarPage source_page, destination_page;
     memset(&source_page, 0, sizeof source_page);
     memset(&destination_page, 0, sizeof destination_page);
@@ -17,6 +19,11 @@ int main(void) {
     assert(fa18_blit_planar_words(&source_page, &destination_page, 1, 2, 3, 4,
                                   1, 1, 0xffff, 0xffff, 1) == 0);
     assert(destination_page.plane[0][4 * FA18_PLANAR_ROW_BYTES + 6] == 0xA5);
+
+    memset(&destination_page, 0, sizeof destination_page);
+    assert(fa18_blit_visible_lanes(&source_page, &destination_page, 1, 2, 3, 4,
+                                   1, 1, 0xffff, 0xffff, 0x01) == 0);
+    assert(destination_page.plane[3][4 * FA18_PLANAR_ROW_BYTES + 6] == 0xA5);
 
     /* The first byte encodes index 0..7 from left to right in the Amiga's
      * MSB-first bit order. The next byte proves the high palette bit. */

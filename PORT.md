@@ -956,6 +956,10 @@ game loop.
   the 40-byte row offset before programming the blitter. The native display
   boundary now exposes `fa18_visible_lane_plane`, which converts that proven
   order to semantic plane indices without storing addresses.
+- Added `fa18_blit_visible_lanes`, which applies that lane conversion before
+  invoking the bounded semantic planar copy. It is ready for the recovered
+  temporary workspace to active page operation once the source workspace
+  coordinates are established.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
