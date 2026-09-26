@@ -7,8 +7,10 @@ int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;
     for (uint8_t index = 0; index < digit_count; ++index) {
-        output[digit_count - 1u - index] =
-            (uint8_t)('0' + ((packed_value >> (index * 4u)) & 0x0fu));
+        uint8_t digit = (uint8_t)((packed_value >> (index * 4u)) & 0x0fu);
+        uint8_t character = (uint8_t)('0' + digit);
+        if (character > '9') character = (uint8_t)(character + 7u);
+        output[digit_count - 1u - index] = character;
     }
     return 0;
 }

@@ -15,6 +15,11 @@ int main(void) {
         fputs("packed decimal retained-digit contract failed\n", stderr);
         return 1;
     }
+    if (fa18_format_packed_decimal(0xab9fu, 4u, formatted) != 0 ||
+        memcmp(formatted, "AB9F", 4u) != 0) {
+        fputs("packed hexadecimal nibble contract failed\n", stderr);
+        return 1;
+    }
     if (fa18_format_packed_decimal(0x0007u, 4u, formatted) != 0) {
         fputs("packed decimal second format failed\n", stderr);
         return 1;

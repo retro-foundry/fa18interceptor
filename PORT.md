@@ -342,7 +342,8 @@ The packed numeric font producer is now represented by
 `fa18_format_packed_decimal` in `port/glyph.c`. It expands the low nibbles in
 display order, preserving the observed `0x0171 -> "0171"` scratch result;
 `fa18_skip_leading_zero_digits` models the later draw-loop suppression check.
-The glyph contract test covers both boundaries. This still leaves the writer
+The formatter also preserves the traced `$30` plus seven conversion for
+nibbles `A` through `F`. The glyph contract test covers both boundaries. This still leaves the writer
 of `$C45B22`, glyph table lookup, and cockpit placement to trace before the
 frame-398 fixture can be replaced.
 
