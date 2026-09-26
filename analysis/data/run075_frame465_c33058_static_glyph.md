@@ -58,3 +58,6 @@ in the native gate.
 Engine frame 481 advances the destination to `$0424`, resolves source bytes
 `F8 80 80 F8 18 98 F8`, and supplies mask `$2000`. This packet is live in the
 same native compositor path.
+
+Engine frame 483 retains `$0424`, resolves source bytes `F8 88 88 98 98 98 F8`,
+and supplies mask `$9000`. This packet is also executed by the native gate.
