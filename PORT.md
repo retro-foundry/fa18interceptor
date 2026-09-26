@@ -857,3 +857,7 @@ game loop.
   source advance and `$28` bytes of destination advance per row. This extends
   the native glyph mask evidence to the later HUD path while keeping the
   original CPU addresses outside the semantic page model.
+- The frame584 packet is now covered by the native glyph contract test using
+  its observed source bytes `60 80 A0 A0 60`, `$FBFA` shift word, set form,
+  and five normalized rows. The test exercises the semantic mask lane without
+  treating the traced slow-RAM addresses as display-page offsets.

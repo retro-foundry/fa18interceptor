@@ -221,6 +221,25 @@ int main(void) {
         return 1;
     }
 
+    /* run075 frame 584 `$C330FE`: normalize the traced five-row set packet
+     * into a native plane. Its original slow-RAM addresses are evidence only. */
+    static const uint8_t run075_lane_bytes[5] = {
+        0x60u, 0x80u, 0xa0u, 0xa0u, 0x60u
+    };
+    memset(&page, 0, sizeof page);
+    const FA18GlyphMaskLane run075_lane = {
+        0u, 0u, run075_lane_bytes, sizeof run075_lane_bytes, 0xfbfa, 5u
+    };
+    if (fa18_apply_glyph_mask_lane(&page, &run075_lane) != 0 ||
+        page.plane[0][2] != 0xc0u || page.plane[0][3] != 0x00u ||
+        page.plane[0][FA18_PLANAR_ROW_BYTES + 1u] != 0x01u ||
+        page.plane[0][FA18_PLANAR_ROW_BYTES + 2u] != 0x00u ||
+        page.plane[0][2u * FA18_PLANAR_ROW_BYTES + 1u] != 0x01u ||
+        page.plane[0][2u * FA18_PLANAR_ROW_BYTES + 2u] != 0x40u) {
+        fputs("run075 frame584 glyph mask contract failed\n", stderr);
+        return 1;
+    }
+
     memset(&page, 0, sizeof page);
     /* `$0BFA` takes the complementary set form using the same source bytes. */
     FA18GlyphMaskLane set_lane = {1u, 4u, glyph, 2u, 0x0bfau, 2u};
