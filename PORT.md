@@ -241,8 +241,8 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 252. Frame
-253 remains locked until its changed display page is reconstructed.
+The native live gate currently covers run075 frames 200 through 253. Frame
+254 remains locked until its changed display page is reconstructed.
 
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
@@ -306,6 +306,8 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
   boundary, so it reuses that native page before frame 252.
 - Frame 252 is pixel-identical to frame 236, with no replay event at the
   boundary, so it reuses that native page before frame 253.
+- Frame 253 is pixel-identical to frame 236, with no replay event at the
+  boundary, so it reuses that native page before frame 254.
 
 - Oracle capture must report the canonical restored-state SHA-256 and exact
   frame labels. A source run or config mismatch fails immediately.
