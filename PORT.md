@@ -1081,17 +1081,11 @@ game loop.
   `analysis/data/run060_frame7992_area_bus_validation.md`. Frame 7992 still
   requires the complete ordered renderer stream before it can pass its exact
   output gate.
-- A live breakpoint at `$C30668` captures all 36 frame-7992 preparation entries.
-  They form nine semantic preparation shapes repeated across four plane passes;
-  the evidence is recorded in
-  `analysis/data/run060_frame7992_c30668_entries.md`. The next port boundary is
-  a typed prepared line packet joining these controls to their screen endpoints.
-- The byte-exact `$C305D6-$C30667` continuation and `$C30668-$C306B3`
-  submission leaf are now the authoritative construction path for the later
-  frame-7992 jobs: the caller derives the line deltas, destination row/byte
-  offset, error modulus, and `BLTSIZE`; the leaf supplies the fixed `$28`
-  C/D stride and writes the inherited A low word. The native packet must join
-  those values at the semantic page boundary.
+- A frame-aligned `$C30668` probe records zero hits during run060 frame 7992.
+  An earlier unaligned capture was withdrawn; the correction is recorded in
+  `analysis/data/run060_frame7992_c30668_entries.md`. The widened DMA inventory
+  remains the authority for the 36 completed submissions, and the producer for
+  the later 32 jobs is still unresolved.
 - Reconstructed all 36 ordered `$DFF058` submissions in frame 7992. The first
   four are the validated `$FCE/$0312` area jobs; the remaining 32 are grouped
   four-plane operations with distinct control and size modes. The inventory is
