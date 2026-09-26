@@ -47,6 +47,12 @@ int main(void) {
     FA18FlightTrigState pair = {0};
     assert(fa18_flight_lookup_two_sine_cosine(&trig_table, 0, 0, &pair) == 0 &&
            pair.d0 == 0 && pair.d1 == 0x4000 && pair.d2 == 0 && pair.d3 == 0x4000);
+    FA18FlightPose attitude_pose = {0};
+    assert(fa18_flight_update_attitude(&trig_table, 0, 0, 0, &attitude_pose) == 0);
+    assert(attitude_pose.attitude[0][0] == -0x4000 &&
+           attitude_pose.attitude[1][1] == 0x4000 &&
+           attitude_pose.attitude[2][2] == 0x4000 &&
+           attitude_pose.attitude[0][1] == 0 && attitude_pose.attitude[1][0] == 0);
 
     FA18FlightPose pose = {0};
     pose.altitude = 0x72301;

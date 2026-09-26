@@ -76,6 +76,12 @@ int fa18_flight_lookup_two_sine_cosine(const FA18FlightTrigTable *table,
                                        int16_t second_angle,
                                        FA18FlightTrigState *trig);
 
+/* `$C2E514` caller boundary: native angles are reduced by three bits before
+ * the two pair lookups and matrix composition update pose attitude. */
+int fa18_flight_update_attitude(const FA18FlightTrigTable *table,
+                                int16_t first_angle, int16_t second_angle,
+                                int16_t third_angle, FA18FlightPose *pose);
+
 /* `$C14D32`: the signed vertical delta is committed to the active pose. */
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);
 

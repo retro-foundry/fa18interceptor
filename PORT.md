@@ -356,6 +356,12 @@ the zero-angle `(0,$4000)` result used by the matrix producer. The asset keeps
 the endpoint word at offset `$0708`, which is required by the original table
 indexing.
 
+`fa18_flight_update_attitude` now connects the angle inputs to the pose:
+three native angle words are shifted by three, passed through the verified
+lookup table, composed by `$C2E514` arithmetic, and stored in the semantic
+attitude matrix. Its zero-angle contract preserves the original matrix sign
+convention.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,

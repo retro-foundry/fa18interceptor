@@ -158,6 +158,21 @@ int fa18_flight_lookup_two_sine_cosine(const FA18FlightTrigTable *table,
     return 0;
 }
 
+int fa18_flight_update_attitude(const FA18FlightTrigTable *table,
+                                int16_t first_angle, int16_t second_angle,
+                                int16_t third_angle, FA18FlightPose *pose) {
+    if (!table || !pose) return -1;
+    const int16_t first = (int16_t)((uint16_t)first_angle >> 3);
+    const int16_t second = (int16_t)((uint16_t)second_angle >> 3);
+    const int16_t third = (int16_t)((uint16_t)third_angle >> 3);
+    FA18FlightTrigState trig = {0};
+    if (fa18_flight_lookup_two_sine_cosine(table, first, second, &trig) != 0 ||
+        fa18_flight_lookup_sine_cosine(table, third, &trig.d4, &trig.d5) != 0) {
+        return -1;
+    }
+    return fa18_flight_compose_attitude_matrix(&trig, pose->attitude);
+}
+
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta) {
     if (!pose) return -1;
     pose->altitude += delta;
