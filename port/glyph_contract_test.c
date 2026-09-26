@@ -300,6 +300,66 @@ int main(void) {
         }
     }
 
+    /* run075 frame 465 `$C33058`: the caller-selected glyph stream is seven
+     * bytes at the resolved table entry, D3 supplies $C000, and D6=$0009
+     * enables lanes 4 and 1. The four plane bases are represented by the
+     * semantic page lanes; only the common relative destination $041A is
+     * retained here. */
+    static const uint8_t run075_frame465_glyph[7] = {
+        0xf0u, 0x90u, 0x90u, 0xf8u, 0xc8u, 0xc8u, 0xc8u
+    };
+    static const uint32_t frame465_before[4][7] = {
+        {0xe4400000u, 0x64400000u, 0x24400000u, 0x26400000u,
+         0x26400000u, 0x26400000u, 0xe7c00000u},
+        {0x1bbfffffu, 0x9bbfffffu, 0xdbbfffffu, 0xd9bfffffu,
+         0xd9bfffffu, 0xd9bfffffu, 0x183fffffu},
+        {0x00000000u, 0x00000000u, 0x00000000u, 0x00000000u,
+         0x00000000u, 0x00000000u, 0x00000000u},
+        {0xffffffffu, 0xffffffffu, 0xffffffffu, 0xffffffffu,
+         0xffffffffu, 0xffffffffu, 0xffffffffu}
+    };
+    static const uint32_t frame465_after[4][7] = {
+        {0xe44f0000u, 0x64490000u, 0x24490000u, 0x264f8000u,
+         0x264c8000u, 0x264c8000u, 0xe7cc8000u},
+        {0x1bb0ffffu, 0x9bb6ffffu, 0xdbb6ffffu, 0xd9b07fffu,
+         0xd9b37fffu, 0xd9b37fffu, 0x18337fffu},
+        {0x00000000u, 0x00000000u, 0x00000000u, 0x00000000u,
+         0x00000000u, 0x00000000u, 0x00000000u},
+        {0xffffffffu, 0xffffffffu, 0xffffffffu, 0xffffffffu,
+         0xffffffffu, 0xffffffffu, 0xffffffffu}
+    };
+    memset(&page, 0, sizeof page);
+    for (uint8_t plane = 0; plane < FA18_PLANES; ++plane) {
+        for (size_t row = 0; row < 7; ++row) {
+            const size_t offset = 0x41au + row * FA18_PLANAR_ROW_BYTES;
+            const uint32_t word = frame465_before[plane][row];
+            page.plane[plane][offset] = (uint8_t)(word >> 24);
+            page.plane[plane][offset + 1] = (uint8_t)(word >> 16);
+            page.plane[plane][offset + 2] = (uint8_t)(word >> 8);
+            page.plane[plane][offset + 3] = (uint8_t)word;
+        }
+    }
+    const FA18StaticGlyphSubmission run075_frame465_submission = {
+        run075_frame465_glyph, 7u, 0x41au, 0xc000u, 0x09u, 7u
+    };
+    if (fa18_submit_static_glyph(&page, &run075_frame465_submission) != 0) {
+        fputs("run075 frame465 static glyph rejected\n", stderr);
+        return 1;
+    }
+    for (uint8_t plane = 0; plane < FA18_PLANES; ++plane) {
+        for (size_t row = 0; row < 7; ++row) {
+            const size_t offset = 0x41au + row * FA18_PLANAR_ROW_BYTES;
+            const uint32_t actual = ((uint32_t)page.plane[plane][offset] << 24) |
+                ((uint32_t)page.plane[plane][offset + 1] << 16) |
+                ((uint32_t)page.plane[plane][offset + 2] << 8) |
+                page.plane[plane][offset + 3];
+            if (actual != frame465_after[plane][row]) {
+                fputs("run075 frame465 static glyph trace failed\n", stderr);
+                return 1;
+            }
+        }
+    }
+
     set_lane.first_byte_offset = FA18_PLANAR_PAGE_BYTES - 3u;
     if (fa18_apply_glyph_mask_lane(&page, &set_lane) != -1) {
         fputs("glyph bounds contract failed\n", stderr);

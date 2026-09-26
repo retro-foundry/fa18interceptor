@@ -769,3 +769,10 @@ game loop.
   shift for every digit.
 - The exact pixel check is included in `fa18_glyph_contract`; all 16 native
   contract tests pass after this change.
+- A run075 frame-465 trace now exercises the same static glyph compositor at
+  the first post-scene text boundary. It resolves seven source bytes,
+  `$C000` mask data, `$041A` relative placement, and the plane 4/3/2/1 mode
+  pattern. The before and after display words are checked in the glyph
+  contract; source-table selection and layout cursor ownership remain caller
+  work. See
+  [the frame-465 static glyph note](analysis/data/run075_frame465_c33058_static_glyph.md).

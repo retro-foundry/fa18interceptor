@@ -1,0 +1,24 @@
+# run075 frame 465 `$C33058` static glyph submission
+
+The run075 playback reaches `$C33058` at Engine frame 465, the first
+post-scene frame after the frame-462 renderer boundary. The entry registers
+are `D3=$FFFFC000`, `D4=$00C30032`, `D5=$0000041A`, `D6=$000001C2`, and
+`D7=$000001C2`; the enclosing routine resolves the source pointer to
+`$C3DAB7`. The seven source bytes consumed by `$C330FE` are:
+
+```text
+F0 90 90 F8 C8 C8 C8
+```
+
+The four destination longs are read from the display lane table at
+`$C4567E`: `$18980`, `$16A40`, `$14B00`, and `$12BC0`. Adding `D5` gives a
+common semantic page-relative offset `$041A`. `D6` selects set mode for the
+outer and innermost lanes (planes 4 and 1) and clear mode for planes 3 and 2;
+the mask word is `$C000`.
+
+This is represented by `FA18StaticGlyphSubmission` and checked by
+`fa18_glyph_contract` against the before and after display words captured
+from `build/run075_frame464_c33058_trace`. The trace also confirms that the
+current native function is the four-lane `$C33058` caller contract; the table
+lookup and layout cursor update after the lane writes remain separate caller
+work.
