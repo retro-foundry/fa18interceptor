@@ -3,6 +3,23 @@
 static uint32_t read_be32(const uint8_t *bytes);
 static void write_be32(uint8_t *bytes, uint32_t value);
 
+int fa18_pack_decimal_workspace(uint32_t value, uint32_t *packed_value) {
+    static const uint32_t decimal_places[] = {10000000u, 1000000u,
+        100000u, 10000u, 1000u, 100u, 10u, 1u};
+    if (!packed_value) return -1;
+    uint32_t result = 0;
+    uint32_t place_bit = 0x10000000u;
+    for (size_t index = 0; index < sizeof decimal_places / sizeof decimal_places[0]; ++index) {
+        while (value >= decimal_places[index]) {
+            value -= decimal_places[index];
+            result += place_bit;
+        }
+        place_bit >>= 4;
+    }
+    *packed_value = result;
+    return 0;
+}
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;

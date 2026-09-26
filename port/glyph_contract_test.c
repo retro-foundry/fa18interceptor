@@ -5,6 +5,13 @@
 #include <string.h>
 
 int main(void) {
+    uint32_t packed = 0;
+    if (fa18_pack_decimal_workspace(375u, &packed) != 0 || packed != 0x375u ||
+        fa18_pack_decimal_workspace(0u, &packed) != 0 || packed != 0u ||
+        fa18_pack_decimal_workspace(1u, NULL) != -1) {
+        fputs("workspace packed-decimal contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {

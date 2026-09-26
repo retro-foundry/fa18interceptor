@@ -102,6 +102,11 @@ infer a function's purpose merely from a rendered frame.
   `FA18Palette` boundary. It accepts only RGB4 values and valid palette
   indices; the source palette write order remains open until a run060+ trace
   identifies it.
+- 2026-09-26: Ported the run029 traced `$C25A08` workspace conversion as
+  `fa18_pack_decimal_workspace`. It reproduces repeated decimal-place
+  subtraction and packed-nibble accumulation, including the observed raw
+  value `375 -> 0x00000375`; the caller still determines which cockpit field
+  the value represents.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).

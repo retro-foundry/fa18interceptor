@@ -12,6 +12,9 @@
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output);
 
+/* `$C25A08`: convert an unsigned workspace value to packed decimal nibbles. */
+int fa18_pack_decimal_workspace(uint32_t value, uint32_t *packed_value);
+
 /* The draw loop's leading-zero check, retaining one digit for zero. */
 const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
                                              uint8_t digit_count);
