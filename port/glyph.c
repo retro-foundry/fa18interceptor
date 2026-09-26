@@ -20,6 +20,17 @@ int fa18_pack_decimal_workspace(uint32_t value, uint32_t *packed_value) {
     return 0;
 }
 
+int fa18_prepare_cockpit_numeric(uint32_t raw_value, uint8_t digit_count,
+                                 FA18CockpitNumericValue *value) {
+    if (!value || digit_count == 0 || digit_count > 8 ||
+        fa18_pack_decimal_workspace(raw_value, &value->packed_value) != 0 ||
+        fa18_format_packed_decimal(value->packed_value, digit_count,
+                                    value->digits) != 0) return -1;
+    value->raw_value = raw_value;
+    value->digit_count = digit_count;
+    return 0;
+}
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;

@@ -12,6 +12,13 @@ int main(void) {
         fputs("workspace packed-decimal contract failed\n", stderr);
         return 1;
     }
+    FA18CockpitNumericValue numeric;
+    if (fa18_prepare_cockpit_numeric(375u, 4u, &numeric) != 0 ||
+        numeric.raw_value != 375u || numeric.packed_value != 0x375u ||
+        memcmp(numeric.digits, "0375", 4u) != 0) {
+        fputs("cockpit numeric composition contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {
