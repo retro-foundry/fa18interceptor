@@ -13,6 +13,12 @@ programs the area blitter with:
 | `BLTDPTL` | `$000076EE` | `move.l d1,$54(a0)` |
 | `BLTSIZE` | `$0D14` | `move.w d0,$58(a0)` |
 
+The caller image at entry also contains `BLTAFWM=$00FF`, `BLTALWM=$00FF`,
+`BLTCMOD=$0028`, `BLTBMOD=$0001`, `BLTAMOD=$0001`, and `BLTDMOD=$0000`.
+The pointer image before the helper writes is `C=$00010026`, `B=$00000037`,
+`A=$000000EE`, and `D=$00010026`; the helper replaces A, B, and D with the
+`$000076EE` values above and leaves C unchanged.
+
 The entry values are `D0=$0D14`, `D1=$000076EE`, and `D2=$000076EE`.
 `BLTCON1` bit 1 selects descending address progression; bit zero is clear,
 so this is an area fill operation rather than line mode. The setup writes the
