@@ -21,3 +21,10 @@ This is the fresh direction command that the frame-949 `$C1B410` update uses
 to decrement root `+$28`. The input phase reaches `$C1B50C` through its
 `$C16F88` direct call; the raw event-to-derived-bit interpretation remains
 separate from the proven control-mask write.
+
+The complementary sealed run060 `J 0 4 1` input phase (breakpoint hit at frame
+1008) reaches `$C1B510` instead. It selects `D2=$10` and the same shared
+publisher writes `$C461E9: $01->$11`. `$C1B410` defines `$10` as the increment
+code for signed lane `+$28`, making `$10` and `$20` the observed opposite
+commands for that lane. The physical joystick-direction labels remain
+unassigned.
