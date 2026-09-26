@@ -353,6 +353,9 @@ axis names or motion formulas.
 Relative `m` input is now reset at each frame advance, matching Engine9000's
 input-poll lifetime; same-frame motion records still accumulate before the
 flight consumer reads them.
+The 14 native contracts remain green after this change. The existing full
+run075 RGB444 comparison remains the authoritative visual gate; its earlier
+completed run covered all 20,788 frames before this input-only adjustment.
 
 `fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
 the computed lateral and forward terms update `$14/$1C`, while the signed
