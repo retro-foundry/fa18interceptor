@@ -25,6 +25,8 @@ def main() -> None:
                         help="resume after tracing and execute this many full frames before final snapshots")
     parser.add_argument("--skip-hits", type=int, default=0,
                         help="execute and resume this many matching breakpoint entries before tracing")
+    parser.add_argument("--post-address", type=lambda value: int(value, 0),
+                        help="after the first instruction, pause at this PC before continuing")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     args = parser.parse_args()
@@ -88,6 +90,9 @@ def main() -> None:
                    "asm": f"{instruction.mnemonic} {instruction.op_str}".strip(),
                    "registers": registers}
             engine.core.e9k_debug_step_instr()
+            if args.post_address is not None and index == 0:
+                engine.core.e9k_debug_remove_breakpoint(args.address)
+                engine.core.e9k_debug_add_breakpoint(args.post_address)
             engine.core.retro_run()
             row["next_pc"] = engine.regs()["pc"]
             rows.append(row)
