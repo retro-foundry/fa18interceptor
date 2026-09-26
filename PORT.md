@@ -920,6 +920,9 @@ game loop.
   `fa18_build_run075_frame559_pair_source`, with contract coverage for all 14
   recovered records. This is the native geometry input for the remaining
   frame559 blit implementation.
+- The three frame559 display packets are now represented by
+  `FA18DisplayBlitPacket` and `fa18_build_run075_frame559_blit_packets`, with
+  separate logical moduli, masks, data words, dimensions, and lane sources.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
