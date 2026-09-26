@@ -101,6 +101,11 @@ infer a function's purpose merely from a rendered frame.
   the traced destination. Later line submissions require the complete frame
   7991 plane snapshot because their C reads depend on more than the final
   destination words; isolated two-word seeds are not valid fixtures.
+- 2026-09-27: Generated a complete semantic frame-7991 plane snapshot and
+  frame-7992 DMA write oracle. The native recurrence matches all 12 short line
+  submissions across four planes. The first 99-row submission is now the
+  active gate; its first observed mismatch is packet 12 at offset `$1572`,
+  where the native word is `$FBFF` and the emulator word is `$FBC0`.
 
 - 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the
