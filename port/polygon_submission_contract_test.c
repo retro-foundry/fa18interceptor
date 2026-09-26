@@ -15,6 +15,11 @@ int main(void) {
     assert(fa18_reduce_screen_pair_bounds(&converted, &bounds) == 0);
     assert(bounds.min_x == 211 && bounds.max_x == 227 &&
            bounds.min_y == 60 && bounds.max_y == 67);
+    const FA18ViewVertex vertices[] = {
+        {51, 30, 40}, {56, 30, 40}, {67, 37, 40}, {63, 36, 40}
+    };
+    assert(fa18_prepare_projected_submission(vertices, 4, &converted, &bounds) == 0);
+    assert(converted.count == 4 && bounds.min_x == 0 && bounds.max_x == 0);
     assert(fa18_reduce_screen_pair_bounds(NULL, &bounds) < 0);
     puts("screen pair bounds contract passed");
     return 0;

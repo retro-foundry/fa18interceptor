@@ -21,6 +21,11 @@ typedef struct {
 int fa18_screen_polygon_to_pair_list(const FA18ScreenPolygon *polygon,
                                      FA18ScreenPairList *list);
 
+int fa18_prepare_projected_submission(const FA18ViewVertex *vertices,
+                                      uint16_t count,
+                                      FA18ScreenPairList *list,
+                                      FA18ScreenPairBounds *bounds);
+
 /* `$C301F6`'s proved bounds-reduction stage. */
 int fa18_reduce_screen_pair_bounds(const FA18ScreenPairList *list,
                                    FA18ScreenPairBounds *bounds);

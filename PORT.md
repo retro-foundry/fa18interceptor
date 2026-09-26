@@ -356,6 +356,9 @@ The proven `$C301F6` bounds stage is now represented by
 remains separate.
 `fa18_screen_polygon_to_pair_list` now connects the native projection polygon
 to this packet without copying any original memory layout.
+`fa18_prepare_projected_submission` composes projection, packet conversion,
+and bounds reduction as one typed preparation stage; it deliberately stops
+before the unresolved `$C301F6` primitive branch.
 The native playback loop now applies port-0 `J` events to a semantic packed
 flight-control byte and updates `FA18FlightControlLanes` at the event frame.
 This connects the proven run060 input path to native state without inventing

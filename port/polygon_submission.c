@@ -25,3 +25,16 @@ int fa18_reduce_screen_pair_bounds(const FA18ScreenPairList *list,
     }
     return 0;
 }
+
+int fa18_prepare_projected_submission(const FA18ViewVertex *vertices,
+                                      uint16_t count,
+                                      FA18ScreenPairList *list,
+                                      FA18ScreenPairBounds *bounds) {
+    FA18ScreenPolygon polygon;
+    if (!list || !bounds || fa18_project_polygon(vertices, count, &polygon) <= 0) {
+        return -1;
+    }
+    if (fa18_screen_polygon_to_pair_list(&polygon, list) != 0 ||
+        fa18_reduce_screen_pair_bounds(list, bounds) != 0) return -1;
+    return 0;
+}
