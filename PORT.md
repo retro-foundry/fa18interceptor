@@ -861,3 +861,8 @@ game loop.
   its observed source bytes `60 80 A0 A0 60`, `$FBFA` shift word, set form,
   and five normalized rows. The test exercises the semantic mask lane without
   treating the traced slow-RAM addresses as display-page offsets.
+- The frame584 consumer is now identified as `$C2F8B4`: one planar word is
+  cleared with `$F7FF`, two adjacent plane words receive `$0800`, and the
+  fourth plane is untouched. Its `$1F40` pointer spacing confirms the
+  four-plane page geometry. The screen coordinate and displayed colour remain
+  caller-owned until the upstream pointer calculation is traced.
