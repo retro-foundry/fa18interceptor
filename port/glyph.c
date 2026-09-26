@@ -81,6 +81,18 @@ int fa18_prepare_glyph_placement(int16_t lane_base,
     return 0;
 }
 
+int fa18_render_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
+                      uint8_t character, uint8_t plane_index,
+                      size_t destination_offset, uint8_t shift_count,
+                      uint16_t row_count) {
+    const uint8_t *glyph_stream = NULL;
+    size_t remaining = 0;
+    if (fa18_select_glyph(table, character, &glyph_stream, &remaining) != 0 ||
+        remaining < row_count) return -1;
+    return fa18_merge_glyph_stream(page, plane_index, destination_offset,
+                                   glyph_stream, row_count, shift_count);
+}
+
 static uint16_t rol16(uint16_t value, unsigned count) {
     count &= 15u;
     if (!count) return value;

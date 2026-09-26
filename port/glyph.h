@@ -55,6 +55,12 @@ int fa18_prepare_glyph_placement(int16_t lane_base,
                                  uint16_t compositor_shift,
                                  FA18GlyphPlacement *placement);
 
+/* Select one native glyph and apply its bounded rows to a planar page. */
+int fa18_render_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
+                      uint8_t character, uint8_t plane_index,
+                      size_t destination_offset, uint8_t shift_count,
+                      uint16_t row_count);
+
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the
  * source packet's mode/shift word; the byte stream and selected plane replace
  * the original untyped registers and address values. */

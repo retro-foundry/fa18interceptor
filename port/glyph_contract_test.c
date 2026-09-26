@@ -67,6 +67,14 @@ int main(void) {
         fputs("run075 font asset lookup contract failed\n", stderr);
         return 1;
     }
+    memset(&merge_page, 0, sizeof merge_page);
+    if (fa18_render_glyph(&merge_page, &run075_font, (uint8_t)'1', 0u,
+                          0u, 0u, 6u) != 0 ||
+        (merge_page.plane[0][0] | merge_page.plane[0][1] |
+         merge_page.plane[0][FA18_PLANAR_ROW_BYTES]) == 0u) {
+        fputs("run075 glyph render contract failed\n", stderr);
+        return 1;
+    }
 
     FA18GlyphPlacement placement;
     if (fa18_prepare_glyph_placement(2, 4, 3, 0x100, 0x20, 7, &placement) != 0 ||

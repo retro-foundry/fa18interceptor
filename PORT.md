@@ -370,6 +370,11 @@ The verified run075 frame-398 font region `$C3D790-$C3DAF7` is extracted as
 872-byte glyph stream; the contract test confirms the traced character `1`
 lookup at relative offset `$00B7` (`$C3D847`).
 
+`fa18_render_glyph` now connects that native asset to the planar renderer:
+lookup, stream bounds, and the `$C32858` row merge are one tested operation.
+Its destination, plane, shift, and row count are explicit inputs, so the
+frame-398 caller can supply traced values as they become available.
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The
