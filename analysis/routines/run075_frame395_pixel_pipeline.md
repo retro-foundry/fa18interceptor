@@ -214,3 +214,9 @@ line control and destination address for each enabled bit of `$C456E7`, with
 destination pointer. These are hardware packet values, not native palette
 indices, so they belong in the line adapter's derived state rather than in
 `FA18LineStyle.plane_bits` until the chunky color mapping is proven.
+
+The same saved state shows `$C456E8=$FFFF`, so the line submission copies
+the computed modulo value without taking the optional negative/XOR branch.
+The `$C45957` bit-0 test branches to the normal setup path for this call.
+Together with `$C456E7=$FF`, this proves the first frame-395 line packet uses
+all four planes with no optional plane suppression or XOR modification.
