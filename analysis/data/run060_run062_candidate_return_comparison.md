@@ -17,10 +17,20 @@ python scripts/trace_from_breakpoint.py `
   --output build/run060_full_c279b8_trace
 ```
 
-It hits at GUI frame 192.  At `$C279B8`, the live accumulated `D1` is `+119`
-(`$00000077`).  The `BLT $C279C2` is not taken, `$C279BC` writes `D0=0`, and
-the routine returns to `$C26014` after five instructions.  The retained trace
-is `build/run060_full_c279b8_trace/trace.jsonl`.
+It hits at GUI frame 192.  At `$C27968`, `+$10(A3)` supplies `D1=+119`
+(`$00000077`), but `+$7B(A3)` supplies `$FF`.  Its signed test at `$C27972`
+takes `BLT $C279B8` directly, before the type or three-component checks.  At
+`$C279B8`, the accumulated `D1` is therefore still `+119`; its own
+`BLT $C279C2` is not taken, `$C279BC` writes `D0=0`, and the routine returns
+to `$C26014` after five instructions.  The retained trace is
+`build/run060_full_c279b8_trace/trace.jsonl`.
+
+The same direct-bypass values recur in a late success-side sample: arming at
+run060 frame 9,000 reaches `$C27968` at frame 9,005 with `+$10=+119` and
+`+$7B=$FF`, then returns zero through the same path.  The retained fixture is
+`build/run060_late_c27968_probe/trace.jsonl`.  This makes the observed
+zero-return route relevant to the landing-success interval, but it does not
+make it a component-bound acceptance.
 
 The complementary direct probe keeps a breakpoint at `$C279C2` for every one
 of run060's 10,085 recorded GUI frames:
@@ -44,8 +54,10 @@ Run062 reaches `$C279C2` with `D1=-$15`, returns `$10`, and that return flows
 into the documented `$C26102/$C26178` record-flag transition.  See
 [the instruction-level run062 transition](run062_c26102_postflight_record_transition.md).
 
-Thus the sampled outcomes differ at a concrete geometry-filter result:
-run060 has an observed nonnegative zero return, while run062 has an observed
-negative `$10` return that prepares its later failure-side postflight route.
-This does not prove that every zero return is success, that every negative
-return is failure, or what physical quantity the candidate components encode.
+Thus the sampled outcomes differ before and within this candidate-result
+logic: run060 samples take the signed `+$7B` direct-bypass zero route, whereas
+run062 enters the class-$10 component path and receives a negative `$10`
+return that prepares its later failure-side postflight route.  The full-run
+no-hit at `$C279C2` only proves that run060 never reaches this negative-return
+address; it does not prove that a zero return means component-bound success.
+Neither route identifies the physical quantity represented by the components.
