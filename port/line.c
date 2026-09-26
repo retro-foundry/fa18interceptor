@@ -46,18 +46,14 @@ int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
                                const FA18LineBlitJob *job) {
     if (!plane || !job || fa18_validate_line_blit_job(job) != 0 ||
         plane_bytes < (size_t)(FA18_WIDTH / 8) * FA18_HEIGHT) return -1;
+    uint16_t con0 = job->bltcon0;
     uint16_t con1 = job->bltcon1;
     int16_t apt = (int16_t)job->bltapt_low;
-    const unsigned ashift = (job->bltcon0 >> 12) & 15u;
+    unsigned ashift = (con0 >> 12) & 15u;
     unsigned bshift = (con1 >> 12) & 15u;
-    uint16_t bline = job->bltb_source_word;
-    if (bshift != 0u) {
-        const unsigned rotate = (bshift + 15u) & 15u;
-        bline = (uint16_t)((job->bltbdat >> rotate) |
-                           (job->bltbdat << ((16u - rotate) & 15u)));
-    }
-    size_t cpt = job->destination_byte_offset & ~(size_t)1u;
-    int overflow = 0;
+    uint16_t bline = (uint16_t)((job->bltb_source_word >> bshift) |
+                                (job->bltb_source_word << ((16u - bshift) & 15u)));
+    int64_t cpt = (int64_t)(job->destination_byte_offset & ~(size_t)1u);
     int one_dot = 0;
     int line_loop = 1;
     uint32_t aold = 0;
@@ -68,37 +64,53 @@ int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
         if (job->bltcon0 & 0x0200u)
             apt = (int16_t)(apt + (sign ? (int16_t)job->bltbmod :
                                              (int16_t)job->bltamod));
-        if (cpt + 1u >= plane_bytes) return -1;
-        const uint16_t c = line_read_word(plane, cpt);
+        if (cpt < 0 || cpt + 1 >= (int64_t)plane_bytes) return -1;
+        const uint16_t c = line_read_word(plane, (size_t)cpt);
+        const uint16_t b = (bline & 1u) ? 0xffffu : 0u;
         const uint16_t a = (uint16_t)(job->bltadat >> ashift);
         const uint16_t d = fa18_apply_blitter_minterm(
-            (uint8_t)(job->bltcon0 & 0xffu), a, bline, c);
-        if (emit) line_write_word(plane, cpt, d);
+            (uint8_t)(con0 & 0xffu), a, b, c);
 
-        if (!sign) {
-            if (con1 & 0x10u) {
-                cpt += (con1 & 0x08u) ? job->bltcmod : 2u;
-                line_loop = 0;
-            } else if (con1 & 0x04u) {
-                cpt += (con1 & 0x08u) ? (size_t)-2 : 2u;
-                overflow = (con1 & 0x08u) ? -1 : 1;
+        /* BLTCON1 X and Y pointer stages. */
+        int overflow = 0;
+        if (!sign && !(con1 & 0x10u)) {
+            if (con1 & 0x08u) {
+                if (ashift == 0u) cpt -= 2;
+            } else {
+                if (ashift == 15u) cpt += 2;
             }
-        } else {
-            if (con1 & 0x10u) {
-                cpt += (con1 & 0x08u) ? (size_t)-2 : 2u;
-                overflow = (con1 & 0x08u) ? -1 : 1;
-            } else if (con1 & 0x04u) {
-                cpt += (con1 & 0x08u) ? (size_t)-2 : 2u;
-                overflow = (con1 & 0x08u) ? -1 : 1;
+            overflow = (con1 & 0x08u) ? -1 : 1;
+        }
+        if (con1 & 0x10u) {
+            if (con1 & 0x04u) {
+                if (ashift == 0u) cpt -= 2;
+            } else {
+                if (ashift == 15u) cpt += 2;
+            }
+            overflow = (con1 & 0x08u) ? -1 : 1;
+        }
+        aold = (aold << 16) | (job->bltadat & job->first_mask);
+        aold >>= ashift;
+        if (overflow) {
+            ashift = (unsigned)((int)ashift + overflow) & 15u;
+            con0 = (uint16_t)((con0 & 0x0fffu) | (uint16_t)(ashift << 12));
+        }
+        if (line_loop && (con0 & 0x0200u)) {
+            if (!sign && (con1 & 0x10u)) {
+                cpt += (con1 & 0x08u) ? -(int64_t)job->bltcmod : job->bltcmod;
+            }
+            if (!(con1 & 0x10u)) {
+                cpt += (con1 & 0x04u) ? -(int64_t)job->bltcmod : job->bltcmod;
             }
         }
-        if (line_loop) cpt += (con1 & 0x10u) ? job->bltcmod : 0u;
         line_loop = 1;
-        if (overflow != 0) overflow = 0;
+        con1 = (uint16_t)((con1 & 0x0fffu) | ((apt < 0) ? 0x40u : 0u));
         bshift = (bshift + 15u) & 15u;
-        bline = (uint16_t)((bline >> 1) | (bline << 15));
-        aold = (aold << 16) | job->bltadat;
-        aold >>= ashift;
+        bline = (uint16_t)((((uint32_t)0 << 16) | job->bltb_source_word) >> bshift);
+        if (emit) {
+            if (cpt < 0 || cpt + 1 >= (int64_t)plane_bytes) return -1;
+            line_write_word(plane, (size_t)cpt, d);
+        }
     }
     return 0;
 }
