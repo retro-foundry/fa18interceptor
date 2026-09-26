@@ -24,6 +24,9 @@ the two selectors have different observed roles.
 
 Therefore `$C46184` is a useful selected-record base and the run062
 negative-candidate record, but its root slot is **not** established as the
-moving player position/orientation record. The next player-state experiment
-must follow the record selected at the relevant input/update invocation, not
-assume table index zero.
+moving player position/orientation record. A later bounded run060 trace does
+show that `$C13E10` selects this root slot in one real input-control update;
+see `run060_c13e10_root_control_record.md`. That promotion makes record zero
+an input-controlled record in that scenario, not a spatial/player record. The
+next player-state experiment must trace its changing fields into projection or
+camera output rather than infer motion from selection alone.
