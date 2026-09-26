@@ -2,6 +2,7 @@
 #define FA18_FLIGHT_H
 
 #include <stdint.h>
+#include <stddef.h>
 
 /* Semantic replacement for the selected 512-byte flight record. Only fields
  * with a proven writer are exposed here; the record layout itself is not
@@ -37,6 +38,11 @@ typedef struct {
     int16_t d5;
 } FA18FlightTrigState;
 
+typedef struct {
+    const uint8_t *bytes;
+    size_t byte_count;
+} FA18FlightTrigTable;
+
 /* `$C1B410`: decode the packed control byte at the observed `$65` boundary. */
 int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,
                                      uint8_t packed_control);
@@ -61,6 +67,14 @@ int fa18_flight_prepare_scaled_motion(int16_t first_word,
 /* `$C2E514-$C2E5AB`: compose the nine post lookup fixed point words. */
 int fa18_flight_compose_attitude_matrix(const FA18FlightTrigState *trig,
                                         int16_t output[3][3]);
+
+int fa18_flight_lookup_sine_cosine(const FA18FlightTrigTable *table,
+                                   int16_t angle, int16_t *sine,
+                                   int16_t *cosine);
+int fa18_flight_lookup_two_sine_cosine(const FA18FlightTrigTable *table,
+                                       int16_t first_angle,
+                                       int16_t second_angle,
+                                       FA18FlightTrigState *trig);
 
 /* `$C14D32`: the signed vertical delta is committed to the active pose. */
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);

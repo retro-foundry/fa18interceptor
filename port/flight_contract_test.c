@@ -1,4 +1,5 @@
 #include "flight.h"
+#include "run075_trig_asset.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -36,6 +37,16 @@ int main(void) {
            attitude[1][1] == 0x3000 && attitude[1][2] == 0x1000 &&
            attitude[2][0] == -0x5c00 && attitude[2][1] == -0x2400 &&
            attitude[2][2] == 0x2000);
+    const FA18FlightTrigTable trig_table = {
+        fa18_run075_trig_bytes, sizeof fa18_run075_trig_bytes
+    };
+    int16_t sine = 0;
+    int16_t cosine = 0;
+    assert(fa18_flight_lookup_sine_cosine(&trig_table, 0, &sine, &cosine) == 0 &&
+           sine == 0 && cosine == 0x4000);
+    FA18FlightTrigState pair = {0};
+    assert(fa18_flight_lookup_two_sine_cosine(&trig_table, 0, 0, &pair) == 0 &&
+           pair.d0 == 0 && pair.d1 == 0x4000 && pair.d2 == 0 && pair.d3 == 0x4000);
 
     FA18FlightPose pose = {0};
     pose.altitude = 0x72301;

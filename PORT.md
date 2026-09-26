@@ -349,6 +349,13 @@ of `$C2E514-$C2E5AB`, writing nine fixed point words into native attitude
 storage. The trigonometric lookup tables and angle producer remain separate
 evidence items.
 
+The verified `$C3E5E8` quadrant table is now in
+`port/run075_trig_asset.h`. `fa18_flight_lookup_sine_cosine` and
+`fa18_flight_lookup_two_sine_cosine` reproduce the four reflection cases and
+the zero-angle `(0,$4000)` result used by the matrix producer. The asset keeps
+the endpoint word at offset `$0708`, which is required by the original table
+indexing.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,
