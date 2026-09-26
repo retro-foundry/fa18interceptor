@@ -25,6 +25,11 @@ int main(void) {
     assert(fa18_run075_frame395_postflight[1].x == 158);
     assert(fa18_run075_frame395_postflight[1].y == 167);
     assert(fa18_run075_frame395_postflight[22].flags == 1);
+    unsigned adjacent = 0;
+    for (unsigned i = 0; i < FA18_RUN075_FRAME395_POSTFLIGHT_RECORDS; ++i) {
+        adjacent += (fa18_run075_frame395_postflight[i].flags & 1u) != 0;
+    }
+    assert(adjacent == 12);
     FA18PostflightState state = {.vertical_offset = 10, .table_limit = 2};
     Capture capture_state = {0};
     assert(fa18_postflight_submit(&state, (FA18PostflightRecord){158, 167, 0},
