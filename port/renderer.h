@@ -45,5 +45,7 @@ int fa18_apply_pixel_mask(FA18IndexedFrameBuffer *framebuffer,
  * render target. */
 int fa18_render_run075_frame395_scene(const FA18IndexedFrameBuffer *previous,
                                       FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame398_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
 
 #endif

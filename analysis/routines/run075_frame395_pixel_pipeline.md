@@ -246,3 +246,13 @@ preceding native indexed buffer. The live replay gate compares frames 395,
 396, and 397 byte-for-byte; the latter two are identical to frame 395 in the
 run075 oracle. This advances the frame order while the postflight record
 stream and hardware packet to chunky colour mapping continue to be recovered.
+
+## Next boundary: frame 398
+
+Frame 398 changes 18,040 pixels after the frame-395 scene repeats for frames
+396 and 397. Its first shared renderer call enters `$C2F688` with `D0.w=246`,
+`D1.w=$FFFC`, and `D2=$11000`; the related normal replay reaches `$C32740`
+with `D0=3` and packed source `$C45B22`. `$C32740` expands four nibbles to
+ASCII digits, and `$C327A0/$C32806` selects glyph rows and composites them.
+The bounded trace therefore identifies the frame-398 change as the packed
+font compositor path rather than another postflight polygon submission.

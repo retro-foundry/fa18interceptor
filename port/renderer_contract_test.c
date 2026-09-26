@@ -1,5 +1,6 @@
 #include "renderer.h"
 #include "run075_frame395_data.h"
+#include "run075_frame398_data.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -72,6 +73,12 @@ int main(void) {
         scene.pixels[1 * FA18_WIDTH] != 1 ||
         scene.pixels[101 * FA18_WIDTH + 100] != 5) {
         fputs("run075 frame-395 scene contract failed\n", stderr);
+        return 1;
+    }
+    if (FA18_RUN075_FRAME398_SPANS != 857 ||
+        fa18_render_run075_frame398_scene(&scene, &previous) != 0 ||
+        previous.pixels[1 * FA18_WIDTH] != 4) {
+        fputs("run075 frame-398 scene contract failed\n", stderr);
         return 1;
     }
     puts("run075 two-row pixel contract passed");
