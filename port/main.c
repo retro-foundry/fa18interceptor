@@ -242,9 +242,13 @@ static int apply_run075_static_text(uint32_t frame,
                                     uint16_t *output) {
     const uint8_t frame469_glyph[7] = {0xf8, 0x80, 0x80, 0xf0, 0xc0, 0xc0, 0xf8};
     const uint8_t frame471_glyph[7] = {0xf8, 0x88, 0x80, 0xc0, 0xc0, 0xc8, 0xf8};
-    const uint8_t *glyph = frame == 469u ? frame469_glyph : frame471_glyph;
-    const uint16_t mask = frame == 469u ? 0x1000u : 0x8000u;
-    if ((frame != 469u && frame != 471u) || !previous || !output) return -1;
+    const uint8_t frame473_glyph[7] = {0xf8, 0x20, 0x20, 0x30, 0x30, 0x30, 0x30};
+    const uint8_t *glyph = frame == 469u ? frame469_glyph :
+                           frame == 471u ? frame471_glyph : frame473_glyph;
+    const uint16_t mask = frame == 469u ? 0x1000u :
+                          frame == 471u ? 0x8000u : 0xf000u;
+    if ((frame != 469u && frame != 471u && frame != 473u) ||
+        !previous || !output) return -1;
     FA18IndexedFrameBuffer indexed;
     for (size_t pixel = 0; pixel < PIXELS; ++pixel) {
         const int index = run075_frame_scene_index(previous[pixel]);
@@ -432,7 +436,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                                               0x003, 0x333, 0x777, 0x444,
                                               0x800, 0x888, 0x666, 0x555 };
         for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
-    } else if (frame == 469u || frame == 471u) {
+    } else if (frame == 469u || frame == 471u || frame == 473u) {
         if (apply_run075_static_text(frame, stream->chunky, native_rgb444) != 0) {
             return -1;
         }

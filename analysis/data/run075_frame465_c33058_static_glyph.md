@@ -37,3 +37,8 @@ text positions while the caller advances the source and destination cursors.
 Engine frame 471 retains the `$041E` destination and changes the source bytes
 to `F8 88 80 C0 C0 C8 F8`, with mask `$8000` and mode mask `$09`. Its exact
 four-plane result is checked as the next state in the same compositor sequence.
+
+Engine frame 473 retains the destination again, resolves source bytes
+`F8 20 20 30 30 30 30`, and supplies mask `$F000`. The live native gate now
+executes this packet through the semantic page conversion and four-lane
+compositor; the full replay verifier confirms its RGB444 result.

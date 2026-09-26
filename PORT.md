@@ -790,3 +790,6 @@ game loop.
   four-lane operation is applied, and the page is decoded back to RGB444.
   The full 20,788-frame verifier still passes, so these two boundaries no
   longer depend on the HUD delta fixture.
+- Frame 473 is now routed through the same native path with its traced source
+  bytes and `$F000` mask. The complete run075 verifier remains byte exact
+  after adding this third live boundary.
