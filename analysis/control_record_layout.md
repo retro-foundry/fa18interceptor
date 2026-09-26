@@ -28,6 +28,7 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | `$72` | long | nonzero gate in the indexed-control selector | `prepare_indexed_control_record_context.asm` |
 | `$76` | word | output of the secondary limit-table path | `update_indexed_shared_record_fields.asm` |
 | `$78` | word | output of the trigonometric/limit path | `update_indexed_shared_record_fields.asm` |
+| `$7B` | byte | signed entry gate for `$C27968`: a negative value directly returns zero before the class/component checks; otherwise its low nibble must be zero to enter the three-component path. Run060 samples use `$FF` and bypass; run062's failure invocation uses zero and enters. | `prepare_c27968_candidate_result.asm`; `data/run060_run062_candidate_return_comparison.md`; `data/run062_c26102_postflight_record_transition.md` |
 | `$7C` | byte | signed control byte tested by the trigonometric path | `update_indexed_shared_record_fields.asm` |
 | `$7D` | byte | low nibble selects the arithmetic shift applied to three candidate component words | `check_candidate_shifted_component_bounds.asm`; `data/run062_c26102_postflight_record_transition.md` |
 | `$92-$A2` | nine words | active flight orientation-transform matrix: `$C2E514` composes it from root angle state and it transforms a selected seed before its three components are added to `+$14/+18/+1C` | `select_record_matrix_component_seed.asm`; `data/root_record_pose_candidate.md`; `data/run060_root_attitude_matrix.md` |
