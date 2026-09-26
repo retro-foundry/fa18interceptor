@@ -871,3 +871,7 @@ game loop.
   it accepts a chunky word coordinate, Amiga-order word mask, and separate
   clear/set plane masks. The renderer contract test covers the frame584
   clear/set ordering.
+- Frame 523 now uses the native static glyph compositor. Its traced source is
+  `F8 20 20 30 30 30 30`, with mask `$F000` and destination `$0792`; the
+  resulting glyph appears at the oracle's `(145,48)` placement. The complete
+  frame gate remains exact through this newly routed boundary.
