@@ -21,6 +21,15 @@ The bounded route increments `$C457C1`, decrements `$C45AD6`, calls the
 callback pointer at `$C1820C` (which resolved to `$C1075A` in this packet),
 clears `$C457A3`, and returns.
 
+The sealed run060 success activation supplies a second, distinct callback
+fixture.  At entry to the directly traced `$C110A4` sequence writer, the
+active stack return address is `$C0F808`; the byte-exact tail places
+`JSR (A0)` at `$C0F804`.  Thus the live callback pointer dispatch at
+`$C0F804` invoked `$C110A4` on this activation.  That routine sees the
+countdown `$C45AD6=-1`, installs `$C10DAE`, and takes its observed mode-9
+selector-writing route.  This proves the callback edge and countdown gate;
+it does not identify the earlier writer that made the countdown negative.
+
 ## Static branches awaiting a matching packet
 
 When the entry guards permit it, the routine calculates an offset from
