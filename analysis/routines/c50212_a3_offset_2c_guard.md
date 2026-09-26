@@ -37,6 +37,12 @@ condition-code behavior is part of the original contract.
 
 The immediate zero-return route is directly observed in 15 P-code exports
 covering menu, attract, human flight, and run024 crash-result presentation.
+One bounded attract fixture further records the live ordinary context: at
+attract replay frame 500, `A3=$C01388`, `A3+$2C` is zero, and `$C50212`
+executes its compare, taken branch, and RTS before returning to `$C50182` in
+three instructions. This is a concrete scheduler-record fixture, not an
+expiry-command observation.
+
 The nonzero path is statically reconstructed from the identical runtime image
 used by those captures; no capture currently observes an expiry or an encoded
 command pair. Consequently, the countdown/command interpretation is supported
