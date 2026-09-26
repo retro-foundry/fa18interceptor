@@ -310,6 +310,10 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
   boundary, so it reuses that native page before frame 254.
 - Frame 254 is pixel-identical to frame 236, with no replay event at the
   boundary, so it reuses that native page before frame 255.
+- The frame-255 Engine9000 trace reaches `$C0F5F8` and `$C0FECE` at the next
+  execution boundary, while `$C2FD22` and `$C33058` do not run. The native
+  loop must reproduce this delayed menu state progression before unlocking
+  later frames, even though the visible page remains unchanged.
 
 - Oracle capture must report the canonical restored-state SHA-256 and exact
   frame labels. A source run or config mismatch fails immediately.
