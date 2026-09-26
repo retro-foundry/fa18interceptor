@@ -29,6 +29,26 @@ calls the root transform entry `$C091E0` with `(D3,D4,D5) = (11,0,$68)`.
 The transform reads root matrix `+$92..+$A2` and root base `+$14/+18/+1C`;
 its transformed `D0` and `D2` are committed by `$C09534/$C09538`.
 
+## Matrix reset in the same transition
+
+The root's adjacent nine words at `+$92..+$A2` also change exactly once in
+frames 1--300, on frame 189. From the same pre-write checkpoint, the stepped
+writers are `$C2E536`, `$C2E558`, `$C2E588`, and `$C2E5A8`, all stores in
+`$C2E514` (`compose_alternate_three_angle_matrix`). They replace the prior
+matrix with:
+
+```text
+$92..+$A2 = 4000,0000,0000, 0000,4000,0000, 0000,0000,4000
+```
+
+The live composer inputs are `D0.w=D2.w=D4.w=0`; its documented fixed-point
+formula therefore produces the identity matrix. `$C095B8` calls the record
+matrix-update tail `$C2D954` immediately after committing the root tuple,
+which leads to this composer. This proves a qualification-transition reset of
+the root transform matrix alongside the placement update. It strengthens the
+orientation-matrix candidate, but does not distinguish an aircraft attitude
+matrix from a camera/render transform.
+
 The same bounded trace shows `$C1011E: JSR $C0924A` immediately before this
 packet. Its active path reaches `$C10102` through `$C0FFE2`; the existing
 qualification-transition trace proves that this is the mode-9 post-gate
@@ -43,5 +63,7 @@ initialization route for the record.
 Authority: `build/run060_early_root_pose_mutations/memory_region_mutations.json`,
 `build/run060_frame00187_root_pose_writer_stepped/memory_writes.json`, and
 `build/run060_frame00187_root_pose_writer_full_context/memory_writes.json`,
+`build/run060_early_root_matrix_mutations/memory_region_mutations.json`, and
+`build/run060_frame00187_root_matrix_writer_full/memory_writes.json`,
 the byte-exact source around `$C091E0-$C09249`, and
 `analysis/routines/c0fece_delayed_menu_transition.md`.

@@ -56,8 +56,11 @@ The exact stepped writer trace now resolves the transition: `$C094FC` writes
 of the root matrix/base transform entered at `$C091E0`. This is a deliberate
 initialization or placement update, rather than ordinary per-frame renderer
 scratch. See `data/run060_root_pose_initialization.md` for the bounded
-instruction evidence. It is still not enough to choose aircraft pose over a
-coincident camera pose, but it strengthens the root pose interpretation.
+instruction evidence. The same qualification transition resets `+$92..+$A2`
+to a fixed-point identity matrix through `$C2E514`; this is direct matrix
+writer evidence, not merely co-timed sampling. It is still not enough to
+choose aircraft pose over a coincident camera pose, but it strengthens the
+root pose interpretation.
 
 ## Not yet proven
 
