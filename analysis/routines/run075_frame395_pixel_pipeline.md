@@ -71,3 +71,13 @@ at that stack location is `$C31708`. The shared body uses the established
 renderer tables `$C2F766`, `$C2F786`, and `$C2F7C6`. `$C31708` is therefore the
 next caller boundary for static disassembly and source reconstruction of the
 frame-395 scene loop.
+
+The address falls inside the existing byte-exact `$C316C0-$C31721` submission
+tail documented in
+[`c316c0_postflight_renderer_submission.md`](c316c0_postflight_renderer_submission.md).
+That routine adds the vertical offset to `D1`, appends the `(D0,D1)` pair,
+selects `$C2F5F4` or `$C2F60A` from `D7` bit 0, and loops to `$C31410`. This
+connects the frame-395 pixel calls to the reconstructed postflight record
+walker. Its table contents and gameplay meaning remain unproven, so the
+native port still needs a semantic postflight record struct and a run075
+entry fixture before this path can replace the frame fixture.
