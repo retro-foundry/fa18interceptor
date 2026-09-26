@@ -37,7 +37,7 @@ add_executable(fa18_postflight_contract_test postflight_contract_test.c postflig
 add_test(NAME fa18_postflight_contract COMMAND fa18_postflight_contract_test)
 add_executable(fa18_demo_contract_test demo_contract_test.c demo.c menu.c renderer.c)
 add_test(NAME fa18_demo_contract COMMAND fa18_demo_contract_test)
-add_executable(fa18_display_contract_test display_contract_test.c display.c)
+add_executable(fa18_display_contract_test display_contract_test.c display.c blit_job.c)
 add_test(NAME fa18_display_contract COMMAND fa18_display_contract_test)
 add_executable(fa18_glyph_contract_test glyph_contract_test.c glyph.c display.c)
 add_test(NAME fa18_glyph_contract COMMAND fa18_glyph_contract_test)

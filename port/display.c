@@ -2,6 +2,7 @@
 
 #include <stddef.h>
 #include <string.h>
+#include "blit_job.h"
 
 int fa18_visible_lane_plane(unsigned lane) {
     return lane < FA18_PLANES ? (FA18_PLANES - 1 - (int)lane) : -1;
@@ -88,6 +89,53 @@ int fa18_blit_visible_lanes(const FA18PlanarPage *source, FA18PlanarPage *destin
                                   destination_word_x, destination_y, width_words,
                                   height_rows, first_mask, last_mask,
                                   fa18_visible_lane_mask_to_plane_mask(lane_mask));
+}
+
+int fa18_execute_planar_blit(const FA18PlanarPage *source,
+                             FA18PlanarPage *destination,
+                             int a_plane, int b_plane, int c_plane, int d_plane,
+                             int source_word_x, int source_y,
+                             int destination_word_x, int destination_y,
+                             int width_words, int height_rows,
+                             uint8_t logic_function,
+                             uint16_t first_mask, uint16_t last_mask) {
+    if (!source || !destination || a_plane < 0 || a_plane >= FA18_PLANES ||
+        b_plane < 0 || b_plane >= FA18_PLANES || c_plane < 0 || c_plane >= FA18_PLANES ||
+        d_plane < 0 || d_plane >= FA18_PLANES || source_word_x < 0 ||
+        destination_word_x < 0 || source_y < 0 || destination_y < 0 ||
+        width_words <= 0 || height_rows <= 0 || width_words > FA18_WIDTH / 16 ||
+        source_word_x + width_words > FA18_WIDTH / 16 ||
+        destination_word_x + width_words > FA18_WIDTH / 16 ||
+        source_y + height_rows > FA18_HEIGHT || destination_y + height_rows > FA18_HEIGHT)
+        return -1;
+    uint16_t a[FA18_WIDTH / 16], b[FA18_WIDTH / 16];
+    uint16_t c[FA18_WIDTH / 16], d[FA18_WIDTH / 16];
+    for (int row = 0; row < height_rows; ++row) {
+        for (int word = 0; word < width_words; ++word) {
+            const size_t source_offset = (size_t)(source_y + row) * FA18_PLANAR_ROW_BYTES +
+                                         (size_t)(source_word_x + word) * 2u;
+            const size_t destination_offset = (size_t)(destination_y + row) * FA18_PLANAR_ROW_BYTES +
+                                              (size_t)(destination_word_x + word) * 2u;
+            const uint8_t *ap = &source->plane[a_plane][source_offset];
+            const uint8_t *bp = &source->plane[b_plane][source_offset];
+            const uint8_t *cp = &source->plane[c_plane][source_offset];
+            const uint8_t *dp = &destination->plane[d_plane][destination_offset];
+            a[word] = (uint16_t)((ap[0] << 8) | ap[1]);
+            b[word] = (uint16_t)((bp[0] << 8) | bp[1]);
+            c[word] = (uint16_t)((cp[0] << 8) | cp[1]);
+            d[word] = (uint16_t)((dp[0] << 8) | dp[1]);
+        }
+        if (fa18_execute_blitter_words(logic_function, a, b, c, d,
+                                       (size_t)width_words, first_mask, last_mask) != 0)
+            return -1;
+        for (int word = 0; word < width_words; ++word) {
+            const size_t offset = (size_t)(destination_y + row) * FA18_PLANAR_ROW_BYTES +
+                                  (size_t)(destination_word_x + word) * 2u;
+            destination->plane[d_plane][offset] = (uint8_t)(d[word] >> 8);
+            destination->plane[d_plane][offset + 1u] = (uint8_t)d[word];
+        }
+    }
+    return 0;
 }
 
 void fa18_decode_planar_page(const FA18PlanarPage *page,

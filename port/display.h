@@ -35,6 +35,14 @@ int fa18_blit_visible_lanes(const FA18PlanarPage *source, FA18PlanarPage *destin
                             int destination_y, int width_words, int height_rows,
                             uint16_t first_mask, uint16_t last_mask,
                             uint8_t lane_mask);
+int fa18_execute_planar_blit(const FA18PlanarPage *source,
+                             FA18PlanarPage *destination,
+                             int a_plane, int b_plane, int c_plane, int d_plane,
+                             int source_word_x, int source_y,
+                             int destination_word_x, int destination_y,
+                             int width_words, int height_rows,
+                             uint8_t logic_function,
+                             uint16_t first_mask, uint16_t last_mask);
 
 /* Amiga RGB4 words, held as palette state rather than COLORxx registers. */
 typedef struct {

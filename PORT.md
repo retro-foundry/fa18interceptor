@@ -989,6 +989,9 @@ game loop.
 - Added `fa18_execute_blitter_words`, which applies the semantic minterm over
   word arrays and preserves first/last word masks. This is the tested native
   execution boundary for wiring the final fill into the planar page.
+- Added `fa18_execute_planar_blit`, which maps that word operation onto named
+  semantic planes and chunky-sized page coordinates. The display contract now
+  exercises the `$FC` path through this page boundary.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.

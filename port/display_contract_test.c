@@ -23,6 +23,10 @@ int main(void) {
     assert(fa18_blit_planar_words(&source_page, &destination_page, 1, 2, 3, 4,
                                   1, 1, 0xffff, 0xffff, 1) == 0);
     assert(destination_page.plane[0][4 * FA18_PLANAR_ROW_BYTES + 6] == 0xA5);
+    assert(fa18_execute_planar_blit(&source_page, &destination_page, 0, 0, 0, 1,
+                                    1, 2, 3, 4, 1, 1, 0xfc,
+                                    0xffff, 0xffff) == 0);
+    assert(destination_page.plane[1][4 * FA18_PLANAR_ROW_BYTES + 6] == 0xA5);
 
     memset(&destination_page, 0, sizeof destination_page);
     source_page.plane[3][2 * FA18_PLANAR_ROW_BYTES + 2] = 0xA5;
