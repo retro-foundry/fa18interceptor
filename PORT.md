@@ -946,6 +946,11 @@ game loop.
   submits the visible page packet. This establishes the temporary workspace to
   active page boundary; the semantic lane setup is recorded in
   `analysis/data/run075_frame559_c2fbe6_visible_lane_setup.md`.
+- The extended `$C2FBE6` window reaches the lane loop and its per plane
+  pointer arithmetic, but enters the polygon continuation before the final
+  `$C2FD8C` submission boundary. The next trace target is therefore the
+  bounded `$C2FD8C` packet, which should provide the four destination pointers
+  needed to execute the active-page copy semantically.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
