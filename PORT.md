@@ -346,6 +346,10 @@ to branch polarity table has not yet been captured.
 port, direction identifier, and pressed state; frame events retain signed
 motion deltas separately. This allows the proven run060 direction mapping to
 be consumed by native flight input state.
+The native playback loop now applies port-0 `J` events to a semantic packed
+flight-control byte and updates `FA18FlightControlLanes` at the event frame.
+This connects the proven run060 input path to native state without inventing
+axis names or motion formulas.
 
 `fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
 the computed lateral and forward terms update `$14/$1C`, while the signed

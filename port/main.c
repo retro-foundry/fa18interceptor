@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include "menu.h"
 #include "replay.h"
+#include "flight.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,6 +30,8 @@ typedef struct {
     size_t count;
     size_t next;
     FA18ReplayControlState controls;
+    uint8_t packed_flight_control;
+    FA18FlightControlLanes flight_lanes;
 } NativeReplay;
 
 static int collect_replay_event(const FA18ReplayEvent *event, void *user) {
@@ -59,6 +62,16 @@ static int native_replay_apply_frame(NativeReplay *replay, uint32_t frame,
     }
     for (size_t index = first; index < replay->next; ++index) {
         const FA18ReplayEvent *event = &replay->events[index];
+        if (event->kind == FA18_REPLAY_JOYSTICK_EVENT &&
+            event->value[0] == 0) {
+            if (fa18_flight_apply_joystick_direction(
+                    (uint8_t)event->value[1], event->value[2] != 0,
+                    &replay->packed_flight_control) != 0) return -1;
+            if (fa18_flight_update_control_lanes(
+                    &replay->flight_lanes, replay->packed_flight_control) != 0) {
+                return -1;
+            }
+        }
         if (event->frame == 230u && event->kind == FA18_REPLAY_KEY_EVENT &&
             event->value[0] == 49 && event->value[3] != 0) {
             if (fa18_select_run075_demo_mode(menu_state) != 0) return -1;
