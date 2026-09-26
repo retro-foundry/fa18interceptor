@@ -147,3 +147,14 @@ the adjacent call uses mode `10`. The loop calls `$C31312` between record
 groups. A later pass repeats the first scene group and reaches `$C332BC` and
 `$C332FE`, which are the next continuation helpers after this postflight
 record family.
+
+## Continuation component `$C332BC`
+
+Frame 395 reaches `$C332BC` with `D4=$40002`, `D5=2`, `D6=3`, and `D7=2`.
+The helper writes `$FFFFF` to the renderer lane mask, calls `$C332FE`, then
+computes a second component from the stored scene offsets: `x=160` plus
+`$C45988`, and `y=129` plus `$C458D8`. It sets renderer mode `8` and submits
+the component through `$C2F60A` followed by `$C2F5F4`. The bounded trace then
+reaches the same primary/alternate pixel tables with the component's lane
+state. This should become a separate semantic component in the native scene
+model; it must not be folded into the 32-record postflight fixture.
