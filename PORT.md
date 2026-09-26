@@ -88,7 +88,7 @@ infer a function's purpose merely from a rendered frame.
 | `$C1F4AC/$C1F524` | Demo local-triple transform: arithmetic local shift, wrapped translation, signed 3Ã—3 dot products, then fixed-point output (`analysis/routines/c1f4ac_vertex_transform.md`) | Proved transform core ported through `FA18VertexTransform`, `FA18LocalVertex`, and `FA18TransformedVertex`; caller record decoding and alternate route selection remain open |
 | `$C2FF48` | Polygon wrapper selects line or descending area-blit routes (`analysis/routines/c2ff48_display_submission_wrapper.md`) | Not ported: the required run060+ settled fill fixture and exact edge/mask rule are still missing |
 | Display page boundary | Observed cockpit and M-map pages are four 40-byte × 200-row planes with RGB4 palette state (`analysis/routines/native_planar_display_adapter.md`) | Native `FA18PlanarPage` → `FA18IndexedFrameBuffer` decoder and `FA18Palette` RGB444 application ported; page selection and palette programming remain open |
-| run075 frame-200 menu page | Baseline menu screenshot is identical to oracle frame 200; three exact 8,000-byte source planes and six RGB4 colours are mapped in `analysis/routines/run075_frame200_menu_display.md` | `fa18_render_run075_frame200_menu` supplies the live SDL frame and is pixel-compared with the oracle before presentation; frame 201 remains locked |
+| run075 frames 200-233 menu page | Baseline menu screenshot is identical to oracle frame 200; frames 201-233 remain pixel-identical, with the frame-230 key event changing menu state only | Native menu page is rendered and compared for every frame 200-233; live playback stops at frame 234 until its changed page/state is reconstructed |
 | `$C330FE` | Byte-mask update over source glyph bytes and strided display longwords (`analysis/routines/c330fe_strided_long_mask_update.md`) | Proved set/clear mask algebra ported through bounded `FA18GlyphMaskLane` and `FA18PlanarPage`; glyph records and lane placement remain open |
 | `$C33058` | Static-text glyph lanes; run060 success-text entry proves four plane destinations and set/clear mask selection (`analysis/routines/c33058_static_text_glyph_lanes.md`) | Bounded post-glyph-lookup four-lane submission ported through `FA18StaticGlyphSubmission`; glyph/layout producers and general placement remain open |
 
@@ -234,6 +234,10 @@ infer a function's purpose merely from a rendered frame.
   loop. Playback now requires the run075 stream to start at frame 200,
   compares the native RGB444 page against that oracle before presentation,
   and stops on any mismatch. This unlocks no later frame yet.
+- 2026-09-26: Extended the native menu gate through frames 201-233. The
+  frame-230 run075 selection event now applies the proved native menu state
+  transition while preserving the identical pixels. Playback deliberately
+  stops before frame 234, the first changed display page.
 
 ## Build and run the current slice
 

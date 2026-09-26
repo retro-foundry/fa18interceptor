@@ -166,16 +166,21 @@ static int stream_rgb444(const uint16_t *chunky) {
     return fwrite(raw, 1, sizeof raw, stdout) == sizeof raw;
 }
 
-static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
-    if (frame != 200u) return 0;
+static int apply_native_frame_gate(FrameStream *stream, uint32_t frame,
+                                   FA18MenuState *menu_state) {
+    if (frame < 200u || frame > 233u) return 0;
+    if (frame == 230u && fa18_select_run075_demo_mode(menu_state) != 0) {
+        fprintf(stderr, "Native frame-230 menu selection failed\n");
+        return -1;
+    }
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
     fa18_render_run075_frame200_menu(&native_indexed, native_rgb444);
     for (size_t i = 0; i < PIXELS; ++i) {
         if (native_rgb444[i] != stream->chunky[i]) {
-            fprintf(stderr, "Native frame-200 gate mismatch at pixel %zu: "
+        fprintf(stderr, "Native menu gate mismatch at frame %u, pixel %zu: "
                             "native %03x, oracle %03x\n",
-                    i, native_rgb444[i], stream->chunky[i]);
+                    frame, i, native_rgb444[i], stream->chunky[i]);
             return -1;
         }
         stream->chunky[i] = native_rgb444[i];
@@ -211,6 +216,7 @@ static int playback(FrameStream *stream) {
         return 1;
     }
     int running = 1, paused = 0, step = 0, result = 0;
+    FA18MenuState native_menu = {0};
     uint64_t deadline = SDL_GetTicks64();
     while (running) {
         SDL_Event event;
@@ -238,8 +244,15 @@ static int playback(FrameStream *stream) {
             result = status < 0;
             break;
         }
-        int native_gate = apply_native_frame_gate(stream, stream->next - 1);
+        int native_gate = apply_native_frame_gate(stream, stream->next - 1,
+                                                  &native_menu);
         if (native_gate < 0) {
+            result = 1;
+            break;
+        }
+        if (native_gate == 0) {
+            fprintf(stderr, "Native frame gate is not implemented for frame %u\n",
+                    stream->next - 1);
             result = 1;
             break;
         }
