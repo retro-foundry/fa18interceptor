@@ -931,6 +931,15 @@ game loop.
   workspace pointers remain trace metadata until their page coordinates are
   established from memory evidence, so frame559 is still gated from using
   this operation.
+- Extended the run075 frame559 trace through `$C30678` for 500 instructions.
+  The routine stores the packet fields, scans the sorted pair records, derives
+  a row offset from `$C456E2`, and submits the blit setup repeatedly. The
+  packet's source and destination values are the same temporary workspace
+  pointer, so this stage prepares an intermediate plane workspace. Its first
+  Chip changes are outside the Copper active page; the later active-page copy
+  remains a separate handoff to trace before wiring frame559 into the native
+  display path. The bounded trace is in
+  `build/run075_frame559_c30678_500/trace.jsonl`.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
