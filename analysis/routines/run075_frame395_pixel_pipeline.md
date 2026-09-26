@@ -173,3 +173,28 @@ renderer mode, and lane suppression state.
 `$C458D8`, sets renderer mode `12`, and submits through `$C2F5F4`. It then
 continues to the next shared records. The native scene model should represent
 this as a parameterized record group rather than another raw memory region.
+
+## Dense line raster path
+
+The same frame-395 walker reaches `$C2FA7E`, which accounts for the dense
+scene pixels that the 32 `$C2F688` entries cannot explain. The first captured
+line submission has endpoints `(175,93)` and `(163,93)` with source state
+`D4=$FD18005D`, `D5=$7B6`, `D6=$60`, and `D7=$D14`. The routine copies the
+current plane mode, advances both rows, and enters its established line-mode
+stepper. This is an evidence-backed `FA18LineSegment` candidate; plane
+selection and the remaining line list still require collection before frame
+395 can use the native line renderer.
+
+The first eight line entries are:
+
+```text
+(175,93)->(163,93)  (163,93)->(164,94)
+(164,94)->(177,94)  (177,94)->(176,93)
+(176,93)->(163,93)  (194,93)->(182,93)
+(182,93)->(183,93)  (183,93)->(196,93)
+```
+
+The bounded entries alternate source states `$FD18005D`, `$FFD8005E`,
+`$FB1C005D`, and repeat line-mode values `D5=1720/1847/1974`, `D6=96`.
+The observed list is enough to start a native line submission fixture, but
+the complete line count and plane mapping remain open.
