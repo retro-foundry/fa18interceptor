@@ -65,3 +65,6 @@ and supplies mask `$9000`. This packet is also executed by the native gate.
 Engine frame 485 advances the destination to `$0426`, resolves source bytes
 `F8 80 80 F0 C0 C0 C0`, and supplies mask `$7000`. This packet is live in the
 same native compositor path.
+
+Engine frame 487 retains `$0426`, resolves source bytes `F8 98 88 88 88 88 F8`,
+and supplies mask `$E000`. This packet is live in the native gate as well.
