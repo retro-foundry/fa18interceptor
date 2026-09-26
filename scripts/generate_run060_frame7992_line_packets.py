@@ -30,7 +30,7 @@ def main():
     for j, plane, offset in rows:
         width, height = j["size"] & 0x3f, j["size"] >> 6
         values = [hex(j[k]) for k in
-                  ("bltcon0", "bltcon1", "first_mask", "last_mask", "adat", "bdat",
+                   ("bltcon0", "bltcon1", "first_mask", "last_mask", "a", "adat", "bdat",
                    "amod", "bmod", "cmod", "dmod")]
         values += [str(width), str(height), str(plane), "0x%04X" % offset]
         out.append("    {" + ", ".join(values) + "},")

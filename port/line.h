@@ -53,6 +53,7 @@ typedef struct {
 typedef struct {
     uint16_t bltcon0, bltcon1;
     uint16_t first_mask, last_mask;
+    uint16_t bltapt_low;
     uint16_t bltadat, bltbdat;
     uint16_t bltamod, bltbmod, bltcmod, bltdmod;
     uint16_t width_words, height_rows;
