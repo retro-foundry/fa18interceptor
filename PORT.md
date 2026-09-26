@@ -912,3 +912,7 @@ game loop.
   logical planes, word updates with AND/OR masks, and conversion to the
   chunky indexed target. The implementation and contract test are in
   `port/display.h`, `port/renderer.c`, and `port/renderer_contract_test.c`.
+- After separating `FrameStream.native_chunky` from the recorded oracle
+  buffer, the complete available run075 verifier passes: `20788` frames from
+  `200` through `20987`. Native update routines now consume the preceding
+  native frame, and the recorded stream is used for comparison only.
