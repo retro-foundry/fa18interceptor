@@ -824,3 +824,6 @@ game loop.
 - Frame 511 is native with its traced `$078C` destination, source bytes, and
   `$7000` mask. This is the first later text packet after the `$042x` cursor
   sequence; the complete replay verifier remains byte exact.
+- Frame 521 is native with the repeated later-layout `$078C` packet. The full
+  replay verifier remains byte exact after routing this boundary through the
+  semantic compositor.

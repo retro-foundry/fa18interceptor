@@ -97,3 +97,7 @@ The next breakpoint window reaches the later run075 text packet at frame 511.
 It resolves source bytes `F0 90 90 F8 C8 C8 C8`, destination `$078C`, and mask
 `$7000`. The native gate applies this packet through the same semantic page
 conversion, confirming the transition away from the earlier `$042x` cursor.
+
+The next observed packet at frame 521 repeats the same source, destination, and
+mask in the later layout. It is routed through the native gate as a separate
+frame boundary.
