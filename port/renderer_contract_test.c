@@ -77,7 +77,7 @@ int main(void) {
     }
     if (FA18_RUN075_FRAME398_SPANS != 857 ||
         fa18_render_run075_frame398_scene(&scene, &previous) != 0 ||
-        previous.pixels[1 * FA18_WIDTH] != 4) {
+        previous.pixels[1 * FA18_WIDTH] != 6) {
         fputs("run075 frame-398 scene contract failed\n", stderr);
         return 1;
     }

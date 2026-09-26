@@ -7,9 +7,10 @@
 #include "run075_frame398_data.h"
 
 static uint8_t frame_scene_color_index(uint16_t color) {
-    return color == 0x001 ? 1u : color == 0x100 ? 2u :
-           color == 0x111 ? 3u : color == 0x200 ? 4u :
-           color == 0x222 ? 5u : 0u;
+    return color == 0x001 ? 1u : color == 0x002 ? 6u :
+           color == 0x100 ? 2u : color == 0x111 ? 3u :
+           color == 0x200 ? 4u : color == 0x222 ? 5u :
+           color == 0x300 ? 7u : 0u;
 }
 
 /* Exact words at original $C2F7C6, confirmed in run075 frame-315 Slow RAM.

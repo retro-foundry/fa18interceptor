@@ -239,7 +239,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
             return -1;
         }
         static const uint16_t palette[16] = { 0x000, 0x001, 0x100, 0x111,
-                                              0x200, 0x222 };
+                                              0x200, 0x222, 0x002, 0x300 };
         for (size_t i = 0; i < PIXELS; ++i) {
             native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
         }
@@ -258,7 +258,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
             return -1;
         }
         static const uint16_t palette[16] = { 0x000, 0x001, 0x100, 0x111,
-                                              0x200, 0x222 };
+                                              0x200, 0x222, 0x002, 0x300 };
         for (size_t i = 0; i < PIXELS; ++i) {
             native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
         }
