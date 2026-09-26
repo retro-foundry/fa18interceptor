@@ -57,3 +57,12 @@ non-success-side `$C10DAE` continuation. This establishes a negative-candidate
 return -> record flag/update -> postflight-callback dataflow chain. It does
 **not** establish that `$03C0` is a landing threshold, that `D2` is an
 altitude/speed/position value, or that this record belongs to the player.
+
+## Run060 negative evidence
+
+The complete sealed run060 replay (all 10,085 recorded GUI frames from its
+canonical restored state) was run with a breakpoint at `$C26178`. It does not
+hit. The same instruction is directly executed in run062's transition frame.
+Thus setting word bit 9 at this site is a strong observed discriminator between
+the successful run060 scenario and run062's later failure-side progression;
+it remains a scenario discriminator rather than a decoded physical rule.
