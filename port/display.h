@@ -53,6 +53,11 @@ int fa18_execute_run060_frame7992_area_job(
     FA18PlanarPage *page, const FA18AreaBlitJob *job,
     const uint8_t a_source[12][37], const uint8_t b_source[12][37]);
 
+int fa18_execute_area_blit_job(FA18PlanarPage *page,
+                               const FA18AreaBlitJob *job,
+                               const uint8_t *a_source, size_t a_row_stride,
+                               const uint8_t *b_source, size_t b_row_stride);
+
 /* Amiga RGB4 words, held as palette state rather than COLORxx registers. */
 typedef struct {
     uint16_t rgb4[16];
