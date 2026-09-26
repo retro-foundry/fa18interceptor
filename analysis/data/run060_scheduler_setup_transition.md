@@ -1,11 +1,11 @@
 # Run060 scheduler setup transition
 
-Classification: **aligned checkpoint sampling; writer not yet identified**.
+Classification: **native checkpoint state transition; writer not yet
+identified**.
 
-Starting from the sealed global-frame-9,200 checkpoint, the recording suffix
-was replayed with frame alignment and sampled after each restored frame.  The
-first observed scheduler setup mutation is at restored frame 10 (global frame
-9,210):
+Native boot-restore checkpoints independently show that the gate is still
+uninitialized at GUI frame 9,205 (`+$6E=$0007`) and has completed setup by GUI
+frame 9,210 (`+$6E=$0000`). The transition values are:
 
 | Address | Before | After |
 | --- | ---: | ---: |
@@ -20,7 +20,9 @@ At frame 9,263 the bounded parent-tick trace observes its negative value and
 the phase-three route that installs `$C11078`; that callback advances to
 `$C110A4`.
 
-The sampler records a frame-level mutation only.  It does not identify the
-CPU instruction that performed the frame-9,210 setup stores or establish a
-qualification predicate.  Its retained authority is
-`build/run060_frame09200_scheduler_field_samples/memory_region_mutations.json`.
+The native snapshots prove state ordering only. They do not identify the CPU
+instruction that performed the frame-9,210 stores or establish a qualification
+predicate. The full preceding native state sequence is retained in
+[`run060_native_scheduler_gate_timeline.md`](run060_native_scheduler_gate_timeline.md).
+The older aligned direct-core sampler remains local diagnostic evidence, not
+the validation oracle for this timing claim.
