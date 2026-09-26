@@ -1086,6 +1086,12 @@ game loop.
   `analysis/data/run060_frame7992_c30668_entries.md`. The widened DMA inventory
   remains the authority for the 36 completed submissions, and the producer for
   the later 32 jobs is still unresolved.
+- The widened frame-7992 DMA stream now yields an exact per-submission
+  destination-write oracle. Jobs 4--15 produce 10 writes each, jobs 16--19
+  produce 198 each, jobs 20--23 produce 18 each, jobs 24--27 produce 266
+  each, jobs 28--31 produce 18 each, and jobs 32--35 produce 198 each.
+  `scripts/inventory_dma_writes.py` records these writes for recurrence-level
+  comparison before the frame gate is advanced.
 - Reconstructed all 36 ordered `$DFF058` submissions in frame 7992. The first
   four are the validated `$FCE/$0312` area jobs; the remaining 32 are grouped
   four-plane operations with distinct control and size modes. The inventory is
