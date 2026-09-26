@@ -50,6 +50,22 @@ void fa18_clear_renderer_work_buffer(FA18IndexedFrameBuffer *framebuffer) {
     if (framebuffer) memset(framebuffer->pixels, 0, sizeof framebuffer->pixels);
 }
 
+int fa18_apply_plane_word_update(FA18IndexedFrameBuffer *framebuffer,
+                                 const FA18PlaneWordUpdate *update) {
+    if (!framebuffer || !update || update->x < 0 || update->x > FA18_WIDTH - 16 ||
+        update->y < 0 || update->y >= FA18_HEIGHT) return -1;
+    const uint8_t clear_planes = (uint8_t)(update->clear_plane_mask & 15u);
+    const uint8_t set_planes = (uint8_t)(update->set_plane_mask & 15u);
+    for (int bit = 0; bit < 16; ++bit) {
+        if (!(update->word_mask & (uint16_t)(0x8000u >> bit))) continue;
+        uint8_t *pixel = &framebuffer->pixels[(size_t)update->y * FA18_WIDTH +
+                                               (size_t)update->x + (size_t)bit];
+        *pixel = (uint8_t)(*pixel & (uint8_t)~clear_planes);
+        *pixel = (uint8_t)(*pixel | set_planes);
+    }
+    return 0;
+}
+
 static int validate_pixels(const uint8_t *indices, uint16_t mask, int word_x,
                            int y, int rows) {
     for (int bit = 0; bit < 16; ++bit) {

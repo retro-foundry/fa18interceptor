@@ -14,6 +14,17 @@
 #include <string.h>
 
 int main(void) {
+    FA18IndexedFrameBuffer plane_word;
+    memset(&plane_word, 0x0fu, sizeof plane_word);
+    const FA18PlaneWordUpdate plane_word_update = {
+        16, 20, 0x0800u, 0x04u, 0x03u
+    };
+    if (fa18_apply_plane_word_update(&plane_word, &plane_word_update) != 0 ||
+        plane_word.pixels[20u * FA18_WIDTH + 20u] != 0x0bu ||
+        plane_word.pixels[20u * FA18_WIDTH + 21u] != 0x0fu) {
+        fputs("plane word update contract failed\n", stderr);
+        return 1;
+    }
     /* Deplanarized before/after fixture from the exact four Chip-RAM planes
      * around run075 frame-315 $C2F688 entry. See the focused routine report.
      */

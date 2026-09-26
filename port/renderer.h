@@ -30,6 +30,21 @@ typedef struct {
     uint8_t output_xor_plane_mask;
 } FA18RendererState;
 
+/* Address-free form of a single planar word handler such as `$C2F8B4`.
+ * `word_mask` uses Amiga bit order: bit 15 is the leftmost pixel in the
+ * sixteen-pixel word. A plane selected by both masks is cleared first and
+ * then set, matching the hardware handler order. */
+typedef struct {
+    int x;
+    int y;
+    uint16_t word_mask;
+    uint8_t clear_plane_mask;
+    uint8_t set_plane_mask;
+} FA18PlaneWordUpdate;
+
+int fa18_apply_plane_word_update(FA18IndexedFrameBuffer *framebuffer,
+                                 const FA18PlaneWordUpdate *update);
+
 /* Complete visual-buffer contract of $C2F688-$C2FA6F. `indices` is a
  * deplanarized four-bit buffer. A nonnegative output_xor_enable and nonzero
  * output_xor_plane_mask XORs selected lanes on the first row and returns

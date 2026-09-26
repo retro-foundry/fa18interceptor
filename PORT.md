@@ -866,3 +866,8 @@ game loop.
   fourth plane is untouched. Its `$1F40` pointer spacing confirms the
   four-plane page geometry. The screen coordinate and displayed colour remain
   caller-owned until the upstream pointer calculation is traced.
+- Added `FA18PlaneWordUpdate` and `fa18_apply_plane_word_update` to the native
+  renderer. This is the address-free C form of a single planar word handler:
+  it accepts a chunky word coordinate, Amiga-order word mask, and separate
+  clear/set plane masks. The renderer contract test covers the frame584
+  clear/set ordering.
