@@ -115,3 +115,9 @@ index 2 before the shared body at `$C2F688`. This is the first frame-395
 record with a complete native renderer-state bridge. The remaining lane
 fields and all adjacent entries still need the same bounded capture before
 the record fixture can drive pixels.
+
+The adjacent renderer entry `$C2F60A` is also reached in frame 395. Its first
+captured invocation is clipped at `(-25,-25)`, but the next valid invocation
+has `(D0.w,D1.w)=(156,156)`, mode `D2.w=10`, alternate mask table `$C2F7C6`,
+handler table `$C2F786`, and `D4=$40002`, `D5=2`, `D6=2`, `D7=2`. This is a
+two-row renderer input and matches the native `FA18_PIXEL_TWO_ROWS` contract.
