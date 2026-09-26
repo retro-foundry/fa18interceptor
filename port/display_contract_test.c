@@ -1,4 +1,5 @@
 #include "display.h"
+#include "run060_frame7992_area_assets.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -106,6 +107,19 @@ int main(void) {
     assert((indices.pixels[115 * FA18_WIDTH + 3] & 1u) != 0u);
     assert((indices.pixels[144 * FA18_WIDTH + 319] & 1u) != 0u);
     assert((indices.pixels[145 * FA18_WIDTH] & 1u) == 0u);
+    FA18AreaBlitJob jobs[4];
+    assert(fa18_build_run060_frame7992_area_jobs(jobs) == 0);
+    memset(&page, 0, sizeof page);
+    for (size_t job = 0; job < 4; ++job) {
+        assert(fa18_execute_run060_frame7992_area_job(
+                   &page, &jobs[job], fa18_run060_frame7992_a_source,
+                   fa18_run060_frame7992_b_source[job]) == 0);
+    }
+    fa18_decode_planar_page(&page, &indices);
+    size_t area_pixels = 0;
+    for (size_t pixel = 0; pixel < sizeof indices.pixels; ++pixel)
+        if (indices.pixels[pixel] != 0u) ++area_pixels;
+    assert(area_pixels > 0u);
     indices.pixels[0] = 16u;
     if (fa18_apply_palette(&indices, &palette, rgb444) != -1) {
         fputs("invalid palette index contract failed\n", stderr);

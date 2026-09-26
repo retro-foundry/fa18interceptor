@@ -3,6 +3,42 @@
 #include <stddef.h>
 #include <string.h>
 #include "blit_job.h"
+#include "run060_frame7992_area_assets.h"
+
+static uint16_t read_be_word(const uint8_t *bytes) {
+    return (uint16_t)(((uint16_t)bytes[0] << 8) | bytes[1]);
+}
+
+int fa18_execute_run060_frame7992_area_job(
+    FA18PlanarPage *page, const FA18AreaBlitJob *job,
+    const uint8_t a_source[12][37], const uint8_t b_source[12][37]) {
+    if (!page || !job || !a_source || !b_source || job->destination_plane >= FA18_PLANES ||
+        job->width_words != 18u || job->height_rows != 12u ||
+        job->a_modulus != 1u || job->b_modulus != 1u ||
+        job->c_modulus != 5u || job->d_modulus != 5u ||
+        job->destination_word >= FA18_WIDTH / 16 ||
+        job->destination_row >= FA18_HEIGHT) return -1;
+    const size_t start = (size_t)job->destination_row * FA18_PLANAR_ROW_BYTES +
+                         (size_t)job->destination_word * 2u;
+    for (uint16_t row = 0; row < job->height_rows; ++row) {
+        const size_t destination_offset = start + (size_t)row * 41u;
+        if (destination_offset + (size_t)job->width_words * 2u >
+            FA18_PLANAR_PAGE_BYTES) return -1;
+        for (uint16_t word = 0; word < job->width_words; ++word) {
+            const uint8_t *ap = &a_source[row][word * 2u];
+            const uint8_t *bp = &b_source[row][word * 2u];
+            uint8_t *dp = &page->plane[job->destination_plane]
+                                      [destination_offset + (size_t)word * 2u];
+            const uint16_t a = read_be_word(ap);
+            const uint16_t b = read_be_word(bp);
+            const uint16_t c = read_be_word(dp);
+            const uint16_t d = fa18_apply_blitter_minterm(0xce, a, b, c);
+            dp[0] = (uint8_t)(d >> 8);
+            dp[1] = (uint8_t)d;
+        }
+    }
+    return 0;
+}
 
 int fa18_apply_run060_frame7991_fill(FA18PlanarPage *page) {
     static const FA18FillSpan spans[] = {

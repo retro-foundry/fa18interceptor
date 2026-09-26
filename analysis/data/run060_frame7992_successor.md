@@ -6,7 +6,7 @@ The changed display ranges cover all four semantic planes and rows 37--144,
 so frame 7992 is a new renderer output and cannot reuse the frame 7991 fill
 operation.
 
-The DMA records show four line mode submissions, at vertical positions 66,
+The DMA records show four area blit submissions, at vertical positions 66,
 74, 82, and 90. Each writes `$0FCE` to `BLTCON0`, uses the captured line
 control state, and a common A pointer `$00A230`. The C/D pointer low words
 are:

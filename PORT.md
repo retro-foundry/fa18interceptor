@@ -1061,3 +1061,10 @@ game loop.
   `BLTAMOD/BLTBMOD/BLTCMOD/BLTDMOD = 1/1/5/5`, along with the control words,
   masks, pointers, and size. The remaining frame work is the source-data to
   screen-segment conversion.
+- Extracted the frame-7992 A/B source streams as a semantic asset table with
+  the captured 37-byte source row stride, and added
+  `fa18_execute_run060_frame7992_area_job`. It applies the `$CE` minterm to
+  source words and the semantic destination page using the proven 41-byte
+  destination stride. The display contract now executes all four jobs; exact
+  comparison against the captured successor page is the next verification
+  step.
