@@ -241,8 +241,9 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 286. Frame
-287 remains locked until its changed display page is reconstructed.
+The native live gate currently covers run075 frames 200 through 391. Frame
+392 remains locked until its changed display page and state transition are
+reconstructed.
 
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
@@ -339,7 +340,7 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
 - Frame 285 remains all-black and is represented by the same native clear;
   frame 286 is the next page boundary.
 - Frame 286 remains all-black and is represented by the same native clear;
-  frame 287 is the next page boundary.
+  frames 287 through 391 are also all-black and use the same native clear.
 - The first post-clear visual change is frame 392: 361 sparse RGB444 pixels
   in native bounds `x=7..318, y=101..199`. Frames 287..391 are identical to
   frame 286. `$C2FD22` is reached at Engine frame 291 and clears the four
