@@ -23,3 +23,14 @@ This establishes a run060+ pixel oracle for a changed numeric submission and
 confirms that this invocation writes one active plane. It does not establish
 that every numeric field uses one plane, nor does it identify the final
 coordinate table interpretation by itself.
+
+## Compositor join
+
+The same changed trace enters `$C32806` with the normal `$C3201A` layout. The
+first glyph destination is `$01830E`, which is active plane 3 base `$016A40`
+plus native offset `$18CE`. `$C32806` reconstructs shift `0` from the packed
+mask word and derives five rows from the captured `D7` value. The row writes
+therefore use offsets `$18CE`, `$18F6`, `$191E`, `$1946`, and `$196E` within
+the selected plane, matching the observed 40-byte stride. The three
+persistent changed bytes fall inside those row writes; `$0185B3` is outside
+the settled result and remains asynchronous state.

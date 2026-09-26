@@ -156,6 +156,10 @@ infer a function's purpose merely from a rendered frame.
   Engine9000. Three persistent bytes land in active plane 3 and one byte is
   transient blitter state; the exact values and plane-relative offsets are
   recorded in `analysis/data/run060_c3201a_changed_chip_delta.md`.
+- 2026-09-26: Joined that delta through `$C32806`: the first native
+  destination is plane 3 base `$16A40` plus `$18CE`, with shift zero and five
+  40-byte-stride rows. This validates the native placement and compositor
+  inputs against the run060 changed-value trace.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).
