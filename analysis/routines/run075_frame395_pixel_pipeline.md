@@ -27,3 +27,25 @@ frame boundary. The existing native `$C2F688-$C2FA6F` primitive is suitable
 for those calls once their signed coordinates, table, mode, and plane state
 are captured. Do not replace frame 395 with a full image fixture until the
 call sequence and state inputs have been checked.
+
+## Subsequent calls
+
+Skipping the first breakpoint hit and replaying from the same canonical
+restore captures the following entries. The debugger reports the next Engine
+frame for each entry, so these are one boundary later than the corresponding
+normal replay execution point.
+
+| entry | `D0.w` | `D1.w` | `D2` | `D3` | `D4` | `D5` | `D6` | `D7` |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 158 | 167 | 5 | `$FFFF0FF0` | `$41C00` | 32 | 2 | 24 |
+| 2 | 157 | 168 | 0 | 0 | 262146 | 2 | 3 | 2 |
+| 3 | 159 | 168 | `$FFFB` | `$FFFB` | 262148 | 4 | 4 | 4 |
+| 4 | 158 | 168 | `$FFFE` | `$FFFE` | 262145 | 1 | 1 | 1 |
+| 5 | 158 | 167 | `$FFFD` | `$FFFD` | 262146 | 2 | 2 | 2 |
+
+The first coordinate pair `(158,167)` is the established run060 primary
+table sample. The later calls are nearby edge pixels with distinct lane
+masks. The complete numeric records are retained in
+`build/run075_frame395_c2f688_hit0` through `hit5`; the next step is to
+collect the full call count and identify the caller's scene record before
+encoding these as a native draw list.
