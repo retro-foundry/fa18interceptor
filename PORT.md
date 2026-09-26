@@ -115,6 +115,10 @@ infer a function's purpose merely from a rendered frame.
   `fa18_prepare_scaled_record_numeric`. It preserves the signed subtract,
   arithmetic shift, signed division, and `$177` bias before composing the
   four-character value; record ownership and on-screen label remain open.
+- 2026-09-26: Added `FA18ScaledNumericState` and
+  `fa18_update_scaled_numeric` for the observed `$C321D2` previous-value and
+  two-pass redraw gate. It emits typed compositor requests with masks `$4`
+  and `$C`, while coordinate ownership remains unresolved.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).

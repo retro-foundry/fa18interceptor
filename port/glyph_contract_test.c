@@ -27,6 +27,20 @@ int main(void) {
         fputs("scaled record numeric contract failed\n", stderr);
         return 1;
     }
+    FA18ScaledNumericState numeric_state = {0, 0, 0};
+    FA18NumericDrawRequest requests[2];
+    if (fa18_update_scaled_numeric(&numeric_state, 0x10000000,
+                                   requests) != 1 ||
+        requests[0].compositor_mask != 4 || requests[1].compositor_mask != 0x0c ||
+        fa18_update_scaled_numeric(&numeric_state, 0x10000000,
+                                   requests) != 1 ||
+        fa18_update_scaled_numeric(&numeric_state, 0x10000000,
+                                   requests) != 1 ||
+        fa18_update_scaled_numeric(&numeric_state, 0x10000000,
+                                   requests) != 0) {
+        fputs("scaled numeric redraw contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {

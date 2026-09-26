@@ -39,6 +39,29 @@ int fa18_prepare_scaled_record_numeric(int32_t record_value,
     return fa18_prepare_cockpit_numeric((uint32_t)scaled, 4u, value);
 }
 
+int fa18_update_scaled_numeric(FA18ScaledNumericState *state,
+                               int32_t record_value,
+                               FA18NumericDrawRequest requests[2]) {
+    if (!state || !requests) return -1;
+    const int64_t shifted = ((int64_t)record_value - 0x10000000ll) >> 8;
+    const int32_t scaled = (int32_t)(shifted / 0x7000ll) + 0x177;
+    if ((int16_t)scaled != state->previous_word) {
+        state->previous_word = (int16_t)scaled;
+        state->repeat_count = 2;
+    } else if (state->repeat_count == 0) {
+        return 0;
+    } else {
+        --state->repeat_count;
+    }
+    if (!state->disable_conversion && scaled >= 0 &&
+        fa18_prepare_cockpit_numeric((uint32_t)scaled, 4u,
+                                     &requests[0].value) != 0) return -1;
+    requests[1].value = requests[0].value;
+    requests[0].compositor_mask = 4;
+    requests[1].compositor_mask = 0x0c;
+    return 1;
+}
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;

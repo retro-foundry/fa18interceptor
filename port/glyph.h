@@ -22,6 +22,17 @@ typedef struct {
     uint8_t digits[8];
 } FA18CockpitNumericValue;
 
+typedef struct {
+    uint16_t compositor_mask;
+    FA18CockpitNumericValue value;
+} FA18NumericDrawRequest;
+
+typedef struct {
+    int16_t previous_word;
+    uint8_t repeat_count;
+    uint8_t disable_conversion;
+} FA18ScaledNumericState;
+
 /* Compose `$C25A08` and `$C32740` into one native numeric render value. */
 int fa18_prepare_cockpit_numeric(uint32_t raw_value, uint8_t digit_count,
                                  FA18CockpitNumericValue *value);
@@ -29,6 +40,11 @@ int fa18_prepare_cockpit_numeric(uint32_t raw_value, uint8_t digit_count,
 /* `$C321D2`: scale a selected record long before the four-digit render. */
 int fa18_prepare_scaled_record_numeric(int32_t record_value,
                                        FA18CockpitNumericValue *value);
+
+/* `$C321D2`: update redraw state and produce the two observed submissions. */
+int fa18_update_scaled_numeric(FA18ScaledNumericState *state,
+                               int32_t record_value,
+                               FA18NumericDrawRequest requests[2]);
 
 /* The draw loop's leading-zero check, retaining one digit for zero. */
 const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
