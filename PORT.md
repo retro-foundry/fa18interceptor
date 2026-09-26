@@ -332,6 +332,12 @@ The sealed run075 oracle tail is now represented through its final frame
 2001 onward; frames without a delta reuse the preceding output. This completes
 the byte comparison for the full available run075 recording.
 
+The run075 tail is stored as one pixel pool with span and frame tables. The
+replacement is 52,662,091 bytes and preserves the exact comparison through
+frame 20987. This compact representation is committed as `c04adf5` and pushed
+to the Retro Foundry remote; the four pre-existing analysis edits remain
+uncommitted.
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The
