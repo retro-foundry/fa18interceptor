@@ -11,9 +11,9 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | `$03` | byte | flags, including observed bit 7 test | `update_indexed_shared_record_fields.asm` |
 | `$04` | byte | flags, including observed bit 3 and bit 4 tests | `$C1342C`, `$C1B27E` packets |
 | `$10` | long | copied into the accumulated candidate term before the shifted `+$A6/$AC/$B2` comparisons | `prepare_c27968_candidate_result.asm`; run062 transition trace |
-| `$14` | long | first horizontal pose-coordinate candidate: paired with known altitude `+$18` and `+$1C` in the root projection base vector | `data/root_record_pose_candidate.md` |
-| `$18` | long | selected-record cockpit altitude: arithmetic `>>10`, then `*5`, with an alternate formatter route carrying literal `FT`; run060 root value converts to 145 and the deterministic end screen shows 145 FT | `format_record_offset18_with_optional_ft.asm`; `data/run060_root_altitude_formatter.md` |
-| `$1C` | long | second horizontal pose-coordinate candidate: paired with known altitude `+$18` and `+$14` in the root projection base vector | `data/root_record_pose_candidate.md` |
+| `$14` | long | first horizontal pose-coordinate candidate: paired with known altitude `+$18` and `+$1C` in the root projection base vector; explicitly initialized by `$C09534` in early run060 | `data/root_record_pose_candidate.md`; `data/run060_root_pose_initialization.md` |
+| `$18` | long | selected-record cockpit altitude: arithmetic `>>10`, then `*5`, with an alternate formatter route carrying literal `FT`; run060 root value converts to 145 and the deterministic end screen shows 145 FT; explicitly initialized by `$C094FC` in early run060 | `format_record_offset18_with_optional_ft.asm`; `data/run060_root_altitude_formatter.md`; `data/run060_root_pose_initialization.md` |
+| `$1C` | long | second horizontal pose-coordinate candidate: paired with known altitude `+$18` and `+$14` in the root projection base vector; explicitly initialized by `$C09538` in early run060 | `data/root_record_pose_candidate.md`; `data/run060_root_pose_initialization.md` |
 | `$20` | byte | observed bit 0 gate | `$C1342C` packet |
 | `$26` | word | shared record word updated by parent delta | `apply_parent_delta_to_shared_word.asm` |
 | `$28-$2A` | bytes | read by `$C1342C` into local signed words | `$C1342C` packet |

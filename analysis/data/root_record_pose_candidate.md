@@ -51,11 +51,13 @@ together:
 +$1C  $10A404F0 -> $1059A000
 ```
 
-That is an initialization/placement-shaped transition rather than ordinary
-per-frame render scratch. The current watchpoint ABI does not report the bulk
-writer even with all-source mode, so the writer PC remains unknown. This is
-still not enough to choose aircraft pose over a coincident camera pose, but it
-strengthens the root pose interpretation.
+The exact stepped writer trace now resolves the transition: `$C094FC` writes
+`+$18`, and `$C09534/$C09538` write `+$14/+1C`. The latter pair is the output
+of the root matrix/base transform entered at `$C091E0`. This is a deliberate
+initialization or placement update, rather than ordinary per-frame renderer
+scratch. See `data/run060_root_pose_initialization.md` for the bounded
+instruction evidence. It is still not enough to choose aircraft pose over a
+coincident camera pose, but it strengthens the root pose interpretation.
 
 ## Not yet proven
 

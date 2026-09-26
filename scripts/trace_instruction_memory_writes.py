@@ -18,9 +18,14 @@ def parse_int(value: str) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--restore", type=Path, required=True)
-    parser.add_argument("--playback", type=Path, required=True)
-    parser.add_argument("--breakpoint", type=parse_int, required=True)
-    parser.add_argument("--arm-frame", type=int, required=True)
+    parser.add_argument("--playback", type=Path,
+                        help="replay input used while seeking a breakpoint")
+    parser.add_argument("--breakpoint", type=parse_int,
+                        help="PC at which to pause before stepping")
+    parser.add_argument("--arm-frame", type=int,
+                        help="replay frame on which to arm --breakpoint")
+    parser.add_argument("--start-immediately", action="store_true",
+                        help="step directly from --restore instead of replaying to a breakpoint")
     parser.add_argument("--frames", type=int, required=True)
     parser.add_argument("--watch-address", type=parse_int, required=True)
     parser.add_argument("--watch-size", type=parse_int, required=True)
@@ -29,7 +34,12 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
-    events = read_events(args.playback)
+    if args.start_immediately:
+        if args.breakpoint is not None or args.arm_frame is not None or args.playback is not None:
+            parser.error("--start-immediately cannot be combined with replay-seek arguments")
+    elif args.playback is None or args.breakpoint is None or args.arm_frame is None:
+        parser.error("supply --start-immediately, or all of --playback, --breakpoint, and --arm-frame")
+    events = read_events(args.playback) if args.playback else {}
     decoder = capstone.Cs(capstone.CS_ARCH_M68K,
                           capstone.CS_MODE_BIG_ENDIAN | capstone.CS_MODE_M68K_000)
     engine = Engine(args.config.resolve(), args.output / "saves")
@@ -39,19 +49,22 @@ def main() -> None:
         if not engine.core.retro_unserialize(state, len(state)):
             raise RuntimeError("Core rejected save state")
         hit_frame = None
-        for frame in range(1, args.frames + 1):
-            if frame == args.arm_frame:
-                engine.core.e9k_debug_add_breakpoint(args.breakpoint)
-            for kind, values in events.get(frame, []):
-                engine.event(kind, values)
-            engine.core.retro_run()
-            if engine.core.e9k_debug_is_paused():
-                if engine.regs()["pc"] != args.breakpoint:
-                    raise RuntimeError(f"unexpected breakpoint {engine.regs()['pc']:06x}")
-                hit_frame = frame
-                break
-        if hit_frame is None:
-            raise RuntimeError("breakpoint not reached")
+        if args.start_immediately:
+            hit_frame = 0
+        else:
+            for frame in range(1, args.frames + 1):
+                if frame == args.arm_frame:
+                    engine.core.e9k_debug_add_breakpoint(args.breakpoint)
+                for kind, values in events.get(frame, []):
+                    engine.event(kind, values)
+                engine.core.retro_run()
+                if engine.core.e9k_debug_is_paused():
+                    if engine.regs()["pc"] != args.breakpoint:
+                        raise RuntimeError(f"unexpected breakpoint {engine.regs()['pc']:06x}")
+                    hit_frame = frame
+                    break
+            if hit_frame is None:
+                raise RuntimeError("breakpoint not reached")
         before = engine.memory(args.watch_address, args.watch_size)
         writes = []
         for index in range(args.max_instructions):
@@ -71,7 +84,8 @@ def main() -> None:
                                "before": before.hex(), "after": after.hex(),
                                "registers": registers})
                 before = after
-        report = {"breakpoint": f"${args.breakpoint:06X}", "hit_frame": hit_frame,
+        report = {"breakpoint": f"${args.breakpoint:06X}" if args.breakpoint is not None else None,
+                  "start_immediately": args.start_immediately, "hit_frame": hit_frame,
                   "watch_address": f"${args.watch_address:06X}", "watch_size": args.watch_size,
                   "instructions": args.max_instructions, "writes": writes,
                   "limitation": "Future replay input is not delivered while instruction stepping."}
