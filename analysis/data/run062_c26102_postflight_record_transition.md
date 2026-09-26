@@ -32,15 +32,28 @@ The entry is reached from the standard first-record update chain:
 $C0F01C -> $C1C6BC -> $C22D8E -> JSR $C25B66 -> ... -> $C26102
 ```
 
-The top-level `$C22D4E` caller initially selects `A1=$C46184`. At the live
-`$C26102` invocation, prior code has reached `$C261AA`: its comparison
-`D0 == $0040` is false, hence it sets byte bit 7. The subsequent path requires
-`D2 > $03C0`, `$C4589A == 0`, and bit 6 of `D0` clear before `$C26178` ORs
-word bit 9. That same static path increments `+$46` of the structure pointed
-to by `$C1AB74`, writes one to `$C457C5`, and writes `$04` to `$C45798`.
+The top-level `$C22D4E` caller initially selects `A1=$C46184`. In this exact
+execution, `$C2601C` reloads a zero low-word record index into `D1`; its
+following `TST.W` therefore falls through the `$C260AC` path. `D0=$0010` has
+bit 4 set, so `$C260BE` sets byte bit 7 at `+$03(A1)` and branches directly to
+`$C26102`. (It does not use the distinct `$C261AA` route.) The subsequent path
+requires `D2 > $03C0`, `$C4589A == 0`, and bit 6 of `D0` clear before
+`$C26178` ORs word bit 9. That same static path increments `+$46` of the
+structure pointed to by `$C1AB74`, writes one to `$C457C5`, and writes `$04`
+to `$C45798`.
+
+## Upstream return code
+
+The live `D0=$0010` is not an arbitrary surviving register value. Immediately
+before `$C26014` restores `A1=$C46184`, `$C279B8` tests its signed accumulated
+`D1`; the trace has `$D1=-$15` and takes its `BLT $C279C2` branch.
+`$C279C2` executes `MOVEQ #$10,D0; UNLK A6; RTS`, returning code `$10` to the
+record-update continuation. The preceding helper's byte-exact checks show
+that this is its negative accumulated-candidate return, but do not assign the
+candidate components physical axes or a landing meaning.
 
 `$C45798=$04` is later the saved callback code that routes run062 through the
-non-success-side `$C10DAE` continuation. This establishes an update-to-
-postflight-callback dataflow chain. It does **not** establish that `$03C0` is
-a landing threshold, that `D2` is an altitude/speed/position value, or that
-this record belongs to the player.
+non-success-side `$C10DAE` continuation. This establishes a negative-candidate
+return -> record flag/update -> postflight-callback dataflow chain. It does
+**not** establish that `$03C0` is a landing threshold, that `D2` is an
+altitude/speed/position value, or that this record belongs to the player.
