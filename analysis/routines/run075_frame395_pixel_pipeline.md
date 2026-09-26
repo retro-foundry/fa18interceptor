@@ -62,6 +62,12 @@ regions in the same frame construction:
 Representative later entries are `(159,132, mode inputs 1/3)`, `(159,71,
 0x3FFF)`, and `(293,156, 0x00000003/0x00000000)`. Each individual hit is
   preserved in `build/run075_frame395_c2f688_hit16` through `hit30`. These
-  records establish that frame 395 is assembled by several draw families;
-  they do not yet identify the source scene structs or the complete caller
-  loop.
+records establish that frame 395 is assembled by several draw families;
+they do not yet identify the source scene structs or the complete caller
+loop.
+
+The first captured call has stack pointer `$C55034`; the saved return address
+at that stack location is `$C31708`. The shared body uses the established
+renderer tables `$C2F766`, `$C2F786`, and `$C2F7C6`. `$C31708` is therefore the
+next caller boundary for static disassembly and source reconstruction of the
+frame-395 scene loop.
