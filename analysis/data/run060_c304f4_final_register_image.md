@@ -5,7 +5,7 @@ The run060 replay was stopped at the first instruction of `$C304F4`, the
 
 | Register | Value |
 | --- | ---: |
-| `BLTCON0` | `$00FC` |
+| `BLTCON0` readback | `$00FC` |
 | `BLTCON1` | `$0002` |
 | `BLTAFWM/BLTALWM` | `$00FF/$00FF` |
 | `BLTCPT` | `$00000037` |
@@ -17,10 +17,11 @@ The run060 replay was stopped at the first instruction of `$C304F4`, the
 | `BLTSIZE` before the instruction | `$0014` |
 
 The CPU register at the trigger is `D0=$0D14`; `$C304F4` writes that value to
-`BLTSIZE`. The image therefore differs from the `$C304B2` setup packet. The
-`$00FC` control readback is retained as evidence but is not yet assigned a
-semantic minterm: the preceding caller path must explain the control change
-before this register image can drive the native renderer.
+`BLTSIZE`. The return bounded trace shows the preceding branch writes
+`move.w #$0DFC,$40(a0)` before the common `$C304B2` setup. The custom readback
+is `$00FC`, so the high control bits are not preserved by the readback image;
+the programmed final control word is `$0DFC`. This is the actual final mode
+for the run060 fill submission.
 
 Authority: `build/run060_c304f4_final_regs/custom_at_breakpoint.bin` and
 `trace.jsonl`. This capture uses run060 only.

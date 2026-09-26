@@ -976,9 +976,9 @@ game loop.
   `FA18AreaFillPacket` records that complete run060 packet and has a contract
   test. The packet is not yet connected to the live renderer.
 - A direct run060 `$C304F4` trigger capture shows a separate final custom
-  register image, including `$00FC` at `BLTCON0`; it is recorded in
-  `analysis/data/run060_c304f4_final_register_image.md` and remains separate
-  until the caller transition is explained.
+  register image, including `$00FC` at `BLTCON0`; the return bounded trace
+  proves the programmed word is `$0DFC`. It is recorded in
+  `analysis/data/run060_c304f4_final_register_image.md`.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.
