@@ -38,9 +38,22 @@ following `TST.W` therefore falls through the `$C260AC` path. `D0=$0010` has
 bit 4 set, so `$C260BE` sets byte bit 7 at `+$03(A1)` and branches directly to
 `$C26102`. (It does not use the distinct `$C261AA` route.) The subsequent path
 requires `D2 > $03C0`, `$C4589A == 0`, and bit 6 of `D0` clear before
-`$C26178` ORs word bit 9. That same static path increments `+$46` of the
-structure pointed to by `$C1AB74`, writes one to `$C457C5`, and writes `$04`
-to `$C45798`.
+`$C26178` ORs word bit 9. The fall-through sequence then is:
+
+```text
+$C26184  MOVEA.L  $C1AB74,A0
+$C2618A  ADDQ.W   #1,$46(A0)
+$C2618E  MOVE.B   #1,$C457C5
+$C26196  MOVE.B   #4,$C45798
+```
+
+Thus `$C26196` is the exact static producer of selector code `$04` on that
+route. A 60,000-instruction step trace beginning at `$C25B66` from the
+frame-2,000 checkpoint reports no *value transition* at `$C45798`: its
+checkpoint value is already `$04`, so re-storing `$04` is invisible to the
+tracer's before/after memory comparison. This does not establish that the
+observed frame-125 invocation executes the store; it does establish the
+instruction that produces the code whenever this fall-through is taken.
 
 ## Upstream return code
 
@@ -85,10 +98,13 @@ candidate-to-flagged-record identity for this run062 path. It does not prove
 the base record is the player record or identify any component as an axis.
 
 `$C45798=$04` is later the saved callback code that routes run062 through the
-non-success-side `$C10DAE` continuation. This establishes a negative-candidate
-return -> record flag/update -> postflight-callback dataflow chain. It does
-**not** establish that `$03C0` is a landing threshold, that `D2` is an
-altitude/speed/position value, or that this record belongs to the player.
+non-success-side `$C10DAE` continuation. The checkpoint proves the code is
+already live by global frame 2,000; `$C26196` proves its route-local producer,
+but retained delta traces do not date the producing write. This establishes a
+negative-candidate return -> record flag/update -> postflight-callback dataflow
+chain. It does **not** establish that `$03C0` is a landing threshold, that
+`D2` is an altitude/speed/position value, or that this record belongs to the
+player.
 
 ## Run060 negative evidence
 
