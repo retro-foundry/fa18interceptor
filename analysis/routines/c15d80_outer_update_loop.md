@@ -1,7 +1,8 @@
 # Outer update-loop slice at `$C15D80`
 
-Classification: **structural caller loop**. It is the first static loop
-boundary above the byte-exact `$C0EFD4-$C0F3C3` parent update routine.
+Classification: **behavioral display-synchronized update loop**. It is the
+first static loop boundary above the byte-exact `$C0EFD4-$C0F3C3` parent update
+routine.
 
 `$C15DA2` calls `$C0EFD4`; after `$C53FC0` and `$C1612C`, `$C15DB2` branches
 back to `$C15D96`. The initial `$C0E78A` call at `$C15D8E` therefore occurs
@@ -13,3 +14,10 @@ back-edge is structural evidence, not proof of a complete main-loop function.
 
 The final pre-back-edge child is dynamically bounded at `$C1612C -> $C15DB2`;
 see [`c1612c_outer_loop_child.md`](c1612c_outer_loop_child.md).
+
+`$C1612C` begins each observed invocation with graphics.library
+`WaitBOVP(A0=$C1822A)`. Therefore every iteration of this back-edge contains
+an explicit Amiga display-synchronization gate after the parent update and
+after `DisownBlitter`. This is the main update-loop boundary for the observed
+game path. The exact ViewPort contents, raster phase, and whether any other
+task or interrupt contributes additional pacing remain unassigned.

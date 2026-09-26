@@ -1,14 +1,13 @@
-; Byte-exact library-vector wrapper $C53F88-$C53F9B.
-; The library identity and LVO operation meaning remain unassigned.
+; Byte-exact graphics.library WaitBOVP wrapper $C53F88-$C53F9B.
                 org     $C53F88
 
-LIBRARY_BASE_POINTER            equ $C182CA
-LIBRARY_LVO_192                 equ -$192
+GFX_BASE_POINTER                equ $C182CA
+WAIT_BOVP_LVO                   equ -$192
 
-invoke_library_lvo_192_with_a0_argument:
+invoke_graphics_wait_bovp_with_viewport:
                 move.l  a6,-(sp)
                 movea.l 8(sp),a0
-                movea.l LIBRARY_BASE_POINTER.l,a6
-                jsr     LIBRARY_LVO_192(a6)
+                movea.l GFX_BASE_POINTER.l,a6
+                jsr     WAIT_BOVP_LVO(a6)
                 movea.l (sp)+,a6
                 rts
