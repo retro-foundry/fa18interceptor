@@ -992,10 +992,11 @@ game loop.
 - Added `fa18_execute_planar_blit`, which maps that word operation onto named
   semantic planes and chunky-sized page coordinates. The display contract now
   exercises the `$FC` path through this page boundary.
-- The bounded run060 `$C304F4` DMA capture now reproduces the exact 1,790-byte
-  destination delta without a full-frame settle. It is recorded in
-  `analysis/data/run060_c304f4_bounded_dma.md` and is the fixture for wiring
-  the final `$0DFC` fill operation.
+- The bounded run060 `$C304F4` DMA capture reproduces the earlier 1,790-byte
+  destination delta, but the replay bridge advances ordinary frames between
+  single instructions. It is supporting evidence only; the exact operation
+  output remains unisolated. The limitation is recorded in
+  `analysis/data/run060_c304f4_bounded_dma.md`.
 - The complete `$C2FD8C` active page packet is recorded in
   `analysis/data/run075_frame559_c2fd8c_active_page_packet.md`: 20 words by
   144 rows, with lane order 4, 3, 2, 1 mapped to native planes 3, 2, 1, 0.
