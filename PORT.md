@@ -106,11 +106,11 @@ infer a function's purpose merely from a rendered frame.
   submissions across four planes. The first 99-row submission is now the
   active gate; its first observed mismatch is packet 12 at offset `$1572`,
   where the native word is `$FBFF` and the emulator word is `$FBC0`.
-- 2026-09-27: Packet 12 DMA tracing shows its C channel reads a separate
-  source stream while D writes the active display plane. The current executor
-  intentionally aliases C reads to the destination plane, which explains why
-  the short groups pass but the long group diverges. The next semantic job
-  struct needs an explicit C source stream before packet 12 can be promoted.
+- 2026-09-27: Re-audited packet 12 DMA record flags against Engine9000's
+  `record_dma_blit` mapping. The `extra=2` reads previously classified as C
+  are unrelated DMA records; a line C read would carry the line flag in
+  `extra=34`. The separate C source conclusion is withdrawn. Packet 12's
+  remaining divergence is still a line pipeline or pointer timing issue.
 
 - 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the
