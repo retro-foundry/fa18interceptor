@@ -1,5 +1,6 @@
 #include "line.h"
 #include "run075_frame395_lines.h"
+#include "run075_frame395_line_packet.h"
 
 #include <stdio.h>
 #include <assert.h>
@@ -9,12 +10,7 @@ int main(void) {
     assert(FA18_RUN075_FRAME395_LINES == 12);
     assert(fa18_run075_frame395_lines[0].x0 == 175);
     assert(fa18_run075_frame395_lines[11].x1 == 199);
-    const FA18LinePacket packet = {
-        .bltcon1 = 85, .bltbmod = 0xfff8, .bltamod = 0,
-        .bltsize = 0, .destination_offset = 94u * 320u + 21u,
-        .active_plane_mask = 0x0f
-    };
-    assert(fa18_validate_line_packet(&packet));
+    assert(fa18_validate_line_packet(&fa18_run075_frame395_line_packet));
     /* Generic raster contract. A settled run060+ visual fixture is still
      * required before this primitive can be promoted to port parity. */
     FA18IndexedFrameBuffer framebuffer;
