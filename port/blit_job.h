@@ -19,7 +19,16 @@ typedef struct {
     uint16_t height_rows;
 } FA18BlitExtent;
 
+typedef struct {
+    FA18BlitExtent extent;
+    uint16_t first_mask;
+    uint16_t last_mask;
+    uint8_t source_plane_mask;
+} FA18DisplayBlitGeometry;
+
 FA18BlitExtent fa18_decode_blit_extent(uint16_t bltsize);
+int fa18_decode_display_blit_geometry(const FA18DisplayBlitPacket *packet,
+                                      FA18DisplayBlitGeometry *geometry);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 

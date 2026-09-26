@@ -9,6 +9,11 @@ int main(void) {
            transition[0].width_height == 0x1e02);
     assert(transition[1].c_source == 0x6eef &&
            transition[2].d_destination == 0x6e58);
+    FA18DisplayBlitGeometry geometry;
+    assert(fa18_decode_display_blit_geometry(&transition[0], &geometry) == 0);
+    assert(geometry.extent.width_words == 2 && geometry.extent.height_rows == 120);
+    assert(geometry.first_mask == 0xffff && geometry.last_mask == 0xffff);
+    assert(geometry.source_plane_mask == 0x0a);
 
     FA18BlitExtent extent = fa18_decode_blit_extent(0x0e14);
     assert(extent.width_words == 20 && extent.height_rows == 56);

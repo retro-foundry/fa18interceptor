@@ -926,6 +926,11 @@ game loop.
 - Added `fa18_blit_planar_words`, a bounded semantic plane to plane copy with
   word edge masks and selectable planes. Its display contract test covers
   source, destination, extent, and mask behavior.
+- Added `fa18_decode_display_blit_geometry`, which exposes recovered packet
+  extent, edge masks, and enabled channels as semantic fields. The `0x6e..`
+  workspace pointers remain trace metadata until their page coordinates are
+  established from memory evidence, so frame559 is still gated from using
+  this operation.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
