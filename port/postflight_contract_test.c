@@ -30,6 +30,11 @@ int main(void) {
         adjacent += (fa18_run075_frame395_postflight[i].flags & 1u) != 0;
     }
     assert(adjacent == 12);
+    FA18PostflightScene scene;
+    fa18_postflight_scene_init(&scene, 0, 10, 0);
+    assert(scene.table_selection == 0 && scene.record_cursor == 0);
+    assert(scene.record_limit == 10 && scene.vertical_offset == 0);
+    assert(scene.renderer_mode == 0);
     FA18PostflightState state = {.vertical_offset = 10, .table_limit = 2};
     Capture capture_state = {0};
     assert(fa18_postflight_submit(&state, (FA18PostflightRecord){158, 167, 0},

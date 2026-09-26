@@ -21,6 +21,21 @@ typedef struct {
     uint8_t rejected;
 } FA18PostflightState;
 
+typedef struct {
+    uint8_t table_selection;
+    uint16_t record_cursor;
+    uint16_t record_limit;
+    int16_t vertical_offset;
+    uint8_t renderer_mode;
+} FA18PostflightScene;
+
+/* Frame-395 entry contract recovered at $C31392: selector zero, ten-record
+ * initial limit, and renderer mode zero. */
+void fa18_postflight_scene_init(FA18PostflightScene *scene,
+                                uint8_t table_selection,
+                                uint16_t record_limit,
+                                int16_t vertical_offset);
+
 typedef int (*FA18PostflightSubmit)(FA18PostflightRenderer renderer,
                                     int16_t x, int16_t y, void *context);
 
