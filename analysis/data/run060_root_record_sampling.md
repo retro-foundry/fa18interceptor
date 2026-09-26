@@ -1,8 +1,9 @@
 # Run060 root control-record sampling
 
-Classification: **sealed full-replay negative evidence**. This sampling tests
-whether the first 512-byte control-table record at `$C46184` can be called the
-moving player record. It cannot.
+Classification: **sealed full-replay negative evidence**, with one later
+field-level physical identification. This sampling tests whether the first
+512-byte control-table record at `$C46184` can be called the complete moving
+player position/orientation record. It cannot.
 
 The complete deterministic run060 replay was sampled every 250 GUI frames for
 the root record's leading fields, `+$10`, `+$14/$18/$1C`, `+$66/$6E`, and
@@ -24,9 +25,12 @@ the two selectors have different observed roles.
 
 Therefore `$C46184` is a useful selected-record base and the run062
 negative-candidate record, but its root slot is **not** established as the
-moving player position/orientation record. A later bounded run060 trace does
-show that `$C13E10` selects this root slot in one real input-control update;
-see `run060_c13e10_root_control_record.md`. That promotion makes record zero
-an input-controlled record in that scenario, not a spatial/player record. The
-next player-state experiment must trace its changing fields into projection or
-camera output rather than infer motion from selection alone.
+complete moving player position/orientation record. A later bounded run060
+trace does show that `$C13E10` selects this root slot in one real
+input-control update; see `run060_c13e10_root_control_record.md`. A separate
+live formatter packet proves root `+$18` is the selected cockpit-altitude
+source (145 FT in this interval); see `run060_root_altitude_formatter.md`.
+Those promotions establish an input-controlled record with an aircraft
+altitude field, not horizontal position or orientation. The next player-state
+experiment must trace the remaining fields into world placement or camera
+output rather than infer them from selection alone.

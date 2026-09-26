@@ -11,6 +11,7 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | `$03` | byte | flags, including observed bit 7 test | `update_indexed_shared_record_fields.asm` |
 | `$04` | byte | flags, including observed bit 3 and bit 4 tests | `$C1342C`, `$C1B27E` packets |
 | `$10` | long | copied into the accumulated candidate term before the shifted `+$A6/$AC/$B2` comparisons | `prepare_c27968_candidate_result.asm`; run062 transition trace |
+| `$18` | long | selected-record cockpit-altitude source: arithmetic `>>10`, then `*5`, formatted through a literal `FT` suffix; run060 root value `$00007708` displays 145 FT | `format_record_offset18_with_optional_ft.asm`; `data/run060_root_altitude_formatter.md` |
 | `$20` | byte | observed bit 0 gate | `$C1342C` packet |
 | `$26` | word | shared record word updated by parent delta | `apply_parent_delta_to_shared_word.asm` |
 | `$28-$2A` | bytes | read by `$C1342C` into local signed words | `$C1342C` packet |
@@ -30,5 +31,6 @@ selected base for downstream helpers. The fixed stride is evidence for a
 
 Do not treat absent offsets as unused or the entries above as a complete object
 definition. They are a reusable naming contract for byte-exact reconstructions.
-In particular, the root table slot `$C46184` is not established as the moving
-player record; see `data/run060_root_record_sampling.md`.
+In particular, the root table slot `$C46184` is not established as the full
+moving player position/orientation record. In run060 it does supply the
+selected cockpit-altitude field; see `data/run060_root_altitude_formatter.md`.
