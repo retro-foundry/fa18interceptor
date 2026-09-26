@@ -339,6 +339,9 @@ contract test and ready for the raw OCS input adapter.
 The `$C16F1C` `JOY0DAT` bit derivation is also represented by
 `FA18Joy0DerivedInput` and `fa18_flight_decode_joy0dat`; it preserves the two
 independent XOR tests before command direction selection.
+The direction branches remain separate because the available run060 packets
+prove their selected commands individually, while the complete raw `JOY0DAT`
+to branch polarity table has not yet been captured.
 
 `fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
 the computed lateral and forward terms update `$14/$1C`, while the signed
