@@ -888,3 +888,7 @@ game loop.
   destination `$0798`; its oracle placement begins at `(187,48)`.
 - Frame 535 now uses source `88 88 88 F8 C8 C8 C8`, mask `$9000`, and the
   repeated destination `$0798`; its oracle placement begins at `(194,48)`.
+- The later frame557 HUD transition reaches `$C2F8B4` with a semantic plane
+  word update: one lane AND `$FFFD`, the next OR `$0002`, and the third OR
+  zero. This is recorded in the native plane word contract while its caller
+  supplied screen coordinate remains unresolved.
