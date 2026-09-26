@@ -16,6 +16,14 @@ int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
 const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
                                              uint8_t digit_count);
 
+/* `$C32858-$C3287D`: merge one glyph byte per row into a strided longword
+ * destination. `destination_offset` is relative to the selected native
+ * plane, and each following row is 40 bytes later. */
+int fa18_merge_glyph_stream(FA18PlanarPage *page, uint8_t plane_index,
+                            size_t destination_offset,
+                            const uint8_t *glyph_bytes, uint16_t row_count,
+                            uint8_t shift_count);
+
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the
  * source packet's mode/shift word; the byte stream and selected plane replace
  * the original untyped registers and address values. */

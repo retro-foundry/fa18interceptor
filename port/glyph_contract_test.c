@@ -25,6 +25,17 @@ int main(void) {
         return 1;
     }
 
+    FA18PlanarPage merge_page;
+    memset(&merge_page, 0, sizeof merge_page);
+    const uint8_t merge_bytes[2] = {0xf0u, 0x80u};
+    if (fa18_merge_glyph_stream(&merge_page, 1u, 0u, merge_bytes, 2u, 0u) != 0 ||
+        merge_page.plane[1][0] != 0xe0u ||
+        merge_page.plane[1][1] != 0x00u ||
+        merge_page.plane[1][FA18_PLANAR_ROW_BYTES] != 0x80u) {
+        fputs("strided glyph merge contract failed\n", stderr);
+        return 1;
+    }
+
     FA18PlanarPage page;
     const uint8_t glyph[2] = {0xf0u, 0x80u};
     memset(&page, 0xff, sizeof page);

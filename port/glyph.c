@@ -1,5 +1,8 @@
 #include "glyph.h"
 
+static uint32_t read_be32(const uint8_t *bytes);
+static void write_be32(uint8_t *bytes, uint32_t value);
+
 int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
                                uint8_t *output) {
     if (!output || digit_count == 0 || digit_count > 8) return -1;
@@ -16,6 +19,30 @@ const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
     uint8_t first = 0;
     while (first + 1u < digit_count && digits[first] == '0') ++first;
     return &digits[first];
+}
+
+int fa18_merge_glyph_stream(FA18PlanarPage *page, uint8_t plane_index,
+                            size_t destination_offset,
+                            const uint8_t *glyph_bytes, uint16_t row_count,
+                            uint8_t shift_count) {
+    if (!page || plane_index >= FA18_PLANES || !glyph_bytes || row_count == 0 ||
+        shift_count > 31u || destination_offset > FA18_PLANAR_PAGE_BYTES - 4u ||
+        (size_t)(row_count - 1u) * FA18_PLANAR_ROW_BYTES >
+            FA18_PLANAR_PAGE_BYTES - 4u - destination_offset) return -1;
+
+    const uint32_t mask = 0xe0000000u >> shift_count;
+    for (uint16_t row = 0; row < row_count; ++row) {
+        const size_t offset = destination_offset +
+            (size_t)row * FA18_PLANAR_ROW_BYTES;
+        uint8_t *destination = &page->plane[plane_index][offset];
+        uint32_t old = read_be32(destination);
+        /* The source byte is loaded into the low byte, then ROR.L #8 moves it
+         * into the high byte before the shared right shift. */
+        const uint32_t rotated = (uint32_t)glyph_bytes[row] << 24;
+        const uint32_t shifted = rotated >> shift_count;
+        write_be32(destination, (shifted & mask) | (old & ~mask));
+    }
+    return 0;
 }
 
 static uint16_t rol16(uint16_t value, unsigned count) {
