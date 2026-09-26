@@ -424,6 +424,12 @@ lookup, stream bounds, and the `$C32858` row merge are one tested operation.
 Its destination, plane, shift, and row count are explicit inputs, so the
 frame-398 caller can supply traced values as they become available.
 
+The bounded frame-398 `$C32740` trace supplies packed value `$00001225` with
+`D0=3`; the formatter therefore emits the scratch characters `"1225"` before
+the four glyph records are consumed. The trace proves this producer input but
+does not yet identify the caller's screen coordinates or all other frame-398
+pixel writers.
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The
