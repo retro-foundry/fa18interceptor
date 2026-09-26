@@ -831,3 +831,8 @@ game loop.
   their previously captured `$041A`/`$041C` destinations, `$C000`/`$A000`
   masks, and source streams. The first decoded text packets no longer depend
   on the HUD fixture path.
+- The run075 `$C2F688` calls observed around frames 554–561 change internal
+  Chip bytes while adjacent oracle frames remain pixel-identical. They are
+  recorded as off-screen/internal renderer work and do not advance the visible
+  chunky gate. See
+  [the frame554–561 trace note](analysis/data/run075_frames554_561_c2f688_offscreen.md).
