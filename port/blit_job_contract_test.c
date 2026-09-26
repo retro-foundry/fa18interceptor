@@ -10,5 +10,10 @@ int main(void) {
     assert(fa18_choose_lane_control(1, 1) == FA18_LANE_CONTROL_C);
     assert(fa18_choose_lane_control(0, 0) == FA18_LANE_CONTROL_B);
     assert(fa18_choose_lane_control(0, 1) == FA18_LANE_CONTROL_A);
+    fa18_prepare_adjusted_lane_blit(0x0342, 0x1000, 0x20, 0x0200,
+                                    0x0100, 0x0120, 0x0012, 1, &operation);
+    assert(operation.bltcon0 == 0x0fec && operation.bltcon1 == 2);
+    assert(operation.bltapt == 0x1000 && operation.bltbpt == 0x1020);
+    assert(operation.bltcpt == 0x12bfe && operation.bltamod == 1);
     puts("blit job contract passed"); return 0;
 }

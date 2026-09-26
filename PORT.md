@@ -373,6 +373,11 @@ now represented by `FA18LaneControl` and `FA18BlitOperation`. The native job
 keeps the proven control words, shared lane pointer, size word, and D4/D3
 branch polarity without modeling Custom-chip registers; area source and
 display-plane meaning remain evidence targets.
+The complete observed `$C304FA` adjusted lane arithmetic is also represented
+by `fa18_prepare_adjusted_lane_blit`, including the vertical pointer offset,
+line modulo, mode/limit correction, and D3 control selection. Its operation
+still stops at typed job preparation because the run060+ captures do not
+identify the source pixels for a general area fill.
 The native playback loop now applies port-0 `J` events to a semantic packed
 flight-control byte and updates `FA18FlightControlLanes` at the event frame.
 This connects the proven run060 input path to native state without inventing
