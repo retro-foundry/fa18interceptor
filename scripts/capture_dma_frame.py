@@ -63,7 +63,7 @@ def main() -> None:
         selected = []
         for i, r in enumerate(rows):
             if ((0xC304B0 <= r.addr <= 0xC30500) or
-                    (0xDFF040 <= r.addr <= 0xDFF060) or
+                    (0xDFF040 <= r.addr <= 0xDFF076) or
                     (0x12BC0 <= r.addr < 0x1A8C0) or
                     r.addr in (0x76EE, 0x14266, 0x12BC0, 0x10026, 0x37) or r.type != 0):
                 selected.append({'index': i, 'hpos': r.hpos, 'vpos': r.vpos, 'reg': f'{r.reg:04X}',

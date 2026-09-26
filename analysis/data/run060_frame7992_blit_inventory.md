@@ -18,3 +18,8 @@ the widened DMA capture. Frame 7992 contains 36 ordered jobs:
 All later jobs use `$28` C/D modulos and fan out to the four semantic planes.
 Their destination offsets and source asset selections still need to be
 resolved before frame 7992 can use the complete native sequence.
+
+The widened DMA capture also records the line data registers. Jobs 4--35 all
+use `BLTADAT=$8000` and `BLTBDAT=$FFFF`, as required by the Engine9000 line-mode
+implementation. The capture and inventory scripts now include these registers
+so the native recurrence has the actual A/B seed values.

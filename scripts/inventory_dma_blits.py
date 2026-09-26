@@ -9,7 +9,7 @@ def main():
     jobs=[]
     for r in records:
         addr=int(r['addr'],16); value=int(r['dat'],16)&0xffff
-        if not 0xdff040 <= addr <= 0xdff066 or addr & 1: continue
+        if not 0xdff040 <= addr <= 0xdff076 or addr & 1: continue
         regs[addr]=value
         if addr != 0xdff058: continue
         def pair(hi,lo): return (regs.get(hi,0)<<16)|regs.get(lo,0)
@@ -18,6 +18,7 @@ def main():
                      'first_mask':regs.get(0xdff044,0),'last_mask':regs.get(0xdff046,0),
                      'c':pair(0xdff048,0xdff04a),'b':pair(0xdff04c,0xdff04e),
                      'a':pair(0xdff050,0xdff052),'d':pair(0xdff054,0xdff056),
+                     'bdat':regs.get(0xdff072,0),'adat':regs.get(0xdff074,0),
                      'size':value,'cmod':regs.get(0xdff060,0),
                      'bmod':regs.get(0xdff062,0),'amod':regs.get(0xdff064,0),
                      'dmod':regs.get(0xdff066,0)})
