@@ -241,6 +241,9 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
+The native live gate currently covers run075 frames 200 through 234. Frame
+235 remains locked until its changed display page is reconstructed.
+
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
 python scripts/pack_port_frames.py --oracle build/port_run075_demo_oracle --last-frame 20987 --output build/port_run075_demo.fa18
@@ -259,6 +262,9 @@ pauses, Right advances one paused frame, and Esc exits. `--dump-frame N
 OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
 
 ## Validation gates
+
+- Frame 234 now has a native post-selection text page and scheduling state
+  contract. The next native gate is frame 235.
 
 - Oracle capture must report the canonical restored-state SHA-256 and exact
   frame labels. A source run or config mismatch fails immediately.

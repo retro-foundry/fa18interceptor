@@ -1,15 +1,16 @@
 #include "menu.h"
 
 #include "menu_frame200_data.h"
+#include "menu_frame234_data.h"
 
 #include <string.h>
 
-void fa18_render_run075_frame200_menu(FA18IndexedFrameBuffer *framebuffer,
-                                      uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT]) {
-    if (!framebuffer || !rgb444) return;
+static void render_menu_runs(FA18IndexedFrameBuffer *framebuffer,
+                             uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT],
+                             const uint32_t *runs, size_t run_count) {
     memset(framebuffer->pixels, 0, sizeof framebuffer->pixels);
-    for (size_t i = 0; i < FA18_MENU_FRAME200_RUNS; ++i) {
-        const uint32_t packed = fa18_menu_frame200_runs[i];
+    for (size_t i = 0; i < run_count; ++i) {
+        const uint32_t packed = runs[i];
         const uint16_t y = (uint16_t)(packed >> 24);
         const uint16_t start = (uint16_t)((packed >> 15) & 0x1ffu);
         const uint16_t length = (uint16_t)((packed >> 6) & 0x1ffu);
@@ -21,6 +22,20 @@ void fa18_render_run075_frame200_menu(FA18IndexedFrameBuffer *framebuffer,
     for (size_t i = 0; i < FA18_WIDTH * FA18_HEIGHT; ++i) {
         rgb444[i] = fa18_menu_frame200_palette[framebuffer->pixels[i]];
     }
+}
+
+void fa18_render_run075_frame200_menu(FA18IndexedFrameBuffer *framebuffer,
+                                      uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT]) {
+    if (!framebuffer || !rgb444) return;
+    render_menu_runs(framebuffer, rgb444, fa18_menu_frame200_runs,
+                     FA18_MENU_FRAME200_RUNS);
+}
+
+void fa18_render_run075_frame234_menu(FA18IndexedFrameBuffer *framebuffer,
+                                      uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT]) {
+    if (!framebuffer || !rgb444) return;
+    render_menu_runs(framebuffer, rgb444, fa18_menu_frame234_runs,
+                     FA18_MENU_FRAME234_RUNS);
 }
 
 int fa18_select_run075_demo_mode(FA18MenuState *state) {
