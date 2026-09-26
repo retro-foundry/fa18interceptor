@@ -317,6 +317,12 @@ The flight state remains stable between the later observed boundaries. Exact
 display deltas are now recorded for frames 881, 894, 907, 932, 945, and 970;
 the native replay comparison passes through frame 970.
 
+The bounded control consumer `$C1B410` is now ported as
+`fa18_flight_update_control_lanes`. It decodes packed fields `$30`, `$C0`, and
+`$0C`, applies the observed signed one-unit or three-unit updates, and clamps
+the three semantic lanes to `[-20,20]`, `[-20,20]`, and `[-60,60]`. The lanes
+remain unnamed until a caller proves their physical flight meaning.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,

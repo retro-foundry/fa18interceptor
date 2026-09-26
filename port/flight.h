@@ -16,6 +16,16 @@ typedef struct {
     int16_t attitude[3][3];
 } FA18FlightPose;
 
+/* Semantic form of the three bounded control bytes at record offsets
+ * `$28-$2A`; axis physical meanings remain intentionally unassigned. */
+typedef struct {
+    int8_t lane[3];
+} FA18FlightControlLanes;
+
+/* `$C1B410`: decode the packed control byte at the observed `$65` boundary. */
+int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,
+                                     uint8_t packed_control);
+
 /* `$C14D32`: the signed vertical delta is committed to the active pose. */
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);
 
