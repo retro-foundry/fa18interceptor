@@ -29,12 +29,25 @@ typedef struct {
     uint8_t renderer_mode;
 } FA18PostflightScene;
 
+typedef struct {
+    int16_t horizontal_offset;
+    int16_t vertical_offset;
+    int16_t horizontal_min;
+    int16_t horizontal_max;
+    int16_t vertical_base;
+    uint8_t renderer_mode;
+    uint8_t suppressed_planes;
+} FA18PostflightComponent;
+
 /* Frame-395 entry contract recovered at $C31392: selector zero, ten-record
  * initial limit, and renderer mode zero. */
 void fa18_postflight_scene_init(FA18PostflightScene *scene,
                                 uint8_t table_selection,
                                 uint16_t record_limit,
                                 int16_t vertical_offset);
+
+int fa18_postflight_component_coordinates(
+    const FA18PostflightComponent *component, int16_t *x, int16_t *y);
 
 typedef int (*FA18PostflightSubmit)(FA18PostflightRenderer renderer,
                                     int16_t x, int16_t y, void *context);

@@ -35,6 +35,15 @@ int main(void) {
     assert(scene.table_selection == 0 && scene.record_cursor == 0);
     assert(scene.record_limit == 10 && scene.vertical_offset == 0);
     assert(scene.renderer_mode == 0);
+    FA18PostflightComponent component = {
+        .horizontal_min = 1, .horizontal_max = 0x13d,
+        .vertical_base = 0x81, .renderer_mode = 8
+    };
+    int16_t x = 0, y = 0;
+    assert(fa18_postflight_component_coordinates(&component, &x, &y) == 0);
+    assert(x == 160 && y == 129 && component.renderer_mode == 8);
+    component.horizontal_offset = -200;
+    assert(fa18_postflight_component_coordinates(&component, &x, &y) == 1);
     FA18PostflightState state = {.vertical_offset = 10, .table_limit = 2};
     Capture capture_state = {0};
     assert(fa18_postflight_submit(&state, (FA18PostflightRecord){158, 167, 0},

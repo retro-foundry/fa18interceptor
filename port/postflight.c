@@ -12,6 +12,20 @@ void fa18_postflight_scene_init(FA18PostflightScene *scene,
     scene->renderer_mode = 0;
 }
 
+int fa18_postflight_component_coordinates(
+    const FA18PostflightComponent *component, int16_t *x, int16_t *y) {
+    if (!component || !x || !y || component->horizontal_min > component->horizontal_max) {
+        return -1;
+    }
+    const int x_value = 160 + component->horizontal_offset;
+    if (x_value < component->horizontal_min || x_value > component->horizontal_max) {
+        return 1;
+    }
+    *x = (int16_t)x_value;
+    *y = (int16_t)(component->vertical_base + component->vertical_offset);
+    return 0;
+}
+
 int fa18_postflight_submit(FA18PostflightState *state,
                            FA18PostflightRecord record,
                            FA18PostflightSubmit submit, void *context) {
