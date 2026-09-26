@@ -27,3 +27,9 @@ The next changed text boundary is Engine frame 467. It advances the source
 entry and destination by two bytes, uses source bytes `C8 C8 C8 C8 D8 50 70`,
 mask `$A000`, and the same plane mode mask `$09`. The same contract now checks
 that second packet as well, preserving the observed per-frame cursor advance.
+
+The following boundary is Engine frame 469. Its source bytes are
+`F8 80 80 F0 C0 C0 F8`, the relative destination is `$041E`, and the mask is
+`$1000`; the plane mode mask remains `$09`. The captured four-plane words are
+also checked, confirming that the lane writer is reusable across successive
+text positions while the caller advances the source and destination cursors.

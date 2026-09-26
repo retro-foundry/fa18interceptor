@@ -417,6 +417,59 @@ int main(void) {
         }
     }
 
+    /* Frame 469 is the next visible text boundary in the same replay. */
+    static const uint8_t run075_frame469_glyph[7] = {
+        0xf8u, 0x80u, 0x80u, 0xf0u, 0xc0u, 0xc0u, 0xf8u
+    };
+    static const uint32_t frame469_before[4][7] = {
+        {0u, 0u, 0u, 0u, 0u, 0u, 0u},
+        {0xffffffffu, 0xffffffffu, 0xffffffffu, 0xffffffffu,
+         0xffffffffu, 0xffffffffu, 0xffffffffu},
+        {0u, 0u, 0u, 0u, 0u, 0u, 0u},
+        {0xffffffffu, 0xffffffffu, 0xffffffffu, 0xffffffffu,
+         0xffffffffu, 0xffffffffu, 0xffffffffu}
+    };
+    static const uint32_t frame469_after[4][7] = {
+        {0x7c000000u, 0x40000000u, 0x40000000u, 0x78000000u,
+         0x60000000u, 0x60000000u, 0x7c000000u},
+        {0x83ffffffu, 0xbfffffffu, 0xbfffffffu, 0x87ffffffu,
+         0x9fffffffu, 0x9fffffffu, 0x83ffffffu},
+        {0u, 0u, 0u, 0u, 0u, 0u, 0u},
+        {0xffffffffu, 0xffffffffu, 0xffffffffu, 0xffffffffu,
+         0xffffffffu, 0xffffffffu, 0xffffffffu}
+    };
+    memset(&page, 0, sizeof page);
+    for (uint8_t plane = 0; plane < FA18_PLANES; ++plane) {
+        for (size_t row = 0; row < 7; ++row) {
+            const size_t offset = 0x41eu + row * FA18_PLANAR_ROW_BYTES;
+            const uint32_t word = frame469_before[plane][row];
+            page.plane[plane][offset] = (uint8_t)(word >> 24);
+            page.plane[plane][offset + 1] = (uint8_t)(word >> 16);
+            page.plane[plane][offset + 2] = (uint8_t)(word >> 8);
+            page.plane[plane][offset + 3] = (uint8_t)word;
+        }
+    }
+    const FA18StaticGlyphSubmission run075_frame469_submission = {
+        run075_frame469_glyph, 7u, 0x41eu, 0x1000u, 0x09u, 7u
+    };
+    if (fa18_submit_static_glyph(&page, &run075_frame469_submission) != 0) {
+        fputs("run075 frame469 static glyph rejected\n", stderr);
+        return 1;
+    }
+    for (uint8_t plane = 0; plane < FA18_PLANES; ++plane) {
+        for (size_t row = 0; row < 7; ++row) {
+            const size_t offset = 0x41eu + row * FA18_PLANAR_ROW_BYTES;
+            const uint32_t actual = ((uint32_t)page.plane[plane][offset] << 24) |
+                ((uint32_t)page.plane[plane][offset + 1] << 16) |
+                ((uint32_t)page.plane[plane][offset + 2] << 8) |
+                page.plane[plane][offset + 3];
+            if (actual != frame469_after[plane][row]) {
+                fputs("run075 frame469 static glyph trace failed\n", stderr);
+                return 1;
+            }
+        }
+    }
+
     set_lane.first_byte_offset = FA18_PLANAR_PAGE_BYTES - 3u;
     if (fa18_apply_glyph_mask_lane(&page, &set_lane) != -1) {
         fputs("glyph bounds contract failed\n", stderr);

@@ -780,3 +780,6 @@ game loop.
   same compositor with its traced source advance, `$041C` destination, and
   `$A000` mask. This extends the frame order without assuming a general text
   layout rule before the caller state is decoded.
+- Frame 469 is checked through the same four-lane operation with source bytes
+  from the trace, `$041E` placement, and `$1000` mask. The successive checks
+  establish the observed cursor progression through this static text run.
