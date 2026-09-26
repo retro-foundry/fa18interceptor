@@ -29,3 +29,24 @@ updates words at offsets `$56-$5A` from `A1` and branches on nearby flag/angle
 fields. It reaches `$C2D700` twice in the bounded `$C1C63E` packet. These are
 object-layout observations only; the object type and field meanings are
 unknown.
+
+## run060 first pitch-like publication handoff
+
+The sealed qualification replay reaches this same entry at replay frame 949,
+the first frame of the measured root-angle change.  A breakpoint at `$C2DEE0`
+returns normally to `$C2D704` after 295 instructions with the active record
+context intact (`A1=$C46184`, `A4=$C46204`).  Its returned word tuple is:
+
+```text
+D4 = $7070
+D5 = $0000
+D6 = $0000
+```
+
+The bounded trace deliberately stops at that return, so it does not itself
+write the root angle fields.  The contiguous long-context trace independently
+shows the enclosing packet reaching `$C2D954` with that tuple and publishing
+`$7070/$0000/$0000` to root `+$66/+$68/+$6A`.  Thus `$C2DEE0` is the immediate
+numeric producer of the first run060 pitch-like angle tuple, while `$C2D94E`
+is its record publisher.  This proves the handoff, not an interpretation of
+the inputs, lookup table, or the real-world control axis.
