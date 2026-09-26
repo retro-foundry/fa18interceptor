@@ -878,3 +878,5 @@ game loop.
 - Frame 525 now uses the native compositor with traced source
   `80 80 80 C0 C0 C0 F8`, mask `$6000`, and destination `$0794`; its oracle
   placement is `(152,48)`.
+- Frame 527 now uses source `70 50 50 F8 C8 C8 C8`, mask `$D000`, and the
+  repeated destination `$0794`; its oracle placement is `(166,48)`.
