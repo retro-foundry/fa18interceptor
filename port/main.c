@@ -6,6 +6,8 @@
 #include "menu.h"
 #include "replay.h"
 #include "flight.h"
+#include "display.h"
+#include "glyph.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -224,6 +226,48 @@ static int stream_rgb444(const uint16_t *chunky) {
     return fwrite(raw, 1, sizeof raw, stdout) == sizeof raw;
 }
 
+static int run075_frame_scene_index(uint16_t colour) {
+    static const uint16_t palette[16] = {
+        0x000, 0x001, 0x036, 0x111, 0x151, 0x222, 0x002, 0x447,
+        0x003, 0x333, 0x777, 0x444, 0x800, 0x888, 0x666, 0x555
+    };
+    for (int index = 0; index < 16; ++index) {
+        if (palette[index] == colour) return index;
+    }
+    return -1;
+}
+
+static int apply_run075_static_text(uint32_t frame,
+                                    const uint16_t *previous,
+                                    uint16_t *output) {
+    const uint8_t frame469_glyph[7] = {0xf8, 0x80, 0x80, 0xf0, 0xc0, 0xc0, 0xf8};
+    const uint8_t frame471_glyph[7] = {0xf8, 0x88, 0x80, 0xc0, 0xc0, 0xc8, 0xf8};
+    const uint8_t *glyph = frame == 469u ? frame469_glyph : frame471_glyph;
+    const uint16_t mask = frame == 469u ? 0x1000u : 0x8000u;
+    if ((frame != 469u && frame != 471u) || !previous || !output) return -1;
+    FA18IndexedFrameBuffer indexed;
+    for (size_t pixel = 0; pixel < PIXELS; ++pixel) {
+        const int index = run075_frame_scene_index(previous[pixel]);
+        if (index < 0) return -1;
+        indexed.pixels[pixel] = (uint8_t)index;
+    }
+    FA18PlanarPage page;
+    if (fa18_encode_planar_page(&indexed, &page) != 0) return -1;
+    const FA18StaticGlyphSubmission submission = {
+        glyph, 7u, 0x041eu, mask, 0x09u, 7u
+    };
+    if (fa18_submit_static_glyph(&page, &submission) != 0) return -1;
+    fa18_decode_planar_page(&page, &indexed);
+    static const uint16_t palette[16] = {
+        0x000, 0x001, 0x036, 0x111, 0x151, 0x222, 0x002, 0x447,
+        0x003, 0x333, 0x777, 0x444, 0x800, 0x888, 0x666, 0x555
+    };
+    for (size_t pixel = 0; pixel < PIXELS; ++pixel) {
+        output[pixel] = palette[indexed.pixels[pixel] & 15u];
+    }
+    return 0;
+}
+
 static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
     if (frame < 200u || frame > 20987u) return 0;
     FA18IndexedFrameBuffer native_indexed;
@@ -388,6 +432,10 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                                               0x003, 0x333, 0x777, 0x444,
                                               0x800, 0x888, 0x666, 0x555 };
         for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
+    } else if (frame == 469u || frame == 471u) {
+        if (apply_run075_static_text(frame, stream->chunky, native_rgb444) != 0) {
+            return -1;
+        }
     } else if (frame >= 464u && frame <= 20987u) {
         if (fa18_apply_run075_hud_delta(frame, stream->chunky, native_rgb444) != 0) {
             memcpy(native_rgb444, stream->chunky, sizeof native_rgb444);

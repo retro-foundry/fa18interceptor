@@ -785,3 +785,8 @@ game loop.
   establish the observed cursor progression through this static text run.
 - Frame 471 is checked at the same destination with its traced source bytes
   and `$8000` mask, extending the ordered compositor sequence.
+- Frames 469 and 471 now run through the native path in the live run075 gate:
+  the previous chunky frame is packed into semantic planes, `$C33058`'s
+  four-lane operation is applied, and the page is decoded back to RGB444.
+  The full 20,788-frame verifier still passes, so these two boundaries no
+  longer depend on the HUD delta fixture.

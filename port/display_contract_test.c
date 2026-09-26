@@ -45,6 +45,18 @@ int main(void) {
         fputs("planar page boundary contract failed\n", stderr);
         return 1;
     }
+    FA18PlanarPage roundtrip_page;
+    FA18IndexedFrameBuffer roundtrip_indices;
+    if (fa18_encode_planar_page(&indices, &roundtrip_page) != 0) {
+        fputs("planar encoder contract failed\n", stderr);
+        return 1;
+    }
+    fa18_decode_planar_page(&roundtrip_page, &roundtrip_indices);
+    if (memcmp(indices.pixels, roundtrip_indices.pixels,
+               sizeof indices.pixels) != 0) {
+        fputs("planar encode/decode roundtrip failed\n", stderr);
+        return 1;
+    }
     palette.rgb4[0] = 0x0000u;
     palette.rgb4[7] = 0x0d92u;
     palette.rgb4[8] = 0x0036u;

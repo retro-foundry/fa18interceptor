@@ -1,6 +1,7 @@
 #include "display.h"
 
 #include <stddef.h>
+#include <string.h>
 
 const FA18PlanarPage *fa18_select_display_page(const FA18DisplayPagePair *pair,
                                                 int adjusted) {
@@ -34,6 +35,30 @@ void fa18_decode_planar_page(const FA18PlanarPage *page,
             }
         }
     }
+}
+
+int fa18_encode_planar_page(const FA18IndexedFrameBuffer *framebuffer,
+                            FA18PlanarPage *page) {
+    if (!framebuffer || !page) return -1;
+    memset(page, 0, sizeof *page);
+    for (int y = 0; y < FA18_HEIGHT; ++y) {
+        for (int byte_x = 0; byte_x < FA18_PLANAR_ROW_BYTES; ++byte_x) {
+            const size_t source = (size_t)y * FA18_WIDTH + (size_t)byte_x * 8u;
+            const size_t destination = (size_t)y * FA18_PLANAR_ROW_BYTES +
+                                       (size_t)byte_x;
+            for (int bit = 0; bit < 8; ++bit) {
+                const uint8_t index = framebuffer->pixels[source + (size_t)bit];
+                if (index > 15u) return -1;
+                const uint8_t mask = (uint8_t)(0x80u >> bit);
+                for (int plane = 0; plane < FA18_PLANES; ++plane) {
+                    if (index & (uint8_t)(1u << plane)) {
+                        page->plane[plane][destination] |= mask;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 int fa18_apply_palette(const FA18IndexedFrameBuffer *framebuffer,

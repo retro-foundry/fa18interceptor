@@ -39,6 +39,10 @@ uint16_t fa18_rgb4_colour(uint16_t rgb4);
 void fa18_decode_planar_page(const FA18PlanarPage *page,
                              FA18IndexedFrameBuffer *framebuffer);
 
+/* Pack the native indexed target into the semantic four-plane display page. */
+int fa18_encode_planar_page(const FA18IndexedFrameBuffer *framebuffer,
+                            FA18PlanarPage *page);
+
 /* Translate an indexed native framebuffer through named palette state. */
 int fa18_apply_palette(const FA18IndexedFrameBuffer *framebuffer,
                        const FA18Palette *palette,
