@@ -152,6 +152,10 @@ infer a function's purpose merely from a rendered frame.
   stream writes into one native operation. Its contract exercises the six
   character `145` submission path; exact multi-plane ownership remains tied
   to the caller’s active lane evidence.
+- 2026-09-26: Captured the changed run060 `$C3201A` Chip RAM delta with
+  Engine9000. Three persistent bytes land in active plane 3 and one byte is
+  transient blitter state; the exact values and plane-relative offsets are
+  recorded in `analysis/data/run060_c3201a_changed_chip_delta.md`.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).
