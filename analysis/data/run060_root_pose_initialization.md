@@ -29,12 +29,19 @@ calls the root transform entry `$C091E0` with `(D3,D4,D5) = (11,0,$68)`.
 The transform reads root matrix `+$92..+$A2` and root base `+$14/+18/+1C`;
 its transformed `D0` and `D2` are committed by `$C09534/$C09538`.
 
-This proves that the frame-189 change is a deliberate record initialization
-or placement update, not unobserved renderer scratch and not an input-driven
-per-frame integrator. It does **not** yet prove whether the selected record is
-the aircraft, camera, or a shared aircraft/camera pose, nor what external
-scenario condition invokes `$C0924A`.
+The same bounded trace shows `$C1011E: JSR $C0924A` immediately before this
+packet. Its active path reaches `$C10102` through `$C0FFE2`; the existing
+qualification-transition trace proves that this is the mode-9 post-gate
+branch selected by the qualification menu path. Thus this is a
+**qualification-transition placement update**, not unobserved renderer
+scratch or an input-driven per-frame integrator.
+
+It does **not** yet prove whether the selected record is the aircraft, camera,
+or a shared aircraft/camera pose. It also does not show that this is the only
+initialization route for the record.
 
 Authority: `build/run060_early_root_pose_mutations/memory_region_mutations.json`,
 `build/run060_frame00187_root_pose_writer_stepped/memory_writes.json`, and
-the byte-exact source around `$C091E0-$C09249`.
+`build/run060_frame00187_root_pose_writer_full_context/memory_writes.json`,
+the byte-exact source around `$C091E0-$C09249`, and
+`analysis/routines/c0fece_delayed_menu_transition.md`.

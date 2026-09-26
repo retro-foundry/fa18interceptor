@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from collections import deque
 
 import capstone
 
@@ -30,6 +31,8 @@ def main() -> None:
     parser.add_argument("--watch-address", type=parse_int, required=True)
     parser.add_argument("--watch-size", type=parse_int, required=True)
     parser.add_argument("--max-instructions", type=int, required=True)
+    parser.add_argument("--context-instructions", type=int, default=0,
+                        help="attach this many preceding stepped instructions to each write")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
     args = parser.parse_args()
@@ -67,6 +70,7 @@ def main() -> None:
                 raise RuntimeError("breakpoint not reached")
         before = engine.memory(args.watch_address, args.watch_size)
         writes = []
+        context = deque(maxlen=args.context_instructions)
         for index in range(args.max_instructions):
             registers = engine.regs()
             pc = registers["pc"]
@@ -74,16 +78,19 @@ def main() -> None:
             instruction = next(decoder.disasm(raw, pc, 1), None)
             if instruction is None:
                 raise RuntimeError(f"68000 decode failed at {pc:06x}")
+            row = {"index": index, "pc": f"${pc:06X}",
+                   "bytes": raw[:instruction.size].hex(),
+                   "asm": f"{instruction.mnemonic} {instruction.op_str}".strip()}
             engine.core.e9k_debug_step_instr()
             engine.core.retro_run()
             after = engine.memory(args.watch_address, args.watch_size)
             if after != before:
-                writes.append({"index": index, "pc": f"${pc:06X}",
-                               "bytes": raw[:instruction.size].hex(),
-                               "asm": f"{instruction.mnemonic} {instruction.op_str}".strip(),
+                writes.append({**row,
                                "before": before.hex(), "after": after.hex(),
-                               "registers": registers})
+                               "registers": registers,
+                               "preceding_instructions": list(context)})
                 before = after
+            context.append(row)
         report = {"breakpoint": f"${args.breakpoint:06X}" if args.breakpoint is not None else None,
                   "start_immediately": args.start_immediately, "hit_frame": hit_frame,
                   "watch_address": f"${args.watch_address:06X}", "watch_size": args.watch_size,

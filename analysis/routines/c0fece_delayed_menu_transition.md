@@ -17,6 +17,9 @@ The observed branch at `$C10102`:
 - sets `$C45848` to three;
 - clears `$C458AE` and `$C457AD`;
 - calls `$C28722`, `$C0924A`, `$C11312`, `$C082B0`, and `$C1C860`;
+  the sealed run060 trace now establishes that `$C0924A` performs the early
+  selected-root `+$14/+18/+1C` placement update; see
+  `../data/run060_root_pose_initialization.md`;
 - sets `$C458AD` and `$C45795` to one;
 - clears `$C45986`, `$C45988`, and `$C45785`;
 - installs `$C101FC` in callback slot `$C1820C`; its byte-exact countdown
