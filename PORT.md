@@ -241,8 +241,8 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 275. Frame
-276 remains locked until its changed display page is reconstructed.
+The native live gate currently covers run075 frames 200 through 276. Frame
+277 remains locked until its changed display page is reconstructed.
 
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
@@ -318,6 +318,8 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
   submission has no visible pixel effect at this frame boundary.
 - Frame 275 remains all-black and is represented by the same native clear;
   frame 276 is the next page boundary.
+- Frame 276 remains all-black and is represented by the same native clear;
+  frame 277 is the next page boundary.
 - The frame-255 Engine9000 trace reaches `$C0F5F8` and `$C0FECE` at the next
   execution boundary, while `$C2FD22` and `$C33058` do not run. The native
   loop must reproduce this delayed menu state progression before unlocking
