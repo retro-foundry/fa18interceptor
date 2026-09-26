@@ -8,7 +8,7 @@ selected base for downstream helpers. The fixed stride is evidence for a
 | Offset | Width | Observed role | Evidence |
 | ---: | --- | --- | --- |
 | `$01` | byte | `$C0A2F0` requires bit 6 for its selected-record scheduler setup. In direct-core run060 analysis, `$C1CA8C` temporarily sets bit 4 and `$C1D65E` clears it again; neither observed write changes the required bit 6. | `data/run060_root_header_scheduler_operands.md`; `set_context_workspace_bit4.asm` |
-| `$02` | word | `$C0A2F0` requires `(word & $C080) == $C080` for its selected-record scheduler setup. `$C1B630` is a byte-exact raw-$20 arrestor-hook producer that can toggle bit 15, but direct-core timing does not establish it as the native run060 writer. The independently required bit 7 has no identified producer. | `data/run060_root_header_scheduler_operands.md`; `toggle_arrestor_hook.asm` |
+| `$02` | word | `$C0A2F0` requires `(word & $C080) == $C080` for its selected-record scheduler setup. `$C1B630` is a byte-exact raw-$20 arrestor-hook producer that can toggle bit 15, but direct-core timing does not establish it as the native run060 writer. Native frame-8,796 continuation stepping identifies `$C14E08` as the bit-7 producer (`ORI.W #$0080` then store) for the selected root record. | `data/run060_root_header_scheduler_operands.md`; `set_c13d84_selected_record_word2_bit7.asm`; `toggle_arrestor_hook.asm` |
 | `$03` | byte | flags, including observed bit 7 test | `update_indexed_shared_record_fields.asm` |
 | `$04` | byte | flags, including observed bit 3 and bit 4 tests | `$C1342C`, `$C1B27E` packets |
 | `$10` | long | copied into the accumulated candidate term before the shifted `+$A6/$AC/$B2` comparisons | `prepare_c27968_candidate_result.asm`; run062 transition trace |

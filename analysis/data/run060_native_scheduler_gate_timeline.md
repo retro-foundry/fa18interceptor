@@ -15,7 +15,7 @@ fields. Native checkpoint reads give the following timeline:
 | 8,750 | `11 C8 80 02` | `$00` | `$0718` | `$00/$FF/$00` | `$C080` mask fails: bit 7 is clear. |
 | 8,772 | `11 C8 80 02` | `$00` | `$06A0` | not sampled | still mask-failing. |
 | 8,796 | `11 C8 80 02` | `$00` | `$05EC` | not sampled | still mask-failing. |
-| 8,799 | `11 C8 80 82` | `$00` | `$05B0` | not sampled | `$C080` mask is now satisfied; `+$6E` remains nonzero. |
+| 8,799 | `11 C8 80 82` | `$00` | `$05B0` | not sampled | `$C080` mask is now satisfied; `+$6E` remains nonzero. A no-input continuation from native frame 8,796 reaches `$C14E08`, which ORs `$0080` into the selected root word `+$02`, reproducing `$8002 -> $8082`. |
 | 8,855 | `11 C8 80 82` | `$00` | `$0593` | not sampled | header stays gate-ready while `+$6E` decreases. |
 | 8,870 | `11 C8 C0 C2` | `$00` | `$057E` | not sampled | additional header bits change; the required mask remains satisfied. |
 | 9,000 | `11 C8 C0 82` | `$00` | `$00A9` | not sampled | only `+$6E` still blocks the listed gate conditions. |
