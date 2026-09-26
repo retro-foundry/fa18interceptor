@@ -26,6 +26,9 @@ typedef struct {
     uint16_t y[FA18_POLYGON_MAX_VERTICES];
 } FA18PairSource;
 
+/* Recovered run075 frame559 transition geometry after `$C2FF48` sorting. */
+int fa18_build_run075_frame559_pair_source(FA18PairSource *source);
+
 typedef enum {
     FA18_SUBMISSION_SUCCESS = 0,
     FA18_SUBMISSION_FAR_VERTICAL,

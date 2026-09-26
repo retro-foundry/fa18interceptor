@@ -6,6 +6,20 @@ static int absolute_difference(int16_t first, int16_t second) {
     return difference < 0 ? -difference : difference;
 }
 
+int fa18_build_run075_frame559_pair_source(FA18PairSource *source) {
+    static const uint16_t x[] = {0, 0, 71, 70, 90, 105, 105, 122,
+                                 134, 110, 137, 200, 83, 67};
+    static const uint16_t y[] = {319, 89, 89, 89, 89, 89, 89, 89,
+                                 89, 89, 89, 89, 65302, 65362};
+    if (!source) return -1;
+    source->count = (uint16_t)(sizeof x / sizeof x[0]);
+    for (uint16_t index = 0; index < source->count; ++index) {
+        source->x[index] = x[index];
+        source->y[index] = y[index];
+    }
+    return 0;
+}
+
 int fa18_screen_polygon_to_pair_list(const FA18ScreenPolygon *polygon,
                                      FA18ScreenPairList *list) {
     if (!polygon || !list || polygon->count > FA18_POLYGON_MAX_VERTICES) return -1;

@@ -4,6 +4,14 @@
 #include <stdio.h>
 
 int main(void) {
+    FA18PairSource transition;
+    assert(fa18_build_run075_frame559_pair_source(&transition) == 0);
+    assert(transition.count == 14);
+    assert(transition.x[0] == 0 && transition.y[0] == 319);
+    assert(transition.x[11] == 200 && transition.y[11] == 89);
+    assert(transition.x[12] == 83 && transition.y[12] == 65302);
+    assert(transition.x[13] == 67 && transition.y[13] == 65362);
+
     FA18PairSource source = {2, {0x0100, 0x0200}, {0x0100, 0x0080}};
     FA18ScreenPairList built;
     assert(fa18_build_renderer_pair_list(&source, 3, -2, &built) == 0);
