@@ -117,6 +117,9 @@ infer a function's purpose merely from a rendered frame.
   complete oracle, including the prior packet 12 `$FBC0` final word. Corrected
   X overflow direction from the selected increment/decrement operation; packet
   16 now matches as well.
+- 2026-09-27: Corrected the frame 7992 area destination mapping. All four
+  captured D pointers resolve to plane-specific row 133, word 1; the first
+  semantic job had retained row 101 from an earlier pointer interpretation.
 
 - 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the
