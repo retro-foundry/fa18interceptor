@@ -158,3 +158,12 @@ the component through `$C2F60A` followed by `$C2F5F4`. The bounded trace then
 reaches the same primary/alternate pixel tables with the component's lane
 state. This should become a separate semantic component in the native scene
 model; it must not be folded into the 32-record postflight fixture.
+
+The `$C332FE` helper itself is a bounded screen component constructor. It
+accepts the stored horizontal and vertical offsets, clamps the horizontal
+coordinate to `1..$13D`, adds the fixed vertical base `$81` plus
+`$C458D8`, sets mode `8`, and submits `(160,129)` through `$C2F60A` and
+`$C2F5F4`. Its later table work converts the resulting handler word into
+lane masks, including the `$C456E7` per-plane suppression checks. The native
+component struct therefore needs horizontal/vertical offsets, clamp bounds,
+renderer mode, and lane suppression state.
