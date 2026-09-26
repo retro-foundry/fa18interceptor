@@ -352,6 +352,11 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
   scene state and the producing renderer calls remain open.
 - Frames 393 and 394 are pixel-identical to frame 392 and reuse that fixture.
   Frame 395 is the next visual boundary and remains locked.
+- The frame-395 trace reaches `$C2F688`; its first captured call has signed
+  coordinates `(-25,-25)` and returns through the established no-op path.
+  The visible 29,453-pixel frame therefore requires tracing the surrounding
+  pixel calls, rather than assuming this first invocation owns the output.
+  See [the frame-395 pipeline note](analysis/routines/run075_frame395_pixel_pipeline.md).
 - The frame-255 Engine9000 trace reaches `$C0F5F8` and `$C0FECE` at the next
   execution boundary, while `$C2FD22` and `$C33058` do not run. The native
   loop must reproduce this delayed menu state progression before unlocking
