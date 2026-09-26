@@ -24,3 +24,20 @@ progression. The matching first words/bytes do not prove identical full record
 state, nor do they identify the landing predicate, result-state writer, or
 persistence behavior. They only exclude treating these sampled leading fields
 as a sufficient direct success/failure test.
+
+## Later run062 transition
+
+The run062 frame-2,000 checkpoint is not the instant at which its callback
+executes. A no-input, frame-by-frame sample from that same native checkpoint
+records the leading `$C46184` word as `$11C8` through replay frame 124, then
+as `$93C8` on frame 125. It remains `$93C8` until the `$C10DAE` callback is
+entered on frame 132, where the bounded trace observes bit 9 set; the
+gate-positive callback then clears it to `$91C8`.
+
+The sample is retained at
+`build/run062_frame2000_postflight_word_samples.json`; the callback trace is
+`build/run062_frame2000_c10dae_handoff_trace/trace.jsonl`. A CPU and an
+all-source write watch on `$C46184` both miss this sampled mutation, so neither
+identifies a writer PC. The update is therefore evidence of a timed
+postflight-record transition, not yet of its producer or a qualification
+predicate.
