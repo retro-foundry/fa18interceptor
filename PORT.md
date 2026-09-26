@@ -940,6 +940,12 @@ game loop.
   remains a separate handoff to trace before wiring frame559 into the native
   display path. The bounded trace is in
   `build/run075_frame559_c30678_500/trace.jsonl`.
+- Traced the following `$C2FBE6` visible lane helper for 500 instructions.
+  It selects enabled lanes from `$C456E7`, applies the optional `$C456E8` row
+  adjustment, adds the computed row offset to each active plane base, and
+  submits the visible page packet. This establishes the temporary workspace to
+  active page boundary; the semantic lane setup is recorded in
+  `analysis/data/run075_frame559_c2fbe6_visible_lane_setup.md`.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
