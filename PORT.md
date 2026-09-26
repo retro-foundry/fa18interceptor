@@ -817,3 +817,5 @@ game loop.
   `$A000` mask. The complete replay verifier remains byte exact.
 - Frame 495 is native with its traced `$042C` destination, source bytes, and
   `$1000` mask. The complete replay verifier remains byte exact.
+- Frame 497 is native with its traced `$042C` destination, source bytes, and
+  `$8000` mask. The complete replay verifier remains byte exact.

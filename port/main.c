@@ -254,6 +254,7 @@ static int apply_run075_static_text(uint32_t frame,
     const uint8_t frame491_glyph[7] = {0xf0, 0x90, 0x90, 0xf8, 0xc8, 0xc8, 0xf8};
     const uint8_t frame493_glyph[7] = {0xf8, 0x98, 0x88, 0x88, 0x88, 0x88, 0xf8};
     const uint8_t frame495_glyph[7] = {0xf8, 0x88, 0x80, 0xd8, 0xc8, 0xc8, 0xf8};
+    const uint8_t frame497_glyph[7] = {0xf8, 0x80, 0x80, 0xf0, 0xc0, 0xc0, 0xf8};
     const uint8_t *glyph = frame == 469u ? frame469_glyph :
                            frame == 471u ? frame471_glyph :
                            frame == 473u ? frame473_glyph :
@@ -266,7 +267,8 @@ static int apply_run075_static_text(uint32_t frame,
                            frame == 487u ? frame487_glyph :
                            frame == 489u ? frame489_glyph :
                            frame == 491u ? frame491_glyph :
-                           frame == 493u ? frame493_glyph : frame495_glyph;
+                           frame == 493u ? frame493_glyph :
+                           frame == 495u ? frame495_glyph : frame497_glyph;
     const uint16_t mask = frame == 469u ? 0x1000u :
                           frame == 471u ? 0x8000u :
                           frame == 473u ? 0xf000u :
@@ -279,17 +281,19 @@ static int apply_run075_static_text(uint32_t frame,
                           frame == 487u ? 0xe000u :
                           frame == 489u ? 0x5000u :
                           frame == 491u ? 0x3000u :
-                          frame == 493u ? 0xa000u : 0x1000u;
+                          frame == 493u ? 0xa000u :
+                          frame == 495u ? 0x1000u : 0x8000u;
     const size_t destination = frame >= 475u ?
         (frame == 479u ? 0x0422u :
          frame == 481u ? 0x0424u : frame == 483u ? 0x0424u :
          frame == 485u ? 0x0426u : frame == 487u ? 0x0426u :
          frame == 489u ? 0x0428u : frame == 491u ? 0x042au :
-         frame == 493u ? 0x042au : frame == 495u ? 0x042cu : 0x0420u) : 0x041eu;
+         frame == 493u ? 0x042au : frame == 495u ? 0x042cu :
+         frame == 497u ? 0x042cu : 0x0420u) : 0x041eu;
     if ((frame != 469u && frame != 471u && frame != 473u &&
          frame != 475u && frame != 477u && frame != 479u && frame != 481u &&
          frame != 483u && frame != 485u && frame != 487u && frame != 489u &&
-         frame != 491u && frame != 493u && frame != 495u) ||
+         frame != 491u && frame != 493u && frame != 495u && frame != 497u) ||
         !previous || !output) return -1;
     FA18IndexedFrameBuffer indexed;
     for (size_t pixel = 0; pixel < PIXELS; ++pixel) {
@@ -482,7 +486,7 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                frame == 475u || frame == 477u || frame == 479u ||
                frame == 481u || frame == 483u || frame == 485u ||
                frame == 487u || frame == 489u || frame == 491u ||
-               frame == 493u || frame == 495u) {
+               frame == 493u || frame == 495u || frame == 497u) {
         if (apply_run075_static_text(frame, stream->chunky, native_rgb444) != 0) {
             return -1;
         }
