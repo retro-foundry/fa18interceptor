@@ -22,7 +22,7 @@ At publisher entry:
 ```text
 A2 = $C46184
 D0,D1,D2 = $00000000, $00000500, $00001400
-record +$14/+$18/+$1C = $11982C00, $00007710, $081059A0
+record +$14/+$18/+$1C = $11982C00, $00007708, $1059A000
 ```
 
 The direct publisher arm performs the byte-exact operations at `$C1C5E0`:
@@ -45,6 +45,24 @@ The routine stores the shifted tuple at `$C45A72-$C45A76` and the complete
 shifted middle component `$FFFFFF83` at `$C45A78`. The before/after snapshots
 agree with those published values.
 
+## Upstream matrix seed in the same packet
+
+A second trace of the immediately preceding `$C1C54E` path reaches the same
+return in 59 instructions. `$C458DE=$0000`, so the path explicitly selects
+`A2=$C46184`. Record byte `+$62=$11` chooses the literal signed seed
+`(D3,D4,D5)=(0,5,$14)`. The nine signed words at `+$92..+$A2` are:
+
+```text
+$92..+$A2 = $4000,$0000,$0000, $0000,$4000,$0000, $0000,$0000,$4000
+```
+
+`$C1C54E-$C1C5DF` performs the three dot-product-like sums, right shifts them
+by six, adds the resulting components to the root `+$14/+18/+1C` triple, and
+stores that intermediate tuple to `$C45A7C`. At `$C1C5E0` it supplies the
+measured publisher inputs `(0,$500,$1400)`. This proves that the same root
+record supplies both a three-component base triple and a nine-word transform
+matrix to the projection path.
+
 ## Meaning boundary
 
 This proves that the root record's `+$14/+18/+1C` longwords are live inputs to
@@ -55,6 +73,13 @@ incoming `D0-D2`, masked on two axes, negated, and sampled root values remain
 unchanged across the late-run sampling window. The selected root record is now
 known to have both input-control and projection-context roles; its ownership
 remains unresolved.
+
+A repeat packet armed after a distinct run060 joystick event (`J 0 4` at
+recorded frame 8,392) hits `$C1C5E0` at replay frame 8,395. Its root triple,
+incoming `D0-D2`, and published tuple are byte-for-byte the same as this
+frame-8,246 packet. This is limited negative evidence: the direct publisher
+does not reflect that input event in its values over this interval, so it is
+not by itself a moving-aircraft position publisher.
 
 The next decisive trace is a controlled input-differential packet followed to
 the producer of the `$C1C5E0` incoming `D0-D2`, then through camera/render
