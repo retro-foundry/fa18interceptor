@@ -352,6 +352,8 @@ This connects the proven run060 input path to native state without inventing
 axis names or motion formulas.
 The packed command byte now belongs to `FA18ReplayControlState`, so replay
 events and the live flight lane consumer share one deterministic source.
+The replay contract now parses the sealed run060 recording and verifies its
+joystick direction events, in addition to the run075 replay contract.
 Relative `m` input is now reset at each frame advance, matching Engine9000's
 input-poll lifetime; same-frame motion records still accumulate before the
 flight consumer reads them.

@@ -5,10 +5,22 @@
 
 typedef struct { FA18ReplayEvent event[128]; size_t count; } Events;
 
+typedef struct { size_t count; int saw_j; } EventKinds;
+
 static int collect(const FA18ReplayEvent *event, void *user) {
     Events *events = user;
     if (events->count >= 128) return 0;
     events->event[events->count++] = *event;
+    return 0;
+}
+
+static int collect_run060(const FA18ReplayEvent *event, void *user) {
+    EventKinds *kinds = user;
+    ++kinds->count;
+    if (event->kind == FA18_REPLAY_JOYSTICK_EVENT && event->value[0] == 0 &&
+        (event->value[1] == 5 || event->value[1] == 6 || event->value[1] == 7)) {
+        kinds->saw_j = 1;
+    }
     return 0;
 }
 
@@ -33,6 +45,13 @@ int main(void) {
         events.event[events.count - 1].value[1] != 7 ||
         events.event[events.count - 1].value[2] != -25) {
         fputs("signed replay parse contract failed\n", stderr);
+        return 1;
+    }
+    EventKinds run060 = {0, 0};
+    if (fa18_replay_read_events("../../captures/run060/playback.e9k",
+                                collect_run060, &run060, NULL) != 0 ||
+        run060.count == 0 || !run060.saw_j) {
+        fputs("run060 joystick replay parse contract failed\n", stderr);
         return 1;
     }
     FA18ReplayControlState state;
