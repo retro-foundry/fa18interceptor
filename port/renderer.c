@@ -263,11 +263,13 @@ int fa18_apply_run075_hud_delta(uint32_t frame, const uint16_t *previous,
         const FA18TailDelta *delta = &fa18_run075_tail_deltas[delta_index];
         if (delta->frame != frame) continue;
         for (uint16_t span_index = 0; span_index < delta->span_count; ++span_index) {
-            const FA18TailSpan *span = &delta->spans[span_index];
+            const FA18TailSpan *span =
+                &fa18_run075_tail_spans[delta->span_offset + span_index];
             if (span->start >= FA18_WIDTH * FA18_HEIGHT || span->length == 0 ||
                 span->length > FA18_WIDTH * FA18_HEIGHT - span->start) return -1;
-            memcpy(&output[span->start], span->pixels,
-                   span->length * sizeof span->pixels[0]);
+            memcpy(&output[span->start],
+                   &fa18_run075_tail_pixels[span->pixel_offset],
+                   span->length * sizeof(uint16_t));
         }
         return 0;
     }
