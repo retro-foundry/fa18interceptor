@@ -1,6 +1,6 @@
 # Root control record pose candidate
 
-Classification: **scenario-backed moving-pose inference**. This is
+Classification: **scenario-backed active flight-pose inference**. This is
 deliberately not a final aircraft-position/orientation identification.
 
 Three independently established facts now meet at the root selected record
@@ -36,10 +36,12 @@ to the position-like triple.
 
 The root tuple is sampled moving coherently during run060's qualification
 flight and returns to its start value on the replay's reset event; see
-`data/run060_root_pose_motion_timeline.md`. In cockpit play the pose can be
-the aircraft, camera, or a deliberately coincident aircraft/camera context.
-The root is selected by the live control stage, which supports (but does not
-prove) player ownership.
+`data/run060_root_pose_motion_timeline.md`. Direct stepped traces now identify
+the committed vertical writer at `$C14D32` and paired horizontal writers at
+`$C25E6E/$C25E72`; see `data/run060_root_pose_integrator.md`. In cockpit play
+the pose can be the aircraft, camera, or a deliberately coincident
+aircraft/camera context. The root is selected by the live control stage, which
+supports (but does not prove) player ownership.
 
 ## Early run060 initialization event
 
