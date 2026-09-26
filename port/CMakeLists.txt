@@ -31,6 +31,8 @@ add_executable(fa18_menu_display_contract_test menu_display_contract_test.c menu
 add_test(NAME fa18_menu_display_contract COMMAND fa18_menu_display_contract_test)
 add_executable(fa18_renderer_contract_test renderer_contract_test.c renderer.c)
 add_test(NAME fa18_renderer_contract COMMAND fa18_renderer_contract_test)
+add_executable(fa18_polygon_contract_test polygon_contract_test.c renderer.c)
+add_test(NAME fa18_polygon_contract COMMAND fa18_polygon_contract_test)
 add_executable(fa18_line_contract_test line_contract_test.c line.c)
 add_test(NAME fa18_line_contract COMMAND fa18_line_contract_test)
 add_executable(fa18_postflight_contract_test postflight_contract_test.c postflight.c)

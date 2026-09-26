@@ -2,6 +2,8 @@
 #define FA18_RENDERER_H
 
 #include <stdint.h>
+#include <stddef.h>
+#include "projection.h"
 
 enum { FA18_WIDTH = 320, FA18_HEIGHT = 200 };
 
@@ -41,6 +43,16 @@ typedef struct {
     uint8_t clear_plane_mask;
     uint8_t set_plane_mask;
 } FA18PlaneWordUpdate;
+
+typedef struct {
+    uint16_t y;
+    uint16_t x_first;
+    uint16_t x_last;
+} FA18FillSpan;
+
+int fa18_apply_fill_spans(FA18IndexedFrameBuffer *framebuffer,
+                          const FA18FillSpan *spans, size_t span_count,
+                          uint8_t set_plane_mask);
 
 int fa18_apply_plane_word_update(FA18IndexedFrameBuffer *framebuffer,
                                  const FA18PlaneWordUpdate *update);

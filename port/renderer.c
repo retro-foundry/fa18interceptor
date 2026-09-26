@@ -3,6 +3,19 @@
 #include <stddef.h>
 #include <string.h>
 
+int fa18_apply_fill_spans(FA18IndexedFrameBuffer *framebuffer,
+                          const FA18FillSpan *spans, size_t span_count,
+                          uint8_t set_plane_mask) {
+    if (!framebuffer || !spans || span_count == 0u || set_plane_mask == 0u) return -1;
+    for (size_t i = 0; i < span_count; ++i) {
+        if (spans[i].y >= FA18_HEIGHT || spans[i].x_first > spans[i].x_last ||
+            spans[i].x_last >= FA18_WIDTH) return -1;
+        for (uint16_t x = spans[i].x_first; x <= spans[i].x_last; ++x)
+            framebuffer->pixels[(size_t)spans[i].y * FA18_WIDTH + x] |= set_plane_mask;
+    }
+    return 0;
+}
+
 #include "run075_frame395_data.h"
 #include "run075_frame398_data.h"
 #include "run075_frame402_data.h"

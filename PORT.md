@@ -1020,3 +1020,9 @@ game loop.
   `analysis/data/run060_frame7991_dma_blitter_sequence.md`; the next task is
   to map its page accesses and match frame 7991 in the native renderer before
   moving on.
+- Added `FA18FillSpan` and `fa18_apply_fill_spans` as the first native area
+  fill output boundary. Its contract reproduces every changed pixel in the
+  run060 frame-7991 settled polygon delta, including the original edge
+  inclusion and row limits. The source polygon remains represented by the
+  existing `FA18ScreenPolygon`; the general polygon-to-span edge rule is still
+  open until another run060+ fill confirms it.
