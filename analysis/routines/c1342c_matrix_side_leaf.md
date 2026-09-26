@@ -74,3 +74,19 @@ it to word offset `+$0004`, reads `$002D` from the zero-index table rooted at
 passed to `$C13BA0` and becomes the smoothing target above. This establishes a
 table-driven target lane, not the table's coordinate convention or gameplay
 meaning.
+
+The lane itself is root record byte `+$28`, loaded and sign-extended at
+`$C1357A-$C13590`. In this frame it is `$FE` (signed −2), while the adjacent
+`+$29/+2A` byte lanes are both zero. Therefore the fully bounded first-input
+path is:
+
+```text
+root +$28 = −2
+  -> $C3D690 word lane +4 = $002D
+  -> negate to target −45
+  -> quarter-step root +$56: −6 -> −15
+  -> $C2DEE0 / $C2D954 produce and publish $7070
+```
+
+This is an executed numerical dependency chain for the initial run060 turn;
+the three byte lanes' physical axes remain unassigned.
