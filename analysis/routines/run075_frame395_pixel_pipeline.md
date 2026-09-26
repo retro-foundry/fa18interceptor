@@ -81,3 +81,26 @@ connects the frame-395 pixel calls to the reconstructed postflight record
 walker. Its table contents and gameplay meaning remain unproven, so the
 native port still needs a semantic postflight record struct and a run075
 entry fixture before this path can replace the frame fixture.
+
+## Complete bounded entry set
+
+The repeated-breakpoint collector reaches 32 `$C2F688` entries before the
+postflight path leaves this call family. The screen coordinates and `D7`
+selection values are:
+
+```text
+156,156,00000001  158,167,00000018  157,168,00000002  159,168,00000004
+158,168,00000001  158,167,00000002  156,156,00000002  158,167,00000018
+156,156,00000001  158,167,00000018  160,129,00000002  159,129,00008000
+160,130,00000001  159,130,00008000  160,131,00000001  159,131,00008000
+159,132,00000001  161,132,00000003  159,071,0000C000  159,072,00000001
+159,074,00000001  159,075,00000001  293,156,0005403D  295,156,00050C00
+298,156,00050300  300,156,00050060  298,159,00050018  300,159,00050060
+293,159,00050018  295,159,00050C00  303,159,00050300  305,159,00050003
+```
+
+The final entries split into the same three spatial families identified in
+the earlier inventory. This is sufficient to define a bounded native
+`FA18PostflightRecord` fixture for this call family, but the complete frame
+still includes other rendering work; this record set alone must not unlock
+frame 395.
