@@ -263,6 +263,11 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
 
 ## Validation gates
 
+- Live native playback consumes the supplied `E9K_INPUT_V1` file with
+  `--replay captures/run075/playback.e9k`. The frame-230 key-down and
+  frame-234 key-up drive the native menu transitions; they are not generated
+  from frame numbers.
+
 - Frame 234 now has a native post-selection text page and scheduling state
   contract. The next native gate is frame 235.
 - Frame 235 is the observed cleared display page after the setup text. It is

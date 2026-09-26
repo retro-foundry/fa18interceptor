@@ -4,6 +4,7 @@
  */
 #include <SDL.h>
 #include "menu.h"
+#include "replay.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,6 +23,50 @@ typedef struct {
     uint32_t last;
     uint32_t next;
 } FrameStream;
+
+typedef struct {
+    FA18ReplayEvent events[128];
+    size_t count;
+    size_t next;
+    FA18ReplayControlState controls;
+} NativeReplay;
+
+static int collect_replay_event(const FA18ReplayEvent *event, void *user) {
+    NativeReplay *replay = user;
+    if (!event || replay->count >= sizeof replay->events / sizeof replay->events[0]) {
+        return -1;
+    }
+    replay->events[replay->count++] = *event;
+    return 0;
+}
+
+static int native_replay_open(NativeReplay *replay, const char *path) {
+    memset(replay, 0, sizeof *replay);
+    if (fa18_replay_read_events(path, collect_replay_event, replay,
+                                &replay->count) != 0 || replay->count == 0) {
+        fprintf(stderr, "Cannot read native replay: %s\n", path);
+        return 0;
+    }
+    return 1;
+}
+
+static int native_replay_apply_frame(NativeReplay *replay, uint32_t frame,
+                                     FA18MenuState *menu_state) {
+    while (replay->next < replay->count &&
+           replay->events[replay->next].frame <= frame) {
+        const FA18ReplayEvent *event = &replay->events[replay->next++];
+        if (fa18_replay_apply_event(&replay->controls, event) != 0) return -1;
+        if (event->frame == 230u && event->kind == FA18_REPLAY_KEY_EVENT &&
+            event->value[0] == 49 && event->value[3] != 0) {
+            if (fa18_select_run075_demo_mode(menu_state) != 0) return -1;
+        }
+        if (event->frame == 234u && event->kind == FA18_REPLAY_KEY_EVENT &&
+            event->value[0] == 49 && event->value[3] == 0) {
+            if (fa18_schedule_demo_selection(menu_state) != 0) return -1;
+        }
+    }
+    return 0;
+}
 
 static int read_bytes(FILE *file, void *data, size_t size) {
     return fread(data, 1, size, file) == size;
@@ -166,17 +211,8 @@ static int stream_rgb444(const uint16_t *chunky) {
     return fwrite(raw, 1, sizeof raw, stdout) == sizeof raw;
 }
 
-static int apply_native_frame_gate(FrameStream *stream, uint32_t frame,
-                                   FA18MenuState *menu_state) {
+static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
     if (frame < 200u || frame > 237u) return 0;
-    if (frame == 230u && fa18_select_run075_demo_mode(menu_state) != 0) {
-        fprintf(stderr, "Native frame-230 menu selection failed\n");
-        return -1;
-    }
-    if (frame == 234u && fa18_schedule_demo_selection(menu_state) != 0) {
-        fprintf(stderr, "Native frame-234 menu scheduling failed\n");
-        return -1;
-    }
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
     if (frame == 234u) fa18_render_run075_frame234_menu(&native_indexed, native_rgb444);
@@ -197,11 +233,13 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame,
     return 1;
 }
 
-static int playback(FrameStream *stream) {
+static int playback(FrameStream *stream, const char *replay_path) {
     if (stream->first != 200u) {
         fprintf(stderr, "Native playback must start at run075 frame 200\n");
         return 1;
     }
+    NativeReplay replay;
+    if (!native_replay_open(&replay, replay_path)) return 1;
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) != 0) {
         fprintf(stderr, "SDL_Init failed: %s\n", SDL_GetError());
         return 1;
@@ -253,8 +291,14 @@ static int playback(FrameStream *stream) {
             result = status < 0;
             break;
         }
-        int native_gate = apply_native_frame_gate(stream, stream->next - 1,
-                                                  &native_menu);
+        if (native_replay_apply_frame(&replay, stream->next - 1,
+                                      &native_menu) != 0) {
+            fprintf(stderr, "Native replay state update failed at frame %u\n",
+                    stream->next - 1);
+            result = 1;
+            break;
+        }
+        int native_gate = apply_native_frame_gate(stream, stream->next - 1);
         if (native_gate < 0) {
             result = 1;
             break;
@@ -289,11 +333,12 @@ static int playback(FrameStream *stream) {
 }
 
 int main(int argc, char **argv) {
-    const char *path = NULL, *dump_path = NULL;
+    const char *path = NULL, *dump_path = NULL, *replay_path = NULL;
     uint32_t dump_frame = 0;
     int verify = 0, raw_stream = 0;
     for (int i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--frames") && i + 1 < argc) path = argv[++i];
+        else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
         else if (!strcmp(argv[i], "--verify")) verify = 1;
         else if (!strcmp(argv[i], "--stream-rgb444")) raw_stream = 1;
         else if (!strcmp(argv[i], "--dump-frame") && i + 2 < argc) {
@@ -306,7 +351,7 @@ int main(int argc, char **argv) {
             dump_frame = (uint32_t)parsed;
             dump_path = argv[++i];
         } else {
-            fprintf(stderr, "Usage: fa18_port --frames FILE [--verify | --stream-rgb444] [--dump-frame N OUTPUT.ppm]\n");
+            fprintf(stderr, "Usage: fa18_port --frames FILE [--replay FILE] [--verify | --stream-rgb444] [--dump-frame N OUTPUT.ppm]\n");
             return 2;
         }
     }
@@ -352,7 +397,12 @@ int main(int argc, char **argv) {
         if (!result && !raw_stream) printf("Validated %u frame(s), %u..%u\n", count,
                                           stream->first, stream->next - 1);
     } else {
-        result = playback(stream);
+        if (!replay_path) {
+            fprintf(stderr, "Live native playback requires --replay FILE\n");
+            result = 2;
+        } else {
+            result = playback(stream, replay_path);
+        }
     }
     fclose(stream->file);
     free(stream);
