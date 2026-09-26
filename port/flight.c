@@ -172,6 +172,17 @@ int fa18_flight_publish_control_field(uint8_t *packed_control,
     return 0;
 }
 
+int fa18_flight_decode_joy0dat(uint16_t joy0dat,
+                               FA18Joy0DerivedInput *derived) {
+    if (!derived) return -1;
+    const uint16_t xor_test = (uint16_t)(((joy0dat & 0x0200u) >> 1) ^
+                                         (joy0dat & 0x0100u));
+    derived->first_derived = (uint8_t)(xor_test != 0);
+    derived->second_derived = (uint8_t)(((joy0dat & 0x0002u) != 0) !=
+                                        ((joy0dat & 0x0200u) != 0));
+    return 0;
+}
+
 int fa18_flight_update_attitude(const FA18FlightTrigTable *table,
                                 int16_t first_angle, int16_t second_angle,
                                 int16_t third_angle, FA18FlightPose *pose) {

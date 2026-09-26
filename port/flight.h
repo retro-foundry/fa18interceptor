@@ -24,6 +24,11 @@ typedef struct {
 } FA18FlightControlLanes;
 
 typedef struct {
+    uint8_t first_derived;
+    uint8_t second_derived;
+} FA18Joy0DerivedInput;
+
+typedef struct {
     int32_t first;
     int32_t second;
     int32_t third;
@@ -54,6 +59,10 @@ int fa18_flight_publish_control_field(uint8_t *packed_control,
                                       uint8_t field_mask,
                                       uint8_t command,
                                       int enabled);
+
+/* `$C16F1C`: reproduce the two independent JOY0DAT derived tests. */
+int fa18_flight_decode_joy0dat(uint16_t joy0dat,
+                               FA18Joy0DerivedInput *derived);
 
 /* `$C14B16-$C14B7D`: sign extend three prepared words, scale by four, and
  * retain their negated longword terms for the active record. */

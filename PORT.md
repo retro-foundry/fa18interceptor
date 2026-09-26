@@ -336,6 +336,9 @@ Run060 input traces also prove the adjacent semantic publisher: `$20/$10`
 replace bits 5:4 and `$08/$04` replace bits 3:2 when the input gate is active.
 This is now `fa18_flight_publish_control_field`, covered by the flight
 contract test and ready for the raw OCS input adapter.
+The `$C16F1C` `JOY0DAT` bit derivation is also represented by
+`FA18Joy0DerivedInput` and `fa18_flight_decode_joy0dat`; it preserves the two
+independent XOR tests before command direction selection.
 
 `fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
 the computed lateral and forward terms update `$14/$1C`, while the signed

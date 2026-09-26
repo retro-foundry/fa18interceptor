@@ -5,6 +5,15 @@
 #include <stdio.h>
 
 int main(void) {
+    FA18Joy0DerivedInput derived;
+    assert(fa18_flight_decode_joy0dat(0x0000, &derived) == 0);
+    assert(derived.first_derived == 0 && derived.second_derived == 0);
+    assert(fa18_flight_decode_joy0dat(0x0100, &derived) == 0);
+    assert(derived.first_derived == 1 && derived.second_derived == 0);
+    assert(fa18_flight_decode_joy0dat(0x0202, &derived) == 0);
+    assert(derived.first_derived == 1 && derived.second_derived == 0);
+    assert(fa18_flight_decode_joy0dat(0x0002, &derived) == 0);
+    assert(derived.first_derived == 0 && derived.second_derived == 1);
     uint8_t packed = 0x01;
     assert(fa18_flight_publish_control_field(&packed, 0x30, 0x20, 1) == 0);
     assert(packed == 0x21);
