@@ -52,6 +52,16 @@ int main(void) {
         return 1;
     }
 
+    FA18GlyphPlacement placement;
+    if (fa18_prepare_glyph_placement(2, 4, 3, 0x100, 0x20, 7, &placement) != 0 ||
+        placement.visible_coordinate != 9 ||
+        placement.destination_offset != 0x127 ||
+        placement.compositor_shift != 7 ||
+        fa18_prepare_glyph_placement(-8, 0, 0, 0, 0, 0, &placement) != 1) {
+        fputs("glyph placement arithmetic contract failed\n", stderr);
+        return 1;
+    }
+
     FA18PlanarPage page;
     const uint8_t glyph[2] = {0xf0u, 0x80u};
     memset(&page, 0xff, sizeof page);

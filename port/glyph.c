@@ -61,6 +61,24 @@ int fa18_select_glyph(const FA18GlyphTable *table, uint8_t character,
     return 0;
 }
 
+int fa18_prepare_glyph_placement(int16_t lane_base,
+                                 int16_t doubled_render_lane,
+                                 int16_t glyph_position,
+                                 int32_t geometry_base,
+                                 int32_t selected_pointer_value,
+                                 uint16_t compositor_shift,
+                                 FA18GlyphPlacement *placement) {
+    if (!placement) return -1;
+    const int32_t coordinate = (int32_t)lane_base +
+        (int32_t)doubled_render_lane + (int32_t)glyph_position;
+    if (coordinate < 0 || coordinate >= 0x28) return 1;
+    placement->visible_coordinate = coordinate;
+    placement->destination_offset = geometry_base + selected_pointer_value +
+        (int32_t)doubled_render_lane + (int32_t)glyph_position;
+    placement->compositor_shift = compositor_shift;
+    return 0;
+}
+
 static uint16_t rol16(uint16_t value, unsigned count) {
     count &= 15u;
     if (!count) return value;

@@ -38,6 +38,23 @@ int fa18_select_glyph(const FA18GlyphTable *table, uint8_t character,
                       const uint8_t **glyph_stream,
                       size_t *remaining_bytes);
 
+/* Address-free form of `$C327A0-$C327C8`. The original routine uses these
+ * values as register arithmetic; keeping them named here makes the caller's
+ * unresolved producer inputs visible without reproducing Amiga addresses. */
+typedef struct {
+    int32_t visible_coordinate;
+    int32_t destination_offset;
+    uint16_t compositor_shift;
+} FA18GlyphPlacement;
+
+int fa18_prepare_glyph_placement(int16_t lane_base,
+                                 int16_t doubled_render_lane,
+                                 int16_t glyph_position,
+                                 int32_t geometry_base,
+                                 int32_t selected_pointer_value,
+                                 uint16_t compositor_shift,
+                                 FA18GlyphPlacement *placement);
+
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the
  * source packet's mode/shift word; the byte stream and selected plane replace
  * the original untyped registers and address values. */

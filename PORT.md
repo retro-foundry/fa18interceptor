@@ -358,6 +358,12 @@ returns a bounded stream slice from a native font asset, with no original
 memory address model. The next unresolved part of the frame-398 chain is the
 caller supplied coordinate and renderer destination calculation.
 
+That `$C327A0` arithmetic is now represented by `FA18GlyphPlacement` and
+`fa18_prepare_glyph_placement`. It preserves the lane and glyph position sum,
+the observed `0x28` visibility bound, the geometry plus selected-pointer
+destination calculation, and the compositor shift as explicit native fields.
+The caller values remain inputs until their frame-398 producers are traced.
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The
