@@ -13,6 +13,7 @@
 #include "run075_frame462_data.h"
 #include "run075_hud_deltas.h"
 #include "run075_tail_deltas.h"
+#include "display.h"
 
 static uint8_t frame_scene_color_index(uint16_t color) {
     return color == 0x001 ? 1u : color == 0x002 ? 6u :
@@ -48,6 +49,44 @@ static uint16_t pixel_mask(FA18PixelTable table, int x) {
 
 void fa18_clear_renderer_work_buffer(FA18IndexedFrameBuffer *framebuffer) {
     if (framebuffer) memset(framebuffer->pixels, 0, sizeof framebuffer->pixels);
+}
+
+void fa18_clear_planar_page(FA18PlanarPage *page) {
+    if (page) memset(page, 0, sizeof *page);
+}
+
+int fa18_apply_planar_word(FA18PlanarPage *page, int plane, int word_x,
+                           int y, uint16_t and_mask, uint16_t or_mask) {
+    if (!page || plane < 0 || plane >= FA18_PLANES || word_x < 0 ||
+        word_x >= FA18_WIDTH / 16 || y < 0 || y >= FA18_HEIGHT) return -1;
+    const size_t offset = (size_t)y * FA18_PLANAR_ROW_BYTES +
+                          (size_t)word_x * 2u;
+    uint16_t word = (uint16_t)(((uint16_t)page->plane[plane][offset] << 8) |
+                               page->plane[plane][offset + 1u]);
+    word = (uint16_t)((word & and_mask) | or_mask);
+    page->plane[plane][offset] = (uint8_t)(word >> 8);
+    page->plane[plane][offset + 1u] = (uint8_t)word;
+    return 0;
+}
+
+void fa18_planar_page_to_indexed(const FA18PlanarPage *page,
+                                 FA18IndexedFrameBuffer *framebuffer) {
+    if (!page || !framebuffer) return;
+    for (int y = 0; y < FA18_HEIGHT; ++y) {
+        for (int byte_x = 0; byte_x < FA18_PLANAR_ROW_BYTES; ++byte_x) {
+            const size_t offset = (size_t)y * FA18_PLANAR_ROW_BYTES +
+                                  (size_t)byte_x;
+            for (int bit = 0; bit < 8; ++bit) {
+                const uint8_t mask = (uint8_t)(0x80u >> bit);
+                uint8_t index = 0;
+                for (int plane = 0; plane < FA18_PLANES; ++plane)
+                    if (page->plane[plane][offset] & mask)
+                        index = (uint8_t)(index | (uint8_t)(1u << plane));
+                framebuffer->pixels[(size_t)y * FA18_WIDTH +
+                                    (size_t)byte_x * 8u + (size_t)bit] = index;
+            }
+        }
+    }
 }
 
 int fa18_apply_plane_word_update(FA18IndexedFrameBuffer *framebuffer,

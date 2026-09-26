@@ -15,6 +15,12 @@ typedef struct {
     uint8_t plane[FA18_PLANES][FA18_PLANAR_PAGE_BYTES];
 } FA18PlanarPage;
 
+void fa18_clear_planar_page(FA18PlanarPage *page);
+int fa18_apply_planar_word(FA18PlanarPage *page, int plane, int word_x,
+                           int y, uint16_t and_mask, uint16_t or_mask);
+void fa18_planar_page_to_indexed(const FA18PlanarPage *page,
+                                 FA18IndexedFrameBuffer *framebuffer);
+
 /* Amiga RGB4 words, held as palette state rather than COLORxx registers. */
 typedef struct {
     uint16_t rgb4[16];

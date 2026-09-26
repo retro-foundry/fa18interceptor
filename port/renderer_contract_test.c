@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "display.h"
 #include "run075_frame395_data.h"
 #include "run075_frame398_data.h"
 #include "run075_frame402_data.h"
@@ -14,6 +15,22 @@
 #include <string.h>
 
 int main(void) {
+    FA18PlanarPage page;
+    FA18IndexedFrameBuffer planar_output;
+    fa18_clear_planar_page(&page);
+    if (fa18_apply_planar_word(&page, 0, 8, 105, 0xffffu, 0x0018u) != 0 ||
+        fa18_apply_planar_word(&page, 1, 8, 105, 0xffe7u, 0) != 0 ||
+        fa18_apply_planar_word(&page, 2, 8, 105, 0xffffu, 0x0002u) != 0) {
+        fprintf(stderr, "semantic planar word update failed\n");
+        return 1;
+    }
+    fa18_planar_page_to_indexed(&page, &planar_output);
+    if (planar_output.pixels[105 * FA18_WIDTH + 8 * 16 + 11] != 1u ||
+        planar_output.pixels[105 * FA18_WIDTH + 8 * 16 + 12] != 1u ||
+        planar_output.pixels[105 * FA18_WIDTH + 8 * 16 + 14] != 4u) {
+        fprintf(stderr, "semantic planar conversion failed\n");
+        return 1;
+    }
     FA18IndexedFrameBuffer plane_word;
     memset(&plane_word, 0x0fu, sizeof plane_word);
     const FA18PlaneWordUpdate plane_word_update = {
