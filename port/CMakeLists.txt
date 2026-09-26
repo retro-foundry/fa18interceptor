@@ -15,7 +15,7 @@ FetchContent_Declare(SDL2
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
 
-add_executable(fa18_port main.c menu.c renderer.c line.c postflight.c demo.c display.c glyph.c projection.c transform.c projection_packet.c projection_seed.c replay.c)
+add_executable(fa18_port main.c menu.c renderer.c line.c postflight.c demo.c display.c glyph.c projection.c transform.c projection_packet.c projection_seed.c replay.c flight.c)
 target_compile_definitions(fa18_port PRIVATE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_port PRIVATE SDL2-static)
 if(MSVC)
@@ -51,3 +51,5 @@ add_executable(fa18_projection_seed_contract_test projection_seed_contract_test.
 add_test(NAME fa18_projection_seed_contract COMMAND fa18_projection_seed_contract_test)
 add_executable(fa18_replay_contract_test replay_contract_test.c replay.c)
 add_test(NAME fa18_replay_contract COMMAND fa18_replay_contract_test)
+add_executable(fa18_flight_contract_test flight_contract_test.c flight.c)
+add_test(NAME fa18_flight_contract COMMAND fa18_flight_contract_test)

@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 661. Frames
+The native live gate currently covers run075 frames 200 through 793. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -305,6 +305,13 @@ Frame 614 reaches `$C306AE` and `$C2FF48` and changes 32 pixels. Frame 641
 adds 6 pixels. Frame 661 is the next large geometry boundary; all three exact
 RGB444 deltas are in the native adapter, and comparison passes through frame
 661.
+
+Frame 793 is the first gate boundary with the active flight update chain. The
+native `FA18FlightPose` struct models the proven lateral, altitude, forward,
+signed delta, and attitude state. `$C13D84` selects the active record,
+`$C14D32` commits the vertical delta, `$C25E6E/$C25E72` publish the horizontal
+pair, and `$C25A08` prepares the packed cockpit value. Its exact 291-run RGB444
+display delta is verified through frame 793.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
