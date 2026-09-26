@@ -120,7 +120,7 @@ int main(void) {
     }
     uint16_t hud_previous[FA18_WIDTH * FA18_HEIGHT] = {0};
     uint16_t hud_output[FA18_WIDTH * FA18_HEIGHT] = {0};
-    if (FA18_RUN075_HUD_DELTA_COUNT != 38 ||
+    if (FA18_RUN075_HUD_DELTA_COUNT != 44 ||
         fa18_apply_run075_hud_delta(464, hud_previous, hud_output) != 0 ||
         fa18_apply_run075_hud_delta(500, hud_previous, hud_output) != 0 ||
         fa18_apply_run075_hud_delta(559, hud_previous, hud_output) != 0 ||
@@ -128,7 +128,13 @@ int main(void) {
         fa18_apply_run075_hud_delta(614, hud_previous, hud_output) != 0 ||
         fa18_apply_run075_hud_delta(641, hud_previous, hud_output) != 0 ||
         fa18_apply_run075_hud_delta(661, hud_previous, hud_output) != 0 ||
-        fa18_apply_run075_hud_delta(793, hud_previous, hud_output) != 0) {
+        fa18_apply_run075_hud_delta(793, hud_previous, hud_output) != 0 ||
+        fa18_apply_run075_hud_delta(881, hud_previous, hud_output) != 0 ||
+        fa18_apply_run075_hud_delta(894, hud_previous, hud_output) != 0 ||
+        fa18_apply_run075_hud_delta(907, hud_previous, hud_output) != 0 ||
+        fa18_apply_run075_hud_delta(932, hud_previous, hud_output) != 0 ||
+        fa18_apply_run075_hud_delta(945, hud_previous, hud_output) != 0 ||
+        fa18_apply_run075_hud_delta(970, hud_previous, hud_output) != 0) {
         fputs("run075 HUD delta contract failed\n", stderr);
         return 1;
     }

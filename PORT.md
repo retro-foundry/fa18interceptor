@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 793. Frames
+The native live gate currently covers run075 frames 200 through 970. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -312,6 +312,10 @@ signed delta, and attitude state. `$C13D84` selects the active record,
 `$C14D32` commits the vertical delta, `$C25E6E/$C25E72` publish the horizontal
 pair, and `$C25A08` prepares the packed cockpit value. Its exact 291-run RGB444
 display delta is verified through frame 793.
+
+The flight state remains stable between the later observed boundaries. Exact
+display deltas are now recorded for frames 881, 894, 907, 932, 945, and 970;
+the native replay comparison passes through frame 970.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
