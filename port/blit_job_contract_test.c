@@ -8,7 +8,15 @@ int main(void) {
     assert(fill.first_mask == 0x00ff && fill.last_mask == 0x00ff);
     assert(fill.c_modulus == 0x28 && fill.b_modulus == 1);
     assert(fill.a_modulus == 1 && fill.d_modulus == 0);
-    assert(fill.width_words == 20 && fill.height_rows == 13);
+    assert(fill.width_words == 20 && fill.height_rows == 52);
+    FA18BlitOperation setup;
+    assert(fa18_prepare_c304b2_setup(&fill, &setup) == 0);
+    assert(setup.bltcon0 == 0x0d0c && setup.bltcon1 == 2);
+    assert(setup.bltapt == 0x76ee && setup.bltbpt == 0x76ee);
+    assert(setup.bltcpt == 0x10026 && setup.bltdpt == 0x76ee);
+    assert(setup.bltamod == 1 && setup.bltbmod == 1 &&
+           setup.bltcmod == 0x28 && setup.bltdmod == 0);
+    assert(setup.bltsize == 0x0d14);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&

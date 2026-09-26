@@ -1,7 +1,13 @@
 #ifndef FA18_BLIT_JOB_H
 #define FA18_BLIT_JOB_H
 #include <stdint.h>
-typedef struct { uint16_t bltcon0, bltcon1, bltamod; uint32_t bltapt, bltbpt, bltcpt, bltdpt; uint16_t bltsize; } FA18BlitOperation;
+typedef struct {
+    uint16_t bltcon0, bltcon1;
+    uint16_t bltafwm, bltalwm;
+    uint16_t bltamod, bltbmod, bltcmod, bltdmod;
+    uint32_t bltapt, bltbpt, bltcpt, bltdpt;
+    uint16_t bltsize;
+} FA18BlitOperation;
 
 /* Complete semantic packet for the frame559 `$C30678` setup. */
 typedef struct {
@@ -41,6 +47,8 @@ FA18BlitExtent fa18_decode_blit_extent(uint16_t bltsize);
 int fa18_decode_display_blit_geometry(const FA18DisplayBlitPacket *packet,
                                       FA18DisplayBlitGeometry *geometry);
 int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet);
+int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
+                              FA18BlitOperation *operation);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 

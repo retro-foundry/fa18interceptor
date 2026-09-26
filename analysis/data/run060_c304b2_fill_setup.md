@@ -11,7 +11,7 @@ programs the area blitter with:
 | `BLTDPTH` | `$000076EE` | `move.l d2,$50(a0)` |
 | `BLTCPTH` | `$000076EE` | `move.l d1,$4C(a0)` |
 | `BLTDPTL` | `$000076EE` | `move.l d1,$54(a0)` |
-| `BLTSIZE` | `$0D14` | `move.w d0,$58(a0)` |
+| `BLTSIZE` | `$0D14` (20 words x 52 rows) | `move.w d0,$58(a0)` |
 
 The caller image at entry also contains `BLTAFWM=$00FF`, `BLTALWM=$00FF`,
 `BLTCMOD=$0028`, `BLTBMOD=$0001`, `BLTAMOD=$0001`, and `BLTDMOD=$0000`.
