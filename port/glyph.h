@@ -158,7 +158,7 @@ int fa18_render_numeric_glyphs(FA18PlanarPage *page,
                                const FA18FeetCoordinateTable *coordinates,
                                uint8_t plane_index, int16_t lane_base,
                                int16_t doubled_render_lane,
-                               int16_t geometry_base, uint8_t shift_count,
+                               int16_t geometry_base,
                                uint16_t row_count);
 
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the

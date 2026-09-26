@@ -1,5 +1,6 @@
 #include "glyph.h"
 #include "run075_font_asset.h"
+#include "run060_feet_plane3_data.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -174,8 +175,25 @@ int main(void) {
     FA18CockpitNumericValue numeric_render;
     if (fa18_prepare_cockpit_numeric(145u, 6u, &numeric_render) != 0 ||
         fa18_render_numeric_glyphs(&merge_page, &run075_font, &numeric_render,
-                                   &coordinates, 2, 0x1e, 0, 0x18ce, 0, 6) != 0) {
+                                   &coordinates, 2, 0x1e, 0, 0x18ce, 6) != 0) {
         fputs("numeric glyph render contract failed\n", stderr);
+        return 1;
+    }
+    FA18PlanarPage run060_page;
+    memset(&run060_page, 0, sizeof run060_page);
+    memcpy(run060_page.plane[2], fa18_run060_feet_plane3,
+           sizeof fa18_run060_feet_plane3);
+    FA18FeetCoordinateTable run060_coordinates;
+    if (fa18_decode_feet_coordinate_table(fa18_run060_feet_coordinate_words,
+                                           &run060_coordinates) != 0 ||
+        fa18_prepare_cockpit_numeric(125u, 6u, &numeric_render) != 0 ||
+        fa18_render_numeric_glyphs(&run060_page, &run075_font, &numeric_render,
+                                   &run060_coordinates, 2, 0x1e, 0, 0x18ce,
+                                   5) != 0 ||
+        run060_page.plane[2][0x18f9] != 0x04 ||
+        run060_page.plane[2][0x1920] != 0x3b ||
+        run060_page.plane[2][0x1948] != 0x20) {
+        fprintf(stderr, "run060 feet plane delta contract failed %02x %02x %02x\n", run060_page.plane[2][0x18f9], run060_page.plane[2][0x1920], run060_page.plane[2][0x1948]);
         return 1;
     }
 

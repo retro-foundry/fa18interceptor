@@ -754,3 +754,18 @@ implemented by the C runtime. Flight dynamics are deferred until the cockpit
 frame gate. The two menu branches and one renderer
 primitive are validated native contracts but are not yet part of the live
 game loop.
+
+### Run060 numeric glyph pixel contract
+
+- The run060 `$C3201A` feet display path is checked against the captured
+  plane-3 page at the five-row compositor boundary. The fixture starts from
+  the settled `chip.bin` plane and verifies persistent bytes at relative
+  offsets `$18F9`, `$1920`, and `$1948` for rendered value `125`.
+- Coordinate words traced at `$C31928` are represented by semantic
+  `FA18GlyphCoordinatePair` data: `(0,0)`, `(0,$4000)`, `(0,$8000)`,
+  `(0,$E000)`, `($0002,$2000)`, and `($0002,$6000)`.
+- `$C32806` derives a compositor shift from each mask. The native glyph loop
+  uses shifts `0, 4, 8, 14, 2, 6` from the coordinate table instead of one
+  shift for every digit.
+- The exact pixel check is included in `fa18_glyph_contract`; all 16 native
+  contract tests pass after this change.

@@ -16,7 +16,7 @@ RAM snapshot at the breakpoint, the bounded trace changes four bytes:
 
 The first three bytes are in the active plane range `$016A40-$01897F`, so
 they are plane 3 in the captured display page. Their plane-relative offsets
-are `$18EF9`, `$1920`, and `$1948`. The final byte is transient asynchronous
+are `$18F9`, `$1920`, and `$1948`. The final byte is transient asynchronous
 blitter state because it returns to `$40` after one settled frame.
 
 This establishes a run060+ pixel oracle for a changed numeric submission and
