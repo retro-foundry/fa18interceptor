@@ -23,6 +23,18 @@ typedef struct {
     uint8_t control_plane_bits;
 } FA18LineStyle;
 
+typedef struct {
+    uint16_t bltcon1;
+    uint16_t bltbmod;
+    uint16_t bltamod;
+    uint16_t bltsize;
+    uint32_t destination_offset;
+    uint8_t active_plane_mask;
+} FA18LinePacket;
+
+/* Frame-395 `$C2FB7A` packet values after CPU line preparation. */
+int fa18_validate_line_packet(const FA18LinePacket *packet);
+
 /* Native translation of the proved, in-bounds $C2FA7E line-mode path. The
  * original first endpoint row is advanced before line-mode stepping. Returns
  * 0 after drawing, 1 when the original start-row limit rejects the segment,

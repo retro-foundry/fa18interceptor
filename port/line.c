@@ -2,6 +2,11 @@
 
 #include <stdlib.h>
 
+int fa18_validate_line_packet(const FA18LinePacket *packet) {
+    return packet && packet->active_plane_mask != 0 &&
+           packet->destination_offset < 320u * 200u;
+}
+
 static int set_line_pixel(FA18IndexedFrameBuffer *framebuffer,
                           const FA18LineStyle *style, int x, int y) {
     if (x < 0 || x >= FA18_WIDTH || y < 0 || y >= FA18_HEIGHT) return -1;

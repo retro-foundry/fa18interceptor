@@ -9,6 +9,12 @@ int main(void) {
     assert(FA18_RUN075_FRAME395_LINES == 12);
     assert(fa18_run075_frame395_lines[0].x0 == 175);
     assert(fa18_run075_frame395_lines[11].x1 == 199);
+    const FA18LinePacket packet = {
+        .bltcon1 = 85, .bltbmod = 0xfff8, .bltamod = 0,
+        .bltsize = 0, .destination_offset = 94u * 320u + 21u,
+        .active_plane_mask = 0x0f
+    };
+    assert(fa18_validate_line_packet(&packet));
     /* Generic raster contract. A settled run060+ visual fixture is still
      * required before this primitive can be promoted to port parity. */
     FA18IndexedFrameBuffer framebuffer;
