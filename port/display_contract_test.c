@@ -10,6 +10,14 @@ int main(void) {
     FA18IndexedFrameBuffer indices;
     FA18Palette palette;
     uint16_t rgb444[FA18_WIDTH * FA18_HEIGHT];
+    FA18PlanarPage adjusted_page;
+    FA18DisplayPagePair page_pair = {&page, &adjusted_page};
+    if (fa18_select_display_page(&page_pair, 0) != &page ||
+        fa18_select_display_page(&page_pair, 1) != &adjusted_page ||
+        fa18_select_display_page(NULL, 0) != NULL) {
+        fputs("display page selector contract failed\n", stderr);
+        return 1;
+    }
     memset(&page, 0, sizeof page);
     memset(&palette, 0, sizeof palette);
     for (int pixel = 0; pixel < 8; ++pixel) {

@@ -20,6 +20,15 @@ typedef struct {
     uint16_t rgb4[16];
 } FA18Palette;
 
+/* Semantic replacement for the two page pairs selected by `$C2F558`. */
+typedef struct {
+    const FA18PlanarPage *base;
+    const FA18PlanarPage *adjusted;
+} FA18DisplayPagePair;
+
+const FA18PlanarPage *fa18_select_display_page(const FA18DisplayPagePair *pair,
+                                                int adjusted);
+
 /* Convert one 12-bit Amiga RGB4 word to the port's RGB444 pixel format. */
 uint16_t fa18_rgb4_colour(uint16_t rgb4);
 

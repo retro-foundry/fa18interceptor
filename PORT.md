@@ -94,6 +94,11 @@ infer a function's purpose merely from a rendered frame.
 
 ## Progress
 
+- 2026-09-26: Ported the semantic `$C2F558` display page pair selector as
+  `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the
+  observed adjusted versus unadjusted page choice while leaving raw table
+  addresses outside the C runtime model.
+
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).
   Added a bounded host-scheduler oracle renderer. Frames 200, 230, 300 and 400

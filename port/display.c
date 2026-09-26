@@ -2,6 +2,12 @@
 
 #include <stddef.h>
 
+const FA18PlanarPage *fa18_select_display_page(const FA18DisplayPagePair *pair,
+                                                int adjusted) {
+    if (!pair) return NULL;
+    return adjusted ? pair->adjusted : pair->base;
+}
+
 uint16_t fa18_rgb4_colour(uint16_t rgb4) {
     return (uint16_t)(rgb4 & 0x0fffu);
 }
