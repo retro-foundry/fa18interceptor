@@ -20,6 +20,8 @@ typedef struct {
     uint16_t rgb4[16];
 } FA18Palette;
 
+int fa18_palette_set(FA18Palette *palette, uint8_t index, uint16_t rgb4);
+
 /* Semantic replacement for the two page pairs selected by `$C2F558`. */
 typedef struct {
     const FA18PlanarPage *base;

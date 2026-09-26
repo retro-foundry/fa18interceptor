@@ -8,6 +8,12 @@ const FA18PlanarPage *fa18_select_display_page(const FA18DisplayPagePair *pair,
     return adjusted ? pair->adjusted : pair->base;
 }
 
+int fa18_palette_set(FA18Palette *palette, uint8_t index, uint16_t rgb4) {
+    if (!palette || index >= 16u || (rgb4 & 0xf000u) != 0) return -1;
+    palette->rgb4[index] = rgb4;
+    return 0;
+}
+
 uint16_t fa18_rgb4_colour(uint16_t rgb4) {
     return (uint16_t)(rgb4 & 0x0fffu);
 }

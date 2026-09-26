@@ -18,6 +18,13 @@ int main(void) {
         fputs("display page selector contract failed\n", stderr);
         return 1;
     }
+    if (fa18_palette_set(&palette, 4, 0x0151) != 0 ||
+        palette.rgb4[4] != 0x0151 ||
+        fa18_palette_set(&palette, 16, 0) != -1 ||
+        fa18_palette_set(&palette, 4, 0x1000) != -1) {
+        fputs("palette entry update contract failed\n", stderr);
+        return 1;
+    }
     memset(&page, 0, sizeof page);
     memset(&palette, 0, sizeof palette);
     for (int pixel = 0; pixel < 8; ++pixel) {

@@ -98,6 +98,10 @@ infer a function's purpose merely from a rendered frame.
   `FA18DisplayPagePair` and `fa18_select_display_page`. It preserves the
   observed adjusted versus unadjusted page choice while leaving raw table
   addresses outside the C runtime model.
+- 2026-09-26: Added validated `fa18_palette_set` entry updates to the native
+  `FA18Palette` boundary. It accepts only RGB4 values and valid palette
+  indices; the source palette write order remains open until a run060+ trace
+  identifies it.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).
