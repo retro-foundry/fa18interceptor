@@ -352,6 +352,12 @@ row count, and shift fields, preserves big endian display words, and advances
 rows by the native 40-byte stride. Its contract test covers the observed mask
 merge and rejects out-of-page destinations.
 
+The `$C3D790` font lookup is now represented by `FA18GlyphTable` and
+`fa18_select_glyph`. The selector applies the observed ASCII-space bias and
+returns a bounded stream slice from a native font asset, with no original
+memory address model. The next unresolved part of the frame-398 chain is the
+caller supplied coordinate and renderer destination calculation.
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The

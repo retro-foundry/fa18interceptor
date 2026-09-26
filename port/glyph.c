@@ -45,6 +45,22 @@ int fa18_merge_glyph_stream(FA18PlanarPage *page, uint8_t plane_index,
     return 0;
 }
 
+int fa18_select_glyph(const FA18GlyphTable *table, uint8_t character,
+                      const uint8_t **glyph_stream,
+                      size_t *remaining_bytes) {
+    if (!table || !glyph_stream || !remaining_bytes || character < 0x20u) {
+        return -1;
+    }
+    const size_t index = (size_t)(character - 0x20u);
+    if (!table->offsets || index >= table->offset_count ||
+        !table->glyph_bytes) return -1;
+    const size_t offset = table->offsets[index];
+    if (offset > table->glyph_byte_count) return -1;
+    *glyph_stream = &table->glyph_bytes[offset];
+    *remaining_bytes = table->glyph_byte_count - offset;
+    return 0;
+}
+
 static uint16_t rol16(uint16_t value, unsigned count) {
     count &= 15u;
     if (!count) return value;

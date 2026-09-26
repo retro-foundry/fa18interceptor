@@ -24,6 +24,20 @@ int fa18_merge_glyph_stream(FA18PlanarPage *page, uint8_t plane_index,
                             const uint8_t *glyph_bytes, uint16_t row_count,
                             uint8_t shift_count);
 
+/* `$C327A0`: a native font owns its offset table and byte stream. Offsets are
+ * relative to `glyph_bytes`, matching the original word table semantics. */
+typedef struct {
+    const uint16_t *offsets;
+    size_t offset_count;
+    const uint8_t *glyph_bytes;
+    size_t glyph_byte_count;
+} FA18GlyphTable;
+
+/* Select the stream for an ASCII character after the observed space bias. */
+int fa18_select_glyph(const FA18GlyphTable *table, uint8_t character,
+                      const uint8_t **glyph_stream,
+                      size_t *remaining_bytes);
+
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the
  * source packet's mode/shift word; the byte stream and selected plane replace
  * the original untyped registers and address values. */

@@ -36,6 +36,22 @@ int main(void) {
         return 1;
     }
 
+    const uint16_t glyph_offsets[2] = {2u, 4u};
+    const uint8_t glyph_stream[6] = {0xaa, 0xbb, 0xc1, 0xc2, 0xd1, 0xd2};
+    const FA18GlyphTable glyph_table = {
+        glyph_offsets, 2u, glyph_stream, sizeof glyph_stream
+    };
+    const uint8_t *selected = NULL;
+    size_t remaining = 0;
+    if (fa18_select_glyph(&glyph_table, 0x20u, &selected, &remaining) != 0 ||
+        selected != &glyph_stream[2] || remaining != 4u ||
+        fa18_select_glyph(&glyph_table, 0x21u, &selected, &remaining) != 0 ||
+        selected != &glyph_stream[4] || remaining != 2u ||
+        fa18_select_glyph(&glyph_table, 0x22u, &selected, &remaining) != -1) {
+        fputs("glyph offset table contract failed\n", stderr);
+        return 1;
+    }
+
     FA18PlanarPage page;
     const uint8_t glyph[2] = {0xf0u, 0x80u};
     memset(&page, 0xff, sizeof page);
