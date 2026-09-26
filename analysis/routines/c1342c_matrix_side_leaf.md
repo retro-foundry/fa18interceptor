@@ -66,3 +66,11 @@ new = old − delta = $FFF1  (−15)
 Thus the first component is a one-quarter relaxation toward a leaf-computed
 target for this packet. The target's upstream source and its physical/control
 meaning are still unassigned.
+
+For this exact target, the immediate provenance is also observed. The selected
+signed lane local is `−2`; `$C135BE-$C135CC` takes its absolute value, doubles
+it to word offset `+$0004`, reads `$002D` from the zero-index table rooted at
+`$C3D690`, and negates it before storing `$FFD3` at `$C45B5E`. That value is
+passed to `$C13BA0` and becomes the smoothing target above. This establishes a
+table-driven target lane, not the table's coordinate convention or gameplay
+meaning.
