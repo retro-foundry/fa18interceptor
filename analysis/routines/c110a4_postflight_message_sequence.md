@@ -31,3 +31,18 @@ the ordinary parent-update entry.
 It proves the postflight mode-9 message transition, not the condition that
 made mode 9 reachable, the semantic meaning of the external helper, or pilot
 qualification persistence.
+
+## `$C1AB74` offset-zero lifetime in run060
+
+The pointer stored at `$C1AB74` resolves to `$00C06A98` in the adjacent
+run060 checkpoints.  Its first word is `$0000` at frame 9,284 and `$0001` at
+frame 9,285, exactly across the traced mode-9 branch.  This independently
+matches the `MOVE.W #1,(A0)` at `$C11172` in the success-selector writer
+trace.  By frame 9,400 that word is again `$0000`.
+
+Consequently this is an observed transient state-block write associated with
+the mode-9 message sequence.  The available checkpoints do **not** establish
+which later instruction clears it, nor do they support treating it as a
+persistent qualification/unlock record.  Its known later static consumer
+(`$C1BD78`) only tests whether the word is zero while selecting a command
+mode; it has not been observed consuming this success transition.
