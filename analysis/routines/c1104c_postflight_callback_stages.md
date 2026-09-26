@@ -11,7 +11,14 @@ On expiry, `$C1104C` clears `$C45795`, writes selector word `$000E` at
 
 On expiry, `$C11078` writes one to `$C457AE`, reloads `$C45AD6` to two,
 installs `$C110A4` in `$C1820C`, and writes one to `$C458AD`.  This makes it
-the exact static producer of the callback slot used by run060's later
-success-queue activation.  The run060 invocation of this particular entry is
-not yet captured as a bounded instruction trace; the source establishes
-dataflow, not the causal result predicate.
+the exact producer of the callback slot used by run060's later success-queue
+activation.
+
+The sealed run060 checkpoint at global frame 9,200 was resumed with the
+recording suffix aligned to that checkpoint.  It reaches `$C11078` 63 restored
+frames later (global frame 9,263) with `$C45AD6=$FFFF`.  Its bounded ten-
+instruction trace takes the expiry route, stores `$0002` to `$C45AD6`, stores
+`$C110A4` to `$C1820C`, and returns to `$C0F808`.  The retained fixture is
+`build/run060_frame09200_c11078_handoff_trace_v2/`.  This directly joins the
+post-input scheduler to the later success queue, but does not identify the
+physical or result predicate that selected this scheduler state.

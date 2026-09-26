@@ -15,6 +15,8 @@ def main():
     parser.add_argument('--restore', type=Path, required=True)
     parser.add_argument('--playback', type=Path,
                         help='optional E9K input stream; omit when restoring a post-step state')
+    parser.add_argument('--playback-frame-offset', type=int, default=0,
+                        help='global replay frame represented by restored frame zero')
     parser.add_argument('--address', type=lambda x: int(x, 0), required=True)
     parser.add_argument('--arm-frame', type=int, required=True)
     parser.add_argument('--return-pc', type=lambda x: int(x, 0), required=True)
@@ -39,7 +41,8 @@ def main():
     for frame in range(1, args.frames + 1):
         if frame == args.arm_frame:
             engine.core.e9k_debug_add_breakpoint(args.address)
-        for kind, values in events.get(frame, []):
+        global_frame = args.playback_frame_offset + frame
+        for kind, values in events.get(global_frame, []):
             engine.event(kind, values)
         engine.core.retro_run()
         if engine.core.e9k_debug_is_paused():
@@ -47,7 +50,8 @@ def main():
             break
     if hit_frame is None or engine.regs()['pc'] != args.address:
         raise RuntimeError(f'Breakpoint {args.address:06x} not reached')
-    future = [frame for frame in events if frame > hit_frame]
+    future = [frame for frame in events
+              if frame > args.playback_frame_offset + hit_frame]
     if future and not args.ignore_future_input:
         raise ValueError(f'Future input after breakpoint frame {hit_frame}: {future}')
     writes = []
