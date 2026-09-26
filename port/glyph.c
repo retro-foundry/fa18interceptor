@@ -224,6 +224,29 @@ int fa18_render_placed_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
                              shift_count, row_count);
 }
 
+int fa18_render_numeric_glyphs(FA18PlanarPage *page,
+                               const FA18GlyphTable *table,
+                               const FA18CockpitNumericValue *value,
+                               const FA18FeetCoordinateTable *coordinates,
+                               uint8_t plane_index, int16_t lane_base,
+                               int16_t doubled_render_lane,
+                               int16_t geometry_base, uint8_t shift_count,
+                               uint16_t row_count) {
+    if (!page || !table || !value || !coordinates ||
+        value->digit_count > coordinates->count) return -1;
+    for (uint8_t index = 0; index < value->digit_count; ++index) {
+        FA18PlaneGlyphPlacement placement;
+        int status = fa18_prepare_plane_glyph_placement(
+            plane_index, lane_base, doubled_render_lane,
+            &coordinates->pair[index], geometry_base, &placement);
+        if (status == 1) continue;
+        if (status != 0 || fa18_render_placed_glyph(
+                page, table, value->digits[index], &placement,
+                shift_count, row_count) != 0) return -1;
+    }
+    return 0;
+}
+
 static uint16_t rol16(uint16_t value, unsigned count) {
     count &= 15u;
     if (!count) return value;

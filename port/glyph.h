@@ -152,6 +152,15 @@ int fa18_render_placed_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
                              const FA18PlaneGlyphPlacement *placement,
                              uint8_t shift_count, uint16_t row_count);
 
+int fa18_render_numeric_glyphs(FA18PlanarPage *page,
+                               const FA18GlyphTable *table,
+                               const FA18CockpitNumericValue *value,
+                               const FA18FeetCoordinateTable *coordinates,
+                               uint8_t plane_index, int16_t lane_base,
+                               int16_t doubled_render_lane,
+                               int16_t geometry_base, uint8_t shift_count,
+                               uint16_t row_count);
+
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the
  * source packet's mode/shift word; the byte stream and selected plane replace
  * the original untyped registers and address values. */

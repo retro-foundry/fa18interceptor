@@ -171,6 +171,13 @@ int main(void) {
         fputs("placed glyph render contract failed\n", stderr);
         return 1;
     }
+    FA18CockpitNumericValue numeric_render;
+    if (fa18_prepare_cockpit_numeric(145u, 6u, &numeric_render) != 0 ||
+        fa18_render_numeric_glyphs(&merge_page, &run075_font, &numeric_render,
+                                   &coordinates, 2, 0x1e, 0, 0x18ce, 0, 6) != 0) {
+        fputs("numeric glyph render contract failed\n", stderr);
+        return 1;
+    }
 
     FA18GlyphPlacement placement;
     if (fa18_prepare_glyph_placement(2, 4, 3, 0x100, 0x20, 7, &placement) != 0 ||
