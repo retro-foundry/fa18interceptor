@@ -904,6 +904,11 @@ game loop.
   packet: coordinates `(140,105)`, four plane lanes separated by `$1F40`,
   and the first word update's OR/AND masks. The evidence is recorded in
   `analysis/data/run075_frame559_c2f688_plane_packet.md`.
+- The complete frame559 call set contains five `$C2F688` point updates at
+  `(140,105)`, `(52,106)`, `(297,106)`, `(231,109)`, and `(101,101)`. This
+  call set is recorded in
+  `analysis/data/run075_frame559_c2f688_call_set.md` and is the next native
+  geometry reconstruction target.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
