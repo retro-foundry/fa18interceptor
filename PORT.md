@@ -362,6 +362,10 @@ lookup table, composed by `$C2E514` arithmetic, and stored in the semantic
 attitude matrix. Its zero-angle contract preserves the original matrix sign
 convention.
 
+The complete Debug build and all 14 CTest contracts pass after the flight
+chain additions. The detached full recording comparison also reports an exact
+chunky RGB444 match for all 20,788 frames from 200 through 20987.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,
