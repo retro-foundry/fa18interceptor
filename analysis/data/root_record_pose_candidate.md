@@ -44,6 +44,12 @@ the pose can be the aircraft, camera, or a deliberately coincident
 aircraft/camera context. The root is selected by the live control stage, which
 supports (but does not prove) player ownership.
 
+The initial identity-matrix trajectory supplies a provisional coordinate basis:
+`+$14` is the lateral horizontal candidate, `+$18` is vertical altitude, and
+`+$1C` is the initial forward horizontal candidate. The first changing angle
+`+$66` rotates only the vertical/forward plane, making it pitch-like. See
+`data/run060_root_axis_orientation_inference.md`.
+
 ## Early run060 initialization event
 
 The deterministic per-frame sampler over root `+$14/+18/+1C` finds exactly
@@ -70,7 +76,7 @@ root pose interpretation.
 
 ## Not yet proven
 
-- Which horizontal component is which world axis.
+- The real-world sign and units of the inferred lateral/forward axes.
 - Whether root position is aircraft world position, camera position, or a
   shared player/camera pose.
 - Whether the matrix is aircraft attitude, camera attitude, or a shared
