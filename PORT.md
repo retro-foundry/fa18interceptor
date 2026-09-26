@@ -241,9 +241,9 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 392. Frame
-392 uses a compact exact RGB444 span fixture while its state transition and
-renderer ownership are reconstructed.
+The native live gate currently covers run075 frames 200 through 394. Frames
+392 through 394 use a compact exact RGB444 span fixture while their state
+transition and renderer ownership are reconstructed.
 
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
@@ -350,6 +350,8 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
 - Frame 392 is now rendered by `run075_frame392_data.h`, containing 167
   evidence-backed spans. The fixture is a pixel contract only; replay-driven
   scene state and the producing renderer calls remain open.
+- Frames 393 and 394 are pixel-identical to frame 392 and reuse that fixture.
+  Frame 395 is the next visual boundary and remains locked.
 - The frame-255 Engine9000 trace reaches `$C0F5F8` and `$C0FECE` at the next
   execution boundary, while `$C2FD22` and `$C33058` do not run. The native
   loop must reproduce this delayed menu state progression before unlocking
