@@ -884,3 +884,5 @@ game loop.
   destination `$0796`; its oracle placement begins at `(173,48)`.
 - Frame 531 now uses source `C8 C8 A8 98 C8 C8 C8`, mask `$B000`, and the
   repeated destination `$0796`; its oracle placement begins at `(180,48)`.
+- Frame 533 now uses source `F8 88 80 C0 C0 C8 F8`, mask `$2000`, and
+  destination `$0798`; its oracle placement begins at `(187,48)`.
