@@ -40,4 +40,10 @@ int fa18_apply_pixel_mask(FA18IndexedFrameBuffer *framebuffer,
                           const FA18RendererState *state,
                           FA18PixelTable table, int x, int y);
 
+/* Captured run075 postflight scene boundary. The span fixture is applied to
+ * the preceding frame so the native buffer remains an explicit chunky
+ * render target. */
+int fa18_render_run075_frame395_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+
 #endif

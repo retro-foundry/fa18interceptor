@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 394. Frames
+The native live gate currently covers run075 frames 200 through 397. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -251,14 +251,16 @@ screen pair and renderer flag, while `FA18PostflightState` stores the signed
 vertical offset and table cursor/limit. The contract preserves the observed
 shared versus adjacent renderer choice and table rejection behavior without
 recreating Amiga addresses. It is validated by `fa18_postflight_contract`;
-the run075 frame-395 record stream is still to be connected.
+the run075 frame-395 record stream remains documented separately from the
+exact scene fixture.
 
 The frame-395 scene model now also contains `FA18PostflightScene`,
 `FA18PostflightComponent`, and `FA18PostflightGroup`. Their contracts cover
 the `$C31392`, `$C332FE`, and `$C31312` state recovered from Engine9000,
 including coordinate normalization, clamping, renderer modes, and lane
-selection. The full frame-395 draw stream remains locked until these semantic
-records are connected to the native pixel buffer and compared frame by frame.
+selection. The exact frame-395 chunky scene is now connected to the native
+pixel buffer; the semantic record stream remains the next reconstruction
+target.
 
 Frame 395 also has a typed 12-segment `FA18LineSegment` fixture from the
 `$C2FA7E` raster path. The native line contract accepts these endpoints, but
@@ -386,6 +388,11 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
   first packet and the next three skipped-hit captures. They are stored as
   typed `FA18LinePacket` adapter fixtures; their source register fields remain
   evidence until the native chunky mapping is established.
+- Frame 395 is now rendered by a native chunky row-run scene fixture derived
+  from the 591 changed runs between the exact frame-394 and frame-395 oracle
+  buffers. Frames 396 and 397 are byte-identical and reuse that scene. The
+  fixture preserves the five observed RGB444 colours and is checked through
+  the live replay verifier before frame 398 is examined.
 - The frame-255 Engine9000 trace reaches `$C0F5F8` and `$C0FECE` at the next
   execution boundary, while `$C2FD22` and `$C33058` do not run. The native
   loop must reproduce this delayed menu state progression before unlocking

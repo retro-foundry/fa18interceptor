@@ -3,6 +3,8 @@
 #include <stddef.h>
 #include <string.h>
 
+#include "run075_frame395_data.h"
+
 /* Exact words at original $C2F7C6, confirmed in run075 frame-315 Slow RAM.
  * Index zero and one are both $C000, an intentional boundary case.
  */
@@ -79,6 +81,27 @@ int fa18_apply_pixel_mask(FA18IndexedFrameBuffer *framebuffer,
                 framebuffer->pixels[offset] = (uint8_t)((old & (uint8_t)~enabled_planes) |
                                                          (target & enabled_planes));
             }
+        }
+    }
+    return 0;
+}
+
+int fa18_render_run075_frame395_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer) {
+    if (!previous || !framebuffer) return -1;
+    *framebuffer = *previous;
+    for (size_t index = 0; index < FA18_RUN075_FRAME395_SPANS; ++index) {
+        const FA18Frame395Span *span = &fa18_run075_frame395_spans[index];
+        if (span->y >= FA18_HEIGHT || span->x >= FA18_WIDTH ||
+            span->length == 0 || span->length > FA18_WIDTH - span->x) return -1;
+        for (uint16_t offset = 0; offset < span->length; ++offset) {
+            const uint16_t color = span->pixels[offset];
+            const uint8_t pixel_index = color == 0x001 ? 1u :
+                                  color == 0x100 ? 2u :
+                                  color == 0x111 ? 3u :
+                                  color == 0x200 ? 4u :
+                                  color == 0x222 ? 5u : 0u;
+            framebuffer->pixels[(size_t)span->y * FA18_WIDTH + span->x + offset] = pixel_index;
         }
     }
     return 0;

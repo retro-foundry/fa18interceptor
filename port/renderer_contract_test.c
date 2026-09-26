@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "run075_frame395_data.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -60,6 +61,17 @@ int main(void) {
     if (fa18_apply_pixel_mask(&framebuffer, &state, FA18_PIXEL_PRIMARY, 100, 125) != 0 ||
         framebuffer.pixels[125 * FA18_WIDTH + 100] != 9) {
         fputs("primary all-XOR handler contract failed\n", stderr);
+        return 1;
+    }
+    FA18IndexedFrameBuffer previous;
+    memset(&previous, 0, sizeof previous);
+    previous.pixels[1 * FA18_WIDTH] = 1;
+    FA18IndexedFrameBuffer scene;
+    if (FA18_RUN075_FRAME395_SPANS != 591 ||
+        fa18_render_run075_frame395_scene(&previous, &scene) != 0 ||
+        scene.pixels[1 * FA18_WIDTH] != 1 ||
+        scene.pixels[101 * FA18_WIDTH + 100] != 5) {
+        fputs("run075 frame-395 scene contract failed\n", stderr);
         return 1;
     }
     puts("run075 two-row pixel contract passed");

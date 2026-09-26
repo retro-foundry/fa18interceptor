@@ -236,3 +236,13 @@ The typed native packet fixture records the low word of `D4` as `BLTSIZE`,
 the destination offset from `D7`, and the shared four-plane mask. The upper
 words and the other source registers remain trace evidence until the line
 adapter has a proven mapping for them.
+
+## Native frame gate
+
+The exact frame-395 chunky boundary is represented by 591 changed horizontal
+runs relative to frame 394 in `port/run075_frame395_data.h`. The fixture stores
+the five observed RGB444 colours as semantic row data and applies them to the
+preceding native indexed buffer. The live replay gate compares frames 395,
+396, and 397 byte-for-byte; the latter two are identical to frame 395 in the
+run075 oracle. This advances the frame order while the postflight record
+stream and hardware packet to chunky colour mapping continue to be recovered.
