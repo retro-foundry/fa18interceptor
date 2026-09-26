@@ -29,3 +29,14 @@ the proved menu tick/delay state update at the same fixed update boundary.
 The existing `fa18_menu_post_input_tick` contract is the first candidate
 consumer; the exact number and ordering of sub-ticks per displayed frame must
 be measured from the Engine9000 trace before later frames are unlocked.
+
+## First visible change
+
+The first RGB444 change after the green `DEMO` label is frame 273. Its image
+is an all-zero 320x200 chunky page. The next display submission breakpoint,
+`$C2FF48`, is reached at Engine frame 274 with entry registers
+`D0=319,D1=179,D2=0,D3=319,D4=179,D5=0,D6=1135,D7=$FFFFFFFF`; the bounded
+trace branches through `$C301F6` and `$C305AA`. `$C2FD22` was not the entry
+hit in this window. This identifies the visible frame-273 boundary as a
+cleared page before the following renderer submission, without yet assigning
+the complete transition state.
