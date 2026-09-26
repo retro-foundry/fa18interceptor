@@ -338,6 +338,14 @@ frame 20987. This compact representation is committed as `c04adf5` and pushed
 to the Retro Foundry remote; the four pre-existing analysis edits remain
 uncommitted.
 
+The packed numeric font producer is now represented by
+`fa18_format_packed_decimal` in `port/glyph.c`. It expands the low nibbles in
+display order, preserving the observed `0x0171 -> "0171"` scratch result;
+`fa18_skip_leading_zero_digits` models the later draw-loop suppression check.
+The glyph contract test covers both boundaries. This still leaves the writer
+of `$C45B22`, glyph table lookup, and cockpit placement to trace before the
+frame-398 fixture can be replaced.
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The

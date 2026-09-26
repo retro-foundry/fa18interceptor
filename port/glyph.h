@@ -6,6 +6,16 @@
 #include <stddef.h>
 #include <stdint.h>
 
+/* `$C32740`: expand the low `digit_count` nibbles of a packed value into
+ * scratch bytes in display order. `output` must have room for `digit_count`
+ * bytes. Leading-zero suppression is a separate draw-loop decision. */
+int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
+                               uint8_t *output);
+
+/* The draw loop's leading-zero check, retaining one digit for zero. */
+const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
+                                             uint8_t digit_count);
+
 /* Native parameters for one `$C330FE` lane. `encoded_shift` retains only the
  * source packet's mode/shift word; the byte stream and selected plane replace
  * the original untyped registers and address values. */

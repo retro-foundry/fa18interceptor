@@ -1,5 +1,23 @@
 #include "glyph.h"
 
+int fa18_format_packed_decimal(uint32_t packed_value, uint8_t digit_count,
+                               uint8_t *output) {
+    if (!output || digit_count == 0 || digit_count > 8) return -1;
+    for (uint8_t index = 0; index < digit_count; ++index) {
+        output[digit_count - 1u - index] =
+            (uint8_t)('0' + ((packed_value >> (index * 4u)) & 0x0fu));
+    }
+    return 0;
+}
+
+const uint8_t *fa18_skip_leading_zero_digits(const uint8_t *digits,
+                                             uint8_t digit_count) {
+    if (!digits || digit_count == 0) return NULL;
+    uint8_t first = 0;
+    while (first + 1u < digit_count && digits[first] == '0') ++first;
+    return &digits[first];
+}
+
 static uint16_t rol16(uint16_t value, unsigned count) {
     count &= 15u;
     if (!count) return value;

@@ -4,6 +4,27 @@
 #include <string.h>
 
 int main(void) {
+    uint8_t formatted[8] = {0};
+    if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
+        memcmp(formatted, "0171", 4u) != 0) {
+        fputs("packed decimal formatter contract failed\n", stderr);
+        return 1;
+    }
+    const uint8_t *digits = fa18_skip_leading_zero_digits(formatted, 4u);
+    if (!digits || digits != &formatted[1] || *digits != '1') {
+        fputs("packed decimal retained-digit contract failed\n", stderr);
+        return 1;
+    }
+    if (fa18_format_packed_decimal(0x0007u, 4u, formatted) != 0) {
+        fputs("packed decimal second format failed\n", stderr);
+        return 1;
+    }
+    digits = fa18_skip_leading_zero_digits(formatted, 4u);
+    if (!digits || digits != &formatted[3] || *digits != '7') {
+        fputs("packed decimal leading-zero contract failed\n", stderr);
+        return 1;
+    }
+
     FA18PlanarPage page;
     const uint8_t glyph[2] = {0xf0u, 0x80u};
     memset(&page, 0xff, sizeof page);
