@@ -340,6 +340,12 @@ OUTPUT.ppm` exports an exact 320x200 native frame for a pixel comparison.
   frame 286 is the next page boundary.
 - Frame 286 remains all-black and is represented by the same native clear;
   frame 287 is the next page boundary.
+- The first post-clear visual change is frame 392: 361 sparse RGB444 pixels
+  in native bounds `x=7..318, y=101..199`. Frames 287..391 are identical to
+  frame 286. `$C2FD22` is reached at Engine frame 291 and clears the four
+  active planar streams; it is a buffer clear, not the source of the frame
+  392 pixels. See
+  [the frame-392 boundary note](analysis/routines/run075_frame392_cockpit_entry.md).
 - The frame-255 Engine9000 trace reaches `$C0F5F8` and `$C0FECE` at the next
   execution boundary, while `$C2FD22` and `$C33058` do not run. The native
   loop must reproduce this delayed menu state progression before unlocking
