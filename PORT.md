@@ -342,6 +342,10 @@ independent XOR tests before command direction selection.
 The direction branches remain separate because the available run060 packets
 prove their selected commands individually, while the complete raw `JOY0DAT`
 to branch polarity table has not yet been captured.
+`E9K_INPUT_V1` parsing now accepts `J` joystick events and preserves their
+port, direction identifier, and pressed state; frame events retain signed
+motion deltas separately. This allows the proven run060 direction mapping to
+be consumed by native flight input state.
 
 `fa18_flight_apply_motion_terms` now ports the proven pose commit boundary:
 the computed lateral and forward terms update `$14/$1C`, while the signed

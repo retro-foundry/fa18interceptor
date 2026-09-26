@@ -24,6 +24,15 @@ int main(void) {
     assert(fa18_flight_publish_control_field(&packed, 0x0c, 0x04, 0) == 0);
     assert(packed == 0x19);
     assert(fa18_flight_publish_control_field(&packed, 0x30, 0x08, 1) < 0);
+    packed = 0x01;
+    assert(fa18_flight_apply_joystick_direction(5, 1, &packed) == 0 &&
+           packed == 0x21);
+    assert(fa18_flight_apply_joystick_direction(5, 0, &packed) == 0 &&
+           packed == 0x01);
+    assert(fa18_flight_apply_joystick_direction(6, 1, &packed) == 0 &&
+           packed == 0x09);
+    assert(fa18_flight_apply_joystick_direction(7, 1, &packed) == 0 &&
+           packed == 0x05);
     FA18FlightControlLanes lanes = {{0, 0, 0}};
     assert(fa18_flight_update_control_lanes(&lanes, 0x21u) == 0);
     assert(lanes.lane[0] == -1 && lanes.lane[1] == 0 && lanes.lane[2] == 0);

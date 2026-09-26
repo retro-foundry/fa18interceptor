@@ -43,6 +43,13 @@ int main(void) {
         fputs("replay control latch contract failed\n", stderr);
         return 1;
     }
+    const FA18ReplayEvent joystick = {939, FA18_REPLAY_JOYSTICK_EVENT,
+                                      {0, 5, 1, 0}};
+    if (fa18_replay_apply_event(&state, &joystick) != 0 ||
+        !state.joystick[0][5]) {
+        fputs("joystick control latch contract failed\n", stderr);
+        return 1;
+    }
     FA18ReplayEvent events_for_frame[] = {
         {230, FA18_REPLAY_KEY_EVENT, {49, 49, 16, 1}},
         {234, FA18_REPLAY_KEY_EVENT, {49, 49, 16, 0}}

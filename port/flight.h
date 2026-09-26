@@ -64,6 +64,11 @@ int fa18_flight_publish_control_field(uint8_t *packed_control,
 int fa18_flight_decode_joy0dat(uint16_t joy0dat,
                                FA18Joy0DerivedInput *derived);
 
+/* Proven run060 frontend direction identifiers to packed command fields. */
+int fa18_flight_apply_joystick_direction(uint8_t direction,
+                                         int pressed,
+                                         uint8_t *packed_control);
+
 /* `$C14B16-$C14B7D`: sign extend three prepared words, scale by four, and
  * retain their negated longword terms for the active record. */
 int fa18_flight_scale_motion_words(int16_t first, int16_t second,

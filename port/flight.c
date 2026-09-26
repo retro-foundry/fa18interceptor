@@ -183,6 +183,23 @@ int fa18_flight_decode_joy0dat(uint16_t joy0dat,
     return 0;
 }
 
+int fa18_flight_apply_joystick_direction(uint8_t direction,
+                                         int pressed,
+                                         uint8_t *packed_control) {
+    uint8_t field_mask;
+    uint8_t command;
+    switch (direction) {
+    case 4: field_mask = 0x30; command = 0x10; break;
+    case 5: field_mask = 0x30; command = 0x20; break;
+    case 6: field_mask = 0x0c; command = 0x08; break;
+    case 7: field_mask = 0x0c; command = 0x04; break;
+    default: return -1;
+    }
+    return fa18_flight_publish_control_field(packed_control, field_mask,
+                                             pressed ? command : 0,
+                                             1);
+}
+
 int fa18_flight_update_attitude(const FA18FlightTrigTable *table,
                                 int16_t first_angle, int16_t second_angle,
                                 int16_t third_angle, FA18FlightPose *pose) {

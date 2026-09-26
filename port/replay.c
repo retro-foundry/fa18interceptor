@@ -42,6 +42,12 @@ int fa18_replay_read_events(const char *path, FA18ReplayEventSink sink, void *us
                 fclose(file);
                 return -1;
             }
+        } else if (kind == 'J') {
+            event.kind = FA18_REPLAY_JOYSTICK_EVENT;
+            if (fields != 5) {
+                fclose(file);
+                return -1;
+            }
         } else {
             fclose(file);
             return -1;
@@ -67,14 +73,25 @@ int fa18_replay_apply_event(FA18ReplayControlState *state,
     if (!state || !event || event->frame < state->frame) return -1;
     state->frame = event->frame;
     if (event->kind == FA18_REPLAY_FRAME_EVENT) {
-        for (size_t index = 0; index < 4; ++index) {
-            state->joystick[index] = (uint8_t)(event->value[index] & 0xff);
+        if (event->value[0] < 0 || event->value[0] > 4) return -1;
+        int first_port = event->value[0] == 4 ? 0 : event->value[0];
+        int last_port = event->value[0] == 4 ? 4 : event->value[0] + 1;
+        for (int port = first_port; port < last_port; ++port) {
+            state->motion[port][0] += event->value[1];
+            state->motion[port][1] += event->value[2];
         }
         return 0;
     }
     if (event->kind == FA18_REPLAY_KEY_EVENT && event->value[0] >= 0 &&
         event->value[0] < 256) {
         state->keyboard_down[event->value[0]] = (uint8_t)(event->value[3] != 0);
+        return 0;
+    }
+    if (event->kind == FA18_REPLAY_JOYSTICK_EVENT &&
+        event->value[0] >= 0 && event->value[0] < 4 &&
+        event->value[1] >= 0 && event->value[1] < 8) {
+        state->joystick[event->value[0]][event->value[1]] =
+            (uint8_t)(event->value[2] != 0);
         return 0;
     }
     return -1;

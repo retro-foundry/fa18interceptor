@@ -6,7 +6,8 @@
 
 typedef enum {
     FA18_REPLAY_FRAME_EVENT = 1,
-    FA18_REPLAY_KEY_EVENT = 2
+    FA18_REPLAY_KEY_EVENT = 2,
+    FA18_REPLAY_JOYSTICK_EVENT = 3
 } FA18ReplayEventKind;
 
 typedef struct {
@@ -17,7 +18,8 @@ typedef struct {
 
 typedef struct {
     uint32_t frame;
-    uint8_t joystick[4];
+    int32_t motion[4][2];
+    uint8_t joystick[4][8];
     uint8_t keyboard_down[256];
 } FA18ReplayControlState;
 
