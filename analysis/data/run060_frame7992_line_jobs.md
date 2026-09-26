@@ -32,6 +32,21 @@ The word x values are obtained from the byte offset by dividing by two; the
 remaining byte offset is zero for all four jobs. The source pointers are
 temporary table data and remain address-free in the native representation.
 
+At the four packet entries, the caller tables advance together:
+
+```text
+A1: $C309AA, $C309AE, $C309B2, $C309B6
+A2: $C45682, $C45686, $C4568A, $C4568E
+A3: $C1AB5C, $C1AB58, $C1AB54, $C1AB50
+```
+
+The first source record at A3 contains pointer words
+`$00B038/$00A210/$008280/$008B18`; subsequent entries shift through the
+same object slot chain. These are source asset/table references, not screen
+coordinates. `$C53F44` is the observed `WaitBlit()` library wrapper, so the
+native implementation should consume the resolved asset words and submit a
+synchronous line operation at the semantic page boundary.
+
 `FA18LineBlitJob` and `fa18_build_run060_frame7992_line_jobs` preserve these
 values as a semantic packet. The packet builder is the current native boundary
 for this frame. The conversion from these source-table pointers to screen

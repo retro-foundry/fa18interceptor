@@ -18,7 +18,10 @@ def main():
             while armed and e.core.e9k_debug_is_paused() and len(hits)<a.count:
                 regs=e.regs()
                 hits.append({'hit':len(hits),'frame':f,'registers':regs,
-                             'record_words':e.memory(0xC4B390,0x100).hex()})
+                             'record_words':e.memory(0xC4B390,0x100).hex(),
+                             'a1_bytes':e.memory(regs['a1'],16).hex(),
+                             'a2_bytes':e.memory(regs['a2'],16).hex(),
+                             'a3_bytes':e.memory(regs['a3'],16).hex()})
                 e.core.e9k_debug_step_instr(); e.core.e9k_debug_resume(); e.core.retro_run()
             if len(hits)>=a.count: break
         if len(hits)!=a.count: raise RuntimeError(f'only captured {len(hits)} of {a.count} hits')
