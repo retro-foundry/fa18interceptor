@@ -847,3 +847,8 @@ game loop.
   `FA18BlitExtent` dimensions. The frame553 `$0E14` operation is therefore
   recorded as 20 words wide by 56 rows high. This captures the proven geometry
   without treating the original Chip pointer as a port address.
+- The C304B2 function note now records its caller supplied contract: it copies
+  one lane pointer into A, B, and D, waits for idle, selects `$0D0C`, writes
+  line mode `$0002`, and triggers the caller supplied extent. The skipped
+  `$0D3C` branch and unresolved page ownership remain explicit evidence until
+  the caller trace assigns those roles.
