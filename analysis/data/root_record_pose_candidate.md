@@ -1,7 +1,7 @@
 # Root control record pose candidate
 
-Classification: **dataflow-backed pose inference**. This is deliberately not a
-final player-position/orientation identification.
+Classification: **scenario-backed moving-pose inference**. This is
+deliberately not a final aircraft-position/orientation identification.
 
 Three independently established facts now meet at the root selected record
 `$C46184` in run060:
@@ -34,9 +34,12 @@ used as matching components of the same projection vector, root `+$14` and
 candidate**: it transforms a selected local seed before that result is added
 to the position-like triple.
 
-In cockpit play the pose can be the aircraft, camera, or a deliberately
-coincident aircraft/camera context. The root is selected by the live control
-stage, which supports (but does not prove) player ownership.
+The root tuple is sampled moving coherently during run060's qualification
+flight and returns to its start value on the replay's reset event; see
+`data/run060_root_pose_motion_timeline.md`. In cockpit play the pose can be
+the aircraft, camera, or a deliberately coincident aircraft/camera context.
+The root is selected by the live control stage, which supports (but does not
+prove) player ownership.
 
 ## Early run060 initialization event
 
@@ -73,6 +76,6 @@ root pose interpretation.
   horizontal components and matrix.
 
 The late-run stability of the triple does not reject this candidate: it is a
-stable portion of this one qualification scenario, not a controlled motion
-experiment. A controlled earlier-flight differential, followed through world
-placement or camera output, is needed for promotion to a player-pose contract.
+stable portion of this one qualification scenario. A controlled differential,
+followed through world placement or camera output, is needed for promotion to
+an aircraft-pose contract.
