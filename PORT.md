@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 463. Frames
+The native live gate currently covers run075 frames 200 through 500. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -292,6 +292,10 @@ comparison passes through frame 461.
 Frame 462 adds 21 HUD pixels through the same `$C33058` static glyph path and
 repeats at frame 463. The native gate stores 12 changed row runs and exact
 replay comparison passes through frame 463.
+
+Frames 464 through 500 contain nineteen even-frame HUD updates, with the odd
+frames repeating the preceding image. They are represented by the typed
+`FA18HudDelta` RGB444 adapter and verified byte-for-byte through frame 500.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the

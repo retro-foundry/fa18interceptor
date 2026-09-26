@@ -60,4 +60,7 @@ int fa18_render_run075_frame460_scene(const FA18IndexedFrameBuffer *previous,
 int fa18_render_run075_frame462_scene(const FA18IndexedFrameBuffer *previous,
                                       FA18IndexedFrameBuffer *framebuffer);
 
+int fa18_apply_run075_hud_delta(uint32_t frame, const uint16_t *previous,
+                                uint16_t *output);
+
 #endif
