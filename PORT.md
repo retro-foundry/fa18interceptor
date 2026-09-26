@@ -840,3 +840,6 @@ game loop.
   buffer clear/copy that precedes the frame559 HUD text. Its register boundary
   and 4,358-byte Chip delta are recorded in
   [the frame553 blit note](analysis/data/run075_frame553_c304f4_hud_clear.md).
+- The same note now records the enclosing `$C304B2` setup: `$0D0C/$0002`
+  blitter control, `$0E14` size, and `$76EE` computed pointer word. The typed
+  page-copy implementation remains gated on resolving its page roles.

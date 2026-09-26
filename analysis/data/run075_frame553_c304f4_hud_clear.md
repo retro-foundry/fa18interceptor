@@ -12,3 +12,9 @@ This is the buffer transition immediately before the large frame559 HUD text
 delta; it is a blitter clear/copy boundary rather than a `$C2F688` pixel
 submission. The native port should model it as a typed display-page operation
 once the source and destination page roles are decoded.
+
+The enclosing `$C304B2` setup is also captured in the same trace. It loads
+`$C4596E` into the blitter size field (`$0E14`), sets `BLTCON0=$0D0C` and
+`BLTCON1=$0002`, and derives the `$76EE` word from `$C45960` before writing the
+custom-chip pointer fields. This establishes the operation shape, while the
+original absolute pointer roles remain intentionally outside the C page model.
