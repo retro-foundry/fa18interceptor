@@ -90,3 +90,14 @@ root +$28 = −2
 
 This is an executed numerical dependency chain for the initial run060 turn;
 the three byte lanes' physical axes remain unassigned.
+
+## run060 third-lane working output
+
+At frame 1754, this leaf runs after `$C1B410` has changed root `+$2A` to −3.
+The bounded `$C1342C` packet changes its working triple at root
+`+$56/+58/+5A` from `$0000/$0000/$0000` to `$0000/$0000/$0013`. The following
+`$C2D620/$C2D624/$C2D628` load supplies that same `$0013` as the third
+`$C2DEE0` input, which returns the later published `$0010` third orientation
+component. This proves the packet-local `+$2A`-window to working-third-input
+handoff; the exact arithmetic inside the wider leaf still needs a bounded
+instruction-level derivation.
