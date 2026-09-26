@@ -53,7 +53,11 @@ int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
     unsigned bshift = (con1 >> 12) & 15u;
     uint16_t bline = (uint16_t)((job->bltb_source_word >> bshift) |
                                 (job->bltb_source_word << ((16u - bshift) & 15u)));
-    int64_t cpt = (int64_t)(job->destination_byte_offset & ~(size_t)1u);
+    /* The captured C/D pointers are odd; Agnus performs the word cycle at
+     * the following even byte address. */
+    int64_t cpt = (int64_t)((job->destination_byte_offset + 1u) &
+                            ~(size_t)1u);
+    int64_t dpt = cpt;
     int one_dot = 0;
     int line_loop = 1;
     uint32_t aold = 0;
@@ -108,9 +112,10 @@ int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
         bshift = (bshift + 15u) & 15u;
         bline = (uint16_t)((((uint32_t)0 << 16) | job->bltb_source_word) >> bshift);
         if (emit) {
-            if (cpt < 0 || cpt + 1 >= (int64_t)plane_bytes) return -1;
-            line_write_word(plane, (size_t)cpt, d);
+            if (dpt < 0 || dpt + 1 >= (int64_t)plane_bytes) return -1;
+            line_write_word(plane, (size_t)dpt, d);
         }
+        dpt = cpt;
     }
     return 0;
 }
