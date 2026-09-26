@@ -18,6 +18,20 @@ B=$00ACD8 C/D=$015FCA
 B=$00AB28 C/D=$01408A
 ```
 
+Using the captured active page table
+`[$018980,$016A40,$014B00,$012BC0]`, the C/D destinations decode as:
+
+| job | semantic plane | page byte offset | word x | row |
+|---:|---:|---:|---:|---:|
+| 0 | 3 | `$0FCA` | 1 | 101 |
+| 1 | 2 | `$14CA` | 1 | 133 |
+| 2 | 1 | `$14CA` | 1 | 133 |
+| 3 | 0 | `$14CA` | 1 | 133 |
+
+The word x values are obtained from the byte offset by dividing by two; the
+remaining byte offset is zero for all four jobs. The source pointers are
+temporary table data and remain address-free in the native representation.
+
 `FA18LineBlitJob` and `fa18_build_run060_frame7992_line_jobs` preserve these
 values as a semantic packet. The packet builder is the current native boundary
 for this frame. The conversion from these source-table pointers to screen
