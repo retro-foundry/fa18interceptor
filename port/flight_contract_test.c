@@ -27,6 +27,15 @@ int main(void) {
            adjusted == 2);
     assert(fa18_flight_prepare_scaled_motion(10, -3, 18, 0x4000, &terms) == 0);
     assert(terms.first == -72 && terms.second == -16 && terms.third == -0x10000);
+    const FA18FlightTrigState trig = {0x1000, 0x2000, 0x3000,
+                                      0x4000, 0x5000, 0x6000};
+    int16_t attitude[3][3];
+    assert(fa18_flight_compose_attitude_matrix(&trig, attitude) == 0);
+    assert(attitude[0][0] == -0x5100 && attitude[0][1] == -0x6200 &&
+           attitude[0][2] == 0x1800 && attitude[1][0] == 0x2800 &&
+           attitude[1][1] == 0x3000 && attitude[1][2] == 0x1000 &&
+           attitude[2][0] == -0x5c00 && attitude[2][1] == -0x2400 &&
+           attitude[2][2] == 0x2000);
 
     FA18FlightPose pose = {0};
     pose.altitude = 0x72301;

@@ -344,6 +344,11 @@ with the `$C14B16` scaled-term preparation in the observed caller order. Its
 four word inputs and three positional outputs remain explicit until the
 record fields are fully assigned.
 
+`fa18_flight_compose_attitude_matrix` now implements the post lookup arithmetic
+of `$C2E514-$C2E5AB`, writing nine fixed point words into native attitude
+storage. The trigonometric lookup tables and angle producer remain separate
+evidence items.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,

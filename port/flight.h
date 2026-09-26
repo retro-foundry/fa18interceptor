@@ -28,6 +28,15 @@ typedef struct {
     int32_t third;
 } FA18FlightMotionTerms;
 
+typedef struct {
+    int16_t d0;
+    int16_t d1;
+    int16_t d2;
+    int16_t d3;
+    int16_t d4;
+    int16_t d5;
+} FA18FlightTrigState;
+
 /* `$C1B410`: decode the packed control byte at the observed `$65` boundary. */
 int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,
                                      uint8_t packed_control);
@@ -48,6 +57,10 @@ int fa18_flight_prepare_scaled_motion(int16_t first_word,
                                       int16_t second_word,
                                       int16_t third_word,
                                       FA18FlightMotionTerms *terms);
+
+/* `$C2E514-$C2E5AB`: compose the nine post lookup fixed point words. */
+int fa18_flight_compose_attitude_matrix(const FA18FlightTrigState *trig,
+                                        int16_t output[3][3]);
 
 /* `$C14D32`: the signed vertical delta is committed to the active pose. */
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);

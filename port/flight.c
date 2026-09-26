@@ -68,6 +68,36 @@ int fa18_flight_prepare_scaled_motion(int16_t first_word,
                                           terms);
 }
 
+static int32_t trig_product(int16_t left, int16_t right) {
+    const int32_t product = (int32_t)left * (int32_t)right;
+    return arithmetic_shift_right(product, 14);
+}
+
+static int16_t matrix_word(int32_t value) {
+    return (int16_t)(uint16_t)value;
+}
+
+int fa18_flight_compose_attitude_matrix(const FA18FlightTrigState *trig,
+                                        int16_t output[3][3]) {
+    if (!trig || !output) return -1;
+    const int16_t d0 = trig->d0, d1 = trig->d1, d2 = trig->d2;
+    const int16_t d3 = trig->d3, d4 = trig->d4, d5 = trig->d5;
+    output[0][0] = matrix_word(arithmetic_shift_right(
+        trig_product(d4, d0) * d2 - (int32_t)d5 * d3, 14));
+    output[0][1] = matrix_word(-arithmetic_shift_right(
+        trig_product(d5, d0) * d2 + (int32_t)d4 * d3, 14));
+    output[0][2] = matrix_word(trig_product(d1, d2));
+    output[1][0] = matrix_word(trig_product(d4, d1));
+    output[1][1] = matrix_word(trig_product(d5, d1));
+    output[1][2] = matrix_word(d0);
+    output[2][0] = matrix_word(-arithmetic_shift_right(
+        trig_product(d4, d0) * d3 + (int32_t)d5 * d2, 14));
+    output[2][1] = matrix_word(arithmetic_shift_right(
+        trig_product(d5, d0) * d3 - (int32_t)d4 * d2, 14));
+    output[2][2] = matrix_word(trig_product(d1, d3));
+    return 0;
+}
+
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta) {
     if (!pose) return -1;
     pose->altitude += delta;
