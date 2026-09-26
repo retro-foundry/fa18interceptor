@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 461. Frames
+The native live gate currently covers run075 frames 200 through 463. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -288,6 +288,10 @@ Frame 460 adds 17 pixels to the cockpit HUD and repeats at frame 461. The
 normal replay reaches `$C33058` with a static glyph submission and introduces
 RGB444 colour `$D92`; the native gate stores its 10 changed row runs and exact
 comparison passes through frame 461.
+
+Frame 462 adds 21 HUD pixels through the same `$C33058` static glyph path and
+repeats at frame 463. The native gate stores 12 changed row runs and exact
+replay comparison passes through frame 463.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the

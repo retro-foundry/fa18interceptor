@@ -10,6 +10,7 @@
 #include "run075_frame408_data.h"
 #include "run075_frame414_data.h"
 #include "run075_frame460_data.h"
+#include "run075_frame462_data.h"
 
 static uint8_t frame_scene_color_index(uint16_t color) {
     return color == 0x001 ? 1u : color == 0x002 ? 6u :
@@ -217,6 +218,22 @@ int fa18_render_run075_frame460_scene(const FA18IndexedFrameBuffer *previous,
         for (uint16_t offset = 0; offset < span->length; ++offset) {
             framebuffer->pixels[(size_t)span->y * FA18_WIDTH + span->x + offset] =
                 span->pixels[offset] == 0xd92 ? 6u : frame_scene_color_index(span->pixels[offset]);
+        }
+    }
+    return 0;
+}
+
+int fa18_render_run075_frame462_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer) {
+    if (!previous || !framebuffer) return -1;
+    *framebuffer = *previous;
+    for (size_t index = 0; index < FA18_RUN075_FRAME462_SPANS; ++index) {
+        const FA18Frame462Span *span = &fa18_run075_frame462_spans[index];
+        if (span->y >= FA18_HEIGHT || span->x >= FA18_WIDTH ||
+            span->length == 0 || span->length > FA18_WIDTH - span->x) return -1;
+        for (uint16_t offset = 0; offset < span->length; ++offset) {
+            framebuffer->pixels[(size_t)span->y * FA18_WIDTH + span->x + offset] =
+                frame_scene_color_index(span->pixels[offset]);
         }
     }
     return 0;
