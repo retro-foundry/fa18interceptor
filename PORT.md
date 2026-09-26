@@ -836,3 +836,7 @@ game loop.
   recorded as off-screen/internal renderer work and do not advance the visible
   chunky gate. See
   [the frame554–561 trace note](analysis/data/run075_frames554_561_c2f688_offscreen.md).
+- The preceding frame553 `$C304F4` trigger performs the large settled display
+  buffer clear/copy that precedes the frame559 HUD text. Its register boundary
+  and 4,358-byte Chip delta are recorded in
+  [the frame553 blit note](analysis/data/run075_frame553_c304f4_hud_clear.md).
