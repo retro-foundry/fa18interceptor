@@ -260,6 +260,11 @@ including coordinate normalization, clamping, renderer modes, and lane
 selection. The full frame-395 draw stream remains locked until these semantic
 records are connected to the native pixel buffer and compared frame by frame.
 
+Frame 395 also has a typed 12-segment `FA18LineSegment` fixture from the
+`$C2FA7E` raster path. The native line contract accepts these endpoints, but
+the source plane state and complete line list are still required before the
+fixture can drive the live frame.
+
 ```powershell
 python scripts/render_port_oracle.py --last-frame 20987 --output build/port_run075_demo_oracle
 python scripts/pack_port_frames.py --oracle build/port_run075_demo_oracle --last-frame 20987 --output build/port_run075_demo.fa18
