@@ -913,6 +913,9 @@ game loop.
   `$C3031C/$C305AA` consumer. The records and the `$C30678-$C306AE` display
   packet setup are documented in
   `analysis/data/run075_frame559_c2ff48_polygon_records.md`.
+- The three resulting `$C30678` blit input packets are recorded in
+  `analysis/data/run075_frame559_c30678_blit_packets.md`; they map onto the
+  existing semantic `FA18BlitOperation` contract.
 - The following frame559 `$C2F8B4` handoff is recorded in
   `analysis/data/run075_frame559_c2f8b4_plane_packet.md`. It confirms that
   this transition needs a semantic temporary plane page before conversion to
