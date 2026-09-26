@@ -63,3 +63,27 @@ P-code is `pcode/raw/run003_joy4_callback/`. The prior samples remain
 the callback count at `$C45774` rises from `$2768` to `$2769`. This recording
 code likewise has no demonstrated JOY0DAT delta or game-axis meaning.
 
+## run060 frame-939 `J 0 5` check
+
+The sealed successful-qualification recording contains `J 0 5 1` at replay
+frame 939, ten frames before the first observed non-zero root angle tuple.
+A `$C1718E` breakpoint armed for that frame reaches the callback and returns
+through `$FC134C` after the normal 83 instructions.  Its before/after state
+is:
+
+```text
+                    before    after
+$C45774 count       $005F     $0060
+$C45776              $00BF     $00BF
+$C45778              $00C0     $00C0
+$C4577C              $00C0     $00C0
+$C1AC06/$C1AC08      $0003/$0018  $0003/$0018
+```
+
+The raw `JOY0DAT` sample has the same low/high bytes as the saved prior
+samples, so both callback deltas are zero.  Consequently this recorded event
+does reach the input callback but does **not** directly change either bounded
+accumulator in that invocation.  A later run060 control-stage trace sees
+`$C45778/$C4577C=$03C0`; the transition to that held state is not assigned to
+the frame-939 joystick callback by this evidence.
+
