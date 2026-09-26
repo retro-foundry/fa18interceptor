@@ -1,21 +1,20 @@
-; Byte-exact adjacent library-vector wrappers $C53FB0-$C53FCF.
-; The library identity and LVO operation meanings remain unassigned.
+; Byte-exact graphics.library OwnBlitter/DisownBlitter wrappers $C53FB0-$C53FCF.
                 org     $C53FB0
 
-LIBRARY_BASE_POINTER            equ $C182CA
-LIBRARY_LVO_1C8                 equ -$1C8
-LIBRARY_LVO_1CE                 equ -$1CE
+GFX_BASE_POINTER                equ $C182CA
+OWN_BLITTER_LVO                 equ -$1C8
+DISOWN_BLITTER_LVO              equ -$1CE
 
-invoke_library_lvo_1c8:
+invoke_graphics_own_blitter:
                 move.l  a6,-(sp)
-                movea.l LIBRARY_BASE_POINTER.l,a6
-                jsr     LIBRARY_LVO_1C8(a6)
+                movea.l GFX_BASE_POINTER.l,a6
+                jsr     OWN_BLITTER_LVO(a6)
                 movea.l (sp)+,a6
                 rts
 
-invoke_library_lvo_1ce:
+invoke_graphics_disown_blitter:
                 move.l  a6,-(sp)
-                movea.l LIBRARY_BASE_POINTER.l,a6
-                jsr     LIBRARY_LVO_1CE(a6)
+                movea.l GFX_BASE_POINTER.l,a6
+                jsr     DISOWN_BLITTER_LVO(a6)
                 movea.l (sp)+,a6
                 rts
