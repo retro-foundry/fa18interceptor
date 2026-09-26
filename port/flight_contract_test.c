@@ -5,6 +5,16 @@
 #include <stdio.h>
 
 int main(void) {
+    uint8_t packed = 0x01;
+    assert(fa18_flight_publish_control_field(&packed, 0x30, 0x20, 1) == 0);
+    assert(packed == 0x21);
+    assert(fa18_flight_publish_control_field(&packed, 0x30, 0x10, 1) == 0);
+    assert(packed == 0x11);
+    assert(fa18_flight_publish_control_field(&packed, 0x0c, 0x08, 1) == 0);
+    assert(packed == 0x19);
+    assert(fa18_flight_publish_control_field(&packed, 0x0c, 0x04, 0) == 0);
+    assert(packed == 0x19);
+    assert(fa18_flight_publish_control_field(&packed, 0x30, 0x08, 1) < 0);
     FA18FlightControlLanes lanes = {{0, 0, 0}};
     assert(fa18_flight_update_control_lanes(&lanes, 0x21u) == 0);
     assert(lanes.lane[0] == -1 && lanes.lane[1] == 0 && lanes.lane[2] == 0);

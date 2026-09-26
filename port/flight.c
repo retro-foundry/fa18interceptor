@@ -158,6 +158,20 @@ int fa18_flight_lookup_two_sine_cosine(const FA18FlightTrigTable *table,
     return 0;
 }
 
+int fa18_flight_publish_control_field(uint8_t *packed_control,
+                                      uint8_t field_mask,
+                                      uint8_t command,
+                                      int enabled) {
+    if (!packed_control || (field_mask != 0x30u && field_mask != 0xc0u &&
+                            field_mask != 0x0cu) ||
+        (command & (uint8_t)~field_mask) != 0) return -1;
+    if (enabled) {
+        *packed_control = (uint8_t)((*packed_control & (uint8_t)~field_mask) |
+                                    command);
+    }
+    return 0;
+}
+
 int fa18_flight_update_attitude(const FA18FlightTrigTable *table,
                                 int16_t first_angle, int16_t second_angle,
                                 int16_t third_angle, FA18FlightPose *pose) {

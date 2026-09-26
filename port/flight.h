@@ -47,6 +47,14 @@ typedef struct {
 int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,
                                      uint8_t packed_control);
 
+/* `$C1B516/$C1B586`: replace one two-bit command field when the observed
+ * input gate is active. The field masks and command values are source-level
+ * control codes; their physical axis names are intentionally not assumed. */
+int fa18_flight_publish_control_field(uint8_t *packed_control,
+                                      uint8_t field_mask,
+                                      uint8_t command,
+                                      int enabled);
+
 /* `$C14B16-$C14B7D`: sign extend three prepared words, scale by four, and
  * retain their negated longword terms for the active record. */
 int fa18_flight_scale_motion_words(int16_t first, int16_t second,
