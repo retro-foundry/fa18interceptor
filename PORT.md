@@ -442,6 +442,15 @@ Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The
 native gate stores the 857 changed row runs from frame 397 to frame 398 and
 reuses that result for identical frames 399 and 400. The exact replay check
+
+The Python Engine9000 bridge now accepts `FA18_ENGINE_ROOT`. Set it to
+`build/engine9000-replay` when a trace must use the sealed run075 runner and
+its matching `system/ami9000.dll`; the default remains the checked-in tools
+core. A replay from `initial_state.bin` reaches `$C2F688` at bridge frame 419,
+while the archived trace reports frame 398. A replay from `restored-state.bin`
+reaches the same address with a different machine state. These runs establish
+the runner and breakpoint path, but do not replace the archived frame-398
+trace until the restore-frame accounting is reconciled. The exact replay check
 passes through frame 400; the packed value and glyph table are now the next
 semantic inputs to replace in the scene fixture.
 

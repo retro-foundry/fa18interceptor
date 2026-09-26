@@ -12,7 +12,11 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ENGINE = ROOT / 'tools/engine9000/e9k-debugger'
+# Captures may be sealed with the standalone replay runner. Keep the tools
+# core as the default, but allow a caller to select the exact recorded engine
+# root for instruction-faithful traces.
+ENGINE = Path(os.environ.get('FA18_ENGINE_ROOT',
+                            str(ROOT / 'tools/engine9000/e9k-debugger')))
 U = C.c_uint
 P = C.c_void_p
 S = C.c_size_t
