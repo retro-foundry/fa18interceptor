@@ -365,6 +365,11 @@ the observed `0x28` visibility bound, the geometry plus selected-pointer
 destination calculation, and the compositor shift as explicit native fields.
 The caller values remain inputs until their frame-398 producers are traced.
 
+The verified run075 frame-398 font region `$C3D790-$C3DAF7` is extracted as
+`port/run075_font_asset.h`. It contains the native 436-entry offset table and
+872-byte glyph stream; the contract test confirms the traced character `1`
+lookup at relative offset `$00B7` (`$C3D847`).
+
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the
 `$C327A0/$C32806` glyph compositor merges rows into the renderer buffer. The

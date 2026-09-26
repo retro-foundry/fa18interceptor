@@ -1,4 +1,5 @@
 #include "glyph.h"
+#include "run075_font_asset.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -54,6 +55,16 @@ int main(void) {
         selected != &glyph_stream[4] || remaining != 2u ||
         fa18_select_glyph(&glyph_table, 0x22u, &selected, &remaining) != -1) {
         fputs("glyph offset table contract failed\n", stderr);
+        return 1;
+    }
+
+    const FA18GlyphTable run075_font = {
+        fa18_run075_font_offsets, 436u,
+        fa18_run075_font_bytes, sizeof fa18_run075_font_bytes
+    };
+    if (fa18_select_glyph(&run075_font, (uint8_t)'1', &selected, &remaining) != 0 ||
+        selected != &fa18_run075_font_bytes[0x00b7] || remaining != 872u - 0x00b7u) {
+        fputs("run075 font asset lookup contract failed\n", stderr);
         return 1;
     }
 
