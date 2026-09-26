@@ -28,9 +28,12 @@ negative-candidate record, but its root slot is **not** established as the
 complete moving player position/orientation record. A later bounded run060
 trace does show that `$C13E10` selects this root slot in one real
 input-control update; see `run060_c13e10_root_control_record.md`. A separate
-live formatter packet proves root `+$18` is the selected cockpit-altitude
-source (145 FT in this interval); see `run060_root_altitude_formatter.md`.
-Those promotions establish an input-controlled record with an aircraft
-altitude field, not horizontal position or orientation. The next player-state
+live formatter packet proves root `+$18` is a selected feet-valued display
+source (it converts to 145 in this interval); see
+`run060_root_altitude_formatter.md`. The alternate formatter's `FT` suffix
+strongly supports an altitude interpretation, but the unchanged live packet
+does not place its glyphs on screen. Those promotions establish an
+input-controlled record with a feet-valued display field, not horizontal
+position or orientation. The next player-state
 experiment must trace the remaining fields into world placement or camera
 output rather than infer them from selection alone.

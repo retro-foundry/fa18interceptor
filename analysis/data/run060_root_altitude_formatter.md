@@ -1,6 +1,8 @@
-# Run060 root record cockpit-altitude formatter
+# Run060 root record feet-display formatter
 
-Classification: **scenario-backed cockpit altitude dataflow**.
+Classification: **scenario-backed feet-valued display dataflow**. The
+altitude interpretation is strongly supported, but final glyph placement is
+not proven by this unchanged-value packet.
 
 Authority is the sealed run060 replay, traced at the selected-record formatter:
 
@@ -24,13 +26,17 @@ $C3204C..$C32052  multiply by 5    -> $00000091 (145)
 ```
 
 The same byte-exact formatter has an alternate submission that appends literal
-`FT`. This proves that selected-record `+$18` is the cockpit altitude source
-in this run060 interval, and its measured value is **145 FT**.
+`FT`. This proves that selected-record `+$18` is a feet-valued display source
+and its measured conversion is **145**. The literal strongly supports an
+altitude interpretation, but this live packet returns through its
+unchanged-value cache path at `$C32090` before it redraws glyphs; it does not
+itself prove placement next to the visible `FT` text.
 
 ## Boundary
 
-This identifies one physical component of the selected root record: vertical
-altitude. It does not identify `+$14` or `+$1C` as horizontal coordinates,
-does not identify the `+$92..+$A2` matrix as player orientation, and does not
-prove the root record contains all player state. Those require independent
-world-placement/camera consumer evidence.
+This identifies a feet-valued selected-root display field. It does not yet
+identify `+$14` or `+$1C` as horizontal coordinates, the `+$92..+$A2` matrix
+as player orientation, or the display field itself as aircraft altitude rather
+than another feet-valued cockpit measurement. A changed-value glyph placement
+trace plus the unit route would promote the altitude inference to direct
+screen-backed evidence.

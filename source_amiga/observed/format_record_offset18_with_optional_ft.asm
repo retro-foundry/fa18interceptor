@@ -1,4 +1,4 @@
-; Byte-exact observed cockpit-altitude formatter stage $C3201A-$C32129.
+; Byte-exact observed selected-record feet-display formatter $C3201A-$C32129.
 ; Converts selected-record long +$18, tracks redraw state, and formats six
 ; packed-decimal characters. One alternate submission appends literal "FT".
 
@@ -18,15 +18,15 @@ PACKED_FONT_RENDERER          equ     $C3271A
 
                 org     $C3201A
 
-format_selected_record_altitude_with_optional_ft:
+format_selected_record_feet_display_with_optional_ft:
                 tst.b   $C457A4.l
-                beq.s   format_selected_record_altitude_from_record
+                beq.s   format_selected_record_feet_display_from_record
                 move.l  ALTITUDE_OVERRIDE_LONG.l,d0
                 cmpi.l  #$1869F,d0
                 ble.s   format_record_offset18_filter
                 move.l  #$1869F,d0
                 bra.s   format_record_offset18_filter
-format_selected_record_altitude_from_record:
+format_selected_record_feet_display_from_record:
                 lea.l   DISPLAY_RECORD_BASE.l,a0
                 adda.w  DISPLAY_RECORD_OFFSET.l,a0
                 move.l  $18(a0),d0
@@ -38,13 +38,13 @@ format_selected_record_altitude_from_record:
                 add.l   d1,d0
 format_record_offset18_filter:
                 tst.b   FORMATTER_MODE_BYTE.l
-                beq.s   format_selected_record_altitude_normal_mode
+                beq.s   format_selected_record_feet_display_normal_mode
                 tst.b   FORMATTER_ALT_MODE_BYTE.l
                 beq.s   format_record_offset18_return
                 btst    #6,FORMATTER_FLAGS_BYTE.l
                 beq.s   format_record_offset18_return
                 bra.s   format_record_offset18_store
-format_selected_record_altitude_normal_mode:
+format_selected_record_feet_display_normal_mode:
                 tst.b   FORMATTER_ACTIVITY_BYTE.l
                 bgt.s   format_record_offset18_store
                 move.l  FORMATTER_PREVIOUS_LONG.l,d2
