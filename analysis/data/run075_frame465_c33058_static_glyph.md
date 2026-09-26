@@ -33,3 +33,7 @@ The following boundary is Engine frame 469. Its source bytes are
 `$1000`; the plane mode mask remains `$09`. The captured four-plane words are
 also checked, confirming that the lane writer is reusable across successive
 text positions while the caller advances the source and destination cursors.
+
+Engine frame 471 retains the `$041E` destination and changes the source bytes
+to `F8 88 80 C0 C0 C8 F8`, with mask `$8000` and mode mask `$09`. Its exact
+four-plane result is checked as the next state in the same compositor sequence.

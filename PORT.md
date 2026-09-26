@@ -783,3 +783,5 @@ game loop.
 - Frame 469 is checked through the same four-lane operation with source bytes
   from the trace, `$041E` placement, and `$1000` mask. The successive checks
   establish the observed cursor progression through this static text run.
+- Frame 471 is checked at the same destination with its traced source bytes
+  and `$8000` mask, extending the ordered compositor sequence.
