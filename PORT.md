@@ -334,6 +334,11 @@ signed word is widened, multiplied by four, and negated before publication.
 The three terms remain positionally named until the caller proves their axis
 meaning.
 
+The `$C15138` signed pair helper is now ported as
+`fa18_flight_adjust_signed_word_pair`. It preserves the magnitude thresholds,
+68000 arithmetic right shift behavior, and adjusted-first-word result used by
+the scaled motion preparation.
+
 The later flight update sequence reaches frame 1007 and then the recorded
 display boundaries through frame 1454. The delta adapter contains each
 boundary, including the larger transitions at frames 1047, 1237, 1390, 1429,

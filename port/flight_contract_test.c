@@ -18,6 +18,13 @@ int main(void) {
     assert(fa18_flight_scale_motion_words(0x0012, (int16_t)-3, 0x4000,
                                           &terms) == 0);
     assert(terms.first == -0x48 && terms.second == 12 && terms.third == -0x10000);
+    int16_t adjusted = 0;
+    assert(fa18_flight_adjust_signed_word_pair(10, -3, &adjusted) == 0 &&
+           adjusted == 4);
+    assert(fa18_flight_adjust_signed_word_pair(-7, 0, &adjusted) == 0 &&
+           adjusted == -2);
+    assert(fa18_flight_adjust_signed_word_pair(2, 0, &adjusted) == 0 &&
+           adjusted == 2);
 
     FA18FlightPose pose = {0};
     pose.altitude = 0x72301;

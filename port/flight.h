@@ -37,6 +37,10 @@ int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,
 int fa18_flight_scale_motion_words(int16_t first, int16_t second,
                                    int16_t third, FA18FlightMotionTerms *terms);
 
+/* `$C15138`: adjust a signed word pair and return the updated first word. */
+int fa18_flight_adjust_signed_word_pair(int16_t first, int16_t second,
+                                        int16_t *adjusted_first);
+
 /* `$C14D32`: the signed vertical delta is committed to the active pose. */
 int fa18_flight_commit_vertical(FA18FlightPose *pose, int32_t delta);
 
