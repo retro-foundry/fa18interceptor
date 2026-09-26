@@ -20,14 +20,16 @@ fields. Native checkpoint reads give the following timeline:
 | 8,870 | `11 C8 C0 C2` | `$00` | `$057E` | not sampled | additional header bits change; the required mask remains satisfied. |
 | 9,000 | `11 C8 C0 82` | `$00` | `$00A9` | not sampled | only `+$6E` still blocks the listed gate conditions. |
 | 9,205 | `11 C8 C0 82` | `$00` | `$0007` | `$00/$FF/$00` | gate is still blocked by nonzero `+$6E`. |
+| 9,208 | `11 C8 C0 82` | `$00` | `$0007` | `$00/$FF/$00` | still blocked. |
+| 9,209 | `11 C8 C0 82` | `$00` | `$0000` | `$00/$FF/$00` | all listed record/selector conditions are now ready; scheduler state is not yet initialized. |
 | 9,210 | `11 C8 C0 82` | `$FF` | `$0000` | `$03/$04/$01` | native scheduler setup has completed. |
 
 Thus the native run establishes a necessary-state sequence:
 
 ```text
 header mask becomes ready (8,797..8,799)
-  -> word +$6E reaches zero (9,205..9,210)
-  -> selector/phase/countdown/latch setup is visible by 9,210
+  -> word +$6E reaches zero (9,208..9,209)
+  -> selector/phase/countdown/latch setup on the following frame (9,210)
 ```
 
 The recorded joystick release at frame 8,791 precedes the bit-7 transition,
@@ -44,5 +46,7 @@ Authority:
   `run060_frame08799_native_checkpoint/`, `run060_frame08855_native_checkpoint/`,
   `run060_frame08870_native_checkpoint/`, `run060_frame09000_checkpoint/`
 - `build/run060_frame09205_native_checkpoint/`
+- `build/run060_frame09208_native_checkpoint/`
+- `build/run060_frame09209_native_checkpoint/`
 - `build/run060_frame09210_native_checkpoint/`
 - `source_amiga/observed/prepare_selected_record_scheduler_state.asm`

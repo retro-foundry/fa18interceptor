@@ -4,8 +4,9 @@ Classification: **native checkpoint state transition; writer not yet
 identified**.
 
 Native boot-restore checkpoints independently show that the gate is still
-uninitialized at GUI frame 9,205 (`+$6E=$0007`) and has completed setup by GUI
-frame 9,210 (`+$6E=$0000`). The transition values are:
+uninitialized at GUI frame 9,208 (`+$6E=$0007`), reaches zero at frame 9,209
+without changing scheduler fields, and completes setup on the following frame
+9,210. The transition values are:
 
 | Address | Before | After |
 | --- | ---: | ---: |
