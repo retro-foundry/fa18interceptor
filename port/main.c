@@ -3,6 +3,7 @@
  * original routine contracts are proved (see PORT.md).
  */
 #include <SDL.h>
+#include "menu.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -165,7 +166,28 @@ static int stream_rgb444(const uint16_t *chunky) {
     return fwrite(raw, 1, sizeof raw, stdout) == sizeof raw;
 }
 
+static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
+    if (frame != 200u) return 0;
+    FA18IndexedFrameBuffer native_indexed;
+    uint16_t native_rgb444[PIXELS];
+    fa18_render_run075_frame200_menu(&native_indexed, native_rgb444);
+    for (size_t i = 0; i < PIXELS; ++i) {
+        if (native_rgb444[i] != stream->chunky[i]) {
+            fprintf(stderr, "Native frame-200 gate mismatch at pixel %zu: "
+                            "native %03x, oracle %03x\n",
+                    i, native_rgb444[i], stream->chunky[i]);
+            return -1;
+        }
+        stream->chunky[i] = native_rgb444[i];
+    }
+    return 1;
+}
+
 static int playback(FrameStream *stream) {
+    if (stream->first != 200u) {
+        fprintf(stderr, "Native playback must start at run075 frame 200\n");
+        return 1;
+    }
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) != 0) {
         fprintf(stderr, "SDL_Init failed: %s\n", SDL_GetError());
         return 1;
@@ -214,6 +236,11 @@ static int playback(FrameStream *stream) {
         int status = stream_next(stream);
         if (status <= 0) {
             result = status < 0;
+            break;
+        }
+        int native_gate = apply_native_frame_gate(stream, stream->next - 1);
+        if (native_gate < 0) {
+            result = 1;
             break;
         }
         to_argb(stream->chunky, argb);
