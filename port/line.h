@@ -49,6 +49,16 @@ typedef struct {
     uint16_t height_rows;
 } FA18AreaBlitJob;
 
+typedef struct {
+    uint16_t bltcon0, bltcon1;
+    uint16_t first_mask, last_mask;
+    uint16_t bltadat, bltbdat;
+    uint16_t bltamod, bltbmod, bltcmod, bltdmod;
+    uint16_t width_words, height_rows;
+    uint8_t destination_plane;
+    uint16_t destination_byte_offset;
+} FA18LineBlitJob;
+
 /* Four live run060 frame-7992 segment-37 jobs, retained as semantic packet
  * fields rather than an Amiga memory image. */
 int fa18_build_run060_frame7992_area_jobs(FA18AreaBlitJob jobs[4]);
