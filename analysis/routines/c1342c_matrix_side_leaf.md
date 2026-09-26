@@ -101,3 +101,17 @@ The bounded `$C1342C` packet changes its working triple at root
 component. This proves the packet-local `+$2A`-window to working-third-input
 handoff; the exact arithmetic inside the wider leaf still needs a bounded
 instruction-level derivation.
+
+That arithmetic is now bounded for the same packet. `$C1386A` reads
+`$C45B62=$FFC1` (signed −63), negates it, and `$C13C64-$C13C80` derives
+`(63 >> 1) + (63 >> 3) = 31 + 7 = 38`. `$C13CBE-$C13CCE` then applies a
+one-half relaxation to working `+$5A`:
+
+```text
+old = 0
+target = 38
+new = old - ((old - target) >> 1) = 19 = $0013
+```
+
+The upstream producer of `$C45B62` is not yet bounded to root control lane
+`+$2A`; this derivation establishes the exact local working-output arithmetic.
