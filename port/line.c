@@ -20,6 +20,18 @@ int fa18_validate_line_packet(const FA18LinePacket *packet) {
            packet->destination_byte_offset < 40u * 200u;
 }
 
+int fa18_validate_line_blit_job(const FA18LineBlitJob *job) {
+    if (!job || job->destination_plane >= 4u ||
+        !(job->bltcon1 & 1u) || job->width_words == 0u ||
+        job->width_words > FA18_WIDTH / 16 || job->height_rows == 0u ||
+        job->destination_byte_offset >= FA18_PLANAR_PAGE_BYTES ||
+        job->destination_byte_offset + job->width_words * 2u >
+            FA18_PLANAR_PAGE_BYTES || job->bltadat != 0x8000u ||
+        job->bltbdat != 0xffffu || job->bltcmod != 0x28u ||
+        job->bltdmod != 0x28u) return -1;
+    return 0;
+}
+
 static int set_line_pixel(FA18IndexedFrameBuffer *framebuffer,
                           const FA18LineStyle *style, int x, int y) {
     if (x < 0 || x >= FA18_WIDTH || y < 0 || y >= FA18_HEIGHT) return -1;

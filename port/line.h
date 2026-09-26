@@ -5,6 +5,8 @@
 
 #include "renderer.h"
 
+enum { FA18_PLANAR_PAGE_BYTES = (FA18_WIDTH / 8) * FA18_HEIGHT };
+
 /* Caller-level endpoints proved at $C2FA7E. They are screen coordinates, not
  * pointers or Amiga register values. */
 typedef struct {
@@ -58,6 +60,8 @@ typedef struct {
     uint8_t destination_plane;
     uint16_t destination_byte_offset;
 } FA18LineBlitJob;
+
+int fa18_validate_line_blit_job(const FA18LineBlitJob *job);
 
 /* Four live run060 frame-7992 segment-37 jobs, retained as semantic packet
  * fields rather than an Amiga memory image. */

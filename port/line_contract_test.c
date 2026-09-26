@@ -1,6 +1,7 @@
 #include "line.h"
 #include "run075_frame395_lines.h"
 #include "run075_frame395_line_packet.h"
+#include "run060_frame7992_line_packets.h"
 
 #include <stdio.h>
 #include <assert.h>
@@ -28,6 +29,8 @@ int main(void) {
     assert(fa18_run075_frame395_line_packets[2].bltbmod == 0xffe6);
     assert(fa18_run075_frame395_line_packets[2].bltsize == 0x0382);
     assert(fa18_run075_frame395_line_packets[3].destination_byte_offset == 0x0ec6);
+    for (size_t i = 0; i < FA18_RUN060_FRAME7992_LINE_PACKET_COUNT; ++i)
+        assert(fa18_validate_line_blit_job(&fa18_run060_frame7992_line_packets[i]) == 0);
     /* Generic raster contract. A settled run060+ visual fixture is still
      * required before this primitive can be promoted to port parity. */
     FA18IndexedFrameBuffer framebuffer;
