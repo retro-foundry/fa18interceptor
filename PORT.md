@@ -241,7 +241,7 @@ infer a function's purpose merely from a rendered frame.
 
 ## Build and run the current slice
 
-The native live gate currently covers run075 frames 200 through 1995. Frames
+The native live gate currently covers run075 frames 200 through 20987. Frames
 392 through 394 use a compact exact RGB444 span fixture while their state
 transition and renderer ownership are reconstructed.
 
@@ -326,6 +326,11 @@ The next deterministic flight section is now represented through frame 1995,
 including every observed boundary from 1521 onward and the large transitions
 at frames 1609, 1817, 1873, 1882, and 1938. Exact replay comparison covers
 the complete gate through frame 1995.
+
+The sealed run075 oracle tail is now represented through its final frame
+20987. The packed tail contains 1,966 exact frame delta records from frame
+2001 onward; frames without a delta reuse the preceding output. This completes
+the byte comparison for the full available run075 recording.
 
 Frame 398 is the next exact chunky scene boundary. Its normal replay reaches
 `$C32740`, which formats packed nibbles into display characters before the

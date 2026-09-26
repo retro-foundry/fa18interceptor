@@ -8,6 +8,7 @@
 #include "run075_frame460_data.h"
 #include "run075_frame462_data.h"
 #include "run075_hud_deltas.h"
+#include "run075_tail_deltas.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -144,7 +145,10 @@ int main(void) {
         fa18_apply_run075_hud_delta(1609, hud_previous, hud_output) != 0 ||
         fa18_apply_run075_hud_delta(1817, hud_previous, hud_output) != 0 ||
         fa18_apply_run075_hud_delta(1938, hud_previous, hud_output) != 0 ||
-        fa18_apply_run075_hud_delta(1995, hud_previous, hud_output) != 0) {
+        fa18_apply_run075_hud_delta(1995, hud_previous, hud_output) != 0 ||
+        FA18_RUN075_TAIL_DELTA_COUNT != 1966 ||
+        fa18_apply_run075_hud_delta(2001, hud_previous, hud_output) != 0 ||
+        fa18_apply_run075_hud_delta(20985, hud_previous, hud_output) != 0) {
         fputs("run075 HUD delta contract failed\n", stderr);
         return 1;
     }

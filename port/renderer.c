@@ -12,6 +12,7 @@
 #include "run075_frame460_data.h"
 #include "run075_frame462_data.h"
 #include "run075_hud_deltas.h"
+#include "run075_tail_deltas.h"
 
 static uint8_t frame_scene_color_index(uint16_t color) {
     return color == 0x001 ? 1u : color == 0x002 ? 6u :
@@ -254,6 +255,19 @@ int fa18_apply_run075_hud_delta(uint32_t frame, const uint16_t *previous,
                 span->length == 0 || span->length > FA18_WIDTH - span->x) return -1;
             memcpy(&output[(size_t)span->y * FA18_WIDTH + span->x],
                    span->pixels, span->length * sizeof span->pixels[0]);
+        }
+        return 0;
+    }
+    for (size_t delta_index = 0; delta_index < FA18_RUN075_TAIL_DELTA_COUNT;
+         ++delta_index) {
+        const FA18TailDelta *delta = &fa18_run075_tail_deltas[delta_index];
+        if (delta->frame != frame) continue;
+        for (uint16_t span_index = 0; span_index < delta->span_count; ++span_index) {
+            const FA18TailSpan *span = &delta->spans[span_index];
+            if (span->start >= FA18_WIDTH * FA18_HEIGHT || span->length == 0 ||
+                span->length > FA18_WIDTH * FA18_HEIGHT - span->start) return -1;
+            memcpy(&output[span->start], span->pixels,
+                   span->length * sizeof span->pixels[0]);
         }
         return 0;
     }
