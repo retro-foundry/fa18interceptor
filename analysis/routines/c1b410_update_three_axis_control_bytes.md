@@ -8,6 +8,15 @@ to `$EC..$14`; the third changes by 3 and clamps to `$C4..$3C`.
 The axis names describe independent state slots and bounded arithmetic. Their
 physical flight-control binding requires a frame-bounded caller trace.
 
+## run060 third-lane instance
+
+The sealed run060 frame-1754 packet enters with root `+$65=$09`, so bits 3:2
+are `$08`. It takes the third-lane decrement path and writes root signed
+`+$2A: $00 -> $FD` (0 to -3); `+$28` and `+$29` remain zero in this packet.
+This directly confirms the later `J 0 6` route's bounded three-unit effect on
+the third control lane. Its downstream transform or motion consumer is still
+unassigned.
+
 ## run060 initial-turn instance
 
 The sealed run060 replay enters this exact routine at frame 949 with
