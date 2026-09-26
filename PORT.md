@@ -1012,3 +1012,11 @@ game loop.
   buffer, the complete available run075 verifier passes: `20788` frames from
   `200` through `20987`. Native update routines now consume the preceding
   native frame, and the recorded stream is used for comparison only.
+- Rebuilt the Engine9000 `ami9000` core with DMA debug collection enabled and
+  added `scripts/capture_dma_frame.py`. A run060 replay capture now exposes
+  the complete DMA record set for frame 7991. The live records confirm the
+  `$C304B2` setup sequence and its `$DFF040/$DFF042` control writes at vpos
+  84. The evidence is documented in
+  `analysis/data/run060_frame7991_dma_blitter_sequence.md`; the next task is
+  to map its page accesses and match frame 7991 in the native renderer before
+  moving on.
