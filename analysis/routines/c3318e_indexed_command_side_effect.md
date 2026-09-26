@@ -25,3 +25,12 @@ documented in `analysis/routines/c17ef2_guarded_command_packet.md`.  The
 containing byte-exact source is
 `source_amiga/observed/route_guarded_command_side_effect.asm`; no overlapping
 entry-only slice is retained.
+
+The run075 key-1 demo selection supplies a second scenario branch. After
+`$C1BDEC` writes `$C458A6=$7F` in direct-core frame 230, the caller enters
+`$C3318E` with `$C457D7!=0`. It jumps to `$C33180`, selects `D0=2,D1=2`,
+passes the nonpositive `$C4588A` guard, and constructs the `$12C`/`1` packet
+for `$C17EF2`. This distinguishes the demo path's `D1=2` from the F1
+packet's `D1=4` without assigning a sound or gameplay purpose to the helper.
+Trace: `build/port_run075_c1bd78_trace/trace.jsonl`, beginning at frame 230;
+the wrapper's byte-exact source above supplies the full return path.

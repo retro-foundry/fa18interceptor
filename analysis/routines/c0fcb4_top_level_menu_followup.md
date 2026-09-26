@@ -66,3 +66,9 @@ frontend key `5` reaches `$C1BD78`, which writes `$C458A6=9`; this callback
 then dynamically takes the `$09` branch and writes selector 105 at `$C4574A`.
 See `analysis/run024_qualification_selection_chain.md`.  This narrow evidence
 does not turn the other table values into frontend-key mappings.
+
+The sealed run075 frame-230 key-1 path now proves the `$7F` demo arm at
+`$C0FD10`: it writes selector 101, delay `$00D2`, and callback `$C0FECE`
+in the frame-234 bounded trace. See
+`analysis/routines/c0fcb4_run075_demo.md` for the producer, pre/post RAM,
+countdown, and limits. Only that bounded branch has a native C port.

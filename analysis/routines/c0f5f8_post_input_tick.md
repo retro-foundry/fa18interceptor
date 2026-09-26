@@ -21,6 +21,14 @@ The bounded route increments `$C457C1`, decrements `$C45AD6`, calls the
 callback pointer at `$C1820C` (which resolved to `$C1075A` in this packet),
 clears `$C457A3`, and returns.
 
+The native port represents this proved state-update prefix as
+`fa18_menu_post_input_tick`. It increments the named `post_input_tick_count`
+field and decrements signed `delay_ticks` with explicit 16-bit wrap semantics.
+Callback dispatch and command-pending clearing remain outside this small
+contract because their surrounding state-machine ownership has not yet been
+ported. `port/menu_contract_test.c` checks both the zero-to-negative boundary
+and `$8000 -> $7FFF` word wrap.
+
 The sealed run060 success activation supplies a second, distinct callback
 fixture.  At entry to the directly traced `$C110A4` sequence writer, the
 active stack return address is `$C0F808`; the byte-exact tail places

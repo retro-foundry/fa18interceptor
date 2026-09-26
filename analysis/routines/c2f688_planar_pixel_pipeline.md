@@ -61,3 +61,15 @@ identify what any drawn pixel depicts, or prove that these are the Copper's
 currently displayed planes. Source: `prepare_renderer_table_offsets.asm`,
 `mask_renderer_register_pairs.asm`, `apply_renderer_output_mask.asm`, and
 `apply_primary_renderer_lane_masks.asm` under `source_amiga/observed/`.
+
+The run075 frame-315 alternate path provides a separate port contract:
+`A3=$C2F7C6`, `A4=$C2F7E6`, mode `$B`, mask `$0018` at x=172, and handler
+`$C2F9EE`. It writes the selected two-bit mask at y=99 and y=100, changing
+four Chip-RAM bytes and two deplanarized pixel indices. The later run060
+trace at x=100, y=125, mode `$D` independently proves a primary-table handler
+that maps input index 2 to 12. `port/renderer.c` translates the complete
+proved primary and alternate table behavior into indexed chunky pixels through
+the named `FA18RendererState` struct and `FA18PixelTable` enum. It preserves
+enabled-plane behavior and both XOR paths. The native primitive owns only its
+320x200 visual buffer, so original writes outside that buffer remain outside
+this port contract. See `analysis/routines/c2f688_run075_two_row_mask.md`.

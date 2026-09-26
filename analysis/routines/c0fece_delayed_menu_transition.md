@@ -34,3 +34,23 @@ This establishes a real post-gate transition branch for selected mode 9.  It
 does not prove the gameplay meaning of `$C10102`, the helper calls, or the
 state fields above; in particular it does not identify qualification
 persistence.
+
+## run075 demo countdown boundary
+
+The run075 demo selection installs this callback at direct-core frame 234
+with mode `$7F` and `$C45AD6=$00D2`. The shared `$C0F5F8` tick decrements
+the word five or six times per video frame in this interval. `$C0FECE`
+reaches its signed-negative body at `$C0FEEA` in frame 270 with delay `$FFFF`;
+the `$C0FFDA` table selects the mode-$7F `$C1000A` arm in the bounded
+continuation. At frame 271 that arm writes `$C457AE=1` and callback `$C0FA04`
+after the common setup has installed `$C103E4` and delay 4. The exact
+pre/post branch contract is ported in `port/menu.c`; shared helpers and later
+`$C0FA04` effects remain unresolved. See
+`analysis/routines/c0fcb4_run075_demo.md`.
+
+The entry gate itself is now native `fa18_menu_delay_expired`: its
+`FA18MenuState.delay_ticks` field is `int16_t`, preserving the original signed
+test. It returns false for zero and true for `-1`, exactly matching the
+`BPL` branch at `$C0FEE6`. `fa18_menu_post_input_tick` now ports the proved
+shared decrement itself with 16-bit wrap; callback dispatch and common helper
+effects remain separate native contracts.

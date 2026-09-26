@@ -25,7 +25,7 @@ clip-error paths.
 
 ## Renderer chain
 
-For the run031 Golden Gate control packet the now-observed path is:
+The observed geometry-to-renderer path is:
 
 ```text
 scene control records → clipping / tuple cache → $C4B990 triples
@@ -34,3 +34,16 @@ scene control records → clipping / tuple cache → $C4B990 triples
 
 This proves the common geometry-to-renderer handoff. It does not by itself map
 a particular control record to a particular bridge pixel or model part.
+
+## Native port contract
+
+`port/projection.c:fa18_project_polygon` ports the proved 3+-tuple path with
+native `FA18ViewVertex`, `FA18ScreenPoint`, and `FA18ScreenPolygon` structs.
+It preserves signed division, `$0..319` / `$0..179` clamps, the source's
+`319-x` / `179-y` stored-pair reversal, and nonpositive-depth rejection. The
+source's separate 1-2 tuple branch remains open.
+
+`fa18_projection_contract_test` currently checks the source formula, clamps,
+and zero-depth rejection with synthetic values. A run060+ captured tuple and
+`$C4B390` output pair fixture is required before this becomes a scenario-backed
+port contract.
