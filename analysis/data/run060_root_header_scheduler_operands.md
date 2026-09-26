@@ -25,8 +25,9 @@ establish two separate facts about that direct-core execution:
 | 8,435 | byte `+$01`: `$D8 -> $C8` | The same bounded trace records `$C1D65E: BCLR.B #4,$1(A0)`, clearing that transient bit. |
 
 `$C1B630` is the byte-exact raw-$20 arrestor-hook state toggle in
-`toggle_arrestor_hook.asm`; it is therefore a proven producer of the mask's
-bit 15. The run060 trace does not identify a producer of mask bit 7.
+`toggle_arrestor_hook.asm`; it is therefore a generic/static producer of the
+mask's bit 15. The direct-core trace does not establish that it is the native
+run060 writer. The run060 trace does not identify a producer of mask bit 7.
 
 The `+$01` observations are deliberately narrower: bit 4 is a workspace
 context lane written and cleared around the traced update, while scheduler bit
@@ -39,6 +40,19 @@ The native boot-restore replay is deterministic at the frame-9,200 boundary:
 the existing checkpoint and a fresh independent capture both hash to
 `6400d29b3f34a95fe54d2a0f2170e8b60d86c4a887870a520a65348f77c48d15`.
 Its root header is `11 C8 C0 82`.
+
+Two further native captures bracket direct-core replay frame 5,091. Their
+headers are both `11 C8 80 00`:
+
+| native GUI frame | root header |
+| ---: | --- |
+| 5,090 | `11 C8 80 00` |
+| 5,091 | `11 C8 80 00` |
+
+The direct-core `$C1B630` bit-15 transition at its frame 5,091 therefore is
+not a matching native run060 transition. It remains valid local instruction
+dataflow for the core API state, but cannot be promoted to the native
+qualification scenario.
 
 Direct `retro_unserialize` restoration through the analysis bridge instead
 reaches `11 C8 80 82` at frame 9,200. The bridge and native boot-restore paths
@@ -55,5 +69,7 @@ Authority:
 - `build/run060_frame08000_header_writer_8434_parent_trace/memory_writes.json`
 - `build/run060_frame09200_checkpoint/checkpoint.json`
 - `build/run060_frame09200_repro_checkpoint/checkpoint.json`
+- `build/run060_frame05090_native_checkpoint/checkpoint.json`
+- `build/run060_frame05091_native_checkpoint/checkpoint.json`
 - `source_amiga/observed/toggle_arrestor_hook.asm`
 - `source_amiga/observed/set_context_workspace_bit4.asm`
