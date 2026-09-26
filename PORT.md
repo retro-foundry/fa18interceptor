@@ -354,6 +354,8 @@ The proven `$C301F6` bounds stage is now represented by
 `fa18_reduce_screen_pair_bounds`. The run031 sample
 `(211,60),(216,60),(227,67),(223,66)` is covered; pair-to-primitive selection
 remains separate.
+`fa18_screen_polygon_to_pair_list` now connects the native projection polygon
+to this packet without copying any original memory layout.
 The native playback loop now applies port-0 `J` events to a semantic packed
 flight-control byte and updates `FA18FlightControlLanes` at the event frame.
 This connects the proven run060 input path to native state without inventing

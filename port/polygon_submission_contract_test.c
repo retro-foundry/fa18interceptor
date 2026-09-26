@@ -8,7 +8,11 @@ int main(void) {
         4, {{211, 60}, {216, 60}, {227, 67}, {223, 66}}
     };
     FA18ScreenPairBounds bounds;
-    assert(fa18_reduce_screen_pair_bounds(&list, &bounds) == 0);
+    FA18ScreenPolygon polygon = {4, {{211, 60}, {216, 60}, {227, 67}, {223, 66}}};
+    FA18ScreenPairList converted;
+    assert(fa18_screen_polygon_to_pair_list(&polygon, &converted) == 0);
+    assert(converted.count == 4 && converted.pair[2].x == 227);
+    assert(fa18_reduce_screen_pair_bounds(&converted, &bounds) == 0);
     assert(bounds.min_x == 211 && bounds.max_x == 227 &&
            bounds.min_y == 60 && bounds.max_y == 67);
     assert(fa18_reduce_screen_pair_bounds(NULL, &bounds) < 0);

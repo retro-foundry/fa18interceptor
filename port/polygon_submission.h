@@ -18,6 +18,9 @@ typedef struct {
     int16_t max_y;
 } FA18ScreenPairBounds;
 
+int fa18_screen_polygon_to_pair_list(const FA18ScreenPolygon *polygon,
+                                     FA18ScreenPairList *list);
+
 /* `$C301F6`'s proved bounds-reduction stage. */
 int fa18_reduce_screen_pair_bounds(const FA18ScreenPairList *list,
                                    FA18ScreenPairBounds *bounds);
