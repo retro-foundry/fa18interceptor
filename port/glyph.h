@@ -119,6 +119,13 @@ typedef struct {
     uint16_t compositor_shift;
 } FA18GlyphPlacement;
 
+typedef struct {
+    uint8_t plane_index;
+    int32_t destination_offset;
+    int32_t visible_coordinate;
+    uint16_t mask;
+} FA18PlaneGlyphPlacement;
+
 int fa18_prepare_glyph_placement(int16_t lane_base,
                                  int16_t doubled_render_lane,
                                  int16_t glyph_position,
@@ -126,6 +133,13 @@ int fa18_prepare_glyph_placement(int16_t lane_base,
                                  int32_t selected_pointer_value,
                                  uint16_t compositor_shift,
                                  FA18GlyphPlacement *placement);
+
+int fa18_prepare_plane_glyph_placement(uint8_t plane_index,
+                                       int16_t lane_base,
+                                       int16_t doubled_render_lane,
+                                       const FA18GlyphCoordinatePair *pair,
+                                       int16_t geometry_base,
+                                       FA18PlaneGlyphPlacement *placement);
 
 /* Select one native glyph and apply its bounded rows to a planar page. */
 int fa18_render_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,

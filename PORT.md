@@ -138,6 +138,11 @@ infer a function's purpose merely from a rendered frame.
   `FA18GlyphCoordinatePair` entries. The words are retained as signed
   position and compositor mask pairs; they are deliberately not called x/y
   coordinates until the final plane mapping is proven.
+- 2026-09-26: Added `fa18_prepare_plane_glyph_placement`, which replaces the
+  observed active-plane pointer with a semantic plane index and computes the
+  bounded native destination offset. It preserves the `$28` visibility gate,
+  even destination check, and coordinate mask without retaining Amiga
+  addresses.
 
 - 2026-09-26: Sealed `captures/run075` (87 input events; canonical restored
   state SHA-256 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`).

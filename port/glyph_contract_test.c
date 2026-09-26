@@ -81,6 +81,19 @@ int main(void) {
         fputs("feet coordinate table contract failed\n", stderr);
         return 1;
     }
+    FA18PlaneGlyphPlacement plane_placement;
+    if (fa18_prepare_plane_glyph_placement(2, 0x1e, 0,
+                                           &coordinates.pair[0], 0x18ce,
+                                           &plane_placement) != 0 ||
+        plane_placement.plane_index != 2 ||
+        plane_placement.destination_offset != 0x18ce ||
+        plane_placement.visible_coordinate != 0x1e ||
+        fa18_prepare_plane_glyph_placement(4, 0, 0,
+                                           &coordinates.pair[0], 0,
+                                           &plane_placement) != -1) {
+        fputs("plane glyph placement contract failed\n", stderr);
+        return 1;
+    }
     uint8_t formatted[8] = {0};
     if (fa18_format_packed_decimal(0x0171u, 4u, formatted) != 0 ||
         memcmp(formatted, "0171", 4u) != 0) {

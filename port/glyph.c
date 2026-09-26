@@ -183,6 +183,25 @@ int fa18_prepare_glyph_placement(int16_t lane_base,
     return 0;
 }
 
+int fa18_prepare_plane_glyph_placement(uint8_t plane_index,
+                                       int16_t lane_base,
+                                       int16_t doubled_render_lane,
+                                       const FA18GlyphCoordinatePair *pair,
+                                       int16_t geometry_base,
+                                       FA18PlaneGlyphPlacement *placement) {
+    if (!pair || !placement || plane_index >= FA18_PLANES) return -1;
+    const int32_t visible = (int32_t)lane_base + doubled_render_lane + pair->position;
+    if (visible < 0 || visible >= 0x28) return 1;
+    const int32_t destination = (int32_t)geometry_base + doubled_render_lane + pair->position;
+    if (destination < 0 || destination > FA18_PLANAR_PAGE_BYTES - 4 ||
+        (destination & 1) != 0) return 1;
+    placement->plane_index = plane_index;
+    placement->destination_offset = destination;
+    placement->visible_coordinate = visible;
+    placement->mask = pair->mask;
+    return 0;
+}
+
 int fa18_render_glyph(FA18PlanarPage *page, const FA18GlyphTable *table,
                       uint8_t character, uint8_t plane_index,
                       size_t destination_offset, uint8_t shift_count,
