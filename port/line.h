@@ -62,6 +62,8 @@ typedef struct {
 } FA18LineBlitJob;
 
 int fa18_validate_line_blit_job(const FA18LineBlitJob *job);
+int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
+                               const FA18LineBlitJob *job);
 
 /* Four live run060 frame-7992 segment-37 jobs, retained as semantic packet
  * fields rather than an Amiga memory image. */

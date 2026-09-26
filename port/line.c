@@ -2,6 +2,16 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "blit_job.h"
+
+static uint16_t line_read_word(const uint8_t *plane, size_t offset) {
+    return (uint16_t)(((uint16_t)plane[offset] << 8) | plane[offset + 1u]);
+}
+
+static void line_write_word(uint8_t *plane, size_t offset, uint16_t value) {
+    plane[offset] = (uint8_t)(value >> 8);
+    plane[offset + 1u] = (uint8_t)value;
+}
 
 int fa18_build_run060_frame7992_area_jobs(FA18AreaBlitJob jobs[4]) {
     static const FA18AreaBlitJob captured[4] = {
@@ -29,6 +39,67 @@ int fa18_validate_line_blit_job(const FA18LineBlitJob *job) {
             (FA18_WIDTH / 8) * FA18_HEIGHT || job->bltadat != 0x8000u ||
         job->bltbdat != 0xffffu || job->bltcmod != 0x28u ||
         job->bltdmod != 0x28u) return -1;
+    return 0;
+}
+
+int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
+                               const FA18LineBlitJob *job) {
+    if (!plane || !job || fa18_validate_line_blit_job(job) != 0 ||
+        plane_bytes < (size_t)(FA18_WIDTH / 8) * FA18_HEIGHT) return -1;
+    uint16_t con1 = job->bltcon1;
+    int16_t apt = (int16_t)job->bltapt_low;
+    const unsigned ashift = (job->bltcon0 >> 12) & 15u;
+    unsigned bshift = (con1 >> 12) & 15u;
+    uint16_t bline = job->bltbdat;
+    if (bshift != 0u) {
+        const unsigned rotate = (bshift + 15u) & 15u;
+        bline = (uint16_t)((job->bltbdat >> rotate) |
+                           (job->bltbdat << ((16u - rotate) & 15u)));
+    }
+    size_t cpt = job->destination_byte_offset & ~(size_t)1u;
+    int overflow = 0;
+    int one_dot = 0;
+    int line_loop = 1;
+    uint32_t aold = 0;
+    for (uint16_t step = 0; step < job->height_rows; ++step) {
+        const int emit = !(con1 & 2u) || !one_dot;
+        one_dot = 1;
+        const int sign = apt < 0;
+        if (job->bltcon0 & 0x0200u)
+            apt = (int16_t)(apt + (sign ? (int16_t)job->bltbmod :
+                                             (int16_t)job->bltamod));
+        if (cpt + 1u >= plane_bytes) return -1;
+        const uint16_t c = line_read_word(plane, cpt);
+        const uint16_t a = (uint16_t)(job->bltadat >> ashift);
+        const uint16_t d = fa18_apply_blitter_minterm(
+            (uint8_t)(job->bltcon0 & 0xffu), a, bline, c);
+        if (emit) line_write_word(plane, cpt, d);
+
+        if (!sign) {
+            if (con1 & 0x10u) {
+                cpt += (con1 & 0x08u) ? job->bltcmod : 2u;
+                line_loop = 0;
+            } else if (con1 & 0x04u) {
+                cpt += (con1 & 0x08u) ? (size_t)-2 : 2u;
+                overflow = (con1 & 0x08u) ? -1 : 1;
+            }
+        } else {
+            if (con1 & 0x10u) {
+                cpt += (con1 & 0x08u) ? (size_t)-2 : 2u;
+                overflow = (con1 & 0x08u) ? -1 : 1;
+            } else if (con1 & 0x04u) {
+                cpt += (con1 & 0x08u) ? (size_t)-2 : 2u;
+                overflow = (con1 & 0x08u) ? -1 : 1;
+            }
+        }
+        if (line_loop) cpt += (con1 & 0x10u) ? job->bltcmod : 0u;
+        line_loop = 1;
+        if (overflow != 0) overflow = 0;
+        bshift = (bshift + 15u) & 15u;
+        bline = (uint16_t)((bline >> 1) | (bline << 15));
+        aold = (aold << 16) | job->bltadat;
+        aold >>= ashift;
+    }
     return 0;
 }
 
