@@ -21,6 +21,7 @@ int main(void) {
     assert(destination_page.plane[0][4 * FA18_PLANAR_ROW_BYTES + 6] == 0xA5);
 
     memset(&destination_page, 0, sizeof destination_page);
+    source_page.plane[3][2 * FA18_PLANAR_ROW_BYTES + 2] = 0xA5;
     assert(fa18_blit_visible_lanes(&source_page, &destination_page, 1, 2, 3, 4,
                                    1, 1, 0xffff, 0xffff, 0x01) == 0);
     assert(destination_page.plane[3][4 * FA18_PLANAR_ROW_BYTES + 6] == 0xA5);
