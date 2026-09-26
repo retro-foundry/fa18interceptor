@@ -5,6 +5,7 @@
 typedef struct {
     uint16_t bltcon0, bltcon1;
     uint16_t bltafwm, bltalwm;
+    uint16_t bltadat, bltbdat;
     uint16_t bltamod, bltbmod, bltcmod, bltdmod;
     uint32_t bltapt, bltbpt, bltcpt, bltdpt;
     uint16_t bltsize;
@@ -56,6 +57,13 @@ int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
  * inherited channels unchanged until the final BLTSIZE write. */
 int fa18_prepare_c30668_submit(uint16_t a_low_word, uint32_t destination,
                                FA18BlitOperation *operation);
+int fa18_prepare_line_blit(uint16_t bltcon0, uint16_t bltcon1,
+                           uint16_t first_mask, uint16_t last_mask,
+                           uint16_t adat, uint16_t bdat,
+                           uint16_t amod, uint16_t bmod,
+                           uint16_t cmod, uint16_t dmod,
+                           uint32_t destination, uint16_t bltsize,
+                           FA18BlitOperation *operation);
 uint16_t fa18_apply_blitter_minterm(uint8_t logic_function,
                                     uint16_t a, uint16_t b, uint16_t c);
 int fa18_execute_blitter_words(uint8_t logic_function,

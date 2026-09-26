@@ -47,6 +47,8 @@ int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
     operation->bltcon1 = packet->control_b;
     operation->bltafwm = packet->first_mask;
     operation->bltalwm = packet->last_mask;
+    operation->bltadat = 0;
+    operation->bltbdat = 0;
     operation->bltamod = packet->a_modulus;
     operation->bltbmod = packet->b_modulus;
     operation->bltcmod = packet->c_modulus;
@@ -66,6 +68,22 @@ int fa18_prepare_c30668_submit(uint16_t a_low_word, uint32_t destination,
     operation->bltapt = (operation->bltapt & 0xffff0000u) | a_low_word;
     operation->bltcpt = destination;
     operation->bltdpt = destination;
+    return 0;
+}
+
+int fa18_prepare_line_blit(uint16_t bltcon0, uint16_t bltcon1,
+                           uint16_t first_mask, uint16_t last_mask,
+                           uint16_t adat, uint16_t bdat,
+                           uint16_t amod, uint16_t bmod,
+                           uint16_t cmod, uint16_t dmod,
+                           uint32_t destination, uint16_t bltsize,
+                           FA18BlitOperation *operation) {
+    if (!operation || !(bltcon1 & 1u) || (bltsize & 0x3fu) == 0u ||
+        (bltsize >> 6) == 0u) return -1;
+    *operation = (FA18BlitOperation){
+        bltcon0, bltcon1, first_mask, last_mask, adat, bdat,
+        amod, bmod, cmod, dmod, 0, 0, destination, destination, bltsize
+    };
     return 0;
 }
 
@@ -107,6 +125,7 @@ void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitO
     if (!operation) return;
     operation->bltcon0 = 0x0d0c; operation->bltcon1 = 2;
     operation->bltafwm = 0xffff; operation->bltalwm = 0xffff;
+    operation->bltadat = 0; operation->bltbdat = 0;
     operation->bltamod = 0; operation->bltbmod = 0;
     operation->bltcmod = 0; operation->bltdmod = 0;
     operation->bltapt = lane_pointer; operation->bltbpt = lane_pointer;
@@ -130,6 +149,7 @@ void fa18_prepare_adjusted_lane_blit(uint16_t blit_size, uint32_t lane_pointer,
     operation->bltcon0 = (d3 & 1u) ? 0x0fec : 0x0f4c;
     operation->bltcon1 = 2;
     operation->bltafwm = 0xffff; operation->bltalwm = 0xffff;
+    operation->bltadat = 0; operation->bltbdat = 0;
     operation->bltamod = a_mod; operation->bltbmod = 0;
     operation->bltcmod = 0; operation->bltdmod = 0;
     operation->bltapt = lane_pointer; operation->bltcpt = c_pointer;

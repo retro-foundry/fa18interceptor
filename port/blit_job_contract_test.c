@@ -12,6 +12,13 @@ int main(void) {
     FA18BlitOperation setup;
     assert(fa18_prepare_c304b2_setup(&fill, &setup) == 0);
     assert(setup.bltcon0 == 0x0d0c && setup.bltcon1 == 2);
+    assert(setup.bltadat == 0 && setup.bltbdat == 0);
+    FA18BlitOperation operation;
+    assert(fa18_prepare_line_blit(0xdb0a, 0x51, 0xffff, 0xffff,
+                                  0x8000, 0xffff, 0, 0, 0x28, 0x28,
+                                  0x1234, 0x0142, &operation) == 0);
+    assert(operation.bltadat == 0x8000 && operation.bltbdat == 0xffff);
+    assert(operation.bltcpt == 0x1234 && operation.bltdpt == 0x1234);
     assert(setup.bltapt == 0x76ee && setup.bltbpt == 0x76ee);
     assert(setup.bltcpt == 0x10026 && setup.bltdpt == 0x76ee);
     assert(setup.bltamod == 1 && setup.bltbmod == 1 &&
@@ -49,7 +56,6 @@ int main(void) {
     assert(extent.width_words == 20 && extent.height_rows == 56);
     extent = fa18_decode_blit_extent(0x0302);
     assert(extent.width_words == 2 && extent.height_rows == 12);
-    FA18BlitOperation operation;
     fa18_prepare_lane_blit(0x0302, 0x007b6a, &operation);
     assert(operation.bltcon0 == 0x0d0c && operation.bltcon1 == 2);
 
