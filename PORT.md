@@ -1026,3 +1026,9 @@ game loop.
   inclusion and row limits. The source polygon remains represented by the
   existing `FA18ScreenPolygon`; the general polygon-to-span edge rule is still
   open until another run060+ fill confirms it.
+- Profiled run060 frames 7988--7991 through Engine9000. The frame 7991 path
+  executes `$C2FEDE -> $C2FF48 -> $C301F6 -> $C30466 -> $C304F4`, then the
+  `$C30668/$C306AE` blitter submission path. The large `$C304F8` count is the
+  hardware idle wait. The profile is recorded in
+  `analysis/data/run060_frame7991_profile.md`; the next native connection is
+  the synchronous `$C30668` semantic submission after page mapping is proved.
