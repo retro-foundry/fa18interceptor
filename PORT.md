@@ -1045,3 +1045,9 @@ game loop.
   exact edge pixels after deplanarization. This is the first run060 fill
   operation connected to the native page model; it remains a frame-7991
   boundary until the next run060+ fill supplies a general edge rule.
+- Advanced exactly one replay frame to run060 frame 7992 and captured its
+  successor state. The frame changes all four semantic planes and contains
+  four `$0FCE` line-mode submissions. The register values and Chip snapshot
+  hashes are recorded in `analysis/data/run060_frame7992_successor.md`; the
+  native port is held at this frame until those line packets are decoded and
+  matched.
