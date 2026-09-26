@@ -212,7 +212,7 @@ static int stream_rgb444(const uint16_t *chunky) {
 }
 
 static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
-    if (frame < 200u || frame > 500u) return 0;
+    if (frame < 200u || frame > 586u) return 0;
     FA18IndexedFrameBuffer native_indexed;
     uint16_t native_rgb444[PIXELS];
     if (frame == 234u) fa18_render_run075_frame234_menu(&native_indexed, native_rgb444);
@@ -375,10 +375,8 @@ static int apply_native_frame_gate(FrameStream *stream, uint32_t frame) {
                                               0x003, 0x333, 0x777, 0x444,
                                               0x800, 0x888, 0x666, 0x555 };
         for (size_t i = 0; i < PIXELS; ++i) native_rgb444[i] = palette[native_indexed.pixels[i] & 15u];
-    } else if (frame >= 464u && frame <= 500u) {
-        if ((frame & 1u) == 0u) {
-            if (fa18_apply_run075_hud_delta(frame, stream->chunky, native_rgb444) != 0) return -1;
-        } else {
+    } else if (frame >= 464u && frame <= 586u) {
+        if (fa18_apply_run075_hud_delta(frame, stream->chunky, native_rgb444) != 0) {
             memcpy(native_rgb444, stream->chunky, sizeof native_rgb444);
         }
     }
