@@ -565,7 +565,14 @@ static int16_t bounded_pair_limit(int16_t d4, int16_t d5, int16_t a4,
     a4 = subtract_word(a4, a1);
     if (d5 <= a4) return d4;
     const int32_t dividend = (int32_t)(uint32_t)((int64_t)d4 * a4 * 2);
-    return arithmetic_shift_right_word(divs_word_result(dividend, d5, d3, fault), 1);
+    const int16_t quotient = divs_word_result(dividend, d5, d3, fault);
+    /* `$C30634-$C30638`: ASR.W exposes the quotient's low bit through C;
+     * a set carry adds one after the shift.  This must also apply when DIVS
+     * overflow leaves D3 unchanged. */
+    int16_t result = arithmetic_shift_right_word(quotient, 1);
+    if ((uint16_t)quotient & 1u)
+        result = (int16_t)((uint16_t)result + 1u);
+    return result;
 }
 
 int fa18_prepare_projection_pair_blitter_core(

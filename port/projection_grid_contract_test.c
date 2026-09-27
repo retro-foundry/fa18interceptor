@@ -44,6 +44,7 @@ typedef struct {
     int blitter_calls;
     int final_calls;
     FA18ProjectionPairBlitterWrites first_blitter;
+    FA18ProjectionPairBlitterWrites blitter[4];
     FA18ProjectionPairFinalState final_state;
 } C301FarListAdapter;
 
@@ -116,6 +117,7 @@ static int emit_c301_far_blitter(void *context,
     C301FarListAdapter *adapter = context;
     if (!adapter || !writes) return -1;
     if (!adapter->blitter_calls) adapter->first_blitter = *writes;
+    if (adapter->blitter_calls < 4) adapter->blitter[adapter->blitter_calls] = *writes;
     ++adapter->blitter_calls;
     return 0;
 }
@@ -545,6 +547,36 @@ int main(void) {
     assert(far_adapter.final_state.offset_long == 0x000013a2u);
     assert(far_adapter.final_state.lane_long == 0x000073eau);
     assert(far_adapter.final_state.blit_size == 0x0b43);
+
+    /* run036 frame-7000 `$C2FF48` packet.  The second edge reaches the
+     * `$C30634-$C30638` quotient-low-bit rounding path. */
+    const FA18ProjectionPairScreenPoint run036_pairs[] = {
+        {97, 127}, {130, 138}, {74, 145}, {57, 130}
+    };
+    C301FarListAdapter run036_adapter = {0};
+    assert(fa18_submit_projection_pair_far_list(
+               run036_pairs, 4, 144, 145, 127, 0x00006048u, 0, 0,
+               emit_c3029e_line, &run036_adapter,
+               emit_c301_far_blitter, emit_c301_far_final, &run036_adapter,
+               &route, &finalization_route) == 0);
+    assert(route == FA18_PROJECTION_PAIR_BOUNDS_C302DE_CONTINUATION);
+    assert(finalization_route == FA18_PROJECTION_PAIR_FINALIZATION_SUBMITTED);
+    assert(run036_adapter.blitter_calls == 4 && run036_adapter.final_calls == 1);
+    const uint16_t run036_sizes[4] = {0x0882, 0x0c02, 0x0442, 0x0a42};
+    const uint16_t run036_controls[4] = {0x1b4a, 0x2b4a, 0x9b4a, 0x1b4a};
+    const uint16_t run036_a_low[4] = {0xffe6, 0xffa8, 0x0016, 0xffb8};
+    const uint32_t run036_destinations[4] = {0x7454, 0x7610, 0x74c7, 0x7454};
+    for (unsigned run036_index = 0; run036_index < 4; ++run036_index) {
+        assert(run036_adapter.blitter[run036_index].bltcon0 == run036_controls[run036_index]);
+        assert(run036_adapter.blitter[run036_index].bltapt_low == run036_a_low[run036_index]);
+        assert(run036_adapter.blitter[run036_index].bltcpt == run036_destinations[run036_index]);
+        assert(run036_adapter.blitter[run036_index].bltdpt == run036_destinations[run036_index]);
+        assert(run036_adapter.blitter[run036_index].bltsize == run036_sizes[run036_index]);
+    }
+    assert(run036_adapter.blitter[0].bltcon1 == 0x0053 &&
+           run036_adapter.blitter[1].bltcon1 == 0x0057 &&
+           run036_adapter.blitter[2].bltcon1 == 0x0013 &&
+           run036_adapter.blitter[3].bltcon1 == 0x0057);
     assert(fa18_submit_projection_pair_far_list(
                direct_tuple_list, 3, 179, 106, 0, 0x00012bc0u, 0, 0,
                emit_c3029e_line, &far_adapter,

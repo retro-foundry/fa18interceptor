@@ -75,15 +75,16 @@ The external stored pair list is decimal `(97,127) (130,138) (74,145)
 (57,130)` (the leading `$0061` word is hexadecimal, not decimal 61).  Passing
 that list with the trace-time scalar fields `display=144`, `vertical=145`,
 `horizontal=127`, and renderer base `$6048` through the native far-list
-dispatcher reproduces packets one, three, and four exactly.  Packet two has a
-remaining native discrepancy: it produces `BLTSIZE=$0BC2`, while the original
-trigger at Custom-stream sequence 568 writes `$0C02`.  The remaining fields
-of that packet match (`BLTCON0=$2B4A`, `BLTCON1=$0057`, A=`$00FFA8`,
-C/D=`$007610`).
+dispatcher reproduces all four packets exactly.  The second edge specifically
+proved the `$C30634-$C30638` rounding detail: `DIVS` returns quotient 93;
+`ASR.W` yields 46 with carry set, then the source increments to 47, producing
+`BLTSIZE=$0C02`.  The native bounded-limit helper now preserves that carry
+rounding, including the source's DIVS-overflow register behavior.
 
-Therefore the native page diagnostic must not be wired yet.  Correct the
-second `$C305D6/$C305F8` bounded-limit result first, with this packet as its
-focused acceptance condition.
+The packet producer is now ready for the native page diagnostic.  That
+diagnostic must still apply the complete inherited line/fill/lane state and
+compare its settled Chip-page output, rather than calling a generic triangle
+filler.
 
 ## Lane-stage consequence
 
