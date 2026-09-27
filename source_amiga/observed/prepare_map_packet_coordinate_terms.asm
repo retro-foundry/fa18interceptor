@@ -30,3 +30,5 @@ prepare_map_packet_coordinate_terms:
                 lsr.w   d2,d1
                 tst.w   -$3e(a6)
                 bne.b   $C2ABD2
+                addq.w  #4,d0
+                addq.w  #4,d1
