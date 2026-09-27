@@ -29,6 +29,13 @@ area path needs true inherited blitter channels and word/shift/modulo
 semantics; it does not authorize a generic filled-triangle substitute or
 normal `game.c` scheduling.
 
+`port/blit_job.c` now has the bounded `fa18_execute_ocs_block_blit` primitive
+for that next stage.  It executes only evidenced OCS block submissions over
+caller-owned Chip bytes (A/B/C enables, shifts, masks, signed modulos, and
+descending progression); line/fill state deliberately returns an error.  It
+is not attached to a flight page yet: that requires the traced inherited
+register image and the active-page address mapping from the run036 oracle.
+
 The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
 starts from external frame-384 pre-call state, then runs the native
 `$C279D0-$C27D0F` packet/grid/direct-pixel/line path over that page. It does

@@ -39,6 +39,21 @@ int main(void) {
     assert(fa18_execute_blitter_words(0xfc, a_words, b_words, c_words,
                                       d_words, 2, 0xff00, 0x00ff) == 0);
     assert(d_words[0] == 0xffaa && d_words[1] == 0xaaff);
+    uint8_t chip[32] = {0};
+    /* A/B/C all enabled; minterm $FC is A OR B and the second source word
+     * demonstrates the registered ascending A shift. */
+    chip[0] = 0x80; chip[1] = 0x01;
+    chip[2] = 0x40; chip[3] = 0x02;
+    chip[8] = 0xff; chip[9] = 0xff;
+    operation = (FA18BlitOperation){
+        0x1ffcu, 0x0000u, 0xffffu, 0xffffu, 0, 0,
+        0, 0, 0, 0, 0, 4, 8, 8, 0x0042u
+    };
+    assert(fa18_execute_ocs_block_blit(&operation, chip, sizeof chip) == 0);
+    assert(chip[8] == 0x40 && chip[9] == 0x00);
+    assert(chip[10] == 0xa0 && chip[11] == 0x01);
+    operation.bltcon1 = 0x0001u;
+    assert(fa18_execute_ocs_block_blit(&operation, chip, sizeof chip) == -1);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&

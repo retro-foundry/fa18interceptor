@@ -74,6 +74,15 @@ int fa18_execute_blitter_words(uint8_t logic_function,
                                size_t word_count,
                                uint16_t first_mask,
                                uint16_t last_mask);
+
+/* Execute one OCS block-mode BLTSIZE submission against caller-owned Chip
+ * bytes.  It preserves the source register model: enabled A/B/C channels are
+ * selected from BLTCON0, shifts use their BLTCON fields and initial data
+ * registers, and pointer/modulo progression follows BLTCON1 DESC.  Line and
+ * fill modes have distinct hardware state and deliberately fail here rather
+ * than being approximated as a polygon fill. */
+int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
+                                uint8_t *chip_bytes, size_t chip_byte_count);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 

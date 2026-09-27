@@ -121,6 +121,102 @@ int fa18_execute_blitter_words(uint8_t logic_function,
     return 0;
 }
 
+static int read_chip_word(const uint8_t *bytes, size_t count, uint32_t address,
+                          uint16_t *word) {
+    if (!bytes || !word || address > count || count - address < 2u) return -1;
+    *word = (uint16_t)(((uint16_t)bytes[address] << 8) | bytes[address + 1u]);
+    return 0;
+}
+
+static int write_chip_word(uint8_t *bytes, size_t count, uint32_t address,
+                           uint16_t word) {
+    if (!bytes || address > count || count - address < 2u) return -1;
+    bytes[address] = (uint8_t)(word >> 8);
+    bytes[address + 1u] = (uint8_t)word;
+    return 0;
+}
+
+static uint16_t shifted_source_word(uint16_t previous, uint16_t current,
+                                    uint8_t shift, int descending) {
+    if (shift == 0u) return current;
+    if (descending)
+        return (uint16_t)((uint16_t)(current << shift) |
+                          (uint16_t)(previous >> (16u - shift)));
+    return (uint16_t)((uint16_t)(current >> shift) |
+                      (uint16_t)(previous << (16u - shift)));
+}
+
+int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
+                                uint8_t *chip_bytes, size_t chip_byte_count) {
+    FA18BlitExtent extent;
+    uint32_t a, b, c, d;
+    uint16_t previous_a, previous_b;
+    const uint8_t shift_a = (uint8_t)(operation ? operation->bltcon0 >> 12 : 0u);
+    const uint8_t shift_b = (uint8_t)(operation ? operation->bltcon1 >> 12 : 0u);
+    const int use_a = operation && (operation->bltcon0 & 0x0800u) != 0u;
+    const int use_b = operation && (operation->bltcon0 & 0x0400u) != 0u;
+    const int use_c = operation && (operation->bltcon0 & 0x0200u) != 0u;
+    const int use_d = operation && (operation->bltcon0 & 0x0100u) != 0u;
+    const int descending = operation && (operation->bltcon1 & 0x0002u) != 0u;
+
+    if (!operation || !chip_bytes || (operation->bltcon1 & 0x0019u) != 0u)
+        return -1;
+    extent = fa18_decode_blit_extent(operation->bltsize);
+    if (!extent.width_words || !extent.height_rows || !use_d) return -1;
+
+    a = operation->bltapt;
+    b = operation->bltbpt;
+    c = operation->bltcpt;
+    d = operation->bltdpt;
+    previous_a = operation->bltadat;
+    previous_b = operation->bltbdat;
+    for (uint16_t row = 0; row < extent.height_rows; ++row) {
+        for (uint16_t column = 0; column < extent.width_words; ++column) {
+            uint16_t raw_a = operation->bltadat;
+            uint16_t raw_b = operation->bltbdat;
+            uint16_t raw_c = 0;
+            uint16_t a_word, b_word, result, old_d;
+            const uint16_t mask = column == 0 ? operation->bltafwm :
+                                  column + 1u == extent.width_words ? operation->bltalwm :
+                                  0xffffu;
+            if (use_a && read_chip_word(chip_bytes, chip_byte_count, a, &raw_a) != 0)
+                return -1;
+            if (use_b && read_chip_word(chip_bytes, chip_byte_count, b, &raw_b) != 0)
+                return -1;
+            if (use_c && read_chip_word(chip_bytes, chip_byte_count, c, &raw_c) != 0)
+                return -1;
+            a_word = use_a ? shifted_source_word(previous_a, raw_a, shift_a, descending) : 0;
+            b_word = use_b ? shifted_source_word(previous_b, raw_b, shift_b, descending) : 0;
+            result = fa18_apply_blitter_minterm((uint8_t)operation->bltcon0,
+                                                a_word, b_word, raw_c);
+            if (read_chip_word(chip_bytes, chip_byte_count, d, &old_d) != 0)
+                return -1;
+            if (write_chip_word(chip_bytes, chip_byte_count, d,
+                                (uint16_t)((old_d & (uint16_t)~mask) |
+                                           (result & mask))) != 0)
+                return -1;
+            previous_a = raw_a;
+            previous_b = raw_b;
+            if (use_a) a = (uint32_t)((int64_t)a + (descending ? -2 : 2));
+            if (use_b) b = (uint32_t)((int64_t)b + (descending ? -2 : 2));
+            if (use_c) c = (uint32_t)((int64_t)c + (descending ? -2 : 2));
+            d = (uint32_t)((int64_t)d + (descending ? -2 : 2));
+        }
+        if (use_a) a = (uint32_t)((int64_t)a +
+                                   (descending ? -(int16_t)operation->bltamod :
+                                                 (int16_t)operation->bltamod));
+        if (use_b) b = (uint32_t)((int64_t)b +
+                                   (descending ? -(int16_t)operation->bltbmod :
+                                                 (int16_t)operation->bltbmod));
+        if (use_c) c = (uint32_t)((int64_t)c +
+                                   (descending ? -(int16_t)operation->bltcmod :
+                                                 (int16_t)operation->bltcmod));
+        d = (uint32_t)((int64_t)d + (descending ? -(int16_t)operation->bltdmod :
+                                                (int16_t)operation->bltdmod));
+    }
+    return 0;
+}
+
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation) {
     if (!operation) return;
     operation->bltcon0 = 0x0d0c; operation->bltcon1 = 2;
