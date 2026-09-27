@@ -4,6 +4,7 @@
 #include "map_detail_component_route.h"
 #include "map_detail_fields.h"
 #include "map_detail_gate.h"
+#include "map_packet_relative_offset.h"
 #include "map_packet_stage.h"
 
 typedef struct {
@@ -11,6 +12,8 @@ typedef struct {
     FA18MapDetailGateInput gate;
     FA18MapDetailFieldsInput fields;
     FA18MapPacketStageInput packet_stage;
+    uint8_t use_relative_offset;
+    FA18MapPacketRelativeOffsetInput relative_offset;
 } FA18MapPacketRecordStageInput;
 
 typedef enum {
@@ -23,7 +26,8 @@ typedef enum {
 
 /* `$C2AD00-$C2AFF7`, excluding the caller-owned record walker and
  * coordinate-table selection: run one control byte through detail selection,
- * visibility, stream selection, static-pair transformation, and display. */
+ * directory-relative packet lookup, visibility, stream selection,
+ * static-pair transformation, and display. */
 int fa18_run_map_packet_record_stage(
     const FA18MapPacketRecordStageInput *input,
     FA18MapPacketProjectionRecord *records, size_t record_capacity,

@@ -24,6 +24,24 @@ int fa18_run_map_packet_record_stage(
     }
     if (gate_result) *gate_result = gate;
 
+    FA18MapPacketStageInput packet_stage = input->packet_stage;
+    if (input->use_relative_offset) {
+        FA18MapPacketRelativeOffsetInput relative = input->relative_offset;
+        relative.mode = gate.mode;
+        FA18MapPacketRelativeOffsetResult selected;
+        FA18MapPacketRelativeOffsetRoute relative_route;
+        if (fa18_select_map_packet_relative_offset(&relative, &selected,
+                                                   &relative_route) != 0)
+            return -1;
+        if (relative_route != FA18_MAP_PACKET_RELATIVE_OFFSET_READY) {
+            *record_count = 0;
+            *route = FA18_MAP_PACKET_RECORD_REJECTED;
+            return 0;
+        }
+        packet_stage.selector.packet = selected.packet;
+        packet_stage.selector.packet_size = selected.packet_size;
+    }
+
     FA18MapDetailFieldsInput fields = input->fields;
     fields.alternate_layout = input->gate.alternate_layout;
     fields.force_visible = gate.detail_byte;
@@ -32,7 +50,6 @@ int fa18_run_map_packet_record_stage(
     FA18MapDetailFieldsResult detail;
     if (fa18_apply_map_detail_fields(&fields, &detail) != 0) return -1;
 
-    FA18MapPacketStageInput packet_stage = input->packet_stage;
     packet_stage.selector.alternate_stream = detail.visible != 0;
     packet_stage.transform.detail_shift = gate.coordinate_shift;
     packet_stage.transform.packed_seed =
