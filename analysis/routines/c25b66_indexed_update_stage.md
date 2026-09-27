@@ -44,3 +44,11 @@ record flag gate. `$C25C3E-$C25C45` tests only bit 0 of the caller-owned
 record byte at `+2`: clear reaches `$C25C54`, while set falls through to the
 still-unported `$C25C46` continuation. It does not establish either
 continuation's record semantics.
+
+## control-word branch after the clear record flag
+
+The same run001 trace reaches `$C25C54` with `$C458CC=$0840` and
+`$C459B4=0`. The `$0040` mask is set, so `$C25C62-$C25C69` branches to the
+bounded `$C25C70` control-stage call. The other source-defined outcomes are a
+clear mask to `$C25D86` and a set mask with nonzero selected index falling
+through at `$C25C6A`; neither assigns record semantics.

@@ -106,6 +106,11 @@ or leaves the `$C25C46` fallthrough as an explicit continuation when set.
 `ctest` passes **92/92** tests; the native frame check remains 192 exact
 frames through global frame 391.
 
+`port/indexed_update_control_path.{c,h}` now ports `$C25C54-$C25C69`: control
+bit `$0040` clear routes to `$C25D86`; when set, a zero selected index routes
+to `$C25C70`, while a nonzero index remains an explicit `$C25C6A`
+continuation. `ctest` passes **93/93** tests with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
