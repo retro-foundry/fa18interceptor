@@ -13,6 +13,7 @@
 #include "scene_record_table.h"
 #include "scene_component_magnitude.h"
 #include "scene_dispatch_table.h"
+#include "scene_render_fixture.h"
 #include "replay.h"
 #include "video.h"
 
@@ -28,6 +29,7 @@ typedef struct {
     FA18MenuTextState menu_text;
     FA18MenuFlow menu_flow;
     FA18MenuRecord menu_records[FA18_MENU_TEXT_SELECTORS];
+    FA18SceneRenderFixture render_fixture;
     uint32_t frame; /* PAL video frame number, matching the recorded run */
 } FA18Game;
 
@@ -37,6 +39,10 @@ void fa18_game_free(FA18Game *game);
 
 /* Apply replay controls at the presentation boundary for the current frame. */
 int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *controls);
+
+/* User-authorized temporary captured-state visual bootstrap. It is opt-in and
+ * does not alter the normal replay path. */
+int fa18_game_enable_render_fixture(FA18Game *game, const char *chip_capture_path);
 
 /* Advance one PAL video frame with the given control state. */
 int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,

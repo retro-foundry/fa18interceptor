@@ -142,6 +142,7 @@ int main(int argc, char **argv) {
     uint32_t last = 0;
     int headless = 0;
     int dump_stdout = 0;
+    const char *render_fixture_capture = NULL;
     for (int i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--adf") && i + 1 < argc) adf_path = argv[++i];
         else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
@@ -161,8 +162,10 @@ int main(int argc, char **argv) {
                 fputs("Only standard output is supported for RGB444 output\n", stderr);
                 return 2;
             }
+        } else if (!strcmp(argv[i], "--bootstrap-render-fixture") && i + 1 < argc) {
+            render_fixture_capture = argv[++i];
         } else {
-            fputs("Usage: fa18_port --adf FILE --replay FILE [--timing FILE] [--headless --to N --dump-rgb444 -]\n", stderr);
+            fputs("Usage: fa18_port --adf FILE --replay FILE [--timing FILE] [--bootstrap-render-fixture CHIP] [--headless --to N --dump-rgb444 -]\n", stderr);
             return 2;
         }
     }
@@ -193,6 +196,14 @@ int main(int argc, char **argv) {
     }
     FA18Game game;
     if (!fa18_game_init(&game, adf_path)) {
+        free(events.items);
+        free(ticks.items);
+        return 1;
+    }
+    if (render_fixture_capture &&
+        fa18_game_enable_render_fixture(&game, render_fixture_capture) != 0) {
+        fputs("Cannot initialize temporary scene render fixture\n", stderr);
+        fa18_game_free(&game);
         free(events.items);
         free(ticks.items);
         return 1;

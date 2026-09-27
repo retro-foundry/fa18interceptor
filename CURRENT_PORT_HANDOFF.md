@@ -11,6 +11,15 @@ The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
  pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **116/116** tests.
 
+The user explicitly authorized a temporary opt-in display diagnostic while the
+scene producer is reconstructed. `--bootstrap-render-fixture CHIP` imports the
+five traced run075 frame-392 page planes from a caller-supplied external
+Chip-RAM capture and presents them with the native Hunk-21 mode-8 palette. It
+contains no captured page in the executable, is never selected by normal
+replay, and does not advance the 192-frame parity result. It is a visibility
+diagnostic only, not a native scene renderer or completion of the frame-392
+producer.
+
 ## Non-negotiable porting rules
 
 - The Amiga source/disassembly and extracted assets are the authority.  Do not
