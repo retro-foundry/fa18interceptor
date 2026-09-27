@@ -70,13 +70,21 @@ python scripts/trace_from_breakpoint.py \
 
 At that entry `$C456B6=$C4567E`, whose four plane bases are
 `$018980,$016A40,$014B00,$012BC0`; it is not the separately fetched
-five-plane `$04DB30,$04FA70,$0519B0,$0538F0,$055830` family. The first
-normal-frame DMA capture at this boundary fetches the latter family, while a
-frame-by-frame sample records no mutation in its complete 40,000-byte range
-after global frame 389 through frame 392. Thus `$C279D0` is active renderer
-work but is not yet demonstrated as the producer of the visible frame-392
-pixels. In particular, neither its record stream nor the first visible scene
-may be named terrain from this evidence.
+five-plane `$04DB30,$04FA70,$0519B0,$0538F0,$055830` family. The normal DMA
+captures for frames 391 and 392 fetch that latter five-plane family.
+
+The selector's normal state provides the immediate staging timeline. Its
+`$C456B6` byte changes from `$C4567E` to `$C4566E` at global frame 380, then
+back to `$C4567E` at frame 389. `$C4566E` holds the four render-page bases
+`$0538F0,$0519B0,$04FA70,$04DB30`, so the frame-380 selection can direct the
+four-plane primitive to the page later fetched as five planes. A
+frame-by-frame sample of the complete 40,000-byte display family records its
+last mutation at frame 389 and none in frames 390--392. Thus frame 392 reveals
+a page prepared earlier; the `$C279D0` work newly observed in frame 392 is
+directed at the other page. The page-selection/palette/Copper condition that
+makes the already prepared page visible remains open. In particular, neither
+the staged record stream nor the first visible scene may be named terrain from
+this evidence.
 
 ## Next port boundary
 
