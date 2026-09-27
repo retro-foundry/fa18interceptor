@@ -20,6 +20,15 @@ replay, and does not advance the 192-frame parity result. It is a visibility
 diagnostic only, not a native scene renderer or completion of the frame-392
 producer.
 
+The next rendering boundary is the real far-polygon path.  A bounded run036
+`$C2FF48 -> $C301F6 -> $C302DE/$C302EC -> $C30306` call is now recorded as
+`analysis/routines/run036_c2ff48_area_blit_oracle.md`: it reaches four
+`$C30668` prepared jobs and the following lane stage, with source register
+images plus a 110-byte settled Chip-page delta oracle.  It proves the native
+area path needs true inherited blitter channels and word/shift/modulo
+semantics; it does not authorize a generic filled-triangle substitute or
+normal `game.c` scheduling.
+
 The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
 starts from external frame-384 pre-call state, then runs the native
 `$C279D0-$C27D0F` packet/grid/direct-pixel/line path over that page. It does
