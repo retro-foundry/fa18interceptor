@@ -31,6 +31,20 @@ int main(void) {
         fputs("message record bounds contract failed\n", stderr);
         return 1;
     }
+    memcpy(data + FA18_MENU_RECORD_TABLE_OFFSET + 10, "OLD", 4);
+    data[FA18_MENU_RECORD_TABLE_OFFSET + 14] = 4;
+    data[FA18_MENU_RECORD_TABLE_OFFSET + 15] = 0;
+    data[FA18_MENU_RECORD_TABLE_OFFSET + 16] = 0xa2;
+    memcpy(data + FA18_MENU_RECORD_TABLE_OFFSET + 17, "NEXT", 5);
+    record = (FA18MenuRecord){.text = data + FA18_MENU_RECORD_TABLE_OFFSET + 10,
+                              .text_length = 3, .layout_offset = 0x19ca};
+    if (fa18_menu_select_inline_followup(&exe, &record, 0x1e0, &record) != 0 ||
+        record.text_length != 4 || memcmp(record.text, "NEXT", 4) != 0 ||
+        record.layout_offset != 0x1baa || record.attribute != 0 ||
+        record.layout_index != 10) {
+        fputs("message record inline followup contract failed\n", stderr);
+        return 1;
+    }
     puts("message record selector contract passed");
     return 0;
 }

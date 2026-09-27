@@ -12,7 +12,7 @@ int fa18_menu_queue_top_level_text(FA18MenuTextState *state) {
         state->video_latch = 0x001f0000u;
     state->auxiliary_latch = 1;
     state->mode_latch = 0;
-    state->display_delay = 0x000001e0u;
+    state->text_layout_increment = 0x000001e0u;
     memcpy(state->selectors, selectors, sizeof selectors);
     state->selector_count = sizeof selectors / sizeof selectors[0];
     return 0;

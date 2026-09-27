@@ -36,8 +36,17 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
             return 0;
         }
     }
+    if (fa18_menu_select_inline_followup(
+            &game->exe, &game->menu_records[game->menu_text.selector_count - 2],
+            game->menu_text.text_layout_increment,
+            &game->menu_records[game->menu_text.selector_count - 1]) != 0) {
+        fputs("Cannot resolve the top-level menu inline text record\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
     if (fa18_render_top_level_menu(&game->video, &game->exe, game->menu_records,
-                                   game->menu_text.selector_count - 1) != 0) {
+                                   game->menu_text.selector_count) != 0) {
         fputs("Cannot render the top-level menu text\n", stderr);
         fa18_hunks_free(&game->exe);
         fa18_disk_close(&game->disk);

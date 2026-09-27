@@ -22,4 +22,11 @@ typedef struct {
 int fa18_menu_select_message_record(const FA18Hunks *exe, uint16_t selector,
                                     FA18MenuRecord *record);
 
+/* `$C32C3A-$C32CB2` consumes the three inline control bytes after a completed
+ * text record and advances its layout base by `$C4573E`. */
+int fa18_menu_select_inline_followup(const FA18Hunks *exe,
+                                     const FA18MenuRecord *previous,
+                                     uint32_t layout_increment,
+                                     FA18MenuRecord *record);
+
 #endif

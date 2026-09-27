@@ -99,10 +99,14 @@ in order. The menu frames (200..~391) should be unaffected.
    records are resolved from the executable's `$C3ED0A` relative table; the
    bounded `$C32F54-$C33168` compositor reads its palette, layout, and glyph
    data from `$C08490`, `$C41066`, and `$C3D8FC` at runtime.
-3. The frame-200 gate has only one unresolved line: `SHIFT ESC ... RETURNS
-   YOU TO THIS MENU` at y=177..183 (541 pixels). It is not present in
-   `$C0FBE0`'s selector queue. Trace its original producer and layout state;
-   do not add it from a frame fixture or infer its placement from pixels.
-4. Continue in frame order, one original routine/contract per commit, with
+3. `$C32C3A-$C32CB2` is ported for the inline follow-up after selector 109.
+   It skips the prior NUL, reads the `$04,$00,$A2` glyph/attribute/layout
+   triplet at `$C3F3D1`, then renders `SHIFT ESC ... RETURNS YOU TO THIS MENU`
+   from `$C3F3D4` at `$19CA + $1E0 = $1BAA`. Frames 200..233 match exactly
+   (`NATIVE_FRAME_COUNT=34`).
+4. Frame 234 is the first mismatch: recorded key `1` starts the demonstration
+   selection. Trace its original input consumer and menu follow-up in frame
+   order; do not infer the transition from the oracle pixels.
+5. Continue one original routine/contract per commit, with
    `NATIVE_FRAME_COUNT` in each commit message. The CPU-paced flight timing
    issue remains a separate blocker before the 3D path.

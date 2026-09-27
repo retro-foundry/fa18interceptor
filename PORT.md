@@ -1156,3 +1156,15 @@ game loop.
   seven-row line (`SHIFT ESC ... RETURNS YOU TO THIS MENU`, 541 pixels at
   y=177..183); it is not in `$C0FBE0`'s queue, so it remains absent pending a
   traced producer/placement contract. The frame count therefore remains zero.
+- 2026-09-27: The frame-200 state trace closes that final line: after selector
+  109, `$C32C3A-$C32CB2` skips the NUL at `$C3F3D0`, consumes the following
+  inline control bytes, and advances the `$19CA` base by `$C4573E=$1E0`. Its
+  `SHIFT ESC ... RETURNS YOU TO THIS MENU` payload therefore starts at
+  `$1BAA`; the saved cursor then reaches `$1D8A`. Port this inline-record path
+  rather than treating the line as an additional selector.
+- 2026-09-27: Ported `$C32C3A-$C32CB2`'s inline follow-up grammar. After the
+  selector-109 NUL at `$C3F3D0`, the native parser consumes the three control
+  bytes `$04,$00,$A2` and renders the following payload from `$C3F3D4` with
+  the proved `$1E0` layout increment. Frames 200..233 now match the native
+  oracle exactly (`NATIVE_FRAME_COUNT=34`); frame 234 is the first key-`1`
+  demonstration-selection transition and remains unported.
