@@ -152,6 +152,11 @@ and derives the comparison word through a caller-owned signed depth-table
 lookup, including the source `$7ffe` saturation. `ctest` remains **98/98**
 with the same native frame result.
 
+`fa18_run_scene_placement_stage` now composes `$C1CB14-$C1CCB9`: the selector
+prefix feeds its chosen offset directly into the already-portable placement
+record loop. Tables, descriptor lookup, and descriptor consumer behavior stay
+caller-owned. `ctest` remains **98/98** with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

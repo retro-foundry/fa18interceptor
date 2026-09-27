@@ -35,6 +35,22 @@ int fa18_prepare_scene_placement_selector(
     return 0;
 }
 
+int fa18_run_scene_placement_stage(const FA18ScenePlacementStageInput *input,
+                                   FA18ScenePlacementStageResult *result) {
+    if (!input || !result ||
+        fa18_prepare_scene_placement_selector(
+            input->select_alternate_table, input->primary_offset,
+            input->alternate_offset, input->projection_depth,
+            input->depth_lookup, input->depth_context, &result->selector) != 0)
+        return -1;
+    return fa18_traverse_scene_placements(
+        input->primary_table, input->primary_size,
+        input->alternate_table, input->alternate_size,
+        result->selector.use_alternate_table, result->selector.initial_offset,
+        input->gate_coordinate, input->descriptor_lookup, input->consumer,
+        input->traversal_context, &result->traversal);
+}
+
 int fa18_decode_scene_placement_record(const uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
                                        FA18ScenePlacementRecord *record) {
     if (!bytes || !record) return -1;

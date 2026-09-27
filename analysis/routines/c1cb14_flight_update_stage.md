@@ -57,3 +57,7 @@ preceding `$C1CB14-$C1CB73` selector prefix. It chooses the caller-owned list
 offset, clears its two direct flags, and creates the `$C459B2` comparison word
 from the caller-owned signed depth-byte table (or the exact `$7ffe`
 saturation). The placement table and lookup ownership remain external.
+
+`fa18_run_scene_placement_stage` now composes this selector state with the
+existing `$C1CB74-$C1CCB9` traversal, retaining the descriptor lookup and
+consumer as caller-owned native boundaries.

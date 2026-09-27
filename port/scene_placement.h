@@ -60,6 +60,32 @@ int fa18_prepare_scene_placement_selector(
     FA18ScenePlacementDepthLookup depth_lookup, void *context,
     FA18ScenePlacementSelectorState *state);
 
+typedef struct {
+    uint8_t select_alternate_table;
+    uint16_t primary_offset;
+    uint16_t alternate_offset;
+    int32_t projection_depth;
+    int32_t gate_coordinate;
+    const uint8_t *primary_table;
+    size_t primary_size;
+    const uint8_t *alternate_table;
+    size_t alternate_size;
+    FA18ScenePlacementDepthLookup depth_lookup;
+    void *depth_context;
+    FA18ScenePlacementDescriptorLookup descriptor_lookup;
+    FA18ScenePlacementConsumer consumer;
+    void *traversal_context;
+} FA18ScenePlacementStageInput;
+
+typedef struct {
+    FA18ScenePlacementSelectorState selector;
+    FA18ScenePlacementTraversalState traversal;
+} FA18ScenePlacementStageResult;
+
+/* `$C1CB14-$C1CCB9`: compose the selector prefix with the common record loop. */
+int fa18_run_scene_placement_stage(const FA18ScenePlacementStageInput *input,
+                                   FA18ScenePlacementStageResult *result);
+
 /* Decode one big-endian runtime record. */
 int fa18_decode_scene_placement_record(const uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
                                        FA18ScenePlacementRecord *record);

@@ -97,5 +97,18 @@ int main(void) {
     assert(fa18_traverse_scene_placements(records, FA18_SCENE_PLACEMENT_BYTES - 1,
                                           0, 0, 0, 0, 0, lookup, consume,
                                           &fixture, &state) == -1);
+
+    FA18ScenePlacementStageInput stage_input = {
+        0, 0, 0, -0x100, 0,
+        records, sizeof records, 0, 0,
+        depth_lookup, &depth_index, lookup, consume, &fixture
+    };
+    FA18ScenePlacementStageResult stage_result;
+    fixture.probe = (FA18ScenePlacementDescriptorProbe){0, 0};
+    fixture.calls = 0;
+    assert(fa18_run_scene_placement_stage(&stage_input, &stage_result) == 0);
+    assert(depth_index == 2 && stage_result.selector.comparison_word == 0xfd00 &&
+           stage_result.traversal.accepted_count == 1 && fixture.calls == 1);
+    assert(fa18_run_scene_placement_stage(0, &stage_result) == -1);
     return 0;
 }
