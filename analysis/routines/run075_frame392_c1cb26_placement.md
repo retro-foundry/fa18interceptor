@@ -17,3 +17,12 @@ result is stored at the source record's `+20` field. The remaining records
 exercise the existing signed countdown/skip paths. This is concrete evidence
 for the already-native alternate-entry placement stage, but does not identify
 the placement data as terrain or establish a scheduler cadence.
+
+The sibling `$C1CB14` call is independently bounded by
+`build/run075_frame392_c1cb14/trace.jsonl`. It performs the same
+`$C45A78=FFFFFF83` depth-table calculation and publishes `$4000`, but keeps
+the primary selector byte clear, chooses `$C4E9AA`, and immediately finds the
+`$FFFF` terminator at offset zero. It returns to `$C0F0AC` after 25
+instructions without descriptor work. Thus the frame-392 parent invocation's
+only observed placement-descriptor traversal is the following alternate
+`$C1CB26` child.
