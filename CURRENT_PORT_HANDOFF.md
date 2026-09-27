@@ -230,6 +230,12 @@ caller-owned callbacks, preserving their source order without assigning their
 unbounded behavior. `ctest` passes **111/111** tests with the same native
 frame result.
 
+`port/record_scan_indexed_stage.{c,h}` now ports `$C15688-$C158D6`:
+flag/mode-derived coefficient selection, both signed matrix-product triples,
+masked origin additions, `+$28/+30/+32` slot writes, and the turn-word
+secondary adjustment. Its `$C159AE` tail is a required caller callback.
+`ctest` passes **112/112** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
