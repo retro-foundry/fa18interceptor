@@ -1,6 +1,8 @@
 #ifndef FA18_RECORD_MATRIX_UPDATE_H
 #define FA18_RECORD_MATRIX_UPDATE_H
 
+#include "flight.h"
+
 #include <stdint.h>
 
 typedef struct {
@@ -30,5 +32,11 @@ typedef struct {
 int fa18_update_record_matrix(FA18RecordMatrixUpdateState *state,
                               const FA18RecordMatrixUpdateInput *input,
                               const FA18RecordMatrixUpdateOps *ops);
+
+/* Concrete `$C2D94E-$C2D99A` route: publish the record triple, construct its
+ * `$C2E47A` rotation matrix, then construct the `$C2E514` attitude matrix. */
+int fa18_update_record_matrix_native(FA18RecordMatrixUpdateState *state,
+                                     const FA18RecordMatrixUpdateInput *input,
+                                     const FA18FlightTrigTable *trig_table);
 
 #endif
