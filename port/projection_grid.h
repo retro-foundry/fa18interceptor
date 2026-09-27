@@ -82,6 +82,13 @@ typedef struct {
     FA18ProjectionPairScreenPoint direct_pair;
 } FA18ProjectionGridEmission;
 
+typedef struct {
+    int16_t min_x;
+    int16_t max_x;
+    int16_t min_y;
+    int16_t max_y;
+} FA18ProjectionPairBounds;
+
 enum {
     FA18_PROJECTION_GRID_SKIP = 0,
     FA18_PROJECTION_GRID_TRIANGLE = 1,
@@ -155,5 +162,9 @@ int fa18_emit_projection_grid_record(const FA18ProjectionGrid *grid,
                                      const FA18ProjectionGridPreparedRecord *record,
                                      int16_t direct_pair_mode_limit,
                                      FA18ProjectionGridEmission *emission);
+
+/* `$C301F6-$C30258`: reduce the submitted word-pair list to signed extrema. */
+int fa18_reduce_projection_pair_bounds(const FA18ProjectionPairScreenPoint *pairs,
+                                       uint16_t count, FA18ProjectionPairBounds *bounds);
 
 #endif

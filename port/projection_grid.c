@@ -235,3 +235,19 @@ int fa18_emit_projection_grid_record(const FA18ProjectionGrid *grid,
     return record->kind == 2 ? FA18_PROJECTION_GRID_DIRECT_RENDERER_B :
                                FA18_PROJECTION_GRID_DIRECT_RENDERER_A;
 }
+
+int fa18_reduce_projection_pair_bounds(const FA18ProjectionPairScreenPoint *pairs,
+                                       uint16_t count, FA18ProjectionPairBounds *bounds) {
+    if (!pairs || !bounds || count < 3) return -1;
+    FA18ProjectionPairBounds reduced = {
+        pairs[0].x, pairs[0].x, pairs[0].y, pairs[0].y
+    };
+    for (uint16_t index = 1; index < count; ++index) {
+        if (pairs[index].x < reduced.min_x) reduced.min_x = pairs[index].x;
+        if (pairs[index].x > reduced.max_x) reduced.max_x = pairs[index].x;
+        if (pairs[index].y < reduced.min_y) reduced.min_y = pairs[index].y;
+        if (pairs[index].y > reduced.max_y) reduced.max_y = pairs[index].y;
+    }
+    *bounds = reduced;
+    return 0;
+}

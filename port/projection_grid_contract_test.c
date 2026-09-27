@@ -121,6 +121,11 @@ int main(void) {
                                             110, &emission) == FA18_PROJECTION_GRID_SKIP);
     assert(fa18_emit_projection_grid_record(0, &matrix, &base, &translation,
                                             179, &emission) == -1);
+    FA18ProjectionPairBounds bounds;
+    assert(fa18_reduce_projection_pair_bounds(emission.triangle.points, 3, &bounds) == 0);
+    assert(bounds.min_x == 106 && bounds.max_x == 109);
+    assert(bounds.min_y == 111 && bounds.max_y == 111);
+    assert(fa18_reduce_projection_pair_bounds(emission.triangle.points, 2, &bounds) == -1);
 
     table[0] = 0xff; table[1] = 0xff;
     assert(fa18_load_projection_grid(&hunks, &grid) == -1);

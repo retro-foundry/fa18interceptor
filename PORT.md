@@ -1273,3 +1273,8 @@ game loop.
   kinds run the direct pair through the same projection, apply `$C45984`'s
   row limit, and preserve the source's `kind == 2` renderer-B selection.
   Renderer calls and record-loop pacing remain unconnected.
+- 2026-09-27: Ported `$C301F6-$C30258`'s signed pair-list extrema reduction as
+  `fa18_reduce_projection_pair_bounds`. It is the first direct consumer of
+  the three-point `$C279` output; the frame-384 batch reduces to x `106..109`
+  and y `111..111`. The later near-line and blitter branch targets remain
+  outside this bounded native step.
