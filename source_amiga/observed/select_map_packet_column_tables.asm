@@ -31,3 +31,16 @@ select_map_packet_column_tables:
                 add.w   d2,d2
                 adda.w  d2,a0
                 bra.b   $C2AD00
+.middle_metric:
+                move.w  d2,d3
+                add.w   d2,d2
+                add.w   d2,d2
+                add.w   d3,d2
+                add.w   d3,d2
+                lea.l   (a1),a0
+                adda.w  d2,a0
+                bra.b   $C2AD00
+.high_metric:
+                lea.l   (a2),a0
+                asl.w   #3,d2
+                adda.w  d2,a0
