@@ -1176,3 +1176,9 @@ game loop.
   the remaining clear completes after presentation, yielding the frame-235
   black page. Frames 200..235 match exactly (`NATIVE_FRAME_COUNT=36`). The
   selector-101 label is the next unported presentation step at frame 236.
+- 2026-09-27: Ported selector 101's post-clear presentation through the same
+  executable-backed `$C32D24` record lookup and `$C32F54-$C33168` glyph
+  compositor as the initial menu. The queued `1 ... DEMO` label is therefore
+  not a separate visual asset. Frames 200..272 match exactly
+  (`NATIVE_FRAME_COUNT=73`); frame 273 clears that label and is the next
+  evidence boundary.

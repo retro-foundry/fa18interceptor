@@ -31,6 +31,6 @@ void fa18_game_free(FA18Game *game);
 int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *controls);
 
 /* Advance one PAL video frame with the given control state. */
-void fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls);
+int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls);
 
 #endif

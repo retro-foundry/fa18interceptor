@@ -19,6 +19,7 @@ typedef struct {
     uint8_t selected_mode;
     uint8_t selection_marker;
     uint8_t complete_clear_after_present;
+    uint8_t selector_render_pending;
     uint16_t selectors[2];
     int16_t display_delay;
 } FA18MenuFlow;
@@ -33,5 +34,8 @@ int fa18_menu_flow_apply_controls(FA18MenuFlow *flow,
 
 /* Complete `$C2FD22` after its partially visible first presentation. */
 void fa18_menu_flow_finish_presented_frame(FA18MenuFlow *flow, FA18Video *video);
+
+/* Consume the selector that follows the completed display clear. */
+int fa18_menu_flow_take_selector(FA18MenuFlow *flow, uint16_t *selector);
 
 #endif

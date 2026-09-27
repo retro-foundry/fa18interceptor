@@ -67,8 +67,17 @@ int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *contr
     return fa18_menu_flow_apply_controls(&game->menu_flow, controls, &game->video);
 }
 
-void fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls) {
+int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls) {
+    if (!game) return -1;
     (void)controls;
+    uint16_t selector;
+    if (fa18_menu_flow_take_selector(&game->menu_flow, &selector) == 0) {
+        FA18MenuRecord record;
+        if (fa18_menu_select_message_record(&game->exe, selector, &record) != 0 ||
+            fa18_render_top_level_menu(&game->video, &game->exe, &record, 1) != 0)
+            return -1;
+    }
     fa18_menu_flow_finish_presented_frame(&game->menu_flow, &game->video);
     ++game->frame;
+    return 0;
 }

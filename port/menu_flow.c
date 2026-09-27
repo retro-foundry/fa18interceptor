@@ -43,4 +43,12 @@ void fa18_menu_flow_finish_presented_frame(FA18MenuFlow *flow, FA18Video *video)
     if (!flow || !video || !flow->complete_clear_after_present) return;
     memset(video->pixels, 0, sizeof video->pixels);
     flow->complete_clear_after_present = 0;
+    flow->selector_render_pending = 1;
+}
+
+int fa18_menu_flow_take_selector(FA18MenuFlow *flow, uint16_t *selector) {
+    if (!flow || !selector || !flow->selector_render_pending) return -1;
+    *selector = flow->selectors[0];
+    flow->selector_render_pending = 0;
+    return 0;
 }

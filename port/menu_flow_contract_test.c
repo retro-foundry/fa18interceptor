@@ -31,6 +31,12 @@ int main(void) {
             return 1;
         }
     }
+    uint16_t selector = 0;
+    if (fa18_menu_flow_take_selector(&flow, &selector) != 0 || selector != 101 ||
+        fa18_menu_flow_take_selector(&flow, &selector) != -1) {
+        fputs("menu queued selector contract failed\n", stderr);
+        return 1;
+    }
     if (fa18_menu_flow_apply_controls(NULL, &controls, &video) != -1) {
         fputs("menu flow argument contract failed\n", stderr);
         return 1;

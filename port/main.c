@@ -98,7 +98,11 @@ static int play_window(FA18Game *game, const EventList *events) {
             continue;
         }
         SDL_RenderPresent(renderer);
-        fa18_game_frame(game, &controls);
+        if (fa18_game_frame(game, &controls) != 0) {
+            fputs("Game frame update failed\n", stderr);
+            running = 0;
+            continue;
+        }
         deadline += 20;
         if (SDL_GetTicks64() > deadline + 100) deadline = SDL_GetTicks64();
     }
@@ -179,7 +183,11 @@ int main(int argc, char **argv) {
                 result = 1;
                 break;
             }
-            fa18_game_frame(&game, &controls);
+            if (fa18_game_frame(&game, &controls) != 0) {
+                fputs("Game frame update failed\n", stderr);
+                result = 1;
+                break;
+            }
         }
     } else {
         result = play_window(&game, &events) != 0;

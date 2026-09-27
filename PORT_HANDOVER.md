@@ -110,9 +110,13 @@ in order. The menu frames (200..~391) should be unaffected.
    completed first-loop iterations are visible in frame 234, before the
    pending clear completes for frame 235. Frames 200..235 match exactly
    (`NATIVE_FRAME_COUNT=36`).
-5. Frame 236 is the first mismatch: trace and render selector 101's queued
-   `DEMO` label through the existing message-record and glyph path, rather
-   than restoring a recorded label bitmap.
-6. Continue one original routine/contract per commit, with
+5. Selector 101 now resolves and renders through `$C32D24` and the bounded
+   `$C32F54-$C33168` glyph route after the clear. Its `1 ... DEMO` payload
+   matches through frame 272; frames 200..272 are exact
+   (`NATIVE_FRAME_COUNT=73`).
+6. Frame 273 is the first mismatch: it clears the selector-101 label. Trace
+   the original producer and presentation boundary before implementing it;
+   do not reuse an all-black oracle frame.
+7. Continue one original routine/contract per commit, with
    `NATIVE_FRAME_COUNT` in each commit message. The CPU-paced flight timing
    issue remains a separate blocker before the 3D path.
