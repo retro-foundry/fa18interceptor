@@ -69,6 +69,12 @@ route rather than inventing a child call.
 `ctest` passes **87/87** tests.  The native reference result remains **192
 exact frames** (200 through 391) with the same first mismatch at frame 392.
 
+The active-record input to the earlier `$C1C54E-$C1C63D` projection publisher
+is now decoded by `fa18_decode_scene_projection_seed_record`.  It extracts
+only the observed root longwords (`+$14/+18/+1C`), type byte (`+$62`), and
+nine signed matrix words (`+$92..+$A2`) from caller-owned record bytes.  The
+containing record's scheduling and scene meaning remain unclaimed.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
