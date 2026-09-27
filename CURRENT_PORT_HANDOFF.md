@@ -78,6 +78,11 @@ containing record's scheduling and scene meaning remain unclaimed.
 bounded run075 trace join from those decoded fields to the prepared-page
 projection packet.
 
+`port/angle_octant.{c,h}` now ports `$C254E8-$C2554B`, the subsequent native
+angle-sector classifier. It preserves the source's byte-controlled primary or
+alternate input selection and signed threshold comparisons, while leaving the
+octant's downstream scene meaning unresolved. `ctest` passes **88/88** tests.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
