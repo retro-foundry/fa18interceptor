@@ -17,7 +17,10 @@ int main(void) {
 
     words[0] = 0xffff;
     assert(fa18_scene_component_magnitude(&table, 0x7fff, 0, 0, &result) == 0);
-    assert(result == 0x7fff);
+    /* Both MULU.W operations retain their wrapped 32-bit result.  The final
+     * signed ASR makes this $FFF90006 product negative, so the signed cap is
+     * deliberately not taken. */
+    assert(result == -28);
     words[0] = 0x4000;
 
     const FA18SceneMagnitudeTable short_table = {words, 1};

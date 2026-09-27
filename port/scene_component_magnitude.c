@@ -100,8 +100,9 @@ int fa18_scene_component_magnitude(const FA18SceneMagnitudeTable *table,
         vertical = 0;
     }
     if (table_word(table, (int16_t)vertical, &lookup) != 0) return -1;
+    const uint32_t scalar_product = (uint32_t)(uint16_t)planar * lookup;
     const int32_t scalar = arithmetic_shift_right_long(
-        (int32_t)(uint16_t)planar * lookup, 14);
+        (int32_t)scalar_product, 14);
     *result = scalar > INT16_MAX ? INT16_MAX : (int16_t)scalar;
     return 0;
 }
