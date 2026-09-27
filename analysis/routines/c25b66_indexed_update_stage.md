@@ -52,3 +52,11 @@ The same run001 trace reaches `$C25C54` with `$C458CC=$0840` and
 bounded `$C25C70` control-stage call. The other source-defined outcomes are a
 clear mask to `$C25D86` and a set mask with nonzero selected index falling
 through at `$C25C6A`; neither assigns record semantics.
+
+## control-stage return routing
+
+`$C25C70-$C25C85` first calls `$C1B27E`, then sends a nonzero selected index
+to `$C25D22`. With a zero index it reads the signed longword at selected-record
+offset `+$42`: nonnegative reaches `$C25CCA`, while negative falls through to
+the still-unported `$C25C86` continuation. The `$C1B27E` control-record body
+remains a separately evidenced caller boundary.

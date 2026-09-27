@@ -111,6 +111,12 @@ bit `$0040` clear routes to `$C25D86`; when set, a zero selected index routes
 to `$C25C70`, while a nonzero index remains an explicit `$C25C6A`
 continuation. `ctest` passes **93/93** tests with the same native frame result.
 
+`port/indexed_update_control_stage.{c,h}` now ports `$C25C70-$C25C85` around
+the caller-owned `$C1B27E` control-record boundary. It routes nonzero selected
+indices to `$C25D22`, otherwise routes signed selected-record `+$42` to
+`$C25CCA` when nonnegative or leaves `$C25C86` explicit when negative. `ctest`
+passes **94/94** tests with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
