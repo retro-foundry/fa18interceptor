@@ -200,6 +200,12 @@ countdown early return, record-byte decrement, selected-kind limit override,
 four-longword descriptor dispatch, result store, and 24-byte next-record
 advance. `ctest` passes **107/107** tests with the same native frame result.
 
+`port/flagged_slot_scan.{c,h}` now ports `$C265E8-$C26605`: the exact
+20-slot reverse scan over 64-byte records, testing bit 0 at record `+$27`.
+The first flagged slot transfers to a required caller-owned `$C26606`
+evaluator; no flagged slots return the source zero result. `ctest` passes
+**108/108** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
