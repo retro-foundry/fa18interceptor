@@ -77,6 +77,18 @@ typedef struct {
     FA18ProjectionPairScreenPoint points[3];
 } FA18ProjectionTriangle;
 
+typedef struct {
+    FA18ProjectionTriangle triangle;
+    FA18ProjectionPairScreenPoint direct_pair;
+} FA18ProjectionGridEmission;
+
+enum {
+    FA18_PROJECTION_GRID_SKIP = 0,
+    FA18_PROJECTION_GRID_TRIANGLE = 1,
+    FA18_PROJECTION_GRID_DIRECT_RENDERER_A = 2,
+    FA18_PROJECTION_GRID_DIRECT_RENDERER_B = 3
+};
+
 /* `$C27A36-$C27ADA`: bind the `$C28124` table from original Hunk 25 data. */
 int fa18_load_projection_grid(const FA18Hunks *hunks, FA18ProjectionGrid *grid);
 
@@ -134,5 +146,14 @@ int fa18_project_projection_triangle(const FA18ProjectionPairMatrix *matrix,
                                      const FA18ProjectionGridPreparedRecord *translation,
                                      const FA18ProjectionPairInput pairs[3],
                                      FA18ProjectionTriangle *triangle);
+
+/* `$C27B94-$C27D0F`: route one prepared record to its static three-pair
+ * polygon batch or one of the two direct-pair renderer selections. */
+int fa18_emit_projection_grid_record(const FA18ProjectionGrid *grid,
+                                     const FA18ProjectionPairMatrix *matrix,
+                                     const FA18ProjectionPairBase *base,
+                                     const FA18ProjectionGridPreparedRecord *record,
+                                     int16_t direct_pair_mode_limit,
+                                     FA18ProjectionGridEmission *emission);
 
 #endif

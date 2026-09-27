@@ -208,3 +208,30 @@ int fa18_project_projection_triangle(const FA18ProjectionPairMatrix *matrix,
     *triangle = projected;
     return 1;
 }
+
+int fa18_emit_projection_grid_record(const FA18ProjectionGrid *grid,
+                                     const FA18ProjectionPairMatrix *matrix,
+                                     const FA18ProjectionPairBase *base,
+                                     const FA18ProjectionGridPreparedRecord *record,
+                                     int16_t direct_pair_mode_limit,
+                                     FA18ProjectionGridEmission *emission) {
+    if (!grid || !matrix || !base || !record || !emission) return -1;
+    if (record->kind < 0) {
+        FA18ProjectionPairInput pairs[3];
+        if (fa18_projection_grid_pair_source(grid, record->kind, pairs) != 0)
+            return -1;
+        const int status = fa18_project_projection_triangle(matrix, base, record, pairs,
+                                                            &emission->triangle);
+        return status == 1 ? FA18_PROJECTION_GRID_TRIANGLE : status;
+    }
+
+    FA18ProjectionPairInput pair = { record->shifted_x, record->shifted_y };
+    FA18ProjectionPairOutput transformed;
+    if (fa18_transform_projection_pair(matrix, base, &pair, &transformed) != 0)
+        return -1;
+    const int status = fa18_project_projection_pair(&transformed, &emission->direct_pair);
+    if (status != 1) return status;
+    if (emission->direct_pair.y > direct_pair_mode_limit) return FA18_PROJECTION_GRID_SKIP;
+    return record->kind == 2 ? FA18_PROJECTION_GRID_DIRECT_RENDERER_B :
+                               FA18_PROJECTION_GRID_DIRECT_RENDERER_A;
+}

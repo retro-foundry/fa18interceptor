@@ -1267,3 +1267,9 @@ game loop.
   scaled input and matrix words 1, 4, and 7, retaining signed multiply and
   arithmetic shift behavior. The frame-384 input `-1000` yields the observed
   base `(0,-985,0)` from `$C45BD8`.
+- 2026-09-27: Ported `$C27B94-$C27D0F`'s prepared-record renderer routing as
+  `fa18_emit_projection_grid_record`. Negative kinds decode one of the three
+  Hunk-25 pair blocks and emit the three-point `$C2FF48` batch; non-negative
+  kinds run the direct pair through the same projection, apply `$C45984`'s
+  row limit, and preserve the source's `kind == 2` renderer-B selection.
+  Renderer calls and record-loop pacing remain unconnected.

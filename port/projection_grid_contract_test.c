@@ -108,6 +108,20 @@ int main(void) {
     assert(fa18_project_projection_triangle(&matrix, &base, &translation,
                                              source_pairs, &triangle) == 0);
 
+    FA18ProjectionGridEmission emission;
+    translation.kind = -20;
+    assert(fa18_emit_projection_grid_record(&grid, &matrix, &base, &translation,
+                                            179, &emission) == FA18_PROJECTION_GRID_TRIANGLE);
+    assert(emission.triangle.points[0].x == 106 && emission.triangle.points[2].x == 108);
+    translation.kind = 2;
+    assert(fa18_emit_projection_grid_record(&grid, &matrix, &base, &translation,
+                                            179, &emission) == FA18_PROJECTION_GRID_DIRECT_RENDERER_B);
+    assert(emission.direct_pair.x == 108 && emission.direct_pair.y == 111);
+    assert(fa18_emit_projection_grid_record(&grid, &matrix, &base, &translation,
+                                            110, &emission) == FA18_PROJECTION_GRID_SKIP);
+    assert(fa18_emit_projection_grid_record(0, &matrix, &base, &translation,
+                                            179, &emission) == -1);
+
     table[0] = 0xff; table[1] = 0xff;
     assert(fa18_load_projection_grid(&hunks, &grid) == -1);
     assert(fa18_load_projection_grid(0, &grid) == -1);
