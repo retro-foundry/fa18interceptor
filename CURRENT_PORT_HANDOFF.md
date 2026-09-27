@@ -161,6 +161,12 @@ caller-owned. `ctest` remains **98/98** with the same native frame result.
 stage in the callback shape used by the `$C1CB14/$C1CB26` parent-update slots;
 its typed entry selects the source's fixed primary or alternate variant.
 
+`port/flight_followup_record.{c,h}` now ports `$C1CCBC-$C1CD0D`, the common
+parent followup reset/select prefix. It exposes the positive selector's
+word-wrapped 512-byte record offset and leaves the nonpositive `$C1CE38`
+route explicit. `ctest` passes **99/99** tests with the same native frame
+result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

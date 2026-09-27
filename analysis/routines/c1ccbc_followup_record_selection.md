@@ -22,3 +22,7 @@ call returns to `$C0F116` after 17,672 instructions.
 Evidence: static bytes `$C1CCBC-$C1CD0D`, parent calls at `$C0F100/$C0F110`,
 the existing byte-exact `$C1CD0E` follow-up source, and
 `build/run060_c1ccbc_normal_full/trace.jsonl`.
+
+`fa18_prepare_flight_followup_record` now represents this prefix directly.
+It retains the caller-owned big-endian selector table and reports the positive
+component-calculation versus nonpositive `$C1CE38` continuation separately.
