@@ -195,6 +195,11 @@ long-component publication, signed shifted-value thresholds, the header/control
 subroute, and the caller-owned `$C1D91A` fixed-point boundary. `ctest` passes
 **106/106** tests with the same native frame result.
 
+`port/alternate_record_loop.{c,h}` now ports `$C1CF36-$C1CFC9`: its signed
+countdown early return, record-byte decrement, selected-kind limit override,
+four-longword descriptor dispatch, result store, and 24-byte next-record
+advance. `ctest` passes **107/107** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
