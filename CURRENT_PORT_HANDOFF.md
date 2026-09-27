@@ -206,6 +206,13 @@ The first flagged slot transfers to a required caller-owned `$C26606`
 evaluator; no flagged slots return the source zero result. `ctest` passes
 **108/108** tests with the same native frame result.
 
+`port/flagged_slot_evaluator.{c,h}` now ports `$C26606-$C266AB`: its bit-5
+or context-selection gate, signed word-derived linked-record offset, both
+wrapped absolute-difference triples, `$C1D974` scalar calls, and signed
+`first <= second` decision. The `$C46184` linked-record lookup remains a
+required caller resolver. `ctest` passes **109/109** tests with the same
+native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
