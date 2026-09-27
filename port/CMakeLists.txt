@@ -15,7 +15,7 @@ FetchContent_Declare(SDL2
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
 
-add_executable(fa18_port main.c menu.c renderer.c line.c postflight.c demo.c display.c glyph.c projection.c polygon_submission.c blit_job.c transform.c projection_packet.c projection_seed.c replay.c flight.c)
+add_executable(fa18_port main.c disk.c hunk.c video.c game.c replay.c)
 target_compile_definitions(fa18_port PRIVATE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_port PRIVATE SDL2-static)
 if(MSVC)
@@ -24,7 +24,15 @@ else()
     target_compile_options(fa18_port PRIVATE -Wall -Wextra -Wpedantic)
 endif()
 
+# fa18_port must not contain recorded emulator output; see the script for the rules.
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
+set(FA18_NATIVE_BUILD_CHECK ${Python3_EXECUTABLE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../scripts/check_native_build.py)
+add_custom_target(fa18_native_build_check COMMAND ${FA18_NATIVE_BUILD_CHECK} VERBATIM)
+add_dependencies(fa18_port fa18_native_build_check)
+
 enable_testing()
+add_test(NAME fa18_native_build_check COMMAND ${FA18_NATIVE_BUILD_CHECK})
 add_executable(fa18_menu_contract_test menu_contract_test.c menu.c)
 add_test(NAME fa18_menu_contract COMMAND fa18_menu_contract_test)
 add_executable(fa18_menu_display_contract_test menu_display_contract_test.c menu.c)
@@ -41,7 +49,7 @@ add_executable(fa18_demo_contract_test demo_contract_test.c demo.c menu.c render
 add_test(NAME fa18_demo_contract COMMAND fa18_demo_contract_test)
 add_executable(fa18_display_contract_test display_contract_test.c display.c blit_job.c line.c)
 add_test(NAME fa18_display_contract COMMAND fa18_display_contract_test)
-add_executable(fa18_glyph_contract_test glyph_contract_test.c glyph.c display.c)
+add_executable(fa18_glyph_contract_test glyph_contract_test.c glyph.c display.c blit_job.c)
 add_test(NAME fa18_glyph_contract COMMAND fa18_glyph_contract_test)
 add_executable(fa18_projection_contract_test projection_contract_test.c projection.c)
 add_test(NAME fa18_projection_contract COMMAND fa18_projection_contract_test)

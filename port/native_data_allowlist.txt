@@ -1,0 +1,11 @@
+# Game assets fa18_port may compile in, checked by scripts/check_native_build.py.
+#
+# Only data the game ships on its disk belongs here: fonts, trig tables, models,
+# palettes, text. Each entry needs its provenance: the ADF hunk and offset, and
+# the script that extracts it. Recorded emulator output (frames, Chip RAM,
+# blitter/DMA captures, traces) never belongs here, even when it is correct.
+#
+# Entries are added by the project owner only.
+#
+# Format:  <file in port/> | <provenance>
+# Example: assets/font.h | CODE hunk 63 +$1A40..$1DA7, scripts/extract_font.py

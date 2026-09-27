@@ -1128,3 +1128,12 @@ game loop.
   four-plane operations with distinct control and size modes. The inventory is
   in `analysis/data/run060_frame7992_blit_inventory.md`, and the native next
   step is resolving those groups into semantic source assets and page jobs.
+- 2026-09-27: Restarted the executable boundary without compiled emulator
+  output. `fa18_port` now reads the OFS ADF and HUNK executable at runtime,
+  parses the recorded control-input stream, owns a native 320x200 indexed
+  framebuffer/palette, and implements the headless RGB444 output contract and
+  SDL window path. The native-build check passes and the replay harness loads
+  the real disk successfully. Honest frame-gate baseline: `NATIVE_FRAME_COUNT=0`;
+  frame 200 is still unported (5,192 pixels differ), so the next slice is the
+  `$C0FBE0` menu text queue and its static compositor rather than stored frame
+  data.
