@@ -167,6 +167,11 @@ word-wrapped 512-byte record offset and leaves the nonpositive `$C1CE38`
 route explicit. `ctest` passes **99/99** tests with the same native frame
 result.
 
+`port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
+the three source magnitudes from the selected record and prepared components,
+then applying the `$EF` cap through its required `$29` error callback. `ctest`
+passes **100/100** tests with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

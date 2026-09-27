@@ -26,3 +26,8 @@ the existing byte-exact `$C1CD0E` follow-up source, and
 `fa18_prepare_flight_followup_record` now represents this prefix directly.
 It retains the caller-owned big-endian selector table and reports the positive
 component-calculation versus nonpositive `$C1CE38` continuation separately.
+
+The positive branch's next bounded `$C1CD0E-$C1CDB1` magnitude preparation is
+now represented by `fa18_calculate_flight_followup_magnitudes`. Its `$29`
+error-helper call remains a required callback when the source maximum caps at
+`$EF`; the following lookup-table shift phase remains separate.
