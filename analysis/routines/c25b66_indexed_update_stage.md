@@ -68,3 +68,10 @@ remains a separately evidenced caller boundary.
 header byte `+0` bit 7: clear also calls `$C2D408`; set continues at
 `$C25DA6`. The call preserves the current record pointer around the child and
 does not identify the record class's scene meaning.
+
+## selected-record eligibility gate
+
+`$C25D22-$C25D3F` compares `$C459B4` with `$C458DC`, then tests `$C45785`
+and selected-record byte `+3` bit 0. An index mismatch, nonzero context, or
+clear bit reaches `$C25D5E`; equal indices with clear context and the bit set
+fall through to the still-unported `$C25D40` continuation.

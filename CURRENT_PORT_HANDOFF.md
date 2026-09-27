@@ -123,6 +123,11 @@ caller-owned `$C2D408` matrix dispatch; other classes with bit 7 set leave the
 `$C25DA6` continuation explicit. `ctest` passes **95/95** tests with the same
 native frame result.
 
+`port/indexed_update_selected_record_gate.{c,h}` now ports
+`$C25D22-$C25D3F`: index mismatch, nonzero context, or clear selected-record
+`+3` bit 0 routes to `$C25D5E`; the all-clear case leaves `$C25D40` explicit.
+`ctest` passes **96/96** tests with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
