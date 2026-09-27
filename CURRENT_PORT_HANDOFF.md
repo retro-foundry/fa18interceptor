@@ -9,7 +9,7 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **115/115** tests.
+ pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **116/116** tests.
 
 ## Non-negotiable porting rules
 
@@ -260,6 +260,14 @@ record with the existing `$C1C54E -> $C279D0` packet/page contract. It resolves
 the required 164-byte active record before decoding; matrix, grid, render page,
 and scheduler are still caller-owned. The existing pipeline contract exercises
 both its valid and out-of-bounds paths; `ctest` remains **115/115** with the
+same native frame result.
+
+`port/scene_bootstrap_template.{c,h}` now ports the `$C092D4-$C09302`
+relocation-backed template binding from original Hunk 16: source selector
+`$10` chooses `+$3C`, all other values choose `+$50`, and the copied second
+longword is retained as a native `(segment, offset)` descriptor reference.
+This is the source-owned input installed before the root-record pose path; it
+does not use a captured Amiga address. `ctest` passes **116/116** with the
 same native frame result.
 
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
