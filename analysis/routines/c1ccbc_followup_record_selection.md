@@ -35,3 +35,8 @@ error-helper call remains a required callback when the source maximum caps at
 That `$C1CDB2-$C1CDFB` lookup/shift phase is now represented by
 `fa18_shift_flight_followup_components`. Its signed-byte table lookup remains
 caller-owned; the following descriptor dispatch is still a separate boundary.
+
+`fa18_dispatch_flight_followup_descriptor` now models that
+`$C1CDFC-$C1CE37` dispatch: required fixed-point call, caller-owned descriptor
+lookup/handler, source control-longword publication, and word `+2` loop-index
+advance. The descriptor table payload remains external.

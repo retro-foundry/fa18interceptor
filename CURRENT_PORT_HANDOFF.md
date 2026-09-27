@@ -177,6 +177,12 @@ source signed-byte shift count from caller-owned table data and publishing the
 shifted depth/components for the following descriptor dispatch. `ctest` passes
 **101/101** tests with the same native frame result.
 
+`port/flight_followup_descriptor.{c,h}` now ports `$C1CDFC-$C1CE37` around
+caller-owned fixed-point, descriptor-lookup, and descriptor-handler boundaries.
+It publishes both descriptor control longwords and advances the source record
+index by two. `ctest` passes **102/102** tests with the same native frame
+result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
