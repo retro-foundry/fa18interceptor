@@ -1,0 +1,66 @@
+#ifndef FA18_SCENE_PLACEMENT_H
+#define FA18_SCENE_PLACEMENT_H
+
+#include <stddef.h>
+#include <stdint.h>
+
+/* `$C1CB74-$C1CCB6` walks either `$C4E9AA` or `$C4F03A` in 24-byte steps.
+ * These are mutable placement records; they are not static model data. */
+enum { FA18_SCENE_PLACEMENT_BYTES = 24 };
+
+typedef struct {
+    int16_t selector;
+    uint32_t descriptor_reference;
+    int16_t coordinate[3];
+    uint16_t field_0c;
+    uint16_t per_frame[5];
+} FA18ScenePlacementRecord;
+
+/* The selector only reads these descriptor words before handing the selected
+ * placement to the type-specific route at `$C1CC50`/`$C1CCBC`. */
+typedef struct {
+    int16_t first_word;
+    uint32_t first_long;
+} FA18ScenePlacementDescriptorProbe;
+
+typedef struct {
+    uint8_t selector_byte;
+    uint16_t selector_low_nibble;
+    int32_t projection_coordinate[3];
+    uint16_t next_offset;
+    uint16_t accepted_count;
+    uint16_t skipped_count;
+} FA18ScenePlacementTraversalState;
+
+typedef int (*FA18ScenePlacementDescriptorLookup)(void *context,
+                                                   uint32_t descriptor_reference,
+                                                   FA18ScenePlacementDescriptorProbe *probe);
+typedef int (*FA18ScenePlacementConsumer)(void *context,
+                                          const FA18ScenePlacementRecord *record,
+                                          const FA18ScenePlacementDescriptorProbe *probe,
+                                          const FA18ScenePlacementTraversalState *state);
+
+/* Decode one big-endian runtime record. */
+int fa18_decode_scene_placement_record(const uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
+                                       FA18ScenePlacementRecord *record);
+
+/* Bounded port of the common `$C1CB74` loop. `initial_offset` is the mutable
+ * `$C459AA` word relative to the selected table. `use_alternate_table` picks
+ * the `$C4F03A` family, but both table inputs are caller-owned byte streams.
+ * `gate_coordinate` is the source's `$C45A66` comparison value.
+ *
+ * It deliberately ends at the descriptor-specific branch: the callback is
+ * the native owner of the unresolved `$C1CC50` / `$C1CCBC` routes. */
+int fa18_traverse_scene_placements(const uint8_t *primary_table,
+                                   size_t primary_size,
+                                   const uint8_t *alternate_table,
+                                   size_t alternate_size,
+                                   int use_alternate_table,
+                                   uint16_t initial_offset,
+                                   int32_t gate_coordinate,
+                                   FA18ScenePlacementDescriptorLookup lookup,
+                                   FA18ScenePlacementConsumer consumer,
+                                   void *context,
+                                   FA18ScenePlacementTraversalState *state);
+
+#endif
