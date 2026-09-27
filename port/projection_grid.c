@@ -25,3 +25,23 @@ int fa18_projection_grid_record(const FA18ProjectionGrid *grid, uint16_t index,
     record->kind = (int16_t)fa18_be16(data + 4u);
     return 0;
 }
+
+static int16_t normalize_grid_component(int16_t component) {
+    const uint16_t difference = (uint16_t)(UINT16_C(0x0400) - (uint16_t)component);
+    return (int16_t)((difference & UINT16_C(0xf800)) + (uint16_t)component);
+}
+
+int fa18_prepare_projection_grid(const FA18ProjectionGrid *grid,
+                                 int16_t projection_input,
+                                 int16_t component_x, int16_t component_y,
+                                 FA18ProjectionGridSetup *setup) {
+    if (!grid || !grid->records || !setup) return -1;
+    if (projection_input < -128) return 1;
+    setup->record_count = grid->record_count;
+    setup->bounds_limit = grid->bounds_limit;
+    setup->grid_x = normalize_grid_component(component_x);
+    setup->grid_y = normalize_grid_component(component_y);
+    setup->scaled_input = (int16_t)((uint16_t)projection_input << 3);
+    setup->coordinate_shift = 3;
+    return 0;
+}

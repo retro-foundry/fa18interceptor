@@ -1231,3 +1231,9 @@ game loop.
   96 three-word records and exposes bounded signed record access. The game
   initialisation now requires this original-data binding; it does not yet
   execute the projection loop or infer terrain identity for its records.
+- 2026-09-27: Ported the observed normal `$C27A36-$C27ADA` grid setup as
+  `fa18_prepare_projection_grid`: it retains the table limits, normalizes the
+  two signed components to the source's `$800` grid, and performs the exact
+  word-width `<< 3` input scale. The exercised run075 setup is checked as
+  `(-125,-6207,-6578) -> (-63,-434,-1000)`. The separate `< -$80` branch
+  remains a reported unmodeled result rather than a guessed fallback.

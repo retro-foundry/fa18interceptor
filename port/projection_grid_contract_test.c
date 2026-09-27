@@ -33,6 +33,14 @@ int main(void) {
     assert(fa18_projection_grid_record(&grid, 2, &record) == -1);
     assert(fa18_projection_grid_record(&grid, 0, 0) == -1);
 
+    FA18ProjectionGridSetup setup = { 0 };
+    assert(fa18_prepare_projection_grid(&grid, -125, -6207, -6578, &setup) == 0);
+    assert(setup.record_count == 2 && setup.bounds_limit == 3);
+    assert(setup.grid_x == -63 && setup.grid_y == -434);
+    assert(setup.scaled_input == -1000 && setup.coordinate_shift == 3);
+    assert(fa18_prepare_projection_grid(&grid, -129, -6207, -6578, &setup) == 1);
+    assert(fa18_prepare_projection_grid(0, -125, -6207, -6578, &setup) == -1);
+
     table[0] = 0; table[1] = 3;
     assert(fa18_load_projection_grid(&hunks, &grid) == -1);
     assert(fa18_load_projection_grid(0, &grid) == -1);
