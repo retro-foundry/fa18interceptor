@@ -69,6 +69,22 @@ proves it is `$00728E`, rather than an absent/default channel.  Their source
 control words have BLTCON1 bit 0 set: these are **line-mode** submissions,
 not plain block copies.
 
+## Native producer cross-check
+
+The external stored pair list is decimal `(97,127) (130,138) (74,145)
+(57,130)` (the leading `$0061` word is hexadecimal, not decimal 61).  Passing
+that list with the trace-time scalar fields `display=144`, `vertical=145`,
+`horizontal=127`, and renderer base `$6048` through the native far-list
+dispatcher reproduces packets one, three, and four exactly.  Packet two has a
+remaining native discrepancy: it produces `BLTSIZE=$0BC2`, while the original
+trigger at Custom-stream sequence 568 writes `$0C02`.  The remaining fields
+of that packet match (`BLTCON0=$2B4A`, `BLTCON1=$0057`, A=`$00FFA8`,
+C/D=`$007610`).
+
+Therefore the native page diagnostic must not be wired yet.  Correct the
+second `$C305D6/$C305F8` bounded-limit result first, with this packet as its
+focused acceptance condition.
+
 ## Lane-stage consequence
 
 After the four line jobs, the call performs the `$C303D2-$C30404` descending

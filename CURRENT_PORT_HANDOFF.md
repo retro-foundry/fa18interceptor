@@ -37,6 +37,12 @@ contracts cover shift, fill, and line progression.  They are not attached to
 a flight page yet: the next stage is a run036 diagnostic that applies the
 complete traced line/fill/lane sequence and compares its page delta.
 
+Before that diagnostic, fix the run036 producer's one known packet mismatch:
+the native far-list dispatcher matches three `$C306AE` jobs but emits `$0BC2`
+instead of the original second job's `$0C02` size.  The exact trace-time
+inputs and acceptance condition are in
+`analysis/routines/run036_c2ff48_area_blit_oracle.md`.
+
 The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
 starts from external frame-384 pre-call state, then runs the native
 `$C279D0-$C27D0F` packet/grid/direct-pixel/line path over that page. It does
