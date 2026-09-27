@@ -33,3 +33,12 @@ the captured C source stream, and a destination plane/offset. Keep the two
 instances separate at the caller level so destination selection remains an
 explicit game state decision. Do not model the original absolute Chip RAM
 addresses as a native memory image.
+
+## Frame boundary state
+
+The first frame-7997 family inherits the data channels from the end of frame
+7996. The captured boundary writes leave `BLTADAT` and `BLTBDAT` at `$FFFF`;
+the prior pointer setup also leaves low pointer state associated with `$76EE`.
+Frame 7997 then supplies the family controls and destination low words without
+rewriting those data channels. The native caller must carry this state between
+submissions and frames.
