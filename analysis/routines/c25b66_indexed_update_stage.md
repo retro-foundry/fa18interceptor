@@ -23,3 +23,12 @@ joystick-state consumer its direct enclosing invocation. Later it calls
 The packet therefore joins the verified joystick-state, indexed-record, and
 matrix work inside one complete per-record update interval. It does not yet
 prove that this is the player, camera, or a particular aircraft record.
+
+## run075 zero-index fast return
+
+`build/run075_c25b66_indexed_update/trace.jsonl` reaches `$C25B66` at local
+frame 189. `$C459B4` is zero, so the entry takes `$C25B78`; it ORs the zero
+selector with `$C457AE=1`, branches to the return at `$C25B64`, and returns to
+`$C22D8E` after six instructions. This proves only the zero-index/nonzero-state
+fast return. The zero-index clear-state successor and nonzero-index route remain
+separate unported boundaries.
