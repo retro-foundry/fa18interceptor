@@ -74,6 +74,9 @@ is now decoded by `fa18_decode_scene_projection_seed_record`.  It extracts
 only the observed root longwords (`+$14/+18/+1C`), type byte (`+$62`), and
 nine signed matrix words (`+$92..+$A2`) from caller-owned record bytes.  The
 containing record's scheduling and scene meaning remain unclaimed.
+`analysis/routines/run075_c1c54e_active_projection_record.md` supplies the
+bounded run075 trace join from those decoded fields to the prepared-page
+projection packet.
 
 ## Matrix-product projection evidence
 
