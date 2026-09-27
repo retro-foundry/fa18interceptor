@@ -23,7 +23,7 @@ FetchContent_Declare(SDL2
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
 
-add_executable(fa18_port main.c disk.c hunk.c video.c game.c menu_text.c menu_flow.c menu_record.c menu_render.c replay.c planar_pixel.c projection_grid.c projection_packet.c flight_renderer_packet.c flight_renderer_page.c line.c scene_record_table.c scene_record_dispatch.c scene_dispatch_table.c scene_projection_seed.c scene_placement.c scene_alternate_record.c scene_component_accumulation.c scene_component_magnitude.c scene_fixed_point_stage.c copper_page.c five_plane_page.c viewport_palette.c viewport_mode.c outer_loop_child.c post_input_followup.c scene_initialization.c message_sequence.c scene_finalization.c scene_root_setup.c scene_root_transition.c scene_vector_transform.c record_matrix_update.c scene_negative_pose.c parent_flight_update.c outer_page_selector.c)
+add_executable(fa18_port main.c disk.c hunk.c video.c game.c menu_text.c menu_flow.c menu_record.c menu_render.c replay.c planar_pixel.c projection_grid.c projection_packet.c flight_renderer_packet.c flight_renderer_page.c line.c scene_record_table.c scene_record_dispatch.c scene_dispatch_table.c scene_projection_seed.c scene_placement.c scene_alternate_record.c scene_descriptor_stage.c scene_component_accumulation.c scene_component_magnitude.c scene_fixed_point_stage.c copper_page.c five_plane_page.c viewport_palette.c viewport_mode.c outer_loop_child.c post_input_followup.c scene_initialization.c message_sequence.c scene_finalization.c scene_root_setup.c scene_root_transition.c scene_vector_transform.c record_matrix_update.c scene_negative_pose.c parent_flight_update.c outer_page_selector.c)
 target_compile_definitions(fa18_port PRIVATE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_port PRIVATE SDL2-static)
 if(MSVC)
@@ -125,6 +125,8 @@ add_executable(fa18_scene_placement_contract_test scene_placement_contract_test.
 add_test(NAME fa18_scene_placement_contract COMMAND fa18_scene_placement_contract_test)
 add_executable(fa18_scene_alternate_record_contract_test scene_alternate_record_contract_test.c scene_alternate_record.c scene_placement.c)
 add_test(NAME fa18_scene_alternate_record_contract COMMAND fa18_scene_alternate_record_contract_test)
+add_executable(fa18_scene_descriptor_stage_contract_test scene_descriptor_stage_contract_test.c scene_descriptor_stage.c)
+add_test(NAME fa18_scene_descriptor_stage_contract COMMAND fa18_scene_descriptor_stage_contract_test)
 add_executable(fa18_scene_component_accumulation_contract_test scene_component_accumulation_contract_test.c scene_component_accumulation.c)
 add_test(NAME fa18_scene_component_accumulation_contract COMMAND fa18_scene_component_accumulation_contract_test)
 add_executable(fa18_scene_component_magnitude_contract_test scene_component_magnitude_contract_test.c scene_component_magnitude.c)
