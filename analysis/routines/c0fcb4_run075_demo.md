@@ -53,10 +53,10 @@ callback, including helper effects and non-demo modes, remains unported.
 `$C0FECE` is entered at direct-core frame 235. Its byte-exact prefix reads
 mode `$7F` and signed delay `$C45AD6`; while nonnegative it returns at
 `$C1017A`. The shared `$C0F5F8` post-input tick is the documented decrement
-producer. End-of-frame samples show `$00D1` at frame 234, `$00CC` at frame
-235, `$0005` at frame 269 and `$FFFF` at frame 270. There are normally five
+producer. End-of-frame samples show `$00D2` at frame 234, `$00D1` at frame
+235, `$0004` at frame 270 and `$FFFF` at frame 271. There are normally five
 or six game ticks per captured video frame here; the delay is **not 210 video
-frames**. The negative-delay body at `$C0FEEA` is reached at frame 270.
+frames**. The negative-delay body at `$C0FEEA` is reached at frame 271.
 
 The longer bounded continuation in `build/port_run075_c0feea_25k_trace/`
 reaches the `$C0FFDA` mode table. It sees saved mode `$7F`, finds the matching

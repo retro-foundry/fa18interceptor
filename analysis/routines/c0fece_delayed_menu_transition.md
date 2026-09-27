@@ -40,7 +40,7 @@ persistence.
 The run075 demo selection installs this callback at direct-core frame 234
 with mode `$7F` and `$C45AD6=$00D2`. The shared `$C0F5F8` tick decrements
 the word five or six times per video frame in this interval. `$C0FECE`
-reaches its signed-negative body at `$C0FEEA` in frame 270 with delay `$FFFF`;
+reaches its signed-negative body at `$C0FEEA` in frame 271 with delay `$FFFF`;
 the `$C0FFDA` table selects the mode-$7F `$C1000A` arm in the bounded
 continuation. At frame 271 that arm writes `$C457AE=1` and callback `$C0FA04`
 after the common setup has installed `$C103E4` and delay 4. The exact

@@ -118,7 +118,7 @@ in order. The menu frames (200..~391) should be unaffected.
    the original producer and presentation boundary before implementing it;
    do not reuse an all-black oracle frame.
    The full replay checkpoints now establish the route: `$C45AD6` reaches
-   `$FFFF` in frame 270 and enters `$C0FEEA`; in frame 271, `$C17B08` reaches
+   `$FFFF` in frame 271 and enters `$C0FEEA`; in frame 271, `$C17B08` reaches
    `$C4FFB0` and writes `$8080` to `COPJMP2`. The label remains visible in
    frame 272 and the selected blank page first presents in frame 273. The
    native timer is not advancing because `$C0F5F8` runs five or six times per

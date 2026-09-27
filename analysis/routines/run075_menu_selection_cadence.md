@@ -22,24 +22,24 @@ once between these sampled presentation boundaries.
 
 ## Measured run075 countdown
 
-The release at frame 234 installs `$00D2`; the same frame's post-input tail
-leaves `$00D1`. The subsequent observed decrement counts are:
+The release at frame 234 installs `$00D2`; no post-input tick occurs in that
+sampled presentation. The subsequent observed decrement counts are:
 
 | sampled frame(s) | decrements in each sampled presentation | total |
 | --- | ---: | ---: |
-| 235--239 | 5 | 25 |
-| 240--259 | 6 | 120 |
-| 260 | 5 | 5 |
-| 261--270 | 6 | 60 |
+| 235 | 1 | 1 |
+| 236--240 | 5 | 25 |
+| 241--270 | 6 | 180 |
+| 271 | 5 | 5 |
 
-The total is 210. Thus the post-release `$00D1` becomes `$FFFF` at the
-frame-270 sample and takes `$C0FECE`'s negative-delay path. This is evidence
+The total is 211. Thus `$00D2` becomes `$FFFF` at the frame-271 sample and
+takes `$C0FECE`'s negative-delay path. This is evidence
 for this replay/configuration, not a general relation between native video
 frames and game updates. A native frame-number table or inferred 5/6 pattern
 would encode measured emulator pacing rather than source-owned behavior.
 
-After the transition arm, the sampled delay is four and remains four through
-frames 272--280. Therefore the later entry-delay countdown cannot be assumed
+After the transition arm, the sampled delay is four at frame 272 and remains
+four through frame 280. Therefore the later entry-delay countdown cannot be assumed
 to run once per presentation either.
 
 ## Observed indexed Copper-state handoff

@@ -77,7 +77,7 @@ infer a function's purpose merely from a rendered frame.
 | `$C1BD78` demo branch | run075 frame 230: key `1`, zero `D4`, nonzero `$C4FDBC` lead to demo mode (`analysis/routines/c0fcb4_run075_demo.md`) | Bounded post-dispatch demo selection ported through `FA18MenuState`; frontend mapping and `$C3318E` side effect remain open |
 | `$C3318E` | run075 demo route selects `D0=2,D1=2` packet for `$C17EF2`; purpose of the callee remains open (`analysis/routines/c3318e_indexed_command_side_effect.md`) | Not ported |
 | `$C0FCB4` | run075 frame 234 proves demo selector 101, delay `$D2`, and delayed-transition continuation; other routes in `analysis/routines/c0fcb4_top_level_menu_followup.md` | `$C0FD10-$C0FDCE` demo arm ported through native `FA18MenuState` in `port/menu.c`; rest not ported |
-| `$C0FECE` | run075 signed countdown expires at frame 270; mode `$7F` dispatch selects the demo-entry continuation (`analysis/routines/c0fece_delayed_menu_transition.md`) | Signed gate, proved tick update, bounded run075 common setup, and `$C1000A-$C10020` demo arm ported through `FA18MenuState`; helper-call effects and other modes remain open |
+| `$C0FECE` | run075 signed countdown expires at frame 271; mode `$7F` dispatch selects the demo-entry continuation (`analysis/routines/c0fece_delayed_menu_transition.md`) | Signed gate, proved tick update, bounded run075 common setup, and `$C1000A-$C10020` demo arm ported through `FA18MenuState`; helper-call effects and other modes remain open |
 | `$C0FAA4` | run075 frame 370 direct scene-initialization stores, followed by `$C0FA04` followup stores; helper calls `$C28722`, `$C0924A`, `$C11312`, `$C082B0` remain dataflow evidence (`analysis/routines/c0faa4_run075_scene_initialization.md`) | Direct state subset and caller ordering ported through `FA18MenuState`; nested helper effects and scene rendering remain open |
 | `$C2F688` | Four-plane pixel word address/mask preparation and handlers; run075 frame 315 proves the alternate two-row path and run060 proves a primary handler (`analysis/routines/c2f688_run075_two_row_mask.md`) | Proved primary and alternate handlers, plane enables, and pre-dispatch XOR ported to chunky pixels through `FA18RendererState` in `port/renderer.c`; arbitrary off-buffer Amiga writes remain outside this visual contract |
 | `$C2FA7E` | Blitter line setup and enabled-plane submissions; run075 proves endpoint ordering and hardware triggers (`analysis/routines/c2fa7e_blitter_line.md`) | Native recurrence remains provisional; require a settled run060+ visual fixture before calling it a port contract |
@@ -209,7 +209,7 @@ infer a function's purpose merely from a rendered frame.
   20,987. A dummy SDL video driver completed a 201-frame presentation run.
 - 2026-09-26: Traced run075's key-1 producer and demo menu arm. Ported the
   bounded `$C0FD10-$C0FDCE` branch and passed an emulator pre/post fixture.
-  The shared countdown expires at frame 270 after about five or six game ticks
+  The shared countdown expires at frame 271 after about five or six game ticks
   per captured video frame. Traced the subsequent `$C0FFDA` mode table to its
   `$C1000A` demo arm; ported that arm with a second exact pre/post fixture.
   The port represents this as one `FA18MenuState`, with a typed continuation
@@ -1184,17 +1184,16 @@ game loop.
   evidence boundary.
 - 2026-09-27: Full replay checkpoints resolve the frame-273 boundary without
   assigning it to `$C2FD22`: `$C45AD6` expires into `$C0FEEA` during frame
-  270, and the frame-271 `$C17B08 -> $C4FFB0` route writes `$8080` to
+  271, and the same-frame `$C17B08 -> $C4FFB0` route writes `$8080` to
   `COPJMP2`. The former page remains visible through frame 272; the selected
   blank page first presents at frame 273. `$C0F5F8` performs five or six
   sub-ticks per PAL frame in this span, so a frame-number replacement would
   invent CPU pacing. The native runtime needs an approved timing-stream
   contract before this presentation transition can be ported faithfully.
 - 2026-09-27: The run075 countdown cadence is now enumerated without making
-  it a native schedule: after the release-frame decrement, frames 235--239
-  have five `$C0F5F8` ticks each; frames 240--259 have six; frame 260 has
-  five; and frames 261--270 have six. Those 210 ticks take `$00D1` to
-  `$FFFF`. `$C4FE38[0]` then changes from `$C07678`, through the proved
+  it a native schedule: frame 235 has one `$C0F5F8` tick; frames 236--240
+  have five each; frames 241--270 have six; and frame 271 has five. Those
+  211 ticks take `$00D2` to `$FFFF`. `$C4FE38[0]` then changes from `$C07678`, through the proved
   `$C17B08` clear at frame 271, to `$C06A18` at frame 272, immediately before
   the blank presentation. The state is evidence only: its mutable Copper
   record ownership and source-independent timing rule are unproved. See

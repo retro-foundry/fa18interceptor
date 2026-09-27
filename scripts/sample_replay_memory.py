@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--restore', type=Path, required=True)
     parser.add_argument('--playback', type=Path, required=True)
     parser.add_argument('--frames', type=int, required=True)
+    parser.add_argument('--frame-offset', type=int, default=0,
+                        help='Replay-frame label immediately before the first executed frame.')
     parser.add_argument('--word', action='append',
                         type=lambda text: int(text, 0),
                         help='Runtime word address; may be repeated.')
@@ -27,8 +29,8 @@ def main():
                         help='Only sample frames containing this recording event kind.')
     parser.add_argument('--sample-every', type=int,
                         help='Also sample every N frames in the selected interval.')
-    parser.add_argument('--sample-first', type=int, default=1,
-                        help='First frame eligible for --sample-every.')
+    parser.add_argument('--sample-first', type=int,
+                        help='First replay-frame label eligible for --sample-every.')
     parser.add_argument('--sample-last', type=int,
                         help='Last frame eligible for --sample-every (default: --frames).')
     parser.add_argument('--output', type=Path, required=True)
@@ -42,12 +44,16 @@ def main():
     words = list(dict.fromkeys(words))
     if not words:
         raise ValueError('At least one --word or --word-range is required')
-    if args.frames < 1:
+    if args.frames < 1 or args.frame_offset < 0:
         raise ValueError('--frames must be positive')
     if args.sample_every is not None and args.sample_every < 1:
         raise ValueError('--sample-every must be positive')
-    sample_last = args.frames if args.sample_last is None else args.sample_last
-    if args.sample_first < 1 or sample_last < args.sample_first or sample_last > args.frames:
+    first_frame = args.frame_offset + 1
+    last_frame = args.frame_offset + args.frames
+    sample_first = first_frame if args.sample_first is None else args.sample_first
+    sample_last = last_frame if args.sample_last is None else args.sample_last
+    if (sample_first < first_frame or sample_last < sample_first or
+            sample_last > last_frame):
         raise ValueError('Invalid --sample-first/--sample-last interval')
     if args.output.exists():
         raise FileExistsError(args.output)
@@ -60,14 +66,14 @@ def main():
         raise RuntimeError('Core rejected save state')
 
     records = []
-    for frame in range(1, args.frames + 1):
+    for frame in range(first_frame, last_frame + 1):
         frame_events = events.get(frame, [])
         for kind, values in frame_events:
             engine.event(kind, values)
         engine.core.retro_run()
         matching = [(kind, values) for kind, values in frame_events if kind == args.input_kind]
-        periodic = (args.sample_every is not None and args.sample_first <= frame <= sample_last
-                    and (frame - args.sample_first) % args.sample_every == 0)
+        periodic = (args.sample_every is not None and sample_first <= frame <= sample_last
+                    and (frame - sample_first) % args.sample_every == 0)
         if matching or periodic:
             records.append({
                 'frame': frame,
@@ -80,8 +86,9 @@ def main():
         'restore': str(args.restore),
         'playback': str(args.playback),
         'frames': args.frames,
+        'frame_offset': args.frame_offset,
         'input_kind': args.input_kind,
-        'periodic_interval': ([args.sample_first, sample_last, args.sample_every]
+        'periodic_interval': ([sample_first, sample_last, args.sample_every]
                               if args.sample_every is not None else None),
         'word_addresses': [f'{address:06x}' for address in words],
         'records': records,
