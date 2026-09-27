@@ -190,6 +190,11 @@ word/long packet publication. The bit-6 `$C1D0A4` entry is retained as a
 required callback because its `$C48184` helper body is not yet bounded.
 `ctest` passes **105/105** tests with the same native frame result.
 
+`port/alternate_record_value_gate.{c,h}` now ports `$C1CEE4-$C1CF35`:
+long-component publication, signed shifted-value thresholds, the header/control
+subroute, and the caller-owned `$C1D91A` fixed-point boundary. `ctest` passes
+**106/106** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
