@@ -1137,3 +1137,9 @@ game loop.
   frame 200 is still unported (5,192 pixels differ), so the next slice is the
   `$C0FBE0` menu text queue and its static compositor rather than stored frame
   data.
+- 2026-09-27: Ported the direct `$C0FBE0-$C0FCB3` top-level text-queue writes
+  as `FA18MenuTextState`. It carries the original ordered selectors
+  `6,100..109,0`, display-mode/delay stores, and the proved video-latch guard;
+  the helper-call effects, callback execution, descriptor lookup, glyph layout,
+  and rendering are deliberately separate and remain unported. The new queue
+  contract validates both branches of the direct latch store.

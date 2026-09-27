@@ -5,6 +5,7 @@
 
 #include "disk.h"
 #include "hunk.h"
+#include "menu_text.h"
 #include "replay.h"
 #include "video.h"
 
@@ -13,6 +14,7 @@ typedef struct {
     FA18Disk disk;
     FA18Hunks exe;
     FA18Video video;
+    FA18MenuTextState menu_text;
     uint32_t frame; /* PAL video frame number, matching the recorded run */
 } FA18Game;
 
