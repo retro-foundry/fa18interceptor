@@ -6,6 +6,7 @@
 #include "disk.h"
 #include "hunk.h"
 #include "menu_text.h"
+#include "menu_flow.h"
 #include "menu_record.h"
 #include "menu_render.h"
 #include "replay.h"
@@ -17,6 +18,7 @@ typedef struct {
     FA18Hunks exe;
     FA18Video video;
     FA18MenuTextState menu_text;
+    FA18MenuFlow menu_flow;
     FA18MenuRecord menu_records[FA18_MENU_TEXT_SELECTORS];
     uint32_t frame; /* PAL video frame number, matching the recorded run */
 } FA18Game;
@@ -24,6 +26,9 @@ typedef struct {
 /* Load the game from the disk and bring it to the state of run075 frame 200. */
 int fa18_game_init(FA18Game *game, const char *adf_path);
 void fa18_game_free(FA18Game *game);
+
+/* Apply replay controls at the presentation boundary for the current frame. */
+int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *controls);
 
 /* Advance one PAL video frame with the given control state. */
 void fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls);

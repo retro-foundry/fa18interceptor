@@ -85,6 +85,11 @@ static int play_window(FA18Game *game, const EventList *events) {
             running = 0;
             continue;
         }
+        if (fa18_game_apply_controls(game, &controls) != 0) {
+            fputs("Game control update failed\n", stderr);
+            running = 0;
+            continue;
+        }
         copy_to_argb(&game->video, argb);
         if (SDL_UpdateTexture(texture, NULL, argb, FA18_WIDTH * (int)sizeof *argb) != 0 ||
             SDL_RenderClear(renderer) != 0 || SDL_RenderCopy(renderer, texture, NULL, NULL) != 0) {
@@ -168,6 +173,7 @@ int main(int argc, char **argv) {
         while (!result && game.frame <= last) {
             if (fa18_replay_advance_frame(&controls, events.items, events.count,
                                           &next_event, game.frame) != 0 ||
+                fa18_game_apply_controls(&game, &controls) != 0 ||
                 write_rgb444(&game.video) != 0) {
                 fputs("Native frame output failed\n", stderr);
                 result = 1;

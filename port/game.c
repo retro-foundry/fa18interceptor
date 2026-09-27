@@ -52,6 +52,7 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
         fa18_disk_close(&game->disk);
         return 0;
     }
+    fa18_menu_flow_init(&game->menu_flow);
     game->frame = START_FRAME;
     return 1;
 }
@@ -61,7 +62,13 @@ void fa18_game_free(FA18Game *game) {
     fa18_disk_close(&game->disk);
 }
 
+int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *controls) {
+    if (!game) return -1;
+    return fa18_menu_flow_apply_controls(&game->menu_flow, controls, &game->video);
+}
+
 void fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls) {
     (void)controls;
+    fa18_menu_flow_finish_presented_frame(&game->menu_flow, &game->video);
     ++game->frame;
 }

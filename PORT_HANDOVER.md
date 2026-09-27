@@ -104,9 +104,15 @@ in order. The menu frames (200..~391) should be unaffected.
    triplet at `$C3F3D1`, then renders `SHIFT ESC ... RETURNS YOU TO THIS MENU`
    from `$C3F3D4` at `$19CA + $1E0 = $1BAA`. Frames 200..233 match exactly
    (`NATIVE_FRAME_COUNT=34`).
-4. Frame 234 is the first mismatch: recorded key `1` starts the demonstration
-   selection. Trace its original input consumer and menu follow-up in frame
-   order; do not infer the transition from the oracle pixels.
-5. Continue one original routine/contract per commit, with
+4. The first numeric menu command is ported: its press follows the observed
+   `$C1BD78-$C1BDEC` mode-$7F route and its release follows `$C0FD10-$C0FDCE`.
+   `$C2FD44-$C2FD56` clears four 32-pixel planar chunks per iteration; 1,144
+   completed first-loop iterations are visible in frame 234, before the
+   pending clear completes for frame 235. Frames 200..235 match exactly
+   (`NATIVE_FRAME_COUNT=36`).
+5. Frame 236 is the first mismatch: trace and render selector 101's queued
+   `DEMO` label through the existing message-record and glyph path, rather
+   than restoring a recorded label bitmap.
+6. Continue one original routine/contract per commit, with
    `NATIVE_FRAME_COUNT` in each commit message. The CPU-paced flight timing
    issue remains a separate blocker before the 3D path.

@@ -1168,3 +1168,11 @@ game loop.
   the proved `$1E0` layout increment. Frames 200..233 now match the native
   oracle exactly (`NATIVE_FRAME_COUNT=34`); frame 234 is the first key-`1`
   demonstration-selection transition and remains unported.
+- 2026-09-27: Ported the observed first numeric menu-command route. The key
+  press takes `$C1BD78-$C1BDEC`'s mode-$7F branch; its release takes
+  `$C0FD10-$C0FDCE`, queues selector 101, and starts `$C2FD22`'s renderer
+  work-buffer clear. The frame-234 page is produced by the first 1,144
+  iterations of `$C2FD44-$C2FD56`, each clearing a four-plane 32-pixel span;
+  the remaining clear completes after presentation, yielding the frame-235
+  black page. Frames 200..235 match exactly (`NATIVE_FRAME_COUNT=36`). The
+  selector-101 label is the next unported presentation step at frame 236.
