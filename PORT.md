@@ -1211,3 +1211,10 @@ game loop.
   `$C17B08` clears and `$C17B2C` indexed-record replacements followed by the
   observed frame-273 Copper bitplane switch; it contains no Copper address,
   page pointer, or stored output data.
+- 2026-09-27: Ported the byte-exact outer page-selector algebra as
+  `FA18OuterPagePointerPair`. `$C2F558` publishes pair 0 for a zero selector
+  and pair 1 otherwise; the display-synchronised `$C1612C-$C16283` tail
+  advances the 16-bit selector as `1 - index`. The contract includes the
+  original wrapping case. It is deliberately not wired to the native frame
+  loop: the source pacing and the Copper/palette condition that first reveals
+  the prepared run075 scene page at frame 392 remain unassigned.
