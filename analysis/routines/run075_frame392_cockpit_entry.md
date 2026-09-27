@@ -53,14 +53,34 @@ the frame-391-only profile instead includes `$C249…/$C24D…` and
 `$C302…/$C306…` paths. The `$C27B…` range is the observed `$C279D0`
 projection-to-polygon traversal: it transforms selected records, fills the
 `$C4B392-$C4B39D` screen-pair buffer, and submits through `$C2FF48`.
-`$C2F68A` is within the four-plane pixel primitive. This makes a renderer
-submission path a direct candidate for the first visible scene change, but
-does not yet identify the submitted records as terrain or assign the 361
-pixels to a particular primitive.
+`$C2F68A` is within the four-plane pixel primitive.
+
+A return-bounded trace of that first `$C279D0` entry, with its breakpoint
+armed at local frame 192 (global frame 392), reaches two `$C2FF48` entries
+and five `$C2F688` entries before returning to `$C0F0C8` after 5,706
+instructions:
+
+```text
+python scripts/trace_from_breakpoint.py \
+  --restore captures/run075/initial_state.bin --playback captures/run075/playback.e9k \
+  --playback-frame-offset 200 --address 0xC279D0 --arm-frame 192 \
+  --return-pc 0xC0F0C8 --frames 200 --max-instructions 10000 \
+  --ignore-future-input --output build/run075_frame392_c279d0_first
+```
+
+At that entry `$C456B6=$C4567E`, whose four plane bases are
+`$018980,$016A40,$014B00,$012BC0`; it is not the separately fetched
+five-plane `$04DB30,$04FA70,$0519B0,$0538F0,$055830` family. The first
+normal-frame DMA capture at this boundary fetches the latter family, while a
+frame-by-frame sample records no mutation in its complete 40,000-byte range
+after global frame 389 through frame 392. Thus `$C279D0` is active renderer
+work but is not yet demonstrated as the producer of the visible frame-392
+pixels. In particular, neither its record stream nor the first visible scene
+may be named terrain from this evidence.
 
 ## Next port boundary
 
-Trace the normal frame-392 `$C279D0 -> $C2FF48` submissions and their display
-writes, then model the first cockpit or scene records as C structs. Do not add
-the flight model or advance the native frame gate until the frame-392 pixels
-and their input/state cause are accounted for.
+Trace the display-state/Copper path selecting or revealing the five-plane
+page at the frame-391/392 boundary, then model the first cockpit or scene
+records as C structs. Do not add the flight model or advance the native frame
+gate until the frame-392 pixels and their input/state cause are accounted for.
