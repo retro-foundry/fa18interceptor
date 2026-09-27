@@ -1149,3 +1149,10 @@ game loop.
   layout offset, attribute, and layout index. Negative-selector handling is a
   distinct original path and remains explicitly absent; this change does not
   draw the resolved text.
+- 2026-09-27: Ported the bounded glyph/palette route behind the queued initial
+  records: `$C32F54-$C33168` now reads `$C08490`, `$C41066`, and `$C3D8FC`
+  from the executable, producing the static title, prompt, option, and first
+  Esc line without embedded frame data. Frame 200 is down to one unresolved
+  seven-row line (`SHIFT ESC ... RETURNS YOU TO THIS MENU`, 541 pixels at
+  y=177..183); it is not in `$C0FBE0`'s queue, so it remains absent pending a
+  traced producer/placement contract. The frame count therefore remains zero.

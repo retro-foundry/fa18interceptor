@@ -7,6 +7,7 @@
 #include "hunk.h"
 #include "menu_text.h"
 #include "menu_record.h"
+#include "menu_render.h"
 #include "replay.h"
 #include "video.h"
 

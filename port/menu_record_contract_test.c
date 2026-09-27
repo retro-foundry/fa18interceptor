@@ -21,7 +21,7 @@ int main(void) {
     FA18MenuRecord record;
     if (fa18_menu_select_message_record(&exe, 1, &record) != 0 ||
         record.text_length != 4 || memcmp(record.text, "MENU", 4) != 0 ||
-        record.layout_offset != 158 || record.attribute != 3 || record.layout_index != 2) {
+        record.layout_offset != 158 || record.attribute != 3 || record.layout_index != 5) {
         fputs("message record positive selector contract failed\n", stderr);
         return 1;
     }

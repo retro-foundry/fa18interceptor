@@ -25,8 +25,8 @@ int fa18_menu_select_message_record(const FA18Hunks *exe, uint16_t selector,
     if (!end) return -1;
     record->text = text;
     record->text_length = (size_t)(end - text);
-    record->layout_offset = (uint32_t)header[0] * 40u + (int8_t)header[1];
+    record->layout_offset = (int32_t)header[0] * 40 + (int8_t)header[1];
     record->attribute = header[2];
-    record->layout_index = header[3] & 0x0fu;
+    record->layout_index = header[3] >> 4;
     return 0;
 }

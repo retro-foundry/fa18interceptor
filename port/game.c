@@ -36,6 +36,13 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
             return 0;
         }
     }
+    if (fa18_render_top_level_menu(&game->video, &game->exe, game->menu_records,
+                                   game->menu_text.selector_count - 1) != 0) {
+        fputs("Cannot render the top-level menu text\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
     game->frame = START_FRAME;
     return 1;
 }

@@ -12,7 +12,7 @@ enum { FA18_MENU_TEXT_HUNK = 64, FA18_MENU_RECORD_TABLE_OFFSET = 0x0a };
 typedef struct {
     const uint8_t *text;
     size_t text_length;
-    uint32_t layout_offset;
+    int32_t layout_offset;
     uint8_t attribute;
     uint8_t layout_index;
 } FA18MenuRecord;

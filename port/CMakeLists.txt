@@ -15,7 +15,7 @@ FetchContent_Declare(SDL2
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
 
-add_executable(fa18_port main.c disk.c hunk.c video.c game.c menu_text.c menu_record.c replay.c)
+add_executable(fa18_port main.c disk.c hunk.c video.c game.c menu_text.c menu_record.c menu_render.c replay.c)
 target_compile_definitions(fa18_port PRIVATE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_port PRIVATE SDL2-static)
 if(MSVC)
@@ -37,6 +37,8 @@ add_executable(fa18_menu_text_contract_test menu_text_contract_test.c menu_text.
 add_test(NAME fa18_menu_text_contract COMMAND fa18_menu_text_contract_test)
 add_executable(fa18_menu_record_contract_test menu_record_contract_test.c menu_record.c)
 add_test(NAME fa18_menu_record_contract COMMAND fa18_menu_record_contract_test)
+add_executable(fa18_menu_render_contract_test menu_render_contract_test.c menu_render.c)
+add_test(NAME fa18_menu_render_contract COMMAND fa18_menu_render_contract_test)
 add_executable(fa18_menu_contract_test menu_contract_test.c menu.c)
 add_test(NAME fa18_menu_contract COMMAND fa18_menu_contract_test)
 add_executable(fa18_menu_display_contract_test menu_display_contract_test.c menu.c)

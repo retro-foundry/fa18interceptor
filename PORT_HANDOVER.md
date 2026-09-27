@@ -92,18 +92,17 @@ in order. The menu frames (200..~391) should be unaffected.
 
 ## Next steps
 
-1. Finish the new executable skeleton. Already written but **not yet compiled
-   or tested**: `port/disk.c/.h` (OFS reader), `port/hunk.c/.h` (segments,
-   relocations, `fa18_hunk_pointer` resolves a stored pointer to segment +
-   offset), `port/video.c/.h` (indexed 320x200 buffer plus 32-entry palette
-   to RGB444), `port/game.c/.h` (loads disk and executable, frame counter
-   starting at 200; draws nothing yet). Still to write: a new `port/main.c` with `--adf FILE --replay FILE --headless --to N
-   --dump-rgb444 -` (contract in `scripts/native_frame_count.py`) and an SDL
-   window mode. Point `add_executable(fa18_port ...)` at only the new files;
-   keep old modules for their tests until they are replaced.
-2. Make the check pass and record the honest baseline in PORT.md.
-3. Port the menu: decompile `$C0FBE0`, the text sequencer (`$C32BD2`,
-   `$C32CEE`, `$C32D24`), the compositor and its font, the palette, and the
-   frame-234 selection path, reading strings and font from the executable.
-4. Continue in frame order, one routine per commit, frame count in each
-   commit message.
+1. The disk-backed executable skeleton is complete and committed. `fa18_port`
+   accepts `--adf FILE --replay FILE --headless --to N --dump-rgb444 -`, or
+   starts an SDL window, while `scripts/check_native_build.py` passes.
+2. `$C0FBE0` and the positive `$C32D24` selector path are ported. The initial
+   records are resolved from the executable's `$C3ED0A` relative table; the
+   bounded `$C32F54-$C33168` compositor reads its palette, layout, and glyph
+   data from `$C08490`, `$C41066`, and `$C3D8FC` at runtime.
+3. The frame-200 gate has only one unresolved line: `SHIFT ESC ... RETURNS
+   YOU TO THIS MENU` at y=177..183 (541 pixels). It is not present in
+   `$C0FBE0`'s selector queue. Trace its original producer and layout state;
+   do not add it from a frame fixture or infer its placement from pixels.
+4. Continue in frame order, one original routine/contract per commit, with
+   `NATIVE_FRAME_COUNT` in each commit message. The CPU-paced flight timing
+   issue remains a separate blocker before the 3D path.
