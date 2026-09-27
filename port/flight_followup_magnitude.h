@@ -7,6 +7,7 @@ typedef struct {
     uint16_t coordinate_x;
     uint16_t coordinate_z;
     int32_t depth;
+    int32_t offset_18;
     uint32_t origin_x;
     uint32_t origin_z;
 } FA18FlightFollowupMagnitudeRecord;

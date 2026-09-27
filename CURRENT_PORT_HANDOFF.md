@@ -167,6 +167,12 @@ word-wrapped 512-byte record offset and leaves the nonpositive `$C1CE38`
 route explicit. `ctest` passes **99/99** tests with the same native frame
 result.
 
+`port/flight_followup_pipeline.{c,h}` now composes the bounded positive
+`$C1CCBC-$C1CE37` path: selector record, magnitude, shift, and descriptor
+dispatch. Its record/table/fixed-point/descriptor operations remain caller
+bound, and the nonpositive `$C1CE38` route remains explicit. `ctest` passes
+**103/103** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`

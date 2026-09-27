@@ -40,3 +40,8 @@ caller-owned; the following descriptor dispatch is still a separate boundary.
 `$C1CDFC-$C1CE37` dispatch: required fixed-point call, caller-owned descriptor
 lookup/handler, source control-longword publication, and word `+2` loop-index
 advance. The descriptor table payload remains external.
+
+`fa18_run_flight_followup_pipeline` now composes the positive selector branch
+through those three bounded phases, retaining record lookup, error, shift-table,
+fixed-point, and descriptor boundaries as caller-owned. The nonpositive route
+continues to report `$C1CE38` rather than substituting an implementation.
