@@ -213,6 +213,13 @@ wrapped absolute-difference triples, `$C1D974` scalar calls, and signed
 required caller resolver. `ctest` passes **109/109** tests with the same
 native frame result.
 
+`port/record_scan_renderer_pass.{c,h}` now ports the bounded direct path of
+`$C1518C-$C1522D`, `$C153BC-$C153FB`, and `$C2F490`: renderer-bound
+initialization, counter decrement, the ten even-indexed 64-byte slot sweep,
+mode-gated `+$28` decrements, and the finish-state rewrite. The unresolved
+candidate body is returned as an explicit continuation when its source gates
+are met. `ctest` passes **110/110** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
