@@ -11,6 +11,7 @@
 #include "menu_render.h"
 #include "projection_grid.h"
 #include "scene_record_table.h"
+#include "scene_component_magnitude.h"
 #include "replay.h"
 #include "video.h"
 
@@ -20,6 +21,7 @@ typedef struct {
     FA18Hunks exe;
     FA18ProjectionGrid projection_grid;
     FA18SceneRecordTable scene_record_table;
+    FA18LoadedSceneMagnitudeTable scene_magnitude_table;
     FA18Video video;
     FA18MenuTextState menu_text;
     FA18MenuFlow menu_flow;

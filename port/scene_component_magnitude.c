@@ -2,6 +2,20 @@
 
 #include <limits.h>
 
+int fa18_load_scene_magnitude_table(const FA18Hunks *hunks,
+                                    FA18LoadedSceneMagnitudeTable *table) {
+    if (!hunks || !table || FA18_SCENE_MAGNITUDE_HUNK >= hunks->count) return -1;
+    const FA18HunkSegment *segment = &hunks->segments[FA18_SCENE_MAGNITUDE_HUNK];
+    const size_t bytes = FA18_SCENE_MAGNITUDE_WORDS * 2u;
+    if (!segment->data || segment->size < FA18_SCENE_MAGNITUDE_OFFSET ||
+        segment->size - FA18_SCENE_MAGNITUDE_OFFSET < bytes)
+        return -1;
+    const uint8_t *source = segment->data + FA18_SCENE_MAGNITUDE_OFFSET;
+    for (unsigned index = 0; index != FA18_SCENE_MAGNITUDE_WORDS; ++index)
+        table->words[index] = fa18_be16(source + index * 2u);
+    return 0;
+}
+
 static int32_t arithmetic_shift_right_long(int32_t value, unsigned count) {
     if (!count) return value;
     if (value >= 0) return value >> count;
