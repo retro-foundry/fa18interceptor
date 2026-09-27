@@ -23,4 +23,9 @@ int fa18_build_single_angle_matrix(const FA18FlightTrigTable *table,
 int fa18_build_single_angle_trig_matrix(const FA18FlightTrigTable *table,
                                         int16_t angle, int16_t output[3][3]);
 
+/* `$C2E3DE-$C2E479`: compose the mixed-scale three-angle matrix. */
+int fa18_compose_three_angle_matrix(const FA18FlightTrigTable *table,
+                                    int16_t first_angle, int16_t second_angle,
+                                    int16_t third_angle, int16_t output[3][3]);
+
 #endif
