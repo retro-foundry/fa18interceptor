@@ -26,6 +26,9 @@ typedef struct {
     uint8_t post_input_phase;
     uint8_t transition_auxiliary;
     uint8_t demo_followup_pending;
+    uint8_t blank_presentation_pending;
+    uint8_t blank_presentation_waited;
+    uint8_t blank_presentation_selected;
     uint16_t selectors[2];
     int16_t display_delay;
     int16_t transition_row_limit;
@@ -39,7 +42,9 @@ int fa18_menu_flow_apply_controls(FA18MenuFlow *flow,
                                   const FA18ReplayControlState *controls,
                                   FA18Video *video);
 
-/* Complete `$C2FD22` after its partially visible first presentation. */
+/* Complete `$C2FD22` after its partially visible first presentation. It also
+ * advances the separately proved run075 blank-page handoff after one retained
+ * presentation, when a scheduler has delivered the delayed transition tick. */
 void fa18_menu_flow_finish_presented_frame(FA18MenuFlow *flow, FA18Video *video);
 
 /* Consume the selector that follows the completed display clear. */

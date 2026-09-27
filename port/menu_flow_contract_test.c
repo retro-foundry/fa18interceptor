@@ -48,9 +48,22 @@ int main(void) {
         !flow.transition_started || flow.display_delay != 4 ||
         flow.transition_row_limit != 179 || flow.transition_stage != 3 ||
         flow.post_input_phase != 2 || !flow.transition_auxiliary ||
-        !flow.demo_followup_pending ||
+        !flow.demo_followup_pending || !flow.blank_presentation_pending ||
         fa18_menu_flow_post_input_tick(&flow) != -1) {
         fputs("menu delayed-transition contract failed\n", stderr);
+        return 1;
+    }
+    memset(video.pixels, 5, sizeof video.pixels);
+    fa18_menu_flow_finish_presented_frame(&flow, &video);
+    if (!flow.blank_presentation_pending || !flow.blank_presentation_waited ||
+        flow.blank_presentation_selected || video.pixels[0] != 5) {
+        fputs("menu blank-handoff retained-presentation contract failed\n", stderr);
+        return 1;
+    }
+    fa18_menu_flow_finish_presented_frame(&flow, &video);
+    if (flow.blank_presentation_pending || !flow.blank_presentation_selected ||
+        video.pixels[0] != 0 || video.pixels[FA18_PIXELS - 1] != 0) {
+        fputs("menu blank-handoff selected-presentation contract failed\n", stderr);
         return 1;
     }
     FA18MenuFlow wrap = {0};

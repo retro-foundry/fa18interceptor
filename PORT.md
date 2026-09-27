@@ -1205,3 +1205,9 @@ game loop.
   source has no one-tick-per-frame contract. The menu-flow test covers the
   211-tick transition edge; the visible native gate remains 73 frames until
   an authorized scheduler is supplied.
+- 2026-09-27: The delayed-transition contract now also preserves the proved
+  presentation handoff: after its tick, one menu-label presentation remains,
+  then a semantic blank page is selected. This corresponds to run075's
+  `$C17B08` clears and `$C17B2C` indexed-record replacements followed by the
+  observed frame-273 Copper bitplane switch; it contains no Copper address,
+  page pointer, or stored output data.

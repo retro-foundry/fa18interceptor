@@ -75,6 +75,16 @@ ordered writes to the first two `$C4FE38` entries:
 This proves an indexed-record handoff sequence, but not that either record is
 itself a display page or when a native chunky buffer should be cleared.
 
+The normal Custom-register log supplies the presentation consequence. In
+frames 271 and 272 its active Copper list writes the four bitplane-pointer
+pairs `$4DB30/$4FA70/$519B0/$538F0`; frame 273 instead writes
+`$12BC0/$14B00/$16A40/$18980`. The rendered run075 page remains the menu
+label through frame 272 and is black at frame 273. The selected chip-memory
+range is not uniformly zero, so the evidence is a black **presentation**, not
+a claim that a raw memory range can be cleared. Native code therefore retains
+one presentation after the bounded transition tick and then selects a semantic
+black page, without carrying Copper addresses or page pointers.
+
 ## Port consequence
 
 The current native C menu route deliberately stops at frame 272. It needs a

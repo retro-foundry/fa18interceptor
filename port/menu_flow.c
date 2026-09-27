@@ -40,10 +40,23 @@ int fa18_menu_flow_apply_controls(FA18MenuFlow *flow,
 }
 
 void fa18_menu_flow_finish_presented_frame(FA18MenuFlow *flow, FA18Video *video) {
-    if (!flow || !video || !flow->complete_clear_after_present) return;
+    if (!flow || !video) return;
+    if (flow->complete_clear_after_present) {
+        memset(video->pixels, 0, sizeof video->pixels);
+        flow->complete_clear_after_present = 0;
+        flow->selector_render_pending = 1;
+    }
+    if (!flow->blank_presentation_pending) return;
+    if (!flow->blank_presentation_waited) {
+        flow->blank_presentation_waited = 1;
+        return;
+    }
+    /* run075: `$C0FEEA`'s indexed-record path changes the Copper selection
+     * during frame 271; the old menu page presents in 272 and the selected
+     * blank page presents in 273. The record/page ownership is not modeled. */
     memset(video->pixels, 0, sizeof video->pixels);
-    flow->complete_clear_after_present = 0;
-    flow->selector_render_pending = 1;
+    flow->blank_presentation_pending = 0;
+    flow->blank_presentation_selected = 1;
 }
 
 int fa18_menu_flow_take_selector(FA18MenuFlow *flow, uint16_t *selector) {
@@ -75,6 +88,7 @@ int fa18_menu_flow_post_input_tick(FA18MenuFlow *flow) {
     flow->post_input_phase = 2;
     flow->transition_auxiliary = 1;
     flow->demo_followup_pending = 1;
+    flow->blank_presentation_pending = 1;
     flow->transition_started = 1;
     return 1;
 }
