@@ -89,6 +89,11 @@ and scale operations, then invokes the required caller-owned `$C22C80`
 record-update boundary. It adds no record traversal or scheduler guess.
 `ctest` passes **89/89** tests.
 
+`port/record_stride_gate.{c,h}` now ports the first `$C22C80-$C22CCD`
+record-stride decrement gate. It applies the observed 16 word decrements only
+when the caller-owned state byte is clear; the succeeding record-bank calls
+remain unported boundaries. `ctest` passes **90/90** tests.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
