@@ -27,6 +27,7 @@ add_executable(fa18_port main.c disk.c hunk.c video.c game.c menu_text.c menu_fl
 target_compile_definitions(fa18_port PRIVATE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_sources(fa18_port PRIVATE map_packet_control_walker.c)
 target_sources(fa18_port PRIVATE record_scan_renderer_pass.c)
+target_sources(fa18_port PRIVATE record_scan_candidate_prelude.c)
 target_link_libraries(fa18_port PRIVATE SDL2-static)
 if(MSVC)
     target_compile_options(fa18_port PRIVATE /W4)
@@ -261,3 +262,5 @@ add_executable(fa18_flagged_slot_evaluator_contract_test flagged_slot_evaluator_
 add_test(NAME fa18_flagged_slot_evaluator_contract COMMAND fa18_flagged_slot_evaluator_contract_test)
 add_executable(fa18_record_scan_renderer_pass_contract_test record_scan_renderer_pass_contract_test.c record_scan_renderer_pass.c)
 add_test(NAME fa18_record_scan_renderer_pass_contract COMMAND fa18_record_scan_renderer_pass_contract_test)
+add_executable(fa18_record_scan_candidate_prelude_contract_test record_scan_candidate_prelude_contract_test.c record_scan_candidate_prelude.c)
+add_test(NAME fa18_record_scan_candidate_prelude_contract COMMAND fa18_record_scan_candidate_prelude_contract_test)

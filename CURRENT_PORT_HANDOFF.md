@@ -222,6 +222,14 @@ are met; a set scan-mode byte correctly bypasses the flag gate and can still
 take the direct auxiliary-clear advance. `ctest` passes **110/110** tests with
 the same native frame result.
 
+`port/record_scan_candidate_prelude.{c,h}` now ports `$C1522E-$C153DB`:
+the selected-slot gates, table/counter and renderer-budget state updates,
+`+$26/+2E` word writes, auxiliary transitions, and loop re-entry. The
+`$C17F8C`, `$C181A0`, `$C15688`, and `$C153FC` children are required
+caller-owned callbacks, preserving their source order without assigning their
+unbounded behavior. `ctest` passes **111/111** tests with the same native
+frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
