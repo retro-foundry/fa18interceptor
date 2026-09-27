@@ -32,6 +32,12 @@ int main(void) {
     assert(route == FA18_RECORD_SCAN_RENDERER_PASS_COMPLETE &&
            be16(slots[0].bytes + 0x28) == 0xff);
 
+    input = (FA18RecordScanRendererPassInput){1, 0, 8, 0};
+    state = (FA18RecordScanRendererPassState){0, 1, 0};
+    slots[6].bytes[0x27] = 0;
+    assert(fa18_run_record_scan_renderer_pass(slots, &input, &state, &route) == 0);
+    assert(route == FA18_RECORD_SCAN_RENDERER_PASS_COMPLETE);
+
     input = (FA18RecordScanRendererPassInput){0, 0, 8, 0};
     state = (FA18RecordScanRendererPassState){0, 2, 0};
     assert(fa18_run_record_scan_renderer_pass(slots, &input, &state, &route) == 0);

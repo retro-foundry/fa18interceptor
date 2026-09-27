@@ -218,7 +218,9 @@ native frame result.
 initialization, counter decrement, the ten even-indexed 64-byte slot sweep,
 mode-gated `+$28` decrements, and the finish-state rewrite. The unresolved
 candidate body is returned as an explicit continuation when its source gates
-are met. `ctest` passes **110/110** tests with the same native frame result.
+are met; a set scan-mode byte correctly bypasses the flag gate and can still
+take the direct auxiliary-clear advance. `ctest` passes **110/110** tests with
+the same native frame result.
 
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,

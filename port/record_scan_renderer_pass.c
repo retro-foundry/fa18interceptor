@@ -17,7 +17,10 @@ int fa18_run_record_scan_renderer_pass(
     if (!slots || !input || !state || !route) return -1;
     state->renderer_bound = UINT32_C(0x000fffff);
     state->scan_counter = (uint8_t)(state->scan_counter - 1u);
-    if (input->scan_mode || (input->flags & 0x0008u) || input->auxiliary_flag) {
+    /* `$C15200-$C1522D`: a set mode byte bypasses the `$C15218` flags test,
+     * then falls into the direct advance when the auxiliary byte is clear. */
+    if (input->auxiliary_flag ||
+        (!input->scan_mode && (input->flags & 0x0008u))) {
         *route = FA18_RECORD_SCAN_RENDERER_PASS_CANDIDATE_CONTINUATION;
         return 0;
     }
