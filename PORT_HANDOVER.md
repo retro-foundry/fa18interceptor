@@ -128,6 +128,9 @@ in order. The menu frames (200..~391) should be unaffected.
    stream (or a user-approved relaxed present-order comparator) for the
    CPU-paced loop. The frame-count script and its command-line contract are
    user-owned; do not modify either unilaterally.
+   `analysis/routines/run075_menu_selection_cadence.md` gives the exact
+   run075 measurement and the adjacent indexed Copper-state changes. It is
+   deliberately not a C scheduling fixture.
 8. Continue one original routine/contract per commit, with
    `NATIVE_FRAME_COUNT` in each commit message. The CPU-paced flight timing
    issue remains a separate blocker before the 3D path.

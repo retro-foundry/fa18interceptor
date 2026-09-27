@@ -1190,3 +1190,12 @@ game loop.
   sub-ticks per PAL frame in this span, so a frame-number replacement would
   invent CPU pacing. The native runtime needs an approved timing-stream
   contract before this presentation transition can be ported faithfully.
+- 2026-09-27: The run075 countdown cadence is now enumerated without making
+  it a native schedule: after the release-frame decrement, frames 235--239
+  have five `$C0F5F8` ticks each; frames 240--259 have six; frame 260 has
+  five; and frames 261--270 have six. Those 210 ticks take `$00D1` to
+  `$FFFF`. `$C4FE38[0]` then changes from `$C07678`, through the proved
+  `$C17B08` clear at frame 271, to `$C06A18` at frame 272, immediately before
+  the blank presentation. The state is evidence only: its mutable Copper
+  record ownership and source-independent timing rule are unproved. See
+  `analysis/routines/run075_menu_selection_cadence.md`.
