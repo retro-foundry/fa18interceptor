@@ -11,6 +11,13 @@ typedef struct {
     FA18ScenePlacementTraversalState state;
 } Fixture;
 
+static int depth_lookup(void *context, int16_t index, int8_t *value) {
+    int16_t *observed_index = context;
+    *observed_index = index;
+    *value = -3;
+    return 0;
+}
+
 static int lookup(void *context, uint32_t reference,
                   FA18ScenePlacementDescriptorProbe *probe) {
     Fixture *fixture = context;
@@ -31,6 +38,21 @@ static int consume(void *context, const FA18ScenePlacementRecord *record,
 }
 
 int main(void) {
+    int16_t depth_index = 0;
+    FA18ScenePlacementSelectorState selector;
+    assert(fa18_prepare_scene_placement_selector(0, 0x12, 0x34, -0x0100,
+                                                  depth_lookup, &depth_index,
+                                                  &selector) == 0);
+    assert(!selector.use_alternate_table && selector.initial_offset == 0x12 &&
+           !selector.auxiliary_flag && !selector.status_flag && depth_index == 2 &&
+           selector.comparison_word == 0xfd00);
+    assert(fa18_prepare_scene_placement_selector(1, 0x12, 0x34, -0x8000,
+                                                  depth_lookup, &depth_index,
+                                                  &selector) == 0);
+    assert(selector.use_alternate_table && selector.initial_offset == 0x34 &&
+           selector.comparison_word == 0x7ffe);
+    assert(fa18_prepare_scene_placement_selector(0, 0, 0, 0, 0, 0, &selector) == -1);
+
     uint8_t records[FA18_SCENE_PLACEMENT_BYTES * 2] = {0};
     records[0] = 0x15; records[1] = 0x02;
     records[2] = 0x00; records[3] = 0xc2; records[4] = 0x23; records[5] = 0x2c;

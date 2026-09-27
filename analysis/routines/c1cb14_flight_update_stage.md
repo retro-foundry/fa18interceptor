@@ -51,3 +51,9 @@ that the loop is active in that visible scene. Its first observed descriptor is
 third longword would write zero to `$C45A36`; it is therefore a non-geometry
 descriptor. The sample proves traversal of the selection system in the
 landmark frame, not the descriptor or edge list that draws the bridge.
+
+The native `scene_placement` boundary now also includes the immediately
+preceding `$C1CB14-$C1CB73` selector prefix. It chooses the caller-owned list
+offset, clears its two direct flags, and creates the `$C459B2` comparison word
+from the caller-owned signed depth-byte table (or the exact `$7ffe`
+saturation). The placement table and lookup ownership remain external.

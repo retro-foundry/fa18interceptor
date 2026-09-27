@@ -40,6 +40,26 @@ typedef int (*FA18ScenePlacementConsumer)(void *context,
                                           const FA18ScenePlacementDescriptorProbe *probe,
                                           const FA18ScenePlacementTraversalState *state);
 
+typedef int (*FA18ScenePlacementDepthLookup)(void *context, int16_t index,
+                                             int8_t *value);
+
+/* Direct state produced by `$C1CB14-$C1CB73` for the following placement loop. */
+typedef struct {
+    uint8_t use_alternate_table;
+    uint16_t initial_offset;
+    uint8_t auxiliary_flag;
+    uint8_t status_flag;
+    uint16_t comparison_word;
+} FA18ScenePlacementSelectorState;
+
+/* `$C1CB14-$C1CB73`: select a placement-list offset and derive the signed
+ * comparison word from the caller-owned depth byte table. */
+int fa18_prepare_scene_placement_selector(
+    uint8_t select_alternate_table, uint16_t primary_offset,
+    uint16_t alternate_offset, int32_t projection_depth,
+    FA18ScenePlacementDepthLookup depth_lookup, void *context,
+    FA18ScenePlacementSelectorState *state);
+
 /* Decode one big-endian runtime record. */
 int fa18_decode_scene_placement_record(const uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
                                        FA18ScenePlacementRecord *record);

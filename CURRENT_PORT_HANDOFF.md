@@ -146,6 +146,12 @@ The same scene-pipeline module now exposes
 renderer-packet callback in the existing `$C0F090` parent update boundary.
 It does not provide the parent loop's other children or a top-level schedule.
 
+`scene_placement` now also ports `$C1CB14-$C1CB73`, the selector prefix for
+its existing `$C1CB74` traversal: it selects the primary/alternate list offset
+and derives the comparison word through a caller-owned signed depth-table
+lookup, including the source `$7ffe` saturation. `ctest` remains **98/98**
+with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

@@ -2,6 +2,39 @@
 
 #include "hunk.h"
 
+static int32_t negate_long(int32_t value) {
+    return (int32_t)(UINT32_C(0) - (uint32_t)value);
+}
+
+static int16_t arithmetic_shift_right_word(int16_t value, unsigned count) {
+    if (value >= 0) return (int16_t)(value >> count);
+    return (int16_t)-((-(int32_t)value + ((1 << count) - 1)) >> count);
+}
+
+int fa18_prepare_scene_placement_selector(
+    uint8_t select_alternate_table, uint16_t primary_offset,
+    uint16_t alternate_offset, int32_t projection_depth,
+    FA18ScenePlacementDepthLookup depth_lookup, void *context,
+    FA18ScenePlacementSelectorState *state) {
+    const int32_t negated_depth = negate_long(projection_depth);
+
+    if (!depth_lookup || !state) return -1;
+    *state = (FA18ScenePlacementSelectorState){
+        select_alternate_table ? 1u : 0u,
+        select_alternate_table ? alternate_offset : primary_offset,
+        0, 0, 0
+    };
+    if (negated_depth > 0x7fff) {
+        state->comparison_word = 0x7ffeu;
+        return 0;
+    }
+    const int16_t index = arithmetic_shift_right_word((int16_t)negated_depth, 7);
+    int8_t table_value;
+    if (depth_lookup(context, index, &table_value) != 0) return -1;
+    state->comparison_word = (uint16_t)((int16_t)table_value << 8);
+    return 0;
+}
+
 int fa18_decode_scene_placement_record(const uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
                                        FA18ScenePlacementRecord *record) {
     if (!bytes || !record) return -1;
