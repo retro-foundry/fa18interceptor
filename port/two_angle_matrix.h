@@ -19,4 +19,8 @@ int fa18_build_two_angle_matrix(const FA18FlightTrigTable *table,
 int fa18_build_single_angle_matrix(const FA18FlightTrigTable *table,
                                    int16_t angle, int16_t output[3][3]);
 
+/* `$C2E370-$C2E38D`: construct the one-angle native-trig matrix. */
+int fa18_build_single_angle_trig_matrix(const FA18FlightTrigTable *table,
+                                        int16_t angle, int16_t output[3][3]);
+
 #endif

@@ -81,3 +81,22 @@ int fa18_build_single_angle_matrix(const FA18FlightTrigTable *table,
     output[2][2] = word_asr(cosine, 6);
     return 0;
 }
+
+int fa18_build_single_angle_trig_matrix(const FA18FlightTrigTable *table,
+                                        int16_t angle, int16_t output[3][3]) {
+    if (!table || !output) return -1;
+    int16_t sine = 0;
+    int16_t cosine = 0;
+    if (fa18_flight_lookup_sine_cosine(table, word_asr(angle, 3),
+                                       &sine, &cosine) != 0) return -1;
+    output[0][0] = cosine;
+    output[0][1] = 0;
+    output[0][2] = sine;
+    output[1][0] = 0;
+    output[1][1] = 0x4000;
+    output[1][2] = 0;
+    output[2][0] = word_negate(sine);
+    output[2][1] = 0;
+    output[2][2] = cosine;
+    return 0;
+}
