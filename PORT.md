@@ -1218,3 +1218,10 @@ game loop.
   original wrapping case. It is deliberately not wired to the native frame
   loop: the source pacing and the Copper/palette condition that first reveals
   the prepared run075 scene page at frame 392 remain unassigned.
+- 2026-09-27: Moved the proved `$C2F688-$C2FA6F` four-lane pixel-mask core
+  into the strict native target as `FA18PlanarPixelState`. It preserves the
+  fifth native page-index bit while applying the original primary/two-row
+  masks, lane enable, handler mode, and early XOR behavior to the source's
+  four lanes. The native target contains no recorded frame data. Source record
+  decoding, the five-plane page presentation, and the original update cadence
+  still need to be connected before this primitive can advance frame 273.

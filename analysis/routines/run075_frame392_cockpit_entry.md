@@ -102,6 +102,31 @@ global frames 201--392. That excludes a mutation of this observed palette bank
 as the frame-392 trigger; it does not exclude a distinct Copper-controlled
 palette source until `$C07F00` is decoded.
 
+## Prepared-page producer sample
+
+Arming `$C279D0` at local frame 182 first reaches it at local frame 184
+(global frame 384), inside the bounded render-page preparation interval. This
+return-bounded invocation uses `$C456B6=$C4566E`, the `$04DB30` render-page
+pointer family, rather than the `$012BC0` family used by the frame-392
+invocation. It reaches two `$C2FF48` submissions and five `$C2F688` pixel
+entries before returning to `$C0F0C8` after 4,593 instructions. The direct
+pixel entries are `(140,105)`, `(52,106)`, `(297,106)`, `(231,109)`, and
+`(101,101)`; all lie in the first visible frame's `y=101..199` bounds.
+
+```text
+python scripts/trace_from_breakpoint.py \
+  --restore captures/run075/initial_state.bin --playback captures/run075/playback.e9k \
+  --playback-frame-offset 200 --address 0xC279D0 --arm-frame 182 \
+  --return-pc 0xC0F0C8 --frames 185 --max-instructions 10000 \
+  --ignore-future-input --output build/run075_frame382_c279d0_render_page
+```
+
+This directly identifies `$C279D0` as one producer of the page later shown at
+frame 392, even though its frame-392 invocation has already moved to the
+alternate page. The polygon contexts and source records remain unclassified:
+these coordinates are not sufficient to call the staged image terrain,
+cockpit art, or a complete scene.
+
 ## Next port boundary
 
 Trace the display-state/Copper path selecting or revealing the five-plane

@@ -15,7 +15,7 @@ FetchContent_Declare(SDL2
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
 
-add_executable(fa18_port main.c disk.c hunk.c video.c game.c menu_text.c menu_flow.c menu_record.c menu_render.c replay.c)
+add_executable(fa18_port main.c disk.c hunk.c video.c game.c menu_text.c menu_flow.c menu_record.c menu_render.c replay.c planar_pixel.c)
 target_compile_definitions(fa18_port PRIVATE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_port PRIVATE SDL2-static)
 if(MSVC)
@@ -71,6 +71,8 @@ add_executable(fa18_projection_packet_contract_test projection_packet_contract_t
 add_test(NAME fa18_projection_packet_contract COMMAND fa18_projection_packet_contract_test)
 add_executable(fa18_outer_page_selector_contract_test outer_page_selector_contract_test.c outer_page_selector.c)
 add_test(NAME fa18_outer_page_selector_contract COMMAND fa18_outer_page_selector_contract_test)
+add_executable(fa18_planar_pixel_contract_test planar_pixel_contract_test.c planar_pixel.c video.c)
+add_test(NAME fa18_planar_pixel_contract COMMAND fa18_planar_pixel_contract_test)
 add_executable(fa18_projection_seed_contract_test projection_seed_contract_test.c projection_seed.c)
 add_test(NAME fa18_projection_seed_contract COMMAND fa18_projection_seed_contract_test)
 add_executable(fa18_replay_contract_test replay_contract_test.c replay.c)
