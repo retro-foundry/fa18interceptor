@@ -156,3 +156,37 @@ int fa18_compose_three_angle_matrix(const FA18FlightTrigTable *table,
     output[2][2] = product_high_asr4(trig.d3, trig.d1);
     return 0;
 }
+
+int fa18_build_rotation_matrix(const FA18FlightTrigTable *table,
+                               int16_t first_angle, int16_t second_angle,
+                               int16_t third_angle, int16_t output[3][3]) {
+    if (!table || !output) return -1;
+    FA18FlightTrigState trig = {0};
+    const int16_t first = (int16_t)((uint16_t)first_angle >> 3);
+    const int16_t second = (int16_t)((uint16_t)second_angle >> 3);
+    const int16_t third = (int16_t)((uint16_t)third_angle >> 3);
+    if (fa18_flight_lookup_two_sine_cosine(table, first, second, &trig) != 0 ||
+        fa18_flight_lookup_sine_cosine(table, third, &trig.d4, &trig.d5) != 0)
+        return -1;
+
+    int32_t term = long_asr((int32_t)trig.d2 * trig.d0, 14);
+    term = mul_word_by_low(term, trig.d4);
+    output[0][0] = (int16_t)long_asr(long_add_wrap((int32_t)trig.d3 * trig.d5, term), 14);
+    output[0][1] = word_negate((int16_t)long_asr((int32_t)trig.d1 * trig.d4, 14));
+    term = long_asr((int32_t)trig.d3 * trig.d0, 14);
+    term = mul_word_by_low(term, trig.d4);
+    output[0][2] = (int16_t)long_asr(long_subtract_wrap((int32_t)trig.d2 * trig.d5, term), 14);
+
+    term = long_asr((int32_t)trig.d2 * trig.d0, 14);
+    term = mul_word_by_low(term, trig.d5);
+    output[1][0] = (int16_t)long_asr(long_subtract_wrap((int32_t)trig.d3 * trig.d4, term), 14);
+    output[1][1] = (int16_t)long_asr((int32_t)trig.d1 * trig.d5, 14);
+    term = long_asr((int32_t)trig.d3 * trig.d0, 14);
+    term = mul_word_by_low(term, trig.d5);
+    output[1][2] = (int16_t)long_asr(long_add_wrap((int32_t)trig.d2 * trig.d4, term), 14);
+
+    output[2][0] = word_negate((int16_t)long_asr((int32_t)trig.d2 * trig.d1, 14));
+    output[2][1] = word_negate(trig.d0);
+    output[2][2] = (int16_t)long_asr((int32_t)trig.d3 * trig.d1, 14);
+    return 0;
+}

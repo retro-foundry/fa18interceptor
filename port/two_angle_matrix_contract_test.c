@@ -31,6 +31,10 @@ int main(void) {
     assert(matrix[0][0] == 255 && matrix[0][1] == 0 && matrix[0][2] == -12);
     assert(matrix[1][0] == 0 && matrix[1][1] == 256 && matrix[1][2] == 0);
     assert(matrix[2][0] == 12 && matrix[2][1] == 0 && matrix[2][2] == 255);
+    assert(fa18_build_rotation_matrix(&table, 0, 0, 0, matrix) == 0);
+    assert(matrix[0][0] == 0x4000 && matrix[0][1] == 0 && matrix[0][2] == 0);
+    assert(matrix[1][0] == 0 && matrix[1][1] == 0x4000 && matrix[1][2] == 0);
+    assert(matrix[2][0] == 0 && matrix[2][1] == 0 && matrix[2][2] == 0x4000);
     assert(fa18_build_single_angle_trig_matrix(&table, 0, matrix) == 0);
     assert(matrix[0][0] == 0x4000 && matrix[0][1] == 0 && matrix[0][2] == 0);
     assert(matrix[1][0] == 0 && matrix[1][1] == 0x4000 && matrix[1][2] == 0);
@@ -47,6 +51,7 @@ int main(void) {
     assert(fa18_build_single_angle_matrix(NULL, 0, matrix) == -1);
     assert(fa18_build_single_angle_trig_matrix(NULL, 0, matrix) == -1);
     assert(fa18_compose_three_angle_matrix(NULL, 0, 0, 0, matrix) == -1);
+    assert(fa18_build_rotation_matrix(NULL, 0, 0, 0, matrix) == -1);
     assert(fa18_load_two_angle_trig_table(NULL, &table) == -1);
     puts("two-angle matrix contract passed");
     return 0;

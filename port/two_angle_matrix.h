@@ -28,4 +28,9 @@ int fa18_compose_three_angle_matrix(const FA18FlightTrigTable *table,
                                     int16_t first_angle, int16_t second_angle,
                                     int16_t third_angle, int16_t output[3][3]);
 
+/* `$C2E47A-$C2E513`: construct the full-scale three-angle rotation matrix. */
+int fa18_build_rotation_matrix(const FA18FlightTrigTable *table,
+                               int16_t first_angle, int16_t second_angle,
+                               int16_t third_angle, int16_t output[3][3]);
+
 #endif
