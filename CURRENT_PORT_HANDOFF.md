@@ -94,6 +94,10 @@ record-stride decrement gate. It applies the observed 16 word decrements only
 when the caller-owned state byte is clear; the succeeding record-bank calls
 remain unported boundaries. `ctest` passes **90/90** tests.
 
+`port/indexed_update_gate.{c,h}` now ports `$C25B66-$C25B6F`'s selected-record
+zero/nonzero split. Both successors remain explicit until their bounded bodies
+are composed. `ctest` passes **91/91** tests.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
