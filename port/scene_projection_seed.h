@@ -6,6 +6,8 @@
 
 #include "projection_packet.h"
 
+enum { FA18_SCENE_PROJECTION_SEED_RECORD_BYTES = 0xa4 };
+
 /* Selected record fields consumed by `$C1C54E-$C1C5DF`. */
 typedef struct {
     uint8_t type_byte_62;

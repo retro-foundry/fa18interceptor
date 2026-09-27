@@ -36,6 +36,13 @@ int main(void) {
     FA18ParentFlightScenePipelineContext callback = {&grid, &input, &renderer, &result};
     assert(fa18_run_parent_flight_scene_pipeline(&callback) == 0 &&
            result.packet_route == FA18_PROJECTION_GRID_PACKET_READY);
+    FA18SceneActiveRecordState active = {record, sizeof record, 0, 0};
+    assert(fa18_render_active_flight_scene_pipeline(&grid, &active, &input,
+                                                     &renderer, &result) == 0 &&
+           result.packet_route == FA18_PROJECTION_GRID_PACKET_READY);
+    active.selected_offset = 1;
+    assert(fa18_render_active_flight_scene_pipeline(&grid, &active, &input,
+                                                     &renderer, &result) == -1);
     input.scene_record_size = sizeof record - 1;
     assert(fa18_render_flight_scene_pipeline(&grid, &input, &renderer, &result) == -1);
     return 0;

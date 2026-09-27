@@ -255,6 +255,13 @@ in native code. `ctest` passes **115/115** tests with the same native frame
 result. This is a data binding only; it does not schedule or present a flight
 scene.
 
+`fa18_render_active_flight_scene_pipeline` now composes that selected raw
+record with the existing `$C1C54E -> $C279D0` packet/page contract. It resolves
+the required 164-byte active record before decoding; matrix, grid, render page,
+and scheduler are still caller-owned. The existing pipeline contract exercises
+both its valid and out-of-bounds paths; `ctest` remains **115/115** with the
+same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`

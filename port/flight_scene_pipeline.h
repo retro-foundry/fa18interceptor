@@ -6,6 +6,7 @@
 
 #include "flight_renderer_page.h"
 #include "flight_renderer_packet.h"
+#include "scene_active_record.h"
 #include "scene_projection_seed.h"
 
 /* Caller-owned live inputs at the `$C1C54E -> $C279D0` composition boundary. */
@@ -29,6 +30,16 @@ typedef struct {
  * ownership, page selection, and Copper presentation remain caller-owned. */
 int fa18_render_flight_scene_pipeline(
     const FA18ProjectionGrid *grid,
+    const FA18FlightScenePipelineInput *input,
+    const FA18FlightRendererPage *page_renderer,
+    FA18FlightScenePipelineResult *result);
+
+/* Resolve the `$C46184 + $C458DE.w` record selected by `$C1C54E`, then run
+ * the same bounded packet/page pipeline. The caller still owns record-store
+ * updates, the live matrix, page selection, and scheduling. */
+int fa18_render_active_flight_scene_pipeline(
+    const FA18ProjectionGrid *grid,
+    const FA18SceneActiveRecordState *active_record,
     const FA18FlightScenePipelineInput *input,
     const FA18FlightRendererPage *page_renderer,
     FA18FlightScenePipelineResult *result);

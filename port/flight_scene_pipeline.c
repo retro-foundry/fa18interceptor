@@ -23,6 +23,25 @@ int fa18_render_flight_scene_pipeline(
         &result->packet_route, &result->submitted_record_count);
 }
 
+int fa18_render_active_flight_scene_pipeline(
+    const FA18ProjectionGrid *grid,
+    const FA18SceneActiveRecordState *active_record,
+    const FA18FlightScenePipelineInput *input,
+    const FA18FlightRendererPage *page_renderer,
+    FA18FlightScenePipelineResult *result) {
+    const uint8_t *record;
+    FA18FlightScenePipelineInput selected_input;
+
+    if (!input || fa18_resolve_scene_active_record(
+                      active_record, FA18_SCENE_PROJECTION_SEED_RECORD_BYTES,
+                      &record) != 0)
+        return -1;
+    selected_input = *input;
+    selected_input.scene_record_bytes = record;
+    selected_input.scene_record_size = FA18_SCENE_PROJECTION_SEED_RECORD_BYTES;
+    return fa18_render_flight_scene_pipeline(grid, &selected_input, page_renderer, result);
+}
+
 int fa18_run_parent_flight_scene_pipeline(void *context) {
     FA18ParentFlightScenePipelineContext *pipeline = context;
     if (!pipeline) return -1;

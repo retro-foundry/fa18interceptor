@@ -6,8 +6,7 @@ enum {
     SCENE_ROOT_Z_OFFSET = 0x1c,
     SCENE_TYPE_OFFSET = 0x62,
     SCENE_MATRIX_OFFSET = 0x92,
-    SCENE_MATRIX_WORDS = 9,
-    SCENE_PROJECTION_SEED_RECORD_BYTES = SCENE_MATRIX_OFFSET + SCENE_MATRIX_WORDS * 2
+    SCENE_MATRIX_WORDS = 9
 };
 
 static uint16_t read_be16(const uint8_t *bytes) {
@@ -37,7 +36,7 @@ static int32_t transform_row(const int16_t row[3], const int16_t seed[3]) {
 
 int fa18_decode_scene_projection_seed_record(const uint8_t *bytes, size_t size,
                                              FA18SceneProjectionSeedRecord *record) {
-    if (!bytes || !record || size < SCENE_PROJECTION_SEED_RECORD_BYTES) return -1;
+    if (!bytes || !record || size < FA18_SCENE_PROJECTION_SEED_RECORD_BYTES) return -1;
     record->root.x = read_be32(bytes + SCENE_ROOT_X_OFFSET);
     record->root.y = read_be32(bytes + SCENE_ROOT_Y_OFFSET);
     record->root.z = read_be32(bytes + SCENE_ROOT_Z_OFFSET);
