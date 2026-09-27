@@ -41,6 +41,24 @@ int main(void) {
     assert(fa18_prepare_projection_grid(&grid, -129, -6207, -6578, &setup) == 1);
     assert(fa18_prepare_projection_grid(0, -125, -6207, -6578, &setup) == -1);
 
+    table[4] = 0x01; table[5] = 0x00;
+    table[6] = 0x02; table[7] = 0x00;
+    table[8] = 0xff; table[9] = 0xf4;
+    memset(data + FA18_C279_PROJECTION_BOUNDS_OFFSET, 0,
+           FA18_C279_PROJECTION_BOUNDS_BYTES);
+    FA18ProjectionGridPreparedRecord prepared;
+    FA18ProjectionGridSetup record_setup = { 2, 3, 0, 0, 0, 3 };
+    data[FA18_C279_PROJECTION_BOUNDS_OFFSET + 65] = 1;
+    assert(fa18_prepare_projection_grid_record(&grid, &record_setup, 0, 0, &prepared) == 1);
+    assert(prepared.shifted_x == 0x0800 && prepared.shifted_y == 0x1000);
+    assert(prepared.kind == -12 && prepared.bound == 1);
+    data[FA18_C279_PROJECTION_BOUNDS_OFFSET + 65] = 2;
+    assert(fa18_prepare_projection_grid_record(&grid, &record_setup, 0, 0, &prepared) == 1);
+    assert(prepared.kind == 1 && prepared.bound == 2);
+    data[FA18_C279_PROJECTION_BOUNDS_OFFSET + 65] = 4;
+    assert(fa18_prepare_projection_grid_record(&grid, &record_setup, 0, 0, &prepared) == 0);
+    assert(fa18_prepare_projection_grid_record(&grid, &record_setup, 2, 0, &prepared) == -1);
+
     table[0] = 0; table[1] = 3;
     assert(fa18_load_projection_grid(&hunks, &grid) == -1);
     assert(fa18_load_projection_grid(0, &grid) == -1);

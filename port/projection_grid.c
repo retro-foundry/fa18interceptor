@@ -5,14 +5,18 @@
 int fa18_load_projection_grid(const FA18Hunks *hunks, FA18ProjectionGrid *grid) {
     if (!hunks || !grid || FA18_C279_PROJECTION_GRID_HUNK >= hunks->count) return -1;
     const FA18HunkSegment *segment = &hunks->segments[FA18_C279_PROJECTION_GRID_HUNK];
-    if (!segment->data || segment->size < FA18_C279_PROJECTION_GRID_OFFSET + 4u) return -1;
+    if (!segment->data || segment->size < FA18_C279_PROJECTION_GRID_OFFSET + 4u ||
+        FA18_C279_PROJECTION_BOUNDS_OFFSET + FA18_C279_PROJECTION_BOUNDS_BYTES >
+            FA18_C279_PROJECTION_GRID_OFFSET)
+        return -1;
     const uint8_t *data = segment->data + FA18_C279_PROJECTION_GRID_OFFSET;
     const uint16_t record_count = fa18_be16(data);
     const size_t records_size = (size_t)record_count * FA18_C279_PROJECTION_GRID_RECORD_BYTES;
     if (records_size > segment->size - FA18_C279_PROJECTION_GRID_OFFSET - 4u) return -1;
     grid->record_count = record_count;
-    grid->bounds_limit = fa18_be16(data + 2u);
+    grid->bounds_limit = (int16_t)fa18_be16(data + 2u);
     grid->records = data + 4u;
+    grid->bounds_table = segment->data + FA18_C279_PROJECTION_BOUNDS_OFFSET;
     return 0;
 }
 
@@ -44,4 +48,40 @@ int fa18_prepare_projection_grid(const FA18ProjectionGrid *grid,
     setup->scaled_input = (int16_t)((uint16_t)projection_input << 3);
     setup->coordinate_shift = 3;
     return 0;
+}
+
+static int16_t add_word(int16_t left, int16_t right) {
+    return (int16_t)((uint16_t)left + (uint16_t)right);
+}
+
+static int16_t absolute_word(int16_t value) {
+    return value < 0 ? (int16_t)(UINT16_C(0) - (uint16_t)value) : value;
+}
+
+int fa18_prepare_projection_grid_record(const FA18ProjectionGrid *grid,
+                                        const FA18ProjectionGridSetup *setup,
+                                        uint16_t record_index,
+                                        int16_t negative_kind_flag,
+                                        FA18ProjectionGridPreparedRecord *record) {
+    FA18ProjectionGridRecord source;
+    if (!grid || !setup || !record || !grid->bounds_table ||
+        setup->coordinate_shift != 3 ||
+        fa18_projection_grid_record(grid, record_index, &source) != 0)
+        return -1;
+    const int16_t x = add_word(source.x, setup->grid_x);
+    const int16_t y = add_word(source.y, setup->grid_y);
+    const int16_t x_bin = (int16_t)(absolute_word(x) >> 8);
+    const int16_t y_bin = (int16_t)(absolute_word(y) >> 8);
+    if (x_bin < 0 || y_bin < 0 || x_bin >= 32 || y_bin >= 32) return -1;
+    const int16_t bound = (int8_t)grid->bounds_table[(uint16_t)y_bin * 32u + (uint16_t)x_bin];
+    if (bound > setup->bounds_limit) return 0;
+
+    int16_t kind = source.kind;
+    if (kind < 0 && (negative_kind_flag != 0 || bound > 1))
+        kind = kind == -12 ? 1 : 2;
+    record->shifted_x = (int16_t)((uint16_t)x << setup->coordinate_shift);
+    record->shifted_y = (int16_t)((uint16_t)y << setup->coordinate_shift);
+    record->kind = kind;
+    record->bound = bound;
+    return 1;
 }

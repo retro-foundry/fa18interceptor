@@ -1237,3 +1237,8 @@ game loop.
   word-width `<< 3` input scale. The exercised run075 setup is checked as
   `(-125,-6207,-6578) -> (-63,-434,-1000)`. The separate `< -$80` branch
   remains a reported unmodeled result rather than a guessed fallback.
+- 2026-09-27: Ported `$C27B20-$C27B8E`'s static-grid record preparation.
+  The strict native target reads the original 1,024-byte `$C27D24` bounds
+  table from Hunk 25, applies the signed-word sum/absolute bins, preserves the
+  source's negative-kind gate, and emits the exact shifted pair inputs for the
+  later matrix stage. The pair projection and polygon submission remain open.

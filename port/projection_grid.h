@@ -7,14 +7,17 @@
 
 enum {
     FA18_C279_PROJECTION_GRID_HUNK = 25,
+    FA18_C279_PROJECTION_BOUNDS_OFFSET = 0x0354,
+    FA18_C279_PROJECTION_BOUNDS_BYTES = 0x0400,
     FA18_C279_PROJECTION_GRID_OFFSET = 0x0754,
     FA18_C279_PROJECTION_GRID_RECORD_BYTES = 6
 };
 
 typedef struct {
     uint16_t record_count;
-    uint16_t bounds_limit;
+    int16_t bounds_limit;
     const uint8_t *records;
+    const uint8_t *bounds_table;
 } FA18ProjectionGrid;
 
 typedef struct {
@@ -25,12 +28,19 @@ typedef struct {
 
 typedef struct {
     uint16_t record_count;
-    uint16_t bounds_limit;
+    int16_t bounds_limit;
     int16_t grid_x;
     int16_t grid_y;
     int16_t scaled_input;
     uint8_t coordinate_shift;
 } FA18ProjectionGridSetup;
+
+typedef struct {
+    int16_t shifted_x;
+    int16_t shifted_y;
+    int16_t kind;
+    int16_t bound;
+} FA18ProjectionGridPreparedRecord;
 
 /* `$C27A36-$C27ADA`: bind the `$C28124` table from original Hunk 25 data. */
 int fa18_load_projection_grid(const FA18Hunks *hunks, FA18ProjectionGrid *grid);
@@ -45,5 +55,15 @@ int fa18_prepare_projection_grid(const FA18ProjectionGrid *grid,
                                  int16_t projection_input,
                                  int16_t component_x, int16_t component_y,
                                  FA18ProjectionGridSetup *setup);
+
+/* `$C27B20-$C27B8E`: prepare one table record before the pair projection.
+ * `negative_kind_flag` is the source's `-$22(A6)` word, retained without a
+ * promoted semantic name. Returns one when prepared, zero when bounds-cull
+ * skips the record, or minus one outside this bounded native model. */
+int fa18_prepare_projection_grid_record(const FA18ProjectionGrid *grid,
+                                        const FA18ProjectionGridSetup *setup,
+                                        uint16_t record_index,
+                                        int16_t negative_kind_flag,
+                                        FA18ProjectionGridPreparedRecord *record);
 
 #endif
