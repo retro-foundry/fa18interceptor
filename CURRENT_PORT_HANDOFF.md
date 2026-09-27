@@ -261,6 +261,7 @@ Read these before wiring it into the runtime:
 
 - `analysis/routines/run075_frame392_cockpit_entry.md`
 - `analysis/routines/run075_c279d0_prepared_page_handoff.md`
+- `analysis/routines/run075_frame392_parent_update.md`
 
 The visible change at global frame 392 is not fresh page rendering.  A page
 was prepared at frame 384 by `$C279D0` from Hunk 25 records, while dynamic
