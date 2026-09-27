@@ -63,6 +63,11 @@ typedef struct {
     int16_t depth;
 } FA18ProjectionPairOutput;
 
+typedef struct {
+    int16_t x;
+    int16_t y;
+} FA18ProjectionPairScreenPoint;
+
 /* `$C27A36-$C27ADA`: bind the `$C28124` table from original Hunk 25 data. */
 int fa18_load_projection_grid(const FA18Hunks *hunks, FA18ProjectionGrid *grid);
 
@@ -94,5 +99,11 @@ int fa18_transform_projection_pair(const FA18ProjectionPairMatrix *matrix,
                                    const FA18ProjectionPairBase *base,
                                    const FA18ProjectionPairInput *input,
                                    FA18ProjectionPairOutput *output);
+
+/* `$C27BF2-$C27C4D`: cull and perspective-project one matrix result into the
+ * `$C4B392` pair-buffer coordinate system. Returns one when accepted, zero
+ * when the source culls it, or minus one outside the bounded DIVS model. */
+int fa18_project_projection_pair(const FA18ProjectionPairOutput *input,
+                                 FA18ProjectionPairScreenPoint *point);
 
 #endif

@@ -71,6 +71,15 @@ int main(void) {
     assert(projected.x == 1294 && projected.y == -985 && projected.depth == 3899);
     assert(fa18_transform_projection_pair(0, &base, &pair, &projected) == -1);
 
+    FA18ProjectionPairScreenPoint screen;
+    assert(fa18_project_projection_pair(&projected, &screen) == 1);
+    assert(screen.x == 106 && screen.y == 111);
+    projected.depth = 0;
+    assert(fa18_project_projection_pair(&projected, &screen) == 0);
+    projected.x = 101; projected.y = 0; projected.depth = 100;
+    assert(fa18_project_projection_pair(&projected, &screen) == 0);
+    assert(fa18_project_projection_pair(0, &screen) == -1);
+
     table[0] = 0; table[1] = 3;
     assert(fa18_load_projection_grid(&hunks, &grid) == -1);
     assert(fa18_load_projection_grid(0, &grid) == -1);

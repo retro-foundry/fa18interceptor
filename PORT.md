@@ -1249,3 +1249,9 @@ game loop.
   stops before the depth cull, perspective division, and `$C2FF48` polygon
   submission. The run075 global-frame-384 first pair contract is
   `(2355,7749) -> (1294,-985,3899)` with its captured matrix/base terms.
+- 2026-09-27: Ported the following `$C27BF2-$C27C4D` visibility and
+  perspective stage as `fa18_project_projection_pair`. It retains the signed
+  depth-frustum comparisons, `160/depth` and `90/depth` signed divisions, and
+  the source's final `319-x,179-y` pair-buffer orientation. The traced first
+  run075 pair is accepted as `(106,111)`; full record iteration, pair-source
+  lookup, and polygon submission remain separate.

@@ -117,3 +117,38 @@ int fa18_transform_projection_pair(const FA18ProjectionPairMatrix *matrix,
                                           input->x, input->y, base->depth);
     return 0;
 }
+
+static int16_t negate_word(int16_t value) {
+    return (int16_t)(UINT16_C(0) - (uint16_t)value);
+}
+
+static int divide_signed_long_by_word(int32_t dividend, int16_t divisor,
+                                      int16_t *quotient) {
+    if (!quotient || divisor == 0) return -1;
+    const int32_t value = dividend / divisor;
+    if (value < INT16_MIN || value > INT16_MAX) return -1;
+    *quotient = (int16_t)value;
+    return 0;
+}
+
+int fa18_project_projection_pair(const FA18ProjectionPairOutput *input,
+                                 FA18ProjectionPairScreenPoint *point) {
+    if (!input || !point) return -1;
+    const int16_t depth = input->depth;
+    if (depth <= 0 || input->x > depth || negate_word(input->x) > depth ||
+        input->y > depth || negate_word(input->y) > depth)
+        return 0;
+
+    int16_t projected_x;
+    int16_t projected_y;
+    if (divide_signed_long_by_word((int32_t)input->x * 160, depth, &projected_x) != 0 ||
+        divide_signed_long_by_word((int32_t)input->y * 90, depth, &projected_y) != 0)
+        return -1;
+    projected_x = add_word(projected_x, 160);
+    projected_y = add_word(projected_y, 90);
+    if (projected_x < 0 || projected_x >= 320 || projected_y < 0 || projected_y >= 180)
+        return 0;
+    point->x = negate_word(add_word(projected_x, -319));
+    point->y = negate_word(add_word(projected_y, -179));
+    return 1;
+}
