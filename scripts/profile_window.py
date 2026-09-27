@@ -29,10 +29,14 @@ def main():
     parser.add_argument('--playback', type=Path, required=True)
     parser.add_argument('--first-frame', type=int, required=True)
     parser.add_argument('--last-frame', type=int, required=True)
+    parser.add_argument('--frame-offset', type=int, default=0,
+                        help='Replay-frame label immediately before the first executed frame.')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
     args = parser.parse_args()
-    if args.first_frame < 1 or args.last_frame < args.first_frame:
+    first_executed_frame = args.frame_offset + 1
+    if (args.frame_offset < 0 or args.first_frame < first_executed_frame or
+            args.last_frame < args.first_frame):
         raise ValueError('Invalid frame interval')
     args.output.mkdir(parents=True, exist_ok=False)
     events = read_events(args.playback)
@@ -44,7 +48,7 @@ def main():
     start_profile = engine.bind('e9k_debug_profiler_start', None, C.c_int)
     stop_profile = engine.bind('e9k_debug_profiler_stop', None)
     next_profile = engine.bind('e9k_debug_profiler_stream_next', C.c_size_t, C.c_char_p, C.c_size_t)
-    for frame in range(1, args.last_frame + 1):
+    for frame in range(first_executed_frame, args.last_frame + 1):
         for kind, values in events.get(frame, []):
             engine.event(kind, values)
         if frame == args.first_frame:
@@ -60,6 +64,7 @@ def main():
     stop_profile()
     hits = {int(row['pc'], 16): {'samples': row['samples'], 'cycles': row['cycles']} for row in chunks}
     report = {'first_frame': args.first_frame, 'last_frame': args.last_frame,
+              'frame_offset': args.frame_offset,
               'recording': str(args.playback), 'hits': {f'{pc:06x}': value for pc, value in sorted(hits.items())},
               'count': len(hits)}
     (args.output / 'profile.json').write_text(json.dumps(report, indent=2) + '\n')

@@ -32,9 +32,35 @@ instruction trace advances debugger frames while stepping, so it is used for
 callee behavior and register evidence only; frame 392 pixel ownership still
 requires a normal replay trace around the first visible change.
 
+## Normal-frame renderer boundary
+
+The corrected normal-replay PC profiles distinguish the two adjacent host
+frames. They restore the canonical state after replay frame 200, deliver
+recorded input by global frame label, and profile exactly one subsequent
+frame:
+
+```text
+python scripts/profile_window.py --restore captures/run075/initial_state.bin \
+  --playback captures/run075/playback.e9k --first-frame 391 --last-frame 391 \
+  --frame-offset 200 --output build/run075_profile_391_offset
+python scripts/profile_window.py --restore captures/run075/initial_state.bin \
+  --playback captures/run075/playback.e9k --first-frame 392 --last-frame 392 \
+  --frame-offset 200 --output build/run075_profile_392_offset
+```
+
+The frame-392 profile newly samples `$C27B32-$C27C9A` and `$C2F68A`, while
+the frame-391-only profile instead includes `$C249…/$C24D…` and
+`$C302…/$C306…` paths. The `$C27B…` range is the observed `$C279D0`
+projection-to-polygon traversal: it transforms selected records, fills the
+`$C4B392-$C4B39D` screen-pair buffer, and submits through `$C2FF48`.
+`$C2F68A` is within the four-plane pixel primitive. This makes a renderer
+submission path a direct candidate for the first visible scene change, but
+does not yet identify the submitted records as terrain or assign the 361
+pixels to a particular primitive.
+
 ## Next port boundary
 
-Trace the normal frame-391/392 renderer and flight-state calls, then model the
-first cockpit or scene records as C structs. Do not add the flight model or
-advance the native frame gate until the frame-392 pixels and their input/state
-cause are accounted for.
+Trace the normal frame-392 `$C279D0 -> $C2FF48` submissions and their display
+writes, then model the first cockpit or scene records as C structs. Do not add
+the flight model or advance the native frame gate until the frame-392 pixels
+and their input/state cause are accounted for.
