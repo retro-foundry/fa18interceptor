@@ -136,6 +136,12 @@ static int write_chip_word(uint8_t *bytes, size_t count, uint32_t address,
     return 0;
 }
 
+/* OCS word DMA ignores pointer bit zero. A signed modulo can leave the raw
+ * row-end value odd, but the next row starts at the resolved even DMA address. */
+static uint32_t blitter_word_address(uint32_t pointer) {
+    return pointer & ~1u;
+}
+
 static uint16_t shifted_source_word(uint16_t previous, uint16_t current,
                                     uint8_t shift, int descending) {
     if (shift == 0u) return current;
@@ -180,64 +186,93 @@ int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
     extent = fa18_decode_blit_extent(operation->bltsize);
     if (!extent.width_words || !extent.height_rows || !use_d) return -1;
 
-    a = operation->bltapt;
-    b = operation->bltbpt;
-    c = operation->bltcpt;
-    d = operation->bltdpt;
-    previous_a = operation->bltadat;
-    previous_b = operation->bltbdat;
+    /* BLT?PTL accepts only address bits 1..15. Modulo arithmetic may later
+     * set bit zero internally; blitter_word_address() masks each DMA access. */
+    a = operation->bltapt & ~1u;
+    b = operation->bltbpt & ~1u;
+    c = operation->bltcpt & ~1u;
+    d = operation->bltdpt & ~1u;
+    /* The source starts both shifter history registers clear.  BLTADAT and
+     * BLTBDAT are the held values only when their DMA channels are absent. */
+    previous_a = 0;
+    previous_b = 0;
+    uint32_t pending_destination = 0;
+    uint16_t pending_result = 0;
+    int have_pending_destination = 0;
     for (uint16_t row = 0; row < extent.height_rows; ++row) {
         int fill_carry = (operation->bltcon1 & 0x0004u) != 0u;
         for (uint16_t column = 0; column < extent.width_words; ++column) {
             uint16_t raw_a = operation->bltadat;
             uint16_t raw_b = operation->bltbdat;
             uint16_t raw_c = operation->bltcdat;
-            uint16_t a_word, b_word, result, old_d;
+            uint16_t a_word, b_word, result;
             const uint16_t mask = column == 0 ? operation->bltafwm :
                                   column + 1u == extent.width_words ? operation->bltalwm :
                                   0xffffu;
-            if (use_a && read_chip_word(chip_bytes, chip_byte_count, a, &raw_a) != 0)
+            if (use_a && read_chip_word(chip_bytes, chip_byte_count,
+                                        blitter_word_address(a), &raw_a) != 0)
                 return -1;
-            if (use_b && read_chip_word(chip_bytes, chip_byte_count, b, &raw_b) != 0)
+            if (use_b && read_chip_word(chip_bytes, chip_byte_count,
+                                        blitter_word_address(b), &raw_b) != 0)
                 return -1;
-            if (use_c && read_chip_word(chip_bytes, chip_byte_count, c, &raw_c) != 0)
+            if (use_c && read_chip_word(chip_bytes, chip_byte_count,
+                                        blitter_word_address(c), &raw_c) != 0)
                 return -1;
+            raw_a = (uint16_t)(raw_a & mask);
             a_word = use_a ? shifted_source_word(previous_a, raw_a, shift_a, descending) : 0;
             b_word = use_b ? shifted_source_word(previous_b, raw_b, shift_b, descending) : 0;
+            /* D is a pipelined write: every source read for this word occurs
+             * before the preceding D result becomes visible. */
+            if (have_pending_destination &&
+                write_chip_word(chip_bytes, chip_byte_count,
+                                blitter_word_address(pending_destination),
+                                pending_result) != 0)
+                return -1;
             result = fa18_apply_blitter_minterm((uint8_t)operation->bltcon0,
                                                 a_word, b_word, raw_c);
             if (operation->bltcon1 & 0x0018u)
                 result = apply_ocs_fill(result, (operation->bltcon1 & 0x0008u) != 0u,
                                         &fill_carry);
-            if (read_chip_word(chip_bytes, chip_byte_count, d, &old_d) != 0)
-                return -1;
-            if (write_chip_word(chip_bytes, chip_byte_count, d,
-                                (uint16_t)((old_d & (uint16_t)~mask) |
-                                           (result & mask))) != 0)
-                return -1;
+            pending_destination = d;
+            pending_result = result;
+            have_pending_destination = 1;
             previous_a = raw_a;
             previous_b = raw_b;
-            if (use_a) a = (uint32_t)((int64_t)a + (descending ? -2 : 2));
-            if (use_b) b = (uint32_t)((int64_t)b + (descending ? -2 : 2));
-            if (use_c) c = (uint32_t)((int64_t)c + (descending ? -2 : 2));
-            d = (uint32_t)((int64_t)d + (descending ? -2 : 2));
+            /* The final word access remains at its address while the modulo
+             * is applied. The run036 $0486 DMA trace reads $76CE as row
+             * one's last word, then begins row two at $76B0 after $001D. */
+            if (column + 1u < extent.width_words) {
+                if (use_a) a = (uint32_t)((int64_t)a + (descending ? -2 : 2));
+                if (use_b) b = (uint32_t)((int64_t)b + (descending ? -2 : 2));
+                if (use_c) c = (uint32_t)((int64_t)c + (descending ? -2 : 2));
+                d = (uint32_t)((int64_t)d + (descending ? -2 : 2));
+            }
         }
-        if (use_a) a = (uint32_t)((int64_t)a +
-                                   (descending ? -(int16_t)operation->bltamod :
-                                                 (int16_t)operation->bltamod));
-        if (use_b) b = (uint32_t)((int64_t)b +
-                                   (descending ? -(int16_t)operation->bltbmod :
-                                                 (int16_t)operation->bltbmod));
-        if (use_c) c = (uint32_t)((int64_t)c +
-                                   (descending ? -(int16_t)operation->bltcmod :
-                                                 (int16_t)operation->bltcmod));
-        d = (uint32_t)((int64_t)d + (descending ? -(int16_t)operation->bltdmod :
-                                                (int16_t)operation->bltdmod));
+        if (use_a)
+            a = blitter_word_address((uint32_t)((int64_t)a +
+                (descending ? -(int16_t)operation->bltamod :
+                              (int16_t)operation->bltamod)));
+        if (use_b)
+            b = blitter_word_address((uint32_t)((int64_t)b +
+                (descending ? -(int16_t)operation->bltbmod :
+                              (int16_t)operation->bltbmod)));
+        if (use_c)
+            c = blitter_word_address((uint32_t)((int64_t)c +
+                (descending ? -(int16_t)operation->bltcmod :
+                              (int16_t)operation->bltcmod)));
+        d = blitter_word_address((uint32_t)((int64_t)d +
+            (descending ? -(int16_t)operation->bltdmod :
+                          (int16_t)operation->bltdmod)));
     }
+    if (have_pending_destination &&
+        write_chip_word(chip_bytes, chip_byte_count,
+                        blitter_word_address(pending_destination),
+                        pending_result) != 0)
+        return -1;
     return 0;
 }
 
-int fa18_execute_ocs_line_blit(const FA18BlitOperation *operation,
+int fa18_execute_ocs_line_blit(FA18BlitOperation *operation,
                                uint8_t *chip_bytes, size_t chip_byte_count) {
     FA18BlitExtent extent;
     uint32_t a, b, c, d;
@@ -249,16 +284,22 @@ int fa18_execute_ocs_line_blit(const FA18BlitOperation *operation,
         (operation->bltcon0 & 0x0200u) == 0u) return -1;
     extent = fa18_decode_blit_extent(operation->bltsize);
     if (!extent.width_words || !extent.height_rows) return -1;
-    a = operation->bltapt;
-    b = operation->bltbpt;
-    c = operation->bltcpt;
-    d = operation->bltdpt;
+    /* `$C30668` may carry an odd pre-write destination (run036 has `$74C7`),
+     * but BLTCPTL/BLTDPTL retain it as `$74C6` after their `$fffe` mask. */
+    a = operation->bltapt & ~1u;
+    b = operation->bltbpt & ~1u;
+    c = operation->bltcpt & ~1u;
+    d = operation->bltdpt & ~1u;
     con0 = operation->bltcon0;
     con1 = operation->bltcon1;
-    bline = operation->bltbdat;
+    { const uint8_t initial_bshift = (uint8_t)(con1 >> 12);
+      bline = (uint16_t)((operation->bltbdat >> initial_bshift) |
+                         (operation->bltbdat << ((16u - initial_bshift) & 15u))); }
 
     for (uint16_t row = 0; row < extent.height_rows; ++row) {
-        const int sign = ((int16_t)a) < 0;
+        /* The initial direction comes from the inherited BLTSIGN latch;
+         * later rows refresh it after BLTAPT has advanced. */
+        const int sign = (con1 & 0x0040u) != 0u;
         const int single = (con1 & 0x0002u) != 0u;
         const int sud = (con1 & 0x0010u) != 0u;
         const int sul = (con1 & 0x0008u) != 0u;
@@ -266,19 +307,28 @@ int fa18_execute_ocs_line_blit(const FA18BlitOperation *operation,
         const uint8_t shift = (uint8_t)(con0 >> 12);
         uint16_t a_data = operation->bltadat;
         uint16_t a_hold;
-        uint16_t b_hold = 0;
+        uint16_t b_hold;
         uint16_t result;
         int moved_y = 0;
+        /* Status selects the single-dot write before the C pointer steps.
+         * A subsequent vertical step clears the latch for the next row. */
+        const int write_pixel = !single || !one_dot;
+        one_dot = 1;
 
         if (con0 & 0x0800u)
             a = (uint32_t)((int64_t)a + (sign ? (int16_t)operation->bltbmod :
                                                 (int16_t)operation->bltamod));
         if (extent.width_words > 1u && (con0 & 0x0400u)) {
-            if (read_chip_word(chip_bytes, chip_byte_count, b, &bline) != 0) return -1;
+            if (read_chip_word(chip_bytes, chip_byte_count,
+                               blitter_word_address(b), &bline) != 0) return -1;
             b = (uint32_t)((int64_t)b + (int16_t)operation->bltbmod);
-            b_hold = (bline & 1u) ? 0xffffu : 0u;
         }
-        if (read_chip_word(chip_bytes, chip_byte_count, c, &c_data) != 0) return -1;
+        /* Line mode consumes the rotating BLTBDAT bitstream regardless of
+         * BLTCHB. `$C306A0` explicitly seeds it with $FFFF while B DMA is
+         * disabled for the run036 polygon edges. */
+        b_hold = (bline & 1u) ? 0xffffu : 0u;
+        if (read_chip_word(chip_bytes, chip_byte_count,
+                           blitter_word_address(c), &c_data) != 0) return -1;
         a_hold = (uint16_t)((a_data & operation->bltafwm) >> shift);
         result = fa18_apply_blitter_minterm((uint8_t)con0, a_hold, b_hold, c_data);
 
@@ -317,13 +367,20 @@ int fa18_execute_ocs_line_blit(const FA18BlitOperation *operation,
         con1 = (uint16_t)((con1 & (uint16_t)~0x0040u) | ((((int16_t)a) < 0) ? 0x0040u : 0u));
         { const uint8_t bshift = (uint8_t)(((con1 >> 12) + 15u) & 15u);
           con1 = (uint16_t)((con1 & 0x0fffu) | ((uint16_t)bshift << 12));
-          bline = (uint16_t)((bline >> bshift) | (bline << ((16u - bshift) & 15u))); }
-        if (!single || !one_dot) {
-            if (write_chip_word(chip_bytes, chip_byte_count, d, result) != 0) return -1;
+          bline = (uint16_t)((operation->bltbdat >> bshift) |
+                             (operation->bltbdat << ((16u - bshift) & 15u))); }
+        if (write_pixel) {
+            if (write_chip_word(chip_bytes, chip_byte_count,
+                                blitter_word_address(d), result) != 0) return -1;
         }
-        one_dot = 1;
         d = c;
     }
+    operation->bltapt = a;
+    operation->bltbpt = b;
+    operation->bltcpt = c;
+    operation->bltdpt = d;
+    operation->bltcon0 = con0;
+    operation->bltcon1 = con1;
     return 0;
 }
 

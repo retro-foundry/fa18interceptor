@@ -3,8 +3,11 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: use `git log --oneline -1` for the current committed port stage.
-- Working tree: only untracked `.vscode/` (user-owned; leave it alone).
+- Head: `9a35a2e0 Match traced polygon blit rounding`.
+- Working tree contains an uncommitted run036 polygon-blitter stage:
+  `port/CMakeLists.txt`, `port/blit_job.c`, `port/blit_job.h`,
+  `port/blit_job_contract_test.c`, and new `port/run036_polygon_oracle_test.c`.
+  User-owned untracked `.vscode/` remains untouched; do not discard these changes.
 - Goal: complete the faithful C port, committing each coherent, validated stage.
 
 The current native reference check reaches **192 exact frames**: global frames
@@ -42,6 +45,62 @@ The corrected `$C30634-$C30638` bounded-limit helper preserves the source's
 post-ASR carry rounding, producing the original second job's `$0C02` size.
 The next stage remains the inherited line/fill/lane diagnostic described in
 `analysis/routines/run036_c2ff48_area_blit_oracle.md`.
+## Current uncommitted polygon diagnostic
+The standalone run036 oracle accepts external pre- and post-call Chip images.
+It reproduces the four C306AE lines, the C303EC fill, and C304F4/C304B2 lane jobs
+without embedding captured data or affecting normal replay.
+Current result: 184 differing bytes; native changes 118 bytes while the original changes 110.
+This improved from 195 after correcting BLTSING latch order.
+The remaining mismatch is line-mode per-row state/math.
+The source C30668 submitter waits for DMACONR busy clear, so per-job execution is correct.
+The focused blit contract passes; rerun full serial gates before committing.
+`$C302E6-$C30404` explicitly reloads the later fill job's C pointer with
+`$FFFFFFFF`; the diagnostic now preserves that register image rather than
+using the C pointer advanced by the final line job.  This does not change the
+184-byte result because that `$09F0` job has C disabled.  Full serial gates
+pass: 116/116 contracts and 192 exact native frames (200--391); frame 392
+still first differs by 361 pixels.
+The isolated no-future-input trace now stops at `$C303D2`, immediately after
+the four line jobs: its 32-byte Chip delta matches the native line executor
+exactly.  The key correction is the pinned custom-register `$FFFE` mask on
+the low C/D pointer words (the trace-time `$74C7` submission executes at
+`$74C6`).  The remaining run036 final-page mismatch is downstream in the
+descending `$09F0/$000A` fill and lane sequence; do not reopen the line-mode
+math without a new line-stage difference.
+`build/run036_7000_before_desc_fill_trigger/` stops at `$C30404`, immediately
+before the source `move.w D7,BLTSIZE` trigger.  It is the valid isolated fill
+input: the preceding `$C303D2-$C303E0` busy-wait has settled the line jobs,
+and `$C303EC-$C30402` has written the exact `$09F0/$000A` A/D/C/data image.
+`fa18_run036_polygon_oracle_test --fill-only PRE_TRIGGER POST_FILL` now
+compares that input to `build/run036_7000_after_desc_fill_settled/`, whose
+`$C3049E` stop is the following `$C30466` helper's pre-lane wait exit.
+The former 147-byte fill difference was traced to pointer handling, not a
+hybrid fill direction. `build/run036_7000_dma_fill_window.json` captures the
+ordinary frame-7000 DMA stream, including `$7400-$7700`. At vpos 186/hpos 86
+it records the exact `$C30404` submission (`BLTCON0=$09F0`,
+`BLTCON1=$000A`, A/D=`$76D8`, C=`$FFFFFFFF`, size=`$0486`). The following DMA
+reads and writes are all even-addressed while the signed `$001D` modulus leaves
+the internal pointers odd between rows. Therefore retain the raw pointer for
+arithmetic, but mask bit zero at every OCS DMA word access. The block and line
+executors now do so, with a synthetic odd-modulus contract test. The crucial
+row-end rule is that the final word remains at its address for the modulo, and
+the next row begins at the resulting even DMA address; do not retain an odd
+pointer into the next row. The isolated fill is byte exact: zero differing
+bytes and 105 changed bytes on each side.
+
+The complete bounded run036 `$C2FF48` producer is now byte exact as well.
+`fa18_run036_polygon_oracle_test PRE_CALL POST_CALL` replays the four
+`$C30668` line jobs, `$C30404` descending fill, both `$C30466` lane copies,
+and `$C304B2`, with zero differing bytes and the expected 110-byte pre-call
+delta against `build/run036_7000_c2ff48_submission_trace_no_future/`.
+`--post-lines` independently starts at the external settled-line checkpoint
+and reaches its final image with zero differences. The lane reconstruction
+must retain the final fill's A/B/D `$001D` modulos: the source lane leaves do
+not rewrite them. This is still a diagnostic-only Chip-RAM producer; normal
+`game.c` neither owns an OCS-address-to-five-plane-page binding nor schedules
+the source scene/root state that calls it. Normal replay remains exactly 192
+frames (200--391), with frame 392 still the first mismatch. The early
+`$C2FF56` return remains invalid because blitter work is active.
 
 The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
 starts from external frame-384 pre-call state, then runs the native

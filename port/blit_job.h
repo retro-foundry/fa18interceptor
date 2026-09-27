@@ -90,7 +90,7 @@ int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
 /* Synchronous OCS line-mode execution of one BLTSIZE trigger.  This is the
  * register-state model used by `$C306AE`; it intentionally has no geometric
  * triangle API. */
-int fa18_execute_ocs_line_blit(const FA18BlitOperation *operation,
+int fa18_execute_ocs_line_blit(FA18BlitOperation *operation,
                                uint8_t *chip_bytes, size_t chip_byte_count);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);

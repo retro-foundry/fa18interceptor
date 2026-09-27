@@ -42,7 +42,14 @@ def main() -> None:
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--narrow', action='store_true',
                    help='export only blitter registers and active page records')
+    p.add_argument('--address-start', type=lambda text: int(text, 0),
+                   help='include DMA records at or above this 24-bit address')
+    p.add_argument('--address-end', type=lambda text: int(text, 0),
+                   help='include DMA records below this 24-bit address')
     args = p.parse_args()
+    if (args.address_start is None) != (args.address_end is None) or \
+       (args.address_start is not None and args.address_start >= args.address_end):
+        p.error('--address-start and --address-end must be supplied as one nonempty range')
     events = read_events(args.playback)
     engine = Engine((ROOT / 'local/fa18.uae').resolve(), args.output.parent / 'saves')
     try:
@@ -67,7 +74,10 @@ def main() -> None:
         rows = C.cast(view.contents.records, C.POINTER(Record * info.recordCount)).contents
         selected = []
         for i, r in enumerate(rows):
-            narrow_match = ((0xC304B0 <= r.addr <= 0xC30500) or
+            requested_address_match = (args.address_start is not None and
+                                       args.address_start <= r.addr < args.address_end)
+            narrow_match = (requested_address_match or
+                            (0xC304B0 <= r.addr <= 0xC30500) or
                             (0xDFF040 <= r.addr <= 0xDFF076) or
                             (0x12BC0 <= r.addr < 0x1A8C0) or
                             r.addr in (0x76EE, 0x14266, 0x12BC0, 0x10026, 0x37))
@@ -83,6 +93,8 @@ def main() -> None:
                   'frame_number': info.frameNumber,
                   'record_count': info.recordCount, 'record_size': C.sizeof(Record),
                   'dma_mode': 6, 'visible': [view.contents.visibleWidth, view.contents.visibleHeight],
+                  'address_window': ([args.address_start, args.address_end]
+                                     if args.address_start is not None else None),
                   'selected_records': selected}
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')

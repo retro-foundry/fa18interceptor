@@ -64,16 +64,54 @@ int main(void) {
     };
     assert(fa18_execute_ocs_block_blit(&operation, chip, sizeof chip) == 0);
     assert(chip[0] == 0xff && chip[1] == 0xff);
+    /* Odd signed moduli retain the internal low bit, but each OCS word DMA
+     * access is even-addressed. This is the row transition recorded after
+     * the run036 $C30404 descending-fill trigger. */
+    memset(chip, 0, sizeof chip);
+    chip[0x10] = 0x00; chip[0x11] = 0x80;
+    chip[0x0e] = 0x00; chip[0x0f] = 0x40;
+    operation = (FA18BlitOperation){
+        .bltcon0 = 0x09f0u, .bltcon1 = 0x000au,
+        .bltafwm = 0xffffu, .bltalwm = 0xffffu,
+        .bltamod = 1, .bltdmod = 1,
+        .bltapt = 0x10u, .bltdpt = 0x10u, .bltsize = 0x0081u
+    };
+    assert(fa18_execute_ocs_block_blit(&operation, chip, sizeof chip) == 0);
+    assert(chip[0x10] == 0xff && chip[0x11] == 0x80);
+    assert(chip[0x0e] == 0xff && chip[0x0f] == 0xc0);
     memset(chip, 0, sizeof chip);
     operation = (FA18BlitOperation){
         .bltcon0 = 0x0bdau, .bltcon1 = 0x0001u,
         .bltafwm = 0xffffu, .bltalwm = 0xffffu,
-        .bltadat = 0x8000u, .bltcmod = 2,
+        .bltadat = 0x8000u, .bltbdat = 0xffffu, .bltcmod = 2,
         .bltcpt = 0, .bltdpt = 0, .bltsize = 0x0082u
     };
     assert(fa18_execute_ocs_line_blit(&operation, chip, sizeof chip) == 0);
     assert(chip[0] == 0x80 && chip[1] == 0x00);
     assert(chip[2] == 0x40 && chip[3] == 0x00);
+    /* In line single-dot mode, a vertical C step clears the one-dot latch
+     * after status selection, making the following row write again. */
+    memset(chip, 0, sizeof chip);
+    operation = (FA18BlitOperation){
+        .bltcon0 = 0x0bdau, .bltcon1 = 0x0013u,
+        .bltafwm = 0xffffu, .bltalwm = 0xffffu,
+        .bltadat = 0x8000u, .bltcmod = 2,
+        .bltcpt = 0, .bltdpt = 0, .bltsize = 0x0082u
+    };
+    assert(fa18_execute_ocs_line_blit(&operation, chip, sizeof chip) == 0);
+    assert(chip[0] != 0 || chip[1] != 0);
+    assert(chip[2] != 0 || chip[3] != 0);
+    /* BLTCPTL/BLTDPTL clear address bit zero on register writes. */
+    memset(chip, 0, sizeof chip);
+    operation = (FA18BlitOperation){
+        .bltcon0 = 0x9b4au, .bltcon1 = 0x0013u,
+        .bltafwm = 0xffffu, .bltalwm = 0xffffu,
+        .bltadat = 0x8000u, .bltbdat = 0xffffu, .bltcmod = 2,
+        .bltcpt = 1u, .bltdpt = 1u, .bltsize = 0x0042u
+    };
+    assert(fa18_execute_ocs_line_blit(&operation, chip, sizeof chip) == 0);
+    assert(chip[0] != 0 || chip[1] != 0);
+    assert(chip[2] == 0 && chip[3] == 0);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&

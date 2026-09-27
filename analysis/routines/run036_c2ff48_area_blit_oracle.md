@@ -109,13 +109,16 @@ the whole bounded call, but it cannot be assigned solely to a `$C30668` job:
 the trace contains the subsequent lane-stage blits and the individual DMA
 completion boundaries were not captured.
 
-## Port boundary
+## Completed bounded producer and remaining integration boundary
 
-Do not connect a generic triangle filler to `FA18FlightRendererPage` from
-this evidence.  The next native implementation must model the actual OCS
-line-mode and descending exclusive-fill semantics, followed by the observed
-lane copies, then compare its complete run036 diagnostic page delta to the
-110-byte oracle above.  `fa18_execute_ocs_block_blit` is useful only for the
-later `$C30466/$C304B2` block jobs; it must reject the line/fill control words
-rather than misrendering them.  The live owner that supplies these fields and
-selects the active display page is still outside the normal `game.c` path.
+`fa18_run036_polygon_oracle_test` now replays the four line jobs, the
+descending fill, both `$C30466` copies, and `$C304B2` from the external
+pre-call Chip image. It matches the captured return image byte-for-byte:
+zero differing bytes and the 110-byte delta above. Its `--fill-only` and
+`--post-lines` modes independently prove the fill and lane tail checkpoints.
+
+Do not connect a generic triangle filler to `FA18FlightRendererPage`. The
+remaining work is a source-owned OCS-address-to-five-plane-page binding and
+the scene/root scheduler that chooses the render and display pages. Those
+owners remain outside normal `game.c`; the oracle never provides captured page
+content to the executable.
