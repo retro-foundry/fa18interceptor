@@ -184,6 +184,12 @@ shift, and its selector-word construction. The unresolved `$C25876` call is a
 required caller callback, so no submission behavior is guessed. `ctest`
 passes **104/104** tests with the same native frame result.
 
+`port/alternate_flight_scale.{c,h}` now ports `$C1CEA4-$C1CEE3`: direct
+tuple scaling, the bit-4 `$C1D0B6` component-accumulation path, and their
+word/long packet publication. The bit-6 `$C1D0A4` entry is retained as a
+required callback because its `$C48184` helper body is not yet bounded.
+`ctest` passes **105/105** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
