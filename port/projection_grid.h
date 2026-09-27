@@ -115,6 +115,12 @@ int fa18_transform_projection_pair(const FA18ProjectionPairMatrix *matrix,
                                    const FA18ProjectionPairInput *input,
                                    FA18ProjectionPairOutput *output);
 
+/* `$C27AF4-$C27B1E`: derive the D1/D5/D7 pair bases from the scaled grid
+ * input and middle `$C45BD8` matrix column. */
+int fa18_prepare_projection_pair_base(const FA18ProjectionPairMatrix *matrix,
+                                      int16_t scaled_input,
+                                      FA18ProjectionPairBase *base);
+
 /* `$C27BF2-$C27C4D`: cull and perspective-project one matrix result into the
  * `$C4B392` pair-buffer coordinate system. Returns one when accepted, zero
  * when the source culls it, or minus one outside the bounded DIVS model. */

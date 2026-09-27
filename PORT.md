@@ -1262,3 +1262,8 @@ game loop.
   captured `$C2870C` source `(43,-43),(-43,-43),(0,32)` projects to
   `(106,111),(109,111),(108,111)`. Record iteration and renderer submission
   remain unconnected.
+- 2026-09-27: Ported `$C27AF4-$C27B1E`'s matrix-base derivation as
+  `fa18_prepare_projection_pair_base`. It uses the original grid setup's
+  scaled input and matrix words 1, 4, and 7, retaining signed multiply and
+  arithmetic shift behavior. The frame-384 input `-1000` yields the observed
+  base `(0,-985,0)` from `$C45BD8`.

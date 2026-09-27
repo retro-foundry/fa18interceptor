@@ -95,6 +95,10 @@ static int16_t matrix_pair_component(int16_t first_coefficient,
     return (int16_t)(uint16_t)(arithmetic_shift_right_8(sum) + (uint16_t)base);
 }
 
+static int16_t multiply_word_shift_8(int16_t left, int16_t right) {
+    return (int16_t)arithmetic_shift_right_8(multiply_word_bits(left, right));
+}
+
 int fa18_prepare_projection_grid_record(const FA18ProjectionGrid *grid,
                                         const FA18ProjectionGridSetup *setup,
                                         uint16_t record_index,
@@ -134,6 +138,16 @@ int fa18_transform_projection_pair(const FA18ProjectionPairMatrix *matrix,
                                       input->x, input->y, base->y);
     output->depth = matrix_pair_component(matrix->words[6], matrix->words[8],
                                           input->x, input->y, base->depth);
+    return 0;
+}
+
+int fa18_prepare_projection_pair_base(const FA18ProjectionPairMatrix *matrix,
+                                      int16_t scaled_input,
+                                      FA18ProjectionPairBase *base) {
+    if (!matrix || !base) return -1;
+    base->x = multiply_word_shift_8(matrix->words[1], scaled_input);
+    base->y = multiply_word_shift_8(matrix->words[4], scaled_input);
+    base->depth = multiply_word_shift_8(matrix->words[7], scaled_input);
     return 0;
 }
 

@@ -78,7 +78,10 @@ int main(void) {
     FA18ProjectionPairMatrix matrix = {
         { 167, 0, -8, 0, 252, 0, 6, 0, 127 }
     };
-    FA18ProjectionPairBase base = { 0, -985, 0 };
+    FA18ProjectionPairBase base;
+    assert(fa18_prepare_projection_pair_base(&matrix, -1000, &base) == 0);
+    assert(base.x == 0 && base.y == -985 && base.depth == 0);
+    assert(fa18_prepare_projection_pair_base(0, -1000, &base) == -1);
     FA18ProjectionPairInput pair = { 2355, 7749 };
     FA18ProjectionPairOutput projected;
     assert(fa18_transform_projection_pair(&matrix, &base, &pair, &projected) == 0);
