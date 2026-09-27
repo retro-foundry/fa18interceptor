@@ -75,3 +75,10 @@ does not identify the record class's scene meaning.
 and selected-record byte `+3` bit 0. An index mismatch, nonzero context, or
 clear bit reaches `$C25D5E`; equal indices with clear context and the bit set
 fall through to the still-unported `$C25D40` continuation.
+
+## conditional selector call
+
+`$C25D5E-$C25D85` tests selected-record `+$20` bit 1, class byte `+$62` high
+nibble `$10`, and header byte `+0` bit 4. Only clear/set/set respectively
+calls `$C13D84`; all outcomes then reach `$C25D86`. The selector retains its
+separate established record-selection semantics.

@@ -128,6 +128,11 @@ native frame result.
 `+3` bit 0 routes to `$C25D5E`; the all-clear case leaves `$C25D40` explicit.
 `ctest` passes **96/96** tests with the same native frame result.
 
+`port/indexed_record_selector_gate.{c,h}` now ports `$C25D5E-$C25D85`:
+selected-record `+$20` bit 1 clear, class `+$62` high nibble `$10`, and header
+bit 4 set invoke caller-owned `$C13D84`; all outcomes continue to `$C25D86`.
+`ctest` passes **97/97** tests with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
