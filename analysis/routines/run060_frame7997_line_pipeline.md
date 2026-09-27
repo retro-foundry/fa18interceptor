@@ -30,6 +30,13 @@ already present in the line pipeline when the new C read is recorded. The
 terminal D value is also generated after the final line stage, so it cannot be
 modeled as a simple one element shift of the captured C array.
 
+Engine9000's `actually_do_blit()` explains the ordering: with `hblitsize=2`,
+each iteration reads B and C, computes the first minterm, advances the line
+state, writes the pending D value, and then computes the terminal minterm that
+feeds the following iteration. The first D is therefore the submission's
+pending line value at start, followed by values produced by the preceding
+iteration's terminal stage.
+
 The native packet keeps the captured D stream as an explicit oracle until the
 cycle ordering is implemented. It carries the B source and pipeline state as
 semantic fields and does not recreate the Amiga address space.
