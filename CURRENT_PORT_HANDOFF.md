@@ -157,6 +157,10 @@ prefix feeds its chosen offset directly into the already-portable placement
 record loop. Tables, descriptor lookup, and descriptor consumer behavior stay
 caller-owned. `ctest` remains **98/98** with the same native frame result.
 
+`fa18_run_parent_flight_placement_stage` exposes that composed placement
+stage in the callback shape used by the `$C1CB14/$C1CB26` parent-update slots;
+its caller still selects the source entry variant through the stage input.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

@@ -86,6 +86,15 @@ typedef struct {
 int fa18_run_scene_placement_stage(const FA18ScenePlacementStageInput *input,
                                    FA18ScenePlacementStageResult *result);
 
+/* Adapter for either `$C1CB14` or `$C1CB26` callback slot in the parent
+ * update. The caller selects the source entry through `select_alternate_table`. */
+typedef struct {
+    const FA18ScenePlacementStageInput *input;
+    FA18ScenePlacementStageResult *result;
+} FA18ParentFlightPlacementStageContext;
+
+int fa18_run_parent_flight_placement_stage(void *context);
+
 /* Decode one big-endian runtime record. */
 int fa18_decode_scene_placement_record(const uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
                                        FA18ScenePlacementRecord *record);

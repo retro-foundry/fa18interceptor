@@ -61,3 +61,7 @@ saturation). The placement table and lookup ownership remain external.
 `fa18_run_scene_placement_stage` now composes this selector state with the
 existing `$C1CB74-$C1CCB9` traversal, retaining the descriptor lookup and
 consumer as caller-owned native boundaries.
+
+The same composition is available as the typed parent-update callback
+`fa18_run_parent_flight_placement_stage`; it does not infer which of the two
+source entries a caller should schedule.
