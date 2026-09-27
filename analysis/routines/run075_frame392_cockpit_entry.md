@@ -127,6 +127,13 @@ alternate page. The polygon contexts and source records remain unclassified:
 these coordinates are not sufficient to call the staged image terrain,
 cockpit art, or a complete scene.
 
+The frame-384 entry carries `A5=$C3B5B6`. That same static context is observed
+in an independent demonstration-flight descriptor-to-polygon path and in
+separated M-map captures, where it is explicitly retained as a repeated
+component of unknown world semantics. The current `$C279D0` traversal does
+not join that context to its mutable `$C28128` record stream, so it is
+corroborating renderer context—not a basis for naming the first page terrain.
+
 ## Next port boundary
 
 Trace the display-state/Copper path selecting or revealing the five-plane
