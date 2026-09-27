@@ -9,7 +9,7 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **86/86** tests.
+pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **115/115** tests.
 
 ## Non-negotiable porting rules
 
@@ -246,6 +246,14 @@ native frame result.
 and component normalization, the `$C1D974` table magnitude, source scale-loop
 and DIVU-overflow register behavior, signed result shifts, and word-width
 negation. `ctest` passes **114/114** tests with the same native frame result.
+
+`port/scene_active_record.{c,h}` now models the `$C1C54E-$C1C564` active
+record binding: the signed `$C458DE.w` offset applied to the caller-owned
+`$C46184` record-store base, with a bounded raw-record view for its immediate
+consumer. The frame-392 trace observes offset zero, but no captured record is
+in native code. `ctest` passes **115/115** tests with the same native frame
+result. This is a data binding only; it does not schedule or present a flight
+scene.
 
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
