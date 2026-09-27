@@ -1255,3 +1255,10 @@ game loop.
   the source's final `319-x,179-y` pair-buffer orientation. The traced first
   run075 pair is accepted as `(106,111)`; full record iteration, pair-source
   lookup, and polygon submission remain separate.
+- 2026-09-27: Bound `$C279D0`'s three static negative-kind pair sources from
+  Hunk 25 (`$C286DC`, `$C286F4`, `$C2870C`) and ported the exact three-pair
+  batch before `$C2FF48`. `fa18_project_projection_triangle` applies the
+  shifted grid translation, matrix, and perspective stages atomically: the
+  captured `$C2870C` source `(43,-43),(-43,-43),(0,32)` projects to
+  `(106,111),(109,111),(108,111)`. Record iteration and renderer submission
+  remain unconnected.

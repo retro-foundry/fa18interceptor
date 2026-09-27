@@ -4,7 +4,8 @@
 #include <string.h>
 
 int main(void) {
-    uint8_t data[FA18_C279_PROJECTION_GRID_OFFSET + 16] = { 0 };
+    uint8_t data[FA18_C279_PROJECTION_PAIR_SOURCE_20_OFFSET +
+                 FA18_C279_PROJECTION_PAIR_SOURCE_BYTES] = { 0 };
     FA18HunkSegment segments[26];
     memset(segments, 0, sizeof segments);
     segments[FA18_C279_PROJECTION_GRID_HUNK].data = data;
@@ -22,6 +23,13 @@ int main(void) {
     table[10] = 0x01; table[11] = 0x60;
     table[12] = 0x05; table[13] = 0x80;
     table[14] = 0xff; table[15] = 0xf0;
+    uint8_t *pairs_20 = data + FA18_C279_PROJECTION_PAIR_SOURCE_20_OFFSET;
+    pairs_20[0] = 0; pairs_20[1] = 43;
+    pairs_20[2] = 0xff; pairs_20[3] = 0xd5;
+    pairs_20[4] = 0xff; pairs_20[5] = 0xd5;
+    pairs_20[6] = 0xff; pairs_20[7] = 0xd5;
+    pairs_20[8] = 0; pairs_20[9] = 0;
+    pairs_20[10] = 0; pairs_20[11] = 32;
 
     assert(fa18_load_projection_grid(&hunks, &grid) == 0);
     assert(grid.record_count == 2);
@@ -32,6 +40,12 @@ int main(void) {
     assert(record.x == 0x0160 && record.y == 0x0580 && record.kind == -16);
     assert(fa18_projection_grid_record(&grid, 2, &record) == -1);
     assert(fa18_projection_grid_record(&grid, 0, 0) == -1);
+    FA18ProjectionPairInput source_pairs[3];
+    assert(fa18_projection_grid_pair_source(&grid, -20, source_pairs) == 0);
+    assert(source_pairs[0].x == 43 && source_pairs[0].y == -43);
+    assert(source_pairs[1].x == -43 && source_pairs[1].y == -43);
+    assert(source_pairs[2].x == 0 && source_pairs[2].y == 32);
+    assert(fa18_projection_grid_pair_source(&grid, -8, source_pairs) == -1);
 
     FA18ProjectionGridSetup setup = { 0 };
     assert(fa18_prepare_projection_grid(&grid, -125, -6207, -6578, &setup) == 0);
@@ -80,7 +94,18 @@ int main(void) {
     assert(fa18_project_projection_pair(&projected, &screen) == 0);
     assert(fa18_project_projection_pair(0, &screen) == -1);
 
-    table[0] = 0; table[1] = 3;
+    FA18ProjectionGridPreparedRecord translation = { 2312, 7792, -20, 0 };
+    FA18ProjectionTriangle triangle;
+    assert(fa18_project_projection_triangle(&matrix, &base, &translation,
+                                             source_pairs, &triangle) == 1);
+    assert(triangle.points[0].x == 106 && triangle.points[0].y == 111);
+    assert(triangle.points[1].x == 109 && triangle.points[1].y == 111);
+    assert(triangle.points[2].x == 108 && triangle.points[2].y == 111);
+    source_pairs[0].x = 32767;
+    assert(fa18_project_projection_triangle(&matrix, &base, &translation,
+                                             source_pairs, &triangle) == 0);
+
+    table[0] = 0xff; table[1] = 0xff;
     assert(fa18_load_projection_grid(&hunks, &grid) == -1);
     assert(fa18_load_projection_grid(0, &grid) == -1);
     return 0;

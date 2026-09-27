@@ -5,7 +5,10 @@
 int fa18_load_projection_grid(const FA18Hunks *hunks, FA18ProjectionGrid *grid) {
     if (!hunks || !grid || FA18_C279_PROJECTION_GRID_HUNK >= hunks->count) return -1;
     const FA18HunkSegment *segment = &hunks->segments[FA18_C279_PROJECTION_GRID_HUNK];
-    if (!segment->data || segment->size < FA18_C279_PROJECTION_GRID_OFFSET + 4u ||
+    if (!segment->data ||
+        segment->size < FA18_C279_PROJECTION_PAIR_SOURCE_20_OFFSET +
+                            FA18_C279_PROJECTION_PAIR_SOURCE_BYTES ||
+        segment->size < FA18_C279_PROJECTION_GRID_OFFSET + 4u ||
         FA18_C279_PROJECTION_BOUNDS_OFFSET + FA18_C279_PROJECTION_BOUNDS_BYTES >
             FA18_C279_PROJECTION_GRID_OFFSET)
         return -1;
@@ -17,6 +20,22 @@ int fa18_load_projection_grid(const FA18Hunks *hunks, FA18ProjectionGrid *grid) 
     grid->bounds_limit = (int16_t)fa18_be16(data + 2u);
     grid->records = data + 4u;
     grid->bounds_table = segment->data + FA18_C279_PROJECTION_BOUNDS_OFFSET;
+    grid->pair_sources[0] = segment->data + FA18_C279_PROJECTION_PAIR_SOURCE_12_OFFSET;
+    grid->pair_sources[1] = segment->data + FA18_C279_PROJECTION_PAIR_SOURCE_16_OFFSET;
+    grid->pair_sources[2] = segment->data + FA18_C279_PROJECTION_PAIR_SOURCE_20_OFFSET;
+    return 0;
+}
+
+int fa18_projection_grid_pair_source(const FA18ProjectionGrid *grid, int16_t kind,
+                                     FA18ProjectionPairInput pairs[3]) {
+    if (!grid || !pairs || kind > -12 || kind < -20 || (kind & 3) != 0) return -1;
+    const uint16_t source_index = (uint16_t)((-kind - 12) / 4);
+    const uint8_t *source = grid->pair_sources[source_index];
+    if (!source) return -1;
+    for (uint16_t index = 0; index < 3; ++index) {
+        pairs[index].x = (int16_t)fa18_be16(source + (size_t)index * 4u);
+        pairs[index].y = (int16_t)fa18_be16(source + (size_t)index * 4u + 2u);
+    }
     return 0;
 }
 
@@ -150,5 +169,28 @@ int fa18_project_projection_pair(const FA18ProjectionPairOutput *input,
         return 0;
     point->x = negate_word(add_word(projected_x, -319));
     point->y = negate_word(add_word(projected_y, -179));
+    return 1;
+}
+
+int fa18_project_projection_triangle(const FA18ProjectionPairMatrix *matrix,
+                                     const FA18ProjectionPairBase *base,
+                                     const FA18ProjectionGridPreparedRecord *translation,
+                                     const FA18ProjectionPairInput pairs[3],
+                                     FA18ProjectionTriangle *triangle) {
+    if (!matrix || !base || !translation || !pairs || !triangle) return -1;
+    FA18ProjectionTriangle projected = { 0 };
+    for (uint16_t index = 0; index < 3; ++index) {
+        FA18ProjectionPairInput translated = {
+            add_word(pairs[index].x, translation->shifted_x),
+            add_word(pairs[index].y, translation->shifted_y)
+        };
+        FA18ProjectionPairOutput transformed;
+        if (fa18_transform_projection_pair(matrix, base, &translated, &transformed) != 0)
+            return -1;
+        const int status = fa18_project_projection_pair(&transformed,
+                                                         &projected.points[index]);
+        if (status != 1) return status;
+    }
+    *triangle = projected;
     return 1;
 }
