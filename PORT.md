@@ -1225,3 +1225,9 @@ game loop.
   four lanes. The native target contains no recorded frame data. Source record
   decoding, the five-plane page presentation, and the original update cadence
   still need to be connected before this primitive can advance frame 273.
+- 2026-09-27: Bound `$C279D0`'s static projection-grid input directly from
+  the runtime-loaded original executable: CODE Hunk 25, offset `$754`
+  (`$C28124` at the original runtime base). `FA18ProjectionGrid` validates its
+  96 three-word records and exposes bounded signed record access. The game
+  initialisation now requires this original-data binding; it does not yet
+  execute the projection loop or infer terrain identity for its records.

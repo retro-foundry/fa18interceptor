@@ -9,6 +9,7 @@
 #include "menu_flow.h"
 #include "menu_record.h"
 #include "menu_render.h"
+#include "projection_grid.h"
 #include "replay.h"
 #include "video.h"
 
@@ -16,6 +17,7 @@
 typedef struct {
     FA18Disk disk;
     FA18Hunks exe;
+    FA18ProjectionGrid projection_grid;
     FA18Video video;
     FA18MenuTextState menu_text;
     FA18MenuFlow menu_flow;

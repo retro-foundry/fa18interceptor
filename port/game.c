@@ -21,6 +21,12 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
         fa18_disk_close(&game->disk);
         return 0;
     }
+    if (fa18_load_projection_grid(&game->exe, &game->projection_grid) != 0) {
+        fputs("Cannot load the C279 projection grid\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
     if (fa18_menu_queue_top_level_text(&game->menu_text) != 0) {
         fputs("Cannot initialize the top-level menu text queue\n", stderr);
         fa18_hunks_free(&game->exe);
