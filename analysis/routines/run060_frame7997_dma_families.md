@@ -20,6 +20,12 @@ display destinations. The other plane submissions use related `BLTCON0`
 values, preserving this family shape while changing the line direction,
 extent, or destination plane.
 
+The DMA records for these two instances repeatedly report the same destination
+word during the 13 line iterations. The C/D event stream therefore represents
+pipeline writes to one final word, rather than thirteen adjacent words. The
+native oracle must compare the final word at each destination after executing
+the recurrence.
+
 ## Port contract
 
 Represent this as a semantic line packet containing the line recurrence fields,
