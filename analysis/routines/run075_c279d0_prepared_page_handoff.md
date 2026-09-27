@@ -44,3 +44,9 @@ The trace also proves that this must be data-driven: the top-level call arrives
 with unrelated register values, then the packet forms its own inputs from the
 published workspace. The frame-384 values above are an oracle for integration
 tests, not constants permitted in the runtime path.
+
+The native port now exposes this exact bounded composition through
+`fa18_render_flight_scene_pipeline`: caller-owned selected record bytes and
+live matrix decode/publish the packet, then the existing Hunk-25 traversal
+submits through a caller-initialized five-plane renderer. It deliberately does
+not choose the record, matrix, render page, display page, or call cadence.

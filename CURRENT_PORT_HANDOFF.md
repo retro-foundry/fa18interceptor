@@ -133,6 +133,14 @@ selected-record `+$20` bit 1 clear, class `+$62` high nibble `$10`, and header
 bit 4 set invoke caller-owned `$C13D84`; all outcomes continue to `$C25D86`.
 `ctest` passes **97/97** tests with the same native frame result.
 
+`port/flight_scene_pipeline.{c,h}` now composes the evidenced data path from
+decoded `$C1C54E` selected-record fields through packet publication and the
+bounded Hunk-25 `$C279D0` grid traversal into an initialized five-plane page
+renderer. Record selection, live matrix ownership, page selection, Copper
+presentation, and scheduler timing are required caller inputs rather than
+guessed runtime behavior. `ctest` passes **98/98** tests with the same native
+frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
