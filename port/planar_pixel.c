@@ -58,8 +58,6 @@ static uint8_t updated_lanes(uint8_t previous, const FA18PlanarPixelState *state
     const uint8_t mode = (uint8_t)(state->draw_mode & 15u);
     const uint8_t target = table == FA18_PLANAR_PIXEL_PRIMARY && mode > 1u
         ? (uint8_t)(mode - 1u) : mode;
-    if (table == FA18_PLANAR_PIXEL_PRIMARY && mode == 1u)
-        return (uint8_t)(previous ^ active_lanes);
     return (uint8_t)((previous & (uint8_t)~active_lanes) | (target & active_lanes));
 }
 

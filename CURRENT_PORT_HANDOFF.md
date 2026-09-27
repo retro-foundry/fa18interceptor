@@ -20,6 +20,11 @@ replay, and does not advance the 192-frame parity result. It is a visibility
 diagnostic only, not a native scene renderer or completion of the frame-392
 producer.
 
+`port/planar_pixel.c` now preserves the `$C2F786` primary dispatch-table gap:
+selector 1 enters `$C2F83A` (lane-0 set), not the adjacent `$C2F830` all-XOR
+helper that is absent from the table. Its focused contract passes; normal
+replay remains 192 exact frames through global frame 391.
+
 ## Non-negotiable porting rules
 
 - The Amiga source/disassembly and extracted assets are the authority.  Do not

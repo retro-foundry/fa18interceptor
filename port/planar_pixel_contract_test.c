@@ -58,7 +58,15 @@ int main(void) {
     assert(fa18_submit_primary_renderer_pixel(&video, &state, 100, 125) == 0);
     assert(video.pixels[125 * FA18_WIDTH + 100] == 10);
 
+    /* `$C2F786[1]` is `$C2F83A`, the lane-0-set handler. The adjacent
+     * `$C2F830` all-XOR helper is not a dispatch-table entry. */
     memset(&video, 0, sizeof video);
+    state = (FA18PlanarPixelState){ 1, 15, -1, 0 };
+    assert(fa18_submit_primary_renderer_pixel(&video, &state, 100, 125) == 0);
+    assert(video.pixels[125 * FA18_WIDTH + 100] == 1);
+
+    memset(&video, 0, sizeof video);
+    state = (FA18PlanarPixelState){ 11, 15, -1, 0 };
     assert(fa18_submit_alternate_renderer_pixel(&video, &state, 172, 99) == 0);
     assert(video.pixels[99 * FA18_WIDTH + 171] == 11);
     assert(video.pixels[99 * FA18_WIDTH + 172] == 11);

@@ -72,7 +72,9 @@ int fa18_apply_planar_pixel_mask_to_page(FA18PlanarPixelPage *page,
                                          const FA18PlanarPixelState *state,
                                          FA18PlanarPixelTable table, int x, int y);
 
-/* `$C2F5F4-$C2F609`: select the primary one-word mask/handler tables. */
+/* `$C2F5F4-$C2F609`: select the primary one-word mask/handler tables. The
+ * `$C2F830` all-XOR helper lies between table targets and is not selected by
+ * this dispatch table. */
 int fa18_submit_primary_renderer_pixel(FA18Video *video,
                                        const FA18PlanarPixelState *state,
                                        int16_t x, int16_t y);
