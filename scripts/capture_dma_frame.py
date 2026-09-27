@@ -71,7 +71,8 @@ def main() -> None:
             if narrow_match or (not args.narrow and r.type != 0):
                 selected.append({'index': i, 'hpos': r.hpos, 'vpos': r.vpos, 'reg': f'{r.reg:04X}',
                                  'dat': f'{r.dat:X}', 'size': r.size, 'addr': f'{r.addr:06X}',
-                                 'evt': r.evt, 'evt2': r.evt2, 'evtdata': r.evtdata,
+                                 'evt': r.evt, 'evt2': r.evt2, 'evtdata': r.evtdata, 'cf_reg': f'{r.cf_reg:04X}',
+                                 'cf_dat': f'{r.cf_dat:X}', 'cf_addr': f'{r.cf_addr:06X}',
                                  'type': r.type, 'extra': r.extra})
         report = {'frame_requested': args.frame, 'frame_number': info.frameNumber,
                   'record_count': info.recordCount, 'record_size': C.sizeof(Record),
