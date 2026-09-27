@@ -109,9 +109,16 @@ int main(void) {
     assert(fa18_run_scene_placement_stage(&stage_input, &stage_result) == 0);
     assert(depth_index == 2 && stage_result.selector.comparison_word == 0xfd00 &&
            stage_result.traversal.accepted_count == 1 && fixture.calls == 1);
-    FA18ParentFlightPlacementStageContext callback = {&stage_input, &stage_result};
+    FA18ParentFlightPlacementStageContext callback = {
+        &stage_input, &stage_result, FA18_PARENT_FLIGHT_PLACEMENT_PRIMARY_ENTRY
+    };
     assert(fa18_run_parent_flight_placement_stage(&callback) == 0 &&
            stage_result.traversal.accepted_count == 1);
+    callback.entry = FA18_PARENT_FLIGHT_PLACEMENT_ALTERNATE_ENTRY;
+    stage_input.alternate_table = records;
+    stage_input.alternate_size = sizeof records;
+    assert(fa18_run_parent_flight_placement_stage(&callback) == 0 &&
+           stage_result.selector.use_alternate_table);
     assert(fa18_run_scene_placement_stage(0, &stage_result) == -1);
     return 0;
 }

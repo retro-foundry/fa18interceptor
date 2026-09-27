@@ -86,11 +86,17 @@ typedef struct {
 int fa18_run_scene_placement_stage(const FA18ScenePlacementStageInput *input,
                                    FA18ScenePlacementStageResult *result);
 
+typedef enum {
+    FA18_PARENT_FLIGHT_PLACEMENT_PRIMARY_ENTRY,
+    FA18_PARENT_FLIGHT_PLACEMENT_ALTERNATE_ENTRY
+} FA18ParentFlightPlacementEntry;
+
 /* Adapter for either `$C1CB14` or `$C1CB26` callback slot in the parent
- * update. The caller selects the source entry through `select_alternate_table`. */
+ * update. The entry selects the source's fixed primary/alternate path. */
 typedef struct {
     const FA18ScenePlacementStageInput *input;
     FA18ScenePlacementStageResult *result;
+    FA18ParentFlightPlacementEntry entry;
 } FA18ParentFlightPlacementStageContext;
 
 int fa18_run_parent_flight_placement_stage(void *context);

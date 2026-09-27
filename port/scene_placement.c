@@ -53,8 +53,15 @@ int fa18_run_scene_placement_stage(const FA18ScenePlacementStageInput *input,
 
 int fa18_run_parent_flight_placement_stage(void *context) {
     FA18ParentFlightPlacementStageContext *stage = context;
-    if (!stage) return -1;
-    return fa18_run_scene_placement_stage(stage->input, stage->result);
+    FA18ScenePlacementStageInput input;
+    if (!stage || !stage->input ||
+        (stage->entry != FA18_PARENT_FLIGHT_PLACEMENT_PRIMARY_ENTRY &&
+         stage->entry != FA18_PARENT_FLIGHT_PLACEMENT_ALTERNATE_ENTRY))
+        return -1;
+    input = *stage->input;
+    input.select_alternate_table =
+        stage->entry == FA18_PARENT_FLIGHT_PLACEMENT_ALTERNATE_ENTRY;
+    return fa18_run_scene_placement_stage(&input, stage->result);
 }
 
 int fa18_decode_scene_placement_record(const uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
