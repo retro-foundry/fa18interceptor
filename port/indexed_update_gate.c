@@ -10,9 +10,13 @@ int fa18_select_indexed_update_gate(uint16_t selected_record_index,
 
 int fa18_run_indexed_update_gate(uint16_t selected_record_index,
                                  uint8_t stride_state_flag,
+                                 uint8_t postflight_flag,
                                  FA18IndexedUpdateGateRoute *route) {
     if (fa18_select_indexed_update_gate(selected_record_index, route) != 0) return -1;
     if (selected_record_index == 0 && stride_state_flag)
         *route = FA18_INDEXED_UPDATE_ZERO_INDEX_RETURN;
+    else if (selected_record_index == 0)
+        *route = postflight_flag ? FA18_INDEXED_UPDATE_ZERO_INDEX_POSTFLIGHT :
+            FA18_INDEXED_UPDATE_ZERO_INDEX_NORMAL;
     return 0;
 }
