@@ -1143,3 +1143,9 @@ game loop.
   the helper-call effects, callback execution, descriptor lookup, glyph layout,
   and rendering are deliberately separate and remain unported. The new queue
   contract validates both branches of the direct latch store.
+- 2026-09-27: Ported the positive `$C32D24` selector route. The native menu
+  now resolves each queued selector against the executable's own `$C3ED0A`
+  relative-word table (CODE hunk 64), retaining the descriptor payload,
+  layout offset, attribute, and layout index. Negative-selector handling is a
+  distinct original path and remains explicitly absent; this change does not
+  draw the resolved text.

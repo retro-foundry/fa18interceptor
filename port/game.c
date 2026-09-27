@@ -27,6 +27,15 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
         fa18_disk_close(&game->disk);
         return 0;
     }
+    for (size_t i = 0; i + 1 < game->menu_text.selector_count; ++i) {
+        if (fa18_menu_select_message_record(&game->exe, game->menu_text.selectors[i],
+                                            &game->menu_records[i]) != 0) {
+            fputs("Cannot resolve a top-level menu text record\n", stderr);
+            fa18_hunks_free(&game->exe);
+            fa18_disk_close(&game->disk);
+            return 0;
+        }
+    }
     game->frame = START_FRAME;
     return 1;
 }
