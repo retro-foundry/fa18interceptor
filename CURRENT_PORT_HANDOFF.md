@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: `c262d136 Port indexed update zero routes`
+- Head: use `git log --oneline -1` for the current committed port stage.
 - Working tree: only untracked `.vscode/` (user-owned; leave it alone).
 - Goal: complete the faithful C port, committing each coherent, validated stage.
 
@@ -168,10 +168,14 @@ route explicit. `ctest` passes **99/99** tests with the same native frame
 result.
 
 `port/flight_followup_pipeline.{c,h}` now composes the bounded positive
-`$C1CCBC-$C1CE37` path: selector record, magnitude, shift, and descriptor
-dispatch. Its record/table/fixed-point/descriptor operations remain caller
-bound, and the nonpositive `$C1CE38` route remains explicit. `ctest` passes
-**103/103** tests with the same native frame result.
+`$C1CCBC-$C1CE37` path (selector record, magnitude, shift, and descriptor
+dispatch) and its proven nonpositive `$C1CE38` handoff. On that handoff it
+uses the caller-owned `$C459B0` alternate-list offset to prepare one
+`$C4F6CA` descriptor record, reporting prepared, skipped, and terminator
+outcomes separately. The later scaling, record-loop, and indirect-handler
+stages remain explicit. Record/table/fixed-point/descriptor operations remain
+caller bound. `ctest` passes **103/103** tests with the same native frame
+result.
 
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
