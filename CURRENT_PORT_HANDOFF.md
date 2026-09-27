@@ -57,7 +57,19 @@ The newly-portable transformation pieces include:
 scene/root transform, projection-grid submission, five-plane page, or
 viewport/Copper presentation needed for the flight scene.
 
-## The next implementation target
+## Completed matrix-product projection stage
+
+`port/matrix_product_projection.{c,h}` now ports `$C2ECC6-$C2ED6B` for the
+validated-tuple path.  The focused contract covers run041's accepted tuple,
+project-limit rejection, both source clamps, the negative-`D7` return, and
+68000 `DIVS.W` zero-divisor/quotient-overflow faults.  It deliberately returns
+an explicit unported-continuation result for every nonnegative-`D7` child
+route rather than inventing a child call.
+
+`ctest` passes **87/87** tests.  The native reference result remains **192
+exact frames** (200 through 391) with the same first mismatch at frame 392.
+
+## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
 `analysis/routines/c2ecc6_matrix_product_projection.md` and source in
@@ -87,6 +99,14 @@ negative D7 route:       ends at D7=-1, returns projected x
 
 Add focused contract tests (including rejection and clamping), add the source
 to CMake and `fa18_port`, then run the standard checks and commit the stage.
+
+## Next implementation boundary
+
+Do not integrate this standalone matrix projection into `game.c` until the
+scene/root transform publisher and renderer scheduling path are evidenced.
+Use the frame-392 display-state/Copper evidence below to identify the native
+owner that supplies the projection packet and matrix, then connect the proven
+data flow without frame-number gates.
 
 ## Frame-392 evidence and integration boundary
 
