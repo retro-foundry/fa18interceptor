@@ -10,6 +10,7 @@ int main(void) {
     FA18MapPacketCoordinateSetupResult result;
     assert(fa18_prepare_map_packet_coordinate_setup(&input, &result) == 0);
     assert(result.origin_component == (int16_t)0xa998 && result.row_min == 5 &&
+           result.local_x == 0x1122 && result.local_y == (int16_t)0x99aa &&
            result.column_min == 13 && result.coordinate_x == INT32_C(0x33440005) &&
            result.coordinate_y == (int32_t)UINT32_C(0xbbcc000d));
 

@@ -33,6 +33,8 @@ int fa18_prepare_map_packet_coordinate_setup(
 
     uint32_t coordinate_x = swap_words((uint32_t)component[0]);
     uint32_t coordinate_y = swap_words((uint32_t)component[2]);
+    result->local_x = (int16_t)coordinate_x;
+    result->local_y = (int16_t)coordinate_y;
     coordinate_x = lsr_word(coordinate_x, input->coordinate_bin_shift);
     coordinate_y = lsr_word(coordinate_y, input->coordinate_bin_shift);
     if (!input->alternate_layout) {

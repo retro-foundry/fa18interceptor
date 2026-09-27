@@ -13,6 +13,8 @@ typedef struct {
 
 typedef struct {
     int16_t origin_component;
+    int16_t local_x;
+    int16_t local_y;
     int16_t row_min;
     int16_t column_min;
     int32_t coordinate_x;
