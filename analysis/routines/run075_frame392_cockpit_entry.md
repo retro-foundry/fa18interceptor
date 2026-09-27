@@ -97,6 +97,11 @@ the alternate page. The `$C07F00` object's exact Copper/palette ownership is
 still unassigned, so this proves the page-staging presentation path without
 claiming a decoded Copper list.
 
+The adjacent `$C1AA9C` 32-word RGB4 palette bank remains byte-identical for
+global frames 201--392. That excludes a mutation of this observed palette bank
+as the frame-392 trigger; it does not exclude a distinct Copper-controlled
+palette source until `$C07F00` is decoded.
+
 ## Next port boundary
 
 Trace the display-state/Copper path selecting or revealing the five-plane
