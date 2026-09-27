@@ -29,14 +29,13 @@ area path needs true inherited blitter channels and word/shift/modulo
 semantics; it does not authorize a generic filled-triangle substitute or
 normal `game.c` scheduling.
 
-`port/blit_job.c` now has the bounded `fa18_execute_ocs_block_blit` primitive
-for the later lane-copy portion.  It executes only OCS block submissions over
-caller-owned Chip bytes (A/B/C enables, shifts, masks, signed modulos, and
-descending progression); line/fill state deliberately returns an error.  The
-run036 Custom-register stream now proves that the preceding four `$C306AE`
-jobs are line-mode and `$C30404` is descending exclusive fill, so they remain
-the next implementation boundary.  This is not attached to a flight page
-yet.
+`port/blit_job.c` now has bounded synchronous OCS execution primitives:
+`fa18_execute_ocs_block_blit` covers block and exclusive/inclusive fill state,
+while `fa18_execute_ocs_line_blit` ports the line-mode register progression
+used by `$C306AE`.  Both operate only on caller-owned Chip bytes; focused
+contracts cover shift, fill, and line progression.  They are not attached to
+a flight page yet: the next stage is a run036 diagnostic that applies the
+complete traced line/fill/lane sequence and compares its page delta.
 
 The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
 starts from external frame-384 pre-call state, then runs the native

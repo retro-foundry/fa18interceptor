@@ -1,6 +1,7 @@
 #include "blit_job.h"
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
 int main(void) {
     FA18AreaFillPacket fill;
     assert(fa18_build_run060_frame7991_area_fill(&fill) == 0);
@@ -54,6 +55,25 @@ int main(void) {
     assert(chip[10] == 0xa0 && chip[11] == 0x01);
     operation.bltcon1 = 0x0001u;
     assert(fa18_execute_ocs_block_blit(&operation, chip, sizeof chip) == -1);
+    memset(chip, 0, sizeof chip);
+    chip[0] = 0x00; chip[1] = 0x01;
+    operation = (FA18BlitOperation){
+        .bltcon0 = 0x03aau, .bltcon1 = 0x000au,
+        .bltafwm = 0xffffu, .bltalwm = 0xffffu,
+        .bltcpt = 0, .bltdpt = 0, .bltsize = 0x0041u
+    };
+    assert(fa18_execute_ocs_block_blit(&operation, chip, sizeof chip) == 0);
+    assert(chip[0] == 0xff && chip[1] == 0xff);
+    memset(chip, 0, sizeof chip);
+    operation = (FA18BlitOperation){
+        .bltcon0 = 0x0bdau, .bltcon1 = 0x0001u,
+        .bltafwm = 0xffffu, .bltalwm = 0xffffu,
+        .bltadat = 0x8000u, .bltcmod = 2,
+        .bltcpt = 0, .bltdpt = 0, .bltsize = 0x0082u
+    };
+    assert(fa18_execute_ocs_line_blit(&operation, chip, sizeof chip) == 0);
+    assert(chip[0] == 0x80 && chip[1] == 0x00);
+    assert(chip[2] == 0x40 && chip[3] == 0x00);
     FA18DisplayBlitPacket transition[3];
     assert(fa18_build_run075_frame559_blit_packets(transition) == 0);
     assert(transition[0].control_a == 0x8aea &&

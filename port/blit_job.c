@@ -146,6 +146,22 @@ static uint16_t shifted_source_word(uint16_t previous, uint16_t current,
                       (uint16_t)(previous << (16u - shift)));
 }
 
+/* Exact low-to-high bit walk used by the pinned Engine9000/UAE
+ * `build_blitfilltable()`.  BLTCON1 carries the initial fill carry in bit 2,
+ * and bit 3 selects inclusive rather than exclusive fill. */
+static uint16_t apply_ocs_fill(uint16_t value, int inclusive, int *carry) {
+    uint16_t output = value;
+    for (unsigned bit = 0; bit < 16; ++bit) {
+        const uint16_t mask = (uint16_t)(1u << bit);
+        if (*carry) {
+            if (inclusive) output = (uint16_t)(output | mask);
+            else output = (uint16_t)(output ^ mask);
+        }
+        if (value & mask) *carry = !*carry;
+    }
+    return output;
+}
+
 int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
                                 uint8_t *chip_bytes, size_t chip_byte_count) {
     FA18BlitExtent extent;
@@ -159,7 +175,7 @@ int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
     const int use_d = operation && (operation->bltcon0 & 0x0100u) != 0u;
     const int descending = operation && (operation->bltcon1 & 0x0002u) != 0u;
 
-    if (!operation || !chip_bytes || (operation->bltcon1 & 0x0019u) != 0u)
+    if (!operation || !chip_bytes || (operation->bltcon1 & 0x0001u) != 0u)
         return -1;
     extent = fa18_decode_blit_extent(operation->bltsize);
     if (!extent.width_words || !extent.height_rows || !use_d) return -1;
@@ -171,10 +187,11 @@ int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
     previous_a = operation->bltadat;
     previous_b = operation->bltbdat;
     for (uint16_t row = 0; row < extent.height_rows; ++row) {
+        int fill_carry = (operation->bltcon1 & 0x0004u) != 0u;
         for (uint16_t column = 0; column < extent.width_words; ++column) {
             uint16_t raw_a = operation->bltadat;
             uint16_t raw_b = operation->bltbdat;
-            uint16_t raw_c = 0;
+            uint16_t raw_c = operation->bltcdat;
             uint16_t a_word, b_word, result, old_d;
             const uint16_t mask = column == 0 ? operation->bltafwm :
                                   column + 1u == extent.width_words ? operation->bltalwm :
@@ -189,6 +206,9 @@ int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
             b_word = use_b ? shifted_source_word(previous_b, raw_b, shift_b, descending) : 0;
             result = fa18_apply_blitter_minterm((uint8_t)operation->bltcon0,
                                                 a_word, b_word, raw_c);
+            if (operation->bltcon1 & 0x0018u)
+                result = apply_ocs_fill(result, (operation->bltcon1 & 0x0008u) != 0u,
+                                        &fill_carry);
             if (read_chip_word(chip_bytes, chip_byte_count, d, &old_d) != 0)
                 return -1;
             if (write_chip_word(chip_bytes, chip_byte_count, d,
@@ -213,6 +233,96 @@ int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
                                                  (int16_t)operation->bltcmod));
         d = (uint32_t)((int64_t)d + (descending ? -(int16_t)operation->bltdmod :
                                                 (int16_t)operation->bltdmod));
+    }
+    return 0;
+}
+
+int fa18_execute_ocs_line_blit(const FA18BlitOperation *operation,
+                               uint8_t *chip_bytes, size_t chip_byte_count) {
+    FA18BlitExtent extent;
+    uint32_t a, b, c, d;
+    uint16_t con0, con1, bline;
+    uint16_t c_data = 0;
+    int one_dot = 0;
+
+    if (!operation || !chip_bytes || (operation->bltcon1 & 0x0001u) == 0u ||
+        (operation->bltcon0 & 0x0200u) == 0u) return -1;
+    extent = fa18_decode_blit_extent(operation->bltsize);
+    if (!extent.width_words || !extent.height_rows) return -1;
+    a = operation->bltapt;
+    b = operation->bltbpt;
+    c = operation->bltcpt;
+    d = operation->bltdpt;
+    con0 = operation->bltcon0;
+    con1 = operation->bltcon1;
+    bline = operation->bltbdat;
+
+    for (uint16_t row = 0; row < extent.height_rows; ++row) {
+        const int sign = ((int16_t)a) < 0;
+        const int single = (con1 & 0x0002u) != 0u;
+        const int sud = (con1 & 0x0010u) != 0u;
+        const int sul = (con1 & 0x0008u) != 0u;
+        const int aul = (con1 & 0x0004u) != 0u;
+        const uint8_t shift = (uint8_t)(con0 >> 12);
+        uint16_t a_data = operation->bltadat;
+        uint16_t a_hold;
+        uint16_t b_hold = 0;
+        uint16_t result;
+        int moved_y = 0;
+
+        if (con0 & 0x0800u)
+            a = (uint32_t)((int64_t)a + (sign ? (int16_t)operation->bltbmod :
+                                                (int16_t)operation->bltamod));
+        if (extent.width_words > 1u && (con0 & 0x0400u)) {
+            if (read_chip_word(chip_bytes, chip_byte_count, b, &bline) != 0) return -1;
+            b = (uint32_t)((int64_t)b + (int16_t)operation->bltbmod);
+            b_hold = (bline & 1u) ? 0xffffu : 0u;
+        }
+        if (read_chip_word(chip_bytes, chip_byte_count, c, &c_data) != 0) return -1;
+        a_hold = (uint16_t)((a_data & operation->bltafwm) >> shift);
+        result = fa18_apply_blitter_minterm((uint8_t)con0, a_hold, b_hold, c_data);
+
+        if (!sign) {
+            if (!sud) {
+                if (sul) {
+                    if (shift == 0u) c -= 2u;
+                    con0 = (uint16_t)((con0 & 0x0fffu) | ((uint16_t)((shift + 15u) & 15u) << 12));
+                } else {
+                    if (shift == 15u) c += 2u;
+                    con0 = (uint16_t)((con0 & 0x0fffu) | ((uint16_t)((shift + 1u) & 15u) << 12));
+                }
+            }
+        }
+        if (sud) {
+            if (aul) {
+                if (shift == 0u) c -= 2u;
+                con0 = (uint16_t)((con0 & 0x0fffu) | ((uint16_t)((shift + 15u) & 15u) << 12));
+            } else {
+                if (shift == 15u) c += 2u;
+                con0 = (uint16_t)((con0 & 0x0fffu) | ((uint16_t)((shift + 1u) & 15u) << 12));
+            }
+        }
+        if (!sign && sud) {
+            c = (uint32_t)((int64_t)c + (sul ? -(int16_t)operation->bltcmod :
+                                             (int16_t)operation->bltcmod));
+            moved_y = 1;
+        }
+        if (!sud) {
+            c = (uint32_t)((int64_t)c + (aul ? -(int16_t)operation->bltcmod :
+                                             (int16_t)operation->bltcmod));
+            moved_y = 1;
+        }
+        if (moved_y) one_dot = 0;
+
+        con1 = (uint16_t)((con1 & (uint16_t)~0x0040u) | ((((int16_t)a) < 0) ? 0x0040u : 0u));
+        { const uint8_t bshift = (uint8_t)(((con1 >> 12) + 15u) & 15u);
+          con1 = (uint16_t)((con1 & 0x0fffu) | ((uint16_t)bshift << 12));
+          bline = (uint16_t)((bline >> bshift) | (bline << ((16u - bshift) & 15u))); }
+        if (!single || !one_dot) {
+            if (write_chip_word(chip_bytes, chip_byte_count, d, result) != 0) return -1;
+        }
+        one_dot = 1;
+        d = c;
     }
     return 0;
 }
