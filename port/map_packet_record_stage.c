@@ -3,7 +3,8 @@
 int fa18_run_map_packet_record_stage(
     const FA18MapPacketRecordStageInput *input,
     FA18MapPacketProjectionRecord *records, size_t record_capacity,
-    uint16_t *record_count, FA18MapPacketRecordStageRoute *route) {
+    uint16_t *record_count, FA18MapDetailGateResult *gate_result,
+    FA18MapPacketRecordStageRoute *route) {
     if (!input || !records || !record_count || !route) return -1;
 
     FA18MapDetailGateResult gate;
@@ -21,6 +22,7 @@ int fa18_run_map_packet_record_stage(
         *route = FA18_MAP_PACKET_RECORD_FRAME_STOP;
         return 0;
     }
+    if (gate_result) *gate_result = gate;
 
     FA18MapDetailFieldsInput fields = input->fields;
     fields.alternate_layout = input->gate.alternate_layout;

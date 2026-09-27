@@ -27,19 +27,19 @@ int main(void) {
     FA18MapPacketProjectionRecord records[0x12];
     uint16_t count;
     FA18MapPacketRecordStageRoute route;
-    assert(fa18_run_map_packet_record_stage(&input, records, 0x12, &count,
+    assert(fa18_run_map_packet_record_stage(&input, records, 0x12, &count, 0,
                                             &route) == 0);
     assert(route == FA18_MAP_PACKET_RECORD_DISPLAYED && count == 1 &&
            fixture.calls == 1);
 
     FA18MapPacketRecordStageInput terminator = input;
     terminator.encoded_mode = -1;
-    assert(fa18_run_map_packet_record_stage(&terminator, records, 0x12, &count,
+    assert(fa18_run_map_packet_record_stage(&terminator, records, 0x12, &count, 0,
                                             &route) == 0 &&
            route == FA18_MAP_PACKET_RECORD_TERMINATOR && !count);
     terminator.encoded_mode = 3;
     terminator.gate.frame_flag = 1;
-    assert(fa18_run_map_packet_record_stage(&terminator, records, 0x12, &count,
+    assert(fa18_run_map_packet_record_stage(&terminator, records, 0x12, &count, 0,
                                             &route) == 0 &&
            route == FA18_MAP_PACKET_RECORD_FRAME_STOP && !count);
     return 0;

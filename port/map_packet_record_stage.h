@@ -27,6 +27,7 @@ typedef enum {
 int fa18_run_map_packet_record_stage(
     const FA18MapPacketRecordStageInput *input,
     FA18MapPacketProjectionRecord *records, size_t record_capacity,
-    uint16_t *record_count, FA18MapPacketRecordStageRoute *route);
+    uint16_t *record_count, FA18MapDetailGateResult *gate_result,
+    FA18MapPacketRecordStageRoute *route);
 
 #endif
