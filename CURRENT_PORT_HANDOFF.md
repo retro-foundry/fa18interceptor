@@ -242,6 +242,11 @@ longword result publications, and the flagged motion additions. The scalar
 primitive is caller-owned. `ctest` passes **113/113** tests with the same
 native frame result.
 
+`port/record_scan_scalar.{c,h}` now ports `$C257EC-$C25862`: signed selector
+and component normalization, the `$C1D974` table magnitude, source scale-loop
+and DIVU-overflow register behavior, signed result shifts, and word-width
+negation. `ctest` passes **114/114** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
