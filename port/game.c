@@ -27,6 +27,12 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
         fa18_disk_close(&game->disk);
         return 0;
     }
+    if (fa18_load_scene_record_table(&game->exe, &game->scene_record_table) != 0) {
+        fputs("Cannot load the C42A02 scene record table\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
     if (fa18_menu_queue_top_level_text(&game->menu_text) != 0) {
         fputs("Cannot initialize the top-level menu text queue\n", stderr);
         fa18_hunks_free(&game->exe);
@@ -73,7 +79,8 @@ int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *contr
     return fa18_menu_flow_apply_controls(&game->menu_flow, controls, &game->video);
 }
 
-int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls) {
+int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,
+                    uint16_t post_input_ticks) {
     if (!game) return -1;
     (void)controls;
     uint16_t selector;
@@ -82,6 +89,10 @@ int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls) {
         if (fa18_menu_select_message_record(&game->exe, selector, &record) != 0 ||
             fa18_render_top_level_menu(&game->video, &game->exe, &record, 1) != 0)
             return -1;
+    }
+    for (uint16_t tick = 0; tick < post_input_ticks; ++tick) {
+        int result = fa18_menu_flow_post_input_tick(&game->menu_flow);
+        if (result < 0 && !game->menu_flow.transition_started) return -1;
     }
     fa18_menu_flow_finish_presented_frame(&game->menu_flow, &game->video);
     ++game->frame;

@@ -16,6 +16,12 @@ typedef struct {
     size_t capacity;
 } EventList;
 
+typedef struct {
+    FA18ReplayTickRange *items;
+    size_t count;
+    size_t capacity;
+} TickList;
+
 static int append_event(const FA18ReplayEvent *event, void *user) {
     EventList *list = user;
     if (list->count == list->capacity) {
@@ -26,6 +32,19 @@ static int append_event(const FA18ReplayEvent *event, void *user) {
         list->capacity = capacity;
     }
     list->items[list->count++] = *event;
+    return 0;
+}
+
+static int append_tick_range(const FA18ReplayTickRange *range, void *user) {
+    TickList *list = user;
+    if (list->count == list->capacity) {
+        size_t capacity = list->capacity ? list->capacity * 2 : 8;
+        FA18ReplayTickRange *items = realloc(list->items, capacity * sizeof *items);
+        if (!items) return -1;
+        list->items = items;
+        list->capacity = capacity;
+    }
+    list->items[list->count++] = *range;
     return 0;
 }
 
@@ -45,7 +64,7 @@ static void copy_to_argb(const FA18Video *video, uint32_t *argb) {
     }
 }
 
-static int play_window(FA18Game *game, const EventList *events) {
+static int play_window(FA18Game *game, const EventList *events, const TickList *ticks) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
         fprintf(stderr, "SDL initialization failed: %s\n", SDL_GetError());
         return -1;
@@ -98,7 +117,9 @@ static int play_window(FA18Game *game, const EventList *events) {
             continue;
         }
         SDL_RenderPresent(renderer);
-        if (fa18_game_frame(game, &controls) != 0) {
+        if (fa18_game_frame(game, &controls,
+                            fa18_replay_ticks_for_frame(ticks->items, ticks->count,
+                                                        game->frame)) != 0) {
             fputs("Game frame update failed\n", stderr);
             running = 0;
             continue;
@@ -117,12 +138,14 @@ static int play_window(FA18Game *game, const EventList *events) {
 int main(int argc, char **argv) {
     const char *adf_path = NULL;
     const char *replay_path = NULL;
+    const char *timing_path = NULL;
     uint32_t last = 0;
     int headless = 0;
     int dump_stdout = 0;
     for (int i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--adf") && i + 1 < argc) adf_path = argv[++i];
         else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
+        else if (!strcmp(argv[i], "--timing") && i + 1 < argc) timing_path = argv[++i];
         else if (!strcmp(argv[i], "--headless")) headless = 1;
         else if (!strcmp(argv[i], "--to") && i + 1 < argc) {
             char *end = NULL;
@@ -139,7 +162,7 @@ int main(int argc, char **argv) {
                 return 2;
             }
         } else {
-            fputs("Usage: fa18_port --adf FILE --replay FILE [--headless --to N --dump-rgb444 -]\n", stderr);
+            fputs("Usage: fa18_port --adf FILE --replay FILE [--timing FILE] [--headless --to N --dump-rgb444 -]\n", stderr);
             return 2;
         }
     }
@@ -156,14 +179,22 @@ int main(int argc, char **argv) {
 #endif
 
     EventList events = {0};
+    TickList ticks = {0};
     if (fa18_replay_read_events(replay_path, append_event, &events, NULL) != 0) {
         fprintf(stderr, "Cannot read replay input: %s\n", replay_path);
+        free(events.items);
+        return 1;
+    }
+    if (timing_path && fa18_replay_read_tick_ranges(timing_path, append_tick_range,
+                                                     &ticks, NULL) != 0) {
+        fprintf(stderr, "Cannot read replay timing: %s\n", timing_path);
         free(events.items);
         return 1;
     }
     FA18Game game;
     if (!fa18_game_init(&game, adf_path)) {
         free(events.items);
+        free(ticks.items);
         return 1;
     }
     int result = 0;
@@ -183,16 +214,19 @@ int main(int argc, char **argv) {
                 result = 1;
                 break;
             }
-            if (fa18_game_frame(&game, &controls) != 0) {
+            if (fa18_game_frame(&game, &controls,
+                                fa18_replay_ticks_for_frame(ticks.items, ticks.count,
+                                                            game.frame)) != 0) {
                 fputs("Game frame update failed\n", stderr);
                 result = 1;
                 break;
             }
         }
     } else {
-        result = play_window(&game, &events) != 0;
+        result = play_window(&game, &events, &ticks) != 0;
     }
     fa18_game_free(&game);
     free(events.items);
+    free(ticks.items);
     return result;
 }

@@ -3,9 +3,8 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "dimensions.h"
 #include "projection.h"
-
-enum { FA18_WIDTH = 320, FA18_HEIGHT = 200 };
 
 /* The port's four-bit render target. Each byte stores one native palette
  * index, replacing four separate Amiga bitplanes. */
@@ -66,28 +65,5 @@ int fa18_apply_plane_word_update(FA18IndexedFrameBuffer *framebuffer,
 int fa18_apply_pixel_mask(FA18IndexedFrameBuffer *framebuffer,
                           const FA18RendererState *state,
                           FA18PixelTable table, int x, int y);
-
-/* Captured run075 postflight scene boundary. The span fixture is applied to
- * the preceding frame so the native buffer remains an explicit chunky
- * render target. */
-int fa18_render_run075_frame395_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-int fa18_render_run075_frame398_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-int fa18_render_run075_frame402_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-int fa18_render_run075_frame405_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-int fa18_render_run075_frame408_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-int fa18_render_run075_frame414_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-int fa18_render_run075_frame460_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-int fa18_render_run075_frame462_scene(const FA18IndexedFrameBuffer *previous,
-                                      FA18IndexedFrameBuffer *framebuffer);
-
-int fa18_apply_run075_hud_delta(uint32_t frame, const uint16_t *previous,
-                                uint16_t *output);
 
 #endif

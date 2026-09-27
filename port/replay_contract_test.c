@@ -6,6 +6,7 @@
 typedef struct { FA18ReplayEvent event[128]; size_t count; } Events;
 
 typedef struct { size_t count; int saw_j; } EventKinds;
+typedef struct { FA18ReplayTickRange range[8]; size_t count; } TickRanges;
 
 static int collect(const FA18ReplayEvent *event, void *user) {
     Events *events = user;
@@ -21,6 +22,13 @@ static int collect_run060(const FA18ReplayEvent *event, void *user) {
         (event->value[1] == 5 || event->value[1] == 6 || event->value[1] == 7)) {
         kinds->saw_j = 1;
     }
+    return 0;
+}
+
+static int collect_tick_range(const FA18ReplayTickRange *range, void *user) {
+    TickRanges *ranges = user;
+    if (ranges->count >= 8) return -1;
+    ranges->range[ranges->count++] = *range;
     return 0;
 }
 
@@ -45,6 +53,21 @@ int main(void) {
         events.event[events.count - 1].value[1] != 7 ||
         events.event[events.count - 1].value[2] != -25) {
         fputs("signed replay parse contract failed\n", stderr);
+        return 1;
+    }
+    TickRanges ticks = {{0}, 0};
+    if (fa18_replay_read_tick_ranges("../../captures/run075/timing.e9t",
+                                     collect_tick_range, &ticks, NULL) != 0 ||
+        ticks.count != 4 || ticks.range[0].first_frame != 235 ||
+        ticks.range[1].last_frame != 240 || ticks.range[2].ticks != 6 ||
+        ticks.range[3].first_frame != 271 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 234) != 0 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 235) != 1 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 240) != 5 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 270) != 6 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 271) != 5 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 272) != 0) {
+        fputs("run075 replay timing contract failed\n", stderr);
         return 1;
     }
     EventKinds run060 = {0, 0};

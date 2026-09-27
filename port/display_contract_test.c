@@ -5,6 +5,8 @@
 #include <string.h>
 #include <assert.h>
 
+int fa18_build_run060_frame7992_area_jobs(FA18AreaBlitJob jobs[4]);
+
 int main(void) {
     assert(fa18_visible_lane_plane(0) == 3);
     assert(fa18_visible_lane_plane(1) == 2);

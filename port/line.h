@@ -1,8 +1,10 @@
 #ifndef FA18_LINE_H
 #define FA18_LINE_H
 
+#include <stddef.h>
 #include <stdint.h>
 
+#include "planar_lane_page.h"
 #include "renderer.h"
 
 
@@ -67,10 +69,6 @@ int fa18_validate_line_blit_job(const FA18LineBlitJob *job);
 int fa18_execute_line_blit_job(uint8_t *plane, size_t plane_bytes,
                                const FA18LineBlitJob *job);
 
-/* Four live run060 frame-7992 segment-37 jobs, retained as semantic packet
- * fields rather than an Amiga memory image. */
-int fa18_build_run060_frame7992_area_jobs(FA18AreaBlitJob jobs[4]);
-
 /* Frame-395 `$C2FB7A` packet values after CPU line preparation. */
 int fa18_validate_line_packet(const FA18LinePacket *packet);
 
@@ -82,5 +80,28 @@ int fa18_validate_line_packet(const FA18LinePacket *packet);
 int fa18_draw_line(FA18IndexedFrameBuffer *framebuffer,
                    const FA18LineStyle *style, FA18LineSegment segment,
                    int16_t row_limit);
+
+/* The same bounded `$C2FA7E` recurrence at the four-plane page boundary.
+ * The fifth Copper lane is deliberately outside this source primitive. */
+enum {
+    FA18_LINE_PLANAR_LANES = FA18_PLANAR_LANE_COUNT,
+    FA18_LINE_PLANAR_ROW_BYTES = FA18_PLANAR_LANE_ROW_BYTES,
+    FA18_LINE_PLANAR_PAGE_BYTES = FA18_PLANAR_LANE_PAGE_BYTES
+};
+
+typedef FA18PlanarLanePage FA18LinePlanarPage;
+
+int fa18_draw_line_to_page(FA18LinePlanarPage *page,
+                           const FA18LineStyle *style, FA18LineSegment segment,
+                           int16_t row_limit);
+
+typedef struct {
+    FA18LinePlanarPage *page;
+    const FA18LineStyle *style;
+} FA18PlanarLinePageContext;
+
+/* Callback adapter for `$C301F6 -> $C2FA7E` grid submissions. */
+int fa18_emit_line_to_page(void *context, int16_t x0, int16_t y0,
+                           int16_t x1, int16_t y1, int16_t row_limit);
 
 #endif

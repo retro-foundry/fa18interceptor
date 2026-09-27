@@ -14,6 +14,25 @@
 #include <stdio.h>
 #include <string.h>
 
+int fa18_render_run075_frame395_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame398_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame402_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame405_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame408_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame414_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame460_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_render_run075_frame462_scene(const FA18IndexedFrameBuffer *previous,
+                                      FA18IndexedFrameBuffer *framebuffer);
+int fa18_apply_run075_hud_delta(uint32_t frame, const uint16_t *previous,
+                                uint16_t *output);
+
 int main(void) {
     FA18PlanarPage page;
     FA18IndexedFrameBuffer planar_output;

@@ -10,6 +10,7 @@
 #include "menu_record.h"
 #include "menu_render.h"
 #include "projection_grid.h"
+#include "scene_record_table.h"
 #include "replay.h"
 #include "video.h"
 
@@ -18,6 +19,7 @@ typedef struct {
     FA18Disk disk;
     FA18Hunks exe;
     FA18ProjectionGrid projection_grid;
+    FA18SceneRecordTable scene_record_table;
     FA18Video video;
     FA18MenuTextState menu_text;
     FA18MenuFlow menu_flow;
@@ -33,6 +35,7 @@ void fa18_game_free(FA18Game *game);
 int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *controls);
 
 /* Advance one PAL video frame with the given control state. */
-int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls);
+int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,
+                    uint16_t post_input_ticks);
 
 #endif

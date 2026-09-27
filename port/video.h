@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-enum { FA18_WIDTH = 320, FA18_HEIGHT = 200, FA18_PIXELS = FA18_WIDTH * FA18_HEIGHT };
+#include "dimensions.h"
 
 /* The game's display: 320x200 palette indices plus the 32-entry palette, in
  * the Amiga's 12-bit 0x0RGB colour format. */

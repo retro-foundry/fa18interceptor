@@ -12,6 +12,8 @@
 #include <assert.h>
 #include <string.h>
 
+int fa18_build_run060_frame7992_area_jobs(FA18AreaBlitJob jobs[4]);
+
 int main(void) {
     FA18AreaBlitJob jobs[4];
     assert(fa18_build_run060_frame7992_area_jobs(jobs) == 0);
@@ -99,6 +101,22 @@ int main(void) {
             framebuffer.pixels[x] != 4) {
             fputs("line-mode raster contract failed\n", stderr);
             return 1;
+        }
+    }
+
+    /* The same recurrence writes only the owned four lower planar lanes. */
+    {
+        uint8_t planes[FA18_LINE_PLANAR_LANES][FA18_LINE_PLANAR_PAGE_BYTES] = {{0}};
+        FA18LinePlanarPage page = { {
+            planes[0], planes[1], planes[2], planes[3]
+        }, FA18_LINE_PLANAR_PAGE_BYTES };
+        assert(fa18_draw_line_to_page(&page, &style, segment, 179) == 0);
+        for (unsigned lane = 0; lane < FA18_LINE_PLANAR_LANES; ++lane) {
+            const uint8_t selected = (lane == 1 || lane == 2) ? 1u : 0u;
+            assert(planes[lane][62] == (selected ? 0x0fu : 0u));
+            assert(planes[lane][63] == (selected ? 0xffu : 0u));
+            assert(planes[lane][64] == (selected ? 0xffu : 0u));
+            assert(planes[lane][65] == (selected ? 0xe0u : 0u));
         }
     }
 

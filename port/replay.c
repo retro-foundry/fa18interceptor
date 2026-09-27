@@ -129,3 +129,53 @@ int fa18_replay_advance_frame(FA18ReplayControlState *state,
     state->frame = frame;
     return 0;
 }
+
+int fa18_replay_read_tick_ranges(const char *path, FA18ReplayTickSink sink,
+                                 void *user, size_t *range_count) {
+    if (!path || !sink) return -1;
+    FILE *file = fopen(path, "rb");
+    if (!file) return -1;
+    char line[128];
+    size_t count = 0;
+    int valid_header = 0;
+    uint32_t previous_last = 0;
+    while (fgets(line, sizeof line, file)) {
+        if (!valid_header) {
+            if (strcmp(line, "E9K_TICKS_V1\n") && strcmp(line, "E9K_TICKS_V1\r\n")) {
+                fclose(file);
+                return -1;
+            }
+            valid_header = 1;
+            continue;
+        }
+        unsigned first, last, ticks;
+        if (sscanf(line, "F %u %u T %u", &first, &last, &ticks) != 3 ||
+            first > last || ticks > UINT16_MAX ||
+            (count && first <= previous_last)) {
+            fclose(file);
+            return -1;
+        }
+        const FA18ReplayTickRange range = {(uint32_t)first, (uint32_t)last,
+                                           (uint16_t)ticks};
+        if (sink(&range, user) != 0) {
+            fclose(file);
+            return -1;
+        }
+        previous_last = range.last_frame;
+        ++count;
+    }
+    fclose(file);
+    if (!valid_header) return -1;
+    if (range_count) *range_count = count;
+    return 0;
+}
+
+uint16_t fa18_replay_ticks_for_frame(const FA18ReplayTickRange *ranges,
+                                     size_t range_count, uint32_t frame) {
+    if (!ranges && range_count) return 0;
+    for (size_t index = 0; index < range_count; ++index) {
+        if (frame < ranges[index].first_frame) break;
+        if (frame <= ranges[index].last_frame) return ranges[index].ticks;
+    }
+    return 0;
+}

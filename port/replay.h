@@ -26,6 +26,14 @@ typedef struct {
 
 typedef int (*FA18ReplayEventSink)(const FA18ReplayEvent *event, void *user);
 
+typedef struct {
+    uint32_t first_frame;
+    uint32_t last_frame;
+    uint16_t ticks;
+} FA18ReplayTickRange;
+
+typedef int (*FA18ReplayTickSink)(const FA18ReplayTickRange *range, void *user);
+
 /* Read the deterministic E9K_INPUT_V1 text stream used by Engine9000. */
 int fa18_replay_read_events(const char *path, FA18ReplayEventSink sink, void *user,
                             size_t *event_count);
@@ -40,5 +48,11 @@ int fa18_replay_apply_event(FA18ReplayControlState *state,
 int fa18_replay_advance_frame(FA18ReplayControlState *state,
                               const FA18ReplayEvent *events, size_t event_count,
                               size_t *next_event, uint32_t frame);
+
+/* Read a source-measured, replay-specific `E9K_TICKS_V1` timing stream. */
+int fa18_replay_read_tick_ranges(const char *path, FA18ReplayTickSink sink,
+                                 void *user, size_t *range_count);
+uint16_t fa18_replay_ticks_for_frame(const FA18ReplayTickRange *ranges,
+                                     size_t range_count, uint32_t frame);
 
 #endif
