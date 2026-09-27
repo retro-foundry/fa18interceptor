@@ -117,6 +117,12 @@ indices to `$C25D22`, otherwise routes signed selected-record `+$42` to
 `$C25CCA` when nonnegative or leaves `$C25C86` explicit when negative. `ctest`
 passes **94/94** tests with the same native frame result.
 
+`port/indexed_record_matrix_dispatch.{c,h}` now ports `$C25D86-$C25DA5`:
+class `+$62` high nibble `$30`, or a clear record-header bit 7, invokes the
+caller-owned `$C2D408` matrix dispatch; other classes with bit 7 set leave the
+`$C25DA6` continuation explicit. `ctest` passes **95/95** tests with the same
+native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

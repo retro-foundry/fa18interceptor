@@ -60,3 +60,11 @@ to `$C25D22`. With a zero index it reads the signed longword at selected-record
 offset `+$42`: nonnegative reaches `$C25CCA`, while negative falls through to
 the still-unported `$C25C86` continuation. The `$C1B27E` control-record body
 remains a separately evidenced caller boundary.
+
+## matrix-dispatch class and header gates
+
+`$C25D86-$C25DA5` masks selected-record class byte `+$62`. A high nibble of
+`$30` reaches the `$C2D408` matrix-dispatch call directly. Other classes test
+header byte `+0` bit 7: clear also calls `$C2D408`; set continues at
+`$C25DA6`. The call preserves the current record pointer around the child and
+does not identify the record class's scene meaning.
