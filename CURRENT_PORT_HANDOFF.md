@@ -30,11 +30,13 @@ semantics; it does not authorize a generic filled-triangle substitute or
 normal `game.c` scheduling.
 
 `port/blit_job.c` now has the bounded `fa18_execute_ocs_block_blit` primitive
-for that next stage.  It executes only evidenced OCS block submissions over
+for the later lane-copy portion.  It executes only OCS block submissions over
 caller-owned Chip bytes (A/B/C enables, shifts, masks, signed modulos, and
-descending progression); line/fill state deliberately returns an error.  It
-is not attached to a flight page yet: that requires the traced inherited
-register image and the active-page address mapping from the run036 oracle.
+descending progression); line/fill state deliberately returns an error.  The
+run036 Custom-register stream now proves that the preceding four `$C306AE`
+jobs are line-mode and `$C30404` is descending exclusive fill, so they remain
+the next implementation boundary.  This is not attached to a flight page
+yet.
 
 The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
 starts from external frame-384 pre-call state, then runs the native

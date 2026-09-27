@@ -46,17 +46,36 @@ closing record sourced with `$C4B392`.  The four `$C30668` entries are:
 
 Those are direct source-register images immediately before the exact
 `$C30668-$C306B3` leaf.  They validate the existing native
-`fa18_prepare_projection_pair_*` register construction, but do **not** by
-themselves specify every effective DMA input: the leaf inherits `BLTBPT` and
-`BLTALWM`.
+`fa18_prepare_projection_pair_*` register construction.  The leaf's final
+`BLTSIZE` store is at `$C306AE`, not its entry address.
+
+## Complete Custom-register oracle
+
+`build/run036_frame7000_instruction_trace/custom_writes.jsonl` covers the
+same first bounded call in the full original replay.  Reconstructing channel
+state at every `BLTSIZE` trigger identifies its four jobs at stream sequences
+552, 568, 584, and 600:
+
+| sequence | trigger | BLTCON0 | BLTCON1 | A | B | C = D | size |
+| ---: | --- | --- | --- | --- | --- | --- | --- |
+| 552 | `$C306AE` | `$1B4A` | `$0053` | `$00FFE6` | `$00728E` | `$007454` | `$0882` |
+| 568 | `$C306AE` | `$2B4A` | `$0057` | `$00FFA8` | `$00728E` | `$007610` | `$0C02` |
+| 584 | `$C306AE` | `$9B4A` | `$0013` | `$000016` | `$00728E` | `$0074C7` | `$0442` |
+| 600 | `$C306AE` | `$1B4A` | `$0057` | `$00FFB8` | `$00728E` | `$007454` | `$0A42` |
+
+All four have `$FFFF/$FFFF` A masks and `$0028` C/D modulos.  Their B
+pointer is inherited from the preceding renderer stage; the complete stream
+proves it is `$00728E`, rather than an absent/default channel.  Their source
+control words have BLTCON1 bit 0 set: these are **line-mode** submissions,
+not plain block copies.
 
 ## Lane-stage consequence
 
-After the four prepared jobs, the call performs the `$C303D2-$C30404` lane
-job, two `$C30466` jobs, then `$C304B2`:
+After the four line jobs, the call performs the `$C303D2-$C30404` descending
+exclusive-fill job, two `$C30466` lane copies, then `$C304B2`:
 
 ```text
-C303EC: BLTAPT=BLTDPT=000076D8, BLTCPT=FFFFFFFF,
+C303EC: BLTAPT=BLTDPT=000076D8, BLTCPT=00007454, BLTBPT=0000728E,
          BLTAMOD=BLTBMOD=BLTDMOD=001D, BLTCON0=09F0,
          BLTCON1=000A, BLTSIZE=0486
 C30466 #1: BLTAPT=000076D8, BLTBPT=BLTDPT=00014250,
@@ -76,8 +95,10 @@ completion boundaries were not captured.
 ## Port boundary
 
 Do not connect a generic triangle filler to `FA18FlightRendererPage` from
-this evidence.  The next native implementation must model the actual
-register inheritance and word/shift/modulo DMA semantics, then compare its
-complete run036 diagnostic page delta to the 110-byte oracle above.  The
-live owner that supplies these fields and selects the active display page is
-still outside the normal `game.c` path.
+this evidence.  The next native implementation must model the actual OCS
+line-mode and descending exclusive-fill semantics, followed by the observed
+lane copies, then compare its complete run036 diagnostic page delta to the
+110-byte oracle above.  `fa18_execute_ocs_block_blit` is useful only for the
+later `$C30466/$C304B2` block jobs; it must reject the line/fill control words
+rather than misrendering them.  The live owner that supplies these fields and
+selects the active display page is still outside the normal `game.c` path.
