@@ -1198,3 +1198,10 @@ game loop.
   the blank presentation. The state is evidence only: its mutable Copper
   record ownership and source-independent timing rule are unproved. See
   `analysis/routines/run075_menu_selection_cadence.md`.
+- 2026-09-27: Added `fa18_menu_flow_post_input_tick`, a single-tick native
+  consumer for the bounded `$C0F5F8 -> $C0FECE -> $C0FEEA/$C1000A` run075
+  subset. It preserves the 16-bit decrement/wrap and direct transition
+  stores, but it is deliberately not called once per presented frame: the
+  source has no one-tick-per-frame contract. The menu-flow test covers the
+  211-tick transition edge; the visible native gate remains 73 frames until
+  an authorized scheduler is supplied.

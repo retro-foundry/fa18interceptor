@@ -8,9 +8,9 @@ full-frame call with:
 ```text
 python scripts/sample_replay_memory.py --restore captures/run075/initial_state.bin \
   --playback captures/run075/playback.e9k --config captures/run075/config.uae \
-  --frames 280 --word 0xC45AD6 --word 0xC458A6 --word 0xC1820C \
+  --frame-offset 200 --frames 80 --word 0xC45AD6 --word 0xC458A6 --word 0xC1820C \
   --word 0xC1820E --sample-every 1 --sample-first 228 --sample-last 280 \
-  --input-kind K --output build/port_run075_menu_tick_words.json
+  --input-kind K --output build/port_run075_menu_tick_words_offset.json
 ```
 
 `Engine.frame` advances in its VBlank callback, so this is a presentation
@@ -60,6 +60,20 @@ still visible through frame 272 and the blank page first presents at frame
 273. The pointers are mutable runtime records; the current evidence does not
 establish their record type, their page ownership, or a native double/triple
 buffer mapping. They must not be copied as address-based native state.
+
+An offset-aware no-future-input trace begins at `$C0FEEA` in replay frame 271
+(`build/port_run075_c0feea_c4fe38_writes_25k/`). It records the following
+ordered writes to the first two `$C4FE38` entries:
+
+| trace instruction | writer | entry result |
+| ---: | --- | --- |
+| 8 | `$C17B1A` (`$C17B08`, index 0) | entry 0 cleared |
+| 2,235 | `$C17B1A` (`$C17B08`, index 1) | entry 1 cleared |
+| 5,218 | `$C17B80` (`$C17B2C`, source 8, target 0) | entry 0 = `$C06A18` |
+| 6,229 | `$C17B80` (`$C17B2C`, source 9, target 1) | entry 1 = `$C06A58` |
+
+This proves an indexed-record handoff sequence, but not that either record is
+itself a display page or when a native chunky buffer should be cleared.
 
 ## Port consequence
 

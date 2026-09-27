@@ -52,3 +52,29 @@ int fa18_menu_flow_take_selector(FA18MenuFlow *flow, uint16_t *selector) {
     flow->selector_render_pending = 0;
     return 0;
 }
+
+int fa18_menu_flow_post_input_tick(FA18MenuFlow *flow) {
+    if (!flow || flow->selected_mode != MENU_DEMONSTRATION_MODE ||
+        flow->transition_started) {
+        return -1;
+    }
+    /* `$C0F7D8-$C0F7FE`: byte tick counter plus wrapping signed word
+     * decrement. `$C0F804` invokes the active callback after this update. */
+    ++flow->post_input_tick_count;
+    if (flow->display_delay == INT16_MIN) flow->display_delay = INT16_MAX;
+    else --flow->display_delay;
+    if (flow->display_delay >= 0) return 0;
+
+    /* Bounded run075 delayed callback: `$C0FEEA-$C10020`. These are the
+     * direct state writes established before/at the mode-$7F table arm.
+     * Helper effects and the indexed Copper record ownership are separate
+     * contracts, so this function deliberately performs no video update. */
+    flow->transition_row_limit = 179;
+    flow->display_delay = 4;
+    flow->transition_stage = 3;
+    flow->post_input_phase = 2;
+    flow->transition_auxiliary = 1;
+    flow->demo_followup_pending = 1;
+    flow->transition_started = 1;
+    return 1;
+}

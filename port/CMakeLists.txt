@@ -61,7 +61,7 @@ add_executable(fa18_glyph_contract_test glyph_contract_test.c glyph.c display.c 
 add_test(NAME fa18_glyph_contract COMMAND fa18_glyph_contract_test)
 add_executable(fa18_projection_contract_test projection_contract_test.c projection.c)
 add_test(NAME fa18_projection_contract COMMAND fa18_projection_contract_test)
-add_executable(fa18_polygon_submission_contract_test polygon_submission_contract_test.c polygon_submission.c projection.c line.c)
+add_executable(fa18_polygon_submission_contract_test polygon_submission_contract_test.c polygon_submission.c projection.c line.c blit_job.c)
 add_test(NAME fa18_polygon_submission_contract COMMAND fa18_polygon_submission_contract_test)
 add_executable(fa18_blit_job_contract_test blit_job_contract_test.c blit_job.c)
 add_test(NAME fa18_blit_job_contract COMMAND fa18_blit_job_contract_test)

@@ -131,6 +131,10 @@ in order. The menu frames (200..~391) should be unaffected.
    `analysis/routines/run075_menu_selection_cadence.md` gives the exact
    run075 measurement and the adjacent indexed Copper-state changes. It is
    deliberately not a C scheduling fixture.
+   `fa18_menu_flow_post_input_tick` ports one supplied `$C0F5F8` tick and its
+   bounded negative-delay transition subset, but `game.c` does not call it
+   per presentation. Its contract reaches the transition after 211 supplied
+   ticks; this preparation does not advance `NATIVE_FRAME_COUNT=73`.
 8. Continue one original routine/contract per commit, with
    `NATIVE_FRAME_COUNT` in each commit message. The CPU-paced flight timing
    issue remains a separate blocker before the 3D path.

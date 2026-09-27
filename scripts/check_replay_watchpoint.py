@@ -25,6 +25,8 @@ def main():
     parser.add_argument('--value', type=lambda x: int(x, 0))
     parser.add_argument('--arm-frame', type=int, required=True)
     parser.add_argument('--frames', type=int, required=True)
+    parser.add_argument('--frame-offset', type=int, default=0,
+                        help='Replay-frame label immediately before the first executed frame.')
     parser.add_argument('--expect', choices=['hit', 'miss'], required=True)
     parser.add_argument('--any-source', action='store_true')
     parser.add_argument('--source', choices=['cpu', 'dma', 'blitter', 'copper', 'audio', 'video', 'peripheral', 'disk'])
@@ -34,6 +36,8 @@ def main():
     args = parser.parse_args()
     if args.any_source and args.source:
         parser.error('--any-source and --source cannot be combined')
+    if args.frames < 1 or args.frame_offset < 0:
+        parser.error('--frames must be positive and --frame-offset nonnegative')
     events = read_events(args.playback)
     engine = Engine(args.config.resolve(), ROOT / 'local/saves')
     engine.core.retro_run()
@@ -43,7 +47,8 @@ def main():
     add = engine.bind('e9k_debug_add_watchpoint', C.c_int, *([C.c_uint32] * 8))
     consume = engine.bind('e9k_debug_consume_watchbreak', C.c_int, C.POINTER(Watchbreak))
     hit = None
-    for frame in range(1, args.frames + 1):
+    for local_frame in range(1, args.frames + 1):
+        frame = args.frame_offset + local_frame
         if frame == args.arm_frame:
             # e9k-lib.h v0.62-alpha: source 1=CPU, 2=DMA, 3=blitter,
             # 4=copper, 5=audio, 6=video, 7=peripheral, 8=disk.
@@ -71,6 +76,7 @@ def main():
     report = {'address': f'{args.address:06x}', 'address_mask': f'{args.address_mask:06x}',
               'access': args.access, 'value': args.value, 'source': args.source or ('any' if args.any_source else 'cpu'),
               'arm_frame': args.arm_frame,
+              'frame_offset': args.frame_offset,
               'expect': args.expect, 'actual': actual, 'hit': hit}
     print(json.dumps(report, indent=2))
     if actual != args.expect:

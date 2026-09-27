@@ -37,6 +37,30 @@ int main(void) {
         fputs("menu queued selector contract failed\n", stderr);
         return 1;
     }
+    for (int tick = 0; tick < 210; ++tick) {
+        if (fa18_menu_flow_post_input_tick(&flow) != 0 ||
+            flow.display_delay != 209 - tick) {
+            fputs("menu delayed-tick countdown contract failed\n", stderr);
+            return 1;
+        }
+    }
+    if (fa18_menu_flow_post_input_tick(&flow) != 1 ||
+        !flow.transition_started || flow.display_delay != 4 ||
+        flow.transition_row_limit != 179 || flow.transition_stage != 3 ||
+        flow.post_input_phase != 2 || !flow.transition_auxiliary ||
+        !flow.demo_followup_pending ||
+        fa18_menu_flow_post_input_tick(&flow) != -1) {
+        fputs("menu delayed-transition contract failed\n", stderr);
+        return 1;
+    }
+    FA18MenuFlow wrap = {0};
+    wrap.selected_mode = 0x7f;
+    wrap.display_delay = INT16_MIN;
+    if (fa18_menu_flow_post_input_tick(&wrap) != 0 ||
+        wrap.display_delay != INT16_MAX || wrap.post_input_tick_count != 1) {
+        fputs("menu delayed-tick wrap contract failed\n", stderr);
+        return 1;
+    }
     if (fa18_menu_flow_apply_controls(NULL, &controls, &video) != -1) {
         fputs("menu flow argument contract failed\n", stderr);
         return 1;
