@@ -42,6 +42,27 @@ typedef struct {
     int16_t bound;
 } FA18ProjectionGridPreparedRecord;
 
+typedef struct {
+    int16_t words[9];
+} FA18ProjectionPairMatrix;
+
+typedef struct {
+    int16_t x;
+    int16_t y;
+    int16_t depth;
+} FA18ProjectionPairBase;
+
+typedef struct {
+    int16_t x;
+    int16_t y;
+} FA18ProjectionPairInput;
+
+typedef struct {
+    int16_t x;
+    int16_t y;
+    int16_t depth;
+} FA18ProjectionPairOutput;
+
 /* `$C27A36-$C27ADA`: bind the `$C28124` table from original Hunk 25 data. */
 int fa18_load_projection_grid(const FA18Hunks *hunks, FA18ProjectionGrid *grid);
 
@@ -65,5 +86,13 @@ int fa18_prepare_projection_grid_record(const FA18ProjectionGrid *grid,
                                         uint16_t record_index,
                                         int16_t negative_kind_flag,
                                         FA18ProjectionGridPreparedRecord *record);
+
+/* `$C27B9C-$C27BF0`: project one translated pair through the live sparse
+ * `$C45BD8` matrix. This excludes the following cull, perspective divide, and
+ * `$C2FF48` polygon submission. */
+int fa18_transform_projection_pair(const FA18ProjectionPairMatrix *matrix,
+                                   const FA18ProjectionPairBase *base,
+                                   const FA18ProjectionPairInput *input,
+                                   FA18ProjectionPairOutput *output);
 
 #endif

@@ -58,6 +58,24 @@ static int16_t absolute_word(int16_t value) {
     return value < 0 ? (int16_t)(UINT16_C(0) - (uint16_t)value) : value;
 }
 
+static uint32_t multiply_word_bits(int16_t left, int16_t right) {
+    return (uint32_t)((int32_t)left * (int32_t)right);
+}
+
+static uint32_t arithmetic_shift_right_8(uint32_t value) {
+    if ((value & UINT32_C(0x80000000)) != 0)
+        return (value >> 8) | UINT32_C(0xff000000);
+    return value >> 8;
+}
+
+static int16_t matrix_pair_component(int16_t first_coefficient,
+                                     int16_t second_coefficient,
+                                     int16_t x, int16_t y, int16_t base) {
+    const uint32_t sum = multiply_word_bits(first_coefficient, x) +
+                         multiply_word_bits(second_coefficient, y);
+    return (int16_t)(uint16_t)(arithmetic_shift_right_8(sum) + (uint16_t)base);
+}
+
 int fa18_prepare_projection_grid_record(const FA18ProjectionGrid *grid,
                                         const FA18ProjectionGridSetup *setup,
                                         uint16_t record_index,
@@ -84,4 +102,18 @@ int fa18_prepare_projection_grid_record(const FA18ProjectionGrid *grid,
     record->kind = kind;
     record->bound = bound;
     return 1;
+}
+
+int fa18_transform_projection_pair(const FA18ProjectionPairMatrix *matrix,
+                                   const FA18ProjectionPairBase *base,
+                                   const FA18ProjectionPairInput *input,
+                                   FA18ProjectionPairOutput *output) {
+    if (!matrix || !base || !input || !output) return -1;
+    output->x = matrix_pair_component(matrix->words[0], matrix->words[2],
+                                      input->x, input->y, base->x);
+    output->y = matrix_pair_component(matrix->words[3], matrix->words[5],
+                                      input->x, input->y, base->y);
+    output->depth = matrix_pair_component(matrix->words[6], matrix->words[8],
+                                          input->x, input->y, base->depth);
+    return 0;
 }

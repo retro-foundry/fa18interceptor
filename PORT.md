@@ -1242,3 +1242,10 @@ game loop.
   table from Hunk 25, applies the signed-word sum/absolute bins, preserves the
   source's negative-kind gate, and emits the exact shifted pair inputs for the
   later matrix stage. The pair projection and polygon submission remain open.
+- 2026-09-27: Ported the bounded `$C27B9C-$C27BF0` pair matrix stage as
+  `fa18_transform_projection_pair`. It preserves the source's signed-word
+  products, wrapping long-word accumulation, arithmetic `>> 8`, and word
+  base additions through the sparse rows of live `$C45BD8`; it intentionally
+  stops before the depth cull, perspective division, and `$C2FF48` polygon
+  submission. The run075 global-frame-384 first pair contract is
+  `(2355,7749) -> (1294,-985,3899)` with its captured matrix/base terms.

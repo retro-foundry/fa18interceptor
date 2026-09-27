@@ -59,6 +59,18 @@ int main(void) {
     assert(fa18_prepare_projection_grid_record(&grid, &record_setup, 0, 0, &prepared) == 0);
     assert(fa18_prepare_projection_grid_record(&grid, &record_setup, 2, 0, &prepared) == -1);
 
+    /* run075 global frame 384, first `$C27B9C` pair: matrix `$C45BD8`,
+     * translated pair D3/D4, and base D1/D5/D7 from `-$20(A6)`. */
+    FA18ProjectionPairMatrix matrix = {
+        { 167, 0, -8, 0, 252, 0, 6, 0, 127 }
+    };
+    FA18ProjectionPairBase base = { 0, -985, 0 };
+    FA18ProjectionPairInput pair = { 2355, 7749 };
+    FA18ProjectionPairOutput projected;
+    assert(fa18_transform_projection_pair(&matrix, &base, &pair, &projected) == 0);
+    assert(projected.x == 1294 && projected.y == -985 && projected.depth == 3899);
+    assert(fa18_transform_projection_pair(0, &base, &pair, &projected) == -1);
+
     table[0] = 0; table[1] = 3;
     assert(fa18_load_projection_grid(&hunks, &grid) == -1);
     assert(fa18_load_projection_grid(0, &grid) == -1);
