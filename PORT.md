@@ -1182,3 +1182,11 @@ game loop.
   not a separate visual asset. Frames 200..272 match exactly
   (`NATIVE_FRAME_COUNT=73`); frame 273 clears that label and is the next
   evidence boundary.
+- 2026-09-27: Full replay checkpoints resolve the frame-273 boundary without
+  assigning it to `$C2FD22`: `$C45AD6` expires into `$C0FEEA` during frame
+  270, and the frame-271 `$C17B08 -> $C4FFB0` route writes `$8080` to
+  `COPJMP2`. The former page remains visible through frame 272; the selected
+  blank page first presents at frame 273. `$C0F5F8` performs five or six
+  sub-ticks per PAL frame in this span, so a frame-number replacement would
+  invent CPU pacing. The native runtime needs an approved timing-stream
+  contract before this presentation transition can be ported faithfully.

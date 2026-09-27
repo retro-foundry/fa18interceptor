@@ -117,6 +117,17 @@ in order. The menu frames (200..~391) should be unaffected.
 6. Frame 273 is the first mismatch: it clears the selector-101 label. Trace
    the original producer and presentation boundary before implementing it;
    do not reuse an all-black oracle frame.
-7. Continue one original routine/contract per commit, with
+   The full replay checkpoints now establish the route: `$C45AD6` reaches
+   `$FFFF` in frame 270 and enters `$C0FEEA`; in frame 271, `$C17B08` reaches
+   `$C4FFB0` and writes `$8080` to `COPJMP2`. The label remains visible in
+   frame 272 and the selected blank page first presents in frame 273. The
+   native timer is not advancing because `$C0F5F8` runs five or six times per
+   PAL frame in this interval. This CPU-paced sub-tick schedule is not in the
+   allowed ADF/control inputs, so do not replace it with a frame-number rule.
+7. Before continuing beyond frame 272, obtain a user-approved runtime timing
+   stream (or a user-approved relaxed present-order comparator) for the
+   CPU-paced loop. The frame-count script and its command-line contract are
+   user-owned; do not modify either unilaterally.
+8. Continue one original routine/contract per commit, with
    `NATIVE_FRAME_COUNT` in each commit message. The CPU-paced flight timing
    issue remains a separate blocker before the 3D path.
