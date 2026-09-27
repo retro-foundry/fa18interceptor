@@ -177,6 +177,13 @@ stages remain explicit. Record/table/fixed-point/descriptor operations remain
 caller bound. `ctest` passes **103/103** tests with the same native frame
 result.
 
+`port/record_delta_scan.{c,h}` now ports the alternate-terminator continuation
+`$C1CFD6-$C1D0A3`: source latch/mode gates, the bounded 16-record
+`$C46184` scan, wrapped component deltas, the source's adaptive arithmetic
+shift, and its selector-word construction. The unresolved `$C25876` call is a
+required caller callback, so no submission behavior is guessed. `ctest`
+passes **104/104** tests with the same native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
