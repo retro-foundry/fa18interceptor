@@ -236,6 +236,12 @@ masked origin additions, `+$28/+30/+32` slot writes, and the turn-word
 secondary adjustment. Its `$C159AE` tail is a required caller callback.
 `ctest` passes **112/112** tests with the same native frame result.
 
+`port/record_scan_tail.{c,h}` now ports `$C159AE-$C15BF4`: turn/flag selector
+formation, source-wrapped delta shifts, the `$C257EC` scalar boundary, six
+longword result publications, and the flagged motion additions. The scalar
+primitive is caller-owned. `ctest` passes **113/113** tests with the same
+native frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
