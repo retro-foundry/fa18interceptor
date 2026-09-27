@@ -30,5 +30,17 @@ prove that this is the player, camera, or a particular aircraft record.
 frame 189. `$C459B4` is zero, so the entry takes `$C25B78`; it ORs the zero
 selector with `$C457AE=1`, branches to the return at `$C25B64`, and returns to
 `$C22D8E` after six instructions. This proves only the zero-index/nonzero-state
-fast return. The zero-index clear-state successor and nonzero-index route remain
-separate unported boundaries.
+fast return. The nonzero-index route remains a separate unported boundary.
+
+## run001 zero-index clear-state route
+
+At the start of `build/run001_c25b66_update_stage/trace.jsonl`, `$C459B4` and
+`$C457AE` are both zero. The entry therefore reaches `$C25B80`; with
+`$C45785` also clear, it branches to `$C25C3E`. The record byte at `A1+2` has
+bit 0 clear, so `$C25C44` branches to `$C25C54`.
+
+This establishes the zero-index clear-state normal route and the next bounded
+record flag gate. `$C25C3E-$C25C45` tests only bit 0 of the caller-owned
+record byte at `+2`: clear reaches `$C25C54`, while set falls through to the
+still-unported `$C25C46` continuation. It does not establish either
+continuation's record semantics.

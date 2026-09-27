@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: `1314e869 Port matrix tuple validation prefix`
+- Head: `c262d136 Port indexed update zero routes`
 - Working tree: only untracked `.vscode/` (user-owned; leave it alone).
 - Goal: complete the faithful C port, committing each coherent, validated stage.
 
@@ -94,9 +94,17 @@ record-stride decrement gate. It applies the observed 16 word decrements only
 when the caller-owned state byte is clear; the succeeding record-bank calls
 remain unported boundaries. `ctest` passes **90/90** tests.
 
-`port/indexed_update_gate.{c,h}` now ports `$C25B66-$C25B6F`'s selected-record
-zero/nonzero split. Both successors remain explicit until their bounded bodies
-are composed. `ctest` passes **91/91** tests.
+`port/indexed_update_gate.{c,h}` now ports `$C25B66-$C25B93`'s selected-record
+zero/nonzero split, zero-state fast return, and zero-index context route. The
+context-clear path enters `$C25C3E`; the context-set path enters `$C25BAC`.
+Both downstream bodies remain explicit until bounded. `ctest` passes **91/91**
+tests.
+
+`port/indexed_update_record_flag.{c,h}` now ports `$C25C3E-$C25C45`: bit 0 of
+the caller-owned selected-record byte at `+2` routes to `$C25C54` when clear
+or leaves the `$C25C46` fallthrough as an explicit continuation when set.
+`ctest` passes **92/92** tests; the native frame check remains 192 exact
+frames through global frame 391.
 
 ## Matrix-product projection evidence
 
