@@ -172,6 +172,11 @@ the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`
 passes **100/100** tests with the same native frame result.
 
+`port/flight_followup_shift.{c,h}` now ports `$C1CDB2-$C1CDFB`, looking up the
+source signed-byte shift count from caller-owned table data and publishing the
+shifted depth/components for the following descriptor dispatch. `ctest` passes
+**101/101** tests with the same native frame result.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

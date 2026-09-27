@@ -31,3 +31,7 @@ The positive branch's next bounded `$C1CD0E-$C1CDB1` magnitude preparation is
 now represented by `fa18_calculate_flight_followup_magnitudes`. Its `$29`
 error-helper call remains a required callback when the source maximum caps at
 `$EF`; the following lookup-table shift phase remains separate.
+
+That `$C1CDB2-$C1CDFB` lookup/shift phase is now represented by
+`fa18_shift_flight_followup_components`. Its signed-byte table lookup remains
+caller-owned; the following descriptor dispatch is still a separate boundary.
