@@ -86,6 +86,17 @@ makes the already prepared page visible remains open. In particular, neither
 the staged record stream nor the first visible scene may be named terrain from
 this evidence.
 
+The frame-389 return-bounded `$C1612C -> $C15DB2` trace supplies the next
+display-state edge. It first calls `WaitBOVP`, copies table entry zero
+`$C074D8` into `$C1821C` and `$C07F00` into `$C18232`, invokes `LoadView`,
+then changes `$C4566C` from zero to one in its tail. `$C18232` is
+`$C1822A + 8`, the proved graphics `ViewPort` display-instruction field.
+Therefore this outer-loop child publishes a selected display instruction and
+waits for the graphics display boundary before the next loop begins rendering
+the alternate page. The `$C07F00` object's exact Copper/palette ownership is
+still unassigned, so this proves the page-staging presentation path without
+claiming a decoded Copper list.
+
 ## Next port boundary
 
 Trace the display-state/Copper path selecting or revealing the five-plane
