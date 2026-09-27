@@ -22,3 +22,11 @@ int fa18_render_flight_scene_pipeline(
         input->direct_pair_mode_limit, submission, &result->packet_state,
         &result->packet_route, &result->submitted_record_count);
 }
+
+int fa18_run_parent_flight_scene_pipeline(void *context) {
+    FA18ParentFlightScenePipelineContext *pipeline = context;
+    if (!pipeline) return -1;
+    return fa18_render_flight_scene_pipeline(
+        pipeline->grid, pipeline->input, pipeline->page_renderer,
+        pipeline->result);
+}

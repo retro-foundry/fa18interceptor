@@ -33,4 +33,15 @@ int fa18_render_flight_scene_pipeline(
     const FA18FlightRendererPage *page_renderer,
     FA18FlightScenePipelineResult *result);
 
+/* Adapter for the `$C279D0` renderer-packet callback slot in
+ * `fa18_run_parent_flight_update`. */
+typedef struct {
+    const FA18ProjectionGrid *grid;
+    const FA18FlightScenePipelineInput *input;
+    const FA18FlightRendererPage *page_renderer;
+    FA18FlightScenePipelineResult *result;
+} FA18ParentFlightScenePipelineContext;
+
+int fa18_run_parent_flight_scene_pipeline(void *context);
+
 #endif

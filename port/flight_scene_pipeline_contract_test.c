@@ -33,6 +33,9 @@ int main(void) {
     assert(fa18_render_flight_scene_pipeline(&grid, &input, &renderer, &result) == 0);
     assert(result.packet_route == FA18_PROJECTION_GRID_PACKET_READY &&
            result.submitted_record_count == 1);
+    FA18ParentFlightScenePipelineContext callback = {&grid, &input, &renderer, &result};
+    assert(fa18_run_parent_flight_scene_pipeline(&callback) == 0 &&
+           result.packet_route == FA18_PROJECTION_GRID_PACKET_READY);
     input.scene_record_size = sizeof record - 1;
     assert(fa18_render_flight_scene_pipeline(&grid, &input, &renderer, &result) == -1);
     return 0;

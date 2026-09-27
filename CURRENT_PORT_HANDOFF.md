@@ -141,6 +141,11 @@ presentation, and scheduler timing are required caller inputs rather than
 guessed runtime behavior. `ctest` passes **98/98** tests with the same native
 frame result.
 
+The same scene-pipeline module now exposes
+`fa18_run_parent_flight_scene_pipeline`, a typed adapter for the `$C279D0`
+renderer-packet callback in the existing `$C0F090` parent update boundary.
+It does not provide the parent loop's other children or a top-level schedule.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in

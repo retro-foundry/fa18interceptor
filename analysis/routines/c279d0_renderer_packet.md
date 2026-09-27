@@ -33,3 +33,8 @@ sequence, not a flight-state integrator. Its older source name used
 This removes `$C279D0` from the flight-model search. The remaining direct
 candidate path is the JOY0DAT accumulator consumers and whichever persistent
 state those paths update before world placement or landing evaluation.
+
+`fa18_run_parent_flight_scene_pipeline` is the native typed adapter for this
+specific renderer-packet callback slot in `fa18_run_parent_flight_update`. It
+only binds caller-owned packet inputs to the bounded renderer composition; it
+does not claim the parent update's other child stages or loop cadence.
