@@ -143,6 +143,8 @@ int main(int argc, char **argv) {
     int headless = 0;
     int dump_stdout = 0;
     const char *render_fixture_capture = NULL;
+    const char *c279_render_slow_capture = NULL;
+    const char *c279_render_chip_capture = NULL;
     for (int i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--adf") && i + 1 < argc) adf_path = argv[++i];
         else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
@@ -164,12 +166,17 @@ int main(int argc, char **argv) {
             }
         } else if (!strcmp(argv[i], "--bootstrap-render-fixture") && i + 1 < argc) {
             render_fixture_capture = argv[++i];
+        } else if (!strcmp(argv[i], "--bootstrap-c279-render-fixture") && i + 2 < argc) {
+            c279_render_slow_capture = argv[++i];
+            c279_render_chip_capture = argv[++i];
         } else {
-            fputs("Usage: fa18_port --adf FILE --replay FILE [--timing FILE] [--bootstrap-render-fixture CHIP] [--headless --to N --dump-rgb444 -]\n", stderr);
+            fputs("Usage: fa18_port --adf FILE --replay FILE [--timing FILE] [--bootstrap-render-fixture CHIP] [--bootstrap-c279-render-fixture SLOW CHIP] [--headless --to N --dump-rgb444 -]\n", stderr);
             return 2;
         }
     }
-    if (!adf_path || !replay_path || (headless && (!last || !dump_stdout)) ||
+    if (!adf_path || !replay_path || (render_fixture_capture && c279_render_slow_capture) ||
+        (c279_render_slow_capture && !c279_render_chip_capture) ||
+        (headless && (!last || !dump_stdout)) ||
         (!headless && (last || dump_stdout))) {
         fputs("Missing or incompatible playback options\n", stderr);
         return 2;
@@ -203,6 +210,15 @@ int main(int argc, char **argv) {
     if (render_fixture_capture &&
         fa18_game_enable_render_fixture(&game, render_fixture_capture) != 0) {
         fputs("Cannot initialize temporary scene render fixture\n", stderr);
+        fa18_game_free(&game);
+        free(events.items);
+        free(ticks.items);
+        return 1;
+    }
+    if (c279_render_slow_capture &&
+        fa18_game_enable_c279_render_fixture(&game, c279_render_slow_capture,
+                                             c279_render_chip_capture) != 0) {
+        fputs("Cannot initialize temporary C279 render producer fixture\n", stderr);
         fa18_game_free(&game);
         free(events.items);
         free(ticks.items);

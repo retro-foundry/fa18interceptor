@@ -19,10 +19,12 @@ int fa18_flight_renderer_page_init(
 
     renderer->last_dma_value = 0;
     renderer->dma_call_count = 0;
+    renderer->pixel_state = *pixel_state;
+    renderer->line_style = *line_style;
     renderer->direct_pixels.page = &renderer->lanes;
-    renderer->direct_pixels.state = pixel_state;
+    renderer->direct_pixels.state = &renderer->pixel_state;
     renderer->lines.page = &renderer->lanes;
-    renderer->lines.style = line_style;
+    renderer->lines.style = &renderer->line_style;
     renderer->triangle_submission = (FA18ProjectionPairSubmission){
         display_bound_y, vertical_value, horizontal_value, renderer_base_long,
         mode_flag, saved_line_scratch,
@@ -36,6 +38,33 @@ int fa18_flight_renderer_page_init(
         fa18_emit_adjacent_renderer_pixels_to_page,
         &renderer->direct_pixels,
         0, 0
+    };
+    return 0;
+}
+
+int fa18_flight_renderer_page_apply_projection_grid_packet_state(
+    FA18FlightRendererPage *renderer,
+    const FA18ProjectionGridPacketState *packet_state) {
+    FA18PlanarPixelSourceState pixel_source;
+
+    if (!renderer || !packet_state) return -1;
+    pixel_source = (FA18PlanarPixelSourceState){
+        packet_state->renderer_selector,
+        (uint8_t)packet_state->renderer_state_words[0],
+        packet_state->renderer_state_words[1],
+        (uint8_t)packet_state->renderer_state_words[2]
+    };
+    if (fa18_decode_planar_pixel_state(&pixel_source, &renderer->pixel_state) != 0)
+        return -1;
+
+    /* `$C2FA82` copies `$C45954` to `$C45956`; the low byte at `$C45957`
+     * controls the negative-mode branch. `$C456E8` and its low byte
+     * `$C456E9` remain the plane mode and per-plane flag bits. */
+    renderer->line_style = (FA18LineStyle){
+        (uint8_t)packet_state->renderer_state_words[0],
+        packet_state->renderer_state_words[1],
+        (uint8_t)packet_state->renderer_state_words[1],
+        packet_state->renderer_selector
     };
     return 0;
 }

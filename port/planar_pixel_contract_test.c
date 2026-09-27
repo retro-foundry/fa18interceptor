@@ -28,10 +28,23 @@ int main(void) {
     }
     state = (FA18PlanarPixelState){ 13, 15, -1, 0 };
 
+    /* `$C2F786` has the all-clear entry at selector zero and then one
+     * table entry for each matching four-plane set combination. */
+    memset(&video, 0, sizeof video);
+    for (uint8_t selector = 0; selector < 16; ++selector) {
+        const int x = 100 + selector;
+        video.pixels[125 * FA18_WIDTH + x] = 0x1f;
+        state = (FA18PlanarPixelState){ selector, 15, -1, 0 };
+        assert(fa18_apply_planar_pixel_mask(&video, &state,
+                                            FA18_PLANAR_PIXEL_PRIMARY, x, 125) == 0);
+        assert(video.pixels[125 * FA18_WIDTH + x] == (uint8_t)(0x10u | selector));
+    }
+
+    state = (FA18PlanarPixelState){ 13, 15, -1, 0 };
     video.pixels[125 * FA18_WIDTH + 100] = 0x12;
     assert(fa18_apply_planar_pixel_mask(&video, &state,
                                         FA18_PLANAR_PIXEL_PRIMARY, 100, 125) == 0);
-    assert(video.pixels[125 * FA18_WIDTH + 100] == 0x1c);
+    assert(video.pixels[125 * FA18_WIDTH + 100] == 0x1d);
 
     memset(&video, 0, sizeof video);
     state = (FA18PlanarPixelState){ 11, 15, -1, 0 };
@@ -56,7 +69,7 @@ int main(void) {
     memset(&video, 0, sizeof video);
     state = (FA18PlanarPixelState){ 11, 15, -1, 0 };
     assert(fa18_submit_primary_renderer_pixel(&video, &state, 100, 125) == 0);
-    assert(video.pixels[125 * FA18_WIDTH + 100] == 10);
+    assert(video.pixels[125 * FA18_WIDTH + 100] == 11);
 
     /* `$C2F786[1]` is `$C2F83A`, the lane-0-set handler. The adjacent
      * `$C2F830` all-XOR helper is not a dispatch-table entry. */
@@ -74,8 +87,8 @@ int main(void) {
 
     memset(&video, 0, sizeof video);
     assert(fa18_submit_adjacent_renderer_pixels(&video, &state, 160, 99) == 0);
-    assert(video.pixels[99 * FA18_WIDTH + 159] == 10);
-    assert(video.pixels[99 * FA18_WIDTH + 160] == 10);
+    assert(video.pixels[99 * FA18_WIDTH + 159] == 11);
+    assert(video.pixels[99 * FA18_WIDTH + 160] == 11);
 
     memset(&video, 0, sizeof video);
     assert(fa18_submit_bounded_renderer_pixels(&video, &state, 172, 99, 179) == 0);
@@ -88,17 +101,17 @@ int main(void) {
 
     memset(&video, 0, sizeof video);
     assert(fa18_submit_adjusted_renderer_pixels(&video, &state, 99, 124, 1, 1) == 0);
-    assert(video.pixels[125 * FA18_WIDTH + 100] == 10);
+    assert(video.pixels[125 * FA18_WIDTH + 100] == 11);
     assert(fa18_submit_adjusted_renderer_pixels(&video, &state, -1, 99, 0, 0) == 1);
     assert(fa18_submit_adjusted_renderer_pixels(&video, &state, 319, 99, 1, 0) == 1);
 
     memset(&video, 0, sizeof video);
     const FA18PlanarPixelRendererContext renderer = { &video, &state };
     assert(fa18_emit_primary_renderer_pixel(&renderer, 100, 125) == 0);
-    assert(video.pixels[125 * FA18_WIDTH + 100] == 10);
+    assert(video.pixels[125 * FA18_WIDTH + 100] == 11);
     assert(fa18_emit_adjacent_renderer_pixels(&renderer, 160, 99) == 0);
-    assert(video.pixels[99 * FA18_WIDTH + 159] == 10);
-    assert(video.pixels[99 * FA18_WIDTH + 160] == 10);
+    assert(video.pixels[99 * FA18_WIDTH + 159] == 11);
+    assert(video.pixels[99 * FA18_WIDTH + 160] == 11);
     assert(fa18_emit_primary_renderer_pixel(0, 100, 125) == -1);
 
     uint8_t lanes[FA18_PLANAR_PIXEL_LANES][FA18_PLANAR_PIXEL_PAGE_BYTES] = {{0}};

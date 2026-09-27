@@ -30,6 +30,7 @@ typedef struct {
     FA18MenuFlow menu_flow;
     FA18MenuRecord menu_records[FA18_MENU_TEXT_SELECTORS];
     FA18SceneRenderFixture render_fixture;
+    FA18C279RenderFixture c279_render_fixture;
     uint32_t frame; /* PAL video frame number, matching the recorded run */
 } FA18Game;
 
@@ -43,6 +44,11 @@ int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *contr
 /* User-authorized temporary captured-state visual bootstrap. It is opt-in and
  * does not alter the normal replay path. */
 int fa18_game_enable_render_fixture(FA18Game *game, const char *chip_capture_path);
+
+/* User-authorized temporary `$C279D0` producer diagnostic. It is opt-in and
+ * does not alter the normal replay path. */
+int fa18_game_enable_c279_render_fixture(FA18Game *game, const char *slow_capture_path,
+                                         const char *chip_capture_path);
 
 /* Advance one PAL video frame with the given control state. */
 int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,

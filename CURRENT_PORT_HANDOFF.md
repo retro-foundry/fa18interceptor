@@ -20,10 +20,23 @@ replay, and does not advance the 192-frame parity result. It is a visibility
 diagnostic only, not a native scene renderer or completion of the frame-392
 producer.
 
-`port/planar_pixel.c` now preserves the `$C2F786` primary dispatch-table gap:
-selector 1 enters `$C2F83A` (lane-0 set), not the adjacent `$C2F830` all-XOR
-helper that is absent from the table. Its focused contract passes; normal
-replay remains 192 exact frames through global frame 391.
+The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
+starts from external frame-384 pre-call state, then runs the native
+`$C279D0-$C27D0F` packet/grid/direct-pixel/line path over that page. It does
+not embed either capture or schedule it in normal replay. Against
+`build/run075_frame382_c279d0_render_page/{slow,chip,final_chip}.bin`, its
+one-frame RGB444 result is byte-identical to the original post-return page
+(128,000 bytes, zero differences; 12 nonblack pixels under Hunk-21 mode 8).
+This proves only that narrow producer invocation, not the later 361-pixel
+frame-392 page or its display scheduler.
+
+`port/planar_pixel.c` now preserves the entire `$C2F786` primary dispatch
+table: selector 0 reaches `$C2F826` (all clear), while selectors 1--15 map
+directly to their matching lane-set targets `$C2F83A-$C2F8C6`. The adjacent
+`$C2F830` all-XOR helper is absent from that table. The `$C279D0` packet's
+own `$C456E6-$C456ED`/`$C45954` setup now also binds the native page's pixel
+and line callbacks before its Hunk-25 traversal. Focused contracts pass;
+normal replay remains 192 exact frames through global frame 391.
 
 ## Non-negotiable porting rules
 
@@ -70,6 +83,11 @@ The newly-portable transformation pieces include:
 `port/game.c` still only handles menu flow.  It does not yet own the live
 scene/root transform, projection-grid submission, five-plane page, or
 viewport/Copper presentation needed for the flight scene.
+
+The external `$C279D0` producer diagnostic is deliberately not an exception:
+it exists to validate the now-connected renderer boundary with caller-supplied
+oracle state. The normal game still has no evidenced scene/root publisher or
+scheduler, so it must not be wired into `game.c` without those missing owners.
 
 ## Completed matrix-product projection stage
 

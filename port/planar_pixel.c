@@ -49,15 +49,15 @@ static void set_pixel_page_lanes(FA18PlanarPixelPage *page, size_t offset,
     }
 }
 
-static uint8_t updated_lanes(uint8_t previous, const FA18PlanarPixelState *state,
-                             FA18PlanarPixelTable table) {
+static uint8_t updated_lanes(uint8_t previous, const FA18PlanarPixelState *state) {
     const uint8_t active_lanes = (uint8_t)(state->active_plane_mask & 15u);
     const uint8_t xor_lanes = (uint8_t)(state->output_xor_plane_mask & active_lanes & 15u);
     if (state->output_xor_enable >= 0 && xor_lanes)
         return (uint8_t)(previous ^ xor_lanes);
-    const uint8_t mode = (uint8_t)(state->draw_mode & 15u);
-    const uint8_t target = table == FA18_PLANAR_PIXEL_PRIMARY && mode > 1u
-        ? (uint8_t)(mode - 1u) : mode;
+    /* `$C2F786[0]` is `$C2F826` (all clear); entries 1..15 point at
+     * `$C2F83A`..`$C2F8C6`, the matching four-lane set combinations.
+     * `$C2F830` is an all-XOR helper between table entries, not a selector. */
+    const uint8_t target = (uint8_t)(state->draw_mode & 15u);
     return (uint8_t)((previous & (uint8_t)~active_lanes) | (target & active_lanes));
 }
 
@@ -79,7 +79,7 @@ int fa18_apply_planar_pixel_mask(FA18Video *video,
             uint8_t *pixel = &video->pixels[(size_t)row * FA18_WIDTH + word_x + bit];
             const uint8_t preserved_fifth_lane = (uint8_t)(*pixel & 16u);
             *pixel = (uint8_t)(preserved_fifth_lane |
-                               updated_lanes((uint8_t)(*pixel & 15u), state, table));
+                               updated_lanes((uint8_t)(*pixel & 15u), state));
         }
     }
     return 0;
@@ -105,8 +105,7 @@ static int apply_planar_pixel_mask_to_page_rows(FA18PlanarPixelPage *page,
         for (int row = y; row < y + rows; ++row) {
             const size_t offset = (size_t)row * FA18_PLANAR_PIXEL_ROW_BYTES + byte_x;
             set_pixel_page_lanes(page, offset, bit,
-                                 updated_lanes(pixel_page_lanes(page, offset, bit),
-                                               state, table));
+                                 updated_lanes(pixel_page_lanes(page, offset, bit), state));
         }
     }
     return 0;

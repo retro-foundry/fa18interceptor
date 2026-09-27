@@ -17,7 +17,7 @@ int main(void) {
     assert(submission && submission->triangle_submission);
 
     assert(submission->primary_emitter(submission->emitter_context, 20, 10) == 0);
-    assert(page.planes[0][402] == 0 && page.planes[1][402] == 0x08 &&
+    assert(page.planes[0][402] == 0x08 && page.planes[1][402] == 0x08 &&
            page.planes[2][402] == 0 && page.planes[3][402] == 0x08);
 
     assert(submission->triangle_submission->dma_emitter(
@@ -29,5 +29,21 @@ int main(void) {
     assert(page.planes[1][402] == 0x0f && page.planes[2][402] == 0x0f);
     assert(!submission->triangle_submission->blitter_emitter &&
            !submission->triangle_submission->final_emitter);
+
+    const FA18ProjectionGridPacketState packet_state = {
+        { 4, 0, 0, -1 }, 3, 1, 0
+    };
+    assert(fa18_flight_renderer_page_apply_projection_grid_packet_state(
+               &renderer, &packet_state) == 0);
+    assert(renderer.direct_pixels.state == &renderer.pixel_state &&
+           renderer.pixel_state.draw_mode == 3 &&
+           renderer.pixel_state.active_plane_mask == 4 &&
+           renderer.pixel_state.output_xor_enable == 0 &&
+           renderer.pixel_state.output_xor_plane_mask == 0);
+    assert(renderer.lines.style == &renderer.line_style &&
+           renderer.line_style.active_plane_mask == 4 &&
+           renderer.line_style.plane_mode == 0 && renderer.line_style.plane_bits == 0 &&
+           renderer.line_style.control_plane_bits == 3);
+    assert(fa18_flight_renderer_page_apply_projection_grid_packet_state(0, &packet_state) == -1);
     return 0;
 }

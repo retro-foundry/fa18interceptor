@@ -33,6 +33,10 @@ int main(void) {
     assert(fa18_render_flight_scene_pipeline(&grid, &input, &renderer, &result) == 0);
     assert(result.packet_route == FA18_PROJECTION_GRID_PACKET_READY &&
            result.submitted_record_count == 1);
+    assert(renderer.pixel_state.draw_mode == 3 &&
+           renderer.pixel_state.active_plane_mask == 4 &&
+           renderer.pixel_state.output_xor_enable == 0 &&
+           renderer.pixel_state.output_xor_plane_mask == 0);
     FA18ParentFlightScenePipelineContext callback = {&grid, &input, &renderer, &result};
     assert(fa18_run_parent_flight_scene_pipeline(&callback) == 0 &&
            result.packet_route == FA18_PROJECTION_GRID_PACKET_READY);

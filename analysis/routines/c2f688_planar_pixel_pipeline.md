@@ -66,10 +66,11 @@ The run075 frame-315 alternate path provides a separate port contract:
 `A3=$C2F7C6`, `A4=$C2F7E6`, mode `$B`, mask `$0018` at x=172, and handler
 `$C2F9EE`. It writes the selected two-bit mask at y=99 and y=100, changing
 four Chip-RAM bytes and two deplanarized pixel indices. The later run060
-trace at x=100, y=125, mode `$D` independently proves a primary-table handler
-that maps input index 2 to 12. `port/renderer.c` translates the complete
-proved primary and alternate table behavior into indexed chunky pixels through
-the named `FA18RendererState` struct and `FA18PixelTable` enum. It preserves
-enabled-plane behavior and both XOR paths. The native primitive owns only its
-320x200 visual buffer, so original writes outside that buffer remain outside
-this port contract. See `analysis/routines/c2f688_run075_two_row_mask.md`.
+trace at x=100, y=125, mode `$D` reaches `$C2F8B2`: it clears lane 1 and sets
+lanes 0, 2, and 3, so an all-enabled input index 2 becomes index 13. The
+native `port/planar_pixel.c` path now preserves that direct selector-to-lane
+mapping for every `$C2F786` entry, including selector 1's `$C2F83A` lane-0
+set target. It preserves enabled-plane behavior and both XOR paths. The native
+primitive owns only its 320x200 visual buffer, so original writes outside that
+buffer remain outside this port contract. See
+`analysis/routines/c2f688_run075_two_row_mask.md`.

@@ -90,14 +90,26 @@ int fa18_game_apply_controls(FA18Game *game, const FA18ReplayControlState *contr
     int result;
     if (!game) return -1;
     result = fa18_menu_flow_apply_controls(&game->menu_flow, controls, &game->video);
-    if (result != 0 || !game->render_fixture.enabled) return result;
-    return fa18_present_scene_render_fixture(&game->render_fixture, &game->video);
+    if (result != 0) return result;
+    if (game->c279_render_fixture.enabled)
+        return fa18_present_c279_render_fixture(&game->c279_render_fixture, &game->video);
+    if (game->render_fixture.enabled)
+        return fa18_present_scene_render_fixture(&game->render_fixture, &game->video);
+    return 0;
 }
 
 int fa18_game_enable_render_fixture(FA18Game *game, const char *chip_capture_path) {
     if (!game) return -1;
     return fa18_initialize_scene_render_fixture(&game->render_fixture, &game->exe,
                                                 chip_capture_path, &game->video);
+}
+
+int fa18_game_enable_c279_render_fixture(FA18Game *game, const char *slow_capture_path,
+                                         const char *chip_capture_path) {
+    if (!game) return -1;
+    return fa18_initialize_c279_render_fixture(&game->c279_render_fixture, &game->exe,
+                                               &game->projection_grid, slow_capture_path,
+                                               chip_capture_path, &game->video);
 }
 
 int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,

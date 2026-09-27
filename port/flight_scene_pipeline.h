@@ -31,7 +31,7 @@ typedef struct {
 int fa18_render_flight_scene_pipeline(
     const FA18ProjectionGrid *grid,
     const FA18FlightScenePipelineInput *input,
-    const FA18FlightRendererPage *page_renderer,
+    FA18FlightRendererPage *page_renderer,
     FA18FlightScenePipelineResult *result);
 
 /* Resolve the `$C46184 + $C458DE.w` record selected by `$C1C54E`, then run
@@ -41,7 +41,7 @@ int fa18_render_active_flight_scene_pipeline(
     const FA18ProjectionGrid *grid,
     const FA18SceneActiveRecordState *active_record,
     const FA18FlightScenePipelineInput *input,
-    const FA18FlightRendererPage *page_renderer,
+    FA18FlightRendererPage *page_renderer,
     FA18FlightScenePipelineResult *result);
 
 /* Adapter for the `$C279D0` renderer-packet callback slot in
@@ -49,7 +49,7 @@ int fa18_render_active_flight_scene_pipeline(
 typedef struct {
     const FA18ProjectionGrid *grid;
     const FA18FlightScenePipelineInput *input;
-    const FA18FlightRendererPage *page_renderer;
+    FA18FlightRendererPage *page_renderer;
     FA18FlightScenePipelineResult *result;
 } FA18ParentFlightScenePipelineContext;
 

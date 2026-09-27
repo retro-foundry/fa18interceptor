@@ -12,6 +12,8 @@
  * remain absent until their complete page semantics are reconstructed. */
 typedef struct {
     FA18PlanarLanePage lanes;
+    FA18PlanarPixelState pixel_state;
+    FA18LineStyle line_style;
     FA18PlanarPixelPageRendererContext direct_pixels;
     FA18PlanarLinePageContext lines;
     FA18ProjectionPairSubmission triangle_submission;
@@ -28,6 +30,13 @@ int fa18_flight_renderer_page_init(
     const FA18PlanarPixelState *pixel_state, const FA18LineStyle *line_style,
     int16_t display_bound_y, int16_t vertical_value, int16_t horizontal_value,
     uint32_t renderer_base_long, uint8_t mode_flag, uint32_t saved_line_scratch);
+
+/* `$C279D4-$C279F2` writes `$C456E6-$C456ED` and `$C45954` before the
+ * Hunk-25 traversal. Bind those source-owned fields to this page's direct
+ * pixel and line callbacks; the input packet/scheduler remain caller-owned. */
+int fa18_flight_renderer_page_apply_projection_grid_packet_state(
+    FA18FlightRendererPage *renderer,
+    const FA18ProjectionGridPacketState *packet_state);
 
 const FA18ProjectionGridSubmission *fa18_flight_renderer_page_submission(
     const FA18FlightRendererPage *renderer);
