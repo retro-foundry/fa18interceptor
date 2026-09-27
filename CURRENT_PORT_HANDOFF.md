@@ -1,0 +1,129 @@
+# C port continuation handoff
+
+## Starting point
+
+- Branch: `coverage-accounting`
+- Head: `1314e869 Port matrix tuple validation prefix`
+- Working tree: only untracked `.vscode/` (user-owned; leave it alone).
+- Goal: complete the faithful C port, committing each coherent, validated stage.
+
+The current native reference check reaches **192 exact frames**: global frames
+200 through 391.  It first mismatches at global frame 392 (361 of 64,000
+pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **86/86** tests.
+
+## Non-negotiable porting rules
+
+- The Amiga source/disassembly and extracted assets are the authority.  Do not
+  add invented gameplay, constants, timing schedules, frame-specific output,
+  or fallbacks.
+- Do not use Ghidra.  The repository handover explicitly disallows it.
+- Do not put emulator-captured screen/frame data in `fa18_port`.  Captured data
+  may be a test oracle/fixture only.  The native allowlist check enforces this.
+- Preserve user-owned `scripts/check_native_build.py`,
+  `scripts/native_frame_count.py`, and `port/native_data_allowlist.txt`.
+- Run build/test and the native-frame verifier serially: the MSVC linker can
+  lock when they overlap.
+- Keep `.vscode/` untracked.  Commit only the coherent port work you make.
+
+## What the port has now
+
+Recent commits, newest first:
+
+```
+1314e869 Port matrix tuple validation prefix
+103d0833 Port fixed matrix product tuple
+c8873377 Port signed matrix product stage
+67c78b1f Wire native record matrix update path
+a1336578 Port rotation matrix builder
+a9522cbc Port three-angle matrix composer
+cef55fd1 Port single-angle trig matrix builder
+635fcd34 Port matrix row scaling stage
+```
+
+The newly-portable transformation pieces include:
+
+- `port/two_angle_matrix.{c,h}`: source routines `$C2E38E`, `$C2E346`,
+  `$C2E370`, `$C2E3DE`, and `$C2E47A`; Hunk 63 trig lookup setup.
+- `port/matrix_row_scale.{c,h}`: `$C2E5AC`.
+- `port/signed_matrix_product.{c,h}`: core `$C2DEFC-$C2E017`.  The preceding
+  `$C2DEE0` guards are intentionally not claimed as ported.
+- `port/fixed_matrix_tuple.{c,h}`: `$C0DAEE-$C0DB3A` product/handoff prefix.
+- `port/matrix_tuple_validation.{c,h}`: `$C2EC9C-$C2ECC5` plus rejection
+  helper `$C2EC82-$C2EC8F`.
+- `port/record_matrix_update.{c,h}`: concrete native `$C2D94E` path alongside
+  its original generic callback API.
+
+`port/game.c` still only handles menu flow.  It does not yet own the live
+scene/root transform, projection-grid submission, five-plane page, or
+viewport/Copper presentation needed for the flight scene.
+
+## The next implementation target
+
+Port `$C2ECC6-$C2ED6B`, documented in
+`analysis/routines/c2ecc6_matrix_product_projection.md` and source in
+`source_amiga/observed/project_matrix_product_tuple.asm`.
+
+It projects a validated matrix-product tuple:
+
+1. signed multiply/divide and add screen offsets (`#$a0`, `#$5a`),
+2. source clamp to x `0..$13f` and y `0..$b3`,
+3. reflection to the stored pair at `$C45958`,
+4. project-limit rejection through `$C2EC82`,
+5. the negative-`D7` continuation/return path.
+
+Keep the non-negative-`D7` child dispatch as an explicit unported boundary;
+do not invent a child call.  For 68000 `DIVS.W`, model signed 32-bit numerator
+and signed 16-bit divisor, truncation toward zero, and detect quotient
+overflow rather than silently using C overflow behavior.
+
+The primary observed test case is run041:
+
+```
+input low signed tuple: D0=-19, D1=1452, D2=7990
+pre-reflection:          (160, 106)
+stored projected pair:   (159, 74)
+negative D7 route:       ends at D7=-1, returns projected x
+```
+
+Add focused contract tests (including rejection and clamping), add the source
+to CMake and `fa18_port`, then run the standard checks and commit the stage.
+
+## Frame-392 evidence and integration boundary
+
+Read these before wiring it into the runtime:
+
+- `analysis/routines/run075_frame392_cockpit_entry.md`
+- `analysis/routines/run075_c279d0_prepared_page_handoff.md`
+
+The visible change at global frame 392 is not fresh page rendering.  A page
+was prepared at frame 384 by `$C279D0` from Hunk 25 records, while dynamic
+Copper lower-16 palette state from the Hunk 21 mode table made it visible at
+392.  Relevant observed entry values are `$C45A72.w=E7C1`,
+`$C45A76.w=E64E`, `$C45A78.l=FFFFFF83`, and matrix `$C45BD8`.
+
+Those values are evidence, never runtime constants.  The eventual data flow
+must be:
+
+```
+scene/root transform -> projection packet + matrix -> FA18ProjectionGrid
+-> five-plane page -> viewport/Copper present
+```
+
+Existing page, packet, grid, viewport, and palette modules are building
+blocks, but they are not yet scheduled by the game loop.  In particular, do
+not naively advance/present a blank page just to make frame 392 change.
+
+## Standard validation after each stage
+
+Use the existing build directory/configuration and run serially:
+
+```
+cmake --build build --config Release
+ctest --test-dir build -C Release --output-on-failure
+python scripts/check_native_build.py
+python scripts/native_frame_count.py --to 392 --timeout 180
+```
+
+At this handoff, expected frame-check result is `NATIVE_FRAME_COUNT=192`, with
+the first mismatch at frame 392 as described above.  A new exact result beyond
+that is welcome only if it arises from the faithful runtime pipeline.
