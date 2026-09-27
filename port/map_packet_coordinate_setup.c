@@ -22,20 +22,17 @@ static uint32_t add_word_4(uint32_t value) {
 
 int fa18_prepare_map_packet_coordinate_setup(
     const FA18MapPacketCoordinateSetupInput *input,
-    FA18MapPacketCoordinateSetupResult *result,
-    FA18MapPacketCoordinateSetupRoute *route) {
-    if (!input || !result || !route) return -1;
-    if (input->directory_selector_gate) {
-        *route = FA18_MAP_PACKET_COORDINATE_EXTERNAL_SELECTOR;
-        return 0;
-    }
+    FA18MapPacketCoordinateSetupResult *result) {
+    if (!input || !result) return -1;
+    const int32_t *component = input->directory_selector_gate ?
+        input->selector_component : input->control_component;
 
-    uint32_t origin = (uint32_t)input->control_component[1] + UINT32_C(0x1000);
+    uint32_t origin = (uint32_t)component[1] + UINT32_C(0x1000);
     origin = rol_long_4(swap_words(origin));
     result->origin_component = (int16_t)(uint16_t)(UINT32_C(0) - origin);
 
-    uint32_t coordinate_x = swap_words((uint32_t)input->control_component[0]);
-    uint32_t coordinate_y = swap_words((uint32_t)input->control_component[2]);
+    uint32_t coordinate_x = swap_words((uint32_t)component[0]);
+    uint32_t coordinate_y = swap_words((uint32_t)component[2]);
     coordinate_x = lsr_word(coordinate_x, input->coordinate_bin_shift);
     coordinate_y = lsr_word(coordinate_y, input->coordinate_bin_shift);
     if (!input->alternate_layout) {
@@ -46,6 +43,5 @@ int fa18_prepare_map_packet_coordinate_setup(
     result->coordinate_y = (int32_t)coordinate_y;
     result->row_min = (int16_t)coordinate_x;
     result->column_min = (int16_t)coordinate_y;
-    *route = FA18_MAP_PACKET_COORDINATE_READY;
     return 0;
 }

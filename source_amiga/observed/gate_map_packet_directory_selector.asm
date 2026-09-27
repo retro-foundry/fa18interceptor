@@ -5,3 +5,5 @@
 gate_map_packet_directory_selector:
                 tst.b   $C45785.l
                 beq.b   $C2AB8C
+                lea.l   $C45C3E.l,a4
+                bra.b   $C2AB9C
