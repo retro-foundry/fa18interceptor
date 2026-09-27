@@ -1,12 +1,12 @@
 # Reverse-engineering handoff
 
-Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
+Updated: 2026-09-25. Read `README.md`, `STATUS.md`,
+`RE_COMPLETION_PLAN.md`, then this file.
 
 ## Authority and working state
 
 - Branch: `coverage-accounting`; remote: `github-retrofoundry`.
-- All material analysis commits are pushed. Check `git status --short` before
-  editing; build outputs are ignored.
+- Check `git status --short` before editing; build outputs are ignored.
 - Original disk and sealed captures are authorities. Do not alter a sealed
   capture. Runtime authority is the pinned Engine9000 v0.62-alpha Amiga core.
 - Run the byte gate after source changes:
@@ -15,8 +15,42 @@ Updated: 2026-09-24. Read `README.md`, `STATUS.md`, then this file.
   python scripts/verify_reconstructions.py
   ```
 
-  Last checked result: 629 source slices / 51,102 bytes match the authority
-  snapshot.
+  The current generated coverage file records 634 source slices / 51,256
+  bytes, with no overlaps. Re-run the byte gate after edits.
+
+- Strict byte coverage is 28,562 / 44,218 exported executed bytes (64.59%)
+  and 51,256 / 219,784 plausible instruction bytes (23.32%), after excluding
+  66,192 confirmed data bytes. `analysis/code_data_estimates.md` adds a
+  separate working estimate: Hunks 41–44 contribute 10,148 candidate immutable
+  scene/control bytes, yielding 51,256 / 209,636 (24.45%). Do not use that
+  estimate in a completion claim: its hunk-level data-use audit is incomplete.
+  Strict unresolved CODE remains 55,280 bytes; estimated unresolved is 45,132.
+
+- The sealed run041 `$C35A98` source interval contains an accepted
+  `$C33D34 -> $C2EC90 -> $C33D3A` projection and a rejected
+  `$C0DB3A -> $C2EC9C -> $C0DB40` call. The accepted store at `$C45958` is
+  `(159,74)`; the former `(319,90)` note was wrong. Reproduce the compact
+  fixture with `python scripts/extract_run041_projection_oracle.py`; see
+  `analysis/routines/c2ecc6_matrix_product_projection.md`. The two adjacent
+  `$C2EC90/$C2EC94` entry stubs are now byte-exact in
+  `source_amiga/observed/select_projection_validation_mode.asm`; only the
+  `$C2EC90` entry executes in this fixture.
+
+- `RE_COMPLETION_PLAN.md` defines the evidence gates and ordered work.
+  `analysis/semantics.json` now mirrors generated strict byte metrics; its
+  semantic counts remain reviewed separately from source length.
+
+- `analysis/reverse_call_stack_priorities.md` ranks the first critical
+  unknowns using verified emulator call/return chains from run037, run041,
+  and run042. `scripts/reverse_trace_call_stacks.py` regenerates the JSON
+  evidence. Priority 1 is the `$C1CC86/$C1CFA6 -> $C1EE14` descriptor-stage
+  boundary; priority 2 is the known `$C1C636 -> $C45A78 -> $C2AA9C` depth
+  route's still-unproved live tuple/physical-range interpretation. The
+  run037 `$C1EE14/$C1ED3C` calls all return and six of seven reach both the
+  immutable-triple transform and the control-stream walker. Branch entries
+  share the enclosing call frame and must not be counted as separate calls.
+  The seventh call scans `$C37EA6` through two bounded control words and a
+  `$FFFF` sentinel, then returns zero via the new byte-exact `$C1EEA0` slice.
 
 - The source frontier in Hunk 8 now includes the independently returning
   structural record-delta scan `$C1CFD6-$C1D0A3` in
@@ -235,5 +269,101 @@ uncovered green margins are not asserted land. See
 - `0f895cd Join flat map placement to 3D face context`
 - `1dd3249 Visualize source-bounded terrain face`
 
-Keep the goal active: full reverse engineering, a complete 3D world-map
-extraction, and a physical-distance LOD proof are not complete.
+Keep the goal active: full reverse engineering and a complete 3D world-map
+extraction are not complete. On 2026-09-25 the user explicitly removed LOD
+from scope; retain prior LOD notes as qualified historical evidence only and
+do not treat a physical-distance proof as a completion blocker. The user's
+working reconstruction guidance is simply two terrain-tile sizes; keep that
+as user guidance rather than promoting it to a newly proved selector rule.
+
+## Latest selector result
+
+`analysis/data/run041_descriptor_detail_selector.md` records same-invocation
+control-word comparisons and source choices across frames 5,000, 5,750,
+6,000, and 6,250. The `$C1EE58-$C1EE83` selector is now byte-exact.
+`analysis/data/run041_selector_input_provenance.md` proves its immediate
+caller-record writers: primary `$C1CBA8/$C1CC60`, alternate
+`$C1CE66/$C1CF6A`. Follow each record's construction and coordinate inputs,
+then resolve the `$C1CC86` / `$C1CFA6` pass change. Do not label the rule
+physical-distance LOD yet. The collector and analyzer scripts regenerate the
+JSON evidence from the four bounded traces.
+
+The key correction is that `$C1D91A` is not the immediate source of these
+selector inputs. `$C1EE14` compares fields supplied by mutable placement
+records: the caller writes the low selector nibble to `$C45AB8` and its active
+record's `+$04` word to `$C45B40`. The existing builder proves `$C4E9AA` and
+`$C4F6CA` are mutable placement caches; the next trace must join their specific
+construction to the selected run041 records, then explain why the alternate
+route renders at frame 6,250.
+
+The active selected records are now explicit in
+`analysis/data/run041_selector_input_provenance.json` as `limit_store.active_record`:
+the primary route samples `$C4E9C2/$C4E9DA` before moving to
+`$C4E9DA/$C4E9F2`, while the alternate route samples
+`$C4F712/$C4F72A` then `$C4F6E2/$C4F6FA`. The completed 5,737--5,760 run041
+trace proves that this stable display interval has no `$C1D488` template copy
+or `$C1DD36` builder read despite 23 descriptor-stage calls. Do not extend it
+blindly: capture a scene/placement-changing update that starts before the
+builder and continues through one of those exact record reads and a returned
+`$C1EE14` invocation.
+
+The same analyzer's snapshot-backed join now shows both table routes carry the
+same sampled descriptor/control pairs (`$C22408 -> $C35568` and
+`$C2241C -> $C355A0`). At frame 6,250, the primary/alternate rendering split
+is therefore not explained by a different selected descriptor `+8` control
+pointer; only the alternate route reaches the observed transforms. Limit words
+can mutate after a trace-start snapshot, so do not use those snapshots as
+call-time state without the analyzer's match flags.
+
+The mutation has a proved immediate writer: `$C1CC2E/$C1CF2C` call the
+byte-exact `$C1D91A` fixed-point stage, `$C1CC34/$C1CF32` can store its `D1`
+back to the same active record `+$10`, then `$C1CC60/$C1CF6A` publish that
+word to `$C45B40`. Run041 examples include primary `$C4E9DA -> 398` at frame
+6,009 and alternate `$C4F6FA -> 397` at frame 6,012. This is fixed-point
+detail-threshold dataflow, not proof of physical range or LOD.
+
+The separate map-depth producer/consumer handoff now has a compact oracle:
+`python scripts/extract_attract_projection_metric_oracle.py` proves
+`$C1C636 -> $C45A78 -> $C2AAD2` value parity (`-125`) in the bounded attract
+trace, with 19 intervening reads and no intervening write. This proves the
+renderer-component dependency but not the transform's source record, camera
+context, physical distance, or LOD meaning.
+
+The oracle also records publisher `A2=$C46184` and its direct `+$14/+$18/+$1C`
+field reads: it is rooted in the mutable control-record bank, not a direct
+immutable terrain-template triple. The selected control record's physical role
+and camera relation remain open.
+
+`$C279D0`, the parent flight-update helper, now has byte-exact observed source
+for its entry `$C279D0-$C279F9` and its `$C27A0C-$C27A31` component gate.
+The latter reads `$C45A78`, branches to `$C27C44` below signed `-$800`, and
+otherwise sets `$C457A2` before a second `-$200` comparison. Its observed
+descendants reach `$C2FF48` polygon submission. See
+`analysis/routines/c279d0_flight_update_helper.md`. This narrows another
+renderer-facing consumer of the projection component, but does not establish
+physical distance, object identity, or a shared LOD predicate.
+
+The same helper's contiguous `$C27AF4-$C27C4D` loop is now exact source in
+`project_c279d0_table_records.asm`: it transforms selected table records,
+fills `$C4B392-$C4B39D` with bounded screen pairs, and calls `$C2FF48`.
+This joins the helper's `$C45A78` component gate to a direct polygon path, but
+does not identify the table's object or turn projection thresholds into range.
+
+`project_c279d0_direct_pair.asm` now adds the exact `$C27C62-$C27D0F`
+alternate branch. It repeats the bounded fixed-point projection and chooses
+`$C2F5F4` or `$C2F60A` from local record-kind word `-$18(A6)`. Treat this as
+renderer dispatch dataflow, not an object-class or physical-range label.
+
+`$C123FA` is now entered as an exact coordinate-update helper slice
+(`initialize_c123fa_coordinate_update.asm`) on the `$C2D9BA` matrix-pipeline
+call path. The verified continuation normalizes signed argument components,
+then uses `$C45ACC/$C45AD0/$C45AD2` and `$C3DB00` in a divide/table path.
+See `analysis/routines/c123fa_coordinate_update.md`; axes, units, and final
+formula remain unproven.
+
+`$C20A52-$C20A7F` is now exact source in
+`initialize_c20a52_record_projection.asm`. It shares the `$C1F6F8` walker
+frame, initializes selector `$000D` and `$C456E6`, selects an offset within
+`$C48390`, then feeds an observed `$C4BF90` workspace / `$C246A0` projection
+continuation. See `analysis/routines/c20a52_record_projection.md`; retain the
+primitive topology and object identity as unresolved.

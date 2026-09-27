@@ -33,6 +33,8 @@ def main():
     parser.add_argument('--address-mask', type=lambda x: int(x, 0), default=0xffffff,
                         help='24-bit address compare mask (default: exact address)')
     parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
+    parser.add_argument('--output', type=Path,
+                        help='new directory in which to preserve the paused state on a hit')
     args = parser.parse_args()
     if args.any_source and args.source:
         parser.error('--any-source and --source cannot be combined')
@@ -69,8 +71,16 @@ def main():
         engine.core.retro_run()
         watch = Watchbreak()
         if consume(C.byref(watch)):
-            hit = {'frame': frame, 'registers': engine.regs(),
+            registers = engine.regs()
+            stack_size = min(256, 0xc80000 - registers['a7'])
+            hit = {'frame': frame, 'registers': registers,
+                   'instruction_bytes': engine.memory(registers['pc'], 16).hex(),
+                   'stack_bytes': engine.memory(registers['a7'], stack_size).hex(),
                    'watch': {name: getattr(watch, name) for name, _ in Watchbreak._fields_}}
+            if args.output:
+                args.output.mkdir(parents=True, exist_ok=False)
+                (args.output / 'state.bin').write_bytes(engine.state())
+                hit['paused_state'] = str(args.output / 'state.bin')
             break
     actual = 'hit' if hit else 'miss'
     report = {'address': f'{args.address:06x}', 'address_mask': f'{args.address_mask:06x}',

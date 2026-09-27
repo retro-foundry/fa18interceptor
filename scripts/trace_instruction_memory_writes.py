@@ -71,6 +71,12 @@ def main() -> None:
                     break
             if hit_frame is None:
                 raise RuntimeError("breakpoint not reached")
+        entry_registers = engine.regs()
+        entry = {
+            "registers": entry_registers,
+            "instruction_bytes": engine.memory(entry_registers["pc"], 16).hex(),
+            "stack_bytes": engine.memory(entry_registers["a7"], 32).hex(),
+        }
         before = engine.memory(args.watch_address, args.watch_size)
         writes = []
         context = deque(maxlen=args.context_instructions)
@@ -96,6 +102,7 @@ def main() -> None:
             context.append(row)
         report = {"breakpoint": f"${args.breakpoint:06X}" if args.breakpoint is not None else None,
                   "start_immediately": args.start_immediately, "hit_frame": hit_frame,
+                  "entry": entry,
                   "playback_frame_offset": args.playback_frame_offset,
                   "watch_address": f"${args.watch_address:06X}", "watch_size": args.watch_size,
                   "instructions": args.max_instructions, "writes": writes,

@@ -78,7 +78,7 @@ infer a function's purpose merely from a rendered frame.
 | `$C3318E` | run075 demo route selects `D0=2,D1=2` packet for `$C17EF2`; purpose of the callee remains open (`analysis/routines/c3318e_indexed_command_side_effect.md`) | Not ported |
 | `$C0FCB4` | run075 frame 234 proves demo selector 101, delay `$D2`, and delayed-transition continuation; other routes in `analysis/routines/c0fcb4_top_level_menu_followup.md` | `$C0FD10-$C0FDCE` demo arm ported through native `FA18MenuState` in `port/menu.c`; rest not ported |
 | `$C0FECE` | run075 signed countdown expires at frame 271; mode `$7F` dispatch selects the demo-entry continuation (`analysis/routines/c0fece_delayed_menu_transition.md`) | Signed gate, proved tick update, bounded run075 common setup, and `$C1000A-$C10020` demo arm ported through `FA18MenuState`; helper-call effects and other modes remain open |
-| `$C0FAA4` | run075 frame 370 direct scene-initialization stores, followed by `$C0FA04` followup stores; helper calls `$C28722`, `$C0924A`, `$C11312`, `$C082B0` remain dataflow evidence (`analysis/routines/c0faa4_run075_scene_initialization.md`) | Direct state subset and caller ordering ported through `FA18MenuState`; nested helper effects and scene rendering remain open |
+| `$C0FAA4` | run075 frame 370 direct scene-initialization stores, followed by `$C0FA04` followup stores; helper calls `$C28722`, `$C0924A`, `$C11312`, `$C082B0` remain dataflow evidence (`analysis/routines/c0faa4_run075_scene_initialization.md`) | Direct stores and ordered helper boundary ported through `FA18SceneInitializationState`; the shared `$C45AD6` countdown composes with the reusable `$C0FA04` primitive; nested helper effects and scene rendering remain open |
 | `$C2F688` | Four-plane pixel word address/mask preparation and handlers; run075 frame 315 proves the alternate two-row path and run060 proves a primary handler (`analysis/routines/c2f688_run075_two_row_mask.md`) | Proved primary and alternate handlers, plane enables, and pre-dispatch XOR ported to chunky pixels through `FA18RendererState` in `port/renderer.c`; arbitrary off-buffer Amiga writes remain outside this visual contract |
 | `$C2FA7E` | Blitter line setup and enabled-plane submissions; run075 proves endpoint ordering and hardware triggers (`analysis/routines/c2fa7e_blitter_line.md`) | Native recurrence remains provisional; require a settled run060+ visual fixture before calling it a port contract |
 | `$C24CFE` | Finalized view tuples project to bounded screen-pair polygons before `$C2FF48` (`analysis/routines/c24cfe_polygon_projection_submit_tail.md`) | Formula is implemented with native structs; require a run060+ tuple/output fixture before calling it a port contract; 1-2 tuple branch remains open |
@@ -249,6 +249,46 @@ infer a function's purpose merely from a rendered frame.
   `FA18MenuState`. `fa18_expire_run075_demo_entry` applies that subset before
   `$C0FA04` replaces the delay with two and installs the followup continuation.
   `$C28722`, `$C0924A`, `$C11312`, `$C082B0`, and scene rendering remain open.
+- 2026-09-27: Replaced the fixture-only `$C0FAA4` direct subset with reusable
+  `FA18SceneInitializationState` and an ordered helper boundary. Its signed
+  `$C45AD6` countdown is caller-owned so the native `$C0FA04` primitive
+  observes the original write-one then write-two order. Ported byte-exact
+  `$C11312` as `FA18MessageSequenceState` and exercised it as the third scene
+  initialization helper. Ported direct `$C082B0` finalization stores and its
+  guard as the fourth helper; the larger `$C28722` and `$C0924A` owners remain
+  open.
+- 2026-09-27: Ported the self-contained `$C09620` then `$C095C0` root-setup
+  helper pair called by `$C0924A`, including `$C0840E`'s three cleared root
+  workspace blocks and the source's `$C45798` conditional rewrite. The
+  `$C0924A` table/pose construction and `$C28722` dispatcher remain open.
+- 2026-09-27: Ported the byte-exact `$C091E0` scene-vector matrix primitive:
+  signed word products, wrapping long sums, arithmetic shift by four, and
+  wrapping long translations. It is now available to `$C0924A`'s traced pose
+  path without assigning a record identity; its table selection and `$C2D954`
+  update remain open.
+- 2026-09-27: Ported `$C2D94E` record matrix-update publication: it clears the
+  direct control bit, publishes D4--D6, preserves the `$C2E47A` then `$C2E514`
+  ownership order, and derives the latter's `$7080`-relative tuple. The two
+  matrix computation owners and `$C0924A` table selection remain open.
+- 2026-09-27: Added a native Hunk-67 adapter for the immutable `$C42A02` and
+  `$C42A54` table family. `FA18Game` now loads the original five 16-byte
+  table-A records from the executable; the table's semantic labels and the
+  `$C0924A` caller computation remain open.
+- 2026-09-27: Ported `$C09498-$C095BE`, `$C0924A`'s run075 negative-table
+  pose branch: it handles the bit-6 retry, descriptor masking, direct root
+  pose/screen fields, `$C091E0` transform, and `$C2D954` handoff. Native
+  selected-record/descriptor production, the positive route, and the two
+  matrix owners remain open.
+- 2026-09-27: Ported the direct record-creation arm `$C28BEE-$C28E08` of
+  `$C28722`'s dispatcher. It preserves the 164-byte (not 512-byte) clear,
+  record header flags, coordinate fixed-point construction, default fields,
+  and matrix-update handoff. Pointer-table iteration, geometry lookup, and
+  runtime integration remain caller-owned.
+- 2026-09-27: Ported `$C1C54E-$C1C63D` as a native selected-record projection
+  seed and publisher composition. The byte-exact type seed, nine-word matrix
+  products, source shift, root-relative packet, and depth metric are now
+  available to the existing Hunk-25 renderer pass without a captured frame
+  fixture; scene scheduling and page submission remain open.
 - 2026-09-26: Ported the byte-exact `$C0FA4C` input-match and `$C0FA80`
   completion callback state gates as reusable `FA18MenuState` functions.
   Their direct state contracts pass, but no run075 reachability is inferred.
@@ -1278,3 +1318,233 @@ game loop.
   the three-point `$C279` output; the frame-384 batch reduces to x `106..109`
   and y `111..111`. The later near-line and blitter branch targets remain
   outside this bounded native step.
+- 2026-09-27: Ported `$C301F6`'s immediate post-bounds selector as
+  `fa18_select_projection_pair_bounds_route`. It retains the direct-return,
+  `$C302C4`, `$C2F66E`, `$C302DE`, `$C302EC`, and `$C302B6` outcomes as
+  separate source-addressed routes. `fa18_submit_projection_pair_bounds`
+  connects only `$C302B6 -> $C2FA7E` through an opaque caller-owned line
+  adapter; the other continuations have no native substitute or area-fill
+  connection. The `$C2870C` triangle contract selects that direct line route.
+- 2026-09-27: Ported `$C302C4-$C302DD` as
+  `fa18_submit_projection_pair_axis_step`. It retains the wrapping word row
+  increment, signed D6 decrement, bound return, and exact `$C2F5F4` versus
+  `$C2F60A` call selection. Both shared pixel helpers remain caller-owned
+  opaque emitters: this continuation supplies no evidence for a new display
+  buffer or primitive connection.
+- 2026-09-27: Ported `$C305AA-$C305D5` as
+  `fa18_prepare_projection_pair_range`. Its equality return, unsigned `bls`
+  exit, signed display-bound return, and literal register preparation for
+  `$C305F8` are distinct outcomes. The unknown `$C305D6/$C305F8` successors
+  remain routes, not native geometry or fill substitutes.
+- 2026-09-27: Ported `$C305D6-$C306B3` as
+  `fa18_prepare_projection_pair_blitter`. It retains the signed/unsigned
+  delta choices and applies precisely the `$C30668` partial register writes,
+  leaving channels/masks not written by the source inherited from the caller.
+  The captured `$C305D6` cockpit invocation reproduces `$FB4A/$0043`, the
+  `$012C0F` C/D pointer, and `$1A82` size without assigning image ownership.
+- 2026-09-27: Factored the exact `$C305F8-$C306B3` shared suffix as
+  `fa18_prepare_projection_pair_blitter_core`, and connected the proved
+  high-range `$C305AA` register state through it. This keeps the source's
+  low-nibble D6 mask, signed D7 extension, and partial `$C30668` writes
+  common to both entries without connecting an unproved pixel-fill path.
+- 2026-09-27: Ported `$C30342-$C3040B` as
+  `fa18_finalize_projection_pair_blit`. It reproduces the saved-word reload
+  order, lane workspace arithmetic, and the final `$09F0/$000A` submission.
+  The cockpit trace state `(0,319), vertical 106, bound 144, base $012BC0`
+  yields offset `$10B6`, lane `$13C76`, and size `$1AD4`. The preceding
+  variable pair-list traversal remains distinct because each `$C305AA` call
+  can take separate source continuations.
+- 2026-09-27: Ported `$C302E6-$C3040B`'s orchestration as
+  `fa18_finalize_projection_pair_list`: its signed D6 fallback gate, clamped
+  D0, D1/D2 exchange, adjacent pair traversal, closing last-to-first pair,
+  and final lane setup are all explicit. Every pair is delivered to a required
+  caller-owned `$C305AA` emitter; no generic polygon/fill substitute is used.
+- 2026-09-27: Connected `$C305AA-$C306B3` as
+  `fa18_submit_projection_pair_range`. The equality return, `$C305D6` path,
+  and `$C305F8` path now converge on their exact prepared blitter write sets,
+  allowing the `$C302E6` list walker to receive a source-complete pair emitter
+  without asserting a displayed-pixel meaning for those jobs.
+- 2026-09-27: Ported `$C3029E-$C302C2` as
+  `fa18_submit_projection_pair_protected_line`. It preserves `$C456E6` at
+  the caller boundary, supplies `$000FFFFF` only for a zero `$C457A2` flag,
+  and otherwise invokes only the established `$C2FA7E` line emitter.
+- 2026-09-27: The no-input Engine9000 trace from the run075 frame-270
+  checkpoint through chipset frame 280 confirms that all 29 `$C301F6`
+  entries in frames 273--280 take `$C302DE -> $C302EC`; none takes the
+  protected-line or axis-step exits. It records 214 `$C305AA` pair ranges,
+  183 `$C30668` prepared line jobs, and 29 `$C303E0` final `$09F0/$000A`
+  jobs. This validates the active source route, but not a native presentation
+  schedule or pixel-fill ownership.
+- 2026-09-27: A normal checkpoint at global frame 273 captures `$C4B390` as
+  count `4` followed by `(177,81)`, `(206,101)`, `(214,125)`, and `(178,105)`.
+  That independently matches the source tuple-list layout consumed by
+  `$C301F6` and confirms live post-projection input at the first replay
+  mismatch frame. It is capture evidence only: it neither identifies scene
+  ownership nor licenses a frame-specific native rendering connection.
+- 2026-09-27: Ported `$C2FF48-$C2FF57` as
+  `fa18_submit_projection_pair_tuple_list`. It performs the exact pre-entry
+  DMACON `$8400` write through a caller-owned hardware adapter, reduces the
+  `$C4B390` list, then enters the existing `$C301F6` route boundary. It adds
+  no native DMA, buffer, or area-fill substitute.
+- 2026-09-27: Composed the two far `$C301F6` exits through
+  `$C302DE/$C302EC -> $C302E6-$C3040B` as
+  `fa18_submit_projection_pair_far_list`. Each `$C305AA` edge now produces
+  only the already-proved `$C30668` partial-write callback, followed by the
+  exact final `$09F0/$000A` callback. The `$C3029E` fallback stays explicit;
+  no generic fill executor or assumed framebuffer is introduced.
+- 2026-09-27: The same frame-273 checkpoint records the renderer globals
+  `$C45980=$0051`, `$C45982=$007D`, `$C45984=$00B3`, and `$C456E2=$00006048`.
+  With its captured four-point list, the composed contract yields final offset
+  `$13A2`, lane `$73EA`, and size `$0B43`. This is a bounded checkpoint
+  contract, not evidence that this renderer page is presented natively.
+- 2026-09-27: The composed far-list boundary now executes its narrow-tall
+  `$C3029E` fallback through the existing protected `$C2FA7E` adapter. Its
+  mode-dependent `$C456E6` scratch is restored at the callback boundary;
+  regular far lists retain the partial-blitter/final-job path.
+- 2026-09-27: Added `fa18_submit_projection_pair_list`, the source-shaped
+  `$C2FF48-$C3040B` dispatcher. It performs the mandatory `$8400` DMA write
+  once, then connects only the direct `$C2FA7E` and far blitter routes. The
+  `$C302C4` and `$C2F66E` planar-helper outcomes remain explicit but have no
+  invented native substitute.
+- 2026-09-27: Connected the original negative-kind `$C279` three-point batch
+  to that dispatcher as `fa18_submit_projection_grid_record`, preserving its
+  `$C27C42 -> $C2FF48` boundary. Non-negative direct-pair renderer outcomes
+  remain returned routes and are not redirected into polygon submission.
+- 2026-09-27: With explicit user authorization, added the replay-owned
+  `captures/run075/timing.e9t` (`E9K_TICKS_V1`) stream and `--timing` runner
+  input. It supplies the measured `$C0F5F8` counts only to the existing
+  one-tick `$C0F7D8-$C10020` port; no frame-number branch was added to game
+  logic. Frames 200--280 now compare exactly. This is deliberately run075
+  timing evidence, not a portable scheduler rule.
+- 2026-09-27: Extended the outer-page contract with `$C1612C-$C1617D` as
+  `fa18_prepare_outer_page_publication`. It performs the exact selected-index
+  pair of longword table reads that publish `$C1821C/$C18232` before LoadView.
+  The payload is deliberately opaque: no Copper-list decode or native page
+  presentation has been inferred.
+- 2026-09-27: The frame-389 `$C1612C` return snapshot confirms publication of
+  `$C074D8` and `$C07F00` into the viewport fields. `$C07F00` begins with
+  live slow-RAM references including `$C555F8`, but its layout is not yet a
+  proven Copper-list or native-page contract, so frame-392 presentation stays
+  disconnected.
+- 2026-09-27: Ported the source-backed `$C2F5C0/$C2F5F4/$C2F60A/$C2F626/$C2F66E`
+  pixel-wrapper routes through the strict native `FA18PlanarPixelState`
+  primitive. They retain the signed wrapping adjustment/range gate, the
+  primary versus alternate mask-table selection, the low-nibble adjacent
+  primary pair, and the row-limit branch to the two-row handler. This adds no
+  frame data or scene-specific caller; the dynamic projection/page producer
+  needed by frame 392 remains unconnected.
+- 2026-09-27: Added the same `$C2F688-$C2FA6F` mask operations at the native
+  four-plane buffer boundary. `FA18PlanarPixelPage` preserves `$C456B6`'s
+  proved reverse pointer order (mask bits 0--3 select BPL1--BPL4 through
+  offsets `$0C,$08,$04,$00`), while leaving the fifth Copper plane and page
+  lifecycle caller-owned. Its contract compares every resulting colour-bit
+  value with the existing direct indexed adapter; no captured page is used.
+- 2026-09-27: Connected `$C27C62-$C27D0F`'s accepted direct pair to typed
+  `$C2F5F4`/`$C2F60A` callback adapters. The projection-grid contract now
+  exercises renderer-A and renderer-B selection against the native pixel
+  wrappers. The complete grid traversal and its live matrix/component inputs
+  remain separate caller work; no frame-specific scene is introduced.
+- 2026-09-27: Joined `$C27AF4-$C27D0F` into the source-bounded projection
+  table pass. It derives the pair base from the supplied sparse matrix, visits
+  precisely the prepared record count, preserves the per-record bounds cull,
+  and dispatches negative batches versus the two direct pixel routes through
+  caller-owned boundaries. Its required completion callback retains the final
+  `$C457A2` byte clear without assigning that state an unproved meaning. No
+  native caller currently supplies the live matrix or page-producing state.
+- 2026-09-27: Added the preceding `$C279D0-$C27A6D` packet setup. It retains
+  the literal four-word renderer initialization and selector, signed
+  `$C45A78` gate, mode-byte exit, lower-range exit, bounded grid setup, and
+  final `$C457A2` clear as typed state or explicit routes. The unobserved
+  fall-through bodies remain unconnected.
+- 2026-09-27: Composed the published projection packet with the complete
+  ready-route `$C279D0-$C27D0F` grid pass in
+  `fa18_render_flight_projection_grid`. It owns only the source packet setup
+  and final mode-flag clear; matrix publication and page/Blitter callbacks
+  remain explicit callers. This is the third `$C0F090` child that returns to
+  `$C0F0C8`, not a frame-specific renderer scheduler.
+- 2026-09-27: Added the bounded `$C2FA7E` line recurrence at a four-lane
+  planar-page boundary. `fa18_draw_line_to_page` preserves the fifth Copper
+  lane by construction and is usable as the `$C301F6` callback reached by the
+  prepared-page packet's first run075 polygon submission. It does not claim
+  the remaining far area-blit branches are page-rendered.
+- 2026-09-27: Bound the source-proved `$C279D0` direct-pixel and direct-line
+  callbacks to one `FA18FivePlanePage` through `FA18FlightRendererPage`.
+  The binding records the literal `$8400` DMA-enable submission and leaves
+  unproved far Blitter callbacks null instead of substituting a fill. Shared
+  planar-lane and display-dimension headers keep those page writers type-safe;
+  replay-specific fixtures were kept out of the native source closure.
+- 2026-09-27: Added the exact low-lane renderer-state decoder for `$C45954`,
+  `$C456E7`, `$C456E8`, and `$C456EB`. The five-plane binding can now receive
+  the live source-shaped mode, enabled-lane mask, and XOR gate rather than a
+  hand-authored `FA18PlanarPixelState`.
+- 2026-09-27: Ported the bounded OCS Copper page-state decoder for the proved
+  `$C07F00 -> $C555F8 -> $C55680` display-instruction chain. It consumes only
+  caller-provided big-endian Copper MOVE/WAIT streams and publishes BPLCON0
+  plus five plane pointers at a requested beam line; it stores neither a page
+  nor recorded output. The native scheduler and the runtime owner that builds
+  those lists remain open, so this component is not yet connected to replay
+  presentation.
+- 2026-09-27: Added the corresponding five-plane `$5200` presentation step.
+  `fa18_present_copper_page` resolves Copper pointers only against required
+  caller-owned buffers and deplanarizes the source bit order into `FA18Video`.
+  A complete source-written 32-register Copper palette replaces the video
+  palette; an incomplete palette retains caller state rather than guessing
+  missing colours. It rejects non-five-plane and incomplete page state instead
+  of treating the old four-plane adapter as a substitute.
+- 2026-09-27: A normal frame-392 replay now decodes the published five-plane
+  Copper page and its dynamically patched `$0577B0` palette to all 64,000
+  oracle RGB444 pixels. The preceding frame-389 list has zeroed `COLOR01/2`,
+  yielding the prior all-black page, while frame 392 writes `$100/$111` and
+  reveals exactly 361 pixels. This replaces the `$C1AA9C` palette hypothesis
+  with a proved Copper palette boundary; the native runtime still needs a
+  live page/palette producer rather than these captured buffers.
+- 2026-09-27: A CPU-write watchpoint at the frame-392 Copper-list boundary
+  identifies the palette-load leaf `MOVE.W (A1),(A0)+` with destination
+  `$0577B6` and source `$C085F0`; its saved call context also retains the
+  `$0577B0` Copper-list and `$DFF180` COLOR00 bases. Added
+  `fa18_update_copper_palette_moves`, which transfers caller-provided RGB4
+  words into existing `COLORxx` Copper MOVE data words only. It makes no
+  palette/table, frame, or page ownership claim, and remains disconnected
+  until the original palette source and display lifecycle have native owners.
+- 2026-09-27: Resolved that source ownership through the `$C1718E` mode-buffer
+  callback and `$C53EC0` graphics `LoadRGB4` wrapper. At frame 392 the live
+  mode is 8, selecting `$C08510 + (15-8)*32 = $C085F0`; the proved `D0=16`
+  call updates only `COLOR00..15`. Added the disk-Hunk-backed
+  `viewport_palette` module, which extracts one of the 16 exact 16-word RGB4
+  tables from Hunk 21 and applies it only to matching lower Copper colours.
+  It intentionally does not invent an update schedule, a 32-colour write, or
+  a page lifecycle; those remain runtime integration work.
+- 2026-09-27: Ported the mode-state tail of `$C1718E` as
+  `fa18_advance_viewport_mode`. It retains the signed-byte countdown, one-step
+  mode progression, both ordered `$C53EC0` lower-16-colour loads and paired
+  `(1-$C4566C)` pointer publications, and terminal 16-word `$C45660`
+  copy/state-3 write.
+  The API requires all dynamic owners from its caller, including scheduling,
+  pointer tables, Copper streams, and destination; it has no frame-keyed
+  substitute and is not yet attached to the native runtime loop.
+- 2026-09-27: Measured the run075 mode-callback cadence with a direct replay
+  sampler. After `$C0FA04` returns from scene initialization at global frame
+  370, its own stores set mode target 15/current 0; the sampled state advances
+  current mode once per three observed updates, reaching eight at frame 392.
+  A breakpoint counter proves one `$C1718E` entry per replay frame in the
+  measured window; a normal CPU watchpoint identifies its `$C1731A`
+  terminal state-3 write, which is consumed by the idle
+  `$C1617E` outer child before the following entry. Added `outer_loop_child`
+  for that idle counter/palette/toggle branch, with its wait and 32-word palette
+  operations required from the caller.
+- 2026-09-27: Joined the palette buffer ownership across `$C0F812`, `$C1718E`,
+  and `$C1617E`. `viewport_palette` now initializes a caller-owned 32-word
+  buffer from Hunk-21 `$C08510` and replaces only its lower 16 words on a
+  terminal mode copy; this provides the exact 32-word argument to the
+  outer-child palette operation without embedded replay data.
+- 2026-09-27: Added a native five-plane `$5200` page owner with five 8,000-byte
+  buffers, lower-four-plane pixel-pipeline access, and a count-preserving
+  `LoadRGB4` palette boundary. Its integration contract connects terminal mode
+  copy, shared 32-word buffer, outer-child palette load, and page palette.
+  It intentionally has no synthetic Copper list, captured page, or invented
+  scene schedule; native scene-pixel production is still required.
+  Added `post_input_followup` for the direct negative-countdown `$C0FA04`
+  followup stores, with the preceding `$C0FAA4` work retained as a required
+  caller-owned initializer. The paired `$C0FA4C` current/target match gate is
+  in the same typed component. This is not yet runtime-wired because the
+  native scheduler and scene/page owners remain incomplete.

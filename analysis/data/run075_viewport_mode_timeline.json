@@ -1,0 +1,4191 @@
+{
+  "authority": {
+    "restore": "captures\\run075\\initial_state.bin",
+    "playback": "captures\\run075\\playback.e9k",
+    "start_frame": 200,
+    "frames": 192,
+    "mode_state_address": "$C458A0",
+    "outer_index_address": "$C4566C",
+    "copper_colour_value_address": "$0577B6"
+  },
+  "samples": [
+    {
+      "frame": 201,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 202,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 203,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 204,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 205,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 206,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 207,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 208,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 209,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 210,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 211,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 212,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 213,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 214,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 215,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 216,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 217,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 218,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 219,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 220,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 221,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 222,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 223,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 224,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 225,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 226,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 227,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 228,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 229,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 230,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 231,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 232,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 233,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 234,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 235,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 236,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 237,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 238,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 239,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 240,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 241,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 242,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 243,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 244,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 245,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 246,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 247,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 248,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 249,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 250,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 251,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 252,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 253,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 254,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 255,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 256,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 257,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 258,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 259,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 260,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 261,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 262,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 263,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 264,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 265,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 266,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 267,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 268,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 269,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 270,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 271,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 272,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 273,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 274,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 275,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 276,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 277,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 278,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 279,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 280,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 281,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 282,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 283,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 284,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 285,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 286,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 287,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 288,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 289,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 290,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 291,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 292,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 293,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 294,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 295,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 296,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 297,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 298,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 299,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 300,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 301,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 302,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 303,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 304,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 305,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 306,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 307,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 308,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 309,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 310,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 311,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 312,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 313,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 314,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 315,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 316,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 317,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 318,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 319,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 320,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 321,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 322,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 323,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 324,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 325,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 326,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 327,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 328,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 329,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 330,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 331,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 332,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 333,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 334,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 335,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 336,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 337,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 338,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 339,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 340,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 341,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 342,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 343,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 344,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 345,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 346,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 347,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 348,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 349,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 350,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 351,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 352,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 353,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 354,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 355,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 356,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 357,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 358,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 359,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 360,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 361,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 362,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 363,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 364,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 365,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 366,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 367,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 368,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 369,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 370,
+      "mode_current": 0,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 371,
+      "mode_current": 1,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 372,
+      "mode_current": 1,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 373,
+      "mode_current": 1,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 374,
+      "mode_current": 2,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 375,
+      "mode_current": 2,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 376,
+      "mode_current": 2,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 377,
+      "mode_current": 3,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 378,
+      "mode_current": 3,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 379,
+      "mode_current": 3,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 380,
+      "mode_current": 4,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 381,
+      "mode_current": 4,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 382,
+      "mode_current": 4,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 383,
+      "mode_current": 5,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 384,
+      "mode_current": 5,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 385,
+      "mode_current": 5,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 386,
+      "mode_current": 6,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 387,
+      "mode_current": 6,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 388,
+      "mode_current": 6,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 389,
+      "mode_current": 7,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 390,
+      "mode_current": 7,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 391,
+      "mode_current": 7,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 392,
+      "mode_current": 8,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        256,
+        273,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "state_changes": [
+    {
+      "frame": 201,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 230,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 235,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 236,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 237,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 238,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 239,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 240,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 271,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 272,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 2,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        2592,
+        2457,
+        273,
+        642,
+        1371,
+        54,
+        1092
+      ]
+    },
+    {
+      "frame": 288,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 289,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 1,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 318,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 319,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 335,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 353,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 369,
+      "mode_current": 15,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 370,
+      "mode_current": 0,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 371,
+      "mode_current": 1,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 372,
+      "mode_current": 1,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 373,
+      "mode_current": 1,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 374,
+      "mode_current": 2,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 375,
+      "mode_current": 2,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 376,
+      "mode_current": 2,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 377,
+      "mode_current": 3,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 378,
+      "mode_current": 3,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 379,
+      "mode_current": 3,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 380,
+      "mode_current": 4,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 381,
+      "mode_current": 4,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 382,
+      "mode_current": 4,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 383,
+      "mode_current": 5,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 384,
+      "mode_current": 5,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 385,
+      "mode_current": 5,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 386,
+      "mode_current": 6,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 387,
+      "mode_current": 6,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 388,
+      "mode_current": 6,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 0,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 389,
+      "mode_current": 7,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 390,
+      "mode_current": 7,
+      "mode_target": 15,
+      "mode_countdown": 1,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 391,
+      "mode_current": 7,
+      "mode_target": 15,
+      "mode_countdown": 0,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "frame": 392,
+      "mode_current": 8,
+      "mode_target": 15,
+      "mode_countdown": 2,
+      "mode_state": 0,
+      "outer_selected_index": 1,
+      "copper_colour_00_to_07": [
+        0,
+        256,
+        273,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

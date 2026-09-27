@@ -20,6 +20,13 @@ It deliberately does not clear the complete `$C4574A` sequence region.  The
 routine therefore initializes its head and control fields but is not, by itself,
 evidence for the later sequence writer.
 
+## Native contract
+
+`port/message_sequence.c` ports the exact direct fields as
+`FA18MessageSequenceState`. Its callback adapter lets an evidenced caller own
+the ordering. `message_sequence_contract_test` verifies that it clears only
+the two-word head and all four byte controls while writing delay `$01B8`.
+
 ## Caller evidence
 
 The byte-exact `$C1075A` callback tests `$C458AC`; its nonzero static path

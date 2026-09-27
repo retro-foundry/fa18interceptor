@@ -1,4 +1,4 @@
-# `$C0FAA4`: run075 demo scene-initialization subset
+# `$C0FAA4`: run075 scene initialization
 
 Classification: **scenario-backed direct state subset with unresolved helper
 effects**.
@@ -25,21 +25,34 @@ must preserve that order.
 
 ## Native contract
 
-`fa18_initialize_run075_demo_scene` in `port/menu.c` represents the direct
-subset using named `FA18MenuState` fields: scene latches, stage, guard,
-native selected-mode value, transition auxiliary flag, counters, marker, and
-delay. It does not reproduce the original storage map or encode the helper
-calls as fake memory writes.
+`fa18_initialize_scene_state` in `port/scene_initialization.c` represents the
+full observed direct-store sequence with named scene fields and required,
+ordered helper callbacks. Its caller owns the signed countdown because the
+initializer writes the same traced `$C45AD6` word that `$C0FA04` immediately
+replaces. The component does not reproduce the original storage map or encode
+the helper calls as fake memory writes.
 
-`fa18_expire_run075_demo_entry` represents the observed composition:
+`fa18_finish_post_input_followup` plus the scene-initializer adapter represent
+the observed composition:
 
 1. apply the `$C0FAA4` direct subset while the prior mode is `$7F` and delay
    is negative;
 2. apply `$C0FA04`'s direct followup writes, including delay two and the typed
    `FA18_MENU_CALLBACK_DEMO_FOLLOWUP_MATCH` continuation.
 
-`fa18_demo_contract_test` exercises this route after the preceding run075
-entry wait. The called helpers, their wider state, rendering initiated after
-this transition, and any uses outside run075 remain open.
+`scene_entry_contract_test` exercises the shared countdown and ordering: the
+initializer sees negative `$C45AD6`, stores one on return, and `$C0FA04` then
+stores two while installing its next callback. The called helpers, their wider
+state, rendering initiated after this transition, and any uses outside run075
+remain open.
+
+The `$C11312` third helper is now the native `message_sequence` contract, and
+the `$C082B0` fourth helper is the native `scene_finalization` direct-store
+contract, in that composition. `$C28722` and `$C0924A` remain required caller
+boundaries because their broader state ownership is not yet reconstructed.
+
+Within `$C0924A`, its consecutive `$C09620` and `$C095C0` nested root-setup
+helpers are now native `scene_root_setup`; the table/placement remainder of
+the caller remains open.
 
 Meaning level: direct writes **port-contract**; nested helpers **dataflow**.

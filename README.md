@@ -1,14 +1,19 @@
 # F/A-18 Interceptor: runtime reconstruction
 
 Read **[STATUS.md](STATUS.md)** first when continuing this project.
+The ordered work and evidence gates are in
+[RE_COMPLETION_PLAN.md](RE_COMPLETION_PLAN.md).
+The native C/SDL2 port and run075 frame oracle are tracked in [PORT.md](PORT.md).
 
 GAME.md has information about the game itself.
 
 The authority is the supplied 1988 Amiga disk, executed by the pinned
-[Engine9000 v0.62-alpha](https://github.com/alpine9000/engine9000-public/tree/v0.62-alpha)
-Amiga core. The goal is readable, byte-exact 68000 assembly backed by recorded
-play, real frames and observed routine contracts. Raw Ghidra P-code is an
-address-linked analysis aid, not the final source or proof of a routine's meaning.
+[RetroFoundry Engine9000 fork](https://github.com/retro-foundry/engine9000-public/tree/fa18-interceptor)
+at `ace4c3a`. It derives from upstream Engine9000 v0.62-alpha
+(`f9ca09b`) and leaves F1--F12 unbound so F/A-18 receives those keys. The goal
+is readable, byte-exact 68000 assembly backed by recorded play, real frames and
+observed routine contracts. Raw Ghidra P-code is an address-linked analysis
+aid, not the final source or proof of a routine's meaning.
 
 ## Record a session
 
@@ -51,6 +56,10 @@ python scripts/engine9000_bridge.py --restore captures/run001/initial_state.bin 
   --config captures/run001/config.uae --playback captures/run001/playback.e9k `
   --frames 300 --output build/run001_first300
 ```
+
+The native run075 parity runner automatically supplies its adjacent
+`timing.e9t` when present. This is a replay-owned timing stream, not a general
+game scheduler; invoke the executable manually with `--timing <file>`.
 
 `last_input_frame` in `run.json` is the last recorded event, not a guessed exit
 frame. Every run retains its own initial state, exact configuration, raw events
@@ -205,4 +214,4 @@ private config/media and records hashes in `local/toolchain.json`. Before
 running it, set `FA18_KICKSTART_ROM` to the path of a legally obtained
 Kickstart 1.3 ROM image.
 `AMIGA.md` supplies hardware context; original bytes and traces decide game
-behavior. `../quest` is the reference workflow. No native port is being built.
+behavior. `../quest` is the reference workflow. The native port is in `port/`.

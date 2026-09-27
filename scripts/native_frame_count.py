@@ -201,8 +201,13 @@ def main() -> None:
         shutil.copy2(executable, sandbox / executable.name)
         shutil.copy2(adfs[0], sandbox / "game.adf")
         shutil.copy2(args.replay, sandbox / "playback.e9k")
+        timing = args.replay.with_name("timing.e9t")
+        if timing.is_file():
+            shutil.copy2(timing, sandbox / "timing.e9t")
         command = [str(sandbox / executable.name), "--adf", str(sandbox / "game.adf"),
                    "--replay", str(sandbox / "playback.e9k")]
+        if timing.is_file():
+            command += ["--timing", str(sandbox / "timing.e9t")]
         matched, lines = count_frames(command, sandbox, args.oracle, args.to,
                                       args.report_dir, args.timeout)
     end = f" (frames {FIRST_FRAME}..{FIRST_FRAME + matched - 1} exact)" if matched else ""

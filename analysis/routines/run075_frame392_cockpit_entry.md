@@ -93,14 +93,122 @@ then changes `$C4566C` from zero to one in its tail. `$C18232` is
 `$C1822A + 8`, the proved graphics `ViewPort` display-instruction field.
 Therefore this outer-loop child publishes a selected display instruction and
 waits for the graphics display boundary before the next loop begins rendering
-the alternate page. The `$C07F00` object's exact Copper/palette ownership is
-still unassigned, so this proves the page-staging presentation path without
-claiming a decoded Copper list.
+the alternate page.
+
+The frame-389 final Slow-RAM snapshot now identifies `$C07F00` structurally as
+the first `struct CopList` referenced by that `ViewPort`'s `DspIns` field. Its
+Kickstart-1.3 layout has `Next=$C555F8`, `_ViewPort=$C1822A`, and
+`CopLStart=$0577B0`; `$C555F8` in turn has `Next=$C55680` and
+`CopLStart=$057880`, while `$C55680` ends the chain with
+`CopLStart=$057888`. The merged Chip-RAM stream loads BPL1--BPL5 as
+`$04DB30,$04FA70,$0519B0,$0538F0,$055830`. Its wait at `$2A01` is followed by
+`BPLCON0=$5200`, and the `$F201` wait restores `$0200`; therefore the selected
+display instruction presents that five-plane family over the Copper interval
+from vertical position `$2A` until `$F2`. This is a structural Copper/display
+join, not a claim about scene identity or the still-unported native scheduler.
 
 The adjacent `$C1AA9C` 32-word RGB4 palette bank remains byte-identical for
 global frames 201--392. That excludes a mutation of this observed palette bank
-as the frame-392 trigger; it does not exclude a distinct Copper-controlled
-palette source until `$C07F00` is decoded.
+as the frame-392 trigger. The `$C07F00` decode proves its plane pointers and
+BPLCON0 interval, but does not yet identify a distinct Copper-controlled
+palette source.
+
+## Copper palette and page exactness
+
+A normal full-frame replay through global frame 392 now resolves that remaining
+palette source. `build/run075_global392_normal/normal_custom_writes.jsonl`
+records the published Copper prefix at `$0577B4`: at vertical position 40 it
+writes `COLOR00=$000`, `COLOR01=$100`, `COLOR02=$111`, and the remaining
+observed colour registers (including `COLOR09=$620`). These are dynamic words
+in the `$0577B0` list, not the unchanged `$C1AA9C` RGB4 bank.
+
+`python scripts/compare_run075_frame392_copper_page.py --chip
+build/run075_global392_normal/chip.bin --report
+build/run075_global392_copper_page_decode.json` deplanarizes the five proved
+buffers and those Copper palette moves. It has zero mismatches against all
+64,000 RGB444 pixels in oracle frame 392: 63,639 are `$000`, 193 are `$100`,
+and 168 are `$111`. The prior frame-389 return snapshot retains zero for
+`COLOR01/COLOR02`; the identical five-plane decode is all black and differs by
+exactly those 361 pixels. This proves that the visible boundary is a dynamic
+Copper-palette update on an already prepared page. It remains a captured
+display oracle, not native page data or a complete scene producer.
+
+An ordinary-replay CPU-write watchpoint over `$0577B0-$0577BF`, armed at
+global frame 392, stops on its first access at `$0577B6`. The interrupted
+instruction is `MOVE.W (A1),(A0)+` at `$FCFF32`, with `A0=$0577B6` and
+`A1=$C085F0`; its call context retains the Copper-list base `$0577B0` and
+Custom `COLOR00` base `$DFF180`. `$C085F0` begins the live RGB4 words
+`$000,$100,$111,...,$620`, matching the published Copper values. The
+watchpoint reports the leaf copying routine, not a game-level owner, so it
+does not identify a scene or schedule. It does establish the source-to-list
+palette-load boundary independently of the frame oracle.
+
+The saved stack and the byte-exact `$C1718E` callback identify the owner:
+`$C53EC0` loads `A0/A1/D0` then invokes graphics.library `-$C0`, which the
+Kickstart 1.3 ABI names `LoadRGB4(ViewPort, colours, count)`. At this frame
+`$C458A0=8`; `$C1718E` computes `$C08510 + (15 - 8) * 32 = $C085F0` and
+passes `count=16`. Thus this is a 16-word Hunk-21 RGB4 mode table applied to
+`COLOR00..15`, not a 32-word palette write; higher Copper colours retain their
+separate state. A run075 frame-201..392 CPU write watch finds the Hunk source
+unchanged.
+
+`fa18_update_copper_palette_moves` models the bounded list-write operation
+over caller-owned mutable Copper streams. `fa18_load_viewport_mode_palette`
+now reproduces the exact Hunk-21 `$C08510` table stride and
+`fa18_load_viewport_mode_palette_into_copper` applies only the first 16
+registers. Neither routine supplies a palette, page, frame gate, or scene
+producer; the contracts use synthetic values and retain the source values only
+as replay evidence.
+
+The source-bounded `$C1718E` mode tail is now also represented by
+`fa18_advance_viewport_mode`. It preserves the signed-byte countdown and
+one-step current/target transition; on an eligible step it loads the selected
+16-colour table, publishes the proved `(1 - $C4566C)` pointer-table pair,
+performs the source's second identical lower-16-colour load, and republishes
+that pair. When the current
+mode reaches target, it performs the exact 16-word copy
+to a required caller-owned destination and stores state `3`. The equal-mode
+nonzero-state branch reloads the palette without republishing pointers. The
+callback schedule, pointer-table contents, destination ownership, and page
+producer remain separate native owners rather than inferred state.
+
+`scripts/sample_run075_viewport_mode.py` samples the direct state and Copper
+words once per ordinary replay frame. In run075, `$C0FA04`'s expired path
+returns from `$C0FAA4` and then writes `$C458A1=15` and `$C458A0=0` at global
+frame 370. The sampled state then permits one mode increment per three observed
+updates, making the live current mode eight at frame 392. A live `$C1718E`
+breakpoint counter records exactly one entry in each run075 replay frame 201--420;
+at frame 413 its entry state is current 14/target 15/countdown 0. Its terminal
+write is independently CPU-watchpointed at `$C1731A`: `MOVE.B #3,$C458A4`
+changes the byte from zero to three. The idle `$C1617E` outer-loop child then
+consumes that shared state before the following callback entry, which observes
+state 2. This is a traced
+scheduler cadence, not permission to replace it with a frame-number condition.
+`post_input_followup`
+models only those direct `$C0FA04` stores after a caller-owned scene-initializer
+callback, preserving their observed order. Its paired `$C0FA4C` direct gate
+clears its separate auxiliary byte after countdown expiry and advances only
+when the same typed current/target bytes match; no replay-frame condition is
+used.
+
+`outer_loop_child` ports the matching idle branch of `$C1617E-$C16283`: it
+decrements the same state byte, conditionally performs its caller-owned
+`WaitBOVP`/32-word `LoadRGB4` sequence, and retains the word-sized outer-index
+toggle. The nonzero activity-counter loop remains a separate unported branch.
+`viewport_palette` now also models the shared 32-word `$C45660` buffer: the
+initial `$C0F812` copy seeds all words from Hunk-21 `$C08510`, and the terminal
+mode copy replaces only words 0--15. This is the exact source of the buffer
+provided to the outer-child 32-word palette operation; no captured palette is
+embedded.
+
+`five_plane_page` is the native owner for one proved `$5200` five-plane page:
+it owns five separate 8,000-byte buffers, exports the lower four to the
+established planar-pixel adapters, and exposes a count-preserving `LoadRGB4`
+palette callback. Its display state is presented through the existing Copper
+page decoder contract with private native pointer identities. The
+`viewport_transition_page` contract proves the terminal 16-word mode copy and
+the following 32-word outer-child load reach that same page palette. It does
+not claim that the native runtime yet produces the page's scene pixels.
 
 ## Prepared-page producer sample
 

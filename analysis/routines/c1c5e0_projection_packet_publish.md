@@ -23,3 +23,11 @@ Authority: `analysis/data/run060_root_projection_packet.md` and
 
 `port/projection_packet.c` represents this as named root/input/output structs.
 It does not model the original record address or `$C45A62/$C45A72` workspace.
+
+The source prefix `$C1C54E-$C1C5DF` is now composed in
+`port/scene_projection_seed.c`. It chooses the source literal seed from
+record byte `+$62`, applies the signed nine-word `+$92..+$A2` matrix with the
+source's arithmetic shift by six, then passes that result and the same record
+root to the publisher. This supplies a native, data-driven input boundary for
+the Hunk-25 `$C279D0` renderer traversal; page lifecycle and scheduler wiring
+remain separate.

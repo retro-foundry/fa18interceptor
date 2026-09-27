@@ -12,6 +12,16 @@ values initialized to zero or `$7080 - D5/D6/D7`, and calls `$C2E514`.
 This proves a record triple publication followed by two distinct matrix/transform
 consumers.  Their coordinate convention and field ownership remain unassigned.
 
+## Native contract
+
+`port/record_matrix_update.c` ports the direct `$C2D94E-$C2D99A` publication
+and ordering as `fa18_update_record_matrix`. Its caller owns the distinct
+`$C2E47A` build matrix and `$C2E514` alternate attitude matrix computations;
+the contract supplies those as required callbacks. It preserves the bit-2
+clear, D4--D6 publication, and `$7080 - D5/D6/D7` angle derivation before the
+second callback. `record_matrix_update_contract_test` covers the run075
+`(D4,D5,D6,D7)=(0,$6FB8,0,0)` handoff and call order.
+
 ## run003 second-lane publication
 
 The sealed run003 comma hold reaches the publisher's `$C2D954` `MOVEM.W` at
