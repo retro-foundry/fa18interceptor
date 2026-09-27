@@ -270,6 +270,12 @@ This is the source-owned input installed before the root-record pose path; it
 does not use a captured Amiga address. `ctest` passes **116/116** with the
 same native frame result.
 
+Its `$C0930A-$C09334` descriptor-class decode is now included too: it follows
+the relocated descriptor segment/offset, preserves the signed/bit-14 selector
+routes, and returns only the source low nibble. This is the class input for
+the mutable dispatch record; `ctest` remains **116/116** with the same native
+frame result.
+
 `port/flight_followup_magnitude.{c,h}` now ports `$C1CD0E-$C1CDB1`, deriving
 the three source magnitudes from the selected record and prepared components,
 then applying the `$EF` cap through its required `$29` error callback. `ctest`

@@ -25,4 +25,10 @@ int fa18_load_scene_bootstrap_template(const FA18Hunks *hunks,
                                        uint8_t source_selector,
                                        FA18SceneBootstrapTemplate *template_state);
 
+/* `$C0930A-$C09334`: follow the copied descriptor reference and derive the
+ * low-nibble class byte used by the following record setup. */
+int fa18_decode_scene_bootstrap_class(const FA18Hunks *hunks,
+                                      const FA18SceneBootstrapTemplate *template_state,
+                                      uint8_t *class_nibble);
+
 #endif
