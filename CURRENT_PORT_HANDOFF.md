@@ -83,6 +83,12 @@ angle-sector classifier. It preserves the source's byte-controlled primary or
 alternate input selection and signed threshold comparisons, while leaving the
 octant's downstream scene meaning unresolved. `ctest` passes **88/88** tests.
 
+`port/update_stage_prefix.{c,h}` now ports the `$C1C63E-$C1C6BB` setup prefix.
+It synchronizes the octant-derived byte, preserves the signed long threshold
+and scale operations, then invokes the required caller-owned `$C22C80`
+record-update boundary. It adds no record traversal or scheduler guess.
+`ctest` passes **89/89** tests.
+
 ## Matrix-product projection evidence
 
 Port `$C2ECC6-$C2ED6B`, documented in
