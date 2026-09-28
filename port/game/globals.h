@@ -283,4 +283,12 @@
 #define WORKSPACES         0xC48390u /* renderer workspaces, offset by stream words */
 #define NORMALIZED         0xC45A4Cu /* word[3]: normalize_vector's result */
 
+/* ---- renderer buffers, sound mute, point list ($C2FD22, $C3316A, $C25876) */
+#define RENDER_BUFFERS_A   0xC456BEu /* long[5]: work buffers, the fifth optional */
+#define RENDER_BUFFERS_B   0xC456D2u /* long[5]: work buffers */
+#define RENDER_BUFFER_LONGS 2000     /* longs in each */
+#define FIFTH_BUFFER_USED  0xC457D6u /* byte: clear the fifth A buffer too */
+#define TONE_MUTE          0xC4588Au /* byte: > 0 suppresses tones ($C3316A) */
+#define LIST_MATRIX        0xC45BFCu /* word[9]: rotation for list points, 8 fraction bits */
+
 #endif

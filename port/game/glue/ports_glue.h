@@ -191,4 +191,14 @@ int glue_C0D334(void);
 int glue_C25754(void);
 int glue_C265E8(void);
 
+/* batch 25: main engine, tone, edge vertices, buffers, stage blit, grid position, list point */
+int glue_C17C62(void);
+int glue_C17D6E(void);
+int glue_C3316A(void);
+int glue_C219AE(void);
+int glue_C2FD22(void);
+int glue_C3040C(void);
+int glue_C1EBE0(void);
+int glue_C25876(void);
+
 #endif

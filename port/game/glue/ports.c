@@ -180,6 +180,15 @@ const FA18Port fa18_ports[] = {
     {0xC0D334, glue_C0D334, "derive_shown_vertices", 2800},
     {0xC25754, glue_C25754, "normalize_vector", 1600},
     {0xC265E8, glue_C265E8, "flagged_slot_in_range", 3500},
+    /* batch 25: main engine, tone, edge vertices, buffers, stage blit, grid position, list point */
+    {0xC17C62, glue_C17C62, "play_main_engine", 900},
+    {0xC17D6E, glue_C17D6E, "slide_main_engine", 1600},
+    {0xC3316A, glue_C3316A, "play_tone", 1200},
+    {0xC219AE, glue_C219AE, "derive_edge_vertices", 400},
+    {0xC2FD22, glue_C2FD22, "clear_render_buffers", 150000},
+    {0xC3040C, glue_C3040C, "blit_mask_between_planes", 300},
+    {0xC1EBE0, glue_C1EBE0, "grid_relative_position", 300},
+    {0xC25876, glue_C25876, "append_list_point", 600},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

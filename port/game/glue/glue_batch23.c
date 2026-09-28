@@ -22,17 +22,23 @@ static void free_voice_registers(uint32_t channel) {
     A(0) = rd_u32(VOICE_TABLE + (gaddr)(int32_t)(int16_t)D(0));
 }
 
-int glue_C17CF6(void) {
+void play_engine_registers(int32_t period, int32_t volume);
+void play_engine_registers(int32_t period, int32_t volume) {
     int enabled = (rd_u8(SOUND_FLAGS) & 0x02) && rd_u32(SOUND_VOICES + 4 * SOUND_ENGINE_HIGH);
-    play_engine(ARG(0), ARG(1));
+    play_engine(period, volume);
     if (enabled) play_sound_registers(SOUND_ENGINE_HIGH, 1);
+}
+
+int glue_C17CF6(void) {
+    play_engine_registers(ARG(0), ARG(1));
     return glue_return();
 }
 
 /* $C17DAA: leaves D0 = ticks, D1 = the last division's remainder, A0 the
  * channel 1 voice, A1 the channel 0 voice. */
-int glue_C17DAA(void) {
-    int32_t period = ARG(0), volume = ARG(1), ticks = ARG(2), remainder;
+void slide_engine_registers(int32_t period, int32_t volume, int32_t ticks);
+void slide_engine_registers(int32_t period, int32_t volume, int32_t ticks) {
+    int32_t remainder;
     int enabled = (rd_u8(SOUND_FLAGS) & 0x02) && rd_u32(VOICE_SLOTS + 4);
     gaddr low = rd_u32(VOICE_SLOTS);
     int32_t volume_now = enabled ? rd_s32(low + VOICE_VOLUME) : 0;
@@ -44,6 +50,10 @@ int glue_C17DAA(void) {
         A(0) = rd_u32(VOICE_SLOTS + 4);
         A(1) = low;
     }
+}
+
+int glue_C17DAA(void) {
+    slide_engine_registers(ARG(0), ARG(1), ARG(2));
     return glue_return();
 }
 

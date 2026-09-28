@@ -190,3 +190,34 @@ void play_scripted_sound(int32_t volume) {
     wr_u32(voice + VOICE_DELAY, 1);
     play_sound(SOUND_SCRIPTED, 2, volume);
 }
+
+void play_main_engine(int32_t period, int32_t volume) {
+    gaddr low, high;
+    if (!(rd_u8(SOUND_FLAGS) & 0x01)) {
+        play_engine(period, volume >> 2);
+        return;
+    }
+    if (!sound_voice(1)) return;
+    high = sound_voice(1);
+    low = sound_voice(0);
+    wr_u32(high + VOICE_VOLUME_SLIDE, 0);
+    wr_u32(low + VOICE_VOLUME_SLIDE, 0);
+    wr_u32(high + VOICE_PERIOD_SLIDE, 0);
+    wr_u32(low + VOICE_PERIOD_SLIDE, 0);
+    wr_u32(low + VOICE_PERIOD, (uint32_t)period << 16);
+    wr_u32(high + VOICE_PERIOD, (uint32_t)(period + 2) << 16);
+    play_sound(0, 0, volume);
+    play_sound(1, 1, volume);
+}
+
+void slide_main_engine(int32_t period, int32_t volume, int32_t ticks) {
+    slide_engine(period, (rd_u8(SOUND_FLAGS) & 0x01) ? volume : volume >> 2, ticks);
+}
+
+void play_tone(int32_t pitch) {
+    int32_t args[9] = {0x12C, 0, 1, 0x12C, 0, 1, 1, 1, 1};
+    if ((int8_t)rd_u8(TONE_MUTE) > 0) return;
+    args[1] = pitch;
+    args[4] = pitch;
+    play_programmed_sound(args);
+}

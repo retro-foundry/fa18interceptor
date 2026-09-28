@@ -15,4 +15,10 @@ void derive_vertex_tail(gaddr workspace);
  * +$60 and the midpoint of +$6C and +$72. Returns the stream after it. */
 gaddr derive_shown_vertices(gaddr stream);
 
+/* Stream operation $C219AE: operands a, b, w. With e = V(b) - V(a) in the
+ * workspace bank and W = WORKSPACES + w: W+$12 = W+$00 + e; W+$18 and W+$1E
+ * = W+$06 and W+$0C plus e/2. Then skips 14 bytes per step in bits 4-6 of
+ * the shown record's +$7C. Returns the stream after it. */
+gaddr derive_edge_vertices(gaddr stream);
+
 #endif

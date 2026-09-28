@@ -86,3 +86,17 @@ gaddr derive_shown_vertices(gaddr stream) {
     put(w, 0x294, midpoint(midpoint(get(w, 0x6C), get(w, 0x72)), get(w, 0x60)));
     return stream + 2;
 }
+
+gaddr derive_edge_vertices(gaddr stream) {
+    int16_t a = rd_s16(stream), b = rd_s16(stream + 2), w = rd_s16(stream + 4);
+    gaddr bank = WORKSPACES, target = WORKSPACES + (gaddr)(int32_t)w;
+    Vertex edge = sub(get(bank + (gaddr)(int32_t)b, 0), get(bank + (gaddr)(int32_t)a, 0));
+    int steps;
+
+    put(target, 0x12, add(get(target, 0x00), edge));
+    edge = half(edge);
+    put(target, 0x18, add(get(target, 0x06), edge));
+    put(target, 0x1E, add(get(target, 0x0C), edge));
+    steps = (int8_t)(rd_u8(CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD) + 0x7C) & 0x7F) >> 4;
+    return stream + 6 + (gaddr)(14 * steps);
+}

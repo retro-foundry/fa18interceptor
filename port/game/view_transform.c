@@ -17,3 +17,32 @@ void view_transform(gaddr in, int16_t shift, gaddr out) {
         wr_s16(out + (gaddr)(2 * row), (int16_t)(sum >> 8));
     }
 }
+
+void grid_relative_position(gaddr record, int shift, int32_t out[3]) {
+    uint16_t cell = rd_u16(record + 0x0E);
+    int16_t column = (int16_t)((cell >> 8) - (rd_u16(GRID_ORIGIN_X) & 0xFF));
+    int16_t row = (int16_t)((cell & 0xFF) - (rd_u16(GRID_ORIGIN_Z) & 0xFF));
+    shift &= 15;
+    out[0] = (int32_t)((uint32_t)(int32_t)rd_s16(record + 0x06) << shift) - ((int32_t)((uint32_t)(uint16_t)column << 16) >> 2);
+    out[1] = (int32_t)((uint32_t)(int32_t)rd_s16(record + 0x08) << shift);
+    out[2] = (int32_t)((uint32_t)(int32_t)rd_s16(record + 0x0A) << shift) - ((int32_t)((uint32_t)(uint16_t)row << 16) >> 2);
+}
+
+void append_list_point(int16_t x, int16_t y, int16_t z, int shift, uint16_t tag) {
+    gaddr p = rd_u32(LIST_WRITE);
+    int count = shift & 63;
+    int32_t a, b;
+    a = ((int32_t)x * rd_s16(LIST_MATRIX) + (int32_t)y * rd_s16(LIST_MATRIX + 2) + (int32_t)z * rd_s16(LIST_MATRIX + 4)) >> 8;
+    b = ((int32_t)x * rd_s16(LIST_MATRIX + 12) + (int32_t)y * rd_s16(LIST_MATRIX + 14) + (int32_t)z * rd_s16(LIST_MATRIX + 16)) >> 8;
+    a = count >= 32 ? 0 : (int32_t)((uint32_t)a << count);
+    b = count >= 32 ? 0 : (int32_t)((uint32_t)b << count);
+    wr_s32(p, a);
+    wr_u32(p + 4, 0);
+    wr_s32(p + 8, b);
+    wr_u16(p + 12, tag);
+    p += 16;
+    wr_u32(p, 0);
+    wr_u32(p + 4, 0);
+    wr_u32(p + 8, 0);
+    wr_u32(LIST_WRITE, p);
+}

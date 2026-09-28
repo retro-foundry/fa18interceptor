@@ -86,4 +86,17 @@ void play_programmed_sound(const int32_t args[9]);
  * ($C18096). */
 void play_scripted_sound(int32_t volume);
 
+/* The main engine pair (sounds 0 and 1 on channels 0 and 1) at `period`
+ * and period + 2 when SOUND_FLAGS bit 0 is set and sound 1 exists;
+ * otherwise play_engine at a quarter of the volume ($C17C62). */
+void play_main_engine(int32_t period, int32_t volume);
+
+/* slide_engine, the volume quartered unless SOUND_FLAGS bit 0 is set
+ * ($C17D6E). */
+void slide_main_engine(int32_t period, int32_t volume, int32_t ticks);
+
+/* A short programmed tone at `pitch` ($C3316A), unless TONE_MUTE is
+ * positive. */
+void play_tone(int32_t pitch);
+
 #endif
