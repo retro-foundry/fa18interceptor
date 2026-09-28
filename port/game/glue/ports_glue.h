@@ -201,4 +201,10 @@ int glue_C3040C(void);
 int glue_C1EBE0(void);
 int glue_C25876(void);
 
+/* batch 26: tones, page plane tops */
+int glue_C33180(void);
+int glue_C3318E(void);
+int glue_C33186(void);
+int glue_C2F582(void);
+
 #endif

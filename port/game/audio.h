@@ -95,8 +95,17 @@ void play_main_engine(int32_t period, int32_t volume);
  * ($C17D6E). */
 void slide_main_engine(int32_t period, int32_t volume, int32_t ticks);
 
-/* A short programmed tone at `pitch` ($C3316A), unless TONE_MUTE is
- * positive. */
-void play_tone(int32_t pitch);
+/* A short programmed tone of variant `kind` at `pitch`, unless TONE_MUTE
+ * is positive ($C3319A; $C3316A plays kind 1). */
+void play_tone(int32_t kind, int32_t pitch);
+
+/* Tone 2 at pitch 2 ($C33180). */
+void play_tone_2(void);
+
+/* Tone 2 at pitch 2 while the volume fades, else at pitch 4 ($C3318E). */
+void play_status_tone(void);
+
+/* play_status_tone unless a context runs ($C33186). */
+void play_status_tone_outside_context(void);
 
 #endif

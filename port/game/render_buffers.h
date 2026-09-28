@@ -12,4 +12,8 @@ void clear_render_buffers(void);
  * C = D = plane 1 at POLY_PLANE_OFFSET, POLY_BLIT_SIZE, descending. */
 void blit_mask_between_planes(void);
 
+/* Clear the first 40 bytes of each of the four planes of both pages
+ * ($C2F582). */
+void clear_page_plane_tops(void);
+
 #endif

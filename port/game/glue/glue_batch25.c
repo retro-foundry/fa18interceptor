@@ -35,12 +35,33 @@ int glue_C17D6E(void) {
     return glue_return();
 }
 
-/* $C3316A: D1 pitch. Every register comes back (the MOVEM restore) except
+/* $C3316A: D1 pitch (tone 1). Every register comes back (the MOVEM restore) except
  * D0 = 1, set before the save. */
 int glue_C3316A(void) {
-    play_tone((int32_t)D(1));
+    play_tone(1, (int32_t)D(1));
     D(0) = 1;
     return glue_return();
+}
+
+/* $C33180, $C3318E, $C33186: the registers come back except D0/D1, set to
+ * the variant and pitch before the save. */
+int glue_C33180(void) {
+    play_tone_2();
+    D(0) = 2;
+    D(1) = 2;
+    return glue_return();
+}
+
+int glue_C3318E(void) {
+    D(0) = 2;
+    D(1) = rd_u8(VOLUME_FADING) ? 2 : 4;
+    play_status_tone();
+    return glue_return();
+}
+
+int glue_C33186(void) {
+    if (rd_u8(CONTEXT_SELECT)) return glue_return();
+    return glue_C3318E();
 }
 
 /* $C219AE: A2 stream. Every register is live after it. */
@@ -144,5 +165,18 @@ int glue_C25876(void) {
     D(4) = (uint32_t)second;
     A(0) = LIST_MATRIX + 18;
     A(3) = rd_u32(LIST_WRITE);
+    return glue_return();
+}
+
+/* $C2F582: D0-D7, A4, A5 = 0 (MOVEQ/MOVE.L's flags: Z), A0-A3 = page 1's
+ * plane pointers. */
+int glue_C2F582(void) {
+    int i;
+    clear_page_plane_tops();
+    for (i = 0; i < 8; i++) D(i) = 0;
+    for (i = 0; i < 4; i++) A(i) = rd_u32(PAGE0_PLANE_TABLE + 16 + (gaddr)(4 * i));
+    A(4) = 0;
+    A(5) = 0;
+    flags_logic_l(0);
     return glue_return();
 }

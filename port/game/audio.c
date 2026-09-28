@@ -214,10 +214,24 @@ void slide_main_engine(int32_t period, int32_t volume, int32_t ticks) {
     slide_engine(period, (rd_u8(SOUND_FLAGS) & 0x01) ? volume : volume >> 2, ticks);
 }
 
-void play_tone(int32_t pitch) {
-    int32_t args[9] = {0x12C, 0, 1, 0x12C, 0, 1, 1, 1, 1};
+void play_tone(int32_t kind, int32_t pitch) {
+    int32_t args[9] = {0x12C, 0, 1, 0x12C, 0, 1, 1, 0, 0};
     if ((int8_t)rd_u8(TONE_MUTE) > 0) return;
     args[1] = pitch;
     args[4] = pitch;
+    args[7] = kind;
+    args[8] = kind;
     play_programmed_sound(args);
+}
+
+void play_tone_2(void) {
+    play_tone(2, 2);
+}
+
+void play_status_tone(void) {
+    play_tone(2, rd_u8(VOLUME_FADING) ? 2 : 4);
+}
+
+void play_status_tone_outside_context(void) {
+    if (!rd_u8(CONTEXT_SELECT)) play_status_tone();
 }

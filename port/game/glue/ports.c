@@ -189,6 +189,11 @@ const FA18Port fa18_ports[] = {
     {0xC3040C, glue_C3040C, "blit_mask_between_planes", 300},
     {0xC1EBE0, glue_C1EBE0, "grid_relative_position", 300},
     {0xC25876, glue_C25876, "append_list_point", 600},
+    /* batch 26: tones, page plane tops */
+    {0xC33180, glue_C33180, "play_tone_2", 1200},
+    {0xC3318E, glue_C3318E, "play_status_tone", 1250},
+    {0xC33186, glue_C33186, "play_status_tone_outside_context", 1260},
+    {0xC2F582, glue_C2F582, "clear_page_plane_tops", 600},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

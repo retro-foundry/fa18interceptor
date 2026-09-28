@@ -34,3 +34,12 @@ void blit_mask_between_planes(void) {
     custom_write_ptr(BLTDPT, plane1);
     custom_write(BLTSIZE, rd_u16(POLY_BLIT_SIZE));
 }
+
+void clear_page_plane_tops(void) {
+    int page, plane, i;
+    for (page = 0; page < 2; page++)
+        for (plane = 0; plane < 4; plane++) {
+            gaddr p = rd_u32(PAGE0_PLANE_TABLE + (gaddr)(16 * page + 4 * plane));
+            for (i = 0; i < 10; i++) wr_u32(p + (gaddr)(4 * i), 0);
+        }
+}
