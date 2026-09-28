@@ -27,6 +27,14 @@ append/status flags.  The preceding `$C1CA82` selector and following
 `$C1D10C` consumer remain explicit source owners; this does not schedule a
 renderer or use replay-frame data.
 
+The capture-free active-scene diagnostic now accepts the earlier
+`$C0FA04`-initialized boundary rather than incorrectly requiring the later
+`$C0FA80`/`$C10C08` continuation.  It still produces zero pixels at frame
+402, which proves that the default `$C2DB18 -> $C1C54E -> $C279D0` adapter
+does not yet have the live parent-update state needed by the real
+prepared-page producer.  This diagnostic remains opt-in and is not routed to
+normal presentation.
+
 `post_input_followup.{c,h}` and `game.c` now retain the complete direct
 post-input callback sequence instead of treating `$C0FA04` as scene-entry
 completion.  After `$C0FA04` initializes the scene and installs `$C0FA4C`,

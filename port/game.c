@@ -82,6 +82,10 @@ static int advance_scene_entry_callback(FA18Game *game) {
     if (result < 0) return -1;
     if (result > 0 &&
         game->post_input_followup.callback ==
+            FA18_POST_INPUT_CALLBACK_AFTER_FINISH_FOLLOWUP)
+        game->scene_entry_initialized = 1;
+    if (result > 0 &&
+        game->post_input_followup.callback ==
             FA18_POST_INPUT_CALLBACK_CONTINUE_AFTER_COMPLETE_FOLLOWUP)
         game->scene_entry_complete = 1;
     return 0;
@@ -238,7 +242,7 @@ int fa18_game_present_active_scene_render_diagnostic(FA18Game *game) {
     FA18SceneActiveRecordState active_record;
     uint16_t palette[FA18_VIEWPORT_PALETTE_WORDS];
 
-    if (!game || !game->scene_entry_complete) return -1;
+    if (!game || !game->scene_entry_initialized) return -1;
     fa18_five_plane_page_init(&page);
     if (fa18_flight_renderer_page_init(
             &renderer, &page, &pixels, &lines,

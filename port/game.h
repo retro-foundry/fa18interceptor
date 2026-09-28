@@ -57,6 +57,10 @@ typedef struct {
     uint32_t viewport_left_pointer_table[2];
     uint32_t viewport_right_pointer_table[2];
     uint8_t scene_entry_armed;
+    /* `$C0FA04` has completed `$C0FAA4`; `$C0FA4C/$C0FA80` may still be
+     * pending. This keeps the source initialization boundary distinct from
+     * installation of the later `$C10C08` continuation. */
+    uint8_t scene_entry_initialized;
     uint8_t scene_entry_complete;
     FA18MenuRecord menu_records[FA18_MENU_TEXT_SELECTORS];
     FA18SceneRenderFixture render_fixture;
@@ -81,9 +85,10 @@ int fa18_game_enable_c279_render_fixture(FA18Game *game, const char *slow_captur
                                          const char *chip_capture_path);
 
 /* User-authorized, capture-free renderer diagnostic. It renders the current
- * scene-entry root record through the default `$C2DB18 -> $C1C54E -> $C279D0`
- * path into a fresh native page and presents it. It is deliberately separate
- * from normal scheduling until the parent/outer-loop owner is complete. */
+ * `$C0FA04`-initialized root record through the default
+ * `$C2DB18 -> $C1C54E -> $C279D0` path into a fresh native page and presents
+ * it. It is deliberately separate from normal scheduling until the
+ * parent/outer-loop owner is complete. */
 int fa18_game_present_active_scene_render_diagnostic(FA18Game *game);
 
 /* Advance one PAL video frame with the given control state. `post_input_ticks`
