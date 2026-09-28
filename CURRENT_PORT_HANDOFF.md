@@ -84,6 +84,13 @@ now contains the five measured `$C0F5F8` entries at frames 290, 317, 335,
 changing the 192 exact-frame gate, because page/viewport presentation is still
 not attached.
 
+`matrix_pipeline_tail.{c,h}` now ports the source-ordered `$C2DAB0-$C2DAF1`
+tail of `$C2D9BA`: it builds `$C45BD8` from caller-owned angle words, scales
+its rows, builds `$C45BFC`, and copies the three `$C461EA` auxiliary words.
+The bounded frame-608 trace validates its projection matrix
+`(167,0,-8 / 1,248,39 / 6,-21,126)`. `$C091E0/$C123FA` still own the inputs,
+so this is intentionally not scheduled by `game.c`.
+
 ## Next context: live scene rendering
 
 Do not add a frame-number trigger or captured page to `game.c`. The source
