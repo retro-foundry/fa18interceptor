@@ -1171,6 +1171,13 @@ the guarded `$C2F66E` submission setup. Those callbacks still own their wider
 state, but the eventual parent scheduler now has the source packet that
 prepares its context instead of a placeholder refresh slot.
 
+`terrain_template_static_data.{c,h}` now binds the immutable source inputs
+for the next `$C1D330-$C1D51D` workspace producer: Hunk 65 at `$C412EC` is
+the band control stream and Hunk 66 at `$C42390` is the static group/template
+directory. The mutable bit gate, special pairs, placement cache, and workspace
+bands remain caller-owned, so this adds original data without importing a
+replay snapshot.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
