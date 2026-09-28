@@ -78,10 +78,11 @@ source-backed mode-$7F arm consumes a scheduler tick, it retains that arm's
 delay four. Later scheduler ticks use the shared `$C0F7D8-$C0F7FE` counter
 and invoke the real `$C0FA04` composition; the negative tick runs
 `scene_entry_runtime` before the observed followup stores set viewport target
-15/current 0. No presentation-frame trigger is used. The archived run075
-timing stream currently ends at frame 271, so its native reference output is
-intentionally unchanged; new timing evidence is required before this live
-path can be reached by the normal replay.
+15/current 0. No presentation-frame trigger is used. The run075 timing stream
+now contains the five measured `$C0F5F8` entries at frames 290, 317, 335,
+351, and 369. The live path reaches the observed scene-entry expiry without
+changing the 192 exact-frame gate, because page/viewport presentation is still
+not attached.
 
 ## Next context: live scene rendering
 
@@ -90,9 +91,8 @@ join is established: run075 reaches `$C0FA04`'s expired branch at global frame
 370, which calls `$C0FAA4`; only after it returns does the caller set viewport
 mode `current=0`, `target=15`. The source cadence reaches current mode 8 at
 frame 392, where the dynamic Copper palette reveals an already prepared page.
-The game-level callback composition is now present, but its source-measured
-tick stream must be extended past frame 271 before the normal replay reaches
-the scene-entry transition. Then connect its genuine record/matrix state to
+The game-level callback composition and measured stream now reach the
+scene-entry transition. Connect its genuine record/matrix state to
 `FA18FlightScenePipeline` and `FA18ViewportMode`/five-plane presentation. It
 must provide genuine record, matrix, page, and Copper state; the existing
 capture fixtures are diagnostic only. See `analysis/routines/c0fa04_post_input_followup.md`,

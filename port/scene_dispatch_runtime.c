@@ -15,13 +15,12 @@ static int load_template(const FA18Hunks *hunks, int16_t source_offset,
     if (!hunks || !template_record || source_offset < 0 ||
         FA18_SCENE_DISPATCH_TEMPLATE_HUNK >= hunks->count)
         return -1;
-    for (unsigned i = 0; i != FA18_SCENE_DISPATCH_TEMPLATE_POINTERS; ++i) {
+    for (unsigned i = 0; i != FA18_SCENE_DISPATCH_TEMPLATE_POINTERS; ++i)
         if (!fa18_hunk_pointer(hunks, FA18_SCENE_DISPATCH_TEMPLATE_HUNK,
                                (uint32_t)source_offset + i * 4u,
                                &template_record->segment[i],
                                &template_record->offset[i]))
-            return -1;
-    }
+            template_record->segment[i] = UINT32_MAX;
     return 0;
 }
 
@@ -80,8 +79,9 @@ int fa18_initialize_scene_dispatch_runtime(
             load_template(hunks, source.source_offset,
                           &runtime->template_record[record_index]) != 0 ||
             template_class(hunks, &runtime->template_record[record_index],
-                           &class_nibble) != 0)
+                           &class_nibble) != 0) {
             return -1;
+        }
         /* `$C28B84` already-published bit-6 route retains the live slot. */
         if (runtime->record[record_index].bytes[1] & 0x40u) continue;
         if (fa18_scene_dispatch_geometry(table, source.geometry_offset, &geometry) != 0)

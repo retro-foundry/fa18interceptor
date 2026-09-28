@@ -15,9 +15,10 @@ enum {
     FA18_SCENE_DISPATCH_TEMPLATE_POINTERS = 5
 };
 
-/* One relocated five-longword template copied by `$C28B96-$C28B9C` into the
- * record-indexed `$C22188` parameter pack.  References stay segment-relative
- * in native code rather than retaining Amiga addresses. */
+/* One five-longword template copied by `$C28B96-$C28B9C` from Hunk 16 into
+ * the record-indexed `$C22188` parameter pack. Only entries with a Hunk
+ * relocation are resolved; the source carries the other pointer words as
+ * opaque values and this port does not consume them. */
 typedef struct {
     uint32_t segment[FA18_SCENE_DISPATCH_TEMPLATE_POINTERS];
     uint32_t offset[FA18_SCENE_DISPATCH_TEMPLATE_POINTERS];

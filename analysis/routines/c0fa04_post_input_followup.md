@@ -20,6 +20,13 @@ followup mode `$0F`, and typed `FA18_MENU_CALLBACK_DEMO_FOLLOWUP_MATCH`.
 The direct initializer subset and unresolved nested helpers are documented in
 `c0faa4_run075_scene_initialization.md`.
 
+In ordinary run075 replay, after the mode-$7F arm sets `$C45AD6=4`, live
+`$C0F5F8` entries occur at frames 290, 317, 335, 351, and 369 with countdowns
+4, 3, 2, 1, and 0 respectively. Its decrement-before-dispatch tail makes the
+last entry call `$C0FA04` with `-1`, matching the bounded frame-370 expiry.
+Those five replay-owned ticks are present in `captures/run075/timing.e9t`; no
+general presentation-frame cadence is implied.
+
 The run075 frame-291 trace proves the nonnegative call reaches `$C2FD22`;
 `FA18DemoController` maps that clear to its native chunky work buffer.
 `fa18_demo_contract_test` reaches the expiry after the five ticks required to

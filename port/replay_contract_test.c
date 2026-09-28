@@ -6,7 +6,7 @@
 typedef struct { FA18ReplayEvent event[128]; size_t count; } Events;
 
 typedef struct { size_t count; int saw_j; } EventKinds;
-typedef struct { FA18ReplayTickRange range[8]; size_t count; } TickRanges;
+typedef struct { FA18ReplayTickRange range[9]; size_t count; } TickRanges;
 
 static int collect(const FA18ReplayEvent *event, void *user) {
     Events *events = user;
@@ -27,7 +27,7 @@ static int collect_run060(const FA18ReplayEvent *event, void *user) {
 
 static int collect_tick_range(const FA18ReplayTickRange *range, void *user) {
     TickRanges *ranges = user;
-    if (ranges->count >= 8) return -1;
+    if (ranges->count >= 9) return -1;
     ranges->range[ranges->count++] = *range;
     return 0;
 }
@@ -58,14 +58,18 @@ int main(void) {
     TickRanges ticks = {{0}, 0};
     if (fa18_replay_read_tick_ranges("../../captures/run075/timing.e9t",
                                      collect_tick_range, &ticks, NULL) != 0 ||
-        ticks.count != 4 || ticks.range[0].first_frame != 235 ||
+        ticks.count != 9 || ticks.range[0].first_frame != 235 ||
         ticks.range[1].last_frame != 240 || ticks.range[2].ticks != 6 ||
-        ticks.range[3].first_frame != 271 ||
+        ticks.range[3].first_frame != 271 || ticks.range[4].first_frame != 290 ||
+        ticks.range[8].first_frame != 369 ||
         fa18_replay_ticks_for_frame(ticks.range, ticks.count, 234) != 0 ||
         fa18_replay_ticks_for_frame(ticks.range, ticks.count, 235) != 1 ||
         fa18_replay_ticks_for_frame(ticks.range, ticks.count, 240) != 5 ||
         fa18_replay_ticks_for_frame(ticks.range, ticks.count, 270) != 6 ||
         fa18_replay_ticks_for_frame(ticks.range, ticks.count, 271) != 5 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 290) != 1 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 291) != 0 ||
+        fa18_replay_ticks_for_frame(ticks.range, ticks.count, 369) != 1 ||
         fa18_replay_ticks_for_frame(ticks.range, ticks.count, 272) != 0) {
         fputs("run075 replay timing contract failed\n", stderr);
         return 1;

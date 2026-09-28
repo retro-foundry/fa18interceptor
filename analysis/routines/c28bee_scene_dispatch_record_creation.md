@@ -24,3 +24,11 @@ each selected slot already has bit 6 at `+1`, so that trace proves dispatcher
 reachability and the skip condition, not creation timing. The selected
 run075 pose record is therefore still a producer/integration boundary for
 the first cockpit frame.
+
+`$C28B34` first forms its template pointer as `$C22048 + word(A2)`, so the
+source word is an offset within Hunk 16, not a relocation offset itself. Its
+`MOVEM.L` copies all five pointer words to `$C22188 + index*20`, but this
+bounded path consumes only the second word to derive the descriptor class.
+The native dispatcher therefore resolves only words that have Hunk
+relocations; untouched source pointer words remain opaque rather than causing
+the otherwise valid dispatch to fail.
