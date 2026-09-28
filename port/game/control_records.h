@@ -99,4 +99,18 @@ int16_t attitude_term(void);
  * history (twice while it is filling) and keep its +$3D history length. */
 void record_position_history(void);
 
+/* Append a (kind, index) event, and an $FF end marker, to `events` for
+ * every active record (control records: kind $10; workspace records: $40)
+ * pending at cell (column, row, level); clear their pending bit. Returns the
+ * advanced event pointer. */
+gaddr collect_records_in_cell(int16_t column, int16_t row, int8_t level, gaddr events);
+
+/* Accumulate a record position scaled down by `shift`: *x = (*x << 8) +
+ * (+$14 & $FFFFF) >> shift, likewise *z with +$1C; *y = +$18 >> shift. */
+void accumulate_record_position(gaddr record, int shift, int32_t *x, int32_t *y, int32_t *z);
+
+/* Update the shown record +$78 toward a limit from TABLE_78_LIMIT and the
+ * +$66 angle, and set +$76 from TABLE_76_TARGET. */
+void update_record_76_78(void);
+
 #endif

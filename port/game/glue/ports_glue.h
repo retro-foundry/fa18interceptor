@@ -123,4 +123,9 @@ int glue_C2E5F6(void);
 int glue_C24F76(void);
 int glue_C2564E(void);
 
+/* batch 15: cell occupancy, record position, record 76/78 */
+int glue_C1D520(void);
+int glue_C1D0B6(void);
+int glue_C26428(void);
+
 #endif

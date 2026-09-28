@@ -299,3 +299,82 @@ void record_position_history(void) {
     }
     wr_u8(record + 0x3D, (uint8_t)length);
 }
+
+static gaddr collect_in(gaddr base, int stride, uint8_t kind, int16_t column, int16_t row,
+                        int8_t level, gaddr events) {
+    int i;
+    for (i = 0; i < 16; i++) {
+        gaddr r = base + (gaddr)(i * stride);
+        uint8_t flags = rd_u8(r + 1);
+        if ((flags & 0x40) && (flags & 0x10) && rd_s16(r + 6) == column && rd_s16(r + 8) == row &&
+            (int8_t)rd_u8(r + 0x0A) == level) {
+            wr_u8(r + 1, (uint8_t)(flags & ~0x10));
+            wr_u8(events++, kind);
+            wr_u8(events++, (uint8_t)i);
+            wr_u8(events, 0xFF);
+        }
+    }
+    return events;
+}
+
+gaddr collect_records_in_cell(int16_t column, int16_t row, int8_t level, gaddr events) {
+    if (level < 0 || !rd_u8(CELL_CHECKS)) return events;
+    wr_u16(CELL_TIMER, 0x50);
+    events = collect_in(CONTROL_RECORDS, CONTROL_RECORD_BYTES, 0x10, column, row, level, events);
+    return collect_in(WORKSPACE_RECORDS, WORKSPACE_RECORD_BYTES, 0x40, column, row, level, events);
+}
+
+void accumulate_record_position(gaddr record, int shift, int32_t *x, int32_t *y, int32_t *z) {
+    int32_t level = rd_s32(record + 0x18);
+    *x = (int32_t)((uint32_t)*x << 8) + ((int32_t)(rd_u32(record + 0x14) & 0xFFFFF) >> shift);
+    *z = (int32_t)((uint32_t)*z << 8) + ((int32_t)(rd_u32(record + 0x1C) & 0xFFFFF) >> shift);
+    *y = level >> shift;
+    wr_s32(POSITION_LEVEL, (int32_t)(level + rd_s32(POSITION_BIAS)) >> shift);
+    wr_u8(POSITION_VALID, 1);
+}
+
+/* The 2.14 sine table as 2.8: entry i and i + 1. */
+static int16_t sine8(int16_t index) { return (int16_t)(rd_s16(SINE_TABLE + (gaddr)(int32_t)(int16_t)(index * 2)) >> 6); }
+
+static int16_t table_by_magnitude(gaddr table, int16_t v) {
+    int16_t i = (int16_t)((int16_t)(v < 0 ? -v : v) >> 7);
+    if (i > 30) i = 30;
+    return rd_s16(table + (gaddr)(int32_t)(int16_t)(i * 2));
+}
+
+void update_record_76_78(void) {
+    gaddr r = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+    int16_t limit, angle, cosine_term, current, step, next;
+
+    if (!rd_u8(RECORD_UPDATES_ON)) {
+        wr_u16(r + 0x76, 0);
+        wr_u16(r + 0x78, 0);
+        return;
+    }
+    limit = table_by_magnitude(TABLE_78_LIMIT, rd_s16(r + 0x6C));
+    angle = (int16_t)(rd_s16(r + 0x66) >> 3);
+    if (angle <= 0x708) {
+        cosine_term = (int16_t)(0x100 - sine8((int16_t)(0x384 - angle)));
+    } else {
+        cosine_term = (int16_t)-(int16_t)(0x100 - sine8((int16_t)(0x384 - (0xE10 - angle))));
+    }
+    limit = (int16_t)(((int32_t)limit * cosine_term) >> 3);
+
+    current = rd_s16(r + 0x78);
+    if (rd_u8(r + 0x03) & 0x80) {
+        next = 0;
+    } else {
+        if ((int8_t)rd_u8(r + 0x7C) >= 0) limit = (int16_t)(limit - (int16_t)(limit >> 2));
+        if (current <= limit) {
+            next = (int16_t)(current - (int16_t)((int16_t)(current - limit) >> 5));
+        } else {
+            step = (int16_t)(current - limit);
+            if (step > 0xFF) next = (int16_t)(current - (int16_t)(step >> 8));
+            else if (current == 0) next = 0;
+            else if (current < 0) next = 0;
+            else next = (int16_t)(current - 1);
+        }
+    }
+    wr_s16(r + 0x78, next);
+    wr_s16(r + 0x76, table_by_magnitude(TABLE_76_TARGET, rd_s16(r + 0x6E)));
+}

@@ -216,4 +216,18 @@
 #define SQRT_INPUT         0xC45B64u /* long */
 #define SQRT_RESULT        0xC45B68u /* word */
 
+/* ---- cell occupancy ($C1D520) --------------------------------------------- */
+#define CELL_CHECKS        0xC45864u /* byte: nonzero enables the cell check */
+#define CELL_TIMER         0xC45AD4u /* word: set to $50 by the check */
+
+/* ---- record position accumulation ($C1D0B6) ------------------------------- */
+#define POSITION_BIAS      0xC45A66u /* long: added to +$18 before scaling */
+#define POSITION_LEVEL     0xC45B3Cu /* long: (+$18 + POSITION_BIAS) >> shift */
+#define POSITION_VALID     0xC458BBu /* byte: set to 1 */
+
+/* ---- record update tables ($C26428) --------------------------------------- */
+#define RECORD_UPDATES_ON  0xC45784u /* byte */
+#define TABLE_78_LIMIT     0xC263DCu /* word[31]: by |+$6C| >> 7 */
+#define TABLE_76_TARGET    0xC2639Cu /* word[31]: by |+$6E| >> 7 */
+
 #endif
