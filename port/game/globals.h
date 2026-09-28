@@ -129,4 +129,33 @@
 #define TABLE_CLEAR_MODE   0xC458A4u /* byte: set to 2 by clear_long_table */
 #define LONG_TABLE         0xC45660u /* long: address of a 16-long table */
 
+/* ---- random numbers ($C50AB4) --------------------------------------------- */
+#define RANDOM_SEED        0xC07288u /* long: 31-bit shift register */
+
+/* ---- voices, continued ---------------------------------------------------- */
+#define VOICE_SLOTS        0xC4FE38u /* long[4]: the voice playing on each channel */
+
+/* ---- readouts ($C2548A) ---------------------------------------------------- */
+#define READOUT_SOURCE_VALID 0xC45AFAu /* long: negative until a first sample */
+#define READOUT_DIVISOR    0xC45B0Au /* long */
+#define READOUT_VALUE      0xC45AE6u /* word: 800000 / divisor, 9999 above $7FFF */
+#define READOUT_MINIMUM    0xC45AE8u /* word */
+#define READOUT_MAXIMUM    0xC458E0u /* word */
+#define READOUT_SAMPLE     0xC45AF2u /* two longs, copied to READOUT_SOURCE_VALID.. */
+
+/* ---- view panning ($C258C8) ---------------------------------------------- */
+#define VIEW_PAN           0xC45A94u /* word: 1/80 degree, limited to 270..90 through 0 */
+#define VIEW_ROTATE        0xC45A96u /* word: 1/80 degree, full circle */
+#define PAN_KEYS           0xC4582Eu /* byte: nonzero while panning; bit 5 = other way */
+#define ROTATE_KEYS        0xC45830u /* byte: nonzero while rotating; bit 3 = other way */
+#define PAUSE_A            0xC457ADu /* byte: nonzero blocks panning */
+
+/* ---- mission objects ($C0840E) ------------------------------------------- */
+#define MISSION_FLAGS_A    0xC4588Bu
+#define MISSION_FLAGS_B    0xC4588Cu
+#define MISSION_FLAGS_C    0xC4588Du
+#define MISSION_COUNTER    0xC458C2u /* word */
+#define MISSION_LEVEL_A    0xC4584Cu /* byte: reset to $10 */
+#define MISSION_LEVEL_B    0xC4584Du /* byte: reset to $10 */
+
 #endif

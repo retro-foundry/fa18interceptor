@@ -29,4 +29,14 @@ void divide_rounded(void);
  * `angle` is in eighths of the sin_cos unit. */
 void y_rotation_matrix(int16_t angle, gaddr out);
 
+/* Move *value toward zero: by value >> shift outside +-15, by 1 inside
+ * (so 0 becomes -1). */
+void decay_toward_zero(gaddr value, int16_t shift);
+
+/* x * 5/8 (as x/2 + x/8, each rounded down). */
+int16_t five_eighths(int16_t x);
+
+/* One pseudo-random bit from the 31-bit shift register. */
+int32_t random_bit(void);
+
 #endif

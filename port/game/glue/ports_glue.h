@@ -74,4 +74,15 @@ int glue_C082B0(void);
 int glue_C10C08(void);
 int glue_C11B0E(void);
 
+/* batch 9: hex text, decay, nudge, random, voices, readout, mission, view pan */
+int glue_C0F56A(void);
+int glue_C13A2A(void);
+int glue_C13CDE(void);
+int glue_C13396(void);
+int glue_C50AB4(void);
+int glue_C17B08(void);
+int glue_C2548A(void);
+int glue_C0840E(void);
+int glue_C258C8(void);
+
 #endif

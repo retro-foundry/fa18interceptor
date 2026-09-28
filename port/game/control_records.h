@@ -63,4 +63,11 @@ void update_view_matrix(void);
 /* Compass heading of the viewed record, in degrees and tape steps. */
 void update_compass(void);
 
+/* Nudge *value away from zero by the current record's +$6C / 128, except
+ * inside the +-$500 dead zone. */
+void nudge_outside_dead_zone(gaddr value);
+
+/* Reset the player record's mission fields and clear records 1-3. */
+void reset_mission_objects(void);
+
 #endif

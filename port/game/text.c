@@ -26,3 +26,21 @@ void plot_glyph3(gaddr glyph, gaddr dest, int shift, int rows, GlyphMode mode) {
         dest += ROW_BYTES;
     }
 }
+
+void format_hex(gaddr p, uint32_t value, int8_t width) {
+    int8_t i;
+
+    p += (gaddr)(int32_t)width;
+    for (i = 0; i < width; i++) {
+        int8_t digit = (int8_t)((value & 15) + '0');
+        if (digit > '9') digit = (int8_t)(digit + 7);
+        wr_u8(p--, (uint8_t)digit);
+        value >>= 4;
+    }
+    width--;
+    p++;
+    for (i = 0; i < width; i++) {
+        if (rd_u8(p) != '0') break;
+        wr_u8(p++, ' ');
+    }
+}

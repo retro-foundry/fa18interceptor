@@ -81,6 +81,16 @@ const FA18Port fa18_ports[] = {
     {0xC082B0, glue_C082B0, "finish_scene_setup", 320},
     {0xC10C08, glue_C10C08, "start_context_stage", 120},
     {0xC11B0E, glue_C11B0E, "clear_long_table", 500},
+    /* batch 9: hex text, decay, nudge, random, voices, readout, mission, view pan */
+    {0xC0F56A, glue_C0F56A, "format_hex", 600},
+    {0xC13A2A, glue_C13A2A, "decay_toward_zero", 120},
+    {0xC13CDE, glue_C13CDE, "nudge_outside_dead_zone", 120},
+    {0xC13396, glue_C13396, "five_eighths", 80},
+    {0xC50AB4, glue_C50AB4, "random_bit", 150},
+    {0xC17B08, glue_C17B08, "free_voice", 150},
+    {0xC2548A, glue_C2548A, "update_readout", 250},
+    {0xC0840E, glue_C0840E, "reset_mission_objects", 900},
+    {0xC258C8, glue_C258C8, "pan_view_from_keys", 120},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

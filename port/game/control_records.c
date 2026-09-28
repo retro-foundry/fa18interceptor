@@ -151,3 +151,32 @@ void update_compass(void) {
     else tape = (int16_t)(tape - 4);
     wr_s16(COMPASS_TAPE, tape);
 }
+
+void nudge_outside_dead_zone(gaddr value) {
+    int16_t step = (int16_t)(rd_s16(rd_u32(CURRENT_RECORD) + 0x6C) >> 7);
+    int16_t v = rd_s16(value);
+    if (v >= 0) {
+        if (v < 0x500) step = 0;
+        wr_s16(value, (int16_t)(v + step));
+    } else {
+        if (v > -0x500) step = 0;
+        wr_s16(value, (int16_t)(v - step));
+    }
+}
+
+void reset_mission_objects(void) {
+    int record, i;
+    wr_u32(CONTROL_RECORDS + 0x72, 6400000);
+    wr_u8(CONTROL_RECORDS + 0x5F, 0x24);
+    wr_u16(CONTROL_RECORDS + 0x60, 500);
+    wr_u8(REDRAW_FIRST + 0xD, 3);
+    wr_u8(REDRAW_FIRST + 0xE, 3);
+    wr_u8(MISSION_LEVEL_A, 0x10);
+    wr_u8(MISSION_LEVEL_B, 0x10);
+    wr_u8(MISSION_FLAGS_A, 0);
+    wr_u8(MISSION_FLAGS_C, 0);
+    wr_u8(MISSION_FLAGS_B, 0);
+    wr_u16(MISSION_COUNTER, 0);
+    for (record = 1; record <= 3; record++)
+        for (i = 0; i < 41; i++) wr_u32(CONTROL_RECORDS + (gaddr)(record * CONTROL_RECORD_BYTES + 4 * i), 0);
+}

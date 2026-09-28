@@ -65,3 +65,29 @@ void y_rotation_matrix(int16_t angle, gaddr out) {
     words[6] = (int16_t)-s; words[7] = 0; words[8] = c;
     for (i = 0; i < 9; i++) wr_s16(out + (gaddr)(2 * i), words[i]);
 }
+
+/* Arithmetic right shift of a word by 0-63 places, as ASR.W does. */
+static int16_t asr_word(int16_t v, int shift) {
+    shift &= 63;
+    if (shift >= 16) return (int16_t)(v < 0 ? -1 : 0);
+    return (int16_t)(v >> shift);
+}
+
+void decay_toward_zero(gaddr value, int16_t shift) {
+    int16_t v = rd_s16(value);
+    if (v < -15) wr_s16(value, (int16_t)(v + asr_word((int16_t)-v, shift)));
+    else if (v > 15) wr_s16(value, (int16_t)(v - asr_word(v, shift)));
+    else if (v < 0) wr_s16(value, (int16_t)(v + 1));
+    else wr_s16(value, (int16_t)(v - 1));
+}
+
+int16_t five_eighths(int16_t x) { return (int16_t)((x >> 1) + (x >> 3)); }
+
+int32_t random_bit(void) {
+    uint32_t seed = rd_u32(RANDOM_SEED);
+    int32_t bit = (int32_t)((seed ^ ((int32_t)seed >> 3)) & 1);
+    seed = ((uint32_t)((int32_t)seed >> 1)) & 0x7FFFFFFFu;
+    if (bit) seed += 0x80000000u;
+    wr_u32(RANDOM_SEED, seed);
+    return bit;
+}

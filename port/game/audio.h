@@ -39,4 +39,7 @@ enum { VOICE_LOOP_COUNTERS = 0x24, VOICE_DELAY = 0x2C, VOICE_PROGRAM = 0x30, VOI
  * channel interrupt. */
 void step_voice_program(gaddr voice, gaddr slot, int channel);
 
+/* Free the voice slot of a channel and clear its interrupt. */
+void free_voice(int channel);
+
 #endif
