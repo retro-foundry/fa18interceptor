@@ -47,7 +47,7 @@ static void usage(void) {
             "                   [--ram-out OUT.bin] [--replay RUN.e9k --start-frame N]\n"
             "                   [--window [--scale N]]   (window: --frames 0 runs until closed)\n"
             "                   [--ports off|on|shadow] [--ports-only LIST] [--ports-report OUT.json]\n"
-            "                   [--profile OUT.json]\n");
+            "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n");
 }
 
 #ifdef FA18_WITH_SDL
@@ -141,7 +141,7 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
 int main(int argc, char **argv) {
     const char *state_path = NULL, *rom_path = NULL, *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL,
                *fallback = NULL, *ram_out = NULL;
-    const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL;
+    const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL, *edges_path = NULL;
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
@@ -171,6 +171,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--ports-only") && i + 1 < argc) ports_only = argv[++i];
         else if (!strcmp(argv[i], "--ports-report") && i + 1 < argc) ports_report = argv[++i];
         else if (!strcmp(argv[i], "--profile") && i + 1 < argc) profile_path = argv[++i];
+        else if (!strcmp(argv[i], "--edges") && i + 1 < argc) edges_path = argv[++i];
+        else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else { usage(); return 2; }
     }
@@ -215,6 +217,7 @@ int main(int argc, char **argv) {
     if (ppm && !write_ppm(ppm, m->last_screen)) { fprintf(stderr, "cannot write %s\n", ppm); return 1; }
     if (fallback) fa18_recomp_write_fallback_log(fallback);
     if (profile_path) fa18_recomp_write_profile(profile_path);
+    if (edges_path) fa18_recomp_write_edges(edges_path);
     if (ports_mode == FA18_PORTS_SHADOW || ports_report) {
         long bad = fa18_ports_report(ports_report);
         fprintf(stderr, "ports: %ld mismatching calls\n", bad);

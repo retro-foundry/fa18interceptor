@@ -14,6 +14,7 @@ port/recomp/recomp_runtime.h for the macro contract.
 from __future__ import annotations
 
 import argparse
+import sys
 import ctypes
 import json
 import re
@@ -21,6 +22,7 @@ from collections import deque
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 MUSASHI = ROOT / "tools/musashi"
 
 SLOW_BASE, SLOW_SIZE = 0xC00000, 0x80000
@@ -268,6 +270,8 @@ def main() -> None:
                         help="bridge trace.jsonl whose PCs seed discovery")
     parser.add_argument("--seeds", type=Path, action="append", default=[],
                         help="JSON list of extra entry PCs (e.g. fallback-interpreter log)")
+    parser.add_argument("--edges", type=Path, action="append", default=[],
+                        help="fa18_recomp --edges output: observed call edges for liveness")
     parser.add_argument("--dll", type=Path, default=ROOT / "build/recomp/dasm_helper.dll")
     parser.add_argument("--out", type=Path, default=ROOT / "port/recomp/generated")
     parser.add_argument("--functions-per-file", type=int, default=150)
@@ -383,6 +387,23 @@ def main() -> None:
                       "spans": [[f"{a:06X}", f"{b:06X}"] for a, b in ranges(fn)],
                       "calls": [f"{c:06X}" for c in sorted(fn.calls)],
                       "dynamic_calls": dynamic_calls, "jumps_out": jumps_out, "kinds": kinds})
+    # Live registers/flags after each call site (tools/recomp/liveness.py).
+    import liveness
+    extra: dict[int, set[int]] = {}
+    for path in args.edges:
+        for ret, callee in json.loads(path.read_text()):
+            extra.setdefault(int(callee, 16), set()).add(int(ret, 16))
+    live = liveness.call_site_liveness(functions, extra)
+    rows = []
+    for ret, (tokens, _) in sorted(live.items()):
+        regs, high, flags = liveness.masks(tokens)
+        rows.append(f"    {{0x{ret:06X}, 0x{regs:04X}, 0x{high:02X}, 0x{flags:02X}}},")
+    (args.out / "recomp_liveness.c").write_text("\n".join(
+        header + ['#include "recomp_ports.h"', '',
+                  "/* Registers (bit 0 = D0 low word .. bit 15 = A7), D0-D7 high words, and",
+                  " * flags (bit 0 = X, N, Z, V, C) a caller may read after the call returning to `ret`. */",
+                  f"const FA18CallLiveness fa18_call_liveness[{len(rows)}] = {{"] + rows +
+        ["};", f"const int fa18_call_liveness_count = {len(rows)};", ""]))
     (args.out / "recomp_graph.json").write_text(json.dumps(graph, indent=1) + "\n")
     (args.out / "recomp_seeds.json").write_text(json.dumps(sorted(f"{s:06X}" for s in set(seeds))) + "\n")
     print(json.dumps(report))

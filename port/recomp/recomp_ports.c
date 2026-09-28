@@ -129,6 +129,69 @@ static void report_mismatch(int port, const char *what, uint32_t detail, uint32_
             (unsigned long long)s->calls, fa18_bus_read32(REG_A[7]));
 }
 
+/* ---- liveness ------------------------------------------------------------ */
+
+static int poison;
+void fa18_ports_set_poison(int on) { poison = on; }
+
+/* Live registers/flags after the call returning to `ret`; NULL = all live. */
+static const FA18CallLiveness *liveness_after(uint32_t ret) {
+    int lo = 0, hi = fa18_call_liveness_count - 1;
+    while (lo <= hi) {
+        int mid = (lo + hi) / 2;
+        uint32_t r = fa18_call_liveness[mid].ret;
+        if (r == ret) return &fa18_call_liveness[mid];
+        if (r < ret) lo = mid + 1;
+        else hi = mid - 1;
+    }
+    return NULL;
+}
+
+/* Bits of register i (0-7 D, 8-15 A) the caller can observe. */
+static uint32_t register_mask(const FA18CallLiveness *live, int i) {
+    uint32_t mask = 0;
+    if (!live) return 0xFFFFFFFFu;
+    if (i >= 8) return (live->regs >> i & 1) ? 0xFFFFFFFFu : 0;
+    if (live->regs >> i & 1) mask |= 0x0000FFFFu;
+    if (live->high >> i & 1) mask |= 0xFFFF0000u;
+    return mask;
+}
+
+/* SR bits of the live condition flags (X=0x10, N=8, Z=4, V=2, C=1). */
+static uint32_t sr_flag_mask(const FA18CallLiveness *live) {
+    static const uint32_t bit[5] = {0x10, 0x08, 0x04, 0x02, 0x01};
+    uint32_t mask = 0;
+    int f;
+    if (!live) return 0x1F;
+    for (f = 0; f < 5; f++)
+        if (live->flags >> f & 1) mask |= bit[f];
+    return mask;
+}
+
+/* Stack below the stack pointer the caller returns with is dead. */
+static int dead_stack(uint32_t a, uint32_t sp) {
+    sp &= 0xFFFFFF;
+    return a < sp && a >= sp - 0x1000;
+}
+
+/* Validation of the liveness table: overwrite everything it declares dead.
+ * A wrong entry changes the game, which a comparison with the plain
+ * generated run then shows. */
+static void poison_dead(const FA18CallLiveness *live) {
+    int i;
+    if (!live) return;
+    for (i = 0; i < 16; i++) {
+        uint32_t dead = ~register_mask(live, i);
+        if (i == 15) dead = 0; /* never A7 */
+        REG_DA[i] = (REG_DA[i] & ~dead) | (0xA5C3E1F7u & dead);
+    }
+    if (!(live->flags & 0x01)) FLAG_X ^= XFLAG_SET;
+    if (!(live->flags & 0x02)) FLAG_N ^= NFLAG_SET;
+    if (!(live->flags & 0x04)) FLAG_Z = FLAG_Z ? 0 : 1;
+    if (!(live->flags & 0x08)) FLAG_V ^= VFLAG_SET;
+    if (!(live->flags & 0x10)) FLAG_C ^= CFLAG_SET;
+}
+
 /* SHADOW: reference first, then the port on the same state; the game keeps
  * the reference result. */
 static int run_shadow(int function, int label, int port) {
@@ -137,7 +200,8 @@ static int run_shadow(int function, int label, int port) {
     int cycles_before = GET_CYCLES(), cycles_reference, r, i, mismatch = 0;
     size_t reference_end, port_start, reference_custom_count, k;
     CustomWrite *reference_custom;
-    uint32_t caller = fa18_bus_read32(REG_A[7]);
+    uint32_t caller = fa18_bus_read32(REG_A[7]) & 0xFFFFFF, reference_sp;
+    const FA18CallLiveness *live = liveness_after(caller);
     LogEntry *reference;
     uint8_t *reference_new;
 
@@ -161,6 +225,7 @@ static int run_shadow(int function, int label, int port) {
     }
     cycles_reference = cycles_before - GET_CYCLES();
     m68k_get_context(context_reference);
+    reference_sp = REG_A[7];
     reference_end = log_count;
     reference_custom_count = custom_count;
     reference_custom = malloc(sizeof *reference_custom * (custom_count + 1));
@@ -183,16 +248,18 @@ static int run_shadow(int function, int label, int port) {
         report_mismatch(port, "glue did not return", 0, 0, (uint32_t)r);
         mismatch = 1;
     } else {
+        /* Registers and flags the caller can observe (liveness table). */
         for (i = 0; i < 16; i++) {
             uint32_t want = ((m68ki_cpu_core *)context_reference)->dar[i];
-            if (REG_DA[i] != want) {
+            uint32_t mask = register_mask(live, i);
+            if ((REG_DA[i] ^ want) & mask) {
                 report_mismatch(port, i < 8 ? "D" : "A", (uint32_t)(i & 7), want, REG_DA[i]);
                 mismatch = 1;
             }
         }
         {
             unsigned char *now = malloc(m68k_context_size());
-            uint32_t want_sr, got_sr, want_pc;
+            uint32_t want_sr, got_sr, want_pc, flag_mask = sr_flag_mask(live);
             m68k_get_context(now);
             m68k_set_context(context_reference);
             want_sr = m68k_get_reg(NULL, M68K_REG_SR);
@@ -200,7 +267,7 @@ static int run_shadow(int function, int label, int port) {
             m68k_set_context(now);
             got_sr = m68k_get_reg(NULL, M68K_REG_SR);
             free(now);
-            if ((want_sr & 0xFF1F) != (got_sr & 0xFF1F)) {
+            if ((want_sr ^ got_sr) & (0xFF00 | flag_mask)) {
                 report_mismatch(port, "SR", 0, want_sr, got_sr);
                 mismatch = 1;
             }
@@ -222,9 +289,11 @@ static int run_shadow(int function, int label, int port) {
                 mismatch = 1;
             }
         }
-        /* Memory: every byte either run wrote must end with the same value. */
+        /* Memory: every byte either run wrote must end with the same value,
+         * except the dead stack below the returned-to stack pointer. */
         for (i = 0; i < (int)reference_end; i++) {
             uint8_t got = *byte_at(reference[i].address);
+            if (dead_stack(reference[i].address, reference_sp)) continue;
             if (got != reference_new[i]) {
                 report_mismatch(port, "byte", reference[i].address, reference_new[i], got);
                 mismatch = 1;
@@ -237,6 +306,7 @@ static int run_shadow(int function, int label, int port) {
             int k;
             for (k = (int)reference_end - 1; k >= 0; k--)
                 if (reference[k].address == a) { want = reference_new[k]; break; }
+            if (dead_stack(a, reference_sp)) continue;
             if (*byte_at(a) != want) {
                 report_mismatch(port, "byte", a, want, *byte_at(a));
                 mismatch = 1;
@@ -250,6 +320,7 @@ static int run_shadow(int function, int label, int port) {
     for (i = 0; i < (int)reference_end; i++) *byte_at(reference[i].address) = reference_new[i];
     m68k_set_context(context_reference);
     SET_CYCLES(cycles_before - cycles_reference);
+    if (poison) poison_dead(live);
     for (k = 0; k < reference_custom_count; k++)
         fa18_custom_write(fa18_machine, reference_custom[k].reg, reference_custom[k].value);
     free(reference_custom);
@@ -260,9 +331,42 @@ static int run_shadow(int function, int label, int port) {
 }
 
 /* Called by the runtime for every entry into a generated routine. */
+/* Observed call edges (return address, routine), for liveness of routines
+ * reached through jump tables and indirect calls. */
+#define EDGE_SLOTS 65536
+static uint64_t edges[EDGE_SLOTS];
+
+static void note_edge(int function) {
+    uint32_t ret = fa18_bus_read32(REG_A[7]) & 0xFFFFFF;
+    uint64_t key = (uint64_t)ret << 32 | (uint32_t)(function + 1);
+    uint32_t h = (uint32_t)((key * 0x9E3779B97F4A7C15ull) >> 48) & (EDGE_SLOTS - 1);
+    while (edges[h] && edges[h] != key) h = (h + 1) & (EDGE_SLOTS - 1);
+    edges[h] = key;
+}
+
+int fa18_recomp_write_edges(const char *path) {
+    FILE *out = fopen(path, "w");
+    int i, first = 1;
+    if (!out) return 0;
+    fputs("[", out);
+    for (i = 0; i < EDGE_SLOTS; i++) {
+        if (!edges[i]) continue;
+        fprintf(out, "%s[\"%06X\", \"%06X\"]", first ? "" : ", ", (uint32_t)(edges[i] >> 32),
+                fa18_recomp_functions[(uint32_t)edges[i] - 1].entry);
+        first = 0;
+    }
+    fputs("]", out);
+    fputc(10, out);
+    fclose(out);
+    return 1;
+}
+
 int fa18_ports_enter(int function, int label, int via_call) {
     int port;
-    if (REG_PC == fa18_recomp_functions[function].entry) profile[function]++;
+    if (REG_PC == fa18_recomp_functions[function].entry) {
+        profile[function]++;
+        if (via_call || entered_by_call()) note_edge(function);
+    }
     port = port_of_function[function];
     if (port < 0 || mode == FA18_PORTS_OFF || fa18_write_log_active || REG_PC != fa18_ports[port].entry ||
         (!via_call && !entered_by_call()))
