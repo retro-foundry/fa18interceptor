@@ -1548,3 +1548,14 @@ game loop.
   caller-owned initializer. The paired `$C0FA4C` current/target match gate is
   in the same typed component. This is not yet runtime-wired because the
   native scheduler and scene/page owners remain incomplete.
+- 2026-09-28: Added `FA18FivePlaneChipBinding`, an explicit caller-owned bridge
+  from five dynamic Chip-plane bases to `FA18FivePlanePage`. It validates the
+  complete non-overlapping plane ranges and derives `$C456B6`'s BPL4..BPL1
+  lower-plane order without choosing a page address. The page renderer can now
+  execute the typed `$C2FF58-$C30037` lane stage when its supplied source table
+  matches that binding, synchronizing the native page before and after the
+  actual blitter operation. This does not schedule the renderer or select a
+  page. Run-named register-packet constructors have been isolated in a
+  contract-only oracle source so the normal executable keeps its no-capture
+  source closure. The native frame result remains 192 exact frames through 391;
+  frame 392 remains the first mismatch.

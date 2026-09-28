@@ -73,3 +73,21 @@ const FA18ProjectionGridSubmission *fa18_flight_renderer_page_submission(
     const FA18FlightRendererPage *renderer) {
     return renderer ? &renderer->grid_submission : 0;
 }
+
+int fa18_flight_renderer_page_execute_lane_stage(
+    FA18FlightRendererPage *renderer, FA18FivePlanePage *page,
+    const FA18FivePlaneChipBinding *binding, FA18RendererLaneStage *stage,
+    FA18BlitOperation *operation) {
+    uint32_t lane_pointers[4];
+
+    if (!renderer || !page || !binding || !stage || !operation ||
+        fa18_five_plane_chip_binding_renderer_lane_pointers(binding, lane_pointers) != 0)
+        return -1;
+    for (unsigned lane = 0; lane < 4; ++lane)
+        if (stage->plane_pointers[lane] != lane_pointers[lane]) return -1;
+    if (fa18_five_plane_chip_binding_store_page(binding, page) != 0 ||
+        fa18_execute_renderer_lane_stage(stage, operation, binding->chip_bytes,
+                                         binding->chip_byte_count) != 0)
+        return -1;
+    return fa18_five_plane_chip_binding_load_page(binding, page);
+}

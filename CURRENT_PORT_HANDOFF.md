@@ -3,16 +3,26 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: `9a35a2e0 Match traced polygon blit rounding`.
-- Working tree contains an uncommitted run036 polygon-blitter stage:
-  `port/CMakeLists.txt`, `port/blit_job.c`, `port/blit_job.h`,
-  `port/blit_job_contract_test.c`, and new `port/run036_polygon_oracle_test.c`.
-  User-owned untracked `.vscode/` remains untouched; do not discard these changes.
+- Head: `c2067003 Port renderer lane blit stage`.
+- The current working tree adds a source-addressed five-plane/Chip-RAM binding
+  for the reusable `$C2FF58-$C30037` backend. User-owned untracked `.vscode/`
+  remains untouched; do not discard it.
 - Goal: complete the faithful C port, committing each coherent, validated stage.
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
- pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **116/116** tests.
+ pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **117/117** tests.
+
+`FA18FivePlaneChipBinding` is the native bridge from caller-owned dynamic Chip
+addresses to a `FA18FivePlanePage`. It validates five non-overlapping complete
+plane ranges, preserves the source `$C456B6` reverse lower-plane order, and
+copies page state only at its explicit boundary. `fa18_flight_renderer_page_execute_lane_stage`
+uses that binding only when the supplied `$C456B6` table matches, then executes
+the complete typed `$C2FF58-$C30037` lane tail and synchronizes the page back.
+No capture, hard-coded Amiga address, page selection, or frame schedule is
+present in the runtime path. Run-named recovered register packets were moved to
+`blit_job_oracle.{c,h}`, which is linked only by its contract test, so the
+native executable retains the no-recorded-output closure.
 
 The user explicitly authorized a temporary opt-in display diagnostic while the
 scene producer is reconstructed. `--bootstrap-render-fixture CHIP` imports the

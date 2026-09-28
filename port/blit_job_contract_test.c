@@ -1,4 +1,5 @@
 #include "blit_job.h"
+#include "blit_job_oracle.h"
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>

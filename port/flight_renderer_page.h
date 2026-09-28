@@ -4,8 +4,10 @@
 #include <stdint.h>
 
 #include "five_plane_page.h"
+#include "five_plane_chip_binding.h"
 #include "line.h"
 #include "projection_grid.h"
+#include "blit_job.h"
 
 /* Native page owner for the source-proved direct-pixel and direct-line
  * children of the `$C279D0` grid pass. Far area-blit children intentionally
@@ -40,5 +42,14 @@ int fa18_flight_renderer_page_apply_projection_grid_packet_state(
 
 const FA18ProjectionGridSubmission *fa18_flight_renderer_page_submission(
     const FA18FlightRendererPage *renderer);
+
+/* Bind the proved `$C2FF58-$C30037` lane tail to this page only when the
+ * caller's source pointer table identifies the same four lower planes.  Page
+ * selection, scheduler timing, and the remaining `$C2FF48` producer inputs
+ * remain caller-owned. */
+int fa18_flight_renderer_page_execute_lane_stage(
+    FA18FlightRendererPage *renderer, FA18FivePlanePage *page,
+    const FA18FivePlaneChipBinding *binding, FA18RendererLaneStage *stage,
+    FA18BlitOperation *operation);
 
 #endif

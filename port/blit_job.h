@@ -51,8 +51,6 @@ typedef struct {
 FA18BlitExtent fa18_decode_blit_extent(uint16_t bltsize);
 int fa18_decode_display_blit_geometry(const FA18DisplayBlitPacket *packet,
                                       FA18DisplayBlitGeometry *geometry);
-int fa18_build_run060_frame7991_area_fill(FA18AreaFillPacket *packet);
-int fa18_build_run060_frame7991_final_fill(FA18AreaFillPacket *packet);
 int fa18_prepare_c304b2_setup(const FA18AreaFillPacket *packet,
                               FA18BlitOperation *operation);
 /* `$C30668-$C306B3`: retain the caller's A high word, replace BLTAPTL,
@@ -123,5 +121,4 @@ void fa18_prepare_adjusted_lane_blit(uint16_t blit_size, uint32_t lane_pointer,
                                      uint16_t limit_word, uint16_t d3,
                                      FA18BlitOperation *operation);
 FA18LaneControl fa18_choose_lane_control(uint16_t d4, uint16_t d3);
-int fa18_build_run075_frame559_blit_packets(FA18DisplayBlitPacket packets[3]);
 #endif
