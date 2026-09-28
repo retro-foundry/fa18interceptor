@@ -28,6 +28,12 @@ not seed a capture, name the source tables, or schedule/present a frame.  The
 focused contract verifies the recorded arithmetic and the `$C2D954` register
 shaped matrix input.
 
+The static Hunk-8 boundary (`$C1C2C8-$C1DBDC`) bounds the two source tables
+used by this route without a guessed size: `$C1D7E2-$C1D8D5` contains 122
+words (61 signed word pairs), while `$C1D8D6-$C1D9D7` contains 129 signed byte
+pairs.  `$C1D9D8` is the adjacent, separately-owned magnitude table.  A native
+resolver must reject a root table byte selector outside those measured ranges.
+
 `fa18_prepare_scene_root_placement` now dispatches both signs of the original
 Hunk-67 entry: the caller must resolve the positive route's original table
 tail and adjustment pairs, which are cross-checked against the five entry
