@@ -1121,6 +1121,15 @@ state caller-owned. Its integration contract reaches the display callback via a
 wide stream, selector pair, directory entry, and packet entirely from bounded
 source-shaped data.
 
+`map_packet_depth_stage.{c,h}` now ports the local `$C2AA9C-$C2AB33` parent
+prefix. It consumes the already ported `$C1C636` full projection depth,
+initializes the four renderer words, applies the source optional unsigned scale,
+and selects normal/wide map passes. The frame-382 trace verifies
+`$C45A78=-125`, nonzero `$C457DD`, and resulting metric `125`: normal is
+skipped and wide is called. This supplies the exact metric owner immediately
+above the original map-pass composition, while the live record/matrix/page
+owner remains unscheduled.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
