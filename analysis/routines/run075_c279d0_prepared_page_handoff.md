@@ -79,3 +79,27 @@ The trace artifacts are `build/run075_frame373_c279d0_full/`,
 `build/run075_frame392_c279d0_first/`. This is evidence for a future
 state-owned selector/scheduler, not authority for frame-number logic or an
 inferred call cadence in the native replay.
+
+## Counted outer-loop boundary
+
+`scripts/sample_run075_outer_loop_hits.py` uses a live `$C1612C` breakpoint,
+steps one instruction only to escape each entry, and resumes ordinary replay.
+Over frames 201--392 it records 392 entries. In the relevant late interval its
+entry data is:
+
+| Global frame | `$C1612C` entries | pre-child `$C4566C` | pre-child `$C456B6` |
+| ---: | ---: | ---: | --- |
+| 335 | 1 | 0 | `$C4566E` |
+| 353 | 1 | 1 | `$C4567E` |
+| 369 | 1 | 0 | `$C4566E` |
+| 380 | 1 | 1 | `$C4567E` |
+| 389 | 1 | 0 | `$C4566E` |
+
+The child toggles `$C4566C` in its tail. Therefore the frame-380 child leaves
+the zero selector for the next `$C2F558` publication; the known frame-384
+renderer then sees `$C456B6=$C4566E` and writes the prepared display page.
+The frame-389 child subsequently publishes that page for display before
+toggling back. This gives an observed source sequence for the page handoff,
+but not a substitute native scheduler: `$C0EFD4` and the renderer can execute
+between the counted display-child entries. The generated report is
+`build/run075_outer_loop_hits_201_392.json`.

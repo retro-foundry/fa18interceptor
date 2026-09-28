@@ -814,6 +814,17 @@ That is the source-owned `$C456B6` publisher feeding `$C279D0`; the actual
 page tables and loop cadence remain caller-owned and are still not wired into
 `game.c`.
 
+The new live-breakpoint sampler `scripts/sample_run075_outer_loop_hits.py`
+counts 392 `$C1612C` entries over run075 frames 201--392. Its late entries at
+335/353/369/380/389 alternate the pre-child renderer publication between
+`$C4566E` (index 0) and `$C4567E` (index 1). Since the child toggles the index
+in its tail, the frame-380 child leaves the selector that `$C2F558` uses before
+the known frame-384 `$C279D0` render into `$C4566E`; frame 389 displays that
+page then returns selection to the other family. This is the first counted
+page-handoff sequence. It proves the outer child is not presentation-frame
+cadence (there are no child entries in 370--379 despite ordinary replay), and
+does not authorize a `game_frame` schedule.
+
 `outer_loop_child.{c,h}` now composes the complete observed
 `$C1612C-$C16283` packet behind explicit caller-owned OS boundaries.  It
 performs `WaitBOVP`, publishes the indexed `$C182BA/$C182C2` pair, and invokes
