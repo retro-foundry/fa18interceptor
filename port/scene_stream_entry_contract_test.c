@@ -5,7 +5,7 @@
 int main(void) {
     const uint8_t selected_stream[] = {0x00, 0x10, 0, 0, 0x12, 0x34};
     FA18SceneStreamEntryInput input = {
-        selected_stream, sizeof selected_stream, 0, 0x1000,
+        selected_stream, sizeof selected_stream, 0, 0, 0x1000,
         8, 0, 1, 0x80, 1, 0, 0, 0, 0, 0
     };
     FA18SceneStreamEntryResult result;
@@ -18,17 +18,20 @@ int main(void) {
            result.descriptor.published_stage_cursor == 6);
 
     const uint8_t terminal_stream[] = {0xff, 0xff};
-    input.stream = terminal_stream; input.stream_size = sizeof terminal_stream;
+    input.control_stream = terminal_stream;
+    input.control_stream_size = sizeof terminal_stream;
     assert(fa18_enter_scene_stream(&input, &result, &route) == 0);
     assert(route == FA18_SCENE_STREAM_ENTRY_RETURN_ZERO);
 
     const uint8_t active_stream[] = {0x20, 0x01, 0, 0, 0x20, 0x01};
-    input.stream = active_stream; input.stream_size = sizeof active_stream;
+    input.control_stream = active_stream;
+    input.control_stream_size = sizeof active_stream;
     input.activity_flag = 1;
     assert(fa18_enter_scene_stream(&input, &result, &route) == 0);
     assert(route == FA18_SCENE_STREAM_ENTRY_RETURN_ONE);
 
-    input.stream = selected_stream; input.stream_size = sizeof selected_stream;
+    input.control_stream = selected_stream;
+    input.control_stream_size = sizeof selected_stream;
     input.descriptor_gate_flag = 1; input.descriptor_gate_word = 0;
     assert(fa18_enter_scene_stream(&input, &result, &route) == 0);
     assert(route == FA18_SCENE_STREAM_ENTRY_RETURN_ZERO);

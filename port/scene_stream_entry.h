@@ -7,10 +7,15 @@
 #include "scene_stream_descriptor.h"
 
 typedef struct {
-    const uint8_t *stream;
-    size_t stream_size;
+    /* A2 at `$C1EE44`: the selected control stream from descriptor +8. */
+    const uint8_t *control_stream;
+    size_t control_stream_size;
     uint32_t stream_cursor;
-    uint32_t record_base;
+    /* Control-stream base used by its relative branch words. */
+    uint32_t control_base;
+    /* A0 at `$C1CC6C`: the separate descriptor-record family.  `$C1EF02`
+     * indexes this base with the selected low twelve bits; it is not A2. */
+    uint32_t descriptor_base;
     int16_t selector_limit;
     int16_t selector_shift;
     uint8_t depth_scale_enabled;
@@ -36,7 +41,8 @@ typedef struct {
 } FA18SceneStreamEntryResult;
 
 /* `$C1EE14-$C1EF15`: derive the threshold limit, select one source stream
- * record, retain its early return gates, and publish the descriptor/cursor
+ * record, retain its early return gates, and publish the separate
+ * descriptor-record/cursor pair
  * pair consumed by the later `$C1F6F8` walker. The transform and walker
  * bodies remain separate source boundaries. */
 int fa18_enter_scene_stream(const FA18SceneStreamEntryInput *input,

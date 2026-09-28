@@ -28,6 +28,10 @@ typedef struct {
  * and does not choose any scene data or scheduling. */
 typedef struct {
     FA18SceneStreamEntryInput entry;
+    /* The descriptor family addressed by A0, distinct from entry's A2
+     * control stream. `$C1EF16-$C1F578` reads its words and local triples. */
+    const uint8_t *descriptor_bytes;
+    size_t descriptor_size;
     int32_t prepared_component[3]; /* `$C45A62/$66/$6A` before C1F464. */
     int32_t stream_component_x; /* `$C45B30` */
     int32_t stream_component_y; /* `$C45B34` */

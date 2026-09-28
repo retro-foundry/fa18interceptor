@@ -19,14 +19,15 @@ int main(void) {
     /* The selected descriptor starts at +$20.  Its direct branch has three
      * raw triples and the immediately selected control stream names them by
      * `$C48390` offsets, exactly as C1F464/C1F6F8 require. */
+    uint8_t control[16] = {0};
     uint8_t bytes[0x80] = {0};
     uint8_t workspace[18] = {0};
     FA18SceneStreamRuntimeInput input = {0};
     FA18SceneStreamRuntimeResult result;
     FA18SceneStreamRuntimeRoute route;
 
-    bytes[0] = 0x40; bytes[1] = 0x20; /* threshold selector with bit 14 */
-    bytes[2] = 0x00; bytes[3] = 0x20; /* selected descriptor */
+    control[0] = 0x40; control[1] = 0x20; /* threshold selector with bit 14 */
+    control[2] = 0x00; control[3] = 0x20; /* selected descriptor */
     bytes[0x20 + 6] = 0x00; /* high/low nibbles */
     bytes[0x20 + 7] = 0x00; /* C1F464 direct branch */
     bytes[0x20 + 8] = 3;    /* triple count */
@@ -40,16 +41,18 @@ int main(void) {
     bytes[0x20 + 24] = 0; bytes[0x20 + 25] = 96;
     bytes[0x20 + 26] = 0; bytes[0x20 + 27] = 144;
     /* `$C45A36`: one ordinary triple control then its `$FFFF` terminator. */
-    bytes[4] = 0; bytes[5] = 0;
-    bytes[6] = 0; bytes[7] = 0;
-    bytes[8] = 0; bytes[9] = 6;
-    bytes[10] = 0; bytes[11] = 12;
-    bytes[12] = 0; bytes[13] = 14; /* ordinary-control relative jump */
-    bytes[14] = 0xff; bytes[15] = 0xff;
+    control[4] = 0; control[5] = 0;
+    control[6] = 0; control[7] = 0;
+    control[8] = 0; control[9] = 6;
+    control[10] = 0; control[11] = 12;
+    control[12] = 0; control[13] = 14; /* ordinary-control relative jump */
+    control[14] = 0xff; control[15] = 0xff;
 
     input.entry = (FA18SceneStreamEntryInput){
-        bytes, sizeof bytes, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0
+        control, sizeof control, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0
     };
+    input.descriptor_bytes = bytes;
+    input.descriptor_size = sizeof bytes;
     input.matrix = (FA18TransformMatrix){{256, 0, 0, 0, 256, 0, 0, 0, 256}};
     input.workspace = (FA18SceneStreamTransformedWorkspace){workspace, sizeof workspace};
     input.walker_step_budget = 2;

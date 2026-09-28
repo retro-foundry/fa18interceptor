@@ -44,7 +44,8 @@ int fa18_run_scene_stream_direct_runtime(
     FA18RecordWalkerPrefixInput walker;
     FA18RecordWalkerPrefixRoute walker_route;
 
-    if (!input || !result || !route || !input->entry.stream ||
+    if (!input || !result || !route || !input->entry.control_stream ||
+        !input->descriptor_bytes || !input->descriptor_size ||
         !input->workspace.bytes || !input->workspace.byte_count ||
         !input->walker_step_budget)
         return -1;
@@ -59,16 +60,16 @@ int fa18_run_scene_stream_direct_runtime(
         return 0;
     }
     descriptor = result->entry.descriptor.descriptor_cursor;
-    if (descriptor > input->entry.stream_size ||
-        input->entry.stream_size - descriptor < 10u ||
-        fa18_decode_scene_stream_descriptor(input->entry.stream + descriptor,
-                                            input->entry.stream_size - descriptor,
+    if (descriptor > input->descriptor_size ||
+        input->descriptor_size - descriptor < 10u ||
+        fa18_decode_scene_stream_descriptor(input->descriptor_bytes + descriptor,
+                                            input->descriptor_size - descriptor,
                                             &result->descriptor) != 0)
         return -1;
-    control = input->entry.stream[descriptor + 7u];
-    count = input->entry.stream[descriptor + 8u];
+    control = input->descriptor_bytes[descriptor + 7u];
+    count = input->descriptor_bytes[descriptor + 8u];
     if (!count || input->workspace.byte_count / 6u < count ||
-        input->entry.stream_size - descriptor < 10u + (size_t)count * 6u)
+        input->descriptor_size - descriptor < 10u + (size_t)count * 6u)
         return -1;
     if (control & 1u) {
         *route = FA18_SCENE_STREAM_RUNTIME_UNPORTED_CONTROL_BRANCH;
@@ -95,7 +96,7 @@ int fa18_run_scene_stream_direct_runtime(
     }
     result->transform.matrix = input->matrix;
     for (uint16_t index = 0; index < count; ++index) {
-        const uint8_t *source = input->entry.stream + descriptor + 10u + (size_t)index * 6u;
+        const uint8_t *source = input->descriptor_bytes + descriptor + 10u + (size_t)index * 6u;
         vertices[index] = (FA18LocalVertex){
             (int16_t)fa18_be16(source), (int16_t)fa18_be16(source + 2u),
             (int16_t)fa18_be16(source + 4u)
@@ -109,7 +110,8 @@ int fa18_run_scene_stream_direct_runtime(
             return -1;
     result->transformed_vertex_count = count;
     walker = (FA18RecordWalkerPrefixInput){
-        input->entry.stream, input->entry.stream_size, input->entry.record_base,
+        input->entry.control_stream, input->entry.control_stream_size,
+        input->entry.control_base,
         result->entry.descriptor.published_stage_cursor,
         input->workspace.bytes, (size_t)count * 6u, input->walker_step_budget,
         input->triple_handler, input->hex_handler, input->other_handler,

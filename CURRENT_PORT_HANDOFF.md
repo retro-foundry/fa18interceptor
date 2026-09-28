@@ -11,6 +11,15 @@ remain explicit unported routes.  This is a source-data owner boundary, not
 yet a `game.c` schedule: normal frame 402 remains black (zero nonblack
 pixels).
 
+The stream-runtime input now preserves the source's two independent pointer
+families at `$C1EE44-$C1EF10`: descriptor `+8` supplies A2's control stream,
+while descriptor `+4` supplies A0's record/vertex base.  The old combined
+buffer contract could not represent relocated Hunk descriptors such as
+`$C2232C -> A2=$C445DC`; the corrected API and contract use deliberately
+separate control and descriptor byte ranges.  This is a P-code dataflow
+correction only; the normal frame-402 visual gate is still zero nonblack
+pixels.
+
 `prepared_record_dispatch.{c,h}` ports `$C2005C-$C200F5` through the
 explicit `$C2469E` handoff.  It retains the source's two direct transformed
 tuple offsets, variable continuation terminated by a negative masked offset,

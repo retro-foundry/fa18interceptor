@@ -47,16 +47,18 @@ int fa18_enter_scene_stream(const FA18SceneStreamEntryInput *input,
     uint32_t cursor;
     int16_t word;
 
-    if (!input || !result || !route || !input->stream) return -1;
+    if (!input || !result || !route || !input->control_stream) return -1;
     result->effective_limit = effective_limit(input);
     cursor = input->stream_cursor;
-    if (read_word(input->stream, input->stream_size, cursor, &word) != 0) return -1;
+    if (read_word(input->control_stream, input->control_stream_size, cursor, &word) != 0)
+        return -1;
     cursor += 2u;
     while (word >= 0) {
         FA18SceneStreamSelectorResult selection;
         FA18SceneStreamSelectorRoute selection_route;
         if (fa18_select_scene_stream_threshold(
-                input->stream, input->stream_size, cursor, input->record_base,
+                input->control_stream, input->control_stream_size, cursor,
+                input->control_base,
                 word, input->selector_shift, result->effective_limit,
                 &selection, &selection_route) != 0)
             return -1;
@@ -70,7 +72,7 @@ int fa18_enter_scene_stream(const FA18SceneStreamEntryInput *input,
             break;
         }
         cursor = selection.next_cursor;
-        if (read_word(input->stream, input->stream_size, cursor, &word) != 0)
+        if (read_word(input->control_stream, input->control_stream_size, cursor, &word) != 0)
             return -1;
         cursor += 2u;
     }
@@ -104,7 +106,7 @@ int fa18_enter_scene_stream(const FA18SceneStreamEntryInput *input,
         *route = FA18_SCENE_STREAM_ENTRY_RETURN_ZERO;
         return 0;
     }
-    result->descriptor.descriptor_cursor = input->record_base +
+    result->descriptor.descriptor_cursor = input->descriptor_base +
                                             ((uint16_t)word & UINT16_C(0x0fff));
     result->descriptor.published_stage_cursor = cursor;
     *route = FA18_SCENE_STREAM_ENTRY_DESCRIPTOR_READY;
