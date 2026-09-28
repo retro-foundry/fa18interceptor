@@ -128,6 +128,11 @@ const FA18Port fa18_ports[] = {
     {0xC1D520, glue_C1D520, "collect_records_in_cell", 600},
     {0xC1D0B6, glue_C1D0B6, "accumulate_record_position", 250},
     {0xC26428, glue_C26428, "update_record_76_78", 500},
+    /* batch 16: small text */
+    {0xC32794, glue_C32794, "draw_small_text", 400},
+    {0xC32662, glue_C32662, "draw_small_text", 420},
+    {0xC3271A, glue_C3271A, "format_small_hex", 600},
+    {0xC32736, glue_C32736, "format_small_hex", 620},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -128,4 +128,10 @@ int glue_C1D520(void);
 int glue_C1D0B6(void);
 int glue_C26428(void);
 
+/* batch 16: small text */
+int glue_C32794(void);
+int glue_C32662(void);
+int glue_C3271A(void);
+int glue_C32736(void);
+
 #endif

@@ -230,4 +230,9 @@
 #define TABLE_78_LIMIT     0xC263DCu /* word[31]: by |+$6C| >> 7 */
 #define TABLE_76_TARGET    0xC2639Cu /* word[31]: by |+$6E| >> 7 */
 
+/* ---- small text ($C32794) -------------------------------------------------- */
+#define SMALL_GLYPHS       0xC3D790u /* word offsets from here, per character from ' ' */
+#define ERROR_CODE         0xC4599Eu /* word: set to $46 on a misaligned glyph */
+#define TEXT_ALWAYS        0xC45793u /* byte: draw text even while a context runs */
+
 #endif
