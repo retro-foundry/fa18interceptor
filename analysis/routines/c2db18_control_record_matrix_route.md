@@ -13,3 +13,18 @@ and cached matrices, and calls `$C2DEE0` with a record-relative context.
 
 Names in the source describe data flow only. The state-byte, record-type, and
 matrix-cache game-level roles remain unassigned pending differential traces.
+
+## run075 prepared-page witness
+
+The return-bounded `build/run075_frame373_c2d99c_matrix/` trace reaches the
+dispatcher at global frame 380 with `$C45785=0`, so it executes this route.
+It takes the default non-special, selector-zero, mode-at-most-one path:
+`$C2DB9E` copies the active record's `+$66/+$68/+$6A` tuple to `$C45A88`,
+then `$C2DCB2` calls `$C2E3DE` for `$C45BD8` with `(0,28600,0)`. `$C2DCBC`
+immediately scales that matrix through `$C2E5AC` using live row scales
+`(168,252,128)`, yielding `(167,0,-8 / 0,252,0 / 6,0,127)`.
+
+This is the matrix consumed by the established run075 frame-384 projection
+contract. It validates the existing default C route as the dynamic matrix
+producer for that pass; it does not establish a normal C scheduler or permit
+captured values in runtime code.

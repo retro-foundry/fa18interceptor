@@ -50,14 +50,19 @@ The complete `$C2D9BA-$C2DADF` body is now byte-exact source in
 callee names in that file remain structural where the bounded packet does not
 prove a game-level role.
 
-## run075 prepared-page matrix witness
+## Scope boundary
 
-A return-bounded run075 trace at `$C2D99C`, armed before the prepared-page
-interval, reaches the wrapper at local frame 180 (global frame 380) and
-returns to `$C0F030` after 331 instructions. Its source state has
-`$C457B4=1`, `$C458AE=0`, `$C457AE=1`, inputs
-`$C45A94/$C45A96=(7200,0)`, and row scales `(168,252,128)`. The completed
-pipeline publishes `$C45BD8` as:
+The run075 prepared-page trace at `$C2D99C` does **not** exercise this
+`$C2D9BA` route. At local frame 180 (global frame 380), it reads
+`$C45785=0`, takes the dispatcher's `beq` at `$C2D9A2`, and calls `$C2DB18`.
+The trace therefore establishes the dynamic default control-record route,
+not this enabled/fallback pipeline. Its `$C45A94/$C45A96=(7200,0)` values and
+the `$C457B4/$C458AE/$C457AE` state are not inputs to the matrix that pass.
+
+The executed `$C2DB18` path copies active-record `+$66/+$68/+$6A` to
+`$C45A88`, then calls `$C2E3DE` at `$C2DCB2` with `(D0,D2,D4)=(0,28600,0)`
+and `A1=$C45BD8`; `$C2DCBC` immediately calls `$C2E5AC` to apply the live
+row scales `(168,252,128)`. It publishes:
 
 ```text
 (167, 0, -8,
@@ -67,5 +72,6 @@ pipeline publishes `$C45BD8` as:
 
 That is the exact nine-word matrix consumed by the established run075
 frame-384 `$C27B9C` projection-pair contract. The artifact is
-`build/run075_frame373_c2d99c_matrix/`. This connects the matrix producer to
-the future normal page owner without treating the trace values as constants.
+`build/run075_frame373_c2d99c_matrix/`; the dynamic route is documented in
+[`c2db18_control_record_matrix_route.md`](c2db18_control_record_matrix_route.md).
+This enabled/fallback pipeline remains independently structural evidence.
