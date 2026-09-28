@@ -50,6 +50,13 @@ placement/scene runtime schedule.  Run the normal visual gate immediately
 after that binding; if it remains black, report exactly that rather than
 presenting a contract or oracle artifact.
 
+`flagged_record_component_bound.{c,h}` now ports `$C1FC42-$C1FCCE`, the
+flag-controlled record-component bound used by the `$C1F77C` walker branch.
+It preserves selector-specific word/long widths, source shift counts, and the
+source-visible Z/D7 result rather than replacing it with a Boolean. The
+frame-601 selector-one packet (`112` against bound `132`) is a contract. It
+is a necessary walker predicate, not the missing live placement/page owner.
+
 ## Latest record-walker composition
 
 `record_walker_runtime.{c,h}` now directly composes the bounded P-code path
