@@ -1305,6 +1305,10 @@ write `$C18232` then `$C1821C` for slot zero.  See
 now model this as a constructor-owned native pair followed by an explicit
 slot publication; it must still recover the constructor's page/Chip-buffer
 relationship and original scheduling before attaching it to `game.c`.
+`view_pair_initializer.{c,h}` now ports that bounded publication sequence and
+shares its native pair type with `flight_page_handoff`; it deliberately does
+not create identities in `game.c` before the original transition owner is
+recovered.
 
 ## Standard validation after each stage
 

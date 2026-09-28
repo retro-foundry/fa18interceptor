@@ -5,6 +5,7 @@
 
 #include "flight_renderer_page.h"
 #include "outer_loop_child.h"
+#include "view_pair_initializer.h"
 
 enum {
     FA18_FLIGHT_PAGE_HANDOFF_CHIP_BYTES =
@@ -13,10 +14,7 @@ enum {
 
 /* Caller-owned identities for the two View/ViewPort display publications.
  * They are native keys, not imported Amiga addresses. */
-typedef struct {
-    uint32_t view_pointer;
-    uint32_t display_instruction_pointer;
-} FA18FlightPageViewPair;
+typedef FA18NativeViewPair FA18FlightPageViewPair;
 
 typedef struct {
     FA18FivePlanePage page[2];

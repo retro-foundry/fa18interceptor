@@ -54,3 +54,9 @@ creates native View and display-instruction identities, then the initializer
 publishes their pair into slot zero or one.  It must not import the observed
 Amiga addresses as native identities, and it must not make `$C1612C` a pair
 creator.
+
+`port/view_pair_initializer.{c,h}` ports this boundary. Its two required
+callbacks retain the observed construction order (display instruction, then
+View), and `fa18_initialize_view_pair_slot` publishes the live pair only after
+both succeed. The caller still owns native View, Copper-list, raster, and
+five-plane-page construction.
