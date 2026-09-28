@@ -1361,3 +1361,11 @@ This is the source-backed `$C1AADC` family, not a capture and not a normal
 flight presentation route. Its View/Copper selector remains unresolved, so
 the page is deliberately unpresented; normal run075 output remains the
 authoritative validation path. See `analysis/routines/c0e078_splsh_ilbm_loader.md`.
+
+`scene_stream_entry.{c,h}` now composes the `$C1EE14-$C1EF15` stream-entry
+prefix: it derives the source threshold, walks the existing `$C1EE58` selector,
+retains all observed early return gates, and publishes the selected descriptor
+and post-selection cursor for `$C1F6F8`. The caller still owns the mutable
+placement/stream banks and the later walker, transforms, renderer submission,
+and scheduler; this is not attached to `game.c`. See
+`analysis/routines/c1ee14_stream_entry.md`.
