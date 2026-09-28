@@ -1185,6 +1185,12 @@ existing `$C1D330-$C1D51D` band/stream implementation using caller-owned live
 terms, gates, append records, and workspace; it remains unscheduled pending
 the recovered parent cadence.
 
+`analysis/routines/c1d10c_template_cursor_resolution.md` now records the
+source-owned `$C1D10C-$C1D32E` cursor selection: three control roots,
+directory/gate packs, live term packs, and the shared static-table offset
+calculation. The next implementation must resolve this cursor rather than
+using the traced `$C412EC` subcursor as a universal template stream.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
