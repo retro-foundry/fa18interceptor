@@ -759,7 +759,11 @@ bounded `$C28800-$C288C4` continuation behind its required `$C123FA`
 coordinate callback; it is deliberately unscheduled until that exact helper
 route is ported.  The new contract makes the source high-byte selection,
 bit-6 gate, placement copies, wrapped deltas, and `(0,C45AC2,0)` matrix
-publication explicit.  See
+publication explicit.  `coordinate_update_positive_pair.{c,h}` now ports the
+recorded `$C123FA-$C1294E` callback route, including its shift-14, rounded
+ratio, Hunk-63 index-11, magnitude, and clamp path to `$C45AC2=$6FB8`; only
+the enclosing target-record/dispatch ownership remains before composing it.
+See
 `analysis/routines/run075_scene_dispatch_coordinate_pose.md`.  Do not seed
 `$6FB8` in normal runtime state.
 

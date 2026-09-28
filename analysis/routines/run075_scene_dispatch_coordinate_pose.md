@@ -31,9 +31,12 @@ predecessors are `$C288AC` (load `$C45AC2`), `$C288B6` (move it to `D5`), and
 `$C28800-$C288C4` nonnegative-link continuation: source high-byte selection,
 bit-6 gate, placement-field copy, wrapped coordinate deltas, `$C123FA`
 six-longword callback packet, and the `(0, output[1], 0)` `$C2D954`
-publication all have a contract.  It is intentionally not scheduled by
-`scene_dispatch_runtime` yet.  The existing `coordinate_update_negative_pair`
-adapter covers a different observed `$C123FA` negative-only branch, so it must
-not be used to synthesize this packet.  Port the actual `$C123FA` route
-selected by `$C28800`, then compose the result with this dispatch continuation;
-do not introduce `$6FB8` as a native default.
+publication all have a contract.  `coordinate_update_positive_pair.{c,h}`
+now ports the exact `$C123FA-$C1294E` route used by this packet: the source
+inputs are `(0,0,$00800000,0,$0B000000,-1)`, shift 14 is selected, rounded
+ratio 745 shifts to Hunk-63 word index 11, and its source word 25 gives
+`$6FB8`.  The adapter remains intentionally unscheduled by
+`scene_dispatch_runtime` until the source `$C28800` target-record ownership
+and dispatch continuation are composed.  The existing
+`coordinate_update_negative_pair` adapter covers a different `$C123FA`
+branch and is not used to synthesize this packet.
