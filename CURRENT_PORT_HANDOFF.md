@@ -16,6 +16,14 @@ signed multiply/divide, the `$C45AC6` candidate triple, and the gate bit that
 the `$C2EE4A` dispatcher branches on.  The next direct consumer is that
 dispatcher, not a host clipping replacement.
 
+`projected_segment_preparation.{c,h}` composes `$C2EE4A-$C2F0C5`: it follows
+the P-code's signed D3/D4 branch graph, retains the caller-owned
+`$C45AC6/$C45ACA` state through retry entries, projects both selected
+components via the `$C2F03A` 320x180 tail, and invokes the page owner's
+`$C2FA7E` callback.  Its contract reaches the callback through the source
+branch structure.  It is ready to bind as the `$C212B0` callback; normal
+`game.c` still does not schedule the real placement/control-stream producer.
+
 `workspace_segment_projection.{c,h}` ports the complete direct leaf
 `$C2ED6C-$C2EE42`.  It consumes two source-format transformed triples from
 the `$C4C592` workspace, preserves each signed depth/extent rejection, applies
@@ -25,8 +33,8 @@ caller-owned `$C2FA7E` line-emitter callback.  Its contract covers one accepted
 pair and both rejection categories.  It has no synthetic geometry, no capture
 page, and no `game.c` scheduling.
 
-Validation: the focused new clipping contract passes; full-suite validation is
-due before the next commit.  The native build checker sees 368 C sources.
+Validation: 194/194 CTest contracts pass and the native build checker sees
+370 C sources.
 This is an exact renderer leaf, but normal frame 402 remains
 black until the P-code placement/record path supplies the real workspace pairs
 and binds the real five-plane line-emitter owner.  Do not present the contract
