@@ -749,6 +749,16 @@ stores; no run075 capture values are introduced into normal runtime state.
 The full native gate passes 142/142 contracts and retains 192 exact frames
 (200--391), first differing at frame 392 by 361 pixels.
 
+The selected record's run075 second angle is now traced to its real dispatch
+producer, rather than treated as a root-placement value.  At global frame 272,
+`$C28AFE -> $C28B34 -> $C28800` calls `$C123FA`, which publishes
+`$C45AC2=$6FB8`; `$C288BC` then invokes `$C2D954` with `(0,$6FB8,0)` for slot
+14 (`$C47D84`).  The current native dispatch adapter covers the direct
+`$C28BEE` creation arm but not this `$C28800-$C288C4` continuation or its
+required `$C123FA` coordinate route.  See
+`analysis/routines/run075_scene_dispatch_coordinate_pose.md`.  Do not seed
+`$6FB8` in normal runtime state.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
