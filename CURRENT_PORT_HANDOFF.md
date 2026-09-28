@@ -850,13 +850,13 @@ source writes rather than silently supplying a callback. This makes the
 upstream `$C45795` gate state representable without conflating it with the
 bounded menu fixture, but it is not yet scheduled by `game.c`.
 
-An ordinary-replay profile over global frames 370--392 finds `$C279D0` only
-at 373, 384, and 392, and `$C1612C` only at 380 and 389; `$C1718E` occurs on
-every sampled frame. The new frame-373 return trace takes 11,352 instructions
-and confirms `$C456B6=$C4567E`, versus the known frame-384 prepared-page
-entry's `$C4566E`; all three entries share packet
-`($E7C1,$E64E,$FFFFFF83)`. This is a source cadence/page-selection clue, not
-permission to add a native frame-number render schedule. See
+An ordinary-replay PC profile over global frames 370--392 samples `$C279D0`
+at 373, 384, and 392, and `$C1612C` at 380 and 389; it cannot establish
+absence on the other frames. The new frame-373 return trace takes 11,352
+instructions and confirms `$C456B6=$C4567E`, versus the known frame-384
+prepared-page entry's `$C4566E`; all three entries share packet
+`($E7C1,$E64E,$FFFFFF83)`. This is a source page-selection clue, not
+permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
