@@ -33,4 +33,9 @@ void two_angle_matrix(uint16_t a, uint16_t b, gaddr out);
  * 8 fraction bits ($C2E5AC). */
 void scale_matrix_rows(gaddr matrix, gaddr scales);
 
+/* The matrix that undoes a record's orientation ($C2D970): the alternate
+ * composition of the three angles negated (a full turn, $7080, less each
+ * nonzero angle), written at record + $92. */
+void inverse_orientation_matrix(gaddr record, uint16_t x, uint16_t y, uint16_t z);
+
 #endif

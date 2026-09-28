@@ -55,4 +55,14 @@ int32_t random_bits(int32_t count);
  * large inputs are scaled down by 16 or 256 first). */
 void square_root(void);
 
+/* Signed 32-bit division truncating toward zero, remainder with the
+ * dividend's sign; x / 0 gives 0 remainder 0 (the compiler's runtime divide
+ * at $C52EC8). */
+int32_t long_divide(int32_t dividend, int32_t divisor, int32_t *remainder);
+
+/* Approximate length of (x, y, z), components nonnegative ($C1D974): the
+ * larger of x and y scaled by sqrt(1 + ratio^2) from MAGNITUDE_TABLE, then
+ * the same with z. Capped at $7FFF (low word) and stored in MAGNITUDE. */
+int32_t magnitude3(int16_t x, int16_t y, int16_t z);
+
 #endif

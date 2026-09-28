@@ -151,4 +151,25 @@ int glue_C2E5AC(void);
 int glue_C2E3DE(void);
 int glue_C2E514(void);
 
+/* batch 20: inverse orientation, stream skip, attitude flags, vertex tail, divide, interrupt server */
+int glue_C2D970(void);
+int glue_C21940(void);
+int glue_C122A2(void);
+int glue_C0D384(void);
+int glue_C52EC8(void);
+int glue_C06132(void);
+
+/* batch 20: play_sound */
+int glue_C17B2C(void);
+
+/* batch 21: side-plane clips, view transform */
+int glue_C2EA5A(void);
+int glue_C2EAD0(void);
+int glue_C2F0C6(void);
+int glue_C2F0F4(void);
+int glue_C1F2EE(void);
+
+/* batch 22: magnitude */
+int glue_C1D974(void);
+
 #endif

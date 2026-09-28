@@ -110,3 +110,11 @@ int16_t find_sorted_word(gaddr table, int16_t key) {
         else low = (int16_t)(mid + 1);
     }
 }
+
+gaddr skip_if_shown_record_flag(gaddr stream) {
+    int16_t skip = rd_s16(stream);
+    gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+    stream += 2;
+    if (rd_u16(record + 2) & 0x08) stream += (gaddr)(int32_t)skip;
+    return stream;
+}

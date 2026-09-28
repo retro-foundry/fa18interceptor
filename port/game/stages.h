@@ -39,4 +39,9 @@ int16_t display_value_to_draw(gaddr cache, int16_t value);
  * (after raising error $1C) when it is absent. */
 int16_t find_sorted_word(gaddr table, int16_t key);
 
+/* Stream operation $C21940: a word operand, and a skip over that many bytes
+ * when the shown record's flags (+2) have bit 3 set. Returns the stream
+ * position after it. */
+gaddr skip_if_shown_record_flag(gaddr stream);
+
 #endif

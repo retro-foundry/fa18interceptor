@@ -147,3 +147,62 @@ void square_root(void) {
     else root = (uint16_t)(newton_sqrt(x >> 8) << 4);
     wr_u16(SQRT_RESULT, root);
 }
+
+int32_t long_divide(int32_t dividend, int32_t divisor, int32_t *remainder) {
+    uint32_t n, d, q, r;
+    if (divisor == 0 || dividend == 0) {
+        *remainder = 0;
+        return 0;
+    }
+    n = dividend < 0 ? 0u - (uint32_t)dividend : (uint32_t)dividend;
+    d = divisor < 0 ? 0u - (uint32_t)divisor : (uint32_t)divisor;
+    q = n / d;
+    r = n % d;
+    if ((dividend ^ divisor) < 0) q = 0u - q;
+    if (dividend < 0) r = 0u - r;
+    *remainder = (int32_t)r;
+    return (int32_t)q;
+}
+
+/* 68000 DIVU.W: quotient in the low word, remainder in the high word; on
+ * overflow the dividend is left as it was. */
+static uint32_t divu_w(uint32_t dividend, uint16_t divisor) {
+    uint32_t q = dividend / divisor;
+    if (q > 0xFFFF) return dividend;
+    return (dividend % divisor) << 16 | q;
+}
+
+/* sqrt(1 + (small/large)^2) from the table, for a table index made from the
+ * ratio. */
+static uint16_t magnitude_factor(int16_t index) {
+    return rd_u16(MAGNITUDE_TABLE + (gaddr)(int32_t)(int16_t)(index * 2));
+}
+
+int32_t magnitude3(int16_t x, int16_t y, int16_t z) {
+    int16_t large = x, small = y, index = 0;
+    int32_t planar, height, big, other, result;
+
+    if (small > large) {
+        large = y;
+        small = x;
+    }
+    if (small != 0 && large != 0)
+        index = (int16_t)divu_w((uint32_t)((int32_t)small << 8), (uint16_t)large);
+    planar = (int32_t)((uint32_t)(uint16_t)large * magnitude_factor(index));
+
+    height = (int32_t)z << 14;
+    big = planar;
+    other = height;
+    if (height > planar) {
+        big = height;
+        other = planar;
+    }
+    big >>= 14;
+    index = 0;
+    if ((int16_t)big != 0)
+        index = (int16_t)((int16_t)divu_w((uint32_t)other, (uint16_t)big) >> 6);
+    result = (int32_t)((uint32_t)magnitude_factor(index) * (uint16_t)big) >> 14;
+    if (result > 0x7FFF) result = (int32_t)(((uint32_t)result & 0xFFFF0000u) | 0x7FFF);
+    wr_u16(MAGNITUDE, (uint16_t)result);
+    return result;
+}

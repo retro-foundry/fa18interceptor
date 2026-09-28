@@ -49,13 +49,18 @@ int glue_C2E3DE(void) {
 
 /* $C2E514: D0.w, D2.w, D4.w angles, A1 matrix. Everything is live after it:
  * D0-D5 the lookups, D6 = (ca*cb) >> 14, D7 = 14, A1 the last word. */
-int glue_C2E514(void) {
+void alternate_rotation_registers(void);
+void alternate_rotation_registers(void) {
     uint16_t a = (uint16_t)D(0), b = (uint16_t)D(2), c = (uint16_t)D(4);
     alternate_rotation_matrix(a, b, c, A(1));
     three_lookup_registers();
     D(6) = (uint32_t)(((int32_t)(int16_t)D(1) * (int16_t)D(3)) >> 14);
     D(7) = 14;
     A(1) += 16;
+}
+
+int glue_C2E514(void) {
+    alternate_rotation_registers();
     return glue_return();
 }
 

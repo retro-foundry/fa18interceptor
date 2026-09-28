@@ -146,6 +146,23 @@ const FA18Port fa18_ports[] = {
     /* batch 19: three-angle matrix variants */
     {0xC2E3DE, glue_C2E3DE, "rotation_matrix8", 900},
     {0xC2E514, glue_C2E514, "alternate_rotation_matrix", 900},
+    /* batch 20: inverse orientation, stream skip, attitude flags, vertex tail, divide, interrupt server */
+    {0xC2D970, glue_C2D970, "inverse_orientation_matrix", 960},
+    {0xC21940, glue_C21940, "skip_if_shown_record_flag", 90},
+    {0xC122A2, glue_C122A2, "update_attitude_flags", 500},
+    {0xC0D384, glue_C0D384, "derive_vertex_tail", 1300},
+    {0xC52EC8, glue_C52EC8, "long_divide", 900},
+    {0xC06132, glue_C06132, "count_interrupt", 60},
+    /* batch 20: play_sound */
+    {0xC17B2C, glue_C17B2C, "play_sound", 450},
+    /* batch 21: side-plane clips, view transform */
+    {0xC2EA5A, glue_C2EA5A, "clip_to_side_plane", 420},
+    {0xC2EAD0, glue_C2EAD0, "clip_to_side_plane", 430},
+    {0xC2F0C6, glue_C2F0C6, "clip_to_side_plane", 330},
+    {0xC2F0F4, glue_C2F0F4, "clip_to_side_plane", 340},
+    {0xC1F2EE, glue_C1F2EE, "view_transform", 560},
+    /* batch 22: magnitude */
+    {0xC1D974, glue_C1D974, "magnitude3", 500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

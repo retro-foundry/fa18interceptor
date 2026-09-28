@@ -249,4 +249,24 @@
 /* ---- matrices ($C2E5AC) ------------------------------------------------- */
 #define MATRIX_ROW_SCALES  0xC45A3Eu /* word[3]: per-row scale, 8 fraction bits */
 
+/* ---- attitude ($C122A2) ---------------------------------------------------- */
+#define ATTITUDE_A         0xC45A88u /* long: angle, 1/80 degree (>> 3 = tenths) */
+#define ATTITUDE_B         0xC45A90u /* long: angle, 1/80 degree */
+#define ATTITUDE_LATCH     0xC45786u /* byte: set while angle A is in (60, 315) degrees */
+#define ATTITUDE_NEAR      0xC4586Cu /* byte: 1 while angle A is in (45, 320) degrees */
+#define ATTITUDE_BAND      0xC4586Bu /* byte: 0-3 by how far angle A is from level */
+#define UPDATE_MASK        0xC45858u /* byte: bits $0B set when the latch changes */
+#define STATUS_CA          0xC458CAu /* word: bit 1 = exactly one angle past 90 degrees */
+
+/* ---- interrupt server ($C06132) ------------------------------------------ */
+#define SERVER_COUNT       0x20      /* word in the server's data: calls so far */
+
+/* ---- clipping and view transform ($C2EA5A, $C1F2EE) --------------------- */
+#define CLIP_POINT         0xC45AC6u /* word[3]: where a segment met a side plane */
+#define CAMERA_MATRIX      0xC45C20u /* word[9]: camera rotation, 8 fraction bits ($C1F2EE) */
+
+/* ---- magnitude ($C1D974) ------------------------------------------------- */
+#define MAGNITUDE_TABLE    0xC1D9D8u /* word[]: sqrt(1 + (i/256)^2), 2.14 */
+#define MAGNITUDE          0xC45B40u /* word: the last magnitude3 result */
+
 #endif

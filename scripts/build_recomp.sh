@@ -3,6 +3,9 @@
 # objects are cached; the CMake build in port/recomp adds the SDL window.
 set -e
 cd "$(dirname "$0")/.."
+# The build runs with -w; catch a global defined twice (a silent redefinition).
+dups=$(sed -n 's/^#define \([A-Z0-9_]*\) .*/\1/p' port/game/globals.h | sort | uniq -d)
+if [ -n "$dups" ]; then echo "globals.h defines twice: $dups" >&2; exit 1; fi
 M=tools/musashi
 O=build/recomp/obj
 mkdir -p $O

@@ -107,3 +107,14 @@ void scale_matrix_rows(gaddr matrix, gaddr scales) {
         }
     }
 }
+
+/* A full turn in native angle units. */
+#define FULL_TURN 0x7080
+
+static uint16_t negated_angle(uint16_t angle) {
+    return angle ? (uint16_t)(FULL_TURN - angle) : 0;
+}
+
+void inverse_orientation_matrix(gaddr record, uint16_t x, uint16_t y, uint16_t z) {
+    alternate_rotation_matrix(negated_angle(x), negated_angle(y), negated_angle(z), record + 0x92);
+}
