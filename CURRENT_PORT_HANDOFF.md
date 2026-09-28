@@ -1295,6 +1295,17 @@ buffers. Frame-392 traces prove the child consumes and publishes those tables,
 but do not identify their initialization writer; do not substitute the
 observed `$C074D8/$C07F00` addresses as native identities.
 
+This writer is now bounded.  In `captures/cold_boot_menu_init/`, the table is
+zero initially; `$C160BE/$C160C8` publish slot zero at replay frame 5,926 and
+`$C16110/$C1611A` publish slot one at frame 7,699.  Each slot copies the live
+View `$C1821C` and display-instruction `$C18232` fields only after the paired
+`$C53F18`/`$C53F04` graphics-library calls.  The preceding calls respectively
+write `$C18232` then `$C1821C` for slot zero.  See
+`analysis/routines/c16084_view_pair_initialization.md`.  A native owner may
+now model this as a constructor-owned native pair followed by an explicit
+slot publication; it must still recover the constructor's page/Chip-buffer
+relationship and original scheduling before attaching it to `game.c`.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
