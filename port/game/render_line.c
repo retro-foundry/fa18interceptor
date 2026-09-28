@@ -121,3 +121,8 @@ void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
         custom_write(BLTSIZE, line.size);
     }
 }
+
+void reset_line_style(void) {
+    /* One long write: LINE_PLANES = all four, LINE_COLOUR = -1 (object colour). */
+    wr_u32(LINE_PLANES - 1, 0x000FFFFFu);
+}

@@ -34,4 +34,17 @@ int glue_C0DAD4(void);
 int glue_C0DADC(void);
 int glue_C0DAE6(void);
 
+/* render_state.c, view.c, stages.c */
+int glue_empty_stage(void);
+int glue_C25864(void);
+int glue_C2F490(void);
+int glue_C4FFB4(void);
+int glue_C2F596(void);
+int glue_C08324(void);
+int glue_C095C0(void);
+int glue_C1D722(void);
+int glue_C30F56(void);
+int glue_C1C7F6(void);
+int glue_C25482(void);
+
 #endif

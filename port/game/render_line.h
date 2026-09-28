@@ -32,4 +32,7 @@ int setup_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row,
  * page, in the current line colour. */
 void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
 
+/* Draw lines into all four planes in the current object colour. */
+void reset_line_style(void);
+
 #endif

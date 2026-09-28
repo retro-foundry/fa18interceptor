@@ -2,6 +2,7 @@
 #include "audio.h"
 
 #include "globals.h"
+#include "hardware.h"
 
 #define FIXED_UNIT 0x10000
 #define MAX_VOLUME (63 * FIXED_UNIT)
@@ -33,4 +34,9 @@ void fade_master_volume(void) {
         if (level > MAX_VOLUME) level = MAX_VOLUME;
     }
     wr_s32(MASTER_VOLUME, level);
+}
+
+void clear_voice_interrupt(int channel) {
+    gaddr voice = rd_u32(VOICE_TABLE + (gaddr)(int32_t)(int16_t)(channel * 4));
+    custom_write(INTREQ, rd_u16(voice + VOICE_INTERRUPT));
 }

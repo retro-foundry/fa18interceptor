@@ -41,6 +41,22 @@ const FA18Port fa18_ports[] = {
     {0xC0DAD4, glue_C0DAD4, "append_point", 40},
     {0xC0DADC, glue_C0DADC, "append_point", 40},
     {0xC0DAE6, glue_C0DAE6, "append_point", 40},
+    /* stages.c */
+    {0xC25B1C, glue_empty_stage, "empty_stage", 16},
+    {0xC25B1E, glue_empty_stage, "empty_stage", 16},
+    {0xC31F4A, glue_empty_stage, "empty_stage", 16},
+    {0xC25864, glue_C25864, "reset_list", 50},
+    {0xC25482, glue_C25482, "tick_timer", 30},
+    /* render_line.c, render_state.c */
+    {0xC2F490, glue_C2F490, "reset_line_style", 30},
+    {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},
+    {0xC1D722, glue_C1D722, "fill_column", 280},
+    {0xC30F56, glue_C30F56, "start_blit", 90},
+    /* audio.c, view.c, control_records.c */
+    {0xC4FFB4, glue_C4FFB4, "clear_voice_interrupt", 60},
+    {0xC08324, glue_C08324, "set_zoom_maximum", 60},
+    {0xC095C0, glue_C095C0, "reset_player_record", 220},
+    {0xC1C7F6, glue_C1C7F6, "classify_record_rate", 120},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

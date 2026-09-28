@@ -34,3 +34,42 @@ void settle_record(gaddr record) {
         wr_u16(record + REC_PENDING, 0);
     }
 }
+
+static int16_t magnitude(int16_t v) { return (int16_t)(v < 0 ? -v : v); }
+
+void classify_record_rate(gaddr record) {
+    int16_t a = magnitude(rd_s16(record + 0x56));
+    int16_t b = magnitude(rd_s16(record + 0x58));
+    int16_t c = (int16_t)(magnitude(rd_s16(record + 0x5A)) >> 2);
+    int16_t largest;
+
+    if (b > a) largest = b > c ? b : c;
+    else largest = c > a ? c : a;
+
+    if (largest <= 0x60)
+        wr_u8(RECORD_RATE, magnitude(rd_s16(record + 0x6C)) > 0x1000 ? 3 : 5);
+    else
+        wr_u8(RECORD_RATE, largest <= 0xC0 ? 3 : 1);
+}
+
+void reset_player_record(void) {
+    gaddr p = CONTROL_RECORDS;
+    wr_u16(p + 0x6C, 0);
+    wr_u16(p + 0x6E, 0);
+    wr_u16(p + 0x78, 0);
+    wr_u32(p + 0x3E, 0);
+    wr_u32(p + 0x42, 0);
+    wr_u32(p + 0x46, 0);
+    wr_u32(p + 0x56, 0);
+    wr_u16(p + 0x5A, 0);
+    wr_u32(p + 0x50, 0);
+    wr_u16(p + 0x54, 0);
+    wr_u8(p + 0x65, 0);
+    wr_u8(p + 0x2B, 9);
+    wr_u16(p + 0x00, (uint16_t)(rd_u16(p + 0x00) & 0x7FFF));
+    wr_u32(0xC45B50u, 0);
+    wr_u32(0xC45B54u, 0);
+    wr_u16(0xC45AE0u, 0);
+    wr_u16(0xC45ADEu, 0);
+    wr_u16(0xC45AE4u, 0xFFFF);
+}

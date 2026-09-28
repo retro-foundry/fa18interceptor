@@ -23,4 +23,9 @@ void set_voice_output(gaddr channel, gaddr voice);
  * active. */
 void fade_master_volume(void);
 
+enum { VOICE_INTERRUPT = 0x14 }; /* word: this channel's INTREQ bits */
+
+/* Clear a channel's audio interrupt request (INTREQ bits from its voice). */
+void clear_voice_interrupt(int channel);
+
 #endif

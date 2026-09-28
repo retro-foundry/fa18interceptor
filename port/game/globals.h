@@ -60,4 +60,16 @@
 /* ---- screen frame lists ($C0DAA0) ------------------------------------------ */
 #define FRAME_POINTS       0xC4B990u /* (x, y) word pairs, 8 bytes apart */
 
+/* ---- view zoom (memory map) --------------------------------------------- */
+#define ZOOM_SCALE         0xC45A42u /* word: $20 (wide) .. $80 */
+#define ZOOM_FLAGS         0xC457DDu /* byte: bit 7 = zoom at $80 */
+#define DISPLAY_UPDATE     0xC4583Du /* byte: display update request */
+
+/* ---- misc ------------------------------------------------------------------ */
+#define RECORD_RATE        0xC458BCu /* byte: 5, 3 or 1 from classify_record_rate ($C1C7F6) */
+#define LIST_COUNT         0xC46182u /* word: entries in the list at LIST_BUFFER ($C25864) */
+#define LIST_WRITE         0xC459CAu /* long: next free entry */
+#define LIST_BUFFER        0xC4E2BCu
+#define VOICE_TABLE        0xC4FE28u /* long[4]: voice record per channel ($C4FFB4) */
+
 #endif
