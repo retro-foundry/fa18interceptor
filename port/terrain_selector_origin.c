@@ -1,0 +1,55 @@
+#include "terrain_selector_origin.h"
+
+static int32_t read_be32(const uint8_t *bytes) {
+    return (int32_t)((uint32_t)bytes[0] << 24 | (uint32_t)bytes[1] << 16 |
+                     (uint32_t)bytes[2] << 8 | bytes[3]);
+}
+
+static int16_t read_be16(const uint8_t *bytes) {
+    return (int16_t)((uint16_t)bytes[0] << 8 | bytes[1]);
+}
+
+int fa18_publish_terrain_selector_origin_direct(
+    FA18TerrainSelectorOriginDirectState *state,
+    FA18TerrainSelectorOriginResult *result) {
+    int32_t floor;
+
+    if (!state || !result)
+        return -1;
+    if (state->prepare_matrix)
+        state->prepare_matrix(state->prepare_context);
+    if (!state->origin_enable || !state->gate_b || state->gate_a) {
+        *result = FA18_TERRAIN_SELECTOR_ORIGIN_GATE_EXIT;
+        return 0;
+    }
+    if (!state->gate_mode || state->detail_mode) {
+        *result = FA18_TERRAIN_SELECTOR_ORIGIN_UNPORTED_MATRIX_ROUTE;
+        return 0;
+    }
+    if (!state->active_record ||
+        state->active_record_size < FA18_TERRAIN_SELECTOR_ORIGIN_DIRECT_RECORD_BYTES)
+        return -1;
+
+    state->origin[0] = read_be32(state->active_record + 0x14);
+    floor = (int32_t)(int16_t)(read_be16(state->active_record + 0x4e) + 7) * 256;
+    if (state->origin[1] < floor)
+        state->origin[1] = floor;
+    state->origin[2] = read_be32(state->active_record + 0x1c);
+    *result = FA18_TERRAIN_SELECTOR_ORIGIN_DIRECT_PUBLISHED;
+    return 0;
+}
+
+int fa18_publish_terrain_selector_origin_direct_callback(void *context,
+                                                          int32_t origin[3]) {
+    FA18TerrainSelectorOriginDirectState *state = context;
+    FA18TerrainSelectorOriginResult result;
+
+    if (!state || !origin ||
+        fa18_publish_terrain_selector_origin_direct(state, &result) != 0 ||
+        result != FA18_TERRAIN_SELECTOR_ORIGIN_DIRECT_PUBLISHED)
+        return -1;
+    origin[0] = state->origin[0];
+    origin[1] = state->origin[1];
+    origin[2] = state->origin[2];
+    return 0;
+}

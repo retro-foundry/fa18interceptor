@@ -2,8 +2,8 @@
 
 ## Context handoff — 2026-09-28
 
-- Branch/head: `coverage-accounting` at `31588705` (`Port extended record
-  table dispatch`), pushed to `origin/coverage-accounting`.
+- Branch: `coverage-accounting`; all completed slices are pushed to
+  `origin/coverage-accounting`.
 - Worktree: user-owned untracked `.vscode/` only; leave it untouched.
 - Native normal-render truth: `game.c` still does **not** schedule the real
   placement/control-stream owner.  Do not claim, show, or link a native frame
@@ -13,10 +13,20 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 197/197 CTest contracts passed; native build checker
-  reported 376 C sources.
+- Last full validation: 201/201 CTest contracts passed; native build checker
+  reported 386 C sources.
 
 ### Most recent chain
+
+`terrain_selector_origin.{c,h}` now ports the direct-record lane of
+`$C29042-$C291D3`.  In the source gate combination `C45785 != 0`, `C457B5 !=
+0`, `C457AE == 0`, `C457AD != 0`, and `C458AE == 0`, it calls the caller-owned
+`$C2DAF2` matrix-preparation boundary, reads the active record `+$14/+1C`,
+retains the previous middle component, applies the exact signed-word floor
+`(+$4E + 7) << 8`, and publishes the resulting selector triple.  Its adapter
+can satisfy `$C1C6BC`'s origin-update callback only for that proven lane.  The
+matrix-table route and `$C291D4` continuation fail explicitly; this slice is
+not scheduled by `game.c`, so normal frame 402 remains black/unverified.
 
 `record_walker_runtime.{c,h}` ports bounded `$C1F6F8-$C1F966`, including
 `$C1F7A0` A1/A2 selection and `$C1F910` negative-selector dispatch.
