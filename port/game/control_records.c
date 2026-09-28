@@ -73,3 +73,31 @@ void reset_player_record(void) {
     wr_u16(0xC45ADEu, 0);
     wr_u16(0xC45AE4u, 0xFFFF);
 }
+
+void update_record_5a(void) {
+    gaddr r = rd_u32(CURRENT_RECORD);
+    int16_t level = rd_s16(r + 0x6A);
+    if (level == 0) wr_u16(r + 0x5A, 0);
+    else wr_s16(r + 0x5A, level > 14400 ? 0x20 : -0x20);
+}
+
+void ease_record_26(int16_t target) {
+    gaddr r = rd_u32(CURRENT_RECORD);
+    int16_t value = rd_s16(r + 0x26);
+    int16_t step = (int16_t)((int16_t)(value - target) >> 3);
+    wr_s16(r + 0x26, (int16_t)(value - step));
+}
+
+void mark_record_pending(gaddr record) {
+    int was_pending = rd_u16(record + REC_PENDING) != 0;
+    wr_u16(record + REC_PENDING, 0xFFFF);
+    if (!was_pending) wr_s16(record + REC_PENDING_SIGN, (int16_t)-rd_s16(record + REC_PENDING_SIGN));
+}
+
+void set_record_view(gaddr record, int16_t a, int16_t b, int16_t c, int16_t d, uint32_t e) {
+    wr_s16(record + 0x2C, a);
+    wr_s16(record + 0x2E, b);
+    wr_s16(record + 0x30, c);
+    wr_s16(record + 0x32, d);
+    wr_u32(record + 0x34, e);
+}

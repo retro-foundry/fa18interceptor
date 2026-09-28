@@ -104,6 +104,23 @@ Contributing causes:
   The remaining generated routines and fallback-log entries are the
   measured backlog.
 
+## Where Ghidra and P-code fit
+
+Not on the critical path. The translation needs only the loaded machine code
+(decoded with the CPU core's own tables) and emulator traces to show which
+code runs. This project exported Ghidra P-code per capture before any C
+existed; that duplicated what a decoder provides and was slow. The analysis
+built from it (routine reports, a memory map, named globals) did pay off
+later, as reading material for the readable-C stage.
+
+Next time:
+- Skip per-capture P-code exports.
+- Load the program into Ghidra once, statically, and use its decompiler view,
+  cross-references and data typing as a reading aid while writing each
+  routine's C (stage 5).
+- Keep names and struct layouts in the C source and the memory map, not in a
+  separate RE database that has to be kept in sync.
+
 ## Rules for agents working on it
 
 - The first question in every session: "what is the first diverging frame

@@ -40,3 +40,40 @@ void clear_voice_interrupt(int channel) {
     gaddr voice = rd_u32(VOICE_TABLE + (gaddr)(int32_t)(int16_t)(channel * 4));
     custom_write(INTREQ, rd_u16(voice + VOICE_INTERRUPT));
 }
+
+void step_voice_program(gaddr voice, gaddr slot, int channel) {
+    gaddr program, pc;
+
+    if (rd_u32(voice + VOICE_DELAY) == 0) return;
+    wr_u32(voice + VOICE_DELAY, rd_u32(voice + VOICE_DELAY) - 1);
+    if (rd_u32(voice + VOICE_DELAY) != 0) return;
+
+    program = rd_u32(voice + VOICE_PROGRAM);
+    pc = program + rd_u32(voice + VOICE_POSITION);
+    for (;;) {
+        int32_t field = rd_s32(pc);
+        uint32_t value = rd_u32(pc + 4);
+        pc += 8;
+        if (field < VOICE_DELAY) {
+            wr_u32(voice + (gaddr)field, value);
+            continue;
+        }
+        if (field == VOICE_DELAY) {
+            wr_u32(voice + VOICE_DELAY, value);
+            wr_u32(voice + VOICE_POSITION, pc - program);
+            if (value == 0) {
+                wr_u32(slot, 0);
+                clear_voice_interrupt(channel);
+            }
+            return;
+        }
+        {
+            gaddr counter = voice + VOICE_LOOP_COUNTERS + (gaddr)(int32_t)(int16_t)(field - 0x40);
+            if (rd_u32(counter) != 0) {
+                wr_u32(counter, rd_u32(counter) - 1);
+                if (rd_u32(counter) == 0) continue;
+            }
+            pc = program + value;
+        }
+    }
+}

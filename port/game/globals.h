@@ -72,4 +72,24 @@
 #define LIST_BUFFER        0xC4E2BCu
 #define VOICE_TABLE        0xC4FE28u /* long[4]: voice record per channel ($C4FFB4) */
 
+#define CURRENT_RECORD     0xC18210u /* long: address of the current control record (memory map) */
+
+/* ---- post-input sequence (earlier port: post_input_followup) --------------- */
+#define POST_INPUT_COUNTDOWN 0xC45AD6u /* word: negative once expired */
+#define POST_INPUT_AUX       0xC45795u /* byte */
+#define POST_INPUT_EVENT     0xC457AEu /* byte: event flag cleared on completion */
+#define VIEWPORT_MODE        0xC458A0u /* byte: current viewport mode */
+#define VIEWPORT_TARGET      0xC458A1u /* byte: mode being changed to */
+#define STAGE_CALLBACK       0xC1820Cu /* long: routine run by the next update */
+
+/* Routine addresses stored in STAGE_CALLBACK (function pointers once the
+ * callers are C). */
+#define ROUTINE_COMPLETE_POST_INPUT 0xC0FA80u
+#define ROUTINE_AFTER_POST_INPUT    0xC10C08u
+
+/* ---- rounded division ($C25980) ------------------------------------------ */
+#define DIVIDE_NUMERATOR   0xC45ACCu /* long */
+#define DIVIDE_DENOMINATOR 0xC45AD0u /* word */
+#define DIVIDE_QUOTIENT    0xC45AD2u /* word: rounded to nearest, halves away from zero */
+
 #endif

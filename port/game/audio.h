@@ -28,4 +28,15 @@ enum { VOICE_INTERRUPT = 0x14 }; /* word: this channel's INTREQ bits */
 /* Clear a channel's audio interrupt request (INTREQ bits from its voice). */
 void clear_voice_interrupt(int channel);
 
+/* Voice program: a list of (offset, value) long pairs run when the voice
+ * delay expires. An offset below $2C stores the value into that voice
+ * field; $2C waits `value` ticks (0 ends the program); an offset of $40 + n
+ * is a loop on counter n: jump to `value` while the counter, decremented,
+ * is not zero (a zero counter always jumps). */
+enum { VOICE_LOOP_COUNTERS = 0x24, VOICE_DELAY = 0x2C, VOICE_PROGRAM = 0x30, VOICE_POSITION = 0x34 };
+
+/* Advance a voice program; when it ends, free `slot` and clear the
+ * channel interrupt. */
+void step_voice_program(gaddr voice, gaddr slot, int channel);
+
 #endif

@@ -13,3 +13,5 @@ void reset_list(void) {
 void tick_timer(gaddr timer) {
     if (rd_s8(timer) >= 0) wr_u8(timer, (uint8_t)(rd_u8(timer) - 1));
 }
+
+int zero_result(void) { return 0; }

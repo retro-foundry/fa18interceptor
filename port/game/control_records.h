@@ -36,4 +36,17 @@ void classify_record_rate(gaddr record);
 /* Clear the first (player) record's motion fields and the related globals. */
 void reset_player_record(void);
 
+/* Current record: +$5A = +$20 when +$6A exceeds 14400, -$20 when it is
+ * lower but nonzero, 0 when +$6A is zero. */
+void update_record_5a(void);
+
+/* Current record: move +$26 an eighth of the way toward `target`. */
+void ease_record_26(int16_t target);
+
+/* Mark a record pending (+$50 = -1), negating +$54 if it was not already. */
+void mark_record_pending(gaddr record);
+
+/* Store view parameters into a record at +$2C..+$37. */
+void set_record_view(gaddr record, int16_t a, int16_t b, int16_t c, int16_t d, uint32_t e);
+
 #endif

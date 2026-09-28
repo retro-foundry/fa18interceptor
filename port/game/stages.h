@@ -12,4 +12,7 @@ void reset_list(void);
 /* Count a byte timer down to zero; negative timers are stopped. */
 void tick_timer(gaddr timer);
 
+/* Handlers that report "nothing" (0). */
+int zero_result(void);
+
 #endif

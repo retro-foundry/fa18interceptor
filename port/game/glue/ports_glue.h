@@ -47,4 +47,20 @@ int glue_C30F56(void);
 int glue_C1C7F6(void);
 int glue_C25482(void);
 
+/* batch 7 */
+int glue_C50212(void);
+int glue_C4FFB0(void);
+int glue_C13B5A(void);
+int glue_C14876(void);
+int glue_C308E2(void);
+int glue_C30904(void);
+int glue_C2DEA2(void);
+int glue_C28F16(void);
+int glue_C0FA4C(void);
+int glue_C0FA80(void);
+int glue_C1FE20(void);
+int glue_C21960(void);
+int glue_C25980(void);
+int glue_C2E370(void);
+
 #endif

@@ -33,3 +33,35 @@ int16_t attenuate_offset(int16_t x, int16_t y) {
     else if (size > 2) sum = (int16_t)(sum >> 1);
     return (int16_t)(sum - y);
 }
+
+int16_t rounded_divide(int32_t dividend, int16_t divisor) {
+    int16_t half = (int16_t)((int16_t)(divisor < 0 ? -divisor : divisor) >> 1);
+    int32_t q = dividend / divisor;
+    int16_t quotient, remainder;
+
+    if (q >= -32768 && q <= 32767) {
+        quotient = (int16_t)q;
+        remainder = (int16_t)(dividend % divisor);
+    } else {
+        quotient = (int16_t)dividend;
+        remainder = (int16_t)(dividend >> 16);
+    }
+    if (remainder < 0) remainder = (int16_t)-remainder;
+    if (half > remainder) return quotient;
+    return (int16_t)(quotient < 0 ? quotient - 1 : quotient + 1);
+}
+
+void divide_rounded(void) {
+    wr_s16(DIVIDE_QUOTIENT, rounded_divide(rd_s32(DIVIDE_NUMERATOR), rd_s16(DIVIDE_DENOMINATOR)));
+}
+
+void y_rotation_matrix(int16_t angle, gaddr out) {
+    Fixed14 s, c;
+    int16_t words[9];
+    int i;
+    sin_cos((int16_t)(angle >> 3), &s, &c);
+    words[0] = c; words[1] = 0; words[2] = s;
+    words[3] = 0; words[4] = FIXED14_ONE; words[5] = 0;
+    words[6] = (int16_t)-s; words[7] = 0; words[8] = c;
+    for (i = 0; i < 9; i++) wr_s16(out + (gaddr)(2 * i), words[i]);
+}

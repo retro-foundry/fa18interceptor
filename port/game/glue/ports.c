@@ -57,6 +57,20 @@ const FA18Port fa18_ports[] = {
     {0xC08324, glue_C08324, "set_zoom_maximum", 60},
     {0xC095C0, glue_C095C0, "reset_player_record", 220},
     {0xC1C7F6, glue_C1C7F6, "classify_record_rate", 120},
+    {0xC50212, glue_C50212, "step_voice_program", 200},
+    {0xC4FFB0, glue_C4FFB0, "clear_voice_interrupt", 70},
+    {0xC13B5A, glue_C13B5A, "update_record_5a", 120},
+    {0xC14876, glue_C14876, "ease_record_26", 100},
+    {0xC308E2, glue_C308E2, "restart_blit_cd", 70},
+    {0xC30904, glue_C30904, "restart_blit_ad", 70},
+    {0xC2DEA2, glue_C2DEA2, "mark_record_pending", 50},
+    {0xC28F16, glue_C28F16, "set_record_view", 90},
+    {0xC0FA4C, glue_C0FA4C, "await_viewport_match", 90},
+    {0xC0FA80, glue_C0FA80, "complete_post_input", 80},
+    {0xC1FE20, glue_C1FE20, "zero_result", 20},
+    {0xC21960, glue_C21960, "zero_result", 24},
+    {0xC25980, glue_C25980, "divide_rounded", 250},
+    {0xC2E370, glue_C2E370, "y_rotation_matrix", 260},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
