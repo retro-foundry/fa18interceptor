@@ -19,6 +19,10 @@ static int project_component(int16_t component, int16_t depth, int16_t scale,
     return 0;
 }
 
+static int16_t negate_word(int16_t value) {
+    return (int16_t)(UINT16_C(0) - (uint16_t)value);
+}
+
 static int project_endpoint(const FA18ViewVertex *endpoint,
                             FA18ScreenPoint *screen) {
     int16_t x, y;
@@ -26,8 +30,8 @@ static int project_endpoint(const FA18ViewVertex *endpoint,
     /* `$C2ED76-$C2EDAC` / `$C2EDCE-$C2EE04`: the source rejects positive
      * x/y magnitudes strictly greater than depth before division. */
     if (endpoint->depth <= 0 || endpoint->x > endpoint->depth ||
-        -(int32_t)endpoint->x > endpoint->depth || endpoint->y > endpoint->depth ||
-        -(int32_t)endpoint->y > endpoint->depth)
+        negate_word(endpoint->x) > endpoint->depth || endpoint->y > endpoint->depth ||
+        negate_word(endpoint->y) > endpoint->depth)
         return 0;
     if (project_component(endpoint->x, endpoint->depth, 160, 160, 319, &x) != 0 ||
         project_component(endpoint->y, endpoint->depth, 90, 90, 179, &y) != 0)
