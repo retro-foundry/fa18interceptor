@@ -11,6 +11,9 @@ static int resolve_record(void *context, uint16_t index,
     assert(index == 14);
     ++log->record_calls;
     *record = (FA18SceneNegativePoseRecord){ .flags_byte_01 = 0x40 };
+    record->angles[0] = 0x1234;
+    record->angles[1] = -2;
+    record->angles[2] = 0x4567;
     record->matrix.value[0][0] = 0x4000;
     record->matrix.value[1][1] = 0x4000;
     record->matrix.value[2][2] = 0x4000;
@@ -28,14 +31,18 @@ static int resolve_descriptor(void *context, uint16_t index,
 
 static int matrix_build(void *context, const int16_t input[3], int16_t output[3][3]) {
     Log *log = context;
-    assert(++log->matrix_calls == 1 && input[0] == 0 && input[1] == 0 && input[2] == 0);
+    assert(++log->matrix_calls == 1 &&
+           ((input[0] == 0x1234 && input[1] == -2 && input[2] == 0x4567) ||
+            (!input[0] && !input[1] && !input[2])));
     output[0][0] = 0x4000;
     return 0;
 }
 
 static int matrix_compose(void *context, const int16_t input[3], int16_t output[3][3]) {
     Log *log = context;
-    assert(++log->matrix_calls == 2 && !input[0] && !input[1] && !input[2]);
+    assert(++log->matrix_calls == 2 &&
+           ((input[0] == 0x7082 && input[1] == 0x2b19 && !input[2]) ||
+            (!input[0] && !input[1] && !input[2])));
     output[1][1] = 0x4000;
     return 0;
 }
@@ -74,13 +81,16 @@ int main(void) {
     assert(route == FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_APPLIED &&
            state.selected_record_index == 14 && log.record_calls == 1 &&
            log.descriptor_calls == 1 && log.matrix_calls == 2);
-    assert(state.setup.word_00 == 0x11c8 && state.pose.position[1] == 0x7708);
+    assert(state.setup.word_00 == 0x11c8 && state.pose.position[1] == 0x7708 &&
+           state.copied_angle[0] == 0x1234 && state.copied_angle[1] == -2 &&
+           state.copied_angle[2] == 0x4567);
     hunk_bytes[FA18_SCENE_RECORD_TABLE_A_OFFSET + 3 * 16] = 0;
     hunk_bytes[FA18_SCENE_RECORD_TABLE_A_OFFSET + 3 * 16 + 1] = 1;
     log.matrix_calls = 0;
     assert(fa18_prepare_scene_root_placement(
                &table, &(FA18SceneRootPlacementInput){3, 0}, &state, &ops, &route) == 0);
     assert(route == FA18_SCENE_ROOT_PLACEMENT_POSITIVE_APPLIED &&
-           state.positive_pose.position[0] == INT32_C(0x01000000));
+           state.positive_pose.position[0] == INT32_C(0x01000000) &&
+           !state.copied_angle[0] && !state.copied_angle[1] && !state.copied_angle[2]);
     return 0;
 }

@@ -739,6 +739,16 @@ each line/fill boundary. The adapter is available as the two
 to `game.c`: the parent still must provide its actual record, matrix, page,
 lane state, and scheduler cadence. `ctest` passes 120/120 contracts.
 
+`scene_root_placement.{c,h}` and `scene_root_record.c` now also port the
+negative-root handoff at `$C09514-$C0951A`: after the selected source record
+has driven `$C2D954`, its three `+$66/+68/+6A` angle words are copied into
+root slot zero.  This is the record subsequently selected by the observed
+`$C1C54E` projection seed and default `$C2DB18` matrix route.  The C contract
+checks both the signed angle matrix inputs and the exact big-endian root
+stores; no run075 capture values are introduced into normal runtime state.
+The full native gate passes 142/142 contracts and retains 192 exact frames
+(200--391), first differing at frame 392 by 361 pixels.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:

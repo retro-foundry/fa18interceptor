@@ -40,6 +40,9 @@ typedef struct {
     FA18SceneNegativePoseState pose;
     FA18ScenePositivePoseState positive_pose;
     uint16_t selected_record_index;
+    /* `$C09514-$C0951A` copies the selected negative-route record's
+     * `+$66/+68/+6A` words into root slot zero before `$C091E0`. */
+    int16_t copied_angle[3];
     uint8_t retry_scene_index;
 } FA18SceneRootPlacementState;
 

@@ -16,6 +16,9 @@ int fa18_prepare_scene_root_placement(
         fa18_initialize_scene_root_setup(&state->setup) != 0 ||
         fa18_scene_record_table_a_entry(table, input->table_index, words) != 0)
         return -1;
+    state->copied_angle[0] = 0;
+    state->copied_angle[1] = 0;
+    state->copied_angle[2] = 0;
 
     if (words[0] >= 0) {
         if (!ops->resolve_positive || !ops->positive_matrix_ops ||
@@ -40,6 +43,11 @@ int fa18_prepare_scene_root_placement(
         words[0], &state->retry_scene_index, &selected, &descriptor,
         input->inherited_d7, &state->pose, ops->negative_pose_ops);
     if (result < 0) return -1;
+    if (result == 0) {
+        state->copied_angle[0] = selected.angles[0];
+        state->copied_angle[1] = selected.angles[1];
+        state->copied_angle[2] = selected.angles[2];
+    }
     *route = result == 0 ? FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_APPLIED
                          : FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_RETRY;
     return 0;

@@ -35,6 +35,11 @@ int fa18_publish_scene_root_record(FA18SceneDispatchRecord *record,
         bytes[0x0b] = placement->pose.word_0b;
         put16(bytes, 0x0c, placement->pose.word_0c);
         put16(bytes, 0x0e, placement->pose.word_0e);
+        /* `$C09514-$C0951A`: the selected source record supplies the three
+         * control angles subsequently read from root slot zero by `$C2DB18`. */
+        put16(bytes, 0x66, (uint16_t)placement->copied_angle[0]);
+        put16(bytes, 0x68, (uint16_t)placement->copied_angle[1]);
+        put16(bytes, 0x6a, (uint16_t)placement->copied_angle[2]);
         publish_matrix(bytes, &placement->pose.matrix_update);
         return 0;
     }
