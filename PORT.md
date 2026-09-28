@@ -1570,9 +1570,10 @@ game loop.
   frame 391.
 - 2026-09-28: Reconstructed `$C28722-$C28E08` as `scene_dispatch_runtime`.
   It selects Hunk-27 dispatch records, carries all five relocatable Hunk-16
-  template references, creates unmarked `$C46184` slots, and supplies the
+  template references, creates traced unmarked non-root `$C46184` slots, and supplies the
   index-14 record plus Hunk-52 field-four descriptor to the existing negative
   root-pose route. The attract-demo `$C28BEE` trace validates slot 14's
   `$11180000/$00000000/$11180000` initial position. Corrected the source
   coordinate scale in `scene_record_dispatch` to the traced `SWAP; ASL.L #6`
-  form. All 119 contracts pass; normal replay remains exact through frame 391.
+  form. The trace does not create root slot zero, whose first producer remains
+  open. All 119 contracts pass; normal replay remains exact through frame 391.
