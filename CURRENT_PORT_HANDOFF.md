@@ -948,7 +948,7 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-285 files, `ctest` passes 152/152, and frame parity remains 192 exact frames
+287 files, `ctest` passes 153/153, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 
@@ -968,6 +968,13 @@ contract produces the four `$C4B390` triplets from the observed
 `$C45A66/$C45BD8` inputs. It is not a renderer hook; the `$C2E758`
 adjustment/selection iterator and `$C0D7E0` consumer still determine whether
 those candidates become display pairs and polygons.
+
+`display_record_iterator.{c,h}` now ports the full `$C2E758-$C2EC67`
+eight-record adjustment/selection loop, including its four source arithmetic
+forms, bounded projection, exact clears/defer behavior, and scratch slots.
+It matches the return-bounded run075 `$C4B390/$C4B990/$C4E854` witness, but is
+still not scheduled: `$C0D7E0`'s consumer must convert these pairs into the
+source polygon submission before a native five-plane page can be rendered.
 
 ## Standard validation after each stage
 

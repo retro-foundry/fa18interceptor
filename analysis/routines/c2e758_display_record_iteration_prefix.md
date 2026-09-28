@@ -141,3 +141,13 @@ the `$A0/$5A` offsets and clamps.  The source busy loop for a nonpositive
 divisor is represented as an explicit native rejection.  This primitive is
 not scheduled on its own; the preceding adjustment/selection iterator and the
 caller-owned page submission remain to be composed.
+
+`port/display_record_iterator.{c,h}` now ports the complete static
+`$C2E758-$C2EC67` iterator: its eight source case branches, four shared
+adjustment forms, bounds classifier, direct-clear versus conditional-defer
+tails, scratch publishes, and `$C4B990` pair projection. Its contract is the
+return-bounded run075 before/after workspace and scratch state. In particular,
+the implementation distinguishes direct `$C2E9DC` clears from the `$C2E9D8`
+signed test/defer entry; collapsing those paths initially failed the live
+slot-three witness. This module remains unscheduled until `$C0D7E0`'s pair
+consumer and a real page-submission owner are composed.
