@@ -1022,6 +1022,16 @@ palette evidence. Frame parity remains 192 because the native pixel indices at
 the 361 revealed locations are still zero: the missing work is the prepared
 five-plane page producer, not another fade or palette substitution.
 
+`active_record_pose_commit.{c,h}` now preserves two bounded writers which
+mutate the active `$C46184`-family record: `$C14D0C-$C14D93` commits
+`+$18 -= local_delta` with its status/clamp/continuation decisions, and
+`$C25E6E-$C25E7D` publishes caller-produced `D2/D4` into `+$14/+$1C`.
+The run060 frame-925 oracle confirms `$72301 - $2580 = $6FD81`; because that
+result exceeds the source limit `$708`, it takes `$C1505E` before clearing the
+caller status bit. These are deliberately unscheduled leaves: the unported
+`$C13D84` parent still owns delta production, the downstream continuations,
+and the cadence that must drive the live scene record.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
