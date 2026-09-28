@@ -1163,6 +1163,14 @@ coordinate triple and transfers `$C45850` to the map pass's low-filter/column
 selector. Thus the parent map pass no longer has an opaque selector-template
 gap; detail fields, native page ownership, and outer scheduling remain open.
 
+`context_refresh_packet.{c,h}` now ports the structural
+`$C1C860-$C1CA2D` packet immediately before the map conditional in the parent
+middle. It refreshes active/origin selector terms, consumes the source request
+bits in order, invokes the explicit selector/stage callbacks, and preserves
+the guarded `$C2F66E` submission setup. Those callbacks still own their wider
+state, but the eventual parent scheduler now has the source packet that
+prepares its context instead of a placeholder refresh slot.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
