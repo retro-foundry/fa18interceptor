@@ -91,7 +91,9 @@ Its `$C1DD98-$C1DE38` work-term prefix is also ported: the selected workspace
 pair, C1D7E2 correction pair, and caller-owned translated/origin terms form
 the first and third source work longwords while the middle word remains clear.
 
-The remaining placement-builder work is its `$C1DC1C-$C1DE3E` source selector,
+`scene_placement_builder_prefix.{c,h}` now ports `$C1DC44-$C1DD34`: its two
+signed-byte maps select the source-scaled coordinate pairs and one bounded
+96-byte `$C48390` workspace cell. The remaining builder work is its setup,
 workspace traversal, descriptor route, and live-term ownership, using the new
 mutable workspace expansion as source-backed input. Do not schedule the
 renderer from a presentation frame or import a captured page.
