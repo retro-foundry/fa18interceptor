@@ -20,8 +20,8 @@ int fa18_run_parent_update_tail(FA18ParentUpdateTailState *state,
         if (run(ops->postflight_a, ops->context) != 0 ||
             run(ops->postflight_b, ops->context) != 0 ||
             run(ops->postflight_c, ops->context) != 0 ||
-            (uint8_t)(state->postflight_mode - 2u) == 0 &&
-                run(ops->postflight_mode_two, ops->context) != 0)
+            ((uint8_t)(state->postflight_mode - 2u) == 0 &&
+             run(ops->postflight_mode_two, ops->context) != 0))
             return -1;
     }
 
