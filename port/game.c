@@ -84,6 +84,15 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
         fa18_disk_close(&game->disk);
         return 0;
     }
+    file = fa18_disk_read(&game->disk, "pix/splsh", &size);
+    loaded = file && fa18_load_splsh_ilbm_page(&game->splash_page, file, size) == 0;
+    free(file);
+    if (!loaded) {
+        fputs("Cannot load source pix/splsh ILBM page\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
     if (fa18_initialize_scene_renderer_defaults(&game->scene_renderer_defaults) != 0) {
         fputs("Cannot initialize source scene renderer defaults\n", stderr);
         fa18_hunks_free(&game->exe);

@@ -1353,3 +1353,11 @@ python scripts/native_frame_count.py --to 392 --timeout 180
 At this handoff, expected frame-check result is `NATIVE_FRAME_COUNT=192`, with
 the first mismatch at frame 392 as described above.  A new exact result beyond
 that is welcome only if it arises from the faithful runtime pipeline.
+
+`ilbm_page_loader.{c,h}` now ports the bounded ADF decode side of `$C0E078`
+for `pix/splsh`: its strict 320x200 five-plane ByteRun1/CMAP boundary builds a
+separate native startup page from the original disk at `game.c` initialization.
+This is the source-backed `$C1AADC` family, not a capture and not a normal
+flight presentation route. Its View/Copper selector remains unresolved, so
+the page is deliberately unpresented; normal run075 output remains the
+authoritative validation path. See `analysis/routines/c0e078_splsh_ilbm_loader.md`.
