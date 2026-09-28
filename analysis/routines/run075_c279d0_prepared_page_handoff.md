@@ -50,3 +50,31 @@ The native port now exposes this exact bounded composition through
 live matrix decode/publish the packet, then the existing Hunk-25 traversal
 submits through a caller-initialized five-plane renderer. It deliberately does
 not choose the record, matrix, render page, display page, or call cadence.
+
+## Normal-replay cadence sample
+
+Single-frame ordinary-replay profiles for global frames 370--392 establish
+that the `$C279D0` entry is not a per-presentation operation. It occurs on
+global frames 373, 384, and 392 in that interval; `$C1612C` instead occurs on
+frames 380 and 389. `$C1718E` occurs on every sampled frame. The renderer and
+display publication clocks are therefore separate source paths.
+
+A return-bounded renderer trace armed at local frame 171 reaches `$C279D0` on
+local frame 173 (global frame 373) and returns to `$C0F0C8` after 11,352
+instructions. Its entry Slow-RAM state has `$C456B6=$C4567E`,
+`$C4566C=0`, and the same `$E7C1/$E64E/$FFFFFF83` packet recorded for the
+known frame-384 and frame-392 calls. The known render-page trace has instead
+`$C456B6=$C4566E`; frame 392 returns to `$C4567E`. Thus the source-backed
+page selection is:
+
+| Global frame | `$C279D0` | `$C456B6` page family |
+| ---: | :---: | --- |
+| 373 | yes | `$C4567E` |
+| 384 | yes | `$C4566E` (prepared display-page lower lanes) |
+| 392 | yes | `$C4567E` |
+
+The trace artifacts are `build/run075_frame373_c279d0_full/`,
+`build/run075_frame382_c279d0_render_page/`, and
+`build/run075_frame392_c279d0_first/`. This is evidence for a future
+state-owned selector/scheduler, not authority for frame-number logic in the
+native replay.
