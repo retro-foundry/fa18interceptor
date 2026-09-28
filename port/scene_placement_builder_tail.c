@@ -125,14 +125,34 @@ int fa18_build_scene_placement_record(const FA18ScenePlacementBuildInput *input,
     FA18ScenePlacementBuilderTailInput tail;
     uint32_t descriptor;
     int32_t work[3];
-    if (!input || !bytes || !input->workspace_item || !input->work || !input->resolve ||
-        fa18_decode_scene_placement_workspace_header(input->workspace_item, &header) ||
+    if (!input || !bytes || !input->workspace_item ||
+        fa18_decode_scene_placement_workspace_header(input->workspace_item, &header)) return -1;
+    if (input->use_published_work)
+        return fa18_finish_scene_placement_record_from_work(
+            input->workspace_item, input->published_descriptor_reference,
+            &input->tail, bytes, result);
+    if (!input->work || !input->resolve ||
         input->resolve(input->context, header.descriptor_index, &descriptor) ||
         fa18_build_scene_placement_work(input->work, work)) return -1;
-    memset(bytes, 0, FA18_SCENE_PLACEMENT_BYTES);
-    write_word(bytes, header.selector_word);
-    write_long(bytes + 2, descriptor);
     tail = input->tail;
     memcpy(tail.coordinate_work, work, sizeof work);
-    return fa18_finish_scene_placement_record(bytes, &tail, result);
+    return fa18_finish_scene_placement_record_from_work(input->workspace_item,
+                                                         descriptor, &tail, bytes,
+                                                         result);
+}
+
+int fa18_finish_scene_placement_record_from_work(
+    const uint8_t workspace_item[2], uint32_t descriptor_reference,
+    const FA18ScenePlacementBuilderTailInput *tail,
+    uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
+    FA18ScenePlacementBuilderTailResult *result) {
+    FA18ScenePlacementHeader header;
+
+    if (!workspace_item || !tail || !bytes || !result ||
+        fa18_decode_scene_placement_workspace_header(workspace_item, &header) != 0)
+        return -1;
+    memset(bytes, 0, FA18_SCENE_PLACEMENT_BYTES);
+    write_word(bytes, header.selector_word);
+    write_long(bytes + 2, descriptor_reference);
+    return fa18_finish_scene_placement_record(bytes, tail, result);
 }

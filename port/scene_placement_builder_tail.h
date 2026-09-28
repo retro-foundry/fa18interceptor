@@ -66,8 +66,27 @@ int fa18_finish_scene_placement_record(
     const FA18ScenePlacementBuilderTailInput *input,
     FA18ScenePlacementBuilderTailResult *result);
 
+/* `$C1DD36-$C1DD88` followed by `$C1E042-$C1E0B0`: emit a record from
+ * already-published work values.  Flagged descriptor routes retain the prior
+ * third scratch value, so they cannot use `$C1DD98-$C1DE38`'s payload helper. */
+int fa18_finish_scene_placement_record_from_work(
+    const uint8_t workspace_item[2], uint32_t descriptor_reference,
+    const FA18ScenePlacementBuilderTailInput *tail,
+    uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
+    FA18ScenePlacementBuilderTailResult *result);
+
 typedef int (*FA18ScenePlacementDescriptorResolve)(void *, uint8_t, uint32_t *);
-typedef struct { const uint8_t *workspace_item; const FA18ScenePlacementWorkInput *work; FA18ScenePlacementBuilderTailInput tail; FA18ScenePlacementDescriptorResolve resolve; void *context; } FA18ScenePlacementBuildInput;
+typedef struct {
+    const uint8_t *workspace_item;
+    const FA18ScenePlacementWorkInput *work;
+    FA18ScenePlacementBuilderTailInput tail;
+    FA18ScenePlacementDescriptorResolve resolve;
+    void *context;
+    /* `$C1DDE8` retains a prior third scratch word, so its caller has already
+     * formed all three `$C456EE/$F2/$F6` values and the descriptor reference. */
+    uint8_t use_published_work;
+    uint32_t published_descriptor_reference;
+} FA18ScenePlacementBuildInput;
 /* Compose the observed direct header/work/tail route into one 24-byte record. */
 int fa18_build_scene_placement_record(const FA18ScenePlacementBuildInput *, uint8_t[FA18_SCENE_PLACEMENT_BYTES], FA18ScenePlacementBuilderTailResult *);
 

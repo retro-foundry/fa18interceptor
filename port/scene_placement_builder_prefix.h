@@ -27,6 +27,9 @@ typedef struct {
 
 typedef struct {
     uint32_t selector_packet;
+    /* `$C1DCE4-$C1DCE8`: signed placement-map byte retained in `$C459BC`
+     * before the first record tail is emitted. */
+    int16_t record_tail_word;
     int32_t workspace_component[2];
     int32_t translation_component[2];
     uint8_t *workspace_cursor;

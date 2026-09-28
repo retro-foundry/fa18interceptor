@@ -11,8 +11,8 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  The configured suite contains **133** contracts;
-the last full run (before the final append-helper contract) passed 132/132.
+pixels; bbox x=7..318, y=101..199).  The configured suite contains **138** contracts;
+the last full run passed 138/138.
 
 ## Latest root-owner work
 
@@ -97,13 +97,15 @@ signed-byte maps select the source-scaled coordinate pairs and one bounded
 ports the following `$C1DD22-$C1DD34` cell walk, including its source
 terminator and bit-4/bit-6 payload stride; it composes the prefix and cell
 walk into one `$C1DC44-$C1E11A` record-emission boundary.
-`terrain_placement_direct.{c,h}` now supplies the observed flags-clear route:
-the cell payload, prefix, correction pair, projection packet, shift table, and
-`$C22188` table identity produce full records and the source cycle transition.
-The remaining builder work is the flagged descriptor branches and top-level
-live-term ownership, using the new mutable workspace expansion as
-source-backed input. Do not schedule the renderer from a presentation frame
-or import a captured page.
+`terrain_placement_direct.{c,h}` now supplies all bounded `$C1DD36-$C1E0B0`
+record routes: flags-clear entries use their six-byte payload, bit-4 entries
+bind mutable 512-byte `$C46184` records and preserve `$C1DE82`'s conditional
+bit clear, while bit-6 entries follow the 32-byte `$C48184` lookup before
+forming the `$C22188` identity. Flagged entries retain the caller-owned prior
+`$C456F6` third work value and use the distinct `$C459B5` tail. The normal
+tail now carries `$C459BC` exactly from the signed placement-map byte to the
+next ordinal. Top-level live-term ownership remains unported. Do not schedule
+the renderer from a presentation frame or import a captured page.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then

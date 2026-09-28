@@ -49,6 +49,7 @@ int fa18_prepare_scene_placement_builder_prefix(
 
     output->selector_packet = ((uint32_t)(uint8_t)first_byte << 8) |
                               (uint8_t)second_byte;
+    output->record_tail_word = (int16_t)placement_cell;
     output->workspace_component[0] = scale_word_by_four(
         input->workspace_pair_table[placement_cell]);
     output->workspace_component[1] = scale_word_by_four(
