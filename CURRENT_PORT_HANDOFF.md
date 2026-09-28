@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Implementation head before this handoff update: `d519a92b Load positive root pose tables`.
+- Implementation head: `d10a2361 Correct coordinate angle ratio source`.
 - The current working tree adds a source-addressed five-plane/Chip-RAM binding
   for the reusable `$C2FF58-$C30037` backend. User-owned untracked `.vscode/`
   remains untouched; do not discard it.
@@ -11,7 +11,7 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **121/121** tests.
+pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **127/127** tests.
 
 ## Latest root-owner work
 
@@ -47,6 +47,15 @@ be5c3fdb Record post-menu transition trace
 Current gates after the root work: native build check passes 233 files;
 `ctest` passes 123/123; native parity is unchanged at frames 200--391 exact,
 with the first mismatch at frame 392.
+
+Subsequent source-backed matrix work brings the native build check to 241
+files and the contract suite to 127/127.  The current pushed commits are
+`e97f6ee5` (matrix tail), `ee8aa794` (signed divide), `be061c83` (magnitude
+refinement), `bfc81a8b`/`626bc430` (negative-pair route and table oracle),
+and `d10a2361` (correct first-ratio operand).  The `$C12570` operand is the
+unscaled `$18(a6)` component shifted by six, not its earlier scaled value;
+the bounded route therefore reaches Hunk-63 table indexes 25 and 43 and
+publishes the traced output pair `(760,6760)`.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
