@@ -246,4 +246,7 @@
 #define STICK_X_HELD       0xC45832u /* byte: a left/right direction is latched */
 #define PLAYER_STICK       0xC461E9u /* byte: player record +$65; bits 4-5 Y, 2-3 X, while paused */
 
+/* ---- matrices ($C2E5AC) ------------------------------------------------- */
+#define MATRIX_ROW_SCALES  0xC45A3Eu /* word[3]: per-row scale, 8 fraction bits */
+
 #endif

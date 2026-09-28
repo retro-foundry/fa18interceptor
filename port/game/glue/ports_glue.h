@@ -142,4 +142,13 @@ int glue_C13A8E(void);
 /* batch 18: joystick */
 int glue_C16F1C(void);
 
+/* batch 19: rotation matrices and row scaling */
+int glue_C2E47A(void);
+int glue_C2E38E(void);
+int glue_C2E5AC(void);
+
+/* batch 19: three-angle matrix variants */
+int glue_C2E3DE(void);
+int glue_C2E514(void);
+
 #endif

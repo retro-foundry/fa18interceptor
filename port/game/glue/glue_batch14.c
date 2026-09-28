@@ -9,7 +9,8 @@
 
 /* $C2E5F6: D0.w, D2.w angles -> D0/D1 = sine/cosine of the first, D2/D3 of
  * the second; D7.w keeps the second lookup's table offset, A0 the table. */
-int glue_C2E5F6(void) {
+void sin_cos_pair_registers(void);
+void sin_cos_pair_registers(void) {
     int16_t first = (int16_t)D(0), second = (int16_t)D(2), off = (int16_t)(second * 2);
     Fixed14 s0, c0, s1, c1;
 
@@ -24,6 +25,10 @@ int glue_C2E5F6(void) {
     else if (off < 0xE10) SET_W(D(7), off - 0x708);
     else SET_W(D(7), off - 0x1518);
     A(0) = SINE_TABLE;
+}
+
+int glue_C2E5F6(void) {
+    sin_cos_pair_registers();
     return glue_return();
 }
 

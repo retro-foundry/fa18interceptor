@@ -139,6 +139,13 @@ const FA18Port fa18_ports[] = {
     {0xC13A8E, glue_C13A8E, "update_record_56_from_66", 200},
     /* batch 18: joystick */
     {0xC16F1C, glue_C16F1C, "read_joystick", 300},
+    /* batch 19: rotation matrices and row scaling */
+    {0xC2E47A, glue_C2E47A, "rotation_matrix", 900},
+    {0xC2E38E, glue_C2E38E, "two_angle_matrix", 520},
+    {0xC2E5AC, glue_C2E5AC, "scale_matrix_rows", 640},
+    /* batch 19: three-angle matrix variants */
+    {0xC2E3DE, glue_C2E3DE, "rotation_matrix8", 900},
+    {0xC2E514, glue_C2E514, "alternate_rotation_matrix", 900},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
