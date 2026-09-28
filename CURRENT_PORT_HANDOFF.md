@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: `198d0f35 Reconstruct scene dispatch record bank`.
+- Head: `239b3ed9 Correct root dispatch coverage handoff`.
 - The current working tree adds a source-addressed five-plane/Chip-RAM binding
   for the reusable `$C2FF58-$C30037` backend. User-owned untracked `.vscode/`
   remains untouched; do not discard it.
@@ -48,6 +48,13 @@ the trace-backed slot-14 `+$14/$18/$1C` tuple
 create root slot zero at `$C46184`, whose first producer remains an explicit
 boundary. The normal game loop also lacks source update/presentation ownership,
 so frame 392 remains unrendered in normal replay.
+
+A CPU changed-write watch over the root prefix `$C46100/$FFFF00`, replayed
+from the sealed run075 restore at recorder frame zero through frame 2,000,
+finds no root mutation. The restored record is therefore already initialized
+before this recorded run; replaying from its frame zero cannot recover the
+first root producer. This is negative evidence only: it does not authorize
+seeding native state from the save, and it leaves the root producer open.
 
 The user explicitly authorized a temporary opt-in display diagnostic while the
 scene producer is reconstructed. `--bootstrap-render-fixture CHIP` imports the
