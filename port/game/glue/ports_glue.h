@@ -172,4 +172,23 @@ int glue_C1F2EE(void);
 /* batch 22: magnitude */
 int glue_C1D974(void);
 
+/* batch 23: y-plane clips, sound routines, record orientation */
+int glue_C2EB4C(void);
+int glue_C2EBC2(void);
+int glue_C2F156(void);
+int glue_C17CF6(void);
+int glue_C17DAA(void);
+int glue_C17E4A(void);
+int glue_C17EF2(void);
+int glue_C18096(void);
+int glue_C2D954(void);
+
+/* batch 24: local to world, shown vertices, normalize, slot scan */
+int glue_C091E0(void);
+int glue_C091CE(void);
+int glue_C091A8(void);
+int glue_C0D334(void);
+int glue_C25754(void);
+int glue_C265E8(void);
+
 #endif

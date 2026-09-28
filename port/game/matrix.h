@@ -38,4 +38,13 @@ void scale_matrix_rows(gaddr matrix, gaddr scales);
  * nonzero angle), written at record + $92. */
 void inverse_orientation_matrix(gaddr record, uint16_t x, uint16_t y, uint16_t z);
 
+/* Give a record its orientation ($C2D954): the three angle words at +$66,
+ * the rotation at +$80 and its inverse at +$92. */
+void set_record_orientation(gaddr record, uint16_t x, uint16_t y, uint16_t z);
+
+/* A record-relative point in world coordinates ($C091E0, $C091CE,
+ * $C091A8): `matrix` (2.14) times (x, y, z), shifted down by 4, plus the
+ * record's position. */
+void local_to_world(gaddr record, gaddr matrix, int16_t x, int16_t y, int16_t z, int32_t out[3]);
+
 #endif

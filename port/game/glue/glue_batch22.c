@@ -13,9 +13,10 @@ static uint32_t divu_w(uint32_t dividend, uint16_t divisor) {
 }
 
 /* $C1D974: D2.w, D3.w, D4.w components -> D1 the magnitude. The caller
- * reads D3 and D4 as the two table lookups leave them, and the flags of the
- * final MOVE.W D1 store. */
-int glue_C1D974(void) {
+ * reads D3 and D4 as the two table lookups leave them (D2 the last divisor),
+ * and the flags of the final MOVE.W D1 store. */
+void magnitude_registers(void);
+void magnitude_registers(void) {
     uint32_t d2 = D(2), d3 = D(3), d4 = D(4), t;
     int32_t result;
 
@@ -51,8 +52,13 @@ int glue_C1D974(void) {
 
     result = magnitude3((int16_t)D(2), (int16_t)D(3), (int16_t)D(4));
     D(1) = (uint32_t)result;
+    D(2) = d2;
     D(3) = d3;
     D(4) = d4;
     flags_logic_w(D(1));
+}
+
+int glue_C1D974(void) {
+    magnitude_registers();
     return glue_return();
 }

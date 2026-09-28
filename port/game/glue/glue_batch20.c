@@ -63,7 +63,8 @@ int glue_C122A2(void) {
 
 /* $C0D384: A3 workspace. The caller reads D6, D7 and A4: the last sum,
  * loaded by MOVEM.W from $4E (sign-extended) and advanced by word adds. */
-int glue_C0D384(void) {
+void vertex_tail_registers(void);
+void vertex_tail_registers(void) {
     gaddr w = A(3);
     int16_t x = rd_s16(w + 0x4E), y = rd_s16(w + 0x50), z = rd_s16(w + 0x52);
     int16_t nz;
@@ -72,6 +73,10 @@ int glue_C0D384(void) {
     D(7) = ((uint32_t)(int32_t)y & 0xFFFF0000u) | rd_u16(w + 0xD4);
     nz = (int16_t)(rd_u16(w + 0xD6) - (uint16_t)z);
     A(4) = (uint32_t)((int32_t)z + nz);
+}
+
+int glue_C0D384(void) {
+    vertex_tail_registers();
     return glue_return();
 }
 
@@ -98,11 +103,10 @@ int glue_C06132(void) {
  * record: D0 = sound << 2, A0 its SOUND_VOICES entry. Otherwise
  * clear_voice_interrupt's D0 = channel << 2 and A0 = that channel's voice
  * record, D1 = channel << 2, A1 the SOUND_VOICES entry. */
-int glue_C17B2C(void) {
-    uint32_t sound = rd_u32(A(7) + 4), channel = rd_u32(A(7) + 8), volume = rd_u32(A(7) + 12);
+void play_sound_registers(uint32_t sound, uint32_t channel);
+void play_sound_registers(uint32_t sound, uint32_t channel) {
     gaddr entry = SOUND_VOICES + (sound << 2);
     int plays = rd_u32(entry) != 0;
-    play_sound((int)sound, (int)channel, (int32_t)volume);
     if (!plays) {
         D(0) = sound << 2;
         A(0) = entry;
@@ -114,5 +118,11 @@ int glue_C17B2C(void) {
         A(1) = entry;
         flags_logic_w(rd_u16(A(0) + 0x14)); /* the interrupt bit written to INTREQ */
     }
+}
+
+int glue_C17B2C(void) {
+    uint32_t sound = rd_u32(A(7) + 4), channel = rd_u32(A(7) + 8), volume = rd_u32(A(7) + 12);
+    play_sound((int)sound, (int)channel, (int32_t)volume);
+    play_sound_registers(sound, channel);
     return glue_return();
 }

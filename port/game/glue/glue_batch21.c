@@ -1,5 +1,5 @@
-/* Glue for the side-plane clips $C2EA5A, $C2EAD0, $C2F0C6, $C2F0F4 and the
- * view transform $C1F2EE. */
+/* Glue for the view-plane clips ($C2EA5A, $C2EAD0, $C2EB4C, $C2EBC2,
+ * $C2F0C6, $C2F0F4, $C2F156) and the view transform $C1F2EE. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -10,18 +10,22 @@
 
 /* The clips save and restore D0-D6: the result is only the Z flag (MOVEQ
  * #1 or #0 just before the restore). */
-static int clip_glue(gaddr p, int side, int rounded) {
-    int outside = clip_to_side_plane(p, (int16_t)D(3), (int16_t)D(4), (int16_t)D(5), side, rounded);
+static int clip_glue(gaddr p, int axis, int side, int rounded) {
+    int outside = clip_to_view_plane(p, (int16_t)D(3), (int16_t)D(4), (int16_t)D(5), axis, side, rounded);
     flags_logic_l((uint32_t)outside);
     return glue_return();
 }
 
-/* $C2EA5A, $C2EAD0: the point at A1 + D1.w. */
-int glue_C2EA5A(void) { return clip_glue(A(1) + (gaddr)(int32_t)(int16_t)D(1), CLIP_RIGHT, 1); }
-int glue_C2EAD0(void) { return clip_glue(A(1) + (gaddr)(int32_t)(int16_t)D(1), CLIP_LEFT, 1); }
-/* $C2F0C6, $C2F0F4: the point at A1 + 6. */
-int glue_C2F0C6(void) { return clip_glue(A(1) + 6, CLIP_RIGHT, 0); }
-int glue_C2F0F4(void) { return clip_glue(A(1) + 6, CLIP_LEFT, 0); }
+#define INDEXED (A(1) + (gaddr)(int32_t)(int16_t)D(1)) /* the point at A1 + D1.w */
+
+int glue_C2EA5A(void) { return clip_glue(INDEXED, CLIP_X, 1, 1); }
+int glue_C2EAD0(void) { return clip_glue(INDEXED, CLIP_X, -1, 1); }
+int glue_C2EB4C(void) { return clip_glue(INDEXED, CLIP_Y, 1, 1); }
+int glue_C2EBC2(void) { return clip_glue(INDEXED, CLIP_Y, -1, 1); }
+/* The truncated forms take the point at A1 + 6. */
+int glue_C2F0C6(void) { return clip_glue(A(1) + 6, CLIP_X, 1, 0); }
+int glue_C2F0F4(void) { return clip_glue(A(1) + 6, CLIP_X, -1, 0); }
+int glue_C2F156(void) { return clip_glue(A(1) + 6, CLIP_Y, -1, 0); }
 
 /* $C1F2EE: A1 - 6 the point, the shift in the caller's frame at -8(A6), A3
  * the output (advanced by 6). Every register is live after it: D2-D4 the

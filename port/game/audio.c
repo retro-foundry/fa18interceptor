@@ -1,6 +1,8 @@
 /* Sound output levels. */
 #include "audio.h"
 
+#include "fixed_math.h"
+
 #include "globals.h"
 #include "hardware.h"
 
@@ -104,4 +106,87 @@ void play_alert_tone(int32_t volume) {
     wr_u32(voice + 0x18, 0xFFFE0000u);        /* pitch slide -2 per tick */
     wr_u32(voice + 0x10, 1);
     play_sound(SOUND_ALERT, 2, volume);
+}
+
+static gaddr sound_voice(int sound) {
+    return rd_u32(SOUND_VOICES + (gaddr)(4 * sound));
+}
+
+void play_engine(int32_t period, int32_t volume) {
+    gaddr low, high;
+    if (!(rd_u8(SOUND_FLAGS) & 0x02) || !sound_voice(SOUND_ENGINE_HIGH)) return;
+    low = sound_voice(SOUND_ENGINE_LOW);
+    high = sound_voice(SOUND_ENGINE_HIGH);
+    wr_u32(high + VOICE_VOLUME_SLIDE, 0);
+    wr_u32(low + VOICE_VOLUME_SLIDE, 0);
+    wr_u32(high + VOICE_PERIOD_SLIDE, 0);
+    wr_u32(low + VOICE_PERIOD_SLIDE, 0);
+    wr_u32(low + VOICE_PERIOD, (uint32_t)period << 16);
+    wr_u32(high + VOICE_PERIOD, (uint32_t)(period + 2) << 16);
+    play_sound(SOUND_ENGINE_LOW, 0, volume);
+    play_sound(SOUND_ENGINE_HIGH, 1, volume);
+}
+
+void slide_engine(int32_t period, int32_t volume, int32_t ticks) {
+    gaddr high, low;
+    int32_t remainder, step;
+    if (!(rd_u8(SOUND_FLAGS) & 0x02) || !rd_u32(VOICE_SLOTS + 4)) return;
+    high = rd_u32(VOICE_SLOTS + 4);
+    low = rd_u32(VOICE_SLOTS);
+    step = long_divide((int32_t)((uint32_t)period << 16) - rd_s32(low + VOICE_PERIOD), ticks, &remainder);
+    wr_s32(high + VOICE_PERIOD_SLIDE, step);
+    wr_s32(low + VOICE_PERIOD_SLIDE, step);
+    wr_s32(high + VOICE_PERIOD_TICKS, ticks);
+    wr_s32(low + VOICE_PERIOD_TICKS, ticks);
+    step = long_divide((int32_t)((uint32_t)volume << 16) - rd_s32(low + VOICE_VOLUME), ticks, &remainder);
+    wr_s32(high + VOICE_VOLUME_SLIDE, step);
+    wr_s32(low + VOICE_VOLUME_SLIDE, step);
+    wr_s32(high + VOICE_VOLUME_TICKS, ticks);
+    wr_s32(low + VOICE_VOLUME_TICKS, ticks);
+}
+
+void play_noise(int32_t volume) {
+    if (!(rd_u8(SOUND_FLAGS) & 0x10)) {
+        free_voice(0);
+        free_voice(1);
+        return;
+    }
+    if (!sound_voice(SOUND_NOISE_HIGH)) return;
+    wr_u32(sound_voice(SOUND_NOISE_LOW) + VOICE_PERIOD, (uint32_t)(random_bits(6) + 0x168) << 16);
+    wr_u32(sound_voice(SOUND_NOISE_HIGH) + VOICE_PERIOD, (uint32_t)(random_bits(6) + 0x168) << 16);
+    play_sound(SOUND_NOISE_LOW, 0, volume);
+    play_sound(SOUND_NOISE_HIGH, 1, volume);
+}
+
+void play_programmed_sound(const int32_t a[9]) {
+    gaddr voice = sound_voice(SOUND_PROGRAMMED);
+    if (!voice) return;
+    free_voice(3);
+    wr_s32(PROGRAM_4_VALUES + 0x00, a[7]);
+    wr_s32(PROGRAM_4_VALUES + 0x08, a[6]);
+    wr_u32(PROGRAM_4_VALUES + 0x10, (uint32_t)a[0] << 16);
+    wr_u32(PROGRAM_4_VALUES + 0x18, (uint32_t)a[1] << 16);
+    wr_s32(PROGRAM_4_VALUES + 0x20, a[2]);
+    wr_u32(PROGRAM_4_VALUES + 0x28, (uint32_t)a[3] << 16);
+    wr_u32(PROGRAM_4_VALUES + 0x30, (uint32_t)a[4] << 16);
+    wr_s32(PROGRAM_4_VALUES + 0x38, a[5]);
+    wr_s32(PROGRAM_4_VALUES + 0x48, a[8]);
+    voice = sound_voice(SOUND_PROGRAMMED);
+    wr_u32(voice + VOICE_POSITION, 0);
+    wr_u32(voice + VOICE_DELAY, 1);
+    play_sound(SOUND_PROGRAMMED, 3, 0);
+}
+
+void play_scripted_sound(int32_t volume) {
+    gaddr voice;
+    if (!(rd_u8(SOUND_FLAGS) & 0x40)) return;
+    if (rd_u16(SCRIPT_RECORD) != rd_u16(VIEW_RECORD)) return;
+    if (!sound_voice(SOUND_SCRIPTED)) return;
+    free_voice(2);
+    voice = sound_voice(SOUND_SCRIPTED);
+    wr_u32(voice + VOICE_DELAY, 0);
+    wr_u32(voice + VOICE_PROGRAM, SCRIPTED_SOUND_PROGRAM);
+    wr_u32(voice + VOICE_POSITION, 0);
+    wr_u32(voice + VOICE_DELAY, 1);
+    play_sound(SOUND_SCRIPTED, 2, volume);
 }

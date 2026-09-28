@@ -65,4 +65,15 @@ int32_t long_divide(int32_t dividend, int32_t divisor, int32_t *remainder);
  * the same with z. Capped at $7FFF (low word) and stored in MAGNITUDE. */
 int32_t magnitude3(int16_t x, int16_t y, int16_t z);
 
+/* NORMALIZED = (x, y, z) scaled to about `scale` / length, signed by the
+ * sign of `scale` ($C25754, using magnitude3). All zero when the scale or
+ * the length is zero. */
+void normalize_vector(int32_t scale, int32_t x, int32_t y, int32_t z);
+
+/* $C265E8: the first flagged slot (bit 0 of +$27, scanning 19 down to 0)
+ * that is armed (bit 5 of +$26, or any context running): 1 when its
+ * record's distance from the observer is at most the slot's own offset
+ * point's distance, else 0. */
+int flagged_slot_in_range(void);
+
 #endif

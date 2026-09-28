@@ -1,5 +1,7 @@
 #include "matrix.h"
 
+#include "globals.h"
+
 #include "fixed_math.h"
 
 /* A 2.14 product, as the 68000 code keeps it: MULS then ASR.L #14. */
@@ -117,4 +119,21 @@ static uint16_t negated_angle(uint16_t angle) {
 
 void inverse_orientation_matrix(gaddr record, uint16_t x, uint16_t y, uint16_t z) {
     alternate_rotation_matrix(negated_angle(x), negated_angle(y), negated_angle(z), record + 0x92);
+}
+
+void set_record_orientation(gaddr record, uint16_t x, uint16_t y, uint16_t z) {
+    wr_u16(record + 0x66, x);
+    wr_u16(record + 0x68, y);
+    wr_u16(record + 0x6A, z);
+    rotation_matrix(x, y, z, record + 0x80);
+    inverse_orientation_matrix(record, x, y, z);
+}
+
+void local_to_world(gaddr record, gaddr matrix, int16_t x, int16_t y, int16_t z, int32_t out[3]) {
+    int row;
+    for (row = 0; row < 3; row++) {
+        gaddr m = matrix + (gaddr)(6 * row);
+        int32_t sum = (int32_t)x * rd_s16(m) + (int32_t)y * rd_s16(m + 2) + (int32_t)z * rd_s16(m + 4);
+        out[row] = (sum >> 4) + rd_s32(record + RECORD_POSITION + (gaddr)(4 * row));
+    }
 }

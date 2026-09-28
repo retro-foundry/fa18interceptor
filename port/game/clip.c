@@ -25,9 +25,15 @@ static int16_t rounded_quotient(int32_t dividend, int16_t divisor) {
     return (int16_t)(q < 0 ? q - 1 : q + 1);
 }
 
-int clip_to_side_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int side, int rounded) {
+int clip_to_view_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int axis, int side, int rounded) {
     int16_t px = rd_s16(p), py = rd_s16(p + 2), pz = rd_s16(p + 4);
-    int16_t dx, denominator, x, y, z, qy_in;
+    int16_t dx, denominator, x, y, z, qy_in, t;
+
+    /* The y planes are the x planes with the two axes exchanged. */
+    if (axis == CLIP_Y) {
+        t = px; px = py; py = t;
+        t = qx; qx = qy; qy = t;
+    }
 
     if (rounded) {
         qx = (int16_t)(qx - 1);
@@ -55,6 +61,9 @@ int clip_to_side_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int side, in
         z = (int16_t)(pz - q);
     }
     x = side < 0 ? (int16_t)-z : z;
+    if (axis == CLIP_Y) {
+        t = x; x = y; y = t;
+    }
 
     wr_s16(CLIP_POINT, x);
     wr_s16(CLIP_POINT + 2, y);

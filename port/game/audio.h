@@ -6,8 +6,18 @@
 /* Voice records hold 16.16 fixed-point pitch and volume; the hardware gets
  * their integer parts. */
 enum {
-    VOICE_PERIOD = 0x08, /* long: Paula period, 16.16 */
-    VOICE_VOLUME = 0x0C  /* long: volume 0-63, 16.16 */
+    VOICE_PERIOD = 0x08,       /* long: Paula period, 16.16 */
+    VOICE_VOLUME = 0x0C,       /* long: volume 0-63, 16.16 */
+    VOICE_PERIOD_SLIDE = 0x18, /* long: added to the period each tick */
+    VOICE_VOLUME_SLIDE = 0x1C, /* long: added to the volume each tick */
+    VOICE_PERIOD_TICKS = 0x38, /* long: ticks the period slide lasts */
+    VOICE_VOLUME_TICKS = 0x3C  /* long: ticks the volume slide lasts */
+};
+
+/* Sounds with dedicated routines. */
+enum {
+    SOUND_ENGINE_LOW = 2, SOUND_ENGINE_HIGH = 3, SOUND_PROGRAMMED = 4,
+    SOUND_NOISE_LOW = 8, SOUND_NOISE_HIGH = 9, SOUND_SCRIPTED = 11
 };
 
 /* Paula channel registers relative to the channel base ($DFF0A0 + 16*n). */
@@ -52,5 +62,28 @@ void play_sound(int sound, int channel, int32_t volume);
 /* The alert tone on channel 2, when enabled and the view shows the scripted
  * record. */
 void play_alert_tone(int32_t volume);
+
+/* The engine pair (sounds 2 and 3 on channels 0 and 1) at `period` and
+ * period + 2, when enabled (SOUND_FLAGS bit 1) and sound 3 exists
+ * ($C17CF6). Any slides stop. */
+void play_engine(int32_t period, int32_t volume);
+
+/* Slide the engine pair from its current period and volume to `period` and
+ * `volume` over `ticks` ticks ($C17DAA). */
+void slide_engine(int32_t period, int32_t volume, int32_t ticks);
+
+/* The noise pair (sounds 8 and 9 on channels 0 and 1) at random periods
+ * $168-$1A7 when SOUND_FLAGS bit 4 is set; otherwise channels 0 and 1 are
+ * freed ($C17E4A). */
+void play_noise(int32_t volume);
+
+/* Sound 4 on channel 3 with its program's values set from the arguments
+ * ($C17EF2): nine longs, see the definition. */
+void play_programmed_sound(const int32_t args[9]);
+
+/* Sound 11 on channel 2 with the program at SCRIPTED_SOUND_PROGRAM, when
+ * enabled (SOUND_FLAGS bit 6) and the view shows the scripted record
+ * ($C18096). */
+void play_scripted_sound(int32_t volume);
 
 #endif

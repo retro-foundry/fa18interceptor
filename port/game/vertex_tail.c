@@ -1,5 +1,7 @@
 #include "vertex_tail.h"
 
+#include "globals.h"
+
 /* A vertex: three coordinate words, wrapping as the 68000 word arithmetic
  * does. */
 typedef struct {
@@ -73,4 +75,14 @@ void derive_vertex_tail(gaddr w) {
     n = add(n, l);
     put(w, 0xCC, add(get(w, 0x42), n));
     put(w, 0xD2, add(get(w, 0x4E), n));
+}
+
+gaddr derive_shown_vertices(gaddr stream) {
+    gaddr shown = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD) + 0xA4);
+    gaddr w = WORKSPACES + (gaddr)(int32_t)rd_s16(stream);
+
+    derive_vertex_tail(shown);
+    derive_vertex_tail(w);
+    put(w, 0x294, midpoint(midpoint(get(w, 0x6C), get(w, 0x72)), get(w, 0x60)));
+    return stream + 2;
 }

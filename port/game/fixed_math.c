@@ -206,3 +206,71 @@ int32_t magnitude3(int16_t x, int16_t y, int16_t z) {
     wr_u16(MAGNITUDE, (uint16_t)result);
     return result;
 }
+
+/* NEG.W when negative: -32768 stays. */
+static int16_t abs16(int16_t v) {
+    return v < 0 ? (int16_t)-v : v;
+}
+
+void normalize_vector(int32_t scale, int32_t x, int32_t y, int32_t z) {
+    int16_t size = (int16_t)scale, rx = 0, ry = 0, rz = 0;
+    int32_t length = 0, factor;
+    int shift;
+
+    if (size != 0) length = magnitude3((int16_t)abs16((int16_t)x), (int16_t)abs16((int16_t)y), (int16_t)abs16((int16_t)z));
+    if (size != 0 && (int16_t)length != 0) {
+        if (size < 0) size = (int16_t)-size;
+        /* A power-of-four multiple of the scale just above the length. */
+        factor = size;
+        shift = 8;
+        while (factor <= length) {
+            factor <<= 2;
+            shift += 2;
+        }
+        do {
+            factor >>= 2;
+            shift -= 2;
+        } while (shift > 1 && factor > length);
+        factor <<= 2;
+        shift += 2;
+        factor = (int32_t)divu_w((uint32_t)factor << 8, (uint16_t)length);
+        rx = (int16_t)(((int32_t)(int16_t)x * (int16_t)factor) >> shift);
+        ry = (int16_t)(((int32_t)(int16_t)y * (int16_t)factor) >> shift);
+        rz = (int16_t)(((int32_t)(int16_t)z * (int16_t)factor) >> shift);
+        if ((int16_t)((uint32_t)scale >> 16) < 0) {
+            rx = (int16_t)-rx;
+            ry = (int16_t)-ry;
+            rz = (int16_t)-rz;
+        }
+    }
+    wr_s16(NORMALIZED, rx);
+    wr_s16(NORMALIZED + 2, ry);
+    wr_s16(NORMALIZED + 4, rz);
+}
+
+/* |a - b| >> 8, components of two long positions. */
+static int16_t distance_part(int32_t a, int32_t b) {
+    int32_t d = a - b;
+    if (d < 0) d = -d;
+    return (int16_t)(d >> 8);
+}
+
+int flagged_slot_in_range(void) {
+    int i;
+    for (i = SLOT_COUNT - 1; i >= 0; i--) {
+        gaddr slot = SLOT_TABLE + (gaddr)(SLOT_SIZE * i), record, observer = OBSERVER;
+        int16_t near, far;
+        if (!(rd_u8(slot + 0x27) & 0x01)) continue;
+        if (!(rd_u8(slot + 0x26) & 0x20) && !rd_u8(CONTEXT_SELECT)) return 0;
+        record = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)(rd_s16(slot + 0x2E) << 9);
+        near = (int16_t)magnitude3(distance_part(rd_s32(record + 0x14), rd_s32(observer + 0x0C)),
+                                   distance_part(rd_s32(record + 0x18), rd_s32(observer + 0x10)),
+                                   distance_part(rd_s32(record + 0x1C), rd_s32(observer + 0x14)));
+        far = (int16_t)magnitude3(
+            distance_part(rd_s32(slot) + (int32_t)((uint32_t)(int32_t)rd_s16(slot + 0x30) << 22), rd_s32(observer + 0x0C)),
+            distance_part(rd_s32(slot + 4), rd_s32(observer + 0x10)),
+            distance_part(rd_s32(slot + 8) + (int32_t)((uint32_t)(int32_t)rd_s16(slot + 0x32) << 22), rd_s32(observer + 0x14)));
+        return near > far ? 0 : 1;
+    }
+    return 0;
+}

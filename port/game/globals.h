@@ -237,7 +237,7 @@
 
 /* ---- sounds ($C17B2C, $C1803C) ------------------------------------------- */
 #define SOUND_VOICES       0xC0A438u /* long[]: voice record of each sound */
-#define SOUND_FLAGS        0xC45B5Bu /* byte: bit 2 = alert tone enabled */
+#define SOUND_FLAGS        0xC45B5Bu /* byte: enables: bit 1 engine, 2 alert tone, 4 noise, 6 scripted */
 #define SOUND_ALERT        5         /* the alert tone's sound number */
 
 /* ---- joystick ($C16F1C) --------------------------------------------------- */
@@ -268,5 +268,19 @@
 /* ---- magnitude ($C1D974) ------------------------------------------------- */
 #define MAGNITUDE_TABLE    0xC1D9D8u /* word[]: sqrt(1 + (i/256)^2), 2.14 */
 #define MAGNITUDE          0xC45B40u /* word: the last magnitude3 result */
+
+/* ---- sound programs ($C17EF2, $C18096) ---------------------------------- */
+#define PROGRAM_4_VALUES       0xC50B7Cu /* long[]: sound 4 program values, 8 bytes apart */
+#define SCRIPTED_SOUND_PROGRAM 0xC50C00u /* sound 11's voice program */
+
+/* ---- world transforms and slots ($C091E0, $C265E8, $C25754) ------------- */
+#define RECORD_POSITION    0x14      /* long[3] in a control record: world x, y, z */
+#define RECORD_INVERSE     0x92      /* word[9] in a control record: inverse orientation */
+#define OBSERVER           0xC45C32u /* observer; long[3] position at +$0C */
+#define SLOT_TABLE         0xC45C72u /* 20 slots of 64 bytes */
+#define SLOT_COUNT         20
+#define SLOT_SIZE          64
+#define WORKSPACES         0xC48390u /* renderer workspaces, offset by stream words */
+#define NORMALIZED         0xC45A4Cu /* word[3]: normalize_vector's result */
 
 #endif

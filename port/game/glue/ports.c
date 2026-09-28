@@ -163,6 +163,23 @@ const FA18Port fa18_ports[] = {
     {0xC1F2EE, glue_C1F2EE, "view_transform", 560},
     /* batch 22: magnitude */
     {0xC1D974, glue_C1D974, "magnitude3", 500},
+    /* batch 23: y-plane clips, sound routines, record orientation */
+    {0xC2EB4C, glue_C2EB4C, "clip_to_view_plane", 430},
+    {0xC2EBC2, glue_C2EBC2, "clip_to_view_plane", 440},
+    {0xC2F156, glue_C2F156, "clip_to_view_plane", 340},
+    {0xC17CF6, glue_C17CF6, "play_engine", 700},
+    {0xC17DAA, glue_C17DAA, "slide_engine", 1500},
+    {0xC17E4A, glue_C17E4A, "play_noise", 2000},
+    {0xC17EF2, glue_C17EF2, "play_programmed_sound", 900},
+    {0xC18096, glue_C18096, "play_scripted_sound", 700},
+    {0xC2D954, glue_C2D954, "set_record_orientation", 2000},
+    /* batch 24: local to world, shown vertices, normalize, slot scan */
+    {0xC091E0, glue_C091E0, "local_to_world", 700},
+    {0xC091CE, glue_C091CE, "local_to_world", 720},
+    {0xC091A8, glue_C091A8, "local_to_world", 2600},
+    {0xC0D334, glue_C0D334, "derive_shown_vertices", 2800},
+    {0xC25754, glue_C25754, "normalize_vector", 1600},
+    {0xC265E8, glue_C265E8, "flagged_slot_in_range", 3500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
