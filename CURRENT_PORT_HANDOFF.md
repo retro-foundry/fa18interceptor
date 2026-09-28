@@ -26,6 +26,15 @@ distinction.  This supplies real immutable-derived gates to the future
 `$C1D10C` cursor/template owner; normal scheduling still does not invoke that
 owner, so the frame-402 native gate remains zero pixels.
 
+The completed run075 frame-382 `$C2AA9C` parent packet narrows the remaining
+map-render owner.  Its live root is selected at offset zero and has `+$06/+08
+= $0044/$0044`; these yield the already-portable first selector pair
+`$0011/$0011` and second pair `$0044/$0044`.  The trace's missing native
+inputs are therefore the mutable parent flags (including the append/alternate
+pack selection) plus the map detail/workspace/page state, rather than a new
+active-record decode.  These trace values are an integration oracle only and
+must not be embedded as frame-specific runtime defaults.
+
 `scene_template_cursor_context.{c,h}` now ports the mutable pack handoff at
 `$C1D10C-$C1D22C`: it feeds the already reconstructed cursor resolver from the
 first `$C45948/$C4594A` selector pair, the second
