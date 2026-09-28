@@ -1,0 +1,829 @@
+{
+  "classification": "verified dynamic JSR/BSR stack pushes only; native coverage means an address-linked port source reference, not semantic completeness",
+  "trace": "build\\run075_frame392_parent_callgraph_trace\\trace.jsonl",
+  "instruction_rows": 31800,
+  "verified_game_calls": 174,
+  "distinct_edges": 64,
+  "distinct_dynamic_callees": 49,
+  "address_linked_native_callees": 26,
+  "callees_without_native_address_evidence": 23,
+  "edges": [
+    {
+      "caller": 12644518,
+      "callee": 12700436,
+      "calls": 1
+    },
+    {
+      "caller": 12644532,
+      "callee": 12700454,
+      "calls": 1
+    },
+    {
+      "caller": 12644546,
+      "callee": 12745168,
+      "calls": 1
+    },
+    {
+      "caller": 12644576,
+      "callee": 12740072,
+      "calls": 1
+    },
+    {
+      "caller": 12644624,
+      "callee": 12700860,
+      "calls": 1
+    },
+    {
+      "caller": 12644638,
+      "callee": 12669324,
+      "calls": 1
+    },
+    {
+      "caller": 12669342,
+      "callee": 12776592,
+      "calls": 1
+    },
+    {
+      "caller": 12677978,
+      "callee": 12926656,
+      "calls": 1
+    },
+    {
+      "caller": 12678056,
+      "callee": 12926656,
+      "calls": 1
+    },
+    {
+      "caller": 12678214,
+      "callee": 12734440,
+      "calls": 4
+    },
+    {
+      "caller": 12700806,
+      "callee": 12709396,
+      "calls": 1
+    },
+    {
+      "caller": 12701384,
+      "callee": 12701878,
+      "calls": 2
+    },
+    {
+      "caller": 12701484,
+      "callee": 12704026,
+      "calls": 2
+    },
+    {
+      "caller": 12701606,
+      "callee": 12709196,
+      "calls": 1
+    },
+    {
+      "caller": 12701606,
+      "callee": 12724928,
+      "calls": 1
+    },
+    {
+      "caller": 12701842,
+      "callee": 12736630,
+      "calls": 2
+    },
+    {
+      "caller": 12711786,
+      "callee": 12712844,
+      "calls": 1
+    },
+    {
+      "caller": 12711804,
+      "callee": 12713026,
+      "calls": 2
+    },
+    {
+      "caller": 12712152,
+      "callee": 12636236,
+      "calls": 1
+    },
+    {
+      "caller": 12712258,
+      "callee": 12713714,
+      "calls": 1
+    },
+    {
+      "caller": 12712258,
+      "callee": 12713986,
+      "calls": 1
+    },
+    {
+      "caller": 12712258,
+      "callee": 12714076,
+      "calls": 15
+    },
+    {
+      "caller": 12712258,
+      "callee": 12716030,
+      "calls": 1
+    },
+    {
+      "caller": 12712258,
+      "callee": 12716608,
+      "calls": 1
+    },
+    {
+      "caller": 12712258,
+      "callee": 12718768,
+      "calls": 4
+    },
+    {
+      "caller": 12712300,
+      "callee": 12712346,
+      "calls": 2
+    },
+    {
+      "caller": 12712332,
+      "callee": 12713504,
+      "calls": 1
+    },
+    {
+      "caller": 12712332,
+      "callee": 12713738,
+      "calls": 1
+    },
+    {
+      "caller": 12712332,
+      "callee": 12717416,
+      "calls": 1
+    },
+    {
+      "caller": 12713782,
+      "callee": 12712834,
+      "calls": 1
+    },
+    {
+      "caller": 12714168,
+      "callee": 12712834,
+      "calls": 6
+    },
+    {
+      "caller": 12714214,
+      "callee": 12732062,
+      "calls": 3
+    },
+    {
+      "caller": 12716916,
+      "callee": 12732064,
+      "calls": 4
+    },
+    {
+      "caller": 12717066,
+      "callee": 12732064,
+      "calls": 4
+    },
+    {
+      "caller": 12717596,
+      "callee": 12774986,
+      "calls": 4
+    },
+    {
+      "caller": 12718852,
+      "callee": 12774986,
+      "calls": 12
+    },
+    {
+      "caller": 12732294,
+      "callee": 12732352,
+      "calls": 2
+    },
+    {
+      "caller": 12732318,
+      "callee": 12732352,
+      "calls": 10
+    },
+    {
+      "caller": 12732524,
+      "callee": 12732594,
+      "calls": 2
+    },
+    {
+      "caller": 12732556,
+      "callee": 12732594,
+      "calls": 9
+    },
+    {
+      "caller": 12732758,
+      "callee": 12732822,
+      "calls": 1
+    },
+    {
+      "caller": 12732784,
+      "callee": 12732822,
+      "calls": 4
+    },
+    {
+      "caller": 12733530,
+      "callee": 12732822,
+      "calls": 1
+    },
+    {
+      "caller": 12733792,
+      "callee": 12779336,
+      "calls": 1
+    },
+    {
+      "caller": 12745780,
+      "callee": 12779336,
+      "calls": 2
+    },
+    {
+      "caller": 12745980,
+      "callee": 12776948,
+      "calls": 2
+    },
+    {
+      "caller": 12745988,
+      "callee": 12776970,
+      "calls": 3
+    },
+    {
+      "caller": 12775028,
+      "callee": 12775622,
+      "calls": 1
+    },
+    {
+      "caller": 12775050,
+      "callee": 12775668,
+      "calls": 1
+    },
+    {
+      "caller": 12775084,
+      "callee": 12775668,
+      "calls": 1
+    },
+    {
+      "caller": 12775144,
+      "callee": 12775766,
+      "calls": 1
+    },
+    {
+      "caller": 12775560,
+      "callee": 12778110,
+      "calls": 12
+    },
+    {
+      "caller": 12779346,
+      "callee": 12780022,
+      "calls": 3
+    },
+    {
+      "caller": 12779408,
+      "callee": 12780646,
+      "calls": 1
+    },
+    {
+      "caller": 12779458,
+      "callee": 12780646,
+      "calls": 1
+    },
+    {
+      "caller": 12779508,
+      "callee": 12780646,
+      "calls": 1
+    },
+    {
+      "caller": 12779558,
+      "callee": 12780646,
+      "calls": 1
+    },
+    {
+      "caller": 12779562,
+      "callee": 12780722,
+      "calls": 1
+    },
+    {
+      "caller": 12780214,
+      "callee": 12778110,
+      "calls": 1
+    },
+    {
+      "caller": 12780324,
+      "callee": 12780970,
+      "calls": 5
+    },
+    {
+      "caller": 12780348,
+      "callee": 12780970,
+      "calls": 1
+    },
+    {
+      "caller": 12910972,
+      "callee": 12911122,
+      "calls": 8
+    },
+    {
+      "caller": 12910982,
+      "callee": 12911072,
+      "calls": 8
+    },
+    {
+      "caller": 12926674,
+      "callee": 12593206,
+      "calls": 2
+    }
+  ],
+  "callees": [
+    {
+      "address": 12593206,
+      "label": "$C02836",
+      "calls": 2,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12636236,
+      "label": "$C0D04C",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12669324,
+      "label": "$C1518C",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "record_scan_renderer_pass.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12700436,
+      "label": "$C1CB14",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "scene_placement.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12700454,
+      "label": "$C1CB26",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "scene_placement.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12700860,
+      "label": "$C1CCBC",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "flight_followup_pipeline.h",
+        "flight_followup_record.h",
+        "scene_placement.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12701878,
+      "label": "$C1D0B6",
+      "calls": 2,
+      "callers": 1,
+      "native_address_evidence": [
+        "alternate_flight_scale.h",
+        "scene_alternate_record.h",
+        "scene_component_accumulation.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12704026,
+      "label": "$C1D91A",
+      "calls": 2,
+      "callers": 1,
+      "native_address_evidence": [
+        "scene_fixed_point_stage.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12709196,
+      "label": "$C1ED4C",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "scene_stream_gate.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12709396,
+      "label": "$C1EE14",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "scene_stream_cursor.h",
+        "scene_stream_entry.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12712346,
+      "label": "$C1F99A",
+      "calls": 2,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12712834,
+      "label": "$C1FB82",
+      "calls": 7,
+      "callers": 2,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12712844,
+      "label": "$C1FB8C",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12713026,
+      "label": "$C1FC42",
+      "calls": 2,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12713504,
+      "label": "$C1FE20",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12713714,
+      "label": "$C1FEF2",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12713738,
+      "label": "$C1FF0A",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12713986,
+      "label": "$C20002",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12714076,
+      "label": "$C2005C",
+      "calls": 15,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12716030,
+      "label": "$C207FE",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12716608,
+      "label": "$C20A40",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12717416,
+      "label": "$C20D68",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12718768,
+      "label": "$C212B0",
+      "calls": 4,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12724928,
+      "label": "$C22AC0",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12732062,
+      "label": "$C2469E",
+      "calls": 3,
+      "callers": 1,
+      "native_address_evidence": [
+        "polygon_clip_pipeline.c"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12732064,
+      "label": "$C246A0",
+      "calls": 8,
+      "callers": 2,
+      "native_address_evidence": [
+        "map_packet_polygon_display.h",
+        "map_packet_stage.h",
+        "map_packet_transform.h",
+        "polygon_clip_pipeline.h",
+        "polygon_clip_pipeline_contract_test.c",
+        "polygon_display_pipeline.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12732352,
+      "label": "$C247C0",
+      "calls": 12,
+      "callers": 2,
+      "native_address_evidence": [
+        "clip_segment_pair.h",
+        "polygon_clip_pipeline.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12732594,
+      "label": "$C248B2",
+      "calls": 11,
+      "callers": 2,
+      "native_address_evidence": [
+        "clip_segment_pair.c",
+        "clip_segment_pair.h",
+        "polygon_clip_pipeline.h",
+        "tuple_cache_stage.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12732822,
+      "label": "$C24996",
+      "calls": 6,
+      "callers": 3,
+      "native_address_evidence": [
+        "negated_tuple_emit.h",
+        "polygon_clip_pipeline.h",
+        "tuple_cache_stage.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12734440,
+      "label": "$C24FE8",
+      "calls": 4,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12736630,
+      "label": "$C25876",
+      "calls": 2,
+      "callers": 1,
+      "native_address_evidence": [
+        "record_delta_scan.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12740072,
+      "label": "$C265E8",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "flagged_slot_scan.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12745168,
+      "label": "$C279D0",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "default_scene_render_pass.h",
+        "default_scene_render_pass_contract_test.c",
+        "flight_renderer_packet.c",
+        "flight_renderer_packet.h",
+        "flight_renderer_page.h",
+        "flight_scene_pipeline.h",
+        "game.h",
+        "projection_grid.h",
+        "scene_render_fixture.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12774986,
+      "label": "$C2EE4A",
+      "calls": 16,
+      "callers": 2,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12775622,
+      "label": "$C2F0C6",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12775668,
+      "label": "$C2F0F4",
+      "calls": 2,
+      "callers": 2,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12775766,
+      "label": "$C2F156",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12776592,
+      "label": "$C2F490",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "record_scan_renderer_pass.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12776948,
+      "label": "$C2F5F4",
+      "calls": 2,
+      "callers": 1,
+      "native_address_evidence": [
+        "flight_renderer_page.h",
+        "planar_pixel.h",
+        "projection_grid.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12776970,
+      "label": "$C2F60A",
+      "calls": 3,
+      "callers": 1,
+      "native_address_evidence": [
+        "flight_renderer_page.h",
+        "planar_pixel.c",
+        "planar_pixel.h",
+        "projection_grid.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12778110,
+      "label": "$C2FA7E",
+      "calls": 13,
+      "callers": 2,
+      "native_address_evidence": [
+        "flight_renderer_page.h",
+        "line.c",
+        "line.h",
+        "projection_grid.h",
+        "scene_render_fixture.c"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12779336,
+      "label": "$C2FF48",
+      "calls": 3,
+      "callers": 2,
+      "native_address_evidence": [
+        "flight_renderer_page.h",
+        "polygon_display_pipeline.h",
+        "polygon_submission.h",
+        "projection_grid.h",
+        "projection_grid_contract_test.c",
+        "selected_display_submission.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12780022,
+      "label": "$C301F6",
+      "calls": 3,
+      "callers": 1,
+      "native_address_evidence": [
+        "flight_page_handoff.h",
+        "flight_renderer_page.h",
+        "line.h",
+        "polygon_submission.h",
+        "projection_grid.c",
+        "projection_grid.h",
+        "projection_page_blitter.c",
+        "selected_display_submission.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12780646,
+      "label": "$C30466",
+      "calls": 4,
+      "callers": 4,
+      "native_address_evidence": [
+        "blit_job.c",
+        "blit_job.h",
+        "run036_polygon_oracle_test.c",
+        "selected_table_display_stage.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12780722,
+      "label": "$C304B2",
+      "calls": 1,
+      "callers": 1,
+      "native_address_evidence": [
+        "blit_job.c",
+        "blit_job.h",
+        "blit_job_contract_test.c",
+        "run036_polygon_oracle_test.c"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12780970,
+      "label": "$C305AA",
+      "calls": 6,
+      "callers": 2,
+      "native_address_evidence": [
+        "projection_grid.h"
+      ],
+      "classification": "address_linked_native"
+    },
+    {
+      "address": 12911072,
+      "label": "$C501E0",
+      "calls": 8,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12911122,
+      "label": "$C50212",
+      "calls": 8,
+      "callers": 1,
+      "native_address_evidence": [],
+      "classification": "no_native_address_evidence"
+    },
+    {
+      "address": 12926656,
+      "label": "$C53EC0",
+      "calls": 2,
+      "callers": 2,
+      "native_address_evidence": [
+        "viewport_palette.h"
+      ],
+      "classification": "address_linked_native"
+    }
+  ]
+}

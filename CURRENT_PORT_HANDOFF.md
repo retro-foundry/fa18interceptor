@@ -1394,3 +1394,20 @@ word branches, `$4000` count, `$3FFF` target index, error report, returned
 status accumulation, and each enclosing-walker exit as explicit routes.
 Target resolution stays caller-owned and this is not attached to `game.c`.
 See `analysis/routines/c1f910_record_table_dispatch.md`.
+
+## Frame-392 dynamic call graph
+
+`build/run075_frame392_parent_callgraph_trace/` is a fresh Engine9000 trace
+from the global-frame-392 `$C0F090` parent entry through its verified
+`$C0F124` return: 31,800 instructions. `scripts/generate_trace_call_graph.py`
+uses only observed `JSR`/`BSR` transitions that push a same-stack return
+address, producing `analysis/frame392_parent_dynamic_call_graph.{json,dot,md}`.
+It records 174 verified game calls over 64 distinct edges and 49 dynamic
+callees. 26 callees have an address-linked native `port/` reference; **23 do
+not** and are the immediate frame-392 porting backlog. This is a conservative
+address-coverage ledger, not a claim that the 26 referenced routines are fully
+semantically complete. The unrepresented set includes the high-frequency
+`$C2EE4A` projection preparation (16 calls), `$C2005C` face dispatch (15),
+`$C1FB82` predicate (7), `$C1F99A` record transform (2), and the
+`$C2F0C6/$C2F0F4/$C2F156` segment-clip continuations. Do not treat the graph
+as a static whole-program graph or schedule it directly in `game.c`.
