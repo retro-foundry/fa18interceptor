@@ -1148,6 +1148,15 @@ and metric `125`. The still-unrecovered selector-gate alternate components,
 detail/filter state, page submission, and scheduler remain explicit caller
 state; this bridge is intentionally not attached to `game.c`.
 
+`context_selector_pack.{c,h}` now ports `$C1C6BC-$C1C7F5`, the immediate
+writer for the map pass's `$C45850` table selector and companion mutable pack.
+Its clear-context route copies selector fields from the active record; its
+alternate route invokes the still-caller-owned `$C29042` origin update and
+derives coarse/fine selectors from `$C45C3E/$C45C46`. The source mode/depth
+suppression and accumulated change byte are retained. This makes the map
+table-selector state a source-backed producer, but active-origin production,
+detail state, page ownership, and scheduling are still outstanding.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
