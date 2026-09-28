@@ -102,6 +102,12 @@ unsigned divide/refinement helper that publishes `$C45B68` from `$C45B64` for
 the same coordinate path. Its DIVU.W fault conditions stay explicit; it has
 not been used to infer the still-unrecovered `$C123FA` branches.
 
+`coordinate_update_negative_pair.{c,h}` now ports the fully traced low-scale
+negative-pair path through `$C123FA`: source Hunk-63 angle words, `$C25980`,
+and `$C2564E` produce the two `$C45AC0/$C45AC2` outputs. It rejects all
+unobserved sign, dominant-component, scale, and terminal branches instead of
+generalizing from the trace.
+
 ## Next context: live scene rendering
 
 Do not add a frame-number trigger or captured page to `game.c`. The source
