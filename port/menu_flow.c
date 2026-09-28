@@ -8,6 +8,15 @@ void fa18_menu_flow_init(FA18MenuFlow *flow) {
     if (flow) memset(flow, 0, sizeof *flow);
 }
 
+int fa18_menu_flow_advance_post_input_countdown(FA18MenuFlow *flow,
+                                                 int16_t *countdown) {
+    if (!flow || !countdown) return -1;
+    ++flow->post_input_tick_count;
+    if (*countdown == INT16_MIN) *countdown = INT16_MAX;
+    else --*countdown;
+    return 0;
+}
+
 static void clear_renderer_first_loop_prefix(FA18Video *video, uint32_t iterations) {
     /* `$C2FD44-$C2FD56` clears four longwords, one in each displayed plane.
      * Four bytes per 40-byte plane row make one 32-pixel chunky span. */
@@ -73,9 +82,8 @@ int fa18_menu_flow_post_input_tick(FA18MenuFlow *flow) {
     }
     /* `$C0F7D8-$C0F7FE`: byte tick counter plus wrapping signed word
      * decrement. `$C0F804` invokes the active callback after this update. */
-    ++flow->post_input_tick_count;
-    if (flow->display_delay == INT16_MIN) flow->display_delay = INT16_MAX;
-    else --flow->display_delay;
+    if (fa18_menu_flow_advance_post_input_countdown(flow, &flow->display_delay) != 0)
+        return -1;
     if (flow->display_delay >= 0) return 0;
 
     /* Bounded run075 delayed callback: `$C0FEEA-$C10020`. These are the

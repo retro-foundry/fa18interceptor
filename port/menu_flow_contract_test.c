@@ -75,6 +75,15 @@ int main(void) {
         fputs("menu delayed-tick wrap contract failed\n", stderr);
         return 1;
     }
+    int16_t callback_countdown = INT16_MIN;
+    wrap.post_input_tick_count = 0xff;
+    if (fa18_menu_flow_advance_post_input_countdown(&wrap, &callback_countdown) != 0 ||
+        callback_countdown != INT16_MAX || wrap.post_input_tick_count != 0 ||
+        fa18_menu_flow_advance_post_input_countdown(NULL, &callback_countdown) != -1 ||
+        fa18_menu_flow_advance_post_input_countdown(&wrap, NULL) != -1) {
+        fputs("menu shared callback-tick contract failed\n", stderr);
+        return 1;
+    }
     if (fa18_menu_flow_apply_controls(NULL, &controls, &video) != -1) {
         fputs("menu flow argument contract failed\n", stderr);
         return 1;

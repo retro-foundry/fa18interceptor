@@ -44,8 +44,8 @@ be5c3fdb Record post-menu transition trace
 4fbce23b Bind projection blits to five-plane pages
 ```
 
-Current gates after the root work: native build check passes 229 files;
-`ctest` passes 121/121; native parity is unchanged at frames 200--391 exact,
+Current gates after the root work: native build check passes 233 files;
+`ctest` passes 123/123; native parity is unchanged at frames 200--391 exact,
 with the first mismatch at frame 392.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
@@ -57,18 +57,14 @@ composition uses the original Hunk-27 dispatch data, Hunk-67 record table,
 Hunk-16 relocation-backed templates, Hunk-52 descriptor, and Hunk-63 trig
 table; it does not retain captured state. Its new contract uses synthetic
 Hunks to verify ordered direct state, record-14 creation, the negative root
-route, message initialization, and finalization. It is not attached to
-`game.c` yet: the native root-record publisher (including the live type and
-matrix fields read by `$C1C54E`) remains required before this initializer can
-enter the normal rendering scheduler.
+route, message initialization, and finalization.
 
 `scene_root_record.{c,h}` now publishes the direct `$C0924A-$C095BE` root
 writes into mutable slot zero: root `+$06/+08/+0A/+0B/+0C/+0E/+10`,
 `+$14/+18/+1C`, flags at `+$04`, and the `$C2D954` attitude output at
 `+$92..+$A2`. `scene_entry_runtime` invokes it immediately after the bounded
-root placement. The pre-existing type byte `+$62` is intentionally preserved:
-the source path does not write it, and its native producer is still required
-before `$C1C54E` can become the normal renderer input.
+root placement. The source-owned type byte `+$62` is published at `$C092EC`
+from its caller-owned producer before the remaining root fields are written.
 
 That producer is now bounded too: the run075 `$C0FEEA` continuation executes
 `$C0FFB2-$C0FFBE` before the mode-$7F arm, writing root selector `3` and root
@@ -76,21 +72,30 @@ type `$11` to the bytes later consumed by `$C0924A`. `FA18MenuFlow` carries
 these two direct values when its existing source-backed delayed transition
 expires, and `scene_entry_runtime` writes the caller-provided root type to
 slot-zero `+$62` at the observed `$C092EC` boundary before root placement.
-The remaining integration task is callback scheduling from that arm to the
-entry initializer; it must be a source-backed scheduler, not a frame count.
+`FA18Game` now owns the scene-entry runtime, initialization state,
+`$C0FA04` followup state, and viewport-mode state. When the existing
+source-backed mode-$7F arm consumes a scheduler tick, it retains that arm's
+delay four. Later scheduler ticks use the shared `$C0F7D8-$C0F7FE` counter
+and invoke the real `$C0FA04` composition; the negative tick runs
+`scene_entry_runtime` before the observed followup stores set viewport target
+15/current 0. No presentation-frame trigger is used. The archived run075
+timing stream currently ends at frame 271, so its native reference output is
+intentionally unchanged; new timing evidence is required before this live
+path can be reached by the normal replay.
 
-## Next context: required scheduler integration
+## Next context: live scene rendering
 
 Do not add a frame-number trigger or captured page to `game.c`. The source
 join is established: run075 reaches `$C0FA04`'s expired branch at global frame
 370, which calls `$C0FAA4`; only after it returns does the caller set viewport
 mode `current=0`, `target=15`. The source cadence reaches current mode 8 at
 frame 392, where the dynamic Copper palette reveals an already prepared page.
-The missing native owner must compose this exact callback order with the new
-root resolver, the existing root placement/matrix state, `FA18FlightScenePipeline`,
-and `FA18ViewportMode`/five-plane presentation. It must provide genuine record,
-matrix, page, and Copper state; the existing capture fixtures are diagnostic
-only. See `analysis/routines/c0fa04_post_input_followup.md`,
+The game-level callback composition is now present, but its source-measured
+tick stream must be extended past frame 271 before the normal replay reaches
+the scene-entry transition. Then connect its genuine record/matrix state to
+`FA18FlightScenePipeline` and `FA18ViewportMode`/five-plane presentation. It
+must provide genuine record, matrix, page, and Copper state; the existing
+capture fixtures are diagnostic only. See `analysis/routines/c0fa04_post_input_followup.md`,
 `analysis/routines/c0faa4_run075_scene_initialization.md`, and
 `analysis/routines/run075_frame392_cockpit_entry.md` before editing `game.c`.
 

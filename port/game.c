@@ -6,6 +6,29 @@
 
 enum { START_FRAME = 200 };
 
+static int initialize_scene_entry(void *context) {
+    FA18Game *game = context;
+    if (!game) return -1;
+    return fa18_run_scene_entry_runtime(&game->scene_entry_runtime,
+                                        game->menu_flow.selected_mode,
+                                        game->menu_flow.root_type,
+                                        &game->scene_initialization,
+                                        &game->post_input_followup.countdown);
+}
+
+static int advance_scene_entry_callback(FA18Game *game) {
+    if (!game || !game->scene_entry_armed || game->scene_entry_complete ||
+        fa18_menu_flow_advance_post_input_countdown(
+            &game->menu_flow, &game->post_input_followup.countdown) != 0)
+        return -1;
+    int result = fa18_finish_post_input_followup(&game->post_input_followup,
+                                                  &game->viewport_mode,
+                                                  initialize_scene_entry, game);
+    if (result < 0) return -1;
+    if (result > 0) game->scene_entry_complete = 1;
+    return 0;
+}
+
 int fa18_game_init(FA18Game *game, const char *adf_path) {
     memset(game, 0, sizeof *game);
     if (!fa18_disk_open(&game->disk, adf_path)) {
@@ -41,6 +64,14 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
     }
     if (fa18_load_scene_dispatch_table(&game->exe, &game->scene_dispatch_table) != 0) {
         fputs("Cannot load the C297D2 scene dispatch table\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
+    if (fa18_scene_entry_runtime_init(&game->scene_entry_runtime, &game->exe,
+                                      &game->scene_dispatch_table,
+                                      &game->scene_record_table) != 0) {
+        fputs("Cannot initialize the scene-entry runtime\n", stderr);
         fa18_hunks_free(&game->exe);
         fa18_disk_close(&game->disk);
         return 0;
@@ -124,8 +155,21 @@ int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,
             return -1;
     }
     for (uint16_t tick = 0; tick < post_input_ticks; ++tick) {
+        if (game->scene_entry_armed) {
+            if (advance_scene_entry_callback(game) != 0) return -1;
+            continue;
+        }
         int result = fa18_menu_flow_post_input_tick(&game->menu_flow);
-        if (result < 0 && !game->menu_flow.transition_started) return -1;
+        if (result < 0) return -1;
+        if (result > 0) {
+            /* `$C1000A` has selected `$C0FA04`; its delay of four belongs to
+             * the same externally supplied `$C0F5F8` scheduler stream. */
+            game->post_input_followup = (FA18PostInputFollowupState){
+                0, 0, 0, game->menu_flow.display_delay,
+                FA18_POST_INPUT_CALLBACK_FINISH_FOLLOWUP
+            };
+            game->scene_entry_armed = 1;
+        }
     }
     fa18_menu_flow_finish_presented_frame(&game->menu_flow, &game->video);
     ++game->frame;

@@ -13,6 +13,8 @@
 #include "scene_record_table.h"
 #include "scene_component_magnitude.h"
 #include "scene_dispatch_table.h"
+#include "scene_entry_runtime.h"
+#include "post_input_followup.h"
 #include "scene_render_fixture.h"
 #include "replay.h"
 #include "video.h"
@@ -28,6 +30,12 @@ typedef struct {
     FA18Video video;
     FA18MenuTextState menu_text;
     FA18MenuFlow menu_flow;
+    FA18SceneEntryRuntime scene_entry_runtime;
+    FA18SceneInitializationState scene_initialization;
+    FA18PostInputFollowupState post_input_followup;
+    FA18ViewportModeState viewport_mode;
+    uint8_t scene_entry_armed;
+    uint8_t scene_entry_complete;
     FA18MenuRecord menu_records[FA18_MENU_TEXT_SELECTORS];
     FA18SceneRenderFixture render_fixture;
     FA18C279RenderFixture c279_render_fixture;
@@ -50,7 +58,9 @@ int fa18_game_enable_render_fixture(FA18Game *game, const char *chip_capture_pat
 int fa18_game_enable_c279_render_fixture(FA18Game *game, const char *slow_capture_path,
                                          const char *chip_capture_path);
 
-/* Advance one PAL video frame with the given control state. */
+/* Advance one PAL video frame with the given control state. `post_input_ticks`
+ * comes from a source-measured scheduler stream; it is never inferred from
+ * presentation frames. */
 int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,
                     uint16_t post_input_ticks);
 

@@ -38,6 +38,11 @@ typedef struct {
 
 void fa18_menu_flow_init(FA18MenuFlow *flow);
 
+/* Shared `$C0F7D8-$C0F7FE` tail: count one scheduler-delivered post-input
+ * callback tick and decrement its caller-owned signed countdown. */
+int fa18_menu_flow_advance_post_input_countdown(FA18MenuFlow *flow,
+                                                 int16_t *countdown);
+
 /* Apply the observed key-1 edge route before the current video frame is
  * presented. `$C2FD22`'s first-loop prefix is visible in that same frame. */
 int fa18_menu_flow_apply_controls(FA18MenuFlow *flow,
