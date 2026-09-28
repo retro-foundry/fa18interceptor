@@ -15,6 +15,11 @@ back-edge is structural evidence, not proof of a complete main-loop function.
 The final pre-back-edge child is dynamically bounded at `$C1612C -> $C15DB2`;
 see [`c1612c_outer_loop_child.md`](c1612c_outer_loop_child.md).
 
+The native `outer_update_loop` contract now retains the leading `$C2F558`
+renderer-pointer publication as a required caller-owned stage before
+`OwnBlitter`. This is the source slot that selects `$C456B6` for the parent
+renderer; the native loop still does not assign its page contents or cadence.
+
 `$C1612C` begins each observed invocation with graphics.library
 `WaitBOVP(A0=$C1822A)`. Therefore every iteration of this back-edge contains
 an explicit Amiga display-synchronization gate after the parent update and

@@ -20,11 +20,13 @@ int fa18_initialize_outer_update_loop(FA18OuterUpdateLoopState *state,
 
 int fa18_run_outer_update_loop_iteration(FA18OuterUpdateLoopState *state,
                                          const FA18OuterUpdateLoopOps *ops) {
-    if (!state || !ops || !state->initialized || !ops->own_blitter ||
+    if (!state || !ops || !state->initialized || !ops->select_renderer_page ||
+        !ops->own_blitter ||
         !ops->disown_blitter || !ops->parent_update || !ops->wait_display ||
         !ops->outer_child)
         return -1;
-    if (run_stage(ops->own_blitter, ops->context) != 0 ||
+    if (run_stage(ops->select_renderer_page, ops->context) != 0 ||
+        run_stage(ops->own_blitter, ops->context) != 0 ||
         run_stage(ops->disown_blitter, ops->context) != 0 ||
         run_stage(ops->parent_update, ops->context) != 0 ||
         run_stage(ops->wait_display, ops->context) != 0 ||

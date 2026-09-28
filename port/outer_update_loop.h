@@ -9,6 +9,9 @@ typedef int (*FA18OuterUpdateLoopDelay)(void *context, uint32_t argument);
 typedef struct {
     FA18OuterUpdateLoopStage acquire_blitter;
     FA18OuterUpdateLoopDelay initial_delay;
+    /* `$C2F558`: publish the selected renderer pointer pair before the
+     * OwnBlitter/parent-update bracket. */
+    FA18OuterUpdateLoopStage select_renderer_page;
     FA18OuterUpdateLoopStage own_blitter;
     FA18OuterUpdateLoopStage disown_blitter;
     FA18OuterUpdateLoopStage parent_update;
@@ -23,8 +26,9 @@ typedef struct {
 } FA18OuterUpdateLoopState;
 
 /* `$C15D80-$C15DB3`: run the one-time acquire/delay prefix, then exactly one
- * display-synchronized loop iteration.  The caller controls repetition at the
- * source back-edge; no presentation-frame cadence is inferred here. */
+ * `$C2F558`, OwnBlitter, parent-update, DisownBlitter, display-child loop
+ * iteration. The caller controls repetition at the source back-edge; no
+ * presentation-frame cadence is inferred here. */
 int fa18_initialize_outer_update_loop(FA18OuterUpdateLoopState *state,
                                       const FA18OuterUpdateLoopOps *ops);
 int fa18_run_outer_update_loop_iteration(FA18OuterUpdateLoopState *state,

@@ -808,6 +808,12 @@ Relevant evidence is `analysis/routines/c1612c_outer_loop_child.md`,
 `analysis/routines/run075_frame392_parent_update.md`, and
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
+`outer_update_loop` now includes the previously omitted mandatory `$C2F558`
+selector stage before its `OwnBlitter -> $C0EFD4 -> DisownBlitter` bracket.
+That is the source-owned `$C456B6` publisher feeding `$C279D0`; the actual
+page tables and loop cadence remain caller-owned and are still not wired into
+`game.c`.
+
 `outer_loop_child.{c,h}` now composes the complete observed
 `$C1612C-$C16283` packet behind explicit caller-owned OS boundaries.  It
 performs `WaitBOVP`, publishes the indexed `$C182BA/$C182C2` pair, and invokes
