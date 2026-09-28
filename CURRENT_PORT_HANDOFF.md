@@ -67,20 +67,22 @@ builder remain required before this can supply a native C279 scene page.
 
 ## New-context resume point
 
-The current native build audit passes 253 source files.  The user-owned
+The current native build audit passes 255 source files.  The user-owned
 untracked `.vscode/` directory is the only worktree change.  Do not schedule
 `$C279D0` from a presentation frame or import captured scene/page state.
 
-The next implementation is the `$C1D3F4-$C1D51D` immutable stream selector,
-specifically its workspace-item expansion.  Reuse
-`static_template_search.{c,h}` for the sorted row and
-`template_workspace_append.{c,h}` for the live record-marker boundaries.
-For the special-pair branch, preserve 68000 partial-register semantics: the
-first source byte is sign-extended to a word; the second output word retains
-that sign-extension high byte and replaces only its low byte.  The downstream
-`$C1DC1C-$C1E0B0` placement builder and its upstream workspace terms remain
-unported.  Normal replay is still exact through frame 391 and first differs
-at frame 392 by 361 pixels.
+`static_template_stream_selector.{c,h}` now ports the `$C1D3F4-$C1D51D`
+immutable stream selector and its workspace-item expansion. It composes the
+existing sorted-row search and append bridge at their source boundaries,
+preserves the 16-item/96-byte cell limit, and retains the special-pair
+partial-register result: the second output word keeps the sign-extension high
+byte of the first source byte. The downstream `$C1DC1C-$C1E0B0` placement
+builder and its upstream workspace terms remain unported. Normal replay is
+still exact through frame 391 and first differs at frame 392 by 361 pixels.
+
+The next implementation is the `$C1DC1C-$C1E0B0` placement builder, using the
+new mutable workspace expansion as its source-backed input. Do not schedule
+the renderer from a presentation frame or import a captured page.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
