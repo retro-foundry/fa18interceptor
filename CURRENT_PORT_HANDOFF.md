@@ -404,6 +404,18 @@ observed direct-pixel state writes a zero-valued lane there, and the visible
 frame requires the unported polygon/fill descendants plus the earlier prepared
 page.  This diagnostic remains opt-in and has no effect on normal replay.
 
+A full ordinary-replay sample of the displayed five-plane allocation
+`$04DB30-$05776F` changes the earlier producer assumption: it records 63
+mutating frames over run075 201--392, including large bursts of 6,249 bytes at
+frame 382, 3,563 at 385, and 6,868 at 387.  The same 381--389 PC profile is
+dominated by `$C304F8` span/fill wait-submit work and includes `$C2FE..`
+active-plane packets and `$C3066A` submissions.  By contrast, the bounded
+frame-384 `$C279D0` pass changes only six bytes of one lower plane.  Therefore
+the normal native page owner must compose the existing active-plane and
+page-blitter paths with their live parent state; a fresh root-grid pass cannot
+produce the palette-revealed image on its own.  The sampler output is
+`build/run075_display_page_mutations_201_392/memory_region_mutations.json`.
+
 Recent commits, newest first:
 
 ```
