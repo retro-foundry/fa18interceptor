@@ -2,6 +2,13 @@
 
 ## Latest visible primitive
 
+`offset_pair_segment_submission.{c,h}` ports `$C212B0-$C2131B`, the direct
+producer immediately above `$C2EE4A`.  It resolves the source offset-pair
+stream through `$C48390`, retains the source's negative-second-offset terminal
+pair, applies the original depth-AND skip, and accumulates the exact
+segment-preparation result.  The `$C2EE4A` callback remains explicitly
+caller-owned: do not connect it to a generic clipper or a diagnostic renderer.
+
 `workspace_segment_projection.{c,h}` ports the complete direct leaf
 `$C2ED6C-$C2EE42`.  It consumes two source-format transformed triples from
 the `$C4C592` workspace, preserves each signed depth/extent rejection, applies
@@ -11,8 +18,8 @@ caller-owned `$C2FA7E` line-emitter callback.  Its contract covers one accepted
 pair and both rejection categories.  It has no synthetic geometry, no capture
 page, and no `game.c` scheduling.
 
-Validation: 191/191 CTest contracts pass and the native build checker sees
-364 C sources.  This is an exact renderer leaf, but normal frame 402 remains
+Validation: 192/192 CTest contracts pass and the native build checker sees
+366 C sources.  This is an exact renderer leaf, but normal frame 402 remains
 black until the P-code placement/record path supplies the real workspace pairs
 and binds the real five-plane line-emitter owner.  Do not present the contract
 callback as a normal rendered frame.
