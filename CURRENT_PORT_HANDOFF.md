@@ -18,6 +18,14 @@
 
 ### Most recent chain
 
+`post_input_command_dispatch.{c,h}` now ports `$C10C68-$C10CFC`.  It retains
+the inherited countdown wait, clears the activity byte only on expiration,
+calls the separate `$C25070` source owner only for modes 3--8, writes the
+same `$58/$59/$5A` command words plus source terminator, and selects `$C10CFE`.
+Mode 2 instead sets its completion byte and emits only the terminator.  The
+normal frame-402 gate remains zero nonblack pixels; this controller is still
+not scheduled early and `$C10CFE` remains the next continuation target.
+
 `post_input_transition.{c,h}` now ports the recovered static `$C10C08-$C10C66`
 entry controller.  It initializes the exact non-flight controller fields and
 five-tick target `$C10C68`, selects `$C11A26` only for the signed event-flag
