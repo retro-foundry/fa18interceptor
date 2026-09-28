@@ -52,7 +52,6 @@ int fa18_run_map_packet_record_stage(
 
     packet_stage.selector.alternate_stream = detail.visible != 0;
     packet_stage.transform.detail_shift = gate.coordinate_shift;
-    packet_stage.coordinate_shift = gate.coordinate_shift;
     packet_stage.transform.packed_seed =
         fa18_complete_map_detail_component_route(detail.coordinate_x,
                                                  detail.coordinate_y);

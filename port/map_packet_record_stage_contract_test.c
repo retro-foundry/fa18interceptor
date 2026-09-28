@@ -72,7 +72,6 @@ int main(void) {
     shifted.gate = (FA18MapDetailGateInput){0, 1, 0, 1, 0x400};
     shifted.packet_stage.selector.resolve_stream = resolve_inline_stream;
     shifted.packet_stage.selector.context = (void *)packet;
-    fixture.expected_shift = 2;
     assert(fa18_run_map_packet_record_stage(&shifted, records, 0x12, &count, 0,
                                             &route) == 0 &&
            route == FA18_MAP_PACKET_RECORD_DISPLAYED && count == 1 &&

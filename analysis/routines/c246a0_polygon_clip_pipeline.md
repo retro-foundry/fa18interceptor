@@ -4,9 +4,11 @@ Authority: `build/run075_frame382_c246_stage/`, captured during the ordinary
 run075 render-page preparation pass. The invocation begins at `$C246A0` and
 returns to `$C2AFE8` after 3,129 instructions.
 
-The source reads 13 triples from `$C4BF94` with coordinate shift two
-(`D3=2` at entry) and leaves 14 triples at `$C4B990` before `$C24CFE`
-projects and submits them.
+The source reads 13 triples from `$C4BF94` with zero coordinate shift: although
+entry `D3=2`, `$C246AC` first loads `$C4BF90` into its local and `$C246EA`
+overwrites `D3` from that header for every triple. The frame-382 parent clears
+that header at `$C2AAA4`; the captured header is `(0,13)`. The stage leaves 14
+triples at `$C4B990` before `$C24CFE` projects and submits them.
 The traced path enters the outer loop, both tuple-cache children, and all four
 post-loop closures. Its result is source-order clipping against the four
 planes `y=z`, `-y=z`, `x=z`, and `-x=z`; the first and final crossings are
@@ -24,11 +26,12 @@ witness checks all 14 projected pairs at `$C4B390`, including `(0,89)`,
 
 `map_packet_polygon_display.{c,h}` is the direct `$C2AFE2` callback adapter:
 it copies the preceding map packet's three-word records into the clip input,
-passes the caller-owned live shift, and routes the result to the already bound
-`$C2FF48` submission state.  It does not select a page, retain a shift, or
-schedule rendering.
+passes the caller-owned `$C4BF90` workspace-header shift, and routes the result
+to the already bound `$C2FF48` submission state. Map detail shift is already
+applied by `$C2AF92` while producing the triples and is not applied again here.
+The adapter does not select a page, retain a shift, or schedule rendering.
 
 Its page-level contract binds the existing submission callbacks to a native
 five-plane page with the traced renderer values (bound 144, vertical 89,
-horizontal 0). The raw 13-record, shift-two witness produces the 14 projected
+horizontal 0). The raw 13-record, zero-header witness produces the 14 projected
 pairs, one `$8400` DMA write, page-blitter work, and nonzero lower-plane bytes.

@@ -7,11 +7,11 @@
 
 int main(void) {
     const FA18MapPacketProjectionRecord records[] = {
-        {{2383,-8,1982}}, {{1030,-8,1869}}, {{1022,-8,1829}},
-        {{737,-8,1708}}, {{606,-8,1790}}, {{633,-8,1855}},
-        {{435,-8,1848}}, {{274,-8,1739}}, {{554,-8,1789}},
-        {{236,-8,1682}}, {{-337,-8,1311}}, {{-241,-8,-213}},
-        {{2515,-8,-114}}
+        {{9532,-32,7928}}, {{4120,-32,7476}}, {{4088,-32,7316}},
+        {{2948,-32,6832}}, {{2424,-32,7160}}, {{2532,-32,7420}},
+        {{1740,-32,7392}}, {{1096,-32,6956}}, {{2216,-32,7156}},
+        {{944,-32,6728}}, {{-1348,-32,5244}}, {{-964,-32,-852}},
+        {{10060,-32,-456}}
     };
     uint8_t chip[0x10000 + FA18_COPPER_PAGE_BYTES * FA18_COPPER_PAGE_PLANES] = {0};
     const uint32_t planes[FA18_COPPER_PAGE_PLANES] = {
@@ -42,7 +42,7 @@ int main(void) {
                &renderer, &page_blitter) == 0);
     display = (FA18MapPacketPolygonDisplay){&renderer.triangle_submission, &result};
 
-    assert(fa18_display_map_packet_polygon(&display, records, 13, 2) == 0);
+    assert(fa18_display_map_packet_polygon(&display, records, 13, 0) == 0);
     assert(result.clipped_count == 14 && result.pair_count == 14);
     assert(renderer.dma_call_count == 1 && renderer.last_dma_value == 0x8400);
     assert(page_blitter.line_submissions != 0);

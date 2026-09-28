@@ -11,7 +11,9 @@ typedef int (*FA18MapPacketDisplayStage)(
 typedef struct {
     FA18MapPacketSelectorInput selector;
     FA18MapPacketTransform transform;
-    uint16_t coordinate_shift;
+    /* `$C4BF90` workspace header consumed by `$C246A0`, distinct from the
+     * detail shift already applied while producing these records. */
+    uint16_t workspace_shift;
     FA18MapPacketDisplayStage display_stage;
     void *display_context;
 } FA18MapPacketStageInput;
@@ -24,7 +26,7 @@ typedef enum {
 
 /* `$C2AEFC-$C2AFE2`: select a packet stream, decode its original big-endian
  * pair records, build `$C4BF92`-style projection records, then invoke the
- * caller-owned `$C246A0` display-stage boundary. */
+ * caller-owned `$C246A0` display-stage boundary and its workspace header. */
 int fa18_run_map_packet_stage(const FA18MapPacketStageInput *input,
                               FA18MapPacketProjectionRecord *records,
                               size_t record_capacity,

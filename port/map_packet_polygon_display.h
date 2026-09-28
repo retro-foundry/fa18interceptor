@@ -10,8 +10,8 @@ typedef struct {
 } FA18MapPacketPolygonDisplay;
 
 /* `$C2AFE2 -> $C246A0`: adapt the just-produced map triples to the common
- * clip/project/list-submit pipeline.  The shift is the live caller word; it
- * is deliberately not retained as renderer state. */
+ * clip/project/list-submit pipeline. The shift is the `$C4BF90` workspace
+ * header, deliberately distinct from the already-applied detail shift. */
 int fa18_display_map_packet_polygon(
     void *context, const FA18MapPacketProjectionRecord *records,
     uint16_t record_count, uint16_t coordinate_shift);
