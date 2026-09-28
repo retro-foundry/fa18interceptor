@@ -44,6 +44,12 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
         fa18_disk_close(&game->disk);
         return 0;
     }
+    if (fa18_initialize_scene_renderer_defaults(&game->scene_renderer_defaults) != 0) {
+        fputs("Cannot initialize source scene renderer defaults\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
     if (fa18_load_projection_grid(&game->exe, &game->projection_grid) != 0) {
         fputs("Cannot load the C279 projection grid\n", stderr);
         fa18_hunks_free(&game->exe);

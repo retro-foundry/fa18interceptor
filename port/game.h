@@ -14,6 +14,7 @@
 #include "scene_component_magnitude.h"
 #include "scene_dispatch_table.h"
 #include "scene_entry_runtime.h"
+#include "scene_renderer_defaults.h"
 #include "post_input_followup.h"
 #include "scene_render_fixture.h"
 #include "replay.h"
@@ -31,6 +32,7 @@ typedef struct {
     FA18MenuTextState menu_text;
     FA18MenuFlow menu_flow;
     FA18SceneEntryRuntime scene_entry_runtime;
+    FA18SceneRendererDefaults scene_renderer_defaults;
     FA18SceneInitializationState scene_initialization;
     FA18PostInputFollowupState post_input_followup;
     FA18ViewportModeState viewport_mode;

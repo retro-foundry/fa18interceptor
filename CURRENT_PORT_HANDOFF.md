@@ -11,8 +11,8 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  The configured suite contains **141** contracts;
-the last full run passed 141/141.
+pixels; bbox x=7..318, y=101..199).  The configured suite contains **142** contracts;
+the last full run passed 142/142.
 
 ## Latest root-owner work
 
@@ -123,6 +123,12 @@ record's `+$66/+68/+6A` triple supplies `$C45A88`, `$C45BEA`, and the scaled
 `{167,0,-8; 0,252,0; 6,0,127}`. Alternate selector/type routes and the live
 row-scale producer remain explicit caller boundaries; no captured values enter
 the normal runtime.
+
+`scene_renderer_defaults.{c,h}` now supplies the direct cold-boot
+`$C09010-$C09068` renderer stores to normal `game.c` initialization: matrix
+input `$1C20/0`, row scale `$A8/$FC/$80`, and display bounds
+`$A7/$32/$320`. These are original bootstrap constants, not run075 capture
+values; page production and presentation remain separately scheduled.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
