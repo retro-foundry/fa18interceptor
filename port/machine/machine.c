@@ -118,8 +118,8 @@ static uint8_t cia_read(FA18Machine *m, int which, int reg) {
     switch (reg) {
     case 0:
         if (which == 0) {
-            /* No fire buttons pressed; drive not ready/disk present bits high. */
-            uint8_t inputs = 0xFC;
+            /* /FIR1 joystick fire, /FIR0 left mouse; floppy status lines high. */
+            uint8_t inputs = (uint8_t)(0x3C | (m->joy_fire ? 0 : 0x80) | (m->mouse_left ? 0 : 0x40));
             return (uint8_t)((c->pra & c->ddra) | (inputs & ~c->ddra));
         }
         return (uint8_t)((c->pra & c->ddra) | (0xFF & ~c->ddra));
@@ -214,7 +214,6 @@ void fa18_blitter_busy(FA18Machine *m, int cycles) {
     if (blit_end < fa18_next_event) fa18_next_event = blit_end;
 }
 
-static const uint16_t potinp = 0x5500; /* DATLY/DATLX/DATRY/DATRX high: buttons released */
 static int blit_zero = 1;
 
 void fa18_blitter_zero_flag(int zero);
@@ -237,7 +236,8 @@ uint16_t fa18_custom_read(FA18Machine *m, uint32_t reg) {
     case 0x00C: return m->joy1dat;
     case 0x010: return m->adkcon;
     case 0x012: case 0x014: return 0;
-    case 0x016: return potinp;
+    case 0x016: /* DATLY/DATLX/DATRY/DATRX; DATLY low = right mouse button */
+        return (uint16_t)(m->mouse_right ? 0x5100 : 0x5500);
     case 0x018: return 0x3000;
     case 0x01A: return 0;
     case 0x01C: return m->intena;
@@ -422,6 +422,12 @@ void fa18_machine_mouse(FA18Machine *m, int dx, int dy) {
     m->mouse_x = (m->mouse_x + dx) & 0xFF;
     m->mouse_y = (m->mouse_y + dy) & 0xFF;
     m->joy0dat = (uint16_t)(m->mouse_y << 8 | m->mouse_x);
+}
+
+void fa18_machine_button(FA18Machine *m, int button, int down) {
+    if (button == 0) m->mouse_left = down;
+    else if (button == 1) m->mouse_right = down;
+    else m->joy_fire = down;
 }
 
 static void keyboard_line(FA18Machine *m) {

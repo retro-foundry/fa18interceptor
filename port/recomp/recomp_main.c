@@ -7,6 +7,7 @@
 #include "m68k.h"
 #include "machine.h"
 #include "recomp_runtime.h"
+#include "input.h"
 
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb");
@@ -41,13 +42,103 @@ static int write_ppm(const char *path, const uint16_t *pixels) {
 static void usage(void) {
     fprintf(stderr,
             "usage: fa18_recomp --state STATE.bin --rom KICK13.rom [--frames N] [--ppm OUT.ppm]\n"
-            "                   [--ppm-every DIR] [--rgb444 OUT.bin] [--no-recomp] [--fallback-log OUT.json]\n");
+            "                   [--ppm-every DIR] [--rgb444 OUT.bin] [--no-recomp] [--fallback-log OUT.json]\n"
+            "                   [--ram-out OUT.bin] [--replay RUN.e9k --start-frame N]\n"
+            "                   [--window [--scale N]]   (window: --frames 0 runs until closed)\n");
 }
+
+#ifdef FA18_WITH_SDL
+#define SDL_MAIN_HANDLED
+#include <SDL.h>
+
+/* Live 50 Hz window. Keys go to the Amiga keyboard; clicking the window
+ * captures the mouse, F12 releases it. Recorded replay events still apply. */
+static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int frames, int scale) {
+    SDL_Window *win;
+    SDL_Renderer *ren;
+    SDL_Texture *tex;
+    static uint32_t argb[FA18_SCREEN_W * FA18_SCREEN_H];
+    uint64_t deadline;
+    int running = 1, frame = 0, grabbed = 0;
+    SDL_SetMainReady();
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
+        fprintf(stderr, "SDL initialization failed: %s\n", SDL_GetError());
+        return 1;
+    }
+    win = SDL_CreateWindow("F/A-18 Interceptor (translated)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                           FA18_SCREEN_W * scale, FA18_SCREEN_H * scale, SDL_WINDOW_RESIZABLE);
+    ren = win ? SDL_CreateRenderer(win, -1, SDL_RENDERER_PRESENTVSYNC) : NULL;
+    if (!ren && win) ren = SDL_CreateRenderer(win, -1, 0);
+    tex = ren ? SDL_CreateTexture(ren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, FA18_SCREEN_W,
+                                  FA18_SCREEN_H) : NULL;
+    if (!tex) {
+        fprintf(stderr, "SDL display creation failed: %s\n", SDL_GetError());
+        SDL_Quit();
+        return 1;
+    }
+    SDL_RenderSetLogicalSize(ren, FA18_SCREEN_W, FA18_SCREEN_H);
+    deadline = SDL_GetTicks64();
+    while (running && (frames <= 0 || frame < frames)) {
+        SDL_Event e;
+        int p;
+        while (SDL_PollEvent(&e)) {
+            switch (e.type) {
+            case SDL_QUIT: running = 0; break;
+            case SDL_KEYDOWN:
+            case SDL_KEYUP:
+                if (e.key.keysym.sym == SDLK_F12) {
+                    if (e.type == SDL_KEYDOWN) { grabbed = 0; SDL_SetRelativeMouseMode(SDL_FALSE); }
+                } else if (!e.key.repeat) {
+                    int raw = fa18_amiga_rawkey(e.key.keysym.sym);
+                    if (raw >= 0) fa18_machine_key(m, raw, e.type == SDL_KEYDOWN);
+                }
+                break;
+            case SDL_MOUSEMOTION:
+                if (grabbed) fa18_machine_mouse(m, e.motion.xrel, e.motion.yrel);
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+            case SDL_MOUSEBUTTONUP:
+                if (!grabbed && e.type == SDL_MOUSEBUTTONDOWN) {
+                    grabbed = 1;
+                    SDL_SetRelativeMouseMode(SDL_TRUE);
+                } else if (e.button.button == SDL_BUTTON_LEFT || e.button.button == SDL_BUTTON_RIGHT) {
+                    fa18_machine_button(m, e.button.button == SDL_BUTTON_LEFT ? 0 : 1,
+                                        e.type == SDL_MOUSEBUTTONDOWN);
+                }
+                break;
+            default: break;
+            }
+        }
+        fa18_replay_apply(replay, m, start_frame + frame + 1);
+        fa18_machine_run_frame(m);
+        frame++;
+        for (p = 0; p < FA18_SCREEN_W * FA18_SCREEN_H; p++) {
+            uint16_t v = m->last_screen[p];
+            argb[p] = 0xFF000000u | (uint32_t)((v >> 8) & 15) * 0x110000u | (uint32_t)((v >> 4) & 15) * 0x1100u |
+                      (uint32_t)(v & 15) * 0x11u;
+        }
+        SDL_UpdateTexture(tex, NULL, argb, FA18_SCREEN_W * (int)sizeof argb[0]);
+        SDL_RenderClear(ren);
+        SDL_RenderCopy(ren, tex, NULL, NULL);
+        SDL_RenderPresent(ren);
+        deadline += 20; /* 50 Hz PAL */
+        while (SDL_GetTicks64() < deadline) SDL_Delay(1);
+        if (SDL_GetTicks64() > deadline + 100) deadline = SDL_GetTicks64();
+    }
+    SDL_DestroyTexture(tex);
+    SDL_DestroyRenderer(ren);
+    SDL_DestroyWindow(win);
+    SDL_Quit();
+    return 0;
+}
+#endif
 
 int main(int argc, char **argv) {
     const char *state_path = NULL, *rom_path = NULL, *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL,
                *fallback = NULL, *ram_out = NULL;
-    int frames = 10, use_recomp = 1, i;
+    const char *replay_path = NULL;
+    int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
+    FA18Replay replay = {0};
     size_t state_size, rom_size;
     uint8_t *state, *rom;
     char error[256];
@@ -64,6 +155,10 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--fallback-log") && i + 1 < argc) fallback = argv[++i];
         else if (!strcmp(argv[i], "--ram-out") && i + 1 < argc) ram_out = argv[++i];
         else if (!strcmp(argv[i], "--no-recomp")) use_recomp = 0;
+        else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
+        else if (!strcmp(argv[i], "--start-frame") && i + 1 < argc) start_frame = atoi(argv[++i]);
+        else if (!strcmp(argv[i], "--window")) window = 1;
+        else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else { usage(); return 2; }
     }
     if (!state_path || !rom_path) { usage(); return 2; }
@@ -76,8 +171,24 @@ int main(int argc, char **argv) {
         return 1;
     }
     fa18_recomp_init(use_recomp);
+    if (replay_path && !fa18_replay_load(&replay, replay_path)) {
+        fprintf(stderr, "cannot read E9K_INPUT_V1 replay %s\n", replay_path);
+        return 1;
+    }
+    if (window) {
+#ifdef FA18_WITH_SDL
+        int result = run_window(m, &replay, start_frame, frames, scale);
+        fa18_replay_free(&replay);
+        return result;
+#else
+        fprintf(stderr, "--window needs the CMake build (SDL2)\n");
+        return 2;
+#endif
+    }
     if (rgb_path && !(rgb = fopen(rgb_path, "wb"))) { fprintf(stderr, "cannot write %s\n", rgb_path); return 1; }
     for (i = 0; i < frames; i++) {
+        /* Events recorded for a frame are delivered before that frame runs. */
+        fa18_replay_apply(&replay, m, start_frame + i + 1);
         fa18_machine_run_frame(m);
         if (rgb) fwrite(m->last_screen, sizeof m->last_screen[0], FA18_SCREEN_W * FA18_SCREEN_H, rgb);
         if (ppm_dir) {

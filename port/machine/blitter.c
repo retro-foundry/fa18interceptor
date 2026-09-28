@@ -22,6 +22,8 @@ enum {
 };
 
 #define R(off) (m->custom[(off) >> 1])
+/* Agnus ignores bit 0 of the modulo registers (UAE BLTxMOD: v & 0xFFFE). */
+#define MOD(off) ((int16_t)(R(off) & 0xFFFE))
 
 static uint32_t reg_ptr(const FA18Machine *m, uint32_t off) {
     return ((uint32_t)m->custom[off >> 1] << 16 | m->custom[(off >> 1) + 1]) & 0x7FFFE;
@@ -74,12 +76,11 @@ static int area_blit(FA18Machine *m, int width, int height) {
     uint8_t mt = (uint8_t)con0;
     int desc = (con1 & CON1_DESC) != 0;
     int fill = (con1 & (CON1_IFE | CON1_EFE)) != 0;
-    int inclusive = (con1 & CON1_IFE) != 0;
+    int inclusive = (con1 & (CON1_IFE | CON1_EFE)) == CON1_IFE; /* both set: exclusive (UAE) */
     int ash = desc ? 16 - (con0 >> 12) : con0 >> 12;
     int bsh = desc ? 16 - (con1 >> 12) : con1 >> 12;
     int step = desc ? -2 : 2;
-    int32_t amod = (int16_t)R(0x064), bmod = (int16_t)R(0x062), cmod = (int16_t)R(0x060),
-            dmod = (int16_t)R(0x066);
+    int32_t amod = MOD(0x064), bmod = MOD(0x062), cmod = MOD(0x060), dmod = MOD(0x066);
     uint32_t apt = reg_ptr(m, 0x050), bpt = reg_ptr(m, 0x04C), cpt = reg_ptr(m, 0x048),
              dpt = reg_ptr(m, 0x054);
     uint32_t ap = apt, bp = bpt, cp = cpt, dp = dpt, dstp = 0;
@@ -155,7 +156,7 @@ static int line_blit(FA18Machine *m, int width, int height) {
     uint16_t con0 = R(0x040), con1 = R(0x042);
     uint32_t cpt = reg_ptr(m, 0x048), dpt = reg_ptr(m, 0x054);
     uint32_t apt = (uint32_t)m->custom[0x052 >> 1] | (uint32_t)m->custom[0x050 >> 1] << 16;
-    int16_t amod = (int16_t)R(0x064), bmod = (int16_t)R(0x062), cmod = (int16_t)R(0x060);
+    int16_t amod = MOD(0x064), bmod = MOD(0x062), cmod = MOD(0x060);
     uint32_t bpt = reg_ptr(m, 0x04C);
     int onedot = 0, linepixel = 0, loop = 1, ovf = 0, zero = 1;
     int bshift = con1 >> 12;

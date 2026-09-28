@@ -57,6 +57,7 @@ typedef struct {
     FA18Cia cia[2];
     uint16_t joy0dat, joy1dat, pot;
     int mouse_x, mouse_y;
+    int mouse_left, mouse_right, joy_fire; /* 1 = pressed */
     uint8_t keyboard_queue[64];
     int keyboard_head, keyboard_tail, keyboard_cooldown;
     uint16_t screen[FA18_SCREEN_W * FA18_SCREEN_H];      /* RGB444, frame in progress */
@@ -76,6 +77,8 @@ void fa18_machine_run_frame(FA18Machine *m);
 /* Keyboard: Amiga raw key code (0..$7F), down or up. */
 void fa18_machine_key(FA18Machine *m, int rawkey, int down);
 void fa18_machine_mouse(FA18Machine *m, int dx, int dy);
+/* Port 0 mouse buttons (0 left, 1 right) and port 1 joystick fire. */
+void fa18_machine_button(FA18Machine *m, int button, int down);
 
 uint8_t fa18_bus_read8(uint32_t address);
 uint16_t fa18_bus_read16(uint32_t address);
