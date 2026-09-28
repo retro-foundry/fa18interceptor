@@ -13,10 +13,17 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 203/203 CTest contracts passed; native build checker
-  reported 390 C sources.
+- Last full validation: 204/204 CTest contracts passed; native build checker
+  reported 392 C sources.
 
 ### Most recent chain
+
+`terrain_selector_origin_adjustment.{c,h}` now ports the shared
+`$C29548-$C295D0` candidate tail.  It quarter-reduces the source magnitude,
+uses the required `$C2574A` scale callback, sign-extends/scales the candidate,
+smooths it with `$C45C4A`, adds it to the live origin, and writes the masked
+X/Z negated companion separately.  Static adjustment-table dispatch and the
+parent owner remain outside this bounded tail.
 
 `matrix_transform_components.{c,h}` now ports `$C091F0-$C09249`, the shared
 signed three-word transform leaf: wrapped signed word products through the
