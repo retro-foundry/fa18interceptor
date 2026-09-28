@@ -102,6 +102,17 @@ the source scene/root state that calls it. Normal replay remains exactly 192
 frames (200--391), with frame 392 still the first mismatch. The early
 `$C2FF56` return remains invalid because blitter work is active.
 
+`FA18RendererLaneStage` now ports the normal `$C2FF58-$C30037` lane tail as
+one typed operation: its caller supplies the source-order `$C456B6` pointer
+block, lane-enable/scale words, mutable `$C45956`, and the final lane
+workspace fields. It performs each enabled `$C30466` submission and the final
+`$C304B2` submission while preserving inherited blitter registers. The
+non-negative-enable/nonzero-stage-flag `$C3040C` prelude remains an explicit
+failure, not a substitute. The run036 oracle routes its two enabled lanes
+through this API and stays byte exact. It is a reusable renderer backend, but
+it still requires an OCS Chip-page binding and source scheduler before it can
+be connected to `FA18FlightRendererPage` or `game.c`.
+
 The separate opt-in `--bootstrap-c279-render-fixture SLOW CHIP` diagnostic
 starts from external frame-384 pre-call state, then runs the native
 `$C279D0-$C27D0F` packet/grid/direct-pixel/line path over that page. It does

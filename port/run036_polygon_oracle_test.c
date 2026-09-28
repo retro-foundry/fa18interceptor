@@ -138,22 +138,15 @@ static int apply_fill_and_lanes(uint8_t *chip, const Run036Emitter *emitter,
     if (apply_descending_fill(chip, emitter) != 0) return -1;
     if (after_fill_path && save_file(after_fill_path, chip) != 0) return -1;
 
-    /* `$C2FF58` selects lanes C and 8, then calls `$C304B2`. */
-    operation.bltcon0 = 0x0dfc;
-    operation.bltcon1 = 0x0002;
-    operation.bltsize = emitter->final_state.blit_size;
-    operation.bltapt = emitter->final_state.lane_long;
-    operation.bltbpt = 0x014250;
-    operation.bltdpt = 0x014250;
-    if (fa18_execute_ocs_block_blit(&operation, chip, CHIP_BYTES) != 0) return -1;
-    operation.bltbpt = 0x016190;
-    operation.bltdpt = 0x016190;
-    if (fa18_execute_ocs_block_blit(&operation, chip, CHIP_BYTES) != 0) return -1;
-    operation.bltcon0 = 0x0d0c;
-    operation.bltbpt = emitter->final_state.lane_long;
-    operation.bltdpt = emitter->final_state.lane_long;
-    if (fa18_execute_ocs_block_blit(&operation, chip, CHIP_BYTES) != 0) return -1;
-    return 0;
+    /* run036's `$C2FF58` state after `$C30404`: `$C456B6` points at
+     * this source-order plane table and lanes 0/1 are enabled. */
+    FA18RendererLaneStage lanes = {
+        { 0x00018980u, 0x00016a40u, 0x00014b00u, 0x00012bc0u },
+        0x03u, 3, 0, 0, 7,
+        emitter->final_state.offset_long, emitter->final_state.lane_copy,
+        emitter->final_state.lane_long, emitter->final_state.blit_size, 0
+    };
+    return fa18_execute_renderer_lane_stage(&lanes, &operation, chip, CHIP_BYTES);
 }
 
 int main(int argc, char **argv) {

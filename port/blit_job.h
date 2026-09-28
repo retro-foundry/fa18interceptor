@@ -79,11 +79,9 @@ int fa18_execute_blitter_words(uint8_t logic_function,
                                uint16_t last_mask);
 
 /* Execute one OCS block-mode BLTSIZE submission against caller-owned Chip
- * bytes.  It preserves the source register model: enabled A/B/C channels are
+ * bytes. It preserves the source register model: enabled A/B/C channels are
  * selected from BLTCON0, shifts use their BLTCON fields and initial data
- * registers, and pointer/modulo progression follows BLTCON1 DESC.  Line and
- * fill modes have distinct hardware state and deliberately fail here rather
- * than being approximated as a polygon fill. */
+ * registers, and pointer/modulo progression follows BLTCON1 DESC. */
 int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
                                 uint8_t *chip_bytes, size_t chip_byte_count);
 
@@ -92,6 +90,29 @@ int fa18_execute_ocs_block_blit(const FA18BlitOperation *operation,
  * triangle API. */
 int fa18_execute_ocs_line_blit(FA18BlitOperation *operation,
                                uint8_t *chip_bytes, size_t chip_byte_count);
+
+/* Mutable source state consumed by `$C2FF58-$C30037`. `plane_pointers` are
+ * the four longwords at the caller-owned `$C456B6` block in source order
+ * (+0, +4, +8, +12). The function preserves inherited operation registers
+ * except for the exact `$C30466/$C304B2` writes, and rejects the separately
+ * unported `$C3040C` prelude route. */
+typedef struct {
+    uint32_t plane_pointers[4];
+    uint8_t lane_enable_mask;
+    int16_t enable_word;
+    int16_t scale_word;
+    int16_t inherited_d4;
+    uint16_t line_control;
+    uint32_t lane_offset;
+    uint32_t lane_copy;
+    uint32_t lane_pointer;
+    uint16_t blit_size;
+    uint16_t stage_flag;
+} FA18RendererLaneStage;
+
+int fa18_execute_renderer_lane_stage(FA18RendererLaneStage *stage,
+                                     FA18BlitOperation *operation,
+                                     uint8_t *chip_bytes, size_t chip_byte_count);
 typedef enum { FA18_LANE_CONTROL_A = 0, FA18_LANE_CONTROL_B, FA18_LANE_CONTROL_C } FA18LaneControl;
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation);
 

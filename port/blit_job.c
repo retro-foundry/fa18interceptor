@@ -384,6 +384,54 @@ int fa18_execute_ocs_line_blit(FA18BlitOperation *operation,
     return 0;
 }
 
+static int16_t arithmetic_shift_right(int16_t value, unsigned count) {
+    if (value >= 0) return (int16_t)(value >> count);
+    return (int16_t)-((-(int32_t)value + ((INT32_C(1) << count) - 1)) >> count);
+}
+
+int fa18_execute_renderer_lane_stage(FA18RendererLaneStage *stage,
+                                     FA18BlitOperation *operation,
+                                     uint8_t *chip_bytes, size_t chip_byte_count) {
+    if (!stage || !operation || !chip_bytes ||
+        (stage->enable_word >= 0 && stage->stage_flag != 0))
+        return -1;
+
+    for (unsigned lane = 0; lane < 4; ++lane) {
+        int16_t d3;
+        int16_t d4;
+        if ((stage->lane_enable_mask & (UINT8_C(1) << lane)) == 0u) {
+            stage->line_control = (uint16_t)(stage->line_control >> 1);
+            continue;
+        }
+        if (stage->enable_word < 0) {
+            d3 = (int16_t)stage->line_control;
+            d4 = stage->inherited_d4;
+        } else {
+            d3 = arithmetic_shift_right(stage->enable_word, lane);
+            d4 = arithmetic_shift_right(stage->scale_word, lane);
+        }
+        /* `$C30466` consumes one bit before deriving the lane job. */
+        stage->line_control = (uint16_t)(stage->line_control >> 1);
+        operation->bltcon0 = (d4 & 1) ? 0x0fecu :
+                             (d3 & 1) ? 0x0dfcu : 0x0d0cu;
+        operation->bltcon1 = 0x0002u;
+        operation->bltapt = stage->lane_copy;
+        operation->bltbpt = stage->lane_offset + stage->plane_pointers[3u - lane];
+        operation->bltdpt = operation->bltbpt;
+        operation->bltsize = stage->blit_size;
+        if (fa18_execute_ocs_block_blit(operation, chip_bytes, chip_byte_count) != 0)
+            return -1;
+    }
+    /* `$C304B2`: A/B/D receive `$C45960`; all other registers are inherited. */
+    operation->bltcon0 = 0x0d0cu;
+    operation->bltcon1 = 0x0002u;
+    operation->bltapt = stage->lane_pointer;
+    operation->bltbpt = stage->lane_pointer;
+    operation->bltdpt = stage->lane_pointer;
+    operation->bltsize = stage->blit_size;
+    return fa18_execute_ocs_block_blit(operation, chip_bytes, chip_byte_count);
+}
+
 void fa18_prepare_lane_blit(uint16_t blit_size, uint32_t lane_pointer, FA18BlitOperation *operation) {
     if (!operation) return;
     operation->bltcon0 = 0x0d0c; operation->bltcon1 = 2;

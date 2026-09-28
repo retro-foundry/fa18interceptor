@@ -79,6 +79,20 @@ int main(void) {
     assert(fa18_execute_ocs_block_blit(&operation, chip, sizeof chip) == 0);
     assert(chip[0x10] == 0xff && chip[0x11] == 0x80);
     assert(chip[0x0e] == 0xff && chip[0x0f] == 0xc0);
+    /* `$C2FF58-$C30037` consumes a lane bit, selects the source-order +12
+     * pointer for lane zero, then finishes through `$C304B2`. */
+    memset(chip, 0, sizeof chip);
+    chip[0] = 0x80;
+    operation = (FA18BlitOperation){
+        .bltafwm = 0xffffu, .bltalwm = 0xffffu
+    };
+    FA18RendererLaneStage lanes = {
+        { 0, 0, 0, 8 }, 1, 3, 0, 0, 7, 0, 0, 16, 0x0041u, 0
+    };
+    assert(fa18_execute_renderer_lane_stage(&lanes, &operation, chip, sizeof chip) == 0);
+    assert(chip[8] == 0x80 && chip[9] == 0 && lanes.line_control == 0);
+    lanes.stage_flag = 1;
+    assert(fa18_execute_renderer_lane_stage(&lanes, &operation, chip, sizeof chip) == -1);
     memset(chip, 0, sizeof chip);
     operation = (FA18BlitOperation){
         .bltcon0 = 0x0bdau, .bltcon1 = 0x0001u,
