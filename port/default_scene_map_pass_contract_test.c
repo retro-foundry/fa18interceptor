@@ -24,7 +24,7 @@ static int display(void *context, const FA18MapPacketProjectionRecord *records,
 static int low_row(void *context, uint32_t address, int16_t selector,
                    int8_t row[4]) {
     (void)context;
-    if (address != 0x00c2aa1c || selector != 0) return -1;
+    if (address != 0x00c2aa1c || selector != 6) return -1;
     row[0] = -1; row[1] = row[2] = row[3] = 0;
     return 0;
 }
@@ -75,6 +75,8 @@ int main(void) {
     input.scene = (FA18DefaultSceneRenderPassInput){
         {scene_record, sizeof scene_record, 0, 0}, {0, 0, 0, {168,252,128}},
         0, 200};
+    input.selector_pack = (FA18ContextSelectorPackState){
+        0, 0, 0, {0,0,0}, 0, 0, 6, 0, 0, 0};
     input.map.depth = (FA18MapPacketDepthStageInput){0, 0, 1, 0x80};
     input.map.pass.static_data = &static_data;
     input.map.pass.selector = (FA18MapPacketPassSelectorInput){

@@ -18,10 +18,14 @@ source-owned values into a caller-supplied map-parent template:
   transform matrix; and
 - the projection packet becomes the map depth-stage input.
 
-The template deliberately retains the static Hunk binding, selector-gate
-alternate component, detail fields, filter row resolver, workspace header,
-and native page submission. Those are live parent/page state not recovered by
-this local composition.
+The parent-prepared `$C1C6BC` selector pack is also consumed directly:
+`$C45785` selects the ordinary-root or alternate-origin coordinate triple,
+`$C45C3E/$C45C42/$C45C46` supply the latter, and `$C45850` supplies the map
+low-filter/column-table selector.
+
+The template deliberately retains the static Hunk binding, detail fields,
+filter row resolver, workspace header, and native page submission. Those are
+live parent/page state not recovered by this local composition.
 
 The contract uses a source-shaped active record whose `$C1C54E` seed yields
 depth `-125`, reproducing the frame-382 `$C2AA9C` low-metric branch. It proves

@@ -2,6 +2,7 @@
 #define FA18_DEFAULT_SCENE_MAP_PASS_H
 
 #include "default_scene_render_pass.h"
+#include "context_selector_pack.h"
 #include "map_packet_parent_pass.h"
 
 /* Caller supplies the still-live map selectors, detail state, static Hunk
@@ -10,6 +11,9 @@
  * root longs, `$C45BD8`, and `$C45A78`. */
 typedef struct {
     FA18DefaultSceneRenderPassInput scene;
+    /* `$C1C6BC` output, prepared by the parent immediately before the map
+     * conditional. */
+    FA18ContextSelectorPackState selector_pack;
     FA18MapPacketParentPassInput map;
 } FA18DefaultSceneMapPassInput;
 

@@ -28,6 +28,12 @@ int fa18_render_default_active_scene_map_pass(
 
     map = input->map;
     map.depth.packet = &result->scene.scene_pipeline.packet;
+    map.pass.selector.coordinate.directory_selector_gate =
+        input->selector_pack.context_selection;
+    memcpy(map.pass.selector.coordinate.selector_component,
+           input->selector_pack.origin,
+           sizeof map.pass.selector.coordinate.selector_component);
+    map.pass.selector.table_selector = (int8_t)input->selector_pack.selector_byte_x;
     map.pass.selector.coordinate.control_component[0] = read_be32(record + 0x14);
     map.pass.selector.coordinate.control_component[1] = read_be32(record + 0x18);
     map.pass.selector.coordinate.control_component[2] = read_be32(record + 0x1c);

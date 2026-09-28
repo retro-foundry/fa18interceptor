@@ -1157,6 +1157,12 @@ suppression and accumulated change byte are retained. This makes the map
 table-selector state a source-backed producer, but active-origin production,
 detail state, page ownership, and scheduling are still outstanding.
 
+The default-scene/map bridge now consumes that selector pack directly: it
+uses `$C45785` to choose the active-root or `$C45C3E/$C45C42/$C45C46`
+coordinate triple and transfers `$C45850` to the map pass's low-filter/column
+selector. Thus the parent map pass no longer has an opaque selector-template
+gap; detail fields, native page ownership, and outer scheduling remain open.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
