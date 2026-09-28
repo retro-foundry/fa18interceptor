@@ -1032,6 +1032,20 @@ caller status bit. These are deliberately unscheduled leaves: the unported
 `$C13D84` parent still owns delta production, the downstream continuations,
 and the cadence that must drive the live scene record.
 
+`fa18_flight_adjust_signed_word_pair` now preserves `$C15138` word-width
+arithmetic: `ADD.W`, `NEG.W`, shifts, and `SUB.W` all retain 68000 16-bit
+wrap. In particular `$7FFF + 1` becomes `$8000`; `NEG.W` leaves that signed
+minimum unchanged, so the source takes the `<= 4` route and the final
+subtraction wraps back to `$7FFF`. This closes an edge-case divergence in the
+already ported `$C14B16` scaled-delta producer, but does not schedule it.
+
+The live prepared page cannot be supplied by a fresh `$C279D0` root-grid pass:
+normal run075 page mutations are dominated by `$C304F8` span/fill work, while
+the frame-384 `$C279D0` pass changes only six lower-plane bytes. The proven
+two-page `$C1612C` handoff must therefore receive the complete source
+`$C0D752 -> $C2FEDE/$C301F6 -> $C304F8` producer state before it can replace
+the capture diagnostic in `game.c`.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
