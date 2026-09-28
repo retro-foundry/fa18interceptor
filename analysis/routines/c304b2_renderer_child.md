@@ -28,3 +28,23 @@ as an alternate source path in the evidence record, not selected by the native
 port. Since the three channel pointers are equal at this leaf, their semantic
 page roles cannot be inferred from C304B2 alone; that assignment belongs to the
 caller and its selected renderer lane.
+
+## run075 prepared-page caller witness
+
+The return-bounded run075 capture at local replay frame 182 (the prepared-page
+window) reaches this leaf with `BLTSIZE=$0E14` and the shared A/B/D lane
+pointer `$000076EE`. That is a 20-word by 56-row operation. The saved stack
+has `$C3002E` as the immediate return PC and `$C24D66` as its caller's return
+PC, establishing the source path:
+
+```text
+$C24D60 polygon wrapper -> $C2FF48 -> $C2FF58 lane tail -> $C3002A -> $C304B2
+```
+
+This is distinct from the `$C279D0` Hunk-25 invocation sampled during the
+same page-preparation interval: its two `$C2FF48` calls take the direct-line
+continuation and do not reach this fill leaf. Therefore the generic `$C24D`
+polygon input/transform publisher, rather than a fresh grid packet alone, is
+the next required producer for the page later revealed by the mode-palette
+transition. The observed pointer and size are diagnostic evidence only, not
+native runtime constants.

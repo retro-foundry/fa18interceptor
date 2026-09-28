@@ -761,6 +761,16 @@ each line/fill boundary. The adapter is available as the two
 to `game.c`: the parent still must provide its actual record, matrix, page,
 lane state, and scheduler cadence. `ctest` passes 120/120 contracts.
 
+The next prepared-page producer witness is now narrowed further. A
+return-bounded `$C304B2` capture in the run075 preparation window carries
+`BLTSIZE=$0E14` and shared A/B/D pointer `$000076EE`; its stack proves
+`$C24D60 -> $C2FF48 -> $C2FF58 -> $C3002A -> $C304B2`. The contemporaneous
+`$C279D0` calls take their direct-line continuation instead and do not reach
+that fill. Recover the `$C24D` polygon input/transform publisher before
+wiring a normal page-render schedule; do not treat the projection-grid
+diagnostic as the complete prepared-page producer. See
+`analysis/routines/c304b2_renderer_child.md`.
+
 `scene_root_placement.{c,h}` and `scene_root_record.c` now also port the
 negative-root handoff at `$C09514-$C0951A`: after the selected source record
 has driven `$C2D954`, its three `+$66/+68/+6A` angle words are copied into
