@@ -1083,6 +1083,15 @@ native producer immediately before the established projection/submission
 tail, but still needs a typed `$C246A0` display-stage adapter to publish the
 result to the selected renderer page and the parent cadence to schedule it.
 
+`polygon_display_pipeline.{c,h}` now closes the bounded producer through
+`$C24CFE -> $C2FF48`: it clips caller triples, projects the positive-depth
+result into source screen-pair order, and invokes the distinct DMA-enabled
+tuple-list wrapper once. The run075 frame-382 contract confirms all 14
+`$C4B390` pairs (including the closing `(0,179)` pair) and the one `$8400`
+DMA submission. A future `$C246A0` map-display callback can bind this directly
+to the selected page's renderer submission; normal cadence and map-record
+ownership remain unresolved.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:

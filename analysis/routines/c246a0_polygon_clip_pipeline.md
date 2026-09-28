@@ -15,3 +15,8 @@ retained at the tail rather than rotating the polygon at the closing edge.
 word-width rounding rule. Its contract uses the observed 13 input triples and
 checks the exact 14-tuple `$C4B990` result. It is a producer for the existing
 `$C24CFE` projection/submission path, not yet a game scheduler or page hook.
+
+`polygon_display_pipeline.{c,h}` now composes that result through the exact
+positive-depth projection and `$C2FF48` DMA-enabled list wrapper. Its same
+witness checks all 14 projected pairs at `$C4B390`, including `(0,89)`,
+`(319,91)`, and the closing `(0,179)`, and confirms one `$8400` DMA write.
