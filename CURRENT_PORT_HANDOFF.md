@@ -1,5 +1,22 @@
 # C port continuation handoff
 
+## Latest dispatch boundary
+
+`prepared_record_dispatch.{c,h}` ports `$C2005C-$C200F5` through the
+explicit `$C2469E` handoff.  It retains the source's two direct transformed
+tuple offsets, variable continuation terminated by a negative masked offset,
+depth-AND rejection, descriptor handling, `$C1FB82` branch result, stream
+advance, and both local counters.  The frame-601 emulator packet
+`{0x002a,0x0024,0x8072,0x000c}` is a reusable contract: it reaches the traced
+negative return at `$C200F2`.  This code is deliberately not scheduled by
+`game.c`; a live record-walker/page owner must consume its display-ready
+workspace before it can affect normal replay.
+
+Validation at this boundary: 188/188 CTest contracts pass; native replay is
+still exact over frames 200--391 and first mismatches at 392.  The normal
+frame-402 renderer gate remains black (zero nonblack pixels).  Do not present
+this dispatch contract as a rendered frame.
+
 ## Starting point
 
 - Branch: `coverage-accounting`
