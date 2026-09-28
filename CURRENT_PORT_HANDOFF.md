@@ -1310,6 +1310,13 @@ shares its native pair type with `flight_page_handoff`; it deliberately does
 not create identities in `game.c` before the original transition owner is
 recovered.
 
+The pair initializer is callback-scheduled: its slot-zero return at cold-boot
+frame 5,926 is `$C0E344`, whose prefix calls `$C0E65E`, `WaitBOVP`, and the
+live `$C1AADC` renderer setup path. The callback table holds the initializer
+at `$C55058`; this is not a direct `$C1612C` or `$C15D80` call. See
+`analysis/routines/c0e344_view_pair_continuation.md`. Recover that dispatcher
+and `$C0E65E/$C24DB0` contracts before scheduling native pair construction.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
