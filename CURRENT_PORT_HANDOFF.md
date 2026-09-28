@@ -13,10 +13,17 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 201/201 CTest contracts passed; native build checker
-  reported 386 C sources.
+- Last full validation: 202/202 CTest contracts passed; native build checker
+  reported 388 C sources.
 
 ### Most recent chain
+
+`current_record_matrix.{c,h}` now ports `$C2DAF2-$C2DB17`, the matrix
+preparation called at the `$C29042` entry.  It reads the selected record
+`+$68`, substitutes `0x7080 - angle` only for a nonzero source word, and
+builds the resulting single-angle matrix.  The callback adapter lets a
+source-owned active-record/matrix state satisfy the direct origin publisher;
+it does not create the missing parent update owner or schedule presentation.
 
 `terrain_selector_origin.{c,h}` now ports the direct-record lane of
 `$C29042-$C291D3`.  In the source gate combination `C45785 != 0`, `C457B5 !=
