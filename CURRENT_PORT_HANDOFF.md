@@ -1,5 +1,24 @@
 # C port continuation handoff
 
+## Latest record-walker composition
+
+`record_walker_runtime.{c,h}` now directly composes the bounded P-code path
+`$C1F6F8-$C1F966`: ordinary record traversal, `$C1F7A0` negative-control
+A1/A2 selection, and `$C1F910-$C1F94D` negative selector dispatch.  Its table
+handler receives A2 after the selector word, which is the source cursor needed
+by `$0034 -> $C212B0`.  `$C1F844`, `$C1F8EC`, and `$C1F94E` remain explicit
+external routes; no selector is skipped or substituted.  The contract reaches
+the real `$0034` dispatch boundary and resumes the source A5 terminator after
+a negative target return.
+
+This is a P-code translation boundary only.  It is not scheduled by `game.c`,
+and normal native frame 402 remains unverified/non-rendering until the live
+placement/stream owner supplies its real inputs and `$0034` is bound to the
+five-plane line emitter.
+
+Validation after this change: 195/195 CTest contracts pass and the native
+build checker sees 372 sources.
+
 ## Latest visible primitive
 
 `offset_pair_segment_submission.{c,h}` ports `$C212B0-$C2131B`, the direct
