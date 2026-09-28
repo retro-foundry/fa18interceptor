@@ -43,8 +43,13 @@ $C24D60 polygon wrapper -> $C2FF48 -> $C2FF58 lane tail -> $C3002A -> $C304B2
 
 This is distinct from the `$C279D0` Hunk-25 invocation sampled during the
 same page-preparation interval: its two `$C2FF48` calls take the direct-line
-continuation and do not reach this fill leaf. Therefore the generic `$C24D`
-polygon input/transform publisher, rather than a fresh grid packet alone, is
-the next required producer for the page later revealed by the mode-palette
-transition. The observed pointer and size are diagnostic evidence only, not
-native runtime constants.
+continuation and do not reach this fill leaf. A return-bounded capture at the
+first `$C24D60` entry in the same frame now identifies its caller return as
+`$C2AFE8`. That is the `$C2AA9C-$C2AFF9` map-packet pass's display-stage
+continuation, so this prepared-page fill comes from the static-map packet
+transform -> `$C246A0` clip -> `$C24CFE` projection path, rather than an
+unclassified generic `$C24D` producer. The source-backed native composition
+exists in `map_packet_parent_pass`, `map_packet_polygon_display`, and the
+polygon/page-blitter modules; its still-missing owner is the live parent state
+and page handoff. The observed pointer and size are diagnostic evidence only,
+not native runtime constants.

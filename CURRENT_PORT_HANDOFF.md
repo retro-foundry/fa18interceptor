@@ -1046,6 +1046,15 @@ two-page `$C1612C` handoff must therefore receive the complete source
 `$C0D752 -> $C2FEDE/$C301F6 -> $C304F8` producer state before it can replace
 the capture diagnostic in `game.c`.
 
+A new return-bounded run075 frame-382 trace at `$C24D60` resolves one key
+prepared-page producer edge: the stack return at its first `$C2FF48` submit is
+`$C2AFE8`. The area-fill path is therefore the already bounded
+`$C2AA9C-$C2AFF9` static-map packet pass feeding `$C246A0 -> $C24CFE`, not an
+unclassified generic polygon publisher or the small `$C279D0` grid pass. The
+native map static-data, transform, clip/display, and page-blitter components
+must next be composed with their live parent selectors, matrix, detail, and
+two-page owner; do not substitute the trace's packet or page values.
+
 `fa18_load_display_record_candidate_input_pairs` now loads `$C0D75E`'s four
 signed candidate pairs from the first 16 executable bytes of original segment
 33 (runtime `$C0D720`). They are intentionally code words consumed as data by
