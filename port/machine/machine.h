@@ -79,6 +79,8 @@ void fa18_machine_key(FA18Machine *m, int rawkey, int down);
 void fa18_machine_mouse(FA18Machine *m, int dx, int dy);
 /* Port 0 mouse buttons (0 left, 1 right) and port 1 joystick fire. */
 void fa18_machine_button(FA18Machine *m, int button, int down);
+/* Port 1 joystick directions (1 = held). */
+void fa18_machine_joystick(FA18Machine *m, int up, int down, int left, int right);
 
 uint8_t fa18_bus_read8(uint32_t address);
 uint16_t fa18_bus_read16(uint32_t address);

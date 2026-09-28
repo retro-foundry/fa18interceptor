@@ -11,13 +11,15 @@ int fa18_amiga_rawkey(int sdl_keycode);
  * numbered from the run's restore frame. */
 typedef struct {
     int frame;
-    char kind;       /* 'K' key, 'm' mouse motion, 'b' mouse button */
-    int a, b, c, d;  /* K: key char mods down; m: port dx dy; b: port button down */
+    char kind;       /* 'K' key, 'm' mouse motion, 'b' mouse button, 'J' joypad, 'C' clear */
+    int a, b, c, d;  /* K: key char mods down; m: port dx dy; b: port button down;
+                        J: port id down (libretro pad ids: 0 fire, 4-7 up down left right) */
 } FA18ReplayEvent;
 
 typedef struct {
     FA18ReplayEvent *events;
     int count, next;
+    int pad[16];     /* held joypad buttons, port 0 */
 } FA18Replay;
 
 int fa18_replay_load(FA18Replay *replay, const char *path);

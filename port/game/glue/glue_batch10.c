@@ -40,6 +40,7 @@ int glue_C11312(void) {
     reset_message_sequence();
     D(0) = 0;
     A(0) = MESSAGE_QUEUE + 4;
+    flags_logic_b(0); /* final MOVE.B D0,MESSAGE_STATE_D */
     return glue_return();
 }
 

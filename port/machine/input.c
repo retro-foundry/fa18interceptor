@@ -112,6 +112,18 @@ void fa18_replay_apply(FA18Replay *replay, FA18Machine *m, int frame) {
         case 'b':
             if (e->a == 0 || e->a == 4) fa18_machine_button(m, e->b, e->c);
             break;
+        case 'J':
+            if (e->a == 0 && e->b >= 0 && e->b < 16) {
+                replay->pad[e->b] = e->c != 0;
+                fa18_machine_joystick(m, replay->pad[4], replay->pad[5], replay->pad[6], replay->pad[7]);
+                fa18_machine_button(m, 2, replay->pad[0]);
+            }
+            break;
+        case 'C':
+            memset(replay->pad, 0, sizeof replay->pad);
+            fa18_machine_joystick(m, 0, 0, 0, 0);
+            fa18_machine_button(m, 2, 0);
+            break;
         default: break;
         }
     }

@@ -446,6 +446,12 @@ void fa18_machine_button(FA18Machine *m, int button, int down) {
     else m->joy_fire = down;
 }
 
+void fa18_machine_joystick(FA18Machine *m, int up, int down, int left, int right) {
+    /* JOY1DAT: bit 9 left, bit 8 up ^ left, bit 1 right, bit 0 down ^ right. */
+    m->joy1dat = (uint16_t)((left ? 0x200 : 0) | ((up ^ left) ? 0x100 : 0) | (right ? 0x002 : 0) |
+                            ((down ^ right) ? 0x001 : 0));
+}
+
 static void keyboard_line(FA18Machine *m) {
     uint8_t k;
     if (m->keyboard_cooldown > 0) { m->keyboard_cooldown--; return; }
