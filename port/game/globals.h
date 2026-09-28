@@ -200,4 +200,16 @@
 /* ---- attitude term ($C148E2) ----------------------------------------------- */
 #define REFERENCE_18       0xC456FAu /* long: compared with record field +$18 */
 
+/* ---- cockpit slide animation ($C2559A) ------------------------------------ */
+#define SLIDE_ANIMATION    0xC457C0u /* byte: 1-based animation number, 0 = none (also REDRAW_KEEP_STATE) */
+#define SLIDE_STEP         0xC4588Fu /* byte: current step */
+#define SLIDE_FLAGS        0xC458CCu /* word: bit 10 = animation started */
+#define SLIDE_TABLE        0xC25572u /* per animation: long -> step count byte, long -> offsets */
+
+/* ---- position history ($C2651E) ------------------------------------------ */
+#define HISTORY_RECORD     0xC4FDD2u /* word: record offset the history follows */
+#define HISTORY_COUNT      0xC4FDD0u /* byte: 0-6 entries filled */
+#define HISTORY_NEXT       0xC4FDD1u /* byte: 0-5 next slot */
+#define HISTORY_SLOTS      0xC4FDD4u /* 12-byte slots: record +$14, +$18, +$1C */
+
 #endif

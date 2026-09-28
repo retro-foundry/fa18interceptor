@@ -113,4 +113,9 @@ int glue_C254E8(void);
 int glue_C231A2(void);
 int glue_C148E2(void);
 
+/* batch 13: decimal format, cockpit slide, position history */
+int glue_C3267A(void);
+int glue_C2559A(void);
+int glue_C2651E(void);
+
 #endif

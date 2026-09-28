@@ -19,3 +19,22 @@ uint32_t to_packed_bcd(uint32_t value) {
 }
 
 void pack_display_value(void) { wr_u32(DISPLAY_VALUE_BCD, to_packed_bcd(rd_u32(DISPLAY_VALUE))); }
+
+gaddr format_decimal(gaddr end, uint32_t value, int count, int keep_zeros) {
+    uint32_t bcd;
+    gaddr p = end;
+    int i;
+
+    wr_u32(DISPLAY_VALUE, value);
+    pack_display_value();
+    bcd = rd_u32(DISPLAY_VALUE_BCD);
+    for (i = 0; i < count; i++) {
+        wr_u8(--p, (uint8_t)((bcd & 15) + '0'));
+        bcd >>= 4;
+    }
+    if (!keep_zeros) {
+        gaddr q = p;
+        for (i = 0; i < count - 1 && rd_u8(q) == '0'; i++) wr_u8(q++, ' ');
+    }
+    return p;
+}

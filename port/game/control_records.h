@@ -95,4 +95,8 @@ int paired_record_ready(gaddr record);
  * 2^11 or, unless +$2 bit 3, 2^13. */
 int16_t attitude_term(void);
 
+/* Record the shown record's position (+$14/+$18/+$1C) in the six-slot
+ * history (twice while it is filling) and keep its +$3D history length. */
+void record_position_history(void);
+
 #endif

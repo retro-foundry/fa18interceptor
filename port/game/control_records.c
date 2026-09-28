@@ -268,3 +268,34 @@ int16_t attitude_term(void) {
     offset_18 >>= (rd_u16(r + 0x02) & 0x08) ? 11 : 13;
     return (int16_t)(sum + offset_18);
 }
+
+void record_position_history(void) {
+    int16_t offset = rd_s16(SCRIPT_RECORD);
+    gaddr record, slot;
+    int copies, i;
+    int8_t length;
+
+    if (offset != rd_s16(HISTORY_RECORD)) return;
+    record = CONTROL_RECORDS + (gaddr)(int32_t)offset;
+    if (rd_u8(POST_INPUT_EVENT)) return;
+
+    slot = HISTORY_SLOTS + (gaddr)(int32_t)(int16_t)(rd_s8(HISTORY_NEXT) * 12);
+    copies = (int8_t)rd_u8(HISTORY_COUNT) < 5 ? 2 : 1;
+    while (copies--)
+        for (i = 0; i < 12; i += 4, slot += 4) wr_u32(slot, rd_u32(record + 0x14 + (gaddr)i));
+    wr_u8(HISTORY_NEXT, (uint8_t)(rd_u8(HISTORY_NEXT) + 1));
+    if ((int8_t)rd_u8(HISTORY_NEXT) > 5) wr_u8(HISTORY_NEXT, 0);
+    if ((int8_t)rd_u8(HISTORY_COUNT) < 6) wr_u8(HISTORY_COUNT, (uint8_t)(rd_u8(HISTORY_COUNT) + 1));
+
+    if (rd_u16(record + 0x6E) && (rd_u8(record + 0x02) & 0x10)) {
+        length = (int8_t)(rd_u8(HISTORY_COUNT) - 1);
+        if (length >= 5) length = 4;
+    } else {
+        length = (int8_t)rd_u8(record + 0x3D);
+        if (length == 0 || --length <= 0) {
+            wr_u8(HISTORY_COUNT, 0);
+            wr_u8(HISTORY_NEXT, 0);
+        }
+    }
+    wr_u8(record + 0x3D, (uint8_t)length);
+}
