@@ -137,6 +137,8 @@ const FA18Port fa18_ports[] = {
     {0xC259C2, glue_C259C2, "unpack_display_value", 900},
     {0xC1D4E4, glue_C1D4E4, "find_sorted_word", 200},
     {0xC13A8E, glue_C13A8E, "update_record_56_from_66", 200},
+    /* batch 18: joystick */
+    {0xC16F1C, glue_C16F1C, "read_joystick", 300},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

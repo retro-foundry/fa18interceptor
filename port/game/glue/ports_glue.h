@@ -139,4 +139,7 @@ int glue_C259C2(void);
 int glue_C1D4E4(void);
 int glue_C13A8E(void);
 
+/* batch 18: joystick */
+int glue_C16F1C(void);
+
 #endif

@@ -146,8 +146,8 @@
 /* ---- view panning ($C258C8) ---------------------------------------------- */
 #define VIEW_PAN           0xC45A94u /* word: 1/80 degree, limited to 270..90 through 0 */
 #define VIEW_ROTATE        0xC45A96u /* word: 1/80 degree, full circle */
-#define PAN_KEYS           0xC4582Eu /* byte: nonzero while panning; bit 5 = other way */
-#define ROTATE_KEYS        0xC45830u /* byte: nonzero while rotating; bit 3 = other way */
+#define STICK_Y            0xC4582Eu /* byte: joystick up $10, down $20 (pans the view) */
+#define STICK_X            0xC45830u /* byte: joystick left $08, right $04 (rotates the view) */
 #define PAUSE_A            0xC457ADu /* byte: nonzero blocks panning */
 
 /* ---- mission objects ($C0840E) ------------------------------------------- */
@@ -239,5 +239,11 @@
 #define SOUND_VOICES       0xC0A438u /* long[]: voice record of each sound */
 #define SOUND_FLAGS        0xC45B5Bu /* byte: bit 2 = alert tone enabled */
 #define SOUND_ALERT        5         /* the alert tone's sound number */
+
+/* ---- joystick ($C16F1C) --------------------------------------------------- */
+#define STICK_RAW          0xC45950u /* word: last JOY1DAT */
+#define STICK_Y_HELD       0xC45831u /* byte: an up/down direction is latched */
+#define STICK_X_HELD       0xC45832u /* byte: a left/right direction is latched */
+#define PLAYER_STICK       0xC461E9u /* byte: player record +$65; bits 4-5 Y, 2-3 X, while paused */
 
 #endif

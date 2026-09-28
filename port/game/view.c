@@ -26,7 +26,7 @@ void pan_view_from_keys(void) {
         return;
     pan = rd_s16(VIEW_PAN);
     rotate = rd_s16(VIEW_ROTATE);
-    if ((keys = rd_u8(PAN_KEYS)) != 0) {
+    if ((keys = rd_u8(STICK_Y)) != 0) {
         if (!(keys & 0x20)) {
             if (pan >= HALF_TURN) {
                 pan = (int16_t)(pan + PAN_STEP);
@@ -45,7 +45,7 @@ void pan_view_from_keys(void) {
             }
         }
         wr_s16(VIEW_PAN, pan);
-    } else if ((keys = rd_u8(ROTATE_KEYS)) != 0) {
+    } else if ((keys = rd_u8(STICK_X)) != 0) {
         if (!(keys & 0x08)) {
             rotate = (int16_t)(rotate + PAN_STEP);
             if (rotate >= FULL_TURN) rotate = (int16_t)(rotate - FULL_TURN);
