@@ -240,7 +240,6 @@ int fa18_game_enable_c279_render_fixture(FA18Game *game, const char *slow_captur
 }
 
 int fa18_game_present_active_scene_render_diagnostic(FA18Game *game) {
-    FA18FivePlanePage page;
     FA18FlightRendererPage renderer;
     FA18PlanarPixelState pixels = {0, 0, 0, 0};
     FA18LineStyle lines = {0, 0, 0, 0};
@@ -250,9 +249,8 @@ int fa18_game_present_active_scene_render_diagnostic(FA18Game *game) {
     uint16_t palette[FA18_VIEWPORT_PALETTE_WORDS];
 
     if (!game || !game->scene_entry_initialized) return -1;
-    fa18_five_plane_page_init(&page);
     if (fa18_flight_renderer_page_init(
-            &renderer, &page, &pixels, &lines,
+            &renderer, &game->renderer_page_setup.page, &pixels, &lines,
             game->scene_renderer_defaults.display_bound_y,
             game->scene_renderer_defaults.display_vertical,
             game->scene_renderer_defaults.display_horizontal, 0, 0, 0) != 0)
@@ -275,9 +273,10 @@ int fa18_game_present_active_scene_render_diagnostic(FA18Game *game) {
             &renderer, &result) != 0 ||
         fa18_load_viewport_mode_palette(&game->exe, game->viewport_mode.current,
                                         palette) != 0 ||
-        fa18_five_plane_page_load_rgb4(&page, palette, sizeof palette / sizeof *palette) != 0)
+        fa18_five_plane_page_load_rgb4(&game->renderer_page_setup.page, palette,
+                                       sizeof palette / sizeof *palette) != 0)
         return -1;
-    return fa18_five_plane_page_present(&page, &game->video);
+    return fa18_five_plane_page_present(&game->renderer_page_setup.page, &game->video);
 }
 
 int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,

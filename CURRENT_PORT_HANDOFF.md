@@ -18,6 +18,14 @@
 
 ### Most recent chain
 
+The opt-in active-scene diagnostic now renders into the source-shaped
+`$C15DB4-$C1601E` renderer-page allocation already owned by `FA18Game`, rather
+than a fresh unrelated five-plane page.  It remains entirely outside normal
+presentation and does not create an outer-loop schedule.  This ownership
+correction leaves both the normal and diagnostic frame-402 gates at zero
+nonblack pixels, confirming that the missing work is the live parent
+placement/map producer rather than page allocation.
+
 `map_packet_static_data` now resolves the `$C2AC76` low-metric four-byte
 selector rows directly from original Hunk 28, replacing another caller
 placeholder in the `$C2AA9C` map parent composition.  The record/detail/page
