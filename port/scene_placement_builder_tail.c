@@ -30,6 +30,24 @@ static void write_long(uint8_t *bytes, uint32_t value) {
     bytes[3] = (uint8_t)value;
 }
 
+int fa18_build_scene_placement_work(const FA18ScenePlacementWorkInput *input,
+                                    int32_t work[3]) {
+    int32_t first, third;
+    if (!input || !work) return -1;
+    first = input->workspace_word[0];
+    third = input->workspace_word[1];
+    if (!input->append_enabled) {
+        first *= 4;
+        third *= 4;
+    }
+    first -= (int32_t)input->correction_word[0] * 4;
+    third -= (int32_t)input->correction_word[1] * 4;
+    work[0] = first + input->translated_component[0] + input->origin_component[0];
+    work[1] = 0; /* `$C1DE04` clears the middle scratch word on this route. */
+    work[2] = third + input->translated_component[1] + input->origin_component[1];
+    return 0;
+}
+
 int fa18_finish_scene_placement_record(
     uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
     const FA18ScenePlacementBuilderTailInput *input,
