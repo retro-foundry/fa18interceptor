@@ -37,8 +37,8 @@ int main(void) {
            trace.delay == 0x186a0 && trace.calls[0] == 1 && trace.calls[1] == 2);
     assert(fa18_run_outer_update_loop_iteration(&state, &ops) == 0);
     assert(state.completed_iterations == 1 && trace.count == 8 &&
-           trace.calls[2] == 3 && trace.calls[3] == 4 && trace.calls[4] == 5 &&
-           trace.calls[5] == 6 && trace.calls[6] == 7 && trace.calls[7] == 8);
+           trace.calls[2] == 3 && trace.calls[3] == 4 && trace.calls[4] == 6 &&
+           trace.calls[5] == 5 && trace.calls[6] == 7 && trace.calls[7] == 8);
     assert(fa18_run_outer_update_loop_iteration(&state, &ops) == 0);
     assert(state.completed_iterations == 2 && trace.count == 14);
     ops.wait_display = 0;
