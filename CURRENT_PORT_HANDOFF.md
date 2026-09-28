@@ -753,20 +753,19 @@ The selected record's run075 second angle is now traced to its real dispatch
 producer, rather than treated as a root-placement value.  At global frame 272,
 `$C28AFE -> $C28B34 -> $C28800` calls `$C123FA`, which publishes
 `$C45AC2=$6FB8`; `$C288BC` then invokes `$C2D954` with `(0,$6FB8,0)` for slot
-14 (`$C47D84`).  The current native dispatch adapter covers the direct
-`$C28BEE` creation arm.  `scene_dispatch_coordinate_pose.{c,h}` now ports the
-bounded `$C28800-$C288C4` continuation behind its required `$C123FA`
-coordinate callback; it is deliberately unscheduled until that exact helper
-route is ported.  The new contract makes the source high-byte selection,
-bit-6 gate, placement copies, wrapped deltas, and `(0,C45AC2,0)` matrix
-publication explicit.  `coordinate_update_positive_pair.{c,h}` now ports the
-recorded `$C123FA-$C1294E` callback route, including its shift-14, rounded
-ratio, Hunk-63 index-11, magnitude, and clamp path to `$C45AC2=$6FB8`; only
-the enclosing target-record/dispatch ownership remains before composing it.
-The full `$C28800` trace proves its target is `$C47D84` while selector `$4000`
-resolves a linked `$C4E184` record outside the 17-slot native dispatch bank;
-the adapter therefore requires that linked record from a future source-backed
-resolver, rather than fabricating a local slot.
+14 (`$C47D84`).  The full `$C28800` trace proves run075 takes its **negative**
+selector route: `$04(A2)=$8D0E`, mask `$7F00`, ASR#7 to `$C295E0` table index
+26, then resolve `(70,112,6144,6144,0)`. `$C28F16` copies that tuple to
+`+$2C..+$34`, `$C28824` writes `+$38=$FF`, and the source longword expansion
+forms the recorded coordinate packet `(0,0,$00800000,0,$0B000000,-1)`.
+`scene_dispatch_negative_coordinate_pose.{c,h}` now ports this bounded
+`$C28808-$C288C4` route behind a required Hunk-27 geometry resolver, while
+`scene_dispatch_coordinate_pose.{c,h}` remains the distinct nonnegative
+linked-record route. `coordinate_update_positive_pair.{c,h}` ports the
+recorded `$C123FA-$C1294E` callback route, including shift 14, rounded ratio,
+Hunk-63 index 11, magnitude, and clamp path to `$C45AC2=$6FB8`. The dispatch
+loop must still supply the live target and geometry resolver before either
+route can be scheduled; do not seed `$6FB8` or page data.
 See
 `analysis/routines/run075_scene_dispatch_coordinate_pose.md`.  Do not seed
 `$6FB8` in normal runtime state.

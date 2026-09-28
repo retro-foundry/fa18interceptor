@@ -27,20 +27,23 @@ The source-derived evidence is retained in
 predecessors are `$C288AC` (load `$C45AC2`), `$C288B6` (move it to `D5`), and
 `$C288BC` (call `$C2D954`).
 
-`port/scene_dispatch_coordinate_pose.{c,h}` now ports the bounded
-`$C28800-$C288C4` nonnegative-link continuation: source high-byte selection,
-bit-6 gate, placement-field copy, wrapped coordinate deltas, `$C123FA`
-six-longword callback packet, and the `(0, output[1], 0)` `$C2D954`
-publication all have a contract.  `coordinate_update_positive_pair.{c,h}`
-now ports the exact `$C123FA-$C1294E` route used by this packet: the source
-inputs are `(0,0,$00800000,0,$0B000000,-1)`, shift 14 is selected, rounded
-ratio 745 shifts to Hunk-63 word index 11, and its source word 25 gives
-`$6FB8`.  The adapter remains intentionally unscheduled by
-`scene_dispatch_runtime` until the source `$C28800` target-record ownership
-and dispatch continuation are composed: the observed target is `$C47D84`,
-while selector `$4000` resolves its linked source record at `$C4E184`, beyond
-the 17-slot native dispatch bank.  `scene_dispatch_coordinate_pose` therefore
-requires its linked record explicitly rather than treating the selector as a
-local index.  The existing
-`coordinate_update_negative_pair` adapter covers a different `$C123FA`
-branch and is not used to synthesize this packet.
+The full `$C28800` trace corrects the earlier ownership inference: run075
+loads `$04(A2)=$8D0E`, takes the negative branch at `$C28806`, masks it to
+`$0D00`, then arithmetic-shifts it by seven to the `$C295E0` word-table index
+26.  That table resolves the five-word tuple `(70,112,6144,6144,0)`; `$C28F16`
+copies it to slot 14 `+$2C..+$34`, `$C28824` writes `+$38=$FF`, and
+`$C2882A-$C2883A` expands it to the two longword coordinate deltas.  Against
+the created slot's `+$14/+$1C`, those are exactly
+`(0,0,$00800000,0,$0B000000,-1)` for `$C123FA`.
+
+`scene_dispatch_negative_coordinate_pose.{c,h}` ports that actual bounded
+negative `$C28808-$C288C4` route with a required geometry-table resolver.
+`scene_dispatch_coordinate_pose.{c,h}` remains the separately ported
+nonnegative `$C2883E-$C288C4` linked-record route; it must not be described as
+the run075 path.  `coordinate_update_positive_pair.{c,h}` ports the exact
+`$C123FA-$C1294E` route used by the negative packet: shift 14 is selected,
+rounded ratio 745 shifts to Hunk-63 word index 11, and source word 25 gives
+`$6FB8`.  Neither route is scheduled by `scene_dispatch_runtime` yet; the
+dispatch loop must supply the live target and original Hunk-27 geometry-table
+resolver without capture-derived state.  The existing
+`coordinate_update_negative_pair` adapter covers a different `$C123FA` branch.

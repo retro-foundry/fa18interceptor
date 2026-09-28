@@ -31,8 +31,8 @@ int fa18_publish_scene_dispatch_coordinate_pose(
     if (!target || !linked_record || !coordinate_update || !matrix_ops || source_selector < 0)
         return -1;
     /* `$C2883E-$C28856`: the caller resolves `C46184 + (selector << 1)`.
-     * In run075 selector `$4000` resolves `$C4E184`, outside the 17-slot
-     * scene-dispatch bank, so this boundary must not invent a local index. */
+     * This is only the nonnegative branch; run075 takes the separate negative
+     * `$C28808` geometry-table route. */
     if (!(word_at(linked_record->bytes, 0) & 0x0040u)) return -1;
 
     /* `$C28858-$C2887C`: copy the five source placement fields. */
