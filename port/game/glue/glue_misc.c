@@ -6,6 +6,9 @@
 #include "fixed_math.h"
 #include "globals.h"
 #include "memory.h"
+#include "player_input.h"
+#include "numbers.h"
+#include "render_page.h"
 #include "text.h"
 
 /* $C2E6DA: D4.w angle -> D4.w sine, D5.w cosine. The original leaves its
@@ -103,5 +106,25 @@ int glue_C32806(void) {
     plot_glyph3(glyph, dest, shift, rows, mode);
 
     glyph_epilogue(d3_in, shift, rows, glyph, dest, last);
+    return glue_return();
+}
+
+/* $C25A08: no register inputs; saves and restores everything it uses. */
+int glue_C25A08(void) {
+    pack_display_value();
+    return glue_return();
+}
+
+/* $C1715C: returns the buttons in D0 (long). */
+int glue_C1715C(void) {
+    D(0) = (uint32_t)read_mouse_buttons();
+    return glue_return();
+}
+
+/* $C2F558: leaves the selected tables in A0/A1. */
+int glue_C2F558(void) {
+    select_draw_page();
+    A(0) = rd_u32(PAGE_PLANE_TABLE);
+    A(1) = rd_u32(PAGE_POINTER_TABLE);
     return glue_return();
 }

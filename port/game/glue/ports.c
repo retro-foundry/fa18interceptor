@@ -19,6 +19,10 @@ const FA18Port fa18_ports[] = {
     /* text.c */
     {0xC330FE, glue_C330FE, "plot_glyph8", 300},
     {0xC32806, glue_C32806, "plot_glyph3", 300},
+    /* numbers.c, input.c, render_page.c */
+    {0xC25A08, glue_C25A08, "pack_display_value", 400},
+    {0xC1715C, glue_C1715C, "read_mouse_buttons", 90},
+    {0xC2F558, glue_C2F558, "select_draw_page", 90},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
