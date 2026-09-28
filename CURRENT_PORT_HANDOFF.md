@@ -820,6 +820,21 @@ future real outer-loop owner, but is intentionally not wired into `game.c`
 until that owner has source-backed parent callbacks, render-page choice, and
 Copper publication.
 
+`periodic_notification.{c,h}` now ports `$C11B44-$C11BAF`, the direct
+periodic byte stage called from the parent prefix after `$C0F5F8`.  It
+preserves decrement-before-signed-test behavior, the `8/$86` expiry reload,
+the `$06/$04` intermediate codes, and the signed clamp path; the latter is
+important because source byte `$80` decrements to positive `$7F` before it is
+clamped, rather than taking the expiry branch.  A new normal run075 parent
+trace at the frame-392-era invocation (`build/run075_frame392_c0efd4_parent_full/`)
+returns through `$C15DA8` after 91,544 instructions and reaches `$C0F090` /
+`$C279D0`; its `$C11B44` call decrements the countdown from two to one.
+The later observed parent invocation (`build/run075_frame391_c0efd4_parent/`,
+hit frame 199) takes `$C0F370` instead after `$C11B44` expires its countdown,
+so this evidence rejects attaching `$C279D0` to every native presentation
+frame.  The remaining owner is the upstream `$C0F5F8/$C11B44` gate state,
+not a frame-number schedule.
+
 Current validated state uses `build\\port-native`: native build audit passes
 277 files, `ctest` passes 146/146, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
