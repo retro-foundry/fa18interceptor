@@ -26,3 +26,22 @@ an explicit Amiga display-synchronization gate after the parent update and
 after `DisownBlitter`. This is the main update-loop boundary for the observed
 game path. The exact ViewPort contents, raster phase, and whether any other
 task or interrupt contributes additional pacing remain unassigned.
+
+## run075 counted cadence
+
+The live-breakpoint samplers
+`scripts/sample_run075_parent_update_hits.py` and
+`scripts/sample_run075_outer_loop_hits.py` step one instruction at each
+`$C0EFD4` / `$C1612C` entry and resume ordinary replay. Across frames 201--392
+the child has 392 entries, so this loop is not a fixed presentation-frame
+counter. In the late frame-360--392 window, however, both adjacent calls have
+six entries in every replay frame; the child's index sequence is
+`1,0,1,0,1,0`. The parent sampler observes the same six-entry late window
+(with 393 entries across the full window because the parent breakpoint can be
+reached immediately before a child boundary).
+
+This establishes a locally measured outer-loop cadence and page alternation,
+but it is not authority for a global six-pass native schedule: early replay
+frames contain zero, one, four, five, and six entries. The future normal owner
+must retain the loop's display/task pacing boundary rather than derive passes
+from the replay-frame number.

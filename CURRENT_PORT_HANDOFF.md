@@ -814,16 +814,14 @@ That is the source-owned `$C456B6` publisher feeding `$C279D0`; the actual
 page tables and loop cadence remain caller-owned and are still not wired into
 `game.c`.
 
-The new live-breakpoint sampler `scripts/sample_run075_outer_loop_hits.py`
-counts 392 `$C1612C` entries over run075 frames 201--392. Its late entries at
-335/353/369/380/389 alternate the pre-child renderer publication between
-`$C4566E` (index 0) and `$C4567E` (index 1). Since the child toggles the index
-in its tail, the frame-380 child leaves the selector that `$C2F558` uses before
-the known frame-384 `$C279D0` render into `$C4566E`; frame 389 displays that
-page then returns selection to the other family. This is the first counted
-page-handoff sequence. It proves the outer child is not presentation-frame
-cadence (there are no child entries in 370--379 despite ordinary replay), and
-does not authorize a `game_frame` schedule.
+The live `$C1612C` and `$C0EFD4` breakpoint samplers now correct the earlier
+outer-loop cadence interpretation. Over frames 201--392 the child totals 392
+entries, with early replay frames carrying zero, one, four, five, or six
+iterations. In the frame-360--392 preparation window both adjacent calls run
+six times per replay frame, and child indices alternate `1,0,1,0,1,0` before
+their tail toggle. This confirms the `$C4566E` prepared-page handoff while
+also proving neither a once-per-frame nor a globally fixed six-pass
+`game_frame` schedule is source-backed.
 
 The run075 `$C2D99C` return trace (`build/run075_frame373_c2d99c_matrix/`)
 now proves the source matrix producer for the prepared-page pass. At global

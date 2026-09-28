@@ -84,22 +84,19 @@ inferred call cadence in the native replay.
 
 `scripts/sample_run075_outer_loop_hits.py` uses a live `$C1612C` breakpoint,
 steps one instruction only to escape each entry, and resumes ordinary replay.
-Over frames 201--392 it records 392 entries. In the relevant late interval its
-entry data is:
+Over frames 201--392 it records 392 entries. A fresh full-window replay
+confirms that this aggregate is variable; it is not one child per display
+frame. In frames 360--392, each replay frame has six child entries and their
+pre-tail indices alternate `1,0,1,0,1,0`. The adjacent `$C0EFD4` parent
+sampler sees the same six-entry late window. Earlier frames contain zero, one,
+four, five, or six entries, so neither count authorizes a fixed native
+per-frame schedule.
 
-| Global frame | `$C1612C` entries | pre-child `$C4566C` | pre-child `$C456B6` |
-| ---: | ---: | ---: | --- |
-| 335 | 1 | 0 | `$C4566E` |
-| 353 | 1 | 1 | `$C4567E` |
-| 369 | 1 | 0 | `$C4566E` |
-| 380 | 1 | 1 | `$C4567E` |
-| 389 | 1 | 0 | `$C4566E` |
-
-The child toggles `$C4566C` in its tail. Therefore the frame-380 child leaves
-the zero selector for the next `$C2F558` publication; the known frame-384
-renderer then sees `$C456B6=$C4566E` and writes the prepared display page.
-The frame-389 child subsequently publishes that page for display before
-toggling back. This gives an observed source sequence for the page handoff,
-but not a substitute native scheduler: `$C0EFD4` and the renderer can execute
-between the counted display-child entries. The generated report is
-`build/run075_outer_loop_hits_201_392.json`.
+The child toggles `$C4566C` in its tail, making each measured index the page
+the preceding `$C2F558` selected for rendering and the page the child is
+about to publish for display. The known frame-384 renderer sees `$C4566E` and
+writes the prepared display page; a later index-zero child publishes that
+page before toggling back. This is an observed page handoff, not a replay-frame
+counter. The generated reports are
+`build/run075_parent_update_hits_201_392.json` and
+`build/run075_outer_loop_hits_201_392_recheck.json`.
