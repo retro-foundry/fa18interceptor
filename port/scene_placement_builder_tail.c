@@ -20,6 +20,15 @@ static int16_t asr_word(int16_t value, unsigned count) {
     return (int16_t)-(((-(int32_t)value) + ((1 << count) - 1)) >> count);
 }
 
+static int32_t neg_if_negative_68k(int32_t value) {
+    if (value >= 0) return value;
+    return (int32_t)(UINT32_C(0) - (uint32_t)value);
+}
+
+static int32_t add_long_68k(int32_t left, int32_t right) {
+    return (int32_t)((uint32_t)left + (uint32_t)right);
+}
+
 static void write_word(uint8_t *bytes, uint16_t value) {
     bytes[0] = (uint8_t)(value >> 8);
     bytes[1] = (uint8_t)value;
@@ -47,6 +56,26 @@ int fa18_build_scene_placement_work(const FA18ScenePlacementWorkInput *input,
     work[0] = first + input->translated_component[0] + input->origin_component[0];
     work[1] = 0; /* `$C1DE04` clears the middle scratch word on this route. */
     work[2] = third + input->translated_component[1] + input->origin_component[1];
+    return 0;
+}
+
+int fa18_derive_scene_placement_magnitudes(
+    const FA18ScenePlacementMagnitudeInput *input, int16_t magnitude[3]) {
+    const int descriptor_selected = input && (input->header_flags & 0x50u);
+    int32_t first, second, third;
+
+    if (!input || !magnitude) return -1;
+    first = add_long_68k(input->coordinate_work[0], input->projection_packet[0]);
+    second = add_long_68k(input->coordinate_work[2], input->projection_packet[1]);
+    third = input->projection_depth;
+    if (descriptor_selected) {
+        first = add_long_68k(first, input->descriptor_component[0] & 0x0fffu);
+        second = add_long_68k(second, input->descriptor_component[1] & 0x0fffu);
+        third = add_long_68k(third, input->descriptor_component[2] & 0x0fffu);
+    }
+    magnitude[0] = (int16_t)asr_long(neg_if_negative_68k(first), 12);
+    magnitude[1] = (int16_t)asr_long(neg_if_negative_68k(second), 12);
+    magnitude[2] = (int16_t)asr_long(neg_if_negative_68k(third), 11);
     return 0;
 }
 

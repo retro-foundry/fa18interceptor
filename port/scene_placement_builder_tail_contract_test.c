@@ -14,11 +14,22 @@ int main(void) {
     FA18ScenePlacementBuilderTailResult result;
     FA18ScenePlacementHeader header;
     int32_t work[3];
+    int16_t magnitude[3];
     FA18ScenePlacementWorkInput work_input = {
         { 0x0800, 0x0800 }, { 3, -2 }, { 0x3000, 0x4000 }, { -0x1000, 0x2000 }, 0
     };
     assert(fa18_build_scene_placement_work(&work_input, work) == 0);
     assert(work[0] == 0x3ff4 && work[1] == 0 && work[2] == 0x8008);
+    FA18ScenePlacementMagnitudeInput magnitude_input = {
+        { -0x2000, 0, 0x2100 }, { -0x1000, 0x2000 }, -0x100000,
+        { 0x1234, 0x0abc, 0x0ff0 }, 0x10
+    };
+    assert(fa18_derive_scene_placement_magnitudes(&magnitude_input, magnitude) == 0);
+    assert(magnitude[0] == 2 && magnitude[1] == 4 && magnitude[2] == 510);
+    magnitude_input.header_flags = 0;
+    assert(fa18_derive_scene_placement_magnitudes(&magnitude_input, magnitude) == 0);
+    assert(magnitude[0] == 3 && magnitude[1] == 4 && magnitude[2] == 512);
+    assert(fa18_derive_scene_placement_magnitudes(NULL, magnitude) == -1);
     assert(fa18_decode_scene_placement_workspace_header((uint8_t[]){0, 0x6e}, &header) == 0 &&
            header.selector_word == 0x6e00 && header.descriptor_index == 0x6e);
     shifts[48] = 7;

@@ -80,18 +80,21 @@ byte of the first source byte. The downstream `$C1DC1C-$C1E0B0` placement
 builder and its upstream workspace terms remain unported. Normal replay is
 still exact through frame 391 and first differs at frame 392 by 361 pixels.
 
-`scene_placement_builder_tail.{c,h}` now ports the fully bounded
-`$C1DF04-$C1E0B0` output tail of the placement builder: adaptive shift-table
-selection, the shift-byte OR into the selector, three signed coordinate
-writes, and the 24-byte record suffix. Its caller still owns the preceding
-workspace/descriptor route and the live terms; it is not scheduled by game.c.
+`scene_placement_builder_tail.{c,h}` now ports the bounded
+`$C1DE3E-$C1E0B0` direct-record path of the placement builder: live work,
+projection-packet, and descriptor words produce the three normalized
+magnitudes; the tail then selects its adaptive shift, ORs it into the selector,
+writes three signed coordinates, and publishes the exact 24-byte record
+suffix. Its caller still owns the preceding workspace/descriptor route and
+the live terms; it is not scheduled by game.c.
 Its `$C1DD98-$C1DE38` work-term prefix is also ported: the selected workspace
 pair, C1D7E2 correction pair, and caller-owned translated/origin terms form
 the first and third source work longwords while the middle word remains clear.
 
-The next implementation is the `$C1DC1C-$C1E0B0` placement builder, using the
-new mutable workspace expansion as its source-backed input. Do not schedule
-the renderer from a presentation frame or import a captured page.
+The remaining placement-builder work is its `$C1DC1C-$C1DE3E` source selector,
+workspace traversal, descriptor route, and live-term ownership, using the new
+mutable workspace expansion as source-backed input. Do not schedule the
+renderer from a presentation frame or import a captured page.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then

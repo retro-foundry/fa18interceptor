@@ -30,11 +30,28 @@ typedef struct {
     uint8_t append_enabled;
 } FA18ScenePlacementWorkInput;
 
+/* Inputs still live at `$C1DE3E` after the two workspace work values have
+ * been formed.  Descriptor components are the raw words at +$0c/+0e/+10;
+ * the source masks them to twelve bits before adding them. */
+typedef struct {
+    int32_t coordinate_work[3];
+    int16_t projection_packet[2];
+    int32_t projection_depth;
+    uint16_t descriptor_component[3];
+    uint8_t header_flags;
+} FA18ScenePlacementMagnitudeInput;
+
 /* `$C1DD98-$C1DE38`: form the first and third per-record work longwords.
  * The caller supplies the selected workspace pair, C1D7E2 correction pair,
  * and the live translated/origin terms established earlier in the builder. */
 int fa18_build_scene_placement_work(const FA18ScenePlacementWorkInput *input,
                                     int32_t work[3]);
+
+/* `$C1DE3E-$C1DF03`: derive the three normalized magnitudes consumed by
+ * `$C1DF04`.  Descriptor additions occur only when header bits 4 or 6 select
+ * either source descriptor route. */
+int fa18_derive_scene_placement_magnitudes(
+    const FA18ScenePlacementMagnitudeInput *input, int16_t magnitude[3]);
 
 typedef struct { uint16_t selector_word; uint8_t descriptor_index; } FA18ScenePlacementHeader;
 /* `$C1DD36-$C1DD88` observed direct route (bit 7 of the low header byte clear). */
