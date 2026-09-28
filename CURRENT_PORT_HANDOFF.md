@@ -1369,3 +1369,14 @@ and post-selection cursor for `$C1F6F8`. The caller still owns the mutable
 placement/stream banks and the later walker, transforms, renderer submission,
 and scheduler; this is not attached to `game.c`. See
 `analysis/routines/c1ee14_stream_entry.md`.
+
+`record_walker_prefix.{c,h}` now ports the ordinary `$C1F6F8-$C1F79F`
+control branch that consumes the cursor from `$C1EF10`: it initializes the
+source masks, expands original three-word records from the caller-owned
+`$C48390` table, calls typed triple/hex/other handlers, and preserves the two
+relative jump forms and `$FFFF` return. Nonterminal negative controls and the
+source-cleared local-count path remain explicit `$C1F7A0`/`$C1F844` caller
+boundaries.
+This is still not attached to `game.c`; it enables a source-owned bridge from
+the recovered stream entry to the existing geometry callbacks. See
+`analysis/routines/c1f6f8_record_walker_prefix.md`.
