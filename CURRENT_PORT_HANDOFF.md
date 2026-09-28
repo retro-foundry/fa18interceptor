@@ -948,7 +948,7 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-281 files, `ctest` passes 150/150, and frame parity remains 192 exact frames
+283 files, `ctest` passes 151/151, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 

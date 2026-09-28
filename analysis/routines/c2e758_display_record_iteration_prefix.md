@@ -133,3 +133,11 @@ instructions, and returns to `$C0D7E0`.  This establishes the concrete live
 composition `$C0D752 -> C2E758 -> C0D7E0` for the prepared-page path.  It does
 not yet establish the native owner, its cadence, or how its generated pairs
 become a native page submission.
+
+`port/display_record_projection.{c,h}` now ports the accepted-triplet tail
+`$C2E9F8-$C2EA59`.  Its contract uses the two accepted pairs from that
+return-bounded trace and preserves the source's DIVS/ASR carry behavior before
+the `$A0/$5A` offsets and clamps.  The source busy loop for a nonpositive
+divisor is represented as an explicit native rejection.  This primitive is
+not scheduled on its own; the preceding adjustment/selection iterator and the
+caller-owned page submission remain to be composed.
