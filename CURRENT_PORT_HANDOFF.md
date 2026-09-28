@@ -1113,6 +1113,14 @@ requests and retain the source runtime bases; no replay memory is imported.
 The remaining normal-runtime owner is the live parent record/matrix state that
 must populate the pass input and bind the selected page submission.
 
+`map_packet_original_pass.{c,h}` now composes the original-Hunk resolver with
+the complete `$C2AB34-$C2AFF9` pass runner. It rebases the relative-directory
+pointer to the source-selected `$C42CA8`/`$C42E6C` base before invoking the
+existing selector, then leaves matrix, detail, coordinate, and page submission
+state caller-owned. Its integration contract reaches the display callback via a
+wide stream, selector pair, directory entry, and packet entirely from bounded
+source-shaped data.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
