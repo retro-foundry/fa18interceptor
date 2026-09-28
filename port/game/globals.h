@@ -42,4 +42,22 @@
 /* ---- input ---------------------------------------------------------------- */
 #define CIAA_PORT_COPY     0xC1839Au /* byte: last CIA-A port A; bit 6 = /FIR0 ($C1715C) */
 
+/* ---- control records ------------------------------------------------------
+ * Sixteen 512-byte records at $C46184, selected by index << 9 (memory map). */
+#define CONTROL_RECORDS    0xC46184u
+#define CONTROL_RECORD_BYTES 512
+#define SELECTED_RECORD    0xC459C0u /* word: byte offset of the selected record, or -1 ($C230B0) */
+#define SELECTION_ACTIVE   0xC45868u /* byte: cleared with the selection */
+#define SELECTION_MARKER   0xC4593Au /* word: set to -1 with the selection */
+
+/* ---- notifications ($C11B44) ----------------------------------------------- */
+#define NOTIFY_COUNTDOWN   0xC45890u /* byte: 8..1 cadence counter */
+#define NOTIFY_CODE        0xC4588Eu /* byte: code for this step ($86, $06, $04 or 0) */
+
+/* ---- renderer spans ($C310E2) ----------------------------------------------- */
+#define SPAN_ORIGIN        0xC45986u /* word: added to a span position (default $32) */
+
+/* ---- screen frame lists ($C0DAA0) ------------------------------------------ */
+#define FRAME_POINTS       0xC4B990u /* (x, y) word pairs, 8 bytes apart */
+
 #endif

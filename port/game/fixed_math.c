@@ -24,3 +24,12 @@ void sin_cos(Angle angle, Fixed14 *sine, Fixed14 *cosine) {
         *cosine = quarter_sine((int16_t)(angle - 2700));
     }
 }
+
+int16_t attenuate_offset(int16_t x, int16_t y) {
+    int16_t sum = (int16_t)(x + y);
+    int16_t size = (int16_t)(sum < 0 ? -sum : sum);
+
+    if (size > 4) sum = (int16_t)(sum >> 2);
+    else if (size > 2) sum = (int16_t)(sum >> 1);
+    return (int16_t)(sum - y);
+}

@@ -25,6 +25,22 @@ const FA18Port fa18_ports[] = {
     {0xC25A08, glue_C25A08, "pack_display_value", 400},
     {0xC1715C, glue_C1715C, "read_mouse_buttons", 90},
     {0xC2F558, glue_C2F558, "select_draw_page", 90},
+    /* notify.c */
+    {0xC11B44, glue_C11B44, "tick_notification_cadence", 100},
+    /* fixed_math.c */
+    {0xC15138, glue_C15138, "attenuate_offset", 150},
+    /* render_span.c */
+    {0xC310E2, glue_C310E2, "bound_span", 80},
+    /* control_records.c */
+    {0xC1EBC0, glue_C1EBC0, "read_record_fields", 90},
+    {0xC230B0, glue_C230B0, "release_lost_selection", 90},
+    {0xC2DE96, glue_C2DE96, "settle_record", 50},
+    /* screen_frame.c */
+    {0xC0DAA0, glue_C0DAA0, "append_mirrored_points", 150},
+    {0xC0DAD0, glue_C0DAD0, "append_point", 30},
+    {0xC0DAD4, glue_C0DAD4, "append_point", 40},
+    {0xC0DADC, glue_C0DADC, "append_point", 40},
+    {0xC0DAE6, glue_C0DAE6, "append_point", 40},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
