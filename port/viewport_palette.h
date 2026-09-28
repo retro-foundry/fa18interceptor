@@ -5,6 +5,7 @@
 
 #include "copper_page.h"
 #include "hunk.h"
+#include "video.h"
 
 enum {
     FA18_VIEWPORT_PALETTE_WORDS = 16,
@@ -38,5 +39,12 @@ int fa18_load_viewport_mode_palette_into_copper(
     const FA18Hunks *exe, uint8_t mode,
     FA18CopperMutableInstructionStream *streams, size_t stream_count,
     uint32_t *updated_mask);
+
+/* Apply the published COLOR00--15 MOVE values at the native video boundary.
+ * This is Copper executing the caller's mutable list, not a new palette
+ * source; COLOR16--31 remain untouched. */
+int fa18_apply_viewport_copper_palette_to_video(
+    const FA18CopperMutableInstructionStream *streams, size_t stream_count,
+    FA18Video *video);
 
 #endif

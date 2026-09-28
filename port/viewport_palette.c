@@ -8,6 +8,10 @@ enum {
     VIEWPORT_PALETTE_STRIDE = FA18_VIEWPORT_PALETTE_WORDS * 2
 };
 
+static uint16_t read_be16(const uint8_t *bytes) {
+    return (uint16_t)((uint16_t)bytes[0] << 8 | bytes[1]);
+}
+
 int fa18_load_viewport_mode_palette(const FA18Hunks *exe, uint8_t mode,
                                     uint16_t palette[FA18_VIEWPORT_PALETTE_WORDS]) {
     const FA18HunkSegment *segment;
@@ -59,4 +63,32 @@ int fa18_load_viewport_mode_palette_into_copper(
     memcpy(palette, source, sizeof source);
     return fa18_update_copper_palette_moves(streams, stream_count, palette,
                                             UINT32_C(0x0000ffff), updated_mask);
+}
+
+int fa18_apply_viewport_copper_palette_to_video(
+    const FA18CopperMutableInstructionStream *streams, size_t stream_count,
+    FA18Video *video) {
+    uint16_t palette[FA18_VIEWPORT_PALETTE_WORDS] = {0};
+    uint16_t present = 0;
+
+    if (!streams || !stream_count || !video) return -1;
+    for (size_t stream_index = 0; stream_index < stream_count; ++stream_index) {
+        const FA18CopperMutableInstructionStream stream = streams[stream_index];
+        if (!stream.bytes || stream.byte_count % 4u) return -1;
+        for (size_t offset = 0; offset < stream.byte_count; offset += 4) {
+            const uint16_t register_word = read_be16(stream.bytes + offset);
+            const uint16_t value = read_be16(stream.bytes + offset + 2);
+            if (register_word == UINT16_C(0xffff) && value == UINT16_C(0xfffe)) break;
+            if (!(register_word & 1u) && register_word >= UINT16_C(0x0180) &&
+                register_word <= UINT16_C(0x019e) &&
+                !((register_word - UINT16_C(0x0180)) & 1u)) {
+                const unsigned colour = (unsigned)(register_word - UINT16_C(0x0180)) / 2u;
+                palette[colour] = (uint16_t)(value & 0x0fffu);
+                present |= (uint16_t)(UINT16_C(1) << colour);
+            }
+        }
+    }
+    if (present != UINT16_C(0xffff)) return -1;
+    memcpy(video->palette, palette, sizeof palette);
+    return 0;
 }

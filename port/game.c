@@ -36,8 +36,14 @@ static int advance_viewport_callback(FA18Game *game) {
     /* The registered `$C1718E` callback has one counted entry per run075
      * replay frame. Its pointer publication is retained as opaque state here;
      * the future two-page owner supplies the actual table payloads. */
-    return fa18_advance_viewport_mode(&game->viewport_mode, &bindings, &game->exe,
-                                      &game->viewport_copper_stream, 1, &step);
+    if (fa18_advance_viewport_mode(&game->viewport_mode, &bindings, &game->exe,
+                                   &game->viewport_copper_stream, 1, &step) != 0)
+        return -1;
+    if (step.palette_loaded && fa18_apply_viewport_copper_palette_to_video(
+                                   &game->viewport_copper_stream, 1,
+                                   &game->video) != 0)
+        return -1;
+    return 0;
 }
 
 static int initialize_scene_entry(void *context) {

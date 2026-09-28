@@ -50,6 +50,23 @@ int main(void) {
     assert(stream_bytes[6] == 0x08 && stream_bytes[7] == 0x01);
     assert(stream_bytes[10] == 0x08 && stream_bytes[11] == 0x0f);
     assert(stream_bytes[14] == 0x0b && stream_bytes[15] == 0xbb);
+    uint8_t video_stream_bytes[FA18_VIEWPORT_PALETTE_WORDS * 4u + 4u] = {0};
+    FA18CopperMutableInstructionStream video_stream = {
+        video_stream_bytes, sizeof video_stream_bytes
+    };
+    FA18Video video = {0};
+    for (unsigned colour = 0; colour < FA18_VIEWPORT_PALETTE_WORDS; ++colour) {
+        put_be16(video_stream_bytes + colour * 4u, (uint16_t)(0x0180u + colour * 2u));
+        put_be16(video_stream_bytes + colour * 4u + 2u, (uint16_t)(0x0f00u + colour));
+    }
+    put_be16(video_stream_bytes + FA18_VIEWPORT_PALETTE_WORDS * 4u, 0xffff);
+    put_be16(video_stream_bytes + FA18_VIEWPORT_PALETTE_WORDS * 4u + 2u, 0xfffe);
+    video.palette[16] = 0x0abcu;
+    assert(fa18_apply_viewport_copper_palette_to_video(&video_stream, 1, &video) == 0);
+    assert(video.palette[0] == 0x0f00 && video.palette[15] == 0x0f0f &&
+           video.palette[16] == 0x0abcu);
+    video_stream.byte_count = (FA18_VIEWPORT_PALETTE_WORDS - 1u) * 4u;
+    assert(fa18_apply_viewport_copper_palette_to_video(&video_stream, 1, &video) == -1);
     assert(fa18_load_viewport_mode_palette(&exe, 16, palette) == -1);
     assert(fa18_load_viewport_mode_palette_into_copper(&exe, 16, &stream, 1,
                                                         &updated) == -1);

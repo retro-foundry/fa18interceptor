@@ -1013,6 +1013,15 @@ blitter/table state is not yet bounded. This permits a future source-owned
 parent to pass the matching page's bound blitter submission without inventing
 either hardware state or render cadence.
 
+`fa18_apply_viewport_copper_palette_to_video` now closes the native
+presentation boundary after `$C1718E`: when that callback has updated the
+mutable COLOR00--15 Copper moves, normal replay copies those published words
+to `FA18Video` while preserving COLOR16--31. A live run075 state trace reaches
+mode eight with COLOR01=`$100` and COLOR02=`$111`, matching the frame-392
+palette evidence. Frame parity remains 192 because the native pixel indices at
+the 361 revealed locations are still zero: the missing work is the prepared
+five-plane page producer, not another fade or palette substitution.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
