@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Implementation head: `d10a2361 Correct coordinate angle ratio source`.
+- Implementation head: `3f471e2b Gate template workspace appends`.
 - The current working tree adds a source-addressed five-plane/Chip-RAM binding
   for the reusable `$C2FF58-$C30037` backend. User-owned untracked `.vscode/`
   remains untouched; do not discard it.
@@ -11,7 +11,7 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **127/127** tests.
+pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **132/132** tests.
 
 ## Latest root-owner work
 
@@ -56,6 +56,13 @@ and `d10a2361` (correct first-ratio operand).  The `$C12570` operand is the
 unscaled `$18(a6)` component shifted by six, not its earlier scaled value;
 the bounded route therefore reaches Hunk-63 table indexes 25 and 43 and
 publishes the traced output pair `(760,6760)`.
+
+The current live-producer path has new source boundaries: `4984b0d7` composes
+`$C0EFD4-$C0F123`; `be796877`/`4cc67274` port the signed-control static
+template band walk; `1c7b5a74` ports its sorted-row lookup; and
+`43bdc63b`/`79b604f4`/`3f471e2b` port the append-enabled live-record marker
+bridge. The workspace stream selector and the downstream `$C1DC1C` placement
+builder remain required before this can supply a native C279 scene page.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
