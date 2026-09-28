@@ -1130,6 +1130,14 @@ skipped and wide is called. This supplies the exact metric owner immediately
 above the original map-pass composition, while the live record/matrix/page
 owner remains unscheduled.
 
+`map_packet_parent_pass.{c,h}` now composes that depth owner with the original
+map pass in source order: normal only above `$3F8`, then wide always. Its
+frame-382-shaped contract uses the depth packet `-125`, the caller-owned low
+filter row, and original `$C2ACA8` control stream/payload path to reach the
+display callback. This is the full local `$C2AA9C` map producer; scheduling,
+live record/matrix construction, and selected five-plane page ownership remain
+the next parent boundary.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
