@@ -1411,3 +1411,18 @@ semantically complete. The unrepresented set includes the high-frequency
 `$C1FB82` predicate (7), `$C1F99A` record transform (2), and the
 `$C2F0C6/$C2F0F4/$C2F156` segment-clip continuations. Do not treat the graph
 as a static whole-program graph or schedule it directly in `game.c`.
+
+## Native visual-progress gate
+
+Run `python scripts/render_native_visual.py --frame 402 --output
+build/native_visual/frame402_normal.ppm` after every renderer-path change.
+It invokes the normal native replay from the original ADF, recorded input, and
+replay-owned timing stream only, emitting a labelled PPM and JSON summary with
+nonblack-pixel count and bounds. `--render-active-scene` is separately labelled
+as a capture-free diagnostic; it must never be described as normal replay.
+The initial 2026-09-28 result is zero nonblack pixels for normal frame 402.
+The original frame 402 has 36,650 nonblack pixels over `x=0..319, y=1..199`,
+making it the short-term visual gate rather than the sparse 361-pixel reveal
+at frame 392. A meaningful rendering stage must change the normal image or
+prove a source-defined earlier/later presentation boundary; structural
+contracts alone are no longer sufficient visual progress.
