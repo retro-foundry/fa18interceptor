@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: `239b3ed9 Correct root dispatch coverage handoff`.
+- Head: `3065e4b2 Record run075 root initialization boundary`.
 - The current working tree adds a source-addressed five-plane/Chip-RAM binding
   for the reusable `$C2FF58-$C30037` backend. User-owned untracked `.vscode/`
   remains untouched; do not discard it.
@@ -44,10 +44,17 @@ resolves the verified Hunk-52 descriptor without retaining a runtime Amiga
 address. The creation adapter was also corrected for `$C28DD8-$C28DE4`:
 coordinate terms are `SWAP; ASL.L #6` (`* $400000`), not `* 64`. This produces
 the trace-backed slot-14 `+$14/$18/$1C` tuple
-`$11180000/$00000000/$11180000` before root placement. The trace does not
-create root slot zero at `$C46184`, whose first producer remains an explicit
-boundary. The normal game loop also lacks source update/presentation ownership,
-so frame 392 remains unrendered in normal replay.
+`$11180000/$00000000/$11180000` before root placement. A fresh
+cold-boot-to-menu capture now identifies the root producer: at chipset frame
+7769, `$C08F76-$C08F8E` clears the first 164 bytes of each of the sixteen
+`$C46184 + index*$200` slots, then its startup path reaches `$C09266` /
+`$C0924A`. The resulting slot zero is not a `$C28BEE` record.
+`build/cold_boot_menu_init_root_creation_instruction_trace/` contains the
+8,511-instruction bounded frame trace (root clear at row 2037, root transition
+at row 4308). Existing root setup and placement modules match the nested path,
+but they are not attached to `game.c`: the source scene-entry scheduler, full
+startup owner, and update/presentation schedule remain unported. Frame 392
+therefore remains unrendered in normal replay.
 
 A CPU changed-write watch over the root prefix `$C46100/$FFFF00`, replayed
 from the sealed run075 restore at recorder frame zero through frame 2,000,

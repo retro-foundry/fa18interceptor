@@ -7,6 +7,16 @@ The first part of `$C0924A` calls `$C09620` and then `$C095C0` after its own
 prefix stores. `$C09620` calls `$C0840E`; neither `$C0840E`, `$C09620`, nor
 `$C095C0` has another unresolved callee in the covered ranges.
 
+The cold-boot-to-menu replay adds the preceding producer boundary. During
+chipset frame 7769, `$C08F76-$C08F8E` first clears the first 164 bytes of each
+of the sixteen `$C46184 + index*$200` slots. It then performs the surrounding
+startup stores and reaches the `$C09266` / `$C0924A` sequence. The root at
+slot zero is therefore not created by the `$C28BEE` dispatch-record arm:
+`$C28BEE` remains the selected non-root record constructor. The trace is
+`build/cold_boot_menu_init_root_creation_instruction_trace/trace.jsonl`;
+the source root clear begins at trace row 2037 and `$C0924A` begins at row
+4308.
+
 `$C0840E` sets a direct display pointer/value group and clears three adjacent
 164-byte root-workspace blocks. `$C09620` clears root bit `+$21`, writes its
 root control fields, invokes `$C0840E`, then initializes its direct latches
