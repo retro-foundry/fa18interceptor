@@ -2,6 +2,14 @@
 
 ## Latest dispatch boundary
 
+`record_triple_transform.{c,h}` ports the direct raw-triple body of
+`$C1F4AC-$C1F578` from the P-code: variable signed word shifts, wrapping word
+translations, three signed matrix dot products with wrapping long sums, and
+the final `ASR.L #8` tuple stores.  It is the missing producer API for the
+mutable `$C48390` transformed-triple workspace.  The descriptor/count logic
+around this body and its live parent caller still need composition; do not
+claim that normal replay invokes it yet.
+
 `prepared_record_dispatch.{c,h}` ports `$C2005C-$C200F5` through the
 explicit `$C2469E` handoff.  It retains the source's two direct transformed
 tuple offsets, variable continuation terminated by a negative masked offset,
