@@ -31,3 +31,11 @@ callbacks to a native page only after its caller supplies initialized inherited
 state whose page identity matches the renderer's four lower planes. The live
 `$C2FEDE` parent, its inherited blitter inputs, and normal replay scheduling
 remain caller-owned and uncomposed.
+
+`port/selected_table_display_stage.{c,h}` now ports the complete local
+orchestration: saved-table substitution/restoration, prepared-list result
+branch, direct submission, optional selector lane call, mode clear, and the
+24-byte output copy. Its optional selector lane and required `$C0D74A`
+post-pass are callbacks because their source-owned state has not been bounded.
+In particular, a nonzero prepared-list result bypasses `$C301F6` but still
+falls through to the restore/post-pass sequence, as in the source.

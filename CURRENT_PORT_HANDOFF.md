@@ -948,7 +948,7 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-293 files, `ctest` passes 156/156, and frame parity remains 192 exact frames
+295 files, `ctest` passes 157/157, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 
@@ -1001,6 +1001,17 @@ It rejects any other page, retaining the source inherited registers and lane
 state in the caller-owned `FA18ProjectionPageBlitter`. The `$C2FEDE` parent,
 its live inherited blitter inputs, and the source render cadence still need a
 native owner before this path can be scheduled in `game.c`.
+
+`selected_table_display_stage.{c,h}` now composes the full bounded
+`$C2FEDE-$C2FF45` local sequence around the prepared-list pipeline and direct
+submission: it substitutes/restores the saved table field, skips `$C301F6` on
+a nonzero prepared-list result while retaining the source's post-pass
+fallthrough, conditionally invokes the selector lane callback, and performs
+the mode-clear or 24-byte selected-list copy. The `$C30466(D0=8,D3=0,D4=0)`
+and `$C0D74A` children remain explicit caller callbacks because their live
+blitter/table state is not yet bounded. This permits a future source-owned
+parent to pass the matching page's bound blitter submission without inventing
+either hardware state or render cadence.
 
 ## Standard validation after each stage
 
