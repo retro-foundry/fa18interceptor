@@ -1191,6 +1191,13 @@ directory/gate packs, live term packs, and the shared static-table offset
 calculation. The next implementation must resolve this cursor rather than
 using the traced `$C412EC` subcursor as a universal template stream.
 
+`terrain_template_cursor_resolver.{c,h}` now implements that `$C1D10C-$C1D32E`
+selection boundary: it resolves the source control cursor, selected directory,
+translate block, gate, and live row/group terms from caller-owned runtime
+flags. It is available to compose with `terrain_template_workspace_pass`, but
+is not attached to the native frame loop before the flight parent cadence is
+ported.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
