@@ -30,7 +30,9 @@ static int consume(void *context, const FA18ScenePlacementRecord *record,
                    const FA18ScenePlacementDescriptorProbe *probe,
                    const FA18ScenePlacementTraversalState *state) {
     Fixture *fixture = context;
-    assert(probe == &fixture->probe || probe->first_long == fixture->probe.first_long);
+    assert(probe == &fixture->probe ||
+           (probe->first_target_hunk == fixture->probe.first_target_hunk &&
+            probe->first_target_offset == fixture->probe.first_target_offset));
     fixture->record = *record;
     fixture->state = *state;
     ++fixture->calls;
@@ -86,7 +88,7 @@ int main(void) {
                                           0, lookup, consume, &fixture, &state) == 0);
     assert(fixture.calls == 0 && state.accepted_count == 0 && state.skipped_count == 1);
 
-    fixture.probe = (FA18ScenePlacementDescriptorProbe){0, 0x00c1ed48u};
+    fixture.probe = (FA18ScenePlacementDescriptorProbe){0, 10, 0x10};
     assert(fa18_traverse_scene_placements(records, sizeof records, 0, 0, 0, 0,
                                           -0x380001, lookup, consume, &fixture, &state) == 0);
     assert(state.accepted_count == 0 && state.skipped_count == 1);

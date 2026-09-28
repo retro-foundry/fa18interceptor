@@ -1,5 +1,7 @@
 #include "scene_descriptor_static_data.h"
 
+#include "scene_placement.h"
+
 #include <assert.h>
 #include <string.h>
 
@@ -16,6 +18,7 @@ int main(void) {
     FA18Hunks hunks = {segments, 70};
     FA18SceneDescriptorStaticData data;
     FA18SceneDescriptorPointers pointers;
+    FA18ScenePlacementDescriptorProbe probe;
     const uint8_t *bytes;
     size_t size;
 
@@ -35,6 +38,9 @@ int main(void) {
     assert(pointers.target_hunk[1] == 41 && pointers.target_offset[1] == 0x12);
     assert(pointers.target_hunk[2] == 69 && pointers.target_offset[2] == 0x0c);
     assert(pointers.target_hunk[3] == 45 && pointers.target_offset[3] == 0);
+    assert(fa18_lookup_scene_descriptor_static(&data, 0x00c22068, &probe) == 0 &&
+           probe.first_word == 0 && probe.first_target_hunk == 10 &&
+           probe.first_target_offset == 0xdc);
     assert(fa18_resolve_scene_descriptor_target(&data, pointers.target_hunk[2],
                                                 pointers.target_offset[2],
                                                 &bytes, &size) == 0 &&

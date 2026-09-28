@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "hunk.h"
+#include "scene_placement.h"
 
 enum {
     FA18_SCENE_DESCRIPTOR_HUNK = 16,
@@ -36,6 +37,11 @@ int fa18_load_scene_descriptor_static_data(const FA18Hunks *hunks,
 int fa18_resolve_scene_descriptor_pointers(
     const FA18SceneDescriptorStaticData *data, uint32_t runtime_address,
     FA18SceneDescriptorPointers *pointers);
+
+/* Adapter for `$C1CB74`: expose the first relocated pointer in the common
+ * placement-loop probe without collapsing it into an absolute address. */
+int fa18_lookup_scene_descriptor_static(void *context, uint32_t runtime_address,
+                                        FA18ScenePlacementDescriptorProbe *probe);
 
 /* Obtain target-Hunk bytes for a relocation pair. This is deliberately
  * bounded and does not translate the pair into a process pointer or an

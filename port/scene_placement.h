@@ -20,7 +20,8 @@ typedef struct {
  * placement to the type-specific route at `$C1CC50`/`$C1CCBC`. */
 typedef struct {
     int16_t first_word;
-    uint32_t first_long;
+    uint32_t first_target_hunk;
+    uint32_t first_target_offset;
 } FA18ScenePlacementDescriptorProbe;
 
 typedef struct {

@@ -2,6 +2,11 @@
 
 #include "hunk.h"
 
+/* `$C1ED48` is Hunk 10's `$10` relocation target: Hunk 10 starts at
+ * `$C1ED38` in the authoritative loader map. */
+enum { PLACEMENT_DESCRIPTOR_TRAMPOLINE_HUNK = 10,
+       PLACEMENT_DESCRIPTOR_TRAMPOLINE_OFFSET = 0x10 };
+
 static int32_t negate_long(int32_t value) {
     return (int32_t)(UINT32_C(0) - (uint32_t)value);
 }
@@ -107,7 +112,8 @@ int fa18_traverse_scene_placements(const uint8_t *primary_table,
         }
         if (lookup(context, record.descriptor_reference, &probe) != 0) return -1;
         if (probe.first_word < 0 ||
-            (probe.first_long == UINT32_C(0x00c1ed48) &&
+            (probe.first_target_hunk == PLACEMENT_DESCRIPTOR_TRAMPOLINE_HUNK &&
+             probe.first_target_offset == PLACEMENT_DESCRIPTOR_TRAMPOLINE_OFFSET &&
              gate_coordinate < -INT32_C(0x00380000))) {
             ++state->skipped_count;
         } else {

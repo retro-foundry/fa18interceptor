@@ -31,6 +31,21 @@ int fa18_resolve_scene_descriptor_pointers(
     return 0;
 }
 
+int fa18_lookup_scene_descriptor_static(void *context, uint32_t runtime_address,
+                                        FA18ScenePlacementDescriptorProbe *probe) {
+    FA18SceneDescriptorStaticData *data = context;
+    FA18SceneDescriptorPointers pointers;
+    uint32_t offset;
+    if (!data || !probe || runtime_address < FA18_SCENE_DESCRIPTOR_RUNTIME_BASE ||
+        fa18_resolve_scene_descriptor_pointers(data, runtime_address, &pointers) != 0)
+        return -1;
+    offset = runtime_address - FA18_SCENE_DESCRIPTOR_RUNTIME_BASE;
+    probe->first_word = (int16_t)fa18_be16(data->bytes + offset);
+    probe->first_target_hunk = pointers.target_hunk[0];
+    probe->first_target_offset = pointers.target_offset[0];
+    return 0;
+}
+
 int fa18_resolve_scene_descriptor_target(const FA18SceneDescriptorStaticData *data,
                                          uint32_t target_hunk,
                                          uint32_t target_offset,

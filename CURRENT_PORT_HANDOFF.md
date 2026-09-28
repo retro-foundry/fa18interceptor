@@ -29,6 +29,11 @@ can express the observed `$C2232C` route to the `$C1EE14` code Hunk and its
 normal frame 402 remains black until that source-owned mutable list is
 produced and scheduled.
 
+The `$C1CB74` trampoline guard now compares the first descriptor relocation as
+Hunk 10 offset `$10` (the loader-backed representation of `$C1ED48`) rather
+than comparing a manually reconstructed absolute value.  The static-data
+lookup adapter exposes exactly that pair to the existing placement traversal.
+
 `prepared_record_dispatch.{c,h}` ports `$C2005C-$C200F5` through the
 explicit `$C2469E` handoff.  It retains the source's two direct transformed
 tuple offsets, variable continuation terminated by a negative masked offset,
