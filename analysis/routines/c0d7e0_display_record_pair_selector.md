@@ -51,3 +51,12 @@ count-four record through four leaves, selects one of two source words by
 `$C45785`, and compares it to `$3840`: greater selects the success return and
 otherwise selects rejection. The state fields and threshold domain remain
 unassigned.
+
+`port/display_record_selector.{c,h}` now ports this complete selector and its
+five record-write leaves as source-layout writes. The live return-bounded
+run075 trace at `build/run075_prepared_c0d7e0/` takes the first extended
+branch and produces count four with pairs `(0,89), (319,89), (319,0), (0,0)`;
+the native contract verifies those words and the `$C0DA70` publication state.
+The selected list is not yet submitted in normal native replay: its source
+consumer is `$C2FEDE -> $C301F6`, which must be composed with the real page
+blitter owner rather than a diagnostic surface.
