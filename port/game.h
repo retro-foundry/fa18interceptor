@@ -21,6 +21,7 @@
 #include "default_scene_render_pass.h"
 #include "ilbm_page_loader.h"
 #include "renderer_page_setup.h"
+#include "template_bitmask_buffers.h"
 #include "replay.h"
 #include "video.h"
 
@@ -45,6 +46,9 @@ typedef struct {
      * the restored run075 state at frame 200. Its renderer/presentation
      * scheduler remains separately owned. */
     FA18RendererPageSetup renderer_page_setup;
+    /* `$C1C40C` expands Hunk-66 compact selector streams into these three
+     * source-shaped mutable gates before the template cursor may consume them. */
+    FA18TemplateBitmaskBuffers template_bitmask_buffers;
     FA18SceneInitializationState scene_initialization;
     FA18PostInputFollowupState post_input_followup;
     FA18ViewportModeState viewport_mode;

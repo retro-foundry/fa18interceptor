@@ -13,10 +13,18 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 207/207 CTest contracts passed; native build checker
-  reported 398 C sources.
+- Last full validation: 208/208 CTest contracts passed; native build checker
+  reported 400 C sources.
 
 ### Most recent chain
+
+`template_bitmask_buffers.{c,h}` now ports `$C1C40C-$C1C54D` and initializes
+its three source-shaped mutable gate buffers from original Hunk 66 during game
+startup.  It clears the exact 2 KiB buffers, expands the 128 compact rows at
+`$C42290/$C42390/$C42490`, and preserves the source `$43/$44/$45` error
+distinction.  This supplies real immutable-derived gates to the future
+`$C1D10C` cursor/template owner; normal scheduling still does not invoke that
+owner, so the frame-402 native gate remains zero pixels.
 
 `scene_template_cursor_context.{c,h}` now ports the mutable pack handoff at
 `$C1D10C-$C1D22C`: it feeds the already reconstructed cursor resolver from the
