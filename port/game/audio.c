@@ -82,3 +82,5 @@ void free_voice(int channel) {
     wr_u32(VOICE_SLOTS + (gaddr)(channel * 4), 0);
     clear_voice_interrupt(channel);
 }
+
+void stop_channel_2(void) { free_voice(2); }

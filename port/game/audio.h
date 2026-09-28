@@ -42,4 +42,7 @@ void step_voice_program(gaddr voice, gaddr slot, int channel);
 /* Free the voice slot of a channel and clear its interrupt. */
 void free_voice(int channel);
 
+/* Stop whatever channel 2 is playing. */
+void stop_channel_2(void);
+
 #endif

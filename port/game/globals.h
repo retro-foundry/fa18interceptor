@@ -174,4 +174,20 @@
 #define GRID_ORIGIN_Z      0xC4594Eu /* word: low byte = grid row */
 #define DISPLAY_FORCE      0xC458DBu /* byte: bit 0 forces display updates */
 
+/* ---- cockpit display script ------------------------------------------------ */
+#define SCRIPT_RECORD      0xC459B6u /* word: offset of the record the script shows */
+#define SCRIPT_COUNT       0xC45847u /* byte: bit 7 is a flag; bits 0-6 a repeat count */
+
+/* ---- player record setup ($C09620) ------------------------------------------ */
+#define PLAYER_FLAGS_A     0xC45899u
+#define PLAYER_FLAGS_B     0xC4589Au
+#define PLAYER_FLAGS_C     0xC458B3u
+#define PLAYER_FLAGS_D     0xC458B1u
+#define PLAYER_FLAGS_E     0xC45889u
+#define PLAYER_FLAGS_F     0xC4586Fu
+#define PLAYER_FLAGS_G     0xC458B5u
+#define PLAYER_LIMIT       0xC45B42u /* word: reset to $7FFF */
+#define PLAYER_READY       0xC457D8u /* byte: set to 1 */
+#define PLAYER_PHASE       0xC45798u /* byte: set to 4 when nonzero */
+
 #endif

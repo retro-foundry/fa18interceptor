@@ -95,4 +95,17 @@ int glue_C1ECD4(void);
 int glue_C2E346(void);
 int glue_C31C20(void);
 
+/* batch 11: player setup, steering, random bits, channel stop, cockpit script */
+int glue_C09620(void);
+int glue_C13BA0(void);
+int glue_C13C64(void);
+int glue_C50B02(void);
+int glue_C180FC(void);
+int glue_C1EC96(void);
+int glue_C21916(void);
+int glue_C21966(void);
+int glue_C2198C(void);
+int glue_C218C8(void);
+int glue_C207FE(void);
+
 #endif

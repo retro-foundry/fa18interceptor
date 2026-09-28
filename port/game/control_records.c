@@ -180,3 +180,48 @@ void reset_mission_objects(void) {
     for (record = 1; record <= 3; record++)
         for (i = 0; i < 41; i++) wr_u32(CONTROL_RECORDS + (gaddr)(record * CONTROL_RECORD_BYTES + 4 * i), 0);
 }
+
+void prepare_player_record(void) {
+    gaddr p = CONTROL_RECORDS;
+    wr_u8(p + 0x21, (uint8_t)(rd_u8(p + 0x21) & ~1));
+    wr_u8(p + 0x63, 0x0D);
+    reset_mission_objects();
+    wr_u16(p + 0x00, 0x148);
+    wr_u16(p + 0x00, (uint16_t)(rd_u16(p + 0x00) | 0x1080));
+    wr_u16(p + 0x7E, 0x1400);
+    wr_u8(PLAYER_FLAGS_A, 0);
+    wr_u8(PLAYER_FLAGS_B, 0);
+    wr_u8(PLAYER_FLAGS_C, 0);
+    wr_u8(PLAYER_FLAGS_D, 0);
+    wr_u8(PLAYER_FLAGS_E, 0);
+    wr_u8(PLAYER_FLAGS_F, 0);
+    wr_u8(PLAYER_FLAGS_G, 0);
+    wr_u16(PLAYER_LIMIT, 0x7FFF);
+    wr_u8(PLAYER_READY, 1);
+    wr_u8(p + 0x71, 0xFF);
+    wr_u16(SELECTED_RECORD, 0xFFFF);
+    wr_u8(SELECTION_ACTIVE, 0);
+    if (rd_u8(PLAYER_PHASE)) wr_u8(PLAYER_PHASE, 4);
+}
+
+static void ease_field(gaddr field, int16_t target, int shift) {
+    int16_t v = rd_s16(field);
+    wr_s16(field, (int16_t)(v - (int16_t)((int16_t)(v - target) >> shift)));
+    nudge_outside_dead_zone(field);
+}
+
+int16_t steer_record_56(int16_t target) {
+    gaddr r = rd_u32(CURRENT_RECORD);
+    if (!(rd_u16(r + 0x02) & 0x80) && rd_u16(r + 0x26) != 0 && target <= 0) return target;
+    if (rd_u8(r + 0x20) & 0x04) target = (int16_t)(target >> 1);
+    ease_field(r + 0x56, target, 2);
+    return target;
+}
+
+int16_t steer_record_5a(int16_t target) {
+    gaddr r = rd_u32(CURRENT_RECORD);
+    target = five_eighths(target);
+    if (rd_u8(r + 0x20) & 0x04) target = (int16_t)(target >> 1);
+    ease_field(r + 0x5A, target, rd_u8(r + 0x62) == 0x14 ? 2 : 1);
+    return target;
+}

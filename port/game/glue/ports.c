@@ -100,6 +100,18 @@ const FA18Port fa18_ports[] = {
     {0xC1ECD4, glue_C1ECD4, "cell_step", 100},
     {0xC2E346, glue_C2E346, "y_rotation_matrix8", 280},
     {0xC31C20, glue_C31C20, "display_value_to_draw", 80},
+    /* batch 11: player setup, steering, random bits, channel stop, cockpit script */
+    {0xC09620, glue_C09620, "prepare_player_record", 700},
+    {0xC13BA0, glue_C13BA0, "steer_record_56", 220},
+    {0xC13C64, glue_C13C64, "steer_record_5a", 240},
+    {0xC50B02, glue_C50B02, "random_bits", 300},
+    {0xC180FC, glue_C180FC, "stop_channel_2", 180},
+    {0xC1EC96, glue_C1EC96, "cell_step", 130},
+    {0xC21916, glue_C21916, "skip_for_type_3_to_6", 70},
+    {0xC21966, glue_C21966, "skip_counted_entries", 90},
+    {0xC2198C, glue_C2198C, "skip_for_low_class", 70},
+    {0xC218C8, glue_C218C8, "skip_to_type_block", 110},
+    {0xC207FE, glue_C207FE, "viewed_record_flagged", 70},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

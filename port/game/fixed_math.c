@@ -114,3 +114,9 @@ void y_rotation_matrix8(int16_t angle, gaddr out) {
 }
 
 int32_t cell_step(int16_t cells) { return (int32_t)((uint32_t)(uint16_t)cells << 16) >> 2; }
+
+int32_t random_bits(int32_t count) {
+    int32_t bits = 0;
+    while (count-- > 0) bits = bits * 2 + random_bit();
+    return bits;
+}

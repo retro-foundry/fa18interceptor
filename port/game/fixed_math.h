@@ -48,4 +48,7 @@ void y_rotation_matrix8(int16_t angle, gaddr out);
 /* Grid-cell difference as a 16.16 position step (a quarter unit per cell). */
 int32_t cell_step(int16_t cells);
 
+/* `count` pseudo-random bits, first bit highest. */
+int32_t random_bits(int32_t count);
+
 #endif

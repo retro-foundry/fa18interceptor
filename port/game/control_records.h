@@ -70,4 +70,18 @@ void nudge_outside_dead_zone(gaddr value);
 /* Reset the player record's mission fields and clear records 1-3. */
 void reset_mission_objects(void);
 
+/* Set up the player record for a new flight. */
+void prepare_player_record(void);
+
+/* Ease the current record's +$56 a quarter of the way toward `target`
+ * (halved when +$20 bit 2 is set), then apply the dead-zone nudge. Nothing
+ * happens while +$26 is nonzero, +$2 bit 7 is clear and target <= 0.
+ * Returns the target as possibly halved. */
+int16_t steer_record_56(int16_t target);
+
+/* Ease the current record's +$5A toward 5/8 of `target` (halved when +$20
+ * bit 2 is set) by a half or, when +$62 is $14, a quarter; then apply the
+ * dead-zone nudge. Returns the scaled target. */
+int16_t steer_record_5a(int16_t target);
+
 #endif
