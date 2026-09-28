@@ -1319,6 +1319,14 @@ holds the initializer at `$C55058`; this is not a direct `$C1612C` or
 Do not attach this callback to the flight handoff; recover the separate
 flight page/view initialization and cadence first.
 
+The actual pending five-plane render page is now bounded at
+`$C15DB4-$C1601E`: it allocates five `$1F40` planes into `$C18272` and
+`$C456BE`, duplicates the lower four sources, then calls `$C2F4DE` to build
+the renderer tables. `renderer_page_setup.{c,h}` ports that private native
+page and exact table layout; its contract passes. It is not yet connected to
+the source callback/timeline that selects and presents it. See
+`analysis/routines/c15db4_renderer_page_setup.md`.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
