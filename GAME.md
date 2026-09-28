@@ -1,6 +1,4 @@
-from pathlib import Path
-
-content = r"""# F/A-18 Interceptor (Amiga, 1988) — Reverse-Engineering Dossier
+# F/A-18 Interceptor (Amiga, 1988) — Reverse-Engineering Dossier
 
 ## Purpose
 
@@ -30,7 +28,42 @@ Do not silently promote a historical report or hypothesis to a binary fact.
 
 ---
 
-# 1. Executive conclusions
+## Confirmed by this project
+
+Findings from running and translating the original (2026-09). They settle or
+refine several claims below.
+
+- **Executable.** The ADF's `F-18 Interceptor` is an unpacked Amiga Hunk
+  executable of 185 hunks (286 KB CODE, 1.5 KB DATA, 11.5 KB BSS), loaded into
+  Slow RAM from `$C00000` (`analysis/hunk_runtime_resolved.json`). This
+  confirms the deeply segmented layout of section 1, item 2.
+- **Languages.** Both compiled C and hand-written assembly are present. Many
+  routines have Lattice-style `LINK A6` frames and stack arguments (for
+  example `$C1715C`, which reads the mouse buttons, and `$C15138`, which
+  assigns to its own parameter); the renderer is register-based assembly.
+- **Structure.** C startup is at `$C0DEB0` and `main()` at `$C0E27E`. The main
+  loop at `$C15D96` calls the update `$C0EFD4` once per iteration and is
+  CPU-paced: an iteration lasts as many video frames as the 68000 needs, and
+  3D frames change every 3 to 13 video frames.
+- **Renderer.** Confirms section 1, item 6: polygons are outlined with one-dot
+  blitter lines into a one-plane mask, area-filled, then composited into each
+  bitplane by colour (set, clear or complement); lines are blitter line draws
+  into each enabled plane. The 3D view is 320x180; lines are clipped against a
+  last row.
+- **Maths.** Angles are tenths of a degree; `sin_cos` uses a 901-entry
+  quarter-wave table of 2.14 fixed-point values at `$C3E5E8`.
+- **Sound.** Voices run small programs (field stores, delays, counted loops);
+  a master volume, 0-63 in 16.16, fades a quarter step per update and limits
+  every voice.
+- **Operating system.** The game keeps using Kickstart during play: interrupt
+  servers, graphics.library blitter ownership and `WaitBOVP`. About half of
+  all executed instructions in a flight sequence are in ROM.
+- **Zoom.** The view zoom scale runs from `$20` to `$80` (the `[` and `]`
+  keys).
+
+The recreated C source for these systems is in `port/game/`.
+
+## 1. Executive conclusions
 
 These are the most important facts to know before starting.
 
@@ -80,9 +113,9 @@ These are the most important facts to know before starting.
 
 ---
 
-# 2. Provenance and development history
+## 2. Provenance and development history
 
-## 2.1 Core credits
+### 2.1 Core credits
 
 Known Amiga credits:
 
@@ -98,7 +131,7 @@ Known Amiga credits:
 
 The exact wording varies slightly between credit databases and period material.
 
-## 2.2 Bob Dinnerman's background
+### 2.2 Bob Dinnerman's background
 
 Contemporary material states:
 
@@ -111,14 +144,14 @@ Contemporary material states:
 
 This background matters because it explains why the code may look more like arcade/simulation code than a conventional Amiga game engine.
 
-## 2.3 Language split
+### 2.3 Language split
 
 Contemporary Amiga Computing reporting says:
 
 - approximately 90% assembler;
 - menus and setup routines in C.
 
-### Reverse-engineering implication
+#### Reverse-engineering implication
 
 Do not assume one compiler-generated idiom across the whole binary.
 
@@ -142,7 +175,7 @@ A useful early task is to classify every segment as:
 
 ---
 
-# 3. Electronic Arts Artist Workstation development environment
+## 3. Electronic Arts Artist Workstation development environment
 
 A 1988 COMPUTE! article describes EA's contemporary Artist Workstation:
 
@@ -155,7 +188,7 @@ A 1988 COMPUTE! article describes EA's contemporary Artist Workstation:
 
 Interceptor was explicitly reported as having been developed on EA's AWS.
 
-### Why this is useful
+#### Why this is useful
 
 This creates several possibilities to investigate:
 
@@ -168,9 +201,9 @@ Do a comparative binary survey of 1987-1989 EA Amiga executables if time allows.
 
 ---
 
-# 4. Platform and memory targets
+## 4. Platform and memory targets
 
-## Original documented requirements
+### Original documented requirements
 
 Original manual:
 
@@ -182,7 +215,7 @@ Original manual:
 
 The game is an OCS-era title.
 
-## WHDLoad environment
+### WHDLoad environment
 
 The current WHDLoad installation reports:
 
@@ -197,7 +230,7 @@ The patch source itself defines:
 
 The difference between the advertised expansion amount and the patch's `$50000` fast-memory allocation is consistent with additional Kickstart/emulation requirements; do not confuse WHDLoad's requirements with the exact original retail-game memory map.
 
-### Essential experiment
+#### Essential experiment
 
 Run the same original executable under:
 
@@ -216,9 +249,9 @@ This should expose the memory-capability gate very quickly.
 
 ---
 
-# 5. Disk and executable architecture
+## 5. Disk and executable architecture
 
-## 5.1 Ordinary AmigaDOS installation
+### 5.1 Ordinary AmigaDOS installation
 
 Available evidence indicates a normal AmigaDOS disk rather than a custom trackloader:
 
@@ -228,7 +261,7 @@ Available evidence indicates a normal AmigaDOS disk rather than a custom tracklo
 - WHDLoad copies ordinary files;
 - WHDLoad uses DOS `LoadSeg` to launch the main executable.
 
-## 5.2 Hard-coded device paths
+### 5.2 Hard-coded device paths
 
 Contemporary 1988 users complained that the game looked for sound, picture and other supporting resources using hard-coded paths beginning with:
 
@@ -242,7 +275,7 @@ The classic hard-drive workaround was:
 
 The modern WHDLoad slave likewise creates assignments for `DF0` and `F18`.
 
-### Reverse-engineering use
+#### Reverse-engineering use
 
 Search the decrunched executable for every occurrence of:
 
@@ -255,7 +288,7 @@ Search the decrunched executable for every occurrence of:
 
 Then cross-reference every string to recover the resource loader graph.
 
-## 5.3 Main executable name
+### 5.3 Main executable name
 
 The public WHDLoad source defines its program name as:
 
@@ -263,7 +296,7 @@ The public WHDLoad source defines its program name as:
 
 Case is not significant to normal AmigaDOS use, but preserve original directory entry spelling in project notes.
 
-## 5.4 Packed executable
+### 5.4 Packed executable
 
 The WHDLoad installer:
 
@@ -272,7 +305,7 @@ The WHDLoad installer:
 
 This is a very important warning.
 
-### Rule
+#### Rule
 
 Never compare:
 
@@ -288,7 +321,7 @@ Preserve:
 - original packed file hash;
 - unpacked/decrunched file hash.
 
-## 5.5 Segmented Hunk executable
+### 5.5 Segmented Hunk executable
 
 The WHDLoad loader stores the `LoadSeg` segment list and later calls an internal helper with value **71**.
 
@@ -298,7 +331,7 @@ Therefore:
 
 **CONFIRMED-PATCH: the executable targeted by WHDLoad contains at least 72 linked segments.**
 
-### First static-analysis deliverable
+#### First static-analysis deliverable
 
 Generate a table like:
 
@@ -312,7 +345,7 @@ Preserve segment boundaries in the disassembly.
 
 ---
 
-# 6. Public WHDLoad source — exact reverse-engineering landmarks
+## 6. Public WHDLoad source — exact reverse-engineering landmarks
 
 The current public source lives in:
 
@@ -330,7 +363,7 @@ This is **WHDLoad patch/slave source, not the original F/A-18 Interceptor source
 
 That distinction is essential.
 
-## 6.1 Patch landmarks
+### 6.1 Patch landmarks
 
 The following values are from the current patch list.
 
@@ -352,7 +385,7 @@ Treat them as **WHDLoad `resload_PatchSeg` logical offsets** until you have prov
 
 There is also an older comment in the patch source describing a protection change around raw-looking offset `1CE70`, changing an immediate value from `$FF` to `$01`. Treat that comment as version-specific historical information until matched against your executable.
 
-## 6.2 In-game state byte
+### 6.2 In-game state byte
 
 The slave:
 
@@ -366,7 +399,7 @@ Patch comments/logic distinguish:
 - zero: text is being displayed;
 - non-zero: normal in-game state.
 
-### High-value task
+#### High-value task
 
 Identify the original references to `segment71 + 357`.
 
@@ -382,11 +415,11 @@ This is one of the best initial anchors in the whole executable.
 
 ---
 
-# 7. Timing model
+## 7. Timing model
 
 Timing deserves very early attention because incorrect timing will contaminate every physics observation.
 
-## 7.1 CPU-dependent busy loop
+### 7.1 CPU-dependent busy loop
 
 The WHDLoad source replaces a loop that its author describes as effectively something like a C busy-wait.
 
@@ -400,7 +433,7 @@ The patch author's comments say the original delay appears:
 
 This is strong evidence of elapsed-time behaviour originally implemented as raw CPU iteration rather than VBL timing.
 
-## 7.2 VBL-based speed regulation
+### 7.2 VBL-based speed regulation
 
 Normal regulated gameplay in the WHDLoad v2 patch uses a VBL counter.
 
@@ -412,7 +445,7 @@ The speed-regulation routine normally waits for a minimum count of:
 
 before proceeding.
 
-### Important inference
+#### Important inference
 
 If one call to this regulator corresponds to one complete simulation/render update:
 
@@ -427,7 +460,7 @@ This may be:
 
 **Do not assume which. Measure it.**
 
-## 7.3 Text-mode timing
+### 7.3 Text-mode timing
 
 The patch handles text differently from in-game updates so mission text remains readable on fast machines.
 
@@ -438,13 +471,13 @@ This means there are at least two timing regimes:
 
 Recover that state machine before rewriting timing.
 
-## 7.4 Sound delay
+### 7.4 Sound delay
 
 A separate patch at logical `$451C8` introduces a raster-based delay.
 
 This is an excellent anchor into the sound-update path.
 
-## 7.5 Required timing experiments
+### 7.5 Required timing experiments
 
 Run at:
 
@@ -467,9 +500,9 @@ Then determine which quantities remain invariant.
 
 ---
 
-# 8. Graphics / renderer
+## 8. Graphics / renderer
 
-## 8.1 Contemporary evidence
+### 8.1 Contemporary evidence
 
 A 1988 technical article on Amiga 3D graphics states that some of Interceptor's 3D-solid algorithms were designed around the Amiga blitter's:
 
@@ -484,7 +517,7 @@ A separate contemporary review explicitly praises:
 - sampled sound;
 - use of the blitter.
 
-### Consequence
+#### Consequence
 
 The renderer should be investigated as a likely hybrid:
 
@@ -495,7 +528,7 @@ The renderer should be investigated as a likely hybrid:
 
 Do not assume all polygon fill is blitter-driven, and do not assume it is all CPU-driven.
 
-## 8.2 Modern WHDLoad graphical bug clue
+### 8.2 Modern WHDLoad graphical bug clue
 
 The WHDLoad ReadMe reports that on faster machines the third-person heading/speed/height indicators can show graphical corruption and speculates that they may be:
 
@@ -504,7 +537,7 @@ The WHDLoad ReadMe reports that on faster machines the third-person heading/spee
 
 This is not proven, but it provides a good breakpoint target.
 
-## 8.3 Graphics analysis plan
+### 8.3 Graphics analysis plan
 
 Instrument:
 
@@ -527,7 +560,7 @@ For each frame, capture:
 
 Also trace `graphics.library` calls.
 
-### Questions to answer
+#### Questions to answer
 
 - What is the gameplay display resolution?
 - How many bitplanes are active?
@@ -542,7 +575,7 @@ Also trace `graphics.library` calls.
 - Are object faces stored already ordered or sorted dynamically?
 - Is the world a flat mesh, object list, spatial grid, or hand-scripted landmark set?
 
-## 8.4 Useful visual-state probes
+### 8.4 Useful visual-state probes
 
 Change only one thing at a time and diff memory/custom-register traces:
 
@@ -560,9 +593,9 @@ Camera systems are likely a cleaner entry point than immediately attacking the 3
 
 ---
 
-# 9. Input subsystem
+## 9. Input subsystem
 
-## 9.1 Documented controls
+### 9.1 Documented controls
 
 Key systems include:
 
@@ -593,7 +626,7 @@ Key systems include:
 
 A later fan key sheet lists `K` for ECM, but the full manual says `J`. Trust the original manual first; verify runtime raw keycode.
 
-## 9.2 Raw keycode landmarks from WHDLoad joypad patch
+### 9.2 Raw keycode landmarks from WHDLoad joypad patch
 
 The modern slave synthesizes original keyboard events using these raw keycodes:
 
@@ -610,7 +643,7 @@ This gives hard constants for locating the original keyboard dispatch path.
 
 The keyboard patch site is at logical `$01590`.
 
-### Suggested first input experiment
+#### Suggested first input experiment
 
 Set breakpoints on the original handler and press one documented key at a time.
 
@@ -622,9 +655,9 @@ This quickly labels a large part of the main state structure.
 
 ---
 
-# 10. Aircraft, physics and likely constants
+## 10. Aircraft, physics and likely constants
 
-## 10.1 Aircraft
+### 10.1 Aircraft
 
 Player-accessible:
 
@@ -635,7 +668,7 @@ Carrier start forces the F/A-18.
 
 The cockpit/control scheme is largely shared.
 
-## 10.2 Useful documented thresholds
+### 10.2 Useful documented thresholds
 
 Manual/historical observations provide concrete values useful for correlating memory state:
 
@@ -647,7 +680,7 @@ Manual/historical observations provide concrete values useful for correlating me
 
 These are not necessarily internal constants in these exact units, but they are excellent calibration points.
 
-## 10.3 Artificial world ceiling
+### 10.3 Artificial world ceiling
 
 Old detailed hints describe an exact ceiling at:
 
@@ -659,7 +692,7 @@ Decimal 40960 equals:
 
 This is a powerful search target, but `$A000` can occur for unrelated reasons.
 
-### Experiment
+#### Experiment
 
 Climb under controlled conditions while watching candidate altitude variables.
 
@@ -672,7 +705,7 @@ Identify:
 
 Then check whether world X/Y boundaries use related magnitudes.
 
-## 10.4 World boundaries
+### 10.4 World boundaries
 
 Historical hints describe hard North/South/East/West boundaries analogous to the altitude ceiling.
 
@@ -686,7 +719,7 @@ Recover:
 - boundary constants;
 - heading coordinate convention.
 
-## 10.5 Collision oddities as probes
+### 10.5 Collision oddities as probes
 
 Historical detailed player notes report:
 
@@ -710,7 +743,7 @@ These are not proof of the collision implementation, but they strongly suggest e
 
 ---
 
-# 11. Camera system
+## 11. Camera system
 
 The game supports:
 
@@ -726,7 +759,7 @@ Historical notes indicate that many camera controls continue to work while the p
 
 There are reports of an ejection edge case in which the camera/player state can become detached from a replacement aircraft.
 
-### Reverse-engineering value
+#### Reverse-engineering value
 
 This makes the camera system an excellent way to identify several independent references:
 
@@ -741,9 +774,9 @@ Do not assume all of these are the same state variable.
 
 ---
 
-# 12. Radar/HUD/combat subsystem
+## 12. Radar/HUD/combat subsystem
 
-## 12.1 Weapons
+### 12.1 Weapons
 
 Core weapons:
 
@@ -761,7 +794,7 @@ Also:
 
 Manual and secondary sources differ on some ammunition-count details. Prefer runtime state over modern summaries.
 
-## 12.2 Radar ranges
+### 12.2 Radar ranges
 
 Selectable radar ranges:
 
@@ -775,7 +808,7 @@ These values provide an easy route to locating:
 - lookup table;
 - radar scale calculation.
 
-## 12.3 Historical HUD/radar details
+### 12.3 Historical HUD/radar details
 
 Detailed old hints claim:
 
@@ -786,7 +819,7 @@ These should be easy to verify visually and then map to rendering conditionals.
 
 ---
 
-# 13. Game modes and mission architecture
+## 13. Game modes and mission architecture
 
 Main progression:
 
@@ -803,7 +836,7 @@ There are six combat missions.
 
 This gives a strong expectation that the program contains a top-level scenario/mode dispatch table.
 
-### Find early
+#### Find early
 
 - menu option -> mode ID;
 - mode ID -> setup routine;
@@ -816,9 +849,9 @@ Do not decompile six missions independently until this shared framework is under
 
 ---
 
-# 14. Demonstration and training modes as scripted-engine oracles
+## 14. Demonstration and training modes as scripted-engine oracles
 
-## Demonstration Flight
+### Demonstration Flight
 
 The demo is fully scripted:
 
@@ -836,13 +869,13 @@ This is ideal for finding:
 - throttle/gear scripted events;
 - waypoint system.
 
-### Experiment
+#### Experiment
 
 Record memory every frame through a complete demo.
 
 Search for low-entropy tables consumed sequentially.
 
-## Training demonstration
+### Training demonstration
 
 The training demo contains seven known maneuvers and a deterministic sequence.
 
@@ -859,7 +892,7 @@ These modes may be easier to reverse than hostile combat AI because they are str
 
 ---
 
-# 15. Hidden/free-flight starts
+## 15. Hidden/free-flight starts
 
 Multiple old sources describe undocumented free-flight entries.
 
@@ -871,7 +904,7 @@ Evidence conflicts:
 
 Do not choose one claim and discard the others.
 
-### High-value test
+#### High-value test
 
 Instrument the free-flight menu dispatch and press:
 
@@ -891,7 +924,7 @@ This may reveal abandoned locations/scenarios still in the binary.
 
 ---
 
-# 16. Six combat missions
+## 16. Six combat missions
 
 The documented/historically known missions include:
 
@@ -904,7 +937,7 @@ The documented/historically known missions include:
 
 The first missions are documented in the original manual; later missions were deliberately not fully spoiled there.
 
-## Mission 4 — rescue
+### Mission 4 — rescue
 
 Useful implementation probes:
 
@@ -916,7 +949,7 @@ Useful implementation probes:
 
 The pilot and pod reportedly have unusual/non-standard collision behavior.
 
-## Mission 5 — cruise missile
+### Mission 5 — cruise missile
 
 Useful because it contains a very distinctive object type:
 
@@ -926,7 +959,7 @@ Useful because it contains a very distinctive object type:
 
 Trace its object update function to identify how non-aircraft movers fit into the object system.
 
-## Mission 6 — Shadow Sub
+### Mission 6 — Shadow Sub
 
 This mission has decades of contradictory player lore.
 
@@ -942,7 +975,7 @@ One WHDLoad-distributed hints file says its author contacted Electronic Arts and
 
 Other historical/modern descriptions say the carrier may be logically destroyed without a visible explosion, and some players concluded only the patrolling aircraft actually mattered.
 
-### Do not solve this from lore.
+#### Do not solve this from lore.
 
 Trace the code.
 
@@ -962,7 +995,7 @@ This is an ideal place where reverse engineering can settle a 38-year-old ambigu
 
 ---
 
-# 17. Difficulty / replay behavior
+## 17. Difficulty / replay behavior
 
 Contemporary Usenet discussion reported that missions can vary on repeat attempts, for example:
 
@@ -973,7 +1006,7 @@ Contemporary Usenet discussion reported that missions can vary on repeat attempt
 
 The manual also indicates replayed/completed missions may become tougher.
 
-### Investigate
+#### Investigate
 
 Look for:
 
@@ -995,7 +1028,7 @@ Diff snapshots.
 
 ---
 
-# 18. Flight log / persistence
+## 18. Flight log / persistence
 
 The original manual describes a persistent flight log.
 
@@ -1012,7 +1045,7 @@ A supplied `R`/Rookie pilot on a write-enabled disk begins with the first three 
 
 Saving occurs through the flight-log UI.
 
-## This is one of the easiest data formats to recover
+### This is one of the easiest data formats to recover
 
 Use a disposable copy of the disk.
 
@@ -1040,9 +1073,9 @@ Then use persistence-field references to find the in-memory pilot/log structure.
 
 ---
 
-# 19. Copy protection
+## 19. Copy protection
 
-## 19.1 Original protection
+### 19.1 Original protection
 
 The retail game uses a physical rotating "Flight Computer" code wheel.
 
@@ -1050,7 +1083,7 @@ The manual explains a four-character challenge/countercode process and allows th
 
 OpenRetro preserves scans of the code wheel and manual.
 
-## 19.2 1988 public patch
+### 19.2 1988 public patch
 
 A July 1988 Usenet/public-domain patch modified the executable so the valid response becomes `0000`.
 
@@ -1079,7 +1112,7 @@ A public-domain `f18fix.c` wrote zero bytes at raw file offsets:
 
 Those raw offsets are version/packing dependent.
 
-## 19.3 WHDLoad protection landmarks
+### 19.3 WHDLoad protection landmarks
 
 Modern WHDLoad additionally:
 
@@ -1089,7 +1122,7 @@ Modern WHDLoad additionally:
 
 These sites should triangulate the protection state machine.
 
-## 19.4 Unit A crack clue
+### 19.4 Unit A crack clue
 
 The WHDLoad patch explicitly remains compatible with a well-known Unit A crack.
 
@@ -1097,7 +1130,7 @@ It installs a handler for **TRAP #0** that returns zero.
 
 This strongly suggests that cracked executable contains or depends on a `TRAP #0` path.
 
-### Use crack variants only as comparison material
+#### Use crack variants only as comparison material
 
 For an original-code reconstruction:
 
@@ -1108,7 +1141,7 @@ For an original-code reconstruction:
 
 ---
 
-# 20. Two WHDLoad access-fault fixes
+## 20. Two WHDLoad access-fault fixes
 
 The patch contains two fixes for access faults.
 
@@ -1123,7 +1156,7 @@ Possible explanations include:
 - top-byte metadata;
 - a pointer calculation that only happened to work in original memory placement.
 
-### Required work
+#### Required work
 
 At both logical fault sites:
 
@@ -1137,7 +1170,7 @@ Do not simply preserve the WHDLoad fix in a decompilation without understanding 
 
 ---
 
-# 21. Sound system
+## 21. Sound system
 
 Confirmed from contemporary reporting:
 
@@ -1147,7 +1180,7 @@ Confirmed from contemporary reporting:
 
 WHDLoad also patches a specific sound-delay site.
 
-## Investigate
+### Investigate
 
 Determine whether runtime audio uses:
 
@@ -1179,18 +1212,18 @@ Because 1 MiB changes sound content, file-open traces under 512 KiB and 1 MiB ma
 
 ---
 
-# 22. JetFighter relationship
+## 22. JetFighter relationship
 
 This is a major comparative lead.
 
-## Evidence
+### Evidence
 
 - Bob Dinnerman programmed/designed both.
 - Contemporary reporting described the subsequent PC game as an Interceptor-related development.
 - Paul Grace's modern first-person account says EA's PC-version negotiations failed and the work later appeared as **JetFighter**.
 - Grace recalls that PC libraries retained Amiga OS-related strings, suggesting a genuine code/data lineage rather than a purely conceptual sequel.
 
-## How to use JetFighter
+### How to use JetFighter
 
 With a legally obtained early DOS JetFighter build:
 
@@ -1218,11 +1251,11 @@ If a table in the Amiga binary is mysterious but an analogous DOS table sits nea
 
 ---
 
-# 23. Renderer/world hypotheses to test
+## 23. Renderer/world hypotheses to test
 
 These are intentionally hypotheses, not facts.
 
-## HYPOTHESIS A — object-list/painter rendering
+### HYPOTHESIS A — object-list/painter rendering
 
 Given the era, filled solids and relatively sparse world, a back-to-front object/face renderer is plausible.
 
@@ -1233,7 +1266,7 @@ Test by:
 - identifying sort keys;
 - looking for depth compares/sorts.
 
-## HYPOTHESIS B — coarse collision separate from render geometry
+### HYPOTHESIS B — coarse collision separate from render geometry
 
 Bridge/pilot/pod quirks and carrier-edge behaviour suggest collision geometry may be much simpler than visual meshes.
 
@@ -1245,13 +1278,13 @@ Test by locating:
 - carrier deck bounds;
 - speed threshold.
 
-## HYPOTHESIS C — shared scripted control path for demo/training/AI
+### HYPOTHESIS C — shared scripted control path for demo/training/AI
 
 Demo flight, instructor aircraft and combat AI may all feed a common aircraft-control state rather than separate physics.
 
 Find the aircraft integration function first, then identify who writes desired control inputs.
 
-## HYPOTHESIS D — fixed-point world state
+### HYPOTHESIS D — fixed-point world state
 
 Almost certain for performance reasons, but the exact format is unknown.
 
@@ -1266,33 +1299,33 @@ Correlate memory with:
 
 ---
 
-# 24. Behavioural bugs that are useful reverse-engineering tools
+## 24. Behavioural bugs that are useful reverse-engineering tools
 
 Do not "fix" these before understanding them.
 
 They can expose architecture.
 
-## Surface skipping / bogging
+### Surface skipping / bogging
 
 Can identify terrain-contact and crash thresholds.
 
-## 40,960 ft ceiling
+### 40,960 ft ceiling
 
 Can identify altitude variable and clamp.
 
-## Hard N/S/E/W boundaries
+### Hard N/S/E/W boundaries
 
 Can identify world coordinates and map extent.
 
-## Water landing
+### Water landing
 
 Can reveal that crash/ground logic is not simply terrain type == water.
 
-## Carrier-edge support
+### Carrier-edge support
 
 Can reveal deck collision bounds.
 
-## Ejection/replacement-aircraft state oddity
+### Ejection/replacement-aircraft state oddity
 
 Can separate:
 
@@ -1301,7 +1334,7 @@ Can separate:
 - camera target;
 - cockpit mode.
 
-## Demo external-view plane popping
+### Demo external-view plane popping
 
 WHDLoad notes this is more common in demo mode on fast machines.
 
@@ -1311,15 +1344,15 @@ Potentially reveals synchronization between:
 - draw list;
 - buffer flip.
 
-## Third-person indicator corruption
+### Third-person indicator corruption
 
 Potential blitter/display-buffer race.
 
 ---
 
-# 25. Suggested static-analysis workflow
+## 25. Suggested static-analysis workflow
 
-## Phase 0 — preserve exact inputs
+### Phase 0 — preserve exact inputs
 
 For every disk/executable variant:
 
@@ -1336,7 +1369,7 @@ Create:
 
 Do not merge findings across variants without saying which binary they came from.
 
-## Phase 1 — parse Hunks first
+### Phase 1 — parse Hunks first
 
 Before broad disassembly:
 
@@ -1354,7 +1387,7 @@ and:
 
 `hunks.md`
 
-## Phase 2 — map WHDLoad landmarks
+### Phase 2 — map WHDLoad landmarks
 
 For each patch logical offset:
 
@@ -1369,7 +1402,7 @@ Output:
 
 `whdload_landmarks.md`
 
-## Phase 3 — string and OS-call pass
+### Phase 3 — string and OS-call pass
 
 Find:
 
@@ -1392,7 +1425,7 @@ Label functions such as:
 - screen setup;
 - keyboard input.
 
-## Phase 4 — classify assembly vs C
+### Phase 4 — classify assembly vs C
 
 Use:
 
@@ -1404,7 +1437,7 @@ Use:
 
 Mark suspected C-generated segments.
 
-## Phase 5 — build call graph
+### Phase 5 — build call graph
 
 Do not immediately translate to C.
 
@@ -1418,7 +1451,7 @@ First produce:
 
 ---
 
-# 26. Suggested dynamic-analysis workflow
+## 26. Suggested dynamic-analysis workflow
 
 Use WinUAE/FS-UAE debugger or another emulator capable of:
 
@@ -1427,7 +1460,7 @@ Use WinUAE/FS-UAE debugger or another emulator capable of:
 - custom-chip register logging;
 - deterministic savestates.
 
-## Experiment A — input-state matrix
+### Experiment A — input-state matrix
 
 Snapshot at stable free flight.
 
@@ -1455,7 +1488,7 @@ Repeat for:
 
 Goal: identify main player/cockpit state structure.
 
-## Experiment B — coordinates
+### Experiment B — coordinates
 
 Keep plane stationary/on runway.
 
@@ -1467,7 +1500,7 @@ Find candidate X/Y/Z.
 
 Use map and altitude readout to solve scale.
 
-## Experiment C — flight integration
+### Experiment C — flight integration
 
 Watch candidate:
 
@@ -1482,7 +1515,7 @@ Single-step one game tick.
 
 Recover state-update order.
 
-## Experiment D — scripted demo
+### Experiment D — scripted demo
 
 The demo is deterministic.
 
@@ -1493,7 +1526,7 @@ Trace one complete loop and identify:
 - target speed/heading/altitude;
 - event opcodes if any.
 
-## Experiment E — mission setup diffs
+### Experiment E — mission setup diffs
 
 Create savestates immediately after setup of every mode/mission.
 
@@ -1505,7 +1538,7 @@ Diff to find:
 - spawn data;
 - AI skill.
 
-## Experiment F — renderer register trace
+### Experiment F — renderer register trace
 
 Log blitter register writes for one frame in:
 
@@ -1520,7 +1553,7 @@ This can turn opaque graphics code into named passes.
 
 ---
 
-# 27. Persistence experiment in detail
+## 27. Persistence experiment in detail
 
 Because the disk log is writable, use it as a controlled reverse-engineering channel.
 
@@ -1550,7 +1583,7 @@ Once format is known, search RAM for exact serialized fields to find live state.
 
 ---
 
-# 28. Mission-state reconstruction strategy
+## 28. Mission-state reconstruction strategy
 
 For each mission create a state-machine document.
 
@@ -1568,4 +1601,4 @@ MissionState
   special_object_state
   timer
   rng_seed
-  
+```

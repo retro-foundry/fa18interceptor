@@ -2,13 +2,13 @@
 
 ## Executive summary
 
-This guide treats an Amiga game as a system of **Motorola 68k code, Chip RAM data structures and asynchronous custom-chip programs**, rather than as an ordinary linear executable. For reverse engineering, the most important architectural fact is that graphics, sprites, Copper instructions, blitter operands, disk DMA and Paula audio are driven through memory-mapped hardware centred on `$DFF000`, while the custom chips obtain their DMA-visible data from **Chip RAM**. Commodore explicitly states that Copper instruction fetches come from Chip RAM and that bitplanes, sprites, Copper lists and audio data may be placed anywhere within the Chip RAM supported by the installed Agnus/Alice. citeturn12view2turn15view3
+This guide treats an Amiga game as a system of **Motorola 68k code, Chip RAM data structures and asynchronous custom-chip programs**, rather than as an ordinary linear executable. For reverse engineering, the most important architectural fact is that graphics, sprites, Copper instructions, blitter operands, disk DMA and Paula audio are driven through memory-mapped hardware centred on `$DFF000`, while the custom chips obtain their DMA-visible data from **Chip RAM**. Commodore explicitly states that Copper instruction fetches come from Chip RAM and that bitplanes, sprites, Copper lists and audio data may be placed anywhere within the Chip RAM supported by the installed Agnus/Alice.
 
 The most productive investigation strategy is therefore usually:
 
 **input register → game state → frame/update loop → rendering commands → Copper/blitter state → bitplane pointers → graphics/resource data**, rather than trying to understand the complete program from its entry point downwards.
 
-For an unknown title, assume initially that it targets a **68000, PAL-capable OCS/ECS machine with 512 KiB–1 MiB of Chip RAM**, while treating every one of those assumptions as provisional. Detect AGA explicitly rather than assuming it from the binary. An A1200 instead has a 68EC020, the AA/AGA Alice/Lisa chipset, 2 MiB of Chip RAM in the standard machine, eight bitplanes and a 256-entry 24-bit palette architecture. Commodore's A1200 functional specification identifies AA—subsequently called AGA—and gives the PAL/NTSC CPU clocks as approximately 14.18/14.32 MHz. citeturn14view0
+For an unknown title, assume initially that it targets a **68000, PAL-capable OCS/ECS machine with 512 KiB–1 MiB of Chip RAM**, while treating every one of those assumptions as provisional. Detect AGA explicitly rather than assuming it from the binary. An A1200 instead has a 68EC020, the AA/AGA Alice/Lisa chipset, 2 MiB of Chip RAM in the standard machine, eight bitplanes and a 256-entry 24-bit palette architecture. Commodore's A1200 functional specification identifies AA—subsequently called AGA—and gives the PAL/NTSC CPU clocks as approximately 14.18/14.32 MHz.
 
 The hardware division relevant to an agent is:
 
@@ -19,9 +19,9 @@ The hardware division relevant to an agent is:
 | **Denise / Lisa** | Converts planar bitplanes and sprites into pixels; handles palette, display modes and collision logic. |
 | **Paula** | Four-channel PCM audio, disk data path, serial and interrupt-related functions. |
 | **8520 CIAs** | Keyboard serial interface, fire buttons, timers, floppy controls and other low-speed I/O. |
-| **Gary / Gayle / related glue logic** | Address decoding and motherboard bus/control functions; not the graphics/audio “custom chipset” itself. Gary is characteristic of machines such as the A500/A2000; A600/A1200 use Gayle, and the A1200 additionally uses Budgie for parts of the CPU/chip-memory interface. citeturn20search0turn14view0 |
+| **Gary / Gayle / related glue logic** | Address decoding and motherboard bus/control functions; not the graphics/audio “custom chipset” itself. Gary is characteristic of machines such as the A500/A2000; A600/A1200 use Gayle, and the A1200 additionally uses Budgie for parts of the CPU/chip-memory interface. |
 
-The original Commodore Hardware Reference Manual is the baseline authority for OCS/ECS behaviour; the A1200/AA specifications are required for AGA-specific interpretation. The HRM also warns that AmigaOS does **not** impose a fixed application RAM layout: software is intended to be relocatable, and the only fixed system pointer application code traditionally relies on is the `exec.library` base pointer at absolute address `$00000004`. citeturn12view2
+The original Commodore Hardware Reference Manual is the baseline authority for OCS/ECS behaviour; the A1200/AA specifications are required for AGA-specific interpretation. The HRM also warns that AmigaOS does **not** impose a fixed application RAM layout: software is intended to be relocatable, and the only fixed system pointer application code traditionally relies on is the `exec.library` base pointer at absolute address `$00000004`.
 
 **Assumptions where the target is unspecified**
 
@@ -38,7 +38,7 @@ The original Commodore Hardware Reference Manual is the baseline authority for O
 
 ## Architecture, chipset generations, memory map and registers
 
-The original Amiga architecture combines a 68k processor with three principal multimedia custom chips: Agnus, Denise and Paula. The A500/A2000-era 68000 operates at approximately 7.16 MHz NTSC or 7.09 MHz PAL; custom-chip DMA shares Chip RAM with the CPU. Later ECS Agnus variants expanded DMA-addressable Chip RAM to 1 or 2 MiB depending on model, while AGA replaced Agnus/Denise with Alice/Lisa and widened the graphics subsystem. citeturn15view0turn15view1turn15view3
+The original Amiga architecture combines a 68k processor with three principal multimedia custom chips: Agnus, Denise and Paula. The A500/A2000-era 68000 operates at approximately 7.16 MHz NTSC or 7.09 MHz PAL; custom-chip DMA shares Chip RAM with the CPU. Later ECS Agnus variants expanded DMA-addressable Chip RAM to 1 or 2 MiB depending on model, while AGA replaced Agnus/Denise with Alice/Lisa and widened the graphics subsystem.
 
 ### Chipset comparison
 
@@ -58,13 +58,13 @@ The original Amiga architecture combines a 68k processor with three principal mu
 | Wider sprite fetch | No | No | AGA fetch modes allow wider sprite data |
 | Key extra registers | — | `DENISEID`, `BPLCON3`, beam/timing registers, `BLTSIZV/H` | `BPLCON4`, `CLXCON2`, `FMODE`, AGA extensions |
 
-The ECS Hardware Reference Manual documents programmable scan timing, SuperHires, enhanced Denise identification and the expanded blitter range; Commodore's A1200 specification documents eight bitplanes and 256 simultaneous palette entries selected from a 24-bit RGB space for AA/AGA. citeturn15view3turn14view0
+The ECS Hardware Reference Manual documents programmable scan timing, SuperHires, enhanced Denise identification and the expanded blitter range; Commodore's A1200 specification documents eight bitplanes and 256 simultaneous palette entries selected from a 24-bit RGB space for AA/AGA.
 
-A useful warning for automated analysis is that **“ECS” is not one immutable RAM configuration**. Commodore describes Fat Agnus configurations with 512 KiB DMA reach, ECS machines with 1 MiB Chip RAM and systems such as the A3000 with 2 MiB Chip RAM. Infer the actual limit from the machine, Agnus revision or observed DMA pointers rather than the game's marketing date. citeturn15view3
+A useful warning for automated analysis is that **“ECS” is not one immutable RAM configuration**. Commodore describes Fat Agnus configurations with 512 KiB DMA reach, ECS machines with 1 MiB Chip RAM and systems such as the A3000 with 2 MiB Chip RAM. Infer the actual limit from the machine, Agnus revision or observed DMA pointers rather than the game's marketing date.
 
 ### Classic 24-bit address space
 
-The following is the practical OCS/ECS-oriented CPU map. The HRM itself warns that this is a **hardware address-space map, not a promise about where an operating-system application will be loaded**. citeturn10search10turn12view2
+The following is the practical OCS/ECS-oriented CPU map. The HRM itself warns that this is a **hardware address-space map, not a promise about where an operating-system application will be loaded**.
 
 | CPU addresses | Size | Principal use |
 |---|---:|---|
@@ -86,7 +86,7 @@ The following is the practical OCS/ECS-oriented CPU map. The HRM itself warns th
 | `$F00000–$FBFFFF` | 768 KiB | ROM/extended-ROM area whose use changes between machines and Kickstart generations. |
 | `$FC0000–$FFFFFF` | 256 KiB | Classic 256 KiB Kickstart ROM window; later 512 KiB ROM arrangements extend lower. |
 
-The most important distinction for reverse engineering is **Chip RAM versus CPU-only/Fast RAM**, not merely the numerical range. Agnus/Alice DMA engines cannot blindly consume arbitrary Fast RAM pointers. A pointer used by bitplane, sprite, audio, Copper or blitter DMA is therefore an exceptionally strong clue that the pointed-to buffer must reside in DMA-accessible Chip RAM. citeturn15view3
+The most important distinction for reverse engineering is **Chip RAM versus CPU-only/Fast RAM**, not merely the numerical range. Agnus/Alice DMA engines cannot blindly consume arbitrary Fast RAM pointers. A pointer used by bitplane, sprite, audio, Copper or blitter DMA is therefore an exceptionally strong clue that the pointed-to buffer must reside in DMA-accessible Chip RAM.
 
 ```mermaid
 flowchart TB
@@ -105,7 +105,7 @@ flowchart TB
 
 ### A1200-specific map
 
-Do **not** apply the classic `$A00000–$BEFFFF` interpretation blindly to an A1200. Commodore's 1992 functional specification assigns large portions to the PC Card/PCMCIA interface, IDE and other system logic. citeturn17view7
+Do **not** apply the classic `$A00000–$BEFFFF` interpretation blindly to an A1200. Commodore's 1992 functional specification assigns large portions to the PC Card/PCMCIA interface, IDE and other system logic.
 
 | A1200 address | Size | Assignment in Commodore specification |
 |---|---:|---|
@@ -136,7 +136,7 @@ Do **not** apply the classic `$A00000–$BEFFFF` interpretation blindly to an A1
 | `$F00000–$F7FFFF` | 512 KiB | Flash-ROM space |
 | `$F80000–$FFFFFF` | 512 KiB | System ROM / second half of 1 MiB ROM |
 
-The final `$F80000–$FFFFFF` endpoint above is reconstructed from the specified 512 KiB region; the OCR copy of Commodore's document truncates one hexadecimal digit in that endpoint. citeturn17view7
+The final `$F80000–$FFFFFF` endpoint above is reconstructed from the specified 512 KiB region; the OCR copy of Commodore's document truncates one hexadecimal digit in that endpoint.
 
 ### Custom-register map
 
@@ -147,7 +147,7 @@ CUSTOM = $DFF000
 absolute_address = $DFF000 + register_offset
 ```
 
-Commodore's own hardware include files define `CUSTOM equ $DFF000`. citeturn17view6
+Commodore's own hardware include files define `CUSTOM equ $DFF000`.
 
 The following table is intentionally arranged for reverse engineering rather than programming: a write cluster to one row should be classified as a subsystem immediately.
 
@@ -208,11 +208,11 @@ The following table is intentionally arranged for reverse engineering rather tha
 | `$1C0–$1E4` | timing registers | R/W | ECS programmable horizontal/vertical totals, blanking/sync, beam control, `DIWHIGH`. |
 | `$1FC` | `FMODE` | W | AGA bitplane/sprite fetch mode. |
 
-The HRM register summaries and Commodore Denise specification confirm the bitplane-data/control and 32-colour-register organisation; Denise contains six bitplane and eight sprite-pair serial paths and converts the selected colour through 12-bit RGB on OCS/ECS. citeturn4view0turn4view1turn4view2turn18view4
+The HRM register summaries and Commodore Denise specification confirm the bitplane-data/control and 32-colour-register organisation; Denise contains six bitplane and eight sprite-pair serial paths and converts the selected colour through 12-bit RGB on OCS/ECS.
 
 Two register behaviours deserve to become hard-coded agent rules:
 
-1. **`DMACON`, `INTENA`, `INTREQ` and `ADKCON` use set/clear semantics.** Bit 15 determines whether the asserted lower bits are set or cleared; writing zero bits does not clear corresponding state. citeturn17view2
+1. **`DMACON`, `INTENA`, `INTREQ` and `ADKCON` use set/clear semantics.** Bit 15 determines whether the asserted lower bits are set or cleared; writing zero bits does not clear corresponding state.
 2. Many custom registers are **write-only or have different read and write functions at nearby/same logical locations**. A naïve memory model that assumes ordinary RAM semantics will produce false dataflow.
 
 ## Graphics architecture, blitter and Copper
@@ -229,7 +229,7 @@ plane 2 bit ───┐ │ │
 colour index = b0 + 2*b1 + 4*b2 + ...
 ```
 
-Within bitplane words, pixels are emitted **most-significant bit first**. Commodore's Denise specification describes the `BPLxDAT` serialisation and the bitplane-control registers controlling these paths. citeturn3view3turn4view0
+Within bitplane words, pixels are emitted **most-significant bit first**. Commodore's Denise specification describes the `BPLxDAT` serialisation and the bitplane-control registers controlling these paths.
 
 Thus an uncompressed 320-pixel-wide plane normally has:
 
@@ -271,9 +271,9 @@ flowchart LR
 
 **Contiguous planes** commonly have one pointer per entire plane and `BPL1MOD/BPL2MOD` near zero for a straightforward full-width bitmap. **Scanline-interleaved planes** place plane 0 row 0, plane 1 row 0, … then row 1; their bitplane pointers start a row-stride apart and the modulo skips the other planes between successive fetches. This relationship is often more reliable than trying to recognise raw artwork visually.
 
-`BPLCON0` identifies the number of active planes and major modes; `DIWSTRT/DIWSTOP` determine the display window while `DDFSTRT/DDFSTOP` govern the DMA fetch interval. `BPL1MOD/BPL2MOD` then tell you how much address adjustment is applied after each raster row. citeturn18view7turn16view5
+`BPLCON0` identifies the number of active planes and major modes; `DIWSTRT/DIWSTOP` determine the display window while `DDFSTRT/DDFSTOP` govern the DMA fetch interval. `BPL1MOD/BPL2MOD` then tell you how much address adjustment is applied after each raster row.
 
-In **dual-playfield mode**, odd and even planes form separate playfields with independently controlled scrolling and priority. A characteristic game engine therefore has two pointer/modulo groups and may use one playfield as foreground objects or parallax scenery while the other forms the background. The hardware priority/collision stage combines playfields and sprites after their bit streams have been generated. citeturn17view3
+In **dual-playfield mode**, odd and even planes form separate playfields with independently controlled scrolling and priority. A characteristic game engine therefore has two pointer/modulo groups and may use one playfield as foreground objects or parallax scenery while the other forms the background. The hardware priority/collision stage combines playfields and sprites after their bit streams have been generated.
 
 ### Palette and sprites
 
@@ -283,7 +283,7 @@ OCS/ECS expose 32 colour registers at `$DFF180–$DFF1BE`, each conventionally i
 word: 0000 RRRR GGGG BBBB
 ```
 
-giving four bits per component. Denise uses the five-bit colour selection to choose one of these 32 registers. citeturn3view3turn4view2
+giving four bits per component. Denise uses the five-bit colour selection to choose one of these 32 registers.
 
 AGA preserves the 32-register programming window for compatibility but expands the logical palette to **256 24-bit entries**. `BPLCON3` selects a 32-colour bank and whether a write supplies the high or low nibbles of the RGB components. Therefore a repeated pattern of:
 
@@ -294,9 +294,9 @@ change BPLCON3
 write COLOR00..COLOR31
 ```
 
-is a strong AGA signature. Commodore's A1200 specification describes the expanded 256-entry palette and 24-bit colour space. citeturn14view0
+is a strong AGA signature. Commodore's A1200 specification describes the expanded 256-entry palette and 24-bit colour space.
 
-The hardware provides eight sprite channels. On OCS/ECS a normal sprite is 16 pixels wide and contributes two bits per pixel; pairing/attaching neighbouring sprite channels permits a combined four-bit sprite. Position/control words precede sprite scanline data. For reverse engineering, writes to `$DFF120–$DFF13E` identify sprite-list pointers, while Copper writes into sprite pointer or position registers often reveal **sprite multiplexing**. citeturn3view3turn19search8
+The hardware provides eight sprite channels. On OCS/ECS a normal sprite is 16 pixels wide and contributes two bits per pixel; pairing/attaching neighbouring sprite channels permits a combined four-bit sprite. Position/control words precede sprite scanline data. For reverse engineering, writes to `$DFF120–$DFF13E` identify sprite-list pointers, while Copper writes into sprite pointer or position registers often reveal **sprite multiplexing**.
 
 ### Blitter model
 
@@ -308,7 +308,7 @@ B ─────────── shift ─┼── 8-bit Boolean minterm ─
 C ──────────────────┘
 ```
 
-A, B and C are logical sources; D is the destination. Any memory channel can be disabled while its internal data register continues to participate in the Boolean operation. `BLTCON0` selects source/D enables and the 8-bit Boolean function; `BLTCON1` supplies B shift plus direction/line/fill controls. Commodore explicitly gives the classic masked “cookie-cut” expression as `AB + A̅C`, minterm `$CA`: where the A mask is set, copy B; otherwise retain C. citeturn18view5turn18view6
+A, B and C are logical sources; D is the destination. Any memory channel can be disabled while its internal data register continues to participate in the Boolean operation. `BLTCON0` selects source/D enables and the 8-bit Boolean function; `BLTCON1` supplies B shift plus direction/line/fill controls. Commodore explicitly gives the classic masked “cookie-cut” expression as `AB + A̅C`, minterm `$CA`: where the A mask is set, copy B; otherwise retain C.
 
 Typical minterms worth recognising are:
 
@@ -321,7 +321,7 @@ Typical minterms worth recognising are:
 | Set | `$FF` | `D = 1` |
 | Cookie cut | `$CA` | `D = A ? B : C` |
 
-For legacy area blits, `BLTSIZE` encodes height in bits 15–6 and width in 16-bit words in bits 5–0. Writing `BLTSIZE` starts the operation. ECS introduces `BLTSIZV/BLTSIZH` for much larger dimensions; the HRM describes the enhanced “big blit” range as reaching roughly 32K × 32K pixels. citeturn16view2turn15view3
+For legacy area blits, `BLTSIZE` encodes height in bits 15–6 and width in 16-bit words in bits 5–0. Writing `BLTSIZE` starts the operation. ECS introduces `BLTSIZV/BLTSIZH` for much larger dimensions; the HRM describes the enhanced “big blit” range as reaching roughly 32K × 32K pixels.
 
 A representative masked BOB sequence looks like this:
 
@@ -371,7 +371,7 @@ Blits are **asynchronous**. A CPU routine may launch a blit and continue; the ac
 
 ### Copper instruction set
 
-The Copper executes from Chip RAM and has precisely three instruction classes: **MOVE, WAIT and SKIP**. citeturn12view2
+The Copper executes from Chip RAM and has precisely three instruction classes: **MOVE, WAIT and SKIP**.
 
 **MOVE**
 
@@ -395,9 +395,9 @@ comparison masks plus blitter-condition control
 bit 0 = 0
 ```
 
-A WAIT suspends Copper execution until the masked beam position is equal to or beyond the target. While waiting, the Copper does not consume memory cycles. citeturn17view0
+A WAIT suspends Copper execution until the masked beam position is equal to or beyond the target. While waiting, the Copper does not consume memory cycles.
 
-**SKIP** has the same positional representation, but bit 0 of its second word is `1`; if the beam has reached/passed the requested position, the **next Copper instruction is skipped**. citeturn16view1
+**SKIP** has the same positional representation, but bit 0 of its second word is `1`; if the beam has reached/passed the requested position, the **next Copper instruction is skipped**.
 
 The canonical end marker is:
 
@@ -405,7 +405,7 @@ The canonical end marker is:
 $FFFF,$FFFE
 ```
 
-which Commodore's include file names `COPPER_HALT`. citeturn17view6
+which Commodore's include file names `COPPER_HALT`.
 
 An extremely common raster-effect list is therefore:
 
@@ -482,7 +482,7 @@ Horizontal “sine” distortions typically consist of one WAIT per scanline or 
         dc.w $5301,$fffe, $0102,$0044
 ```
 
-A program may regenerate only the `$0011,$0022,…` words each frame from a sine table. This is why a data watchpoint on the Copper list can lead directly to the game's effect-generation routine. Practical community demonstrations show the same technique for per-raster horizontal sinusoidal shifts. citeturn22search24
+A program may regenerate only the `$0011,$0022,…` words each frame from a sine table. This is why a data watchpoint on the Copper list can lead directly to the game's effect-generation routine. Practical community demonstrations show the same technique for per-raster horizontal sinusoidal shifts.
 
 Other Copper patterns to recognise are:
 
@@ -497,13 +497,13 @@ Other Copper patterns to recognise are:
 | `INTREQ` | Copper-generated CPU event |
 | Blitter registers | Copper-triggered blits; restricted by `COPCON` semantics |
 
-`COPCON` controls dangerous access to lower custom registers. Treat Copper MOVEs below the usual display register range as noteworthy: they may be manipulating the blitter or other sensitive hardware and behaviour differs subtly across chipset revisions. Commodore specifically documents the expanded ECS interpretation of the `CDANG` facility. citeturn16view0
+`COPCON` controls dangerous access to lower custom registers. Treat Copper MOVEs below the usual display register range as noteworthy: they may be manipulating the blitter or other sensitive hardware and behaviour differs subtly across chipset revisions. Commodore specifically documents the expanded ECS interpretation of the `CDANG` facility.
 
 ## Display timing, DMA, interrupts, audio and input
 
 ### PAL and NTSC raster timing
 
-The Copper's vertical compare contains only eight vertical-position bits even though a complete Amiga field exceeds 256 lines. The HRM gives **262 possible NTSC positions and 312 PAL positions** in the ordinary field and describes interlaced fields alternating 262/263 NTSC or 312/313 PAL. It also gives approximately 227 colour-clock positions per PAL line, with NTSC alternating 227- and 228-clock lines. citeturn17view1
+The Copper's vertical compare contains only eight vertical-position bits even though a complete Amiga field exceeds 256 lines. The HRM gives **262 possible NTSC positions and 312 PAL positions** in the ordinary field and describes interlaced fields alternating 262/263 NTSC or 312/313 PAL. It also gives approximately 227 colour-clock positions per PAL line, with NTSC alternating 227- and 228-clock lines.
 
 ```mermaid
 xychart-beta
@@ -513,7 +513,7 @@ xychart-beta
     bar [262,312]
 ```
 
-This is why a naïve Copper parser that assumes an eight-bit vertical value is the complete screen coordinate fails after line 255. Copper lists can deliberately cross the apparent eight-bit wrap and continue into the remaining lines. citeturn17view1
+This is why a naïve Copper parser that assumes an eight-bit vertical value is the complete screen coordinate fails after line 255. Copper lists can deliberately cross the apparent eight-bit wrap and continue into the remaining lines.
 
 Nominal Commodore display-window values include:
 
@@ -524,7 +524,7 @@ Nominal Commodore display-window values include:
 | `DIWSTOP.VSTOP` | `$F4` | `$2C` interpreted as `$12C` |
 | `DIWSTOP.HSTOP` | `$C1` | `$C1` |
 
-The HRM gives maximum ordinary non-interlaced displayable video of 241 NTSC and 283 PAL lines, although games commonly choose smaller windows; therefore **200/256-line artwork dimensions are heuristics, not hard hardware boundaries**. citeturn16view5
+The HRM gives maximum ordinary non-interlaced displayable video of 241 NTSC and 283 PAL lines, although games commonly choose smaller windows; therefore **200/256-line artwork dimensions are heuristics, not hard hardware boundaries**.
 
 Beam polling is another important binary fingerprint:
 
@@ -536,7 +536,7 @@ Beam polling is another important binary fingerprint:
         bne.s   .waitline
 ```
 
-`VPOSR` and `VHPOSR` expose beam-position/field information, and ECS extends the available vertical bits. A busy loop touching `$DFF004/$DFF006` usually indicates raster synchronisation, frame pacing or deliberate cycle-exact effects. citeturn23view2turn15view3
+`VPOSR` and `VHPOSR` expose beam-position/field information, and ECS extends the available vertical bits. A busy loop touching `$DFF004/$DFF006` usually indicates raster synchronisation, frame pacing or deliberate cycle-exact effects.
 
 ### DMA control
 
@@ -556,7 +556,7 @@ Beam polling is another important binary fingerprint:
 | 4 | `DSKEN` | Disk DMA |
 | 3..0 | `AUD3EN..AUD0EN` | Four Paula audio DMA channels |
 
-The HRM notes explicitly that individual audio DMA bits do nothing unless master `DMAEN` is also enabled. citeturn18view0turn18view1
+The HRM notes explicitly that individual audio DMA bits do nothing unless master `DMAEN` is also enabled.
 
 For reverse engineering, values such as:
 
@@ -575,7 +575,7 @@ means “clear bitplane DMA”, not “replace DMACON with `$0100`”.
 
 ### Interrupts
 
-`INTENA/INTENAR` and `INTREQ/INTREQR` mirror the same set/clear design. Commodore defines separate read and write addresses and explicitly states that bit 15 is the `SET/CLR` control for writes. citeturn17view2
+`INTENA/INTENAR` and `INTREQ/INTREQR` mirror the same set/clear design. Commodore defines separate read and write addresses and explicitly states that bit 15 is the `SET/CLR` control for writes.
 
 | Interrupt bit | Name | Typical source |
 |---:|---|---|
@@ -607,7 +607,7 @@ level 6: EXTER / CIA-B
 level 7: non-maskable CPU level
 ```
 
-Commodore's priority diagram places Copper, vertical blank and blitter completion together in the graphics-oriented middle level and all four audio sources above them. citeturn18view3
+Commodore's priority diagram places Copper, vertical blank and blitter completion together in the graphics-oriented middle level and all four audio sources above them.
 
 A game's **level-3 handler is consequently one of the highest-value functions to find**: it may perform frame swaps, Copper-list installation, palette animation, scroll updates and blitter scheduling.
 
@@ -623,7 +623,7 @@ AUDxVOL        volume
 AUDxDAT        current/manual data
 ```
 
-Paula's DMA obtains one **16-bit word** and emits its two bytes as successive sample values; `AUDxLEN` is therefore a word count, not a byte count. citeturn23view4
+Paula's DMA obtains one **16-bit word** and emits its two bytes as successive sample values; `AUDxLEN` is therefore a word count, not a byte count.
 
 A 256-byte sample normally corresponds to:
 
@@ -631,7 +631,7 @@ A 256-byte sample normally corresponds to:
 AUDxLEN = 128
 ```
 
-which the HRM uses directly in its examples. citeturn23view5
+which the HRM uses directly in its examples.
 
 The standard period clock is about 3.579545 MHz NTSC or 3.546895 MHz PAL, giving:
 
@@ -639,7 +639,7 @@ The standard period clock is about 3.579545 MHz NTSC or 3.546895 MHz PAL, giving
 sample_rate ≈ audio_clock / AUDxPER
 ```
 
-The HRM gives standard-period limits around the high-20-kHz range for ordinary PAL/NTSC DMA operation. citeturn16view5
+The HRM gives standard-period limits around the high-20-kHz range for ordinary PAL/NTSC DMA operation.
 
 A highly productive audio-resource technique is therefore:
 
@@ -654,7 +654,7 @@ Module players complicate this because they may reprogram periods, sample addres
 
 ### Joystick, mouse and keyboard
 
-`JOY0DAT` at `$DFF00A` and `JOY1DAT` at `$DFF00C` each contain two eight-bit mouse quadrature counters; low counter bits double as digital joystick states. Commodore's register summary explicitly describes them as left/right vertical-horizontal joystick/mouse data. citeturn23view2turn23view3
+`JOY0DAT` at `$DFF00A` and `JOY1DAT` at `$DFF00C` each contain two eight-bit mouse quadrature counters; low counter bits double as digital joystick states. Commodore's register summary explicitly describes them as left/right vertical-horizontal joystick/mouse data.
 
 The main fire buttons are active-low inputs on CIA-A port A:
 
@@ -664,7 +664,7 @@ bit 6       controller port 0 fire / left mouse button
 bit 7       controller port 1 fire
 ```
 
-Commodore's connector documentation gives those exact mappings. citeturn23view0turn23view1
+Commodore's connector documentation gives those exact mappings.
 
 This makes the following constants valuable static signatures:
 
@@ -676,13 +676,13 @@ This makes the following constants valuable static signatures:
 
 Do not expect every program to contain these four-byte constants literally. Efficient assembly typically loads `$DFF000` or `$BFE001` into an address register once and thereafter uses short displacements.
 
-The keyboard communicates serially using `KCLK` and `KDAT`; Commodore documents eight-bit serial key words plus a handshake, and the CIA exposes a serial data register (`SDR`) and interrupt-control register. Thus a game reading raw keyboard data may be reached through the CIA-A interrupt path rather than through a direct “keyboard register” in the custom-chip block. citeturn16view7turn18view7
+The keyboard communicates serially using `KCLK` and `KDAT`; Commodore documents eight-bit serial key words plus a handshake, and the CIA exposes a serial data register (`SDR`) and interrupt-control register. Thus a game reading raw keyboard data may be reached through the CIA-A interrupt path rather than through a direct “keyboard register” in the custom-chip block.
 
 ## Exec, ROM interaction, executables and game resources
 
 ### OS and ROM fingerprints
 
-AmigaOS software should not depend on fixed application RAM addresses. Commodore explicitly says applications are relocatable and identifies **address `$00000004` as the one absolute software-system location of interest: a pointer to `exec.library`**. citeturn12view2
+AmigaOS software should not depend on fixed application RAM addresses. Commodore explicitly says applications are relocatable and identifies **address `$00000004` as the one absolute software-system location of interest: a pointer to `exec.library`**.
 
 The canonical assembly fingerprint is:
 
@@ -694,7 +694,7 @@ The canonical assembly fingerprint is:
         jsr     -xxx(a6)            ; library-vector call
 ```
 
-Amiga libraries use **negative Library Vector Offsets (LVOs)** relative to the library base, and the ROM Kernel documentation should be preferred over trying to attach meaning to an absolute ROM address. citeturn22search0turn22search18
+Amiga libraries use **negative Library Vector Offsets (LVOs)** relative to the library base, and the ROM Kernel documentation should be preferred over trying to attach meaning to an absolute ROM address.
 
 Important calls to recognise semantically include:
 
@@ -734,7 +734,7 @@ Common identifiers are:
 00 00 03 F2        HUNK_END
 ```
 
-The Hunk header describes the number and allocated sizes of hunks, and relocations mean that a pointer visible in the on-disk image may not equal the final runtime address. citeturn22search5turn22search11
+The Hunk header describes the number and allocated sizes of hunks, and relocations mean that a pointer visible in the on-disk image may not equal the final runtime address.
 
 That has a direct consequence:
 
@@ -759,9 +759,9 @@ CAMG      Amiga display-mode information
 BODY      bitmap data
 ```
 
-The EA/Commodore ILBM specification defines `BMHD`, `CMAP`, `CAMG`-related usage and `BODY`; uncompressed ILBM BODY data is arranged by scanline and bitplane, with rows word-aligned. citeturn22search16turn22search2
+The EA/Commodore ILBM specification defines `BMHD`, `CMAP`, `CAMG`-related usage and `BODY`; uncompressed ILBM BODY data is arranged by scanline and bitplane, with rows word-aligned.
 
-A crucial distinction is that ILBM's `CMAP` entries are byte-sized RGB triples even though an OCS/ECS Amiga display ultimately uses four bits per hardware RGB component; hardware conversion takes the significant component bits. citeturn22search2
+A crucial distinction is that ILBM's `CMAP` entries are byte-sized RGB triples even though an OCS/ECS Amiga display ultimately uses four bits per hardware RGB component; hardware conversion takes the significant component bits.
 
 Nevertheless, many commercial games **do not store runtime artwork as intact ILBM files**. Typical alternatives include:
 
@@ -807,7 +807,7 @@ Fast/other RAM, if available
 +-------------------------------+
 ```
 
-This is a functional classification rather than a fixed memory map. On a 512 KiB machine even CPU code/game state commonly live in Chip RAM, while on expanded machines engines often try to preserve Chip bandwidth by moving CPU-only material to Fast RAM. The HRM explicitly says the OS dynamically allocates memory and that display/audio/Copper resources may lie anywhere in suitable Chip RAM. citeturn12view2turn15view3
+This is a functional classification rather than a fixed memory map. On a 512 KiB machine even CPU code/game state commonly live in Chip RAM, while on expanded machines engines often try to preserve Chip bandwidth by moving CPU-only material to Fast RAM. The HRM explicitly says the OS dynamically allocates memory and that display/audio/Copper resources may lie anywhere in suitable Chip RAM.
 
 For a trackloader title, replace “file” thinking with:
 
@@ -825,7 +825,7 @@ destination fixed or allocated address
 resource interpretation
 ```
 
-The Paula disk interface exposes `DSKPT`, `DSKLEN`, `DSKSYNC`, `DSKBYTR` and associated DMA status; a routine repeatedly touching these rather than DOS file calls is strong evidence of a custom disk path. Commodore documents `DSKBYTR` as the byte/status interface and describes its DMA/sync status bits. citeturn17view5
+The Paula disk interface exposes `DSKPT`, `DSKLEN`, `DSKSYNC`, `DSKBYTR` and associated DMA status; a routine repeatedly touching these rather than DOS file calls is strong evidence of a custom disk path. Commodore documents `DSKBYTR` as the byte/status interface and describes its DMA/sync status bits.
 
 ## Reverse-engineering workflow and data-recognition heuristics
 
@@ -1441,7 +1441,7 @@ and record transformations explicitly.
 
 **Assuming every pointer can feed the custom chips.** Copper, bitplane, sprite and Paula DMA require Chip-RAM-visible sources. A candidate pointing into Fast RAM means either the interpretation is wrong, the address is pre-relocation, or data is copied before DMA.
 
-**Treating `DMACON/INTENA/INTREQ` like assignments.** Their bit-15 set/clear convention is a frequent decompiler error. citeturn17view2
+**Treating `DMACON/INTENA/INTREQ` like assignments.** Their bit-15 set/clear convention is a frequent decompiler error.
 
 **Looking only for `$DFFxxx` constants.** High-quality assembly normally loads `$DFF000` once and uses register-relative offsets. Identify the base-register lifetime and rename every displacement.
 
@@ -1449,7 +1449,7 @@ and record transformations explicitly.
 
 **Missing Copper data because it looks like instructions.** A Copper list is data to the CPU but a program to Agnus. Mark its memory as a separate instruction domain rather than 68k code.
 
-**Ignoring the line-255 Copper wrap.** The hardware has more vertical lines than the Copper WAIT field's eight directly encoded vertical bits. PAL lists are particularly likely to expose this. citeturn17view1
+**Ignoring the line-255 Copper wrap.** The hardware has more vertical lines than the Copper WAIT field's eight directly encoded vertical bits. PAL lists are particularly likely to expose this.
 
 **Treating a blit as synchronous.** CPU execution can run ahead of the blitter. Track `BBUSY`, blitter interrupts and later dependencies.
 
@@ -1461,11 +1461,11 @@ and record transformations explicitly.
 
 **Interpreting EHB as a 64-entry stored palette.** Classic Extra-Half-Brite derives an additional colour set from the base palette rather than requiring 64 independent OCS colour registers.
 
-**Applying OCS assumptions to AGA.** Eight planes, palette banking, `BPLCON4`, `CLXCON2` and `FMODE` are obvious reasons to switch models. AGA still preserves much OCS/ECS programming structure, which can otherwise make an AGA executable deceptively familiar. citeturn14view0
+**Applying OCS assumptions to AGA.** Eight planes, palette banking, `BPLCON4`, `CLXCON2` and `FMODE` are obvious reasons to switch models. AGA still preserves much OCS/ECS programming structure, which can otherwise make an AGA executable deceptively familiar.
 
-**Assuming Gary exists on every Amiga.** Gary is motherboard glue/address-decoding logic on models such as the A500/A2000, not a universal member of the Agnus/Denise/Paula graphics stack. The A1200 uses Gayle and Budgie for corresponding system functions. citeturn20search0turn14view0
+**Assuming Gary exists on every Amiga.** Gary is motherboard glue/address-decoding logic on models such as the A500/A2000, not a universal member of the Agnus/Denise/Paula graphics stack. The A1200 uses Gayle and Budgie for corresponding system functions.
 
-**Hard-coding PAL.** Raster waits, audio periods and screen heights can differ. Commodore gives CPU/system clocks and raster counts separately for PAL and NTSC; identify what the game actually assumes. citeturn15view0turn17view1
+**Hard-coding PAL.** Raster waits, audio periods and screen heights can differ. Commodore gives CPU/system clocks and raster counts separately for PAL and NTSC; identify what the game actually assumes.
 
 **Trusting raw-data “looks” over hardware evidence.** The strongest graphics identification is a chain such as:
 
@@ -1482,16 +1482,44 @@ rather than a visually plausible conversion made in isolation.
 
 **Failing to separate OS state from game state.** A memory reference in a Workbench-launched title may belong to Exec, graphics.library, DOS, an interrupt server or the game. Start by identifying library-vector calls and hardware takeover boundaries.
 
-**Assuming all disk resources are ordinary files.** Direct Paula disk-register traffic and custom `DSKSYNC`/DMA setup are signs that filesystem-based analysis may never find the resources in the form seen at runtime. citeturn17view5
+**Assuming all disk resources are ordinary files.** Direct Paula disk-register traffic and custom `DSKSYNC`/DMA setup are signs that filesystem-based analysis may never find the resources in the form seen at runtime.
 
 ### Primary-source and community anchors
 
-The strongest baseline source is Commodore-Amiga's **Amiga Hardware Reference Manual, Third Edition (1991)**, which covers Agnus/Denise/Paula, Copper, bitplanes, sprites, audio, blitter, DMA, interrupts, CIAs, register summaries and ECS extensions. Its archived text and the structured Amiga Developer CD version should be treated as the default authority for OCS/ECS semantics. citeturn10search8turn19search8
+The strongest baseline source is Commodore-Amiga's **Amiga Hardware Reference Manual, Third Edition (1991)**, which covers Agnus/Denise/Paula, Copper, bitplanes, sprites, audio, blitter, DMA, interrupts, CIAs, register summaries and ECS extensions. Its archived text and the structured Amiga Developer CD version should be treated as the default authority for OCS/ECS semantics.
 
-Primary and near-primary material used by this guide includes the [Amiga Hardware Reference Manual archive](https://archive.org/details/amiga-hardware-reference-manual-3rd-edition), the [Amiga ROM Kernel Reference Manual: Exec archive](https://archive.org/details/amiga-rom-kernel-reference-manual-exec), the preserved [Amiga Developer Documentation collection](https://amigadev.elowar.com/read/ADCD_2.1/), and Commodore's 1992 **Advanced Amiga 1200 System Functional Specification**, whose preserved text documents the A1200 AA/AGA architecture and memory map. citeturn22search0turn14view0
+Primary and near-primary material used by this guide includes the [Amiga Hardware Reference Manual archive](https://archive.org/details/amiga-hardware-reference-manual-3rd-edition), the [Amiga ROM Kernel Reference Manual: Exec archive](https://archive.org/details/amiga-rom-kernel-reference-manual-exec), the preserved [Amiga Developer Documentation collection](https://amigadev.elowar.com/read/ADCD_2.1/), and Commodore's 1992 **Advanced Amiga 1200 System Functional Specification**, whose preserved text documents the A1200 AA/AGA architecture and memory map.
 
-The surviving Commodore **Denise specification** independently confirms the display encoder's six bitplane paths, eight sprite-pair paths, 32 colour registers, bitplane controls and 12-bit RGB organisation; it is particularly useful when an HRM summary is ambiguous. citeturn3view3turn4view0turn4view1turn4view2
+The surviving Commodore **Denise specification** independently confirms the display encoder's six bitplane paths, eight sprite-pair paths, 32 colour registers, bitplane controls and 12-bit RGB organisation; it is particularly useful when an HRM summary is ambiguous.
 
-For file formats, prefer the original EA/Commodore IFF material and the Amiga Developer documentation before third-party descriptions. The preserved ILBM specification defines `BMHD`, `CMAP`, `BODY` and related chunks. citeturn22search16turn19search8
+For file formats, prefer the original EA/Commodore IFF material and the Amiga Developer documentation before third-party descriptions. The preserved ILBM specification defines `BMHD`, `CMAP`, `BODY` and related chunks.
 
-For practical triangulation after the primary documentation, [Aminet](https://aminet.net/) is valuable for historical tools/source/examples, [English Amiga Board](https://eab.abime.net/) for reverse-engineering and hardware-programming discussions, and [Amiga.org](https://forum.amiga.org/) for long-running community technical discussion. Community material is most useful for identifying real-world idioms—trackloaders, unusual Copper tricks, blitter patterns and game-specific formats—but hardware behaviour should be checked back against Commodore documentation wherever possible. citeturn22search19turn22search1turn20search15
+For practical triangulation after the primary documentation, [Aminet](https://aminet.net/) is valuable for historical tools/source/examples, [English Amiga Board](https://eab.abime.net/) for reverse-engineering and hardware-programming discussions, and [Amiga.org](https://forum.amiga.org/) for long-running community technical discussion. Community material is most useful for identifying real-world idioms—trackloaders, unusual Copper tricks, blitter patterns and game-specific formats—but hardware behaviour should be checked back against Commodore documentation wherever possible.
+
+## Findings from emulating F/A-18 Interceptor
+
+Details that mattered when building a native A500 model for this game
+(`port/machine/`); each was found by comparing against a UAE-based emulator.
+
+- **Blitter modulos ignore bit 0.** Agnus stores BLTxMOD as `value & $FFFE`.
+  The game writes odd modulos for its fill and copy blits; honouring bit 0
+  drifts every row by a byte.
+- **Line mode, ONEDOT.** The one-dot flag is cleared whenever the line steps
+  to a new row, so each row gets exactly one pixel; area fills depend on it.
+- **POTGOR idle value is `$5500`**, not `$FF00`: DATLY, DATLX, DATRY and DATRX
+  read high when the buttons are released. Kickstart's input handler reads it
+  every frame.
+- **CIA-A TOD** counts the vertical sync pulse, a few lines after the VERTB
+  interrupt, not at line 0.
+- **UAE boot ROM area.** UAE maps a 64 KiB board at `$F00000` (`rtarea`) and
+  can install interrupt servers there; savestates carry it in the `BORO`
+  chunk.
+- **Blitter timing.** Games poll BBUSY; an instant blitter changes their
+  timing. Keep the memory effect synchronous but hold BBUSY and the BLIT
+  interrupt for the blit's real duration (UAE `blit_cycle_diagram`).
+- **Slow RAM is on the chip bus.** On an A500, CPU accesses to `$C00000` RAM
+  wait for bitplane, Copper and blitter DMA just like Chip RAM accesses. A
+  model without that runs the CPU too fast.
+- **Savestates** (UAE `ASF`) are uncompressed chunks: `CPU `, `CHIP` (custom
+  registers, without the sprite block), `CIAA`/`CIAB`, `CRAM`/`BRAM` (RAM),
+  `BORO`, `END `.
