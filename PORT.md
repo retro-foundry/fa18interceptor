@@ -90,6 +90,12 @@ frame-392 restore. Done when `scripts/render_native_visual.py --frame 402`
 reports nonblack native pixels from the translated path. Then widen to the
 whole program.
 
+**Status 2026-09-28: milestone met.** The translated path draws frame 402
+(`fa18_recomp`, built by `scripts/build_recomp.sh`) and frames 393-397, 399
+and 401 are pixel-exact against Engine9000. The first diverging frame is 398,
+caused by chip-bus contention timing. `CURRENT_PORT_HANDOFF.md` has the
+current metric and next blocker; `scripts/recomp_parity.py` reproduces it.
+
 ### Rules that change
 
 - A generated function is a legitimate port of the original routine. The old

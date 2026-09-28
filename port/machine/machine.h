@@ -21,11 +21,11 @@
 #define FA18_LINE_CYCLES (FA18_LINE_CCKS * 2)
 
 /* The native image covers the standard lowres PAL display area: DIW
- * horizontal $81 is x=0 and beam line $2C is y=0. */
+ * horizontal $81 is x=0 and beam line $2A is y=0. */
 #define FA18_SCREEN_W 320
 #define FA18_SCREEN_H 256
 #define FA18_SCREEN_HSTART 0x81
-#define FA18_SCREEN_VSTART 0x2C
+#define FA18_SCREEN_VSTART 0x2A
 
 typedef struct {
     uint8_t pra, prb, ddra, ddrb;
