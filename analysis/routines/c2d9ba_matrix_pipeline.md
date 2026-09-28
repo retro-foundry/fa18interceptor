@@ -69,10 +69,3 @@ That is the exact nine-word matrix consumed by the established run075
 frame-384 `$C27B9C` projection-pair contract. The artifact is
 `build/run075_frame373_c2d99c_matrix/`. This connects the matrix producer to
 the future normal page owner without treating the trace values as constants.
-
-`matrix_pipeline.{c,h}` now ports `$C2D9BA-$C2DADF`'s local record selection,
-transform call, conditional coordinate-update handoff, and matrix-cache tail.
-The transform and coordinate-update bodies remain explicit caller-owned edges.
-It is deliberately not connected to the normal renderer: the current native
-two-angle implementation must first be reconciled with the run075 `(7200,0)`
-input/matrix witness.
