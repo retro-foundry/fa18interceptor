@@ -1,2 +1,3 @@
 #include "active_plane_packet.h"
 int fa18_build_active_plane_packet(const FA18ActivePlanePacketInput*i,FA18BlitOperation o[4]){unsigned k;if(!i||!o)return -1;for(k=0;k<4;k++){o[k]=(FA18BlitOperation){0};o[k].bltcon0=(k==1||k==2&&i->plane3_select)?0x3fa:0x100;o[k].bltafwm=o[k].bltalwm=o[k].bltadat=0xffff;o[k].bltbmod=o[k].bltcmod=o[k].bltdmod=1;o[k].bltcpt=o[k].bltdpt=i->plane_base[k]+0x28;o[k].bltsize=(uint16_t)((i->size_input<<6)+0x14);}return 0;}
+int fa18_execute_active_plane_packet(const FA18ActivePlanePacketInput*i,uint8_t*b,size_t z){FA18BlitOperation o[4];unsigned k;if(!b||fa18_build_active_plane_packet(i,o))return -1;for(k=0;k<4;k++)if(fa18_execute_ocs_block_blit(&o[k],b,z))return -1;return 0;}
