@@ -1426,3 +1426,12 @@ making it the short-term visual gate rather than the sparse 361-pixel reveal
 at frame 392. A meaningful rendering stage must change the normal image or
 prove a source-defined earlier/later presentation boundary; structural
 contracts alone are no longer sufficient visual progress.
+
+The visual tool also writes a viewable PNG. For a strictly labelled
+capture-backed native-renderer checkpoint, run the frame-382 `$C279D0`
+pre-call Slow/Chip inputs first as `--bootstrap-render-fixture CHIP`, then
+run `--bootstrap-c279-render-fixture SLOW CHIP --delta-against BASELINE.png`.
+The resulting black-background delta is only pixels changed by the native
+`$C279D0-$C27D0F` code. It currently has 12 nonblack pixels at
+`x=52..297, y=101..112`; it is not normal replay and cannot satisfy the
+frame-402 gate by itself.
