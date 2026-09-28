@@ -6,6 +6,9 @@
 
 #include "m68kcpu.h"
 #include "machine.h"
+#include "recomp_ports.h"
+
+int fa18_ports_enter(int function, int label, int via_call);
 
 int fa18_recomp_abort;
 FA18RecompStats fa18_recomp_stats;
@@ -86,7 +89,7 @@ int fa18_recomp_invoke(int function, int label, uint32_t pc) {
     if (disabled[function] || pc != fa18_recomp_functions[function].entry || depth > 4000)
         return FA18_EXIT_DISPATCH;
     depth++;
-    r = fa18_recomp_functions[function].fn(label);
+    r = fa18_ports_enter(function, label, 1);
     depth--;
     return r;
 }
@@ -106,7 +109,7 @@ int fa18_recomp_call_dynamic(void) {
     int r;
     if (!e || depth > 4000) return FA18_EXIT_DISPATCH;
     depth++;
-    r = fa18_recomp_functions[e->function].fn((int)e->label);
+    r = fa18_ports_enter((int)e->function, (int)e->label, 1);
     depth--;
     return r;
 }
@@ -148,7 +151,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         fa18_recomp_abort = 0;
         fa18_recomp_stats.dispatches++;
         depth = 1;
-        r = fa18_recomp_functions[e->function].fn((int)e->label);
+        r = fa18_ports_enter((int)e->function, (int)e->label, 0);
         depth = 0;
         fa18_recomp_stats.generated_cycles += (uint64_t)(before - GET_CYCLES());
         /* EXIT_INTERP at a due chipset event resumes after servicing. */

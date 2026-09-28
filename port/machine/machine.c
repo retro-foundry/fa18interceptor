@@ -8,6 +8,13 @@
 
 FA18Machine *fa18_machine;
 
+extern int fa18_write_log_active, fa18_write_log_hardware;
+void fa18_write_log_before(uint32_t address, int size);
+#define LOG_WRITE(a, n) do { if (fa18_write_log_active) fa18_write_log_before((a), (n)); } while (0)
+#define HARDWARE_BLOCKED() (fa18_write_log_active ? (fa18_write_log_hardware = 1) : 0)
+void fa18_write_log_custom(uint32_t reg, uint16_t value);
+#define CUSTOM_LOGGED(reg, v) (fa18_write_log_active ? (fa18_write_log_custom((reg), (v)), 1) : 0)
+
 /* One timeline for interpreter and generated code. While Musashi runs, the
  * current CPU cycle is fa18_cycle_origin - GET_CYCLES(). Chipset work (line
  * ends, Copper, display, CIAs, interrupt acceptance) happens only at
@@ -304,6 +311,7 @@ uint8_t fa18_bus_read8(uint32_t a) {
     if ((a & 0xFF0000) == 0xF00000) return m->rtarea[a & 0xFFFF];
     if (is_cia(a)) {
         uint8_t v = 0xFF;
+        if (HARDWARE_BLOCKED()) return v; /* CIA reads have side effects */
         if (!(a & 0x1000) && (a & 1)) v = cia_read(m, 0, (int)(a >> 8) & 15);
         if (!(a & 0x2000) && !(a & 1)) v = cia_read(m, 1, (int)(a >> 8) & 15);
         return v;
@@ -344,25 +352,30 @@ void fa18_bus_write8(uint32_t a, uint8_t v) {
     a &= 0xFFFFFF;
     if (a < 0x200000) {
         a &= FA18_CHIP_SIZE - 1;
+        LOG_WRITE(a, 1);
         m->chip[a] = v;
         fa18_recomp_note_write(a, 1);
         return;
     }
     if (a >= FA18_SLOW_BASE && a < FA18_SLOW_BASE + FA18_SLOW_SIZE) {
+        LOG_WRITE(a, 1);
         m->slow[a - FA18_SLOW_BASE] = v;
         fa18_recomp_note_write(a, 1);
         return;
     }
     if ((a & 0xFF0000) == 0xF00000) {
+        LOG_WRITE(a, 1);
         m->rtarea[a & 0xFFFF] = v;
         return;
     }
     if (is_cia(a)) {
+        if (HARDWARE_BLOCKED()) return;
         if (!(a & 0x1000) && (a & 1)) cia_write(m, 0, (int)(a >> 8) & 15, v);
         if (!(a & 0x2000) && !(a & 1)) cia_write(m, 1, (int)(a >> 8) & 15, v);
         return;
     }
     if (is_custom(a)) {
+        if (CUSTOM_LOGGED(a & 0x1FE, (uint16_t)(v << 8 | v))) return;
         fa18_custom_write(m, a & 0x1FE, (uint16_t)(v << 8 | v));
         return;
     }
@@ -374,6 +387,7 @@ void fa18_bus_write16(uint32_t a, uint16_t v) {
     a &= 0xFFFFFF;
     if (a < 0x200000) {
         a &= FA18_CHIP_SIZE - 1;
+        LOG_WRITE(a, 2);
         m->chip[a] = (uint8_t)(v >> 8);
         m->chip[(a + 1) & (FA18_CHIP_SIZE - 1)] = (uint8_t)v;
         fa18_recomp_note_write(a, 2);
@@ -381,12 +395,14 @@ void fa18_bus_write16(uint32_t a, uint16_t v) {
     }
     if (a >= FA18_SLOW_BASE && a + 1 < FA18_SLOW_BASE + FA18_SLOW_SIZE) {
         uint8_t *p = m->slow + (a - FA18_SLOW_BASE);
+        LOG_WRITE(a, 2);
         p[0] = (uint8_t)(v >> 8);
         p[1] = (uint8_t)v;
         fa18_recomp_note_write(a, 2);
         return;
     }
     if (is_custom(a)) {
+        if (CUSTOM_LOGGED(a & 0x1FE, v)) return;
         fa18_custom_write(m, a & 0x1FE, v);
         return;
     }
@@ -477,6 +493,12 @@ static void advance_line(FA18Machine *m) {
         return;
     }
     start_line(m);
+}
+
+/* Advance the CPU to the end of the current blit (a BBUSY wait loop). */
+void fa18_machine_wait_blitter(void) {
+    int64_t now = now_cycle();
+    if (blit_pending && now < blit_end) USE_CYCLES((int)(blit_end - now));
 }
 
 int fa18_machine_event_due(void) {

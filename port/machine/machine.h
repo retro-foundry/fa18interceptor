@@ -102,6 +102,7 @@ void fa18_machine_beam(int *vpos, int *hpos);
 /* Instruction-boundary chipset service (see machine.c). */
 int fa18_machine_service(void);
 int fa18_machine_event_due(void);
+void fa18_machine_wait_blitter(void);
 
 static inline uint16_t fa18_chip16(const FA18Machine *m, uint32_t a) {
     a &= FA18_CHIP_SIZE - 2;

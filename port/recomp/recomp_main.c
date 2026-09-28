@@ -8,6 +8,7 @@
 #include "machine.h"
 #include "recomp_runtime.h"
 #include "input.h"
+#include "recomp_ports.h"
 
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb");
@@ -44,7 +45,9 @@ static void usage(void) {
             "usage: fa18_recomp --state STATE.bin --rom KICK13.rom [--frames N] [--ppm OUT.ppm]\n"
             "                   [--ppm-every DIR] [--rgb444 OUT.bin] [--no-recomp] [--fallback-log OUT.json]\n"
             "                   [--ram-out OUT.bin] [--replay RUN.e9k --start-frame N]\n"
-            "                   [--window [--scale N]]   (window: --frames 0 runs until closed)\n");
+            "                   [--window [--scale N]]   (window: --frames 0 runs until closed)\n"
+            "                   [--ports off|on|shadow] [--ports-only LIST] [--ports-report OUT.json]\n"
+            "                   [--profile OUT.json]\n");
 }
 
 #ifdef FA18_WITH_SDL
@@ -138,7 +141,8 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
 int main(int argc, char **argv) {
     const char *state_path = NULL, *rom_path = NULL, *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL,
                *fallback = NULL, *ram_out = NULL;
-    const char *replay_path = NULL;
+    const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL;
+    FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
     size_t state_size, rom_size;
@@ -160,6 +164,13 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
         else if (!strcmp(argv[i], "--start-frame") && i + 1 < argc) start_frame = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--window")) window = 1;
+        else if (!strcmp(argv[i], "--ports") && i + 1 < argc) {
+            const char *v = argv[++i];
+            ports_mode = !strcmp(v, "on") ? FA18_PORTS_ON : !strcmp(v, "shadow") ? FA18_PORTS_SHADOW : FA18_PORTS_OFF;
+        }
+        else if (!strcmp(argv[i], "--ports-only") && i + 1 < argc) ports_only = argv[++i];
+        else if (!strcmp(argv[i], "--ports-report") && i + 1 < argc) ports_report = argv[++i];
+        else if (!strcmp(argv[i], "--profile") && i + 1 < argc) profile_path = argv[++i];
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else { usage(); return 2; }
     }
@@ -173,6 +184,7 @@ int main(int argc, char **argv) {
         return 1;
     }
     fa18_recomp_init(use_recomp);
+    fa18_ports_init(ports_mode, ports_only);
     if (replay_path && !fa18_replay_load(&replay, replay_path)) {
         fprintf(stderr, "cannot read E9K_INPUT_V1 replay %s\n", replay_path);
         return 1;
@@ -202,6 +214,12 @@ int main(int argc, char **argv) {
     if (rgb) fclose(rgb);
     if (ppm && !write_ppm(ppm, m->last_screen)) { fprintf(stderr, "cannot write %s\n", ppm); return 1; }
     if (fallback) fa18_recomp_write_fallback_log(fallback);
+    if (profile_path) fa18_recomp_write_profile(profile_path);
+    if (ports_mode == FA18_PORTS_SHADOW || ports_report) {
+        long bad = fa18_ports_report(ports_report);
+        fprintf(stderr, "ports: %ld mismatching calls\n", bad);
+        if (bad) return 3;
+    }
     if (ram_out) {
         /* Chip RAM, Slow RAM, then D0-D7/A0-A7/SR/PC as big-endian longs. */
         FILE *f = fopen(ram_out, "wb");

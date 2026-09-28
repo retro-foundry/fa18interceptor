@@ -365,6 +365,26 @@ def main() -> None:
               "seed_pcs": len(seeds), "seed_pcs_uncovered": sum(1 for s in seeds if s not in covered),
               "instruction_kinds": kinds}
     (args.out / "recomp_manifest.json").write_text(json.dumps(report, indent=2) + "\n")
+
+    # Per-routine call graph for porting order (tools/recomp/inventory.py).
+    graph = []
+    for e in ordered:
+        fn = functions[e]
+        kinds = {}
+        for d in fn.insns.values():
+            k = "undecodable" if d is None else d[4]
+            kinds[k] = kinds.get(k, 0) + 1
+        dynamic_calls = sum(1 for d in fn.insns.values()
+                            if d is not None and d[4] in ("bsr", "jsr") and d[5] is None)
+        jumps_out = sum(1 for d in fn.insns.values()
+                        if d is not None and d[4] in ("bra", "jmp", "bcc", "dbcc")
+                        and (d[5] is None or d[5] not in fn.insns))
+        graph.append({"entry": f"{e:06X}", "instructions": sum(1 for d in fn.insns.values() if d),
+                      "spans": [[f"{a:06X}", f"{b:06X}"] for a, b in ranges(fn)],
+                      "calls": [f"{c:06X}" for c in sorted(fn.calls)],
+                      "dynamic_calls": dynamic_calls, "jumps_out": jumps_out, "kinds": kinds})
+    (args.out / "recomp_graph.json").write_text(json.dumps(graph, indent=1) + "\n")
+    (args.out / "recomp_seeds.json").write_text(json.dumps(sorted(f"{s:06X}" for s in set(seeds))) + "\n")
     print(json.dumps(report))
 
 
