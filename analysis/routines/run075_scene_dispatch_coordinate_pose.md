@@ -43,7 +43,10 @@ nonnegative `$C2883E-$C288C4` linked-record route; it must not be described as
 the run075 path.  `coordinate_update_positive_pair.{c,h}` ports the exact
 `$C123FA-$C1294E` route used by the negative packet: shift 14 is selected,
 rounded ratio 745 shifts to Hunk-63 word index 11, and source word 25 gives
-`$6FB8`.  Neither route is scheduled by `scene_dispatch_runtime` yet; the
-dispatch loop must supply the live target and original Hunk-27 geometry-table
-resolver without capture-derived state.  The existing
+`$6FB8`.  `scene_dispatch_runtime` now preserves `$C28AFE`'s final-created
+target, supplies the original Hunk-27 `$C295E0` resolver, and calls the
+negative route before the root-placement consumer runs.  It loads the Hunk-63
+coordinate table at scene-entry initialization. The nonnegative linked-record
+route remains unbound because its source resolver has not yet been recovered.
+The existing
 `coordinate_update_negative_pair` adapter covers a different `$C123FA` branch.

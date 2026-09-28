@@ -41,10 +41,17 @@ int main(void) {
     dispatch_bytes[base + 0xb0] = 0x80;
     dispatch_bytes[base + 0xb2] = 0xff;
     dispatch_bytes[base + 0xb3] = 0xff;
-    dispatch_bytes[0x40] = 0; dispatch_bytes[0x41] = 0x44;
-    dispatch_bytes[0x42] = 0; dispatch_bytes[0x43] = 0x44;
-    dispatch_bytes[0x44] = 0x18; dispatch_bytes[0x45] = 0;
-    dispatch_bytes[0x46] = 0x18; dispatch_bytes[0x47] = 0;
+    dispatch_bytes[0x40] = 0; dispatch_bytes[0x41] = 0x60;
+    dispatch_bytes[0x60] = 0; dispatch_bytes[0x61] = 0x44;
+    dispatch_bytes[0x62] = 0; dispatch_bytes[0x63] = 0x44;
+    dispatch_bytes[0x64] = 0x18; dispatch_bytes[0x65] = 0;
+    dispatch_bytes[0x66] = 0x18; dispatch_bytes[0x67] = 0;
+    dispatch_bytes[26] = 0; dispatch_bytes[27] = 0x80;
+    dispatch_bytes[0x80] = 0; dispatch_bytes[0x81] = 70;
+    dispatch_bytes[0x82] = 0; dispatch_bytes[0x83] = 112;
+    dispatch_bytes[0x84] = 0x18; dispatch_bytes[0x85] = 0;
+    dispatch_bytes[0x86] = 0x18; dispatch_bytes[0x87] = 0;
+    trig_bytes[22] = 0; trig_bytes[23] = 25;
     template_bytes[0xa0 + 19] = 0x80;
     descriptor_bytes[0] = 0x80; descriptor_bytes[1] = 3;
     descriptor_bytes[9] = 5;
@@ -61,6 +68,8 @@ int main(void) {
     assert(state.scene_latch_previous == 9 && state.scene_stage == 3 &&
            state.callback_mode == 3 && countdown == 1);
     assert(runtime.dispatch_runtime.record[14].bytes[1] & 0x40u);
+    assert(runtime.dispatch_runtime.record[14].bytes[0x68] == 0x6f &&
+           runtime.dispatch_runtime.record[14].bytes[0x69] == 0xb8);
     assert(runtime.root_route == FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_APPLIED &&
            runtime.root_placement.selected_record_index == 14 &&
            runtime.root_placement.pose.position[1] == 0x7708);

@@ -36,18 +36,29 @@ int main(void) {
            source.source_flags == 0x8000);
     assert(fa18_scene_dispatch_source_record(&table, selection.records, 1, &source) == 0);
     assert(fa18_scene_dispatch_source_record(&table, table.data - 1, 0, &source) == -1);
-    data[0x40] = 0xff; data[0x41] = 0xfe;
-    data[0x42] = 0; data[0x43] = 3;
-    data[0x44] = 0; data[0x45] = 4;
-    data[0x46] = 0xff; data[0x47] = 0xfb;
-    data[0x48] = 0x12; data[0x49] = 0x34;
-    data[0x4a] = 0x56; data[0x4b] = 0x78;
+    data[0x40] = 0; data[0x41] = 0x60;
+    data[0x60] = 0xff; data[0x61] = 0xfe;
+    data[0x62] = 0; data[0x63] = 3;
+    data[0x64] = 0; data[0x65] = 4;
+    data[0x66] = 0xff; data[0x67] = 0xfb;
+    data[0x68] = 0x12; data[0x69] = 0x34;
     FA18SceneDispatchGeometry geometry;
     assert(fa18_scene_dispatch_geometry(&table, 0x40, &geometry) == 0);
     assert(geometry.coordinate_x == -2 && geometry.coordinate_z == 3 &&
            geometry.component_x == 4 && geometry.component_z == -5 &&
-           geometry.altitude == 0x12345678);
-    assert(fa18_scene_dispatch_geometry(&table, sizeof data - 11, &geometry) == -1);
+           geometry.altitude == 0x1234);
+    data[26] = 0; data[27] = 0x80;
+    data[0x80] = 0; data[0x81] = 70;
+    data[0x82] = 0; data[0x83] = 112;
+    data[0x84] = 0x18; data[0x85] = 0;
+    data[0x86] = 0x18; data[0x87] = 0;
+    data[0x88] = 0; data[0x89] = 0;
+    int16_t negative_geometry[5];
+    assert(fa18_scene_dispatch_negative_geometry(&table, 26, negative_geometry) == 0);
+    assert(negative_geometry[0] == 70 && negative_geometry[1] == 112 &&
+           negative_geometry[2] == 6144 && negative_geometry[3] == 6144 &&
+           negative_geometry[4] == 0);
+    assert(fa18_scene_dispatch_geometry(&table, sizeof data - 1, &geometry) == -1);
     input.mode = 0x7d;
     assert(fa18_select_scene_dispatch_records(&table, &input, &selection) == 1);
     input.mode = 0;

@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "scene_dispatch_table.h"
+#include "coordinate_update_negative_pair.h"
 #include "scene_negative_pose.h"
 #include "scene_record_dispatch.h"
 
@@ -36,7 +37,8 @@ typedef struct {
 int fa18_initialize_scene_dispatch_runtime(
     const FA18Hunks *hunks, const FA18SceneDispatchTable *table,
     const FA18SceneDispatchSelectionInput *selection_input,
-    int16_t inherited_d7, const FA18RecordMatrixUpdateOps *matrix_ops,
+    int16_t inherited_d7, const FA18CoordinateAngleTable *coordinate_table,
+    const FA18RecordMatrixUpdateOps *matrix_ops,
     FA18SceneDispatchRuntime *runtime);
 
 /* Resolver adapters for `$C09498`: selected record data come from the

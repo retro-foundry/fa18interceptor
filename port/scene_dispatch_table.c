@@ -85,14 +85,40 @@ int fa18_scene_dispatch_source_record(
 int fa18_scene_dispatch_geometry(const FA18SceneDispatchTable *table,
                                  uint16_t offset,
                                  FA18SceneDispatchGeometry *geometry) {
-    if (!table || !table->segment || !geometry ||
-        offset > table->segment_size || table->segment_size - offset < 12u)
+    int16_t displacement;
+    int64_t geometry_offset;
+    if (!table || !table->segment || !geometry || offset > table->segment_size ||
+        table->segment_size - offset < 2u)
         return -1;
-    const uint8_t *source = table->segment + offset;
+    displacement = (int16_t)fa18_be16(table->segment + offset);
+    geometry_offset = displacement;
+    if (geometry_offset < 0 || (uint64_t)geometry_offset > table->segment_size ||
+        table->segment_size - (uint32_t)geometry_offset < 10u)
+        return -1;
+    const uint8_t *source = table->segment + (uint32_t)geometry_offset;
     geometry->coordinate_x = (int16_t)fa18_be16(source);
     geometry->coordinate_z = (int16_t)fa18_be16(source + 2);
     geometry->component_x = (int16_t)fa18_be16(source + 4);
     geometry->component_z = (int16_t)fa18_be16(source + 6);
-    geometry->altitude = (int32_t)fa18_be32(source + 8);
+    geometry->altitude = (int16_t)fa18_be16(source + 8);
+    return 0;
+}
+
+int fa18_scene_dispatch_negative_geometry(const FA18SceneDispatchTable *table,
+                                          uint16_t selector_index,
+                                          int16_t geometry[5]) {
+    int16_t displacement;
+    int64_t offset;
+    if (!table || !table->segment || !geometry ||
+        selector_index > table->segment_size ||
+        table->segment_size - selector_index < 2u)
+        return -1;
+    displacement = (int16_t)fa18_be16(table->segment + selector_index);
+    offset = displacement;
+    if (offset < 0 || (uint64_t)offset > table->segment_size ||
+        table->segment_size - (uint32_t)offset < 10u)
+        return -1;
+    for (unsigned i = 0; i != 5; ++i)
+        geometry[i] = (int16_t)fa18_be16(table->segment + (uint32_t)offset + i * 2u);
     return 0;
 }

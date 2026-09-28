@@ -19,6 +19,7 @@ typedef struct {
     const FA18SceneDispatchTable *dispatch_table;
     const FA18SceneRecordTable *record_table;
     FA18FlightTrigTable trig_table;
+    FA18CoordinateAngleTable coordinate_table;
     FA18ScenePositivePoseTables positive_tables;
     FA18ScenePositivePoseResolver positive_resolver;
     FA18SceneDispatchRuntime dispatch_runtime;

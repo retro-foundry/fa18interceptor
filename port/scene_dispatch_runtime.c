@@ -1,4 +1,6 @@
 #include "scene_dispatch_runtime.h"
+#include "coordinate_update_positive_pair.h"
+#include "scene_dispatch_negative_coordinate_pose.h"
 
 #include <string.h>
 
@@ -8,6 +10,17 @@ static int16_t word_at(const uint8_t *bytes, unsigned offset) {
 
 static int32_t long_at(const uint8_t *bytes, unsigned offset) {
     return (int32_t)fa18_be32(bytes + offset);
+}
+
+static int negative_geometry(void *context, uint16_t selector_index,
+                             int16_t geometry[5]) {
+    return fa18_scene_dispatch_negative_geometry(context, selector_index, geometry);
+}
+
+static int positive_coordinate(void *context,
+                               const FA18SceneCoordinateUpdateInput *input,
+                               int16_t output[2]) {
+    return fa18_update_coordinate_positive_pair(context, input, output);
 }
 
 static int load_template(const FA18Hunks *hunks, int16_t source_offset,
@@ -56,12 +69,17 @@ static int template_class(const FA18Hunks *hunks,
 int fa18_initialize_scene_dispatch_runtime(
     const FA18Hunks *hunks, const FA18SceneDispatchTable *table,
     const FA18SceneDispatchSelectionInput *selection_input,
-    int16_t inherited_d7, const FA18RecordMatrixUpdateOps *matrix_ops,
+    int16_t inherited_d7, const FA18CoordinateAngleTable *coordinate_table,
+    const FA18RecordMatrixUpdateOps *matrix_ops,
     FA18SceneDispatchRuntime *runtime) {
     FA18SceneDispatchSelection selection;
     int selected;
 
-    if (!hunks || !table || !selection_input || !matrix_ops || !runtime) return -1;
+    FA18SceneDispatchSourceRecord first_source = {0};
+    uint16_t last_record_index = 0;
+    int last_was_created = 0;
+    if (!hunks || !table || !selection_input || !coordinate_table || !matrix_ops || !runtime)
+        return -1;
     runtime->hunks = hunks;
     selected = fa18_select_scene_dispatch_records(table, selection_input, &selection);
     if (selected != 0) return selected;
@@ -73,7 +91,16 @@ int fa18_initialize_scene_dispatch_runtime(
         uint16_t record_index;
         uint8_t class_nibble;
 
-        if (decoded <= 0) return decoded < 0 ? -1 : 0;
+        if (decoded <= 0) {
+            if (decoded < 0 || !last_was_created) return decoded < 0 ? -1 : 0;
+            if ((int16_t)first_source.source_word_1 >= 0) return -1;
+            const int published = fa18_publish_scene_dispatch_negative_coordinate_pose(
+                &runtime->record[last_record_index], (int16_t)first_source.source_word_1,
+                negative_geometry, (void *)table, positive_coordinate,
+                (void *)coordinate_table, matrix_ops);
+            return published < 0 ? -1 : 0;
+        }
+        if (!source_index) first_source = source;
         record_index = source.source_word_1 & 0x007fu;
         if (record_index >= FA18_SCENE_DISPATCH_RECORD_COUNT ||
             load_template(hunks, source.source_offset,
@@ -83,7 +110,10 @@ int fa18_initialize_scene_dispatch_runtime(
             return -1;
         }
         /* `$C28B84` already-published bit-6 route retains the live slot. */
-        if (runtime->record[record_index].bytes[1] & 0x40u) continue;
+        if (runtime->record[record_index].bytes[1] & 0x40u) {
+            last_was_created = 0;
+            continue;
+        }
         if (fa18_scene_dispatch_geometry(table, source.geometry_offset, &geometry) != 0)
             return -1;
         const FA18SceneDispatchCreateInput input = {
@@ -96,6 +126,8 @@ int fa18_initialize_scene_dispatch_runtime(
         if (fa18_create_scene_dispatch_record(&runtime->record[record_index],
                                               &input, matrix_ops) != 0)
             return -1;
+        last_record_index = record_index;
+        last_was_created = 1;
     }
 }
 

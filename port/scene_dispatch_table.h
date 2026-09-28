@@ -79,4 +79,10 @@ int fa18_scene_dispatch_geometry(const FA18SceneDispatchTable *table,
                                  uint16_t offset,
                                  FA18SceneDispatchGeometry *geometry);
 
+/* `$C28812-$C2881C`: index the `$C295E0` relative-word table, then load the
+ * five sign-extended words consumed by `MOVEM.W ... D2-D6`. */
+int fa18_scene_dispatch_negative_geometry(const FA18SceneDispatchTable *table,
+                                          uint16_t selector_index,
+                                          int16_t geometry[5]);
+
 #endif

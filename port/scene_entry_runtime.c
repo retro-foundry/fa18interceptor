@@ -31,7 +31,8 @@ static int initialize_records(void *context) {
     /* `$C28B12` starts each observed dispatch record with D7 = -2. */
     return runtime && fa18_initialize_scene_dispatch_runtime(
                           runtime->hunks, runtime->dispatch_table, &input, -2,
-                          matrix_ops(runtime), &runtime->dispatch_runtime) == 0 ? 0 : -1;
+                          &runtime->coordinate_table, matrix_ops(runtime),
+                          &runtime->dispatch_runtime) == 0 ? 0 : -1;
 }
 
 static int resolve_negative_record(void *context, uint16_t record_index,
@@ -104,6 +105,7 @@ int fa18_scene_entry_runtime_init(FA18SceneEntryRuntime *runtime,
     runtime->dispatch_table = dispatch_table;
     runtime->record_table = record_table;
     if (fa18_load_two_angle_trig_table(hunks, &runtime->trig_table) != 0 ||
+        fa18_load_coordinate_angle_table(hunks, &runtime->coordinate_table) != 0 ||
         fa18_load_scene_positive_pose_tables(hunks, &runtime->positive_tables) != 0)
         return -1;
     runtime->positive_resolver = (FA18ScenePositivePoseResolver){

@@ -764,8 +764,10 @@ forms the recorded coordinate packet `(0,0,$00800000,0,$0B000000,-1)`.
 linked-record route. `coordinate_update_positive_pair.{c,h}` ports the
 recorded `$C123FA-$C1294E` callback route, including shift 14, rounded ratio,
 Hunk-63 index 11, magnitude, and clamp path to `$C45AC2=$6FB8`. The dispatch
-loop must still supply the live target and geometry resolver before either
-route can be scheduled; do not seed `$6FB8` or page data.
+runtime now carries `$C28AFE`'s final created target through this negative
+route with the source Hunk-27/Hunk-63 tables before root placement. The
+nonnegative linked-record resolver remains unported; do not seed `$6FB8` or
+page data.
 See
 `analysis/routines/run075_scene_dispatch_coordinate_pose.md`.  Do not seed
 `$6FB8` in normal runtime state.
