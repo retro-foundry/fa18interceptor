@@ -62,6 +62,14 @@ route, message initialization, and finalization. It is not attached to
 matrix fields read by `$C1C54E`) remains required before this initializer can
 enter the normal rendering scheduler.
 
+`scene_root_record.{c,h}` now publishes the direct `$C0924A-$C095BE` root
+writes into mutable slot zero: root `+$06/+08/+0A/+0B/+0C/+0E/+10`,
+`+$14/+18/+1C`, flags at `+$04`, and the `$C2D954` attitude output at
+`+$92..+$A2`. `scene_entry_runtime` invokes it immediately after the bounded
+root placement. The pre-existing type byte `+$62` is intentionally preserved:
+the source path does not write it, and its native producer is still required
+before `$C1C54E` can become the normal renderer input.
+
 ## Next context: required scheduler integration
 
 Do not add a frame-number trigger or captured page to `game.c`. The source

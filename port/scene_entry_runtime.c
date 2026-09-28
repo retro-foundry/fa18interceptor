@@ -1,4 +1,5 @@
 #include "scene_entry_runtime.h"
+#include "scene_root_record.h"
 
 #include <string.h>
 
@@ -71,9 +72,13 @@ static int initialize_root(void *context) {
         resolve_positive,
         &negative_ops, matrix_ops(runtime), runtime
     };
-    return fa18_prepare_scene_root_placement(runtime->record_table, &input,
-                                             &runtime->root_placement, &ops,
-                                             &runtime->root_route);
+    if (fa18_prepare_scene_root_placement(runtime->record_table, &input,
+                                          &runtime->root_placement, &ops,
+                                          &runtime->root_route) != 0)
+        return -1;
+    return fa18_publish_scene_root_record(&runtime->dispatch_runtime.record[0],
+                                          &runtime->root_placement,
+                                          runtime->root_route);
 }
 
 static int prepare_message(void *context) {

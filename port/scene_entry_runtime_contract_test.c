@@ -64,6 +64,8 @@ int main(void) {
     assert(runtime.root_route == FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_APPLIED &&
            runtime.root_placement.selected_record_index == 14 &&
            runtime.root_placement.pose.position[1] == 0x7708);
+    assert(runtime.dispatch_runtime.record[0].bytes[4] == 0xc8 &&
+           runtime.dispatch_runtime.record[0].bytes[0x18 + 3] == 0x08);
     assert(runtime.message.delay == 0x1b8 && runtime.finalization.stage_word == 0x90);
     return 0;
 }
