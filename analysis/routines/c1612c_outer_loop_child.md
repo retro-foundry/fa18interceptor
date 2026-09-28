@@ -46,3 +46,10 @@ table itself. The selected View/CopList addresses are trace witnesses, not
 native pointer constants. A native display owner must preserve this index-zero
 publication relationship with caller-owned page identities and an explicit
 `LoadView` boundary.
+
+`flight_page_handoff.{c,h}` is that typed native owner. It binds two
+caller-identified five-plane pages to the existing `$C279D0` lower-plane
+renderers, maps the outer child's publication back to the selected page, and
+routes the child's RGB4 loads to that page before presentation. Its contract
+checks the index-zero render/display/toggle sequence without importing the
+observed View or CopList addresses.

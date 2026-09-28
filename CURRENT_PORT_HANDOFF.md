@@ -875,6 +875,15 @@ frame 384, not the alternate renderer table selected after the child tail.
 Those source addresses are evidence only; the pending native page owner must
 use page identities and preserve the index-zero publication relationship.
 
+`flight_page_handoff.{c,h}` now provides that native two-page owner. It binds
+caller-owned page-view identities to two five-plane renderers, returns the
+current `$C2F558`-selected renderer, and executes the complete child so its
+`LoadView` publication selects the matching native page and its RGB4 loads
+apply to that page before presentation. The contract verifies index-zero
+render/display publication and the child-tail toggle to page one. `game.c`
+still does not schedule this owner: the `$C0EFD4` gate and its source page-view
+identity producer must be composed first.
+
 `periodic_notification.{c,h}` now ports `$C11B44-$C11BAF`, the direct
 periodic byte stage called from the parent prefix after `$C0F5F8`.  It
 preserves decrement-before-signed-test behavior, the `8/$86` expiry reload,
