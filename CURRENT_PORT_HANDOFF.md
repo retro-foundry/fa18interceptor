@@ -85,6 +85,9 @@ still exact through frame 391 and first differs at frame 392 by 361 pixels.
 selection, the shift-byte OR into the selector, three signed coordinate
 writes, and the 24-byte record suffix. Its caller still owns the preceding
 workspace/descriptor route and the live terms; it is not scheduled by game.c.
+Its `$C1DD98-$C1DE38` work-term prefix is also ported: the selected workspace
+pair, C1D7E2 correction pair, and caller-owned translated/origin terms form
+the first and third source work longwords while the middle word remains clear.
 
 The next implementation is the `$C1DC1C-$C1E0B0` placement builder, using the
 new mutable workspace expansion as its source-backed input. Do not schedule
