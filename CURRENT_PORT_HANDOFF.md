@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: `c2067003 Port renderer lane blit stage`.
+- Head: `379dfdd9 Compose negative root placement route`.
 - The current working tree adds a source-addressed five-plane/Chip-RAM binding
   for the reusable `$C2FF58-$C30037` backend. User-owned untracked `.vscode/`
   remains untouched; do not discard it.
@@ -11,7 +11,7 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
- pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **118/118** tests.
+ pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **119/119** tests.
 
 `FA18FivePlaneChipBinding` is the native bridge from caller-owned dynamic Chip
 addresses to a `FA18FivePlanePage`. It validates five non-overlapping complete
@@ -30,9 +30,22 @@ Hunk-67 table entry, derives the source record index, resolves the mutable
 record and template descriptor through required callers, then invokes the
 already-proved pose transform/matrix update. The positive-table `$C093BC`
 family is an explicit unported route. This is the first source-ordered path
-from `$C0FAA4` scene initialization into root pose/matrix state, but it cannot
-be normal-runtime scheduled yet: the mutable `$C46184` bank and descriptor
-publishers still have no native owners.
+from `$C0FAA4` scene initialization into root pose/matrix state. The mutable
+`$C46184` bank is now owned by `scene_dispatch_runtime`, but its update/
+presentation schedule still has no native owner.
+
+`scene_dispatch_runtime.{c,h}` now composes `$C28722-$C28E08` from original
+Hunk-27 dispatch records and Hunk-16 relocation-backed five-pointer templates.
+The earlier attract-demo trace proves `$C28BEE` creates selected slot 14 at
+`$C47D84`; the new runtime reconstructs that slot and exposes the exact
+record/descriptor resolver pair needed by `$C09498`. Its template field four
+resolves the verified Hunk-52 descriptor without retaining a runtime Amiga
+address. The creation adapter was also corrected for `$C28DD8-$C28DE4`:
+coordinate terms are `SWAP; ASL.L #6` (`* $400000`), not `* 64`. This produces
+the trace-backed slot-14 `+$14/$18/$1C` tuple
+`$11180000/$00000000/$11180000` before root placement. The normal game loop
+still lacks the source update/presentation ownership, so frame 392 remains
+unrendered in normal replay.
 
 The user explicitly authorized a temporary opt-in display diagnostic while the
 scene producer is reconstructed. `--bootstrap-render-fixture CHIP` imports the

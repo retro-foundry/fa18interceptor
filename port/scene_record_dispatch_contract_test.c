@@ -41,10 +41,10 @@ int main(void) {
     assert(record.bytes[0] == 0x11 && record.bytes[0x64] == 0x10 &&
            record.bytes[0x7c] == 0xe0 && record.bytes[0x6c] == 0x20 &&
            record.bytes[0x6e] == 0x20);
-    assert(record.bytes[0x14] == 0x00 && record.bytes[0x15] == 0x00 &&
-           record.bytes[0x16] == 0x03 && record.bytes[0x17] == 0x80 &&
-           record.bytes[0x1c] == 0xff && record.bytes[0x1d] == 0xff &&
-           record.bytes[0x1e] == 0xfb && record.bytes[0x1f] == 0xc0);
+    assert(record.bytes[0x14] == 0xff && record.bytes[0x15] == 0x80 &&
+           record.bytes[0x16] == 0x04 && record.bytes[0x17] == 0x00 &&
+           record.bytes[0x1c] == 0x00 && record.bytes[0x1d] == 0xbf &&
+           record.bytes[0x1e] == 0xfb && record.bytes[0x1f] == 0x00);
     assert(record.bytes[164] == 0xa5 && record.matrix_update.build_matrix[0][0] == 4);
     return 0;
 }

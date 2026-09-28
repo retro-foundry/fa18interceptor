@@ -12,6 +12,13 @@ static void put_long(uint8_t *bytes, unsigned offset, uint32_t value) {
     put_word(bytes, offset + 2, (uint16_t)value);
 }
 
+/* `$C28DD8-$C28DE4`: `SWAP` then `ASL.L #6` makes the signed coordinate a
+ * 0x400000-scale term before the already-extended component's `ASL.L #8`. */
+static uint32_t dispatch_position_component(int16_t coordinate, int16_t component) {
+    return (uint32_t)((int64_t)coordinate * INT64_C(0x400000) +
+                      (int64_t)component * 256);
+}
+
 int fa18_create_scene_dispatch_record(FA18SceneDispatchRecord *record,
                                       const FA18SceneDispatchCreateInput *input,
                                       const FA18RecordMatrixUpdateOps *matrix_ops) {
@@ -43,11 +50,11 @@ int fa18_create_scene_dispatch_record(FA18SceneDispatchRecord *record,
     put_word(record->bytes, 0x0c, (uint16_t)input->component_x);
     put_word(record->bytes, 0x0e, (uint16_t)input->component_z);
     put_long(record->bytes, 0x10, (uint32_t)input->altitude);
-    put_long(record->bytes, 0x14, (uint32_t)((int32_t)input->coordinate_x * 64 +
-                                               (int32_t)input->component_x * 256));
+    put_long(record->bytes, 0x14,
+             dispatch_position_component(input->coordinate_x, input->component_x));
     put_long(record->bytes, 0x18, (uint32_t)input->altitude);
-    put_long(record->bytes, 0x1c, (uint32_t)((int32_t)input->coordinate_z * 64 +
-                                               (int32_t)input->component_z * 256));
+    put_long(record->bytes, 0x1c,
+             dispatch_position_component(input->coordinate_z, input->component_z));
     record->bytes[0x5f] = 0x44;
     put_word(record->bytes, 0x60, 0x01f4);
     put_long(record->bytes, 0x72, 0x0061a800u);
