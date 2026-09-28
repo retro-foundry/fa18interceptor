@@ -1260,6 +1260,16 @@ The latest implementation commits are `6000d323` (active packet execution)
 and `4dcd0bb6` (outer ownership ordering). The worktree should otherwise
 remain clean except for the user-owned untracked `.vscode/` directory.
 
+`f281806a` ports `$C2F582-$C2F5BF` as `renderer_pointer_set_clear.{c,h}`.
+The parent-tail modulo-32 route can now clear both source pointer quartets,
+forty bytes at each target, through caller-owned Chip offsets. It validates all
+eight ranges before storing, so a bad page binding cannot leave a partially
+cleared native renderer state. This primitive is deliberately unscheduled:
+the parent-tail state and live page-pair initialization are still required
+before it can contribute to normal replay. Full validation after this commit
+passes 176/176 contracts and 192 exact native frames (200--391); frame 392
+remains the first mismatch, at 361 pixels.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
