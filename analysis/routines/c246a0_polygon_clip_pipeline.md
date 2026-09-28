@@ -27,3 +27,8 @@ it copies the preceding map packet's three-word records into the clip input,
 passes the caller-owned live shift, and routes the result to the already bound
 `$C2FF48` submission state.  It does not select a page, retain a shift, or
 schedule rendering.
+
+Its page-level contract binds the existing submission callbacks to a native
+five-plane page with the traced renderer values (bound 144, vertical 89,
+horizontal 0). The raw 13-record, shift-two witness produces the 14 projected
+pairs, one `$8400` DMA write, page-blitter work, and nonzero lower-plane bytes.

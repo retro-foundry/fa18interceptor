@@ -1096,6 +1096,13 @@ display boundary; no shift, page, capture, or scheduler is retained by the
 adapter. Normal cadence, map-record ownership, and the selected renderer-page
 binding remain unresolved.
 
+The map-polygon adapter also has a five-plane page contract: the same raw
+shift-two run075 witness binds the source renderer scalars (bound 144,
+vertical 89, horizontal 0) to `FA18FlightRendererPage` and
+`FA18ProjectionPageBlitter`. It produces a DMA submission, page-blitter work,
+and nonzero lower-plane bytes. This establishes actual native page geometry at
+the adapter boundary; it is not a scheduler or a captured page import.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
