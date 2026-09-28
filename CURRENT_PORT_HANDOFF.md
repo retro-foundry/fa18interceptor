@@ -3,7 +3,7 @@
 ## Starting point
 
 - Branch: `coverage-accounting`
-- Head: `3065e4b2 Record run075 root initialization boundary`.
+- Implementation head before this handoff update: `d519a92b Load positive root pose tables`.
 - The current working tree adds a source-addressed five-plane/Chip-RAM binding
   for the reusable `$C2FF58-$C30037` backend. User-owned untracked `.vscode/`
   remains untouched; do not discard it.
@@ -11,7 +11,57 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
- pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **119/119** tests.
+pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **121/121** tests.
+
+## Latest root-owner work
+
+The cold-boot trace proves startup selects the **nonnegative** root table path
+`$C093BE-$C095BE`, rather than only the earlier ported `$C09498` negative
+path. `port/scene_positive_pose.{c,h}` now ports that direct root-pose packet:
+it consumes the five entry words, its three-word tail, and the two original
+adjustment pairs; publishes root `+$06/+08/+0B/+0C/+0E`, `+$14/+18/+1C`, and
+the corresponding delta state; then calls the existing `$C2D954` matrix
+boundary. The cold-boot contract fixes the source result at
+`+$14=$10545920`, `+$18=$00000708`, `+$1C=$10A404F0`, `+$06=$0041`,
+`+$08=$0042`, `+$0C=$1459`, and `+$0E=$2404`.
+
+`scene_root_placement` dispatches both signs of the Hunk-67 root entry. Its
+positive callback is `fa18_resolve_scene_positive_pose`, supplied by
+`scene_positive_pose_tables.{c,h}`. That resolver reads the actual Hunk-67
+eight-word entry and Hunk-8 data, rejecting invalid selectors. Hunk-8 bounds
+are measured, not guessed: `$C1D7E2-$C1D8D5` is 61 signed-word pairs and
+`$C1D8D6-$C1D9D7` is 129 signed-byte pairs; `$C1D9D8` begins the separate
+magnitude table. Related evidence: `analysis/routines/c093be_positive_scene_pose.md`.
+
+Commits after the earlier handoff head:
+
+```
+d519a92b Load positive root pose tables
+6c023c17 Bound positive root adjustment tables
+321f7dbf Dispatch positive root placement
+26ceed69 Port positive root scene pose
+be5c3fdb Record post-menu transition trace
+4fbce23b Bind projection blits to five-plane pages
+```
+
+Current gates after the root work: native build check passes 229 files;
+`ctest` passes 121/121; native parity is unchanged at frames 200--391 exact,
+with the first mismatch at frame 392.
+
+## Next context: required scheduler integration
+
+Do not add a frame-number trigger or captured page to `game.c`. The source
+join is established: run075 reaches `$C0FA04`'s expired branch at global frame
+370, which calls `$C0FAA4`; only after it returns does the caller set viewport
+mode `current=0`, `target=15`. The source cadence reaches current mode 8 at
+frame 392, where the dynamic Copper palette reveals an already prepared page.
+The missing native owner must compose this exact callback order with the new
+root resolver, the existing root placement/matrix state, `FA18FlightScenePipeline`,
+and `FA18ViewportMode`/five-plane presentation. It must provide genuine record,
+matrix, page, and Copper state; the existing capture fixtures are diagnostic
+only. See `analysis/routines/c0fa04_post_input_followup.md`,
+`analysis/routines/c0faa4_run075_scene_initialization.md`, and
+`analysis/routines/run075_frame392_cockpit_entry.md` before editing `game.c`.
 
 `FA18FivePlaneChipBinding` is the native bridge from caller-owned dynamic Chip
 addresses to a `FA18FivePlanePage`. It validates five non-overlapping complete
