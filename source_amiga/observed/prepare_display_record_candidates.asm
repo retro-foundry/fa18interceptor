@@ -1,5 +1,5 @@
 ; Byte-exact bounded prefix $C0D752-$C0D7DF.
-; It fills five spaced three-word outputs and calls the observed $C2E758 child.
+; It fills four spaced three-word outputs and calls the observed $C2E758 child.
                 org $C0D752
 MATRIX_WORDS equ $C45BD8
 INPUT_TRIPLES equ $C0D720

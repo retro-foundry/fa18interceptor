@@ -948,7 +948,7 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-283 files, `ctest` passes 151/151, and frame parity remains 192 exact frames
+285 files, `ctest` passes 152/152, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 
@@ -960,6 +960,14 @@ not to schedule a blank page or add a frame-specific render hook.  The latest
 return-bounded evidence is `$C0D752 -> $C2E758 -> $C0D7E0` in ordinary run075;
 `$C2E758` writes `$C4B990` pairs before the existing `$C24A/$C24C/$C24D`
 clipping/projection/fill path.
+
+`display_record_candidates.{c,h}` now ports the preceding `$C0D752-$C0D7D2`
+matrix preparation prefix using four `$C0D720` pairs: the source's count-four
+decrement/BGT loop corrects earlier five-record prose. Its live run075
+contract produces the four `$C4B390` triplets from the observed
+`$C45A66/$C45BD8` inputs. It is not a renderer hook; the `$C2E758`
+adjustment/selection iterator and `$C0D7E0` consumer still determine whether
+those candidates become display pairs and polygons.
 
 ## Standard validation after each stage
 

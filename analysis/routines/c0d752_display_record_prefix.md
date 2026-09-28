@@ -8,9 +8,9 @@ to `$C2FEF2`; this prefix executes before its `$C2E758` child.
 branches into the common prefix at `$C0D758`; `$C0D752` instead loads
 `$C45BD8`. The alternate selection's meaning remains unassigned.
 
-The prefix takes five consecutive two-word inputs from `$C0D720`, combines each
+The prefix takes four consecutive two-word inputs from `$C0D720`, combines each
 with a shifted part of `$C45A66` and three-word groups at `$C45BD8`, and writes
-three rounded shifted products into five records beginning at `$C4B390` with a
+three rounded shifted products into four records beginning at `$C4B390` with a
 `$1A`-byte stride. It then clears four longwords at `$C4E854` and calls
 `$C2E758`.
 
@@ -29,3 +29,11 @@ selector; six selected record-emission branches; one fallback branch; and the
 bytes in that range with no gaps. The split source files preserve readable
 branch-level contracts without promoting the record data to a visual or
 gameplay interpretation.
+
+The run075 return-bounded capture at `build/run075_prepared_c0d752/` resolves
+the count unambiguously: the `move.w #4` / decrement / `BGT` loop makes four,
+not five, candidate records. It enters at `$C0D752`, invokes `$C2E758`, and
+reaches `$C0D7E0` in 737 instructions. `port/display_record_candidates.{c,h}`
+ports that four-record matrix prefix and its source rounding; the contract uses
+the captured `$C0D720`, `$C45A66`, and `$C45BD8` inputs and `$C4B390` output.
+The later iterator and selector are still separate, unscheduled native work.
