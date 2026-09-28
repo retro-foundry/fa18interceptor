@@ -9,6 +9,7 @@
  * A filled polygon is drawn once as a one-bit mask in a scratch buffer, then
  * composited into each bitplane of the draw page according to its colour
  * (run075 frame 393 blit sequence; $C30466, $C304B2). */
+#define POLY_MASK_PLANE    0xC456E2u /* long: row 0 of the one-plane mask buffer ($C305AA) */
 #define PAGE_PLANE_TABLE   0xC456B6u /* long: address of the draw page's plane-pointer table */
 #define POLY_PLANE_BITS    0xC45956u /* word: colour bits still to composite, one per plane */
 #define POLY_MASK_END      0xC45960u /* long: last word of the mask buffer (descending blits) */

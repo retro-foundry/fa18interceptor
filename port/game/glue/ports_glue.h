@@ -6,5 +6,6 @@
 /* render_polygon.c */
 int glue_C30466(void);
 int glue_C304B2(void);
+int glue_C305AA(void);
 
 #endif

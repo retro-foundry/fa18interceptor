@@ -3,6 +3,7 @@
 #include "ports_glue.h"
 
 #include "globals.h"
+#include "hardware.h"
 #include "memory.h"
 #include "render_polygon.h"
 
@@ -41,5 +42,38 @@ int glue_C304B2(void) {
     SET_W(D(0), size);
     A(0) = 0xDFF000;
     flags_logic_w(size);
+    return glue_return();
+}
+
+/* $C305AA: D0-D3 = x0, y0, x1, y1 (words), A4.w = last row. Live outputs at
+ * its call sites: D4 (low word), A1, and the D4/D5 high words, which the
+ * original swaps with EXG on y-major edges. */
+int glue_C305AA(void) {
+    int16_t x0 = (int16_t)D(0), y0 = (int16_t)D(1), x1 = (int16_t)D(2), y1 = (int16_t)D(3);
+    int16_t last_row = (int16_t)A(4), row, dx, rows;
+
+    draw_polygon_edge(x0, y0, x1, y1, last_row);
+
+    if (y1 == y0) return glue_return();
+    if ((uint16_t)y1 > (uint16_t)y0) {
+        rows = (int16_t)(y1 - y0 - 1);
+        row = (int16_t)(y0 + 1);
+        if (row > last_row) return glue_return();
+        dx = (int16_t)(x1 - x0);
+    } else {
+        rows = (int16_t)(y0 - y1 - 1);
+        dx = (int16_t)(x0 - x1);
+        SET_W(D(4), dx);
+        row = (int16_t)(y1 + 1);
+        if (row > last_row) return glue_return();
+    }
+    if (dx < 0) dx = (int16_t)-dx;
+    if ((uint16_t)dx < (uint16_t)rows) { /* y-major: EXG D4,D5 */
+        uint32_t d4 = D(4);
+        D(4) = D(5);
+        D(5) = d4;
+    }
+    A(1) = (uint32_t)(int32_t)row;
+    SET_W(D(4), custom_written(BLTSIZE));
     return glue_return();
 }

@@ -10,7 +10,7 @@
 enum {
     DMACONR = 0x002,
     BLTCON0 = 0x040, BLTCON1 = 0x042, BLTAFWM = 0x044, BLTALWM = 0x046,
-    BLTCPT = 0x048, BLTBPT = 0x04C, BLTAPT = 0x050, BLTDPT = 0x054, BLTSIZE = 0x058,
+    BLTCPT = 0x048, BLTBPT = 0x04C, BLTAPT = 0x050, BLTAPTL = 0x052, BLTDPT = 0x054, BLTSIZE = 0x058,
     BLTCMOD = 0x060, BLTBMOD = 0x062, BLTAMOD = 0x064, BLTDMOD = 0x066,
     BLTCDAT = 0x070, BLTBDAT = 0x072, BLTADAT = 0x074
 };
@@ -19,13 +19,16 @@ enum {
 enum {
     SRCA = 0x0800, SRCB = 0x0400, SRCC = 0x0200, DEST = 0x0100,
     BLITREVERSE = 0x0002, FILL_OR = 0x0008, FILL_XOR = 0x0010, LINEMODE = 0x0001,
-    ONEDOT = 0x0002, SIGNFLAG = 0x0040
+    ONEDOT = 0x0002, SIGNFLAG = 0x0040,
+    /* Line-mode octant bits. */
+    OCT_SUD = 0x0010, OCT_SUL = 0x0008, OCT_AUL = 0x0004
 };
 
 /* Minterms over sources A, B, C. */
 enum {
     MINTERM_A = 0xF0, MINTERM_B = 0xCC, MINTERM_C = 0xAA,
-    MINTERM_A_OR_B = 0xFC, MINTERM_NOTA_AND_B = 0x0C, MINTERM_A_XOR_B = 0x3C
+    MINTERM_A_OR_B = 0xFC, MINTERM_NOTA_AND_B = 0x0C, MINTERM_A_XOR_B = 0x3C,
+    MINTERM_LINE_XOR = 0x4A /* line mode: dot (A, B = texture) XOR destination (C) */
 };
 
 /* Make BLTSIZE from a height in rows and a width in words. */
@@ -35,6 +38,8 @@ void custom_write(unsigned reg, uint16_t value);
 /* A 32-bit pointer register pair (high word first, as a MOVE.L writes it). */
 void custom_write_ptr(unsigned reg, uint32_t value);
 uint16_t custom_read(unsigned reg);
+/* The last value this code wrote to a (write-only) register. */
+uint16_t custom_written(unsigned reg);
 
 /* Wait until the blitter has finished its current operation. */
 void wait_blitter(void);
