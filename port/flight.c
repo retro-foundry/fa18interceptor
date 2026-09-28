@@ -47,13 +47,16 @@ static int32_t arithmetic_shift_right(int32_t value, unsigned count) {
 int fa18_flight_adjust_signed_word_pair(int16_t first, int16_t second,
                                         int16_t *adjusted_first) {
     if (!adjusted_first) return -1;
-    int32_t sum = (int32_t)first + (int32_t)second;
-    const int32_t magnitude = sum < 0 ? -sum : sum;
-    if (magnitude > 4) sum = arithmetic_shift_right(sum, 2);
-    else if (magnitude > 2) sum = arithmetic_shift_right(sum, 1);
-    sum -= second;
-    if (sum < INT16_MIN || sum > INT16_MAX) return -1;
-    *adjusted_first = (int16_t)sum;
+    int16_t sum = (int16_t)((uint16_t)first + (uint16_t)second);
+    int16_t magnitude = sum;
+
+    /* `$C15144-$C1515C`: ADD.W and NEG.W both retain their 16-bit wrap.
+     * In particular, negating $8000 remains $8000 and takes the source's
+     * signed small-magnitude branch. */
+    if (magnitude < 0) magnitude = (int16_t)-(uint16_t)magnitude;
+    if (magnitude > 4) sum = (int16_t)arithmetic_shift_right(sum, 2);
+    else if (magnitude > 2) sum = (int16_t)arithmetic_shift_right(sum, 1);
+    *adjusted_first = (int16_t)((uint16_t)sum - (uint16_t)second);
     return 0;
 }
 

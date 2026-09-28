@@ -54,6 +54,10 @@ int main(void) {
            adjusted == -2);
     assert(fa18_flight_adjust_signed_word_pair(2, 0, &adjusted) == 0 &&
            adjusted == 2);
+    /* ADD.W $7FFF + 1 wraps to $8000. NEG.W leaves that word unchanged, so
+     * `$C15138` follows its signed <= 4 route and SUB.W wraps back to $7FFF. */
+    assert(fa18_flight_adjust_signed_word_pair(0x7fff, 1, &adjusted) == 0 &&
+           adjusted == 0x7fff);
     assert(fa18_flight_prepare_scaled_motion(10, -3, 18, 0x4000, &terms) == 0);
     assert(terms.first == -72 && terms.second == -16 && terms.third == -0x10000);
     const FA18FlightTrigState trig = {0x1000, 0x2000, 0x3000,
