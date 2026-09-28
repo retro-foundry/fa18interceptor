@@ -836,6 +836,15 @@ must compose that existing control-record route and the active-record
 projection seed, not import trace values. `$C2D9BA` and its `$C45A94/$C45A96`
 input-selection callbacks are a separate enabled/fallback route.
 
+`default_scene_render_pass.{c,h}` now makes that bounded composition callable:
+it resolves the caller-owned active record once, executes the default
+`$C2DB18` cache route, then feeds its `$C45BD8` result and the same record to
+the existing `$C1C54E -> $C279D0` page pipeline. Its contract reaches the
+renderer ready route with the run075 matrix oracle and rejects alternate
+control-record selections explicitly. It is not wired into `game.c`: source
+page selection, palette publication, and the parent-update/outer-loop cadence
+are still required before a normal presentation can be scheduled.
+
 `outer_loop_child.{c,h}` now composes the complete observed
 `$C1612C-$C16283` packet behind explicit caller-owned OS boundaries.  It
 performs `WaitBOVP`, publishes the indexed `$C182BA/$C182C2` pair, and invokes

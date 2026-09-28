@@ -28,3 +28,8 @@ This is the matrix consumed by the established run075 frame-384 projection
 contract. It validates the existing default C route as the dynamic matrix
 producer for that pass; it does not establish a normal C scheduler or permit
 captured values in runtime code.
+
+`default_scene_render_pass.{c,h}` composes this default route with the later
+same-active-record `$C1C54E -> $C279D0` handoff. Its contract checks the
+run075 matrix oracle and the renderer's ready-side initialization, while
+keeping page selection, palette publication, and parent cadence caller-owned.
