@@ -6,6 +6,40 @@
 
 enum { START_FRAME = 200 };
 
+static int initialize_viewport_callback_state(FA18Game *game) {
+    if (!game) return -1;
+    for (unsigned colour = 0; colour < FA18_VIEWPORT_PALETTE_WORDS; ++colour) {
+        const uint16_t register_word = (uint16_t)(UINT16_C(0x0180) + colour * 2u);
+        game->viewport_copper_bytes[colour * 4u] = (uint8_t)(register_word >> 8);
+        game->viewport_copper_bytes[colour * 4u + 1u] = (uint8_t)register_word;
+    }
+    game->viewport_copper_bytes[FA18_VIEWPORT_PALETTE_WORDS * 4u] = 0xff;
+    game->viewport_copper_bytes[FA18_VIEWPORT_PALETTE_WORDS * 4u + 1u] = 0xff;
+    game->viewport_copper_bytes[FA18_VIEWPORT_PALETTE_WORDS * 4u + 2u] = 0xff;
+    game->viewport_copper_bytes[FA18_VIEWPORT_PALETTE_WORDS * 4u + 3u] = 0xfe;
+    game->viewport_copper_stream = (FA18CopperMutableInstructionStream){
+        game->viewport_copper_bytes, sizeof game->viewport_copper_bytes
+    };
+    return fa18_initialize_viewport_palette_buffer(&game->exe,
+                                                   &game->viewport_palette_buffer);
+}
+
+static int advance_viewport_callback(FA18Game *game) {
+    FA18ViewportModeBindings bindings;
+    FA18ViewportModeStep step;
+
+    if (!game) return -1;
+    bindings = (FA18ViewportModeBindings){
+        0, game->viewport_left_pointer_table, game->viewport_right_pointer_table,
+        2, &game->viewport_palette_buffer
+    };
+    /* The registered `$C1718E` callback has one counted entry per run075
+     * replay frame. Its pointer publication is retained as opaque state here;
+     * the future two-page owner supplies the actual table payloads. */
+    return fa18_advance_viewport_mode(&game->viewport_mode, &bindings, &game->exe,
+                                      &game->viewport_copper_stream, 1, &step);
+}
+
 static int initialize_scene_entry(void *context) {
     FA18Game *game = context;
     if (!game) return -1;
@@ -46,6 +80,12 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
     }
     if (fa18_initialize_scene_renderer_defaults(&game->scene_renderer_defaults) != 0) {
         fputs("Cannot initialize source scene renderer defaults\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
+    if (initialize_viewport_callback_state(game) != 0) {
+        fputs("Cannot initialize source viewport callback state\n", stderr);
         fa18_hunks_free(&game->exe);
         fa18_disk_close(&game->disk);
         return 0;
@@ -177,6 +217,7 @@ int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,
             game->scene_entry_armed = 1;
         }
     }
+    if (advance_viewport_callback(game) != 0) return -1;
     fa18_menu_flow_finish_presented_frame(&game->menu_flow, &game->video);
     ++game->frame;
     return 0;

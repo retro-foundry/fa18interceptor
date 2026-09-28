@@ -845,6 +845,15 @@ control-record selections explicitly. It is not wired into `game.c`: source
 page selection, palette publication, and the parent-update/outer-loop cadence
 are still required before a normal presentation can be scheduled.
 
+`game.c` now invokes the bounded `$C1718E` viewport-mode tail once per replay
+frame, matching the counted run075 callback cadence. It owns the mutable
+COLOR00--15 instruction stream and source Hunk-21 palette buffer, so the
+normal scene-entry transition advances its current/target/countdown state
+without any frame-number branch. The `$C182BA/$C182C2` pointer publication is
+still deliberately opaque in this owner: the real two-page pointer payload
+and outer-child display publication have not been attached, so this state-only
+step leaves the frame output unchanged.
+
 `outer_loop_child.{c,h}` now composes the complete observed
 `$C1612C-$C16283` packet behind explicit caller-owned OS boundaries.  It
 performs `WaitBOVP`, publishes the indexed `$C182BA/$C182C2` pair, and invokes
@@ -891,7 +900,7 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-279 files, `ctest` passes 148/148, and frame parity remains 192 exact frames
+279 files, `ctest` passes 149/149, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 

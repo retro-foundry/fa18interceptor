@@ -17,6 +17,7 @@
 #include "scene_renderer_defaults.h"
 #include "post_input_followup.h"
 #include "scene_render_fixture.h"
+#include "viewport_palette.h"
 #include "replay.h"
 #include "video.h"
 
@@ -36,6 +37,14 @@ typedef struct {
     FA18SceneInitializationState scene_initialization;
     FA18PostInputFollowupState post_input_followup;
     FA18ViewportModeState viewport_mode;
+    /* Native mutable counterpart of the callback-owned COLOR00--15 stream.
+     * The outer-view pointer tables are intentionally unbound until the real
+     * two-page owner is composed. */
+    uint8_t viewport_copper_bytes[FA18_VIEWPORT_PALETTE_WORDS * 4u + 4u];
+    FA18CopperMutableInstructionStream viewport_copper_stream;
+    FA18ViewportPaletteBuffer viewport_palette_buffer;
+    uint32_t viewport_left_pointer_table[2];
+    uint32_t viewport_right_pointer_table[2];
     uint8_t scene_entry_armed;
     uint8_t scene_entry_complete;
     FA18MenuRecord menu_records[FA18_MENU_TEXT_SELECTORS];
