@@ -49,4 +49,9 @@ int fa18_finish_scene_placement_record(
     const FA18ScenePlacementBuilderTailInput *input,
     FA18ScenePlacementBuilderTailResult *result);
 
+typedef int (*FA18ScenePlacementDescriptorResolve)(void *, uint8_t, uint32_t *);
+typedef struct { const uint8_t *workspace_item; const FA18ScenePlacementWorkInput *work; FA18ScenePlacementBuilderTailInput tail; FA18ScenePlacementDescriptorResolve resolve; void *context; } FA18ScenePlacementBuildInput;
+/* Compose the observed direct header/work/tail route into one 24-byte record. */
+int fa18_build_scene_placement_record(const FA18ScenePlacementBuildInput *, uint8_t[FA18_SCENE_PLACEMENT_BYTES], FA18ScenePlacementBuilderTailResult *);
+
 #endif

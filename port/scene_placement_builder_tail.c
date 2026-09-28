@@ -1,5 +1,7 @@
 #include "scene_placement_builder_tail.h"
 
+#include <string.h>
+
 #include "hunk.h"
 
 static int32_t asr_long(int32_t value, unsigned count) {
@@ -85,4 +87,23 @@ int fa18_finish_scene_placement_record(
     result->shift_count = shift;
     result->next_cycle_byte = cycle == 0 ? 3u : (uint8_t)(cycle - 1u);
     return 0;
+}
+
+int fa18_build_scene_placement_record(const FA18ScenePlacementBuildInput *input,
+                                      uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
+                                      FA18ScenePlacementBuilderTailResult *result) {
+    FA18ScenePlacementHeader header;
+    FA18ScenePlacementBuilderTailInput tail;
+    uint32_t descriptor;
+    int32_t work[3];
+    if (!input || !bytes || !input->workspace_item || !input->work || !input->resolve ||
+        fa18_decode_scene_placement_workspace_header(input->workspace_item, &header) ||
+        input->resolve(input->context, header.descriptor_index, &descriptor) ||
+        fa18_build_scene_placement_work(input->work, work)) return -1;
+    memset(bytes, 0, FA18_SCENE_PLACEMENT_BYTES);
+    write_word(bytes, header.selector_word);
+    write_long(bytes + 2, descriptor);
+    tail = input->tail;
+    memcpy(tail.coordinate_work, work, sizeof work);
+    return fa18_finish_scene_placement_record(bytes, &tail, result);
 }

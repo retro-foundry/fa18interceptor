@@ -2,6 +2,7 @@
 
 #include <assert.h>
 #include <string.h>
+static int resolve(void *context,uint8_t index,uint32_t *reference){(void)context;if(index!=0x6e)return -1;*reference=0x00c22408;return 0;}
 
 int main(void) {
     uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES] = {0, 0x40};
@@ -28,5 +29,9 @@ int main(void) {
         0, 0, 0, 0, 0, 0, 0, 0}, sizeof bytes));
     input.magnitude[2] = 0x1e0;
     assert(fa18_finish_scene_placement_record(bytes, &input, &result) == -1);
+    input.magnitude[2] = 96;
+    FA18ScenePlacementBuildInput build={ (uint8_t[]){0,0x6e,8,0,8,0}, &work_input, input, resolve, 0 };
+    assert(fa18_build_scene_placement_record(&build,bytes,&result)==0);
+    assert(bytes[0]==0x6e && bytes[1]==7 && !memcmp(bytes+2,(uint8_t[]){0,0xc2,0x24,8},4));
     return 0;
 }
