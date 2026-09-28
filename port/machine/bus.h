@@ -18,8 +18,13 @@ void fa18_bus_line(FA18Machine *m, int vpos, int64_t line_start);
  * (1 = the step uses the bus, 0 = idle). Returns the CPU cycle it ends. */
 int64_t fa18_bus_blit(int64_t start, const uint8_t *diagram, int steps_per_word, int64_t words);
 
-/* A new instruction starts; the next access is its opcode fetch. */
+/* Accesses restart (exception processing, chipset service). */
 void fa18_bus_instruction(void);
+/* The instruction at `pc` starts; the next access is its opcode fetch. */
+void fa18_bus_begin(uint32_t pc);
+/* The previous instruction has completed and execution continues at
+ * `pc`: charge a jump's deferred fetches. Called before chipset service. */
+void fa18_bus_finish(uint32_t pc);
 /* One CPU word access at `address`: charges its wait. */
 void fa18_bus_access(uint32_t address);
 /* A program word fetch at `address` (opcode or extension word). */

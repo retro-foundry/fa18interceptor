@@ -65,6 +65,7 @@ typedef struct {
     FA18Cia cia[2];
     uint16_t joy0dat, joy1dat, pot;
     int mouse_x, mouse_y;
+    int mouse_dx, mouse_dy; /* motion not yet seen by the mouse counters */
     int mouse_left, mouse_right, joy_fire; /* 1 = pressed */
     uint8_t keyboard_queue[64];
     int keyboard_head, keyboard_tail, keyboard_cooldown;

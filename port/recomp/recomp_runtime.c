@@ -148,6 +148,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
     (void)pc;
     for (;;) {
         int before, r;
+        fa18_bus_finish(REG_PC);
         fa18_bus_instruction();
         if (fa18_machine_service()) break;
         fa18_bus_instruction();
@@ -162,7 +163,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         /* EXIT_INTERP at a due chipset event resumes after servicing. */
         if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) break;
     }
-    fa18_bus_instruction(); /* the interpreter's opcode fetch follows */
+    fa18_bus_begin(REG_PC); /* the interpreter's opcode fetch follows */
     trace_pc(REG_PC);
     if (enabled_flag) {
         int f = fold(REG_PC);

@@ -34,6 +34,12 @@ static int current_vpos;
 static int64_t current_line_start; /* CPU cycles */
 static int access_index;           /* bus accesses so far in this instruction */
 static uint32_t fetch_next;        /* where sequential program fetch continues */
+static int fetches;                /* program fetches of the current instruction */
+static int lead;                   /* internal cycles before its first access */
+static uint8_t lead_table[0x10000];
+static int jumping;                /* the current instruction changes the flow */
+static uint32_t jump_pc;           /* ... from here */
+static int jump_fetches;           /* its program fetches, not yet charged */
 static int eclock_phase;
 static int copper_carry; /* Copper fetches left over from the previous line */
 
@@ -43,14 +49,18 @@ static int copper_carry; /* Copper fetches left over from the previous line */
 static uint8_t blit_timeline[BLIT_TIMELINE_MAX];
 static int64_t blit_first, blit_count;
 
+static void build_lead_table(void);
+
 void fa18_bus_reset(void) {
     const char *phase = getenv("FA18_ECLOCK_PHASE");
     memset(line_dma, 0, sizeof line_dma);
     access_index = 0;
+    jumping = 0;
     copper_carry = 0;
     fetch_next = 0xFFFFFFFFu;
     blit_first = blit_count = 0;
     eclock_phase = phase ? atoi(phase) : 0;
+    build_lead_table();
 }
 
 static int dma_owned(int64_t cck) {
@@ -152,7 +162,7 @@ int64_t fa18_bus_blit(int64_t start, const uint8_t *diagram, int steps_per_word,
 /* ---- CPU accesses --------------------------------------------------------- */
 
 static int64_t access_time(void) {
-    return fa18_machine_now() + 4 * access_index;
+    return fa18_machine_now() + lead + 4 * access_index;
 }
 
 int64_t fa18_bus_now(void) {
@@ -161,6 +171,136 @@ int64_t fa18_bus_now(void) {
 
 void fa18_bus_instruction(void) {
     access_index = 0;
+    lead = 0;
+}
+
+static int64_t slot_wait(uint32_t a, int64_t t);
+
+/* ---- where an instruction's accesses fall -------------------------------- */
+
+/* Internal cycles before an instruction's first bus access, by opcode (the
+ * 68000's microcycle order, e.g. "n np np" for a taken branch). Accesses
+ * then follow four cycles apart. 255 marks the conditional branches, whose
+ * order depends on whether they are taken. */
+enum { LEAD_BCC = 255, LEAD_DBCC = 254 };
+
+static int ea_lead(int ea) {
+    int mode = (ea >> 3) & 7, reg = ea & 7;
+    if (mode == 4) return 2;                            /* -(An): n nr */
+    if (mode == 6 || (mode == 7 && reg == 3)) return 2; /* (d8,An,Xn), (d8,PC,Xn): n np nr */
+    return 0;
+}
+
+static void build_lead_table(void) {
+    int op;
+    for (op = 0; op < 0x10000; op++) {
+        int ea = op & 0x3F, mode = (ea >> 3) & 7, reg = ea & 7, l = 0;
+        switch (op >> 12) {
+        case 0x6:
+            l = (op & 0xFF00) == 0x6100 ? 2 : LEAD_BCC; /* BSR: n nS ns np np */
+            break;
+        case 0x5:
+            if ((op & 0xF0F8) == 0x50C8) l = LEAD_DBCC;
+            else l = ea_lead(ea);
+            break;
+        case 0x4:
+            if ((op & 0xFF80) == 0x4E80) { /* JSR, JMP */
+                if (mode == 5 || (mode == 7 && (reg == 0 || reg == 2))) l = 2;
+                else if (mode == 6 || (mode == 7 && reg == 3)) l = 6;
+            } else if ((op & 0xF1C0) == 0x41C0 || (op & 0xFFC0) == 0x4840) { /* LEA, PEA */
+                if (mode == 6 || (mode == 7 && reg == 3)) l = 2;
+            } else if ((op & 0xFB80) != 0x4880 && (op & 0xFFF0) != 0x4E70 && (op & 0xFFF0) != 0x4E40 &&
+                       (op & 0xFFF0) != 0x4E50 && (op & 0xFFF0) != 0x4E60) {
+                l = ea_lead(ea); /* not MOVEM, TRAP, LINK/UNLK, MOVE USP, RTS etc. */
+            }
+            break;
+        case 0x1: case 0x2: case 0x3: /* MOVE: the source field */
+        case 0x0: case 0x8: case 0x9: case 0xB: case 0xC: case 0xD:
+            l = ea_lead(ea);
+            break;
+        case 0xE:
+            if ((op & 0xC0) == 0xC0) l = ea_lead(ea); /* memory shifts */
+            break;
+        default: break;
+        }
+        lead_table[op] = (uint8_t)l;
+    }
+}
+
+static int condition(int cc) {
+    switch (cc & 15) {
+    case 0: return 1;
+    case 1: return 0;
+    case 2: return COND_HI() != 0;
+    case 3: return COND_LS() != 0;
+    case 4: return COND_CC() != 0;
+    case 5: return COND_CS() != 0;
+    case 6: return COND_NE() != 0;
+    case 7: return COND_EQ() != 0;
+    case 8: return COND_VC() != 0;
+    case 9: return COND_VS() != 0;
+    case 10: return COND_PL() != 0;
+    case 11: return COND_MI() != 0;
+    case 12: return COND_GE() != 0;
+    case 13: return COND_LT() != 0;
+    case 14: return COND_GT() != 0;
+    default: return COND_LE() != 0;
+    }
+}
+
+/* A jump's program fetches: the 68000 ends a change of flow by refilling
+ * its two-word prefetch queue at the target ("... np np"), after any stack
+ * accesses; only words beyond the first two of the instruction are fetched
+ * from the jump itself. They are charged once the target is known, at the
+ * start of the next instruction, at the times they happened. */
+void fa18_bus_finish(uint32_t target) {
+    int n, k;
+    int64_t end;
+    if (!jumping) return;
+    jumping = 0;
+    if (!fa18_bus_timing) return;
+    n = (jump_fetches > 2 ? jump_fetches - 2 : 0) + 2;
+    end = fa18_machine_now();
+    for (k = 0; k < n; k++) {
+        uint32_t a = k < n - 2 ? jump_pc : target;
+        int64_t wait = slot_wait(a, end - 4 * (n - k));
+        if (wait > 0) {
+            USE_CYCLES((int)wait);
+            end += wait;
+        }
+    }
+    fetch_next = target + 4;
+}
+
+static int is_jump(int op) {
+    if ((op & 0xF000) == 0x6000) {
+        if ((op & 0xFE00) == 0x6000) return 1; /* BRA, BSR */
+        return condition(op >> 8);
+    }
+    if ((op & 0xF0F8) == 0x50C8) /* DBcc: loops while false and the counter has not run out */
+        return !condition(op >> 8) && (REG_D[op & 7] & 0xFFFF) != 0;
+    if ((op & 0xFF80) == 0x4E80) return 1; /* JSR, JMP */
+    return op == 0x4E75 || op == 0x4E73 || op == 0x4E77; /* RTS, RTE, RTR */
+}
+
+/* An instruction at `pc` starts. */
+void fa18_bus_begin(uint32_t pc) {
+    int op = fa18_bus_read16(pc), l;
+    fa18_bus_finish(pc);
+    access_index = 0;
+    fetches = 0;
+    l = lead_table[op];
+    if (l == LEAD_BCC) {
+        /* Taken: n np np. Not taken: nn np (np). */
+        l = condition(op >> 8) ? 2 : 4;
+    } else if (l == LEAD_DBCC) {
+        /* Loops back: n np np; condition true: n n np np. */
+        l = condition(op >> 8) ? 4 : 2;
+    }
+    lead = l;
+    jumping = is_jump(op);
+    jump_pc = pc;
+    jump_fetches = 0;
 }
 
 static int is_chip_bus(uint32_t a) {
@@ -173,8 +313,58 @@ static int blitter_holds(int64_t cck) {
     return i >= 0 && i < blit_count && blit_timeline[i];
 }
 
+void fa18_blitter_delayed(int cycles);
+
+/* The CPU takes the blitter's cycle `cck`: the rest of the blit moves one
+ * cycle later. */
+static void blitter_yield(int64_t cck) {
+    int64_t i = cck - blit_first;
+    if (blit_count >= BLIT_TIMELINE_MAX) return;
+    memmove(blit_timeline + i + 1, blit_timeline + i, (size_t)(blit_count - i));
+    blit_timeline[i] = 0;
+    blit_count++;
+    fa18_blitter_delayed(2);
+}
+
+/* Cycles a chip-bus access starting at CPU cycle `t` waits for its slot;
+ * with `steal`, a cycle the CPU takes from the blitter is taken for good. */
+static int64_t slot_wait_steal(uint32_t a, int64_t t, int steal) {
+    int64_t cck;
+    if (!is_chip_bus(a)) return 0;
+    cck = (t + 1) >> 1;
+    if (fa18_machine->dmacon & 0x0400) {
+        while (dma_owned(cck) || blitter_holds(cck)) cck++;
+    } else {
+        /* Without BLTPRI the CPU takes a blitter cycle after waiting for the
+         * blitter. UAE (dma_cycle, BLIT_NASTY_CPU_STEAL_CYCLE_COUNT) counts
+         * every waited cycle and delays the blit; its pipelined blitter is
+         * not modelled here, and measured against its traces (bitplane,
+         * area and line blits) the closest fit is: count only blitter-held
+         * cycles, take the third, no delay. FA18_STEAL=mode,limit selects
+         * the variants (mode bit 0: count other DMA, bit 1: delay). */
+        static int mode = -1, limit = 3;
+        int waited = 1;
+        if (mode < 0) {
+            const char *e = getenv("FA18_STEAL");
+            mode = 0;
+            if (e) sscanf(e, "%d,%d", &mode, &limit);
+        }
+        while (dma_owned(cck) || blitter_holds(cck)) {
+            if (!dma_owned(cck) && waited >= limit) {
+                if (steal && (mode & 2)) blitter_yield(cck);
+                break;
+            }
+            if ((mode & 1) || !dma_owned(cck)) waited++;
+            cck++;
+        }
+    }
+    return cck * 2 - t;
+}
+
+static int64_t slot_wait(uint32_t a, int64_t t) { return slot_wait_steal(a, t, 1); }
+
 void fa18_bus_access(uint32_t a) {
-    int64_t t, cck, wait;
+    int64_t t, wait;
     if (!fa18_bus_timing) return;
     t = access_time();
     access_index++;
@@ -186,37 +376,27 @@ void fa18_bus_access(uint32_t a) {
         USE_CYCLES(pre + 6 - 4);
         return;
     }
-    if (!is_chip_bus(a)) return;
-    cck = (t + 1) >> 1;
-    if (fa18_machine->dmacon & 0x0400) {
-        while (dma_owned(cck) || blitter_holds(cck)) cck++;
-    } else {
-        /* Without BLTPRI the blitter yields after the CPU has waited three
-         * of its cycles. */
-        int held = 0;
-        while (dma_owned(cck) || (blitter_holds(cck) && held < 3)) {
-            if (!dma_owned(cck)) held++;
-            cck++;
-        }
-    }
-    wait = cck * 2 - t;
+    wait = slot_wait(a, t);
     if (wait > 4 && getenv("FA18_WAIT_LOG")) {
         int64_t c = (t + 1) >> 1, offset = t - current_line_start;
-        fprintf(stderr, "WAIT %06X t=%lld v=%d h=%lld wait=%lld blit=%lld..%lld dma:", a, (long long)t, current_vpos,
-                (long long)(offset / 2), (long long)wait, (long long)blit_first, (long long)(blit_first + blit_count));
-        for (; c < cck; c++) fprintf(stderr, "%c", dma_owned(c) ? 'D' : blitter_holds(c) ? 'B' : '.');
+        fprintf(stderr, "WAIT %06X t=%lld v=%d h=%lld wait=%lld dma:", a, (long long)t, current_vpos,
+                (long long)(offset / 2), (long long)wait);
+        for (; c < (t + wait + 1) >> 1; c++) fprintf(stderr, "%c", dma_owned(c) ? 'D' : blitter_holds(c) ? 'B' : '.');
         fprintf(stderr, "\n");
     }
     if (wait > 0) USE_CYCLES((int)wait);
 }
 
-/* Program fetch. The 68000 keeps two words prefetched; after a change of
- * flow it refills both, so the first fetch away from the sequential stream
- * costs an extra access. */
+/* A program word fetch (the refill after a jump is charged by
+ * fa18_bus_begin). */
 void fa18_bus_fetch(uint32_t a) {
     if (!fa18_bus_timing) return;
-    if (a != fetch_next) fa18_bus_access(a);
+    if (jumping) {
+        jump_fetches++;
+        return;
+    }
     fa18_bus_access(a);
+    fetches++;
     fetch_next = a + 2;
 }
 

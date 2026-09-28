@@ -234,8 +234,51 @@ void fa18_blitter_busy(FA18Machine *m, const uint8_t *diagram, int steps_per_wor
 
 static int blit_zero = 1;
 
+/* The CPU took a cycle from the running blit (bus.c). */
+void fa18_blitter_delayed(int cycles);
+void fa18_blitter_delayed(int cycles) { blit_end += cycles; }
+
 void fa18_blitter_zero_flag(int zero);
 void fa18_blitter_zero_flag(int zero) { blit_zero = zero; }
+
+/* ---- mouse (UAE inputdevice.c) ------------------------------------------ */
+
+/* Recorded mouse motion does not reach the counters at once. It is held as a
+ * pending delta and released when the game reads JOYxDAT, in proportion to
+ * the lines since the previous read (at least one count), and by one count
+ * at each vertical blank: UAE's readinput/mouseupdate/getvelocity. */
+static int64_t total_lines, last_input_line;
+
+static int mouse_velocity(int *delta, int pct) {
+    int value = *delta, v;
+    if (pct > 1000) pct = 1000;
+    if (pct < 0) pct = 0;
+    v = value * pct / 1000;
+    if (!v) {
+        if (value < -FA18_PAL_LINES / 2) v = -2;
+        else if (value < 0) v = -1;
+        else if (value > FA18_PAL_LINES / 2) v = 2;
+        else if (value > 0) v = 1;
+    }
+    *delta -= v;
+    return v;
+}
+
+static void mouse_update(FA18Machine *m, int pct) {
+    m->mouse_x = (m->mouse_x + mouse_velocity(&m->mouse_dx, pct)) & 0xFF;
+    m->mouse_y = (m->mouse_y + mouse_velocity(&m->mouse_dy, pct)) & 0xFF;
+    m->joy0dat = (uint16_t)(m->mouse_y << 8 | m->mouse_x);
+}
+
+static void read_input(FA18Machine *m) {
+    int v, h;
+    int64_t line, diff;
+    fa18_machine_beam(&v, &h);
+    line = total_lines + (v - m->vpos); /* the beam may already be past a line end */
+    diff = line - last_input_line;
+    if (diff > 0) mouse_update(m, diff < 10 ? 0 : (int)(diff * 1000 / FA18_PAL_LINES));
+    last_input_line = line;
+}
 
 uint16_t fa18_custom_read(FA18Machine *m, uint32_t reg) {
     int v, h;
@@ -250,8 +293,12 @@ uint16_t fa18_custom_read(FA18Machine *m, uint32_t reg) {
     case 0x006:
         fa18_machine_beam(&v, &h);
         return (uint16_t)((v & 0xFF) << 8 | (h & 0xFF));
-    case 0x00A: return m->joy0dat;
-    case 0x00C: return m->joy1dat;
+    case 0x00A:
+    case 0x00C:
+        /* Reading moves the mouse counters: not repeatable inside a shadow
+         * comparison. */
+        if (!HARDWARE_BLOCKED()) read_input(m);
+        return reg == 0x00A ? m->joy0dat : m->joy1dat;
     case 0x010: return m->adkcon;
     case 0x012: case 0x014: return 0;
     case 0x016: /* DATLY/DATLX/DATRY/DATRX; DATLY low = right mouse button */
@@ -358,9 +405,27 @@ uint32_t fa18_bus_read32(uint32_t a) {
     return (uint32_t)fa18_bus_read16(a) << 16 | fa18_bus_read16(a + 2);
 }
 
+/* FA18_WATCH=lo-hi (hex): log CPU writes into that range (debugging). */
+static void watch_write(uint32_t a, uint32_t v, int size) {
+    static int init;
+    static uint32_t lo = 1, hi = 0;
+    if (!init) {
+        const char *env = getenv("FA18_WATCH");
+        init = 1;
+        if (env) sscanf(env, "%x-%x", &lo, &hi);
+    }
+    if (a + (uint32_t)size > lo && a < hi) {
+        int vp, h;
+        fa18_machine_beam(&vp, &h);
+        fprintf(stderr, "WATCH frame=%llu v=%d h=%d pc=%06X %06X <- %0*X\n", (unsigned long long)fa18_machine->frame,
+                vp, h, (unsigned)m68k_get_reg(NULL, M68K_REG_PPC), a, size * 2, v);
+    }
+}
+
 void fa18_bus_write8(uint32_t a, uint8_t v) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
+    watch_write(a, v, 1);
     if (a < 0x200000) {
         a &= FA18_CHIP_SIZE - 1;
         LOG_WRITE(a, 1);
@@ -396,6 +461,7 @@ void fa18_bus_write8(uint32_t a, uint8_t v) {
 void fa18_bus_write16(uint32_t a, uint16_t v) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
+    watch_write(a, v, 2);
     if (a < 0x200000) {
         a &= FA18_CHIP_SIZE - 1;
         LOG_WRITE(a, 2);
@@ -460,9 +526,8 @@ void fa18_machine_key(FA18Machine *m, int rawkey, int down) {
 }
 
 void fa18_machine_mouse(FA18Machine *m, int dx, int dy) {
-    m->mouse_x = (m->mouse_x + dx) & 0xFF;
-    m->mouse_y = (m->mouse_y + dy) & 0xFF;
-    m->joy0dat = (uint16_t)(m->mouse_y << 8 | m->mouse_x);
+    m->mouse_dx += dx;
+    m->mouse_dy += dy;
 }
 
 void fa18_machine_button(FA18Machine *m, int button, int down) {
@@ -494,6 +559,7 @@ static void start_line(FA18Machine *m) {
     if (m->vpos == 0) {
         fa18_copper_restart(m);
         fa18_raise_interrupt(m, 5);
+        mouse_update(m, 0); /* UAE inputdevice_vsync */
     }
     /* CIA-A TOD counts the vertical sync pulse, which follows the interrupt
      * by a few lines on PAL. */
@@ -515,6 +581,7 @@ static void advance_line(FA18Machine *m) {
     cia_tod_tick(m, 1);
     keyboard_line(m);
     line_start += FA18_LINE_CYCLES;
+    total_lines++;
     line_started = 0;
     m->vpos++;
     if (m->vpos >= FA18_PAL_LINES) m->vpos = 0;
@@ -707,6 +774,7 @@ int fa18_machine_load_state(FA18Machine *m, const uint8_t *s, size_t size,
     for (i = 0; i < 6; i++) m->bplpt[i] = custom_long(m, 0x0E0 + (uint32_t)i * 4);
     m->vpos = (m->custom[0x004 / 2] & 1) << 8 | m->custom[0x006 / 2] >> 8;
     m->cycle = 0;
+    total_lines = last_input_line = 0;
     line_start = -(int64_t)(m->custom[0x006 / 2] & 0xFF) * 2;
     line_started = 0;
     frame_done = 0;

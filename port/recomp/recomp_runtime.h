@@ -73,11 +73,12 @@ extern int64_t fa18_cycle_origin, fa18_next_event;
  * due (it resumes here after servicing) or the routine was invalidated. */
 #define FA18_EXEC(pc, op)                                                        \
     do {                                                                         \
+        fa18_bus_finish(pc);                                                     \
         if (fa18_cycle_origin - GET_CYCLES() >= fa18_next_event || fa18_recomp_abort) { \
             REG_PC = (pc);                                                       \
             return FA18_EXIT_INTERP;                                             \
         }                                                                        \
-        fa18_bus_instruction();                                                  \
+        fa18_bus_begin(pc);                                                      \
         fa18_bus_fetch(pc); /* the opcode fetch the interpreter makes */         \
         REG_PPC = (pc);                                                          \
         REG_PC = (pc) + 2;                                                       \
