@@ -1326,6 +1326,10 @@ the renderer tables. `renderer_page_setup.{c,h}` ports that private native
 page and exact table layout; its contract passes. It is not yet connected to
 the source callback/timeline that selects and presents it. See
 `analysis/routines/c15db4_renderer_page_setup.md`.
+`FA18Game` now owns this setup at native initialization, matching that the
+source allocation predates restored run075 frame 200. Full validation after
+this integration passes 181/181 contracts and retains the 192 exact-frame
+prefix; the first mismatch remains frame 392 with the same 361 pixels.
 
 ## Standard validation after each stage
 

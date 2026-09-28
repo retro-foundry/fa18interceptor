@@ -90,6 +90,12 @@ int fa18_game_init(FA18Game *game, const char *adf_path) {
         fa18_disk_close(&game->disk);
         return 0;
     }
+    if (fa18_initialize_renderer_page_setup(&game->renderer_page_setup) != 0) {
+        fputs("Cannot initialize native renderer page setup\n", stderr);
+        fa18_hunks_free(&game->exe);
+        fa18_disk_close(&game->disk);
+        return 0;
+    }
     if (initialize_viewport_callback_state(game) != 0) {
         fputs("Cannot initialize source viewport callback state\n", stderr);
         fa18_hunks_free(&game->exe);

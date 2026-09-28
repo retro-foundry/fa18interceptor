@@ -19,6 +19,7 @@
 #include "scene_render_fixture.h"
 #include "viewport_palette.h"
 #include "default_scene_render_pass.h"
+#include "renderer_page_setup.h"
 #include "replay.h"
 #include "video.h"
 
@@ -35,6 +36,10 @@ typedef struct {
     FA18MenuFlow menu_flow;
     FA18SceneEntryRuntime scene_entry_runtime;
     FA18SceneRendererDefaults scene_renderer_defaults;
+    /* `$C15DB4-$C1601E` has already allocated this pending render page before
+     * the restored run075 state at frame 200. Its renderer/presentation
+     * scheduler remains separately owned. */
+    FA18RendererPageSetup renderer_page_setup;
     FA18SceneInitializationState scene_initialization;
     FA18PostInputFollowupState post_input_followup;
     FA18ViewportModeState viewport_mode;
