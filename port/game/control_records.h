@@ -113,4 +113,10 @@ void accumulate_record_position(gaddr record, int shift, int32_t *x, int32_t *y,
  * +$66 angle, and set +$76 from TABLE_76_TARGET. */
 void update_record_76_78(void);
 
+/* While +$66 is positive: below 400, flag the record (+$2 bit 6) once,
+ * sound the alert if it is a plain player record (+$0 bits $1600 = $1000,
+ * +$4 bit 1 clear), and zero +$56; otherwise ease +$56 toward -$40 or $40
+ * (by the whole difference, or half when +$6C >= $6C0). */
+void update_record_56_from_66(void);
+
 #endif

@@ -1,6 +1,7 @@
 /* Control records. */
 #include "control_records.h"
 
+#include "audio.h"
 #include "fixed_math.h"
 #include "globals.h"
 
@@ -377,4 +378,25 @@ void update_record_76_78(void) {
     }
     wr_s16(r + 0x78, next);
     wr_s16(r + 0x76, table_by_magnitude(TABLE_76_TARGET, rd_s16(r + 0x6E)));
+}
+
+void update_record_56_from_66(void) {
+    gaddr r = rd_u32(CURRENT_RECORD);
+    int16_t angle = rd_s16(r + 0x66), target, value;
+    int shift;
+
+    if (angle <= 0) return;
+    if (angle < 400) {
+        uint16_t flags = rd_u16(r + 0x02);
+        if (!(flags & 0x40)) {
+            wr_u16(r + 0x02, (uint16_t)(flags | 0x40));
+            if ((rd_u16(r) & 0x1600) == 0x1000 && !(rd_u8(r + 0x04) & 0x02)) play_alert_tone(15);
+        }
+        wr_u16(r + 0x56, 0);
+        return;
+    }
+    shift = rd_s16(r + 0x6C) >= 0x6C0 ? 1 : 0;
+    target = angle >= 0x3840 ? 0x40 : -0x40;
+    value = rd_s16(r + 0x56);
+    wr_s16(r + 0x56, (int16_t)(value - (int16_t)((int16_t)(value - target) >> shift)));
 }

@@ -35,4 +35,8 @@ gaddr skip_stream_records(gaddr stream);
  * draw, or -1 when nothing needs drawing. */
 int16_t display_value_to_draw(gaddr cache, int16_t value);
 
+/* Index of `key` in a sorted word table (count word, then entries), or -1
+ * (after raising error $1C) when it is absent. */
+int16_t find_sorted_word(gaddr table, int16_t key);
+
 #endif

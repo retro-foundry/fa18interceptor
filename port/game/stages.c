@@ -93,3 +93,20 @@ int16_t display_value_to_draw(gaddr cache, int16_t value) {
     wr_u16(cache, (uint16_t)(rd_u16(cache) & 0x7FFF));
     return (int16_t)(cached & 0x7FFF);
 }
+
+int16_t find_sorted_word(gaddr table, int16_t key) {
+    gaddr entries = table + 2;
+    int16_t low = 0, high = (int16_t)(rd_s16(table) >> 1);
+    for (;;) {
+        int16_t mid, entry;
+        if ((int32_t)high - low < 0) {
+            wr_u16(ERROR_CODE, 0x1C);
+            return -1;
+        }
+        mid = (int16_t)((int16_t)((int16_t)(high - low) >> 1) + low);
+        entry = rd_s16(entries + (gaddr)(int32_t)(int16_t)(mid * 2));
+        if (key == entry) return mid;
+        if (key < entry) high = (int16_t)(mid - 1);
+        else low = (int16_t)(mid + 1);
+    }
+}

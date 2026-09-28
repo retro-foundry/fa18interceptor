@@ -133,6 +133,10 @@ const FA18Port fa18_ports[] = {
     {0xC32662, glue_C32662, "draw_small_text", 420},
     {0xC3271A, glue_C3271A, "format_small_hex", 600},
     {0xC32736, glue_C32736, "format_small_hex", 620},
+    /* batch 17: BCD unpack, sorted search, record 56/66 with alert */
+    {0xC259C2, glue_C259C2, "unpack_display_value", 900},
+    {0xC1D4E4, glue_C1D4E4, "find_sorted_word", 200},
+    {0xC13A8E, glue_C13A8E, "update_record_56_from_66", 200},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -21,4 +21,7 @@ gaddr format_decimal(gaddr end, uint32_t value, int count, int keep_zeros);
  * field + offset + width, blanking leading zeros. */
 void print_number(gaddr field, int16_t offset, uint32_t value, int8_t width);
 
+/* DISPLAY_VALUE = the eight packed BCD digits of DISPLAY_VALUE_BCD. */
+void unpack_display_value(void);
+
 #endif

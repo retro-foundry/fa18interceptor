@@ -235,4 +235,9 @@
 #define ERROR_CODE         0xC4599Eu /* word: set to $46 on a misaligned glyph */
 #define TEXT_ALWAYS        0xC45793u /* byte: draw text even while a context runs */
 
+/* ---- sounds ($C17B2C, $C1803C) ------------------------------------------- */
+#define SOUND_VOICES       0xC0A438u /* long[]: voice record of each sound */
+#define SOUND_FLAGS        0xC45B5Bu /* byte: bit 2 = alert tone enabled */
+#define SOUND_ALERT        5         /* the alert tone's sound number */
+
 #endif

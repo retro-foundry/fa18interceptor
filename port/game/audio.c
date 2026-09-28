@@ -84,3 +84,24 @@ void free_voice(int channel) {
 }
 
 void stop_channel_2(void) { free_voice(2); }
+
+void play_sound(int sound, int channel, int32_t volume) {
+    gaddr entry = SOUND_VOICES + (gaddr)(sound * 4);
+    if (!rd_u32(entry)) return;
+    free_voice(channel);
+    wr_u32(rd_u32(entry) + VOICE_VOLUME, (uint32_t)volume << 16);
+    wr_u32(VOICE_SLOTS + (gaddr)(channel * 4), rd_u32(entry));
+    clear_voice_interrupt(channel);
+}
+
+void play_alert_tone(int32_t volume) {
+    gaddr voice;
+    if (!(rd_u8(SOUND_FLAGS) & 0x04)) return;
+    if (rd_u16(SCRIPT_RECORD) != rd_u16(VIEW_RECORD)) return;
+    voice = rd_u32(SOUND_VOICES + 4 * SOUND_ALERT);
+    if (!voice) return;
+    wr_u32(voice + VOICE_PERIOD, 0x1360000u); /* period 310 */
+    wr_u32(voice + 0x18, 0xFFFE0000u);        /* pitch slide -2 per tick */
+    wr_u32(voice + 0x10, 1);
+    play_sound(SOUND_ALERT, 2, volume);
+}

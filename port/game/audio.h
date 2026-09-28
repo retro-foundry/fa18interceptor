@@ -45,4 +45,12 @@ void free_voice(int channel);
 /* Stop whatever channel 2 is playing. */
 void stop_channel_2(void);
 
+/* Play sound `sound` on `channel` at `volume` (0-63): its voice record
+ * takes over the channel. Nothing happens for a sound without a record. */
+void play_sound(int sound, int channel, int32_t volume);
+
+/* The alert tone on channel 2, when enabled and the view shows the scripted
+ * record. */
+void play_alert_tone(int32_t volume);
+
 #endif

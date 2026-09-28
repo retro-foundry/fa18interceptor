@@ -134,4 +134,9 @@ int glue_C32662(void);
 int glue_C3271A(void);
 int glue_C32736(void);
 
+/* batch 17: BCD unpack, sorted search, record 56/66 with alert */
+int glue_C259C2(void);
+int glue_C1D4E4(void);
+int glue_C13A8E(void);
+
 #endif

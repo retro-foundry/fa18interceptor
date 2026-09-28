@@ -46,3 +46,16 @@ void print_number(gaddr field, int16_t offset, uint32_t value, int8_t width) {
     /* Packed BCD printed as hex digits is the decimal number. */
     format_hex(field + (gaddr)(int32_t)offset, rd_u32(DISPLAY_VALUE_BCD), width);
 }
+
+void unpack_display_value(void) {
+    static const uint32_t place_value[8] = {10000000u, 1000000u, 100000u, 10000u,
+                                            1000u, 100u, 10u, 1u};
+    uint32_t value = 0;
+    int i;
+    for (i = 0; i < 8; i++) {
+        uint8_t pair = rd_u8(DISPLAY_VALUE_BCD + (gaddr)(i / 2));
+        int digit = (i & 1) ? (pair & 15) : (pair >> 4);
+        value += (uint32_t)digit * place_value[i];
+    }
+    wr_u32(DISPLAY_VALUE, value);
+}
