@@ -11,8 +11,8 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  The configured suite contains **138** contracts;
-the last full run passed 138/138.
+pixels; bbox x=7..318, y=101..199).  The configured suite contains **139** contracts;
+the last full run passed 139/139.
 
 ## Latest root-owner work
 
@@ -106,6 +106,13 @@ forming the `$C22188` identity. Flagged entries retain the caller-owned prior
 tail now carries `$C459BC` exactly from the signed placement-map byte to the
 next ordinal. Top-level live-term ownership remains unported. Do not schedule
 the renderer from a presentation frame or import a captured page.
+
+`outer_update_loop.{c,h}` now ports `$C15D80-$C15DB3` as the source-level
+owner above the parent update: it retains the one-time acquire/delay prefix,
+then one explicit iteration of OwnBlitter, DisownBlitter, `$C0EFD4`, display
+wait, and `$C1612C`. The caller still owns loop repetition at the original
+back-edge and every unresolved child body, so this does not infer a
+presentation-frame scheduler or wire incomplete parent work into `game.c`.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
