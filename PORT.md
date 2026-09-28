@@ -17,7 +17,94 @@ The verified Amiga plane geometry is four 8,000-byte planes, 40 bytes per row,
 horizontally at x=40..679, y=16..215. These are distinct dimensions. The host
 PNG crop is an oracle, not game source data.
 
-## Work sequence
+## Strategy change (2026-09-28)
+
+The previous sequence ported one bounded routine slice at a time, bottom-up.
+After about 400 C modules and 208 passing contract tests, `game.c` still does
+not schedule the real renderer and frame 402 renders zero native pixels. Each
+slice was correct on its own, but nothing required the slices to be wired
+together, so every new slice revealed another missing owner. That approach is
+replaced by **translate everything first, then make it readable**:
+
+1. **Stage A: whole-program mechanical translation.** A generator
+   (`tools/recomp/`) reads the original CODE hunks via the existing hunk loader
+   and emits C for *every* reachable instruction. It targets a CPU-state struct
+   (`D0-D7`, `A0-A7`, `SR`/CCR, `PC`) and a flat, big-endian 24-bit address
+   space. Each original routine becomes one C function named by its runtime
+   address (`fn_C1CA82`). Branches become `goto` labels. `JSR`/`BSR` to known
+   entries become C calls. Discovery uses recursive descent from the hunk entry
+   point, every PC observed in the sealed traces, and every relocated pointer
+   into CODE. The generator uses one instruction-semantics table, checked
+   against Capstone decoding and the existing P-code exports.
+   This is a direct translation of the original instructions, consistent with
+   the rule that the P-code/assembly is the authority. It is not emulator
+   output.
+2. **Unknown-code fallback.** An indirect jump or call to an address the
+   generator did not discover goes to a small in-process 68000 interpreter
+   covering the same instruction table. The fallback logs the address. The next
+   generator run adds it as an entry. Target: fallback hits reach zero on each
+   sealed scenario. Every logged hit is a coverage fact for the RE plan.
+3. **Stage B: Amiga machine layer (`port/machine/`).** Reads and writes to
+   `$DFF000` custom registers and to the CIAs are routed to a minimal chipset
+   model:
+   - blitter (area, line and fill modes, executed synchronously when
+     `BLTSIZE` is written);
+   - Copper list interpretation at frame start and at the WAIT positions the
+     game uses;
+   - bitplane/palette fetch into the 320x200 chunky SDL2 framebuffer;
+   - VERTB/COPER/BLIT interrupt delivery at frame boundaries;
+   - CIA timers and keyboard;
+   - Paula audio later.
+
+   Game `JSR -xxx(A6)` library calls are replaced by C functions implementing
+   only the LVOs the game actually uses. `scripts/` builds that inventory from
+   the traces first. Kickstart ROM code is never translated.
+4. **Stage C: frame parity.** Run the translated program from the run075
+   canonical restore (RAM, registers and chipset state loaded from the sealed
+   snapshot) with the recorded `E9K_INPUT_V1` stream. Compare every frame with
+   the Engine9000 oracle. On a mismatch, compare per-frame chip-RAM and custom-
+   register write logs and fix the **first** divergence. Once restore-based
+   parity holds, add a cold start from the ADF and hunk loader.
+   **The one progress metric is the first diverging frame of each sealed run.**
+   Work that does not move it is deferred.
+5. **Stage D: readable C.** With full-frame parity in place, replace generated
+   functions one at a time with hand-written C. Replacements take the form of
+   native structs, names and fixed-point types. Every replacement is
+   differentially tested: the generated function and its replacement run on
+   the same captured machine state, and memory, registers and chipset writes
+   must match. The run must still reach the same first-divergence frame. The
+   existing hand-ported modules in `port/` become Stage D replacements, adopted
+   where their contract tests and a differential run agree. They are not
+   deleted.
+6. **Full-game coverage.** Extend parity to the other sealed scenarios
+   (training, free flight, missions, combat, landing, crashes, map, pilot log).
+   Fallback-interpreter hits and remaining generated functions are the
+   measured backlog.
+
+### First milestone
+
+Generate C for the renderer call tree reachable from the frame-402 path
+(`$C2DB18 -> $C1C54E -> $C279D0` down to `$C2FF48` and the `$C2FA7E` line
+emitter). Add the synchronous blitter and bitplane fetch. Run from the run075
+frame-392 restore. Done when `scripts/render_native_visual.py --frame 402`
+reports nonblack native pixels from the translated path. Then widen to the
+whole program.
+
+### Rules that change
+
+- A generated function is a legitimate port of the original routine. The old
+  rule that forbade placeholders still applies to hand-invented behavior, not to
+  mechanical translation.
+- Snapshots may seed native RAM and chipset state during Stages A-C. Emulator
+  frames remain comparison oracles only. They are never copied into native
+  presentation.
+- Handoffs are one page: goal, current first-divergence frame per run, and the
+  single next blocker. History belongs in git and in `analysis/`.
+
+## Previous work sequence (superseded 2026-09-28)
+
+Kept for its evidence references. Steps 2-4 below are covered by Stages B-C
+above, and step 5's per-routine porting becomes Stage D.
 
 1. **Seal and bound run075.** Keep `captures/run075` immutable. Use
    `scripts/render_port_oracle.py` to render exact host-scheduled frames from

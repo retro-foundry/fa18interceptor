@@ -1,6 +1,6 @@
 # Reverse-engineering completion plan
 
-Updated: 2026-09-25. Authority: preserved 1988 disk, sealed captures, canonical
+Updated: 2026-09-28. Authority: preserved 1988 disk, sealed captures, canonical
 runtime snapshots, and the pinned Engine9000 v0.62-alpha Amiga core. The target
 is readable, byte-exact 68000 game source and a behaviorally explained game,
 including the renderer's world representation and its detail-selection rule.
@@ -174,7 +174,29 @@ this scope decision remains in force.
   The completion report must state byte, execution, semantic, and scenario
   coverage separately.
 
+## Native port strategy (2026-09-28)
+
+The C port now starts with a whole-program mechanical 68000-to-C translation.
+The translated program runs on a minimal Amiga chipset layer, and hand-written
+readable C replaces generated functions one at a time under differential tests
+(see `PORT.md`, "Strategy change"). This feeds the reverse-engineering gates
+above:
+
+- The generator's recursive-descent discovery and the fallback interpreter's
+  logged hits turn into concrete code/data evidence for the 55,280
+  unclassified CODE bytes (gate 1).
+- Frame parity on each sealed scenario is a whole-program behavioral oracle
+  (gates 2 and 5). A routine that differential tests show can be replaced
+  without changing the first-divergence frame has a proved port contract.
+- Byte-exact assembly reconstruction and naming continue independently. The
+  port no longer waits for either of them.
+
 ## Immediate next queue
+
+0. Port milestone first: translated renderer path draws nonblack native pixels
+   at run075 frame 402 (`PORT.md`, "First milestone"). Items 1-5 below
+   continue in parallel as RE work, but they are no longer prerequisites for
+   the port.
 
 1. Keep `python scripts/extract_run041_projection_oracle.py` in the validation
    pass for the accepted `$C2EC90` and rejected `$C2EC9C` paths. The accepted
