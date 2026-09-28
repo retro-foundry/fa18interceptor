@@ -20,6 +20,7 @@ typedef struct {
     const uint8_t *active_record;
     size_t active_record_size;
     int32_t origin[3];
+    int32_t negated_companion[3];
     FA18TerrainSelectorOriginMatrixPrepare prepare_matrix;
     void *prepare_context;
 } FA18TerrainSelectorOriginDirectState;
@@ -30,9 +31,10 @@ typedef enum {
     FA18_TERRAIN_SELECTOR_ORIGIN_UNPORTED_MATRIX_ROUTE
 } FA18TerrainSelectorOriginResult;
 
-/* `$C29042-$C291D3`: invoke the `$C2DAF2` caller boundary, apply the source
- * gates, and publish the direct record triple.  `result` distinguishes the
- * source's no-publish gate exit from its unported matrix/continuation route. */
+/* `$C29042-$C291D3`, then `$C295B6-$C295D0`: invoke the `$C2DAF2` caller
+ * boundary, apply the source gates, publish the direct record triple, and
+ * publish its masked/negated companion. `result` distinguishes the source's
+ * no-publish gate exit from its unported matrix/continuation route. */
 int fa18_publish_terrain_selector_origin_direct(
     FA18TerrainSelectorOriginDirectState *state,
     FA18TerrainSelectorOriginResult *result);

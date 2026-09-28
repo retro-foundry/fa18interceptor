@@ -44,10 +44,11 @@ it does not create the missing parent update owner or schedule presentation.
 0`, `C457AE == 0`, `C457AD != 0`, and `C458AE == 0`, it calls the caller-owned
 `$C2DAF2` matrix-preparation boundary, reads the active record `+$14/+1C`,
 retains the previous middle component, applies the exact signed-word floor
-`(+$4E + 7) << 8`, and publishes the resulting selector triple.  Its adapter
-can satisfy `$C1C6BC`'s origin-update callback only for that proven lane.  The
-matrix-table route and `$C291D4` continuation fail explicitly; this slice is
-not scheduled by `game.c`, so normal frame 402 remains black/unverified.
+`(+$4E + 7) << 8`, then takes the common `$C295B6` masked/negated-companion
+write after publishing the selector triple. Its adapter can satisfy `$C1C6BC`'s
+origin-update callback only for that proven lane. The matrix-table route and
+`$C291D4` continuation fail explicitly; this slice is not scheduled by
+`game.c`, so normal frame 402 remains black/unverified.
 
 `record_walker_runtime.{c,h}` ports bounded `$C1F6F8-$C1F966`, including
 `$C1F7A0` A1/A2 selection and `$C1F910` negative-selector dispatch.

@@ -35,6 +35,12 @@ int fa18_publish_terrain_selector_origin_direct(
     if (state->origin[1] < floor)
         state->origin[1] = floor;
     state->origin[2] = read_be32(state->active_record + 0x1c);
+    state->negated_companion[0] = (int32_t)(UINT32_C(0) -
+        ((uint32_t)state->origin[0] & UINT32_C(0x003fffff)));
+    state->negated_companion[1] = (int32_t)(UINT32_C(0) -
+        (uint32_t)state->origin[1]);
+    state->negated_companion[2] = (int32_t)(UINT32_C(0) -
+        ((uint32_t)state->origin[2] & UINT32_C(0x003fffff)));
     *result = FA18_TERRAIN_SELECTOR_ORIGIN_DIRECT_PUBLISHED;
     return 0;
 }
