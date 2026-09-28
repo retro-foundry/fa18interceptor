@@ -48,6 +48,20 @@ Current gates after the root work: native build check passes 229 files;
 `ctest` passes 121/121; native parity is unchanged at frames 200--391 exact,
 with the first mismatch at frame 392.
 
+`scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
+boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
+`$C082B0`. The run075 expiry trace proves that `$C28722` consumes mode `$7F`,
+then `$C0924A` consumes the initializer-published stage byte three (Hunk-67
+table-A entry three) after the dispatch returns with `D7=-1`. The native
+composition uses the original Hunk-27 dispatch data, Hunk-67 record table,
+Hunk-16 relocation-backed templates, Hunk-52 descriptor, and Hunk-63 trig
+table; it does not retain captured state. Its new contract uses synthetic
+Hunks to verify ordered direct state, record-14 creation, the negative root
+route, message initialization, and finalization. It is not attached to
+`game.c` yet: the native root-record publisher (including the live type and
+matrix fields read by `$C1C54E`) remains required before this initializer can
+enter the normal rendering scheduler.
+
 ## Next context: required scheduler integration
 
 Do not add a frame-number trigger or captured page to `game.c`. The source
