@@ -25,9 +25,10 @@ the native state waits for the viewport input match, then `$C0FA80` clears the
 caller-owned event flag, sets its auxiliary byte, and records the installed
 `$C10C08` continuation.  `game.c` marks this bounded sequence complete only
 after `$C0FA80`; it does not advance or substitute the unported `$C10C08`
-controller.  The run075 timing stream has only delivered 196 of the source
-mode-$7F delay's 210 ticks by frame 402, so this state correction is not a
-normal-render scheduler or a visual result.
+controller.  The run075 timing stream supplies the 211 decrements that expire
+the source `$00D2` delay at frame 271, then its five later entries reach
+`$C0FA04` at frame 369.  It supplies no further callback tick by frame 402,
+so this state correction is not a normal-render scheduler or a visual result.
 
 `terrain_selector_origin_adjustment.{c,h}` now ports the shared
 `$C29548-$C295D0` candidate tail.  It quarter-reduces the source magnitude,
