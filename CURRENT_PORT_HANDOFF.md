@@ -772,13 +772,54 @@ See
 `analysis/routines/run075_scene_dispatch_coordinate_pose.md`.  Do not seed
 `$6FB8` in normal runtime state.
 
+## New-context resume point: live pose complete, renderer page blocked
+
+The current pushed head is `f3146e1a` (`Schedule negative dispatch coordinate
+pose`), following `20e93a97` (`Port negative dispatch coordinate pose`).
+The only user-owned worktree change is untracked `.vscode/`; leave it alone.
+
+The `$C28AFE -> $C28B34 -> $C28800` run075 route is now composed in normal
+scene entry, not merely represented by a diagnostic adapter.  The dispatch
+runtime retains the final created target, resolves its negative selector via
+the original Hunk-27 `$C295E0` relative-word table, uses the original Hunk-63
+angle table through `$C123FA`, and publishes slot 14's `(0,$6FB8,0)` attitude
+before `$C09514-$C0951A` copies that triple to root slot zero.  The Hunk-27
+geometry decoder was corrected to preserve its source indirection and five
+sign-extended-word `MOVEM` shape.  Relevant source-backed modules are:
+
+- `scene_dispatch_negative_coordinate_pose.{c,h}` (`$C28808-$C288C4`);
+- `scene_dispatch_runtime.{c,h}` (`$C28AFE` final-target scheduling);
+- `scene_dispatch_table.{c,h}` (`$C295E0` indirect geometry lookup);
+- `scene_entry_runtime.{c,h}` (Hunk-63 table ownership).
+
+The normal runtime still does **not** draw/present flight polygons.  Its
+existing `flight_scene_pipeline` can consume root record 0 as the `$C1C54E`
+projection seed and the original Hunk-25 grid, but `game.c` does not yet own
+the source `$C0F090 -> $C279D0` parent call, a five-plane render-page choice,
+or Copper/page-pointer publication.  The capture fixtures remain diagnostic
+only and must not be wired into normal replay.
+
+The last evidence audit established that `$C1718E` is a JOY0DAT callback, not
+the normal page scheduler.  The next evidence target is the live
+`$C1612C` outer-loop child/page-pointer route: recover how it publishes the
+render/display page and Copper state after the `$C0EFD4/$C0F090` parent update.
+Relevant evidence is `analysis/routines/c1612c_outer_loop_child.md`,
+`analysis/routines/run075_frame392_cockpit_entry.md`,
+`analysis/routines/run075_frame392_parent_update.md`, and
+`analysis/routines/run075_c279d0_prepared_page_handoff.md`.
+
+Current validated state uses `build\\port-native`: native build audit passes
+277 files, `ctest` passes 145/145, and frame parity remains 192 exact frames
+(200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
+bbox x=7..318 y=101..199.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
 
 ```
-cmake --build build --config Release
-ctest --test-dir build -C Release --output-on-failure
+cmake --build build\port-native --config Release
+ctest --test-dir build\port-native -C Release --output-on-failure
 python scripts/check_native_build.py
 python scripts/native_frame_count.py --to 392 --timeout 180
 ```
