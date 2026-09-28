@@ -1,5 +1,22 @@
 # C port continuation handoff
 
+## Latest visible primitive
+
+`workspace_segment_projection.{c,h}` ports the complete direct leaf
+`$C2ED6C-$C2EE42`.  It consumes two source-format transformed triples from
+the `$C4C592` workspace, preserves each signed depth/extent rejection, applies
+the source's `160/depth + 160` and `90/depth + 90` projection/clamp operations,
+reverses the resulting 320x180 endpoint coordinates, and invokes the
+caller-owned `$C2FA7E` line-emitter callback.  Its contract covers one accepted
+pair and both rejection categories.  It has no synthetic geometry, no capture
+page, and no `game.c` scheduling.
+
+Validation: 191/191 CTest contracts pass and the native build checker sees
+364 C sources.  This is an exact renderer leaf, but normal frame 402 remains
+black until the P-code placement/record path supplies the real workspace pairs
+and binds the real five-plane line-emitter owner.  Do not present the contract
+callback as a normal rendered frame.
+
 ## Latest dispatch boundary
 
 `scene_stream_runtime.{c,h}` now composes the direct P-code route
