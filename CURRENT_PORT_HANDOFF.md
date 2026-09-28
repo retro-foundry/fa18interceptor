@@ -1061,6 +1061,17 @@ inside `$C2E758`. `display_record_pipeline` and its iterator now expose the
 latter explicitly as `adjustment_gate_5aca`; it is not a caller stack value or
 an arbitrary test case selector.
 
+The return-bounded `$C2FEDE` trace corrects the native page adapter boundary:
+`$C303EC-$C30404` returns at `$C3040A` directly to `$C2FEF8`; it does not
+execute the distinct `$C2FF58` lane tail. `FA18ProjectionPageBlitter` now
+performs only the direct line/fill callbacks, leaving the lane stage to its
+separate caller. The selected-table display-stage contract binds that callback
+to a real native five-plane page using the run075 live values (bound 144,
+vertical 89, horizontal 0), produces two direct line submissions, and verifies
+the observed first-lower-plane `$80` write at page byte `$28`. This proves the
+selected-list path produces page geometry; it is still unscheduled until the
+parent owns the live matrix/workspace and source gate cadence.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:

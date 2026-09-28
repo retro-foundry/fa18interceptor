@@ -78,11 +78,11 @@ int fa18_projection_page_emit_final(
     operation->bltcpt = state->bltcpt;
     operation->bltdpt = state->bltdpt;
     operation->bltsize = state->blit_size;
+    /* `$C303EC-$C3040A` returns directly to its `$C301F6` caller.  The
+     * `$C2FF58` renderer-lane stage is a separate source path and must not
+     * be inferred from this final fill. */
     if (fa18_execute_ocs_block_blit(operation, blitter->binding.chip_bytes,
                                     blitter->binding.chip_byte_count) != 0 ||
-        fa18_execute_renderer_lane_stage(&blitter->lanes, operation,
-                                         blitter->binding.chip_bytes,
-                                         blitter->binding.chip_byte_count) != 0 ||
         sync_chip_to_page(blitter) != 0)
         return -1;
     return 0;

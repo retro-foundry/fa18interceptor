@@ -32,6 +32,14 @@ state whose page identity matches the renderer's four lower planes. The live
 `$C2FEDE` parent, its inherited blitter inputs, and normal replay scheduling
 remain caller-owned and uncomposed.
 
+The run075 return trace also corrects an earlier adapter composition: after
+the `$C303EC-$C30404` descending fill, `$C3040A` returns directly to the
+`$C301F6` caller at `$C2FEF8`. It does not fall through to `$C2FF58`.
+`FA18ProjectionPageBlitter` therefore executes only that direct fill for the
+selected-table route; `$C2FF58` remains the separately invoked lane-stage
+path. The page-level selected-table contract binds a native five-plane page
+and checks the witnessed first-lower-plane write at byte offset `$28`.
+
 `port/selected_table_display_stage.{c,h}` now ports the complete local
 orchestration: saved-table substitution/restoration, prepared-list result
 branch, direct submission, optional selector lane call, mode clear, and the

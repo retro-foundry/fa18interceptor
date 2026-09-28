@@ -5,8 +5,9 @@
 #include "five_plane_chip_binding.h"
 #include "projection_grid.h"
 
-/* Typed page-side owner for the complete `$C30668 -> $C30404 -> $C2FF58`
- * submission tail. The parent traversal supplies every inherited register and
+/* Typed page-side owner for the direct `$C30668 -> $C30404` submission tail.
+ * `$C2FF58` is a distinct caller path, represented separately by the stored
+ * lane state. The parent traversal supplies every inherited register and
  * lane-state value; this adapter only performs the source-proved mutations
  * and synchronizes the caller-owned five-plane page at each hardware boundary. */
 typedef struct {
@@ -28,7 +29,7 @@ int fa18_projection_page_blitter_init(
 int fa18_projection_page_emit_blitter(
     void *context, const FA18ProjectionPairBlitterWrites *writes);
 
-/* Callback for `$C303EC-$C30404` followed by the `$C2FF58` lane tail. */
+/* Callback for the direct `$C303EC-$C30404` descending-fill tail. */
 int fa18_projection_page_emit_final(
     void *context, const FA18ProjectionPairFinalState *state);
 
