@@ -1380,3 +1380,10 @@ boundaries.
 This is still not attached to `game.c`; it enables a source-owned bridge from
 the recovered stream entry to the existing geometry callbacks. See
 `analysis/routines/c1f6f8_record_walker_prefix.md`.
+
+`record_stream_selector.{c,h}` now ports the negative-control selector
+`$C1F7A0-$C1F837`: it preserves the source's `$FFFF`, `$1000`, `$2000`,
+`$4000`, and `$8000` branches, publishes original-address A1/A2 stream
+positions, and leaves `$C1F906` dispatch plus `$C1F844` post-stream work as
+explicit caller routes. This is not attached to `game.c`. See
+`analysis/routines/c1f7a0_record_stream_selector.md`.
