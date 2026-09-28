@@ -26,6 +26,19 @@ int main(void) {
     assert(fa18_initialize_flight_page_handoff(
                &handoff, view_pair, &dynamic_palette, &pixels, &lines,
                179, 111, 106, 0, 0, 0) == 0);
+    assert(handoff.chip_binding[0].plane_pointers[0] == 0 &&
+           handoff.chip_binding[0].plane_pointers[4] == 32000 &&
+           handoff.chip_binding[1].plane_pointers[0] == 0 &&
+           handoff.chip_binding[1].plane_pointers[4] == 32000);
+    assert(fa18_flight_page_handoff_bind_page_blitter(
+               &handoff, 0,
+               &(FA18BlitOperation){.bltafwm = 0xffff, .bltalwm = 0xffff}) == 0);
+    assert(handoff.renderer[0].triangle_submission.blitter_emitter ==
+               fa18_projection_page_emit_blitter &&
+           handoff.renderer[0].triangle_submission.final_emitter ==
+               fa18_projection_page_emit_final);
+    assert(fa18_flight_page_handoff_bind_page_blitter(&handoff, 2,
+                                                       &(FA18BlitOperation){0}) == -1);
     assert(fa18_flight_page_handoff_selected_renderer(&handoff) == &handoff.renderer[0]);
     handoff.page[0].planes[0][0] = 0x80;
     assert(fa18_run_flight_page_handoff_child(&handoff, &mode, &ops, &video,

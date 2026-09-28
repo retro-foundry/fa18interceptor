@@ -2,6 +2,18 @@
 
 #include <string.h>
 
+static int initialize_page_chip_binding(FA18FlightPageHandoff *handoff,
+                                        unsigned index) {
+    uint32_t plane_pointers[FA18_COPPER_PAGE_PLANES];
+
+    if (!handoff || index >= 2) return -1;
+    for (unsigned plane = 0; plane < FA18_COPPER_PAGE_PLANES; ++plane)
+        plane_pointers[plane] = plane * FA18_COPPER_PAGE_BYTES;
+    return fa18_five_plane_chip_binding_init(
+        &handoff->chip_binding[index], handoff->chip_bytes[index],
+        sizeof handoff->chip_bytes[index], plane_pointers);
+}
+
 typedef struct {
     FA18FlightPageHandoff *handoff;
     const FA18FlightPageHandoffOps *ops;
@@ -55,13 +67,30 @@ int fa18_initialize_flight_page_handoff(
     handoff->outer_child.dynamic_palette = dynamic_palette;
     for (unsigned index = 0; index < 2; ++index) {
         fa18_five_plane_page_init(&handoff->page[index]);
-        if (fa18_flight_renderer_page_init(
+        if (initialize_page_chip_binding(handoff, index) != 0 ||
+            fa18_flight_renderer_page_init(
                 &handoff->renderer[index], &handoff->page[index], pixel_state,
                 line_style, display_bound_y, vertical_value, horizontal_value,
                 renderer_base_long, mode_flag, saved_line_scratch) != 0)
             return -1;
     }
     return 0;
+}
+
+int fa18_flight_page_handoff_bind_page_blitter(
+    FA18FlightPageHandoff *handoff, uint16_t page_index,
+    const FA18BlitOperation *inherited_operation) {
+    FA18RendererLaneStage lanes = {0};
+
+    if (!handoff || !inherited_operation || page_index > 1 ||
+        fa18_five_plane_chip_binding_renderer_lane_pointers(
+            &handoff->chip_binding[page_index], lanes.plane_pointers) != 0 ||
+        fa18_projection_page_blitter_init(
+            &handoff->page_blitter[page_index], &handoff->page[page_index],
+            &handoff->chip_binding[page_index], inherited_operation, &lanes) != 0)
+        return -1;
+    return fa18_flight_renderer_page_bind_projection_page_blitter(
+        &handoff->renderer[page_index], &handoff->page_blitter[page_index]);
 }
 
 FA18FlightRendererPage *fa18_flight_page_handoff_selected_renderer(

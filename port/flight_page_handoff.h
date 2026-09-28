@@ -6,6 +6,11 @@
 #include "flight_renderer_page.h"
 #include "outer_loop_child.h"
 
+enum {
+    FA18_FLIGHT_PAGE_HANDOFF_CHIP_BYTES =
+        FA18_COPPER_PAGE_BYTES * FA18_COPPER_PAGE_PLANES
+};
+
 /* Caller-owned identities for the two View/ViewPort display publications.
  * They are native keys, not imported Amiga addresses. */
 typedef struct {
@@ -15,6 +20,12 @@ typedef struct {
 
 typedef struct {
     FA18FivePlanePage page[2];
+    /* Native Chip-RAM counterparts for the two source-selected five-plane
+     * render pages. These offsets are private native storage identities, not
+     * imported Amiga addresses. */
+    uint8_t chip_bytes[2][FA18_FLIGHT_PAGE_HANDOFF_CHIP_BYTES];
+    FA18FivePlaneChipBinding chip_binding[2];
+    FA18ProjectionPageBlitter page_blitter[2];
     FA18FlightRendererPage renderer[2];
     FA18OuterLoopChildState outer_child;
     FA18FlightPageViewPair view_pair[2];
@@ -34,6 +45,15 @@ int fa18_initialize_flight_page_handoff(
     const FA18PlanarPixelState *pixel_state, const FA18LineStyle *line_style,
     int16_t display_bound_y, int16_t vertical_value, int16_t horizontal_value,
     uint32_t renderer_base_long, uint8_t mode_flag, uint32_t saved_line_scratch);
+
+/* Bind the selected native page to the source parent's inherited blitter
+ * packet. `$C301F6/$C30404` retain registers the parent established before
+ * the local submission; this boundary refuses to manufacture those values.
+ * The page's five private plane offsets and lower-lane order are derived from
+ * its owned Chip image. */
+int fa18_flight_page_handoff_bind_page_blitter(
+    FA18FlightPageHandoff *handoff, uint16_t page_index,
+    const FA18BlitOperation *inherited_operation);
 
 /* `$C2F558` selection view. The outer child tail alone changes its index. */
 FA18FlightRendererPage *fa18_flight_page_handoff_selected_renderer(
