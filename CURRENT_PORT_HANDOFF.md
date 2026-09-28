@@ -13,10 +13,18 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 205/205 CTest contracts passed; native build checker
-  reported 394 C sources.
+- Last full validation: 206/206 CTest contracts passed; native build checker
+  reported 396 C sources.
 
 ### Most recent chain
+
+`context_workspace_flags.{c,h}` now ports `$C1CA82-$C1CB13`.  It ORs bit four
+into byte one of the sixteen `$C46184` 512-byte records and the sixteen
+`$C48184` 32-byte workspace lanes, retaining both mutable regions as
+caller-owned buffers.  This is the classifier/refresh prerequisite immediately
+before the `$C1CB14` placement selector; it does not attach placeholder
+template callbacks or schedule the parent loop.  The normal native frame-402
+gate remains black (zero nonblack pixels).
 
 `scene_selector_context.{c,h}` now ports `$C1C8B0-$C1C912`, the first
 mutable selector pack consumed by the later `$C1D10C` template/placement
