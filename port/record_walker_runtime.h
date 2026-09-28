@@ -11,6 +11,9 @@
 typedef int (*FA18RecordWalkerDispatchHandler)(void *context, uint16_t selector,
                                                uint32_t record_cursor,
                                                int16_t *source_status);
+typedef int (*FA18RecordWalkerExtendedHandler)(void *context, int16_t initial_word,
+                                               uint32_t record_cursor,
+                                               int16_t *source_status);
 typedef int (*FA18RecordWalkerErrorHandler)(void *context, int16_t control_word);
 
 typedef struct {
@@ -28,8 +31,10 @@ typedef struct {
     FA18RecordWalkerHexHandler hex_handler;
     FA18RecordWalkerOtherHandler other_handler;
     FA18RecordWalkerDispatchHandler dispatch_handler;
+    FA18RecordWalkerExtendedHandler extended_handler;
     FA18RecordWalkerErrorHandler error_handler;
     void *context;
+    void *extended_context;
 } FA18RecordWalkerRuntimeInput;
 
 typedef enum {
@@ -56,7 +61,8 @@ typedef struct {
 /* Direct bounded composition of `$C1F6F8-$C1F966`: ordinary walker records,
  * negative control selection (`$C1F7A0`), and negative A2 selector dispatch
  * (`$C1F910`).  `$C1F844`, `$C1F8EC`, and `$C1F94E` stay explicit because
- * their source-owned state/branches have not yet been ported. */
+ * `$C1F844` and `$C1F8EC` stay explicit; callers can bind `$C1F94E` through
+ * extended_handler without replacing its source status path. */
 int fa18_run_record_walker_runtime(const FA18RecordWalkerRuntimeInput *input,
                                    FA18RecordWalkerRuntimeResult *result,
                                    FA18RecordWalkerRuntimeRoute *route);

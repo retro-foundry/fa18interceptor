@@ -39,10 +39,19 @@ typedef struct {
     uint16_t selector;
 } FA18ExtendedRecordDispatchResult;
 
+typedef struct {
+    FA18ExtendedRecordDispatchInput input;
+} FA18ExtendedRecordWalkerBinding;
+
 /* `$C1F94E-$C1F999`: positive table control, its `$C1F99A` transform call,
  * and the following selector target.  `$C1F8EC` remains an explicit route. */
 int fa18_dispatch_extended_record(const FA18ExtendedRecordDispatchInput *input,
                                   FA18ExtendedRecordDispatchResult *result,
                                   FA18ExtendedRecordDispatchRoute *route);
+
+/* `$C1F94E` adapter for a nonnegative A2 word reached by `$C1F910`. */
+int fa18_dispatch_extended_record_from_walker(void *context, int16_t initial_word,
+                                              uint32_t record_cursor,
+                                              int16_t *source_status);
 
 #endif

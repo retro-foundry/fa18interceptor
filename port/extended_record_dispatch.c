@@ -81,3 +81,25 @@ int fa18_dispatch_extended_record(const FA18ExtendedRecordDispatchInput *input,
         return 0;
     }
 }
+
+int fa18_dispatch_extended_record_from_walker(void *context, int16_t initial_word,
+                                              uint32_t record_cursor,
+                                              int16_t *source_status) {
+    FA18ExtendedRecordDispatchInput input;
+    FA18ExtendedRecordDispatchResult result;
+    FA18ExtendedRecordDispatchRoute route;
+    if (!context || !source_status) return -1;
+    input = ((const FA18ExtendedRecordWalkerBinding *)context)->input;
+    input.initial_word = initial_word;
+    input.a2_cursor = record_cursor;
+    if (fa18_dispatch_extended_record(&input, &result, &route) != 0) return -1;
+    if (route == FA18_EXTENDED_RECORD_DISPATCH_CONTINUE) {
+        *source_status = (int16_t)result.record_status;
+        return 0;
+    }
+    if (route == FA18_EXTENDED_RECORD_DISPATCH_RESTART) {
+        *source_status = -1;
+        return 0;
+    }
+    return -1;
+}

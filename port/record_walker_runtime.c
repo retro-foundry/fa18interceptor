@@ -178,8 +178,17 @@ int fa18_run_record_walker_runtime(const FA18RecordWalkerRuntimeInput *input,
                 if (read_stream_word(input, result->a2_cursor, &selector_word) != 0) return -1;
                 result->a2_cursor += 2u;
                 if (selector_word >= 0) {
-                    *route = FA18_RECORD_WALKER_RUNTIME_EXTENDED_CONTROL_EXTERNAL;
-                    return 0;
+                    if (!input->extended_handler) {
+                        *route = FA18_RECORD_WALKER_RUNTIME_EXTENDED_CONTROL_EXTERNAL;
+                        return 0;
+                    }
+                    if (input->extended_handler(input->extended_context ? input->extended_context :
+                                                input->context, selector_word,
+                                                result->a2_cursor, &source_status) != 0)
+                        return -1;
+                    if (source_status < 0) break;
+                    result->record_status |= (uint16_t)source_status;
+                    continue;
                 }
                 if (selector_word == -1) {
                     if (!input->error_handler ||

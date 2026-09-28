@@ -42,11 +42,13 @@ workspace.  The descriptor-bit-0-clear route remains an explicit failure
 boundary because it transfers through `$C1FA92` into the separately unported
 `$C1FB24` continuation.  `extended_record_dispatch` now permits distinct
 transform and selector contexts, so its `$C1F99A` callback can use this real
-transform without inventing a shared owner.  The next task is composition into
-the record walker, then binding the resulting line-emitter owner only at the
-actual placement/scene runtime schedule.  Run the normal visual gate
-immediately after that binding; if it remains black, report exactly that
-rather than presenting a contract or oracle artifact.
+transform without inventing a shared owner.  `record_walker_runtime` now
+binds that `$C1F94E` positive route through the same enclosing `$C1F910`
+status/restart loop; an unbound positive route remains explicit.  The next
+task is binding this resulting line-emitter owner at the actual
+placement/scene runtime schedule.  Run the normal visual gate immediately
+after that binding; if it remains black, report exactly that rather than
+presenting a contract or oracle artifact.
 
 ## Latest record-walker composition
 
