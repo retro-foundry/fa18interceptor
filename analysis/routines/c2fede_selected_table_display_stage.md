@@ -19,3 +19,11 @@ ownership of both record areas remain unassigned.
 The raw P-code authority is `pcode/raw/attract_cockpit_c2fede/`. The static
 alternate branch is retained byte-exactly in
 `source_amiga/observed/run_selected_table_display_stage.asm`.
+
+The run075 return-bounded trace at `build/run075_prepared_c2fede/` confirms
+that the live selected four-point list enters `$C301F6`, takes the far
+`$C302DE` continuation, and completes the `$C30306` range/finalization path.
+`port/selected_display_submission.{c,h}` now bridges that direct `$C301F6`
+entry to the existing bounds/far-list implementation without incorrectly
+introducing the separate `$C2FF48` DMA wrapper. Its renderer/blitter state is
+still explicitly caller-owned; normal replay does not yet bind it to a page.

@@ -948,7 +948,7 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-291 files, `ctest` passes 155/155, and frame parity remains 192 exact frames
+293 files, `ctest` passes 156/156, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 
@@ -990,6 +990,13 @@ workspaces. Its chained live fixture matches the selected list consumed by
 writes three words and then advances by `$1A`; this corrects a tempting but
 wrong 13-word placement. The remaining boundary is now exactly
 `$C2FEDE -> $C301F6 -> $C30306` and its inherited five-plane blitter state.
+
+`selected_display_submission.{c,h}` now bridges the selected source list into
+the existing direct `$C301F6` bounds/far-list path (without adding the distinct
+`$C2FF48` DMA wrapper). The live list takes `$C302DE` and reaches `$C30306`.
+Its blitter callbacks and inherited five-plane state remain explicitly
+caller-owned; the next implementation task is to bind that established state
+to the selected native page before scheduling it.
 
 ## Standard validation after each stage
 
