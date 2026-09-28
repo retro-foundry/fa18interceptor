@@ -11,7 +11,7 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
- pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **117/117** tests.
+ pixels; bbox x=7..318, y=101..199).  `ctest` currently passes **118/118** tests.
 
 `FA18FivePlaneChipBinding` is the native bridge from caller-owned dynamic Chip
 addresses to a `FA18FivePlanePage`. It validates five non-overlapping complete
@@ -23,6 +23,16 @@ No capture, hard-coded Amiga address, page selection, or frame schedule is
 present in the runtime path. Run-named recovered register packets were moved to
 `blit_job_oracle.{c,h}`, which is linked only by its contract test, so the
 native executable retains the no-recorded-output closure.
+
+`scene_root_placement.{c,h}` now composes the observed negative-table route of
+`$C0924A-$C095BE`: it runs the `$C09620/$C095C0` root reset, reads one original
+Hunk-67 table entry, derives the source record index, resolves the mutable
+record and template descriptor through required callers, then invokes the
+already-proved pose transform/matrix update. The positive-table `$C093BC`
+family is an explicit unported route. This is the first source-ordered path
+from `$C0FAA4` scene initialization into root pose/matrix state, but it cannot
+be normal-runtime scheduled yet: the mutable `$C46184` bank and descriptor
+publishers still have no native owners.
 
 The user explicitly authorized a temporary opt-in display diagnostic while the
 scene producer is reconstructed. `--bootstrap-render-fixture CHIP` imports the

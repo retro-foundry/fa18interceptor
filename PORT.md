@@ -1559,3 +1559,12 @@ game loop.
   contract-only oracle source so the normal executable keeps its no-capture
   source closure. The native frame result remains 192 exact frames through 391;
   frame 392 remains the first mismatch.
+- 2026-09-28: Composed `$C0924A-$C095BE`'s observed negative-table root route
+  as `scene_root_placement`. It orders the existing `$C09620/$C095C0` reset,
+  Hunk-67 table selection, mutable record/descriptor resolution, and the
+  `$C09498` pose/matrix publication. The positive-table family is returned as
+  explicitly unported; no selection policy or scene record is invented. This
+  advances the true scene-initialization-to-projection chain but is not wired
+  to the normal game loop because the `$C46184` bank and template descriptor
+  publishers still lack native ownership. Native replay remains exact through
+  frame 391.
