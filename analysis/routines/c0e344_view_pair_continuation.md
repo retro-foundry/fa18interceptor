@@ -30,14 +30,20 @@ $C0E380  read the two live words at $C1AAE0/$C1AAE2
 $C0E39C  call $C24DB0 with those six pointers and two words
 ```
 
+`$C1AADC` is the bounded loader-return slot for `pix/splsh`; see
+[`runtime_display_pointer_state.md`](../runtime_display_pointer_state.md) and
+[`disk_graphics_assets.md`](../disk_graphics_assets.md). The continuation is
+therefore startup display-resource setup, not evidence that this pair creates
+the run075 flight pages.
+
 If `$C24DB0` returns `$C560`, the continuation performs another `WaitBOVP`,
 calls `$C0E78A` with `$21000`, clears a caller-selected 32-word region below
 the first raster source at `$C18252`, and continues through the ViewPort
 palette/list path. The function's wider semantics remain unassigned.
 
-This is enough to constrain the native port: `game.c` must not initialize the
-two flight-page identities at scene entry or from a presentation-frame number.
-Their creator belongs to the recovered callback/timeline owner, and its
-continuation synchronizes the ViewPort before renderer setup. The exact
-callback dispatcher and `$C0E65E/$C24DB0` state contracts remain required
-before this path can be scheduled natively.
+This is enough to constrain the native port: `game.c` must not use this
+startup callback as the creator of the two run075 flight-page identities.
+The generic View-pair publication port remains valid, but the actual flight
+page/view constructor and its transition schedule remain separately
+unrecovered. The exact dispatcher and `$C0E65E/$C24DB0` state contracts are
+required only before scheduling this startup display path natively.
