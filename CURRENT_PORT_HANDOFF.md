@@ -1138,6 +1138,16 @@ display callback. This is the full local `$C2AA9C` map producer; scheduling,
 live record/matrix construction, and selected five-plane page ownership remain
 the next parent boundary.
 
+`default_scene_map_pass.{c,h}` now composes the source-owned active-record
+state directly above that local producer. It runs the existing default
+`$C2DB18 -> $C1C54E/$C1C636` route, transfers record `+$14/+18/+1C` to the
+ordinary `$C2AB8C` map-coordinate input, transfers `$C45BD8` to the map
+transform, and uses the published full packet depth for `$C2AA9C`. Its
+frame-382-shaped contract reaches the wide display callback with depth `-125`
+and metric `125`. The still-unrecovered selector-gate alternate components,
+detail/filter state, page submission, and scheduler remain explicit caller
+state; this bridge is intentionally not attached to `game.c`.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
