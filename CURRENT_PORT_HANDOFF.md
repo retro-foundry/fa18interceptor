@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 140; 1.5 million calls matching over run075, run024, run060 and run062; poison-clean |
+| Recreated routines (`port/game/`) | 152; 1.5 million calls matching over run075, run024, run060 and run062; poison-clean |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
 | run060 replay | game RAM identical through frame 93; pixels exact to frame 540; drifts after |
