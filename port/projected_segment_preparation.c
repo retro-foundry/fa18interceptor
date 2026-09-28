@@ -15,8 +15,9 @@ static int project_component(int16_t value, int16_t depth, int16_t scale,
     return 1;
 }
 
-/* Literal branch translation of `$C2EE60-$C2F034`.  A return of one enters
- * `$C2F03A`; zero is `$C2EE44/$C2F034` rejection. */
+/* Literal branch translation of `$C2EE60-$C2F034`.  One enters `$C2F03A`
+ * (the `$C45AC6` candidate); two enters `$C2F042` with D3-D5 still holding
+ * the raw current triple; zero is `$C2EE44/$C2F034` rejection. */
 static int select_components(FA18ProjectedSegmentPreparationState *state,
                              const FA18ViewVertex *current,
                              const FA18ViewVertex *other) {
@@ -77,7 +78,7 @@ d4_alternate:
         goto d3_completion;
     }
     if (neg_word(current->y) < current->depth)
-        return current->depth >= 0; /* `$C2F030-$C2F042` retained components. */
+        return current->depth >= 0 ? 2 : 0; /* `$C2F030-$C2F042`, raw D3-D5. */
     if (other->depth <= neg_word(other->y)) return 0;
     CLIP(FA18_PROJECTED_SEGMENT_CLIP_D4_SECOND_C2F156);
     if (!outside) return 1;
@@ -117,10 +118,13 @@ int fa18_prepare_projected_segment(
     work[0] = endpoints[0];
     work[1] = endpoints[1];
     for (unsigned index = 0; index < 2; ++index) {
-        if (!select_components(state, &work[0], &work[1])) return 0;
-        if (!project_component(state->components.x, state->components.depth,
+        const int tail = select_components(state, &work[0], &work[1]);
+        const FA18ViewVertex *source;
+        if (!tail) return 0;
+        source = tail == 1 ? &state->components : &work[0];
+        if (!project_component(source->x, source->depth,
                                160, 160, 319, &x[index]) ||
-            !project_component(state->components.y, state->components.depth,
+            !project_component(source->y, source->depth,
                                90, 90, 179, &y[index]))
             return 0;
         if (!index) {

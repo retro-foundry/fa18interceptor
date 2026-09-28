@@ -12,12 +12,15 @@ static int capture(void *context, int16_t x0, int16_t y0, int16_t x1, int16_t y1
 }
 
 int main(void) {
-    FA18ProjectedSegmentPreparationState state = {{0, 0, 0}, -1};
-    const FA18ViewVertex endpoints[2] = {{10, 0, 10}, {0, 0, 20}};
+    /* First `$C2EE4A` pair in the frame-602 `$C212B0` P-code trace. It takes
+     * `$C2EE94 -> $C2EF58 -> $C2EF88 -> $C2F042` for both endpoints. */
+    FA18ProjectedSegmentPreparationState state = {{5605, 1703, 5605}, 0};
+    const FA18ViewVertex endpoints[2] = {{-205, 570, 2334}, {-59, 570, 2334}};
     Capture result = {0};
 
     assert(fa18_prepare_projected_segment(&state, endpoints, capture, &result) == 1);
-    assert(result.calls == 1 && result.x0 == 0 && result.y0 == 89);
-    assert(result.x1 == 0 && result.y1 == 89);
+    /* `$C2F088` loads these endpoint words before its `$C2FA7E` call. */
+    assert(result.calls == 1 && result.x0 == 173 && result.y0 == 68);
+    assert(result.x1 == 163 && result.y1 == 68);
     return 0;
 }
