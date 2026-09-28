@@ -56,6 +56,12 @@ but they are not attached to `game.c`: the source scene-entry scheduler, full
 startup owner, and update/presentation schedule remain unported. Frame 392
 therefore remains unrendered in normal replay.
 
+The complete direct cold-boot body `$C08F26-$C090AD` is now byte-exact source
+in `source_amiga/observed/initialize_scene_bootstrap.asm`, verified against
+the cold-boot trace's Slow-RAM authority (392 assembled bytes, zero
+differences). It owns the two bounded bank clears and enters `$C09266`; its
+remaining helper calls and the menu-to-scene scheduler are still separate.
+
 A CPU changed-write watch over the root prefix `$C46100/$FFFF00`, replayed
 from the sealed run075 restore at recorder frame zero through frame 2,000,
 finds no root mutation. The restored record is therefore already initialized
