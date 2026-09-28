@@ -5,8 +5,11 @@
 #include <string.h>
 
 #include "m68kcpu.h"
+#include "bus.h"
 #include "machine.h"
 #include "recomp_ports.h"
+
+extern int64_t fa18_cycle_origin;
 
 int fa18_ports_enter(int function, int label, int via_call);
 
@@ -135,8 +138,8 @@ static void trace_pc(unsigned int pc) {
         int r;
         fprintf(stderr, "T %06X", pc);
         for (r = 0; r < 16; r++) fprintf(stderr, " %08X", REG_DA[r]);
-        fprintf(stderr, " %04X %d %d | %s\n", m68k_get_reg(NULL, M68K_REG_SR), fa18_machine->vpos,
-                slice_hpos(), text);
+        fprintf(stderr, " %04X %d %d | %s | %lld\n", m68k_get_reg(NULL, M68K_REG_SR), fa18_machine->vpos,
+                slice_hpos(), text, (long long)(fa18_cycle_origin - GET_CYCLES()));
     }
 }
 
@@ -145,7 +148,9 @@ void fa18_machine_instruction_hook(unsigned int pc) {
     (void)pc;
     for (;;) {
         int before, r;
+        fa18_bus_instruction();
         if (fa18_machine_service()) break;
+        fa18_bus_instruction();
         if (!enabled_flag || (e = lookup(REG_PC)) == NULL) break;
         before = GET_CYCLES();
         fa18_recomp_abort = 0;
@@ -157,6 +162,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         /* EXIT_INTERP at a due chipset event resumes after servicing. */
         if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) break;
     }
+    fa18_bus_instruction(); /* the interpreter's opcode fetch follows */
     trace_pc(REG_PC);
     if (enabled_flag) {
         int f = fold(REG_PC);

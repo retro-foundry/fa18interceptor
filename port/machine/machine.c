@@ -1,8 +1,10 @@
 #include "machine.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
+#include "bus.h"
 #include "m68kcpu.h"
 #include "recomp_runtime.h"
 
@@ -35,9 +37,11 @@ static int64_t now_cycle(void) {
     return in_execute ? fa18_cycle_origin - GET_CYCLES() : fa18_machine->cycle;
 }
 
+int64_t fa18_machine_now(void) { return now_cycle(); }
+
 void fa18_machine_beam(int *vpos, int *hpos) {
     FA18Machine *m = fa18_machine;
-    int64_t h = (now_cycle() - line_start) / 2;
+    int64_t h = (fa18_bus_now() - line_start) / 2;
     if (h < 0) h = 0;
     if (h >= FA18_LINE_CCKS) h = FA18_LINE_CCKS - 1;
     *vpos = m->vpos;
@@ -213,10 +217,17 @@ static uint32_t custom_long(const FA18Machine *m, uint32_t reg) {
     return ((uint32_t)m->custom[reg >> 1] << 16 | m->custom[(reg >> 1) + 1]) & 0x7FFFE;
 }
 
-void fa18_blitter_busy(FA18Machine *m, int cycles);
-void fa18_blitter_busy(FA18Machine *m, int cycles) {
+void fa18_blitter_busy(FA18Machine *m, const uint8_t *diagram, int steps_per_word, int64_t words);
+void fa18_blitter_busy(FA18Machine *m, const uint8_t *diagram, int steps_per_word, int64_t words) {
     (void)m;
-    blit_end = now_cycle() + cycles;
+    blit_end = fa18_bus_blit(fa18_bus_now(), diagram, steps_per_word, words);
+    if (getenv("FA18_BLIT_LOG")) {
+        int v, h;
+        fa18_machine_beam(&v, &h);
+        fprintf(stderr, "BLIT v=%d h=%d con0=%04X con1=%04X size=%04X steps=%d words=%lld ccks=%lld\n", v, h,
+                m->custom[0x040 >> 1], m->custom[0x042 >> 1], m->custom[0x058 >> 1], steps_per_word,
+                (long long)words, (long long)((blit_end - fa18_bus_now()) / 2));
+    }
     blit_pending = 1;
     if (blit_end < fa18_next_event) fa18_next_event = blit_end;
 }
@@ -232,7 +243,7 @@ uint16_t fa18_custom_read(FA18Machine *m, uint32_t reg) {
     switch (reg) {
     case 0x002:
         return (uint16_t)((m->dmacon & 0x07FF) | (blit_zero ? 0x2000 : 0) |
-                          (blit_pending && now_cycle() < blit_end ? 0x4000 : 0));
+                          (blit_pending && fa18_bus_now() < blit_end ? 0x4000 : 0));
     case 0x004:
         fa18_machine_beam(&v, &h);
         return (uint16_t)(0x8000 | ((v >> 8) & 1));
@@ -415,13 +426,27 @@ void fa18_bus_write32(uint32_t a, uint32_t v) {
     fa18_bus_write16(a + 2, (uint16_t)v);
 }
 
-/* Musashi memory interface. */
-unsigned int m68k_read_memory_8(unsigned int a) { return fa18_bus_read8(a); }
-unsigned int m68k_read_memory_16(unsigned int a) { return fa18_bus_read16(a); }
-unsigned int m68k_read_memory_32(unsigned int a) { return fa18_bus_read32(a); }
-void m68k_write_memory_8(unsigned int a, unsigned int v) { fa18_bus_write8(a, (uint8_t)v); }
-void m68k_write_memory_16(unsigned int a, unsigned int v) { fa18_bus_write16(a, (uint16_t)v); }
-void m68k_write_memory_32(unsigned int a, unsigned int v) { fa18_bus_write32(a, v); }
+/* Musashi memory interface: CPU accesses, timed by the bus (bus.c). A long
+ * access is two word accesses. */
+static void cpu_words(uint32_t a, int words) {
+    fa18_bus_access(a);
+    if (words > 1) fa18_bus_access(a + 2);
+}
+unsigned int m68k_read_memory_8(unsigned int a) { cpu_words(a, 1); return fa18_bus_read8(a); }
+unsigned int m68k_read_memory_16(unsigned int a) { cpu_words(a, 1); return fa18_bus_read16(a); }
+unsigned int m68k_read_memory_32(unsigned int a) { cpu_words(a, 2); return fa18_bus_read32(a); }
+void m68k_write_memory_8(unsigned int a, unsigned int v) { cpu_words(a, 1); fa18_bus_write8(a, (uint8_t)v); }
+void m68k_write_memory_16(unsigned int a, unsigned int v) { cpu_words(a, 1); fa18_bus_write16(a, (uint16_t)v); }
+void m68k_write_memory_32(unsigned int a, unsigned int v) { cpu_words(a, 2); fa18_bus_write32(a, v); }
+unsigned int m68k_read_immediate_16(unsigned int a) { fa18_bus_fetch(a); return fa18_bus_read16(a); }
+unsigned int m68k_read_immediate_32(unsigned int a) {
+    fa18_bus_fetch(a);
+    fa18_bus_fetch(a + 2);
+    return fa18_bus_read32(a);
+}
+unsigned int m68k_read_pcrelative_8(unsigned int a) { cpu_words(a, 1); return fa18_bus_read8(a); }
+unsigned int m68k_read_pcrelative_16(unsigned int a) { cpu_words(a, 1); return fa18_bus_read16(a); }
+unsigned int m68k_read_pcrelative_32(unsigned int a) { cpu_words(a, 2); return fa18_bus_read32(a); }
 unsigned int m68k_read_disassembler_16(unsigned int a) { return fa18_bus_read16(a); }
 unsigned int m68k_read_disassembler_32(unsigned int a) { return fa18_bus_read32(a); }
 
@@ -475,6 +500,7 @@ static void start_line(FA18Machine *m) {
     if (m->vpos == 3) cia_tod_tick(m, 0);
     fa18_copper_run_until(m, m->vpos, FA18_LINE_CCKS);
     fa18_display_line(m, m->vpos);
+    fa18_bus_line(m, m->vpos, line_start);
     line_started = 1;
 }
 
@@ -491,8 +517,8 @@ static void advance_line(FA18Machine *m) {
     line_start += FA18_LINE_CYCLES;
     line_started = 0;
     m->vpos++;
-    if (m->vpos >= FA18_PAL_LINES) {
-        m->vpos = 0;
+    if (m->vpos >= FA18_PAL_LINES) m->vpos = 0;
+    if (m->vpos == FA18_FRAME_END_LINE) {
         memcpy(m->last_screen, m->screen, sizeof m->screen);
         m->frame++;
         frame_done = 1;
@@ -566,6 +592,31 @@ void fa18_machine_run_frame(FA18Machine *m) {
     }
 }
 
+/* Predict every line's DMA slots for the first frame after a restore by
+ * running one Copper frame on a scratch copy of the machine (the restored
+ * display registers are usually whatever the Copper last left). The copy
+ * cannot start blits: the Copper danger bit is cleared. */
+static void seed_dma_maps(FA18Machine *m) {
+    FA18Machine *copy = malloc(sizeof *copy);
+    int64_t saved_end = blit_end, saved_event = fa18_next_event;
+    int saved_pending = blit_pending, v;
+    if (!copy) return;
+    memcpy(copy, m, sizeof *copy);
+    copy->copper_danger = 0;
+    fa18_machine = copy;
+    fa18_copper_restart(copy);
+    for (v = 0; v < FA18_PAL_LINES; v++) {
+        fa18_copper_run_until(copy, v, FA18_LINE_CCKS);
+        fa18_bus_line(copy, v, 0);
+    }
+    fa18_machine = m;
+    free(copy);
+    blit_end = saved_end;
+    blit_pending = saved_pending;
+    fa18_next_event = saved_event;
+    update_irq(m);
+}
+
 /* ---- UAE savestate ------------------------------------------------------- */
 
 static uint32_t be32(const uint8_t *p) {
@@ -622,6 +673,8 @@ int fa18_machine_load_state(FA18Machine *m, const uint8_t *s, size_t size,
     }
     memset(m, 0, sizeof *m);
     fa18_machine = m;
+    fa18_bus_reset();
+    fa18_bus_timing = 0; /* reset vectors and restore are not CPU time */
     memcpy(m->rom, rom, FA18_ROM_SIZE);
     cram = find_chunk(s, size, "CRAM", &len);
     if (!cram || len < FA18_CHIP_SIZE) { snprintf(error, error_size, "missing CRAM"); return 0; }
@@ -678,6 +731,7 @@ int fa18_machine_load_state(FA18Machine *m, const uint8_t *s, size_t size,
     if (be32(cpu) != 68000) { snprintf(error, error_size, "savestate CPU is not a 68000"); return 0; }
     m68k_init();
     m68k_set_cpu_type(M68K_CPU_TYPE_68000);
+    fa18_cpu_timing_init();
     m68k_pulse_reset();
     {
         const uint8_t *r = cpu + 8;
@@ -698,5 +752,8 @@ int fa18_machine_load_state(FA18Machine *m, const uint8_t *s, size_t size,
         }
     }
     update_irq(m);
+    seed_dma_maps(m);
+    fa18_bus_line(m, m->vpos, line_start);
+    fa18_bus_timing = 1;
     return 1;
 }

@@ -25,6 +25,7 @@
 #ifdef FA18_RECOMP_GENERATED
 #include "m68kcpu.h"
 #include "m68kops.h"
+#include "bus.h"
 #endif
 
 enum { FA18_RET = 0, FA18_EXIT_DISPATCH = 1, FA18_EXIT_INTERP = 2 };
@@ -76,6 +77,8 @@ extern int64_t fa18_cycle_origin, fa18_next_event;
             REG_PC = (pc);                                                       \
             return FA18_EXIT_INTERP;                                             \
         }                                                                        \
+        fa18_bus_instruction();                                                  \
+        fa18_bus_fetch(pc); /* the opcode fetch the interpreter makes */         \
         REG_PPC = (pc);                                                          \
         REG_PC = (pc) + 2;                                                       \
         REG_IR = (op);                                                           \

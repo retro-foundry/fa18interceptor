@@ -50,6 +50,13 @@ static void usage(void) {
             "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n");
 }
 
+/* Engine9000 recordings start from a UAE restore, and UAE's first frame
+ * after a restore runs two frames of machine time (two vertical blanks)
+ * before the second frame's input is read. Replays reproduce that; a state
+ * written mid-session by the bridge (no restore in the reference) does not
+ * need it: pass --no-restore-lead. */
+static int restore_lead = -1;
+
 #ifdef FA18_WITH_SDL
 #ifndef SDL_MAIN_HANDLED
 #define SDL_MAIN_HANDLED
@@ -115,6 +122,7 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
             }
         }
         fa18_replay_apply(replay, m, start_frame + frame + 1);
+        if (frame == 0 && restore_lead) fa18_machine_run_frame(m);
         fa18_machine_run_frame(m);
         frame++;
         for (p = 0; p < FA18_SCREEN_W * FA18_SCREEN_H; p++) {
@@ -163,6 +171,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--no-recomp")) use_recomp = 0;
         else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
         else if (!strcmp(argv[i], "--start-frame") && i + 1 < argc) start_frame = atoi(argv[++i]);
+        else if (!strcmp(argv[i], "--no-restore-lead")) restore_lead = 0;
         else if (!strcmp(argv[i], "--window")) window = 1;
         else if (!strcmp(argv[i], "--ports") && i + 1 < argc) {
             const char *v = argv[++i];
@@ -187,6 +196,7 @@ int main(int argc, char **argv) {
     }
     fa18_recomp_init(use_recomp);
     fa18_ports_init(ports_mode, ports_only);
+    if (restore_lead < 0) restore_lead = replay_path != NULL && start_frame == 0;
     if (replay_path && !fa18_replay_load(&replay, replay_path)) {
         fprintf(stderr, "cannot read E9K_INPUT_V1 replay %s\n", replay_path);
         return 1;
@@ -205,6 +215,7 @@ int main(int argc, char **argv) {
     for (i = 0; i < frames; i++) {
         /* Events recorded for a frame are delivered before that frame runs. */
         fa18_replay_apply(&replay, m, start_frame + i + 1);
+        if (i == 0 && restore_lead) fa18_machine_run_frame(m);
         fa18_machine_run_frame(m);
         if (rgb) fwrite(m->last_screen, sizeof m->last_screen[0], FA18_SCREEN_W * FA18_SCREEN_H, rgb);
         if (ppm_dir) {

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 int fa18_amiga_rawkey(int k) {
     static const char row0[] = "`1234567890-=\\";
@@ -60,6 +61,35 @@ int fa18_amiga_rawkey(int k) {
     return -1;
 }
 
+int fa18_amiga_rawkey_retro(int k) {
+    static const uint8_t keypad[10] = {0x0F, 0x1D, 0x1E, 0x1F, 0x2D, 0x2E, 0x2F, 0x3D, 0x3E, 0x3F};
+    if (k < 256) return k == 0 ? -1 : fa18_amiga_rawkey(k); /* ASCII range is shared */
+    if (k <= 265) return keypad[k - 256];
+    if (k >= 282 && k <= 291) return 0x50 + (k - 282); /* F1-F10 */
+    switch (k) {
+    case 266: return 0x3C; /* keypad . */
+    case 267: return 0x5C; /* keypad / */
+    case 268: return 0x5D; /* keypad * */
+    case 269: return 0x4A; /* keypad - */
+    case 270: return 0x5E; /* keypad + */
+    case 271: return 0x43; /* keypad enter */
+    case 273: return 0x4C; /* up */
+    case 274: return 0x4D; /* down */
+    case 275: return 0x4E; /* right */
+    case 276: return 0x4F; /* left */
+    case 277: case 315: return 0x5F; /* insert, help = Help */
+    case 301: return 0x62; /* caps lock */
+    case 303: return 0x61; /* right shift */
+    case 304: return 0x60; /* left shift */
+    case 305: case 306: return 0x63; /* ctrl */
+    case 307: return 0x65; /* right alt */
+    case 308: return 0x64; /* left alt */
+    case 309: case 312: return 0x67; /* right Amiga */
+    case 310: case 311: return 0x66; /* left Amiga */
+    default: return -1;
+    }
+}
+
 int fa18_replay_load(FA18Replay *replay, const char *path) {
     FILE *f = fopen(path, "r");
     char line[256];
@@ -102,7 +132,7 @@ void fa18_replay_apply(FA18Replay *replay, FA18Machine *m, int frame) {
         if (e->frame < frame) continue;
         switch (e->kind) {
         case 'K': {
-            int raw = fa18_amiga_rawkey(e->a);
+            int raw = fa18_amiga_rawkey_retro(e->a);
             if (raw >= 0) fa18_machine_key(m, raw, e->d);
             break;
         }

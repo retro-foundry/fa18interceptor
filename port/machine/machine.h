@@ -19,6 +19,10 @@
 #define FA18_PAL_LINES 313
 #define FA18_LINE_CCKS 227
 #define FA18_LINE_CYCLES (FA18_LINE_CCKS * 2)
+/* A frame ends, and the next frame's input is applied, when line 3 starts:
+ * where UAE (Engine9000) ends retro_run, after the vertical blank
+ * interrupt. Its savestates are taken there too. */
+#define FA18_FRAME_END_LINE 3
 
 /* The native image covers the standard lowres PAL display area: DIW
  * horizontal $81 is x=0 and beam line $2A is y=0. */
@@ -49,6 +53,10 @@ typedef struct {
     int copper_waiting; /* 1 while a WAIT is unsatisfied */
     uint16_t copper_wait_v, copper_wait_h, copper_wait_vmask, copper_wait_hmask;
     int copper_danger;
+    /* Copper activity on the current line, for DMA slot accounting: runs of
+     * instructions and the CCK each run starts at. */
+    int copper_segments;
+    int copper_segment_start[16], copper_segment_count[16];
     uint32_t bplpt[6];
     int vpos, hpos;
     uint64_t frame;      /* completed frames since restore */
@@ -97,6 +105,9 @@ void fa18_copper_restart(FA18Machine *m);
 void fa18_copper_run_until(FA18Machine *m, int vpos, int hpos);
 void fa18_display_line(FA18Machine *m, int vpos);
 void fa18_raise_interrupt(FA18Machine *m, int bit);
+
+/* Current CPU cycle (start of the executing instruction). */
+int64_t fa18_machine_now(void);
 
 /* Beam position including cycles spent in the current execution slice. */
 void fa18_machine_beam(int *vpos, int *hpos);

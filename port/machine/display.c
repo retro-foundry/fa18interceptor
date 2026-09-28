@@ -20,15 +20,37 @@ static int beam_reached(int vpos, int hpos, uint16_t w1, uint16_t w2) {
     return beam >= target;
 }
 
+/* Count one executed instruction for the line's DMA slots; a run starts
+ * where the WAIT that released it was satisfied. */
+static void copper_slot(FA18Machine *m, int vpos, int resumed) {
+    int n = m->copper_segments;
+    if (resumed || n == 0) {
+        int start = 0;
+        /* The WAIT's first word holds the beam position it waited for. */
+        if (resumed && (m->copper_wait_v >> 8) == (vpos & 0xFF)) start = m->copper_wait_v & 0xFE;
+        if (n == 16) n = 15;
+        else m->copper_segments = n + 1;
+        m->copper_segment_start[n] = start;
+        m->copper_segment_count[n] = 0;
+    } else {
+        n--;
+    }
+    m->copper_segment_count[n]++;
+}
+
 void fa18_copper_run_until(FA18Machine *m, int vpos, int hpos) {
     int budget = MAX_COPPER_PER_LINE;
+    m->copper_segments = 0;
     if (!(m->dmacon & 0x0200) || !(m->dmacon & 0x0080)) return;
     while (budget-- > 0) {
         uint16_t w1, w2;
+        int resumed = 0;
         if (m->copper_waiting) {
             if (!beam_reached(vpos, hpos - 1, m->copper_wait_v, m->copper_wait_h)) return;
             m->copper_waiting = 0;
+            resumed = 1;
         }
+        copper_slot(m, vpos, resumed);
         w1 = fa18_chip16(m, m->copper_pc);
         w2 = fa18_chip16(m, m->copper_pc + 2);
         m->copper_pc = (m->copper_pc + 4) & (FA18_CHIP_SIZE - 1);

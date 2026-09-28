@@ -6,13 +6,21 @@
 
 #include "recomp_runtime.h"
 
-void fa18_blitter_zero_flag(int zero);
-void fa18_blitter_busy(FA18Machine *m, int cycles);
+#include <string.h>
 
-/* Colour clocks per word by channel mask ABCD (UAE blit_cycle_diagram and
- * blit_cycle_diagram_fill). */
-static const uint8_t cycles_per_word[16] = {2, 2, 2, 3, 3, 3, 3, 4, 2, 2, 2, 3, 3, 3, 3, 4};
-static const uint8_t fill_cycles_per_word[16] = {2, 3, 2, 3, 3, 4, 3, 4, 2, 3, 2, 3, 3, 4, 3, 4};
+void fa18_blitter_zero_flag(int zero);
+void fa18_blitter_busy(FA18Machine *m, const uint8_t *diagram, int steps_per_word, int64_t words);
+
+/* Cycle diagrams by channel mask ABCD (UAE blit_cycle_diagram): the bus
+ * steps of one word, 1 where a channel transfers and 0 where the step is
+ * idle. Fill mode adds an idle step before D. Line mode takes four steps
+ * per pixel, C and D transferring. */
+static const uint8_t diagram_steps[16] = {2, 2, 2, 3, 3, 3, 3, 4, 2, 2, 2, 3, 3, 3, 3, 4};
+static const uint8_t diagram[16][4] = {
+    {0, 0}, {0, 1}, {0, 1}, {0, 1, 1}, {0, 1, 0}, {0, 1, 1}, {0, 1, 1}, {0, 1, 1, 1},
+    {1, 0}, {1, 1}, {1, 1}, {1, 1, 1}, {1, 1, 0}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1, 1},
+};
+static const uint8_t line_diagram[4] = {0, 1, 0, 1};
 
 enum {
     CON1_LINE = 0x0001, CON1_DESC = 0x0002, CON1_FCI = 0x0004, CON1_IFE = 0x0008,
@@ -266,15 +274,23 @@ static int line_blit(FA18Machine *m, int width, int height) {
 
 void fa18_blitter_start(FA18Machine *m) {
     uint16_t size = R(0x058);
-    int height = size >> 6, width = size & 63, zero, ccks;
+    int height = size >> 6, width = size & 63, zero, steps;
     int channels = (R(0x040) >> 8) & 15;
+    uint8_t steps_of_word[5];
     if (!height) height = 1024;
     if (!width) width = 64;
     if (R(0x042) & CON1_LINE) {
-        ccks = 4 * height + 2;
+        memcpy(steps_of_word, line_diagram, 4);
+        steps = 4;
     } else {
-        int fill = (R(0x042) & (CON1_IFE | CON1_EFE)) != 0;
-        ccks = (fill ? fill_cycles_per_word : cycles_per_word)[channels] * width * height + 2;
+        steps = diagram_steps[channels];
+        memcpy(steps_of_word, diagram[channels], (size_t)steps);
+        if ((R(0x042) & (CON1_IFE | CON1_EFE)) && (channels & 3) == 1) {
+            /* Fill without C: an idle step before the D write. */
+            steps_of_word[steps] = steps_of_word[steps - 1];
+            steps_of_word[steps - 1] = 0;
+            steps++;
+        }
     }
     if (R(0x042) & CON1_LINE) {
         zero = line_blit(m, width, height);
@@ -286,5 +302,5 @@ void fa18_blitter_start(FA18Machine *m) {
     fa18_blitter_zero_flag(zero);
     /* Memory is updated now; BBUSY and the BLIT interrupt follow the
      * hardware duration so CPU wait loops keep their timing. */
-    fa18_blitter_busy(m, ccks * 2);
+    fa18_blitter_busy(m, steps_of_word, steps, (int64_t)(R(0x042) & CON1_LINE ? height : width * height));
 }

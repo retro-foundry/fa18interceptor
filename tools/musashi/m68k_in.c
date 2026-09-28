@@ -283,6 +283,65 @@ M68KMAKE_OPCODE_HANDLER_HEADER
 
 #include <stdio.h>
 #include "m68kcpu.h"
+
+/* FA18: data-dependent 68000 timing measured against cycle-exact UAE
+ * (scripts/musashi_timing_audit.py). MULS costs 38+2n where n counts the
+ * 01/10 pairs of the source with a zero appended below; DIVS/DIVU follow
+ * the hardware's shift-subtract loop. The returned values are totals for
+ * the register form; callers subtract Musashi's table value. */
+static int fa18_muls_cycles(uint src)
+{
+	uint bits = (src & 0xffff) << 1;
+	int n = 0, i;
+	for (i = 0; i < 16 && bits; i++, bits >>= 1)
+		if ((bits & 3) == 1 || (bits & 3) == 2)
+			n++;
+	return 2 * n;
+}
+
+static int fa18_divu_cycles(uint dividend, uint divisor)
+{
+	int mcycles = 38, i;
+	uint hdivisor = (divisor & 0xffff) << 16;
+	if ((dividend >> 16) >= (divisor & 0xffff))
+		return 10;
+	for (i = 0; i < 15; i++) {
+		uint temp = dividend;
+		dividend <<= 1;
+		if ((sint)temp < 0)
+			dividend -= hdivisor;
+		else {
+			mcycles += 2;
+			if (dividend >= hdivisor) {
+				dividend -= hdivisor;
+				mcycles--;
+			}
+		}
+	}
+	return mcycles * 2;
+}
+
+static int fa18_divs_cycles(sint dividend, sint divisor)
+{
+	int mcycles = 6, i;
+	uint adividend = dividend < 0 ? 0u - (uint)dividend : (uint)dividend;
+	uint adivisor = (uint)(divisor < 0 ? -divisor : divisor) & 0xffff;
+	uint aquot;
+	if (dividend < 0)
+		mcycles++;
+	if ((adividend >> 16) >= adivisor)
+		return (mcycles + 2) * 2;
+	aquot = adividend / adivisor;
+	mcycles += 55;
+	if (divisor >= 0)
+		mcycles += dividend >= 0 ? -1 : 1;
+	for (i = 0; i < 15; i++) {
+		if ((sint16)aquot >= 0)
+			mcycles++;
+		aquot <<= 1;
+	}
+	return mcycles * 2;
+}
 extern void m68040_fpu_op0(void);
 extern void m68040_fpu_op1(void);
 extern void m68881_mmu_ops(void);
@@ -2353,6 +2412,7 @@ M68KMAKE_OP(bchg, 32, r, d)
 {
 	uint* r_dst = &DY;
 	uint mask = 1 << (DX & 0x1f);
+	if(mask < 0x10000) USE_CYCLES(-2);
 
 	FLAG_Z = *r_dst & mask;
 	*r_dst ^= mask;
@@ -2374,6 +2434,7 @@ M68KMAKE_OP(bchg, 32, s, d)
 {
 	uint* r_dst = &DY;
 	uint mask = 1 << (OPER_I_8() & 0x1f);
+	if(mask < 0x10000) USE_CYCLES(-2);
 
 	FLAG_Z = *r_dst & mask;
 	*r_dst ^= mask;
@@ -2395,6 +2456,7 @@ M68KMAKE_OP(bclr, 32, r, d)
 {
 	uint* r_dst = &DY;
 	uint mask = 1 << (DX & 0x1f);
+	if(mask < 0x10000) USE_CYCLES(-2);
 
 	FLAG_Z = *r_dst & mask;
 	*r_dst &= ~mask;
@@ -2416,6 +2478,7 @@ M68KMAKE_OP(bclr, 32, s, d)
 {
 	uint* r_dst = &DY;
 	uint mask = 1 << (OPER_I_8() & 0x1f);
+	if(mask < 0x10000) USE_CYCLES(-2);
 
 	FLAG_Z = *r_dst & mask;
 	*r_dst &= ~mask;
@@ -3136,6 +3199,7 @@ M68KMAKE_OP(bset, 32, r, d)
 {
 	uint* r_dst = &DY;
 	uint mask = 1 << (DX & 0x1f);
+	if(mask < 0x10000) USE_CYCLES(-2);
 
 	FLAG_Z = *r_dst & mask;
 	*r_dst |= mask;
@@ -3157,6 +3221,7 @@ M68KMAKE_OP(bset, 32, s, d)
 {
 	uint* r_dst = &DY;
 	uint mask = 1 << (OPER_I_8() & 0x1f);
+	if(mask < 0x10000) USE_CYCLES(-2);
 
 	FLAG_Z = *r_dst & mask;
 	*r_dst |= mask;
@@ -4372,6 +4437,7 @@ M68KMAKE_OP(divs, 16, ., d)
 
 	if(src != 0)
 	{
+		USE_CYCLES(fa18_divs_cycles(MAKE_INT_32(*r_dst), src) - 158);
 		if((uint32)*r_dst == 0x80000000 && src == -1)
 		{
 			FLAG_Z = 0;
@@ -4410,6 +4476,7 @@ M68KMAKE_OP(divs, 16, ., .)
 
 	if(src != 0)
 	{
+		USE_CYCLES(fa18_divs_cycles(MAKE_INT_32(*r_dst), src) - 158);
 		if((uint32)*r_dst == 0x80000000 && src == -1)
 		{
 			FLAG_Z = 0;
@@ -4446,6 +4513,7 @@ M68KMAKE_OP(divu, 16, ., d)
 
 	if(src != 0)
 	{
+		USE_CYCLES(fa18_divu_cycles(*r_dst, src) - 140);
 		uint quotient = *r_dst / src;
 		uint remainder = *r_dst % src;
 
@@ -4472,6 +4540,7 @@ M68KMAKE_OP(divu, 16, ., .)
 
 	if(src != 0)
 	{
+		USE_CYCLES(fa18_divu_cycles(*r_dst, src) - 140);
 		uint quotient = *r_dst / src;
 		uint remainder = *r_dst % src;
 
@@ -7389,14 +7458,7 @@ M68KMAKE_OP(muls, 16, ., d)
 	uint* r_dst = &DX;
 	uint x = MAKE_INT_16(DY);
 	if(CPU_TYPE_IS_010_LESS(CPU_TYPE)) {
-		uint c = 0;
-		for (uint y = x, f = 0; y; y>>=1) {
-			if ((y&1) != f) {
-				c += 2;
-				f = 1 - f;
-			}
-		}
-		USE_CYCLES(c);
+		USE_CYCLES(fa18_muls_cycles(x));
 	}
 
 	uint res = MASK_OUT_ABOVE_32(x * MAKE_INT_16(MASK_OUT_ABOVE_16(*r_dst)));
@@ -7415,14 +7477,7 @@ M68KMAKE_OP(muls, 16, ., .)
 	uint* r_dst = &DX;
 	uint x = MAKE_INT_16(M68KMAKE_GET_OPER_AY_16);
 	if(CPU_TYPE_IS_010_LESS(CPU_TYPE)) {
-		uint c = 0;
-		for (uint y = x, f = 0; y; y>>=1) {
-			if ((y&1) != f) {
-				c += 2;
-				f = 1 - f;
-			}
-		}
-		USE_CYCLES(c);
+		USE_CYCLES(fa18_muls_cycles(x));
 	}
 	uint res = MASK_OUT_ABOVE_32(x * MAKE_INT_16(MASK_OUT_ABOVE_16(*r_dst)));
 

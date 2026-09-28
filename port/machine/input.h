@@ -3,9 +3,11 @@
 
 #include "machine.h"
 
-/* Amiga raw key code for an SDL2 keycode (SDLK_* value), or -1. Engine9000
- * E9K_INPUT_V1 recordings store the same keycodes. */
+/* Amiga raw key code for an SDL2 keycode (SDLK_* value), or -1. */
 int fa18_amiga_rawkey(int sdl_keycode);
+/* Amiga raw key code for a libretro RETROK_* code, or -1. Engine9000
+ * E9K_INPUT_V1 recordings store these (SDL 1.2 numbering: F1 = 282). */
+int fa18_amiga_rawkey_retro(int retrok);
 
 /* An E9K_INPUT_V1 recording: per-frame keyboard, mouse and button events,
  * numbered from the run's restore frame. */
