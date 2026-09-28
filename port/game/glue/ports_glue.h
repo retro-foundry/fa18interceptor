@@ -8,4 +8,11 @@ int glue_C30466(void);
 int glue_C304B2(void);
 int glue_C305AA(void);
 
+/* fixed_math.c, audio.c, text.c */
+int glue_C2E6DA(void);
+int glue_C501E0(void);
+int glue_C24FE8(void);
+int glue_C330FE(void);
+int glue_C32806(void);
+
 #endif

@@ -396,7 +396,9 @@ def call_site_liveness(functions: dict, extra_callers: dict[int, set[int]] | Non
     for callee, rets in (extra_callers or {}).items():
         callers.setdefault(callee, set()).update(rets)
 
-    live_out = {e: (frozenset() if e in callers else ALL) for e in functions}
+    site_rets = {ret for ret, _, _ in sites}
+    live_out = {e: (ALL if e not in callers or any(r not in site_rets for r in callers[e]) else frozenset())
+                for e in functions}
     live_at: dict[int, frozenset] = {}
     site_owner = {ret: owner for ret, owner, _ in sites}
     sites_in: dict[int, list[int]] = {}
@@ -425,7 +427,10 @@ def call_site_liveness(functions: dict, extra_callers: dict[int, set[int]] | Non
         for callee in callees_of_site.get(ret, ()):
             if callee not in live_out:
                 continue
-            new = frozenset().union(*(live_at.get(r, frozenset()) for r in callers[callee]))
+            # A return address outside translated code (ROM, undiscovered
+            # code) is not analysed: everything is live there.
+            new = frozenset().union(*(live_at.get(r, frozenset()) if r in site_owner else ALL
+                                      for r in callers[callee]))
             if new != live_out[callee]:
                 live_out[callee] = new
                 for r in sites_in.get(callee, ()):
