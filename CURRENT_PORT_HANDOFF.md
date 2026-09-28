@@ -763,6 +763,10 @@ publication explicit.  `coordinate_update_positive_pair.{c,h}` now ports the
 recorded `$C123FA-$C1294E` callback route, including its shift-14, rounded
 ratio, Hunk-63 index-11, magnitude, and clamp path to `$C45AC2=$6FB8`; only
 the enclosing target-record/dispatch ownership remains before composing it.
+The full `$C28800` trace proves its target is `$C47D84` while selector `$4000`
+resolves a linked `$C4E184` record outside the 17-slot native dispatch bank;
+the adapter therefore requires that linked record from a future source-backed
+resolver, rather than fabricating a local slot.
 See
 `analysis/routines/run075_scene_dispatch_coordinate_pose.md`.  Do not seed
 `$6FB8` in normal runtime state.

@@ -21,39 +21,35 @@ static void put_long(uint8_t *bytes, unsigned offset, uint32_t value) {
 }
 
 int fa18_publish_scene_dispatch_coordinate_pose(
-    FA18SceneDispatchRecord *target,
-    const FA18SceneDispatchRecord *records, size_t record_count,
+    FA18SceneDispatchRecord *target, const FA18SceneDispatchRecord *linked_record,
     int16_t source_selector, FA18SceneCoordinateUpdate coordinate_update,
     void *coordinate_context, const FA18RecordMatrixUpdateOps *matrix_ops) {
-    const FA18SceneDispatchRecord *selected;
     FA18SceneCoordinateUpdateInput coordinate_input;
     FA18RecordMatrixUpdateInput matrix_input;
     int16_t coordinate_output[2];
-    unsigned selected_index;
 
-    if (!target || !records || !coordinate_update || !matrix_ops || source_selector < 0)
+    if (!target || !linked_record || !coordinate_update || !matrix_ops || source_selector < 0)
         return -1;
-    /* `$C28844-$C28856`: only a live source slot is a valid link target. */
-    selected_index = (unsigned)((uint16_t)source_selector >> 8);
-    if (selected_index >= record_count) return -1;
-    selected = &records[selected_index];
-    if (!(word_at(selected->bytes, 0) & 0x0040u)) return -1;
+    /* `$C2883E-$C28856`: the caller resolves `C46184 + (selector << 1)`.
+     * In run075 selector `$4000` resolves `$C4E184`, outside the 17-slot
+     * scene-dispatch bank, so this boundary must not invent a local index. */
+    if (!(word_at(linked_record->bytes, 0) & 0x0040u)) return -1;
 
     /* `$C28858-$C2887C`: copy the five source placement fields. */
-    put_word(target->bytes, 0x2c, word_at(selected->bytes, 6));
-    put_word(target->bytes, 0x2e, word_at(selected->bytes, 8));
-    put_word(target->bytes, 0x30, word_at(selected->bytes, 0x0c));
-    put_word(target->bytes, 0x32, word_at(selected->bytes, 0x0e));
-    put_long(target->bytes, 0x34, long_at(selected->bytes, 0x10));
-    target->bytes[0x38] = (uint8_t)(selected_index | 0x80u);
+    put_word(target->bytes, 0x2c, word_at(linked_record->bytes, 6));
+    put_word(target->bytes, 0x2e, word_at(linked_record->bytes, 8));
+    put_word(target->bytes, 0x30, word_at(linked_record->bytes, 0x0c));
+    put_word(target->bytes, 0x32, word_at(linked_record->bytes, 0x0e));
+    put_long(target->bytes, 0x34, long_at(linked_record->bytes, 0x10));
+    target->bytes[0x38] = (uint8_t)(((uint16_t)source_selector >> 8) | 0x80u);
 
     /* `$C28880-$C288A4`: source-width subtraction and the six pushed longs
      * for `$C123FA`; its first output is intentionally not consumed here. */
     coordinate_input = (FA18SceneCoordinateUpdateInput){
         0, 0,
-        (int32_t)(long_at(selected->bytes, 0x14) - long_at(target->bytes, 0x14)),
+        (int32_t)(long_at(linked_record->bytes, 0x14) - long_at(target->bytes, 0x14)),
         0,
-        (int32_t)(long_at(selected->bytes, 0x1c) - long_at(target->bytes, 0x1c)),
+        (int32_t)(long_at(linked_record->bytes, 0x1c) - long_at(target->bytes, 0x1c)),
         -1
     };
     if (coordinate_update(coordinate_context, &coordinate_input, coordinate_output) != 0)

@@ -36,26 +36,26 @@ static int compose(void *context, const int16_t input[3], int16_t output[3][3]) 
 }
 
 int main(void) {
-    FA18SceneDispatchRecord records[17] = {{0}};
+    FA18SceneDispatchRecord linked_record = {{0}};
     FA18SceneDispatchRecord target = {{0}};
     unsigned calls = 0;
     const FA18RecordMatrixUpdateOps matrix_ops = {build, compose, 0};
 
-    put_word(records[14].bytes, 0, 0x0040);
-    put_word(records[14].bytes, 6, 0x1111);
-    put_word(records[14].bytes, 8, 0x2222);
-    put_word(records[14].bytes, 0x0c, 0x3333);
-    put_word(records[14].bytes, 0x0e, 0x4444);
-    put_long(records[14].bytes, 0x10, 0x55556666u);
-    put_long(records[14].bytes, 0x14, 0x01000000u);
-    put_long(records[14].bytes, 0x1c, 0x0e000000u);
+    put_word(linked_record.bytes, 0, 0x0040);
+    put_word(linked_record.bytes, 6, 0x1111);
+    put_word(linked_record.bytes, 8, 0x2222);
+    put_word(linked_record.bytes, 0x0c, 0x3333);
+    put_word(linked_record.bytes, 0x0e, 0x4444);
+    put_long(linked_record.bytes, 0x10, 0x55556666u);
+    put_long(linked_record.bytes, 0x14, 0x01000000u);
+    put_long(linked_record.bytes, 0x1c, 0x0e000000u);
     put_long(target.bytes, 0x14, 0x00800000u);
     put_long(target.bytes, 0x1c, 0x03000000u);
 
     assert(fa18_publish_scene_dispatch_coordinate_pose(
-               &target, records, 17, 0x0e00, coordinate_update, &calls,
+               &target, &linked_record, 0x4000, coordinate_update, &calls,
                &matrix_ops) == 0);
-    assert(calls == 1 && target.bytes[0x38] == 0x8e);
+    assert(calls == 1 && target.bytes[0x38] == 0xc0);
     assert(target.bytes[0x2c] == 0x11 && target.bytes[0x2e] == 0x22 &&
            target.bytes[0x30] == 0x33 && target.bytes[0x32] == 0x44 &&
            target.bytes[0x34] == 0x55 && target.bytes[0x37] == 0x66);
@@ -66,10 +66,10 @@ int main(void) {
            target.matrix_update.published[1] == 0x6fb8 &&
            target.matrix_update.published[2] == 0);
     assert(fa18_publish_scene_dispatch_coordinate_pose(
-               &target, records, 14, 0x0e00, coordinate_update, &calls,
+               &target, NULL, 0x4000, coordinate_update, &calls,
                &matrix_ops) == -1);
     assert(fa18_publish_scene_dispatch_coordinate_pose(
-               &target, records, 17, -1, coordinate_update, &calls,
+               &target, &linked_record, -1, coordinate_update, &calls,
                &matrix_ops) == -1);
     return 0;
 }

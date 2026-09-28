@@ -20,8 +20,7 @@ typedef int (*FA18SceneCoordinateUpdate)(void *context,
  * `(0, C45AC2, 0)` through `$C2D954`.  The coordinate callback is required:
  * no captured coordinate output is a runtime substitute. */
 int fa18_publish_scene_dispatch_coordinate_pose(
-    FA18SceneDispatchRecord *target,
-    const FA18SceneDispatchRecord *records, size_t record_count,
+    FA18SceneDispatchRecord *target, const FA18SceneDispatchRecord *linked_record,
     int16_t source_selector, FA18SceneCoordinateUpdate coordinate_update,
     void *coordinate_context, const FA18RecordMatrixUpdateOps *matrix_ops);
 
