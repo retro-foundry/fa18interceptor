@@ -1072,6 +1072,17 @@ the observed first-lower-plane `$80` write at page byte `$28`. This proves the
 selected-list path produces page geometry; it is still unscheduled until the
 parent owns the live matrix/workspace and source gate cadence.
 
+The ordinary run075 prepared-page window now has an exact `$C246A0` polygon
+clip witness. At global frame 382 it reads 13 zero-shift triples from
+`$C4BF94`, runs both clip-cache leaves and all four final closures, then leaves
+14 source-ordered triples at `$C4B990` before `$C24CFE` projects/submits them.
+`polygon_clip_pipeline.{c,h}` ports that four-plane (`y=z`, `-y=z`, `x=z`,
+`-x=z`) composition with source word rounding; its contract matches every
+captured output tuple, including the closing-edge order. It is the missing
+native producer immediately before the established projection/submission
+tail, but still needs a typed `$C246A0` display-stage adapter to publish the
+result to the selected renderer page and the parent cadence to schedule it.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
