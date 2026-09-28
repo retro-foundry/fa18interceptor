@@ -1,2 +1,42 @@
 #include "terrain_placement_pipeline.h"
-int fa18_emit_workspace_placement_records(const uint8_t *workspace,size_t size,const FA18ScenePlacementBuildInput *items,size_t count,FA18TerrainPlacementEmit emit,void *context){if(!workspace||!items||!emit)return -1;for(size_t i=0;i<count;i++){uint8_t record[FA18_SCENE_PLACEMENT_BYTES];FA18ScenePlacementBuilderTailResult result;ptrdiff_t off=items[i].workspace_item-workspace;if(off<0||(size_t)off>size||size-(size_t)off<7)return -1;if(workspace[off]==0xff)continue;if(fa18_build_scene_placement_record(&items[i],record,&result)||emit(context,record))return -1;}return 0;}
+
+enum { WORKSPACE_CELL_BYTES = 0x60 };
+
+int fa18_emit_workspace_placement_records(
+    const uint8_t *workspace_cell, size_t workspace_cell_size,
+    FA18TerrainPlacementBuildInputResolve resolve, FA18TerrainPlacementEmit emit,
+    void *context, FA18TerrainPlacementCellEnd *end) {
+    const uint8_t *cursor;
+    const uint8_t *limit;
+    uint8_t ordinal = 0;
+
+    if (!workspace_cell || !resolve || !emit || !end ||
+        workspace_cell_size < WORKSPACE_CELL_BYTES)
+        return -1;
+    cursor = workspace_cell;
+    limit = workspace_cell + WORKSPACE_CELL_BYTES;
+    while (cursor < limit) {
+        FA18ScenePlacementBuildInput input;
+        FA18ScenePlacementBuilderTailResult result;
+        uint8_t record[FA18_SCENE_PLACEMENT_BYTES];
+        size_t stride;
+
+        if (*cursor == 0xffu) {
+            *end = FA18_TERRAIN_PLACEMENT_CELL_TERMINATOR;
+            return 0;
+        }
+        if ((size_t)(limit - cursor) < 2u) return -1;
+        /* Bits 4/6 suppress both `$C1DD98` and `$C1DE0A` payload reads. */
+        stride = (cursor[0] & 0x50u) ? 2u : 6u;
+        if ((size_t)(limit - cursor) < stride || ordinal == UINT8_MAX) return -1;
+        ++ordinal; /* `$C1DD34`: ADDQ.B #1,D1 before the record is built. */
+        if (resolve(context, cursor, ordinal, &input) != 0 ||
+            input.workspace_item != cursor ||
+            fa18_build_scene_placement_record(&input, record, &result) != 0 ||
+            emit(context, record) != 0)
+            return -1;
+        cursor += stride;
+    }
+    *end = FA18_TERRAIN_PLACEMENT_CELL_END;
+    return 0;
+}
