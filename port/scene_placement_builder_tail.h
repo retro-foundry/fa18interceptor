@@ -36,6 +36,11 @@ typedef struct {
 int fa18_build_scene_placement_work(const FA18ScenePlacementWorkInput *input,
                                     int32_t work[3]);
 
+typedef struct { uint16_t selector_word; uint8_t descriptor_index; } FA18ScenePlacementHeader;
+/* `$C1DD36-$C1DD88` observed direct route (bit 7 of the low header byte clear). */
+int fa18_decode_scene_placement_workspace_header(const uint8_t workspace[2],
+                                                 FA18ScenePlacementHeader *header);
+
 /* `$C1DF04-$C1E0B0`: select the adaptive precision shift, OR it into the
  * low selector byte at `+1`, store the three arithmetic-shifted coordinate
  * words at `+6..+11`, then write the exact mutable record suffix. */

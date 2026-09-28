@@ -48,6 +48,14 @@ int fa18_build_scene_placement_work(const FA18ScenePlacementWorkInput *input,
     return 0;
 }
 
+int fa18_decode_scene_placement_workspace_header(const uint8_t workspace[2],
+                                                 FA18ScenePlacementHeader *header) {
+    if (!workspace || !header || (workspace[1] & 0x80u)) return -1;
+    header->selector_word = (uint16_t)((uint16_t)workspace[1] << 8 | workspace[0]);
+    header->descriptor_index = workspace[1];
+    return 0;
+}
+
 int fa18_finish_scene_placement_record(
     uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
     const FA18ScenePlacementBuilderTailInput *input,

@@ -11,12 +11,15 @@ int main(void) {
         UINT32_C(0x00104183), 0
     };
     FA18ScenePlacementBuilderTailResult result;
+    FA18ScenePlacementHeader header;
     int32_t work[3];
     FA18ScenePlacementWorkInput work_input = {
         { 0x0800, 0x0800 }, { 3, -2 }, { 0x3000, 0x4000 }, { -0x1000, 0x2000 }, 0
     };
     assert(fa18_build_scene_placement_work(&work_input, work) == 0);
     assert(work[0] == 0x3ff4 && work[1] == 0 && work[2] == 0x8008);
+    assert(fa18_decode_scene_placement_workspace_header((uint8_t[]){0, 0x6e}, &header) == 0 &&
+           header.selector_word == 0x6e00 && header.descriptor_index == 0x6e);
     shifts[48] = 7;
     assert(fa18_finish_scene_placement_record(bytes, &input, &result) == 0);
     assert(result.shift_count == 7 && result.next_cycle_byte == 3);
