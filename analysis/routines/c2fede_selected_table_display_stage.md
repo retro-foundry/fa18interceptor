@@ -25,5 +25,9 @@ that the live selected four-point list enters `$C301F6`, takes the far
 `$C302DE` continuation, and completes the `$C30306` range/finalization path.
 `port/selected_display_submission.{c,h}` now bridges that direct `$C301F6`
 entry to the existing bounds/far-list implementation without incorrectly
-introducing the separate `$C2FF48` DMA wrapper. Its renderer/blitter state is
-still explicitly caller-owned; normal replay does not yet bind it to a page.
+introducing the separate `$C2FF48` DMA wrapper.
+`fa18_flight_renderer_page_bind_projection_page_blitter` can now attach those
+callbacks to a native page only after its caller supplies initialized inherited
+state whose page identity matches the renderer's four lower planes. The live
+`$C2FEDE` parent, its inherited blitter inputs, and normal replay scheduling
+remain caller-owned and uncomposed.

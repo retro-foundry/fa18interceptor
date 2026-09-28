@@ -994,9 +994,13 @@ wrong 13-word placement. The remaining boundary is now exactly
 `selected_display_submission.{c,h}` now bridges the selected source list into
 the existing direct `$C301F6` bounds/far-list path (without adding the distinct
 `$C2FF48` DMA wrapper). The live list takes `$C302DE` and reaches `$C30306`.
-Its blitter callbacks and inherited five-plane state remain explicitly
-caller-owned; the next implementation task is to bind that established state
-to the selected native page before scheduling it.
+`fa18_flight_renderer_page_bind_projection_page_blitter` now binds those
+callbacks to a selected native page when, and only when, the caller has built
+an initialized page blitter whose page identity matches all four lower planes.
+It rejects any other page, retaining the source inherited registers and lane
+state in the caller-owned `FA18ProjectionPageBlitter`. The `$C2FEDE` parent,
+its live inherited blitter inputs, and the source render cadence still need a
+native owner before this path can be scheduled in `game.c`.
 
 ## Standard validation after each stage
 

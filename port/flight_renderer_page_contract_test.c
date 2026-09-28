@@ -58,6 +58,23 @@ int main(void) {
     };
     assert(fa18_five_plane_chip_binding_init(&binding, chip, sizeof chip,
                                              plane_pointers) == 0);
+    FA18ProjectionPageBlitter page_blitter;
+    assert(fa18_projection_page_blitter_init(&page_blitter, &page, &binding,
+                                              &operation, &lane_stage) == 0);
+    assert(fa18_flight_renderer_page_bind_projection_page_blitter(
+               &renderer, &page_blitter) == 0);
+    assert(submission->triangle_submission->blitter_emitter ==
+               fa18_projection_page_emit_blitter &&
+           submission->triangle_submission->final_emitter ==
+               fa18_projection_page_emit_final &&
+           submission->triangle_submission->blitter_context == &page_blitter);
+    FA18FivePlanePage other_page;
+    FA18ProjectionPageBlitter other_blitter;
+    fa18_five_plane_page_init(&other_page);
+    assert(fa18_projection_page_blitter_init(&other_blitter, &other_page, &binding,
+                                              &operation, &lane_stage) == 0);
+    assert(fa18_flight_renderer_page_bind_projection_page_blitter(
+               &renderer, &other_blitter) == -1);
     chip[0xc000] = 0x80;
     assert(fa18_flight_renderer_page_execute_lane_stage(
                &renderer, &page, &binding, &lane_stage, &operation) == 0);
@@ -65,5 +82,6 @@ int main(void) {
     lane_stage.plane_pointers[0] = 0;
     assert(fa18_flight_renderer_page_execute_lane_stage(
                &renderer, &page, &binding, &lane_stage, &operation) == -1);
+    assert(fa18_flight_renderer_page_bind_projection_page_blitter(0, &page_blitter) == -1);
     return 0;
 }

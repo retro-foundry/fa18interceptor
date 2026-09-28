@@ -7,6 +7,7 @@
 #include "five_plane_chip_binding.h"
 #include "line.h"
 #include "projection_grid.h"
+#include "projection_page_blitter.h"
 #include "blit_job.h"
 
 /* Native page owner for the source-proved direct-pixel and direct-line
@@ -39,6 +40,14 @@ int fa18_flight_renderer_page_init(
 int fa18_flight_renderer_page_apply_projection_grid_packet_state(
     FA18FlightRendererPage *renderer,
     const FA18ProjectionGridPacketState *packet_state);
+
+/* Attach the `$C301F6 -> $C303EC -> $C2FF58` callbacks to this page after
+ * the parent has reconstructed its inherited blitter state.  The binding is
+ * accepted only for the same page's four lower bitplanes; page scheduling and
+ * all producer inputs remain with the caller. */
+int fa18_flight_renderer_page_bind_projection_page_blitter(
+    FA18FlightRendererPage *renderer,
+    FA18ProjectionPageBlitter *blitter);
 
 const FA18ProjectionGridSubmission *fa18_flight_renderer_page_submission(
     const FA18FlightRendererPage *renderer);

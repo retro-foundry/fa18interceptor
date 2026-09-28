@@ -69,6 +69,20 @@ int fa18_flight_renderer_page_apply_projection_grid_packet_state(
     return 0;
 }
 
+int fa18_flight_renderer_page_bind_projection_page_blitter(
+    FA18FlightRendererPage *renderer,
+    FA18ProjectionPageBlitter *blitter) {
+    if (!renderer || !blitter || !blitter->initialized || !blitter->page)
+        return -1;
+    for (unsigned lane = 0; lane < 4; ++lane)
+        if (renderer->lanes.lanes[lane] != blitter->page->planes[lane]) return -1;
+
+    renderer->triangle_submission.blitter_emitter = fa18_projection_page_emit_blitter;
+    renderer->triangle_submission.final_emitter = fa18_projection_page_emit_final;
+    renderer->triangle_submission.blitter_context = blitter;
+    return 0;
+}
+
 const FA18ProjectionGridSubmission *fa18_flight_renderer_page_submission(
     const FA18FlightRendererPage *renderer) {
     return renderer ? &renderer->grid_submission : 0;
