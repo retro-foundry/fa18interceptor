@@ -1203,6 +1203,63 @@ the workspace producer in the same source order. This is the direct native
 callback payload for the parent pipeline's `context_refresh` slot; live
 placement resolution and the parent scheduler remain the next integration.
 
+## Current handoff — outer cockpit path
+
+The native comparison is exact for frames 200--391 and first differs at frame
+392: 361 of 64,000 pixels, in `x=7..318`, `y=101..199`.  Visual inspection of
+the oracle/native diff shows dim cockpit/HUD transition pixels (horizon arc,
+side outlines, and central indicators), rather than terrain geometry or a
+global fade.  The cockpit visible at this point is therefore a meaningful
+integration target; do not treat the black geometry alone as a rendering
+verdict.
+
+The recovered source sequence is:
+
+```
+outer update -> $C2F558 page selection -> parent marker 60 -> $C0D730
+             -> $C2FD8C four-plane blits -> selected-page presentation
+```
+
+Recent commits implement bounded pieces of that route. `display_buffer_gate`
+ports `$C0D730-$C0D749`: bit 13 of `$C458D2` selects the active `$C2FD8C`
+callback or the still-untraced `$C0DA38` alternate. `active_plane_packet`
+ports `$C2FD8C-$C2FEDA`, building and executing its four self-blits from
+caller-provided active plane bases, size, and plane-3 select state. Its
+contract includes an actual synthetic Chip-RAM blit. `outer_update_loop` was
+also corrected to source order in commit `4dcd0bb6`:
+
+```
+$C2F558 -> OwnBlitter -> parent update -> DisownBlitter -> wait display -> child
+```
+
+The preceding ordering was wrong: the parent update must run while the
+blitter is owned. The individual display-gate, active-packet, and outer-loop
+contracts pass. The full suite passed 173/173 immediately before these final
+small additions; rerun the standard suite after integrating further work.
+
+Do not bind captured pages as normal game assets. The frame-392 trace has
+`$C456B6=$C4567E`, whose mutable attract-family lanes are `$012BC0`,
+`$014B00`, `$016A40`, `$018980` (8000 bytes each), while later DMA fetches
+the normal five-plane family at `$04DB30`, `$04FA70`, `$0519B0`, `$0538F0`,
+`$055830`. This is a live staging/timeline boundary, not immutable disk data.
+`five_plane_chip_binding` and `active_plane_packet` are available to operate
+on a genuine caller-owned page once its initialization and ownership are
+recovered.
+
+`game.c` still has no live `FA18OuterUpdateLoop`, flight-page state, or parent
+pipeline owner. It must not be wired with no-op stages or replay/capture state.
+The next context should first recover the real active page pair/Chip-memory
+initialization and cadence, then instantiate the outer loop with source-owned
+stages: connect `$C2F558` to `flight_page_handoff`, route the selected page's
+plane offsets through `$C0D730` to `active_plane_packet`, and only then attach
+the terrain selector pass to `context_refresh` and continue with placement and
+display composition. Require a normal native frame run to show the cockpit
+transition at frame 392 before pursuing the later terrain geometry.
+
+The latest implementation commits are `6000d323` (active packet execution)
+and `4dcd0bb6` (outer ownership ordering). The worktree should otherwise
+remain clean except for the user-owned untracked `.vscode/` directory.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
