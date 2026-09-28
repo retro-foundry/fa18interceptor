@@ -49,3 +49,23 @@ The complete `$C2D9BA-$C2DADF` body is now byte-exact source in
 `source_amiga/observed/update_matrix_pipeline.asm` (294 bytes). Field and
 callee names in that file remain structural where the bounded packet does not
 prove a game-level role.
+
+## run075 prepared-page matrix witness
+
+A return-bounded run075 trace at `$C2D99C`, armed before the prepared-page
+interval, reaches the wrapper at local frame 180 (global frame 380) and
+returns to `$C0F030` after 331 instructions. Its source state has
+`$C457B4=1`, `$C458AE=0`, `$C457AE=1`, inputs
+`$C45A94/$C45A96=(7200,0)`, and row scales `(168,252,128)`. The completed
+pipeline publishes `$C45BD8` as:
+
+```text
+(167, 0, -8,
+   0, 252, 0,
+   6, 0, 127)
+```
+
+That is the exact nine-word matrix consumed by the established run075
+frame-384 `$C27B9C` projection-pair contract. The artifact is
+`build/run075_frame373_c2d99c_matrix/`. This connects the matrix producer to
+the future normal page owner without treating the trace values as constants.

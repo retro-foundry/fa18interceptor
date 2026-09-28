@@ -825,6 +825,16 @@ page-handoff sequence. It proves the outer child is not presentation-frame
 cadence (there are no child entries in 370--379 despite ordinary replay), and
 does not authorize a `game_frame` schedule.
 
+The run075 `$C2D99C` return trace (`build/run075_frame373_c2d99c_matrix/`)
+now proves the source matrix producer for the prepared-page pass. At global
+frame 380 its live inputs are `$C45A94/$C45A96=(7200,0)` with row scales
+`(168,252,128)` and it publishes `$C45BD8=(167,0,-8;0,252,0;6,0,127)`, the
+matrix consumed by the existing frame-384 projection-grid contract. This
+means the missing normal owner must compose the existing matrix pipeline and
+the active-record projection seed, not import the trace matrix. The source
+input-selection/update callbacks before `$C2DAB0` remain the next unresolved
+runtime boundary.
+
 `outer_loop_child.{c,h}` now composes the complete observed
 `$C1612C-$C16283` packet behind explicit caller-owned OS boundaries.  It
 performs `WaitBOVP`, publishes the indexed `$C182BA/$C182C2` pair, and invokes
