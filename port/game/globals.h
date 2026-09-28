@@ -190,4 +190,14 @@
 #define PLAYER_READY       0xC457D8u /* byte: set to 1 */
 #define PLAYER_PHASE       0xC45798u /* byte: set to 4 when nonzero */
 
+/* ---- view octant ($C254E8; earlier port: angle_octant) ---------------------- */
+#define VIEW_OCTANT        0xC45854u /* byte: 0-7, 45-degree sector of the view angle */
+#define HEADING_ANGLE      0xC45A8Cu /* long: low word is the heading used outside contexts */
+
+/* ---- paired records ($C231A2) ---------------------------------------------- */
+#define PAIR_OVERRIDE      0xC457BCu /* byte: one-shot "ready" override, consumed */
+
+/* ---- attitude term ($C148E2) ----------------------------------------------- */
+#define REFERENCE_18       0xC456FAu /* long: compared with record field +$18 */
+
 #endif

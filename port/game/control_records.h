@@ -84,4 +84,15 @@ int16_t steer_record_56(int16_t target);
  * dead-zone nudge. Returns the scaled target. */
 int16_t steer_record_5a(int16_t target);
 
+/* Whether a record is ready to pair with its partner: it is active (+$1
+ * bits 6 and 0), not excluded (+$0 & $8700, +$20 bit 1), its partner (+$38,
+ * when negative) is active and not excluded, and it is in state +$64 bits
+ * 5-6 set with +$63 class $2x or $3x. PAIR_OVERRIDE forces "ready" once. */
+int paired_record_ready(gaddr record);
+
+/* Attitude term of the current record: 2 * |+$56| + a folded +$6A angle / 8
+ * - the signed +$66 angle / 2 + (REFERENCE_18 - +$18) scaled down by
+ * 2^11 or, unless +$2 bit 3, 2^13. */
+int16_t attitude_term(void);
+
 #endif

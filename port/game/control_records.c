@@ -225,3 +225,46 @@ int16_t steer_record_5a(int16_t target) {
     ease_field(r + 0x5A, target, rd_u8(r + 0x62) == 0x14 ? 2 : 1);
     return target;
 }
+
+int paired_record_ready(gaddr record) {
+    int8_t partner;
+    uint8_t cls;
+
+    if (rd_u16(record) & 0x8700) return 0;
+    if (rd_u8(record + 0x20) & 0x02) return 0;
+    if (rd_u8(PAIR_OVERRIDE)) goto ready;
+    if (!(rd_u8(record + 0x01) & 0x40)) return 0;
+    partner = (int8_t)rd_u8(record + 0x38);
+    if (partner < 0) {
+        gaddr other = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)((partner & 0x7F) << 9);
+        if (!(rd_u8(other + 0x01) & 0x40)) return 0;
+        if (rd_u8(other + 0x20) & 0x02) return 0;
+        if (rd_u8(other + 0x01) & 0x01) return 0;
+    }
+    if ((rd_u8(record + 0x64) & 0x60) != 0x60) return 0;
+    if (!(rd_u8(record + 0x01) & 0x01)) return 0;
+    cls = (uint8_t)(rd_u8(record + 0x63) & 0xF0);
+    if (cls != 0x20 && cls != 0x30) return 0;
+ready:
+    wr_u8(PAIR_OVERRIDE, 0);
+    return 1;
+}
+
+int16_t attitude_term(void) {
+    gaddr r = rd_u32(CURRENT_RECORD);
+    int16_t angle_66 = rd_s16(r + 0x66), angle_6a, size_56, sum;
+    int32_t offset_18;
+
+    if (angle_66 >= 0x3840) angle_66 = (int16_t)(angle_66 - 0x7080);
+    angle_66 = (int16_t)(angle_66 >> 1);
+    angle_6a = rd_s16(r + 0x6A);
+    if (angle_6a >= 0x3840) angle_6a = (int16_t)(0x7080 - angle_6a);
+    if (angle_6a >= 0x1C20) angle_6a = (int16_t)(0x3840 - angle_6a);
+    angle_6a = (int16_t)(angle_6a >> 3);
+    size_56 = rd_s16(r + 0x56);
+    if (size_56 < 0) size_56 = (int16_t)-size_56;
+    sum = (int16_t)(size_56 * 2 + angle_6a - angle_66);
+    offset_18 = rd_s32(REFERENCE_18) - rd_s32(r + 0x18);
+    offset_18 >>= (rd_u16(r + 0x02) & 0x08) ? 11 : 13;
+    return (int16_t)(sum + offset_18);
+}

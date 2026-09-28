@@ -8,4 +8,7 @@ void set_zoom_maximum(void);
  * limited to the front half circle, rotation wraps. */
 void pan_view_from_keys(void);
 
+/* The 45-degree sector (0-7) of the view angle into VIEW_OCTANT. */
+void update_view_octant(void);
+
 #endif

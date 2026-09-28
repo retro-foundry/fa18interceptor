@@ -56,3 +56,10 @@ void pan_view_from_keys(void) {
         wr_s16(VIEW_ROTATE, rotate);
     }
 }
+
+void update_view_octant(void) {
+    int16_t angle = rd_u8(CONTEXT_SELECT) ? rd_s16(VIEW_ROTATE) : (int16_t)rd_u32(HEADING_ANGLE);
+    int8_t octant = 0;
+    while (octant < 7 && angle >= (int16_t)((octant + 1) * 0xE10)) octant++;
+    wr_u8(VIEW_OCTANT, (uint8_t)octant);
+}

@@ -108,4 +108,9 @@ int glue_C2198C(void);
 int glue_C218C8(void);
 int glue_C207FE(void);
 
+/* batch 12: view octant, paired records, attitude term */
+int glue_C254E8(void);
+int glue_C231A2(void);
+int glue_C148E2(void);
+
 #endif
