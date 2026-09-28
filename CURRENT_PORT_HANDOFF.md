@@ -808,8 +808,20 @@ Relevant evidence is `analysis/routines/c1612c_outer_loop_child.md`,
 `analysis/routines/run075_frame392_parent_update.md`, and
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
+`outer_loop_child.{c,h}` now composes the complete observed
+`$C1612C-$C16283` packet behind explicit caller-owned OS boundaries.  It
+performs `WaitBOVP`, publishes the indexed `$C182BA/$C182C2` pair, and invokes
+`LoadView` before the source's idle or signed activity path.  The activity
+path retains the exact static/dynamic 32-word RGB4 ordering and all
+`WaitBOVP`/`WaitBlit` boundaries; no page, palette, or callback schedule is
+invented.  `outer_loop_child_full_contract_test` verifies the two-iteration
+activity sequence and the idle route.  This supplies the display child for a
+future real outer-loop owner, but is intentionally not wired into `game.c`
+until that owner has source-backed parent callbacks, render-page choice, and
+Copper publication.
+
 Current validated state uses `build\\port-native`: native build audit passes
-277 files, `ctest` passes 145/145, and frame parity remains 192 exact frames
+277 files, `ctest` passes 146/146, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 
