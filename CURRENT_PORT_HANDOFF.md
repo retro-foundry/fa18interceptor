@@ -1178,6 +1178,13 @@ directory. The mutable bit gate, special pairs, placement cache, and workspace
 bands remain caller-owned, so this adds original data without importing a
 replay snapshot.
 
+The immutable binding now also exposes the exact `$C411F0` control translate,
+`$C1D764` delta-pair, and `$C1D8B6` special-pair tables. The new
+`terrain_template_workspace_pass.{c,h}` composes those values through the
+existing `$C1D330-$C1D51D` band/stream implementation using caller-owned live
+terms, gates, append records, and workspace; it remains unscheduled pending
+the recovered parent cadence.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
