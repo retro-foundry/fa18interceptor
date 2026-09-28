@@ -11,8 +11,8 @@
 
 The current native reference check reaches **192 exact frames**: global frames
 200 through 391.  It first mismatches at global frame 392 (361 of 64,000
-pixels; bbox x=7..318, y=101..199).  The configured suite contains **139** contracts;
-the last full run passed 139/139.
+pixels; bbox x=7..318, y=101..199).  The configured suite contains **141** contracts;
+the last full run passed 141/141.
 
 ## Latest root-owner work
 
@@ -113,6 +113,16 @@ then one explicit iteration of OwnBlitter, DisownBlitter, `$C0EFD4`, display
 wait, and `$C1612C`. The caller still owns loop repetition at the original
 back-edge and every unresolved child body, so this does not infer a
 presentation-frame scheduler or wire incomplete parent work into `game.c`.
+
+`matrix_cache_update.{c,h}` ports the direct `$C2DC9A-$C2DCC0` `$C45BD8`
+publisher: it composes the three live `$C45A8A/$8E/$92` angle words and applies
+the three `$C45A3E` row scales. `control_record_matrix_route.{c,h}` composes
+the observed default `$C2DB18-$C2DCC0` route: a non-special active control
+record's `+$66/+68/+6A` triple supplies `$C45A88`, `$C45BEA`, and the scaled
+`$C45BD8` cache. The run075 matrix is contract-verified as
+`{167,0,-8; 0,252,0; 6,0,127}`. Alternate selector/type routes and the live
+row-scale producer remain explicit caller boundaries; no captured values enter
+the normal runtime.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
