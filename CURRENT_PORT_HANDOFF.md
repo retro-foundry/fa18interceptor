@@ -1,5 +1,45 @@
 # C port continuation handoff
 
+## Context handoff — 2026-09-28
+
+- Branch/head: `coverage-accounting` at `31588705` (`Port extended record
+  table dispatch`), pushed to `origin/coverage-accounting`.
+- Worktree: user-owned untracked `.vscode/` only; leave it untouched.
+- Native normal-render truth: `game.c` still does **not** schedule the real
+  placement/control-stream owner.  Do not claim, show, or link a native frame
+  until `scripts/render_native_visual.py --frame 402` reports nonblack native
+  pixels.  Do not route `fa18_game_present_active_scene_render_diagnostic`, a
+  capture fixture, or an emulator/oracle image into normal presentation.
+- Authority: translate the supplied P-code/observed assembly directly.  The
+  emulator is validation only, never implementation input or a displayed
+  substitute for the native frame.
+- Last full validation: 197/197 CTest contracts passed; native build checker
+  reported 376 C sources.
+
+### Most recent chain
+
+`record_walker_runtime.{c,h}` ports bounded `$C1F6F8-$C1F966`, including
+`$C1F7A0` A1/A2 selection and `$C1F910` negative-selector dispatch.
+`line_record_dispatch.{c,h}` is the strict `$0034 -> $C212B0 -> $C2EE4A ->
+$C2FA7E` adapter.  Its frame-602 contract starts at real A2 `$C3985A`, reads
+offsets 342/348, and gets native callback coordinates `(173,68)->(163,68)`.
+All non-`$0034` selectors fail explicitly.
+
+`extended_record_dispatch.{c,h}` ports `$C1F94E-$C1F999`; it reaches the
+required `$C1F99A` transform boundary and then dispatches the next selector.
+It deliberately takes `$C1F99A` as a callback—no transformed records are
+invented.  The next direct implementation task is `$C1F99A-$C1FB22` using
+the bounded trace at `build/run031_frame7500_c1f99a_external_trace/` (231
+instructions, return PC `$C1F970`) and
+`build/run031_frame1965_c1f99a_transform_entries.json` for its descriptor,
+source, workspace, and matrix ranges.
+
+After `$C1F99A`, compose it into the extended dispatcher and walker, then
+bind the resulting line-emitter owner only at the actual placement/scene
+runtime schedule.  Run the normal visual gate immediately after that binding;
+if it remains black, report exactly that rather than presenting a contract or
+oracle artifact.
+
 ## Latest record-walker composition
 
 `record_walker_runtime.{c,h}` now directly composes the bounded P-code path
