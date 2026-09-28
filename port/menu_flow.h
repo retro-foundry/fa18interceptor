@@ -23,6 +23,8 @@ typedef struct {
     uint8_t post_input_tick_count;
     uint8_t transition_started;
     uint8_t transition_stage;
+    uint8_t root_table_index;
+    uint8_t root_type;
     uint8_t post_input_phase;
     uint8_t transition_auxiliary;
     uint8_t demo_followup_pending;

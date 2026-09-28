@@ -28,6 +28,7 @@ typedef struct {
     FA18SceneFinalizationState finalization;
     const FA18SceneInitializationState *initialization_state;
     uint8_t mode;
+    uint8_t root_type;
 } FA18SceneEntryRuntime;
 
 int fa18_scene_entry_runtime_init(FA18SceneEntryRuntime *runtime,
@@ -38,6 +39,7 @@ int fa18_scene_entry_runtime_init(FA18SceneEntryRuntime *runtime,
 /* `$C0FAA4` invokes `$C28722`, `$C0924A`, `$C11312`, then `$C082B0`.
  * `mode` is supplied by the caller-owned post-input state, not a recording. */
 int fa18_run_scene_entry_runtime(FA18SceneEntryRuntime *runtime, uint8_t mode,
+                                 uint8_t root_type,
                                  FA18SceneInitializationState *state,
                                  int16_t *countdown);
 

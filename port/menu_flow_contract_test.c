@@ -47,6 +47,7 @@ int main(void) {
     if (fa18_menu_flow_post_input_tick(&flow) != 1 ||
         !flow.transition_started || flow.display_delay != 4 ||
         flow.transition_row_limit != 179 || flow.transition_stage != 3 ||
+        flow.root_table_index != 3 || flow.root_type != 0x11 ||
         flow.post_input_phase != 2 || !flow.transition_auxiliary ||
         !flow.demo_followup_pending || !flow.blank_presentation_pending ||
         fa18_menu_flow_post_input_tick(&flow) != -1) {

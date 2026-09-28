@@ -57,14 +57,15 @@ int main(void) {
     assert(fa18_load_scene_record_table(&hunks, &record_table) == 0);
     assert(fa18_scene_entry_runtime_init(&runtime, &hunks, &dispatch_table,
                                          &record_table) == 0);
-    assert(fa18_run_scene_entry_runtime(&runtime, 0x7f, &state, &countdown) == 0);
+    assert(fa18_run_scene_entry_runtime(&runtime, 0x7f, 0x11, &state, &countdown) == 0);
     assert(state.scene_latch_previous == 9 && state.scene_stage == 3 &&
            state.callback_mode == 3 && countdown == 1);
     assert(runtime.dispatch_runtime.record[14].bytes[1] & 0x40u);
     assert(runtime.root_route == FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_APPLIED &&
            runtime.root_placement.selected_record_index == 14 &&
            runtime.root_placement.pose.position[1] == 0x7708);
-    assert(runtime.dispatch_runtime.record[0].bytes[4] == 0xc8 &&
+    assert(runtime.dispatch_runtime.record[0].bytes[0x62] == 0x11 &&
+           runtime.dispatch_runtime.record[0].bytes[4] == 0xc8 &&
            runtime.dispatch_runtime.record[0].bytes[0x18 + 3] == 0x08);
     assert(runtime.message.delay == 0x1b8 && runtime.finalization.stage_word == 0x90);
     return 0;

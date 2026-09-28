@@ -72,6 +72,9 @@ static int initialize_root(void *context) {
         resolve_positive,
         &negative_ops, matrix_ops(runtime), runtime
     };
+    /* `$C092EC` stores the caller-published `$C45849` byte at root +$62
+     * before the table route writes the root pose fields. */
+    runtime->dispatch_runtime.record[0].bytes[0x62] = runtime->root_type;
     if (fa18_prepare_scene_root_placement(runtime->record_table, &input,
                                           &runtime->root_placement, &ops,
                                           &runtime->root_route) != 0)
@@ -110,6 +113,7 @@ int fa18_scene_entry_runtime_init(FA18SceneEntryRuntime *runtime,
 }
 
 int fa18_run_scene_entry_runtime(FA18SceneEntryRuntime *runtime, uint8_t mode,
+                                 uint8_t root_type,
                                  FA18SceneInitializationState *state,
                                  int16_t *countdown) {
     const FA18SceneInitializationOps ops = {
@@ -117,6 +121,7 @@ int fa18_run_scene_entry_runtime(FA18SceneEntryRuntime *runtime, uint8_t mode,
     };
     if (!runtime || !state || !countdown) return -1;
     runtime->mode = mode;
+    runtime->root_type = root_type;
     runtime->initialization_state = state;
     return fa18_initialize_scene_state(state, countdown, &ops);
 }

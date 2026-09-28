@@ -85,6 +85,10 @@ int fa18_menu_flow_post_input_tick(FA18MenuFlow *flow) {
     flow->transition_row_limit = 179;
     flow->display_delay = 4;
     flow->transition_stage = 3;
+    /* `$C0FFB2-$C0FFBE` prepares the root-table selector and root type before
+     * the mode-$7F arm installs `$C0FA04`. */
+    flow->root_table_index = 3;
+    flow->root_type = 0x11;
     flow->post_input_phase = 2;
     flow->transition_auxiliary = 1;
     flow->demo_followup_pending = 1;

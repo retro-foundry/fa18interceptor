@@ -70,6 +70,15 @@ root placement. The pre-existing type byte `+$62` is intentionally preserved:
 the source path does not write it, and its native producer is still required
 before `$C1C54E` can become the normal renderer input.
 
+That producer is now bounded too: the run075 `$C0FEEA` continuation executes
+`$C0FFB2-$C0FFBE` before the mode-$7F arm, writing root selector `3` and root
+type `$11` to the bytes later consumed by `$C0924A`. `FA18MenuFlow` carries
+these two direct values when its existing source-backed delayed transition
+expires, and `scene_entry_runtime` writes the caller-provided root type to
+slot-zero `+$62` at the observed `$C092EC` boundary before root placement.
+The remaining integration task is callback scheduling from that arm to the
+entry initializer; it must be a source-backed scheduler, not a frame count.
+
 ## Next context: required scheduler integration
 
 Do not add a frame-number trigger or captured page to `game.c`. The source
