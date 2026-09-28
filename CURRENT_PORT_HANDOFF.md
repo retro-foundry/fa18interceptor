@@ -2,6 +2,15 @@
 
 ## Latest dispatch boundary
 
+`scene_stream_runtime.{c,h}` now composes the direct P-code route
+`$C1EE14-$C1EF9C -> $C1F464-$C1F578 -> $C1F6F8-$C1F79F`.  It keeps the
+selected descriptor/control-stream and its `$C48390` transformed triples in
+one big-endian mutable workspace, then hands the same original offsets to the
+record walker.  Descriptor control-bit branches and negative walker controls
+remain explicit unported routes.  This is a source-data owner boundary, not
+yet a `game.c` schedule: normal frame 402 remains black (zero nonblack
+pixels).
+
 `prepared_record_dispatch.{c,h}` ports `$C2005C-$C200F5` through the
 explicit `$C2469E` handoff.  It retains the source's two direct transformed
 tuple offsets, variable continuation terminated by a negative masked offset,
