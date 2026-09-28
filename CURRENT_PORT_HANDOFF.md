@@ -13,10 +13,19 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 204/204 CTest contracts passed; native build checker
-  reported 392 C sources.
+- Last full validation: 205/205 CTest contracts passed; native build checker
+  reported 394 C sources.
 
 ### Most recent chain
+
+`scene_selector_context.{c,h}` now ports `$C1C8B0-$C1C912`, the first
+mutable selector pack consumed by the later `$C1D10C` template/placement
+stage.  It reads selected-record `+$06/+08` with arithmetic quartering on the
+normal route, or derives the masked alternate `$C45C3E/$C45C46` high-word
+pair with arithmetic eighths, then writes the two selector terms and direct
+append/status flags.  The preceding `$C1CA82` selector and following
+`$C1D10C` consumer remain explicit source owners; this does not schedule a
+renderer or use replay-frame data.
 
 `post_input_followup.{c,h}` and `game.c` now retain the complete direct
 post-input callback sequence instead of treating `$C0FA04` as scene-entry
