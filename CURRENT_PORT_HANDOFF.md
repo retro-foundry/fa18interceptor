@@ -13,10 +13,17 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 202/202 CTest contracts passed; native build checker
-  reported 388 C sources.
+- Last full validation: 203/203 CTest contracts passed; native build checker
+  reported 390 C sources.
 
 ### Most recent chain
+
+`matrix_transform_components.{c,h}` now ports `$C091F0-$C09249`, the shared
+signed three-word transform leaf: wrapped signed word products through the
+active 8.8 matrix, arithmetic longword shift by four, and wrapped addition of
+the selected record `+$14/+18/+1C` triple.  It is available to the
+matrix-table branch of `$C29042`; table selection and parent scheduling remain
+caller-owned.
 
 `current_record_matrix.{c,h}` now ports `$C2DAF2-$C2DB17`, the matrix
 preparation called at the `$C29042` entry.  It reads the selected record
