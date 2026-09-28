@@ -1270,6 +1270,22 @@ before it can contribute to normal replay. Full validation after this commit
 passes 176/176 contracts and 192 exact native frames (200--391); frame 392
 remains the first mismatch, at 361 pixels.
 
+The five static slices of the full parent update are now composed by
+`parent_update_pipeline.{c,h}` through `$C0EFD4-$C0F3C3`: prefix, middle,
+flight update, postflight setup, activity stages, and tail. Commits
+`7946482b`, `9e927ba0`, `10dfb13a`, `cc9534ff`, `6a85b5be`, and `ca71a26b`
+add those boundaries, their source gates, the complete composition, its
+contract linkage, and fail-loud dependency validation. The parent carries its
+single caller-owned local-frame word through the postflight/activity/tail
+gates; it does not infer a presentation-frame cadence. Full validation after
+the composition passes 179/179 contracts and retains 192 exact frames.
+
+The next required source owner is still the initialization of the two native
+view/page identities corresponding to `$C182BA/$C182C2` and their five-plane
+buffers. Frame-392 traces prove the child consumes and publishes those tables,
+but do not identify their initialization writer; do not substitute the
+observed `$C074D8/$C07F00` addresses as native identities.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
