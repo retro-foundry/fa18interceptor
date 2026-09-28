@@ -66,7 +66,8 @@ int fa18_update_coordinate_negative_pair(
     scaled_first = (int16_t)asr_long(first, 8);
     scaled_third = (int16_t)asr_long(input->third_component, 8);
     if (scaled_first <= scaled_third ||
-        fa18_round_signed_divide((int32_t)scaled_third << 6, scaled_first,
+        /* `$C12570` reloads the unscaled `$18(a6)` component before ASL #6. */
+        fa18_round_signed_divide(input->third_component << 6, scaled_first,
                                  &first_ratio) != 0 ||
         lookup_word(table, asr_word(first_ratio, 6), &table_word) != 0)
         return -1;

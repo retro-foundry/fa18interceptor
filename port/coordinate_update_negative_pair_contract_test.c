@@ -17,12 +17,12 @@ int main(void) {
     FA18HunkSegment segments[64] = {0};
     FA18Hunks hunks = {segments, 64};
 
-    /* The bounded `$C2D9BA` trace reaches quotient indexes zero and 43.
-     * Original Hunk-63 `$C3DB00` words are 0 and 95 respectively. */
-    store_word(bytes, 0, 0);
+    /* The bounded `$C2D9BA` trace reaches quotient indexes 25 and 43.
+     * Original Hunk-63 `$C3DB00` words are 55 and 95 respectively. */
+    store_word(bytes, 25, 55);
     store_word(bytes, 43, 95);
     assert(fa18_update_coordinate_negative_pair(&table, &input, &output) == 0);
-    assert(output.output_x == 760 && output.output_z == 7200 &&
+    assert(output.output_x == 760 && output.output_z == 6760 &&
            output.status_flag == 1);
     input.first_component = 1;
     assert(fa18_update_coordinate_negative_pair(&table, &input, &output) == -1);
