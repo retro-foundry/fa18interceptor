@@ -32,3 +32,16 @@ int fa18_advance_post_input_followup_match(FA18PostInputFollowupState *followup,
     followup->callback = FA18_POST_INPUT_CALLBACK_COMPLETE_FOLLOWUP;
     return 1;
 }
+
+int fa18_complete_post_input_followup(FA18PostInputFollowupState *followup,
+                                      uint8_t *event_flag) {
+    if (!followup || !event_flag ||
+        followup->callback != FA18_POST_INPUT_CALLBACK_COMPLETE_FOLLOWUP)
+        return -1;
+    if (followup->countdown >= 0) return 0;
+
+    *event_flag = 0;
+    followup->match_auxiliary = 1;
+    followup->callback = FA18_POST_INPUT_CALLBACK_CONTINUE_AFTER_COMPLETE_FOLLOWUP;
+    return 1;
+}

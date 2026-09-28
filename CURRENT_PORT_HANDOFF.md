@@ -18,6 +18,17 @@
 
 ### Most recent chain
 
+`post_input_followup.{c,h}` and `game.c` now retain the complete direct
+post-input callback sequence instead of treating `$C0FA04` as scene-entry
+completion.  After `$C0FA04` initializes the scene and installs `$C0FA4C`,
+the native state waits for the viewport input match, then `$C0FA80` clears the
+caller-owned event flag, sets its auxiliary byte, and records the installed
+`$C10C08` continuation.  `game.c` marks this bounded sequence complete only
+after `$C0FA80`; it does not advance or substitute the unported `$C10C08`
+controller.  The run075 timing stream has only delivered 196 of the source
+mode-$7F delay's 210 ticks by frame 402, so this state correction is not a
+normal-render scheduler or a visual result.
+
 `terrain_selector_origin_adjustment.{c,h}` now ports the shared
 `$C29548-$C295D0` candidate tail.  It quarter-reduces the source magnitude,
 uses the required `$C2574A` scale callback, sign-extends/scales the candidate,

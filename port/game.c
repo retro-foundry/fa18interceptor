@@ -61,11 +61,29 @@ static int advance_scene_entry_callback(FA18Game *game) {
         fa18_menu_flow_advance_post_input_countdown(
             &game->menu_flow, &game->post_input_followup.countdown) != 0)
         return -1;
-    int result = fa18_finish_post_input_followup(&game->post_input_followup,
+    int result;
+    switch (game->post_input_followup.callback) {
+    case FA18_POST_INPUT_CALLBACK_FINISH_FOLLOWUP:
+        result = fa18_finish_post_input_followup(&game->post_input_followup,
                                                   &game->viewport_mode,
                                                   initialize_scene_entry, game);
+        break;
+    case FA18_POST_INPUT_CALLBACK_AFTER_FINISH_FOLLOWUP:
+        result = fa18_advance_post_input_followup_match(&game->post_input_followup,
+                                                         &game->viewport_mode);
+        break;
+    case FA18_POST_INPUT_CALLBACK_COMPLETE_FOLLOWUP:
+        result = fa18_complete_post_input_followup(
+            &game->post_input_followup, &game->scene_initialization.scene_flag);
+        break;
+    default:
+        return -1;
+    }
     if (result < 0) return -1;
-    if (result > 0) game->scene_entry_complete = 1;
+    if (result > 0 &&
+        game->post_input_followup.callback ==
+            FA18_POST_INPUT_CALLBACK_CONTINUE_AFTER_COMPLETE_FOLLOWUP)
+        game->scene_entry_complete = 1;
     return 0;
 }
 

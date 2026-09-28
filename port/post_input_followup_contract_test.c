@@ -44,12 +44,23 @@ int main(void) {
     assert(followup.countdown == 2 &&
            followup.callback == FA18_POST_INPUT_CALLBACK_COMPLETE_FOLLOWUP);
 
+    followup.countdown = 0;
+    uint8_t event_flag = 1;
+    assert(fa18_complete_post_input_followup(&followup, &event_flag) == 0);
+    assert(event_flag == 1 &&
+           followup.callback == FA18_POST_INPUT_CALLBACK_COMPLETE_FOLLOWUP);
+    followup.countdown = -1;
+    assert(fa18_complete_post_input_followup(&followup, &event_flag) == 1);
+    assert(!event_flag && followup.match_auxiliary == 1 &&
+           followup.callback == FA18_POST_INPUT_CALLBACK_CONTINUE_AFTER_COMPLETE_FOLLOWUP);
+
     followup.callback = FA18_POST_INPUT_CALLBACK_FINISH_FOLLOWUP;
     followup.countdown = 0;
     assert(fa18_finish_post_input_followup(&followup, &viewport_mode,
                                             observe_initializer, &observation) == 0);
     assert(observation.calls == 1);
     assert(fa18_advance_post_input_followup_match(&followup, &viewport_mode) == -1);
+    assert(fa18_complete_post_input_followup(&followup, &event_flag) == -1);
     assert(fa18_finish_post_input_followup(NULL, &viewport_mode,
                                             observe_initializer, &observation) == -1);
     return 0;
