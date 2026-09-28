@@ -118,4 +118,9 @@ int glue_C3267A(void);
 int glue_C2559A(void);
 int glue_C2651E(void);
 
+/* batch 14: paired sin_cos, print_number, square_root */
+int glue_C2E5F6(void);
+int glue_C24F76(void);
+int glue_C2564E(void);
+
 #endif

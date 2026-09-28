@@ -212,4 +212,8 @@
 #define HISTORY_NEXT       0xC4FDD1u /* byte: 0-5 next slot */
 #define HISTORY_SLOTS      0xC4FDD4u /* 12-byte slots: record +$14, +$18, +$1C */
 
+/* ---- square root ($C2564E) ------------------------------------------------ */
+#define SQRT_INPUT         0xC45B64u /* long */
+#define SQRT_RESULT        0xC45B68u /* word */
+
 #endif

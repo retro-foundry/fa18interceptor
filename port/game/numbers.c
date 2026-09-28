@@ -3,6 +3,7 @@
 
 #include "globals.h"
 #include "memory.h"
+#include "text.h"
 
 uint32_t to_packed_bcd(uint32_t value) {
     static const uint32_t place_value[8] = {10000000u, 1000000u, 100000u, 10000u,
@@ -37,4 +38,11 @@ gaddr format_decimal(gaddr end, uint32_t value, int count, int keep_zeros) {
         for (i = 0; i < count - 1 && rd_u8(q) == '0'; i++) wr_u8(q++, ' ');
     }
     return p;
+}
+
+void print_number(gaddr field, int16_t offset, uint32_t value, int8_t width) {
+    wr_u32(DISPLAY_VALUE, value);
+    pack_display_value();
+    /* Packed BCD printed as hex digits is the decimal number. */
+    format_hex(field + (gaddr)(int32_t)offset, rd_u32(DISPLAY_VALUE_BCD), width);
 }

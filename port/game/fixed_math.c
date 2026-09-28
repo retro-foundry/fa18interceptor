@@ -120,3 +120,30 @@ int32_t random_bits(int32_t count) {
     while (count-- > 0) bits = bits * 2 + random_bit();
     return bits;
 }
+
+/* DIVU.W quotient: on overflow the dividend's low word stays. */
+static uint16_t divu_word(uint32_t dividend, uint16_t divisor) {
+    uint32_t q = dividend / divisor;
+    return (uint16_t)(q > 0xFFFF ? dividend : q);
+}
+
+static uint16_t newton_sqrt(uint32_t x) {
+    uint16_t guess = (uint16_t)(divu_word(x, 200) + 2);
+    for (;;) {
+        uint16_t q;
+        if (guess == 0) return 0; /* the original would take a divide-by-zero trap */
+        q = divu_word(x, guess);
+        int16_t diff = (int16_t)(q - guess);
+        if (diff >= -1 && diff <= 1) return q;
+        guess = (uint16_t)((uint16_t)(guess + q) >> 1);
+    }
+}
+
+void square_root(void) {
+    uint32_t x = rd_u32(SQRT_INPUT);
+    uint16_t root;
+    if ((int32_t)x <= 0x63F000) root = newton_sqrt(x);
+    else if ((int32_t)x <= 0x63F0000) root = (uint16_t)(newton_sqrt(x >> 4) << 2);
+    else root = (uint16_t)(newton_sqrt(x >> 8) << 4);
+    wr_u16(SQRT_RESULT, root);
+}

@@ -51,4 +51,8 @@ int32_t cell_step(int16_t cells);
 /* `count` pseudo-random bits, first bit highest. */
 int32_t random_bits(int32_t count);
 
+/* Integer square root of SQRT_INPUT into SQRT_RESULT (Newton's method;
+ * large inputs are scaled down by 16 or 256 first). */
+void square_root(void);
+
 #endif

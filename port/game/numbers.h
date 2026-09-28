@@ -17,4 +17,8 @@ void pack_display_value(void);
  * spaces. Returns the address of the first digit. */
 gaddr format_decimal(gaddr end, uint32_t value, int count, int keep_zeros);
 
+/* Print `value` in decimal into the `width`-character field that ends at
+ * field + offset + width, blanking leading zeros. */
+void print_number(gaddr field, int16_t offset, uint32_t value, int8_t width);
+
 #endif

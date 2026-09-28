@@ -120,6 +120,10 @@ const FA18Port fa18_ports[] = {
     {0xC3267A, glue_C3267A, "format_decimal", 500},
     {0xC2559A, glue_C2559A, "step_cockpit_slide", 300},
     {0xC2651E, glue_C2651E, "record_position_history", 350},
+    /* batch 14: paired sin_cos, print_number, square_root */
+    {0xC2E5F6, glue_C2E5F6, "sin_cos", 200},
+    {0xC24F76, glue_C24F76, "print_number", 700},
+    {0xC2564E, glue_C2564E, "square_root", 600},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
