@@ -948,9 +948,18 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-279 files, `ctest` passes 149/149, and frame parity remains 192 exact frames
+281 files, `ctest` passes 150/150, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
+
+The frame-392 difference is a source palette reveal, not a new page write:
+the prepared five-plane cockpit page was populated before the transition, and
+the mode-8 lower-16 COLOR update makes 361 existing pixels visible.  Therefore
+the next native work is to port and compose the live prepared-page producer,
+not to schedule a blank page or add a frame-specific render hook.  The latest
+return-bounded evidence is `$C0D752 -> $C2E758 -> $C0D7E0` in ordinary run075;
+`$C2E758` writes `$C4B990` pairs before the existing `$C24A/$C24C/$C24D`
+clipping/projection/fill path.
 
 ## Standard validation after each stage
 

@@ -115,3 +115,21 @@ paths return to the common loop increment at `$C2EA38`.
 
 The static prefix ends immediately after the direct helper call so that the
 unexecuted selector tail remains outside this bounded reconstruction.
+
+## run075 prepared-page caller witness
+
+The ordinary run075 preparation-window watch on `$C4B990` records the same
+iterator as a live producer, rather than only the earlier attract-cockpit
+case.  It observes the iterator clear workspace slots at `$C2E9DC`, then
+write accepted projected pairs at `$C2EA34`; the downstream `$C24A44/$C24A46`
+and `$C24A6C/$C24A6E/$C24A70` writes subsequently build the clipped tuple list
+consumed by the prepared-page polygon tail.  The watch's host-frame label is
+not a reliable presentation-frame identity, so this is deliberately a
+preparation-window statement.
+
+A return-bounded replay trace at `$C2E758` (`build/run075_prepared_c2e758/`)
+hits after the normal replay input has been delivered, executes 564
+instructions, and returns to `$C0D7E0`.  This establishes the concrete live
+composition `$C0D752 -> C2E758 -> C0D7E0` for the prepared-page path.  It does
+not yet establish the native owner, its cadence, or how its generated pairs
+become a native page submission.
