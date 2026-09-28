@@ -1,0 +1,4 @@
+#include "template_workspace_append.h"
+static int w(const uint8_t*p){return (int16_t)((uint16_t)p[0]<<8|p[1]);}
+static int scan(uint8_t*b,size_t z,size_t stride,uint8_t tag,int8_t x,int16_t a,int16_t c,uint8_t*out,size_t cap,size_t*n){for(unsigned k=0;k<16;k++){if(z<stride)return -1;if((b[1]&0x50)==0x50&&w(b+6)==c&&w(b+8)==a&&(int8_t)b[10]==x){if(cap-*n<3)return -1;b[1]&=(uint8_t)~0x10;out[(*n)++]=tag;out[(*n)++]=(uint8_t)k;out[*n]=0xff;}b+=stride;z-=stride;}return 0;}
+int fa18_append_template_workspace_matches(FA18TemplateWorkspaceAppend*s,int8_t x,int16_t a,int16_t b,size_t*n){if(!s||!n||!s->first||!s->second||!s->out)return -1;*n=0;if(x<0)return 0;if(scan(s->first,s->first_size,0x200,0x10,x,a,b,s->out,s->out_size,n)||scan(s->second,s->second_size,0x20,0x40,x,a,b,s->out,s->out_size,n))return -1;return 0;}
