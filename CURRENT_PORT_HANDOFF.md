@@ -1105,6 +1105,14 @@ vertical 89, horizontal 0) to `FA18FlightRendererPage` and
 and nonzero lower-plane bytes. This establishes actual native page geometry at
 the adapter boundary; it is not a scheduler or a captured page import.
 
+`map_packet_static_data.{c,h}` now binds the original immutable inputs required
+by the existing map-pass runner: Hunk 28 (`$C29F00-$C2B3B4`) supplies selector
+pairs and control streams, while Hunk 68 (`$C42CA8-$C444F8`) supplies the
+packet-directory and pair payload. Its address resolvers reject out-of-range
+requests and retain the source runtime bases; no replay memory is imported.
+The remaining normal-runtime owner is the live parent record/matrix state that
+must populate the pass input and bind the selected page submission.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
