@@ -2,6 +2,7 @@
 #define FA18_TERRAIN_PLACEMENT_PIPELINE_H
 #include <stddef.h>
 #include <stdint.h>
+#include "scene_placement_builder_prefix.h"
 #include "scene_placement_builder_tail.h"
 
 typedef int (*FA18TerrainPlacementEmit)(void *, const uint8_t[FA18_SCENE_PLACEMENT_BYTES]);
@@ -19,6 +20,16 @@ typedef enum {
  * this routine owns only the original terminator and flag-controlled stride. */
 int fa18_emit_workspace_placement_records(
     const uint8_t *workspace_cell, size_t workspace_cell_size,
+    FA18TerrainPlacementBuildInputResolve resolve, FA18TerrainPlacementEmit emit,
+    void *context, FA18TerrainPlacementCellEnd *end);
+
+/* `$C1DC44-$C1E11A`: compose the cell-selector prefix with its following
+ * workspace walk.  This is the native boundary from source selector inputs to
+ * placement records; per-item live terms and descriptor resolution remain
+ * required through `resolve`. */
+int fa18_emit_prefixed_workspace_placement_records(
+    const FA18ScenePlacementBuilderPrefixInput *prefix_input,
+    FA18ScenePlacementBuilderPrefix *prefix,
     FA18TerrainPlacementBuildInputResolve resolve, FA18TerrainPlacementEmit emit,
     void *context, FA18TerrainPlacementCellEnd *end);
 #endif

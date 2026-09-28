@@ -40,3 +40,15 @@ int fa18_emit_workspace_placement_records(
     *end = FA18_TERRAIN_PLACEMENT_CELL_END;
     return 0;
 }
+
+int fa18_emit_prefixed_workspace_placement_records(
+    const FA18ScenePlacementBuilderPrefixInput *prefix_input,
+    FA18ScenePlacementBuilderPrefix *prefix,
+    FA18TerrainPlacementBuildInputResolve resolve, FA18TerrainPlacementEmit emit,
+    void *context, FA18TerrainPlacementCellEnd *end) {
+    if (!prefix || fa18_prepare_scene_placement_builder_prefix(prefix_input, prefix) != 0)
+        return -1;
+    return fa18_emit_workspace_placement_records(prefix->workspace_cursor,
+                                                  WORKSPACE_CELL_BYTES, resolve, emit,
+                                                  context, end);
+}

@@ -62,5 +62,28 @@ int main(void) {
     assert(observation.resolved == 1 && end == FA18_TERRAIN_PLACEMENT_CELL_TERMINATOR);
     assert(fa18_emit_workspace_placement_records(cell, 0x5f, resolve_input,
                                                   emit_record, &observation, &end) == -1);
+    {
+        int8_t type_map[21] = { 0 };
+        int8_t type_pairs[2] = { 0, 0 };
+        int8_t placement_map[16] = { 0 };
+        int16_t pairs[4] = { 0 };
+        uint8_t workspace[16 * 0x60] = { 0 };
+        FA18ScenePlacementBuilderPrefixInput prefix_input = {
+            0, type_map, 21, type_pairs, 2, { 0, 0 }, 0, placement_map, 16,
+            pairs, 4, pairs, 4, workspace, sizeof workspace
+        };
+        FA18ScenePlacementBuilderPrefix prefix;
+        placement_map[0] = 1;
+        workspace[0x60] = 0;
+        workspace[0x61] = 0x6e;
+        workspace[0x66] = 0xff;
+        observation = (Observation){ 0 };
+        assert(fa18_emit_prefixed_workspace_placement_records(&prefix_input, &prefix,
+                                                               resolve_input, emit_record,
+                                                               &observation, &end) == 0);
+        assert(prefix.workspace_cursor == workspace + 0x60 &&
+               observation.emitted == 1 &&
+               end == FA18_TERRAIN_PLACEMENT_CELL_TERMINATOR);
+    }
     return 0;
 }

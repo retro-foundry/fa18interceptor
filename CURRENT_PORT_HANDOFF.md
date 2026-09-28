@@ -95,10 +95,11 @@ the first and third source work longwords while the middle word remains clear.
 signed-byte maps select the source-scaled coordinate pairs and one bounded
 96-byte `$C48390` workspace cell. `terrain_placement_pipeline.{c,h}` now
 ports the following `$C1DD22-$C1DD34` cell walk, including its source
-terminator and bit-4/bit-6 payload stride. The remaining builder work is its
-setup, descriptor route, and live-term ownership, using the new mutable
-workspace expansion as source-backed input. Do not schedule the renderer from
-a presentation frame or import a captured page.
+terminator and bit-4/bit-6 payload stride; it composes the prefix and cell
+walk into one `$C1DC44-$C1E11A` record-emission boundary. The remaining
+builder work is its setup, descriptor route, and live-term ownership, using
+the new mutable workspace expansion as source-backed input. Do not schedule
+the renderer from a presentation frame or import a captured page.
 
 `scene_entry_runtime.{c,h}` now composes the exact four `$C0FAA4` helper
 boundaries into one state-driven owner: `$C28722`, `$C0924A`, `$C11312`, then
