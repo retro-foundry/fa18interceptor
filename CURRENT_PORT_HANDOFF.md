@@ -1387,3 +1387,10 @@ the recovered stream entry to the existing geometry callbacks. See
 positions, and leaves `$C1F906` dispatch plus `$C1F844` post-stream work as
 explicit caller routes. This is not attached to `game.c`. See
 `analysis/routines/c1f7a0_record_stream_selector.md`.
+
+`record_table_dispatch.{c,h}` now ports `$C1F910-$C1F94D`, the A2 indirect
+selector entry following the stream selector. It retains the source signed
+word branches, `$4000` count, `$3FFF` target index, error report, returned
+status accumulation, and each enclosing-walker exit as explicit routes.
+Target resolution stays caller-owned and this is not attached to `game.c`.
+See `analysis/routines/c1f910_record_table_dispatch.md`.
