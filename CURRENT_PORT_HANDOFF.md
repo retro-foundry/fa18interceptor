@@ -20,6 +20,15 @@ separate control and descriptor byte ranges.  This is a P-code dataflow
 correction only; the normal frame-402 visual gate is still zero nonblack
 pixels.
 
+`scene_descriptor_static_data.{c,h}` now resolves a `$C1CB74` descriptor
+runtime address inside Hunk 16 through its four original `HUNK_RELOC32`
+fields.  It returns bounded `(target Hunk, target offset)` pairs and target
+bytes, never a host pointer or reconstructed Amiga address.  In particular it
+can express the observed `$C2232C` route to the `$C1EE14` code Hunk and its
+`$C445DC` control data.  Its next consumer is the placement-loop callback;
+normal frame 402 remains black until that source-owned mutable list is
+produced and scheduled.
+
 `prepared_record_dispatch.{c,h}` ports `$C2005C-$C200F5` through the
 explicit `$C2469E` handoff.  It retains the source's two direct transformed
 tuple offsets, variable continuation terminated by a negative masked offset,
