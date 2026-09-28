@@ -18,9 +18,9 @@ typedef FA18NativeViewPair FA18FlightPageViewPair;
 
 typedef struct {
     FA18FivePlanePage page[2];
-    /* Native Chip-RAM counterparts for the two source-selected five-plane
-     * render pages. These offsets are private native storage identities, not
-     * imported Amiga addresses. */
+    /* Generic two-page contract storage. `$C15DB4` now proves only one newly
+     * allocated five-plane page plus a lower-four-plane view over it; this
+     * storage is not the normal source initializer and remains unscheduled. */
     uint8_t chip_bytes[2][FA18_FLIGHT_PAGE_HANDOFF_CHIP_BYTES];
     FA18FivePlaneChipBinding chip_binding[2];
     FA18ProjectionPageBlitter page_blitter[2];
@@ -53,7 +53,9 @@ int fa18_flight_page_handoff_bind_page_blitter(
     FA18FlightPageHandoff *handoff, uint16_t page_index,
     const FA18BlitOperation *inherited_operation);
 
-/* `$C2F558` selection view. The outer child tail alone changes its index. */
+/* Generic selection view used by the unscheduled handoff contract. The
+ * source page/view topology must instead be composed from renderer_page_setup
+ * and the recovered ViewPort owner before normal runtime use. */
 FA18FlightRendererPage *fa18_flight_page_handoff_selected_renderer(
     FA18FlightPageHandoff *handoff);
 

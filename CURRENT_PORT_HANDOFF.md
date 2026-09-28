@@ -1331,6 +1331,14 @@ source allocation predates restored run075 frame 200. Full validation after
 this integration passes 181/181 contracts and retains the 192 exact-frame
 prefix; the first mismatch remains frame 392 with the same 361 pixels.
 
+Topology correction: `$C15FE8-$C16018` configures the second display record
+from the **lower four lanes of that same newly allocated five-plane page**.
+This does not prove two independent render-page allocations. The existing
+`flight_page_handoff` two-page object is generic, unscheduled contract support
+only; do not use it as the normal source initializer. Compose runtime display
+ownership from `renderer_page_setup` and the recovered ViewPort/Copper
+configuration, then separately account for the older `$012BC0` family.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
