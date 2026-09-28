@@ -1054,6 +1054,13 @@ as a fixture. The loader is one concrete normal-runtime input for the
 `$C0D752` producer; its live matrix, source component, iterator workspace,
 and inherited blitter registers still belong to the enclosing parent state.
 
+The same run075 prepared-page snapshot resolves two remaining pipeline names:
+`$C45A66=$FFFF83F8` contributes the high-word source component `-1` to
+`$C0D752`, and `$C45ACA=$0248` is the signed alternate-adjustment gate used
+inside `$C2E758`. `display_record_pipeline` and its iterator now expose the
+latter explicitly as `adjustment_gate_5aca`; it is not a caller stack value or
+an arbitrary test case selector.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:

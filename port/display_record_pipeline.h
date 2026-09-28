@@ -9,7 +9,7 @@ typedef struct {
     int16_t input_pairs[FA18_DISPLAY_RECORD_CANDIDATE_COUNT][2];
     int16_t source_component;
     int16_t matrix[3][3];
-    int16_t case_signed_word;
+    int16_t adjustment_gate_5aca;
     FA18DisplayRecordSelectorInput selector;
 } FA18DisplayRecordPipelineInput;
 
@@ -20,7 +20,8 @@ typedef struct {
 
 /* `$C0D752 -> $C2E758 -> $C0D7E0`: caller-owned workspace starts with the
  * source's remaining record/pair state; this routine performs only the proved
- * mutations and returns the selected `$C4B390` list. */
+ * mutations and returns the selected `$C4B390` list. `adjustment_gate_5aca`
+ * is the signed source word at `$C45ACA`. */
 int fa18_run_display_record_pipeline(
     const FA18DisplayRecordPipelineInput *input,
     int16_t records[FA18_DISPLAY_RECORD_ITERATOR_RECORD_COUNT]

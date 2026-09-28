@@ -21,7 +21,8 @@ int main(void) {
     };
     const int16_t expected_scratch[8] = {0, 1, 0, 1, 0, 5, 0, 4};
 
-    /* Return-bounded `build/run075_prepared_c2e758/` before/after windows. */
+    /* Return-bounded `build/run075_prepared_c2e758/` before/after windows;
+     * the live signed `$C45ACA` gate is `$0248` (584). */
     assert(fa18_iterate_display_records(records, workspace, scratch, 584) == 0);
     for (uint16_t index = 0; index < 8; ++index) {
         if (workspace[index][0] != expected_workspace[index][0] ||

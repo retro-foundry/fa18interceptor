@@ -25,7 +25,7 @@ int fa18_run_display_record_pipeline(
     }
     memset(result->scratch, 0, sizeof result->scratch);
     if (fa18_iterate_display_records(records, workspace, result->scratch,
-                                     input->case_signed_word) != 0)
+                                     input->adjustment_gate_5aca) != 0)
         return -1;
     memcpy(result->selection.words, record_words, sizeof result->selection.words);
     if (fa18_select_display_record_pairs(workspace, result->scratch,

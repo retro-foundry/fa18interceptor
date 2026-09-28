@@ -78,7 +78,7 @@ static void clear_record(int16_t records[8][8], int16_t workspace[2],
 }
 
 int fa18_iterate_display_records(int16_t records[8][8], int16_t workspace[8][2],
-                                 int16_t scratch[8], int16_t gate) {
+                                 int16_t scratch[8], int16_t adjustment_gate_5aca) {
     int defer = 0;
     if (!records || !workspace || !scratch) return -1;
     for (uint16_t index = 0; index < 8; ++index) {
@@ -98,7 +98,7 @@ int fa18_iterate_display_records(int16_t records[8][8], int16_t workspace[8][2],
         status = adjust(STANDARD, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_1;
-        if (gate >= 0) goto case3;
+        if (adjustment_gate_5aca >= 0) goto case3;
         d2 = word_neg(d2);
         if (d6 <= d2) goto case3;
         status = adjust(NEGATED, other, d3, d4, d5, &candidate);
@@ -114,7 +114,7 @@ case2:
         status = adjust(NEGATED, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_3;
-        if (gate >= 0) goto case3;
+        if (adjustment_gate_5aca >= 0) goto case3;
         d2 = word_neg(d2);
         if (d6 <= d2) goto case3;
         status = adjust(STANDARD, other, d3, d4, d5, &candidate);
@@ -130,7 +130,7 @@ case3:
         status = adjust(NEGATED_TRANSPOSED, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_2;
-        if (gate >= 0 || d4 < d5) goto failed;
+        if (adjustment_gate_5aca >= 0 || d4 < d5) goto failed;
         d2 = word_neg(d2);
         if (d6 <= d2) goto failed;
         status = adjust(TRANSPOSED, other, d3, d4, d5, &candidate);
@@ -144,7 +144,7 @@ case4:
         status = adjust(TRANSPOSED, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_0;
-        if (gate >= 0) goto failed;
+        if (adjustment_gate_5aca >= 0) goto failed;
         d6 = word_neg(d4);
         if (d6 < d5) goto failed;
         d2 = word_neg(d2);
@@ -160,7 +160,7 @@ case5:
         status = adjust(TRANSPOSED, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_0;
-        if (gate >= 0) goto case7;
+        if (adjustment_gate_5aca >= 0) goto case7;
         d2 = word_neg(d2);
         if (d6 <= d2) goto case7;
         status = adjust(NEGATED_TRANSPOSED, other, d3, d4, d5, &candidate);
@@ -175,7 +175,7 @@ case6:
         status = adjust(NEGATED_TRANSPOSED, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_2;
-        if (gate >= 0) goto case7;
+        if (adjustment_gate_5aca >= 0) goto case7;
         d2 = word_neg(d2);
         if (d6 <= d2) goto case7;
         status = adjust(TRANSPOSED, other, d3, d4, d5, &candidate);
@@ -191,7 +191,7 @@ case7:
         status = adjust(NEGATED, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_3;
-        if (gate >= 0 || d3 < d5) goto failed;
+        if (adjustment_gate_5aca >= 0 || d3 < d5) goto failed;
         d2 = word_neg(d2);
         if (d6 <= d2) goto failed;
         status = adjust(STANDARD, other, d3, d4, d5, &candidate);
@@ -205,7 +205,7 @@ case8:
         status = adjust(STANDARD, other, d3, d4, d5, &candidate);
         if (status < 0) return -1;
         if (!status) goto publish_1;
-        if (gate >= 0) goto failed;
+        if (adjustment_gate_5aca >= 0) goto failed;
         d6 = word_neg(d3);
         if (d6 < d5) goto failed;
         d2 = word_neg(d2);
