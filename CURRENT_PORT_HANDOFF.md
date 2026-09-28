@@ -80,6 +80,12 @@ byte of the first source byte. The downstream `$C1DC1C-$C1E0B0` placement
 builder and its upstream workspace terms remain unported. Normal replay is
 still exact through frame 391 and first differs at frame 392 by 361 pixels.
 
+`scene_placement_builder_tail.{c,h}` now ports the fully bounded
+`$C1DF04-$C1E0B0` output tail of the placement builder: adaptive shift-table
+selection, the shift-byte OR into the selector, three signed coordinate
+writes, and the 24-byte record suffix. Its caller still owns the preceding
+workspace/descriptor route and the live terms; it is not scheduled by game.c.
+
 The next implementation is the `$C1DC1C-$C1E0B0` placement builder, using the
 new mutable workspace expansion as its source-backed input. Do not schedule
 the renderer from a presentation frame or import a captured page.

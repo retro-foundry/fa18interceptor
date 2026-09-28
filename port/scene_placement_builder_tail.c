@@ -1,0 +1,62 @@
+#include "scene_placement_builder_tail.h"
+
+#include "hunk.h"
+
+static int32_t asr_long(int32_t value, unsigned count) {
+    count &= 63u;
+    if (!count) return value;
+    if (count >= 32u) return value < 0 ? -1 : 0;
+    if (value >= 0) return value >> count;
+    return -(int32_t)(((uint32_t)(-(int64_t)value) + ((UINT32_C(1) << count) - 1u)) >> count);
+}
+
+static int16_t asr_word(int16_t value, unsigned count) {
+    count &= 63u;
+    if (!count) return value;
+    if (count >= 16u) return value < 0 ? -1 : 0;
+    if (value >= 0) return (int16_t)((uint16_t)value >> count);
+    return (int16_t)-(((-(int32_t)value) + ((1 << count) - 1)) >> count);
+}
+
+static void write_word(uint8_t *bytes, uint16_t value) {
+    bytes[0] = (uint8_t)(value >> 8);
+    bytes[1] = (uint8_t)value;
+}
+
+static void write_long(uint8_t *bytes, uint32_t value) {
+    bytes[0] = (uint8_t)(value >> 24);
+    bytes[1] = (uint8_t)(value >> 16);
+    bytes[2] = (uint8_t)(value >> 8);
+    bytes[3] = (uint8_t)value;
+}
+
+int fa18_finish_scene_placement_record(
+    uint8_t bytes[FA18_SCENE_PLACEMENT_BYTES],
+    const FA18ScenePlacementBuilderTailInput *input,
+    FA18ScenePlacementBuilderTailResult *result) {
+    int16_t maximum;
+    uint16_t table_index;
+    uint8_t shift;
+    uint8_t cycle;
+
+    if (!bytes || !input || !result || !input->shift_table) return -1;
+    maximum = input->magnitude[0];
+    if (input->magnitude[1] > maximum) maximum = input->magnitude[1];
+    if (input->magnitude[2] > maximum) maximum = input->magnitude[2];
+    table_index = (uint16_t)maximum >> 1;
+    if (table_index > 0xefu || table_index >= input->shift_table_size) return -1;
+    shift = input->shift_table[table_index];
+    bytes[1] |= shift; /* `$C1DF3C`: OR.B D6,-5(A2). */
+    write_word(bytes + 6, (uint16_t)asr_long(input->coordinate_work[0], shift));
+    write_word(bytes + 8, (uint16_t)asr_word((int16_t)input->coordinate_work[1], shift));
+    write_word(bytes + 10, (uint16_t)asr_long(input->coordinate_work[2], shift));
+    write_long(bytes + 12, input->record_tail);
+    write_word(bytes + 16, 0);
+    cycle = input->cycle_byte;
+    bytes[18] = cycle;
+    bytes[19] = 0;
+    write_long(bytes + 20, 0);
+    result->shift_count = shift;
+    result->next_cycle_byte = cycle == 0 ? 3u : (uint8_t)(cycle - 1u);
+    return 0;
+}
