@@ -27,6 +27,12 @@ the real A2 `$C3985A`, reads pair offsets 342/348, and reaches the native line
 callback with the original output `(173,68)->(163,68)`.  Other table selectors
 fail explicitly until their P-code targets are ported.
 
+`extended_record_dispatch.{c,h}` ports `$C1F94E-$C1F999`, the positive table
+control immediately before the `$C1F99A` transform and its following selector
+target.  `$C1F99A` remains a required caller-owned transform callback; the
+implementation preserves the source shift/limit loop and returns its control
+transfer explicitly rather than supplying transformed data itself.
+
 ## Latest visible primitive
 
 `offset_pair_segment_submission.{c,h}` ports `$C212B0-$C2131B`, the direct
