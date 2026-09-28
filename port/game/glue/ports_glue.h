@@ -63,4 +63,15 @@ int glue_C21960(void);
 int glue_C25980(void);
 int glue_C2E370(void);
 
+/* batch 8: depth sort, records, compass, cockpit, context stage */
+int glue_C1E4A6(void);
+int glue_C1CA82(void);
+int glue_C1EC3A(void);
+int glue_C2DAF2(void);
+int glue_C310AA(void);
+int glue_C082B8(void);
+int glue_C082B0(void);
+int glue_C10C08(void);
+int glue_C11B0E(void);
+
 #endif

@@ -92,4 +92,41 @@
 #define DIVIDE_DENOMINATOR 0xC45AD0u /* word */
 #define DIVIDE_QUOTIENT    0xC45AD2u /* word: rounded to nearest, halves away from zero */
 
+/* ---- cockpit display redraw requests (memory map) ------------------------- */
+/* One byte per cockpit display (radar range, ECM, weapons, zoom, ...): set to
+ * 3 when it must be redrawn. */
+#define REDRAW_FIRST       0xC45836u
+#define REDRAW_KEEP_STATE  0xC457C0u /* byte: nonzero keeps the two values below */
+#define REDRAW_STATE_WORD  0xC458D8u /* word */
+#define REDRAW_STATE_LONG  0xC45918u /* long */
+
+/* ---- workspace records (earlier port: context_workspace_flags) ------------ */
+#define WORKSPACE_RECORDS  0xC48184u /* sixteen 32-byte records */
+#define WORKSPACE_RECORD_BYTES 32
+
+/* ---- player view ---------------------------------------------------------- */
+#define VIEW_RECORD        0xC458DEu /* word: offset of the viewed control record */
+#define VIEW_MATRIX        0xC45C0Eu /* 3x3 2.14 heading matrix of the viewed record */
+#define COMPASS_DEGREES    0xC459A0u /* word: heading in whole degrees */
+#define COMPASS_TAPE       0xC458C4u /* word: compass tape position, 0-95 */
+
+/* ---- depth sort ($C1E4A6) -------------------------------------------------- */
+#define DEPTH_KEYS_SOURCE  0xC4E778u /* 22 words: keys of this frame, negative = unused */
+#define DEPTH_KEYS         0xC4E7A4u /* working copy; values follow at +$2C */
+#define DEPTH_VALUES       0xC4E7D0u
+#define DEPTH_ORDER        0xC4E828u /* output: values, far to near */
+
+/* ---- post-input sequence, continued --------------------------------------- */
+#define CONTEXT_SELECT     0xC45785u /* byte: dispatcher context (memory map) */
+#define CONTEXT_STARTED    0xC457B4u /* byte */
+#define CONTEXT_STATE      0xC458AEu /* byte */
+#define CONTEXT_GATE       0xC458ADu /* byte */
+#define CONTEXT_AUX        0xC45788u /* byte */
+#define ROUTINE_CONTEXT_STAGE      0xC10C68u
+#define ROUTINE_VIEWPORT_CHANGE    0xC11A26u
+
+/* ---- misc ------------------------------------------------------------------ */
+#define TABLE_CLEAR_MODE   0xC458A4u /* byte: set to 2 by clear_long_table */
+#define LONG_TABLE         0xC45660u /* long: address of a 16-long table */
+
 #endif

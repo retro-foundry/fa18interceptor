@@ -9,4 +9,8 @@ void await_viewport_match(void);
  * auxiliary byte and schedule the next stage. */
 void complete_post_input(void);
 
+/* Next stage: start the selected context, or, if one is running, wait for
+ * its event and then change the viewport. */
+void start_context_stage(void);
+
 #endif

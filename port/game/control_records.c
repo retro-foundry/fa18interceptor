@@ -1,6 +1,7 @@
 /* Control records. */
 #include "control_records.h"
 
+#include "fixed_math.h"
 #include "globals.h"
 
 gaddr control_record(uint16_t selector) {
@@ -100,4 +101,53 @@ void set_record_view(gaddr record, int16_t a, int16_t b, int16_t c, int16_t d, u
     wr_s16(record + 0x30, c);
     wr_s16(record + 0x32, d);
     wr_u32(record + 0x34, e);
+}
+
+void flag_all_records(void) {
+    int i;
+    for (i = 0; i < 16; i++) {
+        gaddr r = CONTROL_RECORDS + (gaddr)(i * CONTROL_RECORD_BYTES) + REC_FLAGS;
+        wr_u8(r, (uint8_t)(rd_u8(r) | 0x10));
+    }
+    for (i = 0; i < 16; i++) {
+        gaddr w = WORKSPACE_RECORDS + (gaddr)(i * WORKSPACE_RECORD_BYTES) + 1;
+        wr_u8(w, (uint8_t)(rd_u8(w) | 0x10));
+    }
+}
+
+void read_record_pair(gaddr entry, int16_t *high, int16_t *low) {
+    uint16_t head = rd_u16(entry);
+    if (!(head & 0x10)) {
+        uint16_t pair = rd_u16(entry + 0x0E);
+        *low = (int16_t)(pair & 0xFF);
+        *high = (int16_t)(pair >> 8);
+    } else {
+        gaddr record = control_record(head);
+        *high = (int16_t)(rd_u16(record + 0x06) & 0xFF);
+        *low = (int16_t)(rd_u16(record + 0x08) & 0xFF);
+    }
+}
+
+/* Headings are in 1/80 degree, 0-28799. */
+#define FULL_TURN 28800
+
+void update_view_matrix(void) {
+    gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+    int16_t heading = rd_s16(record + 0x68);
+    y_rotation_matrix(heading ? (int16_t)(FULL_TURN - heading) : 0, VIEW_MATRIX);
+}
+
+void update_compass(void) {
+    gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+    uint32_t tenths = (uint32_t)((int32_t)rd_s16(record + 0x68) >> 3);
+    uint16_t degrees = (uint16_t)tenths;
+    int16_t tape;
+
+    /* DIVU.W: on overflow the dividend is left in place. */
+    if (tenths / 10 <= 0xFFFF) degrees = (uint16_t)(tenths / 10);
+    wr_u16(COMPASS_DEGREES, degrees);
+    tape = (int16_t)(((uint32_t)(uint16_t)((int16_t)degrees >> 1) * 135) >> 8);
+    if ((int32_t)tape - 4 < 0) tape = (int16_t)(tape - 4 + 96);
+    else tape = (int16_t)(tape - 4);
+    wr_s16(COMPASS_TAPE, tape);
 }

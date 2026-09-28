@@ -49,4 +49,18 @@ void mark_record_pending(gaddr record);
 /* Store view parameters into a record at +$2C..+$37. */
 void set_record_view(gaddr record, int16_t a, int16_t b, int16_t c, int16_t d, uint32_t e);
 
+/* Set bit 4 of byte +1 in every control record and workspace record. */
+void flag_all_records(void);
+
+/* The two display bytes of a record entry: its own +$0E word (high, low)
+ * unless bit 4 of its first word is set, when they come from the control
+ * record its high byte selects (+$06 and +$08 low bytes). */
+void read_record_pair(gaddr entry, int16_t *high, int16_t *low);
+
+/* Heading matrix of the viewed record into VIEW_MATRIX. */
+void update_view_matrix(void);
+
+/* Compass heading of the viewed record, in degrees and tape steps. */
+void update_compass(void);
+
 #endif
