@@ -40,6 +40,16 @@ static int matrix_compose(void *context, const int16_t input[3], int16_t output[
     return 0;
 }
 
+static int resolve_positive(void *context, uint8_t index, FA18ScenePositivePoseInput *input) {
+    Log *log = context;
+    assert(index == 3);
+    ++log->record_calls;
+    *input = (FA18ScenePositivePoseInput){
+        {1, 0, 0, 0, 0}, {0, 0, 0}, {0, 0}, {0, 0}
+    };
+    return 0;
+}
+
 int main(void) {
     uint8_t hunk_bytes[0x100] = {0};
     FA18HunkSegment segments[FA18_SCENE_RECORD_TABLE_HUNK + 1] = {{0}};
@@ -50,7 +60,7 @@ int main(void) {
     const FA18RecordMatrixUpdateOps matrix_ops = {matrix_build, matrix_compose, &log};
     const FA18SceneNegativePoseOps negative_ops = {0, &matrix_ops, &log};
     const FA18SceneRootPlacementOps ops = {
-        resolve_record, resolve_descriptor, &negative_ops, &log
+        resolve_record, resolve_descriptor, resolve_positive, &negative_ops, &matrix_ops, &log
     };
     FA18SceneRootPlacementRoute route;
 
@@ -67,8 +77,10 @@ int main(void) {
     assert(state.setup.word_00 == 0x11c8 && state.pose.position[1] == 0x7708);
     hunk_bytes[FA18_SCENE_RECORD_TABLE_A_OFFSET + 3 * 16] = 0;
     hunk_bytes[FA18_SCENE_RECORD_TABLE_A_OFFSET + 3 * 16 + 1] = 1;
+    log.matrix_calls = 0;
     assert(fa18_prepare_scene_root_placement(
                &table, &(FA18SceneRootPlacementInput){3, 0}, &state, &ops, &route) == 0);
-    assert(route == FA18_SCENE_ROOT_PLACEMENT_POSITIVE_UNPORTED);
+    assert(route == FA18_SCENE_ROOT_PLACEMENT_POSITIVE_APPLIED &&
+           state.positive_pose.position[0] == INT32_C(0x01000000));
     return 0;
 }

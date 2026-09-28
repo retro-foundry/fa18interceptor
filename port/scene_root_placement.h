@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "scene_negative_pose.h"
+#include "scene_positive_pose.h"
 #include "scene_record_table.h"
 #include "scene_root_setup.h"
 
@@ -16,6 +17,9 @@ typedef int (*FA18SceneRootPlacementRecordResolver)(void *context,
 typedef int (*FA18SceneRootPlacementDescriptorResolver)(void *context,
                                                         uint16_t record_index,
                                                         FA18SceneNegativePoseDescriptor *descriptor);
+typedef int (*FA18SceneRootPlacementPositiveResolver)(void *context,
+                                                       uint8_t table_index,
+                                                       FA18ScenePositivePoseInput *input);
 
 typedef struct {
     uint8_t table_index;
@@ -25,13 +29,16 @@ typedef struct {
 typedef struct {
     FA18SceneRootPlacementRecordResolver resolve_record;
     FA18SceneRootPlacementDescriptorResolver resolve_descriptor;
+    FA18SceneRootPlacementPositiveResolver resolve_positive;
     const FA18SceneNegativePoseOps *negative_pose_ops;
+    const FA18RecordMatrixUpdateOps *positive_matrix_ops;
     void *context;
 } FA18SceneRootPlacementOps;
 
 typedef struct {
     FA18SceneRootSetupState setup;
     FA18SceneNegativePoseState pose;
+    FA18ScenePositivePoseState positive_pose;
     uint16_t selected_record_index;
     uint8_t retry_scene_index;
 } FA18SceneRootPlacementState;
@@ -39,12 +46,13 @@ typedef struct {
 typedef enum {
     FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_APPLIED,
     FA18_SCENE_ROOT_PLACEMENT_NEGATIVE_RETRY,
-    FA18_SCENE_ROOT_PLACEMENT_POSITIVE_UNPORTED
+    FA18_SCENE_ROOT_PLACEMENT_POSITIVE_APPLIED
 } FA18SceneRootPlacementRoute;
 
 /* The root-reset prefix calls `$C09620` then `$C095C0`; a negative Hunk-67
- * entry then follows `$C09498-$C095BE`. A nonnegative entry is the distinct
- * unported `$C093BC` family and returns its route without a substitute. */
+ * entry follows `$C09498-$C095BE`, while a nonnegative entry follows the
+ * distinct `$C093BE-$C095BE` root-pose route.  Both data owners remain
+ * explicit caller resolvers. */
 int fa18_prepare_scene_root_placement(
     const FA18SceneRecordTable *table,
     const FA18SceneRootPlacementInput *input,

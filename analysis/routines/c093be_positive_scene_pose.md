@@ -27,3 +27,9 @@ original table values and adjustment pairs supplied by its caller.  It does
 not seed a capture, name the source tables, or schedule/present a frame.  The
 focused contract verifies the recorded arithmetic and the `$C2D954` register
 shaped matrix input.
+
+`fa18_prepare_scene_root_placement` now dispatches both signs of the original
+Hunk-67 entry: the caller must resolve the positive route's original table
+tail and adjustment pairs, which are cross-checked against the five entry
+words before this pose routine runs.  The top-level scene scheduler remains
+the missing owner of that resolver.

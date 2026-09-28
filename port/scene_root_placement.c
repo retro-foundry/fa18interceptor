@@ -9,19 +9,28 @@ int fa18_prepare_scene_root_placement(
     int16_t words[FA18_SCENE_RECORD_TABLE_ENTRY_WORDS];
     FA18SceneNegativePoseRecord selected;
     FA18SceneNegativePoseDescriptor descriptor;
+    FA18ScenePositivePoseInput positive;
     int result;
 
     if (!table || !input || !state || !ops || !route ||
-        !ops->resolve_record || !ops->resolve_descriptor ||
-        !ops->negative_pose_ops ||
         fa18_initialize_scene_root_setup(&state->setup) != 0 ||
         fa18_scene_record_table_a_entry(table, input->table_index, words) != 0)
         return -1;
 
     if (words[0] >= 0) {
-        *route = FA18_SCENE_ROOT_PLACEMENT_POSITIVE_UNPORTED;
+        if (!ops->resolve_positive || !ops->positive_matrix_ops ||
+            ops->resolve_positive(ops->context, input->table_index, &positive) != 0)
+            return -1;
+        for (unsigned index = 0; index < 5; ++index)
+            if (positive.entry_words[index] != words[index]) return -1;
+        if (fa18_initialize_positive_scene_pose(&positive, &state->positive_pose,
+                                                ops->positive_matrix_ops) != 0)
+            return -1;
+        *route = FA18_SCENE_ROOT_PLACEMENT_POSITIVE_APPLIED;
         return 0;
     }
+    if (!ops->resolve_record || !ops->resolve_descriptor || !ops->negative_pose_ops)
+        return -1;
     state->selected_record_index = (uint16_t)words[0] & UINT16_C(0x7fff);
     if (ops->resolve_record(ops->context, state->selected_record_index, &selected) != 0 ||
         ops->resolve_descriptor(ops->context, state->selected_record_index,
