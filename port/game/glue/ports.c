@@ -91,6 +91,15 @@ const FA18Port fa18_ports[] = {
     {0xC2548A, glue_C2548A, "update_readout", 250},
     {0xC0840E, glue_C0840E, "reset_mission_objects", 900},
     {0xC258C8, glue_C258C8, "pan_view_from_keys", 120},
+    /* batch 10: decay, messages, lookups, cell steps, 2.8 matrix, cached display value */
+    {0xC148A2, glue_C148A2, "decay_outside_limit", 130},
+    {0xC11312, glue_C11312, "reset_message_sequence", 150},
+    {0xC287DA, glue_C287DA, "mode_offset", 80},
+    {0xC1FEF2, glue_C1FEF2, "skip_stream_records", 60},
+    {0xC1ECFC, glue_C1ECFC, "cell_step", 100},
+    {0xC1ECD4, glue_C1ECD4, "cell_step", 100},
+    {0xC2E346, glue_C2E346, "y_rotation_matrix8", 280},
+    {0xC31C20, glue_C31C20, "display_value_to_draw", 80},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

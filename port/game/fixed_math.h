@@ -39,4 +39,13 @@ int16_t five_eighths(int16_t x);
 /* One pseudo-random bit from the 31-bit shift register. */
 int32_t random_bit(void);
 
+/* Past +-limit, move *value toward zero by value >> shift; within it, zero. */
+void decay_outside_limit(gaddr value, int16_t limit, int16_t shift);
+
+/* As y_rotation_matrix, in 2.8 fixed point ($100 = 1.0). */
+void y_rotation_matrix8(int16_t angle, gaddr out);
+
+/* Grid-cell difference as a 16.16 position step (a quarter unit per cell). */
+int32_t cell_step(int16_t cells);
+
 #endif

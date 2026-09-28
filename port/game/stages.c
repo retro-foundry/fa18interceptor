@@ -54,3 +54,42 @@ void sort_by_depth(int16_t count) {
         out += 2;
     }
 }
+
+void reset_message_sequence(void) {
+    wr_u16(MESSAGE_QUEUE, 0);
+    wr_u16(MESSAGE_QUEUE + 2, 0);
+    wr_u32(MESSAGE_TIMER, 0x1B8);
+    wr_u8(MESSAGE_STATE_A, 0);
+    wr_u8(MESSAGE_STATE_B, 0);
+    wr_u8(MESSAGE_STATE_C, 0);
+    wr_u8(MESSAGE_STATE_D, 0);
+}
+
+int16_t mode_offset(void) {
+    int8_t mode = (int8_t)rd_u8(MODE_SELECT);
+    if (mode == 0x7E || mode == 0x7F) return 0;
+    return (int16_t)(rd_s8(rd_u32(MODE_TABLE) + 0x12 + (gaddr)(int32_t)mode) * 2);
+}
+
+gaddr skip_stream_records(gaddr stream) {
+    int n = rd_u16(STREAM_SKIP) & 15;
+    return stream + (gaddr)(n * 0x34);
+}
+
+int16_t display_value_to_draw(gaddr cache, int16_t value) {
+    int16_t cached;
+    if ((int8_t)rd_u8(REDRAW_FIRST + 1) > 0) {
+        wr_u16(cache, (uint16_t)(value | 0x8000));
+        return value;
+    }
+    cached = rd_s16(cache);
+    if (cached >= 0) {
+        if (cached == value || (rd_u8(DISPLAY_FORCE) & 1)) return -1;
+        if (!rd_u8(POST_INPUT_EVENT)) {
+            wr_u16(cache, (uint16_t)(value | 0x8000));
+            return value;
+        }
+    }
+    wr_u16(cache, (uint16_t)(rd_u16(cache) & 0x7FFF));
+    return (int16_t)(cached & 0x7FFF);
+}

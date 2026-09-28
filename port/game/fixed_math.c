@@ -91,3 +91,26 @@ int32_t random_bit(void) {
     wr_u32(RANDOM_SEED, seed);
     return bit;
 }
+
+void decay_outside_limit(gaddr value, int16_t limit, int16_t shift) {
+    int32_t v = rd_s16(value), lim = limit;
+    if (v > lim || v < -lim) {
+        int16_t w = (int16_t)v;
+        wr_s16(value, (int16_t)(w - asr_word(w, shift)));
+    } else {
+        wr_u16(value, 0);
+    }
+}
+
+void y_rotation_matrix8(int16_t angle, gaddr out) {
+    Fixed14 s, c;
+    int16_t words[9];
+    int i;
+    sin_cos((int16_t)(angle >> 3), &s, &c);
+    words[0] = (int16_t)(c >> 6); words[1] = 0; words[2] = (int16_t)(s >> 6);
+    words[3] = 0; words[4] = 0x100; words[5] = 0;
+    words[6] = (int16_t)-(s >> 6); words[7] = 0; words[8] = (int16_t)(c >> 6);
+    for (i = 0; i < 9; i++) wr_s16(out + (gaddr)(2 * i), words[i]);
+}
+
+int32_t cell_step(int16_t cells) { return (int32_t)((uint32_t)(uint16_t)cells << 16) >> 2; }

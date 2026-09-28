@@ -158,4 +158,20 @@
 #define MISSION_LEVEL_A    0xC4584Cu /* byte: reset to $10 */
 #define MISSION_LEVEL_B    0xC4584Du /* byte: reset to $10 */
 
+/* ---- message sequence (earlier port: message_sequence) -------------------- */
+#define MESSAGE_QUEUE      0xC4574Au /* words: queued message codes */
+#define MESSAGE_TIMER      0xC4573Eu /* long */
+#define MESSAGE_STATE_A    0xC457C6u /* byte */
+#define MESSAGE_STATE_B    0xC457C3u /* byte */
+#define MESSAGE_STATE_C    0xC457E0u /* byte */
+#define MESSAGE_STATE_D    0xC45871u /* byte */
+
+/* ---- misc lookups ---------------------------------------------------------- */
+#define MODE_SELECT        0xC458A6u /* byte: $7E/$7F have no table entry */
+#define MODE_TABLE         0xC1AB74u /* long: address of a table; bytes from +$12 */
+#define STREAM_SKIP        0xC458DAu /* word: low 4 bits = 52-byte records to skip */
+#define GRID_ORIGIN_X      0xC4594Cu /* word: low byte = grid column */
+#define GRID_ORIGIN_Z      0xC4594Eu /* word: low byte = grid row */
+#define DISPLAY_FORCE      0xC458DBu /* byte: bit 0 forces display updates */
+
 #endif

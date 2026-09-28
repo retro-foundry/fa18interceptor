@@ -85,4 +85,14 @@ int glue_C2548A(void);
 int glue_C0840E(void);
 int glue_C258C8(void);
 
+/* batch 10: decay, messages, lookups, cell steps, 2.8 matrix, cached display value */
+int glue_C148A2(void);
+int glue_C11312(void);
+int glue_C287DA(void);
+int glue_C1FEF2(void);
+int glue_C1ECFC(void);
+int glue_C1ECD4(void);
+int glue_C2E346(void);
+int glue_C31C20(void);
+
 #endif
