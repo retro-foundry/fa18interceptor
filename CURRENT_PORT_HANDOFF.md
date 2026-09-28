@@ -91,6 +91,12 @@ The bounded frame-608 trace validates its projection matrix
 `(167,0,-8 / 1,248,39 / 6,-21,126)`. `$C091E0/$C123FA` still own the inputs,
 so this is intentionally not scheduled by `game.c`.
 
+`rounded_signed_divide.{c,h}` now ports `$C25980-$C259C1`, the signed DIVS.W
+remainder-threshold rounding helper used by `$C123FA`. It reports zero-divisor
+and signed-quotient overflow instead of pretending the original exception
+returns. The enclosing coordinate-update formula is still an explicit evidence
+gap and is not scheduled.
+
 ## Next context: live scene rendering
 
 Do not add a frame-number trigger or captured page to `game.c`. The source
