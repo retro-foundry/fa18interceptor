@@ -27,6 +27,16 @@ int main(void) {
                &data, FA18_MAP_PACKET_CONTROL_RUNTIME_BASE + 0x12,
                &resolved, &size) == 0 && resolved == control + 0x12 &&
            size == sizeof control - 0x12);
+    int8_t row[4] = {0};
+    control[4] = 0x80; control[5] = 1; control[6] = 2; control[7] = 3;
+    control[8] = 4; control[9] = 5; control[10] = 6; control[11] = 7;
+    assert(fa18_resolve_map_packet_low_filter_row(
+               &data, FA18_MAP_PACKET_CONTROL_RUNTIME_BASE + 4, 1, row) == 0 &&
+           row[0] == 4 && row[1] == 5 && row[2] == 6 && row[3] == 7);
+    assert(fa18_resolve_map_packet_low_filter_row(
+               &data, FA18_MAP_PACKET_CONTROL_RUNTIME_BASE + 4, -1, row) == -1 &&
+           fa18_resolve_map_packet_low_filter_row(
+               &data, FA18_MAP_PACKET_CONTROL_RUNTIME_BASE + 0x1e, 0, row) == -1);
     assert(fa18_resolve_map_packet_static_packet(
                &data, FA18_MAP_PACKET_PACKET_RUNTIME_BASE + 0x20,
                &resolved, &size) == 0 && resolved == packet + 0x20 &&

@@ -44,6 +44,23 @@ int fa18_resolve_map_packet_control_stream(void *context, uint32_t address,
                                 address, stream, size);
 }
 
+int fa18_resolve_map_packet_low_filter_row(void *context, uint32_t address,
+                                           int16_t selector, int8_t row[4]) {
+    FA18MapPacketStaticData *data = context;
+    const uint8_t *source;
+    size_t size;
+    const int32_t offset = (int32_t)selector * 4;
+    if (!data || !row || offset < 0 ||
+        resolve(data->control_bytes, data->control_size,
+                FA18_MAP_PACKET_CONTROL_RUNTIME_BASE, address,
+                &source, &size) != 0 || (size_t)offset > size ||
+        size - (size_t)offset < 4u)
+        return -1;
+    for (unsigned index = 0; index != 4; ++index)
+        row[index] = (int8_t)source[(size_t)offset + index];
+    return 0;
+}
+
 int fa18_resolve_map_packet_static_packet(void *context, uint32_t address,
                                           const uint8_t **packet, size_t *size) {
     FA18MapPacketStaticData *data = context;

@@ -18,6 +18,12 @@
 
 ### Most recent chain
 
+`map_packet_static_data` now resolves the `$C2AC76` low-metric four-byte
+selector rows directly from original Hunk 28, replacing another caller
+placeholder in the `$C2AA9C` map parent composition.  The record/detail/page
+owner remains external; this binding does not schedule map rendering.  Full
+CTest remains 208/208 and the normal frame-402 gate remains zero pixels.
+
 `template_bitmask_buffers.{c,h}` now ports `$C1C40C-$C1C54D` and initializes
 its three source-shaped mutable gate buffers from original Hunk 66 during game
 startup.  It clears the exact 2 KiB buffers, expands the 128 compact rows at

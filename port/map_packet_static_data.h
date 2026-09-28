@@ -27,6 +27,10 @@ int fa18_resolve_map_packet_control_pair(void *context, uint8_t mode,
                                          int8_t pair[2]);
 int fa18_resolve_map_packet_control_stream(void *context, uint32_t address,
                                            const uint8_t **stream, size_t *size);
+/* `$C2AC76-$C2AC97`: resolve one four-byte low-metric selector row from the
+ * original Hunk-28 control payload. */
+int fa18_resolve_map_packet_low_filter_row(void *context, uint32_t address,
+                                           int16_t selector, int8_t row[4]);
 int fa18_resolve_map_packet_static_packet(void *context, uint32_t address,
                                           const uint8_t **packet, size_t *size);
 
