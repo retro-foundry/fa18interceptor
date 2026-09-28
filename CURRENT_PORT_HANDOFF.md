@@ -9,6 +9,13 @@ pair, applies the original depth-AND skip, and accumulates the exact
 segment-preparation result.  The `$C2EE4A` callback remains explicitly
 caller-owned: do not connect it to a generic clipper or a diagnostic renderer.
 
+`projected_segment_clip.{c,h}` now ports all four signed interpolation entries
+`$C2F0C6`, `$C2F0F4`, `$C2F128`, and `$C2F156` through their shared
+`$C2F186-$C2F1B6` result gate.  It preserves 16-bit add/subtract/negate,
+signed multiply/divide, the `$C45AC6` candidate triple, and the gate bit that
+the `$C2EE4A` dispatcher branches on.  The next direct consumer is that
+dispatcher, not a host clipping replacement.
+
 `workspace_segment_projection.{c,h}` ports the complete direct leaf
 `$C2ED6C-$C2EE42`.  It consumes two source-format transformed triples from
 the `$C4C592` workspace, preserves each signed depth/extent rejection, applies
@@ -18,8 +25,9 @@ caller-owned `$C2FA7E` line-emitter callback.  Its contract covers one accepted
 pair and both rejection categories.  It has no synthetic geometry, no capture
 page, and no `game.c` scheduling.
 
-Validation: 192/192 CTest contracts pass and the native build checker sees
-366 C sources.  This is an exact renderer leaf, but normal frame 402 remains
+Validation: the focused new clipping contract passes; full-suite validation is
+due before the next commit.  The native build checker sees 368 C sources.
+This is an exact renderer leaf, but normal frame 402 remains
 black until the P-code placement/record path supplies the real workspace pairs
 and binds the real five-plane line-emitter owner.  Do not present the contract
 callback as a normal rendered frame.
