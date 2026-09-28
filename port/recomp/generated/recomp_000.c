@@ -4,6 +4,40 @@
 
 #include "recomp_functions.h"
 
+int fa18_fn_C0004E(int entry) {
+    switch (entry) {
+    case 0: goto L_C0004E;
+    case 1: goto L_C0655A;
+    case 2: goto L_C06598;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0004E:
+    FA18_CHECK(0xC0004E);
+    FA18_JUMP(0xC0004E, 0x4EF9, 0xC0655A, L_C0655A); /* C0004E: jmp     $c0655a.l */
+L_C0655A:
+    FA18_CHECK(0xC0655A);
+    FA18_OP(0xC0655A, 0x518F, 0xC0655C); /* C0655A: subq.l  #8, A7 */
+    FA18_OP(0xC0655C, 0x4879, 0xC06562); /* C0655C: pea     $fe46be.l */
+    FA18_JUMP(0xC06562, 0x6034, 0xC06598, L_C06598); /* C06562: bra     $c06598 */
+L_C06598:
+    FA18_CHECK(0xC06598);
+    FA18_OP(0xC06598, 0x2F4D, 0xC0659C); /* C06598: move.l  A5, ($8,A7) */
+    FA18_OP(0xC0659C, 0x4BFA, 0xC065A0); /* C0659C: lea     ($c,PC), A5; ($c065aa) */
+    FA18_OP(0xC065A0, 0x2F4D, 0xC065A4); /* C065A0: move.l  A5, ($4,A7) */
+    FA18_OP(0xC065A4, 0x4BFA, 0xC065A8); /* C065A4: lea     (-$84,PC), A5; ($c06522) */
+    FA18_RETURN(0xC065A8, 0x4E75); /* C065A8: rts */
+}
+
+int fa18_fn_C000A8(int entry) {
+    switch (entry) {
+    case 0: goto L_C000A8;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C000A8:
+    FA18_CHECK(0xC000A8);
+    FA18_JUMP_OUT(0xC000A8, 0x4EF9); /* C000A8: jmp     $fc0706.l */
+}
+
 int fa18_fn_C000AE(int entry) {
     switch (entry) {
     case 0: goto L_C000AE;
@@ -14,6 +48,64 @@ L_C000AE:
     FA18_JUMP_OUT(0xC000AE, 0x4EF9); /* C000AE: jmp     $fc0718.l */
 }
 
+int fa18_fn_C000B4(int entry) {
+    switch (entry) {
+    case 0: goto L_C000B4;
+    case 1: goto L_C06578;
+    case 2: goto L_C06598;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C000B4:
+    FA18_CHECK(0xC000B4);
+    FA18_JUMP(0xC000B4, 0x4EF9, 0xC06578, L_C06578); /* C000B4: jmp     $c06578.l */
+L_C06578:
+    FA18_CHECK(0xC06578);
+    FA18_OP(0xC06578, 0x518F, 0xC0657A); /* C06578: subq.l  #8, A7 */
+    FA18_OP(0xC0657A, 0x4879, 0xC06580); /* C0657A: pea     $fe48fe.l */
+    FA18_JUMP(0xC06580, 0x6016, 0xC06598, L_C06598); /* C06580: bra     $c06598 */
+L_C06598:
+    FA18_CHECK(0xC06598);
+    FA18_OP(0xC06598, 0x2F4D, 0xC0659C); /* C06598: move.l  A5, ($8,A7) */
+    FA18_OP(0xC0659C, 0x4BFA, 0xC065A0); /* C0659C: lea     ($c,PC), A5; ($c065aa) */
+    FA18_OP(0xC065A0, 0x2F4D, 0xC065A4); /* C065A0: move.l  A5, ($4,A7) */
+    FA18_OP(0xC065A4, 0x4BFA, 0xC065A8); /* C065A4: lea     (-$84,PC), A5; ($c06522) */
+    FA18_RETURN(0xC065A8, 0x4E75); /* C065A8: rts */
+}
+
+int fa18_fn_C000BA(int entry) {
+    switch (entry) {
+    case 0: goto L_C000BA;
+    case 1: goto L_C06564;
+    case 2: goto L_C06598;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C000BA:
+    FA18_CHECK(0xC000BA);
+    FA18_JUMP(0xC000BA, 0x4EF9, 0xC06564, L_C06564); /* C000BA: jmp     $c06564.l */
+L_C06564:
+    FA18_CHECK(0xC06564);
+    FA18_OP(0xC06564, 0x518F, 0xC06566); /* C06564: subq.l  #8, A7 */
+    FA18_OP(0xC06566, 0x4879, 0xC0656C); /* C06566: pea     $fe46d2.l */
+    FA18_JUMP(0xC0656C, 0x602A, 0xC06598, L_C06598); /* C0656C: bra     $c06598 */
+L_C06598:
+    FA18_CHECK(0xC06598);
+    FA18_OP(0xC06598, 0x2F4D, 0xC0659C); /* C06598: move.l  A5, ($8,A7) */
+    FA18_OP(0xC0659C, 0x4BFA, 0xC065A0); /* C0659C: lea     ($c,PC), A5; ($c065aa) */
+    FA18_OP(0xC065A0, 0x2F4D, 0xC065A4); /* C065A0: move.l  A5, ($4,A7) */
+    FA18_OP(0xC065A4, 0x4BFA, 0xC065A8); /* C065A4: lea     (-$84,PC), A5; ($c06522) */
+    FA18_RETURN(0xC065A8, 0x4E75); /* C065A8: rts */
+}
+
+int fa18_fn_C000FC(int entry) {
+    switch (entry) {
+    case 0: goto L_C000FC;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C000FC:
+    FA18_CHECK(0xC000FC);
+    FA18_JUMP_OUT(0xC000FC, 0x4EF9); /* C000FC: jmp     $fc1c18.l */
+}
+
 int fa18_fn_C00102(int entry) {
     switch (entry) {
     case 0: goto L_C00102;
@@ -22,6 +114,96 @@ int fa18_fn_C00102(int entry) {
 L_C00102:
     FA18_CHECK(0xC00102);
     FA18_JUMP_OUT(0xC00102, 0x4EF9); /* C00102: jmp     $fc1bea.l */
+}
+
+int fa18_fn_C00108(int entry) {
+    switch (entry) {
+    case 0: goto L_C00108;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00108:
+    FA18_CHECK(0xC00108);
+    FA18_JUMP_OUT(0xC00108, 0x4EF9); /* C00108: jmp     $fc1b70.l */
+}
+
+int fa18_fn_C00132(int entry) {
+    switch (entry) {
+    case 0: goto L_C00132;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00132:
+    FA18_CHECK(0xC00132);
+    FA18_JUMP_OUT(0xC00132, 0x4EF9); /* C00132: jmp     $fc1e84.l */
+}
+
+int fa18_fn_C00138(int entry) {
+    switch (entry) {
+    case 0: goto L_C00138;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00138:
+    FA18_CHECK(0xC00138);
+    FA18_JUMP_OUT(0xC00138, 0x4EF9); /* C00138: jmp     $fc1f0c.l */
+}
+
+int fa18_fn_C00144(int entry) {
+    switch (entry) {
+    case 0: goto L_C00144;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00144:
+    FA18_CHECK(0xC00144);
+    FA18_JUMP_OUT(0xC00144, 0x4EF9); /* C00144: jmp     $fc1e5e.l */
+}
+
+int fa18_fn_C00150(int entry) {
+    switch (entry) {
+    case 0: goto L_C00150;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00150:
+    FA18_CHECK(0xC00150);
+    FA18_JUMP_OUT(0xC00150, 0x4EF9); /* C00150: jmp     $fc1db0.l */
+}
+
+int fa18_fn_C00174(int entry) {
+    switch (entry) {
+    case 0: goto L_C00174;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00174:
+    FA18_CHECK(0xC00174);
+    FA18_JUMP_OUT(0xC00174, 0x4EF9); /* C00174: jmp     $fc164a.l */
+}
+
+int fa18_fn_C0018C(int entry) {
+    switch (entry) {
+    case 0: goto L_C0018C;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0018C:
+    FA18_CHECK(0xC0018C);
+    FA18_JUMP_OUT(0xC0018C, 0x4EF9); /* C0018C: jmp     $fc15e8.l */
+}
+
+int fa18_fn_C001EC(int entry) {
+    switch (entry) {
+    case 0: goto L_C001EC;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C001EC:
+    FA18_CHECK(0xC001EC);
+    FA18_JUMP_OUT(0xC001EC, 0x4EF9); /* C001EC: jmp     $fc1f9c.l */
+}
+
+int fa18_fn_C001F2(int entry) {
+    switch (entry) {
+    case 0: goto L_C001F2;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C001F2:
+    FA18_CHECK(0xC001F2);
+    FA18_JUMP_OUT(0xC001F2, 0x4EF9); /* C001F2: jmp     $fc1f96.l */
 }
 
 int fa18_fn_C001F8(int entry) {
@@ -44,6 +226,26 @@ L_C001FE:
     FA18_JUMP_OUT(0xC001FE, 0x4EF9); /* C001FE: jmp     $fc1428.l */
 }
 
+int fa18_fn_C00240(int entry) {
+    switch (entry) {
+    case 0: goto L_C00240;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00240:
+    FA18_CHECK(0xC00240);
+    FA18_JUMP_OUT(0xC00240, 0x4EF9); /* C00240: jmp     $fc0f1c.l */
+}
+
+int fa18_fn_C00246(int entry) {
+    switch (entry) {
+    case 0: goto L_C00246;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00246:
+    FA18_CHECK(0xC00246);
+    FA18_JUMP_OUT(0xC00246, 0x4EF9); /* C00246: jmp     $fc1f74.l */
+}
+
 int fa18_fn_C00252(int entry) {
     switch (entry) {
     case 0: goto L_C00252;
@@ -54,6 +256,16 @@ L_C00252:
     FA18_JUMP_OUT(0xC00252, 0x4EF9); /* C00252: jmp     $fc0e9c.l */
 }
 
+int fa18_fn_C00258(int entry) {
+    switch (entry) {
+    case 0: goto L_C00258;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C00258:
+    FA18_CHECK(0xC00258);
+    FA18_JUMP_OUT(0xC00258, 0x4EF9); /* C00258: jmp     $fc08e6.l */
+}
+
 int fa18_fn_C023B8(int entry) {
     switch (entry) {
     case 0: goto L_C023B8;
@@ -62,6 +274,26 @@ int fa18_fn_C023B8(int entry) {
 L_C023B8:
     FA18_CHECK(0xC023B8);
     FA18_JUMP_OUT(0xC023B8, 0x4EF9); /* C023B8: jmp     $fe44f2.l */
+}
+
+int fa18_fn_C0257E(int entry) {
+    switch (entry) {
+    case 0: goto L_C0257E;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0257E:
+    FA18_CHECK(0xC0257E);
+    FA18_JUMP_OUT(0xC0257E, 0x4EF9); /* C0257E: jmp     $fc4a76.l */
+}
+
+int fa18_fn_C02584(int entry) {
+    switch (entry) {
+    case 0: goto L_C02584;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C02584:
+    FA18_CHECK(0xC02584);
+    FA18_JUMP_OUT(0xC02584, 0x4EF9); /* C02584: jmp     $fc49fe.l */
 }
 
 int fa18_fn_C02728(int entry) {
@@ -144,6 +376,16 @@ L_C02836:
     FA18_JUMP_OUT(0xC02836, 0x4EF9); /* C02836: jmp     $fc5b4c.l */
 }
 
+int fa18_fn_C02B06(int entry) {
+    switch (entry) {
+    case 0: goto L_C02B06;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C02B06:
+    FA18_CHECK(0xC02B06);
+    FA18_JUMP_OUT(0xC02B06, 0x4EF9); /* C02B06: jmp     $fe4cb8.l */
+}
+
 int fa18_fn_C02DC8(int entry) {
     switch (entry) {
     case 0: goto L_C02DC8;
@@ -154,6 +396,84 @@ L_C02DC8:
     FA18_JUMP_OUT(0xC02DC8, 0x4EF9); /* C02DC8: jmp     $fe9046.l */
 }
 
+int fa18_fn_C02DDA(int entry) {
+    switch (entry) {
+    case 0: goto L_C02DDA;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C02DDA:
+    FA18_CHECK(0xC02DDA);
+    FA18_JUMP_OUT(0xC02DDA, 0x4EF9); /* C02DDA: jmp     $fe90f2.l */
+}
+
+int fa18_fn_C02DE0(int entry) {
+    switch (entry) {
+    case 0: goto L_C02DE0;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C02DE0:
+    FA18_CHECK(0xC02DE0);
+    FA18_JUMP_OUT(0xC02DE0, 0x4EF9); /* C02DE0: jmp     $fe90c0.l */
+}
+
+int fa18_fn_C06132(int entry) {
+    switch (entry) {
+    case 0: goto L_C06132;
+    case 1: goto L_C0616E;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C06132:
+    FA18_CHECK(0xC06132);
+    FA18_OP(0xC06132, 0x4E71, 0xC06134); /* C06132: nop */
+    FA18_JUMP(0xC06134, 0x6000, 0xC0616E, L_C0616E); /* C06134: bra     $c0616e */
+L_C0616E:
+    FA18_CHECK(0xC0616E);
+    FA18_OP(0xC0616E, 0x066E, 0xC06174); /* C0616E: addi.w  #$1, ($20,A6) */
+    FA18_OP(0xC06174, 0x200E, 0xC06176); /* C06174: move.l  A6, D0 */
+    FA18_RETURN(0xC06176, 0x4E75); /* C06176: rts */
+}
+
+int fa18_fn_C064EC(int entry) {
+    switch (entry) {
+    case 0: goto L_C064EC;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C064EC:
+    FA18_CHECK(0xC064EC);
+    FA18_JUMP_OUT(0xC064EC, 0x4EF9); /* C064EC: jmp     $fc06f0.l */
+}
+
+int fa18_fn_C064F8(int entry) {
+    switch (entry) {
+    case 0: goto L_C064F8;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C064F8:
+    FA18_CHECK(0xC064F8);
+    FA18_JUMP_OUT(0xC064F8, 0x4EF9); /* C064F8: jmp     $fc06a2.l */
+}
+
+int fa18_fn_C064FE(int entry) {
+    switch (entry) {
+    case 0: goto L_C064FE;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C064FE:
+    FA18_CHECK(0xC064FE);
+    FA18_JUMP_OUT(0xC064FE, 0x4EF9); /* C064FE: jmp     $fc1474.l */
+}
+
+int fa18_fn_C065AA(int entry) {
+    switch (entry) {
+    case 0: goto L_C065AA;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C065AA:
+    FA18_CHECK(0xC065AA);
+    FA18_OP(0xC065AA, 0x2A5F, 0xC065AC); /* C065AA: movea.l (A7)+, A5 */
+    FA18_RETURN(0xC065AC, 0x4E75); /* C065AC: rts */
+}
+
 int fa18_fn_C06C02(int entry) {
     switch (entry) {
     case 0: goto L_C06C02;
@@ -162,6 +482,42 @@ int fa18_fn_C06C02(int entry) {
 L_C06C02:
     FA18_CHECK(0xC06C02);
     FA18_RETURN(0xC06C02, 0x4E75); /* C06C02: rts */
+}
+
+int fa18_fn_C082B0(int entry) {
+    switch (entry) {
+    case 0: goto L_C082B0;
+    case 1: goto L_C08316;
+    case 2: goto L_C08322;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C082B0:
+    FA18_CHECK(0xC082B0);
+    FA18_OP(0xC082B0, 0x33FC, 0xC082B8); /* C082B0: move.w  #$90, $c45984.l */
+    FA18_OP(0xC082B8, 0x7803, 0xC082BA); /* C082B8: moveq   #$3, D4 */
+    FA18_OP(0xC082BA, 0x13C4, 0xC082C0); /* C082BA: move.b  D4, $c45837.l */
+    FA18_OP(0xC082C0, 0x13C4, 0xC082C6); /* C082C0: move.b  D4, $c45836.l */
+    FA18_OP(0xC082C6, 0x13C4, 0xC082CC); /* C082C6: move.b  D4, $c45839.l */
+    FA18_OP(0xC082CC, 0x13C4, 0xC082D2); /* C082CC: move.b  D4, $c4583a.l */
+    FA18_OP(0xC082D2, 0x13C4, 0xC082D8); /* C082D2: move.b  D4, $c4583e.l */
+    FA18_OP(0xC082D8, 0x13C4, 0xC082DE); /* C082D8: move.b  D4, $c4583f.l */
+    FA18_OP(0xC082DE, 0x13C4, 0xC082E4); /* C082DE: move.b  D4, $c45840.l */
+    FA18_OP(0xC082E4, 0x13C4, 0xC082EA); /* C082E4: move.b  D4, $c45841.l */
+    FA18_OP(0xC082EA, 0x13C4, 0xC082F0); /* C082EA: move.b  D4, $c4583b.l */
+    FA18_OP(0xC082F0, 0x13C4, 0xC082F6); /* C082F0: move.b  D4, $c4583d.l */
+    FA18_OP(0xC082F6, 0x13C4, 0xC082FC); /* C082F6: move.b  D4, $c45843.l */
+    FA18_OP(0xC082FC, 0x13C4, 0xC08302); /* C082FC: move.b  D4, $c45844.l */
+    FA18_OP(0xC08302, 0x13C4, 0xC08308); /* C08302: move.b  D4, $c45845.l */
+    FA18_OP(0xC08308, 0x13C4, 0xC0830E); /* C08308: move.b  D4, $c4583c.l */
+    FA18_OP(0xC0830E, 0x4A39, 0xC08314); /* C0830E: tst.b   $c457c0.l */
+    FA18_BCC(0xC08314, 0x660C, 0xC08316, 0xC08322, L_C08322); /* C08314: bne     $c08322 */
+L_C08316:
+    FA18_CHECK(0xC08316);
+    FA18_OP(0xC08316, 0x4279, 0xC0831C); /* C08316: clr.w   $c458d8.l */
+    FA18_OP(0xC0831C, 0x42B9, 0xC08322); /* C0831C: clr.l   $c45918.l */
+L_C08322:
+    FA18_CHECK(0xC08322);
+    FA18_RETURN(0xC08322, 0x4E75); /* C08322: rts */
 }
 
 int fa18_fn_C082B8(int entry) {
@@ -335,7 +691,7 @@ L_C083E2:
     FA18_CHECK(0xC083E2);
     FA18_OP(0xC083E2, 0x4840, 0xC083E4); /* C083E2: swap    D0 */
     FA18_OP(0xC083E4, 0x303C, 0xC083E8); /* C083E4: move.w  #$4005, D0 */
-    FA18_CALL(0xC083E8, 0x4EB9, 0xC083EE, 216, 0); /* C083E8: jsr     $c25704.l */
+    FA18_CALL(0xC083E8, 0x4EB9, 0xC083EE, 298, 0); /* C083E8: jsr     $c25704.l */
 L_C083EE:
     FA18_CHECK(0xC083EE);
     FA18_OP(0xC083EE, 0x4840, 0xC083F0); /* C083EE: swap    D0 */
@@ -353,6 +709,50 @@ L_C08404:
 L_C08408:
     FA18_CHECK(0xC08408);
     FA18_OP(0xC08408, 0x4239, 0xC0840E); /* C08408: clr.b   $c45798.l */
+L_C0840E:
+    FA18_CHECK(0xC0840E);
+    FA18_OP(0xC0840E, 0x23FC, 0xC08418); /* C0840E: move.l  #$61a800, $c461f6.l */
+    FA18_OP(0xC08418, 0x13FC, 0xC08420); /* C08418: move.b  #$24, $c461e3.l */
+    FA18_OP(0xC08420, 0x33FC, 0xC08428); /* C08420: move.w  #$1f4, $c461e4.l */
+    FA18_OP(0xC08428, 0x13FC, 0xC08430); /* C08428: move.b  #$3, $c45843.l */
+    FA18_OP(0xC08430, 0x13FC, 0xC08438); /* C08430: move.b  #$3, $c45844.l */
+    FA18_OP(0xC08438, 0x13FC, 0xC08440); /* C08438: move.b  #$10, $c4584c.l */
+    FA18_OP(0xC08440, 0x13FC, 0xC08448); /* C08440: move.b  #$10, $c4584d.l */
+    FA18_OP(0xC08448, 0x4239, 0xC0844E); /* C08448: clr.b   $c4588b.l */
+    FA18_OP(0xC0844E, 0x4239, 0xC08454); /* C0844E: clr.b   $c4588d.l */
+    FA18_OP(0xC08454, 0x4239, 0xC0845A); /* C08454: clr.b   $c4588c.l */
+    FA18_OP(0xC0845A, 0x4279, 0xC08460); /* C0845A: clr.w   $c458c2.l */
+    FA18_OP(0xC08460, 0x48E7, 0xC08464); /* C08460: movem.l D0/D4/A0-A1, -(A7) */
+    FA18_OP(0xC08464, 0x41F9, 0xC0846A); /* C08464: lea     $c46184.l, A0 */
+    FA18_OP(0xC0846A, 0xD0FC, 0xC0846E); /* C0846A: adda.w  #$200, A0 */
+    FA18_OP(0xC0846E, 0x7002, 0xC08470); /* C0846E: moveq   #$2, D0 */
+L_C08470:
+    FA18_CHECK(0xC08470);
+    FA18_OP(0xC08470, 0x7828, 0xC08472); /* C08470: moveq   #$28, D4 */
+    FA18_OP(0xC08472, 0x43D0, 0xC08474); /* C08472: lea     (A0), A1 */
+L_C08474:
+    FA18_CHECK(0xC08474);
+    FA18_OP(0xC08474, 0x4299, 0xC08476); /* C08474: clr.l   (A1)+ */
+    FA18_BCC(0xC08476, 0x51CC, 0xC0847A, 0xC08474, L_C08474); /* C08476: dbra    D4, $c08474 */
+L_C0847A:
+    FA18_CHECK(0xC0847A);
+    FA18_OP(0xC0847A, 0xD0FC, 0xC0847E); /* C0847A: adda.w  #$200, A0 */
+    FA18_BCC(0xC0847E, 0x51C8, 0xC08482, 0xC08470, L_C08470); /* C0847E: dbra    D0, $c08470 */
+L_C08482:
+    FA18_CHECK(0xC08482);
+    FA18_OP(0xC08482, 0x4CDF, 0xC08486); /* C08482: movem.l (A7)+, D0/D4/A0-A1 */
+    FA18_RETURN(0xC08486, 0x4E75); /* C08486: rts */
+}
+
+int fa18_fn_C0840E(int entry) {
+    switch (entry) {
+    case 0: goto L_C0840E;
+    case 1: goto L_C08470;
+    case 2: goto L_C08474;
+    case 3: goto L_C0847A;
+    case 4: goto L_C08482;
+    default: return FA18_EXIT_DISPATCH;
+    }
 L_C0840E:
     FA18_CHECK(0xC0840E);
     FA18_OP(0xC0840E, 0x23FC, 0xC08418); /* C0840E: move.l  #$61a800, $c461f6.l */
@@ -420,7 +820,7 @@ L_C091A8:
     FA18_CHECK(0xC091A8);
     FA18_OP(0xC091A8, 0x48E7, 0xC091AC); /* C091A8: movem.l A1-A2, -(A7) */
     FA18_OP(0xC091AC, 0x48A7, 0xC091B0); /* C091AC: movem.w D3-D5, -(A7) */
-    FA18_CALL(0xC091B0, 0x4EB9, 0xC091B6, 277, 0); /* C091B0: jsr     $c2daf2.l */
+    FA18_CALL(0xC091B0, 0x4EB9, 0xC091B6, 359, 0); /* C091B0: jsr     $c2daf2.l */
 L_C091B6:
     FA18_CHECK(0xC091B6);
     FA18_OP(0xC091B6, 0x4C9F, 0xC091BA); /* C091B6: movem.w (A7)+, D3-D5 */
@@ -556,6 +956,1146 @@ L_C091F0:
     FA18_RETURN(0xC09248, 0x4E75); /* C09248: rts */
 }
 
+int fa18_fn_C0924A(int entry) {
+    switch (entry) {
+    case 0: goto L_C0924A;
+    case 1: goto L_C092AC;
+    case 2: goto L_C092B0;
+    case 3: goto L_C092E6;
+    case 4: goto L_C092EC;
+    case 5: goto L_C092F0;
+    case 6: goto L_C09314;
+    case 7: goto L_C0931A;
+    case 8: goto L_C09320;
+    case 9: goto L_C09324;
+    case 10: goto L_C093A2;
+    case 11: goto L_C093BE;
+    case 12: goto L_C09498;
+    case 13: goto L_C094AC;
+    case 14: goto L_C094B6;
+    case 15: goto L_C094D4;
+    case 16: goto L_C094E2;
+    case 17: goto L_C094E4;
+    case 18: goto L_C0952E;
+    case 19: goto L_C095B8;
+    case 20: goto L_C095BE;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0924A:
+    FA18_CHECK(0xC0924A);
+    FA18_OP(0xC0924A, 0x4239, 0xC09250); /* C0924A: clr.b   $c45785.l */
+    FA18_OP(0xC09250, 0x4239, 0xC09256); /* C09250: clr.b   $c457a6.l */
+    FA18_OP(0xC09256, 0x13FC, 0xC0925E); /* C09256: move.b  #$1, $c457b5.l */
+    FA18_OP(0xC0925E, 0x13FC, 0xC09266); /* C0925E: move.b  #$1, $c457b4.l */
+    FA18_OP(0xC09266, 0x23F9, 0xC09270); /* C09266: move.l  $c4fda4.l, $c4fdac.l */
+    FA18_OP(0xC09270, 0x23F9, 0xC0927A); /* C09270: move.l  $c4fdb0.l, $c4fdb4.l */
+    FA18_OP(0xC0927A, 0x23F9, 0xC09284); /* C0927A: move.l  $c4fda4.l, $c4fdbc.l */
+    FA18_OP(0xC09284, 0x23F9, 0xC0928E); /* C09284: move.l  $c4fdb0.l, $c4fdb8.l */
+    FA18_OP(0xC0928E, 0x58B9, 0xC09294); /* C0928E: addq.l  #4, $c4fdb8.l */
+    FA18_OP(0xC09294, 0x4279, 0xC0929A); /* C09294: clr.w   $c4592c.l */
+    FA18_OP(0xC0929A, 0x4279, 0xC092A0); /* C0929A: clr.w   $c45930.l */
+    FA18_OP(0xC092A0, 0x13FC, 0xC092A8); /* C092A0: move.b  #$ff, $c45858.l */
+    FA18_CALL(0xC092A8, 0x6100, 0xC092AC, 57, 0); /* C092A8: bsr     $c09620 */
+L_C092AC:
+    FA18_CHECK(0xC092AC);
+    FA18_CALL(0xC092AC, 0x6100, 0xC092B0, 56, 0); /* C092AC: bsr     $c095c0 */
+L_C092B0:
+    FA18_CHECK(0xC092B0);
+    FA18_OP(0xC092B0, 0x4279, 0xC092B6); /* C092B0: clr.w   $c459c2.l */
+    FA18_OP(0xC092B6, 0x7009, 0xC092B8); /* C092B6: moveq   #$9, D0 */
+    FA18_OP(0xC092B8, 0x13C0, 0xC092BE); /* C092B8: move.b  D0, $c461af.l */
+    FA18_OP(0xC092BE, 0xE740, 0xC092C0); /* C092BE: asl.w   #3, D0 */
+    FA18_OP(0xC092C0, 0x33C0, 0xC092C6); /* C092C0: move.w  D0, $c45778.l */
+    FA18_OP(0xC092C6, 0x33C0, 0xC092CC); /* C092C6: move.w  D0, $c4577c.l */
+    FA18_OP(0xC092CC, 0x13FC, 0xC092D4); /* C092CC: move.b  #$fe, $c458b0.l */
+    FA18_OP(0xC092D4, 0x41F9, 0xC092DA); /* C092D4: lea     $c22048.l, A0 */
+    FA18_OP(0xC092DA, 0x1239, 0xC092E0); /* C092DA: move.b  $c45849.l, D1 */
+    FA18_OP(0xC092E0, 0x0C01, 0xC092E4); /* C092E0: cmpi.b  #$10, D1 */
+    FA18_BCC(0xC092E4, 0x6606, 0xC092E6, 0xC092EC, L_C092EC); /* C092E4: bne     $c092ec */
+L_C092E6:
+    FA18_CHECK(0xC092E6);
+    FA18_OP(0xC092E6, 0x303C, 0xC092EA); /* C092E6: move.w  #$3c, D0 */
+    FA18_JUMP(0xC092EA, 0x6004, 0xC092F0, L_C092F0); /* C092EA: bra     $c092f0 */
+L_C092EC:
+    FA18_CHECK(0xC092EC);
+    FA18_OP(0xC092EC, 0x303C, 0xC092F0); /* C092EC: move.w  #$50, D0 */
+L_C092F0:
+    FA18_CHECK(0xC092F0);
+    FA18_OP(0xC092F0, 0x13C1, 0xC092F6); /* C092F0: move.b  D1, $c461e6.l */
+    FA18_OP(0xC092F6, 0xD0C0, 0xC092F8); /* C092F6: adda.w  D0, A0 */
+    FA18_OP(0xC092F8, 0x4CD0, 0xC092FC); /* C092F8: movem.l (A0), D0-D4 */
+    FA18_OP(0xC092FC, 0x203C, 0xC09302); /* C092FC: move.l  #$c1ed4c, D0 */
+    FA18_OP(0xC09302, 0x48F9, 0xC0930A); /* C09302: movem.l D0-D4, $c22188.l */
+    FA18_OP(0xC0930A, 0x2279, 0xC09310); /* C0930A: movea.l $c2218c.l, A1 */
+    FA18_OP(0xC09310, 0x3411, 0xC09312); /* C09310: move.w  (A1), D2 */
+    FA18_BCC(0xC09312, 0x6D10, 0xC09314, 0xC09324, L_C09324); /* C09312: blt     $c09324 */
+L_C09314:
+    FA18_CHECK(0xC09314);
+    FA18_OP(0xC09314, 0x0242, 0xC09318); /* C09314: andi.w  #$4000, D2 */
+    FA18_BCC(0xC09318, 0x6706, 0xC0931A, 0xC09320, L_C09320); /* C09318: beq     $c09320 */
+L_C0931A:
+    FA18_CHECK(0xC0931A);
+    FA18_OP(0xC0931A, 0x3429, 0xC0931E); /* C0931A: move.w  ($2,A1), D2 */
+    FA18_JUMP(0xC0931E, 0x6004, 0xC09324, L_C09324); /* C0931E: bra     $c09324 */
+L_C09320:
+    FA18_CHECK(0xC09320);
+    FA18_OP(0xC09320, 0x3429, 0xC09324); /* C09320: move.w  ($4,A1), D2 */
+L_C09324:
+    FA18_CHECK(0xC09324);
+    FA18_OP(0xC09324, 0x0242, 0xC09328); /* C09324: andi.w  #$fff, D2 */
+    FA18_OP(0xC09328, 0x1831, 0xC0932C); /* C09328: move.b  ($6,A1,D2.w), D4 */
+    FA18_OP(0xC0932C, 0x0204, 0xC09330); /* C0932C: andi.b  #$f, D4 */
+    FA18_OP(0xC09330, 0x13C4, 0xC09336); /* C09330: move.b  D4, $c46201.l */
+    FA18_OP(0xC09336, 0x4239, 0xC0933C); /* C09336: clr.b   $c457a0.l */
+    FA18_OP(0xC0933C, 0x43F9, 0xC09342); /* C0933C: lea     $c46184.l, A1 */
+    FA18_OP(0xC09342, 0x0269, 0xC09348); /* C09342: andi.w  #$f9ff, ($0,A1) */
+    FA18_OP(0xC09348, 0x0269, 0xC0934E); /* C09348: andi.w  #$deff, ($2,A1) */
+    FA18_OP(0xC0934E, 0x0269, 0xC09354); /* C0934E: andi.w  #$7ff7, ($2,A1) */
+    FA18_OP(0xC09354, 0x08A9, 0xC0935A); /* C09354: bclr    #$4, ($2,A1) */
+    FA18_OP(0xC0935A, 0x0069, 0xC09360); /* C0935A: ori.w   #$80, ($2,A1) */
+    FA18_OP(0xC09360, 0x0229, 0xC09366); /* C09360: andi.b  #$3f, ($4,A1) */
+    FA18_OP(0xC09366, 0x08A9, 0xC0936C); /* C09366: bclr    #$1, ($4,A1) */
+    FA18_OP(0xC0936C, 0x0229, 0xC09372); /* C0936C: andi.b  #$f7, ($4,A1) */
+    FA18_OP(0xC09372, 0x08A9, 0xC09378); /* C09372: bclr    #$0, ($20,A1) */
+    FA18_OP(0xC09378, 0x08A9, 0xC0937E); /* C09378: bclr    #$2, ($20,A1) */
+    FA18_OP(0xC0937E, 0x08A9, 0xC09384); /* C0937E: bclr    #$1, ($20,A1) */
+    FA18_OP(0xC09384, 0x137C, 0xC0938A); /* C09384: move.b  #$0, ($7c,A1) */
+    FA18_OP(0xC0938A, 0x4239, 0xC09390); /* C0938A: clr.b   $c45847.l */
+    FA18_OP(0xC09390, 0x4239, 0xC09396); /* C09390: clr.b   $c45870.l */
+    FA18_OP(0xC09396, 0x4239, 0xC0939C); /* C09396: clr.b   $c457ab.l */
+    FA18_OP(0xC0939C, 0x4239, 0xC093A2); /* C0939C: clr.b   $c45842.l */
+L_C093A2:
+    FA18_CHECK(0xC093A2);
+    FA18_OP(0xC093A2, 0x41F9, 0xC093A8); /* C093A2: lea     $c42a02.l, A0 */
+    FA18_OP(0xC093A8, 0x1039, 0xC093AE); /* C093A8: move.b  $c45848.l, D0 */
+    FA18_OP(0xC093AE, 0x4880, 0xC093B0); /* C093AE: ext.w   D0 */
+    FA18_OP(0xC093B0, 0xE940, 0xC093B2); /* C093B0: asl.w   #4, D0 */
+    FA18_OP(0xC093B2, 0xD0C0, 0xC093B4); /* C093B2: adda.w  D0, A0 */
+    FA18_OP(0xC093B4, 0x4C98, 0xC093B8); /* C093B4: movem.w (A0)+, D0-D4 */
+    FA18_OP(0xC093B8, 0x4A40, 0xC093BA); /* C093B8: tst.w   D0 */
+    FA18_BCC(0xC093BA, 0x6D00, 0xC093BE, 0xC09498, L_C09498); /* C093BA: blt     $c09498 */
+L_C093BE:
+    FA18_CHECK(0xC093BE);
+    FA18_OP(0xC093BE, 0x33C0, 0xC093C4); /* C093BE: move.w  D0, $c45948.l */
+    FA18_OP(0xC093C4, 0x33C1, 0xC093CA); /* C093C4: move.w  D1, $c4594a.l */
+    FA18_OP(0xC093CA, 0x1342, 0xC093CE); /* C093CA: move.b  D2, ($b,A1) */
+    FA18_OP(0xC093CE, 0x45F9, 0xC093D4); /* C093CE: lea     $c1d8d6.l, A2 */
+    FA18_OP(0xC093D4, 0x3C02, 0xC093D6); /* C093D4: move.w  D2, D6 */
+    FA18_OP(0xC093D6, 0xDC46, 0xC093D8); /* C093D6: add.w   D6, D6 */
+    FA18_OP(0xC093D8, 0x3A39, 0xC093DE); /* C093D8: move.w  $c45948.l, D5 */
+    FA18_OP(0xC093DE, 0xE545, 0xC093E0); /* C093DE: asl.w   #2, D5 */
+    FA18_OP(0xC093E0, 0x1E32, 0xC093E4); /* C093E0: move.b  (A2,D6.w), D7 */
+    FA18_OP(0xC093E4, 0x4887, 0xC093E6); /* C093E4: ext.w   D7 */
+    FA18_OP(0xC093E6, 0xDA47, 0xC093E8); /* C093E6: add.w   D7, D5 */
+    FA18_OP(0xC093E8, 0x3345, 0xC093EC); /* C093E8: move.w  D5, ($6,A1) */
+    FA18_OP(0xC093EC, 0x33C5, 0xC093F2); /* C093EC: move.w  D5, $c4594c.l */
+    FA18_OP(0xC093F2, 0x3A39, 0xC093F8); /* C093F2: move.w  $c4594a.l, D5 */
+    FA18_OP(0xC093F8, 0xE545, 0xC093FA); /* C093F8: asl.w   #2, D5 */
+    FA18_OP(0xC093FA, 0x1E32, 0xC093FE); /* C093FA: move.b  ($1,A2,D6.w), D7 */
+    FA18_OP(0xC093FE, 0x4887, 0xC09400); /* C093FE: ext.w   D7 */
+    FA18_OP(0xC09400, 0xDA47, 0xC09402); /* C09400: add.w   D7, D5 */
+    FA18_OP(0xC09402, 0x33C5, 0xC09408); /* C09402: move.w  D5, $c4594e.l */
+    FA18_OP(0xC09408, 0x3345, 0xC0940C); /* C09408: move.w  D5, ($8,A1) */
+    FA18_OP(0xC0940C, 0x4840, 0xC0940E); /* C0940C: swap    D0 */
+    FA18_OP(0xC0940E, 0xE180, 0xC09410); /* C0940E: asl.l   #8, D0 */
+    FA18_OP(0xC09410, 0x4841, 0xC09412); /* C09410: swap    D1 */
+    FA18_OP(0xC09412, 0xE181, 0xC09414); /* C09412: asl.l   #8, D1 */
+    FA18_OP(0xC09414, 0xE542, 0xC09416); /* C09414: asl.w   #2, D2 */
+    FA18_OP(0xC09416, 0x45F9, 0xC0941C); /* C09416: lea     $c1d7e2.l, A2 */
+    FA18_OP(0xC0941C, 0x4CB2, 0xC09422); /* C0941C: movem.w (A2,D2.w), D5-D6 */
+    FA18_OP(0xC09422, 0xE185, 0xC09424); /* C09422: asl.l   #8, D5 */
+    FA18_OP(0xC09424, 0xE186, 0xC09426); /* C09424: asl.l   #8, D6 */
+    FA18_OP(0xC09426, 0xE585, 0xC09428); /* C09426: asl.l   #2, D5 */
+    FA18_OP(0xC09428, 0xE586, 0xC0942A); /* C09428: asl.l   #2, D6 */
+    FA18_OP(0xC0942A, 0xD085, 0xC0942C); /* C0942A: add.l   D5, D0 */
+    FA18_OP(0xC0942C, 0xD286, 0xC0942E); /* C0942C: add.l   D6, D1 */
+    FA18_OP(0xC0942E, 0x4C98, 0xC09432); /* C0942E: movem.w (A0)+, D5-D7 */
+    FA18_OP(0xC09432, 0xE985, 0xC09434); /* C09432: asl.l   #4, D5 */
+    FA18_OP(0xC09434, 0xE986, 0xC09436); /* C09434: asl.l   #4, D6 */
+    FA18_OP(0xC09436, 0xE183, 0xC09438); /* C09436: asl.l   #8, D3 */
+    FA18_OP(0xC09438, 0xE184, 0xC0943A); /* C09438: asl.l   #8, D4 */
+    FA18_OP(0xC0943A, 0xE583, 0xC0943C); /* C0943A: asl.l   #2, D3 */
+    FA18_OP(0xC0943C, 0xE584, 0xC0943E); /* C0943C: asl.l   #2, D4 */
+    FA18_OP(0xC0943E, 0xD685, 0xC09440); /* C0943E: add.l   D5, D3 */
+    FA18_OP(0xC09440, 0xD886, 0xC09442); /* C09440: add.l   D6, D4 */
+    FA18_OP(0xC09442, 0x237C, 0xC0944A); /* C09442: move.l  #$708, ($18,A1) */
+    FA18_OP(0xC0944A, 0xD083, 0xC0944C); /* C0944A: add.l   D3, D0 */
+    FA18_OP(0xC0944C, 0xD284, 0xC0944E); /* C0944C: add.l   D4, D1 */
+    FA18_OP(0xC0944E, 0x2340, 0xC09452); /* C0944E: move.l  D0, ($14,A1) */
+    FA18_OP(0xC09452, 0x2341, 0xC09456); /* C09452: move.l  D1, ($1c,A1) */
+    FA18_OP(0xC09456, 0x4483, 0xC09458); /* C09456: neg.l   D3 */
+    FA18_OP(0xC09458, 0x4484, 0xC0945A); /* C09458: neg.l   D4 */
+    FA18_OP(0xC0945A, 0x23C3, 0xC09460); /* C0945A: move.l  D3, $c45a62.l */
+    FA18_OP(0xC09460, 0x23C4, 0xC09466); /* C09460: move.l  D4, $c45a6a.l */
+    FA18_OP(0xC09466, 0x23FC, 0xC09470); /* C09466: move.l  #$fffff8f8, $c45a66.l */
+    FA18_OP(0xC09470, 0x4483, 0xC09472); /* C09470: neg.l   D3 */
+    FA18_OP(0xC09472, 0x4484, 0xC09474); /* C09472: neg.l   D4 */
+    FA18_OP(0xC09474, 0xE083, 0xC09476); /* C09474: asr.l   #8, D3 */
+    FA18_OP(0xC09476, 0xE084, 0xC09478); /* C09476: asr.l   #8, D4 */
+    FA18_OP(0xC09478, 0x3343, 0xC0947C); /* C09478: move.w  D3, ($c,A1) */
+    FA18_OP(0xC0947C, 0x3344, 0xC09480); /* C0947C: move.w  D4, ($e,A1) */
+    FA18_OP(0xC09480, 0x237C, 0xC09488); /* C09480: move.l  #$fffffff9, ($10,A1) */
+    FA18_OP(0xC09488, 0x7800, 0xC0948A); /* C09488: moveq   #$0, D4 */
+    FA18_OP(0xC0948A, 0x7C00, 0xC0948C); /* C0948A: moveq   #$0, D6 */
+    FA18_OP(0xC0948C, 0xCEFC, 0xC09490); /* C0948C: mulu.w  #$a, D7 */
+    FA18_OP(0xC09490, 0xE747, 0xC09492); /* C09490: asl.w   #3, D7 */
+    FA18_OP(0xC09492, 0x3A07, 0xC09494); /* C09492: move.w  D7, D5 */
+    FA18_JUMP(0xC09494, 0x6000, 0xC095B8, L_C095B8); /* C09494: bra     $c095b8 */
+L_C09498:
+    FA18_CHECK(0xC09498);
+    FA18_OP(0xC09498, 0x0240, 0xC0949C); /* C09498: andi.w  #$7fff, D0 */
+    FA18_OP(0xC0949C, 0x3200, 0xC0949E); /* C0949C: move.w  D0, D1 */
+    FA18_OP(0xC0949E, 0xE140, 0xC094A0); /* C0949E: asl.w   #8, D0 */
+    FA18_OP(0xC094A0, 0xD040, 0xC094A2); /* C094A0: add.w   D0, D0 */
+    FA18_OP(0xC094A2, 0xD2C0, 0xC094A4); /* C094A2: adda.w  D0, A1 */
+    FA18_OP(0xC094A4, 0x0829, 0xC094AA); /* C094A4: btst    #$6, ($1,A1) */
+    FA18_BCC(0xC094AA, 0x660A, 0xC094AC, 0xC094B6, L_C094B6); /* C094AA: bne     $c094b6 */
+L_C094AC:
+    FA18_CHECK(0xC094AC);
+    FA18_OP(0xC094AC, 0x4239, 0xC094B2); /* C094AC: clr.b   $c45848.l */
+    FA18_JUMP(0xC094B2, 0x6000, 0xC093A2, L_C093A2); /* C094B2: bra     $c093a2 */
+L_C094B6:
+    FA18_CHECK(0xC094B6);
+    FA18_OP(0xC094B6, 0x45F9, 0xC094BC); /* C094B6: lea     $c46184.l, A2 */
+    FA18_OP(0xC094BC, 0x49F9, 0xC094C2); /* C094BC: lea     $c22188.l, A4 */
+    FA18_OP(0xC094C2, 0xE541, 0xC094C4); /* C094C2: asl.w   #2, D1 */
+    FA18_OP(0xC094C4, 0x3001, 0xC094C6); /* C094C4: move.w  D1, D0 */
+    FA18_OP(0xC094C6, 0xE541, 0xC094C8); /* C094C6: asl.w   #2, D1 */
+    FA18_OP(0xC094C8, 0xD240, 0xC094CA); /* C094C8: add.w   D0, D1 */
+    FA18_OP(0xC094CA, 0x2874, 0xC094CE); /* C094CA: movea.l ($10,A4,D1.w), A4 */
+    FA18_OP(0xC094CE, 0x202C, 0xC094D2); /* C094CE: move.l  ($2,A4), D0 */
+    FA18_BCC(0xC094D2, 0x6D10, 0xC094D4, 0xC094E4, L_C094E4); /* C094D2: blt     $c094e4 */
+L_C094D4:
+    FA18_CHECK(0xC094D4);
+    FA18_OP(0xC094D4, 0x33FC, 0xC094DC); /* C094D4: move.w  #$28, $c4599e.l */
+    FA18_CALL(0xC094DC, 0x4EB9, 0xC094E2, 42, 0); /* C094DC: jsr     $c06c02.l */
+L_C094E2:
+    FA18_CHECK(0xC094E2);
+    FA18_OP(0xC094E2, 0x4280, 0xC094E4); /* C094E2: clr.l   D0 */
+L_C094E4:
+    FA18_CHECK(0xC094E4);
+    FA18_OP(0xC094E4, 0x0880, 0xC094E8); /* C094E4: bclr    #$1f, D0 */
+    FA18_OP(0xC094E8, 0x2200, 0xC094EA); /* C094E8: move.l  D0, D1 */
+    FA18_OP(0xC094EA, 0x0680, 0xC094F0); /* C094EA: addi.l  #$7, D0 */
+    FA18_OP(0xC094F0, 0x2540, 0xC094F4); /* C094F0: move.l  D0, ($10,A2) */
+    FA18_OP(0xC094F4, 0xE181, 0xC094F6); /* C094F4: asl.l   #8, D1 */
+    FA18_OP(0xC094F6, 0x0681, 0xC094FC); /* C094F6: addi.l  #$708, D1 */
+    FA18_OP(0xC094FC, 0x2541, 0xC09500); /* C094FC: move.l  D1, ($18,A2) */
+    FA18_OP(0xC09500, 0x002A, 0xC09506); /* C09500: ori.b   #$c0, ($4,A2) */
+    FA18_OP(0xC09506, 0x002A, 0xC0950C); /* C09506: ori.b   #$8, ($4,A2) */
+    FA18_OP(0xC0950C, 0x303C, 0xC09510); /* C0950C: move.w  #$a4, D0 */
+    FA18_OP(0xC09510, 0x4272, 0xC09514); /* C09510: clr.w   ($14,A2,D0.w) */
+    FA18_OP(0xC09514, 0x2569, 0xC0951A); /* C09514: move.l  ($66,A1), ($66,A2) */
+    FA18_OP(0xC0951A, 0x3569, 0xC09520); /* C0951A: move.w  ($6a,A1), ($6a,A2) */
+    FA18_OP(0xC09520, 0x363C, 0xC09524); /* C09520: move.w  #$b, D3 */
+    FA18_OP(0xC09524, 0x7800, 0xC09526); /* C09524: moveq   #$0, D4 */
+    FA18_OP(0xC09526, 0x3A3C, 0xC0952A); /* C09526: move.w  #$68, D5 */
+    FA18_CALL(0xC0952A, 0x6100, 0xC0952E, 54, 0); /* C0952A: bsr     $c091e0 */
+L_C0952E:
+    FA18_CHECK(0xC0952E);
+    FA18_OP(0xC0952E, 0x43F9, 0xC09534); /* C0952E: lea     $c46184.l, A1 */
+    FA18_OP(0xC09534, 0x2340, 0xC09538); /* C09534: move.l  D0, ($14,A1) */
+    FA18_OP(0xC09538, 0x2342, 0xC0953C); /* C09538: move.l  D2, ($1c,A1) */
+    FA18_OP(0xC0953C, 0x2600, 0xC0953E); /* C0953C: move.l  D0, D3 */
+    FA18_OP(0xC0953E, 0x2802, 0xC09540); /* C0953E: move.l  D2, D4 */
+    FA18_OP(0xC09540, 0x0283, 0xC09546); /* C09540: andi.l  #$3fffff, D3 */
+    FA18_OP(0xC09546, 0x0284, 0xC0954C); /* C09546: andi.l  #$3fffff, D4 */
+    FA18_OP(0xC0954C, 0xE083, 0xC0954E); /* C0954C: asr.l   #8, D3 */
+    FA18_OP(0xC0954E, 0xE084, 0xC09550); /* C0954E: asr.l   #8, D4 */
+    FA18_OP(0xC09550, 0x3343, 0xC09554); /* C09550: move.w  D3, ($c,A1) */
+    FA18_OP(0xC09554, 0x3344, 0xC09558); /* C09554: move.w  D4, ($e,A1) */
+    FA18_OP(0xC09558, 0x2202, 0xC0955A); /* C09558: move.l  D2, D1 */
+    FA18_OP(0xC0955A, 0x0280, 0xC09560); /* C0955A: andi.l  #$1fffffff, D0 */
+    FA18_OP(0xC09560, 0x0281, 0xC09566); /* C09560: andi.l  #$1fffffff, D1 */
+    FA18_OP(0xC09566, 0x4840, 0xC09568); /* C09566: swap    D0 */
+    FA18_OP(0xC09568, 0x4841, 0xC0956A); /* C09568: swap    D1 */
+    FA18_OP(0xC0956A, 0xE840, 0xC0956C); /* C0956A: asr.w   #4, D0 */
+    FA18_OP(0xC0956C, 0xE841, 0xC0956E); /* C0956C: asr.w   #4, D1 */
+    FA18_OP(0xC0956E, 0x3400, 0xC09570); /* C0956E: move.w  D0, D2 */
+    FA18_OP(0xC09570, 0x3601, 0xC09572); /* C09570: move.w  D1, D3 */
+    FA18_OP(0xC09572, 0x0240, 0xC09576); /* C09572: andi.w  #$3, D0 */
+    FA18_OP(0xC09576, 0x0241, 0xC0957A); /* C09576: andi.w  #$3, D1 */
+    FA18_OP(0xC0957A, 0x5700, 0xC0957C); /* C0957A: subq.b  #3, D0 */
+    FA18_OP(0xC0957C, 0x4400, 0xC0957E); /* C0957C: neg.b   D0 */
+    FA18_OP(0xC0957E, 0x5701, 0xC09580); /* C0957E: subq.b  #3, D1 */
+    FA18_OP(0xC09580, 0x4401, 0xC09582); /* C09580: neg.b   D1 */
+    FA18_OP(0xC09582, 0xD201, 0xC09584); /* C09582: add.b   D1, D1 */
+    FA18_OP(0xC09584, 0xD201, 0xC09586); /* C09584: add.b   D1, D1 */
+    FA18_OP(0xC09586, 0xD200, 0xC09588); /* C09586: add.b   D0, D1 */
+    FA18_OP(0xC09588, 0x1341, 0xC0958C); /* C09588: move.b  D1, ($a,A1) */
+    FA18_OP(0xC0958C, 0xE442, 0xC0958E); /* C0958C: asr.w   #2, D2 */
+    FA18_OP(0xC0958E, 0xE443, 0xC09590); /* C0958E: asr.w   #2, D3 */
+    FA18_OP(0xC09590, 0x3342, 0xC09594); /* C09590: move.w  D2, ($6,A1) */
+    FA18_OP(0xC09594, 0x3343, 0xC09598); /* C09594: move.w  D3, ($8,A1) */
+    FA18_OP(0xC09598, 0x0242, 0xC0959C); /* C09598: andi.w  #$3, D2 */
+    FA18_OP(0xC0959C, 0x0243, 0xC095A0); /* C0959C: andi.w  #$3, D3 */
+    FA18_OP(0xC095A0, 0x5702, 0xC095A2); /* C095A0: subq.b  #3, D2 */
+    FA18_OP(0xC095A2, 0x4402, 0xC095A4); /* C095A2: neg.b   D2 */
+    FA18_OP(0xC095A4, 0x5703, 0xC095A6); /* C095A4: subq.b  #3, D3 */
+    FA18_OP(0xC095A6, 0x4403, 0xC095A8); /* C095A6: neg.b   D3 */
+    FA18_OP(0xC095A8, 0xD603, 0xC095AA); /* C095A8: add.b   D3, D3 */
+    FA18_OP(0xC095AA, 0xD603, 0xC095AC); /* C095AA: add.b   D3, D3 */
+    FA18_OP(0xC095AC, 0xD602, 0xC095AE); /* C095AC: add.b   D2, D3 */
+    FA18_OP(0xC095AE, 0x1343, 0xC095B2); /* C095AE: move.b  D3, ($b,A1) */
+    FA18_OP(0xC095B2, 0x4CA9, 0xC095B8); /* C095B2: movem.w ($66,A1), D4-D6 */
+L_C095B8:
+    FA18_CHECK(0xC095B8);
+    FA18_CALL(0xC095B8, 0x4EB9, 0xC095BE, 355, 0); /* C095B8: jsr     $c2d954.l */
+L_C095BE:
+    FA18_CHECK(0xC095BE);
+    FA18_RETURN(0xC095BE, 0x4E75); /* C095BE: rts */
+}
+
+int fa18_fn_C095C0(int entry) {
+    switch (entry) {
+    case 0: goto L_C095C0;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C095C0:
+    FA18_CHECK(0xC095C0);
+    FA18_OP(0xC095C0, 0x43F9, 0xC095C6); /* C095C0: lea     $c46184.l, A1 */
+    FA18_OP(0xC095C6, 0x4269, 0xC095CA); /* C095C6: clr.w   ($6c,A1) */
+    FA18_OP(0xC095CA, 0x4269, 0xC095CE); /* C095CA: clr.w   ($6e,A1) */
+    FA18_OP(0xC095CE, 0x4269, 0xC095D2); /* C095CE: clr.w   ($78,A1) */
+    FA18_OP(0xC095D2, 0x42A9, 0xC095D6); /* C095D2: clr.l   ($3e,A1) */
+    FA18_OP(0xC095D6, 0x42A9, 0xC095DA); /* C095D6: clr.l   ($42,A1) */
+    FA18_OP(0xC095DA, 0x42A9, 0xC095DE); /* C095DA: clr.l   ($46,A1) */
+    FA18_OP(0xC095DE, 0x42A9, 0xC095E2); /* C095DE: clr.l   ($56,A1) */
+    FA18_OP(0xC095E2, 0x4269, 0xC095E6); /* C095E2: clr.w   ($5a,A1) */
+    FA18_OP(0xC095E6, 0x42A9, 0xC095EA); /* C095E6: clr.l   ($50,A1) */
+    FA18_OP(0xC095EA, 0x4269, 0xC095EE); /* C095EA: clr.w   ($54,A1) */
+    FA18_OP(0xC095EE, 0x4229, 0xC095F2); /* C095EE: clr.b   ($65,A1) */
+    FA18_OP(0xC095F2, 0x137C, 0xC095F8); /* C095F2: move.b  #$9, ($2b,A1) */
+    FA18_OP(0xC095F8, 0x0269, 0xC095FE); /* C095F8: andi.w  #$7fff, ($0,A1) */
+    FA18_OP(0xC095FE, 0x42B9, 0xC09604); /* C095FE: clr.l   $c45b50.l */
+    FA18_OP(0xC09604, 0x42B9, 0xC0960A); /* C09604: clr.l   $c45b54.l */
+    FA18_OP(0xC0960A, 0x4279, 0xC09610); /* C0960A: clr.w   $c45ae0.l */
+    FA18_OP(0xC09610, 0x4279, 0xC09616); /* C09610: clr.w   $c45ade.l */
+    FA18_OP(0xC09616, 0x33FC, 0xC0961E); /* C09616: move.w  #$ffff, $c45ae4.l */
+    FA18_RETURN(0xC0961E, 0x4E75); /* C0961E: rts */
+}
+
+int fa18_fn_C09620(int entry) {
+    switch (entry) {
+    case 0: goto L_C09620;
+    case 1: goto L_C09638;
+    case 2: goto L_C096A0;
+    case 3: goto L_C096A8;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C09620:
+    FA18_CHECK(0xC09620);
+    FA18_OP(0xC09620, 0x41F9, 0xC09626); /* C09620: lea     $c46184.l, A0 */
+    FA18_OP(0xC09626, 0x08A8, 0xC0962C); /* C09626: bclr    #$0, ($21,A0) */
+    FA18_OP(0xC0962C, 0x117C, 0xC09632); /* C0962C: move.b  #$d, ($63,A0) */
+    FA18_CALL(0xC09632, 0x4EB9, 0xC09638, 50, 0); /* C09632: jsr     $c0840e.l */
+L_C09638:
+    FA18_CHECK(0xC09638);
+    FA18_OP(0xC09638, 0x317C, 0xC0963E); /* C09638: move.w  #$148, ($0,A0) */
+    FA18_OP(0xC0963E, 0x0068, 0xC09644); /* C0963E: ori.w   #$1080, ($0,A0) */
+    FA18_OP(0xC09644, 0x317C, 0xC0964A); /* C09644: move.w  #$1400, ($7e,A0) */
+    FA18_OP(0xC0964A, 0x4239, 0xC09650); /* C0964A: clr.b   $c45899.l */
+    FA18_OP(0xC09650, 0x4239, 0xC09656); /* C09650: clr.b   $c4589a.l */
+    FA18_OP(0xC09656, 0x4239, 0xC0965C); /* C09656: clr.b   $c458b3.l */
+    FA18_OP(0xC0965C, 0x4239, 0xC09662); /* C0965C: clr.b   $c458b1.l */
+    FA18_OP(0xC09662, 0x4239, 0xC09668); /* C09662: clr.b   $c45889.l */
+    FA18_OP(0xC09668, 0x4239, 0xC0966E); /* C09668: clr.b   $c4586f.l */
+    FA18_OP(0xC0966E, 0x4239, 0xC09674); /* C0966E: clr.b   $c458b5.l */
+    FA18_OP(0xC09674, 0x33FC, 0xC0967C); /* C09674: move.w  #$7fff, $c45b42.l */
+    FA18_OP(0xC0967C, 0x13FC, 0xC09684); /* C0967C: move.b  #$1, $c457d8.l */
+    FA18_OP(0xC09684, 0x117C, 0xC0968A); /* C09684: move.b  #$ff, ($71,A0) */
+    FA18_OP(0xC0968A, 0x33FC, 0xC09692); /* C0968A: move.w  #$ffff, $c459c0.l */
+    FA18_OP(0xC09692, 0x4239, 0xC09698); /* C09692: clr.b   $c45868.l */
+    FA18_OP(0xC09698, 0x4A39, 0xC0969E); /* C09698: tst.b   $c45798.l */
+    FA18_BCC(0xC0969E, 0x6708, 0xC096A0, 0xC096A8, L_C096A8); /* C0969E: beq     $c096a8 */
+L_C096A0:
+    FA18_CHECK(0xC096A0);
+    FA18_OP(0xC096A0, 0x13FC, 0xC096A8); /* C096A0: move.b  #$4, $c45798.l */
+L_C096A8:
+    FA18_CHECK(0xC096A8);
+    FA18_RETURN(0xC096A8, 0x4E75); /* C096A8: rts */
+}
+
+int fa18_fn_C096B8(int entry) {
+    switch (entry) {
+    case 0: goto L_C096B8;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C096B8:
+    FA18_CHECK(0xC096B8);
+    FA18_OP(0xC096B8, 0x7000, 0xC096BA); /* C096B8: moveq   #$0, D0 */
+    FA18_RETURN(0xC096BA, 0x4E75); /* C096BA: rts */
+}
+
+int fa18_fn_C096BC(int entry) {
+    switch (entry) {
+    case 0: goto L_C096B8;
+    case 1: goto L_C096BC;
+    case 2: goto L_C096C8;
+    case 3: goto L_C096D6;
+    case 4: goto L_C096F6;
+    case 5: goto L_C09708;
+    case 6: goto L_C0970C;
+    case 7: goto L_C09716;
+    case 8: goto L_C09722;
+    case 9: goto L_C0972A;
+    case 10: goto L_C09730;
+    case 11: goto L_C09732;
+    case 12: goto L_C09738;
+    case 13: goto L_C0976C;
+    case 14: goto L_C09772;
+    case 15: goto L_C097CA;
+    case 16: goto L_C09812;
+    case 17: goto L_C09820;
+    case 18: goto L_C09826;
+    case 19: goto L_C0982A;
+    case 20: goto L_C09830;
+    case 21: goto L_C09838;
+    case 22: goto L_C0983C;
+    case 23: goto L_C0984C;
+    case 24: goto L_C09850;
+    case 25: goto L_C09856;
+    case 26: goto L_C0985E;
+    case 27: goto L_C09864;
+    case 28: goto L_C09868;
+    case 29: goto L_C09876;
+    case 30: goto L_C09878;
+    case 31: goto L_C0987E;
+    case 32: goto L_C0988C;
+    case 33: goto L_C09890;
+    case 34: goto L_C09892;
+    case 35: goto L_C09896;
+    case 36: goto L_C0989C;
+    case 37: goto L_C098A6;
+    case 38: goto L_C098AA;
+    case 39: goto L_C098BA;
+    case 40: goto L_C098BE;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C096B8:
+    FA18_CHECK(0xC096B8);
+    FA18_OP(0xC096B8, 0x7000, 0xC096BA); /* C096B8: moveq   #$0, D0 */
+    FA18_RETURN(0xC096BA, 0x4E75); /* C096BA: rts */
+L_C096BC:
+    FA18_CHECK(0xC096BC);
+    FA18_OP(0xC096BC, 0x0CB9, 0xC096C6); /* C096BC: cmpi.l  #-$380000, $c45a66.l */
+    FA18_BCC(0xC096C6, 0x6DF0, 0xC096C8, 0xC096B8, L_C096B8); /* C096C6: blt     $c096b8 */
+L_C096C8:
+    FA18_CHECK(0xC096C8);
+    FA18_JUMP(0xC096C8, 0x600C, 0xC096D6, L_C096D6); /* C096C8: bra     $c096d6 */
+L_C096D6:
+    FA18_CHECK(0xC096D6);
+    FA18_OP(0xC096D6, 0x4E56, 0xC096DA); /* C096D6: link    A6, #-$98 */
+    FA18_OP(0xC096DA, 0x23FC, 0xC096E4); /* C096DA: move.l  #$fffff, $c456e6.l */
+    FA18_OP(0xC096E4, 0x3439, 0xC096EA); /* C096E4: move.w  $c45b40.l, D2 */
+    FA18_OP(0xC096EA, 0x3D42, 0xC096EE); /* C096EA: move.w  D2, (-$96,A6) */
+    FA18_OP(0xC096EE, 0x4A39, 0xC096F4); /* C096EE: tst.b   $c457dd.l */
+    FA18_BCC(0xC096F4, 0x6612, 0xC096F6, 0xC09708, L_C09708); /* C096F4: bne     $c09708 */
+L_C096F6:
+    FA18_CHECK(0xC096F6);
+    FA18_OP(0xC096F6, 0x3639, 0xC096FC); /* C096F6: move.w  $c45a42.l, D3 */
+    FA18_OP(0xC096FC, 0x48C3, 0xC096FE); /* C096FC: ext.l   D3 */
+    FA18_OP(0xC096FE, 0xE183, 0xC09700); /* C096FE: asl.l   #8, D3 */
+    FA18_OP(0xC09700, 0x86FC, 0xC09704); /* C09700: divu.w  #$80, D3 */
+    FA18_OP(0xC09704, 0xC4C3, 0xC09706); /* C09704: mulu.w  D3, D2 */
+    FA18_OP(0xC09706, 0xE082, 0xC09708); /* C09706: asr.l   #8, D2 */
+L_C09708:
+    FA18_CHECK(0xC09708);
+    FA18_OP(0xC09708, 0x3D42, 0xC0970C); /* C09708: move.w  D2, (-$28,A6) */
+L_C0970C:
+    FA18_CHECK(0xC0970C);
+    FA18_OP(0xC0970C, 0x2479, 0xC09712); /* C0970C: movea.l $c45a36.l, A2 */
+    FA18_OP(0xC09712, 0x301A, 0xC09714); /* C09712: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09714, 0x6D1C, 0xC09716, 0xC09732, L_C09732); /* C09714: blt     $c09732 */
+L_C09716:
+    FA18_CHECK(0xC09716);
+    FA18_OP(0xC09716, 0x3239, 0xC0971C); /* C09716: move.w  $c45ab8.l, D1 */
+    FA18_OP(0xC0971C, 0xE260, 0xC0971E); /* C0971C: asr.w   D1, D0 */
+    FA18_OP(0xC0971E, 0xB042, 0xC09720); /* C0971E: cmp.w   D2, D0 */
+    FA18_BCC(0xC09720, 0x6C0E, 0xC09722, 0xC09730, L_C09730); /* C09720: bge     $c09730 */
+L_C09722:
+    FA18_CHECK(0xC09722);
+    FA18_OP(0xC09722, 0x23D2, 0xC09728); /* C09722: move.l  (A2), $c45a36.l */
+    FA18_BCC(0xC09728, 0x6CE2, 0xC0972A, 0xC0970C, L_C0970C); /* C09728: bge     $c0970c */
+L_C0972A:
+    FA18_CHECK(0xC0972A);
+    FA18_OP(0xC0972A, 0x7000, 0xC0972C); /* C0972A: moveq   #$0, D0 */
+    FA18_OP(0xC0972C, 0x4E5E, 0xC0972E); /* C0972C: unlk    A6 */
+    FA18_RETURN(0xC0972E, 0x4E75); /* C0972E: rts */
+L_C09730:
+    FA18_CHECK(0xC09730);
+    FA18_OP(0xC09730, 0x584A, 0xC09732); /* C09730: addq.w  #4, A2 */
+L_C09732:
+    FA18_CHECK(0xC09732);
+    FA18_OP(0xC09732, 0x0C40, 0xC09736); /* C09732: cmpi.w  #-$1, D0 */
+    FA18_BCC(0xC09736, 0x67F2, 0xC09738, 0xC0972A, L_C0972A); /* C09736: beq     $c0972a */
+L_C09738:
+    FA18_CHECK(0xC09738);
+    FA18_OP(0xC09738, 0x225A, 0xC0973A); /* C09738: movea.l (A2)+, A1 */
+    FA18_OP(0xC0973A, 0x23C9, 0xC09740); /* C0973A: move.l  A1, $c45a32.l */
+    FA18_OP(0xC09740, 0x23CA, 0xC09746); /* C09740: move.l  A2, $c45a36.l */
+    FA18_OP(0xC09746, 0x3039, 0xC0974C); /* C09746: move.w  $c45a72.l, D0 */
+    FA18_OP(0xC0974C, 0x2239, 0xC09752); /* C0974C: move.l  $c45a66.l, D1 */
+    FA18_OP(0xC09752, 0xE081, 0xC09754); /* C09752: asr.l   #8, D1 */
+    FA18_OP(0xC09754, 0x3439, 0xC0975A); /* C09754: move.w  $c45a76.l, D2 */
+    FA18_OP(0xC0975A, 0x1E39, 0xC09760); /* C0975A: move.b  $c4585b.l, D7 */
+    FA18_OP(0xC09760, 0x0207, 0xC09764); /* C09760: andi.b  #$f, D7 */
+    FA18_OP(0xC09764, 0x4887, 0xC09766); /* C09764: ext.w   D7 */
+    FA18_OP(0xC09766, 0x3D47, 0xC0976A); /* C09766: move.w  D7, (-$8,A6) */
+    FA18_BCC(0xC0976A, 0x6706, 0xC0976C, 0xC09772, L_C09772); /* C0976A: beq     $c09772 */
+L_C0976C:
+    FA18_CHECK(0xC0976C);
+    FA18_OP(0xC0976C, 0xEE60, 0xC0976E); /* C0976C: asr.w   D7, D0 */
+    FA18_OP(0xC0976E, 0xEEA1, 0xC09770); /* C0976E: asr.l   D7, D1 */
+    FA18_OP(0xC09770, 0xEE62, 0xC09772); /* C09770: asr.w   D7, D2 */
+L_C09772:
+    FA18_CHECK(0xC09772);
+    FA18_OP(0xC09772, 0x48AE, 0xC09778); /* C09772: movem.w D0-D2, (-$86,A6) */
+    FA18_OP(0xC09778, 0x4279, 0xC0977E); /* C09778: clr.w   $c4bf90.l */
+    FA18_OP(0xC0977E, 0x47F9, 0xC09784); /* C0977E: lea     $c48390.l, A3 */
+    FA18_OP(0xC09784, 0x45F9, 0xC0978A); /* C09784: lea     $c45bd8.l, A2 */
+    FA18_OP(0xC0978A, 0x49D2, 0xC0978C); /* C0978A: lea     (A2), A4 */
+    FA18_OP(0xC0978C, 0x3039, 0xC09792); /* C0978C: move.w  $c45b2a.l, D0 */
+    FA18_OP(0xC09792, 0x3239, 0xC09798); /* C09792: move.w  $c45b2e.l, D1 */
+    FA18_OP(0xC09798, 0xD06E, 0xC0979C); /* C09798: add.w   (-$86,A6), D0 */
+    FA18_OP(0xC0979C, 0xD26E, 0xC097A0); /* C0979C: add.w   (-$82,A6), D1 */
+    FA18_OP(0xC097A0, 0x41EE, 0xC097A4); /* C097A0: lea     (-$a,A6), A0 */
+    FA18_OP(0xC097A4, 0x3099, 0xC097A6); /* C097A4: move.w  (A1)+, (A0) */
+    FA18_OP(0xC097A6, 0x5849, 0xC097A8); /* C097A6: addq.w  #4, A1 */
+    FA18_OP(0xC097A8, 0x342E, 0xC097AC); /* C097A8: move.w  (-$84,A6), D2 */
+    FA18_OP(0xC097AC, 0x3602, 0xC097AE); /* C097AC: move.w  D2, D3 */
+    FA18_OP(0xC097AE, 0x3C02, 0xC097B0); /* C097AE: move.w  D2, D6 */
+    FA18_OP(0xC097B0, 0xC5EC, 0xC097B4); /* C097B0: muls.w  ($e,A4), D2 */
+    FA18_OP(0xC097B4, 0xE082, 0xC097B6); /* C097B4: asr.l   #8, D2 */
+    FA18_OP(0xC097B6, 0x3A42, 0xC097B8); /* C097B6: movea.w D2, A5 */
+    FA18_OP(0xC097B8, 0xC7EC, 0xC097BC); /* C097B8: muls.w  ($2,A4), D3 */
+    FA18_OP(0xC097BC, 0xE083, 0xC097BE); /* C097BC: asr.l   #8, D3 */
+    FA18_OP(0xC097BE, 0xCDEC, 0xC097C2); /* C097BE: muls.w  ($8,A4), D6 */
+    FA18_OP(0xC097C2, 0xE086, 0xC097C4); /* C097C2: asr.l   #8, D6 */
+    FA18_OP(0xC097C4, 0x48AE, 0xC097CA); /* C097C4: movem.w D3/D6/A5, (-$78,A6) */
+L_C097CA:
+    FA18_CHECK(0xC097CA);
+    FA18_OP(0xC097CA, 0x3419, 0xC097CC); /* C097CA: move.w  (A1)+, D2 */
+    FA18_OP(0xC097CC, 0x3819, 0xC097CE); /* C097CC: move.w  (A1)+, D4 */
+    FA18_OP(0xC097CE, 0x3E2E, 0xC097D2); /* C097CE: move.w  (-$8,A6), D7 */
+    FA18_OP(0xC097D2, 0xEE62, 0xC097D4); /* C097D2: asr.w   D7, D2 */
+    FA18_OP(0xC097D4, 0xEE64, 0xC097D6); /* C097D4: asr.w   D7, D4 */
+    FA18_OP(0xC097D6, 0xD440, 0xC097D8); /* C097D6: add.w   D0, D2 */
+    FA18_OP(0xC097D8, 0xD841, 0xC097DA); /* C097D8: add.w   D1, D4 */
+    FA18_OP(0xC097DA, 0x45D4, 0xC097DC); /* C097DA: lea     (A4), A2 */
+    FA18_OP(0xC097DC, 0x3A02, 0xC097DE); /* C097DC: move.w  D2, D5 */
+    FA18_OP(0xC097DE, 0x3E04, 0xC097E0); /* C097DE: move.w  D4, D7 */
+    FA18_OP(0xC097E0, 0xCBDA, 0xC097E2); /* C097E0: muls.w  (A2)+, D5 */
+    FA18_OP(0xC097E2, 0x544A, 0xC097E4); /* C097E2: addq.w  #2, A2 */
+    FA18_OP(0xC097E4, 0xCFDA, 0xC097E6); /* C097E4: muls.w  (A2)+, D7 */
+    FA18_OP(0xC097E6, 0xDE85, 0xC097E8); /* C097E6: add.l   D5, D7 */
+    FA18_OP(0xC097E8, 0xE087, 0xC097EA); /* C097E8: asr.l   #8, D7 */
+    FA18_OP(0xC097EA, 0xDE43, 0xC097EC); /* C097EA: add.w   D3, D7 */
+    FA18_OP(0xC097EC, 0x36C7, 0xC097EE); /* C097EC: move.w  D7, (A3)+ */
+    FA18_OP(0xC097EE, 0x3A02, 0xC097F0); /* C097EE: move.w  D2, D5 */
+    FA18_OP(0xC097F0, 0x3E04, 0xC097F2); /* C097F0: move.w  D4, D7 */
+    FA18_OP(0xC097F2, 0xCBDA, 0xC097F4); /* C097F2: muls.w  (A2)+, D5 */
+    FA18_OP(0xC097F4, 0x544A, 0xC097F6); /* C097F4: addq.w  #2, A2 */
+    FA18_OP(0xC097F6, 0xCFDA, 0xC097F8); /* C097F6: muls.w  (A2)+, D7 */
+    FA18_OP(0xC097F8, 0xDE85, 0xC097FA); /* C097F8: add.l   D5, D7 */
+    FA18_OP(0xC097FA, 0xE087, 0xC097FC); /* C097FA: asr.l   #8, D7 */
+    FA18_OP(0xC097FC, 0xDE46, 0xC097FE); /* C097FC: add.w   D6, D7 */
+    FA18_OP(0xC097FE, 0x36C7, 0xC09800); /* C097FE: move.w  D7, (A3)+ */
+    FA18_OP(0xC09800, 0xC5DA, 0xC09802); /* C09800: muls.w  (A2)+, D2 */
+    FA18_OP(0xC09802, 0xC9EA, 0xC09806); /* C09802: muls.w  ($2,A2), D4 */
+    FA18_OP(0xC09806, 0xD882, 0xC09808); /* C09806: add.l   D2, D4 */
+    FA18_OP(0xC09808, 0xE084, 0xC0980A); /* C09808: asr.l   #8, D4 */
+    FA18_OP(0xC0980A, 0xD84D, 0xC0980C); /* C0980A: add.w   A5, D4 */
+    FA18_OP(0xC0980C, 0x36C4, 0xC0980E); /* C0980C: move.w  D4, (A3)+ */
+    FA18_OP(0xC0980E, 0x5350, 0xC09810); /* C0980E: subq.w  #1, (A0) */
+    FA18_BCC(0xC09810, 0x6EB8, 0xC09812, 0xC097CA, L_C097CA); /* C09810: bgt     $c097ca */
+L_C09812:
+    FA18_CHECK(0xC09812);
+    FA18_OP(0xC09812, 0x426E, 0xC09816); /* C09812: clr.w   (-$7c,A6) */
+    FA18_OP(0xC09816, 0x2479, 0xC0981C); /* C09816: movea.l $c45a36.l, A2 */
+    FA18_OP(0xC0981C, 0x426E, 0xC09820); /* C0981C: clr.w   (-$6a,A6) */
+L_C09820:
+    FA18_CHECK(0xC09820);
+    FA18_OP(0xC09820, 0x4A6E, 0xC09824); /* C09820: tst.w   (-$6a,A6) */
+    FA18_BCC(0xC09824, 0x6630, 0xC09826, 0xC09856, L_C09856); /* C09824: bne     $c09856 */
+L_C09826:
+    FA18_CHECK(0xC09826);
+    FA18_OP(0xC09826, 0x301A, 0xC09828); /* C09826: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09828, 0x6C4E, 0xC0982A, 0xC09878, L_C09878); /* C09828: bge     $c09878 */
+L_C0982A:
+    FA18_CHECK(0xC0982A);
+    FA18_OP(0xC0982A, 0x0C40, 0xC0982E); /* C0982A: cmpi.w  #-$1, D0 */
+    FA18_BCC(0xC0982E, 0x6726, 0xC09830, 0xC09856, L_C09856); /* C0982E: beq     $c09856 */
+L_C09830:
+    FA18_CHECK(0xC09830);
+    FA18_OP(0xC09830, 0x3200, 0xC09832); /* C09830: move.w  D0, D1 */
+    FA18_OP(0xC09832, 0x0241, 0xC09836); /* C09832: andi.w  #$4000, D1 */
+    FA18_BCC(0xC09836, 0x6704, 0xC09838, 0xC0983C, L_C0983C); /* C09836: beq     $c0983c */
+L_C09838:
+    FA18_CHECK(0xC09838);
+    FA18_OP(0xC09838, 0x526E, 0xC0983C); /* C09838: addq.w  #1, (-$6a,A6) */
+L_C0983C:
+    FA18_CHECK(0xC0983C);
+    FA18_OP(0xC0983C, 0x0240, 0xC09840); /* C0983C: andi.w  #$3fff, D0 */
+    FA18_OP(0xC09840, 0x41F9, 0xC09846); /* C09840: lea     $c1fce8.l, A0 */
+    FA18_OP(0xC09846, 0x2070, 0xC0984A); /* C09846: movea.l (A0,D0.w), A0 */
+    FA18_CALL_DYNAMIC(0xC0984A, 0x4E90, 0xC0984C); /* C0984A: jsr     (A0) */
+L_C0984C:
+    FA18_CHECK(0xC0984C);
+    FA18_OP(0xC0984C, 0x4A40, 0xC0984E); /* C0984C: tst.w   D0 */
+    FA18_BCC(0xC0984E, 0x6D0E, 0xC09850, 0xC0985E, L_C0985E); /* C0984E: blt     $c0985e */
+L_C09850:
+    FA18_CHECK(0xC09850);
+    FA18_OP(0xC09850, 0x816E, 0xC09854); /* C09850: or.w    D0, (-$7c,A6) */
+    FA18_JUMP(0xC09854, 0x60CA, 0xC09820, L_C09820); /* C09854: bra     $c09820 */
+L_C09856:
+    FA18_CHECK(0xC09856);
+    FA18_OP(0xC09856, 0x302E, 0xC0985A); /* C09856: move.w  (-$7c,A6), D0 */
+    FA18_OP(0xC0985A, 0x4E5E, 0xC0985C); /* C0985A: unlk    A6 */
+    FA18_RETURN(0xC0985C, 0x4E75); /* C0985C: rts */
+L_C0985E:
+    FA18_CHECK(0xC0985E);
+    FA18_OP(0xC0985E, 0x7000, 0xC09860); /* C0985E: moveq   #$0, D0 */
+    FA18_OP(0xC09860, 0x4E5E, 0xC09862); /* C09860: unlk    A6 */
+    FA18_RETURN(0xC09862, 0x4E75); /* C09862: rts */
+L_C09864:
+    FA18_CHECK(0xC09864);
+    FA18_OP(0xC09864, 0x301A, 0xC09866); /* C09864: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09866, 0x6DEE, 0xC09868, 0xC09856, L_C09856); /* C09866: blt     $c09856 */
+L_C09868:
+    FA18_CHECK(0xC09868);
+    FA18_OP(0xC09868, 0x3239, 0xC0986E); /* C09868: move.w  $c45ab8.l, D1 */
+    FA18_OP(0xC0986E, 0xE260, 0xC09870); /* C0986E: asr.w   D1, D0 */
+    FA18_OP(0xC09870, 0xB06E, 0xC09874); /* C09870: cmp.w   (-$28,A6), D0 */
+    FA18_BCC(0xC09874, 0x6DE0, 0xC09876, 0xC09856, L_C09856); /* C09874: blt     $c09856 */
+L_C09876:
+    FA18_CHECK(0xC09876);
+    FA18_OP(0xC09876, 0x2452, 0xC09878); /* C09876: movea.l (A2), A2 */
+L_C09878:
+    FA18_CHECK(0xC09878);
+    FA18_OP(0xC09878, 0x0C40, 0xC0987C); /* C09878: cmpi.w  #$7fff, D0 */
+    FA18_BCC(0xC0987C, 0x6714, 0xC0987E, 0xC09892, L_C09892); /* C0987C: beq     $c09892 */
+L_C0987E:
+    FA18_CHECK(0xC0987E);
+    FA18_OP(0xC0987E, 0x3239, 0xC09884); /* C0987E: move.w  $c45ab8.l, D1 */
+    FA18_OP(0xC09884, 0xE260, 0xC09886); /* C09884: asr.w   D1, D0 */
+    FA18_OP(0xC09886, 0xB06E, 0xC0988A); /* C09886: cmp.w   (-$28,A6), D0 */
+    FA18_BCC(0xC0988A, 0x6DD8, 0xC0988C, 0xC09864, L_C09864); /* C0988A: blt     $c09864 */
+L_C0988C:
+    FA18_CHECK(0xC0988C);
+    FA18_OP(0xC0988C, 0x4A5A, 0xC0988E); /* C0988C: tst.w   (A2)+ */
+    FA18_BCC(0xC0988E, 0x6D02, 0xC09890, 0xC09892, L_C09892); /* C0988E: blt     $c09892 */
+L_C09890:
+    FA18_CHECK(0xC09890);
+    FA18_OP(0xC09890, 0x544A, 0xC09892); /* C09890: addq.w  #2, A2 */
+L_C09892:
+    FA18_CHECK(0xC09892);
+    FA18_OP(0xC09892, 0x301A, 0xC09894); /* C09892: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09894, 0x6706, 0xC09896, 0xC0989C, L_C0989C); /* C09894: beq     $c0989c */
+L_C09896:
+    FA18_CHECK(0xC09896);
+    FA18_OP(0xC09896, 0x3E1A, 0xC09898); /* C09896: move.w  (A2)+, D7 */
+    FA18_CALL(0xC09898, 0x6100, 0xC0989C, 61, 0); /* C09898: bsr     $c098c6 */
+L_C0989C:
+    FA18_CHECK(0xC0989C);
+    FA18_OP(0xC0989C, 0x301A, 0xC0989E); /* C0989C: move.w  (A2)+, D0 */
+    FA18_OP(0xC0989E, 0x3200, 0xC098A0); /* C0989E: move.w  D0, D1 */
+    FA18_OP(0xC098A0, 0x0241, 0xC098A4); /* C098A0: andi.w  #$4000, D1 */
+    FA18_BCC(0xC098A4, 0x6704, 0xC098A6, 0xC098AA, L_C098AA); /* C098A4: beq     $c098aa */
+L_C098A6:
+    FA18_CHECK(0xC098A6);
+    FA18_OP(0xC098A6, 0x526E, 0xC098AA); /* C098A6: addq.w  #1, (-$6a,A6) */
+L_C098AA:
+    FA18_CHECK(0xC098AA);
+    FA18_OP(0xC098AA, 0x0240, 0xC098AE); /* C098AA: andi.w  #$3fff, D0 */
+    FA18_OP(0xC098AE, 0x41F9, 0xC098B4); /* C098AE: lea     $c1fce8.l, A0 */
+    FA18_OP(0xC098B4, 0x2070, 0xC098B8); /* C098B4: movea.l (A0,D0.w), A0 */
+    FA18_CALL_DYNAMIC(0xC098B8, 0x4E90, 0xC098BA); /* C098B8: jsr     (A0) */
+L_C098BA:
+    FA18_CHECK(0xC098BA);
+    FA18_OP(0xC098BA, 0x4A40, 0xC098BC); /* C098BA: tst.w   D0 */
+    FA18_BCC(0xC098BC, 0x6DA0, 0xC098BE, 0xC0985E, L_C0985E); /* C098BC: blt     $c0985e */
+L_C098BE:
+    FA18_CHECK(0xC098BE);
+    FA18_OP(0xC098BE, 0x816E, 0xC098C2); /* C098BE: or.w    D0, (-$7c,A6) */
+    FA18_JUMP(0xC098C2, 0x6000, 0xC09820, L_C09820); /* C098C2: bra     $c09820 */
+}
+
+int fa18_fn_C096CA(int entry) {
+    switch (entry) {
+    case 0: goto L_C096B8;
+    case 1: goto L_C096CA;
+    case 2: goto L_C096D6;
+    case 3: goto L_C096F6;
+    case 4: goto L_C09708;
+    case 5: goto L_C0970C;
+    case 6: goto L_C09716;
+    case 7: goto L_C09722;
+    case 8: goto L_C0972A;
+    case 9: goto L_C09730;
+    case 10: goto L_C09732;
+    case 11: goto L_C09738;
+    case 12: goto L_C0976C;
+    case 13: goto L_C09772;
+    case 14: goto L_C097CA;
+    case 15: goto L_C09812;
+    case 16: goto L_C09820;
+    case 17: goto L_C09826;
+    case 18: goto L_C0982A;
+    case 19: goto L_C09830;
+    case 20: goto L_C09838;
+    case 21: goto L_C0983C;
+    case 22: goto L_C0984C;
+    case 23: goto L_C09850;
+    case 24: goto L_C09856;
+    case 25: goto L_C0985E;
+    case 26: goto L_C09864;
+    case 27: goto L_C09868;
+    case 28: goto L_C09876;
+    case 29: goto L_C09878;
+    case 30: goto L_C0987E;
+    case 31: goto L_C0988C;
+    case 32: goto L_C09890;
+    case 33: goto L_C09892;
+    case 34: goto L_C09896;
+    case 35: goto L_C0989C;
+    case 36: goto L_C098A6;
+    case 37: goto L_C098AA;
+    case 38: goto L_C098BA;
+    case 39: goto L_C098BE;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C096B8:
+    FA18_CHECK(0xC096B8);
+    FA18_OP(0xC096B8, 0x7000, 0xC096BA); /* C096B8: moveq   #$0, D0 */
+    FA18_RETURN(0xC096BA, 0x4E75); /* C096BA: rts */
+L_C096CA:
+    FA18_CHECK(0xC096CA);
+    FA18_OP(0xC096CA, 0x0CB9, 0xC096D4); /* C096CA: cmpi.l  #-$800000, $c45a66.l */
+    FA18_BCC(0xC096D4, 0x6DE2, 0xC096D6, 0xC096B8, L_C096B8); /* C096D4: blt     $c096b8 */
+L_C096D6:
+    FA18_CHECK(0xC096D6);
+    FA18_OP(0xC096D6, 0x4E56, 0xC096DA); /* C096D6: link    A6, #-$98 */
+    FA18_OP(0xC096DA, 0x23FC, 0xC096E4); /* C096DA: move.l  #$fffff, $c456e6.l */
+    FA18_OP(0xC096E4, 0x3439, 0xC096EA); /* C096E4: move.w  $c45b40.l, D2 */
+    FA18_OP(0xC096EA, 0x3D42, 0xC096EE); /* C096EA: move.w  D2, (-$96,A6) */
+    FA18_OP(0xC096EE, 0x4A39, 0xC096F4); /* C096EE: tst.b   $c457dd.l */
+    FA18_BCC(0xC096F4, 0x6612, 0xC096F6, 0xC09708, L_C09708); /* C096F4: bne     $c09708 */
+L_C096F6:
+    FA18_CHECK(0xC096F6);
+    FA18_OP(0xC096F6, 0x3639, 0xC096FC); /* C096F6: move.w  $c45a42.l, D3 */
+    FA18_OP(0xC096FC, 0x48C3, 0xC096FE); /* C096FC: ext.l   D3 */
+    FA18_OP(0xC096FE, 0xE183, 0xC09700); /* C096FE: asl.l   #8, D3 */
+    FA18_OP(0xC09700, 0x86FC, 0xC09704); /* C09700: divu.w  #$80, D3 */
+    FA18_OP(0xC09704, 0xC4C3, 0xC09706); /* C09704: mulu.w  D3, D2 */
+    FA18_OP(0xC09706, 0xE082, 0xC09708); /* C09706: asr.l   #8, D2 */
+L_C09708:
+    FA18_CHECK(0xC09708);
+    FA18_OP(0xC09708, 0x3D42, 0xC0970C); /* C09708: move.w  D2, (-$28,A6) */
+L_C0970C:
+    FA18_CHECK(0xC0970C);
+    FA18_OP(0xC0970C, 0x2479, 0xC09712); /* C0970C: movea.l $c45a36.l, A2 */
+    FA18_OP(0xC09712, 0x301A, 0xC09714); /* C09712: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09714, 0x6D1C, 0xC09716, 0xC09732, L_C09732); /* C09714: blt     $c09732 */
+L_C09716:
+    FA18_CHECK(0xC09716);
+    FA18_OP(0xC09716, 0x3239, 0xC0971C); /* C09716: move.w  $c45ab8.l, D1 */
+    FA18_OP(0xC0971C, 0xE260, 0xC0971E); /* C0971C: asr.w   D1, D0 */
+    FA18_OP(0xC0971E, 0xB042, 0xC09720); /* C0971E: cmp.w   D2, D0 */
+    FA18_BCC(0xC09720, 0x6C0E, 0xC09722, 0xC09730, L_C09730); /* C09720: bge     $c09730 */
+L_C09722:
+    FA18_CHECK(0xC09722);
+    FA18_OP(0xC09722, 0x23D2, 0xC09728); /* C09722: move.l  (A2), $c45a36.l */
+    FA18_BCC(0xC09728, 0x6CE2, 0xC0972A, 0xC0970C, L_C0970C); /* C09728: bge     $c0970c */
+L_C0972A:
+    FA18_CHECK(0xC0972A);
+    FA18_OP(0xC0972A, 0x7000, 0xC0972C); /* C0972A: moveq   #$0, D0 */
+    FA18_OP(0xC0972C, 0x4E5E, 0xC0972E); /* C0972C: unlk    A6 */
+    FA18_RETURN(0xC0972E, 0x4E75); /* C0972E: rts */
+L_C09730:
+    FA18_CHECK(0xC09730);
+    FA18_OP(0xC09730, 0x584A, 0xC09732); /* C09730: addq.w  #4, A2 */
+L_C09732:
+    FA18_CHECK(0xC09732);
+    FA18_OP(0xC09732, 0x0C40, 0xC09736); /* C09732: cmpi.w  #-$1, D0 */
+    FA18_BCC(0xC09736, 0x67F2, 0xC09738, 0xC0972A, L_C0972A); /* C09736: beq     $c0972a */
+L_C09738:
+    FA18_CHECK(0xC09738);
+    FA18_OP(0xC09738, 0x225A, 0xC0973A); /* C09738: movea.l (A2)+, A1 */
+    FA18_OP(0xC0973A, 0x23C9, 0xC09740); /* C0973A: move.l  A1, $c45a32.l */
+    FA18_OP(0xC09740, 0x23CA, 0xC09746); /* C09740: move.l  A2, $c45a36.l */
+    FA18_OP(0xC09746, 0x3039, 0xC0974C); /* C09746: move.w  $c45a72.l, D0 */
+    FA18_OP(0xC0974C, 0x2239, 0xC09752); /* C0974C: move.l  $c45a66.l, D1 */
+    FA18_OP(0xC09752, 0xE081, 0xC09754); /* C09752: asr.l   #8, D1 */
+    FA18_OP(0xC09754, 0x3439, 0xC0975A); /* C09754: move.w  $c45a76.l, D2 */
+    FA18_OP(0xC0975A, 0x1E39, 0xC09760); /* C0975A: move.b  $c4585b.l, D7 */
+    FA18_OP(0xC09760, 0x0207, 0xC09764); /* C09760: andi.b  #$f, D7 */
+    FA18_OP(0xC09764, 0x4887, 0xC09766); /* C09764: ext.w   D7 */
+    FA18_OP(0xC09766, 0x3D47, 0xC0976A); /* C09766: move.w  D7, (-$8,A6) */
+    FA18_BCC(0xC0976A, 0x6706, 0xC0976C, 0xC09772, L_C09772); /* C0976A: beq     $c09772 */
+L_C0976C:
+    FA18_CHECK(0xC0976C);
+    FA18_OP(0xC0976C, 0xEE60, 0xC0976E); /* C0976C: asr.w   D7, D0 */
+    FA18_OP(0xC0976E, 0xEEA1, 0xC09770); /* C0976E: asr.l   D7, D1 */
+    FA18_OP(0xC09770, 0xEE62, 0xC09772); /* C09770: asr.w   D7, D2 */
+L_C09772:
+    FA18_CHECK(0xC09772);
+    FA18_OP(0xC09772, 0x48AE, 0xC09778); /* C09772: movem.w D0-D2, (-$86,A6) */
+    FA18_OP(0xC09778, 0x4279, 0xC0977E); /* C09778: clr.w   $c4bf90.l */
+    FA18_OP(0xC0977E, 0x47F9, 0xC09784); /* C0977E: lea     $c48390.l, A3 */
+    FA18_OP(0xC09784, 0x45F9, 0xC0978A); /* C09784: lea     $c45bd8.l, A2 */
+    FA18_OP(0xC0978A, 0x49D2, 0xC0978C); /* C0978A: lea     (A2), A4 */
+    FA18_OP(0xC0978C, 0x3039, 0xC09792); /* C0978C: move.w  $c45b2a.l, D0 */
+    FA18_OP(0xC09792, 0x3239, 0xC09798); /* C09792: move.w  $c45b2e.l, D1 */
+    FA18_OP(0xC09798, 0xD06E, 0xC0979C); /* C09798: add.w   (-$86,A6), D0 */
+    FA18_OP(0xC0979C, 0xD26E, 0xC097A0); /* C0979C: add.w   (-$82,A6), D1 */
+    FA18_OP(0xC097A0, 0x41EE, 0xC097A4); /* C097A0: lea     (-$a,A6), A0 */
+    FA18_OP(0xC097A4, 0x3099, 0xC097A6); /* C097A4: move.w  (A1)+, (A0) */
+    FA18_OP(0xC097A6, 0x5849, 0xC097A8); /* C097A6: addq.w  #4, A1 */
+    FA18_OP(0xC097A8, 0x342E, 0xC097AC); /* C097A8: move.w  (-$84,A6), D2 */
+    FA18_OP(0xC097AC, 0x3602, 0xC097AE); /* C097AC: move.w  D2, D3 */
+    FA18_OP(0xC097AE, 0x3C02, 0xC097B0); /* C097AE: move.w  D2, D6 */
+    FA18_OP(0xC097B0, 0xC5EC, 0xC097B4); /* C097B0: muls.w  ($e,A4), D2 */
+    FA18_OP(0xC097B4, 0xE082, 0xC097B6); /* C097B4: asr.l   #8, D2 */
+    FA18_OP(0xC097B6, 0x3A42, 0xC097B8); /* C097B6: movea.w D2, A5 */
+    FA18_OP(0xC097B8, 0xC7EC, 0xC097BC); /* C097B8: muls.w  ($2,A4), D3 */
+    FA18_OP(0xC097BC, 0xE083, 0xC097BE); /* C097BC: asr.l   #8, D3 */
+    FA18_OP(0xC097BE, 0xCDEC, 0xC097C2); /* C097BE: muls.w  ($8,A4), D6 */
+    FA18_OP(0xC097C2, 0xE086, 0xC097C4); /* C097C2: asr.l   #8, D6 */
+    FA18_OP(0xC097C4, 0x48AE, 0xC097CA); /* C097C4: movem.w D3/D6/A5, (-$78,A6) */
+L_C097CA:
+    FA18_CHECK(0xC097CA);
+    FA18_OP(0xC097CA, 0x3419, 0xC097CC); /* C097CA: move.w  (A1)+, D2 */
+    FA18_OP(0xC097CC, 0x3819, 0xC097CE); /* C097CC: move.w  (A1)+, D4 */
+    FA18_OP(0xC097CE, 0x3E2E, 0xC097D2); /* C097CE: move.w  (-$8,A6), D7 */
+    FA18_OP(0xC097D2, 0xEE62, 0xC097D4); /* C097D2: asr.w   D7, D2 */
+    FA18_OP(0xC097D4, 0xEE64, 0xC097D6); /* C097D4: asr.w   D7, D4 */
+    FA18_OP(0xC097D6, 0xD440, 0xC097D8); /* C097D6: add.w   D0, D2 */
+    FA18_OP(0xC097D8, 0xD841, 0xC097DA); /* C097D8: add.w   D1, D4 */
+    FA18_OP(0xC097DA, 0x45D4, 0xC097DC); /* C097DA: lea     (A4), A2 */
+    FA18_OP(0xC097DC, 0x3A02, 0xC097DE); /* C097DC: move.w  D2, D5 */
+    FA18_OP(0xC097DE, 0x3E04, 0xC097E0); /* C097DE: move.w  D4, D7 */
+    FA18_OP(0xC097E0, 0xCBDA, 0xC097E2); /* C097E0: muls.w  (A2)+, D5 */
+    FA18_OP(0xC097E2, 0x544A, 0xC097E4); /* C097E2: addq.w  #2, A2 */
+    FA18_OP(0xC097E4, 0xCFDA, 0xC097E6); /* C097E4: muls.w  (A2)+, D7 */
+    FA18_OP(0xC097E6, 0xDE85, 0xC097E8); /* C097E6: add.l   D5, D7 */
+    FA18_OP(0xC097E8, 0xE087, 0xC097EA); /* C097E8: asr.l   #8, D7 */
+    FA18_OP(0xC097EA, 0xDE43, 0xC097EC); /* C097EA: add.w   D3, D7 */
+    FA18_OP(0xC097EC, 0x36C7, 0xC097EE); /* C097EC: move.w  D7, (A3)+ */
+    FA18_OP(0xC097EE, 0x3A02, 0xC097F0); /* C097EE: move.w  D2, D5 */
+    FA18_OP(0xC097F0, 0x3E04, 0xC097F2); /* C097F0: move.w  D4, D7 */
+    FA18_OP(0xC097F2, 0xCBDA, 0xC097F4); /* C097F2: muls.w  (A2)+, D5 */
+    FA18_OP(0xC097F4, 0x544A, 0xC097F6); /* C097F4: addq.w  #2, A2 */
+    FA18_OP(0xC097F6, 0xCFDA, 0xC097F8); /* C097F6: muls.w  (A2)+, D7 */
+    FA18_OP(0xC097F8, 0xDE85, 0xC097FA); /* C097F8: add.l   D5, D7 */
+    FA18_OP(0xC097FA, 0xE087, 0xC097FC); /* C097FA: asr.l   #8, D7 */
+    FA18_OP(0xC097FC, 0xDE46, 0xC097FE); /* C097FC: add.w   D6, D7 */
+    FA18_OP(0xC097FE, 0x36C7, 0xC09800); /* C097FE: move.w  D7, (A3)+ */
+    FA18_OP(0xC09800, 0xC5DA, 0xC09802); /* C09800: muls.w  (A2)+, D2 */
+    FA18_OP(0xC09802, 0xC9EA, 0xC09806); /* C09802: muls.w  ($2,A2), D4 */
+    FA18_OP(0xC09806, 0xD882, 0xC09808); /* C09806: add.l   D2, D4 */
+    FA18_OP(0xC09808, 0xE084, 0xC0980A); /* C09808: asr.l   #8, D4 */
+    FA18_OP(0xC0980A, 0xD84D, 0xC0980C); /* C0980A: add.w   A5, D4 */
+    FA18_OP(0xC0980C, 0x36C4, 0xC0980E); /* C0980C: move.w  D4, (A3)+ */
+    FA18_OP(0xC0980E, 0x5350, 0xC09810); /* C0980E: subq.w  #1, (A0) */
+    FA18_BCC(0xC09810, 0x6EB8, 0xC09812, 0xC097CA, L_C097CA); /* C09810: bgt     $c097ca */
+L_C09812:
+    FA18_CHECK(0xC09812);
+    FA18_OP(0xC09812, 0x426E, 0xC09816); /* C09812: clr.w   (-$7c,A6) */
+    FA18_OP(0xC09816, 0x2479, 0xC0981C); /* C09816: movea.l $c45a36.l, A2 */
+    FA18_OP(0xC0981C, 0x426E, 0xC09820); /* C0981C: clr.w   (-$6a,A6) */
+L_C09820:
+    FA18_CHECK(0xC09820);
+    FA18_OP(0xC09820, 0x4A6E, 0xC09824); /* C09820: tst.w   (-$6a,A6) */
+    FA18_BCC(0xC09824, 0x6630, 0xC09826, 0xC09856, L_C09856); /* C09824: bne     $c09856 */
+L_C09826:
+    FA18_CHECK(0xC09826);
+    FA18_OP(0xC09826, 0x301A, 0xC09828); /* C09826: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09828, 0x6C4E, 0xC0982A, 0xC09878, L_C09878); /* C09828: bge     $c09878 */
+L_C0982A:
+    FA18_CHECK(0xC0982A);
+    FA18_OP(0xC0982A, 0x0C40, 0xC0982E); /* C0982A: cmpi.w  #-$1, D0 */
+    FA18_BCC(0xC0982E, 0x6726, 0xC09830, 0xC09856, L_C09856); /* C0982E: beq     $c09856 */
+L_C09830:
+    FA18_CHECK(0xC09830);
+    FA18_OP(0xC09830, 0x3200, 0xC09832); /* C09830: move.w  D0, D1 */
+    FA18_OP(0xC09832, 0x0241, 0xC09836); /* C09832: andi.w  #$4000, D1 */
+    FA18_BCC(0xC09836, 0x6704, 0xC09838, 0xC0983C, L_C0983C); /* C09836: beq     $c0983c */
+L_C09838:
+    FA18_CHECK(0xC09838);
+    FA18_OP(0xC09838, 0x526E, 0xC0983C); /* C09838: addq.w  #1, (-$6a,A6) */
+L_C0983C:
+    FA18_CHECK(0xC0983C);
+    FA18_OP(0xC0983C, 0x0240, 0xC09840); /* C0983C: andi.w  #$3fff, D0 */
+    FA18_OP(0xC09840, 0x41F9, 0xC09846); /* C09840: lea     $c1fce8.l, A0 */
+    FA18_OP(0xC09846, 0x2070, 0xC0984A); /* C09846: movea.l (A0,D0.w), A0 */
+    FA18_CALL_DYNAMIC(0xC0984A, 0x4E90, 0xC0984C); /* C0984A: jsr     (A0) */
+L_C0984C:
+    FA18_CHECK(0xC0984C);
+    FA18_OP(0xC0984C, 0x4A40, 0xC0984E); /* C0984C: tst.w   D0 */
+    FA18_BCC(0xC0984E, 0x6D0E, 0xC09850, 0xC0985E, L_C0985E); /* C0984E: blt     $c0985e */
+L_C09850:
+    FA18_CHECK(0xC09850);
+    FA18_OP(0xC09850, 0x816E, 0xC09854); /* C09850: or.w    D0, (-$7c,A6) */
+    FA18_JUMP(0xC09854, 0x60CA, 0xC09820, L_C09820); /* C09854: bra     $c09820 */
+L_C09856:
+    FA18_CHECK(0xC09856);
+    FA18_OP(0xC09856, 0x302E, 0xC0985A); /* C09856: move.w  (-$7c,A6), D0 */
+    FA18_OP(0xC0985A, 0x4E5E, 0xC0985C); /* C0985A: unlk    A6 */
+    FA18_RETURN(0xC0985C, 0x4E75); /* C0985C: rts */
+L_C0985E:
+    FA18_CHECK(0xC0985E);
+    FA18_OP(0xC0985E, 0x7000, 0xC09860); /* C0985E: moveq   #$0, D0 */
+    FA18_OP(0xC09860, 0x4E5E, 0xC09862); /* C09860: unlk    A6 */
+    FA18_RETURN(0xC09862, 0x4E75); /* C09862: rts */
+L_C09864:
+    FA18_CHECK(0xC09864);
+    FA18_OP(0xC09864, 0x301A, 0xC09866); /* C09864: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09866, 0x6DEE, 0xC09868, 0xC09856, L_C09856); /* C09866: blt     $c09856 */
+L_C09868:
+    FA18_CHECK(0xC09868);
+    FA18_OP(0xC09868, 0x3239, 0xC0986E); /* C09868: move.w  $c45ab8.l, D1 */
+    FA18_OP(0xC0986E, 0xE260, 0xC09870); /* C0986E: asr.w   D1, D0 */
+    FA18_OP(0xC09870, 0xB06E, 0xC09874); /* C09870: cmp.w   (-$28,A6), D0 */
+    FA18_BCC(0xC09874, 0x6DE0, 0xC09876, 0xC09856, L_C09856); /* C09874: blt     $c09856 */
+L_C09876:
+    FA18_CHECK(0xC09876);
+    FA18_OP(0xC09876, 0x2452, 0xC09878); /* C09876: movea.l (A2), A2 */
+L_C09878:
+    FA18_CHECK(0xC09878);
+    FA18_OP(0xC09878, 0x0C40, 0xC0987C); /* C09878: cmpi.w  #$7fff, D0 */
+    FA18_BCC(0xC0987C, 0x6714, 0xC0987E, 0xC09892, L_C09892); /* C0987C: beq     $c09892 */
+L_C0987E:
+    FA18_CHECK(0xC0987E);
+    FA18_OP(0xC0987E, 0x3239, 0xC09884); /* C0987E: move.w  $c45ab8.l, D1 */
+    FA18_OP(0xC09884, 0xE260, 0xC09886); /* C09884: asr.w   D1, D0 */
+    FA18_OP(0xC09886, 0xB06E, 0xC0988A); /* C09886: cmp.w   (-$28,A6), D0 */
+    FA18_BCC(0xC0988A, 0x6DD8, 0xC0988C, 0xC09864, L_C09864); /* C0988A: blt     $c09864 */
+L_C0988C:
+    FA18_CHECK(0xC0988C);
+    FA18_OP(0xC0988C, 0x4A5A, 0xC0988E); /* C0988C: tst.w   (A2)+ */
+    FA18_BCC(0xC0988E, 0x6D02, 0xC09890, 0xC09892, L_C09892); /* C0988E: blt     $c09892 */
+L_C09890:
+    FA18_CHECK(0xC09890);
+    FA18_OP(0xC09890, 0x544A, 0xC09892); /* C09890: addq.w  #2, A2 */
+L_C09892:
+    FA18_CHECK(0xC09892);
+    FA18_OP(0xC09892, 0x301A, 0xC09894); /* C09892: move.w  (A2)+, D0 */
+    FA18_BCC(0xC09894, 0x6706, 0xC09896, 0xC0989C, L_C0989C); /* C09894: beq     $c0989c */
+L_C09896:
+    FA18_CHECK(0xC09896);
+    FA18_OP(0xC09896, 0x3E1A, 0xC09898); /* C09896: move.w  (A2)+, D7 */
+    FA18_CALL(0xC09898, 0x6100, 0xC0989C, 61, 0); /* C09898: bsr     $c098c6 */
+L_C0989C:
+    FA18_CHECK(0xC0989C);
+    FA18_OP(0xC0989C, 0x301A, 0xC0989E); /* C0989C: move.w  (A2)+, D0 */
+    FA18_OP(0xC0989E, 0x3200, 0xC098A0); /* C0989E: move.w  D0, D1 */
+    FA18_OP(0xC098A0, 0x0241, 0xC098A4); /* C098A0: andi.w  #$4000, D1 */
+    FA18_BCC(0xC098A4, 0x6704, 0xC098A6, 0xC098AA, L_C098AA); /* C098A4: beq     $c098aa */
+L_C098A6:
+    FA18_CHECK(0xC098A6);
+    FA18_OP(0xC098A6, 0x526E, 0xC098AA); /* C098A6: addq.w  #1, (-$6a,A6) */
+L_C098AA:
+    FA18_CHECK(0xC098AA);
+    FA18_OP(0xC098AA, 0x0240, 0xC098AE); /* C098AA: andi.w  #$3fff, D0 */
+    FA18_OP(0xC098AE, 0x41F9, 0xC098B4); /* C098AE: lea     $c1fce8.l, A0 */
+    FA18_OP(0xC098B4, 0x2070, 0xC098B8); /* C098B4: movea.l (A0,D0.w), A0 */
+    FA18_CALL_DYNAMIC(0xC098B8, 0x4E90, 0xC098BA); /* C098B8: jsr     (A0) */
+L_C098BA:
+    FA18_CHECK(0xC098BA);
+    FA18_OP(0xC098BA, 0x4A40, 0xC098BC); /* C098BA: tst.w   D0 */
+    FA18_BCC(0xC098BC, 0x6DA0, 0xC098BE, 0xC0985E, L_C0985E); /* C098BC: blt     $c0985e */
+L_C098BE:
+    FA18_CHECK(0xC098BE);
+    FA18_OP(0xC098BE, 0x816E, 0xC098C2); /* C098BE: or.w    D0, (-$7c,A6) */
+    FA18_JUMP(0xC098C2, 0x6000, 0xC09820, L_C09820); /* C098C2: bra     $c09820 */
+}
+
+int fa18_fn_C098C6(int entry) {
+    switch (entry) {
+    case 0: goto L_C098C6;
+    case 1: goto L_C09904;
+    case 2: goto L_C09950;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C098C6:
+    FA18_CHECK(0xC098C6);
+    FA18_OP(0xC098C6, 0x47F9, 0xC098CC); /* C098C6: lea     $c48390.l, A3 */
+    FA18_OP(0xC098CC, 0x3407, 0xC098CE); /* C098CC: move.w  D7, D2 */
+    FA18_OP(0xC098CE, 0xE242, 0xC098D0); /* C098CE: asr.w   #1, D2 */
+    FA18_OP(0xC098D0, 0xD447, 0xC098D2); /* C098D0: add.w   D7, D2 */
+    FA18_OP(0xC098D2, 0xD6C2, 0xC098D4); /* C098D2: adda.w  D2, A3 */
+    FA18_OP(0xC098D4, 0x3D40, 0xC098D8); /* C098D4: move.w  D0, (-$a,A6) */
+    FA18_OP(0xC098D8, 0x2279, 0xC098DE); /* C098D8: movea.l $c45a32.l, A1 */
+    FA18_OP(0xC098DE, 0x5C49, 0xC098E0); /* C098DE: addq.w  #6, A1 */
+    FA18_OP(0xC098E0, 0xD2C7, 0xC098E2); /* C098E0: adda.w  D7, A1 */
+    FA18_OP(0xC098E2, 0x41F9, 0xC098E8); /* C098E2: lea     $c45bd8.l, A0 */
+    FA18_OP(0xC098E8, 0x49D0, 0xC098EA); /* C098E8: lea     (A0), A4 */
+    FA18_OP(0xC098EA, 0x302E, 0xC098EE); /* C098EA: move.w  (-$86,A6), D0 */
+    FA18_OP(0xC098EE, 0x322E, 0xC098F2); /* C098EE: move.w  (-$82,A6), D1 */
+    FA18_OP(0xC098F2, 0xD079, 0xC098F8); /* C098F2: add.w   $c45b2a.l, D0 */
+    FA18_OP(0xC098F8, 0xD279, 0xC098FE); /* C098F8: add.w   $c45b2e.l, D1 */
+    FA18_OP(0xC098FE, 0x4CAE, 0xC09904); /* C098FE: movem.w (-$78,A6), D3/D6 */
+L_C09904:
+    FA18_CHECK(0xC09904);
+    FA18_OP(0xC09904, 0x3419, 0xC09906); /* C09904: move.w  (A1)+, D2 */
+    FA18_OP(0xC09906, 0x3819, 0xC09908); /* C09906: move.w  (A1)+, D4 */
+    FA18_OP(0xC09908, 0x3E2E, 0xC0990C); /* C09908: move.w  (-$8,A6), D7 */
+    FA18_OP(0xC0990C, 0xEE62, 0xC0990E); /* C0990C: asr.w   D7, D2 */
+    FA18_OP(0xC0990E, 0xEE64, 0xC09910); /* C0990E: asr.w   D7, D4 */
+    FA18_OP(0xC09910, 0xD440, 0xC09912); /* C09910: add.w   D0, D2 */
+    FA18_OP(0xC09912, 0xD841, 0xC09914); /* C09912: add.w   D1, D4 */
+    FA18_OP(0xC09914, 0x41D4, 0xC09916); /* C09914: lea     (A4), A0 */
+    FA18_OP(0xC09916, 0x3A02, 0xC09918); /* C09916: move.w  D2, D5 */
+    FA18_OP(0xC09918, 0x3E04, 0xC0991A); /* C09918: move.w  D4, D7 */
+    FA18_OP(0xC0991A, 0xCBD8, 0xC0991C); /* C0991A: muls.w  (A0)+, D5 */
+    FA18_OP(0xC0991C, 0x5448, 0xC0991E); /* C0991C: addq.w  #2, A0 */
+    FA18_OP(0xC0991E, 0xCFD8, 0xC09920); /* C0991E: muls.w  (A0)+, D7 */
+    FA18_OP(0xC09920, 0xDE85, 0xC09922); /* C09920: add.l   D5, D7 */
+    FA18_OP(0xC09922, 0xE087, 0xC09924); /* C09922: asr.l   #8, D7 */
+    FA18_OP(0xC09924, 0xDE43, 0xC09926); /* C09924: add.w   D3, D7 */
+    FA18_OP(0xC09926, 0x36C7, 0xC09928); /* C09926: move.w  D7, (A3)+ */
+    FA18_OP(0xC09928, 0x3A02, 0xC0992A); /* C09928: move.w  D2, D5 */
+    FA18_OP(0xC0992A, 0x3E04, 0xC0992C); /* C0992A: move.w  D4, D7 */
+    FA18_OP(0xC0992C, 0xCBD8, 0xC0992E); /* C0992C: muls.w  (A0)+, D5 */
+    FA18_OP(0xC0992E, 0x5448, 0xC09930); /* C0992E: addq.w  #2, A0 */
+    FA18_OP(0xC09930, 0xCFD8, 0xC09932); /* C09930: muls.w  (A0)+, D7 */
+    FA18_OP(0xC09932, 0xDE85, 0xC09934); /* C09932: add.l   D5, D7 */
+    FA18_OP(0xC09934, 0xE087, 0xC09936); /* C09934: asr.l   #8, D7 */
+    FA18_OP(0xC09936, 0xDE46, 0xC09938); /* C09936: add.w   D6, D7 */
+    FA18_OP(0xC09938, 0x36C7, 0xC0993A); /* C09938: move.w  D7, (A3)+ */
+    FA18_OP(0xC0993A, 0xC5D8, 0xC0993C); /* C0993A: muls.w  (A0)+, D2 */
+    FA18_OP(0xC0993C, 0xC9E8, 0xC09940); /* C0993C: muls.w  ($2,A0), D4 */
+    FA18_OP(0xC09940, 0xD882, 0xC09942); /* C09940: add.l   D2, D4 */
+    FA18_OP(0xC09942, 0xE084, 0xC09944); /* C09942: asr.l   #8, D4 */
+    FA18_OP(0xC09944, 0xD86E, 0xC09948); /* C09944: add.w   (-$74,A6), D4 */
+    FA18_OP(0xC09948, 0x36C4, 0xC0994A); /* C09948: move.w  D4, (A3)+ */
+    FA18_OP(0xC0994A, 0x536E, 0xC0994E); /* C0994A: subq.w  #1, (-$a,A6) */
+    FA18_BCC(0xC0994E, 0x6EB4, 0xC09950, 0xC09904, L_C09904); /* C0994E: bgt     $c09904 */
+L_C09950:
+    FA18_CHECK(0xC09950);
+    FA18_RETURN(0xC09950, 0x4E75); /* C09950: rts */
+}
+
+int fa18_fn_C09952(int entry) {
+    switch (entry) {
+    case 0: goto L_C09952;
+    case 1: goto L_C09980;
+    case 2: goto L_C09990;
+    case 3: goto L_C0999A;
+    case 4: goto L_C099A2;
+    case 5: goto L_C099A6;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C09952:
+    FA18_CHECK(0xC09952);
+    FA18_OP(0xC09952, 0x3E1A, 0xC09954); /* C09952: move.w  (A2)+, D7 */
+    FA18_OP(0xC09954, 0x41F9, 0xC0995A); /* C09954: lea     $c4bf90.l, A0 */
+    FA18_OP(0xC0995A, 0x30FC, 0xC0995E); /* C0995A: move.w  #$0, (A0)+ */
+    FA18_OP(0xC0995E, 0x47F9, 0xC09964); /* C0995E: lea     $c48390.l, A3 */
+    FA18_OP(0xC09964, 0x30C7, 0xC09966); /* C09964: move.w  D7, (A0)+ */
+    FA18_OP(0xC09966, 0x5747, 0xC09968); /* C09966: subq.w  #3, D7 */
+    FA18_OP(0xC09968, 0x321A, 0xC0996A); /* C09968: move.w  (A2)+, D1 */
+    FA18_OP(0xC0996A, 0x49F3, 0xC0996E); /* C0996A: lea     (A3,D1.w), A4 */
+    FA18_OP(0xC0996E, 0x20DC, 0xC09970); /* C0996E: move.l  (A4)+, (A0)+ */
+    FA18_OP(0xC09970, 0x3C14, 0xC09972); /* C09970: move.w  (A4), D6 */
+    FA18_OP(0xC09972, 0x30C6, 0xC09974); /* C09972: move.w  D6, (A0)+ */
+    FA18_OP(0xC09974, 0x321A, 0xC09976); /* C09974: move.w  (A2)+, D1 */
+    FA18_OP(0xC09976, 0x49F3, 0xC0997A); /* C09976: lea     (A3,D1.w), A4 */
+    FA18_OP(0xC0997A, 0x20DC, 0xC0997C); /* C0997A: move.l  (A4)+, (A0)+ */
+    FA18_OP(0xC0997C, 0x30D4, 0xC0997E); /* C0997C: move.w  (A4), (A0)+ */
+    FA18_OP(0xC0997E, 0xCC54, 0xC09980); /* C0997E: and.w   (A4), D6 */
+L_C09980:
+    FA18_CHECK(0xC09980);
+    FA18_OP(0xC09980, 0x321A, 0xC09982); /* C09980: move.w  (A2)+, D1 */
+    FA18_OP(0xC09982, 0x49F3, 0xC09986); /* C09982: lea     (A3,D1.w), A4 */
+    FA18_OP(0xC09986, 0x20DC, 0xC09988); /* C09986: move.l  (A4)+, (A0)+ */
+    FA18_OP(0xC09988, 0x30D4, 0xC0998A); /* C09988: move.w  (A4), (A0)+ */
+    FA18_OP(0xC0998A, 0xCC54, 0xC0998C); /* C0998A: and.w   (A4), D6 */
+    FA18_OP(0xC0998C, 0x5347, 0xC0998E); /* C0998C: subq.w  #1, D7 */
+    FA18_BCC(0xC0998E, 0x6CF0, 0xC09990, 0xC09980, L_C09980); /* C0998E: bge     $c09980 */
+L_C09990:
+    FA18_CHECK(0xC09990);
+    FA18_OP(0xC09990, 0x33DA, 0xC09996); /* C09990: move.w  (A2)+, $c45954.l */
+    FA18_OP(0xC09996, 0x4A46, 0xC09998); /* C09996: tst.w   D6 */
+    FA18_BCC(0xC09998, 0x6D0C, 0xC0999A, 0xC099A6, L_C099A6); /* C09998: blt     $c099a6 */
+L_C0999A:
+    FA18_CHECK(0xC0999A);
+    FA18_OP(0xC0999A, 0x2F0A, 0xC0999C); /* C0999A: move.l  A2, -(A7) */
+    FA18_CALL(0xC0999C, 0x4EB9, 0xC099A2, 281, 3); /* C0999C: jsr     $c2469e.l */
+L_C099A2:
+    FA18_CHECK(0xC099A2);
+    FA18_OP(0xC099A2, 0x245F, 0xC099A4); /* C099A2: movea.l (A7)+, A2 */
+    FA18_RETURN(0xC099A4, 0x4E75); /* C099A4: rts */
+L_C099A6:
+    FA18_CHECK(0xC099A6);
+    FA18_OP(0xC099A6, 0x7000, 0xC099A8); /* C099A6: moveq   #$0, D0 */
+    FA18_RETURN(0xC099A8, 0x4E75); /* C099A8: rts */
+}
+
+int fa18_fn_C099F6(int entry) {
+    switch (entry) {
+    case 0: goto L_C099F6;
+    case 1: goto L_C09A1E;
+    case 2: goto L_C09A28;
+    case 3: goto L_C09A2C;
+    case 4: goto L_C09A40;
+    case 5: goto L_C09A60;
+    case 6: goto L_C09A74;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C099F6:
+    FA18_CHECK(0xC099F6);
+    FA18_OP(0xC099F6, 0x3E1A, 0xC099F8); /* C099F6: move.w  (A2)+, D7 */
+    FA18_OP(0xC099F8, 0x41F9, 0xC099FE); /* C099F8: lea     $c4bf90.l, A0 */
+    FA18_OP(0xC099FE, 0x4258, 0xC09A00); /* C099FE: clr.w   (A0)+ */
+    FA18_OP(0xC09A00, 0x47F9, 0xC09A06); /* C09A00: lea     $c48390.l, A3 */
+    FA18_OP(0xC09A06, 0xD6DA, 0xC09A08); /* C09A06: adda.w  (A2)+, A3 */
+    FA18_OP(0xC09A08, 0x30C7, 0xC09A0A); /* C09A08: move.w  D7, (A0)+ */
+    FA18_OP(0xC09A0A, 0x5747, 0xC09A0C); /* C09A0A: subq.w  #3, D7 */
+    FA18_OP(0xC09A0C, 0x20DB, 0xC09A0E); /* C09A0C: move.l  (A3)+, (A0)+ */
+    FA18_OP(0xC09A0E, 0x3C1B, 0xC09A10); /* C09A0E: move.w  (A3)+, D6 */
+    FA18_OP(0xC09A10, 0x30C6, 0xC09A12); /* C09A10: move.w  D6, (A0)+ */
+    FA18_OP(0xC09A12, 0x20DB, 0xC09A14); /* C09A12: move.l  (A3)+, (A0)+ */
+    FA18_OP(0xC09A14, 0x30D3, 0xC09A16); /* C09A14: move.w  (A3), (A0)+ */
+    FA18_OP(0xC09A16, 0xCC5B, 0xC09A18); /* C09A16: and.w   (A3)+, D6 */
+    FA18_OP(0xC09A18, 0x20DB, 0xC09A1A); /* C09A18: move.l  (A3)+, (A0)+ */
+    FA18_OP(0xC09A1A, 0x30D3, 0xC09A1C); /* C09A1A: move.w  (A3), (A0)+ */
+    FA18_OP(0xC09A1C, 0xCC5B, 0xC09A1E); /* C09A1C: and.w   (A3)+, D6 */
+L_C09A1E:
+    FA18_CHECK(0xC09A1E);
+    FA18_OP(0xC09A1E, 0x20DB, 0xC09A20); /* C09A1E: move.l  (A3)+, (A0)+ */
+    FA18_OP(0xC09A20, 0x30D3, 0xC09A22); /* C09A20: move.w  (A3), (A0)+ */
+    FA18_OP(0xC09A22, 0xCC5B, 0xC09A24); /* C09A22: and.w   (A3)+, D6 */
+    FA18_BCC(0xC09A24, 0x51CF, 0xC09A28, 0xC09A1E, L_C09A1E); /* C09A24: dbra    D7, $c09a1e */
+L_C09A28:
+    FA18_CHECK(0xC09A28);
+    FA18_OP(0xC09A28, 0x4A46, 0xC09A2A); /* C09A28: tst.w   D6 */
+    FA18_BCC(0xC09A2A, 0x6D48, 0xC09A2C, 0xC09A74, L_C09A74); /* C09A2A: blt     $c09a74 */
+L_C09A2C:
+    FA18_CHECK(0xC09A2C);
+    FA18_JUMP(0xC09A2C, 0x6012, 0xC09A40, L_C09A40); /* C09A2C: bra     $c09a40 */
+L_C09A40:
+    FA18_CHECK(0xC09A40);
+    FA18_OP(0xC09A40, 0x33FC, 0xC09A48); /* C09A40: move.w  #$7, $c45954.l */
+    FA18_OP(0xC09A48, 0x323C, 0xC09A4C); /* C09A48: move.w  #$3, D1 */
+    FA18_OP(0xC09A4C, 0x343C, 0xC09A50); /* C09A4C: move.w  #$3, D2 */
+    FA18_OP(0xC09A50, 0x48B9, 0xC09A58); /* C09A50: movem.w D1-D2, $c456e6.l */
+    FA18_OP(0xC09A58, 0x2F0A, 0xC09A5A); /* C09A58: move.l  A2, -(A7) */
+    FA18_CALL(0xC09A5A, 0x4EB9, 0xC09A60, 281, 3); /* C09A5A: jsr     $c2469e.l */
+L_C09A60:
+    FA18_CHECK(0xC09A60);
+    FA18_OP(0xC09A60, 0x245F, 0xC09A62); /* C09A60: movea.l (A7)+, A2 */
+    FA18_OP(0xC09A62, 0x323C, 0xC09A66); /* C09A62: move.w  #$f, D1 */
+    FA18_OP(0xC09A66, 0x343C, 0xC09A6A); /* C09A66: move.w  #$ffff, D2 */
+    FA18_OP(0xC09A6A, 0x48B9, 0xC09A72); /* C09A6A: movem.w D1-D2, $c456e6.l */
+    FA18_RETURN(0xC09A72, 0x4E75); /* C09A72: rts */
+L_C09A74:
+    FA18_CHECK(0xC09A74);
+    FA18_OP(0xC09A74, 0x7000, 0xC09A76); /* C09A74: moveq   #$0, D0 */
+    FA18_RETURN(0xC09A76, 0x4E75); /* C09A76: rts */
+}
+
 int fa18_fn_C09A78(int entry) {
     switch (entry) {
     case 0: goto L_C09A78;
@@ -567,7 +2107,7 @@ int fa18_fn_C09A78(int entry) {
 L_C09A78:
     FA18_CHECK(0xC09A78);
     FA18_OP(0xC09A78, 0x41F9, 0xC09A7E); /* C09A78: lea     $c09b48.l, A0 */
-    FA18_CALL(0xC09A7E, 0x6100, 0xC09A82, 28, 0); /* C09A7E: bsr     $c09ab8 */
+    FA18_CALL(0xC09A7E, 0x6100, 0xC09A82, 66, 0); /* C09A7E: bsr     $c09ab8 */
 L_C09A82:
     FA18_CHECK(0xC09A82);
     FA18_BCC(0xC09A82, 0x670A, 0xC09A84, 0xC09A8E, L_C09A8E); /* C09A82: beq     $c09a8e */
@@ -592,7 +2132,7 @@ int fa18_fn_C09A98(int entry) {
 L_C09A98:
     FA18_CHECK(0xC09A98);
     FA18_OP(0xC09A98, 0x41F9, 0xC09A9E); /* C09A98: lea     $c09d78.l, A0 */
-    FA18_CALL(0xC09A9E, 0x6100, 0xC09AA2, 28, 0); /* C09A9E: bsr     $c09ab8 */
+    FA18_CALL(0xC09A9E, 0x6100, 0xC09AA2, 66, 0); /* C09A9E: bsr     $c09ab8 */
 L_C09AA2:
     FA18_CHECK(0xC09AA2);
     FA18_BCC(0xC09AA2, 0x670A, 0xC09AA4, 0xC09AAE, L_C09AAE); /* C09AA2: beq     $c09aae */
@@ -746,6 +2286,39 @@ L_C09B44:
     FA18_RETURN(0xC09B46, 0x4E75); /* C09B46: rts */
 }
 
+int fa18_fn_C09DD0(int entry) {
+    switch (entry) {
+    case 0: goto L_C09DD0;
+    case 1: goto L_C09DDE;
+    case 2: goto L_C09DE6;
+    case 3: goto L_C09DF0;
+    case 4: goto L_C09E02;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C09DD0:
+    FA18_CHECK(0xC09DD0);
+    FA18_OP(0xC09DD0, 0x2F00, 0xC09DD2); /* C09DD0: move.l  D0, -(A7) */
+    FA18_OP(0xC09DD2, 0x3039, 0xC09DD8); /* C09DD2: move.w  $c459c0.l, D0 */
+    FA18_OP(0xC09DD8, 0x0C40, 0xC09DDC); /* C09DD8: cmpi.w  #-$1, D0 */
+    FA18_BCC(0xC09DDC, 0x6724, 0xC09DDE, 0xC09E02, L_C09E02); /* C09DDC: beq     $c09e02 */
+L_C09DDE:
+    FA18_CHECK(0xC09DDE);
+    FA18_OP(0xC09DDE, 0xB079, 0xC09DE4); /* C09DDE: cmp.w   $c459b6.l, D0 */
+    FA18_BCC(0xC09DE4, 0x661C, 0xC09DE6, 0xC09E02, L_C09E02); /* C09DE4: bne     $c09e02 */
+L_C09DE6:
+    FA18_CHECK(0xC09DE6);
+    FA18_OP(0xC09DE6, 0x303C, 0xC09DEA); /* C09DE6: move.w  #$4016, D0 */
+    FA18_CALL(0xC09DEA, 0x4EB9, 0xC09DF0, 298, 0); /* C09DEA: jsr     $c25704.l */
+L_C09DF0:
+    FA18_CHECK(0xC09DF0);
+    FA18_OP(0xC09DF0, 0x33FC, 0xC09DF8); /* C09DF0: move.w  #$ffff, $c459c0.l */
+    FA18_OP(0xC09DF8, 0x02B9, 0xC09E02); /* C09DF8: andi.l  #$ffffbdff, $c45b50.l */
+L_C09E02:
+    FA18_CHECK(0xC09E02);
+    FA18_OP(0xC09E02, 0x201F, 0xC09E04); /* C09E02: move.l  (A7)+, D0 */
+    FA18_RETURN(0xC09E04, 0x4E75); /* C09E04: rts */
+}
+
 int fa18_fn_C09E06(int entry) {
     switch (entry) {
     case 0: goto L_C09E06;
@@ -782,7 +2355,7 @@ L_C09E06:
     FA18_OP(0xC09E06, 0x4239, 0xC09E0C); /* C09E06: clr.b   $c457ba.l */
     FA18_OP(0xC09E0C, 0x4239, 0xC09E12); /* C09E0C: clr.b   $c457bb.l */
     FA18_OP(0xC09E12, 0x4239, 0xC09E18); /* C09E12: clr.b   $c457bc.l */
-    FA18_CALL(0xC09E18, 0x4EB9, 0xC09E1E, 184, 0); /* C09E18: jsr     $c230b0.l */
+    FA18_CALL(0xC09E18, 0x4EB9, 0xC09E1E, 264, 0); /* C09E18: jsr     $c230b0.l */
 L_C09E1E:
     FA18_CHECK(0xC09E1E);
     FA18_OP(0xC09E1E, 0x0839, 0xC09E26); /* C09E1E: btst    #$6, $c458cd.l */
@@ -802,7 +2375,7 @@ L_C09E3C:
     FA18_BCC(0xC09E40, 0x6606, 0xC09E42, 0xC09E48, L_C09E48); /* C09E40: bne     $c09e48 */
 L_C09E42:
     FA18_CHECK(0xC09E42);
-    FA18_CALL(0xC09E42, 0x6100, 0xC09E46, 30, 1); /* C09E42: bsr     $c09e98 */
+    FA18_CALL(0xC09E42, 0x6100, 0xC09E46, 69, 1); /* C09E42: bsr     $c09e98 */
 L_C09E46:
     FA18_CHECK(0xC09E46);
     FA18_JUMP(0xC09E46, 0x604C, 0xC09E94, L_C09E94); /* C09E46: bra     $c09e94 */
@@ -812,7 +2385,7 @@ L_C09E48:
     FA18_BCC(0xC09E4C, 0x6606, 0xC09E4E, 0xC09E54, L_C09E54); /* C09E4C: bne     $c09e54 */
 L_C09E4E:
     FA18_CHECK(0xC09E4E);
-    FA18_CALL(0xC09E4E, 0x6100, 0xC09E52, 31, 1); /* C09E4E: bsr     $c09ec4 */
+    FA18_CALL(0xC09E4E, 0x6100, 0xC09E52, 70, 1); /* C09E4E: bsr     $c09ec4 */
 L_C09E52:
     FA18_CHECK(0xC09E52);
     FA18_JUMP(0xC09E52, 0x6040, 0xC09E94, L_C09E94); /* C09E52: bra     $c09e94 */
@@ -822,7 +2395,7 @@ L_C09E54:
     FA18_BCC(0xC09E58, 0x6606, 0xC09E5A, 0xC09E60, L_C09E60); /* C09E58: bne     $c09e60 */
 L_C09E5A:
     FA18_CHECK(0xC09E5A);
-    FA18_CALL(0xC09E5A, 0x6100, 0xC09E5E, 32, 0); /* C09E5A: bsr     $c0a002 */
+    FA18_CALL(0xC09E5A, 0x6100, 0xC09E5E, 71, 0); /* C09E5A: bsr     $c0a002 */
 L_C09E5E:
     FA18_CHECK(0xC09E5E);
     FA18_JUMP(0xC09E5E, 0x6034, 0xC09E94, L_C09E94); /* C09E5E: bra     $c09e94 */
@@ -832,7 +2405,7 @@ L_C09E60:
     FA18_BCC(0xC09E64, 0x6606, 0xC09E66, 0xC09E6C, L_C09E6C); /* C09E64: bne     $c09e6c */
 L_C09E66:
     FA18_CHECK(0xC09E66);
-    FA18_CALL(0xC09E66, 0x6100, 0xC09E6A, 34, 1); /* C09E66: bsr     $c0a15c */
+    FA18_CALL(0xC09E66, 0x6100, 0xC09E6A, 73, 1); /* C09E66: bsr     $c0a15c */
 L_C09E6A:
     FA18_CHECK(0xC09E6A);
     FA18_JUMP(0xC09E6A, 0x6028, 0xC09E94, L_C09E94); /* C09E6A: bra     $c09e94 */
@@ -842,7 +2415,7 @@ L_C09E6C:
     FA18_BCC(0xC09E70, 0x6606, 0xC09E72, 0xC09E78, L_C09E78); /* C09E70: bne     $c09e78 */
 L_C09E72:
     FA18_CHECK(0xC09E72);
-    FA18_CALL(0xC09E72, 0x6100, 0xC09E76, 35, 1); /* C09E72: bsr     $c0a1e0 */
+    FA18_CALL(0xC09E72, 0x6100, 0xC09E76, 74, 1); /* C09E72: bsr     $c0a1e0 */
 L_C09E76:
     FA18_CHECK(0xC09E76);
     FA18_JUMP(0xC09E76, 0x601C, 0xC09E94, L_C09E94); /* C09E76: bra     $c09e94 */
@@ -852,7 +2425,7 @@ L_C09E78:
     FA18_BCC(0xC09E7C, 0x6606, 0xC09E7E, 0xC09E84, L_C09E84); /* C09E7C: bne     $c09e84 */
 L_C09E7E:
     FA18_CHECK(0xC09E7E);
-    FA18_CALL(0xC09E7E, 0x6100, 0xC09E82, 36, 1); /* C09E7E: bsr     $c0a2f0 */
+    FA18_CALL(0xC09E7E, 0x6100, 0xC09E82, 75, 1); /* C09E7E: bsr     $c0a2f0 */
 L_C09E82:
     FA18_CHECK(0xC09E82);
     FA18_JUMP(0xC09E82, 0x6010, 0xC09E94, L_C09E94); /* C09E82: bra     $c09e94 */
@@ -862,13 +2435,13 @@ L_C09E84:
     FA18_BCC(0xC09E88, 0x6606, 0xC09E8A, 0xC09E90, L_C09E90); /* C09E88: bne     $c09e90 */
 L_C09E8A:
     FA18_CHECK(0xC09E8A);
-    FA18_CALL(0xC09E8A, 0x6100, 0xC09E8E, 37, 1); /* C09E8A: bsr     $c0a334 */
+    FA18_CALL(0xC09E8A, 0x6100, 0xC09E8E, 76, 1); /* C09E8A: bsr     $c0a334 */
 L_C09E8E:
     FA18_CHECK(0xC09E8E);
     FA18_JUMP(0xC09E8E, 0x6004, 0xC09E94, L_C09E94); /* C09E8E: bra     $c09e94 */
 L_C09E90:
     FA18_CHECK(0xC09E90);
-    FA18_CALL(0xC09E90, 0x6100, 0xC09E94, 38, 1); /* C09E90: bsr     $c0a364 */
+    FA18_CALL(0xC09E90, 0x6100, 0xC09E94, 77, 1); /* C09E90: bsr     $c0a364 */
 L_C09E94:
     FA18_CHECK(0xC09E94);
     FA18_RETURN(0xC09E94, 0x4E75); /* C09E94: rts */
@@ -928,7 +2501,7 @@ L_C0A3D2:
     FA18_BCC(0xC0A3D4, 0x6612, 0xC0A3D6, 0xC0A3E8, L_C0A3E8); /* C0A3D4: bne     $c0a3e8 */
 L_C0A3D6:
     FA18_CHECK(0xC0A3D6);
-    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 39, 0); /* C0A3D6: bsr     $c0a3ea */
+    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 78, 0); /* C0A3D6: bsr     $c0a3ea */
 L_C0A3DA:
     FA18_CHECK(0xC0A3DA);
     FA18_BCC(0xC0A3DA, 0x660C, 0xC0A3DC, 0xC0A3E8, L_C0A3E8); /* C0A3DA: bne     $c0a3e8 */
@@ -1060,7 +2633,7 @@ L_C09FA8:
 L_C09FB0:
     FA18_CHECK(0xC09FB0);
     FA18_OP(0xC09FB0, 0x3239, 0xC09FB6); /* C09FB0: move.w  $c459b4.l, D1 */
-    FA18_CALL(0xC09FB6, 0x4EB9, 0xC09FBC, 132, 20); /* C09FB6: jsr     $c1bee8.l */
+    FA18_CALL(0xC09FB6, 0x4EB9, 0xC09FBC, 196, 20); /* C09FB6: jsr     $c1bee8.l */
 L_C09FBC:
     FA18_CHECK(0xC09FBC);
     FA18_OP(0xC09FBC, 0x0C39, 0xC09FC4); /* C09FBC: cmpi.b  #$3, $c4582a.l */
@@ -1110,7 +2683,7 @@ L_C0A3D2:
     FA18_BCC(0xC0A3D4, 0x6612, 0xC0A3D6, 0xC0A3E8, L_C0A3E8); /* C0A3D4: bne     $c0a3e8 */
 L_C0A3D6:
     FA18_CHECK(0xC0A3D6);
-    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 39, 0); /* C0A3D6: bsr     $c0a3ea */
+    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 78, 0); /* C0A3D6: bsr     $c0a3ea */
 L_C0A3DA:
     FA18_CHECK(0xC0A3DA);
     FA18_BCC(0xC0A3DA, 0x660C, 0xC0A3DC, 0xC0A3E8, L_C0A3E8); /* C0A3DA: bne     $c0a3e8 */
@@ -1267,11 +2840,11 @@ L_C0A0AA:
 L_C0A0B2:
     FA18_CHECK(0xC0A0B2);
     FA18_OP(0xC0A0B2, 0x43D2, 0xC0A0B4); /* C0A0B2: lea     (A2), A1 */
-    FA18_CALL(0xC0A0B4, 0x6100, 0xC0A0B8, 33, 0); /* C0A0B4: bsr     $c0a12e */
+    FA18_CALL(0xC0A0B4, 0x6100, 0xC0A0B8, 72, 0); /* C0A0B4: bsr     $c0a12e */
 L_C0A0B8:
     FA18_CHECK(0xC0A0B8);
     FA18_OP(0xC0A0B8, 0x43D3, 0xC0A0BA); /* C0A0B8: lea     (A3), A1 */
-    FA18_CALL(0xC0A0BA, 0x6100, 0xC0A0BE, 33, 0); /* C0A0BA: bsr     $c0a12e */
+    FA18_CALL(0xC0A0BA, 0x6100, 0xC0A0BE, 72, 0); /* C0A0BA: bsr     $c0a12e */
 L_C0A0BE:
     FA18_CHECK(0xC0A0BE);
     FA18_OP(0xC0A0BE, 0x4A79, 0xC0A0C4); /* C0A0BE: tst.w   $c45782.l */
@@ -1338,7 +2911,7 @@ L_C0A3D2:
     FA18_BCC(0xC0A3D4, 0x6612, 0xC0A3D6, 0xC0A3E8, L_C0A3E8); /* C0A3D4: bne     $c0a3e8 */
 L_C0A3D6:
     FA18_CHECK(0xC0A3D6);
-    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 39, 0); /* C0A3D6: bsr     $c0a3ea */
+    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 78, 0); /* C0A3D6: bsr     $c0a3ea */
 L_C0A3DA:
     FA18_CHECK(0xC0A3DA);
     FA18_BCC(0xC0A3DA, 0x660C, 0xC0A3DC, 0xC0A3E8, L_C0A3E8); /* C0A3DA: bne     $c0a3e8 */
@@ -1483,7 +3056,7 @@ L_C0A3D2:
     FA18_BCC(0xC0A3D4, 0x6612, 0xC0A3D6, 0xC0A3E8, L_C0A3E8); /* C0A3D4: bne     $c0a3e8 */
 L_C0A3D6:
     FA18_CHECK(0xC0A3D6);
-    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 39, 0); /* C0A3D6: bsr     $c0a3ea */
+    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 78, 0); /* C0A3D6: bsr     $c0a3ea */
 L_C0A3DA:
     FA18_CHECK(0xC0A3DA);
     FA18_BCC(0xC0A3DA, 0x660C, 0xC0A3DC, 0xC0A3E8, L_C0A3E8); /* C0A3DA: bne     $c0a3e8 */
@@ -1597,7 +3170,7 @@ L_C0A2A8:
 L_C0A2B0:
     FA18_CHECK(0xC0A2B0);
     FA18_OP(0xC0A2B0, 0x3239, 0xC0A2B6); /* C0A2B0: move.w  $c459b4.l, D1 */
-    FA18_CALL(0xC0A2B6, 0x4EB9, 0xC0A2BC, 132, 20); /* C0A2B6: jsr     $c1bee8.l */
+    FA18_CALL(0xC0A2B6, 0x4EB9, 0xC0A2BC, 196, 20); /* C0A2B6: jsr     $c1bee8.l */
 L_C0A2BC:
     FA18_CHECK(0xC0A2BC);
     FA18_OP(0xC0A2BC, 0x0C39, 0xC0A2C4); /* C0A2BC: cmpi.b  #$3, $c4582a.l */
@@ -1637,7 +3210,7 @@ L_C0A3D2:
     FA18_BCC(0xC0A3D4, 0x6612, 0xC0A3D6, 0xC0A3E8, L_C0A3E8); /* C0A3D4: bne     $c0a3e8 */
 L_C0A3D6:
     FA18_CHECK(0xC0A3D6);
-    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 39, 0); /* C0A3D6: bsr     $c0a3ea */
+    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 78, 0); /* C0A3D6: bsr     $c0a3ea */
 L_C0A3DA:
     FA18_CHECK(0xC0A3DA);
     FA18_BCC(0xC0A3DA, 0x660C, 0xC0A3DC, 0xC0A3E8, L_C0A3E8); /* C0A3DA: bne     $c0a3e8 */
@@ -1813,7 +3386,7 @@ L_C0A3D2:
     FA18_BCC(0xC0A3D4, 0x6612, 0xC0A3D6, 0xC0A3E8, L_C0A3E8); /* C0A3D4: bne     $c0a3e8 */
 L_C0A3D6:
     FA18_CHECK(0xC0A3D6);
-    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 39, 0); /* C0A3D6: bsr     $c0a3ea */
+    FA18_CALL(0xC0A3D6, 0x6100, 0xC0A3DA, 78, 0); /* C0A3D6: bsr     $c0a3ea */
 L_C0A3DA:
     FA18_CHECK(0xC0A3DA);
     FA18_BCC(0xC0A3DA, 0x660C, 0xC0A3DC, 0xC0A3E8, L_C0A3E8); /* C0A3DA: bne     $c0a3e8 */
@@ -1877,6 +3450,97 @@ L_C0A428:
     FA18_CHECK(0xC0A428);
     FA18_OP(0xC0A428, 0x7001, 0xC0A42A); /* C0A428: moveq   #$1, D0 */
     FA18_RETURN(0xC0A42A, 0x4E75); /* C0A42A: rts */
+}
+
+int fa18_fn_C0CF98(int entry) {
+    switch (entry) {
+    case 0: goto L_C0CF98;
+    case 1: goto L_C0CFB0;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0CF98:
+    FA18_CHECK(0xC0CF98);
+    FA18_OP(0xC0CF98, 0x47F9, 0xC0CF9E); /* C0CF98: lea     $c48390.l, A3 */
+    FA18_OP(0xC0CF9E, 0xD6DA, 0xC0CFA0); /* C0CF9E: adda.w  (A2)+, A3 */
+    FA18_OP(0xC0CFA0, 0x33DA, 0xC0CFA6); /* C0CFA0: move.w  (A2)+, $c45954.l */
+    FA18_OP(0xC0CFA6, 0x3C1A, 0xC0CFA8); /* C0CFA6: move.w  (A2)+, D6 */
+    FA18_OP(0xC0CFA8, 0x48E7, 0xC0CFAC); /* C0CFA8: movem.l A1-A2/A5, -(A7) */
+    FA18_CALL(0xC0CFAC, 0x6100, 0xC0CFB0, 80, 0); /* C0CFAC: bsr     $c0cffa */
+L_C0CFB0:
+    FA18_CHECK(0xC0CFB0);
+    FA18_OP(0xC0CFB0, 0x4CDF, 0xC0CFB4); /* C0CFB0: movem.l (A7)+, A1-A2/A5 */
+    FA18_RETURN(0xC0CFB4, 0x4E75); /* C0CFB4: rts */
+}
+
+int fa18_fn_C0CFFA(int entry) {
+    switch (entry) {
+    case 0: goto L_C0CFFA;
+    case 1: goto L_C0D010;
+    case 2: goto L_C0D012;
+    case 3: goto L_C0D016;
+    case 4: goto L_C0D018;
+    case 5: goto L_C0D01C;
+    case 6: goto L_C0D01E;
+    case 7: goto L_C0D02A;
+    case 8: goto L_C0D034;
+    case 9: goto L_C0D03C;
+    case 10: goto L_C0D040;
+    case 11: goto L_C0D046;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0CFFA:
+    FA18_CHECK(0xC0CFFA);
+    FA18_OP(0xC0CFFA, 0x4C93, 0xC0CFFE); /* C0CFFA: movem.w (A3), D3-D5 */
+    FA18_OP(0xC0CFFE, 0x302E, 0xC0D002); /* C0CFFE: move.w  (-$8,A6), D0 */
+    FA18_OP(0xC0D002, 0xE163, 0xC0D004); /* C0D002: asl.w   D0, D3 */
+    FA18_OP(0xC0D004, 0xE164, 0xC0D006); /* C0D004: asl.w   D0, D4 */
+    FA18_OP(0xC0D006, 0xE165, 0xC0D008); /* C0D006: asl.w   D0, D5 */
+    FA18_OP(0xC0D008, 0x48A7, 0xC0D00C); /* C0D008: movem.w D3-D6, -(A7) */
+    FA18_OP(0xC0D00C, 0x3003, 0xC0D00E); /* C0D00C: move.w  D3, D0 */
+    FA18_BCC(0xC0D00E, 0x6C02, 0xC0D010, 0xC0D012, L_C0D012); /* C0D00E: bge     $c0d012 */
+L_C0D010:
+    FA18_CHECK(0xC0D010);
+    FA18_OP(0xC0D010, 0x4440, 0xC0D012); /* C0D010: neg.w   D0 */
+L_C0D012:
+    FA18_CHECK(0xC0D012);
+    FA18_OP(0xC0D012, 0x3204, 0xC0D014); /* C0D012: move.w  D4, D1 */
+    FA18_BCC(0xC0D014, 0x6C02, 0xC0D016, 0xC0D018, L_C0D018); /* C0D014: bge     $c0d018 */
+L_C0D016:
+    FA18_CHECK(0xC0D016);
+    FA18_OP(0xC0D016, 0x4441, 0xC0D018); /* C0D016: neg.w   D1 */
+L_C0D018:
+    FA18_CHECK(0xC0D018);
+    FA18_OP(0xC0D018, 0x3405, 0xC0D01A); /* C0D018: move.w  D5, D2 */
+    FA18_BCC(0xC0D01A, 0x6C02, 0xC0D01C, 0xC0D01E, L_C0D01E); /* C0D01A: bge     $c0d01e */
+L_C0D01C:
+    FA18_CHECK(0xC0D01C);
+    FA18_OP(0xC0D01C, 0x4442, 0xC0D01E); /* C0D01C: neg.w   D2 */
+L_C0D01E:
+    FA18_CHECK(0xC0D01E);
+    FA18_OP(0xC0D01E, 0x3802, 0xC0D020); /* C0D01E: move.w  D2, D4 */
+    FA18_OP(0xC0D020, 0x3601, 0xC0D022); /* C0D020: move.w  D1, D3 */
+    FA18_OP(0xC0D022, 0x3400, 0xC0D024); /* C0D022: move.w  D0, D2 */
+    FA18_CALL(0xC0D024, 0x4EB9, 0xC0D02A, 217, 0); /* C0D024: jsr     $c1d974.l */
+L_C0D02A:
+    FA18_CHECK(0xC0D02A);
+    FA18_OP(0xC0D02A, 0x3E01, 0xC0D02C); /* C0D02A: move.w  D1, D7 */
+    FA18_OP(0xC0D02C, 0x4C9F, 0xC0D030); /* C0D02C: movem.w (A7)+, D0-D2/D6 */
+    FA18_OP(0xC0D030, 0x4A47, 0xC0D032); /* C0D030: tst.w   D7 */
+    FA18_BCC(0xC0D032, 0x6F08, 0xC0D034, 0xC0D03C, L_C0D03C); /* C0D032: ble     $c0d03c */
+L_C0D034:
+    FA18_CHECK(0xC0D034);
+    FA18_OP(0xC0D034, 0x8CC7, 0xC0D036); /* C0D034: divu.w  D7, D6 */
+    FA18_OP(0xC0D036, 0x0C46, 0xC0D03A); /* C0D036: cmpi.w  #$7f, D6 */
+    FA18_BCC(0xC0D03A, 0x6F04, 0xC0D03C, 0xC0D040, L_C0D040); /* C0D03A: ble     $c0d040 */
+L_C0D03C:
+    FA18_CHECK(0xC0D03C);
+    FA18_OP(0xC0D03C, 0x3C3C, 0xC0D040); /* C0D03C: move.w  #$7f, D6 */
+L_C0D040:
+    FA18_CHECK(0xC0D040);
+    FA18_CALL(0xC0D040, 0x4EB9, 0xC0D046, 380, 3); /* C0D040: jsr     $c2ec9c.l */
+L_C0D046:
+    FA18_CHECK(0xC0D046);
+    FA18_RETURN(0xC0D046, 0x4E75); /* C0D046: rts */
 }
 
 int fa18_fn_C0D04C(int entry) {
@@ -2133,7 +3797,7 @@ L_C0D1D0:
     FA18_OP(0xC0D1D8, 0x3802, 0xC0D1DA); /* C0D1D8: move.w  D2, D4 */
     FA18_OP(0xC0D1DA, 0x3601, 0xC0D1DC); /* C0D1DA: move.w  D1, D3 */
     FA18_OP(0xC0D1DC, 0x3400, 0xC0D1DE); /* C0D1DC: move.w  D0, D2 */
-    FA18_CALL(0xC0D1DE, 0x4EB9, 0xC0D1E4, 153, 0); /* C0D1DE: jsr     $c1d974.l */
+    FA18_CALL(0xC0D1DE, 0x4EB9, 0xC0D1E4, 217, 0); /* C0D1DE: jsr     $c1d974.l */
 L_C0D1E4:
     FA18_CHECK(0xC0D1E4);
     FA18_OP(0xC0D1E4, 0x4C9F, 0xC0D1E8); /* C0D1E4: movem.w (A7)+, D3-D6 */
@@ -2143,7 +3807,7 @@ L_C0D1E4:
     FA18_OP(0xC0D1EE, 0xE061, 0xC0D1F0); /* C0D1EE: asr.w   D0, D1 */
     FA18_OP(0xC0D1F0, 0x3E01, 0xC0D1F2); /* C0D1F0: move.w  D1, D7 */
     FA18_OP(0xC0D1F2, 0x3F06, 0xC0D1F4); /* C0D1F2: move.w  D6, -(A7) */
-    FA18_CALL(0xC0D1F4, 0x4EB9, 0xC0D1FA, 268, 0); /* C0D1F4: jsr     $c2ce82.l */
+    FA18_CALL(0xC0D1F4, 0x4EB9, 0xC0D1FA, 350, 0); /* C0D1F4: jsr     $c2ce82.l */
 L_C0D1FA:
     FA18_CHECK(0xC0D1FA);
     FA18_OP(0xC0D1FA, 0x3006, 0xC0D1FC); /* C0D1FA: move.w  D6, D0 */
@@ -2192,7 +3856,7 @@ L_C0D226:
     FA18_OP(0xC0D250, 0xD244, 0xC0D252); /* C0D250: add.w   D4, D1 */
     FA18_OP(0xC0D252, 0xD445, 0xC0D254); /* C0D252: add.w   D5, D2 */
     FA18_OP(0xC0D254, 0xDC47, 0xC0D256); /* C0D254: add.w   D7, D6 */
-    FA18_CALL(0xC0D256, 0x4EB9, 0xC0D25C, 298, 3); /* C0D256: jsr     $c2ec9c.l */
+    FA18_CALL(0xC0D256, 0x4EB9, 0xC0D25C, 380, 3); /* C0D256: jsr     $c2ec9c.l */
 L_C0D25C:
     FA18_CHECK(0xC0D25C);
     FA18_OP(0xC0D25C, 0x816E, 0xC0D260); /* C0D25C: or.w    D0, (-$1e,A6) */
@@ -2217,7 +3881,7 @@ L_C0D25C:
     FA18_OP(0xC0D28A, 0xD244, 0xC0D28C); /* C0D28A: add.w   D4, D1 */
     FA18_OP(0xC0D28C, 0xD445, 0xC0D28E); /* C0D28C: add.w   D5, D2 */
     FA18_OP(0xC0D28E, 0xDC47, 0xC0D290); /* C0D28E: add.w   D7, D6 */
-    FA18_CALL(0xC0D290, 0x4EB9, 0xC0D296, 298, 3); /* C0D290: jsr     $c2ec9c.l */
+    FA18_CALL(0xC0D290, 0x4EB9, 0xC0D296, 380, 3); /* C0D290: jsr     $c2ec9c.l */
 L_C0D296:
     FA18_CHECK(0xC0D296);
     FA18_OP(0xC0D296, 0x816E, 0xC0D29A); /* C0D296: or.w    D0, (-$1e,A6) */
@@ -2242,7 +3906,7 @@ L_C0D296:
     FA18_OP(0xC0D2C4, 0xD244, 0xC0D2C6); /* C0D2C4: add.w   D4, D1 */
     FA18_OP(0xC0D2C6, 0xD445, 0xC0D2C8); /* C0D2C6: add.w   D5, D2 */
     FA18_OP(0xC0D2C8, 0xDC47, 0xC0D2CA); /* C0D2C8: add.w   D7, D6 */
-    FA18_CALL(0xC0D2CA, 0x4EB9, 0xC0D2D0, 298, 3); /* C0D2CA: jsr     $c2ec9c.l */
+    FA18_CALL(0xC0D2CA, 0x4EB9, 0xC0D2D0, 380, 3); /* C0D2CA: jsr     $c2ec9c.l */
 L_C0D2D0:
     FA18_CHECK(0xC0D2D0);
     FA18_OP(0xC0D2D0, 0x816E, 0xC0D2D4); /* C0D2D0: or.w    D0, (-$1e,A6) */
@@ -2259,7 +3923,7 @@ L_C0D2E4:
     FA18_OP(0xC0D2E8, 0x9C47, 0xC0D2EA); /* C0D2E8: sub.w   D7, D6 */
 L_C0D2EA:
     FA18_CHECK(0xC0D2EA);
-    FA18_CALL(0xC0D2EA, 0x4EB9, 0xC0D2F0, 298, 3); /* C0D2EA: jsr     $c2ec9c.l */
+    FA18_CALL(0xC0D2EA, 0x4EB9, 0xC0D2F0, 380, 3); /* C0D2EA: jsr     $c2ec9c.l */
 L_C0D2F0:
     FA18_CHECK(0xC0D2F0);
     FA18_OP(0xC0D2F0, 0x816E, 0xC0D2F4); /* C0D2F0: or.w    D0, (-$1e,A6) */
@@ -2296,6 +3960,199 @@ L_C0D32C:
     FA18_RETURN(0xC0D332, 0x4E75); /* C0D332: rts */
 }
 
+int fa18_fn_C0D334(int entry) {
+    switch (entry) {
+    case 0: goto L_C0D334;
+    case 1: goto L_C0D34A;
+    case 2: goto L_C0D356;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0D334:
+    FA18_CHECK(0xC0D334);
+    FA18_OP(0xC0D334, 0x47F9, 0xC0D33A); /* C0D334: lea     $c46184.l, A3 */
+    FA18_OP(0xC0D33A, 0x3039, 0xC0D340); /* C0D33A: move.w  $c459b6.l, D0 */
+    FA18_OP(0xC0D340, 0x0640, 0xC0D344); /* C0D340: addi.w  #$a4, D0 */
+    FA18_OP(0xC0D344, 0xD6C0, 0xC0D346); /* C0D344: adda.w  D0, A3 */
+    FA18_CALL(0xC0D346, 0x6100, 0xC0D34A, 83, 0); /* C0D346: bsr     $c0d384 */
+L_C0D34A:
+    FA18_CHECK(0xC0D34A);
+    FA18_OP(0xC0D34A, 0x47F9, 0xC0D350); /* C0D34A: lea     $c48390.l, A3 */
+    FA18_OP(0xC0D350, 0xD6DA, 0xC0D352); /* C0D350: adda.w  (A2)+, A3 */
+    FA18_CALL(0xC0D352, 0x6100, 0xC0D356, 83, 0); /* C0D352: bsr     $c0d384 */
+L_C0D356:
+    FA18_CHECK(0xC0D356);
+    FA18_OP(0xC0D356, 0x4CAB, 0xC0D35C); /* C0D356: movem.w ($6c,A3), D0-D5 */
+    FA18_OP(0xC0D35C, 0xD640, 0xC0D35E); /* C0D35C: add.w   D0, D3 */
+    FA18_OP(0xC0D35E, 0xD841, 0xC0D360); /* C0D35E: add.w   D1, D4 */
+    FA18_OP(0xC0D360, 0xDA42, 0xC0D362); /* C0D360: add.w   D2, D5 */
+    FA18_OP(0xC0D362, 0xE243, 0xC0D364); /* C0D362: asr.w   #1, D3 */
+    FA18_OP(0xC0D364, 0xE244, 0xC0D366); /* C0D364: asr.w   #1, D4 */
+    FA18_OP(0xC0D366, 0xE245, 0xC0D368); /* C0D366: asr.w   #1, D5 */
+    FA18_OP(0xC0D368, 0x4CAB, 0xC0D36E); /* C0D368: movem.w ($60,A3), D0-D2 */
+    FA18_OP(0xC0D36E, 0xD640, 0xC0D370); /* C0D36E: add.w   D0, D3 */
+    FA18_OP(0xC0D370, 0xD841, 0xC0D372); /* C0D370: add.w   D1, D4 */
+    FA18_OP(0xC0D372, 0xDA42, 0xC0D374); /* C0D372: add.w   D2, D5 */
+    FA18_OP(0xC0D374, 0xE243, 0xC0D376); /* C0D374: asr.w   #1, D3 */
+    FA18_OP(0xC0D376, 0xE244, 0xC0D378); /* C0D376: asr.w   #1, D4 */
+    FA18_OP(0xC0D378, 0xE245, 0xC0D37A); /* C0D378: asr.w   #1, D5 */
+    FA18_OP(0xC0D37A, 0x48AB, 0xC0D380); /* C0D37A: movem.w D3-D5, ($294,A3) */
+    FA18_OP(0xC0D380, 0x7000, 0xC0D382); /* C0D380: moveq   #$0, D0 */
+    FA18_RETURN(0xC0D382, 0x4E75); /* C0D382: rts */
+}
+
+int fa18_fn_C0D384(int entry) {
+    switch (entry) {
+    case 0: goto L_C0D384;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0D384:
+    FA18_CHECK(0xC0D384);
+    FA18_OP(0xC0D384, 0x4CAB, 0xC0D38A); /* C0D384: movem.w ($12,A3), D0-D5 */
+    FA18_OP(0xC0D38A, 0xD640, 0xC0D38C); /* C0D38A: add.w   D0, D3 */
+    FA18_OP(0xC0D38C, 0xD841, 0xC0D38E); /* C0D38C: add.w   D1, D4 */
+    FA18_OP(0xC0D38E, 0xDA42, 0xC0D390); /* C0D38E: add.w   D2, D5 */
+    FA18_OP(0xC0D390, 0xE243, 0xC0D392); /* C0D390: asr.w   #1, D3 */
+    FA18_OP(0xC0D392, 0xE244, 0xC0D394); /* C0D392: asr.w   #1, D4 */
+    FA18_OP(0xC0D394, 0xE245, 0xC0D396); /* C0D394: asr.w   #1, D5 */
+    FA18_OP(0xC0D396, 0x48AB, 0xC0D39C); /* C0D396: movem.w D3-D5, ($84,A3) */
+    FA18_OP(0xC0D39C, 0x4CAB, 0xC0D3A2); /* C0D39C: movem.w ($36,A3), D0-D2 */
+    FA18_OP(0xC0D3A2, 0x3C00, 0xC0D3A4); /* C0D3A2: move.w  D0, D6 */
+    FA18_OP(0xC0D3A4, 0x3E01, 0xC0D3A6); /* C0D3A4: move.w  D1, D7 */
+    FA18_OP(0xC0D3A6, 0x3842, 0xC0D3A8); /* C0D3A6: movea.w D2, A4 */
+    FA18_OP(0xC0D3A8, 0x9043, 0xC0D3AA); /* C0D3A8: sub.w   D3, D0 */
+    FA18_OP(0xC0D3AA, 0x9244, 0xC0D3AC); /* C0D3AA: sub.w   D4, D1 */
+    FA18_OP(0xC0D3AC, 0x9445, 0xC0D3AE); /* C0D3AC: sub.w   D5, D2 */
+    FA18_OP(0xC0D3AE, 0x9640, 0xC0D3B0); /* C0D3AE: sub.w   D0, D3 */
+    FA18_OP(0xC0D3B0, 0x9841, 0xC0D3B2); /* C0D3B0: sub.w   D1, D4 */
+    FA18_OP(0xC0D3B2, 0x9A42, 0xC0D3B4); /* C0D3B2: sub.w   D2, D5 */
+    FA18_OP(0xC0D3B4, 0x48AB, 0xC0D3BA); /* C0D3B4: movem.w D3-D5, ($8a,A3) */
+    FA18_OP(0xC0D3BA, 0x4CAB, 0xC0D3C0); /* C0D3BA: movem.w ($30,A3), D0-D2 */
+    FA18_OP(0xC0D3C0, 0x9C40, 0xC0D3C2); /* C0D3C0: sub.w   D0, D6 */
+    FA18_OP(0xC0D3C2, 0x9E41, 0xC0D3C4); /* C0D3C2: sub.w   D1, D7 */
+    FA18_OP(0xC0D3C4, 0x98C2, 0xC0D3C6); /* C0D3C4: suba.w  D2, A4 */
+    FA18_OP(0xC0D3C6, 0xDC43, 0xC0D3C8); /* C0D3C6: add.w   D3, D6 */
+    FA18_OP(0xC0D3C8, 0xDE44, 0xC0D3CA); /* C0D3C8: add.w   D4, D7 */
+    FA18_OP(0xC0D3CA, 0xD8C5, 0xC0D3CC); /* C0D3CA: adda.w  D5, A4 */
+    FA18_OP(0xC0D3CC, 0x48AB, 0xC0D3D2); /* C0D3CC: movem.w D6-D7/A4, ($90,A3) */
+    FA18_OP(0xC0D3D2, 0x4CAB, 0xC0D3D8); /* C0D3D2: movem.w ($12,A3), D0-D7/A4 */
+    FA18_OP(0xC0D3D8, 0x9C40, 0xC0D3DA); /* C0D3D8: sub.w   D0, D6 */
+    FA18_OP(0xC0D3DA, 0x9E41, 0xC0D3DC); /* C0D3DA: sub.w   D1, D7 */
+    FA18_OP(0xC0D3DC, 0x98C2, 0xC0D3DE); /* C0D3DC: suba.w  D2, A4 */
+    FA18_OP(0xC0D3DE, 0xD646, 0xC0D3E0); /* C0D3DE: add.w   D6, D3 */
+    FA18_OP(0xC0D3E0, 0xD847, 0xC0D3E2); /* C0D3E0: add.w   D7, D4 */
+    FA18_OP(0xC0D3E2, 0xDA4C, 0xC0D3E4); /* C0D3E2: add.w   A4, D5 */
+    FA18_OP(0xC0D3E4, 0x48AB, 0xC0D3EA); /* C0D3E4: movem.w D3-D5, ($96,A3) */
+    FA18_OP(0xC0D3EA, 0x4CAB, 0xC0D3F0); /* C0D3EA: movem.w ($8a,A3), D0-D5 */
+    FA18_OP(0xC0D3F0, 0xD046, 0xC0D3F2); /* C0D3F0: add.w   D6, D0 */
+    FA18_OP(0xC0D3F2, 0xD247, 0xC0D3F4); /* C0D3F2: add.w   D7, D1 */
+    FA18_OP(0xC0D3F4, 0xD44C, 0xC0D3F6); /* C0D3F4: add.w   A4, D2 */
+    FA18_OP(0xC0D3F6, 0xD646, 0xC0D3F8); /* C0D3F6: add.w   D6, D3 */
+    FA18_OP(0xC0D3F8, 0xD847, 0xC0D3FA); /* C0D3F8: add.w   D7, D4 */
+    FA18_OP(0xC0D3FA, 0xDA4C, 0xC0D3FC); /* C0D3FA: add.w   A4, D5 */
+    FA18_OP(0xC0D3FC, 0x48AB, 0xC0D402); /* C0D3FC: movem.w D0-D5, ($e4,A3) */
+    FA18_OP(0xC0D402, 0xD640, 0xC0D404); /* C0D402: add.w   D0, D3 */
+    FA18_OP(0xC0D404, 0xD841, 0xC0D406); /* C0D404: add.w   D1, D4 */
+    FA18_OP(0xC0D406, 0xDA42, 0xC0D408); /* C0D406: add.w   D2, D5 */
+    FA18_OP(0xC0D408, 0xE243, 0xC0D40A); /* C0D408: asr.w   #1, D3 */
+    FA18_OP(0xC0D40A, 0xE244, 0xC0D40C); /* C0D40A: asr.w   #1, D4 */
+    FA18_OP(0xC0D40C, 0xE245, 0xC0D40E); /* C0D40C: asr.w   #1, D5 */
+    FA18_OP(0xC0D40E, 0x48AB, 0xC0D414); /* C0D40E: movem.w D3-D5, ($a8,A3) */
+    FA18_OP(0xC0D414, 0x4CAB, 0xC0D41A); /* C0D414: movem.w ($1e,A3), D0-D2 */
+    FA18_OP(0xC0D41A, 0x4CAB, 0xC0D420); /* C0D41A: movem.w ($96,A3), D3-D5 */
+    FA18_OP(0xC0D420, 0x3C03, 0xC0D422); /* C0D420: move.w  D3, D6 */
+    FA18_OP(0xC0D422, 0x3E04, 0xC0D424); /* C0D422: move.w  D4, D7 */
+    FA18_OP(0xC0D424, 0x3845, 0xC0D426); /* C0D424: movea.w D5, A4 */
+    FA18_OP(0xC0D426, 0xD640, 0xC0D428); /* C0D426: add.w   D0, D3 */
+    FA18_OP(0xC0D428, 0xD841, 0xC0D42A); /* C0D428: add.w   D1, D4 */
+    FA18_OP(0xC0D42A, 0xDA42, 0xC0D42C); /* C0D42A: add.w   D2, D5 */
+    FA18_OP(0xC0D42C, 0xE243, 0xC0D42E); /* C0D42C: asr.w   #1, D3 */
+    FA18_OP(0xC0D42E, 0xE244, 0xC0D430); /* C0D42E: asr.w   #1, D4 */
+    FA18_OP(0xC0D430, 0xE245, 0xC0D432); /* C0D430: asr.w   #1, D5 */
+    FA18_OP(0xC0D432, 0xD043, 0xC0D434); /* C0D432: add.w   D3, D0 */
+    FA18_OP(0xC0D434, 0xD244, 0xC0D436); /* C0D434: add.w   D4, D1 */
+    FA18_OP(0xC0D436, 0xD445, 0xC0D438); /* C0D436: add.w   D5, D2 */
+    FA18_OP(0xC0D438, 0xE240, 0xC0D43A); /* C0D438: asr.w   #1, D0 */
+    FA18_OP(0xC0D43A, 0xE241, 0xC0D43C); /* C0D43A: asr.w   #1, D1 */
+    FA18_OP(0xC0D43C, 0xE242, 0xC0D43E); /* C0D43C: asr.w   #1, D2 */
+    FA18_OP(0xC0D43E, 0xD646, 0xC0D440); /* C0D43E: add.w   D6, D3 */
+    FA18_OP(0xC0D440, 0xD847, 0xC0D442); /* C0D440: add.w   D7, D4 */
+    FA18_OP(0xC0D442, 0xDA4C, 0xC0D444); /* C0D442: add.w   A4, D5 */
+    FA18_OP(0xC0D444, 0xE243, 0xC0D446); /* C0D444: asr.w   #1, D3 */
+    FA18_OP(0xC0D446, 0xE244, 0xC0D448); /* C0D446: asr.w   #1, D4 */
+    FA18_OP(0xC0D448, 0xE245, 0xC0D44A); /* C0D448: asr.w   #1, D5 */
+    FA18_OP(0xC0D44A, 0x48AB, 0xC0D450); /* C0D44A: movem.w D0-D5, ($9c,A3) */
+    FA18_OP(0xC0D450, 0x4CAB, 0xC0D456); /* C0D450: movem.w ($6,A3), D0-D5 */
+    FA18_OP(0xC0D456, 0xD640, 0xC0D458); /* C0D456: add.w   D0, D3 */
+    FA18_OP(0xC0D458, 0xD841, 0xC0D45A); /* C0D458: add.w   D1, D4 */
+    FA18_OP(0xC0D45A, 0xDA42, 0xC0D45C); /* C0D45A: add.w   D2, D5 */
+    FA18_OP(0xC0D45C, 0xE243, 0xC0D45E); /* C0D45C: asr.w   #1, D3 */
+    FA18_OP(0xC0D45E, 0xE244, 0xC0D460); /* C0D45E: asr.w   #1, D4 */
+    FA18_OP(0xC0D460, 0xE245, 0xC0D462); /* C0D460: asr.w   #1, D5 */
+    FA18_OP(0xC0D462, 0x48AB, 0xC0D468); /* C0D462: movem.w D3-D5, ($ae,A3) */
+    FA18_OP(0xC0D468, 0x4CAB, 0xC0D46E); /* C0D468: movem.w ($24,A3), D0-D5 */
+    FA18_OP(0xC0D46E, 0x4CAB, 0xC0D474); /* C0D46E: movem.w ($3c,A3), D6-D7/A4 */
+    FA18_OP(0xC0D474, 0x9043, 0xC0D476); /* C0D474: sub.w   D3, D0 */
+    FA18_OP(0xC0D476, 0x9244, 0xC0D478); /* C0D476: sub.w   D4, D1 */
+    FA18_OP(0xC0D478, 0x9445, 0xC0D47A); /* C0D478: sub.w   D5, D2 */
+    FA18_OP(0xC0D47A, 0xDC40, 0xC0D47C); /* C0D47A: add.w   D0, D6 */
+    FA18_OP(0xC0D47C, 0xDE41, 0xC0D47E); /* C0D47C: add.w   D1, D7 */
+    FA18_OP(0xC0D47E, 0xD8C2, 0xC0D480); /* C0D47E: adda.w  D2, A4 */
+    FA18_OP(0xC0D480, 0x48AB, 0xC0D486); /* C0D480: movem.w D6-D7/A4, ($7e,A3) */
+    FA18_OP(0xC0D486, 0x4CAB, 0xC0D48C); /* C0D486: movem.w ($48,A3), D3-D5 */
+    FA18_OP(0xC0D48C, 0xD640, 0xC0D48E); /* C0D48C: add.w   D0, D3 */
+    FA18_OP(0xC0D48E, 0xD841, 0xC0D490); /* C0D48E: add.w   D1, D4 */
+    FA18_OP(0xC0D490, 0xDA42, 0xC0D492); /* C0D490: add.w   D2, D5 */
+    FA18_OP(0xC0D492, 0x4CAB, 0xC0D498); /* C0D492: movem.w ($54,A3), D6-D7/A4 */
+    FA18_OP(0xC0D498, 0xDC40, 0xC0D49A); /* C0D498: add.w   D0, D6 */
+    FA18_OP(0xC0D49A, 0xDE41, 0xC0D49C); /* C0D49A: add.w   D1, D7 */
+    FA18_OP(0xC0D49C, 0xD8C2, 0xC0D49E); /* C0D49C: adda.w  D2, A4 */
+    FA18_OP(0xC0D49E, 0x48AB, 0xC0D4A4); /* C0D49E: movem.w D3-D7/A4, ($b4,A3) */
+    FA18_OP(0xC0D4A4, 0x3600, 0xC0D4A6); /* C0D4A4: move.w  D0, D3 */
+    FA18_OP(0xC0D4A6, 0x3801, 0xC0D4A8); /* C0D4A6: move.w  D1, D4 */
+    FA18_OP(0xC0D4A8, 0x3A02, 0xC0D4AA); /* C0D4A8: move.w  D2, D5 */
+    FA18_OP(0xC0D4AA, 0xE240, 0xC0D4AC); /* C0D4AA: asr.w   #1, D0 */
+    FA18_OP(0xC0D4AC, 0xE241, 0xC0D4AE); /* C0D4AC: asr.w   #1, D1 */
+    FA18_OP(0xC0D4AE, 0xE242, 0xC0D4B0); /* C0D4AE: asr.w   #1, D2 */
+    FA18_OP(0xC0D4B0, 0xD640, 0xC0D4B2); /* C0D4B0: add.w   D0, D3 */
+    FA18_OP(0xC0D4B2, 0xD841, 0xC0D4B4); /* C0D4B2: add.w   D1, D4 */
+    FA18_OP(0xC0D4B4, 0xDA42, 0xC0D4B6); /* C0D4B4: add.w   D2, D5 */
+    FA18_OP(0xC0D4B6, 0x4CAB, 0xC0D4BC); /* C0D4B6: movem.w ($6,A3), D0-D2/D6-D7/A4 */
+    FA18_OP(0xC0D4BC, 0xD043, 0xC0D4BE); /* C0D4BC: add.w   D3, D0 */
+    FA18_OP(0xC0D4BE, 0xD244, 0xC0D4C0); /* C0D4BE: add.w   D4, D1 */
+    FA18_OP(0xC0D4C0, 0xD445, 0xC0D4C2); /* C0D4C0: add.w   D5, D2 */
+    FA18_OP(0xC0D4C2, 0xDC43, 0xC0D4C4); /* C0D4C2: add.w   D3, D6 */
+    FA18_OP(0xC0D4C4, 0xDE44, 0xC0D4C6); /* C0D4C4: add.w   D4, D7 */
+    FA18_OP(0xC0D4C6, 0xD8C5, 0xC0D4C8); /* C0D4C6: adda.w  D5, A4 */
+    FA18_OP(0xC0D4C8, 0x48AB, 0xC0D4CE); /* C0D4C8: movem.w D0-D2/D6-D7/A4, ($c0,A3) */
+    FA18_OP(0xC0D4CE, 0x4CAB, 0xC0D4D4); /* C0D4CE: movem.w ($24,A3), D0-D2/D6-D7/A4 */
+    FA18_OP(0xC0D4D4, 0x9046, 0xC0D4D6); /* C0D4D4: sub.w   D6, D0 */
+    FA18_OP(0xC0D4D6, 0x9247, 0xC0D4D8); /* C0D4D6: sub.w   D7, D1 */
+    FA18_OP(0xC0D4D8, 0x944C, 0xC0D4DA); /* C0D4D8: sub.w   A4, D2 */
+    FA18_OP(0xC0D4DA, 0x4CAB, 0xC0D4E0); /* C0D4DA: movem.w ($c0,A3), D6-D7/A4 */
+    FA18_OP(0xC0D4E0, 0xDC40, 0xC0D4E2); /* C0D4E0: add.w   D0, D6 */
+    FA18_OP(0xC0D4E2, 0xDE41, 0xC0D4E4); /* C0D4E2: add.w   D1, D7 */
+    FA18_OP(0xC0D4E4, 0xD8C2, 0xC0D4E6); /* C0D4E4: adda.w  D2, A4 */
+    FA18_OP(0xC0D4E6, 0x48AB, 0xC0D4EC); /* C0D4E6: movem.w D6-D7/A4, ($d8,A3) */
+    FA18_OP(0xC0D4EC, 0x4CAB, 0xC0D4F2); /* C0D4EC: movem.w ($c6,A3), D6-D7/A4 */
+    FA18_OP(0xC0D4F2, 0xDC40, 0xC0D4F4); /* C0D4F2: add.w   D0, D6 */
+    FA18_OP(0xC0D4F4, 0xDE41, 0xC0D4F6); /* C0D4F4: add.w   D1, D7 */
+    FA18_OP(0xC0D4F6, 0xD8C2, 0xC0D4F8); /* C0D4F6: adda.w  D2, A4 */
+    FA18_OP(0xC0D4F8, 0x48AB, 0xC0D4FE); /* C0D4F8: movem.w D6-D7/A4, ($de,A3) */
+    FA18_OP(0xC0D4FE, 0xD640, 0xC0D500); /* C0D4FE: add.w   D0, D3 */
+    FA18_OP(0xC0D500, 0xD841, 0xC0D502); /* C0D500: add.w   D1, D4 */
+    FA18_OP(0xC0D502, 0xDA42, 0xC0D504); /* C0D502: add.w   D2, D5 */
+    FA18_OP(0xC0D504, 0x4CAB, 0xC0D50A); /* C0D504: movem.w ($42,A3), D0-D2 */
+    FA18_OP(0xC0D50A, 0xD043, 0xC0D50C); /* C0D50A: add.w   D3, D0 */
+    FA18_OP(0xC0D50C, 0xD244, 0xC0D50E); /* C0D50C: add.w   D4, D1 */
+    FA18_OP(0xC0D50E, 0xD445, 0xC0D510); /* C0D50E: add.w   D5, D2 */
+    FA18_OP(0xC0D510, 0x4CAB, 0xC0D516); /* C0D510: movem.w ($4e,A3), D6-D7/A4 */
+    FA18_OP(0xC0D516, 0xDC43, 0xC0D518); /* C0D516: add.w   D3, D6 */
+    FA18_OP(0xC0D518, 0xDE44, 0xC0D51A); /* C0D518: add.w   D4, D7 */
+    FA18_OP(0xC0D51A, 0xD8C5, 0xC0D51C); /* C0D51A: adda.w  D5, A4 */
+    FA18_OP(0xC0D51C, 0x48AB, 0xC0D522); /* C0D51C: movem.w D0-D2/D6-D7/A4, ($cc,A3) */
+    FA18_RETURN(0xC0D522, 0x4E75); /* C0D522: rts */
+}
+
 int fa18_fn_C0D730(int entry) {
     switch (entry) {
     case 0: goto L_C0D730;
@@ -2312,13 +4169,13 @@ L_C0D730:
     FA18_BCC(0xC0D73A, 0x6608, 0xC0D73C, 0xC0D744, L_C0D744); /* C0D73A: bne     $c0d744 */
 L_C0D73C:
     FA18_CHECK(0xC0D73C);
-    FA18_CALL(0xC0D73C, 0x4EB9, 0xC0D742, 331, 0); /* C0D73C: jsr     $c2fd8c.l */
+    FA18_CALL(0xC0D73C, 0x4EB9, 0xC0D742, 422, 0); /* C0D73C: jsr     $c2fd8c.l */
 L_C0D742:
     FA18_CHECK(0xC0D742);
     FA18_RETURN(0xC0D742, 0x4E75); /* C0D742: rts */
 L_C0D744:
     FA18_CHECK(0xC0D744);
-    FA18_CALL(0xC0D744, 0x6100, 0xC0D748, 44, 0); /* C0D744: bsr     $c0da38 */
+    FA18_CALL(0xC0D744, 0x6100, 0xC0D748, 87, 0); /* C0D744: bsr     $c0da38 */
 L_C0D748:
     FA18_CHECK(0xC0D748);
     FA18_RETURN(0xC0D748, 0x4E75); /* C0D748: rts */
@@ -2514,7 +4371,7 @@ L_C0D7CC:
     FA18_OP(0xC0D7D4, 0x429C, 0xC0D7D6); /* C0D7D4: clr.l   (A4)+ */
     FA18_OP(0xC0D7D6, 0x429C, 0xC0D7D8); /* C0D7D6: clr.l   (A4)+ */
     FA18_OP(0xC0D7D8, 0x4294, 0xC0D7DA); /* C0D7D8: clr.l   (A4) */
-    FA18_CALL(0xC0D7DA, 0x4EB9, 0xC0D7E0, 292, 0); /* C0D7DA: jsr     $c2e758.l */
+    FA18_CALL(0xC0D7DA, 0x4EB9, 0xC0D7E0, 374, 0); /* C0D7DA: jsr     $c2e758.l */
 L_C0D7E0:
     FA18_CHECK(0xC0D7E0);
     FA18_OP(0xC0D7E0, 0x43F9, 0xC0D7E6); /* C0D7E0: lea     $c4e854.l, A1 */
@@ -2604,32 +4461,32 @@ L_C0D884:
     FA18_BCC(0xC0D88E, 0x661E, 0xC0D890, 0xC0D8AE, L_C0D8AE); /* C0D88E: bne     $c0d8ae */
 L_C0D890:
     FA18_CHECK(0xC0D890);
-    FA18_CALL(0xC0D890, 0x6100, 0xC0D894, 45, 0); /* C0D890: bsr     $c0daa0 */
+    FA18_CALL(0xC0D890, 0x6100, 0xC0D894, 88, 0); /* C0D890: bsr     $c0daa0 */
 L_C0D894:
     FA18_CHECK(0xC0D894);
-    FA18_CALL(0xC0D894, 0x6100, 0xC0D898, 48, 0); /* C0D894: bsr     $c0dadc */
+    FA18_CALL(0xC0D894, 0x6100, 0xC0D898, 91, 0); /* C0D894: bsr     $c0dadc */
 L_C0D898:
     FA18_CHECK(0xC0D898);
-    FA18_CALL(0xC0D898, 0x6100, 0xC0D89C, 49, 0); /* C0D898: bsr     $c0dae6 */
+    FA18_CALL(0xC0D898, 0x6100, 0xC0D89C, 92, 0); /* C0D898: bsr     $c0dae6 */
 L_C0D89C:
     FA18_CHECK(0xC0D89C);
     FA18_OP(0xC0D89C, 0x43F9, 0xC0D8A2); /* C0D89C: lea     $c4b39a.l, A1 */
-    FA18_CALL(0xC0D8A2, 0x6100, 0xC0D8A6, 47, 0); /* C0D8A2: bsr     $c0dad4 */
+    FA18_CALL(0xC0D8A2, 0x6100, 0xC0D8A6, 90, 0); /* C0D8A2: bsr     $c0dad4 */
 L_C0D8A6:
     FA18_CHECK(0xC0D8A6);
-    FA18_CALL(0xC0D8A6, 0x6100, 0xC0D8AA, 46, 0); /* C0D8A6: bsr     $c0dad0 */
+    FA18_CALL(0xC0D8A6, 0x6100, 0xC0D8AA, 89, 0); /* C0D8A6: bsr     $c0dad0 */
 L_C0D8AA:
     FA18_CHECK(0xC0D8AA);
     FA18_JUMP(0xC0D8AA, 0x6000, 0xC0DA70, L_C0DA70); /* C0D8AA: bra     $c0da70 */
 L_C0D8AE:
     FA18_CHECK(0xC0D8AE);
-    FA18_CALL(0xC0D8AE, 0x6100, 0xC0D8B2, 45, 0); /* C0D8AE: bsr     $c0daa0 */
+    FA18_CALL(0xC0D8AE, 0x6100, 0xC0D8B2, 88, 0); /* C0D8AE: bsr     $c0daa0 */
 L_C0D8B2:
     FA18_CHECK(0xC0D8B2);
-    FA18_CALL(0xC0D8B2, 0x6100, 0xC0D8B6, 48, 0); /* C0D8B2: bsr     $c0dadc */
+    FA18_CALL(0xC0D8B2, 0x6100, 0xC0D8B6, 91, 0); /* C0D8B2: bsr     $c0dadc */
 L_C0D8B6:
     FA18_CHECK(0xC0D8B6);
-    FA18_CALL(0xC0D8B6, 0x6100, 0xC0D8BA, 49, 0); /* C0D8B6: bsr     $c0dae6 */
+    FA18_CALL(0xC0D8B6, 0x6100, 0xC0D8BA, 92, 0); /* C0D8B6: bsr     $c0dae6 */
 L_C0D8BA:
     FA18_CHECK(0xC0D8BA);
     FA18_JUMP(0xC0D8BA, 0x6000, 0xC0DA70, L_C0DA70); /* C0D8BA: bra     $c0da70 */
@@ -2642,37 +4499,37 @@ L_C0D8BE:
     FA18_BCC(0xC0D8D2, 0x6624, 0xC0D8D4, 0xC0D8F8, L_C0D8F8); /* C0D8D2: bne     $c0d8f8 */
 L_C0D8D4:
     FA18_CHECK(0xC0D8D4);
-    FA18_CALL(0xC0D8D4, 0x6100, 0xC0D8D8, 45, 0); /* C0D8D4: bsr     $c0daa0 */
+    FA18_CALL(0xC0D8D4, 0x6100, 0xC0D8D8, 88, 0); /* C0D8D4: bsr     $c0daa0 */
 L_C0D8D8:
     FA18_CHECK(0xC0D8D8);
-    FA18_CALL(0xC0D8D8, 0x6100, 0xC0D8DC, 47, 0); /* C0D8D8: bsr     $c0dad4 */
+    FA18_CALL(0xC0D8D8, 0x6100, 0xC0D8DC, 90, 0); /* C0D8D8: bsr     $c0dad4 */
 L_C0D8DC:
     FA18_CHECK(0xC0D8DC);
-    FA18_CALL(0xC0D8DC, 0x6100, 0xC0D8E0, 48, 0); /* C0D8DC: bsr     $c0dadc */
+    FA18_CALL(0xC0D8DC, 0x6100, 0xC0D8E0, 91, 0); /* C0D8DC: bsr     $c0dadc */
 L_C0D8E0:
     FA18_CHECK(0xC0D8E0);
-    FA18_CALL(0xC0D8E0, 0x6100, 0xC0D8E4, 49, 0); /* C0D8E0: bsr     $c0dae6 */
+    FA18_CALL(0xC0D8E0, 0x6100, 0xC0D8E4, 92, 0); /* C0D8E0: bsr     $c0dae6 */
 L_C0D8E4:
     FA18_CHECK(0xC0D8E4);
     FA18_OP(0xC0D8E4, 0x43F9, 0xC0D8EA); /* C0D8E4: lea     $c4b390.l, A1 */
     FA18_OP(0xC0D8EA, 0x32FC, 0xC0D8EE); /* C0D8EA: move.w  #$3, (A1)+ */
     FA18_OP(0xC0D8EE, 0x5049, 0xC0D8F0); /* C0D8EE: addq.w  #8, A1 */
-    FA18_CALL(0xC0D8F0, 0x6100, 0xC0D8F4, 46, 0); /* C0D8F0: bsr     $c0dad0 */
+    FA18_CALL(0xC0D8F0, 0x6100, 0xC0D8F4, 89, 0); /* C0D8F0: bsr     $c0dad0 */
 L_C0D8F4:
     FA18_CHECK(0xC0D8F4);
     FA18_JUMP(0xC0D8F4, 0x6000, 0xC0DA70, L_C0DA70); /* C0D8F4: bra     $c0da70 */
 L_C0D8F8:
     FA18_CHECK(0xC0D8F8);
-    FA18_CALL(0xC0D8F8, 0x6100, 0xC0D8FC, 45, 0); /* C0D8F8: bsr     $c0daa0 */
+    FA18_CALL(0xC0D8F8, 0x6100, 0xC0D8FC, 88, 0); /* C0D8F8: bsr     $c0daa0 */
 L_C0D8FC:
     FA18_CHECK(0xC0D8FC);
-    FA18_CALL(0xC0D8FC, 0x6100, 0xC0D900, 47, 0); /* C0D8FC: bsr     $c0dad4 */
+    FA18_CALL(0xC0D8FC, 0x6100, 0xC0D900, 90, 0); /* C0D8FC: bsr     $c0dad4 */
 L_C0D900:
     FA18_CHECK(0xC0D900);
-    FA18_CALL(0xC0D900, 0x6100, 0xC0D904, 48, 0); /* C0D900: bsr     $c0dadc */
+    FA18_CALL(0xC0D900, 0x6100, 0xC0D904, 91, 0); /* C0D900: bsr     $c0dadc */
 L_C0D904:
     FA18_CHECK(0xC0D904);
-    FA18_CALL(0xC0D904, 0x6100, 0xC0D908, 49, 0); /* C0D904: bsr     $c0dae6 */
+    FA18_CALL(0xC0D904, 0x6100, 0xC0D908, 92, 0); /* C0D904: bsr     $c0dae6 */
 L_C0D908:
     FA18_CHECK(0xC0D908);
     FA18_JUMP(0xC0D908, 0x6000, 0xC0DA70, L_C0DA70); /* C0D908: bra     $c0da70 */
@@ -2685,37 +4542,37 @@ L_C0D90C:
     FA18_BCC(0xC0D920, 0x6614, 0xC0D922, 0xC0D936, L_C0D936); /* C0D920: bne     $c0d936 */
 L_C0D922:
     FA18_CHECK(0xC0D922);
-    FA18_CALL(0xC0D922, 0x6100, 0xC0D926, 45, 0); /* C0D922: bsr     $c0daa0 */
+    FA18_CALL(0xC0D922, 0x6100, 0xC0D926, 88, 0); /* C0D922: bsr     $c0daa0 */
 L_C0D926:
     FA18_CHECK(0xC0D926);
-    FA18_CALL(0xC0D926, 0x6100, 0xC0D92A, 48, 0); /* C0D926: bsr     $c0dadc */
+    FA18_CALL(0xC0D926, 0x6100, 0xC0D92A, 91, 0); /* C0D926: bsr     $c0dadc */
 L_C0D92A:
     FA18_CHECK(0xC0D92A);
-    FA18_CALL(0xC0D92A, 0x6100, 0xC0D92E, 47, 0); /* C0D92A: bsr     $c0dad4 */
+    FA18_CALL(0xC0D92A, 0x6100, 0xC0D92E, 90, 0); /* C0D92A: bsr     $c0dad4 */
 L_C0D92E:
     FA18_CHECK(0xC0D92E);
-    FA18_CALL(0xC0D92E, 0x6100, 0xC0D932, 46, 0); /* C0D92E: bsr     $c0dad0 */
+    FA18_CALL(0xC0D92E, 0x6100, 0xC0D932, 89, 0); /* C0D92E: bsr     $c0dad0 */
 L_C0D932:
     FA18_CHECK(0xC0D932);
     FA18_JUMP(0xC0D932, 0x6000, 0xC0DA70, L_C0DA70); /* C0D932: bra     $c0da70 */
 L_C0D936:
     FA18_CHECK(0xC0D936);
-    FA18_CALL(0xC0D936, 0x6100, 0xC0D93A, 45, 0); /* C0D936: bsr     $c0daa0 */
+    FA18_CALL(0xC0D936, 0x6100, 0xC0D93A, 88, 0); /* C0D936: bsr     $c0daa0 */
 L_C0D93A:
     FA18_CHECK(0xC0D93A);
-    FA18_CALL(0xC0D93A, 0x6100, 0xC0D93E, 48, 0); /* C0D93A: bsr     $c0dadc */
+    FA18_CALL(0xC0D93A, 0x6100, 0xC0D93E, 91, 0); /* C0D93A: bsr     $c0dadc */
 L_C0D93E:
     FA18_CHECK(0xC0D93E);
-    FA18_CALL(0xC0D93E, 0x6100, 0xC0D942, 47, 0); /* C0D93E: bsr     $c0dad4 */
+    FA18_CALL(0xC0D93E, 0x6100, 0xC0D942, 90, 0); /* C0D93E: bsr     $c0dad4 */
 L_C0D942:
     FA18_CHECK(0xC0D942);
-    FA18_CALL(0xC0D942, 0x6100, 0xC0D946, 46, 0); /* C0D942: bsr     $c0dad0 */
+    FA18_CALL(0xC0D942, 0x6100, 0xC0D946, 89, 0); /* C0D942: bsr     $c0dad0 */
 L_C0D946:
     FA18_CHECK(0xC0D946);
     FA18_OP(0xC0D946, 0x43F9, 0xC0D94C); /* C0D946: lea     $c4b390.l, A1 */
     FA18_OP(0xC0D94C, 0x32FC, 0xC0D950); /* C0D94C: move.w  #$3, (A1)+ */
     FA18_OP(0xC0D950, 0x5049, 0xC0D952); /* C0D950: addq.w  #8, A1 */
-    FA18_CALL(0xC0D952, 0x6100, 0xC0D956, 49, 0); /* C0D952: bsr     $c0dae6 */
+    FA18_CALL(0xC0D952, 0x6100, 0xC0D956, 92, 0); /* C0D952: bsr     $c0dae6 */
 L_C0D956:
     FA18_CHECK(0xC0D956);
     FA18_JUMP(0xC0D956, 0x6000, 0xC0DA70, L_C0DA70); /* C0D956: bra     $c0da70 */
@@ -2728,37 +4585,37 @@ L_C0D95A:
     FA18_BCC(0xC0D96E, 0x6624, 0xC0D970, 0xC0D994, L_C0D994); /* C0D96E: bne     $c0d994 */
 L_C0D970:
     FA18_CHECK(0xC0D970);
-    FA18_CALL(0xC0D970, 0x6100, 0xC0D974, 45, 0); /* C0D970: bsr     $c0daa0 */
+    FA18_CALL(0xC0D970, 0x6100, 0xC0D974, 88, 0); /* C0D970: bsr     $c0daa0 */
 L_C0D974:
     FA18_CHECK(0xC0D974);
-    FA18_CALL(0xC0D974, 0x6100, 0xC0D978, 48, 0); /* C0D974: bsr     $c0dadc */
+    FA18_CALL(0xC0D974, 0x6100, 0xC0D978, 91, 0); /* C0D974: bsr     $c0dadc */
 L_C0D978:
     FA18_CHECK(0xC0D978);
-    FA18_CALL(0xC0D978, 0x6100, 0xC0D97C, 49, 0); /* C0D978: bsr     $c0dae6 */
+    FA18_CALL(0xC0D978, 0x6100, 0xC0D97C, 92, 0); /* C0D978: bsr     $c0dae6 */
 L_C0D97C:
     FA18_CHECK(0xC0D97C);
-    FA18_CALL(0xC0D97C, 0x6100, 0xC0D980, 46, 0); /* C0D97C: bsr     $c0dad0 */
+    FA18_CALL(0xC0D97C, 0x6100, 0xC0D980, 89, 0); /* C0D97C: bsr     $c0dad0 */
 L_C0D980:
     FA18_CHECK(0xC0D980);
     FA18_OP(0xC0D980, 0x43F9, 0xC0D986); /* C0D980: lea     $c4b390.l, A1 */
     FA18_OP(0xC0D986, 0x32FC, 0xC0D98A); /* C0D986: move.w  #$3, (A1)+ */
     FA18_OP(0xC0D98A, 0x5049, 0xC0D98C); /* C0D98A: addq.w  #8, A1 */
-    FA18_CALL(0xC0D98C, 0x6100, 0xC0D990, 47, 0); /* C0D98C: bsr     $c0dad4 */
+    FA18_CALL(0xC0D98C, 0x6100, 0xC0D990, 90, 0); /* C0D98C: bsr     $c0dad4 */
 L_C0D990:
     FA18_CHECK(0xC0D990);
     FA18_JUMP(0xC0D990, 0x6000, 0xC0DA70, L_C0DA70); /* C0D990: bra     $c0da70 */
 L_C0D994:
     FA18_CHECK(0xC0D994);
-    FA18_CALL(0xC0D994, 0x6100, 0xC0D998, 45, 0); /* C0D994: bsr     $c0daa0 */
+    FA18_CALL(0xC0D994, 0x6100, 0xC0D998, 88, 0); /* C0D994: bsr     $c0daa0 */
 L_C0D998:
     FA18_CHECK(0xC0D998);
-    FA18_CALL(0xC0D998, 0x6100, 0xC0D99C, 48, 0); /* C0D998: bsr     $c0dadc */
+    FA18_CALL(0xC0D998, 0x6100, 0xC0D99C, 91, 0); /* C0D998: bsr     $c0dadc */
 L_C0D99C:
     FA18_CHECK(0xC0D99C);
-    FA18_CALL(0xC0D99C, 0x6100, 0xC0D9A0, 49, 0); /* C0D99C: bsr     $c0dae6 */
+    FA18_CALL(0xC0D99C, 0x6100, 0xC0D9A0, 92, 0); /* C0D99C: bsr     $c0dae6 */
 L_C0D9A0:
     FA18_CHECK(0xC0D9A0);
-    FA18_CALL(0xC0D9A0, 0x6100, 0xC0D9A4, 46, 0); /* C0D9A0: bsr     $c0dad0 */
+    FA18_CALL(0xC0D9A0, 0x6100, 0xC0D9A4, 89, 0); /* C0D9A0: bsr     $c0dad0 */
 L_C0D9A4:
     FA18_CHECK(0xC0D9A4);
     FA18_JUMP(0xC0D9A4, 0x6000, 0xC0DA70, L_C0DA70); /* C0D9A4: bra     $c0da70 */
@@ -2770,32 +4627,32 @@ L_C0D9A8:
     FA18_BCC(0xC0D9BA, 0x6C1E, 0xC0D9BC, 0xC0D9DA, L_C0D9DA); /* C0D9BA: bge     $c0d9da */
 L_C0D9BC:
     FA18_CHECK(0xC0D9BC);
-    FA18_CALL(0xC0D9BC, 0x6100, 0xC0D9C0, 45, 0); /* C0D9BC: bsr     $c0daa0 */
+    FA18_CALL(0xC0D9BC, 0x6100, 0xC0D9C0, 88, 0); /* C0D9BC: bsr     $c0daa0 */
 L_C0D9C0:
     FA18_CHECK(0xC0D9C0);
-    FA18_CALL(0xC0D9C0, 0x6100, 0xC0D9C4, 49, 0); /* C0D9C0: bsr     $c0dae6 */
+    FA18_CALL(0xC0D9C0, 0x6100, 0xC0D9C4, 92, 0); /* C0D9C0: bsr     $c0dae6 */
 L_C0D9C4:
     FA18_CHECK(0xC0D9C4);
-    FA18_CALL(0xC0D9C4, 0x6100, 0xC0D9C8, 46, 0); /* C0D9C4: bsr     $c0dad0 */
+    FA18_CALL(0xC0D9C4, 0x6100, 0xC0D9C8, 89, 0); /* C0D9C4: bsr     $c0dad0 */
 L_C0D9C8:
     FA18_CHECK(0xC0D9C8);
     FA18_OP(0xC0D9C8, 0x43F9, 0xC0D9CE); /* C0D9C8: lea     $c4b39a.l, A1 */
-    FA18_CALL(0xC0D9CE, 0x6100, 0xC0D9D2, 48, 0); /* C0D9CE: bsr     $c0dadc */
+    FA18_CALL(0xC0D9CE, 0x6100, 0xC0D9D2, 91, 0); /* C0D9CE: bsr     $c0dadc */
 L_C0D9D2:
     FA18_CHECK(0xC0D9D2);
-    FA18_CALL(0xC0D9D2, 0x6100, 0xC0D9D6, 47, 0); /* C0D9D2: bsr     $c0dad4 */
+    FA18_CALL(0xC0D9D2, 0x6100, 0xC0D9D6, 90, 0); /* C0D9D2: bsr     $c0dad4 */
 L_C0D9D6:
     FA18_CHECK(0xC0D9D6);
     FA18_JUMP(0xC0D9D6, 0x6000, 0xC0DA70, L_C0DA70); /* C0D9D6: bra     $c0da70 */
 L_C0D9DA:
     FA18_CHECK(0xC0D9DA);
-    FA18_CALL(0xC0D9DA, 0x6100, 0xC0D9DE, 45, 0); /* C0D9DA: bsr     $c0daa0 */
+    FA18_CALL(0xC0D9DA, 0x6100, 0xC0D9DE, 88, 0); /* C0D9DA: bsr     $c0daa0 */
 L_C0D9DE:
     FA18_CHECK(0xC0D9DE);
-    FA18_CALL(0xC0D9DE, 0x6100, 0xC0D9E2, 49, 0); /* C0D9DE: bsr     $c0dae6 */
+    FA18_CALL(0xC0D9DE, 0x6100, 0xC0D9E2, 92, 0); /* C0D9DE: bsr     $c0dae6 */
 L_C0D9E2:
     FA18_CHECK(0xC0D9E2);
-    FA18_CALL(0xC0D9E2, 0x6100, 0xC0D9E6, 46, 0); /* C0D9E2: bsr     $c0dad0 */
+    FA18_CALL(0xC0D9E2, 0x6100, 0xC0D9E6, 89, 0); /* C0D9E2: bsr     $c0dad0 */
 L_C0D9E6:
     FA18_CHECK(0xC0D9E6);
     FA18_JUMP(0xC0D9E6, 0x6000, 0xC0DA70, L_C0DA70); /* C0D9E6: bra     $c0da70 */
@@ -2808,37 +4665,37 @@ L_C0D9EA:
     FA18_BCC(0xC0D9FE, 0x6614, 0xC0DA00, 0xC0DA14, L_C0DA14); /* C0D9FE: bne     $c0da14 */
 L_C0DA00:
     FA18_CHECK(0xC0DA00);
-    FA18_CALL(0xC0DA00, 0x6100, 0xC0DA04, 45, 0); /* C0DA00: bsr     $c0daa0 */
+    FA18_CALL(0xC0DA00, 0x6100, 0xC0DA04, 88, 0); /* C0DA00: bsr     $c0daa0 */
 L_C0DA04:
     FA18_CHECK(0xC0DA04);
-    FA18_CALL(0xC0DA04, 0x6100, 0xC0DA08, 47, 0); /* C0DA04: bsr     $c0dad4 */
+    FA18_CALL(0xC0DA04, 0x6100, 0xC0DA08, 90, 0); /* C0DA04: bsr     $c0dad4 */
 L_C0DA08:
     FA18_CHECK(0xC0DA08);
-    FA18_CALL(0xC0DA08, 0x6100, 0xC0DA0C, 46, 0); /* C0DA08: bsr     $c0dad0 */
+    FA18_CALL(0xC0DA08, 0x6100, 0xC0DA0C, 89, 0); /* C0DA08: bsr     $c0dad0 */
 L_C0DA0C:
     FA18_CHECK(0xC0DA0C);
-    FA18_CALL(0xC0DA0C, 0x6100, 0xC0DA10, 49, 0); /* C0DA0C: bsr     $c0dae6 */
+    FA18_CALL(0xC0DA0C, 0x6100, 0xC0DA10, 92, 0); /* C0DA0C: bsr     $c0dae6 */
 L_C0DA10:
     FA18_CHECK(0xC0DA10);
     FA18_JUMP(0xC0DA10, 0x6000, 0xC0DA70, L_C0DA70); /* C0DA10: bra     $c0da70 */
 L_C0DA14:
     FA18_CHECK(0xC0DA14);
-    FA18_CALL(0xC0DA14, 0x6100, 0xC0DA18, 45, 0); /* C0DA14: bsr     $c0daa0 */
+    FA18_CALL(0xC0DA14, 0x6100, 0xC0DA18, 88, 0); /* C0DA14: bsr     $c0daa0 */
 L_C0DA18:
     FA18_CHECK(0xC0DA18);
-    FA18_CALL(0xC0DA18, 0x6100, 0xC0DA1C, 47, 0); /* C0DA18: bsr     $c0dad4 */
+    FA18_CALL(0xC0DA18, 0x6100, 0xC0DA1C, 90, 0); /* C0DA18: bsr     $c0dad4 */
 L_C0DA1C:
     FA18_CHECK(0xC0DA1C);
-    FA18_CALL(0xC0DA1C, 0x6100, 0xC0DA20, 46, 0); /* C0DA1C: bsr     $c0dad0 */
+    FA18_CALL(0xC0DA1C, 0x6100, 0xC0DA20, 89, 0); /* C0DA1C: bsr     $c0dad0 */
 L_C0DA20:
     FA18_CHECK(0xC0DA20);
-    FA18_CALL(0xC0DA20, 0x6100, 0xC0DA24, 49, 0); /* C0DA20: bsr     $c0dae6 */
+    FA18_CALL(0xC0DA20, 0x6100, 0xC0DA24, 92, 0); /* C0DA20: bsr     $c0dae6 */
 L_C0DA24:
     FA18_CHECK(0xC0DA24);
     FA18_OP(0xC0DA24, 0x43F9, 0xC0DA2A); /* C0DA24: lea     $c4b390.l, A1 */
     FA18_OP(0xC0DA2A, 0x32FC, 0xC0DA2E); /* C0DA2A: move.w  #$3, (A1)+ */
     FA18_OP(0xC0DA2E, 0x5049, 0xC0DA30); /* C0DA2E: addq.w  #8, A1 */
-    FA18_CALL(0xC0DA30, 0x6100, 0xC0DA34, 48, 0); /* C0DA30: bsr     $c0dadc */
+    FA18_CALL(0xC0DA30, 0x6100, 0xC0DA34, 91, 0); /* C0DA30: bsr     $c0dadc */
 L_C0DA34:
     FA18_CHECK(0xC0DA34);
     FA18_JUMP(0xC0DA34, 0x6000, 0xC0DA70, L_C0DA70); /* C0DA34: bra     $c0da70 */
@@ -2846,16 +4703,16 @@ L_C0DA38:
     FA18_CHECK(0xC0DA38);
     FA18_OP(0xC0DA38, 0x43F9, 0xC0DA3E); /* C0DA38: lea     $c4b390.l, A1 */
     FA18_OP(0xC0DA3E, 0x32FC, 0xC0DA42); /* C0DA3E: move.w  #$4, (A1)+ */
-    FA18_CALL(0xC0DA42, 0x6100, 0xC0DA46, 46, 0); /* C0DA42: bsr     $c0dad0 */
+    FA18_CALL(0xC0DA42, 0x6100, 0xC0DA46, 89, 0); /* C0DA42: bsr     $c0dad0 */
 L_C0DA46:
     FA18_CHECK(0xC0DA46);
-    FA18_CALL(0xC0DA46, 0x6100, 0xC0DA4A, 47, 0); /* C0DA46: bsr     $c0dad4 */
+    FA18_CALL(0xC0DA46, 0x6100, 0xC0DA4A, 90, 0); /* C0DA46: bsr     $c0dad4 */
 L_C0DA4A:
     FA18_CHECK(0xC0DA4A);
-    FA18_CALL(0xC0DA4A, 0x6100, 0xC0DA4E, 48, 0); /* C0DA4A: bsr     $c0dadc */
+    FA18_CALL(0xC0DA4A, 0x6100, 0xC0DA4E, 91, 0); /* C0DA4A: bsr     $c0dadc */
 L_C0DA4E:
     FA18_CHECK(0xC0DA4E);
-    FA18_CALL(0xC0DA4E, 0x6100, 0xC0DA52, 49, 0); /* C0DA4E: bsr     $c0dae6 */
+    FA18_CALL(0xC0DA4E, 0x6100, 0xC0DA52, 92, 0); /* C0DA4E: bsr     $c0dae6 */
 L_C0DA52:
     FA18_CHECK(0xC0DA52);
     FA18_OP(0xC0DA52, 0x4A39, 0xC0DA58); /* C0DA52: tst.b   $c45785.l */
@@ -3077,7 +4934,7 @@ L_C0D7CC:
     FA18_OP(0xC0D7D4, 0x429C, 0xC0D7D6); /* C0D7D4: clr.l   (A4)+ */
     FA18_OP(0xC0D7D6, 0x429C, 0xC0D7D8); /* C0D7D6: clr.l   (A4)+ */
     FA18_OP(0xC0D7D8, 0x4294, 0xC0D7DA); /* C0D7D8: clr.l   (A4) */
-    FA18_CALL(0xC0D7DA, 0x4EB9, 0xC0D7E0, 292, 0); /* C0D7DA: jsr     $c2e758.l */
+    FA18_CALL(0xC0D7DA, 0x4EB9, 0xC0D7E0, 374, 0); /* C0D7DA: jsr     $c2e758.l */
 L_C0D7E0:
     FA18_CHECK(0xC0D7E0);
     FA18_OP(0xC0D7E0, 0x43F9, 0xC0D7E6); /* C0D7E0: lea     $c4e854.l, A1 */
@@ -3167,32 +5024,32 @@ L_C0D884:
     FA18_BCC(0xC0D88E, 0x661E, 0xC0D890, 0xC0D8AE, L_C0D8AE); /* C0D88E: bne     $c0d8ae */
 L_C0D890:
     FA18_CHECK(0xC0D890);
-    FA18_CALL(0xC0D890, 0x6100, 0xC0D894, 45, 0); /* C0D890: bsr     $c0daa0 */
+    FA18_CALL(0xC0D890, 0x6100, 0xC0D894, 88, 0); /* C0D890: bsr     $c0daa0 */
 L_C0D894:
     FA18_CHECK(0xC0D894);
-    FA18_CALL(0xC0D894, 0x6100, 0xC0D898, 48, 0); /* C0D894: bsr     $c0dadc */
+    FA18_CALL(0xC0D894, 0x6100, 0xC0D898, 91, 0); /* C0D894: bsr     $c0dadc */
 L_C0D898:
     FA18_CHECK(0xC0D898);
-    FA18_CALL(0xC0D898, 0x6100, 0xC0D89C, 49, 0); /* C0D898: bsr     $c0dae6 */
+    FA18_CALL(0xC0D898, 0x6100, 0xC0D89C, 92, 0); /* C0D898: bsr     $c0dae6 */
 L_C0D89C:
     FA18_CHECK(0xC0D89C);
     FA18_OP(0xC0D89C, 0x43F9, 0xC0D8A2); /* C0D89C: lea     $c4b39a.l, A1 */
-    FA18_CALL(0xC0D8A2, 0x6100, 0xC0D8A6, 47, 0); /* C0D8A2: bsr     $c0dad4 */
+    FA18_CALL(0xC0D8A2, 0x6100, 0xC0D8A6, 90, 0); /* C0D8A2: bsr     $c0dad4 */
 L_C0D8A6:
     FA18_CHECK(0xC0D8A6);
-    FA18_CALL(0xC0D8A6, 0x6100, 0xC0D8AA, 46, 0); /* C0D8A6: bsr     $c0dad0 */
+    FA18_CALL(0xC0D8A6, 0x6100, 0xC0D8AA, 89, 0); /* C0D8A6: bsr     $c0dad0 */
 L_C0D8AA:
     FA18_CHECK(0xC0D8AA);
     FA18_JUMP(0xC0D8AA, 0x6000, 0xC0DA70, L_C0DA70); /* C0D8AA: bra     $c0da70 */
 L_C0D8AE:
     FA18_CHECK(0xC0D8AE);
-    FA18_CALL(0xC0D8AE, 0x6100, 0xC0D8B2, 45, 0); /* C0D8AE: bsr     $c0daa0 */
+    FA18_CALL(0xC0D8AE, 0x6100, 0xC0D8B2, 88, 0); /* C0D8AE: bsr     $c0daa0 */
 L_C0D8B2:
     FA18_CHECK(0xC0D8B2);
-    FA18_CALL(0xC0D8B2, 0x6100, 0xC0D8B6, 48, 0); /* C0D8B2: bsr     $c0dadc */
+    FA18_CALL(0xC0D8B2, 0x6100, 0xC0D8B6, 91, 0); /* C0D8B2: bsr     $c0dadc */
 L_C0D8B6:
     FA18_CHECK(0xC0D8B6);
-    FA18_CALL(0xC0D8B6, 0x6100, 0xC0D8BA, 49, 0); /* C0D8B6: bsr     $c0dae6 */
+    FA18_CALL(0xC0D8B6, 0x6100, 0xC0D8BA, 92, 0); /* C0D8B6: bsr     $c0dae6 */
 L_C0D8BA:
     FA18_CHECK(0xC0D8BA);
     FA18_JUMP(0xC0D8BA, 0x6000, 0xC0DA70, L_C0DA70); /* C0D8BA: bra     $c0da70 */
@@ -3205,37 +5062,37 @@ L_C0D8BE:
     FA18_BCC(0xC0D8D2, 0x6624, 0xC0D8D4, 0xC0D8F8, L_C0D8F8); /* C0D8D2: bne     $c0d8f8 */
 L_C0D8D4:
     FA18_CHECK(0xC0D8D4);
-    FA18_CALL(0xC0D8D4, 0x6100, 0xC0D8D8, 45, 0); /* C0D8D4: bsr     $c0daa0 */
+    FA18_CALL(0xC0D8D4, 0x6100, 0xC0D8D8, 88, 0); /* C0D8D4: bsr     $c0daa0 */
 L_C0D8D8:
     FA18_CHECK(0xC0D8D8);
-    FA18_CALL(0xC0D8D8, 0x6100, 0xC0D8DC, 47, 0); /* C0D8D8: bsr     $c0dad4 */
+    FA18_CALL(0xC0D8D8, 0x6100, 0xC0D8DC, 90, 0); /* C0D8D8: bsr     $c0dad4 */
 L_C0D8DC:
     FA18_CHECK(0xC0D8DC);
-    FA18_CALL(0xC0D8DC, 0x6100, 0xC0D8E0, 48, 0); /* C0D8DC: bsr     $c0dadc */
+    FA18_CALL(0xC0D8DC, 0x6100, 0xC0D8E0, 91, 0); /* C0D8DC: bsr     $c0dadc */
 L_C0D8E0:
     FA18_CHECK(0xC0D8E0);
-    FA18_CALL(0xC0D8E0, 0x6100, 0xC0D8E4, 49, 0); /* C0D8E0: bsr     $c0dae6 */
+    FA18_CALL(0xC0D8E0, 0x6100, 0xC0D8E4, 92, 0); /* C0D8E0: bsr     $c0dae6 */
 L_C0D8E4:
     FA18_CHECK(0xC0D8E4);
     FA18_OP(0xC0D8E4, 0x43F9, 0xC0D8EA); /* C0D8E4: lea     $c4b390.l, A1 */
     FA18_OP(0xC0D8EA, 0x32FC, 0xC0D8EE); /* C0D8EA: move.w  #$3, (A1)+ */
     FA18_OP(0xC0D8EE, 0x5049, 0xC0D8F0); /* C0D8EE: addq.w  #8, A1 */
-    FA18_CALL(0xC0D8F0, 0x6100, 0xC0D8F4, 46, 0); /* C0D8F0: bsr     $c0dad0 */
+    FA18_CALL(0xC0D8F0, 0x6100, 0xC0D8F4, 89, 0); /* C0D8F0: bsr     $c0dad0 */
 L_C0D8F4:
     FA18_CHECK(0xC0D8F4);
     FA18_JUMP(0xC0D8F4, 0x6000, 0xC0DA70, L_C0DA70); /* C0D8F4: bra     $c0da70 */
 L_C0D8F8:
     FA18_CHECK(0xC0D8F8);
-    FA18_CALL(0xC0D8F8, 0x6100, 0xC0D8FC, 45, 0); /* C0D8F8: bsr     $c0daa0 */
+    FA18_CALL(0xC0D8F8, 0x6100, 0xC0D8FC, 88, 0); /* C0D8F8: bsr     $c0daa0 */
 L_C0D8FC:
     FA18_CHECK(0xC0D8FC);
-    FA18_CALL(0xC0D8FC, 0x6100, 0xC0D900, 47, 0); /* C0D8FC: bsr     $c0dad4 */
+    FA18_CALL(0xC0D8FC, 0x6100, 0xC0D900, 90, 0); /* C0D8FC: bsr     $c0dad4 */
 L_C0D900:
     FA18_CHECK(0xC0D900);
-    FA18_CALL(0xC0D900, 0x6100, 0xC0D904, 48, 0); /* C0D900: bsr     $c0dadc */
+    FA18_CALL(0xC0D900, 0x6100, 0xC0D904, 91, 0); /* C0D900: bsr     $c0dadc */
 L_C0D904:
     FA18_CHECK(0xC0D904);
-    FA18_CALL(0xC0D904, 0x6100, 0xC0D908, 49, 0); /* C0D904: bsr     $c0dae6 */
+    FA18_CALL(0xC0D904, 0x6100, 0xC0D908, 92, 0); /* C0D904: bsr     $c0dae6 */
 L_C0D908:
     FA18_CHECK(0xC0D908);
     FA18_JUMP(0xC0D908, 0x6000, 0xC0DA70, L_C0DA70); /* C0D908: bra     $c0da70 */
@@ -3248,37 +5105,37 @@ L_C0D90C:
     FA18_BCC(0xC0D920, 0x6614, 0xC0D922, 0xC0D936, L_C0D936); /* C0D920: bne     $c0d936 */
 L_C0D922:
     FA18_CHECK(0xC0D922);
-    FA18_CALL(0xC0D922, 0x6100, 0xC0D926, 45, 0); /* C0D922: bsr     $c0daa0 */
+    FA18_CALL(0xC0D922, 0x6100, 0xC0D926, 88, 0); /* C0D922: bsr     $c0daa0 */
 L_C0D926:
     FA18_CHECK(0xC0D926);
-    FA18_CALL(0xC0D926, 0x6100, 0xC0D92A, 48, 0); /* C0D926: bsr     $c0dadc */
+    FA18_CALL(0xC0D926, 0x6100, 0xC0D92A, 91, 0); /* C0D926: bsr     $c0dadc */
 L_C0D92A:
     FA18_CHECK(0xC0D92A);
-    FA18_CALL(0xC0D92A, 0x6100, 0xC0D92E, 47, 0); /* C0D92A: bsr     $c0dad4 */
+    FA18_CALL(0xC0D92A, 0x6100, 0xC0D92E, 90, 0); /* C0D92A: bsr     $c0dad4 */
 L_C0D92E:
     FA18_CHECK(0xC0D92E);
-    FA18_CALL(0xC0D92E, 0x6100, 0xC0D932, 46, 0); /* C0D92E: bsr     $c0dad0 */
+    FA18_CALL(0xC0D92E, 0x6100, 0xC0D932, 89, 0); /* C0D92E: bsr     $c0dad0 */
 L_C0D932:
     FA18_CHECK(0xC0D932);
     FA18_JUMP(0xC0D932, 0x6000, 0xC0DA70, L_C0DA70); /* C0D932: bra     $c0da70 */
 L_C0D936:
     FA18_CHECK(0xC0D936);
-    FA18_CALL(0xC0D936, 0x6100, 0xC0D93A, 45, 0); /* C0D936: bsr     $c0daa0 */
+    FA18_CALL(0xC0D936, 0x6100, 0xC0D93A, 88, 0); /* C0D936: bsr     $c0daa0 */
 L_C0D93A:
     FA18_CHECK(0xC0D93A);
-    FA18_CALL(0xC0D93A, 0x6100, 0xC0D93E, 48, 0); /* C0D93A: bsr     $c0dadc */
+    FA18_CALL(0xC0D93A, 0x6100, 0xC0D93E, 91, 0); /* C0D93A: bsr     $c0dadc */
 L_C0D93E:
     FA18_CHECK(0xC0D93E);
-    FA18_CALL(0xC0D93E, 0x6100, 0xC0D942, 47, 0); /* C0D93E: bsr     $c0dad4 */
+    FA18_CALL(0xC0D93E, 0x6100, 0xC0D942, 90, 0); /* C0D93E: bsr     $c0dad4 */
 L_C0D942:
     FA18_CHECK(0xC0D942);
-    FA18_CALL(0xC0D942, 0x6100, 0xC0D946, 46, 0); /* C0D942: bsr     $c0dad0 */
+    FA18_CALL(0xC0D942, 0x6100, 0xC0D946, 89, 0); /* C0D942: bsr     $c0dad0 */
 L_C0D946:
     FA18_CHECK(0xC0D946);
     FA18_OP(0xC0D946, 0x43F9, 0xC0D94C); /* C0D946: lea     $c4b390.l, A1 */
     FA18_OP(0xC0D94C, 0x32FC, 0xC0D950); /* C0D94C: move.w  #$3, (A1)+ */
     FA18_OP(0xC0D950, 0x5049, 0xC0D952); /* C0D950: addq.w  #8, A1 */
-    FA18_CALL(0xC0D952, 0x6100, 0xC0D956, 49, 0); /* C0D952: bsr     $c0dae6 */
+    FA18_CALL(0xC0D952, 0x6100, 0xC0D956, 92, 0); /* C0D952: bsr     $c0dae6 */
 L_C0D956:
     FA18_CHECK(0xC0D956);
     FA18_JUMP(0xC0D956, 0x6000, 0xC0DA70, L_C0DA70); /* C0D956: bra     $c0da70 */
@@ -3291,37 +5148,37 @@ L_C0D95A:
     FA18_BCC(0xC0D96E, 0x6624, 0xC0D970, 0xC0D994, L_C0D994); /* C0D96E: bne     $c0d994 */
 L_C0D970:
     FA18_CHECK(0xC0D970);
-    FA18_CALL(0xC0D970, 0x6100, 0xC0D974, 45, 0); /* C0D970: bsr     $c0daa0 */
+    FA18_CALL(0xC0D970, 0x6100, 0xC0D974, 88, 0); /* C0D970: bsr     $c0daa0 */
 L_C0D974:
     FA18_CHECK(0xC0D974);
-    FA18_CALL(0xC0D974, 0x6100, 0xC0D978, 48, 0); /* C0D974: bsr     $c0dadc */
+    FA18_CALL(0xC0D974, 0x6100, 0xC0D978, 91, 0); /* C0D974: bsr     $c0dadc */
 L_C0D978:
     FA18_CHECK(0xC0D978);
-    FA18_CALL(0xC0D978, 0x6100, 0xC0D97C, 49, 0); /* C0D978: bsr     $c0dae6 */
+    FA18_CALL(0xC0D978, 0x6100, 0xC0D97C, 92, 0); /* C0D978: bsr     $c0dae6 */
 L_C0D97C:
     FA18_CHECK(0xC0D97C);
-    FA18_CALL(0xC0D97C, 0x6100, 0xC0D980, 46, 0); /* C0D97C: bsr     $c0dad0 */
+    FA18_CALL(0xC0D97C, 0x6100, 0xC0D980, 89, 0); /* C0D97C: bsr     $c0dad0 */
 L_C0D980:
     FA18_CHECK(0xC0D980);
     FA18_OP(0xC0D980, 0x43F9, 0xC0D986); /* C0D980: lea     $c4b390.l, A1 */
     FA18_OP(0xC0D986, 0x32FC, 0xC0D98A); /* C0D986: move.w  #$3, (A1)+ */
     FA18_OP(0xC0D98A, 0x5049, 0xC0D98C); /* C0D98A: addq.w  #8, A1 */
-    FA18_CALL(0xC0D98C, 0x6100, 0xC0D990, 47, 0); /* C0D98C: bsr     $c0dad4 */
+    FA18_CALL(0xC0D98C, 0x6100, 0xC0D990, 90, 0); /* C0D98C: bsr     $c0dad4 */
 L_C0D990:
     FA18_CHECK(0xC0D990);
     FA18_JUMP(0xC0D990, 0x6000, 0xC0DA70, L_C0DA70); /* C0D990: bra     $c0da70 */
 L_C0D994:
     FA18_CHECK(0xC0D994);
-    FA18_CALL(0xC0D994, 0x6100, 0xC0D998, 45, 0); /* C0D994: bsr     $c0daa0 */
+    FA18_CALL(0xC0D994, 0x6100, 0xC0D998, 88, 0); /* C0D994: bsr     $c0daa0 */
 L_C0D998:
     FA18_CHECK(0xC0D998);
-    FA18_CALL(0xC0D998, 0x6100, 0xC0D99C, 48, 0); /* C0D998: bsr     $c0dadc */
+    FA18_CALL(0xC0D998, 0x6100, 0xC0D99C, 91, 0); /* C0D998: bsr     $c0dadc */
 L_C0D99C:
     FA18_CHECK(0xC0D99C);
-    FA18_CALL(0xC0D99C, 0x6100, 0xC0D9A0, 49, 0); /* C0D99C: bsr     $c0dae6 */
+    FA18_CALL(0xC0D99C, 0x6100, 0xC0D9A0, 92, 0); /* C0D99C: bsr     $c0dae6 */
 L_C0D9A0:
     FA18_CHECK(0xC0D9A0);
-    FA18_CALL(0xC0D9A0, 0x6100, 0xC0D9A4, 46, 0); /* C0D9A0: bsr     $c0dad0 */
+    FA18_CALL(0xC0D9A0, 0x6100, 0xC0D9A4, 89, 0); /* C0D9A0: bsr     $c0dad0 */
 L_C0D9A4:
     FA18_CHECK(0xC0D9A4);
     FA18_JUMP(0xC0D9A4, 0x6000, 0xC0DA70, L_C0DA70); /* C0D9A4: bra     $c0da70 */
@@ -3333,32 +5190,32 @@ L_C0D9A8:
     FA18_BCC(0xC0D9BA, 0x6C1E, 0xC0D9BC, 0xC0D9DA, L_C0D9DA); /* C0D9BA: bge     $c0d9da */
 L_C0D9BC:
     FA18_CHECK(0xC0D9BC);
-    FA18_CALL(0xC0D9BC, 0x6100, 0xC0D9C0, 45, 0); /* C0D9BC: bsr     $c0daa0 */
+    FA18_CALL(0xC0D9BC, 0x6100, 0xC0D9C0, 88, 0); /* C0D9BC: bsr     $c0daa0 */
 L_C0D9C0:
     FA18_CHECK(0xC0D9C0);
-    FA18_CALL(0xC0D9C0, 0x6100, 0xC0D9C4, 49, 0); /* C0D9C0: bsr     $c0dae6 */
+    FA18_CALL(0xC0D9C0, 0x6100, 0xC0D9C4, 92, 0); /* C0D9C0: bsr     $c0dae6 */
 L_C0D9C4:
     FA18_CHECK(0xC0D9C4);
-    FA18_CALL(0xC0D9C4, 0x6100, 0xC0D9C8, 46, 0); /* C0D9C4: bsr     $c0dad0 */
+    FA18_CALL(0xC0D9C4, 0x6100, 0xC0D9C8, 89, 0); /* C0D9C4: bsr     $c0dad0 */
 L_C0D9C8:
     FA18_CHECK(0xC0D9C8);
     FA18_OP(0xC0D9C8, 0x43F9, 0xC0D9CE); /* C0D9C8: lea     $c4b39a.l, A1 */
-    FA18_CALL(0xC0D9CE, 0x6100, 0xC0D9D2, 48, 0); /* C0D9CE: bsr     $c0dadc */
+    FA18_CALL(0xC0D9CE, 0x6100, 0xC0D9D2, 91, 0); /* C0D9CE: bsr     $c0dadc */
 L_C0D9D2:
     FA18_CHECK(0xC0D9D2);
-    FA18_CALL(0xC0D9D2, 0x6100, 0xC0D9D6, 47, 0); /* C0D9D2: bsr     $c0dad4 */
+    FA18_CALL(0xC0D9D2, 0x6100, 0xC0D9D6, 90, 0); /* C0D9D2: bsr     $c0dad4 */
 L_C0D9D6:
     FA18_CHECK(0xC0D9D6);
     FA18_JUMP(0xC0D9D6, 0x6000, 0xC0DA70, L_C0DA70); /* C0D9D6: bra     $c0da70 */
 L_C0D9DA:
     FA18_CHECK(0xC0D9DA);
-    FA18_CALL(0xC0D9DA, 0x6100, 0xC0D9DE, 45, 0); /* C0D9DA: bsr     $c0daa0 */
+    FA18_CALL(0xC0D9DA, 0x6100, 0xC0D9DE, 88, 0); /* C0D9DA: bsr     $c0daa0 */
 L_C0D9DE:
     FA18_CHECK(0xC0D9DE);
-    FA18_CALL(0xC0D9DE, 0x6100, 0xC0D9E2, 49, 0); /* C0D9DE: bsr     $c0dae6 */
+    FA18_CALL(0xC0D9DE, 0x6100, 0xC0D9E2, 92, 0); /* C0D9DE: bsr     $c0dae6 */
 L_C0D9E2:
     FA18_CHECK(0xC0D9E2);
-    FA18_CALL(0xC0D9E2, 0x6100, 0xC0D9E6, 46, 0); /* C0D9E2: bsr     $c0dad0 */
+    FA18_CALL(0xC0D9E2, 0x6100, 0xC0D9E6, 89, 0); /* C0D9E2: bsr     $c0dad0 */
 L_C0D9E6:
     FA18_CHECK(0xC0D9E6);
     FA18_JUMP(0xC0D9E6, 0x6000, 0xC0DA70, L_C0DA70); /* C0D9E6: bra     $c0da70 */
@@ -3371,37 +5228,37 @@ L_C0D9EA:
     FA18_BCC(0xC0D9FE, 0x6614, 0xC0DA00, 0xC0DA14, L_C0DA14); /* C0D9FE: bne     $c0da14 */
 L_C0DA00:
     FA18_CHECK(0xC0DA00);
-    FA18_CALL(0xC0DA00, 0x6100, 0xC0DA04, 45, 0); /* C0DA00: bsr     $c0daa0 */
+    FA18_CALL(0xC0DA00, 0x6100, 0xC0DA04, 88, 0); /* C0DA00: bsr     $c0daa0 */
 L_C0DA04:
     FA18_CHECK(0xC0DA04);
-    FA18_CALL(0xC0DA04, 0x6100, 0xC0DA08, 47, 0); /* C0DA04: bsr     $c0dad4 */
+    FA18_CALL(0xC0DA04, 0x6100, 0xC0DA08, 90, 0); /* C0DA04: bsr     $c0dad4 */
 L_C0DA08:
     FA18_CHECK(0xC0DA08);
-    FA18_CALL(0xC0DA08, 0x6100, 0xC0DA0C, 46, 0); /* C0DA08: bsr     $c0dad0 */
+    FA18_CALL(0xC0DA08, 0x6100, 0xC0DA0C, 89, 0); /* C0DA08: bsr     $c0dad0 */
 L_C0DA0C:
     FA18_CHECK(0xC0DA0C);
-    FA18_CALL(0xC0DA0C, 0x6100, 0xC0DA10, 49, 0); /* C0DA0C: bsr     $c0dae6 */
+    FA18_CALL(0xC0DA0C, 0x6100, 0xC0DA10, 92, 0); /* C0DA0C: bsr     $c0dae6 */
 L_C0DA10:
     FA18_CHECK(0xC0DA10);
     FA18_JUMP(0xC0DA10, 0x6000, 0xC0DA70, L_C0DA70); /* C0DA10: bra     $c0da70 */
 L_C0DA14:
     FA18_CHECK(0xC0DA14);
-    FA18_CALL(0xC0DA14, 0x6100, 0xC0DA18, 45, 0); /* C0DA14: bsr     $c0daa0 */
+    FA18_CALL(0xC0DA14, 0x6100, 0xC0DA18, 88, 0); /* C0DA14: bsr     $c0daa0 */
 L_C0DA18:
     FA18_CHECK(0xC0DA18);
-    FA18_CALL(0xC0DA18, 0x6100, 0xC0DA1C, 47, 0); /* C0DA18: bsr     $c0dad4 */
+    FA18_CALL(0xC0DA18, 0x6100, 0xC0DA1C, 90, 0); /* C0DA18: bsr     $c0dad4 */
 L_C0DA1C:
     FA18_CHECK(0xC0DA1C);
-    FA18_CALL(0xC0DA1C, 0x6100, 0xC0DA20, 46, 0); /* C0DA1C: bsr     $c0dad0 */
+    FA18_CALL(0xC0DA1C, 0x6100, 0xC0DA20, 89, 0); /* C0DA1C: bsr     $c0dad0 */
 L_C0DA20:
     FA18_CHECK(0xC0DA20);
-    FA18_CALL(0xC0DA20, 0x6100, 0xC0DA24, 49, 0); /* C0DA20: bsr     $c0dae6 */
+    FA18_CALL(0xC0DA20, 0x6100, 0xC0DA24, 92, 0); /* C0DA20: bsr     $c0dae6 */
 L_C0DA24:
     FA18_CHECK(0xC0DA24);
     FA18_OP(0xC0DA24, 0x43F9, 0xC0DA2A); /* C0DA24: lea     $c4b390.l, A1 */
     FA18_OP(0xC0DA2A, 0x32FC, 0xC0DA2E); /* C0DA2A: move.w  #$3, (A1)+ */
     FA18_OP(0xC0DA2E, 0x5049, 0xC0DA30); /* C0DA2E: addq.w  #8, A1 */
-    FA18_CALL(0xC0DA30, 0x6100, 0xC0DA34, 48, 0); /* C0DA30: bsr     $c0dadc */
+    FA18_CALL(0xC0DA30, 0x6100, 0xC0DA34, 91, 0); /* C0DA30: bsr     $c0dadc */
 L_C0DA34:
     FA18_CHECK(0xC0DA34);
     FA18_JUMP(0xC0DA34, 0x6000, 0xC0DA70, L_C0DA70); /* C0DA34: bra     $c0da70 */
@@ -3409,16 +5266,16 @@ L_C0DA38:
     FA18_CHECK(0xC0DA38);
     FA18_OP(0xC0DA38, 0x43F9, 0xC0DA3E); /* C0DA38: lea     $c4b390.l, A1 */
     FA18_OP(0xC0DA3E, 0x32FC, 0xC0DA42); /* C0DA3E: move.w  #$4, (A1)+ */
-    FA18_CALL(0xC0DA42, 0x6100, 0xC0DA46, 46, 0); /* C0DA42: bsr     $c0dad0 */
+    FA18_CALL(0xC0DA42, 0x6100, 0xC0DA46, 89, 0); /* C0DA42: bsr     $c0dad0 */
 L_C0DA46:
     FA18_CHECK(0xC0DA46);
-    FA18_CALL(0xC0DA46, 0x6100, 0xC0DA4A, 47, 0); /* C0DA46: bsr     $c0dad4 */
+    FA18_CALL(0xC0DA46, 0x6100, 0xC0DA4A, 90, 0); /* C0DA46: bsr     $c0dad4 */
 L_C0DA4A:
     FA18_CHECK(0xC0DA4A);
-    FA18_CALL(0xC0DA4A, 0x6100, 0xC0DA4E, 48, 0); /* C0DA4A: bsr     $c0dadc */
+    FA18_CALL(0xC0DA4A, 0x6100, 0xC0DA4E, 91, 0); /* C0DA4A: bsr     $c0dadc */
 L_C0DA4E:
     FA18_CHECK(0xC0DA4E);
-    FA18_CALL(0xC0DA4E, 0x6100, 0xC0DA52, 49, 0); /* C0DA4E: bsr     $c0dae6 */
+    FA18_CALL(0xC0DA4E, 0x6100, 0xC0DA52, 92, 0); /* C0DA4E: bsr     $c0dae6 */
 L_C0DA52:
     FA18_CHECK(0xC0DA52);
     FA18_OP(0xC0DA52, 0x4A39, 0xC0DA58); /* C0DA52: tst.b   $c45785.l */
@@ -3473,16 +5330,16 @@ L_C0DA38:
     FA18_CHECK(0xC0DA38);
     FA18_OP(0xC0DA38, 0x43F9, 0xC0DA3E); /* C0DA38: lea     $c4b390.l, A1 */
     FA18_OP(0xC0DA3E, 0x32FC, 0xC0DA42); /* C0DA3E: move.w  #$4, (A1)+ */
-    FA18_CALL(0xC0DA42, 0x6100, 0xC0DA46, 46, 0); /* C0DA42: bsr     $c0dad0 */
+    FA18_CALL(0xC0DA42, 0x6100, 0xC0DA46, 89, 0); /* C0DA42: bsr     $c0dad0 */
 L_C0DA46:
     FA18_CHECK(0xC0DA46);
-    FA18_CALL(0xC0DA46, 0x6100, 0xC0DA4A, 47, 0); /* C0DA46: bsr     $c0dad4 */
+    FA18_CALL(0xC0DA46, 0x6100, 0xC0DA4A, 90, 0); /* C0DA46: bsr     $c0dad4 */
 L_C0DA4A:
     FA18_CHECK(0xC0DA4A);
-    FA18_CALL(0xC0DA4A, 0x6100, 0xC0DA4E, 48, 0); /* C0DA4A: bsr     $c0dadc */
+    FA18_CALL(0xC0DA4A, 0x6100, 0xC0DA4E, 91, 0); /* C0DA4A: bsr     $c0dadc */
 L_C0DA4E:
     FA18_CHECK(0xC0DA4E);
-    FA18_CALL(0xC0DA4E, 0x6100, 0xC0DA52, 49, 0); /* C0DA4E: bsr     $c0dae6 */
+    FA18_CALL(0xC0DA4E, 0x6100, 0xC0DA52, 92, 0); /* C0DA4E: bsr     $c0dae6 */
 L_C0DA52:
     FA18_CHECK(0xC0DA52);
     FA18_OP(0xC0DA52, 0x4A39, 0xC0DA58); /* C0DA52: tst.b   $c45785.l */
@@ -3628,7 +5485,7 @@ L_C0DAEE:
     FA18_OP(0xC0DB2E, 0xE082, 0xC0DB30); /* C0DB2E: asr.l   #8, D2 */
     FA18_OP(0xC0DB30, 0x7C08, 0xC0DB32); /* C0DB30: moveq   #$8, D6 */
     FA18_OP(0xC0DB32, 0x33FC, 0xC0DB3A); /* C0DB32: move.w  #$9, $c45954.l */
-    FA18_CALL(0xC0DB3A, 0x4EB9, 0xC0DB40, 298, 3); /* C0DB3A: jsr     $c2ec9c.l */
+    FA18_CALL(0xC0DB3A, 0x4EB9, 0xC0DB40, 380, 3); /* C0DB3A: jsr     $c2ec9c.l */
 L_C0DB40:
     FA18_CHECK(0xC0DB40);
     FA18_RETURN(0xC0DB40, 0x4E75); /* C0DB40: rts */
@@ -3659,7 +5516,7 @@ L_C0EF08:
     FA18_OP(0xC0EF0C, 0x2F3C, 0xC0EF12); /* C0EF0C: move.l  #$10001, -(A7) */
     FA18_OP(0xC0EF12, 0x7028, 0xC0EF14); /* C0EF12: moveq   #$28, D0 */
     FA18_OP(0xC0EF14, 0x2F00, 0xC0EF16); /* C0EF14: move.l  D0, -(A7) */
-    FA18_CALL(0xC0EF16, 0x4EB9, 0xC0EF1C, 436, 0); /* C0EF16: jsr     $c53b30.l */
+    FA18_CALL(0xC0EF16, 0x4EB9, 0xC0EF1C, 528, 0); /* C0EF16: jsr     $c53b30.l */
 L_C0EF1C:
     FA18_CHECK(0xC0EF1C);
     FA18_OP(0xC0EF1C, 0x508F, 0xC0EF1E); /* C0EF1C: addq.l  #8, A7 */
@@ -3671,19 +5528,19 @@ L_C0EF1C:
     FA18_OP(0xC0EF34, 0x2F01, 0xC0EF36); /* C0EF34: move.l  D1, -(A7) */
     FA18_OP(0xC0EF36, 0x4879, 0xC0EF3C); /* C0EF36: pea     $c07fe4.l */
     FA18_OP(0xC0EF3C, 0x2D40, 0xC0EF40); /* C0EF3C: move.l  D0, (-$10,A6) */
-    FA18_CALL(0xC0EF40, 0x4EB9, 0xC0EF46, 431, 0); /* C0EF40: jsr     $c53a7c.l */
+    FA18_CALL(0xC0EF40, 0x4EB9, 0xC0EF46, 523, 0); /* C0EF40: jsr     $c53a7c.l */
 L_C0EF46:
     FA18_CHECK(0xC0EF46);
     FA18_OP(0xC0EF46, 0x508F, 0xC0EF48); /* C0EF46: addq.l  #8, A7 */
     FA18_OP(0xC0EF48, 0x2F39, 0xC0EF4E); /* C0EF48: move.l  $c4fdc4.l, -(A7) */
     FA18_OP(0xC0EF4E, 0x2F00, 0xC0EF50); /* C0EF4E: move.l  D0, -(A7) */
     FA18_OP(0xC0EF50, 0x2D40, 0xC0EF54); /* C0EF50: move.l  D0, (-$c,A6) */
-    FA18_CALL(0xC0EF54, 0x4EB9, 0xC0EF5A, 433, 0); /* C0EF54: jsr     $c53ac8.l */
+    FA18_CALL(0xC0EF54, 0x4EB9, 0xC0EF5A, 525, 0); /* C0EF54: jsr     $c53ac8.l */
 L_C0EF5A:
     FA18_CHECK(0xC0EF5A);
     FA18_OP(0xC0EF5A, 0x508F, 0xC0EF5C); /* C0EF5A: addq.l  #8, A7 */
     FA18_OP(0xC0EF5C, 0x2F2E, 0xC0EF60); /* C0EF5C: move.l  (-$c,A6), -(A7) */
-    FA18_CALL(0xC0EF60, 0x4EB9, 0xC0EF66, 432, 0); /* C0EF60: jsr     $c53a98.l */
+    FA18_CALL(0xC0EF60, 0x4EB9, 0xC0EF66, 524, 0); /* C0EF60: jsr     $c53a98.l */
 L_C0EF66:
     FA18_CHECK(0xC0EF66);
     FA18_OP(0xC0EF66, 0x588F, 0xC0EF68); /* C0EF66: addq.l  #4, A7 */
@@ -3728,7 +5585,7 @@ L_C0EFB8:
     FA18_OP(0xC0EFB8, 0x7028, 0xC0EFBA); /* C0EFB8: moveq   #$28, D0 */
     FA18_OP(0xC0EFBA, 0x2F00, 0xC0EFBC); /* C0EFBA: move.l  D0, -(A7) */
     FA18_OP(0xC0EFBC, 0x2F39, 0xC0EFC2); /* C0EFBC: move.l  $c4fdc4.l, -(A7) */
-    FA18_CALL(0xC0EFC2, 0x4EB9, 0xC0EFC8, 437, 0); /* C0EFC2: jsr     $c53b48.l */
+    FA18_CALL(0xC0EFC2, 0x4EB9, 0xC0EFC8, 529, 0); /* C0EFC2: jsr     $c53b48.l */
 L_C0EFC8:
     FA18_CHECK(0xC0EFC8);
     FA18_OP(0xC0EFC8, 0x508F, 0xC0EFCA); /* C0EFC8: addq.l  #8, A7 */
@@ -3856,13 +5713,13 @@ L_C0EFD4:
     FA18_CHECK(0xC0EFD4);
     FA18_OP(0xC0EFD4, 0x4E56, 0xC0EFD8); /* C0EFD4: link    A6, #-$2 */
     FA18_OP(0xC0EFD8, 0x3D79, 0xC0EFE0); /* C0EFD8: move.w  $c458da.l, (-$2,A6) */
-    FA18_CALL(0xC0EFE0, 0x6100, 0xC0EFE4, 54, 0); /* C0EFE0: bsr     $c0f3c4 */
+    FA18_CALL(0xC0EFE0, 0x6100, 0xC0EFE4, 97, 0); /* C0EFE0: bsr     $c0f3c4 */
 L_C0EFE4:
     FA18_CHECK(0xC0EFE4);
-    FA18_CALL(0xC0EFE4, 0x4EB9, 0xC0EFEA, 57, 0); /* C0EFE4: jsr     $c0f5f8.l */
+    FA18_CALL(0xC0EFE4, 0x4EB9, 0xC0EFEA, 100, 0); /* C0EFE4: jsr     $c0f5f8.l */
 L_C0EFEA:
     FA18_CHECK(0xC0EFEA);
-    FA18_CALL(0xC0EFEA, 0x4EB9, 0xC0EFF0, 59, 0); /* C0EFEA: jsr     $c11b44.l */
+    FA18_CALL(0xC0EFEA, 0x4EB9, 0xC0EFF0, 115, 0); /* C0EFEA: jsr     $c11b44.l */
 L_C0EFF0:
     FA18_CHECK(0xC0EFF0);
     FA18_OP(0xC0EFF0, 0x4A39, 0xC0EFF6); /* C0EFF0: tst.b   $c45795.l */
@@ -3870,43 +5727,43 @@ L_C0EFF0:
 L_C0EFFA:
     FA18_CHECK(0xC0EFFA);
     FA18_OP(0xC0EFFA, 0x33FC, 0xC0F002); /* C0EFFA: move.w  #$8, $c45ad4.l */
-    FA18_CALL(0xC0F002, 0x4EB9, 0xC0F008, 61, 0); /* C0F002: jsr     $c12098.l */
+    FA18_CALL(0xC0F002, 0x4EB9, 0xC0F008, 118, 0); /* C0F002: jsr     $c12098.l */
 L_C0F008:
     FA18_CHECK(0xC0F008);
     FA18_OP(0xC0F008, 0x33FC, 0xC0F010); /* C0F008: move.w  #$10, $c45ad4.l */
-    FA18_CALL(0xC0F010, 0x4EB9, 0xC0F016, 229, 0); /* C0F010: jsr     $c25b1e.l */
+    FA18_CALL(0xC0F010, 0x4EB9, 0xC0F016, 311, 0); /* C0F010: jsr     $c25b1e.l */
 L_C0F016:
     FA18_CHECK(0xC0F016);
-    FA18_CALL(0xC0F016, 0x4EB9, 0xC0F01C, 136, 0); /* C0F016: jsr     $c1c63e.l */
+    FA18_CALL(0xC0F016, 0x4EB9, 0xC0F01C, 200, 0); /* C0F016: jsr     $c1c63e.l */
 L_C0F01C:
     FA18_CHECK(0xC0F01C);
     FA18_OP(0xC0F01C, 0x33FC, 0xC0F024); /* C0F01C: move.w  #$20, $c45ad4.l */
-    FA18_CALL(0xC0F024, 0x4EB9, 0xC0F02A, 228, 0); /* C0F024: jsr     $c25b1c.l */
+    FA18_CALL(0xC0F024, 0x4EB9, 0xC0F02A, 310, 0); /* C0F024: jsr     $c25b1c.l */
 L_C0F02A:
     FA18_CHECK(0xC0F02A);
-    FA18_CALL(0xC0F02A, 0x4EB9, 0xC0F030, 275, 0); /* C0F02A: jsr     $c2d99c.l */
+    FA18_CALL(0xC0F02A, 0x4EB9, 0xC0F030, 357, 0); /* C0F02A: jsr     $c2d99c.l */
 L_C0F030:
     FA18_CHECK(0xC0F030);
-    FA18_CALL(0xC0F030, 0x4EB9, 0xC0F036, 135, 0); /* C0F030: jsr     $c1c54e.l */
+    FA18_CALL(0xC0F030, 0x4EB9, 0xC0F036, 199, 0); /* C0F030: jsr     $c1c54e.l */
 L_C0F036:
     FA18_CHECK(0xC0F036);
-    FA18_CALL(0xC0F036, 0x4EB9, 0xC0F03C, 213, 0); /* C0F036: jsr     $c254e8.l */
+    FA18_CALL(0xC0F036, 0x4EB9, 0xC0F03C, 295, 0); /* C0F036: jsr     $c254e8.l */
 L_C0F03C:
     FA18_CHECK(0xC0F03C);
-    FA18_CALL(0xC0F03C, 0x4EB9, 0xC0F042, 63, 0); /* C0F03C: jsr     $c122a2.l */
+    FA18_CALL(0xC0F03C, 0x4EB9, 0xC0F042, 120, 0); /* C0F03C: jsr     $c122a2.l */
 L_C0F042:
     FA18_CHECK(0xC0F042);
-    FA18_CALL(0xC0F042, 0x4EB9, 0xC0F048, 138, 1); /* C0F042: jsr     $c1c860.l */
+    FA18_CALL(0xC0F042, 0x4EB9, 0xC0F048, 202, 1); /* C0F042: jsr     $c1c860.l */
 L_C0F048:
     FA18_CHECK(0xC0F048);
     FA18_OP(0xC0F048, 0x33FC, 0xC0F050); /* C0F048: move.w  #$60, $c45ad4.l */
-    FA18_CALL(0xC0F050, 0x4EB9, 0xC0F056, 214, 2); /* C0F050: jsr     $c2559a.l */
+    FA18_CALL(0xC0F050, 0x4EB9, 0xC0F056, 296, 2); /* C0F050: jsr     $c2559a.l */
 L_C0F056:
     FA18_CHECK(0xC0F056);
-    FA18_CALL(0xC0F056, 0x4EB9, 0xC0F05C, 220, 0); /* C0F056: jsr     $c25864.l */
+    FA18_CALL(0xC0F056, 0x4EB9, 0xC0F05C, 302, 0); /* C0F056: jsr     $c25864.l */
 L_C0F05C:
     FA18_CHECK(0xC0F05C);
-    FA18_CALL(0xC0F05C, 0x4EB9, 0xC0F062, 41, 0); /* C0F05C: jsr     $c0d730.l */
+    FA18_CALL(0xC0F05C, 0x4EB9, 0xC0F062, 84, 0); /* C0F05C: jsr     $c0d730.l */
 L_C0F062:
     FA18_CHECK(0xC0F062);
     FA18_OP(0xC0F062, 0x33FC, 0xC0F06A); /* C0F062: move.w  #$68, $c45ad4.l */
@@ -3919,11 +5776,11 @@ L_C0F074:
     FA18_BCC(0xC0F07A, 0x6706, 0xC0F07C, 0xC0F082, L_C0F082); /* C0F07A: beq     $c0f082 */
 L_C0F07C:
     FA18_CHECK(0xC0F07C);
-    FA18_CALL(0xC0F07C, 0x4EB9, 0xC0F082, 253, 0); /* C0F07C: jsr     $c2aa9c.l */
+    FA18_CALL(0xC0F07C, 0x4EB9, 0xC0F082, 335, 0); /* C0F07C: jsr     $c2aa9c.l */
 L_C0F082:
     FA18_CHECK(0xC0F082);
     FA18_OP(0xC0F082, 0x33FC, 0xC0F08A); /* C0F082: move.w  #$70, $c45ad4.l */
-    FA18_CALL(0xC0F08A, 0x4EB9, 0xC0F090, 50, 0); /* C0F08A: jsr     $c0daee.l */
+    FA18_CALL(0xC0F08A, 0x4EB9, 0xC0F090, 93, 0); /* C0F08A: jsr     $c0daee.l */
 L_C0F090:
     FA18_CHECK(0xC0F090);
     FA18_OP(0xC0F090, 0x0CB9, 0xC0F09A); /* C0F090: cmpi.l  #-$8000000, $c45a66.l */
@@ -3931,15 +5788,15 @@ L_C0F090:
 L_C0F09E:
     FA18_CHECK(0xC0F09E);
     FA18_OP(0xC0F09E, 0x33FC, 0xC0F0A6); /* C0F09E: move.w  #$78, $c45ad4.l */
-    FA18_CALL(0xC0F0A6, 0x4EB9, 0xC0F0AC, 140, 0); /* C0F0A6: jsr     $c1cb14.l */
+    FA18_CALL(0xC0F0A6, 0x4EB9, 0xC0F0AC, 204, 0); /* C0F0A6: jsr     $c1cb14.l */
 L_C0F0AC:
     FA18_CHECK(0xC0F0AC);
     FA18_OP(0xC0F0AC, 0x33FC, 0xC0F0B4); /* C0F0AC: move.w  #$80, $c45ad4.l */
-    FA18_CALL(0xC0F0B4, 0x4EB9, 0xC0F0BA, 141, 0); /* C0F0B4: jsr     $c1cb26.l */
+    FA18_CALL(0xC0F0B4, 0x4EB9, 0xC0F0BA, 205, 0); /* C0F0B4: jsr     $c1cb26.l */
 L_C0F0BA:
     FA18_CHECK(0xC0F0BA);
     FA18_OP(0xC0F0BA, 0x33FC, 0xC0F0C2); /* C0F0BA: move.w  #$90, $c45ad4.l */
-    FA18_CALL(0xC0F0C2, 0x4EB9, 0xC0F0C8, 242, 0); /* C0F0C2: jsr     $c279d0.l */
+    FA18_CALL(0xC0F0C2, 0x4EB9, 0xC0F0C8, 324, 0); /* C0F0C2: jsr     $c279d0.l */
 L_C0F0C8:
     FA18_CHECK(0xC0F0C8);
     FA18_OP(0xC0F0C8, 0x33FC, 0xC0F0D0); /* C0F0C8: move.w  #$a0, $c45ad4.l */
@@ -3947,13 +5804,13 @@ L_C0F0C8:
     FA18_BCC(0xC0F0D6, 0x6708, 0xC0F0D8, 0xC0F0E0, L_C0F0E0); /* C0F0D6: beq     $c0f0e0 */
 L_C0F0D8:
     FA18_CHECK(0xC0F0D8);
-    FA18_CALL(0xC0F0D8, 0x4EB9, 0xC0F0DE, 84, 0); /* C0F0D8: jsr     $c1518c.l */
+    FA18_CALL(0xC0F0D8, 0x4EB9, 0xC0F0DE, 147, 0); /* C0F0D8: jsr     $c1518c.l */
 L_C0F0DE:
     FA18_CHECK(0xC0F0DE);
     FA18_JUMP(0xC0F0DE, 0x6044, 0xC0F124, L_C0F124); /* C0F0DE: bra     $c0f124 */
 L_C0F0E0:
     FA18_CHECK(0xC0F0E0);
-    FA18_CALL(0xC0F0E0, 0x4EB9, 0xC0F0E6, 235, 0); /* C0F0E0: jsr     $c265e8.l */
+    FA18_CALL(0xC0F0E0, 0x4EB9, 0xC0F0E6, 317, 0); /* C0F0E0: jsr     $c265e8.l */
 L_C0F0E6:
     FA18_CHECK(0xC0F0E6);
     FA18_OP(0xC0F0E6, 0x4A80, 0xC0F0E8); /* C0F0E6: tst.l   D0 */
@@ -3961,29 +5818,29 @@ L_C0F0E6:
 L_C0F0EA:
     FA18_CHECK(0xC0F0EA);
     FA18_OP(0xC0F0EA, 0x33FC, 0xC0F0F2); /* C0F0EA: move.w  #$a4, $c45ad4.l */
-    FA18_CALL(0xC0F0F2, 0x4EB9, 0xC0F0F8, 84, 0); /* C0F0F2: jsr     $c1518c.l */
+    FA18_CALL(0xC0F0F2, 0x4EB9, 0xC0F0F8, 147, 0); /* C0F0F2: jsr     $c1518c.l */
 L_C0F0F8:
     FA18_CHECK(0xC0F0F8);
     FA18_OP(0xC0F0F8, 0x33FC, 0xC0F100); /* C0F0F8: move.w  #$a8, $c45ad4.l */
-    FA18_CALL(0xC0F100, 0x4EB9, 0xC0F106, 142, 0); /* C0F100: jsr     $c1ccbc.l */
+    FA18_CALL(0xC0F100, 0x4EB9, 0xC0F106, 206, 0); /* C0F100: jsr     $c1ccbc.l */
 L_C0F106:
     FA18_CHECK(0xC0F106);
     FA18_JUMP(0xC0F106, 0x601C, 0xC0F124, L_C0F124); /* C0F106: bra     $c0f124 */
 L_C0F108:
     FA18_CHECK(0xC0F108);
     FA18_OP(0xC0F108, 0x33FC, 0xC0F110); /* C0F108: move.w  #$ac, $c45ad4.l */
-    FA18_CALL(0xC0F110, 0x4EB9, 0xC0F116, 142, 0); /* C0F110: jsr     $c1ccbc.l */
+    FA18_CALL(0xC0F110, 0x4EB9, 0xC0F116, 206, 0); /* C0F110: jsr     $c1ccbc.l */
 L_C0F116:
     FA18_CHECK(0xC0F116);
     FA18_OP(0xC0F116, 0x33FC, 0xC0F11E); /* C0F116: move.w  #$b0, $c45ad4.l */
-    FA18_CALL(0xC0F11E, 0x4EB9, 0xC0F124, 84, 0); /* C0F11E: jsr     $c1518c.l */
+    FA18_CALL(0xC0F11E, 0x4EB9, 0xC0F124, 147, 0); /* C0F11E: jsr     $c1518c.l */
 L_C0F124:
     FA18_CHECK(0xC0F124);
     FA18_OP(0xC0F124, 0x33FC, 0xC0F12C); /* C0F124: move.w  #$c0, $c45ad4.l */
-    FA18_CALL(0xC0F12C, 0x4EB9, 0xC0F132, 60, 0); /* C0F12C: jsr     $c11bfc.l */
+    FA18_CALL(0xC0F12C, 0x4EB9, 0xC0F132, 117, 0); /* C0F12C: jsr     $c11bfc.l */
 L_C0F132:
     FA18_CHECK(0xC0F132);
-    FA18_CALL(0xC0F132, 0x4EB9, 0xC0F138, 65, 0); /* C0F132: jsr     $c12950.l */
+    FA18_CALL(0xC0F132, 0x4EB9, 0xC0F138, 122, 0); /* C0F132: jsr     $c12950.l */
 L_C0F138:
     FA18_CHECK(0xC0F138);
     FA18_OP(0xC0F138, 0x33FC, 0xC0F140); /* C0F138: move.w  #$d0, $c45ad4.l */
@@ -4011,22 +5868,22 @@ L_C0F172:
     FA18_BCC(0xC0F178, 0x6700, 0xC0F17C, 0xC0F2DC, L_C0F2DC); /* C0F178: beq     $c0f2dc */
 L_C0F17C:
     FA18_CHECK(0xC0F17C);
-    FA18_CALL(0xC0F17C, 0x4EB9, 0xC0F182, 342, 1); /* C0F17C: jsr     $c30764.l */
+    FA18_CALL(0xC0F17C, 0x4EB9, 0xC0F182, 433, 1); /* C0F17C: jsr     $c30764.l */
 L_C0F182:
     FA18_CHECK(0xC0F182);
-    FA18_CALL(0xC0F182, 0x4EB9, 0xC0F188, 348, 0); /* C0F182: jsr     $c309b6.l */
+    FA18_CALL(0xC0F182, 0x4EB9, 0xC0F188, 439, 0); /* C0F182: jsr     $c309b6.l */
 L_C0F188:
     FA18_CHECK(0xC0F188);
-    FA18_CALL(0xC0F188, 0x4EB9, 0xC0F18E, 361, 1); /* C0F188: jsr     $c31226.l */
+    FA18_CALL(0xC0F188, 0x4EB9, 0xC0F18E, 452, 1); /* C0F188: jsr     $c31226.l */
 L_C0F18E:
     FA18_CHECK(0xC0F18E);
-    FA18_CALL(0xC0F18E, 0x4EB9, 0xC0F194, 400, 2); /* C0F18E: jsr     $c332bc.l */
+    FA18_CALL(0xC0F18E, 0x4EB9, 0xC0F194, 492, 2); /* C0F18E: jsr     $c332bc.l */
 L_C0F194:
     FA18_CHECK(0xC0F194);
-    FA18_CALL(0xC0F194, 0x4EB9, 0xC0F19A, 360, 1); /* C0F194: jsr     $c3112a.l */
+    FA18_CALL(0xC0F194, 0x4EB9, 0xC0F19A, 451, 1); /* C0F194: jsr     $c3112a.l */
 L_C0F19A:
     FA18_CHECK(0xC0F19A);
-    FA18_CALL(0xC0F19A, 0x4EB9, 0xC0F1A0, 357, 1); /* C0F19A: jsr     $c30f78.l */
+    FA18_CALL(0xC0F19A, 0x4EB9, 0xC0F1A0, 448, 1); /* C0F19A: jsr     $c30f78.l */
 L_C0F1A0:
     FA18_CHECK(0xC0F1A0);
     FA18_OP(0xC0F1A0, 0x1039, 0xC0F1A6); /* C0F1A0: move.b  $c45837.l, D0 */
@@ -4040,10 +5897,10 @@ L_C0F1AA:
     FA18_BCC(0xC0F1B6, 0x6F0C, 0xC0F1B8, 0xC0F1C4, L_C0F1C4); /* C0F1B6: ble     $c0f1c4 */
 L_C0F1B8:
     FA18_CHECK(0xC0F1B8);
-    FA18_CALL(0xC0F1B8, 0x4EB9, 0xC0F1BE, 372, 1); /* C0F1B8: jsr     $c31eb6.l */
+    FA18_CALL(0xC0F1B8, 0x4EB9, 0xC0F1BE, 463, 1); /* C0F1B8: jsr     $c31eb6.l */
 L_C0F1BE:
     FA18_CHECK(0xC0F1BE);
-    FA18_CALL(0xC0F1BE, 0x4EB9, 0xC0F1C4, 374, 0); /* C0F1BE: jsr     $c31f4c.l */
+    FA18_CALL(0xC0F1BE, 0x4EB9, 0xC0F1C4, 465, 0); /* C0F1BE: jsr     $c31f4c.l */
 L_C0F1C4:
     FA18_CHECK(0xC0F1C4);
     FA18_OP(0xC0F1C4, 0x1039, 0xC0F1CA); /* C0F1C4: move.b  $c45837.l, D0 */
@@ -4057,7 +5914,7 @@ L_C0F1CE:
     FA18_BCC(0xC0F1DA, 0x6C06, 0xC0F1DC, 0xC0F1E2, L_C0F1E2); /* C0F1DA: bge     $c0f1e2 */
 L_C0F1DC:
     FA18_CHECK(0xC0F1DC);
-    FA18_CALL(0xC0F1DC, 0x4EB9, 0xC0F1E2, 377, 0); /* C0F1DC: jsr     $c32178.l */
+    FA18_CALL(0xC0F1DC, 0x4EB9, 0xC0F1E2, 468, 0); /* C0F1DC: jsr     $c32178.l */
 L_C0F1E2:
     FA18_CHECK(0xC0F1E2);
     FA18_OP(0xC0F1E2, 0x1039, 0xC0F1E8); /* C0F1E2: move.b  $c45837.l, D0 */
@@ -4075,7 +5932,7 @@ L_C0F1FA:
     FA18_BCC(0xC0F204, 0x6F06, 0xC0F206, 0xC0F20C, L_C0F20C); /* C0F204: ble     $c0f20c */
 L_C0F206:
     FA18_CHECK(0xC0F206);
-    FA18_CALL(0xC0F206, 0x4EB9, 0xC0F20C, 375, 0); /* C0F206: jsr     $c3201a.l */
+    FA18_CALL(0xC0F206, 0x4EB9, 0xC0F20C, 466, 0); /* C0F206: jsr     $c3201a.l */
 L_C0F20C:
     FA18_CHECK(0xC0F20C);
     FA18_OP(0xC0F20C, 0x1039, 0xC0F212); /* C0F20C: move.b  $c45837.l, D0 */
@@ -4089,7 +5946,7 @@ L_C0F216:
     FA18_BCC(0xC0F222, 0x6C06, 0xC0F224, 0xC0F22A, L_C0F22A); /* C0F222: bge     $c0f22a */
 L_C0F224:
     FA18_CHECK(0xC0F224);
-    FA18_CALL(0xC0F224, 0x4EB9, 0xC0F22A, 376, 0); /* C0F224: jsr     $c3212a.l */
+    FA18_CALL(0xC0F224, 0x4EB9, 0xC0F22A, 467, 0); /* C0F224: jsr     $c3212a.l */
 L_C0F22A:
     FA18_CHECK(0xC0F22A);
     FA18_OP(0xC0F22A, 0x1039, 0xC0F230); /* C0F22A: move.b  $c45837.l, D0 */
@@ -4103,38 +5960,38 @@ L_C0F234:
     FA18_BCC(0xC0F240, 0x6C06, 0xC0F242, 0xC0F248, L_C0F248); /* C0F240: bge     $c0f248 */
 L_C0F242:
     FA18_CHECK(0xC0F242);
-    FA18_CALL(0xC0F242, 0x4EB9, 0xC0F248, 347, 1); /* C0F242: jsr     $c30918.l */
+    FA18_CALL(0xC0F242, 0x4EB9, 0xC0F248, 438, 1); /* C0F242: jsr     $c30918.l */
 L_C0F248:
     FA18_CHECK(0xC0F248);
     FA18_OP(0xC0F248, 0x33FC, 0xC0F250); /* C0F248: move.w  #$1a0, $c45ad4.l */
-    FA18_CALL(0xC0F250, 0x4EB9, 0xC0F256, 333, 1); /* C0F250: jsr     $c3003a.l */
+    FA18_CALL(0xC0F250, 0x4EB9, 0xC0F256, 424, 1); /* C0F250: jsr     $c3003a.l */
 L_C0F256:
     FA18_CHECK(0xC0F256);
-    FA18_CALL(0xC0F256, 0x4EB9, 0xC0F25C, 388, 11); /* C0F256: jsr     $c328a8.l */
+    FA18_CALL(0xC0F256, 0x4EB9, 0xC0F25C, 479, 11); /* C0F256: jsr     $c328a8.l */
 L_C0F25C:
     FA18_CHECK(0xC0F25C);
-    FA18_CALL(0xC0F25C, 0x4EB9, 0xC0F262, 349, 1); /* C0F25C: jsr     $c30a00.l */
+    FA18_CALL(0xC0F25C, 0x4EB9, 0xC0F262, 440, 1); /* C0F25C: jsr     $c30a00.l */
 L_C0F262:
     FA18_CHECK(0xC0F262);
-    FA18_CALL(0xC0F262, 0x4EB9, 0xC0F268, 378, 0); /* C0F262: jsr     $c321d2.l */
+    FA18_CALL(0xC0F262, 0x4EB9, 0xC0F268, 469, 0); /* C0F262: jsr     $c321d2.l */
 L_C0F268:
     FA18_CHECK(0xC0F268);
-    FA18_CALL(0xC0F268, 0x4EB9, 0xC0F26E, 379, 0); /* C0F268: jsr     $c32260.l */
+    FA18_CALL(0xC0F268, 0x4EB9, 0xC0F26E, 470, 0); /* C0F268: jsr     $c32260.l */
 L_C0F26E:
     FA18_CHECK(0xC0F26E);
-    FA18_CALL(0xC0F26E, 0x4EB9, 0xC0F274, 365, 1); /* C0F26E: jsr     $c31acc.l */
+    FA18_CALL(0xC0F26E, 0x4EB9, 0xC0F274, 456, 1); /* C0F26E: jsr     $c31acc.l */
 L_C0F274:
     FA18_CHECK(0xC0F274);
-    FA18_CALL(0xC0F274, 0x4EB9, 0xC0F27A, 353, 1); /* C0F274: jsr     $c30d34.l */
+    FA18_CALL(0xC0F274, 0x4EB9, 0xC0F27A, 444, 1); /* C0F274: jsr     $c30d34.l */
 L_C0F27A:
     FA18_CHECK(0xC0F27A);
-    FA18_CALL(0xC0F27A, 0x4EB9, 0xC0F280, 364, 0); /* C0F27A: jsr     $c31a64.l */
+    FA18_CALL(0xC0F27A, 0x4EB9, 0xC0F280, 455, 0); /* C0F27A: jsr     $c31a64.l */
 L_C0F280:
     FA18_CHECK(0xC0F280);
-    FA18_CALL(0xC0F280, 0x4EB9, 0xC0F286, 380, 1); /* C0F280: jsr     $c322ee.l */
+    FA18_CALL(0xC0F280, 0x4EB9, 0xC0F286, 471, 1); /* C0F280: jsr     $c322ee.l */
 L_C0F286:
     FA18_CHECK(0xC0F286);
-    FA18_CALL(0xC0F286, 0x4EB9, 0xC0F28C, 351, 0); /* C0F286: jsr     $c30b5c.l */
+    FA18_CALL(0xC0F286, 0x4EB9, 0xC0F28C, 442, 0); /* C0F286: jsr     $c30b5c.l */
 L_C0F28C:
     FA18_CHECK(0xC0F28C);
     FA18_OP(0xC0F28C, 0x1039, 0xC0F292); /* C0F28C: move.b  $c45837.l, D0 */
@@ -4155,13 +6012,13 @@ L_C0F2A8:
 L_C0F2B0:
     FA18_CHECK(0xC0F2B0);
     FA18_OP(0xC0F2B0, 0x13FC, 0xC0F2B8); /* C0F2B0: move.b  #$1, $c457d9.l */
-    FA18_CALL(0xC0F2B8, 0x4EB9, 0xC0F2BE, 374, 0); /* C0F2B8: jsr     $c31f4c.l */
+    FA18_CALL(0xC0F2B8, 0x4EB9, 0xC0F2BE, 465, 0); /* C0F2B8: jsr     $c31f4c.l */
 L_C0F2BE:
     FA18_CHECK(0xC0F2BE);
-    FA18_CALL(0xC0F2BE, 0x4EB9, 0xC0F2C4, 375, 0); /* C0F2BE: jsr     $c3201a.l */
+    FA18_CALL(0xC0F2BE, 0x4EB9, 0xC0F2C4, 466, 0); /* C0F2BE: jsr     $c3201a.l */
 L_C0F2C4:
     FA18_CHECK(0xC0F2C4);
-    FA18_CALL(0xC0F2C4, 0x4EB9, 0xC0F2CA, 372, 1); /* C0F2C4: jsr     $c31eb6.l */
+    FA18_CALL(0xC0F2C4, 0x4EB9, 0xC0F2CA, 463, 1); /* C0F2C4: jsr     $c31eb6.l */
 L_C0F2CA:
     FA18_CHECK(0xC0F2CA);
     FA18_OP(0xC0F2CA, 0x4E71, 0xC0F2CC); /* C0F2CA: nop */
@@ -4170,20 +6027,20 @@ L_C0F2CA:
     FA18_BCC(0xC0F2D4, 0x6606, 0xC0F2D6, 0xC0F2DC, L_C0F2DC); /* C0F2D4: bne     $c0f2dc */
 L_C0F2D6:
     FA18_CHECK(0xC0F2D6);
-    FA18_CALL(0xC0F2D6, 0x4EB9, 0xC0F2DC, 380, 1); /* C0F2D6: jsr     $c322ee.l */
+    FA18_CALL(0xC0F2D6, 0x4EB9, 0xC0F2DC, 471, 1); /* C0F2D6: jsr     $c322ee.l */
 L_C0F2DC:
     FA18_CHECK(0xC0F2DC);
     FA18_OP(0xC0F2DC, 0x33FC, 0xC0F2E4); /* C0F2DC: move.w  #$1d4, $c45ad4.l */
-    FA18_CALL(0xC0F2E4, 0x4EB9, 0xC0F2EA, 62, 0); /* C0F2E4: jsr     $c12242.l */
+    FA18_CALL(0xC0F2E4, 0x4EB9, 0xC0F2EA, 119, 0); /* C0F2E4: jsr     $c12242.l */
 L_C0F2EA:
     FA18_CHECK(0xC0F2EA);
-    FA18_CALL(0xC0F2EA, 0x4EB9, 0xC0F2F0, 373, 0); /* C0F2EA: jsr     $c31f4a.l */
+    FA18_CALL(0xC0F2EA, 0x4EB9, 0xC0F2F0, 464, 0); /* C0F2EA: jsr     $c31f4a.l */
 L_C0F2F0:
     FA18_CHECK(0xC0F2F0);
-    FA18_CALL(0xC0F2F0, 0x4EB9, 0xC0F2F6, 259, 1); /* C0F2F0: jsr     $c2b564.l */
+    FA18_CALL(0xC0F2F0, 0x4EB9, 0xC0F2F6, 341, 1); /* C0F2F0: jsr     $c2b564.l */
 L_C0F2F6:
     FA18_CHECK(0xC0F2F6);
-    FA18_CALL(0xC0F2F6, 0x4EB9, 0xC0F2FC, 210, 0); /* C0F2F6: jsr     $c25312.l */
+    FA18_CALL(0xC0F2F6, 0x4EB9, 0xC0F2FC, 292, 0); /* C0F2F6: jsr     $c25312.l */
 L_C0F2FC:
     FA18_CHECK(0xC0F2FC);
     FA18_OP(0xC0F2FC, 0x302E, 0xC0F300); /* C0F2FC: move.w  (-$2,A6), D0 */
@@ -4192,7 +6049,7 @@ L_C0F2FC:
     FA18_BCC(0xC0F306, 0x6606, 0xC0F308, 0xC0F30E, L_C0F30E); /* C0F306: bne     $c0f30e */
 L_C0F308:
     FA18_CHECK(0xC0F308);
-    FA18_CALL(0xC0F308, 0x4EB9, 0xC0F30E, 212, 0); /* C0F308: jsr     $c2548a.l */
+    FA18_CALL(0xC0F308, 0x4EB9, 0xC0F30E, 294, 0); /* C0F308: jsr     $c2548a.l */
 L_C0F30E:
     FA18_CHECK(0xC0F30E);
     FA18_OP(0xC0F30E, 0x302E, 0xC0F312); /* C0F30E: move.w  (-$2,A6), D0 */
@@ -4202,7 +6059,7 @@ L_C0F30E:
 L_C0F31A:
     FA18_CHECK(0xC0F31A);
     FA18_OP(0xC0F31A, 0x42A7, 0xC0F31C); /* C0F31A: clr.l   -(A7) */
-    FA18_CALL(0xC0F31C, 0x4EB9, 0xC0F322, 445, 0); /* C0F31C: jsr     $c53f9c.l */
+    FA18_CALL(0xC0F31C, 0x4EB9, 0xC0F322, 537, 0); /* C0F31C: jsr     $c53f9c.l */
 L_C0F322:
     FA18_CHECK(0xC0F322);
     FA18_OP(0xC0F322, 0x588F, 0xC0F324); /* C0F322: addq.l  #4, A7 */
@@ -4214,7 +6071,7 @@ L_C0F324:
     FA18_BCC(0xC0F32E, 0x6608, 0xC0F330, 0xC0F338, L_C0F338); /* C0F32E: bne     $c0f338 */
 L_C0F330:
     FA18_CHECK(0xC0F330);
-    FA18_CALL(0xC0F330, 0x4EB9, 0xC0F336, 310, 0); /* C0F330: jsr     $c2f582.l */
+    FA18_CALL(0xC0F330, 0x4EB9, 0xC0F336, 392, 0); /* C0F330: jsr     $c2f582.l */
 L_C0F336:
     FA18_CHECK(0xC0F336);
     FA18_JUMP(0xC0F336, 0x601E, 0xC0F356, L_C0F356); /* C0F336: bra     $c0f356 */
@@ -4231,7 +6088,7 @@ L_C0F342:
     FA18_BCC(0xC0F34E, 0x6606, 0xC0F350, 0xC0F356, L_C0F356); /* C0F34E: bne     $c0f356 */
 L_C0F350:
     FA18_CHECK(0xC0F350);
-    FA18_CALL(0xC0F350, 0x4EB9, 0xC0F356, 16, 0); /* C0F350: jsr     $c082b8.l */
+    FA18_CALL(0xC0F350, 0x4EB9, 0xC0F356, 44, 0); /* C0F350: jsr     $c082b8.l */
 L_C0F356:
     FA18_CHECK(0xC0F356);
     FA18_OP(0xC0F356, 0x1039, 0xC0F35C); /* C0F356: move.b  $c457ae.l, D0 */
@@ -4245,17 +6102,17 @@ L_C0F360:
     FA18_JUMP(0xC0F36E, 0x6010, 0xC0F380, L_C0F380); /* C0F36E: bra     $c0f380 */
 L_C0F370:
     FA18_CHECK(0xC0F370);
-    FA18_CALL(0xC0F370, 0x4EB9, 0xC0F376, 65, 0); /* C0F370: jsr     $c12950.l */
+    FA18_CALL(0xC0F370, 0x4EB9, 0xC0F376, 122, 0); /* C0F370: jsr     $c12950.l */
 L_C0F376:
     FA18_CHECK(0xC0F376);
     FA18_OP(0xC0F376, 0x42A7, 0xC0F378); /* C0F376: clr.l   -(A7) */
-    FA18_CALL(0xC0F378, 0x4EB9, 0xC0F37E, 445, 0); /* C0F378: jsr     $c53f9c.l */
+    FA18_CALL(0xC0F378, 0x4EB9, 0xC0F37E, 537, 0); /* C0F378: jsr     $c53f9c.l */
 L_C0F37E:
     FA18_CHECK(0xC0F37E);
     FA18_OP(0xC0F37E, 0x588F, 0xC0F380); /* C0F37E: addq.l  #4, A7 */
 L_C0F380:
     FA18_CHECK(0xC0F380);
-    FA18_CALL(0xC0F380, 0x4EB9, 0xC0F386, 258, 1); /* C0F380: jsr     $c2b3c2.l */
+    FA18_CALL(0xC0F380, 0x4EB9, 0xC0F386, 340, 1); /* C0F380: jsr     $c2b3c2.l */
 L_C0F386:
     FA18_CHECK(0xC0F386);
     FA18_OP(0xC0F386, 0x4A39, 0xC0F38C); /* C0F386: tst.b   $c457b2.l */
@@ -4267,15 +6124,15 @@ L_C0F38E:
 L_C0F396:
     FA18_CHECK(0xC0F396);
     FA18_OP(0xC0F396, 0x33FC, 0xC0F39E); /* C0F396: move.w  #$210, $c45ad4.l */
-    FA18_CALL(0xC0F39E, 0x4EB9, 0xC0F3A4, 308, 0); /* C0F39E: jsr     $c2f49c.l */
+    FA18_CALL(0xC0F39E, 0x4EB9, 0xC0F3A4, 390, 0); /* C0F39E: jsr     $c2f49c.l */
 L_C0F3A4:
     FA18_CHECK(0xC0F3A4);
     FA18_OP(0xC0F3A4, 0x33FC, 0xC0F3AC); /* C0F3A4: move.w  #$218, $c45ad4.l */
-    FA18_CALL(0xC0F3AC, 0x4EB9, 0xC0F3B2, 366, 1); /* C0F3AC: jsr     $c31b76.l */
+    FA18_CALL(0xC0F3AC, 0x4EB9, 0xC0F3B2, 457, 1); /* C0F3AC: jsr     $c31b76.l */
 L_C0F3B2:
     FA18_CHECK(0xC0F3B2);
     FA18_OP(0xC0F3B2, 0x33FC, 0xC0F3BA); /* C0F3B2: move.w  #$220, $c45ad4.l */
-    FA18_CALL(0xC0F3BA, 0x4EB9, 0xC0F3C0, 394, 21); /* C0F3BA: jsr     $c32cee.l */
+    FA18_CALL(0xC0F3BA, 0x4EB9, 0xC0F3C0, 485, 21); /* C0F3BA: jsr     $c32cee.l */
 L_C0F3C0:
     FA18_CHECK(0xC0F3C0);
     FA18_OP(0xC0F3C0, 0x4E5E, 0xC0F3C2); /* C0F3C0: unlk    A6 */
@@ -4362,14 +6219,14 @@ int fa18_fn_C0F116(int entry) {
 L_C0F116:
     FA18_CHECK(0xC0F116);
     FA18_OP(0xC0F116, 0x33FC, 0xC0F11E); /* C0F116: move.w  #$b0, $c45ad4.l */
-    FA18_CALL(0xC0F11E, 0x4EB9, 0xC0F124, 84, 0); /* C0F11E: jsr     $c1518c.l */
+    FA18_CALL(0xC0F11E, 0x4EB9, 0xC0F124, 147, 0); /* C0F11E: jsr     $c1518c.l */
 L_C0F124:
     FA18_CHECK(0xC0F124);
     FA18_OP(0xC0F124, 0x33FC, 0xC0F12C); /* C0F124: move.w  #$c0, $c45ad4.l */
-    FA18_CALL(0xC0F12C, 0x4EB9, 0xC0F132, 60, 0); /* C0F12C: jsr     $c11bfc.l */
+    FA18_CALL(0xC0F12C, 0x4EB9, 0xC0F132, 117, 0); /* C0F12C: jsr     $c11bfc.l */
 L_C0F132:
     FA18_CHECK(0xC0F132);
-    FA18_CALL(0xC0F132, 0x4EB9, 0xC0F138, 65, 0); /* C0F132: jsr     $c12950.l */
+    FA18_CALL(0xC0F132, 0x4EB9, 0xC0F138, 122, 0); /* C0F132: jsr     $c12950.l */
 L_C0F138:
     FA18_CHECK(0xC0F138);
     FA18_OP(0xC0F138, 0x33FC, 0xC0F140); /* C0F138: move.w  #$d0, $c45ad4.l */
@@ -4397,22 +6254,22 @@ L_C0F172:
     FA18_BCC(0xC0F178, 0x6700, 0xC0F17C, 0xC0F2DC, L_C0F2DC); /* C0F178: beq     $c0f2dc */
 L_C0F17C:
     FA18_CHECK(0xC0F17C);
-    FA18_CALL(0xC0F17C, 0x4EB9, 0xC0F182, 342, 1); /* C0F17C: jsr     $c30764.l */
+    FA18_CALL(0xC0F17C, 0x4EB9, 0xC0F182, 433, 1); /* C0F17C: jsr     $c30764.l */
 L_C0F182:
     FA18_CHECK(0xC0F182);
-    FA18_CALL(0xC0F182, 0x4EB9, 0xC0F188, 348, 0); /* C0F182: jsr     $c309b6.l */
+    FA18_CALL(0xC0F182, 0x4EB9, 0xC0F188, 439, 0); /* C0F182: jsr     $c309b6.l */
 L_C0F188:
     FA18_CHECK(0xC0F188);
-    FA18_CALL(0xC0F188, 0x4EB9, 0xC0F18E, 361, 1); /* C0F188: jsr     $c31226.l */
+    FA18_CALL(0xC0F188, 0x4EB9, 0xC0F18E, 452, 1); /* C0F188: jsr     $c31226.l */
 L_C0F18E:
     FA18_CHECK(0xC0F18E);
-    FA18_CALL(0xC0F18E, 0x4EB9, 0xC0F194, 400, 2); /* C0F18E: jsr     $c332bc.l */
+    FA18_CALL(0xC0F18E, 0x4EB9, 0xC0F194, 492, 2); /* C0F18E: jsr     $c332bc.l */
 L_C0F194:
     FA18_CHECK(0xC0F194);
-    FA18_CALL(0xC0F194, 0x4EB9, 0xC0F19A, 360, 1); /* C0F194: jsr     $c3112a.l */
+    FA18_CALL(0xC0F194, 0x4EB9, 0xC0F19A, 451, 1); /* C0F194: jsr     $c3112a.l */
 L_C0F19A:
     FA18_CHECK(0xC0F19A);
-    FA18_CALL(0xC0F19A, 0x4EB9, 0xC0F1A0, 357, 1); /* C0F19A: jsr     $c30f78.l */
+    FA18_CALL(0xC0F19A, 0x4EB9, 0xC0F1A0, 448, 1); /* C0F19A: jsr     $c30f78.l */
 L_C0F1A0:
     FA18_CHECK(0xC0F1A0);
     FA18_OP(0xC0F1A0, 0x1039, 0xC0F1A6); /* C0F1A0: move.b  $c45837.l, D0 */
@@ -4426,10 +6283,10 @@ L_C0F1AA:
     FA18_BCC(0xC0F1B6, 0x6F0C, 0xC0F1B8, 0xC0F1C4, L_C0F1C4); /* C0F1B6: ble     $c0f1c4 */
 L_C0F1B8:
     FA18_CHECK(0xC0F1B8);
-    FA18_CALL(0xC0F1B8, 0x4EB9, 0xC0F1BE, 372, 1); /* C0F1B8: jsr     $c31eb6.l */
+    FA18_CALL(0xC0F1B8, 0x4EB9, 0xC0F1BE, 463, 1); /* C0F1B8: jsr     $c31eb6.l */
 L_C0F1BE:
     FA18_CHECK(0xC0F1BE);
-    FA18_CALL(0xC0F1BE, 0x4EB9, 0xC0F1C4, 374, 0); /* C0F1BE: jsr     $c31f4c.l */
+    FA18_CALL(0xC0F1BE, 0x4EB9, 0xC0F1C4, 465, 0); /* C0F1BE: jsr     $c31f4c.l */
 L_C0F1C4:
     FA18_CHECK(0xC0F1C4);
     FA18_OP(0xC0F1C4, 0x1039, 0xC0F1CA); /* C0F1C4: move.b  $c45837.l, D0 */
@@ -4443,7 +6300,7 @@ L_C0F1CE:
     FA18_BCC(0xC0F1DA, 0x6C06, 0xC0F1DC, 0xC0F1E2, L_C0F1E2); /* C0F1DA: bge     $c0f1e2 */
 L_C0F1DC:
     FA18_CHECK(0xC0F1DC);
-    FA18_CALL(0xC0F1DC, 0x4EB9, 0xC0F1E2, 377, 0); /* C0F1DC: jsr     $c32178.l */
+    FA18_CALL(0xC0F1DC, 0x4EB9, 0xC0F1E2, 468, 0); /* C0F1DC: jsr     $c32178.l */
 L_C0F1E2:
     FA18_CHECK(0xC0F1E2);
     FA18_OP(0xC0F1E2, 0x1039, 0xC0F1E8); /* C0F1E2: move.b  $c45837.l, D0 */
@@ -4461,7 +6318,7 @@ L_C0F1FA:
     FA18_BCC(0xC0F204, 0x6F06, 0xC0F206, 0xC0F20C, L_C0F20C); /* C0F204: ble     $c0f20c */
 L_C0F206:
     FA18_CHECK(0xC0F206);
-    FA18_CALL(0xC0F206, 0x4EB9, 0xC0F20C, 375, 0); /* C0F206: jsr     $c3201a.l */
+    FA18_CALL(0xC0F206, 0x4EB9, 0xC0F20C, 466, 0); /* C0F206: jsr     $c3201a.l */
 L_C0F20C:
     FA18_CHECK(0xC0F20C);
     FA18_OP(0xC0F20C, 0x1039, 0xC0F212); /* C0F20C: move.b  $c45837.l, D0 */
@@ -4475,7 +6332,7 @@ L_C0F216:
     FA18_BCC(0xC0F222, 0x6C06, 0xC0F224, 0xC0F22A, L_C0F22A); /* C0F222: bge     $c0f22a */
 L_C0F224:
     FA18_CHECK(0xC0F224);
-    FA18_CALL(0xC0F224, 0x4EB9, 0xC0F22A, 376, 0); /* C0F224: jsr     $c3212a.l */
+    FA18_CALL(0xC0F224, 0x4EB9, 0xC0F22A, 467, 0); /* C0F224: jsr     $c3212a.l */
 L_C0F22A:
     FA18_CHECK(0xC0F22A);
     FA18_OP(0xC0F22A, 0x1039, 0xC0F230); /* C0F22A: move.b  $c45837.l, D0 */
@@ -4489,38 +6346,38 @@ L_C0F234:
     FA18_BCC(0xC0F240, 0x6C06, 0xC0F242, 0xC0F248, L_C0F248); /* C0F240: bge     $c0f248 */
 L_C0F242:
     FA18_CHECK(0xC0F242);
-    FA18_CALL(0xC0F242, 0x4EB9, 0xC0F248, 347, 1); /* C0F242: jsr     $c30918.l */
+    FA18_CALL(0xC0F242, 0x4EB9, 0xC0F248, 438, 1); /* C0F242: jsr     $c30918.l */
 L_C0F248:
     FA18_CHECK(0xC0F248);
     FA18_OP(0xC0F248, 0x33FC, 0xC0F250); /* C0F248: move.w  #$1a0, $c45ad4.l */
-    FA18_CALL(0xC0F250, 0x4EB9, 0xC0F256, 333, 1); /* C0F250: jsr     $c3003a.l */
+    FA18_CALL(0xC0F250, 0x4EB9, 0xC0F256, 424, 1); /* C0F250: jsr     $c3003a.l */
 L_C0F256:
     FA18_CHECK(0xC0F256);
-    FA18_CALL(0xC0F256, 0x4EB9, 0xC0F25C, 388, 11); /* C0F256: jsr     $c328a8.l */
+    FA18_CALL(0xC0F256, 0x4EB9, 0xC0F25C, 479, 11); /* C0F256: jsr     $c328a8.l */
 L_C0F25C:
     FA18_CHECK(0xC0F25C);
-    FA18_CALL(0xC0F25C, 0x4EB9, 0xC0F262, 349, 1); /* C0F25C: jsr     $c30a00.l */
+    FA18_CALL(0xC0F25C, 0x4EB9, 0xC0F262, 440, 1); /* C0F25C: jsr     $c30a00.l */
 L_C0F262:
     FA18_CHECK(0xC0F262);
-    FA18_CALL(0xC0F262, 0x4EB9, 0xC0F268, 378, 0); /* C0F262: jsr     $c321d2.l */
+    FA18_CALL(0xC0F262, 0x4EB9, 0xC0F268, 469, 0); /* C0F262: jsr     $c321d2.l */
 L_C0F268:
     FA18_CHECK(0xC0F268);
-    FA18_CALL(0xC0F268, 0x4EB9, 0xC0F26E, 379, 0); /* C0F268: jsr     $c32260.l */
+    FA18_CALL(0xC0F268, 0x4EB9, 0xC0F26E, 470, 0); /* C0F268: jsr     $c32260.l */
 L_C0F26E:
     FA18_CHECK(0xC0F26E);
-    FA18_CALL(0xC0F26E, 0x4EB9, 0xC0F274, 365, 1); /* C0F26E: jsr     $c31acc.l */
+    FA18_CALL(0xC0F26E, 0x4EB9, 0xC0F274, 456, 1); /* C0F26E: jsr     $c31acc.l */
 L_C0F274:
     FA18_CHECK(0xC0F274);
-    FA18_CALL(0xC0F274, 0x4EB9, 0xC0F27A, 353, 1); /* C0F274: jsr     $c30d34.l */
+    FA18_CALL(0xC0F274, 0x4EB9, 0xC0F27A, 444, 1); /* C0F274: jsr     $c30d34.l */
 L_C0F27A:
     FA18_CHECK(0xC0F27A);
-    FA18_CALL(0xC0F27A, 0x4EB9, 0xC0F280, 364, 0); /* C0F27A: jsr     $c31a64.l */
+    FA18_CALL(0xC0F27A, 0x4EB9, 0xC0F280, 455, 0); /* C0F27A: jsr     $c31a64.l */
 L_C0F280:
     FA18_CHECK(0xC0F280);
-    FA18_CALL(0xC0F280, 0x4EB9, 0xC0F286, 380, 1); /* C0F280: jsr     $c322ee.l */
+    FA18_CALL(0xC0F280, 0x4EB9, 0xC0F286, 471, 1); /* C0F280: jsr     $c322ee.l */
 L_C0F286:
     FA18_CHECK(0xC0F286);
-    FA18_CALL(0xC0F286, 0x4EB9, 0xC0F28C, 351, 0); /* C0F286: jsr     $c30b5c.l */
+    FA18_CALL(0xC0F286, 0x4EB9, 0xC0F28C, 442, 0); /* C0F286: jsr     $c30b5c.l */
 L_C0F28C:
     FA18_CHECK(0xC0F28C);
     FA18_OP(0xC0F28C, 0x1039, 0xC0F292); /* C0F28C: move.b  $c45837.l, D0 */
@@ -4541,13 +6398,13 @@ L_C0F2A8:
 L_C0F2B0:
     FA18_CHECK(0xC0F2B0);
     FA18_OP(0xC0F2B0, 0x13FC, 0xC0F2B8); /* C0F2B0: move.b  #$1, $c457d9.l */
-    FA18_CALL(0xC0F2B8, 0x4EB9, 0xC0F2BE, 374, 0); /* C0F2B8: jsr     $c31f4c.l */
+    FA18_CALL(0xC0F2B8, 0x4EB9, 0xC0F2BE, 465, 0); /* C0F2B8: jsr     $c31f4c.l */
 L_C0F2BE:
     FA18_CHECK(0xC0F2BE);
-    FA18_CALL(0xC0F2BE, 0x4EB9, 0xC0F2C4, 375, 0); /* C0F2BE: jsr     $c3201a.l */
+    FA18_CALL(0xC0F2BE, 0x4EB9, 0xC0F2C4, 466, 0); /* C0F2BE: jsr     $c3201a.l */
 L_C0F2C4:
     FA18_CHECK(0xC0F2C4);
-    FA18_CALL(0xC0F2C4, 0x4EB9, 0xC0F2CA, 372, 1); /* C0F2C4: jsr     $c31eb6.l */
+    FA18_CALL(0xC0F2C4, 0x4EB9, 0xC0F2CA, 463, 1); /* C0F2C4: jsr     $c31eb6.l */
 L_C0F2CA:
     FA18_CHECK(0xC0F2CA);
     FA18_OP(0xC0F2CA, 0x4E71, 0xC0F2CC); /* C0F2CA: nop */
@@ -4556,20 +6413,20 @@ L_C0F2CA:
     FA18_BCC(0xC0F2D4, 0x6606, 0xC0F2D6, 0xC0F2DC, L_C0F2DC); /* C0F2D4: bne     $c0f2dc */
 L_C0F2D6:
     FA18_CHECK(0xC0F2D6);
-    FA18_CALL(0xC0F2D6, 0x4EB9, 0xC0F2DC, 380, 1); /* C0F2D6: jsr     $c322ee.l */
+    FA18_CALL(0xC0F2D6, 0x4EB9, 0xC0F2DC, 471, 1); /* C0F2D6: jsr     $c322ee.l */
 L_C0F2DC:
     FA18_CHECK(0xC0F2DC);
     FA18_OP(0xC0F2DC, 0x33FC, 0xC0F2E4); /* C0F2DC: move.w  #$1d4, $c45ad4.l */
-    FA18_CALL(0xC0F2E4, 0x4EB9, 0xC0F2EA, 62, 0); /* C0F2E4: jsr     $c12242.l */
+    FA18_CALL(0xC0F2E4, 0x4EB9, 0xC0F2EA, 119, 0); /* C0F2E4: jsr     $c12242.l */
 L_C0F2EA:
     FA18_CHECK(0xC0F2EA);
-    FA18_CALL(0xC0F2EA, 0x4EB9, 0xC0F2F0, 373, 0); /* C0F2EA: jsr     $c31f4a.l */
+    FA18_CALL(0xC0F2EA, 0x4EB9, 0xC0F2F0, 464, 0); /* C0F2EA: jsr     $c31f4a.l */
 L_C0F2F0:
     FA18_CHECK(0xC0F2F0);
-    FA18_CALL(0xC0F2F0, 0x4EB9, 0xC0F2F6, 259, 1); /* C0F2F0: jsr     $c2b564.l */
+    FA18_CALL(0xC0F2F0, 0x4EB9, 0xC0F2F6, 341, 1); /* C0F2F0: jsr     $c2b564.l */
 L_C0F2F6:
     FA18_CHECK(0xC0F2F6);
-    FA18_CALL(0xC0F2F6, 0x4EB9, 0xC0F2FC, 210, 0); /* C0F2F6: jsr     $c25312.l */
+    FA18_CALL(0xC0F2F6, 0x4EB9, 0xC0F2FC, 292, 0); /* C0F2F6: jsr     $c25312.l */
 L_C0F2FC:
     FA18_CHECK(0xC0F2FC);
     FA18_OP(0xC0F2FC, 0x302E, 0xC0F300); /* C0F2FC: move.w  (-$2,A6), D0 */
@@ -4578,7 +6435,7 @@ L_C0F2FC:
     FA18_BCC(0xC0F306, 0x6606, 0xC0F308, 0xC0F30E, L_C0F30E); /* C0F306: bne     $c0f30e */
 L_C0F308:
     FA18_CHECK(0xC0F308);
-    FA18_CALL(0xC0F308, 0x4EB9, 0xC0F30E, 212, 0); /* C0F308: jsr     $c2548a.l */
+    FA18_CALL(0xC0F308, 0x4EB9, 0xC0F30E, 294, 0); /* C0F308: jsr     $c2548a.l */
 L_C0F30E:
     FA18_CHECK(0xC0F30E);
     FA18_OP(0xC0F30E, 0x302E, 0xC0F312); /* C0F30E: move.w  (-$2,A6), D0 */
@@ -4588,7 +6445,7 @@ L_C0F30E:
 L_C0F31A:
     FA18_CHECK(0xC0F31A);
     FA18_OP(0xC0F31A, 0x42A7, 0xC0F31C); /* C0F31A: clr.l   -(A7) */
-    FA18_CALL(0xC0F31C, 0x4EB9, 0xC0F322, 445, 0); /* C0F31C: jsr     $c53f9c.l */
+    FA18_CALL(0xC0F31C, 0x4EB9, 0xC0F322, 537, 0); /* C0F31C: jsr     $c53f9c.l */
 L_C0F322:
     FA18_CHECK(0xC0F322);
     FA18_OP(0xC0F322, 0x588F, 0xC0F324); /* C0F322: addq.l  #4, A7 */
@@ -4600,7 +6457,7 @@ L_C0F324:
     FA18_BCC(0xC0F32E, 0x6608, 0xC0F330, 0xC0F338, L_C0F338); /* C0F32E: bne     $c0f338 */
 L_C0F330:
     FA18_CHECK(0xC0F330);
-    FA18_CALL(0xC0F330, 0x4EB9, 0xC0F336, 310, 0); /* C0F330: jsr     $c2f582.l */
+    FA18_CALL(0xC0F330, 0x4EB9, 0xC0F336, 392, 0); /* C0F330: jsr     $c2f582.l */
 L_C0F336:
     FA18_CHECK(0xC0F336);
     FA18_JUMP(0xC0F336, 0x601E, 0xC0F356, L_C0F356); /* C0F336: bra     $c0f356 */
@@ -4617,7 +6474,7 @@ L_C0F342:
     FA18_BCC(0xC0F34E, 0x6606, 0xC0F350, 0xC0F356, L_C0F356); /* C0F34E: bne     $c0f356 */
 L_C0F350:
     FA18_CHECK(0xC0F350);
-    FA18_CALL(0xC0F350, 0x4EB9, 0xC0F356, 16, 0); /* C0F350: jsr     $c082b8.l */
+    FA18_CALL(0xC0F350, 0x4EB9, 0xC0F356, 44, 0); /* C0F350: jsr     $c082b8.l */
 L_C0F356:
     FA18_CHECK(0xC0F356);
     FA18_OP(0xC0F356, 0x1039, 0xC0F35C); /* C0F356: move.b  $c457ae.l, D0 */
@@ -4631,7 +6488,7 @@ L_C0F360:
     FA18_JUMP(0xC0F36E, 0x6010, 0xC0F380, L_C0F380); /* C0F36E: bra     $c0f380 */
 L_C0F380:
     FA18_CHECK(0xC0F380);
-    FA18_CALL(0xC0F380, 0x4EB9, 0xC0F386, 258, 1); /* C0F380: jsr     $c2b3c2.l */
+    FA18_CALL(0xC0F380, 0x4EB9, 0xC0F386, 340, 1); /* C0F380: jsr     $c2b3c2.l */
 L_C0F386:
     FA18_CHECK(0xC0F386);
     FA18_OP(0xC0F386, 0x4A39, 0xC0F38C); /* C0F386: tst.b   $c457b2.l */
@@ -4643,15 +6500,15 @@ L_C0F38E:
 L_C0F396:
     FA18_CHECK(0xC0F396);
     FA18_OP(0xC0F396, 0x33FC, 0xC0F39E); /* C0F396: move.w  #$210, $c45ad4.l */
-    FA18_CALL(0xC0F39E, 0x4EB9, 0xC0F3A4, 308, 0); /* C0F39E: jsr     $c2f49c.l */
+    FA18_CALL(0xC0F39E, 0x4EB9, 0xC0F3A4, 390, 0); /* C0F39E: jsr     $c2f49c.l */
 L_C0F3A4:
     FA18_CHECK(0xC0F3A4);
     FA18_OP(0xC0F3A4, 0x33FC, 0xC0F3AC); /* C0F3A4: move.w  #$218, $c45ad4.l */
-    FA18_CALL(0xC0F3AC, 0x4EB9, 0xC0F3B2, 366, 1); /* C0F3AC: jsr     $c31b76.l */
+    FA18_CALL(0xC0F3AC, 0x4EB9, 0xC0F3B2, 457, 1); /* C0F3AC: jsr     $c31b76.l */
 L_C0F3B2:
     FA18_CHECK(0xC0F3B2);
     FA18_OP(0xC0F3B2, 0x33FC, 0xC0F3BA); /* C0F3B2: move.w  #$220, $c45ad4.l */
-    FA18_CALL(0xC0F3BA, 0x4EB9, 0xC0F3C0, 394, 21); /* C0F3BA: jsr     $c32cee.l */
+    FA18_CALL(0xC0F3BA, 0x4EB9, 0xC0F3C0, 485, 21); /* C0F3BA: jsr     $c32cee.l */
 L_C0F3C0:
     FA18_CHECK(0xC0F3C0);
     FA18_OP(0xC0F3C0, 0x4E5E, 0xC0F3C2); /* C0F3C0: unlk    A6 */
@@ -4687,10 +6544,10 @@ int fa18_fn_C0F3C4(int entry) {
 L_C0F3C4:
     FA18_CHECK(0xC0F3C4);
     FA18_OP(0xC0F3C4, 0x4E56, 0xC0F3C8); /* C0F3C4: link    A6, #-$6 */
-    FA18_CALL(0xC0F3C8, 0x4EB9, 0xC0F3CE, 95, 0); /* C0F3C8: jsr     $c16eae.l */
+    FA18_CALL(0xC0F3C8, 0x4EB9, 0xC0F3CE, 158, 0); /* C0F3C8: jsr     $c16eae.l */
 L_C0F3CE:
     FA18_CHECK(0xC0F3CE);
-    FA18_CALL(0xC0F3CE, 0x4EB9, 0xC0F3D4, 97, 0); /* C0F3CE: jsr     $c1715c.l */
+    FA18_CALL(0xC0F3CE, 0x4EB9, 0xC0F3D4, 160, 0); /* C0F3CE: jsr     $c1715c.l */
 L_C0F3D4:
     FA18_CHECK(0xC0F3D4);
     FA18_OP(0xC0F3D4, 0x3239, 0xC0F3DA); /* C0F3D4: move.w  $c4577e.l, D1 */
@@ -4701,7 +6558,7 @@ L_C0F3E2:
     FA18_CHECK(0xC0F3E2);
     FA18_OP(0xC0F3E2, 0x33C0, 0xC0F3E8); /* C0F3E2: move.w  D0, $c4577e.l */
     FA18_OP(0xC0F3E8, 0x33C0, 0xC0F3EE); /* C0F3E8: move.w  D0, $c45780.l */
-    FA18_CALL(0xC0F3EE, 0x4EB9, 0xC0F3F4, 77, 0); /* C0F3EE: jsr     $c13d34.l */
+    FA18_CALL(0xC0F3EE, 0x4EB9, 0xC0F3F4, 140, 0); /* C0F3EE: jsr     $c13d34.l */
 L_C0F3F4:
     FA18_CHECK(0xC0F3F4);
     FA18_OP(0xC0F3F4, 0x1039, 0xC0F3FA); /* C0F3F4: move.b  $c4584b.l, D0 */
@@ -4718,7 +6575,7 @@ L_C0F408:
     FA18_BCC(0xC0F40E, 0x672A, 0xC0F410, 0xC0F43A, L_C0F43A); /* C0F40E: beq     $c0f43a */
 L_C0F410:
     FA18_CHECK(0xC0F410);
-    FA18_CALL(0xC0F410, 0x4EB9, 0xC0F416, 115, 2); /* C0F410: jsr     $c1ac28.l */
+    FA18_CALL(0xC0F410, 0x4EB9, 0xC0F416, 179, 2); /* C0F410: jsr     $c1ac28.l */
 L_C0F416:
     FA18_CHECK(0xC0F416);
     FA18_JUMP(0xC0F416, 0x60F0, 0xC0F408, L_C0F408); /* C0F416: bra     $c0f408 */
@@ -4735,13 +6592,13 @@ L_C0F420:
     FA18_BCC(0xC0F430, 0x6708, 0xC0F432, 0xC0F43A, L_C0F43A); /* C0F430: beq     $c0f43a */
 L_C0F432:
     FA18_CHECK(0xC0F432);
-    FA18_CALL(0xC0F432, 0x4EB9, 0xC0F438, 115, 2); /* C0F432: jsr     $c1ac28.l */
+    FA18_CALL(0xC0F432, 0x4EB9, 0xC0F438, 179, 2); /* C0F432: jsr     $c1ac28.l */
 L_C0F438:
     FA18_CHECK(0xC0F438);
     FA18_JUMP(0xC0F438, 0x60E6, 0xC0F420, L_C0F420); /* C0F438: bra     $c0f420 */
 L_C0F43A:
     FA18_CHECK(0xC0F43A);
-    FA18_CALL(0xC0F43A, 0x4EB9, 0xC0F440, 93, 0); /* C0F43A: jsr     $c16c56.l */
+    FA18_CALL(0xC0F43A, 0x4EB9, 0xC0F440, 156, 0); /* C0F43A: jsr     $c16c56.l */
 L_C0F440:
     FA18_CHECK(0xC0F440);
     FA18_OP(0xC0F440, 0x1D40, 0xC0F444); /* C0F440: move.b  D0, (-$1,A6) */
@@ -4752,7 +6609,7 @@ L_C0F44A:
     FA18_OP(0xC0F44A, 0x1D40, 0xC0F44E); /* C0F44A: move.b  D0, (-$3,A6) */
     FA18_OP(0xC0F44E, 0x0280, 0xC0F454); /* C0F44E: andi.l  #$ff, D0 */
     FA18_OP(0xC0F454, 0x2F00, 0xC0F456); /* C0F454: move.l  D0, -(A7) */
-    FA18_CALL(0xC0F456, 0x4EB9, 0xC0F45C, 116, 5); /* C0F456: jsr     $c1ad74.l */
+    FA18_CALL(0xC0F456, 0x4EB9, 0xC0F45C, 180, 5); /* C0F456: jsr     $c1ad74.l */
 L_C0F45C:
     FA18_CHECK(0xC0F45C);
     FA18_OP(0xC0F45C, 0x588F, 0xC0F45E); /* C0F45C: addq.l  #4, A7 */
@@ -4795,25 +6652,25 @@ int fa18_fn_C0F4A6(int entry) {
 L_C0F4A6:
     FA18_CHECK(0xC0F4A6);
     FA18_OP(0xC0F4A6, 0x42A7, 0xC0F4A8); /* C0F4A6: clr.l   -(A7) */
-    FA18_CALL(0xC0F4A8, 0x4EB9, 0xC0F4AE, 101, 0); /* C0F4A8: jsr     $c17b08.l */
+    FA18_CALL(0xC0F4A8, 0x4EB9, 0xC0F4AE, 164, 0); /* C0F4A8: jsr     $c17b08.l */
 L_C0F4AE:
     FA18_CHECK(0xC0F4AE);
     FA18_OP(0xC0F4AE, 0x588F, 0xC0F4B0); /* C0F4AE: addq.l  #4, A7 */
     FA18_OP(0xC0F4B0, 0x7001, 0xC0F4B2); /* C0F4B0: moveq   #$1, D0 */
     FA18_OP(0xC0F4B2, 0x2F00, 0xC0F4B4); /* C0F4B2: move.l  D0, -(A7) */
-    FA18_CALL(0xC0F4B4, 0x4EB9, 0xC0F4BA, 101, 0); /* C0F4B4: jsr     $c17b08.l */
+    FA18_CALL(0xC0F4B4, 0x4EB9, 0xC0F4BA, 164, 0); /* C0F4B4: jsr     $c17b08.l */
 L_C0F4BA:
     FA18_CHECK(0xC0F4BA);
     FA18_OP(0xC0F4BA, 0x588F, 0xC0F4BC); /* C0F4BA: addq.l  #4, A7 */
     FA18_OP(0xC0F4BC, 0x7002, 0xC0F4BE); /* C0F4BC: moveq   #$2, D0 */
     FA18_OP(0xC0F4BE, 0x2F00, 0xC0F4C0); /* C0F4BE: move.l  D0, -(A7) */
-    FA18_CALL(0xC0F4C0, 0x4EB9, 0xC0F4C6, 101, 0); /* C0F4C0: jsr     $c17b08.l */
+    FA18_CALL(0xC0F4C0, 0x4EB9, 0xC0F4C6, 164, 0); /* C0F4C0: jsr     $c17b08.l */
 L_C0F4C6:
     FA18_CHECK(0xC0F4C6);
     FA18_OP(0xC0F4C6, 0x588F, 0xC0F4C8); /* C0F4C6: addq.l  #4, A7 */
     FA18_OP(0xC0F4C8, 0x7003, 0xC0F4CA); /* C0F4C8: moveq   #$3, D0 */
     FA18_OP(0xC0F4CA, 0x2F00, 0xC0F4CC); /* C0F4CA: move.l  D0, -(A7) */
-    FA18_CALL(0xC0F4CC, 0x4EB9, 0xC0F4D2, 101, 0); /* C0F4CC: jsr     $c17b08.l */
+    FA18_CALL(0xC0F4CC, 0x4EB9, 0xC0F4D2, 164, 0); /* C0F4CC: jsr     $c17b08.l */
 L_C0F4D2:
     FA18_CHECK(0xC0F4D2);
     FA18_OP(0xC0F4D2, 0x588F, 0xC0F4D4); /* C0F4D2: addq.l  #4, A7 */
@@ -5005,7 +6862,7 @@ L_C0F6A4:
 L_C0F6BC:
     FA18_CHECK(0xC0F6BC);
     FA18_OP(0xC0F6BC, 0x33FC, 0xC0F6C4); /* C0F6BC: move.w  #$3f, $c4599e.l */
-    FA18_CALL(0xC0F6C4, 0x4EB9, 0xC0F6CA, 15, 0); /* C0F6C4: jsr     $c06c02.l */
+    FA18_CALL(0xC0F6C4, 0x4EB9, 0xC0F6CA, 42, 0); /* C0F6C4: jsr     $c06c02.l */
 L_C0F6CA:
     FA18_CHECK(0xC0F6CA);
     FA18_OP(0xC0F6CA, 0x42B9, 0xC0F6D0); /* C0F6CA: clr.l   $c45914.l */
@@ -5117,6 +6974,42 @@ L_C0F808:
     FA18_RETURN(0xC0F810, 0x4E75); /* C0F810: rts */
 }
 
+int fa18_fn_C0FA04(int entry) {
+    switch (entry) {
+    case 0: goto L_C0FA04;
+    case 1: goto L_C0FA0E;
+    case 2: goto L_C0FA12;
+    case 3: goto L_C0FA44;
+    case 4: goto L_C0FA4A;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0FA04:
+    FA18_CHECK(0xC0FA04);
+    FA18_OP(0xC0FA04, 0x3039, 0xC0FA0A); /* C0FA04: move.w  $c45ad6.l, D0 */
+    FA18_OP(0xC0FA0A, 0x4A40, 0xC0FA0C); /* C0FA0A: tst.w   D0 */
+    FA18_BCC(0xC0FA0C, 0x6A36, 0xC0FA0E, 0xC0FA44, L_C0FA44); /* C0FA0C: bpl     $c0fa44 */
+L_C0FA0E:
+    FA18_CHECK(0xC0FA0E);
+    FA18_CALL(0xC0FA0E, 0x6100, 0xC0FA12, 104, 0); /* C0FA0E: bsr     $c0faa4 */
+L_C0FA12:
+    FA18_CHECK(0xC0FA12);
+    FA18_OP(0xC0FA12, 0x13FC, 0xC0FA1A); /* C0FA12: move.b  #$3, $c4584b.l */
+    FA18_OP(0xC0FA1A, 0x7000, 0xC0FA1C); /* C0FA1A: moveq   #$0, D0 */
+    FA18_OP(0xC0FA1C, 0x13C0, 0xC0FA22); /* C0FA1C: move.b  D0, $c45785.l */
+    FA18_OP(0xC0FA22, 0x33FC, 0xC0FA2A); /* C0FA22: move.w  #$2, $c45ad6.l */
+    FA18_OP(0xC0FA2A, 0x13FC, 0xC0FA32); /* C0FA2A: move.b  #$f, $c458a1.l */
+    FA18_OP(0xC0FA32, 0x13C0, 0xC0FA38); /* C0FA32: move.b  D0, $c458a0.l */
+    FA18_OP(0xC0FA38, 0x41FA, 0xC0FA3C); /* C0FA38: lea     ($12,PC), A0; ($c0fa4c) */
+    FA18_OP(0xC0FA3C, 0x23C8, 0xC0FA42); /* C0FA3C: move.l  A0, $c1820c.l */
+    FA18_JUMP(0xC0FA42, 0x6006, 0xC0FA4A, L_C0FA4A); /* C0FA42: bra     $c0fa4a */
+L_C0FA44:
+    FA18_CHECK(0xC0FA44);
+    FA18_CALL(0xC0FA44, 0x4EB9, 0xC0FA4A, 421, 0); /* C0FA44: jsr     $c2fd22.l */
+L_C0FA4A:
+    FA18_CHECK(0xC0FA4A);
+    FA18_RETURN(0xC0FA4A, 0x4E75); /* C0FA4A: rts */
+}
+
 int fa18_fn_C0FA4C(int entry) {
     switch (entry) {
     case 0: goto L_C0FA4C;
@@ -5145,6 +7038,981 @@ L_C0FA6C:
 L_C0FA7E:
     FA18_CHECK(0xC0FA7E);
     FA18_RETURN(0xC0FA7E, 0x4E75); /* C0FA7E: rts */
+}
+
+int fa18_fn_C0FA80(int entry) {
+    switch (entry) {
+    case 0: goto L_C0FA80;
+    case 1: goto L_C0FA8A;
+    case 2: goto L_C0FAA2;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0FA80:
+    FA18_CHECK(0xC0FA80);
+    FA18_OP(0xC0FA80, 0x3039, 0xC0FA86); /* C0FA80: move.w  $c45ad6.l, D0 */
+    FA18_OP(0xC0FA86, 0x4A40, 0xC0FA88); /* C0FA86: tst.w   D0 */
+    FA18_BCC(0xC0FA88, 0x6A18, 0xC0FA8A, 0xC0FAA2, L_C0FAA2); /* C0FA88: bpl     $c0faa2 */
+L_C0FA8A:
+    FA18_CHECK(0xC0FA8A);
+    FA18_OP(0xC0FA8A, 0x4239, 0xC0FA90); /* C0FA8A: clr.b   $c457ae.l */
+    FA18_OP(0xC0FA90, 0x13FC, 0xC0FA98); /* C0FA90: move.b  #$1, $c45795.l */
+    FA18_OP(0xC0FA98, 0x41FA, 0xC0FA9C); /* C0FA98: lea     ($116e,PC), A0; ($c10c08) */
+    FA18_OP(0xC0FA9C, 0x23C8, 0xC0FAA2); /* C0FA9C: move.l  A0, $c1820c.l */
+L_C0FAA2:
+    FA18_CHECK(0xC0FAA2);
+    FA18_RETURN(0xC0FAA2, 0x4E75); /* C0FAA2: rts */
+}
+
+int fa18_fn_C0FAA4(int entry) {
+    switch (entry) {
+    case 0: goto L_C0FAA4;
+    case 1: goto L_C0FAE2;
+    case 2: goto L_C0FAF0;
+    case 3: goto L_C0FAF4;
+    case 4: goto L_C0FB16;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0FAA4:
+    FA18_CHECK(0xC0FAA4);
+    FA18_OP(0xC0FAA4, 0x13F9, 0xC0FAAE); /* C0FAA4: move.b  $c458a7.l, $c458a8.l */
+    FA18_OP(0xC0FAAE, 0x7000, 0xC0FAB0); /* C0FAAE: moveq   #$0, D0 */
+    FA18_OP(0xC0FAB0, 0x13C0, 0xC0FAB6); /* C0FAB0: move.b  D0, $c458a7.l */
+    FA18_OP(0xC0FAB6, 0x7004, 0xC0FAB8); /* C0FAB6: moveq   #$4, D0 */
+    FA18_OP(0xC0FAB8, 0x13C0, 0xC0FABE); /* C0FAB8: move.b  D0, $c45848.l */
+    FA18_OP(0xC0FABE, 0x5300, 0xC0FAC0); /* C0FABE: subq.b  #1, D0 */
+    FA18_OP(0xC0FAC0, 0x13C0, 0xC0FAC6); /* C0FAC0: move.b  D0, $c45848.l */
+    FA18_OP(0xC0FAC6, 0x7000, 0xC0FAC8); /* C0FAC6: moveq   #$0, D0 */
+    FA18_OP(0xC0FAC8, 0x13C0, 0xC0FACE); /* C0FAC8: move.b  D0, $c458ae.l */
+    FA18_OP(0xC0FACE, 0x13C0, 0xC0FAD4); /* C0FACE: move.b  D0, $c457ad.l */
+    FA18_OP(0xC0FAD4, 0x13FC, 0xC0FADC); /* C0FAD4: move.b  #$1, $c45790.l */
+    FA18_CALL(0xC0FADC, 0x4EB9, 0xC0FAE2, 325, 1); /* C0FADC: jsr     $c28722.l */
+L_C0FAE2:
+    FA18_CHECK(0xC0FAE2);
+    FA18_OP(0xC0FAE2, 0x13FC, 0xC0FAEA); /* C0FAE2: move.b  #$3, $c458a6.l */
+    FA18_CALL(0xC0FAEA, 0x4EB9, 0xC0FAF0, 55, 0); /* C0FAEA: jsr     $c0924a.l */
+L_C0FAF0:
+    FA18_CHECK(0xC0FAF0);
+    FA18_CALL(0xC0FAF0, 0x6100, 0xC0FAF4, 113, 0); /* C0FAF0: bsr     $c11312 */
+L_C0FAF4:
+    FA18_CHECK(0xC0FAF4);
+    FA18_OP(0xC0FAF4, 0x4239, 0xC0FAFA); /* C0FAF4: clr.b   $c458ad.l */
+    FA18_OP(0xC0FAFA, 0x13FC, 0xC0FB02); /* C0FAFA: move.b  #$1, $c45795.l */
+    FA18_OP(0xC0FB02, 0x7000, 0xC0FB04); /* C0FB02: moveq   #$0, D0 */
+    FA18_OP(0xC0FB04, 0x33C0, 0xC0FB0A); /* C0FB04: move.w  D0, $c45986.l */
+    FA18_OP(0xC0FB0A, 0x33C0, 0xC0FB10); /* C0FB0A: move.w  D0, $c45988.l */
+    FA18_CALL(0xC0FB10, 0x4EB9, 0xC0FB16, 43, 0); /* C0FB10: jsr     $c082b0.l */
+L_C0FB16:
+    FA18_CHECK(0xC0FB16);
+    FA18_OP(0xC0FB16, 0x13FC, 0xC0FB1E); /* C0FB16: move.b  #$ff, $c45858.l */
+    FA18_OP(0xC0FB1E, 0x33FC, 0xC0FB26); /* C0FB1E: move.w  #$1, $c45ad6.l */
+    FA18_RETURN(0xC0FB26, 0x4E75); /* C0FB26: rts */
+}
+
+int fa18_fn_C0FCB4(int entry) {
+    switch (entry) {
+    case 0: goto L_C0FCB4;
+    case 1: goto L_C0FCD0;
+    case 2: goto L_C0FCE2;
+    case 3: goto L_C0FCE6;
+    case 4: goto L_C0FCF4;
+    case 5: goto L_C0FD00;
+    case 6: goto L_C0FD0A;
+    case 7: goto L_C0FD10;
+    case 8: goto L_C0FD18;
+    case 9: goto L_C0FD26;
+    case 10: goto L_C0FD2E;
+    case 11: goto L_C0FD3C;
+    case 12: goto L_C0FD44;
+    case 13: goto L_C0FD52;
+    case 14: goto L_C0FD5A;
+    case 15: goto L_C0FD68;
+    case 16: goto L_C0FD70;
+    case 17: goto L_C0FD7E;
+    case 18: goto L_C0FD86;
+    case 19: goto L_C0FD98;
+    case 20: goto L_C0FDA8;
+    case 21: goto L_C0FDB2;
+    case 22: goto L_C0FDBC;
+    case 23: goto L_C0FDC4;
+    case 24: goto L_C0FDD0;
+    case 25: goto L_C0FDDA;
+    case 26: goto L_C0FDDE;
+    case 27: goto L_C0FDE4;
+    case 28: goto L_C0FDF0;
+    case 29: goto L_C0FDFC;
+    case 30: goto L_C0FE02;
+    case 31: goto L_C0FE08;
+    case 32: goto L_C0FE24;
+    case 33: goto L_C0FE2C;
+    case 34: goto L_C0FE32;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0FCB4:
+    FA18_CHECK(0xC0FCB4);
+    FA18_OP(0xC0FCB4, 0x4E56, 0xC0FCB8); /* C0FCB4: link    A6, #-$6 */
+    FA18_OP(0xC0FCB8, 0x2D7C, 0xC0FCC0); /* C0FCB8: move.l  #$c4574a, (-$4,A6) */
+    FA18_OP(0xC0FCC0, 0x1D79, 0xC0FCC8); /* C0FCC0: move.b  $c458a6.l, (-$5,A6) */
+    FA18_OP(0xC0FCC8, 0x4A39, 0xC0FCCE); /* C0FCC8: tst.b   $c4582a.l */
+    FA18_BCC(0xC0FCCE, 0x6724, 0xC0FCD0, 0xC0FCF4, L_C0FCF4); /* C0FCCE: beq     $c0fcf4 */
+L_C0FCD0:
+    FA18_CHECK(0xC0FCD0);
+    FA18_OP(0xC0FCD0, 0x4239, 0xC0FCD6); /* C0FCD0: clr.b   $c4582a.l */
+    FA18_OP(0xC0FCD6, 0x3039, 0xC0FCDC); /* C0FCD6: move.w  $c45772.l, D0 */
+    FA18_OP(0xC0FCDC, 0x5D40, 0xC0FCDE); /* C0FCDC: subq.w  #6, D0 */
+    FA18_BCC(0xC0FCDE, 0x6700, 0xC0FCE2, 0xC0FE32, L_C0FE32); /* C0FCDE: beq     $c0fe32 */
+L_C0FCE2:
+    FA18_CHECK(0xC0FCE2);
+    FA18_CALL(0xC0FCE2, 0x6100, 0xC0FCE6, 113, 0); /* C0FCE2: bsr     $c11312 */
+L_C0FCE6:
+    FA18_CHECK(0xC0FCE6);
+    FA18_OP(0xC0FCE6, 0x41FA, 0xC0FCEA); /* C0FCE6: lea     (-$108,PC), A0; ($c0fbe0) */
+    FA18_OP(0xC0FCEA, 0x23C8, 0xC0FCF0); /* C0FCEA: move.l  A0, $c1820c.l */
+    FA18_JUMP(0xC0FCF0, 0x6000, 0xC0FE32, L_C0FE32); /* C0FCF0: bra     $c0fe32 */
+L_C0FCF4:
+    FA18_CHECK(0xC0FCF4);
+    FA18_OP(0xC0FCF4, 0x1039, 0xC0FCFA); /* C0FCF4: move.b  $c458a6.l, D0 */
+    FA18_OP(0xC0FCFA, 0x4A00, 0xC0FCFC); /* C0FCFA: tst.b   D0 */
+    FA18_BCC(0xC0FCFC, 0x6F00, 0xC0FD00, 0xC0FDD0, L_C0FDD0); /* C0FCFC: ble     $c0fdd0 */
+L_C0FD00:
+    FA18_CHECK(0xC0FD00);
+    FA18_OP(0xC0FD00, 0x42B9, 0xC0FD06); /* C0FD00: clr.l   $c45668.l */
+    FA18_CALL(0xC0FD06, 0x6100, 0xC0FD0A, 113, 0); /* C0FD06: bsr     $c11312 */
+L_C0FD0A:
+    FA18_CHECK(0xC0FD0A);
+    FA18_CALL(0xC0FD0A, 0x4EB9, 0xC0FD10, 421, 0); /* C0FD0A: jsr     $c2fd22.l */
+L_C0FD10:
+    FA18_CHECK(0xC0FD10);
+    FA18_OP(0xC0FD10, 0x0C2E, 0xC0FD16); /* C0FD10: cmpi.b  #$7f, (-$5,A6) */
+    FA18_BCC(0xC0FD16, 0x660E, 0xC0FD18, 0xC0FD26, L_C0FD26); /* C0FD16: bne     $c0fd26 */
+L_C0FD18:
+    FA18_CHECK(0xC0FD18);
+    FA18_OP(0xC0FD18, 0x206E, 0xC0FD1C); /* C0FD18: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FD1C, 0x30BC, 0xC0FD20); /* C0FD1C: move.w  #$65, (A0) */
+    FA18_OP(0xC0FD20, 0x54AE, 0xC0FD24); /* C0FD20: addq.l  #2, (-$4,A6) */
+    FA18_JUMP(0xC0FD24, 0x6072, 0xC0FD98, L_C0FD98); /* C0FD24: bra     $c0fd98 */
+L_C0FD26:
+    FA18_CHECK(0xC0FD26);
+    FA18_OP(0xC0FD26, 0x0C2E, 0xC0FD2C); /* C0FD26: cmpi.b  #$1, (-$5,A6) */
+    FA18_BCC(0xC0FD2C, 0x660E, 0xC0FD2E, 0xC0FD3C, L_C0FD3C); /* C0FD2C: bne     $c0fd3c */
+L_C0FD2E:
+    FA18_CHECK(0xC0FD2E);
+    FA18_OP(0xC0FD2E, 0x206E, 0xC0FD32); /* C0FD2E: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FD32, 0x30BC, 0xC0FD36); /* C0FD32: move.w  #$66, (A0) */
+    FA18_OP(0xC0FD36, 0x54AE, 0xC0FD3A); /* C0FD36: addq.l  #2, (-$4,A6) */
+    FA18_JUMP(0xC0FD3A, 0x605C, 0xC0FD98, L_C0FD98); /* C0FD3A: bra     $c0fd98 */
+L_C0FD3C:
+    FA18_CHECK(0xC0FD3C);
+    FA18_OP(0xC0FD3C, 0x0C2E, 0xC0FD42); /* C0FD3C: cmpi.b  #$2, (-$5,A6) */
+    FA18_BCC(0xC0FD42, 0x660E, 0xC0FD44, 0xC0FD52, L_C0FD52); /* C0FD42: bne     $c0fd52 */
+L_C0FD44:
+    FA18_CHECK(0xC0FD44);
+    FA18_OP(0xC0FD44, 0x206E, 0xC0FD48); /* C0FD44: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FD48, 0x30BC, 0xC0FD4C); /* C0FD48: move.w  #$67, (A0) */
+    FA18_OP(0xC0FD4C, 0x54AE, 0xC0FD50); /* C0FD4C: addq.l  #2, (-$4,A6) */
+    FA18_JUMP(0xC0FD50, 0x6046, 0xC0FD98, L_C0FD98); /* C0FD50: bra     $c0fd98 */
+L_C0FD52:
+    FA18_CHECK(0xC0FD52);
+    FA18_OP(0xC0FD52, 0x0C2E, 0xC0FD58); /* C0FD52: cmpi.b  #$7d, (-$5,A6) */
+    FA18_BCC(0xC0FD58, 0x660E, 0xC0FD5A, 0xC0FD68, L_C0FD68); /* C0FD58: bne     $c0fd68 */
+L_C0FD5A:
+    FA18_CHECK(0xC0FD5A);
+    FA18_OP(0xC0FD5A, 0x206E, 0xC0FD5E); /* C0FD5A: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FD5E, 0x30BC, 0xC0FD62); /* C0FD5E: move.w  #$68, (A0) */
+    FA18_OP(0xC0FD62, 0x54AE, 0xC0FD66); /* C0FD62: addq.l  #2, (-$4,A6) */
+    FA18_JUMP(0xC0FD66, 0x6030, 0xC0FD98, L_C0FD98); /* C0FD66: bra     $c0fd98 */
+L_C0FD68:
+    FA18_CHECK(0xC0FD68);
+    FA18_OP(0xC0FD68, 0x0C2E, 0xC0FD6E); /* C0FD68: cmpi.b  #$9, (-$5,A6) */
+    FA18_BCC(0xC0FD6E, 0x660E, 0xC0FD70, 0xC0FD7E, L_C0FD7E); /* C0FD6E: bne     $c0fd7e */
+L_C0FD70:
+    FA18_CHECK(0xC0FD70);
+    FA18_OP(0xC0FD70, 0x206E, 0xC0FD74); /* C0FD70: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FD74, 0x30BC, 0xC0FD78); /* C0FD74: move.w  #$69, (A0) */
+    FA18_OP(0xC0FD78, 0x54AE, 0xC0FD7C); /* C0FD78: addq.l  #2, (-$4,A6) */
+    FA18_JUMP(0xC0FD7C, 0x601A, 0xC0FD98, L_C0FD98); /* C0FD7C: bra     $c0fd98 */
+L_C0FD7E:
+    FA18_CHECK(0xC0FD7E);
+    FA18_OP(0xC0FD7E, 0x4A39, 0xC0FD84); /* C0FD7E: tst.b   $c45792.l */
+    FA18_BCC(0xC0FD84, 0x6712, 0xC0FD86, 0xC0FD98, L_C0FD98); /* C0FD84: beq     $c0fd98 */
+L_C0FD86:
+    FA18_CHECK(0xC0FD86);
+    FA18_OP(0xC0FD86, 0x206E, 0xC0FD8A); /* C0FD86: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FD8A, 0x30BC, 0xC0FD8E); /* C0FD8A: move.w  #$6b, (A0) */
+    FA18_OP(0xC0FD8E, 0x54AE, 0xC0FD92); /* C0FD8E: addq.l  #2, (-$4,A6) */
+    FA18_OP(0xC0FD92, 0x4239, 0xC0FD98); /* C0FD92: clr.b   $c45792.l */
+L_C0FD98:
+    FA18_CHECK(0xC0FD98);
+    FA18_OP(0xC0FD98, 0x206E, 0xC0FD9C); /* C0FD98: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FD9C, 0x4250, 0xC0FD9E); /* C0FD9C: clr.w   (A0) */
+    FA18_OP(0xC0FD9E, 0x1039, 0xC0FDA4); /* C0FD9E: move.b  $c4582b.l, D0 */
+    FA18_OP(0xC0FDA4, 0x4A00, 0xC0FDA6); /* C0FDA4: tst.b   D0 */
+    FA18_BCC(0xC0FDA6, 0x6614, 0xC0FDA8, 0xC0FDBC, L_C0FDBC); /* C0FDA6: bne     $c0fdbc */
+L_C0FDA8:
+    FA18_CHECK(0xC0FDA8);
+    FA18_OP(0xC0FDA8, 0x0839, 0xC0FDB0); /* C0FDA8: btst    #$7, $c45b5b.l */
+    FA18_BCC(0xC0FDB0, 0x670A, 0xC0FDB2, 0xC0FDBC, L_C0FDBC); /* C0FDB0: beq     $c0fdbc */
+L_C0FDB2:
+    FA18_CHECK(0xC0FDB2);
+    FA18_OP(0xC0FDB2, 0x33FC, 0xC0FDBA); /* C0FDB2: move.w  #$d2, $c45ad6.l */
+    FA18_JUMP(0xC0FDBA, 0x6008, 0xC0FDC4, L_C0FDC4); /* C0FDBA: bra     $c0fdc4 */
+L_C0FDBC:
+    FA18_CHECK(0xC0FDBC);
+    FA18_OP(0xC0FDBC, 0x33FC, 0xC0FDC4); /* C0FDBC: move.w  #$96, $c45ad6.l */
+L_C0FDC4:
+    FA18_CHECK(0xC0FDC4);
+    FA18_OP(0xC0FDC4, 0x41FA, 0xC0FDC8); /* C0FDC4: lea     ($108,PC), A0; ($c0fece) */
+    FA18_OP(0xC0FDC8, 0x23C8, 0xC0FDCE); /* C0FDC8: move.l  A0, $c1820c.l */
+    FA18_JUMP(0xC0FDCE, 0x6062, 0xC0FE32, L_C0FE32); /* C0FDCE: bra     $c0fe32 */
+L_C0FDD0:
+    FA18_CHECK(0xC0FDD0);
+    FA18_OP(0xC0FDD0, 0x1039, 0xC0FDD6); /* C0FDD0: move.b  $c458a6.l, D0 */
+    FA18_OP(0xC0FDD6, 0x4A00, 0xC0FDD8); /* C0FDD6: tst.b   D0 */
+    FA18_BCC(0xC0FDD8, 0x6A52, 0xC0FDDA, 0xC0FE2C, L_C0FE2C); /* C0FDD8: bpl     $c0fe2c */
+L_C0FDDA:
+    FA18_CHECK(0xC0FDDA);
+    FA18_CALL(0xC0FDDA, 0x6100, 0xC0FDDE, 113, 0); /* C0FDDA: bsr     $c11312 */
+L_C0FDDE:
+    FA18_CHECK(0xC0FDDE);
+    FA18_CALL(0xC0FDDE, 0x4EB9, 0xC0FDE4, 421, 0); /* C0FDDE: jsr     $c2fd22.l */
+L_C0FDE4:
+    FA18_CHECK(0xC0FDE4);
+    FA18_OP(0xC0FDE4, 0x1039, 0xC0FDEA); /* C0FDE4: move.b  $c458a6.l, D0 */
+    FA18_OP(0xC0FDEA, 0x0C00, 0xC0FDEE); /* C0FDEA: cmpi.b  #-$1, D0 */
+    FA18_BCC(0xC0FDEE, 0x660C, 0xC0FDF0, 0xC0FDFC, L_C0FDFC); /* C0FDEE: bne     $c0fdfc */
+L_C0FDF0:
+    FA18_CHECK(0xC0FDF0);
+    FA18_OP(0xC0FDF0, 0x41FA, 0xC0FDF4); /* C0FDF0: lea     ($38c,PC), A0; ($c1017e) */
+    FA18_OP(0xC0FDF4, 0x23C8, 0xC0FDFA); /* C0FDF4: move.l  A0, $c1820c.l */
+    FA18_JUMP(0xC0FDFA, 0x6028, 0xC0FE24, L_C0FE24); /* C0FDFA: bra     $c0fe24 */
+L_C0FDFC:
+    FA18_CHECK(0xC0FDFC);
+    FA18_CALL(0xC0FDFC, 0x4EB9, 0xC0FE02, 421, 0); /* C0FDFC: jsr     $c2fd22.l */
+L_C0FE02:
+    FA18_CHECK(0xC0FE02);
+    FA18_CALL(0xC0FE02, 0x4EB9, 0xC0FE08, 287, 0); /* C0FE02: jsr     $c24e8a.l */
+L_C0FE08:
+    FA18_CHECK(0xC0FE08);
+    FA18_OP(0xC0FE08, 0x206E, 0xC0FE0C); /* C0FE08: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FE0C, 0x30BC, 0xC0FE10); /* C0FE0C: move.w  #$57, (A0) */
+    FA18_OP(0xC0FE10, 0x54AE, 0xC0FE14); /* C0FE10: addq.l  #2, (-$4,A6) */
+    FA18_OP(0xC0FE14, 0x206E, 0xC0FE18); /* C0FE14: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC0FE18, 0x4250, 0xC0FE1A); /* C0FE18: clr.w   (A0) */
+    FA18_OP(0xC0FE1A, 0x41FA, 0xC0FE1E); /* C0FE1A: lea     ($1a,PC), A0; ($c0fe36) */
+    FA18_OP(0xC0FE1E, 0x23C8, 0xC0FE24); /* C0FE1E: move.l  A0, $c1820c.l */
+L_C0FE24:
+    FA18_CHECK(0xC0FE24);
+    FA18_OP(0xC0FE24, 0x4239, 0xC0FE2A); /* C0FE24: clr.b   $c458a6.l */
+    FA18_JUMP(0xC0FE2A, 0x6006, 0xC0FE32, L_C0FE32); /* C0FE2A: bra     $c0fe32 */
+L_C0FE2C:
+    FA18_CHECK(0xC0FE2C);
+    FA18_OP(0xC0FE2C, 0x4239, 0xC0FE32); /* C0FE2C: clr.b   $c4582a.l */
+L_C0FE32:
+    FA18_CHECK(0xC0FE32);
+    FA18_OP(0xC0FE32, 0x4E5E, 0xC0FE34); /* C0FE32: unlk    A6 */
+    FA18_RETURN(0xC0FE34, 0x4E75); /* C0FE34: rts */
+}
+
+int fa18_fn_C0FECE(int entry) {
+    switch (entry) {
+    case 0: goto L_C0FECE;
+    case 1: goto L_C0FEEA;
+    case 2: goto L_C0FEF8;
+    case 3: goto L_C0FF04;
+    case 4: goto L_C0FF1A;
+    case 5: goto L_C0FF20;
+    case 6: goto L_C0FF2A;
+    case 7: goto L_C0FF2E;
+    case 8: goto L_C0FF38;
+    case 9: goto L_C0FF42;
+    case 10: goto L_C0FF46;
+    case 11: goto L_C0FF56;
+    case 12: goto L_C0FF58;
+    case 13: goto L_C0FF64;
+    case 14: goto L_C0FF82;
+    case 15: goto L_C0FFA8;
+    case 16: goto L_C0FFCA;
+    case 17: goto L_C0FFD4;
+    case 18: goto L_C0FFDA;
+    case 19: goto L_C10162;
+    case 20: goto L_C1016C;
+    case 21: goto L_C10174;
+    case 22: goto L_C1017A;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C0FECE:
+    FA18_CHECK(0xC0FECE);
+    FA18_OP(0xC0FECE, 0x4E56, 0xC0FED2); /* C0FECE: link    A6, #-$2 */
+    FA18_OP(0xC0FED2, 0x1039, 0xC0FED8); /* C0FED2: move.b  $c458a6.l, D0 */
+    FA18_OP(0xC0FED8, 0x4880, 0xC0FEDA); /* C0FED8: ext.w   D0 */
+    FA18_OP(0xC0FEDA, 0x3239, 0xC0FEE0); /* C0FEDA: move.w  $c45ad6.l, D1 */
+    FA18_OP(0xC0FEE0, 0x3D40, 0xC0FEE4); /* C0FEE0: move.w  D0, (-$2,A6) */
+    FA18_OP(0xC0FEE4, 0x4A41, 0xC0FEE6); /* C0FEE4: tst.w   D1 */
+    FA18_BCC(0xC0FEE6, 0x6A00, 0xC0FEEA, 0xC1017A, L_C1017A); /* C0FEE6: bpl     $c1017a */
+L_C0FEEA:
+    FA18_CHECK(0xC0FEEA);
+    FA18_OP(0xC0FEEA, 0x4239, 0xC0FEF0); /* C0FEEA: clr.b   $c457d7.l */
+    FA18_OP(0xC0FEF0, 0x42A7, 0xC0FEF2); /* C0FEF0: clr.l   -(A7) */
+    FA18_CALL(0xC0FEF2, 0x4EB9, 0xC0FEF8, 164, 0); /* C0FEF2: jsr     $c17b08.l */
+L_C0FEF8:
+    FA18_CHECK(0xC0FEF8);
+    FA18_OP(0xC0FEF8, 0x588F, 0xC0FEFA); /* C0FEF8: addq.l  #4, A7 */
+    FA18_OP(0xC0FEFA, 0x7001, 0xC0FEFC); /* C0FEFA: moveq   #$1, D0 */
+    FA18_OP(0xC0FEFC, 0x2F00, 0xC0FEFE); /* C0FEFC: move.l  D0, -(A7) */
+    FA18_CALL(0xC0FEFE, 0x4EB9, 0xC0FF04, 164, 0); /* C0FEFE: jsr     $c17b08.l */
+L_C0FF04:
+    FA18_CHECK(0xC0FF04);
+    FA18_OP(0xC0FF04, 0x588F, 0xC0FF06); /* C0FF04: addq.l  #4, A7 */
+    FA18_OP(0xC0FF06, 0x23FC, 0xC0FF10); /* C0FF06: move.l  #$3f0000, $c4ff26.l */
+    FA18_OP(0xC0FF10, 0x302E, 0xC0FF14); /* C0FF10: move.w  (-$2,A6), D0 */
+    FA18_OP(0xC0FF14, 0x0C40, 0xC0FF18); /* C0FF14: cmpi.w  #$3, D0 */
+    FA18_BCC(0xC0FF18, 0x6514, 0xC0FF1A, 0xC0FF2E, L_C0FF2E); /* C0FF18: bcs     $c0ff2e */
+L_C0FF1A:
+    FA18_CHECK(0xC0FF1A);
+    FA18_OP(0xC0FF1A, 0x0C40, 0xC0FF1E); /* C0FF1A: cmpi.w  #$8, D0 */
+    FA18_BCC(0xC0FF1E, 0x620E, 0xC0FF20, 0xC0FF2E, L_C0FF2E); /* C0FF1E: bhi     $c0ff2e */
+L_C0FF20:
+    FA18_CHECK(0xC0FF20);
+    FA18_OP(0xC0FF20, 0x7028, 0xC0FF22); /* C0FF20: moveq   #$28, D0 */
+    FA18_OP(0xC0FF22, 0x2F00, 0xC0FF24); /* C0FF22: move.l  D0, -(A7) */
+    FA18_CALL(0xC0FF24, 0x4EB9, 0xC0FF2A, 166, 0); /* C0FF24: jsr     $c17c2a.l */
+L_C0FF2A:
+    FA18_CHECK(0xC0FF2A);
+    FA18_OP(0xC0FF2A, 0x588F, 0xC0FF2C); /* C0FF2A: addq.l  #4, A7 */
+    FA18_JUMP(0xC0FF2C, 0x602A, 0xC0FF58, L_C0FF58); /* C0FF2C: bra     $c0ff58 */
+L_C0FF2E:
+    FA18_CHECK(0xC0FF2E);
+    FA18_OP(0xC0FF2E, 0x0839, 0xC0FF36); /* C0FF2E: btst    #$4, $c45b5b.l */
+    FA18_BCC(0xC0FF36, 0x670E, 0xC0FF38, 0xC0FF46, L_C0FF46); /* C0FF36: beq     $c0ff46 */
+L_C0FF38:
+    FA18_CHECK(0xC0FF38);
+    FA18_OP(0xC0FF38, 0x7008, 0xC0FF3A); /* C0FF38: moveq   #$8, D0 */
+    FA18_OP(0xC0FF3A, 0x2F00, 0xC0FF3C); /* C0FF3A: move.l  D0, -(A7) */
+    FA18_CALL(0xC0FF3C, 0x4EB9, 0xC0FF42, 171, 0); /* C0FF3C: jsr     $c17e4a.l */
+L_C0FF42:
+    FA18_CHECK(0xC0FF42);
+    FA18_OP(0xC0FF42, 0x588F, 0xC0FF44); /* C0FF42: addq.l  #4, A7 */
+    FA18_JUMP(0xC0FF44, 0x6012, 0xC0FF58, L_C0FF58); /* C0FF44: bra     $c0ff58 */
+L_C0FF46:
+    FA18_CHECK(0xC0FF46);
+    FA18_OP(0xC0FF46, 0x7008, 0xC0FF48); /* C0FF46: moveq   #$8, D0 */
+    FA18_OP(0xC0FF48, 0x2F00, 0xC0FF4A); /* C0FF48: move.l  D0, -(A7) */
+    FA18_OP(0xC0FF4A, 0x2F3C, 0xC0FF50); /* C0FF4A: move.l  #$300, -(A7) */
+    FA18_CALL(0xC0FF50, 0x4EB9, 0xC0FF56, 168, 0); /* C0FF50: jsr     $c17cf6.l */
+L_C0FF56:
+    FA18_CHECK(0xC0FF56);
+    FA18_OP(0xC0FF56, 0x508F, 0xC0FF58); /* C0FF56: addq.l  #8, A7 */
+L_C0FF58:
+    FA18_CHECK(0xC0FF58);
+    FA18_OP(0xC0FF58, 0x33FC, 0xC0FF60); /* C0FF58: move.w  #$b3, $c45984.l */
+    FA18_CALL(0xC0FF60, 0x6100, 0xC0FF64, 113, 0); /* C0FF60: bsr     $c11312 */
+L_C0FF64:
+    FA18_CHECK(0xC0FF64);
+    FA18_OP(0xC0FF64, 0x33FC, 0xC0FF6C); /* C0FF64: move.w  #$4, $c45ad6.l */
+    FA18_OP(0xC0FF6C, 0x13FC, 0xC0FF74); /* C0FF6C: move.b  #$3, $c45897.l */
+    FA18_OP(0xC0FF74, 0x13FC, 0xC0FF7C); /* C0FF74: move.b  #$2, $c45898.l */
+    FA18_CALL(0xC0FF7C, 0x4EB9, 0xC0FF82, 325, 1); /* C0FF7C: jsr     $c28722.l */
+L_C0FF82:
+    FA18_CHECK(0xC0FF82);
+    FA18_OP(0xC0FF82, 0x4239, 0xC0FF88); /* C0FF82: clr.b   $c457ae.l */
+    FA18_OP(0xC0FF88, 0x13FC, 0xC0FF90); /* C0FF88: move.b  #$1, $c45795.l */
+    FA18_OP(0xC0FF90, 0x13FC, 0xC0FF98); /* C0FF90: move.b  #$3, $c45836.l */
+    FA18_OP(0xC0FF98, 0x13F9, 0xC0FFA2); /* C0FF98: move.b  $c458a0.l, $c458a1.l */
+    FA18_CALL(0xC0FFA2, 0x4EB9, 0xC0FFA8, 114, 0); /* C0FFA2: jsr     $c11b0e.l */
+L_C0FFA8:
+    FA18_CHECK(0xC0FFA8);
+    FA18_OP(0xC0FFA8, 0x41FA, 0xC0FFAC); /* C0FFA8: lea     ($43a,PC), A0; ($c103e4) */
+    FA18_OP(0xC0FFAC, 0x23C8, 0xC0FFB2); /* C0FFAC: move.l  A0, $c1820c.l */
+    FA18_OP(0xC0FFB2, 0x13FC, 0xC0FFBA); /* C0FFB2: move.b  #$3, $c45848.l */
+    FA18_OP(0xC0FFBA, 0x13FC, 0xC0FFC2); /* C0FFBA: move.b  #$11, $c45849.l */
+    FA18_OP(0xC0FFC2, 0x7000, 0xC0FFC4); /* C0FFC2: moveq   #$0, D0 */
+    FA18_OP(0xC0FFC4, 0x302E, 0xC0FFC8); /* C0FFC4: move.w  (-$2,A6), D0 */
+    FA18_OP(0xC0FFC8, 0x7230, 0xC0FFCA); /* C0FFC8: moveq   #$30, D1 */
+L_C0FFCA:
+    FA18_CHECK(0xC0FFCA);
+    FA18_OP(0xC0FFCA, 0x0481, 0xC0FFD0); /* C0FFCA: subi.l  #$8, D1 */
+    FA18_BCC(0xC0FFD0, 0x6B00, 0xC0FFD4, 0xC10162, L_C10162); /* C0FFD0: bmi     $c10162 */
+L_C0FFD4:
+    FA18_CHECK(0xC0FFD4);
+    FA18_OP(0xC0FFD4, 0xB0BB, 0xC0FFD8); /* C0FFD4: cmp.l   ($8,PC,D1.l), D0 */
+    FA18_BCC(0xC0FFD8, 0x66F0, 0xC0FFDA, 0xC0FFCA, L_C0FFCA); /* C0FFD8: bne     $c0ffca */
+L_C0FFDA:
+    FA18_CHECK(0xC0FFDA);
+    FA18_JUMP_OUT(0xC0FFDA, 0x4EFB); /* C0FFDA: jmp     ($6,PC,D1.l) */
+L_C10162:
+    FA18_CHECK(0xC10162);
+    FA18_OP(0xC10162, 0x1039, 0xC10168); /* C10162: move.b  $c45848.l, D0 */
+    FA18_OP(0xC10168, 0x5700, 0xC1016A); /* C10168: subq.b  #3, D0 */
+    FA18_BCC(0xC1016A, 0x6608, 0xC1016C, 0xC10174, L_C10174); /* C1016A: bne     $c10174 */
+L_C1016C:
+    FA18_CHECK(0xC1016C);
+    FA18_OP(0xC1016C, 0x13FC, 0xC10174); /* C1016C: move.b  #$11, $c45849.l */
+L_C10174:
+    FA18_CHECK(0xC10174);
+    FA18_CALL(0xC10174, 0x4EB9, 0xC1017A, 202, 1); /* C10174: jsr     $c1c860.l */
+L_C1017A:
+    FA18_CHECK(0xC1017A);
+    FA18_OP(0xC1017A, 0x4E5E, 0xC1017C); /* C1017A: unlk    A6 */
+    FA18_RETURN(0xC1017C, 0x4E75); /* C1017C: rts */
+}
+
+int fa18_fn_C1000A(int entry) {
+    switch (entry) {
+    case 0: goto L_C1000A;
+    case 1: goto L_C1000E;
+    case 2: goto L_C10162;
+    case 3: goto L_C1016C;
+    case 4: goto L_C10174;
+    case 5: goto L_C1017A;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C1000A:
+    FA18_CHECK(0xC1000A);
+    FA18_JUMP(0xC1000A, 0x6000, 0xC1000E, L_C1000E); /* C1000A: bra     $c1000e */
+L_C1000E:
+    FA18_CHECK(0xC1000E);
+    FA18_OP(0xC1000E, 0x13FC, 0xC10016); /* C1000E: move.b  #$1, $c457ae.l */
+    FA18_OP(0xC10016, 0x41FA, 0xC1001A); /* C10016: lea     (-$614,PC), A0; ($c0fa04) */
+    FA18_OP(0xC1001A, 0x23C8, 0xC10020); /* C1001A: move.l  A0, $c1820c.l */
+    FA18_JUMP(0xC10020, 0x6000, 0xC10162, L_C10162); /* C10020: bra     $c10162 */
+L_C10162:
+    FA18_CHECK(0xC10162);
+    FA18_OP(0xC10162, 0x1039, 0xC10168); /* C10162: move.b  $c45848.l, D0 */
+    FA18_OP(0xC10168, 0x5700, 0xC1016A); /* C10168: subq.b  #3, D0 */
+    FA18_BCC(0xC1016A, 0x6608, 0xC1016C, 0xC10174, L_C10174); /* C1016A: bne     $c10174 */
+L_C1016C:
+    FA18_CHECK(0xC1016C);
+    FA18_OP(0xC1016C, 0x13FC, 0xC10174); /* C1016C: move.b  #$11, $c45849.l */
+L_C10174:
+    FA18_CHECK(0xC10174);
+    FA18_CALL(0xC10174, 0x4EB9, 0xC1017A, 202, 1); /* C10174: jsr     $c1c860.l */
+L_C1017A:
+    FA18_CHECK(0xC1017A);
+    FA18_OP(0xC1017A, 0x4E5E, 0xC1017C); /* C1017A: unlk    A6 */
+    FA18_RETURN(0xC1017C, 0x4E75); /* C1017C: rts */
+}
+
+int fa18_fn_C10C08(int entry) {
+    switch (entry) {
+    case 0: goto L_C10C08;
+    case 1: goto L_C10C12;
+    case 2: goto L_C10C42;
+    case 3: goto L_C10C4C;
+    case 4: goto L_C10C66;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C10C08:
+    FA18_CHECK(0xC10C08);
+    FA18_OP(0xC10C08, 0x1039, 0xC10C0E); /* C10C08: move.b  $c45785.l, D0 */
+    FA18_OP(0xC10C0E, 0x4A00, 0xC10C10); /* C10C0E: tst.b   D0 */
+    FA18_BCC(0xC10C10, 0x6630, 0xC10C12, 0xC10C42, L_C10C42); /* C10C10: bne     $c10c42 */
+L_C10C12:
+    FA18_CHECK(0xC10C12);
+    FA18_OP(0xC10C12, 0x13FC, 0xC10C1A); /* C10C12: move.b  #$1, $c457b4.l */
+    FA18_OP(0xC10C1A, 0x7000, 0xC10C1C); /* C10C1A: moveq   #$0, D0 */
+    FA18_OP(0xC10C1C, 0x13C0, 0xC10C22); /* C10C1C: move.b  D0, $c458ae.l */
+    FA18_OP(0xC10C22, 0x13C0, 0xC10C28); /* C10C22: move.b  D0, $c458ad.l */
+    FA18_OP(0xC10C28, 0x13C0, 0xC10C2E); /* C10C28: move.b  D0, $c45788.l */
+    FA18_OP(0xC10C2E, 0x33FC, 0xC10C36); /* C10C2E: move.w  #$5, $c45ad6.l */
+    FA18_OP(0xC10C36, 0x41FA, 0xC10C3A); /* C10C36: lea     ($30,PC), A0; ($c10c68) */
+    FA18_OP(0xC10C3A, 0x23C8, 0xC10C40); /* C10C3A: move.l  A0, $c1820c.l */
+    FA18_JUMP(0xC10C40, 0x6024, 0xC10C66, L_C10C66); /* C10C40: bra     $c10c66 */
+L_C10C42:
+    FA18_CHECK(0xC10C42);
+    FA18_OP(0xC10C42, 0x1039, 0xC10C48); /* C10C42: move.b  $c457ae.l, D0 */
+    FA18_OP(0xC10C48, 0x4A00, 0xC10C4A); /* C10C48: tst.b   D0 */
+    FA18_BCC(0xC10C4A, 0x6A1A, 0xC10C4C, 0xC10C66, L_C10C66); /* C10C4A: bpl     $c10c66 */
+L_C10C4C:
+    FA18_CHECK(0xC10C4C);
+    FA18_OP(0xC10C4C, 0x33FC, 0xC10C54); /* C10C4C: move.w  #$2, $c45ad6.l */
+    FA18_OP(0xC10C54, 0x13FC, 0xC10C5C); /* C10C54: move.b  #$a, $c458a1.l */
+    FA18_OP(0xC10C5C, 0x23FC, 0xC10C66); /* C10C5C: move.l  #$c11a26, $c1820c.l */
+L_C10C66:
+    FA18_CHECK(0xC10C66);
+    FA18_RETURN(0xC10C66, 0x4E75); /* C10C66: rts */
+}
+
+int fa18_fn_C10C68(int entry) {
+    switch (entry) {
+    case 0: goto L_C10C68;
+    case 1: goto L_C10C78;
+    case 2: goto L_C10C96;
+    case 3: goto L_C10C9C;
+    case 4: goto L_C10CA2;
+    case 5: goto L_C10CA6;
+    case 6: goto L_C10CB2;
+    case 7: goto L_C10CBA;
+    case 8: goto L_C10CC6;
+    case 9: goto L_C10CD4;
+    case 10: goto L_C10CE2;
+    case 11: goto L_C10CEA;
+    case 12: goto L_C10CFA;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C10C68:
+    FA18_CHECK(0xC10C68);
+    FA18_OP(0xC10C68, 0x4E56, 0xC10C6C); /* C10C68: link    A6, #-$6 */
+    FA18_OP(0xC10C6C, 0x3039, 0xC10C72); /* C10C6C: move.w  $c45ad6.l, D0 */
+    FA18_OP(0xC10C72, 0x4A40, 0xC10C74); /* C10C72: tst.w   D0 */
+    FA18_BCC(0xC10C74, 0x6A00, 0xC10C78, 0xC10CFA, L_C10CFA); /* C10C74: bpl     $c10cfa */
+L_C10C78:
+    FA18_CHECK(0xC10C78);
+    FA18_OP(0xC10C78, 0x1039, 0xC10C7E); /* C10C78: move.b  $c458a6.l, D0 */
+    FA18_OP(0xC10C7E, 0x4239, 0xC10C84); /* C10C7E: clr.b   $c45795.l */
+    FA18_OP(0xC10C84, 0x2D7C, 0xC10C8C); /* C10C84: move.l  #$c4574a, (-$4,A6) */
+    FA18_OP(0xC10C8C, 0x1D40, 0xC10C90); /* C10C8C: move.b  D0, (-$5,A6) */
+    FA18_OP(0xC10C90, 0x0C00, 0xC10C94); /* C10C90: cmpi.b  #$3, D0 */
+    FA18_BCC(0xC10C94, 0x6D1C, 0xC10C96, 0xC10CB2, L_C10CB2); /* C10C94: blt     $c10cb2 */
+L_C10C96:
+    FA18_CHECK(0xC10C96);
+    FA18_OP(0xC10C96, 0x0C00, 0xC10C9A); /* C10C96: cmpi.b  #$8, D0 */
+    FA18_BCC(0xC10C9A, 0x6E16, 0xC10C9C, 0xC10CB2, L_C10CB2); /* C10C9A: bgt     $c10cb2 */
+L_C10C9C:
+    FA18_CHECK(0xC10C9C);
+    FA18_CALL(0xC10C9C, 0x4EB9, 0xC10CA2, 290, 1); /* C10C9C: jsr     $c25070.l */
+L_C10CA2:
+    FA18_CHECK(0xC10CA2);
+    FA18_OP(0xC10CA2, 0x4A80, 0xC10CA4); /* C10CA2: tst.l   D0 */
+    FA18_BCC(0xC10CA4, 0x6B0C, 0xC10CA6, 0xC10CB2, L_C10CB2); /* C10CA4: bmi     $c10cb2 */
+L_C10CA6:
+    FA18_CHECK(0xC10CA6);
+    FA18_OP(0xC10CA6, 0x206E, 0xC10CAA); /* C10CA6: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC10CAA, 0x30BC, 0xC10CAE); /* C10CAA: move.w  #$58, (A0) */
+    FA18_OP(0xC10CAE, 0x54AE, 0xC10CB2); /* C10CAE: addq.l  #2, (-$4,A6) */
+L_C10CB2:
+    FA18_CHECK(0xC10CB2);
+    FA18_OP(0xC10CB2, 0x0C2E, 0xC10CB8); /* C10CB2: cmpi.b  #$2, (-$5,A6) */
+    FA18_BCC(0xC10CB8, 0x6728, 0xC10CBA, 0xC10CE2, L_C10CE2); /* C10CB8: beq     $c10ce2 */
+L_C10CBA:
+    FA18_CHECK(0xC10CBA);
+    FA18_OP(0xC10CBA, 0x1039, 0xC10CC0); /* C10CBA: move.b  $c46188.l, D0 */
+    FA18_OP(0xC10CC0, 0x0800, 0xC10CC4); /* C10CC0: btst    #$3, D0 */
+    FA18_BCC(0xC10CC4, 0x670E, 0xC10CC6, 0xC10CD4, L_C10CD4); /* C10CC4: beq     $c10cd4 */
+L_C10CC6:
+    FA18_CHECK(0xC10CC6);
+    FA18_OP(0xC10CC6, 0x206E, 0xC10CCA); /* C10CC6: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC10CCA, 0x30BC, 0xC10CCE); /* C10CCA: move.w  #$5a, (A0) */
+    FA18_OP(0xC10CCE, 0x54AE, 0xC10CD2); /* C10CCE: addq.l  #2, (-$4,A6) */
+    FA18_JUMP(0xC10CD2, 0x6016, 0xC10CEA, L_C10CEA); /* C10CD2: bra     $c10cea */
+L_C10CD4:
+    FA18_CHECK(0xC10CD4);
+    FA18_OP(0xC10CD4, 0x206E, 0xC10CD8); /* C10CD4: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC10CD8, 0x30BC, 0xC10CDC); /* C10CD8: move.w  #$59, (A0) */
+    FA18_OP(0xC10CDC, 0x54AE, 0xC10CE0); /* C10CDC: addq.l  #2, (-$4,A6) */
+    FA18_JUMP(0xC10CE0, 0x6008, 0xC10CEA, L_C10CEA); /* C10CE0: bra     $c10cea */
+L_C10CE2:
+    FA18_CHECK(0xC10CE2);
+    FA18_OP(0xC10CE2, 0x13FC, 0xC10CEA); /* C10CE2: move.b  #$ff, $c457e0.l */
+L_C10CEA:
+    FA18_CHECK(0xC10CEA);
+    FA18_OP(0xC10CEA, 0x206E, 0xC10CEE); /* C10CEA: movea.l (-$4,A6), A0 */
+    FA18_OP(0xC10CEE, 0x4250, 0xC10CF0); /* C10CEE: clr.w   (A0) */
+    FA18_OP(0xC10CF0, 0x41FA, 0xC10CF4); /* C10CF0: lea     ($c,PC), A0; ($c10cfe) */
+    FA18_OP(0xC10CF4, 0x23C8, 0xC10CFA); /* C10CF4: move.l  A0, $c1820c.l */
+L_C10CFA:
+    FA18_CHECK(0xC10CFA);
+    FA18_OP(0xC10CFA, 0x4E5E, 0xC10CFC); /* C10CFA: unlk    A6 */
+    FA18_RETURN(0xC10CFC, 0x4E75); /* C10CFC: rts */
+}
+
+int fa18_fn_C10CFE(int entry) {
+    switch (entry) {
+    case 0: goto L_C10CFE;
+    case 1: goto L_C10D0A;
+    case 2: goto L_C10D4C;
+    case 3: goto L_C10D54;
+    case 4: goto L_C10D5A;
+    case 5: goto L_C10D88;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C10CFE:
+    FA18_CHECK(0xC10CFE);
+    FA18_OP(0xC10CFE, 0x1039, 0xC10D04); /* C10CFE: move.b  $c457e0.l, D0 */
+    FA18_OP(0xC10D04, 0x4A00, 0xC10D06); /* C10D04: tst.b   D0 */
+    FA18_BCC(0xC10D06, 0x6A00, 0xC10D0A, 0xC10D88, L_C10D88); /* C10D06: bpl     $c10d88 */
+L_C10D0A:
+    FA18_CHECK(0xC10D0A);
+    FA18_OP(0xC10D0A, 0x7001, 0xC10D0C); /* C10D0A: moveq   #$1, D0 */
+    FA18_OP(0xC10D0C, 0x13C0, 0xC10D12); /* C10D0C: move.b  D0, $c45795.l */
+    FA18_OP(0xC10D12, 0x3039, 0xC10D18); /* C10D12: move.w  $c458cc.l, D0 */
+    FA18_OP(0xC10D18, 0x0040, 0xC10D1C); /* C10D18: ori.w   #$40, D0 */
+    FA18_OP(0xC10D1C, 0x33C0, 0xC10D22); /* C10D1C: move.w  D0, $c458cc.l */
+    FA18_OP(0xC10D22, 0x3039, 0xC10D28); /* C10D22: move.w  $c458ce.l, D0 */
+    FA18_OP(0xC10D28, 0x0040, 0xC10D2C); /* C10D28: ori.w   #$100, D0 */
+    FA18_OP(0xC10D2C, 0x33C0, 0xC10D32); /* C10D2C: move.w  D0, $c458ce.l */
+    FA18_OP(0xC10D32, 0x3039, 0xC10D38); /* C10D32: move.w  $c458d2.l, D0 */
+    FA18_OP(0xC10D38, 0x0040, 0xC10D3C); /* C10D38: ori.w   #$2, D0 */
+    FA18_OP(0xC10D3C, 0x33C0, 0xC10D42); /* C10D3C: move.w  D0, $c458d2.l */
+    FA18_OP(0xC10D42, 0x1039, 0xC10D48); /* C10D42: move.b  $c458a6.l, D0 */
+    FA18_OP(0xC10D48, 0x5500, 0xC10D4A); /* C10D48: subq.b  #2, D0 */
+    FA18_BCC(0xC10D4A, 0x6608, 0xC10D4C, 0xC10D54, L_C10D54); /* C10D4A: bne     $c10d54 */
+L_C10D4C:
+    FA18_CHECK(0xC10D4C);
+    FA18_OP(0xC10D4C, 0x13FC, 0xC10D54); /* C10D4C: move.b  #$1, $c45793.l */
+L_C10D54:
+    FA18_CHECK(0xC10D54);
+    FA18_CALL(0xC10D54, 0x4EB9, 0xC10D5A, 157, 0); /* C10D54: jsr     $c16d04.l */
+L_C10D5A:
+    FA18_CHECK(0xC10D5A);
+    FA18_OP(0xC10D5A, 0x2039, 0xC10D60); /* C10D5A: move.l  $c45af2.l, D0 */
+    FA18_OP(0xC10D60, 0x23C0, 0xC10D66); /* C10D60: move.l  D0, $c45914.l */
+    FA18_OP(0xC10D66, 0x23F9, 0xC10D70); /* C10D66: move.l  $c45af2.l, $c4590c.l */
+    FA18_OP(0xC10D70, 0x4279, 0xC10D76); /* C10D70: clr.w   $c458da.l */
+    FA18_OP(0xC10D76, 0x33FC, 0xC10D7E); /* C10D76: move.w  #$3, $c45ad6.l */
+    FA18_OP(0xC10D7E, 0x41FA, 0xC10D82); /* C10D7E: lea     ($a,PC), A0; ($c10d8a) */
+    FA18_OP(0xC10D82, 0x23C8, 0xC10D88); /* C10D82: move.l  A0, $c1820c.l */
+L_C10D88:
+    FA18_CHECK(0xC10D88);
+    FA18_RETURN(0xC10D88, 0x4E75); /* C10D88: rts */
+}
+
+int fa18_fn_C10D8A(int entry) {
+    switch (entry) {
+    case 0: goto L_C10D8A;
+    case 1: goto L_C10D94;
+    case 2: goto L_C10DA2;
+    case 3: goto L_C10DAC;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C10D8A:
+    FA18_CHECK(0xC10D8A);
+    FA18_OP(0xC10D8A, 0x3039, 0xC10D90); /* C10D8A: move.w  $c45ad6.l, D0 */
+    FA18_OP(0xC10D90, 0x4A40, 0xC10D92); /* C10D90: tst.w   D0 */
+    FA18_BCC(0xC10D92, 0x6A18, 0xC10D94, 0xC10DAC, L_C10DAC); /* C10D92: bpl     $c10dac */
+L_C10D94:
+    FA18_CHECK(0xC10D94);
+    FA18_OP(0xC10D94, 0x13FC, 0xC10D9C); /* C10D94: move.b  #$1, $c457a1.l */
+    FA18_CALL(0xC10D9C, 0x4EB9, 0xC10DA2, 489, 0); /* C10D9C: jsr     $c33180.l */
+L_C10DA2:
+    FA18_CHECK(0xC10DA2);
+    FA18_OP(0xC10DA2, 0x41FA, 0xC10DA6); /* C10DA2: lea     ($a,PC), A0; ($c10dae) */
+    FA18_OP(0xC10DA6, 0x23C8, 0xC10DAC); /* C10DA6: move.l  A0, $c1820c.l */
+L_C10DAC:
+    FA18_CHECK(0xC10DAC);
+    FA18_RETURN(0xC10DAC, 0x4E75); /* C10DAC: rts */
+}
+
+int fa18_fn_C10DAE(int entry) {
+    switch (entry) {
+    case 0: goto L_C10DAE;
+    case 1: goto L_C10DC8;
+    case 2: goto L_C10DD8;
+    case 3: goto L_C10DE2;
+    case 4: goto L_C10E3A;
+    case 5: goto L_C10E56;
+    case 6: goto L_C10E64;
+    case 7: goto L_C10E66;
+    case 8: goto L_C10E74;
+    case 9: goto L_C10E90;
+    case 10: goto L_C10E96;
+    case 11: goto L_C10EA0;
+    case 12: goto L_C10EB6;
+    case 13: goto L_C10ECE;
+    case 14: goto L_C10EDA;
+    case 15: goto L_C10EE2;
+    case 16: goto L_C10EEC;
+    case 17: goto L_C10EF6;
+    case 18: goto L_C10EFC;
+    case 19: goto L_C10F06;
+    case 20: goto L_C10F0E;
+    case 21: goto L_C10F18;
+    case 22: goto L_C10F20;
+    case 23: goto L_C10F28;
+    case 24: goto L_C10F34;
+    case 25: goto L_C10F5C;
+    case 26: goto L_C10F7A;
+    case 27: goto L_C10F8C;
+    case 28: goto L_C10F9A;
+    case 29: goto L_C10FB4;
+    case 30: goto L_C10FC8;
+    case 31: goto L_C10FD4;
+    case 32: goto L_C10FEE;
+    case 33: goto L_C10FF6;
+    case 34: goto L_C11002;
+    case 35: goto L_C1100A;
+    case 36: goto L_C11016;
+    case 37: goto L_C11020;
+    case 38: goto L_C1102A;
+    case 39: goto L_C11036;
+    case 40: goto L_C11040;
+    case 41: goto L_C11048;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C10DAE:
+    FA18_CHECK(0xC10DAE);
+    FA18_OP(0xC10DAE, 0x4E56, 0xC10DB2); /* C10DAE: link    A6, #-$2 */
+    FA18_OP(0xC10DB2, 0x1D79, 0xC10DBA); /* C10DB2: move.b  $c45798.l, (-$1,A6) */
+    FA18_OP(0xC10DBA, 0x3039, 0xC10DC0); /* C10DBA: move.w  $c46184.l, D0 */
+    FA18_OP(0xC10DC0, 0x0800, 0xC10DC4); /* C10DC0: btst    #$9, D0 */
+    FA18_BCC(0xC10DC4, 0x6700, 0xC10DC8, 0xC10E96, L_C10E96); /* C10DC4: beq     $c10e96 */
+L_C10DC8:
+    FA18_CHECK(0xC10DC8);
+    FA18_OP(0xC10DC8, 0x1039, 0xC10DCE); /* C10DC8: move.b  $c46200.l, D0 */
+    FA18_OP(0xC10DCE, 0x0200, 0xC10DD2); /* C10DCE: andi.b  #$f, D0 */
+    FA18_OP(0xC10DD2, 0x4A00, 0xC10DD4); /* C10DD2: tst.b   D0 */
+    FA18_BCC(0xC10DD4, 0x6600, 0xC10DD8, 0xC10E96, L_C10E96); /* C10DD4: bne     $c10e96 */
+L_C10DD8:
+    FA18_CHECK(0xC10DD8);
+    FA18_OP(0xC10DD8, 0x4A39, 0xC10DDE); /* C10DD8: tst.b   $c4578c.l */
+    FA18_BCC(0xC10DDE, 0x6700, 0xC10DE2, 0xC10E74, L_C10E74); /* C10DDE: beq     $c10e74 */
+L_C10DE2:
+    FA18_CHECK(0xC10DE2);
+    FA18_OP(0xC10DE2, 0x2079, 0xC10DE8); /* C10DE2: movea.l $c1ab74.l, A0 */
+    FA18_OP(0xC10DE8, 0x3028, 0xC10DEC); /* C10DE8: move.w  ($10,A0), D0 */
+    FA18_OP(0xC10DEC, 0x5240, 0xC10DEE); /* C10DEC: addq.w  #1, D0 */
+    FA18_OP(0xC10DEE, 0x2079, 0xC10DF4); /* C10DEE: movea.l $c1ab74.l, A0 */
+    FA18_OP(0xC10DF4, 0x3140, 0xC10DF8); /* C10DF4: move.w  D0, ($10,A0) */
+    FA18_OP(0xC10DF8, 0x7001, 0xC10DFA); /* C10DF8: moveq   #$1, D0 */
+    FA18_OP(0xC10DFA, 0x13C0, 0xC10E00); /* C10DFA: move.b  D0, $c457c5.l */
+    FA18_OP(0xC10E00, 0x3039, 0xC10E06); /* C10E00: move.w  $c458ca.l, D0 */
+    FA18_OP(0xC10E06, 0x0240, 0xC10E0A); /* C10E06: andi.w  #$feff, D0 */
+    FA18_OP(0xC10E0A, 0x33C0, 0xC10E10); /* C10E0A: move.w  D0, $c458ca.l */
+    FA18_OP(0xC10E10, 0x3039, 0xC10E16); /* C10E10: move.w  $c458cc.l, D0 */
+    FA18_OP(0xC10E16, 0x0240, 0xC10E1A); /* C10E16: andi.w  #$ffbf, D0 */
+    FA18_OP(0xC10E1A, 0x33C0, 0xC10E20); /* C10E1A: move.w  D0, $c458cc.l */
+    FA18_OP(0xC10E20, 0x3039, 0xC10E26); /* C10E20: move.w  $c46184.l, D0 */
+    FA18_OP(0xC10E26, 0x0240, 0xC10E2A); /* C10E26: andi.w  #$fdff, D0 */
+    FA18_OP(0xC10E2A, 0x33C0, 0xC10E30); /* C10E2A: move.w  D0, $c46184.l */
+    FA18_OP(0xC10E30, 0x1039, 0xC10E36); /* C10E30: move.b  $c45785.l, D0 */
+    FA18_OP(0xC10E36, 0x4A00, 0xC10E38); /* C10E36: tst.b   D0 */
+    FA18_BCC(0xC10E38, 0x662C, 0xC10E3A, 0xC10E66, L_C10E66); /* C10E38: bne     $c10e66 */
+L_C10E3A:
+    FA18_CHECK(0xC10E3A);
+    FA18_OP(0xC10E3A, 0x13FC, 0xC10E42); /* C10E3A: move.b  #$1, $c4589a.l */
+    FA18_OP(0xC10E42, 0x42B9, 0xC10E48); /* C10E42: clr.l   $c461c6.l */
+    FA18_OP(0xC10E48, 0x13FC, 0xC10E50); /* C10E48: move.b  #$28, $c45899.l */
+    FA18_CALL(0xC10E50, 0x4EB9, 0xC10E56, 98, 0); /* C10E50: jsr     $c0f4a6.l */
+L_C10E56:
+    FA18_CHECK(0xC10E56);
+    FA18_OP(0xC10E56, 0x7078, 0xC10E58); /* C10E56: moveq   #$78, D0 */
+    FA18_OP(0xC10E58, 0x2F00, 0xC10E5A); /* C10E58: move.l  D0, -(A7) */
+    FA18_OP(0xC10E5A, 0x703F, 0xC10E5C); /* C10E5A: moveq   #$3f, D0 */
+    FA18_OP(0xC10E5C, 0x2F00, 0xC10E5E); /* C10E5C: move.l  D0, -(A7) */
+    FA18_CALL(0xC10E5E, 0x4EB9, 0xC10E64, 173, 0); /* C10E5E: jsr     $c17f8c.l */
+L_C10E64:
+    FA18_CHECK(0xC10E64);
+    FA18_OP(0xC10E64, 0x508F, 0xC10E66); /* C10E64: addq.l  #8, A7 */
+L_C10E66:
+    FA18_CHECK(0xC10E66);
+    FA18_OP(0xC10E66, 0x23FC, 0xC10E70); /* C10E66: move.l  #$c11788, $c1820c.l */
+    FA18_JUMP(0xC10E70, 0x6000, 0xC11048, L_C11048); /* C10E70: bra     $c11048 */
+L_C10E74:
+    FA18_CHECK(0xC10E74);
+    FA18_OP(0xC10E74, 0x3039, 0xC10E7A); /* C10E74: move.w  $c46184.l, D0 */
+    FA18_OP(0xC10E7A, 0x0240, 0xC10E7E); /* C10E7A: andi.w  #$fdff, D0 */
+    FA18_OP(0xC10E7E, 0x33C0, 0xC10E84); /* C10E7E: move.w  D0, $c46184.l */
+    FA18_OP(0xC10E84, 0x2F3C, 0xC10E8A); /* C10E84: move.l  #$4021, -(A7) */
+    FA18_CALL(0xC10E8A, 0x4EB9, 0xC10E90, 116, 0); /* C10E8A: jsr     $c11bb0.l */
+L_C10E90:
+    FA18_CHECK(0xC10E90);
+    FA18_OP(0xC10E90, 0x588F, 0xC10E92); /* C10E90: addq.l  #4, A7 */
+    FA18_JUMP(0xC10E92, 0x6000, 0xC11048, L_C11048); /* C10E92: bra     $c11048 */
+L_C10E96:
+    FA18_CHECK(0xC10E96);
+    FA18_OP(0xC10E96, 0x1039, 0xC10E9C); /* C10E96: move.b  $c457ae.l, D0 */
+    FA18_OP(0xC10E9C, 0x4A00, 0xC10E9E); /* C10E9C: tst.b   D0 */
+    FA18_BCC(0xC10E9E, 0x6A2E, 0xC10EA0, 0xC10ECE, L_C10ECE); /* C10E9E: bpl     $c10ece */
+L_C10EA0:
+    FA18_CHECK(0xC10EA0);
+    FA18_OP(0xC10EA0, 0x33FC, 0xC10EA8); /* C10EA0: move.w  #$2, $c45ad6.l */
+    FA18_OP(0xC10EA8, 0x13FC, 0xC10EB0); /* C10EA8: move.b  #$a, $c458a1.l */
+    FA18_CALL(0xC10EB0, 0x4EB9, 0xC10EB6, 157, 0); /* C10EB0: jsr     $c16d04.l */
+L_C10EB6:
+    FA18_CHECK(0xC10EB6);
+    FA18_OP(0xC10EB6, 0x23F9, 0xC10EC0); /* C10EB6: move.l  $c45af2.l, $c45904.l */
+    FA18_OP(0xC10EC0, 0x23FC, 0xC10ECA); /* C10EC0: move.l  #$c11a26, $c1820c.l */
+    FA18_JUMP(0xC10ECA, 0x6000, 0xC11048, L_C11048); /* C10ECA: bra     $c11048 */
+L_C10ECE:
+    FA18_CHECK(0xC10ECE);
+    FA18_OP(0xC10ECE, 0x102E, 0xC10ED2); /* C10ECE: move.b  (-$1,A6), D0 */
+    FA18_OP(0xC10ED2, 0x0C00, 0xC10ED6); /* C10ED2: cmpi.b  #-$1, D0 */
+    FA18_BCC(0xC10ED6, 0x6E00, 0xC10EDA, 0xC10FC8, L_C10FC8); /* C10ED6: bgt     $c10fc8 */
+L_C10EDA:
+    FA18_CHECK(0xC10EDA);
+    FA18_OP(0xC10EDA, 0x0C00, 0xC10EDE); /* C10EDA: cmpi.b  #-$4, D0 */
+    FA18_BCC(0xC10EDE, 0x6D00, 0xC10EE2, 0xC10FC8, L_C10FC8); /* C10EDE: blt     $c10fc8 */
+L_C10EE2:
+    FA18_CHECK(0xC10EE2);
+    FA18_OP(0xC10EE2, 0x4A39, 0xC10EE8); /* C10EE2: tst.b   $c457c3.l */
+    FA18_BCC(0xC10EE8, 0x6700, 0xC10EEC, 0xC10FC8, L_C10FC8); /* C10EE8: beq     $c10fc8 */
+L_C10EEC:
+    FA18_CHECK(0xC10EEC);
+    FA18_OP(0xC10EEC, 0x4A39, 0xC10EF2); /* C10EEC: tst.b   $c457e0.l */
+    FA18_BCC(0xC10EF2, 0x6700, 0xC10EF6, 0xC10FC8, L_C10FC8); /* C10EF2: beq     $c10fc8 */
+L_C10EF6:
+    FA18_CHECK(0xC10EF6);
+    FA18_OP(0xC10EF6, 0x0C00, 0xC10EFA); /* C10EF6: cmpi.b  #-$1, D0 */
+    FA18_BCC(0xC10EFA, 0x660A, 0xC10EFC, 0xC10F06, L_C10F06); /* C10EFA: bne     $c10f06 */
+L_C10EFC:
+    FA18_CHECK(0xC10EFC);
+    FA18_OP(0xC10EFC, 0x13FC, 0xC10F04); /* C10EFC: move.b  #$1, $c45798.l */
+    FA18_JUMP(0xC10F04, 0x6022, 0xC10F28, L_C10F28); /* C10F04: bra     $c10f28 */
+L_C10F06:
+    FA18_CHECK(0xC10F06);
+    FA18_OP(0xC10F06, 0x0C2E, 0xC10F0C); /* C10F06: cmpi.b  #-$2, (-$1,A6) */
+    FA18_BCC(0xC10F0C, 0x660A, 0xC10F0E, 0xC10F18, L_C10F18); /* C10F0C: bne     $c10f18 */
+L_C10F0E:
+    FA18_CHECK(0xC10F0E);
+    FA18_OP(0xC10F0E, 0x13FC, 0xC10F16); /* C10F0E: move.b  #$2, $c45798.l */
+    FA18_JUMP(0xC10F16, 0x6010, 0xC10F28, L_C10F28); /* C10F16: bra     $c10f28 */
+L_C10F18:
+    FA18_CHECK(0xC10F18);
+    FA18_OP(0xC10F18, 0x0C2E, 0xC10F1E); /* C10F18: cmpi.b  #-$4, (-$1,A6) */
+    FA18_BCC(0xC10F1E, 0x6608, 0xC10F20, 0xC10F28, L_C10F28); /* C10F1E: bne     $c10f28 */
+L_C10F20:
+    FA18_CHECK(0xC10F20);
+    FA18_OP(0xC10F20, 0x13FC, 0xC10F28); /* C10F20: move.b  #$4, $c45798.l */
+L_C10F28:
+    FA18_CHECK(0xC10F28);
+    FA18_OP(0xC10F28, 0x13FC, 0xC10F30); /* C10F28: move.b  #$1, $c45795.l */
+    FA18_CALL(0xC10F30, 0x6100, 0xC10F34, 113, 0); /* C10F30: bsr     $c11312 */
+L_C10F34:
+    FA18_CHECK(0xC10F34);
+    FA18_OP(0xC10F34, 0x7000, 0xC10F36); /* C10F34: moveq   #$0, D0 */
+    FA18_OP(0xC10F36, 0x13C0, 0xC10F3C); /* C10F36: move.b  D0, $c458ad.l */
+    FA18_OP(0xC10F3C, 0x13FC, 0xC10F44); /* C10F3C: move.b  #$fe, $c458b0.l */
+    FA18_OP(0xC10F44, 0x13FC, 0xC10F4C); /* C10F44: move.b  #$ff, $c45858.l */
+    FA18_OP(0xC10F4C, 0x13C0, 0xC10F52); /* C10F4C: move.b  D0, $c457ae.l */
+    FA18_OP(0xC10F52, 0x4A79, 0xC10F58); /* C10F52: tst.w   $c458dc.l */
+    FA18_BCC(0xC10F58, 0x6700, 0xC10F5C, 0xC11048, L_C11048); /* C10F58: beq     $c11048 */
+L_C10F5C:
+    FA18_CHECK(0xC10F5C);
+    FA18_OP(0xC10F5C, 0x7000, 0xC10F5E); /* C10F5C: moveq   #$0, D0 */
+    FA18_OP(0xC10F5E, 0x33C0, 0xC10F64); /* C10F5E: move.w  D0, $c458dc.l */
+    FA18_OP(0xC10F64, 0x33C0, 0xC10F6A); /* C10F64: move.w  D0, $c458de.l */
+    FA18_OP(0xC10F6A, 0x1039, 0xC10F70); /* C10F6A: move.b  $c45834.l, D0 */
+    FA18_OP(0xC10F70, 0x13C0, 0xC10F76); /* C10F70: move.b  D0, $c45785.l */
+    FA18_OP(0xC10F76, 0x4A00, 0xC10F78); /* C10F76: tst.b   D0 */
+    FA18_BCC(0xC10F78, 0x6712, 0xC10F7A, 0xC10F8C, L_C10F8C); /* C10F78: beq     $c10f8c */
+L_C10F7A:
+    FA18_CHECK(0xC10F7A);
+    FA18_OP(0xC10F7A, 0x33FC, 0xC10F82); /* C10F7A: move.w  #$32, $c45986.l */
+    FA18_OP(0xC10F82, 0x33FC, 0xC10F8A); /* C10F82: move.w  #$a7, $c45984.l */
+    FA18_JUMP(0xC10F8A, 0x600E, 0xC10F9A, L_C10F9A); /* C10F8A: bra     $c10f9a */
+L_C10F8C:
+    FA18_CHECK(0xC10F8C);
+    FA18_OP(0xC10F8C, 0x4279, 0xC10F92); /* C10F8C: clr.w   $c45986.l */
+    FA18_OP(0xC10F92, 0x33FC, 0xC10F9A); /* C10F92: move.w  #$90, $c45984.l */
+L_C10F9A:
+    FA18_CHECK(0xC10F9A);
+    FA18_OP(0xC10F9A, 0x4239, 0xC10FA0); /* C10F9A: clr.b   $c457a7.l */
+    FA18_OP(0xC10FA0, 0x3039, 0xC10FA6); /* C10FA0: move.w  $c45986.l, D0 */
+    FA18_OP(0xC10FA6, 0xE940, 0xC10FA8); /* C10FA6: asl.w   #4, D0 */
+    FA18_OP(0xC10FA8, 0x33C0, 0xC10FAE); /* C10FA8: move.w  D0, $c45988.l */
+    FA18_CALL(0xC10FAE, 0x4EB9, 0xC10FB4, 44, 0); /* C10FAE: jsr     $c082b8.l */
+L_C10FB4:
+    FA18_CHECK(0xC10FB4);
+    FA18_OP(0xC10FB4, 0x1039, 0xC10FBA); /* C10FB4: move.b  $c457be.l, D0 */
+    FA18_OP(0xC10FBA, 0x0200, 0xC10FBE); /* C10FBA: andi.b  #$7f, D0 */
+    FA18_OP(0xC10FBE, 0x13C0, 0xC10FC4); /* C10FBE: move.b  D0, $c458b2.l */
+    FA18_JUMP(0xC10FC4, 0x6000, 0xC11048, L_C11048); /* C10FC4: bra     $c11048 */
+L_C10FC8:
+    FA18_CHECK(0xC10FC8);
+    FA18_OP(0xC10FC8, 0x1039, 0xC10FCE); /* C10FC8: move.b  $c4582a.l, D0 */
+    FA18_OP(0xC10FCE, 0x0C00, 0xC10FD2); /* C10FCE: cmpi.b  #-$1, D0 */
+    FA18_BCC(0xC10FD2, 0x661A, 0xC10FD4, 0xC10FEE, L_C10FEE); /* C10FD2: bne     $c10fee */
+L_C10FD4:
+    FA18_CHECK(0xC10FD4);
+    FA18_OP(0xC10FD4, 0x4239, 0xC10FDA); /* C10FD4: clr.b   $c4582a.l */
+    FA18_OP(0xC10FDA, 0x13FC, 0xC10FE2); /* C10FDA: move.b  #$ff, $c457e0.l */
+    FA18_OP(0xC10FE2, 0x23FC, 0xC10FEC); /* C10FE2: move.l  #$c118fc, $c1820c.l */
+    FA18_JUMP(0xC10FEC, 0x605A, 0xC11048, L_C11048); /* C10FEC: bra     $c11048 */
+L_C10FEE:
+    FA18_CHECK(0xC10FEE);
+    FA18_OP(0xC10FEE, 0x0C2E, 0xC10FF4); /* C10FEE: cmpi.b  #-$10, (-$1,A6) */
+    FA18_BCC(0xC10FF4, 0x660C, 0xC10FF6, 0xC11002, L_C11002); /* C10FF4: bne     $c11002 */
+L_C10FF6:
+    FA18_CHECK(0xC10FF6);
+    FA18_OP(0xC10FF6, 0x23FC, 0xC11000); /* C10FF6: move.l  #$c118fc, $c1820c.l */
+    FA18_JUMP(0xC11000, 0x6046, 0xC11048, L_C11048); /* C11000: bra     $c11048 */
+L_C11002:
+    FA18_CHECK(0xC11002);
+    FA18_OP(0xC11002, 0x0C2E, 0xC11008); /* C11002: cmpi.b  #-$11, (-$1,A6) */
+    FA18_BCC(0xC11008, 0x660C, 0xC1100A, 0xC11016, L_C11016); /* C11008: bne     $c11016 */
+L_C1100A:
+    FA18_CHECK(0xC1100A);
+    FA18_OP(0xC1100A, 0x23FC, 0xC11014); /* C1100A: move.l  #$c11958, $c1820c.l */
+    FA18_JUMP(0xC11014, 0x6032, 0xC11048, L_C11048); /* C11014: bra     $c11048 */
+L_C11016:
+    FA18_CHECK(0xC11016);
+    FA18_OP(0xC11016, 0x3039, 0xC1101C); /* C11016: move.w  $c458de.l, D0 */
+    FA18_OP(0xC1101C, 0x4A40, 0xC1101E); /* C1101C: tst.w   D0 */
+    FA18_BCC(0xC1101E, 0x6620, 0xC11020, 0xC11040, L_C11040); /* C1101E: bne     $c11040 */
+L_C11020:
+    FA18_CHECK(0xC11020);
+    FA18_OP(0xC11020, 0x1039, 0xC11026); /* C11020: move.b  $c45785.l, D0 */
+    FA18_OP(0xC11026, 0x4A00, 0xC11028); /* C11026: tst.b   D0 */
+    FA18_BCC(0xC11028, 0x6616, 0xC1102A, 0xC11040, L_C11040); /* C11028: bne     $c11040 */
+L_C1102A:
+    FA18_CHECK(0xC1102A);
+    FA18_OP(0xC1102A, 0x1039, 0xC11030); /* C1102A: move.b  $c45889.l, D0 */
+    FA18_OP(0xC11030, 0x0C00, 0xC11034); /* C11030: cmpi.b  #$5, D0 */
+    FA18_BCC(0xC11034, 0x6F0A, 0xC11036, 0xC11040, L_C11040); /* C11034: ble     $c11040 */
+L_C11036:
+    FA18_CHECK(0xC11036);
+    FA18_OP(0xC11036, 0x13FC, 0xC1103E); /* C11036: move.b  #$2, $c458a1.l */
+    FA18_JUMP(0xC1103E, 0x6008, 0xC11048, L_C11048); /* C1103E: bra     $c11048 */
+L_C11040:
+    FA18_CHECK(0xC11040);
+    FA18_OP(0xC11040, 0x13FC, 0xC11048); /* C11040: move.b  #$f, $c458a1.l */
+L_C11048:
+    FA18_CHECK(0xC11048);
+    FA18_OP(0xC11048, 0x4E5E, 0xC1104A); /* C11048: unlk    A6 */
+    FA18_RETURN(0xC1104A, 0x4E75); /* C1104A: rts */
+}
+
+int fa18_fn_C11312(int entry) {
+    switch (entry) {
+    case 0: goto L_C11312;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C11312:
+    FA18_CHECK(0xC11312);
+    FA18_OP(0xC11312, 0x4E56, 0xC11316); /* C11312: link    A6, #-$4 */
+    FA18_OP(0xC11316, 0x41F9, 0xC1131C); /* C11316: lea     $c4574a.l, A0 */
+    FA18_OP(0xC1131C, 0x7000, 0xC1131E); /* C1131C: moveq   #$0, D0 */
+    FA18_OP(0xC1131E, 0x3080, 0xC11320); /* C1131E: move.w  D0, (A0) */
+    FA18_OP(0xC11320, 0x5488, 0xC11322); /* C11320: addq.l  #2, A0 */
+    FA18_OP(0xC11322, 0x3080, 0xC11324); /* C11322: move.w  D0, (A0) */
+    FA18_OP(0xC11324, 0x5488, 0xC11326); /* C11324: addq.l  #2, A0 */
+    FA18_OP(0xC11326, 0x23FC, 0xC11330); /* C11326: move.l  #$1b8, $c4573e.l */
+    FA18_OP(0xC11330, 0x7000, 0xC11332); /* C11330: moveq   #$0, D0 */
+    FA18_OP(0xC11332, 0x13C0, 0xC11338); /* C11332: move.b  D0, $c457c6.l */
+    FA18_OP(0xC11338, 0x13C0, 0xC1133E); /* C11338: move.b  D0, $c457c3.l */
+    FA18_OP(0xC1133E, 0x13C0, 0xC11344); /* C1133E: move.b  D0, $c457e0.l */
+    FA18_OP(0xC11344, 0x13C0, 0xC1134A); /* C11344: move.b  D0, $c45871.l */
+    FA18_OP(0xC1134A, 0x4E5E, 0xC1134C); /* C1134A: unlk    A6 */
+    FA18_RETURN(0xC1134C, 0x4E75); /* C1134C: rts */
+}
+
+int fa18_fn_C11B0E(int entry) {
+    switch (entry) {
+    case 0: goto L_C11B0E;
+    case 1: goto L_C11B26;
+    case 2: goto L_C11B2E;
+    case 3: goto L_C11B3E;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C11B0E:
+    FA18_CHECK(0xC11B0E);
+    FA18_OP(0xC11B0E, 0x4E56, 0xC11B12); /* C11B0E: link    A6, #-$6 */
+    FA18_OP(0xC11B12, 0x13FC, 0xC11B1A); /* C11B12: move.b  #$2, $c458a4.l */
+    FA18_OP(0xC11B1A, 0x2D79, 0xC11B22); /* C11B1A: move.l  $c45660.l, (-$6,A6) */
+    FA18_OP(0xC11B22, 0x426E, 0xC11B26); /* C11B22: clr.w   (-$2,A6) */
+L_C11B26:
+    FA18_CHECK(0xC11B26);
+    FA18_OP(0xC11B26, 0x0C6E, 0xC11B2C); /* C11B26: cmpi.w  #$10, (-$2,A6) */
+    FA18_BCC(0xC11B2C, 0x6C10, 0xC11B2E, 0xC11B3E, L_C11B3E); /* C11B2C: bge     $c11b3e */
+L_C11B2E:
+    FA18_CHECK(0xC11B2E);
+    FA18_OP(0xC11B2E, 0x206E, 0xC11B32); /* C11B2E: movea.l (-$6,A6), A0 */
+    FA18_OP(0xC11B32, 0x4290, 0xC11B34); /* C11B32: clr.l   (A0) */
+    FA18_OP(0xC11B34, 0x58AE, 0xC11B38); /* C11B34: addq.l  #4, (-$6,A6) */
+    FA18_OP(0xC11B38, 0x526E, 0xC11B3C); /* C11B38: addq.w  #1, (-$2,A6) */
+    FA18_JUMP(0xC11B3C, 0x60E8, 0xC11B26, L_C11B26); /* C11B3C: bra     $c11b26 */
+L_C11B3E:
+    FA18_CHECK(0xC11B3E);
+    FA18_OP(0xC11B3E, 0x4E5E, 0xC11B40); /* C11B3E: unlk    A6 */
+    FA18_RETURN(0xC11B40, 0x4E75); /* C11B40: rts */
 }
 
 int fa18_fn_C11B44(int entry) {
@@ -5203,6 +8071,46 @@ L_C11BA0:
 L_C11BAE:
     FA18_CHECK(0xC11BAE);
     FA18_RETURN(0xC11BAE, 0x4E75); /* C11BAE: rts */
+}
+
+int fa18_fn_C11BB0(int entry) {
+    switch (entry) {
+    case 0: goto L_C11BB0;
+    case 1: goto L_C11BC0;
+    case 2: goto L_C11BE2;
+    case 3: goto L_C11BE8;
+    case 4: goto L_C11BF8;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C11BB0:
+    FA18_CHECK(0xC11BB0);
+    FA18_OP(0xC11BB0, 0x4E56, 0xC11BB4); /* C11BB0: link    A6, #$0 */
+    FA18_OP(0xC11BB4, 0x3039, 0xC11BBA); /* C11BB4: move.w  $c458cc.l, D0 */
+    FA18_OP(0xC11BBA, 0x0800, 0xC11BBE); /* C11BBA: btst    #$8, D0 */
+    FA18_BCC(0xC11BBE, 0x6738, 0xC11BC0, 0xC11BF8, L_C11BF8); /* C11BBE: beq     $c11bf8 */
+L_C11BC0:
+    FA18_CHECK(0xC11BC0);
+    FA18_OP(0xC11BC0, 0x322E, 0xC11BC4); /* C11BC0: move.w  ($a,A6), D1 */
+    FA18_OP(0xC11BC4, 0x33C1, 0xC11BCA); /* C11BC4: move.w  D1, $c45ae0.l */
+    FA18_OP(0xC11BCA, 0x0040, 0xC11BCE); /* C11BCA: ori.w   #$1, D0 */
+    FA18_OP(0xC11BCE, 0x33C0, 0xC11BD4); /* C11BCE: move.w  D0, $c458cc.l */
+    FA18_OP(0xC11BD4, 0x0241, 0xC11BD8); /* C11BD4: andi.w  #$ff00, D1 */
+    FA18_OP(0xC11BD8, 0x3D41, 0xC11BDC); /* C11BD8: move.w  D1, ($a,A6) */
+    FA18_OP(0xC11BDC, 0x0C41, 0xC11BE0); /* C11BDC: cmpi.w  #$4000, D1 */
+    FA18_BCC(0xC11BE0, 0x6706, 0xC11BE2, 0xC11BE8, L_C11BE8); /* C11BE0: beq     $c11be8 */
+L_C11BE2:
+    FA18_CHECK(0xC11BE2);
+    FA18_OP(0xC11BE2, 0x0C41, 0xC11BE6); /* C11BE2: cmpi.w  #$4800, D1 */
+    FA18_BCC(0xC11BE6, 0x6610, 0xC11BE8, 0xC11BF8, L_C11BF8); /* C11BE6: bne     $c11bf8 */
+L_C11BE8:
+    FA18_CHECK(0xC11BE8);
+    FA18_OP(0xC11BE8, 0x3039, 0xC11BEE); /* C11BE8: move.w  $c458ce.l, D0 */
+    FA18_OP(0xC11BEE, 0x0240, 0xC11BF2); /* C11BEE: andi.w  #$dfff, D0 */
+    FA18_OP(0xC11BF2, 0x33C0, 0xC11BF8); /* C11BF2: move.w  D0, $c458ce.l */
+L_C11BF8:
+    FA18_CHECK(0xC11BF8);
+    FA18_OP(0xC11BF8, 0x4E5E, 0xC11BFA); /* C11BF8: unlk    A6 */
+    FA18_RETURN(0xC11BFA, 0x4E75); /* C11BFA: rts */
 }
 
 int fa18_fn_C11BFC(int entry) {
@@ -5712,7 +8620,7 @@ L_C120A6:
     FA18_BCC(0xC120AE, 0x6606, 0xC120B0, 0xC120B6, L_C120B6); /* C120AE: bne     $c120b6 */
 L_C120B0:
     FA18_CHECK(0xC120B0);
-    FA18_CALL(0xC120B0, 0x4EB9, 0xC120B6, 130, 0); /* C120B0: jsr     $c1b906.l */
+    FA18_CALL(0xC120B0, 0x4EB9, 0xC120B6, 194, 0); /* C120B0: jsr     $c1b906.l */
 L_C120B6:
     FA18_CHECK(0xC120B6);
     FA18_OP(0xC120B6, 0x3039, 0xC120BC); /* C120B6: move.w  $c458dc.l, D0 */
@@ -5750,7 +8658,7 @@ L_C1212E:
     FA18_CHECK(0xC1212E);
     FA18_OP(0xC1212E, 0x7003, 0xC12130); /* C1212E: moveq   #$3, D0 */
     FA18_OP(0xC12130, 0x2F00, 0xC12132); /* C12130: move.l  D0, -(A7) */
-    FA18_CALL(0xC12132, 0x4EB9, 0xC12138, 101, 0); /* C12132: jsr     $c17b08.l */
+    FA18_CALL(0xC12132, 0x4EB9, 0xC12138, 164, 0); /* C12132: jsr     $c17b08.l */
 L_C12138:
     FA18_CHECK(0xC12138);
     FA18_OP(0xC12138, 0x588F, 0xC1213A); /* C12138: addq.l  #4, A7 */
@@ -5764,12 +8672,12 @@ L_C1214A:
     FA18_OP(0xC1214A, 0x3039, 0xC12150); /* C1214A: move.w  $c45986.l, D0 */
     FA18_OP(0xC12150, 0xE940, 0xC12152); /* C12150: asl.w   #4, D0 */
     FA18_OP(0xC12152, 0x33C0, 0xC12158); /* C12152: move.w  D0, $c45988.l */
-    FA18_CALL(0xC12158, 0x4EB9, 0xC1215E, 17, 0); /* C12158: jsr     $c08324.l */
+    FA18_CALL(0xC12158, 0x4EB9, 0xC1215E, 45, 0); /* C12158: jsr     $c08324.l */
 L_C1215E:
     FA18_CHECK(0xC1215E);
     FA18_OP(0xC1215E, 0x4239, 0xC12164); /* C1215E: clr.b   $c457a7.l */
     FA18_OP(0xC12164, 0x13FC, 0xC1216C); /* C12164: move.b  #$ff, $c45858.l */
-    FA18_CALL(0xC1216C, 0x4EB9, 0xC12172, 131, 0); /* C1216C: jsr     $c1ba86.l */
+    FA18_CALL(0xC1216C, 0x4EB9, 0xC12172, 195, 0); /* C1216C: jsr     $c1ba86.l */
 L_C12172:
     FA18_CHECK(0xC12172);
     FA18_OP(0xC12172, 0x0C2E, 0xC12178); /* C12172: cmpi.b  #$30, (-$1,A6) */
@@ -5802,12 +8710,12 @@ L_C121AE:
     FA18_CHECK(0xC121AE);
     FA18_OP(0xC121AE, 0x33FC, 0xC121B6); /* C121AE: move.w  #$32, $c45986.l */
     FA18_OP(0xC121B6, 0x33FC, 0xC121BE); /* C121B6: move.w  #$320, $c45988.l */
-    FA18_CALL(0xC121BE, 0x4EB9, 0xC121C4, 17, 0); /* C121BE: jsr     $c08324.l */
+    FA18_CALL(0xC121BE, 0x4EB9, 0xC121C4, 45, 0); /* C121BE: jsr     $c08324.l */
 L_C121C4:
     FA18_CHECK(0xC121C4);
     FA18_OP(0xC121C4, 0x4239, 0xC121CA); /* C121C4: clr.b   $c457a7.l */
     FA18_OP(0xC121CA, 0x13FC, 0xC121D2); /* C121CA: move.b  #$ff, $c45858.l */
-    FA18_CALL(0xC121D2, 0x4EB9, 0xC121D8, 131, 0); /* C121D2: jsr     $c1ba86.l */
+    FA18_CALL(0xC121D2, 0x4EB9, 0xC121D8, 195, 0); /* C121D2: jsr     $c1ba86.l */
 L_C121D8:
     FA18_CHECK(0xC121D8);
     FA18_OP(0xC121D8, 0x33FC, 0xC121E0); /* C121D8: move.w  #$a7, $c45984.l */
@@ -5844,7 +8752,7 @@ L_C12224:
 L_C12230:
     FA18_CHECK(0xC12230);
     FA18_OP(0xC12230, 0x33FC, 0xC12238); /* C12230: move.w  #$a7, $c45984.l */
-    FA18_CALL(0xC12238, 0x4EB9, 0xC1223E, 16, 0); /* C12238: jsr     $c082b8.l */
+    FA18_CALL(0xC12238, 0x4EB9, 0xC1223E, 44, 0); /* C12238: jsr     $c082b8.l */
 L_C1223E:
     FA18_CHECK(0xC1223E);
     FA18_OP(0xC1223E, 0x4E5E, 0xC12240); /* C1223E: unlk    A6 */
@@ -5890,7 +8798,7 @@ L_C12286:
     FA18_OP(0xC1228C, 0x7000, 0xC1228E); /* C1228C: moveq   #$0, D0 */
     FA18_OP(0xC1228E, 0x33C0, 0xC12294); /* C1228E: move.w  D0, $c45986.l */
     FA18_OP(0xC12294, 0x33C0, 0xC1229A); /* C12294: move.w  D0, $c45988.l */
-    FA18_CALL(0xC1229A, 0x4EB9, 0xC122A0, 131, 0); /* C1229A: jsr     $c1ba86.l */
+    FA18_CALL(0xC1229A, 0x4EB9, 0xC122A0, 195, 0); /* C1229A: jsr     $c1ba86.l */
 L_C122A0:
     FA18_CHECK(0xC122A0);
     FA18_RETURN(0xC122A0, 0x4E75); /* C122A0: rts */
@@ -6305,7 +9213,7 @@ L_C12518:
     FA18_BCC(0xC12532, 0x672C, 0xC12534, 0xC12560, L_C12560); /* C12532: beq     $c12560 */
 L_C12534:
     FA18_CHECK(0xC12534);
-    FA18_CALL(0xC12534, 0x4EB9, 0xC1253A, 223, 0); /* C12534: jsr     $c25980.l */
+    FA18_CALL(0xC12534, 0x4EB9, 0xC1253A, 305, 0); /* C12534: jsr     $c25980.l */
 L_C1253A:
     FA18_CHECK(0xC1253A);
     FA18_OP(0xC1253A, 0x3039, 0xC12540); /* C1253A: move.w  $c45ad2.l, D0 */
@@ -6332,7 +9240,7 @@ L_C1256A:
     FA18_OP(0xC12574, 0xE1A1, 0xC12576); /* C12574: asl.l   D0, D1 */
     FA18_OP(0xC12576, 0x23C1, 0xC1257C); /* C12576: move.l  D1, $c45acc.l */
     FA18_OP(0xC1257C, 0x33EE, 0xC12584); /* C1257C: move.w  (-$4,A6), $c45ad0.l */
-    FA18_CALL(0xC12584, 0x4EB9, 0xC1258A, 223, 0); /* C12584: jsr     $c25980.l */
+    FA18_CALL(0xC12584, 0x4EB9, 0xC1258A, 305, 0); /* C12584: jsr     $c25980.l */
 L_C1258A:
     FA18_CHECK(0xC1258A);
     FA18_OP(0xC1258A, 0x3039, 0xC12590); /* C1258A: move.w  $c45ad2.l, D0 */
@@ -6393,7 +9301,7 @@ L_C125FC:
     FA18_OP(0xC1261A, 0x2D41, 0xC1261E); /* C1261A: move.l  D1, (-$16,A6) */
     FA18_OP(0xC1261E, 0xD282, 0xC12620); /* C1261E: add.l   D2, D1 */
     FA18_OP(0xC12620, 0x23C1, 0xC12626); /* C12620: move.l  D1, $c45b64.l */
-    FA18_CALL(0xC12626, 0x4EB9, 0xC1262C, 215, 0); /* C12626: jsr     $c2564e.l */
+    FA18_CALL(0xC12626, 0x4EB9, 0xC1262C, 297, 0); /* C12626: jsr     $c2564e.l */
 L_C1262C:
     FA18_CHECK(0xC1262C);
     FA18_OP(0xC1262C, 0x302E, 0xC12630); /* C1262C: move.w  (-$18,A6), D0 */
@@ -6416,7 +9324,7 @@ L_C1264A:
     FA18_BCC(0xC12660, 0x6724, 0xC12662, 0xC12686, L_C12686); /* C12660: beq     $c12686 */
 L_C12662:
     FA18_CHECK(0xC12662);
-    FA18_CALL(0xC12662, 0x4EB9, 0xC12668, 223, 0); /* C12662: jsr     $c25980.l */
+    FA18_CALL(0xC12662, 0x4EB9, 0xC12668, 305, 0); /* C12662: jsr     $c25980.l */
 L_C12668:
     FA18_CHECK(0xC12668);
     FA18_OP(0xC12668, 0x3039, 0xC1266E); /* C12668: move.w  $c45ad2.l, D0 */
@@ -6440,7 +9348,7 @@ L_C12690:
     FA18_OP(0xC12698, 0xE180, 0xC1269A); /* C12698: asl.l   #8, D0 */
     FA18_OP(0xC1269A, 0x23C0, 0xC126A0); /* C1269A: move.l  D0, $c45acc.l */
     FA18_OP(0xC126A0, 0x33EE, 0xC126A8); /* C126A0: move.w  (-$2,A6), $c45ad0.l */
-    FA18_CALL(0xC126A8, 0x4EB9, 0xC126AE, 223, 0); /* C126A8: jsr     $c25980.l */
+    FA18_CALL(0xC126A8, 0x4EB9, 0xC126AE, 305, 0); /* C126A8: jsr     $c25980.l */
 L_C126AE:
     FA18_CHECK(0xC126AE);
     FA18_OP(0xC126AE, 0x3039, 0xC126B4); /* C126AE: move.w  $c45ad2.l, D0 */
@@ -6926,7 +9834,7 @@ L_C129C8:
     FA18_CHECK(0xC129C8);
     FA18_OP(0xC129C8, 0x7005, 0xC129CA); /* C129C8: moveq   #$5, D0 */
     FA18_OP(0xC129CA, 0x2F00, 0xC129CC); /* C129CA: move.l  D0, -(A7) */
-    FA18_CALL(0xC129CC, 0x4EB9, 0xC129D2, 111, 0); /* C129CC: jsr     $c18096.l */
+    FA18_CALL(0xC129CC, 0x4EB9, 0xC129D2, 175, 0); /* C129CC: jsr     $c18096.l */
 L_C129D2:
     FA18_CHECK(0xC129D2);
     FA18_OP(0xC129D2, 0x588F, 0xC129D4); /* C129D2: addq.l  #4, A7 */
@@ -6935,7 +9843,7 @@ L_C129D6:
     FA18_CHECK(0xC129D6);
     FA18_OP(0xC129D6, 0x700A, 0xC129D8); /* C129D6: moveq   #$a, D0 */
     FA18_OP(0xC129D8, 0x2F00, 0xC129DA); /* C129D8: move.l  D0, -(A7) */
-    FA18_CALL(0xC129DA, 0x4EB9, 0xC129E0, 111, 0); /* C129DA: jsr     $c18096.l */
+    FA18_CALL(0xC129DA, 0x4EB9, 0xC129E0, 175, 0); /* C129DA: jsr     $c18096.l */
 L_C129E0:
     FA18_CHECK(0xC129E0);
     FA18_OP(0xC129E0, 0x588F, 0xC129E2); /* C129E0: addq.l  #4, A7 */
@@ -6952,7 +9860,7 @@ L_C129F4:
     FA18_BCC(0xC129FC, 0x660C, 0xC129FE, 0xC12A0A, L_C12A0A); /* C129FC: bne     $c12a0a */
 L_C129FE:
     FA18_CHECK(0xC129FE);
-    FA18_CALL(0xC129FE, 0x4EB9, 0xC12A04, 112, 0); /* C129FE: jsr     $c180fc.l */
+    FA18_CALL(0xC129FE, 0x4EB9, 0xC12A04, 176, 0); /* C129FE: jsr     $c180fc.l */
 L_C12A04:
     FA18_CHECK(0xC12A04);
     FA18_OP(0xC12A04, 0x4239, 0xC12A0A); /* C12A04: clr.b   $c45885.l */
@@ -6986,7 +9894,7 @@ L_C12A2A:
     FA18_OP(0xC12A46, 0x7010, 0xC12A48); /* C12A46: moveq   #$10, D0 */
     FA18_OP(0xC12A48, 0x2F00, 0xC12A4A); /* C12A48: move.l  D0, -(A7) */
     FA18_OP(0xC12A4A, 0x2F3C, 0xC12A50); /* C12A4A: move.l  #$a0, -(A7) */
-    FA18_CALL(0xC12A50, 0x4EB9, 0xC12A56, 108, 0); /* C12A50: jsr     $c17ef2.l */
+    FA18_CALL(0xC12A50, 0x4EB9, 0xC12A56, 172, 0); /* C12A50: jsr     $c17ef2.l */
 L_C12A56:
     FA18_CHECK(0xC12A56);
     FA18_OP(0xC12A56, 0x4FEF, 0xC12A5A); /* C12A56: lea     ($24,A7), A7 */
@@ -7020,7 +9928,7 @@ L_C12A7C:
     FA18_OP(0xC12A9A, 0x700A, 0xC12A9C); /* C12A9A: moveq   #$a, D0 */
     FA18_OP(0xC12A9C, 0x2F00, 0xC12A9E); /* C12A9C: move.l  D0, -(A7) */
     FA18_OP(0xC12A9E, 0x2F3C, 0xC12AA4); /* C12A9E: move.l  #$144, -(A7) */
-    FA18_CALL(0xC12AA4, 0x4EB9, 0xC12AAA, 108, 0); /* C12AA4: jsr     $c17ef2.l */
+    FA18_CALL(0xC12AA4, 0x4EB9, 0xC12AAA, 172, 0); /* C12AA4: jsr     $c17ef2.l */
 L_C12AAA:
     FA18_CHECK(0xC12AAA);
     FA18_OP(0xC12AAA, 0x4FEF, 0xC12AAE); /* C12AAA: lea     ($24,A7), A7 */
@@ -7047,7 +9955,7 @@ L_C12ABC:
     FA18_OP(0xC12ADA, 0x2F00, 0xC12ADC); /* C12ADA: move.l  D0, -(A7) */
     FA18_OP(0xC12ADC, 0x707C, 0xC12ADE); /* C12ADC: moveq   #$7c, D0 */
     FA18_OP(0xC12ADE, 0x2F00, 0xC12AE0); /* C12ADE: move.l  D0, -(A7) */
-    FA18_CALL(0xC12AE0, 0x4EB9, 0xC12AE6, 108, 0); /* C12AE0: jsr     $c17ef2.l */
+    FA18_CALL(0xC12AE0, 0x4EB9, 0xC12AE6, 172, 0); /* C12AE0: jsr     $c17ef2.l */
 L_C12AE6:
     FA18_CHECK(0xC12AE6);
     FA18_OP(0xC12AE6, 0x4FEF, 0xC12AEA); /* C12AE6: lea     ($24,A7), A7 */
@@ -7074,7 +9982,7 @@ L_C12B00:
     FA18_OP(0xC12B1C, 0x7003, 0xC12B1E); /* C12B1C: moveq   #$3, D0 */
     FA18_OP(0xC12B1E, 0x2F00, 0xC12B20); /* C12B1E: move.l  D0, -(A7) */
     FA18_OP(0xC12B20, 0x2F3C, 0xC12B26); /* C12B20: move.l  #$e5, -(A7) */
-    FA18_CALL(0xC12B26, 0x4EB9, 0xC12B2C, 108, 0); /* C12B26: jsr     $c17ef2.l */
+    FA18_CALL(0xC12B26, 0x4EB9, 0xC12B2C, 172, 0); /* C12B26: jsr     $c17ef2.l */
 L_C12B2C:
     FA18_CHECK(0xC12B2C);
     FA18_OP(0xC12B2C, 0x4FEF, 0xC12B30); /* C12B2C: lea     ($24,A7), A7 */
@@ -7100,7 +10008,7 @@ L_C12B3E:
     FA18_OP(0xC12B5A, 0x7004, 0xC12B5C); /* C12B5A: moveq   #$4, D0 */
     FA18_OP(0xC12B5C, 0x2F00, 0xC12B5E); /* C12B5C: move.l  D0, -(A7) */
     FA18_OP(0xC12B5E, 0x2F3C, 0xC12B64); /* C12B5E: move.l  #$c0, -(A7) */
-    FA18_CALL(0xC12B64, 0x4EB9, 0xC12B6A, 108, 0); /* C12B64: jsr     $c17ef2.l */
+    FA18_CALL(0xC12B64, 0x4EB9, 0xC12B6A, 172, 0); /* C12B64: jsr     $c17ef2.l */
 L_C12B6A:
     FA18_CHECK(0xC12B6A);
     FA18_OP(0xC12B6A, 0x4FEF, 0xC12B6E); /* C12B6A: lea     ($24,A7), A7 */
@@ -7128,7 +10036,7 @@ L_C12B7C:
     FA18_OP(0xC12B9C, 0x700F, 0xC12B9E); /* C12B9C: moveq   #$f, D0 */
     FA18_OP(0xC12B9E, 0x2F00, 0xC12BA0); /* C12B9E: move.l  D0, -(A7) */
     FA18_OP(0xC12BA0, 0x2F3C, 0xC12BA6); /* C12BA0: move.l  #$1f4, -(A7) */
-    FA18_CALL(0xC12BA6, 0x4EB9, 0xC12BAC, 108, 0); /* C12BA6: jsr     $c17ef2.l */
+    FA18_CALL(0xC12BA6, 0x4EB9, 0xC12BAC, 172, 0); /* C12BA6: jsr     $c17ef2.l */
 L_C12BAC:
     FA18_CHECK(0xC12BAC);
     FA18_OP(0xC12BAC, 0x4FEF, 0xC12BB0); /* C12BAC: lea     ($24,A7), A7 */
@@ -7153,7 +10061,7 @@ L_C12BBE:
     FA18_OP(0xC12BD8, 0x700A, 0xC12BDA); /* C12BD8: moveq   #$a, D0 */
     FA18_OP(0xC12BDA, 0x2F00, 0xC12BDC); /* C12BDA: move.l  D0, -(A7) */
     FA18_OP(0xC12BDC, 0x2F3C, 0xC12BE2); /* C12BDC: move.l  #$1f4, -(A7) */
-    FA18_CALL(0xC12BE2, 0x4EB9, 0xC12BE8, 108, 0); /* C12BE2: jsr     $c17ef2.l */
+    FA18_CALL(0xC12BE2, 0x4EB9, 0xC12BE8, 172, 0); /* C12BE2: jsr     $c17ef2.l */
 L_C12BE8:
     FA18_CHECK(0xC12BE8);
     FA18_OP(0xC12BE8, 0x4FEF, 0xC12BEC); /* C12BE8: lea     ($24,A7), A7 */
@@ -7179,7 +10087,7 @@ L_C12BFA:
     FA18_OP(0xC12C16, 0x7008, 0xC12C18); /* C12C16: moveq   #$8, D0 */
     FA18_OP(0xC12C18, 0x2F00, 0xC12C1A); /* C12C18: move.l  D0, -(A7) */
     FA18_OP(0xC12C1A, 0x2F3C, 0xC12C20); /* C12C1A: move.l  #$190, -(A7) */
-    FA18_CALL(0xC12C20, 0x4EB9, 0xC12C26, 108, 0); /* C12C20: jsr     $c17ef2.l */
+    FA18_CALL(0xC12C20, 0x4EB9, 0xC12C26, 172, 0); /* C12C20: jsr     $c17ef2.l */
 L_C12C26:
     FA18_CHECK(0xC12C26);
     FA18_OP(0xC12C26, 0x4FEF, 0xC12C2A); /* C12C26: lea     ($24,A7), A7 */
@@ -7205,7 +10113,7 @@ L_C12C36:
     FA18_OP(0xC12C52, 0x700A, 0xC12C54); /* C12C52: moveq   #$a, D0 */
     FA18_OP(0xC12C54, 0x2F00, 0xC12C56); /* C12C54: move.l  D0, -(A7) */
     FA18_OP(0xC12C56, 0x2F3C, 0xC12C5C); /* C12C56: move.l  #$1f4, -(A7) */
-    FA18_CALL(0xC12C5C, 0x4EB9, 0xC12C62, 108, 0); /* C12C5C: jsr     $c17ef2.l */
+    FA18_CALL(0xC12C5C, 0x4EB9, 0xC12C62, 172, 0); /* C12C5C: jsr     $c17ef2.l */
 L_C12C62:
     FA18_CHECK(0xC12C62);
     FA18_OP(0xC12C62, 0x4FEF, 0xC12C66); /* C12C62: lea     ($24,A7), A7 */
@@ -7218,7 +10126,7 @@ L_C12C72:
     FA18_CHECK(0xC12C72);
     FA18_OP(0xC12C72, 0x7003, 0xC12C74); /* C12C72: moveq   #$3, D0 */
     FA18_OP(0xC12C74, 0x2F00, 0xC12C76); /* C12C74: move.l  D0, -(A7) */
-    FA18_CALL(0xC12C76, 0x4EB9, 0xC12C7C, 101, 0); /* C12C76: jsr     $c17b08.l */
+    FA18_CALL(0xC12C76, 0x4EB9, 0xC12C7C, 164, 0); /* C12C76: jsr     $c17b08.l */
 L_C12C7C:
     FA18_CHECK(0xC12C7C);
     FA18_OP(0xC12C7C, 0x588F, 0xC12C7E); /* C12C7C: addq.l  #4, A7 */
@@ -7250,7 +10158,7 @@ L_C12CA6:
     FA18_OP(0xC12CB8, 0x48C1, 0xC12CBA); /* C12CB8: ext.l   D1 */
     FA18_OP(0xC12CBA, 0x2F01, 0xC12CBC); /* C12CBA: move.l  D1, -(A7) */
     FA18_OP(0xC12CBC, 0x2F00, 0xC12CBE); /* C12CBC: move.l  D0, -(A7) */
-    FA18_CALL(0xC12CBE, 0x4EB9, 0xC12CC4, 109, 0); /* C12CBE: jsr     $c17f8c.l */
+    FA18_CALL(0xC12CBE, 0x4EB9, 0xC12CC4, 173, 0); /* C12CBE: jsr     $c17f8c.l */
 L_C12CC4:
     FA18_CHECK(0xC12CC4);
     FA18_OP(0xC12CC4, 0x508F, 0xC12CC6); /* C12CC4: addq.l  #8, A7 */
@@ -7266,7 +10174,7 @@ L_C12CC8:
     FA18_OP(0xC12CDC, 0x48C1, 0xC12CDE); /* C12CDC: ext.l   D1 */
     FA18_OP(0xC12CDE, 0x2F01, 0xC12CE0); /* C12CDE: move.l  D1, -(A7) */
     FA18_OP(0xC12CE0, 0x2F00, 0xC12CE2); /* C12CE0: move.l  D0, -(A7) */
-    FA18_CALL(0xC12CE2, 0x4EB9, 0xC12CE8, 109, 0); /* C12CE2: jsr     $c17f8c.l */
+    FA18_CALL(0xC12CE2, 0x4EB9, 0xC12CE8, 173, 0); /* C12CE2: jsr     $c17f8c.l */
 L_C12CE8:
     FA18_CHECK(0xC12CE8);
     FA18_OP(0xC12CE8, 0x508F, 0xC12CEA); /* C12CE8: addq.l  #8, A7 */
@@ -7306,7 +10214,7 @@ L_C12D2E:
     FA18_OP(0xC12D34, 0x302E, 0xC12D38); /* C12D34: move.w  (-$2,A6), D0 */
     FA18_OP(0xC12D38, 0x48C0, 0xC12D3A); /* C12D38: ext.l   D0 */
     FA18_OP(0xC12D3A, 0x2F00, 0xC12D3C); /* C12D3A: move.l  D0, -(A7) */
-    FA18_CALL(0xC12D3C, 0x6100, 0xC12D40, 67, 0); /* C12D3C: bsr     $c131be */
+    FA18_CALL(0xC12D3C, 0x6100, 0xC12D40, 124, 0); /* C12D3C: bsr     $c131be */
 L_C12D40:
     FA18_CHECK(0xC12D40);
     FA18_OP(0xC12D40, 0x588F, 0xC12D42); /* C12D40: addq.l  #4, A7 */
@@ -7396,7 +10304,7 @@ L_C12DF6:
     FA18_OP(0xC12DFE, 0x3239, 0xC12E04); /* C12DFE: move.w  $c45b42.l, D1 */
     FA18_OP(0xC12E04, 0x48C1, 0xC12E06); /* C12E04: ext.l   D1 */
     FA18_OP(0xC12E06, 0x2D40, 0xC12E0A); /* C12E06: move.l  D0, (-$16,A6) */
-    FA18_CALL(0xC12E0A, 0x4EB9, 0xC12E10, 427, 0); /* C12E0A: jsr     $c52ec8.l */
+    FA18_CALL(0xC12E0A, 0x4EB9, 0xC12E10, 519, 0); /* C12E0A: jsr     $c52ec8.l */
 L_C12E10:
     FA18_CHECK(0xC12E10);
     FA18_OP(0xC12E10, 0x3D40, 0xC12E14); /* C12E10: move.w  D0, (-$6,A6) */
@@ -7427,7 +10335,7 @@ L_C12E48:
     FA18_OP(0xC12E4E, 0x48C0, 0xC12E50); /* C12E4E: ext.l   D0 */
     FA18_OP(0xC12E50, 0x2F00, 0xC12E52); /* C12E50: move.l  D0, -(A7) */
     FA18_OP(0xC12E52, 0x2F01, 0xC12E54); /* C12E52: move.l  D1, -(A7) */
-    FA18_CALL(0xC12E54, 0x4EB9, 0xC12E5A, 104, 0); /* C12E54: jsr     $c17cf6.l */
+    FA18_CALL(0xC12E54, 0x4EB9, 0xC12E5A, 168, 0); /* C12E54: jsr     $c17cf6.l */
 L_C12E5A:
     FA18_CHECK(0xC12E5A);
     FA18_OP(0xC12E5A, 0x508F, 0xC12E5C); /* C12E5A: addq.l  #8, A7 */
@@ -7445,7 +10353,7 @@ L_C12E68:
     FA18_OP(0xC12E78, 0x48C1, 0xC12E7A); /* C12E78: ext.l   D1 */
     FA18_OP(0xC12E7A, 0x2F01, 0xC12E7C); /* C12E7A: move.l  D1, -(A7) */
     FA18_OP(0xC12E7C, 0x2F00, 0xC12E7E); /* C12E7C: move.l  D0, -(A7) */
-    FA18_CALL(0xC12E7E, 0x4EB9, 0xC12E84, 104, 0); /* C12E7E: jsr     $c17cf6.l */
+    FA18_CALL(0xC12E7E, 0x4EB9, 0xC12E84, 168, 0); /* C12E7E: jsr     $c17cf6.l */
 L_C12E84:
     FA18_CHECK(0xC12E84);
     FA18_OP(0xC12E84, 0x508F, 0xC12E86); /* C12E84: addq.l  #8, A7 */
@@ -7463,7 +10371,7 @@ L_C12E92:
     FA18_OP(0xC12EA2, 0x48C1, 0xC12EA4); /* C12EA2: ext.l   D1 */
     FA18_OP(0xC12EA4, 0x2F01, 0xC12EA6); /* C12EA4: move.l  D1, -(A7) */
     FA18_OP(0xC12EA6, 0x2F00, 0xC12EA8); /* C12EA6: move.l  D0, -(A7) */
-    FA18_CALL(0xC12EA8, 0x4EB9, 0xC12EAE, 104, 0); /* C12EA8: jsr     $c17cf6.l */
+    FA18_CALL(0xC12EA8, 0x4EB9, 0xC12EAE, 168, 0); /* C12EA8: jsr     $c17cf6.l */
 L_C12EAE:
     FA18_CHECK(0xC12EAE);
     FA18_OP(0xC12EAE, 0x508F, 0xC12EB0); /* C12EAE: addq.l  #8, A7 */
@@ -7480,7 +10388,7 @@ L_C12EBC:
     FA18_OP(0xC12EC6, 0x48C1, 0xC12EC8); /* C12EC6: ext.l   D1 */
     FA18_OP(0xC12EC8, 0x2F01, 0xC12ECA); /* C12EC8: move.l  D1, -(A7) */
     FA18_OP(0xC12ECA, 0x2F00, 0xC12ECC); /* C12ECA: move.l  D0, -(A7) */
-    FA18_CALL(0xC12ECC, 0x6100, 0xC12ED0, 66, 0); /* C12ECC: bsr     $c13176 */
+    FA18_CALL(0xC12ECC, 0x6100, 0xC12ED0, 123, 0); /* C12ECC: bsr     $c13176 */
 L_C12ED0:
     FA18_CHECK(0xC12ED0);
     FA18_OP(0xC12ED0, 0x508F, 0xC12ED2); /* C12ED0: addq.l  #8, A7 */
@@ -7508,7 +10416,7 @@ L_C12EF4:
     FA18_OP(0xC12F04, 0x48C1, 0xC12F06); /* C12F04: ext.l   D1 */
     FA18_OP(0xC12F06, 0x2F01, 0xC12F08); /* C12F06: move.l  D1, -(A7) */
     FA18_OP(0xC12F08, 0x2F00, 0xC12F0A); /* C12F08: move.l  D0, -(A7) */
-    FA18_CALL(0xC12F0A, 0x4EB9, 0xC12F10, 104, 0); /* C12F0A: jsr     $c17cf6.l */
+    FA18_CALL(0xC12F0A, 0x4EB9, 0xC12F10, 168, 0); /* C12F0A: jsr     $c17cf6.l */
 L_C12F10:
     FA18_CHECK(0xC12F10);
     FA18_OP(0xC12F10, 0x508F, 0xC12F12); /* C12F10: addq.l  #8, A7 */
@@ -7523,7 +10431,7 @@ L_C12F16:
     FA18_OP(0xC12F24, 0x2F02, 0xC12F26); /* C12F24: move.l  D2, -(A7) */
     FA18_OP(0xC12F26, 0x2F01, 0xC12F28); /* C12F26: move.l  D1, -(A7) */
     FA18_OP(0xC12F28, 0x2F00, 0xC12F2A); /* C12F28: move.l  D0, -(A7) */
-    FA18_CALL(0xC12F2A, 0x4EB9, 0xC12F30, 106, 0); /* C12F2A: jsr     $c17daa.l */
+    FA18_CALL(0xC12F2A, 0x4EB9, 0xC12F30, 170, 0); /* C12F2A: jsr     $c17daa.l */
 L_C12F30:
     FA18_CHECK(0xC12F30);
     FA18_OP(0xC12F30, 0x4FEF, 0xC12F34); /* C12F30: lea     ($c,A7), A7 */
@@ -7560,7 +10468,7 @@ L_C12F72:
     FA18_OP(0xC12F78, 0x48C0, 0xC12F7A); /* C12F78: ext.l   D0 */
     FA18_OP(0xC12F7A, 0x2F00, 0xC12F7C); /* C12F7A: move.l  D0, -(A7) */
     FA18_OP(0xC12F7C, 0x2F01, 0xC12F7E); /* C12F7C: move.l  D1, -(A7) */
-    FA18_CALL(0xC12F7E, 0x4EB9, 0xC12F84, 103, 0); /* C12F7E: jsr     $c17c62.l */
+    FA18_CALL(0xC12F7E, 0x4EB9, 0xC12F84, 167, 0); /* C12F7E: jsr     $c17c62.l */
 L_C12F84:
     FA18_CHECK(0xC12F84);
     FA18_OP(0xC12F84, 0x508F, 0xC12F86); /* C12F84: addq.l  #8, A7 */
@@ -7574,7 +10482,7 @@ L_C12F8A:
     FA18_OP(0xC12F96, 0xE481, 0xC12F98); /* C12F96: asr.l   #2, D1 */
     FA18_OP(0xC12F98, 0x2F01, 0xC12F9A); /* C12F98: move.l  D1, -(A7) */
     FA18_OP(0xC12F9A, 0x2F00, 0xC12F9C); /* C12F9A: move.l  D0, -(A7) */
-    FA18_CALL(0xC12F9C, 0x4EB9, 0xC12FA2, 104, 0); /* C12F9C: jsr     $c17cf6.l */
+    FA18_CALL(0xC12F9C, 0x4EB9, 0xC12FA2, 168, 0); /* C12F9C: jsr     $c17cf6.l */
 L_C12FA2:
     FA18_CHECK(0xC12FA2);
     FA18_OP(0xC12FA2, 0x508F, 0xC12FA4); /* C12FA2: addq.l  #8, A7 */
@@ -7593,7 +10501,7 @@ L_C12FB0:
     FA18_OP(0xC12FC2, 0xE281, 0xC12FC4); /* C12FC2: asr.l   #1, D1 */
     FA18_OP(0xC12FC4, 0x2F01, 0xC12FC6); /* C12FC4: move.l  D1, -(A7) */
     FA18_OP(0xC12FC6, 0x2F00, 0xC12FC8); /* C12FC6: move.l  D0, -(A7) */
-    FA18_CALL(0xC12FC8, 0x4EB9, 0xC12FCE, 104, 0); /* C12FC8: jsr     $c17cf6.l */
+    FA18_CALL(0xC12FC8, 0x4EB9, 0xC12FCE, 168, 0); /* C12FC8: jsr     $c17cf6.l */
 L_C12FCE:
     FA18_CHECK(0xC12FCE);
     FA18_OP(0xC12FCE, 0x508F, 0xC12FD0); /* C12FCE: addq.l  #8, A7 */
@@ -7611,7 +10519,7 @@ L_C12FDC:
     FA18_OP(0xC12FEC, 0x48C1, 0xC12FEE); /* C12FEC: ext.l   D1 */
     FA18_OP(0xC12FEE, 0x2F01, 0xC12FF0); /* C12FEE: move.l  D1, -(A7) */
     FA18_OP(0xC12FF0, 0x2F00, 0xC12FF2); /* C12FF0: move.l  D0, -(A7) */
-    FA18_CALL(0xC12FF2, 0x4EB9, 0xC12FF8, 103, 0); /* C12FF2: jsr     $c17c62.l */
+    FA18_CALL(0xC12FF2, 0x4EB9, 0xC12FF8, 167, 0); /* C12FF2: jsr     $c17c62.l */
 L_C12FF8:
     FA18_CHECK(0xC12FF8);
     FA18_OP(0xC12FF8, 0x508F, 0xC12FFA); /* C12FF8: addq.l  #8, A7 */
@@ -7628,7 +10536,7 @@ L_C13006:
     FA18_OP(0xC13010, 0x48C1, 0xC13012); /* C13010: ext.l   D1 */
     FA18_OP(0xC13012, 0x2F01, 0xC13014); /* C13012: move.l  D1, -(A7) */
     FA18_OP(0xC13014, 0x2F00, 0xC13016); /* C13014: move.l  D0, -(A7) */
-    FA18_CALL(0xC13016, 0x6100, 0xC1301A, 66, 0); /* C13016: bsr     $c13176 */
+    FA18_CALL(0xC13016, 0x6100, 0xC1301A, 123, 0); /* C13016: bsr     $c13176 */
 L_C1301A:
     FA18_CHECK(0xC1301A);
     FA18_OP(0xC1301A, 0x508F, 0xC1301C); /* C1301A: addq.l  #8, A7 */
@@ -7656,7 +10564,7 @@ L_C1303E:
     FA18_OP(0xC1304E, 0x48C1, 0xC13050); /* C1304E: ext.l   D1 */
     FA18_OP(0xC13050, 0x2F01, 0xC13052); /* C13050: move.l  D1, -(A7) */
     FA18_OP(0xC13052, 0x2F00, 0xC13054); /* C13052: move.l  D0, -(A7) */
-    FA18_CALL(0xC13054, 0x4EB9, 0xC1305A, 104, 0); /* C13054: jsr     $c17cf6.l */
+    FA18_CALL(0xC13054, 0x4EB9, 0xC1305A, 168, 0); /* C13054: jsr     $c17cf6.l */
 L_C1305A:
     FA18_CHECK(0xC1305A);
     FA18_OP(0xC1305A, 0x508F, 0xC1305C); /* C1305A: addq.l  #8, A7 */
@@ -7678,7 +10586,7 @@ L_C13072:
     FA18_OP(0xC1307C, 0x720A, 0xC1307E); /* C1307C: moveq   #$a, D1 */
     FA18_OP(0xC1307E, 0x2F01, 0xC13080); /* C1307E: move.l  D1, -(A7) */
     FA18_OP(0xC13080, 0x2F00, 0xC13082); /* C13080: move.l  D0, -(A7) */
-    FA18_CALL(0xC13082, 0x4EB9, 0xC13088, 105, 0); /* C13082: jsr     $c17d6e.l */
+    FA18_CALL(0xC13082, 0x4EB9, 0xC13088, 169, 0); /* C13082: jsr     $c17d6e.l */
 L_C13088:
     FA18_CHECK(0xC13088);
     FA18_OP(0xC13088, 0x4FEF, 0xC1308C); /* C13088: lea     ($c,A7), A7 */
@@ -7692,7 +10600,7 @@ L_C13090:
     FA18_OP(0xC1309A, 0x7228, 0xC1309C); /* C1309A: moveq   #$28, D1 */
     FA18_OP(0xC1309C, 0x2F01, 0xC1309E); /* C1309C: move.l  D1, -(A7) */
     FA18_OP(0xC1309E, 0x2F00, 0xC130A0); /* C1309E: move.l  D0, -(A7) */
-    FA18_CALL(0xC130A0, 0x4EB9, 0xC130A6, 105, 0); /* C130A0: jsr     $c17d6e.l */
+    FA18_CALL(0xC130A0, 0x4EB9, 0xC130A6, 169, 0); /* C130A0: jsr     $c17d6e.l */
 L_C130A6:
     FA18_CHECK(0xC130A6);
     FA18_OP(0xC130A6, 0x4FEF, 0xC130AA); /* C130A6: lea     ($c,A7), A7 */
@@ -7717,7 +10625,7 @@ L_C130C4:
     FA18_OP(0xC130D2, 0x2F02, 0xC130D4); /* C130D2: move.l  D2, -(A7) */
     FA18_OP(0xC130D4, 0x2F01, 0xC130D6); /* C130D4: move.l  D1, -(A7) */
     FA18_OP(0xC130D6, 0x2F00, 0xC130D8); /* C130D6: move.l  D0, -(A7) */
-    FA18_CALL(0xC130D8, 0x4EB9, 0xC130DE, 105, 0); /* C130D8: jsr     $c17d6e.l */
+    FA18_CALL(0xC130D8, 0x4EB9, 0xC130DE, 169, 0); /* C130D8: jsr     $c17d6e.l */
 L_C130DE:
     FA18_CHECK(0xC130DE);
     FA18_OP(0xC130DE, 0x4FEF, 0xC130E2); /* C130DE: lea     ($c,A7), A7 */
@@ -7737,31 +10645,31 @@ L_C130E4:
     FA18_OP(0xC13100, 0x2F02, 0xC13102); /* C13100: move.l  D2, -(A7) */
     FA18_OP(0xC13102, 0x2F01, 0xC13104); /* C13102: move.l  D1, -(A7) */
     FA18_OP(0xC13104, 0x2F00, 0xC13106); /* C13104: move.l  D0, -(A7) */
-    FA18_CALL(0xC13106, 0x4EB9, 0xC1310C, 105, 0); /* C13106: jsr     $c17d6e.l */
+    FA18_CALL(0xC13106, 0x4EB9, 0xC1310C, 169, 0); /* C13106: jsr     $c17d6e.l */
 L_C1310C:
     FA18_CHECK(0xC1310C);
     FA18_OP(0xC1310C, 0x4FEF, 0xC13110); /* C1310C: lea     ($c,A7), A7 */
     FA18_JUMP(0xC13110, 0x6022, 0xC13134, L_C13134); /* C13110: bra     $c13134 */
 L_C13112:
     FA18_CHECK(0xC13112);
-    FA18_CALL(0xC13112, 0x6100, 0xC13116, 68, 0); /* C13112: bsr     $c133b2 */
+    FA18_CALL(0xC13112, 0x6100, 0xC13116, 131, 0); /* C13112: bsr     $c133b2 */
 L_C13116:
     FA18_CHECK(0xC13116);
     FA18_OP(0xC13116, 0x48C0, 0xC13118); /* C13116: ext.l   D0 */
     FA18_OP(0xC13118, 0x2F00, 0xC1311A); /* C13118: move.l  D0, -(A7) */
-    FA18_CALL(0xC1311A, 0x4EB9, 0xC13120, 107, 0); /* C1311A: jsr     $c17e4a.l */
+    FA18_CALL(0xC1311A, 0x4EB9, 0xC13120, 171, 0); /* C1311A: jsr     $c17e4a.l */
 L_C13120:
     FA18_CHECK(0xC13120);
     FA18_OP(0xC13120, 0x588F, 0xC13122); /* C13120: addq.l  #4, A7 */
     FA18_JUMP(0xC13122, 0x6010, 0xC13134, L_C13134); /* C13122: bra     $c13134 */
 L_C13124:
     FA18_CHECK(0xC13124);
-    FA18_CALL(0xC13124, 0x6100, 0xC13128, 68, 0); /* C13124: bsr     $c133b2 */
+    FA18_CALL(0xC13124, 0x6100, 0xC13128, 131, 0); /* C13124: bsr     $c133b2 */
 L_C13128:
     FA18_CHECK(0xC13128);
     FA18_OP(0xC13128, 0x48C0, 0xC1312A); /* C13128: ext.l   D0 */
     FA18_OP(0xC1312A, 0x2F00, 0xC1312C); /* C1312A: move.l  D0, -(A7) */
-    FA18_CALL(0xC1312C, 0x4EB9, 0xC13132, 107, 0); /* C1312C: jsr     $c17e4a.l */
+    FA18_CALL(0xC1312C, 0x4EB9, 0xC13132, 171, 0); /* C1312C: jsr     $c17e4a.l */
 L_C13132:
     FA18_CHECK(0xC13132);
     FA18_OP(0xC13132, 0x588F, 0xC13134); /* C13132: addq.l  #4, A7 */
@@ -7820,7 +10728,7 @@ L_C13184:
     FA18_OP(0xC13184, 0x302E, 0xC13188); /* C13184: move.w  ($e,A6), D0 */
     FA18_OP(0xC13188, 0x48C0, 0xC1318A); /* C13188: ext.l   D0 */
     FA18_OP(0xC1318A, 0x2F00, 0xC1318C); /* C1318A: move.l  D0, -(A7) */
-    FA18_CALL(0xC1318C, 0x4EB9, 0xC13192, 113, 0); /* C1318C: jsr     $c18108.l */
+    FA18_CALL(0xC1318C, 0x4EB9, 0xC13192, 177, 0); /* C1318C: jsr     $c18108.l */
 L_C13192:
     FA18_CHECK(0xC13192);
     FA18_OP(0xC13192, 0x588F, 0xC13194); /* C13192: addq.l  #4, A7 */
@@ -7835,7 +10743,7 @@ L_C1319C:
     FA18_OP(0xC131AC, 0x48C1, 0xC131AE); /* C131AC: ext.l   D1 */
     FA18_OP(0xC131AE, 0x2F01, 0xC131B0); /* C131AE: move.l  D1, -(A7) */
     FA18_OP(0xC131B0, 0x2F00, 0xC131B2); /* C131B0: move.l  D0, -(A7) */
-    FA18_CALL(0xC131B2, 0x4EB9, 0xC131B8, 104, 0); /* C131B2: jsr     $c17cf6.l */
+    FA18_CALL(0xC131B2, 0x4EB9, 0xC131B8, 168, 0); /* C131B2: jsr     $c17cf6.l */
 L_C131B8:
     FA18_CHECK(0xC131B8);
     FA18_OP(0xC131B8, 0x508F, 0xC131BA); /* C131B8: addq.l  #8, A7 */
@@ -7981,7 +10889,7 @@ L_C13306:
     FA18_OP(0xC1330E, 0x3239, 0xC13314); /* C1330E: move.w  $c45b42.l, D1 */
     FA18_OP(0xC13314, 0x48C1, 0xC13316); /* C13314: ext.l   D1 */
     FA18_OP(0xC13316, 0x2D40, 0xC1331A); /* C13316: move.l  D0, (-$6,A6) */
-    FA18_CALL(0xC1331A, 0x4EB9, 0xC13320, 427, 0); /* C1331A: jsr     $c52ec8.l */
+    FA18_CALL(0xC1331A, 0x4EB9, 0xC13320, 519, 0); /* C1331A: jsr     $c52ec8.l */
 L_C13320:
     FA18_CHECK(0xC13320);
     FA18_OP(0xC13320, 0x3D40, 0xC13324); /* C13320: move.w  D0, ($a,A6) */
@@ -8039,6 +10947,316 @@ L_C1338C:
     FA18_OP(0xC13390, 0x48C0, 0xC13392); /* C13390: ext.l   D0 */
     FA18_OP(0xC13392, 0x4E5E, 0xC13394); /* C13392: unlk    A6 */
     FA18_RETURN(0xC13394, 0x4E75); /* C13394: rts */
+}
+
+int fa18_fn_C13258(int entry) {
+    switch (entry) {
+    case 0: goto L_C13258;
+    case 1: goto L_C13272;
+    case 2: goto L_C1327E;
+    case 3: goto L_C1329C;
+    case 4: goto L_C132B0;
+    case 5: goto L_C132B8;
+    case 6: goto L_C13330;
+    case 7: goto L_C13340;
+    case 8: goto L_C1334A;
+    case 9: goto L_C13350;
+    case 10: goto L_C1338C;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C13258:
+    FA18_CHECK(0xC13258);
+    FA18_JUMP(0xC13258, 0x6018, 0xC13272, L_C13272); /* C13258: bra     $c13272 */
+L_C13272:
+    FA18_CHECK(0xC13272);
+    FA18_OP(0xC13272, 0x302E, 0xC13276); /* C13272: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13276, 0x48C0, 0xC13278); /* C13276: ext.l   D0 */
+    FA18_OP(0xC13278, 0x2F00, 0xC1327A); /* C13278: move.l  D0, -(A7) */
+    FA18_CALL(0xC1327A, 0x6100, 0xC1327E, 130, 0); /* C1327A: bsr     $c13396 */
+L_C1327E:
+    FA18_CHECK(0xC1327E);
+    FA18_OP(0xC1327E, 0x588F, 0xC13280); /* C1327E: addq.l  #4, A7 */
+    FA18_OP(0xC13280, 0x3D40, 0xC13284); /* C13280: move.w  D0, ($a,A6) */
+    FA18_JUMP(0xC13284, 0x6016, 0xC1329C, L_C1329C); /* C13284: bra     $c1329c */
+L_C1329C:
+    FA18_CHECK(0xC1329C);
+    FA18_OP(0xC1329C, 0x1039, 0xC132A2); /* C1329C: move.b  $c45785.l, D0 */
+    FA18_OP(0xC132A2, 0x4880, 0xC132A4); /* C132A2: ext.w   D0 */
+    FA18_OP(0xC132A4, 0x48C0, 0xC132A6); /* C132A4: ext.l   D0 */
+    FA18_OP(0xC132A6, 0x0480, 0xC132AC); /* C132A6: subi.l  #$1, D0 */
+    FA18_BCC(0xC132AC, 0x6D00, 0xC132B0, 0xC13330, L_C13330); /* C132AC: blt     $c13330 */
+L_C132B0:
+    FA18_CHECK(0xC132B0);
+    FA18_OP(0xC132B0, 0x0C80, 0xC132B6); /* C132B0: cmpi.l  #$4, D0 */
+    FA18_BCC(0xC132B6, 0x6C78, 0xC132B8, 0xC13330, L_C13330); /* C132B6: bge     $c13330 */
+L_C132B8:
+    FA18_CHECK(0xC132B8);
+    FA18_OP(0xC132B8, 0xE380, 0xC132BA); /* C132B8: asl.l   #1, D0 */
+    FA18_JUMP_OUT(0xC132BA, 0x4EFB); /* C132BA: jmp     ($2,PC,D0.l) */
+L_C13330:
+    FA18_CHECK(0xC13330);
+    FA18_OP(0xC13330, 0x2079, 0xC13336); /* C13330: movea.l $c18210.l, A0 */
+    FA18_OP(0xC13336, 0x3028, 0xC1333A); /* C13336: move.w  ($2,A0), D0 */
+    FA18_OP(0xC1333A, 0x0800, 0xC1333E); /* C1333A: btst    #$3, D0 */
+    FA18_BCC(0xC1333E, 0x660A, 0xC13340, 0xC1334A, L_C1334A); /* C1333E: bne     $c1334a */
+L_C13340:
+    FA18_CHECK(0xC13340);
+    FA18_OP(0xC13340, 0x302E, 0xC13344); /* C13340: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13344, 0xE440, 0xC13346); /* C13344: asr.w   #2, D0 */
+    FA18_OP(0xC13346, 0x916E, 0xC1334A); /* C13346: sub.w   D0, ($a,A6) */
+L_C1334A:
+    FA18_CHECK(0xC1334A);
+    FA18_OP(0xC1334A, 0x4A6E, 0xC1334E); /* C1334A: tst.w   ($a,A6) */
+    FA18_BCC(0xC1334E, 0x6E3C, 0xC13350, 0xC1338C, L_C1338C); /* C1334E: bgt     $c1338c */
+L_C13350:
+    FA18_CHECK(0xC13350);
+    FA18_OP(0xC13350, 0x3D7C, 0xC13356); /* C13350: move.w  #$1, ($a,A6) */
+    FA18_JUMP(0xC13356, 0x6034, 0xC1338C, L_C1338C); /* C13356: bra     $c1338c */
+L_C1338C:
+    FA18_CHECK(0xC1338C);
+    FA18_OP(0xC1338C, 0x302E, 0xC13390); /* C1338C: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13390, 0x48C0, 0xC13392); /* C13390: ext.l   D0 */
+    FA18_OP(0xC13392, 0x4E5E, 0xC13394); /* C13392: unlk    A6 */
+    FA18_RETURN(0xC13394, 0x4E75); /* C13394: rts */
+}
+
+int fa18_fn_C1325A(int entry) {
+    switch (entry) {
+    case 0: goto L_C1325A;
+    case 1: goto L_C13286;
+    case 2: goto L_C1329C;
+    case 3: goto L_C132B0;
+    case 4: goto L_C132B8;
+    case 5: goto L_C13330;
+    case 6: goto L_C13340;
+    case 7: goto L_C1334A;
+    case 8: goto L_C13350;
+    case 9: goto L_C1338C;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C1325A:
+    FA18_CHECK(0xC1325A);
+    FA18_JUMP(0xC1325A, 0x602A, 0xC13286, L_C13286); /* C1325A: bra     $c13286 */
+L_C13286:
+    FA18_CHECK(0xC13286);
+    FA18_OP(0xC13286, 0x302E, 0xC1328A); /* C13286: move.w  ($a,A6), D0 */
+    FA18_OP(0xC1328A, 0xE440, 0xC1328C); /* C1328A: asr.w   #2, D0 */
+    FA18_OP(0xC1328C, 0x916E, 0xC13290); /* C1328C: sub.w   D0, ($a,A6) */
+    FA18_JUMP(0xC13290, 0x600A, 0xC1329C, L_C1329C); /* C13290: bra     $c1329c */
+L_C1329C:
+    FA18_CHECK(0xC1329C);
+    FA18_OP(0xC1329C, 0x1039, 0xC132A2); /* C1329C: move.b  $c45785.l, D0 */
+    FA18_OP(0xC132A2, 0x4880, 0xC132A4); /* C132A2: ext.w   D0 */
+    FA18_OP(0xC132A4, 0x48C0, 0xC132A6); /* C132A4: ext.l   D0 */
+    FA18_OP(0xC132A6, 0x0480, 0xC132AC); /* C132A6: subi.l  #$1, D0 */
+    FA18_BCC(0xC132AC, 0x6D00, 0xC132B0, 0xC13330, L_C13330); /* C132AC: blt     $c13330 */
+L_C132B0:
+    FA18_CHECK(0xC132B0);
+    FA18_OP(0xC132B0, 0x0C80, 0xC132B6); /* C132B0: cmpi.l  #$4, D0 */
+    FA18_BCC(0xC132B6, 0x6C78, 0xC132B8, 0xC13330, L_C13330); /* C132B6: bge     $c13330 */
+L_C132B8:
+    FA18_CHECK(0xC132B8);
+    FA18_OP(0xC132B8, 0xE380, 0xC132BA); /* C132B8: asl.l   #1, D0 */
+    FA18_JUMP_OUT(0xC132BA, 0x4EFB); /* C132BA: jmp     ($2,PC,D0.l) */
+L_C13330:
+    FA18_CHECK(0xC13330);
+    FA18_OP(0xC13330, 0x2079, 0xC13336); /* C13330: movea.l $c18210.l, A0 */
+    FA18_OP(0xC13336, 0x3028, 0xC1333A); /* C13336: move.w  ($2,A0), D0 */
+    FA18_OP(0xC1333A, 0x0800, 0xC1333E); /* C1333A: btst    #$3, D0 */
+    FA18_BCC(0xC1333E, 0x660A, 0xC13340, 0xC1334A, L_C1334A); /* C1333E: bne     $c1334a */
+L_C13340:
+    FA18_CHECK(0xC13340);
+    FA18_OP(0xC13340, 0x302E, 0xC13344); /* C13340: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13344, 0xE440, 0xC13346); /* C13344: asr.w   #2, D0 */
+    FA18_OP(0xC13346, 0x916E, 0xC1334A); /* C13346: sub.w   D0, ($a,A6) */
+L_C1334A:
+    FA18_CHECK(0xC1334A);
+    FA18_OP(0xC1334A, 0x4A6E, 0xC1334E); /* C1334A: tst.w   ($a,A6) */
+    FA18_BCC(0xC1334E, 0x6E3C, 0xC13350, 0xC1338C, L_C1338C); /* C1334E: bgt     $c1338c */
+L_C13350:
+    FA18_CHECK(0xC13350);
+    FA18_OP(0xC13350, 0x3D7C, 0xC13356); /* C13350: move.w  #$1, ($a,A6) */
+    FA18_JUMP(0xC13356, 0x6034, 0xC1338C, L_C1338C); /* C13356: bra     $c1338c */
+L_C1338C:
+    FA18_CHECK(0xC1338C);
+    FA18_OP(0xC1338C, 0x302E, 0xC13390); /* C1338C: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13390, 0x48C0, 0xC13392); /* C13390: ext.l   D0 */
+    FA18_OP(0xC13392, 0x4E5E, 0xC13394); /* C13392: unlk    A6 */
+    FA18_RETURN(0xC13394, 0x4E75); /* C13394: rts */
+}
+
+int fa18_fn_C1325C(int entry) {
+    switch (entry) {
+    case 0: goto L_C1325C;
+    case 1: goto L_C13292;
+    case 2: goto L_C132B0;
+    case 3: goto L_C132B8;
+    case 4: goto L_C13330;
+    case 5: goto L_C13340;
+    case 6: goto L_C1334A;
+    case 7: goto L_C13350;
+    case 8: goto L_C1338C;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C1325C:
+    FA18_CHECK(0xC1325C);
+    FA18_JUMP(0xC1325C, 0x6034, 0xC13292, L_C13292); /* C1325C: bra     $c13292 */
+L_C13292:
+    FA18_CHECK(0xC13292);
+    FA18_OP(0xC13292, 0x302E, 0xC13296); /* C13292: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13296, 0xE640, 0xC13298); /* C13296: asr.w   #3, D0 */
+    FA18_OP(0xC13298, 0x916E, 0xC1329C); /* C13298: sub.w   D0, ($a,A6) */
+    FA18_OP(0xC1329C, 0x1039, 0xC132A2); /* C1329C: move.b  $c45785.l, D0 */
+    FA18_OP(0xC132A2, 0x4880, 0xC132A4); /* C132A2: ext.w   D0 */
+    FA18_OP(0xC132A4, 0x48C0, 0xC132A6); /* C132A4: ext.l   D0 */
+    FA18_OP(0xC132A6, 0x0480, 0xC132AC); /* C132A6: subi.l  #$1, D0 */
+    FA18_BCC(0xC132AC, 0x6D00, 0xC132B0, 0xC13330, L_C13330); /* C132AC: blt     $c13330 */
+L_C132B0:
+    FA18_CHECK(0xC132B0);
+    FA18_OP(0xC132B0, 0x0C80, 0xC132B6); /* C132B0: cmpi.l  #$4, D0 */
+    FA18_BCC(0xC132B6, 0x6C78, 0xC132B8, 0xC13330, L_C13330); /* C132B6: bge     $c13330 */
+L_C132B8:
+    FA18_CHECK(0xC132B8);
+    FA18_OP(0xC132B8, 0xE380, 0xC132BA); /* C132B8: asl.l   #1, D0 */
+    FA18_JUMP_OUT(0xC132BA, 0x4EFB); /* C132BA: jmp     ($2,PC,D0.l) */
+L_C13330:
+    FA18_CHECK(0xC13330);
+    FA18_OP(0xC13330, 0x2079, 0xC13336); /* C13330: movea.l $c18210.l, A0 */
+    FA18_OP(0xC13336, 0x3028, 0xC1333A); /* C13336: move.w  ($2,A0), D0 */
+    FA18_OP(0xC1333A, 0x0800, 0xC1333E); /* C1333A: btst    #$3, D0 */
+    FA18_BCC(0xC1333E, 0x660A, 0xC13340, 0xC1334A, L_C1334A); /* C1333E: bne     $c1334a */
+L_C13340:
+    FA18_CHECK(0xC13340);
+    FA18_OP(0xC13340, 0x302E, 0xC13344); /* C13340: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13344, 0xE440, 0xC13346); /* C13344: asr.w   #2, D0 */
+    FA18_OP(0xC13346, 0x916E, 0xC1334A); /* C13346: sub.w   D0, ($a,A6) */
+L_C1334A:
+    FA18_CHECK(0xC1334A);
+    FA18_OP(0xC1334A, 0x4A6E, 0xC1334E); /* C1334A: tst.w   ($a,A6) */
+    FA18_BCC(0xC1334E, 0x6E3C, 0xC13350, 0xC1338C, L_C1338C); /* C1334E: bgt     $c1338c */
+L_C13350:
+    FA18_CHECK(0xC13350);
+    FA18_OP(0xC13350, 0x3D7C, 0xC13356); /* C13350: move.w  #$1, ($a,A6) */
+    FA18_JUMP(0xC13356, 0x6034, 0xC1338C, L_C1338C); /* C13356: bra     $c1338c */
+L_C1338C:
+    FA18_CHECK(0xC1338C);
+    FA18_OP(0xC1338C, 0x302E, 0xC13390); /* C1338C: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13390, 0x48C0, 0xC13392); /* C13390: ext.l   D0 */
+    FA18_OP(0xC13392, 0x4E5E, 0xC13394); /* C13392: unlk    A6 */
+    FA18_RETURN(0xC13394, 0x4E75); /* C13394: rts */
+}
+
+int fa18_fn_C132BE(int entry) {
+    switch (entry) {
+    case 0: goto L_C132BE;
+    case 1: goto L_C132C6;
+    case 2: goto L_C13330;
+    case 3: goto L_C13340;
+    case 4: goto L_C1334A;
+    case 5: goto L_C13350;
+    case 6: goto L_C1338C;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C132BE:
+    FA18_CHECK(0xC132BE);
+    FA18_JUMP(0xC132BE, 0x6006, 0xC132C6, L_C132C6); /* C132BE: bra     $c132c6 */
+L_C132C6:
+    FA18_CHECK(0xC132C6);
+    FA18_OP(0xC132C6, 0x302E, 0xC132CA); /* C132C6: move.w  ($a,A6), D0 */
+    FA18_OP(0xC132CA, 0xE640, 0xC132CC); /* C132CA: asr.w   #3, D0 */
+    FA18_OP(0xC132CC, 0x916E, 0xC132D0); /* C132CC: sub.w   D0, ($a,A6) */
+    FA18_JUMP(0xC132D0, 0x605E, 0xC13330, L_C13330); /* C132D0: bra     $c13330 */
+L_C13330:
+    FA18_CHECK(0xC13330);
+    FA18_OP(0xC13330, 0x2079, 0xC13336); /* C13330: movea.l $c18210.l, A0 */
+    FA18_OP(0xC13336, 0x3028, 0xC1333A); /* C13336: move.w  ($2,A0), D0 */
+    FA18_OP(0xC1333A, 0x0800, 0xC1333E); /* C1333A: btst    #$3, D0 */
+    FA18_BCC(0xC1333E, 0x660A, 0xC13340, 0xC1334A, L_C1334A); /* C1333E: bne     $c1334a */
+L_C13340:
+    FA18_CHECK(0xC13340);
+    FA18_OP(0xC13340, 0x302E, 0xC13344); /* C13340: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13344, 0xE440, 0xC13346); /* C13344: asr.w   #2, D0 */
+    FA18_OP(0xC13346, 0x916E, 0xC1334A); /* C13346: sub.w   D0, ($a,A6) */
+L_C1334A:
+    FA18_CHECK(0xC1334A);
+    FA18_OP(0xC1334A, 0x4A6E, 0xC1334E); /* C1334A: tst.w   ($a,A6) */
+    FA18_BCC(0xC1334E, 0x6E3C, 0xC13350, 0xC1338C, L_C1338C); /* C1334E: bgt     $c1338c */
+L_C13350:
+    FA18_CHECK(0xC13350);
+    FA18_OP(0xC13350, 0x3D7C, 0xC13356); /* C13350: move.w  #$1, ($a,A6) */
+    FA18_JUMP(0xC13356, 0x6034, 0xC1338C, L_C1338C); /* C13356: bra     $c1338c */
+L_C1338C:
+    FA18_CHECK(0xC1338C);
+    FA18_OP(0xC1338C, 0x302E, 0xC13390); /* C1338C: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13390, 0x48C0, 0xC13392); /* C13390: ext.l   D0 */
+    FA18_OP(0xC13392, 0x4E5E, 0xC13394); /* C13392: unlk    A6 */
+    FA18_RETURN(0xC13394, 0x4E75); /* C13394: rts */
+}
+
+int fa18_fn_C132C0(int entry) {
+    switch (entry) {
+    case 0: goto L_C132C0;
+    case 1: goto L_C132D2;
+    case 2: goto L_C13330;
+    case 3: goto L_C13340;
+    case 4: goto L_C1334A;
+    case 5: goto L_C13350;
+    case 6: goto L_C1338C;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C132C0:
+    FA18_CHECK(0xC132C0);
+    FA18_JUMP(0xC132C0, 0x6010, 0xC132D2, L_C132D2); /* C132C0: bra     $c132d2 */
+L_C132D2:
+    FA18_CHECK(0xC132D2);
+    FA18_OP(0xC132D2, 0x302E, 0xC132D6); /* C132D2: move.w  ($a,A6), D0 */
+    FA18_OP(0xC132D6, 0xE440, 0xC132D8); /* C132D6: asr.w   #2, D0 */
+    FA18_OP(0xC132D8, 0x916E, 0xC132DC); /* C132D8: sub.w   D0, ($a,A6) */
+    FA18_JUMP(0xC132DC, 0x6052, 0xC13330, L_C13330); /* C132DC: bra     $c13330 */
+L_C13330:
+    FA18_CHECK(0xC13330);
+    FA18_OP(0xC13330, 0x2079, 0xC13336); /* C13330: movea.l $c18210.l, A0 */
+    FA18_OP(0xC13336, 0x3028, 0xC1333A); /* C13336: move.w  ($2,A0), D0 */
+    FA18_OP(0xC1333A, 0x0800, 0xC1333E); /* C1333A: btst    #$3, D0 */
+    FA18_BCC(0xC1333E, 0x660A, 0xC13340, 0xC1334A, L_C1334A); /* C1333E: bne     $c1334a */
+L_C13340:
+    FA18_CHECK(0xC13340);
+    FA18_OP(0xC13340, 0x302E, 0xC13344); /* C13340: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13344, 0xE440, 0xC13346); /* C13344: asr.w   #2, D0 */
+    FA18_OP(0xC13346, 0x916E, 0xC1334A); /* C13346: sub.w   D0, ($a,A6) */
+L_C1334A:
+    FA18_CHECK(0xC1334A);
+    FA18_OP(0xC1334A, 0x4A6E, 0xC1334E); /* C1334A: tst.w   ($a,A6) */
+    FA18_BCC(0xC1334E, 0x6E3C, 0xC13350, 0xC1338C, L_C1338C); /* C1334E: bgt     $c1338c */
+L_C13350:
+    FA18_CHECK(0xC13350);
+    FA18_OP(0xC13350, 0x3D7C, 0xC13356); /* C13350: move.w  #$1, ($a,A6) */
+    FA18_JUMP(0xC13356, 0x6034, 0xC1338C, L_C1338C); /* C13356: bra     $c1338c */
+L_C1338C:
+    FA18_CHECK(0xC1338C);
+    FA18_OP(0xC1338C, 0x302E, 0xC13390); /* C1338C: move.w  ($a,A6), D0 */
+    FA18_OP(0xC13390, 0x48C0, 0xC13392); /* C13390: ext.l   D0 */
+    FA18_OP(0xC13392, 0x4E5E, 0xC13394); /* C13392: unlk    A6 */
+    FA18_RETURN(0xC13394, 0x4E75); /* C13394: rts */
+}
+
+int fa18_fn_C13396(int entry) {
+    switch (entry) {
+    case 0: goto L_C13396;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C13396:
+    FA18_CHECK(0xC13396);
+    FA18_OP(0xC13396, 0x4E56, 0xC1339A); /* C13396: link    A6, #$0 */
+    FA18_OP(0xC1339A, 0x302E, 0xC1339E); /* C1339A: move.w  ($a,A6), D0 */
+    FA18_OP(0xC1339E, 0xE240, 0xC133A0); /* C1339E: asr.w   #1, D0 */
+    FA18_OP(0xC133A0, 0x322E, 0xC133A4); /* C133A0: move.w  ($a,A6), D1 */
+    FA18_OP(0xC133A4, 0xE641, 0xC133A6); /* C133A4: asr.w   #3, D1 */
+    FA18_OP(0xC133A6, 0xD041, 0xC133A8); /* C133A6: add.w   D1, D0 */
+    FA18_OP(0xC133A8, 0x3D40, 0xC133AC); /* C133A8: move.w  D0, ($a,A6) */
+    FA18_OP(0xC133AC, 0x48C0, 0xC133AE); /* C133AC: ext.l   D0 */
+    FA18_OP(0xC133AE, 0x4E5E, 0xC133B0); /* C133AE: unlk    A6 */
+    FA18_RETURN(0xC133B0, 0x4E75); /* C133B0: rts */
 }
 
 int fa18_fn_C133B2(int entry) {
@@ -8403,7 +11621,7 @@ L_C135F4:
     FA18_OP(0xC135F4, 0x3039, 0xC135FA); /* C135F4: move.w  $c45b5e.l, D0 */
     FA18_OP(0xC135FA, 0x48C0, 0xC135FC); /* C135FA: ext.l   D0 */
     FA18_OP(0xC135FC, 0x2F00, 0xC135FE); /* C135FC: move.l  D0, -(A7) */
-    FA18_CALL(0xC135FE, 0x6100, 0xC13602, 73, 0); /* C135FE: bsr     $c13ba0 */
+    FA18_CALL(0xC135FE, 0x6100, 0xC13602, 136, 0); /* C135FE: bsr     $c13ba0 */
 L_C13602:
     FA18_CHECK(0xC13602);
     FA18_OP(0xC13602, 0x588F, 0xC13604); /* C13602: addq.l  #4, A7 */
@@ -8419,14 +11637,14 @@ L_C13618:
     FA18_OP(0xC13618, 0x302E, 0xC1361C); /* C13618: move.w  (-$2,A6), D0 */
     FA18_OP(0xC1361C, 0x48C0, 0xC1361E); /* C1361C: ext.l   D0 */
     FA18_OP(0xC1361E, 0x2F00, 0xC13620); /* C1361E: move.l  D0, -(A7) */
-    FA18_CALL(0xC13620, 0x6100, 0xC13624, 71, 0); /* C13620: bsr     $c13a8e */
+    FA18_CALL(0xC13620, 0x6100, 0xC13624, 134, 0); /* C13620: bsr     $c13a8e */
 L_C13624:
     FA18_CHECK(0xC13624);
     FA18_OP(0xC13624, 0x588F, 0xC13626); /* C13624: addq.l  #4, A7 */
     FA18_OP(0xC13626, 0x302E, 0xC1362A); /* C13626: move.w  (-$2,A6), D0 */
     FA18_OP(0xC1362A, 0x48C0, 0xC1362C); /* C1362A: ext.l   D0 */
     FA18_OP(0xC1362C, 0x2F00, 0xC1362E); /* C1362C: move.l  D0, -(A7) */
-    FA18_CALL(0xC1362E, 0x6100, 0xC13632, 72, 0); /* C1362E: bsr     $c13b5a */
+    FA18_CALL(0xC1362E, 0x6100, 0xC13632, 135, 0); /* C1362E: bsr     $c13b5a */
 L_C13632:
     FA18_CHECK(0xC13632);
     FA18_OP(0xC13632, 0x588F, 0xC13634); /* C13632: addq.l  #4, A7 */
@@ -8463,7 +11681,7 @@ L_C1365C:
     FA18_OP(0xC13670, 0x48C0, 0xC13672); /* C13670: ext.l   D0 */
     FA18_OP(0xC13672, 0x4480, 0xC13674); /* C13672: neg.l   D0 */
     FA18_OP(0xC13674, 0x2F00, 0xC13676); /* C13674: move.l  D0, -(A7) */
-    FA18_CALL(0xC13676, 0x6100, 0xC1367A, 73, 0); /* C13676: bsr     $c13ba0 */
+    FA18_CALL(0xC13676, 0x6100, 0xC1367A, 136, 0); /* C13676: bsr     $c13ba0 */
 L_C1367A:
     FA18_CHECK(0xC1367A);
     FA18_OP(0xC1367A, 0x588F, 0xC1367C); /* C1367A: addq.l  #4, A7 */
@@ -8473,14 +11691,14 @@ L_C13680:
     FA18_OP(0xC13680, 0x302E, 0xC13684); /* C13680: move.w  (-$2,A6), D0 */
     FA18_OP(0xC13684, 0x48C0, 0xC13686); /* C13684: ext.l   D0 */
     FA18_OP(0xC13686, 0x2F00, 0xC13688); /* C13686: move.l  D0, -(A7) */
-    FA18_CALL(0xC13688, 0x6100, 0xC1368C, 71, 0); /* C13688: bsr     $c13a8e */
+    FA18_CALL(0xC13688, 0x6100, 0xC1368C, 134, 0); /* C13688: bsr     $c13a8e */
 L_C1368C:
     FA18_CHECK(0xC1368C);
     FA18_OP(0xC1368C, 0x588F, 0xC1368E); /* C1368C: addq.l  #4, A7 */
     FA18_OP(0xC1368E, 0x302E, 0xC13692); /* C1368E: move.w  (-$2,A6), D0 */
     FA18_OP(0xC13692, 0x48C0, 0xC13694); /* C13692: ext.l   D0 */
     FA18_OP(0xC13694, 0x2F00, 0xC13696); /* C13694: move.l  D0, -(A7) */
-    FA18_CALL(0xC13696, 0x6100, 0xC1369A, 72, 0); /* C13696: bsr     $c13b5a */
+    FA18_CALL(0xC13696, 0x6100, 0xC1369A, 135, 0); /* C13696: bsr     $c13b5a */
 L_C1369A:
     FA18_CHECK(0xC1369A);
     FA18_OP(0xC1369A, 0x588F, 0xC1369C); /* C1369A: addq.l  #4, A7 */
@@ -8490,14 +11708,14 @@ L_C136A0:
     FA18_OP(0xC136A0, 0x302E, 0xC136A4); /* C136A0: move.w  (-$2,A6), D0 */
     FA18_OP(0xC136A4, 0x48C0, 0xC136A6); /* C136A4: ext.l   D0 */
     FA18_OP(0xC136A6, 0x2F00, 0xC136A8); /* C136A6: move.l  D0, -(A7) */
-    FA18_CALL(0xC136A8, 0x6100, 0xC136AC, 71, 0); /* C136A8: bsr     $c13a8e */
+    FA18_CALL(0xC136A8, 0x6100, 0xC136AC, 134, 0); /* C136A8: bsr     $c13a8e */
 L_C136AC:
     FA18_CHECK(0xC136AC);
     FA18_OP(0xC136AC, 0x588F, 0xC136AE); /* C136AC: addq.l  #4, A7 */
     FA18_OP(0xC136AE, 0x302E, 0xC136B2); /* C136AE: move.w  (-$2,A6), D0 */
     FA18_OP(0xC136B2, 0x48C0, 0xC136B4); /* C136B2: ext.l   D0 */
     FA18_OP(0xC136B4, 0x2F00, 0xC136B6); /* C136B4: move.l  D0, -(A7) */
-    FA18_CALL(0xC136B6, 0x6100, 0xC136BA, 72, 0); /* C136B6: bsr     $c13b5a */
+    FA18_CALL(0xC136B6, 0x6100, 0xC136BA, 135, 0); /* C136B6: bsr     $c13b5a */
 L_C136BA:
     FA18_CHECK(0xC136BA);
     FA18_OP(0xC136BA, 0x588F, 0xC136BC); /* C136BA: addq.l  #4, A7 */
@@ -8516,7 +11734,7 @@ L_C136D6:
     FA18_OP(0xC136D6, 0x302E, 0xC136DA); /* C136D6: move.w  (-$2,A6), D0 */
     FA18_OP(0xC136DA, 0x48C0, 0xC136DC); /* C136DA: ext.l   D0 */
     FA18_OP(0xC136DC, 0x2F00, 0xC136DE); /* C136DC: move.l  D0, -(A7) */
-    FA18_CALL(0xC136DE, 0x6100, 0xC136E2, 71, 0); /* C136DE: bsr     $c13a8e */
+    FA18_CALL(0xC136DE, 0x6100, 0xC136E2, 134, 0); /* C136DE: bsr     $c13a8e */
 L_C136E2:
     FA18_CHECK(0xC136E2);
     FA18_OP(0xC136E2, 0x588F, 0xC136E4); /* C136E2: addq.l  #4, A7 */
@@ -8541,7 +11759,7 @@ L_C13702:
     FA18_OP(0xC13702, 0x7002, 0xC13704); /* C13702: moveq   #$2, D0 */
     FA18_OP(0xC13704, 0x2F00, 0xC13706); /* C13704: move.l  D0, -(A7) */
     FA18_OP(0xC13706, 0x2F08, 0xC13708); /* C13706: move.l  A0, -(A7) */
-    FA18_CALL(0xC13708, 0x6100, 0xC1370C, 70, 0); /* C13708: bsr     $c13a2a */
+    FA18_CALL(0xC13708, 0x6100, 0xC1370C, 133, 0); /* C13708: bsr     $c13a2a */
 L_C1370C:
     FA18_CHECK(0xC1370C);
     FA18_OP(0xC1370C, 0x508F, 0xC1370E); /* C1370C: addq.l  #8, A7 */
@@ -8551,7 +11769,7 @@ L_C13710:
     FA18_OP(0xC13710, 0x7001, 0xC13712); /* C13710: moveq   #$1, D0 */
     FA18_OP(0xC13712, 0x2F00, 0xC13714); /* C13712: move.l  D0, -(A7) */
     FA18_OP(0xC13714, 0x2F2E, 0xC13718); /* C13714: move.l  (-$e,A6), -(A7) */
-    FA18_CALL(0xC13718, 0x6100, 0xC1371C, 70, 0); /* C13718: bsr     $c13a2a */
+    FA18_CALL(0xC13718, 0x6100, 0xC1371C, 133, 0); /* C13718: bsr     $c13a2a */
 L_C1371C:
     FA18_CHECK(0xC1371C);
     FA18_OP(0xC1371C, 0x508F, 0xC1371E); /* C1371C: addq.l  #8, A7 */
@@ -8598,7 +11816,7 @@ L_C1376E:
     FA18_OP(0xC1376E, 0x3039, 0xC13774); /* C1376E: move.w  $c45b60.l, D0 */
     FA18_OP(0xC13774, 0x48C0, 0xC13776); /* C13774: ext.l   D0 */
     FA18_OP(0xC13776, 0x2F00, 0xC13778); /* C13776: move.l  D0, -(A7) */
-    FA18_CALL(0xC13778, 0x6100, 0xC1377C, 74, 0); /* C13778: bsr     $c13c0a */
+    FA18_CALL(0xC13778, 0x6100, 0xC1377C, 137, 0); /* C13778: bsr     $c13c0a */
 L_C1377C:
     FA18_CHECK(0xC1377C);
     FA18_OP(0xC1377C, 0x588F, 0xC1377E); /* C1377C: addq.l  #4, A7 */
@@ -8608,7 +11826,7 @@ L_C13780:
     FA18_OP(0xC13780, 0x7001, 0xC13782); /* C13780: moveq   #$1, D0 */
     FA18_OP(0xC13782, 0x2F00, 0xC13784); /* C13782: move.l  D0, -(A7) */
     FA18_OP(0xC13784, 0x2F2E, 0xC13788); /* C13784: move.l  (-$12,A6), -(A7) */
-    FA18_CALL(0xC13788, 0x6100, 0xC1378C, 70, 0); /* C13788: bsr     $c13a2a */
+    FA18_CALL(0xC13788, 0x6100, 0xC1378C, 133, 0); /* C13788: bsr     $c13a2a */
 L_C1378C:
     FA18_CHECK(0xC1378C);
     FA18_OP(0xC1378C, 0x508F, 0xC1378E); /* C1378C: addq.l  #8, A7 */
@@ -8636,7 +11854,7 @@ L_C137B6:
     FA18_OP(0xC137B6, 0x7001, 0xC137B8); /* C137B6: moveq   #$1, D0 */
     FA18_OP(0xC137B8, 0x2F00, 0xC137BA); /* C137B8: move.l  D0, -(A7) */
     FA18_OP(0xC137BA, 0x2F08, 0xC137BC); /* C137BA: move.l  A0, -(A7) */
-    FA18_CALL(0xC137BC, 0x6100, 0xC137C0, 70, 0); /* C137BC: bsr     $c13a2a */
+    FA18_CALL(0xC137BC, 0x6100, 0xC137C0, 133, 0); /* C137BC: bsr     $c13a2a */
 L_C137C0:
     FA18_CHECK(0xC137C0);
     FA18_OP(0xC137C0, 0x508F, 0xC137C2); /* C137C0: addq.l  #8, A7 */
@@ -8725,7 +11943,7 @@ L_C1386A:
     FA18_OP(0xC13870, 0x48C0, 0xC13872); /* C13870: ext.l   D0 */
     FA18_OP(0xC13872, 0x4480, 0xC13874); /* C13872: neg.l   D0 */
     FA18_OP(0xC13874, 0x2F00, 0xC13876); /* C13874: move.l  D0, -(A7) */
-    FA18_CALL(0xC13876, 0x6100, 0xC1387A, 75, 0); /* C13876: bsr     $c13c64 */
+    FA18_CALL(0xC13876, 0x6100, 0xC1387A, 138, 0); /* C13876: bsr     $c13c64 */
 L_C1387A:
     FA18_CHECK(0xC1387A);
     FA18_OP(0xC1387A, 0x588F, 0xC1387C); /* C1387A: addq.l  #4, A7 */
@@ -8747,7 +11965,7 @@ L_C138A6:
     FA18_OP(0xC138A6, 0x3039, 0xC138AC); /* C138A6: move.w  $c45b62.l, D0 */
     FA18_OP(0xC138AC, 0x48C0, 0xC138AE); /* C138AC: ext.l   D0 */
     FA18_OP(0xC138AE, 0x2F00, 0xC138B0); /* C138AE: move.l  D0, -(A7) */
-    FA18_CALL(0xC138B0, 0x6100, 0xC138B4, 74, 0); /* C138B0: bsr     $c13c0a */
+    FA18_CALL(0xC138B0, 0x6100, 0xC138B4, 137, 0); /* C138B0: bsr     $c13c0a */
 L_C138B4:
     FA18_CHECK(0xC138B4);
     FA18_OP(0xC138B4, 0x588F, 0xC138B6); /* C138B4: addq.l  #4, A7 */
@@ -8768,7 +11986,7 @@ L_C138CE:
     FA18_OP(0xC138D4, 0x48C0, 0xC138D6); /* C138D4: ext.l   D0 */
     FA18_OP(0xC138D6, 0x4480, 0xC138D8); /* C138D6: neg.l   D0 */
     FA18_OP(0xC138D8, 0x2F00, 0xC138DA); /* C138D8: move.l  D0, -(A7) */
-    FA18_CALL(0xC138DA, 0x6100, 0xC138DE, 75, 0); /* C138DA: bsr     $c13c64 */
+    FA18_CALL(0xC138DA, 0x6100, 0xC138DE, 138, 0); /* C138DA: bsr     $c13c64 */
 L_C138DE:
     FA18_CHECK(0xC138DE);
     FA18_OP(0xC138DE, 0x588F, 0xC138E0); /* C138DE: addq.l  #4, A7 */
@@ -8787,7 +12005,7 @@ L_C138F2:
     FA18_OP(0xC138F8, 0x48C0, 0xC138FA); /* C138F8: ext.l   D0 */
     FA18_OP(0xC138FA, 0x4480, 0xC138FC); /* C138FA: neg.l   D0 */
     FA18_OP(0xC138FC, 0x2F00, 0xC138FE); /* C138FC: move.l  D0, -(A7) */
-    FA18_CALL(0xC138FE, 0x6100, 0xC13902, 75, 0); /* C138FE: bsr     $c13c64 */
+    FA18_CALL(0xC138FE, 0x6100, 0xC13902, 138, 0); /* C138FE: bsr     $c13c64 */
 L_C13902:
     FA18_CHECK(0xC13902);
     FA18_OP(0xC13902, 0x588F, 0xC13904); /* C13902: addq.l  #4, A7 */
@@ -8807,7 +12025,7 @@ L_C13918:
     FA18_OP(0xC1391E, 0x48C0, 0xC13920); /* C1391E: ext.l   D0 */
     FA18_OP(0xC13920, 0x4480, 0xC13922); /* C13920: neg.l   D0 */
     FA18_OP(0xC13922, 0x2F00, 0xC13924); /* C13922: move.l  D0, -(A7) */
-    FA18_CALL(0xC13924, 0x6100, 0xC13928, 75, 0); /* C13924: bsr     $c13c64 */
+    FA18_CALL(0xC13924, 0x6100, 0xC13928, 138, 0); /* C13924: bsr     $c13c64 */
 L_C13928:
     FA18_CHECK(0xC13928);
     FA18_OP(0xC13928, 0x588F, 0xC1392A); /* C13928: addq.l  #4, A7 */
@@ -8822,14 +12040,14 @@ L_C13934:
     FA18_OP(0xC13934, 0x7001, 0xC13936); /* C13934: moveq   #$1, D0 */
     FA18_OP(0xC13936, 0x2F00, 0xC13938); /* C13936: move.l  D0, -(A7) */
     FA18_OP(0xC13938, 0x2F2E, 0xC1393C); /* C13938: move.l  (-$12,A6), -(A7) */
-    FA18_CALL(0xC1393C, 0x6100, 0xC13940, 70, 0); /* C1393C: bsr     $c13a2a */
+    FA18_CALL(0xC1393C, 0x6100, 0xC13940, 133, 0); /* C1393C: bsr     $c13a2a */
 L_C13940:
     FA18_CHECK(0xC13940);
     FA18_OP(0xC13940, 0x508F, 0xC13942); /* C13940: addq.l  #8, A7 */
     FA18_OP(0xC13942, 0x7001, 0xC13944); /* C13942: moveq   #$1, D0 */
     FA18_OP(0xC13944, 0x2F00, 0xC13946); /* C13944: move.l  D0, -(A7) */
     FA18_OP(0xC13946, 0x2F2E, 0xC1394A); /* C13946: move.l  (-$16,A6), -(A7) */
-    FA18_CALL(0xC1394A, 0x6100, 0xC1394E, 70, 0); /* C1394A: bsr     $c13a2a */
+    FA18_CALL(0xC1394A, 0x6100, 0xC1394E, 133, 0); /* C1394A: bsr     $c13a2a */
 L_C1394E:
     FA18_CHECK(0xC1394E);
     FA18_OP(0xC1394E, 0x508F, 0xC13950); /* C1394E: addq.l  #8, A7 */
@@ -8848,7 +12066,7 @@ L_C1396A:
     FA18_OP(0xC1396A, 0x302E, 0xC1396E); /* C1396A: move.w  (-$2,A6), D0 */
     FA18_OP(0xC1396E, 0x48C0, 0xC13970); /* C1396E: ext.l   D0 */
     FA18_OP(0xC13970, 0x2F00, 0xC13972); /* C13970: move.l  D0, -(A7) */
-    FA18_CALL(0xC13972, 0x6100, 0xC13976, 72, 0); /* C13972: bsr     $c13b5a */
+    FA18_CALL(0xC13972, 0x6100, 0xC13976, 135, 0); /* C13972: bsr     $c13b5a */
 L_C13976:
     FA18_CHECK(0xC13976);
     FA18_OP(0xC13976, 0x588F, 0xC13978); /* C13976: addq.l  #4, A7 */
@@ -8862,7 +12080,7 @@ L_C13980:
     FA18_OP(0xC13980, 0x7001, 0xC13982); /* C13980: moveq   #$1, D0 */
     FA18_OP(0xC13982, 0x2F00, 0xC13984); /* C13982: move.l  D0, -(A7) */
     FA18_OP(0xC13984, 0x2F08, 0xC13986); /* C13984: move.l  A0, -(A7) */
-    FA18_CALL(0xC13986, 0x6100, 0xC1398A, 70, 0); /* C13986: bsr     $c13a2a */
+    FA18_CALL(0xC13986, 0x6100, 0xC1398A, 133, 0); /* C13986: bsr     $c13a2a */
 L_C1398A:
     FA18_CHECK(0xC1398A);
     FA18_OP(0xC1398A, 0x508F, 0xC1398C); /* C1398A: addq.l  #8, A7 */
@@ -9061,7 +12279,7 @@ L_C13AF0:
     FA18_CHECK(0xC13AF0);
     FA18_OP(0xC13AF0, 0x700F, 0xC13AF2); /* C13AF0: moveq   #$f, D0 */
     FA18_OP(0xC13AF2, 0x2F00, 0xC13AF4); /* C13AF2: move.l  D0, -(A7) */
-    FA18_CALL(0xC13AF4, 0x4EB9, 0xC13AFA, 110, 0); /* C13AF4: jsr     $c1803c.l */
+    FA18_CALL(0xC13AF4, 0x4EB9, 0xC13AFA, 174, 0); /* C13AF4: jsr     $c1803c.l */
 L_C13AFA:
     FA18_CHECK(0xC13AFA);
     FA18_OP(0xC13AFA, 0x588F, 0xC13AFC); /* C13AFA: addq.l  #4, A7 */
@@ -9210,7 +12428,7 @@ L_C13BDC:
     FA18_OP(0xC13BF8, 0x3081, 0xC13BFA); /* C13BF8: move.w  D1, (A0) */
     FA18_OP(0xC13BFA, 0x2F08, 0xC13BFC); /* C13BFA: move.l  A0, -(A7) */
     FA18_OP(0xC13BFC, 0x2D48, 0xC13C00); /* C13BFC: move.l  A0, (-$4,A6) */
-    FA18_CALL(0xC13C00, 0x6100, 0xC13C04, 76, 0); /* C13C00: bsr     $c13cde */
+    FA18_CALL(0xC13C00, 0x6100, 0xC13C04, 139, 0); /* C13C00: bsr     $c13cde */
 L_C13C04:
     FA18_CHECK(0xC13C04);
     FA18_OP(0xC13C04, 0x588F, 0xC13C06); /* C13C04: addq.l  #4, A7 */
@@ -9258,7 +12476,7 @@ L_C13C36:
     FA18_OP(0xC13C52, 0x3081, 0xC13C54); /* C13C52: move.w  D1, (A0) */
     FA18_OP(0xC13C54, 0x2F08, 0xC13C56); /* C13C54: move.l  A0, -(A7) */
     FA18_OP(0xC13C56, 0x2D48, 0xC13C5A); /* C13C56: move.l  A0, (-$4,A6) */
-    FA18_CALL(0xC13C5A, 0x6100, 0xC13C5E, 76, 0); /* C13C5A: bsr     $c13cde */
+    FA18_CALL(0xC13C5A, 0x6100, 0xC13C5E, 139, 0); /* C13C5A: bsr     $c13cde */
 L_C13C5E:
     FA18_CHECK(0xC13C5E);
     FA18_OP(0xC13C5E, 0x588F, 0xC13C60); /* C13C5E: addq.l  #4, A7 */
@@ -9321,7 +12539,7 @@ L_C13CAE:
     FA18_OP(0xC13CCE, 0x3081, 0xC13CD0); /* C13CCE: move.w  D1, (A0) */
     FA18_OP(0xC13CD0, 0x2F08, 0xC13CD2); /* C13CD0: move.l  A0, -(A7) */
     FA18_OP(0xC13CD2, 0x2D48, 0xC13CD6); /* C13CD2: move.l  A0, (-$4,A6) */
-    FA18_CALL(0xC13CD6, 0x6106, 0xC13CD8, 76, 0); /* C13CD6: bsr     $c13cde */
+    FA18_CALL(0xC13CD6, 0x6106, 0xC13CD8, 139, 0); /* C13CD6: bsr     $c13cde */
 L_C13CD8:
     FA18_CHECK(0xC13CD8);
     FA18_OP(0xC13CD8, 0x588F, 0xC13CDA); /* C13CD8: addq.l  #4, A7 */
@@ -10084,7 +13302,7 @@ L_C1416E:
     FA18_JUMP(0xC14172, 0x6008, 0xC1417C, L_C1417C); /* C14172: bra     $c1417c */
 L_C14174:
     FA18_CHECK(0xC14174);
-    FA18_CALL(0xC14174, 0x6100, 0xC14178, 81, 0); /* C14174: bsr     $c148e2 */
+    FA18_CALL(0xC14174, 0x6100, 0xC14178, 144, 0); /* C14174: bsr     $c148e2 */
 L_C14178:
     FA18_CHECK(0xC14178);
     FA18_OP(0xC14178, 0x3D40, 0xC1417C); /* C14178: move.w  D0, (-$1a,A6) */
@@ -10192,7 +13410,7 @@ L_C14268:
     FA18_CHECK(0xC14268);
     FA18_OP(0xC14268, 0x70DB, 0xC1426A); /* C14268: moveq   #-$25, D0 */
     FA18_OP(0xC1426A, 0x2F00, 0xC1426C); /* C1426A: move.l  D0, -(A7) */
-    FA18_CALL(0xC1426C, 0x6100, 0xC14270, 79, 0); /* C1426C: bsr     $c14876 */
+    FA18_CALL(0xC1426C, 0x6100, 0xC14270, 142, 0); /* C1426C: bsr     $c14876 */
 L_C14270:
     FA18_CHECK(0xC14270);
     FA18_OP(0xC14270, 0x588F, 0xC14272); /* C14270: addq.l  #4, A7 */
@@ -10468,7 +13686,7 @@ L_C144D8:
     FA18_OP(0xC144D8, 0x302E, 0xC144DC); /* C144D8: move.w  (-$22,A6), D0 */
     FA18_OP(0xC144DC, 0x48C0, 0xC144DE); /* C144DC: ext.l   D0 */
     FA18_OP(0xC144DE, 0x2F00, 0xC144E0); /* C144DE: move.l  D0, -(A7) */
-    FA18_CALL(0xC144E0, 0x6100, 0xC144E4, 79, 0); /* C144E0: bsr     $c14876 */
+    FA18_CALL(0xC144E0, 0x6100, 0xC144E4, 142, 0); /* C144E0: bsr     $c14876 */
 L_C144E4:
     FA18_CHECK(0xC144E4);
     FA18_OP(0xC144E4, 0x588F, 0xC144E6); /* C144E4: addq.l  #4, A7 */
@@ -10580,7 +13798,7 @@ L_C145D8:
     FA18_OP(0xC145D8, 0x302E, 0xC145DC); /* C145D8: move.w  (-$22,A6), D0 */
     FA18_OP(0xC145DC, 0x48C0, 0xC145DE); /* C145DC: ext.l   D0 */
     FA18_OP(0xC145DE, 0x2F00, 0xC145E0); /* C145DE: move.l  D0, -(A7) */
-    FA18_CALL(0xC145E0, 0x6100, 0xC145E4, 79, 0); /* C145E0: bsr     $c14876 */
+    FA18_CALL(0xC145E0, 0x6100, 0xC145E4, 142, 0); /* C145E0: bsr     $c14876 */
 L_C145E4:
     FA18_CHECK(0xC145E4);
     FA18_OP(0xC145E4, 0x588F, 0xC145E6); /* C145E4: addq.l  #4, A7 */
@@ -10667,7 +13885,7 @@ L_C14682:
 L_C14688:
     FA18_CHECK(0xC14688);
     FA18_OP(0xC14688, 0x42A7, 0xC1468A); /* C14688: clr.l   -(A7) */
-    FA18_CALL(0xC1468A, 0x6100, 0xC1468E, 79, 0); /* C1468A: bsr     $c14876 */
+    FA18_CALL(0xC1468A, 0x6100, 0xC1468E, 142, 0); /* C1468A: bsr     $c14876 */
 L_C1468E:
     FA18_CHECK(0xC1468E);
     FA18_OP(0xC1468E, 0x588F, 0xC14690); /* C1468E: addq.l  #4, A7 */
@@ -10741,7 +13959,7 @@ L_C1472C:
     FA18_OP(0xC14730, 0x7007, 0xC14732); /* C14730: moveq   #$7, D0 */
     FA18_OP(0xC14732, 0x2F00, 0xC14734); /* C14732: move.l  D0, -(A7) */
     FA18_OP(0xC14734, 0x2F2E, 0xC14738); /* C14734: move.l  (-$20,A6), -(A7) */
-    FA18_CALL(0xC14738, 0x6100, 0xC1473C, 80, 0); /* C14738: bsr     $c148a2 */
+    FA18_CALL(0xC14738, 0x6100, 0xC1473C, 143, 0); /* C14738: bsr     $c148a2 */
 L_C1473C:
     FA18_CHECK(0xC1473C);
     FA18_OP(0xC1473C, 0x4FEF, 0xC14740); /* C1473C: lea     ($c,A7), A7 */
@@ -10771,7 +13989,7 @@ L_C14768:
     FA18_OP(0xC1476C, 0x700F, 0xC1476E); /* C1476C: moveq   #$f, D0 */
     FA18_OP(0xC1476E, 0x2F00, 0xC14770); /* C1476E: move.l  D0, -(A7) */
     FA18_OP(0xC14770, 0x2F08, 0xC14772); /* C14770: move.l  A0, -(A7) */
-    FA18_CALL(0xC14772, 0x6100, 0xC14776, 80, 0); /* C14772: bsr     $c148a2 */
+    FA18_CALL(0xC14772, 0x6100, 0xC14776, 143, 0); /* C14772: bsr     $c148a2 */
 L_C14776:
     FA18_CHECK(0xC14776);
     FA18_OP(0xC14776, 0x4FEF, 0xC1477A); /* C14776: lea     ($c,A7), A7 */
@@ -10795,7 +14013,7 @@ L_C14798:
     FA18_OP(0xC1479C, 0x701F, 0xC1479E); /* C1479C: moveq   #$1f, D0 */
     FA18_OP(0xC1479E, 0x2F00, 0xC147A0); /* C1479E: move.l  D0, -(A7) */
     FA18_OP(0xC147A0, 0x2F2E, 0xC147A4); /* C147A0: move.l  (-$20,A6), -(A7) */
-    FA18_CALL(0xC147A4, 0x6100, 0xC147A8, 80, 0); /* C147A4: bsr     $c148a2 */
+    FA18_CALL(0xC147A4, 0x6100, 0xC147A8, 143, 0); /* C147A4: bsr     $c148a2 */
 L_C147A8:
     FA18_CHECK(0xC147A8);
     FA18_OP(0xC147A8, 0x4FEF, 0xC147AC); /* C147A8: lea     ($c,A7), A7 */
@@ -10813,7 +14031,7 @@ L_C147BA:
     FA18_OP(0xC147BE, 0x7003, 0xC147C0); /* C147BE: moveq   #$3, D0 */
     FA18_OP(0xC147C0, 0x2F00, 0xC147C2); /* C147C0: move.l  D0, -(A7) */
     FA18_OP(0xC147C2, 0x2F2E, 0xC147C6); /* C147C2: move.l  (-$20,A6), -(A7) */
-    FA18_CALL(0xC147C6, 0x6100, 0xC147CA, 80, 0); /* C147C6: bsr     $c148a2 */
+    FA18_CALL(0xC147C6, 0x6100, 0xC147CA, 143, 0); /* C147C6: bsr     $c148a2 */
 L_C147CA:
     FA18_CHECK(0xC147CA);
     FA18_OP(0xC147CA, 0x4FEF, 0xC147CE); /* C147CA: lea     ($c,A7), A7 */
@@ -10866,7 +14084,7 @@ L_C1481C:
     FA18_OP(0xC14820, 0x7007, 0xC14822); /* C14820: moveq   #$7, D0 */
     FA18_OP(0xC14822, 0x2F00, 0xC14824); /* C14822: move.l  D0, -(A7) */
     FA18_OP(0xC14824, 0x2F2E, 0xC14828); /* C14824: move.l  (-$20,A6), -(A7) */
-    FA18_CALL(0xC14828, 0x6100, 0xC1482C, 80, 0); /* C14828: bsr     $c148a2 */
+    FA18_CALL(0xC14828, 0x6100, 0xC1482C, 143, 0); /* C14828: bsr     $c148a2 */
 L_C1482C:
     FA18_CHECK(0xC1482C);
     FA18_OP(0xC1482C, 0x4FEF, 0xC14830); /* C1482C: lea     ($c,A7), A7 */
@@ -10886,7 +14104,7 @@ L_C14840:
     FA18_OP(0xC1484A, 0x3080, 0xC1484C); /* C1484A: move.w  D0, (A0) */
 L_C1484C:
     FA18_CHECK(0xC1484C);
-    FA18_CALL(0xC1484C, 0x4EB9, 0xC14852, 233, 1); /* C1484C: jsr     $c26428.l */
+    FA18_CALL(0xC1484C, 0x4EB9, 0xC14852, 315, 1); /* C1484C: jsr     $c26428.l */
 L_C14852:
     FA18_CHECK(0xC14852);
     FA18_OP(0xC14852, 0x2079, 0xC14858); /* C14852: movea.l $c18210.l, A0 */
@@ -11220,7 +14438,7 @@ L_C149BE:
     FA18_OP(0xC14A48, 0x2D48, 0xC14A4C); /* C14A48: move.l  A0, (-$2c,A6) */
     FA18_OP(0xC14A4C, 0x2D49, 0xC14A50); /* C14A4C: move.l  A1, (-$30,A6) */
     FA18_OP(0xC14A50, 0x2D4A, 0xC14A54); /* C14A50: move.l  A2, (-$34,A6) */
-    FA18_CALL(0xC14A54, 0x4EB9, 0xC14A5A, 218, 0); /* C14A54: jsr     $c25754.l */
+    FA18_CALL(0xC14A54, 0x4EB9, 0xC14A5A, 300, 0); /* C14A54: jsr     $c25754.l */
 L_C14A5A:
     FA18_CHECK(0xC14A5A);
     FA18_OP(0xC14A5A, 0x4FEF, 0xC14A5E); /* C14A5A: lea     ($10,A7), A7 */
@@ -11262,7 +14480,7 @@ L_C14ABE:
     FA18_OP(0xC14AC8, 0x48C1, 0xC14ACA); /* C14AC8: ext.l   D1 */
     FA18_OP(0xC14ACA, 0x2F01, 0xC14ACC); /* C14ACA: move.l  D1, -(A7) */
     FA18_OP(0xC14ACC, 0x2F00, 0xC14ACE); /* C14ACC: move.l  D0, -(A7) */
-    FA18_CALL(0xC14ACE, 0x6100, 0xC14AD2, 83, 0); /* C14ACE: bsr     $c15138 */
+    FA18_CALL(0xC14ACE, 0x6100, 0xC14AD2, 146, 0); /* C14ACE: bsr     $c15138 */
 L_C14AD2:
     FA18_CHECK(0xC14AD2);
     FA18_OP(0xC14AD2, 0x508F, 0xC14AD4); /* C14AD2: addq.l  #8, A7 */
@@ -11273,7 +14491,7 @@ L_C14AD2:
     FA18_OP(0xC14AE0, 0x2F02, 0xC14AE2); /* C14AE0: move.l  D2, -(A7) */
     FA18_OP(0xC14AE2, 0x2F01, 0xC14AE4); /* C14AE2: move.l  D1, -(A7) */
     FA18_OP(0xC14AE4, 0x3D40, 0xC14AE8); /* C14AE4: move.w  D0, (-$2,A6) */
-    FA18_CALL(0xC14AE8, 0x6100, 0xC14AEC, 83, 0); /* C14AE8: bsr     $c15138 */
+    FA18_CALL(0xC14AE8, 0x6100, 0xC14AEC, 146, 0); /* C14AE8: bsr     $c15138 */
 L_C14AEC:
     FA18_CHECK(0xC14AEC);
     FA18_OP(0xC14AEC, 0x508F, 0xC14AEE); /* C14AEC: addq.l  #8, A7 */
@@ -11302,7 +14520,7 @@ L_C14B16:
     FA18_OP(0xC14B20, 0x48C1, 0xC14B22); /* C14B20: ext.l   D1 */
     FA18_OP(0xC14B22, 0x2F01, 0xC14B24); /* C14B22: move.l  D1, -(A7) */
     FA18_OP(0xC14B24, 0x2F00, 0xC14B26); /* C14B24: move.l  D0, -(A7) */
-    FA18_CALL(0xC14B26, 0x6100, 0xC14B2A, 83, 0); /* C14B26: bsr     $c15138 */
+    FA18_CALL(0xC14B26, 0x6100, 0xC14B2A, 146, 0); /* C14B26: bsr     $c15138 */
 L_C14B2A:
     FA18_CHECK(0xC14B2A);
     FA18_OP(0xC14B2A, 0x508F, 0xC14B2C); /* C14B2A: addq.l  #8, A7 */
@@ -11536,7 +14754,7 @@ L_C14D82:
     FA18_BCC(0xC14D92, 0x664C, 0xC14D94, 0xC14DE0, L_C14DE0); /* C14D92: bne     $c14de0 */
 L_C14D94:
     FA18_CHECK(0xC14D94);
-    FA18_CALL(0xC14D94, 0x4EB9, 0xC14D9A, 257, 2); /* C14D94: jsr     $c2b05a.l */
+    FA18_CALL(0xC14D94, 0x4EB9, 0xC14D9A, 339, 2); /* C14D94: jsr     $c2b05a.l */
 L_C14D9A:
     FA18_CHECK(0xC14D9A);
     FA18_OP(0xC14D9A, 0x206E, 0xC14D9E); /* C14D9A: movea.l (-$30,A6), A0 */
@@ -11587,7 +14805,7 @@ L_C14E04:
     FA18_OP(0xC14E08, 0x3080, 0xC14E0A); /* C14E08: move.w  D0, (A0) */
     FA18_OP(0xC14E0A, 0x2079, 0xC14E10); /* C14E0A: movea.l $c18210.l, A0 */
     FA18_OP(0xC14E10, 0x4268, 0xC14E14); /* C14E10: clr.w   ($26,A0) */
-    FA18_CALL(0xC14E14, 0x4EB9, 0xC14E1A, 94, 0); /* C14E14: jsr     $c16d04.l */
+    FA18_CALL(0xC14E14, 0x4EB9, 0xC14E1A, 157, 0); /* C14E14: jsr     $c16d04.l */
 L_C14E1A:
     FA18_CHECK(0xC14E1A);
     FA18_OP(0xC14E1A, 0x23F9, 0xC14E24); /* C14E1A: move.l  $c45af2.l, $c4590c.l */
@@ -11656,7 +14874,7 @@ L_C14EE6:
     FA18_CHECK(0xC14EE6);
     FA18_OP(0xC14EE6, 0x7028, 0xC14EE8); /* C14EE6: moveq   #$28, D0 */
     FA18_OP(0xC14EE8, 0x2F00, 0xC14EEA); /* C14EE8: move.l  D0, -(A7) */
-    FA18_CALL(0xC14EEA, 0x4EB9, 0xC14EF0, 110, 0); /* C14EEA: jsr     $c1803c.l */
+    FA18_CALL(0xC14EEA, 0x4EB9, 0xC14EF0, 174, 0); /* C14EEA: jsr     $c1803c.l */
 L_C14EF0:
     FA18_CHECK(0xC14EF0);
     FA18_OP(0xC14EF0, 0x588F, 0xC14EF2); /* C14EF0: addq.l  #4, A7 */
@@ -11665,7 +14883,7 @@ L_C14EF6:
     FA18_CHECK(0xC14EF6);
     FA18_OP(0xC14EF6, 0x701E, 0xC14EF8); /* C14EF6: moveq   #$1e, D0 */
     FA18_OP(0xC14EF8, 0x2F00, 0xC14EFA); /* C14EF8: move.l  D0, -(A7) */
-    FA18_CALL(0xC14EFA, 0x4EB9, 0xC14F00, 110, 0); /* C14EFA: jsr     $c1803c.l */
+    FA18_CALL(0xC14EFA, 0x4EB9, 0xC14F00, 174, 0); /* C14EFA: jsr     $c1803c.l */
 L_C14F00:
     FA18_CHECK(0xC14F00);
     FA18_OP(0xC14F00, 0x588F, 0xC14F02); /* C14F00: addq.l  #4, A7 */
@@ -11704,7 +14922,7 @@ L_C14F46:
     FA18_BCC(0xC14F54, 0x6606, 0xC14F56, 0xC14F5C, L_C14F5C); /* C14F54: bne     $c14f5c */
 L_C14F56:
     FA18_CHECK(0xC14F56);
-    FA18_CALL(0xC14F56, 0x4EB9, 0xC14F5C, 21, 0); /* C14F56: jsr     $c083e2.l */
+    FA18_CALL(0xC14F56, 0x4EB9, 0xC14F5C, 49, 0); /* C14F56: jsr     $c083e2.l */
 L_C14F5C:
     FA18_CHECK(0xC14F5C);
     FA18_OP(0xC14F5C, 0x3039, 0xC14F62); /* C14F5C: move.w  $c458d2.l, D0 */
@@ -11817,7 +15035,7 @@ L_C1508C:
     FA18_BCC(0xC15090, 0x666C, 0xC15092, 0xC150FE, L_C150FE); /* C15090: bne     $c150fe */
 L_C15092:
     FA18_CHECK(0xC15092);
-    FA18_CALL(0xC15092, 0x4EB9, 0xC15098, 94, 0); /* C15092: jsr     $c16d04.l */
+    FA18_CALL(0xC15092, 0x4EB9, 0xC15098, 157, 0); /* C15092: jsr     $c16d04.l */
 L_C15098:
     FA18_CHECK(0xC15098);
     FA18_OP(0xC15098, 0x2039, 0xC1509E); /* C15098: move.l  $c4590c.l, D0 */
@@ -11844,7 +15062,7 @@ L_C15098:
     FA18_JUMP(0xC150FC, 0x6006, 0xC15104, L_C15104); /* C150FC: bra     $c15104 */
 L_C150FE:
     FA18_CHECK(0xC150FE);
-    FA18_CALL(0xC150FE, 0x4EB9, 0xC15104, 20, 0); /* C150FE: jsr     $c083a6.l */
+    FA18_CALL(0xC150FE, 0x4EB9, 0xC15104, 48, 0); /* C150FE: jsr     $c083a6.l */
 L_C15104:
     FA18_CHECK(0xC15104);
     FA18_OP(0xC15104, 0x206E, 0xC15108); /* C15104: movea.l (-$30,A6), A0 */
@@ -11977,7 +15195,7 @@ L_C1518C:
     FA18_OP(0xC15192, 0x1D40, 0xC15196); /* C15192: move.b  D0, (-$3,A6) */
     FA18_OP(0xC15196, 0x1D40, 0xC1519A); /* C15196: move.b  D0, (-$1,A6) */
     FA18_OP(0xC1519A, 0x1D40, 0xC1519E); /* C1519A: move.b  D0, (-$2,A6) */
-    FA18_CALL(0xC1519E, 0x4EB9, 0xC151A4, 307, 0); /* C1519E: jsr     $c2f490.l */
+    FA18_CALL(0xC1519E, 0x4EB9, 0xC151A4, 389, 0); /* C1519E: jsr     $c2f490.l */
 L_C151A4:
     FA18_CHECK(0xC151A4);
     FA18_OP(0xC151A4, 0x2D7C, 0xC151AC); /* C151A4: move.l  #$c46201, (-$8,A6) */
@@ -12087,7 +15305,7 @@ L_C152CE:
     FA18_OP(0xC152D0, 0x2F00, 0xC152D2); /* C152D0: move.l  D0, -(A7) */
     FA18_OP(0xC152D2, 0x701C, 0xC152D4); /* C152D2: moveq   #$1c, D0 */
     FA18_OP(0xC152D4, 0x2F00, 0xC152D6); /* C152D4: move.l  D0, -(A7) */
-    FA18_CALL(0xC152D6, 0x4EB9, 0xC152DC, 109, 0); /* C152D6: jsr     $c17f8c.l */
+    FA18_CALL(0xC152D6, 0x4EB9, 0xC152DC, 173, 0); /* C152D6: jsr     $c17f8c.l */
 L_C152DC:
     FA18_CHECK(0xC152DC);
     FA18_OP(0xC152DC, 0x508F, 0xC152DE); /* C152DC: addq.l  #8, A7 */
@@ -12140,7 +15358,7 @@ L_C15342:
     FA18_OP(0xC15344, 0x2F00, 0xC15346); /* C15344: move.l  D0, -(A7) */
     FA18_OP(0xC15346, 0x7006, 0xC15348); /* C15346: moveq   #$6, D0 */
     FA18_OP(0xC15348, 0x2F00, 0xC1534A); /* C15348: move.l  D0, -(A7) */
-    FA18_CALL(0xC1534A, 0x4EB9, 0xC15350, 114, 0); /* C1534A: jsr     $c181a0.l */
+    FA18_CALL(0xC1534A, 0x4EB9, 0xC15350, 178, 0); /* C1534A: jsr     $c181a0.l */
 L_C15350:
     FA18_CHECK(0xC15350);
     FA18_OP(0xC15350, 0x508F, 0xC15352); /* C15350: addq.l  #8, A7 */
@@ -12151,7 +15369,7 @@ L_C15354:
     FA18_OP(0xC15356, 0x2F00, 0xC15358); /* C15356: move.l  D0, -(A7) */
     FA18_OP(0xC15358, 0x7006, 0xC1535A); /* C15358: moveq   #$6, D0 */
     FA18_OP(0xC1535A, 0x2F00, 0xC1535C); /* C1535A: move.l  D0, -(A7) */
-    FA18_CALL(0xC1535C, 0x4EB9, 0xC15362, 114, 0); /* C1535C: jsr     $c181a0.l */
+    FA18_CALL(0xC1535C, 0x4EB9, 0xC15362, 178, 0); /* C1535C: jsr     $c181a0.l */
 L_C15362:
     FA18_CHECK(0xC15362);
     FA18_OP(0xC15362, 0x508F, 0xC15364); /* C15362: addq.l  #8, A7 */
@@ -12162,7 +15380,7 @@ L_C15366:
     FA18_OP(0xC15368, 0x2F00, 0xC1536A); /* C15368: move.l  D0, -(A7) */
     FA18_OP(0xC1536A, 0x701C, 0xC1536C); /* C1536A: moveq   #$1c, D0 */
     FA18_OP(0xC1536C, 0x2F00, 0xC1536E); /* C1536C: move.l  D0, -(A7) */
-    FA18_CALL(0xC1536E, 0x4EB9, 0xC15374, 109, 0); /* C1536E: jsr     $c17f8c.l */
+    FA18_CALL(0xC1536E, 0x4EB9, 0xC15374, 173, 0); /* C1536E: jsr     $c17f8c.l */
 L_C15374:
     FA18_CHECK(0xC15374);
     FA18_OP(0xC15374, 0x508F, 0xC15376); /* C15374: addq.l  #8, A7 */
@@ -12186,7 +15404,7 @@ L_C1539E:
     FA18_OP(0xC1539E, 0x302E, 0xC153A2); /* C1539E: move.w  (-$10,A6), D0 */
     FA18_OP(0xC153A2, 0x48C0, 0xC153A4); /* C153A2: ext.l   D0 */
     FA18_OP(0xC153A4, 0x2F00, 0xC153A6); /* C153A4: move.l  D0, -(A7) */
-    FA18_CALL(0xC153A6, 0x6100, 0xC153AA, 86, 0); /* C153A6: bsr     $c15688 */
+    FA18_CALL(0xC153A6, 0x6100, 0xC153AA, 149, 0); /* C153A6: bsr     $c15688 */
 L_C153AA:
     FA18_CHECK(0xC153AA);
     FA18_OP(0xC153AA, 0x588F, 0xC153AC); /* C153AA: addq.l  #4, A7 */
@@ -12211,7 +15429,7 @@ L_C153C8:
     FA18_OP(0xC153C8, 0x302E, 0xC153CC); /* C153C8: move.w  (-$10,A6), D0 */
     FA18_OP(0xC153CC, 0x48C0, 0xC153CE); /* C153CC: ext.l   D0 */
     FA18_OP(0xC153CE, 0x2F00, 0xC153D0); /* C153CE: move.l  D0, -(A7) */
-    FA18_CALL(0xC153D0, 0x612A, 0xC153D2, 85, 0); /* C153D0: bsr     $c153fc */
+    FA18_CALL(0xC153D0, 0x612A, 0xC153D2, 148, 0); /* C153D0: bsr     $c153fc */
 L_C153D2:
     FA18_CHECK(0xC153D2);
     FA18_OP(0xC153D2, 0x588F, 0xC153D4); /* C153D2: addq.l  #4, A7 */
@@ -12310,7 +15528,7 @@ L_C15442:
     FA18_OP(0xC15442, 0x302E, 0xC15446); /* C15442: move.w  ($a,A6), D0 */
     FA18_OP(0xC15446, 0x48C0, 0xC15448); /* C15446: ext.l   D0 */
     FA18_OP(0xC15448, 0x2F00, 0xC1544A); /* C15448: move.l  D0, -(A7) */
-    FA18_CALL(0xC1544A, 0x4EB9, 0xC15450, 236, 1); /* C1544A: jsr     $c266ae.l */
+    FA18_CALL(0xC1544A, 0x4EB9, 0xC15450, 318, 1); /* C1544A: jsr     $c266ae.l */
 L_C15450:
     FA18_CHECK(0xC15450);
     FA18_OP(0xC15450, 0x588F, 0xC15452); /* C15450: addq.l  #4, A7 */
@@ -12351,7 +15569,7 @@ L_C154B2:
     FA18_OP(0xC154B2, 0x302E, 0xC154B6); /* C154B2: move.w  ($a,A6), D0 */
     FA18_OP(0xC154B6, 0x48C0, 0xC154B8); /* C154B6: ext.l   D0 */
     FA18_OP(0xC154B8, 0x2F00, 0xC154BA); /* C154B8: move.l  D0, -(A7) */
-    FA18_CALL(0xC154BA, 0x4EB9, 0xC154C0, 237, 0); /* C154BA: jsr     $c26c72.l */
+    FA18_CALL(0xC154BA, 0x4EB9, 0xC154C0, 319, 0); /* C154BA: jsr     $c26c72.l */
 L_C154C0:
     FA18_CHECK(0xC154C0);
     FA18_OP(0xC154C0, 0x588F, 0xC154C2); /* C154C0: addq.l  #4, A7 */
@@ -12483,7 +15701,7 @@ L_C155F2:
     FA18_OP(0xC155F2, 0x302E, 0xC155F6); /* C155F2: move.w  ($a,A6), D0 */
     FA18_OP(0xC155F6, 0x48C0, 0xC155F8); /* C155F6: ext.l   D0 */
     FA18_OP(0xC155F8, 0x2F00, 0xC155FA); /* C155F8: move.l  D0, -(A7) */
-    FA18_CALL(0xC155FA, 0x4EB9, 0xC15600, 267, 0); /* C155FA: jsr     $c2cd94.l */
+    FA18_CALL(0xC155FA, 0x4EB9, 0xC15600, 349, 0); /* C155FA: jsr     $c2cd94.l */
 L_C15600:
     FA18_CHECK(0xC15600);
     FA18_OP(0xC15600, 0x588F, 0xC15602); /* C15600: addq.l  #4, A7 */
@@ -12499,7 +15717,7 @@ L_C15610:
     FA18_OP(0xC15610, 0x302E, 0xC15614); /* C15610: move.w  ($a,A6), D0 */
     FA18_OP(0xC15614, 0x48C0, 0xC15616); /* C15614: ext.l   D0 */
     FA18_OP(0xC15616, 0x2F00, 0xC15618); /* C15616: move.l  D0, -(A7) */
-    FA18_CALL(0xC15618, 0x4EB9, 0xC1561E, 266, 6); /* C15618: jsr     $c2cd28.l */
+    FA18_CALL(0xC15618, 0x4EB9, 0xC1561E, 348, 6); /* C15618: jsr     $c2cd28.l */
 L_C1561E:
     FA18_CHECK(0xC1561E);
     FA18_OP(0xC1561E, 0x588F, 0xC15620); /* C1561E: addq.l  #4, A7 */
@@ -12509,7 +15727,7 @@ L_C15622:
     FA18_OP(0xC15622, 0x302E, 0xC15626); /* C15622: move.w  ($a,A6), D0 */
     FA18_OP(0xC15626, 0x48C0, 0xC15628); /* C15626: ext.l   D0 */
     FA18_OP(0xC15628, 0x2F00, 0xC1562A); /* C15628: move.l  D0, -(A7) */
-    FA18_CALL(0xC1562A, 0x4EB9, 0xC15630, 265, 0); /* C1562A: jsr     $c2cca0.l */
+    FA18_CALL(0xC1562A, 0x4EB9, 0xC15630, 347, 0); /* C1562A: jsr     $c2cca0.l */
 L_C15630:
     FA18_CHECK(0xC15630);
     FA18_OP(0xC15630, 0x588F, 0xC15632); /* C15630: addq.l  #4, A7 */
@@ -12750,10691 +15968,11 @@ L_C15866:
     FA18_OP(0xC158C2, 0x302E, 0xC158C6); /* C158C2: move.w  ($a,A6), D0 */
     FA18_OP(0xC158C6, 0x48C0, 0xC158C8); /* C158C6: ext.l   D0 */
     FA18_OP(0xC158C8, 0x2F00, 0xC158CA); /* C158C8: move.l  D0, -(A7) */
-    FA18_CALL(0xC158CA, 0x6100, 0xC158CE, 87, 0); /* C158CA: bsr     $c159ae */
+    FA18_CALL(0xC158CA, 0x6100, 0xC158CE, 150, 0); /* C158CA: bsr     $c159ae */
 L_C158CE:
     FA18_CHECK(0xC158CE);
     FA18_OP(0xC158CE, 0x588F, 0xC158D0); /* C158CE: addq.l  #4, A7 */
     FA18_OP(0xC158D0, 0x4CDF, 0xC158D4); /* C158D0: movem.l (A7)+, D2-D5 */
     FA18_OP(0xC158D4, 0x4E5E, 0xC158D6); /* C158D4: unlk    A6 */
     FA18_RETURN(0xC158D6, 0x4E75); /* C158D6: rts */
-}
-
-int fa18_fn_C159AE(int entry) {
-    switch (entry) {
-    case 0: goto L_C159AE;
-    case 1: goto L_C159CC;
-    case 2: goto L_C159D4;
-    case 3: goto L_C159D8;
-    case 4: goto L_C159DE;
-    case 5: goto L_C159E6;
-    case 6: goto L_C159EC;
-    case 7: goto L_C159F2;
-    case 8: goto L_C15A20;
-    case 9: goto L_C15A28;
-    case 10: goto L_C15A38;
-    case 11: goto L_C15A40;
-    case 12: goto L_C15A50;
-    case 13: goto L_C15AC8;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C159AE:
-    FA18_CHECK(0xC159AE);
-    FA18_OP(0xC159AE, 0x4E56, 0xC159B2); /* C159AE: link    A6, #-$18 */
-    FA18_OP(0xC159B2, 0x48E7, 0xC159B6); /* C159B2: movem.l D2-D3, -(A7) */
-    FA18_OP(0xC159B6, 0x3039, 0xC159BC); /* C159B6: move.w  $c458da.l, D0 */
-    FA18_OP(0xC159BC, 0x48C0, 0xC159BE); /* C159BC: ext.l   D0 */
-    FA18_OP(0xC159BE, 0x0280, 0xC159C4); /* C159BE: andi.l  #$3, D0 */
-    FA18_OP(0xC159C4, 0x0C80, 0xC159CA); /* C159C4: cmpi.l  #$2, D0 */
-    FA18_BCC(0xC159CA, 0x671A, 0xC159CC, 0xC159E6, L_C159E6); /* C159CA: beq     $c159e6 */
-L_C159CC:
-    FA18_CHECK(0xC159CC);
-    FA18_OP(0xC159CC, 0x0C80, 0xC159D2); /* C159CC: cmpi.l  #$1, D0 */
-    FA18_BCC(0xC159D2, 0x670A, 0xC159D4, 0xC159DE, L_C159DE); /* C159D2: beq     $c159de */
-L_C159D4:
-    FA18_CHECK(0xC159D4);
-    FA18_OP(0xC159D4, 0x4A80, 0xC159D6); /* C159D4: tst.l   D0 */
-    FA18_BCC(0xC159D6, 0x6614, 0xC159D8, 0xC159EC, L_C159EC); /* C159D6: bne     $c159ec */
-L_C159D8:
-    FA18_CHECK(0xC159D8);
-    FA18_OP(0xC159D8, 0x426E, 0xC159DC); /* C159D8: clr.w   (-$4,A6) */
-    FA18_JUMP(0xC159DC, 0x6014, 0xC159F2, L_C159F2); /* C159DC: bra     $c159f2 */
-L_C159DE:
-    FA18_CHECK(0xC159DE);
-    FA18_OP(0xC159DE, 0x3D7C, 0xC159E4); /* C159DE: move.w  #$10, (-$4,A6) */
-    FA18_JUMP(0xC159E4, 0x600C, 0xC159F2, L_C159F2); /* C159E4: bra     $c159f2 */
-L_C159E6:
-    FA18_CHECK(0xC159E6);
-    FA18_OP(0xC159E6, 0x426E, 0xC159EA); /* C159E6: clr.w   (-$4,A6) */
-    FA18_JUMP(0xC159EA, 0x6006, 0xC159F2, L_C159F2); /* C159EA: bra     $c159f2 */
-L_C159EC:
-    FA18_CHECK(0xC159EC);
-    FA18_OP(0xC159EC, 0x3D7C, 0xC159F2); /* C159EC: move.w  #$fff0, (-$4,A6) */
-L_C159F2:
-    FA18_CHECK(0xC159F2);
-    FA18_OP(0xC159F2, 0x3039, 0xC159F8); /* C159F2: move.w  $c459b8.l, D0 */
-    FA18_OP(0xC159F8, 0x7209, 0xC159FA); /* C159F8: moveq   #$9, D1 */
-    FA18_OP(0xC159FA, 0x48C0, 0xC159FC); /* C159FA: ext.l   D0 */
-    FA18_OP(0xC159FC, 0xE3A0, 0xC159FE); /* C159FC: asl.l   D1, D0 */
-    FA18_OP(0xC159FE, 0x2040, 0xC15A00); /* C159FE: movea.l D0, A0 */
-    FA18_OP(0xC15A00, 0xD1FC, 0xC15A06); /* C15A00: adda.l  #$c46184, A0 */
-    FA18_OP(0xC15A06, 0x3028, 0xC15A0A); /* C15A06: move.w  ($6c,A0), D0 */
-    FA18_OP(0xC15A0A, 0xEC40, 0xC15A0C); /* C15A0A: asr.w   #6, D0 */
-    FA18_OP(0xC15A0C, 0x2079, 0xC15A12); /* C15A0C: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15A12, 0x3228, 0xC15A16); /* C15A12: move.w  ($26,A0), D1 */
-    FA18_OP(0xC15A16, 0x3D40, 0xC15A1A); /* C15A16: move.w  D0, (-$6,A6) */
-    FA18_OP(0xC15A1A, 0x0801, 0xC15A1E); /* C15A1A: btst    #$c, D1 */
-    FA18_BCC(0xC15A1E, 0x6708, 0xC15A20, 0xC15A28, L_C15A28); /* C15A1E: beq     $c15a28 */
-L_C15A20:
-    FA18_CHECK(0xC15A20);
-    FA18_OP(0xC15A20, 0x3D7C, 0xC15A26); /* C15A20: move.w  #$d, (-$2,A6) */
-    FA18_JUMP(0xC15A26, 0x6028, 0xC15A50, L_C15A50); /* C15A26: bra     $c15a50 */
-L_C15A28:
-    FA18_CHECK(0xC15A28);
-    FA18_OP(0xC15A28, 0x2079, 0xC15A2E); /* C15A28: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15A2E, 0x3028, 0xC15A32); /* C15A2E: move.w  ($26,A0), D0 */
-    FA18_OP(0xC15A32, 0x0800, 0xC15A36); /* C15A32: btst    #$d, D0 */
-    FA18_BCC(0xC15A36, 0x6708, 0xC15A38, 0xC15A40, L_C15A40); /* C15A36: beq     $c15a40 */
-L_C15A38:
-    FA18_CHECK(0xC15A38);
-    FA18_OP(0xC15A38, 0x3D7C, 0xC15A3E); /* C15A38: move.w  #$5, (-$2,A6) */
-    FA18_JUMP(0xC15A3E, 0x6010, 0xC15A50, L_C15A50); /* C15A3E: bra     $c15a50 */
-L_C15A40:
-    FA18_CHECK(0xC15A40);
-    FA18_OP(0xC15A40, 0x302E, 0xC15A44); /* C15A40: move.w  (-$4,A6), D0 */
-    FA18_OP(0xC15A44, 0x0640, 0xC15A48); /* C15A44: addi.w  #$c6, D0 */
-    FA18_OP(0xC15A48, 0xD06E, 0xC15A4C); /* C15A48: add.w   (-$6,A6), D0 */
-    FA18_OP(0xC15A4C, 0x3D40, 0xC15A50); /* C15A4C: move.w  D0, (-$2,A6) */
-L_C15A50:
-    FA18_CHECK(0xC15A50);
-    FA18_OP(0xC15A50, 0x2039, 0xC15A56); /* C15A50: move.l  $c46198.l, D0 */
-    FA18_OP(0xC15A56, 0x0280, 0xC15A5C); /* C15A56: andi.l  #$3fffff, D0 */
-    FA18_OP(0xC15A5C, 0x2239, 0xC15A62); /* C15A5C: move.l  $c45a52.l, D1 */
-    FA18_OP(0xC15A62, 0xD280, 0xC15A64); /* C15A62: add.l   D0, D1 */
-    FA18_OP(0xC15A64, 0x2079, 0xC15A6A); /* C15A64: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15A6A, 0x9290, 0xC15A6C); /* C15A6A: sub.l   (A0), D1 */
-    FA18_OP(0xC15A6C, 0x2039, 0xC15A72); /* C15A6C: move.l  $c45a56.l, D0 */
-    FA18_OP(0xC15A72, 0xD0B9, 0xC15A78); /* C15A72: add.l   $c4619c.l, D0 */
-    FA18_OP(0xC15A78, 0x90A8, 0xC15A7C); /* C15A78: sub.l   ($4,A0), D0 */
-    FA18_OP(0xC15A7C, 0x2439, 0xC15A82); /* C15A7C: move.l  $c461a0.l, D2 */
-    FA18_OP(0xC15A82, 0x0282, 0xC15A88); /* C15A82: andi.l  #$3fffff, D2 */
-    FA18_OP(0xC15A88, 0x2639, 0xC15A8E); /* C15A88: move.l  $c45a5a.l, D3 */
-    FA18_OP(0xC15A8E, 0xD682, 0xC15A90); /* C15A8E: add.l   D2, D3 */
-    FA18_OP(0xC15A90, 0x96A8, 0xC15A94); /* C15A90: sub.l   ($8,A0), D3 */
-    FA18_OP(0xC15A94, 0x2D41, 0xC15A98); /* C15A94: move.l  D1, (-$a,A6) */
-    FA18_OP(0xC15A98, 0xE081, 0xC15A9A); /* C15A98: asr.l   #8, D1 */
-    FA18_OP(0xC15A9A, 0x2D40, 0xC15A9E); /* C15A9A: move.l  D0, (-$e,A6) */
-    FA18_OP(0xC15A9E, 0xE080, 0xC15AA0); /* C15A9E: asr.l   #8, D0 */
-    FA18_OP(0xC15AA0, 0x2D43, 0xC15AA4); /* C15AA0: move.l  D3, (-$12,A6) */
-    FA18_OP(0xC15AA4, 0xE083, 0xC15AA6); /* C15AA4: asr.l   #8, D3 */
-    FA18_OP(0xC15AA6, 0x342E, 0xC15AAA); /* C15AA6: move.w  (-$2,A6), D2 */
-    FA18_OP(0xC15AAA, 0x48C2, 0xC15AAC); /* C15AAA: ext.l   D2 */
-    FA18_OP(0xC15AAC, 0x3D41, 0xC15AB0); /* C15AAC: move.w  D1, (-$14,A6) */
-    FA18_OP(0xC15AB0, 0x48C1, 0xC15AB2); /* C15AB0: ext.l   D1 */
-    FA18_OP(0xC15AB2, 0x3D40, 0xC15AB6); /* C15AB2: move.w  D0, (-$16,A6) */
-    FA18_OP(0xC15AB6, 0x48C0, 0xC15AB8); /* C15AB6: ext.l   D0 */
-    FA18_OP(0xC15AB8, 0x3D43, 0xC15ABC); /* C15AB8: move.w  D3, (-$18,A6) */
-    FA18_OP(0xC15ABC, 0x48C3, 0xC15ABE); /* C15ABC: ext.l   D3 */
-    FA18_OP(0xC15ABE, 0x2F03, 0xC15AC0); /* C15ABE: move.l  D3, -(A7) */
-    FA18_OP(0xC15AC0, 0x2F00, 0xC15AC2); /* C15AC0: move.l  D0, -(A7) */
-    FA18_OP(0xC15AC2, 0x2F01, 0xC15AC4); /* C15AC2: move.l  D1, -(A7) */
-    FA18_OP(0xC15AC4, 0x2F02, 0xC15AC6); /* C15AC4: move.l  D2, -(A7) */
-    FA18_CALL(0xC15AC6, 0x610C, 0xC15AC8, 88, 0); /* C15AC6: bsr     $c15ad4 */
-L_C15AC8:
-    FA18_CHECK(0xC15AC8);
-    FA18_OP(0xC15AC8, 0x4FEF, 0xC15ACC); /* C15AC8: lea     ($10,A7), A7 */
-    FA18_OP(0xC15ACC, 0x4CDF, 0xC15AD0); /* C15ACC: movem.l (A7)+, D2-D3 */
-    FA18_OP(0xC15AD0, 0x4E5E, 0xC15AD2); /* C15AD0: unlk    A6 */
-    FA18_RETURN(0xC15AD2, 0x4E75); /* C15AD2: rts */
-}
-
-int fa18_fn_C15AD4(int entry) {
-    switch (entry) {
-    case 0: goto L_C15AD4;
-    case 1: goto L_C15B02;
-    case 2: goto L_C15B8E;
-    case 3: goto L_C15BEE;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C15AD4:
-    FA18_CHECK(0xC15AD4);
-    FA18_OP(0xC15AD4, 0x4E56, 0xC15AD8); /* C15AD4: link    A6, #-$c */
-    FA18_OP(0xC15AD8, 0x48E7, 0xC15ADC); /* C15AD8: movem.l D2-D3, -(A7) */
-    FA18_OP(0xC15ADC, 0x302E, 0xC15AE0); /* C15ADC: move.w  ($a,A6), D0 */
-    FA18_OP(0xC15AE0, 0x48C0, 0xC15AE2); /* C15AE0: ext.l   D0 */
-    FA18_OP(0xC15AE2, 0x322E, 0xC15AE6); /* C15AE2: move.w  ($e,A6), D1 */
-    FA18_OP(0xC15AE6, 0x48C1, 0xC15AE8); /* C15AE6: ext.l   D1 */
-    FA18_OP(0xC15AE8, 0x342E, 0xC15AEC); /* C15AE8: move.w  ($12,A6), D2 */
-    FA18_OP(0xC15AEC, 0x48C2, 0xC15AEE); /* C15AEC: ext.l   D2 */
-    FA18_OP(0xC15AEE, 0x362E, 0xC15AF2); /* C15AEE: move.w  ($16,A6), D3 */
-    FA18_OP(0xC15AF2, 0x48C3, 0xC15AF4); /* C15AF2: ext.l   D3 */
-    FA18_OP(0xC15AF4, 0x2F03, 0xC15AF6); /* C15AF4: move.l  D3, -(A7) */
-    FA18_OP(0xC15AF6, 0x2F02, 0xC15AF8); /* C15AF6: move.l  D2, -(A7) */
-    FA18_OP(0xC15AF8, 0x2F01, 0xC15AFA); /* C15AF8: move.l  D1, -(A7) */
-    FA18_OP(0xC15AFA, 0x2F00, 0xC15AFC); /* C15AFA: move.l  D0, -(A7) */
-    FA18_CALL(0xC15AFC, 0x4EB9, 0xC15B02, 219, 2); /* C15AFC: jsr     $c257ec.l */
-L_C15B02:
-    FA18_CHECK(0xC15B02);
-    FA18_OP(0xC15B02, 0x4FEF, 0xC15B06); /* C15B02: lea     ($10,A7), A7 */
-    FA18_OP(0xC15B06, 0x3039, 0xC15B0C); /* C15B06: move.w  $c45a4c.l, D0 */
-    FA18_OP(0xC15B0C, 0x48C0, 0xC15B0E); /* C15B0C: ext.l   D0 */
-    FA18_OP(0xC15B0E, 0x2F40, 0xC15B12); /* C15B0E: move.l  D0, ($8,A7) */
-    FA18_OP(0xC15B12, 0xE780, 0xC15B14); /* C15B12: asl.l   #3, D0 */
-    FA18_OP(0xC15B14, 0x2079, 0xC15B1A); /* C15B14: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15B1A, 0x2140, 0xC15B1E); /* C15B1A: move.l  D0, ($c,A0) */
-    FA18_OP(0xC15B1E, 0x3239, 0xC15B24); /* C15B1E: move.w  $c45a4e.l, D1 */
-    FA18_OP(0xC15B24, 0x48C1, 0xC15B26); /* C15B24: ext.l   D1 */
-    FA18_OP(0xC15B26, 0x2F41, 0xC15B2A); /* C15B26: move.l  D1, ($c,A7) */
-    FA18_OP(0xC15B2A, 0xE781, 0xC15B2C); /* C15B2A: asl.l   #3, D1 */
-    FA18_OP(0xC15B2C, 0x2079, 0xC15B32); /* C15B2C: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15B32, 0x2141, 0xC15B36); /* C15B32: move.l  D1, ($10,A0) */
-    FA18_OP(0xC15B36, 0x3039, 0xC15B3C); /* C15B36: move.w  $c45a50.l, D0 */
-    FA18_OP(0xC15B3C, 0x48C0, 0xC15B3E); /* C15B3C: ext.l   D0 */
-    FA18_OP(0xC15B3E, 0x2F40, 0xC15B42); /* C15B3E: move.l  D0, ($10,A7) */
-    FA18_OP(0xC15B42, 0xE780, 0xC15B44); /* C15B42: asl.l   #3, D0 */
-    FA18_OP(0xC15B44, 0x2079, 0xC15B4A); /* C15B44: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15B4A, 0x2140, 0xC15B4E); /* C15B4A: move.l  D0, ($14,A0) */
-    FA18_OP(0xC15B4E, 0x222F, 0xC15B52); /* C15B4E: move.l  ($8,A7), D1 */
-    FA18_OP(0xC15B52, 0x2079, 0xC15B58); /* C15B52: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15B58, 0x2141, 0xC15B5C); /* C15B58: move.l  D1, ($18,A0) */
-    FA18_OP(0xC15B5C, 0x202F, 0xC15B60); /* C15B5C: move.l  ($c,A7), D0 */
-    FA18_OP(0xC15B60, 0x2079, 0xC15B66); /* C15B60: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15B66, 0x2140, 0xC15B6A); /* C15B66: move.l  D0, ($1c,A0) */
-    FA18_OP(0xC15B6A, 0x222F, 0xC15B6E); /* C15B6A: move.l  ($10,A7), D1 */
-    FA18_OP(0xC15B6E, 0x2079, 0xC15B74); /* C15B6E: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15B74, 0x2141, 0xC15B78); /* C15B74: move.l  D1, ($20,A0) */
-    FA18_OP(0xC15B78, 0x4268, 0xC15B7C); /* C15B78: clr.w   ($24,A0) */
-    FA18_OP(0xC15B7C, 0x2079, 0xC15B82); /* C15B7C: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15B82, 0x3028, 0xC15B86); /* C15B82: move.w  ($26,A0), D0 */
-    FA18_OP(0xC15B86, 0x0240, 0xC15B8A); /* C15B86: andi.w  #$3000, D0 */
-    FA18_OP(0xC15B8A, 0x4A40, 0xC15B8C); /* C15B8A: tst.w   D0 */
-    FA18_BCC(0xC15B8C, 0x6760, 0xC15B8E, 0xC15BEE, L_C15BEE); /* C15B8C: beq     $c15bee */
-L_C15B8E:
-    FA18_CHECK(0xC15B8E);
-    FA18_OP(0xC15B8E, 0x2039, 0xC15B94); /* C15B8E: move.l  $c461c2.l, D0 */
-    FA18_OP(0xC15B94, 0xD1A8, 0xC15B98); /* C15B94: add.l   D0, ($c,A0) */
-    FA18_OP(0xC15B98, 0x2039, 0xC15B9E); /* C15B98: move.l  $c461c6.l, D0 */
-    FA18_OP(0xC15B9E, 0x2079, 0xC15BA4); /* C15B9E: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15BA4, 0xD1A8, 0xC15BA8); /* C15BA4: add.l   D0, ($10,A0) */
-    FA18_OP(0xC15BA8, 0x2039, 0xC15BAE); /* C15BA8: move.l  $c461ca.l, D0 */
-    FA18_OP(0xC15BAE, 0x2079, 0xC15BB4); /* C15BAE: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15BB4, 0xD1A8, 0xC15BB8); /* C15BB4: add.l   D0, ($14,A0) */
-    FA18_OP(0xC15BB8, 0x2039, 0xC15BBE); /* C15BB8: move.l  $c461c2.l, D0 */
-    FA18_OP(0xC15BBE, 0xE680, 0xC15BC0); /* C15BBE: asr.l   #3, D0 */
-    FA18_OP(0xC15BC0, 0x2079, 0xC15BC6); /* C15BC0: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15BC6, 0xD1A8, 0xC15BCA); /* C15BC6: add.l   D0, ($18,A0) */
-    FA18_OP(0xC15BCA, 0x2039, 0xC15BD0); /* C15BCA: move.l  $c461c6.l, D0 */
-    FA18_OP(0xC15BD0, 0xE680, 0xC15BD2); /* C15BD0: asr.l   #3, D0 */
-    FA18_OP(0xC15BD2, 0x2079, 0xC15BD8); /* C15BD2: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15BD8, 0xD1A8, 0xC15BDC); /* C15BD8: add.l   D0, ($1c,A0) */
-    FA18_OP(0xC15BDC, 0x2039, 0xC15BE2); /* C15BDC: move.l  $c461ca.l, D0 */
-    FA18_OP(0xC15BE2, 0xE680, 0xC15BE4); /* C15BE2: asr.l   #3, D0 */
-    FA18_OP(0xC15BE4, 0x2079, 0xC15BEA); /* C15BE4: movea.l $c18214.l, A0 */
-    FA18_OP(0xC15BEA, 0xD1A8, 0xC15BEE); /* C15BEA: add.l   D0, ($20,A0) */
-L_C15BEE:
-    FA18_CHECK(0xC15BEE);
-    FA18_OP(0xC15BEE, 0x4CDF, 0xC15BF2); /* C15BEE: movem.l (A7)+, D2-D3 */
-    FA18_OP(0xC15BF2, 0x4E5E, 0xC15BF4); /* C15BF2: unlk    A6 */
-    FA18_RETURN(0xC15BF4, 0x4E75); /* C15BF4: rts */
-}
-
-int fa18_fn_C15DA8(int entry) {
-    switch (entry) {
-    case 0: goto L_C15D96;
-    case 1: goto L_C15D9C;
-    case 2: goto L_C15DA2;
-    case 3: goto L_C15DA8;
-    case 4: goto L_C15DAE;
-    case 5: goto L_C15DB2;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C15D96:
-    FA18_CHECK(0xC15D96);
-    FA18_CALL(0xC15D96, 0x4EB9, 0xC15D9C, 309, 0); /* C15D96: jsr     $c2f558.l */
-L_C15D9C:
-    FA18_CHECK(0xC15D9C);
-    FA18_CALL(0xC15D9C, 0x4EB9, 0xC15DA2, 446, 0); /* C15D9C: jsr     $c53fb0.l */
-L_C15DA2:
-    FA18_CHECK(0xC15DA2);
-    FA18_CALL(0xC15DA2, 0x4EB9, 0xC15DA8, 52, 0); /* C15DA2: jsr     $c0efd4.l */
-L_C15DA8:
-    FA18_CHECK(0xC15DA8);
-    FA18_CALL(0xC15DA8, 0x4EB9, 0xC15DAE, 447, 0); /* C15DA8: jsr     $c53fc0.l */
-L_C15DAE:
-    FA18_CHECK(0xC15DAE);
-    FA18_CALL(0xC15DAE, 0x6100, 0xC15DB2, 90, 0); /* C15DAE: bsr     $c1612c */
-L_C15DB2:
-    FA18_CHECK(0xC15DB2);
-    FA18_JUMP(0xC15DB2, 0x60E2, 0xC15D96, L_C15D96); /* C15DB2: bra     $c15d96 */
-}
-
-int fa18_fn_C1612C(int entry) {
-    switch (entry) {
-    case 0: goto L_C1612C;
-    case 1: goto L_C1613C;
-    case 2: goto L_C1617C;
-    case 3: goto L_C16188;
-    case 4: goto L_C16194;
-    case 5: goto L_C1619C;
-    case 6: goto L_C161A8;
-    case 7: goto L_C161BE;
-    case 8: goto L_C161CE;
-    case 9: goto L_C161DC;
-    case 10: goto L_C161F4;
-    case 11: goto L_C16204;
-    case 12: goto L_C16212;
-    case 13: goto L_C16226;
-    case 14: goto L_C1622E;
-    case 15: goto L_C16248;
-    case 16: goto L_C16254;
-    case 17: goto L_C1626C;
-    case 18: goto L_C16270;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1612C:
-    FA18_CHECK(0xC1612C);
-    FA18_OP(0xC1612C, 0x4E56, 0xC16130); /* C1612C: link    A6, #-$2 */
-    FA18_OP(0xC16130, 0x4879, 0xC16136); /* C16130: pea     $c1822a.l */
-    FA18_CALL(0xC16136, 0x4EB9, 0xC1613C, 444, 0); /* C16136: jsr     $c53f88.l */
-L_C1613C:
-    FA18_CHECK(0xC1613C);
-    FA18_OP(0xC1613C, 0x588F, 0xC1613E); /* C1613C: addq.l  #4, A7 */
-    FA18_OP(0xC1613E, 0x3039, 0xC16144); /* C1613E: move.w  $c4566c.l, D0 */
-    FA18_OP(0xC16144, 0x3F40, 0xC16148); /* C16144: move.w  D0, ($0,A7) */
-    FA18_OP(0xC16148, 0x48C0, 0xC1614A); /* C16148: ext.l   D0 */
-    FA18_OP(0xC1614A, 0xE580, 0xC1614C); /* C1614A: asl.l   #2, D0 */
-    FA18_OP(0xC1614C, 0x2040, 0xC1614E); /* C1614C: movea.l D0, A0 */
-    FA18_OP(0xC1614E, 0xD1FC, 0xC16154); /* C1614E: adda.l  #$c182ba, A0 */
-    FA18_OP(0xC16154, 0x23D0, 0xC1615A); /* C16154: move.l  (A0), $c1821c.l */
-    FA18_OP(0xC1615A, 0x302F, 0xC1615E); /* C1615A: move.w  ($0,A7), D0 */
-    FA18_OP(0xC1615E, 0x48C0, 0xC16160); /* C1615E: ext.l   D0 */
-    FA18_OP(0xC16160, 0xE580, 0xC16162); /* C16160: asl.l   #2, D0 */
-    FA18_OP(0xC16162, 0x2040, 0xC16164); /* C16162: movea.l D0, A0 */
-    FA18_OP(0xC16164, 0xD1FC, 0xC1616A); /* C16164: adda.l  #$c182c2, A0 */
-    FA18_OP(0xC1616A, 0x23D0, 0xC16170); /* C1616A: move.l  (A0), $c18232.l */
-    FA18_OP(0xC16170, 0x4879, 0xC16176); /* C16170: pea     $c18218.l */
-    FA18_CALL(0xC16176, 0x4EB9, 0xC1617C, 442, 0); /* C16176: jsr     $c53f30.l */
-L_C1617C:
-    FA18_CHECK(0xC1617C);
-    FA18_OP(0xC1617C, 0x588F, 0xC1617E); /* C1617C: addq.l  #4, A7 */
-    FA18_OP(0xC1617E, 0x4A39, 0xC16184); /* C1617E: tst.b   $c45899.l */
-    FA18_BCC(0xC16184, 0x6700, 0xC16188, 0xC16226, L_C16226); /* C16184: beq     $c16226 */
-L_C16188:
-    FA18_CHECK(0xC16188);
-    FA18_OP(0xC16188, 0x4879, 0xC1618E); /* C16188: pea     $c1822a.l */
-    FA18_CALL(0xC1618E, 0x4EB9, 0xC16194, 444, 0); /* C1618E: jsr     $c53f88.l */
-L_C16194:
-    FA18_CHECK(0xC16194);
-    FA18_OP(0xC16194, 0x588F, 0xC16196); /* C16194: addq.l  #4, A7 */
-    FA18_CALL(0xC16196, 0x4EB9, 0xC1619C, 443, 0); /* C16196: jsr     $c53f44.l */
-L_C1619C:
-    FA18_CHECK(0xC1619C);
-    FA18_OP(0xC1619C, 0x1039, 0xC161A2); /* C1619C: move.b  $c45899.l, D0 */
-    FA18_OP(0xC161A2, 0x4A00, 0xC161A4); /* C161A2: tst.b   D0 */
-    FA18_BCC(0xC161A4, 0x6F00, 0xC161A8, 0xC16270, L_C16270); /* C161A4: ble     $c16270 */
-L_C161A8:
-    FA18_CHECK(0xC161A8);
-    FA18_OP(0xC161A8, 0x7020, 0xC161AA); /* C161A8: moveq   #$20, D0 */
-    FA18_OP(0xC161AA, 0x2F00, 0xC161AC); /* C161AA: move.l  D0, -(A7) */
-    FA18_OP(0xC161AC, 0x4879, 0xC161B2); /* C161AC: pea     $c084d0.l */
-    FA18_OP(0xC161B2, 0x4879, 0xC161B8); /* C161B2: pea     $c1822a.l */
-    FA18_CALL(0xC161B8, 0x4EB9, 0xC161BE, 441, 0); /* C161B8: jsr     $c53ec0.l */
-L_C161BE:
-    FA18_CHECK(0xC161BE);
-    FA18_OP(0xC161BE, 0x4FEF, 0xC161C2); /* C161BE: lea     ($c,A7), A7 */
-    FA18_OP(0xC161C2, 0x4879, 0xC161C8); /* C161C2: pea     $c1822a.l */
-    FA18_CALL(0xC161C8, 0x4EB9, 0xC161CE, 444, 0); /* C161C8: jsr     $c53f88.l */
-L_C161CE:
-    FA18_CHECK(0xC161CE);
-    FA18_OP(0xC161CE, 0x588F, 0xC161D0); /* C161CE: addq.l  #4, A7 */
-    FA18_OP(0xC161D0, 0x4879, 0xC161D6); /* C161D0: pea     $c1822a.l */
-    FA18_CALL(0xC161D6, 0x4EB9, 0xC161DC, 444, 0); /* C161D6: jsr     $c53f88.l */
-L_C161DC:
-    FA18_CHECK(0xC161DC);
-    FA18_OP(0xC161DC, 0x588F, 0xC161DE); /* C161DC: addq.l  #4, A7 */
-    FA18_OP(0xC161DE, 0x7020, 0xC161E0); /* C161DE: moveq   #$20, D0 */
-    FA18_OP(0xC161E0, 0x2F00, 0xC161E2); /* C161E0: move.l  D0, -(A7) */
-    FA18_OP(0xC161E2, 0x2F39, 0xC161E8); /* C161E2: move.l  $c45660.l, -(A7) */
-    FA18_OP(0xC161E8, 0x4879, 0xC161EE); /* C161E8: pea     $c1822a.l */
-    FA18_CALL(0xC161EE, 0x4EB9, 0xC161F4, 441, 0); /* C161EE: jsr     $c53ec0.l */
-L_C161F4:
-    FA18_CHECK(0xC161F4);
-    FA18_OP(0xC161F4, 0x4FEF, 0xC161F8); /* C161F4: lea     ($c,A7), A7 */
-    FA18_OP(0xC161F8, 0x4879, 0xC161FE); /* C161F8: pea     $c1822a.l */
-    FA18_CALL(0xC161FE, 0x4EB9, 0xC16204, 444, 0); /* C161FE: jsr     $c53f88.l */
-L_C16204:
-    FA18_CHECK(0xC16204);
-    FA18_OP(0xC16204, 0x588F, 0xC16206); /* C16204: addq.l  #4, A7 */
-    FA18_OP(0xC16206, 0x4879, 0xC1620C); /* C16206: pea     $c1822a.l */
-    FA18_CALL(0xC1620C, 0x4EB9, 0xC16212, 444, 0); /* C1620C: jsr     $c53f88.l */
-L_C16212:
-    FA18_CHECK(0xC16212);
-    FA18_OP(0xC16212, 0x588F, 0xC16214); /* C16212: addq.l  #4, A7 */
-    FA18_OP(0xC16214, 0x1039, 0xC1621A); /* C16214: move.b  $c45899.l, D0 */
-    FA18_OP(0xC1621A, 0x5300, 0xC1621C); /* C1621A: subq.b  #1, D0 */
-    FA18_OP(0xC1621C, 0x13C0, 0xC16222); /* C1621C: move.b  D0, $c45899.l */
-    FA18_JUMP(0xC16222, 0x6000, 0xC1619C, L_C1619C); /* C16222: bra     $c1619c */
-L_C16226:
-    FA18_CHECK(0xC16226);
-    FA18_OP(0xC16226, 0x4A39, 0xC1622C); /* C16226: tst.b   $c458a4.l */
-    FA18_BCC(0xC1622C, 0x6742, 0xC1622E, 0xC16270, L_C16270); /* C1622C: beq     $c16270 */
-L_C1622E:
-    FA18_CHECK(0xC1622E);
-    FA18_OP(0xC1622E, 0x1039, 0xC16234); /* C1622E: move.b  $c458a4.l, D0 */
-    FA18_OP(0xC16234, 0x5300, 0xC16236); /* C16234: subq.b  #1, D0 */
-    FA18_OP(0xC16236, 0x13C0, 0xC1623C); /* C16236: move.b  D0, $c458a4.l */
-    FA18_OP(0xC1623C, 0x3039, 0xC16242); /* C1623C: move.w  $c458d2.l, D0 */
-    FA18_OP(0xC16242, 0x0800, 0xC16246); /* C16242: btst    #$8, D0 */
-    FA18_BCC(0xC16246, 0x6628, 0xC16248, 0xC16270, L_C16270); /* C16246: bne     $c16270 */
-L_C16248:
-    FA18_CHECK(0xC16248);
-    FA18_OP(0xC16248, 0x4879, 0xC1624E); /* C16248: pea     $c1822a.l */
-    FA18_CALL(0xC1624E, 0x4EB9, 0xC16254, 444, 0); /* C1624E: jsr     $c53f88.l */
-L_C16254:
-    FA18_CHECK(0xC16254);
-    FA18_OP(0xC16254, 0x588F, 0xC16256); /* C16254: addq.l  #4, A7 */
-    FA18_OP(0xC16256, 0x7020, 0xC16258); /* C16256: moveq   #$20, D0 */
-    FA18_OP(0xC16258, 0x2F00, 0xC1625A); /* C16258: move.l  D0, -(A7) */
-    FA18_OP(0xC1625A, 0x2F39, 0xC16260); /* C1625A: move.l  $c45660.l, -(A7) */
-    FA18_OP(0xC16260, 0x4879, 0xC16266); /* C16260: pea     $c1822a.l */
-    FA18_CALL(0xC16266, 0x4EB9, 0xC1626C, 441, 0); /* C16266: jsr     $c53ec0.l */
-L_C1626C:
-    FA18_CHECK(0xC1626C);
-    FA18_OP(0xC1626C, 0x4FEF, 0xC16270); /* C1626C: lea     ($c,A7), A7 */
-L_C16270:
-    FA18_CHECK(0xC16270);
-    FA18_OP(0xC16270, 0x3039, 0xC16276); /* C16270: move.w  $c4566c.l, D0 */
-    FA18_OP(0xC16276, 0x7201, 0xC16278); /* C16276: moveq   #$1, D1 */
-    FA18_OP(0xC16278, 0x9240, 0xC1627A); /* C16278: sub.w   D0, D1 */
-    FA18_OP(0xC1627A, 0x33C1, 0xC16280); /* C1627A: move.w  D1, $c4566c.l */
-    FA18_OP(0xC16280, 0x4E5E, 0xC16282); /* C16280: unlk    A6 */
-    FA18_RETURN(0xC16282, 0x4E75); /* C16282: rts */
-}
-
-int fa18_fn_C1643A(int entry) {
-    switch (entry) {
-    case 0: goto L_C1643A;
-    case 1: goto L_C1644A;
-    case 2: goto L_C16450;
-    case 3: goto L_C1645C;
-    case 4: goto L_C16468;
-    case 5: goto L_C16470;
-    case 6: goto L_C1647C;
-    case 7: goto L_C16482;
-    case 8: goto L_C16494;
-    case 9: goto L_C164A2;
-    case 10: goto L_C164AA;
-    case 11: goto L_C164B6;
-    case 12: goto L_C164D0;
-    case 13: goto L_C164E0;
-    case 14: goto L_C164EC;
-    case 15: goto L_C164F6;
-    case 16: goto L_C16502;
-    case 17: goto L_C16508;
-    case 18: goto L_C1650E;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1643A:
-    FA18_CHECK(0xC1643A);
-    FA18_OP(0xC1643A, 0x4E56, 0xC1643E); /* C1643A: link    A6, #-$c */
-    FA18_OP(0xC1643E, 0x3039, 0xC16444); /* C1643E: move.w  $c45928.l, D0 */
-    FA18_OP(0xC16444, 0x4A40, 0xC16446); /* C16444: tst.w   D0 */
-    FA18_BCC(0xC16446, 0x6600, 0xC1644A, 0xC1650E, L_C1650E); /* C16446: bne     $c1650e */
-L_C1644A:
-    FA18_CHECK(0xC1644A);
-    FA18_CALL(0xC1644A, 0x4EB9, 0xC16450, 447, 0); /* C1644A: jsr     $c53fc0.l */
-L_C16450:
-    FA18_CHECK(0xC16450);
-    FA18_OP(0xC16450, 0x4239, 0xC16456); /* C16450: clr.b   $c457c5.l */
-    FA18_CALL(0xC16456, 0x4EB9, 0xC1645C, 51, 0); /* C16456: jsr     $c0ef08.l */
-L_C1645C:
-    FA18_CHECK(0xC1645C);
-    FA18_OP(0xC1645C, 0x33C0, 0xC16462); /* C1645C: move.w  D0, $c45928.l */
-    FA18_OP(0xC16462, 0x4A40, 0xC16464); /* C16462: tst.w   D0 */
-    FA18_BCC(0xC16464, 0x6600, 0xC16468, 0xC16508, L_C16508); /* C16464: bne     $c16508 */
-L_C16468:
-    FA18_CHECK(0xC16468);
-    FA18_OP(0xC16468, 0x42A7, 0xC1646A); /* C16468: clr.l   -(A7) */
-    FA18_CALL(0xC1646A, 0x4EB9, 0xC16470, 445, 0); /* C1646A: jsr     $c53f9c.l */
-L_C16470:
-    FA18_CHECK(0xC16470);
-    FA18_OP(0xC16470, 0x588F, 0xC16472); /* C16470: addq.l  #4, A7 */
-    FA18_OP(0xC16472, 0x3039, 0xC16478); /* C16472: move.w  $c08010.l, D0 */
-    FA18_OP(0xC16478, 0x4A40, 0xC1647A); /* C16478: tst.w   D0 */
-    FA18_BCC(0xC1647A, 0x6606, 0xC1647C, 0xC16482, L_C16482); /* C1647A: bne     $c16482 */
-L_C1647C:
-    FA18_CHECK(0xC1647C);
-    FA18_OP(0xC1647C, 0x7000, 0xC1647E); /* C1647C: moveq   #$0, D0 */
-    FA18_OP(0xC1647E, 0x4E5E, 0xC16480); /* C1647E: unlk    A6 */
-    FA18_RETURN(0xC16480, 0x4E75); /* C16480: rts */
-L_C16482:
-    FA18_CHECK(0xC16482);
-    FA18_OP(0xC16482, 0x2F3C, 0xC16488); /* C16482: move.l  #$3ed, -(A7) */
-    FA18_OP(0xC16488, 0x4879, 0xC1648E); /* C16488: pea     $c08028.l */
-    FA18_CALL(0xC1648E, 0x4EB9, 0xC16494, 428, 0); /* C1648E: jsr     $c539a8.l */
-L_C16494:
-    FA18_CHECK(0xC16494);
-    FA18_OP(0xC16494, 0x508F, 0xC16496); /* C16494: addq.l  #8, A7 */
-    FA18_OP(0xC16496, 0x42A7, 0xC16498); /* C16496: clr.l   -(A7) */
-    FA18_OP(0xC16498, 0x2D40, 0xC1649C); /* C16498: move.l  D0, (-$c,A6) */
-    FA18_CALL(0xC1649C, 0x4EB9, 0xC164A2, 445, 0); /* C1649C: jsr     $c53f9c.l */
-L_C164A2:
-    FA18_CHECK(0xC164A2);
-    FA18_OP(0xC164A2, 0x588F, 0xC164A4); /* C164A2: addq.l  #4, A7 */
-    FA18_OP(0xC164A4, 0x4AAE, 0xC164A8); /* C164A4: tst.l   (-$c,A6) */
-    FA18_BCC(0xC164A8, 0x6E0C, 0xC164AA, 0xC164B6, L_C164B6); /* C164A8: bgt     $c164b6 */
-L_C164AA:
-    FA18_CHECK(0xC164AA);
-    FA18_OP(0xC164AA, 0x4279, 0xC164B0); /* C164AA: clr.w   $c08010.l */
-    FA18_OP(0xC164B0, 0x7000, 0xC164B2); /* C164B0: moveq   #$0, D0 */
-    FA18_OP(0xC164B2, 0x4E5E, 0xC164B4); /* C164B2: unlk    A6 */
-    FA18_RETURN(0xC164B4, 0x4E75); /* C164B4: rts */
-L_C164B6:
-    FA18_CHECK(0xC164B6);
-    FA18_OP(0xC164B6, 0x2079, 0xC164BC); /* C164B6: movea.l $c1ab74.l, A0 */
-    FA18_OP(0xC164BC, 0x704E, 0xC164BE); /* C164BC: moveq   #$4e, D0 */
-    FA18_OP(0xC164BE, 0x2F00, 0xC164C0); /* C164BE: move.l  D0, -(A7) */
-    FA18_OP(0xC164C0, 0x2F08, 0xC164C2); /* C164C0: move.l  A0, -(A7) */
-    FA18_OP(0xC164C2, 0x2F2E, 0xC164C6); /* C164C2: move.l  (-$c,A6), -(A7) */
-    FA18_OP(0xC164C6, 0x2D48, 0xC164CA); /* C164C6: move.l  A0, (-$4,A6) */
-    FA18_CALL(0xC164CA, 0x4EB9, 0xC164D0, 430, 0); /* C164CA: jsr     $c539f4.l */
-L_C164D0:
-    FA18_CHECK(0xC164D0);
-    FA18_OP(0xC164D0, 0x4FEF, 0xC164D4); /* C164D0: lea     ($c,A7), A7 */
-    FA18_OP(0xC164D4, 0x42A7, 0xC164D6); /* C164D4: clr.l   -(A7) */
-    FA18_OP(0xC164D6, 0x2D40, 0xC164DA); /* C164D6: move.l  D0, (-$8,A6) */
-    FA18_CALL(0xC164DA, 0x4EB9, 0xC164E0, 445, 0); /* C164DA: jsr     $c53f9c.l */
-L_C164E0:
-    FA18_CHECK(0xC164E0);
-    FA18_OP(0xC164E0, 0x588F, 0xC164E2); /* C164E0: addq.l  #4, A7 */
-    FA18_OP(0xC164E2, 0x2F2E, 0xC164E6); /* C164E2: move.l  (-$c,A6), -(A7) */
-    FA18_CALL(0xC164E6, 0x4EB9, 0xC164EC, 429, 0); /* C164E6: jsr     $c539c4.l */
-L_C164EC:
-    FA18_CHECK(0xC164EC);
-    FA18_OP(0xC164EC, 0x588F, 0xC164EE); /* C164EC: addq.l  #4, A7 */
-    FA18_OP(0xC164EE, 0x42A7, 0xC164F0); /* C164EE: clr.l   -(A7) */
-    FA18_CALL(0xC164F0, 0x4EB9, 0xC164F6, 445, 0); /* C164F0: jsr     $c53f9c.l */
-L_C164F6:
-    FA18_CHECK(0xC164F6);
-    FA18_OP(0xC164F6, 0x588F, 0xC164F8); /* C164F6: addq.l  #4, A7 */
-    FA18_OP(0xC164F8, 0x0CAE, 0xC16500); /* C164F8: cmpi.l  #-$1, (-$8,A6) */
-    FA18_BCC(0xC16500, 0x6606, 0xC16502, 0xC16508, L_C16508); /* C16500: bne     $c16508 */
-L_C16502:
-    FA18_CHECK(0xC16502);
-    FA18_OP(0xC16502, 0x7000, 0xC16504); /* C16502: moveq   #$0, D0 */
-    FA18_OP(0xC16504, 0x4E5E, 0xC16506); /* C16504: unlk    A6 */
-    FA18_RETURN(0xC16506, 0x4E75); /* C16506: rts */
-L_C16508:
-    FA18_CHECK(0xC16508);
-    FA18_CALL(0xC16508, 0x4EB9, 0xC1650E, 446, 0); /* C16508: jsr     $c53fb0.l */
-L_C1650E:
-    FA18_CHECK(0xC1650E);
-    FA18_OP(0xC1650E, 0x4E5E, 0xC16510); /* C1650E: unlk    A6 */
-    FA18_RETURN(0xC16510, 0x4E75); /* C16510: rts */
-}
-
-int fa18_fn_C16BF2(int entry) {
-    switch (entry) {
-    case 0: goto L_C16BF2;
-    case 1: goto L_C16C02;
-    case 2: goto L_C16C0C;
-    case 3: goto L_C16C12;
-    case 4: goto L_C16C30;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C16BF2:
-    FA18_CHECK(0xC16BF2);
-    FA18_OP(0xC16BF2, 0x4E56, 0xC16BF6); /* C16BF2: link    A6, #-$6 */
-    FA18_OP(0xC16BF6, 0x2F39, 0xC16BFC); /* C16BF6: move.l  $c0815c.l, -(A7) */
-    FA18_CALL(0xC16BFC, 0x4EB9, 0xC16C02, 438, 0); /* C16BFC: jsr     $c53c08.l */
-L_C16C02:
-    FA18_CHECK(0xC16C02);
-    FA18_OP(0xC16C02, 0x588F, 0xC16C04); /* C16C02: addq.l  #4, A7 */
-    FA18_OP(0xC16C04, 0x2D40, 0xC16C08); /* C16C04: move.l  D0, (-$6,A6) */
-    FA18_OP(0xC16C08, 0x4A80, 0xC16C0A); /* C16C08: tst.l   D0 */
-    FA18_BCC(0xC16C0A, 0x6606, 0xC16C0C, 0xC16C12, L_C16C12); /* C16C0A: bne     $c16c12 */
-L_C16C0C:
-    FA18_CHECK(0xC16C0C);
-    FA18_OP(0xC16C0C, 0x7000, 0xC16C0E); /* C16C0C: moveq   #$0, D0 */
-    FA18_OP(0xC16C0E, 0x4E5E, 0xC16C10); /* C16C0E: unlk    A6 */
-    FA18_RETURN(0xC16C10, 0x4E75); /* C16C10: rts */
-L_C16C12:
-    FA18_CHECK(0xC16C12);
-    FA18_OP(0xC16C12, 0x2079, 0xC16C18); /* C16C12: movea.l $c1abac.l, A0 */
-    FA18_OP(0xC16C18, 0x3028, 0xC16C1C); /* C16C18: move.w  ($6,A0), D0 */
-    FA18_OP(0xC16C1C, 0x4268, 0xC16C20); /* C16C1C: clr.w   ($6,A0) */
-    FA18_OP(0xC16C20, 0x2F39, 0xC16C26); /* C16C20: move.l  $c08134.l, -(A7) */
-    FA18_OP(0xC16C26, 0x1D40, 0xC16C2A); /* C16C26: move.b  D0, (-$1,A6) */
-    FA18_CALL(0xC16C2A, 0x4EB9, 0xC16C30, 440, 0); /* C16C2A: jsr     $c53c8c.l */
-L_C16C30:
-    FA18_CHECK(0xC16C30);
-    FA18_OP(0xC16C30, 0x588F, 0xC16C32); /* C16C30: addq.l  #4, A7 */
-    FA18_OP(0xC16C32, 0x102E, 0xC16C36); /* C16C32: move.b  (-$1,A6), D0 */
-    FA18_OP(0xC16C36, 0x4E5E, 0xC16C38); /* C16C36: unlk    A6 */
-    FA18_RETURN(0xC16C38, 0x4E75); /* C16C38: rts */
-}
-
-int fa18_fn_C16C56(int entry) {
-    switch (entry) {
-    case 0: goto L_C16C56;
-    case 1: goto L_C16C62;
-    case 2: goto L_C16C72;
-    case 3: goto L_C16C76;
-    case 4: goto L_C16C7E;
-    case 5: goto L_C16C86;
-    case 6: goto L_C16C9C;
-    case 7: goto L_C16CA4;
-    case 8: goto L_C16CBC;
-    case 9: goto L_C16CCE;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C16C56:
-    FA18_CHECK(0xC16C56);
-    FA18_OP(0xC16C56, 0x4E56, 0xC16C5A); /* C16C56: link    A6, #-$4 */
-    FA18_OP(0xC16C5A, 0x4A79, 0xC16C60); /* C16C5A: tst.w   $c08182.l */
-    FA18_BCC(0xC16C60, 0x6710, 0xC16C62, 0xC16C72, L_C16C72); /* C16C60: beq     $c16c72 */
-L_C16C62:
-    FA18_CHECK(0xC16C62);
-    FA18_OP(0xC16C62, 0x4279, 0xC16C68); /* C16C62: clr.w   $c08182.l */
-    FA18_OP(0xC16C68, 0x3039, 0xC16C6E); /* C16C68: move.w  $c1abc8.l, D0 */
-    FA18_OP(0xC16C6E, 0x4E5E, 0xC16C70); /* C16C6E: unlk    A6 */
-    FA18_RETURN(0xC16C70, 0x4E75); /* C16C70: rts */
-L_C16C72:
-    FA18_CHECK(0xC16C72);
-    FA18_CALL(0xC16C72, 0x6100, 0xC16C76, 92, 0); /* C16C72: bsr     $c16bf2 */
-L_C16C76:
-    FA18_CHECK(0xC16C76);
-    FA18_OP(0xC16C76, 0x1D40, 0xC16C7A); /* C16C76: move.b  D0, (-$2,A6) */
-    FA18_OP(0xC16C7A, 0x4A00, 0xC16C7C); /* C16C7A: tst.b   D0 */
-    FA18_BCC(0xC16C7C, 0x6608, 0xC16C7E, 0xC16C86, L_C16C86); /* C16C7C: bne     $c16c86 */
-L_C16C7E:
-    FA18_CHECK(0xC16C7E);
-    FA18_OP(0xC16C7E, 0x303C, 0xC16C82); /* C16C7E: move.w  #$ff, D0 */
-    FA18_OP(0xC16C82, 0x4E5E, 0xC16C84); /* C16C82: unlk    A6 */
-    FA18_RETURN(0xC16C84, 0x4E75); /* C16C84: rts */
-L_C16C86:
-    FA18_CHECK(0xC16C86);
-    FA18_OP(0xC16C86, 0x102E, 0xC16C8A); /* C16C86: move.b  (-$2,A6), D0 */
-    FA18_OP(0xC16C8A, 0x0200, 0xC16C8E); /* C16C8A: andi.b  #$7f, D0 */
-    FA18_OP(0xC16C8E, 0x1D40, 0xC16C92); /* C16C8E: move.b  D0, (-$1,A6) */
-    FA18_OP(0xC16C92, 0x0200, 0xC16C96); /* C16C92: andi.b  #$70, D0 */
-    FA18_OP(0xC16C96, 0x0C00, 0xC16C9A); /* C16C96: cmpi.b  #$70, D0 */
-    FA18_BCC(0xC16C9A, 0x6608, 0xC16C9C, 0xC16CA4, L_C16CA4); /* C16C9A: bne     $c16ca4 */
-L_C16C9C:
-    FA18_CHECK(0xC16C9C);
-    FA18_OP(0xC16C9C, 0x303C, 0xC16CA0); /* C16C9C: move.w  #$ff, D0 */
-    FA18_OP(0xC16CA0, 0x4E5E, 0xC16CA2); /* C16CA0: unlk    A6 */
-    FA18_RETURN(0xC16CA2, 0x4E75); /* C16CA2: rts */
-L_C16CA4:
-    FA18_CHECK(0xC16CA4);
-    FA18_OP(0xC16CA4, 0x102E, 0xC16CA8); /* C16CA4: move.b  (-$2,A6), D0 */
-    FA18_OP(0xC16CA8, 0x0200, 0xC16CAC); /* C16CA8: andi.b  #$80, D0 */
-    FA18_OP(0xC16CAC, 0x57C1, 0xC16CAE); /* C16CAC: seq     D1 */
-    FA18_OP(0xC16CAE, 0x4401, 0xC16CB0); /* C16CAE: neg.b   D1 */
-    FA18_OP(0xC16CB0, 0x4881, 0xC16CB2); /* C16CB0: ext.w   D1 */
-    FA18_OP(0xC16CB2, 0x48C1, 0xC16CB4); /* C16CB2: ext.l   D1 */
-    FA18_OP(0xC16CB4, 0x3D41, 0xC16CB8); /* C16CB4: move.w  D1, (-$4,A6) */
-    FA18_OP(0xC16CB8, 0x4A41, 0xC16CBA); /* C16CB8: tst.w   D1 */
-    FA18_BCC(0xC16CBA, 0x6612, 0xC16CBC, 0xC16CCE, L_C16CCE); /* C16CBA: bne     $c16cce */
-L_C16CBC:
-    FA18_CHECK(0xC16CBC);
-    FA18_OP(0xC16CBC, 0x102E, 0xC16CC0); /* C16CBC: move.b  (-$1,A6), D0 */
-    FA18_OP(0xC16CC0, 0x4880, 0xC16CC2); /* C16CC0: ext.w   D0 */
-    FA18_OP(0xC16CC2, 0x48C0, 0xC16CC4); /* C16CC2: ext.l   D0 */
-    FA18_OP(0xC16CC4, 0x0680, 0xC16CCA); /* C16CC4: addi.l  #$80, D0 */
-    FA18_OP(0xC16CCA, 0x1D40, 0xC16CCE); /* C16CCA: move.b  D0, (-$1,A6) */
-L_C16CCE:
-    FA18_CHECK(0xC16CCE);
-    FA18_OP(0xC16CCE, 0x102E, 0xC16CD2); /* C16CCE: move.b  (-$1,A6), D0 */
-    FA18_OP(0xC16CD2, 0x4880, 0xC16CD4); /* C16CD2: ext.w   D0 */
-    FA18_OP(0xC16CD4, 0x4E5E, 0xC16CD6); /* C16CD4: unlk    A6 */
-    FA18_RETURN(0xC16CD6, 0x4E75); /* C16CD6: rts */
-}
-
-int fa18_fn_C16D04(int entry) {
-    switch (entry) {
-    case 0: goto L_C16D04;
-    case 1: goto L_C16D34;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C16D04:
-    FA18_CHECK(0xC16D04);
-    FA18_OP(0xC16D04, 0x13FC, 0xC16D0C); /* C16D04: move.b  #$5, $c1ab8c.l */
-    FA18_OP(0xC16D0C, 0x4239, 0xC16D12); /* C16D0C: clr.b   $c1ab8d.l */
-    FA18_OP(0xC16D12, 0x91C8, 0xC16D14); /* C16D12: suba.l  A0, A0 */
-    FA18_OP(0xC16D14, 0x23C8, 0xC16D1A); /* C16D14: move.l  A0, $c1ab8e.l */
-    FA18_OP(0xC16D1A, 0x23C8, 0xC16D20); /* C16D1A: move.l  A0, $c1ab92.l */
-    FA18_OP(0xC16D20, 0x33FC, 0xC16D28); /* C16D20: move.w  #$a, $c1aba0.l */
-    FA18_OP(0xC16D28, 0x4879, 0xC16D2E); /* C16D28: pea     $c1ab84.l */
-    FA18_CALL(0xC16D2E, 0x4EB9, 0xC16D34, 439, 0); /* C16D2E: jsr     $c53c78.l */
-L_C16D34:
-    FA18_CHECK(0xC16D34);
-    FA18_OP(0xC16D34, 0x588F, 0xC16D36); /* C16D34: addq.l  #4, A7 */
-    FA18_OP(0xC16D36, 0x23F9, 0xC16D40); /* C16D36: move.l  $c1aba4.l, $c45af2.l */
-    FA18_OP(0xC16D40, 0x23F9, 0xC16D4A); /* C16D40: move.l  $c1aba8.l, $c45af6.l */
-    FA18_RETURN(0xC16D4A, 0x4E75); /* C16D4A: rts */
-}
-
-int fa18_fn_C16EAE(int entry) {
-    switch (entry) {
-    case 0: goto L_C16EAE;
-    case 1: goto L_C16EBE;
-    case 2: goto L_C16EC8;
-    case 3: goto L_C16ED0;
-    case 4: goto L_C16EE2;
-    case 5: goto L_C16EE8;
-    case 6: goto L_C16EEE;
-    case 7: goto L_C16EF0;
-    case 8: goto L_C16EF8;
-    case 9: goto L_C16EFE;
-    case 10: goto L_C16F14;
-    case 11: goto L_C16F16;
-    case 12: goto L_C16F18;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C16EAE:
-    FA18_CHECK(0xC16EAE);
-    FA18_OP(0xC16EAE, 0x4E56, 0xC16EB2); /* C16EAE: link    A6, #-$6 */
-    FA18_OP(0xC16EB2, 0x2F39, 0xC16EB8); /* C16EB2: move.l  $c1abec.l, -(A7) */
-    FA18_CALL(0xC16EB8, 0x4EB9, 0xC16EBE, 438, 0); /* C16EB8: jsr     $c53c08.l */
-L_C16EBE:
-    FA18_CHECK(0xC16EBE);
-    FA18_OP(0xC16EBE, 0x588F, 0xC16EC0); /* C16EBE: addq.l  #4, A7 */
-    FA18_OP(0xC16EC0, 0x2D40, 0xC16EC4); /* C16EC0: move.l  D0, (-$6,A6) */
-    FA18_OP(0xC16EC4, 0x4A80, 0xC16EC6); /* C16EC4: tst.l   D0 */
-    FA18_BCC(0xC16EC6, 0x6608, 0xC16EC8, 0xC16ED0, L_C16ED0); /* C16EC6: bne     $c16ed0 */
-L_C16EC8:
-    FA18_CHECK(0xC16EC8);
-    FA18_OP(0xC16EC8, 0x4239, 0xC16ECE); /* C16EC8: clr.b   $c4582d.l */
-    FA18_JUMP(0xC16ECE, 0x6046, 0xC16F16, L_C16F16); /* C16ECE: bra     $c16f16 */
-L_C16ED0:
-    FA18_CHECK(0xC16ED0);
-    FA18_OP(0xC16ED0, 0x2079, 0xC16ED6); /* C16ED0: movea.l $c1abca.l, A0 */
-    FA18_OP(0xC16ED6, 0x3028, 0xC16EDA); /* C16ED6: move.w  ($6,A0), D0 */
-    FA18_OP(0xC16EDA, 0x3D40, 0xC16EDE); /* C16EDA: move.w  D0, (-$2,A6) */
-    FA18_OP(0xC16EDE, 0x4A40, 0xC16EE0); /* C16EDE: tst.w   D0 */
-    FA18_BCC(0xC16EE0, 0x671C, 0xC16EE2, 0xC16EFE, L_C16EFE); /* C16EE0: beq     $c16efe */
-L_C16EE2:
-    FA18_CHECK(0xC16EE2);
-    FA18_OP(0xC16EE2, 0x0C40, 0xC16EE6); /* C16EE2: cmpi.w  #$68, D0 */
-    FA18_BCC(0xC16EE6, 0x6608, 0xC16EE8, 0xC16EF0, L_C16EF0); /* C16EE6: bne     $c16ef0 */
-L_C16EE8:
-    FA18_CHECK(0xC16EE8);
-    FA18_CALL(0xC16EE8, 0x4EB9, 0xC16EEE, 18, 0); /* C16EE8: jsr     $c0833e.l */
-L_C16EEE:
-    FA18_CHECK(0xC16EEE);
-    FA18_JUMP(0xC16EEE, 0x600E, 0xC16EFE, L_C16EFE); /* C16EEE: bra     $c16efe */
-L_C16EF0:
-    FA18_CHECK(0xC16EF0);
-    FA18_OP(0xC16EF0, 0x0C6E, 0xC16EF6); /* C16EF0: cmpi.w  #$e8, (-$2,A6) */
-    FA18_BCC(0xC16EF6, 0x6606, 0xC16EF8, 0xC16EFE, L_C16EFE); /* C16EF6: bne     $c16efe */
-L_C16EF8:
-    FA18_CHECK(0xC16EF8);
-    FA18_CALL(0xC16EF8, 0x4EB9, 0xC16EFE, 19, 0); /* C16EF8: jsr     $c08394.l */
-L_C16EFE:
-    FA18_CHECK(0xC16EFE);
-    FA18_OP(0xC16EFE, 0x2079, 0xC16F04); /* C16EFE: movea.l $c1abca.l, A0 */
-    FA18_OP(0xC16F04, 0x4268, 0xC16F08); /* C16F04: clr.w   ($6,A0) */
-    FA18_OP(0xC16F08, 0x2F39, 0xC16F0E); /* C16F08: move.l  $c1abce.l, -(A7) */
-    FA18_CALL(0xC16F0E, 0x4EB9, 0xC16F14, 440, 0); /* C16F0E: jsr     $c53c8c.l */
-L_C16F14:
-    FA18_CHECK(0xC16F14);
-    FA18_OP(0xC16F14, 0x588F, 0xC16F16); /* C16F14: addq.l  #4, A7 */
-L_C16F16:
-    FA18_CHECK(0xC16F16);
-    FA18_CALL(0xC16F16, 0x6104, 0xC16F18, 96, 0); /* C16F16: bsr     $c16f1c */
-L_C16F18:
-    FA18_CHECK(0xC16F18);
-    FA18_OP(0xC16F18, 0x4E5E, 0xC16F1A); /* C16F18: unlk    A6 */
-    FA18_RETURN(0xC16F1A, 0x4E75); /* C16F1A: rts */
-}
-
-int fa18_fn_C16F1C(int entry) {
-    switch (entry) {
-    case 0: goto L_C16F1C;
-    case 1: goto L_C16F56;
-    case 2: goto L_C16F5C;
-    case 3: goto L_C16F66;
-    case 4: goto L_C16F88;
-    case 5: goto L_C16F8E;
-    case 6: goto L_C16F98;
-    case 7: goto L_C16FA0;
-    case 8: goto L_C16FA6;
-    case 9: goto L_C16FAC;
-    case 10: goto L_C16FB4;
-    case 11: goto L_C16FBA;
-    case 12: goto L_C16FC4;
-    case 13: goto L_C16FCC;
-    case 14: goto L_C16FD2;
-    case 15: goto L_C16FDC;
-    case 16: goto L_C16FE4;
-    case 17: goto L_C16FEA;
-    case 18: goto L_C16FF0;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C16F1C:
-    FA18_CHECK(0xC16F1C);
-    FA18_OP(0xC16F1C, 0x4E56, 0xC16F20); /* C16F1C: link    A6, #-$a */
-    FA18_OP(0xC16F20, 0x2D7C, 0xC16F28); /* C16F20: move.l  #$dff00c, (-$4,A6) */
-    FA18_OP(0xC16F28, 0x206E, 0xC16F2C); /* C16F28: movea.l (-$4,A6), A0 */
-    FA18_OP(0xC16F2C, 0x3010, 0xC16F2E); /* C16F2C: move.w  (A0), D0 */
-    FA18_OP(0xC16F2E, 0x33C0, 0xC16F34); /* C16F2E: move.w  D0, $c45950.l */
-    FA18_OP(0xC16F34, 0x3D40, 0xC16F38); /* C16F34: move.w  D0, (-$6,A6) */
-    FA18_OP(0xC16F38, 0x48C0, 0xC16F3A); /* C16F38: ext.l   D0 */
-    FA18_OP(0xC16F3A, 0x2F40, 0xC16F3E); /* C16F3A: move.l  D0, ($0,A7) */
-    FA18_OP(0xC16F3E, 0x0280, 0xC16F44); /* C16F3E: andi.l  #$200, D0 */
-    FA18_OP(0xC16F44, 0xE280, 0xC16F46); /* C16F44: asr.l   #1, D0 */
-    FA18_OP(0xC16F46, 0x222F, 0xC16F4A); /* C16F46: move.l  ($0,A7), D1 */
-    FA18_OP(0xC16F4A, 0x0281, 0xC16F50); /* C16F4A: andi.l  #$100, D1 */
-    FA18_OP(0xC16F50, 0xB380, 0xC16F52); /* C16F50: eor.l   D1, D0 */
-    FA18_OP(0xC16F52, 0x4A80, 0xC16F54); /* C16F52: tst.l   D0 */
-    FA18_BCC(0xC16F54, 0x6710, 0xC16F56, 0xC16F66, L_C16F66); /* C16F54: beq     $c16f66 */
-L_C16F56:
-    FA18_CHECK(0xC16F56);
-    FA18_CALL(0xC16F56, 0x4EB9, 0xC16F5C, 123, 0); /* C16F56: jsr     $c1b510.l */
-L_C16F5C:
-    FA18_CHECK(0xC16F5C);
-    FA18_OP(0xC16F5C, 0x13FC, 0xC16F64); /* C16F5C: move.b  #$1, $c45831.l */
-    FA18_JUMP(0xC16F64, 0x6046, 0xC16FAC, L_C16FAC); /* C16F64: bra     $c16fac */
-L_C16F66:
-    FA18_CHECK(0xC16F66);
-    FA18_OP(0xC16F66, 0x302E, 0xC16F6A); /* C16F66: move.w  (-$6,A6), D0 */
-    FA18_OP(0xC16F6A, 0x48C0, 0xC16F6C); /* C16F6A: ext.l   D0 */
-    FA18_OP(0xC16F6C, 0x2F40, 0xC16F70); /* C16F6C: move.l  D0, ($0,A7) */
-    FA18_OP(0xC16F70, 0x0280, 0xC16F76); /* C16F70: andi.l  #$2, D0 */
-    FA18_OP(0xC16F76, 0xE280, 0xC16F78); /* C16F76: asr.l   #1, D0 */
-    FA18_OP(0xC16F78, 0x222F, 0xC16F7C); /* C16F78: move.l  ($0,A7), D1 */
-    FA18_OP(0xC16F7C, 0x0281, 0xC16F82); /* C16F7C: andi.l  #$1, D1 */
-    FA18_OP(0xC16F82, 0xB380, 0xC16F84); /* C16F82: eor.l   D1, D0 */
-    FA18_OP(0xC16F84, 0x4A80, 0xC16F86); /* C16F84: tst.l   D0 */
-    FA18_BCC(0xC16F86, 0x6710, 0xC16F88, 0xC16F98, L_C16F98); /* C16F86: beq     $c16f98 */
-L_C16F88:
-    FA18_CHECK(0xC16F88);
-    FA18_CALL(0xC16F88, 0x4EB9, 0xC16F8E, 122, 0); /* C16F88: jsr     $c1b50c.l */
-L_C16F8E:
-    FA18_CHECK(0xC16F8E);
-    FA18_OP(0xC16F8E, 0x13FC, 0xC16F96); /* C16F8E: move.b  #$1, $c45831.l */
-    FA18_JUMP(0xC16F96, 0x6014, 0xC16FAC, L_C16FAC); /* C16F96: bra     $c16fac */
-L_C16F98:
-    FA18_CHECK(0xC16F98);
-    FA18_OP(0xC16F98, 0x4A39, 0xC16F9E); /* C16F98: tst.b   $c45831.l */
-    FA18_BCC(0xC16F9E, 0x670C, 0xC16FA0, 0xC16FAC, L_C16FAC); /* C16F9E: beq     $c16fac */
-L_C16FA0:
-    FA18_CHECK(0xC16FA0);
-    FA18_CALL(0xC16FA0, 0x4EB9, 0xC16FA6, 124, 0); /* C16FA0: jsr     $c1b514.l */
-L_C16FA6:
-    FA18_CHECK(0xC16FA6);
-    FA18_OP(0xC16FA6, 0x4239, 0xC16FAC); /* C16FA6: clr.b   $c45831.l */
-L_C16FAC:
-    FA18_CHECK(0xC16FAC);
-    FA18_OP(0xC16FAC, 0x082E, 0xC16FB2); /* C16FAC: btst    #$1, (-$6,A6) */
-    FA18_BCC(0xC16FB2, 0x6710, 0xC16FB4, 0xC16FC4, L_C16FC4); /* C16FB2: beq     $c16fc4 */
-L_C16FB4:
-    FA18_CHECK(0xC16FB4);
-    FA18_CALL(0xC16FB4, 0x4EB9, 0xC16FBA, 125, 0); /* C16FB4: jsr     $c1b558.l */
-L_C16FBA:
-    FA18_CHECK(0xC16FBA);
-    FA18_OP(0xC16FBA, 0x13FC, 0xC16FC2); /* C16FBA: move.b  #$1, $c45832.l */
-    FA18_JUMP(0xC16FC2, 0x602C, 0xC16FF0, L_C16FF0); /* C16FC2: bra     $c16ff0 */
-L_C16FC4:
-    FA18_CHECK(0xC16FC4);
-    FA18_OP(0xC16FC4, 0x082E, 0xC16FCA); /* C16FC4: btst    #$1, (-$5,A6) */
-    FA18_BCC(0xC16FCA, 0x6710, 0xC16FCC, 0xC16FDC, L_C16FDC); /* C16FCA: beq     $c16fdc */
-L_C16FCC:
-    FA18_CHECK(0xC16FCC);
-    FA18_CALL(0xC16FCC, 0x4EB9, 0xC16FD2, 126, 0); /* C16FCC: jsr     $c1b55c.l */
-L_C16FD2:
-    FA18_CHECK(0xC16FD2);
-    FA18_OP(0xC16FD2, 0x13FC, 0xC16FDA); /* C16FD2: move.b  #$1, $c45832.l */
-    FA18_JUMP(0xC16FDA, 0x6014, 0xC16FF0, L_C16FF0); /* C16FDA: bra     $c16ff0 */
-L_C16FDC:
-    FA18_CHECK(0xC16FDC);
-    FA18_OP(0xC16FDC, 0x4A39, 0xC16FE2); /* C16FDC: tst.b   $c45832.l */
-    FA18_BCC(0xC16FE2, 0x670C, 0xC16FE4, 0xC16FF0, L_C16FF0); /* C16FE2: beq     $c16ff0 */
-L_C16FE4:
-    FA18_CHECK(0xC16FE4);
-    FA18_CALL(0xC16FE4, 0x4EB9, 0xC16FEA, 127, 0); /* C16FE4: jsr     $c1b560.l */
-L_C16FEA:
-    FA18_CHECK(0xC16FEA);
-    FA18_OP(0xC16FEA, 0x4239, 0xC16FF0); /* C16FEA: clr.b   $c45832.l */
-L_C16FF0:
-    FA18_CHECK(0xC16FF0);
-    FA18_OP(0xC16FF0, 0x4E5E, 0xC16FF2); /* C16FF0: unlk    A6 */
-    FA18_RETURN(0xC16FF2, 0x4E75); /* C16FF2: rts */
-}
-
-int fa18_fn_C1715C(int entry) {
-    switch (entry) {
-    case 0: goto L_C1715C;
-    case 1: goto L_C17172;
-    case 2: goto L_C17174;
-    case 3: goto L_C17180;
-    case 4: goto L_C17184;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1715C:
-    FA18_CHECK(0xC1715C);
-    FA18_OP(0xC1715C, 0x4E56, 0xC17160); /* C1715C: link    A6, #-$2 */
-    FA18_OP(0xC17160, 0x48E7, 0xC17164); /* C17160: movem.l D7, -(A7) */
-    FA18_OP(0xC17164, 0x7E00, 0xC17166); /* C17164: moveq   #$0, D7 */
-    FA18_OP(0xC17166, 0x1039, 0xC1716C); /* C17166: move.b  $c1839a.l, D0 */
-    FA18_OP(0xC1716C, 0x0800, 0xC17170); /* C1716C: btst    #$6, D0 */
-    FA18_BCC(0xC17170, 0x6602, 0xC17172, 0xC17174, L_C17174); /* C17170: bne     $c17174 */
-L_C17172:
-    FA18_CHECK(0xC17172);
-    FA18_OP(0xC17172, 0x7E01, 0xC17174); /* C17172: moveq   #$1, D7 */
-L_C17174:
-    FA18_CHECK(0xC17174);
-    FA18_OP(0xC17174, 0x3039, 0xC1717A); /* C17174: move.w  $dff016.l, D0 */
-    FA18_OP(0xC1717A, 0x0800, 0xC1717E); /* C1717A: btst    #$a, D0 */
-    FA18_BCC(0xC1717E, 0x6604, 0xC17180, 0xC17184, L_C17184); /* C1717E: bne     $c17184 */
-L_C17180:
-    FA18_CHECK(0xC17180);
-    FA18_OP(0xC17180, 0x08C7, 0xC17184); /* C17180: bset    #$1, D7 */
-L_C17184:
-    FA18_CHECK(0xC17184);
-    FA18_OP(0xC17184, 0x2007, 0xC17186); /* C17184: move.l  D7, D0 */
-    FA18_OP(0xC17186, 0x4CDF, 0xC1718A); /* C17186: movem.l (A7)+, D7 */
-    FA18_OP(0xC1718A, 0x4E5E, 0xC1718C); /* C1718A: unlk    A6 */
-    FA18_RETURN(0xC1718C, 0x4E75); /* C1718C: rts */
-}
-
-int fa18_fn_C1718E(int entry) {
-    switch (entry) {
-    case 0: goto L_C1718E;
-    case 1: goto L_C171D0;
-    case 2: goto L_C171D8;
-    case 3: goto L_C171E2;
-    case 4: goto L_C171E8;
-    case 5: goto L_C171F2;
-    case 6: goto L_C171FA;
-    case 7: goto L_C17204;
-    case 8: goto L_C1720A;
-    case 9: goto L_C17214;
-    case 10: goto L_C1721A;
-    case 11: goto L_C17224;
-    case 12: goto L_C17254;
-    case 13: goto L_C1725A;
-    case 14: goto L_C17264;
-    case 15: goto L_C17274;
-    case 16: goto L_C1727A;
-    case 17: goto L_C1727C;
-    case 18: goto L_C17292;
-    case 19: goto L_C17298;
-    case 20: goto L_C172A2;
-    case 21: goto L_C172B2;
-    case 22: goto L_C172B8;
-    case 23: goto L_C172BA;
-    case 24: goto L_C172F0;
-    case 25: goto L_C17304;
-    case 26: goto L_C17308;
-    case 27: goto L_C1731A;
-    case 28: goto L_C17330;
-    case 29: goto L_C17360;
-    case 30: goto L_C173AE;
-    case 31: goto L_C173EE;
-    case 32: goto L_C173FA;
-    case 33: goto L_C17402;
-    case 34: goto L_C1741A;
-    case 35: goto L_C17424;
-    case 36: goto L_C1742C;
-    case 37: goto L_C17442;
-    case 38: goto L_C17446;
-    case 39: goto L_C1744C;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1718E:
-    FA18_CHECK(0xC1718E);
-    FA18_OP(0xC1718E, 0x4E56, 0xC17192); /* C1718E: link    A6, #-$16 */
-    FA18_OP(0xC17192, 0x48E7, 0xC17196); /* C17192: movem.l D2, -(A7) */
-    FA18_OP(0xC17196, 0x3039, 0xC1719C); /* C17196: move.w  $dff00a.l, D0 */
-    FA18_OP(0xC1719C, 0x3D40, 0xC171A0); /* C1719C: move.w  D0, (-$4,A6) */
-    FA18_OP(0xC171A0, 0x0240, 0xC171A4); /* C171A0: andi.w  #$ff, D0 */
-    FA18_OP(0xC171A4, 0x322E, 0xC171A8); /* C171A4: move.w  (-$4,A6), D1 */
-    FA18_OP(0xC171A8, 0xE041, 0xC171AA); /* C171A8: asr.w   #8, D1 */
-    FA18_OP(0xC171AA, 0x0241, 0xC171AE); /* C171AA: andi.w  #$ff, D1 */
-    FA18_OP(0xC171AE, 0x3D40, 0xC171B2); /* C171AE: move.w  D0, (-$6,A6) */
-    FA18_OP(0xC171B2, 0x9079, 0xC171B8); /* C171B2: sub.w   $c1ac06.l, D0 */
-    FA18_OP(0xC171B8, 0x3D41, 0xC171BC); /* C171B8: move.w  D1, (-$8,A6) */
-    FA18_OP(0xC171BC, 0x9279, 0xC171C2); /* C171BC: sub.w   $c1ac08.l, D1 */
-    FA18_OP(0xC171C2, 0x3D40, 0xC171C6); /* C171C2: move.w  D0, (-$a,A6) */
-    FA18_OP(0xC171C6, 0x3D41, 0xC171CA); /* C171C6: move.w  D1, (-$c,A6) */
-    FA18_OP(0xC171CA, 0x0C40, 0xC171CE); /* C171CA: cmpi.w  #-$80, D0 */
-    FA18_BCC(0xC171CE, 0x6C08, 0xC171D0, 0xC171D8, L_C171D8); /* C171CE: bge     $c171d8 */
-L_C171D0:
-    FA18_CHECK(0xC171D0);
-    FA18_OP(0xC171D0, 0x066E, 0xC171D6); /* C171D0: addi.w  #$100, (-$a,A6) */
-    FA18_JUMP(0xC171D6, 0x6010, 0xC171E8, L_C171E8); /* C171D6: bra     $c171e8 */
-L_C171D8:
-    FA18_CHECK(0xC171D8);
-    FA18_OP(0xC171D8, 0x302E, 0xC171DC); /* C171D8: move.w  (-$a,A6), D0 */
-    FA18_OP(0xC171DC, 0x0C40, 0xC171E0); /* C171DC: cmpi.w  #$7f, D0 */
-    FA18_BCC(0xC171E0, 0x6F06, 0xC171E2, 0xC171E8, L_C171E8); /* C171E0: ble     $c171e8 */
-L_C171E2:
-    FA18_CHECK(0xC171E2);
-    FA18_OP(0xC171E2, 0x046E, 0xC171E8); /* C171E2: subi.w  #$100, (-$a,A6) */
-L_C171E8:
-    FA18_CHECK(0xC171E8);
-    FA18_OP(0xC171E8, 0x302E, 0xC171EC); /* C171E8: move.w  (-$c,A6), D0 */
-    FA18_OP(0xC171EC, 0x0C40, 0xC171F0); /* C171EC: cmpi.w  #-$80, D0 */
-    FA18_BCC(0xC171F0, 0x6C08, 0xC171F2, 0xC171FA, L_C171FA); /* C171F0: bge     $c171fa */
-L_C171F2:
-    FA18_CHECK(0xC171F2);
-    FA18_OP(0xC171F2, 0x066E, 0xC171F8); /* C171F2: addi.w  #$100, (-$c,A6) */
-    FA18_JUMP(0xC171F8, 0x6010, 0xC1720A, L_C1720A); /* C171F8: bra     $c1720a */
-L_C171FA:
-    FA18_CHECK(0xC171FA);
-    FA18_OP(0xC171FA, 0x302E, 0xC171FE); /* C171FA: move.w  (-$c,A6), D0 */
-    FA18_OP(0xC171FE, 0x0C40, 0xC17202); /* C171FE: cmpi.w  #$7f, D0 */
-    FA18_BCC(0xC17202, 0x6F06, 0xC17204, 0xC1720A, L_C1720A); /* C17202: ble     $c1720a */
-L_C17204:
-    FA18_CHECK(0xC17204);
-    FA18_OP(0xC17204, 0x046E, 0xC1720A); /* C17204: subi.w  #$100, (-$c,A6) */
-L_C1720A:
-    FA18_CHECK(0xC1720A);
-    FA18_OP(0xC1720A, 0x1039, 0xC17210); /* C1720A: move.b  $c457d8.l, D0 */
-    FA18_OP(0xC17210, 0x4A00, 0xC17212); /* C17210: tst.b   D0 */
-    FA18_BCC(0xC17212, 0x6610, 0xC17214, 0xC17224, L_C17224); /* C17212: bne     $c17224 */
-L_C17214:
-    FA18_CHECK(0xC17214);
-    FA18_OP(0xC17214, 0x4A6E, 0xC17218); /* C17214: tst.w   (-$c,A6) */
-    FA18_BCC(0xC17218, 0x6A0A, 0xC1721A, 0xC17224, L_C17224); /* C17218: bpl     $c17224 */
-L_C1721A:
-    FA18_CHECK(0xC1721A);
-    FA18_OP(0xC1721A, 0x302E, 0xC1721E); /* C1721A: move.w  (-$c,A6), D0 */
-    FA18_OP(0xC1721E, 0xE240, 0xC17220); /* C1721E: asr.w   #1, D0 */
-    FA18_OP(0xC17220, 0x3D40, 0xC17224); /* C17220: move.w  D0, (-$c,A6) */
-L_C17224:
-    FA18_CHECK(0xC17224);
-    FA18_OP(0xC17224, 0x3039, 0xC1722A); /* C17224: move.w  $c45776.l, D0 */
-    FA18_OP(0xC1722A, 0xD06E, 0xC1722E); /* C1722A: add.w   (-$a,A6), D0 */
-    FA18_OP(0xC1722E, 0x33C0, 0xC17234); /* C1722E: move.w  D0, $c45776.l */
-    FA18_OP(0xC17234, 0x3239, 0xC1723A); /* C17234: move.w  $c45778.l, D1 */
-    FA18_OP(0xC1723A, 0x926E, 0xC1723E); /* C1723A: sub.w   (-$c,A6), D1 */
-    FA18_OP(0xC1723E, 0x33C1, 0xC17244); /* C1723E: move.w  D1, $c45778.l */
-    FA18_OP(0xC17244, 0x3039, 0xC1724A); /* C17244: move.w  $c45776.l, D0 */
-    FA18_OP(0xC1724A, 0x3239, 0xC17250); /* C1724A: move.w  $c081b0.l, D1 */
-    FA18_OP(0xC17250, 0xB240, 0xC17252); /* C17250: cmp.w   D0, D1 */
-    FA18_BCC(0xC17252, 0x6D06, 0xC17254, 0xC1725A, L_C1725A); /* C17252: blt     $c1725a */
-L_C17254:
-    FA18_CHECK(0xC17254);
-    FA18_OP(0xC17254, 0x3239, 0xC1725A); /* C17254: move.w  $c45776.l, D1 */
-L_C1725A:
-    FA18_CHECK(0xC1725A);
-    FA18_OP(0xC1725A, 0x3039, 0xC17260); /* C1725A: move.w  $c081ac.l, D0 */
-    FA18_OP(0xC17260, 0xB041, 0xC17262); /* C17260: cmp.w   D1, D0 */
-    FA18_BCC(0xC17262, 0x6E18, 0xC17264, 0xC1727C, L_C1727C); /* C17262: bgt     $c1727c */
-L_C17264:
-    FA18_CHECK(0xC17264);
-    FA18_OP(0xC17264, 0x3039, 0xC1726A); /* C17264: move.w  $c45776.l, D0 */
-    FA18_OP(0xC1726A, 0x3239, 0xC17270); /* C1726A: move.w  $c081b0.l, D1 */
-    FA18_OP(0xC17270, 0xB240, 0xC17272); /* C17270: cmp.w   D0, D1 */
-    FA18_BCC(0xC17272, 0x6D06, 0xC17274, 0xC1727A, L_C1727A); /* C17272: blt     $c1727a */
-L_C17274:
-    FA18_CHECK(0xC17274);
-    FA18_OP(0xC17274, 0x3239, 0xC1727A); /* C17274: move.w  $c45776.l, D1 */
-L_C1727A:
-    FA18_CHECK(0xC1727A);
-    FA18_OP(0xC1727A, 0x2001, 0xC1727C); /* C1727A: move.l  D1, D0 */
-L_C1727C:
-    FA18_CHECK(0xC1727C);
-    FA18_OP(0xC1727C, 0x33C0, 0xC17282); /* C1727C: move.w  D0, $c45776.l */
-    FA18_OP(0xC17282, 0x3039, 0xC17288); /* C17282: move.w  $c45778.l, D0 */
-    FA18_OP(0xC17288, 0x3239, 0xC1728E); /* C17288: move.w  $c081b2.l, D1 */
-    FA18_OP(0xC1728E, 0xB240, 0xC17290); /* C1728E: cmp.w   D0, D1 */
-    FA18_BCC(0xC17290, 0x6D06, 0xC17292, 0xC17298, L_C17298); /* C17290: blt     $c17298 */
-L_C17292:
-    FA18_CHECK(0xC17292);
-    FA18_OP(0xC17292, 0x3239, 0xC17298); /* C17292: move.w  $c45778.l, D1 */
-L_C17298:
-    FA18_CHECK(0xC17298);
-    FA18_OP(0xC17298, 0x3039, 0xC1729E); /* C17298: move.w  $c081ae.l, D0 */
-    FA18_OP(0xC1729E, 0xB041, 0xC172A0); /* C1729E: cmp.w   D1, D0 */
-    FA18_BCC(0xC172A0, 0x6E18, 0xC172A2, 0xC172BA, L_C172BA); /* C172A0: bgt     $c172ba */
-L_C172A2:
-    FA18_CHECK(0xC172A2);
-    FA18_OP(0xC172A2, 0x3039, 0xC172A8); /* C172A2: move.w  $c45778.l, D0 */
-    FA18_OP(0xC172A8, 0x3239, 0xC172AE); /* C172A8: move.w  $c081b2.l, D1 */
-    FA18_OP(0xC172AE, 0xB240, 0xC172B0); /* C172AE: cmp.w   D0, D1 */
-    FA18_BCC(0xC172B0, 0x6D06, 0xC172B2, 0xC172B8, L_C172B8); /* C172B0: blt     $c172b8 */
-L_C172B2:
-    FA18_CHECK(0xC172B2);
-    FA18_OP(0xC172B2, 0x3239, 0xC172B8); /* C172B2: move.w  $c45778.l, D1 */
-L_C172B8:
-    FA18_CHECK(0xC172B8);
-    FA18_OP(0xC172B8, 0x2001, 0xC172BA); /* C172B8: move.l  D1, D0 */
-L_C172BA:
-    FA18_CHECK(0xC172BA);
-    FA18_OP(0xC172BA, 0x33C0, 0xC172C0); /* C172BA: move.w  D0, $c45778.l */
-    FA18_OP(0xC172C0, 0x33EE, 0xC172C8); /* C172C0: move.w  (-$6,A6), $c1ac06.l */
-    FA18_OP(0xC172C8, 0x33EE, 0xC172D0); /* C172C8: move.w  (-$8,A6), $c1ac08.l */
-    FA18_OP(0xC172D0, 0x3039, 0xC172D6); /* C172D0: move.w  $c45774.l, D0 */
-    FA18_OP(0xC172D6, 0x5240, 0xC172D8); /* C172D6: addq.w  #1, D0 */
-    FA18_OP(0xC172D8, 0x33C0, 0xC172DE); /* C172D8: move.w  D0, $c45774.l */
-    FA18_OP(0xC172DE, 0x1039, 0xC172E4); /* C172DE: move.b  $c458a0.l, D0 */
-    FA18_OP(0xC172E4, 0x1239, 0xC172EA); /* C172E4: move.b  $c458a1.l, D1 */
-    FA18_OP(0xC172EA, 0xB001, 0xC172EC); /* C172EA: cmp.b   D1, D0 */
-    FA18_BCC(0xC172EC, 0x6700, 0xC172F0, 0xC17424, L_C17424); /* C172EC: beq     $c17424 */
-L_C172F0:
-    FA18_CHECK(0xC172F0);
-    FA18_OP(0xC172F0, 0x1439, 0xC172F6); /* C172F0: move.b  $c458a3.l, D2 */
-    FA18_OP(0xC172F6, 0x5302, 0xC172F8); /* C172F6: subq.b  #1, D2 */
-    FA18_OP(0xC172F8, 0x13C2, 0xC172FE); /* C172F8: move.b  D2, $c458a3.l */
-    FA18_OP(0xC172FE, 0x4A02, 0xC17300); /* C172FE: tst.b   D2 */
-    FA18_BCC(0xC17300, 0x6A00, 0xC17304, 0xC17446, L_C17446); /* C17300: bpl     $c17446 */
-L_C17304:
-    FA18_CHECK(0xC17304);
-    FA18_OP(0xC17304, 0xB001, 0xC17306); /* C17304: cmp.b   D1, D0 */
-    FA18_BCC(0xC17306, 0x6F12, 0xC17308, 0xC1731A, L_C1731A); /* C17306: ble     $c1731a */
-L_C17308:
-    FA18_CHECK(0xC17308);
-    FA18_OP(0xC17308, 0x5300, 0xC1730A); /* C17308: subq.b  #1, D0 */
-    FA18_OP(0xC1730A, 0x13C0, 0xC17310); /* C1730A: move.b  D0, $c458a0.l */
-    FA18_OP(0xC17310, 0x13FC, 0xC17318); /* C17310: move.b  #$1, $c458a3.l */
-    FA18_JUMP(0xC17318, 0x6016, 0xC17330, L_C17330); /* C17318: bra     $c17330 */
-L_C1731A:
-    FA18_CHECK(0xC1731A);
-    FA18_OP(0xC1731A, 0x1039, 0xC17320); /* C1731A: move.b  $c458a0.l, D0 */
-    FA18_OP(0xC17320, 0x5200, 0xC17322); /* C17320: addq.b  #1, D0 */
-    FA18_OP(0xC17322, 0x13C0, 0xC17328); /* C17322: move.b  D0, $c458a0.l */
-    FA18_OP(0xC17328, 0x13FC, 0xC17330); /* C17328: move.b  #$2, $c458a3.l */
-L_C17330:
-    FA18_CHECK(0xC17330);
-    FA18_OP(0xC17330, 0x41F9, 0xC17336); /* C17330: lea     $c08510.l, A0 */
-    FA18_OP(0xC17336, 0x1039, 0xC1733C); /* C17336: move.b  $c458a0.l, D0 */
-    FA18_OP(0xC1733C, 0x4880, 0xC1733E); /* C1733C: ext.w   D0 */
-    FA18_OP(0xC1733E, 0x48C0, 0xC17340); /* C1733E: ext.l   D0 */
-    FA18_OP(0xC17340, 0x720F, 0xC17342); /* C17340: moveq   #$f, D1 */
-    FA18_OP(0xC17342, 0x9280, 0xC17344); /* C17342: sub.l   D0, D1 */
-    FA18_OP(0xC17344, 0xE981, 0xC17346); /* C17344: asl.l   #4, D1 */
-    FA18_OP(0xC17346, 0xE381, 0xC17348); /* C17346: asl.l   #1, D1 */
-    FA18_OP(0xC17348, 0xD1C1, 0xC1734A); /* C17348: adda.l  D1, A0 */
-    FA18_OP(0xC1734A, 0x7010, 0xC1734C); /* C1734A: moveq   #$10, D0 */
-    FA18_OP(0xC1734C, 0x2F00, 0xC1734E); /* C1734C: move.l  D0, -(A7) */
-    FA18_OP(0xC1734E, 0x2F08, 0xC17350); /* C1734E: move.l  A0, -(A7) */
-    FA18_OP(0xC17350, 0x4879, 0xC17356); /* C17350: pea     $c1822a.l */
-    FA18_OP(0xC17356, 0x2D48, 0xC1735A); /* C17356: move.l  A0, (-$10,A6) */
-    FA18_CALL(0xC1735A, 0x4EB9, 0xC17360, 441, 0); /* C1735A: jsr     $c53ec0.l */
-L_C17360:
-    FA18_CHECK(0xC17360);
-    FA18_OP(0xC17360, 0x4FEF, 0xC17364); /* C17360: lea     ($c,A7), A7 */
-    FA18_OP(0xC17364, 0x3039, 0xC1736A); /* C17364: move.w  $c4566c.l, D0 */
-    FA18_OP(0xC1736A, 0x7201, 0xC1736C); /* C1736A: moveq   #$1, D1 */
-    FA18_OP(0xC1736C, 0x9240, 0xC1736E); /* C1736C: sub.w   D0, D1 */
-    FA18_OP(0xC1736E, 0x3D41, 0xC17372); /* C1736E: move.w  D1, (-$16,A6) */
-    FA18_OP(0xC17372, 0x48C1, 0xC17374); /* C17372: ext.l   D1 */
-    FA18_OP(0xC17374, 0xE581, 0xC17376); /* C17374: asl.l   #2, D1 */
-    FA18_OP(0xC17376, 0x2041, 0xC17378); /* C17376: movea.l D1, A0 */
-    FA18_OP(0xC17378, 0xD1FC, 0xC1737E); /* C17378: adda.l  #$c182ba, A0 */
-    FA18_OP(0xC1737E, 0x23D0, 0xC17384); /* C1737E: move.l  (A0), $c1821c.l */
-    FA18_OP(0xC17384, 0x302E, 0xC17388); /* C17384: move.w  (-$16,A6), D0 */
-    FA18_OP(0xC17388, 0x48C0, 0xC1738A); /* C17388: ext.l   D0 */
-    FA18_OP(0xC1738A, 0xE580, 0xC1738C); /* C1738A: asl.l   #2, D0 */
-    FA18_OP(0xC1738C, 0x2040, 0xC1738E); /* C1738C: movea.l D0, A0 */
-    FA18_OP(0xC1738E, 0xD1FC, 0xC17394); /* C1738E: adda.l  #$c182c2, A0 */
-    FA18_OP(0xC17394, 0x23D0, 0xC1739A); /* C17394: move.l  (A0), $c18232.l */
-    FA18_OP(0xC1739A, 0x7010, 0xC1739C); /* C1739A: moveq   #$10, D0 */
-    FA18_OP(0xC1739C, 0x2F00, 0xC1739E); /* C1739C: move.l  D0, -(A7) */
-    FA18_OP(0xC1739E, 0x2F2E, 0xC173A2); /* C1739E: move.l  (-$10,A6), -(A7) */
-    FA18_OP(0xC173A2, 0x4879, 0xC173A8); /* C173A2: pea     $c1822a.l */
-    FA18_CALL(0xC173A8, 0x4EB9, 0xC173AE, 441, 0); /* C173A8: jsr     $c53ec0.l */
-L_C173AE:
-    FA18_CHECK(0xC173AE);
-    FA18_OP(0xC173AE, 0x4FEF, 0xC173B2); /* C173AE: lea     ($c,A7), A7 */
-    FA18_OP(0xC173B2, 0x302E, 0xC173B6); /* C173B2: move.w  (-$16,A6), D0 */
-    FA18_OP(0xC173B6, 0x48C0, 0xC173B8); /* C173B6: ext.l   D0 */
-    FA18_OP(0xC173B8, 0xE580, 0xC173BA); /* C173B8: asl.l   #2, D0 */
-    FA18_OP(0xC173BA, 0x2040, 0xC173BC); /* C173BA: movea.l D0, A0 */
-    FA18_OP(0xC173BC, 0xD1FC, 0xC173C2); /* C173BC: adda.l  #$c182ba, A0 */
-    FA18_OP(0xC173C2, 0x23D0, 0xC173C8); /* C173C2: move.l  (A0), $c1821c.l */
-    FA18_OP(0xC173C8, 0x302E, 0xC173CC); /* C173C8: move.w  (-$16,A6), D0 */
-    FA18_OP(0xC173CC, 0x48C0, 0xC173CE); /* C173CC: ext.l   D0 */
-    FA18_OP(0xC173CE, 0xE580, 0xC173D0); /* C173CE: asl.l   #2, D0 */
-    FA18_OP(0xC173D0, 0x2040, 0xC173D2); /* C173D0: movea.l D0, A0 */
-    FA18_OP(0xC173D2, 0xD1FC, 0xC173D8); /* C173D2: adda.l  #$c182c2, A0 */
-    FA18_OP(0xC173D8, 0x23D0, 0xC173DE); /* C173D8: move.l  (A0), $c18232.l */
-    FA18_OP(0xC173DE, 0x1039, 0xC173E4); /* C173DE: move.b  $c458a0.l, D0 */
-    FA18_OP(0xC173E4, 0x1239, 0xC173EA); /* C173E4: move.b  $c458a1.l, D1 */
-    FA18_OP(0xC173EA, 0xB001, 0xC173EC); /* C173EA: cmp.b   D1, D0 */
-    FA18_BCC(0xC173EC, 0x6658, 0xC173EE, 0xC17446, L_C17446); /* C173EC: bne     $c17446 */
-L_C173EE:
-    FA18_CHECK(0xC173EE);
-    FA18_OP(0xC173EE, 0x2D79, 0xC173F6); /* C173EE: move.l  $c45660.l, (-$14,A6) */
-    FA18_OP(0xC173F6, 0x426E, 0xC173FA); /* C173F6: clr.w   (-$2,A6) */
-L_C173FA:
-    FA18_CHECK(0xC173FA);
-    FA18_OP(0xC173FA, 0x0C6E, 0xC17400); /* C173FA: cmpi.w  #$10, (-$2,A6) */
-    FA18_BCC(0xC17400, 0x6C18, 0xC17402, 0xC1741A, L_C1741A); /* C17400: bge     $c1741a */
-L_C17402:
-    FA18_CHECK(0xC17402);
-    FA18_OP(0xC17402, 0x206E, 0xC17406); /* C17402: movea.l (-$10,A6), A0 */
-    FA18_OP(0xC17406, 0x226E, 0xC1740A); /* C17406: movea.l (-$14,A6), A1 */
-    FA18_OP(0xC1740A, 0x3290, 0xC1740C); /* C1740A: move.w  (A0), (A1) */
-    FA18_OP(0xC1740C, 0x54AE, 0xC17410); /* C1740C: addq.l  #2, (-$10,A6) */
-    FA18_OP(0xC17410, 0x54AE, 0xC17414); /* C17410: addq.l  #2, (-$14,A6) */
-    FA18_OP(0xC17414, 0x526E, 0xC17418); /* C17414: addq.w  #1, (-$2,A6) */
-    FA18_JUMP(0xC17418, 0x60E0, 0xC173FA, L_C173FA); /* C17418: bra     $c173fa */
-L_C1741A:
-    FA18_CHECK(0xC1741A);
-    FA18_OP(0xC1741A, 0x13FC, 0xC17422); /* C1741A: move.b  #$3, $c458a4.l */
-    FA18_JUMP(0xC17422, 0x6022, 0xC17446, L_C17446); /* C17422: bra     $c17446 */
-L_C17424:
-    FA18_CHECK(0xC17424);
-    FA18_OP(0xC17424, 0x4A39, 0xC1742A); /* C17424: tst.b   $c458a4.l */
-    FA18_BCC(0xC1742A, 0x671A, 0xC1742C, 0xC17446, L_C17446); /* C1742A: beq     $c17446 */
-L_C1742C:
-    FA18_CHECK(0xC1742C);
-    FA18_OP(0xC1742C, 0x7010, 0xC1742E); /* C1742C: moveq   #$10, D0 */
-    FA18_OP(0xC1742E, 0x2F00, 0xC17430); /* C1742E: move.l  D0, -(A7) */
-    FA18_OP(0xC17430, 0x2F39, 0xC17436); /* C17430: move.l  $c45660.l, -(A7) */
-    FA18_OP(0xC17436, 0x4879, 0xC1743C); /* C17436: pea     $c1822a.l */
-    FA18_CALL(0xC1743C, 0x4EB9, 0xC17442, 441, 0); /* C1743C: jsr     $c53ec0.l */
-L_C17442:
-    FA18_CHECK(0xC17442);
-    FA18_OP(0xC17442, 0x4FEF, 0xC17446); /* C17442: lea     ($c,A7), A7 */
-L_C17446:
-    FA18_CHECK(0xC17446);
-    FA18_CALL(0xC17446, 0x4EB9, 0xC1744C, 208, 1); /* C17446: jsr     $c24fe8.l */
-L_C1744C:
-    FA18_CHECK(0xC1744C);
-    FA18_OP(0xC1744C, 0x7000, 0xC1744E); /* C1744C: moveq   #$0, D0 */
-    FA18_OP(0xC1744E, 0x4CDF, 0xC17452); /* C1744E: movem.l (A7)+, D2 */
-    FA18_OP(0xC17452, 0x4E5E, 0xC17454); /* C17452: unlk    A6 */
-    FA18_RETURN(0xC17454, 0x4E75); /* C17454: rts */
-}
-
-int fa18_fn_C17456(int entry) {
-    switch (entry) {
-    case 0: goto L_C17456;
-    case 1: goto L_C17488;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17456:
-    FA18_CHECK(0xC17456);
-    FA18_OP(0xC17456, 0x13FC, 0xC1745E); /* C17456: move.b  #$2, $c1abf8.l */
-    FA18_OP(0xC1745E, 0x4239, 0xC17464); /* C1745E: clr.b   $c1abf9.l */
-    FA18_OP(0xC17464, 0x23FC, 0xC1746E); /* C17464: move.l  #$c081b4, $c1abfa.l */
-    FA18_OP(0xC1746E, 0x41FA, 0xC17472); /* C1746E: lea     (-$2e2,PC), A0; ($c1718e) */
-    FA18_OP(0xC17472, 0x23C8, 0xC17478); /* C17472: move.l  A0, $c1ac02.l */
-    FA18_OP(0xC17478, 0x4879, 0xC1747E); /* C17478: pea     $c1abf0.l */
-    FA18_OP(0xC1747E, 0x7005, 0xC17480); /* C1747E: moveq   #$5, D0 */
-    FA18_OP(0xC17480, 0x2F00, 0xC17482); /* C17480: move.l  D0, -(A7) */
-    FA18_CALL(0xC17482, 0x4EB9, 0xC17488, 434, 0); /* C17482: jsr     $c53b00.l */
-L_C17488:
-    FA18_CHECK(0xC17488);
-    FA18_OP(0xC17488, 0x508F, 0xC1748A); /* C17488: addq.l  #8, A7 */
-    FA18_RETURN(0xC1748A, 0x4E75); /* C1748A: rts */
-}
-
-int fa18_fn_C1748C(int entry) {
-    switch (entry) {
-    case 0: goto L_C1748C;
-    case 1: goto L_C1749C;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1748C:
-    FA18_CHECK(0xC1748C);
-    FA18_OP(0xC1748C, 0x4879, 0xC17492); /* C1748C: pea     $c1abf0.l */
-    FA18_OP(0xC17492, 0x7005, 0xC17494); /* C17492: moveq   #$5, D0 */
-    FA18_OP(0xC17494, 0x2F00, 0xC17496); /* C17494: move.l  D0, -(A7) */
-    FA18_CALL(0xC17496, 0x4EB9, 0xC1749C, 435, 0); /* C17496: jsr     $c53b18.l */
-L_C1749C:
-    FA18_CHECK(0xC1749C);
-    FA18_OP(0xC1749C, 0x508F, 0xC1749E); /* C1749C: addq.l  #8, A7 */
-    FA18_RETURN(0xC1749E, 0x4E75); /* C1749E: rts */
-}
-
-int fa18_fn_C17B08(int entry) {
-    switch (entry) {
-    case 0: goto L_C17B08;
-    case 1: goto L_C17B26;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17B08:
-    FA18_CHECK(0xC17B08);
-    FA18_OP(0xC17B08, 0x4E56, 0xC17B0C); /* C17B08: link    A6, #$0 */
-    FA18_OP(0xC17B0C, 0x202E, 0xC17B10); /* C17B0C: move.l  ($8,A6), D0 */
-    FA18_OP(0xC17B10, 0xE580, 0xC17B12); /* C17B10: asl.l   #2, D0 */
-    FA18_OP(0xC17B12, 0x2040, 0xC17B14); /* C17B12: movea.l D0, A0 */
-    FA18_OP(0xC17B14, 0xD1FC, 0xC17B1A); /* C17B14: adda.l  #$c4fe38, A0 */
-    FA18_OP(0xC17B1A, 0x4290, 0xC17B1C); /* C17B1A: clr.l   (A0) */
-    FA18_OP(0xC17B1C, 0x2F2E, 0xC17B20); /* C17B1C: move.l  ($8,A6), -(A7) */
-    FA18_CALL(0xC17B20, 0x4EB9, 0xC17B26, 419, 0); /* C17B20: jsr     $c4ffb0.l */
-L_C17B26:
-    FA18_CHECK(0xC17B26);
-    FA18_OP(0xC17B26, 0x588F, 0xC17B28); /* C17B26: addq.l  #4, A7 */
-    FA18_OP(0xC17B28, 0x4E5E, 0xC17B2A); /* C17B28: unlk    A6 */
-    FA18_RETURN(0xC17B2A, 0x4E75); /* C17B2A: rts */
-}
-
-int fa18_fn_C17B2C(int entry) {
-    switch (entry) {
-    case 0: goto L_C17B2C;
-    case 1: goto L_C17B46;
-    case 2: goto L_C17B4C;
-    case 3: goto L_C17B8C;
-    case 4: goto L_C17B8E;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17B2C:
-    FA18_CHECK(0xC17B2C);
-    FA18_OP(0xC17B2C, 0x4E56, 0xC17B30); /* C17B2C: link    A6, #$0 */
-    FA18_OP(0xC17B30, 0x48E7, 0xC17B34); /* C17B30: movem.l D2, -(A7) */
-    FA18_OP(0xC17B34, 0x202E, 0xC17B38); /* C17B34: move.l  ($8,A6), D0 */
-    FA18_OP(0xC17B38, 0xE580, 0xC17B3A); /* C17B38: asl.l   #2, D0 */
-    FA18_OP(0xC17B3A, 0x2040, 0xC17B3C); /* C17B3A: movea.l D0, A0 */
-    FA18_OP(0xC17B3C, 0xD1FC, 0xC17B42); /* C17B3C: adda.l  #$c0a438, A0 */
-    FA18_OP(0xC17B42, 0x4A90, 0xC17B44); /* C17B42: tst.l   (A0) */
-    FA18_BCC(0xC17B44, 0x6748, 0xC17B46, 0xC17B8E, L_C17B8E); /* C17B44: beq     $c17b8e */
-L_C17B46:
-    FA18_CHECK(0xC17B46);
-    FA18_OP(0xC17B46, 0x2F2E, 0xC17B4A); /* C17B46: move.l  ($c,A6), -(A7) */
-    FA18_CALL(0xC17B4A, 0x61BC, 0xC17B4C, 101, 0); /* C17B4A: bsr     $c17b08 */
-L_C17B4C:
-    FA18_CHECK(0xC17B4C);
-    FA18_OP(0xC17B4C, 0x588F, 0xC17B4E); /* C17B4C: addq.l  #4, A7 */
-    FA18_OP(0xC17B4E, 0x202E, 0xC17B52); /* C17B4E: move.l  ($8,A6), D0 */
-    FA18_OP(0xC17B52, 0xE580, 0xC17B54); /* C17B52: asl.l   #2, D0 */
-    FA18_OP(0xC17B54, 0x2040, 0xC17B56); /* C17B54: movea.l D0, A0 */
-    FA18_OP(0xC17B56, 0xD1FC, 0xC17B5C); /* C17B56: adda.l  #$c0a438, A0 */
-    FA18_OP(0xC17B5C, 0x2250, 0xC17B5E); /* C17B5C: movea.l (A0), A1 */
-    FA18_OP(0xC17B5E, 0x7210, 0xC17B60); /* C17B5E: moveq   #$10, D1 */
-    FA18_OP(0xC17B60, 0x242E, 0xC17B64); /* C17B60: move.l  ($10,A6), D2 */
-    FA18_OP(0xC17B64, 0xE3A2, 0xC17B66); /* C17B64: asl.l   D1, D2 */
-    FA18_OP(0xC17B66, 0x2342, 0xC17B6A); /* C17B66: move.l  D2, ($c,A1) */
-    FA18_OP(0xC17B6A, 0x222E, 0xC17B6E); /* C17B6A: move.l  ($c,A6), D1 */
-    FA18_OP(0xC17B6E, 0xE581, 0xC17B70); /* C17B6E: asl.l   #2, D1 */
-    FA18_OP(0xC17B70, 0x2041, 0xC17B72); /* C17B70: movea.l D1, A0 */
-    FA18_OP(0xC17B72, 0xD1FC, 0xC17B78); /* C17B72: adda.l  #$c4fe38, A0 */
-    FA18_OP(0xC17B78, 0x2240, 0xC17B7A); /* C17B78: movea.l D0, A1 */
-    FA18_OP(0xC17B7A, 0xD3FC, 0xC17B80); /* C17B7A: adda.l  #$c0a438, A1 */
-    FA18_OP(0xC17B80, 0x2091, 0xC17B82); /* C17B80: move.l  (A1), (A0) */
-    FA18_OP(0xC17B82, 0x2F2E, 0xC17B86); /* C17B82: move.l  ($c,A6), -(A7) */
-    FA18_CALL(0xC17B86, 0x4EB9, 0xC17B8C, 419, 0); /* C17B86: jsr     $c4ffb0.l */
-L_C17B8C:
-    FA18_CHECK(0xC17B8C);
-    FA18_OP(0xC17B8C, 0x588F, 0xC17B8E); /* C17B8C: addq.l  #4, A7 */
-L_C17B8E:
-    FA18_CHECK(0xC17B8E);
-    FA18_OP(0xC17B8E, 0x4CDF, 0xC17B92); /* C17B8E: movem.l (A7)+, D2 */
-    FA18_OP(0xC17B92, 0x4E5E, 0xC17B94); /* C17B92: unlk    A6 */
-    FA18_RETURN(0xC17B94, 0x4E75); /* C17B94: rts */
-}
-
-int fa18_fn_C17C62(int entry) {
-    switch (entry) {
-    case 0: goto L_C17C62;
-    case 1: goto L_C17C70;
-    case 2: goto L_C17C78;
-    case 3: goto L_C17CCA;
-    case 4: goto L_C17CDC;
-    case 5: goto L_C17CE2;
-    case 6: goto L_C17CF0;
-    case 7: goto L_C17CF2;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17C62:
-    FA18_CHECK(0xC17C62);
-    FA18_OP(0xC17C62, 0x4E56, 0xC17C66); /* C17C62: link    A6, #$0 */
-    FA18_OP(0xC17C66, 0x0839, 0xC17C6E); /* C17C66: btst    #$0, $c45b5b.l */
-    FA18_BCC(0xC17C6E, 0x6772, 0xC17C70, 0xC17CE2, L_C17CE2); /* C17C6E: beq     $c17ce2 */
-L_C17C70:
-    FA18_CHECK(0xC17C70);
-    FA18_OP(0xC17C70, 0x4AB9, 0xC17C76); /* C17C70: tst.l   $c0a43c.l */
-    FA18_BCC(0xC17C76, 0x677A, 0xC17C78, 0xC17CF2, L_C17CF2); /* C17C76: beq     $c17cf2 */
-L_C17C78:
-    FA18_CHECK(0xC17C78);
-    FA18_OP(0xC17C78, 0x2079, 0xC17C7E); /* C17C78: movea.l $c0a43c.l, A0 */
-    FA18_OP(0xC17C7E, 0x7000, 0xC17C80); /* C17C7E: moveq   #$0, D0 */
-    FA18_OP(0xC17C80, 0x2140, 0xC17C84); /* C17C80: move.l  D0, ($1c,A0) */
-    FA18_OP(0xC17C84, 0x2279, 0xC17C8A); /* C17C84: movea.l $c0a438.l, A1 */
-    FA18_OP(0xC17C8A, 0x2340, 0xC17C8E); /* C17C8A: move.l  D0, ($1c,A1) */
-    FA18_OP(0xC17C8E, 0x2140, 0xC17C92); /* C17C8E: move.l  D0, ($18,A0) */
-    FA18_OP(0xC17C92, 0x2279, 0xC17C98); /* C17C92: movea.l $c0a438.l, A1 */
-    FA18_OP(0xC17C98, 0x2340, 0xC17C9C); /* C17C98: move.l  D0, ($18,A1) */
-    FA18_OP(0xC17C9C, 0x7010, 0xC17C9E); /* C17C9C: moveq   #$10, D0 */
-    FA18_OP(0xC17C9E, 0x222E, 0xC17CA2); /* C17C9E: move.l  ($8,A6), D1 */
-    FA18_OP(0xC17CA2, 0xE1A1, 0xC17CA4); /* C17CA2: asl.l   D0, D1 */
-    FA18_OP(0xC17CA4, 0x2279, 0xC17CAA); /* C17CA4: movea.l $c0a438.l, A1 */
-    FA18_OP(0xC17CAA, 0x2341, 0xC17CAE); /* C17CAA: move.l  D1, ($8,A1) */
-    FA18_OP(0xC17CAE, 0x202E, 0xC17CB2); /* C17CAE: move.l  ($8,A6), D0 */
-    FA18_OP(0xC17CB2, 0x5480, 0xC17CB4); /* C17CB2: addq.l  #2, D0 */
-    FA18_OP(0xC17CB4, 0x7210, 0xC17CB6); /* C17CB4: moveq   #$10, D1 */
-    FA18_OP(0xC17CB6, 0xE3A0, 0xC17CB8); /* C17CB6: asl.l   D1, D0 */
-    FA18_OP(0xC17CB8, 0x2140, 0xC17CBC); /* C17CB8: move.l  D0, ($8,A0) */
-    FA18_OP(0xC17CBC, 0x2F2E, 0xC17CC0); /* C17CBC: move.l  ($c,A6), -(A7) */
-    FA18_OP(0xC17CC0, 0x7000, 0xC17CC2); /* C17CC0: moveq   #$0, D0 */
-    FA18_OP(0xC17CC2, 0x2F00, 0xC17CC4); /* C17CC2: move.l  D0, -(A7) */
-    FA18_OP(0xC17CC4, 0x2F00, 0xC17CC6); /* C17CC4: move.l  D0, -(A7) */
-    FA18_CALL(0xC17CC6, 0x6100, 0xC17CCA, 102, 0); /* C17CC6: bsr     $c17b2c */
-L_C17CCA:
-    FA18_CHECK(0xC17CCA);
-    FA18_OP(0xC17CCA, 0x4FEF, 0xC17CCE); /* C17CCA: lea     ($c,A7), A7 */
-    FA18_OP(0xC17CCE, 0x2F2E, 0xC17CD2); /* C17CCE: move.l  ($c,A6), -(A7) */
-    FA18_OP(0xC17CD2, 0x7001, 0xC17CD4); /* C17CD2: moveq   #$1, D0 */
-    FA18_OP(0xC17CD4, 0x2F00, 0xC17CD6); /* C17CD4: move.l  D0, -(A7) */
-    FA18_OP(0xC17CD6, 0x2F00, 0xC17CD8); /* C17CD6: move.l  D0, -(A7) */
-    FA18_CALL(0xC17CD8, 0x6100, 0xC17CDC, 102, 0); /* C17CD8: bsr     $c17b2c */
-L_C17CDC:
-    FA18_CHECK(0xC17CDC);
-    FA18_OP(0xC17CDC, 0x4FEF, 0xC17CE0); /* C17CDC: lea     ($c,A7), A7 */
-    FA18_JUMP(0xC17CE0, 0x6010, 0xC17CF2, L_C17CF2); /* C17CE0: bra     $c17cf2 */
-L_C17CE2:
-    FA18_CHECK(0xC17CE2);
-    FA18_OP(0xC17CE2, 0x202E, 0xC17CE6); /* C17CE2: move.l  ($c,A6), D0 */
-    FA18_OP(0xC17CE6, 0xE480, 0xC17CE8); /* C17CE6: asr.l   #2, D0 */
-    FA18_OP(0xC17CE8, 0x2F00, 0xC17CEA); /* C17CE8: move.l  D0, -(A7) */
-    FA18_OP(0xC17CEA, 0x2F2E, 0xC17CEE); /* C17CEA: move.l  ($8,A6), -(A7) */
-    FA18_CALL(0xC17CEE, 0x6106, 0xC17CF0, 104, 0); /* C17CEE: bsr     $c17cf6 */
-L_C17CF0:
-    FA18_CHECK(0xC17CF0);
-    FA18_OP(0xC17CF0, 0x508F, 0xC17CF2); /* C17CF0: addq.l  #8, A7 */
-L_C17CF2:
-    FA18_CHECK(0xC17CF2);
-    FA18_OP(0xC17CF2, 0x4E5E, 0xC17CF4); /* C17CF2: unlk    A6 */
-    FA18_RETURN(0xC17CF4, 0x4E75); /* C17CF4: rts */
-}
-
-int fa18_fn_C17CF6(int entry) {
-    switch (entry) {
-    case 0: goto L_C17CF6;
-    case 1: goto L_C17D04;
-    case 2: goto L_C17D0C;
-    case 3: goto L_C17D52;
-    case 4: goto L_C17D66;
-    case 5: goto L_C17D6A;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17CF6:
-    FA18_CHECK(0xC17CF6);
-    FA18_OP(0xC17CF6, 0x4E56, 0xC17CFA); /* C17CF6: link    A6, #$0 */
-    FA18_OP(0xC17CFA, 0x0839, 0xC17D02); /* C17CFA: btst    #$1, $c45b5b.l */
-    FA18_BCC(0xC17D02, 0x6766, 0xC17D04, 0xC17D6A, L_C17D6A); /* C17D02: beq     $c17d6a */
-L_C17D04:
-    FA18_CHECK(0xC17D04);
-    FA18_OP(0xC17D04, 0x4AB9, 0xC17D0A); /* C17D04: tst.l   $c0a444.l */
-    FA18_BCC(0xC17D0A, 0x675E, 0xC17D0C, 0xC17D6A, L_C17D6A); /* C17D0A: beq     $c17d6a */
-L_C17D0C:
-    FA18_CHECK(0xC17D0C);
-    FA18_OP(0xC17D0C, 0x2079, 0xC17D12); /* C17D0C: movea.l $c0a440.l, A0 */
-    FA18_OP(0xC17D12, 0x2279, 0xC17D18); /* C17D12: movea.l $c0a444.l, A1 */
-    FA18_OP(0xC17D18, 0x7000, 0xC17D1A); /* C17D18: moveq   #$0, D0 */
-    FA18_OP(0xC17D1A, 0x2340, 0xC17D1E); /* C17D1A: move.l  D0, ($1c,A1) */
-    FA18_OP(0xC17D1E, 0x2140, 0xC17D22); /* C17D1E: move.l  D0, ($1c,A0) */
-    FA18_OP(0xC17D22, 0x2340, 0xC17D26); /* C17D22: move.l  D0, ($18,A1) */
-    FA18_OP(0xC17D26, 0x2140, 0xC17D2A); /* C17D26: move.l  D0, ($18,A0) */
-    FA18_OP(0xC17D2A, 0x7010, 0xC17D2C); /* C17D2A: moveq   #$10, D0 */
-    FA18_OP(0xC17D2C, 0x222E, 0xC17D30); /* C17D2C: move.l  ($8,A6), D1 */
-    FA18_OP(0xC17D30, 0xE1A1, 0xC17D32); /* C17D30: asl.l   D0, D1 */
-    FA18_OP(0xC17D32, 0x2141, 0xC17D36); /* C17D32: move.l  D1, ($8,A0) */
-    FA18_OP(0xC17D36, 0x202E, 0xC17D3A); /* C17D36: move.l  ($8,A6), D0 */
-    FA18_OP(0xC17D3A, 0x5480, 0xC17D3C); /* C17D3A: addq.l  #2, D0 */
-    FA18_OP(0xC17D3C, 0x7210, 0xC17D3E); /* C17D3C: moveq   #$10, D1 */
-    FA18_OP(0xC17D3E, 0xE3A0, 0xC17D40); /* C17D3E: asl.l   D1, D0 */
-    FA18_OP(0xC17D40, 0x2340, 0xC17D44); /* C17D40: move.l  D0, ($8,A1) */
-    FA18_OP(0xC17D44, 0x2F2E, 0xC17D48); /* C17D44: move.l  ($c,A6), -(A7) */
-    FA18_OP(0xC17D48, 0x42A7, 0xC17D4A); /* C17D48: clr.l   -(A7) */
-    FA18_OP(0xC17D4A, 0x7002, 0xC17D4C); /* C17D4A: moveq   #$2, D0 */
-    FA18_OP(0xC17D4C, 0x2F00, 0xC17D4E); /* C17D4C: move.l  D0, -(A7) */
-    FA18_CALL(0xC17D4E, 0x6100, 0xC17D52, 102, 0); /* C17D4E: bsr     $c17b2c */
-L_C17D52:
-    FA18_CHECK(0xC17D52);
-    FA18_OP(0xC17D52, 0x4FEF, 0xC17D56); /* C17D52: lea     ($c,A7), A7 */
-    FA18_OP(0xC17D56, 0x2F2E, 0xC17D5A); /* C17D56: move.l  ($c,A6), -(A7) */
-    FA18_OP(0xC17D5A, 0x7001, 0xC17D5C); /* C17D5A: moveq   #$1, D0 */
-    FA18_OP(0xC17D5C, 0x2F00, 0xC17D5E); /* C17D5C: move.l  D0, -(A7) */
-    FA18_OP(0xC17D5E, 0x7003, 0xC17D60); /* C17D5E: moveq   #$3, D0 */
-    FA18_OP(0xC17D60, 0x2F00, 0xC17D62); /* C17D60: move.l  D0, -(A7) */
-    FA18_CALL(0xC17D62, 0x6100, 0xC17D66, 102, 0); /* C17D62: bsr     $c17b2c */
-L_C17D66:
-    FA18_CHECK(0xC17D66);
-    FA18_OP(0xC17D66, 0x4FEF, 0xC17D6A); /* C17D66: lea     ($c,A7), A7 */
-L_C17D6A:
-    FA18_CHECK(0xC17D6A);
-    FA18_OP(0xC17D6A, 0x4E5E, 0xC17D6C); /* C17D6A: unlk    A6 */
-    FA18_RETURN(0xC17D6C, 0x4E75); /* C17D6C: rts */
-}
-
-int fa18_fn_C17D6E(int entry) {
-    switch (entry) {
-    case 0: goto L_C17D6E;
-    case 1: goto L_C17D7C;
-    case 2: goto L_C17D8A;
-    case 3: goto L_C17D90;
-    case 4: goto L_C17DA2;
-    case 5: goto L_C17DA6;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17D6E:
-    FA18_CHECK(0xC17D6E);
-    FA18_OP(0xC17D6E, 0x4E56, 0xC17D72); /* C17D6E: link    A6, #$0 */
-    FA18_OP(0xC17D72, 0x0839, 0xC17D7A); /* C17D72: btst    #$0, $c45b5b.l */
-    FA18_BCC(0xC17D7A, 0x6714, 0xC17D7C, 0xC17D90, L_C17D90); /* C17D7A: beq     $c17d90 */
-L_C17D7C:
-    FA18_CHECK(0xC17D7C);
-    FA18_OP(0xC17D7C, 0x2F2E, 0xC17D80); /* C17D7C: move.l  ($10,A6), -(A7) */
-    FA18_OP(0xC17D80, 0x2F2E, 0xC17D84); /* C17D80: move.l  ($c,A6), -(A7) */
-    FA18_OP(0xC17D84, 0x2F2E, 0xC17D88); /* C17D84: move.l  ($8,A6), -(A7) */
-    FA18_CALL(0xC17D88, 0x6120, 0xC17D8A, 106, 0); /* C17D88: bsr     $c17daa */
-L_C17D8A:
-    FA18_CHECK(0xC17D8A);
-    FA18_OP(0xC17D8A, 0x4FEF, 0xC17D8E); /* C17D8A: lea     ($c,A7), A7 */
-    FA18_JUMP(0xC17D8E, 0x6016, 0xC17DA6, L_C17DA6); /* C17D8E: bra     $c17da6 */
-L_C17D90:
-    FA18_CHECK(0xC17D90);
-    FA18_OP(0xC17D90, 0x202E, 0xC17D94); /* C17D90: move.l  ($c,A6), D0 */
-    FA18_OP(0xC17D94, 0xE480, 0xC17D96); /* C17D94: asr.l   #2, D0 */
-    FA18_OP(0xC17D96, 0x2F2E, 0xC17D9A); /* C17D96: move.l  ($10,A6), -(A7) */
-    FA18_OP(0xC17D9A, 0x2F00, 0xC17D9C); /* C17D9A: move.l  D0, -(A7) */
-    FA18_OP(0xC17D9C, 0x2F2E, 0xC17DA0); /* C17D9C: move.l  ($8,A6), -(A7) */
-    FA18_CALL(0xC17DA0, 0x6108, 0xC17DA2, 106, 0); /* C17DA0: bsr     $c17daa */
-L_C17DA2:
-    FA18_CHECK(0xC17DA2);
-    FA18_OP(0xC17DA2, 0x4FEF, 0xC17DA6); /* C17DA2: lea     ($c,A7), A7 */
-L_C17DA6:
-    FA18_CHECK(0xC17DA6);
-    FA18_OP(0xC17DA6, 0x4E5E, 0xC17DA8); /* C17DA6: unlk    A6 */
-    FA18_RETURN(0xC17DA8, 0x4E75); /* C17DA8: rts */
-}
-
-int fa18_fn_C17DAA(int entry) {
-    switch (entry) {
-    case 0: goto L_C17DAA;
-    case 1: goto L_C17DBE;
-    case 2: goto L_C17DC6;
-    case 3: goto L_C17DEA;
-    case 4: goto L_C17E22;
-    case 5: goto L_C17E42;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17DAA:
-    FA18_CHECK(0xC17DAA);
-    FA18_OP(0xC17DAA, 0x4E56, 0xC17DAE); /* C17DAA: link    A6, #$0 */
-    FA18_OP(0xC17DAE, 0x48E7, 0xC17DB2); /* C17DAE: movem.l D2, -(A7) */
-    FA18_OP(0xC17DB2, 0x0839, 0xC17DBA); /* C17DB2: btst    #$1, $c45b5b.l */
-    FA18_BCC(0xC17DBA, 0x6700, 0xC17DBE, 0xC17E42, L_C17E42); /* C17DBA: beq     $c17e42 */
-L_C17DBE:
-    FA18_CHECK(0xC17DBE);
-    FA18_OP(0xC17DBE, 0x4AB9, 0xC17DC4); /* C17DBE: tst.l   $c4fe3c.l */
-    FA18_BCC(0xC17DC4, 0x677C, 0xC17DC6, 0xC17E42, L_C17E42); /* C17DC4: beq     $c17e42 */
-L_C17DC6:
-    FA18_CHECK(0xC17DC6);
-    FA18_OP(0xC17DC6, 0x2079, 0xC17DCC); /* C17DC6: movea.l $c4fe3c.l, A0 */
-    FA18_OP(0xC17DCC, 0x7010, 0xC17DCE); /* C17DCC: moveq   #$10, D0 */
-    FA18_OP(0xC17DCE, 0x222E, 0xC17DD2); /* C17DCE: move.l  ($8,A6), D1 */
-    FA18_OP(0xC17DD2, 0xE1A1, 0xC17DD4); /* C17DD2: asl.l   D0, D1 */
-    FA18_OP(0xC17DD4, 0x2279, 0xC17DDA); /* C17DD4: movea.l $c4fe38.l, A1 */
-    FA18_OP(0xC17DDA, 0x92A9, 0xC17DDE); /* C17DDA: sub.l   ($8,A1), D1 */
-    FA18_OP(0xC17DDE, 0x2001, 0xC17DE0); /* C17DDE: move.l  D1, D0 */
-    FA18_OP(0xC17DE0, 0x222E, 0xC17DE4); /* C17DE0: move.l  ($10,A6), D1 */
-    FA18_CALL(0xC17DE4, 0x4EB9, 0xC17DEA, 427, 0); /* C17DE4: jsr     $c52ec8.l */
-L_C17DEA:
-    FA18_CHECK(0xC17DEA);
-    FA18_OP(0xC17DEA, 0x2140, 0xC17DEE); /* C17DEA: move.l  D0, ($18,A0) */
-    FA18_OP(0xC17DEE, 0x2279, 0xC17DF4); /* C17DEE: movea.l $c4fe38.l, A1 */
-    FA18_OP(0xC17DF4, 0x2340, 0xC17DF8); /* C17DF4: move.l  D0, ($18,A1) */
-    FA18_OP(0xC17DF8, 0x202E, 0xC17DFC); /* C17DF8: move.l  ($10,A6), D0 */
-    FA18_OP(0xC17DFC, 0x2140, 0xC17E00); /* C17DFC: move.l  D0, ($38,A0) */
-    FA18_OP(0xC17E00, 0x2279, 0xC17E06); /* C17E00: movea.l $c4fe38.l, A1 */
-    FA18_OP(0xC17E06, 0x2340, 0xC17E0A); /* C17E06: move.l  D0, ($38,A1) */
-    FA18_OP(0xC17E0A, 0x7210, 0xC17E0C); /* C17E0A: moveq   #$10, D1 */
-    FA18_OP(0xC17E0C, 0x242E, 0xC17E10); /* C17E0C: move.l  ($c,A6), D2 */
-    FA18_OP(0xC17E10, 0xE3A2, 0xC17E12); /* C17E10: asl.l   D1, D2 */
-    FA18_OP(0xC17E12, 0x94A9, 0xC17E16); /* C17E12: sub.l   ($c,A1), D2 */
-    FA18_OP(0xC17E16, 0x2002, 0xC17E18); /* C17E16: move.l  D2, D0 */
-    FA18_OP(0xC17E18, 0x222E, 0xC17E1C); /* C17E18: move.l  ($10,A6), D1 */
-    FA18_CALL(0xC17E1C, 0x4EB9, 0xC17E22, 427, 0); /* C17E1C: jsr     $c52ec8.l */
-L_C17E22:
-    FA18_CHECK(0xC17E22);
-    FA18_OP(0xC17E22, 0x2140, 0xC17E26); /* C17E22: move.l  D0, ($1c,A0) */
-    FA18_OP(0xC17E26, 0x2279, 0xC17E2C); /* C17E26: movea.l $c4fe38.l, A1 */
-    FA18_OP(0xC17E2C, 0x2340, 0xC17E30); /* C17E2C: move.l  D0, ($1c,A1) */
-    FA18_OP(0xC17E30, 0x202E, 0xC17E34); /* C17E30: move.l  ($10,A6), D0 */
-    FA18_OP(0xC17E34, 0x2140, 0xC17E38); /* C17E34: move.l  D0, ($3c,A0) */
-    FA18_OP(0xC17E38, 0x2279, 0xC17E3E); /* C17E38: movea.l $c4fe38.l, A1 */
-    FA18_OP(0xC17E3E, 0x2340, 0xC17E42); /* C17E3E: move.l  D0, ($3c,A1) */
-L_C17E42:
-    FA18_CHECK(0xC17E42);
-    FA18_OP(0xC17E42, 0x4CDF, 0xC17E46); /* C17E42: movem.l (A7)+, D2 */
-    FA18_OP(0xC17E46, 0x4E5E, 0xC17E48); /* C17E46: unlk    A6 */
-    FA18_RETURN(0xC17E48, 0x4E75); /* C17E48: rts */
-}
-
-int fa18_fn_C17E4A(int entry) {
-    switch (entry) {
-    case 0: goto L_C17E4A;
-    case 1: goto L_C17E5A;
-    case 2: goto L_C17E64;
-    case 3: goto L_C17E78;
-    case 4: goto L_C17EA0;
-    case 5: goto L_C17EC2;
-    case 6: goto L_C17ED6;
-    case 7: goto L_C17EDC;
-    case 8: goto L_C17EE2;
-    case 9: goto L_C17EEC;
-    case 10: goto L_C17EEE;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17E4A:
-    FA18_CHECK(0xC17E4A);
-    FA18_OP(0xC17E4A, 0x4E56, 0xC17E4E); /* C17E4A: link    A6, #-$4 */
-    FA18_OP(0xC17E4E, 0x0839, 0xC17E56); /* C17E4E: btst    #$4, $c45b5b.l */
-    FA18_BCC(0xC17E56, 0x6700, 0xC17E5A, 0xC17EDC, L_C17EDC); /* C17E56: beq     $c17edc */
-L_C17E5A:
-    FA18_CHECK(0xC17E5A);
-    FA18_OP(0xC17E5A, 0x4AB9, 0xC17E60); /* C17E5A: tst.l   $c0a45c.l */
-    FA18_BCC(0xC17E60, 0x6700, 0xC17E64, 0xC17EEE, L_C17EEE); /* C17E60: beq     $c17eee */
-L_C17E64:
-    FA18_CHECK(0xC17E64);
-    FA18_OP(0xC17E64, 0x2079, 0xC17E6A); /* C17E64: movea.l $c0a458.l, A0 */
-    FA18_OP(0xC17E6A, 0x7006, 0xC17E6C); /* C17E6A: moveq   #$6, D0 */
-    FA18_OP(0xC17E6C, 0x2F00, 0xC17E6E); /* C17E6C: move.l  D0, -(A7) */
-    FA18_OP(0xC17E6E, 0x2F48, 0xC17E72); /* C17E6E: move.l  A0, ($4,A7) */
-    FA18_CALL(0xC17E72, 0x4EB9, 0xC17E78, 426, 0); /* C17E72: jsr     $c50b02.l */
-L_C17E78:
-    FA18_CHECK(0xC17E78);
-    FA18_OP(0xC17E78, 0x588F, 0xC17E7A); /* C17E78: addq.l  #4, A7 */
-    FA18_OP(0xC17E7A, 0x0680, 0xC17E80); /* C17E7A: addi.l  #$168, D0 */
-    FA18_OP(0xC17E80, 0x7210, 0xC17E82); /* C17E80: moveq   #$10, D1 */
-    FA18_OP(0xC17E82, 0xE3A0, 0xC17E84); /* C17E82: asl.l   D1, D0 */
-    FA18_OP(0xC17E84, 0x206F, 0xC17E88); /* C17E84: movea.l ($0,A7), A0 */
-    FA18_OP(0xC17E88, 0x2140, 0xC17E8C); /* C17E88: move.l  D0, ($8,A0) */
-    FA18_OP(0xC17E8C, 0x2079, 0xC17E92); /* C17E8C: movea.l $c0a45c.l, A0 */
-    FA18_OP(0xC17E92, 0x7006, 0xC17E94); /* C17E92: moveq   #$6, D0 */
-    FA18_OP(0xC17E94, 0x2F00, 0xC17E96); /* C17E94: move.l  D0, -(A7) */
-    FA18_OP(0xC17E96, 0x2F48, 0xC17E9A); /* C17E96: move.l  A0, ($4,A7) */
-    FA18_CALL(0xC17E9A, 0x4EB9, 0xC17EA0, 426, 0); /* C17E9A: jsr     $c50b02.l */
-L_C17EA0:
-    FA18_CHECK(0xC17EA0);
-    FA18_OP(0xC17EA0, 0x588F, 0xC17EA2); /* C17EA0: addq.l  #4, A7 */
-    FA18_OP(0xC17EA2, 0x0680, 0xC17EA8); /* C17EA2: addi.l  #$168, D0 */
-    FA18_OP(0xC17EA8, 0x7210, 0xC17EAA); /* C17EA8: moveq   #$10, D1 */
-    FA18_OP(0xC17EAA, 0xE3A0, 0xC17EAC); /* C17EAA: asl.l   D1, D0 */
-    FA18_OP(0xC17EAC, 0x206F, 0xC17EB0); /* C17EAC: movea.l ($0,A7), A0 */
-    FA18_OP(0xC17EB0, 0x2140, 0xC17EB4); /* C17EB0: move.l  D0, ($8,A0) */
-    FA18_OP(0xC17EB4, 0x2F2E, 0xC17EB8); /* C17EB4: move.l  ($8,A6), -(A7) */
-    FA18_OP(0xC17EB8, 0x42A7, 0xC17EBA); /* C17EB8: clr.l   -(A7) */
-    FA18_OP(0xC17EBA, 0x7008, 0xC17EBC); /* C17EBA: moveq   #$8, D0 */
-    FA18_OP(0xC17EBC, 0x2F00, 0xC17EBE); /* C17EBC: move.l  D0, -(A7) */
-    FA18_CALL(0xC17EBE, 0x6100, 0xC17EC2, 102, 0); /* C17EBE: bsr     $c17b2c */
-L_C17EC2:
-    FA18_CHECK(0xC17EC2);
-    FA18_OP(0xC17EC2, 0x4FEF, 0xC17EC6); /* C17EC2: lea     ($c,A7), A7 */
-    FA18_OP(0xC17EC6, 0x2F2E, 0xC17ECA); /* C17EC6: move.l  ($8,A6), -(A7) */
-    FA18_OP(0xC17ECA, 0x7001, 0xC17ECC); /* C17ECA: moveq   #$1, D0 */
-    FA18_OP(0xC17ECC, 0x2F00, 0xC17ECE); /* C17ECC: move.l  D0, -(A7) */
-    FA18_OP(0xC17ECE, 0x7009, 0xC17ED0); /* C17ECE: moveq   #$9, D0 */
-    FA18_OP(0xC17ED0, 0x2F00, 0xC17ED2); /* C17ED0: move.l  D0, -(A7) */
-    FA18_CALL(0xC17ED2, 0x6100, 0xC17ED6, 102, 0); /* C17ED2: bsr     $c17b2c */
-L_C17ED6:
-    FA18_CHECK(0xC17ED6);
-    FA18_OP(0xC17ED6, 0x4FEF, 0xC17EDA); /* C17ED6: lea     ($c,A7), A7 */
-    FA18_JUMP(0xC17EDA, 0x6012, 0xC17EEE, L_C17EEE); /* C17EDA: bra     $c17eee */
-L_C17EDC:
-    FA18_CHECK(0xC17EDC);
-    FA18_OP(0xC17EDC, 0x42A7, 0xC17EDE); /* C17EDC: clr.l   -(A7) */
-    FA18_CALL(0xC17EDE, 0x6100, 0xC17EE2, 101, 0); /* C17EDE: bsr     $c17b08 */
-L_C17EE2:
-    FA18_CHECK(0xC17EE2);
-    FA18_OP(0xC17EE2, 0x588F, 0xC17EE4); /* C17EE2: addq.l  #4, A7 */
-    FA18_OP(0xC17EE4, 0x7001, 0xC17EE6); /* C17EE4: moveq   #$1, D0 */
-    FA18_OP(0xC17EE6, 0x2F00, 0xC17EE8); /* C17EE6: move.l  D0, -(A7) */
-    FA18_CALL(0xC17EE8, 0x6100, 0xC17EEC, 101, 0); /* C17EE8: bsr     $c17b08 */
-L_C17EEC:
-    FA18_CHECK(0xC17EEC);
-    FA18_OP(0xC17EEC, 0x588F, 0xC17EEE); /* C17EEC: addq.l  #4, A7 */
-L_C17EEE:
-    FA18_CHECK(0xC17EEE);
-    FA18_OP(0xC17EEE, 0x4E5E, 0xC17EF0); /* C17EEE: unlk    A6 */
-    FA18_RETURN(0xC17EF0, 0x4E75); /* C17EF0: rts */
-}
-
-int fa18_fn_C17EF2(int entry) {
-    switch (entry) {
-    case 0: goto L_C17EF2;
-    case 1: goto L_C17F00;
-    case 2: goto L_C17F08;
-    case 3: goto L_C17F84;
-    case 4: goto L_C17F88;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17EF2:
-    FA18_CHECK(0xC17EF2);
-    FA18_OP(0xC17EF2, 0x4E56, 0xC17EF6); /* C17EF2: link    A6, #$0 */
-    FA18_OP(0xC17EF6, 0x4AB9, 0xC17EFC); /* C17EF6: tst.l   $c0a448.l */
-    FA18_BCC(0xC17EFC, 0x6700, 0xC17F00, 0xC17F88, L_C17F88); /* C17EFC: beq     $c17f88 */
-L_C17F00:
-    FA18_CHECK(0xC17F00);
-    FA18_OP(0xC17F00, 0x7003, 0xC17F02); /* C17F00: moveq   #$3, D0 */
-    FA18_OP(0xC17F02, 0x2F00, 0xC17F04); /* C17F02: move.l  D0, -(A7) */
-    FA18_CALL(0xC17F04, 0x6100, 0xC17F08, 101, 0); /* C17F04: bsr     $c17b08 */
-L_C17F08:
-    FA18_CHECK(0xC17F08);
-    FA18_OP(0xC17F08, 0x588F, 0xC17F0A); /* C17F08: addq.l  #4, A7 */
-    FA18_OP(0xC17F0A, 0x23EE, 0xC17F12); /* C17F0A: move.l  ($24,A6), $c50b7c.l */
-    FA18_OP(0xC17F12, 0x23EE, 0xC17F1A); /* C17F12: move.l  ($20,A6), $c50b84.l */
-    FA18_OP(0xC17F1A, 0x7010, 0xC17F1C); /* C17F1A: moveq   #$10, D0 */
-    FA18_OP(0xC17F1C, 0x222E, 0xC17F20); /* C17F1C: move.l  ($8,A6), D1 */
-    FA18_OP(0xC17F20, 0xE1A1, 0xC17F22); /* C17F20: asl.l   D0, D1 */
-    FA18_OP(0xC17F22, 0x23C1, 0xC17F28); /* C17F22: move.l  D1, $c50b8c.l */
-    FA18_OP(0xC17F28, 0x222E, 0xC17F2C); /* C17F28: move.l  ($c,A6), D1 */
-    FA18_OP(0xC17F2C, 0xE1A1, 0xC17F2E); /* C17F2C: asl.l   D0, D1 */
-    FA18_OP(0xC17F2E, 0x23C1, 0xC17F34); /* C17F2E: move.l  D1, $c50b94.l */
-    FA18_OP(0xC17F34, 0x23EE, 0xC17F3C); /* C17F34: move.l  ($10,A6), $c50b9c.l */
-    FA18_OP(0xC17F3C, 0x222E, 0xC17F40); /* C17F3C: move.l  ($14,A6), D1 */
-    FA18_OP(0xC17F40, 0xE1A1, 0xC17F42); /* C17F40: asl.l   D0, D1 */
-    FA18_OP(0xC17F42, 0x23C1, 0xC17F48); /* C17F42: move.l  D1, $c50ba4.l */
-    FA18_OP(0xC17F48, 0x222E, 0xC17F4C); /* C17F48: move.l  ($18,A6), D1 */
-    FA18_OP(0xC17F4C, 0xE1A1, 0xC17F4E); /* C17F4C: asl.l   D0, D1 */
-    FA18_OP(0xC17F4E, 0x23C1, 0xC17F54); /* C17F4E: move.l  D1, $c50bac.l */
-    FA18_OP(0xC17F54, 0x23EE, 0xC17F5C); /* C17F54: move.l  ($1c,A6), $c50bb4.l */
-    FA18_OP(0xC17F5C, 0x23EE, 0xC17F64); /* C17F5C: move.l  ($28,A6), $c50bc4.l */
-    FA18_OP(0xC17F64, 0x2079, 0xC17F6A); /* C17F64: movea.l $c0a448.l, A0 */
-    FA18_OP(0xC17F6A, 0x7000, 0xC17F6C); /* C17F6A: moveq   #$0, D0 */
-    FA18_OP(0xC17F6C, 0x2140, 0xC17F70); /* C17F6C: move.l  D0, ($34,A0) */
-    FA18_OP(0xC17F70, 0x7001, 0xC17F72); /* C17F70: moveq   #$1, D0 */
-    FA18_OP(0xC17F72, 0x2140, 0xC17F76); /* C17F72: move.l  D0, ($2c,A0) */
-    FA18_OP(0xC17F76, 0x42A7, 0xC17F78); /* C17F76: clr.l   -(A7) */
-    FA18_OP(0xC17F78, 0x7003, 0xC17F7A); /* C17F78: moveq   #$3, D0 */
-    FA18_OP(0xC17F7A, 0x2F00, 0xC17F7C); /* C17F7A: move.l  D0, -(A7) */
-    FA18_OP(0xC17F7C, 0x7004, 0xC17F7E); /* C17F7C: moveq   #$4, D0 */
-    FA18_OP(0xC17F7E, 0x2F00, 0xC17F80); /* C17F7E: move.l  D0, -(A7) */
-    FA18_CALL(0xC17F80, 0x6100, 0xC17F84, 102, 0); /* C17F80: bsr     $c17b2c */
-L_C17F84:
-    FA18_CHECK(0xC17F84);
-    FA18_OP(0xC17F84, 0x4FEF, 0xC17F88); /* C17F84: lea     ($c,A7), A7 */
-L_C17F88:
-    FA18_CHECK(0xC17F88);
-    FA18_OP(0xC17F88, 0x4E5E, 0xC17F8A); /* C17F88: unlk    A6 */
-    FA18_RETURN(0xC17F8A, 0x4E75); /* C17F8A: rts */
-}
-
-int fa18_fn_C17F8C(int entry) {
-    switch (entry) {
-    case 0: goto L_C17F8C;
-    case 1: goto L_C17F9C;
-    case 2: goto L_C17FA6;
-    case 3: goto L_C17FAE;
-    case 4: goto L_C17FCC;
-    case 5: goto L_C17FF2;
-    case 6: goto L_C18022;
-    case 7: goto L_C18028;
-    case 8: goto L_C18038;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C17F8C:
-    FA18_CHECK(0xC17F8C);
-    FA18_OP(0xC17F8C, 0x4E56, 0xC17F90); /* C17F8C: link    A6, #-$4 */
-    FA18_OP(0xC17F90, 0x0839, 0xC17F98); /* C17F90: btst    #$0, $c45b5a.l */
-    FA18_BCC(0xC17F98, 0x6700, 0xC17F9C, 0xC18028, L_C18028); /* C17F98: beq     $c18028 */
-L_C17F9C:
-    FA18_CHECK(0xC17F9C);
-    FA18_OP(0xC17F9C, 0x4AB9, 0xC17FA2); /* C17F9C: tst.l   $c0a450.l */
-    FA18_BCC(0xC17FA2, 0x6700, 0xC17FA6, 0xC18038, L_C18038); /* C17FA2: beq     $c18038 */
-L_C17FA6:
-    FA18_CHECK(0xC17FA6);
-    FA18_OP(0xC17FA6, 0x7002, 0xC17FA8); /* C17FA6: moveq   #$2, D0 */
-    FA18_OP(0xC17FA8, 0x2F00, 0xC17FAA); /* C17FA8: move.l  D0, -(A7) */
-    FA18_CALL(0xC17FAA, 0x6100, 0xC17FAE, 101, 0); /* C17FAA: bsr     $c17b08 */
-L_C17FAE:
-    FA18_CHECK(0xC17FAE);
-    FA18_OP(0xC17FAE, 0x588F, 0xC17FB0); /* C17FAE: addq.l  #4, A7 */
-    FA18_OP(0xC17FB0, 0x7010, 0xC17FB2); /* C17FB0: moveq   #$10, D0 */
-    FA18_OP(0xC17FB2, 0x222E, 0xC17FB6); /* C17FB2: move.l  ($8,A6), D1 */
-    FA18_OP(0xC17FB6, 0xE1A1, 0xC17FB8); /* C17FB6: asl.l   D0, D1 */
-    FA18_OP(0xC17FB8, 0x23C1, 0xC17FBE); /* C17FB8: move.l  D1, $c50bdc.l */
-    FA18_OP(0xC17FBE, 0x4481, 0xC17FC0); /* C17FBE: neg.l   D1 */
-    FA18_OP(0xC17FC0, 0x2001, 0xC17FC2); /* C17FC0: move.l  D1, D0 */
-    FA18_OP(0xC17FC2, 0x222E, 0xC17FC6); /* C17FC2: move.l  ($c,A6), D1 */
-    FA18_CALL(0xC17FC6, 0x4EB9, 0xC17FCC, 427, 0); /* C17FC6: jsr     $c52ec8.l */
-L_C17FCC:
-    FA18_CHECK(0xC17FCC);
-    FA18_OP(0xC17FCC, 0x23C0, 0xC17FD2); /* C17FCC: move.l  D0, $c50be4.l */
-    FA18_OP(0xC17FD2, 0x23EE, 0xC17FDA); /* C17FD2: move.l  ($c,A6), $c50bec.l */
-    FA18_OP(0xC17FDA, 0x2079, 0xC17FE0); /* C17FDA: movea.l $c0a450.l, A0 */
-    FA18_OP(0xC17FE0, 0x42A8, 0xC17FE4); /* C17FE0: clr.l   ($34,A0) */
-    FA18_OP(0xC17FE4, 0x700B, 0xC17FE6); /* C17FE4: moveq   #$b, D0 */
-    FA18_OP(0xC17FE6, 0x2F00, 0xC17FE8); /* C17FE6: move.l  D0, -(A7) */
-    FA18_OP(0xC17FE8, 0x2F48, 0xC17FEC); /* C17FE8: move.l  A0, ($4,A7) */
-    FA18_CALL(0xC17FEC, 0x4EB9, 0xC17FF2, 426, 0); /* C17FEC: jsr     $c50b02.l */
-L_C17FF2:
-    FA18_CHECK(0xC17FF2);
-    FA18_OP(0xC17FF2, 0x588F, 0xC17FF4); /* C17FF2: addq.l  #4, A7 */
-    FA18_OP(0xC17FF4, 0xE580, 0xC17FF6); /* C17FF4: asl.l   #2, D0 */
-    FA18_OP(0xC17FF6, 0x0680, 0xC17FFC); /* C17FF6: addi.l  #$231e, D0 */
-    FA18_OP(0xC17FFC, 0x7210, 0xC17FFE); /* C17FFC: moveq   #$10, D1 */
-    FA18_OP(0xC17FFE, 0xE3A0, 0xC18000); /* C17FFE: asl.l   D1, D0 */
-    FA18_OP(0xC18000, 0x206F, 0xC18004); /* C18000: movea.l ($0,A7), A0 */
-    FA18_OP(0xC18004, 0x2140, 0xC18008); /* C18004: move.l  D0, ($8,A0) */
-    FA18_OP(0xC18008, 0x7001, 0xC1800A); /* C18008: moveq   #$1, D0 */
-    FA18_OP(0xC1800A, 0x2079, 0xC18010); /* C1800A: movea.l $c0a450.l, A0 */
-    FA18_OP(0xC18010, 0x2140, 0xC18014); /* C18010: move.l  D0, ($2c,A0) */
-    FA18_OP(0xC18014, 0x42A7, 0xC18016); /* C18014: clr.l   -(A7) */
-    FA18_OP(0xC18016, 0x7002, 0xC18018); /* C18016: moveq   #$2, D0 */
-    FA18_OP(0xC18018, 0x2F00, 0xC1801A); /* C18018: move.l  D0, -(A7) */
-    FA18_OP(0xC1801A, 0x7006, 0xC1801C); /* C1801A: moveq   #$6, D0 */
-    FA18_OP(0xC1801C, 0x2F00, 0xC1801E); /* C1801C: move.l  D0, -(A7) */
-    FA18_CALL(0xC1801E, 0x6100, 0xC18022, 102, 0); /* C1801E: bsr     $c17b2c */
-L_C18022:
-    FA18_CHECK(0xC18022);
-    FA18_OP(0xC18022, 0x4FEF, 0xC18026); /* C18022: lea     ($c,A7), A7 */
-    FA18_JUMP(0xC18026, 0x6010, 0xC18038, L_C18038); /* C18026: bra     $c18038 */
-L_C18028:
-    FA18_CHECK(0xC18028);
-    FA18_OP(0xC18028, 0x13FC, 0xC18030); /* C18028: move.b  #$fa, $c458b0.l */
-    FA18_OP(0xC18030, 0x13FC, 0xC18038); /* C18030: move.b  #$2, $c45797.l */
-L_C18038:
-    FA18_CHECK(0xC18038);
-    FA18_OP(0xC18038, 0x4E5E, 0xC1803A); /* C18038: unlk    A6 */
-    FA18_RETURN(0xC1803A, 0x4E75); /* C1803A: rts */
-}
-
-int fa18_fn_C1803C(int entry) {
-    switch (entry) {
-    case 0: goto L_C1803C;
-    case 1: goto L_C1804A;
-    case 2: goto L_C1805A;
-    case 3: goto L_C18062;
-    case 4: goto L_C1808E;
-    case 5: goto L_C18092;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1803C:
-    FA18_CHECK(0xC1803C);
-    FA18_OP(0xC1803C, 0x4E56, 0xC18040); /* C1803C: link    A6, #$0 */
-    FA18_OP(0xC18040, 0x0839, 0xC18048); /* C18040: btst    #$2, $c45b5b.l */
-    FA18_BCC(0xC18048, 0x6748, 0xC1804A, 0xC18092, L_C18092); /* C18048: beq     $c18092 */
-L_C1804A:
-    FA18_CHECK(0xC1804A);
-    FA18_OP(0xC1804A, 0x3039, 0xC18050); /* C1804A: move.w  $c459b6.l, D0 */
-    FA18_OP(0xC18050, 0x3239, 0xC18056); /* C18050: move.w  $c458de.l, D1 */
-    FA18_OP(0xC18056, 0xB041, 0xC18058); /* C18056: cmp.w   D1, D0 */
-    FA18_BCC(0xC18058, 0x6638, 0xC1805A, 0xC18092, L_C18092); /* C18058: bne     $c18092 */
-L_C1805A:
-    FA18_CHECK(0xC1805A);
-    FA18_OP(0xC1805A, 0x4AB9, 0xC18060); /* C1805A: tst.l   $c0a44c.l */
-    FA18_BCC(0xC18060, 0x6730, 0xC18062, 0xC18092, L_C18092); /* C18060: beq     $c18092 */
-L_C18062:
-    FA18_CHECK(0xC18062);
-    FA18_OP(0xC18062, 0x2079, 0xC18068); /* C18062: movea.l $c0a44c.l, A0 */
-    FA18_OP(0xC18068, 0x217C, 0xC18070); /* C18068: move.l  #$1360000, ($8,A0) */
-    FA18_OP(0xC18070, 0x217C, 0xC18078); /* C18070: move.l  #$fffe0000, ($18,A0) */
-    FA18_OP(0xC18078, 0x7001, 0xC1807A); /* C18078: moveq   #$1, D0 */
-    FA18_OP(0xC1807A, 0x2140, 0xC1807E); /* C1807A: move.l  D0, ($10,A0) */
-    FA18_OP(0xC1807E, 0x2F2E, 0xC18082); /* C1807E: move.l  ($8,A6), -(A7) */
-    FA18_OP(0xC18082, 0x7002, 0xC18084); /* C18082: moveq   #$2, D0 */
-    FA18_OP(0xC18084, 0x2F00, 0xC18086); /* C18084: move.l  D0, -(A7) */
-    FA18_OP(0xC18086, 0x7005, 0xC18088); /* C18086: moveq   #$5, D0 */
-    FA18_OP(0xC18088, 0x2F00, 0xC1808A); /* C18088: move.l  D0, -(A7) */
-    FA18_CALL(0xC1808A, 0x6100, 0xC1808E, 102, 0); /* C1808A: bsr     $c17b2c */
-L_C1808E:
-    FA18_CHECK(0xC1808E);
-    FA18_OP(0xC1808E, 0x4FEF, 0xC18092); /* C1808E: lea     ($c,A7), A7 */
-L_C18092:
-    FA18_CHECK(0xC18092);
-    FA18_OP(0xC18092, 0x4E5E, 0xC18094); /* C18092: unlk    A6 */
-    FA18_RETURN(0xC18094, 0x4E75); /* C18094: rts */
-}
-
-int fa18_fn_C18096(int entry) {
-    switch (entry) {
-    case 0: goto L_C18096;
-    case 1: goto L_C180A4;
-    case 2: goto L_C180B4;
-    case 3: goto L_C180BC;
-    case 4: goto L_C180C4;
-    case 5: goto L_C180F4;
-    case 6: goto L_C180F8;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C18096:
-    FA18_CHECK(0xC18096);
-    FA18_OP(0xC18096, 0x4E56, 0xC1809A); /* C18096: link    A6, #$0 */
-    FA18_OP(0xC1809A, 0x0839, 0xC180A2); /* C1809A: btst    #$6, $c45b5b.l */
-    FA18_BCC(0xC180A2, 0x6754, 0xC180A4, 0xC180F8, L_C180F8); /* C180A2: beq     $c180f8 */
-L_C180A4:
-    FA18_CHECK(0xC180A4);
-    FA18_OP(0xC180A4, 0x3039, 0xC180AA); /* C180A4: move.w  $c459b6.l, D0 */
-    FA18_OP(0xC180AA, 0x3239, 0xC180B0); /* C180AA: move.w  $c458de.l, D1 */
-    FA18_OP(0xC180B0, 0xB041, 0xC180B2); /* C180B0: cmp.w   D1, D0 */
-    FA18_BCC(0xC180B2, 0x6644, 0xC180B4, 0xC180F8, L_C180F8); /* C180B2: bne     $c180f8 */
-L_C180B4:
-    FA18_CHECK(0xC180B4);
-    FA18_OP(0xC180B4, 0x4AB9, 0xC180BA); /* C180B4: tst.l   $c0a464.l */
-    FA18_BCC(0xC180BA, 0x673C, 0xC180BC, 0xC180F8, L_C180F8); /* C180BA: beq     $c180f8 */
-L_C180BC:
-    FA18_CHECK(0xC180BC);
-    FA18_OP(0xC180BC, 0x7002, 0xC180BE); /* C180BC: moveq   #$2, D0 */
-    FA18_OP(0xC180BE, 0x2F00, 0xC180C0); /* C180BE: move.l  D0, -(A7) */
-    FA18_CALL(0xC180C0, 0x6100, 0xC180C4, 101, 0); /* C180C0: bsr     $c17b08 */
-L_C180C4:
-    FA18_CHECK(0xC180C4);
-    FA18_OP(0xC180C4, 0x588F, 0xC180C6); /* C180C4: addq.l  #4, A7 */
-    FA18_OP(0xC180C6, 0x2079, 0xC180CC); /* C180C6: movea.l $c0a464.l, A0 */
-    FA18_OP(0xC180CC, 0x7000, 0xC180CE); /* C180CC: moveq   #$0, D0 */
-    FA18_OP(0xC180CE, 0x2140, 0xC180D2); /* C180CE: move.l  D0, ($2c,A0) */
-    FA18_OP(0xC180D2, 0x217C, 0xC180DA); /* C180D2: move.l  #$c50c00, ($30,A0) */
-    FA18_OP(0xC180DA, 0x2140, 0xC180DE); /* C180DA: move.l  D0, ($34,A0) */
-    FA18_OP(0xC180DE, 0x7001, 0xC180E0); /* C180DE: moveq   #$1, D0 */
-    FA18_OP(0xC180E0, 0x2140, 0xC180E4); /* C180E0: move.l  D0, ($2c,A0) */
-    FA18_OP(0xC180E4, 0x2F2E, 0xC180E8); /* C180E4: move.l  ($8,A6), -(A7) */
-    FA18_OP(0xC180E8, 0x7002, 0xC180EA); /* C180E8: moveq   #$2, D0 */
-    FA18_OP(0xC180EA, 0x2F00, 0xC180EC); /* C180EA: move.l  D0, -(A7) */
-    FA18_OP(0xC180EC, 0x700B, 0xC180EE); /* C180EC: moveq   #$b, D0 */
-    FA18_OP(0xC180EE, 0x2F00, 0xC180F0); /* C180EE: move.l  D0, -(A7) */
-    FA18_CALL(0xC180F0, 0x6100, 0xC180F4, 102, 0); /* C180F0: bsr     $c17b2c */
-L_C180F4:
-    FA18_CHECK(0xC180F4);
-    FA18_OP(0xC180F4, 0x4FEF, 0xC180F8); /* C180F4: lea     ($c,A7), A7 */
-L_C180F8:
-    FA18_CHECK(0xC180F8);
-    FA18_OP(0xC180F8, 0x4E5E, 0xC180FA); /* C180F8: unlk    A6 */
-    FA18_RETURN(0xC180FA, 0x4E75); /* C180FA: rts */
-}
-
-int fa18_fn_C180FC(int entry) {
-    switch (entry) {
-    case 0: goto L_C180FC;
-    case 1: goto L_C18104;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C180FC:
-    FA18_CHECK(0xC180FC);
-    FA18_OP(0xC180FC, 0x7002, 0xC180FE); /* C180FC: moveq   #$2, D0 */
-    FA18_OP(0xC180FE, 0x2F00, 0xC18100); /* C180FE: move.l  D0, -(A7) */
-    FA18_CALL(0xC18100, 0x6100, 0xC18104, 101, 0); /* C18100: bsr     $c17b08 */
-L_C18104:
-    FA18_CHECK(0xC18104);
-    FA18_OP(0xC18104, 0x588F, 0xC18106); /* C18104: addq.l  #4, A7 */
-    FA18_RETURN(0xC18106, 0x4E75); /* C18106: rts */
-}
-
-int fa18_fn_C18108(int entry) {
-    switch (entry) {
-    case 0: goto L_C18108;
-    case 1: goto L_C18118;
-    case 2: goto L_C18120;
-    case 3: goto L_C18128;
-    case 4: goto L_C1814C;
-    case 5: goto L_C1816A;
-    case 6: goto L_C18198;
-    case 7: goto L_C1819C;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C18108:
-    FA18_CHECK(0xC18108);
-    FA18_OP(0xC18108, 0x4E56, 0xC1810C); /* C18108: link    A6, #-$4 */
-    FA18_OP(0xC1810C, 0x0839, 0xC18114); /* C1810C: btst    #$1, $c45b5a.l */
-    FA18_BCC(0xC18114, 0x6700, 0xC18118, 0xC1819C, L_C1819C); /* C18114: beq     $c1819c */
-L_C18118:
-    FA18_CHECK(0xC18118);
-    FA18_OP(0xC18118, 0x4AB9, 0xC1811E); /* C18118: tst.l   $c0a468.l */
-    FA18_BCC(0xC1811E, 0x677C, 0xC18120, 0xC1819C, L_C1819C); /* C1811E: beq     $c1819c */
-L_C18120:
-    FA18_CHECK(0xC18120);
-    FA18_OP(0xC18120, 0x7002, 0xC18122); /* C18120: moveq   #$2, D0 */
-    FA18_OP(0xC18122, 0x2F00, 0xC18124); /* C18122: move.l  D0, -(A7) */
-    FA18_CALL(0xC18124, 0x6100, 0xC18128, 101, 0); /* C18124: bsr     $c17b08 */
-L_C18128:
-    FA18_CHECK(0xC18128);
-    FA18_OP(0xC18128, 0x588F, 0xC1812A); /* C18128: addq.l  #4, A7 */
-    FA18_OP(0xC1812A, 0x7010, 0xC1812C); /* C1812A: moveq   #$10, D0 */
-    FA18_OP(0xC1812C, 0x222E, 0xC18130); /* C1812C: move.l  ($8,A6), D1 */
-    FA18_OP(0xC18130, 0xE1A1, 0xC18132); /* C18130: asl.l   D0, D1 */
-    FA18_OP(0xC18132, 0x23C1, 0xC18138); /* C18132: move.l  D1, $c50c4c.l */
-    FA18_OP(0xC18138, 0x202E, 0xC1813C); /* C18138: move.l  ($8,A6), D0 */
-    FA18_OP(0xC1813C, 0x5380, 0xC1813E); /* C1813C: subq.l  #1, D0 */
-    FA18_OP(0xC1813E, 0x7210, 0xC18140); /* C1813E: moveq   #$10, D1 */
-    FA18_OP(0xC18140, 0xE3A0, 0xC18142); /* C18140: asl.l   D1, D0 */
-    FA18_OP(0xC18142, 0x4480, 0xC18144); /* C18142: neg.l   D0 */
-    FA18_OP(0xC18144, 0x723C, 0xC18146); /* C18144: moveq   #$3c, D1 */
-    FA18_CALL(0xC18146, 0x4EB9, 0xC1814C, 427, 0); /* C18146: jsr     $c52ec8.l */
-L_C1814C:
-    FA18_CHECK(0xC1814C);
-    FA18_OP(0xC1814C, 0x23C0, 0xC18152); /* C1814C: move.l  D0, $c50c54.l */
-    FA18_OP(0xC18152, 0x2079, 0xC18158); /* C18152: movea.l $c0a468.l, A0 */
-    FA18_OP(0xC18158, 0x42A8, 0xC1815C); /* C18158: clr.l   ($34,A0) */
-    FA18_OP(0xC1815C, 0x7003, 0xC1815E); /* C1815C: moveq   #$3, D0 */
-    FA18_OP(0xC1815E, 0x2F00, 0xC18160); /* C1815E: move.l  D0, -(A7) */
-    FA18_OP(0xC18160, 0x2F48, 0xC18164); /* C18160: move.l  A0, ($4,A7) */
-    FA18_CALL(0xC18164, 0x4EB9, 0xC1816A, 426, 0); /* C18164: jsr     $c50b02.l */
-L_C1816A:
-    FA18_CHECK(0xC1816A);
-    FA18_OP(0xC1816A, 0x588F, 0xC1816C); /* C1816A: addq.l  #4, A7 */
-    FA18_OP(0xC1816C, 0x0680, 0xC18172); /* C1816C: addi.l  #$8c, D0 */
-    FA18_OP(0xC18172, 0x7210, 0xC18174); /* C18172: moveq   #$10, D1 */
-    FA18_OP(0xC18174, 0xE3A0, 0xC18176); /* C18174: asl.l   D1, D0 */
-    FA18_OP(0xC18176, 0x206F, 0xC1817A); /* C18176: movea.l ($0,A7), A0 */
-    FA18_OP(0xC1817A, 0x2140, 0xC1817E); /* C1817A: move.l  D0, ($8,A0) */
-    FA18_OP(0xC1817E, 0x7001, 0xC18180); /* C1817E: moveq   #$1, D0 */
-    FA18_OP(0xC18180, 0x2079, 0xC18186); /* C18180: movea.l $c0a468.l, A0 */
-    FA18_OP(0xC18186, 0x2140, 0xC1818A); /* C18186: move.l  D0, ($2c,A0) */
-    FA18_OP(0xC1818A, 0x42A7, 0xC1818C); /* C1818A: clr.l   -(A7) */
-    FA18_OP(0xC1818C, 0x7002, 0xC1818E); /* C1818C: moveq   #$2, D0 */
-    FA18_OP(0xC1818E, 0x2F00, 0xC18190); /* C1818E: move.l  D0, -(A7) */
-    FA18_OP(0xC18190, 0x700C, 0xC18192); /* C18190: moveq   #$c, D0 */
-    FA18_OP(0xC18192, 0x2F00, 0xC18194); /* C18192: move.l  D0, -(A7) */
-    FA18_CALL(0xC18194, 0x6100, 0xC18198, 102, 0); /* C18194: bsr     $c17b2c */
-L_C18198:
-    FA18_CHECK(0xC18198);
-    FA18_OP(0xC18198, 0x4FEF, 0xC1819C); /* C18198: lea     ($c,A7), A7 */
-L_C1819C:
-    FA18_CHECK(0xC1819C);
-    FA18_OP(0xC1819C, 0x4E5E, 0xC1819E); /* C1819C: unlk    A6 */
-    FA18_RETURN(0xC1819E, 0x4E75); /* C1819E: rts */
-}
-
-int fa18_fn_C181A0(int entry) {
-    switch (entry) {
-    case 0: goto L_C181A0;
-    case 1: goto L_C181AC;
-    case 2: goto L_C181B4;
-    case 3: goto L_C181F2;
-    case 4: goto L_C181F6;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C181A0:
-    FA18_CHECK(0xC181A0);
-    FA18_OP(0xC181A0, 0x4E56, 0xC181A4); /* C181A0: link    A6, #$0 */
-    FA18_OP(0xC181A4, 0x4AB9, 0xC181AA); /* C181A4: tst.l   $c0a460.l */
-    FA18_BCC(0xC181AA, 0x674A, 0xC181AC, 0xC181F6, L_C181F6); /* C181AA: beq     $c181f6 */
-L_C181AC:
-    FA18_CHECK(0xC181AC);
-    FA18_OP(0xC181AC, 0x7002, 0xC181AE); /* C181AC: moveq   #$2, D0 */
-    FA18_OP(0xC181AE, 0x2F00, 0xC181B0); /* C181AE: move.l  D0, -(A7) */
-    FA18_CALL(0xC181B0, 0x6100, 0xC181B4, 101, 0); /* C181B0: bsr     $c17b08 */
-L_C181B4:
-    FA18_CHECK(0xC181B4);
-    FA18_OP(0xC181B4, 0x588F, 0xC181B6); /* C181B4: addq.l  #4, A7 */
-    FA18_OP(0xC181B6, 0x2079, 0xC181BC); /* C181B6: movea.l $c0a460.l, A0 */
-    FA18_OP(0xC181BC, 0x7000, 0xC181BE); /* C181BC: moveq   #$0, D0 */
-    FA18_OP(0xC181BE, 0x2140, 0xC181C2); /* C181BE: move.l  D0, ($2c,A0) */
-    FA18_OP(0xC181C2, 0x23EE, 0xC181CA); /* C181C2: move.l  ($8,A6), $c50c74.l */
-    FA18_OP(0xC181CA, 0x7010, 0xC181CC); /* C181CA: moveq   #$10, D0 */
-    FA18_OP(0xC181CC, 0x222E, 0xC181D0); /* C181CC: move.l  ($c,A6), D1 */
-    FA18_OP(0xC181D0, 0xE1A1, 0xC181D2); /* C181D0: asl.l   D0, D1 */
-    FA18_OP(0xC181D2, 0x23C1, 0xC181D8); /* C181D2: move.l  D1, $c50c7c.l */
-    FA18_OP(0xC181D8, 0x7000, 0xC181DA); /* C181D8: moveq   #$0, D0 */
-    FA18_OP(0xC181DA, 0x2140, 0xC181DE); /* C181DA: move.l  D0, ($34,A0) */
-    FA18_OP(0xC181DE, 0x7001, 0xC181E0); /* C181DE: moveq   #$1, D0 */
-    FA18_OP(0xC181E0, 0x2140, 0xC181E4); /* C181E0: move.l  D0, ($2c,A0) */
-    FA18_OP(0xC181E4, 0x42A7, 0xC181E6); /* C181E4: clr.l   -(A7) */
-    FA18_OP(0xC181E6, 0x7002, 0xC181E8); /* C181E6: moveq   #$2, D0 */
-    FA18_OP(0xC181E8, 0x2F00, 0xC181EA); /* C181E8: move.l  D0, -(A7) */
-    FA18_OP(0xC181EA, 0x700A, 0xC181EC); /* C181EA: moveq   #$a, D0 */
-    FA18_OP(0xC181EC, 0x2F00, 0xC181EE); /* C181EC: move.l  D0, -(A7) */
-    FA18_CALL(0xC181EE, 0x6100, 0xC181F2, 102, 0); /* C181EE: bsr     $c17b2c */
-L_C181F2:
-    FA18_CHECK(0xC181F2);
-    FA18_OP(0xC181F2, 0x4FEF, 0xC181F6); /* C181F2: lea     ($c,A7), A7 */
-L_C181F6:
-    FA18_CHECK(0xC181F6);
-    FA18_OP(0xC181F6, 0x4E5E, 0xC181F8); /* C181F6: unlk    A6 */
-    FA18_RETURN(0xC181F8, 0x4E75); /* C181F8: rts */
-}
-
-int fa18_fn_C1AC28(int entry) {
-    switch (entry) {
-    case 0: goto L_C1AC18;
-    case 1: goto L_C1AC26;
-    case 2: goto L_C1AC28;
-    case 3: goto L_C1AC34;
-    case 4: goto L_C1AC48;
-    case 5: goto L_C1AC50;
-    case 6: goto L_C1AC58;
-    case 7: goto L_C1AC60;
-    case 8: goto L_C1AC68;
-    case 9: goto L_C1AC70;
-    case 10: goto L_C1AC78;
-    case 11: goto L_C1AC80;
-    case 12: goto L_C1AC88;
-    case 13: goto L_C1AC92;
-    case 14: goto L_C1AC9C;
-    case 15: goto L_C1ACA6;
-    case 16: goto L_C1ACB0;
-    case 17: goto L_C1ACBC;
-    case 18: goto L_C1ACC8;
-    case 19: goto L_C1ACD4;
-    case 20: goto L_C1ACDC;
-    case 21: goto L_C1ACE4;
-    case 22: goto L_C1ACEC;
-    case 23: goto L_C1ACF4;
-    case 24: goto L_C1ACFC;
-    case 25: goto L_C1AD04;
-    case 26: goto L_C1AD0C;
-    case 27: goto L_C1AD14;
-    case 28: goto L_C1AD1E;
-    case 29: goto L_C1AD28;
-    case 30: goto L_C1AD32;
-    case 31: goto L_C1AD3C;
-    case 32: goto L_C1AD46;
-    case 33: goto L_C1AD50;
-    case 34: goto L_C1AD5A;
-    case 35: goto L_C1AD64;
-    case 36: goto L_C1AD70;
-    case 37: goto L_C1B126;
-    case 38: goto L_C1B12A;
-    case 39: goto L_C1B12E;
-    case 40: goto L_C1B138;
-    case 41: goto L_C1B14A;
-    case 42: goto L_C1B1A4;
-    case 43: goto L_C1B1AA;
-    case 44: goto L_C1B1C8;
-    case 45: goto L_C1B1CE;
-    case 46: goto L_C1B1F0;
-    case 47: goto L_C1B1F6;
-    case 48: goto L_C1B1FC;
-    case 49: goto L_C1B202;
-    case 50: goto L_C1B206;
-    case 51: goto L_C1B21C;
-    case 52: goto L_C1B222;
-    case 53: goto L_C1B228;
-    case 54: goto L_C1B22C;
-    case 55: goto L_C1B232;
-    case 56: goto L_C1B5DC;
-    case 57: goto L_C1B5E0;
-    case 58: goto L_C1B5E6;
-    case 59: goto L_C1B616;
-    case 60: goto L_C1B62A;
-    case 61: goto L_C1B630;
-    case 62: goto L_C1B654;
-    case 63: goto L_C1B658;
-    case 64: goto L_C1B65E;
-    case 65: goto L_C1B66C;
-    case 66: goto L_C1B670;
-    case 67: goto L_C1B67C;
-    case 68: goto L_C1B684;
-    case 69: goto L_C1B68C;
-    case 70: goto L_C1B69A;
-    case 71: goto L_C1B6C2;
-    case 72: goto L_C1B6EA;
-    case 73: goto L_C1B702;
-    case 74: goto L_C1B710;
-    case 75: goto L_C1B71A;
-    case 76: goto L_C1B720;
-    case 77: goto L_C1B722;
-    case 78: goto L_C1B75C;
-    case 79: goto L_C1B762;
-    case 80: goto L_C1B772;
-    case 81: goto L_C1B77C;
-    case 82: goto L_C1B780;
-    case 83: goto L_C1B792;
-    case 84: goto L_C1B796;
-    case 85: goto L_C1B79A;
-    case 86: goto L_C1B7A6;
-    case 87: goto L_C1B7AA;
-    case 88: goto L_C1B7AE;
-    case 89: goto L_C1B7B2;
-    case 90: goto L_C1B7B6;
-    case 91: goto L_C1B7C2;
-    case 92: goto L_C1B7CC;
-    case 93: goto L_C1B7E4;
-    case 94: goto L_C1B7F0;
-    case 95: goto L_C1B7F8;
-    case 96: goto L_C1B800;
-    case 97: goto L_C1B80A;
-    case 98: goto L_C1B814;
-    case 99: goto L_C1B81E;
-    case 100: goto L_C1B82E;
-    case 101: goto L_C1B842;
-    case 102: goto L_C1B848;
-    case 103: goto L_C1B85A;
-    case 104: goto L_C1B85E;
-    case 105: goto L_C1B860;
-    case 106: goto L_C1B878;
-    case 107: goto L_C1B884;
-    case 108: goto L_C1B890;
-    case 109: goto L_C1B8A2;
-    case 110: goto L_C1B8AC;
-    case 111: goto L_C1B8B4;
-    case 112: goto L_C1B8C8;
-    case 113: goto L_C1B8CE;
-    case 114: goto L_C1B8E0;
-    case 115: goto L_C1B8E4;
-    case 116: goto L_C1B8EC;
-    case 117: goto L_C1B8F2;
-    case 118: goto L_C1B8F8;
-    case 119: goto L_C1B906;
-    case 120: goto L_C1B914;
-    case 121: goto L_C1B922;
-    case 122: goto L_C1B930;
-    case 123: goto L_C1B93E;
-    case 124: goto L_C1B94E;
-    case 125: goto L_C1B950;
-    case 126: goto L_C1B95A;
-    case 127: goto L_C1B95C;
-    case 128: goto L_C1B960;
-    case 129: goto L_C1B96E;
-    case 130: goto L_C1B986;
-    case 131: goto L_C1B98A;
-    case 132: goto L_C1B998;
-    case 133: goto L_C1B9AC;
-    case 134: goto L_C1B9BA;
-    case 135: goto L_C1B9CC;
-    case 136: goto L_C1B9DA;
-    case 137: goto L_C1B9E0;
-    case 138: goto L_C1BA1C;
-    case 139: goto L_C1BA28;
-    case 140: goto L_C1BA2E;
-    case 141: goto L_C1BA34;
-    case 142: goto L_C1BA3E;
-    case 143: goto L_C1BA44;
-    case 144: goto L_C1BA48;
-    case 145: goto L_C1BA50;
-    case 146: goto L_C1BA64;
-    case 147: goto L_C1BA8C;
-    case 148: goto L_C1BA98;
-    case 149: goto L_C1BA9E;
-    case 150: goto L_C1BAA4;
-    case 151: goto L_C1BAB0;
-    case 152: goto L_C1BAB6;
-    case 153: goto L_C1BABC;
-    case 154: goto L_C1BAC8;
-    case 155: goto L_C1BB66;
-    case 156: goto L_C1BB7A;
-    case 157: goto L_C1BB84;
-    case 158: goto L_C1BB8E;
-    case 159: goto L_C1BB96;
-    case 160: goto L_C1BB9C;
-    case 161: goto L_C1BBA8;
-    case 162: goto L_C1BBB4;
-    case 163: goto L_C1BBBA;
-    case 164: goto L_C1BBC0;
-    case 165: goto L_C1BBCE;
-    case 166: goto L_C1BBE6;
-    case 167: goto L_C1BBEA;
-    case 168: goto L_C1BC12;
-    case 169: goto L_C1BC24;
-    case 170: goto L_C1BC3A;
-    case 171: goto L_C1BC46;
-    case 172: goto L_C1BC4C;
-    case 173: goto L_C1BF8C;
-    case 174: goto L_C1BF96;
-    case 175: goto L_C1BFA6;
-    case 176: goto L_C1BFB4;
-    case 177: goto L_C1BFBC;
-    case 178: goto L_C1C046;
-    case 179: goto L_C1C0E0;
-    case 180: goto L_C1C0E4;
-    case 181: goto L_C1C0F4;
-    case 182: goto L_C1C10C;
-    case 183: goto L_C1C116;
-    case 184: goto L_C1C11C;
-    case 185: goto L_C1C122;
-    case 186: goto L_C1C12C;
-    case 187: goto L_C1C134;
-    case 188: goto L_C1C13E;
-    case 189: goto L_C1C148;
-    case 190: goto L_C1C152;
-    case 191: goto L_C1C16A;
-    case 192: goto L_C1C16E;
-    case 193: goto L_C1C172;
-    case 194: goto L_C1C182;
-    case 195: goto L_C1C19A;
-    case 196: goto L_C1C1A4;
-    case 197: goto L_C1C1AA;
-    case 198: goto L_C1C1F2;
-    case 199: goto L_C1C20E;
-    case 200: goto L_C1C218;
-    case 201: goto L_C1C21E;
-    case 202: goto L_C1C23C;
-    case 203: goto L_C1C244;
-    case 204: goto L_C1C24A;
-    case 205: goto L_C1C25C;
-    case 206: goto L_C1C268;
-    case 207: goto L_C1C26A;
-    case 208: goto L_C1C2A4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1AC18:
-    FA18_CHECK(0xC1AC18);
-    FA18_OP(0xC1AC18, 0x33FC, 0xC1AC20); /* C1AC18: move.w  #$33, $c4599e.l */
-    FA18_CALL(0xC1AC20, 0x4EB9, 0xC1AC26, 15, 0); /* C1AC20: jsr     $c06c02.l */
-L_C1AC26:
-    FA18_CHECK(0xC1AC26);
-    FA18_RETURN(0xC1AC26, 0x4E75); /* C1AC26: rts */
-L_C1AC28:
-    FA18_CHECK(0xC1AC28);
-    FA18_OP(0xC1AC28, 0x3039, 0xC1AC2E); /* C1AC28: move.w  $c45996.l, D0 */
-    FA18_OP(0xC1AC2E, 0x0240, 0xC1AC32); /* C1AC2E: andi.w  #$f0, D0 */
-    FA18_BCC(0xC1AC32, 0x66E4, 0xC1AC34, 0xC1AC18, L_C1AC18); /* C1AC32: bne     $c1ac18 */
-L_C1AC34:
-    FA18_CHECK(0xC1AC34);
-    FA18_OP(0xC1AC34, 0x7000, 0xC1AC36); /* C1AC34: moveq   #$0, D0 */
-    FA18_OP(0xC1AC36, 0x1A39, 0xC1AC3C); /* C1AC36: move.b  $c45785.l, D5 */
-    FA18_OP(0xC1AC3C, 0x7C00, 0xC1AC3E); /* C1AC3C: moveq   #$0, D6 */
-    FA18_OP(0xC1AC3E, 0x41F9, 0xC1AC44); /* C1AC3E: lea     $c45996.l, A0 */
-    FA18_OP(0xC1AC44, 0x4A50, 0xC1AC46); /* C1AC44: tst.w   (A0) */
-    FA18_BCC(0xC1AC46, 0x6768, 0xC1AC48, 0xC1ACB0, L_C1ACB0); /* C1AC46: beq     $c1acb0 */
-L_C1AC48:
-    FA18_CHECK(0xC1AC48);
-    FA18_OP(0xC1AC48, 0x0890, 0xC1AC4C); /* C1AC48: bclr    #$0, (A0) */
-    FA18_BCC(0xC1AC4C, 0x6600, 0xC1AC50, 0xC1BC12, L_C1BC12); /* C1AC4C: bne     $c1bc12 */
-L_C1AC50:
-    FA18_CHECK(0xC1AC50);
-    FA18_OP(0xC1AC50, 0x0890, 0xC1AC54); /* C1AC50: bclr    #$1, (A0) */
-    FA18_BCC(0xC1AC54, 0x6600, 0xC1AC58, 0xC1B616, L_C1B616); /* C1AC54: bne     $c1b616 */
-L_C1AC58:
-    FA18_CHECK(0xC1AC58);
-    FA18_OP(0xC1AC58, 0x0890, 0xC1AC5C); /* C1AC58: bclr    #$2, (A0) */
-    FA18_BCC(0xC1AC5C, 0x6600, 0xC1AC60, 0xC1B21C, L_C1B21C); /* C1AC5C: bne     $c1b21c */
-L_C1AC60:
-    FA18_CHECK(0xC1AC60);
-    FA18_OP(0xC1AC60, 0x0890, 0xC1AC64); /* C1AC60: bclr    #$3, (A0) */
-    FA18_BCC(0xC1AC64, 0x6600, 0xC1AC68, 0xC1B22C, L_C1B22C); /* C1AC64: bne     $c1b22c */
-L_C1AC68:
-    FA18_CHECK(0xC1AC68);
-    FA18_OP(0xC1AC68, 0x0890, 0xC1AC6C); /* C1AC68: bclr    #$4, (A0) */
-    FA18_BCC(0xC1AC6C, 0x6600, 0xC1AC70, 0xC1BB7A, L_C1BB7A); /* C1AC6C: bne     $c1bb7a */
-L_C1AC70:
-    FA18_CHECK(0xC1AC70);
-    FA18_OP(0xC1AC70, 0x0890, 0xC1AC74); /* C1AC70: bclr    #$5, (A0) */
-    FA18_BCC(0xC1AC74, 0x6600, 0xC1AC78, 0xC1B126, L_C1B126); /* C1AC74: bne     $c1b126 */
-L_C1AC78:
-    FA18_CHECK(0xC1AC78);
-    FA18_OP(0xC1AC78, 0x0890, 0xC1AC7C); /* C1AC78: bclr    #$6, (A0) */
-    FA18_BCC(0xC1AC7C, 0x6600, 0xC1AC80, 0xC1B1C8, L_C1B1C8); /* C1AC7C: bne     $c1b1c8 */
-L_C1AC80:
-    FA18_CHECK(0xC1AC80);
-    FA18_OP(0xC1AC80, 0x0890, 0xC1AC84); /* C1AC80: bclr    #$7, (A0) */
-    FA18_BCC(0xC1AC84, 0x6600, 0xC1AC88, 0xC1B1A4, L_C1B1A4); /* C1AC84: bne     $c1b1a4 */
-L_C1AC88:
-    FA18_CHECK(0xC1AC88);
-    FA18_OP(0xC1AC88, 0x08A8, 0xC1AC8E); /* C1AC88: bclr    #$0, ($1,A0) */
-    FA18_BCC(0xC1AC8E, 0x6600, 0xC1AC92, 0xC1B5DC, L_C1B5DC); /* C1AC8E: bne     $c1b5dc */
-L_C1AC92:
-    FA18_CHECK(0xC1AC92);
-    FA18_OP(0xC1AC92, 0x08A8, 0xC1AC98); /* C1AC92: bclr    #$1, ($1,A0) */
-    FA18_BCC(0xC1AC98, 0x6600, 0xC1AC9C, 0xC1C0E0, L_C1C0E0); /* C1AC98: bne     $c1c0e0 */
-L_C1AC9C:
-    FA18_CHECK(0xC1AC9C);
-    FA18_OP(0xC1AC9C, 0x08A8, 0xC1ACA2); /* C1AC9C: bclr    #$2, ($1,A0) */
-    FA18_BCC(0xC1ACA2, 0x6600, 0xC1ACA6, 0xC1C172, L_C1C172); /* C1ACA2: bne     $c1c172 */
-L_C1ACA6:
-    FA18_CHECK(0xC1ACA6);
-    FA18_OP(0xC1ACA6, 0x08A8, 0xC1ACAC); /* C1ACA6: bclr    #$3, ($1,A0) */
-    FA18_BCC(0xC1ACAC, 0x6600, 0xC1ACB0, 0xC1C1F2, L_C1C1F2); /* C1ACAC: bne     $c1c1f2 */
-L_C1ACB0:
-    FA18_CHECK(0xC1ACB0);
-    FA18_OP(0xC1ACB0, 0x0C39, 0xC1ACB8); /* C1ACB0: cmpi.b  #$2, $c4584b.l */
-    FA18_BCC(0xC1ACB8, 0x6700, 0xC1ACBC, 0xC1AD70, L_C1AD70); /* C1ACB8: beq     $c1ad70 */
-L_C1ACBC:
-    FA18_CHECK(0xC1ACBC);
-    FA18_OP(0xC1ACBC, 0x0C39, 0xC1ACC4); /* C1ACBC: cmpi.b  #$1, $c4584b.l */
-    FA18_BCC(0xC1ACC4, 0x6700, 0xC1ACC8, 0xC1AD70, L_C1AD70); /* C1ACC4: beq     $c1ad70 */
-L_C1ACC8:
-    FA18_CHECK(0xC1ACC8);
-    FA18_OP(0xC1ACC8, 0x41F9, 0xC1ACCE); /* C1ACC8: lea     $c45998.l, A0 */
-    FA18_OP(0xC1ACCE, 0x4A50, 0xC1ACD0); /* C1ACCE: tst.w   (A0) */
-    FA18_BCC(0xC1ACD0, 0x6700, 0xC1ACD4, 0xC1AD64, L_C1AD64); /* C1ACD0: beq     $c1ad64 */
-L_C1ACD4:
-    FA18_CHECK(0xC1ACD4);
-    FA18_OP(0xC1ACD4, 0x0890, 0xC1ACD8); /* C1ACD4: bclr    #$0, (A0) */
-    FA18_BCC(0xC1ACD8, 0x6600, 0xC1ACDC, 0xC1BF8C, L_C1BF8C); /* C1ACD8: bne     $c1bf8c */
-L_C1ACDC:
-    FA18_CHECK(0xC1ACDC);
-    FA18_OP(0xC1ACDC, 0x0890, 0xC1ACE0); /* C1ACDC: bclr    #$1, (A0) */
-    FA18_BCC(0xC1ACE0, 0x6600, 0xC1ACE4, 0xC1B66C, L_C1B66C); /* C1ACE0: bne     $c1b66c */
-L_C1ACE4:
-    FA18_CHECK(0xC1ACE4);
-    FA18_OP(0xC1ACE4, 0x0890, 0xC1ACE8); /* C1ACE4: bclr    #$2, (A0) */
-    FA18_BCC(0xC1ACE8, 0x6600, 0xC1ACEC, 0xC1B6C2, L_C1B6C2); /* C1ACE8: bne     $c1b6c2 */
-L_C1ACEC:
-    FA18_CHECK(0xC1ACEC);
-    FA18_OP(0xC1ACEC, 0x0890, 0xC1ACF0); /* C1ACEC: bclr    #$3, (A0) */
-    FA18_BCC(0xC1ACF0, 0x6600, 0xC1ACF4, 0xC1B7F0, L_C1B7F0); /* C1ACF0: bne     $c1b7f0 */
-L_C1ACF4:
-    FA18_CHECK(0xC1ACF4);
-    FA18_OP(0xC1ACF4, 0x0890, 0xC1ACF8); /* C1ACF4: bclr    #$4, (A0) */
-    FA18_BCC(0xC1ACF8, 0x6600, 0xC1ACFC, 0xC1B8F8, L_C1B8F8); /* C1ACF8: bne     $c1b8f8 */
-L_C1ACFC:
-    FA18_CHECK(0xC1ACFC);
-    FA18_OP(0xC1ACFC, 0x0890, 0xC1AD00); /* C1ACFC: bclr    #$5, (A0) */
-    FA18_BCC(0xC1AD00, 0x6600, 0xC1AD04, 0xC1B780, L_C1B780); /* C1AD00: bne     $c1b780 */
-L_C1AD04:
-    FA18_CHECK(0xC1AD04);
-    FA18_OP(0xC1AD04, 0x0890, 0xC1AD08); /* C1AD04: bclr    #$6, (A0) */
-    FA18_BCC(0xC1AD08, 0x6600, 0xC1AD0C, 0xC1B960, L_C1B960); /* C1AD08: bne     $c1b960 */
-L_C1AD0C:
-    FA18_CHECK(0xC1AD0C);
-    FA18_OP(0xC1AD0C, 0x0890, 0xC1AD10); /* C1AD0C: bclr    #$7, (A0) */
-    FA18_BCC(0xC1AD10, 0x6600, 0xC1AD14, 0xC1B79A, L_C1B79A); /* C1AD10: bne     $c1b79a */
-L_C1AD14:
-    FA18_CHECK(0xC1AD14);
-    FA18_OP(0xC1AD14, 0x08A8, 0xC1AD1A); /* C1AD14: bclr    #$0, ($1,A0) */
-    FA18_BCC(0xC1AD1A, 0x6600, 0xC1AD1E, 0xC1B914, L_C1B914); /* C1AD1A: bne     $c1b914 */
-L_C1AD1E:
-    FA18_CHECK(0xC1AD1E);
-    FA18_OP(0xC1AD1E, 0x08A8, 0xC1AD24); /* C1AD1E: bclr    #$1, ($1,A0) */
-    FA18_BCC(0xC1AD24, 0x6600, 0xC1AD28, 0xC1B9AC, L_C1B9AC); /* C1AD24: bne     $c1b9ac */
-L_C1AD28:
-    FA18_CHECK(0xC1AD28);
-    FA18_OP(0xC1AD28, 0x08A8, 0xC1AD2E); /* C1AD28: bclr    #$2, ($1,A0) */
-    FA18_BCC(0xC1AD2E, 0x6600, 0xC1AD32, 0xC1B930, L_C1B930); /* C1AD2E: bne     $c1b930 */
-L_C1AD32:
-    FA18_CHECK(0xC1AD32);
-    FA18_OP(0xC1AD32, 0x08A8, 0xC1AD38); /* C1AD32: bclr    #$3, ($1,A0) */
-    FA18_BCC(0xC1AD38, 0x6600, 0xC1AD3C, 0xC1B98A, L_C1B98A); /* C1AD38: bne     $c1b98a */
-L_C1AD3C:
-    FA18_CHECK(0xC1AD3C);
-    FA18_OP(0xC1AD3C, 0x08A8, 0xC1AD42); /* C1AD3C: bclr    #$4, ($1,A0) */
-    FA18_BCC(0xC1AD42, 0x6600, 0xC1AD46, 0xC1B7B6, L_C1B7B6); /* C1AD42: bne     $c1b7b6 */
-L_C1AD46:
-    FA18_CHECK(0xC1AD46);
-    FA18_OP(0xC1AD46, 0x08A8, 0xC1AD4C); /* C1AD46: bclr    #$5, ($1,A0) */
-    FA18_BCC(0xC1AD4C, 0x6600, 0xC1AD50, 0xC1B7C2, L_C1B7C2); /* C1AD4C: bne     $c1b7c2 */
-L_C1AD50:
-    FA18_CHECK(0xC1AD50);
-    FA18_OP(0xC1AD50, 0x08A8, 0xC1AD56); /* C1AD50: bclr    #$6, ($1,A0) */
-    FA18_BCC(0xC1AD56, 0x6600, 0xC1AD5A, 0xC1BB66, L_C1BB66); /* C1AD56: bne     $c1bb66 */
-L_C1AD5A:
-    FA18_CHECK(0xC1AD5A);
-    FA18_OP(0xC1AD5A, 0x08A8, 0xC1AD60); /* C1AD5A: bclr    #$7, ($1,A0) */
-    FA18_BCC(0xC1AD60, 0x6600, 0xC1AD64, 0xC1B890, L_C1B890); /* C1AD60: bne     $c1b890 */
-L_C1AD64:
-    FA18_CHECK(0xC1AD64);
-    FA18_OP(0xC1AD64, 0x4239, 0xC1AD6A); /* C1AD64: clr.b   $c45879.l */
-    FA18_OP(0xC1AD6A, 0x4239, 0xC1AD70); /* C1AD6A: clr.b   $c4587a.l */
-L_C1AD70:
-    FA18_CHECK(0xC1AD70);
-    FA18_RETURN(0xC1AD70, 0x4E75); /* C1AD70: rts */
-L_C1B126:
-    FA18_CHECK(0xC1B126);
-    FA18_OP(0xC1B126, 0x4A06, 0xC1B128); /* C1B126: tst.b   D6 */
-    FA18_BCC(0xC1B128, 0x6604, 0xC1B12A, 0xC1B12E, L_C1B12E); /* C1B128: bne     $c1b12e */
-L_C1B12A:
-    FA18_CHECK(0xC1B12A);
-    FA18_JUMP(0xC1B12A, 0x6000, 0xC1C23C, L_C1C23C); /* C1B12A: bra     $c1c23c */
-L_C1B12E:
-    FA18_CHECK(0xC1B12E);
-    FA18_OP(0xC1B12E, 0x4A39, 0xC1B134); /* C1B12E: tst.b   $c457ae.l */
-    FA18_BCC(0xC1B134, 0x6600, 0xC1B138, 0xC1C23C, L_C1C23C); /* C1B134: bne     $c1c23c */
-L_C1B138:
-    FA18_CHECK(0xC1B138);
-    FA18_OP(0xC1B138, 0x13FC, 0xC1B140); /* C1B138: move.b  #$8, $c45842.l */
-    FA18_OP(0xC1B140, 0x41F9, 0xC1B146); /* C1B140: lea     $c457ab.l, A0 */
-    FA18_CALL(0xC1B146, 0x6100, 0xC1B14A, 133, 0); /* C1B146: bsr     $c1c214 */
-L_C1B14A:
-    FA18_CHECK(0xC1B14A);
-    FA18_OP(0xC1B14A, 0x08F9, 0xC1B152); /* C1B14A: bset    #$5, $c4599a.l */
-    FA18_OP(0xC1B152, 0x0039, 0xC1B15A); /* C1B152: ori.b   #$a, $c46200.l */
-    FA18_JUMP(0xC1B15A, 0x6000, 0xC1C23C, L_C1C23C); /* C1B15A: bra     $c1c23c */
-L_C1B1A4:
-    FA18_CHECK(0xC1B1A4);
-    FA18_CALL(0xC1B1A4, 0x4EB9, 0xC1B1AA, 398, 1); /* C1B1A4: jsr     $c33186.l */
-L_C1B1AA:
-    FA18_CHECK(0xC1B1AA);
-    FA18_OP(0xC1B1AA, 0x08F9, 0xC1B1B2); /* C1B1AA: bset    #$7, $c4599a.l */
-    FA18_OP(0xC1B1B2, 0x13FC, 0xC1B1BA); /* C1B1B2: move.b  #$1, $c457b9.l */
-    FA18_JUMP(0xC1B1BA, 0x6000, 0xC1C23C, L_C1C23C); /* C1B1BA: bra     $c1c23c */
-L_C1B1C8:
-    FA18_CHECK(0xC1B1C8);
-    FA18_CALL(0xC1B1C8, 0x4EB9, 0xC1B1CE, 398, 1); /* C1B1C8: jsr     $c33186.l */
-L_C1B1CE:
-    FA18_CHECK(0xC1B1CE);
-    FA18_OP(0xC1B1CE, 0x08F9, 0xC1B1D6); /* C1B1CE: bset    #$6, $c4599a.l */
-    FA18_OP(0xC1B1D6, 0x41F9, 0xC1B1DC); /* C1B1D6: lea     $c46184.l, A0 */
-    FA18_OP(0xC1B1DC, 0xD0F9, 0xC1B1E2); /* C1B1DC: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1B1E2, 0x1828, 0xC1B1E6); /* C1B1E2: move.b  ($63,A0), D4 */
-    FA18_OP(0xC1B1E6, 0x0204, 0xC1B1EA); /* C1B1E6: andi.b  #$f, D4 */
-    FA18_OP(0xC1B1EA, 0x0C04, 0xC1B1EE); /* C1B1EA: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1B1EE, 0x670C, 0xC1B1F0, 0xC1B1FC, L_C1B1FC); /* C1B1EE: beq     $c1b1fc */
-L_C1B1F0:
-    FA18_CHECK(0xC1B1F0);
-    FA18_OP(0xC1B1F0, 0x0C04, 0xC1B1F4); /* C1B1F0: cmpi.b  #$b, D4 */
-    FA18_BCC(0xC1B1F4, 0x670C, 0xC1B1F6, 0xC1B202, L_C1B202); /* C1B1F4: beq     $c1b202 */
-L_C1B1F6:
-    FA18_CHECK(0xC1B1F6);
-    FA18_OP(0xC1B1F6, 0x183C, 0xC1B1FA); /* C1B1F6: move.b  #$b, D4 */
-    FA18_JUMP(0xC1B1FA, 0x600A, 0xC1B206, L_C1B206); /* C1B1FA: bra     $c1b206 */
-L_C1B1FC:
-    FA18_CHECK(0xC1B1FC);
-    FA18_OP(0xC1B1FC, 0x183C, 0xC1B200); /* C1B1FC: move.b  #$d, D4 */
-    FA18_JUMP(0xC1B200, 0x6004, 0xC1B206, L_C1B206); /* C1B200: bra     $c1b206 */
-L_C1B202:
-    FA18_CHECK(0xC1B202);
-    FA18_OP(0xC1B202, 0x183C, 0xC1B206); /* C1B202: move.b  #$9, D4 */
-L_C1B206:
-    FA18_CHECK(0xC1B206);
-    FA18_OP(0xC1B206, 0x0228, 0xC1B20C); /* C1B206: andi.b  #$f0, ($63,A0) */
-    FA18_OP(0xC1B20C, 0x8928, 0xC1B210); /* C1B20C: or.b    D4, ($63,A0) */
-    FA18_OP(0xC1B210, 0x13FC, 0xC1B218); /* C1B210: move.b  #$3, $c4583b.l */
-    FA18_JUMP(0xC1B218, 0x6000, 0xC1C23C, L_C1C23C); /* C1B218: bra     $c1c23c */
-L_C1B21C:
-    FA18_CHECK(0xC1B21C);
-    FA18_OP(0xC1B21C, 0x4A06, 0xC1B21E); /* C1B21C: tst.b   D6 */
-    FA18_BCC(0xC1B21E, 0x6600, 0xC1B222, 0xC1C23C, L_C1C23C); /* C1B21E: bne     $c1c23c */
-L_C1B222:
-    FA18_CHECK(0xC1B222);
-    FA18_CALL(0xC1B222, 0x4EB9, 0xC1B228, 18, 0); /* C1B222: jsr     $c0833e.l */
-L_C1B228:
-    FA18_CHECK(0xC1B228);
-    FA18_JUMP(0xC1B228, 0x6000, 0xC1C23C, L_C1C23C); /* C1B228: bra     $c1c23c */
-L_C1B22C:
-    FA18_CHECK(0xC1B22C);
-    FA18_CALL(0xC1B22C, 0x4EB9, 0xC1B232, 19, 0); /* C1B22C: jsr     $c08394.l */
-L_C1B232:
-    FA18_CHECK(0xC1B232);
-    FA18_JUMP(0xC1B232, 0x6000, 0xC1C23C, L_C1C23C); /* C1B232: bra     $c1c23c */
-L_C1B5DC:
-    FA18_CHECK(0xC1B5DC);
-    FA18_CALL(0xC1B5DC, 0x6100, 0xC1B5E0, 128, 0); /* C1B5DC: bsr     $c1b602 */
-L_C1B5E0:
-    FA18_CHECK(0xC1B5E0);
-    FA18_CALL(0xC1B5E0, 0x4EB9, 0xC1B5E6, 398, 1); /* C1B5E0: jsr     $c33186.l */
-L_C1B5E6:
-    FA18_CHECK(0xC1B5E6);
-    FA18_OP(0xC1B5E6, 0x08F9, 0xC1B5EE); /* C1B5E6: bset    #$0, $c4599b.l */
-    FA18_OP(0xC1B5EE, 0x13FC, 0xC1B5F6); /* C1B5EE: move.b  #$3, $c4583f.l */
-    FA18_OP(0xC1B5F6, 0x0A79, 0xC1B5FE); /* C1B5F6: eori.w  #$800, $c46184.l */
-    FA18_JUMP(0xC1B5FE, 0x6000, 0xC1C23C, L_C1C23C); /* C1B5FE: bra     $c1c23c */
-L_C1B616:
-    FA18_CHECK(0xC1B616);
-    FA18_OP(0xC1B616, 0x08F9, 0xC1B61E); /* C1B616: bset    #$1, $c4599a.l */
-    FA18_OP(0xC1B61E, 0x0C39, 0xC1B626); /* C1B61E: cmpi.b  #$11, $c461e6.l */
-    FA18_BCC(0xC1B626, 0x6600, 0xC1B62A, 0xC1C23C, L_C1C23C); /* C1B626: bne     $c1c23c */
-L_C1B62A:
-    FA18_CHECK(0xC1B62A);
-    FA18_CALL(0xC1B62A, 0x4EB9, 0xC1B630, 398, 1); /* C1B62A: jsr     $c33186.l */
-L_C1B630:
-    FA18_CHECK(0xC1B630);
-    FA18_OP(0xC1B630, 0x0A79, 0xC1B638); /* C1B630: eori.w  #$8000, $c46186.l */
-    FA18_OP(0xC1B638, 0x0879, 0xC1B640); /* C1B638: bchg    #$7, $c45847.l */
-    FA18_OP(0xC1B640, 0x13FC, 0xC1B648); /* C1B640: move.b  #$3, $c45845.l */
-    FA18_OP(0xC1B648, 0x4840, 0xC1B64A); /* C1B648: swap    D0 */
-    FA18_OP(0xC1B64A, 0x0839, 0xC1B652); /* C1B64A: btst    #$7, $c46186.l */
-    FA18_BCC(0xC1B652, 0x6704, 0xC1B654, 0xC1B658, L_C1B658); /* C1B652: beq     $c1b658 */
-L_C1B654:
-    FA18_CHECK(0xC1B654);
-    FA18_OP(0xC1B654, 0x303C, 0xC1B658); /* C1B654: move.w  #$4023, D0 */
-L_C1B658:
-    FA18_CHECK(0xC1B658);
-    FA18_CALL(0xC1B658, 0x4EB9, 0xC1B65E, 216, 0); /* C1B658: jsr     $c25704.l */
-L_C1B65E:
-    FA18_CHECK(0xC1B65E);
-    FA18_OP(0xC1B65E, 0x4840, 0xC1B660); /* C1B65E: swap    D0 */
-    FA18_JUMP(0xC1B660, 0x6000, 0xC1C23C, L_C1C23C); /* C1B660: bra     $c1c23c */
-L_C1B66C:
-    FA18_CHECK(0xC1B66C);
-    FA18_OP(0xC1B66C, 0x4A06, 0xC1B66E); /* C1B66C: tst.b   D6 */
-    FA18_BCC(0xC1B66E, 0x6652, 0xC1B670, 0xC1B6C2, L_C1B6C2); /* C1B66E: bne     $c1b6c2 */
-L_C1B670:
-    FA18_CHECK(0xC1B670);
-    FA18_OP(0xC1B670, 0x08F9, 0xC1B678); /* C1B670: bset    #$1, $c4599c.l */
-    FA18_OP(0xC1B678, 0x4A05, 0xC1B67A); /* C1B678: tst.b   D5 */
-    FA18_BCC(0xC1B67A, 0x6608, 0xC1B67C, 0xC1B684, L_C1B684); /* C1B67A: bne     $c1b684 */
-L_C1B67C:
-    FA18_CHECK(0xC1B67C);
-    FA18_OP(0xC1B67C, 0x13FC, 0xC1B684); /* C1B67C: move.b  #$4, $c458b2.l */
-L_C1B684:
-    FA18_CHECK(0xC1B684);
-    FA18_OP(0xC1B684, 0x13FC, 0xC1B68C); /* C1B684: move.b  #$1, $c457b5.l */
-L_C1B68C:
-    FA18_CHECK(0xC1B68C);
-    FA18_OP(0xC1B68C, 0x13FC, 0xC1B694); /* C1B68C: move.b  #$1, $c457b4.l */
-    FA18_OP(0xC1B694, 0x4239, 0xC1B69A); /* C1B694: clr.b   $c457ad.l */
-L_C1B69A:
-    FA18_CHECK(0xC1B69A);
-    FA18_OP(0xC1B69A, 0x41F9, 0xC1B6A0); /* C1B69A: lea     $c46184.l, A0 */
-    FA18_OP(0xC1B6A0, 0x3839, 0xC1B6A6); /* C1B6A0: move.w  $c458de.l, D4 */
-    FA18_OP(0xC1B6A6, 0x33F0, 0xC1B6AE); /* C1B6A6: move.w  ($68,A0,D4.w), $c4592a.l */
-    FA18_OP(0xC1B6AE, 0x0079, 0xC1B6B6); /* C1B6AE: ori.w   #$2, $c458c6.l */
-    FA18_OP(0xC1B6B6, 0x13FC, 0xC1B6BE); /* C1B6B6: move.b  #$ff, $c45833.l */
-    FA18_JUMP(0xC1B6BE, 0x6000, 0xC1C23C, L_C1C23C); /* C1B6BE: bra     $c1c23c */
-L_C1B6C2:
-    FA18_CHECK(0xC1B6C2);
-    FA18_OP(0xC1B6C2, 0x08F9, 0xC1B6CA); /* C1B6C2: bset    #$2, $c4599c.l */
-    FA18_OP(0xC1B6CA, 0x13FC, 0xC1B6D2); /* C1B6CA: move.b  #$ff, $c457a6.l */
-    FA18_OP(0xC1B6D2, 0x41F9, 0xC1B6D8); /* C1B6D2: lea     $c42a02.l, A0 */
-    FA18_OP(0xC1B6D8, 0x1039, 0xC1B6DE); /* C1B6D8: move.b  $c45848.l, D0 */
-    FA18_OP(0xC1B6DE, 0x4880, 0xC1B6E0); /* C1B6DE: ext.w   D0 */
-    FA18_OP(0xC1B6E0, 0xE940, 0xC1B6E2); /* C1B6E0: asl.w   #4, D0 */
-    FA18_OP(0xC1B6E2, 0x3200, 0xC1B6E4); /* C1B6E2: move.w  D0, D1 */
-    FA18_OP(0xC1B6E4, 0xD0C0, 0xC1B6E6); /* C1B6E4: adda.w  D0, A0 */
-    FA18_OP(0xC1B6E6, 0x3010, 0xC1B6E8); /* C1B6E6: move.w  (A0), D0 */
-    FA18_BCC(0xC1B6E8, 0x6C38, 0xC1B6EA, 0xC1B722, L_C1B722); /* C1B6E8: bge     $c1b722 */
-L_C1B6EA:
-    FA18_CHECK(0xC1B6EA);
-    FA18_OP(0xC1B6EA, 0x0240, 0xC1B6EE); /* C1B6EA: andi.w  #$7fff, D0 */
-    FA18_OP(0xC1B6EE, 0xE140, 0xC1B6F0); /* C1B6EE: asl.w   #8, D0 */
-    FA18_OP(0xC1B6F0, 0xD040, 0xC1B6F2); /* C1B6F0: add.w   D0, D0 */
-    FA18_OP(0xC1B6F2, 0x43F9, 0xC1B6F8); /* C1B6F2: lea     $c46184.l, A1 */
-    FA18_OP(0xC1B6F8, 0xD2C0, 0xC1B6FA); /* C1B6F8: adda.w  D0, A1 */
-    FA18_OP(0xC1B6FA, 0x0C29, 0xC1B700); /* C1B6FA: cmpi.b  #$20, ($62,A1) */
-    FA18_BCC(0xC1B700, 0x660E, 0xC1B702, 0xC1B710, L_C1B710); /* C1B700: bne     $c1b710 */
-L_C1B702:
-    FA18_CHECK(0xC1B702);
-    FA18_OP(0xC1B702, 0x363C, 0xC1B706); /* C1B702: move.w  #$ffdc, D3 */
-    FA18_OP(0xC1B706, 0x383C, 0xC1B70A); /* C1B706: move.w  #$2f, D4 */
-    FA18_OP(0xC1B70A, 0x3A3C, 0xC1B70E); /* C1B70A: move.w  #$ffd0, D5 */
-    FA18_JUMP(0xC1B70E, 0x600A, 0xC1B71A, L_C1B71A); /* C1B70E: bra     $c1b71a */
-L_C1B710:
-    FA18_CHECK(0xC1B710);
-    FA18_OP(0xC1B710, 0x7600, 0xC1B712); /* C1B710: moveq   #$0, D3 */
-    FA18_OP(0xC1B712, 0x383C, 0xC1B716); /* C1B712: move.w  #$14, D4 */
-    FA18_OP(0xC1B716, 0x3A3C, 0xC1B71A); /* C1B716: move.w  #$ff96, D5 */
-L_C1B71A:
-    FA18_CHECK(0xC1B71A);
-    FA18_CALL(0xC1B71A, 0x4EB9, 0xC1B720, 25, 0); /* C1B71A: jsr     $c091e0.l */
-L_C1B720:
-    FA18_CHECK(0xC1B720);
-    FA18_JUMP(0xC1B720, 0x603A, 0xC1B75C, L_C1B75C); /* C1B720: bra     $c1b75c */
-L_C1B722:
-    FA18_CHECK(0xC1B722);
-    FA18_OP(0xC1B722, 0x41F9, 0xC1B728); /* C1B722: lea     $c42a54.l, A0 */
-    FA18_OP(0xC1B728, 0xD0C1, 0xC1B72A); /* C1B728: adda.w  D1, A0 */
-    FA18_OP(0xC1B72A, 0x4C90, 0xC1B72E); /* C1B72A: movem.w (A0), D0-D5 */
-    FA18_OP(0xC1B72E, 0x4840, 0xC1B730); /* C1B72E: swap    D0 */
-    FA18_OP(0xC1B730, 0xED80, 0xC1B732); /* C1B730: asl.l   #6, D0 */
-    FA18_OP(0xC1B732, 0x4841, 0xC1B734); /* C1B732: swap    D1 */
-    FA18_OP(0xC1B734, 0xED81, 0xC1B736); /* C1B734: asl.l   #6, D1 */
-    FA18_OP(0xC1B736, 0xD442, 0xC1B738); /* C1B736: add.w   D2, D2 */
-    FA18_OP(0xC1B738, 0xD442, 0xC1B73A); /* C1B738: add.w   D2, D2 */
-    FA18_OP(0xC1B73A, 0x49F9, 0xC1B740); /* C1B73A: lea     $c1d7e2.l, A4 */
-    FA18_OP(0xC1B740, 0x4CB4, 0xC1B746); /* C1B740: movem.w (A4,D2.w), D6-D7 */
-    FA18_OP(0xC1B746, 0xE186, 0xC1B748); /* C1B746: asl.l   #8, D6 */
-    FA18_OP(0xC1B748, 0xE187, 0xC1B74A); /* C1B748: asl.l   #8, D7 */
-    FA18_OP(0xC1B74A, 0xD086, 0xC1B74C); /* C1B74A: add.l   D6, D0 */
-    FA18_OP(0xC1B74C, 0xD287, 0xC1B74E); /* C1B74C: add.l   D7, D1 */
-    FA18_OP(0xC1B74E, 0xE184, 0xC1B750); /* C1B74E: asl.l   #8, D4 */
-    FA18_OP(0xC1B750, 0xE185, 0xC1B752); /* C1B750: asl.l   #8, D5 */
-    FA18_OP(0xC1B752, 0xD084, 0xC1B754); /* C1B752: add.l   D4, D0 */
-    FA18_OP(0xC1B754, 0xD285, 0xC1B756); /* C1B754: add.l   D5, D1 */
-    FA18_OP(0xC1B756, 0xE183, 0xC1B758); /* C1B756: asl.l   #8, D3 */
-    FA18_OP(0xC1B758, 0x2401, 0xC1B75A); /* C1B758: move.l  D1, D2 */
-    FA18_OP(0xC1B75A, 0x2203, 0xC1B75C); /* C1B75A: move.l  D3, D1 */
-L_C1B75C:
-    FA18_CHECK(0xC1B75C);
-    FA18_CALL(0xC1B75C, 0x4EB9, 0xC1B762, 22, 0); /* C1B75C: jsr     $c0915a.l */
-L_C1B762:
-    FA18_CHECK(0xC1B762);
-    FA18_OP(0xC1B762, 0x4239, 0xC1B768); /* C1B762: clr.b   $c457b5.l */
-    FA18_OP(0xC1B768, 0x4A39, 0xC1B76E); /* C1B768: tst.b   $c45785.l */
-    FA18_BCC(0xC1B76E, 0x6700, 0xC1B772, 0xC1B68C, L_C1B68C); /* C1B76E: beq     $c1b68c */
-L_C1B772:
-    FA18_CHECK(0xC1B772);
-    FA18_OP(0xC1B772, 0x4239, 0xC1B778); /* C1B772: clr.b   $c457a6.l */
-    FA18_JUMP(0xC1B778, 0x6000, 0xC1C23C, L_C1C23C); /* C1B778: bra     $c1c23c */
-L_C1B77C:
-    FA18_CHECK(0xC1B77C);
-    FA18_OP(0xC1B77C, 0x7800, 0xC1B77E); /* C1B77C: moveq   #$0, D4 */
-    FA18_JUMP(0xC1B77E, 0x604C, 0xC1B7CC, L_C1B7CC); /* C1B77E: bra     $c1b7cc */
-L_C1B780:
-    FA18_CHECK(0xC1B780);
-    FA18_OP(0xC1B780, 0x08F9, 0xC1B788); /* C1B780: bset    #$5, $c4599c.l */
-    FA18_OP(0xC1B788, 0x4A39, 0xC1B78E); /* C1B788: tst.b   $c45785.l */
-    FA18_BCC(0xC1B78E, 0x6700, 0xC1B792, 0xC1B906, L_C1B906); /* C1B78E: beq     $c1b906 */
-L_C1B792:
-    FA18_CHECK(0xC1B792);
-    FA18_OP(0xC1B792, 0x7801, 0xC1B794); /* C1B792: moveq   #$1, D4 */
-    FA18_JUMP(0xC1B794, 0x6036, 0xC1B7CC, L_C1B7CC); /* C1B794: bra     $c1b7cc */
-L_C1B796:
-    FA18_CHECK(0xC1B796);
-    FA18_OP(0xC1B796, 0x7802, 0xC1B798); /* C1B796: moveq   #$2, D4 */
-    FA18_JUMP(0xC1B798, 0x6032, 0xC1B7CC, L_C1B7CC); /* C1B798: bra     $c1b7cc */
-L_C1B79A:
-    FA18_CHECK(0xC1B79A);
-    FA18_OP(0xC1B79A, 0x08F9, 0xC1B7A2); /* C1B79A: bset    #$7, $c4599c.l */
-    FA18_OP(0xC1B7A2, 0x7803, 0xC1B7A4); /* C1B7A2: moveq   #$3, D4 */
-    FA18_JUMP(0xC1B7A4, 0x6026, 0xC1B7CC, L_C1B7CC); /* C1B7A4: bra     $c1b7cc */
-L_C1B7A6:
-    FA18_CHECK(0xC1B7A6);
-    FA18_OP(0xC1B7A6, 0x7804, 0xC1B7A8); /* C1B7A6: moveq   #$4, D4 */
-    FA18_JUMP(0xC1B7A8, 0x6022, 0xC1B7CC, L_C1B7CC); /* C1B7A8: bra     $c1b7cc */
-L_C1B7AA:
-    FA18_CHECK(0xC1B7AA);
-    FA18_OP(0xC1B7AA, 0x7805, 0xC1B7AC); /* C1B7AA: moveq   #$5, D4 */
-    FA18_JUMP(0xC1B7AC, 0x601E, 0xC1B7CC, L_C1B7CC); /* C1B7AC: bra     $c1b7cc */
-L_C1B7AE:
-    FA18_CHECK(0xC1B7AE);
-    FA18_OP(0xC1B7AE, 0x7806, 0xC1B7B0); /* C1B7AE: moveq   #$6, D4 */
-    FA18_JUMP(0xC1B7B0, 0x601A, 0xC1B7CC, L_C1B7CC); /* C1B7B0: bra     $c1b7cc */
-L_C1B7B2:
-    FA18_CHECK(0xC1B7B2);
-    FA18_OP(0xC1B7B2, 0x7807, 0xC1B7B4); /* C1B7B2: moveq   #$7, D4 */
-    FA18_JUMP(0xC1B7B4, 0x6016, 0xC1B7CC, L_C1B7CC); /* C1B7B4: bra     $c1b7cc */
-L_C1B7B6:
-    FA18_CHECK(0xC1B7B6);
-    FA18_OP(0xC1B7B6, 0x08F9, 0xC1B7BE); /* C1B7B6: bset    #$4, $c4599d.l */
-    FA18_OP(0xC1B7BE, 0x7808, 0xC1B7C0); /* C1B7BE: moveq   #$8, D4 */
-    FA18_JUMP(0xC1B7C0, 0x600A, 0xC1B7CC, L_C1B7CC); /* C1B7C0: bra     $c1b7cc */
-L_C1B7C2:
-    FA18_CHECK(0xC1B7C2);
-    FA18_OP(0xC1B7C2, 0x08F9, 0xC1B7CA); /* C1B7C2: bset    #$5, $c4599d.l */
-    FA18_OP(0xC1B7CA, 0x7809, 0xC1B7CC); /* C1B7CA: moveq   #$9, D4 */
-L_C1B7CC:
-    FA18_CHECK(0xC1B7CC);
-    FA18_OP(0xC1B7CC, 0x13C4, 0xC1B7D2); /* C1B7CC: move.b  D4, $c458b2.l */
-    FA18_OP(0xC1B7D2, 0x13FC, 0xC1B7DA); /* C1B7D2: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B7DA, 0x4A39, 0xC1B7E0); /* C1B7DA: tst.b   $c458b0.l */
-    FA18_BCC(0xC1B7E0, 0x6600, 0xC1B7E4, 0xC1C23C, L_C1C23C); /* C1B7E0: bne     $c1c23c */
-L_C1B7E4:
-    FA18_CHECK(0xC1B7E4);
-    FA18_OP(0xC1B7E4, 0x13FC, 0xC1B7EC); /* C1B7E4: move.b  #$ff, $c458b0.l */
-    FA18_JUMP(0xC1B7EC, 0x6000, 0xC1C23C, L_C1C23C); /* C1B7EC: bra     $c1c23c */
-L_C1B7F0:
-    FA18_CHECK(0xC1B7F0);
-    FA18_OP(0xC1B7F0, 0x4A39, 0xC1B7F6); /* C1B7F0: tst.b   $c45785.l */
-    FA18_BCC(0xC1B7F6, 0x6612, 0xC1B7F8, 0xC1B80A, L_C1B80A); /* C1B7F6: bne     $c1b80a */
-L_C1B7F8:
-    FA18_CHECK(0xC1B7F8);
-    FA18_OP(0xC1B7F8, 0x1839, 0xC1B7FE); /* C1B7F8: move.b  $c45785.l, D4 */
-    FA18_BCC(0xC1B7FE, 0x66B6, 0xC1B800, 0xC1B7B6, L_C1B7B6); /* C1B7FE: bne     $c1b7b6 */
-L_C1B800:
-    FA18_CHECK(0xC1B800);
-    FA18_OP(0xC1B800, 0x08F9, 0xC1B808); /* C1B800: bset    #$3, $c4599c.l */
-    FA18_JUMP(0xC1B808, 0x607A, 0xC1B884, L_C1B884); /* C1B808: bra     $c1b884 */
-L_C1B80A:
-    FA18_CHECK(0xC1B80A);
-    FA18_OP(0xC1B80A, 0x1839, 0xC1B810); /* C1B80A: move.b  $c45785.l, D4 */
-    FA18_BCC(0xC1B810, 0x6700, 0xC1B814, 0xC1C23C, L_C1C23C); /* C1B810: beq     $c1c23c */
-L_C1B814:
-    FA18_CHECK(0xC1B814);
-    FA18_OP(0xC1B814, 0x4A39, 0xC1B81A); /* C1B814: tst.b   $c458ae.l */
-    FA18_BCC(0xC1B81A, 0x6600, 0xC1B81E, 0xC1C23C, L_C1C23C); /* C1B81A: bne     $c1c23c */
-L_C1B81E:
-    FA18_CHECK(0xC1B81E);
-    FA18_OP(0xC1B81E, 0x08F9, 0xC1B826); /* C1B81E: bset    #$3, $c4599c.l */
-    FA18_OP(0xC1B826, 0x4A39, 0xC1B82C); /* C1B826: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B82C, 0x672C, 0xC1B82E, 0xC1B85A, L_C1B85A); /* C1B82C: beq     $c1b85a */
-L_C1B82E:
-    FA18_CHECK(0xC1B82E);
-    FA18_OP(0xC1B82E, 0x2239, 0xC1B834); /* C1B82E: move.l  $c45c42.l, D1 */
-    FA18_OP(0xC1B834, 0x0481, 0xC1B83A); /* C1B834: subi.l  #$2000000, D1 */
-    FA18_OP(0xC1B83A, 0x0C81, 0xC1B840); /* C1B83A: cmpi.l  #$1000000, D1 */
-    FA18_BCC(0xC1B840, 0x6C06, 0xC1B842, 0xC1B848, L_C1B848); /* C1B840: bge     $c1b848 */
-L_C1B842:
-    FA18_CHECK(0xC1B842);
-    FA18_OP(0xC1B842, 0x223C, 0xC1B848); /* C1B842: move.l  #$1000000, D1 */
-L_C1B848:
-    FA18_CHECK(0xC1B848);
-    FA18_OP(0xC1B848, 0x23C1, 0xC1B84E); /* C1B848: move.l  D1, $c45c42.l */
-    FA18_OP(0xC1B84E, 0x13FC, 0xC1B856); /* C1B84E: move.b  #$ff, $c45858.l */
-    FA18_JUMP(0xC1B856, 0x6000, 0xC1C23C, L_C1C23C); /* C1B856: bra     $c1c23c */
-L_C1B85A:
-    FA18_CHECK(0xC1B85A);
-    FA18_OP(0xC1B85A, 0x5304, 0xC1B85C); /* C1B85A: subq.b  #1, D4 */
-    FA18_BCC(0xC1B85C, 0x6E02, 0xC1B85E, 0xC1B860, L_C1B860); /* C1B85C: bgt     $c1b860 */
-L_C1B85E:
-    FA18_CHECK(0xC1B85E);
-    FA18_OP(0xC1B85E, 0x78FF, 0xC1B860); /* C1B85E: moveq   #-$1, D4 */
-L_C1B860:
-    FA18_CHECK(0xC1B860);
-    FA18_OP(0xC1B860, 0x13C4, 0xC1B866); /* C1B860: move.b  D4, $c45785.l */
-    FA18_OP(0xC1B866, 0x13FC, 0xC1B86E); /* C1B866: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B86E, 0x4A39, 0xC1B874); /* C1B86E: tst.b   $c458b0.l */
-    FA18_BCC(0xC1B874, 0x6600, 0xC1B878, 0xC1C23C, L_C1C23C); /* C1B874: bne     $c1c23c */
-L_C1B878:
-    FA18_CHECK(0xC1B878);
-    FA18_OP(0xC1B878, 0x13FC, 0xC1B880); /* C1B878: move.b  #$ff, $c458b0.l */
-    FA18_JUMP(0xC1B880, 0x6000, 0xC1C23C, L_C1C23C); /* C1B880: bra     $c1c23c */
-L_C1B884:
-    FA18_CHECK(0xC1B884);
-    FA18_OP(0xC1B884, 0x13FC, 0xC1B88C); /* C1B884: move.b  #$ff, $c45891.l */
-    FA18_JUMP(0xC1B88C, 0x6000, 0xC1C23C, L_C1C23C); /* C1B88C: bra     $c1c23c */
-L_C1B890:
-    FA18_CHECK(0xC1B890);
-    FA18_OP(0xC1B890, 0x08F9, 0xC1B898); /* C1B890: bset    #$7, $c4599d.l */
-    FA18_OP(0xC1B898, 0x1839, 0xC1B89E); /* C1B898: move.b  $c45785.l, D4 */
-    FA18_BCC(0xC1B89E, 0x6700, 0xC1B8A2, 0xC1C23C, L_C1C23C); /* C1B89E: beq     $c1c23c */
-L_C1B8A2:
-    FA18_CHECK(0xC1B8A2);
-    FA18_OP(0xC1B8A2, 0x4A39, 0xC1B8A8); /* C1B8A2: tst.b   $c458ae.l */
-    FA18_BCC(0xC1B8A8, 0x6600, 0xC1B8AC, 0xC1C23C, L_C1C23C); /* C1B8A8: bne     $c1c23c */
-L_C1B8AC:
-    FA18_CHECK(0xC1B8AC);
-    FA18_OP(0xC1B8AC, 0x4A39, 0xC1B8B2); /* C1B8AC: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B8B2, 0x672C, 0xC1B8B4, 0xC1B8E0, L_C1B8E0); /* C1B8B2: beq     $c1b8e0 */
-L_C1B8B4:
-    FA18_CHECK(0xC1B8B4);
-    FA18_OP(0xC1B8B4, 0x2239, 0xC1B8BA); /* C1B8B4: move.l  $c45c42.l, D1 */
-    FA18_OP(0xC1B8BA, 0x0681, 0xC1B8C0); /* C1B8BA: addi.l  #$2000000, D1 */
-    FA18_OP(0xC1B8C0, 0x0C81, 0xC1B8C6); /* C1B8C0: cmpi.l  #$8000000, D1 */
-    FA18_BCC(0xC1B8C6, 0x6F06, 0xC1B8C8, 0xC1B8CE, L_C1B8CE); /* C1B8C6: ble     $c1b8ce */
-L_C1B8C8:
-    FA18_CHECK(0xC1B8C8);
-    FA18_OP(0xC1B8C8, 0x223C, 0xC1B8CE); /* C1B8C8: move.l  #$8000000, D1 */
-L_C1B8CE:
-    FA18_CHECK(0xC1B8CE);
-    FA18_OP(0xC1B8CE, 0x23C1, 0xC1B8D4); /* C1B8CE: move.l  D1, $c45c42.l */
-    FA18_OP(0xC1B8D4, 0x13FC, 0xC1B8DC); /* C1B8D4: move.b  #$ff, $c45858.l */
-    FA18_JUMP(0xC1B8DC, 0x6000, 0xC1C23C, L_C1C23C); /* C1B8DC: bra     $c1c23c */
-L_C1B8E0:
-    FA18_CHECK(0xC1B8E0);
-    FA18_OP(0xC1B8E0, 0x5204, 0xC1B8E2); /* C1B8E0: addq.b  #1, D4 */
-    FA18_BCC(0xC1B8E2, 0x670E, 0xC1B8E4, 0xC1B8F2, L_C1B8F2); /* C1B8E2: beq     $c1b8f2 */
-L_C1B8E4:
-    FA18_CHECK(0xC1B8E4);
-    FA18_OP(0xC1B8E4, 0x0C04, 0xC1B8E8); /* C1B8E4: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1B8E8, 0x6D00, 0xC1B8EC, 0xC1B860, L_C1B860); /* C1B8E8: blt     $c1b860 */
-L_C1B8EC:
-    FA18_CHECK(0xC1B8EC);
-    FA18_OP(0xC1B8EC, 0x7804, 0xC1B8EE); /* C1B8EC: moveq   #$4, D4 */
-    FA18_JUMP(0xC1B8EE, 0x6000, 0xC1B860, L_C1B860); /* C1B8EE: bra     $c1b860 */
-L_C1B8F2:
-    FA18_CHECK(0xC1B8F2);
-    FA18_OP(0xC1B8F2, 0x7801, 0xC1B8F4); /* C1B8F2: moveq   #$1, D4 */
-    FA18_JUMP(0xC1B8F4, 0x6000, 0xC1B860, L_C1B860); /* C1B8F4: bra     $c1b860 */
-L_C1B8F8:
-    FA18_CHECK(0xC1B8F8);
-    FA18_OP(0xC1B8F8, 0x08F9, 0xC1B900); /* C1B8F8: bset    #$4, $c4599c.l */
-    FA18_OP(0xC1B900, 0x4A05, 0xC1B902); /* C1B900: tst.b   D5 */
-    FA18_BCC(0xC1B902, 0x6600, 0xC1B906, 0xC1B77C, L_C1B77C); /* C1B902: bne     $c1b77c */
-L_C1B906:
-    FA18_CHECK(0xC1B906);
-    FA18_OP(0xC1B906, 0x4207, 0xC1B908); /* C1B906: clr.b   D7 */
-    FA18_OP(0xC1B908, 0x13FC, 0xC1B910); /* C1B908: move.b  #$0, $c457a8.l */
-    FA18_JUMP(0xC1B910, 0x6000, 0xC1B9CC, L_C1B9CC); /* C1B910: bra     $c1b9cc */
-L_C1B914:
-    FA18_CHECK(0xC1B914);
-    FA18_OP(0xC1B914, 0x08F9, 0xC1B91C); /* C1B914: bset    #$0, $c4599d.l */
-    FA18_OP(0xC1B91C, 0x4A05, 0xC1B91E); /* C1B91C: tst.b   D5 */
-    FA18_BCC(0xC1B91E, 0x6600, 0xC1B922, 0xC1B7A6, L_C1B7A6); /* C1B91E: bne     $c1b7a6 */
-L_C1B922:
-    FA18_CHECK(0xC1B922);
-    FA18_OP(0xC1B922, 0x7E06, 0xC1B924); /* C1B922: moveq   #$6, D7 */
-    FA18_OP(0xC1B924, 0x13FC, 0xC1B92C); /* C1B924: move.b  #$0, $c457a8.l */
-    FA18_JUMP(0xC1B92C, 0x6000, 0xC1B9CC, L_C1B9CC); /* C1B92C: bra     $c1b9cc */
-L_C1B930:
-    FA18_CHECK(0xC1B930);
-    FA18_OP(0xC1B930, 0x08F9, 0xC1B938); /* C1B930: bset    #$2, $c4599d.l */
-    FA18_OP(0xC1B938, 0x4A05, 0xC1B93A); /* C1B938: tst.b   D5 */
-    FA18_BCC(0xC1B93A, 0x6600, 0xC1B93E, 0xC1B7AE, L_C1B7AE); /* C1B93A: bne     $c1b7ae */
-L_C1B93E:
-    FA18_CHECK(0xC1B93E);
-    FA18_OP(0xC1B93E, 0x13FC, 0xC1B946); /* C1B93E: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B946, 0x5339, 0xC1B94C); /* C1B946: subq.b  #1, $c457a7.l */
-    FA18_BCC(0xC1B94C, 0x6D0E, 0xC1B94E, 0xC1B95C, L_C1B95C); /* C1B94C: blt     $c1b95c */
-L_C1B94E:
-    FA18_CHECK(0xC1B94E);
-    FA18_BCC(0xC1B94E, 0x67B6, 0xC1B950, 0xC1B906, L_C1B906); /* C1B94E: beq     $c1b906 */
-L_C1B950:
-    FA18_CHECK(0xC1B950);
-    FA18_OP(0xC1B950, 0x0C39, 0xC1B958); /* C1B950: cmpi.b  #$b, $c457a7.l */
-    FA18_BCC(0xC1B958, 0x6CAC, 0xC1B95A, 0xC1B906, L_C1B906); /* C1B958: bge     $c1b906 */
-L_C1B95A:
-    FA18_CHECK(0xC1B95A);
-    FA18_JUMP(0xC1B95A, 0x607E, 0xC1B9DA, L_C1B9DA); /* C1B95A: bra     $c1b9da */
-L_C1B95C:
-    FA18_CHECK(0xC1B95C);
-    FA18_OP(0xC1B95C, 0x7E0B, 0xC1B95E); /* C1B95C: moveq   #$b, D7 */
-    FA18_JUMP(0xC1B95E, 0x606C, 0xC1B9CC, L_C1B9CC); /* C1B95E: bra     $c1b9cc */
-L_C1B960:
-    FA18_CHECK(0xC1B960);
-    FA18_OP(0xC1B960, 0x08F9, 0xC1B968); /* C1B960: bset    #$6, $c4599c.l */
-    FA18_OP(0xC1B968, 0x4A05, 0xC1B96A); /* C1B968: tst.b   D5 */
-    FA18_BCC(0xC1B96A, 0x6600, 0xC1B96E, 0xC1B796, L_C1B796); /* C1B96A: bne     $c1b796 */
-L_C1B96E:
-    FA18_CHECK(0xC1B96E);
-    FA18_OP(0xC1B96E, 0x13FC, 0xC1B976); /* C1B96E: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B976, 0x5239, 0xC1B97C); /* C1B976: addq.b  #1, $c457a7.l */
-    FA18_OP(0xC1B97C, 0x0C39, 0xC1B984); /* C1B97C: cmpi.b  #$b, $c457a7.l */
-    FA18_BCC(0xC1B984, 0x6F54, 0xC1B986, 0xC1B9DA, L_C1B9DA); /* C1B984: ble     $c1b9da */
-L_C1B986:
-    FA18_CHECK(0xC1B986);
-    FA18_JUMP(0xC1B986, 0x6000, 0xC1B906, L_C1B906); /* C1B986: bra     $c1b906 */
-L_C1B98A:
-    FA18_CHECK(0xC1B98A);
-    FA18_OP(0xC1B98A, 0x08F9, 0xC1B992); /* C1B98A: bset    #$3, $c4599d.l */
-    FA18_OP(0xC1B992, 0x4A05, 0xC1B994); /* C1B992: tst.b   D5 */
-    FA18_BCC(0xC1B994, 0x6600, 0xC1B998, 0xC1B7B2, L_C1B7B2); /* C1B994: bne     $c1b7b2 */
-L_C1B998:
-    FA18_CHECK(0xC1B998);
-    FA18_OP(0xC1B998, 0x7E0C, 0xC1B99A); /* C1B998: moveq   #$c, D7 */
-    FA18_OP(0xC1B99A, 0x13FC, 0xC1B9A2); /* C1B99A: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B9A2, 0x13FC, 0xC1B9AA); /* C1B9A2: move.b  #$ff, $c45858.l */
-    FA18_JUMP(0xC1B9AA, 0x6020, 0xC1B9CC, L_C1B9CC); /* C1B9AA: bra     $c1b9cc */
-L_C1B9AC:
-    FA18_CHECK(0xC1B9AC);
-    FA18_OP(0xC1B9AC, 0x08F9, 0xC1B9B4); /* C1B9AC: bset    #$1, $c4599d.l */
-    FA18_OP(0xC1B9B4, 0x4A05, 0xC1B9B6); /* C1B9B4: tst.b   D5 */
-    FA18_BCC(0xC1B9B6, 0x6600, 0xC1B9BA, 0xC1B7AA, L_C1B7AA); /* C1B9B6: bne     $c1b7aa */
-L_C1B9BA:
-    FA18_CHECK(0xC1B9BA);
-    FA18_OP(0xC1B9BA, 0x7E0D, 0xC1B9BC); /* C1B9BA: moveq   #$d, D7 */
-    FA18_OP(0xC1B9BC, 0x13FC, 0xC1B9C4); /* C1B9BC: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B9C4, 0x13FC, 0xC1B9CC); /* C1B9C4: move.b  #$ff, $c45858.l */
-L_C1B9CC:
-    FA18_CHECK(0xC1B9CC);
-    FA18_OP(0xC1B9CC, 0x13C7, 0xC1B9D2); /* C1B9CC: move.b  D7, $c457a7.l */
-    FA18_OP(0xC1B9D2, 0x13FC, 0xC1B9DA); /* C1B9D2: move.b  #$3, $c45836.l */
-L_C1B9DA:
-    FA18_CHECK(0xC1B9DA);
-    FA18_CALL(0xC1B9DA, 0x4EB9, 0xC1B9E0, 17, 0); /* C1B9DA: jsr     $c08324.l */
-L_C1B9E0:
-    FA18_CHECK(0xC1B9E0);
-    FA18_OP(0xC1B9E0, 0x33FC, 0xC1B9E8); /* C1B9E0: move.w  #$ffff, $c45936.l */
-    FA18_OP(0xC1B9E8, 0x13FC, 0xC1B9F0); /* C1B9E8: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B9F0, 0x13FC, 0xC1B9F8); /* C1B9F0: move.b  #$0, $c457a9.l */
-    FA18_OP(0xC1B9F8, 0x13FC, 0xC1BA00); /* C1B9F8: move.b  #$ff, $c45891.l */
-    FA18_OP(0xC1BA00, 0x41F9, 0xC1BA06); /* C1BA00: lea     $c46184.l, A0 */
-    FA18_OP(0xC1BA06, 0xD0F9, 0xC1BA0C); /* C1BA06: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1BA0C, 0x1828, 0xC1BA10); /* C1BA0C: move.b  ($62,A0), D4 */
-    FA18_OP(0xC1BA10, 0x0204, 0xC1BA14); /* C1BA10: andi.b  #$f0, D4 */
-    FA18_OP(0xC1BA14, 0x0C04, 0xC1BA18); /* C1BA14: cmpi.b  #$30, D4 */
-    FA18_BCC(0xC1BA18, 0x6700, 0xC1BA1C, 0xC1C23C, L_C1C23C); /* C1BA18: beq     $c1c23c */
-L_C1BA1C:
-    FA18_CHECK(0xC1BA1C);
-    FA18_OP(0xC1BA1C, 0x1839, 0xC1BA22); /* C1BA1C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA22, 0x0C04, 0xC1BA26); /* C1BA22: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA26, 0x6D3C, 0xC1BA28, 0xC1BA64, L_C1BA64); /* C1BA26: blt     $c1ba64 */
-L_C1BA28:
-    FA18_CHECK(0xC1BA28);
-    FA18_OP(0xC1BA28, 0x0C04, 0xC1BA2C); /* C1BA28: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA2C, 0x6F06, 0xC1BA2E, 0xC1BA34, L_C1BA34); /* C1BA2C: ble     $c1ba34 */
-L_C1BA2E:
-    FA18_CHECK(0xC1BA2E);
-    FA18_OP(0xC1BA2E, 0x0C04, 0xC1BA32); /* C1BA2E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BA32, 0x6D30, 0xC1BA34, 0xC1BA64, L_C1BA64); /* C1BA32: blt     $c1ba64 */
-L_C1BA34:
-    FA18_CHECK(0xC1BA34);
-    FA18_OP(0xC1BA34, 0x3E3C, 0xC1BA38); /* C1BA34: move.w  #$b3, D7 */
-    FA18_OP(0xC1BA38, 0x0C04, 0xC1BA3C); /* C1BA38: cmpi.b  #$5, D4 */
-    FA18_BCC(0xC1BA3C, 0x6D06, 0xC1BA3E, 0xC1BA44, L_C1BA44); /* C1BA3C: blt     $c1ba44 */
-L_C1BA3E:
-    FA18_CHECK(0xC1BA3E);
-    FA18_OP(0xC1BA3E, 0x0C04, 0xC1BA42); /* C1BA3E: cmpi.b  #$7, D4 */
-    FA18_BCC(0xC1BA42, 0x6F04, 0xC1BA44, 0xC1BA48, L_C1BA48); /* C1BA42: ble     $c1ba48 */
-L_C1BA44:
-    FA18_CHECK(0xC1BA44);
-    FA18_OP(0xC1BA44, 0x3E3C, 0xC1BA48); /* C1BA44: move.w  #$a7, D7 */
-L_C1BA48:
-    FA18_CHECK(0xC1BA48);
-    FA18_OP(0xC1BA48, 0xBE79, 0xC1BA4E); /* C1BA48: cmp.w   $c45984.l, D7 */
-    FA18_BCC(0xC1BA4E, 0x6614, 0xC1BA50, 0xC1BA64, L_C1BA64); /* C1BA4E: bne     $c1ba64 */
-L_C1BA50:
-    FA18_CHECK(0xC1BA50);
-    FA18_OP(0xC1BA50, 0x33FC, 0xC1BA58); /* C1BA50: move.w  #$32, $c45986.l */
-    FA18_OP(0xC1BA58, 0x33FC, 0xC1BA60); /* C1BA58: move.w  #$320, $c45988.l */
-    FA18_JUMP(0xC1BA60, 0x6000, 0xC1C23C, L_C1C23C); /* C1BA60: bra     $c1c23c */
-L_C1BA64:
-    FA18_CHECK(0xC1BA64);
-    FA18_OP(0xC1BA64, 0x41F9, 0xC1BA6A); /* C1BA64: lea     $c1bad4.l, A0 */
-    FA18_OP(0xC1BA6A, 0x1839, 0xC1BA70); /* C1BA6A: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA70, 0x4884, 0xC1BA72); /* C1BA70: ext.w   D4 */
-    FA18_OP(0xC1BA72, 0x1830, 0xC1BA76); /* C1BA72: move.b  (A0,D4.w), D4 */
-    FA18_OP(0xC1BA76, 0x4884, 0xC1BA78); /* C1BA76: ext.w   D4 */
-    FA18_OP(0xC1BA78, 0x33C4, 0xC1BA7E); /* C1BA78: move.w  D4, $c45986.l */
-    FA18_OP(0xC1BA7E, 0xE944, 0xC1BA80); /* C1BA7E: asl.w   #4, D4 */
-    FA18_OP(0xC1BA80, 0x33C4, 0xC1BA86); /* C1BA80: move.w  D4, $c45988.l */
-    FA18_CALL(0xC1BA86, 0x4EB9, 0xC1BA8C, 16, 0); /* C1BA86: jsr     $c082b8.l */
-L_C1BA8C:
-    FA18_CHECK(0xC1BA8C);
-    FA18_OP(0xC1BA8C, 0x1839, 0xC1BA92); /* C1BA8C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA92, 0x0C04, 0xC1BA96); /* C1BA92: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA96, 0x6D0C, 0xC1BA98, 0xC1BAA4, L_C1BAA4); /* C1BA96: blt     $c1baa4 */
-L_C1BA98:
-    FA18_CHECK(0xC1BA98);
-    FA18_OP(0xC1BA98, 0x0C04, 0xC1BA9C); /* C1BA98: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA9C, 0x6F12, 0xC1BA9E, 0xC1BAB0, L_C1BAB0); /* C1BA9C: ble     $c1bab0 */
-L_C1BA9E:
-    FA18_CHECK(0xC1BA9E);
-    FA18_OP(0xC1BA9E, 0x0C04, 0xC1BAA2); /* C1BA9E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BAA2, 0x6C0C, 0xC1BAA4, 0xC1BAB0, L_C1BAB0); /* C1BAA2: bge     $c1bab0 */
-L_C1BAA4:
-    FA18_CHECK(0xC1BAA4);
-    FA18_OP(0xC1BAA4, 0x33FC, 0xC1BAAC); /* C1BAA4: move.w  #$90, $c45984.l */
-    FA18_JUMP(0xC1BAAC, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAAC: bra     $c1c23c */
-L_C1BAB0:
-    FA18_CHECK(0xC1BAB0);
-    FA18_OP(0xC1BAB0, 0x0C04, 0xC1BAB4); /* C1BAB0: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1BAB4, 0x6F12, 0xC1BAB6, 0xC1BAC8, L_C1BAC8); /* C1BAB4: ble     $c1bac8 */
-L_C1BAB6:
-    FA18_CHECK(0xC1BAB6);
-    FA18_OP(0xC1BAB6, 0x0C04, 0xC1BABA); /* C1BAB6: cmpi.b  #$8, D4 */
-    FA18_BCC(0xC1BABA, 0x6C0C, 0xC1BABC, 0xC1BAC8, L_C1BAC8); /* C1BABA: bge     $c1bac8 */
-L_C1BABC:
-    FA18_CHECK(0xC1BABC);
-    FA18_OP(0xC1BABC, 0x33FC, 0xC1BAC4); /* C1BABC: move.w  #$b3, $c45984.l */
-    FA18_JUMP(0xC1BAC4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAC4: bra     $c1c23c */
-L_C1BAC8:
-    FA18_CHECK(0xC1BAC8);
-    FA18_OP(0xC1BAC8, 0x33FC, 0xC1BAD0); /* C1BAC8: move.w  #$a7, $c45984.l */
-    FA18_JUMP(0xC1BAD0, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAD0: bra     $c1c23c */
-L_C1BB66:
-    FA18_CHECK(0xC1BB66);
-    FA18_OP(0xC1BB66, 0x08F9, 0xC1BB6E); /* C1BB66: bset    #$6, $c4599d.l */
-    FA18_OP(0xC1BB6E, 0x13FC, 0xC1BB76); /* C1BB6E: move.b  #$5, $c45891.l */
-    FA18_JUMP(0xC1BB76, 0x6000, 0xC1C23C, L_C1C23C); /* C1BB76: bra     $c1c23c */
-L_C1BB7A:
-    FA18_CHECK(0xC1BB7A);
-    FA18_OP(0xC1BB7A, 0x0C39, 0xC1BB82); /* C1BB7A: cmpi.b  #$2, $c458a6.l */
-    FA18_BCC(0xC1BB82, 0x6712, 0xC1BB84, 0xC1BB96, L_C1BB96); /* C1BB82: beq     $c1bb96 */
-L_C1BB84:
-    FA18_CHECK(0xC1BB84);
-    FA18_OP(0xC1BB84, 0x0C39, 0xC1BB8C); /* C1BB84: cmpi.b  #$7d, $c458a6.l */
-    FA18_BCC(0xC1BB8C, 0x662C, 0xC1BB8E, 0xC1BBBA, L_C1BBBA); /* C1BB8C: bne     $c1bbba */
-L_C1BB8E:
-    FA18_CHECK(0xC1BB8E);
-    FA18_OP(0xC1BB8E, 0x4A39, 0xC1BB94); /* C1BB8E: tst.b   $c4579a.l */
-    FA18_BCC(0xC1BB94, 0x6C12, 0xC1BB96, 0xC1BBA8, L_C1BBA8); /* C1BB94: bge     $c1bba8 */
-L_C1BB96:
-    FA18_CHECK(0xC1BB96);
-    FA18_CALL(0xC1BB96, 0x4EB9, 0xC1BB9C, 398, 1); /* C1BB96: jsr     $c33186.l */
-L_C1BB9C:
-    FA18_CHECK(0xC1BB9C);
-    FA18_OP(0xC1BB9C, 0x08F9, 0xC1BBA4); /* C1BB9C: bset    #$3, $c46186.l */
-    FA18_JUMP(0xC1BBA4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BBA4: bra     $c1c23c */
-L_C1BBA8:
-    FA18_CHECK(0xC1BBA8);
-    FA18_OP(0xC1BBA8, 0x4840, 0xC1BBAA); /* C1BBA8: swap    D0 */
-    FA18_OP(0xC1BBAA, 0x303C, 0xC1BBAE); /* C1BBAA: move.w  #$401f, D0 */
-    FA18_CALL(0xC1BBAE, 0x4EB9, 0xC1BBB4, 216, 0); /* C1BBAE: jsr     $c25704.l */
-L_C1BBB4:
-    FA18_CHECK(0xC1BBB4);
-    FA18_OP(0xC1BBB4, 0x4840, 0xC1BBB6); /* C1BBB4: swap    D0 */
-    FA18_JUMP(0xC1BBB6, 0x6000, 0xC1C23C, L_C1C23C); /* C1BBB6: bra     $c1c23c */
-L_C1BBBA:
-    FA18_CHECK(0xC1BBBA);
-    FA18_CALL(0xC1BBBA, 0x4EB9, 0xC1BBC0, 398, 1); /* C1BBBA: jsr     $c33186.l */
-L_C1BBC0:
-    FA18_CHECK(0xC1BBC0);
-    FA18_OP(0xC1BBC0, 0x1839, 0xC1BBC6); /* C1BBC0: move.b  $c46200.l, D4 */
-    FA18_OP(0xC1BBC6, 0x0204, 0xC1BBCA); /* C1BBC6: andi.b  #$f, D4 */
-    FA18_BCC(0xC1BBCA, 0x6600, 0xC1BBCE, 0xC1C23C, L_C1C23C); /* C1BBCA: bne     $c1c23c */
-L_C1BBCE:
-    FA18_CHECK(0xC1BBCE);
-    FA18_OP(0xC1BBCE, 0x08F9, 0xC1BBD6); /* C1BBCE: bset    #$4, $c4599a.l */
-    FA18_OP(0xC1BBD6, 0x1839, 0xC1BBDC); /* C1BBD6: move.b  $c461e7.l, D4 */
-    FA18_OP(0xC1BBDC, 0x0204, 0xC1BBE0); /* C1BBDC: andi.b  #$f0, D4 */
-    FA18_OP(0xC1BBE0, 0x0404, 0xC1BBE4); /* C1BBE0: subi.b  #$10, D4 */
-    FA18_BCC(0xC1BBE4, 0x6C04, 0xC1BBE6, 0xC1BBEA, L_C1BBEA); /* C1BBE4: bge     $c1bbea */
-L_C1BBE6:
-    FA18_CHECK(0xC1BBE6);
-    FA18_OP(0xC1BBE6, 0x183C, 0xC1BBEA); /* C1BBE6: move.b  #$30, D4 */
-L_C1BBEA:
-    FA18_CHECK(0xC1BBEA);
-    FA18_OP(0xC1BBEA, 0x0239, 0xC1BBF2); /* C1BBEA: andi.b  #$f, $c461e7.l */
-    FA18_OP(0xC1BBF2, 0x8939, 0xC1BBF8); /* C1BBF2: or.b    D4, $c461e7.l */
-    FA18_OP(0xC1BBF8, 0x13FC, 0xC1BC00); /* C1BBF8: move.b  #$3, $c45843.l */
-    FA18_OP(0xC1BC00, 0x13FC, 0xC1BC08); /* C1BC00: move.b  #$3, $c45844.l */
-    FA18_OP(0xC1BC08, 0x4239, 0xC1BC0E); /* C1BC08: clr.b   $c458b4.l */
-    FA18_JUMP(0xC1BC0E, 0x6000, 0xC1C23C, L_C1C23C); /* C1BC0E: bra     $c1c23c */
-L_C1BC12:
-    FA18_CHECK(0xC1BC12);
-    FA18_OP(0xC1BC12, 0x08F9, 0xC1BC1A); /* C1BC12: bset    #$0, $c4599a.l */
-    FA18_OP(0xC1BC1A, 0x0839, 0xC1BC22); /* C1BC1A: btst    #$7, $c46187.l */
-    FA18_BCC(0xC1BC22, 0x6622, 0xC1BC24, 0xC1BC46, L_C1BC46); /* C1BC22: bne     $c1bc46 */
-L_C1BC24:
-    FA18_CHECK(0xC1BC24);
-    FA18_OP(0xC1BC24, 0x0879, 0xC1BC2C); /* C1BC24: bchg    #$7, $c46200.l */
-    FA18_OP(0xC1BC2C, 0x2839, 0xC1BC32); /* C1BC2C: move.l  $c45b58.l, D4 */
-    FA18_OP(0xC1BC32, 0x0284, 0xC1BC38); /* C1BC32: andi.l  #$40, D4 */
-    FA18_BCC(0xC1BC38, 0x670C, 0xC1BC3A, 0xC1BC46, L_C1BC46); /* C1BC38: beq     $c1bc46 */
-L_C1BC3A:
-    FA18_CHECK(0xC1BC3A);
-    FA18_OP(0xC1BC3A, 0x13FC, 0xC1BC42); /* C1BC3A: move.b  #$83, $c45885.l */
-    FA18_JUMP(0xC1BC42, 0x6000, 0xC1C23C, L_C1C23C); /* C1BC42: bra     $c1c23c */
-L_C1BC46:
-    FA18_CHECK(0xC1BC46);
-    FA18_CALL(0xC1BC46, 0x4EB9, 0xC1BC4C, 398, 1); /* C1BC46: jsr     $c33186.l */
-L_C1BC4C:
-    FA18_CHECK(0xC1BC4C);
-    FA18_JUMP(0xC1BC4C, 0x6000, 0xC1C23C, L_C1C23C); /* C1BC4C: bra     $c1c23c */
-L_C1BF8C:
-    FA18_CHECK(0xC1BF8C);
-    FA18_OP(0xC1BF8C, 0x4A39, 0xC1BF92); /* C1BF8C: tst.b   $c458ae.l */
-    FA18_BCC(0xC1BF92, 0x6600, 0xC1BF96, 0xC1C23C, L_C1C23C); /* C1BF92: bne     $c1c23c */
-L_C1BF96:
-    FA18_CHECK(0xC1BF96);
-    FA18_OP(0xC1BF96, 0x08F9, 0xC1BF9E); /* C1BF96: bset    #$0, $c4599c.l */
-    FA18_OP(0xC1BF9E, 0x4A39, 0xC1BFA4); /* C1BF9E: tst.b   $c457ad.l */
-    FA18_BCC(0xC1BFA4, 0x670E, 0xC1BFA6, 0xC1BFB4, L_C1BFB4); /* C1BFA4: beq     $c1bfb4 */
-L_C1BFA6:
-    FA18_CHECK(0xC1BFA6);
-    FA18_OP(0xC1BFA6, 0x23F9, 0xC1BFB0); /* C1BFA6: move.l  $c45c42.l, $c45664.l */
-    FA18_JUMP(0xC1BFB0, 0x6000, 0xC1B684, L_C1B684); /* C1BFB0: bra     $c1b684 */
-L_C1BFB4:
-    FA18_CHECK(0xC1BFB4);
-    FA18_OP(0xC1BFB4, 0x3F00, 0xC1BFB6); /* C1BFB4: move.w  D0, -(A7) */
-    FA18_CALL(0xC1BFB6, 0x4EB9, 0xC1BFBC, 55, 0); /* C1BFB6: jsr     $c0f4a6.l */
-L_C1BFBC:
-    FA18_CHECK(0xC1BFBC);
-    FA18_OP(0xC1BFBC, 0x301F, 0xC1BFBE); /* C1BFBC: move.w  (A7)+, D0 */
-    FA18_OP(0xC1BFBE, 0x283C, 0xC1BFC4); /* C1BFBE: move.l  #$10c00000, D4 */
-    FA18_OP(0xC1BFC4, 0x2239, 0xC1BFCA); /* C1BFC4: move.l  $c45664.l, D1 */
-    FA18_OP(0xC1BFCA, 0x243C, 0xC1BFD0); /* C1BFCA: move.l  #$11400000, D2 */
-    FA18_OP(0xC1BFD0, 0x23C4, 0xC1BFD6); /* C1BFD0: move.l  D4, $c45c3e.l */
-    FA18_OP(0xC1BFD6, 0x23C1, 0xC1BFDC); /* C1BFD6: move.l  D1, $c45c42.l */
-    FA18_OP(0xC1BFDC, 0x23C2, 0xC1BFE2); /* C1BFDC: move.l  D2, $c45c46.l */
-    FA18_OP(0xC1BFE2, 0x0284, 0xC1BFE8); /* C1BFE2: andi.l  #$3fffff, D4 */
-    FA18_OP(0xC1BFE8, 0x0282, 0xC1BFEE); /* C1BFE8: andi.l  #$3fffff, D2 */
-    FA18_OP(0xC1BFEE, 0x4484, 0xC1BFF0); /* C1BFEE: neg.l   D4 */
-    FA18_OP(0xC1BFF0, 0x4481, 0xC1BFF2); /* C1BFF0: neg.l   D1 */
-    FA18_OP(0xC1BFF2, 0x4482, 0xC1BFF4); /* C1BFF2: neg.l   D2 */
-    FA18_OP(0xC1BFF4, 0x23C4, 0xC1BFFA); /* C1BFF4: move.l  D4, $c45c32.l */
-    FA18_OP(0xC1BFFA, 0x23C1, 0xC1C000); /* C1BFFA: move.l  D1, $c45c36.l */
-    FA18_OP(0xC1C000, 0x23C2, 0xC1C006); /* C1C000: move.l  D2, $c45c3a.l */
-    FA18_OP(0xC1C006, 0x42B9, 0xC1C00C); /* C1C006: clr.l   $c45c4a.l */
-    FA18_OP(0xC1C00C, 0x42B9, 0xC1C012); /* C1C00C: clr.l   $c45c4e.l */
-    FA18_OP(0xC1C012, 0x42B9, 0xC1C018); /* C1C012: clr.l   $c45c52.l */
-    FA18_OP(0xC1C018, 0x33FC, 0xC1C020); /* C1C018: move.w  #$1c20, $c45a94.l */
-    FA18_OP(0xC1C020, 0x4279, 0xC1C026); /* C1C020: clr.w   $c45a96.l */
-    FA18_OP(0xC1C026, 0x4239, 0xC1C02C); /* C1C026: clr.b   $c457b4.l */
-    FA18_OP(0xC1C02C, 0x13FC, 0xC1C034); /* C1C02C: move.b  #$1, $c457b5.l */
-    FA18_OP(0xC1C034, 0x13FC, 0xC1C03C); /* C1C034: move.b  #$1, $c457ad.l */
-    FA18_OP(0xC1C03C, 0x4A39, 0xC1C042); /* C1C03C: tst.b   $c45785.l */
-    FA18_BCC(0xC1C042, 0x6700, 0xC1C046, 0xC1B69A, L_C1B69A); /* C1C042: beq     $c1b69a */
-L_C1C046:
-    FA18_CHECK(0xC1C046);
-    FA18_OP(0xC1C046, 0x33FC, 0xC1C04E); /* C1C046: move.w  #$b3, $c45984.l */
-    FA18_JUMP(0xC1C04E, 0x6000, 0xC1C23C, L_C1C23C); /* C1C04E: bra     $c1c23c */
-L_C1C0E0:
-    FA18_CHECK(0xC1C0E0);
-    FA18_OP(0xC1C0E0, 0x4A06, 0xC1C0E2); /* C1C0E0: tst.b   D6 */
-    FA18_BCC(0xC1C0E2, 0x663E, 0xC1C0E4, 0xC1C122, L_C1C122); /* C1C0E2: bne     $c1c122 */
-L_C1C0E4:
-    FA18_CHECK(0xC1C0E4);
-    FA18_OP(0xC1C0E4, 0x08F9, 0xC1C0EC); /* C1C0E4: bset    #$1, $c4599b.l */
-    FA18_OP(0xC1C0EC, 0x5339, 0xC1C0F2); /* C1C0EC: subq.b  #1, $c4584d.l */
-    FA18_BCC(0xC1C0F2, 0x6F18, 0xC1C0F4, 0xC1C10C, L_C1C10C); /* C1C0F2: ble     $c1c10c */
-L_C1C0F4:
-    FA18_CHECK(0xC1C0F4);
-    FA18_OP(0xC1C0F4, 0x13FC, 0xC1C0FC); /* C1C0F4: move.b  #$1e, $c4584f.l */
-    FA18_OP(0xC1C0FC, 0x3800, 0xC1C0FE); /* C1C0FC: move.w  D0, D4 */
-    FA18_OP(0xC1C0FE, 0x303C, 0xC1C102); /* C1C0FE: move.w  #$4026, D0 */
-    FA18_OP(0xC1C102, 0x13FC, 0xC1C10A); /* C1C102: move.b  #$2, $c4588b.l */
-    FA18_JUMP(0xC1C10A, 0x600A, 0xC1C116, L_C1C116); /* C1C10A: bra     $c1c116 */
-L_C1C10C:
-    FA18_CHECK(0xC1C10C);
-    FA18_OP(0xC1C10C, 0x4239, 0xC1C112); /* C1C10C: clr.b   $c4584d.l */
-    FA18_OP(0xC1C112, 0x303C, 0xC1C116); /* C1C112: move.w  #$4027, D0 */
-L_C1C116:
-    FA18_CHECK(0xC1C116);
-    FA18_CALL(0xC1C116, 0x4EB9, 0xC1C11C, 216, 0); /* C1C116: jsr     $c25704.l */
-L_C1C11C:
-    FA18_CHECK(0xC1C11C);
-    FA18_OP(0xC1C11C, 0x3004, 0xC1C11E); /* C1C11C: move.w  D4, D0 */
-    FA18_JUMP(0xC1C11E, 0x6000, 0xC1C23C, L_C1C23C); /* C1C11E: bra     $c1c23c */
-L_C1C122:
-    FA18_CHECK(0xC1C122);
-    FA18_OP(0xC1C122, 0x0C39, 0xC1C12A); /* C1C122: cmpi.b  #$6, $c458a6.l */
-    FA18_BCC(0xC1C12A, 0x6642, 0xC1C12C, 0xC1C16E, L_C1C16E); /* C1C12A: bne     $c1c16e */
-L_C1C12C:
-    FA18_CHECK(0xC1C12C);
-    FA18_OP(0xC1C12C, 0x4A79, 0xC1C132); /* C1C12C: tst.w   $c458c2.l */
-    FA18_BCC(0xC1C132, 0x663A, 0xC1C134, 0xC1C16E, L_C1C16E); /* C1C132: bne     $c1c16e */
-L_C1C134:
-    FA18_CHECK(0xC1C134);
-    FA18_OP(0xC1C134, 0x0839, 0xC1C13C); /* C1C134: btst    #$6, $c46385.l */
-    FA18_BCC(0xC1C13C, 0x6714, 0xC1C13E, 0xC1C152, L_C1C152); /* C1C13C: beq     $c1c152 */
-L_C1C13E:
-    FA18_CHECK(0xC1C13E);
-    FA18_OP(0xC1C13E, 0x0839, 0xC1C146); /* C1C13E: btst    #$6, $c46585.l */
-    FA18_BCC(0xC1C146, 0x670A, 0xC1C148, 0xC1C152, L_C1C152); /* C1C146: beq     $c1c152 */
-L_C1C148:
-    FA18_CHECK(0xC1C148);
-    FA18_OP(0xC1C148, 0x0839, 0xC1C150); /* C1C148: btst    #$6, $c46785.l */
-    FA18_BCC(0xC1C150, 0x661C, 0xC1C152, 0xC1C16E, L_C1C16E); /* C1C150: bne     $c1c16e */
-L_C1C152:
-    FA18_CHECK(0xC1C152);
-    FA18_OP(0xC1C152, 0x0039, 0xC1C15A); /* C1C152: ori.b   #$f, $c46200.l */
-    FA18_OP(0xC1C15A, 0x3F00, 0xC1C15C); /* C1C15A: move.w  D0, -(A7) */
-    FA18_OP(0xC1C15C, 0x7030, 0xC1C15E); /* C1C15C: moveq   #$30, D0 */
-    FA18_OP(0xC1C15E, 0x2F00, 0xC1C160); /* C1C15E: move.l  D0, -(A7) */
-    FA18_OP(0xC1C160, 0x701C, 0xC1C162); /* C1C160: moveq   #$1c, D0 */
-    FA18_OP(0xC1C162, 0x2F00, 0xC1C164); /* C1C162: move.l  D0, -(A7) */
-    FA18_CALL(0xC1C164, 0x4EB9, 0xC1C16A, 109, 0); /* C1C164: jsr     $c17f8c.l */
-L_C1C16A:
-    FA18_CHECK(0xC1C16A);
-    FA18_OP(0xC1C16A, 0x508F, 0xC1C16C); /* C1C16A: addq.l  #8, A7 */
-    FA18_OP(0xC1C16C, 0x301F, 0xC1C16E); /* C1C16C: move.w  (A7)+, D0 */
-L_C1C16E:
-    FA18_CHECK(0xC1C16E);
-    FA18_JUMP(0xC1C16E, 0x6000, 0xC1C23C, L_C1C23C); /* C1C16E: bra     $c1c23c */
-L_C1C172:
-    FA18_CHECK(0xC1C172);
-    FA18_OP(0xC1C172, 0x08F9, 0xC1C17A); /* C1C172: bset    #$2, $c4599b.l */
-    FA18_OP(0xC1C17A, 0x5339, 0xC1C180); /* C1C17A: subq.b  #1, $c4584c.l */
-    FA18_BCC(0xC1C180, 0x6F18, 0xC1C182, 0xC1C19A, L_C1C19A); /* C1C180: ble     $c1c19a */
-L_C1C182:
-    FA18_CHECK(0xC1C182);
-    FA18_OP(0xC1C182, 0x13FC, 0xC1C18A); /* C1C182: move.b  #$1e, $c4584e.l */
-    FA18_OP(0xC1C18A, 0x3800, 0xC1C18C); /* C1C18A: move.w  D0, D4 */
-    FA18_OP(0xC1C18C, 0x303C, 0xC1C190); /* C1C18C: move.w  #$4028, D0 */
-    FA18_OP(0xC1C190, 0x13FC, 0xC1C198); /* C1C190: move.b  #$1, $c4588b.l */
-    FA18_JUMP(0xC1C198, 0x600A, 0xC1C1A4, L_C1C1A4); /* C1C198: bra     $c1c1a4 */
-L_C1C19A:
-    FA18_CHECK(0xC1C19A);
-    FA18_OP(0xC1C19A, 0x4239, 0xC1C1A0); /* C1C19A: clr.b   $c4584c.l */
-    FA18_OP(0xC1C1A0, 0x303C, 0xC1C1A4); /* C1C1A0: move.w  #$4029, D0 */
-L_C1C1A4:
-    FA18_CHECK(0xC1C1A4);
-    FA18_CALL(0xC1C1A4, 0x4EB9, 0xC1C1AA, 216, 0); /* C1C1A4: jsr     $c25704.l */
-L_C1C1AA:
-    FA18_CHECK(0xC1C1AA);
-    FA18_OP(0xC1C1AA, 0x3004, 0xC1C1AC); /* C1C1AA: move.w  D4, D0 */
-    FA18_JUMP(0xC1C1AC, 0x6000, 0xC1C23C, L_C1C23C); /* C1C1AC: bra     $c1c23c */
-L_C1C1F2:
-    FA18_CHECK(0xC1C1F2);
-    FA18_OP(0xC1C1F2, 0x41F9, 0xC1C1F8); /* C1C1F2: lea     $c457b0.l, A0 */
-    FA18_OP(0xC1C1F8, 0x08F9, 0xC1C200); /* C1C1F8: bset    #$3, $c4599b.l */
-    FA18_OP(0xC1C200, 0x13FC, 0xC1C208); /* C1C200: move.b  #$3, $c45840.l */
-    FA18_CALL(0xC1C208, 0x4EB9, 0xC1C20E, 398, 1); /* C1C208: jsr     $c33186.l */
-L_C1C20E:
-    FA18_CHECK(0xC1C20E);
-    FA18_OP(0xC1C20E, 0x41F9, 0xC1C214); /* C1C20E: lea     $c458b5.l, A0 */
-    FA18_OP(0xC1C214, 0x4A10, 0xC1C216); /* C1C214: tst.b   (A0) */
-    FA18_BCC(0xC1C216, 0x6706, 0xC1C218, 0xC1C21E, L_C1C21E); /* C1C216: beq     $c1c21e */
-L_C1C218:
-    FA18_CHECK(0xC1C218);
-    FA18_OP(0xC1C218, 0x10BC, 0xC1C21C); /* C1C218: move.b  #$0, (A0) */
-    FA18_JUMP(0xC1C21C, 0x601E, 0xC1C23C, L_C1C23C); /* C1C21C: bra     $c1c23c */
-L_C1C21E:
-    FA18_CHECK(0xC1C21E);
-    FA18_OP(0xC1C21E, 0x10BC, 0xC1C222); /* C1C21E: move.b  #$1, (A0) */
-    FA18_JUMP(0xC1C222, 0x6018, 0xC1C23C, L_C1C23C); /* C1C222: bra     $c1c23c */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-}
-
-int fa18_fn_C1AD74(int entry) {
-    switch (entry) {
-    case 0: goto L_C06BF0;
-    case 1: goto L_C06BF6;
-    case 2: goto L_C06BFA;
-    case 3: goto L_C06C00;
-    case 4: goto L_C1AD72;
-    case 5: goto L_C1AD74;
-    case 6: goto L_C1AD86;
-    case 7: goto L_C1AD8E;
-    case 8: goto L_C1AD92;
-    case 9: goto L_C1ADAC;
-    case 10: goto L_C1ADB6;
-    case 11: goto L_C1ADC0;
-    case 12: goto L_C1ADCA;
-    case 13: goto L_C1ADD4;
-    case 14: goto L_C1ADDE;
-    case 15: goto L_C1ADE8;
-    case 16: goto L_C1ADF0;
-    case 17: goto L_C1ADF6;
-    case 18: goto L_C1AE02;
-    case 19: goto L_C1AE10;
-    case 20: goto L_C1AE18;
-    case 21: goto L_C1AE20;
-    case 22: goto L_C1AE28;
-    case 23: goto L_C1AE30;
-    case 24: goto L_C1AE38;
-    case 25: goto L_C1AE40;
-    case 26: goto L_C1AE48;
-    case 27: goto L_C1AE50;
-    case 28: goto L_C1AE58;
-    case 29: goto L_C1AE60;
-    case 30: goto L_C1AE68;
-    case 31: goto L_C1AE70;
-    case 32: goto L_C1AE78;
-    case 33: goto L_C1AE80;
-    case 34: goto L_C1AE88;
-    case 35: goto L_C1AE90;
-    case 36: goto L_C1AE98;
-    case 37: goto L_C1AEA0;
-    case 38: goto L_C1AEA8;
-    case 39: goto L_C1AEB0;
-    case 40: goto L_C1AEB8;
-    case 41: goto L_C1AEC0;
-    case 42: goto L_C1AEC8;
-    case 43: goto L_C1AED0;
-    case 44: goto L_C1AED8;
-    case 45: goto L_C1AEE0;
-    case 46: goto L_C1AEE8;
-    case 47: goto L_C1AEF0;
-    case 48: goto L_C1AEF4;
-    case 49: goto L_C1AEFC;
-    case 50: goto L_C1AF04;
-    case 51: goto L_C1AF0C;
-    case 52: goto L_C1AF14;
-    case 53: goto L_C1AF1C;
-    case 54: goto L_C1AF24;
-    case 55: goto L_C1AF2C;
-    case 56: goto L_C1AF34;
-    case 57: goto L_C1AF3C;
-    case 58: goto L_C1AF44;
-    case 59: goto L_C1AF4C;
-    case 60: goto L_C1AF54;
-    case 61: goto L_C1AF5C;
-    case 62: goto L_C1AF64;
-    case 63: goto L_C1AF6C;
-    case 64: goto L_C1AF74;
-    case 65: goto L_C1AF7C;
-    case 66: goto L_C1AF84;
-    case 67: goto L_C1AF90;
-    case 68: goto L_C1AF96;
-    case 69: goto L_C1AF9C;
-    case 70: goto L_C1AFA2;
-    case 71: goto L_C1AFA8;
-    case 72: goto L_C1AFB0;
-    case 73: goto L_C1AFB6;
-    case 74: goto L_C1AFBE;
-    case 75: goto L_C1AFC4;
-    case 76: goto L_C1AFC8;
-    case 77: goto L_C1AFCE;
-    case 78: goto L_C1AFD2;
-    case 79: goto L_C1AFD8;
-    case 80: goto L_C1AFDC;
-    case 81: goto L_C1AFE2;
-    case 82: goto L_C1AFE6;
-    case 83: goto L_C1AFEC;
-    case 84: goto L_C1AFF0;
-    case 85: goto L_C1AFF6;
-    case 86: goto L_C1AFFA;
-    case 87: goto L_C1B000;
-    case 88: goto L_C1B004;
-    case 89: goto L_C1B00A;
-    case 90: goto L_C1B00C;
-    case 91: goto L_C1B010;
-    case 92: goto L_C1B018;
-    case 93: goto L_C1B020;
-    case 94: goto L_C1B028;
-    case 95: goto L_C1B030;
-    case 96: goto L_C1B038;
-    case 97: goto L_C1B042;
-    case 98: goto L_C1B04A;
-    case 99: goto L_C1B052;
-    case 100: goto L_C1B05A;
-    case 101: goto L_C1B062;
-    case 102: goto L_C1B06A;
-    case 103: goto L_C1B072;
-    case 104: goto L_C1B07A;
-    case 105: goto L_C1B082;
-    case 106: goto L_C1B08A;
-    case 107: goto L_C1B092;
-    case 108: goto L_C1B098;
-    case 109: goto L_C1B09E;
-    case 110: goto L_C1B0AA;
-    case 111: goto L_C1B0B2;
-    case 112: goto L_C1B0BA;
-    case 113: goto L_C1B0C0;
-    case 114: goto L_C1B0C6;
-    case 115: goto L_C1B0CA;
-    case 116: goto L_C1B0D6;
-    case 117: goto L_C1B0DC;
-    case 118: goto L_C1B0E2;
-    case 119: goto L_C1B0E6;
-    case 120: goto L_C1B0F2;
-    case 121: goto L_C1B0FC;
-    case 122: goto L_C1B104;
-    case 123: goto L_C1B10C;
-    case 124: goto L_C1B114;
-    case 125: goto L_C1B11C;
-    case 126: goto L_C1B126;
-    case 127: goto L_C1B12A;
-    case 128: goto L_C1B12E;
-    case 129: goto L_C1B138;
-    case 130: goto L_C1B14A;
-    case 131: goto L_C1B1A4;
-    case 132: goto L_C1B1AA;
-    case 133: goto L_C1B1C8;
-    case 134: goto L_C1B1CE;
-    case 135: goto L_C1B1F0;
-    case 136: goto L_C1B1F6;
-    case 137: goto L_C1B1FC;
-    case 138: goto L_C1B202;
-    case 139: goto L_C1B206;
-    case 140: goto L_C1B21C;
-    case 141: goto L_C1B222;
-    case 142: goto L_C1B228;
-    case 143: goto L_C1B22C;
-    case 144: goto L_C1B232;
-    case 145: goto L_C1B236;
-    case 146: goto L_C1B244;
-    case 147: goto L_C1B246;
-    case 148: goto L_C1B264;
-    case 149: goto L_C1B272;
-    case 150: goto L_C1B274;
-    case 151: goto L_C1B4F4;
-    case 152: goto L_C1B4F8;
-    case 153: goto L_C1B4FC;
-    case 154: goto L_C1B500;
-    case 155: goto L_C1B504;
-    case 156: goto L_C1B508;
-    case 157: goto L_C1B540;
-    case 158: goto L_C1B544;
-    case 159: goto L_C1B548;
-    case 160: goto L_C1B54C;
-    case 161: goto L_C1B550;
-    case 162: goto L_C1B554;
-    case 163: goto L_C1B58E;
-    case 164: goto L_C1B594;
-    case 165: goto L_C1B59A;
-    case 166: goto L_C1B59C;
-    case 167: goto L_C1B5B8;
-    case 168: goto L_C1B5BC;
-    case 169: goto L_C1B5C0;
-    case 170: goto L_C1B5C2;
-    case 171: goto L_C1B5D8;
-    case 172: goto L_C1B5DC;
-    case 173: goto L_C1B5E0;
-    case 174: goto L_C1B5E6;
-    case 175: goto L_C1B616;
-    case 176: goto L_C1B62A;
-    case 177: goto L_C1B630;
-    case 178: goto L_C1B654;
-    case 179: goto L_C1B658;
-    case 180: goto L_C1B65E;
-    case 181: goto L_C1B664;
-    case 182: goto L_C1B670;
-    case 183: goto L_C1B67C;
-    case 184: goto L_C1B684;
-    case 185: goto L_C1B68C;
-    case 186: goto L_C1B69A;
-    case 187: goto L_C1B6C2;
-    case 188: goto L_C1B6EA;
-    case 189: goto L_C1B702;
-    case 190: goto L_C1B710;
-    case 191: goto L_C1B71A;
-    case 192: goto L_C1B720;
-    case 193: goto L_C1B722;
-    case 194: goto L_C1B75C;
-    case 195: goto L_C1B762;
-    case 196: goto L_C1B772;
-    case 197: goto L_C1B77C;
-    case 198: goto L_C1B780;
-    case 199: goto L_C1B792;
-    case 200: goto L_C1B796;
-    case 201: goto L_C1B79A;
-    case 202: goto L_C1B7A6;
-    case 203: goto L_C1B7AA;
-    case 204: goto L_C1B7AE;
-    case 205: goto L_C1B7B2;
-    case 206: goto L_C1B7B6;
-    case 207: goto L_C1B7C2;
-    case 208: goto L_C1B7CC;
-    case 209: goto L_C1B7E4;
-    case 210: goto L_C1B7F8;
-    case 211: goto L_C1B800;
-    case 212: goto L_C1B80A;
-    case 213: goto L_C1B814;
-    case 214: goto L_C1B81E;
-    case 215: goto L_C1B82E;
-    case 216: goto L_C1B842;
-    case 217: goto L_C1B848;
-    case 218: goto L_C1B85A;
-    case 219: goto L_C1B85E;
-    case 220: goto L_C1B860;
-    case 221: goto L_C1B878;
-    case 222: goto L_C1B884;
-    case 223: goto L_C1B890;
-    case 224: goto L_C1B8A2;
-    case 225: goto L_C1B8AC;
-    case 226: goto L_C1B8B4;
-    case 227: goto L_C1B8C8;
-    case 228: goto L_C1B8CE;
-    case 229: goto L_C1B8E0;
-    case 230: goto L_C1B8E4;
-    case 231: goto L_C1B8EC;
-    case 232: goto L_C1B8F2;
-    case 233: goto L_C1B8F8;
-    case 234: goto L_C1B906;
-    case 235: goto L_C1B914;
-    case 236: goto L_C1B922;
-    case 237: goto L_C1B930;
-    case 238: goto L_C1B93E;
-    case 239: goto L_C1B94E;
-    case 240: goto L_C1B950;
-    case 241: goto L_C1B95A;
-    case 242: goto L_C1B95C;
-    case 243: goto L_C1B960;
-    case 244: goto L_C1B96E;
-    case 245: goto L_C1B986;
-    case 246: goto L_C1B98A;
-    case 247: goto L_C1B998;
-    case 248: goto L_C1B9AC;
-    case 249: goto L_C1B9BA;
-    case 250: goto L_C1B9CC;
-    case 251: goto L_C1B9DA;
-    case 252: goto L_C1B9E0;
-    case 253: goto L_C1BA1C;
-    case 254: goto L_C1BA28;
-    case 255: goto L_C1BA2E;
-    case 256: goto L_C1BA34;
-    case 257: goto L_C1BA3E;
-    case 258: goto L_C1BA44;
-    case 259: goto L_C1BA48;
-    case 260: goto L_C1BA50;
-    case 261: goto L_C1BA64;
-    case 262: goto L_C1BA8C;
-    case 263: goto L_C1BA98;
-    case 264: goto L_C1BA9E;
-    case 265: goto L_C1BAA4;
-    case 266: goto L_C1BAB0;
-    case 267: goto L_C1BAB6;
-    case 268: goto L_C1BABC;
-    case 269: goto L_C1BAC8;
-    case 270: goto L_C1BAE2;
-    case 271: goto L_C1BAE8;
-    case 272: goto L_C1BAF2;
-    case 273: goto L_C1BAFA;
-    case 274: goto L_C1BB02;
-    case 275: goto L_C1BB06;
-    case 276: goto L_C1BB10;
-    case 277: goto L_C1BB1A;
-    case 278: goto L_C1BB20;
-    case 279: goto L_C1BB3C;
-    case 280: goto L_C1BB44;
-    case 281: goto L_C1BB4E;
-    case 282: goto L_C1BB5A;
-    case 283: goto L_C1BB66;
-    case 284: goto L_C1BB7A;
-    case 285: goto L_C1BB84;
-    case 286: goto L_C1BB8E;
-    case 287: goto L_C1BB96;
-    case 288: goto L_C1BB9C;
-    case 289: goto L_C1BBA8;
-    case 290: goto L_C1BBB4;
-    case 291: goto L_C1BBBA;
-    case 292: goto L_C1BBC0;
-    case 293: goto L_C1BBCE;
-    case 294: goto L_C1BBE6;
-    case 295: goto L_C1BBEA;
-    case 296: goto L_C1BC12;
-    case 297: goto L_C1BC24;
-    case 298: goto L_C1BC3A;
-    case 299: goto L_C1BC46;
-    case 300: goto L_C1BC4C;
-    case 301: goto L_C1BC50;
-    case 302: goto L_C1BC56;
-    case 303: goto L_C1BC5E;
-    case 304: goto L_C1BC66;
-    case 305: goto L_C1BC72;
-    case 306: goto L_C1BC78;
-    case 307: goto L_C1BC80;
-    case 308: goto L_C1BC86;
-    case 309: goto L_C1BC8C;
-    case 310: goto L_C1BC8E;
-    case 311: goto L_C1BC94;
-    case 312: goto L_C1BC98;
-    case 313: goto L_C1BCA4;
-    case 314: goto L_C1BCA8;
-    case 315: goto L_C1BCB2;
-    case 316: goto L_C1BCBA;
-    case 317: goto L_C1BCC2;
-    case 318: goto L_C1BCCE;
-    case 319: goto L_C1BCD6;
-    case 320: goto L_C1BCDA;
-    case 321: goto L_C1BCDC;
-    case 322: goto L_C1BCE0;
-    case 323: goto L_C1BCE6;
-    case 324: goto L_C1BCEA;
-    case 325: goto L_C1BCEE;
-    case 326: goto L_C1BCFA;
-    case 327: goto L_C1BD04;
-    case 328: goto L_C1BD10;
-    case 329: goto L_C1BD18;
-    case 330: goto L_C1BD22;
-    case 331: goto L_C1BD2C;
-    case 332: goto L_C1BD38;
-    case 333: goto L_C1BD48;
-    case 334: goto L_C1BD4A;
-    case 335: goto L_C1BD5A;
-    case 336: goto L_C1BD64;
-    case 337: goto L_C1BD68;
-    case 338: goto L_C1BD78;
-    case 339: goto L_C1BD82;
-    case 340: goto L_C1BD8A;
-    case 341: goto L_C1BD90;
-    case 342: goto L_C1BD96;
-    case 343: goto L_C1BD9C;
-    case 344: goto L_C1BDA4;
-    case 345: goto L_C1BDAC;
-    case 346: goto L_C1BDB4;
-    case 347: goto L_C1BDBC;
-    case 348: goto L_C1BDC8;
-    case 349: goto L_C1BDCA;
-    case 350: goto L_C1BDD0;
-    case 351: goto L_C1BDE4;
-    case 352: goto L_C1BDEA;
-    case 353: goto L_C1BDEC;
-    case 354: goto L_C1BDF2;
-    case 355: goto L_C1BDF8;
-    case 356: goto L_C1BDFC;
-    case 357: goto L_C1BE00;
-    case 358: goto L_C1BE0A;
-    case 359: goto L_C1BE16;
-    case 360: goto L_C1BE1C;
-    case 361: goto L_C1BE26;
-    case 362: goto L_C1BE34;
-    case 363: goto L_C1BE36;
-    case 364: goto L_C1BE3A;
-    case 365: goto L_C1BE3E;
-    case 366: goto L_C1BE42;
-    case 367: goto L_C1BE46;
-    case 368: goto L_C1BE4A;
-    case 369: goto L_C1BE5C;
-    case 370: goto L_C1BE60;
-    case 371: goto L_C1BE6A;
-    case 372: goto L_C1BE78;
-    case 373: goto L_C1BE7E;
-    case 374: goto L_C1BE82;
-    case 375: goto L_C1BE88;
-    case 376: goto L_C1BE8E;
-    case 377: goto L_C1BE9E;
-    case 378: goto L_C1BEA8;
-    case 379: goto L_C1BEC8;
-    case 380: goto L_C1BED2;
-    case 381: goto L_C1BEDA;
-    case 382: goto L_C1BEDE;
-    case 383: goto L_C1BEE4;
-    case 384: goto L_C1BF8C;
-    case 385: goto L_C1BF96;
-    case 386: goto L_C1BFA6;
-    case 387: goto L_C1BFB4;
-    case 388: goto L_C1BFBC;
-    case 389: goto L_C1C046;
-    case 390: goto L_C1C052;
-    case 391: goto L_C1C05C;
-    case 392: goto L_C1C062;
-    case 393: goto L_C1C06A;
-    case 394: goto L_C1C06E;
-    case 395: goto L_C1C078;
-    case 396: goto L_C1C080;
-    case 397: goto L_C1C092;
-    case 398: goto L_C1C09A;
-    case 399: goto L_C1C0A4;
-    case 400: goto L_C1C0AC;
-    case 401: goto L_C1C0B4;
-    case 402: goto L_C1C0C0;
-    case 403: goto L_C1C0E0;
-    case 404: goto L_C1C0E4;
-    case 405: goto L_C1C0F4;
-    case 406: goto L_C1C10C;
-    case 407: goto L_C1C116;
-    case 408: goto L_C1C11C;
-    case 409: goto L_C1C122;
-    case 410: goto L_C1C12C;
-    case 411: goto L_C1C134;
-    case 412: goto L_C1C13E;
-    case 413: goto L_C1C148;
-    case 414: goto L_C1C152;
-    case 415: goto L_C1C16A;
-    case 416: goto L_C1C16E;
-    case 417: goto L_C1C172;
-    case 418: goto L_C1C182;
-    case 419: goto L_C1C19A;
-    case 420: goto L_C1C1A4;
-    case 421: goto L_C1C1AA;
-    case 422: goto L_C1C1F2;
-    case 423: goto L_C1C20E;
-    case 424: goto L_C1C214;
-    case 425: goto L_C1C218;
-    case 426: goto L_C1C21E;
-    case 427: goto L_C1C224;
-    case 428: goto L_C1C228;
-    case 429: goto L_C1C22A;
-    case 430: goto L_C1C234;
-    case 431: goto L_C1C23C;
-    case 432: goto L_C1C244;
-    case 433: goto L_C1C24A;
-    case 434: goto L_C1C25C;
-    case 435: goto L_C1C268;
-    case 436: goto L_C1C26A;
-    case 437: goto L_C1C2A4;
-    case 438: goto L_C1C2B6;
-    case 439: goto L_C1C2B8;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C06BF0:
-    FA18_CHECK(0xC06BF0);
-    FA18_CALL(0xC06BF0, 0x4EB9, 0xC06BF6, 100, 0); /* C06BF0: jsr     $c1748c.l */
-L_C06BF6:
-    FA18_CHECK(0xC06BF6);
-    FA18_CALL(0xC06BF6, 0x6100, 0xC06BFA, 15, 0); /* C06BF6: bsr     $c06c02 */
-L_C06BFA:
-    FA18_CHECK(0xC06BFA);
-    FA18_CALL(0xC06BFA, 0x4EB9, 0xC06C00, 99, 0); /* C06BFA: jsr     $c17456.l */
-L_C06C00:
-    FA18_CHECK(0xC06C00);
-    FA18_RETURN(0xC06C00, 0x4E75); /* C06C00: rts */
-L_C1AD72:
-    FA18_CHECK(0xC1AD72);
-    FA18_RETURN(0xC1AD72, 0x4E75); /* C1AD72: rts */
-L_C1AD74:
-    FA18_CHECK(0xC1AD74);
-    FA18_OP(0xC1AD74, 0x4E56, 0xC1AD78); /* C1AD74: link    A6, #$0 */
-    FA18_OP(0xC1AD78, 0x202E, 0xC1AD7C); /* C1AD78: move.l  ($8,A6), D0 */
-    FA18_OP(0xC1AD7C, 0x4E5E, 0xC1AD7E); /* C1AD7C: unlk    A6 */
-    FA18_OP(0xC1AD7E, 0x4A39, 0xC1AD84); /* C1AD7E: tst.b   $c457d5.l */
-    FA18_BCC(0xC1AD84, 0x6E0C, 0xC1AD86, 0xC1AD92, L_C1AD92); /* C1AD84: bgt     $c1ad92 */
-L_C1AD86:
-    FA18_CHECK(0xC1AD86);
-    FA18_OP(0xC1AD86, 0x5239, 0xC1AD8C); /* C1AD86: addq.b  #1, $c457d5.l */
-    FA18_BCC(0xC1AD8C, 0x6FE4, 0xC1AD8E, 0xC1AD72, L_C1AD72); /* C1AD8C: ble     $c1ad72 */
-L_C1AD8E:
-    FA18_CHECK(0xC1AD8E);
-    FA18_OP(0xC1AD8E, 0x0880, 0xC1AD92); /* C1AD8E: bclr    #$7, D0 */
-L_C1AD92:
-    FA18_CHECK(0xC1AD92);
-    FA18_OP(0xC1AD92, 0x1A39, 0xC1AD98); /* C1AD92: move.b  $c45785.l, D5 */
-    FA18_OP(0xC1AD98, 0x1C39, 0xC1AD9E); /* C1AD98: move.b  $c45878.l, D6 */
-    FA18_OP(0xC1AD9E, 0x1639, 0xC1ADA4); /* C1AD9E: move.b  $c458ae.l, D3 */
-    FA18_OP(0xC1ADA4, 0x0C03, 0xC1ADA8); /* C1ADA4: cmpi.b  #$3, D3 */
-    FA18_BCC(0xC1ADA8, 0x6700, 0xC1ADAC, 0xC1B038, L_C1B038); /* C1ADA8: beq     $c1b038 */
-L_C1ADAC:
-    FA18_CHECK(0xC1ADAC);
-    FA18_OP(0xC1ADAC, 0x4A39, 0xC1ADB2); /* C1ADAC: tst.b   $c457d3.l */
-    FA18_BCC(0xC1ADB2, 0x6600, 0xC1ADB6, 0xC1B038, L_C1B038); /* C1ADB2: bne     $c1b038 */
-L_C1ADB6:
-    FA18_CHECK(0xC1ADB6);
-    FA18_OP(0xC1ADB6, 0x4A39, 0xC1ADBC); /* C1ADB6: tst.b   $c458ad.l */
-    FA18_BCC(0xC1ADBC, 0x6600, 0xC1ADC0, 0xC1B038, L_C1B038); /* C1ADBC: bne     $c1b038 */
-L_C1ADC0:
-    FA18_CHECK(0xC1ADC0);
-    FA18_OP(0xC1ADC0, 0x4A39, 0xC1ADC6); /* C1ADC0: tst.b   $c45791.l */
-    FA18_BCC(0xC1ADC6, 0x6600, 0xC1ADCA, 0xC1AFA2, L_C1AFA2); /* C1ADC6: bne     $c1afa2 */
-L_C1ADCA:
-    FA18_CHECK(0xC1ADCA);
-    FA18_OP(0xC1ADCA, 0x4A39, 0xC1ADD0); /* C1ADCA: tst.b   $c45787.l */
-    FA18_BCC(0xC1ADD0, 0x6700, 0xC1ADD4, 0xC1AFA2, L_C1AFA2); /* C1ADD0: beq     $c1afa2 */
-L_C1ADD4:
-    FA18_CHECK(0xC1ADD4);
-    FA18_OP(0xC1ADD4, 0x4A39, 0xC1ADDA); /* C1ADD4: tst.b   $c458a6.l */
-    FA18_BCC(0xC1ADDA, 0x6700, 0xC1ADDE, 0xC1AFA2, L_C1AFA2); /* C1ADDA: beq     $c1afa2 */
-L_C1ADDE:
-    FA18_CHECK(0xC1ADDE);
-    FA18_OP(0xC1ADDE, 0x1239, 0xC1ADE4); /* C1ADDE: move.b  $c4584b.l, D1 */
-    FA18_BCC(0xC1ADE4, 0x6D00, 0xC1ADE8, 0xC1AFA2, L_C1AFA2); /* C1ADE4: blt     $c1afa2 */
-L_C1ADE8:
-    FA18_CHECK(0xC1ADE8);
-    FA18_OP(0xC1ADE8, 0x0C01, 0xC1ADEC); /* C1ADE8: cmpi.b  #$3, D1 */
-    FA18_BCC(0xC1ADEC, 0x6700, 0xC1ADF0, 0xC1B030, L_C1B030); /* C1ADEC: beq     $c1b030 */
-L_C1ADF0:
-    FA18_CHECK(0xC1ADF0);
-    FA18_OP(0xC1ADF0, 0x4A03, 0xC1ADF2); /* C1ADF0: tst.b   D3 */
-    FA18_BCC(0xC1ADF2, 0x6600, 0xC1ADF6, 0xC1AEE0, L_C1AEE0); /* C1ADF2: bne     $c1aee0 */
-L_C1ADF6:
-    FA18_CHECK(0xC1ADF6);
-    FA18_OP(0xC1ADF6, 0x0C39, 0xC1ADFE); /* C1ADF6: cmpi.b  #$2, $c458a6.l */
-    FA18_BCC(0xC1ADFE, 0x6700, 0xC1AE02, 0xC1AEE0, L_C1AEE0); /* C1ADFE: beq     $c1aee0 */
-L_C1AE02:
-    FA18_CHECK(0xC1AE02);
-    FA18_OP(0xC1AE02, 0x1839, 0xC1AE08); /* C1AE02: move.b  $c46200.l, D4 */
-    FA18_OP(0xC1AE08, 0x0204, 0xC1AE0C); /* C1AE08: andi.b  #$f, D4 */
-    FA18_BCC(0xC1AE0C, 0x6600, 0xC1AE10, 0xC1AEE0, L_C1AEE0); /* C1AE0C: bne     $c1aee0 */
-L_C1AE10:
-    FA18_CHECK(0xC1AE10);
-    FA18_OP(0xC1AE10, 0x0C01, 0xC1AE14); /* C1AE10: cmpi.b  #$1, D1 */
-    FA18_BCC(0xC1AE14, 0x6700, 0xC1AE18, 0xC1AEE0, L_C1AEE0); /* C1AE14: beq     $c1aee0 */
-L_C1AE18:
-    FA18_CHECK(0xC1AE18);
-    FA18_OP(0xC1AE18, 0x0C01, 0xC1AE1C); /* C1AE18: cmpi.b  #$2, D1 */
-    FA18_BCC(0xC1AE1C, 0x6700, 0xC1AE20, 0xC1AEE0, L_C1AEE0); /* C1AE1C: beq     $c1aee0 */
-L_C1AE20:
-    FA18_CHECK(0xC1AE20);
-    FA18_OP(0xC1AE20, 0x0C01, 0xC1AE24); /* C1AE20: cmpi.b  #$5, D1 */
-    FA18_BCC(0xC1AE24, 0x6C00, 0xC1AE28, 0xC1B030, L_C1B030); /* C1AE24: bge     $c1b030 */
-L_C1AE28:
-    FA18_CHECK(0xC1AE28);
-    FA18_OP(0xC1AE28, 0x0C00, 0xC1AE2C); /* C1AE28: cmpi.b  #$40, D0 */
-    FA18_BCC(0xC1AE2C, 0x6700, 0xC1AE30, 0xC1B21C, L_C1B21C); /* C1AE2C: beq     $c1b21c */
-L_C1AE30:
-    FA18_CHECK(0xC1AE30);
-    FA18_OP(0xC1AE30, 0x0C00, 0xC1AE34); /* C1AE30: cmpi.b  #$4c, D0 */
-    FA18_BCC(0xC1AE34, 0x6700, 0xC1AE38, 0xC1B4FC, L_C1B4FC); /* C1AE34: beq     $c1b4fc */
-L_C1AE38:
-    FA18_CHECK(0xC1AE38);
-    FA18_OP(0xC1AE38, 0x0C00, 0xC1AE3C); /* C1AE38: cmpi.b  #$4d, D0 */
-    FA18_BCC(0xC1AE3C, 0x6700, 0xC1AE40, 0xC1B4F4, L_C1B4F4); /* C1AE3C: beq     $c1b4f4 */
-L_C1AE40:
-    FA18_CHECK(0xC1AE40);
-    FA18_OP(0xC1AE40, 0x0C00, 0xC1AE44); /* C1AE40: cmpi.b  #$4f, D0 */
-    FA18_BCC(0xC1AE44, 0x6700, 0xC1AE48, 0xC1B540, L_C1B540); /* C1AE44: beq     $c1b540 */
-L_C1AE48:
-    FA18_CHECK(0xC1AE48);
-    FA18_OP(0xC1AE48, 0x0C00, 0xC1AE4C); /* C1AE48: cmpi.b  #$4e, D0 */
-    FA18_BCC(0xC1AE4C, 0x6700, 0xC1AE50, 0xC1B548, L_C1B548); /* C1AE4C: beq     $c1b548 */
-L_C1AE50:
-    FA18_CHECK(0xC1AE50);
-    FA18_OP(0xC1AE50, 0x0C00, 0xC1AE54); /* C1AE50: cmpi.b  #$38, D0 */
-    FA18_BCC(0xC1AE54, 0x6700, 0xC1AE58, 0xC1B58E, L_C1B58E); /* C1AE54: beq     $c1b58e */
-L_C1AE58:
-    FA18_CHECK(0xC1AE58);
-    FA18_OP(0xC1AE58, 0x0C00, 0xC1AE5C); /* C1AE58: cmpi.b  #$39, D0 */
-    FA18_BCC(0xC1AE5C, 0x6700, 0xC1AE60, 0xC1B594, L_C1B594); /* C1AE5C: beq     $c1b594 */
-L_C1AE60:
-    FA18_CHECK(0xC1AE60);
-    FA18_OP(0xC1AE60, 0x0C00, 0xC1AE64); /* C1AE60: cmpi.b  #$c, D0 */
-    FA18_BCC(0xC1AE64, 0x6700, 0xC1AE68, 0xC1B5B8, L_C1B5B8); /* C1AE64: beq     $c1b5b8 */
-L_C1AE68:
-    FA18_CHECK(0xC1AE68);
-    FA18_OP(0xC1AE68, 0x0C00, 0xC1AE6C); /* C1AE68: cmpi.b  #$b, D0 */
-    FA18_BCC(0xC1AE6C, 0x6700, 0xC1AE70, 0xC1B5BC, L_C1B5BC); /* C1AE6C: beq     $c1b5bc */
-L_C1AE70:
-    FA18_CHECK(0xC1AE70);
-    FA18_OP(0xC1AE70, 0x0C00, 0xC1AE74); /* C1AE70: cmpi.b  #$d, D0 */
-    FA18_BCC(0xC1AE74, 0x6700, 0xC1AE78, 0xC1B5DC, L_C1B5DC); /* C1AE74: beq     $c1b5dc */
-L_C1AE78:
-    FA18_CHECK(0xC1AE78);
-    FA18_OP(0xC1AE78, 0x0C00, 0xC1AE7C); /* C1AE78: cmpi.b  #$41, D0 */
-    FA18_BCC(0xC1AE7C, 0x6700, 0xC1AE80, 0xC1B5DC, L_C1B5DC); /* C1AE7C: beq     $c1b5dc */
-L_C1AE80:
-    FA18_CHECK(0xC1AE80);
-    FA18_OP(0xC1AE80, 0x0C00, 0xC1AE84); /* C1AE80: cmpi.b  #$12, D0 */
-    FA18_BCC(0xC1AE84, 0x6700, 0xC1AE88, 0xC1B126, L_C1B126); /* C1AE84: beq     $c1b126 */
-L_C1AE88:
-    FA18_CHECK(0xC1AE88);
-    FA18_OP(0xC1AE88, 0x0C00, 0xC1AE8C); /* C1AE88: cmpi.b  #$13, D0 */
-    FA18_BCC(0xC1AE8C, 0x6700, 0xC1AE90, 0xC1B1C8, L_C1B1C8); /* C1AE8C: beq     $c1b1c8 */
-L_C1AE90:
-    FA18_CHECK(0xC1AE90);
-    FA18_OP(0xC1AE90, 0x0C00, 0xC1AE94); /* C1AE90: cmpi.b  #$24, D0 */
-    FA18_BCC(0xC1AE94, 0x6700, 0xC1AE98, 0xC1BC12, L_C1BC12); /* C1AE94: beq     $c1bc12 */
-L_C1AE98:
-    FA18_CHECK(0xC1AE98);
-    FA18_OP(0xC1AE98, 0x0C00, 0xC1AE9C); /* C1AE98: cmpi.b  #$20, D0 */
-    FA18_BCC(0xC1AE9C, 0x6700, 0xC1AEA0, 0xC1B616, L_C1B616); /* C1AE9C: beq     $c1b616 */
-L_C1AEA0:
-    FA18_CHECK(0xC1AEA0);
-    FA18_OP(0xC1AEA0, 0x0C00, 0xC1AEA4); /* C1AEA0: cmpi.b  #$23, D0 */
-    FA18_BCC(0xC1AEA4, 0x6700, 0xC1AEA8, 0xC1C0E0, L_C1C0E0); /* C1AEA4: beq     $c1c0e0 */
-L_C1AEA8:
-    FA18_CHECK(0xC1AEA8);
-    FA18_OP(0xC1AEA8, 0x0C00, 0xC1AEAC); /* C1AEA8: cmpi.b  #$33, D0 */
-    FA18_BCC(0xC1AEAC, 0x6700, 0xC1AEB0, 0xC1C172, L_C1C172); /* C1AEAC: beq     $c1c172 */
-L_C1AEB0:
-    FA18_CHECK(0xC1AEB0);
-    FA18_OP(0xC1AEB0, 0x0C00, 0xC1AEB4); /* C1AEB0: cmpi.b  #$26, D0 */
-    FA18_BCC(0xC1AEB4, 0x6700, 0xC1AEB8, 0xC1C1F2, L_C1C1F2); /* C1AEB4: beq     $c1c1f2 */
-L_C1AEB8:
-    FA18_CHECK(0xC1AEB8);
-    FA18_OP(0xC1AEB8, 0x0C00, 0xC1AEBC); /* C1AEB8: cmpi.b  #$25, D0 */
-    FA18_BCC(0xC1AEBC, 0x6700, 0xC1AEC0, 0xC1B264, L_C1B264); /* C1AEBC: beq     $c1b264 */
-L_C1AEC0:
-    FA18_CHECK(0xC1AEC0);
-    FA18_OP(0xC1AEC0, 0x0C00, 0xC1AEC4); /* C1AEC0: cmpi.b  #$21, D0 */
-    FA18_BCC(0xC1AEC4, 0x6700, 0xC1AEC8, 0xC1C052, L_C1C052); /* C1AEC4: beq     $c1c052 */
-L_C1AEC8:
-    FA18_CHECK(0xC1AEC8);
-    FA18_OP(0xC1AEC8, 0x0C00, 0xC1AECC); /* C1AEC8: cmpi.b  #$14, D0 */
-    FA18_BCC(0xC1AECC, 0x6700, 0xC1AED0, 0xC1B1A4, L_C1B1A4); /* C1AECC: beq     $c1b1a4 */
-L_C1AED0:
-    FA18_CHECK(0xC1AED0);
-    FA18_OP(0xC1AED0, 0x0C00, 0xC1AED4); /* C1AED0: cmpi.b  #$15, D0 */
-    FA18_BCC(0xC1AED4, 0x6700, 0xC1AED8, 0xC1B236, L_C1B236); /* C1AED4: beq     $c1b236 */
-L_C1AED8:
-    FA18_CHECK(0xC1AED8);
-    FA18_OP(0xC1AED8, 0x0C00, 0xC1AEDC); /* C1AED8: cmpi.b  #$37, D0 */
-    FA18_BCC(0xC1AEDC, 0x6700, 0xC1AEE0, 0xC1BF8C, L_C1BF8C); /* C1AEDC: beq     $c1bf8c */
-L_C1AEE0:
-    FA18_CHECK(0xC1AEE0);
-    FA18_OP(0xC1AEE0, 0x1639, 0xC1AEE6); /* C1AEE0: move.b  $c458ae.l, D3 */
-    FA18_BCC(0xC1AEE6, 0x670C, 0xC1AEE8, 0xC1AEF4, L_C1AEF4); /* C1AEE6: beq     $c1aef4 */
-L_C1AEE8:
-    FA18_CHECK(0xC1AEE8);
-    FA18_OP(0xC1AEE8, 0x0C03, 0xC1AEEC); /* C1AEE8: cmpi.b  #$6, D3 */
-    FA18_BCC(0xC1AEEC, 0x6700, 0xC1AEF0, 0xC1AF74, L_C1AF74); /* C1AEEC: beq     $c1af74 */
-L_C1AEF0:
-    FA18_CHECK(0xC1AEF0);
-    FA18_JUMP(0xC1AEF0, 0x6000, 0xC1AF7C, L_C1AF7C); /* C1AEF0: bra     $c1af7c */
-L_C1AEF4:
-    FA18_CHECK(0xC1AEF4);
-    FA18_OP(0xC1AEF4, 0x0C00, 0xC1AEF8); /* C1AEF4: cmpi.b  #$44, D0 */
-    FA18_BCC(0xC1AEF8, 0x6700, 0xC1AEFC, 0xC1BB7A, L_C1BB7A); /* C1AEF8: beq     $c1bb7a */
-L_C1AEFC:
-    FA18_CHECK(0xC1AEFC);
-    FA18_OP(0xC1AEFC, 0x0C00, 0xC1AF00); /* C1AEFC: cmpi.b  #$3e, D0 */
-    FA18_BCC(0xC1AF00, 0x6700, 0xC1AF04, 0xC1B8F8, L_C1B8F8); /* C1AF00: beq     $c1b8f8 */
-L_C1AF04:
-    FA18_CHECK(0xC1AF04);
-    FA18_OP(0xC1AF04, 0x0C00, 0xC1AF08); /* C1AF04: cmpi.b  #$1e, D0 */
-    FA18_BCC(0xC1AF08, 0x6700, 0xC1AF0C, 0xC1B914, L_C1B914); /* C1AF08: beq     $c1b914 */
-L_C1AF0C:
-    FA18_CHECK(0xC1AF0C);
-    FA18_OP(0xC1AF0C, 0x0C00, 0xC1AF10); /* C1AF0C: cmpi.b  #$2d, D0 */
-    FA18_BCC(0xC1AF10, 0x6700, 0xC1AF14, 0xC1B930, L_C1B930); /* C1AF10: beq     $c1b930 */
-L_C1AF14:
-    FA18_CHECK(0xC1AF14);
-    FA18_OP(0xC1AF14, 0x0C00, 0xC1AF18); /* C1AF14: cmpi.b  #$2f, D0 */
-    FA18_BCC(0xC1AF18, 0x6700, 0xC1AF1C, 0xC1B960, L_C1B960); /* C1AF18: beq     $c1b960 */
-L_C1AF1C:
-    FA18_CHECK(0xC1AF1C);
-    FA18_OP(0xC1AF1C, 0x0C00, 0xC1AF20); /* C1AF1C: cmpi.b  #$3d, D0 */
-    FA18_BCC(0xC1AF20, 0x6700, 0xC1AF24, 0xC1B98A, L_C1B98A); /* C1AF20: beq     $c1b98a */
-L_C1AF24:
-    FA18_CHECK(0xC1AF24);
-    FA18_OP(0xC1AF24, 0x0C00, 0xC1AF28); /* C1AF24: cmpi.b  #$1d, D0 */
-    FA18_BCC(0xC1AF28, 0x6700, 0xC1AF2C, 0xC1B9AC, L_C1B9AC); /* C1AF28: beq     $c1b9ac */
-L_C1AF2C:
-    FA18_CHECK(0xC1AF2C);
-    FA18_OP(0xC1AF2C, 0x0C00, 0xC1AF30); /* C1AF2C: cmpi.b  #$2e, D0 */
-    FA18_BCC(0xC1AF30, 0x6700, 0xC1AF34, 0xC1B7F8, L_C1B7F8); /* C1AF30: beq     $c1b7f8 */
-L_C1AF34:
-    FA18_CHECK(0xC1AF34);
-    FA18_OP(0xC1AF34, 0x0C00, 0xC1AF38); /* C1AF34: cmpi.b  #$3f, D0 */
-    FA18_BCC(0xC1AF38, 0x6700, 0xC1AF3C, 0xC1B780, L_C1B780); /* C1AF38: beq     $c1b780 */
-L_C1AF3C:
-    FA18_CHECK(0xC1AF3C);
-    FA18_OP(0xC1AF3C, 0x0C00, 0xC1AF40); /* C1AF3C: cmpi.b  #$1f, D0 */
-    FA18_BCC(0xC1AF40, 0x6700, 0xC1AF44, 0xC1B79A, L_C1B79A); /* C1AF40: beq     $c1b79a */
-L_C1AF44:
-    FA18_CHECK(0xC1AF44);
-    FA18_OP(0xC1AF44, 0x0C00, 0xC1AF48); /* C1AF44: cmpi.b  #$3c, D0 */
-    FA18_BCC(0xC1AF48, 0x6700, 0xC1AF4C, 0xC1B7C2, L_C1B7C2); /* C1AF48: beq     $c1b7c2 */
-L_C1AF4C:
-    FA18_CHECK(0xC1AF4C);
-    FA18_OP(0xC1AF4C, 0x0C00, 0xC1AF50); /* C1AF4C: cmpi.b  #-$62, D0 */
-    FA18_BCC(0xC1AF50, 0x6700, 0xC1AF54, 0xC1BB66, L_C1BB66); /* C1AF50: beq     $c1bb66 */
-L_C1AF54:
-    FA18_CHECK(0xC1AF54);
-    FA18_OP(0xC1AF54, 0x0C00, 0xC1AF58); /* C1AF54: cmpi.b  #-$53, D0 */
-    FA18_BCC(0xC1AF58, 0x6700, 0xC1AF5C, 0xC1BB66, L_C1BB66); /* C1AF58: beq     $c1bb66 */
-L_C1AF5C:
-    FA18_CHECK(0xC1AF5C);
-    FA18_OP(0xC1AF5C, 0x0C00, 0xC1AF60); /* C1AF5C: cmpi.b  #-$51, D0 */
-    FA18_BCC(0xC1AF60, 0x6700, 0xC1AF64, 0xC1BB66, L_C1BB66); /* C1AF60: beq     $c1bb66 */
-L_C1AF64:
-    FA18_CHECK(0xC1AF64);
-    FA18_OP(0xC1AF64, 0x0C00, 0xC1AF68); /* C1AF64: cmpi.b  #-$43, D0 */
-    FA18_BCC(0xC1AF68, 0x6700, 0xC1AF6C, 0xC1BB66, L_C1BB66); /* C1AF68: beq     $c1bb66 */
-L_C1AF6C:
-    FA18_CHECK(0xC1AF6C);
-    FA18_OP(0xC1AF6C, 0x0C00, 0xC1AF70); /* C1AF6C: cmpi.b  #-$63, D0 */
-    FA18_BCC(0xC1AF70, 0x6700, 0xC1AF74, 0xC1BB66, L_C1BB66); /* C1AF70: beq     $c1bb66 */
-L_C1AF74:
-    FA18_CHECK(0xC1AF74);
-    FA18_OP(0xC1AF74, 0x0C00, 0xC1AF78); /* C1AF74: cmpi.b  #$43, D0 */
-    FA18_BCC(0xC1AF78, 0x6700, 0xC1AF7C, 0xC1B664, L_C1B664); /* C1AF78: beq     $c1b664 */
-L_C1AF7C:
-    FA18_CHECK(0xC1AF7C);
-    FA18_OP(0xC1AF7C, 0x0C00, 0xC1AF80); /* C1AF7C: cmpi.b  #$45, D0 */
-    FA18_BCC(0xC1AF80, 0x6700, 0xC1AF84, 0xC1C224, L_C1C224); /* C1AF80: beq     $c1c224 */
-L_C1AF84:
-    FA18_CHECK(0xC1AF84);
-    FA18_OP(0xC1AF84, 0x0C39, 0xC1AF8C); /* C1AF84: cmpi.b  #$2, $c458a6.l */
-    FA18_BCC(0xC1AF8C, 0x6700, 0xC1AF90, 0xC1B010, L_C1B010); /* C1AF8C: beq     $c1b010 */
-L_C1AF90:
-    FA18_CHECK(0xC1AF90);
-    FA18_OP(0xC1AF90, 0x0C03, 0xC1AF94); /* C1AF90: cmpi.b  #$5, D3 */
-    FA18_BCC(0xC1AF94, 0x670C, 0xC1AF96, 0xC1AFA2, L_C1AFA2); /* C1AF94: beq     $c1afa2 */
-L_C1AF96:
-    FA18_CHECK(0xC1AF96);
-    FA18_OP(0xC1AF96, 0x0C03, 0xC1AF9A); /* C1AF96: cmpi.b  #$6, D3 */
-    FA18_BCC(0xC1AF9A, 0x6706, 0xC1AF9C, 0xC1AFA2, L_C1AFA2); /* C1AF9A: beq     $c1afa2 */
-L_C1AF9C:
-    FA18_CHECK(0xC1AF9C);
-    FA18_OP(0xC1AF9C, 0x4A03, 0xC1AF9E); /* C1AF9C: tst.b   D3 */
-    FA18_BCC(0xC1AF9E, 0x6E00, 0xC1AFA2, 0xC1B038, L_C1B038); /* C1AF9E: bgt     $c1b038 */
-L_C1AFA2:
-    FA18_CHECK(0xC1AFA2);
-    FA18_OP(0xC1AFA2, 0x0C00, 0xC1AFA6); /* C1AFA2: cmpi.b  #$1, D0 */
-    FA18_BCC(0xC1AFA6, 0x6D16, 0xC1AFA8, 0xC1AFBE, L_C1AFBE); /* C1AFA6: blt     $c1afbe */
-L_C1AFA8:
-    FA18_CHECK(0xC1AFA8);
-    FA18_OP(0xC1AFA8, 0x0C00, 0xC1AFAC); /* C1AFA8: cmpi.b  #$a, D0 */
-    FA18_BCC(0xC1AFAC, 0x6F00, 0xC1AFB0, 0xC1BC72, L_C1BC72); /* C1AFAC: ble     $c1bc72 */
-L_C1AFB0:
-    FA18_CHECK(0xC1AFB0);
-    FA18_OP(0xC1AFB0, 0x0C00, 0xC1AFB4); /* C1AFB0: cmpi.b  #$50, D0 */
-    FA18_BCC(0xC1AFB4, 0x6D08, 0xC1AFB6, 0xC1AFBE, L_C1AFBE); /* C1AFB4: blt     $c1afbe */
-L_C1AFB6:
-    FA18_CHECK(0xC1AFB6);
-    FA18_OP(0xC1AFB6, 0x0C00, 0xC1AFBA); /* C1AFB6: cmpi.b  #$59, D0 */
-    FA18_BCC(0xC1AFBA, 0x6F00, 0xC1AFBE, 0xC1BC50, L_C1BC50); /* C1AFBA: ble     $c1bc50 */
-L_C1AFBE:
-    FA18_CHECK(0xC1AFBE);
-    FA18_OP(0xC1AFBE, 0x0C00, 0xC1AFC2); /* C1AFBE: cmpi.b  #$1d, D0 */
-    FA18_BCC(0xC1AFC2, 0x6604, 0xC1AFC4, 0xC1AFC8, L_C1AFC8); /* C1AFC2: bne     $c1afc8 */
-L_C1AFC4:
-    FA18_CHECK(0xC1AFC4);
-    FA18_OP(0xC1AFC4, 0x7800, 0xC1AFC6); /* C1AFC4: moveq   #$0, D4 */
-    FA18_JUMP(0xC1AFC6, 0x6044, 0xC1B00C, L_C1B00C); /* C1AFC6: bra     $c1b00c */
-L_C1AFC8:
-    FA18_CHECK(0xC1AFC8);
-    FA18_OP(0xC1AFC8, 0x0C00, 0xC1AFCC); /* C1AFC8: cmpi.b  #$1e, D0 */
-    FA18_BCC(0xC1AFCC, 0x6604, 0xC1AFCE, 0xC1AFD2, L_C1AFD2); /* C1AFCC: bne     $c1afd2 */
-L_C1AFCE:
-    FA18_CHECK(0xC1AFCE);
-    FA18_OP(0xC1AFCE, 0x7801, 0xC1AFD0); /* C1AFCE: moveq   #$1, D4 */
-    FA18_JUMP(0xC1AFD0, 0x603A, 0xC1B00C, L_C1B00C); /* C1AFD0: bra     $c1b00c */
-L_C1AFD2:
-    FA18_CHECK(0xC1AFD2);
-    FA18_OP(0xC1AFD2, 0x0C00, 0xC1AFD6); /* C1AFD2: cmpi.b  #$1f, D0 */
-    FA18_BCC(0xC1AFD6, 0x6604, 0xC1AFD8, 0xC1AFDC, L_C1AFDC); /* C1AFD6: bne     $c1afdc */
-L_C1AFD8:
-    FA18_CHECK(0xC1AFD8);
-    FA18_OP(0xC1AFD8, 0x7802, 0xC1AFDA); /* C1AFD8: moveq   #$2, D4 */
-    FA18_JUMP(0xC1AFDA, 0x6030, 0xC1B00C, L_C1B00C); /* C1AFDA: bra     $c1b00c */
-L_C1AFDC:
-    FA18_CHECK(0xC1AFDC);
-    FA18_OP(0xC1AFDC, 0x0C00, 0xC1AFE0); /* C1AFDC: cmpi.b  #$2d, D0 */
-    FA18_BCC(0xC1AFE0, 0x6604, 0xC1AFE2, 0xC1AFE6, L_C1AFE6); /* C1AFE0: bne     $c1afe6 */
-L_C1AFE2:
-    FA18_CHECK(0xC1AFE2);
-    FA18_OP(0xC1AFE2, 0x7803, 0xC1AFE4); /* C1AFE2: moveq   #$3, D4 */
-    FA18_JUMP(0xC1AFE4, 0x6026, 0xC1B00C, L_C1B00C); /* C1AFE4: bra     $c1b00c */
-L_C1AFE6:
-    FA18_CHECK(0xC1AFE6);
-    FA18_OP(0xC1AFE6, 0x0C00, 0xC1AFEA); /* C1AFE6: cmpi.b  #$2e, D0 */
-    FA18_BCC(0xC1AFEA, 0x6604, 0xC1AFEC, 0xC1AFF0, L_C1AFF0); /* C1AFEA: bne     $c1aff0 */
-L_C1AFEC:
-    FA18_CHECK(0xC1AFEC);
-    FA18_OP(0xC1AFEC, 0x7804, 0xC1AFEE); /* C1AFEC: moveq   #$4, D4 */
-    FA18_JUMP(0xC1AFEE, 0x601C, 0xC1B00C, L_C1B00C); /* C1AFEE: bra     $c1b00c */
-L_C1AFF0:
-    FA18_CHECK(0xC1AFF0);
-    FA18_OP(0xC1AFF0, 0x0C00, 0xC1AFF4); /* C1AFF0: cmpi.b  #$2f, D0 */
-    FA18_BCC(0xC1AFF4, 0x6604, 0xC1AFF6, 0xC1AFFA, L_C1AFFA); /* C1AFF4: bne     $c1affa */
-L_C1AFF6:
-    FA18_CHECK(0xC1AFF6);
-    FA18_OP(0xC1AFF6, 0x7805, 0xC1AFF8); /* C1AFF6: moveq   #$5, D4 */
-    FA18_JUMP(0xC1AFF8, 0x6012, 0xC1B00C, L_C1B00C); /* C1AFF8: bra     $c1b00c */
-L_C1AFFA:
-    FA18_CHECK(0xC1AFFA);
-    FA18_OP(0xC1AFFA, 0x0C00, 0xC1AFFE); /* C1AFFA: cmpi.b  #$3d, D0 */
-    FA18_BCC(0xC1AFFE, 0x6604, 0xC1B000, 0xC1B004, L_C1B004); /* C1AFFE: bne     $c1b004 */
-L_C1B000:
-    FA18_CHECK(0xC1B000);
-    FA18_OP(0xC1B000, 0x7806, 0xC1B002); /* C1B000: moveq   #$6, D4 */
-    FA18_JUMP(0xC1B002, 0x6008, 0xC1B00C, L_C1B00C); /* C1B002: bra     $c1b00c */
-L_C1B004:
-    FA18_CHECK(0xC1B004);
-    FA18_OP(0xC1B004, 0x0C00, 0xC1B008); /* C1B004: cmpi.b  #$3e, D0 */
-    FA18_BCC(0xC1B008, 0x6606, 0xC1B00A, 0xC1B010, L_C1B010); /* C1B008: bne     $c1b010 */
-L_C1B00A:
-    FA18_CHECK(0xC1B00A);
-    FA18_OP(0xC1B00A, 0x7807, 0xC1B00C); /* C1B00A: moveq   #$7, D4 */
-L_C1B00C:
-    FA18_CHECK(0xC1B00C);
-    FA18_JUMP(0xC1B00C, 0x6000, 0xC1BC78, L_C1BC78); /* C1B00C: bra     $c1bc78 */
-L_C1B010:
-    FA18_CHECK(0xC1B010);
-    FA18_OP(0xC1B010, 0x0C00, 0xC1B014); /* C1B010: cmpi.b  #$1b, D0 */
-    FA18_BCC(0xC1B014, 0x6700, 0xC1B018, 0xC1BAE2, L_C1BAE2); /* C1B014: beq     $c1bae2 */
-L_C1B018:
-    FA18_CHECK(0xC1B018);
-    FA18_OP(0xC1B018, 0x0C00, 0xC1B01C); /* C1B018: cmpi.b  #$1a, D0 */
-    FA18_BCC(0xC1B01C, 0x6700, 0xC1B020, 0xC1BB02, L_C1BB02); /* C1B01C: beq     $c1bb02 */
-L_C1B020:
-    FA18_CHECK(0xC1B020);
-    FA18_OP(0xC1B020, 0x0C00, 0xC1B024); /* C1B020: cmpi.b  #-$65, D0 */
-    FA18_BCC(0xC1B024, 0x6700, 0xC1B028, 0xC1BB66, L_C1BB66); /* C1B024: beq     $c1bb66 */
-L_C1B028:
-    FA18_CHECK(0xC1B028);
-    FA18_OP(0xC1B028, 0x0C00, 0xC1B02C); /* C1B028: cmpi.b  #-$66, D0 */
-    FA18_BCC(0xC1B02C, 0x6700, 0xC1B030, 0xC1BB66, L_C1BB66); /* C1B02C: beq     $c1bb66 */
-L_C1B030:
-    FA18_CHECK(0xC1B030);
-    FA18_OP(0xC1B030, 0x0C00, 0xC1B034); /* C1B030: cmpi.b  #$19, D0 */
-    FA18_BCC(0xC1B034, 0x6700, 0xC1B038, 0xC1C06E, L_C1C06E); /* C1B034: beq     $c1c06e */
-L_C1B038:
-    FA18_CHECK(0xC1B038);
-    FA18_OP(0xC1B038, 0x0C39, 0xC1B040); /* C1B038: cmpi.b  #$2, $c458ad.l */
-    FA18_BCC(0xC1B040, 0x6608, 0xC1B042, 0xC1B04A, L_C1B04A); /* C1B040: bne     $c1b04a */
-L_C1B042:
-    FA18_CHECK(0xC1B042);
-    FA18_OP(0xC1B042, 0x0C00, 0xC1B046); /* C1B042: cmpi.b  #$43, D0 */
-    FA18_BCC(0xC1B046, 0x6700, 0xC1B04A, 0xC1B664, L_C1B664); /* C1B046: beq     $c1b664 */
-L_C1B04A:
-    FA18_CHECK(0xC1B04A);
-    FA18_OP(0xC1B04A, 0x0C00, 0xC1B04E); /* C1B04A: cmpi.b  #-$34, D0 */
-    FA18_BCC(0xC1B04E, 0x6700, 0xC1B052, 0xC1B504, L_C1B504); /* C1B04E: beq     $c1b504 */
-L_C1B052:
-    FA18_CHECK(0xC1B052);
-    FA18_OP(0xC1B052, 0x0C00, 0xC1B056); /* C1B052: cmpi.b  #-$33, D0 */
-    FA18_BCC(0xC1B056, 0x6700, 0xC1B05A, 0xC1B504, L_C1B504); /* C1B056: beq     $c1b504 */
-L_C1B05A:
-    FA18_CHECK(0xC1B05A);
-    FA18_OP(0xC1B05A, 0x0C00, 0xC1B05E); /* C1B05A: cmpi.b  #-$31, D0 */
-    FA18_BCC(0xC1B05E, 0x6700, 0xC1B062, 0xC1B550, L_C1B550); /* C1B05E: beq     $c1b550 */
-L_C1B062:
-    FA18_CHECK(0xC1B062);
-    FA18_OP(0xC1B062, 0x0C00, 0xC1B066); /* C1B062: cmpi.b  #-$32, D0 */
-    FA18_BCC(0xC1B066, 0x6700, 0xC1B06A, 0xC1B550, L_C1B550); /* C1B066: beq     $c1b550 */
-L_C1B06A:
-    FA18_CHECK(0xC1B06A);
-    FA18_OP(0xC1B06A, 0x0C00, 0xC1B06E); /* C1B06A: cmpi.b  #-$48, D0 */
-    FA18_BCC(0xC1B06E, 0x6700, 0xC1B072, 0xC1B59A, L_C1B59A); /* C1B06E: beq     $c1b59a */
-L_C1B072:
-    FA18_CHECK(0xC1B072);
-    FA18_OP(0xC1B072, 0x0C00, 0xC1B076); /* C1B072: cmpi.b  #-$47, D0 */
-    FA18_BCC(0xC1B076, 0x6700, 0xC1B07A, 0xC1B59A, L_C1B59A); /* C1B076: beq     $c1b59a */
-L_C1B07A:
-    FA18_CHECK(0xC1B07A);
-    FA18_OP(0xC1B07A, 0x0C00, 0xC1B07E); /* C1B07A: cmpi.b  #-$74, D0 */
-    FA18_BCC(0xC1B07E, 0x6700, 0xC1B082, 0xC1B5C0, L_C1B5C0); /* C1B07E: beq     $c1b5c0 */
-L_C1B082:
-    FA18_CHECK(0xC1B082);
-    FA18_OP(0xC1B082, 0x0C00, 0xC1B086); /* C1B082: cmpi.b  #-$75, D0 */
-    FA18_BCC(0xC1B086, 0x6700, 0xC1B08A, 0xC1B5C0, L_C1B5C0); /* C1B086: beq     $c1b5c0 */
-L_C1B08A:
-    FA18_CHECK(0xC1B08A);
-    FA18_OP(0xC1B08A, 0x0C00, 0xC1B08E); /* C1B08A: cmpi.b  #-$40, D0 */
-    FA18_BCC(0xC1B08E, 0x6700, 0xC1B092, 0xC1B22C, L_C1B22C); /* C1B08E: beq     $c1b22c */
-L_C1B092:
-    FA18_CHECK(0xC1B092);
-    FA18_OP(0xC1B092, 0x0C00, 0xC1B096); /* C1B092: cmpi.b  #$60, D0 */
-    FA18_BCC(0xC1B096, 0x6706, 0xC1B098, 0xC1B09E, L_C1B09E); /* C1B096: beq     $c1b09e */
-L_C1B098:
-    FA18_CHECK(0xC1B098);
-    FA18_OP(0xC1B098, 0x0C00, 0xC1B09C); /* C1B098: cmpi.b  #$61, D0 */
-    FA18_BCC(0xC1B09C, 0x660C, 0xC1B09E, 0xC1B0AA, L_C1B0AA); /* C1B09C: bne     $c1b0aa */
-L_C1B09E:
-    FA18_CHECK(0xC1B09E);
-    FA18_OP(0xC1B09E, 0x13FC, 0xC1B0A6); /* C1B09E: move.b  #$1, $c45878.l */
-    FA18_JUMP(0xC1B0A6, 0x6000, 0xC1C2B6, L_C1C2B6); /* C1B0A6: bra     $c1c2b6 */
-L_C1B0AA:
-    FA18_CHECK(0xC1B0AA);
-    FA18_OP(0xC1B0AA, 0x0C00, 0xC1B0AE); /* C1B0AA: cmpi.b  #-$20, D0 */
-    FA18_BCC(0xC1B0AE, 0x6700, 0xC1B0B2, 0xC1C2B6, L_C1C2B6); /* C1B0AE: beq     $c1c2b6 */
-L_C1B0B2:
-    FA18_CHECK(0xC1B0B2);
-    FA18_OP(0xC1B0B2, 0x0C00, 0xC1B0B6); /* C1B0B2: cmpi.b  #-$1f, D0 */
-    FA18_BCC(0xC1B0B6, 0x6700, 0xC1B0BA, 0xC1C2B6, L_C1C2B6); /* C1B0B6: beq     $c1c2b6 */
-L_C1B0BA:
-    FA18_CHECK(0xC1B0BA);
-    FA18_OP(0xC1B0BA, 0x0C00, 0xC1B0BE); /* C1B0BA: cmpi.b  #$66, D0 */
-    FA18_BCC(0xC1B0BE, 0x670A, 0xC1B0C0, 0xC1B0CA, L_C1B0CA); /* C1B0BE: beq     $c1b0ca */
-L_C1B0C0:
-    FA18_CHECK(0xC1B0C0);
-    FA18_OP(0xC1B0C0, 0x0C00, 0xC1B0C4); /* C1B0C0: cmpi.b  #-$1a, D0 */
-    FA18_BCC(0xC1B0C4, 0x6610, 0xC1B0C6, 0xC1B0D6, L_C1B0D6); /* C1B0C4: bne     $c1b0d6 */
-L_C1B0C6:
-    FA18_CHECK(0xC1B0C6);
-    FA18_JUMP(0xC1B0C6, 0x6000, 0xC1C2B6, L_C1C2B6); /* C1B0C6: bra     $c1c2b6 */
-L_C1B0CA:
-    FA18_CHECK(0xC1B0CA);
-    FA18_OP(0xC1B0CA, 0x13FC, 0xC1B0D2); /* C1B0CA: move.b  #$1, $c45879.l */
-    FA18_JUMP(0xC1B0D2, 0x6000, 0xC1C2B6, L_C1C2B6); /* C1B0D2: bra     $c1c2b6 */
-L_C1B0D6:
-    FA18_CHECK(0xC1B0D6);
-    FA18_OP(0xC1B0D6, 0x0C00, 0xC1B0DA); /* C1B0D6: cmpi.b  #$67, D0 */
-    FA18_BCC(0xC1B0DA, 0x670A, 0xC1B0DC, 0xC1B0E6, L_C1B0E6); /* C1B0DA: beq     $c1b0e6 */
-L_C1B0DC:
-    FA18_CHECK(0xC1B0DC);
-    FA18_OP(0xC1B0DC, 0x0C00, 0xC1B0E0); /* C1B0DC: cmpi.b  #-$19, D0 */
-    FA18_BCC(0xC1B0E0, 0x6610, 0xC1B0E2, 0xC1B0F2, L_C1B0F2); /* C1B0E0: bne     $c1b0f2 */
-L_C1B0E2:
-    FA18_CHECK(0xC1B0E2);
-    FA18_JUMP(0xC1B0E2, 0x6000, 0xC1C2B6, L_C1C2B6); /* C1B0E2: bra     $c1c2b6 */
-L_C1B0E6:
-    FA18_CHECK(0xC1B0E6);
-    FA18_OP(0xC1B0E6, 0x13FC, 0xC1B0EE); /* C1B0E6: move.b  #$1, $c4587a.l */
-    FA18_JUMP(0xC1B0EE, 0x6000, 0xC1C2B6, L_C1C2B6); /* C1B0EE: bra     $c1c2b6 */
-L_C1B0F2:
-    FA18_CHECK(0xC1B0F2);
-    FA18_OP(0xC1B0F2, 0x0C39, 0xC1B0FA); /* C1B0F2: cmpi.b  #$2, $c457e0.l */
-    FA18_BCC(0xC1B0FA, 0x6708, 0xC1B0FC, 0xC1B104, L_C1B104); /* C1B0FA: beq     $c1b104 */
-L_C1B0FC:
-    FA18_CHECK(0xC1B0FC);
-    FA18_OP(0xC1B0FC, 0x0C00, 0xC1B100); /* C1B0FC: cmpi.b  #$31, D0 */
-    FA18_BCC(0xC1B100, 0x6700, 0xC1B104, 0xC1C2B8, L_C1C2B8); /* C1B100: beq     $c1c2b8 */
-L_C1B104:
-    FA18_CHECK(0xC1B104);
-    FA18_OP(0xC1B104, 0x0C00, 0xC1B108); /* C1B104: cmpi.b  #$46, D0 */
-    FA18_BCC(0xC1B108, 0x6700, 0xC1B10C, 0xC1C2B8, L_C1C2B8); /* C1B108: beq     $c1c2b8 */
-L_C1B10C:
-    FA18_CHECK(0xC1B10C);
-    FA18_OP(0xC1B10C, 0x0C00, 0xC1B110); /* C1B10C: cmpi.b  #$45, D0 */
-    FA18_BCC(0xC1B110, 0x6700, 0xC1B114, 0xC1C224, L_C1C224); /* C1B110: beq     $c1c224 */
-L_C1B114:
-    FA18_CHECK(0xC1B114);
-    FA18_OP(0xC1B114, 0x0C00, 0xC1B118); /* C1B114: cmpi.b  #$44, D0 */
-    FA18_BCC(0xC1B118, 0x6600, 0xC1B11C, 0xC1C23C, L_C1C23C); /* C1B118: bne     $c1c23c */
-L_C1B11C:
-    FA18_CHECK(0xC1B11C);
-    FA18_OP(0xC1B11C, 0x4239, 0xC1B122); /* C1B11C: clr.b   $c457d3.l */
-    FA18_JUMP(0xC1B122, 0x6000, 0xC1C23C, L_C1C23C); /* C1B122: bra     $c1c23c */
-L_C1B126:
-    FA18_CHECK(0xC1B126);
-    FA18_OP(0xC1B126, 0x4A06, 0xC1B128); /* C1B126: tst.b   D6 */
-    FA18_BCC(0xC1B128, 0x6604, 0xC1B12A, 0xC1B12E, L_C1B12E); /* C1B128: bne     $c1b12e */
-L_C1B12A:
-    FA18_CHECK(0xC1B12A);
-    FA18_JUMP(0xC1B12A, 0x6000, 0xC1C23C, L_C1C23C); /* C1B12A: bra     $c1c23c */
-L_C1B12E:
-    FA18_CHECK(0xC1B12E);
-    FA18_OP(0xC1B12E, 0x4A39, 0xC1B134); /* C1B12E: tst.b   $c457ae.l */
-    FA18_BCC(0xC1B134, 0x6600, 0xC1B138, 0xC1C23C, L_C1C23C); /* C1B134: bne     $c1c23c */
-L_C1B138:
-    FA18_CHECK(0xC1B138);
-    FA18_OP(0xC1B138, 0x13FC, 0xC1B140); /* C1B138: move.b  #$8, $c45842.l */
-    FA18_OP(0xC1B140, 0x41F9, 0xC1B146); /* C1B140: lea     $c457ab.l, A0 */
-    FA18_CALL(0xC1B146, 0x6100, 0xC1B14A, 133, 0); /* C1B146: bsr     $c1c214 */
-L_C1B14A:
-    FA18_CHECK(0xC1B14A);
-    FA18_OP(0xC1B14A, 0x08F9, 0xC1B152); /* C1B14A: bset    #$5, $c4599a.l */
-    FA18_OP(0xC1B152, 0x0039, 0xC1B15A); /* C1B152: ori.b   #$a, $c46200.l */
-    FA18_JUMP(0xC1B15A, 0x6000, 0xC1C23C, L_C1C23C); /* C1B15A: bra     $c1c23c */
-L_C1B1A4:
-    FA18_CHECK(0xC1B1A4);
-    FA18_CALL(0xC1B1A4, 0x4EB9, 0xC1B1AA, 398, 1); /* C1B1A4: jsr     $c33186.l */
-L_C1B1AA:
-    FA18_CHECK(0xC1B1AA);
-    FA18_OP(0xC1B1AA, 0x08F9, 0xC1B1B2); /* C1B1AA: bset    #$7, $c4599a.l */
-    FA18_OP(0xC1B1B2, 0x13FC, 0xC1B1BA); /* C1B1B2: move.b  #$1, $c457b9.l */
-    FA18_JUMP(0xC1B1BA, 0x6000, 0xC1C23C, L_C1C23C); /* C1B1BA: bra     $c1c23c */
-L_C1B1C8:
-    FA18_CHECK(0xC1B1C8);
-    FA18_CALL(0xC1B1C8, 0x4EB9, 0xC1B1CE, 398, 1); /* C1B1C8: jsr     $c33186.l */
-L_C1B1CE:
-    FA18_CHECK(0xC1B1CE);
-    FA18_OP(0xC1B1CE, 0x08F9, 0xC1B1D6); /* C1B1CE: bset    #$6, $c4599a.l */
-    FA18_OP(0xC1B1D6, 0x41F9, 0xC1B1DC); /* C1B1D6: lea     $c46184.l, A0 */
-    FA18_OP(0xC1B1DC, 0xD0F9, 0xC1B1E2); /* C1B1DC: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1B1E2, 0x1828, 0xC1B1E6); /* C1B1E2: move.b  ($63,A0), D4 */
-    FA18_OP(0xC1B1E6, 0x0204, 0xC1B1EA); /* C1B1E6: andi.b  #$f, D4 */
-    FA18_OP(0xC1B1EA, 0x0C04, 0xC1B1EE); /* C1B1EA: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1B1EE, 0x670C, 0xC1B1F0, 0xC1B1FC, L_C1B1FC); /* C1B1EE: beq     $c1b1fc */
-L_C1B1F0:
-    FA18_CHECK(0xC1B1F0);
-    FA18_OP(0xC1B1F0, 0x0C04, 0xC1B1F4); /* C1B1F0: cmpi.b  #$b, D4 */
-    FA18_BCC(0xC1B1F4, 0x670C, 0xC1B1F6, 0xC1B202, L_C1B202); /* C1B1F4: beq     $c1b202 */
-L_C1B1F6:
-    FA18_CHECK(0xC1B1F6);
-    FA18_OP(0xC1B1F6, 0x183C, 0xC1B1FA); /* C1B1F6: move.b  #$b, D4 */
-    FA18_JUMP(0xC1B1FA, 0x600A, 0xC1B206, L_C1B206); /* C1B1FA: bra     $c1b206 */
-L_C1B1FC:
-    FA18_CHECK(0xC1B1FC);
-    FA18_OP(0xC1B1FC, 0x183C, 0xC1B200); /* C1B1FC: move.b  #$d, D4 */
-    FA18_JUMP(0xC1B200, 0x6004, 0xC1B206, L_C1B206); /* C1B200: bra     $c1b206 */
-L_C1B202:
-    FA18_CHECK(0xC1B202);
-    FA18_OP(0xC1B202, 0x183C, 0xC1B206); /* C1B202: move.b  #$9, D4 */
-L_C1B206:
-    FA18_CHECK(0xC1B206);
-    FA18_OP(0xC1B206, 0x0228, 0xC1B20C); /* C1B206: andi.b  #$f0, ($63,A0) */
-    FA18_OP(0xC1B20C, 0x8928, 0xC1B210); /* C1B20C: or.b    D4, ($63,A0) */
-    FA18_OP(0xC1B210, 0x13FC, 0xC1B218); /* C1B210: move.b  #$3, $c4583b.l */
-    FA18_JUMP(0xC1B218, 0x6000, 0xC1C23C, L_C1C23C); /* C1B218: bra     $c1c23c */
-L_C1B21C:
-    FA18_CHECK(0xC1B21C);
-    FA18_OP(0xC1B21C, 0x4A06, 0xC1B21E); /* C1B21C: tst.b   D6 */
-    FA18_BCC(0xC1B21E, 0x6600, 0xC1B222, 0xC1C23C, L_C1C23C); /* C1B21E: bne     $c1c23c */
-L_C1B222:
-    FA18_CHECK(0xC1B222);
-    FA18_CALL(0xC1B222, 0x4EB9, 0xC1B228, 18, 0); /* C1B222: jsr     $c0833e.l */
-L_C1B228:
-    FA18_CHECK(0xC1B228);
-    FA18_JUMP(0xC1B228, 0x6000, 0xC1C23C, L_C1C23C); /* C1B228: bra     $c1c23c */
-L_C1B22C:
-    FA18_CHECK(0xC1B22C);
-    FA18_CALL(0xC1B22C, 0x4EB9, 0xC1B232, 19, 0); /* C1B22C: jsr     $c08394.l */
-L_C1B232:
-    FA18_CHECK(0xC1B232);
-    FA18_JUMP(0xC1B232, 0x6000, 0xC1C23C, L_C1C23C); /* C1B232: bra     $c1c23c */
-L_C1B236:
-    FA18_CHECK(0xC1B236);
-    FA18_OP(0xC1B236, 0x3039, 0xC1B23C); /* C1B236: move.w  $c459c4.l, D0 */
-    FA18_OP(0xC1B23C, 0x5240, 0xC1B23E); /* C1B23C: addq.w  #1, D0 */
-    FA18_OP(0xC1B23E, 0x0C40, 0xC1B242); /* C1B23E: cmpi.w  #$3, D0 */
-    FA18_BCC(0xC1B242, 0x6F02, 0xC1B244, 0xC1B246, L_C1B246); /* C1B242: ble     $c1b246 */
-L_C1B244:
-    FA18_CHECK(0xC1B244);
-    FA18_OP(0xC1B244, 0x7001, 0xC1B246); /* C1B244: moveq   #$1, D0 */
-L_C1B246:
-    FA18_CHECK(0xC1B246);
-    FA18_OP(0xC1B246, 0x08C0, 0xC1B24A); /* C1B246: bset    #$f, D0 */
-    FA18_OP(0xC1B24A, 0x33C0, 0xC1B250); /* C1B24A: move.w  D0, $c459c4.l */
-    FA18_OP(0xC1B250, 0x13FC, 0xC1B258); /* C1B250: move.b  #$5, $c45886.l */
-    FA18_OP(0xC1B258, 0x13FC, 0xC1B260); /* C1B258: move.b  #$2, $c4583c.l */
-    FA18_JUMP(0xC1B260, 0x6000, 0xC1C23C, L_C1C23C); /* C1B260: bra     $c1c23c */
-L_C1B264:
-    FA18_CHECK(0xC1B264);
-    FA18_OP(0xC1B264, 0x1839, 0xC1B26A); /* C1B264: move.b  $c457a1.l, D4 */
-    FA18_OP(0xC1B26A, 0x5204, 0xC1B26C); /* C1B26A: addq.b  #1, D4 */
-    FA18_OP(0xC1B26C, 0x0C04, 0xC1B270); /* C1B26C: cmpi.b  #$1, D4 */
-    FA18_BCC(0xC1B270, 0x6F02, 0xC1B272, 0xC1B274, L_C1B274); /* C1B270: ble     $c1b274 */
-L_C1B272:
-    FA18_CHECK(0xC1B272);
-    FA18_OP(0xC1B272, 0x4204, 0xC1B274); /* C1B272: clr.b   D4 */
-L_C1B274:
-    FA18_CHECK(0xC1B274);
-    FA18_OP(0xC1B274, 0x13C4, 0xC1B27A); /* C1B274: move.b  D4, $c457a1.l */
-    FA18_JUMP(0xC1B27A, 0x6000, 0xC1C23C, L_C1C23C); /* C1B27A: bra     $c1c23c */
-L_C1B4F4:
-    FA18_CHECK(0xC1B4F4);
-    FA18_CALL(0xC1B4F4, 0x6100, 0xC1B4F8, 122, 0); /* C1B4F4: bsr     $c1b50c */
-L_C1B4F8:
-    FA18_CHECK(0xC1B4F8);
-    FA18_JUMP(0xC1B4F8, 0x6000, 0xC1C23C, L_C1C23C); /* C1B4F8: bra     $c1c23c */
-L_C1B4FC:
-    FA18_CHECK(0xC1B4FC);
-    FA18_CALL(0xC1B4FC, 0x6100, 0xC1B500, 123, 0); /* C1B4FC: bsr     $c1b510 */
-L_C1B500:
-    FA18_CHECK(0xC1B500);
-    FA18_JUMP(0xC1B500, 0x6000, 0xC1C23C, L_C1C23C); /* C1B500: bra     $c1c23c */
-L_C1B504:
-    FA18_CHECK(0xC1B504);
-    FA18_CALL(0xC1B504, 0x6100, 0xC1B508, 124, 0); /* C1B504: bsr     $c1b514 */
-L_C1B508:
-    FA18_CHECK(0xC1B508);
-    FA18_JUMP(0xC1B508, 0x6000, 0xC1C23C, L_C1C23C); /* C1B508: bra     $c1c23c */
-L_C1B540:
-    FA18_CHECK(0xC1B540);
-    FA18_CALL(0xC1B540, 0x6100, 0xC1B544, 125, 0); /* C1B540: bsr     $c1b558 */
-L_C1B544:
-    FA18_CHECK(0xC1B544);
-    FA18_JUMP(0xC1B544, 0x6000, 0xC1C23C, L_C1C23C); /* C1B544: bra     $c1c23c */
-L_C1B548:
-    FA18_CHECK(0xC1B548);
-    FA18_CALL(0xC1B548, 0x6100, 0xC1B54C, 126, 0); /* C1B548: bsr     $c1b55c */
-L_C1B54C:
-    FA18_CHECK(0xC1B54C);
-    FA18_JUMP(0xC1B54C, 0x6000, 0xC1C23C, L_C1C23C); /* C1B54C: bra     $c1c23c */
-L_C1B550:
-    FA18_CHECK(0xC1B550);
-    FA18_CALL(0xC1B550, 0x6100, 0xC1B554, 127, 0); /* C1B550: bsr     $c1b560 */
-L_C1B554:
-    FA18_CHECK(0xC1B554);
-    FA18_JUMP(0xC1B554, 0x6000, 0xC1C23C, L_C1C23C); /* C1B554: bra     $c1c23c */
-L_C1B58E:
-    FA18_CHECK(0xC1B58E);
-    FA18_OP(0xC1B58E, 0x143C, 0xC1B592); /* C1B58E: move.b  #$80, D2 */
-    FA18_JUMP(0xC1B592, 0x6008, 0xC1B59C, L_C1B59C); /* C1B592: bra     $c1b59c */
-L_C1B594:
-    FA18_CHECK(0xC1B594);
-    FA18_OP(0xC1B594, 0x143C, 0xC1B598); /* C1B594: move.b  #$40, D2 */
-    FA18_JUMP(0xC1B598, 0x6002, 0xC1B59C, L_C1B59C); /* C1B598: bra     $c1b59c */
-L_C1B59A:
-    FA18_CHECK(0xC1B59A);
-    FA18_OP(0xC1B59A, 0x7400, 0xC1B59C); /* C1B59A: moveq   #$0, D2 */
-L_C1B59C:
-    FA18_CHECK(0xC1B59C);
-    FA18_OP(0xC1B59C, 0x1239, 0xC1B5A2); /* C1B59C: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B5A2, 0x0201, 0xC1B5A6); /* C1B5A2: andi.b  #$3f, D1 */
-    FA18_OP(0xC1B5A6, 0x8202, 0xC1B5A8); /* C1B5A6: or.b    D2, D1 */
-    FA18_OP(0xC1B5A8, 0x13C1, 0xC1B5AE); /* C1B5A8: move.b  D1, $c461e9.l */
-    FA18_OP(0xC1B5AE, 0x13C2, 0xC1B5B4); /* C1B5AE: move.b  D2, $c4582f.l */
-    FA18_JUMP(0xC1B5B4, 0x6000, 0xC1C23C, L_C1C23C); /* C1B5B4: bra     $c1c23c */
-L_C1B5B8:
-    FA18_CHECK(0xC1B5B8);
-    FA18_OP(0xC1B5B8, 0x7401, 0xC1B5BA); /* C1B5B8: moveq   #$1, D2 */
-    FA18_JUMP(0xC1B5BA, 0x6006, 0xC1B5C2, L_C1B5C2); /* C1B5BA: bra     $c1b5c2 */
-L_C1B5BC:
-    FA18_CHECK(0xC1B5BC);
-    FA18_OP(0xC1B5BC, 0x7402, 0xC1B5BE); /* C1B5BC: moveq   #$2, D2 */
-    FA18_JUMP(0xC1B5BE, 0x6002, 0xC1B5C2, L_C1B5C2); /* C1B5BE: bra     $c1b5c2 */
-L_C1B5C0:
-    FA18_CHECK(0xC1B5C0);
-    FA18_OP(0xC1B5C0, 0x7400, 0xC1B5C2); /* C1B5C0: moveq   #$0, D2 */
-L_C1B5C2:
-    FA18_CHECK(0xC1B5C2);
-    FA18_OP(0xC1B5C2, 0x1239, 0xC1B5C8); /* C1B5C2: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B5C8, 0x0201, 0xC1B5CC); /* C1B5C8: andi.b  #$fc, D1 */
-    FA18_OP(0xC1B5CC, 0x8202, 0xC1B5CE); /* C1B5CC: or.b    D2, D1 */
-    FA18_OP(0xC1B5CE, 0x13C1, 0xC1B5D4); /* C1B5CE: move.b  D1, $c461e9.l */
-    FA18_CALL(0xC1B5D4, 0x6100, 0xC1B5D8, 128, 0); /* C1B5D4: bsr     $c1b602 */
-L_C1B5D8:
-    FA18_CHECK(0xC1B5D8);
-    FA18_JUMP(0xC1B5D8, 0x6000, 0xC1C23C, L_C1C23C); /* C1B5D8: bra     $c1c23c */
-L_C1B5DC:
-    FA18_CHECK(0xC1B5DC);
-    FA18_CALL(0xC1B5DC, 0x6100, 0xC1B5E0, 128, 0); /* C1B5DC: bsr     $c1b602 */
-L_C1B5E0:
-    FA18_CHECK(0xC1B5E0);
-    FA18_CALL(0xC1B5E0, 0x4EB9, 0xC1B5E6, 398, 1); /* C1B5E0: jsr     $c33186.l */
-L_C1B5E6:
-    FA18_CHECK(0xC1B5E6);
-    FA18_OP(0xC1B5E6, 0x08F9, 0xC1B5EE); /* C1B5E6: bset    #$0, $c4599b.l */
-    FA18_OP(0xC1B5EE, 0x13FC, 0xC1B5F6); /* C1B5EE: move.b  #$3, $c4583f.l */
-    FA18_OP(0xC1B5F6, 0x0A79, 0xC1B5FE); /* C1B5F6: eori.w  #$800, $c46184.l */
-    FA18_JUMP(0xC1B5FE, 0x6000, 0xC1C23C, L_C1C23C); /* C1B5FE: bra     $c1c23c */
-L_C1B616:
-    FA18_CHECK(0xC1B616);
-    FA18_OP(0xC1B616, 0x08F9, 0xC1B61E); /* C1B616: bset    #$1, $c4599a.l */
-    FA18_OP(0xC1B61E, 0x0C39, 0xC1B626); /* C1B61E: cmpi.b  #$11, $c461e6.l */
-    FA18_BCC(0xC1B626, 0x6600, 0xC1B62A, 0xC1C23C, L_C1C23C); /* C1B626: bne     $c1c23c */
-L_C1B62A:
-    FA18_CHECK(0xC1B62A);
-    FA18_CALL(0xC1B62A, 0x4EB9, 0xC1B630, 398, 1); /* C1B62A: jsr     $c33186.l */
-L_C1B630:
-    FA18_CHECK(0xC1B630);
-    FA18_OP(0xC1B630, 0x0A79, 0xC1B638); /* C1B630: eori.w  #$8000, $c46186.l */
-    FA18_OP(0xC1B638, 0x0879, 0xC1B640); /* C1B638: bchg    #$7, $c45847.l */
-    FA18_OP(0xC1B640, 0x13FC, 0xC1B648); /* C1B640: move.b  #$3, $c45845.l */
-    FA18_OP(0xC1B648, 0x4840, 0xC1B64A); /* C1B648: swap    D0 */
-    FA18_OP(0xC1B64A, 0x0839, 0xC1B652); /* C1B64A: btst    #$7, $c46186.l */
-    FA18_BCC(0xC1B652, 0x6704, 0xC1B654, 0xC1B658, L_C1B658); /* C1B652: beq     $c1b658 */
-L_C1B654:
-    FA18_CHECK(0xC1B654);
-    FA18_OP(0xC1B654, 0x303C, 0xC1B658); /* C1B654: move.w  #$4023, D0 */
-L_C1B658:
-    FA18_CHECK(0xC1B658);
-    FA18_CALL(0xC1B658, 0x4EB9, 0xC1B65E, 216, 0); /* C1B658: jsr     $c25704.l */
-L_C1B65E:
-    FA18_CHECK(0xC1B65E);
-    FA18_OP(0xC1B65E, 0x4840, 0xC1B660); /* C1B65E: swap    D0 */
-    FA18_JUMP(0xC1B660, 0x6000, 0xC1C23C, L_C1C23C); /* C1B660: bra     $c1c23c */
-L_C1B664:
-    FA18_CHECK(0xC1B664);
-    FA18_OP(0xC1B664, 0x13FC, 0xC1B66C); /* C1B664: move.b  #$2, $c457a3.l */
-    FA18_OP(0xC1B66C, 0x4A06, 0xC1B66E); /* C1B66C: tst.b   D6 */
-    FA18_BCC(0xC1B66E, 0x6652, 0xC1B670, 0xC1B6C2, L_C1B6C2); /* C1B66E: bne     $c1b6c2 */
-L_C1B670:
-    FA18_CHECK(0xC1B670);
-    FA18_OP(0xC1B670, 0x08F9, 0xC1B678); /* C1B670: bset    #$1, $c4599c.l */
-    FA18_OP(0xC1B678, 0x4A05, 0xC1B67A); /* C1B678: tst.b   D5 */
-    FA18_BCC(0xC1B67A, 0x6608, 0xC1B67C, 0xC1B684, L_C1B684); /* C1B67A: bne     $c1b684 */
-L_C1B67C:
-    FA18_CHECK(0xC1B67C);
-    FA18_OP(0xC1B67C, 0x13FC, 0xC1B684); /* C1B67C: move.b  #$4, $c458b2.l */
-L_C1B684:
-    FA18_CHECK(0xC1B684);
-    FA18_OP(0xC1B684, 0x13FC, 0xC1B68C); /* C1B684: move.b  #$1, $c457b5.l */
-L_C1B68C:
-    FA18_CHECK(0xC1B68C);
-    FA18_OP(0xC1B68C, 0x13FC, 0xC1B694); /* C1B68C: move.b  #$1, $c457b4.l */
-    FA18_OP(0xC1B694, 0x4239, 0xC1B69A); /* C1B694: clr.b   $c457ad.l */
-L_C1B69A:
-    FA18_CHECK(0xC1B69A);
-    FA18_OP(0xC1B69A, 0x41F9, 0xC1B6A0); /* C1B69A: lea     $c46184.l, A0 */
-    FA18_OP(0xC1B6A0, 0x3839, 0xC1B6A6); /* C1B6A0: move.w  $c458de.l, D4 */
-    FA18_OP(0xC1B6A6, 0x33F0, 0xC1B6AE); /* C1B6A6: move.w  ($68,A0,D4.w), $c4592a.l */
-    FA18_OP(0xC1B6AE, 0x0079, 0xC1B6B6); /* C1B6AE: ori.w   #$2, $c458c6.l */
-    FA18_OP(0xC1B6B6, 0x13FC, 0xC1B6BE); /* C1B6B6: move.b  #$ff, $c45833.l */
-    FA18_JUMP(0xC1B6BE, 0x6000, 0xC1C23C, L_C1C23C); /* C1B6BE: bra     $c1c23c */
-L_C1B6C2:
-    FA18_CHECK(0xC1B6C2);
-    FA18_OP(0xC1B6C2, 0x08F9, 0xC1B6CA); /* C1B6C2: bset    #$2, $c4599c.l */
-    FA18_OP(0xC1B6CA, 0x13FC, 0xC1B6D2); /* C1B6CA: move.b  #$ff, $c457a6.l */
-    FA18_OP(0xC1B6D2, 0x41F9, 0xC1B6D8); /* C1B6D2: lea     $c42a02.l, A0 */
-    FA18_OP(0xC1B6D8, 0x1039, 0xC1B6DE); /* C1B6D8: move.b  $c45848.l, D0 */
-    FA18_OP(0xC1B6DE, 0x4880, 0xC1B6E0); /* C1B6DE: ext.w   D0 */
-    FA18_OP(0xC1B6E0, 0xE940, 0xC1B6E2); /* C1B6E0: asl.w   #4, D0 */
-    FA18_OP(0xC1B6E2, 0x3200, 0xC1B6E4); /* C1B6E2: move.w  D0, D1 */
-    FA18_OP(0xC1B6E4, 0xD0C0, 0xC1B6E6); /* C1B6E4: adda.w  D0, A0 */
-    FA18_OP(0xC1B6E6, 0x3010, 0xC1B6E8); /* C1B6E6: move.w  (A0), D0 */
-    FA18_BCC(0xC1B6E8, 0x6C38, 0xC1B6EA, 0xC1B722, L_C1B722); /* C1B6E8: bge     $c1b722 */
-L_C1B6EA:
-    FA18_CHECK(0xC1B6EA);
-    FA18_OP(0xC1B6EA, 0x0240, 0xC1B6EE); /* C1B6EA: andi.w  #$7fff, D0 */
-    FA18_OP(0xC1B6EE, 0xE140, 0xC1B6F0); /* C1B6EE: asl.w   #8, D0 */
-    FA18_OP(0xC1B6F0, 0xD040, 0xC1B6F2); /* C1B6F0: add.w   D0, D0 */
-    FA18_OP(0xC1B6F2, 0x43F9, 0xC1B6F8); /* C1B6F2: lea     $c46184.l, A1 */
-    FA18_OP(0xC1B6F8, 0xD2C0, 0xC1B6FA); /* C1B6F8: adda.w  D0, A1 */
-    FA18_OP(0xC1B6FA, 0x0C29, 0xC1B700); /* C1B6FA: cmpi.b  #$20, ($62,A1) */
-    FA18_BCC(0xC1B700, 0x660E, 0xC1B702, 0xC1B710, L_C1B710); /* C1B700: bne     $c1b710 */
-L_C1B702:
-    FA18_CHECK(0xC1B702);
-    FA18_OP(0xC1B702, 0x363C, 0xC1B706); /* C1B702: move.w  #$ffdc, D3 */
-    FA18_OP(0xC1B706, 0x383C, 0xC1B70A); /* C1B706: move.w  #$2f, D4 */
-    FA18_OP(0xC1B70A, 0x3A3C, 0xC1B70E); /* C1B70A: move.w  #$ffd0, D5 */
-    FA18_JUMP(0xC1B70E, 0x600A, 0xC1B71A, L_C1B71A); /* C1B70E: bra     $c1b71a */
-L_C1B710:
-    FA18_CHECK(0xC1B710);
-    FA18_OP(0xC1B710, 0x7600, 0xC1B712); /* C1B710: moveq   #$0, D3 */
-    FA18_OP(0xC1B712, 0x383C, 0xC1B716); /* C1B712: move.w  #$14, D4 */
-    FA18_OP(0xC1B716, 0x3A3C, 0xC1B71A); /* C1B716: move.w  #$ff96, D5 */
-L_C1B71A:
-    FA18_CHECK(0xC1B71A);
-    FA18_CALL(0xC1B71A, 0x4EB9, 0xC1B720, 25, 0); /* C1B71A: jsr     $c091e0.l */
-L_C1B720:
-    FA18_CHECK(0xC1B720);
-    FA18_JUMP(0xC1B720, 0x603A, 0xC1B75C, L_C1B75C); /* C1B720: bra     $c1b75c */
-L_C1B722:
-    FA18_CHECK(0xC1B722);
-    FA18_OP(0xC1B722, 0x41F9, 0xC1B728); /* C1B722: lea     $c42a54.l, A0 */
-    FA18_OP(0xC1B728, 0xD0C1, 0xC1B72A); /* C1B728: adda.w  D1, A0 */
-    FA18_OP(0xC1B72A, 0x4C90, 0xC1B72E); /* C1B72A: movem.w (A0), D0-D5 */
-    FA18_OP(0xC1B72E, 0x4840, 0xC1B730); /* C1B72E: swap    D0 */
-    FA18_OP(0xC1B730, 0xED80, 0xC1B732); /* C1B730: asl.l   #6, D0 */
-    FA18_OP(0xC1B732, 0x4841, 0xC1B734); /* C1B732: swap    D1 */
-    FA18_OP(0xC1B734, 0xED81, 0xC1B736); /* C1B734: asl.l   #6, D1 */
-    FA18_OP(0xC1B736, 0xD442, 0xC1B738); /* C1B736: add.w   D2, D2 */
-    FA18_OP(0xC1B738, 0xD442, 0xC1B73A); /* C1B738: add.w   D2, D2 */
-    FA18_OP(0xC1B73A, 0x49F9, 0xC1B740); /* C1B73A: lea     $c1d7e2.l, A4 */
-    FA18_OP(0xC1B740, 0x4CB4, 0xC1B746); /* C1B740: movem.w (A4,D2.w), D6-D7 */
-    FA18_OP(0xC1B746, 0xE186, 0xC1B748); /* C1B746: asl.l   #8, D6 */
-    FA18_OP(0xC1B748, 0xE187, 0xC1B74A); /* C1B748: asl.l   #8, D7 */
-    FA18_OP(0xC1B74A, 0xD086, 0xC1B74C); /* C1B74A: add.l   D6, D0 */
-    FA18_OP(0xC1B74C, 0xD287, 0xC1B74E); /* C1B74C: add.l   D7, D1 */
-    FA18_OP(0xC1B74E, 0xE184, 0xC1B750); /* C1B74E: asl.l   #8, D4 */
-    FA18_OP(0xC1B750, 0xE185, 0xC1B752); /* C1B750: asl.l   #8, D5 */
-    FA18_OP(0xC1B752, 0xD084, 0xC1B754); /* C1B752: add.l   D4, D0 */
-    FA18_OP(0xC1B754, 0xD285, 0xC1B756); /* C1B754: add.l   D5, D1 */
-    FA18_OP(0xC1B756, 0xE183, 0xC1B758); /* C1B756: asl.l   #8, D3 */
-    FA18_OP(0xC1B758, 0x2401, 0xC1B75A); /* C1B758: move.l  D1, D2 */
-    FA18_OP(0xC1B75A, 0x2203, 0xC1B75C); /* C1B75A: move.l  D3, D1 */
-L_C1B75C:
-    FA18_CHECK(0xC1B75C);
-    FA18_CALL(0xC1B75C, 0x4EB9, 0xC1B762, 22, 0); /* C1B75C: jsr     $c0915a.l */
-L_C1B762:
-    FA18_CHECK(0xC1B762);
-    FA18_OP(0xC1B762, 0x4239, 0xC1B768); /* C1B762: clr.b   $c457b5.l */
-    FA18_OP(0xC1B768, 0x4A39, 0xC1B76E); /* C1B768: tst.b   $c45785.l */
-    FA18_BCC(0xC1B76E, 0x6700, 0xC1B772, 0xC1B68C, L_C1B68C); /* C1B76E: beq     $c1b68c */
-L_C1B772:
-    FA18_CHECK(0xC1B772);
-    FA18_OP(0xC1B772, 0x4239, 0xC1B778); /* C1B772: clr.b   $c457a6.l */
-    FA18_JUMP(0xC1B778, 0x6000, 0xC1C23C, L_C1C23C); /* C1B778: bra     $c1c23c */
-L_C1B77C:
-    FA18_CHECK(0xC1B77C);
-    FA18_OP(0xC1B77C, 0x7800, 0xC1B77E); /* C1B77C: moveq   #$0, D4 */
-    FA18_JUMP(0xC1B77E, 0x604C, 0xC1B7CC, L_C1B7CC); /* C1B77E: bra     $c1b7cc */
-L_C1B780:
-    FA18_CHECK(0xC1B780);
-    FA18_OP(0xC1B780, 0x08F9, 0xC1B788); /* C1B780: bset    #$5, $c4599c.l */
-    FA18_OP(0xC1B788, 0x4A39, 0xC1B78E); /* C1B788: tst.b   $c45785.l */
-    FA18_BCC(0xC1B78E, 0x6700, 0xC1B792, 0xC1B906, L_C1B906); /* C1B78E: beq     $c1b906 */
-L_C1B792:
-    FA18_CHECK(0xC1B792);
-    FA18_OP(0xC1B792, 0x7801, 0xC1B794); /* C1B792: moveq   #$1, D4 */
-    FA18_JUMP(0xC1B794, 0x6036, 0xC1B7CC, L_C1B7CC); /* C1B794: bra     $c1b7cc */
-L_C1B796:
-    FA18_CHECK(0xC1B796);
-    FA18_OP(0xC1B796, 0x7802, 0xC1B798); /* C1B796: moveq   #$2, D4 */
-    FA18_JUMP(0xC1B798, 0x6032, 0xC1B7CC, L_C1B7CC); /* C1B798: bra     $c1b7cc */
-L_C1B79A:
-    FA18_CHECK(0xC1B79A);
-    FA18_OP(0xC1B79A, 0x08F9, 0xC1B7A2); /* C1B79A: bset    #$7, $c4599c.l */
-    FA18_OP(0xC1B7A2, 0x7803, 0xC1B7A4); /* C1B7A2: moveq   #$3, D4 */
-    FA18_JUMP(0xC1B7A4, 0x6026, 0xC1B7CC, L_C1B7CC); /* C1B7A4: bra     $c1b7cc */
-L_C1B7A6:
-    FA18_CHECK(0xC1B7A6);
-    FA18_OP(0xC1B7A6, 0x7804, 0xC1B7A8); /* C1B7A6: moveq   #$4, D4 */
-    FA18_JUMP(0xC1B7A8, 0x6022, 0xC1B7CC, L_C1B7CC); /* C1B7A8: bra     $c1b7cc */
-L_C1B7AA:
-    FA18_CHECK(0xC1B7AA);
-    FA18_OP(0xC1B7AA, 0x7805, 0xC1B7AC); /* C1B7AA: moveq   #$5, D4 */
-    FA18_JUMP(0xC1B7AC, 0x601E, 0xC1B7CC, L_C1B7CC); /* C1B7AC: bra     $c1b7cc */
-L_C1B7AE:
-    FA18_CHECK(0xC1B7AE);
-    FA18_OP(0xC1B7AE, 0x7806, 0xC1B7B0); /* C1B7AE: moveq   #$6, D4 */
-    FA18_JUMP(0xC1B7B0, 0x601A, 0xC1B7CC, L_C1B7CC); /* C1B7B0: bra     $c1b7cc */
-L_C1B7B2:
-    FA18_CHECK(0xC1B7B2);
-    FA18_OP(0xC1B7B2, 0x7807, 0xC1B7B4); /* C1B7B2: moveq   #$7, D4 */
-    FA18_JUMP(0xC1B7B4, 0x6016, 0xC1B7CC, L_C1B7CC); /* C1B7B4: bra     $c1b7cc */
-L_C1B7B6:
-    FA18_CHECK(0xC1B7B6);
-    FA18_OP(0xC1B7B6, 0x08F9, 0xC1B7BE); /* C1B7B6: bset    #$4, $c4599d.l */
-    FA18_OP(0xC1B7BE, 0x7808, 0xC1B7C0); /* C1B7BE: moveq   #$8, D4 */
-    FA18_JUMP(0xC1B7C0, 0x600A, 0xC1B7CC, L_C1B7CC); /* C1B7C0: bra     $c1b7cc */
-L_C1B7C2:
-    FA18_CHECK(0xC1B7C2);
-    FA18_OP(0xC1B7C2, 0x08F9, 0xC1B7CA); /* C1B7C2: bset    #$5, $c4599d.l */
-    FA18_OP(0xC1B7CA, 0x7809, 0xC1B7CC); /* C1B7CA: moveq   #$9, D4 */
-L_C1B7CC:
-    FA18_CHECK(0xC1B7CC);
-    FA18_OP(0xC1B7CC, 0x13C4, 0xC1B7D2); /* C1B7CC: move.b  D4, $c458b2.l */
-    FA18_OP(0xC1B7D2, 0x13FC, 0xC1B7DA); /* C1B7D2: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B7DA, 0x4A39, 0xC1B7E0); /* C1B7DA: tst.b   $c458b0.l */
-    FA18_BCC(0xC1B7E0, 0x6600, 0xC1B7E4, 0xC1C23C, L_C1C23C); /* C1B7E0: bne     $c1c23c */
-L_C1B7E4:
-    FA18_CHECK(0xC1B7E4);
-    FA18_OP(0xC1B7E4, 0x13FC, 0xC1B7EC); /* C1B7E4: move.b  #$ff, $c458b0.l */
-    FA18_JUMP(0xC1B7EC, 0x6000, 0xC1C23C, L_C1C23C); /* C1B7EC: bra     $c1c23c */
-L_C1B7F8:
-    FA18_CHECK(0xC1B7F8);
-    FA18_OP(0xC1B7F8, 0x1839, 0xC1B7FE); /* C1B7F8: move.b  $c45785.l, D4 */
-    FA18_BCC(0xC1B7FE, 0x66B6, 0xC1B800, 0xC1B7B6, L_C1B7B6); /* C1B7FE: bne     $c1b7b6 */
-L_C1B800:
-    FA18_CHECK(0xC1B800);
-    FA18_OP(0xC1B800, 0x08F9, 0xC1B808); /* C1B800: bset    #$3, $c4599c.l */
-    FA18_JUMP(0xC1B808, 0x607A, 0xC1B884, L_C1B884); /* C1B808: bra     $c1b884 */
-L_C1B80A:
-    FA18_CHECK(0xC1B80A);
-    FA18_OP(0xC1B80A, 0x1839, 0xC1B810); /* C1B80A: move.b  $c45785.l, D4 */
-    FA18_BCC(0xC1B810, 0x6700, 0xC1B814, 0xC1C23C, L_C1C23C); /* C1B810: beq     $c1c23c */
-L_C1B814:
-    FA18_CHECK(0xC1B814);
-    FA18_OP(0xC1B814, 0x4A39, 0xC1B81A); /* C1B814: tst.b   $c458ae.l */
-    FA18_BCC(0xC1B81A, 0x6600, 0xC1B81E, 0xC1C23C, L_C1C23C); /* C1B81A: bne     $c1c23c */
-L_C1B81E:
-    FA18_CHECK(0xC1B81E);
-    FA18_OP(0xC1B81E, 0x08F9, 0xC1B826); /* C1B81E: bset    #$3, $c4599c.l */
-    FA18_OP(0xC1B826, 0x4A39, 0xC1B82C); /* C1B826: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B82C, 0x672C, 0xC1B82E, 0xC1B85A, L_C1B85A); /* C1B82C: beq     $c1b85a */
-L_C1B82E:
-    FA18_CHECK(0xC1B82E);
-    FA18_OP(0xC1B82E, 0x2239, 0xC1B834); /* C1B82E: move.l  $c45c42.l, D1 */
-    FA18_OP(0xC1B834, 0x0481, 0xC1B83A); /* C1B834: subi.l  #$2000000, D1 */
-    FA18_OP(0xC1B83A, 0x0C81, 0xC1B840); /* C1B83A: cmpi.l  #$1000000, D1 */
-    FA18_BCC(0xC1B840, 0x6C06, 0xC1B842, 0xC1B848, L_C1B848); /* C1B840: bge     $c1b848 */
-L_C1B842:
-    FA18_CHECK(0xC1B842);
-    FA18_OP(0xC1B842, 0x223C, 0xC1B848); /* C1B842: move.l  #$1000000, D1 */
-L_C1B848:
-    FA18_CHECK(0xC1B848);
-    FA18_OP(0xC1B848, 0x23C1, 0xC1B84E); /* C1B848: move.l  D1, $c45c42.l */
-    FA18_OP(0xC1B84E, 0x13FC, 0xC1B856); /* C1B84E: move.b  #$ff, $c45858.l */
-    FA18_JUMP(0xC1B856, 0x6000, 0xC1C23C, L_C1C23C); /* C1B856: bra     $c1c23c */
-L_C1B85A:
-    FA18_CHECK(0xC1B85A);
-    FA18_OP(0xC1B85A, 0x5304, 0xC1B85C); /* C1B85A: subq.b  #1, D4 */
-    FA18_BCC(0xC1B85C, 0x6E02, 0xC1B85E, 0xC1B860, L_C1B860); /* C1B85C: bgt     $c1b860 */
-L_C1B85E:
-    FA18_CHECK(0xC1B85E);
-    FA18_OP(0xC1B85E, 0x78FF, 0xC1B860); /* C1B85E: moveq   #-$1, D4 */
-L_C1B860:
-    FA18_CHECK(0xC1B860);
-    FA18_OP(0xC1B860, 0x13C4, 0xC1B866); /* C1B860: move.b  D4, $c45785.l */
-    FA18_OP(0xC1B866, 0x13FC, 0xC1B86E); /* C1B866: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B86E, 0x4A39, 0xC1B874); /* C1B86E: tst.b   $c458b0.l */
-    FA18_BCC(0xC1B874, 0x6600, 0xC1B878, 0xC1C23C, L_C1C23C); /* C1B874: bne     $c1c23c */
-L_C1B878:
-    FA18_CHECK(0xC1B878);
-    FA18_OP(0xC1B878, 0x13FC, 0xC1B880); /* C1B878: move.b  #$ff, $c458b0.l */
-    FA18_JUMP(0xC1B880, 0x6000, 0xC1C23C, L_C1C23C); /* C1B880: bra     $c1c23c */
-L_C1B884:
-    FA18_CHECK(0xC1B884);
-    FA18_OP(0xC1B884, 0x13FC, 0xC1B88C); /* C1B884: move.b  #$ff, $c45891.l */
-    FA18_JUMP(0xC1B88C, 0x6000, 0xC1C23C, L_C1C23C); /* C1B88C: bra     $c1c23c */
-L_C1B890:
-    FA18_CHECK(0xC1B890);
-    FA18_OP(0xC1B890, 0x08F9, 0xC1B898); /* C1B890: bset    #$7, $c4599d.l */
-    FA18_OP(0xC1B898, 0x1839, 0xC1B89E); /* C1B898: move.b  $c45785.l, D4 */
-    FA18_BCC(0xC1B89E, 0x6700, 0xC1B8A2, 0xC1C23C, L_C1C23C); /* C1B89E: beq     $c1c23c */
-L_C1B8A2:
-    FA18_CHECK(0xC1B8A2);
-    FA18_OP(0xC1B8A2, 0x4A39, 0xC1B8A8); /* C1B8A2: tst.b   $c458ae.l */
-    FA18_BCC(0xC1B8A8, 0x6600, 0xC1B8AC, 0xC1C23C, L_C1C23C); /* C1B8A8: bne     $c1c23c */
-L_C1B8AC:
-    FA18_CHECK(0xC1B8AC);
-    FA18_OP(0xC1B8AC, 0x4A39, 0xC1B8B2); /* C1B8AC: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B8B2, 0x672C, 0xC1B8B4, 0xC1B8E0, L_C1B8E0); /* C1B8B2: beq     $c1b8e0 */
-L_C1B8B4:
-    FA18_CHECK(0xC1B8B4);
-    FA18_OP(0xC1B8B4, 0x2239, 0xC1B8BA); /* C1B8B4: move.l  $c45c42.l, D1 */
-    FA18_OP(0xC1B8BA, 0x0681, 0xC1B8C0); /* C1B8BA: addi.l  #$2000000, D1 */
-    FA18_OP(0xC1B8C0, 0x0C81, 0xC1B8C6); /* C1B8C0: cmpi.l  #$8000000, D1 */
-    FA18_BCC(0xC1B8C6, 0x6F06, 0xC1B8C8, 0xC1B8CE, L_C1B8CE); /* C1B8C6: ble     $c1b8ce */
-L_C1B8C8:
-    FA18_CHECK(0xC1B8C8);
-    FA18_OP(0xC1B8C8, 0x223C, 0xC1B8CE); /* C1B8C8: move.l  #$8000000, D1 */
-L_C1B8CE:
-    FA18_CHECK(0xC1B8CE);
-    FA18_OP(0xC1B8CE, 0x23C1, 0xC1B8D4); /* C1B8CE: move.l  D1, $c45c42.l */
-    FA18_OP(0xC1B8D4, 0x13FC, 0xC1B8DC); /* C1B8D4: move.b  #$ff, $c45858.l */
-    FA18_JUMP(0xC1B8DC, 0x6000, 0xC1C23C, L_C1C23C); /* C1B8DC: bra     $c1c23c */
-L_C1B8E0:
-    FA18_CHECK(0xC1B8E0);
-    FA18_OP(0xC1B8E0, 0x5204, 0xC1B8E2); /* C1B8E0: addq.b  #1, D4 */
-    FA18_BCC(0xC1B8E2, 0x670E, 0xC1B8E4, 0xC1B8F2, L_C1B8F2); /* C1B8E2: beq     $c1b8f2 */
-L_C1B8E4:
-    FA18_CHECK(0xC1B8E4);
-    FA18_OP(0xC1B8E4, 0x0C04, 0xC1B8E8); /* C1B8E4: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1B8E8, 0x6D00, 0xC1B8EC, 0xC1B860, L_C1B860); /* C1B8E8: blt     $c1b860 */
-L_C1B8EC:
-    FA18_CHECK(0xC1B8EC);
-    FA18_OP(0xC1B8EC, 0x7804, 0xC1B8EE); /* C1B8EC: moveq   #$4, D4 */
-    FA18_JUMP(0xC1B8EE, 0x6000, 0xC1B860, L_C1B860); /* C1B8EE: bra     $c1b860 */
-L_C1B8F2:
-    FA18_CHECK(0xC1B8F2);
-    FA18_OP(0xC1B8F2, 0x7801, 0xC1B8F4); /* C1B8F2: moveq   #$1, D4 */
-    FA18_JUMP(0xC1B8F4, 0x6000, 0xC1B860, L_C1B860); /* C1B8F4: bra     $c1b860 */
-L_C1B8F8:
-    FA18_CHECK(0xC1B8F8);
-    FA18_OP(0xC1B8F8, 0x08F9, 0xC1B900); /* C1B8F8: bset    #$4, $c4599c.l */
-    FA18_OP(0xC1B900, 0x4A05, 0xC1B902); /* C1B900: tst.b   D5 */
-    FA18_BCC(0xC1B902, 0x6600, 0xC1B906, 0xC1B77C, L_C1B77C); /* C1B902: bne     $c1b77c */
-L_C1B906:
-    FA18_CHECK(0xC1B906);
-    FA18_OP(0xC1B906, 0x4207, 0xC1B908); /* C1B906: clr.b   D7 */
-    FA18_OP(0xC1B908, 0x13FC, 0xC1B910); /* C1B908: move.b  #$0, $c457a8.l */
-    FA18_JUMP(0xC1B910, 0x6000, 0xC1B9CC, L_C1B9CC); /* C1B910: bra     $c1b9cc */
-L_C1B914:
-    FA18_CHECK(0xC1B914);
-    FA18_OP(0xC1B914, 0x08F9, 0xC1B91C); /* C1B914: bset    #$0, $c4599d.l */
-    FA18_OP(0xC1B91C, 0x4A05, 0xC1B91E); /* C1B91C: tst.b   D5 */
-    FA18_BCC(0xC1B91E, 0x6600, 0xC1B922, 0xC1B7A6, L_C1B7A6); /* C1B91E: bne     $c1b7a6 */
-L_C1B922:
-    FA18_CHECK(0xC1B922);
-    FA18_OP(0xC1B922, 0x7E06, 0xC1B924); /* C1B922: moveq   #$6, D7 */
-    FA18_OP(0xC1B924, 0x13FC, 0xC1B92C); /* C1B924: move.b  #$0, $c457a8.l */
-    FA18_JUMP(0xC1B92C, 0x6000, 0xC1B9CC, L_C1B9CC); /* C1B92C: bra     $c1b9cc */
-L_C1B930:
-    FA18_CHECK(0xC1B930);
-    FA18_OP(0xC1B930, 0x08F9, 0xC1B938); /* C1B930: bset    #$2, $c4599d.l */
-    FA18_OP(0xC1B938, 0x4A05, 0xC1B93A); /* C1B938: tst.b   D5 */
-    FA18_BCC(0xC1B93A, 0x6600, 0xC1B93E, 0xC1B7AE, L_C1B7AE); /* C1B93A: bne     $c1b7ae */
-L_C1B93E:
-    FA18_CHECK(0xC1B93E);
-    FA18_OP(0xC1B93E, 0x13FC, 0xC1B946); /* C1B93E: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B946, 0x5339, 0xC1B94C); /* C1B946: subq.b  #1, $c457a7.l */
-    FA18_BCC(0xC1B94C, 0x6D0E, 0xC1B94E, 0xC1B95C, L_C1B95C); /* C1B94C: blt     $c1b95c */
-L_C1B94E:
-    FA18_CHECK(0xC1B94E);
-    FA18_BCC(0xC1B94E, 0x67B6, 0xC1B950, 0xC1B906, L_C1B906); /* C1B94E: beq     $c1b906 */
-L_C1B950:
-    FA18_CHECK(0xC1B950);
-    FA18_OP(0xC1B950, 0x0C39, 0xC1B958); /* C1B950: cmpi.b  #$b, $c457a7.l */
-    FA18_BCC(0xC1B958, 0x6CAC, 0xC1B95A, 0xC1B906, L_C1B906); /* C1B958: bge     $c1b906 */
-L_C1B95A:
-    FA18_CHECK(0xC1B95A);
-    FA18_JUMP(0xC1B95A, 0x607E, 0xC1B9DA, L_C1B9DA); /* C1B95A: bra     $c1b9da */
-L_C1B95C:
-    FA18_CHECK(0xC1B95C);
-    FA18_OP(0xC1B95C, 0x7E0B, 0xC1B95E); /* C1B95C: moveq   #$b, D7 */
-    FA18_JUMP(0xC1B95E, 0x606C, 0xC1B9CC, L_C1B9CC); /* C1B95E: bra     $c1b9cc */
-L_C1B960:
-    FA18_CHECK(0xC1B960);
-    FA18_OP(0xC1B960, 0x08F9, 0xC1B968); /* C1B960: bset    #$6, $c4599c.l */
-    FA18_OP(0xC1B968, 0x4A05, 0xC1B96A); /* C1B968: tst.b   D5 */
-    FA18_BCC(0xC1B96A, 0x6600, 0xC1B96E, 0xC1B796, L_C1B796); /* C1B96A: bne     $c1b796 */
-L_C1B96E:
-    FA18_CHECK(0xC1B96E);
-    FA18_OP(0xC1B96E, 0x13FC, 0xC1B976); /* C1B96E: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B976, 0x5239, 0xC1B97C); /* C1B976: addq.b  #1, $c457a7.l */
-    FA18_OP(0xC1B97C, 0x0C39, 0xC1B984); /* C1B97C: cmpi.b  #$b, $c457a7.l */
-    FA18_BCC(0xC1B984, 0x6F54, 0xC1B986, 0xC1B9DA, L_C1B9DA); /* C1B984: ble     $c1b9da */
-L_C1B986:
-    FA18_CHECK(0xC1B986);
-    FA18_JUMP(0xC1B986, 0x6000, 0xC1B906, L_C1B906); /* C1B986: bra     $c1b906 */
-L_C1B98A:
-    FA18_CHECK(0xC1B98A);
-    FA18_OP(0xC1B98A, 0x08F9, 0xC1B992); /* C1B98A: bset    #$3, $c4599d.l */
-    FA18_OP(0xC1B992, 0x4A05, 0xC1B994); /* C1B992: tst.b   D5 */
-    FA18_BCC(0xC1B994, 0x6600, 0xC1B998, 0xC1B7B2, L_C1B7B2); /* C1B994: bne     $c1b7b2 */
-L_C1B998:
-    FA18_CHECK(0xC1B998);
-    FA18_OP(0xC1B998, 0x7E0C, 0xC1B99A); /* C1B998: moveq   #$c, D7 */
-    FA18_OP(0xC1B99A, 0x13FC, 0xC1B9A2); /* C1B99A: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B9A2, 0x13FC, 0xC1B9AA); /* C1B9A2: move.b  #$ff, $c45858.l */
-    FA18_JUMP(0xC1B9AA, 0x6020, 0xC1B9CC, L_C1B9CC); /* C1B9AA: bra     $c1b9cc */
-L_C1B9AC:
-    FA18_CHECK(0xC1B9AC);
-    FA18_OP(0xC1B9AC, 0x08F9, 0xC1B9B4); /* C1B9AC: bset    #$1, $c4599d.l */
-    FA18_OP(0xC1B9B4, 0x4A05, 0xC1B9B6); /* C1B9B4: tst.b   D5 */
-    FA18_BCC(0xC1B9B6, 0x6600, 0xC1B9BA, 0xC1B7AA, L_C1B7AA); /* C1B9B6: bne     $c1b7aa */
-L_C1B9BA:
-    FA18_CHECK(0xC1B9BA);
-    FA18_OP(0xC1B9BA, 0x7E0D, 0xC1B9BC); /* C1B9BA: moveq   #$d, D7 */
-    FA18_OP(0xC1B9BC, 0x13FC, 0xC1B9C4); /* C1B9BC: move.b  #$0, $c457a8.l */
-    FA18_OP(0xC1B9C4, 0x13FC, 0xC1B9CC); /* C1B9C4: move.b  #$ff, $c45858.l */
-L_C1B9CC:
-    FA18_CHECK(0xC1B9CC);
-    FA18_OP(0xC1B9CC, 0x13C7, 0xC1B9D2); /* C1B9CC: move.b  D7, $c457a7.l */
-    FA18_OP(0xC1B9D2, 0x13FC, 0xC1B9DA); /* C1B9D2: move.b  #$3, $c45836.l */
-L_C1B9DA:
-    FA18_CHECK(0xC1B9DA);
-    FA18_CALL(0xC1B9DA, 0x4EB9, 0xC1B9E0, 17, 0); /* C1B9DA: jsr     $c08324.l */
-L_C1B9E0:
-    FA18_CHECK(0xC1B9E0);
-    FA18_OP(0xC1B9E0, 0x33FC, 0xC1B9E8); /* C1B9E0: move.w  #$ffff, $c45936.l */
-    FA18_OP(0xC1B9E8, 0x13FC, 0xC1B9F0); /* C1B9E8: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B9F0, 0x13FC, 0xC1B9F8); /* C1B9F0: move.b  #$0, $c457a9.l */
-    FA18_OP(0xC1B9F8, 0x13FC, 0xC1BA00); /* C1B9F8: move.b  #$ff, $c45891.l */
-    FA18_OP(0xC1BA00, 0x41F9, 0xC1BA06); /* C1BA00: lea     $c46184.l, A0 */
-    FA18_OP(0xC1BA06, 0xD0F9, 0xC1BA0C); /* C1BA06: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1BA0C, 0x1828, 0xC1BA10); /* C1BA0C: move.b  ($62,A0), D4 */
-    FA18_OP(0xC1BA10, 0x0204, 0xC1BA14); /* C1BA10: andi.b  #$f0, D4 */
-    FA18_OP(0xC1BA14, 0x0C04, 0xC1BA18); /* C1BA14: cmpi.b  #$30, D4 */
-    FA18_BCC(0xC1BA18, 0x6700, 0xC1BA1C, 0xC1C23C, L_C1C23C); /* C1BA18: beq     $c1c23c */
-L_C1BA1C:
-    FA18_CHECK(0xC1BA1C);
-    FA18_OP(0xC1BA1C, 0x1839, 0xC1BA22); /* C1BA1C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA22, 0x0C04, 0xC1BA26); /* C1BA22: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA26, 0x6D3C, 0xC1BA28, 0xC1BA64, L_C1BA64); /* C1BA26: blt     $c1ba64 */
-L_C1BA28:
-    FA18_CHECK(0xC1BA28);
-    FA18_OP(0xC1BA28, 0x0C04, 0xC1BA2C); /* C1BA28: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA2C, 0x6F06, 0xC1BA2E, 0xC1BA34, L_C1BA34); /* C1BA2C: ble     $c1ba34 */
-L_C1BA2E:
-    FA18_CHECK(0xC1BA2E);
-    FA18_OP(0xC1BA2E, 0x0C04, 0xC1BA32); /* C1BA2E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BA32, 0x6D30, 0xC1BA34, 0xC1BA64, L_C1BA64); /* C1BA32: blt     $c1ba64 */
-L_C1BA34:
-    FA18_CHECK(0xC1BA34);
-    FA18_OP(0xC1BA34, 0x3E3C, 0xC1BA38); /* C1BA34: move.w  #$b3, D7 */
-    FA18_OP(0xC1BA38, 0x0C04, 0xC1BA3C); /* C1BA38: cmpi.b  #$5, D4 */
-    FA18_BCC(0xC1BA3C, 0x6D06, 0xC1BA3E, 0xC1BA44, L_C1BA44); /* C1BA3C: blt     $c1ba44 */
-L_C1BA3E:
-    FA18_CHECK(0xC1BA3E);
-    FA18_OP(0xC1BA3E, 0x0C04, 0xC1BA42); /* C1BA3E: cmpi.b  #$7, D4 */
-    FA18_BCC(0xC1BA42, 0x6F04, 0xC1BA44, 0xC1BA48, L_C1BA48); /* C1BA42: ble     $c1ba48 */
-L_C1BA44:
-    FA18_CHECK(0xC1BA44);
-    FA18_OP(0xC1BA44, 0x3E3C, 0xC1BA48); /* C1BA44: move.w  #$a7, D7 */
-L_C1BA48:
-    FA18_CHECK(0xC1BA48);
-    FA18_OP(0xC1BA48, 0xBE79, 0xC1BA4E); /* C1BA48: cmp.w   $c45984.l, D7 */
-    FA18_BCC(0xC1BA4E, 0x6614, 0xC1BA50, 0xC1BA64, L_C1BA64); /* C1BA4E: bne     $c1ba64 */
-L_C1BA50:
-    FA18_CHECK(0xC1BA50);
-    FA18_OP(0xC1BA50, 0x33FC, 0xC1BA58); /* C1BA50: move.w  #$32, $c45986.l */
-    FA18_OP(0xC1BA58, 0x33FC, 0xC1BA60); /* C1BA58: move.w  #$320, $c45988.l */
-    FA18_JUMP(0xC1BA60, 0x6000, 0xC1C23C, L_C1C23C); /* C1BA60: bra     $c1c23c */
-L_C1BA64:
-    FA18_CHECK(0xC1BA64);
-    FA18_OP(0xC1BA64, 0x41F9, 0xC1BA6A); /* C1BA64: lea     $c1bad4.l, A0 */
-    FA18_OP(0xC1BA6A, 0x1839, 0xC1BA70); /* C1BA6A: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA70, 0x4884, 0xC1BA72); /* C1BA70: ext.w   D4 */
-    FA18_OP(0xC1BA72, 0x1830, 0xC1BA76); /* C1BA72: move.b  (A0,D4.w), D4 */
-    FA18_OP(0xC1BA76, 0x4884, 0xC1BA78); /* C1BA76: ext.w   D4 */
-    FA18_OP(0xC1BA78, 0x33C4, 0xC1BA7E); /* C1BA78: move.w  D4, $c45986.l */
-    FA18_OP(0xC1BA7E, 0xE944, 0xC1BA80); /* C1BA7E: asl.w   #4, D4 */
-    FA18_OP(0xC1BA80, 0x33C4, 0xC1BA86); /* C1BA80: move.w  D4, $c45988.l */
-    FA18_CALL(0xC1BA86, 0x4EB9, 0xC1BA8C, 16, 0); /* C1BA86: jsr     $c082b8.l */
-L_C1BA8C:
-    FA18_CHECK(0xC1BA8C);
-    FA18_OP(0xC1BA8C, 0x1839, 0xC1BA92); /* C1BA8C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA92, 0x0C04, 0xC1BA96); /* C1BA92: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA96, 0x6D0C, 0xC1BA98, 0xC1BAA4, L_C1BAA4); /* C1BA96: blt     $c1baa4 */
-L_C1BA98:
-    FA18_CHECK(0xC1BA98);
-    FA18_OP(0xC1BA98, 0x0C04, 0xC1BA9C); /* C1BA98: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA9C, 0x6F12, 0xC1BA9E, 0xC1BAB0, L_C1BAB0); /* C1BA9C: ble     $c1bab0 */
-L_C1BA9E:
-    FA18_CHECK(0xC1BA9E);
-    FA18_OP(0xC1BA9E, 0x0C04, 0xC1BAA2); /* C1BA9E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BAA2, 0x6C0C, 0xC1BAA4, 0xC1BAB0, L_C1BAB0); /* C1BAA2: bge     $c1bab0 */
-L_C1BAA4:
-    FA18_CHECK(0xC1BAA4);
-    FA18_OP(0xC1BAA4, 0x33FC, 0xC1BAAC); /* C1BAA4: move.w  #$90, $c45984.l */
-    FA18_JUMP(0xC1BAAC, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAAC: bra     $c1c23c */
-L_C1BAB0:
-    FA18_CHECK(0xC1BAB0);
-    FA18_OP(0xC1BAB0, 0x0C04, 0xC1BAB4); /* C1BAB0: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1BAB4, 0x6F12, 0xC1BAB6, 0xC1BAC8, L_C1BAC8); /* C1BAB4: ble     $c1bac8 */
-L_C1BAB6:
-    FA18_CHECK(0xC1BAB6);
-    FA18_OP(0xC1BAB6, 0x0C04, 0xC1BABA); /* C1BAB6: cmpi.b  #$8, D4 */
-    FA18_BCC(0xC1BABA, 0x6C0C, 0xC1BABC, 0xC1BAC8, L_C1BAC8); /* C1BABA: bge     $c1bac8 */
-L_C1BABC:
-    FA18_CHECK(0xC1BABC);
-    FA18_OP(0xC1BABC, 0x33FC, 0xC1BAC4); /* C1BABC: move.w  #$b3, $c45984.l */
-    FA18_JUMP(0xC1BAC4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAC4: bra     $c1c23c */
-L_C1BAC8:
-    FA18_CHECK(0xC1BAC8);
-    FA18_OP(0xC1BAC8, 0x33FC, 0xC1BAD0); /* C1BAC8: move.w  #$a7, $c45984.l */
-    FA18_JUMP(0xC1BAD0, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAD0: bra     $c1c23c */
-L_C1BAE2:
-    FA18_CHECK(0xC1BAE2);
-    FA18_OP(0xC1BAE2, 0x7620, 0xC1BAE4); /* C1BAE2: moveq   #$20, D3 */
-    FA18_OP(0xC1BAE4, 0x4A05, 0xC1BAE6); /* C1BAE4: tst.b   D5 */
-    FA18_BCC(0xC1BAE6, 0x670A, 0xC1BAE8, 0xC1BAF2, L_C1BAF2); /* C1BAE6: beq     $c1baf2 */
-L_C1BAE8:
-    FA18_CHECK(0xC1BAE8);
-    FA18_OP(0xC1BAE8, 0x4A39, 0xC1BAEE); /* C1BAE8: tst.b   $c457b5.l */
-    FA18_BCC(0xC1BAEE, 0x6600, 0xC1BAF2, 0xC1B80A, L_C1B80A); /* C1BAEE: bne     $c1b80a */
-L_C1BAF2:
-    FA18_CHECK(0xC1BAF2);
-    FA18_OP(0xC1BAF2, 0xB679, 0xC1BAF8); /* C1BAF2: cmp.w   $c45a42.l, D3 */
-    FA18_BCC(0xC1BAF8, 0x6C26, 0xC1BAFA, 0xC1BB20, L_C1BB20); /* C1BAF8: bge     $c1bb20 */
-L_C1BAFA:
-    FA18_CHECK(0xC1BAFA);
-    FA18_OP(0xC1BAFA, 0xE0F9, 0xC1BB00); /* C1BAFA: asr.w   $c45a42.l */
-    FA18_JUMP(0xC1BB00, 0x601E, 0xC1BB20, L_C1BB20); /* C1BB00: bra     $c1bb20 */
-L_C1BB02:
-    FA18_CHECK(0xC1BB02);
-    FA18_OP(0xC1BB02, 0x4A05, 0xC1BB04); /* C1BB02: tst.b   D5 */
-    FA18_BCC(0xC1BB04, 0x670A, 0xC1BB06, 0xC1BB10, L_C1BB10); /* C1BB04: beq     $c1bb10 */
-L_C1BB06:
-    FA18_CHECK(0xC1BB06);
-    FA18_OP(0xC1BB06, 0x4A39, 0xC1BB0C); /* C1BB06: tst.b   $c457b5.l */
-    FA18_BCC(0xC1BB0C, 0x6600, 0xC1BB10, 0xC1B890, L_C1B890); /* C1BB0C: bne     $c1b890 */
-L_C1BB10:
-    FA18_CHECK(0xC1BB10);
-    FA18_OP(0xC1BB10, 0x0C79, 0xC1BB18); /* C1BB10: cmpi.w  #$80, $c45a42.l */
-    FA18_BCC(0xC1BB18, 0x6C06, 0xC1BB1A, 0xC1BB20, L_C1BB20); /* C1BB18: bge     $c1bb20 */
-L_C1BB1A:
-    FA18_CHECK(0xC1BB1A);
-    FA18_OP(0xC1BB1A, 0xE1F9, 0xC1BB20); /* C1BB1A: asl.w   $c45a42.l */
-L_C1BB20:
-    FA18_CHECK(0xC1BB20);
-    FA18_OP(0xC1BB20, 0x13FC, 0xC1BB28); /* C1BB20: move.b  #$3, $c4583d.l */
-    FA18_OP(0xC1BB28, 0x13FC, 0xC1BB30); /* C1BB28: move.b  #$ff, $c45891.l */
-    FA18_OP(0xC1BB30, 0x1839, 0xC1BB36); /* C1BB30: move.b  $c457dd.l, D4 */
-    FA18_OP(0xC1BB36, 0x0204, 0xC1BB3A); /* C1BB36: andi.b  #$7f, D4 */
-    FA18_BCC(0xC1BB3A, 0x6608, 0xC1BB3C, 0xC1BB44, L_C1BB44); /* C1BB3A: bne     $c1bb44 */
-L_C1BB3C:
-    FA18_CHECK(0xC1BB3C);
-    FA18_OP(0xC1BB3C, 0x13FC, 0xC1BB44); /* C1BB3C: move.b  #$ff, $c45858.l */
-L_C1BB44:
-    FA18_CHECK(0xC1BB44);
-    FA18_OP(0xC1BB44, 0x0C79, 0xC1BB4C); /* C1BB44: cmpi.w  #$80, $c45a42.l */
-    FA18_BCC(0xC1BB4C, 0x670C, 0xC1BB4E, 0xC1BB5A, L_C1BB5A); /* C1BB4C: beq     $c1bb5a */
-L_C1BB4E:
-    FA18_CHECK(0xC1BB4E);
-    FA18_OP(0xC1BB4E, 0x08B9, 0xC1BB56); /* C1BB4E: bclr    #$7, $c457dd.l */
-    FA18_JUMP(0xC1BB56, 0x6000, 0xC1C23C, L_C1C23C); /* C1BB56: bra     $c1c23c */
-L_C1BB5A:
-    FA18_CHECK(0xC1BB5A);
-    FA18_OP(0xC1BB5A, 0x08F9, 0xC1BB62); /* C1BB5A: bset    #$7, $c457dd.l */
-    FA18_JUMP(0xC1BB62, 0x6000, 0xC1C23C, L_C1C23C); /* C1BB62: bra     $c1c23c */
-L_C1BB66:
-    FA18_CHECK(0xC1BB66);
-    FA18_OP(0xC1BB66, 0x08F9, 0xC1BB6E); /* C1BB66: bset    #$6, $c4599d.l */
-    FA18_OP(0xC1BB6E, 0x13FC, 0xC1BB76); /* C1BB6E: move.b  #$5, $c45891.l */
-    FA18_JUMP(0xC1BB76, 0x6000, 0xC1C23C, L_C1C23C); /* C1BB76: bra     $c1c23c */
-L_C1BB7A:
-    FA18_CHECK(0xC1BB7A);
-    FA18_OP(0xC1BB7A, 0x0C39, 0xC1BB82); /* C1BB7A: cmpi.b  #$2, $c458a6.l */
-    FA18_BCC(0xC1BB82, 0x6712, 0xC1BB84, 0xC1BB96, L_C1BB96); /* C1BB82: beq     $c1bb96 */
-L_C1BB84:
-    FA18_CHECK(0xC1BB84);
-    FA18_OP(0xC1BB84, 0x0C39, 0xC1BB8C); /* C1BB84: cmpi.b  #$7d, $c458a6.l */
-    FA18_BCC(0xC1BB8C, 0x662C, 0xC1BB8E, 0xC1BBBA, L_C1BBBA); /* C1BB8C: bne     $c1bbba */
-L_C1BB8E:
-    FA18_CHECK(0xC1BB8E);
-    FA18_OP(0xC1BB8E, 0x4A39, 0xC1BB94); /* C1BB8E: tst.b   $c4579a.l */
-    FA18_BCC(0xC1BB94, 0x6C12, 0xC1BB96, 0xC1BBA8, L_C1BBA8); /* C1BB94: bge     $c1bba8 */
-L_C1BB96:
-    FA18_CHECK(0xC1BB96);
-    FA18_CALL(0xC1BB96, 0x4EB9, 0xC1BB9C, 398, 1); /* C1BB96: jsr     $c33186.l */
-L_C1BB9C:
-    FA18_CHECK(0xC1BB9C);
-    FA18_OP(0xC1BB9C, 0x08F9, 0xC1BBA4); /* C1BB9C: bset    #$3, $c46186.l */
-    FA18_JUMP(0xC1BBA4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BBA4: bra     $c1c23c */
-L_C1BBA8:
-    FA18_CHECK(0xC1BBA8);
-    FA18_OP(0xC1BBA8, 0x4840, 0xC1BBAA); /* C1BBA8: swap    D0 */
-    FA18_OP(0xC1BBAA, 0x303C, 0xC1BBAE); /* C1BBAA: move.w  #$401f, D0 */
-    FA18_CALL(0xC1BBAE, 0x4EB9, 0xC1BBB4, 216, 0); /* C1BBAE: jsr     $c25704.l */
-L_C1BBB4:
-    FA18_CHECK(0xC1BBB4);
-    FA18_OP(0xC1BBB4, 0x4840, 0xC1BBB6); /* C1BBB4: swap    D0 */
-    FA18_JUMP(0xC1BBB6, 0x6000, 0xC1C23C, L_C1C23C); /* C1BBB6: bra     $c1c23c */
-L_C1BBBA:
-    FA18_CHECK(0xC1BBBA);
-    FA18_CALL(0xC1BBBA, 0x4EB9, 0xC1BBC0, 398, 1); /* C1BBBA: jsr     $c33186.l */
-L_C1BBC0:
-    FA18_CHECK(0xC1BBC0);
-    FA18_OP(0xC1BBC0, 0x1839, 0xC1BBC6); /* C1BBC0: move.b  $c46200.l, D4 */
-    FA18_OP(0xC1BBC6, 0x0204, 0xC1BBCA); /* C1BBC6: andi.b  #$f, D4 */
-    FA18_BCC(0xC1BBCA, 0x6600, 0xC1BBCE, 0xC1C23C, L_C1C23C); /* C1BBCA: bne     $c1c23c */
-L_C1BBCE:
-    FA18_CHECK(0xC1BBCE);
-    FA18_OP(0xC1BBCE, 0x08F9, 0xC1BBD6); /* C1BBCE: bset    #$4, $c4599a.l */
-    FA18_OP(0xC1BBD6, 0x1839, 0xC1BBDC); /* C1BBD6: move.b  $c461e7.l, D4 */
-    FA18_OP(0xC1BBDC, 0x0204, 0xC1BBE0); /* C1BBDC: andi.b  #$f0, D4 */
-    FA18_OP(0xC1BBE0, 0x0404, 0xC1BBE4); /* C1BBE0: subi.b  #$10, D4 */
-    FA18_BCC(0xC1BBE4, 0x6C04, 0xC1BBE6, 0xC1BBEA, L_C1BBEA); /* C1BBE4: bge     $c1bbea */
-L_C1BBE6:
-    FA18_CHECK(0xC1BBE6);
-    FA18_OP(0xC1BBE6, 0x183C, 0xC1BBEA); /* C1BBE6: move.b  #$30, D4 */
-L_C1BBEA:
-    FA18_CHECK(0xC1BBEA);
-    FA18_OP(0xC1BBEA, 0x0239, 0xC1BBF2); /* C1BBEA: andi.b  #$f, $c461e7.l */
-    FA18_OP(0xC1BBF2, 0x8939, 0xC1BBF8); /* C1BBF2: or.b    D4, $c461e7.l */
-    FA18_OP(0xC1BBF8, 0x13FC, 0xC1BC00); /* C1BBF8: move.b  #$3, $c45843.l */
-    FA18_OP(0xC1BC00, 0x13FC, 0xC1BC08); /* C1BC00: move.b  #$3, $c45844.l */
-    FA18_OP(0xC1BC08, 0x4239, 0xC1BC0E); /* C1BC08: clr.b   $c458b4.l */
-    FA18_JUMP(0xC1BC0E, 0x6000, 0xC1C23C, L_C1C23C); /* C1BC0E: bra     $c1c23c */
-L_C1BC12:
-    FA18_CHECK(0xC1BC12);
-    FA18_OP(0xC1BC12, 0x08F9, 0xC1BC1A); /* C1BC12: bset    #$0, $c4599a.l */
-    FA18_OP(0xC1BC1A, 0x0839, 0xC1BC22); /* C1BC1A: btst    #$7, $c46187.l */
-    FA18_BCC(0xC1BC22, 0x6622, 0xC1BC24, 0xC1BC46, L_C1BC46); /* C1BC22: bne     $c1bc46 */
-L_C1BC24:
-    FA18_CHECK(0xC1BC24);
-    FA18_OP(0xC1BC24, 0x0879, 0xC1BC2C); /* C1BC24: bchg    #$7, $c46200.l */
-    FA18_OP(0xC1BC2C, 0x2839, 0xC1BC32); /* C1BC2C: move.l  $c45b58.l, D4 */
-    FA18_OP(0xC1BC32, 0x0284, 0xC1BC38); /* C1BC32: andi.l  #$40, D4 */
-    FA18_BCC(0xC1BC38, 0x670C, 0xC1BC3A, 0xC1BC46, L_C1BC46); /* C1BC38: beq     $c1bc46 */
-L_C1BC3A:
-    FA18_CHECK(0xC1BC3A);
-    FA18_OP(0xC1BC3A, 0x13FC, 0xC1BC42); /* C1BC3A: move.b  #$83, $c45885.l */
-    FA18_JUMP(0xC1BC42, 0x6000, 0xC1C23C, L_C1C23C); /* C1BC42: bra     $c1c23c */
-L_C1BC46:
-    FA18_CHECK(0xC1BC46);
-    FA18_CALL(0xC1BC46, 0x4EB9, 0xC1BC4C, 398, 1); /* C1BC46: jsr     $c33186.l */
-L_C1BC4C:
-    FA18_CHECK(0xC1BC4C);
-    FA18_JUMP(0xC1BC4C, 0x6000, 0xC1C23C, L_C1C23C); /* C1BC4C: bra     $c1c23c */
-L_C1BC50:
-    FA18_CHECK(0xC1BC50);
-    FA18_OP(0xC1BC50, 0x0C40, 0xC1BC54); /* C1BC50: cmpi.w  #$59, D0 */
-    FA18_BCC(0xC1BC54, 0x6E78, 0xC1BC56, 0xC1BCCE, L_C1BCCE); /* C1BC54: bgt     $c1bcce */
-L_C1BC56:
-    FA18_CHECK(0xC1BC56);
-    FA18_OP(0xC1BC56, 0x4A39, 0xC1BC5C); /* C1BC56: tst.b   $c458a6.l */
-    FA18_BCC(0xC1BC5C, 0x6708, 0xC1BC5E, 0xC1BC66, L_C1BC66); /* C1BC5C: beq     $c1bc66 */
-L_C1BC5E:
-    FA18_CHECK(0xC1BC5E);
-    FA18_OP(0xC1BC5E, 0x4A39, 0xC1BC64); /* C1BC5E: tst.b   $c45879.l */
-    FA18_BCC(0xC1BC64, 0x6768, 0xC1BC66, 0xC1BCCE, L_C1BCCE); /* C1BC64: beq     $c1bcce */
-L_C1BC66:
-    FA18_CHECK(0xC1BC66);
-    FA18_OP(0xC1BC66, 0x3800, 0xC1BC68); /* C1BC66: move.w  D0, D4 */
-    FA18_OP(0xC1BC68, 0x0444, 0xC1BC6C); /* C1BC68: subi.w  #$50, D4 */
-    FA18_OP(0xC1BC6C, 0x0644, 0xC1BC70); /* C1BC6C: addi.w  #$a, D4 */
-    FA18_JUMP(0xC1BC70, 0x6006, 0xC1BC78, L_C1BC78); /* C1BC70: bra     $c1bc78 */
-L_C1BC72:
-    FA18_CHECK(0xC1BC72);
-    FA18_OP(0xC1BC72, 0x3800, 0xC1BC74); /* C1BC72: move.w  D0, D4 */
-    FA18_OP(0xC1BC74, 0x0444, 0xC1BC78); /* C1BC74: subi.w  #$1, D4 */
-L_C1BC78:
-    FA18_CHECK(0xC1BC78);
-    FA18_OP(0xC1BC78, 0x4A39, 0xC1BC7E); /* C1BC78: tst.b   $c45791.l */
-    FA18_BCC(0xC1BC7E, 0x6728, 0xC1BC80, 0xC1BCA8, L_C1BCA8); /* C1BC7E: beq     $c1bca8 */
-L_C1BC80:
-    FA18_CHECK(0xC1BC80);
-    FA18_OP(0xC1BC80, 0x0C44, 0xC1BC84); /* C1BC80: cmpi.w  #$0, D4 */
-    FA18_BCC(0xC1BC84, 0x6D1E, 0xC1BC86, 0xC1BCA4, L_C1BCA4); /* C1BC84: blt     $c1bca4 */
-L_C1BC86:
-    FA18_CHECK(0xC1BC86);
-    FA18_OP(0xC1BC86, 0x0C44, 0xC1BC8A); /* C1BC86: cmpi.w  #$1, D4 */
-    FA18_BCC(0xC1BC8A, 0x6E18, 0xC1BC8C, 0xC1BCA4, L_C1BCA4); /* C1BC8A: bgt     $c1bca4 */
-L_C1BC8C:
-    FA18_CHECK(0xC1BC8C);
-    FA18_BCC(0xC1BC8C, 0x6706, 0xC1BC8E, 0xC1BC94, L_C1BC94); /* C1BC8C: beq     $c1bc94 */
-L_C1BC8E:
-    FA18_CHECK(0xC1BC8E);
-    FA18_OP(0xC1BC8E, 0x183C, 0xC1BC92); /* C1BC8E: move.b  #$11, D4 */
-    FA18_JUMP(0xC1BC92, 0x6004, 0xC1BC98, L_C1BC98); /* C1BC92: bra     $c1bc98 */
-L_C1BC94:
-    FA18_CHECK(0xC1BC94);
-    FA18_OP(0xC1BC94, 0x183C, 0xC1BC98); /* C1BC94: move.b  #$10, D4 */
-L_C1BC98:
-    FA18_CHECK(0xC1BC98);
-    FA18_OP(0xC1BC98, 0x13C4, 0xC1BC9E); /* C1BC98: move.b  D4, $c45849.l */
-    FA18_OP(0xC1BC9E, 0x4239, 0xC1BCA4); /* C1BC9E: clr.b   $c45791.l */
-L_C1BCA4:
-    FA18_CHECK(0xC1BCA4);
-    FA18_JUMP(0xC1BCA4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BCA4: bra     $c1c23c */
-L_C1BCA8:
-    FA18_CHECK(0xC1BCA8);
-    FA18_OP(0xC1BCA8, 0x4A39, 0xC1BCAE); /* C1BCA8: tst.b   $c45787.l */
-    FA18_BCC(0xC1BCAE, 0x6600, 0xC1BCB2, 0xC1BD78, L_C1BD78); /* C1BCAE: bne     $c1bd78 */
-L_C1BCB2:
-    FA18_CHECK(0xC1BCB2);
-    FA18_OP(0xC1BCB2, 0x0C44, 0xC1BCB6); /* C1BCB2: cmpi.w  #$0, D4 */
-    FA18_BCC(0xC1BCB6, 0x6D00, 0xC1BCBA, 0xC1C23C, L_C1C23C); /* C1BCB6: blt     $c1c23c */
-L_C1BCBA:
-    FA18_CHECK(0xC1BCBA);
-    FA18_OP(0xC1BCBA, 0x0C44, 0xC1BCBE); /* C1BCBA: cmpi.w  #$8, D4 */
-    FA18_BCC(0xC1BCBE, 0x6E00, 0xC1BCC2, 0xC1C23C, L_C1C23C); /* C1BCBE: bgt     $c1c23c */
-L_C1BCC2:
-    FA18_CHECK(0xC1BCC2);
-    FA18_OP(0xC1BCC2, 0x5244, 0xC1BCC4); /* C1BCC2: addq.w  #1, D4 */
-    FA18_OP(0xC1BCC4, 0x13C4, 0xC1BCCA); /* C1BCC4: move.b  D4, $c45787.l */
-    FA18_JUMP(0xC1BCCA, 0x6000, 0xC1C23C, L_C1C23C); /* C1BCCA: bra     $c1c23c */
-L_C1BCCE:
-    FA18_CHECK(0xC1BCCE);
-    FA18_OP(0xC1BCCE, 0x1439, 0xC1BCD4); /* C1BCCE: move.b  $c4584b.l, D2 */
-    FA18_BCC(0xC1BCD4, 0x6E06, 0xC1BCD6, 0xC1BCDC, L_C1BCDC); /* C1BCD4: bgt     $c1bcdc */
-L_C1BCD6:
-    FA18_CHECK(0xC1BCD6);
-    FA18_OP(0xC1BCD6, 0x4A06, 0xC1BCD8); /* C1BCD6: tst.b   D6 */
-    FA18_BCC(0xC1BCD8, 0x6706, 0xC1BCDA, 0xC1BCE0, L_C1BCE0); /* C1BCD8: beq     $c1bce0 */
-L_C1BCDA:
-    FA18_CHECK(0xC1BCDA);
-    FA18_JUMP(0xC1BCDA, 0x6004, 0xC1BCE0, L_C1BCE0); /* C1BCDA: bra     $c1bce0 */
-L_C1BCDC:
-    FA18_CHECK(0xC1BCDC);
-    FA18_JUMP(0xC1BCDC, 0x6000, 0xC1C23C, L_C1C23C); /* C1BCDC: bra     $c1c23c */
-L_C1BCE0:
-    FA18_CHECK(0xC1BCE0);
-    FA18_OP(0xC1BCE0, 0x0C02, 0xC1BCE4); /* C1BCE0: cmpi.b  #-$3, D2 */
-    FA18_BCC(0xC1BCE4, 0x6708, 0xC1BCE6, 0xC1BCEE, L_C1BCEE); /* C1BCE4: beq     $c1bcee */
-L_C1BCE6:
-    FA18_CHECK(0xC1BCE6);
-    FA18_OP(0xC1BCE6, 0x4A02, 0xC1BCE8); /* C1BCE6: tst.b   D2 */
-    FA18_BCC(0xC1BCE8, 0x6710, 0xC1BCEA, 0xC1BCFA, L_C1BCFA); /* C1BCE8: beq     $c1bcfa */
-L_C1BCEA:
-    FA18_CHECK(0xC1BCEA);
-    FA18_JUMP(0xC1BCEA, 0x6000, 0xC1C23C, L_C1C23C); /* C1BCEA: bra     $c1c23c */
-L_C1BCEE:
-    FA18_CHECK(0xC1BCEE);
-    FA18_OP(0xC1BCEE, 0x0444, 0xC1BCF2); /* C1BCEE: subi.w  #$50, D4 */
-    FA18_OP(0xC1BCF2, 0x0644, 0xC1BCF6); /* C1BCF2: addi.w  #$b, D4 */
-    FA18_JUMP(0xC1BCF6, 0x6000, 0xC1BEDA, L_C1BEDA); /* C1BCF6: bra     $c1beda */
-L_C1BCFA:
-    FA18_CHECK(0xC1BCFA);
-    FA18_OP(0xC1BCFA, 0x4A39, 0xC1BD00); /* C1BCFA: tst.b   $c457ae.l */
-    FA18_BCC(0xC1BD00, 0x6600, 0xC1BD04, 0xC1C23C, L_C1C23C); /* C1BD00: bne     $c1c23c */
-L_C1BD04:
-    FA18_CHECK(0xC1BD04);
-    FA18_OP(0xC1BD04, 0x3800, 0xC1BD06); /* C1BD04: move.w  D0, D4 */
-    FA18_OP(0xC1BD06, 0x0444, 0xC1BD0A); /* C1BD06: subi.w  #$4f, D4 */
-    FA18_OP(0xC1BD0A, 0x0C44, 0xC1BD0E); /* C1BD0A: cmpi.w  #$1, D4 */
-    FA18_BCC(0xC1BD0E, 0x6628, 0xC1BD10, 0xC1BD38, L_C1BD38); /* C1BD0E: bne     $c1bd38 */
-L_C1BD10:
-    FA18_CHECK(0xC1BD10);
-    FA18_OP(0xC1BD10, 0x4A39, 0xC1BD16); /* C1BD10: tst.b   $c45870.l */
-    FA18_BCC(0xC1BD16, 0x660A, 0xC1BD18, 0xC1BD22, L_C1BD22); /* C1BD16: bne     $c1bd22 */
-L_C1BD18:
-    FA18_CHECK(0xC1BD18);
-    FA18_OP(0xC1BD18, 0x0C39, 0xC1BD20); /* C1BD18: cmpi.b  #$c, $c461af.l */
-    FA18_BCC(0xC1BD20, 0x670A, 0xC1BD22, 0xC1BD2C, L_C1BD2C); /* C1BD20: beq     $c1bd2c */
-L_C1BD22:
-    FA18_CHECK(0xC1BD22);
-    FA18_OP(0xC1BD22, 0x0C39, 0xC1BD2A); /* C1BD22: cmpi.b  #$c, $c45870.l */
-    FA18_BCC(0xC1BD2A, 0x660C, 0xC1BD2C, 0xC1BD38, L_C1BD38); /* C1BD2A: bne     $c1bd38 */
-L_C1BD2C:
-    FA18_CHECK(0xC1BD2C);
-    FA18_OP(0xC1BD2C, 0x13FC, 0xC1BD34); /* C1BD2C: move.b  #$ff, $c45870.l */
-    FA18_JUMP(0xC1BD34, 0x6000, 0xC1C23C, L_C1C23C); /* C1BD34: bra     $c1c23c */
-L_C1BD38:
-    FA18_CHECK(0xC1BD38);
-    FA18_OP(0xC1BD38, 0xD804, 0xC1BD3A); /* C1BD38: add.b   D4, D4 */
-    FA18_OP(0xC1BD3A, 0x1A04, 0xC1BD3C); /* C1BD3A: move.b  D4, D5 */
-    FA18_OP(0xC1BD3C, 0xD804, 0xC1BD3E); /* C1BD3C: add.b   D4, D4 */
-    FA18_OP(0xC1BD3E, 0xD805, 0xC1BD40); /* C1BD3E: add.b   D5, D4 */
-    FA18_OP(0xC1BD40, 0xD804, 0xC1BD42); /* C1BD40: add.b   D4, D4 */
-    FA18_OP(0xC1BD42, 0x0C04, 0xC1BD46); /* C1BD42: cmpi.b  #$78, D4 */
-    FA18_BCC(0xC1BD46, 0x6D02, 0xC1BD48, 0xC1BD4A, L_C1BD4A); /* C1BD46: blt     $c1bd4a */
-L_C1BD48:
-    FA18_CHECK(0xC1BD48);
-    FA18_OP(0xC1BD48, 0x5204, 0xC1BD4A); /* C1BD48: addq.b  #1, D4 */
-L_C1BD4A:
-    FA18_CHECK(0xC1BD4A);
-    FA18_OP(0xC1BD4A, 0x13C4, 0xC1BD50); /* C1BD4A: move.b  D4, $c45870.l */
-    FA18_OP(0xC1BD50, 0x4A39, 0xC1BD56); /* C1BD50: tst.b   $c457d8.l */
-    FA18_BCC(0xC1BD56, 0x6700, 0xC1BD5A, 0xC1C23C, L_C1C23C); /* C1BD56: beq     $c1c23c */
-L_C1BD5A:
-    FA18_CHECK(0xC1BD5A);
-    FA18_OP(0xC1BD5A, 0x4884, 0xC1BD5C); /* C1BD5A: ext.w   D4 */
-    FA18_OP(0xC1BD5C, 0xE744, 0xC1BD5E); /* C1BD5C: asl.w   #3, D4 */
-    FA18_OP(0xC1BD5E, 0x0C44, 0xC1BD62); /* C1BD5E: cmpi.w  #$3c0, D4 */
-    FA18_BCC(0xC1BD62, 0x6F04, 0xC1BD64, 0xC1BD68, L_C1BD68); /* C1BD62: ble     $c1bd68 */
-L_C1BD64:
-    FA18_CHECK(0xC1BD64);
-    FA18_OP(0xC1BD64, 0x383C, 0xC1BD68); /* C1BD64: move.w  #$3c0, D4 */
-L_C1BD68:
-    FA18_CHECK(0xC1BD68);
-    FA18_OP(0xC1BD68, 0x33C4, 0xC1BD6E); /* C1BD68: move.w  D4, $c45778.l */
-    FA18_OP(0xC1BD6E, 0x33C4, 0xC1BD74); /* C1BD6E: move.w  D4, $c4577c.l */
-    FA18_JUMP(0xC1BD74, 0x6000, 0xC1C23C, L_C1C23C); /* C1BD74: bra     $c1c23c */
-L_C1BD78:
-    FA18_CHECK(0xC1BD78);
-    FA18_OP(0xC1BD78, 0x4A39, 0xC1BD7E); /* C1BD78: tst.b   $c458a6.l */
-    FA18_BCC(0xC1BD7E, 0x6600, 0xC1BD82, 0xC1BE60, L_C1BE60); /* C1BD7E: bne     $c1be60 */
-L_C1BD82:
-    FA18_CHECK(0xC1BD82);
-    FA18_OP(0xC1BD82, 0x0C04, 0xC1BD86); /* C1BD82: cmpi.b  #$0, D4 */
-    FA18_BCC(0xC1BD86, 0x6D00, 0xC1BD8A, 0xC1C23C, L_C1C23C); /* C1BD86: blt     $c1c23c */
-L_C1BD8A:
-    FA18_CHECK(0xC1BD8A);
-    FA18_OP(0xC1BD8A, 0x4A04, 0xC1BD8C); /* C1BD8A: tst.b   D4 */
-    FA18_BCC(0xC1BD8C, 0x6700, 0xC1BD90, 0xC1BE4A, L_C1BE4A); /* C1BD8C: beq     $c1be4a */
-L_C1BD90:
-    FA18_CHECK(0xC1BD90);
-    FA18_OP(0xC1BD90, 0x0C04, 0xC1BD94); /* C1BD90: cmpi.b  #$1, D4 */
-    FA18_BCC(0xC1BD94, 0x6766, 0xC1BD96, 0xC1BDFC, L_C1BDFC); /* C1BD94: beq     $c1bdfc */
-L_C1BD96:
-    FA18_CHECK(0xC1BD96);
-    FA18_OP(0xC1BD96, 0x0C04, 0xC1BD9A); /* C1BD96: cmpi.b  #$2, D4 */
-    FA18_BCC(0xC1BD9A, 0x6750, 0xC1BD9C, 0xC1BDEC, L_C1BDEC); /* C1BD9A: beq     $c1bdec */
-L_C1BD9C:
-    FA18_CHECK(0xC1BD9C);
-    FA18_OP(0xC1BD9C, 0x0C04, 0xC1BDA0); /* C1BD9C: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BDA0, 0x6700, 0xC1BDA4, 0xC1BE42, L_C1BE42); /* C1BDA0: beq     $c1be42 */
-L_C1BDA4:
-    FA18_CHECK(0xC1BDA4);
-    FA18_OP(0xC1BDA4, 0x0C04, 0xC1BDA8); /* C1BDA4: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1BDA8, 0x6700, 0xC1BDAC, 0xC1BE46, L_C1BE46); /* C1BDA8: beq     $c1be46 */
-L_C1BDAC:
-    FA18_CHECK(0xC1BDAC);
-    FA18_OP(0xC1BDAC, 0x0C04, 0xC1BDB0); /* C1BDAC: cmpi.b  #$5, D4 */
-    FA18_BCC(0xC1BDB0, 0x6700, 0xC1BDB4, 0xC1BE3E, L_C1BE3E); /* C1BDB0: beq     $c1be3e */
-L_C1BDB4:
-    FA18_CHECK(0xC1BDB4);
-    FA18_OP(0xC1BDB4, 0x0C04, 0xC1BDB8); /* C1BDB4: cmpi.b  #$7, D4 */
-    FA18_BCC(0xC1BDB8, 0x6700, 0xC1BDBC, 0xC1BE3A, L_C1BE3A); /* C1BDB8: beq     $c1be3a */
-L_C1BDBC:
-    FA18_CHECK(0xC1BDBC);
-    FA18_OP(0xC1BDBC, 0x2079, 0xC1BDC2); /* C1BDBC: movea.l $c1ab74.l, A0 */
-    FA18_OP(0xC1BDC2, 0x4A68, 0xC1BDC6); /* C1BDC2: tst.w   ($0,A0) */
-    FA18_BCC(0xC1BDC6, 0x6602, 0xC1BDC8, 0xC1BDCA, L_C1BDCA); /* C1BDC6: bne     $c1bdca */
-L_C1BDC8:
-    FA18_CHECK(0xC1BDC8);
-    FA18_JUMP(0xC1BDC8, 0x6028, 0xC1BDF2, L_C1BDF2); /* C1BDC8: bra     $c1bdf2 */
-L_C1BDCA:
-    FA18_CHECK(0xC1BDCA);
-    FA18_OP(0xC1BDCA, 0x0C04, 0xC1BDCE); /* C1BDCA: cmpi.b  #$6, D4 */
-    FA18_BCC(0xC1BDCE, 0x663A, 0xC1BDD0, 0xC1BE0A, L_C1BE0A); /* C1BDCE: bne     $c1be0a */
-L_C1BDD0:
-    FA18_CHECK(0xC1BDD0);
-    FA18_OP(0xC1BDD0, 0x13FC, 0xC1BDD8); /* C1BDD0: move.b  #$1, $c45792.l */
-    FA18_OP(0xC1BDD8, 0x1828, 0xC1BDDC); /* C1BDD8: move.b  ($6,A0), D4 */
-    FA18_OP(0xC1BDDC, 0x5204, 0xC1BDDE); /* C1BDDC: addq.b  #1, D4 */
-    FA18_OP(0xC1BDDE, 0x0C04, 0xC1BDE2); /* C1BDDE: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BDE2, 0x6D06, 0xC1BDE4, 0xC1BDEA, L_C1BDEA); /* C1BDE2: blt     $c1bdea */
-L_C1BDE4:
-    FA18_CHECK(0xC1BDE4);
-    FA18_OP(0xC1BDE4, 0x0C04, 0xC1BDE8); /* C1BDE4: cmpi.b  #$8, D4 */
-    FA18_BCC(0xC1BDE8, 0x6F02, 0xC1BDEA, 0xC1BDEC, L_C1BDEC); /* C1BDE8: ble     $c1bdec */
-L_C1BDEA:
-    FA18_CHECK(0xC1BDEA);
-    FA18_OP(0xC1BDEA, 0x7803, 0xC1BDEC); /* C1BDEA: moveq   #$3, D4 */
-L_C1BDEC:
-    FA18_CHECK(0xC1BDEC);
-    FA18_OP(0xC1BDEC, 0x13C4, 0xC1BDF2); /* C1BDEC: move.b  D4, $c458a6.l */
-L_C1BDF2:
-    FA18_CHECK(0xC1BDF2);
-    FA18_CALL(0xC1BDF2, 0x4EB9, 0xC1BDF8, 399, 1); /* C1BDF2: jsr     $c3318e.l */
-L_C1BDF8:
-    FA18_CHECK(0xC1BDF8);
-    FA18_JUMP(0xC1BDF8, 0x6000, 0xC1C23C, L_C1C23C); /* C1BDF8: bra     $c1c23c */
-L_C1BDFC:
-    FA18_CHECK(0xC1BDFC);
-    FA18_OP(0xC1BDFC, 0x4A06, 0xC1BDFE); /* C1BDFC: tst.b   D6 */
-    FA18_BCC(0xC1BDFE, 0x67EC, 0xC1BE00, 0xC1BDEC, L_C1BDEC); /* C1BDFE: beq     $c1bdec */
-L_C1BE00:
-    FA18_CHECK(0xC1BE00);
-    FA18_OP(0xC1BE00, 0x13FC, 0xC1BE08); /* C1BE00: move.b  #$2, $c45792.l */
-    FA18_JUMP(0xC1BE08, 0x60E2, 0xC1BDEC, L_C1BDEC); /* C1BE08: bra     $c1bdec */
-L_C1BE0A:
-    FA18_CHECK(0xC1BE0A);
-    FA18_OP(0xC1BE0A, 0x0404, 0xC1BE0E); /* C1BE0A: subi.b  #$a, D4 */
-    FA18_OP(0xC1BE0E, 0x0C04, 0xC1BE12); /* C1BE0E: cmpi.b  #$0, D4 */
-    FA18_BCC(0xC1BE12, 0x6D00, 0xC1BE16, 0xC1C23C, L_C1C23C); /* C1BE12: blt     $c1c23c */
-L_C1BE16:
-    FA18_CHECK(0xC1BE16);
-    FA18_OP(0xC1BE16, 0x0C04, 0xC1BE1A); /* C1BE16: cmpi.b  #$5, D4 */
-    FA18_BCC(0xC1BE1A, 0x6E1A, 0xC1BE1C, 0xC1BE36, L_C1BE36); /* C1BE1A: bgt     $c1be36 */
-L_C1BE1C:
-    FA18_CHECK(0xC1BE1C);
-    FA18_OP(0xC1BE1C, 0x5204, 0xC1BE1E); /* C1BE1C: addq.b  #1, D4 */
-    FA18_OP(0xC1BE1E, 0x5404, 0xC1BE20); /* C1BE1E: addq.b  #2, D4 */
-    FA18_OP(0xC1BE20, 0x0C04, 0xC1BE24); /* C1BE20: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BE24, 0x67C6, 0xC1BE26, 0xC1BDEC, L_C1BDEC); /* C1BE24: beq     $c1bdec */
-L_C1BE26:
-    FA18_CHECK(0xC1BE26);
-    FA18_OP(0xC1BE26, 0x41E8, 0xC1BE2A); /* C1BE26: lea     ($12,A0), A0 */
-    FA18_OP(0xC1BE2A, 0x4884, 0xC1BE2C); /* C1BE2A: ext.w   D4 */
-    FA18_OP(0xC1BE2C, 0x4A30, 0xC1BE30); /* C1BE2C: tst.b   (-$1,A0,D4.w) */
-    FA18_BCC(0xC1BE30, 0x6700, 0xC1BE34, 0xC1C23C, L_C1C23C); /* C1BE30: beq     $c1c23c */
-L_C1BE34:
-    FA18_CHECK(0xC1BE34);
-    FA18_JUMP(0xC1BE34, 0x60B6, 0xC1BDEC, L_C1BDEC); /* C1BE34: bra     $c1bdec */
-L_C1BE36:
-    FA18_CHECK(0xC1BE36);
-    FA18_JUMP(0xC1BE36, 0x6000, 0xC1C23C, L_C1C23C); /* C1BE36: bra     $c1c23c */
-L_C1BE3A:
-    FA18_CHECK(0xC1BE3A);
-    FA18_OP(0xC1BE3A, 0x78FE, 0xC1BE3C); /* C1BE3A: moveq   #-$2, D4 */
-    FA18_JUMP(0xC1BE3C, 0x60AE, 0xC1BDEC, L_C1BDEC); /* C1BE3C: bra     $c1bdec */
-L_C1BE3E:
-    FA18_CHECK(0xC1BE3E);
-    FA18_OP(0xC1BE3E, 0x78FF, 0xC1BE40); /* C1BE3E: moveq   #-$1, D4 */
-    FA18_JUMP(0xC1BE40, 0x60AA, 0xC1BDEC, L_C1BDEC); /* C1BE40: bra     $c1bdec */
-L_C1BE42:
-    FA18_CHECK(0xC1BE42);
-    FA18_OP(0xC1BE42, 0x787D, 0xC1BE44); /* C1BE42: moveq   #$7d, D4 */
-    FA18_JUMP(0xC1BE44, 0x60A6, 0xC1BDEC, L_C1BDEC); /* C1BE44: bra     $c1bdec */
-L_C1BE46:
-    FA18_CHECK(0xC1BE46);
-    FA18_OP(0xC1BE46, 0x7809, 0xC1BE48); /* C1BE46: moveq   #$9, D4 */
-    FA18_JUMP(0xC1BE48, 0x60A2, 0xC1BDEC, L_C1BDEC); /* C1BE48: bra     $c1bdec */
-L_C1BE4A:
-    FA18_CHECK(0xC1BE4A);
-    FA18_OP(0xC1BE4A, 0x13FC, 0xC1BE52); /* C1BE4A: move.b  #$1, $c45792.l */
-    FA18_OP(0xC1BE52, 0x4AB9, 0xC1BE58); /* C1BE52: tst.l   $c4fdbc.l */
-    FA18_BCC(0xC1BE58, 0x6700, 0xC1BE5C, 0xC1C23C, L_C1C23C); /* C1BE58: beq     $c1c23c */
-L_C1BE5C:
-    FA18_CHECK(0xC1BE5C);
-    FA18_OP(0xC1BE5C, 0x787F, 0xC1BE5E); /* C1BE5C: moveq   #$7f, D4 */
-    FA18_JUMP(0xC1BE5E, 0x608C, 0xC1BDEC, L_C1BDEC); /* C1BE5E: bra     $c1bdec */
-L_C1BE60:
-    FA18_CHECK(0xC1BE60);
-    FA18_OP(0xC1BE60, 0x0839, 0xC1BE68); /* C1BE60: btst    #$3, $c458cc.l */
-    FA18_BCC(0xC1BE68, 0x665E, 0xC1BE6A, 0xC1BEC8, L_C1BEC8); /* C1BE68: bne     $c1bec8 */
-L_C1BE6A:
-    FA18_CHECK(0xC1BE6A);
-    FA18_OP(0xC1BE6A, 0x41F9, 0xC1BE70); /* C1BE6A: lea     $c42a02.l, A0 */
-    FA18_OP(0xC1BE70, 0x1204, 0xC1BE72); /* C1BE70: move.b  D4, D1 */
-    FA18_OP(0xC1BE72, 0x4881, 0xC1BE74); /* C1BE72: ext.w   D1 */
-    FA18_OP(0xC1BE74, 0xE941, 0xC1BE76); /* C1BE74: asl.w   #4, D1 */
-    FA18_OP(0xC1BE76, 0x4242, 0xC1BE78); /* C1BE76: clr.w   D2 */
-L_C1BE78:
-    FA18_CHECK(0xC1BE78);
-    FA18_OP(0xC1BE78, 0x3630, 0xC1BE7C); /* C1BE78: move.w  (A0,D2.w), D3 */
-    FA18_BCC(0xC1BE7C, 0x6D0A, 0xC1BE7E, 0xC1BE88, L_C1BE88); /* C1BE7C: blt     $c1be88 */
-L_C1BE7E:
-    FA18_CHECK(0xC1BE7E);
-    FA18_OP(0xC1BE7E, 0xB242, 0xC1BE80); /* C1BE7E: cmp.w   D2, D1 */
-    FA18_BCC(0xC1BE80, 0x6F0C, 0xC1BE82, 0xC1BE8E, L_C1BE8E); /* C1BE80: ble     $c1be8e */
-L_C1BE82:
-    FA18_CHECK(0xC1BE82);
-    FA18_OP(0xC1BE82, 0x0642, 0xC1BE86); /* C1BE82: addi.w  #$10, D2 */
-    FA18_JUMP(0xC1BE86, 0x60F0, 0xC1BE78, L_C1BE78); /* C1BE86: bra     $c1be78 */
-L_C1BE88:
-    FA18_CHECK(0xC1BE88);
-    FA18_OP(0xC1BE88, 0x5243, 0xC1BE8A); /* C1BE88: addq.w  #1, D3 */
-    FA18_BCC(0xC1BE8A, 0x6700, 0xC1BE8E, 0xC1C23C, L_C1C23C); /* C1BE8A: beq     $c1c23c */
-L_C1BE8E:
-    FA18_CHECK(0xC1BE8E);
-    FA18_OP(0xC1BE8E, 0x13C4, 0xC1BE94); /* C1BE8E: move.b  D4, $c45848.l */
-    FA18_OP(0xC1BE94, 0x4A39, 0xC1BE9A); /* C1BE94: tst.b   $c458ae.l */
-    FA18_BCC(0xC1BE9A, 0x6D00, 0xC1BE9E, 0xC1C23C, L_C1C23C); /* C1BE9A: blt     $c1c23c */
-L_C1BE9E:
-    FA18_CHECK(0xC1BE9E);
-    FA18_OP(0xC1BE9E, 0x4A39, 0xC1BEA4); /* C1BE9E: tst.b   $c458ad.l */
-    FA18_BCC(0xC1BEA4, 0x6600, 0xC1BEA8, 0xC1C23C, L_C1C23C); /* C1BEA4: bne     $c1c23c */
-L_C1BEA8:
-    FA18_CHECK(0xC1BEA8);
-    FA18_OP(0xC1BEA8, 0x41F9, 0xC1BEAE); /* C1BEA8: lea     $c457b5.l, A0 */
-    FA18_JUMP(0xC1BEAE, 0x6000, 0xC1C214, L_C1C214); /* C1BEAE: bra     $c1c214 */
-L_C1BEC8:
-    FA18_CHECK(0xC1BEC8);
-    FA18_OP(0xC1BEC8, 0x1439, 0xC1BECE); /* C1BEC8: move.b  $c4584b.l, D2 */
-    FA18_BCC(0xC1BECE, 0x6700, 0xC1BED2, 0xC1BEDE, L_C1BEDE); /* C1BECE: beq     $c1bede */
-L_C1BED2:
-    FA18_CHECK(0xC1BED2);
-    FA18_OP(0xC1BED2, 0x0C02, 0xC1BED6); /* C1BED2: cmpi.b  #$2, D2 */
-    FA18_BCC(0xC1BED6, 0x6700, 0xC1BEDA, 0xC1BEDE, L_C1BEDE); /* C1BED6: beq     $c1bede */
-L_C1BEDA:
-    FA18_CHECK(0xC1BEDA);
-    FA18_JUMP(0xC1BEDA, 0x6000, 0xC1C23C, L_C1C23C); /* C1BEDA: bra     $c1c23c */
-L_C1BEDE:
-    FA18_CHECK(0xC1BEDE);
-    FA18_OP(0xC1BEDE, 0x5244, 0xC1BEE0); /* C1BEDE: addq.w  #1, D4 */
-    FA18_JUMP(0xC1BEE0, 0x6002, 0xC1BEE4, L_C1BEE4); /* C1BEE0: bra     $c1bee4 */
-L_C1BEE4:
-    FA18_CHECK(0xC1BEE4);
-    FA18_JUMP(0xC1BEE4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BEE4: bra     $c1c23c */
-L_C1BF8C:
-    FA18_CHECK(0xC1BF8C);
-    FA18_OP(0xC1BF8C, 0x4A39, 0xC1BF92); /* C1BF8C: tst.b   $c458ae.l */
-    FA18_BCC(0xC1BF92, 0x6600, 0xC1BF96, 0xC1C23C, L_C1C23C); /* C1BF92: bne     $c1c23c */
-L_C1BF96:
-    FA18_CHECK(0xC1BF96);
-    FA18_OP(0xC1BF96, 0x08F9, 0xC1BF9E); /* C1BF96: bset    #$0, $c4599c.l */
-    FA18_OP(0xC1BF9E, 0x4A39, 0xC1BFA4); /* C1BF9E: tst.b   $c457ad.l */
-    FA18_BCC(0xC1BFA4, 0x670E, 0xC1BFA6, 0xC1BFB4, L_C1BFB4); /* C1BFA4: beq     $c1bfb4 */
-L_C1BFA6:
-    FA18_CHECK(0xC1BFA6);
-    FA18_OP(0xC1BFA6, 0x23F9, 0xC1BFB0); /* C1BFA6: move.l  $c45c42.l, $c45664.l */
-    FA18_JUMP(0xC1BFB0, 0x6000, 0xC1B684, L_C1B684); /* C1BFB0: bra     $c1b684 */
-L_C1BFB4:
-    FA18_CHECK(0xC1BFB4);
-    FA18_OP(0xC1BFB4, 0x3F00, 0xC1BFB6); /* C1BFB4: move.w  D0, -(A7) */
-    FA18_CALL(0xC1BFB6, 0x4EB9, 0xC1BFBC, 55, 0); /* C1BFB6: jsr     $c0f4a6.l */
-L_C1BFBC:
-    FA18_CHECK(0xC1BFBC);
-    FA18_OP(0xC1BFBC, 0x301F, 0xC1BFBE); /* C1BFBC: move.w  (A7)+, D0 */
-    FA18_OP(0xC1BFBE, 0x283C, 0xC1BFC4); /* C1BFBE: move.l  #$10c00000, D4 */
-    FA18_OP(0xC1BFC4, 0x2239, 0xC1BFCA); /* C1BFC4: move.l  $c45664.l, D1 */
-    FA18_OP(0xC1BFCA, 0x243C, 0xC1BFD0); /* C1BFCA: move.l  #$11400000, D2 */
-    FA18_OP(0xC1BFD0, 0x23C4, 0xC1BFD6); /* C1BFD0: move.l  D4, $c45c3e.l */
-    FA18_OP(0xC1BFD6, 0x23C1, 0xC1BFDC); /* C1BFD6: move.l  D1, $c45c42.l */
-    FA18_OP(0xC1BFDC, 0x23C2, 0xC1BFE2); /* C1BFDC: move.l  D2, $c45c46.l */
-    FA18_OP(0xC1BFE2, 0x0284, 0xC1BFE8); /* C1BFE2: andi.l  #$3fffff, D4 */
-    FA18_OP(0xC1BFE8, 0x0282, 0xC1BFEE); /* C1BFE8: andi.l  #$3fffff, D2 */
-    FA18_OP(0xC1BFEE, 0x4484, 0xC1BFF0); /* C1BFEE: neg.l   D4 */
-    FA18_OP(0xC1BFF0, 0x4481, 0xC1BFF2); /* C1BFF0: neg.l   D1 */
-    FA18_OP(0xC1BFF2, 0x4482, 0xC1BFF4); /* C1BFF2: neg.l   D2 */
-    FA18_OP(0xC1BFF4, 0x23C4, 0xC1BFFA); /* C1BFF4: move.l  D4, $c45c32.l */
-    FA18_OP(0xC1BFFA, 0x23C1, 0xC1C000); /* C1BFFA: move.l  D1, $c45c36.l */
-    FA18_OP(0xC1C000, 0x23C2, 0xC1C006); /* C1C000: move.l  D2, $c45c3a.l */
-    FA18_OP(0xC1C006, 0x42B9, 0xC1C00C); /* C1C006: clr.l   $c45c4a.l */
-    FA18_OP(0xC1C00C, 0x42B9, 0xC1C012); /* C1C00C: clr.l   $c45c4e.l */
-    FA18_OP(0xC1C012, 0x42B9, 0xC1C018); /* C1C012: clr.l   $c45c52.l */
-    FA18_OP(0xC1C018, 0x33FC, 0xC1C020); /* C1C018: move.w  #$1c20, $c45a94.l */
-    FA18_OP(0xC1C020, 0x4279, 0xC1C026); /* C1C020: clr.w   $c45a96.l */
-    FA18_OP(0xC1C026, 0x4239, 0xC1C02C); /* C1C026: clr.b   $c457b4.l */
-    FA18_OP(0xC1C02C, 0x13FC, 0xC1C034); /* C1C02C: move.b  #$1, $c457b5.l */
-    FA18_OP(0xC1C034, 0x13FC, 0xC1C03C); /* C1C034: move.b  #$1, $c457ad.l */
-    FA18_OP(0xC1C03C, 0x4A39, 0xC1C042); /* C1C03C: tst.b   $c45785.l */
-    FA18_BCC(0xC1C042, 0x6700, 0xC1C046, 0xC1B69A, L_C1B69A); /* C1C042: beq     $c1b69a */
-L_C1C046:
-    FA18_CHECK(0xC1C046);
-    FA18_OP(0xC1C046, 0x33FC, 0xC1C04E); /* C1C046: move.w  #$b3, $c45984.l */
-    FA18_JUMP(0xC1C04E, 0x6000, 0xC1C23C, L_C1C23C); /* C1C04E: bra     $c1c23c */
-L_C1C052:
-    FA18_CHECK(0xC1C052);
-    FA18_OP(0xC1C052, 0x0C39, 0xC1C05A); /* C1C052: cmpi.b  #$7d, $c458a6.l */
-    FA18_BCC(0xC1C05A, 0x660E, 0xC1C05C, 0xC1C06A, L_C1C06A); /* C1C05A: bne     $c1c06a */
-L_C1C05C:
-    FA18_CHECK(0xC1C05C);
-    FA18_CALL(0xC1C05C, 0x4EB9, 0xC1C062, 398, 1); /* C1C05C: jsr     $c33186.l */
-L_C1C062:
-    FA18_CHECK(0xC1C062);
-    FA18_OP(0xC1C062, 0x0A79, 0xC1C06A); /* C1C062: eori.w  #$1000, $c46986.l */
-L_C1C06A:
-    FA18_CHECK(0xC1C06A);
-    FA18_JUMP(0xC1C06A, 0x6000, 0xC1C23C, L_C1C23C); /* C1C06A: bra     $c1c23c */
-L_C1C06E:
-    FA18_CHECK(0xC1C06E);
-    FA18_OP(0xC1C06E, 0x4A39, 0xC1C074); /* C1C06E: tst.b   $c458ae.l */
-    FA18_BCC(0xC1C074, 0x6D00, 0xC1C078, 0xC1C23C, L_C1C23C); /* C1C074: blt     $c1c23c */
-L_C1C078:
-    FA18_CHECK(0xC1C078);
-    FA18_OP(0xC1C078, 0x4A39, 0xC1C07E); /* C1C078: tst.b   $c457ae.l */
-    FA18_BCC(0xC1C07E, 0x6712, 0xC1C080, 0xC1C092, L_C1C092); /* C1C07E: beq     $c1c092 */
-L_C1C080:
-    FA18_CHECK(0xC1C080);
-    FA18_OP(0xC1C080, 0x13FC, 0xC1C088); /* C1C080: move.b  #$fe, $c458b0.l */
-    FA18_OP(0xC1C088, 0x41F9, 0xC1C08E); /* C1C088: lea     $c457ae.l, A0 */
-    FA18_JUMP(0xC1C08E, 0x6000, 0xC1C214, L_C1C214); /* C1C08E: bra     $c1c214 */
-L_C1C092:
-    FA18_CHECK(0xC1C092);
-    FA18_OP(0xC1C092, 0x3F00, 0xC1C094); /* C1C092: move.w  D0, -(A7) */
-    FA18_CALL(0xC1C094, 0x4EB9, 0xC1C09A, 55, 0); /* C1C094: jsr     $c0f4a6.l */
-L_C1C09A:
-    FA18_CHECK(0xC1C09A);
-    FA18_OP(0xC1C09A, 0x301F, 0xC1C09C); /* C1C09A: move.w  (A7)+, D0 */
-    FA18_OP(0xC1C09C, 0x4A39, 0xC1C0A2); /* C1C09C: tst.b   $c4584b.l */
-    FA18_BCC(0xC1C0A2, 0x661C, 0xC1C0A4, 0xC1C0C0, L_C1C0C0); /* C1C0A2: bne     $c1c0c0 */
-L_C1C0A4:
-    FA18_CHECK(0xC1C0A4);
-    FA18_OP(0xC1C0A4, 0x2639, 0xC1C0AA); /* C1C0A4: move.l  $c4fdac.l, D3 */
-    FA18_BCC(0xC1C0AA, 0x6F14, 0xC1C0AC, 0xC1C0C0, L_C1C0C0); /* C1C0AA: ble     $c1c0c0 */
-L_C1C0AC:
-    FA18_CHECK(0xC1C0AC);
-    FA18_OP(0xC1C0AC, 0x4A39, 0xC1C0B2); /* C1C0AC: tst.b   $c45790.l */
-    FA18_BCC(0xC1C0B2, 0x670C, 0xC1C0B4, 0xC1C0C0, L_C1C0C0); /* C1C0B2: beq     $c1c0c0 */
-L_C1C0B4:
-    FA18_CHECK(0xC1C0B4);
-    FA18_OP(0xC1C0B4, 0x2043, 0xC1C0B6); /* C1C0B4: movea.l D3, A0 */
-    FA18_OP(0xC1C0B6, 0x76FF, 0xC1C0B8); /* C1C0B6: moveq   #-$1, D3 */
-    FA18_OP(0xC1C0B8, 0x10C3, 0xC1C0BA); /* C1C0B8: move.b  D3, (A0)+ */
-    FA18_OP(0xC1C0BA, 0x10C3, 0xC1C0BC); /* C1C0BA: move.b  D3, (A0)+ */
-    FA18_OP(0xC1C0BC, 0x10C3, 0xC1C0BE); /* C1C0BC: move.b  D3, (A0)+ */
-    FA18_OP(0xC1C0BE, 0x10C3, 0xC1C0C0); /* C1C0BE: move.b  D3, (A0)+ */
-L_C1C0C0:
-    FA18_CHECK(0xC1C0C0);
-    FA18_OP(0xC1C0C0, 0x13FC, 0xC1C0C8); /* C1C0C0: move.b  #$ff, $c457ae.l */
-    FA18_JUMP(0xC1C0C8, 0x6000, 0xC1C23C, L_C1C23C); /* C1C0C8: bra     $c1c23c */
-L_C1C0E0:
-    FA18_CHECK(0xC1C0E0);
-    FA18_OP(0xC1C0E0, 0x4A06, 0xC1C0E2); /* C1C0E0: tst.b   D6 */
-    FA18_BCC(0xC1C0E2, 0x663E, 0xC1C0E4, 0xC1C122, L_C1C122); /* C1C0E2: bne     $c1c122 */
-L_C1C0E4:
-    FA18_CHECK(0xC1C0E4);
-    FA18_OP(0xC1C0E4, 0x08F9, 0xC1C0EC); /* C1C0E4: bset    #$1, $c4599b.l */
-    FA18_OP(0xC1C0EC, 0x5339, 0xC1C0F2); /* C1C0EC: subq.b  #1, $c4584d.l */
-    FA18_BCC(0xC1C0F2, 0x6F18, 0xC1C0F4, 0xC1C10C, L_C1C10C); /* C1C0F2: ble     $c1c10c */
-L_C1C0F4:
-    FA18_CHECK(0xC1C0F4);
-    FA18_OP(0xC1C0F4, 0x13FC, 0xC1C0FC); /* C1C0F4: move.b  #$1e, $c4584f.l */
-    FA18_OP(0xC1C0FC, 0x3800, 0xC1C0FE); /* C1C0FC: move.w  D0, D4 */
-    FA18_OP(0xC1C0FE, 0x303C, 0xC1C102); /* C1C0FE: move.w  #$4026, D0 */
-    FA18_OP(0xC1C102, 0x13FC, 0xC1C10A); /* C1C102: move.b  #$2, $c4588b.l */
-    FA18_JUMP(0xC1C10A, 0x600A, 0xC1C116, L_C1C116); /* C1C10A: bra     $c1c116 */
-L_C1C10C:
-    FA18_CHECK(0xC1C10C);
-    FA18_OP(0xC1C10C, 0x4239, 0xC1C112); /* C1C10C: clr.b   $c4584d.l */
-    FA18_OP(0xC1C112, 0x303C, 0xC1C116); /* C1C112: move.w  #$4027, D0 */
-L_C1C116:
-    FA18_CHECK(0xC1C116);
-    FA18_CALL(0xC1C116, 0x4EB9, 0xC1C11C, 216, 0); /* C1C116: jsr     $c25704.l */
-L_C1C11C:
-    FA18_CHECK(0xC1C11C);
-    FA18_OP(0xC1C11C, 0x3004, 0xC1C11E); /* C1C11C: move.w  D4, D0 */
-    FA18_JUMP(0xC1C11E, 0x6000, 0xC1C23C, L_C1C23C); /* C1C11E: bra     $c1c23c */
-L_C1C122:
-    FA18_CHECK(0xC1C122);
-    FA18_OP(0xC1C122, 0x0C39, 0xC1C12A); /* C1C122: cmpi.b  #$6, $c458a6.l */
-    FA18_BCC(0xC1C12A, 0x6642, 0xC1C12C, 0xC1C16E, L_C1C16E); /* C1C12A: bne     $c1c16e */
-L_C1C12C:
-    FA18_CHECK(0xC1C12C);
-    FA18_OP(0xC1C12C, 0x4A79, 0xC1C132); /* C1C12C: tst.w   $c458c2.l */
-    FA18_BCC(0xC1C132, 0x663A, 0xC1C134, 0xC1C16E, L_C1C16E); /* C1C132: bne     $c1c16e */
-L_C1C134:
-    FA18_CHECK(0xC1C134);
-    FA18_OP(0xC1C134, 0x0839, 0xC1C13C); /* C1C134: btst    #$6, $c46385.l */
-    FA18_BCC(0xC1C13C, 0x6714, 0xC1C13E, 0xC1C152, L_C1C152); /* C1C13C: beq     $c1c152 */
-L_C1C13E:
-    FA18_CHECK(0xC1C13E);
-    FA18_OP(0xC1C13E, 0x0839, 0xC1C146); /* C1C13E: btst    #$6, $c46585.l */
-    FA18_BCC(0xC1C146, 0x670A, 0xC1C148, 0xC1C152, L_C1C152); /* C1C146: beq     $c1c152 */
-L_C1C148:
-    FA18_CHECK(0xC1C148);
-    FA18_OP(0xC1C148, 0x0839, 0xC1C150); /* C1C148: btst    #$6, $c46785.l */
-    FA18_BCC(0xC1C150, 0x661C, 0xC1C152, 0xC1C16E, L_C1C16E); /* C1C150: bne     $c1c16e */
-L_C1C152:
-    FA18_CHECK(0xC1C152);
-    FA18_OP(0xC1C152, 0x0039, 0xC1C15A); /* C1C152: ori.b   #$f, $c46200.l */
-    FA18_OP(0xC1C15A, 0x3F00, 0xC1C15C); /* C1C15A: move.w  D0, -(A7) */
-    FA18_OP(0xC1C15C, 0x7030, 0xC1C15E); /* C1C15C: moveq   #$30, D0 */
-    FA18_OP(0xC1C15E, 0x2F00, 0xC1C160); /* C1C15E: move.l  D0, -(A7) */
-    FA18_OP(0xC1C160, 0x701C, 0xC1C162); /* C1C160: moveq   #$1c, D0 */
-    FA18_OP(0xC1C162, 0x2F00, 0xC1C164); /* C1C162: move.l  D0, -(A7) */
-    FA18_CALL(0xC1C164, 0x4EB9, 0xC1C16A, 109, 0); /* C1C164: jsr     $c17f8c.l */
-L_C1C16A:
-    FA18_CHECK(0xC1C16A);
-    FA18_OP(0xC1C16A, 0x508F, 0xC1C16C); /* C1C16A: addq.l  #8, A7 */
-    FA18_OP(0xC1C16C, 0x301F, 0xC1C16E); /* C1C16C: move.w  (A7)+, D0 */
-L_C1C16E:
-    FA18_CHECK(0xC1C16E);
-    FA18_JUMP(0xC1C16E, 0x6000, 0xC1C23C, L_C1C23C); /* C1C16E: bra     $c1c23c */
-L_C1C172:
-    FA18_CHECK(0xC1C172);
-    FA18_OP(0xC1C172, 0x08F9, 0xC1C17A); /* C1C172: bset    #$2, $c4599b.l */
-    FA18_OP(0xC1C17A, 0x5339, 0xC1C180); /* C1C17A: subq.b  #1, $c4584c.l */
-    FA18_BCC(0xC1C180, 0x6F18, 0xC1C182, 0xC1C19A, L_C1C19A); /* C1C180: ble     $c1c19a */
-L_C1C182:
-    FA18_CHECK(0xC1C182);
-    FA18_OP(0xC1C182, 0x13FC, 0xC1C18A); /* C1C182: move.b  #$1e, $c4584e.l */
-    FA18_OP(0xC1C18A, 0x3800, 0xC1C18C); /* C1C18A: move.w  D0, D4 */
-    FA18_OP(0xC1C18C, 0x303C, 0xC1C190); /* C1C18C: move.w  #$4028, D0 */
-    FA18_OP(0xC1C190, 0x13FC, 0xC1C198); /* C1C190: move.b  #$1, $c4588b.l */
-    FA18_JUMP(0xC1C198, 0x600A, 0xC1C1A4, L_C1C1A4); /* C1C198: bra     $c1c1a4 */
-L_C1C19A:
-    FA18_CHECK(0xC1C19A);
-    FA18_OP(0xC1C19A, 0x4239, 0xC1C1A0); /* C1C19A: clr.b   $c4584c.l */
-    FA18_OP(0xC1C1A0, 0x303C, 0xC1C1A4); /* C1C1A0: move.w  #$4029, D0 */
-L_C1C1A4:
-    FA18_CHECK(0xC1C1A4);
-    FA18_CALL(0xC1C1A4, 0x4EB9, 0xC1C1AA, 216, 0); /* C1C1A4: jsr     $c25704.l */
-L_C1C1AA:
-    FA18_CHECK(0xC1C1AA);
-    FA18_OP(0xC1C1AA, 0x3004, 0xC1C1AC); /* C1C1AA: move.w  D4, D0 */
-    FA18_JUMP(0xC1C1AC, 0x6000, 0xC1C23C, L_C1C23C); /* C1C1AC: bra     $c1c23c */
-L_C1C1F2:
-    FA18_CHECK(0xC1C1F2);
-    FA18_OP(0xC1C1F2, 0x41F9, 0xC1C1F8); /* C1C1F2: lea     $c457b0.l, A0 */
-    FA18_OP(0xC1C1F8, 0x08F9, 0xC1C200); /* C1C1F8: bset    #$3, $c4599b.l */
-    FA18_OP(0xC1C200, 0x13FC, 0xC1C208); /* C1C200: move.b  #$3, $c45840.l */
-    FA18_CALL(0xC1C208, 0x4EB9, 0xC1C20E, 398, 1); /* C1C208: jsr     $c33186.l */
-L_C1C20E:
-    FA18_CHECK(0xC1C20E);
-    FA18_OP(0xC1C20E, 0x41F9, 0xC1C214); /* C1C20E: lea     $c458b5.l, A0 */
-L_C1C214:
-    FA18_CHECK(0xC1C214);
-    FA18_OP(0xC1C214, 0x4A10, 0xC1C216); /* C1C214: tst.b   (A0) */
-    FA18_BCC(0xC1C216, 0x6706, 0xC1C218, 0xC1C21E, L_C1C21E); /* C1C216: beq     $c1c21e */
-L_C1C218:
-    FA18_CHECK(0xC1C218);
-    FA18_OP(0xC1C218, 0x10BC, 0xC1C21C); /* C1C218: move.b  #$0, (A0) */
-    FA18_JUMP(0xC1C21C, 0x601E, 0xC1C23C, L_C1C23C); /* C1C21C: bra     $c1c23c */
-L_C1C21E:
-    FA18_CHECK(0xC1C21E);
-    FA18_OP(0xC1C21E, 0x10BC, 0xC1C222); /* C1C21E: move.b  #$1, (A0) */
-    FA18_JUMP(0xC1C222, 0x6018, 0xC1C23C, L_C1C23C); /* C1C222: bra     $c1c23c */
-L_C1C224:
-    FA18_CHECK(0xC1C224);
-    FA18_OP(0xC1C224, 0x4A06, 0xC1C226); /* C1C224: tst.b   D6 */
-    FA18_BCC(0xC1C226, 0x6702, 0xC1C228, 0xC1C22A, L_C1C22A); /* C1C226: beq     $c1c22a */
-L_C1C228:
-    FA18_CHECK(0xC1C228);
-    FA18_JUMP(0xC1C228, 0x600A, 0xC1C234, L_C1C234); /* C1C228: bra     $c1c234 */
-L_C1C22A:
-    FA18_CHECK(0xC1C22A);
-    FA18_OP(0xC1C22A, 0x13FC, 0xC1C232); /* C1C22A: move.b  #$1, $c4582a.l */
-    FA18_JUMP(0xC1C232, 0x6008, 0xC1C23C, L_C1C23C); /* C1C232: bra     $c1c23c */
-L_C1C234:
-    FA18_CHECK(0xC1C234);
-    FA18_OP(0xC1C234, 0x13FC, 0xC1C23C); /* C1C234: move.b  #$ff, $c4582a.l */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-L_C1C2B6:
-    FA18_CHECK(0xC1C2B6);
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-L_C1C2B8:
-    FA18_CHECK(0xC1C2B8);
-    FA18_JUMP(0xC1C2B8, 0x4EF9, 0xC06BF0, L_C06BF0); /* C1C2B8: jmp     $c06bf0.l */
-}
-
-int fa18_fn_C1B27E(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B27E;
-    case 1: goto L_C1B288;
-    case 2: goto L_C1B292;
-    case 3: goto L_C1B29A;
-    case 4: goto L_C1B2C4;
-    case 5: goto L_C1B2CA;
-    case 6: goto L_C1B2DE;
-    case 7: goto L_C1B2E4;
-    case 8: goto L_C1B2EA;
-    case 9: goto L_C1B2F6;
-    case 10: goto L_C1B2FC;
-    case 11: goto L_C1B302;
-    case 12: goto L_C1B30A;
-    case 13: goto L_C1B31A;
-    case 14: goto L_C1B33C;
-    case 15: goto L_C1B340;
-    case 16: goto L_C1B34C;
-    case 17: goto L_C1B354;
-    case 18: goto L_C1B35C;
-    case 19: goto L_C1B35E;
-    case 20: goto L_C1B360;
-    case 21: goto L_C1B36C;
-    case 22: goto L_C1B370;
-    case 23: goto L_C1B37E;
-    case 24: goto L_C1B380;
-    case 25: goto L_C1B386;
-    case 26: goto L_C1B38C;
-    case 27: goto L_C1B390;
-    case 28: goto L_C1B392;
-    case 29: goto L_C1B396;
-    case 30: goto L_C1B398;
-    case 31: goto L_C1B39E;
-    case 32: goto L_C1B3A4;
-    case 33: goto L_C1B3A8;
-    case 34: goto L_C1B3AA;
-    case 35: goto L_C1B3AE;
-    case 36: goto L_C1B3B0;
-    case 37: goto L_C1B3B8;
-    case 38: goto L_C1B3C0;
-    case 39: goto L_C1B3C8;
-    case 40: goto L_C1B3CC;
-    case 41: goto L_C1B3D4;
-    case 42: goto L_C1B3DC;
-    case 43: goto L_C1B3E0;
-    case 44: goto L_C1B3E8;
-    case 45: goto L_C1B3EA;
-    case 46: goto L_C1B3F4;
-    case 47: goto L_C1B3FA;
-    case 48: goto L_C1B402;
-    case 49: goto L_C1B40E;
-    case 50: goto L_C1B410;
-    case 51: goto L_C1B41C;
-    case 52: goto L_C1B41E;
-    case 53: goto L_C1B424;
-    case 54: goto L_C1B42A;
-    case 55: goto L_C1B42E;
-    case 56: goto L_C1B430;
-    case 57: goto L_C1B436;
-    case 58: goto L_C1B43A;
-    case 59: goto L_C1B440;
-    case 60: goto L_C1B444;
-    case 61: goto L_C1B446;
-    case 62: goto L_C1B44C;
-    case 63: goto L_C1B44E;
-    case 64: goto L_C1B45C;
-    case 65: goto L_C1B462;
-    case 66: goto L_C1B468;
-    case 67: goto L_C1B46C;
-    case 68: goto L_C1B46E;
-    case 69: goto L_C1B474;
-    case 70: goto L_C1B478;
-    case 71: goto L_C1B47E;
-    case 72: goto L_C1B482;
-    case 73: goto L_C1B484;
-    case 74: goto L_C1B48A;
-    case 75: goto L_C1B48C;
-    case 76: goto L_C1B498;
-    case 77: goto L_C1B49A;
-    case 78: goto L_C1B4A0;
-    case 79: goto L_C1B4A6;
-    case 80: goto L_C1B4AA;
-    case 81: goto L_C1B4AC;
-    case 82: goto L_C1B4B2;
-    case 83: goto L_C1B4B6;
-    case 84: goto L_C1B4BC;
-    case 85: goto L_C1B4C0;
-    case 86: goto L_C1B4C2;
-    case 87: goto L_C1B4C8;
-    case 88: goto L_C1B4CA;
-    case 89: goto L_C1C1B4;
-    case 90: goto L_C1C1BE;
-    case 91: goto L_C1C23C;
-    case 92: goto L_C1C244;
-    case 93: goto L_C1C24A;
-    case 94: goto L_C1C25C;
-    case 95: goto L_C1C268;
-    case 96: goto L_C1C26A;
-    case 97: goto L_C1C2A4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B27E:
-    FA18_CHECK(0xC1B27E);
-    FA18_OP(0xC1B27E, 0x4A79, 0xC1B284); /* C1B27E: tst.w   $c459b6.l */
-    FA18_BCC(0xC1B284, 0x6600, 0xC1B288, 0xC1B3EA, L_C1B3EA); /* C1B284: bne     $c1b3ea */
-L_C1B288:
-    FA18_CHECK(0xC1B288);
-    FA18_OP(0xC1B288, 0x1039, 0xC1B28E); /* C1B288: move.b  $c4584b.l, D0 */
-    FA18_BCC(0xC1B28E, 0x6F00, 0xC1B292, 0xC1B340, L_C1B340); /* C1B28E: ble     $c1b340 */
-L_C1B292:
-    FA18_CHECK(0xC1B292);
-    FA18_OP(0xC1B292, 0x0C00, 0xC1B296); /* C1B292: cmpi.b  #$3, D0 */
-    FA18_BCC(0xC1B296, 0x6E00, 0xC1B29A, 0xC1B340, L_C1B340); /* C1B296: bgt     $c1b340 */
-L_C1B29A:
-    FA18_CHECK(0xC1B29A);
-    FA18_OP(0xC1B29A, 0x2079, 0xC1B2A0); /* C1B29A: movea.l $c4fdbc.l, A0 */
-    FA18_OP(0xC1B2A0, 0x13D8, 0xC1B2A6); /* C1B2A0: move.b  (A0)+, $c461e9.l */
-    FA18_OP(0xC1B2A6, 0x23C8, 0xC1B2AC); /* C1B2A6: move.l  A0, $c4fdbc.l */
-    FA18_OP(0xC1B2AC, 0x2479, 0xC1B2B2); /* C1B2AC: movea.l $c4fdb8.l, A2 */
-    FA18_OP(0xC1B2B2, 0x33DA, 0xC1B2B8); /* C1B2B2: move.w  (A2)+, $c45996.l */
-    FA18_OP(0xC1B2B8, 0x301A, 0xC1B2BA); /* C1B2B8: move.w  (A2)+, D0 */
-    FA18_OP(0xC1B2BA, 0x0C39, 0xC1B2C2); /* C1B2BA: cmpi.b  #$1, $c4584b.l */
-    FA18_BCC(0xC1B2C2, 0x6706, 0xC1B2C4, 0xC1B2CA, L_C1B2CA); /* C1B2C2: beq     $c1b2ca */
-L_C1B2C4:
-    FA18_CHECK(0xC1B2C4);
-    FA18_OP(0xC1B2C4, 0x33C0, 0xC1B2CA); /* C1B2C4: move.w  D0, $c45998.l */
-L_C1B2CA:
-    FA18_CHECK(0xC1B2CA);
-    FA18_OP(0xC1B2CA, 0x2039, 0xC1B2D0); /* C1B2CA: move.l  $c4fda8.l, D0 */
-    FA18_OP(0xC1B2D0, 0xD080, 0xC1B2D2); /* C1B2D0: add.l   D0, D0 */
-    FA18_OP(0xC1B2D2, 0xD080, 0xC1B2D4); /* C1B2D2: add.l   D0, D0 */
-    FA18_OP(0xC1B2D4, 0xD0B9, 0xC1B2DA); /* C1B2D4: add.l   $c4fdb0.l, D0 */
-    FA18_OP(0xC1B2DA, 0xB08A, 0xC1B2DC); /* C1B2DA: cmp.l   A2, D0 */
-    FA18_BCC(0xC1B2DC, 0x6E06, 0xC1B2DE, 0xC1B2E4, L_C1B2E4); /* C1B2DC: bgt     $c1b2e4 */
-L_C1B2DE:
-    FA18_CHECK(0xC1B2DE);
-    FA18_OP(0xC1B2DE, 0x2479, 0xC1B2E4); /* C1B2DE: movea.l $c4fdb0.l, A2 */
-L_C1B2E4:
-    FA18_CHECK(0xC1B2E4);
-    FA18_OP(0xC1B2E4, 0x23CA, 0xC1B2EA); /* C1B2E4: move.l  A2, $c4fdb8.l */
-L_C1B2EA:
-    FA18_CHECK(0xC1B2EA);
-    FA18_OP(0xC1B2EA, 0x2679, 0xC1B2F0); /* C1B2EA: movea.l $c4fdbc.l, A3 */
-    FA18_OP(0xC1B2F0, 0x0C1B, 0xC1B2F4); /* C1B2F0: cmpi.b  #-$1, (A3)+ */
-    FA18_BCC(0xC1B2F4, 0x660C, 0xC1B2F6, 0xC1B302, L_C1B302); /* C1B2F4: bne     $c1b302 */
-L_C1B2F6:
-    FA18_CHECK(0xC1B2F6);
-    FA18_OP(0xC1B2F6, 0x0C1B, 0xC1B2FA); /* C1B2F6: cmpi.b  #-$1, (A3)+ */
-    FA18_BCC(0xC1B2FA, 0x6606, 0xC1B2FC, 0xC1B302, L_C1B302); /* C1B2FA: bne     $c1b302 */
-L_C1B2FC:
-    FA18_CHECK(0xC1B2FC);
-    FA18_OP(0xC1B2FC, 0x0C1B, 0xC1B300); /* C1B2FC: cmpi.b  #-$1, (A3)+ */
-    FA18_BCC(0xC1B300, 0x673A, 0xC1B302, 0xC1B33C, L_C1B33C); /* C1B300: beq     $c1b33c */
-L_C1B302:
-    FA18_CHECK(0xC1B302);
-    FA18_OP(0xC1B302, 0xB1F9, 0xC1B308); /* C1B302: cmpa.l  $c4fdac.l, A0 */
-    FA18_BCC(0xC1B308, 0x6732, 0xC1B30A, 0xC1B33C, L_C1B33C); /* C1B308: beq     $c1b33c */
-L_C1B30A:
-    FA18_CHECK(0xC1B30A);
-    FA18_OP(0xC1B30A, 0x2039, 0xC1B310); /* C1B30A: move.l  $c4fda4.l, D0 */
-    FA18_OP(0xC1B310, 0xD0B9, 0xC1B316); /* C1B310: add.l   $c4fda8.l, D0 */
-    FA18_OP(0xC1B316, 0xB088, 0xC1B318); /* C1B316: cmp.l   A0, D0 */
-    FA18_BCC(0xC1B318, 0x6E26, 0xC1B31A, 0xC1B340, L_C1B340); /* C1B318: bgt     $c1b340 */
-L_C1B31A:
-    FA18_CHECK(0xC1B31A);
-    FA18_OP(0xC1B31A, 0x23F9, 0xC1B324); /* C1B31A: move.l  $c4fda4.l, $c4fdbc.l */
-    FA18_OP(0xC1B324, 0x23F9, 0xC1B32E); /* C1B324: move.l  $c4fdb0.l, $c4fdb8.l */
-    FA18_OP(0xC1B32E, 0x58B9, 0xC1B334); /* C1B32E: addq.l  #4, $c4fdb8.l */
-    FA18_OP(0xC1B334, 0x2079, 0xC1B33A); /* C1B334: movea.l $c4fdbc.l, A0 */
-    FA18_JUMP(0xC1B33A, 0x60AE, 0xC1B2EA, L_C1B2EA); /* C1B33A: bra     $c1b2ea */
-L_C1B33C:
-    FA18_CHECK(0xC1B33C);
-    FA18_JUMP(0xC1B33C, 0x6000, 0xC1C1B4, L_C1C1B4); /* C1B33C: bra     $c1c1b4 */
-L_C1B340:
-    FA18_CHECK(0xC1B340);
-    FA18_OP(0xC1B340, 0x1029, 0xC1B344); /* C1B340: move.b  ($7c,A1), D0 */
-    FA18_OP(0xC1B344, 0x0200, 0xC1B348); /* C1B344: andi.b  #$f, D0 */
-    FA18_BCC(0xC1B348, 0x6600, 0xC1B34C, 0xC1B40E, L_C1B40E); /* C1B348: bne     $c1b40e */
-L_C1B34C:
-    FA18_CHECK(0xC1B34C);
-    FA18_OP(0xC1B34C, 0x4A39, 0xC1B352); /* C1B34C: tst.b   $c457ae.l */
-    FA18_BCC(0xC1B352, 0x6678, 0xC1B354, 0xC1B3CC, L_C1B3CC); /* C1B352: bne     $c1b3cc */
-L_C1B354:
-    FA18_CHECK(0xC1B354);
-    FA18_OP(0xC1B354, 0x1039, 0xC1B35A); /* C1B354: move.b  $c45870.l, D0 */
-    FA18_BCC(0xC1B35A, 0x6770, 0xC1B35C, 0xC1B3CC, L_C1B3CC); /* C1B35A: beq     $c1b3cc */
-L_C1B35C:
-    FA18_CHECK(0xC1B35C);
-    FA18_BCC(0xC1B35C, 0x6E02, 0xC1B35E, 0xC1B360, L_C1B360); /* C1B35C: bgt     $c1b360 */
-L_C1B35E:
-    FA18_CHECK(0xC1B35E);
-    FA18_OP(0xC1B35E, 0x4200, 0xC1B360); /* C1B35E: clr.b   D0 */
-L_C1B360:
-    FA18_CHECK(0xC1B360);
-    FA18_OP(0xC1B360, 0x1239, 0xC1B366); /* C1B360: move.b  $c4584b.l, D1 */
-    FA18_OP(0xC1B366, 0x0C01, 0xC1B36A); /* C1B366: cmpi.b  #$3, D1 */
-    FA18_BCC(0xC1B36A, 0x6760, 0xC1B36C, 0xC1B3CC, L_C1B3CC); /* C1B36A: beq     $c1b3cc */
-L_C1B36C:
-    FA18_CHECK(0xC1B36C);
-    FA18_OP(0xC1B36C, 0x5301, 0xC1B36E); /* C1B36C: subq.b  #1, D1 */
-    FA18_BCC(0xC1B36E, 0x675C, 0xC1B370, 0xC1B3CC, L_C1B3CC); /* C1B36E: beq     $c1b3cc */
-L_C1B370:
-    FA18_CHECK(0xC1B370);
-    FA18_OP(0xC1B370, 0x1229, 0xC1B374); /* C1B370: move.b  ($39,A1), D1 */
-    FA18_OP(0xC1B374, 0x0201, 0xC1B378); /* C1B374: andi.b  #$f, D1 */
-    FA18_OP(0xC1B378, 0x9029, 0xC1B37C); /* C1B378: sub.b   ($2b,A1), D0 */
-    FA18_BCC(0xC1B37C, 0x6732, 0xC1B37E, 0xC1B3B0, L_C1B3B0); /* C1B37C: beq     $c1b3b0 */
-L_C1B37E:
-    FA18_CHECK(0xC1B37E);
-    FA18_BCC(0xC1B37E, 0x6E18, 0xC1B380, 0xC1B398, L_C1B398); /* C1B37E: bgt     $c1b398 */
-L_C1B380:
-    FA18_CHECK(0xC1B380);
-    FA18_OP(0xC1B380, 0x0C00, 0xC1B384); /* C1B380: cmpi.b  #-$8, D0 */
-    FA18_BCC(0xC1B384, 0x6D0C, 0xC1B386, 0xC1B392, L_C1B392); /* C1B384: blt     $c1b392 */
-L_C1B386:
-    FA18_CHECK(0xC1B386);
-    FA18_OP(0xC1B386, 0x0C01, 0xC1B38A); /* C1B386: cmpi.b  #$2, D1 */
-    FA18_BCC(0xC1B38A, 0x6D06, 0xC1B38C, 0xC1B392, L_C1B392); /* C1B38A: blt     $c1b392 */
-L_C1B38C:
-    FA18_CHECK(0xC1B38C);
-    FA18_CALL(0xC1B38C, 0x6100, 0xC1B390, 121, 0); /* C1B38C: bsr     $c1b4de */
-L_C1B390:
-    FA18_CHECK(0xC1B390);
-    FA18_JUMP(0xC1B390, 0x603A, 0xC1B3CC, L_C1B3CC); /* C1B390: bra     $c1b3cc */
-L_C1B392:
-    FA18_CHECK(0xC1B392);
-    FA18_CALL(0xC1B392, 0x6100, 0xC1B396, 119, 0); /* C1B392: bsr     $c1b4d4 */
-L_C1B396:
-    FA18_CHECK(0xC1B396);
-    FA18_JUMP(0xC1B396, 0x6034, 0xC1B3CC, L_C1B3CC); /* C1B396: bra     $c1b3cc */
-L_C1B398:
-    FA18_CHECK(0xC1B398);
-    FA18_OP(0xC1B398, 0x0C00, 0xC1B39C); /* C1B398: cmpi.b  #$8, D0 */
-    FA18_BCC(0xC1B39C, 0x6E0C, 0xC1B39E, 0xC1B3AA, L_C1B3AA); /* C1B39C: bgt     $c1b3aa */
-L_C1B39E:
-    FA18_CHECK(0xC1B39E);
-    FA18_OP(0xC1B39E, 0x0C01, 0xC1B3A2); /* C1B39E: cmpi.b  #$2, D1 */
-    FA18_BCC(0xC1B3A2, 0x6D06, 0xC1B3A4, 0xC1B3AA, L_C1B3AA); /* C1B3A2: blt     $c1b3aa */
-L_C1B3A4:
-    FA18_CHECK(0xC1B3A4);
-    FA18_CALL(0xC1B3A4, 0x6100, 0xC1B3A8, 121, 0); /* C1B3A4: bsr     $c1b4de */
-L_C1B3A8:
-    FA18_CHECK(0xC1B3A8);
-    FA18_JUMP(0xC1B3A8, 0x6022, 0xC1B3CC, L_C1B3CC); /* C1B3A8: bra     $c1b3cc */
-L_C1B3AA:
-    FA18_CHECK(0xC1B3AA);
-    FA18_CALL(0xC1B3AA, 0x6100, 0xC1B3AE, 118, 0); /* C1B3AA: bsr     $c1b4d0 */
-L_C1B3AE:
-    FA18_CHECK(0xC1B3AE);
-    FA18_JUMP(0xC1B3AE, 0x601C, 0xC1B3CC, L_C1B3CC); /* C1B3AE: bra     $c1b3cc */
-L_C1B3B0:
-    FA18_CHECK(0xC1B3B0);
-    FA18_OP(0xC1B3B0, 0x0C29, 0xC1B3B6); /* C1B3B0: cmpi.b  #$78, ($2b,A1) */
-    FA18_BCC(0xC1B3B6, 0x6D10, 0xC1B3B8, 0xC1B3C8, L_C1B3C8); /* C1B3B6: blt     $c1b3c8 */
-L_C1B3B8:
-    FA18_CHECK(0xC1B3B8);
-    FA18_OP(0xC1B3B8, 0x0829, 0xC1B3BE); /* C1B3B8: btst    #$3, ($3,A1) */
-    FA18_BCC(0xC1B3BE, 0x6608, 0xC1B3C0, 0xC1B3C8, L_C1B3C8); /* C1B3BE: bne     $c1b3c8 */
-L_C1B3C0:
-    FA18_CHECK(0xC1B3C0);
-    FA18_OP(0xC1B3C0, 0x0829, 0xC1B3C6); /* C1B3C0: btst    #$5, ($2,A1) */
-    FA18_BCC(0xC1B3C6, 0x6604, 0xC1B3C8, 0xC1B3CC, L_C1B3CC); /* C1B3C6: bne     $c1b3cc */
-L_C1B3C8:
-    FA18_CHECK(0xC1B3C8);
-    FA18_CALL(0xC1B3C8, 0x6100, 0xC1B3CC, 120, 0); /* C1B3C8: bsr     $c1b4d8 */
-L_C1B3CC:
-    FA18_CHECK(0xC1B3CC);
-    FA18_OP(0xC1B3CC, 0x4A79, 0xC1B3D2); /* C1B3CC: tst.w   $c459b6.l */
-    FA18_BCC(0xC1B3D2, 0x6616, 0xC1B3D4, 0xC1B3EA, L_C1B3EA); /* C1B3D2: bne     $c1b3ea */
-L_C1B3D4:
-    FA18_CHECK(0xC1B3D4);
-    FA18_OP(0xC1B3D4, 0x1839, 0xC1B3DA); /* C1B3D4: move.b  $c4584b.l, D4 */
-    FA18_BCC(0xC1B3DA, 0x6704, 0xC1B3DC, 0xC1B3E0, L_C1B3E0); /* C1B3DA: beq     $c1b3e0 */
-L_C1B3DC:
-    FA18_CHECK(0xC1B3DC);
-    FA18_OP(0xC1B3DC, 0x5304, 0xC1B3DE); /* C1B3DC: subq.b  #1, D4 */
-    FA18_BCC(0xC1B3DE, 0x660A, 0xC1B3E0, 0xC1B3EA, L_C1B3EA); /* C1B3DE: bne     $c1b3ea */
-L_C1B3E0:
-    FA18_CHECK(0xC1B3E0);
-    FA18_OP(0xC1B3E0, 0x2F09, 0xC1B3E2); /* C1B3E0: move.l  A1, -(A7) */
-    FA18_CALL(0xC1B3E2, 0x4EB9, 0xC1B3E8, 227, 1); /* C1B3E2: jsr     $c25a6a.l */
-L_C1B3E8:
-    FA18_CHECK(0xC1B3E8);
-    FA18_OP(0xC1B3E8, 0x225F, 0xC1B3EA); /* C1B3E8: movea.l (A7)+, A1 */
-L_C1B3EA:
-    FA18_CHECK(0xC1B3EA);
-    FA18_OP(0xC1B3EA, 0x4204, 0xC1B3EC); /* C1B3EA: clr.b   D4 */
-    FA18_OP(0xC1B3EC, 0x0829, 0xC1B3F2); /* C1B3EC: btst    #$4, ($4,A1) */
-    FA18_BCC(0xC1B3F2, 0x671C, 0xC1B3F4, 0xC1B410, L_C1B410); /* C1B3F2: beq     $c1b410 */
-L_C1B3F4:
-    FA18_CHECK(0xC1B3F4);
-    FA18_OP(0xC1B3F4, 0x4A69, 0xC1B3F8); /* C1B3F4: tst.w   ($4c,A1) */
-    FA18_BCC(0xC1B3F8, 0x6C08, 0xC1B3FA, 0xC1B402, L_C1B402); /* C1B3F8: bge     $c1b402 */
-L_C1B3FA:
-    FA18_CHECK(0xC1B3FA);
-    FA18_OP(0xC1B3FA, 0x08A9, 0xC1B400); /* C1B3FA: bclr    #$4, ($4,A1) */
-    FA18_JUMP(0xC1B400, 0x600E, 0xC1B410, L_C1B410); /* C1B400: bra     $c1b410 */
-L_C1B402:
-    FA18_CHECK(0xC1B402);
-    FA18_OP(0xC1B402, 0x1344, 0xC1B406); /* C1B402: move.b  D4, ($28,A1) */
-    FA18_OP(0xC1B406, 0x1344, 0xC1B40A); /* C1B406: move.b  D4, ($29,A1) */
-    FA18_OP(0xC1B40A, 0x1344, 0xC1B40E); /* C1B40A: move.b  D4, ($2a,A1) */
-L_C1B40E:
-    FA18_CHECK(0xC1B40E);
-    FA18_RETURN(0xC1B40E, 0x4E75); /* C1B40E: rts */
-L_C1B410:
-    FA18_CHECK(0xC1B410);
-    FA18_OP(0xC1B410, 0x1429, 0xC1B414); /* C1B410: move.b  ($65,A1), D2 */
-    FA18_OP(0xC1B414, 0x1602, 0xC1B416); /* C1B414: move.b  D2, D3 */
-    FA18_OP(0xC1B416, 0x0202, 0xC1B41A); /* C1B416: andi.b  #$30, D2 */
-    FA18_BCC(0xC1B41A, 0x6602, 0xC1B41C, 0xC1B41E, L_C1B41E); /* C1B41A: bne     $c1b41e */
-L_C1B41C:
-    FA18_CHECK(0xC1B41C);
-    FA18_JUMP(0xC1B41C, 0x6030, 0xC1B44E, L_C1B44E); /* C1B41C: bra     $c1b44e */
-L_C1B41E:
-    FA18_CHECK(0xC1B41E);
-    FA18_OP(0xC1B41E, 0x0C02, 0xC1B422); /* C1B41E: cmpi.b  #$10, D2 */
-    FA18_BCC(0xC1B422, 0x6716, 0xC1B424, 0xC1B43A, L_C1B43A); /* C1B422: beq     $c1b43a */
-L_C1B424:
-    FA18_CHECK(0xC1B424);
-    FA18_OP(0xC1B424, 0x1829, 0xC1B428); /* C1B424: move.b  ($28,A1), D4 */
-    FA18_BCC(0xC1B428, 0x6F04, 0xC1B42A, 0xC1B42E, L_C1B42E); /* C1B428: ble     $c1b42e */
-L_C1B42A:
-    FA18_CHECK(0xC1B42A);
-    FA18_OP(0xC1B42A, 0x78FF, 0xC1B42C); /* C1B42A: moveq   #-$1, D4 */
-    FA18_JUMP(0xC1B42C, 0x6002, 0xC1B430, L_C1B430); /* C1B42C: bra     $c1b430 */
-L_C1B42E:
-    FA18_CHECK(0xC1B42E);
-    FA18_OP(0xC1B42E, 0x5304, 0xC1B430); /* C1B42E: subq.b  #1, D4 */
-L_C1B430:
-    FA18_CHECK(0xC1B430);
-    FA18_OP(0xC1B430, 0x0C04, 0xC1B434); /* C1B430: cmpi.b  #-$14, D4 */
-    FA18_BCC(0xC1B434, 0x6C18, 0xC1B436, 0xC1B44E, L_C1B44E); /* C1B434: bge     $c1b44e */
-L_C1B436:
-    FA18_CHECK(0xC1B436);
-    FA18_OP(0xC1B436, 0x78EC, 0xC1B438); /* C1B436: moveq   #-$14, D4 */
-    FA18_JUMP(0xC1B438, 0x6014, 0xC1B44E, L_C1B44E); /* C1B438: bra     $c1b44e */
-L_C1B43A:
-    FA18_CHECK(0xC1B43A);
-    FA18_OP(0xC1B43A, 0x1829, 0xC1B43E); /* C1B43A: move.b  ($28,A1), D4 */
-    FA18_BCC(0xC1B43E, 0x6C04, 0xC1B440, 0xC1B444, L_C1B444); /* C1B43E: bge     $c1b444 */
-L_C1B440:
-    FA18_CHECK(0xC1B440);
-    FA18_OP(0xC1B440, 0x7801, 0xC1B442); /* C1B440: moveq   #$1, D4 */
-    FA18_JUMP(0xC1B442, 0x6002, 0xC1B446, L_C1B446); /* C1B442: bra     $c1b446 */
-L_C1B444:
-    FA18_CHECK(0xC1B444);
-    FA18_OP(0xC1B444, 0x5204, 0xC1B446); /* C1B444: addq.b  #1, D4 */
-L_C1B446:
-    FA18_CHECK(0xC1B446);
-    FA18_OP(0xC1B446, 0x0C04, 0xC1B44A); /* C1B446: cmpi.b  #$14, D4 */
-    FA18_BCC(0xC1B44A, 0x6F02, 0xC1B44C, 0xC1B44E, L_C1B44E); /* C1B44A: ble     $c1b44e */
-L_C1B44C:
-    FA18_CHECK(0xC1B44C);
-    FA18_OP(0xC1B44C, 0x7814, 0xC1B44E); /* C1B44C: moveq   #$14, D4 */
-L_C1B44E:
-    FA18_CHECK(0xC1B44E);
-    FA18_OP(0xC1B44E, 0x1344, 0xC1B452); /* C1B44E: move.b  D4, ($28,A1) */
-    FA18_OP(0xC1B452, 0x4204, 0xC1B454); /* C1B452: clr.b   D4 */
-    FA18_OP(0xC1B454, 0x1403, 0xC1B456); /* C1B454: move.b  D3, D2 */
-    FA18_OP(0xC1B456, 0x0203, 0xC1B45A); /* C1B456: andi.b  #$c0, D3 */
-    FA18_BCC(0xC1B45A, 0x6730, 0xC1B45C, 0xC1B48C, L_C1B48C); /* C1B45A: beq     $c1b48c */
-L_C1B45C:
-    FA18_CHECK(0xC1B45C);
-    FA18_OP(0xC1B45C, 0x0C03, 0xC1B460); /* C1B45C: cmpi.b  #$40, D3 */
-    FA18_BCC(0xC1B460, 0x6716, 0xC1B462, 0xC1B478, L_C1B478); /* C1B460: beq     $c1b478 */
-L_C1B462:
-    FA18_CHECK(0xC1B462);
-    FA18_OP(0xC1B462, 0x1829, 0xC1B466); /* C1B462: move.b  ($29,A1), D4 */
-    FA18_BCC(0xC1B466, 0x6F04, 0xC1B468, 0xC1B46C, L_C1B46C); /* C1B466: ble     $c1b46c */
-L_C1B468:
-    FA18_CHECK(0xC1B468);
-    FA18_OP(0xC1B468, 0x78FF, 0xC1B46A); /* C1B468: moveq   #-$1, D4 */
-    FA18_JUMP(0xC1B46A, 0x6002, 0xC1B46E, L_C1B46E); /* C1B46A: bra     $c1b46e */
-L_C1B46C:
-    FA18_CHECK(0xC1B46C);
-    FA18_OP(0xC1B46C, 0x5304, 0xC1B46E); /* C1B46C: subq.b  #1, D4 */
-L_C1B46E:
-    FA18_CHECK(0xC1B46E);
-    FA18_OP(0xC1B46E, 0x0C04, 0xC1B472); /* C1B46E: cmpi.b  #-$14, D4 */
-    FA18_BCC(0xC1B472, 0x6C18, 0xC1B474, 0xC1B48C, L_C1B48C); /* C1B472: bge     $c1b48c */
-L_C1B474:
-    FA18_CHECK(0xC1B474);
-    FA18_OP(0xC1B474, 0x78EC, 0xC1B476); /* C1B474: moveq   #-$14, D4 */
-    FA18_JUMP(0xC1B476, 0x6014, 0xC1B48C, L_C1B48C); /* C1B476: bra     $c1b48c */
-L_C1B478:
-    FA18_CHECK(0xC1B478);
-    FA18_OP(0xC1B478, 0x1829, 0xC1B47C); /* C1B478: move.b  ($29,A1), D4 */
-    FA18_BCC(0xC1B47C, 0x6C04, 0xC1B47E, 0xC1B482, L_C1B482); /* C1B47C: bge     $c1b482 */
-L_C1B47E:
-    FA18_CHECK(0xC1B47E);
-    FA18_OP(0xC1B47E, 0x7801, 0xC1B480); /* C1B47E: moveq   #$1, D4 */
-    FA18_JUMP(0xC1B480, 0x6002, 0xC1B484, L_C1B484); /* C1B480: bra     $c1b484 */
-L_C1B482:
-    FA18_CHECK(0xC1B482);
-    FA18_OP(0xC1B482, 0x5204, 0xC1B484); /* C1B482: addq.b  #1, D4 */
-L_C1B484:
-    FA18_CHECK(0xC1B484);
-    FA18_OP(0xC1B484, 0x0C04, 0xC1B488); /* C1B484: cmpi.b  #$14, D4 */
-    FA18_BCC(0xC1B488, 0x6F02, 0xC1B48A, 0xC1B48C, L_C1B48C); /* C1B488: ble     $c1b48c */
-L_C1B48A:
-    FA18_CHECK(0xC1B48A);
-    FA18_OP(0xC1B48A, 0x7814, 0xC1B48C); /* C1B48A: moveq   #$14, D4 */
-L_C1B48C:
-    FA18_CHECK(0xC1B48C);
-    FA18_OP(0xC1B48C, 0x1344, 0xC1B490); /* C1B48C: move.b  D4, ($29,A1) */
-    FA18_OP(0xC1B490, 0x4204, 0xC1B492); /* C1B490: clr.b   D4 */
-    FA18_OP(0xC1B492, 0x0202, 0xC1B496); /* C1B492: andi.b  #$c, D2 */
-    FA18_BCC(0xC1B496, 0x6602, 0xC1B498, 0xC1B49A, L_C1B49A); /* C1B496: bne     $c1b49a */
-L_C1B498:
-    FA18_CHECK(0xC1B498);
-    FA18_JUMP(0xC1B498, 0x6030, 0xC1B4CA, L_C1B4CA); /* C1B498: bra     $c1b4ca */
-L_C1B49A:
-    FA18_CHECK(0xC1B49A);
-    FA18_OP(0xC1B49A, 0x0C02, 0xC1B49E); /* C1B49A: cmpi.b  #$4, D2 */
-    FA18_BCC(0xC1B49E, 0x6716, 0xC1B4A0, 0xC1B4B6, L_C1B4B6); /* C1B49E: beq     $c1b4b6 */
-L_C1B4A0:
-    FA18_CHECK(0xC1B4A0);
-    FA18_OP(0xC1B4A0, 0x1829, 0xC1B4A4); /* C1B4A0: move.b  ($2a,A1), D4 */
-    FA18_BCC(0xC1B4A4, 0x6F04, 0xC1B4A6, 0xC1B4AA, L_C1B4AA); /* C1B4A4: ble     $c1b4aa */
-L_C1B4A6:
-    FA18_CHECK(0xC1B4A6);
-    FA18_OP(0xC1B4A6, 0x78FD, 0xC1B4A8); /* C1B4A6: moveq   #-$3, D4 */
-    FA18_JUMP(0xC1B4A8, 0x6002, 0xC1B4AC, L_C1B4AC); /* C1B4A8: bra     $c1b4ac */
-L_C1B4AA:
-    FA18_CHECK(0xC1B4AA);
-    FA18_OP(0xC1B4AA, 0x5704, 0xC1B4AC); /* C1B4AA: subq.b  #3, D4 */
-L_C1B4AC:
-    FA18_CHECK(0xC1B4AC);
-    FA18_OP(0xC1B4AC, 0x0C04, 0xC1B4B0); /* C1B4AC: cmpi.b  #-$3c, D4 */
-    FA18_BCC(0xC1B4B0, 0x6C18, 0xC1B4B2, 0xC1B4CA, L_C1B4CA); /* C1B4B0: bge     $c1b4ca */
-L_C1B4B2:
-    FA18_CHECK(0xC1B4B2);
-    FA18_OP(0xC1B4B2, 0x78C4, 0xC1B4B4); /* C1B4B2: moveq   #-$3c, D4 */
-    FA18_JUMP(0xC1B4B4, 0x6014, 0xC1B4CA, L_C1B4CA); /* C1B4B4: bra     $c1b4ca */
-L_C1B4B6:
-    FA18_CHECK(0xC1B4B6);
-    FA18_OP(0xC1B4B6, 0x1829, 0xC1B4BA); /* C1B4B6: move.b  ($2a,A1), D4 */
-    FA18_BCC(0xC1B4BA, 0x6C04, 0xC1B4BC, 0xC1B4C0, L_C1B4C0); /* C1B4BA: bge     $c1b4c0 */
-L_C1B4BC:
-    FA18_CHECK(0xC1B4BC);
-    FA18_OP(0xC1B4BC, 0x7803, 0xC1B4BE); /* C1B4BC: moveq   #$3, D4 */
-    FA18_JUMP(0xC1B4BE, 0x6002, 0xC1B4C2, L_C1B4C2); /* C1B4BE: bra     $c1b4c2 */
-L_C1B4C0:
-    FA18_CHECK(0xC1B4C0);
-    FA18_OP(0xC1B4C0, 0x5604, 0xC1B4C2); /* C1B4C0: addq.b  #3, D4 */
-L_C1B4C2:
-    FA18_CHECK(0xC1B4C2);
-    FA18_OP(0xC1B4C2, 0x0C04, 0xC1B4C6); /* C1B4C2: cmpi.b  #$3c, D4 */
-    FA18_BCC(0xC1B4C6, 0x6F02, 0xC1B4C8, 0xC1B4CA, L_C1B4CA); /* C1B4C6: ble     $c1b4ca */
-L_C1B4C8:
-    FA18_CHECK(0xC1B4C8);
-    FA18_OP(0xC1B4C8, 0x783C, 0xC1B4CA); /* C1B4C8: moveq   #$3c, D4 */
-L_C1B4CA:
-    FA18_CHECK(0xC1B4CA);
-    FA18_OP(0xC1B4CA, 0x1344, 0xC1B4CE); /* C1B4CA: move.b  D4, ($2a,A1) */
-    FA18_RETURN(0xC1B4CE, 0x4E75); /* C1B4CE: rts */
-L_C1C1B4:
-    FA18_CHECK(0xC1C1B4);
-    FA18_OP(0xC1C1B4, 0x4AB9, 0xC1C1BA); /* C1C1B4: tst.l   $c4fdbc.l */
-    FA18_BCC(0xC1C1BA, 0x6700, 0xC1C1BE, 0xC1C23C, L_C1C23C); /* C1C1BA: beq     $c1c23c */
-L_C1C1BE:
-    FA18_CHECK(0xC1C1BE);
-    FA18_OP(0xC1C1BE, 0x23F9, 0xC1C1C8); /* C1C1BE: move.l  $c4fda4.l, $c4fdbc.l */
-    FA18_OP(0xC1C1C8, 0x23F9, 0xC1C1D2); /* C1C1C8: move.l  $c4fdb0.l, $c4fdb8.l */
-    FA18_OP(0xC1C1D2, 0x52B9, 0xC1C1D8); /* C1C1D2: addq.l  #1, $c4fdbc.l */
-    FA18_OP(0xC1C1D8, 0x50B9, 0xC1C1DE); /* C1C1D8: addq.l  #8, $c4fdb8.l */
-    FA18_OP(0xC1C1DE, 0x13FC, 0xC1C1E6); /* C1C1DE: move.b  #$3, $c4584b.l */
-    FA18_OP(0xC1C1E6, 0x13FC, 0xC1C1EE); /* C1C1E6: move.b  #$1, $c4582a.l */
-    FA18_JUMP(0xC1C1EE, 0x6000, 0xC1C23C, L_C1C23C); /* C1C1EE: bra     $c1c23c */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-}
-
-int fa18_fn_C1B4D0(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B4D0;
-    case 1: goto L_C1B4E0;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B4D0:
-    FA18_CHECK(0xC1B4D0);
-    FA18_OP(0xC1B4D0, 0x7401, 0xC1B4D2); /* C1B4D0: moveq   #$1, D2 */
-    FA18_JUMP(0xC1B4D2, 0x600C, 0xC1B4E0, L_C1B4E0); /* C1B4D2: bra     $c1b4e0 */
-L_C1B4E0:
-    FA18_CHECK(0xC1B4E0);
-    FA18_OP(0xC1B4E0, 0x1239, 0xC1B4E6); /* C1B4E0: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B4E6, 0x0201, 0xC1B4EA); /* C1B4E6: andi.b  #$fc, D1 */
-    FA18_OP(0xC1B4EA, 0x8202, 0xC1B4EC); /* C1B4EA: or.b    D2, D1 */
-    FA18_OP(0xC1B4EC, 0x13C1, 0xC1B4F2); /* C1B4EC: move.b  D1, $c461e9.l */
-    FA18_RETURN(0xC1B4F2, 0x4E75); /* C1B4F2: rts */
-}
-
-int fa18_fn_C1B4D4(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B4D4;
-    case 1: goto L_C1B4E0;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B4D4:
-    FA18_CHECK(0xC1B4D4);
-    FA18_OP(0xC1B4D4, 0x7402, 0xC1B4D6); /* C1B4D4: moveq   #$2, D2 */
-    FA18_JUMP(0xC1B4D6, 0x6008, 0xC1B4E0, L_C1B4E0); /* C1B4D6: bra     $c1b4e0 */
-L_C1B4E0:
-    FA18_CHECK(0xC1B4E0);
-    FA18_OP(0xC1B4E0, 0x1239, 0xC1B4E6); /* C1B4E0: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B4E6, 0x0201, 0xC1B4EA); /* C1B4E6: andi.b  #$fc, D1 */
-    FA18_OP(0xC1B4EA, 0x8202, 0xC1B4EC); /* C1B4EA: or.b    D2, D1 */
-    FA18_OP(0xC1B4EC, 0x13C1, 0xC1B4F2); /* C1B4EC: move.b  D1, $c461e9.l */
-    FA18_RETURN(0xC1B4F2, 0x4E75); /* C1B4F2: rts */
-}
-
-int fa18_fn_C1B4D8(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B4D8;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B4D8:
-    FA18_CHECK(0xC1B4D8);
-    FA18_OP(0xC1B4D8, 0x4239, 0xC1B4DE); /* C1B4D8: clr.b   $c45870.l */
-    FA18_OP(0xC1B4DE, 0x7400, 0xC1B4E0); /* C1B4DE: moveq   #$0, D2 */
-    FA18_OP(0xC1B4E0, 0x1239, 0xC1B4E6); /* C1B4E0: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B4E6, 0x0201, 0xC1B4EA); /* C1B4E6: andi.b  #$fc, D1 */
-    FA18_OP(0xC1B4EA, 0x8202, 0xC1B4EC); /* C1B4EA: or.b    D2, D1 */
-    FA18_OP(0xC1B4EC, 0x13C1, 0xC1B4F2); /* C1B4EC: move.b  D1, $c461e9.l */
-    FA18_RETURN(0xC1B4F2, 0x4E75); /* C1B4F2: rts */
-}
-
-int fa18_fn_C1B4DE(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B4DE;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B4DE:
-    FA18_CHECK(0xC1B4DE);
-    FA18_OP(0xC1B4DE, 0x7400, 0xC1B4E0); /* C1B4DE: moveq   #$0, D2 */
-    FA18_OP(0xC1B4E0, 0x1239, 0xC1B4E6); /* C1B4E0: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B4E6, 0x0201, 0xC1B4EA); /* C1B4E6: andi.b  #$fc, D1 */
-    FA18_OP(0xC1B4EA, 0x8202, 0xC1B4EC); /* C1B4EA: or.b    D2, D1 */
-    FA18_OP(0xC1B4EC, 0x13C1, 0xC1B4F2); /* C1B4EC: move.b  D1, $c461e9.l */
-    FA18_RETURN(0xC1B4F2, 0x4E75); /* C1B4F2: rts */
-}
-
-int fa18_fn_C1B50C(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B50C;
-    case 1: goto L_C1B516;
-    case 2: goto L_C1B524;
-    case 3: goto L_C1B52C;
-    case 4: goto L_C1B53E;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B50C:
-    FA18_CHECK(0xC1B50C);
-    FA18_OP(0xC1B50C, 0x7420, 0xC1B50E); /* C1B50C: moveq   #$20, D2 */
-    FA18_JUMP(0xC1B50E, 0x6006, 0xC1B516, L_C1B516); /* C1B50E: bra     $c1b516 */
-L_C1B516:
-    FA18_CHECK(0xC1B516);
-    FA18_OP(0xC1B516, 0x13C2, 0xC1B51C); /* C1B516: move.b  D2, $c4582e.l */
-    FA18_OP(0xC1B51C, 0x4A39, 0xC1B522); /* C1B51C: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B522, 0x6608, 0xC1B524, 0xC1B52C, L_C1B52C); /* C1B522: bne     $c1b52c */
-L_C1B524:
-    FA18_CHECK(0xC1B524);
-    FA18_OP(0xC1B524, 0x4A39, 0xC1B52A); /* C1B524: tst.b   $c457b4.l */
-    FA18_BCC(0xC1B52A, 0x6712, 0xC1B52C, 0xC1B53E, L_C1B53E); /* C1B52A: beq     $c1b53e */
-L_C1B52C:
-    FA18_CHECK(0xC1B52C);
-    FA18_OP(0xC1B52C, 0x1239, 0xC1B532); /* C1B52C: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B532, 0x0201, 0xC1B536); /* C1B532: andi.b  #$cf, D1 */
-    FA18_OP(0xC1B536, 0x8202, 0xC1B538); /* C1B536: or.b    D2, D1 */
-    FA18_OP(0xC1B538, 0x13C1, 0xC1B53E); /* C1B538: move.b  D1, $c461e9.l */
-L_C1B53E:
-    FA18_CHECK(0xC1B53E);
-    FA18_RETURN(0xC1B53E, 0x4E75); /* C1B53E: rts */
-}
-
-int fa18_fn_C1B510(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B510;
-    case 1: goto L_C1B516;
-    case 2: goto L_C1B524;
-    case 3: goto L_C1B52C;
-    case 4: goto L_C1B53E;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B510:
-    FA18_CHECK(0xC1B510);
-    FA18_OP(0xC1B510, 0x7410, 0xC1B512); /* C1B510: moveq   #$10, D2 */
-    FA18_JUMP(0xC1B512, 0x6002, 0xC1B516, L_C1B516); /* C1B512: bra     $c1b516 */
-L_C1B516:
-    FA18_CHECK(0xC1B516);
-    FA18_OP(0xC1B516, 0x13C2, 0xC1B51C); /* C1B516: move.b  D2, $c4582e.l */
-    FA18_OP(0xC1B51C, 0x4A39, 0xC1B522); /* C1B51C: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B522, 0x6608, 0xC1B524, 0xC1B52C, L_C1B52C); /* C1B522: bne     $c1b52c */
-L_C1B524:
-    FA18_CHECK(0xC1B524);
-    FA18_OP(0xC1B524, 0x4A39, 0xC1B52A); /* C1B524: tst.b   $c457b4.l */
-    FA18_BCC(0xC1B52A, 0x6712, 0xC1B52C, 0xC1B53E, L_C1B53E); /* C1B52A: beq     $c1b53e */
-L_C1B52C:
-    FA18_CHECK(0xC1B52C);
-    FA18_OP(0xC1B52C, 0x1239, 0xC1B532); /* C1B52C: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B532, 0x0201, 0xC1B536); /* C1B532: andi.b  #$cf, D1 */
-    FA18_OP(0xC1B536, 0x8202, 0xC1B538); /* C1B536: or.b    D2, D1 */
-    FA18_OP(0xC1B538, 0x13C1, 0xC1B53E); /* C1B538: move.b  D1, $c461e9.l */
-L_C1B53E:
-    FA18_CHECK(0xC1B53E);
-    FA18_RETURN(0xC1B53E, 0x4E75); /* C1B53E: rts */
-}
-
-int fa18_fn_C1B514(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B514;
-    case 1: goto L_C1B524;
-    case 2: goto L_C1B52C;
-    case 3: goto L_C1B53E;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B514:
-    FA18_CHECK(0xC1B514);
-    FA18_OP(0xC1B514, 0x7400, 0xC1B516); /* C1B514: moveq   #$0, D2 */
-    FA18_OP(0xC1B516, 0x13C2, 0xC1B51C); /* C1B516: move.b  D2, $c4582e.l */
-    FA18_OP(0xC1B51C, 0x4A39, 0xC1B522); /* C1B51C: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B522, 0x6608, 0xC1B524, 0xC1B52C, L_C1B52C); /* C1B522: bne     $c1b52c */
-L_C1B524:
-    FA18_CHECK(0xC1B524);
-    FA18_OP(0xC1B524, 0x4A39, 0xC1B52A); /* C1B524: tst.b   $c457b4.l */
-    FA18_BCC(0xC1B52A, 0x6712, 0xC1B52C, 0xC1B53E, L_C1B53E); /* C1B52A: beq     $c1b53e */
-L_C1B52C:
-    FA18_CHECK(0xC1B52C);
-    FA18_OP(0xC1B52C, 0x1239, 0xC1B532); /* C1B52C: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B532, 0x0201, 0xC1B536); /* C1B532: andi.b  #$cf, D1 */
-    FA18_OP(0xC1B536, 0x8202, 0xC1B538); /* C1B536: or.b    D2, D1 */
-    FA18_OP(0xC1B538, 0x13C1, 0xC1B53E); /* C1B538: move.b  D1, $c461e9.l */
-L_C1B53E:
-    FA18_CHECK(0xC1B53E);
-    FA18_RETURN(0xC1B53E, 0x4E75); /* C1B53E: rts */
-}
-
-int fa18_fn_C1B558(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B558;
-    case 1: goto L_C1B562;
-    case 2: goto L_C1B570;
-    case 3: goto L_C1B57A;
-    case 4: goto L_C1B58C;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B558:
-    FA18_CHECK(0xC1B558);
-    FA18_OP(0xC1B558, 0x7408, 0xC1B55A); /* C1B558: moveq   #$8, D2 */
-    FA18_JUMP(0xC1B55A, 0x6006, 0xC1B562, L_C1B562); /* C1B55A: bra     $c1b562 */
-L_C1B562:
-    FA18_CHECK(0xC1B562);
-    FA18_OP(0xC1B562, 0x13C2, 0xC1B568); /* C1B562: move.b  D2, $c45830.l */
-    FA18_OP(0xC1B568, 0x4A39, 0xC1B56E); /* C1B568: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B56E, 0x660A, 0xC1B570, 0xC1B57A, L_C1B57A); /* C1B56E: bne     $c1b57a */
-L_C1B570:
-    FA18_CHECK(0xC1B570);
-    FA18_OP(0xC1B570, 0x4A39, 0xC1B576); /* C1B570: tst.b   $c457b4.l */
-    FA18_BCC(0xC1B576, 0x6700, 0xC1B57A, 0xC1B58C, L_C1B58C); /* C1B576: beq     $c1b58c */
-L_C1B57A:
-    FA18_CHECK(0xC1B57A);
-    FA18_OP(0xC1B57A, 0x1239, 0xC1B580); /* C1B57A: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B580, 0x0201, 0xC1B584); /* C1B580: andi.b  #$f3, D1 */
-    FA18_OP(0xC1B584, 0x8202, 0xC1B586); /* C1B584: or.b    D2, D1 */
-    FA18_OP(0xC1B586, 0x13C1, 0xC1B58C); /* C1B586: move.b  D1, $c461e9.l */
-L_C1B58C:
-    FA18_CHECK(0xC1B58C);
-    FA18_RETURN(0xC1B58C, 0x4E75); /* C1B58C: rts */
-}
-
-int fa18_fn_C1B55C(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B55C;
-    case 1: goto L_C1B562;
-    case 2: goto L_C1B570;
-    case 3: goto L_C1B57A;
-    case 4: goto L_C1B58C;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B55C:
-    FA18_CHECK(0xC1B55C);
-    FA18_OP(0xC1B55C, 0x7404, 0xC1B55E); /* C1B55C: moveq   #$4, D2 */
-    FA18_JUMP(0xC1B55E, 0x6002, 0xC1B562, L_C1B562); /* C1B55E: bra     $c1b562 */
-L_C1B562:
-    FA18_CHECK(0xC1B562);
-    FA18_OP(0xC1B562, 0x13C2, 0xC1B568); /* C1B562: move.b  D2, $c45830.l */
-    FA18_OP(0xC1B568, 0x4A39, 0xC1B56E); /* C1B568: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B56E, 0x660A, 0xC1B570, 0xC1B57A, L_C1B57A); /* C1B56E: bne     $c1b57a */
-L_C1B570:
-    FA18_CHECK(0xC1B570);
-    FA18_OP(0xC1B570, 0x4A39, 0xC1B576); /* C1B570: tst.b   $c457b4.l */
-    FA18_BCC(0xC1B576, 0x6700, 0xC1B57A, 0xC1B58C, L_C1B58C); /* C1B576: beq     $c1b58c */
-L_C1B57A:
-    FA18_CHECK(0xC1B57A);
-    FA18_OP(0xC1B57A, 0x1239, 0xC1B580); /* C1B57A: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B580, 0x0201, 0xC1B584); /* C1B580: andi.b  #$f3, D1 */
-    FA18_OP(0xC1B584, 0x8202, 0xC1B586); /* C1B584: or.b    D2, D1 */
-    FA18_OP(0xC1B586, 0x13C1, 0xC1B58C); /* C1B586: move.b  D1, $c461e9.l */
-L_C1B58C:
-    FA18_CHECK(0xC1B58C);
-    FA18_RETURN(0xC1B58C, 0x4E75); /* C1B58C: rts */
-}
-
-int fa18_fn_C1B560(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B560;
-    case 1: goto L_C1B570;
-    case 2: goto L_C1B57A;
-    case 3: goto L_C1B58C;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B560:
-    FA18_CHECK(0xC1B560);
-    FA18_OP(0xC1B560, 0x7400, 0xC1B562); /* C1B560: moveq   #$0, D2 */
-    FA18_OP(0xC1B562, 0x13C2, 0xC1B568); /* C1B562: move.b  D2, $c45830.l */
-    FA18_OP(0xC1B568, 0x4A39, 0xC1B56E); /* C1B568: tst.b   $c457ad.l */
-    FA18_BCC(0xC1B56E, 0x660A, 0xC1B570, 0xC1B57A, L_C1B57A); /* C1B56E: bne     $c1b57a */
-L_C1B570:
-    FA18_CHECK(0xC1B570);
-    FA18_OP(0xC1B570, 0x4A39, 0xC1B576); /* C1B570: tst.b   $c457b4.l */
-    FA18_BCC(0xC1B576, 0x6700, 0xC1B57A, 0xC1B58C, L_C1B58C); /* C1B576: beq     $c1b58c */
-L_C1B57A:
-    FA18_CHECK(0xC1B57A);
-    FA18_OP(0xC1B57A, 0x1239, 0xC1B580); /* C1B57A: move.b  $c461e9.l, D1 */
-    FA18_OP(0xC1B580, 0x0201, 0xC1B584); /* C1B580: andi.b  #$f3, D1 */
-    FA18_OP(0xC1B584, 0x8202, 0xC1B586); /* C1B584: or.b    D2, D1 */
-    FA18_OP(0xC1B586, 0x13C1, 0xC1B58C); /* C1B586: move.b  D1, $c461e9.l */
-L_C1B58C:
-    FA18_CHECK(0xC1B58C);
-    FA18_RETURN(0xC1B58C, 0x4E75); /* C1B58C: rts */
-}
-
-int fa18_fn_C1B602(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B602;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B602:
-    FA18_CHECK(0xC1B602);
-    FA18_OP(0xC1B602, 0x4239, 0xC1B608); /* C1B602: clr.b   $c45870.l */
-    FA18_OP(0xC1B608, 0x4279, 0xC1B60E); /* C1B608: clr.w   $c45778.l */
-    FA18_OP(0xC1B60E, 0x4279, 0xC1B614); /* C1B60E: clr.w   $c4577c.l */
-    FA18_RETURN(0xC1B614, 0x4E75); /* C1B614: rts */
-}
-
-int fa18_fn_C1B7A6(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B7A6;
-    case 1: goto L_C1B7CC;
-    case 2: goto L_C1B7E4;
-    case 3: goto L_C1C23C;
-    case 4: goto L_C1C244;
-    case 5: goto L_C1C24A;
-    case 6: goto L_C1C25C;
-    case 7: goto L_C1C268;
-    case 8: goto L_C1C26A;
-    case 9: goto L_C1C2A4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B7A6:
-    FA18_CHECK(0xC1B7A6);
-    FA18_OP(0xC1B7A6, 0x7804, 0xC1B7A8); /* C1B7A6: moveq   #$4, D4 */
-    FA18_JUMP(0xC1B7A8, 0x6022, 0xC1B7CC, L_C1B7CC); /* C1B7A8: bra     $c1b7cc */
-L_C1B7CC:
-    FA18_CHECK(0xC1B7CC);
-    FA18_OP(0xC1B7CC, 0x13C4, 0xC1B7D2); /* C1B7CC: move.b  D4, $c458b2.l */
-    FA18_OP(0xC1B7D2, 0x13FC, 0xC1B7DA); /* C1B7D2: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B7DA, 0x4A39, 0xC1B7E0); /* C1B7DA: tst.b   $c458b0.l */
-    FA18_BCC(0xC1B7E0, 0x6600, 0xC1B7E4, 0xC1C23C, L_C1C23C); /* C1B7E0: bne     $c1c23c */
-L_C1B7E4:
-    FA18_CHECK(0xC1B7E4);
-    FA18_OP(0xC1B7E4, 0x13FC, 0xC1B7EC); /* C1B7E4: move.b  #$ff, $c458b0.l */
-    FA18_JUMP(0xC1B7EC, 0x6000, 0xC1C23C, L_C1C23C); /* C1B7EC: bra     $c1c23c */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-}
-
-int fa18_fn_C1B906(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B906;
-    case 1: goto L_C1B9CC;
-    case 2: goto L_C1B9E0;
-    case 3: goto L_C1BA1C;
-    case 4: goto L_C1BA28;
-    case 5: goto L_C1BA2E;
-    case 6: goto L_C1BA34;
-    case 7: goto L_C1BA3E;
-    case 8: goto L_C1BA44;
-    case 9: goto L_C1BA48;
-    case 10: goto L_C1BA50;
-    case 11: goto L_C1BA64;
-    case 12: goto L_C1BA8C;
-    case 13: goto L_C1BA98;
-    case 14: goto L_C1BA9E;
-    case 15: goto L_C1BAA4;
-    case 16: goto L_C1BAB0;
-    case 17: goto L_C1BAB6;
-    case 18: goto L_C1BABC;
-    case 19: goto L_C1BAC8;
-    case 20: goto L_C1C23C;
-    case 21: goto L_C1C244;
-    case 22: goto L_C1C24A;
-    case 23: goto L_C1C25C;
-    case 24: goto L_C1C268;
-    case 25: goto L_C1C26A;
-    case 26: goto L_C1C2A4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B906:
-    FA18_CHECK(0xC1B906);
-    FA18_OP(0xC1B906, 0x4207, 0xC1B908); /* C1B906: clr.b   D7 */
-    FA18_OP(0xC1B908, 0x13FC, 0xC1B910); /* C1B908: move.b  #$0, $c457a8.l */
-    FA18_JUMP(0xC1B910, 0x6000, 0xC1B9CC, L_C1B9CC); /* C1B910: bra     $c1b9cc */
-L_C1B9CC:
-    FA18_CHECK(0xC1B9CC);
-    FA18_OP(0xC1B9CC, 0x13C7, 0xC1B9D2); /* C1B9CC: move.b  D7, $c457a7.l */
-    FA18_OP(0xC1B9D2, 0x13FC, 0xC1B9DA); /* C1B9D2: move.b  #$3, $c45836.l */
-    FA18_CALL(0xC1B9DA, 0x4EB9, 0xC1B9E0, 17, 0); /* C1B9DA: jsr     $c08324.l */
-L_C1B9E0:
-    FA18_CHECK(0xC1B9E0);
-    FA18_OP(0xC1B9E0, 0x33FC, 0xC1B9E8); /* C1B9E0: move.w  #$ffff, $c45936.l */
-    FA18_OP(0xC1B9E8, 0x13FC, 0xC1B9F0); /* C1B9E8: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B9F0, 0x13FC, 0xC1B9F8); /* C1B9F0: move.b  #$0, $c457a9.l */
-    FA18_OP(0xC1B9F8, 0x13FC, 0xC1BA00); /* C1B9F8: move.b  #$ff, $c45891.l */
-    FA18_OP(0xC1BA00, 0x41F9, 0xC1BA06); /* C1BA00: lea     $c46184.l, A0 */
-    FA18_OP(0xC1BA06, 0xD0F9, 0xC1BA0C); /* C1BA06: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1BA0C, 0x1828, 0xC1BA10); /* C1BA0C: move.b  ($62,A0), D4 */
-    FA18_OP(0xC1BA10, 0x0204, 0xC1BA14); /* C1BA10: andi.b  #$f0, D4 */
-    FA18_OP(0xC1BA14, 0x0C04, 0xC1BA18); /* C1BA14: cmpi.b  #$30, D4 */
-    FA18_BCC(0xC1BA18, 0x6700, 0xC1BA1C, 0xC1C23C, L_C1C23C); /* C1BA18: beq     $c1c23c */
-L_C1BA1C:
-    FA18_CHECK(0xC1BA1C);
-    FA18_OP(0xC1BA1C, 0x1839, 0xC1BA22); /* C1BA1C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA22, 0x0C04, 0xC1BA26); /* C1BA22: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA26, 0x6D3C, 0xC1BA28, 0xC1BA64, L_C1BA64); /* C1BA26: blt     $c1ba64 */
-L_C1BA28:
-    FA18_CHECK(0xC1BA28);
-    FA18_OP(0xC1BA28, 0x0C04, 0xC1BA2C); /* C1BA28: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA2C, 0x6F06, 0xC1BA2E, 0xC1BA34, L_C1BA34); /* C1BA2C: ble     $c1ba34 */
-L_C1BA2E:
-    FA18_CHECK(0xC1BA2E);
-    FA18_OP(0xC1BA2E, 0x0C04, 0xC1BA32); /* C1BA2E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BA32, 0x6D30, 0xC1BA34, 0xC1BA64, L_C1BA64); /* C1BA32: blt     $c1ba64 */
-L_C1BA34:
-    FA18_CHECK(0xC1BA34);
-    FA18_OP(0xC1BA34, 0x3E3C, 0xC1BA38); /* C1BA34: move.w  #$b3, D7 */
-    FA18_OP(0xC1BA38, 0x0C04, 0xC1BA3C); /* C1BA38: cmpi.b  #$5, D4 */
-    FA18_BCC(0xC1BA3C, 0x6D06, 0xC1BA3E, 0xC1BA44, L_C1BA44); /* C1BA3C: blt     $c1ba44 */
-L_C1BA3E:
-    FA18_CHECK(0xC1BA3E);
-    FA18_OP(0xC1BA3E, 0x0C04, 0xC1BA42); /* C1BA3E: cmpi.b  #$7, D4 */
-    FA18_BCC(0xC1BA42, 0x6F04, 0xC1BA44, 0xC1BA48, L_C1BA48); /* C1BA42: ble     $c1ba48 */
-L_C1BA44:
-    FA18_CHECK(0xC1BA44);
-    FA18_OP(0xC1BA44, 0x3E3C, 0xC1BA48); /* C1BA44: move.w  #$a7, D7 */
-L_C1BA48:
-    FA18_CHECK(0xC1BA48);
-    FA18_OP(0xC1BA48, 0xBE79, 0xC1BA4E); /* C1BA48: cmp.w   $c45984.l, D7 */
-    FA18_BCC(0xC1BA4E, 0x6614, 0xC1BA50, 0xC1BA64, L_C1BA64); /* C1BA4E: bne     $c1ba64 */
-L_C1BA50:
-    FA18_CHECK(0xC1BA50);
-    FA18_OP(0xC1BA50, 0x33FC, 0xC1BA58); /* C1BA50: move.w  #$32, $c45986.l */
-    FA18_OP(0xC1BA58, 0x33FC, 0xC1BA60); /* C1BA58: move.w  #$320, $c45988.l */
-    FA18_JUMP(0xC1BA60, 0x6000, 0xC1C23C, L_C1C23C); /* C1BA60: bra     $c1c23c */
-L_C1BA64:
-    FA18_CHECK(0xC1BA64);
-    FA18_OP(0xC1BA64, 0x41F9, 0xC1BA6A); /* C1BA64: lea     $c1bad4.l, A0 */
-    FA18_OP(0xC1BA6A, 0x1839, 0xC1BA70); /* C1BA6A: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA70, 0x4884, 0xC1BA72); /* C1BA70: ext.w   D4 */
-    FA18_OP(0xC1BA72, 0x1830, 0xC1BA76); /* C1BA72: move.b  (A0,D4.w), D4 */
-    FA18_OP(0xC1BA76, 0x4884, 0xC1BA78); /* C1BA76: ext.w   D4 */
-    FA18_OP(0xC1BA78, 0x33C4, 0xC1BA7E); /* C1BA78: move.w  D4, $c45986.l */
-    FA18_OP(0xC1BA7E, 0xE944, 0xC1BA80); /* C1BA7E: asl.w   #4, D4 */
-    FA18_OP(0xC1BA80, 0x33C4, 0xC1BA86); /* C1BA80: move.w  D4, $c45988.l */
-    FA18_CALL(0xC1BA86, 0x4EB9, 0xC1BA8C, 16, 0); /* C1BA86: jsr     $c082b8.l */
-L_C1BA8C:
-    FA18_CHECK(0xC1BA8C);
-    FA18_OP(0xC1BA8C, 0x1839, 0xC1BA92); /* C1BA8C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA92, 0x0C04, 0xC1BA96); /* C1BA92: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA96, 0x6D0C, 0xC1BA98, 0xC1BAA4, L_C1BAA4); /* C1BA96: blt     $c1baa4 */
-L_C1BA98:
-    FA18_CHECK(0xC1BA98);
-    FA18_OP(0xC1BA98, 0x0C04, 0xC1BA9C); /* C1BA98: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA9C, 0x6F12, 0xC1BA9E, 0xC1BAB0, L_C1BAB0); /* C1BA9C: ble     $c1bab0 */
-L_C1BA9E:
-    FA18_CHECK(0xC1BA9E);
-    FA18_OP(0xC1BA9E, 0x0C04, 0xC1BAA2); /* C1BA9E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BAA2, 0x6C0C, 0xC1BAA4, 0xC1BAB0, L_C1BAB0); /* C1BAA2: bge     $c1bab0 */
-L_C1BAA4:
-    FA18_CHECK(0xC1BAA4);
-    FA18_OP(0xC1BAA4, 0x33FC, 0xC1BAAC); /* C1BAA4: move.w  #$90, $c45984.l */
-    FA18_JUMP(0xC1BAAC, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAAC: bra     $c1c23c */
-L_C1BAB0:
-    FA18_CHECK(0xC1BAB0);
-    FA18_OP(0xC1BAB0, 0x0C04, 0xC1BAB4); /* C1BAB0: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1BAB4, 0x6F12, 0xC1BAB6, 0xC1BAC8, L_C1BAC8); /* C1BAB4: ble     $c1bac8 */
-L_C1BAB6:
-    FA18_CHECK(0xC1BAB6);
-    FA18_OP(0xC1BAB6, 0x0C04, 0xC1BABA); /* C1BAB6: cmpi.b  #$8, D4 */
-    FA18_BCC(0xC1BABA, 0x6C0C, 0xC1BABC, 0xC1BAC8, L_C1BAC8); /* C1BABA: bge     $c1bac8 */
-L_C1BABC:
-    FA18_CHECK(0xC1BABC);
-    FA18_OP(0xC1BABC, 0x33FC, 0xC1BAC4); /* C1BABC: move.w  #$b3, $c45984.l */
-    FA18_JUMP(0xC1BAC4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAC4: bra     $c1c23c */
-L_C1BAC8:
-    FA18_CHECK(0xC1BAC8);
-    FA18_OP(0xC1BAC8, 0x33FC, 0xC1BAD0); /* C1BAC8: move.w  #$a7, $c45984.l */
-    FA18_JUMP(0xC1BAD0, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAD0: bra     $c1c23c */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-}
-
-int fa18_fn_C1BA86(int entry) {
-    switch (entry) {
-    case 0: goto L_C1BA86;
-    case 1: goto L_C1BA8C;
-    case 2: goto L_C1BA98;
-    case 3: goto L_C1BA9E;
-    case 4: goto L_C1BAA4;
-    case 5: goto L_C1BAB0;
-    case 6: goto L_C1BAB6;
-    case 7: goto L_C1BABC;
-    case 8: goto L_C1BAC8;
-    case 9: goto L_C1C23C;
-    case 10: goto L_C1C244;
-    case 11: goto L_C1C24A;
-    case 12: goto L_C1C25C;
-    case 13: goto L_C1C268;
-    case 14: goto L_C1C26A;
-    case 15: goto L_C1C2A4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1BA86:
-    FA18_CHECK(0xC1BA86);
-    FA18_CALL(0xC1BA86, 0x4EB9, 0xC1BA8C, 16, 0); /* C1BA86: jsr     $c082b8.l */
-L_C1BA8C:
-    FA18_CHECK(0xC1BA8C);
-    FA18_OP(0xC1BA8C, 0x1839, 0xC1BA92); /* C1BA8C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA92, 0x0C04, 0xC1BA96); /* C1BA92: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA96, 0x6D0C, 0xC1BA98, 0xC1BAA4, L_C1BAA4); /* C1BA96: blt     $c1baa4 */
-L_C1BA98:
-    FA18_CHECK(0xC1BA98);
-    FA18_OP(0xC1BA98, 0x0C04, 0xC1BA9C); /* C1BA98: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA9C, 0x6F12, 0xC1BA9E, 0xC1BAB0, L_C1BAB0); /* C1BA9C: ble     $c1bab0 */
-L_C1BA9E:
-    FA18_CHECK(0xC1BA9E);
-    FA18_OP(0xC1BA9E, 0x0C04, 0xC1BAA2); /* C1BA9E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BAA2, 0x6C0C, 0xC1BAA4, 0xC1BAB0, L_C1BAB0); /* C1BAA2: bge     $c1bab0 */
-L_C1BAA4:
-    FA18_CHECK(0xC1BAA4);
-    FA18_OP(0xC1BAA4, 0x33FC, 0xC1BAAC); /* C1BAA4: move.w  #$90, $c45984.l */
-    FA18_JUMP(0xC1BAAC, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAAC: bra     $c1c23c */
-L_C1BAB0:
-    FA18_CHECK(0xC1BAB0);
-    FA18_OP(0xC1BAB0, 0x0C04, 0xC1BAB4); /* C1BAB0: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1BAB4, 0x6F12, 0xC1BAB6, 0xC1BAC8, L_C1BAC8); /* C1BAB4: ble     $c1bac8 */
-L_C1BAB6:
-    FA18_CHECK(0xC1BAB6);
-    FA18_OP(0xC1BAB6, 0x0C04, 0xC1BABA); /* C1BAB6: cmpi.b  #$8, D4 */
-    FA18_BCC(0xC1BABA, 0x6C0C, 0xC1BABC, 0xC1BAC8, L_C1BAC8); /* C1BABA: bge     $c1bac8 */
-L_C1BABC:
-    FA18_CHECK(0xC1BABC);
-    FA18_OP(0xC1BABC, 0x33FC, 0xC1BAC4); /* C1BABC: move.w  #$b3, $c45984.l */
-    FA18_JUMP(0xC1BAC4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAC4: bra     $c1c23c */
-L_C1BAC8:
-    FA18_CHECK(0xC1BAC8);
-    FA18_OP(0xC1BAC8, 0x33FC, 0xC1BAD0); /* C1BAC8: move.w  #$a7, $c45984.l */
-    FA18_JUMP(0xC1BAD0, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAD0: bra     $c1c23c */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-}
-
-int fa18_fn_C1BEE8(int entry) {
-    switch (entry) {
-    case 0: goto L_C1B906;
-    case 1: goto L_C1B9CC;
-    case 2: goto L_C1B9E0;
-    case 3: goto L_C1BA1C;
-    case 4: goto L_C1BA28;
-    case 5: goto L_C1BA2E;
-    case 6: goto L_C1BA34;
-    case 7: goto L_C1BA3E;
-    case 8: goto L_C1BA44;
-    case 9: goto L_C1BA48;
-    case 10: goto L_C1BA50;
-    case 11: goto L_C1BA64;
-    case 12: goto L_C1BA8C;
-    case 13: goto L_C1BA98;
-    case 14: goto L_C1BA9E;
-    case 15: goto L_C1BAA4;
-    case 16: goto L_C1BAB0;
-    case 17: goto L_C1BAB6;
-    case 18: goto L_C1BABC;
-    case 19: goto L_C1BAC8;
-    case 20: goto L_C1BEE8;
-    case 21: goto L_C1BF16;
-    case 22: goto L_C1BF1E;
-    case 23: goto L_C1BF34;
-    case 24: goto L_C1BF52;
-    case 25: goto L_C1BF6C;
-    case 26: goto L_C1C23C;
-    case 27: goto L_C1C244;
-    case 28: goto L_C1C24A;
-    case 29: goto L_C1C25C;
-    case 30: goto L_C1C268;
-    case 31: goto L_C1C26A;
-    case 32: goto L_C1C2A4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1B906:
-    FA18_CHECK(0xC1B906);
-    FA18_OP(0xC1B906, 0x4207, 0xC1B908); /* C1B906: clr.b   D7 */
-    FA18_OP(0xC1B908, 0x13FC, 0xC1B910); /* C1B908: move.b  #$0, $c457a8.l */
-    FA18_JUMP(0xC1B910, 0x6000, 0xC1B9CC, L_C1B9CC); /* C1B910: bra     $c1b9cc */
-L_C1B9CC:
-    FA18_CHECK(0xC1B9CC);
-    FA18_OP(0xC1B9CC, 0x13C7, 0xC1B9D2); /* C1B9CC: move.b  D7, $c457a7.l */
-    FA18_OP(0xC1B9D2, 0x13FC, 0xC1B9DA); /* C1B9D2: move.b  #$3, $c45836.l */
-    FA18_CALL(0xC1B9DA, 0x4EB9, 0xC1B9E0, 17, 0); /* C1B9DA: jsr     $c08324.l */
-L_C1B9E0:
-    FA18_CHECK(0xC1B9E0);
-    FA18_OP(0xC1B9E0, 0x33FC, 0xC1B9E8); /* C1B9E0: move.w  #$ffff, $c45936.l */
-    FA18_OP(0xC1B9E8, 0x13FC, 0xC1B9F0); /* C1B9E8: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1B9F0, 0x13FC, 0xC1B9F8); /* C1B9F0: move.b  #$0, $c457a9.l */
-    FA18_OP(0xC1B9F8, 0x13FC, 0xC1BA00); /* C1B9F8: move.b  #$ff, $c45891.l */
-    FA18_OP(0xC1BA00, 0x41F9, 0xC1BA06); /* C1BA00: lea     $c46184.l, A0 */
-    FA18_OP(0xC1BA06, 0xD0F9, 0xC1BA0C); /* C1BA06: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1BA0C, 0x1828, 0xC1BA10); /* C1BA0C: move.b  ($62,A0), D4 */
-    FA18_OP(0xC1BA10, 0x0204, 0xC1BA14); /* C1BA10: andi.b  #$f0, D4 */
-    FA18_OP(0xC1BA14, 0x0C04, 0xC1BA18); /* C1BA14: cmpi.b  #$30, D4 */
-    FA18_BCC(0xC1BA18, 0x6700, 0xC1BA1C, 0xC1C23C, L_C1C23C); /* C1BA18: beq     $c1c23c */
-L_C1BA1C:
-    FA18_CHECK(0xC1BA1C);
-    FA18_OP(0xC1BA1C, 0x1839, 0xC1BA22); /* C1BA1C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA22, 0x0C04, 0xC1BA26); /* C1BA22: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA26, 0x6D3C, 0xC1BA28, 0xC1BA64, L_C1BA64); /* C1BA26: blt     $c1ba64 */
-L_C1BA28:
-    FA18_CHECK(0xC1BA28);
-    FA18_OP(0xC1BA28, 0x0C04, 0xC1BA2C); /* C1BA28: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA2C, 0x6F06, 0xC1BA2E, 0xC1BA34, L_C1BA34); /* C1BA2C: ble     $c1ba34 */
-L_C1BA2E:
-    FA18_CHECK(0xC1BA2E);
-    FA18_OP(0xC1BA2E, 0x0C04, 0xC1BA32); /* C1BA2E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BA32, 0x6D30, 0xC1BA34, 0xC1BA64, L_C1BA64); /* C1BA32: blt     $c1ba64 */
-L_C1BA34:
-    FA18_CHECK(0xC1BA34);
-    FA18_OP(0xC1BA34, 0x3E3C, 0xC1BA38); /* C1BA34: move.w  #$b3, D7 */
-    FA18_OP(0xC1BA38, 0x0C04, 0xC1BA3C); /* C1BA38: cmpi.b  #$5, D4 */
-    FA18_BCC(0xC1BA3C, 0x6D06, 0xC1BA3E, 0xC1BA44, L_C1BA44); /* C1BA3C: blt     $c1ba44 */
-L_C1BA3E:
-    FA18_CHECK(0xC1BA3E);
-    FA18_OP(0xC1BA3E, 0x0C04, 0xC1BA42); /* C1BA3E: cmpi.b  #$7, D4 */
-    FA18_BCC(0xC1BA42, 0x6F04, 0xC1BA44, 0xC1BA48, L_C1BA48); /* C1BA42: ble     $c1ba48 */
-L_C1BA44:
-    FA18_CHECK(0xC1BA44);
-    FA18_OP(0xC1BA44, 0x3E3C, 0xC1BA48); /* C1BA44: move.w  #$a7, D7 */
-L_C1BA48:
-    FA18_CHECK(0xC1BA48);
-    FA18_OP(0xC1BA48, 0xBE79, 0xC1BA4E); /* C1BA48: cmp.w   $c45984.l, D7 */
-    FA18_BCC(0xC1BA4E, 0x6614, 0xC1BA50, 0xC1BA64, L_C1BA64); /* C1BA4E: bne     $c1ba64 */
-L_C1BA50:
-    FA18_CHECK(0xC1BA50);
-    FA18_OP(0xC1BA50, 0x33FC, 0xC1BA58); /* C1BA50: move.w  #$32, $c45986.l */
-    FA18_OP(0xC1BA58, 0x33FC, 0xC1BA60); /* C1BA58: move.w  #$320, $c45988.l */
-    FA18_JUMP(0xC1BA60, 0x6000, 0xC1C23C, L_C1C23C); /* C1BA60: bra     $c1c23c */
-L_C1BA64:
-    FA18_CHECK(0xC1BA64);
-    FA18_OP(0xC1BA64, 0x41F9, 0xC1BA6A); /* C1BA64: lea     $c1bad4.l, A0 */
-    FA18_OP(0xC1BA6A, 0x1839, 0xC1BA70); /* C1BA6A: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA70, 0x4884, 0xC1BA72); /* C1BA70: ext.w   D4 */
-    FA18_OP(0xC1BA72, 0x1830, 0xC1BA76); /* C1BA72: move.b  (A0,D4.w), D4 */
-    FA18_OP(0xC1BA76, 0x4884, 0xC1BA78); /* C1BA76: ext.w   D4 */
-    FA18_OP(0xC1BA78, 0x33C4, 0xC1BA7E); /* C1BA78: move.w  D4, $c45986.l */
-    FA18_OP(0xC1BA7E, 0xE944, 0xC1BA80); /* C1BA7E: asl.w   #4, D4 */
-    FA18_OP(0xC1BA80, 0x33C4, 0xC1BA86); /* C1BA80: move.w  D4, $c45988.l */
-    FA18_CALL(0xC1BA86, 0x4EB9, 0xC1BA8C, 16, 0); /* C1BA86: jsr     $c082b8.l */
-L_C1BA8C:
-    FA18_CHECK(0xC1BA8C);
-    FA18_OP(0xC1BA8C, 0x1839, 0xC1BA92); /* C1BA8C: move.b  $c457a7.l, D4 */
-    FA18_OP(0xC1BA92, 0x0C04, 0xC1BA96); /* C1BA92: cmpi.b  #$3, D4 */
-    FA18_BCC(0xC1BA96, 0x6D0C, 0xC1BA98, 0xC1BAA4, L_C1BAA4); /* C1BA96: blt     $c1baa4 */
-L_C1BA98:
-    FA18_CHECK(0xC1BA98);
-    FA18_OP(0xC1BA98, 0x0C04, 0xC1BA9C); /* C1BA98: cmpi.b  #$9, D4 */
-    FA18_BCC(0xC1BA9C, 0x6F12, 0xC1BA9E, 0xC1BAB0, L_C1BAB0); /* C1BA9C: ble     $c1bab0 */
-L_C1BA9E:
-    FA18_CHECK(0xC1BA9E);
-    FA18_OP(0xC1BA9E, 0x0C04, 0xC1BAA2); /* C1BA9E: cmpi.b  #$c, D4 */
-    FA18_BCC(0xC1BAA2, 0x6C0C, 0xC1BAA4, 0xC1BAB0, L_C1BAB0); /* C1BAA2: bge     $c1bab0 */
-L_C1BAA4:
-    FA18_CHECK(0xC1BAA4);
-    FA18_OP(0xC1BAA4, 0x33FC, 0xC1BAAC); /* C1BAA4: move.w  #$90, $c45984.l */
-    FA18_JUMP(0xC1BAAC, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAAC: bra     $c1c23c */
-L_C1BAB0:
-    FA18_CHECK(0xC1BAB0);
-    FA18_OP(0xC1BAB0, 0x0C04, 0xC1BAB4); /* C1BAB0: cmpi.b  #$4, D4 */
-    FA18_BCC(0xC1BAB4, 0x6F12, 0xC1BAB6, 0xC1BAC8, L_C1BAC8); /* C1BAB4: ble     $c1bac8 */
-L_C1BAB6:
-    FA18_CHECK(0xC1BAB6);
-    FA18_OP(0xC1BAB6, 0x0C04, 0xC1BABA); /* C1BAB6: cmpi.b  #$8, D4 */
-    FA18_BCC(0xC1BABA, 0x6C0C, 0xC1BABC, 0xC1BAC8, L_C1BAC8); /* C1BABA: bge     $c1bac8 */
-L_C1BABC:
-    FA18_CHECK(0xC1BABC);
-    FA18_OP(0xC1BABC, 0x33FC, 0xC1BAC4); /* C1BABC: move.w  #$b3, $c45984.l */
-    FA18_JUMP(0xC1BAC4, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAC4: bra     $c1c23c */
-L_C1BAC8:
-    FA18_CHECK(0xC1BAC8);
-    FA18_OP(0xC1BAC8, 0x33FC, 0xC1BAD0); /* C1BAC8: move.w  #$a7, $c45984.l */
-    FA18_JUMP(0xC1BAD0, 0x6000, 0xC1C23C, L_C1C23C); /* C1BAD0: bra     $c1c23c */
-L_C1BEE8:
-    FA18_CHECK(0xC1BEE8);
-    FA18_OP(0xC1BEE8, 0x13FC, 0xC1BEF0); /* C1BEE8: move.b  #$ff, $c45858.l */
-    FA18_OP(0xC1BEF0, 0x33FC, 0xC1BEF8); /* C1BEF0: move.w  #$ffff, $c4593a.l */
-    FA18_OP(0xC1BEF8, 0x13FC, 0xC1BF00); /* C1BEF8: move.b  #$fe, $c458b0.l */
-    FA18_OP(0xC1BF00, 0x33C1, 0xC1BF06); /* C1BF00: move.w  D1, $c458dc.l */
-    FA18_OP(0xC1BF06, 0xE141, 0xC1BF08); /* C1BF06: asl.w   #8, D1 */
-    FA18_OP(0xC1BF08, 0xD241, 0xC1BF0A); /* C1BF08: add.w   D1, D1 */
-    FA18_OP(0xC1BF0A, 0x33C1, 0xC1BF10); /* C1BF0A: move.w  D1, $c458de.l */
-    FA18_CALL(0xC1BF10, 0x4EB9, 0xC1BF16, 17, 0); /* C1BF10: jsr     $c08324.l */
-L_C1BF16:
-    FA18_CHECK(0xC1BF16);
-    FA18_OP(0xC1BF16, 0x4A39, 0xC1BF1C); /* C1BF16: tst.b   $c45785.l */
-    FA18_BCC(0xC1BF1C, 0x6716, 0xC1BF1E, 0xC1BF34, L_C1BF34); /* C1BF1C: beq     $c1bf34 */
-L_C1BF1E:
-    FA18_CHECK(0xC1BF1E);
-    FA18_OP(0xC1BF1E, 0x13F9, 0xC1BF28); /* C1BF1E: move.b  $c45833.l, $c45785.l */
-    FA18_OP(0xC1BF28, 0x13FC, 0xC1BF30); /* C1BF28: move.b  #$3, $c45836.l */
-    FA18_JUMP(0xC1BF30, 0x6000, 0xC1C23C, L_C1C23C); /* C1BF30: bra     $c1c23c */
-L_C1BF34:
-    FA18_CHECK(0xC1BF34);
-    FA18_OP(0xC1BF34, 0x41F9, 0xC1BF3A); /* C1BF34: lea     $c46184.l, A0 */
-    FA18_OP(0xC1BF3A, 0x33F0, 0xC1BF42); /* C1BF3A: move.w  ($68,A0,D1.w), $c4592a.l */
-    FA18_OP(0xC1BF42, 0x1830, 0xC1BF46); /* C1BF42: move.b  ($62,A0,D1.w), D4 */
-    FA18_OP(0xC1BF46, 0x0204, 0xC1BF4A); /* C1BF46: andi.b  #$f0, D4 */
-    FA18_OP(0xC1BF4A, 0x0C04, 0xC1BF4E); /* C1BF4A: cmpi.b  #$30, D4 */
-    FA18_BCC(0xC1BF4E, 0x6600, 0xC1BF52, 0xC1B906, L_C1B906); /* C1BF4E: bne     $c1b906 */
-L_C1BF52:
-    FA18_CHECK(0xC1BF52);
-    FA18_OP(0xC1BF52, 0x33FC, 0xC1BF5A); /* C1BF52: move.w  #$32, $c45986.l */
-    FA18_OP(0xC1BF5A, 0x33FC, 0xC1BF62); /* C1BF5A: move.w  #$320, $c45988.l */
-    FA18_OP(0xC1BF62, 0x4239, 0xC1BF68); /* C1BF62: clr.b   $c457a7.l */
-    FA18_CALL(0xC1BF68, 0x6100, 0xC1BF6C, 131, 0); /* C1BF68: bsr     $c1ba86 */
-L_C1BF6C:
-    FA18_CHECK(0xC1BF6C);
-    FA18_OP(0xC1BF6C, 0x33FC, 0xC1BF74); /* C1BF6C: move.w  #$a7, $c45984.l */
-    FA18_JUMP(0xC1BF74, 0x6000, 0xC1C23C, L_C1C23C); /* C1BF74: bra     $c1c23c */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-}
-
-int fa18_fn_C1C214(int entry) {
-    switch (entry) {
-    case 0: goto L_C1C214;
-    case 1: goto L_C1C218;
-    case 2: goto L_C1C21E;
-    case 3: goto L_C1C23C;
-    case 4: goto L_C1C244;
-    case 5: goto L_C1C24A;
-    case 6: goto L_C1C25C;
-    case 7: goto L_C1C268;
-    case 8: goto L_C1C26A;
-    case 9: goto L_C1C2A4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1C214:
-    FA18_CHECK(0xC1C214);
-    FA18_OP(0xC1C214, 0x4A10, 0xC1C216); /* C1C214: tst.b   (A0) */
-    FA18_BCC(0xC1C216, 0x6706, 0xC1C218, 0xC1C21E, L_C1C21E); /* C1C216: beq     $c1c21e */
-L_C1C218:
-    FA18_CHECK(0xC1C218);
-    FA18_OP(0xC1C218, 0x10BC, 0xC1C21C); /* C1C218: move.b  #$0, (A0) */
-    FA18_JUMP(0xC1C21C, 0x601E, 0xC1C23C, L_C1C23C); /* C1C21C: bra     $c1c23c */
-L_C1C21E:
-    FA18_CHECK(0xC1C21E);
-    FA18_OP(0xC1C21E, 0x10BC, 0xC1C222); /* C1C21E: move.b  #$1, (A0) */
-    FA18_JUMP(0xC1C222, 0x6018, 0xC1C23C, L_C1C23C); /* C1C222: bra     $c1c23c */
-L_C1C23C:
-    FA18_CHECK(0xC1C23C);
-    FA18_OP(0xC1C23C, 0x4A39, 0xC1C242); /* C1C23C: tst.b   $c457a3.l */
-    FA18_BCC(0xC1C242, 0x6660, 0xC1C244, 0xC1C2A4, L_C1C2A4); /* C1C242: bne     $c1c2a4 */
-L_C1C244:
-    FA18_CHECK(0xC1C244);
-    FA18_OP(0xC1C244, 0x0800, 0xC1C248); /* C1C244: btst    #$7, D0 */
-    FA18_BCC(0xC1C248, 0x665A, 0xC1C24A, 0xC1C2A4, L_C1C2A4); /* C1C248: bne     $c1c2a4 */
-L_C1C24A:
-    FA18_CHECK(0xC1C24A);
-    FA18_OP(0xC1C24A, 0x13FC, 0xC1C252); /* C1C24A: move.b  #$1, $c457a3.l */
-    FA18_OP(0xC1C252, 0x0C39, 0xC1C25A); /* C1C252: cmpi.b  #$a, $c457f9.l */
-    FA18_BCC(0xC1C25A, 0x6C48, 0xC1C25C, 0xC1C2A4, L_C1C2A4); /* C1C25A: bge     $c1c2a4 */
-L_C1C25C:
-    FA18_CHECK(0xC1C25C);
-    FA18_OP(0xC1C25C, 0x1839, 0xC1C262); /* C1C25C: move.b  $c457f7.l, D4 */
-    FA18_OP(0xC1C262, 0x0C04, 0xC1C266); /* C1C262: cmpi.b  #$a, D4 */
-    FA18_BCC(0xC1C266, 0x6D02, 0xC1C268, 0xC1C26A, L_C1C26A); /* C1C266: blt     $c1c26a */
-L_C1C268:
-    FA18_CHECK(0xC1C268);
-    FA18_OP(0xC1C268, 0x7800, 0xC1C26A); /* C1C268: moveq   #$0, D4 */
-L_C1C26A:
-    FA18_CHECK(0xC1C26A);
-    FA18_OP(0xC1C26A, 0x4884, 0xC1C26C); /* C1C26A: ext.w   D4 */
-    FA18_OP(0xC1C26C, 0x47F9, 0xC1C272); /* C1C26C: lea     $c457e1.l, A3 */
-    FA18_OP(0xC1C272, 0x1780, 0xC1C276); /* C1C272: move.b  D0, (A3,D4.w) */
-    FA18_OP(0xC1C276, 0x0240, 0xC1C27A); /* C1C276: andi.w  #$ff, D0 */
-    FA18_OP(0xC1C27A, 0x47F9, 0xC1C280); /* C1C27A: lea     $c331ce.l, A3 */
-    FA18_OP(0xC1C280, 0x1033, 0xC1C284); /* C1C280: move.b  (A3,D0.w), D0 */
-    FA18_OP(0xC1C284, 0x5204, 0xC1C286); /* C1C284: addq.b  #1, D4 */
-    FA18_OP(0xC1C286, 0x13C4, 0xC1C28C); /* C1C286: move.b  D4, $c457f7.l */
-    FA18_OP(0xC1C28C, 0x5239, 0xC1C292); /* C1C28C: addq.b  #1, $c457f9.l */
-    FA18_OP(0xC1C292, 0x47F9, 0xC1C298); /* C1C292: lea     $c457eb.l, A3 */
-    FA18_OP(0xC1C298, 0x1839, 0xC1C29E); /* C1C298: move.b  $c457f6.l, D4 */
-    FA18_OP(0xC1C29E, 0x4884, 0xC1C2A0); /* C1C29E: ext.w   D4 */
-    FA18_OP(0xC1C2A0, 0x1780, 0xC1C2A4); /* C1C2A0: move.b  D0, (A3,D4.w) */
-L_C1C2A4:
-    FA18_CHECK(0xC1C2A4);
-    FA18_OP(0xC1C2A4, 0x4239, 0xC1C2AA); /* C1C2A4: clr.b   $c45878.l */
-    FA18_OP(0xC1C2AA, 0x4239, 0xC1C2B0); /* C1C2AA: clr.b   $c45879.l */
-    FA18_OP(0xC1C2B0, 0x4239, 0xC1C2B6); /* C1C2B0: clr.b   $c4587a.l */
-    FA18_RETURN(0xC1C2B6, 0x4E75); /* C1C2B6: rts */
-}
-
-int fa18_fn_C1C2C8(int entry) {
-    switch (entry) {
-    case 0: goto L_C1C2C8;
-    case 1: goto L_C1C2D4;
-    case 2: goto L_C1C2F4;
-    case 3: goto L_C1C2FA;
-    case 4: goto L_C1C308;
-    case 5: goto L_C1C30E;
-    case 6: goto L_C1C322;
-    case 7: goto L_C1C328;
-    case 8: goto L_C1C334;
-    case 9: goto L_C1C340;
-    case 10: goto L_C1C34A;
-    case 11: goto L_C1C352;
-    case 12: goto L_C1C368;
-    case 13: goto L_C1C36A;
-    case 14: goto L_C1C36E;
-    case 15: goto L_C1C370;
-    case 16: goto L_C1C374;
-    case 17: goto L_C1C376;
-    case 18: goto L_C1C37C;
-    case 19: goto L_C1C37E;
-    case 20: goto L_C1C384;
-    case 21: goto L_C1C386;
-    case 22: goto L_C1C38C;
-    case 23: goto L_C1C38E;
-    case 24: goto L_C1C3B8;
-    case 25: goto L_C1C3CA;
-    case 26: goto L_C1C3CC;
-    case 27: goto L_C1C3D2;
-    case 28: goto L_C1C3D4;
-    case 29: goto L_C1C3DA;
-    case 30: goto L_C1C3DC;
-    case 31: goto L_C1C3F4;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1C2C8:
-    FA18_CHECK(0xC1C2C8);
-    FA18_OP(0xC1C2C8, 0x48E7, 0xC1C2CC); /* C1C2C8: movem.l D0-D6, -(A7) */
-    FA18_OP(0xC1C2CC, 0x4A39, 0xC1C2D2); /* C1C2CC: tst.b   $c457ac.l */
-    FA18_BCC(0xC1C2D2, 0x676C, 0xC1C2D4, 0xC1C340, L_C1C340); /* C1C2D2: beq     $c1c340 */
-L_C1C2D4:
-    FA18_CHECK(0xC1C2D4);
-    FA18_OP(0xC1C2D4, 0x4240, 0xC1C2D6); /* C1C2D4: clr.w   D0 */
-    FA18_OP(0xC1C2D6, 0x41F9, 0xC1C2DC); /* C1C2D6: lea     $c46184.l, A0 */
-    FA18_OP(0xC1C2DC, 0xD0F9, 0xC1C2E2); /* C1C2DC: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1C2E2, 0x2428, 0xC1C2E6); /* C1C2E2: move.l  ($14,A0), D2 */
-    FA18_OP(0xC1C2E6, 0x0282, 0xC1C2EC); /* C1C2E6: andi.l  #$3fffff, D2 */
-    FA18_OP(0xC1C2EC, 0xD4B9, 0xC1C2F2); /* C1C2EC: add.l   $c45c32.l, D2 */
-    FA18_BCC(0xC1C2F2, 0x6C06, 0xC1C2F4, 0xC1C2FA, L_C1C2FA); /* C1C2F2: bge     $c1c2fa */
-L_C1C2F4:
-    FA18_CHECK(0xC1C2F4);
-    FA18_OP(0xC1C2F4, 0x4482, 0xC1C2F6); /* C1C2F4: neg.l   D2 */
-    FA18_OP(0xC1C2F6, 0x08C0, 0xC1C2FA); /* C1C2F6: bset    #$0, D0 */
-L_C1C2FA:
-    FA18_CHECK(0xC1C2FA);
-    FA18_OP(0xC1C2FA, 0xE082, 0xC1C2FC); /* C1C2FA: asr.l   #8, D2 */
-    FA18_OP(0xC1C2FC, 0x2628, 0xC1C300); /* C1C2FC: move.l  ($18,A0), D3 */
-    FA18_OP(0xC1C300, 0xD6B9, 0xC1C306); /* C1C300: add.l   $c45c36.l, D3 */
-    FA18_BCC(0xC1C306, 0x6C06, 0xC1C308, 0xC1C30E, L_C1C30E); /* C1C306: bge     $c1c30e */
-L_C1C308:
-    FA18_CHECK(0xC1C308);
-    FA18_OP(0xC1C308, 0x4483, 0xC1C30A); /* C1C308: neg.l   D3 */
-    FA18_OP(0xC1C30A, 0x08C0, 0xC1C30E); /* C1C30A: bset    #$1, D0 */
-L_C1C30E:
-    FA18_CHECK(0xC1C30E);
-    FA18_OP(0xC1C30E, 0xE083, 0xC1C310); /* C1C30E: asr.l   #8, D3 */
-    FA18_OP(0xC1C310, 0x2828, 0xC1C314); /* C1C310: move.l  ($1c,A0), D4 */
-    FA18_OP(0xC1C314, 0x0284, 0xC1C31A); /* C1C314: andi.l  #$3fffff, D4 */
-    FA18_OP(0xC1C31A, 0xD8B9, 0xC1C320); /* C1C31A: add.l   $c45c3a.l, D4 */
-    FA18_BCC(0xC1C320, 0x6C06, 0xC1C322, 0xC1C328, L_C1C328); /* C1C320: bge     $c1c328 */
-L_C1C322:
-    FA18_CHECK(0xC1C322);
-    FA18_OP(0xC1C322, 0x4484, 0xC1C324); /* C1C322: neg.l   D4 */
-    FA18_OP(0xC1C324, 0x08C0, 0xC1C328); /* C1C324: bset    #$2, D0 */
-L_C1C328:
-    FA18_CHECK(0xC1C328);
-    FA18_OP(0xC1C328, 0xE084, 0xC1C32A); /* C1C328: asr.l   #8, D4 */
-    FA18_OP(0xC1C32A, 0x48A7, 0xC1C32E); /* C1C32A: movem.w D2-D4, -(A7) */
-    FA18_CALL(0xC1C32E, 0x4EB9, 0xC1C334, 153, 0); /* C1C32E: jsr     $c1d974.l */
-L_C1C334:
-    FA18_CHECK(0xC1C334);
-    FA18_OP(0xC1C334, 0x4C9F, 0xC1C338); /* C1C334: movem.w (A7)+, D2-D4 */
-    FA18_OP(0xC1C338, 0x3A01, 0xC1C33A); /* C1C338: move.w  D1, D5 */
-    FA18_OP(0xC1C33A, 0x0441, 0xC1C33E); /* C1C33A: subi.w  #$200, D1 */
-    FA18_BCC(0xC1C33E, 0x6E0A, 0xC1C340, 0xC1C34A, L_C1C34A); /* C1C33E: bgt     $c1c34a */
-L_C1C340:
-    FA18_CHECK(0xC1C340);
-    FA18_OP(0xC1C340, 0x4282, 0xC1C342); /* C1C340: clr.l   D2 */
-    FA18_OP(0xC1C342, 0x4283, 0xC1C344); /* C1C342: clr.l   D3 */
-    FA18_OP(0xC1C344, 0x4284, 0xC1C346); /* C1C344: clr.l   D4 */
-    FA18_JUMP(0xC1C346, 0x6000, 0xC1C3DC, L_C1C3DC); /* C1C346: bra     $c1c3dc */
-L_C1C34A:
-    FA18_CHECK(0xC1C34A);
-    FA18_OP(0xC1C34A, 0x3C05, 0xC1C34C); /* C1C34A: move.w  D5, D6 */
-    FA18_OP(0xC1C34C, 0xE246, 0xC1C34E); /* C1C34C: asr.w   #1, D6 */
-    FA18_OP(0xC1C34E, 0xB246, 0xC1C350); /* C1C34E: cmp.w   D6, D1 */
-    FA18_BCC(0xC1C350, 0x6D66, 0xC1C352, 0xC1C3B8, L_C1C3B8); /* C1C350: blt     $c1c3b8 */
-L_C1C352:
-    FA18_CHECK(0xC1C352);
-    FA18_OP(0xC1C352, 0x7C00, 0xC1C354); /* C1C352: moveq   #$0, D6 */
-    FA18_OP(0xC1C354, 0x3C05, 0xC1C356); /* C1C354: move.w  D5, D6 */
-    FA18_OP(0xC1C356, 0x9C41, 0xC1C358); /* C1C356: sub.w   D1, D6 */
-    FA18_OP(0xC1C358, 0x48C6, 0xC1C35A); /* C1C358: ext.l   D6 */
-    FA18_OP(0xC1C35A, 0x4846, 0xC1C35C); /* C1C35A: swap    D6 */
-    FA18_OP(0xC1C35C, 0x8CC5, 0xC1C35E); /* C1C35C: divu.w  D5, D6 */
-    FA18_OP(0xC1C35E, 0xC4C6, 0xC1C360); /* C1C35E: mulu.w  D6, D2 */
-    FA18_OP(0xC1C360, 0xC6C6, 0xC1C362); /* C1C360: mulu.w  D6, D3 */
-    FA18_OP(0xC1C362, 0xC8C6, 0xC1C364); /* C1C362: mulu.w  D6, D4 */
-    FA18_OP(0xC1C364, 0xE082, 0xC1C366); /* C1C364: asr.l   #8, D2 */
-    FA18_BCC(0xC1C366, 0x6402, 0xC1C368, 0xC1C36A, L_C1C36A); /* C1C366: bcc     $c1c36a */
-L_C1C368:
-    FA18_CHECK(0xC1C368);
-    FA18_OP(0xC1C368, 0x5282, 0xC1C36A); /* C1C368: addq.l  #1, D2 */
-L_C1C36A:
-    FA18_CHECK(0xC1C36A);
-    FA18_OP(0xC1C36A, 0xE083, 0xC1C36C); /* C1C36A: asr.l   #8, D3 */
-    FA18_BCC(0xC1C36C, 0x6402, 0xC1C36E, 0xC1C370, L_C1C370); /* C1C36C: bcc     $c1c370 */
-L_C1C36E:
-    FA18_CHECK(0xC1C36E);
-    FA18_OP(0xC1C36E, 0x5283, 0xC1C370); /* C1C36E: addq.l  #1, D3 */
-L_C1C370:
-    FA18_CHECK(0xC1C370);
-    FA18_OP(0xC1C370, 0xE084, 0xC1C372); /* C1C370: asr.l   #8, D4 */
-    FA18_BCC(0xC1C372, 0x6402, 0xC1C374, 0xC1C376, L_C1C376); /* C1C372: bcc     $c1c376 */
-L_C1C374:
-    FA18_CHECK(0xC1C374);
-    FA18_OP(0xC1C374, 0x5284, 0xC1C376); /* C1C374: addq.l  #1, D4 */
-L_C1C376:
-    FA18_CHECK(0xC1C376);
-    FA18_OP(0xC1C376, 0x0800, 0xC1C37A); /* C1C376: btst    #$0, D0 */
-    FA18_BCC(0xC1C37A, 0x6702, 0xC1C37C, 0xC1C37E, L_C1C37E); /* C1C37A: beq     $c1c37e */
-L_C1C37C:
-    FA18_CHECK(0xC1C37C);
-    FA18_OP(0xC1C37C, 0x4482, 0xC1C37E); /* C1C37C: neg.l   D2 */
-L_C1C37E:
-    FA18_CHECK(0xC1C37E);
-    FA18_OP(0xC1C37E, 0x0800, 0xC1C382); /* C1C37E: btst    #$1, D0 */
-    FA18_BCC(0xC1C382, 0x6702, 0xC1C384, 0xC1C386, L_C1C386); /* C1C382: beq     $c1c386 */
-L_C1C384:
-    FA18_CHECK(0xC1C384);
-    FA18_OP(0xC1C384, 0x4483, 0xC1C386); /* C1C384: neg.l   D3 */
-L_C1C386:
-    FA18_CHECK(0xC1C386);
-    FA18_OP(0xC1C386, 0x0800, 0xC1C38A); /* C1C386: btst    #$2, D0 */
-    FA18_BCC(0xC1C38A, 0x6702, 0xC1C38C, 0xC1C38E, L_C1C38E); /* C1C38A: beq     $c1c38e */
-L_C1C38C:
-    FA18_CHECK(0xC1C38C);
-    FA18_OP(0xC1C38C, 0x4484, 0xC1C38E); /* C1C38C: neg.l   D4 */
-L_C1C38E:
-    FA18_CHECK(0xC1C38E);
-    FA18_OP(0xC1C38E, 0x41F9, 0xC1C394); /* C1C38E: lea     $c46184.l, A0 */
-    FA18_OP(0xC1C394, 0xD0F9, 0xC1C39A); /* C1C394: adda.w  $c458de.l, A0 */
-    FA18_OP(0xC1C39A, 0x2028, 0xC1C39E); /* C1C39A: move.l  ($14,A0), D0 */
-    FA18_OP(0xC1C39E, 0x0280, 0xC1C3A4); /* C1C39E: andi.l  #$3fffff, D0 */
-    FA18_OP(0xC1C3A4, 0x9480, 0xC1C3A6); /* C1C3A4: sub.l   D0, D2 */
-    FA18_OP(0xC1C3A6, 0x96A8, 0xC1C3AA); /* C1C3A6: sub.l   ($18,A0), D3 */
-    FA18_OP(0xC1C3AA, 0x2028, 0xC1C3AE); /* C1C3AA: move.l  ($1c,A0), D0 */
-    FA18_OP(0xC1C3AE, 0x0280, 0xC1C3B4); /* C1C3AE: andi.l  #$3fffff, D0 */
-    FA18_OP(0xC1C3B4, 0x9880, 0xC1C3B6); /* C1C3B4: sub.l   D0, D4 */
-    FA18_JUMP(0xC1C3B6, 0x603C, 0xC1C3F4, L_C1C3F4); /* C1C3B6: bra     $c1c3f4 */
-L_C1C3B8:
-    FA18_CHECK(0xC1C3B8);
-    FA18_OP(0xC1C3B8, 0x48C1, 0xC1C3BA); /* C1C3B8: ext.l   D1 */
-    FA18_OP(0xC1C3BA, 0xE181, 0xC1C3BC); /* C1C3BA: asl.l   #8, D1 */
-    FA18_OP(0xC1C3BC, 0x82C5, 0xC1C3BE); /* C1C3BC: divu.w  D5, D1 */
-    FA18_OP(0xC1C3BE, 0xC4C1, 0xC1C3C0); /* C1C3BE: mulu.w  D1, D2 */
-    FA18_OP(0xC1C3C0, 0xC6C1, 0xC1C3C2); /* C1C3C0: mulu.w  D1, D3 */
-    FA18_OP(0xC1C3C2, 0xC8C1, 0xC1C3C4); /* C1C3C2: mulu.w  D1, D4 */
-    FA18_OP(0xC1C3C4, 0x0800, 0xC1C3C8); /* C1C3C4: btst    #$0, D0 */
-    FA18_BCC(0xC1C3C8, 0x6602, 0xC1C3CA, 0xC1C3CC, L_C1C3CC); /* C1C3C8: bne     $c1c3cc */
-L_C1C3CA:
-    FA18_CHECK(0xC1C3CA);
-    FA18_OP(0xC1C3CA, 0x4482, 0xC1C3CC); /* C1C3CA: neg.l   D2 */
-L_C1C3CC:
-    FA18_CHECK(0xC1C3CC);
-    FA18_OP(0xC1C3CC, 0x0800, 0xC1C3D0); /* C1C3CC: btst    #$1, D0 */
-    FA18_BCC(0xC1C3D0, 0x6602, 0xC1C3D2, 0xC1C3D4, L_C1C3D4); /* C1C3D0: bne     $c1c3d4 */
-L_C1C3D2:
-    FA18_CHECK(0xC1C3D2);
-    FA18_OP(0xC1C3D2, 0x4483, 0xC1C3D4); /* C1C3D2: neg.l   D3 */
-L_C1C3D4:
-    FA18_CHECK(0xC1C3D4);
-    FA18_OP(0xC1C3D4, 0x0800, 0xC1C3D8); /* C1C3D4: btst    #$2, D0 */
-    FA18_BCC(0xC1C3D8, 0x6602, 0xC1C3DA, 0xC1C3DC, L_C1C3DC); /* C1C3D8: bne     $c1c3dc */
-L_C1C3DA:
-    FA18_CHECK(0xC1C3DA);
-    FA18_OP(0xC1C3DA, 0x4484, 0xC1C3DC); /* C1C3DA: neg.l   D4 */
-L_C1C3DC:
-    FA18_CHECK(0xC1C3DC);
-    FA18_OP(0xC1C3DC, 0x2039, 0xC1C3E2); /* C1C3DC: move.l  $c45c32.l, D0 */
-    FA18_OP(0xC1C3E2, 0x2239, 0xC1C3E8); /* C1C3E2: move.l  $c45c36.l, D1 */
-    FA18_OP(0xC1C3E8, 0x2A39, 0xC1C3EE); /* C1C3E8: move.l  $c45c3a.l, D5 */
-    FA18_OP(0xC1C3EE, 0xD480, 0xC1C3F0); /* C1C3EE: add.l   D0, D2 */
-    FA18_OP(0xC1C3F0, 0xD681, 0xC1C3F2); /* C1C3F0: add.l   D1, D3 */
-    FA18_OP(0xC1C3F2, 0xD885, 0xC1C3F4); /* C1C3F2: add.l   D5, D4 */
-L_C1C3F4:
-    FA18_CHECK(0xC1C3F4);
-    FA18_OP(0xC1C3F4, 0x23C2, 0xC1C3FA); /* C1C3F4: move.l  D2, $c45a62.l */
-    FA18_OP(0xC1C3FA, 0x23C3, 0xC1C400); /* C1C3FA: move.l  D3, $c45a66.l */
-    FA18_OP(0xC1C400, 0x23C4, 0xC1C406); /* C1C400: move.l  D4, $c45a6a.l */
-    FA18_OP(0xC1C406, 0x4CDF, 0xC1C40A); /* C1C406: movem.l (A7)+, D0-D6 */
-    FA18_RETURN(0xC1C40A, 0x4E75); /* C1C40A: rts */
-}
-
-int fa18_fn_C1C54E(int entry) {
-    switch (entry) {
-    case 0: goto L_C1C54E;
-    case 1: goto L_C1C558;
-    case 2: goto L_C1C56C;
-    case 3: goto L_C1C574;
-    case 4: goto L_C1C57E;
-    case 5: goto L_C1C584;
-    case 6: goto L_C1C588;
-    case 7: goto L_C1C60C;
-    case 8: goto L_C1C610;
-    case 9: goto L_C1C628;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1C54E:
-    FA18_CHECK(0xC1C54E);
-    FA18_OP(0xC1C54E, 0x4A39, 0xC1C554); /* C1C54E: tst.b   $c45785.l */
-    FA18_BCC(0xC1C554, 0x6600, 0xC1C558, 0xC1C60C, L_C1C60C); /* C1C554: bne     $c1c60c */
-L_C1C558:
-    FA18_CHECK(0xC1C558);
-    FA18_OP(0xC1C558, 0x45F9, 0xC1C55E); /* C1C558: lea     $c46184.l, A2 */
-    FA18_OP(0xC1C55E, 0xD4F9, 0xC1C564); /* C1C55E: adda.w  $c458de.l, A2 */
-    FA18_OP(0xC1C564, 0x0C2A, 0xC1C56A); /* C1C564: cmpi.b  #$30, ($62,A2) */
-    FA18_BCC(0xC1C56A, 0x6608, 0xC1C56C, 0xC1C574, L_C1C574); /* C1C56A: bne     $c1c574 */
-L_C1C56C:
-    FA18_CHECK(0xC1C56C);
-    FA18_OP(0xC1C56C, 0x7600, 0xC1C56E); /* C1C56C: moveq   #$0, D3 */
-    FA18_OP(0xC1C56E, 0x7801, 0xC1C570); /* C1C56E: moveq   #$1, D4 */
-    FA18_OP(0xC1C570, 0x7AFB, 0xC1C572); /* C1C570: moveq   #-$5, D5 */
-    FA18_JUMP(0xC1C572, 0x6014, 0xC1C588, L_C1C588); /* C1C572: bra     $c1c588 */
-L_C1C574:
-    FA18_CHECK(0xC1C574);
-    FA18_OP(0xC1C574, 0x7600, 0xC1C576); /* C1C574: moveq   #$0, D3 */
-    FA18_OP(0xC1C576, 0x0C2A, 0xC1C57C); /* C1C576: cmpi.b  #$11, ($62,A2) */
-    FA18_BCC(0xC1C57C, 0x6706, 0xC1C57E, 0xC1C584, L_C1C584); /* C1C57C: beq     $c1c584 */
-L_C1C57E:
-    FA18_CHECK(0xC1C57E);
-    FA18_OP(0xC1C57E, 0x7804, 0xC1C580); /* C1C57E: moveq   #$4, D4 */
-    FA18_OP(0xC1C580, 0x7A12, 0xC1C582); /* C1C580: moveq   #$12, D5 */
-    FA18_JUMP(0xC1C582, 0x6004, 0xC1C588, L_C1C588); /* C1C582: bra     $c1c588 */
-L_C1C584:
-    FA18_CHECK(0xC1C584);
-    FA18_OP(0xC1C584, 0x7805, 0xC1C586); /* C1C584: moveq   #$5, D4 */
-    FA18_OP(0xC1C586, 0x7A14, 0xC1C588); /* C1C586: moveq   #$14, D5 */
-L_C1C588:
-    FA18_CHECK(0xC1C588);
-    FA18_OP(0xC1C588, 0x3C03, 0xC1C58A); /* C1C588: move.w  D3, D6 */
-    FA18_OP(0xC1C58A, 0x3004, 0xC1C58C); /* C1C58A: move.w  D4, D0 */
-    FA18_OP(0xC1C58C, 0x3E05, 0xC1C58E); /* C1C58C: move.w  D5, D7 */
-    FA18_OP(0xC1C58E, 0xCDEA, 0xC1C592); /* C1C58E: muls.w  ($92,A2), D6 */
-    FA18_OP(0xC1C592, 0xC1EA, 0xC1C596); /* C1C592: muls.w  ($94,A2), D0 */
-    FA18_OP(0xC1C596, 0xCFEA, 0xC1C59A); /* C1C596: muls.w  ($96,A2), D7 */
-    FA18_OP(0xC1C59A, 0xD086, 0xC1C59C); /* C1C59A: add.l   D6, D0 */
-    FA18_OP(0xC1C59C, 0xD087, 0xC1C59E); /* C1C59C: add.l   D7, D0 */
-    FA18_OP(0xC1C59E, 0x3C03, 0xC1C5A0); /* C1C59E: move.w  D3, D6 */
-    FA18_OP(0xC1C5A0, 0x3204, 0xC1C5A2); /* C1C5A0: move.w  D4, D1 */
-    FA18_OP(0xC1C5A2, 0x3E05, 0xC1C5A4); /* C1C5A2: move.w  D5, D7 */
-    FA18_OP(0xC1C5A4, 0xCDEA, 0xC1C5A8); /* C1C5A4: muls.w  ($98,A2), D6 */
-    FA18_OP(0xC1C5A8, 0xC3EA, 0xC1C5AC); /* C1C5A8: muls.w  ($9a,A2), D1 */
-    FA18_OP(0xC1C5AC, 0xCFEA, 0xC1C5B0); /* C1C5AC: muls.w  ($9c,A2), D7 */
-    FA18_OP(0xC1C5B0, 0xD286, 0xC1C5B2); /* C1C5B0: add.l   D6, D1 */
-    FA18_OP(0xC1C5B2, 0xD287, 0xC1C5B4); /* C1C5B2: add.l   D7, D1 */
-    FA18_OP(0xC1C5B4, 0x3404, 0xC1C5B6); /* C1C5B4: move.w  D4, D2 */
-    FA18_OP(0xC1C5B6, 0xC7EA, 0xC1C5BA); /* C1C5B6: muls.w  ($9e,A2), D3 */
-    FA18_OP(0xC1C5BA, 0xC5EA, 0xC1C5BE); /* C1C5BA: muls.w  ($a0,A2), D2 */
-    FA18_OP(0xC1C5BE, 0xCBEA, 0xC1C5C2); /* C1C5BE: muls.w  ($a2,A2), D5 */
-    FA18_OP(0xC1C5C2, 0xD483, 0xC1C5C4); /* C1C5C2: add.l   D3, D2 */
-    FA18_OP(0xC1C5C4, 0xD485, 0xC1C5C6); /* C1C5C4: add.l   D5, D2 */
-    FA18_OP(0xC1C5C6, 0xEC80, 0xC1C5C8); /* C1C5C6: asr.l   #6, D0 */
-    FA18_OP(0xC1C5C8, 0xEC81, 0xC1C5CA); /* C1C5C8: asr.l   #6, D1 */
-    FA18_OP(0xC1C5CA, 0xEC82, 0xC1C5CC); /* C1C5CA: asr.l   #6, D2 */
-    FA18_OP(0xC1C5CC, 0x4CEA, 0xC1C5D2); /* C1C5CC: movem.l ($14,A2), D3-D5 */
-    FA18_OP(0xC1C5D2, 0xD680, 0xC1C5D4); /* C1C5D2: add.l   D0, D3 */
-    FA18_OP(0xC1C5D4, 0xD881, 0xC1C5D6); /* C1C5D4: add.l   D1, D4 */
-    FA18_OP(0xC1C5D6, 0xDA82, 0xC1C5D8); /* C1C5D6: add.l   D2, D5 */
-    FA18_OP(0xC1C5D8, 0x48F9, 0xC1C5E0); /* C1C5D8: movem.l D3-D5, $c45a7c.l */
-    FA18_OP(0xC1C5E0, 0x262A, 0xC1C5E4); /* C1C5E0: move.l  ($14,A2), D3 */
-    FA18_OP(0xC1C5E4, 0x0283, 0xC1C5EA); /* C1C5E4: andi.l  #$3fffff, D3 */
-    FA18_OP(0xC1C5EA, 0xD083, 0xC1C5EC); /* C1C5EA: add.l   D3, D0 */
-    FA18_OP(0xC1C5EC, 0xD2AA, 0xC1C5F0); /* C1C5EC: add.l   ($18,A2), D1 */
-    FA18_OP(0xC1C5F0, 0x262A, 0xC1C5F4); /* C1C5F0: move.l  ($1c,A2), D3 */
-    FA18_OP(0xC1C5F4, 0x0283, 0xC1C5FA); /* C1C5F4: andi.l  #$3fffff, D3 */
-    FA18_OP(0xC1C5FA, 0xD483, 0xC1C5FC); /* C1C5FA: add.l   D3, D2 */
-    FA18_OP(0xC1C5FC, 0x4480, 0xC1C5FE); /* C1C5FC: neg.l   D0 */
-    FA18_OP(0xC1C5FE, 0x4481, 0xC1C600); /* C1C5FE: neg.l   D1 */
-    FA18_OP(0xC1C600, 0x4482, 0xC1C602); /* C1C600: neg.l   D2 */
-    FA18_OP(0xC1C602, 0x48F9, 0xC1C60A); /* C1C602: movem.l D0-D2, $c45a62.l */
-    FA18_JUMP(0xC1C60A, 0x601C, 0xC1C628, L_C1C628); /* C1C60A: bra     $c1c628 */
-L_C1C60C:
-    FA18_CHECK(0xC1C60C);
-    FA18_CALL(0xC1C60C, 0x6100, 0xC1C610, 134, 0); /* C1C60C: bsr     $c1c2c8 */
-L_C1C610:
-    FA18_CHECK(0xC1C610);
-    FA18_OP(0xC1C610, 0x4CF9, 0xC1C618); /* C1C610: movem.l $c45c3e.l, D0-D2 */
-    FA18_OP(0xC1C618, 0x48F9, 0xC1C620); /* C1C618: movem.l D0-D2, $c45a7c.l */
-    FA18_OP(0xC1C620, 0x4CF9, 0xC1C628); /* C1C620: movem.l $c45a62.l, D0-D2 */
-L_C1C628:
-    FA18_CHECK(0xC1C628);
-    FA18_OP(0xC1C628, 0xE080, 0xC1C62A); /* C1C628: asr.l   #8, D0 */
-    FA18_OP(0xC1C62A, 0xE081, 0xC1C62C); /* C1C62A: asr.l   #8, D1 */
-    FA18_OP(0xC1C62C, 0xE082, 0xC1C62E); /* C1C62C: asr.l   #8, D2 */
-    FA18_OP(0xC1C62E, 0x48B9, 0xC1C636); /* C1C62E: movem.w D0-D2, $c45a72.l */
-    FA18_OP(0xC1C636, 0x23C1, 0xC1C63C); /* C1C636: move.l  D1, $c45a78.l */
-    FA18_RETURN(0xC1C63C, 0x4E75); /* C1C63C: rts */
-}
-
-int fa18_fn_C1C63E(int entry) {
-    switch (entry) {
-    case 0: goto L_C1C63E;
-    case 1: goto L_C1C64E;
-    case 2: goto L_C1C65C;
-    case 3: goto L_C1C660;
-    case 4: goto L_C1C670;
-    case 5: goto L_C1C67C;
-    case 6: goto L_C1C67E;
-    case 7: goto L_C1C68A;
-    case 8: goto L_C1C68E;
-    case 9: goto L_C1C6A2;
-    case 10: goto L_C1C6AC;
-    case 11: goto L_C1C6B0;
-    case 12: goto L_C1C6B6;
-    case 13: goto L_C1C6BC;
-    case 14: goto L_C1C6C4;
-    case 15: goto L_C1C6D4;
-    case 16: goto L_C1C716;
-    case 17: goto L_C1C71E;
-    case 18: goto L_C1C72A;
-    case 19: goto L_C1C78A;
-    case 20: goto L_C1C794;
-    case 21: goto L_C1C7A0;
-    case 22: goto L_C1C7A2;
-    case 23: goto L_C1C7A8;
-    case 24: goto L_C1C7B0;
-    case 25: goto L_C1C7BA;
-    case 26: goto L_C1C7C6;
-    case 27: goto L_C1C7C8;
-    case 28: goto L_C1C7CE;
-    case 29: goto L_C1C7D6;
-    case 30: goto L_C1C7DE;
-    case 31: goto L_C1C7E6;
-    case 32: goto L_C1C7EE;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1C63E:
-    FA18_CHECK(0xC1C63E);
-    FA18_OP(0xC1C63E, 0x7A00, 0xC1C640); /* C1C63E: moveq   #$0, D5 */
-    FA18_OP(0xC1C640, 0x1039, 0xC1C646); /* C1C640: move.b  $c45854.l, D0 */
-    FA18_OP(0xC1C646, 0xB039, 0xC1C64C); /* C1C646: cmp.b   $c45855.l, D0 */
-    FA18_BCC(0xC1C64C, 0x6712, 0xC1C64E, 0xC1C660, L_C1C660); /* C1C64C: beq     $c1c660 */
-L_C1C64E:
-    FA18_CHECK(0xC1C64E);
-    FA18_OP(0xC1C64E, 0x13C0, 0xC1C654); /* C1C64E: move.b  D0, $c45855.l */
-    FA18_OP(0xC1C654, 0x4A39, 0xC1C65A); /* C1C654: tst.b   $c45786.l */
-    FA18_BCC(0xC1C65A, 0x6604, 0xC1C65C, 0xC1C660, L_C1C660); /* C1C65A: bne     $c1c660 */
-L_C1C65C:
-    FA18_CHECK(0xC1C65C);
-    FA18_OP(0xC1C65C, 0x0005, 0xC1C660); /* C1C65C: ori.b   #$b, D5 */
-L_C1C660:
-    FA18_CHECK(0xC1C660);
-    FA18_OP(0xC1C660, 0x2039, 0xC1C666); /* C1C660: move.l  $c45a66.l, D0 */
-    FA18_OP(0xC1C666, 0x4480, 0xC1C668); /* C1C666: neg.l   D0 */
-    FA18_OP(0xC1C668, 0x0C80, 0xC1C66E); /* C1C668: cmpi.l  #$a000, D0 */
-    FA18_BCC(0xC1C66E, 0x6C0E, 0xC1C670, 0xC1C67E, L_C1C67E); /* C1C66E: bge     $c1c67e */
-L_C1C670:
-    FA18_CHECK(0xC1C670);
-    FA18_OP(0xC1C670, 0x0CB9, 0xC1C67A); /* C1C670: cmpi.l  #$a000, $c45a6e.l */
-    FA18_BCC(0xC1C67A, 0x6C0E, 0xC1C67C, 0xC1C68A, L_C1C68A); /* C1C67A: bge     $c1c68a */
-L_C1C67C:
-    FA18_CHECK(0xC1C67C);
-    FA18_JUMP(0xC1C67C, 0x6010, 0xC1C68E, L_C1C68E); /* C1C67C: bra     $c1c68e */
-L_C1C67E:
-    FA18_CHECK(0xC1C67E);
-    FA18_OP(0xC1C67E, 0x0CB9, 0xC1C688); /* C1C67E: cmpi.l  #$a000, $c45a6e.l */
-    FA18_BCC(0xC1C688, 0x6C04, 0xC1C68A, 0xC1C68E, L_C1C68E); /* C1C688: bge     $c1c68e */
-L_C1C68A:
-    FA18_CHECK(0xC1C68A);
-    FA18_OP(0xC1C68A, 0x0005, 0xC1C68E); /* C1C68A: ori.b   #$b, D5 */
-L_C1C68E:
-    FA18_CHECK(0xC1C68E);
-    FA18_OP(0xC1C68E, 0x23C0, 0xC1C694); /* C1C68E: move.l  D0, $c45a6e.l */
-    FA18_OP(0xC1C694, 0x4240, 0xC1C696); /* C1C694: clr.w   D0 */
-    FA18_OP(0xC1C696, 0x4840, 0xC1C698); /* C1C696: swap    D0 */
-    FA18_OP(0xC1C698, 0xEA80, 0xC1C69A); /* C1C698: asr.l   #5, D0 */
-    FA18_OP(0xC1C69A, 0xB079, 0xC1C6A0); /* C1C69A: cmp.w   $c45a5e.l, D0 */
-    FA18_BCC(0xC1C6A0, 0x6714, 0xC1C6A2, 0xC1C6B6, L_C1C6B6); /* C1C6A0: beq     $c1c6b6 */
-L_C1C6A2:
-    FA18_CHECK(0xC1C6A2);
-    FA18_OP(0xC1C6A2, 0x0C39, 0xC1C6AA); /* C1C6A2: cmpi.b  #$2, $c458ae.l */
-    FA18_BCC(0xC1C6AA, 0x6704, 0xC1C6AC, 0xC1C6B0, L_C1C6B0); /* C1C6AA: beq     $c1c6b0 */
-L_C1C6AC:
-    FA18_CHECK(0xC1C6AC);
-    FA18_OP(0xC1C6AC, 0x0005, 0xC1C6B0); /* C1C6AC: ori.b   #$b, D5 */
-L_C1C6B0:
-    FA18_CHECK(0xC1C6B0);
-    FA18_OP(0xC1C6B0, 0x33C0, 0xC1C6B6); /* C1C6B0: move.w  D0, $c45a5e.l */
-L_C1C6B6:
-    FA18_CHECK(0xC1C6B6);
-    FA18_CALL(0xC1C6B6, 0x4EB9, 0xC1C6BC, 183, 0); /* C1C6B6: jsr     $c22c80.l */
-L_C1C6BC:
-    FA18_CHECK(0xC1C6BC);
-    FA18_OP(0xC1C6BC, 0x4A39, 0xC1C6C2); /* C1C6BC: tst.b   $c45785.l */
-    FA18_BCC(0xC1C6C2, 0x6652, 0xC1C6C4, 0xC1C716, L_C1C716); /* C1C6C2: bne     $c1c716 */
-L_C1C6C4:
-    FA18_CHECK(0xC1C6C4);
-    FA18_OP(0xC1C6C4, 0x47F9, 0xC1C6CA); /* C1C6C4: lea     $c46184.l, A3 */
-    FA18_OP(0xC1C6CA, 0xD6F9, 0xC1C6D0); /* C1C6CA: adda.w  $c458de.l, A3 */
-    FA18_CALL(0xC1C6D0, 0x6100, 0xC1C6D4, 137, 0); /* C1C6D0: bsr     $c1c7f6 */
-L_C1C6D4:
-    FA18_CHECK(0xC1C6D4);
-    FA18_OP(0xC1C6D4, 0x33EB, 0xC1C6DC); /* C1C6D4: move.w  ($6,A3), $c4594c.l */
-    FA18_OP(0xC1C6DC, 0x33EB, 0xC1C6E4); /* C1C6DC: move.w  ($8,A3), $c4594e.l */
-    FA18_OP(0xC1C6E4, 0x13EB, 0xC1C6EC); /* C1C6E4: move.b  ($a,A3), $c45851.l */
-    FA18_OP(0xC1C6EC, 0x3039, 0xC1C6F2); /* C1C6EC: move.w  $c4594c.l, D0 */
-    FA18_OP(0xC1C6F2, 0x0240, 0xC1C6F6); /* C1C6F2: andi.w  #$3, D0 */
-    FA18_OP(0xC1C6F6, 0x5740, 0xC1C6F8); /* C1C6F6: subq.w  #3, D0 */
-    FA18_OP(0xC1C6F8, 0x4440, 0xC1C6FA); /* C1C6F8: neg.w   D0 */
-    FA18_OP(0xC1C6FA, 0x3239, 0xC1C700); /* C1C6FA: move.w  $c4594e.l, D1 */
-    FA18_OP(0xC1C700, 0x0241, 0xC1C704); /* C1C700: andi.w  #$3, D1 */
-    FA18_OP(0xC1C704, 0x5741, 0xC1C706); /* C1C704: subq.w  #3, D1 */
-    FA18_OP(0xC1C706, 0x4441, 0xC1C708); /* C1C706: neg.w   D1 */
-    FA18_OP(0xC1C708, 0xE541, 0xC1C70A); /* C1C708: asl.w   #2, D1 */
-    FA18_OP(0xC1C70A, 0xD240, 0xC1C70C); /* C1C70A: add.w   D0, D1 */
-    FA18_OP(0xC1C70C, 0x13C1, 0xC1C712); /* C1C70C: move.b  D1, $c45850.l */
-    FA18_JUMP(0xC1C712, 0x6000, 0xC1C7EE, L_C1C7EE); /* C1C712: bra     $c1c7ee */
-L_C1C716:
-    FA18_CHECK(0xC1C716);
-    FA18_OP(0xC1C716, 0x3F05, 0xC1C718); /* C1C716: move.w  D5, -(A7) */
-    FA18_CALL(0xC1C718, 0x4EB9, 0xC1C71E, 252, 1); /* C1C718: jsr     $c29042.l */
-L_C1C71E:
-    FA18_CHECK(0xC1C71E);
-    FA18_OP(0xC1C71E, 0x3A1F, 0xC1C720); /* C1C71E: move.w  (A7)+, D5 */
-    FA18_OP(0xC1C720, 0x47F9, 0xC1C726); /* C1C720: lea     $c46184.l, A3 */
-    FA18_CALL(0xC1C726, 0x6100, 0xC1C72A, 137, 0); /* C1C726: bsr     $c1c7f6 */
-L_C1C72A:
-    FA18_CHECK(0xC1C72A);
-    FA18_OP(0xC1C72A, 0x2039, 0xC1C730); /* C1C72A: move.l  $c45c3e.l, D0 */
-    FA18_OP(0xC1C730, 0x2239, 0xC1C736); /* C1C730: move.l  $c45c46.l, D1 */
-    FA18_OP(0xC1C736, 0x0280, 0xC1C73C); /* C1C736: andi.l  #$1fffffff, D0 */
-    FA18_OP(0xC1C73C, 0x0281, 0xC1C742); /* C1C73C: andi.l  #$1fffffff, D1 */
-    FA18_OP(0xC1C742, 0x4840, 0xC1C744); /* C1C742: swap    D0 */
-    FA18_OP(0xC1C744, 0x4841, 0xC1C746); /* C1C744: swap    D1 */
-    FA18_OP(0xC1C746, 0xE840, 0xC1C748); /* C1C746: asr.w   #4, D0 */
-    FA18_OP(0xC1C748, 0xE841, 0xC1C74A); /* C1C748: asr.w   #4, D1 */
-    FA18_OP(0xC1C74A, 0x3400, 0xC1C74C); /* C1C74A: move.w  D0, D2 */
-    FA18_OP(0xC1C74C, 0x3601, 0xC1C74E); /* C1C74C: move.w  D1, D3 */
-    FA18_OP(0xC1C74E, 0x0240, 0xC1C752); /* C1C74E: andi.w  #$3, D0 */
-    FA18_OP(0xC1C752, 0x0241, 0xC1C756); /* C1C752: andi.w  #$3, D1 */
-    FA18_OP(0xC1C756, 0x5700, 0xC1C758); /* C1C756: subq.b  #3, D0 */
-    FA18_OP(0xC1C758, 0x4400, 0xC1C75A); /* C1C758: neg.b   D0 */
-    FA18_OP(0xC1C75A, 0x5701, 0xC1C75C); /* C1C75A: subq.b  #3, D1 */
-    FA18_OP(0xC1C75C, 0x4401, 0xC1C75E); /* C1C75C: neg.b   D1 */
-    FA18_OP(0xC1C75E, 0xD201, 0xC1C760); /* C1C75E: add.b   D1, D1 */
-    FA18_OP(0xC1C760, 0xD201, 0xC1C762); /* C1C760: add.b   D1, D1 */
-    FA18_OP(0xC1C762, 0xD200, 0xC1C764); /* C1C762: add.b   D0, D1 */
-    FA18_OP(0xC1C764, 0xE442, 0xC1C766); /* C1C764: asr.w   #2, D2 */
-    FA18_OP(0xC1C766, 0xE443, 0xC1C768); /* C1C766: asr.w   #2, D3 */
-    FA18_OP(0xC1C768, 0x3002, 0xC1C76A); /* C1C768: move.w  D2, D0 */
-    FA18_OP(0xC1C76A, 0x3803, 0xC1C76C); /* C1C76A: move.w  D3, D4 */
-    FA18_OP(0xC1C76C, 0x0242, 0xC1C770); /* C1C76C: andi.w  #$3, D2 */
-    FA18_OP(0xC1C770, 0x0243, 0xC1C774); /* C1C770: andi.w  #$3, D3 */
-    FA18_OP(0xC1C774, 0x5702, 0xC1C776); /* C1C774: subq.b  #3, D2 */
-    FA18_OP(0xC1C776, 0x4402, 0xC1C778); /* C1C776: neg.b   D2 */
-    FA18_OP(0xC1C778, 0x5703, 0xC1C77A); /* C1C778: subq.b  #3, D3 */
-    FA18_OP(0xC1C77A, 0x4403, 0xC1C77C); /* C1C77A: neg.b   D3 */
-    FA18_OP(0xC1C77C, 0xD603, 0xC1C77E); /* C1C77C: add.b   D3, D3 */
-    FA18_OP(0xC1C77E, 0xD603, 0xC1C780); /* C1C77E: add.b   D3, D3 */
-    FA18_OP(0xC1C780, 0xD602, 0xC1C782); /* C1C780: add.b   D2, D3 */
-    FA18_OP(0xC1C782, 0xB239, 0xC1C788); /* C1C782: cmp.b   $c45851.l, D1 */
-    FA18_BCC(0xC1C788, 0x671E, 0xC1C78A, 0xC1C7A8, L_C1C7A8); /* C1C788: beq     $c1c7a8 */
-L_C1C78A:
-    FA18_CHECK(0xC1C78A);
-    FA18_OP(0xC1C78A, 0x0C39, 0xC1C792); /* C1C78A: cmpi.b  #$2, $c458ae.l */
-    FA18_BCC(0xC1C792, 0x660C, 0xC1C794, 0xC1C7A0, L_C1C7A0); /* C1C792: bne     $c1c7a0 */
-L_C1C794:
-    FA18_CHECK(0xC1C794);
-    FA18_OP(0xC1C794, 0x0CB9, 0xC1C79E); /* C1C794: cmpi.l  #-$1000, $c45a78.l */
-    FA18_BCC(0xC1C79E, 0x6F02, 0xC1C7A0, 0xC1C7A2, L_C1C7A2); /* C1C79E: ble     $c1c7a2 */
-L_C1C7A0:
-    FA18_CHECK(0xC1C7A0);
-    FA18_OP(0xC1C7A0, 0x7AFF, 0xC1C7A2); /* C1C7A0: moveq   #-$1, D5 */
-L_C1C7A2:
-    FA18_CHECK(0xC1C7A2);
-    FA18_OP(0xC1C7A2, 0x13C1, 0xC1C7A8); /* C1C7A2: move.b  D1, $c45851.l */
-L_C1C7A8:
-    FA18_CHECK(0xC1C7A8);
-    FA18_OP(0xC1C7A8, 0xB639, 0xC1C7AE); /* C1C7A8: cmp.b   $c45850.l, D3 */
-    FA18_BCC(0xC1C7AE, 0x671E, 0xC1C7B0, 0xC1C7CE, L_C1C7CE); /* C1C7AE: beq     $c1c7ce */
-L_C1C7B0:
-    FA18_CHECK(0xC1C7B0);
-    FA18_OP(0xC1C7B0, 0x0C39, 0xC1C7B8); /* C1C7B0: cmpi.b  #$2, $c458ae.l */
-    FA18_BCC(0xC1C7B8, 0x660C, 0xC1C7BA, 0xC1C7C6, L_C1C7C6); /* C1C7B8: bne     $c1c7c6 */
-L_C1C7BA:
-    FA18_CHECK(0xC1C7BA);
-    FA18_OP(0xC1C7BA, 0x0CB9, 0xC1C7C4); /* C1C7BA: cmpi.l  #-$1000, $c45a78.l */
-    FA18_BCC(0xC1C7C4, 0x6F02, 0xC1C7C6, 0xC1C7C8, L_C1C7C8); /* C1C7C4: ble     $c1c7c8 */
-L_C1C7C6:
-    FA18_CHECK(0xC1C7C6);
-    FA18_OP(0xC1C7C6, 0x7AFF, 0xC1C7C8); /* C1C7C6: moveq   #-$1, D5 */
-L_C1C7C8:
-    FA18_CHECK(0xC1C7C8);
-    FA18_OP(0xC1C7C8, 0x13C3, 0xC1C7CE); /* C1C7C8: move.b  D3, $c45850.l */
-L_C1C7CE:
-    FA18_CHECK(0xC1C7CE);
-    FA18_OP(0xC1C7CE, 0xB079, 0xC1C7D4); /* C1C7CE: cmp.w   $c4594c.l, D0 */
-    FA18_BCC(0xC1C7D4, 0x6708, 0xC1C7D6, 0xC1C7DE, L_C1C7DE); /* C1C7D4: beq     $c1c7de */
-L_C1C7D6:
-    FA18_CHECK(0xC1C7D6);
-    FA18_OP(0xC1C7D6, 0x7AFF, 0xC1C7D8); /* C1C7D6: moveq   #-$1, D5 */
-    FA18_OP(0xC1C7D8, 0x33C0, 0xC1C7DE); /* C1C7D8: move.w  D0, $c4594c.l */
-L_C1C7DE:
-    FA18_CHECK(0xC1C7DE);
-    FA18_OP(0xC1C7DE, 0xB879, 0xC1C7E4); /* C1C7DE: cmp.w   $c4594e.l, D4 */
-    FA18_BCC(0xC1C7E4, 0x6708, 0xC1C7E6, 0xC1C7EE, L_C1C7EE); /* C1C7E4: beq     $c1c7ee */
-L_C1C7E6:
-    FA18_CHECK(0xC1C7E6);
-    FA18_OP(0xC1C7E6, 0x7AFF, 0xC1C7E8); /* C1C7E6: moveq   #-$1, D5 */
-    FA18_OP(0xC1C7E8, 0x33C4, 0xC1C7EE); /* C1C7E8: move.w  D4, $c4594e.l */
-L_C1C7EE:
-    FA18_CHECK(0xC1C7EE);
-    FA18_OP(0xC1C7EE, 0x8B39, 0xC1C7F4); /* C1C7EE: or.b    D5, $c45858.l */
-    FA18_RETURN(0xC1C7F4, 0x4E75); /* C1C7F4: rts */
-}
-
-int fa18_fn_C1C7F6(int entry) {
-    switch (entry) {
-    case 0: goto L_C1C7F6;
-    case 1: goto L_C1C7FC;
-    case 2: goto L_C1C7FE;
-    case 3: goto L_C1C804;
-    case 4: goto L_C1C806;
-    case 5: goto L_C1C80C;
-    case 6: goto L_C1C80E;
-    case 7: goto L_C1C814;
-    case 8: goto L_C1C818;
-    case 9: goto L_C1C81C;
-    case 10: goto L_C1C820;
-    case 11: goto L_C1C824;
-    case 12: goto L_C1C826;
-    case 13: goto L_C1C82C;
-    case 14: goto L_C1C832;
-    case 15: goto L_C1C834;
-    case 16: goto L_C1C83A;
-    case 17: goto L_C1C844;
-    case 18: goto L_C1C84A;
-    case 19: goto L_C1C854;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1C7F6:
-    FA18_CHECK(0xC1C7F6);
-    FA18_OP(0xC1C7F6, 0x302B, 0xC1C7FA); /* C1C7F6: move.w  ($56,A3), D0 */
-    FA18_BCC(0xC1C7FA, 0x6C02, 0xC1C7FC, 0xC1C7FE, L_C1C7FE); /* C1C7FA: bge     $c1c7fe */
-L_C1C7FC:
-    FA18_CHECK(0xC1C7FC);
-    FA18_OP(0xC1C7FC, 0x4440, 0xC1C7FE); /* C1C7FC: neg.w   D0 */
-L_C1C7FE:
-    FA18_CHECK(0xC1C7FE);
-    FA18_OP(0xC1C7FE, 0x322B, 0xC1C802); /* C1C7FE: move.w  ($58,A3), D1 */
-    FA18_BCC(0xC1C802, 0x6C02, 0xC1C804, 0xC1C806, L_C1C806); /* C1C802: bge     $c1c806 */
-L_C1C804:
-    FA18_CHECK(0xC1C804);
-    FA18_OP(0xC1C804, 0x4441, 0xC1C806); /* C1C804: neg.w   D1 */
-L_C1C806:
-    FA18_CHECK(0xC1C806);
-    FA18_OP(0xC1C806, 0x342B, 0xC1C80A); /* C1C806: move.w  ($5a,A3), D2 */
-    FA18_BCC(0xC1C80A, 0x6C02, 0xC1C80C, 0xC1C80E, L_C1C80E); /* C1C80A: bge     $c1c80e */
-L_C1C80C:
-    FA18_CHECK(0xC1C80C);
-    FA18_OP(0xC1C80C, 0x4442, 0xC1C80E); /* C1C80C: neg.w   D2 */
-L_C1C80E:
-    FA18_CHECK(0xC1C80E);
-    FA18_OP(0xC1C80E, 0xE442, 0xC1C810); /* C1C80E: asr.w   #2, D2 */
-    FA18_OP(0xC1C810, 0xB240, 0xC1C812); /* C1C810: cmp.w   D0, D1 */
-    FA18_BCC(0xC1C812, 0x6E08, 0xC1C814, 0xC1C81C, L_C1C81C); /* C1C812: bgt     $c1c81c */
-L_C1C814:
-    FA18_CHECK(0xC1C814);
-    FA18_OP(0xC1C814, 0xB440, 0xC1C816); /* C1C814: cmp.w   D0, D2 */
-    FA18_BCC(0xC1C816, 0x6F0E, 0xC1C818, 0xC1C826, L_C1C826); /* C1C816: ble     $c1c826 */
-L_C1C818:
-    FA18_CHECK(0xC1C818);
-    FA18_OP(0xC1C818, 0x3002, 0xC1C81A); /* C1C818: move.w  D2, D0 */
-    FA18_JUMP(0xC1C81A, 0x600A, 0xC1C826, L_C1C826); /* C1C81A: bra     $c1c826 */
-L_C1C81C:
-    FA18_CHECK(0xC1C81C);
-    FA18_OP(0xC1C81C, 0xB242, 0xC1C81E); /* C1C81C: cmp.w   D2, D1 */
-    FA18_BCC(0xC1C81E, 0x6E04, 0xC1C820, 0xC1C824, L_C1C824); /* C1C81E: bgt     $c1c824 */
-L_C1C820:
-    FA18_CHECK(0xC1C820);
-    FA18_OP(0xC1C820, 0x3002, 0xC1C822); /* C1C820: move.w  D2, D0 */
-    FA18_JUMP(0xC1C822, 0x6002, 0xC1C826, L_C1C826); /* C1C822: bra     $c1c826 */
-L_C1C824:
-    FA18_CHECK(0xC1C824);
-    FA18_OP(0xC1C824, 0x3001, 0xC1C826); /* C1C824: move.w  D1, D0 */
-L_C1C826:
-    FA18_CHECK(0xC1C826);
-    FA18_OP(0xC1C826, 0x0C40, 0xC1C82A); /* C1C826: cmpi.w  #$60, D0 */
-    FA18_BCC(0xC1C82A, 0x6E18, 0xC1C82C, 0xC1C844, L_C1C844); /* C1C82A: bgt     $c1c844 */
-L_C1C82C:
-    FA18_CHECK(0xC1C82C);
-    FA18_OP(0xC1C82C, 0x322B, 0xC1C830); /* C1C82C: move.w  ($6c,A3), D1 */
-    FA18_BCC(0xC1C830, 0x6C02, 0xC1C832, 0xC1C834, L_C1C834); /* C1C830: bge     $c1c834 */
-L_C1C832:
-    FA18_CHECK(0xC1C832);
-    FA18_OP(0xC1C832, 0x4441, 0xC1C834); /* C1C832: neg.w   D1 */
-L_C1C834:
-    FA18_CHECK(0xC1C834);
-    FA18_OP(0xC1C834, 0x0C41, 0xC1C838); /* C1C834: cmpi.w  #$1000, D1 */
-    FA18_BCC(0xC1C838, 0x6E10, 0xC1C83A, 0xC1C84A, L_C1C84A); /* C1C838: bgt     $c1c84a */
-L_C1C83A:
-    FA18_CHECK(0xC1C83A);
-    FA18_OP(0xC1C83A, 0x13FC, 0xC1C842); /* C1C83A: move.b  #$5, $c458bc.l */
-    FA18_RETURN(0xC1C842, 0x4E75); /* C1C842: rts */
-L_C1C844:
-    FA18_CHECK(0xC1C844);
-    FA18_OP(0xC1C844, 0x0C40, 0xC1C848); /* C1C844: cmpi.w  #$c0, D0 */
-    FA18_BCC(0xC1C848, 0x6E0A, 0xC1C84A, 0xC1C854, L_C1C854); /* C1C848: bgt     $c1c854 */
-L_C1C84A:
-    FA18_CHECK(0xC1C84A);
-    FA18_OP(0xC1C84A, 0x13FC, 0xC1C852); /* C1C84A: move.b  #$3, $c458bc.l */
-    FA18_RETURN(0xC1C852, 0x4E75); /* C1C852: rts */
-L_C1C854:
-    FA18_CHECK(0xC1C854);
-    FA18_OP(0xC1C854, 0x13FC, 0xC1C85C); /* C1C854: move.b  #$1, $c458bc.l */
-    FA18_RETURN(0xC1C85C, 0x4E75); /* C1C85C: rts */
-}
-
-int fa18_fn_C1C860(int entry) {
-    switch (entry) {
-    case 0: goto L_C1C85E;
-    case 1: goto L_C1C860;
-    case 2: goto L_C1C86C;
-    case 3: goto L_C1C87E;
-    case 4: goto L_C1C88A;
-    case 5: goto L_C1C896;
-    case 6: goto L_C1C89C;
-    case 7: goto L_C1C8A2;
-    case 8: goto L_C1C8B0;
-    case 9: goto L_C1C8B8;
-    case 10: goto L_C1C8DA;
-    case 11: goto L_C1C8F2;
-    case 12: goto L_C1C918;
-    case 13: goto L_C1C924;
-    case 14: goto L_C1C92C;
-    case 15: goto L_C1C936;
-    case 16: goto L_C1C94A;
-    case 17: goto L_C1C952;
-    case 18: goto L_C1C964;
-    case 19: goto L_C1C96C;
-    case 20: goto L_C1C976;
-    case 21: goto L_C1C982;
-    case 22: goto L_C1C98A;
-    case 23: goto L_C1C996;
-    case 24: goto L_C1C99C;
-    case 25: goto L_C1C9AE;
-    case 26: goto L_C1C9C2;
-    case 27: goto L_C1C9C8;
-    case 28: goto L_C1C9D2;
-    case 29: goto L_C1C9D8;
-    case 30: goto L_C1C9E0;
-    case 31: goto L_C1C9EC;
-    case 32: goto L_C1C9F4;
-    case 33: goto L_C1CA04;
-    case 34: goto L_C1CA18;
-    case 35: goto L_C1CA20;
-    case 36: goto L_C1CA26;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1C85E:
-    FA18_CHECK(0xC1C85E);
-    FA18_RETURN(0xC1C85E, 0x4E75); /* C1C85E: rts */
-L_C1C860:
-    FA18_CHECK(0xC1C860);
-    FA18_OP(0xC1C860, 0x0CB9, 0xC1C86A); /* C1C860: cmpi.l  #-$8000000, $c45a66.l */
-    FA18_BCC(0xC1C86A, 0x6DF2, 0xC1C86C, 0xC1C85E, L_C1C85E); /* C1C86A: blt     $c1c85e */
-L_C1C86C:
-    FA18_CHECK(0xC1C86C);
-    FA18_OP(0xC1C86C, 0x48E7, 0xC1C870); /* C1C86C: movem.l D0-D5/A0, -(A7) */
-    FA18_OP(0xC1C870, 0x422E, 0xC1C874); /* C1C870: clr.b   (-$2c,A6) */
-    FA18_OP(0xC1C874, 0x1039, 0xC1C87A); /* C1C874: move.b  $c45858.l, D0 */
-    FA18_BCC(0xC1C87A, 0x6700, 0xC1C87E, 0xC1C996, L_C1C996); /* C1C87A: beq     $c1c996 */
-L_C1C87E:
-    FA18_CHECK(0xC1C87E);
-    FA18_OP(0xC1C87E, 0x33FC, 0xC1C886); /* C1C87E: move.w  #$49, $c45ad4.l */
-    FA18_CALL(0xC1C886, 0x6100, 0xC1C88A, 139, 0); /* C1C886: bsr     $c1ca82 */
-L_C1C88A:
-    FA18_CHECK(0xC1C88A);
-    FA18_OP(0xC1C88A, 0x1200, 0xC1C88C); /* C1C88A: move.b  D0, D1 */
-    FA18_OP(0xC1C88C, 0x0201, 0xC1C890); /* C1C88C: andi.b  #$f, D1 */
-    FA18_OP(0xC1C890, 0x0C01, 0xC1C894); /* C1C890: cmpi.b  #$c, D1 */
-    FA18_BCC(0xC1C894, 0x671A, 0xC1C896, 0xC1C8B0, L_C1C8B0); /* C1C894: beq     $c1c8b0 */
-L_C1C896:
-    FA18_CHECK(0xC1C896);
-    FA18_OP(0xC1C896, 0x0C01, 0xC1C89A); /* C1C896: cmpi.b  #$b, D1 */
-    FA18_BCC(0xC1C89A, 0x6714, 0xC1C89C, 0xC1C8B0, L_C1C8B0); /* C1C89A: beq     $c1c8b0 */
-L_C1C89C:
-    FA18_CHECK(0xC1C89C);
-    FA18_OP(0xC1C89C, 0x0C01, 0xC1C8A0); /* C1C89C: cmpi.b  #$f, D1 */
-    FA18_BCC(0xC1C8A0, 0x670E, 0xC1C8A2, 0xC1C8B0, L_C1C8B0); /* C1C8A0: beq     $c1c8b0 */
-L_C1C8A2:
-    FA18_CHECK(0xC1C8A2);
-    FA18_OP(0xC1C8A2, 0x33FC, 0xC1C8AA); /* C1C8A2: move.w  #$27, $c4599e.l */
-    FA18_CALL(0xC1C8AA, 0x4EB9, 0xC1C8B0, 15, 0); /* C1C8AA: jsr     $c06c02.l */
-L_C1C8B0:
-    FA18_CHECK(0xC1C8B0);
-    FA18_OP(0xC1C8B0, 0x4A39, 0xC1C8B6); /* C1C8B0: tst.b   $c45785.l */
-    FA18_BCC(0xC1C8B6, 0x6722, 0xC1C8B8, 0xC1C8DA, L_C1C8DA); /* C1C8B6: beq     $c1c8da */
-L_C1C8B8:
-    FA18_CHECK(0xC1C8B8);
-    FA18_OP(0xC1C8B8, 0x2239, 0xC1C8BE); /* C1C8B8: move.l  $c45c3e.l, D1 */
-    FA18_OP(0xC1C8BE, 0x2439, 0xC1C8C4); /* C1C8BE: move.l  $c45c46.l, D2 */
-    FA18_OP(0xC1C8C4, 0x0281, 0xC1C8CA); /* C1C8C4: andi.l  #$1fffffff, D1 */
-    FA18_OP(0xC1C8CA, 0x0282, 0xC1C8D0); /* C1C8CA: andi.l  #$1fffffff, D2 */
-    FA18_OP(0xC1C8D0, 0x4841, 0xC1C8D2); /* C1C8D0: swap    D1 */
-    FA18_OP(0xC1C8D2, 0x4842, 0xC1C8D4); /* C1C8D2: swap    D2 */
-    FA18_OP(0xC1C8D4, 0xE041, 0xC1C8D6); /* C1C8D4: asr.w   #8, D1 */
-    FA18_OP(0xC1C8D6, 0xE042, 0xC1C8D8); /* C1C8D6: asr.w   #8, D2 */
-    FA18_JUMP(0xC1C8D8, 0x6018, 0xC1C8F2, L_C1C8F2); /* C1C8D8: bra     $c1c8f2 */
-L_C1C8DA:
-    FA18_CHECK(0xC1C8DA);
-    FA18_OP(0xC1C8DA, 0x43F9, 0xC1C8E0); /* C1C8DA: lea     $c46184.l, A1 */
-    FA18_OP(0xC1C8E0, 0xD2F9, 0xC1C8E6); /* C1C8E0: adda.w  $c458de.l, A1 */
-    FA18_OP(0xC1C8E6, 0x3229, 0xC1C8EA); /* C1C8E6: move.w  ($6,A1), D1 */
-    FA18_OP(0xC1C8EA, 0x3429, 0xC1C8EE); /* C1C8EA: move.w  ($8,A1), D2 */
-    FA18_OP(0xC1C8EE, 0xE441, 0xC1C8F0); /* C1C8EE: asr.w   #2, D1 */
-    FA18_OP(0xC1C8F0, 0xE442, 0xC1C8F2); /* C1C8F0: asr.w   #2, D2 */
-L_C1C8F2:
-    FA18_CHECK(0xC1C8F2);
-    FA18_OP(0xC1C8F2, 0x33C1, 0xC1C8F8); /* C1C8F2: move.w  D1, $c45948.l */
-    FA18_OP(0xC1C8F8, 0x33C2, 0xC1C8FE); /* C1C8F8: move.w  D2, $c4594a.l */
-    FA18_OP(0xC1C8FE, 0x13FC, 0xC1C906); /* C1C8FE: move.b  #$1, $c45859.l */
-    FA18_OP(0xC1C906, 0x4239, 0xC1C90C); /* C1C906: clr.b   $c45864.l */
-    FA18_OP(0xC1C90C, 0x4239, 0xC1C912); /* C1C90C: clr.b   $c45865.l */
-    FA18_OP(0xC1C912, 0x0800, 0xC1C916); /* C1C912: btst    #$0, D0 */
-    FA18_BCC(0xC1C916, 0x6714, 0xC1C918, 0xC1C92C, L_C1C92C); /* C1C916: beq     $c1c92c */
-L_C1C918:
-    FA18_CHECK(0xC1C918);
-    FA18_OP(0xC1C918, 0x08B9, 0xC1C920); /* C1C918: bclr    #$0, $c45858.l */
-    FA18_CALL(0xC1C920, 0x6100, 0xC1C924, 146, 0); /* C1C920: bsr     $c1d10c */
-L_C1C924:
-    FA18_CHECK(0xC1C924);
-    FA18_OP(0xC1C924, 0x0839, 0xC1C92C); /* C1C924: btst    #$7, $c45858.l */
-L_C1C92C:
-    FA18_CHECK(0xC1C92C);
-    FA18_OP(0xC1C92C, 0x0839, 0xC1C934); /* C1C92C: btst    #$1, $c45858.l */
-    FA18_BCC(0xC1C934, 0x671C, 0xC1C936, 0xC1C952, L_C1C952); /* C1C934: beq     $c1c952 */
-L_C1C936:
-    FA18_CHECK(0xC1C936);
-    FA18_OP(0xC1C936, 0x08B9, 0xC1C93E); /* C1C936: bclr    #$1, $c45858.l */
-    FA18_OP(0xC1C93E, 0x13FC, 0xC1C946); /* C1C93E: move.b  #$1, $c45865.l */
-    FA18_CALL(0xC1C946, 0x6100, 0xC1C94A, 146, 0); /* C1C946: bsr     $c1d10c */
-L_C1C94A:
-    FA18_CHECK(0xC1C94A);
-    FA18_OP(0xC1C94A, 0x0839, 0xC1C952); /* C1C94A: btst    #$7, $c45858.l */
-L_C1C952:
-    FA18_CHECK(0xC1C952);
-    FA18_OP(0xC1C952, 0x13FC, 0xC1C95A); /* C1C952: move.b  #$1, $c45864.l */
-    FA18_OP(0xC1C95A, 0x0839, 0xC1C962); /* C1C95A: btst    #$2, $c45858.l */
-    FA18_BCC(0xC1C962, 0x6708, 0xC1C964, 0xC1C96C, L_C1C96C); /* C1C962: beq     $c1c96c */
-L_C1C964:
-    FA18_CHECK(0xC1C964);
-    FA18_OP(0xC1C964, 0x08B9, 0xC1C96C); /* C1C964: bclr    #$2, $c45858.l */
-L_C1C96C:
-    FA18_CHECK(0xC1C96C);
-    FA18_OP(0xC1C96C, 0x0839, 0xC1C974); /* C1C96C: btst    #$3, $c45858.l */
-    FA18_BCC(0xC1C974, 0x6714, 0xC1C976, 0xC1C98A, L_C1C98A); /* C1C974: beq     $c1c98a */
-L_C1C976:
-    FA18_CHECK(0xC1C976);
-    FA18_OP(0xC1C976, 0x08B9, 0xC1C97E); /* C1C976: bclr    #$3, $c45858.l */
-    FA18_CALL(0xC1C97E, 0x6100, 0xC1C982, 146, 0); /* C1C97E: bsr     $c1d10c */
-L_C1C982:
-    FA18_CHECK(0xC1C982);
-    FA18_OP(0xC1C982, 0x33FC, 0xC1C98A); /* C1C982: move.w  #$4a, $c45ad4.l */
-L_C1C98A:
-    FA18_CHECK(0xC1C98A);
-    FA18_OP(0xC1C98A, 0x1D7C, 0xC1C990); /* C1C98A: move.b  #$1, (-$2c,A6) */
-    FA18_OP(0xC1C990, 0x4239, 0xC1C996); /* C1C990: clr.b   $c45858.l */
-L_C1C996:
-    FA18_CHECK(0xC1C996);
-    FA18_CALL(0xC1C996, 0x4EB9, 0xC1C99C, 154, 0); /* C1C996: jsr     $c1e328.l */
-L_C1C99C:
-    FA18_CHECK(0xC1C99C);
-    FA18_OP(0xC1C99C, 0x33FC, 0xC1C9A4); /* C1C99C: move.w  #$4b, $c45ad4.l */
-    FA18_OP(0xC1C9A4, 0x422E, 0xC1C9A8); /* C1C9A4: clr.b   (-$2c,A6) */
-    FA18_CALL(0xC1C9A8, 0x4EB9, 0xC1C9AE, 156, 1); /* C1C9A8: jsr     $c1e540.l */
-L_C1C9AE:
-    FA18_CHECK(0xC1C9AE);
-    FA18_OP(0xC1C9AE, 0x33FC, 0xC1C9B6); /* C1C9AE: move.w  #$4c, $c45ad4.l */
-    FA18_OP(0xC1C9B6, 0x3239, 0xC1C9BC); /* C1C9B6: move.w  $c458da.l, D1 */
-    FA18_OP(0xC1C9BC, 0x0241, 0xC1C9C0); /* C1C9BC: andi.w  #$1, D1 */
-    FA18_BCC(0xC1C9C0, 0x6610, 0xC1C9C2, 0xC1C9D2, L_C1C9D2); /* C1C9C0: bne     $c1c9d2 */
-L_C1C9C2:
-    FA18_CHECK(0xC1C9C2);
-    FA18_CALL(0xC1C9C2, 0x4EB9, 0xC1C9C8, 26, 0); /* C1C9C2: jsr     $c09a78.l */
-L_C1C9C8:
-    FA18_CHECK(0xC1C9C8);
-    FA18_OP(0xC1C9C8, 0x33FC, 0xC1C9D0); /* C1C9C8: move.w  #$4d, $c45ad4.l */
-    FA18_JUMP(0xC1C9D0, 0x600E, 0xC1C9E0, L_C1C9E0); /* C1C9D0: bra     $c1c9e0 */
-L_C1C9D2:
-    FA18_CHECK(0xC1C9D2);
-    FA18_CALL(0xC1C9D2, 0x4EB9, 0xC1C9D8, 27, 0); /* C1C9D2: jsr     $c09a98.l */
-L_C1C9D8:
-    FA18_CHECK(0xC1C9D8);
-    FA18_OP(0xC1C9D8, 0x33FC, 0xC1C9E0); /* C1C9D8: move.w  #$4e, $c45ad4.l */
-L_C1C9E0:
-    FA18_CHECK(0xC1C9E0);
-    FA18_OP(0xC1C9E0, 0x4CDF, 0xC1C9E4); /* C1C9E0: movem.l (A7)+, D0-D5/A0 */
-    FA18_OP(0xC1C9E4, 0x4A39, 0xC1C9EA); /* C1C9E4: tst.b   $c457a7.l */
-    FA18_BCC(0xC1C9EA, 0x663A, 0xC1C9EC, 0xC1CA26, L_C1CA26); /* C1C9EA: bne     $c1ca26 */
-L_C1C9EC:
-    FA18_CHECK(0xC1C9EC);
-    FA18_OP(0xC1C9EC, 0x4A39, 0xC1C9F2); /* C1C9EC: tst.b   $c457a4.l */
-    FA18_BCC(0xC1C9F2, 0x6732, 0xC1C9F4, 0xC1CA26, L_C1CA26); /* C1C9F2: beq     $c1ca26 */
-L_C1C9F4:
-    FA18_CHECK(0xC1C9F4);
-    FA18_OP(0xC1C9F4, 0x303C, 0xC1C9F8); /* C1C9F4: move.w  #$72, D0 */
-    FA18_OP(0xC1C9F8, 0x323C, 0xC1C9FC); /* C1C9F8: move.w  #$a0, D1 */
-    FA18_OP(0xC1C9FC, 0x4A39, 0xC1CA02); /* C1C9FC: tst.b   $c45859.l */
-    FA18_BCC(0xC1CA02, 0x6714, 0xC1CA04, 0xC1CA18, L_C1CA18); /* C1CA02: beq     $c1ca18 */
-L_C1CA04:
-    FA18_CHECK(0xC1CA04);
-    FA18_OP(0xC1CA04, 0x23FC, 0xC1CA0E); /* C1CA04: move.l  #$fffff, $c456e6.l */
-    FA18_OP(0xC1CA0E, 0x33FC, 0xC1CA16); /* C1CA0E: move.w  #$f, $c45954.l */
-    FA18_JUMP(0xC1CA16, 0x6008, 0xC1CA20, L_C1CA20); /* C1CA16: bra     $c1ca20 */
-L_C1CA18:
-    FA18_CHECK(0xC1CA18);
-    FA18_OP(0xC1CA18, 0x33FC, 0xC1CA20); /* C1CA18: move.w  #$6, $c45954.l */
-L_C1CA20:
-    FA18_CHECK(0xC1CA20);
-    FA18_CALL(0xC1CA20, 0x4EB9, 0xC1CA26, 318, 6); /* C1CA20: jsr     $c2f66e.l */
-L_C1CA26:
-    FA18_CHECK(0xC1CA26);
-    FA18_OP(0xC1CA26, 0x4239, 0xC1CA2C); /* C1CA26: clr.b   $c45859.l */
-    FA18_RETURN(0xC1CA2C, 0x4E75); /* C1CA2C: rts */
-}
-
-int fa18_fn_C1CA82(int entry) {
-    switch (entry) {
-    case 0: goto L_C1CA82;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1CA82:
-    FA18_CHECK(0xC1CA82);
-    FA18_OP(0xC1CA82, 0x41F9, 0xC1CA88); /* C1CA82: lea     $c46184.l, A0 */
-    FA18_OP(0xC1CA88, 0x1E3C, 0xC1CA8C); /* C1CA88: move.b  #$10, D7 */
-    FA18_OP(0xC1CA8C, 0x8F28, 0xC1CA90); /* C1CA8C: or.b    D7, ($1,A0) */
-    FA18_OP(0xC1CA90, 0x8F28, 0xC1CA94); /* C1CA90: or.b    D7, ($201,A0) */
-    FA18_OP(0xC1CA94, 0x8F28, 0xC1CA98); /* C1CA94: or.b    D7, ($401,A0) */
-    FA18_OP(0xC1CA98, 0x8F28, 0xC1CA9C); /* C1CA98: or.b    D7, ($601,A0) */
-    FA18_OP(0xC1CA9C, 0x8F28, 0xC1CAA0); /* C1CA9C: or.b    D7, ($801,A0) */
-    FA18_OP(0xC1CAA0, 0x8F28, 0xC1CAA4); /* C1CAA0: or.b    D7, ($a01,A0) */
-    FA18_OP(0xC1CAA4, 0x8F28, 0xC1CAA8); /* C1CAA4: or.b    D7, ($c01,A0) */
-    FA18_OP(0xC1CAA8, 0x8F28, 0xC1CAAC); /* C1CAA8: or.b    D7, ($e01,A0) */
-    FA18_OP(0xC1CAAC, 0x8F28, 0xC1CAB0); /* C1CAAC: or.b    D7, ($1001,A0) */
-    FA18_OP(0xC1CAB0, 0x8F28, 0xC1CAB4); /* C1CAB0: or.b    D7, ($1201,A0) */
-    FA18_OP(0xC1CAB4, 0x8F28, 0xC1CAB8); /* C1CAB4: or.b    D7, ($1401,A0) */
-    FA18_OP(0xC1CAB8, 0x8F28, 0xC1CABC); /* C1CAB8: or.b    D7, ($1601,A0) */
-    FA18_OP(0xC1CABC, 0x8F28, 0xC1CAC0); /* C1CABC: or.b    D7, ($1801,A0) */
-    FA18_OP(0xC1CAC0, 0x8F28, 0xC1CAC4); /* C1CAC0: or.b    D7, ($1a01,A0) */
-    FA18_OP(0xC1CAC4, 0x8F28, 0xC1CAC8); /* C1CAC4: or.b    D7, ($1c01,A0) */
-    FA18_OP(0xC1CAC8, 0x8F28, 0xC1CACC); /* C1CAC8: or.b    D7, ($1e01,A0) */
-    FA18_OP(0xC1CACC, 0x41F9, 0xC1CAD2); /* C1CACC: lea     $c48184.l, A0 */
-    FA18_OP(0xC1CAD2, 0x8F28, 0xC1CAD6); /* C1CAD2: or.b    D7, ($1,A0) */
-    FA18_OP(0xC1CAD6, 0x8F28, 0xC1CADA); /* C1CAD6: or.b    D7, ($21,A0) */
-    FA18_OP(0xC1CADA, 0x8F28, 0xC1CADE); /* C1CADA: or.b    D7, ($41,A0) */
-    FA18_OP(0xC1CADE, 0x8F28, 0xC1CAE2); /* C1CADE: or.b    D7, ($61,A0) */
-    FA18_OP(0xC1CAE2, 0x8F28, 0xC1CAE6); /* C1CAE2: or.b    D7, ($81,A0) */
-    FA18_OP(0xC1CAE6, 0x8F28, 0xC1CAEA); /* C1CAE6: or.b    D7, ($a1,A0) */
-    FA18_OP(0xC1CAEA, 0x8F28, 0xC1CAEE); /* C1CAEA: or.b    D7, ($c1,A0) */
-    FA18_OP(0xC1CAEE, 0x8F28, 0xC1CAF2); /* C1CAEE: or.b    D7, ($e1,A0) */
-    FA18_OP(0xC1CAF2, 0x8F28, 0xC1CAF6); /* C1CAF2: or.b    D7, ($101,A0) */
-    FA18_OP(0xC1CAF6, 0x8F28, 0xC1CAFA); /* C1CAF6: or.b    D7, ($121,A0) */
-    FA18_OP(0xC1CAFA, 0x8F28, 0xC1CAFE); /* C1CAFA: or.b    D7, ($141,A0) */
-    FA18_OP(0xC1CAFE, 0x8F28, 0xC1CB02); /* C1CAFE: or.b    D7, ($161,A0) */
-    FA18_OP(0xC1CB02, 0x8F28, 0xC1CB06); /* C1CB02: or.b    D7, ($181,A0) */
-    FA18_OP(0xC1CB06, 0x8F28, 0xC1CB0A); /* C1CB06: or.b    D7, ($1a1,A0) */
-    FA18_OP(0xC1CB0A, 0x8F28, 0xC1CB0E); /* C1CB0A: or.b    D7, ($1c1,A0) */
-    FA18_OP(0xC1CB0E, 0x8F28, 0xC1CB12); /* C1CB0E: or.b    D7, ($1e1,A0) */
-    FA18_RETURN(0xC1CB12, 0x4E75); /* C1CB12: rts */
-}
-
-int fa18_fn_C1CB14(int entry) {
-    switch (entry) {
-    case 0: goto L_C1CB14;
-    case 1: goto L_C1CB38;
-    case 2: goto L_C1CB54;
-    case 3: goto L_C1CB5E;
-    case 4: goto L_C1CB74;
-    case 5: goto L_C1CB7C;
-    case 6: goto L_C1CB84;
-    case 7: goto L_C1CB8A;
-    case 8: goto L_C1CB9C;
-    case 9: goto L_C1CBB6;
-    case 10: goto L_C1CBBE;
-    case 11: goto L_C1CBCC;
-    case 12: goto L_C1CBEE;
-    case 13: goto L_C1CBFE;
-    case 14: goto L_C1CC06;
-    case 15: goto L_C1CC14;
-    case 16: goto L_C1CC1A;
-    case 17: goto L_C1CC1C;
-    case 18: goto L_C1CC26;
-    case 19: goto L_C1CC34;
-    case 20: goto L_C1CC38;
-    case 21: goto L_C1CC42;
-    case 22: goto L_C1CC48;
-    case 23: goto L_C1CC50;
-    case 24: goto L_C1CC88;
-    case 25: goto L_C1CC90;
-    case 26: goto L_C1CC98;
-    case 27: goto L_C1CC9E;
-    case 28: goto L_C1CCA8;
-    case 29: goto L_C1CCAA;
-    case 30: goto L_C1CCAE;
-    case 31: goto L_C1CCBA;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1CB14:
-    FA18_CHECK(0xC1CB14);
-    FA18_OP(0xC1CB14, 0x4239, 0xC1CB1A); /* C1CB14: clr.b   $c45865.l */
-    FA18_OP(0xC1CB1A, 0x33F9, 0xC1CB24); /* C1CB1A: move.w  $c459ac.l, $c459aa.l */
-    FA18_JUMP(0xC1CB24, 0x6012, 0xC1CB38, L_C1CB38); /* C1CB24: bra     $c1cb38 */
-L_C1CB38:
-    FA18_CHECK(0xC1CB38);
-    FA18_OP(0xC1CB38, 0x4239, 0xC1CB3E); /* C1CB38: clr.b   $c45864.l */
-    FA18_OP(0xC1CB3E, 0x4239, 0xC1CB44); /* C1CB3E: clr.b   $c458bb.l */
-    FA18_OP(0xC1CB44, 0x2039, 0xC1CB4A); /* C1CB44: move.l  $c45a78.l, D0 */
-    FA18_OP(0xC1CB4A, 0x4480, 0xC1CB4C); /* C1CB4A: neg.l   D0 */
-    FA18_OP(0xC1CB4C, 0x0C80, 0xC1CB52); /* C1CB4C: cmpi.l  #$7fff, D0 */
-    FA18_BCC(0xC1CB52, 0x6F0A, 0xC1CB54, 0xC1CB5E, L_C1CB5E); /* C1CB52: ble     $c1cb5e */
-L_C1CB54:
-    FA18_CHECK(0xC1CB54);
-    FA18_OP(0xC1CB54, 0x33FC, 0xC1CB5C); /* C1CB54: move.w  #$7ffe, $c459b2.l */
-    FA18_JUMP(0xC1CB5C, 0x6016, 0xC1CB74, L_C1CB74); /* C1CB5C: bra     $c1cb74 */
-L_C1CB5E:
-    FA18_CHECK(0xC1CB5E);
-    FA18_OP(0xC1CB5E, 0xEE40, 0xC1CB60); /* C1CB5E: asr.w   #7, D0 */
-    FA18_OP(0xC1CB60, 0x45F9, 0xC1CB66); /* C1CB60: lea     $c41130.l, A2 */
-    FA18_OP(0xC1CB66, 0x1032, 0xC1CB6A); /* C1CB66: move.b  (A2,D0.w), D0 */
-    FA18_OP(0xC1CB6A, 0x4880, 0xC1CB6C); /* C1CB6A: ext.w   D0 */
-    FA18_OP(0xC1CB6C, 0xE140, 0xC1CB6E); /* C1CB6C: asl.w   #8, D0 */
-    FA18_OP(0xC1CB6E, 0x33C0, 0xC1CB74); /* C1CB6E: move.w  D0, $c459b2.l */
-L_C1CB74:
-    FA18_CHECK(0xC1CB74);
-    FA18_OP(0xC1CB74, 0x4A39, 0xC1CB7A); /* C1CB74: tst.b   $c45865.l */
-    FA18_BCC(0xC1CB7A, 0x6608, 0xC1CB7C, 0xC1CB84, L_C1CB84); /* C1CB7A: bne     $c1cb84 */
-L_C1CB7C:
-    FA18_CHECK(0xC1CB7C);
-    FA18_OP(0xC1CB7C, 0x41F9, 0xC1CB82); /* C1CB7C: lea     $c4e9aa.l, A0 */
-    FA18_JUMP(0xC1CB82, 0x6006, 0xC1CB8A, L_C1CB8A); /* C1CB82: bra     $c1cb8a */
-L_C1CB84:
-    FA18_CHECK(0xC1CB84);
-    FA18_OP(0xC1CB84, 0x41F9, 0xC1CB8A); /* C1CB84: lea     $c4f03a.l, A0 */
-L_C1CB8A:
-    FA18_CHECK(0xC1CB8A);
-    FA18_OP(0xC1CB8A, 0x3039, 0xC1CB90); /* C1CB8A: move.w  $c459aa.l, D0 */
-    FA18_OP(0xC1CB90, 0xD0C0, 0xC1CB92); /* C1CB90: adda.w  D0, A0 */
-    FA18_OP(0xC1CB92, 0x3E18, 0xC1CB94); /* C1CB92: move.w  (A0)+, D7 */
-    FA18_OP(0xC1CB94, 0x0C47, 0xC1CB98); /* C1CB94: cmpi.w  #-$1, D7 */
-    FA18_BCC(0xC1CB98, 0x6700, 0xC1CB9C, 0xC1CCBA, L_C1CCBA); /* C1CB98: beq     $c1ccba */
-L_C1CB9C:
-    FA18_CHECK(0xC1CB9C);
-    FA18_OP(0xC1CB9C, 0x13C7, 0xC1CBA2); /* C1CB9C: move.b  D7, $c4585b.l */
-    FA18_OP(0xC1CBA2, 0x1007, 0xC1CBA4); /* C1CBA2: move.b  D7, D0 */
-    FA18_OP(0xC1CBA4, 0x0240, 0xC1CBA8); /* C1CBA4: andi.w  #$f, D0 */
-    FA18_OP(0xC1CBA8, 0x33C0, 0xC1CBAE); /* C1CBA8: move.w  D0, $c45ab8.l */
-    FA18_OP(0xC1CBAE, 0x2258, 0xC1CBB0); /* C1CBAE: movea.l (A0)+, A1 */
-    FA18_OP(0xC1CBB0, 0x4A51, 0xC1CBB2); /* C1CBB0: tst.w   (A1) */
-    FA18_BCC(0xC1CBB2, 0x6D00, 0xC1CBB6, 0xC1CCAE, L_C1CCAE); /* C1CBB2: blt     $c1ccae */
-L_C1CBB6:
-    FA18_CHECK(0xC1CBB6);
-    FA18_OP(0xC1CBB6, 0x0C91, 0xC1CBBC); /* C1CBB6: cmpi.l  #$c1ed48, (A1) */
-    FA18_BCC(0xC1CBBC, 0x660E, 0xC1CBBE, 0xC1CBCC, L_C1CBCC); /* C1CBBC: bne     $c1cbcc */
-L_C1CBBE:
-    FA18_CHECK(0xC1CBBE);
-    FA18_OP(0xC1CBBE, 0x0CB9, 0xC1CBC8); /* C1CBBE: cmpi.l  #-$380000, $c45a66.l */
-    FA18_BCC(0xC1CBC8, 0x6D00, 0xC1CBCC, 0xC1CCAE, L_C1CCAE); /* C1CBC8: blt     $c1ccae */
-L_C1CBCC:
-    FA18_CHECK(0xC1CBCC);
-    FA18_OP(0xC1CBCC, 0x4C98, 0xC1CBD0); /* C1CBCC: movem.w (A0)+, D2-D4 */
-    FA18_OP(0xC1CBD0, 0x48B9, 0xC1CBD8); /* C1CBD0: movem.w D2-D4, $c45b2a.l */
-    FA18_OP(0xC1CBD8, 0xE182, 0xC1CBDA); /* C1CBD8: asl.l   #8, D2 */
-    FA18_OP(0xC1CBDA, 0xE183, 0xC1CBDC); /* C1CBDA: asl.l   #8, D3 */
-    FA18_OP(0xC1CBDC, 0xE184, 0xC1CBDE); /* C1CBDC: asl.l   #8, D4 */
-    FA18_OP(0xC1CBDE, 0x48F9, 0xC1CBE6); /* C1CBDE: movem.l D2-D4, $c45b30.l */
-    FA18_OP(0xC1CBE6, 0x0C91, 0xC1CBEC); /* C1CBE6: cmpi.l  #$c1ed3c, (A1) */
-    FA18_BCC(0xC1CBEC, 0x6762, 0xC1CBEE, 0xC1CC50, L_C1CC50); /* C1CBEC: beq     $c1cc50 */
-L_C1CBEE:
-    FA18_CHECK(0xC1CBEE);
-    FA18_OP(0xC1CBEE, 0x3228, 0xC1CBF2); /* C1CBEE: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CBF2, 0x48C1, 0xC1CBF4); /* C1CBF2: ext.l   D1 */
-    FA18_OP(0xC1CBF4, 0xE1A1, 0xC1CBF6); /* C1CBF4: asl.l   D0, D1 */
-    FA18_OP(0xC1CBF6, 0x0C81, 0xC1CBFC); /* C1CBF6: cmpi.l  #$400, D1 */
-    FA18_BCC(0xC1CBFC, 0x6C3A, 0xC1CBFE, 0xC1CC38, L_C1CC38); /* C1CBFC: bge     $c1cc38 */
-L_C1CBFE:
-    FA18_CHECK(0xC1CBFE);
-    FA18_OP(0xC1CBFE, 0x0C81, 0xC1CC04); /* C1CBFE: cmpi.l  #$100, D1 */
-    FA18_BCC(0xC1CC04, 0x6D20, 0xC1CC06, 0xC1CC26, L_C1CC26); /* C1CC04: blt     $c1cc26 */
-L_C1CC06:
-    FA18_CHECK(0xC1CC06);
-    FA18_OP(0xC1CC06, 0x3039, 0xC1CC0C); /* C1CC06: move.w  $c458da.l, D0 */
-    FA18_OP(0xC1CC0C, 0x3207, 0xC1CC0E); /* C1CC0C: move.w  D7, D1 */
-    FA18_OP(0xC1CC0E, 0x0801, 0xC1CC12); /* C1CC0E: btst    #$8, D1 */
-    FA18_BCC(0xC1CC12, 0x6608, 0xC1CC14, 0xC1CC1C, L_C1CC1C); /* C1CC12: bne     $c1cc1c */
-L_C1CC14:
-    FA18_CHECK(0xC1CC14);
-    FA18_OP(0xC1CC14, 0x0240, 0xC1CC18); /* C1CC14: andi.w  #$3, D0 */
-    FA18_BCC(0xC1CC18, 0x670C, 0xC1CC1A, 0xC1CC26, L_C1CC26); /* C1CC18: beq     $c1cc26 */
-L_C1CC1A:
-    FA18_CHECK(0xC1CC1A);
-    FA18_JUMP(0xC1CC1A, 0x601C, 0xC1CC38, L_C1CC38); /* C1CC1A: bra     $c1cc38 */
-L_C1CC1C:
-    FA18_CHECK(0xC1CC1C);
-    FA18_OP(0xC1CC1C, 0x0240, 0xC1CC20); /* C1CC1C: andi.w  #$3, D0 */
-    FA18_OP(0xC1CC20, 0x0C40, 0xC1CC24); /* C1CC20: cmpi.w  #$2, D0 */
-    FA18_BCC(0xC1CC24, 0x6612, 0xC1CC26, 0xC1CC38, L_C1CC38); /* C1CC24: bne     $c1cc38 */
-L_C1CC26:
-    FA18_CHECK(0xC1CC26);
-    FA18_OP(0xC1CC26, 0x4CB9, 0xC1CC2E); /* C1CC26: movem.w $c45b2a.l, D2-D4 */
-    FA18_CALL(0xC1CC2E, 0x4EB9, 0xC1CC34, 152, 1); /* C1CC2E: jsr     $c1d91a.l */
-L_C1CC34:
-    FA18_CHECK(0xC1CC34);
-    FA18_OP(0xC1CC34, 0x3141, 0xC1CC38); /* C1CC34: move.w  D1, ($4,A0) */
-L_C1CC38:
-    FA18_CHECK(0xC1CC38);
-    FA18_OP(0xC1CC38, 0x33E8, 0xC1CC40); /* C1CC38: move.w  ($8,A0), $c45aba.l */
-    FA18_BCC(0xC1CC40, 0x6C0E, 0xC1CC42, 0xC1CC50, L_C1CC50); /* C1CC40: bge     $c1cc50 */
-L_C1CC42:
-    FA18_CHECK(0xC1CC42);
-    FA18_OP(0xC1CC42, 0x5328, 0xC1CC46); /* C1CC42: subq.b  #1, ($6,A0) */
-    FA18_BCC(0xC1CC46, 0x6C66, 0xC1CC48, 0xC1CCAE, L_C1CCAE); /* C1CC46: bge     $c1ccae */
-L_C1CC48:
-    FA18_CHECK(0xC1CC48);
-    FA18_OP(0xC1CC48, 0x1179, 0xC1CC50); /* C1CC48: move.b  $c458bc.l, ($6,A0) */
-L_C1CC50:
-    FA18_CHECK(0xC1CC50);
-    FA18_OP(0xC1CC50, 0x5328, 0xC1CC54); /* C1CC50: subq.b  #1, ($7,A0) */
-    FA18_OP(0xC1CC54, 0x13E8, 0xC1CC5C); /* C1CC54: move.b  ($7,A0), $c458bd.l */
-    FA18_OP(0xC1CC5C, 0x3228, 0xC1CC60); /* C1CC5C: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CC60, 0x33C1, 0xC1CC66); /* C1CC60: move.w  D1, $c45b40.l */
-    FA18_OP(0xC1CC66, 0xB279, 0xC1CC6C); /* C1CC66: cmp.w   $c459b2.l, D1 */
-    FA18_OP(0xC1CC6C, 0x2459, 0xC1CC6E); /* C1CC6C: movea.l (A1)+, A2 */
-    FA18_OP(0xC1CC6E, 0x2059, 0xC1CC70); /* C1CC6E: movea.l (A1)+, A0 */
-    FA18_OP(0xC1CC70, 0x23D9, 0xC1CC76); /* C1CC70: move.l  (A1)+, $c45a36.l */
-    FA18_OP(0xC1CC76, 0x23D9, 0xC1CC7C); /* C1CC76: move.l  (A1)+, $c45a3a.l */
-    FA18_OP(0xC1CC7C, 0xE04F, 0xC1CC7E); /* C1CC7C: lsr.w   #8, D7 */
-    FA18_OP(0xC1CC7E, 0x4887, 0xC1CC80); /* C1CC7E: ext.w   D7 */
-    FA18_OP(0xC1CC80, 0x33C7, 0xC1CC86); /* C1CC80: move.w  D7, $c459b4.l */
-    FA18_CALL_DYNAMIC(0xC1CC86, 0x4E92, 0xC1CC88); /* C1CC86: jsr     (A2) */
-L_C1CC88:
-    FA18_CHECK(0xC1CC88);
-    FA18_OP(0xC1CC88, 0x4A39, 0xC1CC8E); /* C1CC88: tst.b   $c45865.l */
-    FA18_BCC(0xC1CC8E, 0x6608, 0xC1CC90, 0xC1CC98, L_C1CC98); /* C1CC8E: bne     $c1cc98 */
-L_C1CC90:
-    FA18_CHECK(0xC1CC90);
-    FA18_OP(0xC1CC90, 0x41F9, 0xC1CC96); /* C1CC90: lea     $c4e9aa.l, A0 */
-    FA18_JUMP(0xC1CC96, 0x6006, 0xC1CC9E, L_C1CC9E); /* C1CC96: bra     $c1cc9e */
-L_C1CC98:
-    FA18_CHECK(0xC1CC98);
-    FA18_OP(0xC1CC98, 0x41F9, 0xC1CC9E); /* C1CC98: lea     $c4f03a.l, A0 */
-L_C1CC9E:
-    FA18_CHECK(0xC1CC9E);
-    FA18_OP(0xC1CC9E, 0x3239, 0xC1CCA4); /* C1CC9E: move.w  $c459aa.l, D1 */
-    FA18_OP(0xC1CCA4, 0x4A40, 0xC1CCA6); /* C1CCA4: tst.w   D0 */
-    FA18_BCC(0xC1CCA6, 0x6E02, 0xC1CCA8, 0xC1CCAA, L_C1CCAA); /* C1CCA6: bgt     $c1ccaa */
-L_C1CCA8:
-    FA18_CHECK(0xC1CCA8);
-    FA18_OP(0xC1CCA8, 0x70FF, 0xC1CCAA); /* C1CCA8: moveq   #-$1, D0 */
-L_C1CCAA:
-    FA18_CHECK(0xC1CCAA);
-    FA18_OP(0xC1CCAA, 0x3180, 0xC1CCAE); /* C1CCAA: move.w  D0, ($14,A0,D1.w) */
-L_C1CCAE:
-    FA18_CHECK(0xC1CCAE);
-    FA18_OP(0xC1CCAE, 0x0679, 0xC1CCB6); /* C1CCAE: addi.w  #$18, $c459aa.l */
-    FA18_JUMP(0xC1CCB6, 0x6000, 0xC1CB74, L_C1CB74); /* C1CCB6: bra     $c1cb74 */
-L_C1CCBA:
-    FA18_CHECK(0xC1CCBA);
-    FA18_RETURN(0xC1CCBA, 0x4E75); /* C1CCBA: rts */
-}
-
-int fa18_fn_C1CB26(int entry) {
-    switch (entry) {
-    case 0: goto L_C1CB26;
-    case 1: goto L_C1CB54;
-    case 2: goto L_C1CB5E;
-    case 3: goto L_C1CB74;
-    case 4: goto L_C1CB7C;
-    case 5: goto L_C1CB84;
-    case 6: goto L_C1CB8A;
-    case 7: goto L_C1CB9C;
-    case 8: goto L_C1CBB6;
-    case 9: goto L_C1CBBE;
-    case 10: goto L_C1CBCC;
-    case 11: goto L_C1CBEE;
-    case 12: goto L_C1CBFE;
-    case 13: goto L_C1CC06;
-    case 14: goto L_C1CC14;
-    case 15: goto L_C1CC1A;
-    case 16: goto L_C1CC1C;
-    case 17: goto L_C1CC26;
-    case 18: goto L_C1CC34;
-    case 19: goto L_C1CC38;
-    case 20: goto L_C1CC42;
-    case 21: goto L_C1CC48;
-    case 22: goto L_C1CC50;
-    case 23: goto L_C1CC88;
-    case 24: goto L_C1CC90;
-    case 25: goto L_C1CC98;
-    case 26: goto L_C1CC9E;
-    case 27: goto L_C1CCA8;
-    case 28: goto L_C1CCAA;
-    case 29: goto L_C1CCAE;
-    case 30: goto L_C1CCBA;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1CB26:
-    FA18_CHECK(0xC1CB26);
-    FA18_OP(0xC1CB26, 0x13FC, 0xC1CB2E); /* C1CB26: move.b  #$1, $c45865.l */
-    FA18_OP(0xC1CB2E, 0x33F9, 0xC1CB38); /* C1CB2E: move.w  $c459ae.l, $c459aa.l */
-    FA18_OP(0xC1CB38, 0x4239, 0xC1CB3E); /* C1CB38: clr.b   $c45864.l */
-    FA18_OP(0xC1CB3E, 0x4239, 0xC1CB44); /* C1CB3E: clr.b   $c458bb.l */
-    FA18_OP(0xC1CB44, 0x2039, 0xC1CB4A); /* C1CB44: move.l  $c45a78.l, D0 */
-    FA18_OP(0xC1CB4A, 0x4480, 0xC1CB4C); /* C1CB4A: neg.l   D0 */
-    FA18_OP(0xC1CB4C, 0x0C80, 0xC1CB52); /* C1CB4C: cmpi.l  #$7fff, D0 */
-    FA18_BCC(0xC1CB52, 0x6F0A, 0xC1CB54, 0xC1CB5E, L_C1CB5E); /* C1CB52: ble     $c1cb5e */
-L_C1CB54:
-    FA18_CHECK(0xC1CB54);
-    FA18_OP(0xC1CB54, 0x33FC, 0xC1CB5C); /* C1CB54: move.w  #$7ffe, $c459b2.l */
-    FA18_JUMP(0xC1CB5C, 0x6016, 0xC1CB74, L_C1CB74); /* C1CB5C: bra     $c1cb74 */
-L_C1CB5E:
-    FA18_CHECK(0xC1CB5E);
-    FA18_OP(0xC1CB5E, 0xEE40, 0xC1CB60); /* C1CB5E: asr.w   #7, D0 */
-    FA18_OP(0xC1CB60, 0x45F9, 0xC1CB66); /* C1CB60: lea     $c41130.l, A2 */
-    FA18_OP(0xC1CB66, 0x1032, 0xC1CB6A); /* C1CB66: move.b  (A2,D0.w), D0 */
-    FA18_OP(0xC1CB6A, 0x4880, 0xC1CB6C); /* C1CB6A: ext.w   D0 */
-    FA18_OP(0xC1CB6C, 0xE140, 0xC1CB6E); /* C1CB6C: asl.w   #8, D0 */
-    FA18_OP(0xC1CB6E, 0x33C0, 0xC1CB74); /* C1CB6E: move.w  D0, $c459b2.l */
-L_C1CB74:
-    FA18_CHECK(0xC1CB74);
-    FA18_OP(0xC1CB74, 0x4A39, 0xC1CB7A); /* C1CB74: tst.b   $c45865.l */
-    FA18_BCC(0xC1CB7A, 0x6608, 0xC1CB7C, 0xC1CB84, L_C1CB84); /* C1CB7A: bne     $c1cb84 */
-L_C1CB7C:
-    FA18_CHECK(0xC1CB7C);
-    FA18_OP(0xC1CB7C, 0x41F9, 0xC1CB82); /* C1CB7C: lea     $c4e9aa.l, A0 */
-    FA18_JUMP(0xC1CB82, 0x6006, 0xC1CB8A, L_C1CB8A); /* C1CB82: bra     $c1cb8a */
-L_C1CB84:
-    FA18_CHECK(0xC1CB84);
-    FA18_OP(0xC1CB84, 0x41F9, 0xC1CB8A); /* C1CB84: lea     $c4f03a.l, A0 */
-L_C1CB8A:
-    FA18_CHECK(0xC1CB8A);
-    FA18_OP(0xC1CB8A, 0x3039, 0xC1CB90); /* C1CB8A: move.w  $c459aa.l, D0 */
-    FA18_OP(0xC1CB90, 0xD0C0, 0xC1CB92); /* C1CB90: adda.w  D0, A0 */
-    FA18_OP(0xC1CB92, 0x3E18, 0xC1CB94); /* C1CB92: move.w  (A0)+, D7 */
-    FA18_OP(0xC1CB94, 0x0C47, 0xC1CB98); /* C1CB94: cmpi.w  #-$1, D7 */
-    FA18_BCC(0xC1CB98, 0x6700, 0xC1CB9C, 0xC1CCBA, L_C1CCBA); /* C1CB98: beq     $c1ccba */
-L_C1CB9C:
-    FA18_CHECK(0xC1CB9C);
-    FA18_OP(0xC1CB9C, 0x13C7, 0xC1CBA2); /* C1CB9C: move.b  D7, $c4585b.l */
-    FA18_OP(0xC1CBA2, 0x1007, 0xC1CBA4); /* C1CBA2: move.b  D7, D0 */
-    FA18_OP(0xC1CBA4, 0x0240, 0xC1CBA8); /* C1CBA4: andi.w  #$f, D0 */
-    FA18_OP(0xC1CBA8, 0x33C0, 0xC1CBAE); /* C1CBA8: move.w  D0, $c45ab8.l */
-    FA18_OP(0xC1CBAE, 0x2258, 0xC1CBB0); /* C1CBAE: movea.l (A0)+, A1 */
-    FA18_OP(0xC1CBB0, 0x4A51, 0xC1CBB2); /* C1CBB0: tst.w   (A1) */
-    FA18_BCC(0xC1CBB2, 0x6D00, 0xC1CBB6, 0xC1CCAE, L_C1CCAE); /* C1CBB2: blt     $c1ccae */
-L_C1CBB6:
-    FA18_CHECK(0xC1CBB6);
-    FA18_OP(0xC1CBB6, 0x0C91, 0xC1CBBC); /* C1CBB6: cmpi.l  #$c1ed48, (A1) */
-    FA18_BCC(0xC1CBBC, 0x660E, 0xC1CBBE, 0xC1CBCC, L_C1CBCC); /* C1CBBC: bne     $c1cbcc */
-L_C1CBBE:
-    FA18_CHECK(0xC1CBBE);
-    FA18_OP(0xC1CBBE, 0x0CB9, 0xC1CBC8); /* C1CBBE: cmpi.l  #-$380000, $c45a66.l */
-    FA18_BCC(0xC1CBC8, 0x6D00, 0xC1CBCC, 0xC1CCAE, L_C1CCAE); /* C1CBC8: blt     $c1ccae */
-L_C1CBCC:
-    FA18_CHECK(0xC1CBCC);
-    FA18_OP(0xC1CBCC, 0x4C98, 0xC1CBD0); /* C1CBCC: movem.w (A0)+, D2-D4 */
-    FA18_OP(0xC1CBD0, 0x48B9, 0xC1CBD8); /* C1CBD0: movem.w D2-D4, $c45b2a.l */
-    FA18_OP(0xC1CBD8, 0xE182, 0xC1CBDA); /* C1CBD8: asl.l   #8, D2 */
-    FA18_OP(0xC1CBDA, 0xE183, 0xC1CBDC); /* C1CBDA: asl.l   #8, D3 */
-    FA18_OP(0xC1CBDC, 0xE184, 0xC1CBDE); /* C1CBDC: asl.l   #8, D4 */
-    FA18_OP(0xC1CBDE, 0x48F9, 0xC1CBE6); /* C1CBDE: movem.l D2-D4, $c45b30.l */
-    FA18_OP(0xC1CBE6, 0x0C91, 0xC1CBEC); /* C1CBE6: cmpi.l  #$c1ed3c, (A1) */
-    FA18_BCC(0xC1CBEC, 0x6762, 0xC1CBEE, 0xC1CC50, L_C1CC50); /* C1CBEC: beq     $c1cc50 */
-L_C1CBEE:
-    FA18_CHECK(0xC1CBEE);
-    FA18_OP(0xC1CBEE, 0x3228, 0xC1CBF2); /* C1CBEE: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CBF2, 0x48C1, 0xC1CBF4); /* C1CBF2: ext.l   D1 */
-    FA18_OP(0xC1CBF4, 0xE1A1, 0xC1CBF6); /* C1CBF4: asl.l   D0, D1 */
-    FA18_OP(0xC1CBF6, 0x0C81, 0xC1CBFC); /* C1CBF6: cmpi.l  #$400, D1 */
-    FA18_BCC(0xC1CBFC, 0x6C3A, 0xC1CBFE, 0xC1CC38, L_C1CC38); /* C1CBFC: bge     $c1cc38 */
-L_C1CBFE:
-    FA18_CHECK(0xC1CBFE);
-    FA18_OP(0xC1CBFE, 0x0C81, 0xC1CC04); /* C1CBFE: cmpi.l  #$100, D1 */
-    FA18_BCC(0xC1CC04, 0x6D20, 0xC1CC06, 0xC1CC26, L_C1CC26); /* C1CC04: blt     $c1cc26 */
-L_C1CC06:
-    FA18_CHECK(0xC1CC06);
-    FA18_OP(0xC1CC06, 0x3039, 0xC1CC0C); /* C1CC06: move.w  $c458da.l, D0 */
-    FA18_OP(0xC1CC0C, 0x3207, 0xC1CC0E); /* C1CC0C: move.w  D7, D1 */
-    FA18_OP(0xC1CC0E, 0x0801, 0xC1CC12); /* C1CC0E: btst    #$8, D1 */
-    FA18_BCC(0xC1CC12, 0x6608, 0xC1CC14, 0xC1CC1C, L_C1CC1C); /* C1CC12: bne     $c1cc1c */
-L_C1CC14:
-    FA18_CHECK(0xC1CC14);
-    FA18_OP(0xC1CC14, 0x0240, 0xC1CC18); /* C1CC14: andi.w  #$3, D0 */
-    FA18_BCC(0xC1CC18, 0x670C, 0xC1CC1A, 0xC1CC26, L_C1CC26); /* C1CC18: beq     $c1cc26 */
-L_C1CC1A:
-    FA18_CHECK(0xC1CC1A);
-    FA18_JUMP(0xC1CC1A, 0x601C, 0xC1CC38, L_C1CC38); /* C1CC1A: bra     $c1cc38 */
-L_C1CC1C:
-    FA18_CHECK(0xC1CC1C);
-    FA18_OP(0xC1CC1C, 0x0240, 0xC1CC20); /* C1CC1C: andi.w  #$3, D0 */
-    FA18_OP(0xC1CC20, 0x0C40, 0xC1CC24); /* C1CC20: cmpi.w  #$2, D0 */
-    FA18_BCC(0xC1CC24, 0x6612, 0xC1CC26, 0xC1CC38, L_C1CC38); /* C1CC24: bne     $c1cc38 */
-L_C1CC26:
-    FA18_CHECK(0xC1CC26);
-    FA18_OP(0xC1CC26, 0x4CB9, 0xC1CC2E); /* C1CC26: movem.w $c45b2a.l, D2-D4 */
-    FA18_CALL(0xC1CC2E, 0x4EB9, 0xC1CC34, 152, 1); /* C1CC2E: jsr     $c1d91a.l */
-L_C1CC34:
-    FA18_CHECK(0xC1CC34);
-    FA18_OP(0xC1CC34, 0x3141, 0xC1CC38); /* C1CC34: move.w  D1, ($4,A0) */
-L_C1CC38:
-    FA18_CHECK(0xC1CC38);
-    FA18_OP(0xC1CC38, 0x33E8, 0xC1CC40); /* C1CC38: move.w  ($8,A0), $c45aba.l */
-    FA18_BCC(0xC1CC40, 0x6C0E, 0xC1CC42, 0xC1CC50, L_C1CC50); /* C1CC40: bge     $c1cc50 */
-L_C1CC42:
-    FA18_CHECK(0xC1CC42);
-    FA18_OP(0xC1CC42, 0x5328, 0xC1CC46); /* C1CC42: subq.b  #1, ($6,A0) */
-    FA18_BCC(0xC1CC46, 0x6C66, 0xC1CC48, 0xC1CCAE, L_C1CCAE); /* C1CC46: bge     $c1ccae */
-L_C1CC48:
-    FA18_CHECK(0xC1CC48);
-    FA18_OP(0xC1CC48, 0x1179, 0xC1CC50); /* C1CC48: move.b  $c458bc.l, ($6,A0) */
-L_C1CC50:
-    FA18_CHECK(0xC1CC50);
-    FA18_OP(0xC1CC50, 0x5328, 0xC1CC54); /* C1CC50: subq.b  #1, ($7,A0) */
-    FA18_OP(0xC1CC54, 0x13E8, 0xC1CC5C); /* C1CC54: move.b  ($7,A0), $c458bd.l */
-    FA18_OP(0xC1CC5C, 0x3228, 0xC1CC60); /* C1CC5C: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CC60, 0x33C1, 0xC1CC66); /* C1CC60: move.w  D1, $c45b40.l */
-    FA18_OP(0xC1CC66, 0xB279, 0xC1CC6C); /* C1CC66: cmp.w   $c459b2.l, D1 */
-    FA18_OP(0xC1CC6C, 0x2459, 0xC1CC6E); /* C1CC6C: movea.l (A1)+, A2 */
-    FA18_OP(0xC1CC6E, 0x2059, 0xC1CC70); /* C1CC6E: movea.l (A1)+, A0 */
-    FA18_OP(0xC1CC70, 0x23D9, 0xC1CC76); /* C1CC70: move.l  (A1)+, $c45a36.l */
-    FA18_OP(0xC1CC76, 0x23D9, 0xC1CC7C); /* C1CC76: move.l  (A1)+, $c45a3a.l */
-    FA18_OP(0xC1CC7C, 0xE04F, 0xC1CC7E); /* C1CC7C: lsr.w   #8, D7 */
-    FA18_OP(0xC1CC7E, 0x4887, 0xC1CC80); /* C1CC7E: ext.w   D7 */
-    FA18_OP(0xC1CC80, 0x33C7, 0xC1CC86); /* C1CC80: move.w  D7, $c459b4.l */
-    FA18_CALL_DYNAMIC(0xC1CC86, 0x4E92, 0xC1CC88); /* C1CC86: jsr     (A2) */
-L_C1CC88:
-    FA18_CHECK(0xC1CC88);
-    FA18_OP(0xC1CC88, 0x4A39, 0xC1CC8E); /* C1CC88: tst.b   $c45865.l */
-    FA18_BCC(0xC1CC8E, 0x6608, 0xC1CC90, 0xC1CC98, L_C1CC98); /* C1CC8E: bne     $c1cc98 */
-L_C1CC90:
-    FA18_CHECK(0xC1CC90);
-    FA18_OP(0xC1CC90, 0x41F9, 0xC1CC96); /* C1CC90: lea     $c4e9aa.l, A0 */
-    FA18_JUMP(0xC1CC96, 0x6006, 0xC1CC9E, L_C1CC9E); /* C1CC96: bra     $c1cc9e */
-L_C1CC98:
-    FA18_CHECK(0xC1CC98);
-    FA18_OP(0xC1CC98, 0x41F9, 0xC1CC9E); /* C1CC98: lea     $c4f03a.l, A0 */
-L_C1CC9E:
-    FA18_CHECK(0xC1CC9E);
-    FA18_OP(0xC1CC9E, 0x3239, 0xC1CCA4); /* C1CC9E: move.w  $c459aa.l, D1 */
-    FA18_OP(0xC1CCA4, 0x4A40, 0xC1CCA6); /* C1CCA4: tst.w   D0 */
-    FA18_BCC(0xC1CCA6, 0x6E02, 0xC1CCA8, 0xC1CCAA, L_C1CCAA); /* C1CCA6: bgt     $c1ccaa */
-L_C1CCA8:
-    FA18_CHECK(0xC1CCA8);
-    FA18_OP(0xC1CCA8, 0x70FF, 0xC1CCAA); /* C1CCA8: moveq   #-$1, D0 */
-L_C1CCAA:
-    FA18_CHECK(0xC1CCAA);
-    FA18_OP(0xC1CCAA, 0x3180, 0xC1CCAE); /* C1CCAA: move.w  D0, ($14,A0,D1.w) */
-L_C1CCAE:
-    FA18_CHECK(0xC1CCAE);
-    FA18_OP(0xC1CCAE, 0x0679, 0xC1CCB6); /* C1CCAE: addi.w  #$18, $c459aa.l */
-    FA18_JUMP(0xC1CCB6, 0x6000, 0xC1CB74, L_C1CB74); /* C1CCB6: bra     $c1cb74 */
-L_C1CCBA:
-    FA18_CHECK(0xC1CCBA);
-    FA18_RETURN(0xC1CCBA, 0x4E75); /* C1CCBA: rts */
-}
-
-int fa18_fn_C1CCBC(int entry) {
-    switch (entry) {
-    case 0: goto L_C1CCBC;
-    case 1: goto L_C1CCE4;
-    case 2: goto L_C1CCF6;
-    case 3: goto L_C1CD5A;
-    case 4: goto L_C1CD5C;
-    case 5: goto L_C1CD6C;
-    case 6: goto L_C1CD6E;
-    case 7: goto L_C1CD7E;
-    case 8: goto L_C1CD80;
-    case 9: goto L_C1CD88;
-    case 10: goto L_C1CD8E;
-    case 11: goto L_C1CD92;
-    case 12: goto L_C1CD96;
-    case 13: goto L_C1CD98;
-    case 14: goto L_C1CDA0;
-    case 15: goto L_C1CDAE;
-    case 16: goto L_C1CDB2;
-    case 17: goto L_C1CE02;
-    case 18: goto L_C1CE2E;
-    case 19: goto L_C1CE38;
-    case 20: goto L_C1CE42;
-    case 21: goto L_C1CE5A;
-    case 22: goto L_C1CE74;
-    case 23: goto L_C1CE7C;
-    case 24: goto L_C1CE8A;
-    case 25: goto L_C1CEAC;
-    case 26: goto L_C1CEB2;
-    case 27: goto L_C1CEC2;
-    case 28: goto L_C1CEC6;
-    case 29: goto L_C1CEC8;
-    case 30: goto L_C1CECC;
-    case 31: goto L_C1CEE4;
-    case 32: goto L_C1CEEC;
-    case 33: goto L_C1CEFC;
-    case 34: goto L_C1CF04;
-    case 35: goto L_C1CF12;
-    case 36: goto L_C1CF18;
-    case 37: goto L_C1CF1A;
-    case 38: goto L_C1CF24;
-    case 39: goto L_C1CF32;
-    case 40: goto L_C1CF36;
-    case 41: goto L_C1CF3C;
-    case 42: goto L_C1CF42;
-    case 43: goto L_C1CF4C;
-    case 44: goto L_C1CF52;
-    case 45: goto L_C1CF5A;
-    case 46: goto L_C1CF84;
-    case 47: goto L_C1CF8C;
-    case 48: goto L_C1CF90;
-    case 49: goto L_C1CF96;
-    case 50: goto L_C1CFA8;
-    case 51: goto L_C1CFB8;
-    case 52: goto L_C1CFBA;
-    case 53: goto L_C1CFBE;
-    case 54: goto L_C1CFD6;
-    case 55: goto L_C1CFEC;
-    case 56: goto L_C1CFF6;
-    case 57: goto L_C1D004;
-    case 58: goto L_C1D00A;
-    case 59: goto L_C1D012;
-    case 60: goto L_C1D014;
-    case 61: goto L_C1D01A;
-    case 62: goto L_C1D028;
-    case 63: goto L_C1D032;
-    case 64: goto L_C1D03A;
-    case 65: goto L_C1D050;
-    case 66: goto L_C1D052;
-    case 67: goto L_C1D056;
-    case 68: goto L_C1D058;
-    case 69: goto L_C1D05C;
-    case 70: goto L_C1D05E;
-    case 71: goto L_C1D062;
-    case 72: goto L_C1D066;
-    case 73: goto L_C1D06A;
-    case 74: goto L_C1D06E;
-    case 75: goto L_C1D070;
-    case 76: goto L_C1D072;
-    case 77: goto L_C1D07A;
-    case 78: goto L_C1D080;
-    case 79: goto L_C1D098;
-    case 80: goto L_C1D0A2;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1CCBC:
-    FA18_CHECK(0xC1CCBC);
-    FA18_OP(0xC1CCBC, 0x13FC, 0xC1CCC4); /* C1CCBC: move.b  #$1, $c45864.l */
-    FA18_OP(0xC1CCC4, 0x13FC, 0xC1CCCC); /* C1CCC4: move.b  #$4, $c4585b.l */
-    FA18_OP(0xC1CCCC, 0x4239, 0xC1CCD2); /* C1CCCC: clr.b   $c458bd.l */
-    FA18_OP(0xC1CCD2, 0x4279, 0xC1CCD8); /* C1CCD2: clr.w   $c45aba.l */
-    FA18_OP(0xC1CCD8, 0x42B9, 0xC1CCDE); /* C1CCD8: clr.l   $c45932.l */
-    FA18_OP(0xC1CCDE, 0x4279, 0xC1CCE4); /* C1CCDE: clr.w   $c459aa.l */
-L_C1CCE4:
-    FA18_CHECK(0xC1CCE4);
-    FA18_OP(0xC1CCE4, 0x41F9, 0xC1CCEA); /* C1CCE4: lea     $c4e98a.l, A0 */
-    FA18_OP(0xC1CCEA, 0xD0F9, 0xC1CCF0); /* C1CCEA: adda.w  $c459aa.l, A0 */
-    FA18_OP(0xC1CCF0, 0x3010, 0xC1CCF2); /* C1CCF0: move.w  (A0), D0 */
-    FA18_BCC(0xC1CCF2, 0x6F00, 0xC1CCF6, 0xC1CE38, L_C1CE38); /* C1CCF2: ble     $c1ce38 */
-L_C1CCF6:
-    FA18_CHECK(0xC1CCF6);
-    FA18_OP(0xC1CCF6, 0x41F9, 0xC1CCFC); /* C1CCF6: lea     $c46184.l, A0 */
-    FA18_OP(0xC1CCFC, 0x33C0, 0xC1CD02); /* C1CCFC: move.w  D0, $c459b4.l */
-    FA18_OP(0xC1CD02, 0xE140, 0xC1CD04); /* C1CD02: asl.w   #8, D0 */
-    FA18_OP(0xC1CD04, 0xD040, 0xC1CD06); /* C1CD04: add.w   D0, D0 */
-    FA18_OP(0xC1CD06, 0x33C0, 0xC1CD0C); /* C1CD06: move.w  D0, $c459b6.l */
-    FA18_OP(0xC1CD0C, 0xD0C0, 0xC1CD0E); /* C1CD0C: adda.w  D0, A0 */
-    FA18_OP(0xC1CD0E, 0x7E00, 0xC1CD10); /* C1CD0E: moveq   #$0, D7 */
-    FA18_OP(0xC1CD10, 0x3E28, 0xC1CD14); /* C1CD10: move.w  ($6,A0), D7 */
-    FA18_OP(0xC1CD14, 0x9E79, 0xC1CD1A); /* C1CD14: sub.w   $c4594c.l, D7 */
-    FA18_OP(0xC1CD1A, 0x4847, 0xC1CD1C); /* C1CD1A: swap    D7 */
-    FA18_OP(0xC1CD1C, 0xED87, 0xC1CD1E); /* C1CD1C: asl.l   #6, D7 */
-    FA18_OP(0xC1CD1E, 0x2828, 0xC1CD22); /* C1CD1E: move.l  ($14,A0), D4 */
-    FA18_OP(0xC1CD22, 0x0284, 0xC1CD28); /* C1CD22: andi.l  #$3fffff, D4 */
-    FA18_OP(0xC1CD28, 0xDE84, 0xC1CD2A); /* C1CD28: add.l   D4, D7 */
-    FA18_OP(0xC1CD2A, 0x7C00, 0xC1CD2C); /* C1CD2A: moveq   #$0, D6 */
-    FA18_OP(0xC1CD2C, 0x3C28, 0xC1CD30); /* C1CD2C: move.w  ($8,A0), D6 */
-    FA18_OP(0xC1CD30, 0x9C79, 0xC1CD36); /* C1CD30: sub.w   $c4594e.l, D6 */
-    FA18_OP(0xC1CD36, 0x4846, 0xC1CD38); /* C1CD36: swap    D6 */
-    FA18_OP(0xC1CD38, 0xED86, 0xC1CD3A); /* C1CD38: asl.l   #6, D6 */
-    FA18_OP(0xC1CD3A, 0x2828, 0xC1CD3E); /* C1CD3A: move.l  ($1c,A0), D4 */
-    FA18_OP(0xC1CD3E, 0x0284, 0xC1CD44); /* C1CD3E: andi.l  #$3fffff, D4 */
-    FA18_OP(0xC1CD44, 0xDC84, 0xC1CD46); /* C1CD44: add.l   D4, D6 */
-    FA18_OP(0xC1CD46, 0x2407, 0xC1CD48); /* C1CD46: move.l  D7, D2 */
-    FA18_OP(0xC1CD48, 0x2806, 0xC1CD4A); /* C1CD48: move.l  D6, D4 */
-    FA18_OP(0xC1CD4A, 0xE087, 0xC1CD4C); /* C1CD4A: asr.l   #8, D7 */
-    FA18_OP(0xC1CD4C, 0xE086, 0xC1CD4E); /* C1CD4C: asr.l   #8, D6 */
-    FA18_OP(0xC1CD4E, 0x3039, 0xC1CD54); /* C1CD4E: move.w  $c45a72.l, D0 */
-    FA18_OP(0xC1CD54, 0x48C0, 0xC1CD56); /* C1CD54: ext.l   D0 */
-    FA18_OP(0xC1CD56, 0xDE80, 0xC1CD58); /* C1CD56: add.l   D0, D7 */
-    FA18_BCC(0xC1CD58, 0x6C02, 0xC1CD5A, 0xC1CD5C, L_C1CD5C); /* C1CD58: bge     $c1cd5c */
-L_C1CD5A:
-    FA18_CHECK(0xC1CD5A);
-    FA18_OP(0xC1CD5A, 0x4487, 0xC1CD5C); /* C1CD5A: neg.l   D7 */
-L_C1CD5C:
-    FA18_CHECK(0xC1CD5C);
-    FA18_OP(0xC1CD5C, 0xE087, 0xC1CD5E); /* C1CD5C: asr.l   #8, D7 */
-    FA18_OP(0xC1CD5E, 0xE887, 0xC1CD60); /* C1CD5E: asr.l   #4, D7 */
-    FA18_OP(0xC1CD60, 0x3039, 0xC1CD66); /* C1CD60: move.w  $c45a76.l, D0 */
-    FA18_OP(0xC1CD66, 0x48C0, 0xC1CD68); /* C1CD66: ext.l   D0 */
-    FA18_OP(0xC1CD68, 0xDC80, 0xC1CD6A); /* C1CD68: add.l   D0, D6 */
-    FA18_BCC(0xC1CD6A, 0x6C02, 0xC1CD6C, 0xC1CD6E, L_C1CD6E); /* C1CD6A: bge     $c1cd6e */
-L_C1CD6C:
-    FA18_CHECK(0xC1CD6C);
-    FA18_OP(0xC1CD6C, 0x4486, 0xC1CD6E); /* C1CD6C: neg.l   D6 */
-L_C1CD6E:
-    FA18_CHECK(0xC1CD6E);
-    FA18_OP(0xC1CD6E, 0xE086, 0xC1CD70); /* C1CD6E: asr.l   #8, D6 */
-    FA18_OP(0xC1CD70, 0xE886, 0xC1CD72); /* C1CD70: asr.l   #4, D6 */
-    FA18_OP(0xC1CD72, 0x2028, 0xC1CD76); /* C1CD72: move.l  ($10,A0), D0 */
-    FA18_OP(0xC1CD76, 0xD0B9, 0xC1CD7C); /* C1CD76: add.l   $c45a78.l, D0 */
-    FA18_BCC(0xC1CD7C, 0x6C02, 0xC1CD7E, 0xC1CD80, L_C1CD80); /* C1CD7C: bge     $c1cd80 */
-L_C1CD7E:
-    FA18_CHECK(0xC1CD7E);
-    FA18_OP(0xC1CD7E, 0x4480, 0xC1CD80); /* C1CD7E: neg.l   D0 */
-L_C1CD80:
-    FA18_CHECK(0xC1CD80);
-    FA18_OP(0xC1CD80, 0xE080, 0xC1CD82); /* C1CD80: asr.l   #8, D0 */
-    FA18_OP(0xC1CD82, 0xE680, 0xC1CD84); /* C1CD82: asr.l   #3, D0 */
-    FA18_OP(0xC1CD84, 0xBE46, 0xC1CD86); /* C1CD84: cmp.w   D6, D7 */
-    FA18_BCC(0xC1CD86, 0x6C0A, 0xC1CD88, 0xC1CD92, L_C1CD92); /* C1CD86: bge     $c1cd92 */
-L_C1CD88:
-    FA18_CHECK(0xC1CD88);
-    FA18_OP(0xC1CD88, 0x3E06, 0xC1CD8A); /* C1CD88: move.w  D6, D7 */
-    FA18_OP(0xC1CD8A, 0xBE40, 0xC1CD8C); /* C1CD8A: cmp.w   D0, D7 */
-    FA18_BCC(0xC1CD8C, 0x6C0A, 0xC1CD8E, 0xC1CD98, L_C1CD98); /* C1CD8C: bge     $c1cd98 */
-L_C1CD8E:
-    FA18_CHECK(0xC1CD8E);
-    FA18_OP(0xC1CD8E, 0x3E00, 0xC1CD90); /* C1CD8E: move.w  D0, D7 */
-    FA18_JUMP(0xC1CD90, 0x6006, 0xC1CD98, L_C1CD98); /* C1CD90: bra     $c1cd98 */
-L_C1CD92:
-    FA18_CHECK(0xC1CD92);
-    FA18_OP(0xC1CD92, 0xBE40, 0xC1CD94); /* C1CD92: cmp.w   D0, D7 */
-    FA18_BCC(0xC1CD94, 0x6C02, 0xC1CD96, 0xC1CD98, L_C1CD98); /* C1CD94: bge     $c1cd98 */
-L_C1CD96:
-    FA18_CHECK(0xC1CD96);
-    FA18_OP(0xC1CD96, 0x3E00, 0xC1CD98); /* C1CD96: move.w  D0, D7 */
-L_C1CD98:
-    FA18_CHECK(0xC1CD98);
-    FA18_OP(0xC1CD98, 0xE24F, 0xC1CD9A); /* C1CD98: lsr.w   #1, D7 */
-    FA18_OP(0xC1CD9A, 0x0C47, 0xC1CD9E); /* C1CD9A: cmpi.w  #$ef, D7 */
-    FA18_BCC(0xC1CD9E, 0x6F12, 0xC1CDA0, 0xC1CDB2, L_C1CDB2); /* C1CD9E: ble     $c1cdb2 */
-L_C1CDA0:
-    FA18_CHECK(0xC1CDA0);
-    FA18_OP(0xC1CDA0, 0x33FC, 0xC1CDA8); /* C1CDA0: move.w  #$29, $c4599e.l */
-    FA18_CALL(0xC1CDA8, 0x4EB9, 0xC1CDAE, 15, 0); /* C1CDA8: jsr     $c06c02.l */
-L_C1CDAE:
-    FA18_CHECK(0xC1CDAE);
-    FA18_OP(0xC1CDAE, 0x3E3C, 0xC1CDB2); /* C1CDAE: move.w  #$ef, D7 */
-L_C1CDB2:
-    FA18_CHECK(0xC1CDB2);
-    FA18_OP(0xC1CDB2, 0x43F9, 0xC1CDB8); /* C1CDB2: lea     $c1df46.l, A1 */
-    FA18_OP(0xC1CDB8, 0x1C31, 0xC1CDBC); /* C1CDB8: move.b  (A1,D7.w), D6 */
-    FA18_OP(0xC1CDBC, 0x4886, 0xC1CDBE); /* C1CDBC: ext.w   D6 */
-    FA18_OP(0xC1CDBE, 0x33C6, 0xC1CDC4); /* C1CDBE: move.w  D6, $c45ab8.l */
-    FA18_OP(0xC1CDC4, 0x2628, 0xC1CDC8); /* C1CDC4: move.l  ($18,A0), D3 */
-    FA18_OP(0xC1CDC8, 0x2003, 0xC1CDCA); /* C1CDC8: move.l  D3, D0 */
-    FA18_OP(0xC1CDCA, 0xD0B9, 0xC1CDD0); /* C1CDCA: add.l   $c45a66.l, D0 */
-    FA18_OP(0xC1CDD0, 0xECA0, 0xC1CDD2); /* C1CDD0: asr.l   D6, D0 */
-    FA18_OP(0xC1CDD2, 0x23C0, 0xC1CDD8); /* C1CDD2: move.l  D0, $c45b3c.l */
-    FA18_OP(0xC1CDD8, 0x13FC, 0xC1CDE0); /* C1CDD8: move.b  #$1, $c458bb.l */
-    FA18_OP(0xC1CDE0, 0xECA2, 0xC1CDE2); /* C1CDE0: asr.l   D6, D2 */
-    FA18_OP(0xC1CDE2, 0xECA3, 0xC1CDE4); /* C1CDE2: asr.l   D6, D3 */
-    FA18_OP(0xC1CDE4, 0xECA4, 0xC1CDE6); /* C1CDE4: asr.l   D6, D4 */
-    FA18_OP(0xC1CDE6, 0x48F9, 0xC1CDEE); /* C1CDE6: movem.l D2-D4, $c45b30.l */
-    FA18_OP(0xC1CDEE, 0xE082, 0xC1CDF0); /* C1CDEE: asr.l   #8, D2 */
-    FA18_OP(0xC1CDF0, 0xE083, 0xC1CDF2); /* C1CDF0: asr.l   #8, D3 */
-    FA18_OP(0xC1CDF2, 0xE084, 0xC1CDF4); /* C1CDF2: asr.l   #8, D4 */
-    FA18_OP(0xC1CDF4, 0x48B9, 0xC1CDFC); /* C1CDF4: movem.w D2-D4, $c45b2a.l */
-    FA18_CALL(0xC1CDFC, 0x4EB9, 0xC1CE02, 152, 1); /* C1CDFC: jsr     $c1d91a.l */
-L_C1CE02:
-    FA18_CHECK(0xC1CE02);
-    FA18_OP(0xC1CE02, 0x43F9, 0xC1CE08); /* C1CE02: lea     $c22188.l, A1 */
-    FA18_OP(0xC1CE08, 0x3239, 0xC1CE0E); /* C1CE08: move.w  $c459b4.l, D1 */
-    FA18_OP(0xC1CE0E, 0xD241, 0xC1CE10); /* C1CE0E: add.w   D1, D1 */
-    FA18_OP(0xC1CE10, 0xD241, 0xC1CE12); /* C1CE10: add.w   D1, D1 */
-    FA18_OP(0xC1CE12, 0x3E01, 0xC1CE14); /* C1CE12: move.w  D1, D7 */
-    FA18_OP(0xC1CE14, 0xD241, 0xC1CE16); /* C1CE14: add.w   D1, D1 */
-    FA18_OP(0xC1CE16, 0xD241, 0xC1CE18); /* C1CE16: add.w   D1, D1 */
-    FA18_OP(0xC1CE18, 0xD247, 0xC1CE1A); /* C1CE18: add.w   D7, D1 */
-    FA18_OP(0xC1CE1A, 0xD2C1, 0xC1CE1C); /* C1CE1A: adda.w  D1, A1 */
-    FA18_OP(0xC1CE1C, 0x2459, 0xC1CE1E); /* C1CE1C: movea.l (A1)+, A2 */
-    FA18_OP(0xC1CE1E, 0x2059, 0xC1CE20); /* C1CE1E: movea.l (A1)+, A0 */
-    FA18_OP(0xC1CE20, 0x23D9, 0xC1CE26); /* C1CE20: move.l  (A1)+, $c45a36.l */
-    FA18_OP(0xC1CE26, 0x23D9, 0xC1CE2C); /* C1CE26: move.l  (A1)+, $c45a3a.l */
-    FA18_CALL_DYNAMIC(0xC1CE2C, 0x4E92, 0xC1CE2E); /* C1CE2C: jsr     (A2) */
-L_C1CE2E:
-    FA18_CHECK(0xC1CE2E);
-    FA18_OP(0xC1CE2E, 0x5479, 0xC1CE34); /* C1CE2E: addq.w  #2, $c459aa.l */
-    FA18_JUMP(0xC1CE34, 0x6000, 0xC1CCE4, L_C1CCE4); /* C1CE34: bra     $c1cce4 */
-L_C1CE38:
-    FA18_CHECK(0xC1CE38);
-    FA18_OP(0xC1CE38, 0x33F9, 0xC1CE42); /* C1CE38: move.w  $c459b0.l, $c459aa.l */
-L_C1CE42:
-    FA18_CHECK(0xC1CE42);
-    FA18_OP(0xC1CE42, 0x41F9, 0xC1CE48); /* C1CE42: lea     $c4f6ca.l, A0 */
-    FA18_OP(0xC1CE48, 0x3039, 0xC1CE4E); /* C1CE48: move.w  $c459aa.l, D0 */
-    FA18_OP(0xC1CE4E, 0xD0C0, 0xC1CE50); /* C1CE4E: adda.w  D0, A0 */
-    FA18_OP(0xC1CE50, 0x3E18, 0xC1CE52); /* C1CE50: move.w  (A0)+, D7 */
-    FA18_OP(0xC1CE52, 0x0C47, 0xC1CE56); /* C1CE52: cmpi.w  #-$1, D7 */
-    FA18_BCC(0xC1CE56, 0x6700, 0xC1CE5A, 0xC1CFD6, L_C1CFD6); /* C1CE56: beq     $c1cfd6 */
-L_C1CE5A:
-    FA18_CHECK(0xC1CE5A);
-    FA18_OP(0xC1CE5A, 0x13C7, 0xC1CE60); /* C1CE5A: move.b  D7, $c4585b.l */
-    FA18_OP(0xC1CE60, 0x1007, 0xC1CE62); /* C1CE60: move.b  D7, D0 */
-    FA18_OP(0xC1CE62, 0x0240, 0xC1CE66); /* C1CE62: andi.w  #$f, D0 */
-    FA18_OP(0xC1CE66, 0x33C0, 0xC1CE6C); /* C1CE66: move.w  D0, $c45ab8.l */
-    FA18_OP(0xC1CE6C, 0x2258, 0xC1CE6E); /* C1CE6C: movea.l (A0)+, A1 */
-    FA18_OP(0xC1CE6E, 0x4A51, 0xC1CE70); /* C1CE6E: tst.w   (A1) */
-    FA18_BCC(0xC1CE70, 0x6D00, 0xC1CE74, 0xC1CFBE, L_C1CFBE); /* C1CE70: blt     $c1cfbe */
-L_C1CE74:
-    FA18_CHECK(0xC1CE74);
-    FA18_OP(0xC1CE74, 0x0C91, 0xC1CE7A); /* C1CE74: cmpi.l  #$c1ed48, (A1) */
-    FA18_BCC(0xC1CE7A, 0x660E, 0xC1CE7C, 0xC1CE8A, L_C1CE8A); /* C1CE7A: bne     $c1ce8a */
-L_C1CE7C:
-    FA18_CHECK(0xC1CE7C);
-    FA18_OP(0xC1CE7C, 0x0CB9, 0xC1CE86); /* C1CE7C: cmpi.l  #-$400000, $c45a66.l */
-    FA18_BCC(0xC1CE86, 0x6D00, 0xC1CE8A, 0xC1CFBE, L_C1CFBE); /* C1CE86: blt     $c1cfbe */
-L_C1CE8A:
-    FA18_CHECK(0xC1CE8A);
-    FA18_OP(0xC1CE8A, 0x4C98, 0xC1CE8E); /* C1CE8A: movem.w (A0)+, D2-D4 */
-    FA18_OP(0xC1CE8E, 0x23D0, 0xC1CE94); /* C1CE8E: move.l  (A0), $c45932.l */
-    FA18_OP(0xC1CE94, 0x3207, 0xC1CE96); /* C1CE94: move.w  D7, D1 */
-    FA18_OP(0xC1CE96, 0xE049, 0xC1CE98); /* C1CE96: lsr.w   #8, D1 */
-    FA18_OP(0xC1CE98, 0x33C1, 0xC1CE9E); /* C1CE98: move.w  D1, $c459b4.l */
-    FA18_OP(0xC1CE9E, 0x4239, 0xC1CEA4); /* C1CE9E: clr.b   $c458bb.l */
-    FA18_OP(0xC1CEA4, 0x0807, 0xC1CEA8); /* C1CEA4: btst    #$6, D7 */
-    FA18_BCC(0xC1CEA8, 0x6600, 0xC1CEAC, 0xC1CEC2, L_C1CEC2); /* C1CEA8: bne     $c1cec2 */
-L_C1CEAC:
-    FA18_CHECK(0xC1CEAC);
-    FA18_OP(0xC1CEAC, 0x0807, 0xC1CEB0); /* C1CEAC: btst    #$4, D7 */
-    FA18_BCC(0xC1CEB0, 0x6616, 0xC1CEB2, 0xC1CEC8, L_C1CEC8); /* C1CEB0: bne     $c1cec8 */
-L_C1CEB2:
-    FA18_CHECK(0xC1CEB2);
-    FA18_OP(0xC1CEB2, 0x48B9, 0xC1CEBA); /* C1CEB2: movem.w D2-D4, $c45b2a.l */
-    FA18_OP(0xC1CEBA, 0xE182, 0xC1CEBC); /* C1CEBA: asl.l   #8, D2 */
-    FA18_OP(0xC1CEBC, 0xE183, 0xC1CEBE); /* C1CEBC: asl.l   #8, D3 */
-    FA18_OP(0xC1CEBE, 0xE184, 0xC1CEC0); /* C1CEBE: asl.l   #8, D4 */
-    FA18_JUMP(0xC1CEC0, 0x6022, 0xC1CEE4, L_C1CEE4); /* C1CEC0: bra     $c1cee4 */
-L_C1CEC2:
-    FA18_CHECK(0xC1CEC2);
-    FA18_CALL(0xC1CEC2, 0x6100, 0xC1CEC6, 144, 0); /* C1CEC2: bsr     $c1d0a4 */
-L_C1CEC6:
-    FA18_CHECK(0xC1CEC6);
-    FA18_JUMP(0xC1CEC6, 0x6004, 0xC1CECC, L_C1CECC); /* C1CEC6: bra     $c1cecc */
-L_C1CEC8:
-    FA18_CHECK(0xC1CEC8);
-    FA18_CALL(0xC1CEC8, 0x6100, 0xC1CECC, 145, 0); /* C1CEC8: bsr     $c1d0b6 */
-L_C1CECC:
-    FA18_CHECK(0xC1CECC);
-    FA18_OP(0xC1CECC, 0x48F9, 0xC1CED4); /* C1CECC: movem.l D2-D4, $c45b30.l */
-    FA18_OP(0xC1CED4, 0xE082, 0xC1CED6); /* C1CED4: asr.l   #8, D2 */
-    FA18_OP(0xC1CED6, 0xE083, 0xC1CED8); /* C1CED6: asr.l   #8, D3 */
-    FA18_OP(0xC1CED8, 0xE084, 0xC1CEDA); /* C1CED8: asr.l   #8, D4 */
-    FA18_OP(0xC1CEDA, 0x48B9, 0xC1CEE2); /* C1CEDA: movem.w D2-D4, $c45b2a.l */
-    FA18_JUMP(0xC1CEE2, 0x6008, 0xC1CEEC, L_C1CEEC); /* C1CEE2: bra     $c1ceec */
-L_C1CEE4:
-    FA18_CHECK(0xC1CEE4);
-    FA18_OP(0xC1CEE4, 0x48F9, 0xC1CEEC); /* C1CEE4: movem.l D2-D4, $c45b30.l */
-L_C1CEEC:
-    FA18_CHECK(0xC1CEEC);
-    FA18_OP(0xC1CEEC, 0x3228, 0xC1CEF0); /* C1CEEC: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CEF0, 0x48C1, 0xC1CEF2); /* C1CEF0: ext.l   D1 */
-    FA18_OP(0xC1CEF2, 0xE1A1, 0xC1CEF4); /* C1CEF2: asl.l   D0, D1 */
-    FA18_OP(0xC1CEF4, 0x0C81, 0xC1CEFA); /* C1CEF4: cmpi.l  #$400, D1 */
-    FA18_BCC(0xC1CEFA, 0x6C3A, 0xC1CEFC, 0xC1CF36, L_C1CF36); /* C1CEFA: bge     $c1cf36 */
-L_C1CEFC:
-    FA18_CHECK(0xC1CEFC);
-    FA18_OP(0xC1CEFC, 0x0C81, 0xC1CF02); /* C1CEFC: cmpi.l  #$100, D1 */
-    FA18_BCC(0xC1CF02, 0x6D20, 0xC1CF04, 0xC1CF24, L_C1CF24); /* C1CF02: blt     $c1cf24 */
-L_C1CF04:
-    FA18_CHECK(0xC1CF04);
-    FA18_OP(0xC1CF04, 0x3039, 0xC1CF0A); /* C1CF04: move.w  $c458da.l, D0 */
-    FA18_OP(0xC1CF0A, 0x3207, 0xC1CF0C); /* C1CF0A: move.w  D7, D1 */
-    FA18_OP(0xC1CF0C, 0x0801, 0xC1CF10); /* C1CF0C: btst    #$8, D1 */
-    FA18_BCC(0xC1CF10, 0x6608, 0xC1CF12, 0xC1CF1A, L_C1CF1A); /* C1CF10: bne     $c1cf1a */
-L_C1CF12:
-    FA18_CHECK(0xC1CF12);
-    FA18_OP(0xC1CF12, 0x0240, 0xC1CF16); /* C1CF12: andi.w  #$3, D0 */
-    FA18_BCC(0xC1CF16, 0x670C, 0xC1CF18, 0xC1CF24, L_C1CF24); /* C1CF16: beq     $c1cf24 */
-L_C1CF18:
-    FA18_CHECK(0xC1CF18);
-    FA18_JUMP(0xC1CF18, 0x601C, 0xC1CF36, L_C1CF36); /* C1CF18: bra     $c1cf36 */
-L_C1CF1A:
-    FA18_CHECK(0xC1CF1A);
-    FA18_OP(0xC1CF1A, 0x0240, 0xC1CF1E); /* C1CF1A: andi.w  #$3, D0 */
-    FA18_OP(0xC1CF1E, 0x0C40, 0xC1CF22); /* C1CF1E: cmpi.w  #$2, D0 */
-    FA18_BCC(0xC1CF22, 0x6612, 0xC1CF24, 0xC1CF36, L_C1CF36); /* C1CF22: bne     $c1cf36 */
-L_C1CF24:
-    FA18_CHECK(0xC1CF24);
-    FA18_OP(0xC1CF24, 0x4CB9, 0xC1CF2C); /* C1CF24: movem.w $c45b2a.l, D2-D4 */
-    FA18_CALL(0xC1CF2C, 0x4EB9, 0xC1CF32, 152, 1); /* C1CF2C: jsr     $c1d91a.l */
-L_C1CF32:
-    FA18_CHECK(0xC1CF32);
-    FA18_OP(0xC1CF32, 0x3141, 0xC1CF36); /* C1CF32: move.w  D1, ($4,A0) */
-L_C1CF36:
-    FA18_CHECK(0xC1CF36);
-    FA18_OP(0xC1CF36, 0x0807, 0xC1CF3A); /* C1CF36: btst    #$6, D7 */
-    FA18_BCC(0xC1CF3A, 0x661E, 0xC1CF3C, 0xC1CF5A, L_C1CF5A); /* C1CF3A: bne     $c1cf5a */
-L_C1CF3C:
-    FA18_CHECK(0xC1CF3C);
-    FA18_OP(0xC1CF3C, 0x0807, 0xC1CF40); /* C1CF3C: btst    #$4, D7 */
-    FA18_BCC(0xC1CF40, 0x6618, 0xC1CF42, 0xC1CF5A, L_C1CF5A); /* C1CF40: bne     $c1cf5a */
-L_C1CF42:
-    FA18_CHECK(0xC1CF42);
-    FA18_OP(0xC1CF42, 0x33E8, 0xC1CF4A); /* C1CF42: move.w  ($8,A0), $c45aba.l */
-    FA18_BCC(0xC1CF4A, 0x6C0E, 0xC1CF4C, 0xC1CF5A, L_C1CF5A); /* C1CF4A: bge     $c1cf5a */
-L_C1CF4C:
-    FA18_CHECK(0xC1CF4C);
-    FA18_OP(0xC1CF4C, 0x5328, 0xC1CF50); /* C1CF4C: subq.b  #1, ($6,A0) */
-    FA18_BCC(0xC1CF50, 0x6C6C, 0xC1CF52, 0xC1CFBE, L_C1CFBE); /* C1CF50: bge     $c1cfbe */
-L_C1CF52:
-    FA18_CHECK(0xC1CF52);
-    FA18_OP(0xC1CF52, 0x1179, 0xC1CF5A); /* C1CF52: move.b  $c458bc.l, ($6,A0) */
-L_C1CF5A:
-    FA18_CHECK(0xC1CF5A);
-    FA18_OP(0xC1CF5A, 0x5328, 0xC1CF5E); /* C1CF5A: subq.b  #1, ($7,A0) */
-    FA18_OP(0xC1CF5E, 0x13E8, 0xC1CF66); /* C1CF5E: move.b  ($7,A0), $c458bd.l */
-    FA18_OP(0xC1CF66, 0x3228, 0xC1CF6A); /* C1CF66: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CF6A, 0x33C1, 0xC1CF70); /* C1CF6A: move.w  D1, $c45b40.l */
-    FA18_OP(0xC1CF70, 0x0247, 0xC1CF74); /* C1CF70: andi.w  #$ff00, D7 */
-    FA18_OP(0xC1CF74, 0xDE47, 0xC1CF76); /* C1CF74: add.w   D7, D7 */
-    FA18_OP(0xC1CF76, 0x33C7, 0xC1CF7C); /* C1CF76: move.w  D7, $c459b6.l */
-    FA18_OP(0xC1CF7C, 0xBE79, 0xC1CF82); /* C1CF7C: cmp.w   $c458de.l, D7 */
-    FA18_BCC(0xC1CF82, 0x6612, 0xC1CF84, 0xC1CF96, L_C1CF96); /* C1CF82: bne     $c1cf96 */
-L_C1CF84:
-    FA18_CHECK(0xC1CF84);
-    FA18_OP(0xC1CF84, 0x4A39, 0xC1CF8A); /* C1CF84: tst.b   $c45785.l */
-    FA18_BCC(0xC1CF8A, 0x6604, 0xC1CF8C, 0xC1CF90, L_C1CF90); /* C1CF8A: bne     $c1cf90 */
-L_C1CF8C:
-    FA18_CHECK(0xC1CF8C);
-    FA18_OP(0xC1CF8C, 0x323C, 0xC1CF90); /* C1CF8C: move.w  #$7fff, D1 */
-L_C1CF90:
-    FA18_CHECK(0xC1CF90);
-    FA18_OP(0xC1CF90, 0x33C1, 0xC1CF96); /* C1CF90: move.w  D1, $c45b42.l */
-L_C1CF96:
-    FA18_CHECK(0xC1CF96);
-    FA18_OP(0xC1CF96, 0x2459, 0xC1CF98); /* C1CF96: movea.l (A1)+, A2 */
-    FA18_OP(0xC1CF98, 0x2059, 0xC1CF9A); /* C1CF98: movea.l (A1)+, A0 */
-    FA18_OP(0xC1CF9A, 0x23D9, 0xC1CFA0); /* C1CF9A: move.l  (A1)+, $c45a36.l */
-    FA18_OP(0xC1CFA0, 0x23D9, 0xC1CFA6); /* C1CFA0: move.l  (A1)+, $c45a3a.l */
-    FA18_CALL_DYNAMIC(0xC1CFA6, 0x4E92, 0xC1CFA8); /* C1CFA6: jsr     (A2) */
-L_C1CFA8:
-    FA18_CHECK(0xC1CFA8);
-    FA18_OP(0xC1CFA8, 0x41F9, 0xC1CFAE); /* C1CFA8: lea     $c4f6ca.l, A0 */
-    FA18_OP(0xC1CFAE, 0x3239, 0xC1CFB4); /* C1CFAE: move.w  $c459aa.l, D1 */
-    FA18_OP(0xC1CFB4, 0x4A40, 0xC1CFB6); /* C1CFB4: tst.w   D0 */
-    FA18_BCC(0xC1CFB6, 0x6E02, 0xC1CFB8, 0xC1CFBA, L_C1CFBA); /* C1CFB6: bgt     $c1cfba */
-L_C1CFB8:
-    FA18_CHECK(0xC1CFB8);
-    FA18_OP(0xC1CFB8, 0x70FF, 0xC1CFBA); /* C1CFB8: moveq   #-$1, D0 */
-L_C1CFBA:
-    FA18_CHECK(0xC1CFBA);
-    FA18_OP(0xC1CFBA, 0x3180, 0xC1CFBE); /* C1CFBA: move.w  D0, ($14,A0,D1.w) */
-L_C1CFBE:
-    FA18_CHECK(0xC1CFBE);
-    FA18_OP(0xC1CFBE, 0x0679, 0xC1CFC6); /* C1CFBE: addi.w  #$18, $c459aa.l */
-    FA18_JUMP(0xC1CFC6, 0x6000, 0xC1CE42, L_C1CE42); /* C1CFC6: bra     $c1ce42 */
-L_C1CFD6:
-    FA18_CHECK(0xC1CFD6);
-    FA18_OP(0xC1CFD6, 0x4239, 0xC1CFDC); /* C1CFD6: clr.b   $c45835.l */
-    FA18_OP(0xC1CFDC, 0x4239, 0xC1CFE2); /* C1CFDC: clr.b   $c45838.l */
-    FA18_OP(0xC1CFE2, 0x4A39, 0xC1CFE8); /* C1CFE2: tst.b   $c45785.l */
-    FA18_BCC(0xC1CFE8, 0x6600, 0xC1CFEC, 0xC1D0A2, L_C1D0A2); /* C1CFE8: bne     $c1d0a2 */
-L_C1CFEC:
-    FA18_CHECK(0xC1CFEC);
-    FA18_OP(0xC1CFEC, 0x0C39, 0xC1CFF4); /* C1CFEC: cmpi.b  #$1, $c45837.l */
-    FA18_BCC(0xC1CFF4, 0x6E1E, 0xC1CFF6, 0xC1D014, L_C1D014); /* C1CFF4: bgt     $c1d014 */
-L_C1CFF6:
-    FA18_CHECK(0xC1CFF6);
-    FA18_OP(0xC1CFF6, 0x3039, 0xC1CFFC); /* C1CFF6: move.w  $c458da.l, D0 */
-    FA18_OP(0xC1CFFC, 0x3200, 0xC1CFFE); /* C1CFFC: move.w  D0, D1 */
-    FA18_OP(0xC1CFFE, 0x0241, 0xC1D002); /* C1CFFE: andi.w  #$2, D1 */
-    FA18_BCC(0xC1D002, 0x6606, 0xC1D004, 0xC1D00A, L_C1D00A); /* C1D002: bne     $c1d00a */
-L_C1D004:
-    FA18_CHECK(0xC1D004);
-    FA18_OP(0xC1D004, 0x5239, 0xC1D00A); /* C1D004: addq.b  #1, $c45838.l */
-L_C1D00A:
-    FA18_CHECK(0xC1D00A);
-    FA18_OP(0xC1D00A, 0x0240, 0xC1D00E); /* C1D00A: andi.w  #$3, D0 */
-    FA18_BCC(0xC1D00E, 0x6600, 0xC1D012, 0xC1D0A2, L_C1D0A2); /* C1D00E: bne     $c1d0a2 */
-L_C1D012:
-    FA18_CHECK(0xC1D012);
-    FA18_JUMP(0xC1D012, 0x6006, 0xC1D01A, L_C1D01A); /* C1D012: bra     $c1d01a */
-L_C1D014:
-    FA18_CHECK(0xC1D014);
-    FA18_OP(0xC1D014, 0x5239, 0xC1D01A); /* C1D014: addq.b  #1, $c45838.l */
-L_C1D01A:
-    FA18_CHECK(0xC1D01A);
-    FA18_OP(0xC1D01A, 0x4279, 0xC1D020); /* C1D01A: clr.w   $c459aa.l */
-    FA18_OP(0xC1D020, 0x43F9, 0xC1D026); /* C1D020: lea     $c46184.l, A1 */
-    FA18_OP(0xC1D026, 0x7000, 0xC1D028); /* C1D026: moveq   #$0, D0 */
-L_C1D028:
-    FA18_CHECK(0xC1D028);
-    FA18_OP(0xC1D028, 0x3239, 0xC1D02E); /* C1D028: move.w  $c458de.l, D1 */
-    FA18_OP(0xC1D02E, 0xB041, 0xC1D030); /* C1D02E: cmp.w   D1, D0 */
-    FA18_BCC(0xC1D030, 0x6766, 0xC1D032, 0xC1D098, L_C1D098); /* C1D030: beq     $c1d098 */
-L_C1D032:
-    FA18_CHECK(0xC1D032);
-    FA18_OP(0xC1D032, 0x0831, 0xC1D038); /* C1D032: btst    #$6, ($1,A1,D0.w) */
-    FA18_BCC(0xC1D038, 0x675E, 0xC1D03A, 0xC1D098, L_C1D098); /* C1D038: beq     $c1d098 */
-L_C1D03A:
-    FA18_CHECK(0xC1D03A);
-    FA18_OP(0xC1D03A, 0x4CF1, 0xC1D040); /* C1D03A: movem.l ($14,A1,D0.w), D2-D4 */
-    FA18_OP(0xC1D040, 0x94B1, 0xC1D044); /* C1D040: sub.l   ($14,A1,D1.w), D2 */
-    FA18_OP(0xC1D044, 0x96B1, 0xC1D048); /* C1D044: sub.l   ($18,A1,D1.w), D3 */
-    FA18_OP(0xC1D048, 0x98B1, 0xC1D04C); /* C1D048: sub.l   ($1c,A1,D1.w), D4 */
-    FA18_OP(0xC1D04C, 0x2A02, 0xC1D04E); /* C1D04C: move.l  D2, D5 */
-    FA18_BCC(0xC1D04E, 0x6C02, 0xC1D050, 0xC1D052, L_C1D052); /* C1D04E: bge     $c1d052 */
-L_C1D050:
-    FA18_CHECK(0xC1D050);
-    FA18_OP(0xC1D050, 0x4485, 0xC1D052); /* C1D050: neg.l   D5 */
-L_C1D052:
-    FA18_CHECK(0xC1D052);
-    FA18_OP(0xC1D052, 0x2C03, 0xC1D054); /* C1D052: move.l  D3, D6 */
-    FA18_BCC(0xC1D054, 0x6C02, 0xC1D056, 0xC1D058, L_C1D058); /* C1D054: bge     $c1d058 */
-L_C1D056:
-    FA18_CHECK(0xC1D056);
-    FA18_OP(0xC1D056, 0x4486, 0xC1D058); /* C1D056: neg.l   D6 */
-L_C1D058:
-    FA18_CHECK(0xC1D058);
-    FA18_OP(0xC1D058, 0x2E04, 0xC1D05A); /* C1D058: move.l  D4, D7 */
-    FA18_BCC(0xC1D05A, 0x6C02, 0xC1D05C, 0xC1D05E, L_C1D05E); /* C1D05A: bge     $c1d05e */
-L_C1D05C:
-    FA18_CHECK(0xC1D05C);
-    FA18_OP(0xC1D05C, 0x4487, 0xC1D05E); /* C1D05C: neg.l   D7 */
-L_C1D05E:
-    FA18_CHECK(0xC1D05E);
-    FA18_OP(0xC1D05E, 0xBC85, 0xC1D060); /* C1D05E: cmp.l   D5, D6 */
-    FA18_BCC(0xC1D060, 0x6D08, 0xC1D062, 0xC1D06A, L_C1D06A); /* C1D060: blt     $c1d06a */
-L_C1D062:
-    FA18_CHECK(0xC1D062);
-    FA18_OP(0xC1D062, 0xBE86, 0xC1D064); /* C1D062: cmp.l   D6, D7 */
-    FA18_BCC(0xC1D064, 0x6E0A, 0xC1D066, 0xC1D070, L_C1D070); /* C1D064: bgt     $c1d070 */
-L_C1D066:
-    FA18_CHECK(0xC1D066);
-    FA18_OP(0xC1D066, 0x2E06, 0xC1D068); /* C1D066: move.l  D6, D7 */
-    FA18_JUMP(0xC1D068, 0x6006, 0xC1D070, L_C1D070); /* C1D068: bra     $c1d070 */
-L_C1D06A:
-    FA18_CHECK(0xC1D06A);
-    FA18_OP(0xC1D06A, 0xBE85, 0xC1D06C); /* C1D06A: cmp.l   D5, D7 */
-    FA18_BCC(0xC1D06C, 0x6E02, 0xC1D06E, 0xC1D070, L_C1D070); /* C1D06C: bgt     $c1d070 */
-L_C1D06E:
-    FA18_CHECK(0xC1D06E);
-    FA18_OP(0xC1D06E, 0x2E05, 0xC1D070); /* C1D06E: move.l  D5, D7 */
-L_C1D070:
-    FA18_CHECK(0xC1D070);
-    FA18_OP(0xC1D070, 0x7200, 0xC1D072); /* C1D070: moveq   #$0, D1 */
-L_C1D072:
-    FA18_CHECK(0xC1D072);
-    FA18_OP(0xC1D072, 0x0C87, 0xC1D078); /* C1D072: cmpi.l  #$7fffff, D7 */
-    FA18_BCC(0xC1D078, 0x6F06, 0xC1D07A, 0xC1D080, L_C1D080); /* C1D078: ble     $c1d080 */
-L_C1D07A:
-    FA18_CHECK(0xC1D07A);
-    FA18_OP(0xC1D07A, 0x5441, 0xC1D07C); /* C1D07A: addq.w  #2, D1 */
-    FA18_OP(0xC1D07C, 0xE487, 0xC1D07E); /* C1D07C: asr.l   #2, D7 */
-    FA18_JUMP(0xC1D07E, 0x60F2, 0xC1D072, L_C1D072); /* C1D07E: bra     $c1d072 */
-L_C1D080:
-    FA18_CHECK(0xC1D080);
-    FA18_OP(0xC1D080, 0x3A01, 0xC1D082); /* C1D080: move.w  D1, D5 */
-    FA18_OP(0xC1D082, 0x5045, 0xC1D084); /* C1D082: addq.w  #8, D5 */
-    FA18_OP(0xC1D084, 0xEAA2, 0xC1D086); /* C1D084: asr.l   D5, D2 */
-    FA18_OP(0xC1D086, 0xEAA3, 0xC1D088); /* C1D086: asr.l   D5, D3 */
-    FA18_OP(0xC1D088, 0xEAA4, 0xC1D08A); /* C1D088: asr.l   D5, D4 */
-    FA18_OP(0xC1D08A, 0x3E00, 0xC1D08C); /* C1D08A: move.w  D0, D7 */
-    FA18_OP(0xC1D08C, 0xE247, 0xC1D08E); /* C1D08C: asr.w   #1, D7 */
-    FA18_OP(0xC1D08E, 0x08C7, 0xC1D092); /* C1D08E: bset    #$4, D7 */
-    FA18_CALL(0xC1D092, 0x4EB9, 0xC1D098, 221, 0); /* C1D092: jsr     $c25876.l */
-L_C1D098:
-    FA18_CHECK(0xC1D098);
-    FA18_OP(0xC1D098, 0x0640, 0xC1D09C); /* C1D098: addi.w  #$200, D0 */
-    FA18_OP(0xC1D09C, 0x0C40, 0xC1D0A0); /* C1D09C: cmpi.w  #$2000, D0 */
-    FA18_BCC(0xC1D0A0, 0x6D86, 0xC1D0A2, 0xC1D028, L_C1D028); /* C1D0A0: blt     $c1d028 */
-L_C1D0A2:
-    FA18_CHECK(0xC1D0A2);
-    FA18_RETURN(0xC1D0A2, 0x4E75); /* C1D0A2: rts */
-}
-
-int fa18_fn_C1CFA8(int entry) {
-    switch (entry) {
-    case 0: goto L_C1CE42;
-    case 1: goto L_C1CE5A;
-    case 2: goto L_C1CE74;
-    case 3: goto L_C1CE7C;
-    case 4: goto L_C1CE8A;
-    case 5: goto L_C1CEAC;
-    case 6: goto L_C1CEB2;
-    case 7: goto L_C1CEC2;
-    case 8: goto L_C1CEC6;
-    case 9: goto L_C1CEC8;
-    case 10: goto L_C1CECC;
-    case 11: goto L_C1CEE4;
-    case 12: goto L_C1CEEC;
-    case 13: goto L_C1CEFC;
-    case 14: goto L_C1CF04;
-    case 15: goto L_C1CF12;
-    case 16: goto L_C1CF18;
-    case 17: goto L_C1CF1A;
-    case 18: goto L_C1CF24;
-    case 19: goto L_C1CF32;
-    case 20: goto L_C1CF36;
-    case 21: goto L_C1CF3C;
-    case 22: goto L_C1CF42;
-    case 23: goto L_C1CF4C;
-    case 24: goto L_C1CF52;
-    case 25: goto L_C1CF5A;
-    case 26: goto L_C1CF84;
-    case 27: goto L_C1CF8C;
-    case 28: goto L_C1CF90;
-    case 29: goto L_C1CF96;
-    case 30: goto L_C1CFA8;
-    case 31: goto L_C1CFB8;
-    case 32: goto L_C1CFBA;
-    case 33: goto L_C1CFBE;
-    case 34: goto L_C1CFD6;
-    case 35: goto L_C1CFEC;
-    case 36: goto L_C1CFF6;
-    case 37: goto L_C1D004;
-    case 38: goto L_C1D00A;
-    case 39: goto L_C1D012;
-    case 40: goto L_C1D014;
-    case 41: goto L_C1D01A;
-    case 42: goto L_C1D028;
-    case 43: goto L_C1D032;
-    case 44: goto L_C1D03A;
-    case 45: goto L_C1D050;
-    case 46: goto L_C1D052;
-    case 47: goto L_C1D056;
-    case 48: goto L_C1D058;
-    case 49: goto L_C1D05C;
-    case 50: goto L_C1D05E;
-    case 51: goto L_C1D062;
-    case 52: goto L_C1D066;
-    case 53: goto L_C1D06A;
-    case 54: goto L_C1D06E;
-    case 55: goto L_C1D070;
-    case 56: goto L_C1D072;
-    case 57: goto L_C1D07A;
-    case 58: goto L_C1D080;
-    case 59: goto L_C1D098;
-    case 60: goto L_C1D0A2;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1CE42:
-    FA18_CHECK(0xC1CE42);
-    FA18_OP(0xC1CE42, 0x41F9, 0xC1CE48); /* C1CE42: lea     $c4f6ca.l, A0 */
-    FA18_OP(0xC1CE48, 0x3039, 0xC1CE4E); /* C1CE48: move.w  $c459aa.l, D0 */
-    FA18_OP(0xC1CE4E, 0xD0C0, 0xC1CE50); /* C1CE4E: adda.w  D0, A0 */
-    FA18_OP(0xC1CE50, 0x3E18, 0xC1CE52); /* C1CE50: move.w  (A0)+, D7 */
-    FA18_OP(0xC1CE52, 0x0C47, 0xC1CE56); /* C1CE52: cmpi.w  #-$1, D7 */
-    FA18_BCC(0xC1CE56, 0x6700, 0xC1CE5A, 0xC1CFD6, L_C1CFD6); /* C1CE56: beq     $c1cfd6 */
-L_C1CE5A:
-    FA18_CHECK(0xC1CE5A);
-    FA18_OP(0xC1CE5A, 0x13C7, 0xC1CE60); /* C1CE5A: move.b  D7, $c4585b.l */
-    FA18_OP(0xC1CE60, 0x1007, 0xC1CE62); /* C1CE60: move.b  D7, D0 */
-    FA18_OP(0xC1CE62, 0x0240, 0xC1CE66); /* C1CE62: andi.w  #$f, D0 */
-    FA18_OP(0xC1CE66, 0x33C0, 0xC1CE6C); /* C1CE66: move.w  D0, $c45ab8.l */
-    FA18_OP(0xC1CE6C, 0x2258, 0xC1CE6E); /* C1CE6C: movea.l (A0)+, A1 */
-    FA18_OP(0xC1CE6E, 0x4A51, 0xC1CE70); /* C1CE6E: tst.w   (A1) */
-    FA18_BCC(0xC1CE70, 0x6D00, 0xC1CE74, 0xC1CFBE, L_C1CFBE); /* C1CE70: blt     $c1cfbe */
-L_C1CE74:
-    FA18_CHECK(0xC1CE74);
-    FA18_OP(0xC1CE74, 0x0C91, 0xC1CE7A); /* C1CE74: cmpi.l  #$c1ed48, (A1) */
-    FA18_BCC(0xC1CE7A, 0x660E, 0xC1CE7C, 0xC1CE8A, L_C1CE8A); /* C1CE7A: bne     $c1ce8a */
-L_C1CE7C:
-    FA18_CHECK(0xC1CE7C);
-    FA18_OP(0xC1CE7C, 0x0CB9, 0xC1CE86); /* C1CE7C: cmpi.l  #-$400000, $c45a66.l */
-    FA18_BCC(0xC1CE86, 0x6D00, 0xC1CE8A, 0xC1CFBE, L_C1CFBE); /* C1CE86: blt     $c1cfbe */
-L_C1CE8A:
-    FA18_CHECK(0xC1CE8A);
-    FA18_OP(0xC1CE8A, 0x4C98, 0xC1CE8E); /* C1CE8A: movem.w (A0)+, D2-D4 */
-    FA18_OP(0xC1CE8E, 0x23D0, 0xC1CE94); /* C1CE8E: move.l  (A0), $c45932.l */
-    FA18_OP(0xC1CE94, 0x3207, 0xC1CE96); /* C1CE94: move.w  D7, D1 */
-    FA18_OP(0xC1CE96, 0xE049, 0xC1CE98); /* C1CE96: lsr.w   #8, D1 */
-    FA18_OP(0xC1CE98, 0x33C1, 0xC1CE9E); /* C1CE98: move.w  D1, $c459b4.l */
-    FA18_OP(0xC1CE9E, 0x4239, 0xC1CEA4); /* C1CE9E: clr.b   $c458bb.l */
-    FA18_OP(0xC1CEA4, 0x0807, 0xC1CEA8); /* C1CEA4: btst    #$6, D7 */
-    FA18_BCC(0xC1CEA8, 0x6600, 0xC1CEAC, 0xC1CEC2, L_C1CEC2); /* C1CEA8: bne     $c1cec2 */
-L_C1CEAC:
-    FA18_CHECK(0xC1CEAC);
-    FA18_OP(0xC1CEAC, 0x0807, 0xC1CEB0); /* C1CEAC: btst    #$4, D7 */
-    FA18_BCC(0xC1CEB0, 0x6616, 0xC1CEB2, 0xC1CEC8, L_C1CEC8); /* C1CEB0: bne     $c1cec8 */
-L_C1CEB2:
-    FA18_CHECK(0xC1CEB2);
-    FA18_OP(0xC1CEB2, 0x48B9, 0xC1CEBA); /* C1CEB2: movem.w D2-D4, $c45b2a.l */
-    FA18_OP(0xC1CEBA, 0xE182, 0xC1CEBC); /* C1CEBA: asl.l   #8, D2 */
-    FA18_OP(0xC1CEBC, 0xE183, 0xC1CEBE); /* C1CEBC: asl.l   #8, D3 */
-    FA18_OP(0xC1CEBE, 0xE184, 0xC1CEC0); /* C1CEBE: asl.l   #8, D4 */
-    FA18_JUMP(0xC1CEC0, 0x6022, 0xC1CEE4, L_C1CEE4); /* C1CEC0: bra     $c1cee4 */
-L_C1CEC2:
-    FA18_CHECK(0xC1CEC2);
-    FA18_CALL(0xC1CEC2, 0x6100, 0xC1CEC6, 144, 0); /* C1CEC2: bsr     $c1d0a4 */
-L_C1CEC6:
-    FA18_CHECK(0xC1CEC6);
-    FA18_JUMP(0xC1CEC6, 0x6004, 0xC1CECC, L_C1CECC); /* C1CEC6: bra     $c1cecc */
-L_C1CEC8:
-    FA18_CHECK(0xC1CEC8);
-    FA18_CALL(0xC1CEC8, 0x6100, 0xC1CECC, 145, 0); /* C1CEC8: bsr     $c1d0b6 */
-L_C1CECC:
-    FA18_CHECK(0xC1CECC);
-    FA18_OP(0xC1CECC, 0x48F9, 0xC1CED4); /* C1CECC: movem.l D2-D4, $c45b30.l */
-    FA18_OP(0xC1CED4, 0xE082, 0xC1CED6); /* C1CED4: asr.l   #8, D2 */
-    FA18_OP(0xC1CED6, 0xE083, 0xC1CED8); /* C1CED6: asr.l   #8, D3 */
-    FA18_OP(0xC1CED8, 0xE084, 0xC1CEDA); /* C1CED8: asr.l   #8, D4 */
-    FA18_OP(0xC1CEDA, 0x48B9, 0xC1CEE2); /* C1CEDA: movem.w D2-D4, $c45b2a.l */
-    FA18_JUMP(0xC1CEE2, 0x6008, 0xC1CEEC, L_C1CEEC); /* C1CEE2: bra     $c1ceec */
-L_C1CEE4:
-    FA18_CHECK(0xC1CEE4);
-    FA18_OP(0xC1CEE4, 0x48F9, 0xC1CEEC); /* C1CEE4: movem.l D2-D4, $c45b30.l */
-L_C1CEEC:
-    FA18_CHECK(0xC1CEEC);
-    FA18_OP(0xC1CEEC, 0x3228, 0xC1CEF0); /* C1CEEC: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CEF0, 0x48C1, 0xC1CEF2); /* C1CEF0: ext.l   D1 */
-    FA18_OP(0xC1CEF2, 0xE1A1, 0xC1CEF4); /* C1CEF2: asl.l   D0, D1 */
-    FA18_OP(0xC1CEF4, 0x0C81, 0xC1CEFA); /* C1CEF4: cmpi.l  #$400, D1 */
-    FA18_BCC(0xC1CEFA, 0x6C3A, 0xC1CEFC, 0xC1CF36, L_C1CF36); /* C1CEFA: bge     $c1cf36 */
-L_C1CEFC:
-    FA18_CHECK(0xC1CEFC);
-    FA18_OP(0xC1CEFC, 0x0C81, 0xC1CF02); /* C1CEFC: cmpi.l  #$100, D1 */
-    FA18_BCC(0xC1CF02, 0x6D20, 0xC1CF04, 0xC1CF24, L_C1CF24); /* C1CF02: blt     $c1cf24 */
-L_C1CF04:
-    FA18_CHECK(0xC1CF04);
-    FA18_OP(0xC1CF04, 0x3039, 0xC1CF0A); /* C1CF04: move.w  $c458da.l, D0 */
-    FA18_OP(0xC1CF0A, 0x3207, 0xC1CF0C); /* C1CF0A: move.w  D7, D1 */
-    FA18_OP(0xC1CF0C, 0x0801, 0xC1CF10); /* C1CF0C: btst    #$8, D1 */
-    FA18_BCC(0xC1CF10, 0x6608, 0xC1CF12, 0xC1CF1A, L_C1CF1A); /* C1CF10: bne     $c1cf1a */
-L_C1CF12:
-    FA18_CHECK(0xC1CF12);
-    FA18_OP(0xC1CF12, 0x0240, 0xC1CF16); /* C1CF12: andi.w  #$3, D0 */
-    FA18_BCC(0xC1CF16, 0x670C, 0xC1CF18, 0xC1CF24, L_C1CF24); /* C1CF16: beq     $c1cf24 */
-L_C1CF18:
-    FA18_CHECK(0xC1CF18);
-    FA18_JUMP(0xC1CF18, 0x601C, 0xC1CF36, L_C1CF36); /* C1CF18: bra     $c1cf36 */
-L_C1CF1A:
-    FA18_CHECK(0xC1CF1A);
-    FA18_OP(0xC1CF1A, 0x0240, 0xC1CF1E); /* C1CF1A: andi.w  #$3, D0 */
-    FA18_OP(0xC1CF1E, 0x0C40, 0xC1CF22); /* C1CF1E: cmpi.w  #$2, D0 */
-    FA18_BCC(0xC1CF22, 0x6612, 0xC1CF24, 0xC1CF36, L_C1CF36); /* C1CF22: bne     $c1cf36 */
-L_C1CF24:
-    FA18_CHECK(0xC1CF24);
-    FA18_OP(0xC1CF24, 0x4CB9, 0xC1CF2C); /* C1CF24: movem.w $c45b2a.l, D2-D4 */
-    FA18_CALL(0xC1CF2C, 0x4EB9, 0xC1CF32, 152, 1); /* C1CF2C: jsr     $c1d91a.l */
-L_C1CF32:
-    FA18_CHECK(0xC1CF32);
-    FA18_OP(0xC1CF32, 0x3141, 0xC1CF36); /* C1CF32: move.w  D1, ($4,A0) */
-L_C1CF36:
-    FA18_CHECK(0xC1CF36);
-    FA18_OP(0xC1CF36, 0x0807, 0xC1CF3A); /* C1CF36: btst    #$6, D7 */
-    FA18_BCC(0xC1CF3A, 0x661E, 0xC1CF3C, 0xC1CF5A, L_C1CF5A); /* C1CF3A: bne     $c1cf5a */
-L_C1CF3C:
-    FA18_CHECK(0xC1CF3C);
-    FA18_OP(0xC1CF3C, 0x0807, 0xC1CF40); /* C1CF3C: btst    #$4, D7 */
-    FA18_BCC(0xC1CF40, 0x6618, 0xC1CF42, 0xC1CF5A, L_C1CF5A); /* C1CF40: bne     $c1cf5a */
-L_C1CF42:
-    FA18_CHECK(0xC1CF42);
-    FA18_OP(0xC1CF42, 0x33E8, 0xC1CF4A); /* C1CF42: move.w  ($8,A0), $c45aba.l */
-    FA18_BCC(0xC1CF4A, 0x6C0E, 0xC1CF4C, 0xC1CF5A, L_C1CF5A); /* C1CF4A: bge     $c1cf5a */
-L_C1CF4C:
-    FA18_CHECK(0xC1CF4C);
-    FA18_OP(0xC1CF4C, 0x5328, 0xC1CF50); /* C1CF4C: subq.b  #1, ($6,A0) */
-    FA18_BCC(0xC1CF50, 0x6C6C, 0xC1CF52, 0xC1CFBE, L_C1CFBE); /* C1CF50: bge     $c1cfbe */
-L_C1CF52:
-    FA18_CHECK(0xC1CF52);
-    FA18_OP(0xC1CF52, 0x1179, 0xC1CF5A); /* C1CF52: move.b  $c458bc.l, ($6,A0) */
-L_C1CF5A:
-    FA18_CHECK(0xC1CF5A);
-    FA18_OP(0xC1CF5A, 0x5328, 0xC1CF5E); /* C1CF5A: subq.b  #1, ($7,A0) */
-    FA18_OP(0xC1CF5E, 0x13E8, 0xC1CF66); /* C1CF5E: move.b  ($7,A0), $c458bd.l */
-    FA18_OP(0xC1CF66, 0x3228, 0xC1CF6A); /* C1CF66: move.w  ($4,A0), D1 */
-    FA18_OP(0xC1CF6A, 0x33C1, 0xC1CF70); /* C1CF6A: move.w  D1, $c45b40.l */
-    FA18_OP(0xC1CF70, 0x0247, 0xC1CF74); /* C1CF70: andi.w  #$ff00, D7 */
-    FA18_OP(0xC1CF74, 0xDE47, 0xC1CF76); /* C1CF74: add.w   D7, D7 */
-    FA18_OP(0xC1CF76, 0x33C7, 0xC1CF7C); /* C1CF76: move.w  D7, $c459b6.l */
-    FA18_OP(0xC1CF7C, 0xBE79, 0xC1CF82); /* C1CF7C: cmp.w   $c458de.l, D7 */
-    FA18_BCC(0xC1CF82, 0x6612, 0xC1CF84, 0xC1CF96, L_C1CF96); /* C1CF82: bne     $c1cf96 */
-L_C1CF84:
-    FA18_CHECK(0xC1CF84);
-    FA18_OP(0xC1CF84, 0x4A39, 0xC1CF8A); /* C1CF84: tst.b   $c45785.l */
-    FA18_BCC(0xC1CF8A, 0x6604, 0xC1CF8C, 0xC1CF90, L_C1CF90); /* C1CF8A: bne     $c1cf90 */
-L_C1CF8C:
-    FA18_CHECK(0xC1CF8C);
-    FA18_OP(0xC1CF8C, 0x323C, 0xC1CF90); /* C1CF8C: move.w  #$7fff, D1 */
-L_C1CF90:
-    FA18_CHECK(0xC1CF90);
-    FA18_OP(0xC1CF90, 0x33C1, 0xC1CF96); /* C1CF90: move.w  D1, $c45b42.l */
-L_C1CF96:
-    FA18_CHECK(0xC1CF96);
-    FA18_OP(0xC1CF96, 0x2459, 0xC1CF98); /* C1CF96: movea.l (A1)+, A2 */
-    FA18_OP(0xC1CF98, 0x2059, 0xC1CF9A); /* C1CF98: movea.l (A1)+, A0 */
-    FA18_OP(0xC1CF9A, 0x23D9, 0xC1CFA0); /* C1CF9A: move.l  (A1)+, $c45a36.l */
-    FA18_OP(0xC1CFA0, 0x23D9, 0xC1CFA6); /* C1CFA0: move.l  (A1)+, $c45a3a.l */
-    FA18_CALL_DYNAMIC(0xC1CFA6, 0x4E92, 0xC1CFA8); /* C1CFA6: jsr     (A2) */
-L_C1CFA8:
-    FA18_CHECK(0xC1CFA8);
-    FA18_OP(0xC1CFA8, 0x41F9, 0xC1CFAE); /* C1CFA8: lea     $c4f6ca.l, A0 */
-    FA18_OP(0xC1CFAE, 0x3239, 0xC1CFB4); /* C1CFAE: move.w  $c459aa.l, D1 */
-    FA18_OP(0xC1CFB4, 0x4A40, 0xC1CFB6); /* C1CFB4: tst.w   D0 */
-    FA18_BCC(0xC1CFB6, 0x6E02, 0xC1CFB8, 0xC1CFBA, L_C1CFBA); /* C1CFB6: bgt     $c1cfba */
-L_C1CFB8:
-    FA18_CHECK(0xC1CFB8);
-    FA18_OP(0xC1CFB8, 0x70FF, 0xC1CFBA); /* C1CFB8: moveq   #-$1, D0 */
-L_C1CFBA:
-    FA18_CHECK(0xC1CFBA);
-    FA18_OP(0xC1CFBA, 0x3180, 0xC1CFBE); /* C1CFBA: move.w  D0, ($14,A0,D1.w) */
-L_C1CFBE:
-    FA18_CHECK(0xC1CFBE);
-    FA18_OP(0xC1CFBE, 0x0679, 0xC1CFC6); /* C1CFBE: addi.w  #$18, $c459aa.l */
-    FA18_JUMP(0xC1CFC6, 0x6000, 0xC1CE42, L_C1CE42); /* C1CFC6: bra     $c1ce42 */
-L_C1CFD6:
-    FA18_CHECK(0xC1CFD6);
-    FA18_OP(0xC1CFD6, 0x4239, 0xC1CFDC); /* C1CFD6: clr.b   $c45835.l */
-    FA18_OP(0xC1CFDC, 0x4239, 0xC1CFE2); /* C1CFDC: clr.b   $c45838.l */
-    FA18_OP(0xC1CFE2, 0x4A39, 0xC1CFE8); /* C1CFE2: tst.b   $c45785.l */
-    FA18_BCC(0xC1CFE8, 0x6600, 0xC1CFEC, 0xC1D0A2, L_C1D0A2); /* C1CFE8: bne     $c1d0a2 */
-L_C1CFEC:
-    FA18_CHECK(0xC1CFEC);
-    FA18_OP(0xC1CFEC, 0x0C39, 0xC1CFF4); /* C1CFEC: cmpi.b  #$1, $c45837.l */
-    FA18_BCC(0xC1CFF4, 0x6E1E, 0xC1CFF6, 0xC1D014, L_C1D014); /* C1CFF4: bgt     $c1d014 */
-L_C1CFF6:
-    FA18_CHECK(0xC1CFF6);
-    FA18_OP(0xC1CFF6, 0x3039, 0xC1CFFC); /* C1CFF6: move.w  $c458da.l, D0 */
-    FA18_OP(0xC1CFFC, 0x3200, 0xC1CFFE); /* C1CFFC: move.w  D0, D1 */
-    FA18_OP(0xC1CFFE, 0x0241, 0xC1D002); /* C1CFFE: andi.w  #$2, D1 */
-    FA18_BCC(0xC1D002, 0x6606, 0xC1D004, 0xC1D00A, L_C1D00A); /* C1D002: bne     $c1d00a */
-L_C1D004:
-    FA18_CHECK(0xC1D004);
-    FA18_OP(0xC1D004, 0x5239, 0xC1D00A); /* C1D004: addq.b  #1, $c45838.l */
-L_C1D00A:
-    FA18_CHECK(0xC1D00A);
-    FA18_OP(0xC1D00A, 0x0240, 0xC1D00E); /* C1D00A: andi.w  #$3, D0 */
-    FA18_BCC(0xC1D00E, 0x6600, 0xC1D012, 0xC1D0A2, L_C1D0A2); /* C1D00E: bne     $c1d0a2 */
-L_C1D012:
-    FA18_CHECK(0xC1D012);
-    FA18_JUMP(0xC1D012, 0x6006, 0xC1D01A, L_C1D01A); /* C1D012: bra     $c1d01a */
-L_C1D014:
-    FA18_CHECK(0xC1D014);
-    FA18_OP(0xC1D014, 0x5239, 0xC1D01A); /* C1D014: addq.b  #1, $c45838.l */
-L_C1D01A:
-    FA18_CHECK(0xC1D01A);
-    FA18_OP(0xC1D01A, 0x4279, 0xC1D020); /* C1D01A: clr.w   $c459aa.l */
-    FA18_OP(0xC1D020, 0x43F9, 0xC1D026); /* C1D020: lea     $c46184.l, A1 */
-    FA18_OP(0xC1D026, 0x7000, 0xC1D028); /* C1D026: moveq   #$0, D0 */
-L_C1D028:
-    FA18_CHECK(0xC1D028);
-    FA18_OP(0xC1D028, 0x3239, 0xC1D02E); /* C1D028: move.w  $c458de.l, D1 */
-    FA18_OP(0xC1D02E, 0xB041, 0xC1D030); /* C1D02E: cmp.w   D1, D0 */
-    FA18_BCC(0xC1D030, 0x6766, 0xC1D032, 0xC1D098, L_C1D098); /* C1D030: beq     $c1d098 */
-L_C1D032:
-    FA18_CHECK(0xC1D032);
-    FA18_OP(0xC1D032, 0x0831, 0xC1D038); /* C1D032: btst    #$6, ($1,A1,D0.w) */
-    FA18_BCC(0xC1D038, 0x675E, 0xC1D03A, 0xC1D098, L_C1D098); /* C1D038: beq     $c1d098 */
-L_C1D03A:
-    FA18_CHECK(0xC1D03A);
-    FA18_OP(0xC1D03A, 0x4CF1, 0xC1D040); /* C1D03A: movem.l ($14,A1,D0.w), D2-D4 */
-    FA18_OP(0xC1D040, 0x94B1, 0xC1D044); /* C1D040: sub.l   ($14,A1,D1.w), D2 */
-    FA18_OP(0xC1D044, 0x96B1, 0xC1D048); /* C1D044: sub.l   ($18,A1,D1.w), D3 */
-    FA18_OP(0xC1D048, 0x98B1, 0xC1D04C); /* C1D048: sub.l   ($1c,A1,D1.w), D4 */
-    FA18_OP(0xC1D04C, 0x2A02, 0xC1D04E); /* C1D04C: move.l  D2, D5 */
-    FA18_BCC(0xC1D04E, 0x6C02, 0xC1D050, 0xC1D052, L_C1D052); /* C1D04E: bge     $c1d052 */
-L_C1D050:
-    FA18_CHECK(0xC1D050);
-    FA18_OP(0xC1D050, 0x4485, 0xC1D052); /* C1D050: neg.l   D5 */
-L_C1D052:
-    FA18_CHECK(0xC1D052);
-    FA18_OP(0xC1D052, 0x2C03, 0xC1D054); /* C1D052: move.l  D3, D6 */
-    FA18_BCC(0xC1D054, 0x6C02, 0xC1D056, 0xC1D058, L_C1D058); /* C1D054: bge     $c1d058 */
-L_C1D056:
-    FA18_CHECK(0xC1D056);
-    FA18_OP(0xC1D056, 0x4486, 0xC1D058); /* C1D056: neg.l   D6 */
-L_C1D058:
-    FA18_CHECK(0xC1D058);
-    FA18_OP(0xC1D058, 0x2E04, 0xC1D05A); /* C1D058: move.l  D4, D7 */
-    FA18_BCC(0xC1D05A, 0x6C02, 0xC1D05C, 0xC1D05E, L_C1D05E); /* C1D05A: bge     $c1d05e */
-L_C1D05C:
-    FA18_CHECK(0xC1D05C);
-    FA18_OP(0xC1D05C, 0x4487, 0xC1D05E); /* C1D05C: neg.l   D7 */
-L_C1D05E:
-    FA18_CHECK(0xC1D05E);
-    FA18_OP(0xC1D05E, 0xBC85, 0xC1D060); /* C1D05E: cmp.l   D5, D6 */
-    FA18_BCC(0xC1D060, 0x6D08, 0xC1D062, 0xC1D06A, L_C1D06A); /* C1D060: blt     $c1d06a */
-L_C1D062:
-    FA18_CHECK(0xC1D062);
-    FA18_OP(0xC1D062, 0xBE86, 0xC1D064); /* C1D062: cmp.l   D6, D7 */
-    FA18_BCC(0xC1D064, 0x6E0A, 0xC1D066, 0xC1D070, L_C1D070); /* C1D064: bgt     $c1d070 */
-L_C1D066:
-    FA18_CHECK(0xC1D066);
-    FA18_OP(0xC1D066, 0x2E06, 0xC1D068); /* C1D066: move.l  D6, D7 */
-    FA18_JUMP(0xC1D068, 0x6006, 0xC1D070, L_C1D070); /* C1D068: bra     $c1d070 */
-L_C1D06A:
-    FA18_CHECK(0xC1D06A);
-    FA18_OP(0xC1D06A, 0xBE85, 0xC1D06C); /* C1D06A: cmp.l   D5, D7 */
-    FA18_BCC(0xC1D06C, 0x6E02, 0xC1D06E, 0xC1D070, L_C1D070); /* C1D06C: bgt     $c1d070 */
-L_C1D06E:
-    FA18_CHECK(0xC1D06E);
-    FA18_OP(0xC1D06E, 0x2E05, 0xC1D070); /* C1D06E: move.l  D5, D7 */
-L_C1D070:
-    FA18_CHECK(0xC1D070);
-    FA18_OP(0xC1D070, 0x7200, 0xC1D072); /* C1D070: moveq   #$0, D1 */
-L_C1D072:
-    FA18_CHECK(0xC1D072);
-    FA18_OP(0xC1D072, 0x0C87, 0xC1D078); /* C1D072: cmpi.l  #$7fffff, D7 */
-    FA18_BCC(0xC1D078, 0x6F06, 0xC1D07A, 0xC1D080, L_C1D080); /* C1D078: ble     $c1d080 */
-L_C1D07A:
-    FA18_CHECK(0xC1D07A);
-    FA18_OP(0xC1D07A, 0x5441, 0xC1D07C); /* C1D07A: addq.w  #2, D1 */
-    FA18_OP(0xC1D07C, 0xE487, 0xC1D07E); /* C1D07C: asr.l   #2, D7 */
-    FA18_JUMP(0xC1D07E, 0x60F2, 0xC1D072, L_C1D072); /* C1D07E: bra     $c1d072 */
-L_C1D080:
-    FA18_CHECK(0xC1D080);
-    FA18_OP(0xC1D080, 0x3A01, 0xC1D082); /* C1D080: move.w  D1, D5 */
-    FA18_OP(0xC1D082, 0x5045, 0xC1D084); /* C1D082: addq.w  #8, D5 */
-    FA18_OP(0xC1D084, 0xEAA2, 0xC1D086); /* C1D084: asr.l   D5, D2 */
-    FA18_OP(0xC1D086, 0xEAA3, 0xC1D088); /* C1D086: asr.l   D5, D3 */
-    FA18_OP(0xC1D088, 0xEAA4, 0xC1D08A); /* C1D088: asr.l   D5, D4 */
-    FA18_OP(0xC1D08A, 0x3E00, 0xC1D08C); /* C1D08A: move.w  D0, D7 */
-    FA18_OP(0xC1D08C, 0xE247, 0xC1D08E); /* C1D08C: asr.w   #1, D7 */
-    FA18_OP(0xC1D08E, 0x08C7, 0xC1D092); /* C1D08E: bset    #$4, D7 */
-    FA18_CALL(0xC1D092, 0x4EB9, 0xC1D098, 221, 0); /* C1D092: jsr     $c25876.l */
-L_C1D098:
-    FA18_CHECK(0xC1D098);
-    FA18_OP(0xC1D098, 0x0640, 0xC1D09C); /* C1D098: addi.w  #$200, D0 */
-    FA18_OP(0xC1D09C, 0x0C40, 0xC1D0A0); /* C1D09C: cmpi.w  #$2000, D0 */
-    FA18_BCC(0xC1D0A0, 0x6D86, 0xC1D0A2, 0xC1D028, L_C1D028); /* C1D0A0: blt     $c1d028 */
-L_C1D0A2:
-    FA18_CHECK(0xC1D0A2);
-    FA18_RETURN(0xC1D0A2, 0x4E75); /* C1D0A2: rts */
-}
-
-int fa18_fn_C1D0A4(int entry) {
-    switch (entry) {
-    case 0: goto L_C1D0A4;
-    case 1: goto L_C1D0C6;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1D0A4:
-    FA18_CHECK(0xC1D0A4);
-    FA18_OP(0xC1D0A4, 0x45F9, 0xC1D0AA); /* C1D0A4: lea     $c48184.l, A2 */
-    FA18_OP(0xC1D0AA, 0x3207, 0xC1D0AC); /* C1D0AA: move.w  D7, D1 */
-    FA18_OP(0xC1D0AC, 0x3C07, 0xC1D0AE); /* C1D0AC: move.w  D7, D6 */
-    FA18_OP(0xC1D0AE, 0x0241, 0xC1D0B2); /* C1D0AE: andi.w  #$ff00, D1 */
-    FA18_OP(0xC1D0B2, 0xE641, 0xC1D0B4); /* C1D0B2: asr.w   #3, D1 */
-    FA18_JUMP(0xC1D0B4, 0x6010, 0xC1D0C6, L_C1D0C6); /* C1D0B4: bra     $c1d0c6 */
-L_C1D0C6:
-    FA18_CHECK(0xC1D0C6);
-    FA18_OP(0xC1D0C6, 0xD4C1, 0xC1D0C8); /* C1D0C6: adda.w  D1, A2 */
-    FA18_OP(0xC1D0C8, 0x0246, 0xC1D0CC); /* C1D0C8: andi.w  #$f, D6 */
-    FA18_OP(0xC1D0CC, 0x262A, 0xC1D0D0); /* C1D0CC: move.l  ($14,A2), D3 */
-    FA18_OP(0xC1D0D0, 0x0283, 0xC1D0D6); /* C1D0D0: andi.l  #$fffff, D3 */
-    FA18_OP(0xC1D0D6, 0xECA3, 0xC1D0D8); /* C1D0D6: asr.l   D6, D3 */
-    FA18_OP(0xC1D0D8, 0xE182, 0xC1D0DA); /* C1D0D8: asl.l   #8, D2 */
-    FA18_OP(0xC1D0DA, 0xD483, 0xC1D0DC); /* C1D0DA: add.l   D3, D2 */
-    FA18_OP(0xC1D0DC, 0x262A, 0xC1D0E0); /* C1D0DC: move.l  ($1c,A2), D3 */
-    FA18_OP(0xC1D0E0, 0x0283, 0xC1D0E6); /* C1D0E0: andi.l  #$fffff, D3 */
-    FA18_OP(0xC1D0E6, 0xECA3, 0xC1D0E8); /* C1D0E6: asr.l   D6, D3 */
-    FA18_OP(0xC1D0E8, 0xE184, 0xC1D0EA); /* C1D0E8: asl.l   #8, D4 */
-    FA18_OP(0xC1D0EA, 0xD883, 0xC1D0EC); /* C1D0EA: add.l   D3, D4 */
-    FA18_OP(0xC1D0EC, 0x262A, 0xC1D0F0); /* C1D0EC: move.l  ($18,A2), D3 */
-    FA18_OP(0xC1D0F0, 0x2203, 0xC1D0F2); /* C1D0F0: move.l  D3, D1 */
-    FA18_OP(0xC1D0F2, 0xECA3, 0xC1D0F4); /* C1D0F2: asr.l   D6, D3 */
-    FA18_OP(0xC1D0F4, 0xD2B9, 0xC1D0FA); /* C1D0F4: add.l   $c45a66.l, D1 */
-    FA18_OP(0xC1D0FA, 0xECA1, 0xC1D0FC); /* C1D0FA: asr.l   D6, D1 */
-    FA18_OP(0xC1D0FC, 0x23C1, 0xC1D102); /* C1D0FC: move.l  D1, $c45b3c.l */
-    FA18_OP(0xC1D102, 0x13FC, 0xC1D10A); /* C1D102: move.b  #$1, $c458bb.l */
-    FA18_RETURN(0xC1D10A, 0x4E75); /* C1D10A: rts */
-}
-
-int fa18_fn_C1D0B6(int entry) {
-    switch (entry) {
-    case 0: goto L_C1D0B6;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1D0B6:
-    FA18_CHECK(0xC1D0B6);
-    FA18_OP(0xC1D0B6, 0x45F9, 0xC1D0BC); /* C1D0B6: lea     $c46184.l, A2 */
-    FA18_OP(0xC1D0BC, 0x3207, 0xC1D0BE); /* C1D0BC: move.w  D7, D1 */
-    FA18_OP(0xC1D0BE, 0x3C07, 0xC1D0C0); /* C1D0BE: move.w  D7, D6 */
-    FA18_OP(0xC1D0C0, 0x0241, 0xC1D0C4); /* C1D0C0: andi.w  #$ff00, D1 */
-    FA18_OP(0xC1D0C4, 0xD241, 0xC1D0C6); /* C1D0C4: add.w   D1, D1 */
-    FA18_OP(0xC1D0C6, 0xD4C1, 0xC1D0C8); /* C1D0C6: adda.w  D1, A2 */
-    FA18_OP(0xC1D0C8, 0x0246, 0xC1D0CC); /* C1D0C8: andi.w  #$f, D6 */
-    FA18_OP(0xC1D0CC, 0x262A, 0xC1D0D0); /* C1D0CC: move.l  ($14,A2), D3 */
-    FA18_OP(0xC1D0D0, 0x0283, 0xC1D0D6); /* C1D0D0: andi.l  #$fffff, D3 */
-    FA18_OP(0xC1D0D6, 0xECA3, 0xC1D0D8); /* C1D0D6: asr.l   D6, D3 */
-    FA18_OP(0xC1D0D8, 0xE182, 0xC1D0DA); /* C1D0D8: asl.l   #8, D2 */
-    FA18_OP(0xC1D0DA, 0xD483, 0xC1D0DC); /* C1D0DA: add.l   D3, D2 */
-    FA18_OP(0xC1D0DC, 0x262A, 0xC1D0E0); /* C1D0DC: move.l  ($1c,A2), D3 */
-    FA18_OP(0xC1D0E0, 0x0283, 0xC1D0E6); /* C1D0E0: andi.l  #$fffff, D3 */
-    FA18_OP(0xC1D0E6, 0xECA3, 0xC1D0E8); /* C1D0E6: asr.l   D6, D3 */
-    FA18_OP(0xC1D0E8, 0xE184, 0xC1D0EA); /* C1D0E8: asl.l   #8, D4 */
-    FA18_OP(0xC1D0EA, 0xD883, 0xC1D0EC); /* C1D0EA: add.l   D3, D4 */
-    FA18_OP(0xC1D0EC, 0x262A, 0xC1D0F0); /* C1D0EC: move.l  ($18,A2), D3 */
-    FA18_OP(0xC1D0F0, 0x2203, 0xC1D0F2); /* C1D0F0: move.l  D3, D1 */
-    FA18_OP(0xC1D0F2, 0xECA3, 0xC1D0F4); /* C1D0F2: asr.l   D6, D3 */
-    FA18_OP(0xC1D0F4, 0xD2B9, 0xC1D0FA); /* C1D0F4: add.l   $c45a66.l, D1 */
-    FA18_OP(0xC1D0FA, 0xECA1, 0xC1D0FC); /* C1D0FA: asr.l   D6, D1 */
-    FA18_OP(0xC1D0FC, 0x23C1, 0xC1D102); /* C1D0FC: move.l  D1, $c45b3c.l */
-    FA18_OP(0xC1D102, 0x13FC, 0xC1D10A); /* C1D102: move.b  #$1, $c458bb.l */
-    FA18_RETURN(0xC1D10A, 0x4E75); /* C1D10A: rts */
-}
-
-int fa18_fn_C1D10C(int entry) {
-    switch (entry) {
-    case 0: goto L_C1D10C;
-    case 1: goto L_C1D120;
-    case 2: goto L_C1D128;
-    case 3: goto L_C1D132;
-    case 4: goto L_C1D13A;
-    case 5: goto L_C1D186;
-    case 6: goto L_C1D196;
-    case 7: goto L_C1D1A2;
-    case 8: goto L_C1D1B2;
-    case 9: goto L_C1D1BA;
-    case 10: goto L_C1D1C2;
-    case 11: goto L_C1D1CA;
-    case 12: goto L_C1D1EC;
-    case 13: goto L_C1D20C;
-    case 14: goto L_C1D234;
-    case 15: goto L_C1D282;
-    case 16: goto L_C1D286;
-    case 17: goto L_C1D28A;
-    case 18: goto L_C1D292;
-    case 19: goto L_C1D2AC;
-    case 20: goto L_C1D2C0;
-    case 21: goto L_C1D2FC;
-    case 22: goto L_C1D30C;
-    case 23: goto L_C1D31A;
-    case 24: goto L_C1D31C;
-    case 25: goto L_C1D322;
-    case 26: goto L_C1D32C;
-    case 27: goto L_C1D338;
-    case 28: goto L_C1D33E;
-    case 29: goto L_C1D344;
-    case 30: goto L_C1D34A;
-    case 31: goto L_C1D366;
-    case 32: goto L_C1D36C;
-    case 33: goto L_C1D370;
-    case 34: goto L_C1D37E;
-    case 35: goto L_C1D382;
-    case 36: goto L_C1D390;
-    case 37: goto L_C1D394;
-    case 38: goto L_C1D396;
-    case 39: goto L_C1D39A;
-    case 40: goto L_C1D3A0;
-    case 41: goto L_C1D3A4;
-    case 42: goto L_C1D3B2;
-    case 43: goto L_C1D3B8;
-    case 44: goto L_C1D3C6;
-    case 45: goto L_C1D3D4;
-    case 46: goto L_C1D3D6;
-    case 47: goto L_C1D3E4;
-    case 48: goto L_C1D3E6;
-    case 49: goto L_C1DBE8;
-    case 50: goto L_C1DBF6;
-    case 51: goto L_C1DBF8;
-    case 52: goto L_C1DC06;
-    case 53: goto L_C1DC08;
-    case 54: goto L_C1DC14;
-    case 55: goto L_C1DC1A;
-    case 56: goto L_C1DC44;
-    case 57: goto L_C1DC4A;
-    case 58: goto L_C1DC50;
-    case 59: goto L_C1DC7A;
-    case 60: goto L_C1DC7E;
-    case 61: goto L_C1DC86;
-    case 62: goto L_C1DC8A;
-    case 63: goto L_C1DCAE;
-    case 64: goto L_C1DCCA;
-    case 65: goto L_C1DCD0;
-    case 66: goto L_C1DCDA;
-    case 67: goto L_C1DD22;
-    case 68: goto L_C1DD2C;
-    case 69: goto L_C1DD34;
-    case 70: goto L_C1DD52;
-    case 71: goto L_C1DD5C;
-    case 72: goto L_C1DD6E;
-    case 73: goto L_C1DD70;
-    case 74: goto L_C1DD92;
-    case 75: goto L_C1DD98;
-    case 76: goto L_C1DD9A;
-    case 77: goto L_C1DDA2;
-    case 78: goto L_C1DDA6;
-    case 79: goto L_C1DDDE;
-    case 80: goto L_C1DDE8;
-    case 81: goto L_C1DDF0;
-    case 82: goto L_C1DDFE;
-    case 83: goto L_C1DE00;
-    case 84: goto L_C1DE0C;
-    case 85: goto L_C1DE14;
-    case 86: goto L_C1DE18;
-    case 87: goto L_C1DE4C;
-    case 88: goto L_C1DE56;
-    case 89: goto L_C1DE68;
-    case 90: goto L_C1DE82;
-    case 91: goto L_C1DE88;
-    case 92: goto L_C1DE94;
-    case 93: goto L_C1DEA0;
-    case 94: goto L_C1DEA2;
-    case 95: goto L_C1DEB0;
-    case 96: goto L_C1DEBA;
-    case 97: goto L_C1DEC6;
-    case 98: goto L_C1DED2;
-    case 99: goto L_C1DED4;
-    case 100: goto L_C1DEE8;
-    case 101: goto L_C1DEF2;
-    case 102: goto L_C1DEFE;
-    case 103: goto L_C1DF00;
-    case 104: goto L_C1DF08;
-    case 105: goto L_C1DF0E;
-    case 106: goto L_C1DF12;
-    case 107: goto L_C1DF16;
-    case 108: goto L_C1DF18;
-    case 109: goto L_C1DF20;
-    case 110: goto L_C1DF2E;
-    case 111: goto L_C1DF32;
-    case 112: goto L_C1E042;
-    case 113: goto L_C1E074;
-    case 114: goto L_C1E07E;
-    case 115: goto L_C1E08C;
-    case 116: goto L_C1E098;
-    case 117: goto L_C1E0A6;
-    case 118: goto L_C1E0AA;
-    case 119: goto L_C1E0CA;
-    case 120: goto L_C1E0E4;
-    case 121: goto L_C1E0EA;
-    case 122: goto L_C1E0F6;
-    case 123: goto L_C1E0F8;
-    case 124: goto L_C1E0FC;
-    case 125: goto L_C1E104;
-    case 126: goto L_C1E10C;
-    case 127: goto L_C1E116;
-    case 128: goto L_C1E11A;
-    case 129: goto L_C1E12E;
-    case 130: goto L_C1E136;
-    case 131: goto L_C1E13E;
-    case 132: goto L_C1E144;
-    case 133: goto L_C1E14C;
-    case 134: goto L_C1E15E;
-    case 135: goto L_C1E164;
-    case 136: goto L_C1E16C;
-    case 137: goto L_C1E18C;
-    case 138: goto L_C1E18E;
-    case 139: goto L_C1E19C;
-    case 140: goto L_C1E19E;
-    case 141: goto L_C1E1A8;
-    case 142: goto L_C1E1AC;
-    case 143: goto L_C1E1BE;
-    case 144: goto L_C1E1D0;
-    case 145: goto L_C1E1D8;
-    case 146: goto L_C1E1E0;
-    case 147: goto L_C1E1E6;
-    case 148: goto L_C1E1EC;
-    case 149: goto L_C1E1F2;
-    case 150: goto L_C1E1F6;
-    case 151: goto L_C1E1FE;
-    case 152: goto L_C1E20A;
-    case 153: goto L_C1E256;
-    case 154: goto L_C1E274;
-    case 155: goto L_C1E278;
-    case 156: goto L_C1E27C;
-    case 157: goto L_C1E280;
-    case 158: goto L_C1E296;
-    case 159: goto L_C1E29A;
-    case 160: goto L_C1E2A6;
-    case 161: goto L_C1E2BC;
-    case 162: goto L_C1E2C4;
-    case 163: goto L_C1E2D8;
-    case 164: goto L_C1E2E0;
-    case 165: goto L_C1E2E8;
-    case 166: goto L_C1E2F0;
-    case 167: goto L_C1E302;
-    case 168: goto L_C1E30A;
-    case 169: goto L_C1E312;
-    case 170: goto L_C1E318;
-    case 171: goto L_C1E324;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1D10C:
-    FA18_CHECK(0xC1D10C);
-    FA18_OP(0xC1D10C, 0x4E56, 0xC1D110); /* C1D10C: link    A6, #-$3c */
-    FA18_OP(0xC1D110, 0x4239, 0xC1D116); /* C1D110: clr.b   $c45856.l */
-    FA18_OP(0xC1D116, 0x4A39, 0xC1D11C); /* C1D116: tst.b   $c45864.l */
-    FA18_BCC(0xC1D11C, 0x6700, 0xC1D120, 0xC1D186, L_C1D186); /* C1D11C: beq     $c1d186 */
-L_C1D120:
-    FA18_CHECK(0xC1D120);
-    FA18_OP(0xC1D120, 0x4A39, 0xC1D126); /* C1D120: tst.b   $c45786.l */
-    FA18_BCC(0xC1D126, 0x670A, 0xC1D128, 0xC1D132, L_C1D132); /* C1D126: beq     $c1d132 */
-L_C1D128:
-    FA18_CHECK(0xC1D128);
-    FA18_OP(0xC1D128, 0x2D7C, 0xC1D130); /* C1D128: move.l  #$c4124e, (-$c,A6) */
-    FA18_JUMP(0xC1D130, 0x6008, 0xC1D13A, L_C1D13A); /* C1D130: bra     $c1d13a */
-L_C1D132:
-    FA18_CHECK(0xC1D132);
-    FA18_OP(0xC1D132, 0x2D7C, 0xC1D13A); /* C1D132: move.l  #$c414b0, (-$c,A6) */
-L_C1D13A:
-    FA18_CHECK(0xC1D13A);
-    FA18_OP(0xC1D13A, 0x2D7C, 0xC1D142); /* C1D13A: move.l  #$c4f6ca, (-$14,A6) */
-    FA18_OP(0xC1D142, 0x2D7C, 0xC1D14A); /* C1D142: move.l  #$c459b0, (-$24,A6) */
-    FA18_OP(0xC1D14A, 0x2D7C, 0xC1D152); /* C1D14A: move.l  #$c42490, (-$4,A6) */
-    FA18_OP(0xC1D152, 0x2D7C, 0xC1D15A); /* C1D152: move.l  #$c1a29c, (-$8,A6) */
-    FA18_OP(0xC1D15A, 0x2D7C, 0xC1D162); /* C1D15A: move.l  #$c1d822, (-$18,A6) */
-    FA18_OP(0xC1D162, 0x2D7C, 0xC1D16A); /* C1D162: move.l  #$c1d876, (-$1c,A6) */
-    FA18_OP(0xC1D16A, 0x3D79, 0xC1D172); /* C1D16A: move.w  $c4594c.l, (-$26,A6) */
-    FA18_OP(0xC1D172, 0x3D79, 0xC1D17A); /* C1D172: move.w  $c4594e.l, (-$28,A6) */
-    FA18_OP(0xC1D17A, 0x1D79, 0xC1D182); /* C1D17A: move.b  $c45851.l, (-$2a,A6) */
-    FA18_JUMP(0xC1D182, 0x6000, 0xC1D234, L_C1D234); /* C1D182: bra     $c1d234 */
-L_C1D186:
-    FA18_CHECK(0xC1D186);
-    FA18_OP(0xC1D186, 0x2D7C, 0xC1D18E); /* C1D186: move.l  #$c414b0, (-$c,A6) */
-    FA18_OP(0xC1D18E, 0x4A39, 0xC1D194); /* C1D18E: tst.b   $c45865.l */
-    FA18_BCC(0xC1D194, 0x661C, 0xC1D196, 0xC1D1B2, L_C1D1B2); /* C1D194: bne     $c1d1b2 */
-L_C1D196:
-    FA18_CHECK(0xC1D196);
-    FA18_OP(0xC1D196, 0x0CB9, 0xC1D1A0); /* C1D196: cmpi.l  #-$a000, $c45a66.l */
-    FA18_BCC(0xC1D1A0, 0x6F10, 0xC1D1A2, 0xC1D1B2, L_C1D1B2); /* C1D1A0: ble     $c1d1b2 */
-L_C1D1A2:
-    FA18_CHECK(0xC1D1A2);
-    FA18_OP(0xC1D1A2, 0x2D7C, 0xC1D1AA); /* C1D1A2: move.l  #$c42092, (-$c,A6) */
-    FA18_OP(0xC1D1AA, 0x5239, 0xC1D1B0); /* C1D1AA: addq.b  #1, $c45856.l */
-    FA18_JUMP(0xC1D1B0, 0x6010, 0xC1D1C2, L_C1D1C2); /* C1D1B0: bra     $c1d1c2 */
-L_C1D1B2:
-    FA18_CHECK(0xC1D1B2);
-    FA18_OP(0xC1D1B2, 0x4A39, 0xC1D1B8); /* C1D1B2: tst.b   $c45786.l */
-    FA18_BCC(0xC1D1B8, 0x6708, 0xC1D1BA, 0xC1D1C2, L_C1D1C2); /* C1D1B8: beq     $c1d1c2 */
-L_C1D1BA:
-    FA18_CHECK(0xC1D1BA);
-    FA18_OP(0xC1D1BA, 0x2D7C, 0xC1D1C2); /* C1D1BA: move.l  #$c4124e, (-$c,A6) */
-L_C1D1C2:
-    FA18_CHECK(0xC1D1C2);
-    FA18_OP(0xC1D1C2, 0x4A39, 0xC1D1C8); /* C1D1C2: tst.b   $c45865.l */
-    FA18_BCC(0xC1D1C8, 0x6622, 0xC1D1CA, 0xC1D1EC, L_C1D1EC); /* C1D1C8: bne     $c1d1ec */
-L_C1D1CA:
-    FA18_CHECK(0xC1D1CA);
-    FA18_OP(0xC1D1CA, 0x2D7C, 0xC1D1D2); /* C1D1CA: move.l  #$c42290, (-$4,A6) */
-    FA18_OP(0xC1D1D2, 0x2D7C, 0xC1D1DA); /* C1D1D2: move.l  #$c1929c, (-$8,A6) */
-    FA18_OP(0xC1D1DA, 0x2D7C, 0xC1D1E2); /* C1D1DA: move.l  #$c4e9aa, (-$14,A6) */
-    FA18_OP(0xC1D1E2, 0x2D7C, 0xC1D1EA); /* C1D1E2: move.l  #$c459ac, (-$24,A6) */
-    FA18_JUMP(0xC1D1EA, 0x6020, 0xC1D20C, L_C1D20C); /* C1D1EA: bra     $c1d20c */
-L_C1D1EC:
-    FA18_CHECK(0xC1D1EC);
-    FA18_OP(0xC1D1EC, 0x2D7C, 0xC1D1F4); /* C1D1EC: move.l  #$c42390, (-$4,A6) */
-    FA18_OP(0xC1D1F4, 0x2D7C, 0xC1D1FC); /* C1D1F4: move.l  #$c19a9c, (-$8,A6) */
-    FA18_OP(0xC1D1FC, 0x2D7C, 0xC1D204); /* C1D1FC: move.l  #$c4f03a, (-$14,A6) */
-    FA18_OP(0xC1D204, 0x2D7C, 0xC1D20C); /* C1D204: move.l  #$c459ae, (-$24,A6) */
-L_C1D20C:
-    FA18_CHECK(0xC1D20C);
-    FA18_OP(0xC1D20C, 0x2D7C, 0xC1D214); /* C1D20C: move.l  #$c1d78e, (-$18,A6) */
-    FA18_OP(0xC1D214, 0x2D7C, 0xC1D21C); /* C1D214: move.l  #$c1d7e2, (-$1c,A6) */
-    FA18_OP(0xC1D21C, 0x3D79, 0xC1D224); /* C1D21C: move.w  $c45948.l, (-$26,A6) */
-    FA18_OP(0xC1D224, 0x3D79, 0xC1D22C); /* C1D224: move.w  $c4594a.l, (-$28,A6) */
-    FA18_OP(0xC1D22C, 0x1D79, 0xC1D234); /* C1D22C: move.b  $c45850.l, (-$2a,A6) */
-L_C1D234:
-    FA18_CHECK(0xC1D234);
-    FA18_OP(0xC1D234, 0x43F9, 0xC1D23A); /* C1D234: lea     $c41170.l, A1 */
-    FA18_OP(0xC1D23A, 0x102E, 0xC1D23E); /* C1D23A: move.b  (-$2a,A6), D0 */
-    FA18_OP(0xC1D23E, 0x4880, 0xC1D240); /* C1D23E: ext.w   D0 */
-    FA18_OP(0xC1D240, 0x1031, 0xC1D244); /* C1D240: move.b  (A1,D0.w), D0 */
-    FA18_OP(0xC1D244, 0x4880, 0xC1D246); /* C1D244: ext.w   D0 */
-    FA18_OP(0xC1D246, 0xE740, 0xC1D248); /* C1D246: asl.w   #3, D0 */
-    FA18_OP(0xC1D248, 0x43F9, 0xC1D24E); /* C1D248: lea     $c41180.l, A1 */
-    FA18_OP(0xC1D24E, 0xD2C0, 0xC1D250); /* C1D24E: adda.w  D0, A1 */
-    FA18_OP(0xC1D250, 0x2D49, 0xC1D254); /* C1D250: move.l  A1, (-$36,A6) */
-    FA18_OP(0xC1D254, 0x3200, 0xC1D256); /* C1D254: move.w  D0, D1 */
-    FA18_OP(0xC1D256, 0xD040, 0xC1D258); /* C1D256: add.w   D0, D0 */
-    FA18_OP(0xC1D258, 0x43F9, 0xC1D25E); /* C1D258: lea     $c411b0.l, A1 */
-    FA18_OP(0xC1D25E, 0xD2C0, 0xC1D260); /* C1D25E: adda.w  D0, A1 */
-    FA18_OP(0xC1D260, 0x2D49, 0xC1D264); /* C1D260: move.l  A1, (-$32,A6) */
-    FA18_OP(0xC1D264, 0xD041, 0xC1D266); /* C1D264: add.w   D1, D0 */
-    FA18_OP(0xC1D266, 0x43F9, 0xC1D26C); /* C1D266: lea     $c411f0.l, A1 */
-    FA18_OP(0xC1D26C, 0xD2C0, 0xC1D26E); /* C1D26C: adda.w  D0, A1 */
-    FA18_OP(0xC1D26E, 0x2D49, 0xC1D272); /* C1D26E: move.l  A1, (-$3a,A6) */
-    FA18_OP(0xC1D272, 0x43F9, 0xC1D278); /* C1D272: lea     $c48390.l, A1 */
-    FA18_OP(0xC1D278, 0x303C, 0xC1D27C); /* C1D278: move.w  #$ffff, D0 */
-    FA18_OP(0xC1D27C, 0x323C, 0xC1D280); /* C1D27C: move.w  #$60, D1 */
-    FA18_OP(0xC1D280, 0x740D, 0xC1D282); /* C1D280: moveq   #$d, D2 */
-L_C1D282:
-    FA18_CHECK(0xC1D282);
-    FA18_CALL(0xC1D282, 0x6100, 0xC1D286, 151, 0); /* C1D282: bsr     $c1d722 */
-L_C1D286:
-    FA18_CHECK(0xC1D286);
-    FA18_BCC(0xC1D286, 0x51CA, 0xC1D28A, 0xC1D282, L_C1D282); /* C1D286: dbra    D2, $c1d282 */
-L_C1D28A:
-    FA18_CHECK(0xC1D28A);
-    FA18_OP(0xC1D28A, 0x4A39, 0xC1D290); /* C1D28A: tst.b   $c45856.l */
-    FA18_BCC(0xC1D290, 0x662E, 0xC1D292, 0xC1D2C0, L_C1D2C0); /* C1D290: bne     $c1d2c0 */
-L_C1D292:
-    FA18_CHECK(0xC1D292);
-    FA18_OP(0xC1D292, 0x102E, 0xC1D296); /* C1D292: move.b  (-$2a,A6), D0 */
-    FA18_OP(0xC1D296, 0x4880, 0xC1D298); /* C1D296: ext.w   D0 */
-    FA18_OP(0xC1D298, 0x41F9, 0xC1D29E); /* C1D298: lea     $c411a0.l, A0 */
-    FA18_OP(0xC1D29E, 0x1030, 0xC1D2A2); /* C1D29E: move.b  (A0,D0.w), D0 */
-    FA18_OP(0xC1D2A2, 0x4880, 0xC1D2A4); /* C1D2A2: ext.w   D0 */
-    FA18_OP(0xC1D2A4, 0x4A39, 0xC1D2AA); /* C1D2A4: tst.b   $c45786.l */
-    FA18_BCC(0xC1D2AA, 0x6650, 0xC1D2AC, 0xC1D2FC, L_C1D2FC); /* C1D2AA: bne     $c1d2fc */
-L_C1D2AC:
-    FA18_CHECK(0xC1D2AC);
-    FA18_OP(0xC1D2AC, 0xE940, 0xC1D2AE); /* C1D2AC: asl.w   #4, D0 */
-    FA18_OP(0xC1D2AE, 0x1239, 0xC1D2B4); /* C1D2AE: move.b  $c45854.l, D1 */
-    FA18_OP(0xC1D2B4, 0x206E, 0xC1D2B8); /* C1D2B4: movea.l (-$36,A6), A0 */
-    FA18_OP(0xC1D2B8, 0x4881, 0xC1D2BA); /* C1D2B8: ext.w   D1 */
-    FA18_OP(0xC1D2BA, 0x1230, 0xC1D2BE); /* C1D2BA: move.b  (A0,D1.w), D1 */
-    FA18_JUMP(0xC1D2BE, 0x605C, 0xC1D31C, L_C1D31C); /* C1D2BE: bra     $c1d31c */
-L_C1D2C0:
-    FA18_CHECK(0xC1D2C0);
-    FA18_OP(0xC1D2C0, 0x1039, 0xC1D2C6); /* C1D2C0: move.b  $c45850.l, D0 */
-    FA18_OP(0xC1D2C6, 0x4880, 0xC1D2C8); /* C1D2C6: ext.w   D0 */
-    FA18_OP(0xC1D2C8, 0x3200, 0xC1D2CA); /* C1D2C8: move.w  D0, D1 */
-    FA18_OP(0xC1D2CA, 0x41F9, 0xC1D2D0); /* C1D2CA: lea     $c411a0.l, A0 */
-    FA18_OP(0xC1D2D0, 0x1030, 0xC1D2D4); /* C1D2D0: move.b  (A0,D0.w), D0 */
-    FA18_OP(0xC1D2D4, 0x4880, 0xC1D2D6); /* C1D2D4: ext.w   D0 */
-    FA18_OP(0xC1D2D6, 0xEB40, 0xC1D2D8); /* C1D2D6: asl.w   #5, D0 */
-    FA18_OP(0xC1D2D8, 0x43F9, 0xC1D2DE); /* C1D2D8: lea     $c41170.l, A1 */
-    FA18_OP(0xC1D2DE, 0x1231, 0xC1D2E2); /* C1D2DE: move.b  (A1,D1.w), D1 */
-    FA18_OP(0xC1D2E2, 0x4881, 0xC1D2E4); /* C1D2E2: ext.w   D1 */
-    FA18_OP(0xC1D2E4, 0xE941, 0xC1D2E6); /* C1D2E4: asl.w   #4, D1 */
-    FA18_OP(0xC1D2E6, 0x43F9, 0xC1D2EC); /* C1D2E6: lea     $c411b0.l, A1 */
-    FA18_OP(0xC1D2EC, 0xD2C1, 0xC1D2EE); /* C1D2EC: adda.w  D1, A1 */
-    FA18_OP(0xC1D2EE, 0x1239, 0xC1D2F4); /* C1D2EE: move.b  $c45851.l, D1 */
-    FA18_OP(0xC1D2F4, 0x4881, 0xC1D2F6); /* C1D2F4: ext.w   D1 */
-    FA18_OP(0xC1D2F6, 0x1231, 0xC1D2FA); /* C1D2F6: move.b  (A1,D1.w), D1 */
-    FA18_JUMP(0xC1D2FA, 0x6020, 0xC1D31C, L_C1D31C); /* C1D2FA: bra     $c1d31c */
-L_C1D2FC:
-    FA18_CHECK(0xC1D2FC);
-    FA18_OP(0xC1D2FC, 0x41F9, 0xC1D302); /* C1D2FC: lea     $c411a0.l, A0 */
-    FA18_OP(0xC1D302, 0x1030, 0xC1D306); /* C1D302: move.b  (A0,D0.w), D0 */
-    FA18_OP(0xC1D306, 0x4880, 0xC1D308); /* C1D306: ext.w   D0 */
-    FA18_OP(0xC1D308, 0xD040, 0xC1D30A); /* C1D308: add.w   D0, D0 */
-    FA18_JUMP(0xC1D30A, 0x6016, 0xC1D322, L_C1D322); /* C1D30A: bra     $c1d322 */
-L_C1D30C:
-    FA18_CHECK(0xC1D30C);
-    FA18_OP(0xC1D30C, 0x33FC, 0xC1D314); /* C1D30C: move.w  #$42, $c4599e.l */
-    FA18_CALL(0xC1D314, 0x4EB9, 0xC1D31A, 15, 0); /* C1D314: jsr     $c06c02.l */
-L_C1D31A:
-    FA18_CHECK(0xC1D31A);
-    FA18_JUMP(0xC1D31A, 0x60F0, 0xC1D30C, L_C1D30C); /* C1D31A: bra     $c1d30c */
-L_C1D31C:
-    FA18_CHECK(0xC1D31C);
-    FA18_OP(0xC1D31C, 0x4881, 0xC1D31E); /* C1D31C: ext.w   D1 */
-    FA18_OP(0xC1D31E, 0xD241, 0xC1D320); /* C1D31E: add.w   D1, D1 */
-    FA18_OP(0xC1D320, 0xD041, 0xC1D322); /* C1D320: add.w   D1, D0 */
-L_C1D322:
-    FA18_CHECK(0xC1D322);
-    FA18_OP(0xC1D322, 0x206E, 0xC1D326); /* C1D322: movea.l (-$c,A6), A0 */
-    FA18_OP(0xC1D326, 0x3030, 0xC1D32A); /* C1D326: move.w  (A0,D0.w), D0 */
-    FA18_BCC(0xC1D32A, 0x6FE0, 0xC1D32C, 0xC1D30C, L_C1D30C); /* C1D32A: ble     $c1d30c */
-L_C1D32C:
-    FA18_CHECK(0xC1D32C);
-    FA18_OP(0xC1D32C, 0xD0C0, 0xC1D32E); /* C1D32C: adda.w  D0, A0 */
-    FA18_OP(0xC1D32E, 0x2F08, 0xC1D330); /* C1D32E: move.l  A0, -(A7) */
-    FA18_OP(0xC1D330, 0x47F9, 0xC1D336); /* C1D330: lea     $c48390.l, A3 */
-    FA18_OP(0xC1D336, 0x780E, 0xC1D338); /* C1D336: moveq   #$e, D4 */
-L_C1D338:
-    FA18_CHECK(0xC1D338);
-    FA18_OP(0xC1D338, 0x1018, 0xC1D33A); /* C1D338: move.b  (A0)+, D0 */
-    FA18_BCC(0xC1D33A, 0x6D00, 0xC1D33E, 0xC1D3E6, L_C1D3E6); /* C1D33A: blt     $c1d3e6 */
-L_C1D33E:
-    FA18_CHECK(0xC1D33E);
-    FA18_OP(0xC1D33E, 0x5344, 0xC1D340); /* C1D33E: subq.w  #1, D4 */
-    FA18_BCC(0xC1D340, 0x6D00, 0xC1D344, 0xC1D3D6, L_C1D3D6); /* C1D340: blt     $c1d3d6 */
-L_C1D344:
-    FA18_CHECK(0xC1D344);
-    FA18_OP(0xC1D344, 0x0C00, 0xC1D348); /* C1D344: cmpi.b  #$14, D0 */
-    FA18_BCC(0xC1D348, 0x6E7C, 0xC1D34A, 0xC1D3C6, L_C1D3C6); /* C1D348: bgt     $c1d3c6 */
-L_C1D34A:
-    FA18_CHECK(0xC1D34A);
-    FA18_OP(0xC1D34A, 0x4880, 0xC1D34C); /* C1D34A: ext.w   D0 */
-    FA18_OP(0xC1D34C, 0x246E, 0xC1D350); /* C1D34C: movea.l (-$3a,A6), A2 */
-    FA18_OP(0xC1D350, 0x1032, 0xC1D354); /* C1D350: move.b  (A2,D0.w), D0 */
-    FA18_OP(0xC1D354, 0x4880, 0xC1D356); /* C1D354: ext.w   D0 */
-    FA18_OP(0xC1D356, 0xD040, 0xC1D358); /* C1D356: add.w   D0, D0 */
-    FA18_OP(0xC1D358, 0x45F9, 0xC1D35E); /* C1D358: lea     $c1d764.l, A2 */
-    FA18_OP(0xC1D35E, 0x4A39, 0xC1D364); /* C1D35E: tst.b   $c45864.l */
-    FA18_BCC(0xC1D364, 0x6606, 0xC1D366, 0xC1D36C, L_C1D36C); /* C1D364: bne     $c1d36c */
-L_C1D366:
-    FA18_CHECK(0xC1D366);
-    FA18_OP(0xC1D366, 0x363C, 0xC1D36A); /* C1D366: move.w  #$1e, D3 */
-    FA18_JUMP(0xC1D36A, 0x6004, 0xC1D370, L_C1D370); /* C1D36A: bra     $c1d370 */
-L_C1D36C:
-    FA18_CHECK(0xC1D36C);
-    FA18_OP(0xC1D36C, 0x363C, 0xC1D370); /* C1D36C: move.w  #$7f, D3 */
-L_C1D370:
-    FA18_CHECK(0xC1D370);
-    FA18_OP(0xC1D370, 0x1432, 0xC1D374); /* C1D370: move.b  (A2,D0.w), D2 */
-    FA18_OP(0xC1D374, 0x4882, 0xC1D376); /* C1D374: ext.w   D2 */
-    FA18_OP(0xC1D376, 0x322E, 0xC1D37A); /* C1D376: move.w  (-$26,A6), D1 */
-    FA18_OP(0xC1D37A, 0xD242, 0xC1D37C); /* C1D37A: add.w   D2, D1 */
-    FA18_BCC(0xC1D37C, 0x6D18, 0xC1D37E, 0xC1D396, L_C1D396); /* C1D37C: blt     $c1d396 */
-L_C1D37E:
-    FA18_CHECK(0xC1D37E);
-    FA18_OP(0xC1D37E, 0xB243, 0xC1D380); /* C1D37E: cmp.w   D3, D1 */
-    FA18_BCC(0xC1D380, 0x6E18, 0xC1D382, 0xC1D39A, L_C1D39A); /* C1D380: bgt     $c1d39a */
-L_C1D382:
-    FA18_CHECK(0xC1D382);
-    FA18_OP(0xC1D382, 0x1432, 0xC1D386); /* C1D382: move.b  ($1,A2,D0.w), D2 */
-    FA18_OP(0xC1D386, 0x4882, 0xC1D388); /* C1D386: ext.w   D2 */
-    FA18_OP(0xC1D388, 0x302E, 0xC1D38C); /* C1D388: move.w  (-$28,A6), D0 */
-    FA18_OP(0xC1D38C, 0xD042, 0xC1D38E); /* C1D38C: add.w   D2, D0 */
-    FA18_BCC(0xC1D38E, 0x6D10, 0xC1D390, 0xC1D3A0, L_C1D3A0); /* C1D38E: blt     $c1d3a0 */
-L_C1D390:
-    FA18_CHECK(0xC1D390);
-    FA18_OP(0xC1D390, 0xB043, 0xC1D392); /* C1D390: cmp.w   D3, D0 */
-    FA18_BCC(0xC1D392, 0x6F1E, 0xC1D394, 0xC1D3B2, L_C1D3B2); /* C1D392: ble     $c1d3b2 */
-L_C1D394:
-    FA18_CHECK(0xC1D394);
-    FA18_JUMP(0xC1D394, 0x600E, 0xC1D3A4, L_C1D3A4); /* C1D394: bra     $c1d3a4 */
-L_C1D396:
-    FA18_CHECK(0xC1D396);
-    FA18_OP(0xC1D396, 0x3203, 0xC1D398); /* C1D396: move.w  D3, D1 */
-    FA18_JUMP(0xC1D398, 0x60E8, 0xC1D382, L_C1D382); /* C1D398: bra     $c1d382 */
-L_C1D39A:
-    FA18_CHECK(0xC1D39A);
-    FA18_OP(0xC1D39A, 0x323C, 0xC1D39E); /* C1D39A: move.w  #$0, D1 */
-    FA18_JUMP(0xC1D39E, 0x60E2, 0xC1D382, L_C1D382); /* C1D39E: bra     $c1d382 */
-L_C1D3A0:
-    FA18_CHECK(0xC1D3A0);
-    FA18_OP(0xC1D3A0, 0x3003, 0xC1D3A2); /* C1D3A0: move.w  D3, D0 */
-    FA18_JUMP(0xC1D3A2, 0x600E, 0xC1D3B2, L_C1D3B2); /* C1D3A2: bra     $c1d3b2 */
-L_C1D3A4:
-    FA18_CHECK(0xC1D3A4);
-    FA18_OP(0xC1D3A4, 0x303C, 0xC1D3A8); /* C1D3A4: move.w  #$0, D0 */
-    FA18_JUMP(0xC1D3A8, 0x6008, 0xC1D3B2, L_C1D3B2); /* C1D3A8: bra     $c1d3b2 */
-L_C1D3B2:
-    FA18_CHECK(0xC1D3B2);
-    FA18_OP(0xC1D3B2, 0x43D3, 0xC1D3B4); /* C1D3B2: lea     (A3), A1 */
-    FA18_CALL(0xC1D3B4, 0x6100, 0xC1D3B8, 147, 0); /* C1D3B4: bsr     $c1d3f4 */
-L_C1D3B8:
-    FA18_CHECK(0xC1D3B8);
-    FA18_OP(0xC1D3B8, 0x1018, 0xC1D3BA); /* C1D3B8: move.b  (A0)+, D0 */
-    FA18_OP(0xC1D3BA, 0x4880, 0xC1D3BC); /* C1D3BA: ext.w   D0 */
-    FA18_OP(0xC1D3BC, 0xD0C0, 0xC1D3BE); /* C1D3BC: adda.w  D0, A0 */
-    FA18_OP(0xC1D3BE, 0xD6FC, 0xC1D3C2); /* C1D3BE: adda.w  #$600, A3 */
-    FA18_JUMP(0xC1D3C2, 0x6000, 0xC1D338, L_C1D338); /* C1D3C2: bra     $c1d338 */
-L_C1D3C6:
-    FA18_CHECK(0xC1D3C6);
-    FA18_OP(0xC1D3C6, 0x33FC, 0xC1D3CE); /* C1D3C6: move.w  #$c, $c4599e.l */
-    FA18_CALL(0xC1D3CE, 0x4EB9, 0xC1D3D4, 15, 0); /* C1D3CE: jsr     $c06c02.l */
-L_C1D3D4:
-    FA18_CHECK(0xC1D3D4);
-    FA18_JUMP(0xC1D3D4, 0x60F0, 0xC1D3C6, L_C1D3C6); /* C1D3D4: bra     $c1d3c6 */
-L_C1D3D6:
-    FA18_CHECK(0xC1D3D6);
-    FA18_OP(0xC1D3D6, 0x33FC, 0xC1D3DE); /* C1D3D6: move.w  #$d, $c4599e.l */
-    FA18_CALL(0xC1D3DE, 0x4EB9, 0xC1D3E4, 15, 0); /* C1D3DE: jsr     $c06c02.l */
-L_C1D3E4:
-    FA18_CHECK(0xC1D3E4);
-    FA18_JUMP(0xC1D3E4, 0x60F0, 0xC1D3D6, L_C1D3D6); /* C1D3E4: bra     $c1d3d6 */
-L_C1D3E6:
-    FA18_CHECK(0xC1D3E6);
-    FA18_OP(0xC1D3E6, 0x33FC, 0xC1D3EE); /* C1D3E6: move.w  #$52, $c45ad4.l */
-    FA18_JUMP(0xC1D3EE, 0x4EF9, 0xC1DC08, L_C1DC08); /* C1D3EE: jmp     $c1dc08.l */
-L_C1DBE8:
-    FA18_CHECK(0xC1DBE8);
-    FA18_OP(0xC1DBE8, 0x33FC, 0xC1DBF0); /* C1DBE8: move.w  #$11, $c4599e.l */
-    FA18_CALL(0xC1DBF0, 0x4EB9, 0xC1DBF6, 15, 0); /* C1DBF0: jsr     $c06c02.l */
-L_C1DBF6:
-    FA18_CHECK(0xC1DBF6);
-    FA18_JUMP(0xC1DBF6, 0x60F0, 0xC1DBE8, L_C1DBE8); /* C1DBF6: bra     $c1dbe8 */
-L_C1DBF8:
-    FA18_CHECK(0xC1DBF8);
-    FA18_OP(0xC1DBF8, 0x33FC, 0xC1DC00); /* C1DBF8: move.w  #$12, $c4599e.l */
-    FA18_CALL(0xC1DC00, 0x4EB9, 0xC1DC06, 15, 0); /* C1DC00: jsr     $c06c02.l */
-L_C1DC06:
-    FA18_CHECK(0xC1DC06);
-    FA18_JUMP(0xC1DC06, 0x60F0, 0xC1DBF8, L_C1DBF8); /* C1DC06: bra     $c1dbf8 */
-L_C1DC08:
-    FA18_CHECK(0xC1DC08);
-    FA18_OP(0xC1DC08, 0x422E, 0xC1DC0C); /* C1DC08: clr.b   (-$2e,A6) */
-    FA18_OP(0xC1DC0C, 0x4A39, 0xC1DC12); /* C1DC0C: tst.b   $c45866.l */
-    FA18_BCC(0xC1DC12, 0x6606, 0xC1DC14, 0xC1DC1A, L_C1DC1A); /* C1DC12: bne     $c1dc1a */
-L_C1DC14:
-    FA18_CHECK(0xC1DC14);
-    FA18_OP(0xC1DC14, 0x206E, 0xC1DC18); /* C1DC14: movea.l (-$24,A6), A0 */
-    FA18_OP(0xC1DC18, 0x4250, 0xC1DC1A); /* C1DC18: clr.w   (A0) */
-L_C1DC1A:
-    FA18_CHECK(0xC1DC1A);
-    FA18_OP(0xC1DC1A, 0x205F, 0xC1DC1C); /* C1DC1A: movea.l (A7)+, A0 */
-    FA18_OP(0xC1DC1C, 0x4279, 0xC1DC22); /* C1DC1C: clr.w   $c4e988.l */
-    FA18_OP(0xC1DC22, 0x246E, 0xC1DC26); /* C1DC22: movea.l (-$14,A6), A2 */
-    FA18_OP(0xC1DC26, 0x4BF9, 0xC1DC2C); /* C1DC26: lea     $c459ce.l, A5 */
-    FA18_OP(0xC1DC2C, 0x4239, 0xC1DC32); /* C1DC2C: clr.b   $c4585c.l */
-    FA18_OP(0xC1DC32, 0x4239, 0xC1DC38); /* C1DC32: clr.b   $c4585e.l */
-    FA18_OP(0xC1DC38, 0x4239, 0xC1DC3E); /* C1DC38: clr.b   $c45867.l */
-    FA18_OP(0xC1DC3E, 0x49F9, 0xC1DC44); /* C1DC3E: lea     $c48390.l, A4 */
-L_C1DC44:
-    FA18_CHECK(0xC1DC44);
-    FA18_OP(0xC1DC44, 0x1018, 0xC1DC46); /* C1DC44: move.b  (A0)+, D0 */
-    FA18_BCC(0xC1DC46, 0x6D00, 0xC1DC4A, 0xC1E16C, L_C1E16C); /* C1DC46: blt     $c1e16c */
-L_C1DC4A:
-    FA18_CHECK(0xC1DC4A);
-    FA18_OP(0xC1DC4A, 0x0C00, 0xC1DC4E); /* C1DC4A: cmpi.b  #$14, D0 */
-    FA18_BCC(0xC1DC4E, 0x6E98, 0xC1DC50, 0xC1DBE8, L_C1DBE8); /* C1DC4E: bgt     $c1dbe8 */
-L_C1DC50:
-    FA18_CHECK(0xC1DC50);
-    FA18_OP(0xC1DC50, 0x4880, 0xC1DC52); /* C1DC50: ext.w   D0 */
-    FA18_OP(0xC1DC52, 0x226E, 0xC1DC56); /* C1DC52: movea.l (-$3a,A6), A1 */
-    FA18_OP(0xC1DC56, 0x1031, 0xC1DC5A); /* C1DC56: move.b  (A1,D0.w), D0 */
-    FA18_OP(0xC1DC5A, 0x4880, 0xC1DC5C); /* C1DC5A: ext.w   D0 */
-    FA18_OP(0xC1DC5C, 0x3200, 0xC1DC5E); /* C1DC5C: move.w  D0, D1 */
-    FA18_OP(0xC1DC5E, 0x43F9, 0xC1DC64); /* C1DC5E: lea     $c1d764.l, A1 */
-    FA18_OP(0xC1DC64, 0xD241, 0xC1DC66); /* C1DC64: add.w   D1, D1 */
-    FA18_OP(0xC1DC66, 0x1431, 0xC1DC6A); /* C1DC66: move.b  (A1,D1.w), D2 */
-    FA18_OP(0xC1DC6A, 0x1631, 0xC1DC6E); /* C1DC6A: move.b  ($1,A1,D1.w), D3 */
-    FA18_OP(0xC1DC6E, 0x4882, 0xC1DC70); /* C1DC6E: ext.w   D2 */
-    FA18_OP(0xC1DC70, 0x4883, 0xC1DC72); /* C1DC70: ext.w   D3 */
-    FA18_OP(0xC1DC72, 0xD479, 0xC1DC78); /* C1DC72: add.w   $c4594c.l, D2 */
-    FA18_BCC(0xC1DC78, 0x6C04, 0xC1DC7A, 0xC1DC7E, L_C1DC7E); /* C1DC78: bge     $c1dc7e */
-L_C1DC7A:
-    FA18_CHECK(0xC1DC7A);
-    FA18_OP(0xC1DC7A, 0x0642, 0xC1DC7E); /* C1DC7A: addi.w  #$80, D2 */
-L_C1DC7E:
-    FA18_CHECK(0xC1DC7E);
-    FA18_OP(0xC1DC7E, 0xD679, 0xC1DC84); /* C1DC7E: add.w   $c4594e.l, D3 */
-    FA18_BCC(0xC1DC84, 0x6C04, 0xC1DC86, 0xC1DC8A, L_C1DC8A); /* C1DC84: bge     $c1dc8a */
-L_C1DC86:
-    FA18_CHECK(0xC1DC86);
-    FA18_OP(0xC1DC86, 0x0643, 0xC1DC8A); /* C1DC86: addi.w  #$80, D3 */
-L_C1DC8A:
-    FA18_CHECK(0xC1DC8A);
-    FA18_OP(0xC1DC8A, 0xE14A, 0xC1DC8C); /* C1DC8A: lsl.w   #8, D2 */
-    FA18_OP(0xC1DC8C, 0x0283, 0xC1DC92); /* C1DC8C: andi.l  #$ff, D3 */
-    FA18_OP(0xC1DC92, 0xD642, 0xC1DC94); /* C1DC92: add.w   D2, D3 */
-    FA18_OP(0xC1DC94, 0x23C3, 0xC1DC9A); /* C1DC94: move.l  D3, $c459bc.l */
-    FA18_OP(0xC1DC9A, 0xE540, 0xC1DC9C); /* C1DC9A: asl.w   #2, D0 */
-    FA18_OP(0xC1DC9C, 0x226E, 0xC1DCA0); /* C1DC9C: movea.l (-$18,A6), A1 */
-    FA18_OP(0xC1DCA0, 0x4CB1, 0xC1DCA6); /* C1DCA0: movem.w (A1,D0.w), D2-D3 */
-    FA18_OP(0xC1DCA6, 0x4A39, 0xC1DCAC); /* C1DCA6: tst.b   $c45864.l */
-    FA18_BCC(0xC1DCAC, 0x671C, 0xC1DCAE, 0xC1DCCA, L_C1DCCA); /* C1DCAC: beq     $c1dcca */
-L_C1DCAE:
-    FA18_CHECK(0xC1DCAE);
-    FA18_OP(0xC1DCAE, 0x43F9, 0xC1DCB4); /* C1DCAE: lea     $c1d7e2.l, A1 */
-    FA18_OP(0xC1DCB4, 0x1C39, 0xC1DCBA); /* C1DCB4: move.b  $c45850.l, D6 */
-    FA18_OP(0xC1DCBA, 0x4886, 0xC1DCBC); /* C1DCBA: ext.w   D6 */
-    FA18_OP(0xC1DCBC, 0xDC46, 0xC1DCBE); /* C1DCBC: add.w   D6, D6 */
-    FA18_OP(0xC1DCBE, 0xDC46, 0xC1DCC0); /* C1DCBE: add.w   D6, D6 */
-    FA18_OP(0xC1DCC0, 0x4CB1, 0xC1DCC6); /* C1DCC0: movem.w (A1,D6.w), D0-D1 */
-    FA18_OP(0xC1DCC6, 0xD480, 0xC1DCC8); /* C1DCC6: add.l   D0, D2 */
-    FA18_OP(0xC1DCC8, 0xD681, 0xC1DCCA); /* C1DCC8: add.l   D1, D3 */
-L_C1DCCA:
-    FA18_CHECK(0xC1DCCA);
-    FA18_OP(0xC1DCCA, 0xE582, 0xC1DCCC); /* C1DCCA: asl.l   #2, D2 */
-    FA18_OP(0xC1DCCC, 0xE583, 0xC1DCCE); /* C1DCCC: asl.l   #2, D3 */
-    FA18_OP(0xC1DCCE, 0x1018, 0xC1DCD0); /* C1DCCE: move.b  (A0)+, D0 */
-L_C1DCD0:
-    FA18_CHECK(0xC1DCD0);
-    FA18_OP(0xC1DCD0, 0x1218, 0xC1DCD2); /* C1DCD0: move.b  (A0)+, D1 */
-    FA18_OP(0xC1DCD2, 0x0C01, 0xC1DCD6); /* C1DCD2: cmpi.b  #$f, D1 */
-    FA18_BCC(0xC1DCD6, 0x6E00, 0xC1DCDA, 0xC1DBF8, L_C1DBF8); /* C1DCD6: bgt     $c1dbf8 */
-L_C1DCDA:
-    FA18_CHECK(0xC1DCDA);
-    FA18_OP(0xC1DCDA, 0x226E, 0xC1DCDE); /* C1DCDA: movea.l (-$32,A6), A1 */
-    FA18_OP(0xC1DCDE, 0x4881, 0xC1DCE0); /* C1DCDE: ext.w   D1 */
-    FA18_OP(0xC1DCE0, 0x1231, 0xC1DCE4); /* C1DCE0: move.b  (A1,D1.w), D1 */
-    FA18_OP(0xC1DCE4, 0x1C01, 0xC1DCE6); /* C1DCE4: move.b  D1, D6 */
-    FA18_OP(0xC1DCE6, 0x4886, 0xC1DCE8); /* C1DCE6: ext.w   D6 */
-    FA18_OP(0xC1DCE8, 0x33C6, 0xC1DCEE); /* C1DCE8: move.w  D6, $c459bc.l */
-    FA18_OP(0xC1DCEE, 0xDC46, 0xC1DCF0); /* C1DCEE: add.w   D6, D6 */
-    FA18_OP(0xC1DCF0, 0xDC46, 0xC1DCF2); /* C1DCF0: add.w   D6, D6 */
-    FA18_OP(0xC1DCF2, 0x226E, 0xC1DCF6); /* C1DCF2: movea.l (-$1c,A6), A1 */
-    FA18_OP(0xC1DCF6, 0x4CB1, 0xC1DCFC); /* C1DCF6: movem.w (A1,D6.w), D4-D5 */
-    FA18_OP(0xC1DCFC, 0xE584, 0xC1DCFE); /* C1DCFC: asl.l   #2, D4 */
-    FA18_OP(0xC1DCFE, 0xE585, 0xC1DD00); /* C1DCFE: asl.l   #2, D5 */
-    FA18_OP(0xC1DD00, 0x4881, 0xC1DD02); /* C1DD00: ext.w   D1 */
-    FA18_OP(0xC1DD02, 0xEB41, 0xC1DD04); /* C1DD02: asl.w   #5, D1 */
-    FA18_OP(0xC1DD04, 0x3C01, 0xC1DD06); /* C1DD04: move.w  D1, D6 */
-    FA18_OP(0xC1DD06, 0xD241, 0xC1DD08); /* C1DD06: add.w   D1, D1 */
-    FA18_OP(0xC1DD08, 0xD246, 0xC1DD0A); /* C1DD08: add.w   D6, D1 */
-    FA18_OP(0xC1DD0A, 0x47F4, 0xC1DD0E); /* C1DD0A: lea     (A4,D1.w), A3 */
-    FA18_OP(0xC1DD0E, 0x23CB, 0xC1DD14); /* C1DD0E: move.l  A3, $c45a2e.l */
-    FA18_OP(0xC1DD14, 0x06B9, 0xC1DD1E); /* C1DD14: addi.l  #$60, $c45a2e.l */
-    FA18_OP(0xC1DD1E, 0x2A8A, 0xC1DD20); /* C1DD1E: move.l  A2, (A5) */
-    FA18_OP(0xC1DD20, 0x7200, 0xC1DD22); /* C1DD20: moveq   #$0, D1 */
-L_C1DD22:
-    FA18_CHECK(0xC1DD22);
-    FA18_OP(0xC1DD22, 0xB7F9, 0xC1DD28); /* C1DD22: cmpa.l  $c45a2e.l, A3 */
-    FA18_BCC(0xC1DD28, 0x6C00, 0xC1DD2C, 0xC1E12E, L_C1E12E); /* C1DD28: bge     $c1e12e */
-L_C1DD2C:
-    FA18_CHECK(0xC1DD2C);
-    FA18_OP(0xC1DD2C, 0x0C13, 0xC1DD30); /* C1DD2C: cmpi.b  #-$1, (A3) */
-    FA18_BCC(0xC1DD30, 0x6700, 0xC1DD34, 0xC1E12E, L_C1E12E); /* C1DD30: beq     $c1e12e */
-L_C1DD34:
-    FA18_CHECK(0xC1DD34);
-    FA18_OP(0xC1DD34, 0x5201, 0xC1DD36); /* C1DD34: addq.b  #1, D1 */
-    FA18_OP(0xC1DD36, 0x3C1B, 0xC1DD38); /* C1DD36: move.w  (A3)+, D6 */
-    FA18_OP(0xC1DD38, 0x3E06, 0xC1DD3A); /* C1DD38: move.w  D6, D7 */
-    FA18_OP(0xC1DD3A, 0x0246, 0xC1DD3E); /* C1DD3A: andi.w  #$ff, D6 */
-    FA18_OP(0xC1DD3E, 0x33C6, 0xC1DD44); /* C1DD3E: move.w  D6, $c459b4.l */
-    FA18_OP(0xC1DD44, 0xE04F, 0xC1DD46); /* C1DD44: lsr.w   #8, D7 */
-    FA18_OP(0xC1DD46, 0x13C7, 0xC1DD4C); /* C1DD46: move.b  D7, $c4585a.l */
-    FA18_OP(0xC1DD4C, 0xE14E, 0xC1DD4E); /* C1DD4C: lsl.w   #8, D6 */
-    FA18_BCC(0xC1DD4E, 0x6D00, 0xC1DD52, 0xC1DDF0, L_C1DDF0); /* C1DD4E: blt     $c1ddf0 */
-L_C1DD52:
-    FA18_CHECK(0xC1DD52);
-    FA18_OP(0xC1DD52, 0x8C07, 0xC1DD54); /* C1DD52: or.b    D7, D6 */
-    FA18_OP(0xC1DD54, 0x34C6, 0xC1DD56); /* C1DD54: move.w  D6, (A2)+ */
-    FA18_OP(0xC1DD56, 0x0807, 0xC1DD5A); /* C1DD56: btst    #$6, D7 */
-    FA18_BCC(0xC1DD5A, 0x6712, 0xC1DD5C, 0xC1DD6E, L_C1DD6E); /* C1DD5A: beq     $c1dd6e */
-L_C1DD5C:
-    FA18_CHECK(0xC1DD5C);
-    FA18_OP(0xC1DD5C, 0x43F9, 0xC1DD62); /* C1DD5C: lea     $c48184.l, A1 */
-    FA18_OP(0xC1DD62, 0x0246, 0xC1DD66); /* C1DD62: andi.w  #$ff00, D6 */
-    FA18_OP(0xC1DD66, 0xE64E, 0xC1DD68); /* C1DD66: lsr.w   #3, D6 */
-    FA18_OP(0xC1DD68, 0x3C31, 0xC1DD6C); /* C1DD68: move.w  ($2,A1,D6.w), D6 */
-    FA18_JUMP(0xC1DD6C, 0x6002, 0xC1DD70, L_C1DD70); /* C1DD6C: bra     $c1dd70 */
-L_C1DD6E:
-    FA18_CHECK(0xC1DD6E);
-    FA18_OP(0xC1DD6E, 0xE04E, 0xC1DD70); /* C1DD6E: lsr.w   #8, D6 */
-L_C1DD70:
-    FA18_CHECK(0xC1DD70);
-    FA18_OP(0xC1DD70, 0x4847, 0xC1DD72); /* C1DD70: swap    D7 */
-    FA18_OP(0xC1DD72, 0xDC46, 0xC1DD74); /* C1DD72: add.w   D6, D6 */
-    FA18_OP(0xC1DD74, 0xDC46, 0xC1DD76); /* C1DD74: add.w   D6, D6 */
-    FA18_OP(0xC1DD76, 0x3E06, 0xC1DD78); /* C1DD76: move.w  D6, D7 */
-    FA18_OP(0xC1DD78, 0xDC46, 0xC1DD7A); /* C1DD78: add.w   D6, D6 */
-    FA18_OP(0xC1DD7A, 0xDC46, 0xC1DD7C); /* C1DD7A: add.w   D6, D6 */
-    FA18_OP(0xC1DD7C, 0xDC47, 0xC1DD7E); /* C1DD7C: add.w   D7, D6 */
-    FA18_OP(0xC1DD7E, 0x4847, 0xC1DD80); /* C1DD7E: swap    D7 */
-    FA18_OP(0xC1DD80, 0x43F9, 0xC1DD86); /* C1DD80: lea     $c22188.l, A1 */
-    FA18_OP(0xC1DD86, 0xD2C6, 0xC1DD88); /* C1DD86: adda.w  D6, A1 */
-    FA18_OP(0xC1DD88, 0x24C9, 0xC1DD8A); /* C1DD88: move.l  A1, (A2)+ */
-    FA18_OP(0xC1DD8A, 0x7C00, 0xC1DD8C); /* C1DD8A: moveq   #$0, D6 */
-    FA18_OP(0xC1DD8C, 0x0807, 0xC1DD90); /* C1DD8C: btst    #$6, D7 */
-    FA18_BCC(0xC1DD90, 0x6608, 0xC1DD92, 0xC1DD9A, L_C1DD9A); /* C1DD90: bne     $c1dd9a */
-L_C1DD92:
-    FA18_CHECK(0xC1DD92);
-    FA18_OP(0xC1DD92, 0x0807, 0xC1DD96); /* C1DD92: btst    #$4, D7 */
-    FA18_BCC(0xC1DD96, 0x6602, 0xC1DD98, 0xC1DD9A, L_C1DD9A); /* C1DD96: bne     $c1dd9a */
-L_C1DD98:
-    FA18_CHECK(0xC1DD98);
-    FA18_OP(0xC1DD98, 0x3C1B, 0xC1DD9A); /* C1DD98: move.w  (A3)+, D6 */
-L_C1DD9A:
-    FA18_CHECK(0xC1DD9A);
-    FA18_OP(0xC1DD9A, 0x4A39, 0xC1DDA0); /* C1DD9A: tst.b   $c45864.l */
-    FA18_BCC(0xC1DDA0, 0x6604, 0xC1DDA2, 0xC1DDA6, L_C1DDA6); /* C1DDA0: bne     $c1dda6 */
-L_C1DDA2:
-    FA18_CHECK(0xC1DDA2);
-    FA18_OP(0xC1DDA2, 0xDC46, 0xC1DDA4); /* C1DDA2: add.w   D6, D6 */
-    FA18_OP(0xC1DDA4, 0xDC46, 0xC1DDA6); /* C1DDA4: add.w   D6, D6 */
-L_C1DDA6:
-    FA18_CHECK(0xC1DDA6);
-    FA18_OP(0xC1DDA6, 0x2F09, 0xC1DDA8); /* C1DDA6: move.l  A1, -(A7) */
-    FA18_OP(0xC1DDA8, 0x43F9, 0xC1DDAE); /* C1DDA8: lea     $c1d7e2.l, A1 */
-    FA18_OP(0xC1DDAE, 0x1E39, 0xC1DDB4); /* C1DDAE: move.b  $c45850.l, D7 */
-    FA18_OP(0xC1DDB4, 0x4887, 0xC1DDB6); /* C1DDB4: ext.w   D7 */
-    FA18_OP(0xC1DDB6, 0xDE47, 0xC1DDB8); /* C1DDB6: add.w   D7, D7 */
-    FA18_OP(0xC1DDB8, 0xDE47, 0xC1DDBA); /* C1DDB8: add.w   D7, D7 */
-    FA18_OP(0xC1DDBA, 0x3E31, 0xC1DDBE); /* C1DDBA: move.w  (A1,D7.w), D7 */
-    FA18_OP(0xC1DDBE, 0x225F, 0xC1DDC0); /* C1DDBE: movea.l (A7)+, A1 */
-    FA18_OP(0xC1DDC0, 0x48C7, 0xC1DDC2); /* C1DDC0: ext.l   D7 */
-    FA18_OP(0xC1DDC2, 0xE587, 0xC1DDC4); /* C1DDC2: asl.l   #2, D7 */
-    FA18_OP(0xC1DDC4, 0x9C87, 0xC1DDC6); /* C1DDC4: sub.l   D7, D6 */
-    FA18_OP(0xC1DDC6, 0xDC84, 0xC1DDC8); /* C1DDC6: add.l   D4, D6 */
-    FA18_OP(0xC1DDC8, 0xDC82, 0xC1DDCA); /* C1DDC8: add.l   D2, D6 */
-    FA18_OP(0xC1DDCA, 0x23C6, 0xC1DDD0); /* C1DDCA: move.l  D6, $c456ee.l */
-    FA18_OP(0xC1DDD0, 0x2F06, 0xC1DDD2); /* C1DDD0: move.l  D6, -(A7) */
-    FA18_OP(0xC1DDD2, 0x7C00, 0xC1DDD4); /* C1DDD2: moveq   #$0, D6 */
-    FA18_OP(0xC1DDD4, 0x0839, 0xC1DDDC); /* C1DDD4: btst    #$6, $c4585a.l */
-    FA18_BCC(0xC1DDDC, 0x660A, 0xC1DDDE, 0xC1DDE8, L_C1DDE8); /* C1DDDC: bne     $c1dde8 */
-L_C1DDDE:
-    FA18_CHECK(0xC1DDDE);
-    FA18_OP(0xC1DDDE, 0x0839, 0xC1DDE6); /* C1DDDE: btst    #$4, $c4585a.l */
-    FA18_BCC(0xC1DDE6, 0x6718, 0xC1DDE8, 0xC1DE00, L_C1DE00); /* C1DDE6: beq     $c1de00 */
-L_C1DDE8:
-    FA18_CHECK(0xC1DDE8);
-    FA18_OP(0xC1DDE8, 0x4279, 0xC1DDEE); /* C1DDE8: clr.w   $c456f2.l */
-    FA18_JUMP(0xC1DDEE, 0x601C, 0xC1DE0C, L_C1DE0C); /* C1DDEE: bra     $c1de0c */
-L_C1DDF0:
-    FA18_CHECK(0xC1DDF0);
-    FA18_OP(0xC1DDF0, 0x33FC, 0xC1DDF8); /* C1DDF0: move.w  #$26, $c4599e.l */
-    FA18_CALL(0xC1DDF8, 0x4EB9, 0xC1DDFE, 15, 0); /* C1DDF8: jsr     $c06c02.l */
-L_C1DDFE:
-    FA18_CHECK(0xC1DDFE);
-    FA18_JUMP(0xC1DDFE, 0x60F0, 0xC1DDF0, L_C1DDF0); /* C1DDFE: bra     $c1ddf0 */
-L_C1DE00:
-    FA18_CHECK(0xC1DE00);
-    FA18_OP(0xC1DE00, 0x2269, 0xC1DE04); /* C1DE00: movea.l ($4,A1), A1 */
-    FA18_OP(0xC1DE04, 0x4279, 0xC1DE0A); /* C1DE04: clr.w   $c456f2.l */
-    FA18_OP(0xC1DE0A, 0x3C1B, 0xC1DE0C); /* C1DE0A: move.w  (A3)+, D6 */
-L_C1DE0C:
-    FA18_CHECK(0xC1DE0C);
-    FA18_OP(0xC1DE0C, 0x4A39, 0xC1DE12); /* C1DE0C: tst.b   $c45864.l */
-    FA18_BCC(0xC1DE12, 0x6604, 0xC1DE14, 0xC1DE18, L_C1DE18); /* C1DE12: bne     $c1de18 */
-L_C1DE14:
-    FA18_CHECK(0xC1DE14);
-    FA18_OP(0xC1DE14, 0xDC46, 0xC1DE16); /* C1DE14: add.w   D6, D6 */
-    FA18_OP(0xC1DE16, 0xDC46, 0xC1DE18); /* C1DE16: add.w   D6, D6 */
-L_C1DE18:
-    FA18_CHECK(0xC1DE18);
-    FA18_OP(0xC1DE18, 0x43F9, 0xC1DE1E); /* C1DE18: lea     $c1d7e2.l, A1 */
-    FA18_OP(0xC1DE1E, 0x1E39, 0xC1DE24); /* C1DE1E: move.b  $c45850.l, D7 */
-    FA18_OP(0xC1DE24, 0x4887, 0xC1DE26); /* C1DE24: ext.w   D7 */
-    FA18_OP(0xC1DE26, 0xDE47, 0xC1DE28); /* C1DE26: add.w   D7, D7 */
-    FA18_OP(0xC1DE28, 0xDE47, 0xC1DE2A); /* C1DE28: add.w   D7, D7 */
-    FA18_OP(0xC1DE2A, 0x3E31, 0xC1DE2E); /* C1DE2A: move.w  ($2,A1,D7.w), D7 */
-    FA18_OP(0xC1DE2E, 0x48C7, 0xC1DE30); /* C1DE2E: ext.l   D7 */
-    FA18_OP(0xC1DE30, 0xE587, 0xC1DE32); /* C1DE30: asl.l   #2, D7 */
-    FA18_OP(0xC1DE32, 0x9C87, 0xC1DE34); /* C1DE32: sub.l   D7, D6 */
-    FA18_OP(0xC1DE34, 0xDC85, 0xC1DE36); /* C1DE34: add.l   D5, D6 */
-    FA18_OP(0xC1DE36, 0xDC83, 0xC1DE38); /* C1DE36: add.l   D3, D6 */
-    FA18_OP(0xC1DE38, 0x23C6, 0xC1DE3E); /* C1DE38: move.l  D6, $c456f6.l */
-    FA18_OP(0xC1DE3E, 0x2E1F, 0xC1DE40); /* C1DE3E: move.l  (A7)+, D7 */
-    FA18_OP(0xC1DE40, 0x3F00, 0xC1DE42); /* C1DE40: move.w  D0, -(A7) */
-    FA18_OP(0xC1DE42, 0x0839, 0xC1DE4A); /* C1DE42: btst    #$4, $c4585a.l */
-    FA18_BCC(0xC1DE4A, 0x6748, 0xC1DE4C, 0xC1DE94, L_C1DE94); /* C1DE4A: beq     $c1de94 */
-L_C1DE4C:
-    FA18_CHECK(0xC1DE4C);
-    FA18_OP(0xC1DE4C, 0x0839, 0xC1DE54); /* C1DE4C: btst    #$6, $c4585a.l */
-    FA18_BCC(0xC1DE54, 0x6712, 0xC1DE56, 0xC1DE68, L_C1DE68); /* C1DE54: beq     $c1de68 */
-L_C1DE56:
-    FA18_CHECK(0xC1DE56);
-    FA18_OP(0xC1DE56, 0x43F9, 0xC1DE5C); /* C1DE56: lea     $c48184.l, A1 */
-    FA18_OP(0xC1DE5C, 0x3039, 0xC1DE62); /* C1DE5C: move.w  $c459b4.l, D0 */
-    FA18_OP(0xC1DE62, 0xEB40, 0xC1DE64); /* C1DE62: asl.w   #5, D0 */
-    FA18_OP(0xC1DE64, 0xD2C0, 0xC1DE66); /* C1DE64: adda.w  D0, A1 */
-    FA18_JUMP(0xC1DE66, 0x6020, 0xC1DE88, L_C1DE88); /* C1DE66: bra     $c1de88 */
-L_C1DE68:
-    FA18_CHECK(0xC1DE68);
-    FA18_OP(0xC1DE68, 0x43F9, 0xC1DE6E); /* C1DE68: lea     $c46184.l, A1 */
-    FA18_OP(0xC1DE6E, 0x3039, 0xC1DE74); /* C1DE6E: move.w  $c459b4.l, D0 */
-    FA18_OP(0xC1DE74, 0xE140, 0xC1DE76); /* C1DE74: asl.w   #8, D0 */
-    FA18_OP(0xC1DE76, 0xD040, 0xC1DE78); /* C1DE76: add.w   D0, D0 */
-    FA18_OP(0xC1DE78, 0xD2C0, 0xC1DE7A); /* C1DE78: adda.w  D0, A1 */
-    FA18_OP(0xC1DE7A, 0x4A39, 0xC1DE80); /* C1DE7A: tst.b   $c45866.l */
-    FA18_BCC(0xC1DE80, 0x6606, 0xC1DE82, 0xC1DE88, L_C1DE88); /* C1DE80: bne     $c1de88 */
-L_C1DE82:
-    FA18_CHECK(0xC1DE82);
-    FA18_OP(0xC1DE82, 0x08A9, 0xC1DE88); /* C1DE82: bclr    #$2, ($1,A1) */
-L_C1DE88:
-    FA18_CHECK(0xC1DE88);
-    FA18_OP(0xC1DE88, 0x3029, 0xC1DE8C); /* C1DE88: move.w  ($c,A1), D0 */
-    FA18_OP(0xC1DE8C, 0x0240, 0xC1DE90); /* C1DE8C: andi.w  #$fff, D0 */
-    FA18_OP(0xC1DE90, 0x48C0, 0xC1DE92); /* C1DE90: ext.l   D0 */
-    FA18_OP(0xC1DE92, 0xDE80, 0xC1DE94); /* C1DE92: add.l   D0, D7 */
-L_C1DE94:
-    FA18_CHECK(0xC1DE94);
-    FA18_OP(0xC1DE94, 0x3039, 0xC1DE9A); /* C1DE94: move.w  $c45a72.l, D0 */
-    FA18_OP(0xC1DE9A, 0x48C0, 0xC1DE9C); /* C1DE9A: ext.l   D0 */
-    FA18_OP(0xC1DE9C, 0xDE80, 0xC1DE9E); /* C1DE9C: add.l   D0, D7 */
-    FA18_BCC(0xC1DE9E, 0x6C02, 0xC1DEA0, 0xC1DEA2, L_C1DEA2); /* C1DE9E: bge     $c1dea2 */
-L_C1DEA0:
-    FA18_CHECK(0xC1DEA0);
-    FA18_OP(0xC1DEA0, 0x4487, 0xC1DEA2); /* C1DEA0: neg.l   D7 */
-L_C1DEA2:
-    FA18_CHECK(0xC1DEA2);
-    FA18_OP(0xC1DEA2, 0xE087, 0xC1DEA4); /* C1DEA2: asr.l   #8, D7 */
-    FA18_OP(0xC1DEA4, 0xE887, 0xC1DEA6); /* C1DEA4: asr.l   #4, D7 */
-    FA18_OP(0xC1DEA6, 0x0839, 0xC1DEAE); /* C1DEA6: btst    #$6, $c4585a.l */
-    FA18_BCC(0xC1DEAE, 0x660A, 0xC1DEB0, 0xC1DEBA, L_C1DEBA); /* C1DEAE: bne     $c1deba */
-L_C1DEB0:
-    FA18_CHECK(0xC1DEB0);
-    FA18_OP(0xC1DEB0, 0x0839, 0xC1DEB8); /* C1DEB0: btst    #$4, $c4585a.l */
-    FA18_BCC(0xC1DEB8, 0x670C, 0xC1DEBA, 0xC1DEC6, L_C1DEC6); /* C1DEB8: beq     $c1dec6 */
-L_C1DEBA:
-    FA18_CHECK(0xC1DEBA);
-    FA18_OP(0xC1DEBA, 0x3029, 0xC1DEBE); /* C1DEBA: move.w  ($e,A1), D0 */
-    FA18_OP(0xC1DEBE, 0x0240, 0xC1DEC2); /* C1DEBE: andi.w  #$fff, D0 */
-    FA18_OP(0xC1DEC2, 0x48C0, 0xC1DEC4); /* C1DEC2: ext.l   D0 */
-    FA18_OP(0xC1DEC4, 0xDC80, 0xC1DEC6); /* C1DEC4: add.l   D0, D6 */
-L_C1DEC6:
-    FA18_CHECK(0xC1DEC6);
-    FA18_OP(0xC1DEC6, 0x3039, 0xC1DECC); /* C1DEC6: move.w  $c45a76.l, D0 */
-    FA18_OP(0xC1DECC, 0x48C0, 0xC1DECE); /* C1DECC: ext.l   D0 */
-    FA18_OP(0xC1DECE, 0xDC80, 0xC1DED0); /* C1DECE: add.l   D0, D6 */
-    FA18_BCC(0xC1DED0, 0x6C02, 0xC1DED2, 0xC1DED4, L_C1DED4); /* C1DED0: bge     $c1ded4 */
-L_C1DED2:
-    FA18_CHECK(0xC1DED2);
-    FA18_OP(0xC1DED2, 0x4486, 0xC1DED4); /* C1DED2: neg.l   D6 */
-L_C1DED4:
-    FA18_CHECK(0xC1DED4);
-    FA18_OP(0xC1DED4, 0xE086, 0xC1DED6); /* C1DED4: asr.l   #8, D6 */
-    FA18_OP(0xC1DED6, 0xE886, 0xC1DED8); /* C1DED6: asr.l   #4, D6 */
-    FA18_OP(0xC1DED8, 0x2039, 0xC1DEDE); /* C1DED8: move.l  $c45a78.l, D0 */
-    FA18_OP(0xC1DEDE, 0x0839, 0xC1DEE6); /* C1DEDE: btst    #$6, $c4585a.l */
-    FA18_BCC(0xC1DEE6, 0x660A, 0xC1DEE8, 0xC1DEF2, L_C1DEF2); /* C1DEE6: bne     $c1def2 */
-L_C1DEE8:
-    FA18_CHECK(0xC1DEE8);
-    FA18_OP(0xC1DEE8, 0x0839, 0xC1DEF0); /* C1DEE8: btst    #$4, $c4585a.l */
-    FA18_BCC(0xC1DEF0, 0x670C, 0xC1DEF2, 0xC1DEFE, L_C1DEFE); /* C1DEF0: beq     $c1defe */
-L_C1DEF2:
-    FA18_CHECK(0xC1DEF2);
-    FA18_OP(0xC1DEF2, 0x2029, 0xC1DEF6); /* C1DEF2: move.l  ($10,A1), D0 */
-    FA18_OP(0xC1DEF6, 0xD0B9, 0xC1DEFC); /* C1DEF6: add.l   $c45a78.l, D0 */
-    FA18_BCC(0xC1DEFC, 0x6C02, 0xC1DEFE, 0xC1DF00, L_C1DF00); /* C1DEFC: bge     $c1df00 */
-L_C1DEFE:
-    FA18_CHECK(0xC1DEFE);
-    FA18_OP(0xC1DEFE, 0x4480, 0xC1DF00); /* C1DEFE: neg.l   D0 */
-L_C1DF00:
-    FA18_CHECK(0xC1DF00);
-    FA18_OP(0xC1DF00, 0xE080, 0xC1DF02); /* C1DF00: asr.l   #8, D0 */
-    FA18_OP(0xC1DF02, 0xE680, 0xC1DF04); /* C1DF02: asr.l   #3, D0 */
-    FA18_OP(0xC1DF04, 0xBE46, 0xC1DF06); /* C1DF04: cmp.w   D6, D7 */
-    FA18_BCC(0xC1DF06, 0x6C0A, 0xC1DF08, 0xC1DF12, L_C1DF12); /* C1DF06: bge     $c1df12 */
-L_C1DF08:
-    FA18_CHECK(0xC1DF08);
-    FA18_OP(0xC1DF08, 0x3E06, 0xC1DF0A); /* C1DF08: move.w  D6, D7 */
-    FA18_OP(0xC1DF0A, 0xBE40, 0xC1DF0C); /* C1DF0A: cmp.w   D0, D7 */
-    FA18_BCC(0xC1DF0C, 0x6C0A, 0xC1DF0E, 0xC1DF18, L_C1DF18); /* C1DF0C: bge     $c1df18 */
-L_C1DF0E:
-    FA18_CHECK(0xC1DF0E);
-    FA18_OP(0xC1DF0E, 0x3E00, 0xC1DF10); /* C1DF0E: move.w  D0, D7 */
-    FA18_JUMP(0xC1DF10, 0x6006, 0xC1DF18, L_C1DF18); /* C1DF10: bra     $c1df18 */
-L_C1DF12:
-    FA18_CHECK(0xC1DF12);
-    FA18_OP(0xC1DF12, 0xBE40, 0xC1DF14); /* C1DF12: cmp.w   D0, D7 */
-    FA18_BCC(0xC1DF14, 0x6C02, 0xC1DF16, 0xC1DF18, L_C1DF18); /* C1DF14: bge     $c1df18 */
-L_C1DF16:
-    FA18_CHECK(0xC1DF16);
-    FA18_OP(0xC1DF16, 0x3E00, 0xC1DF18); /* C1DF16: move.w  D0, D7 */
-L_C1DF18:
-    FA18_CHECK(0xC1DF18);
-    FA18_OP(0xC1DF18, 0xE24F, 0xC1DF1A); /* C1DF18: lsr.w   #1, D7 */
-    FA18_OP(0xC1DF1A, 0x0C47, 0xC1DF1E); /* C1DF1A: cmpi.w  #$ef, D7 */
-    FA18_BCC(0xC1DF1E, 0x6F12, 0xC1DF20, 0xC1DF32, L_C1DF32); /* C1DF1E: ble     $c1df32 */
-L_C1DF20:
-    FA18_CHECK(0xC1DF20);
-    FA18_OP(0xC1DF20, 0x33FC, 0xC1DF28); /* C1DF20: move.w  #$f, $c4599e.l */
-    FA18_CALL(0xC1DF28, 0x4EB9, 0xC1DF2E, 15, 0); /* C1DF28: jsr     $c06c02.l */
-L_C1DF2E:
-    FA18_CHECK(0xC1DF2E);
-    FA18_OP(0xC1DF2E, 0x3E3C, 0xC1DF32); /* C1DF2E: move.w  #$ef, D7 */
-L_C1DF32:
-    FA18_CHECK(0xC1DF32);
-    FA18_OP(0xC1DF32, 0x43F9, 0xC1DF38); /* C1DF32: lea     $c1df46.l, A1 */
-    FA18_OP(0xC1DF38, 0x1C31, 0xC1DF3C); /* C1DF38: move.b  (A1,D7.w), D6 */
-    FA18_OP(0xC1DF3C, 0x8D2A, 0xC1DF40); /* C1DF3C: or.b    D6, (-$5,A2) */
-    FA18_OP(0xC1DF40, 0x4886, 0xC1DF42); /* C1DF40: ext.w   D6 */
-    FA18_JUMP(0xC1DF42, 0x6000, 0xC1E042, L_C1E042); /* C1DF42: bra     $c1e042 */
-L_C1E042:
-    FA18_CHECK(0xC1E042);
-    FA18_OP(0xC1E042, 0x2039, 0xC1E048); /* C1E042: move.l  $c456ee.l, D0 */
-    FA18_OP(0xC1E048, 0xECA0, 0xC1E04A); /* C1E048: asr.l   D6, D0 */
-    FA18_OP(0xC1E04A, 0x34C0, 0xC1E04C); /* C1E04A: move.w  D0, (A2)+ */
-    FA18_OP(0xC1E04C, 0x3039, 0xC1E052); /* C1E04C: move.w  $c456f2.l, D0 */
-    FA18_OP(0xC1E052, 0xEC60, 0xC1E054); /* C1E052: asr.w   D6, D0 */
-    FA18_OP(0xC1E054, 0x34C0, 0xC1E056); /* C1E054: move.w  D0, (A2)+ */
-    FA18_OP(0xC1E056, 0x2039, 0xC1E05C); /* C1E056: move.l  $c456f6.l, D0 */
-    FA18_OP(0xC1E05C, 0xECA0, 0xC1E05E); /* C1E05C: asr.l   D6, D0 */
-    FA18_OP(0xC1E05E, 0x34C0, 0xC1E060); /* C1E05E: move.w  D0, (A2)+ */
-    FA18_OP(0xC1E060, 0x301F, 0xC1E062); /* C1E060: move.w  (A7)+, D0 */
-    FA18_OP(0xC1E062, 0x5239, 0xC1E068); /* C1E062: addq.b  #1, $c4585e.l */
-    FA18_OP(0xC1E068, 0x7E00, 0xC1E06A); /* C1E068: moveq   #$0, D7 */
-    FA18_OP(0xC1E06A, 0x0839, 0xC1E072); /* C1E06A: btst    #$6, $c4585a.l */
-    FA18_BCC(0xC1E072, 0x6618, 0xC1E074, 0xC1E08C, L_C1E08C); /* C1E072: bne     $c1e08c */
-L_C1E074:
-    FA18_CHECK(0xC1E074);
-    FA18_OP(0xC1E074, 0x0839, 0xC1E07C); /* C1E074: btst    #$4, $c4585a.l */
-    FA18_BCC(0xC1E07C, 0x660E, 0xC1E07E, 0xC1E08C, L_C1E08C); /* C1E07C: bne     $c1e08c */
-L_C1E07E:
-    FA18_CHECK(0xC1E07E);
-    FA18_OP(0xC1E07E, 0x1E01, 0xC1E080); /* C1E07E: move.b  D1, D7 */
-    FA18_OP(0xC1E080, 0xE94F, 0xC1E082); /* C1E080: lsl.w   #4, D7 */
-    FA18_OP(0xC1E082, 0x4847, 0xC1E084); /* C1E082: swap    D7 */
-    FA18_OP(0xC1E084, 0x8EB9, 0xC1E08A); /* C1E084: or.l    $c459bc.l, D7 */
-    FA18_JUMP(0xC1E08A, 0x600C, 0xC1E098, L_C1E098); /* C1E08A: bra     $c1e098 */
-L_C1E08C:
-    FA18_CHECK(0xC1E08C);
-    FA18_OP(0xC1E08C, 0x8E39, 0xC1E092); /* C1E08C: or.b    $c459b5.l, D7 */
-    FA18_OP(0xC1E092, 0xE09F, 0xC1E094); /* C1E092: ror.l   #8, D7 */
-    FA18_OP(0xC1E094, 0x08C7, 0xC1E098); /* C1E094: bset    #$1f, D7 */
-L_C1E098:
-    FA18_CHECK(0xC1E098);
-    FA18_OP(0xC1E098, 0x24C7, 0xC1E09A); /* C1E098: move.l  D7, (A2)+ */
-    FA18_OP(0xC1E09A, 0x425A, 0xC1E09C); /* C1E09A: clr.w   (A2)+ */
-    FA18_OP(0xC1E09C, 0x1C2E, 0xC1E0A0); /* C1E09C: move.b  (-$2e,A6), D6 */
-    FA18_OP(0xC1E0A0, 0x14C6, 0xC1E0A2); /* C1E0A0: move.b  D6, (A2)+ */
-    FA18_OP(0xC1E0A2, 0x5306, 0xC1E0A4); /* C1E0A2: subq.b  #1, D6 */
-    FA18_BCC(0xC1E0A4, 0x6C04, 0xC1E0A6, 0xC1E0AA, L_C1E0AA); /* C1E0A4: bge     $c1e0aa */
-L_C1E0A6:
-    FA18_CHECK(0xC1E0A6);
-    FA18_OP(0xC1E0A6, 0x1C3C, 0xC1E0AA); /* C1E0A6: move.b  #$3, D6 */
-L_C1E0AA:
-    FA18_CHECK(0xC1E0AA);
-    FA18_OP(0xC1E0AA, 0x1D46, 0xC1E0AE); /* C1E0AA: move.b  D6, (-$2e,A6) */
-    FA18_OP(0xC1E0AE, 0x421A, 0xC1E0B0); /* C1E0AE: clr.b   (A2)+ */
-    FA18_OP(0xC1E0B0, 0x429A, 0xC1E0B2); /* C1E0B0: clr.l   (A2)+ */
-    FA18_OP(0xC1E0B2, 0x4847, 0xC1E0B4); /* C1E0B2: swap    D7 */
-    FA18_OP(0xC1E0B4, 0x33C7, 0xC1E0BA); /* C1E0B4: move.w  D7, $c459bc.l */
-    FA18_OP(0xC1E0BA, 0x4847, 0xC1E0BC); /* C1E0BA: swap    D7 */
-    FA18_OP(0xC1E0BC, 0x5279, 0xC1E0C2); /* C1E0BC: addq.w  #1, $c4e988.l */
-    FA18_OP(0xC1E0C2, 0x4A39, 0xC1E0C8); /* C1E0C2: tst.b   $c45866.l */
-    FA18_BCC(0xC1E0C8, 0x6642, 0xC1E0CA, 0xC1E10C, L_C1E10C); /* C1E0C8: bne     $c1e10c */
-L_C1E0CA:
-    FA18_CHECK(0xC1E0CA);
-    FA18_OP(0xC1E0CA, 0x43F9, 0xC1E0D0); /* C1E0CA: lea     $c1e11e.l, A1 */
-    FA18_OP(0xC1E0D0, 0x2C39, 0xC1E0D6); /* C1E0D0: move.l  $c45a78.l, D6 */
-    FA18_OP(0xC1E0D6, 0x4486, 0xC1E0D8); /* C1E0D6: neg.l   D6 */
-    FA18_OP(0xC1E0D8, 0xE086, 0xC1E0DA); /* C1E0D8: asr.l   #8, D6 */
-    FA18_OP(0xC1E0DA, 0xE686, 0xC1E0DC); /* C1E0DA: asr.l   #3, D6 */
-    FA18_OP(0xC1E0DC, 0x0C86, 0xC1E0E2); /* C1E0DC: cmpi.l  #$3, D6 */
-    FA18_BCC(0xC1E0E2, 0x6F06, 0xC1E0E4, 0xC1E0EA, L_C1E0EA); /* C1E0E2: ble     $c1e0ea */
-L_C1E0E4:
-    FA18_CHECK(0xC1E0E4);
-    FA18_OP(0xC1E0E4, 0x3C3C, 0xC1E0E8); /* C1E0E4: move.w  #$46, D6 */
-    FA18_JUMP(0xC1E0E8, 0x6012, 0xC1E0FC, L_C1E0FC); /* C1E0E8: bra     $c1e0fc */
-L_C1E0EA:
-    FA18_CHECK(0xC1E0EA);
-    FA18_OP(0xC1E0EA, 0xDC86, 0xC1E0EC); /* C1E0EA: add.l   D6, D6 */
-    FA18_OP(0xC1E0EC, 0xDC86, 0xC1E0EE); /* C1E0EC: add.l   D6, D6 */
-    FA18_OP(0xC1E0EE, 0x4A39, 0xC1E0F4); /* C1E0EE: tst.b   $c45786.l */
-    FA18_BCC(0xC1E0F4, 0x6702, 0xC1E0F6, 0xC1E0F8, L_C1E0F8); /* C1E0F4: beq     $c1e0f8 */
-L_C1E0F6:
-    FA18_CHECK(0xC1E0F6);
-    FA18_OP(0xC1E0F6, 0x5446, 0xC1E0F8); /* C1E0F6: addq.w  #2, D6 */
-L_C1E0F8:
-    FA18_CHECK(0xC1E0F8);
-    FA18_OP(0xC1E0F8, 0x3C31, 0xC1E0FC); /* C1E0F8: move.w  (A1,D6.l), D6 */
-L_C1E0FC:
-    FA18_CHECK(0xC1E0FC);
-    FA18_OP(0xC1E0FC, 0xBC79, 0xC1E102); /* C1E0FC: cmp.w   $c4e988.l, D6 */
-    FA18_BCC(0xC1E102, 0x6C08, 0xC1E104, 0xC1E10C, L_C1E10C); /* C1E102: bge     $c1e10c */
-L_C1E104:
-    FA18_CHECK(0xC1E104);
-    FA18_OP(0xC1E104, 0x226E, 0xC1E108); /* C1E104: movea.l (-$24,A6), A1 */
-    FA18_OP(0xC1E108, 0x0651, 0xC1E10C); /* C1E108: addi.w  #$18, (A1) */
-L_C1E10C:
-    FA18_CHECK(0xC1E10C);
-    FA18_OP(0xC1E10C, 0x0C79, 0xC1E114); /* C1E10C: cmpi.w  #$46, $c4e988.l */
-    FA18_BCC(0xC1E114, 0x6D04, 0xC1E116, 0xC1E11A, L_C1E11A); /* C1E114: blt     $c1e11a */
-L_C1E116:
-    FA18_CHECK(0xC1E116);
-    FA18_OP(0xC1E116, 0x94FC, 0xC1E11A); /* C1E116: suba.w  #$18, A2 */
-L_C1E11A:
-    FA18_CHECK(0xC1E11A);
-    FA18_JUMP(0xC1E11A, 0x6000, 0xC1DD22, L_C1DD22); /* C1E11A: bra     $c1dd22 */
-L_C1E12E:
-    FA18_CHECK(0xC1E12E);
-    FA18_OP(0xC1E12E, 0x4A39, 0xC1E134); /* C1E12E: tst.b   $c45864.l */
-    FA18_BCC(0xC1E134, 0x6728, 0xC1E136, 0xC1E15E, L_C1E15E); /* C1E134: beq     $c1e15e */
-L_C1E136:
-    FA18_CHECK(0xC1E136);
-    FA18_OP(0xC1E136, 0x4A39, 0xC1E13C); /* C1E136: tst.b   $c45866.l */
-    FA18_BCC(0xC1E13C, 0x6620, 0xC1E13E, 0xC1E15E, L_C1E15E); /* C1E13C: bne     $c1e15e */
-L_C1E13E:
-    FA18_CHECK(0xC1E13E);
-    FA18_OP(0xC1E13E, 0x0C01, 0xC1E142); /* C1E13E: cmpi.b  #$1, D1 */
-    FA18_BCC(0xC1E142, 0x6E08, 0xC1E144, 0xC1E14C, L_C1E14C); /* C1E142: bgt     $c1e14c */
-L_C1E144:
-    FA18_CHECK(0xC1E144);
-    FA18_OP(0xC1E144, 0x2ABC, 0xC1E14A); /* C1E144: move.l  #$ffffffff, (A5) */
-    FA18_JUMP(0xC1E14A, 0x6012, 0xC1E15E, L_C1E15E); /* C1E14A: bra     $c1e15e */
-L_C1E14C:
-    FA18_CHECK(0xC1E14C);
-    FA18_OP(0xC1E14C, 0xDAFC, 0xC1E150); /* C1E14C: adda.w  #$4, A5 */
-    FA18_OP(0xC1E150, 0x3AC1, 0xC1E152); /* C1E150: move.w  D1, (A5)+ */
-    FA18_OP(0xC1E152, 0x2ABC, 0xC1E158); /* C1E152: move.l  #$ffffffff, (A5) */
-    FA18_OP(0xC1E158, 0x5239, 0xC1E15E); /* C1E158: addq.b  #1, $c4585c.l */
-L_C1E15E:
-    FA18_CHECK(0xC1E15E);
-    FA18_OP(0xC1E15E, 0x5300, 0xC1E160); /* C1E15E: subq.b  #1, D0 */
-    FA18_BCC(0xC1E160, 0x6E00, 0xC1E164, 0xC1DCD0, L_C1DCD0); /* C1E160: bgt     $c1dcd0 */
-L_C1E164:
-    FA18_CHECK(0xC1E164);
-    FA18_OP(0xC1E164, 0xD8FC, 0xC1E168); /* C1E164: adda.w  #$600, A4 */
-    FA18_JUMP(0xC1E168, 0x6000, 0xC1DC44, L_C1DC44); /* C1E168: bra     $c1dc44 */
-L_C1E16C:
-    FA18_CHECK(0xC1E16C);
-    FA18_OP(0xC1E16C, 0x34BC, 0xC1E170); /* C1E16C: move.w  #$ffff, (A2) */
-    FA18_OP(0xC1E170, 0x13FC, 0xC1E178); /* C1E170: move.b  #$1, $c457a5.l */
-    FA18_OP(0xC1E178, 0x13F9, 0xC1E182); /* C1E178: move.b  $c4585c.l, $c4585d.l */
-    FA18_OP(0xC1E182, 0x4A39, 0xC1E188); /* C1E182: tst.b   $c45864.l */
-    FA18_BCC(0xC1E188, 0x6700, 0xC1E18C, 0xC1E2E0, L_C1E2E0); /* C1E188: beq     $c1e2e0 */
-L_C1E18C:
-    FA18_CHECK(0xC1E18C);
-    FA18_JUMP(0xC1E18C, 0x6010, 0xC1E19E, L_C1E19E); /* C1E18C: bra     $c1e19e */
-L_C1E18E:
-    FA18_CHECK(0xC1E18E);
-    FA18_OP(0xC1E18E, 0x33FC, 0xC1E196); /* C1E18E: move.w  #$10, $c4599e.l */
-    FA18_CALL(0xC1E196, 0x4EB9, 0xC1E19C, 15, 0); /* C1E196: jsr     $c06c02.l */
-L_C1E19C:
-    FA18_CHECK(0xC1E19C);
-    FA18_JUMP(0xC1E19C, 0x60F0, 0xC1E18E, L_C1E18E); /* C1E19C: bra     $c1e18e */
-L_C1E19E:
-    FA18_CHECK(0xC1E19E);
-    FA18_OP(0xC1E19E, 0x2E3C, 0xC1E1A4); /* C1E19E: move.l  #$c4f6ca, D7 */
-    FA18_OP(0xC1E1A4, 0xBE8A, 0xC1E1A6); /* C1E1A4: cmp.l   A2, D7 */
-    FA18_BCC(0xC1E1A6, 0x6EE6, 0xC1E1A8, 0xC1E18E, L_C1E18E); /* C1E1A6: bgt     $c1e18e */
-L_C1E1A8:
-    FA18_CHECK(0xC1E1A8);
-    FA18_BCC(0xC1E1A8, 0x6700, 0xC1E1AC, 0xC1E2E0, L_C1E2E0); /* C1E1A8: beq     $c1e2e0 */
-L_C1E1AC:
-    FA18_CHECK(0xC1E1AC);
-    FA18_OP(0xC1E1AC, 0x94FC, 0xC1E1B0); /* C1E1AC: suba.w  #$18, A2 */
-    FA18_OP(0xC1E1B0, 0x23CA, 0xC1E1B6); /* C1E1B0: move.l  A2, $c459c6.l */
-    FA18_OP(0xC1E1B6, 0x4200, 0xC1E1B8); /* C1E1B6: clr.b   D0 */
-    FA18_OP(0xC1E1B8, 0x4239, 0xC1E1BE); /* C1E1B8: clr.b   $c4585f.l */
-L_C1E1BE:
-    FA18_CHECK(0xC1E1BE);
-    FA18_OP(0xC1E1BE, 0x3E1A, 0xC1E1C0); /* C1E1BE: move.w  (A2)+, D7 */
-    FA18_OP(0xC1E1C0, 0x225A, 0xC1E1C2); /* C1E1C0: movea.l (A2)+, A1 */
-    FA18_OP(0xC1E1C2, 0x4C9A, 0xC1E1C6); /* C1E1C2: movem.w (A2)+, D2-D4 */
-    FA18_OP(0xC1E1C6, 0x2C1A, 0xC1E1C8); /* C1E1C6: move.l  (A2)+, D6 */
-    FA18_OP(0xC1E1C8, 0x0807, 0xC1E1CC); /* C1E1C8: btst    #$6, D7 */
-    FA18_BCC(0xC1E1CC, 0x6600, 0xC1E1D0, 0xC1E2C4, L_C1E2C4); /* C1E1CC: bne     $c1e2c4 */
-L_C1E1D0:
-    FA18_CHECK(0xC1E1D0);
-    FA18_OP(0xC1E1D0, 0x0807, 0xC1E1D4); /* C1E1D0: btst    #$4, D7 */
-    FA18_BCC(0xC1E1D4, 0x6600, 0xC1E1D8, 0xC1E2C4, L_C1E2C4); /* C1E1D4: bne     $c1e2c4 */
-L_C1E1D8:
-    FA18_CHECK(0xC1E1D8);
-    FA18_OP(0xC1E1D8, 0x2229, 0xC1E1DC); /* C1E1D8: move.l  ($4,A1), D1 */
-    FA18_BCC(0xC1E1DC, 0x6F00, 0xC1E1E0, 0xC1E2A6, L_C1E2A6); /* C1E1DC: ble     $c1e2a6 */
-L_C1E1E0:
-    FA18_CHECK(0xC1E1E0);
-    FA18_OP(0xC1E1E0, 0x2041, 0xC1E1E2); /* C1E1E0: movea.l D1, A0 */
-    FA18_OP(0xC1E1E2, 0x3210, 0xC1E1E4); /* C1E1E2: move.w  (A0), D1 */
-    FA18_BCC(0xC1E1E4, 0x6D10, 0xC1E1E6, 0xC1E1F6, L_C1E1F6); /* C1E1E4: blt     $c1e1f6 */
-L_C1E1E6:
-    FA18_CHECK(0xC1E1E6);
-    FA18_OP(0xC1E1E6, 0x0241, 0xC1E1EA); /* C1E1E6: andi.w  #$4000, D1 */
-    FA18_BCC(0xC1E1EA, 0x6706, 0xC1E1EC, 0xC1E1F2, L_C1E1F2); /* C1E1EA: beq     $c1e1f2 */
-L_C1E1EC:
-    FA18_CHECK(0xC1E1EC);
-    FA18_OP(0xC1E1EC, 0x3228, 0xC1E1F0); /* C1E1EC: move.w  ($2,A0), D1 */
-    FA18_JUMP(0xC1E1F0, 0x6004, 0xC1E1F6, L_C1E1F6); /* C1E1F0: bra     $c1e1f6 */
-L_C1E1F2:
-    FA18_CHECK(0xC1E1F2);
-    FA18_OP(0xC1E1F2, 0x3228, 0xC1E1F6); /* C1E1F2: move.w  ($4,A0), D1 */
-L_C1E1F6:
-    FA18_CHECK(0xC1E1F6);
-    FA18_OP(0xC1E1F6, 0x0C41, 0xC1E1FA); /* C1E1F6: cmpi.w  #-$1, D1 */
-    FA18_BCC(0xC1E1FA, 0x6700, 0xC1E1FE, 0xC1E2A6, L_C1E2A6); /* C1E1FA: beq     $c1e2a6 */
-L_C1E1FE:
-    FA18_CHECK(0xC1E1FE);
-    FA18_OP(0xC1E1FE, 0x0241, 0xC1E202); /* C1E1FE: andi.w  #$fff, D1 */
-    FA18_OP(0xC1E202, 0x3230, 0xC1E206); /* C1E202: move.w  (A0,D1.w), D1 */
-    FA18_BCC(0xC1E206, 0x6D00, 0xC1E20A, 0xC1E2A6, L_C1E2A6); /* C1E206: blt     $c1e2a6 */
-L_C1E20A:
-    FA18_CHECK(0xC1E20A);
-    FA18_OP(0xC1E20A, 0xD0C1, 0xC1E20C); /* C1E20A: adda.w  D1, A0 */
-    FA18_OP(0xC1E20C, 0x0247, 0xC1E210); /* C1E20C: andi.w  #$f, D7 */
-    FA18_OP(0xC1E210, 0xEF62, 0xC1E212); /* C1E210: asl.w   D7, D2 */
-    FA18_OP(0xC1E212, 0xEF63, 0xC1E214); /* C1E212: asl.w   D7, D3 */
-    FA18_OP(0xC1E214, 0xEF64, 0xC1E216); /* C1E214: asl.w   D7, D4 */
-    FA18_OP(0xC1E216, 0x0242, 0xC1E21A); /* C1E216: andi.w  #$3fff, D2 */
-    FA18_OP(0xC1E21A, 0x0244, 0xC1E21E); /* C1E21A: andi.w  #$3fff, D4 */
-    FA18_OP(0xC1E21E, 0x4880, 0xC1E220); /* C1E21E: ext.w   D0 */
-    FA18_OP(0xC1E220, 0x3200, 0xC1E222); /* C1E220: move.w  D0, D1 */
-    FA18_OP(0xC1E222, 0x43F9, 0xC1E228); /* C1E222: lea     $c4d790.l, A1 */
-    FA18_OP(0xC1E228, 0xD241, 0xC1E22A); /* C1E228: add.w   D1, D1 */
-    FA18_OP(0xC1E22A, 0xD241, 0xC1E22C); /* C1E22A: add.w   D1, D1 */
-    FA18_OP(0xC1E22C, 0x2388, 0xC1E230); /* C1E22C: move.l  A0, (A1,D1.w) */
-    FA18_OP(0xC1E230, 0x43F9, 0xC1E236); /* C1E230: lea     $c4d7bc.l, A1 */
-    FA18_OP(0xC1E236, 0xED41, 0xC1E238); /* C1E236: asl.w   #6, D1 */
-    FA18_OP(0xC1E238, 0xD2C1, 0xC1E23A); /* C1E238: adda.w  D1, A1 */
-    FA18_OP(0xC1E23A, 0x22C6, 0xC1E23C); /* C1E23A: move.l  D6, (A1)+ */
-    FA18_OP(0xC1E23C, 0x32D8, 0xC1E23E); /* C1E23C: move.w  (A0)+, (A1)+ */
-    FA18_OP(0xC1E23E, 0x3C18, 0xC1E240); /* C1E23E: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E240, 0xDC42, 0xC1E242); /* C1E240: add.w   D2, D6 */
-    FA18_OP(0xC1E242, 0x32C6, 0xC1E244); /* C1E242: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E244, 0x3C18, 0xC1E246); /* C1E244: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E246, 0xDC42, 0xC1E248); /* C1E246: add.w   D2, D6 */
-    FA18_OP(0xC1E248, 0x32C6, 0xC1E24A); /* C1E248: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E24A, 0x3C18, 0xC1E24C); /* C1E24A: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E24C, 0xDC44, 0xC1E24E); /* C1E24C: add.w   D4, D6 */
-    FA18_OP(0xC1E24E, 0x32C6, 0xC1E250); /* C1E24E: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E250, 0x3C18, 0xC1E252); /* C1E250: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E252, 0xDC44, 0xC1E254); /* C1E252: add.w   D4, D6 */
-    FA18_OP(0xC1E254, 0x32C6, 0xC1E256); /* C1E254: move.w  D6, (A1)+ */
-L_C1E256:
-    FA18_CHECK(0xC1E256);
-    FA18_OP(0xC1E256, 0x32D8, 0xC1E258); /* C1E256: move.w  (A0)+, (A1)+ */
-    FA18_OP(0xC1E258, 0x3C18, 0xC1E25A); /* C1E258: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E25A, 0xDC42, 0xC1E25C); /* C1E25A: add.w   D2, D6 */
-    FA18_OP(0xC1E25C, 0x32C6, 0xC1E25E); /* C1E25C: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E25E, 0x3C18, 0xC1E260); /* C1E25E: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E260, 0xDC42, 0xC1E262); /* C1E260: add.w   D2, D6 */
-    FA18_OP(0xC1E262, 0x32C6, 0xC1E264); /* C1E262: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E264, 0x3C18, 0xC1E266); /* C1E264: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E266, 0xDC44, 0xC1E268); /* C1E266: add.w   D4, D6 */
-    FA18_OP(0xC1E268, 0x32C6, 0xC1E26A); /* C1E268: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E26A, 0x3C18, 0xC1E26C); /* C1E26A: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E26C, 0xDC44, 0xC1E26E); /* C1E26C: add.w   D4, D6 */
-    FA18_OP(0xC1E26E, 0x32C6, 0xC1E270); /* C1E26E: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E270, 0x2218, 0xC1E272); /* C1E270: move.l  (A0)+, D1 */
-    FA18_BCC(0xC1E272, 0x6E04, 0xC1E274, 0xC1E278, L_C1E278); /* C1E272: bgt     $c1e278 */
-L_C1E274:
-    FA18_CHECK(0xC1E274);
-    FA18_OP(0xC1E274, 0x22C1, 0xC1E276); /* C1E274: move.l  D1, (A1)+ */
-    FA18_JUMP(0xC1E276, 0x6004, 0xC1E27C, L_C1E27C); /* C1E276: bra     $c1e27c */
-L_C1E278:
-    FA18_CHECK(0xC1E278);
-    FA18_OP(0xC1E278, 0x2F09, 0xC1E27A); /* C1E278: move.l  A1, -(A7) */
-    FA18_OP(0xC1E27A, 0x5849, 0xC1E27C); /* C1E27A: addq.w  #4, A1 */
-L_C1E27C:
-    FA18_CHECK(0xC1E27C);
-    FA18_OP(0xC1E27C, 0x3E18, 0xC1E27E); /* C1E27C: move.w  (A0)+, D7 */
-    FA18_OP(0xC1E27E, 0x5347, 0xC1E280); /* C1E27E: subq.w  #1, D7 */
-L_C1E280:
-    FA18_CHECK(0xC1E280);
-    FA18_OP(0xC1E280, 0x3C18, 0xC1E282); /* C1E280: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E282, 0xDC42, 0xC1E284); /* C1E282: add.w   D2, D6 */
-    FA18_OP(0xC1E284, 0x32C6, 0xC1E286); /* C1E284: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E286, 0x3C18, 0xC1E288); /* C1E286: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E288, 0x32C6, 0xC1E28A); /* C1E288: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E28A, 0x3C18, 0xC1E28C); /* C1E28A: move.w  (A0)+, D6 */
-    FA18_OP(0xC1E28C, 0xDC44, 0xC1E28E); /* C1E28C: add.w   D4, D6 */
-    FA18_OP(0xC1E28E, 0x32C6, 0xC1E290); /* C1E28E: move.w  D6, (A1)+ */
-    FA18_OP(0xC1E290, 0x5C48, 0xC1E292); /* C1E290: addq.w  #6, A0 */
-    FA18_BCC(0xC1E292, 0x51CF, 0xC1E296, 0xC1E280, L_C1E280); /* C1E292: dbra    D7, $c1e280 */
-L_C1E296:
-    FA18_CHECK(0xC1E296);
-    FA18_OP(0xC1E296, 0x4A81, 0xC1E298); /* C1E296: tst.l   D1 */
-    FA18_BCC(0xC1E298, 0x6F22, 0xC1E29A, 0xC1E2BC, L_C1E2BC); /* C1E298: ble     $c1e2bc */
-L_C1E29A:
-    FA18_CHECK(0xC1E29A);
-    FA18_OP(0xC1E29A, 0x2E1F, 0xC1E29C); /* C1E29A: move.l  (A7)+, D7 */
-    FA18_OP(0xC1E29C, 0xCF89, 0xC1E29E); /* C1E29C: exg     D7, A1 */
-    FA18_OP(0xC1E29E, 0x2287, 0xC1E2A0); /* C1E29E: move.l  D7, (A1) */
-    FA18_OP(0xC1E2A0, 0xCF89, 0xC1E2A2); /* C1E2A0: exg     D7, A1 */
-    FA18_OP(0xC1E2A2, 0x2041, 0xC1E2A4); /* C1E2A2: movea.l D1, A0 */
-    FA18_JUMP(0xC1E2A4, 0x60B0, 0xC1E256, L_C1E256); /* C1E2A4: bra     $c1e256 */
-L_C1E2A6:
-    FA18_CHECK(0xC1E2A6);
-    FA18_OP(0xC1E2A6, 0x4880, 0xC1E2A8); /* C1E2A6: ext.w   D0 */
-    FA18_OP(0xC1E2A8, 0x3200, 0xC1E2AA); /* C1E2A8: move.w  D0, D1 */
-    FA18_OP(0xC1E2AA, 0x43F9, 0xC1E2B0); /* C1E2AA: lea     $c4d790.l, A1 */
-    FA18_OP(0xC1E2B0, 0xD241, 0xC1E2B2); /* C1E2B0: add.w   D1, D1 */
-    FA18_OP(0xC1E2B2, 0xD241, 0xC1E2B4); /* C1E2B2: add.w   D1, D1 */
-    FA18_OP(0xC1E2B4, 0x23BC, 0xC1E2BC); /* C1E2B4: move.l  #$ffffffff, (A1,D1.w) */
-L_C1E2BC:
-    FA18_CHECK(0xC1E2BC);
-    FA18_OP(0xC1E2BC, 0x5200, 0xC1E2BE); /* C1E2BC: addq.b  #1, D0 */
-    FA18_OP(0xC1E2BE, 0x0C00, 0xC1E2C2); /* C1E2BE: cmpi.b  #$b, D0 */
-    FA18_BCC(0xC1E2C2, 0x6C1C, 0xC1E2C4, 0xC1E2E0, L_C1E2E0); /* C1E2C2: bge     $c1e2e0 */
-L_C1E2C4:
-    FA18_CHECK(0xC1E2C4);
-    FA18_OP(0xC1E2C4, 0x5239, 0xC1E2CA); /* C1E2C4: addq.b  #1, $c4585f.l */
-    FA18_OP(0xC1E2CA, 0x1E39, 0xC1E2D0); /* C1E2CA: move.b  $c4585f.l, D7 */
-    FA18_OP(0xC1E2D0, 0xBE39, 0xC1E2D6); /* C1E2D0: cmp.b   $c4585e.l, D7 */
-    FA18_BCC(0xC1E2D6, 0x6C08, 0xC1E2D8, 0xC1E2E0, L_C1E2E0); /* C1E2D6: bge     $c1e2e0 */
-L_C1E2D8:
-    FA18_CHECK(0xC1E2D8);
-    FA18_OP(0xC1E2D8, 0x94FC, 0xC1E2DC); /* C1E2D8: suba.w  #$28, A2 */
-    FA18_JUMP(0xC1E2DC, 0x6000, 0xC1E1BE, L_C1E1BE); /* C1E2DC: bra     $c1e1be */
-L_C1E2E0:
-    FA18_CHECK(0xC1E2E0);
-    FA18_OP(0xC1E2E0, 0x4A39, 0xC1E2E6); /* C1E2E0: tst.b   $c45864.l */
-    FA18_BCC(0xC1E2E6, 0x673C, 0xC1E2E8, 0xC1E324, L_C1E324); /* C1E2E6: beq     $c1e324 */
-L_C1E2E8:
-    FA18_CHECK(0xC1E2E8);
-    FA18_OP(0xC1E2E8, 0x4A39, 0xC1E2EE); /* C1E2E8: tst.b   $c45866.l */
-    FA18_BCC(0xC1E2EE, 0x6634, 0xC1E2F0, 0xC1E324, L_C1E324); /* C1E2EE: bne     $c1e324 */
-L_C1E2F0:
-    FA18_CHECK(0xC1E2F0);
-    FA18_OP(0xC1E2F0, 0x41F9, 0xC1E2F6); /* C1E2F0: lea     $c4e98a.l, A0 */
-    FA18_OP(0xC1E2F6, 0x30BC, 0xC1E2FA); /* C1E2F6: move.w  #$ffff, (A0) */
-    FA18_OP(0xC1E2FA, 0x45F9, 0xC1E300); /* C1E2FA: lea     $c46184.l, A2 */
-    FA18_OP(0xC1E300, 0x4240, 0xC1E302); /* C1E300: clr.w   D0 */
-L_C1E302:
-    FA18_CHECK(0xC1E302);
-    FA18_OP(0xC1E302, 0x082A, 0xC1E308); /* C1E302: btst    #$6, ($1,A2) */
-    FA18_BCC(0xC1E308, 0x670E, 0xC1E30A, 0xC1E318, L_C1E318); /* C1E308: beq     $c1e318 */
-L_C1E30A:
-    FA18_CHECK(0xC1E30A);
-    FA18_OP(0xC1E30A, 0x082A, 0xC1E310); /* C1E30A: btst    #$2, ($1,A2) */
-    FA18_BCC(0xC1E310, 0x6706, 0xC1E312, 0xC1E318, L_C1E318); /* C1E310: beq     $c1e318 */
-L_C1E312:
-    FA18_CHECK(0xC1E312);
-    FA18_OP(0xC1E312, 0x30C0, 0xC1E314); /* C1E312: move.w  D0, (A0)+ */
-    FA18_OP(0xC1E314, 0x30BC, 0xC1E318); /* C1E314: move.w  #$ffff, (A0) */
-L_C1E318:
-    FA18_CHECK(0xC1E318);
-    FA18_OP(0xC1E318, 0x5240, 0xC1E31A); /* C1E318: addq.w  #1, D0 */
-    FA18_OP(0xC1E31A, 0xD4FC, 0xC1E31E); /* C1E31A: adda.w  #$200, A2 */
-    FA18_OP(0xC1E31E, 0x0C40, 0xC1E322); /* C1E31E: cmpi.w  #$10, D0 */
-    FA18_BCC(0xC1E322, 0x6DDE, 0xC1E324, 0xC1E302, L_C1E302); /* C1E322: blt     $c1e302 */
-L_C1E324:
-    FA18_CHECK(0xC1E324);
-    FA18_OP(0xC1E324, 0x4E5E, 0xC1E326); /* C1E324: unlk    A6 */
-    FA18_RETURN(0xC1E326, 0x4E75); /* C1E326: rts */
-}
-
-int fa18_fn_C1D3F4(int entry) {
-    switch (entry) {
-    case 0: goto L_C1D3F4;
-    case 1: goto L_C1D40C;
-    case 2: goto L_C1D42C;
-    case 3: goto L_C1D436;
-    case 4: goto L_C1D442;
-    case 5: goto L_C1D44C;
-    case 6: goto L_C1D456;
-    case 7: goto L_C1D45A;
-    case 8: goto L_C1D47C;
-    case 9: goto L_C1D480;
-    case 10: goto L_C1D488;
-    case 11: goto L_C1D49E;
-    case 12: goto L_C1D4BC;
-    case 13: goto L_C1D4BE;
-    case 14: goto L_C1D4C6;
-    case 15: goto L_C1D4D4;
-    case 16: goto L_C1D4D6;
-    case 17: goto L_C1D4DA;
-    case 18: goto L_C1D4DE;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1D3F4:
-    FA18_CHECK(0xC1D3F4);
-    FA18_OP(0xC1D3F4, 0x48E7, 0xC1D3F8); /* C1D3F4: movem.l D2-D5/A0-A5, -(A7) */
-    FA18_OP(0xC1D3F8, 0x3400, 0xC1D3FA); /* C1D3F8: move.w  D0, D2 */
-    FA18_OP(0xC1D3FA, 0x3601, 0xC1D3FC); /* C1D3FA: move.w  D1, D3 */
-    FA18_OP(0xC1D3FC, 0x206E, 0xC1D400); /* C1D3FC: movea.l (-$4,A6), A0 */
-    FA18_OP(0xC1D400, 0xD040, 0xC1D402); /* C1D400: add.w   D0, D0 */
-    FA18_OP(0xC1D402, 0xD0F0, 0xC1D406); /* C1D402: adda.w  (A0,D0.w), A0 */
-    FA18_OP(0xC1D406, 0x4A50, 0xC1D408); /* C1D406: tst.w   (A0) */
-    FA18_BCC(0xC1D408, 0x6D00, 0xC1D40C, 0xC1D4DA, L_C1D4DA); /* C1D408: blt     $c1d4da */
-L_C1D40C:
-    FA18_CHECK(0xC1D40C);
-    FA18_OP(0xC1D40C, 0xE740, 0xC1D40E); /* C1D40C: asl.w   #3, D0 */
-    FA18_OP(0xC1D40E, 0x3C01, 0xC1D410); /* C1D40E: move.w  D1, D6 */
-    FA18_OP(0xC1D410, 0x3801, 0xC1D412); /* C1D410: move.w  D1, D4 */
-    FA18_OP(0xC1D412, 0xEA46, 0xC1D414); /* C1D412: asr.w   #5, D6 */
-    FA18_OP(0xC1D414, 0xDC46, 0xC1D416); /* C1D414: add.w   D6, D6 */
-    FA18_OP(0xC1D416, 0xDC46, 0xC1D418); /* C1D416: add.w   D6, D6 */
-    FA18_OP(0xC1D418, 0xDC40, 0xC1D41A); /* C1D418: add.w   D0, D6 */
-    FA18_OP(0xC1D41A, 0x0244, 0xC1D41E); /* C1D41A: andi.w  #$1f, D4 */
-    FA18_OP(0xC1D41E, 0x2A6E, 0xC1D422); /* C1D41E: movea.l (-$8,A6), A5 */
-    FA18_OP(0xC1D422, 0x2A35, 0xC1D426); /* C1D422: move.l  (A5,D6.w), D5 */
-    FA18_OP(0xC1D426, 0x0905, 0xC1D428); /* C1D426: btst    D4, D5 */
-    FA18_BCC(0xC1D428, 0x6700, 0xC1D42C, 0xC1D4DA, L_C1D4DA); /* C1D428: beq     $c1d4da */
-L_C1D42C:
-    FA18_CHECK(0xC1D42C);
-    FA18_OP(0xC1D42C, 0x4BD0, 0xC1D42E); /* C1D42C: lea     (A0), A5 */
-    FA18_OP(0xC1D42E, 0xDAD0, 0xC1D430); /* C1D42E: adda.w  (A0), A5 */
-    FA18_OP(0xC1D430, 0x548D, 0xC1D432); /* C1D430: addq.l  #2, A5 */
-    FA18_CALL(0xC1D432, 0x6100, 0xC1D436, 148, 0); /* C1D432: bsr     $c1d4e4 */
-L_C1D436:
-    FA18_CHECK(0xC1D436);
-    FA18_OP(0xC1D436, 0xD040, 0xC1D438); /* C1D436: add.w   D0, D0 */
-    FA18_OP(0xC1D438, 0xD040, 0xC1D43A); /* C1D438: add.w   D0, D0 */
-    FA18_OP(0xC1D43A, 0x2A75, 0xC1D43E); /* C1D43A: movea.l (A5,D0.w), A5 */
-    FA18_OP(0xC1D43E, 0x123C, 0xC1D442); /* C1D43E: move.b  #$ff, D1 */
-L_C1D442:
-    FA18_CHECK(0xC1D442);
-    FA18_OP(0xC1D442, 0x101D, 0xC1D444); /* C1D442: move.b  (A5)+, D0 */
-    FA18_OP(0xC1D444, 0x0C00, 0xC1D448); /* C1D444: cmpi.b  #-$1, D0 */
-    FA18_BCC(0xC1D448, 0x6700, 0xC1D44C, 0xC1D4D6, L_C1D4D6); /* C1D448: beq     $c1d4d6 */
-L_C1D44C:
-    FA18_CHECK(0xC1D44C);
-    FA18_OP(0xC1D44C, 0x1C00, 0xC1D44E); /* C1D44C: move.b  D0, D6 */
-    FA18_OP(0xC1D44E, 0x0200, 0xC1D452); /* C1D44E: andi.b  #$f, D0 */
-    FA18_OP(0xC1D452, 0xB200, 0xC1D454); /* C1D452: cmp.b   D0, D1 */
-    FA18_BCC(0xC1D454, 0x6726, 0xC1D456, 0xC1D47C, L_C1D47C); /* C1D454: beq     $c1d47c */
-L_C1D456:
-    FA18_CHECK(0xC1D456);
-    FA18_CALL(0xC1D456, 0x6100, 0xC1D45A, 149, 1); /* C1D456: bsr     $c1d520 */
-L_C1D45A:
-    FA18_CHECK(0xC1D45A);
-    FA18_OP(0xC1D45A, 0x7A10, 0xC1D45C); /* C1D45A: moveq   #$10, D5 */
-    FA18_OP(0xC1D45C, 0x1200, 0xC1D45E); /* C1D45C: move.b  D0, D1 */
-    FA18_OP(0xC1D45E, 0x4880, 0xC1D460); /* C1D45E: ext.w   D0 */
-    FA18_OP(0xC1D460, 0xEB40, 0xC1D462); /* C1D460: asl.w   #5, D0 */
-    FA18_OP(0xC1D462, 0x3E00, 0xC1D464); /* C1D462: move.w  D0, D7 */
-    FA18_OP(0xC1D464, 0xD040, 0xC1D466); /* C1D464: add.w   D0, D0 */
-    FA18_OP(0xC1D466, 0xD047, 0xC1D468); /* C1D466: add.w   D7, D0 */
-    FA18_OP(0xC1D468, 0x45F1, 0xC1D46C); /* C1D468: lea     (A1,D0.w), A2 */
-    FA18_OP(0xC1D46C, 0x23CA, 0xC1D472); /* C1D46C: move.l  A2, $c45a2e.l */
-    FA18_OP(0xC1D472, 0x06B9, 0xC1D47C); /* C1D472: addi.l  #$5d, $c45a2e.l */
-L_C1D47C:
-    FA18_CHECK(0xC1D47C);
-    FA18_OP(0xC1D47C, 0x5305, 0xC1D47E); /* C1D47C: subq.b  #1, D5 */
-    FA18_BCC(0xC1D47E, 0x6D46, 0xC1D480, 0xC1D4C6, L_C1D4C6); /* C1D47E: blt     $c1d4c6 */
-L_C1D480:
-    FA18_CHECK(0xC1D480);
-    FA18_OP(0xC1D480, 0xB5F9, 0xC1D486); /* C1D480: cmpa.l  $c45a2e.l, A2 */
-    FA18_BCC(0xC1D486, 0x6C4E, 0xC1D488, 0xC1D4D6, L_C1D4D6); /* C1D486: bge     $c1d4d6 */
-L_C1D488:
-    FA18_CHECK(0xC1D488);
-    FA18_OP(0xC1D488, 0x1E1D, 0xC1D48A); /* C1D488: move.b  (A5)+, D7 */
-    FA18_OP(0xC1D48A, 0x1007, 0xC1D48C); /* C1D48A: move.b  D7, D0 */
-    FA18_OP(0xC1D48C, 0x0207, 0xC1D490); /* C1D48C: andi.b  #$80, D7 */
-    FA18_OP(0xC1D490, 0x14C7, 0xC1D492); /* C1D490: move.b  D7, (A2)+ */
-    FA18_OP(0xC1D492, 0x0200, 0xC1D496); /* C1D492: andi.b  #$7f, D0 */
-    FA18_OP(0xC1D496, 0x14C0, 0xC1D498); /* C1D496: move.b  D0, (A2)+ */
-    FA18_OP(0xC1D498, 0x0807, 0xC1D49C); /* C1D498: btst    #$7, D7 */
-    FA18_BCC(0xC1D49C, 0x671E, 0xC1D49E, 0xC1D4BC, L_C1D4BC); /* C1D49C: beq     $c1d4bc */
-L_C1D49E:
-    FA18_CHECK(0xC1D49E);
-    FA18_OP(0xC1D49E, 0xE80E, 0xC1D4A0); /* C1D49E: lsr.b   #4, D6 */
-    FA18_OP(0xC1D4A0, 0x0246, 0xC1D4A4); /* C1D4A0: andi.w  #$f, D6 */
-    FA18_OP(0xC1D4A4, 0xDC46, 0xC1D4A6); /* C1D4A4: add.w   D6, D6 */
-    FA18_OP(0xC1D4A6, 0x47F9, 0xC1D4AC); /* C1D4A6: lea     $c1d8b6.l, A3 */
-    FA18_OP(0xC1D4AC, 0x1033, 0xC1D4B0); /* C1D4AC: move.b  (A3,D6.w), D0 */
-    FA18_OP(0xC1D4B0, 0x4880, 0xC1D4B2); /* C1D4B0: ext.w   D0 */
-    FA18_OP(0xC1D4B2, 0x34C0, 0xC1D4B4); /* C1D4B2: move.w  D0, (A2)+ */
-    FA18_OP(0xC1D4B4, 0x1033, 0xC1D4B8); /* C1D4B4: move.b  ($1,A3,D6.w), D0 */
-    FA18_OP(0xC1D4B8, 0x34C0, 0xC1D4BA); /* C1D4B8: move.w  D0, (A2)+ */
-    FA18_JUMP(0xC1D4BA, 0x6002, 0xC1D4BE, L_C1D4BE); /* C1D4BA: bra     $c1d4be */
-L_C1D4BC:
-    FA18_CHECK(0xC1D4BC);
-    FA18_OP(0xC1D4BC, 0x24DD, 0xC1D4BE); /* C1D4BC: move.l  (A5)+, (A2)+ */
-L_C1D4BE:
-    FA18_CHECK(0xC1D4BE);
-    FA18_OP(0xC1D4BE, 0x14BC, 0xC1D4C2); /* C1D4BE: move.b  #$ff, (A2) */
-    FA18_JUMP(0xC1D4C2, 0x6000, 0xC1D442, L_C1D442); /* C1D4C2: bra     $c1d442 */
-L_C1D4C6:
-    FA18_CHECK(0xC1D4C6);
-    FA18_OP(0xC1D4C6, 0x33FC, 0xC1D4CE); /* C1D4C6: move.w  #$38, $c4599e.l */
-    FA18_CALL(0xC1D4CE, 0x4EB9, 0xC1D4D4, 15, 0); /* C1D4CE: jsr     $c06c02.l */
-L_C1D4D4:
-    FA18_CHECK(0xC1D4D4);
-    FA18_JUMP(0xC1D4D4, 0x60F0, 0xC1D4C6, L_C1D4C6); /* C1D4D4: bra     $c1d4c6 */
-L_C1D4D6:
-    FA18_CHECK(0xC1D4D6);
-    FA18_CALL(0xC1D4D6, 0x6100, 0xC1D4DA, 149, 1); /* C1D4D6: bsr     $c1d520 */
-L_C1D4DA:
-    FA18_CHECK(0xC1D4DA);
-    FA18_CALL(0xC1D4DA, 0x6100, 0xC1D4DE, 150, 3); /* C1D4DA: bsr     $c1d5d8 */
-L_C1D4DE:
-    FA18_CHECK(0xC1D4DE);
-    FA18_OP(0xC1D4DE, 0x4CDF, 0xC1D4E2); /* C1D4DE: movem.l (A7)+, D2-D5/A0-A5 */
-    FA18_RETURN(0xC1D4E2, 0x4E75); /* C1D4E2: rts */
-}
-
-int fa18_fn_C1D4E4(int entry) {
-    switch (entry) {
-    case 0: goto L_C1D4E4;
-    case 1: goto L_C1D4EA;
-    case 2: goto L_C1D4F0;
-    case 3: goto L_C1D4FE;
-    case 4: goto L_C1D500;
-    case 5: goto L_C1D506;
-    case 6: goto L_C1D50C;
-    case 7: goto L_C1D50E;
-    case 8: goto L_C1D51C;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1D4E4:
-    FA18_CHECK(0xC1D4E4);
-    FA18_OP(0xC1D4E4, 0x7C00, 0xC1D4E6); /* C1D4E4: moveq   #$0, D6 */
-    FA18_OP(0xC1D4E6, 0x3E18, 0xC1D4E8); /* C1D4E6: move.w  (A0)+, D7 */
-    FA18_OP(0xC1D4E8, 0xE247, 0xC1D4EA); /* C1D4E8: asr.w   #1, D7 */
-L_C1D4EA:
-    FA18_CHECK(0xC1D4EA);
-    FA18_OP(0xC1D4EA, 0x3007, 0xC1D4EC); /* C1D4EA: move.w  D7, D0 */
-    FA18_OP(0xC1D4EC, 0x9046, 0xC1D4EE); /* C1D4EC: sub.w   D6, D0 */
-    FA18_BCC(0xC1D4EE, 0x6D1E, 0xC1D4F0, 0xC1D50E, L_C1D50E); /* C1D4EE: blt     $c1d50e */
-L_C1D4F0:
-    FA18_CHECK(0xC1D4F0);
-    FA18_OP(0xC1D4F0, 0xE240, 0xC1D4F2); /* C1D4F0: asr.w   #1, D0 */
-    FA18_OP(0xC1D4F2, 0xD046, 0xC1D4F4); /* C1D4F2: add.w   D6, D0 */
-    FA18_OP(0xC1D4F4, 0x3800, 0xC1D4F6); /* C1D4F4: move.w  D0, D4 */
-    FA18_OP(0xC1D4F6, 0xD844, 0xC1D4F8); /* C1D4F6: add.w   D4, D4 */
-    FA18_OP(0xC1D4F8, 0xB270, 0xC1D4FC); /* C1D4F8: cmp.w   (A0,D4.w), D1 */
-    FA18_BCC(0xC1D4FC, 0x670E, 0xC1D4FE, 0xC1D50C, L_C1D50C); /* C1D4FC: beq     $c1d50c */
-L_C1D4FE:
-    FA18_CHECK(0xC1D4FE);
-    FA18_BCC(0xC1D4FE, 0x6D06, 0xC1D500, 0xC1D506, L_C1D506); /* C1D4FE: blt     $c1d506 */
-L_C1D500:
-    FA18_CHECK(0xC1D500);
-    FA18_OP(0xC1D500, 0x3C00, 0xC1D502); /* C1D500: move.w  D0, D6 */
-    FA18_OP(0xC1D502, 0x5246, 0xC1D504); /* C1D502: addq.w  #1, D6 */
-    FA18_JUMP(0xC1D504, 0x60E4, 0xC1D4EA, L_C1D4EA); /* C1D504: bra     $c1d4ea */
-L_C1D506:
-    FA18_CHECK(0xC1D506);
-    FA18_OP(0xC1D506, 0x3E00, 0xC1D508); /* C1D506: move.w  D0, D7 */
-    FA18_OP(0xC1D508, 0x5347, 0xC1D50A); /* C1D508: subq.w  #1, D7 */
-    FA18_JUMP(0xC1D50A, 0x60DE, 0xC1D4EA, L_C1D4EA); /* C1D50A: bra     $c1d4ea */
-L_C1D50C:
-    FA18_CHECK(0xC1D50C);
-    FA18_RETURN(0xC1D50C, 0x4E75); /* C1D50C: rts */
-L_C1D50E:
-    FA18_CHECK(0xC1D50E);
-    FA18_OP(0xC1D50E, 0x33FC, 0xC1D516); /* C1D50E: move.w  #$1c, $c4599e.l */
-    FA18_CALL(0xC1D516, 0x4EB9, 0xC1D51C, 15, 0); /* C1D516: jsr     $c06c02.l */
-L_C1D51C:
-    FA18_CHECK(0xC1D51C);
-    FA18_RETURN(0xC1D51C, 0x4E75); /* C1D51C: rts */
-}
-
-int fa18_fn_C1D520(int entry) {
-    switch (entry) {
-    case 0: goto L_C1D51E;
-    case 1: goto L_C1D520;
-    case 2: goto L_C1D524;
-    case 3: goto L_C1D52C;
-    case 4: goto L_C1D53E;
-    case 5: goto L_C1D546;
-    case 6: goto L_C1D54E;
-    case 7: goto L_C1D554;
-    case 8: goto L_C1D55A;
-    case 9: goto L_C1D560;
-    case 10: goto L_C1D570;
-    case 11: goto L_C1D57C;
-    case 12: goto L_C1D584;
-    case 13: goto L_C1D58C;
-    case 14: goto L_C1D594;
-    case 15: goto L_C1D59A;
-    case 16: goto L_C1D5A0;
-    case 17: goto L_C1D5A6;
-    case 18: goto L_C1D5B6;
-    case 19: goto L_C1D5C2;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C1D51E:
-    FA18_CHECK(0xC1D51E);
-    FA18_RETURN(0xC1D51E, 0x4E75); /* C1D51E: rts */
-L_C1D520:
-    FA18_CHECK(0xC1D520);
-    FA18_OP(0xC1D520, 0x4A01, 0xC1D522); /* C1D520: tst.b   D1 */
-    FA18_BCC(0xC1D522, 0x6DFA, 0xC1D524, 0xC1D51E, L_C1D51E); /* C1D522: blt     $c1d51e */
-L_C1D524:
-    FA18_CHECK(0xC1D524);
-    FA18_OP(0xC1D524, 0x4A39, 0xC1D52A); /* C1D524: tst.b   $c45864.l */
-    FA18_BCC(0xC1D52A, 0x67F2, 0xC1D52C, 0xC1D51E, L_C1D51E); /* C1D52A: beq     $c1d51e */
-L_C1D52C:
-    FA18_CHECK(0xC1D52C);
-    FA18_OP(0xC1D52C, 0x33FC, 0xC1D534); /* C1D52C: move.w  #$50, $c45ad4.l */
-    FA18_OP(0xC1D534, 0x2F06, 0xC1D536); /* C1D534: move.l  D6, -(A7) */
-    FA18_OP(0xC1D536, 0x41F9, 0xC1D53C); /* C1D536: lea     $c46184.l, A0 */
-    FA18_OP(0xC1D53C, 0x7C00, 0xC1D53E); /* C1D53C: moveq   #$0, D6 */
-L_C1D53E:
-    FA18_CHECK(0xC1D53E);
-    FA18_OP(0xC1D53E, 0x0828, 0xC1D544); /* C1D53E: btst    #$6, ($1,A0) */
-    FA18_BCC(0xC1D544, 0x672A, 0xC1D546, 0xC1D570, L_C1D570); /* C1D544: beq     $c1d570 */
-L_C1D546:
-    FA18_CHECK(0xC1D546);
-    FA18_OP(0xC1D546, 0x0828, 0xC1D54C); /* C1D546: btst    #$4, ($1,A0) */
-    FA18_BCC(0xC1D54C, 0x6722, 0xC1D54E, 0xC1D570, L_C1D570); /* C1D54C: beq     $c1d570 */
-L_C1D54E:
-    FA18_CHECK(0xC1D54E);
-    FA18_OP(0xC1D54E, 0xB668, 0xC1D552); /* C1D54E: cmp.w   ($6,A0), D3 */
-    FA18_BCC(0xC1D552, 0x661C, 0xC1D554, 0xC1D570, L_C1D570); /* C1D552: bne     $c1d570 */
-L_C1D554:
-    FA18_CHECK(0xC1D554);
-    FA18_OP(0xC1D554, 0xB468, 0xC1D558); /* C1D554: cmp.w   ($8,A0), D2 */
-    FA18_BCC(0xC1D558, 0x6616, 0xC1D55A, 0xC1D570, L_C1D570); /* C1D558: bne     $c1d570 */
-L_C1D55A:
-    FA18_CHECK(0xC1D55A);
-    FA18_OP(0xC1D55A, 0xB228, 0xC1D55E); /* C1D55A: cmp.b   ($a,A0), D1 */
-    FA18_BCC(0xC1D55E, 0x6610, 0xC1D560, 0xC1D570, L_C1D570); /* C1D55E: bne     $c1d570 */
-L_C1D560:
-    FA18_CHECK(0xC1D560);
-    FA18_OP(0xC1D560, 0x08A8, 0xC1D566); /* C1D560: bclr    #$4, ($1,A0) */
-    FA18_OP(0xC1D566, 0x14FC, 0xC1D56A); /* C1D566: move.b  #$10, (A2)+ */
-    FA18_OP(0xC1D56A, 0x14C6, 0xC1D56C); /* C1D56A: move.b  D6, (A2)+ */
-    FA18_OP(0xC1D56C, 0x14BC, 0xC1D570); /* C1D56C: move.b  #$ff, (A2) */
-L_C1D570:
-    FA18_CHECK(0xC1D570);
-    FA18_OP(0xC1D570, 0xD0FC, 0xC1D574); /* C1D570: adda.w  #$200, A0 */
-    FA18_OP(0xC1D574, 0x5206, 0xC1D576); /* C1D574: addq.b  #1, D6 */
-    FA18_OP(0xC1D576, 0x0C06, 0xC1D57A); /* C1D576: cmpi.b  #$10, D6 */
-    FA18_BCC(0xC1D57A, 0x6DC2, 0xC1D57C, 0xC1D53E, L_C1D53E); /* C1D57A: blt     $c1d53e */
-L_C1D57C:
-    FA18_CHECK(0xC1D57C);
-    FA18_OP(0xC1D57C, 0x41F9, 0xC1D582); /* C1D57C: lea     $c48184.l, A0 */
-    FA18_OP(0xC1D582, 0x7C00, 0xC1D584); /* C1D582: moveq   #$0, D6 */
-L_C1D584:
-    FA18_CHECK(0xC1D584);
-    FA18_OP(0xC1D584, 0x0828, 0xC1D58A); /* C1D584: btst    #$6, ($1,A0) */
-    FA18_BCC(0xC1D58A, 0x672A, 0xC1D58C, 0xC1D5B6, L_C1D5B6); /* C1D58A: beq     $c1d5b6 */
-L_C1D58C:
-    FA18_CHECK(0xC1D58C);
-    FA18_OP(0xC1D58C, 0x0828, 0xC1D592); /* C1D58C: btst    #$4, ($1,A0) */
-    FA18_BCC(0xC1D592, 0x6722, 0xC1D594, 0xC1D5B6, L_C1D5B6); /* C1D592: beq     $c1d5b6 */
-L_C1D594:
-    FA18_CHECK(0xC1D594);
-    FA18_OP(0xC1D594, 0xB668, 0xC1D598); /* C1D594: cmp.w   ($6,A0), D3 */
-    FA18_BCC(0xC1D598, 0x661C, 0xC1D59A, 0xC1D5B6, L_C1D5B6); /* C1D598: bne     $c1d5b6 */
-L_C1D59A:
-    FA18_CHECK(0xC1D59A);
-    FA18_OP(0xC1D59A, 0xB468, 0xC1D59E); /* C1D59A: cmp.w   ($8,A0), D2 */
-    FA18_BCC(0xC1D59E, 0x6616, 0xC1D5A0, 0xC1D5B6, L_C1D5B6); /* C1D59E: bne     $c1d5b6 */
-L_C1D5A0:
-    FA18_CHECK(0xC1D5A0);
-    FA18_OP(0xC1D5A0, 0xB228, 0xC1D5A4); /* C1D5A0: cmp.b   ($a,A0), D1 */
-    FA18_BCC(0xC1D5A4, 0x6610, 0xC1D5A6, 0xC1D5B6, L_C1D5B6); /* C1D5A4: bne     $c1d5b6 */
-L_C1D5A6:
-    FA18_CHECK(0xC1D5A6);
-    FA18_OP(0xC1D5A6, 0x08A8, 0xC1D5AC); /* C1D5A6: bclr    #$4, ($1,A0) */
-    FA18_OP(0xC1D5AC, 0x14FC, 0xC1D5B0); /* C1D5AC: move.b  #$40, (A2)+ */
-    FA18_OP(0xC1D5B0, 0x14C6, 0xC1D5B2); /* C1D5B0: move.b  D6, (A2)+ */
-    FA18_OP(0xC1D5B2, 0x14BC, 0xC1D5B6); /* C1D5B2: move.b  #$ff, (A2) */
-L_C1D5B6:
-    FA18_CHECK(0xC1D5B6);
-    FA18_OP(0xC1D5B6, 0xD0FC, 0xC1D5BA); /* C1D5B6: adda.w  #$20, A0 */
-    FA18_OP(0xC1D5BA, 0x5206, 0xC1D5BC); /* C1D5BA: addq.b  #1, D6 */
-    FA18_OP(0xC1D5BC, 0x0C06, 0xC1D5C0); /* C1D5BC: cmpi.b  #$10, D6 */
-    FA18_BCC(0xC1D5C0, 0x6DC2, 0xC1D5C2, 0xC1D584, L_C1D584); /* C1D5C0: blt     $c1d584 */
-L_C1D5C2:
-    FA18_CHECK(0xC1D5C2);
-    FA18_OP(0xC1D5C2, 0x2C1F, 0xC1D5C4); /* C1D5C2: move.l  (A7)+, D6 */
-    FA18_RETURN(0xC1D5C4, 0x4E75); /* C1D5C4: rts */
 }

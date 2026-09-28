@@ -17,6 +17,23 @@ The verified Amiga plane geometry is four 8,000-byte planes, 40 bytes per row,
 horizontally at x=40..679, y=16..215. These are distinct dimensions. The host
 PNG crop is an oracle, not game source data.
 
+## Deliverable
+
+**Recreated, readable C source for the whole game.** Named functions, structs
+and fixed-point types, with no CPU emulator and no generated 68000 code in
+the final build. The mechanical translation and the Musashi interpreter
+(Stages A-C) are scaffolding with two jobs:
+
+- keep the whole game running and rendering at every step;
+- act as the reference each hand-written routine is proven against.
+
+Stage D, turning every generated routine into readable C, is the actual
+work. It proceeds routine by routine under differential tests until no
+generated routine and no interpreter call remain. After that, the OS
+replacement and the chipset layer are the only non-game code. They become
+the direct native renderer, audio and input described under "Target and
+authority".
+
 ## Strategy change (2026-09-28)
 
 The previous sequence ported one bounded routine slice at a time, bottom-up.
@@ -90,11 +107,17 @@ frame-392 restore. Done when `scripts/render_native_visual.py --frame 402`
 reports nonblack native pixels from the translated path. Then widen to the
 whole program.
 
-**Status 2026-09-28: milestone met.** The translated path draws frame 402
-(`fa18_recomp`, built by `scripts/build_recomp.sh`) and frames 393-397, 399
-and 401 are pixel-exact against Engine9000. The first diverging frame is 398,
-caused by chip-bus contention timing. `CURRENT_PORT_HANDOFF.md` has the
-current metric and next blocker; `scripts/recomp_parity.py` reproduces it.
+**Status 2026-09-28: milestone met; the game renders natively.**
+`fa18_recomp --window` plays run075 from the menu through the recorded demo
+selection into flight, live at 50 Hz, in an SDL2 window. It also accepts live
+keyboard and mouse input. Build it with CMake (`port/recomp/CMakeLists.txt`,
+MSVC or gcc) or `scripts/build_recomp.sh` (gcc, headless).
+
+- From the frame-392 snapshot, 8 of the 10 frames 393-402 are pixel-exact
+  against Engine9000.
+- From the menu, frame 500 matches at 99.6%.
+- Over 3,000 frames the flight path drifts because of CPU/bus timing (see
+  `CURRENT_PORT_HANDOFF.md`).
 
 ### Rules that change
 

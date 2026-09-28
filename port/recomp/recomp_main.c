@@ -48,7 +48,9 @@ static void usage(void) {
 }
 
 #ifdef FA18_WITH_SDL
+#ifndef SDL_MAIN_HANDLED
 #define SDL_MAIN_HANDLED
+#endif
 #include <SDL.h>
 
 /* Live 50 Hz window. Keys go to the Amiga keyboard; clicking the window
