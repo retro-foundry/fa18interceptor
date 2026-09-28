@@ -835,8 +835,17 @@ so this evidence rejects attaching `$C279D0` to every native presentation
 frame.  The remaining owner is the upstream `$C0F5F8/$C11B44` gate state,
 not a frame-number schedule.
 
+`post_input_tick.{c,h}` now separately ports the complete static
+`$C0F5F8-$C0F811` local state machine: early guards, longword offset
+calculation, all four callback selections, and the unconditional tail's
+byte/word wrapping writes. `$C06C02` and `JSR (A0)` remain required,
+caller-owned hooks; absent hooks return an explicit error after the local
+source writes rather than silently supplying a callback. This makes the
+upstream `$C45795` gate state representable without conflating it with the
+bounded menu fixture, but it is not yet scheduled by `game.c`.
+
 Current validated state uses `build\\port-native`: native build audit passes
-277 files, `ctest` passes 146/146, and frame parity remains 192 exact frames
+279 files, `ctest` passes 148/148, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 
