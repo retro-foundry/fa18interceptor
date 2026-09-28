@@ -538,6 +538,15 @@ Existing page, packet, grid, viewport, and palette modules are building
 blocks, but they are not yet scheduled by the game loop.  In particular, do
 not naively advance/present a blank page just to make frame 392 change.
 
+`projection_page_blitter.{c,h}` now bridges the typed `$C30668` line packets
+and `$C303EC-$C30404` final fill/lane tail onto a caller-owned five-plane page.
+It validates that the source-order lane pointers match the page's Chip binding,
+preserves the caller-provided inherited blitter registers, and synchronizes at
+each line/fill boundary. The adapter is available as the two
+`FA18ProjectionPairSubmission` callbacks, but is deliberately not yet wired
+to `game.c`: the parent still must provide its actual record, matrix, page,
+lane state, and scheduler cadence. `ctest` passes 120/120 contracts.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
