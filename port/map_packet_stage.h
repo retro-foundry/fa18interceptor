@@ -6,11 +6,12 @@
 
 typedef int (*FA18MapPacketDisplayStage)(
     void *context, const FA18MapPacketProjectionRecord *records,
-    uint16_t record_count);
+    uint16_t record_count, uint16_t coordinate_shift);
 
 typedef struct {
     FA18MapPacketSelectorInput selector;
     FA18MapPacketTransform transform;
+    uint16_t coordinate_shift;
     FA18MapPacketDisplayStage display_stage;
     void *display_context;
 } FA18MapPacketStageInput;

@@ -22,8 +22,9 @@ static int stream(void *context, uint32_t address, const uint8_t **data,
 }
 
 static int display(void *context, const FA18MapPacketProjectionRecord *records,
-                   uint16_t count) {
+                   uint16_t count, uint16_t coordinate_shift) {
     Fixture *fixture = context;
+    (void)coordinate_shift;
     if (!records || count != 1) return -1;
     ++fixture->displays;
     return 0;
@@ -39,7 +40,7 @@ static int record(void *context, const FA18MapPacketPassSelectorResult *pass,
         0, {0,0,0,0,0}, {0,0,0,0,1,0x80,0,0,0,0},
         {{packet, sizeof packet, INT32_C(0x00120000), 0, {256,-256,128},
           16,0,0,0}, {0,{0,0,0},0,{{256,0,0,0,0,256,128,0,128}}},
-         display, fixture}
+         0, display, fixture}
     };
     return 0;
 }

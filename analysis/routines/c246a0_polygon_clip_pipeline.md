@@ -4,8 +4,9 @@ Authority: `build/run075_frame382_c246_stage/`, captured during the ordinary
 run075 render-page preparation pass. The invocation begins at `$C246A0` and
 returns to `$C2AFE8` after 3,129 instructions.
 
-The source reads 13 triples from `$C4BF94` with zero coordinate shift and
-leaves 14 triples at `$C4B990` before `$C24CFE` projects and submits them.
+The source reads 13 triples from `$C4BF94` with coordinate shift two
+(`D3=2` at entry) and leaves 14 triples at `$C4B990` before `$C24CFE`
+projects and submits them.
 The traced path enters the outer loop, both tuple-cache children, and all four
 post-loop closures. Its result is source-order clipping against the four
 planes `y=z`, `-y=z`, `x=z`, and `-x=z`; the first and final crossings are
@@ -20,3 +21,9 @@ checks the exact 14-tuple `$C4B990` result. It is a producer for the existing
 positive-depth projection and `$C2FF48` DMA-enabled list wrapper. Its same
 witness checks all 14 projected pairs at `$C4B390`, including `(0,89)`,
 `(319,91)`, and the closing `(0,179)`, and confirms one `$8400` DMA write.
+
+`map_packet_polygon_display.{c,h}` is the direct `$C2AFE2` callback adapter:
+it copies the preceding map packet's three-word records into the clip input,
+passes the caller-owned live shift, and routes the result to the already bound
+`$C2FF48` submission state.  It does not select a page, retain a shift, or
+schedule rendering.

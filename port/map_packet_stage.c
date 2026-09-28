@@ -39,7 +39,8 @@ int fa18_run_map_packet_stage(const FA18MapPacketStageInput *input,
     if (fa18_transform_map_packet_pairs(&transform, pairs, (uint16_t)selection.pair_count,
                                         selection.pair_count, records, record_capacity,
                                         record_count) != 0 ||
-        input->display_stage(input->display_context, records, *record_count) != 0)
+        input->display_stage(input->display_context, records, *record_count,
+                             input->coordinate_shift) != 0)
         return -1;
     *route = FA18_MAP_PACKET_STAGE_DISPLAYED;
     return 0;

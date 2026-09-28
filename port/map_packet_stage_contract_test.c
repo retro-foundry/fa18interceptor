@@ -5,9 +5,9 @@
 typedef struct { uint16_t calls; FA18MapPacketProjectionRecord record; } Fixture;
 
 static int display(void *context, const FA18MapPacketProjectionRecord *records,
-                   uint16_t count) {
+                   uint16_t count, uint16_t coordinate_shift) {
     Fixture *fixture = context;
-    if (!fixture || count != 1) return -1;
+    if (!fixture || count != 1 || coordinate_shift != 0) return -1;
     ++fixture->calls;
     fixture->record = records[0];
     return 0;
@@ -20,7 +20,7 @@ int main(void) {
         {packet, sizeof packet, 0x00120000, 0, {256, -256, 128}, 16, 0, 0, 0},
         {UINT32_C(0x000a0014), {0,0,0}, 0,
          {{256, 0, 0, 0, 0, 256, 128, 0, 128}}},
-        display, &fixture
+        0, display, &fixture
     };
     FA18MapPacketProjectionRecord records[0x12];
     uint16_t count;

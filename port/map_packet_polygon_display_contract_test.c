@@ -1,4 +1,4 @@
-#include "polygon_display_pipeline.h"
+#include "map_packet_polygon_display.h"
 
 #include <assert.h>
 
@@ -27,12 +27,12 @@ static int final(void *context, const FA18ProjectionPairFinalState *state) {
 }
 
 int main(void) {
-    const FA18ClipTuple input[] = {
-        {2383,-8,1982}, {1030,-8,1869}, {1022,-8,1829},
-        {737,-8,1708}, {606,-8,1790}, {633,-8,1855},
-        {435,-8,1848}, {274,-8,1739}, {554,-8,1789},
-        {236,-8,1682}, {-337,-8,1311}, {-241,-8,-213},
-        {2515,-8,-114}
+    const FA18MapPacketProjectionRecord records[] = {
+        {{2383,-8,1982}}, {{1030,-8,1869}}, {{1022,-8,1829}},
+        {{737,-8,1708}}, {{606,-8,1790}}, {{633,-8,1855}},
+        {{435,-8,1848}}, {{274,-8,1739}}, {{554,-8,1789}},
+        {{236,-8,1682}}, {{-337,-8,1311}}, {{-241,-8,-213}},
+        {{2515,-8,-114}}
     };
     Calls calls = {0};
     const FA18ProjectionPairSubmission submission = {
@@ -40,8 +40,9 @@ int main(void) {
         protected_line, 0, blit, final, &calls
     };
     FA18PolygonDisplayPipelineResult result;
+    FA18MapPacketPolygonDisplay display = {&submission, &result};
 
-    assert(fa18_run_polygon_display_pipeline(input, 13, 2, &submission, &result) == 1);
+    assert(fa18_display_map_packet_polygon(&display, records, 13, 2) == 0);
     assert(result.clipped_count == 14 && result.pair_count == 14);
     assert(result.pairs[0].x == 0 && result.pairs[0].y == 89 &&
            result.pairs[11].x == 319 && result.pairs[11].y == 91 &&

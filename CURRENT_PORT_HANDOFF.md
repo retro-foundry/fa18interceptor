@@ -1073,8 +1073,8 @@ selected-list path produces page geometry; it is still unscheduled until the
 parent owns the live matrix/workspace and source gate cadence.
 
 The ordinary run075 prepared-page window now has an exact `$C246A0` polygon
-clip witness. At global frame 382 it reads 13 zero-shift triples from
-`$C4BF94`, runs both clip-cache leaves and all four final closures, then leaves
+clip witness. At global frame 382 it reads 13 shift-two triples from
+`$C4BF94` (`D3=2` at the clip entry), runs both clip-cache leaves and all four final closures, then leaves
 14 source-ordered triples at `$C4B990` before `$C24CFE` projects/submits them.
 `polygon_clip_pipeline.{c,h}` ports that four-plane (`y=z`, `-y=z`, `x=z`,
 `-x=z`) composition with source word rounding; its contract matches every
@@ -1088,9 +1088,13 @@ result to the selected renderer page and the parent cadence to schedule it.
 result into source screen-pair order, and invokes the distinct DMA-enabled
 tuple-list wrapper once. The run075 frame-382 contract confirms all 14
 `$C4B390` pairs (including the closing `(0,179)` pair) and the one `$8400`
-DMA submission. A future `$C246A0` map-display callback can bind this directly
-to the selected page's renderer submission; normal cadence and map-record
-ownership remain unresolved.
+DMA submission. `map_packet_polygon_display.{c,h}` is now that typed
+`$C2AFE2 -> $C246A0` callback: it copies the just-produced map records, takes
+the detail gate's live shift word, and passes them to the existing submission
+object. The map-record stage propagates the same gate shift through its
+display boundary; no shift, page, capture, or scheduler is retained by the
+adapter. Normal cadence, map-record ownership, and the selected renderer-page
+binding remain unresolved.
 
 ## Standard validation after each stage
 

@@ -2,7 +2,7 @@
 
 #include <assert.h>
 
-typedef struct { uint16_t calls; } Fixture;
+typedef struct { uint16_t calls, expected_shift; } Fixture;
 
 typedef struct {
     Fixture display;
@@ -13,10 +13,20 @@ typedef struct {
 } RelativeFixture;
 
 static int display(void *context, const FA18MapPacketProjectionRecord *records,
-                   uint16_t count) {
+                   uint16_t count, uint16_t coordinate_shift) {
     Fixture *fixture = context;
-    if (!fixture || !records || count != 1) return -1;
+    if (!fixture || !records || count != 1 ||
+        coordinate_shift != fixture->expected_shift) return -1;
     ++fixture->calls;
+    return 0;
+}
+
+static int resolve_inline_stream(void *context, uint32_t reference,
+                                 const uint8_t **stream, size_t *size) {
+    const uint8_t *packet = context;
+    if (!packet || reference != 0) return -1;
+    *stream = packet + 4;
+    *size = 6;
     return 0;
 }
 
@@ -47,7 +57,7 @@ int main(void) {
         {{packet, sizeof packet, INT32_C(0x00120000), 0, {256, -256, 128},
           16, 0, 0, 0},
          {0, {0,0,0}, 0, {{256, 0, 0, 0, 0, 256, 128, 0, 128}}},
-         display, &fixture}
+         0, display, &fixture}
     };
     FA18MapPacketProjectionRecord records[0x12];
     uint16_t count;
@@ -56,6 +66,17 @@ int main(void) {
                                             &route) == 0);
     assert(route == FA18_MAP_PACKET_RECORD_DISPLAYED && count == 1 &&
            fixture.calls == 1);
+
+    FA18MapPacketRecordStageInput shifted = input;
+    shifted.encoded_mode = 4;
+    shifted.gate = (FA18MapDetailGateInput){0, 1, 0, 1, 0x400};
+    shifted.packet_stage.selector.resolve_stream = resolve_inline_stream;
+    shifted.packet_stage.selector.context = (void *)packet;
+    fixture.expected_shift = 2;
+    assert(fa18_run_map_packet_record_stage(&shifted, records, 0x12, &count, 0,
+                                            &route) == 0 &&
+           route == FA18_MAP_PACKET_RECORD_DISPLAYED && count == 1 &&
+           fixture.calls == 2);
 
     FA18MapPacketRecordStageInput terminator = input;
     terminator.encoded_mode = -1;
