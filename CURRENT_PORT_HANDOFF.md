@@ -19,6 +19,14 @@ five-plane line emitter.
 Validation after this change: 195/195 CTest contracts pass and the native
 build checker sees 372 sources.
 
+`line_record_dispatch.{c,h}` binds only the proved `$C1F942` table slot
+`$0034` to `$C212B0 -> $C2EE4A -> $C2FA7E`.  Its source-addressed `$C212B0`
+input retains the big-endian A2 stream and `$C48390` table; it neither imports
+a capture page nor fabricates host geometry.  The frame-602 contract starts at
+the real A2 `$C3985A`, reads pair offsets 342/348, and reaches the native line
+callback with the original output `(173,68)->(163,68)`.  Other table selectors
+fail explicitly until their P-code targets are ported.
+
 ## Latest visible primitive
 
 `offset_pair_segment_submission.{c,h}` ports `$C212B0-$C2131B`, the direct

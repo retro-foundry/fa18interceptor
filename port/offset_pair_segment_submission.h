@@ -27,11 +27,30 @@ typedef struct {
     uint16_t result_flags; /* OR of each `$C2EE4A` result. */
 } FA18OffsetPairSegmentSubmissionResult;
 
+/* Source-addressed counterpart used when `$C1F942` supplies A2 directly.
+ * Both byte ranges remain big-endian original-memory views. */
+typedef struct {
+    const uint8_t *vertex_bytes; /* `$C48390`. */
+    size_t vertex_byte_count;
+    const uint8_t *stream_bytes; /* A2 record stream. */
+    size_t stream_byte_count;
+    uint32_t stream_base;
+    uint32_t stream_cursor;
+    FA18ProjectedSegmentPreparer prepare_segment;
+    void *prepare_context;
+} FA18OffsetPairSegmentStreamInput;
+
 /* `$C212B0-$C2131B`: resolve source offset pairs through the mutable
  * transformed-vertex table, preserve the negative-second-offset terminator,
  * and invoke the caller-owned exact `$C2EE4A` port for eligible pairs. */
 int fa18_submit_offset_pair_segments(
     const FA18OffsetPairSegmentSubmissionInput *input,
+    FA18OffsetPairSegmentSubmissionResult *result);
+
+/* `$C212B0-$C2131B`, source-addressed form: decode the A2 selector/pair
+ * record without reconstructing host-endian vertex or stream arrays. */
+int fa18_submit_offset_pair_segment_stream(
+    const FA18OffsetPairSegmentStreamInput *input,
     FA18OffsetPairSegmentSubmissionResult *result);
 
 #endif
