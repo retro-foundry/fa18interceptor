@@ -97,6 +97,11 @@ and signed-quotient overflow instead of pretending the original exception
 returns. The enclosing coordinate-update formula is still an explicit evidence
 gap and is not scheduled.
 
+`magnitude_refinement.{c,h}` now ports `$C2564E-$C25703`, the three-range
+unsigned divide/refinement helper that publishes `$C45B68` from `$C45B64` for
+the same coordinate path. Its DIVU.W fault conditions stay explicit; it has
+not been used to infer the still-unrecovered `$C123FA` branches.
+
 ## Next context: live scene rendering
 
 Do not add a frame-number trigger or captured page to `game.c`. The source
