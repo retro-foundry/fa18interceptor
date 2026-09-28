@@ -1198,6 +1198,11 @@ flags. It is available to compose with `terrain_template_workspace_pass`, but
 is not attached to the native frame loop before the flight parent cadence is
 ported.
 
+`terrain_template_selector_pass.{c,h}` now composes the cursor resolver with
+the workspace producer in the same source order. This is the direct native
+callback payload for the parent pipeline's `context_refresh` slot; live
+placement resolution and the parent scheduler remain the next integration.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:
