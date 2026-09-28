@@ -1046,6 +1046,14 @@ two-page `$C1612C` handoff must therefore receive the complete source
 `$C0D752 -> $C2FEDE/$C301F6 -> $C304F8` producer state before it can replace
 the capture diagnostic in `game.c`.
 
+`fa18_load_display_record_candidate_input_pairs` now loads `$C0D75E`'s four
+signed candidate pairs from the first 16 executable bytes of original segment
+33 (runtime `$C0D720`). They are intentionally code words consumed as data by
+the source routine, so the native pipeline no longer embeds the run075 values
+as a fixture. The loader is one concrete normal-runtime input for the
+`$C0D752` producer; its live matrix, source component, iterator workspace,
+and inherited blitter registers still belong to the enclosing parent state.
+
 ## Standard validation after each stage
 
 Use the existing build directory/configuration and run serially:

@@ -4,9 +4,13 @@
 #include <stdio.h>
 
 int main(void) {
-    const int16_t input[FA18_DISPLAY_RECORD_CANDIDATE_COUNT][2] = {
-        {10240, -9216}, {-11008, -9728}, {-10240, 9216}, {9728, 11008}
+    uint8_t source[FA18_DISPLAY_RECORD_CANDIDATE_INPUT_BYTES] = {
+        0x28,0x00,0xdc,0x00,0xd5,0x00,0xda,0x00,
+        0xd8,0x00,0x24,0x00,0x26,0x00,0x2b,0x00
     };
+    FA18HunkSegment segments[FA18_DISPLAY_RECORD_CANDIDATE_HUNK + 1u] = {0};
+    FA18Hunks hunks = {segments, FA18_DISPLAY_RECORD_CANDIDATE_HUNK + 1u};
+    int16_t input[FA18_DISPLAY_RECORD_CANDIDATE_COUNT][2];
     const int16_t matrix[3][3] = {
         {167, 0, -8}, {0, 252, 0}, {6, 0, 127}
     };
@@ -16,8 +20,13 @@ int main(void) {
     };
     FA18DisplayRecordCandidate output[FA18_DISPLAY_RECORD_CANDIDATE_COUNT];
 
-    /* `build/run075_prepared_c0d752/`: the four live `$C0D720` pairs and
-     * `$C45BD8` matrix written to `$C4B390 + 0x1a*n`. */
+    segments[FA18_DISPLAY_RECORD_CANDIDATE_HUNK].data = source;
+    segments[FA18_DISPLAY_RECORD_CANDIDATE_HUNK].size = sizeof source;
+    assert(fa18_load_display_record_candidate_input_pairs(&hunks, input) == 0);
+    assert(input[0][0] == 10240 && input[0][1] == -9216 &&
+           input[3][0] == 9728 && input[3][1] == 11008);
+    /* `build/run075_prepared_c0d752/`: these source pairs and the live
+     * `$C45BD8` matrix write the candidates at `$C4B390 + 0x1a*n`. */
     assert(fa18_prepare_display_record_candidates(input, -1, matrix, output) == 0);
     for (uint16_t index = 0; index < FA18_DISPLAY_RECORD_CANDIDATE_COUNT;
          ++index) {
@@ -25,6 +34,8 @@ int main(void) {
         assert(output[index].y == expected[index].y);
         assert(output[index].depth == expected[index].depth);
     }
+    hunks.count = FA18_DISPLAY_RECORD_CANDIDATE_HUNK;
+    assert(fa18_load_display_record_candidate_input_pairs(&hunks, input) == -1);
     assert(fa18_prepare_display_record_candidates(NULL, -1, matrix, output) == -1);
     puts("display-record candidate contract passed");
     return 0;
