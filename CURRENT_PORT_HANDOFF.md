@@ -13,10 +13,18 @@
 - Authority: translate the supplied P-code/observed assembly directly.  The
   emulator is validation only, never implementation input or a displayed
   substitute for the native frame.
-- Last full validation: 206/206 CTest contracts passed; native build checker
-  reported 396 C sources.
+- Last full validation: 207/207 CTest contracts passed; native build checker
+  reported 398 C sources.
 
 ### Most recent chain
+
+`scene_template_cursor_context.{c,h}` now ports the mutable pack handoff at
+`$C1D10C-$C1D22C`: it feeds the already reconstructed cursor resolver from the
+first `$C45948/$C4594A` selector pair, the second
+`$C4594C/$C4594E/$C45850/$C45851` pack, source route bytes, and caller-owned
+bit-gate ranges.  The static cursor roots and later band walk stay in their
+existing source modules; this bridge does not invent a selector, a gate table,
+or a parent-loop call cadence.
 
 `context_workspace_flags.{c,h}` now ports `$C1CA82-$C1CB13`.  It ORs bit four
 into byte one of the sixteen `$C46184` 512-byte records and the sixteen
