@@ -866,6 +866,15 @@ future real outer-loop owner, but is intentionally not wired into `game.c`
 until that owner has source-backed parent callbacks, render-page choice, and
 Copper publication.
 
+The run075 frame-389 child now has an exact display-page witness: entering
+with outer index zero, it copies `$C074D8/$C07F00` from the two `$C182BA/$C182C2`
+tables into the View/ViewPort display fields before `LoadView`; `$C07F00`'s
+linked Copper stream is the `$5200` five-plane `$04DB30,$04FA70,$0519B0,
+$0538F0,$055830` interval. This is the prepared `$C4566E` page rendered at
+frame 384, not the alternate renderer table selected after the child tail.
+Those source addresses are evidence only; the pending native page owner must
+use page identities and preserve the index-zero publication relationship.
+
 `periodic_notification.{c,h}` now ports `$C11B44-$C11BAF`, the direct
 periodic byte stage called from the parent prefix after `$C0F5F8`.  It
 preserves decrement-before-signed-test behavior, the `8/$86` expiry reload,

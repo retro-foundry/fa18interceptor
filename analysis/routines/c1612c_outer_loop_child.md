@@ -29,3 +29,20 @@ The tail is byte-exact at
 (`$C1617E-$C16283`, 262 bytes). Together the two slices cover the complete
 static `$C1612C-$C16283` child (344 bytes), matching the bounded packet's
 entry and return edge.
+
+## run075 prepared-page display publication
+
+The return-bounded run075 child at global frame 389 enters with
+`$C4566C=0`. Its prefix copies `$C074D8` from `$C182BA[0]` to `$C1821C` and
+`$C07F00` from `$C182C2[0]` to `$C18232`, then invokes the `LoadView`
+boundary before its tail changes the selector to one. `$C07F00` is the first
+`CopList` referenced by the ViewPort display-instruction field. Its linked
+Copper stream selects BPL1--BPL5 `$04DB30,$04FA70,$0519B0,$0538F0,$055830`
+between the `$2A01` wait / `$5200` BPLCON0 write and the later `$F201` restore.
+
+Thus the child publishes the five-plane page that the earlier frame-384
+`$C279D0` pass prepared through `$C4566E`; it does not publish the renderer
+table itself. The selected View/CopList addresses are trace witnesses, not
+native pointer constants. A native display owner must preserve this index-zero
+publication relationship with caller-owned page identities and an explicit
+`LoadView` boundary.
