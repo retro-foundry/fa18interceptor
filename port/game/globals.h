@@ -21,6 +21,12 @@
 #define POLY_PLANE_OFFSET  0xC45968u /* long: byte offset of the same word within a plane */
 #define POLY_BLIT_SIZE     0xC4596Eu /* word: BLTSIZE covering the polygon's bounding box */
 
+/* ---- lines ($C2FA7E) -------------------------------------------------------- */
+#define CURRENT_COLOUR     0xC45954u /* word: colour bits of the object being drawn */
+#define LINE_LAST_ROW      0xC45984u /* word: last row lines may reach */
+#define LINE_PLANES        0xC456E7u /* byte: planes a line is drawn into (bit n: table entry 3-n) */
+#define LINE_COLOUR        0xC456E8u /* word: line colour in the low byte; negative: CURRENT_COLOUR */
+
 /* ---- trigonometry ---------------------------------------------------------- */
 #define SINE_TABLE         0xC3E5E8u /* word[901]: sin(i/10 degree), 2.14 ($C2E6DA) */
 

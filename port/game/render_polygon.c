@@ -10,6 +10,7 @@
 #include "globals.h"
 #include "hardware.h"
 #include "memory.h"
+#include "render_line.h"
 
 /* Mask (A) combined with the page plane (B) into the plane (D). */
 static const uint16_t composite_minterm[] = {
@@ -35,84 +36,30 @@ void composite_polygon_plane(int plane_index, PlaneOp op) {
 }
 
 /* One-dot blitter lines draw a single pixel per raster row, so the area fill
- * that follows toggles exactly once per edge on every row it crosses. An
- * edge covers the rows below its upper end down to its lower end (the shared
- * vertex row belongs to one edge only) and is clipped against `last_row`
- * along its major axis. Horizontal edges contribute nothing. */
+ * that follows toggles exactly once per edge on every row it crosses. The
+ * shared vertex row belongs to one edge only (setup_line starts below the
+ * upper end), and horizontal edges contribute nothing. */
 void draw_polygon_edge(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row) {
-    int16_t x, row, dx, rows, rows_left, major, minor, length;
-    uint16_t con0, con1 = LINEMODE | ONEDOT;
-    int x_major;
-    int32_t error;
+    LineSetup edge;
     gaddr start;
 
-    if (y1 == y0) return;
-    if ((uint16_t)y1 > (uint16_t)y0) {
-        rows = (int16_t)(y1 - y0 - 1);
-        row = (int16_t)(y0 + 1);
-        if (row > last_row) return;
-        dx = (int16_t)(x1 - x0);
-        x = x0;
-    } else {
-        rows = (int16_t)(y0 - y1 - 1);
-        dx = (int16_t)(x0 - x1);
-        row = (int16_t)(y1 + 1);
-        if (row > last_row) return;
-        x = x1;
-    }
-    start = rd_u32(POLY_MASK_PLANE) +
-            (gaddr)(int32_t)(int16_t)(row * 40 + ((uint16_t)x >> 3));
-    con0 = (uint16_t)(((x & 15) << 12) + (SRCA | SRCC | DEST | MINTERM_LINE_XOR));
-
-    /* Octant: the blitter always steps down; x-major lines step x each dot. */
-    if (dx >= 0) {
-        x_major = (uint16_t)dx >= (uint16_t)rows;
-        if (x_major) con1 |= OCT_SUD;
-    } else {
-        dx = (int16_t)-dx;
-        x_major = (uint16_t)dx >= (uint16_t)rows;
-        con1 |= x_major ? (OCT_SUD | OCT_AUL) : OCT_SUL;
-    }
-
-    rows_left = (int16_t)(last_row - row);
-    if (x_major) {
-        major = dx;
-        minor = rows;
-        if (minor > rows_left) {
-            /* Shorten to the visible fraction, rounding to nearest:
-             * length = 2 * rows_left * dx / rows, halved with round-up. */
-            int32_t scaled = (int32_t)((uint32_t)((int32_t)rows_left * dx) * 2u);
-            int32_t quotient = scaled / minor;
-            uint16_t low = (quotient >= -32768 && quotient <= 32767) ? (uint16_t)quotient
-                                                                    : (uint16_t)scaled;
-            length = (int16_t)(((int16_t)low >> 1) + (low & 1));
-        } else {
-            length = major;
-        }
-    } else {
-        major = rows;
-        minor = dx;
-        length = major > rows_left ? rows_left : major;
-    }
-
-    /* Bresenham terms in the blitter's 4x scale. */
-    error = (int32_t)(int16_t)(minor * 4) - (int32_t)(int16_t)(major * 2);
-    if (error < 0) con1 |= SIGNFLAG;
+    if (!setup_line(x0, y0, x1, y1, last_row, 0, 1, &edge)) return;
+    start = rd_u32(POLY_MASK_PLANE) + (gaddr)edge.offset;
 
     wait_blitter();
-    custom_write(BLTCON0, con0);
-    custom_write(BLTCON1, con1);
-    custom_write(BLTAMOD, (uint16_t)(minor * 4 - major * 4));
+    custom_write(BLTCON0, (uint16_t)(edge.shift + (SRCA | SRCC | DEST | MINTERM_LINE_XOR)));
+    custom_write(BLTCON1, edge.con1);
+    custom_write(BLTAMOD, (uint16_t)edge.step_both);
     custom_write(BLTDMOD, 40);
     custom_write(BLTCMOD, 40);
-    custom_write(BLTAPTL, (uint16_t)(minor * 4 - major * 2));
+    custom_write(BLTAPTL, (uint16_t)edge.error);
     custom_write_ptr(BLTDPT, start);
     custom_write_ptr(BLTCPT, start);
     custom_write_ptr(BLTAFWM, 0xFFFFFFFFu);
     custom_write(BLTBDAT, 0xFFFF);
     custom_write(BLTADAT, 0x8000);
-    custom_write(BLTBMOD, (uint16_t)(minor * 4));
-    custom_write(BLTSIZE, (uint16_t)(((uint16_t)length << 6) + 0x42)); /* length+1 rows, 2 words */
+    custom_write(BLTBMOD, (uint16_t)edge.step_minor);
+    custom_write(BLTSIZE, edge.size);
 }
 
 void clear_polygon_mask(void) {
