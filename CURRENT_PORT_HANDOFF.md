@@ -948,7 +948,7 @@ permission to add a native frame-number render schedule or infer cadence. See
 `analysis/routines/run075_c279d0_prepared_page_handoff.md`.
 
 Current validated state uses `build\\port-native`: native build audit passes
-289 files, `ctest` passes 154/154, and frame parity remains 192 exact frames
+291 files, `ctest` passes 155/155, and frame parity remains 192 exact frames
 (200--391).  Frame 392 is still the first mismatch: 361/64,000 pixels,
 bbox x=7..318 y=101..199.
 
@@ -982,6 +982,14 @@ The live path selects four reflected pairs `(0,89), (319,89), (319,0), (0,0)`
 and publishes the success flag. The remaining direct path is the source
 `$C2FEDE -> $C301F6` submission and its page-blitter owner; it is not yet
 scheduled in `game.c`.
+
+`display_record_pipeline.{c,h}` now composes the complete prepared-list
+producer `$C0D752 -> $C2E758 -> $C0D7E0` against caller-owned source-shaped
+workspaces. Its chained live fixture matches the selected list consumed by
+`$C2FEDE`. The candidate cursor starts are 16 words apart: each iteration
+writes three words and then advances by `$1A`; this corrects a tempting but
+wrong 13-word placement. The remaining boundary is now exactly
+`$C2FEDE -> $C301F6 -> $C30306` and its inherited five-plane blitter state.
 
 ## Standard validation after each stage
 
