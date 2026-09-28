@@ -23,7 +23,7 @@ int fa18_render_flight_scene_pipeline(
      * gates. The same packet initializer is called again by the traversal;
      * this first call lets the bound page receive the exact source state. */
     if (fa18_initialize_projection_grid_packet(
-            grid, input->packet_mode, result->packet.depth_metric, result->packet.y,
+            grid, input->packet_mode, result->packet.y, result->packet.y,
             result->packet.x, result->packet.z, &result->packet_state, &setup,
             &result->packet_route) != 0 ||
         fa18_flight_renderer_page_apply_projection_grid_packet_state(

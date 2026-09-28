@@ -17,6 +17,9 @@ input = (00000000, 00000500, 00001400)
 
 The unshifted negated tuple is `(-1584128, -31752, -1684480)`. The published
 native packet is `(x,y,z)=(-6188,-125,-6580)` with `depth_metric=-31752`.
+The `$C279D0` gate consumes the published shifted middle component `y` (the
+native counterpart of `$C45A78`), rather than the retained pre-shift
+`depth_metric` intermediate.
 
 Authority: `analysis/data/run060_root_projection_packet.md` and
 `build/run060_frame8241_c1c5e0_projection_packet/trace.jsonl`.

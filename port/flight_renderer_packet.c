@@ -16,7 +16,10 @@ int fa18_render_flight_projection_grid(
         return -1;
 
     if (fa18_initialize_projection_grid_packet(
-            grid, packet_mode, packet->depth_metric, packet->y, packet->x,
+            /* `$C279D0` reads the published, shifted middle component at
+             * `$C45A78`, represented by packet.y.  depth_metric retains the
+             * pre-shift intermediate used by its upstream publisher. */
+            grid, packet_mode, packet->y, packet->y, packet->x,
             packet->z, packet_state, &setup, packet_route) != 0)
         return -1;
     if (*packet_route != FA18_PROJECTION_GRID_PACKET_READY) {

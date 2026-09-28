@@ -57,7 +57,15 @@ int main(void) {
     assert(submitted == 1 && log.primary_calls == 0 && log.adjacent_calls == 1);
     assert(log.complete_calls == 0 && state.line_emitter_mode_flag == 0);
 
+    /* The renderer gate consumes the published middle word (`$C45A78`), not
+     * the pre-shift projection intermediate retained for upstream consumers. */
     packet.depth_metric = -0x801;
+    assert(fa18_render_flight_projection_grid(
+               &grid, &packet, &matrix, 0, 200, &submission, &state, &route,
+               &submitted) == 0);
+    assert(route == FA18_PROJECTION_GRID_PACKET_READY && submitted == 1);
+
+    packet.y = -0x801;
     assert(fa18_render_flight_projection_grid(
                &grid, &packet, &matrix, 0, 200, &submission, &state, &route,
                &submitted) == 0);

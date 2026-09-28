@@ -189,6 +189,47 @@ int fa18_game_enable_c279_render_fixture(FA18Game *game, const char *slow_captur
                                                chip_capture_path, &game->video);
 }
 
+int fa18_game_present_active_scene_render_diagnostic(FA18Game *game) {
+    FA18FivePlanePage page;
+    FA18FlightRendererPage renderer;
+    FA18PlanarPixelState pixels = {0, 0, 0, 0};
+    FA18LineStyle lines = {0, 0, 0, 0};
+    FA18DefaultSceneRenderPassInput input;
+    FA18DefaultSceneRenderPassResult result;
+    FA18SceneActiveRecordState active_record;
+    uint16_t palette[FA18_VIEWPORT_PALETTE_WORDS];
+
+    if (!game || !game->scene_entry_complete) return -1;
+    fa18_five_plane_page_init(&page);
+    if (fa18_flight_renderer_page_init(
+            &renderer, &page, &pixels, &lines,
+            game->scene_renderer_defaults.display_bound_y,
+            game->scene_renderer_defaults.display_vertical,
+            game->scene_renderer_defaults.display_horizontal, 0, 0, 0) != 0)
+        return -1;
+    active_record = (FA18SceneActiveRecordState){
+        game->scene_entry_runtime.dispatch_runtime.record[0].bytes,
+        sizeof game->scene_entry_runtime.dispatch_runtime.record[0].bytes, 0, 0
+    };
+    input = (FA18DefaultSceneRenderPassInput){
+        active_record,
+        {0, 0, 0, {
+            game->scene_renderer_defaults.matrix_row_scale[0],
+            game->scene_renderer_defaults.matrix_row_scale[1],
+            game->scene_renderer_defaults.matrix_row_scale[2]
+        }},
+        0, game->scene_renderer_defaults.display_bound_y
+    };
+    if (fa18_render_default_active_scene_pass(
+            &game->scene_entry_runtime.trig_table, &game->projection_grid, &input,
+            &renderer, &result) != 0 ||
+        fa18_load_viewport_mode_palette(&game->exe, game->viewport_mode.current,
+                                        palette) != 0 ||
+        fa18_five_plane_page_load_rgb4(&page, palette, sizeof palette / sizeof *palette) != 0)
+        return -1;
+    return fa18_five_plane_page_present(&page, &game->video);
+}
+
 int fa18_game_frame(FA18Game *game, const FA18ReplayControlState *controls,
                     uint16_t post_input_ticks) {
     if (!game) return -1;

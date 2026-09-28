@@ -142,6 +142,7 @@ int main(int argc, char **argv) {
     uint32_t last = 0;
     int headless = 0;
     int dump_stdout = 0;
+    int render_active_scene = 0;
     const char *render_fixture_capture = NULL;
     const char *c279_render_slow_capture = NULL;
     const char *c279_render_chip_capture = NULL;
@@ -169,13 +170,16 @@ int main(int argc, char **argv) {
         } else if (!strcmp(argv[i], "--bootstrap-c279-render-fixture") && i + 2 < argc) {
             c279_render_slow_capture = argv[++i];
             c279_render_chip_capture = argv[++i];
+        } else if (!strcmp(argv[i], "--render-active-scene")) {
+            render_active_scene = 1;
         } else {
-            fputs("Usage: fa18_port --adf FILE --replay FILE [--timing FILE] [--bootstrap-render-fixture CHIP] [--bootstrap-c279-render-fixture SLOW CHIP] [--headless --to N --dump-rgb444 -]\n", stderr);
+            fputs("Usage: fa18_port --adf FILE --replay FILE [--timing FILE] [--bootstrap-render-fixture CHIP] [--bootstrap-c279-render-fixture SLOW CHIP] [--render-active-scene] [--headless --to N --dump-rgb444 -]\n", stderr);
             return 2;
         }
     }
     if (!adf_path || !replay_path || (render_fixture_capture && c279_render_slow_capture) ||
         (c279_render_slow_capture && !c279_render_chip_capture) ||
+        (render_active_scene && !headless) ||
         (headless && (!last || !dump_stdout)) ||
         (!headless && (last || dump_stdout))) {
         fputs("Missing or incompatible playback options\n", stderr);
@@ -236,6 +240,8 @@ int main(int argc, char **argv) {
             if (fa18_replay_advance_frame(&controls, events.items, events.count,
                                           &next_event, game.frame) != 0 ||
                 fa18_game_apply_controls(&game, &controls) != 0 ||
+                (render_active_scene && game.frame == last &&
+                 fa18_game_present_active_scene_render_diagnostic(&game) != 0) ||
                 write_rgb444(&game.video) != 0) {
                 fputs("Native frame output failed\n", stderr);
                 result = 1;

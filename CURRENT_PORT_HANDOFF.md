@@ -394,6 +394,16 @@ normal replay remains 192 exact frames through global frame 391.
 
 ## What the port has now
 
+The capture-free `--render-active-scene` diagnostic now reaches the source
+`$C279D0` ready route at run075 frame 392.  The correction is that this helper
+gates on the published shifted middle packet word (`$C45A78`, represented by
+`FA18ProjectionPacket.y`), not the upstream pre-shift intermediate retained as
+`depth_metric`.  The source-root diagnostic reaches eight renderer submissions
+after this correction, while still presenting black on its fresh page: the
+observed direct-pixel state writes a zero-valued lane there, and the visible
+frame requires the unported polygon/fill descendants plus the earlier prepared
+page.  This diagnostic remains opt-in and has no effect on normal replay.
+
 Recent commits, newest first:
 
 ```

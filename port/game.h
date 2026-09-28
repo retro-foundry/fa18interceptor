@@ -18,6 +18,7 @@
 #include "post_input_followup.h"
 #include "scene_render_fixture.h"
 #include "viewport_palette.h"
+#include "default_scene_render_pass.h"
 #include "replay.h"
 #include "video.h"
 
@@ -68,6 +69,12 @@ int fa18_game_enable_render_fixture(FA18Game *game, const char *chip_capture_pat
  * does not alter the normal replay path. */
 int fa18_game_enable_c279_render_fixture(FA18Game *game, const char *slow_capture_path,
                                          const char *chip_capture_path);
+
+/* User-authorized, capture-free renderer diagnostic. It renders the current
+ * scene-entry root record through the default `$C2DB18 -> $C1C54E -> $C279D0`
+ * path into a fresh native page and presents it. It is deliberately separate
+ * from normal scheduling until the parent/outer-loop owner is complete. */
+int fa18_game_present_active_scene_render_diagnostic(FA18Game *game);
 
 /* Advance one PAL video frame with the given control state. `post_input_ticks`
  * comes from a source-measured scheduler stream; it is never inferred from
