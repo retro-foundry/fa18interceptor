@@ -53,7 +53,7 @@ is proven against.
 | Stage | What | State |
 | --- | --- | --- |
 | A | Whole-program translation, interpreter fallback | done (540 routines) |
-| B | Machine layer | done; bus-contention timing missing |
+| B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Frame parity with Engine9000 on every recording | run075: first divergence at frame 398 |
 | D | Readable C, routine by routine, proven | 50 routines |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | not started |
@@ -125,10 +125,11 @@ When every caller of a routine is C, its glue is no longer reached; delete it.
 
 ## Known limits
 
-- **Timing.** The CPU never stalls for DMA. On an A500, Slow RAM shares the
-  chip bus, so the real CPU waits while bitplane, Copper and blitter DMA use
-  it. Native runs about one frame ahead; this is the frame-398 divergence and
-  the long-run flight drift.
+- **Timing.** Bus contention, CIA E-clock waits and the 68000's access
+  order are modelled (`port/machine/bus.c`) and match cycle-exact UAE to
+  ~0.1-0.5% per scene. Long recorded replays still drift (run060 from frame
+  94); exact replays need UAE's cycle-exact CPU and blitter timing. Routine
+  proofs do not depend on this: the shadow check compares every call.
 - **Kickstart** runs on the interpreter; together with the few game
   instructions not yet translated it takes about 30% of CPU cycles. Stage E
   replaces the ROM calls the game uses.

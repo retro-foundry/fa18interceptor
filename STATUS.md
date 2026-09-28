@@ -7,11 +7,13 @@ Updated 2026-09-28.
 | Area | State |
 | --- | --- |
 | Native game | Runs from the run075 menu into flight, live in an SDL2 window at 50 Hz |
-| Frame parity (run075, from the frame-392 snapshot) | 8 of 10 frames 393-402 pixel-exact; first diverging frame 398 |
+| Frame parity (run075, from the frame-392 snapshot) | 10 of 10 frames 393-402 pixel-exact |
+| Replay parity (run060 from its restore) | game RAM identical to the emulator through frame 93; frames pixel-exact to 540; outcome not yet reproduced |
+| Replay parity (run062) | frame 2475 (back at the menu) pixel-exact |
 | Frame parity (run075, from the menu) | frame 500: 99.6% of pixels match; frame 3000: flying, path has drifted (94%) |
 | Translation | 540 routines, 32,191 instructions; ~70% of CPU cycles in translated code |
-| Recreated C source | 50 routines in `port/game/`, 110,000+ calls proven over 3,000 frames |
-| Known gap | CPU/DMA bus timing (the cause of the frame-398 divergence and flight drift) |
+| Recreated C source | 107 routines in `port/game/`, ~1.6 million calls proven over four recordings |
+| Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
 ## The game program
 
@@ -47,6 +49,54 @@ Updated 2026-09-28.
   the Musashi interpreter.
 - Translated and interpreter-only runs end with byte-identical RAM and
   registers over 3,000 frames; gcc and MSVC builds match each other.
+- `port/machine/bus.c`: CPU bus timing, shared by interpreter and translated
+  code (next section).
+
+## Bus timing
+
+The recordings were made with UAE in cycle-exact mode (`cpu_cycle_exact` in
+each capture's `config.uae`). The game's main loop is CPU-paced, so a
+recording only replays natively if native CPU time matches UAE's closely.
+
+What is modelled:
+
+- **DMA slots per line** (colour clocks): memory refresh, bitplane fetch
+  (lowres and hires fetch order; planes 5-6 take the CPU's slots) and the
+  Copper (two fetches per instruction from the WAIT position; overflow runs
+  on the next line). Lines not yet drawn this frame use the previous frame's
+  map; after a restore, one Copper frame is simulated on a scratch copy.
+- **CPU accesses**: Chip RAM, Slow RAM (on the chip bus) and custom
+  registers wait for a free slot; ROM does not. Accesses follow the 68000's
+  microcycle order: internal cycles first for taken branches, `-(An)` and
+  indexed modes, and JMP/JSR forms; a jump's last two fetches read the
+  target, after its stack accesses. CIA accesses wait for the E clock.
+- **Blits** get a per-cycle timeline from UAE's cycle diagrams (fill adds an
+  idle step; line mode is `-C-D`). With BLTPRI the CPU only gets idle steps;
+  without it the CPU takes the third blitter cycle it waited for. That is the
+  closest fit to the traces; UAE's pipelined rule is not reproduced.
+- **Musashi's 68000 cycle table** is corrected in `tools/musashi/m68k_in.c`
+  (regenerate `m68kops.c` with `m68kmake`): long ALU operations from
+  registers, ADDQ to An, ADDA.W #imm, ANDI.L, bit operations on bits 0-15,
+  and exact MULS, DIVS and DIVU timing, all measured against UAE traces
+  (`scripts/musashi_timing_audit.py`).
+- **Frames and input** follow Engine9000: a frame ends when line 3 starts;
+  the first frame after a UAE restore runs two frames of machine time; key
+  codes are libretro `RETROK_*` values; mouse motion is released on JOYxDAT
+  reads and at vertical blank (UAE `readinput` and `mouseupdate`).
+
+Measured per instruction against cycle-exact traces
+(`scripts/recomp_timing.py`), scenes are within 0.01-0.5%, and one
+full-screen area blit about 1%. That is not enough for 10,000-frame replays:
+run060 first differs at frame 94, where native reaches a ROM beam-wait loop
+about 10 colour clocks early and takes one extra pass. Exact replays need
+UAE's cycle-exact 68000 and pipelined blitter and DMA arbitration, ported
+from `tools/engine9000-public/ami9000/sources/src` (the CE CPU handlers,
+`custom.c` `dma_cycle`, `blitter.c`).
+
+Diagnostics: `FA18_WAIT_LOG`, `FA18_MAP_LOG` and `FA18_BLIT_LOG` (bus waits,
+line slot maps, blits), `FA18_WATCH=lo-hi` (writes to a range),
+`FA18_TRACE=N` (instruction trace with cycle counts), `FA18_STEAL` and
+`FA18_ECLOCK_PHASE` (model variants).
 
 ## Recreated C source
 

@@ -53,9 +53,9 @@ the memory map says what is known.
    interpreter's executed ROM PCs plus the library vector offsets in the
    code), with arguments and results, as the specification for replacing
    them in C (PORT.md stage E).
-5. **Timing.** Measure the real per-frame CPU stall caused by bitplane,
-   Copper and blitter DMA (UAE `custom.c` and `blitter.c` slot allocation)
-   as the specification for bus contention in the machine layer.
+5. **Timing.** Done to ~0.1-0.5% (STATUS.md, "Bus timing"). What remains
+   for exact replays is UAE's cycle-exact CPU access timing and its
+   pipelined blitter arbitration.
 6. **Scenario coverage.** Record sealed runs for the modes run075 does not
    reach: free flight, training, missions, combat, landing, crash, map, pilot
    log. Each one becomes a parity and shadow-proof scenario.

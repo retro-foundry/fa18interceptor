@@ -12,10 +12,11 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 50; 110,000+ calls matching over run075's first 3,000 frames; poison-clean |
-| Ready to recreate next | 86 (`python tools/recomp/port_candidates.py`) |
-| run075 frames 393-402 from the frame-392 snapshot | 8/10 exact; first diverging frame 398 |
-| run075 from the menu | frame 500: 99.6% match; frame 3000: flying, path drifted |
+| Recreated routines (`port/game/`) | 107; ~1.6 million calls matching over run075, run024, run060 and run062; poison-clean |
+| Ready to recreate next | `python tools/recomp/port_candidates.py` |
+| run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
+| run060 replay | game RAM identical through frame 93; pixels exact to frame 540; drifts after |
+| run062 replay | frame 2475 exact |
 | Translated vs interpreter-only, 3,000 frames | identical RAM and registers |
 
 ## Next
@@ -23,9 +24,12 @@ one at a time, each proven on every call.
 1. **Keep recreating routines.** Work bottom-up from `port_candidates.py`,
    following PORT.md, "Recreating a routine". `$C1FB82` (backface predicate)
    is postponed until its callers are C.
-2. **Bus-contention timing.** The CPU should stall while DMA holds the chip
-   bus; model it (UAE `custom.c`, `blitter.c`) to fix frame 398 and the
-   flight drift. Re-run the parity script.
+2. **Exact replay timing (deferred).** Bus timing is modelled (STATUS.md,
+   "Bus timing"). For end-to-end replays, port UAE's cycle-exact 68000 and
+   blitter/DMA arbitration. Tools: `scripts/recomp_timing.py` (per
+   instruction against a trace), `scripts/recomp_state_diff.py` (first frame
+   where game RAM differs), `scripts/recomp_outcome.py` (pixels at chosen
+   frames).
 3. **Kickstart calls.** Inventory, then replace with C (PORT.md stage E).
 
 ## Commands
