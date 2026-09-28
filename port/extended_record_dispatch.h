@@ -20,6 +20,10 @@ typedef struct {
     FA18ExtendedRecordTransform transform; /* `$C1F99A`. */
     FA18ExtendedRecordTarget target; /* `$C1F98C`. */
     void *context;
+    /* The source transform and following selector can have independent native
+     * owners while retaining their exact `$C1F94E` order.  Null uses context. */
+    void *transform_context;
+    void *target_context;
 } FA18ExtendedRecordDispatchInput;
 
 typedef enum {

@@ -34,11 +34,19 @@ instructions, return PC `$C1F970`) and
 `build/run031_frame1965_c1f99a_transform_entries.json` for its descriptor,
 source, workspace, and matrix ranges.
 
-After `$C1F99A`, compose it into the extended dispatcher and walker, then
-bind the resulting line-emitter owner only at the actual placement/scene
-runtime schedule.  Run the normal visual gate immediately after that binding;
-if it remains black, report exactly that rather than presenting a contract or
-oracle artifact.
+`c1f99a_record_transform.{c,h}` now ports the observed descriptor-bit-0
+`$C1F99A-$C1FA90` lane: it retains descriptor-relative source/destination
+offsets, the source D1/D2 exchange, both signed 8.8 matrix passes, word/long
+wraps, and writes the transformed triples into the caller-owned `$C48390`
+workspace.  The descriptor-bit-0-clear route remains an explicit failure
+boundary because it transfers through `$C1FA92` into the separately unported
+`$C1FB24` continuation.  `extended_record_dispatch` now permits distinct
+transform and selector contexts, so its `$C1F99A` callback can use this real
+transform without inventing a shared owner.  The next task is composition into
+the record walker, then binding the resulting line-emitter owner only at the
+actual placement/scene runtime schedule.  Run the normal visual gate
+immediately after that binding; if it remains black, report exactly that
+rather than presenting a contract or oracle artifact.
 
 ## Latest record-walker composition
 

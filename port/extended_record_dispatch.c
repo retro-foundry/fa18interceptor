@@ -58,7 +58,8 @@ int fa18_dispatch_extended_record(const FA18ExtendedRecordDispatchInput *input,
         if (count > 0) {
             int16_t descriptor_offset;
             if (!input->transform || read_word(input, cursor, &descriptor_offset) != 0 ||
-                input->transform(input->context, count, descriptor_offset) != 0)
+                input->transform(input->transform_context ? input->transform_context : input->context,
+                                 count, descriptor_offset) != 0)
                 return -1;
             cursor += 2u;
         }
@@ -66,7 +67,8 @@ int fa18_dispatch_extended_record(const FA18ExtendedRecordDispatchInput *input,
         cursor += 2u;
         if ((uint16_t)selector_word & UINT16_C(0x4000)) ++result->record_count;
         result->selector = (uint16_t)selector_word & UINT16_C(0x3fff);
-        if (!input->target || input->target(input->context, result->selector,
+        if (!input->target || input->target(input->target_context ? input->target_context : input->context,
+                                            result->selector,
                                             &source_status) != 0)
             return -1;
         result->next_a2_cursor = cursor;
