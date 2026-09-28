@@ -18,6 +18,14 @@
 
 ### Most recent chain
 
+`post_input_transition.{c,h}` now ports the recovered static `$C10C08-$C10C66`
+entry controller.  It initializes the exact non-flight controller fields and
+five-tick target `$C10C68`, selects `$C11A26` only for the signed event-flag
+route, and otherwise returns without substituting either continuation.  The
+new contract covers all three branches.  It is not scheduled prematurely by
+`game.c`; the normal frame-402 gate remains zero nonblack pixels while the
+subsequent controller bodies and their callback cadence remain distinct work.
+
 The opt-in active-scene diagnostic now renders into the source-shaped
 `$C15DB4-$C1601E` renderer-page allocation already owned by `FA18Game`, rather
 than a fresh unrelated five-plane page.  It remains entirely outside normal
