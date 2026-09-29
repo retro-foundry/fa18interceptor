@@ -221,4 +221,8 @@ int glue_C09AB8(void);
 int glue_C1FC42(void);
 int glue_C1BA86(void);
 
+/* batch 30: audio interrupt, date line */
+int glue_C50158(void);
+int glue_C24E2C(void);
+
 #endif

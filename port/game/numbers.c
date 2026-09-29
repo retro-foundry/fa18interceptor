@@ -59,3 +59,17 @@ void unpack_display_value(void) {
     }
     wr_u32(DISPLAY_VALUE, value);
 }
+
+void format_date_line(void) {
+    uint32_t seconds = rd_u32(rd_u32(MODE_TABLE) + 8);
+    uint32_t q = seconds / 3600;
+    int16_t days = (int16_t)(q > 0xFFFF ? seconds : q); /* DIVU overflow keeps the dividend */
+    int16_t capped = days > 0x7F ? 0x7F : days, day;
+    gaddr name = MONTH_NAMES + (gaddr)(9 * ((uint16_t)capped >> 5));
+    int i;
+
+    for (i = 0; i < 9; i++) wr_u8(DATE_LINE + 0x14 - (gaddr)i, rd_u8(name + (gaddr)i));
+    day = (int16_t)((days & 0x1F) + 1);
+    if (day > 30) day = 30;
+    print_number(DATE_LINE, 0x15, (uint32_t)(int32_t)day, 2);
+}

@@ -205,6 +205,9 @@ const FA18Port fa18_ports[] = {
     /* batch 29: component bound, repeated sum, view key */
     {0xC1FC42, glue_C1FC42, "component_beyond_bound", 250},
     {0xC1BA86, glue_C1BA86, "queue_view_key", 500},
+    /* batch 30: audio interrupt, date line */
+    {0xC50158, glue_C50158, "update_voices", 3000},
+    {0xC24E2C, glue_C24E2C, "format_date_line", 1500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

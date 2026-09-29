@@ -34,7 +34,8 @@ int glue_C2E5F6(void) {
 
 /* $C24F76: D0 value, A0 field, D3.w offset, D2 width. Leaves D0 = 0, D1 =
  * the BCD, A0 advanced by the offset, A1 = MODE_TABLE's table. */
-int glue_C24F76(void) {
+void print_number_registers(void);
+void print_number_registers(void) {
     int16_t offset = (int16_t)D(3);
     int8_t width = (int8_t)D(2);
     gaddr p = A(0) + (uint32_t)(int32_t)offset;
@@ -52,6 +53,10 @@ int glue_C24F76(void) {
     else A(0) = p + (gaddr)checks;
     D(0) = 0;
     A(1) = rd_u32(MODE_TABLE);
+}
+
+int glue_C24F76(void) {
+    print_number_registers();
     return glue_return();
 }
 

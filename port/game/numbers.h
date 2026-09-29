@@ -24,4 +24,10 @@ void print_number(gaddr field, int16_t offset, uint32_t value, int8_t width);
 /* DISPLAY_VALUE = the eight packed BCD digits of DISPLAY_VALUE_BCD. */
 void unpack_display_value(void);
 
+/* The date line ($C24E2C): from the mode table's +$08 long / 3600 (DIVU),
+ * the month name (bits 5-6, capped at $7F) copied reversed into DATE_LINE
+ * +$0C..+$14, and the day (low five bits + 1, at most 30) printed two wide
+ * at +$15. */
+void format_date_line(void);
+
 #endif

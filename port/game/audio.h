@@ -108,4 +108,9 @@ void play_status_tone(void);
 /* play_status_tone unless a context runs ($C33186). */
 void play_status_tone_outside_context(void);
 
+/* The audio interrupt server's work ($C50158): for each channel with a
+ * voice, step its program, write it to Paula, and apply its period and
+ * volume slides, each stopping when its tick count runs out. */
+void update_voices(void);
+
 #endif

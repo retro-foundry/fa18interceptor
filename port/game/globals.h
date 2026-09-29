@@ -325,4 +325,8 @@
 #define BOUND_OFFSET_X     0xC45B2Au /* word */
 #define BOUND_OFFSET_Z     0xC45B2Eu /* word */
 
+/* ---- date line ($C24E2C) --------------------------------------------------- */
+#define DATE_LINE          0xC3FD96u /* text: the month name (reversed) and day */
+#define MONTH_NAMES        0xC24E08u /* char[4][9] */
+
 #endif

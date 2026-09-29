@@ -235,3 +235,30 @@ void play_status_tone(void) {
 void play_status_tone_outside_context(void) {
     if (!rd_u8(CONTEXT_SELECT)) play_status_tone();
 }
+
+/* Add a slide to its value (each tick). */
+static void apply_slide(gaddr voice, int value, int slide) {
+    wr_u32(voice + (gaddr)value, rd_u32(voice + (gaddr)value) + rd_u32(voice + (gaddr)slide));
+}
+
+void update_voices(void) {
+    int channel;
+    for (channel = 0; channel < 4; channel++) {
+        gaddr record = rd_u32(VOICE_TABLE + (gaddr)(4 * channel));
+        gaddr slot = rd_u32(record + 4);
+        gaddr voice = rd_u32(slot);
+        if (!voice) continue;
+        step_voice_program(voice, slot, channel);
+        set_voice_output(rd_u32(record), voice);
+        apply_slide(voice, VOICE_PERIOD, VOICE_PERIOD_SLIDE);
+        apply_slide(voice, VOICE_VOLUME, VOICE_VOLUME_SLIDE);
+        if (rd_u32(voice + VOICE_PERIOD_TICKS)) {
+            wr_u32(voice + VOICE_PERIOD_TICKS, rd_u32(voice + VOICE_PERIOD_TICKS) - 1);
+            if (!rd_u32(voice + VOICE_PERIOD_TICKS)) wr_u32(voice + VOICE_PERIOD_SLIDE, 0);
+        }
+        if (rd_u32(voice + VOICE_VOLUME_TICKS)) {
+            wr_u32(voice + VOICE_VOLUME_TICKS, rd_u32(voice + VOICE_VOLUME_TICKS) - 1);
+            if (!rd_u32(voice + VOICE_VOLUME_TICKS)) wr_u32(voice + VOICE_VOLUME_SLIDE, 0);
+        }
+    }
+}
