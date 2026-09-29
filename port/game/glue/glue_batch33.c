@@ -8,6 +8,7 @@
 #include "globals.h"
 #include "memory.h"
 #include "plot.h"
+#include "glue_text.h"
 
 /* The shared body at $C2F688 with A3 = `masks`, A4 = `writers`, from the
  * D0.w/D1.w already in the registers. */
@@ -74,5 +75,77 @@ void pair_registers(void) {
 int glue_C2F60A(void) {
     plot_pixel_pair((int16_t)D(0), (int16_t)D(1));
     pair_registers();
+    return glue_return();
+}
+
+/* $C2F5D4: the body with D0.w/D1.w pushed round it and popped back (the
+ * words only). */
+static void restored_plot_registers(void) {
+    uint16_t x = (uint16_t)D(0), y = (uint16_t)D(1);
+    plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
+    SET_W(D(1), y);
+    SET_W(D(0), x);
+    flags_logic_w(D(0));
+}
+
+int glue_C2F5D4(void) {
+    plot_pixel((int16_t)D(0), (int16_t)D(1));
+    restored_plot_registers();
+    return glue_return();
+}
+
+/* $C2F5C0: D0 moved by SPAN_ORIGIN_Y and D1 by REDRAW_STATE_WORD first;
+ * a column outside 0..319 returns D2 = -1. */
+void plot_in_view_registers(void) {
+    int32_t across = (int32_t)(int16_t)D(0) + rd_s16(SPAN_ORIGIN_Y);
+    SET_W(D(0), (uint16_t)across);
+    if (across < 0 || (int16_t)across >= 0x140) {
+        D(2) = 0xFFFFFFFFu;
+        flags_logic_l(D(2));
+        return;
+    }
+    SET_W(D(1), (uint16_t)(D(1) + rd_u16(REDRAW_STATE_WORD)));
+    restored_plot_registers();
+}
+
+int glue_C2F5C0(void) {
+    plot_pixel_in_view((int16_t)D(0), (int16_t)D(1));
+    plot_in_view_registers();
+    return glue_return();
+}
+
+/* $C2F64E: the body with the pair masks and two-row writers, D0.w/D1.w
+ * pushed round it. */
+void square_registers(void) {
+    uint16_t x = (uint16_t)D(0), y = (uint16_t)D(1);
+    plot_registers(PAIR_MASKS, PLOT_ROWS_2);
+    SET_W(D(1), y);
+    SET_W(D(0), x);
+    flags_logic_w(D(0));
+}
+
+int glue_C2F64E(void) {
+    plot_square((int16_t)D(0), (int16_t)D(1));
+    square_registers();
+    return glue_return();
+}
+
+/* $C2F63A: moved by the view's origin first; a column outside 0..318
+ * returns D2 = -1. */
+void square_in_view_registers(void) {
+    int32_t across = (int32_t)(int16_t)D(0) + rd_s16(SPAN_ORIGIN_Y);
+    SET_W(D(0), (uint16_t)across);
+    if (across < 0 || (int16_t)across >= 0x13F) {
+        D(2) = 0xFFFFFFFFu;
+        flags_logic_l(D(2));
+        return;
+    }
+    SET_W(D(1), (uint16_t)(D(1) + rd_u16(REDRAW_STATE_WORD)));
+    square_registers();
+}
+
+int glue_C2F63A(void) {
+    plot_square_in_view((int16_t)D(0), (int16_t)D(1));
+    square_in_view_registers();
     return glue_return();
 }

@@ -8,6 +8,7 @@
 #include "globals.h"
 #include "memory.h"
 #include "text.h"
+#include "glue_text.h"
 
 #define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
 #define W(n) ((int16_t)D(n))
@@ -69,24 +70,26 @@ static Text line_from_registers(void) {
     return t;
 }
 
-int glue_C32AB4(void) {
-    Text t = line_from_registers();
-    draw_text_in_view(&t);
+void text_in_view_registers(void) {
     SET_W(D(6), rd_u16(SPAN_ORIGIN));
     D(7) = rd_u32(REDRAW_STATE_LONG);
     text_regs();
+}
+
+int glue_C32AB4(void) {
+    Text t = line_from_registers();
+    draw_text_in_view(&t);
+    text_in_view_registers();
     return glue_return();
 }
 
 /* The digits ($C32AD0): D2.w count - 1, A0 the end; D4.b nonzero keeps
  * leading zeros. */
-static int digits_glue(void) {
+void bcd_text_registers(void) {
     int count = (int)(uint16_t)D(2) + 1, keep = (uint8_t)D(4) != 0, k;
     uint32_t bcd = rd_u32(DISPLAY_VALUE_BCD);
     gaddr end = A(0);
-    Text t = line_from_registers();
 
-    print_bcd_in_view(end, count, keep, &t);
     SET_W(D(6), rd_u16(SPAN_ORIGIN));
     D(7) = rd_u32(REDRAW_STATE_LONG);
     SET_W(D(5), D(2));
@@ -108,6 +111,12 @@ static int digits_glue(void) {
         }
     }
     text_regs();
+}
+
+static int digits_glue(void) {
+    Text t = line_from_registers();
+    print_bcd_in_view(A(0), (int)(uint16_t)D(2) + 1, (uint8_t)D(4) != 0, &t);
+    bcd_text_registers();
     return glue_return();
 }
 

@@ -448,4 +448,28 @@
 #define CROSSING_LAST      0xC4E85Cu /* word[4]: the corner of each plane's last crossing */
 #define CORNER_SCREEN      0xC4B990u /* word[2] per corner: its edge's entry point on screen */
 
+/* ---- cockpit readouts ($C31A64-$C32260) ----------------------------------- */
+#define TEXT_LINE          0xC457FAu /* bytes: a readout's characters, built for the text plotters */
+#define SCALE_REDRAWS      0xC4583Bu /* byte: passes left to redraw the scale readout */
+#define ZOOM_READOUT_FLAGS 0xC45884u /* byte: bit 0 clears the zoom readout instead */
+#define CONTEXT_READOUTS   0xC457D9u /* byte: with COCKPIT_FLAGS bit 6, readouts are drawn in a context */
+#define FIXED_READOUTS     0xC457A4u /* byte: nonzero holds the position readouts and shows FIXED_ALTITUDE */
+#define FIXED_ALTITUDE     0xC4565Cu /* long: the altitude shown while FIXED_READOUTS is set */
+#define SPEED_SHOWN        0xC458F8u /* word: the speed readout's cache (bit 15 drawn) */
+#define ALTITUDE_SHOWN     0xC45900u /* long: the altitude readout's cache (bit 31 drawn) */
+#define BYTE_2B_SHOWN      0xC458FCu /* word: the record +$2B readout's cache */
+#define GRID_Z_SHOWN       0xC4595Cu /* word: the grid row readout's value */
+#define GRID_Z_REDRAWS     0xC45839u /* byte: passes left to redraw it */
+#define GRID_X_SHOWN       0xC4595Eu /* word: the grid column readout's value */
+#define GRID_X_REDRAWS     0xC4583Au /* byte: passes left to redraw it */
+#define WEAPON_REDRAWS     0xC45844u /* byte: passes left to redraw the weapon status */
+#define BAR_REDRAWS_A      0xC4583Eu /* byte: passes left to redraw the $C30B5C marker line */
+#define BAR_REDRAWS_B      0xC4583Fu /* byte: ... its first bar (record word 0 bit 11) */
+#define BAR_REDRAWS_C      0xC45840u /* byte: ... its second bar (PLAYER_FLAGS_G) */
+#define BAR_REDRAWS_E      0xC45842u /* byte: ... its third bar, flashing with BAR_E_FLAG */
+#define BAR_E_FLAG         0xC457ABu /* byte */
+#define BAR_REDRAWS_D      0xC45845u /* byte: passes left to redraw the $C30D34 image */
+#define BAR_REDRAWS_F      0xC45846u /* byte: positive sets the $C30D34 bar (with DISPLAY_FORCE bit 1) */
+#define LOAD_TRIM          0xC45946u /* word: added to the load readout when beyond +-1 */
+
 #endif

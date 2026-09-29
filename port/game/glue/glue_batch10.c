@@ -1,6 +1,7 @@
 /* Glue for decay_outside_limit, message reset, mode_offset, stream skip,
  * cell steps, the 2.8 rotation matrix and the cached display value. */
 #include "glue.h"
+#include "glue_text.h"
 #include "ports_glue.h"
 
 #include "fixed_math.h"
@@ -125,12 +126,9 @@ int glue_C2E346(void) {
 
 /* $C31C20: A1 cache, D0.w value -> D0 (value, cached value, or -1) and
  * its flags; D2.w keeps the cached word it loaded. */
-int glue_C31C20(void) {
-    gaddr cache = A(1);
-    int16_t value = (int16_t)D(0), cached = rd_s16(cache);
+void cached_value_registers(gaddr cache, int16_t value) {
+    int16_t cached = rd_s16(cache);
     int forced = (int8_t)rd_u8(REDRAW_FIRST + 1) > 0;
-
-    display_value_to_draw(cache, value);
 
     if (!forced) {
         SET_W(D(2), cached);
@@ -142,5 +140,13 @@ int glue_C31C20(void) {
         }
     }
     flags_logic_w(D(0));
+}
+
+int glue_C31C20(void) {
+    gaddr cache = A(1);
+    int16_t value = (int16_t)D(0);
+
+    cached_value_registers(cache, value);
+    display_value_to_draw(cache, value);
     return glue_return();
 }

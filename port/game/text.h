@@ -40,6 +40,11 @@ typedef struct {
     gaddr rows;           /* row offset within the plane */
 } SmallText;
 
+/* A line at column 0 or, `in_view`, at the view's column (SPAN_ORIGIN) with
+ * its rows moved by REDRAW_STATE_LONG. */
+SmallText small_text_line(int count, gaddr chars, gaddr layout, gaddr rows, int16_t x_origin, int16_t plane,
+                          uint16_t mode, int in_view);
+
 /* Draw a SmallText line (characters outside the 40-byte row are skipped). */
 void draw_small_text(const SmallText *text);
 
@@ -61,6 +66,8 @@ typedef struct {
     gaddr rows;      /* row offset within the planes */
 } Text;
 void draw_text(const Text *text);
+/* A line at column 0 (draw_text_in_view moves it to the view's). */
+Text text_line(int count, gaddr chars, gaddr layout, gaddr rows, int16_t x_origin);
 /* At the view's column (SPAN_ORIGIN), rows moved by REDRAW_STATE_LONG
  * ($C32AB4). */
 void draw_text_in_view(Text *text);

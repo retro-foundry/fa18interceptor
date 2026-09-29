@@ -45,6 +45,24 @@ void plot_pixel(int16_t x, int16_t y) {
     plot(x, y, PIXEL_MASKS, 1);
 }
 
+void plot_pixel_in_view(int16_t x, int16_t y) {
+    int32_t across = (int32_t)x + rd_s16(SPAN_ORIGIN_Y);
+    /* BLT tests the true sign of the sum; the 320 limit the wrapped word. */
+    if (across < 0 || (int16_t)across >= 0x140) return;
+    plot_pixel((int16_t)across, (int16_t)(y + rd_s16(REDRAW_STATE_WORD)));
+}
+
+void plot_square(int16_t x, int16_t y) {
+    plot(x, y, PAIR_MASKS, 2);
+}
+
+int plot_square_in_view(int16_t x, int16_t y) {
+    int32_t across = (int32_t)x + rd_s16(SPAN_ORIGIN_Y);
+    if (across < 0 || (int16_t)across >= 0x13F) return 0;
+    plot_square((int16_t)across, (int16_t)(y + rd_s16(REDRAW_STATE_WORD)));
+    return 1;
+}
+
 void plot_pixel_pair(int16_t x, int16_t y) {
     if ((x & 15) == 0) {
         plot_pixel(x, y);

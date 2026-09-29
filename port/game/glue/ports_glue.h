@@ -384,4 +384,28 @@ int glue_C20C22(void);
 int glue_C20A52(void);
 int glue_C20A40(void);
 
+/* batch 59: cockpit readouts */
+int glue_C2F5C0(void);
+int glue_C2F5D4(void);
+int glue_C31A64(void);
+int glue_C31ACC(void);
+int glue_C31F4C(void);
+int glue_C3201A(void);
+int glue_C3212A(void);
+int glue_C32178(void);
+int glue_C321D2(void);
+int glue_C32260(void);
+int glue_C31EB6(void);
+int glue_C31C60(void);
+int glue_C31D16(void);
+int glue_C31E6C(void);
+int glue_C31D64(void);
+int glue_C33F54(void);
+
+/* batch 59b: weapon status, threat lights */
+int glue_C2F64E(void);
+int glue_C2F63A(void);
+int glue_C328A8(void);
+int glue_C3112A(void);
+
 #endif

@@ -47,6 +47,20 @@ void format_hex(gaddr p, uint32_t value, int8_t width) {
     }
 }
 
+SmallText small_text_line(int count, gaddr chars, gaddr layout, gaddr rows, int16_t x_origin, int16_t plane,
+                          uint16_t mode, int in_view) {
+    SmallText text;
+    text.count = count;
+    text.layout = layout;
+    text.chars = chars;
+    text.plane_offset = plane;
+    text.mode = mode;
+    text.column = in_view ? rd_s16(SPAN_ORIGIN) : 0;
+    text.x_origin = x_origin;
+    text.rows = rows + (in_view ? rd_u32(REDRAW_STATE_LONG) : 0);
+    return text;
+}
+
 void draw_small_text(const SmallText *text) {
     gaddr plane = rd_u32(rd_u32(PAGE_PLANE_TABLE) + (gaddr)(int32_t)text->plane_offset);
     int16_t column = (int16_t)(text->column * 2);
@@ -91,6 +105,17 @@ void format_digits(gaddr end, int count, int hex, int keep_zeros) {
 }
 
 void format_small_hex(gaddr end, int count) { format_digits(end, count, 1, 0); }
+
+Text text_line(int count, gaddr chars, gaddr layout, gaddr rows, int16_t x_origin) {
+    Text text;
+    text.count = count;
+    text.layout = layout;
+    text.chars = chars;
+    text.column = 0;
+    text.x_origin = x_origin;
+    text.rows = rows;
+    return text;
+}
 
 void draw_text(const Text *text) {
     gaddr planes = rd_u32(PAGE_PLANE_TABLE);

@@ -335,6 +335,28 @@ const FA18Port fa18_ports[] = {
     /* batch 57-58: side face, quad list and strip, face grids and lattices */
     {0xC2159E, glue_C2159E, "draw_side_face", 30000},
     {0xC210E6, glue_C210E6, "draw_quad_strip", 60000},
+    /* batch 59: cockpit readouts */
+    {0xC2F5C0, glue_C2F5C0, "plot_pixel_in_view", 280},
+    {0xC2F5D4, glue_C2F5D4, "plot_pixel", 270},
+    {0xC31A64, glue_C31A64, "draw_scale_readout", 900},
+    {0xC31ACC, glue_C31ACC, "draw_zoom_readout", 1100},
+    {0xC31F4C, glue_C31F4C, "draw_speed_readout", 1000},
+    {0xC3201A, glue_C3201A, "draw_altitude_readout", 1000},
+    {0xC3212A, glue_C3212A, "draw_record_72_readout", 900},
+    {0xC32178, glue_C32178, "draw_record_2b_readout", 900},
+    {0xC321D2, glue_C321D2, "draw_grid_z_readout", 1500},
+    {0xC32260, glue_C32260, "draw_grid_x_readout", 1500},
+    {0xC31EB6, glue_C31EB6, "draw_heading_readout", 1500},
+    {0xC31C60, glue_C31C60, "draw_weapon_readout", 4800},
+    {0xC31D16, glue_C31D16, "draw_signed_readout", 4800},
+    {0xC31E6C, glue_C31E6C, "draw_shoot_cue", 4200},
+    {0xC31D64, glue_C31D64, "draw_load_readout", 5200},
+    {0xC33F54, glue_C33F54, "draw_three_digits", 4600},
+    /* batch 59b: weapon status, threat lights */
+    {0xC2F64E, glue_C2F64E, "plot_square", 280},
+    {0xC2F63A, glue_C2F63A, "plot_square_in_view", 290},
+    {0xC328A8, glue_C328A8, "draw_weapon_status", 1500},
+    {0xC3112A, glue_C3112A, "draw_threat_lights", 3000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
