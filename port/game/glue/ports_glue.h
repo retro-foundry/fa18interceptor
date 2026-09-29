@@ -230,4 +230,8 @@ int glue_C09A78(void);
 int glue_C09A98(void);
 int glue_C12242(void);
 
+/* batch 32: fault hook, level lists */
+int glue_C06C02(void);
+int glue_C1D5D8(void);
+
 #endif

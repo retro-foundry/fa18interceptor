@@ -119,4 +119,22 @@ void update_record_76_78(void);
  * (by the whole difference, or half when +$6C >= $6C0). */
 void update_record_56_from_66(void);
 
+/* The loop state of file_records_by_level, as its caller sees it. */
+typedef struct {
+    int8_t level; /* level of the last record filed ($FF: none) */
+    int16_t level_offset; /* that level's list offset / 3 (level * 32) */
+    int index;    /* record index where filing stopped (16: all) */
+    gaddr cursor; /* the list position last used */
+} FilingState;
+
+/* $C1D5D8: file the flagged records (+$01 bits 6 and 4) standing in cell
+ * (column, row) into the 96-byte per-level lists at `lists`: each as (kind,
+ * index), $FF-terminated, kind $10 for control records and $40 for
+ * workspace records, clearing their bit 4. A record at the same level as
+ * the previous one is appended at the same position without a scan. Stops
+ * when a list is full ($5D bytes); a negative level is a fatal error. Only
+ * when CELL_CHECKS is set. `state->cursor` starts as the caller's list
+ * position. */
+void file_records_by_level(int16_t column, int16_t row, gaddr lists, FilingState *state);
+
 #endif

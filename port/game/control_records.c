@@ -2,6 +2,7 @@
 #include "control_records.h"
 
 #include "audio.h"
+#include "fault.h"
 #include "fixed_math.h"
 #include "globals.h"
 
@@ -399,4 +400,46 @@ void update_record_56_from_66(void) {
     target = angle >= 0x3840 ? 0x40 : -0x40;
     value = rd_s16(r + 0x56);
     wr_s16(r + 0x56, (int16_t)(value - (int16_t)((int16_t)(value - target) >> shift)));
+}
+
+/* File one bank; 0 when a list was full (the whole filing stops). */
+static int file_bank(gaddr base, int stride, uint8_t kind, int16_t column, int16_t row, gaddr lists,
+                     FilingState *s, uint16_t error) {
+    s->level = -1;
+    for (s->index = 0; s->index < 16; s->index++) {
+        gaddr r = base + (gaddr)(s->index * stride);
+        uint8_t flags = rd_u8(r + 1);
+        int8_t level;
+        if (!(flags & 0x40) || !(flags & 0x10) || rd_s16(r + 6) != column || rd_s16(r + 8) != row) continue;
+        level = (int8_t)rd_u8(r + 0x0A);
+        if (level != s->level) {
+            gaddr end;
+            s->level = level;
+            if (level < 0) fatal_error(error);
+            s->level_offset = (int16_t)(level * 32);
+            s->cursor = lists + (gaddr)(int32_t)(int16_t)(level * 96);
+            end = s->cursor + 0x5D;
+            wr_u32(LIST_END, end);
+            for (;;) {
+                int8_t b;
+                if (s->cursor >= end) return 0;
+                b = (int8_t)rd_u8(s->cursor);
+                if (b < 0) break;
+                s->cursor += (b & 0x50) ? 2 : 4;
+            }
+        }
+        wr_u8(r + 1, (uint8_t)(rd_u8(r + 1) & ~0x10));
+        wr_u8(s->cursor, kind);
+        wr_u8(s->cursor + 1, (uint8_t)s->index);
+        wr_u8(s->cursor + 2, 0xFF);
+        s->cursor += 2;
+    }
+    return 1;
+}
+
+void file_records_by_level(int16_t column, int16_t row, gaddr lists, FilingState *state) {
+    if (!rd_u8(CELL_CHECKS)) return;
+    wr_u16(CELL_TIMER, 0x51);
+    if (!file_bank(CONTROL_RECORDS, CONTROL_RECORD_BYTES, 0x10, column, row, lists, state, 0x0E)) return;
+    file_bank(WORKSPACE_RECORDS, WORKSPACE_RECORD_BYTES, 0x40, column, row, lists, state, 0x36);
 }

@@ -212,6 +212,9 @@ const FA18Port fa18_ports[] = {
     {0xC09A78, glue_C09A78, "update_condition_a", 900},
     {0xC09A98, glue_C09A98, "update_condition_b", 900},
     {0xC12242, glue_C12242, "drop_lost_selection", 700},
+    /* batch 32: fault hook, level lists */
+    {0xC06C02, glue_C06C02, "fault_hook", 16},
+    {0xC1D5D8, glue_C1D5D8, "file_records_by_level", 900},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

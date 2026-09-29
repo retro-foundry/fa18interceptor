@@ -337,4 +337,7 @@
 #define TARGET_RECORD      0xC458DCu /* word: index of the targeted record, 0 = none */
 #define SPAN_ORIGIN_Y      0xC45988u /* word */
 
+/* ---- level lists ($C1D5D8) ------------------------------------------------ */
+#define LIST_END           0xC45A2Eu /* long: end of the level list being scanned */
+
 #endif
