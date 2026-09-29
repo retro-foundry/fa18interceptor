@@ -78,7 +78,7 @@ void update_flight_input(uint32_t player, uint32_t incoming_d0) {
         }
         if (ended || bytes == rd_u32(RECORDER_CURSOR)) {
             if (rd_u32(PLAYBACK_BYTES)) {
-                wr_u32(PLAYBACK_BYTES, rd_u32(RECORDER_START));
+                wr_u32(PLAYBACK_BYTES, rd_u32(RECORDER_START) + 1);
                 wr_u32(PLAYBACK_WORDS, rd_u32(RECORDER_WORDS) + 8);
                 wr_u8(RECORDER_MODE, 3);
                 wr_u8(0xC4582Au, 1);
@@ -119,7 +119,7 @@ void update_flight_input(uint32_t player, uint32_t incoming_d0) {
                     else set_throttle_input(0);
                 } else if (rd_s8(player + 0x2B) < 0x78 ||
                            (rd_u8(player + 3) & 8) || !(rd_u8(player + 2) & 0x20)) {
-                    set_throttle_input(0);
+                    release_throttle_keys();
                 }
             }
         }
