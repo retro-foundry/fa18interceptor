@@ -367,5 +367,8 @@
 
 #define CLIP_INPUT         0xC4BF90u /* word shift, word count, then word[3] vertices */
 #define CLIP_ERRORS        0xC458ECu /* word: polygons dropped for a degenerate closing edge */
+#define GAUGE_SOURCE       0xC458F6u /* word: bits 10-14 are the gauge bar's level */
+#define GAUGE_REFRESH      0xC45837u /* byte: positive redraws the gauge bar */
+#define GAUGE_SHOWN        0xC459A4u /* word: the gauge level last kept */
 
 #endif

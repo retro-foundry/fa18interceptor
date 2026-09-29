@@ -253,4 +253,10 @@ int glue_C24996(void);
 int glue_C2469E(void);
 int glue_C246A0(void);
 
+/* batch 38: faces and view marks */
+int glue_C09952(void);
+int glue_C099F6(void);
+int glue_C332FE(void);
+int glue_C30918(void);
+
 #endif

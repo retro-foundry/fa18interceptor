@@ -1,8 +1,8 @@
-/* Glue for the outer polygon clipper $C2469E ($C246A0 past its NOP). All but
- * A0 and A2 are live after it, so its register flow (A0 and A2 too, for
- * the shadow check) is replayed first on a
- * private copy of the clip state, then the C runs on the real one: stage 0
- * inline, the closing edges, the projection, and what draw_polygon leaves.
+/* Glue for the outer polygon clipper $C2469E ($C246A0 past its NOP). Every
+ * register is compared after it, so its register flow is replayed on a
+ * snapshot of the clip state taken before the C, once the C has run (the
+ * projection reads the clipped list the C writes): stage 0 inline, the
+ * closing edges, the projection, and what draw_polygon leaves.
  * The closing crossings and the projection keep their DIVS remainders in
  * the upper words, so the rounding here is on whole longs. */
 #include "glue.h"
@@ -192,20 +192,25 @@ static int clipper_regs(ClipCopy *c) {
     return 1;
 }
 
-int glue_C246A0(void) {
-    uint16_t last_size = custom_written(BLTSIZE);
-    uint16_t colour = rd_u16(CURRENT_COLOUR);
-    ClipCopy copy;
-    int projects, drawn;
+void clipper_snapshot(ClipperSnapshot *s) {
+    s->last_size = custom_written(BLTSIZE);
+    load_clip_copy(&s->copy);
+}
 
-    load_clip_copy(&copy);
-    projects = clipper_regs(&copy);
-    drawn = clip_and_draw_polygon();
-    /* The projection reads the clipped list, which the C has now written. */
+void clipper_registers(ClipperSnapshot *s, uint16_t colour, int drawn) {
+    int projects = clipper_regs(&s->copy);
     if (projects && !project_regs()) SET_W(D(7), 0);
-    if (drawn) draw_polygon_registers(last_size, colour);
+    if (drawn) draw_polygon_registers(s->last_size, colour);
     D(0) = (uint32_t)drawn;
     flags_logic_l(D(0));
+}
+
+int glue_C246A0(void) {
+    uint16_t colour = rd_u16(CURRENT_COLOUR);
+    ClipperSnapshot snapshot;
+
+    clipper_snapshot(&snapshot);
+    clipper_registers(&snapshot, colour, clip_and_draw_polygon());
     return glue_return();
 }
 
