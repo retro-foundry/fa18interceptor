@@ -28,8 +28,7 @@ int glue_C1342C(void) {
 
     /* The zero-third-lane route loads this header into D1 before testing +$5A.
      * The nonzero helper routes below replace it with their live results. */
-    if (rd_u16(header) & 0x2000) D(1) = rd_u16(header);
-    else SET_W(D(1), rd_u16(header));
+    D(1) = rd_u16(header);
     A(0) = record + 0x5A;
 
     /* With header bit 7 clear, a nonzero third lane ends through $C13C64.
@@ -55,6 +54,7 @@ int glue_C1342C(void) {
                     ? MATRIX_SIDE_ZERO_TARGETS : MATRIX_SIDE_ALT_TARGETS;
         int16_t target, used, eased;
         int16_t angle = rd_s16(record + 0x6A);
+        int use_5a_helper;
         if (lane_z < -10) lane_z = -10;
         else if (lane_z > 10) lane_z = 10;
         target = rd_s16(table + (gaddr)(2 * (lane_z < 0 ? -lane_z : lane_z)));
@@ -66,6 +66,15 @@ int glue_C1342C(void) {
             eased = (int16_t)(before_z - (int16_t)((int16_t)(before_z - used) >>
                                                      (rd_u8(record + 0x62) == 0x14 ? 2 : 1)));
             D(1) = (uint16_t)eased;
+            /* $C138CE/$C138F2/$C13918 call $C13C64 with -target.  The
+             * helper's word operations preserve that argument's high word,
+             * while its final D0 low word is the entry +$5A value. */
+            use_5a_helper = (angle < 0x50 && rd_s16(record + 0x6E) > 0x360) ||
+                             (angle < 0x3840 ? lane_z >= 0 : lane_z <= 0);
+            if (use_5a_helper) {
+                D(0) = (uint32_t)(-(int32_t)target);
+                SET_W(D(0), (uint16_t)before_z);
+            }
         } else {
             used = five_eighths(target);
             if (rd_u8(record + 0x20) & 0x04) used = (int16_t)(used >> 1);
@@ -73,17 +82,28 @@ int glue_C1342C(void) {
             D(1) = (uint16_t)eased;
         }
     }
-    /* $C13952 reaches $C13A2A for a zero third lane.  For values outside
-     * its dead zone, that helper leaves the decayed value in D1. */
-    if (!(header_before & 0x80) &&
-        (lane_z == 0 || (rd_u8(record + 4) & 0x08)) &&
-        (before_z < -15 || before_z > 15)) {
-        SET_W(D(1), rd_u16(record + 0x5A));
+    /* $C13952 reaches $C13A2A for a zero third lane.  With bit 7 clear,
+     * it decays the entry value.  With bit 7 set, $C13B5A first derives
+     * +/-$20 from +$6A, then this helper leaves its +/-$10 result in D1. */
+    if (lane_z == 0 || (rd_u8(record + 4) & 0x08)) {
+        if ((header_before & 0x80) && rd_s16(record + 0x6A) != 0) {
+            SET_W(D(1), rd_u16(record + 0x5A));
+        } else if (!(header_before & 0x80) && (before_z < -15 || before_z > 15)) {
+            SET_W(D(1), rd_u16(record + 0x5A));
+        }
     }
     /* The no-gate path ends after the initial header load. */
     if (!(rd_u16(COCKPIT_FLAGS) & 0x40)) {
+        uint32_t d0 = (uint32_t)(int32_t)index;
+        d0 <<= 9;
+        D(0) = (d0 & 0xFFFF0000u) | rd_u16(header);
         A(0) = header;
-        SET_W(D(1), rd_u16(COCKPIT_FLAGS));
+        D(1) = rd_u16(COCKPIT_FLAGS);
+    } else if (index == 0 && rd_s32(MATRIX_SIDE_METRIC) != 0 &&
+               (rd_u8(0xC461A4u) & 0x04)) {
+        /* $C139C0 reloads the header into A0 before the index-zero status
+         * tail returns through $C139CC or $C139FC. */
+        A(0) = header;
     }
     return glue_return();
 }
