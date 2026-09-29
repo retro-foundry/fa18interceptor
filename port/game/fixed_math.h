@@ -97,6 +97,8 @@ void update_target_point(void);
  * across $1E00 and, for the scripted view, a range band in +$63's high
  * nibble. */
 void classify_record_range(gaddr record);
+/* $C244E2: warning latch, then range from the selected record's point. */
+void classify_selected_record_range(gaddr record);
 
 /* Seed the projection ($C1C54E). While a context runs: update_target_point
  * and PROJECTION_ORIGIN = the observer's second position. Otherwise from

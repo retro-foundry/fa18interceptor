@@ -1,6 +1,7 @@
 /* Fixed-point trigonometry. */
 #include "fixed_math.h"
 
+#include "audio.h"
 #include "globals.h"
 #include "memory.h"
 
@@ -354,22 +355,14 @@ static int32_t cell_distance(gaddr record, int cell, int fine, int16_t coarse, i
     return d < 0 ? -d : d;
 }
 
-void classify_record_range(gaddr r) {
-    int16_t distance, band_x, band_z;
+static void classify_record_range_point(gaddr r, int16_t band_x, int16_t band_z,
+                                        int16_t fine_x, int16_t fine_z, int32_t height) {
+    int16_t distance;
     int32_t dx, dy, dz;
 
-    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) + 0x10));
-    if (rd_s16(r + 0x4A) >= 0x480) {
-        int8_t period = rd_s16(r + 0x4A) >= 0x900 ? 0x50 : 0x20;
-        if (period >= (int8_t)(rd_u8(r + 0x39) & 0xF0)) return;
-    }
-    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) & 0x0F));
-    band_x = rd_s16(r + 0x2C);
-    if (band_x < 0) return;
-    band_z = rd_s16(r + 0x2E);
-    dx = cell_distance(r, 0x06, 0x0C, band_x, rd_s16(r + 0x30));
-    dz = cell_distance(r, 0x08, 0x0E, band_z, rd_s16(r + 0x32));
-    dy = rd_s32(r + 0x34) - rd_s32(r + 0x10);
+    dx = cell_distance(r, 0x06, 0x0C, band_x, fine_x);
+    dz = cell_distance(r, 0x08, 0x0E, band_z, fine_z);
+    dy = height - rd_s32(r + 0x10);
     if (dy < 0) dy = -dy;
     if (dx > 0x7F00 || dy > 0x7F00 || dz > 0x7F00) {
         wr_u16(r + 0x4A, 0x7FFF);
@@ -400,6 +393,46 @@ void classify_record_range(gaddr r) {
         return;
     }
     wr_u8(r + 0x63, (uint8_t)((rd_u8(r + 0x63) & 0x0F) | 0x10));
+}
+
+void classify_record_range(gaddr r) {
+    int16_t band_x;
+    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) + 0x10));
+    if (rd_s16(r + 0x4A) >= 0x480) {
+        int8_t period = rd_s16(r + 0x4A) >= 0x900 ? 0x50 : 0x20;
+        if (period >= (int8_t)(rd_u8(r + 0x39) & 0xF0)) return;
+    }
+    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) & 0x0F));
+    band_x = rd_s16(r + 0x2C);
+    if (band_x < 0) return;
+    classify_record_range_point(r, band_x, rd_s16(r + 0x2E),
+                                rd_s16(r + 0x30), rd_s16(r + 0x32), rd_s32(r + 0x34));
+}
+
+void classify_selected_record_range(gaddr r) {
+    int16_t selected;
+    if (rd_s16(r + 0x6C) >= 0x1200 && !(rd_u8(r + 0x7C) & 0x70)) {
+        if (!rd_u8(BAR_REDRAWS_F)) {
+            wr_u8(BAR_REDRAWS_F, 1);
+            play_context_tone_4(4);
+        }
+    } else {
+        wr_u8(BAR_REDRAWS_F, 0);
+    }
+    selected = rd_s16(SELECTED_RECORD);
+    if (selected <= 0) return;
+    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) + 0x10));
+    if (rd_s16(r + 0x4A) >= 0x480) {
+        int8_t period = rd_s16(r + 0x4A) >= 0x900 ? 0x50 : 0x20;
+        if (period >= (int8_t)(rd_u8(r + 0x39) & 0xF0)) return;
+    }
+    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) & 0x0F));
+    {
+        gaddr source = CONTROL_RECORDS + (gaddr)(int32_t)selected;
+        classify_record_range_point(r, rd_s16(source + 0x06), rd_s16(source + 0x08),
+                                    rd_s16(source + 0x0C), rd_s16(source + 0x0E),
+                                    rd_s32(source + 0x10));
+    }
 }
 
 void seed_projection(void) {
