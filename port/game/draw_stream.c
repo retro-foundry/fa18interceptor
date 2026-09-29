@@ -614,3 +614,153 @@ int draw_offset_run(gaddr *stream) {
     } while (--count > 0);
     return drawn;
 }
+
+int draw_split_square(gaddr *stream) {
+    uint32_t colours = (uint32_t)rd_u16(*stream) << 16 | rd_u16(*stream + 2);
+    Vertex corner = get(WORKSPACES + 6);
+    int16_t shift = rd_s16(BOUND_SHIFT), dx, dz, a, b;
+    int32_t sx, sz;
+    int same;
+    gaddr in = CLIP_INPUT + 4;
+
+    *stream += 4;
+    if (corner.x > corner.z || (int16_t)-corner.x > corner.z || corner.y > corner.z || (int16_t)-corner.y > corner.z)
+        return -1;
+    wr_u32(CLIP_INPUT, 3);
+    a = (int16_t)((uint16_t)rd_s16(BOUND_OFFSET_X) << (shift & 63));
+    b = (int16_t)((uint16_t)rd_s16(BOUND_OFFSET_Z) << (shift & 63));
+    if ((shift & 63) >= 16) a = b = 0;
+    /* The eye's offsets from the square's corner, with their true signs. */
+    sx = (int32_t)(int16_t)-rd_s16(PROJECTION_WORDS) - a;
+    sz = (int32_t)(int16_t)-rd_s16(PROJECTION_WORDS + 4) - b;
+    dx = (int16_t)sx;
+    dz = (int16_t)sz;
+    same = (sx < 0) == (sz < 0);
+    if (sx < 0) dx = (int16_t)-dx;
+    if (sz < 0) dz = (int16_t)-dz;
+    wr_u16(CURRENT_COLOUR, (uint16_t)(dz > dx ? colours : colours >> 16));
+    put(in, get(WORKSPACES));
+    if (same) {
+        put(in + 6, get(WORKSPACES + 6));
+        put(in + 12, get(WORKSPACES + 0x18));
+    } else {
+        put(in + 6, get(WORKSPACES + 0xC));
+        put(in + 12, get(WORKSPACES + 0x12));
+    }
+    return clip_and_draw_polygon();
+}
+
+/* Which side of the bound record's edge a..b the eye is on: 1 at or in
+ * front of it (the BGE after ADD.L takes the true sign). */
+static int eye_side(int16_t a, int16_t b) {
+    gaddr bound = rd_u32(BOUND_RECORD);
+    int16_t shift = (int16_t)(rd_u8(bound + 6) & 15), grid = rd_s16(BOUND_SHIFT);
+    int16_t ax = rd_s16(bound + 0xA + (gaddr)(int32_t)a), az = rd_s16(bound + 0xE + (gaddr)(int32_t)a);
+    int16_t ex = (int16_t)(ax - rd_s16(bound + 0xA + (gaddr)(int32_t)b));
+    int16_t ez = (int16_t)(az - rd_s16(bound + 0xE + (gaddr)(int32_t)b));
+
+    ax = (int16_t)((ax >> shift) + rd_s16(BOUND_OFFSET_X));
+    az = (int16_t)((az >> shift) + rd_s16(BOUND_OFFSET_Z));
+    ax = (int16_t)((uint16_t)ax << (grid & 15));
+    az = (int16_t)((uint16_t)az << (grid & 15));
+    if ((grid & 63) >= 16) ax = az = 0;
+    ax = (int16_t)(ax + rd_s16(PROJECTION_WORDS));
+    az = (int16_t)(az + rd_s16(PROJECTION_WORDS + 4));
+    return (int64_t)((int32_t)ax * ex) + (int32_t)az * ez >= 0;
+}
+
+int draw_side_triangle(gaddr *stream) {
+    gaddr in = CLIP_INPUT + 4, block;
+    Vertex edge, q0, q1, q2, p;
+    int16_t a, b, c;
+    int flagged, first_path;
+
+    wr_u16(CLIP_INPUT + 2, 3); /* the shift word is left as it was */
+    wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
+    edge = edge_after(vertex_at(next_word(stream)));
+    a = next_word(stream);
+    b = next_word(stream);
+    flagged = b < 0;
+    first_path = eye_side(a, (int16_t)(b & 0x7FFF)) != flagged;
+    c = next_word(stream);
+    put(in, minus(get(vertex_at(c)), edge));
+    block = vertex_at(next_word(stream));
+    q0 = get(block);
+    q1 = get(block + 6);
+    q2 = get(block + 12);
+    p = get(block + 18);
+    if (first_path) {
+        put(in + 6, p);
+        p = plus(plus(p, minus(q1, q0)), minus(q2, q1));
+    } else {
+        p = plus(p, minus(q1, q0));
+        put(in + 6, p);
+        p = minus(plus(p, minus(q2, q1)), minus(q1, q0));
+    }
+    put(in + 12, p);
+    if ((int16_t)(rd_u16(in + 4) & rd_u16(in + 10) & rd_u16(in + 16)) < 0) return 0;
+    return clip_and_draw_polygon();
+}
+
+/* The ground-square colour choice of $C20592/$C203D0: 1 when the eye's x and
+ * z offsets from the square's corner have the same sign; `colour` gets the
+ * second word of `colours` when the z offset is the larger, else the first. */
+int square_diagonal(uint32_t colours, uint16_t *colour) {
+    int16_t shift = rd_s16(BOUND_SHIFT), a, b, dx, dz;
+    int32_t sx, sz;
+
+    a = (int16_t)((uint16_t)rd_s16(BOUND_OFFSET_X) << (shift & 63));
+    b = (int16_t)((uint16_t)rd_s16(BOUND_OFFSET_Z) << (shift & 63));
+    if ((shift & 63) >= 16) a = b = 0;
+    sx = (int32_t)(int16_t)-rd_s16(PROJECTION_WORDS) - a;
+    sz = (int32_t)(int16_t)-rd_s16(PROJECTION_WORDS + 4) - b;
+    dx = (int16_t)(sx < 0 ? -(int16_t)sx : (int16_t)sx);
+    dz = (int16_t)(sz < 0 ? -(int16_t)sz : (int16_t)sz);
+    *colour = (uint16_t)(dz > dx ? colours : colours >> 16);
+    return (sx < 0) == (sz < 0);
+}
+
+int draw_square_faces(gaddr *stream) {
+    uint32_t colours = (uint32_t)rd_u16(*stream) << 16 | rd_u16(*stream + 2);
+    uint16_t colour, second = rd_u16(*stream + 4);
+    Vertex v0 = get(WORKSPACES), v1 = get(WORKSPACES + 6), v2 = get(WORKSPACES + 12), v3 = get(WORKSPACES + 18);
+    Vertex d = minus(v0, v1), e = minus(v2, v1), p;
+    gaddr in = CLIP_INPUT + 4;
+    int drawn;
+
+    *stream += 6;
+    if (v1.x > v1.z || (int16_t)-v1.x > v1.z || v1.y > v1.z || (int16_t)-v1.y > v1.z) return -1;
+    wr_u32(CLIP_INPUT, 4);
+    if (square_diagonal(colours, &colour)) {
+        wr_u16(CURRENT_COLOUR, colour);
+        put(in, v0);
+        put(in + 6, v1);
+        p = plus(v3, e);
+        put(in + 12, p);
+        put(in + 18, plus(p, d));
+        drawn = clip_and_draw_polygon();
+        wr_u16(CURRENT_COLOUR, second);
+        if (!rd_u8(ATTITUDE_LATCH)) return drawn;
+        put(in + 12, get(in + 18));
+        p = plus(v0, e);
+        put(in + 6, p);
+        put(in + 18, minus(v0, minus(p, get(in + 12))));
+    } else {
+        wr_u16(CURRENT_COLOUR, colour);
+        put(in, v2);
+        put(in + 6, v3);
+        put(in + 12, plus(v3, d));
+        put(in + 18, plus(v2, d));
+        drawn = clip_and_draw_polygon();
+        wr_u16(CURRENT_COLOUR, second);
+        if (!rd_u8(ATTITUDE_LATCH)) return drawn;
+        {
+            Vertex c2 = get(in + 12), c3 = get(in + 18);
+            put(in, v0);
+            put(in + 6, c3);
+            put(in + 18, c2);
+            put(in + 12, plus(c3, minus(c2, v0)));
+        }
+    }
+    return drawn | clip_and_draw_polygon();
+}

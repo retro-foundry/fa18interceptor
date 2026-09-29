@@ -430,6 +430,12 @@ const FA18Port fa18_ports[] = {
     {0xC21500, glue_C21500, "draw_block_face", 8000},
     /* offset run */
     {0xC2122A, glue_C2122A, "draw_offset_run", 6000},
+    /* split square */
+    {0xC20592, glue_C20592, "draw_split_square", 8000},
+    /* side triangle */
+    {0xC2168A, glue_C2168A, "draw_side_triangle", 8000},
+    /* square faces */
+    {0xC203D0, glue_C203D0, "draw_square_faces", 16000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

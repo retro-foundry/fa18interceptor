@@ -619,3 +619,239 @@ int glue_C2122A(void) {
     flags_logic_w(D(0));
     return glue_return();
 }
+
+/* $C20592: its steps' registers, then the clipper's. */
+int glue_C20592(void) {
+    gaddr stream = A(2);
+    uint32_t a1 = A(1), a5 = A(5);
+    int16_t shift = rd_s16(BOUND_SHIFT);
+    int32_t sx, sz;
+    int drawn;
+
+    D(0) = rd_u32(A(2));
+    drawn = draw_split_square(&stream);
+    A(2) += 4;
+    A(3) = WORKSPACES;
+    D(1) = SEXT(rd_u16(WORKSPACES + 6));
+    D(2) = SEXT(rd_u16(WORKSPACES + 8));
+    D(3) = SEXT(rd_u16(WORKSPACES + 10));
+    if (W(1) > W(3)) goto outside;
+    SET_W(D(1), (uint16_t)-W(1));
+    if (W(1) > W(3) || W(2) > W(3)) goto outside;
+    SET_W(D(2), (uint16_t)-W(2));
+    if (W(2) > W(3)) goto outside;
+    A(0) = CLIP_INPUT + 4;
+    SET_W(D(6), (uint16_t)-rd_s16(PROJECTION_WORDS));
+    SET_W(D(7), (uint16_t)-rd_s16(PROJECTION_WORDS + 4));
+    SET_W(D(2), rd_u16(BOUND_OFFSET_X));
+    SET_W(D(3), rd_u16(BOUND_OFFSET_Z));
+    SET_W(D(5), (uint16_t)shift);
+    SET_W(D(2), (shift & 63) >= 16 ? 0 : (uint16_t)((uint16_t)W(2) << (shift & 63)));
+    SET_W(D(3), (shift & 63) >= 16 ? 0 : (uint16_t)((uint16_t)W(3) << (shift & 63)));
+    sx = (int32_t)W(6) - W(2);
+    SET_W(D(6), (uint16_t)sx);
+    sz = (int32_t)W(7) - W(3);
+    SET_W(D(7), (uint16_t)sz);
+    if (sx < 0) SET_W(D(6), (uint16_t)-W(6));
+    if (sz < 0) SET_W(D(7), (uint16_t)-W(7));
+    if (!(W(7) > W(6))) D(0) = D(0) << 16 | D(0) >> 16;
+    SET_W(D(7), (uint16_t)D(0));
+    A(0) = CLIP_INPUT + 4 + 18;
+    {
+        ClipperSnapshot snapshot;
+        clipper_snapshot(&snapshot);
+        snapshot.last_size = fa18_bltsize_at_draw_start;
+        clipper_registers(&snapshot, rd_u16(CURRENT_COLOUR), drawn);
+    }
+    A(1) = a1;
+    A(2) = stream;
+    A(5) = a5;
+    return glue_return();
+outside:
+    D(0) = 0xFFFFFFFFu;
+    flags_logic_l(D(0));
+    return glue_return();
+}
+
+static void load_words(int first, gaddr at) {
+    int k;
+    for (k = 0; k < 6; k++) D(first + k) = SEXT(rd_u16(at + (gaddr)(2 * k)));
+}
+
+/* $C2168A: its steps' registers in order, then the clipper's. */
+int glue_C2168A(void) {
+    gaddr stream = A(2), bound = rd_u32(BOUND_RECORD), in = CLIP_INPUT + 4;
+    uint32_t a1 = A(1), a5 = A(5);
+    int16_t off1 = rd_s16(A(2) + 2), a = rd_s16(A(2) + 4), b = rd_s16(A(2) + 6), c = rd_s16(A(2) + 8);
+    int16_t blk = rd_s16(A(2) + 10), grid = rd_s16(BOUND_SHIFT);
+    int drawn, first_path, k;
+
+    drawn = draw_side_triangle(&stream);
+    A(3) = WORKSPACES;
+    A(0) = in;
+    SET_W(D(0), (uint16_t)off1);
+    for (k = 0; k < 6; k++) D(2 + k) = SEXT(rd_u16(WORKSPACES + SEXT((uint16_t)off1) + (gaddr)(2 * k)));
+    for (k = 0; k < 3; k++) SET_W(D(5 + k), (uint16_t)(W(5 + k) - W(2 + k)));
+    D(6) = D(6) << 16 | D(6) >> 16;
+    D(7) = D(7) << 16 | D(7) >> 16;
+    A(4) = bound;
+    SET_W(D(0), (uint16_t)a);
+    SET_W(D(1), rd_u16(bound + 0xA + SEXT((uint16_t)a)));
+    SET_W(D(2), rd_u16(bound + 0xE + SEXT((uint16_t)a)));
+    SET_W(D(3), (uint16_t)D(1));
+    SET_W(D(4), (uint16_t)D(2));
+    SET_W(D(0), (uint16_t)b);
+    SET_W(D(6), (uint16_t)b);
+    D(0) &= ~0x8000u;
+    SET_W(D(1), (uint16_t)(W(1) - rd_s16(bound + 0xA + SEXT(D(0)))));
+    SET_W(D(2), (uint16_t)(W(2) - rd_s16(bound + 0xE + SEXT(D(0)))));
+    SET_B(D(7), rd_u8(bound + 6));
+    SET_W(D(7), W(7) & 15);
+    SET_W(D(3), (uint16_t)(W(3) >> W(7)));
+    SET_W(D(4), (uint16_t)(W(4) >> W(7)));
+    SET_W(D(3), (uint16_t)(W(3) + rd_s16(BOUND_OFFSET_X)));
+    SET_W(D(4), (uint16_t)(W(4) + rd_s16(BOUND_OFFSET_Z)));
+    SET_W(D(7), (uint16_t)grid);
+    SET_W(D(3), (grid & 63) >= 16 ? 0 : (uint16_t)((uint16_t)W(3) << (grid & 63)));
+    SET_W(D(4), (grid & 63) >= 16 ? 0 : (uint16_t)((uint16_t)W(4) << (grid & 63)));
+    SET_W(D(3), (uint16_t)(W(3) + rd_s16(PROJECTION_WORDS)));
+    SET_W(D(4), (uint16_t)(W(4) + rd_s16(PROJECTION_WORDS + 4)));
+    D(3) = (uint32_t)((int32_t)W(3) * W(1));
+    D(4) = (uint32_t)((int32_t)W(4) * W(2));
+    first_path = ((int64_t)(int32_t)D(3) + (int32_t)D(4) >= 0) != (b < 0);
+    D(4) += D(3);
+    D(6) = D(6) << 16 | D(6) >> 16;
+    D(7) = D(7) << 16 | D(7) >> 16;
+    SET_W(D(0), (uint16_t)c);
+    for (k = 0; k < 3; k++) D(1 + k) = SEXT(rd_u16(WORKSPACES + SEXT((uint16_t)c) + (gaddr)(2 * k)));
+    for (k = 0; k < 3; k++) SET_W(D(1 + k), (uint16_t)(W(1 + k) - W(5 + k)));
+    A(0) = in + 6;
+    A(3) = WORKSPACES + SEXT((uint16_t)blk);
+    load_words(2, A(3));
+    for (k = 0; k < 3; k++) SET_W(D(5 + k), (uint16_t)(W(5 + k) - W(2 + k)));
+    if (first_path) {
+        for (k = 0; k < 3; k++) D(k) = SEXT(rd_u16(A(3) + 0x12 + (gaddr)(2 * k)));
+        A(0) += 6;
+        for (k = 0; k < 3; k++) SET_W(D(k), (uint16_t)(W(k) + W(5 + k)));
+        A(2) = SEXT((uint16_t)D(2));
+        load_words(2, A(3) + 6);
+        for (k = 0; k < 3; k++) SET_W(D(5 + k), (uint16_t)(W(5 + k) - W(2 + k)));
+        SET_W(D(2), (uint16_t)A(2));
+        for (k = 0; k < 3; k++) SET_W(D(k), (uint16_t)(W(k) + W(5 + k)));
+    } else {
+        A(1) = SEXT((uint16_t)D(5));
+        A(4) = SEXT((uint16_t)D(6));
+        A(5) = SEXT((uint16_t)D(7));
+        for (k = 0; k < 3; k++) D(k) = SEXT(rd_u16(A(3) + 0x12 + (gaddr)(2 * k)));
+        for (k = 0; k < 3; k++) SET_W(D(k), (uint16_t)(W(k) + W(5 + k)));
+        A(0) += 6;
+        A(2) = SEXT((uint16_t)D(2));
+        load_words(2, A(3) + 6);
+        for (k = 0; k < 3; k++) SET_W(D(5 + k), (uint16_t)(W(5 + k) - W(2 + k)));
+        SET_W(D(2), (uint16_t)A(2));
+        for (k = 0; k < 3; k++) SET_W(D(k), (uint16_t)(W(k) + W(5 + k)));
+        SET_W(D(0), (uint16_t)(W(0) - (int16_t)A(1)));
+        SET_W(D(1), (uint16_t)(W(1) - (int16_t)A(4)));
+        SET_W(D(2), (uint16_t)(W(2) - (int16_t)A(5)));
+    }
+    SET_W(D(2), (uint16_t)(W(2) & rd_s16(in + 10) & rd_s16(in + 4)));
+    if (W(2) < 0) {
+        A(1) = a1;
+        A(2) = stream;
+        A(5) = a5;
+        D(0) = 0;
+        flags_logic_l(0);
+        return glue_return();
+    }
+    {
+        ClipperSnapshot snapshot;
+        clipper_snapshot(&snapshot);
+        snapshot.last_size = fa18_bltsize_at_draw_start;
+        clipper_registers(&snapshot, rd_u16(CURRENT_COLOUR), drawn);
+    }
+    A(1) = a1;
+    A(2) = stream;
+    A(5) = a5;
+    return glue_return();
+}
+
+/* $C203D0: its frame words, then the last clipper call's registers. */
+int glue_C203D0(void) {
+    gaddr stream = A(2), in = CLIP_INPUT + 4;
+    uint32_t a1 = A(1), a5 = A(5), colours = rd_u32(A(2));
+    uint16_t second = rd_u16(A(2) + 4), colour;
+    int drawn, same, both = rd_u8(ATTITUDE_LATCH) != 0, k;
+    int16_t v[12];
+
+    for (k = 0; k < 12; k++) v[k] = rd_s16(WORKSPACES + (gaddr)(2 * k));
+    same = square_diagonal(colours, &colour);
+    drawn = draw_square_faces(&stream);
+    wr_u16(A(6) - 0x7E, 0);
+    wr_u16(A(6) - 0x5E, second);
+    D(0) = colours;
+    A(2) = stream;
+    A(3) = WORKSPACES;
+    if (drawn < 0) {
+        D(1) = SEXT((uint16_t)v[3]);
+        D(2) = SEXT((uint16_t)v[4]);
+        D(3) = SEXT((uint16_t)v[5]);
+        if (W(1) <= W(3)) {
+            SET_W(D(1), (uint16_t)-W(1));
+            if (W(1) <= W(3) && W(2) <= W(3)) SET_W(D(2), (uint16_t)-W(2));
+        }
+        D(0) = 0xFFFFFFFFu;
+        flags_logic_l(D(0));
+        return glue_return();
+    }
+    wr_u16(A(6) - 0x7E, (uint16_t)drawn);
+    /* The registers at the last clipper call. */
+    A(0) = in;
+    for (k = 0; k < 9; k++) {
+        int r = k < 8 ? k : -1;
+        if (r >= 0) D(r) = SEXT((uint16_t)v[k]);
+    }
+    A(4) = SEXT((uint16_t)v[8]);
+    if (same) {
+        if (!both) {
+            for (k = 0; k < 3; k++) SET_W(D(k), (uint16_t)(v[k] - v[3 + k]));
+            SET_W(D(6), (uint16_t)(v[6] - v[3]));
+            SET_W(D(7), (uint16_t)(v[7] - v[4]));
+            A(4) = SEXT((uint16_t)(v[8] - v[5]));
+            for (k = 0; k < 3; k++) SET_W(D(3 + k), rd_u16(in + 18 + (gaddr)(2 * k)));
+            A(3) = WORKSPACES + 18;
+        } else {
+            SET_W(D(6), (uint16_t)(v[6] - v[3]));
+            SET_W(D(7), (uint16_t)(v[7] - v[4]));
+            A(4) = SEXT((uint16_t)(v[8] - v[5]));
+            for (k = 0; k < 3; k++) SET_W(D(k), rd_u16(in + 6 + (gaddr)(2 * k)));
+            for (k = 0; k < 3; k++) SET_W(D(k), (uint16_t)(W(k) - rd_s16(in + 12 + (gaddr)(2 * k))));
+            for (k = 0; k < 3; k++) SET_W(D(3 + k), rd_u16(in + 18 + (gaddr)(2 * k)));
+        }
+    } else {
+        if (!both) {
+            for (k = 0; k < 3; k++) SET_W(D(k), (uint16_t)(v[k] - v[3 + k]));
+            for (k = 0; k < 3; k++) SET_W(D(3 + k), rd_u16(in + 12 + (gaddr)(2 * k)));
+            for (k = 0; k < 2; k++) SET_W(D(6 + k), rd_u16(in + 18 + (gaddr)(2 * k)));
+            A(4) = SEXT(rd_u16(in + 22));
+            A(3) = WORKSPACES + 18;
+        } else {
+            for (k = 0; k < 3; k++) D(k) = SEXT((uint16_t)v[k]);
+            for (k = 0; k < 3; k++) D(3 + k) = SEXT(rd_u16(in + 18 + (gaddr)(2 * k)));
+            for (k = 0; k < 3; k++) SET_W(D(3 + k), (uint16_t)(W(3 + k) - W(k)));
+            for (k = 0; k < 2; k++) SET_W(D(6 + k), rd_u16(in + 12 + (gaddr)(2 * k)));
+            A(4) = SEXT(rd_u16(in + 16));
+        }
+    }
+    {
+        ClipperSnapshot snapshot;
+        clipper_snapshot(&snapshot);
+        snapshot.last_size = fa18_bltsize_at_draw_start;
+        clipper_registers(&snapshot, both ? second : colour, -1);
+    }
+    A(1) = a1;
+    A(2) = stream;
+    A(5) = a5;
+    SET_W(D(0), (uint16_t)drawn);
+    flags_logic_w(D(0));
+    return glue_return();
+}

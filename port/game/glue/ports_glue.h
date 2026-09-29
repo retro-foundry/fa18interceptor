@@ -500,4 +500,13 @@ int glue_C21500(void);
 /* offset run */
 int glue_C2122A(void);
 
+/* split square */
+int glue_C20592(void);
+
+/* side triangle */
+int glue_C2168A(void);
+
+/* square faces */
+int glue_C203D0(void);
+
 #endif

@@ -119,4 +119,28 @@ int draw_block_face(gaddr *stream);
  * ($C2122A). */
 int draw_offset_run(gaddr *stream);
 
+/* The ground square in the first workspaces ($C20592), split by the
+ * diagonal the eye sees across: a long of two colours, the first when the
+ * eye's x offset from the square's corner is the larger. -1 when the second
+ * workspace point is outside the view. */
+int draw_split_square(gaddr *stream);
+
+/* A triangle beside the bound record's edge ($C2168A): colour, a vertex
+ * whose edge moves the first corner back, the edge's two bound points (bit
+ * 15 of the second flags the other side), the first corner's vertex, then a
+ * block whose fourth vertex and edges give the other two corners, by the
+ * side of the edge the eye is on. Nothing when all three are behind. */
+int draw_side_triangle(gaddr *stream);
+
+/* 1 when the eye's x and z offsets from the ground square's corner have
+ * the same sign; `colour` is the second word of `colours` when the z offset
+ * is the larger, else the first. */
+int square_diagonal(uint32_t colours, uint16_t *colour);
+
+/* The ground square in the first workspaces as quads ($C203D0): a long of
+ * two colours as for draw_split_square, then a word colour for the second
+ * quad drawn while ATTITUDE_LATCH is set. -1 when the second workspace
+ * point is outside the view. */
+int draw_square_faces(gaddr *stream);
+
 #endif
