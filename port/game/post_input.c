@@ -1,6 +1,8 @@
 /* Post-input stage sequence (STAGE_CALLBACK chain). */
 #include "post_input.h"
 
+#include "audio.h"
+
 #include "globals.h"
 #include "memory.h"
 
@@ -32,4 +34,11 @@ void start_context_stage(void) {
         wr_u8(VIEWPORT_TARGET, 10);
         wr_u32(STAGE_CALLBACK, ROUTINE_VIEWPORT_CHANGE);
     }
+}
+
+void check_post_input_expiry(void) {
+    if (rd_s16(POST_INPUT_COUNTDOWN) >= 0) return;
+    wr_u8(POST_INPUT_EXPIRED, 1);
+    play_tone_2();
+    wr_u32(STAGE_CALLBACK, STAGE_AFTER_EXPIRY);
 }

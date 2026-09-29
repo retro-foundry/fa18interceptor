@@ -212,4 +212,9 @@ int glue_C1C2C8(void);
 int glue_C24568(void);
 int glue_C304FA(void);
 
+/* batch 28: post-input expiry, projection seed, condition tables */
+int glue_C10D8A(void);
+int glue_C1C54E(void);
+int glue_C09AB8(void);
+
 #endif

@@ -13,4 +13,8 @@ void complete_post_input(void);
  * its event and then change the viewport. */
 void start_context_stage(void);
 
+/* Once POST_INPUT_COUNTDOWN has gone negative ($C10D8A): mark it expired,
+ * sound tone 2 and install STAGE_AFTER_EXPIRY as the stage callback. */
+void check_post_input_expiry(void);
+
 #endif

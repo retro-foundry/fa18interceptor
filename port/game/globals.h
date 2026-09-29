@@ -298,4 +298,16 @@
 #define LANE_WORD          0xC4597Cu /* word: >> 4 compared with SPAN_ORIGIN + 12 */
 #define LANE_PATTERN       0x12ADCu  /* Chip RAM pattern the lane blit reads through C */
 
+/* ---- projection seed, post-input expiry, condition tables ---------------- */
+#define POST_INPUT_EXPIRED 0xC457A1u /* byte: set once POST_INPUT_COUNTDOWN runs out */
+#define STAGE_AFTER_EXPIRY 0xC10DAEu /* the stage callback installed then */
+#define PROJECTION_ORIGIN  0xC45A7Cu /* long[3]: where the projection is seen from */
+#define PROJECTION_WORDS   0xC45A72u /* word[3]: TARGET_POINT >> 8 */
+#define PROJECTION_Y       0xC45A78u /* long: its y */
+#define CONDITION_KEY_A    0xC45948u /* word: first key of the condition tables */
+#define CONDITION_KEY_B    0xC4594Au /* word: second key */
+#define CONDITION_VALUE    0xC45A78u /* long: compared (negated) with the thresholds */
+#define CONDITION_BYTE_A   0xC45850u /* byte: matched against the first byte list */
+#define CONDITION_BYTE_B   0xC45854u /* byte: matched against the second */
+
 #endif

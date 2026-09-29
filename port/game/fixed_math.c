@@ -377,3 +377,93 @@ void classify_record_range(gaddr r) {
     }
     wr_u8(r + 0x63, (uint8_t)((rd_u8(r + 0x63) & 0x0F) | 0x10));
 }
+
+void seed_projection(void) {
+    int32_t d[3];
+    int i;
+
+    if (rd_u8(CONTEXT_SELECT)) {
+        update_target_point();
+        for (i = 0; i < 3; i++) wr_s32(PROJECTION_ORIGIN + (gaddr)(4 * i), rd_s32(OBSERVER + 0x0C + (gaddr)(4 * i)));
+        for (i = 0; i < 3; i++) d[i] = rd_s32(TARGET_POINT + (gaddr)(4 * i));
+    } else {
+        gaddr r = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+        int16_t eye[3] = {0, 4, 18};
+        uint8_t type = rd_u8(r + 0x62);
+        if (type == 0x30) { eye[1] = 1; eye[2] = -5; }
+        else if (type == 0x11) { eye[1] = 5; eye[2] = 20; }
+        for (i = 0; i < 3; i++) {
+            gaddr m = r + 0x92 + (gaddr)(6 * i);
+            int32_t sum = (int32_t)eye[0] * rd_s16(m) + (int32_t)eye[1] * rd_s16(m + 2) + (int32_t)eye[2] * rd_s16(m + 4);
+            d[i] = sum >> 6;
+            wr_s32(PROJECTION_ORIGIN + (gaddr)(4 * i), rd_s32(r + 0x14 + (gaddr)(4 * i)) + d[i]);
+        }
+        d[0] = -(d[0] + (rd_s32(r + 0x14) & 0x3FFFFF));
+        d[1] = -(d[1] + rd_s32(r + 0x18));
+        d[2] = -(d[2] + (rd_s32(r + 0x1C) & 0x3FFFFF));
+        for (i = 0; i < 3; i++) wr_s32(TARGET_POINT + (gaddr)(4 * i), d[i]);
+    }
+    for (i = 0; i < 3; i++) wr_s16(PROJECTION_WORDS + (gaddr)(2 * i), (int16_t)(d[i] >> 8));
+    wr_s32(PROJECTION_Y, d[1] >> 8);
+}
+
+/* Look `key` up in the -1-terminated word list at `list`, followed by a
+ * table of word offsets from `base`; 0 when it is absent. */
+static gaddr keyed_entry(gaddr list, gaddr base, int16_t key) {
+    gaddr p = list;
+    int16_t index = -2, value;
+    do {
+        index = (int16_t)(index + 2);
+        value = rd_s16(p);
+        p += 2;
+        if (value < 0) return 0;
+    } while (value != key);
+    while (rd_s16(p) >= 0) p += 2;
+    p += 2;
+    return base + (gaddr)(int32_t)rd_s16(p + (gaddr)(int32_t)index);
+}
+
+int condition_table_scan(gaddr table, int *last_byte) {
+    gaddr p = keyed_entry(table, table, rd_s16(CONDITION_KEY_B));
+    int32_t value;
+    int8_t want;
+    *last_byte = -1;
+    if (!p) return 0;
+    p = keyed_entry(p, table, rd_s16(CONDITION_KEY_A));
+    if (!p) return 0;
+    value = -rd_s32(CONDITION_VALUE);
+    for (;;) {
+        int16_t mode = rd_s16(p);
+        int32_t threshold;
+        if (mode < 0) return 0;
+        threshold = rd_s32(p + 2);
+        p += 6;
+        if (mode == 0 ? value > threshold : value < threshold) return 0;
+        want = (int8_t)rd_u8(CONDITION_BYTE_A);
+        *last_byte = (uint8_t)want;
+        /* (byte, byte list) pairs, each list ended by a negative byte. A
+         * matched first byte switches the comparison to CONDITION_BYTE_B
+         * for the rest of the entry, as the original leaves it. */
+        for (;;) {
+            int8_t b = (int8_t)rd_u8(p++);
+            if (b < 0) break;
+            if (b == want) {
+                want = (int8_t)rd_u8(CONDITION_BYTE_B);
+                *last_byte = (uint8_t)want;
+                for (;;) {
+                    int8_t c = (int8_t)rd_u8(p++);
+                    if (c < 0) break;
+                    if (c == want) return 1;
+                }
+            } else {
+                while ((int8_t)rd_u8(p++) >= 0) {}
+            }
+        }
+        if (p & 1) p++;
+    }
+}
+
+int condition_table_matches(gaddr table) {
+    int last_byte;
+    return condition_table_scan(table, &last_byte);
+}

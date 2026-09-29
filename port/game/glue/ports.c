@@ -198,6 +198,10 @@ const FA18Port fa18_ports[] = {
     {0xC1C2C8, glue_C1C2C8, "update_target_point", 1400},
     {0xC24568, glue_C24568, "classify_record_range", 1200},
     {0xC304FA, glue_C304FA, "blit_lane", 400},
+    /* batch 28: post-input expiry, projection seed, condition tables */
+    {0xC10D8A, glue_C10D8A, "check_post_input_expiry", 1300},
+    {0xC1C54E, glue_C1C54E, "seed_projection", 1500},
+    {0xC09AB8, glue_C09AB8, "condition_table_matches", 800},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -91,4 +91,25 @@ void update_target_point(void);
  * nibble. */
 void classify_record_range(gaddr record);
 
+/* Seed the projection ($C1C54E). While a context runs: update_target_point
+ * and PROJECTION_ORIGIN = the observer's second position. Otherwise from
+ * the viewed record: an eye offset by record type ($30: (0, 1, -5); $11:
+ * (0, 5, 20); others (0, 4, 18)) through its +$92 matrix (>> 6) gives
+ * PROJECTION_ORIGIN = position + offset and TARGET_POINT = -(offset +
+ * position, x and z masked to 22 bits). Then PROJECTION_WORDS and
+ * PROJECTION_Y from TARGET_POINT >> 8. */
+void seed_projection(void);
+
+/* A condition table ($C09AB8): find CONDITION_KEY_B then CONDITION_KEY_A in
+ * its two word lists (each -1 terminated, followed by an offset table);
+ * then entries of (mode word, long threshold, byte list, byte list) until a
+ * negative mode. An entry passes when -CONDITION_VALUE is on the mode's
+ * side of the threshold (mode 0: not above it, else not below) and
+ * CONDITION_BYTE_A is in its first list and CONDITION_BYTE_B in the list
+ * that follows. Returns 1 when one passes. */
+int condition_table_matches(gaddr table);
+
+/* The same, also giving the last byte value compared (-1 when none). */
+int condition_table_scan(gaddr table, int *last_byte);
+
 #endif
