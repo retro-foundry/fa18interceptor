@@ -64,6 +64,8 @@ const FA18Port fa18_ports[] = {
     {0xC2EC94, glue_C2EC94, "project_view_point_mode", 650},
     {0xC2EC9C, glue_C2EC9C, "project_view_point_mode", 650},
     {0xC2ECA4, glue_C2ECA4, "project_view_point_mode", 650},
+    {0xC1FE24, glue_C1FE24, "draw_display_stream_point", 750},
+    {0xC1FE46, glue_C1FE46, "draw_display_stream_point", 750},
     /* render_line.c, render_state.c */
     {0xC2F490, glue_C2F490, "reset_line_style", 30},
     {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},

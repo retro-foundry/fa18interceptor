@@ -12,4 +12,9 @@ int project_view_point(int16_t x, int16_t y, int16_t depth);
 int project_view_point_mode(int16_t x, int16_t y, int16_t depth,
                             int16_t mode, int16_t size, int16_t radius);
 
+/* A stream word selects a view-space triplet; the next word supplies its
+ * colour ($C1FE24/$C1FE46). */
+void draw_display_stream_point(uint32_t stream, int16_t mode,
+                               int16_t size, int16_t radius);
+
 #endif

@@ -57,3 +57,11 @@ int project_view_point_mode(int16_t x, int16_t y, int16_t depth,
     default: return 1;
     }
 }
+
+void draw_display_stream_point(uint32_t stream, int16_t mode,
+                               int16_t size, int16_t radius) {
+    gaddr point = DISPLAY_VERTEX_BASE + (gaddr)(int32_t)rd_s16(stream);
+    wr_u16(CURRENT_COLOUR, rd_u16(stream + 2));
+    project_view_point_mode(rd_s16(point), rd_s16(point + 2),
+                            rd_s16(point + 4), mode, size, radius);
+}

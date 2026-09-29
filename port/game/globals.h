@@ -25,6 +25,7 @@
 #define CURRENT_COLOUR     0xC45954u /* word: colour bits of the object being drawn */
 #define CIRCLE_SPANS_PTR   0xC4FE1Cu /* long: work table of left/right extents by row */
 #define PROJECTED_PAIR     0xC45958u /* two words: reflected screen position, or -1 */
+#define DISPLAY_VERTEX_BASE 0xC48390u /* packed view-space triplets for display stream */
 #define LINE_LAST_ROW      0xC45984u /* word: last row lines may reach */
 #define LINE_PLANES        0xC456E7u /* byte: planes a line is drawn into (bit n: table entry 3-n) */
 #define LINE_COLOUR        0xC456E8u /* word: line colour in the low byte; negative: CURRENT_COLOUR */

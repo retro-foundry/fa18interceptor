@@ -19,12 +19,9 @@ static void divs_word(int n, int16_t divisor) {
     D(n) = ((uint32_t)(uint16_t)(dividend % divisor) << 16) | (uint16_t)quotient;
 }
 
-static int projection_mode(int16_t mode, int entry) {
+void projection_mode_registers(int16_t mode, int entry) {
     int16_t x = W(0), y = W(1), depth = W(2);
     int16_t size = rd_s16(A(6) - 0x28);
-    int16_t radius = W(6);
-    if (entry == 0) project_view_point(x, y, depth);
-    else project_view_point_mode(x, y, depth, mode, size, radius);
     if (entry == 0) D(7) = 0xFFFFFFFBu;
     else if (entry == 1) SET_W(D(7), (uint16_t)mode);
     else D(7) = (uint32_t)(int32_t)mode;
@@ -36,7 +33,7 @@ static int projection_mode(int16_t mode, int entry) {
     if (depth <= 0) {
         D(0) = 0;
         flags_logic_l(D(0));
-        return glue_return();
+        return;
     }
     D(0) = (uint32_t)((int32_t)x * 160);
     divs_word(0, depth);
@@ -71,7 +68,7 @@ static int projection_mode(int16_t mode, int entry) {
         goto drawn;
     }
     flags_logic_w(D(0));
-    return glue_return();
+    return;
 pixel:
     plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
     goto drawn;
@@ -83,10 +80,18 @@ block:
 drawn:
     D(0) = 1;
     flags_logic_l(D(0));
-    return glue_return();
+    return;
 rejected:
     D(0) = 0;
     flags_logic_l(0xFFFFFFFFu); /* the invalid pair's MOVE.L */
+    return;
+}
+
+static int projection_mode(int16_t mode, int entry) {
+    int16_t x = W(0), y = W(1), depth = W(2);
+    if (entry == 0) project_view_point(x, y, depth);
+    else project_view_point_mode(x, y, depth, mode, rd_s16(A(6) - 0x28), W(6));
+    projection_mode_registers(mode, entry);
     return glue_return();
 }
 
