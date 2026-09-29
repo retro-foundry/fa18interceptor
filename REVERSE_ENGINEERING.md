@@ -87,17 +87,69 @@ and fields, and to separate code from data. The port does not wait for it.
   Seed function starts from the entry point, relocation targets and traced
   PCs; run auto-analysis; check instruction lengths against the CPU core's
   decoder on every traced instruction.
-- **P-code export once for the whole program**: per instruction its
-  address, bytes, function, flows and raw P-code operations
-  (`ExportFa18Pcode.java`, `pcode/raw/<name>/`). Use it for routine reports
-  (`analysis/routines/<address>_<name>.md`: contract, callers, state read
-  and written, evidence), cross-references when naming globals, and as an
-  independent check of instruction semantics.
+- **P-code export**: per instruction its address, bytes, Ghidra's
+  assembly, function, flows and raw P-code operations
+  (`scripts/ghidra/ExportFa18Pcode.java`). Next time, export once for the
+  whole program; here it was done per capture (see below).
 - **Never gate porting on per-capture exports.** One export per capture over
   ~120 captures cost weeks and covered 16% of the code.
 - **Optional:** byte-exact assembly reconstructions (`source_amiga/observed/`)
   document understanding and prove code/data boundaries. The C port does not
   depend on them.
+
+### How the P-code is actually used
+
+In practice the export has served as an **evidence record of what ran**:
+each file lists the instructions one capture executed. No tool interprets
+the P-code operations, and nothing on the path to the running C reads the
+export at all.
+
+**What is in it.** `pcode/raw/<capture>/` holds one export per capture (126
+directories, frozen: Ghidra is not run on this account):
+
+- `instructions.pcode.jsonl`: one row per executed instruction start
+  (`address`, `bytes`, `assembly`, `function`, `flow_type`, `static_flows`,
+  and the `pcode` operation list with varnodes);
+- `observed.asm.txt`: the same instructions as a plain listing;
+- `functions.json`: Ghidra's function inventory for those addresses;
+- `summary.json`: counts and the language (`68000:BE:32:default`);
+- `instructions.segmented.jsonl` and `segment_annotation.json`, added by
+  `scripts/annotate_pcode_segments.py`: each row mapped back to its original
+  Hunk segment and offset.
+
+**Who reads which fields.**
+
+| Consumer | Reads | Produces |
+| --- | --- | --- |
+| `scripts/coverage.py` | `address`, `bytes` of every row | the "trace-observed bytes" count in `analysis/coverage.json` and STATUS.md |
+| `scripts/verify_reconstructions.py` | coverage from `coverage.py` | coverage reported beside the byte check of `source_amiga/observed/` |
+| `scripts/list_unreconstructed_observed.py` | `address`, `bytes` | executed ranges without byte-exact assembly yet (a work queue) |
+| `scripts/generate_ghidra_function_coverage.py`, `scripts/list_unrepresented_functions.py` | `functions.json` | function entries with and without assembly (`analysis/ghidra_function_coverage.md`) |
+| `scripts/plan_captures.py` | `address`, `bytes` | CODE no export covers, ranked as recording targets (`analysis/capture_targets.md`) |
+| Routine reports, by hand | `observed.asm.txt`, the P-code operations | `analysis/routines/*.md` name one export as the "canonical P-code" or authority for the routine's contract; `source_amiga/observed/` slices were written from these listings |
+
+**What does not read it.** None of the following reads the export; they
+all work from Musashi's decoder and the loaded RAM image:
+
+- the translator (`tools/recomp/recomp.py`);
+- the generated C;
+- liveness;
+- `port_candidates.py` and `port_info.py`;
+- the shadow and poison proofs;
+- the recreated C.
+
+The export reaches the port only indirectly. `port_info.py` prints the
+routine's report path, and the report's contract and names shape the C
+and `globals.h`. The instruction listing the port works from is the one
+in the generated C's comments, not Ghidra's.
+
+**What this means for the next project.** Machine-read, the P-code was only
+ever an execution trace with a disassembly attached. The emulator's own
+instruction trace gives the same evidence without Ghidra. A P-code lifter
+earns its cost only if something reads its semantics. For example, a
+differential check: evaluate each instruction's P-code on recorded
+registers and compare with the CPU core's result, or generate the
+translation from it. Neither was done here (lesson 12.16).
 
 ## 5. Machine layer
 
@@ -360,6 +412,17 @@ Paula as a mixer), and the parity runner keeps checking every recording.
     suppressed.
 15. **Handoffs stay one page.** Goal, current numbers, next blocker,
     commands. History lives in git.
+16. **Know what reads each analysis product.** Here, the P-code export fed
+    coverage counts and hand-written reports; the translation, proofs and C
+    never read it (section 4). Before producing an analysis artefact, name
+    the tool or step that will consume it; an artefact nothing reads is
+    documentation, and should be priced as such.
+17. **Replay register flow on a snapshot when the C changes what the replay
+    reads.** For recursive or stateful routines (the polygon clipper), the
+    glue copies the state the original will read, runs the C on the real
+    state, then replays the registers from the copy. Anything the replay
+    reads that only the C produces (the clipped vertex list) must be read
+    after the C runs.
 
 ## Rules for agents
 
@@ -378,7 +441,7 @@ Paula as a mixer), and the parity runner keeps checking every recording.
 ```
 captures/            sealed recordings (read-only)
 analysis/            memory map, routine reports, inventories
-pcode/               Ghidra P-code export (one static export)
+pcode/               Ghidra P-code exports (evidence of what ran; section 4)
 source_amiga/        optional byte-exact assembly
 tools/<cpu-core>/    vendored reference CPU core (timing-corrected)
 tools/<emulator>/    emulator source, the reference for machine behaviour

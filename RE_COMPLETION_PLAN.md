@@ -30,7 +30,7 @@ the memory map says what is known.
 | `analysis/memory_map.md` | Addresses of globals, records and hardware use |
 | `analysis/routines/` | 425 routine reports: contract, callers, evidence |
 | `source_amiga/observed/` | 1,176 byte-exact assembly slices (51,256 bytes) |
-| `pcode/raw/` | Raw P-code for 122 captures (16% of CODE bytes) |
+| `pcode/raw/` | Raw P-code for 126 captures (16% of CODE bytes); evidence of what ran, not read by the port |
 | `analysis/coverage.json` | Byte coverage: 285,976 CODE bytes, 66,192 confirmed data |
 | `analysis/port_inventory.md` | Porting order, with the module and report for each routine |
 | `port/recomp/generated/recomp_graph.json` | Call graph of the 540 translated routines |

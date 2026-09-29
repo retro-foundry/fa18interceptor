@@ -1,6 +1,6 @@
 # Handoff
 
-One page. History is in git. Updated 2026-09-28.
+One page. History is in git. Updated 2026-09-29.
 
 ## Goal
 
@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 152; 1.5 million calls matching over run075, run024, run060 and run062; poison-clean |
+| Recreated routines (`port/game/`) | 180; 1,222,313 calls matching over run075, run024, run060 and run062; poison-clean |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
 | run060 replay | game RAM identical through frame 93; pixels exact to frame 540; drifts after |
@@ -22,8 +22,13 @@ one at a time, each proven on every call.
 ## Next
 
 1. **Keep recreating routines.** Work bottom-up from `port_candidates.py`,
-   following PORT.md, "Recreating a routine". `$C1FB82` (backface predicate)
-   is postponed until its callers are C.
+   following PORT.md, "Recreating a routine". The polygon path is C from
+   the faces (`$C09952`, `$C099F6`) down through the clipper and
+   `draw_polygon`; the clipper's register replay is reusable for its other
+   callers (`port/game/glue/glue_clip.h`). Next on the list: `$C11BFC`,
+   `$C345A0`, `$C123FA`, `$C27456`. `$C1FB82` (backface predicate) is
+   postponed until its callers are C. The `$C0004E` family are stack
+   trampolines, not game logic; leave them.
 2. **Exact replay timing (deferred).** Bus timing is modelled (STATUS.md,
    "Bus timing"). For end-to-end replays, port UAE's cycle-exact 68000 and
    blitter/DMA arbitration. Tools: `scripts/recomp_timing.py` (per
@@ -53,7 +58,8 @@ snapshot in `build/recomp/run075_f392/`.
 ## Standing rules
 
 - Never present an emulator frame as native output.
-- No Ghidra on this account.
+- No Ghidra on this account. The `pcode/raw/` exports are frozen evidence;
+  nothing in the port reads them (REVERSE_ENGINEERING.md, section 4).
 - `scripts/check_native_build.py`, `scripts/native_frame_count.py` and
   `port/native_data_allowlist.txt` are user-owned; do not edit them.
 - A recreated routine is done only when `scripts/recomp_ports_check.sh`
