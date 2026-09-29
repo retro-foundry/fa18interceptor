@@ -187,7 +187,9 @@ void draw_polygon(void) {
         for (bit = 0; bit < 4; bit++) {
             int set, complement;
             if (!(planes & (1 << bit))) {
-                wr_u16(POLY_PLANE_BITS, (uint16_t)(rd_u16(POLY_PLANE_BITS) >> 1));
+                /* A skipped plane still consumes its colour bit, except the
+                 * last: the original goes straight on to the mask clear. */
+                if (bit < 3) wr_u16(POLY_PLANE_BITS, (uint16_t)(rd_u16(POLY_PLANE_BITS) >> 1));
                 continue;
             }
             if (given) {

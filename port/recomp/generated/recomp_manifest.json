@@ -1,17 +1,17 @@
 {
-  "functions": 540,
-  "entries": 9479,
-  "instructions": 32191,
-  "seed_pcs": 17573,
+  "functions": 624,
+  "entries": 9923,
+  "instructions": 34309,
+  "seed_pcs": 23271,
   "seed_pcs_uncovered": 0,
   "instruction_kinds": {
-    "jmp": 61,
-    "op": 31866,
-    "bcc": 5866,
-    "bra": 1999,
-    "jsr": 809,
-    "rts": 777,
-    "bsr": 663,
-    "dbcc": 109
+    "jmp": 64,
+    "op": 34506,
+    "bcc": 6066,
+    "bra": 2082,
+    "jsr": 881,
+    "rts": 887,
+    "bsr": 693,
+    "dbcc": 127
   }
 }

@@ -124,13 +124,16 @@ static int run_glue(int port) {
     return r;
 }
 
+/* The compared call's return address, taken at its entry. */
+static uint32_t report_caller;
+
 static void report_mismatch(int port, const char *what, uint32_t detail, uint32_t ref, uint32_t got) {
     PortStats *s = &stats[port];
     if (s->reported >= 8) return;
     s->reported++;
     fprintf(stderr, "port %s ($%06X) mismatch: %s %06X reference %08X port %08X (call %llu, caller $%06X)\n",
             fa18_ports[port].name, fa18_ports[port].entry, what, detail, ref, got,
-            (unsigned long long)s->calls, fa18_bus_read32(REG_A[7]));
+            (unsigned long long)s->calls, report_caller);
 }
 
 /* ---- liveness ------------------------------------------------------------ */
@@ -210,6 +213,7 @@ static int run_sandbox(int function, int label, int port) {
     CustomWrite *reference_custom;
     uint32_t caller = fa18_bus_read32(REG_A[7]) & 0xFFFFFF, reference_sp;
     const FA18CallLiveness *live = liveness_after(caller);
+    report_caller = caller;
     LogEntry *reference;
     uint8_t *reference_new;
 
@@ -355,6 +359,7 @@ static int run_shadow(int function, int label, int port) {
     CustomWrite *port_custom;
     uint32_t caller = fa18_bus_read32(REG_A[7]) & 0xFFFFFF, live_sp;
     const FA18CallLiveness *live = liveness_after(caller);
+    report_caller = caller;
     LogEntry *port_writes;
     uint8_t *port_new;
 
