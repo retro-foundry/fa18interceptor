@@ -448,6 +448,7 @@
 #define RECORDER_WORDS     0xC4FDB0u /* long: word pair buffer */
 #define RECORDER_WORD_CURSOR 0xC4FDB4u /* long */
 #define PLAYBACK_WORDS     0xC4FDB8u /* long: word pair being played back */
+#define PLAYBACK_BYTES     0xC4FDBCu /* long: stick byte being played back */
 #define RECORD_WORD_A      0xC45996u /* word: accumulated since the last pass */
 #define RECORD_WORD_B      0xC45998u /* word */
 #define FUNCTION_KEY_LEVEL 0xC45870u /* byte: F1-F9 $0C..$6C, F10 $79 */
