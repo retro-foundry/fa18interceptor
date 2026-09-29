@@ -55,7 +55,7 @@ is proven against.
 | A | Whole-program translation, interpreter fallback | done (624 routines) |
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Frame parity with Engine9000 on every recording | run075 frames 393-402 exact; run060 game RAM identical through frame 93 |
-| D | Readable C, routine by routine, proven | 328 routines |
+| D | Readable C, routine by routine, proven | 331 routines |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | not started |
 | F | Native backend: plain C memory, direct drawing and audio | not started |
 
