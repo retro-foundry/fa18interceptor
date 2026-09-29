@@ -46,10 +46,10 @@ void clear_page_plane_tops(void) {
 
 /* The C pointer and modulo the lane blit uses. */
 static void lane_source(uint16_t size, uint32_t *c_pointer, int16_t *c_modulo) {
-    int16_t row = (int16_t)(rd_s16(LANE_ROW) - rd_s16(REDRAW_STATE_WORD) - 0xB7);
+    int16_t row = (int16_t)(rd_s16(POLY_MAX_Y) - rd_s16(REDRAW_STATE_WORD) - 0xB7);
     int16_t modulo = (int16_t)(3 - (int16_t)(size & 0x3F));
     uint32_t c = LANE_PATTERN + (uint32_t)(int32_t)(int16_t)(row * 4) - 2;
-    if (modulo != 1 && (int16_t)(rd_s16(LANE_WORD) >> 4) == (int16_t)(rd_s16(SPAN_ORIGIN) + 12)) c -= 2;
+    if (modulo != 1 && (int16_t)(rd_s16(POLY_MIN_X) >> 4) == (int16_t)(rd_s16(SPAN_ORIGIN) + 12)) c -= 2;
     *c_pointer = c;
     *c_modulo = modulo;
 }

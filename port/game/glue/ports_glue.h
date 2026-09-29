@@ -238,4 +238,7 @@ int glue_C1D5D8(void);
 int glue_C2F5F4(void);
 int glue_C2F60A(void);
 
+/* batch 34: polygon preparation */
+int glue_C301F6(void);
+
 #endif

@@ -49,24 +49,25 @@ int glue_C304B2(void) {
 /* $C305AA: D0-D3 = x0, y0, x1, y1 (words), A4.w = last row. Live outputs at
  * its call sites: D4 (low word), A1, and the D4/D5 high words, which the
  * original swaps with EXG on y-major edges. */
-int glue_C305AA(void) {
+/* The registers $C305AA leaves from D0-D3/A4 in the registers; `size` is the
+ * BLTSIZE last written (its own when it drew). */
+void polygon_edge_registers(uint16_t size);
+void polygon_edge_registers(uint16_t size) {
     int16_t x0 = (int16_t)D(0), y0 = (int16_t)D(1), x1 = (int16_t)D(2), y1 = (int16_t)D(3);
     int16_t last_row = (int16_t)A(4), row, dx, rows;
 
-    draw_polygon_edge(x0, y0, x1, y1, last_row);
-
-    if (y1 == y0) return glue_return();
+    if (y1 == y0) return;
     if ((uint16_t)y1 > (uint16_t)y0) {
         rows = (int16_t)(y1 - y0 - 1);
         row = (int16_t)(y0 + 1);
-        if (row > last_row) return glue_return();
+        if (row > last_row) return;
         dx = (int16_t)(x1 - x0);
     } else {
         rows = (int16_t)(y0 - y1 - 1);
         dx = (int16_t)(x0 - x1);
         SET_W(D(4), dx);
         row = (int16_t)(y1 + 1);
-        if (row > last_row) return glue_return();
+        if (row > last_row) return;
     }
     if (dx < 0) dx = (int16_t)-dx;
     if ((uint16_t)dx < (uint16_t)rows) { /* y-major: EXG D4,D5 */
@@ -75,21 +76,26 @@ int glue_C305AA(void) {
         D(5) = d4;
     }
     A(1) = (uint32_t)(int32_t)row;
-    SET_W(D(4), custom_written(BLTSIZE));
+    SET_W(D(4), size);
+}
+
+int glue_C305AA(void) {
+    draw_polygon_edge((int16_t)D(0), (int16_t)D(1), (int16_t)D(2), (int16_t)D(3), (int16_t)A(4));
+    polygon_edge_registers(custom_written(BLTSIZE));
     return glue_return();
 }
 
 /* $C2FA7E: D0-D3 = x0, y0, x1, y1 (words). Every register is live at its
  * call sites (polyline loops reuse the setup), so the original's leftovers
  * are rebuilt from the same LineSetup. */
-int glue_C2FA7E(void) {
+/* The registers $C2FA7E leaves, from the D0-D6 in the registers (no drawing). */
+void line_registers(void);
+void line_registers(void) {
     int16_t x0 = (int16_t)D(0), y0 = (int16_t)D(1), x1 = (int16_t)D(2), y1 = (int16_t)D(3);
     int16_t last_row = rd_s16(LINE_LAST_ROW);
     uint32_t d2 = D(2), d3 = D(3), d4 = D(4), d5 = D(5), d6 = D(6), d3_high;
     LineSetup line;
     int bit, last_bit = -1;
-
-    draw_line(x0, y0, x1, y1);
 
     A(2) = (uint32_t)(int32_t)last_row;
     if (!setup_line(x0, y0, x1, y1, last_row, 1, 0, &line)) {
@@ -105,7 +111,7 @@ int glue_C2FA7E(void) {
             SET_W(D(4), x0 - x1);
             SET_W(D(3), y1 + 1);
         }
-        return glue_return();
+        return;
     }
 
     d3_high = d3 & 0xFFFF0000u;
@@ -144,5 +150,10 @@ int glue_C2FA7E(void) {
         SET_W(D(5), line.shift + 0x0B00 + (((colour >> last_bit) & 1) ? 0xFA : 0x0A));
         D(7) = rd_u32(A(2) + (uint32_t)(4 * (3 - last_bit))) + (uint32_t)line.offset;
     }
+}
+
+int glue_C2FA7E(void) {
+    draw_line((int16_t)D(0), (int16_t)D(1), (int16_t)D(2), (int16_t)D(3));
+    line_registers();
     return glue_return();
 }

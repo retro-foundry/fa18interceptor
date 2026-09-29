@@ -11,7 +11,8 @@
 
 /* The shared body at $C2F688 with A3 = `masks`, A4 = `writers`, from the
  * D0.w/D1.w already in the registers. */
-static void plot_registers(gaddr masks, gaddr writers) {
+void plot_registers(gaddr masks, gaddr writers);
+void plot_registers(gaddr masks, gaddr writers) {
     int16_t x = (int16_t)D(0), y = (int16_t)D(1);
     uint16_t mask, offset, row40, colour;
     uint8_t planes;
@@ -54,7 +55,8 @@ int glue_C2F5F4(void) {
 
 /* $C2F60A at a word boundary plots x then x - 1 through $C2F5F4, with D0/D1
  * restored sign-extended from the stack in between. */
-static void pair_registers(void) {
+void pair_registers(void);
+void pair_registers(void) {
     if ((D(0) & 15) == 0) {
         uint32_t x = D(0), y = D(1);
         plot_registers(PIXEL_MASKS, PLOT_ROWS_1);

@@ -18,7 +18,7 @@ void clear_page_plane_tops(void);
 
 /* The lane blit ($C304FA): plane `plane_offset` of the draw page at
  * POLY_PLANE_OFFSET through the polygon mask, C reading LANE_PATTERN from
- * the LANE_ROW row, minterm by `pattern` bit 0. */
+ * the POLY_MAX_Y row, minterm by `pattern` bit 0. */
 void blit_lane(int16_t plane_offset, int pattern);
 
 #endif

@@ -294,8 +294,8 @@
 /* ---- target point, record range, lane blit ($C1C2C8, $C24568, $C304FA) -- */
 #define TARGET_ENABLED     0xC457ACu /* byte: compute TARGET_POINT */
 #define TARGET_POINT       0xC45A62u /* long[3]: $C1C2C8's point */
-#define LANE_ROW           0xC45982u /* word: row the lane blit starts from */
-#define LANE_WORD          0xC4597Cu /* word: >> 4 compared with SPAN_ORIGIN + 12 */
+#define POLY_MAX_Y         0xC45982u /* word: polygon bounds, bottom row ($C301F6) */
+#define POLY_MIN_X         0xC4597Cu /* word: left column less one */
 #define LANE_PATTERN       0x12ADCu  /* Chip RAM pattern the lane blit reads through C */
 
 /* ---- projection seed, post-input expiry, condition tables ---------------- */
@@ -346,5 +346,13 @@
 #define PAIR_MASKS         0xC2F7C6u /* word[16]: two pixels ending at x & 15 */
 #define PLOT_ROWS_1        0xC2F786u /* long[16]: per-colour one-row writers */
 #define PLOT_ROWS_2        0xC2F7E6u /* long[16]: per-colour two-row writers */
+
+/* ---- polygon preparation ($C301F6) --------------------------------------- */
+#define POLY_MAX_X         0xC4597Eu /* word: polygon bounds, right column */
+#define POLY_MIN_Y         0xC45980u /* word: polygon bounds, top row */
+#define POLY_VERTICES      0xC4B390u /* word count, then (x, y) word pairs */
+#define POLY_EDGES_LEFT    0xC45970u /* word: edge counter */
+#define LINE_STYLE         0xC456E6u /* long: $C456E6-$C456E9 (planes, colour) */
+#define KEEP_LINE_STYLE    0xC457A2u /* byte: thin polygons keep the line style */
 
 #endif

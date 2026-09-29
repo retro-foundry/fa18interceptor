@@ -21,4 +21,13 @@ void draw_polygon_edge(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t l
 /* Clear the polygon mask buffer over the polygon's bounding box. */
 void clear_polygon_mask(void);
 
+/* Prepare the polygon at POLY_VERTICES ($C301F6). Its bounding box decides:
+ * above the last row, nothing; one or two rows and columns, a pixel, pair
+ * or 2x2 block; thin in one direction, a line from corner to corner (in all
+ * planes and the current colour unless KEEP_LINE_STYLE); otherwise its
+ * edges into the mask plane and an area fill over the box, with the bounds
+ * and the compositing blit's POLY_* parameters stored. Returns 0 when a
+ * fill was started (compositing follows), 1 otherwise. */
+int prepare_polygon(void);
+
 #endif
