@@ -1,9 +1,11 @@
 /* The bounded screen projection used by the HUD ($C2EC90). */
 #include "projection.h"
 
+#include "circle.h"
 #include "fault.h"
 #include "globals.h"
 #include "memory.h"
+#include "plot.h"
 
 int project_view_point(int16_t x, int16_t y, int16_t depth) {
     int16_t sx, sy;
@@ -31,4 +33,27 @@ int project_view_point(int16_t x, int16_t y, int16_t depth) {
     wr_u16(PROJECTED_PAIR, (uint16_t)sx);
     wr_u16(PROJECTED_PAIR + 2, (uint16_t)sy);
     return 1;
+}
+
+int project_view_point_mode(int16_t x, int16_t y, int16_t depth,
+                            int16_t mode, int16_t size, int16_t radius) {
+    int16_t px, py;
+    if (!project_view_point(x, y, depth)) return 0;
+    px = rd_s16(PROJECTED_PAIR);
+    py = rd_s16(PROJECTED_PAIR + 2);
+    if (mode >= 0) {
+        int16_t block = (int16_t)(0x30 >> (mode >= 16 ? 15 : mode));
+        int16_t pair = (int16_t)(0x50 >> (mode >= 16 ? 15 : mode));
+        if (block >= size) plot_pixel_block(px, py);
+        else if (pair >= size) plot_pixel_pair(px, py);
+        else plot_pixel(px, py);
+        return 1;
+    }
+    switch (mode) {
+    case -1: plot_pixel(px, py); return 1;
+    case -2: plot_pixel_pair(px, py); return 1;
+    case -3: plot_pixel_block(px, py); return 1;
+    case -4: draw_filled_circle(px, py, radius); return 1;
+    default: return 1;
+    }
 }

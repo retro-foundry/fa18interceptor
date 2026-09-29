@@ -11,16 +11,15 @@ void pair_registers(void); /* glue_batch33.c */
 
 #define W(n) ((int16_t)D(n))
 
-int glue_C2F1C0(void) {
+void filled_circle_registers(void) {
     int16_t x = W(0), y = W(1), radius = W(6);
     gaddr table, near, far;
     int16_t px, py, error, top, limit;
 
-    draw_filled_circle(x, y, radius);
     SET_W(D(5), (uint16_t)(radius - 1));
     if (radius <= 0) {
         pair_registers();
-        return glue_return();
+        return;
     }
     table = rd_u32(CIRCLE_SPANS_PTR);
     SET_W(D(5), (uint16_t)(radius - 2));
@@ -70,7 +69,7 @@ int glue_C2F1C0(void) {
             SET_W(D(6), (uint16_t)(W(6) + rising));
             if (W(6) <= 0) {
                 SET_W(D(1), (uint16_t)top);
-                return glue_return();
+                return;
             }
         }
         A(4) += (gaddr)(uint16_t)((uint16_t)(-top) * 4u);
@@ -82,7 +81,7 @@ int glue_C2F1C0(void) {
         int16_t cut = (int16_t)(top + W(4) + W(6) - limit);
         SET_W(D(1), (uint16_t)top);
         SET_W(D(5), (uint16_t)cut);
-        if (top > limit) return glue_return();
+        if (top > limit) return;
         SET_W(D(6), (uint16_t)(W(6) - cut));
         if (W(6) < 0) SET_W(D(4), (uint16_t)(W(4) + W(6)));
     } else {
@@ -126,5 +125,10 @@ int glue_C2F1C0(void) {
         SET_W(D(6), (uint16_t)(W(6) - 1));
         if (W(6) < 0) break;
     }
+}
+
+int glue_C2F1C0(void) {
+    draw_filled_circle(W(0), W(1), W(6));
+    filled_circle_registers();
     return glue_return();
 }

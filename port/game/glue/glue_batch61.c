@@ -276,7 +276,7 @@ int glue_C342D0(void) {
 void pair_registers(void); /* glue_batch33.c */
 
 /* $C2F66E: a pair from LINE_LAST_ROW down, otherwise two rows of pairs. */
-static void block_registers(void) {
+void block_registers(void) {
     if (W(1) >= rd_s16(LINE_LAST_ROW)) pair_registers();
     else plot_registers(PAIR_MASKS, PLOT_ROWS_2);
 }
