@@ -56,4 +56,24 @@ void extend_parallelograms(gaddr *stream);
  * extend_parallelograms ($C20EC4). */
 void extend_parallelograms_scaled(gaddr *stream);
 
+/* Colour, a vertex offset, a row count, then each row's column count: a
+ * grid of segments. With q the block's third vertex, u and v its first two
+ * less q: row r's segments run from q_r + c*u/2 to that plus v, q_r
+ * stepping one vertex a row ($C20D68). */
+int draw_segment_grid(gaddr *stream);
+
+/* Colour, a vertex offset, a count: that many segments along u (stepping by
+ * v/2) from q, then as many back from the far corner (q - v/2 + u)
+ * ($C20904). */
+int draw_segment_lattice(gaddr *stream);
+
+/* A block offset, then a reference offset: three copies of the block's
+ * points 1-5 moved by (reference vertex k - block point 0), to points
+ * 30-44; then skip the stream by the next word ($C21A20). */
+void offset_block_copies(gaddr *stream);
+
+/* A vertex offset and a shift: points 9-17 of the block from its points 1-8
+ * (a scaled edge, and moves along the edges of points 4-8) ($C217EA). */
+void extend_block_scaled(gaddr *stream);
+
 #endif

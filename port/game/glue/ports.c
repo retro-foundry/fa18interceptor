@@ -319,6 +319,11 @@ const FA18Port fa18_ports[] = {
     {0xC21412, glue_C21412, "draw_mixed_face", 30000},
     {0xC20F10, glue_C20F10, "extend_parallelograms", 400},
     {0xC20EC4, glue_C20EC4, "extend_parallelograms_scaled", 600},
+    /* batch 54: segment grids, block generators */
+    {0xC20D68, glue_C20D68, "draw_segment_grid", 40000},
+    {0xC20904, glue_C20904, "draw_segment_lattice", 40000},
+    {0xC21A20, glue_C21A20, "offset_block_copies", 1500},
+    {0xC217EA, glue_C217EA, "extend_block_scaled", 1500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

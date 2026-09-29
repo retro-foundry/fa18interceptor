@@ -244,3 +244,122 @@ void extend_parallelograms_scaled(gaddr *stream) {
     put(v + 54, minus(p8, a));
     parallelograms_at(v);
 }
+
+/* ---- grids of segments ---------------------------------------------------- */
+
+static Vertex half(Vertex v) {
+    Vertex h;
+    h.x = (int16_t)(v.x >> 1);
+    h.y = (int16_t)(v.y >> 1);
+    h.z = (int16_t)(v.z >> 1);
+    return h;
+}
+
+static void segment(Vertex a, Vertex b, int *drawn) {
+    put(SEGMENT_POINTS, a);
+    put(SEGMENT_POINTS + 6, b);
+    *drawn |= draw_clipped_segment();
+}
+
+int draw_segment_grid(gaddr *stream) {
+    gaddr q;
+    int16_t rows;
+    Vertex u, v;
+    int drawn = 0;
+
+    wr_u16(LINE_STYLE, 0x0F);
+    wr_u16(LINE_STYLE + 2, 0xFFFF);
+    wr_u16(POLY_COMPLEMENT, 0);
+    wr_u16(POLY_MASK_BLIT, 0);
+    wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
+    q = vertex_at(next_word(stream)) + 12;
+    rows = next_word(stream);
+    u = minus(get(q - 12), get(q));
+    v = minus(get(q - 6), get(q));
+    for (;;) {
+        int16_t columns = next_word(stream);
+        Vertex along = {0, 0, 0};
+        for (;;) {
+            Vertex a = half(along);
+            segment(plus(get(q), a), plus(plus(get(q), v), a), &drawn);
+            if (--columns <= 0) break;
+            along = plus(along, u);
+        }
+        if (--rows <= 0) break;
+        q += 6;
+    }
+    return drawn;
+}
+
+int draw_segment_lattice(gaddr *stream) {
+    gaddr q;
+    int16_t count, n;
+    Vertex u, v, far, along;
+    int drawn = 0;
+
+    wr_u16(LINE_STYLE, 0x0F);
+    wr_u16(LINE_STYLE + 2, 0xFFFF);
+    wr_u16(POLY_COMPLEMENT, 0);
+    wr_u16(POLY_MASK_BLIT, 0);
+    wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
+    q = vertex_at(next_word(stream)) + 12;
+    count = next_word(stream);
+    u = minus(get(q - 12), get(q));
+    v = minus(get(q - 6), get(q));
+    far = plus(minus(get(q), half(v)), u);
+    /* Lines across v, then lines across u from the far corner. */
+    along.x = along.y = along.z = 0;
+    for (n = count;;) {
+        Vertex s0 = plus(get(q), half(along));
+        segment(s0, plus(s0, u), &drawn);
+        if (--n <= 0) break;
+        along = plus(along, v);
+    }
+    along.x = along.y = along.z = 0;
+    for (n = count;;) {
+        Vertex s0 = minus(far, half(along));
+        segment(s0, minus(s0, u), &drawn);
+        if (--n <= 0) break;
+        along = plus(along, v);
+    }
+    return drawn;
+}
+
+/* ---- more derived points --------------------------------------------------- */
+
+void offset_block_copies(gaddr *stream) {
+    gaddr base = vertex_at(next_word(stream)), ref = vertex_at(rd_s16(*stream));
+    int k, i;
+    *stream += 2;
+    for (k = 0; k < 3; k++) {
+        Vertex d = minus(get(ref + (gaddr)(6 * k)), get(base));
+        for (i = 1; i <= 5; i++) put(base + 0xB4 + (gaddr)(0x1E * k) + (gaddr)(6 * (i - 1)), plus(get(base + (gaddr)(6 * i)), d));
+    }
+    *stream += 2 + (gaddr)(int32_t)rd_s16(*stream);
+}
+
+void extend_block_scaled(gaddr *stream) {
+    gaddr v = vertex_at(next_word(stream));
+    int16_t shift = next_word(stream);
+    Vertex q1 = get(v + 6), q2 = get(v + 12), q3 = get(v + 18), b = minus(q2, q3), f;
+    int s = (shift < 0 ? (int16_t)-shift : shift) & 63;
+    if (shift >= 0) {
+        b.x = (int16_t)(s >= 16 ? 0 : (uint16_t)b.x << s);
+        b.y = (int16_t)(s >= 16 ? 0 : (uint16_t)b.y << s);
+        b.z = (int16_t)(s >= 16 ? 0 : (uint16_t)b.z << s);
+    } else {
+        b.x = (int16_t)(s >= 16 ? (b.x < 0 ? -1 : 0) : b.x >> s);
+        b.y = (int16_t)(s >= 16 ? (b.y < 0 ? -1 : 0) : b.y >> s);
+        b.z = (int16_t)(s >= 16 ? (b.z < 0 ? -1 : 0) : b.z >> s);
+    }
+    put(v + 0x3C, minus(q3, b));
+    put(v + 0x36, plus(q3, minus(q2, q1)));
+    put(v + 0x42, plus(get(v + 0x2A), minus(get(v + 0x1E), get(v + 0x24))));
+    put(v + 0x48, plus(get(v + 0x42), minus(get(v + 0x30), get(v + 0x24))));
+    f = minus(get(v + 0x18), get(v + 0x24));
+    put(v + 0x4E, plus(get(v + 0x1E), f));
+    put(v + 0x54, plus(get(v + 0x30), f));
+    put(v + 0x5A, plus(get(v + 0x2A), f));
+    put(v + 0x60, plus(get(v + 0x42), f));
+    put(v + 0x66, plus(get(v + 0x48), f));
+}

@@ -359,4 +359,10 @@ int glue_C21412(void);
 int glue_C20F10(void);
 int glue_C20EC4(void);
 
+/* batch 54: segment grids, block generators */
+int glue_C20D68(void);
+int glue_C20904(void);
+int glue_C21A20(void);
+int glue_C217EA(void);
+
 #endif
