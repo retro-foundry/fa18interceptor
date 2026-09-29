@@ -46,3 +46,14 @@ void append_list_point(int16_t x, int16_t y, int16_t z, int shift, uint16_t tag)
     wr_u32(p + 8, 0);
     wr_u32(LIST_WRITE, p);
 }
+
+void rotate_by_view_matrix(const int16_t v[3], int32_t out[3]) {
+    int row, k;
+    for (row = 0; row < 3; row++) {
+        uint32_t sum = 0;
+        for (k = 0; k < 3; k++)
+            sum += (uint32_t)((int32_t)rd_s16(VIEW_ANGLE_MATRIX + (gaddr)(6 * row + 2 * k)) * v[k]);
+        out[row] = (int32_t)sum >> 8;
+    }
+    wr_s16(VIEW_DEPTH, (int16_t)out[2]);
+}

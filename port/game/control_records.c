@@ -455,3 +455,51 @@ int16_t ease_record_58(int16_t target) {
     nudge_outside_dead_zone(value);
     return target;
 }
+
+/* A record's control byte +$65: bits 0-1 throttle (kept), 2-3 stick X,
+ * 4-5 stick Y, 6-7 the rudder. */
+#define REC_CONTROLS 0x65
+
+static void set_controls(gaddr record, uint8_t value) {
+    wr_u8(record + REC_CONTROLS, (uint8_t)((rd_u8(record + REC_CONTROLS) & 3) | value));
+}
+
+static uint8_t roll_toward(int16_t turn) { return turn == 0 ? 0 : turn < 0 ? 0x04 : 0x08; }
+
+void steer_record_neutral(gaddr record) { set_controls(record, 0); }
+
+void steer_record_roll(gaddr record, int16_t turn) { set_controls(record, roll_toward(turn)); }
+
+void steer_record_turn(gaddr record, int16_t turn) {
+    uint8_t flags = rd_u8(record + 0x64);
+    int16_t heading = rd_s16(record + 0x6A);
+    uint8_t value;
+
+    if ((flags & 0x60) == 0x60) {
+        /* Rudder toward the turn beyond +$58, with the roll that the bank
+         * (+$6A, a half turn either way) still allows. */
+        if (turn == 0) { set_controls(record, 0); return; }
+        if (turn > 0 ? turn <= rd_s16(record + 0x58) : turn >= rd_s16(record + 0x58)) { set_controls(record, 0); return; }
+        value = turn > 0 ? 0x80 : 0x40;
+        if (heading > 0x3840) { if (heading <= 0x7030) value |= 0x08; }
+        else if (heading > 0x50) value |= 0x04;
+        set_controls(record, value);
+        return;
+    }
+    if (flags & 0x80) {
+        if (heading > 0x3840) {
+            if (heading <= 0x6EF0) { set_controls(record, 0x08); return; }
+        } else if (heading >= 0x190) {
+            set_controls(record, 0x04);
+            return;
+        }
+    }
+    set_controls(record, roll_toward(turn));
+}
+
+void steer_record_pitch(gaddr record, int16_t climb) {
+    int16_t limit = rd_s16(record + 0x56);
+    uint8_t value = 0;
+    if (climb >= 0 ? climb > limit : climb < limit) value = climb >= 0 ? 0x10 : 0x20;
+    set_controls(record, value);
+}

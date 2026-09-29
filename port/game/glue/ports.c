@@ -278,6 +278,15 @@ const FA18Port fa18_ports[] = {
     {0xC21C4C, glue_C21C4C, "split_edge", 300},
     {0xC1FED4, glue_C1FED4, "skip_word_for_mode_57", 50},
     {0xC345A0, glue_C345A0, "plot_ring", 20000},
+    /* batch 48: coloured face, stored-normal test, record steering, view rotation, edge split */
+    {0xC099AA, glue_C099AA, "draw_coloured_face", 30000},
+    {0xC1FB9C, glue_C1FB9C, "point_toward_eye", 300},
+    {0xC2CAA0, glue_C2CAA0, "steer_record_neutral", 60},
+    {0xC2CA92, glue_C2CA92, "steer_record_roll", 80},
+    {0xC2CA26, glue_C2CA26, "steer_record_turn", 200},
+    {0xC2CB86, glue_C2CB86, "steer_record_pitch", 150},
+    {0xC2CE82, glue_C2CE82, "rotate_by_view_matrix", 700},
+    {0xC21C2E, glue_C21C2E, "split_record_and_stream_edges", 700},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

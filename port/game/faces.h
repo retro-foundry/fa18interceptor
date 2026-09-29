@@ -18,6 +18,15 @@ int draw_indexed_face(gaddr *face);
  * the count, whose z also counts toward "behind". */
 int draw_outlined_face(gaddr *face);
 
+/* Word count, then the first `count` vertices of the table (at least four),
+ * then a word colour ($C099AA). */
+int draw_coloured_face(gaddr *face);
+
+/* split_edge on the selected record's points (SELECTED_EDGE past its $A4
+ * table), then on the workspace points the next stream offset names
+ * ($C21C2E). */
+void split_record_and_stream_edges(gaddr *stream);
+
 /* From the two points at `points` (words 0-2 and 3-5), the midpoint to
  * +$1E and the quarter point to +$24 ($C21C4C). */
 void split_edge(gaddr points);

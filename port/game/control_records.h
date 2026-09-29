@@ -47,6 +47,15 @@ void ease_record_26(int16_t target);
  * ($C13C0A). Returns the target used. */
 int16_t ease_record_58(int16_t target);
 
+/* A record's controls (+$65 above the throttle bits) from a steering
+ * demand: none ($C2CAA0); roll toward `turn` ($C2CA92); a turn with rudder
+ * and roll by the record's flags +$64 and bank +$6A ($C2CA26); stick back
+ * or forward when `climb` passes +$56 ($C2CB86). */
+void steer_record_neutral(gaddr record);
+void steer_record_roll(gaddr record, int16_t turn);
+void steer_record_turn(gaddr record, int16_t turn);
+void steer_record_pitch(gaddr record, int16_t climb);
+
 /* Mark a record pending (+$50 = -1), negating +$54 if it was not already. */
 void mark_record_pending(gaddr record);
 

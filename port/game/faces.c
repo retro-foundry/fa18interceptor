@@ -61,3 +61,23 @@ void split_edge(gaddr points) {
     for (k = 0; k < 3; k++)
         wr_s16(points + 0x24 + (gaddr)(2 * k), (int16_t)(p[k] + (int16_t)(d[k] >> 1)));
 }
+
+int draw_coloured_face(gaddr *face) {
+    int16_t count = rd_s16(*face);
+    gaddr v = WORKSPACES, dst = start_input(count);
+    uint16_t behind = 0xFFFF;
+    uint32_t i, copies = (uint32_t)(uint16_t)(count - 4) + 4; /* count, for four or more */
+
+    *face += 2;
+    for (i = 0; i < copies; i++, v += 6) behind &= copy_vertex(&dst, v);
+    wr_u16(CURRENT_COLOUR, rd_u16(*face));
+    *face += 2;
+    if ((int16_t)behind < 0) return 0;
+    return clip_and_draw_polygon();
+}
+
+void split_record_and_stream_edges(gaddr *stream) {
+    split_edge(CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)(rd_s16(SELECTED_EDGE) + 0xA4));
+    split_edge(WORKSPACES + (gaddr)(int32_t)rd_s16(*stream));
+    *stream += 2;
+}

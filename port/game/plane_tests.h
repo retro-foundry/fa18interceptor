@@ -26,4 +26,9 @@ int faces_all_behind(gaddr *stream, gaddr record, int16_t shift,
  * by 8) dotted with the first vertex. 1 when the dot is not negative. */
 int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]);
 
+/* The stored-normal test on its own ($C1FB9C): `point` shifted by
+ * BOUND_SHIFT and offset by BOUND_OFFSET_X/Z, less `eye`, dotted with
+ * `normal`; 1 when not negative. */
+int point_toward_eye(const int16_t point[3], const int16_t normal[3], const int16_t eye[3]);
+
 #endif

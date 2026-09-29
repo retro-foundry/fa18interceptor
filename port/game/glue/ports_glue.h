@@ -313,4 +313,14 @@ int glue_C13C0A(void);
 int glue_C21C4C(void);
 int glue_C1FED4(void);
 
+/* batch 48: coloured face, stored-normal test, record steering, view rotation, edge split */
+int glue_C099AA(void);
+int glue_C1FB9C(void);
+int glue_C2CAA0(void);
+int glue_C2CA92(void);
+int glue_C2CA26(void);
+int glue_C2CB86(void);
+int glue_C2CE82(void);
+int glue_C21C2E(void);
+
 #endif

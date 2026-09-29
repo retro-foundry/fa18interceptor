@@ -430,5 +430,7 @@
 #define RECORD_WORD_A      0xC45996u /* word: accumulated since the last pass */
 #define RECORD_WORD_B      0xC45998u /* word */
 #define FUNCTION_KEY_LEVEL 0xC45870u /* byte: F1-F9 $0C..$6C, F10 $79 */
+#define SELECTED_EDGE      0xC459B6u /* word: offset of an edge in the selected record's points */
+#define VIEW_DEPTH         0xC45AB6u /* word: the last view-rotated point's depth (row 3) */
 
 #endif

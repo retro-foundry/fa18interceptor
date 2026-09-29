@@ -19,4 +19,8 @@ void grid_relative_position(gaddr record, int shift, int32_t out[3]);
  * `shift`, then `tag`; the next three longs are cleared. */
 void append_list_point(int16_t x, int16_t y, int16_t z, int shift, uint16_t tag);
 
+/* `v` rotated by VIEW_ANGLE_MATRIX (8 fraction bits); the depth's low
+ * word also to VIEW_DEPTH ($C2CE82). */
+void rotate_by_view_matrix(const int16_t v[3], int32_t out[3]);
+
 #endif

@@ -68,22 +68,28 @@ static int sum_not_negative(int32_t first, int32_t second, int32_t third) {
     return (int64_t)sum + third >= 0;
 }
 
+int point_toward_eye(const int16_t point[3], const int16_t normal[3], const int16_t eye[3]) {
+    int16_t bound = rd_s16(BOUND_SHIFT), q[3];
+    int k;
+    for (k = 0; k < 3; k++) q[k] = asr_word(point[k], bound);
+    q[0] = (int16_t)(q[0] + rd_s16(BOUND_OFFSET_X));
+    q[2] = (int16_t)(q[2] + rd_s16(BOUND_OFFSET_Z));
+    for (k = 0; k < 3; k++) q[k] = (int16_t)(q[k] - eye[k]);
+    return sum_not_negative(q[2] * normal[2], q[0] * normal[0], q[1] * normal[1]);
+}
+
 int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]) {
     int16_t q[3], n[3], u[3], v[3], p[3];
     int k, shift;
 
     if (kind & 0x3000) {
         gaddr face = points + (gaddr)(int32_t)rd_s16(*faces);
-        int16_t bound = rd_s16(BOUND_SHIFT);
         *faces += 2;
         for (k = 0; k < 3; k++) {
-            q[k] = asr_word(rd_s16(face + (gaddr)(2 * k)), bound);
+            q[k] = rd_s16(face + (gaddr)(2 * k));
             n[k] = rd_s16(face + 6 + (gaddr)(2 * k));
         }
-        q[0] = (int16_t)(q[0] + rd_s16(BOUND_OFFSET_X));
-        q[2] = (int16_t)(q[2] + rd_s16(BOUND_OFFSET_Z));
-        for (k = 0; k < 3; k++) q[k] = (int16_t)(q[k] - eye[k]);
-        return sum_not_negative(q[2] * n[2], q[0] * n[0], q[1] * n[1]);
+        return point_toward_eye(q, n, eye);
     }
     shift = (kind >> 7) & 7;
     for (k = 0; k < 3; k++) {
