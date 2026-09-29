@@ -6,6 +6,9 @@
 #include "memory.h"
 #include "numbers.h"
 #include "postflight_hud.h"
+#include "machine.h"
+#include "projection.h"
+#include "control_records.h"
 #include "text.h"
 #include "glue_text.h"
 
@@ -343,5 +346,180 @@ int glue_C332BC(void) {
     call_port(glue_C31D64, 0xC332F2);
     call_port(glue_C33370, 0xC332F6);
     call_port(glue_C33B38, 0xC332FA);
+    return glue_return();
+}
+
+/* $C28E28's exit scan on A3: 1 when an exit matched. */
+static int zone_exit_registers(int16_t index) {
+    SET_W(D(0), rd_u16(A(3)));
+    A(3) += 2;
+    SET_W(D(0), (uint16_t)(W(0) - 1));
+    if (W(0) < 0) return 0;
+    for (;;) {
+        int k;
+        A(3) += 4;
+        SET_W(D(1), rd_u16(A(3)));
+        SET_W(D(2), rd_u16(A(3) + 2));
+        A(3) += 6;
+        A(4) = 0xC295E0u + SEXT(rd_u16(0xC295E0u + SEXT(D(2))));
+        for (k = 0; k < 5; k++) D(2 + k) = SEXT(rd_u16(A(4) + (gaddr)(2 * k)));
+        A(4) += 10;
+        SET_W(D(1), W(1) & 0x7F);
+        if (W(1) == index) return 1;
+        SET_W(D(0), (uint16_t)(W(0) - 1));
+        if (W(0) == -1) return 0;
+    }
+}
+
+int glue_C28E28(void) {
+    int16_t index = rd_s16(STREAM_MODE), x, y;
+    gaddr record;
+    uint8_t mode;
+    int8_t zone;
+    int k;
+
+    record = CONTROL_RECORDS + SEXT((uint16_t)(index << 9));
+    mode = rd_u8(record + 0x7A);
+    check_zone_exit();
+    A(0) = CONTROL_RECORDS;
+    SET_W(D(0), (uint16_t)(index << 9));
+    if (!W(0)) return glue_return();
+    A(0) = record;
+    SET_B(D(5), rd_u8(record + 0x62) & 0xF0);
+    if ((uint8_t)D(5) != 0x10 || rd_u8(record + 5) == 8) return glue_return();
+    zone = (int8_t)rd_u8(record + 0x5D);
+    SET_B(D(0), (uint8_t)zone);
+    if (zone < 0) return glue_return();
+    SET_B(D(0), (uint8_t)(zone - 1));
+    if ((int8_t)D(0) < 0) return glue_return();
+    SET_W(D(0), (uint16_t)((int8_t)D(0) * 4));
+    x = rd_s16(record + 6);
+    y = rd_s16(record + 8);
+    SET_W(D(5), (uint16_t)x);
+    SET_W(D(6), (uint16_t)y);
+    A(3) = rd_u32(0xC29720u + SEXT(D(0)));
+    for (k = 0; k < 4; k++) D(1 + k) = SEXT(rd_u16(A(3) + (gaddr)(2 * k)));
+    A(3) += 8;
+    if (x >= W(1) && x <= W(2) && y >= W(3) && y <= W(4)) {
+        if (mode == 5) zone_exit_registers(index);
+        return glue_return();
+    }
+    zone_exit_registers(index);
+    return glue_return();
+}
+
+void draw_polygon_registers(uint16_t last_size, uint16_t colour); /* glue_batch35.c */
+void filled_circle_registers(void);                              /* glue_circle.c */
+
+static void divs_into(int n, int16_t divisor) {
+    int32_t dividend = (int32_t)D(n), q = dividend / divisor;
+    if (q == (int16_t)q) D(n) = (uint32_t)(uint16_t)(dividend % divisor) << 16 | (uint16_t)q;
+}
+
+/* One point of $C2D16C's last part from D3-D5 (its offsets): the
+ * transform's and projection's registers; 1 when it is inside the view
+ * (its screen pair then stored at A1). */
+static int shape_point_registers(int16_t z, int16_t shift) {
+    gaddr m = VIEW_ANGLE_MATRIX;
+    int k;
+
+    SET_W(D(3), (uint16_t)(W(3) + (int16_t)A(4)));
+    SET_W(D(4), (uint16_t)(W(4) + (int16_t)A(5)));
+    SET_W(D(5), (uint16_t)(W(5) + z));
+    SET_W(D(7), (uint16_t)shift);
+    for (k = 3; k <= 5; k++) SET_W(D(k), (uint16_t)(W(k) >> (shift & 63)));
+    for (k = 0; k < 3; k++) D(k) = (uint32_t)((int32_t)rd_s16(m + (gaddr)(2 * k)) * W(3 + k));
+    D(0) = (uint32_t)((int32_t)(D(0) + D(1) + D(2)) >> 8);
+    SET_W(D(6), (uint16_t)D(0));
+    for (k = 0; k < 3; k++) D(k) = (uint32_t)((int32_t)rd_s16(m + 6 + (gaddr)(2 * k)) * W(3 + k));
+    D(2) = (uint32_t)((int32_t)(D(2) + D(0) + D(1)) >> 8);
+    D(3) = (uint32_t)((int32_t)rd_s16(m + 12) * W(3));
+    D(4) = (uint32_t)((int32_t)rd_s16(m + 14) * W(4));
+    D(5) = (uint32_t)((int32_t)rd_s16(m + 16) * W(5));
+    D(5) = (uint32_t)((int32_t)(D(5) + D(3) + D(4)) >> 8);
+    A(0) = m + 18;
+    if ((int32_t)D(5) <= 0 || W(6) > W(5)) return 0;
+    SET_W(D(4), (uint16_t)-W(6));
+    if (W(4) > W(5) || W(2) > W(5)) return 0;
+    SET_W(D(4), (uint16_t)-W(2));
+    if (W(4) > W(5)) return 0;
+    D(6) = (uint32_t)((int32_t)W(6) * 160);
+    divs_into(6, W(5));
+    SET_W(D(6), (uint16_t)(W(6) + 160));
+    if (W(6) < 0) SET_W(D(6), 0);
+    else if (W(6) >= 320) SET_W(D(6), 319);
+    SET_W(D(7), (uint16_t)D(2));
+    D(7) = (uint32_t)((int32_t)W(7) * 90);
+    divs_into(7, W(5));
+    SET_W(D(7), (uint16_t)(W(7) + 90));
+    if (W(7) < 0) SET_W(D(7), 0);
+    else if (W(7) >= 180) SET_W(D(7), 179);
+    SET_W(D(6), (uint16_t)(319 - W(6)));
+    SET_W(D(7), (uint16_t)(179 - W(7)));
+    A(1) += 4;
+    return 1;
+}
+
+/* $C2D16C: only its last part (index 0) decides what the caller reads. */
+int glue_C2D16C(void) {
+    int16_t x = W(0), y = W(1), z = W(2), shift = W(7), radius = W(6);
+    uint16_t scale = (uint16_t)D(3);
+    int8_t kind = (int8_t)D(4);
+    gaddr offsets = kind <= 2 ? 0xC2CF6Eu : kind == 3 ? 0xC2CFE3u : kind == 4 ? 0xC2CFBCu : 0xC2CF95u;
+    uint16_t set, colour;
+    int drawn, inside = 1;
+    int16_t pz;
+    gaddr points;
+
+    drawn = draw_shape(x, y, z, scale, kind, radius, shift);
+    colour = kind ? rd_u8((kind <= 1 ? 0xC2D001u : kind == 2 ? 0xC2D00Du : kind == 3 ? 0xC2D019u
+                           : kind == 4 ? 0xC2D025u : 0xC2D031u)) : 13;
+    D(0) = SEXT((uint16_t)(int16_t)((int16_t)((int8_t)rd_u8(offsets) * scale) >> (shift & 63)));
+    D(1) = SEXT((uint16_t)(int16_t)((int16_t)((int8_t)rd_u8(offsets + 1) * scale) >> (shift & 63)));
+    D(2) = SEXT((uint16_t)(int16_t)((int16_t)((int8_t)rd_u8(offsets + 2) * scale) >> (shift & 63)));
+    A(4) = SEXT((uint16_t)(W(0) + x));
+    A(5) = SEXT((uint16_t)(W(1) + y));
+    pz = (int16_t)(W(2) + z);
+    A(3) = 0xC2D03Eu;
+    set = rd_u16(0xC2D03Eu + (gaddr)(2 * scale));
+    points = rd_u32(0xC2CEBEu + set);
+    A(1) = POLY_VERTICES + 2;
+    do {
+        if (kind == 3) {
+            D(3) = 0;
+            D(4) = 0;
+            D(5) = 0;
+        } else {
+            D(3) = SEXT(rd_u16(points));
+            D(4) = SEXT(rd_u16(points + 2));
+            D(5) = SEXT(rd_u16(points + 4));
+            points += 6;
+        }
+        if (!shape_point_registers(pz, shift)) {
+            inside = 0;
+            break;
+        }
+    } while (kind != 3 && A(1) < POLY_VERTICES + 14);
+    A(2) = points;
+    if (inside) {
+        uint16_t now = rd_u16(CURRENT_COLOUR);
+        wr_u16(CURRENT_COLOUR, colour);
+        SET_B(D(0), (uint8_t)kind);
+        if (kind == 0) {
+            int k;
+            for (k = 0; k < 4; k++) D(k) = SEXT(rd_u16(POLY_VERTICES + 2 + (gaddr)(2 * k)));
+            line_registers();
+        } else if (kind == 3) {
+            D(0) = SEXT(rd_u16(POLY_VERTICES + 2));
+            D(1) = SEXT(rd_u16(POLY_VERTICES + 4));
+            SET_W(D(6), (uint16_t)radius);
+            filled_circle_registers();
+        } else {
+            SET_B(D(0), (uint8_t)(kind - 3));
+            draw_polygon_registers(fa18_bltsize_at_draw_start, colour);
+        }
+        wr_u16(CURRENT_COLOUR, now);
+    }
+    SET_W(D(0), (uint16_t)drawn);
     return glue_return();
 }

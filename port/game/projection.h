@@ -26,4 +26,11 @@ void draw_fixed_matrix_mark(void);
 void draw_scaled_view_circle(uint32_t point, int16_t shift, int16_t radius);
 void draw_scaled_stream_circle(uint32_t stream, int16_t shift);
 
+/* A small shape at view-space (x, y, z) ($C2D16C): each of its parts
+ * placed from byte offsets times `scale`, its points shifted down by
+ * `shift`, turned by VIEW_ANGLE_MATRIX and projected; a part with a point
+ * outside the view is skipped. Kind 0 draws lines (colour 13), 3 filled
+ * circles of `radius`, the others triangles. Returns 1 when any was drawn. */
+int draw_shape(int16_t x, int16_t y, int16_t z, uint16_t scale, int8_t kind, int16_t radius, int16_t shift);
+
 #endif

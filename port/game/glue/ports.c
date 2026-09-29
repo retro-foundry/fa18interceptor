@@ -424,6 +424,8 @@ const FA18Port fa18_ports[] = {
     {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 6000},
     /* zone exit */
     {0xC28E28, glue_C28E28, "check_zone_exit", 1500},
+    /* shape */
+    {0xC2D16C, glue_C2D16C, "draw_shape", 20000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
