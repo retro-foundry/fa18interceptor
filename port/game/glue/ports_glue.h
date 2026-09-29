@@ -271,4 +271,10 @@ int glue_C27456(void);
 /* batch 42: direction tracking */
 int glue_C123FA(void);
 
+/* batch 43: normalize register entry */
+int glue_C2574A(void);
+
+/* batch 44: view aiming */
+int glue_C2D9BA(void);
+
 #endif

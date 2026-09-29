@@ -240,6 +240,10 @@ const FA18Port fa18_ports[] = {
     {0xC27456, glue_C27456, "faces_all_behind", 2500},
     /* batch 42: direction tracking */
     {0xC123FA, glue_C123FA, "track_direction", 6000},
+    /* batch 43: normalize register entry */
+    {0xC2574A, glue_C2574A, "normalize_vector", 1600},
+    /* batch 44: view aiming */
+    {0xC2D9BA, glue_C2D9BA, "aim_view", 12000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

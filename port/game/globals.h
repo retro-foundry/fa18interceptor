@@ -391,5 +391,10 @@
 #define TRACKED_PITCH      0xC45AC0u /* word: track_direction's elevation angle */
 #define TRACKED_HEADING    0xC45AC2u /* word: track_direction's azimuth angle */
 #define TRACK_STARTED      0xC457A6u /* byte: set once tracking has snapped to a direction */
+#define CONTEXT_RECORD     0xC459C2u /* word: offset of the record a context view may follow */
+#define CONTEXT_SMOOTH     0xC457B5u /* byte: nonzero turns a context view gradually */
+#define TRACKED_VIEW       0xC45A60u /* word: VIEW_RECORD | VIEW_SIDE last aimed at */
+#define VIEW_SIDE          0xC458B2u /* byte: or'ed into the tracked view identity */
+#define VIEW_ANGLE_MATRIX  0xC45BD8u /* word[9]: pan and rotate matrix, rows scaled, 8 fraction bits */
 
 #endif

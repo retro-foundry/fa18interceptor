@@ -79,13 +79,17 @@ int glue_C2E47A(void) {
 
 /* $C2E38E: D0.w, D2.w angles, A1 matrix. The caller reads D3, D6 (the last
  * product, swapped) and D7/A0 as the sine lookups left them. */
-int glue_C2E38E(void) {
-    uint16_t a = (uint16_t)D(0), b = (uint16_t)D(2);
-    two_angle_matrix(a, b, A(1));
-    SET_W(D(0), a >> 3);
-    SET_W(D(2), b >> 3);
+void two_angle_registers(void);
+void two_angle_registers(void) {
+    SET_W(D(0), (uint16_t)D(0) >> 3);
+    SET_W(D(2), (uint16_t)D(2) >> 3);
     sin_cos_pair_registers();
     D(6) = swapped_product((int16_t)D(3), (int16_t)D(1));
+}
+
+int glue_C2E38E(void) {
+    two_angle_matrix((uint16_t)D(0), (uint16_t)D(2), A(1));
+    two_angle_registers();
     A(1) += 16;
     return glue_return();
 }

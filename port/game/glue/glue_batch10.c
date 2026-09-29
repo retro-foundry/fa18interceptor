@@ -96,12 +96,11 @@ int glue_C1ECD4(void) {
     return glue_return();
 }
 
-/* $C2E346: D4.w angle, A1 output (advanced). */
-int glue_C2E346(void) {
-    int16_t tenths = (int16_t)((int16_t)D(4) >> 3), off = (int16_t)(tenths * 2);
+/* The registers $C2E346 leaves for angle `angle` and output `out`. */
+void y_rotation8_registers(int16_t angle, gaddr out);
+void y_rotation8_registers(int16_t angle, gaddr out) {
+    int16_t tenths = (int16_t)(angle >> 3), off = (int16_t)(tenths * 2);
     Fixed14 s, c;
-
-    y_rotation_matrix8((int16_t)D(4), A(1));
 
     sin_cos(tenths, &s, &c);
     SET_W(D(4), -(s >> 6));
@@ -111,7 +110,16 @@ int glue_C2E346(void) {
     if (off >= 0x708 && off < 0xE10) SET_W(D(7), off - 0x708);
     else if (off >= 0x1518) SET_W(D(7), off - 0x1518);
     A(0) = SINE_TABLE;
-    A(1) += 18;
+    A(1) = out + 18;
+}
+
+/* $C2E346: D4.w angle, A1 output (advanced). */
+int glue_C2E346(void) {
+    int16_t angle = (int16_t)D(4);
+    gaddr out = A(1);
+
+    y_rotation_matrix8(angle, out);
+    y_rotation8_registers(angle, out);
     return glue_return();
 }
 

@@ -11,4 +11,13 @@ void pan_view_from_keys(void);
 /* The 45-degree sector (0-7) of the view angle into VIEW_OCTANT. */
 void update_view_octant(void);
 
+/* Aim the view and build its matrices ($C2D9BA). Outside a context view
+ * the stick pans it; in one, VIEW_PAN and VIEW_ROTATE turn toward a point
+ * just ahead of the followed record (behind it for kind $30 records): at
+ * once for a new target or without CONTEXT_SMOOTH, else by up to $230 or
+ * $7D0 a step. Then VIEW_ANGLE_MATRIX (scaled by MATRIX_ROW_SCALES),
+ * LIST_MATRIX from the rotation, and ATTITUDE_A-C from the player's
+ * orientation words. */
+void aim_view(void);
+
 #endif
