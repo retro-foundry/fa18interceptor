@@ -207,4 +207,9 @@ int glue_C3318E(void);
 int glue_C33186(void);
 int glue_C2F582(void);
 
+/* batch 27: target point, record range, lane blit */
+int glue_C1C2C8(void);
+int glue_C24568(void);
+int glue_C304FA(void);
+
 #endif

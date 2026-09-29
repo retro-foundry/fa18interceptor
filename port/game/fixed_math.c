@@ -274,3 +274,106 @@ int flagged_slot_in_range(void) {
     }
     return 0;
 }
+
+void update_target_point(void) {
+    gaddr record, observer = OBSERVER;
+    int32_t d[3];
+    int16_t length, beyond;
+    int negative[3], i;
+
+    if (!rd_u8(TARGET_ENABLED)) {
+        for (i = 0; i < 3; i++) wr_s32(TARGET_POINT + (gaddr)(4 * i), rd_s32(observer + (gaddr)(4 * i)));
+        return;
+    }
+    record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+    d[0] = (rd_s32(record + 0x14) & 0x3FFFFF) + rd_s32(observer);
+    d[1] = rd_s32(record + 0x18) + rd_s32(observer + 4);
+    d[2] = (rd_s32(record + 0x1C) & 0x3FFFFF) + rd_s32(observer + 8);
+    for (i = 0; i < 3; i++) {
+        negative[i] = d[i] < 0;
+        if (negative[i]) d[i] = -d[i];
+        d[i] >>= 8;
+    }
+    length = (int16_t)magnitude3((int16_t)d[0], (int16_t)d[1], (int16_t)d[2]);
+    beyond = (int16_t)(length - 0x200);
+    if (beyond <= 0) {
+        for (i = 0; i < 3; i++) d[i] = 0;
+    } else if (beyond < (int16_t)(length >> 1)) {
+        uint16_t ratio = (uint16_t)divu_w((uint32_t)((int32_t)beyond << 8), (uint16_t)length);
+        for (i = 0; i < 3; i++) {
+            d[i] = (int32_t)((uint32_t)ratio * (uint16_t)d[i]);
+            if (!negative[i]) d[i] = -d[i];
+        }
+    } else {
+        int32_t near = (int32_t)(int16_t)(length - beyond);
+        uint16_t ratio = (uint16_t)divu_w((uint32_t)near << 16 | ((uint32_t)near >> 16), (uint16_t)length);
+        for (i = 0; i < 3; i++) {
+            uint32_t scaled = (uint32_t)ratio * (uint16_t)d[i];
+            d[i] = ((int32_t)scaled >> 8) + (int32_t)((scaled >> 7) & 1); /* ASR.L, rounded */
+            if (negative[i]) d[i] = -d[i];
+        }
+        d[0] -= rd_s32(record + 0x14) & 0x3FFFFF;
+        d[1] -= rd_s32(record + 0x18);
+        d[2] -= rd_s32(record + 0x1C) & 0x3FFFFF;
+        for (i = 0; i < 3; i++) wr_s32(TARGET_POINT + (gaddr)(4 * i), d[i]);
+        return;
+    }
+    for (i = 0; i < 3; i++) wr_s32(TARGET_POINT + (gaddr)(4 * i), d[i] + rd_s32(observer + (gaddr)(4 * i)));
+}
+
+/* |record's cell coordinate - the other's, as 16.16 / 4 + fine offset|. */
+static int32_t cell_distance(gaddr record, int cell, int fine, int16_t coarse, int16_t detail) {
+    /* EXT.L, SUB.W, SWAP: the sign-extension word lands in the low half. */
+    uint32_t swapped = (uint32_t)(uint16_t)(coarse - rd_s16(record + (gaddr)cell)) << 16 | (coarse < 0 ? 0xFFFFu : 0);
+    int32_t d = (int32_t)swapped >> 2;
+    d += (int16_t)(detail - rd_s16(record + (gaddr)fine));
+    return d < 0 ? -d : d;
+}
+
+void classify_record_range(gaddr r) {
+    int16_t distance, band_x, band_z;
+    int32_t dx, dy, dz;
+
+    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) + 0x10));
+    if (rd_s16(r + 0x4A) >= 0x480) {
+        int8_t period = rd_s16(r + 0x4A) >= 0x900 ? 0x50 : 0x20;
+        if (period >= (int8_t)(rd_u8(r + 0x39) & 0xF0)) return;
+    }
+    wr_u8(r + 0x39, (uint8_t)(rd_u8(r + 0x39) & 0x0F));
+    band_x = rd_s16(r + 0x2C);
+    if (band_x < 0) return;
+    band_z = rd_s16(r + 0x2E);
+    dx = cell_distance(r, 0x06, 0x0C, band_x, rd_s16(r + 0x30));
+    dz = cell_distance(r, 0x08, 0x0E, band_z, rd_s16(r + 0x32));
+    dy = rd_s32(r + 0x34) - rd_s32(r + 0x10);
+    if (dy < 0) dy = -dy;
+    if (dx > 0x7F00 || dy > 0x7F00 || dz > 0x7F00) {
+        wr_u16(r + 0x4A, 0x7FFF);
+        if (rd_u16(SCRIPT_RECORD)) wr_u8(r + 0x63, (uint8_t)(rd_u8(r + 0x63) | 0xF0));
+        return;
+    }
+    distance = (int16_t)magnitude3((int16_t)dx, (int16_t)dy, (int16_t)dz);
+    wr_s16(r + 0x4A, distance);
+    wr_u8(r + 0x04, (uint8_t)(rd_u8(r + 0x04) | 0x01));
+    if (distance > 0x36C0) {
+        if (rd_u16(SCRIPT_RECORD)) wr_u8(r + 0x63, (uint8_t)(rd_u8(r + 0x63) | 0xF0));
+        return;
+    }
+    if (distance > 0x1E00) {
+        if (rd_u8(r + 0x7A) == 4) wr_u8(r + 0x7A, 3);
+    } else if (rd_u8(r + 0x7A) == 3) {
+        wr_u8(r + 0x7A, 4);
+    }
+    if (!rd_u16(SCRIPT_RECORD)) return;
+    if (distance > 0x1800) {
+        wr_u16(r + 0x4A, 0x7FFF);
+        wr_u8(r + 0x63, (uint8_t)(rd_u8(r + 0x63) | 0xF0));
+        return;
+    }
+    if (distance > 0x300) {
+        uint8_t band = distance > 0xC00 ? 0x30 : 0x20;
+        wr_u8(r + 0x63, (uint8_t)((rd_u8(r + 0x63) & 0x0F) | band));
+        return;
+    }
+    wr_u8(r + 0x63, (uint8_t)((rd_u8(r + 0x63) & 0x0F) | 0x10));
+}

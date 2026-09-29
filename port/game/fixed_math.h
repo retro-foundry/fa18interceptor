@@ -76,4 +76,19 @@ void normalize_vector(int32_t scale, int32_t x, int32_t y, int32_t z);
  * point's distance, else 0. */
 int flagged_slot_in_range(void);
 
+/* TARGET_POINT from the viewed record and the observer ($C1C2C8): the
+ * observer position when disabled or within $200 of the record; beyond,
+ * the record-to-observer vector (x and z masked to 22 bits) scaled by a
+ * DIVU ratio of the distance past $200, as the two branches of the
+ * original compute it. */
+void update_target_point(void);
+
+/* A record's range to the observer, classified ($C24568): +$39 counts up
+ * in its high nibble between updates at long range; the distance (x from
+ * +$2C/+$30, z from +$2E/+$32 against the record's cell, y from +$34) is
+ * stored in +$4A (capped at $7FFF), with +$7A toggled between 3 and 4
+ * across $1E00 and, for the scripted view, a range band in +$63's high
+ * nibble. */
+void classify_record_range(gaddr record);
+
 #endif

@@ -194,6 +194,10 @@ const FA18Port fa18_ports[] = {
     {0xC3318E, glue_C3318E, "play_status_tone", 1250},
     {0xC33186, glue_C33186, "play_status_tone_outside_context", 1260},
     {0xC2F582, glue_C2F582, "clear_page_plane_tops", 600},
+    /* batch 27: target point, record range, lane blit */
+    {0xC1C2C8, glue_C1C2C8, "update_target_point", 1400},
+    {0xC24568, glue_C24568, "classify_record_range", 1200},
+    {0xC304FA, glue_C304FA, "blit_lane", 400},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

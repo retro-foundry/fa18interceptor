@@ -291,4 +291,11 @@
 #define TONE_MUTE          0xC4588Au /* byte: > 0 suppresses tones ($C3316A) */
 #define LIST_MATRIX        0xC45BFCu /* word[9]: rotation for list points, 8 fraction bits */
 
+/* ---- target point, record range, lane blit ($C1C2C8, $C24568, $C304FA) -- */
+#define TARGET_ENABLED     0xC457ACu /* byte: compute TARGET_POINT */
+#define TARGET_POINT       0xC45A62u /* long[3]: $C1C2C8's point */
+#define LANE_ROW           0xC45982u /* word: row the lane blit starts from */
+#define LANE_WORD          0xC4597Cu /* word: >> 4 compared with SPAN_ORIGIN + 12 */
+#define LANE_PATTERN       0x12ADCu  /* Chip RAM pattern the lane blit reads through C */
+
 #endif

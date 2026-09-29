@@ -43,3 +43,31 @@ void clear_page_plane_tops(void) {
             for (i = 0; i < 10; i++) wr_u32(p + (gaddr)(4 * i), 0);
         }
 }
+
+/* The C pointer and modulo the lane blit uses. */
+static void lane_source(uint16_t size, uint32_t *c_pointer, int16_t *c_modulo) {
+    int16_t row = (int16_t)(rd_s16(LANE_ROW) - rd_s16(REDRAW_STATE_WORD) - 0xB7);
+    int16_t modulo = (int16_t)(3 - (int16_t)(size & 0x3F));
+    uint32_t c = LANE_PATTERN + (uint32_t)(int32_t)(int16_t)(row * 4) - 2;
+    if (modulo != 1 && (int16_t)(rd_s16(LANE_WORD) >> 4) == (int16_t)(rd_s16(SPAN_ORIGIN) + 12)) c -= 2;
+    *c_pointer = c;
+    *c_modulo = modulo;
+}
+
+void blit_lane(int16_t plane_offset, int pattern) {
+    uint32_t plane = rd_u32(rd_u32(PAGE_PLANE_TABLE) + (gaddr)(int32_t)plane_offset) + rd_u32(POLY_PLANE_OFFSET);
+    uint16_t size = rd_u16(POLY_BLIT_SIZE);
+    uint32_t c;
+    int16_t modulo;
+
+    lane_source(size, &c, &modulo);
+    wait_blitter();
+    custom_write(BLTCON0, (pattern & 1) ? 0x0FEC : 0x0F4C);
+    custom_write(BLTCON1, 0x0002);
+    custom_write_ptr(BLTAPT, rd_u32(POLY_MASK_SOURCE));
+    custom_write_ptr(BLTCPT, c);
+    custom_write(BLTCMOD, (uint16_t)modulo);
+    custom_write_ptr(BLTBPT, plane);
+    custom_write_ptr(BLTDPT, plane);
+    custom_write(BLTSIZE, size);
+}
