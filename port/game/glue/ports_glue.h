@@ -365,4 +365,7 @@ int glue_C20904(void);
 int glue_C21A20(void);
 int glue_C217EA(void);
 
+/* batch 55: corner edges */
+int glue_C2E758(void);
+
 #endif

@@ -84,3 +84,113 @@ int clip_to_view_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int axis, in
     for (k = 0; k < 3; k++) wr_s16(CLIP_POINT + (gaddr)(2 * k), out[k]);
     return outside;
 }
+
+/* ---- one end of an edge, clipped to the view pyramid ---------------------- */
+
+static int crossing_behind(void) { return rd_s16(CLIP_POINT + 4) < 0; }
+
+/* After the planes on one axis failed: the other axis's planes, tried only
+ * when `p` is beyond one of them (a, qa: that axis of p and of q). */
+static int other_axis(const int16_t p[3], int16_t a, int16_t qa, int16_t qz, int axis, ClipProbe probe, void *context,
+                      int *plane) {
+    int first = a < 0 ? -1 : 1;
+    int16_t pa = (int16_t)(first * a), qfirst = (int16_t)(first * qa), qsecond = (int16_t)(-first * qa);
+    if (pa < p[2] || qz <= qfirst) return CLIP_END_NONE;
+    *plane = CLIP_PLANE(axis, first);
+    if (probe(context, axis, first)) return CLIP_END_CROSSING;
+    if (!crossing_behind()) return CLIP_END_NONE;
+    if ((int16_t)-pa < p[2] || qz <= qsecond) return CLIP_END_NONE;
+    *plane = CLIP_PLANE(axis, -first);
+    return probe(context, axis, -first) ? CLIP_END_CROSSING : CLIP_END_NONE;
+}
+
+/* Beyond the plane axis = side * z: its crossing, else the opposite plane's
+ * if the first crossing is behind the eye, else the other axis. */
+static int beyond(const int16_t p[3], const int16_t q[3], int axis, int side, ClipProbe probe, void *context, int *plane) {
+    int16_t qa = axis == CLIP_X ? q[0] : q[1], pb = axis == CLIP_X ? p[1] : p[0], qb = axis == CLIP_X ? q[1] : q[0];
+    if (q[2] <= (int16_t)(side * qa)) return CLIP_END_NONE;
+    *plane = CLIP_PLANE(axis, side);
+    if (probe(context, axis, side)) return CLIP_END_CROSSING;
+    if (crossing_behind() && q[2] > (int16_t)(-side * qa)) {
+        *plane = CLIP_PLANE(axis, -side);
+        if (probe(context, axis, -side)) return CLIP_END_CROSSING;
+    }
+    return other_axis(p, pb, qb, q[2], axis == CLIP_X ? CLIP_Y : CLIP_X, probe, context, plane);
+}
+
+int clip_edge_end(const int16_t p[3], const int16_t q[3], ClipProbe probe, void *context, int *plane) {
+    if (p[0] >= p[2]) return beyond(p, q, CLIP_X, 1, probe, context, plane);
+    if ((int16_t)-p[0] >= p[2]) return beyond(p, q, CLIP_X, -1, probe, context, plane);
+    if (p[1] >= p[2]) return beyond(p, q, CLIP_Y, 1, probe, context, plane);
+    if ((int16_t)-p[1] >= p[2]) return beyond(p, q, CLIP_Y, -1, probe, context, plane);
+    return p[2] >= 0 ? CLIP_END_POINT : CLIP_END_NONE;
+}
+
+/* ---- the corners' edges ($C2E758) ----------------------------------------- */
+
+typedef struct { gaddr q; int16_t p[3]; } CornerProbe;
+
+static int enters_rounded(void *context, int axis, int side) {
+    const CornerProbe *c = context;
+    return !clip_to_view_plane(c->q, c->p[0], c->p[1], c->p[2], axis, side, 1);
+}
+
+/* The rounded screen coordinate of v / z at `half_span` (x 160, y 90). */
+static int16_t rounded_screen(int16_t v, int16_t z, int16_t half_span) {
+    int16_t q, r, s;
+    divs_w((int32_t)v * (2 * half_span), z, &q, &r);
+    s = (int16_t)((int16_t)(q >> 1) + (q & 1) + half_span);
+    if (s < 0) return 0;
+    if (s >= 2 * half_span) return (int16_t)(2 * half_span - 1);
+    return s;
+}
+
+void project_corner_edges(void) {
+    /* Which counter each plane's crossings go to (CLIP_PLANE order). */
+    static const int counter[4] = {1, 3, 0, 2};
+    int i, skip = 0;
+
+    for (i = 0; i <= 7; i++) {
+        int from, to, plane = 0, end;
+        gaddr out = CORNER_SCREEN + (gaddr)(8 * i);
+        CornerProbe probe;
+        int16_t q[3];
+        if (i & 1) {
+            from = i + 1 > 7 ? 0 : i + 1;
+            to = i - 1;
+        } else {
+            from = i;
+            to = i + 2 > 7 ? 0 : i + 2;
+        }
+        if (skip) {
+            skip = 0;
+            continue;
+        }
+        probe.q = CORNER_RECORDS + (gaddr)(16 * to);
+        probe.p[0] = (int16_t)(rd_s16(CORNER_RECORDS + (gaddr)(16 * from)) + 1);
+        probe.p[1] = (int16_t)(rd_s16(CORNER_RECORDS + (gaddr)(16 * from) + 2) + 1);
+        probe.p[2] = rd_s16(CORNER_RECORDS + (gaddr)(16 * from) + 4);
+        q[0] = rd_s16(probe.q);
+        q[1] = rd_s16(probe.q + 2);
+        q[2] = rd_s16(probe.q + 4);
+        end = clip_edge_end(probe.p, q, enters_rounded, &probe, &plane);
+        if (end == CLIP_END_POINT && probe.p[2] >= 0) {
+            if (i & 1) skip = 1; /* in view: the next corner needs nothing */
+            continue;
+        }
+        if (end != CLIP_END_CROSSING) {
+            wr_u32(out, 0);
+            wr_u16(CORNER_RECORDS + (gaddr)(16 * i) + 0xE, 0);
+            continue;
+        }
+        {
+            gaddr n = CROSSING_COUNTS + (gaddr)(2 * counter[plane]);
+            int16_t x = rd_s16(CLIP_POINT), y = rd_s16(CLIP_POINT + 2), z = rd_s16(CLIP_POINT + 4);
+            wr_u16(n, (uint16_t)(rd_u16(n) + 1));
+            wr_u16(CROSSING_LAST + (gaddr)(2 * counter[plane]), (uint16_t)i);
+            if (z <= 0) for (;;) {} /* the original spins here */
+            wr_s16(out, rounded_screen(x, z, 0xA0));
+            wr_s16(out + 2, rounded_screen(y, z, 0x5A));
+        }
+    }
+}

@@ -21,11 +21,18 @@ enum { NONE, POINT, CROSSING };
 
 typedef struct {
     int16_t p[3], q[3], cross[3];
+    int rounded;
 } Segment;
 
-/* One plane test: 1 when the crossing is in view (the BEQ taken). */
+/* One plane test: 1 when the crossing is in view (the BEQ taken). A rounded
+ * test that finds the edge parallel leaves the last crossing. */
 static int cross(Segment *s, int axis, int side) {
-    return !view_plane_crossing(s->q, s->p[0], s->p[1], s->p[2], axis, side, 0, s->cross);
+    int16_t at[3];
+    int outside = view_plane_crossing(s->q, s->p[0], s->p[1], s->p[2], axis, side, s->rounded, at);
+    int k;
+    if (outside < 0) return 0;
+    for (k = 0; k < 3; k++) s->cross[k] = at[k];
+    return !outside;
 }
 
 static int behind(const Segment *s) { return s->cross[2] < 0; }
@@ -92,6 +99,25 @@ static void divs_reg(int n, int16_t divisor) {
     D(n) = ((uint32_t)(uint16_t)(dividend % divisor) << 16) | (uint16_t)q;
 }
 
+/* The decision chain's D2/D6 for an edge from `p` (registers D3-D5 as they
+ * hold it) to `q`; `last` is the last crossing computed (read by the
+ * behind-the-eye tests) and is updated. Returns 0 none, 1 the point, 2 a
+ * crossing (then in `last`). */
+int edge_end_registers(const int16_t p[3], const int16_t q[3], int rounded, int16_t last[3]);
+int edge_end_registers(const int16_t p[3], const int16_t q[3], int rounded, int16_t last[3]) {
+    Segment s;
+    int k, end;
+    for (k = 0; k < 3; k++) {
+        s.p[k] = p[k];
+        s.q[k] = q[k];
+        s.cross[k] = last[k];
+    }
+    s.rounded = rounded;
+    end = end_regs(&s);
+    for (k = 0; k < 3; k++) last[k] = s.cross[k];
+    return end;
+}
+
 /* The registers $C2EE4A leaves for a segment from `p` to `q` (the points
  * as the call found them in SEGMENT_POINTS), without drawing: the
  * projected ends are kept in hand, not read back from POLY_VERTICES. */
@@ -104,7 +130,9 @@ void clipped_segment_registers(const int16_t p[3], const int16_t q[3]) {
     for (k = 0; k < 3; k++) {
         s.p[k] = p[k];
         s.q[k] = q[k];
+        s.cross[k] = rd_s16(CLIP_POINT + (gaddr)(2 * k));
     }
+    s.rounded = 0;
     for (pass = 0; pass < 2; pass++) {
         int end;
         for (k = 0; k < 3; k++) D(3 + k) = SEXT(s.p[k]);

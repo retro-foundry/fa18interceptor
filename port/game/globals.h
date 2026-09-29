@@ -443,5 +443,9 @@
 #define EXPECTED_LENGTH    0xC1AB82u /* word: its length less 2 */
 #define ROUTINE_QUEUE_MESSAGE_FOUR 0xC1072Eu
 #define ROUTINE_AFTER_EVENT        0xC110A4u
+#define CORNER_RECORDS     0xC4B390u /* 16-byte records: x, y, z words, ..., +$E word */
+#define CROSSING_COUNTS    0xC4E854u /* word[4]: crossings through y = z, x = z, y = -z, x = -z */
+#define CROSSING_LAST      0xC4E85Cu /* word[4]: the corner of each plane's last crossing */
+#define CORNER_SCREEN      0xC4B990u /* word[2] per corner: its edge's entry point on screen */
 
 #endif

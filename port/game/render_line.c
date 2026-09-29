@@ -151,8 +151,6 @@ int draw_projected_segment(void) {
 
 /* ---- a segment clipped to the view pyramid ($C2EE4A) ---------------------- */
 
-enum { END_NONE, END_POINT, END_CROSSING };
-
 typedef struct { int16_t x, y, z; } SegmentPoint;
 
 static SegmentPoint segment_point(gaddr a) {
@@ -163,42 +161,10 @@ static SegmentPoint segment_point(gaddr a) {
     return p;
 }
 
-/* Whether the crossing of the plane with the segment from `p` to the second
- * point is in view (it is left in CLIP_POINT either way). */
-static int enters(SegmentPoint p, int axis, int side) {
-    return !clip_to_view_plane(SEGMENT_POINTS + 6, p.x, p.y, p.z, axis, side, 0);
-}
-
-static int crossing_behind(void) { return rd_s16(CLIP_POINT + 4) < 0; }
-
-/* After the planes on one axis failed: the other axis's planes, tried only
- * when `p` is beyond one of them (a, qa: that axis of p and of q). */
-static int other_axis(SegmentPoint p, int16_t a, int16_t qa, int16_t qz, int axis) {
-    int first = a < 0 ? -1 : 1;
-    int16_t pa = (int16_t)(first * a), qfirst = (int16_t)(first * qa), qsecond = (int16_t)(-first * qa);
-    if (pa < p.z || qz <= qfirst) return END_NONE;
-    if (enters(p, axis, first)) return END_CROSSING;
-    if (!crossing_behind()) return END_NONE;
-    if ((int16_t)-pa < p.z || qz <= qsecond) return END_NONE;
-    return enters(p, axis, -first) ? END_CROSSING : END_NONE;
-}
-
-/* Beyond the plane axis = side * z: its crossing, else the opposite plane's
- * if the first crossing is behind the eye, else the other axis. */
-static int beyond(SegmentPoint p, SegmentPoint q, int axis, int side) {
-    int16_t qa = axis == CLIP_X ? q.x : q.y, pb = axis == CLIP_X ? p.y : p.x, qb = axis == CLIP_X ? q.y : q.x;
-    if (q.z <= (int16_t)(side * qa)) return END_NONE;
-    if (enters(p, axis, side)) return END_CROSSING;
-    if (crossing_behind() && q.z > (int16_t)(-side * qa) && enters(p, axis, -side)) return END_CROSSING;
-    return other_axis(p, pb, qb, q.z, axis == CLIP_X ? CLIP_Y : CLIP_X);
-}
-
-static int segment_end(SegmentPoint p, SegmentPoint q) {
-    if (p.x >= p.z) return beyond(p, q, CLIP_X, 1);
-    if ((int16_t)-p.x >= p.z) return beyond(p, q, CLIP_X, -1);
-    if (p.y >= p.z) return beyond(p, q, CLIP_Y, 1);
-    if ((int16_t)-p.y >= p.z) return beyond(p, q, CLIP_Y, -1);
-    return p.z >= 0 ? END_POINT : END_NONE;
+/* The truncated crossing with the segment's second point. */
+static int enters(void *context, int axis, int side) {
+    const int16_t *p = context;
+    return !clip_to_view_plane(SEGMENT_POINTS + 6, p[0], p[1], p[2], axis, side, 0);
 }
 
 static int16_t divs_quotient(int32_t dividend, int16_t divisor) {
@@ -212,10 +178,13 @@ int draw_clipped_segment(void) {
 
     for (pass = 0; pass < 2; pass++) {
         SegmentPoint p = segment_point(SEGMENT_POINTS), q = segment_point(SEGMENT_POINTS + 6), e;
-        int16_t sx, sy;
-        switch (segment_end(p, q)) {
-        case END_POINT: e = p; break;
-        case END_CROSSING: e = segment_point(CLIP_POINT); break;
+        int16_t pv[3], qv[3], sx, sy;
+        int plane;
+        pv[0] = p.x; pv[1] = p.y; pv[2] = p.z;
+        qv[0] = q.x; qv[1] = q.y; qv[2] = q.z;
+        switch (clip_edge_end(pv, qv, enters, pv, &plane)) {
+        case CLIP_END_POINT: e = p; break;
+        case CLIP_END_CROSSING: e = segment_point(CLIP_POINT); break;
         default: return 0;
         }
         if (e.z <= 0) {

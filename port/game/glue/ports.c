@@ -324,6 +324,8 @@ const FA18Port fa18_ports[] = {
     {0xC20904, glue_C20904, "draw_segment_lattice", 40000},
     {0xC21A20, glue_C21A20, "offset_block_copies", 1500},
     {0xC217EA, glue_C217EA, "extend_block_scaled", 1500},
+    /* batch 55: corner edges */
+    {0xC2E758, glue_C2E758, "project_corner_edges", 20000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
