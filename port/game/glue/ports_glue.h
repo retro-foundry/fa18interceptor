@@ -439,4 +439,15 @@ int glue_C33DC8(void);
 int glue_C322EE(void);
 int glue_C1E328(void);
 
+/* batch 63: scene startup and command reset leaves */
+int glue_C08394(void);
+int glue_C090C2(void);
+int glue_C090F2(void);
+int glue_C1B602(void);
+int glue_C0833E(void);
+int glue_C133B2(void);
+int glue_C118A0(void);
+int glue_C083E2(void);
+int glue_C25A00(void);
+
 #endif

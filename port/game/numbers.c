@@ -60,6 +60,14 @@ void unpack_display_value(void) {
     wr_u32(DISPLAY_VALUE, value);
 }
 
+uint32_t add_repeated_nibble_weight(gaddr table_word, uint16_t repeats, uint32_t total) {
+    uint32_t weight = rd_u32(table_word);
+    uint32_t i;
+    /* Entry at $C25A00 is DBRA; each taken branch lands on the ADD.L. */
+    for (i = 0; i < repeats; ++i) total += weight;
+    return total;
+}
+
 void format_date_line(void) {
     uint32_t seconds = rd_u32(rd_u32(MODE_TABLE) + 8);
     uint32_t q = seconds / 3600;

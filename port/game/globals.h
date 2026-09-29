@@ -121,6 +121,16 @@
 #define SORT_LIST_COUNT    0xC4585Cu /* byte: lists to sort */
 #define SORT_LIST_NEXT     0xC4585Du /* byte: the next list, counting down */
 
+/* ---- command and control state (observed leaf routines) ----------------- */
+#define EVENT_FLAG_BYTE    0xC4599Au /* byte: bit 3 set by $C08394 */
+#define COMMAND_WORD       0xC458C6u /* word: bit 3 cleared by $C08394 */
+#define COMMAND_STATUS_BYTE 0xC4579Au /* byte: sign tested by $C0833E */
+#define SECONDARY_REQUEST_FLAGS 0xC46986u /* byte: bit 3 set by $C0833E */
+#define SPACE_COMMAND_MODE 0xC461E7u /* byte: high nibble tested by $C0833E */
+#define SPACE_COMMAND_LATCH 0xC457BAu /* byte: set by $C0833E */
+#define CONTROL_ACCUMULATOR_Y         0xC45778u /* word: cleared by $C1B602 */
+#define CONTROL_ACCUMULATOR_COMPANION 0xC4577Cu /* word: cleared by $C1B602 */
+
 /* ---- post-input sequence, continued --------------------------------------- */
 #define CONTEXT_SELECT     0xC45785u /* byte: dispatcher context (memory map) */
 #define CONTEXT_STARTED    0xC457B4u /* byte */
@@ -165,6 +175,7 @@
 
 /* ---- message sequence (earlier port: message_sequence) -------------------- */
 #define MESSAGE_QUEUE      0xC4574Au /* words: queued message codes */
+#define POSTFLIGHT_FAILURE_INPUT 0xC45849u /* byte: $10 selects queue code $62 ($C118A0) */
 #define MESSAGE_TIMER      0xC4573Eu /* long */
 #define MESSAGE_STATE_A    0xC457C6u /* byte */
 #define MESSAGE_STATE_B    0xC457C3u /* byte */
@@ -404,6 +415,7 @@
 
 /* ---- post-input stage sequence: STAGE_CALLBACK targets ------------------- */
 #define ROUTINE_END_SEQUENCE       0xC0F920u
+#define ROUTINE_FAILURE_STATUS_GATE 0xC118E6u
 #define ROUTINE_AWAIT_VIEWPORT     0xC0F946u
 #define ROUTINE_VIEWPORT_READY     0xC0F974u
 #define ROUTINE_AFTER_VIEWPORT     0xC0F992u

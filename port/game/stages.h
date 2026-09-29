@@ -9,6 +9,17 @@ void empty_stage(void);
 /* Empty the list at LIST_BUFFER. */
 void reset_list(void);
 
+/* Cold scene bootstrap helpers ($C090C2, $C090F2). */
+void clear_scene_startup_state(void);
+void enable_scene_record_updates(void);
+/* Observed command and throttle reset leaves ($C08394, $C1B602). */
+void set_event_bit_and_clear_command_word_bit(void);
+void reset_throttle_input_state(void);
+/* Space command's observed state effects ($C0833E); returns its D4 byte. */
+uint8_t dispatch_space_command_effect(void);
+/* $C118A0: when the countdown expires, queue the selected failure message. */
+void queue_postflight_failure_message(void);
+
 /* Count a byte timer down to zero; negative timers are stopped. */
 void tick_timer(gaddr timer);
 

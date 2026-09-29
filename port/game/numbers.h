@@ -23,6 +23,8 @@ void print_number(gaddr field, int16_t offset, uint32_t value, int8_t width);
 
 /* DISPLAY_VALUE = the eight packed BCD digits of DISPLAY_VALUE_BCD. */
 void unpack_display_value(void);
+/* $C25A00: DBRA-add the selected table weight into the packed-nibble total. */
+uint32_t add_repeated_nibble_weight(gaddr table_word, uint16_t repeats, uint32_t total);
 
 /* The date line ($C24E2C): from the mode table's +$08 long / 3600 (DIVU),
  * the month name (bits 5-6, capped at $7F) copied reversed into DATE_LINE

@@ -12,6 +12,55 @@ void reset_list(void) {
     wr_u32(LIST_WRITE, LIST_BUFFER);
 }
 
+void clear_scene_startup_state(void) {
+    gaddr p;
+    /* $C090C2: CLR.B across 53 bytes, then CLR.W across 52 words. */
+    for (p = 0xC45790u; p < 0xC457C5u; ++p) wr_u8(p, 0);
+    for (p = 0xC458C0u; p < 0xC45928u; p += 2) wr_u16(p, 0);
+}
+
+void enable_scene_record_updates(void) {
+    gaddr p;
+    /* $C090F2: twelve consecutive byte stores. */
+    for (p = RECORD_UPDATES_ON; p < 0xC45790u; ++p) wr_u8(p, 1);
+}
+
+void set_event_bit_and_clear_command_word_bit(void) {
+    /* $C08394: BSET.B #3 and ANDI.W #$FFF7. */
+    wr_u8(EVENT_FLAG_BYTE, (uint8_t)(rd_u8(EVENT_FLAG_BYTE) | 8));
+    wr_u16(COMMAND_WORD, (uint16_t)(rd_u16(COMMAND_WORD) & 0xFFF7u));
+}
+
+void reset_throttle_input_state(void) {
+    /* $C1B602: the three CLR stores in their original order. */
+    wr_u8(FUNCTION_KEY_LEVEL, 0);
+    wr_u16(CONTROL_ACCUMULATOR_Y, 0);
+    wr_u16(CONTROL_ACCUMULATOR_COMPANION, 0);
+}
+
+uint8_t dispatch_space_command_effect(void) {
+    uint8_t command = (uint8_t)(rd_u8(CONTROL_RECORDS + 0x7C) & 15);
+    if (command) return command;
+    if (rd_u8(MODE_SELECT) == 0x7D) {
+        if (rd_s8(COMMAND_STATUS_BYTE) < 0)
+            wr_u8(SECONDARY_REQUEST_FLAGS, (uint8_t)(rd_u8(SECONDARY_REQUEST_FLAGS) | 8));
+        return command;
+    }
+    wr_u8(EVENT_FLAG_BYTE, (uint8_t)(rd_u8(EVENT_FLAG_BYTE) | 4));
+    command = (uint8_t)(rd_u8(SPACE_COMMAND_MODE) & 0xF0);
+    if (command == 0x10) wr_u16(COMMAND_WORD, (uint16_t)(rd_u16(COMMAND_WORD) | 8));
+    else if (command) wr_u8(SPACE_COMMAND_LATCH, 1);
+    return command;
+}
+
+void queue_postflight_failure_message(void) {
+    if (rd_s16(POST_INPUT_COUNTDOWN) >= 0) return;
+    load_long_table(0xC08490u);
+    wr_u16(MESSAGE_QUEUE, rd_u8(POSTFLIGHT_FAILURE_INPUT) == 0x10 ? 0x62 : 0x63);
+    wr_u8(SEQUENCE_FLAG, 0);
+    wr_u32(STAGE_CALLBACK, ROUTINE_FAILURE_STATUS_GATE);
+}
+
 void tick_timer(gaddr timer) {
     if (rd_s8(timer) >= 0) wr_u8(timer, (uint8_t)(rd_u8(timer) - 1));
 }

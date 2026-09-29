@@ -5,6 +5,7 @@
 #include "fault.h"
 #include "fixed_math.h"
 #include "globals.h"
+#include "messages.h"
 
 gaddr control_record(uint16_t selector) {
     /* The original adds the doubled high-byte index as a signed word. */
@@ -181,6 +182,29 @@ void reset_mission_objects(void) {
     wr_u16(MISSION_COUNTER, 0);
     for (record = 1; record <= 3; record++)
         for (i = 0; i < 41; i++) wr_u32(CONTROL_RECORDS + (gaddr)(record * CONTROL_RECORD_BYTES + 4 * i), 0);
+}
+
+int32_t record_6e_step(void) {
+    gaddr record = rd_u32(CURRENT_RECORD);
+    int16_t step;
+    if ((rd_u8(record + 0x62) & 0xF0) == 0x30) return 0x10;
+    step = rd_s16(record + 0x6E);
+    if (step < 0) step = (int16_t)(0u - (uint16_t)step);
+    step = (int16_t)(step >> 9);
+    if (step > 0x3F) step = 0x3F;
+    if (!rd_u8(CONTEXT_SELECT)) step = (int16_t)(step >> 1);
+    if (!step) step = 1;
+    return step;
+}
+
+void begin_mission_reset(void) {
+    uint8_t attempts;
+    post_message(0x4005);
+    if (rd_u8(MODE_SELECT) == 6) {
+        attempts = rd_u8(ATTEMPTS_LEFT);
+        if (attempts != 1 && attempts != 0xFF) wr_u8(ATTEMPTS_LEFT, 0);
+    }
+    reset_mission_objects();
 }
 
 void prepare_player_record(void) {
