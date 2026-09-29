@@ -32,6 +32,7 @@
 
 /* ---- trigonometry ---------------------------------------------------------- */
 #define SINE_TABLE         0xC3E5E8u /* word[901]: sin(i/10 degree), 2.14 ($C2E6DA) */
+#define MATRIX_DEPTH_SCALE_TABLE 0xC2DEC2u /* word scale table selected by $C2DD4E */
 
 /* ---- sound ---------------------------------------------------------------- */
 #define MASTER_VOLUME        0xC4FF26u /* long: 0-63, 16.16; limits every voice ($C501E0) */

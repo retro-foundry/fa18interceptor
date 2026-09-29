@@ -6,6 +6,15 @@
 
 #include "memory.h"
 
+/* Register outputs of the record adjustment below.  The original's caller
+ * carries these values into the following matrix product. */
+typedef struct MatrixDepthAdjustment {
+    uint32_t d3;
+    uint32_t d5;
+    uint32_t d6;
+    uint32_t d7;
+} MatrixDepthAdjustment;
+
 /* Rotation from three angles ($C2E47A), 2.14 fixed point ($4000 = 1). With
  * s/c the sine and cosine of a, b and c:
  *   [ cb*cc + (sb*sa)*sc    -ca*sc    sb*cc - (cb*sa)*sc ]
@@ -32,6 +41,13 @@ void two_angle_matrix(uint16_t a, uint16_t b, gaddr out);
 /* Multiply each row of `matrix` by the matching word of `scales`, keeping
  * 8 fraction bits ($C2E5AC). */
 void scale_matrix_rows(gaddr matrix, gaddr scales);
+
+/* $C2DD4E: adjust a record's matrix inputs and its +$22/+24/+54 working
+ * words.  `d3`, `d5`, `d6`, and `d7` are the original's live register values
+ * on entry and return. */
+void adjust_matrix_record_depth(gaddr record, uint32_t d3, uint32_t d5,
+                                uint32_t d6, uint32_t d7,
+                                MatrixDepthAdjustment *out);
 
 /* The matrix that undoes a record's orientation ($C2D970): the alternate
  * composition of the three angles negated (a full turn, $7080, less each

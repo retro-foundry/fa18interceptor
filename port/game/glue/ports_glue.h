@@ -471,5 +471,6 @@ int glue_C1B27E(void);
 int glue_C3316E(void);
 int glue_C244E2(void);
 int glue_C1342C(void);
+int glue_C2DD4E(void);
 
 #endif
