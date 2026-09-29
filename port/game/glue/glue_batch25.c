@@ -114,10 +114,10 @@ int glue_C2FD22(void) {
 
 /* $C3040C: leaves D0.w = the size, D1 the mask source, D2/D3 the plane 1/0
  * addresses, D4.w = $FCA, A0 the custom base, A2 the plane table. */
-int glue_C3040C(void) {
+void mask_between_registers(void);
+void mask_between_registers(void) {
     gaddr table = rd_u32(PAGE_PLANE_TABLE);
     uint32_t offset = rd_u32(POLY_PLANE_OFFSET);
-    blit_mask_between_planes();
     SET_W(D(0), rd_u16(POLY_BLIT_SIZE));
     D(1) = rd_u32(POLY_MASK_SOURCE);
     D(2) = rd_u32(table + 4) + offset;
@@ -125,6 +125,11 @@ int glue_C3040C(void) {
     SET_W(D(4), 0x0FCA);
     A(0) = 0xDFF000u;
     A(2) = table;
+}
+
+int glue_C3040C(void) {
+    blit_mask_between_planes();
+    mask_between_registers();
     return glue_return();
 }
 

@@ -241,4 +241,7 @@ int glue_C2F60A(void);
 /* batch 34: polygon preparation */
 int glue_C301F6(void);
 
+/* batch 35: polygon submission */
+int glue_C2FF48(void);
+
 #endif

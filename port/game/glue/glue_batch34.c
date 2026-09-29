@@ -35,19 +35,20 @@ static void edge(uint16_t *last_size) {
     polygon_edge_registers(*last_size);
 }
 
-static int finish(uint32_t d0) {
+/* The registers prepare_polygon leaves (after it ran); returns its D0.
+ * `last_size` is the BLTSIZE written before it. */
+int prepare_registers(uint16_t last_size);
+
+static int done(uint32_t d0) {
     D(0) = d0;
     flags_logic_l(d0);
-    return glue_return();
+    return (int)d0;
 }
 
-int glue_C301F6(void) {
-    uint16_t last_size = custom_written(BLTSIZE);
+int prepare_registers(uint16_t last_size) {
     gaddr v = POLY_VERTICES + 2;
     int16_t count;
     int i;
-
-    (void)prepare_polygon();
 
     A(4) = SEXT(rd_u16(LINE_LAST_ROW));
     SET_W(D(6), rd_u16(POLY_VERTICES) - 3);
@@ -66,7 +67,7 @@ int glue_C301F6(void) {
         if (!(W(4) > W(0))) SET_W(D(0), D(4)); else if (W(2) < W(4)) SET_W(D(2), D(4));
         if (!(W(5) > W(1))) SET_W(D(1), D(5)); else if (W(3) < W(5)) SET_W(D(3), D(5));
     }
-    if (W(1) > (int16_t)A(4)) return finish(1);
+    if (W(1) > (int16_t)A(4)) return done(1);
     SET_W(D(7), W(3) - W(1));
     abs_word(7);
     SET_W(D(6), W(2) - W(0));
@@ -78,10 +79,10 @@ int glue_C301F6(void) {
         if (!rd_u8(KEEP_LINE_STYLE)) fa18_bus_write32(LINE_STYLE, 0x000FFFFFu);
         line_registers();
         fa18_bus_write32(LINE_STYLE, style);
-        return finish(1);
+        return done(1);
     }
     SET_W(D(1), W(1) + 1);
-    if (W(1) > (int16_t)A(4)) return finish(1);
+    if (W(1) > (int16_t)A(4)) return done(1);
     if (W(7) == 2) {
         SET_W(D(0), D(2));
         if (W(1) >= rd_s16(LINE_LAST_ROW)) pair_registers();
@@ -95,7 +96,7 @@ int glue_C301F6(void) {
             plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
         }
     }
-    return finish(1);
+    return done(1);
 
 fill:
     SET_W(D(0), W(0) - 1);
@@ -159,5 +160,12 @@ fill:
     SET_W(D(7), (uint16_t)((uint16_t)D(7) << 6));
     SET_W(D(7), W(7) + W(6));
     A(0) = 0xDFF000u;
-    return finish(0);
+    return done(0);
+}
+
+int glue_C301F6(void) {
+    uint16_t last_size = custom_written(BLTSIZE);
+    (void)prepare_polygon();
+    (void)prepare_registers(last_size);
+    return glue_return();
 }

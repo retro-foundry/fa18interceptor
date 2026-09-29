@@ -355,4 +355,8 @@
 #define LINE_STYLE         0xC456E6u /* long: $C456E6-$C456E9 (planes, colour) */
 #define KEEP_LINE_STYLE    0xC457A2u /* byte: thin polygons keep the line style */
 
+/* ---- polygon submission ($C2FF48) ----------------------------------------- */
+#define POLY_COMPLEMENT    0xC456EAu /* word: bit n complements plane entry 3 - n (with LINE_COLOUR) */
+#define POLY_MASK_BLIT     0xC456ECu /* word: nonzero: blit the mask between planes instead */
+
 #endif

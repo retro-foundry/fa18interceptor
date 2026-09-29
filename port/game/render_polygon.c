@@ -11,6 +11,7 @@
 #include "hardware.h"
 #include "memory.h"
 #include "plot.h"
+#include "render_buffers.h"
 #include "render_line.h"
 
 /* Mask (A) combined with the page plane (B) into the plane (D). */
@@ -170,4 +171,36 @@ fill:
         custom_write(BLTSIZE, size);
     }
     return 0;
+}
+
+void draw_polygon(void) {
+    int bit, given, complement_all = 0;
+    uint8_t planes;
+
+    custom_write(DMACON, 0x8400); /* blitter priority */
+    if (prepare_polygon()) return;
+    given = rd_s16(LINE_COLOUR) >= 0;
+    if (given && rd_u16(POLY_MASK_BLIT)) {
+        blit_mask_between_planes();
+    } else {
+        planes = rd_u8(LINE_PLANES);
+        for (bit = 0; bit < 4; bit++) {
+            int set, complement;
+            if (!(planes & (1 << bit))) {
+                wr_u16(POLY_PLANE_BITS, (uint16_t)(rd_u16(POLY_PLANE_BITS) >> 1));
+                continue;
+            }
+            if (given) {
+                set = (rd_s16(LINE_COLOUR) >> bit) & 1;
+                complement = (rd_s16(POLY_COMPLEMENT) >> bit) & 1;
+            } else {
+                set = rd_u16(POLY_PLANE_BITS) & 1;
+                if (bit == 0) complement_all = rd_u16(POLY_COMPLEMENT) & 1;
+                complement = complement_all;
+            }
+            composite_polygon_plane(3 - bit, complement ? PLANE_COMPLEMENT : set ? PLANE_SET : PLANE_CLEAR);
+        }
+    }
+    clear_polygon_mask();
+    custom_write(DMACON, 0x0400);
 }

@@ -30,4 +30,13 @@ void clear_polygon_mask(void);
  * fill was started (compositing follows), 1 otherwise. */
 int prepare_polygon(void);
 
+/* Draw the polygon at POLY_VERTICES ($C2FF48): with blitter priority,
+ * prepare it; when it needs compositing, either blit the mask between the
+ * first planes (LINE_COLOUR given and POLY_MASK_BLIT set) or composite it
+ * into each plane in LINE_PLANES: set or cleared by LINE_COLOUR's bit (or
+ * CURRENT_COLOUR's), complemented by POLY_COMPLEMENT's (with a given
+ * colour; otherwise its bit 0 applies to every plane once plane 0 is
+ * drawn). Then clear the mask. Priority stays on after a direct draw. */
+void draw_polygon(void);
+
 #endif

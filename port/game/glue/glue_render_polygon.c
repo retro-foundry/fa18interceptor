@@ -9,13 +9,11 @@
 #include "render_polygon.h"
 
 /* $C30466: D0.w plane table offset, D3 bit 0 colour bit, D4 bit 0 complement. */
-int glue_C30466(void) {
+void composite_registers(void);
+void composite_registers(void) {
     int16_t offset = (int16_t)D(0);
-    PlaneOp op = (D(4) & 1) ? PLANE_COMPLEMENT : (D(3) & 1) ? PLANE_SET : PLANE_CLEAR;
     uint32_t plane_offset, plane;
     uint16_t size;
-
-    composite_polygon_plane(offset >> 2, op);
 
     size = rd_u16(POLY_BLIT_SIZE);
     A(2) = rd_u32(PAGE_PLANE_TABLE);
@@ -28,14 +26,19 @@ int glue_C30466(void) {
     /* X is the carry of ADD.L D2,D1 (offset + plane); later moves keep it. */
     FLAG_X = (D(1) < plane_offset) ? XFLAG_SET : XFLAG_CLEAR;
     flags_logic_w(size); /* final MOVE.W D0,BLTSIZE */
+}
+
+int glue_C30466(void) {
+    PlaneOp op = (D(4) & 1) ? PLANE_COMPLEMENT : (D(3) & 1) ? PLANE_SET : PLANE_CLEAR;
+    composite_polygon_plane((int16_t)D(0) >> 2, op);
+    composite_registers();
     return glue_return();
 }
 
 /* $C304B2: no inputs. */
-int glue_C304B2(void) {
+void clear_mask_registers(void);
+void clear_mask_registers(void) {
     uint16_t size;
-
-    clear_polygon_mask();
 
     size = rd_u16(POLY_BLIT_SIZE);
     D(2) = rd_u32(POLY_MASK_END);
@@ -43,6 +46,11 @@ int glue_C304B2(void) {
     SET_W(D(0), size);
     A(0) = 0xDFF000;
     flags_logic_w(size);
+}
+
+int glue_C304B2(void) {
+    clear_polygon_mask();
+    clear_mask_registers();
     return glue_return();
 }
 

@@ -220,6 +220,8 @@ const FA18Port fa18_ports[] = {
     {0xC2F60A, glue_C2F60A, "plot_pixel_pair", 280},
     /* batch 34: polygon preparation */
     {0xC301F6, glue_C301F6, "prepare_polygon", 6000},
+    /* batch 35: polygon submission */
+    {0xC2FF48, glue_C2FF48, "draw_polygon", 9000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
