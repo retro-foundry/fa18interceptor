@@ -473,4 +473,13 @@ int glue_C244E2(void);
 int glue_C1342C(void);
 int glue_C2DD4E(void);
 
+/* batch 63: postflight HUD */
+int glue_C33CD2(void);
+
+/* batch 63b */
+int glue_C33B38(void);
+
+/* batch 63c */
+int glue_C33370(void);
+
 #endif

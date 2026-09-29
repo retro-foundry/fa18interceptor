@@ -182,11 +182,10 @@ static int ring_quarter_regs(int16_t *points, int16_t x, int16_t y, int16_t shif
     }
 }
 
-int glue_C345A0(void) {
+void ring_registers(void) {
     int16_t x = W(0), y = W(1), points = W(2), shift = rd_s16(SPAN_ORIGIN_Y);
     int clipped = 1;
 
-    plot_ring(x, y, points, A(0));
     if (x > 14 && x < 0x132) {
         SET_W(D(2), (uint16_t)(0x63 + shift));
         if (x > W(2)) {
@@ -198,12 +197,17 @@ int glue_C345A0(void) {
         SET_W(D(0), (uint16_t)(0x55 + shift));
         SET_W(D(0), (uint16_t)(0xE9 + shift));
     }
-    if (!ring_quarter_regs(&points, x, y, shift, clipped, 1, 1, -1)) return glue_return();
+    if (!ring_quarter_regs(&points, x, y, shift, clipped, 1, 1, -1)) return;
     A(0) -= 2;
-    if (!ring_quarter_regs(&points, x, y, shift, clipped, 0, 1, 1)) return glue_return();
+    if (!ring_quarter_regs(&points, x, y, shift, clipped, 0, 1, 1)) return;
     A(0) += 2;
-    if (!ring_quarter_regs(&points, x, y, shift, clipped, 1, -1, 1)) return glue_return();
+    if (!ring_quarter_regs(&points, x, y, shift, clipped, 1, -1, 1)) return;
     A(0) -= 2;
     ring_quarter_regs(&points, x, y, shift, clipped, 0, -1, -1);
+}
+
+int glue_C345A0(void) {
+    plot_ring(W(0), W(1), W(2), A(0));
+    ring_registers();
     return glue_return();
 }

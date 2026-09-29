@@ -50,6 +50,15 @@ void line_registers(void);
 /* $C348B2's from D0/D1/D4 (glue_batch49.c) and $C31E6C's (glue_batch59.c). */
 void symbol_registers(void);
 void shoot_cue_registers(void);
+/* $C345A0's (glue_batch38.c), $C347F2's (glue_batch61.c) and $C31D16's
+ * (glue_batch59.c), from their entry registers. */
+void ring_registers(void);
+void ring_point_registers(void);
+void signed_readout_registers(void);
+/* $C34066's from D1 (glue_batch61.c); the 8-pixel digits line's entry and
+ * replay, as $C32AA4/$C32AA6 are reached (glue_batch59.c). */
+void tick_row_registers(void);
+void bcd_entry(gaddr layout, gaddr rows, int16_t x, int count, int digits, gaddr end, int keep_zeros);
 
 /* $C2F64E's and $C2F63A's the same way. */
 void square_registers(void);

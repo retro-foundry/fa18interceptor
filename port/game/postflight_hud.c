@@ -20,8 +20,8 @@
 #define LAYOUT_SPEED_TICK     0xC33264u
 #define LAYOUT_HEADING_TICK   0xC33A16u
 
-#define ALTITUDE_LABEL        0xC3341Au
-#define SPEED_LABEL           0xC33644u
+#define ALTITUDE_LABEL        0xC33418u /* "FT" */
+#define SPEED_LABEL           0xC33642u /* "KT" */
 #define RANGE_RING            0xC3494Cu
 #define RANGE_POINT           0xC34976u
 
@@ -136,44 +136,6 @@ static void draw_postflight_bound(int16_t x) {
               (int16_t)(0x5A + rd_s16(REDRAW_STATE_WORD)));
 }
 
-/* $C34066, called after the heading tape puts its centre in HUD_CENTRE_X.
- * Its first mark uses a view-relative plot even though the caller has
- * already moved its row; the following tick rows retain that exact offset. */
-static void draw_heading_ticks(int16_t row) {
-    int16_t x = (int16_t)(rd_s16(HUD_CENTRE_X) + rd_s16(SPAN_ORIGIN_Y));
-    int16_t first_y = (int16_t)(row + rd_s16(REDRAW_STATE_WORD));
-    int16_t saved_row = row;
-    int index;
-
-    if (x >= 0 && x < 0x140) {
-        plot_pixel(x, first_y);
-        plot_pixel(x, (int16_t)(first_y - 1));
-    }
-
-    for (index = 0;; index++) {
-        x = (int16_t)(x + 10);
-        if (x < 0 || x > 0x13F || x >= (int16_t)(0xB9 + rd_s16(SPAN_ORIGIN_Y))) break;
-        if (index == 1 || index == 3) {
-            plot_pixel(x, saved_row);
-            plot_pixel(x, (int16_t)(saved_row - 1));
-        } else {
-            plot_pixel(x, saved_row);
-        }
-    }
-
-    x = (int16_t)(rd_s16(HUD_CENTRE_X) + rd_s16(SPAN_ORIGIN_Y));
-    for (index = 0;; index++) {
-        x = (int16_t)(x - 10);
-        if (x < 0 || x > 0x13F || x <= (int16_t)(0x85 + rd_s16(SPAN_ORIGIN_Y))) break;
-        if (index == 1 || index == 3) {
-            plot_pixel(x, saved_row);
-            plot_pixel(x, (int16_t)(saved_row - 1));
-        } else {
-            plot_pixel(x, saved_row);
-        }
-    }
-}
-
 /* Put the selected BCD digits into the lower three bytes, preserving the
  * original high half in the same way as ANDI.W.  The returned value is the
  * decoded BCD used to place a tape's centre. */
@@ -218,6 +180,10 @@ static void draw_altitude_tape(int32_t altitude) {
     row = (int16_t)(centre + 0x5B + rd_s16(REDRAW_STATE_WORD));
     wr_s16(HUD_CENTRE_X, row);
     row = (int16_t)(row + 2);
+    {
+        int16_t x = (int16_t)(0xDF + rd_s16(SPAN_ORIGIN_Y));
+        if (x > 0 && x < 0x13F) plot_pixel(x, row);
+    }
     initial_row = row;
     rows = 0xE02 + (int16_t)(centre * 40);
     initial_rows = rows;
@@ -235,7 +201,7 @@ static void draw_altitude_tape(int32_t altitude) {
     if (!bcd) goto end;
     rows = initial_rows;
     row = initial_row;
-    for (rows += 0x258u; rows <= 0x1130u; rows += 0x258u) {
+    for (rows += 0x258u; rows <= 0x1130u && rd_u32(DISPLAY_VALUE_BCD); rows += 0x258u) {
         row = (int16_t)(row + 15);
         plot_pixel_in_view(0xDF, row);
         adjust_tape_bcd(0);
@@ -253,7 +219,7 @@ static void draw_speed_tape(gaddr record) {
 
     if (!(rd_u8(record) & 0x80)) {
         speed = rd_s16(record + 0x6E);
-        if (speed >= 0) speed = (int16_t)-speed;
+        if (speed < 0) speed = (int16_t)-speed;
     }
     speed = (int16_t)divu_word((uint32_t)(int32_t)speed, 12);
     if (rd_u8(record + 0x62) != 0x10) {
@@ -281,7 +247,7 @@ static void draw_speed_tape(gaddr record) {
         wr_u32(DISPLAY_VALUE_BCD, bcd);
         if (bcd) {
             rows = initial_rows;
-            for (rows += 0x258u; rows <= 0x1130u; rows += 0x258u) {
+            for (rows += 0x258u; rows <= 0x1130u && rd_u32(DISPLAY_VALUE_BCD); rows += 0x258u) {
                 adjust_tape_bcd(0);
                 draw_speed_tick((gaddr)rows);
             }
@@ -297,8 +263,7 @@ static void draw_speed_tape(gaddr record) {
                 plot_pixel_in_view(0x6C, 0x57);
                 plot_pixel((int16_t)(0x6C + rd_s16(SPAN_ORIGIN_Y)),
                            (int16_t)(0x58 + rd_s16(REDRAW_STATE_WORD)));
-                plot_pixel_in_view((int16_t)(0x6E + rd_s16(SPAN_ORIGIN_Y)),
-                                   (int16_t)(0x59 + rd_s16(REDRAW_STATE_WORD)));
+                plot_pixel_pair(x, (int16_t)(0x59 + rd_s16(REDRAW_STATE_WORD)));
             }
         }
     }
@@ -320,6 +285,7 @@ static void draw_heading_tape(gaddr record) {
 
     heading = (int16_t)(rd_s16(record + 0x68) >> 3);
     centre = (int16_t)-divs_word(prepare_tape_value(heading, 0x40, 0x40, 0, -100), 5);
+    if (rd_s32(DISPLAY_VALUE_BCD) >= 0x360) wr_u32(DISPLAY_VALUE_BCD, 0);
     wr_s16(HUD_CENTRE_X, (int16_t)(centre + 0x9F));
     offset = (int16_t)(centre << 3);
     initial_offset = offset;
@@ -336,14 +302,14 @@ static void draw_heading_tape(gaddr record) {
     }
     wr_u32(DISPLAY_VALUE_BCD, bcd);
     offset = initial_offset;
-    if (rd_s32(DISPLAY_VALUE_BCD) <= 0) wr_u32(DISPLAY_VALUE_BCD, 0x360);
     for (;;) {
+        if (rd_s32(DISPLAY_VALUE_BCD) <= 0) wr_u32(DISPLAY_VALUE_BCD, 0x360);
         offset = (int16_t)(offset - 0xA0);
         if (offset < -0xB0) break;
         adjust_tape_bcd(0);
         draw_three_digits(LAYOUT_HEADING_TICK + (gaddr)(int32_t)offset, 0x858u);
     }
-    draw_heading_ticks((int16_t)(0x3D + rd_s16(REDRAW_STATE_WORD)));
+    draw_tick_row((int16_t)(0x3D + rd_s16(REDRAW_STATE_WORD)));
 }
 
 void draw_postflight_tape(void) {
@@ -387,10 +353,25 @@ void transform_postflight_record(void) {
     x = (int16_t)((int32_t)(rd_u32(POSTFLIGHT_VECTOR_PREVIOUS) - rd_u32(record + 0x14)) >> 8);
     y = (int16_t)((int32_t)(rd_u32(POSTFLIGHT_VECTOR_PREVIOUS + 4) - rd_u32(record + 0x18)) >> 8);
     z = (int16_t)((int32_t)(rd_u32(POSTFLIGHT_VECTOR_PREVIOUS + 8) - rd_u32(record + 0x1C)) >> 8);
-    project_view_point(matrix_dot(x, y, z, VIEW_ANGLE_MATRIX),
-                       matrix_dot(x, y, z, VIEW_ANGLE_MATRIX + 6),
-                       matrix_dot(x, y, z, VIEW_ANGLE_MATRIX + 12));
-    wr_u32(POSTFLIGHT_MARK, rd_u32(PROJECTED_PAIR));
+    {
+        int16_t px = matrix_dot(x, y, z, VIEW_ANGLE_MATRIX), py = matrix_dot(x, y, z, VIEW_ANGLE_MATRIX + 6);
+        int16_t depth = matrix_dot(x, y, z, VIEW_ANGLE_MATRIX + 12);
+        if (project_view_point(px, py, depth)) {
+            wr_u32(POSTFLIGHT_MARK, rd_u32(PROJECTED_PAIR));
+        } else {
+            /* The projector's leftovers: x 0, y as given or, when only the
+             * row limit rejected it, the screen row. */
+            int16_t row = py;
+            if (px < depth && py < depth && (int16_t)-px < depth && (int16_t)-py < depth && depth > 0) {
+                row = (int16_t)((int32_t)py * 90 / depth + 90);
+                if (row < 0) row = 0;
+                else if (row >= 180) row = 179;
+                row = (int16_t)(180 - row);
+            }
+            wr_u16(POSTFLIGHT_MARK, 0);
+            wr_u16(POSTFLIGHT_MARK + 2, (uint16_t)row);
+        }
+    }
 
     current[0] = ((int32_t)0x600 * rd_s16(record + 0x94) + (int32_t)0x4000 * rd_s16(record + 0x96)) >> 6;
     current[1] = ((int32_t)0x600 * rd_s16(record + 0x9A) + (int32_t)0x4000 * rd_s16(record + 0x9C)) >> 6;
@@ -452,11 +433,12 @@ display:
     if (rd_s16(record + 0x4A) > 0x7F00) goto transform;
     if (rd_u8(POST_INPUT_EVENT)) {
         draw_signed_readout(rd_s16(RANGE_RATE));
-    } else if (rd_u8(record + 4) & 1) {
-        wr_u8(record + 4, (uint8_t)(rd_u8(record + 4) & ~1u));
+    } else if (!(rd_u8(record + 4) & 1)) {
         draw_signed_readout(rd_s16(RANGE_RATE));
     } else {
+        /* A new range this pass: the rate is its change. */
         int16_t range = rd_s16(record + 0x4A);
+        wr_u8(record + 4, (uint8_t)(rd_u8(record + 4) & ~1u));
         int16_t rate = (int16_t)(range - rd_s16(POSTFLIGHT_RANGE_LAST));
         wr_s16(RANGE_RATE, rate);
         wr_s16(POSTFLIGHT_RANGE_LAST, range);

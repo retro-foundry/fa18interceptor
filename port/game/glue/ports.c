@@ -412,6 +412,12 @@ const FA18Port fa18_ports[] = {
     {0xC33DC8, glue_C33DC8, "update_missile_cue", 5000},
     /* batch 62: message line, display list sort */
     {0xC322EE, glue_C322EE, "draw_message_line", 9000},
+    /* batch 63: postflight HUD */
+    {0xC33CD2, glue_C33CD2, "transform_postflight_record", 1500},
+    /* batch 63b */
+    {0xC33B38, glue_C33B38, "draw_postflight_variant", 20000},
+    /* batch 63c */
+    {0xC33370, glue_C33370, "draw_postflight_tape", 40000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

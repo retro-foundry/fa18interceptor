@@ -264,7 +264,7 @@ int glue_C31EB6(void) {
 
 /* The registers at $C32AA4/$C32AA6: D0 = x origin over count - 1, D2.w
  * digits - 1, D6/D7 as loaded (MOVEQ). */
-static void bcd_entry(gaddr layout, gaddr rows, int16_t x, int count, int digits, gaddr end, int keep_zeros) {
+void bcd_entry(gaddr layout, gaddr rows, int16_t x, int count, int digits, gaddr end, int keep_zeros) {
     A(0) = end;
     A(1) = layout;
     A(2) = TEXT_LINE;
@@ -294,9 +294,13 @@ int glue_C31C60(void) {
     return glue_return();
 }
 
+void signed_readout_registers(void) {
+    bcd_entry(0xC31998u, 0x134E, 0x16, 5, 4, TEXT_LINE + 5, 1);
+}
+
 int glue_C31D16(void) {
     draw_signed_readout(W(0));
-    bcd_entry(0xC31998u, 0x134E, 0x16, 5, 4, TEXT_LINE + 5, 1);
+    signed_readout_registers();
     return glue_return();
 }
 

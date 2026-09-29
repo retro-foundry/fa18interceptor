@@ -12,8 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 331; 853,731 calls matching in shadow and 1,010,380 in the sandbox pass over three native recordings; poison-clean |
-| Last full proof | `ddfae837` built and `sh scripts/recomp_ports_check.sh` passed after it; the count is unchanged because the new postflight C has no glue registration yet |
+| Recreated routines (`port/game/`) | 334; 829,936 calls matching in shadow and 1,007,412 in the sandbox pass over three native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -37,11 +36,11 @@ one at a time, each proven on every call.
    `draw_polygon`; the clipper's register replay is reusable for its other
    callers (`port/game/glue/glue_clip.h`). The cockpit and HUD are now
    mostly C (`hud_readouts.c`, `hud_bars.c`, `hud_marks.c`,
-   `message_line.c`). `ddfae837` adds unregistered C for the postflight
-   tape `$C33370`, status mark `$C33B38`, transform `$C33CD2`, and outer
-   stage `$C332BC` in `postflight_hud.c`; it includes the local BCD tick,
-   sweep, bound, and heading helpers. Write their register replay glue and
-   register the entries before counting them as recreated. The remaining
+   `message_line.c`, `postflight_hud.c`). The HUD stage's parts `$C33370`
+   (tapes), `$C33B38` (status mark) and `$C33CD2` (transform) are registered;
+   `$C33370`'s glue replays every step in order (the tape forms, record type
+   $10, only approximately: the recordings never show them). `$C332BC`, the
+   ten-line sequencer over them, has C but no glue yet. The remaining
    HUD work is the radar `$C31226`. The stores icons `$C30A00`/`$C30AE2`
    are now C; their glue preserves stray high bits of the caller's D4. Glue helpers
    for routines that end in drawing are in `glue_text.h`: the small-text

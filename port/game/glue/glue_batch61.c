@@ -109,12 +109,11 @@ static void tick_registers(int16_t y, int k) {
     SET_W(D(0), x);
 }
 
-int glue_C34066(void) {
+void tick_row_registers(void) {
     int16_t y = W(1), centre = rd_s16(HUD_CENTRE_X);
     int32_t middle = (int32_t)centre + origin();
     int k;
 
-    draw_tick_row(y);
     SET_W(D(0), (uint16_t)centre);
     plot_in_view_registers();
     if (middle >= 0 && (int16_t)middle < 0x140) {
@@ -142,6 +141,11 @@ int glue_C34066(void) {
         if (W(0) <= W(2)) break;
         tick_registers(y, k);
     }
+}
+
+int glue_C34066(void) {
+    draw_tick_row(W(1));
+    tick_row_registers();
     return glue_return();
 }
 
@@ -288,11 +292,10 @@ int glue_C2F66E(void) {
 }
 
 /* $C347F2: the walk in D0/D1 (MOVE.B keeps the upper bytes) and A0. */
-int glue_C347F2(void) {
+void ring_point_registers(void) {
     int16_t x = W(0), y = W(1), steps = W(2), shift = origin();
     int found = 0, quarter;
 
-    plot_ring_point(x, y, steps, A(0));
     for (quarter = 0; quarter < 4 && !found; quarter++) {
         if (quarter == 1 || quarter == 3) {
             A(0) -= 2;
@@ -313,7 +316,7 @@ int glue_C347F2(void) {
                 SET_B(D(1), rd_u8(A(0) + 1));
                 SET_B(D(0), rd_u8(A(0)));
                 if ((int8_t)D(0) < 0) {
-                    if (quarter == 3) return glue_return();
+                    if (quarter == 3) return;
                     break;
                 }
                 if (quarter == 3) {
@@ -332,9 +335,14 @@ int glue_C347F2(void) {
     SET_W(D(0), (uint16_t)(W(0) + x));
     SET_W(D(1), (uint16_t)(W(1) + y));
     if (W(0) <= 2 || W(0) >= 0x13E || W(0) <= (int16_t)(0x55 + shift) || W(0) >= (int16_t)(0xE9 + shift))
-        return glue_return();
-    if (W(1) <= 0x2D || W(1) >= 0x90) return glue_return();
+        return;
+    if (W(1) <= 0x2D || W(1) >= 0x90) return;
     block_registers();
+}
+
+int glue_C347F2(void) {
+    plot_ring_point(W(0), W(1), W(2), A(0));
+    ring_point_registers();
     return glue_return();
 }
 
