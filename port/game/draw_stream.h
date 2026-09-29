@@ -107,4 +107,16 @@ int draw_face_grid_plain(gaddr *stream);
 int draw_face_lattice(gaddr *stream);
 int draw_face_lattice_plain(gaddr *stream);
 
+/* A face of a workspace block ($C21500): colour word, block offset. Its
+ * fourth vertex and the edges from the first to the second and the second
+ * to the third make a parallelogram, clipped and drawn unless the view is
+ * more than $80 below (PROJECTION_Y) or every corner is behind. */
+int draw_block_face(gaddr *stream);
+
+/* A word (count in bits 8-15, colour in bits 0-5), a base vertex offset,
+ * then a vertex offset: `count` segments between consecutive vertex pairs
+ * from there (at least one), each moved back by the base vertex's edge
+ * ($C2122A). */
+int draw_offset_run(gaddr *stream);
+
 #endif

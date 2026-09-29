@@ -6,6 +6,8 @@
 #include "memory.h"
 #include "numbers.h"
 #include "postflight_hud.h"
+#include "draw_stream.h"
+#include "glue_clip.h"
 #include "machine.h"
 #include "projection.h"
 #include "control_records.h"
@@ -521,5 +523,99 @@ int glue_C2D16C(void) {
         wr_u16(CURRENT_COLOUR, now);
     }
     SET_W(D(0), (uint16_t)drawn);
+    return glue_return();
+}
+
+/* $C21500: A2 the stream (advanced by 4), A3 the block. */
+int glue_C21500(void) {
+    gaddr stream = A(2), block = WORKSPACES + SEXT(rd_u16(A(2) + 2)), in = CLIP_INPUT + 4;
+    uint32_t a1 = A(1), a2 = A(2) + 4, a5 = A(5);
+    uint16_t colour = rd_u16(A(2));
+    int k, drawn;
+
+    drawn = draw_block_face(&stream);
+    A(2) = a2;
+    A(3) = block;
+    if (rd_s32(PROJECTION_Y) < -0x80) {
+        D(0) = 0;
+        flags_logic_l(0);
+        return glue_return();
+    }
+    A(0) = in + 18;
+    for (k = 0; k < 6; k++) D(2 + k) = SEXT(rd_u16(block + (gaddr)(2 * k)));
+    for (k = 0; k < 3; k++) SET_W(D(5 + k), (uint16_t)(W(5 + k) - W(2 + k)));
+    A(1) = SEXT((uint16_t)D(5));
+    A(4) = SEXT((uint16_t)D(6));
+    A(5) = SEXT((uint16_t)D(7));
+    for (k = 0; k < 3; k++) D(k) = SEXT(rd_u16(in + 6 + (gaddr)(2 * k)));
+    A(2) = SEXT(rd_u16(in + 10));
+    for (k = 0; k < 6; k++) D(2 + k) = SEXT(rd_u16(block + 6 + (gaddr)(2 * k)));
+    for (k = 0; k < 3; k++) SET_W(D(5 + k), (uint16_t)(W(5 + k) - W(2 + k)));
+    SET_W(D(2), (uint16_t)A(2));
+    for (k = 0; k < 3; k++) SET_W(D(k), rd_u16(in + 12 + (gaddr)(2 * k)));
+    SET_W(D(0), (uint16_t)(W(0) - (int16_t)A(1)));
+    SET_W(D(1), (uint16_t)(W(1) - (int16_t)A(4)));
+    SET_W(D(2), (uint16_t)(W(2) - (int16_t)A(5)));
+    SET_W(D(7), rd_u16(in + 4) & rd_u16(in + 10) & rd_u16(in + 16) & rd_u16(in + 22));
+    if (W(7) < 0) {
+        A(1) = a1;
+        A(2) = a2;
+        A(5) = a5;
+        D(0) = 0;
+        flags_logic_l(0);
+        return glue_return();
+    }
+    {
+        ClipperSnapshot snapshot;
+        clipper_snapshot(&snapshot);
+        snapshot.last_size = fa18_bltsize_at_draw_start;
+        clipper_registers(&snapshot, colour, drawn);
+    }
+    A(1) = a1;
+    A(2) = a2;
+    A(5) = a5;
+    return glue_return();
+}
+
+void clipped_segment_registers(const int16_t p[3], const int16_t q[3]); /* glue_batch51.c */
+
+/* $C2122A: its count and result words live in the caller's frame; the
+ * registers are the last segment's, with the edge words popped back
+ * sign-extended into D6, D7 and A4. */
+int glue_C2122A(void) {
+    gaddr stream = A(2), base = WORKSPACES + SEXT(rd_u16(A(2) + 2)), points;
+    uint32_t a1 = A(1), a2 = A(2) + 6, a5 = A(5);
+    int16_t count = (int16_t)(rd_u16(A(2)) >> 8), shift[3], p[3], q[3];
+    int drawn, k;
+
+    points = WORKSPACES + SEXT(rd_u16(A(2) + 4));
+    for (k = 0; k < 3; k++) shift[k] = (int16_t)(rd_s16(base + 6 + (gaddr)(2 * k)) - rd_s16(base + (gaddr)(2 * k)));
+    drawn = draw_offset_run(&stream);
+    if (count > 1) points += (gaddr)(12 * (count - 1));
+    for (k = 0; k < 3; k++) {
+        p[k] = (int16_t)(rd_s16(points + (gaddr)(2 * k)) - shift[k]);
+        q[k] = (int16_t)(rd_s16(points + 6 + (gaddr)(2 * k)) - shift[k]);
+    }
+    wr_u16(A(6) - 0x30, (uint16_t)(count > 1 ? 0 : count - 1));
+    wr_u16(A(6) - 0x7E, (uint16_t)drawn);
+    /* The registers at the last call: the points as loaded less the edge. */
+    for (k = 0; k < 6; k++) {
+        int16_t loaded = rd_s16(points + (gaddr)(2 * k));
+        D(k) = (SEXT((uint16_t)loaded) & 0xFFFF0000u) | (uint16_t)(k < 3 ? p[k] : q[k - 3]);
+    }
+    D(6) = (SEXT(rd_u16(base + 8)) & 0xFFFF0000u) | (uint16_t)shift[1];
+    D(7) = (SEXT(rd_u16(base + 10)) & 0xFFFF0000u) | (uint16_t)shift[2];
+    A(4) = SEXT((uint16_t)shift[0]);
+    A(3) = points + 12;
+    clipped_segment_registers(p, q);
+    D(6) = SEXT((uint16_t)shift[1]);
+    D(7) = SEXT((uint16_t)shift[2]);
+    A(4) = SEXT((uint16_t)shift[0]);
+    A(3) = points + 12;
+    A(1) = a1;
+    A(2) = a2;
+    A(5) = a5;
+    SET_W(D(0), (uint16_t)drawn);
+    flags_logic_w(D(0));
     return glue_return();
 }

@@ -494,4 +494,10 @@ int glue_C28E28(void);
 /* shape */
 int glue_C2D16C(void);
 
+/* block face */
+int glue_C21500(void);
+
+/* offset run */
+int glue_C2122A(void);
+
 #endif

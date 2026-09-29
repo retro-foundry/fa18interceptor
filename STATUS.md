@@ -12,7 +12,7 @@ Updated 2026-09-29.
 | Replay parity (run062) | frame 2475 (back at the menu) pixel-exact |
 | Frame parity (run075, from the menu) | frame 500: 99.6% of pixels match; frame 3000: flying, path has drifted (94%) |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 338 routines in `port/game/`; 807,185 matching shadow calls and 981,980 sandbox calls over three native recordings; poison frames identical |
+| Recreated C source | 340 routines in `port/game/`; 804,779 matching shadow calls and 979,311 sandbox calls over three native recordings; poison frames identical |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
 ## The game program

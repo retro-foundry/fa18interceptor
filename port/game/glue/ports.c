@@ -426,6 +426,10 @@ const FA18Port fa18_ports[] = {
     {0xC28E28, glue_C28E28, "check_zone_exit", 1500},
     /* shape */
     {0xC2D16C, glue_C2D16C, "draw_shape", 20000},
+    /* block face */
+    {0xC21500, glue_C21500, "draw_block_face", 8000},
+    /* offset run */
+    {0xC2122A, glue_C2122A, "draw_offset_run", 6000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

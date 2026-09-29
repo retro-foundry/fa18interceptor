@@ -571,3 +571,46 @@ int draw_face_lattice_plain(gaddr *stream) {
     wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
     return face_lattice(stream);
 }
+
+int draw_block_face(gaddr *stream) {
+    gaddr block, in = CLIP_INPUT + 4;
+    Vertex side, across, p;
+
+    wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
+    block = vertex_at(next_word(stream));
+    if (rd_s32(PROJECTION_Y) < -0x80) return 0;
+    wr_u16(CLIP_INPUT, 0);
+    wr_u16(CLIP_INPUT + 2, 4);
+    side = edge_after(block);
+    across = edge_after(block + 6);
+    p = get(block + 18);
+    put(in, p);
+    p = plus(p, side);
+    put(in + 6, p);
+    p = plus(p, across);
+    put(in + 12, p);
+    p = minus(p, side);
+    put(in + 18, p);
+    /* Every corner behind the eye: nothing. */
+    if ((int16_t)(rd_u16(in + 4) & rd_u16(in + 10) & rd_u16(in + 16) & rd_u16(in + 22)) < 0) return 0;
+    return clip_and_draw_polygon();
+}
+
+int draw_offset_run(gaddr *stream) {
+    uint16_t head = (uint16_t)next_word(stream);
+    int16_t count = (int16_t)(head >> 8);
+    Vertex shift;
+    gaddr points;
+    int drawn = 0;
+
+    wr_u16(CURRENT_COLOUR, head & 0x3F);
+    shift = edge_after(vertex_at(next_word(stream)));
+    points = vertex_at(next_word(stream));
+    do {
+        put(SEGMENT_POINTS, minus(get(points), shift));
+        put(SEGMENT_POINTS + 6, minus(get(points + 6), shift));
+        points += 12;
+        drawn |= draw_clipped_segment();
+    } while (--count > 0);
+    return drawn;
+}
