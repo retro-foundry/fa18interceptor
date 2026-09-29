@@ -307,6 +307,18 @@ const FA18Port fa18_ports[] = {
     {0xC10678, glue_C10678, "queue_mode_messages", 300},
     {0xC0910C, glue_C0910C, "start_position", 40},
     {0xC25246, glue_C25246, "check_typed_code", 300},
+    /* batch 53: draw-stream commands */
+    {0xC212B0, glue_C212B0, "draw_segment_pairs", 20000},
+    {0xC2129C, glue_C2129C, "draw_segment_pairs_near", 20000},
+    {0xC211DC, glue_C211DC, "draw_segment_run", 20000},
+    {0xC2131C, glue_C2131C, "draw_offset_segments", 20000},
+    {0xC20E4E, glue_C20E4E, "draw_parallelogram_face", 30000},
+    {0xC20E40, glue_C20E40, "draw_parallelogram_face_2", 30000},
+    {0xC21490, glue_C21490, "draw_parallelogram_face_near", 30000},
+    {0xC2139E, glue_C2139E, "draw_offset_face", 30000},
+    {0xC21412, glue_C21412, "draw_mixed_face", 30000},
+    {0xC20F10, glue_C20F10, "extend_parallelograms", 400},
+    {0xC20EC4, glue_C20EC4, "extend_parallelograms_scaled", 600},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

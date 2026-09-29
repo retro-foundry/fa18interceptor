@@ -346,4 +346,17 @@ int glue_C10678(void);
 int glue_C0910C(void);
 int glue_C25246(void);
 
+/* batch 53: draw-stream commands */
+int glue_C212B0(void);
+int glue_C2129C(void);
+int glue_C211DC(void);
+int glue_C2131C(void);
+int glue_C20E4E(void);
+int glue_C20E40(void);
+int glue_C21490(void);
+int glue_C2139E(void);
+int glue_C21412(void);
+int glue_C20F10(void);
+int glue_C20EC4(void);
+
 #endif

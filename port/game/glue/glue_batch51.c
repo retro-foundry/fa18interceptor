@@ -92,16 +92,19 @@ static void divs_reg(int n, int16_t divisor) {
     D(n) = ((uint32_t)(uint16_t)(dividend % divisor) << 16) | (uint16_t)q;
 }
 
-int glue_C2EE4A(void) {
+/* The registers $C2EE4A leaves for a segment from `p` to `q` (the points
+ * as the call found them in SEGMENT_POINTS), without drawing: the
+ * projected ends are kept in hand, not read back from POLY_VERTICES. */
+void clipped_segment_registers(const int16_t p[3], const int16_t q[3]);
+void clipped_segment_registers(const int16_t p[3], const int16_t q[3]) {
     Segment s;
-    int pass, k, drawn;
+    int16_t ends[4];
+    int pass, k;
 
     for (k = 0; k < 3; k++) {
-        s.p[k] = rd_s16(SEGMENT_POINTS + (gaddr)(2 * k));
-        s.q[k] = rd_s16(SEGMENT_POINTS + 6 + (gaddr)(2 * k));
+        s.p[k] = p[k];
+        s.q[k] = q[k];
     }
-    drawn = draw_clipped_segment();
-    (void)drawn;
     for (pass = 0; pass < 2; pass++) {
         int end;
         for (k = 0; k < 3; k++) D(3 + k) = SEXT(s.p[k]);
@@ -120,12 +123,14 @@ int glue_C2EE4A(void) {
         if (W(4) < 0) w(4, 0); else if (W(4) >= 0xB4) w(4, 0xB3);
         w(3, (int16_t)(0x13F - W(3)));
         w(4, (int16_t)(0xB3 - W(4)));
+        ends[2 * pass] = W(3);
+        ends[2 * pass + 1] = W(4);
         if (pass) {
-            for (k = 0; k < 4; k++) D(k) = SEXT(rd_u16(POLY_VERTICES + (gaddr)(2 * k)));
+            for (k = 0; k < 4; k++) D(k) = SEXT(ends[k]);
             line_registers();
             D(0) = 1;
             flags_logic_l(1);
-            return glue_return();
+            return;
         }
         for (k = 0; k < 3; k++) {
             int16_t t = s.p[k];
@@ -136,5 +141,16 @@ int glue_C2EE4A(void) {
     }
     D(0) = 0;
     flags_logic_l(0);
+}
+
+int glue_C2EE4A(void) {
+    int16_t p[3], q[3];
+    int k;
+    for (k = 0; k < 3; k++) {
+        p[k] = rd_s16(SEGMENT_POINTS + (gaddr)(2 * k));
+        q[k] = rd_s16(SEGMENT_POINTS + 6 + (gaddr)(2 * k));
+    }
+    draw_clipped_segment();
+    clipped_segment_registers(p, q);
     return glue_return();
 }
