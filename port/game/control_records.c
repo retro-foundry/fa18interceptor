@@ -480,6 +480,140 @@ int16_t ease_record_58(int16_t target) {
     return target;
 }
 
+static int16_t matrix_side_target(gaddr table, int16_t lane) {
+    int16_t target = rd_s16(table + (gaddr)(2 * (lane < 0 ? -lane : lane)));
+    return lane < 0 ? (int16_t)-target : target;
+}
+
+static void clear_matrix_side_status(void) {
+    wr_u8(MATRIX_SIDE_STATUS, (uint8_t)(rd_u8(MATRIX_SIDE_STATUS) & (uint8_t)~0x80u));
+}
+
+void update_matrix_side_record(void) {
+    int16_t index = rd_s16(MATRIX_SIDE_RECORD);
+    gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)(index * CONTROL_RECORD_BYTES);
+    gaddr header = record + 2;
+    gaddr table;
+    int16_t x, y, z, target;
+
+    wr_u32(CURRENT_RECORD, record);
+    table = (index == 0 || (rd_u16(header) & 0x100))
+          ? MATRIX_SIDE_ZERO_TARGETS : MATRIX_SIDE_ALT_TARGETS;
+    wr_u16(header, (uint16_t)(rd_u16(header) & 0xFFBF));
+
+    if (!(rd_u16(COCKPIT_FLAGS) & 0x40)) {
+        wr_u32(WARNING_CAUSES, rd_u32(WARNING_CAUSES) & 0xFFFFFFBCu);
+        clear_matrix_side_status();
+        return;
+    }
+
+    if (index == 0) {
+        if (rd_s32(MATRIX_SIDE_METRIC) <= 0) {
+            wr_u32(MATRIX_SIDE_METRIC, 0);
+            if (!(rd_u8(MATRIX_SIDE_STATUS) & 0x40)) {
+                wr_u32(WARNING_CAUSES, (rd_u32(WARNING_CAUSES) & 0xFFFFFFFCu) | 0x40u);
+                wr_u16(header, (uint16_t)(rd_u16(header) & 0xFFF7));
+                wr_u8(BAR_REDRAWS_A, 2);
+            }
+        } else if (rd_s32(MATRIX_SIDE_METRIC) < 0x70800) {
+            if (!(rd_u8(MATRIX_SIDE_STATUS) & 0x02))
+                wr_u32(WARNING_CAUSES, (rd_u32(WARNING_CAUSES) & 0xFFFFFFBEu) | 0x02u);
+        } else if (rd_s32(MATRIX_SIDE_METRIC) < 0xBB800) {
+            if (!(rd_u8(MATRIX_SIDE_STATUS) & 0x01))
+                wr_u32(WARNING_CAUSES, (rd_u32(WARNING_CAUSES) & 0xFFFFFFBDu) | 0x01u);
+        } else {
+            wr_u32(WARNING_CAUSES, rd_u32(WARNING_CAUSES) & 0xFFFFFFBCu);
+        }
+    }
+
+    x = rd_s8(record + 0x28);
+    y = rd_s8(record + 0x29);
+    z = rd_s8(record + 0x2A);
+    if (rd_u8(record + 4) & 0x08) y = z = 0;
+
+    if (x != 0) {
+        target = matrix_side_target(table, x);
+        wr_s16(MATRIX_SIDE_TARGET_X, target);
+        if (!(rd_u16(header) & 0x80)) {
+            steer_record_56(target);
+        } else if (rd_u8(record + 0x20) & 0x01) {
+            update_record_56_from_66();
+            update_record_5a();
+        } else if (rd_s16(record + 0x6C) > 0x300 &&
+                   (rd_s16(record + 0x66) == 0 || rd_s16(record + 0x66) > 0x6D60)) {
+            if (x < 0) {
+                int16_t lane = (int16_t)(-x & ~1);
+                steer_record_56((int16_t)-rd_s16(table + (gaddr)lane));
+            } else {
+                update_record_56_from_66();
+                update_record_5a();
+            }
+        } else {
+            update_record_56_from_66();
+            update_record_5a();
+        }
+    } else {
+        wr_u16(MATRIX_SIDE_TARGET_X, 0);
+        if (rd_u16(header) & 0x80) {
+            update_record_56_from_66();
+        } else if (rd_s16(record + 0x56) != 0 && rd_s16(record + 0x26) == 0) {
+            decay_toward_zero(record + 0x56, index == 0 ? 2 : 1);
+        }
+    }
+
+    if (y != 0) {
+        target = matrix_side_target(table, y);
+        wr_s16(MATRIX_SIDE_TARGET_Y, target);
+        if (!(rd_u8(record + 4) & 0x02) && rd_s16(record + 0x6E) != 0)
+            ease_record_58(target);
+        else
+            decay_toward_zero(record + 0x58, 1);
+    } else if (z == 0 || !(rd_u16(header) & 0x80)) {
+        wr_u16(MATRIX_SIDE_TARGET_Y, 0);
+        if (rd_s16(record + 0x58) != 0) decay_toward_zero(record + 0x58, 1);
+    }
+
+    if (z != 0) {
+        if (rd_u16(header) & 0x80) {
+            if (z < -10) z = -10;
+            else if (z > 10) z = 10;
+        }
+        target = matrix_side_target(table, z);
+        wr_s16(MATRIX_SIDE_TARGET_Z, target);
+        if (!(rd_u16(header) & 0x80)) {
+            steer_record_5a((int16_t)-target);
+        } else if ((rd_u8(record + 4) & 0x02) || rd_s16(record + 0x6E) == 0) {
+            decay_toward_zero(record + 0x58, 1);
+            decay_toward_zero(record + 0x5A, 1);
+        } else {
+            int16_t angle = rd_s16(record + 0x6A);
+            ease_record_58(target);
+            if (angle < 0x50 || angle > 0x7030 || rd_s16(record + 0x6E) <= 0x360 ||
+                (angle < 0x3840 ? z >= 0 : z <= 0))
+                steer_record_5a((int16_t)-target);
+            else
+                wr_u16(record + 0x5A, 0);
+        }
+    } else {
+        wr_u16(MATRIX_SIDE_TARGET_Z, 0);
+        if (rd_u16(header) & 0x80) update_record_5a();
+        if (rd_s16(record + 0x5A) != 0) decay_toward_zero(record + 0x5A, 1);
+    }
+
+    if (index != 0) return;
+    if ((rd_u16(COCKPIT_FLAGS) & 0x40) && rd_s32(MATRIX_SIDE_METRIC) != 0 &&
+        (rd_u8(record + 0x20) & 0x04) && !(rd_u16(header) & 0x80)) {
+        if (!(rd_u8(MATRIX_SIDE_STATUS) & 0x80)) {
+            wr_u8(MATRIX_SIDE_STATUS, (uint8_t)(rd_u8(MATRIX_SIDE_STATUS) | 0x80));
+            wr_u8(MATRIX_SIDE_EVENT_STATUS, (uint8_t)(rd_u8(MATRIX_SIDE_EVENT_STATUS) | 0x20));
+        } else if (rd_s16(MATRIX_SIDE_RESPONSE) < 0) {
+            wr_u16(MATRIX_SIDE_RESPONSE, 2);
+        }
+    } else {
+        clear_matrix_side_status();
+    }
+}
+
 /* A record's control byte +$65: bits 0-1 throttle (kept), 2-3 stick X,
  * 4-5 stick Y, 6-7 the rudder. */
 #define REC_CONTROLS 0x65

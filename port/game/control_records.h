@@ -47,6 +47,10 @@ void ease_record_26(int16_t target);
  * ($C13C0A). Returns the target used. */
 int16_t ease_record_58(int16_t target);
 
+/* $C1342C: select MATRIX_SIDE_RECORD, update its three table-driven working
+ * values (+$56, +$58 and +$5A), and maintain the associated status bits. */
+void update_matrix_side_record(void);
+
 /* A record's controls (+$65 above the throttle bits) from a steering
  * demand: none ($C2CAA0); roll toward `turn` ($C2CA92); a turn with rudder
  * and roll by the record's flags +$64 and bank +$6A ($C2CA26); stick back

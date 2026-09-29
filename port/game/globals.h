@@ -438,6 +438,17 @@
 
 #define ATTEMPTS_LEFT      0xC45898u /* byte: decremented by the outcome stage; negative ends it */
 #define STREAM_MODE        0xC459B4u /* word: $57 skips a word in the face stream */
+/* $C1342C also reads this word as the current matrix-side record index. */
+#define MATRIX_SIDE_RECORD STREAM_MODE
+#define MATRIX_SIDE_ZERO_TARGETS 0xC3D690u /* word lanes selected by $C1342C */
+#define MATRIX_SIDE_ALT_TARGETS  0xC3D70Cu /* alternate word lanes ($C1342C) */
+#define MATRIX_SIDE_METRIC       0xC461F6u /* long: thresholded by $C1342C */
+#define MATRIX_SIDE_STATUS       0xC45B53u /* byte: $C1342C state bits */
+#define MATRIX_SIDE_EVENT_STATUS 0xC45B57u /* byte: $C1342C bit 5 */
+#define MATRIX_SIDE_RESPONSE     0xC458F0u /* word: $C1342C changes negative to 2 */
+#define MATRIX_SIDE_TARGET_X     0xC45B5Eu /* word: first table target */
+#define MATRIX_SIDE_TARGET_Y     0xC45B60u /* word: second table target */
+#define MATRIX_SIDE_TARGET_Z     0xC45B62u /* word: third table target */
 
 /* ---- flight input recorder ($C25A6A) -------------------------------------- */
 #define RECORDER_ON        0xC45790u /* byte */
