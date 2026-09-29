@@ -326,6 +326,12 @@ const FA18Port fa18_ports[] = {
     {0xC217EA, glue_C217EA, "extend_block_scaled", 1500},
     /* batch 55: corner edges */
     {0xC2E758, glue_C2E758, "project_corner_edges", 20000},
+    /* batch 56: fixed-row line, text lines and digits */
+    {0xC2FA78, glue_C2FA78, "draw_line_to_row", 700},
+    {0xC32726, glue_C32726, "format_digits", 620},
+    {0xC32AB4, glue_C32AB4, "draw_text_in_view", 4000},
+    {0xC32AA6, glue_C32AA6, "print_bcd_in_view", 4500},
+    {0xC32AA4, glue_C32AA4, "print_bcd_in_view", 4500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

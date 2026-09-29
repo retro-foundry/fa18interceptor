@@ -124,6 +124,20 @@ int glue_C3271A(void) {
     return small_text_loop();
 }
 
+/* $C32726: as $C3271A with the leading zeros kept (D4 = 1), the digit
+ * count from the caller's D2 rather than D0. */
+int glue_C32726(void) {
+    int count = (int)(uint16_t)D(2) + 1;
+    uint32_t bcd = rd_u32(DISPLAY_VALUE_BCD);
+    D(6) = D(6) << 16;
+    D(7) = 0;
+    format_digits(A(0), count, 1, 1);
+    D(3) = count >= 8 ? 0 : bcd >> (4 * count);
+    D(4) = 1;
+    SET_W(D(2), 0xFFFF);
+    return small_text_loop();
+}
+
 /* $C32736: mode $F3A, column SPAN_ORIGIN, rows offset by REDRAW_STATE_LONG. */
 int glue_C32736(void) {
     D(6) = 0x0F3Au << 16 | rd_u16(SPAN_ORIGIN);

@@ -97,10 +97,12 @@ int glue_C305AA(void) {
  * call sites (polyline loops reuse the setup), so the original's leftovers
  * are rebuilt from the same LineSetup. */
 /* The registers $C2FA7E leaves, from the D0-D6 in the registers (no drawing). */
+void line_registers_to_row(int16_t last_row);
 void line_registers(void);
-void line_registers(void) {
+void line_registers(void) { line_registers_to_row(rd_s16(LINE_LAST_ROW)); }
+
+void line_registers_to_row(int16_t last_row) {
     int16_t x0 = (int16_t)D(0), y0 = (int16_t)D(1), x1 = (int16_t)D(2), y1 = (int16_t)D(3);
-    int16_t last_row = rd_s16(LINE_LAST_ROW);
     uint32_t d2 = D(2), d3 = D(3), d4 = D(4), d5 = D(5), d6 = D(6), d3_high;
     LineSetup line;
     int bit, last_bit = -1;
@@ -158,6 +160,12 @@ void line_registers(void) {
         SET_W(D(5), line.shift + 0x0B00 + (((colour >> last_bit) & 1) ? 0xFA : 0x0A));
         D(7) = rd_u32(A(2) + (uint32_t)(4 * (3 - last_bit))) + (uint32_t)line.offset;
     }
+}
+
+int glue_C2FA78(void) {
+    draw_line_to_row((int16_t)D(0), (int16_t)D(1), (int16_t)D(2), (int16_t)D(3), 0xC7);
+    line_registers_to_row(0xC7);
+    return glue_return();
 }
 
 int glue_C2FA7E(void) {

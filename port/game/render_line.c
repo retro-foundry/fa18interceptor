@@ -89,12 +89,16 @@ static int colour_bit(int plane_bit) {
 }
 
 void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
+    draw_line_to_row(x0, y0, x1, y1, rd_s16(LINE_LAST_ROW));
+}
+
+void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row) {
     LineSetup line;
     gaddr planes;
     int bit;
 
     wr_u16(POLY_PLANE_BITS, rd_u16(CURRENT_COLOUR));
-    if (!setup_line(x0, y0, x1, y1, rd_s16(LINE_LAST_ROW), 1, 0, &line)) return;
+    if (!setup_line(x0, y0, x1, y1, last_row, 1, 0, &line)) return;
 
     wait_blitter();
     custom_write(BLTAMOD, (uint16_t)line.step_both);

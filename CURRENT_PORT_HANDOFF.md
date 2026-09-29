@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 216; 1,055,960 calls matching in shadow and 1,191,036 in the sandbox pass over the native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 262; 869,143 calls matching in shadow and 1,000,015 in the sandbox pass over the native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -37,7 +37,10 @@ one at a time, each proven on every call.
    callers (`port/game/glue/glue_clip.h`). Candidate call counts come from a
    wider profile than the four recordings: `plot_ring` (`$C345A0`) was
    written and matched but never called, so it is unregistered. `$C1FB82` (backface predicate) is
-   postponed until its callers are C. The `$C0004E` family are stack
+   postponed until its callers are C. Loops that call the polygon clipper
+   several times ($C20C38, $C20C22, $C20A40, $C2159E, $C210E6, $C21060)
+   wait: the clipper glue needs BLTSIZE from just before the last face,
+   which a replay after the C cannot know. The `$C0004E` family are stack
    trampolines, not game logic; leave them.
 2. **Exact UAE timing (dropped for now).** Native recordings make the port
    independent of UAE replays; the bus model stays as it is. Tools: `scripts/recomp_timing.py` (per

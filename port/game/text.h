@@ -46,5 +46,26 @@ void draw_small_text(const SmallText *text);
 /* Write `count` hex digits of DISPLAY_VALUE_BCD backwards ending before
  * `end`, leading zeros (not the last digit) as spaces. */
 void format_small_hex(gaddr end, int count);
+/* The same in decimal or hex, leading zeros kept or blanked ($C32726 keeps
+ * them in hex; $C32AA4 blanks them in decimal, $C32AA6 as asked). */
+void format_digits(gaddr end, int count, int hex, int keep_zeros);
+
+/* A line of 8-pixel characters (5 rows) in all four planes of the draw page:
+ * each plane's bit of CURRENT_COLOUR draws the glyph or clears it. */
+typedef struct {
+    int count;       /* characters */
+    gaddr layout;    /* per character: word byte column, word mode (shift bits 12-15) */
+    gaddr chars;     /* character codes from ' ' (spaces are skipped) */
+    int16_t column;  /* added (doubled) to each byte column */
+    int16_t x_origin;/* the line's left byte, for clipping to 0..39 */
+    gaddr rows;      /* row offset within the planes */
+} Text;
+void draw_text(const Text *text);
+/* At the view's column (SPAN_ORIGIN), rows moved by REDRAW_STATE_LONG
+ * ($C32AB4). */
+void draw_text_in_view(Text *text);
+/* `digits` decimal digits of DISPLAY_VALUE_BCD ending before `end`, then
+ * the line ($C32AA4, $C32AA6). */
+void print_bcd_in_view(gaddr end, int digits, int keep_zeros, Text *text);
 
 #endif

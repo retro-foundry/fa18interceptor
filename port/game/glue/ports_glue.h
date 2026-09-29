@@ -368,4 +368,11 @@ int glue_C217EA(void);
 /* batch 55: corner edges */
 int glue_C2E758(void);
 
+/* batch 56: fixed-row line, text lines and digits */
+int glue_C2FA78(void);
+int glue_C32726(void);
+int glue_C32AB4(void);
+int glue_C32AA6(void);
+int glue_C32AA4(void);
+
 #endif

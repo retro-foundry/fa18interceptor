@@ -31,6 +31,9 @@ int setup_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row,
 /* Draw a line from (x0,y0) to (x1,y1) into every enabled plane of the draw
  * page, in the current line colour. */
 void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
+/* The same with a fixed last row in place of LINE_LAST_ROW ($C2FA78 draws
+ * to row $C7). */
+void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row);
 
 /* The two view-space points at SEGMENT_POINTS projected and joined by a
  * line; 0, drawing nothing, when either is behind or outside the view
