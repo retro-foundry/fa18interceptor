@@ -55,7 +55,7 @@ is proven against.
 | A | Whole-program translation, interpreter fallback | done (624 routines) |
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Frame parity with Engine9000 on every recording | run075 frames 393-402 exact; run060 game RAM identical through frame 93 |
-| D | Readable C, routine by routine, proven | 310 routines |
+| D | Readable C, routine by routine, proven | 328 routines |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | not started |
 | F | Native backend: plain C memory, direct drawing and audio | not started |
 
@@ -73,8 +73,10 @@ is proven against.
    memory, call the C, rebuild every live register, flag and high word the
    original leaves, then `glue_return()`. Register it in `ports.c` with the
    cycles to charge.
-5. Prove it: `sh scripts/build_recomp.sh && sh scripts/recomp_ports_check.sh`.
-6. Commit the batch.
+5. Build and use short recording probes for the new routines while porting a
+   substantial batch. Commit verified chunks as they are ready.
+6. Run `sh scripts/recomp_ports_check.sh` over all native recordings after the
+   larger batch, then update the proof counts and handoff notes.
 
 When every caller of a routine is C, its glue is no longer reached; delete it.
 
