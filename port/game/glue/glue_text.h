@@ -38,6 +38,15 @@ void cached_value_registers(gaddr cache, int16_t value);
 /* $C2F5C0's registers from D0/D1 as on entry, after the C plotted;
  * glue_batch33.c. */
 void plot_in_view_registers(void);
+/* $C310E2 from D7/D1/A4 (bound_span has no other effect); glue_batch5.c. */
+void bound_span_registers(void);
+
+/* $C2F5D4's (the plot with D0.w/D1.w put back) and $C2F5F4's. */
+void restored_plot_registers(void);
+void plot_registers(gaddr masks, gaddr writers);
+/* $C2FA7E's from D0-D6 (glue_render_polygon.c). */
+void line_registers(void);
+
 /* $C2F64E's and $C2F63A's the same way. */
 void square_registers(void);
 void square_in_view_registers(void);

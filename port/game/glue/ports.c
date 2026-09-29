@@ -357,6 +357,16 @@ const FA18Port fa18_ports[] = {
     {0xC2F63A, glue_C2F63A, "plot_square_in_view", 290},
     {0xC328A8, glue_C328A8, "draw_weapon_status", 1500},
     {0xC3112A, glue_C3112A, "draw_threat_lights", 3000},
+    /* batch 60: cockpit bars and panel image */
+    {0xC30CC4, glue_C30CC4, "fill_bar_words", 900},
+    {0xC30B5C, glue_C30B5C, "draw_indicator_bars", 2500},
+    {0xC30D34, glue_C30D34, "draw_mode_bar", 2500},
+    {0xC30EAA, glue_C30EAA, "blit_image", 3000},
+    {0xC309B6, glue_C309B6, "draw_panel_image", 3000},
+    /* batch 60b: compass tape */
+    {0xC30F78, glue_C30F78, "draw_compass_tape", 3000},
+    /* batch 60c: panel frame */
+    {0xC30764, glue_C30764, "draw_panel_frame", 4000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

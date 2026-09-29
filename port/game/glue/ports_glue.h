@@ -408,4 +408,18 @@ int glue_C2F63A(void);
 int glue_C328A8(void);
 int glue_C3112A(void);
 
+/* batch 60: cockpit bars and panel image */
+int glue_C30CC4(void);
+int glue_C30B5C(void);
+int glue_C30D34(void);
+int glue_C30EAA(void);
+int glue_C309B6(void);
+
+/* batch 60b: compass tape */
+int glue_C30F78(void);
+
+/* batch 60c: panel frame */
+int glue_C30764(void);
+
+
 #endif

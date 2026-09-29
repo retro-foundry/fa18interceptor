@@ -80,7 +80,7 @@ int glue_C2F60A(void) {
 
 /* $C2F5D4: the body with D0.w/D1.w pushed round it and popped back (the
  * words only). */
-static void restored_plot_registers(void) {
+void restored_plot_registers(void) {
     uint16_t x = (uint16_t)D(0), y = (uint16_t)D(1);
     plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
     SET_W(D(1), y);

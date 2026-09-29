@@ -1,6 +1,7 @@
 /* Glue for notify.c, control_records.c, screen_frame.c, render_span.c and
  * attenuate_offset. */
 #include "glue.h"
+#include "glue_text.h"
 #include "ports_glue.h"
 
 #include "control_records.h"
@@ -38,7 +39,7 @@ int glue_C15138(void) {
 /* $C310E2: D7.w position, D1 cursor, A4.w limit -> D5 and its flags. The
  * original returns MOVEQ #-1/#0 (full D5) except on the partial path, where
  * D5's high word is the sign extension of 2 * SPAN_ORIGIN. */
-int glue_C310E2(void) {
+void bound_span_registers(void) {
     int16_t position = (int16_t)D(7), limit = (int16_t)A(4), origin = rd_s16(SPAN_ORIGIN), result;
     int32_t cursor = (int32_t)D(1);
     int before_origin = (int32_t)position + origin < 0;
@@ -56,6 +57,10 @@ int glue_C310E2(void) {
             D(5) = ((int16_t)(origin * 2) < 0 ? 0xFFFF0000u : 0) | (uint16_t)result;
     }
     flags_logic_w(D(5));
+}
+
+int glue_C310E2(void) {
+    bound_span_registers();
     return glue_return();
 }
 

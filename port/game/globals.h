@@ -470,6 +470,9 @@
 #define BAR_E_FLAG         0xC457ABu /* byte */
 #define BAR_REDRAWS_D      0xC45845u /* byte: passes left to redraw the $C30D34 image */
 #define BAR_REDRAWS_F      0xC45846u /* byte: positive sets the $C30D34 bar (with DISPLAY_FORCE bit 1) */
+#define TAPE_SHOWN         0xC459A2u /* word: the compass tape's cache (bit 15 drawn) */
+#define HUD_CENTRE_X       0xC4598Cu /* word: the HUD's centre column */
+#define HUD_LINE_INDEX     0xC459AAu /* word: 4 x the HUD frame line being drawn */
 #define LOAD_TRIM          0xC45946u /* word: added to the load readout when beyond +-1 */
 
 #endif
