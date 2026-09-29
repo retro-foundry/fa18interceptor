@@ -265,4 +265,7 @@ int glue_C11BFC(void);
 /* not registered: no recording calls it yet */
 int glue_C345A0(void);
 
+/* batch 41: plane-side test */
+int glue_C27456(void);
+
 #endif

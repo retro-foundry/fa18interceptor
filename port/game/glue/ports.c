@@ -236,6 +236,8 @@ const FA18Port fa18_ports[] = {
     {0xC30918, glue_C30918, "draw_gauge_bar", 15000},
     /* batch 39: cockpit messages */
     {0xC11BFC, glue_C11BFC, "update_message", 3000},
+    /* batch 41: plane-side test */
+    {0xC27456, glue_C27456, "faces_all_behind", 2500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
