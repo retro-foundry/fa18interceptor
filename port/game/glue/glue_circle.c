@@ -22,6 +22,7 @@ void filled_circle_registers(void) {
         return;
     }
     table = rd_u32(CIRCLE_SPANS_PTR);
+    A(2) = table + 2;
     SET_W(D(5), (uint16_t)(radius - 2));
     if (radius != 1) {
         if (radius > 127) {
@@ -54,6 +55,7 @@ void filled_circle_registers(void) {
         SET_W(D(3), (uint16_t)py);
         SET_W(D(4), (uint16_t)error);
         A(3) = far;
+        A(2) = near;
     }
     A(4) = table + 2;
     SET_W(D(4), (uint16_t)(radius - 1));
@@ -74,7 +76,7 @@ void filled_circle_registers(void) {
         }
         A(4) += (gaddr)(uint16_t)((uint16_t)(-top) * 4u);
         top = 1;
-        SET_W(D(1), 1);
+        D(1) = 1; /* MOVEQ clears DIVS's remainder in the upper word. */
     }
     limit = rd_s16(LINE_LAST_ROW);
     if ((int16_t)(top + W(4) + W(6)) >= limit) {
@@ -88,6 +90,8 @@ void filled_circle_registers(void) {
         SET_W(D(1), (uint16_t)top);
     }
     SET_W(D(5), (uint16_t)(top * 8));
+    A(1) = rd_u32(rd_u32(PAGE_PLANE_TABLE) + 12) + (gaddr)(int32_t)(int16_t)(top * 40);
+    A(2) = 0xDFF000u;
     /* Each pass leaves D1 with the residual span length and D7 with BLTSIZE. */
     for (;;) {
         int16_t left = (int16_t)(rd_s16(A(4)) + x);
@@ -96,6 +100,7 @@ void filled_circle_registers(void) {
         uint16_t mask;
         if (left < 0) left = 0;
         if (right >= 320) right = 319;
+        A(0) = A(1) + (gaddr)(int16_t)((left & (int16_t)0xFFF0) >> 3) + 3u * 0x1F40u;
         span = (int16_t)(right - left);
         rem = (int16_t)(left & 15);
         first = (int16_t)(16 - rem);
@@ -116,6 +121,7 @@ void filled_circle_registers(void) {
             SET_W(D(1), (uint16_t)extra);
         }
         SET_W(D(0), (rd_u16(CURRENT_COLOUR) & 8) ? 0x3FA : 0x30A);
+        A(1) += 40;
         if (W(4) >= 0) {
             A(4) += 4;
             SET_W(D(4), (uint16_t)(W(4) - 1));
