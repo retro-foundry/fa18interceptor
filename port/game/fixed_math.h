@@ -112,4 +112,12 @@ int condition_table_matches(gaddr table);
 /* The same, also giving the last byte value compared (-1 when none). */
 int condition_table_scan(gaddr table, int *last_byte);
 
+/* $C1FC42: compare a component of BOUND_RECORD (at `offset`, shifted down
+ * by its +$06 low nibble) with a bound chosen by `selector` bits 10-11:
+ * 1: -CONDITION_VALUE (long) against the +$0C word; 2: -PROJECTION_WORDS[0]
+ * against +$0A + BOUND_OFFSET_X << BOUND_SHIFT; otherwise -PROJECTION_WORDS
+ * [2] against +$0E + BOUND_OFFSET_Z << BOUND_SHIFT. Returns bound <
+ * component, inverted when `selector` bit 12 is set. */
+int component_beyond_bound(uint16_t selector, int16_t offset);
+
 #endif

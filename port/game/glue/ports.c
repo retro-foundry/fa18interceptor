@@ -202,6 +202,9 @@ const FA18Port fa18_ports[] = {
     {0xC10D8A, glue_C10D8A, "check_post_input_expiry", 1300},
     {0xC1C54E, glue_C1C54E, "seed_projection", 1500},
     {0xC09AB8, glue_C09AB8, "condition_table_matches", 800},
+    /* batch 29: component bound, repeated sum, view key */
+    {0xC1FC42, glue_C1FC42, "component_beyond_bound", 250},
+    {0xC1BA86, glue_C1BA86, "queue_view_key", 500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

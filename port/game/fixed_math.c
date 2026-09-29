@@ -467,3 +467,27 @@ int condition_table_matches(gaddr table) {
     int last_byte;
     return condition_table_scan(table, &last_byte);
 }
+
+/* The component and bound $C1FC42 compares; 1 when bound < component. */
+static int bound_less(uint16_t selector, int16_t offset) {
+    gaddr r = rd_u32(BOUND_RECORD);
+    int shift = rd_u8(r + 6) & 15;
+    switch ((selector & 0x0C00) >> 10) {
+    case 1:
+        return -rd_s32(CONDITION_VALUE) < (int32_t)(int16_t)(rd_s16(r + (gaddr)(int32_t)offset + 0x0C) >> shift);
+    case 2: {
+        int16_t c = (int16_t)((rd_s16(r + (gaddr)(int32_t)offset + 0x0A) >> shift) +
+                              (int16_t)(rd_s16(BOUND_OFFSET_X) << (rd_u16(BOUND_SHIFT) & 63)));
+        return (int16_t)-rd_s16(PROJECTION_WORDS) < c;
+    }
+    default: {
+        int16_t c = (int16_t)((rd_s16(r + (gaddr)(int32_t)offset + 0x0E) >> shift) +
+                              (int16_t)(rd_s16(BOUND_OFFSET_Z) << (rd_u16(BOUND_SHIFT) & 63)));
+        return (int16_t)-rd_s16(PROJECTION_WORDS + 4) < c;
+    }
+    }
+}
+
+int component_beyond_bound(uint16_t selector, int16_t offset) {
+    return bound_less(selector, offset) != ((selector & 0x1000) != 0);
+}

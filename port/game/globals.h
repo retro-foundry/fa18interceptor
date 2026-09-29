@@ -310,4 +310,19 @@
 #define CONDITION_BYTE_A   0xC45850u /* byte: matched against the first byte list */
 #define CONDITION_BYTE_B   0xC45854u /* byte: matched against the second */
 
+/* ---- key queue, component bound ($C1BA86, $C1FC42) ----------------------- */
+#define VIEW_MODE          0xC457A7u /* byte: selects LINE_LAST_ROW */
+#define KEY_TAKEN          0xC457A3u /* byte: a key was queued this update */
+#define KEY_RAW            0xC457E1u /* byte[10]: raw key codes */
+#define KEY_TRANSLATED     0xC457EBu /* byte[]: translated keys */
+#define KEY_WRITE          0xC457F7u /* byte: next KEY_RAW slot */
+#define KEY_TRANSLATED_WRITE 0xC457F6u /* byte: KEY_TRANSLATED slot */
+#define KEY_COUNT          0xC457F9u /* byte: keys queued */
+#define KEY_TABLE          0xC331CEu /* byte[128]: raw key -> translated */
+#define KEY_STATE          0xC45878u /* byte[3]: cleared after a key */
+#define BOUND_RECORD       0xC45A32u /* long: record whose component is tested */
+#define BOUND_SHIFT        0xC45AB8u /* word: shift for the bound offsets */
+#define BOUND_OFFSET_X     0xC45B2Au /* word */
+#define BOUND_OFFSET_Z     0xC45B2Eu /* word */
+
 #endif

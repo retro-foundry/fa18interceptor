@@ -217,4 +217,8 @@ int glue_C10D8A(void);
 int glue_C1C54E(void);
 int glue_C09AB8(void);
 
+/* batch 29: component bound, repeated sum, view key */
+int glue_C1FC42(void);
+int glue_C1BA86(void);
+
 #endif
