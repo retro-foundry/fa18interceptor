@@ -208,3 +208,25 @@ void draw_polygon(void) {
     clear_polygon_mask();
     custom_write(DMACON, 0x0400);
 }
+
+#define MARK_POLYGON 0xC4B432u /* word count, then (x, y) word pairs at 1/256 scale */
+
+int scale_mark_polygon(void) {
+    gaddr from = MARK_POLYGON, to = POLY_VERTICES;
+    int16_t count = rd_s16(from);
+
+    from += 2;
+    if (count <= 0) return 0;
+    wr_u16(to, (uint16_t)count);
+    for (to += 2; count-- > 0; from += 4, to += 4) {
+        wr_u16(to, (uint16_t)((int16_t)((rd_u16(from) * 0x18u) >> 8) + 0xC1 + rd_s16(SPAN_ORIGIN_Y)));
+        wr_u16(to + 2, (uint16_t)((int16_t)((rd_u16(from + 2) * 0x1Fu) >> 8) + 0xA2 + rd_s16(REDRAW_STATE_WORD)));
+    }
+    return 1;
+}
+
+void draw_mark_polygon(void) {
+    if (!scale_mark_polygon() || prepare_polygon_to_row(0xC7)) return;
+    blit_lane(4, 1);
+    clear_polygon_mask();
+}

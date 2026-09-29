@@ -41,4 +41,12 @@ int prepare_polygon_to_row(int16_t last);
  * drawn). Then clear the mask. Priority stays on after a direct draw. */
 void draw_polygon(void);
 
+/* The mark polygon at MARK_POLYGON scaled into POLY_VERTICES (x * 24/256
+ * + 193, y * 31/256 + 162, moved by the view origin): 0 when it is empty
+ * ($C3019C's first part). */
+int scale_mark_polygon(void);
+
+/* Draw it: fill to row $C7 and composite into plane 1 ($C3019C). */
+void draw_mark_polygon(void);
+
 #endif

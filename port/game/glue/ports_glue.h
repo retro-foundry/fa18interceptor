@@ -512,4 +512,7 @@ int glue_C203D0(void);
 /* shadow */
 int glue_C201A6(void);
 
+/* mark polygon */
+int glue_C3019C(void);
+
 #endif

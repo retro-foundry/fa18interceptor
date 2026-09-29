@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "numbers.h"
 #include "postflight_hud.h"
+#include "render_polygon.h"
 #include "draw_stream.h"
 #include "glue_clip.h"
 #include "machine.h"
@@ -1006,5 +1007,28 @@ one:
     (void)result;
     D(0) = 1;
     flags_logic_l(1);
+    return glue_return();
+}
+
+/* $C3019C: the scaling's registers, then its callees' glue in order (the
+ * fill, and when it was started the lane blit and the mask clear). */
+int glue_C3019C(void) {
+    int16_t count = rd_s16(0xC4B432u);
+
+    scale_mark_polygon();
+    A(0) = 0xC4B432u + 2;
+    A(4) = POLY_VERTICES;
+    SET_W(D(7), (uint16_t)count);
+    if (count <= 0) return glue_return();
+    A(4) += 2 + (gaddr)(4 * count);
+    A(0) += (gaddr)(4 * count);
+    SET_W(D(0), rd_u16(POLY_VERTICES + (gaddr)(4 * count)));
+    SET_W(D(7), 0xFFFF);
+    call_port(glue_C301F0, 0xC301E0);
+    if (D(0)) return glue_return();
+    D(0) = 4;
+    D(3) = 1;
+    call_port(glue_C304FA, 0xC301EA);
+    call_port(glue_C304B2, 0xC301EE);
     return glue_return();
 }
