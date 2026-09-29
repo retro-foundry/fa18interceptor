@@ -59,6 +59,7 @@ const FA18Port fa18_ports[] = {
     {0xC30AE2, glue_C30AE2, "draw_stores_icon_stream", 500},
     {0xC30A00, glue_C30A00, "draw_stores_icons", 900},
     {0xC17B96, glue_C17B96, "start_menu_sound_pair", 600},
+    {0xC2F1C0, glue_C2F1C0, "draw_filled_circle", 4000},
     /* render_line.c, render_state.c */
     {0xC2F490, glue_C2F490, "reset_line_style", 30},
     {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},
