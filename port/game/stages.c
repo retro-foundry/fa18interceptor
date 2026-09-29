@@ -2,9 +2,11 @@
 #include "stages.h"
 
 #include "cockpit.h"
+#include "audio.h"
 #include "fault.h"
 #include "fixed_math.h"
 #include "globals.h"
+#include "player_input.h"
 #include "view.h"
 
 void empty_stage(void) {}
@@ -56,6 +58,60 @@ void start_view_mode_zero(uint8_t raw_key) {
     wr_u8(0xC45878u, 0);
     wr_u8(0xC45879u, 0);
     wr_u8(0xC4587Au, 0);
+}
+
+void update_view_controls(void) {
+    gaddr record;
+    uint8_t type;
+    uint16_t command;
+
+    if (!rd_u8(CONTEXT_SELECT) && !rd_u8(0xC45891u))
+        start_view_mode_zero(0);
+    record = CONTROL_RECORDS + (gaddr)((int32_t)rd_s16(TARGET_RECORD) << 9);
+    type = rd_u8(record + 0x62) & 0xF0;
+    command = rd_u16(COMMAND_WORD);
+    if (command & 2) {
+        wr_u16(COMMAND_WORD, command & (uint16_t)~2u);
+        wr_u8(FIRE_STATE, 0xFE);
+        if (rd_u8(CONTEXT_SELECT)) {
+            wr_u8(CONTEXT_SELECT, 0);
+            wr_u16(SPAN_ORIGIN, 0);
+            wr_u8(TRACK_STARTED, 0);
+            wr_u8(0xC45835u, 1);
+        } else {
+            wr_u8(CONTEXT_SELECT, rd_u8(0xC45833u));
+            wr_u16(SPAN_ORIGIN, 0x32);
+        }
+        free_voice(3);
+        if (type == 0x30) wr_u16(SPAN_ORIGIN, 0x32);
+        wr_u16(SPAN_ORIGIN_Y, (uint16_t)(rd_u16(SPAN_ORIGIN) << 4));
+        set_zoom_maximum();
+        wr_u8(VIEW_MODE, 0);
+        wr_u8(UPDATE_MASK, 0xFF);
+        queue_view_key((uint8_t)rd_u16(SPAN_ORIGIN_Y));
+        if (type == 0x30 || rd_u8(CONTEXT_SELECT)) {
+            wr_u16(LINE_LAST_ROW, rd_u8(PAUSE_A) ? 0xB3 : 0xA7);
+        }
+    }
+    if (type == 0x30 && rd_u16(SPAN_ORIGIN) == 0) {
+        wr_u16(SPAN_ORIGIN, 0x32);
+        wr_u16(SPAN_ORIGIN_Y, 0x320);
+        set_zoom_maximum();
+        wr_u8(VIEW_MODE, 0);
+        wr_u8(UPDATE_MASK, 0xFF);
+        queue_view_key(0);
+        wr_u16(LINE_LAST_ROW, 0xA7);
+    }
+    if (!rd_u8(CONTEXT_SELECT)) return;
+    if (rd_u16(COMMAND_WORD) & 0x10) {
+        wr_u16(COMMAND_WORD, rd_u16(COMMAND_WORD) & (uint16_t)~0x10u);
+        wr_u8(TARGET_ENABLED, rd_u8(TARGET_ENABLED) ^ 1);
+    }
+    if (rd_u8(CONTEXT_STATE) == 6 && rd_s32(0xC45C42u) < 0x24000 &&
+        rd_u16(LINE_LAST_ROW) != 0xA7) {
+        wr_u16(LINE_LAST_ROW, 0xA7);
+        request_cockpit_redraw();
+    }
 }
 
 void enable_scene_record_updates(void) {

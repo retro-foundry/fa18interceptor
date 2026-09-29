@@ -21,4 +21,9 @@ void draw_display_stream_point(uint32_t stream, int16_t mode,
  * ($C0DAEE). */
 void draw_fixed_matrix_mark(void);
 
+/* Shift one view-space triplet, size its circle by the triplet's magnitude,
+ * and project it ($C0CFFA). */
+void draw_scaled_view_circle(uint32_t point, int16_t shift, int16_t radius);
+void draw_scaled_stream_circle(uint32_t stream, int16_t shift);
+
 #endif

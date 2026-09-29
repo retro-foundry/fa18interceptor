@@ -72,6 +72,8 @@ void start_menu_sound_pair(int32_t volume);
  * ($C17F8C/$C18108). */
 void start_sound_6(int32_t period, int32_t ticks);
 void start_sound_12(int32_t period);
+/* Select sound 12 or the engine pair from the event mode ($C13176). */
+void dispatch_event_sound(int16_t period, int16_t volume);
 
 /* The alert tone on channel 2, when enabled and the view shows the scripted
  * record. */

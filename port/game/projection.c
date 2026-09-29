@@ -3,6 +3,7 @@
 
 #include "circle.h"
 #include "fault.h"
+#include "fixed_math.h"
 #include "globals.h"
 #include "memory.h"
 #include "plot.h"
@@ -80,4 +81,33 @@ void draw_fixed_matrix_mark(void) {
     wr_u16(CURRENT_COLOUR, 9);
     project_view_point_mode(result[0], result[1], result[2], -4,
                             0, 8);
+}
+
+static int16_t shift_word(int16_t value, int16_t count) {
+    unsigned bits = (uint16_t)count & 63;
+    return bits >= 16 ? 0 : (int16_t)((uint16_t)value << bits);
+}
+
+void draw_scaled_view_circle(uint32_t point, int16_t shift, int16_t radius) {
+    int16_t x = shift_word(rd_s16(point), shift);
+    int16_t y = shift_word(rd_s16(point + 2), shift);
+    int16_t z = shift_word(rd_s16(point + 4), shift);
+    int16_t ax = x < 0 ? (int16_t)-x : x;
+    int16_t ay = y < 0 ? (int16_t)-y : y;
+    int16_t az = z < 0 ? (int16_t)-z : z;
+    int16_t length = (int16_t)magnitude3(ax, ay, az);
+    int16_t shown = 127;
+    if (length > 0) {
+        uint32_t numerator = (uint32_t)(int32_t)radius;
+        uint32_t quotient = numerator / (uint16_t)length;
+        shown = quotient > 0xFFFFu ? radius : (int16_t)quotient;
+        if (shown > 127) shown = 127;
+    }
+    project_view_point_mode(x, y, z, -4, 0, shown);
+}
+
+void draw_scaled_stream_circle(uint32_t stream, int16_t shift) {
+    gaddr point = DISPLAY_VERTEX_BASE + (gaddr)(int32_t)rd_s16(stream);
+    wr_u16(CURRENT_COLOUR, rd_u16(stream + 2));
+    draw_scaled_view_circle(point, shift, rd_s16(stream + 4));
 }

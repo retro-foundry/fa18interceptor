@@ -144,6 +144,15 @@ void start_sound_12(int32_t period) {
     play_sound(12, 2, 0);
 }
 
+void dispatch_event_sound(int16_t period, int16_t volume) {
+    if (rd_u8(SOUND_FLAGS - 1) & 2) {
+        start_sound_12(volume);
+        wr_u8(0xC45797u, 0);
+    } else {
+        play_engine((int32_t)period + 22, volume);
+    }
+}
+
 void play_alert_tone(int32_t volume) {
     gaddr voice;
     if (!(rd_u8(SOUND_FLAGS) & 0x04)) return;
