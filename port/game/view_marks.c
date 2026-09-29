@@ -92,6 +92,56 @@ void plot_ring(int16_t x, int16_t y, int16_t points, gaddr outline) {
     ring_quarter(&r, 0, -1, -1);               /* upper left */
 }
 
+void plot_ring_point(int16_t x, int16_t y, int16_t steps, gaddr outline) {
+    int16_t shift = rd_s16(SPAN_ORIGIN_Y), px, py;
+    gaddr at = outline;
+    int8_t dx, dy;
+
+    for (;;) { /* upper right */
+        dx = (int8_t)rd_u8(at);
+        dy = (int8_t)rd_u8(at + 1);
+        at += 2;
+        if (dy < 0) break;
+        dy = (int8_t)-dy;
+        if (--steps < 0) goto found;
+    }
+    at -= 2;
+    y = (int16_t)(y - 1);
+    for (;;) { /* lower right, back up the table */
+        at -= 2;
+        dy = (int8_t)rd_u8(at + 1);
+        dx = (int8_t)rd_u8(at);
+        if (dx < 0) break;
+        if (--steps < 0) goto found;
+    }
+    at += 2;
+    for (;;) { /* lower left */
+        dx = (int8_t)rd_u8(at);
+        dy = (int8_t)rd_u8(at + 1);
+        at += 2;
+        if (dy < 0) break;
+        dx = (int8_t)-dx;
+        if (--steps < 0) goto found;
+    }
+    at -= 2;
+    y = (int16_t)(y + 1);
+    for (;;) { /* upper left */
+        at -= 2;
+        dy = (int8_t)rd_u8(at + 1);
+        dx = (int8_t)rd_u8(at);
+        if (dx < 0) return;
+        dx = (int8_t)-dx;
+        dy = (int8_t)-dy;
+        if (--steps < 0) break;
+    }
+found:
+    px = (int16_t)(dx + x);
+    py = (int16_t)(dy + y);
+    if (px <= 2 || px >= 0x13E || px <= (int16_t)(0x55 + shift) || px >= (int16_t)(0xE9 + shift)) return;
+    if (py <= 0x2D || py >= 0x90) return;
+    plot_pixel_block(px, py);
+}
+
 void plot_symbol(int16_t x, int16_t y, int16_t large) {
     gaddr shape;
     if (!large) {

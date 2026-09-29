@@ -367,6 +367,16 @@ const FA18Port fa18_ports[] = {
     {0xC30F78, glue_C30F78, "draw_compass_tape", 3000},
     /* batch 60c: panel frame */
     {0xC30764, glue_C30764, "draw_panel_frame", 4000},
+    /* batch 61: HUD marks */
+    {0xC34146, glue_C34146, "draw_hud_marks", 6000},
+    {0xC34066, glue_C34066, "draw_tick_row", 3000},
+    /* batch 61b: target box */
+    {0xC342D0, glue_C342D0, "draw_target_box", 6000},
+    /* batch 61d: ring point, pixel block */
+    {0xC2F66E, glue_C2F66E, "plot_pixel_block", 300},
+    {0xC347F2, glue_C347F2, "plot_ring_point", 2500},
+    /* batch 61e: missile cue */
+    {0xC33DC8, glue_C33DC8, "update_missile_cue", 5000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -25,6 +25,12 @@ void draw_gauge_bar(void);
  * proven: the recordings never call it (its glue is ready, unregistered). */
 void plot_ring(int16_t x, int16_t y, int16_t points, gaddr outline);
 
+/* The point `steps` along the same walk of `outline` around (x, y) (the
+ * lower quarters one row up), plotted as a 2x2 block when it lies inside x
+ * 3-317, SPAN_ORIGIN_Y + $56-$E8 and y $2E-$8F; nothing when the walk ends
+ * first ($C347F2). */
+void plot_ring_point(int16_t x, int16_t y, int16_t steps, gaddr outline);
+
 /* A pixel symbol (dx, dy byte pairs to a 0, 0 pair) at (x, y) in the
  * view window: the small one, or the large one while STREAM_SKIP bits 0-1
  * are nonzero, each only well inside the window ($C348B2). */

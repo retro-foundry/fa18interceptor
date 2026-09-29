@@ -47,6 +47,10 @@ void plot_registers(gaddr masks, gaddr writers);
 /* $C2FA7E's from D0-D6 (glue_render_polygon.c). */
 void line_registers(void);
 
+/* $C348B2's from D0/D1/D4 (glue_batch49.c) and $C31E6C's (glue_batch59.c). */
+void symbol_registers(void);
+void shoot_cue_registers(void);
+
 /* $C2F64E's and $C2F63A's the same way. */
 void square_registers(void);
 void square_in_view_registers(void);

@@ -421,5 +421,18 @@ int glue_C30F78(void);
 /* batch 60c: panel frame */
 int glue_C30764(void);
 
+/* batch 61: HUD marks */
+int glue_C34146(void);
+int glue_C34066(void);
+
+/* batch 61b: target box */
+int glue_C342D0(void);
+
+/* batch 61d: ring point, pixel block */
+int glue_C2F66E(void);
+int glue_C347F2(void);
+
+/* batch 61e: missile cue */
+int glue_C33DC8(void);
 
 #endif

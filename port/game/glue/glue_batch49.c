@@ -164,22 +164,21 @@ void plot_registers(gaddr masks, gaddr writers); /* glue_batch33.c */
 
 /* $C348B2: D0/D1 the position, D4 the variant. The bounds checks' and the
  * pixel loop's registers, with plot_pixel's leftovers. */
-int glue_C348B2(void) {
+void symbol_registers(void) {
     int16_t x = W(0), y = W(1), large = W(4);
     gaddr shape;
 
-    plot_symbol(x, y, large);
     if (!large) {
-        if (x <= 0x58 || x >= 0xE6 || y <= 0x27 || y >= 0x8D) return glue_return();
+        if (x <= 0x58 || x >= 0xE6 || y <= 0x27 || y >= 0x8D) return;
         shape = SYMBOL_SMALL;
     } else {
         SET_W(D(2), rd_u16(STREAM_SKIP) & 3);
-        if (!W(2) || x <= 0x60 || x >= 0xDE || y <= 0x2E || y >= 0x86) return glue_return();
+        if (!W(2) || x <= 0x60 || x >= 0xDE || y <= 0x2E || y >= 0x86) return;
         shape = SYMBOL_LARGE;
     }
     A(0) = shape;
     SET_W(D(0), W(0) + rd_s16(SPAN_ORIGIN_Y));
-    if (W(0) < 10 || W(0) > 0x136) return glue_return();
+    if (W(0) < 10 || W(0) > 0x136) return;
     SET_W(D(1), W(1) + rd_s16(REDRAW_STATE_WORD));
     x = W(0);
     y = W(1);
@@ -197,5 +196,10 @@ int glue_C348B2(void) {
             A(0) = a0;
         }
     }
+}
+
+int glue_C348B2(void) {
+    plot_symbol(W(0), W(1), W(4));
+    symbol_registers();
     return glue_return();
 }

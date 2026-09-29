@@ -300,11 +300,10 @@ int glue_C31D16(void) {
     return glue_return();
 }
 
-int glue_C31E6C(void) {
+void shoot_cue_registers(void) {
     gaddr record = viewed_record();
     uint8_t kind = rd_u8(record + 0x63) & 0xF0;
 
-    draw_shoot_cue();
     A(1) = record;
     SET_B(D(0), kind);
     A(2) = kind == 0x10 ? 0xC31E65u : 0xC31E5Fu;
@@ -313,6 +312,11 @@ int glue_C31E6C(void) {
     A(4) = 0x1440;
     D(0) = 0x18u << 16 | 5;
     text_in_view_registers();
+}
+
+int glue_C31E6C(void) {
+    draw_shoot_cue();
+    shoot_cue_registers();
     return glue_return();
 }
 

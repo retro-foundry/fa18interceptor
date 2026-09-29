@@ -473,6 +473,10 @@
 #define TAPE_SHOWN         0xC459A2u /* word: the compass tape's cache (bit 15 drawn) */
 #define HUD_CENTRE_X       0xC4598Cu /* word: the HUD's centre column */
 #define HUD_LINE_INDEX     0xC459AAu /* word: 4 x the HUD frame line being drawn */
+#define TARGET_MARK        0xC45936u /* word x, y: the target's screen position (x -1 none) */
+#define SEEKER_MARK        0xC45942u /* word x, y: the seeker mark, slewing toward TARGET_MARK */
+#define SHOOT_CUE          0xC458B4u /* byte: 1 target in reach, 2 in reach and closing fast; the cue shows while set */
+#define RANGE_RATE         0xC45B46u /* word: the change in the target's range (record +$4A) */
 #define LOAD_TRIM          0xC45946u /* word: added to the load readout when beyond +-1 */
 
 #endif
