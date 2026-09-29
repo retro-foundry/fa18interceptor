@@ -1,5 +1,5 @@
 {
-  "authority": "Original executable and captures/baseline_menu/slow.bin",
+  "authority": "Original executable and captures/uae/baseline_menu/slow.bin",
   "seeds": [
     {"segment": 36, "runtime_payload_base": "0xC2F490", "evidence": "analysis/hunk_runtime_mapping.md"},
     {"segment": 41, "runtime_payload_base": "0xC34A50", "evidence": "analysis/mappings/segments41_47_50_loaded.md"},

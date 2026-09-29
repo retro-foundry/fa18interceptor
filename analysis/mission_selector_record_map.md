@@ -1,6 +1,6 @@
 # Static mission-selector record map
 
-Authority: `captures/baseline_menu/slow.bin`, decoded reproducibly with:
+Authority: `captures/uae/baseline_menu/slow.bin`, decoded reproducibly with:
 
 ```powershell
 python scripts/inventory_message_records.py --output analysis/data/mission_selector_records_1_110.json

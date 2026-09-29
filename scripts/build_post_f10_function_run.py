@@ -8,7 +8,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'build/run003_post_f10_first/state.bin'
-CONFIG = ROOT / 'captures/run003/config.uae'
+CONFIG = ROOT / 'captures/uae/run003/config.uae'
 NAME = 'run014_post_f10_functions'
 START_FRAME = 3899
 
@@ -18,7 +18,7 @@ def event_pair(frame, key):
 
 
 def main():
-    run = ROOT / 'captures' / NAME
+    run = ROOT / 'captures' / 'uae' / NAME
     if run.exists():
         raise FileExistsError(run)
     run.mkdir()

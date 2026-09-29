@@ -39,7 +39,7 @@ third/depth component is computed later, so the comparison does not establish
 global terrain coordinates, coastline ownership, a terrain mesh, or
 distance-driven LOD.
 
-Authority: sealed `captures/run042`; ignored reproducible artifacts
+Authority: sealed `captures/uae/run042`; ignored reproducible artifacts
 `build/run042_post_m_checkpoint/`, `build/run042_m_map_transition_trace/`,
 and `build/run042_m_map_static_packets.json`; comparison authority
 `analysis/data/run037_m_map_stable_polygon_static_packets.json`.

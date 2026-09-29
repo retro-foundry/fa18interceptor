@@ -7,7 +7,7 @@ other game object.
 
 ## Runtime packet
 
-- No-input `start_demo` replay from `captures/baseline_menu/state.bin`.
+- No-input `start_demo` replay from `captures/uae/baseline_menu/state.bin`.
 - Breakpoint `$C212B0`, hit in frame 602; observed return `$C1F944`.
 - 2,552 instructions, no input after the breakpoint.
 - P-code: `pcode/raw/no_key_c212b0_display/`, 236 observed RAM starts / 1,434

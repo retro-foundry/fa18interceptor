@@ -39,6 +39,6 @@ This establishes a complete local three-vertex polyline component for this
 bounded map scenario. It does not locate the component globally, establish a
 coastline ownership match, or identify the rest of the terrain mesh.
 
-Authority: sealed `captures/run003`; ignored
+Authority: sealed `captures/uae/run003`; ignored
 `build/run003_m_map_appearance_trace/{trace.jsonl,slow.bin}`; and byte-exact
 [`$C212B0` source](../../source_amiga/observed/submit_offset_pair_segments.asm).

@@ -12,7 +12,7 @@ START = 0xC44880
 END = 0xC45624
 RECORD_SIZE = 24
 DEFAULT_SNAPSHOTS = (
-    ROOT / "captures/baseline_menu/slow.bin",
+    ROOT / "captures/uae/baseline_menu/slow.bin",
     ROOT / "build/run003_m_map_appearance_trace/slow.bin",
     ROOT / "build/run033_placement_bulk_404_trace/slow.bin",
     ROOT / "build/run033_frame05250_placement_thirtyframe_trace/slow.bin",

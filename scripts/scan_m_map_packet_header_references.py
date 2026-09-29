@@ -37,7 +37,7 @@ def main() -> None:
     parser.add_argument("--candidates", type=Path,
                         default=ROOT / "analysis/data/static_m_map_packet_streams.json")
     parser.add_argument("--baseline", type=Path,
-                        default=ROOT / "captures/baseline_menu/slow.bin")
+                        default=ROOT / "captures/uae/baseline_menu/slow.bin")
     parser.add_argument("--comparison", type=Path,
                         default=ROOT / "build/run037_m_map_stable_13f_trace/slow.bin")
     parser.add_argument("--resolved", type=Path,

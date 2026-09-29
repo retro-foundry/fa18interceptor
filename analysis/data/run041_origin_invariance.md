@@ -17,4 +17,4 @@ The sampled `$C45C3E/$C45C42/$C45C46` selector-origin triple, `$C457B6` adjustme
 
 This rules out a change in these sampled selector-origin inputs as the cause of the run041 source-family change. It does **not** measure aircraft-to-landmark range, establish a renderer selector threshold, isolate all camera state, or prove a physical-distance LOD rule.
 
-Authority: sealed `captures/run041` replay checkpoints and the listed ignored build artifacts. Reproduce with `python scripts/summarize_run041_origin_invariance.py`.
+Authority: sealed `captures/uae/run041` replay checkpoints and the listed ignored build artifacts. Reproduce with `python scripts/summarize_run041_origin_invariance.py`.

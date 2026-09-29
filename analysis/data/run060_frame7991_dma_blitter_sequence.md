@@ -1,7 +1,7 @@
 # run060 frame 7991 DMA blitter sequence
 
-The rebuilt Engine9000 core was run from `captures/run060/restored-state.bin`
-with `captures/run060/playback.e9k` applied through replay frame 7991. DMA
+The rebuilt Engine9000 core was run from `captures/uae/run060/restored-state.bin`
+with `captures/uae/run060/playback.e9k` applied through replay frame 7991. DMA
 collection mode 6 reported frame 7991 with 288,000 raw records and a 720 by
 287 render surface. The capture tool is `scripts/capture_dma_frame.py`.
 

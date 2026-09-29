@@ -35,7 +35,7 @@ The scan measures raster output only. It does **not** identify a particular
 face record, terrain/control-stream record, bridge component, or LOD level.
 Those require a renderer submission correlated to this world-viewport region.
 
-Authority: sealed `captures/run035`, ignored reproduction images in
+Authority: sealed `captures/uae/run035`, ignored reproduction images in
 `build/run035_viewport_scan/`, the command below, and the machine-readable
 measurements in `run035_golden_gate_red_viewport_interval.json`.
 

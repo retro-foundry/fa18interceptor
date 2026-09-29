@@ -4,7 +4,7 @@ Renders Engine9000 oracle frames at the given frame numbers (cached under
 build/recomp/oracle/<run>/f<N>) and native frames from the run's restore
 state with its playback, then prints the pixel match ratio per frame.
 
-  python scripts/recomp_outcome.py --run captures/run060 100 500 1000 9545
+  python scripts/recomp_outcome.py --run captures/uae/run060 100 500 1000 9545
 """
 from __future__ import annotations
 

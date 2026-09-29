@@ -15,7 +15,7 @@ anchors are directly proven only in the run003 renderer trace.
 ```powershell
 python scripts/collect_run003_m_map_projected_polygons.py `
   --restore build/run035_postflight_m_8895/state.bin `
-  --config captures/run035/config.uae --no-playback `
+  --config captures/uae/run035/config.uae --no-playback `
   --output build/run035_m_map_projected_polygons
 python scripts/render_run003_m_map_projected_polygon_vectors.py `
   --input build/run035_m_map_projected_polygons/projected_polygons.json `

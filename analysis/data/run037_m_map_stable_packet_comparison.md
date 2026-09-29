@@ -26,6 +26,6 @@ that those packets are a terrain-cell map, nor that their selection is caused
 by flight distance: position, map state, projection, and culling remain
 confounded in this comparison.
 
-Authority: sealed `captures/run037`; keyframes in `build/run037_keyframes/`;
+Authority: sealed `captures/uae/run037`; keyframes in `build/run037_keyframes/`;
 and `build/run037_m_map_stable_13f_trace/trace.jsonl` (133,001 instructions,
 frames 5,688--5,700).

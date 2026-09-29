@@ -204,7 +204,7 @@
     "boundary": "chipset customLogFrameCommit, not frontend vblank callback",
     "limitation": "Single-stepping calls retro_run repeatedly; held-input/autorepeat equivalence needs separate verification."
   },
-  "capture_directory": "captures/menu_trace",
+  "capture_directory": "captures/uae/menu_trace",
   "hardware_reference": "AMIGA.md",
   "toolchain": {
     "engine_release": "v0.62-alpha",

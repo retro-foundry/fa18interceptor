@@ -36,7 +36,7 @@ def printable_runs(data, start, end, minimum):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--slow', type=Path,
-                        default=Path('captures/baseline_menu/slow.bin'))
+                        default=Path('captures/uae/baseline_menu/slow.bin'))
     parser.add_argument('--start', type=lambda value: int(value, 0),
                         default=DEFAULT_START)
     parser.add_argument('--end', type=lambda value: int(value, 0),

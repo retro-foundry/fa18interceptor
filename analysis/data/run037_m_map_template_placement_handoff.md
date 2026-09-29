@@ -36,6 +36,6 @@ immutable segment-66/67 template record
 It does not associate one placement with a coastline pixel or an M-map packet,
 and it cannot distinguish map-mode selection from physical-distance LOD.
 
-Authority: sealed `captures/run037` and
+Authority: sealed `captures/uae/run037` and
 `build/run037_m_map_template_to_placement_3f_trace/trace.jsonl`, which ends
 at chipset frame 5,719.

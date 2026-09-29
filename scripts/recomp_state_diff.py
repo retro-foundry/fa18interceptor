@@ -3,7 +3,7 @@
 Compares Chip and Slow RAM after N frames of a recorded run, ignoring the
 two stack areas (dead stack words depend on interrupt timing).
 
-  python scripts/recomp_state_diff.py --run captures/run060 100 200 300
+  python scripts/recomp_state_diff.py --run captures/uae/run060 100 200 300
 """
 from __future__ import annotations
 

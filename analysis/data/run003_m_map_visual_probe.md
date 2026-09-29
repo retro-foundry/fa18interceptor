@@ -7,7 +7,7 @@ Classification: **scenario-backed display observation**. This records what the g
 Restore the saved state immediately before the first sealed run003 `M` event, then replay the same input stream:
 
 ```powershell
-python scripts/engine9000_bridge.py --restore build/run003_pre_m_2183/state.bin --playback captures/run003/playback.e9k --start-frame 2183 --frames 30 --output build/run003_m_visual_30
+python scripts/engine9000_bridge.py --restore build/run003_pre_m_2183/state.bin --playback captures/uae/run003/playback.e9k --start-frame 2183 --frames 30 --output build/run003_m_visual_30
 ```
 
 At frame 2188 (five replay frames), the screenshot retains the flight cockpit. At frame 2213 (30 replay frames), the image is a full-screen green/blue coastline-style map display with a grid and navigation readouts. Its recorded video hash is `1828e0c0717c86ddb8ee3d4afa1ce15b2f0c9b028b8a0201cbae65cdc462f9f3`. The same hash is present again at frames 2243 and 2363, so this is a stable post-transition display rather than a partial redraw.

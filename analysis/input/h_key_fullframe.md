@@ -8,7 +8,7 @@ interpret instruction stepping as input evidence.
 | Engine9000 recorded key representation | Native `WM_KEYUP` probe for virtual `H` recorded `K 104 104 16 0`. |
 | Replayed input | `local/attract_hud_toggle.e9k`: mode-1 selection at 60/64, `H` down/up at 450/454. |
 | Control | `local/start_demo.e9k`, same demo selection and no `H`. |
-| Comparison point | Frame 460 from `captures/baseline_menu/state.bin`. |
+| Comparison point | Frame 460 from `captures/uae/baseline_menu/state.bin`. |
 | Effect | Final video hash is equal; Chip RAM is equal; Slow RAM, registers and cycle count differ. |
 | Repeatability | Two independent full-frame `H` replays at frame 460 match Chip RAM, Slow RAM, registers, cycles, video and audio exactly. |
 

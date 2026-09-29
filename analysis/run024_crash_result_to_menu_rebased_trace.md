@@ -2,7 +2,7 @@
 
 `pcode/raw/run024_crash_result_to_menu_rebased_trace/` is a bounded no-input
 sample of the return path after the observed crash-result presentation in the
-sealed qualification replay (`captures/run024/`).
+sealed qualification replay (`captures/uae/run024/`).
 
 ## Construction
 

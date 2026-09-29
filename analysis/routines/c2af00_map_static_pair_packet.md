@@ -111,7 +111,7 @@ that every pair is terrain/coastline rather than an overlay, place the pairs
 in global flight coordinates, or establish that the bounded 26 packets are
 the complete map.
 
-Authority: sealed `captures/run003`,
+Authority: sealed `captures/uae/run003`,
 `build/run003_m_map_appearance_trace/{trace.jsonl,slow.bin}`, and:
 
 ```text

@@ -5,7 +5,7 @@ the `$C0EFD4` update sequence. Its semantic role is still unknown.
 
 ## Evidence packet
 
-- Restore: `captures/baseline_menu/state.bin`.
+- Restore: `captures/uae/baseline_menu/state.bin`.
 - Playback: `local/start_demo.e9k`, with no event after menu selection.
 - Breakpoint: `$C1C63E`, armed at frame 600 and hit at frame 607.
 - Exit: return to `$C0F01C` after 7,774 instructions.

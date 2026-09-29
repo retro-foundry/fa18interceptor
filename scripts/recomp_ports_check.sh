@@ -20,13 +20,13 @@ run062:restored-state.bin:2470"
 rm -f build/recomp/ports_report_*.json
 for s in $SCENARIOS; do
   run=${s%%:*}; rest=${s#*:}; state=${rest%%:*}; frames=${rest#*:}
-  [ -f "captures/$run/$state" ] || { echo "skip $run (not present)"; continue; }
+  [ -f "captures/uae/$run/$state" ] || { echo "skip $run (not present)"; continue; }
   extra=""
   [ "$run" = run075 ] && extra="--rgb444 build/recomp/frames_shadow.bin"
-  $EXE --state "captures/$run/$state" --rom $ROM --replay "captures/$run/playback.e9k" --frames "$frames" \
+  $EXE --state "captures/uae/$run/$state" --rom $ROM --replay "captures/uae/$run/playback.e9k" --frames "$frames" \
     --ports shadow --ports-report "build/recomp/ports_report_$run.json" $extra >/dev/null
 done
-$EXE --state captures/run075/restored-state.bin --rom $ROM --replay captures/run075/playback.e9k \
+$EXE --state captures/uae/run075/restored-state.bin --rom $ROM --replay captures/uae/run075/playback.e9k \
   --frames "${FRAMES:-3000}" --ports shadow --poison --rgb444 build/recomp/frames_poison.bin >/dev/null 2>&1
 cmp -s build/recomp/frames_shadow.bin build/recomp/frames_poison.bin || {
   echo "POISON: frames differ: a register or flag declared dead is read"; exit 1; }

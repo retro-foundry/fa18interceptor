@@ -106,7 +106,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=ROOT / "analysis" / "disk_graphics_assets.json")
     parser.add_argument("--markdown", type=Path, default=ROOT / "analysis" / "disk_graphics_assets.md")
     parser.add_argument("--executable", type=Path, default=ROOT / "local" / "extracted" / "f18_interceptor")
-    parser.add_argument("--slow", type=Path, default=ROOT / "captures" / "baseline_menu" / "slow.bin")
+    parser.add_argument("--slow", type=Path, default=ROOT / "captures" / "uae" / "baseline_menu" / "slow.bin")
     parser.add_argument("--hunk-inventory", type=Path, default=ROOT / "analysis" / "hunk_inventory.json")
     parser.add_argument("--runtime-mapping", type=Path, default=ROOT / "analysis" / "hunk_runtime_resolved.json")
     parser.add_argument("--extract-dir", type=Path,

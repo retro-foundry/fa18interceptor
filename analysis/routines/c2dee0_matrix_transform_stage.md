@@ -6,7 +6,7 @@ world-object subsystem.
 
 ## Evidence packet
 
-- No-input `start_demo` replay from `captures/baseline_menu/state.bin`.
+- No-input `start_demo` replay from `captures/uae/baseline_menu/state.bin`.
 - Breakpoint `$C2DEE0`, frame 607; observed return `$C2D704`.
 - 288 instructions, no input after breakpoint.
 - Ghidra P-code: `pcode/raw/no_key_c2dee0/`, 288 observed starts / 2,302

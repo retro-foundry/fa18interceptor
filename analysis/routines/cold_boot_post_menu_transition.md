@@ -2,12 +2,12 @@
 
 Classification: **scenario-backed negative scheduling evidence**.
 
-Authority: the fresh cold-boot replay in `captures/cold_boot_menu_init/`, with
+Authority: the fresh cold-boot replay in `captures/uae/cold_boot_menu_init/`, with
 the recorded Return press/release at frames 9282 and 9287.  The bounded
 instruction trace was produced with:
 
 ```text
-python scripts\engine9000_bridge.py --restore captures\cold_boot_menu_init\initial_state.bin --config captures\cold_boot_menu_init\config.uae --playback captures\cold_boot_menu_init\playback.e9k --frames 9288 --trace-frames 12 --output build\cold_boot_post_menu_transition_trace_9288
+python scripts\engine9000_bridge.py --restore captures\uae\cold_boot_menu_init\initial_state.bin --config captures\uae\cold_boot_menu_init\config.uae --playback captures\uae\cold_boot_menu_init\playback.e9k --frames 9288 --trace-frames 12 --output build\cold_boot_post_menu_transition_trace_9288
 ```
 
 It contains 106,244 instructions across chipset frames 9289--9300.  At frame

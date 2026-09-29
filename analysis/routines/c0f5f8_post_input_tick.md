@@ -7,7 +7,7 @@ Classification: **static complete routine with a bounded tail route**.
 `source_amiga/observed/run_post_input_tick_prefix.asm` reconstructs
 `$C0F5F8-$C0F7D1`, and `run_post_input_tick_tail.asm` reconstructs
 `$C0F7D2-$C0F811`. Together they exactly cover the routine. The routine's
-bytes are checked against `captures/baseline_menu/slow.bin` by
+bytes are checked against `captures/uae/baseline_menu/slow.bin` by
 `python scripts/verify_reconstructions.py`.
 
 A no-future-input trace from the training frame-600 snapshot enters `$C0F5F8`

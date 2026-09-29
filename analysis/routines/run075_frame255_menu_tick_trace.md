@@ -2,8 +2,8 @@
 
 ## Engine9000 replay evidence
 
-The sealed `captures/run075/restored-state.bin` was replayed with
-`captures/run075/playback.e9k`. Breakpoints were armed at Engine frame 255;
+The sealed `captures/uae/run075/restored-state.bin` was replayed with
+`captures/uae/run075/playback.e9k`. Breakpoints were armed at Engine frame 255;
 the first matching calls resumed at Engine frame 256 because the breakpoint
 is installed at the start of the frame's execution window.
 

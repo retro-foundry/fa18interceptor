@@ -102,7 +102,7 @@ red viewport pixels as documented above. The `$C35590/$C355C2` contexts remain
 unassigned individually, so they are not claimed as additional Golden Gate
 segments.
 
-Authority: sealed `captures/run041`; ignored artifacts
+Authority: sealed `captures/uae/run041`; ignored artifacts
 `build/run041_bridge_keyframes/`, `build/run041_bridge_red.json`,
 `build/run041_frame05000_12f_trace/`, and
 `build/run041_frame06250_12f_trace_retry/`,

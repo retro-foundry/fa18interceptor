@@ -19,7 +19,7 @@ from render_run import ROOT, load_run
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run", type=Path, default=ROOT / "captures/run075")
+    parser.add_argument("--run", type=Path, default=ROOT / "captures/uae/run075")
     parser.add_argument("--last-frame", type=int, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()

@@ -15,7 +15,7 @@ between each action group so the resulting key windows can be isolated. Close
 Engine9000 normally when finished, then seal it with:
 
 ```powershell
-python scripts/finalize_run.py captures/run003
+python scripts/finalize_run.py captures/uae/run003
 ```
 
 ## Action order

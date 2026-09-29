@@ -14,5 +14,5 @@ at `$C45870`. The active-gate route also leaves `$0050` at `$C45778` and
 `$C4577C`.
 
 This is the base state for subsequent scripted function-key experiments. Its
-configuration is `captures/run003/config.uae`; substituting a different core
+configuration is `captures/uae/run003/config.uae`; substituting a different core
 configuration would invalidate the state.

@@ -1,6 +1,6 @@
 # Run014 post-F10 function-key replay
 
-`captures/run014_post_f10_functions/` is a native Engine9000 replay from
+`captures/uae/run014_post_f10_functions/` is a native Engine9000 replay from
 `build/run003_post_f10_first/state.bin` at frame 3,899. It presses and releases
 F1--F10 with 90-frame gaps, then repeats F10 after a further 180-frame gap.
 It completes at frame 5,519 with end-video SHA-256

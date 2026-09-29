@@ -58,7 +58,7 @@ It does not establish global coordinates, a coastline-pixel ownership match,
 or a complete terrain model. Its nonzero middle components are local geometry,
 not evidence against the separately proven flat placement layer.
 
-Authority: sealed `captures/run003`; ignored
+Authority: sealed `captures/uae/run003`; ignored
 `build/run003_m_map_appearance_trace/{trace.jsonl,slow.bin}`; and the
 [reproducible renderer census](run003_m_map_display_renderer_census.md), with
 the byte-exact [`$C212B0` source](../../source_amiga/observed/submit_offset_pair_segments.asm).

@@ -12,7 +12,7 @@ python scripts/build_scripted_flight_run.py
 
 It restores the verified in-flight frame-600 state and emits native
 `E9K_INPUT_V1` key transitions, avoiding the unreliable Windows frontend input
-path. Results are in `captures/run013_scripted/` and
+path. Results are in `captures/uae/run013_scripted/` and
 `analysis/run013_scripted.md`.
 
 1. Press F1 through F10 once each, separately.

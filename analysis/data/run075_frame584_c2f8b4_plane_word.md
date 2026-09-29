@@ -25,6 +25,6 @@ later run075 lane evidence without treating the original pointers as C buffer
 addresses.
 
 Authority: `build/run075_frame580_c2f8b4_trace/trace.jsonl`, captured from
-`captures/run075/restored-state.bin` and `captures/run075/playback.e9k` with a
+`captures/uae/run075/restored-state.bin` and `captures/uae/run075/playback.e9k` with a
 breakpoint at `$C2F8B4`, armed at frame 580. The breakpoint was reached at
 frame 584.

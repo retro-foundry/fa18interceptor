@@ -6,7 +6,7 @@ yet a proof of player position or orientation.
 Authority is the sealed run060 replay, bounded at the direct publisher arm:
 
 ```text
-python scripts/trace_from_breakpoint.py --restore captures/run060/restored-state.bin --playback captures/run060/playback.e9k --address 0xC1C5E0 --arm-frame 8241 --return-pc 0xC0F036 --frames 8260 --max-instructions 100 --ignore-future-input --output build/run060_frame8241_c1c5e0_projection_packet
+python scripts/trace_from_breakpoint.py --restore captures/uae/run060/restored-state.bin --playback captures/uae/run060/playback.e9k --address 0xC1C5E0 --arm-frame 8241 --return-pc 0xC0F036 --frames 8260 --max-instructions 100 --ignore-future-input --output build/run060_frame8241_c1c5e0_projection_packet
 ```
 
 Recorded input is delivered normally before the breakpoint. The publisher

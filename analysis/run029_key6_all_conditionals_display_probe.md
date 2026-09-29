@@ -1,6 +1,6 @@
 # Run029 controlled selectable-label display probe
 
-Authority: sealed `captures/run029/initial_state.bin` and the controlled
+Authority: sealed `captures/uae/run029/initial_state.bin` and the controlled
 key-6 prefix `build/run029_key6_prefix.e9k`. No captured input or authority
 file was modified.
 

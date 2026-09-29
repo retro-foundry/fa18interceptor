@@ -1,6 +1,6 @@
 # Run 024 qualification-selection chain
 
-Authority: sealed `captures/run024/playback.e9k`, plus bounded no-future-input
+Authority: sealed `captures/uae/run024/playback.e9k`, plus bounded no-future-input
 traces made from its frame-584 prefix using `scripts/clip_replay.py` and
 `scripts/trace_from_breakpoint.py`.
 

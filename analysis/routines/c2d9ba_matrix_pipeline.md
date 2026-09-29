@@ -6,7 +6,7 @@ identified as camera, player, AI, or renderer state.
 
 ## Evidence packet
 
-- No-input `start_demo` replay from `captures/baseline_menu/state.bin`.
+- No-input `start_demo` replay from `captures/uae/baseline_menu/state.bin`.
 - Breakpoint `$C2D9BA`, hit at frame 608; observed return `$C2D9A8`.
 - 433 instructions with no input after the breakpoint.
 - P-code at `pcode/raw/no_key_c2d9ba/`: 389 observed RAM starts, 3,088

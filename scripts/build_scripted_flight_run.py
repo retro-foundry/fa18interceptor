@@ -17,7 +17,7 @@ def key_events(frame, key):
 
 
 def main():
-    run = ROOT / 'captures' / NAME
+    run = ROOT / 'captures' / 'uae' / NAME
     if run.exists():
         raise FileExistsError(f'{run} already exists')
     run.mkdir()

@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SAMPLES = (
-    ("baseline menu", ROOT / "captures" / "baseline_menu" / "slow.bin"),
+    ("baseline menu", ROOT / "captures" / "uae" / "baseline_menu" / "slow.bin"),
     ("attract frame 600", ROOT / "build" / "attract_focus_600" / "slow.bin"),
     ("attract frame 1800", ROOT / "build" / "attract_focus_1800" / "slow.bin"),
     ("Golden Gate frame 12000", ROOT / "build" / "run031_frame12000_golden_gate_c1f6f8_probe" / "slow.bin"),

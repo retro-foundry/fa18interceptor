@@ -1,6 +1,6 @@
 # run075 frame-230 demonstration selection
 
-Authority: sealed `captures/run075` (canonical restore SHA-256
+Authority: sealed `captures/uae/run075` (canonical restore SHA-256
 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`),
 bounded direct-core traces in `build/port_run075_c1bd78_trace/` and
 `build/port_run075_c0fd10_trace/`, full-frame word samples in
@@ -108,8 +108,8 @@ helpers **dataflow**.
 
 ## Reproduce the bounded packets
 
-Use the sealed `captures/run075/restored-state.bin` and
-`captures/run075/playback.e9k` with `scripts/trace_replay_breakpoint.py`.
+Use the sealed `captures/uae/run075/restored-state.bin` and
+`captures/uae/run075/playback.e9k` with `scripts/trace_replay_breakpoint.py`.
 The entry/arm-frame/instruction triples for the saved packets are:
 
 | Output directory | Breakpoint | Arm frame | Instructions |

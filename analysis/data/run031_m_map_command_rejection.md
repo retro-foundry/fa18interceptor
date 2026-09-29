@@ -15,7 +15,7 @@ frames:
 
 These must not be used as M-map coastline or landmark-position captures. The
 frame-13,200 checkpoint was rebuilt by a normal replay of sealed
-`captures/run031/playback.e9k`; all three tests use the same relative
+`captures/uae/run031/playback.e9k`; all three tests use the same relative
 `E9K_INPUT_V1` key-109 press/release that opens the map from run033's Golden
 Gate checkpoint.
 

@@ -61,6 +61,6 @@ frame 4,000 through 7,000. It is **not** the controlled same-bearing approach
 required for an LOD conclusion. The static multi-tier terrain-origin threshold
 policy remains a candidate mechanism only.
 
-Authority: sealed `captures/run038`; ignored replay artifacts
+Authority: sealed `captures/uae/run038`; ignored replay artifacts
 `build/run038_bridge_keyframes/`, `build/run038_bridge_red.json`, and
 `build/run038_frame{06250,06500}_12f_trace/`.

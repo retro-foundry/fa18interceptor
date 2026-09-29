@@ -27,7 +27,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--invocations", type=Path,
                         default=ROOT / "analysis/data/run041_descriptor_stage_invocations.json")
-    parser.add_argument("--slow", type=Path, default=ROOT / "captures/baseline_menu/slow.bin")
+    parser.add_argument("--slow", type=Path, default=ROOT / "captures/uae/baseline_menu/slow.bin")
     parser.add_argument("--output", type=Path,
                         default=ROOT / "analysis/data/run041_detail_selector_decisions.json")
     args = parser.parse_args()

@@ -1,6 +1,6 @@
 # Run060 text-onset native state delta
 
-Authority: two fresh native checkpoint captures from sealed `captures/run060`:
+Authority: two fresh native checkpoint captures from sealed `captures/uae/run060`:
 GUI frame 9,285 (the last sampled frame with no measured result-text pixels)
 and GUI frame 9,290 (the first sampled frame with 28 such pixels).  The
 visual boundary is documented in [run060 qualification-text onset](run060_qualification_text_onset.md).
@@ -8,9 +8,9 @@ visual boundary is documented in [run060 qualification-text onset](run060_qualif
 Reproduce the state boundary without changing the sealed recording:
 
 ```powershell
-python scripts/capture_run_checkpoint.py --run captures/run060 --frame 9285 `
+python scripts/capture_run_checkpoint.py --run captures/uae/run060 --frame 9285 `
   --output build/run060_frame09285_checkpoint
-python scripts/capture_run_checkpoint.py --run captures/run060 --frame 9290 `
+python scripts/capture_run_checkpoint.py --run captures/uae/run060 --frame 9290 `
   --output build/run060_frame09290_checkpoint
 python scripts/engine9000_bridge.py --restore build/run060_frame09285_checkpoint/frame_09285_state.bin `
   --frames 0 --output build/run060_frame09285_slow

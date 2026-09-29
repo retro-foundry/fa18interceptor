@@ -3,7 +3,7 @@
 Classification: **complete structural packet**. This call immediately
 precedes the `$C15DB2 -> $C15D96` outer-loop back-edge.
 
-- Restore: `captures/baseline_menu/state.bin`.
+- Restore: `captures/uae/baseline_menu/state.bin`.
 - Playback: `local/start_demo.e9k`; no input follows the armed frame.
 - Breakpoint: `$C1612C`, armed at frame 600 and hit at frame 607.
 - Exit: `$C15DB2` after 1,022 stepped instructions.

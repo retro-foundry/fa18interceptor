@@ -42,7 +42,7 @@ int main(void) {
     fclose(file);
     Events events = {{0}, 0};
     size_t count = 0;
-    if (fa18_replay_read_events("../../captures/run075/playback.e9k", collect,
+    if (fa18_replay_read_events("../../captures/uae/run075/playback.e9k", collect,
                                 &events, &count) != 0 || count != 87 ||
         events.count != 87 || events.event[0].frame != 41 ||
         events.event[0].kind != FA18_REPLAY_FRAME_EVENT) {
@@ -56,7 +56,7 @@ int main(void) {
         return 1;
     }
     TickRanges ticks = {{0}, 0};
-    if (fa18_replay_read_tick_ranges("../../captures/run075/timing.e9t",
+    if (fa18_replay_read_tick_ranges("../../captures/uae/run075/timing.e9t",
                                      collect_tick_range, &ticks, NULL) != 0 ||
         ticks.count != 9 || ticks.range[0].first_frame != 235 ||
         ticks.range[1].last_frame != 240 || ticks.range[2].ticks != 6 ||
@@ -75,7 +75,7 @@ int main(void) {
         return 1;
     }
     EventKinds run060 = {0, 0};
-    if (fa18_replay_read_events("../../captures/run060/playback.e9k",
+    if (fa18_replay_read_events("../../captures/uae/run060/playback.e9k",
                                 collect_run060, &run060, NULL) != 0 ||
         run060.count == 0 || !run060.saw_j) {
         fputs("run060 joystick replay parse contract failed\n", stderr);

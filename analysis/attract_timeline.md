@@ -1,6 +1,6 @@
 # Coarse deterministic attract-mode timeline
 
-All points replay `captures/attract_run001/playback.e9k` from the same preserved
+All points replay `captures/uae/attract_run001/playback.e9k` from the same preserved
 menu state. The only recording events select Demonstration Flight at frames 60
 and 64. These are full-frame samples, not instruction traces.
 

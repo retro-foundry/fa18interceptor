@@ -41,7 +41,7 @@ only connected to generic mutable renderer scratch and blitter helpers.
 Consequently, the safe conclusion is shared timing/pipeline activity, not a
 map-data extraction or a static-coastline source claim.
 
-Authority: sealed `captures/run003`, normal-frame visibility timing recorded
+Authority: sealed `captures/uae/run003`, normal-frame visibility timing recorded
 in [the M visual probe](run003_m_map_visual_probe.md), and the deterministic
 `build/run003_m_map_appearance_trace/trace.jsonl` with its paired slow-RAM
 snapshot.  Reproduce the selector export:

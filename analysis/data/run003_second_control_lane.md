@@ -2,8 +2,8 @@
 
 Classification: **scenario-backed behavioural dataflow**.
 
-Authority: sealed `captures/run003/playback.e9k`, restored from
-`captures/run003/initial_state.bin`.  The bounded trace is retained in ignored
+Authority: sealed `captures/uae/run003/playback.e9k`, restored from
+`captures/uae/run003/initial_state.bin`.  The bounded trace is retained in ignored
 build output at `build/run003_frame5360_axis_y_update/`; it hit `$C1B410` on
 absolute replay frame 5,360, executed 23 instructions, and stopped at the
 local return (`$C1B4CE`).  Input through the breakpoint was delivered by the

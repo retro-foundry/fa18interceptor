@@ -1,6 +1,6 @@
 # Mission-selection F1/F2 baseline probe
 
-Two sealed recordings start from `captures/baseline_menu/state.bin` and use
+Two sealed recordings start from `captures/uae/baseline_menu/state.bin` and use
 the same initial configuration.  They test only the menu route; neither is a
 mission-selection success oracle.
 

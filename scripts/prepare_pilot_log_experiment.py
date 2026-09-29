@@ -16,11 +16,11 @@ def sha(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--name', required=True,
-                        help='One directory name below captures/pilot_log_experiments')
+                        help='One directory name below captures/uae/pilot_log_experiments')
     args = parser.parse_args()
     if Path(args.name).name != args.name:
         raise ValueError('--name must be one directory component')
-    output = ROOT / 'captures' / 'pilot_log_experiments' / args.name
+    output = ROOT / 'captures' / 'uae' / 'pilot_log_experiments' / args.name
     if output.exists():
         raise FileExistsError(output)
     source_disk = ROOT / 'local' / 'media' / 'fa18.adf'

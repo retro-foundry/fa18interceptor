@@ -20,6 +20,6 @@ the caller has established the lane addresses. The mask algebra is the existing
 boundary and does not claim that the CPU addresses are native page offsets.
 
 Authority: `build/run075_frame540_c330fe_trace/trace.jsonl`, captured from
-`captures/run075/restored-state.bin` and `captures/run075/playback.e9k` with a
+`captures/uae/run075/restored-state.bin` and `captures/uae/run075/playback.e9k` with a
 breakpoint at `$C330FE`, armed at frame 540. The trace reached the breakpoint
 at frame 584 and was bounded to 1,200 instructions.

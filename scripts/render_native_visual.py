@@ -48,8 +48,8 @@ def main() -> None:
     parser.add_argument("--config", default="Release")
     parser.add_argument("--build-dir", type=Path, default=ROOT / "build/port-native")
     parser.add_argument("--adf", type=Path)
-    parser.add_argument("--replay", type=Path, default=ROOT / "captures/run075/playback.e9k")
-    parser.add_argument("--timing", type=Path, default=ROOT / "captures/run075/timing.e9t")
+    parser.add_argument("--replay", type=Path, default=ROOT / "captures/uae/run075/playback.e9k")
+    parser.add_argument("--timing", type=Path, default=ROOT / "captures/uae/run075/timing.e9t")
     parser.add_argument("--render-active-scene", action="store_true",
                         help="run the existing capture-free native diagnostic at the final frame")
     parser.add_argument("--bootstrap-render-fixture", type=Path,

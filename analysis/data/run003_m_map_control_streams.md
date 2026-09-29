@@ -31,7 +31,7 @@ that a single uninterrupted map video frame submitted exactly these six
 streams. Nor does a control stream by itself prove an individual bitplane
 pixel or immutable vertex list.
 
-Authority: sealed `captures/run003`; `build/run003_m_visual_5/state.bin`; and
+Authority: sealed `captures/uae/run003`; `build/run003_m_visual_5/state.bin`; and
 ignored `build/run003_m_map_control_stream_entries/control_stream_entries.json`.
 
 Reproduce:
@@ -39,7 +39,7 @@ Reproduce:
 ```text
 python scripts/collect_control_stream_entries.py \
   --restore build/run003_m_visual_5/state.bin \
-  --config captures/run003/config.uae \
+  --config captures/uae/run003/config.uae \
   --frames 25 --max-entries 128 \
   --output build/run003_m_map_control_stream_entries
 ```

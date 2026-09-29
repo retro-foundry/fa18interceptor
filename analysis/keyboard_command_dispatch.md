@@ -3,7 +3,7 @@
 The contiguous byte-exact source span `$C1AD74-$C1C2BD` receives a raw input
 word in `D0`, applies state gates, routes accepted raw key bytes, and normally
 ends at the common queue at `$C1C23C`. It is assembled and compared directly
-with `captures/baseline_menu/slow.bin` by `scripts/verify_reconstructions.py`.
+with `captures/uae/baseline_menu/slow.bin` by `scripts/verify_reconstructions.py`.
 
 ```mermaid
 flowchart TD

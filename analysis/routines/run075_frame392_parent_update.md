@@ -8,8 +8,8 @@ Authority:
 
 ```text
 python scripts/trace_from_breakpoint.py \
-  --restore captures/run075/initial_state.bin \
-  --playback captures/run075/playback.e9k --playback-frame-offset 200 \
+  --restore captures/uae/run075/initial_state.bin \
+  --playback captures/uae/run075/playback.e9k --playback-frame-offset 200 \
   --address 0xC0F090 --arm-frame 184 --return-pc 0xC0F124 \
   --frames 200 --max-instructions 120000 --ignore-future-input \
   --output build/run075_frame384_c0f090_parent_full

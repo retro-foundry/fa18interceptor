@@ -23,4 +23,4 @@ as a proven complete bridge or as a repeated road-segment instance.
 
 Authority: a 128-frame replay from
 `build/run031_frame12000_golden_gate_checkpoint/state.bin`, using the recorded
-`captures/setup_gui_check/inputs.e9k` stream and an `$C1F100` breakpoint.
+`captures/uae/setup_gui_check/inputs.e9k` stream and an `$C1F100` breakpoint.

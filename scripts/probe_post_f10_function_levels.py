@@ -5,7 +5,7 @@ from pathlib import Path
 from engine9000_bridge import Engine, ROOT
 
 STATE = ROOT / 'build/run003_post_f10_first/state.bin'
-CONFIG = ROOT / 'captures/run003/config.uae'
+CONFIG = ROOT / 'captures/uae/run003/config.uae'
 
 
 def read_hex(engine, address, size):

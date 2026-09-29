@@ -6,7 +6,7 @@ flight-model identification.
 Authority is the sealed deterministic run060 replay and the bounded trace:
 
 ```text
-python scripts/trace_from_breakpoint.py --restore captures/run060/restored-state.bin --playback captures/run060/playback.e9k --address 0xC13E10 --arm-frame 8241 --return-pc 0xC25D84 --frames 8250 --max-instructions 3000 --ignore-future-input --output build/run060_frame8241_c13e10_input_trace
+python scripts/trace_from_breakpoint.py --restore captures/uae/run060/restored-state.bin --playback captures/uae/run060/playback.e9k --address 0xC13E10 --arm-frame 8241 --return-pc 0xC25D84 --frames 8250 --max-instructions 3000 --ignore-future-input --output build/run060_frame8241_c13e10_input_trace
 ```
 
 The run's recorded input is delivered in ordinary replay before the breakpoint;

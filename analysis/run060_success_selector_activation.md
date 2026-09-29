@@ -1,6 +1,6 @@
 # Run060 success-selector activation boundary
 
-Authority: adjacent native checkpoints from sealed `captures/run060`, captured
+Authority: adjacent native checkpoints from sealed `captures/uae/run060`, captured
 at GUI frames 9,284 and 9,285.  Both replay restores the canonical recording
 state SHA-256
 `760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4`.
@@ -32,9 +32,9 @@ changes are unrelated.
 ## Reproduction
 
 ```powershell
-python scripts/capture_run_checkpoint.py --run captures/run060 --frame 9284 `
+python scripts/capture_run_checkpoint.py --run captures/uae/run060 --frame 9284 `
   --output build/run060_frame09284_checkpoint
-python scripts/capture_run_checkpoint.py --run captures/run060 --frame 9285 `
+python scripts/capture_run_checkpoint.py --run captures/uae/run060 --frame 9285 `
   --output build/run060_frame09285_checkpoint
 python scripts/engine9000_bridge.py --restore build/run060_frame09284_checkpoint/frame_09284_state.bin `
   --frames 0 --output build/run060_frame09284_state_view

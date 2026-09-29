@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MEMORY = ROOT / "captures" / "baseline_menu" / "slow.bin"
+MEMORY = ROOT / "captures" / "uae" / "baseline_menu" / "slow.bin"
 TOPOLOGY = ROOT / "analysis" / "data" / "c351_c34c_face_topology.json"
 OUTPUT = ROOT / "analysis" / "plots" / "c351_c34c_static_topology_candidate.svg"
 START = 0xC3515E

@@ -1,6 +1,6 @@
 # Run062 — deterministic failed qualification return
 
-Authority: sealed `captures/run062`, pinned Engine9000 v0.62-alpha, and the
+Authority: sealed `captures/uae/run062`, pinned Engine9000 v0.62-alpha, and the
 native host-scheduler renderer/checkpoint tools. The run has 195 events, last
 input frame 2,470, and uses the same canonical boot state as run060:
 
@@ -9,7 +9,7 @@ input frame 2,470, and uses the same canonical boot state as run060:
 ```
 
 Two native restore probes reproduce that state exactly. Rendering with
-`scripts/render_run.py --run captures/run062 --output <new-directory> --every 5`
+`scripts/render_run.py --run captures/uae/run062 --output <new-directory> --every 5`
 produces 495 frames through 2,475. Frame 2,200 is the solid yellow crash
 display; frame 2,300 visibly reads `HEY ROOKIE. F/A-18'S DON'T GROW ON TREES,
 YA KNOW`; frame 2,400 is already the top-level F/A-18 menu. The terminal frame

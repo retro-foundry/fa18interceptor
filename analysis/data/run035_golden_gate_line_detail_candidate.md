@@ -28,14 +28,14 @@ The contexts and their line-list records are static inline scene-control data
 inside the verified segment-42 `$C35568-$C361FF` range. They must remain
 control/topology evidence, not be decoded as a contiguous map-vertex table.
 
-Authority: sealed `captures/run035`; red-pixel measurements in
+Authority: sealed `captures/uae/run035`; red-pixel measurements in
 `run035_golden_gate_red_viewport_interval.json`; and ignored replay-preserved
 collector outputs `build/run035_red_{4251,6999,7999}_line_entries/`.
 
 ```text
 python scripts/collect_blitter_line_entries.py \
-  --restore captures/run035/initial_state.bin \
-  --playback captures/run035/playback.e9k \
+  --restore captures/uae/run035/initial_state.bin \
+  --playback captures/uae/run035/playback.e9k \
   --arm-frame 6999 --frames 6999 --max-lines 512 \
   --output build/run035_red_6999_line_entries
 ```

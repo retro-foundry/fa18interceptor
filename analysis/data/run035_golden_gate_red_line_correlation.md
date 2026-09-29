@@ -34,15 +34,15 @@ timing, not a claim that the screenshot at replay frame 4,250 was drawn by a
 single uninterrupted invocation. The static context plus exact screen-space
 overlap are the evidence used here.
 
-Authority: sealed `captures/run035`; `build/run035_red_4250/chip.bin`; the
+Authority: sealed `captures/uae/run035`; `build/run035_red_4250/chip.bin`; the
 landmark measurement in `run035_golden_gate_red_viewport_interval.json`; and
 ignored collector output
 `build/run035_red_4251_line_entries/blitter_line_entries.json`.
 
 ```text
 python scripts/collect_blitter_line_entries.py \
-  --restore captures/run035/initial_state.bin \
-  --playback captures/run035/playback.e9k \
+  --restore captures/uae/run035/initial_state.bin \
+  --playback captures/uae/run035/playback.e9k \
   --arm-frame 4251 --frames 4251 --max-lines 512 \
   --output build/run035_red_4251_line_entries
 ```

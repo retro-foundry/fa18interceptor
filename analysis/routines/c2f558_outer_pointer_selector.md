@@ -2,7 +2,7 @@
 
 Classification: **dataflow**: complete per-iteration child of the outer loop.
 
-- Restore: `captures/baseline_menu/state.bin`; playback `local/start_demo.e9k`.
+- Restore: `captures/uae/baseline_menu/state.bin`; playback `local/start_demo.e9k`.
 - Breakpoint `$C2F558`, armed at frame 600, hit at frame 607.
 - Returns to `$C15D9C` in nine instructions; no later input occurs while
   stepping.

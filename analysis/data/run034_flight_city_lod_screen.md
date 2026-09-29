@@ -6,7 +6,7 @@ it is not a terrain export, global-coordinate recovery, or an LOD proof.
 
 ## Authority
 
-`captures/run034` is sealed with 538 recorded events through replay frame
+`captures/uae/run034` is sealed with 538 recorded events through replay frame
 10,477. The user created an Engine9000 GUI save at frame 4,331 after takeoff.
 `scripts/extract_e9k_snapshot_state.py` extracts its serialized state without
 modifying the capture; a one-frame restore accepted it and produced a flight

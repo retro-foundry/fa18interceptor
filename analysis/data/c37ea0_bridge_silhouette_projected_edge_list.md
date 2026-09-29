@@ -7,7 +7,7 @@ identity is not yet user-confirmed for this frame.
 
 The six list bytes match original Hunk `CODE` segment 49 at payload offset
 `$510`. Its resulting runtime payload base is `$C37990`. Comparing the entire
-1,512-byte payload with `captures/baseline_menu/slow.bin` gives zero
+1,512-byte payload with `captures/uae/baseline_menu/slow.bin` gives zero
 non-relocation mismatches; all 20 relocation sites consistently resolve their
 target segment 46 to `$C37218`. This is therefore a verified runtime placement
 of the enclosing CODE Hunk, while this six-byte range remains separately

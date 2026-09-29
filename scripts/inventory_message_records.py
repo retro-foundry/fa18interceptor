@@ -29,7 +29,7 @@ def payload_until_nul(data, address):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--slow", type=Path,
-                        default=Path("captures/baseline_menu/slow.bin"))
+                        default=Path("captures/uae/baseline_menu/slow.bin"))
     parser.add_argument("--first-code", type=int, default=1)
     parser.add_argument("--last-code", type=int, default=110)
     parser.add_argument("--output", type=Path, required=True)

@@ -8,7 +8,7 @@
     "original_payload_file_offset": "$40060"
   },
   "snapshots": [
-    "captures/baseline_menu/slow.bin",
+    "captures/uae/baseline_menu/slow.bin",
     "build/run003_m_map_appearance_trace/slow.bin",
     "build/run033_placement_bulk_404_trace/slow.bin",
     "build/run033_frame05250_placement_thirtyframe_trace/slow.bin",

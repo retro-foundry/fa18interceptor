@@ -37,7 +37,7 @@ not make a distance/LOD claim.  Most importantly, its direct-blitter route is
 not evidence that the red bridge feature was filled: the one fully bounded
 polygon is in another part of the viewport.
 
-Authority: sealed `captures/run036`; the replay-preserved ignored trace
+Authority: sealed `captures/uae/run036`; the replay-preserved ignored trace
 `build/run036_7000_c2ff48_submission_trace_no_future/` (entry snapshot SHA-256
 `42e066a43e21d0225ea536c6217523789ac613a97277d6532956beb007dfcbb1`).
 
@@ -60,9 +60,9 @@ Reproduce:
 
 ```text
 python scripts/trace_from_breakpoint.py \
-  --restore captures/run036/initial_state.bin \
-  --config captures/run036/config.uae \
-  --playback captures/run036/playback.e9k \
+  --restore captures/uae/run036/initial_state.bin \
+  --config captures/uae/run036/config.uae \
+  --playback captures/uae/run036/playback.e9k \
   --address 0xC2FF48 --arm-frame 7000 --return-pc 0xC24D66 \
   --frames 7002 --max-instructions 10000 --ignore-future-input \
   --output build/run036_7000_c2ff48_submission_trace_no_future
@@ -72,9 +72,9 @@ The same-frame census is reproduced with:
 
 ```text
 python scripts/engine9000_bridge.py \
-  --restore captures/run036/initial_state.bin \
-  --config captures/run036/config.uae \
-  --playback captures/run036/playback.e9k \
+  --restore captures/uae/run036/initial_state.bin \
+  --config captures/uae/run036/config.uae \
+  --playback captures/uae/run036/playback.e9k \
   --frames 6999 --trace-frames 1 \
   --output build/run036_frame7000_instruction_trace
 ```

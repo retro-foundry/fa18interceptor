@@ -32,4 +32,4 @@ Magenta is the rendered trace annotation and yellow marks its endpoints; neither
 colour is part of the original frame. The overlay makes the segment's position
 inspectable but does not strengthen the write-attribution claim above.
 
-Authority: sealed `captures/run003`; `build/run003_m_visual_5/state.bin`; and ignored `build/run003_m_map_c36214_stream_trace/selected_stream_trace.jsonl` (800 instructions from the exact `$C36214` entry).
+Authority: sealed `captures/uae/run003`; `build/run003_m_visual_5/state.bin`; and ignored `build/run003_m_map_c36214_stream_trace/selected_stream_trace.jsonl` (800 instructions from the exact `$C36214` entry).

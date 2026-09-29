@@ -93,7 +93,7 @@ def report_coverage(covered, slices):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--snapshot', type=Path,
-                        default=ROOT / 'captures' / 'baseline_menu')
+                        default=ROOT / 'captures' / 'uae' / 'baseline_menu')
     parser.add_argument('--source-dir', type=Path,
                         default=ROOT / 'source_amiga' / 'observed')
     parser.add_argument('--no-coverage', action='store_true',

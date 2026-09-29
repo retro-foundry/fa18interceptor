@@ -2,12 +2,12 @@
 
 Classification: **scenario timing evidence; not a native scheduler contract**.
 
-The sealed `captures/run075` replay was sampled after every Engine9000
+The sealed `captures/uae/run075` replay was sampled after every Engine9000
 full-frame call with:
 
 ```text
-python scripts/sample_replay_memory.py --restore captures/run075/initial_state.bin \
-  --playback captures/run075/playback.e9k --config captures/run075/config.uae \
+python scripts/sample_replay_memory.py --restore captures/uae/run075/initial_state.bin \
+  --playback captures/uae/run075/playback.e9k --config captures/uae/run075/config.uae \
   --frame-offset 200 --frames 80 --word 0xC45AD6 --word 0xC458A6 --word 0xC1820C \
   --word 0xC1820E --sample-every 1 --sample-first 228 --sample-last 280 \
   --input-kind K --output build/port_run075_menu_tick_words_offset.json

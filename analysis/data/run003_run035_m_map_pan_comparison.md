@@ -29,7 +29,7 @@ workload (`$C3515A`) that draws a display/grid-like line set, but no transform
 entry. It is therefore not a terrain-source or LOD comparison; see the
 [panned-map control probe](run035_m_map_panned_control_probe.md).
 
-Authority: sealed `captures/run003` and `captures/run035`; ignored
+Authority: sealed `captures/uae/run003` and `captures/uae/run035`; ignored
 reproduction artifacts `build/run003_m_visual_30/` and
 `build/run035_postflight_m_8895/`; machine-readable measurement in
 `run003_run035_m_map_pan_comparison.json`.

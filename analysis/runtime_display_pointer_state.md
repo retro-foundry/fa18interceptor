@@ -1,6 +1,6 @@
 # Runtime display-pointer state
 
-Scope: baseline menu snapshot `captures/baseline_menu/slow.bin`, with the
+Scope: baseline menu snapshot `captures/uae/baseline_menu/slow.bin`, with the
 active display allocation cross-checked against `cockpit_bitplane_assets.md`.
 This is a data classification report, not a claim that the surrounding record
 is a particular AmigaOS structure.

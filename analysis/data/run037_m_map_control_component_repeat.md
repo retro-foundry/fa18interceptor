@@ -22,7 +22,7 @@ identified map line component. Their recurrence after a different ordinary
 flight position establishes reusable map-display control data, not spatial
 terrain payload.
 
-Authority: sealed `captures/run037`; source-bounded capture
+Authority: sealed `captures/uae/run037`; source-bounded capture
 `build/run037_m_map_control_component_geometry/instance_geometry.json` from
 the stable map checkpoint. The collector keeps only geometry reached between
 consecutive `$C1F4AC` entries; its line triples are mutable renderer

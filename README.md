@@ -33,8 +33,8 @@ Play run075 from the menu (click the window to capture the mouse, F12 releases
 it):
 
 ```sh
-build/recomp-cmake/Release/fa18_recomp.exe --state captures/run075/restored-state.bin \
-    --rom local/system/kick13.rom --replay captures/run075/playback.e9k --window --frames 0
+build/recomp-cmake/Release/fa18_recomp.exe --state captures/uae/run075/restored-state.bin \
+    --rom local/system/kick13.rom --replay captures/uae/run075/playback.e9k --window --frames 0
 ```
 
 Check the work:
@@ -79,9 +79,9 @@ recordings) are not in git.
 
 ```powershell
 python scripts/record_run.py --name run001                 # play in Engine9000
-python scripts/finalize_run.py captures/run001             # seal it
-python scripts/engine9000_bridge.py --restore captures/run001/initial_state.bin `
-  --config captures/run001/config.uae --playback captures/run001/playback.e9k `
+python scripts/finalize_run.py captures/uae/run001             # seal it
+python scripts/engine9000_bridge.py --restore captures/uae/run001/initial_state.bin `
+  --config captures/uae/run001/config.uae --playback captures/uae/run001/playback.e9k `
   --frames 300 --output build/run001_first300              # replay, snapshot, trace
 ```
 

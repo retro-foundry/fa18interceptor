@@ -2,7 +2,7 @@
 
 ## Evidence
 
-`captures/baseline_menu/screen.png` is byte-for-byte identical to the host
+`captures/uae/baseline_menu/screen.png` is byte-for-byte identical to the host
 oracle image `build/port_run075_demo_oracle/200.png`. The game image is the
 320x200 region at host coordinates `x=40..679`, `y=16..215`, with each game
 pixel doubled horizontally. Sampling the left pixel of each pair gives the
@@ -45,8 +45,8 @@ unlocked.
 
 ## Reproduction
 
-The comparison used `captures/baseline_menu/chip.bin` and
-`captures/baseline_menu/screen.png`. The six sampled colours were mapped to
+The comparison used `captures/uae/baseline_menu/chip.bin` and
+`captures/uae/baseline_menu/screen.png`. The six sampled colours were mapped to
 RGB4 by dividing each 8-bit channel by 17. Matching each candidate plane was
 done by packing the corresponding colour subset MSB-first, row by row, and
 searching the Chip-RAM snapshot for the complete 8,000-byte result.

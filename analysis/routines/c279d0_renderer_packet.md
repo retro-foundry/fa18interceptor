@@ -6,7 +6,7 @@ integration.
 Authority is the sealed run060 qualification replay:
 
 ```text
-python scripts/trace_from_breakpoint.py --restore captures/run060/restored-state.bin --playback captures/run060/playback.e9k --address 0xC279D0 --arm-frame 8241 --return-pc 0xC0F0C8 --frames 8260 --max-instructions 5000 --ignore-future-input --output build/run060_frame8241_c279d0_renderer_packet
+python scripts/trace_from_breakpoint.py --restore captures/uae/run060/restored-state.bin --playback captures/uae/run060/playback.e9k --address 0xC279D0 --arm-frame 8241 --return-pc 0xC0F0C8 --frames 8260 --max-instructions 5000 --ignore-future-input --output build/run060_frame8241_c279d0_renderer_packet
 ```
 
 The breakpoint hits at replay frame 8,241 and returns to its caller at

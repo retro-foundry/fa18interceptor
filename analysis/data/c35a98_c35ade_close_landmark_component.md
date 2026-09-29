@@ -40,7 +40,7 @@ The portable direct-input export is
 Its strict boundary keeps static inputs separate from the following control
 words and all mutable renderer workspaces.
 
-Authority: sealed `captures/run041`; ignored
+Authority: sealed `captures/uae/run041`; ignored
 `build/run041_frame06250_12f_trace_retry/trace.jsonl`,
 `build/run041_large_view_matrix_instances/instance_geometry.json`, and
 `build/run041_red_6250_line_entries/blitter_line_entries.json`, plus

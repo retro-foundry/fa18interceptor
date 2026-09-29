@@ -1,6 +1,6 @@
 # Run029 controlled key-6 selectable-missions probe
 
-Authority: sealed `captures/run029/playback.e9k` plus a controlled derivative
+Authority: sealed `captures/uae/run029/playback.e9k` plus a controlled derivative
 that changes only its frame-266/269 key-5 rows (key/character 53) to digit 6
 (key/character 54).  The original capture is unchanged.
 

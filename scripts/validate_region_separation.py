@@ -142,7 +142,7 @@ def main() -> None:
     # wire format and that it is an unchanged static payload in every saved
     # scene state used for geometry-boundary comparison.
     edge_snapshots = (
-        ROOT / "captures" / "baseline_menu" / "slow.bin",
+        ROOT / "captures" / "uae" / "baseline_menu" / "slow.bin",
         ROOT / "build" / "attract_focus_600" / "slow.bin",
         ROOT / "build" / "attract_focus_1800" / "slow.bin",
         ROOT / "build" / "run031_frame12000_golden_gate_c1f6f8_probe" / "slow.bin",

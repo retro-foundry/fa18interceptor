@@ -32,7 +32,7 @@ def bridge(run: Path, frames: int, output: Path, trace_frames: int = 0) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--run", type=Path, default=ROOT / "captures/run075")
+    parser.add_argument("--run", type=Path, default=ROOT / "captures/uae/run075")
     parser.add_argument("--start", type=int, default=392, help="snapshot frame the native run starts from")
     parser.add_argument("--frames", type=int, default=10)
     parser.add_argument("--no-recomp", action="store_true", help="interpreter-only baseline")

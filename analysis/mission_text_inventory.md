@@ -1,6 +1,6 @@
 # Mission/menu text inventory
 
-Authority: `captures/baseline_menu/slow.bin`, reproduced by
+Authority: `captures/uae/baseline_menu/slow.bin`, reproduced by
 `python scripts/inventory_mission_text.py`.  This is a text-location and
 ordering inventory; it does not identify the code that selects a message or
 any persistent mission-status byte.

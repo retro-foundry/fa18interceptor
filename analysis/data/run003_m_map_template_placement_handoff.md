@@ -59,7 +59,7 @@ walker with static segment-42/43 control streams. That establishes map-mode
 segment-43 stream is followed through its transformed-triple and
 projected-segment route in [the `$C36214` control trace](run003_m_map_c36214_control_trace.md).
 
-Authority: sealed `captures/run003`; `build/run003_m_visual_5/state.bin`; the
+Authority: sealed `captures/uae/run003`; `build/run003_m_visual_5/state.bin`; the
 deterministic `build/run003_m_map_appearance_25f_trace` trace/snapshots; and
 the independently normal-frame `build/run003_m5_noinput_25` snapshot. The
 trace uses no input after restoring the post-`M` checkpoint.
@@ -69,7 +69,7 @@ Reproduce:
 ```text
 python scripts/engine9000_bridge.py \
   --restore build/run003_m_visual_5/state.bin \
-  --config captures/run003/config.uae \
+  --config captures/uae/run003/config.uae \
   --frames 0 --trace-frames 25 \
   --output build/run003_m_map_appearance_25f_trace
 

@@ -14,7 +14,7 @@ from make_gui_snapshot import package
 
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE = ROOT / 'build/engine9000-replay'
-BASE = ROOT / 'captures/baseline_menu'
+BASE = ROOT / 'captures/uae/baseline_menu'
 DEFAULT_RESTORE_FRAME = 120
 
 
@@ -71,7 +71,7 @@ def main():
     engine = ENGINE / 'e9k-debugger.exe'
     if not engine.is_file():
         raise FileNotFoundError(f'deterministic replay engine missing: {engine}')
-    run = ROOT / 'captures' / args.name
+    run = ROOT / 'captures' / 'uae' / args.name
     run.mkdir(parents=True, exist_ok=False)
     for sub in ['saves', 'appdata']:
         (run / sub).mkdir()

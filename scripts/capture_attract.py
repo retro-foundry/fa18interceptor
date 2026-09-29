@@ -7,7 +7,7 @@ import shutil
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / 'captures' / 'baseline_menu'
+BASE = ROOT / 'captures' / 'uae' / 'baseline_menu'
 
 
 def sha(path):
@@ -24,7 +24,7 @@ def main():
         raise ValueError('Run name must be one directory component')
     if args.frames < 600:
         raise ValueError('Use at least 600 frames so the selection reaches flight')
-    capture = ROOT / 'captures' / args.name
+    capture = ROOT / 'captures' / 'uae' / args.name
     if capture.exists():
         raise FileExistsError(capture)
     recording = ROOT / 'local' / 'start_demo.e9k'

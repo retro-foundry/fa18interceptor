@@ -54,7 +54,7 @@ the eight red-raster-correlated line calls retain `$C35596/$C355CE` contexts.
 It supports coexistence of both primitive routes without supporting a
 line-to-polygon bridge transition.
 
-Authority: sealed `captures/run036`; keyframes in ignored
+Authority: sealed `captures/uae/run036`; keyframes in ignored
 `build/run036_keyframes`; replay-preserved ignored collector outputs
 `build/run036_{4999,5999,6999,7000}_polygon_submissions` and
 `build/run036_7000_line_entries`.
@@ -63,9 +63,9 @@ Reproduce the decisive large-span line sample:
 
 ```text
 python scripts/collect_blitter_line_entries.py \
-  --restore captures/run036/initial_state.bin \
-  --config captures/run036/config.uae \
-  --playback captures/run036/playback.e9k \
+  --restore captures/uae/run036/initial_state.bin \
+  --config captures/uae/run036/config.uae \
+  --playback captures/uae/run036/playback.e9k \
   --arm-frame 7000 --frames 7002 --max-lines 128 \
   --output build/run036_7000_line_entries
 ```

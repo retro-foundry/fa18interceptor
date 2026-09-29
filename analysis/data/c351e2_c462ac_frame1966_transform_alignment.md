@@ -9,7 +9,7 @@ At the post-frame snapshot, applying the sampled `$C45BC6` nine-word matrix to t
 [Machine-readable residual report](c351e2_c462ac_frame1966_transform_alignment.json) records every source, expected triple, sampled output, and residual. Reproduce it with:
 
 ```powershell
-python scripts\validate_static_transform_alignment.py --samples build\run031_frame1966_c462ac_and_matrix_samples.json --memory captures\baseline_menu\slow.bin --source 0xC351E2 --output 0xC462AC --matrix 0xC45BC6 --count 14 --tolerance 4 --report analysis\data\c351e2_c462ac_frame1966_transform_alignment.json
+python scripts\validate_static_transform_alignment.py --samples build\run031_frame1966_c462ac_and_matrix_samples.json --memory captures\uae\baseline_menu\slow.bin --source 0xC351E2 --output 0xC462AC --matrix 0xC45BC6 --count 14 --tolerance 4 --report analysis\data\c351e2_c462ac_frame1966_transform_alignment.json
 ```
 
 The sample JSON retains the explicit output/matrix word list. The result is a reproducible numerical comparison, not a source-to-output provenance claim.

@@ -7,7 +7,7 @@ input subsystem.
 
 ## Evidence packet
 
-- Restore: `captures/baseline_menu/state.bin`.
+- Restore: `captures/uae/baseline_menu/state.bin`.
 - Playback: `local/attract_hud_toggle.e9k`; the `H` press and release were
   delivered during ordinary replay before the breakpoint.
 - Breakpoint: `$C0F3C4`, armed at capture frame 450, hit at frame 455.

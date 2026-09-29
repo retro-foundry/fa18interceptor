@@ -87,7 +87,7 @@ def main():
     lines += ["", "## Result", "",
               "The sampled `$C45C3E/$C45C42/$C45C46` selector-origin triple, `$C457B6` adjustment mode, `$C458AE` detail mode, `$C458B2` detail index, and `$C45785` enable byte are identical at frames 5,000, 5,750, 6,000, and 6,250. The producer range does not execute in either bounded trace, while the downstream template-selection region executes in both.",
               "", "This rules out a change in these sampled selector-origin inputs as the cause of the run041 source-family change. It does **not** measure aircraft-to-landmark range, establish a renderer selector threshold, isolate all camera state, or prove a physical-distance LOD rule.",
-              "", "Authority: sealed `captures/run041` replay checkpoints and the listed ignored build artifacts. Reproduce with `python scripts/summarize_run041_origin_invariance.py`.", ""]
+              "", "Authority: sealed `captures/uae/run041` replay checkpoints and the listed ignored build artifacts. Reproduce with `python scripts/summarize_run041_origin_invariance.py`.", ""]
     args.report_output.write_text("\n".join(lines), encoding="utf-8")
     print(f"wrote {args.json_output.relative_to(ROOT)}")
     print(f"wrote {args.report_output.relative_to(ROOT)}")

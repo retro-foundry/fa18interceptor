@@ -14,7 +14,7 @@ byte is zero. Its relevant header predicates are byte `+$01` bit 6 and:
 ## Direct-core restore observations
 
 The in-process Engine9000 bridge restored
-`captures/run060/restored-state.bin`, applied `playback.e9k`, and sampled
+`captures/uae/run060/restored-state.bin`, applied `playback.e9k`, and sampled
 through frame 9,200 at the first four bytes of `$C46184`. The sampled changes
 establish two separate facts about that direct-core execution:
 

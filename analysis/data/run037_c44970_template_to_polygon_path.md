@@ -32,6 +32,6 @@ observed forward sequence only. It does not prove that the `$C427AD` placement
 alone owns every later submission, nor that this component corresponds to a
 particular map feature.
 
-Authority: sealed `captures/run037`; template inventory
+Authority: sealed `captures/uae/run037`; template inventory
 `analysis/data/workspace_template_copies_run037_m_map_template_to_placement_3f.json`;
 and `build/run037_c44970_descriptor_target_trace_v2/trace.jsonl`.

@@ -2,7 +2,7 @@
 
 Classification: **bounded display-pair initialization**.
 
-Authority is the cold-boot replay `captures/cold_boot_menu_init/`.  Its
+Authority is the cold-boot replay `captures/uae/cold_boot_menu_init/`.  Its
 initial state has all sixteen bytes at `$C182BA-$C182C9` zero.  During ordinary
 replay, slot zero first becomes nonzero at frame 5,926 and slot one first
 becomes nonzero at frame 7,699:
@@ -16,8 +16,8 @@ The slot-zero witness was captured with:
 
 ```text
 python scripts/trace_instruction_memory_writes.py \
-  --restore captures/cold_boot_menu_init/initial_state.bin \
-  --playback captures/cold_boot_menu_init/playback.e9k \
+  --restore captures/uae/cold_boot_menu_init/initial_state.bin \
+  --playback captures/uae/cold_boot_menu_init/playback.e9k \
   --breakpoint 0xFE5A70 --arm-frame 5926 --frames 5930 \
   --watch-address 0xC182B0 --watch-size 0x20 \
   --max-instructions 30000 --context-instructions 16 \

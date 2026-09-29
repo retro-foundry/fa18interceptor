@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MEMORY = ROOT / "captures" / "baseline_menu" / "slow.bin"
+MEMORY = ROOT / "captures" / "uae" / "baseline_menu" / "slow.bin"
 
 
 def font(size: int):

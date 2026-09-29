@@ -1,7 +1,7 @@
 # Attract-mode display packet: hardware frames 601-602
 
 Authority: `build/attract_focus_600/`, replayed from the sealed
-`captures/attract_run001` state and recording. The preceding frame-600 image is
+`captures/uae/attract_run001` state and recording. The preceding frame-600 image is
 an in-flight demonstration screen.
 
 The two-frame bounded trace contains 12,902 executed instructions, 1,527 unique

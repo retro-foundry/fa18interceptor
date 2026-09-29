@@ -42,7 +42,7 @@ That existing relationship does **not** promote `$C3B4F8` itself to a mountain
 instance pointer: the missing evidence is the live transition from this
 descriptor target into the `$C3B4FE` control stream.
 
-Authority: `captures/baseline_menu/slow.bin` at slow-RAM offset `$3B4F8`,
+Authority: `captures/uae/baseline_menu/slow.bin` at slow-RAM offset `$3B4F8`,
 `analysis/data/terrain_lattice_target_catalog.json`, and the run003/run037
 live control-stream inventories plus
 `build/run037_c3b4f8_descriptor_target_trace/trace.jsonl`; the separate face-family authority is

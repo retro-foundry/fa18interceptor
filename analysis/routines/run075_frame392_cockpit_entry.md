@@ -40,11 +40,11 @@ recorded input by global frame label, and profile exactly one subsequent
 frame:
 
 ```text
-python scripts/profile_window.py --restore captures/run075/initial_state.bin \
-  --playback captures/run075/playback.e9k --first-frame 391 --last-frame 391 \
+python scripts/profile_window.py --restore captures/uae/run075/initial_state.bin \
+  --playback captures/uae/run075/playback.e9k --first-frame 391 --last-frame 391 \
   --frame-offset 200 --output build/run075_profile_391_offset
-python scripts/profile_window.py --restore captures/run075/initial_state.bin \
-  --playback captures/run075/playback.e9k --first-frame 392 --last-frame 392 \
+python scripts/profile_window.py --restore captures/uae/run075/initial_state.bin \
+  --playback captures/uae/run075/playback.e9k --first-frame 392 --last-frame 392 \
   --frame-offset 200 --output build/run075_profile_392_offset
 ```
 
@@ -62,7 +62,7 @@ instructions:
 
 ```text
 python scripts/trace_from_breakpoint.py \
-  --restore captures/run075/initial_state.bin --playback captures/run075/playback.e9k \
+  --restore captures/uae/run075/initial_state.bin --playback captures/uae/run075/playback.e9k \
   --playback-frame-offset 200 --address 0xC279D0 --arm-frame 192 \
   --return-pc 0xC0F0C8 --frames 200 --max-instructions 10000 \
   --ignore-future-input --output build/run075_frame392_c279d0_first
@@ -223,7 +223,7 @@ pixel entries are `(140,105)`, `(52,106)`, `(297,106)`, `(231,109)`, and
 
 ```text
 python scripts/trace_from_breakpoint.py \
-  --restore captures/run075/initial_state.bin --playback captures/run075/playback.e9k \
+  --restore captures/uae/run075/initial_state.bin --playback captures/uae/run075/playback.e9k \
   --playback-frame-offset 200 --address 0xC279D0 --arm-frame 182 \
   --return-pc 0xC0F0C8 --frames 185 --max-instructions 10000 \
   --ignore-future-input --output build/run075_frame382_c279d0_render_page

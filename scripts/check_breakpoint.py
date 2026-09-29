@@ -7,7 +7,7 @@ import time
 start = time.monotonic()
 e = Engine(ROOT / 'local/fa18.uae', ROOT / 'local/saves')
 e.core.retro_run()
-data = (ROOT / 'captures/baseline_menu/state.bin').read_bytes()
+data = (ROOT / 'captures/uae/baseline_menu/state.bin').read_bytes()
 assert e.core.retro_unserialize(data, len(data))
 target = 0xc0efd4  # Structural call target observed in menu_trace02; no semantic name yet.
 e.core.e9k_debug_add_breakpoint(target)

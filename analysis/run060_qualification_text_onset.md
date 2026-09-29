@@ -1,7 +1,7 @@
 # Run060 qualification-text onset boundary
 
 Authority: native deterministic replay frames in `build/run060_every5`, made
-from sealed `captures/run060` with the canonical boot-restore protocol.  This
+from sealed `captures/uae/run060` with the canonical boot-restore protocol.  This
 is a screen-output measurement, not an instruction trace or a qualification
 predicate claim.
 

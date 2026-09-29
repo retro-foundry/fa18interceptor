@@ -1,7 +1,7 @@
 # `$C2F688` two-row mask path in run075 frame 315
 
 Meaning: **port-contract for the alternate table of a renderer primitive**.
-Authority is the sealed `captures/run075` replay and the 52-instruction
+Authority is the sealed `captures/uae/run075` replay and the 52-instruction
 entry-to-return trace `build/port_run075_c2f688_52_chip/`, including exact
 Chip RAM before and after. Static authority for all 16 offset handlers is
 `source_amiga/observed/apply_offset_renderer_lane_masks.asm`. This is a

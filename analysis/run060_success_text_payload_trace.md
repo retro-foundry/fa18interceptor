@@ -1,6 +1,6 @@
 # Run060 success-text payload-to-compositor trace
 
-Authority: sealed `captures/run060` native checkpoints at GUI frames 9,200 and
+Authority: sealed `captures/uae/run060` native checkpoints at GUI frames 9,200 and
 9,285, plus bounded no-input traces
 `build/run060_frame09200_c32d24_trace/trace.jsonl` and
 `build/run060_frame09285_c32ef6_short_trace/trace.jsonl`. No recorded input

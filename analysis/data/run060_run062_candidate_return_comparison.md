@@ -10,8 +10,8 @@ The following sealed run060 probe arms `$C279B8` from the first replay frame:
 
 ```powershell
 python scripts/trace_from_breakpoint.py `
-  --restore captures/run060/restored-state.bin `
-  --playback captures/run060/playback.e9k `
+  --restore captures/uae/run060/restored-state.bin `
+  --playback captures/uae/run060/playback.e9k `
   --address 0xC279B8 --arm-frame 1 --return-pc 0xC26014 `
   --frames 10085 --max-instructions 16 --ignore-future-input `
   --output build/run060_full_c279b8_trace
@@ -37,8 +37,8 @@ of run060's 10,085 recorded GUI frames:
 
 ```powershell
 python scripts/trace_from_breakpoint.py `
-  --restore captures/run060/restored-state.bin `
-  --playback captures/run060/playback.e9k `
+  --restore captures/uae/run060/restored-state.bin `
+  --playback captures/uae/run060/playback.e9k `
   --address 0xC279C2 --arm-frame 1 --return-pc 0xC26014 `
   --frames 10085 --max-instructions 16 `
   --output build/run060_full_c279c2_probe

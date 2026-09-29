@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MEMORY = ROOT / "captures" / "baseline_menu" / "slow.bin"
+MEMORY = ROOT / "captures" / "uae" / "baseline_menu" / "slow.bin"
 OUTPUT = ROOT / "analysis" / "plots" / "external_aircraft_c3515e_static_vertices.svg"
 START, END = 0xC3515E, 0xC35234
 

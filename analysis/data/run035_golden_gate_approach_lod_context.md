@@ -3,7 +3,7 @@
 Classification: **sealed visual approach with a bounded two-checkpoint source comparison**.
 This is additional Golden Gate-range evidence, not a completed LOD test.
 
-`captures/run035` is sealed with 392 input events through replay frame 8,855.
+`captures/uae/run035` is sealed with 392 input events through replay frame 8,855.
 The supplied approach begins when the Golden Gate's red pixels are visible in
 the outside-world viewport. Cockpit/HUD pixels are a separate display layer
 and are explicitly excluded. The scene also contains another bridge. The
@@ -78,7 +78,7 @@ The remaining requirement is to join any Golden Gate filled-face pixel to its
 upstream face/control context; until then, the face collection remains a mixed
 bridge scene rather than a Golden Gate face sample.
 
-Authority: sealed `captures/run035`, replay checkpoints
+Authority: sealed `captures/uae/run035`, replay checkpoints
 `build/run035_keyframes/frame_{5500,7000}/state.bin`, and bounded no-input
 traces `build/run035_{5500,7000}_c3b0ce_interval/trace.jsonl`.
 Replay-preserved face authority is

@@ -1,6 +1,6 @@
 # Run060 — deterministic successful qualification
 
-Authority: sealed `captures/run060`, the pinned Engine9000 v0.62-alpha Amiga
+Authority: sealed `captures/uae/run060`, the pinned Engine9000 v0.62-alpha Amiga
 core, and the native host-scheduler renderer introduced in commit `431b72d`.
 This is the qualification-success scenario authority. It replaces run029 as a
 success candidate; run029 remains useful only as an earlier, outcome-unproven
@@ -19,7 +19,7 @@ Two independent runs of the native restore probe reproduce that exact 3,145,728
 byte state. Render the native full replay with:
 
 ```powershell
-python scripts/render_run.py --run captures/run060 --output build/run060_render_every5 --every 5
+python scripts/render_run.py --run captures/uae/run060 --output build/run060_render_every5 --every 5
 ```
 
 The command refuses an existing output directory, restores the sealed state,

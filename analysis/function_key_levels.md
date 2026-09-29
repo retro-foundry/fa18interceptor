@@ -3,7 +3,7 @@
 From `build/run003_post_f10_first/state.bin`, each native Libretro F1--F10
 event was pressed on probe frame one and released on frame six. The stock
 Engine9000 core then ran to frame twelve. The state is compatible with
-`captures/run003/config.uae`.
+`captures/uae/run003/config.uae`.
 
 | Native key | Raw game key | Observed `$C45870` |
 | --- | ---: | ---: |

@@ -5,7 +5,7 @@ Classification: **structural**. This is a complete, bounded target of the
 
 ## Runtime packet
 
-- No-input `start_demo` replay from `captures/baseline_menu/state.bin`.
+- No-input `start_demo` replay from `captures/uae/baseline_menu/state.bin`.
 - Breakpoint `$C2005C`, frame 601; return boundary `$C1F944`.
 - 76 instructions; terminates at the requested return boundary.
 - Ghidra P-code: `pcode/raw/no_key_c2005c_dispatch_target/`, 76 observed RAM

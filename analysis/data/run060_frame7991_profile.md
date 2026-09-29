@@ -1,7 +1,7 @@
 # run060 frame 7991 renderer profile
 
 The Engine9000 profiler was started for replay frames 7988 through 7991 after
-restoring `captures/run060/restored-state.bin`. The profile captured 249,001
+restoring `captures/uae/run060/restored-state.bin`. The profile captured 249,001
 cycles across 4,096 PCs. The relevant renderer addresses were all executed in
 the frame window:
 

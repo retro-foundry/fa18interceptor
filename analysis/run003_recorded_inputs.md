@@ -1,6 +1,6 @@
 # Run003 recorded input inventory
 
-This inventory is derived directly from `captures/run003/playback.e9k`, not
+This inventory is derived directly from `captures/uae/run003/playback.e9k`, not
 from the intended plan.  Frame numbers are Engine9000 input frames; a listed
 key is a recorded key-down event.  Repeated entries may be deliberate taps or
 frontend repeat events, so they are coverage evidence rather than a count of

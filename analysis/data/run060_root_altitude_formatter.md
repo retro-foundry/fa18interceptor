@@ -8,7 +8,7 @@ proven.
 Authority is the sealed run060 replay, traced at the selected-record formatter:
 
 ```text
-python scripts/trace_replay_breakpoint.py --restore captures/run060/restored-state.bin --playback captures/run060/playback.e9k --address 0xC3201A --arm-frame 8241 --frames 8260 --instructions 300 --output build/run060_frame8241_c3201a_altitude_formatter_trace
+python scripts/trace_replay_breakpoint.py --restore captures/uae/run060/restored-state.bin --playback captures/uae/run060/playback.e9k --address 0xC3201A --arm-frame 8241 --frames 8260 --instructions 300 --output build/run060_frame8241_c3201a_altitude_formatter_trace
 ```
 
 The formatter hits at replay frame 8,244. Its live selected base is

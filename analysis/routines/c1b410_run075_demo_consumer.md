@@ -2,7 +2,7 @@
 
 This packet extends the existing `$C1B410` structural contract with a run075
 demo invocation. It was captured with the sealed `build/engine9000-replay`
-runner from `captures/run075/initial_state.bin`, applying the sealed replay
+runner from `captures/uae/run075/initial_state.bin`, applying the sealed replay
 events in order. The bridge breakpoint reached the routine at debugger frame
 703; the bounded instruction trace began at frame 704.
 
