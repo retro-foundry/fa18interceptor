@@ -436,6 +436,8 @@ const FA18Port fa18_ports[] = {
     {0xC2168A, glue_C2168A, "draw_side_triangle", 8000},
     /* square faces */
     {0xC203D0, glue_C203D0, "draw_square_faces", 16000},
+    /* shadow */
+    {0xC201A6, glue_C201A6, "draw_record_shadow", 30000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

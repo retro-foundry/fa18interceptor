@@ -764,3 +764,135 @@ int draw_square_faces(gaddr *stream) {
     }
     return drawn | clip_and_draw_polygon();
 }
+
+/* Locals of the stream's caller that the shadow command reads and sets. */
+#define F_SHIFT_TOTAL (-2)   /* word */
+#define F_SCALE       (-6)   /* word */
+#define F_VERTEX_SHIFT (-8)  /* word */
+#define F_COUNT       (-0xE) /* word */
+#define F_ORIGIN      (-0x14)/* word[3] */
+#define F_X           (-0x20)/* long */
+#define F_Y           (-0x1C)/* long */
+#define F_Z           (-0x18)/* long */
+#define F_POINT       (-0x94)/* long[3] */
+
+static int16_t frame_w(gaddr frame, int off) { return rd_s16(frame + (gaddr)(int32_t)off); }
+static int32_t frame_l(gaddr frame, int off) { return rd_s32(frame + (gaddr)(int32_t)off); }
+
+/* Whether the shadow of `record` at `height` is drawn at all: 1 drawn,
+ * 0 not (the command returns 1), -1 far below (the command returns -1). */
+static int shadow_wanted(gaddr record, gaddr frame, int32_t *height) {
+    int32_t level = rd_s32(POSITION_BIAS), floor;
+    uint8_t kind = rd_u8(record + 4) & 0xC0;
+
+    if (kind != 0 && kind != 0xC0) return 0;
+    if (rd_u8(record + 4) & 0x40) {
+        floor = (int32_t)(int16_t)-rd_s16(record + 0x4E) << 8;
+        if (level >= floor) return 0;
+        level = (level - floor) >> (rd_s16(BOUND_SHIFT) & 63);
+        wr_u32(frame + (gaddr)(int32_t)(F_POINT + 4), (uint32_t)level);
+    } else {
+        wr_u32(frame + (gaddr)(int32_t)(F_POINT + 4), (uint32_t)frame_l(frame, F_Y));
+    }
+    *height = level;
+    if (level < -0x100000) return -1;
+    if (!rd_u8(CONTEXT_SELECT) && (int8_t)rd_u8(ATTITUDE_BAND) < 3) {
+        int32_t limit;
+        if (rd_s16(STREAM_MODE) == rd_s16(TARGET_RECORD)) {
+            if (!rd_u8(ATTITUDE_BAND)) return 0;
+            limit = -0x2000;
+        } else {
+            if (rd_u8(record + 0x62) == 0x30 || level >= -0x10000 || rd_u8(record + 0x62) == 0x14) return 1;
+            if ((int8_t)rd_u8(ATTITUDE_BAND) <= 1) return 0;
+            limit = -0xA0000;
+        }
+        if (level < limit) return 0;
+    }
+    return 1;
+}
+
+/* A hull vertex at `offset` in the record's list, placed at the shadow. */
+static Vertex shadow_vertex(gaddr hull, int16_t offset, gaddr frame) {
+    int16_t shift = frame_w(frame, F_VERTEX_SHIFT);
+    int16_t x = (int16_t)((int16_t)(rd_s16(hull + (gaddr)(int32_t)offset) >> (shift & 63)) + frame_w(frame, F_ORIGIN));
+    int16_t y = frame_w(frame, F_ORIGIN + 2);
+    int16_t z = (int16_t)((int16_t)(rd_s16(hull + 4 + (gaddr)(int32_t)offset) >> (shift & 63)) + frame_w(frame, F_ORIGIN + 4));
+    Vertex v;
+    gaddr m = VIEW_ANGLE_MATRIX;
+    v.x = (int16_t)((int32_t)((uint32_t)((int32_t)rd_s16(m) * x) + (uint32_t)((int32_t)rd_s16(m + 2) * y) +
+                              (uint32_t)((int32_t)rd_s16(m + 4) * z)) >> 8);
+    v.y = (int16_t)((int32_t)((uint32_t)((int32_t)rd_s16(m + 6) * x) + (uint32_t)((int32_t)rd_s16(m + 8) * y) +
+                              (uint32_t)((int32_t)rd_s16(m + 10) * z)) >> 8);
+    v.z = (int16_t)((int32_t)((uint32_t)((int32_t)rd_s16(m + 12) * x) + (uint32_t)((int32_t)rd_s16(m + 14) * y) +
+                              (uint32_t)((int32_t)rd_s16(m + 16) * z)) >> 8);
+    return v;
+}
+
+int draw_record_shadow(gaddr *stream, gaddr frame) {
+    gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD), hull = record + 0xA4;
+    int32_t height, top, scaled_y;
+    int16_t shift, extra;
+    int want = 0;
+
+    want = shadow_wanted(record, frame, &height);
+    if (want <= 0) return want < 0 ? -1 : 1;
+    top = (int32_t)next_word(stream) << 8;
+    if (top < rd_s32(record + 0x18)) return 1;
+    shift = rd_s16(BOUND_SHIFT);
+    extra = (int16_t)((int16_t)((int32_t)(int16_t)((uint32_t)-top >> 16) >> 5) - shift);
+    if (extra > 0) {
+        shift = (int16_t)(shift + extra);
+        wr_u32(frame + (gaddr)(int32_t)F_POINT, (uint32_t)(frame_l(frame, F_X) >> (extra & 63)));
+        wr_u32(frame + (gaddr)(int32_t)(F_POINT + 4), (uint32_t)(top >> (shift & 63)));
+        wr_u32(frame + (gaddr)(int32_t)(F_POINT + 8), (uint32_t)(frame_l(frame, F_Z) >> (extra & 63)));
+    } else {
+        extra = 0;
+        wr_u32(frame + (gaddr)(int32_t)F_POINT, (uint32_t)frame_l(frame, F_X));
+        wr_u32(frame + (gaddr)(int32_t)(F_POINT + 8), (uint32_t)frame_l(frame, F_Z));
+    }
+    wr_u16(frame + (gaddr)(int32_t)F_SHIFT_TOTAL, (uint16_t)shift);
+    {
+        int down = (8 - frame_w(frame, F_SCALE)) & 63;
+        int by = extra > 0 ? shift & 63 : 0;
+        int32_t x = frame_l(frame, F_POINT) + (rd_s32(SHADOW_OFFSET_X) >> by);
+        int32_t z = frame_l(frame, F_POINT + 8) + (rd_s32(SHADOW_OFFSET_Z) >> by);
+        scaled_y = frame_l(frame, F_POINT + 4);
+        wr_u16(frame + (gaddr)(int32_t)F_ORIGIN, (uint16_t)(x >> down));
+        wr_u16(frame + (gaddr)(int32_t)(F_ORIGIN + 2), (uint16_t)(scaled_y >> down));
+        wr_u16(frame + (gaddr)(int32_t)(F_ORIGIN + 4), (uint16_t)(z >> down));
+    }
+    wr_u16(CURRENT_COLOUR, 0);
+    wr_u16(CLIP_INPUT, 0);
+    for (;;) {
+        gaddr face = *stream;
+        int16_t count = rd_s16(face);
+        int visible = 1;
+        if (rd_s16(face + 2) == 0) {
+            /* One-sided: the turn of its first three corners, seen from above. */
+            int16_t a = rd_s16(face + 4), b = rd_s16(face + 6), c = rd_s16(face + 8);
+            int16_t x0 = rd_s16(hull + (gaddr)(int32_t)a), z0 = rd_s16(hull + 4 + (gaddr)(int32_t)a);
+            int16_t dxb = (int16_t)(rd_s16(hull + (gaddr)(int32_t)b) - x0), dxc = (int16_t)(rd_s16(hull + (gaddr)(int32_t)c) - x0);
+            int16_t dzb = (int16_t)(rd_s16(hull + 4 + (gaddr)(int32_t)b) - z0);
+            int16_t dzc = (int16_t)(rd_s16(hull + 4 + (gaddr)(int32_t)c) - z0);
+            visible = (int32_t)((uint32_t)((int32_t)dxc * dzb) - (uint32_t)((int32_t)dxb * dzc)) >> 8 >= 0;
+        }
+        if (visible) {
+            gaddr in = CLIP_INPUT + 4;
+            int16_t left = count;
+            *stream = face + 4;
+            wr_u16(CLIP_INPUT + 2, (uint16_t)count);
+            do {
+                put(in, shadow_vertex(hull, next_word(stream), frame));
+                in += 6;
+                wr_u16(frame + (gaddr)(int32_t)F_COUNT, (uint16_t)--left);
+            } while (left > 0);
+            clip_and_draw_polygon();
+        } else {
+            *stream = face + 2 + 2 * count + 2;
+        }
+        {
+            int16_t next = next_word(stream);
+            if (next < 0 || (int32_t)next < rd_s32(record + 0x10)) return 1;
+        }
+    }
+}

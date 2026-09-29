@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 343; 804,884 calls matching in shadow and 979,416 in the sandbox pass over three native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 344; 803,889 calls matching in shadow and 978,365 in the sandbox pass over three native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |

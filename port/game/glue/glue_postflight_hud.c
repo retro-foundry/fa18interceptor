@@ -855,3 +855,156 @@ int glue_C203D0(void) {
     flags_logic_w(D(0));
     return glue_return();
 }
+
+/* $C201A6: the preamble's registers, then each face's (the turn test, or
+ * the placed corners and the clipper's) in order. */
+int glue_C201A6(void) {
+    gaddr frame = A(6), stream = A(2), record = CONTROL_RECORDS + SEXT(rd_u16(SCRIPT_RECORD)), hull = record + 0xA4;
+    uint32_t a1 = A(1), a5 = A(5);
+    int result, k;
+
+    result = draw_record_shadow(&stream, frame);
+    D(0) = rd_u32(POSITION_BIAS);
+    A(4) = record;
+    SET_B(D(3), rd_u8(record + 4));
+    SET_B(D(7), (uint8_t)D(3) & 0xC0);
+    if ((uint8_t)D(7) && (uint8_t)D(7) != 0xC0) goto one;
+    SET_B(D(3), (uint8_t)D(3) & 0x40);
+    if ((uint8_t)D(3)) {
+        SET_W(D(7), (uint16_t)-rd_s16(record + 0x4E));
+        D(7) = SEXT(D(7)) << 8;
+        if ((int32_t)D(0) >= (int32_t)D(7)) goto one;
+        D(0) -= D(7);
+        SET_W(D(3), rd_u16(BOUND_SHIFT));
+        D(0) = (uint32_t)((int32_t)D(0) >> (W(3) & 63));
+    }
+    if ((int32_t)D(0) < -0x100000) {
+        D(0) = 0xFFFFFFFFu;
+        flags_logic_l(D(0));
+        return glue_return();
+    }
+    if (!rd_u8(CONTEXT_SELECT) && (int8_t)rd_u8(ATTITUDE_BAND) < 3) {
+        SET_W(D(7), rd_u16(STREAM_MODE));
+        if (W(7) == rd_s16(TARGET_RECORD)) {
+            if (!rd_u8(ATTITUDE_BAND)) goto one;
+            D(2) = 0xFFFFE000u;
+            if ((int32_t)D(0) < (int32_t)D(2)) goto one;
+        } else if (!(rd_u8(record + 0x62) == 0x30 || (int32_t)D(0) >= -0x10000 || rd_u8(record + 0x62) == 0x14)) {
+            if ((int8_t)rd_u8(ATTITUDE_BAND) <= 1) goto one;
+            D(2) = 0xFFF60000u;
+            if ((int32_t)D(0) < (int32_t)D(2)) goto one;
+        }
+    }
+    /* The draw: A2 from the start of the stream. */
+    D(0) = (uint32_t)((int32_t)rd_s16(A(2)) << 8);
+    A(2) += 2;
+    if ((int32_t)D(0) < rd_s32(record + 0x18)) goto restored_one;
+    A(4) = hull;
+    D(2) = D(0);
+    D(0) = 0u - D(0);
+    D(0) = D(0) << 16 | D(0) >> 16;
+    D(0) = SEXT(D(0));
+    D(0) = (uint32_t)((int32_t)D(0) >> 5);
+    SET_W(D(0), (uint16_t)(W(0) - rd_s16(BOUND_SHIFT)));
+    if (W(0) <= 0) {
+        SET_W(D(0), 0);
+    } else {
+        D(1) = rd_u32(frame - 0x20);
+        D(3) = rd_u32(frame - 0x18);
+        SET_W(D(0), rd_u16(frame - 2));
+        D(2) = (uint32_t)((int32_t)D(2) >> (W(0) & 63));
+    }
+    for (k = 0; k < 3; k++) D(1 + k) = rd_u32(frame - 0x94 + (gaddr)(4 * k));
+    D(4) = (uint32_t)(rd_s32(SHADOW_OFFSET_X) >> (W(0) & 63));
+    D(5) = (uint32_t)(rd_s32(SHADOW_OFFSET_Z) >> (W(0) & 63));
+    D(1) += D(4);
+    D(3) += D(5);
+    D(7) = 8;
+    SET_W(D(7), (uint16_t)(8 - rd_s16(frame - 6)));
+    for (k = 1; k <= 3; k++) D(k) = (uint32_t)((int32_t)D(k) >> (W(7) & 63));
+    for (;;) {
+        gaddr face = A(2);
+        int16_t count = rd_s16(face);
+        int visible = 1;
+        if (rd_s16(face + 2) == 0) {
+            for (k = 0; k < 3; k++) SET_W(D(1 + k), rd_u16(face + 4 + (gaddr)(2 * k)));
+            SET_W(D(0), rd_u16(hull + SEXT(D(1))));
+            SET_W(D(5), (uint16_t)(rd_s16(hull + SEXT(D(2))) - W(0)));
+            SET_W(D(6), (uint16_t)(rd_s16(hull + SEXT(D(3))) - W(0)));
+            SET_W(D(4), rd_u16(hull + 4 + SEXT(D(1))));
+            SET_W(D(1), (uint16_t)(rd_s16(hull + 4 + SEXT(D(2))) - W(4)));
+            SET_W(D(3), (uint16_t)(rd_s16(hull + 4 + SEXT(D(3))) - W(4)));
+            D(6) = (uint32_t)((int32_t)W(6) * W(1));
+            D(3) = (uint32_t)((int32_t)W(5) * W(3));
+            D(6) -= D(3);
+            D(6) = (uint32_t)((int32_t)D(6) >> 8);
+            visible = (int32_t)D(6) >= 0;
+        }
+        if (!visible) {
+            SET_W(D(7), (uint16_t)count);
+            A(2) = face + 2;
+            SET_W(D(7), (uint16_t)(W(7) * 2 + 2));
+            A(2) += SEXT(D(7));
+        } else {
+            gaddr m = VIEW_ANGLE_MATRIX;
+            SET_W(D(7), (uint16_t)count);
+            A(2) = face + 4;
+            A(0) = CLIP_INPUT + 4;
+            for (k = 0; k < count || k == 0; k++) {
+                int16_t off = rd_s16(A(2));
+                A(2) += 2;
+                SET_W(D(7), (uint16_t)off);
+                SET_W(D(5), rd_u16(frame - 8));
+                SET_W(D(2), (uint16_t)(rd_s16(hull + SEXT((uint16_t)off)) >> (W(5) & 63)));
+                SET_W(D(4), (uint16_t)(rd_s16(hull + 4 + SEXT((uint16_t)off)) >> (W(5) & 63)));
+                SET_W(D(2), (uint16_t)(W(2) + rd_s16(frame - 0x14)));
+                SET_W(D(3), rd_u16(frame - 0x12));
+                SET_W(D(4), (uint16_t)(W(4) + rd_s16(frame - 0x10)));
+                A(5) = m;
+                SET_W(D(5), (uint16_t)D(2));
+                SET_W(D(6), (uint16_t)D(3));
+                SET_W(D(7), (uint16_t)D(4));
+                D(5) = (uint32_t)((int32_t)W(5) * rd_s16(m));
+                D(6) = (uint32_t)((int32_t)W(6) * rd_s16(m + 2));
+                D(7) = (uint32_t)((int32_t)W(7) * rd_s16(m + 4));
+                D(7) = (uint32_t)((int32_t)(D(7) + D(6) + D(5)) >> 8);
+                SET_W(D(5), (uint16_t)D(2));
+                SET_W(D(6), (uint16_t)D(3));
+                SET_W(D(7), (uint16_t)D(4));
+                D(5) = (uint32_t)((int32_t)W(5) * rd_s16(m + 6));
+                D(6) = (uint32_t)((int32_t)W(6) * rd_s16(m + 8));
+                D(7) = (uint32_t)((int32_t)W(7) * rd_s16(m + 10));
+                D(7) = (uint32_t)((int32_t)(D(7) + D(6) + D(5)) >> 8);
+                D(2) = (uint32_t)((int32_t)W(2) * rd_s16(m + 12));
+                D(3) = (uint32_t)((int32_t)W(3) * rd_s16(m + 14));
+                D(4) = (uint32_t)((int32_t)W(4) * rd_s16(m + 16));
+                D(4) = (uint32_t)((int32_t)(D(4) + D(3) + D(2)) >> 8);
+                A(5) = m + 18;
+                A(0) += 6;
+                if (count - 1 - k <= 0) break;
+            }
+            {
+                ClipperSnapshot snapshot;
+                uint32_t a2 = A(2), a4 = A(4);
+                clipper_snapshot(&snapshot);
+                snapshot.last_size = fa18_bltsize_at_draw_start;
+                clipper_registers(&snapshot, 0, -1);
+                A(2) = a2;
+                A(4) = a4;
+            }
+        }
+        D(0) = SEXT(rd_u16(A(2)));
+        A(2) += 2;
+        if (W(0) < 0) break;
+        A(5) = record + 0x10;
+        if ((int32_t)D(0) < rd_s32(record + 0x10)) break;
+    }
+restored_one:
+    A(1) = a1;
+    A(5) = a5;
+one:
+    (void)result;
+    D(0) = 1;
+    flags_logic_l(1);
+    return glue_return();
+}

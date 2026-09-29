@@ -143,4 +143,12 @@ int square_diagonal(uint32_t colours, uint16_t *colour);
  * point is outside the view. */
 int draw_square_faces(gaddr *stream);
 
+/* The shadow of the record at SCRIPT_RECORD ($C201A6), in colour 0: its
+ * hull (record +$A4) placed at the shadow point, each face (count, one-sided
+ * flag, vertex offsets) clipped and drawn unless it turns away, until a
+ * face's height word is below the record's +$10. It works in its caller's
+ * frame at `frame` (the placed point and scales). Returns 1, or -1 when the
+ * record is far below. */
+int draw_record_shadow(gaddr *stream, gaddr frame);
+
 #endif

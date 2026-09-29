@@ -524,6 +524,8 @@
 #define INFO_REQUEST       0xC45886u /* byte: negative asks for the next info page, bit 0 the same page */
 #define INFO_REDRAWS       0xC4583Cu /* byte: passes left to redraw the message line */
 #define INFO_PAGE          0xC459C4u /* word: 1 altitude, 2 heading, 3 speed of the selected record (bit 15 new); 0 or -1 none */
+#define SHADOW_OFFSET_X    0xC45B30u /* long: added (scaled) to a shadow's x */
+#define SHADOW_OFFSET_Z    0xC45B38u /* long: added (scaled) to a shadow's z */
 #define LOAD_TRIM          0xC45946u /* word: added to the load readout when beyond +-1 */
 
 #endif

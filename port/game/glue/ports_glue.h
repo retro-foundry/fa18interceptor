@@ -509,4 +509,7 @@ int glue_C2168A(void);
 /* square faces */
 int glue_C203D0(void);
 
+/* shadow */
+int glue_C201A6(void);
+
 #endif
