@@ -20,4 +20,10 @@ void read_joystick(void);
  * translated through KEY_TABLE, in KEY_TRANSLATED, up to ten keys. */
 void queue_view_key(uint8_t raw);
 
+/* $C12242: when the selected record has lost its bit 6 (+$00), drop the
+ * selection and the view record, request a full update and, outside a
+ * context, reset the view mode and span origins and queue_view_key(0)
+ * (TARGET_RECORD holds the selection). */
+void drop_lost_selection(void);
+
 #endif

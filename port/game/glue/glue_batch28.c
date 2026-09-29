@@ -48,7 +48,8 @@ static gaddr search_x(gaddr list, gaddr base, int16_t key, int *x) {
     return base + (gaddr)(int32_t)rd_s16(p + (gaddr)(int32_t)index);
 }
 
-int glue_C09AB8(void) {
+void condition_registers(void);
+void condition_registers(void) {
     int last_byte, x, result = condition_table_scan(A(0), &last_byte);
     gaddr p = search_x(A(0), A(0), rd_s16(CONDITION_KEY_B), &x);
     if (p && search_x(p, A(0), rd_s16(CONDITION_KEY_A), &x)) x = rd_s32(CONDITION_VALUE) != 0; /* NEG.L */
@@ -57,6 +58,10 @@ int glue_C09AB8(void) {
     D(0) = (uint32_t)result;
     flags_logic_l((uint32_t)result);
     FLAG_X = x ? XFLAG_SET : XFLAG_CLEAR;
+}
+
+int glue_C09AB8(void) {
+    condition_registers();
     return glue_return();
 }
 

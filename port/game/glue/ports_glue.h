@@ -225,4 +225,9 @@ int glue_C1BA86(void);
 int glue_C50158(void);
 int glue_C24E2C(void);
 
+/* batch 31: condition flags, lost selection */
+int glue_C09A78(void);
+int glue_C09A98(void);
+int glue_C12242(void);
+
 #endif

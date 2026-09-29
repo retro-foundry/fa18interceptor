@@ -329,4 +329,12 @@
 #define DATE_LINE          0xC3FD96u /* text: the month name (reversed) and day */
 #define MONTH_NAMES        0xC24E08u /* char[4][9] */
 
+/* ---- conditions and selection ($C09A78, $C09A98, $C12242) --------------- */
+#define CONDITIONS_A       0xC09B48u /* condition table for CONDITION_MET_A */
+#define CONDITIONS_B       0xC09D78u /* condition table for CONDITION_MET_B */
+#define CONDITION_MET_A    0xC4589Bu /* byte: 1 when CONDITIONS_A matches */
+#define CONDITION_MET_B    0xC4589Cu /* byte */
+#define TARGET_RECORD      0xC458DCu /* word: index of the targeted record, 0 = none */
+#define SPAN_ORIGIN_Y      0xC45988u /* word */
+
 #endif

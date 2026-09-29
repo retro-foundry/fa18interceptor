@@ -77,3 +77,18 @@ void queue_view_key(uint8_t raw) {
     wr_u8(KEY_STATE + 1, 0);
     wr_u8(KEY_STATE + 2, 0);
 }
+
+void drop_lost_selection(void) {
+    gaddr record;
+    if (!rd_u16(TARGET_RECORD)) return;
+    record = CONTROL_RECORDS + (gaddr)((uint32_t)(int32_t)rd_s16(TARGET_RECORD) << 9);
+    if (rd_u16(record) & 0x40) return;
+    wr_u16(TARGET_RECORD, 0);
+    wr_u16(VIEW_RECORD, 0);
+    wr_u8(UPDATE_MASK, 0xFF);
+    if (rd_u8(CONTEXT_SELECT)) return;
+    wr_u8(VIEW_MODE, 0);
+    wr_u16(SPAN_ORIGIN, 0);
+    wr_u16(SPAN_ORIGIN_Y, 0);
+    queue_view_key(0);
+}

@@ -72,15 +72,26 @@ int glue_C1FC42(void) {
 }
 
 /* $C1BA86: D0.b raw key. The caller reads A3, D0 and D4. */
-int glue_C1BA86(void) {
-    uint8_t raw = (uint8_t)D(0);
-    int queued = !rd_u8(KEY_TAKEN) && !(raw & 0x80) && (int8_t)rd_u8(KEY_COUNT) < 10;
-    queue_view_key(raw);
+int view_key_would_queue(uint8_t raw);
+int view_key_would_queue(uint8_t raw) {
+    return !rd_u8(KEY_TAKEN) && !(raw & 0x80) && (int8_t)rd_u8(KEY_COUNT) < 10;
+}
+
+/* The registers queue_view_key(raw) leaves (after it ran). */
+void view_key_leftovers(uint8_t raw, int queued);
+void view_key_leftovers(uint8_t raw, int queued) {
     D(4) = rd_u8(VIEW_MODE);
     if (queued) {
         SET_W(D(0), rd_u8(KEY_TABLE + raw));
         A(3) = KEY_TRANSLATED;
         D(4) = (uint16_t)(int16_t)(int8_t)rd_u8(KEY_TRANSLATED_WRITE);
     }
+}
+
+int glue_C1BA86(void) {
+    uint8_t raw = (uint8_t)D(0);
+    int queued = view_key_would_queue(raw);
+    queue_view_key(raw);
+    view_key_leftovers(raw, queued);
     return glue_return();
 }

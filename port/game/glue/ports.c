@@ -208,6 +208,10 @@ const FA18Port fa18_ports[] = {
     /* batch 30: audio interrupt, date line */
     {0xC50158, glue_C50158, "update_voices", 3000},
     {0xC24E2C, glue_C24E2C, "format_date_line", 1500},
+    /* batch 31: condition flags, lost selection */
+    {0xC09A78, glue_C09A78, "update_condition_a", 900},
+    {0xC09A98, glue_C09A98, "update_condition_b", 900},
+    {0xC12242, glue_C12242, "drop_lost_selection", 700},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

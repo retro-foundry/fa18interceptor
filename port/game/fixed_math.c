@@ -491,3 +491,11 @@ static int bound_less(uint16_t selector, int16_t offset) {
 int component_beyond_bound(uint16_t selector, int16_t offset) {
     return bound_less(selector, offset) != ((selector & 0x1000) != 0);
 }
+
+void update_condition_a(void) {
+    wr_u8(CONDITION_MET_A, (uint8_t)condition_table_matches(CONDITIONS_A));
+}
+
+void update_condition_b(void) {
+    wr_u8(CONDITION_MET_B, (uint8_t)condition_table_matches(CONDITIONS_B));
+}

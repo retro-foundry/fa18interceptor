@@ -120,4 +120,8 @@ int condition_table_scan(gaddr table, int *last_byte);
  * component, inverted when `selector` bit 12 is set. */
 int component_beyond_bound(uint16_t selector, int16_t offset);
 
+/* CONDITION_MET_A/B = whether CONDITIONS_A/B match ($C09A78, $C09A98). */
+void update_condition_a(void);
+void update_condition_b(void);
+
 #endif
