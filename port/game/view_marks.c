@@ -36,3 +36,58 @@ void draw_gauge_bar(void) {
         plot_pixel_pair((int16_t)(x + 2), y);
     }
 }
+
+typedef struct {
+    int16_t x, y, points, shift;
+    int clipped;
+    gaddr at;
+} Ring;
+
+static int ring_inside(const Ring *r, int16_t x, int16_t y) {
+    return x > 14 && x < 0x132 && x > (int16_t)(0x55 + r->shift) && x < (int16_t)(0xE9 + r->shift)
+        && y > 0x2D && y < 0x90;
+}
+
+/* One quarter: the pairs forward or backward to the sentinel, dx mirrored
+ * by `sx`, dy by `sy` (the lift only below the centre). 0 once the points
+ * run out. */
+static int ring_quarter(Ring *r, int forward, int sx, int sy) {
+    for (;;) {
+        int8_t dx, dy;
+        int16_t x, y;
+        if (forward) {
+            dx = (int8_t)rd_u8(r->at);
+            dy = (int8_t)rd_u8(r->at + 1);
+            r->at += 2;
+            if (dy < 0) return 1;
+        } else {
+            dy = (int8_t)rd_u8(r->at - 1);
+            dx = (int8_t)rd_u8(r->at - 2);
+            r->at -= 2;
+            if (dx < 0) return 1;
+        }
+        x = (int16_t)(r->x + (int8_t)(sx < 0 ? -dx : dx));
+        y = (int16_t)(r->y + (int8_t)(sy < 0 ? -dy : dy - !r->clipped));
+        if (!r->clipped || ring_inside(r, x, y)) plot_pixel(x, y);
+        if (--r->points < 0) return 0;
+    }
+}
+
+void plot_ring(int16_t x, int16_t y, int16_t points, gaddr outline) {
+    Ring r;
+
+    r.x = x;
+    r.y = y;
+    r.points = points;
+    r.shift = rd_s16(SPAN_ORIGIN_Y);
+    r.at = outline;
+    r.clipped = !(x > 14 && x < 0x132 && x > (int16_t)(0x63 + r.shift) && x < (int16_t)(0xDB + r.shift)
+                  && y > 0x39 && y < 0x84);
+    if (!ring_quarter(&r, 1, 1, -1)) return;   /* upper right */
+    r.at -= 2;
+    if (!ring_quarter(&r, 0, 1, 1)) return;    /* lower right, back up the table */
+    r.at += 2;
+    if (!ring_quarter(&r, 1, -1, 1)) return;   /* lower left */
+    r.at -= 2;
+    ring_quarter(&r, 0, -1, -1);               /* upper left */
+}
