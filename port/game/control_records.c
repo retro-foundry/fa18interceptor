@@ -703,3 +703,44 @@ void update_in_sight(gaddr target, gaddr viewer) {
     }
     wr_u8(target + 4, (uint8_t)(rd_u8(target + 4) & ~0x20));
 }
+
+#define ZONE_AREAS  0xC29720u /* per zone: a pointer to its box and exits */
+#define ZONE_VIEWS  0xC295E0u /* word offsets from here to five view words */
+
+void check_zone_exit(void) {
+    int16_t index = rd_s16(STREAM_MODE), x, y, left, right, top, bottom, exits;
+    uint16_t offset = (uint16_t)(index << 9);
+    gaddr record, area;
+    int8_t zone;
+
+    if (!offset) return;
+    record = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)offset;
+    if ((rd_u8(record + 0x62) & 0xF0) != 0x10 || rd_u8(record + 5) == 8) return;
+    zone = (int8_t)rd_u8(record + 0x5D);
+    if (zone < 0) return;
+    if (--zone < 0) {
+        wr_u16(ERROR_CODE, 0x1E);
+        fault_hook();
+        return;
+    }
+    area = rd_u32(ZONE_AREAS + (gaddr)(4 * zone));
+    x = rd_s16(record + 6);
+    y = rd_s16(record + 8);
+    left = rd_s16(area);
+    right = rd_s16(area + 2);
+    top = rd_s16(area + 4);
+    bottom = rd_s16(area + 6);
+    if (x >= left && x <= right && y >= top && y <= bottom) return;
+    exits = rd_s16(area + 8);
+    for (area += 10; exits-- > 0; area += 10) {
+        gaddr view;
+        if ((rd_s16(area + 4) & 0x7F) != index) continue;
+        view = ZONE_VIEWS + (gaddr)(int32_t)rd_s16(ZONE_VIEWS + (gaddr)(int32_t)rd_s16(area + 6));
+        if (rd_u8(record + 0x7A) == 3 || rd_u8(record + 0x7A) == 4) wr_u8(record + 0x7A, 5);
+        wr_u16(record, (uint16_t)(rd_u16(record) & 0xFFFE));
+        set_record_view(record, rd_s16(view), rd_s16(view + 2), rd_s16(view + 4), rd_s16(view + 6),
+                        (uint32_t)(int32_t)rd_s16(view + 8));
+        wr_u8(record + 0x38, 0xFF);
+        return;
+    }
+}

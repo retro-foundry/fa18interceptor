@@ -7,7 +7,7 @@
 #include "memory.h"
 #include "render_polygon.h"
 
-int prepare_registers(uint16_t last_size); /* glue_batch34.c */
+int prepare_registers(uint16_t last_size, int16_t last_row); /* glue_batch34.c */
 void composite_registers(void);            /* glue_render_polygon.c */
 void clear_mask_registers(void);           /* glue_render_polygon.c */
 void mask_between_registers(void);         /* glue_batch25.c */
@@ -17,7 +17,7 @@ void mask_between_registers(void);         /* glue_batch25.c */
 void draw_polygon_registers(uint16_t last_size, uint16_t colour) {
     int bit, given;
 
-    if (prepare_registers(last_size)) return;
+    if (prepare_registers(last_size, rd_s16(LINE_LAST_ROW))) return;
     given = rd_s16(LINE_COLOUR) >= 0;
     if (given) SET_W(D(5), rd_u16(POLY_MASK_BLIT));
     if (given && rd_u16(POLY_MASK_BLIT)) {

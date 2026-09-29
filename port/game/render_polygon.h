@@ -29,6 +29,8 @@ void clear_polygon_mask(void);
  * and the compositing blit's POLY_* parameters stored. Returns 0 when a
  * fill was started (compositing follows), 1 otherwise. */
 int prepare_polygon(void);
+/* The same with `last` for the last row ($C301F0 gives $C7). */
+int prepare_polygon_to_row(int16_t last);
 
 /* Draw the polygon at POLY_VERTICES ($C2FF48): with blitter priority,
  * prepare it; when it needs compositing, either blit the mask between the

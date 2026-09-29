@@ -98,8 +98,10 @@ static void polygon_bounds(gaddr v, int count, int16_t *minx, int16_t *miny, int
     *minx = x0; *maxx = x1; *miny = y0; *maxy = y1;
 }
 
-int prepare_polygon(void) {
-    int16_t last = rd_s16(LINE_LAST_ROW), minx, miny, maxx, maxy, height, width;
+int prepare_polygon(void) { return prepare_polygon_to_row(rd_s16(LINE_LAST_ROW)); }
+
+int prepare_polygon_to_row(int16_t last) {
+    int16_t minx, miny, maxx, maxy, height, width;
     gaddr v = POLY_VERTICES + 2;
     int16_t count = rd_s16(POLY_VERTICES), i;
 

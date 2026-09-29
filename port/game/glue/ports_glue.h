@@ -485,4 +485,11 @@ int glue_C33370(void);
 /* batch 63d: HUD stage */
 int glue_C332BC(void);
 
+/* polygon to row C7 */
+int glue_C301F0(void);
+
+/* zone exit */
+int glue_C28E28(void);
+
+
 #endif

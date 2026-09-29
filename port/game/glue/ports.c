@@ -420,6 +420,10 @@ const FA18Port fa18_ports[] = {
     {0xC33370, glue_C33370, "draw_postflight_tape", 40000},
     /* batch 63d: HUD stage */
     {0xC332BC, glue_C332BC, "draw_postflight_hud", 90000},
+    /* polygon to row C7 */
+    {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 6000},
+    /* zone exit */
+    {0xC28E28, glue_C28E28, "check_zone_exit", 1500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

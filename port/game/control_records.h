@@ -164,4 +164,10 @@ typedef struct {
  * position. */
 void file_records_by_level(int16_t column, int16_t row, gaddr lists, FilingState *state);
 
+/* When the record numbered STREAM_MODE (type $1x) has left its zone's box
+ * (+$5D, 1-based; 0 none, a negative none), take the zone's exit for it:
+ * +$7A 3 or 4 becomes 5, +$0 bit 0 clears, its view comes from the exit
+ * and +$38 is set to $FF ($C28E28). Zone 0 raises error $1E. */
+void check_zone_exit(void);
+
 #endif

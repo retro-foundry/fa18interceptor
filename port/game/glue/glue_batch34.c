@@ -37,7 +37,7 @@ static void edge(uint16_t *last_size) {
 
 /* The registers prepare_polygon leaves (after it ran); returns its D0.
  * `last_size` is the BLTSIZE written before it. */
-int prepare_registers(uint16_t last_size);
+int prepare_registers(uint16_t last_size, int16_t last_row);
 
 static int done(uint32_t d0) {
     D(0) = d0;
@@ -45,12 +45,12 @@ static int done(uint32_t d0) {
     return (int)d0;
 }
 
-int prepare_registers(uint16_t last_size) {
+int prepare_registers(uint16_t last_size, int16_t last_row) {
     gaddr v = POLY_VERTICES + 2;
     int16_t count;
     int i;
 
-    A(4) = SEXT(rd_u16(LINE_LAST_ROW));
+    A(4) = SEXT((uint16_t)last_row);
     SET_W(D(6), rd_u16(POLY_VERTICES) - 3);
     for (i = 0; i < 6; i++) D(i) = SEXT(rd_u16(v + (gaddr)(2 * i)));
     A(0) = v + 12;
@@ -166,6 +166,13 @@ fill:
 int glue_C301F6(void) {
     uint16_t last_size = custom_written(BLTSIZE);
     (void)prepare_polygon();
-    (void)prepare_registers(last_size);
+    (void)prepare_registers(last_size, rd_s16(LINE_LAST_ROW));
+    return glue_return();
+}
+
+int glue_C301F0(void) {
+    uint16_t last_size = custom_written(BLTSIZE);
+    (void)prepare_polygon_to_row(0xC7);
+    (void)prepare_registers(last_size, 0xC7);
     return glue_return();
 }
