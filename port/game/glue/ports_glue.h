@@ -459,5 +459,9 @@ int glue_C2EC9C(void);
 int glue_C2ECA4(void);
 int glue_C1FE24(void);
 int glue_C1FE46(void);
+int glue_C0DAEE(void);
+int glue_C17F8C(void);
+int glue_C18108(void);
+int glue_C1B906(void);
 
 #endif

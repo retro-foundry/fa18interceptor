@@ -11,6 +11,7 @@ void reset_list(void);
 
 /* Cold scene bootstrap helpers ($C090C2, $C090F2). */
 void clear_scene_startup_state(void);
+void start_view_mode_zero(uint8_t raw_key);
 void enable_scene_record_updates(void);
 /* Observed command and throttle reset leaves ($C08394, $C1B602). */
 void set_event_bit_and_clear_command_word_bit(void);

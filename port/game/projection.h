@@ -17,4 +17,8 @@ int project_view_point_mode(int16_t x, int16_t y, int16_t depth,
 void draw_display_stream_point(uint32_t stream, int16_t mode,
                                int16_t size, int16_t radius);
 
+/* Transform the fixed tuple through the view matrix and submit its circle
+ * ($C0DAEE). */
+void draw_fixed_matrix_mark(void);
+
 #endif

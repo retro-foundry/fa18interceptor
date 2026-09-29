@@ -65,3 +65,19 @@ void draw_display_stream_point(uint32_t stream, int16_t mode,
     project_view_point_mode(rd_s16(point), rd_s16(point + 2),
                             rd_s16(point + 4), mode, size, radius);
 }
+
+void draw_fixed_matrix_mark(void) {
+    static const int16_t point[3] = { (int16_t)0xE000, 0x3800, (int16_t)0xE000 };
+    int16_t result[3];
+    int row;
+    for (row = 0; row < 3; row++) {
+        gaddr m = VIEW_ANGLE_MATRIX + (gaddr)(row * 6);
+        uint32_t sum = (uint32_t)((int32_t)point[0] * rd_s16(m));
+        sum += (uint32_t)((int32_t)point[1] * rd_s16(m + 2));
+        sum += (uint32_t)((int32_t)point[2] * rd_s16(m + 4));
+        result[row] = (int16_t)((int32_t)sum >> 8);
+    }
+    wr_u16(CURRENT_COLOUR, 9);
+    project_view_point_mode(result[0], result[1], result[2], -4,
+                            0, 8);
+}

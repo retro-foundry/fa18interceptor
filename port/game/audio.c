@@ -112,6 +112,38 @@ void start_menu_sound_pair(int32_t volume) {
     }
 }
 
+void start_sound_6(int32_t period, int32_t ticks) {
+    gaddr voice = rd_u32(0xC0A450u);
+    int32_t remainder;
+    if (!(rd_u8(SOUND_FLAGS - 1) & 1)) {
+        wr_u8(FIRE_STATE, 0xFA);
+        wr_u8(0xC45797u, 2);
+        return;
+    }
+    if (!voice) return;
+    free_voice(2);
+    wr_u32(0xC50BDCu, (uint32_t)period << 16);
+    wr_s32(0xC50BE4u, long_divide((int32_t)(0u - ((uint32_t)period << 16)), ticks, &remainder));
+    wr_s32(0xC50BECu, ticks);
+    wr_u32(voice + VOICE_POSITION, 0);
+    wr_u32(voice + VOICE_PERIOD, (uint32_t)(random_bits(11) * 4 + 0x231E) << 16);
+    wr_u32(voice + VOICE_DELAY, 1);
+    play_sound(6, 2, 0);
+}
+
+void start_sound_12(int32_t period) {
+    gaddr voice = rd_u32(0xC0A468u);
+    int32_t remainder;
+    if (!(rd_u8(SOUND_FLAGS - 1) & 2) || !voice) return;
+    free_voice(2);
+    wr_u32(0xC50C4Cu, (uint32_t)period << 16);
+    wr_s32(0xC50C54u, long_divide((int32_t)(0u - ((uint32_t)(period - 1) << 16)), 60, &remainder));
+    wr_u32(voice + VOICE_POSITION, 0);
+    wr_u32(voice + VOICE_PERIOD, (uint32_t)(random_bits(3) + 0x8C) << 16);
+    wr_u32(voice + VOICE_DELAY, 1);
+    play_sound(12, 2, 0);
+}
+
 void play_alert_tone(int32_t volume) {
     gaddr voice;
     if (!(rd_u8(SOUND_FLAGS) & 0x04)) return;

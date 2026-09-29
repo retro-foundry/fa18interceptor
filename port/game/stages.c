@@ -1,9 +1,11 @@
 /* Small update stages. */
 #include "stages.h"
 
+#include "cockpit.h"
 #include "fault.h"
 #include "fixed_math.h"
 #include "globals.h"
+#include "view.h"
 
 void empty_stage(void) {}
 
@@ -17,6 +19,43 @@ void clear_scene_startup_state(void) {
     /* $C090C2: CLR.B across 53 bytes, then CLR.W across 52 words. */
     for (p = 0xC45790u; p < 0xC457C5u; ++p) wr_u8(p, 0);
     for (p = 0xC458C0u; p < 0xC45928u; p += 2) wr_u16(p, 0);
+}
+
+void start_view_mode_zero(uint8_t raw_key) {
+    gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+    wr_u8(0xC457A8u, 0);
+    wr_u8(VIEW_MODE, 0);
+    wr_u8(REDRAW_FIRST, 3);
+    set_zoom_maximum();
+    wr_u16(0xC45936u, 0xFFFF);
+    wr_u8(UPDATE_MASK, 0xFF);
+    wr_u8(0xC457A9u, 0);
+    wr_u8(0xC45891u, 0xFF);
+    if ((rd_u8(record + 0x62) & 0xF0) != 0x30) {
+        int16_t origin = rd_s8(0xC1BAD4u);
+        wr_s16(SPAN_ORIGIN, origin);
+        wr_s16(SPAN_ORIGIN_Y, (int16_t)(origin << 4));
+        request_cockpit_redraw();
+        wr_u16(LINE_LAST_ROW, 0x90);
+    }
+    if (!rd_u8(KEY_TAKEN) && !(raw_key & 0x80)) {
+        int8_t count;
+        wr_u8(KEY_TAKEN, 1);
+        count = rd_s8(KEY_COUNT);
+        if (count < 10) {
+            int8_t slot = rd_s8(KEY_WRITE);
+            int8_t dst = rd_s8(KEY_TRANSLATED_WRITE);
+            if (slot >= 10) slot = 0;
+            wr_u8(KEY_RAW + (gaddr)(int32_t)slot, raw_key);
+            wr_u8(KEY_WRITE, (uint8_t)(slot + 1));
+            wr_u8(KEY_COUNT, (uint8_t)(count + 1));
+            wr_u8(KEY_TRANSLATED + (gaddr)(int32_t)dst,
+                  rd_u8(0xC331CEu + raw_key));
+        }
+    }
+    wr_u8(0xC45878u, 0);
+    wr_u8(0xC45879u, 0);
+    wr_u8(0xC4587Au, 0);
 }
 
 void enable_scene_record_updates(void) {

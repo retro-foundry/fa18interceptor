@@ -68,6 +68,11 @@ void play_sound(int sound, int channel, int32_t volume);
 /* Choose the menu's two-channel sound pair from the mode flags ($C17B96). */
 void start_menu_sound_pair(int32_t volume);
 
+/* Configure and play the two event voices selected by the sound mode
+ * ($C17F8C/$C18108). */
+void start_sound_6(int32_t period, int32_t ticks);
+void start_sound_12(int32_t period);
+
 /* The alert tone on channel 2, when enabled and the view shows the scripted
  * record. */
 void play_alert_tone(int32_t volume);
