@@ -234,4 +234,8 @@ int glue_C12242(void);
 int glue_C06C02(void);
 int glue_C1D5D8(void);
 
+/* batch 33: pixel plots */
+int glue_C2F5F4(void);
+int glue_C2F60A(void);
+
 #endif

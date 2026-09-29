@@ -340,4 +340,11 @@
 /* ---- level lists ($C1D5D8) ------------------------------------------------ */
 #define LIST_END           0xC45A2Eu /* long: end of the level list being scanned */
 
+/* ---- pixel plots ($C2F5F4, $C2F60A, $C2F66E) ------------------------------ */
+#define POINT_XOR_PLANES   0xC456EBu /* byte: planes toggled instead of drawn (LINE_COLOUR >= 0) */
+#define PIXEL_MASKS        0xC2F766u /* word[16]: one pixel at x & 15 */
+#define PAIR_MASKS         0xC2F7C6u /* word[16]: two pixels ending at x & 15 */
+#define PLOT_ROWS_1        0xC2F786u /* long[16]: per-colour one-row writers */
+#define PLOT_ROWS_2        0xC2F7E6u /* long[16]: per-colour two-row writers */
+
 #endif
