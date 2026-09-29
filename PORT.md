@@ -87,10 +87,20 @@ When every caller of a routine is C, its glue is no longer reached; delete it.
   edges (`fa18_recomp --edges`). A return into code outside the translation,
   such as a ROM interrupt dispatcher, keeps everything live.
 - **Shadow** (`--ports shadow`). On every call of a recreated routine, the
-  generated routine runs first, then the glue on the same state. Compared:
-  live registers and flags, every memory byte either run wrote (except the dead
-  stack below the returned-to SP), and the exact sequence of custom-register
-  writes. The game continues on the reference result.
+  glue runs first, sandboxed (no chipset events, hardware blocked, custom
+  writes held, all undone), then the generated routine live, servicing
+  chipset work and stepping to the next label exactly as the dispatcher
+  would. Compared: live registers and flags, every memory byte either run
+  wrote (except the dead stack below the returned-to SP), and the exact
+  sequence of custom-register writes. The game continues on the live run,
+  so a shadow run ends byte-identical to a plain run. Calls with an
+  interrupt or hardware access inside, or cut by a frame end, are not
+  compared.
+- **Sandbox** (`--ports sandbox`). The older comparison: the generated
+  routine first with events held off and its custom writes performed at its
+  end, then the glue. It covers the calls shadow cannot (audio, joystick)
+  but shifts events and blits, so it proves routines without keeping
+  timing. `scripts/recomp_ports_check.sh` runs both.
 - **Poison** (`--poison`). After every compared call, everything liveness
   declares dead is overwritten; all frames must still render identically.
 - **ON mode** (`--ports on`). The recreated C runs the game; parity must stay

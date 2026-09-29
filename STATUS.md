@@ -12,7 +12,7 @@ Updated 2026-09-29.
 | Replay parity (run062) | frame 2475 (back at the menu) pixel-exact |
 | Frame parity (run075, from the menu) | frame 500: 99.6% of pixels match; frame 3000: flying, path has drifted (94%) |
 | Translation | 540 routines, 32,191 instructions; ~70% of CPU cycles in translated code |
-| Recreated C source | 187 routines in `port/game/`, 1.2 million calls proven over four recordings |
+| Recreated C source | 187 routines in `port/game/`, 1.3 million calls proven over four recordings (plus a sandbox pass) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
 ## The game program
@@ -31,12 +31,22 @@ Updated 2026-09-29.
 
 ## Emulator and recordings
 
-- Engine9000 fork (UAE core) driven by `scripts/engine9000_bridge.py`:
-  deterministic replay, savestates, RAM dumps, screenshots, instruction traces
-  and custom-register write logs.
-- Sealed recordings in `captures/`. run075 is the main target: menu, key `1`
-  selects the demo at frame 230, cockpit from frame ~392, flight through
-  frame 21,069.
+- **Native recordings** replace the emulator runs, which are obsolete and
+  archived read-only in `captures/uae/`. Record with
+  `fa18_recomp --window --record OUT.fa18in` (CMake build), seal with
+  `python scripts/seal_native_run.py NAME --state START.bin --input OUT.fa18in`
+  into `captures/native/NAME/`. There are none yet; until there are, the
+  proof uses the archived runs.
+- Input is keyed to main-loop iterations (entries to the update `$C0EFD4`),
+  not frames: live input waits for the next iteration and is logged as
+  delivered (FA18_LOOP_INPUT_V1, `port/recomp/loop_input.h`). Replays are
+  exact for a given machine model and translation, and shadow mode keeps
+  that timing, so every proof run of a native recording must end exactly as
+  sealed (the check verifies it). They are not exact across timing-model
+  changes: the game integrates elapsed time per pass, so its state follows
+  machine timing even when the input lands on the same iteration.
+- Engine9000 fork (UAE core), `scripts/engine9000_bridge.py`: kept for the
+  machine-layer reference (traces, custom-register logs).
 
 ## Native machine and translation
 

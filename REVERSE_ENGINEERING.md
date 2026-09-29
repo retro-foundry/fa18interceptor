@@ -66,6 +66,17 @@ frame. The causes:
   (here: frames count from the restore, keys are libretro `RETROK_*` codes,
   mouse motion is raw host deltas). Write that down before the first
   replay (lesson 12.6).
+- **Once the native machine runs the game, record on it** (here
+  `fa18_recomp --window --record`, sealed by `scripts/seal_native_run.py`).
+  Its replays are exact by construction, so whole sessions become proof
+  scenarios; the emulator's recordings would only replay exactly after
+  porting its timing whole (lesson 12.8). Keep the emulator runs archived
+  for the machine layer.
+- **Key input to the program's own loop, not to video frames**, for a
+  CPU-paced game: deliver live input only at the start of a main-loop pass
+  and log it as delivered. Input then lands at the same point in the game
+  whatever the timing. Do not expect more: a game that integrates elapsed
+  time per pass still diverges when machine timing changes (lesson 12.18).
 
 ## 3. Load the program and map memory
 
@@ -423,6 +434,22 @@ Paula as a mixer), and the parity runner keeps checking every recording.
     state, then replays the registers from the copy. Anything the replay
     reads that only the C produces (the clipped vertex list) must be read
     after the C runs.
+18. **Know what a replay depends on.** Here game state at the same loop
+    pass differed after a timing change even with identical input: the
+    simulation advances by the frames each pass took. Exact replays need a
+    frozen machine and translation; record the hashes of both with each
+    recording and re-record after changing them.
+19. **The proof must not perturb what it proves.** The first shadow mode
+    held interrupts off and replayed custom writes after each compared
+    call, which shifted timing, so long replays drifted under the proof
+    itself. Run the reference live, exactly as a plain run would (servicing
+    events and stepping to the next resumable point inside the call), and
+    skip comparing the calls something external interrupted; keep the
+    perturbing mode only as an extra pass for those calls.
+20. **Count program events once.** A translated routine can stop before its
+    first instruction for due chipset work and be dispatched at its entry
+    again; counting entries counted some passes twice. Mark resumptions
+    (the stop PC and stack pointer) and skip them.
 
 ## Rules for agents
 
