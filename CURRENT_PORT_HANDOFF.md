@@ -71,6 +71,10 @@ one at a time, each proven on every call.
    where game RAM differs), `scripts/recomp_outcome.py` (pixels at chosen
    frames).
 3. **Kickstart calls.** Inventory, then replace with C (PORT.md stage E).
+   Reference for the shim: the Amiga Developer CD v2.1 at `D:miga-dev`
+   (outside the repo, on this machine). Its includes, autodocs and FD/LVO
+   files give each library call's offset, registers and behaviour, which is
+   what a C shim for the game's Kickstart calls needs.
 
 ## Commands
 
