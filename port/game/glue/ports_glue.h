@@ -375,4 +375,13 @@ int glue_C32AB4(void);
 int glue_C32AA6(void);
 int glue_C32AA4(void);
 
+/* batch 57-58: side face, quad list and strip, face grids and lattices */
+int glue_C2159E(void);
+int glue_C21060(void);
+int glue_C210E6(void);
+int glue_C20C38(void);
+int glue_C20C22(void);
+int glue_C20A52(void);
+int glue_C20A40(void);
+
 #endif

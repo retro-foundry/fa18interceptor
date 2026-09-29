@@ -332,6 +332,9 @@ const FA18Port fa18_ports[] = {
     {0xC32AB4, glue_C32AB4, "draw_text_in_view", 4000},
     {0xC32AA6, glue_C32AA6, "print_bcd_in_view", 4500},
     {0xC32AA4, glue_C32AA4, "print_bcd_in_view", 4500},
+    /* batch 57-58: side face, quad list and strip, face grids and lattices */
+    {0xC2159E, glue_C2159E, "draw_side_face", 30000},
+    {0xC210E6, glue_C210E6, "draw_quad_strip", 60000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

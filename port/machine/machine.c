@@ -413,6 +413,18 @@ uint32_t fa18_bus_read32(uint32_t a) {
     return (uint32_t)fa18_bus_read16(a) << 16 | fa18_bus_read16(a + 2);
 }
 
+/* The BLTSIZE the program last wrote, and its value when a polygon draw
+ * last began (DMACON $8400, blitter priority on), for glue that rebuilds a
+ * draw's registers after several draws. Kept from the writes as issued,
+ * whether or not a shadow comparison holds them back. */
+uint16_t fa18_bltsize_at_draw_start;
+static uint16_t bltsize_issued;
+
+static void note_draw_start(uint32_t reg, uint16_t v) {
+    if (reg == 0x058) bltsize_issued = v;
+    else if (reg == 0x096 && v == 0x8400) fa18_bltsize_at_draw_start = bltsize_issued;
+}
+
 /* FA18_WATCH=lo-hi (hex): log CPU writes into that range (debugging). */
 static void watch_write(uint32_t a, uint32_t v, int size) {
     static int init;
@@ -487,6 +499,7 @@ void fa18_bus_write16(uint32_t a, uint16_t v) {
         return;
     }
     if (is_custom(a)) {
+        note_draw_start(a & 0x1FE, v);
         if (CUSTOM_LOGGED(a & 0x1FE, v)) return;
         fa18_custom_write(m, a & 0x1FE, v);
         return;

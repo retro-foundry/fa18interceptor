@@ -76,6 +76,8 @@ typedef struct {
 } FA18Machine;
 
 extern FA18Machine *fa18_machine;
+/* BLTSIZE as written just before the last polygon draw began. */
+extern uint16_t fa18_bltsize_at_draw_start;
 
 int fa18_machine_load_state(FA18Machine *m, const uint8_t *state, size_t size,
                             const uint8_t *rom, size_t rom_size, char *error, size_t error_size);

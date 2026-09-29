@@ -54,6 +54,41 @@ void fa18_write_log_custom(uint32_t reg, uint16_t value) {
     custom_count++;
 }
 
+/* Chip bytes the blitter wrote during a live comparison: their final value
+ * depends on DMA the sandboxed port did not run, so they are not compared. */
+static uint8_t dma_bits[FA18_CHIP_SIZE / 8];
+static uint32_t *dma_log;
+static size_t dma_count, dma_capacity;
+
+void fa18_note_dma_write(uint32_t address, int size);
+void fa18_note_dma_write(uint32_t address, int size) {
+    int n;
+    for (n = 0; n < size; n++) {
+        uint32_t a = (address + (uint32_t)n) & (FA18_CHIP_SIZE - 1);
+        if (dma_bits[a >> 3] & (1 << (a & 7))) continue;
+        dma_bits[a >> 3] |= (uint8_t)(1 << (a & 7));
+        if (dma_count == dma_capacity) {
+            dma_capacity = dma_capacity ? dma_capacity * 2 : 4096;
+            dma_log = realloc(dma_log, dma_capacity * sizeof *dma_log);
+        }
+        dma_log[dma_count++] = a;
+    }
+}
+
+static int dma_written(uint32_t a) {
+    a &= 0xFFFFFF;
+    if (a >= 0x200000) return 0;
+    a &= FA18_CHIP_SIZE - 1;
+    return (dma_bits[a >> 3] >> (a & 7)) & 1;
+}
+
+static void dma_clear(void) {
+    while (dma_count) {
+        uint32_t a = dma_log[--dma_count];
+        dma_bits[a >> 3] &= (uint8_t)~(1 << (a & 7));
+    }
+}
+
 static uint8_t *byte_at(uint32_t a) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
@@ -389,6 +424,7 @@ static int run_shadow(int function, int label, int port) {
 
     /* The generated routine, live. */
     custom_count = 0;
+    dma_clear();
     fa18_write_log_active = 2;
     fa18_write_log_hardware = 0;
     {
@@ -468,7 +504,7 @@ static int run_shadow(int function, int label, int port) {
             int j, first = 1;
             for (j = 0; j < i; j++)
                 if (log_entries[j].address == a) { first = 0; break; }
-            if (!first || dead_stack(a, live_sp)) continue;
+            if (!first || dead_stack(a, live_sp) || dma_written(a)) continue;
             for (j = (int)port_count - 1; j >= 0; j--)
                 if (port_writes[j].address == a) { have = port_new[j]; break; }
             if (have != want) {
@@ -481,7 +517,7 @@ static int run_shadow(int function, int label, int port) {
             int j, later = 0, written = 0;
             for (j = i + 1; j < (int)port_count; j++)
                 if (port_writes[j].address == a) { later = 1; break; }
-            if (later || dead_stack(a, live_sp)) continue;
+            if (later || dead_stack(a, live_sp) || dma_written(a)) continue;
             for (j = 0; j < (int)log_count; j++)
                 if (log_entries[j].address == a) { written = 1; break; }
             if (!written && port_new[i] != *byte_at(a)) {

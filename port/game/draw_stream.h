@@ -76,4 +76,35 @@ void offset_block_copies(gaddr *stream);
  * (a scaled edge, and moves along the edges of points 4-8) ($C217EA). */
 void extend_block_scaled(gaddr *stream);
 
+/* Colour, two offsets a, b into BOUND_RECORD's points (+$A/+$E: x, z; b's
+ * bit 15 flips the choice), then a vertex offset and a block offset: a
+ * triangle from that vertex and the block, facing one way or the other by
+ * which side of the edge a..b the eye is on ($C2159E). The clipper input's
+ * shift word is left as it was. */
+int draw_side_face(gaddr *stream);
+
+/* Colour 12, line planes 8, colour 8: quads of four vertex offsets until a
+ * negative offset, each unless wholly behind ($C21060). */
+int draw_quad_list(gaddr *stream);
+
+/* A block offset and a count: quads q, q + a, q + a + b, q + b for q
+ * stepping from the block's point 3, a = 3/2 (p1 - p3) + (p0 - p3) and
+ * b = p2 - p3; line planes 2, colour 0, complement 2 ($C210E6). */
+int draw_quad_strip(gaddr *stream);
+
+/* A block offset, a row count, then each row's column count: a grid of
+ * faces. With q stepping from the block's point 3 a row, u, v, w its points
+ * 0, 1, 2 less point 3, the face at column c spans q + c*v/2 by u and w.
+ * Colour $D, line planes 2, complement 2 ($C20C38), or the colour from the
+ * stream and no line style ($C20C22). */
+int draw_face_grid(gaddr *stream);
+int draw_face_grid_plain(gaddr *stream);
+
+/* A block offset and a count: faces along v (half steps) between points 2
+ * and 3 of the block, across u; then as many back from the far edge (drawn,
+ * not counted in the result). Colour $D, line planes 2, complement 2
+ * ($C20A52), or the colour from the stream, no line style ($C20A40). */
+int draw_face_lattice(gaddr *stream);
+int draw_face_lattice_plain(gaddr *stream);
+
 #endif

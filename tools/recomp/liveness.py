@@ -16,7 +16,9 @@ interprocedural: at an RTS, what is live is what the routine's own callers
 read after their calls (a worklist fixpoint over static and observed call
 edges); a routine with no known caller keeps everything live at its RTS.
 Callee upward-exposed uses are computed per routine; a call kills the flags
-(the callee's RTS leaves its own flags) and kills no registers.
+(the callee's RTS leaves its own flags) and kills no registers. A computed
+call (JSR (An)) reads what its observed callees read; a computed jump with
+known destinations (COMPUTED_JUMPS) what those read.
 
 Validation: `fa18_recomp --ports shadow --poison` overwrites everything
 declared dead after every compared call; the run must end with the same RAM
@@ -309,14 +311,21 @@ def build_summaries(functions: dict) -> dict[int, frozenset]:
     """Upward-exposed register uses of each routine (flags excluded)."""
     summaries: dict[int, frozenset] = {}
     active: set[int] = set()
+    # An entry inside another routine's code (a second way in) is walked in
+    # that routine.
+    containing: dict[int, object] = {}
+    for fn in functions.values():
+        for pc in fn.insns:
+            containing.setdefault(pc, fn)
 
     def summary(entry: int) -> frozenset:
         if entry in summaries:
             return summaries[entry]
-        if entry in active or entry not in functions:
+        fn = functions.get(entry) or containing.get(entry)
+        if entry in active or fn is None:
             return frozenset(REGS)
         active.add(entry)
-        live = walk(entry, frozenset(REGS), functions[entry], summary, ret_live=frozenset())
+        live = walk(entry, frozenset(REGS), fn, summary, ret_live=frozenset())
         active.discard(entry)
         summaries[entry] = frozenset(r for r in live if r in REGS)
         return summaries[entry]
@@ -324,6 +333,21 @@ def build_summaries(functions: dict) -> dict[int, frozenset]:
     for e in functions:
         summary(e)
     return summaries
+
+
+# Computed jumps whose destinations are known, with what those read before
+# returning: the pixel plot's JMP (A4) at $C2F764 goes to one of its
+# per-colour writers (the long tables at $C2F786 and $C2F7E6), which only
+# AND, OR or EOR low words of D0-D7 into (A0)-(A3) and RTS (they set N, Z,
+# V and C, and leave X).
+COMPUTED_JUMPS = {
+    0xC2F764: frozenset({"D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "A0", "A1", "A2", "A3"}),
+}
+
+
+# Return address -> the callees observed from that call site (set by
+# call_site_liveness from the recorded call edges), for computed calls.
+OBSERVED_CALLEES: dict[int, set[int]] = {}
 
 
 def walk(start: int, undecided: frozenset, fn, summary, ret_live: frozenset) -> set[str]:
@@ -351,7 +375,13 @@ def walk(start: int, undecided: frozenset, fn, summary, ret_live: frozenset) -> 
             uses, defs, flags_def, flags_use, control = du
             live |= und & (set(uses) | set(flags_use))
             if control == "call":
-                callee = summary(target) if target is not None else frozenset(REGS)
+                if target is not None:
+                    callee = summary(target)
+                else:
+                    # A computed call: what its observed callees read.
+                    seen_callees = OBSERVED_CALLEES.get(pc + length)
+                    callee = (frozenset().union(*(summary(c) for c in seen_callees)) if seen_callees
+                              else frozenset(REGS))
                 live |= und & callee
                 und = und - set(FLAGS)
                 pc += length
@@ -367,6 +397,9 @@ def walk(start: int, undecided: frozenset, fn, summary, ret_live: frozenset) -> 
                 if target is not None and target in fn.insns:
                     pc = target
                     continue
+                if target is None and pc in COMPUTED_JUMPS:
+                    live |= und & (COMPUTED_JUMPS[pc] | (ret_live - {"N", "Z", "V", "C"}))
+                    break
                 live |= und
                 break
             if control == "branch":
@@ -383,6 +416,10 @@ def walk(start: int, undecided: frozenset, fn, summary, ret_live: frozenset) -> 
 def call_site_liveness(functions: dict, extra_callers: dict[int, set[int]] | None = None
                        ) -> dict[int, tuple[set[str], int]]:
     """{return address: (live tokens, owning routine entry)}."""
+    OBSERVED_CALLEES.clear()
+    for callee, rets in (extra_callers or {}).items():
+        for r in rets:
+            OBSERVED_CALLEES.setdefault(r, set()).add(callee)
     summaries = build_summaries(functions)
     sites = []  # (ret, owning routine, callee or None)
     for entry, fn in functions.items():

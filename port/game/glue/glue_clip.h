@@ -20,7 +20,7 @@ void clip_stage_registers(int k, ClipCopy *c);
 /* The clipper $C246A0 for glue whose routine calls it: the snapshot is
  * taken before the C runs, the registers replayed after it, from the
  * registers at the call; `colour` is CURRENT_COLOUR at the call and
- * `drawn` what clip_and_draw_polygon returned. */
+ * `drawn` what clip_and_draw_polygon returned (-1: derive it). */
 typedef struct {
     ClipCopy copy;
     uint16_t last_size; /* BLTSIZE */

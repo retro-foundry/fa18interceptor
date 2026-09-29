@@ -198,8 +198,9 @@ void clipper_snapshot(ClipperSnapshot *s) {
 }
 
 void clipper_registers(ClipperSnapshot *s, uint16_t colour, int drawn) {
-    int projects = clipper_regs(&s->copy);
-    if (projects && !project_regs()) SET_W(D(7), 0);
+    int projects = clipper_regs(&s->copy), projected = projects && project_regs();
+    if (projects && !projected) SET_W(D(7), 0);
+    if (drawn < 0) drawn = projected; /* the call's own result, when not known */
     if (drawn) draw_polygon_registers(s->last_size, colour);
     D(0) = (uint32_t)drawn;
     flags_logic_l(D(0));

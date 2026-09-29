@@ -71,9 +71,13 @@ static uint8_t fill_byte(uint8_t data, int inclusive, int *fc) {
 
 static uint16_t chip_read(FA18Machine *m, uint32_t a) { return fa18_chip16(m, a); }
 
+extern int fa18_write_log_active;
+void fa18_note_dma_write(uint32_t address, int size);
+
 static void chip_write(FA18Machine *m, uint32_t a, uint16_t v) {
     fa18_chip16_set(m, a, v);
     fa18_recomp_note_write(a & (FA18_CHIP_SIZE - 2), 2);
+    if (fa18_write_log_active == 2) fa18_note_dma_write(a & (FA18_CHIP_SIZE - 2), 2);
 }
 
 /* Persistent blitter data registers across blits (UAE blt_info). */
