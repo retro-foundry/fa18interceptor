@@ -53,6 +53,8 @@
 #define SELECTED_RECORD    0xC459C0u /* word: byte offset of the selected record, or -1 ($C230B0) */
 #define SELECTION_ACTIVE   0xC45868u /* byte: cleared with the selection */
 #define SELECTION_MARKER   0xC4593Au /* word: set to -1 with the selection */
+#define SELECTION_MARKER_Y (SELECTION_MARKER + 2u) /* word: marker's second screen coordinate */
+#define POSTFLIGHT_MARK    0xC4593Eu /* two words: postflight projected screen position */
 
 /* ---- notifications ($C11B44) ----------------------------------------------- */
 #define NOTIFY_COUNTDOWN   0xC45890u /* byte: 8..1 cadence counter */
@@ -82,6 +84,8 @@
 #define POST_INPUT_COUNTDOWN 0xC45AD6u /* word: negative once expired */
 #define POST_INPUT_AUX       0xC45795u /* byte */
 #define POST_INPUT_EVENT     0xC457AEu /* byte: event flag cleared on completion */
+#define POSTFLIGHT_VECTOR_CURRENT  0xC45716u /* three longs: last postflight transformed record vector */
+#define POSTFLIGHT_VECTOR_PREVIOUS 0xC45722u /* three longs: vector before POSTFLIGHT_VECTOR_CURRENT */
 #define VIEWPORT_MODE        0xC458A0u /* byte: current viewport mode */
 #define VIEWPORT_TARGET      0xC458A1u /* byte: mode being changed to */
 #define STAGE_CALLBACK       0xC1820Cu /* long: routine run by the next update */
@@ -511,6 +515,9 @@
 #define SEEKER_MARK        0xC45942u /* word x, y: the seeker mark, slewing toward TARGET_MARK */
 #define SHOOT_CUE          0xC458B4u /* byte: 1 target in reach, 2 in reach and closing fast; the cue shows while set */
 #define RANGE_RATE         0xC45B46u /* word: the change in the target's range (record +$4A) */
+#define POSTFLIGHT_RANGE_LAST 0xC45B44u /* word: previous record +$4A used by the postflight rate */
+#define POSTFLIGHT_BCD_TICK  0xC45B26u /* long: postflight tape's BCD tick scratch */
+#define POSTFLIGHT_BCD_STEP  0xC45B2Au /* three BCD bytes: postflight tape tick increment */
 #define MESSAGE_LINE       0xC4580Au /* 26 characters: the message line as drawn */
 #define MESSAGE_DRAWN      0xC45AE4u /* word: the MESSAGE_TABLE entry last copied to MESSAGE_LINE */
 #define INFO_DELAY         0xC45887u /* byte: passes before the target info takes the line */
