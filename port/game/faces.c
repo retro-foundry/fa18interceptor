@@ -49,3 +49,15 @@ int draw_outlined_face(gaddr *face) {
     wr_u16(LINE_STYLE + 2, 0xFFFF);
     return drawn;
 }
+
+void split_edge(gaddr points) {
+    int16_t p[3], d[3];
+    int k;
+    for (k = 0; k < 3; k++) {
+        p[k] = rd_s16(points + (gaddr)(2 * k));
+        d[k] = (int16_t)((int16_t)(rd_s16(points + 6 + (gaddr)(2 * k)) - p[k]) >> 1);
+        wr_s16(points + 0x1E + (gaddr)(2 * k), (int16_t)(p[k] + d[k]));
+    }
+    for (k = 0; k < 3; k++)
+        wr_s16(points + 0x24 + (gaddr)(2 * k), (int16_t)(p[k] + (int16_t)(d[k] >> 1)));
+}

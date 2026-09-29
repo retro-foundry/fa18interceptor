@@ -137,3 +137,9 @@ void update_message(void) {
     }
     wr_u8(NOTIFY_CODE, 0);
 }
+
+void take_warning_events(void) {
+    if (!(rd_u32(WARNING_CAUSES) & 0x4200)) return;
+    wr_u32(WARNING_CAUSES, rd_u32(WARNING_CAUSES) & ~0x4200u);
+    wr_u32(EVENT_BITS, rd_u32(EVENT_BITS) | 8);
+}

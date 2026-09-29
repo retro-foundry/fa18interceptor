@@ -13,4 +13,7 @@
  * NOTIFY_CODE is consumed. */
 void update_message(void);
 
+/* Turn WARNING_CAUSES bits 9 and 14 into event bit 3 ($C33DA4). */
+void take_warning_events(void);
+
 #endif

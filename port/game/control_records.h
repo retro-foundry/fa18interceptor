@@ -42,6 +42,10 @@ void update_record_5a(void);
 
 /* Current record: move +$26 an eighth of the way toward `target`. */
 void ease_record_26(int16_t target);
+/* The current record's +$58 a quarter of the way toward 5/8 of `target`
+ * (halved again when +$20 bit 2 is set), then kept out of the dead zone
+ * ($C13C0A). Returns the target used. */
+int16_t ease_record_58(int16_t target);
 
 /* Mark a record pending (+$50 = -1), negating +$54 if it was not already. */
 void mark_record_pending(gaddr record);

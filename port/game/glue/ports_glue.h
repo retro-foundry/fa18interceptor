@@ -283,4 +283,34 @@ int glue_C1FB8C(void);
 /* batch 46: target distance */
 int glue_C1D91A(void);
 
+/* batch 47: post-input stages, stick and throttle, flight recorder */
+int glue_C0F946(void);
+int glue_C0F974(void);
+int glue_C0FB70(void);
+int glue_C0FBB6(void);
+int glue_C101FC(void);
+int glue_C10228(void);
+int glue_C1072E(void);
+int glue_C1075A(void);
+int glue_C11872(void);
+int glue_C118E6(void);
+int glue_C11958(void);
+int glue_C119D4(void);
+int glue_C0A2F0(void);
+int glue_C1B4D0(void);
+int glue_C1B4D4(void);
+int glue_C1B4D8(void);
+int glue_C1B4DE(void);
+int glue_C1B50C(void);
+int glue_C1B510(void);
+int glue_C1B514(void);
+int glue_C1B558(void);
+int glue_C1B55C(void);
+int glue_C1B560(void);
+int glue_C25A6A(void);
+int glue_C33DA4(void);
+int glue_C13C0A(void);
+int glue_C21C4C(void);
+int glue_C1FED4(void);
+
 #endif

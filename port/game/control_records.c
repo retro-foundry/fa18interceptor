@@ -443,3 +443,15 @@ void file_records_by_level(int16_t column, int16_t row, gaddr lists, FilingState
     if (!file_bank(CONTROL_RECORDS, CONTROL_RECORD_BYTES, 0x10, column, row, lists, state, 0x0E)) return;
     file_bank(WORKSPACE_RECORDS, WORKSPACE_RECORD_BYTES, 0x40, column, row, lists, state, 0x36);
 }
+
+int16_t ease_record_58(int16_t target) {
+    gaddr r = rd_u32(CURRENT_RECORD), value = r + 0x58;
+    int16_t old;
+
+    target = five_eighths(target);
+    if (rd_u8(r + 0x20) & 4) target = (int16_t)(target >> 1);
+    old = rd_s16(value);
+    wr_s16(value, (int16_t)(old - (int16_t)((int16_t)(old - target) >> 2)));
+    nudge_outside_dead_zone(value);
+    return target;
+}

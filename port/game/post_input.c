@@ -2,6 +2,7 @@
 #include "post_input.h"
 
 #include "audio.h"
+#include "stages.h"
 
 #include "globals.h"
 #include "memory.h"
@@ -41,4 +42,129 @@ void check_post_input_expiry(void) {
     wr_u8(POST_INPUT_EXPIRED, 1);
     play_tone_2();
     wr_u32(STAGE_CALLBACK, STAGE_AFTER_EXPIRY);
+}
+
+/* The stages below run from STAGE_CALLBACK once per update; most wait for
+ * POST_INPUT_COUNTDOWN to expire (go negative) and then install the next. */
+
+static int countdown_expired(void) { return rd_s16(POST_INPUT_COUNTDOWN) < 0; }
+static void next_stage(gaddr routine) { wr_u32(STAGE_CALLBACK, routine); }
+
+void await_viewport_then_ready(void) {
+    if (!countdown_expired() || rd_u8(VIEWPORT_MODE) != rd_u8(VIEWPORT_TARGET)) return;
+    wr_u16(POST_INPUT_COUNTDOWN, 2);
+    next_stage(ROUTINE_VIEWPORT_READY);
+}
+
+void mark_viewport_ready(void) {
+    if (!countdown_expired()) return;
+    wr_u8(POST_INPUT_AUX, 1);
+    next_stage(ROUTINE_AFTER_VIEWPORT);
+}
+
+void choose_after_countdown(void) {
+    if (!countdown_expired()) return;
+    if (!rd_u8(SEQUENCE_FLAG)) {
+        wr_u8(POST_INPUT_AUX, 0);
+        wr_u16(MESSAGE_QUEUE, 0x49);
+        next_stage(ROUTINE_LEAVE_ON_KEY);
+    } else {
+        wr_u8(POST_INPUT_AUX, 1);
+        reset_message_sequence();
+        next_stage(ROUTINE_AFTER_POST_INPUT);
+    }
+}
+
+void leave_on_key_or_message(void) {
+    if ((int8_t)rd_u8(MESSAGE_STATE_C) >= 0 && !rd_u8(KEY_TAKEN)) return;
+    wr_u8(POST_INPUT_AUX, 1);
+    reset_message_sequence();
+    next_stage(ROUTINE_AFTER_POST_INPUT);
+}
+
+void reset_viewport_after_countdown(void) {
+    if (!countdown_expired()) return;
+    wr_u8(POST_INPUT_AUX, 0);
+    wr_u8(VIEWPORT_TARGET, 0x0F);
+    wr_u8(VIEWPORT_MODE, 0);
+    next_stage(ROUTINE_ENTER_MODE_FOUR);
+}
+
+void enter_mode_four_when_ready(void) {
+    if (rd_u8(VIEWPORT_MODE) != rd_u8(VIEWPORT_TARGET)) return;
+    wr_u16(POST_INPUT_COUNTDOWN, 2);
+    wr_u8(POST_INPUT_AUX, 1);
+    wr_u8(UPDATE_MASK, 0xFF);
+    wr_u8(CONTEXT_STATE, 4);
+    wr_u8(CONTEXT_GATE, 1);
+    wr_u16(POST_INPUT_COUNTDOWN, 5);
+    next_stage(ROUTINE_MODE_FOUR);
+}
+
+void queue_message_four(void) {
+    if (rd_u8(MESSAGE_STATE_C) != 1) return;
+    wr_u16(MESSAGE_QUEUE, 4);
+    wr_u8(MESSAGE_STATE_B, 0);
+    wr_u8(MESSAGE_STATE_C, 3);
+    next_stage(ROUTINE_START_OUTCOME);
+}
+
+void start_outcome_countdown(void) {
+    if (!rd_u8(CONTEXT_REQUEST)) return;
+    if (rd_u8(CONTEXT_SELECT)) wr_u8(CONTEXT_GATE, 2);
+    reset_message_sequence();
+    wr_u16(POST_INPUT_COUNTDOWN, 3);
+    next_stage(ROUTINE_OUTCOME);
+}
+
+void expire_to_fire_state(void) {
+    if (!countdown_expired()) return;
+    wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) | 0x40));
+    wr_u8(FIRE_STATE, 0xFE);
+    next_stage(STAGE_AFTER_EXPIRY);
+}
+
+void end_on_message(void) {
+    if ((int8_t)rd_u8(MESSAGE_STATE_C) < 0) next_stage(ROUTINE_END_SEQUENCE);
+}
+
+void follow_message_or_phase(void) {
+    if ((int8_t)rd_u8(MESSAGE_STATE_C) < 0) {
+        wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) & 0xFFBF));
+        wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) & 0x9FFF));
+        wr_u16(POST_INPUT_COUNTDOWN, 0x64);
+        next_stage(ROUTINE_RESTART_SEQUENCE);
+    } else if (rd_u8(SEQUENCE_PHASE) == 0xFF) {
+        wr_u8(SEQUENCE_PHASE, 0);
+        wr_u8(SEQUENCE_FLAG, 0);
+        next_stage(ROUTINE_END_SEQUENCE);
+    } else if (rd_u8(SEQUENCE_PHASE) == 1) {
+        wr_u16(POST_INPUT_COUNTDOWN, 0xFFFF);
+        next_stage(ROUTINE_RESTART_SEQUENCE);
+    }
+}
+
+void restart_after_countdown(void) {
+    if (!countdown_expired()) return;
+    wr_u8(SEQUENCE_PHASE, 0);
+    wr_u8(PLAYER_PHASE, 0);
+    if (rd_u8(CONTEXT_REQUEST)) wr_u8(SEQUENCE_FLAG, 1);
+    wr_u8(POST_INPUT_EVENT, 1);
+    wr_u16(POST_INPUT_COUNTDOWN, 3);
+    wr_u8(POST_INPUT_AUX, 0);
+    wr_u8(VIEWPORT_TARGET, 0);
+    next_stage(ROUTINE_AWAIT_VIEWPORT);
+}
+
+void begin_phase_three(void) {
+    gaddr player = CONTROL_RECORDS;
+    if (rd_u8(PLAYER_PHASE)) return;
+    if (!(rd_u8(player + 1) & 0x40)) return;
+    if ((rd_u16(player + 2) & 0xC080) != 0xC080 || rd_u16(player + 0x6E)) return;
+    if (rd_u8(SEQUENCE_PHASE) == 3) return;
+    wr_u8(PLAYER_PHASE, 0xFF);
+    wr_u16(PHASE_WORD, 0);
+    wr_u8(SEQUENCE_PHASE, 3);
+    wr_u8(SEQUENCE_STEP, 4);
+    wr_u8(CONTEXT_GATE, 1);
 }

@@ -12,8 +12,8 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 187; 1,311,734 calls matching in shadow and 1,245,302 in the sandbox pass over the archived run075, run024, run060 and run062; poison-clean |
-| Native recordings (`captures/native/`) | none yet; shadow runs are byte-identical to plain runs |
+| Recreated routines (`port/game/`) | 216; 1,055,960 calls matching in shadow and 1,191,036 in the sandbox pass over the native recordings; poison-clean |
+| Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
 | run060 replay | game RAM identical through frame 93; pixels exact to frame 540; drifts after |

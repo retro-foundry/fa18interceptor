@@ -118,3 +118,7 @@ gaddr skip_if_shown_record_flag(gaddr stream) {
     if (rd_u16(record + 2) & 0x08) stream += (gaddr)(int32_t)skip;
     return stream;
 }
+
+gaddr skip_word_for_mode_57(gaddr stream) {
+    return rd_u16(STREAM_MODE) == 0x57 ? stream + 2 : stream;
+}

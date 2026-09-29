@@ -44,4 +44,7 @@ int16_t find_sorted_word(gaddr table, int16_t key);
  * position after it. */
 gaddr skip_if_shown_record_flag(gaddr stream);
 
+/* Past one more word of a face stream in STREAM_MODE $57 ($C1FED4). */
+gaddr skip_word_for_mode_57(gaddr stream);
+
 #endif

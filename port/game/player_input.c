@@ -92,3 +92,25 @@ void drop_lost_selection(void) {
     wr_u16(SPAN_ORIGIN_Y, 0);
     queue_view_key(0);
 }
+
+/* PLAYER_STICK fields: bits 0-1 throttle, 2-3 stick X, 4-5 stick Y. */
+static void set_stick_bits(uint8_t keep, uint8_t value) {
+    wr_u8(PLAYER_STICK, (uint8_t)((rd_u8(PLAYER_STICK) & keep) | value));
+}
+
+void set_throttle_input(uint8_t value) { set_stick_bits(0xFC, value); }
+
+void release_throttle_keys(void) {
+    wr_u8(FUNCTION_KEY_LEVEL, 0);
+    set_throttle_input(THROTTLE_HOLD);
+}
+
+void set_stick_y(uint8_t value) {
+    wr_u8(STICK_Y, value);
+    if (rd_u8(PAUSE_A) || rd_u8(CONTEXT_STARTED)) set_stick_bits(0xCF, value);
+}
+
+void set_stick_x(uint8_t value) {
+    wr_u8(STICK_X, value);
+    if (rd_u8(PAUSE_A) || rd_u8(CONTEXT_STARTED)) set_stick_bits(0xF3, value);
+}

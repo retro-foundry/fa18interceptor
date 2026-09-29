@@ -397,4 +397,38 @@
 #define VIEW_SIDE          0xC458B2u /* byte: or'ed into the tracked view identity */
 #define VIEW_ANGLE_MATRIX  0xC45BD8u /* word[9]: pan and rotate matrix, rows scaled, 8 fraction bits */
 
+/* ---- post-input stage sequence: STAGE_CALLBACK targets ------------------- */
+#define ROUTINE_END_SEQUENCE       0xC0F920u
+#define ROUTINE_AWAIT_VIEWPORT     0xC0F946u
+#define ROUTINE_VIEWPORT_READY     0xC0F974u
+#define ROUTINE_AFTER_VIEWPORT     0xC0F992u
+#define ROUTINE_LEAVE_ON_KEY       0xC0FBB6u
+#define ROUTINE_ENTER_MODE_FOUR    0xC10228u
+#define ROUTINE_MODE_FOUR          0xC10678u
+#define ROUTINE_START_OUTCOME      0xC1075Au
+#define ROUTINE_OUTCOME            0xC1078Au
+#define ROUTINE_RESTART_SEQUENCE   0xC119D4u
+#define CONTEXT_REQUEST    0xC458ACu /* byte: a context run was asked for (negative: cancelled) */
+#define SEQUENCE_PHASE     0xC4582Au /* byte: $FF, 1, 2 or 3 */
+#define SEQUENCE_FLAG      0xC4582Bu /* byte */
+#define SEQUENCE_STEP      0xC4582Cu /* byte: set to 4 with phase 3 */
+#define PHASE_WORD         0xC458C0u /* word: cleared with phase 3 */
+#define FIRE_STATE         0xC458B0u /* byte */
+
+#define ATTEMPTS_LEFT      0xC45898u /* byte: decremented by the outcome stage; negative ends it */
+#define STREAM_MODE        0xC459B4u /* word: $57 skips a word in the face stream */
+
+/* ---- flight input recorder ($C25A6A) -------------------------------------- */
+#define RECORDER_ON        0xC45790u /* byte */
+#define RECORDER_MODE      0xC4584Bu /* byte: 0 records, 1 plays back, 4 full */
+#define RECORDER_START     0xC4FDA4u /* long: stick byte buffer */
+#define RECORDER_SIZE      0xC4FDA8u /* long */
+#define RECORDER_CURSOR    0xC4FDACu /* long */
+#define RECORDER_WORDS     0xC4FDB0u /* long: word pair buffer */
+#define RECORDER_WORD_CURSOR 0xC4FDB4u /* long */
+#define PLAYBACK_WORDS     0xC4FDB8u /* long: word pair being played back */
+#define RECORD_WORD_A      0xC45996u /* word: accumulated since the last pass */
+#define RECORD_WORD_B      0xC45998u /* word */
+#define FUNCTION_KEY_LEVEL 0xC45870u /* byte: F1-F9 $0C..$6C, F10 $79 */
+
 #endif

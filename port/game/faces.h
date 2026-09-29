@@ -18,4 +18,8 @@ int draw_indexed_face(gaddr *face);
  * the count, whose z also counts toward "behind". */
 int draw_outlined_face(gaddr *face);
 
+/* From the two points at `points` (words 0-2 and 3-5), the midpoint to
+ * +$1E and the quarter point to +$24 ($C21C4C). */
+void split_edge(gaddr points);
+
 #endif
