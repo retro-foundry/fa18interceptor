@@ -75,3 +75,75 @@ void transform_ground_points(gaddr src, int16_t count, int16_t shift, const int1
         }
     } while (--count > 0);
 }
+
+static int16_t row_dot(gaddr row, int16_t x, int16_t y, int16_t z) {
+    return (int16_t)((int32_t)((uint32_t)((int32_t)x * rd_s16(row)) + (uint32_t)((int32_t)y * rd_s16(row + 2)) +
+                               (uint32_t)((int32_t)z * rd_s16(row + 4))) >> 8);
+}
+
+static void rotate_store(gaddr matrix, int16_t x, int16_t y, int16_t z, gaddr out) {
+    wr_s16(out, row_dot(matrix, x, y, z));
+    wr_s16(out + 2, row_dot(matrix + 6, x, y, z));
+    wr_s16(out + 4, row_dot(matrix + 12, x, y, z));
+}
+
+void transform_bound_points(int16_t count, int16_t first, gaddr frame) {
+    gaddr bound = rd_u32(BOUND_RECORD), in = bound + 0xA + (gaddr)(int32_t)first, out;
+    uint8_t mode = rd_u8(bound + 7);
+    int down = (8 - rd_s16(frame - 6)) & 63, shift = rd_s16(frame - 8) & 63;
+    int32_t x = rd_s32(frame - 0x20) + rd_s32(SHADOW_OFFSET_X);
+    int32_t y = rd_s32(frame - 0x1C), z = rd_s32(frame - 0x18) + rd_s32(SHADOW_OFFSET_Z);
+
+    if (mode & 1) {
+        y += rd_s32(SHADOW_OFFSET_Y);
+        x >>= down;
+        y >>= down;
+        z >>= down;
+        out = WORKSPACES + (gaddr)(int32_t)first;
+        do {
+            int16_t px = (int16_t)(rd_s16(in) >> shift), py = (int16_t)(rd_s16(in + 2) >> shift);
+            int16_t pz = (int16_t)(rd_s16(in + 4) >> shift);
+            in += 6;
+            if (rd_u8(frame - 0x7F) & 1) {
+                view_transform(in - 6, rd_s16(frame - 8), out);
+            } else {
+                rotate_store(VIEW_ANGLE_MATRIX, (int16_t)(row_dot(BOUND_MATRIX, px, py, pz) + (int16_t)x),
+                             (int16_t)(row_dot(BOUND_MATRIX + 6, px, py, pz) + (int16_t)y),
+                             (int16_t)(row_dot(BOUND_MATRIX + 12, px, py, pz) + (int16_t)z), out);
+            }
+            out += 6;
+        } while (--count > 0);
+        return;
+    }
+    x >>= down;
+    y >>= down;
+    z >>= down;
+    wr_u16(frame - 0x12, (uint16_t)y);
+    if (!(mode & 2)) {
+        out = WORKSPACES + (gaddr)(int32_t)first;
+        do {
+            int16_t px = (int16_t)((rd_s16(in) >> shift) + (int16_t)x);
+            int16_t py = (int16_t)((rd_s16(in + 2) >> shift) + (int16_t)y);
+            int16_t pz = (int16_t)((rd_s16(in + 4) >> shift) + (int16_t)z);
+            in += 6;
+            rotate_store(VIEW_ANGLE_MATRIX, px, py, pz, out);
+            out += 6;
+        } while (--count > 0);
+        return;
+    }
+    /* Flat points: (x, z) pairs on the ground, moved by the frame's offset. */
+    out = WORKSPACES + (gaddr)(int32_t)(int16_t)(first + (first >> 1));
+    do {
+        int16_t px = (int16_t)((rd_s16(in) >> shift) + (int16_t)x);
+        int16_t pz = (int16_t)((rd_s16(in + 2) >> shift) + (int16_t)z);
+        gaddr m = VIEW_ANGLE_MATRIX;
+        in += 4;
+        wr_s16(out, (int16_t)((int16_t)((int32_t)((uint32_t)((int32_t)px * rd_s16(m)) + (uint32_t)((int32_t)pz * rd_s16(m + 4))) >> 8) +
+                              rd_s16(frame - 0x78)));
+        wr_s16(out + 2, (int16_t)((int16_t)((int32_t)((uint32_t)((int32_t)px * rd_s16(m + 6)) + (uint32_t)((int32_t)pz * rd_s16(m + 10))) >> 8) +
+                                  rd_s16(frame - 0x76)));
+        wr_s16(out + 4, (int16_t)((int16_t)((int32_t)((uint32_t)((int32_t)px * rd_s16(m + 12)) + (uint32_t)((int32_t)pz * rd_s16(m + 16))) >> 8) +
+                                  rd_s16(frame - 0x74)));
+        out += 6;
+    } while (--count > 0);
+}

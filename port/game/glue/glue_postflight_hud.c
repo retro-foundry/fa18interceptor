@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "numbers.h"
 #include "postflight_hud.h"
+#include "view_transform.h"
 #include "render_polygon.h"
 #include "draw_stream.h"
 #include "glue_clip.h"
@@ -1030,5 +1031,116 @@ int glue_C3019C(void) {
     D(3) = 1;
     call_port(glue_C304FA, 0xC301EA);
     call_port(glue_C304B2, 0xC301EE);
+    return glue_return();
+}
+
+/* $C1FB82: face kind bits 10-11 pick the bound component test ($C1FC3A,
+ * the face's word before last as the offset, into $C1FC42); otherwise the
+ * face test $C1FB8C. Both are recreated; this only dispatches. */
+int glue_C1FB82(void) {
+    SET_W(D(1), (uint16_t)D(7) & 0xC00);
+    if (W(1)) {
+        SET_W(D(0), rd_u16(A(2) - 4) & 0x3FFF);
+        return glue_C1FC42();
+    }
+    return glue_C1FB8C();
+}
+
+/* One rotation's registers as $C1F99A leaves them: the first two rows in
+ * D5-D7 (the middle row's products and sum), the last in D2-D4. */
+static void rotation_registers(gaddr m, int16_t x, int16_t y, int16_t z) {
+    D(5) = (uint32_t)((int32_t)x * rd_s16(m + 6));
+    D(6) = (uint32_t)((int32_t)y * rd_s16(m + 8));
+    D(7) = (uint32_t)((int32_t)z * rd_s16(m + 10));
+    D(7) = (uint32_t)((int32_t)(D(7) + D(6) + D(5)) >> 8);
+    D(2) = (uint32_t)((int32_t)x * rd_s16(m + 12));
+    D(3) = (uint32_t)((int32_t)y * rd_s16(m + 14));
+    D(4) = (uint32_t)((int32_t)z * rd_s16(m + 16));
+    D(4) = (uint32_t)((int32_t)(D(4) + D(3) + D(2)) >> 8);
+}
+
+static int16_t dot_row(gaddr row, int16_t x, int16_t y, int16_t z) {
+    return (int16_t)((int32_t)((uint32_t)((int32_t)x * rd_s16(row)) + (uint32_t)((int32_t)y * rd_s16(row + 2)) +
+                               (uint32_t)((int32_t)z * rd_s16(row + 4))) >> 8);
+}
+
+int glue_C1F99A(void) {
+    gaddr frame = A(6), bound = rd_u32(BOUND_RECORD);
+    int16_t count = W(0), first = W(7), shift = rd_s16(frame - 8);
+    int down = (8 - rd_s16(frame - 6)) & 63, s = shift & 63, n = count > 1 ? count : 1;
+    uint8_t mode = rd_u8(bound + 7);
+    int32_t x = rd_s32(frame - 0x20) + rd_s32(SHADOW_OFFSET_X), y = rd_s32(frame - 0x1C);
+    int32_t z = rd_s32(frame - 0x18) + rd_s32(SHADOW_OFFSET_Z);
+    uint32_t a1 = A(1), a2 = A(2), a5 = A(5);
+    gaddr last = bound + 0xA + SEXT((uint16_t)first);
+
+    transform_bound_points(count, first, frame);
+    wr_u16(frame - 0xA, (uint16_t)(count > 1 ? 0 : count - 1));
+    if (mode & 1) {
+        y += rd_s32(SHADOW_OFFSET_Y);
+        x >>= down;
+        y >>= down;
+        z >>= down;
+        last += (gaddr)(6 * (n - 1));
+        A(4) = BOUND_MATRIX;
+        A(3) = WORKSPACES + SEXT((uint16_t)first) + (gaddr)(6 * n);
+        if (rd_u8(frame - 0x7F) & 1) {
+            int16_t v[3];
+            int k;
+            for (k = 0; k < 3; k++) v[k] = rd_s16(last + (gaddr)(2 * k));
+            v[1] = (int16_t)(v[1] - 0x28);
+            v[2] = (int16_t)(v[2] - 0xA3);
+            for (k = 0; k < 3; k++) v[k] = (int16_t)(v[k] >> s);
+            rotation_registers(CAMERA_MATRIX, v[0], v[1], v[2]);
+        } else {
+            int16_t px = (int16_t)(rd_s16(last) >> s), py = (int16_t)(rd_s16(last + 2) >> s);
+            int16_t pz = (int16_t)(rd_s16(last + 4) >> s);
+            int16_t qx = (int16_t)(dot_row(BOUND_MATRIX, px, py, pz) + (int16_t)x);
+            int16_t qy = (int16_t)(dot_row(BOUND_MATRIX + 6, px, py, pz) + (int16_t)y);
+            int16_t qz = (int16_t)(dot_row(BOUND_MATRIX + 12, px, py, pz) + (int16_t)z);
+            rotation_registers(VIEW_ANGLE_MATRIX, qx, qy, qz);
+            A(0) = SEXT((uint16_t)y);
+        }
+        D(0) = (uint32_t)x;
+        D(1) = (uint32_t)z;
+        A(1) = a1;
+        A(2) = a2;
+        A(5) = a5;
+        return glue_return();
+    }
+    x >>= down;
+    y >>= down;
+    z >>= down;
+    A(4) = VIEW_ANGLE_MATRIX;
+    if (!(mode & 2)) {
+        int16_t px, py, pz;
+        last += (gaddr)(6 * (n - 1));
+        px = (int16_t)((rd_s16(last) >> s) + (int16_t)x);
+        py = (int16_t)((rd_s16(last + 2) >> s) + (int16_t)y);
+        pz = (int16_t)((rd_s16(last + 4) >> s) + (int16_t)z);
+        rotation_registers(VIEW_ANGLE_MATRIX, px, py, pz);
+        A(0) = VIEW_ANGLE_MATRIX + 18;
+        A(3) = WORKSPACES + SEXT((uint16_t)first) + (gaddr)(6 * n);
+    } else {
+        gaddr m = VIEW_ANGLE_MATRIX;
+        int16_t px, pz;
+        int16_t spread = (int16_t)(first + (first >> 1));
+        last += (gaddr)(4 * (n - 1));
+        px = (int16_t)((rd_s16(last) >> s) + (int16_t)x);
+        pz = (int16_t)((rd_s16(last + 2) >> s) + (int16_t)z);
+        D(3) = SEXT(rd_u16(frame - 0x78));
+        D(6) = SEXT(rd_u16(frame - 0x76));
+        D(5) = (uint32_t)((int32_t)px * rd_s16(m + 6));
+        D(7) = (uint32_t)((int32_t)((uint32_t)((int32_t)pz * rd_s16(m + 10)) + D(5)) >> 8);
+        SET_W(D(7), (uint16_t)(W(7) + W(6)));
+        D(2) = (uint32_t)((int32_t)px * rd_s16(m + 12));
+        D(4) = (uint32_t)((int32_t)((uint32_t)((int32_t)pz * rd_s16(m + 16)) + D(2)) >> 8);
+        SET_W(D(4), (uint16_t)(W(4) + rd_s16(frame - 0x74)));
+        A(0) = m + 14;
+        A(3) = WORKSPACES + SEXT((uint16_t)spread) + (gaddr)(6 * n);
+    }
+    D(0) = (uint32_t)x;
+    D(1) = (uint32_t)z;
+    A(1) = a1;
     return glue_return();
 }

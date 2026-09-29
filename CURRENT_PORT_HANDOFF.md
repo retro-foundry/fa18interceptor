@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 345; 798,088 calls matching in shadow and 970,122 in the sandbox pass over three native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 347; 850,259 calls matching in shadow and 1,019,096 in the sandbox pass over three native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -58,8 +58,7 @@ one at a time, each proven on every call.
    throttle hold path clears the function-key level. `$C13176` was compared
    in the sandbox pass; `$C3316E` was called but not compared in these
    recordings.
-   `$C1FB82` (backface predicate) is
-   postponed until its callers are C. Face loops ($C21060, $C20C38, $C20C22, $C20A52, $C20A40) have C and glue
+   `$C1FB82` (backface dispatch) is registered. Face loops ($C21060, $C20C38, $C20C22, $C20A52, $C20A40) have C and glue
    but stay unregistered: the dispatcher at $C1F942 returns to callers whose
    liveness is unknown, so D7's high word counts as live, and it comes from
    the previous face's draw. The glue replays only the last face (BLTSIZE

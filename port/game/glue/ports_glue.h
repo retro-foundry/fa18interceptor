@@ -515,4 +515,10 @@ int glue_C201A6(void);
 /* mark polygon */
 int glue_C3019C(void);
 
+/* face test dispatch */
+int glue_C1FB82(void);
+
+/* bound points */
+int glue_C1F99A(void);
+
 #endif

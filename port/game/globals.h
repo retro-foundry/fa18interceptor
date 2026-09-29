@@ -526,6 +526,8 @@
 #define INFO_PAGE          0xC459C4u /* word: 1 altitude, 2 heading, 3 speed of the selected record (bit 15 new); 0 or -1 none */
 #define SHADOW_OFFSET_X    0xC45B30u /* long: added (scaled) to a shadow's x */
 #define SHADOW_OFFSET_Z    0xC45B38u /* long: added (scaled) to a shadow's z */
+#define BOUND_MATRIX       0xC45BC6u /* word[9]: the bound record's own rotation (8 fraction bits) */
+#define SHADOW_OFFSET_Y    0xC45B34u /* long */
 #define LOAD_TRIM          0xC45946u /* word: added to the load readout when beyond +-1 */
 
 #endif
