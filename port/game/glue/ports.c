@@ -287,6 +287,12 @@ const FA18Port fa18_ports[] = {
     {0xC2CB86, glue_C2CB86, "steer_record_pitch", 150},
     {0xC2CE82, glue_C2CE82, "rotate_by_view_matrix", 700},
     {0xC21C2E, glue_C21C2E, "split_record_and_stream_edges", 700},
+    /* batch 49: projected segment, top-plane crossing, in-sight flag, edge alignment */
+    {0xC2ED70, glue_C2ED70, "draw_projected_segment", 3000},
+    {0xC2F128, glue_C2F128, "top_crossing_outside", 500},
+    {0xC2436A, glue_C2436A, "update_in_sight", 2500},
+    {0xC2084A, glue_C2084A, "edge_alignment", 3000},
+    {0xC2082A, glue_C2082A, "edge_alignment_test", 3000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -503,3 +503,45 @@ void steer_record_pitch(gaddr record, int16_t climb) {
     if (climb >= 0 ? climb > limit : climb < limit) value = climb >= 0 ? 0x10 : 0x20;
     set_controls(record, value);
 }
+
+/* The true sign of a + b + c as the 68000 sees it after two ADD.L (the last
+ * one's N xor V). */
+static int true_sum_negative(int32_t a, int32_t b, int32_t c) {
+    int32_t first = (int32_t)((uint32_t)a + (uint32_t)b);
+    return (int64_t)first + c < 0;
+}
+
+static int32_t column_dot(gaddr record, const int16_t v[3]) {
+    int k;
+    uint32_t sum = 0;
+    for (k = 0; k < 3; k++) sum += (uint32_t)((int32_t)rd_s16(record + 0x96 + (gaddr)(6 * k)) * v[k]);
+    return (int32_t)sum;
+}
+
+void update_in_sight(gaddr target, gaddr viewer) {
+    int16_t n[3], axis[3];
+    int32_t d[3], facing, along;
+    int k;
+
+    if ((rd_u8(target + 0x39) & 0xF0) != 0x10) return;
+    if (rd_s16(viewer + 0x4A) <= 0x3000) {
+        for (k = 0; k < 3; k++)
+            d[k] = (int32_t)(rd_u32(viewer + 0x14 + (gaddr)(4 * k)) - rd_u32(target + 0x14 + (gaddr)(4 * k))) >> 8;
+        normalize_vector(0xC0, d[0], d[1], d[2]);
+        for (k = 0; k < 3; k++) {
+            n[k] = rd_s16(NORMALIZED + (gaddr)(2 * k));
+            axis[k] = rd_s16(target + 0x96 + (gaddr)(6 * k));
+        }
+        facing = column_dot(viewer, n);
+        if (true_sum_negative((int32_t)rd_s16(viewer + 0xA2) * n[2], (int32_t)rd_s16(viewer + 0x96) * n[0],
+                              (int32_t)rd_s16(viewer + 0x9C) * n[1]) && facing <= -0x2C0000) {
+            along = column_dot(viewer, axis);
+            if (!true_sum_negative((int32_t)rd_s16(viewer + 0xA2) * axis[2], (int32_t)rd_s16(viewer + 0x96) * axis[0],
+                                   (int32_t)rd_s16(viewer + 0x9C) * axis[1]) && along >= 0xD000000) {
+                wr_u8(target + 4, (uint8_t)(rd_u8(target + 4) | 0x20));
+                return;
+            }
+        }
+    }
+    wr_u8(target + 4, (uint8_t)(rd_u8(target + 4) & ~0x20));
+}

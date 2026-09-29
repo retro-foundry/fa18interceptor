@@ -1,6 +1,7 @@
 /* Plane-side tests over face streams. */
 #include "plane_tests.h"
 
+#include "fixed_math.h"
 #include "globals.h"
 
 #define POINTS 0xA4 /* a record's point table */
@@ -101,4 +102,37 @@ int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye
     n[1] = (int16_t)((int32_t)((uint32_t)(v[0] * u[2]) - (uint32_t)(u[0] * v[2])) >> 8);
     n[2] = (int16_t)((int32_t)((uint32_t)(u[0] * v[1]) - (uint32_t)(u[1] * v[0])) >> 8);
     return sum_not_negative(n[2] * p[2], n[0] * p[0], n[1] * p[1]);
+}
+
+/* The low word of a dot product's absolute value, shifted down by 4. */
+static int16_t abs_dot(const int16_t a[3], const int16_t b[3]) {
+    int32_t first = (int32_t)((uint32_t)(a[2] * b[2]) + (uint32_t)(a[0] * b[0]));
+    int32_t sum = (int32_t)((uint32_t)first + (uint32_t)(a[1] * b[1]));
+    if ((int64_t)first + a[1] * b[1] < 0) sum = (int32_t)(0u - (uint32_t)sum);
+    return (int16_t)(sum >> 4);
+}
+
+static void horizontal_unit(int16_t x, int16_t z, int16_t out[3]) {
+    int k;
+    normalize_vector(0x100, x, 0, z);
+    for (k = 0; k < 3; k++) out[k] = rd_s16(NORMALIZED + (gaddr)(2 * k));
+}
+
+int edge_alignment(gaddr edge, int16_t eye_x, int16_t eye_z, int16_t range) {
+    int16_t along[3], toward[3], index;
+    gaddr table;
+
+    horizontal_unit((int16_t)(rd_s16(edge + 4) - rd_s16(edge)), (int16_t)(rd_s16(edge + 6) - rd_s16(edge + 2)), along);
+    horizontal_unit((int16_t)(eye_x - rd_s16(BOUND_OFFSET_X)), (int16_t)(eye_z - rd_s16(BOUND_OFFSET_Z)), toward);
+    table = rd_s32(PROJECTION_Y) > -0x80 ? ALIGNMENT_NEAR : ALIGNMENT_FAR;
+    index = (int16_t)(range >> 4);
+    if (index > 10) index = 11;
+    return abs_dot(along, toward) < rd_s16(table + (gaddr)(int32_t)(int16_t)(2 * index)) ? -1 : 0;
+}
+
+int edge_alignment_test(gaddr *stream, int16_t eye_x, int16_t eye_z, int16_t range) {
+    gaddr edge = rd_u32(BOUND_RECORD) + 0xA + (gaddr)(int32_t)rd_s16(*stream);
+    *stream += 2;
+    if (rd_s32(PROJECTION_Y) <= -0x140 || rd_u8(ATTITUDE_NEAR)) return 0;
+    return edge_alignment(edge, eye_x, eye_z, range);
 }

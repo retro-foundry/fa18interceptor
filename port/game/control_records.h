@@ -51,6 +51,12 @@ int16_t ease_record_58(int16_t target);
  * demand: none ($C2CAA0); roll toward `turn` ($C2CA92); a turn with rudder
  * and roll by the record's flags +$64 and bank +$6A ($C2CA26); stick back
  * or forward when `climb` passes +$56 ($C2CB86). */
+/* A kind-1 record's in-sight flag (+4 bit 5): set when the viewer's +$4A
+ * is $3000 or less, the target lies well ahead along the viewer's first
+ * axis (its +$96 column) and the two records' first axes point the same
+ * way ($C2436A). */
+void update_in_sight(gaddr target, gaddr viewer);
+
 void steer_record_neutral(gaddr record);
 void steer_record_roll(gaddr record, int16_t turn);
 void steer_record_turn(gaddr record, int16_t turn);

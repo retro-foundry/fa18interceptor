@@ -432,5 +432,8 @@
 #define FUNCTION_KEY_LEVEL 0xC45870u /* byte: F1-F9 $0C..$6C, F10 $79 */
 #define SELECTED_EDGE      0xC459B6u /* word: offset of an edge in the selected record's points */
 #define VIEW_DEPTH         0xC45AB6u /* word: the last view-rotated point's depth (row 3) */
+#define SEGMENT_POINTS     0xC4C592u /* word[6]: two view-space points of a segment */
+#define ALIGNMENT_NEAR     0xC208D4u /* word[12] in code: alignment thresholds by range, low */
+#define ALIGNMENT_FAR      0xC208ECu /* word[12]: the same, high */
 
 #endif

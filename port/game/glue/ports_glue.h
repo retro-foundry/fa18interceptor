@@ -323,4 +323,11 @@ int glue_C2CB86(void);
 int glue_C2CE82(void);
 int glue_C21C2E(void);
 
+/* batch 49: projected segment, top-plane crossing, in-sight flag, edge alignment */
+int glue_C2ED70(void);
+int glue_C2F128(void);
+int glue_C2436A(void);
+int glue_C2084A(void);
+int glue_C2082A(void);
+
 #endif

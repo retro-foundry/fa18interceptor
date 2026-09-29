@@ -22,7 +22,10 @@ static uint32_t divu_w(uint32_t dividend, uint16_t divisor) {
 
 static uint16_t abs_word(uint32_t v) { return (int16_t)v < 0 ? (uint16_t)-(int16_t)v : (uint16_t)v; }
 
-int glue_C2574A(void) {
+/* normalize_vector entered with registers (D0.w scale, D5-D7 vector):
+ * runs it and leaves its registers. Idempotent on the same inputs. */
+void normalize_registers(void);
+void normalize_registers(void) {
     int16_t scale = W(0);
 
     normalize_vector((int32_t)scale, (int16_t)D(5), (int16_t)D(6), (int16_t)D(7));
@@ -51,6 +54,10 @@ int glue_C2574A(void) {
     D(5) = SEXT(rd_u16(NORMALIZED));
     D(6) = SEXT(rd_u16(NORMALIZED + 2));
     D(7) = SEXT(rd_u16(NORMALIZED + 4));
+}
+
+int glue_C2574A(void) {
+    normalize_registers();
     return glue_return();
 }
 

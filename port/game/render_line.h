@@ -32,6 +32,11 @@ int setup_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row,
  * page, in the current line colour. */
 void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
 
+/* The two view-space points at SEGMENT_POINTS projected and joined by a
+ * line; 0, drawing nothing, when either is behind or outside the view
+ * pyramid ($C2ED70). */
+int draw_projected_segment(void);
+
 /* Draw lines into all four planes in the current object colour. */
 void reset_line_style(void);
 

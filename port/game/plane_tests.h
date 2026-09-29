@@ -31,4 +31,15 @@ int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye
  * `normal`; 1 when not negative. */
 int point_toward_eye(const int16_t point[3], const int16_t normal[3], const int16_t eye[3]);
 
+/* How squarely a horizontal edge (x, z words at +0 and +4, and the next
+ * pair) meets the eye's direction from the bound offset: -1 when the
+ * absolute cosine (in 16ths of the unit $100) is below the threshold for
+ * `range` >> 4 (ALIGNMENT_NEAR, or ALIGNMENT_FAR once PROJECTION_Y is
+ * -$80 or less), else 0 ($C2084A). */
+int edge_alignment(gaddr edge, int16_t eye_x, int16_t eye_z, int16_t range);
+/* The edge at the next stream offset in BOUND_RECORD's points; 0 without
+ * testing when PROJECTION_Y is -$140 or less or ATTITUDE_NEAR is set
+ * ($C2082A). */
+int edge_alignment_test(gaddr *stream, int16_t eye_x, int16_t eye_z, int16_t range);
+
 #endif

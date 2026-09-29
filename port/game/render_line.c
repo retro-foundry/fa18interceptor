@@ -126,3 +126,24 @@ void reset_line_style(void) {
     /* One long write: LINE_PLANES = all four, LINE_COLOUR = -1 (object colour). */
     wr_u32(LINE_PLANES - 1, 0x000FFFFFu);
 }
+
+/* A view-space point on the 320 x 180 view, mirrored as the clipper does;
+ * 0 when it is behind or outside the view pyramid. */
+static int project_point(gaddr p, int16_t *x, int16_t *y) {
+    int16_t px = rd_s16(p), py = rd_s16(p + 2), pz = rd_s16(p + 4), sx, sy;
+    if (pz <= 0 || px > pz || -px > pz || py > pz || -py > pz) return 0;
+    sx = (int16_t)((int32_t)px * 0xA0 / pz + 0xA0);
+    if (sx < 0) sx = 0; else if (sx >= 0x140) sx = 0x13F;
+    sy = (int16_t)((int32_t)py * 0x5A / pz + 0x5A);
+    if (sy < 0) sy = 0; else if (sy >= 0xB4) sy = 0xB3;
+    *x = (int16_t)(0x13F - sx);
+    *y = (int16_t)(0xB3 - sy);
+    return 1;
+}
+
+int draw_projected_segment(void) {
+    int16_t x0, y0, x1, y1;
+    if (!project_point(SEGMENT_POINTS, &x0, &y0) || !project_point(SEGMENT_POINTS + 6, &x1, &y1)) return 0;
+    draw_line(x0, y0, x1, y1);
+    return 1;
+}
