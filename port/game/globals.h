@@ -203,7 +203,7 @@
 /* ---- cockpit slide animation ($C2559A) ------------------------------------ */
 #define SLIDE_ANIMATION    0xC457C0u /* byte: 1-based animation number, 0 = none (also REDRAW_KEEP_STATE) */
 #define SLIDE_STEP         0xC4588Fu /* byte: current step */
-#define SLIDE_FLAGS        0xC458CCu /* word: bit 10 = animation started */
+#define COCKPIT_FLAGS      0xC458CCu /* word: bit 0 posted message held, 2 keep message, 7 threat message, 10 slide animation started */
 #define SLIDE_TABLE        0xC25572u /* per animation: long -> step count byte, long -> offsets */
 
 /* ---- position history ($C2651E) ------------------------------------------ */
@@ -370,5 +370,22 @@
 #define GAUGE_SOURCE       0xC458F6u /* word: bits 10-14 are the gauge bar's level */
 #define GAUGE_REFRESH      0xC45837u /* byte: positive redraws the gauge bar */
 #define GAUGE_SHOWN        0xC459A4u /* word: the gauge level last kept */
+#define MESSAGE_TABLE      0xC3D0A0u /* 28-byte cockpit messages: flags (kind bits 6-7, time bits 0-5), 26 characters, sound */
+#define MESSAGE_CODE       0xC45AE0u /* word: message wanted; low byte = entry, bit 15 flashes, 14 times out, 12 flashes slowly */
+#define MESSAGE_LOADED     0xC45AE2u /* word: the code whose entry is loaded */
+#define MESSAGE_SHOWN      0xC45ADEu /* word: entry shown this step (flashing alternates it) */
+#define MESSAGE_FLAGS      0xC45862u /* byte: the loaded entry's flags; its kind bits after each update */
+#define MESSAGE_SOUND      0xC45863u /* byte: the loaded entry's sound byte */
+#define MESSAGE_TIME       0xC45893u /* byte: the loaded entry's time (flag bits 0-5) */
+#define MESSAGE_COUNTDOWN  0xC45892u /* byte: steps left to show or flash */
+#define MESSAGE_KIND       0xC45860u /* byte: kind bits last shown */
+#define MESSAGE_REDRAWS    0xC45861u /* byte: redraw passes for a new kind */
+#define MESSAGE_STATE      0xC458CEu /* word: bit 13 timing started, bit 5 flash in its second phase */
+#define POSTED_FLAGS       0xC458D6u /* word: bit 5 a message was posted with its own time */
+#define POSTED_TIME        0xC45B74u /* byte: that message's time */
+#define CRASH_FLAGS        0xC458C8u /* word: bit 15 crash imminent */
+#define WARNING_CAUSES     0xC45B50u /* long: low byte bit 0 low fuel, 1 fuel critical, 6 fuel exhausted, 7 stall */
+#define EVENT_BITS         0xC45B54u /* long: event bits; low byte bit 2 message sound, bit 3 its flash-off sound */
+#define THREAT_EVENTS      0xC4586Eu /* byte: bit 1 friendly near, 2 enemy near, 3 cruise, 4 IR, 5 radar missile */
 
 #endif

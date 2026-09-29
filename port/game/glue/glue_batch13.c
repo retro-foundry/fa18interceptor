@@ -29,7 +29,7 @@ int glue_C2559A(void) {
     int8_t animation = (int8_t)rd_u8(SLIDE_ANIMATION);
     int16_t origin = rd_s16(SPAN_ORIGIN), size = (int16_t)(origin < 0 ? -origin : origin);
     uint8_t step_before = rd_u8(SLIDE_STEP);
-    uint16_t flags_before = rd_u16(SLIDE_FLAGS);
+    uint16_t flags_before = rd_u16(COCKPIT_FLAGS);
 
     step_cockpit_slide();
 

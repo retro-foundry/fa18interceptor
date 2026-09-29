@@ -34,9 +34,9 @@ void step_cockpit_slide(void) {
     entry = SLIDE_TABLE + (gaddr)(int32_t)(int16_t)((animation - 1) * 8);
     if ((int8_t)rd_u8(rd_u32(entry)) > (int8_t)rd_u8(SLIDE_STEP)) {
         int16_t rows;
-        if (!(rd_u16(SLIDE_FLAGS) & 0x400)) {
+        if (!(rd_u16(COCKPIT_FLAGS) & 0x400)) {
             wr_u8(SLIDE_STEP, 0);
-            wr_u16(SLIDE_FLAGS, (uint16_t)(rd_u16(SLIDE_FLAGS) | 0x400));
+            wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) | 0x400));
         }
         rows = rd_s8(rd_u32(entry + 4) + (gaddr)(int32_t)(int8_t)rd_u8(SLIDE_STEP));
         wr_u8(SLIDE_STEP, (uint8_t)(rd_u8(SLIDE_STEP) + 1));
@@ -46,7 +46,7 @@ void step_cockpit_slide(void) {
     } else {
         wr_u8(SLIDE_ANIMATION, 0);
         wr_u8(SLIDE_STEP, 0);
-        wr_u16(SLIDE_FLAGS, (uint16_t)(rd_u16(SLIDE_FLAGS) & ~0x400));
+        wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) & ~0x400));
         wr_u32(REDRAW_STATE_LONG, 0);
         wr_u16(LINE_LAST_ROW, 0x90);
     }

@@ -70,10 +70,10 @@ void reset_player_record(void) {
     wr_u8(p + 0x65, 0);
     wr_u8(p + 0x2B, 9);
     wr_u16(p + 0x00, (uint16_t)(rd_u16(p + 0x00) & 0x7FFF));
-    wr_u32(0xC45B50u, 0);
-    wr_u32(0xC45B54u, 0);
-    wr_u16(0xC45AE0u, 0);
-    wr_u16(0xC45ADEu, 0);
+    wr_u32(WARNING_CAUSES, 0);
+    wr_u32(EVENT_BITS, 0);
+    wr_u16(MESSAGE_CODE, 0);
+    wr_u16(MESSAGE_SHOWN, 0);
     wr_u16(0xC45AE4u, 0xFFFF);
 }
 
