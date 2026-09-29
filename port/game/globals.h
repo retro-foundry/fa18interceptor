@@ -387,5 +387,9 @@
 #define WARNING_CAUSES     0xC45B50u /* long: low byte bit 0 low fuel, 1 fuel critical, 6 fuel exhausted, 7 stall */
 #define EVENT_BITS         0xC45B54u /* long: event bits; low byte bit 2 message sound, bit 3 its flash-off sound */
 #define THREAT_EVENTS      0xC4586Eu /* byte: bit 1 friendly near, 2 enemy near, 3 cruise, 4 IR, 5 radar missile */
+#define ARCTAN_TABLE       0xC3DB00u /* word[257]: atan(i / 256) in tenths of a degree */
+#define TRACKED_PITCH      0xC45AC0u /* word: track_direction's elevation angle */
+#define TRACKED_HEADING    0xC45AC2u /* word: track_direction's azimuth angle */
+#define TRACK_STARTED      0xC457A6u /* byte: set once tracking has snapped to a direction */
 
 #endif

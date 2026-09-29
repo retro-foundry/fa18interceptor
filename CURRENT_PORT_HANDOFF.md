@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 180; 1,222,313 calls matching over run075, run024, run060 and run062; poison-clean |
+| Recreated routines (`port/game/`) | 183; 1,232,899 calls matching over run075, run024, run060 and run062; poison-clean |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
 | run060 replay | game RAM identical through frame 93; pixels exact to frame 540; drifts after |
@@ -25,8 +25,9 @@ one at a time, each proven on every call.
    following PORT.md, "Recreating a routine". The polygon path is C from
    the faces (`$C09952`, `$C099F6`) down through the clipper and
    `draw_polygon`; the clipper's register replay is reusable for its other
-   callers (`port/game/glue/glue_clip.h`). Next on the list: `$C11BFC`,
-   `$C345A0`, `$C123FA`, `$C27456`. `$C1FB82` (backface predicate) is
+   callers (`port/game/glue/glue_clip.h`). Candidate call counts come from a
+   wider profile than the four recordings: `plot_ring` (`$C345A0`) was
+   written and matched but never called, so it is unregistered. `$C1FB82` (backface predicate) is
    postponed until its callers are C. The `$C0004E` family are stack
    trampolines, not game logic; leave them.
 2. **Exact replay timing (deferred).** Bus timing is modelled (STATUS.md,

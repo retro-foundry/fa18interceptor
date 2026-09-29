@@ -12,7 +12,7 @@ Updated 2026-09-29.
 | Replay parity (run062) | frame 2475 (back at the menu) pixel-exact |
 | Frame parity (run075, from the menu) | frame 500: 99.6% of pixels match; frame 3000: flying, path has drifted (94%) |
 | Translation | 540 routines, 32,191 instructions; ~70% of CPU cycles in translated code |
-| Recreated C source | 180 routines in `port/game/`, 1.2 million calls proven over four recordings |
+| Recreated C source | 183 routines in `port/game/`, 1.2 million calls proven over four recordings |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
 ## The game program
@@ -105,7 +105,9 @@ line slot maps, blits), `FA18_WATCH=lo-hi` (writes to a range),
 | `render_line.c` | `setup_line`, `draw_line` (`$C2FA7E`), `reset_line_style` |
 | `render_polygon.c` | polygon edge (`$C305AA`), bounds, `prepare_polygon`, `draw_polygon`, mask compositing and clearing |
 | `polygon_clip.c` | clip stages against the four view planes, `clip_and_draw_polygon` (`$C2469E`): clip, project, draw |
-| `faces.c`, `view_marks.c`, `plot.c` | faces from the transformed vertex table; pixel-pair view marks; pixel plots |
+| `faces.c`, `view_marks.c`, `plot.c` | faces from the transformed vertex table; view marks and the ring (not yet called); pixel plots |
+| `messages.c` | the cockpit message line: choice, flashing, timeout |
+| `plane_tests.c`, `tracking.c` | face-stream plane-side test; turning angles toward a direction |
 | `render_buffers.c`, `clip.c`, `matrix.c`, `view_transform.c`, `vertex_tail.c`, `attitude.c` | buffer clears and plane blits; view-plane clipping, matrices, vertex transforms, attitude |
 | `render_state.c`, `render_page.c`, `render_span.c` | blit starts, state blocks, draw page, span bounds |
 | `fixed_math.c` | `sin_cos`, `y_rotation_matrix`, `rounded_divide`, `attenuate_offset` |

@@ -268,4 +268,7 @@ int glue_C345A0(void);
 /* batch 41: plane-side test */
 int glue_C27456(void);
 
+/* batch 42: direction tracking */
+int glue_C123FA(void);
+
 #endif
