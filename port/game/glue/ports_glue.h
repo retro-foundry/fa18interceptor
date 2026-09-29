@@ -330,4 +330,7 @@ int glue_C2436A(void);
 int glue_C2084A(void);
 int glue_C2082A(void);
 
+/* batch 50: symbol plot */
+int glue_C348B2(void);
+
 #endif

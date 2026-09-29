@@ -40,8 +40,4 @@ ClipPoint clip_crossing(int stage, ClipPoint prev, ClipPoint cur);
  * degenerate (CLIP_ERRORS). */
 int clip_and_draw_polygon(void);
 
-/* Where the edge from `p` to `q` crosses the plane y = z, into
- * CLIP_POINT; 1 when that point is outside the view pyramid ($C2F128). */
-int top_crossing_outside(ClipPoint p, ClipPoint q);
-
 #endif

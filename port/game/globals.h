@@ -435,5 +435,7 @@
 #define SEGMENT_POINTS     0xC4C592u /* word[6]: two view-space points of a segment */
 #define ALIGNMENT_NEAR     0xC208D4u /* word[12] in code: alignment thresholds by range, low */
 #define ALIGNMENT_FAR      0xC208ECu /* word[12]: the same, high */
+#define SYMBOL_SMALL       0xC349D0u /* dx, dy byte pairs ending 0, 0 */
+#define SYMBOL_LARGE       0xC349EAu
 
 #endif

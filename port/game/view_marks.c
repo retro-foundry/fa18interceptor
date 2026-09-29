@@ -91,3 +91,22 @@ void plot_ring(int16_t x, int16_t y, int16_t points, gaddr outline) {
     r.at -= 2;
     ring_quarter(&r, 0, -1, -1);               /* upper left */
 }
+
+void plot_symbol(int16_t x, int16_t y, int16_t large) {
+    gaddr shape;
+    if (!large) {
+        if (x <= 0x58 || x >= 0xE6 || y <= 0x27 || y >= 0x8D) return;
+        shape = SYMBOL_SMALL;
+    } else {
+        if (!(rd_u16(STREAM_SKIP) & 3) || x <= 0x60 || x >= 0xDE || y <= 0x2E || y >= 0x86) return;
+        shape = SYMBOL_LARGE;
+    }
+    x = (int16_t)(x + rd_s16(SPAN_ORIGIN_Y));
+    if (x < 10 || x > 0x136) return;
+    y = (int16_t)(y + rd_s16(REDRAW_STATE_WORD));
+    for (;; shape += 2) {
+        int8_t dx = (int8_t)rd_u8(shape), dy = (int8_t)rd_u8(shape + 1);
+        if (!dx && !dy) break;
+        plot_pixel((int16_t)(x + dx), (int16_t)(y + dy));
+    }
+}

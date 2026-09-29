@@ -10,8 +10,8 @@
 #include "globals.h"
 #include "memory.h"
 #include "plane_tests.h"
-#include "polygon_clip.h"
 #include "render_line.h"
+#include "view_marks.h"
 
 #define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
 #define W(n) ((int16_t)D(n))
@@ -62,20 +62,6 @@ int glue_C2ED70(void) {
     }
     (void)drawn;
     flags_logic_l(D(0));
-    return glue_return();
-}
-
-/* $C2F128: A1 + 6 the first point, D3-D5 the second. D0-D6 are restored;
- * only the flags of the MOVEQ result remain. */
-int glue_C2F128(void) {
-    ClipPoint p, q;
-    p.x = rd_s16(A(1) + 6);
-    p.y = rd_s16(A(1) + 8);
-    p.z = rd_s16(A(1) + 10);
-    q.x = W(3);
-    q.y = W(4);
-    q.z = W(5);
-    flags_logic_l((uint32_t)top_crossing_outside(p, q));
     return glue_return();
 }
 
@@ -170,6 +156,46 @@ int glue_C2082A(void) {
         flags_logic_l(0);
     } else {
         alignment_regs(result);
+    }
+    return glue_return();
+}
+
+void plot_registers(gaddr masks, gaddr writers); /* glue_batch33.c */
+
+/* $C348B2: D0/D1 the position, D4 the variant. The bounds checks' and the
+ * pixel loop's registers, with plot_pixel's leftovers. */
+int glue_C348B2(void) {
+    int16_t x = W(0), y = W(1), large = W(4);
+    gaddr shape;
+
+    plot_symbol(x, y, large);
+    if (!large) {
+        if (x <= 0x58 || x >= 0xE6 || y <= 0x27 || y >= 0x8D) return glue_return();
+        shape = SYMBOL_SMALL;
+    } else {
+        SET_W(D(2), rd_u16(STREAM_SKIP) & 3);
+        if (!W(2) || x <= 0x60 || x >= 0xDE || y <= 0x2E || y >= 0x86) return glue_return();
+        shape = SYMBOL_LARGE;
+    }
+    A(0) = shape;
+    SET_W(D(0), W(0) + rd_s16(SPAN_ORIGIN_Y));
+    if (W(0) < 10 || W(0) > 0x136) return glue_return();
+    SET_W(D(1), W(1) + rd_s16(REDRAW_STATE_WORD));
+    x = W(0);
+    y = W(1);
+    for (;;) {
+        SET_B(D(0), rd_u8(A(0)));
+        SET_B(D(1), rd_u8(A(0) + 1));
+        A(0) += 2;
+        SET_B(D(2), (uint8_t)(D(0) | D(1)));
+        if (!(uint8_t)D(2)) break;
+        SET_W(D(0), (uint16_t)((int8_t)D(0) + x));
+        SET_W(D(1), (uint16_t)((int8_t)D(1) + y));
+        {
+            uint32_t a0 = A(0);
+            plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
+            A(0) = a0;
+        }
     }
     return glue_return();
 }

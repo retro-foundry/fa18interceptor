@@ -1,5 +1,5 @@
 /* Glue for the view-plane clips ($C2EA5A, $C2EAD0, $C2EB4C, $C2EBC2,
- * $C2F0C6, $C2F0F4, $C2F156) and the view transform $C1F2EE. */
+ * $C2F0C6, $C2F0F4, $C2F156, $C2F128) and the view transform $C1F2EE. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -26,6 +26,7 @@ int glue_C2EBC2(void) { return clip_glue(INDEXED, CLIP_Y, -1, 1); }
 int glue_C2F0C6(void) { return clip_glue(A(1) + 6, CLIP_X, 1, 0); }
 int glue_C2F0F4(void) { return clip_glue(A(1) + 6, CLIP_X, -1, 0); }
 int glue_C2F156(void) { return clip_glue(A(1) + 6, CLIP_Y, -1, 0); }
+int glue_C2F128(void) { return clip_glue(A(1) + 6, CLIP_Y, 1, 0); }
 
 /* $C1F2EE: A1 - 6 the point, the shift in the caller's frame at -8(A6), A3
  * the output (advanced by 6). Every register is live after it: D2-D4 the

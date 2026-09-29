@@ -25,4 +25,9 @@ void draw_gauge_bar(void);
  * proven: the recordings never call it (its glue is ready, unregistered). */
 void plot_ring(int16_t x, int16_t y, int16_t points, gaddr outline);
 
+/* A pixel symbol (dx, dy byte pairs to a 0, 0 pair) at (x, y) in the
+ * view window: the small one, or the large one while STREAM_SKIP bits 0-1
+ * are nonzero, each only well inside the window ($C348B2). */
+void plot_symbol(int16_t x, int16_t y, int16_t large);
+
 #endif

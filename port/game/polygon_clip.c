@@ -216,16 +216,3 @@ int clip_and_draw_polygon(void) {
     wr_u16(LIST_COUNT, (uint16_t)(rd_u16(LIST_COUNT) + 1));
     return 1;
 }
-
-int top_crossing_outside(ClipPoint p, ClipPoint q) {
-    int16_t rise = (int16_t)(p.z - p.y), den = (int16_t)((int16_t)(q.y - q.z) + rise), dx, dz, x, z;
-    ClipPoint c;
-    if (den == 0) for (;;) {} /* the original spins here */
-    divs_w((int32_t)(int16_t)(p.x - q.x) * rise, den, &dx, &x);
-    divs_w((int32_t)(int16_t)(p.z - q.z) * rise, den, &dz, &z);
-    c.x = (int16_t)(p.x - dx);
-    c.z = (int16_t)(p.z - dz);
-    c.y = c.z;
-    put(CLIP_POINT, c);
-    return c.z < 0 || c.x > c.z || -c.x > c.z || -c.y > c.z;
-}
