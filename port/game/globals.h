@@ -359,4 +359,10 @@
 #define POLY_COMPLEMENT    0xC456EAu /* word: bit n complements plane entry 3 - n (with LINE_COLOUR) */
 #define POLY_MASK_BLIT     0xC456ECu /* word: nonzero: blit the mask between planes instead */
 
+/* ---- polygon clipping ($C2469E) -------------------------------------------- */
+#define CLIP_FLAGS         0xC4E874u /* byte[4] started, byte[4] passed, per stage */
+#define CLIP_SCRATCH       0xC4E910u /* word[3]: the vertex passed between stages */
+#define CLIP_STATES        0xC4E91Au /* per stage ($10 apart): previous, first vertex */
+#define CLIP_OUTPUT        0xC4B990u /* word[3] vertices after clipping */
+
 #endif

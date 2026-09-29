@@ -244,4 +244,9 @@ int glue_C301F6(void);
 /* batch 35: polygon submission */
 int glue_C2FF48(void);
 
+/* batch 36: clip stages */
+int glue_C247C0(void);
+int glue_C248B2(void);
+int glue_C24996(void);
+
 #endif
