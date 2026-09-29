@@ -31,4 +31,13 @@ void clip_stage(int stage, ClipPoint p, ClipOutput *out);
  * by the quotient's sign). */
 ClipPoint clip_crossing(int stage, ClipPoint prev, ClipPoint cur);
 
+/* Clip the polygon at CLIP_INPUT (each coordinate shifted up by its shift)
+ * against the four planes, project what is left onto the 320 x 180 view
+ * (x' = 319 - (160 + 160x/z), y' = 179 - (90 + 90y/z), clamped) into
+ * POLY_VERTICES and draw it; LIST_COUNT counts drawn polygons ($C2469E).
+ * Returns 1 when drawn; 0 when it has fewer than three vertices, is clipped
+ * away (or to two vertices), reaches z <= 0, or a closing edge is
+ * degenerate (CLIP_ERRORS). */
+int clip_and_draw_polygon(void);
+
 #endif

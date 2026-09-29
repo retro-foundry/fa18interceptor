@@ -9,17 +9,12 @@
 #include "globals.h"
 #include "memory.h"
 #include "polygon_clip.h"
+#include "glue_clip.h"
 
 #define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
 #define W(n) ((int16_t)D(n))
 
-typedef struct {
-    int16_t state[4][6]; /* previous, then first */
-    uint8_t started[4], passed[4];
-    int16_t scratch[3];
-} ClipCopy;
-
-static void load(ClipCopy *c) {
+void load_clip_copy(ClipCopy *c) {
     int k, i;
     for (k = 0; k < 4; k++) {
         for (i = 0; i < 6; i++) c->state[k][i] = rd_s16(CLIP_STATES + (gaddr)(0x10 * k + 2 * i));
@@ -44,13 +39,12 @@ static void rounded_into(int n, int16_t factor_reg_value, int base) {
     SET_W(D(n), (uint16_t)(q + W(base)));
 }
 
-static void stage_regs(int k, ClipCopy *c);
 
 /* Pass the vertex in D0-D2 on (through the scratch point when asked). */
 static void pass_regs(int k, ClipCopy *c, int through_scratch) {
     if (through_scratch) { c->scratch[0] = W(0); c->scratch[1] = W(1); c->scratch[2] = W(2); }
     if (k < 3) {
-        stage_regs(k + 1, c);
+        clip_stage_registers(k + 1, c);
     } else {
         A(1) += 6;
         SET_W(D(7), W(7) + 1);
@@ -58,7 +52,7 @@ static void pass_regs(int k, ClipCopy *c, int through_scratch) {
     c->passed[k]++;
 }
 
-static void stage_regs(int k, ClipCopy *c) {
+void clip_stage_registers(int k, ClipCopy *c) {
     uint32_t e0 = D(0), e1 = D(1), e2 = D(2);
     int y_axis = k < 2, negative = k == 1 || k == 3;
     int a = y_axis ? 1 : 0, pa = y_axis ? 4 : 3; /* the tested registers: cur, prev */
@@ -126,13 +120,13 @@ static int stage_glue(int k) {
     ClipOutput out;
     ClipPoint p;
 
-    load(&copy);
+    load_clip_copy(&copy);
     p.x = rd_s16(CLIP_SCRATCH);
     p.y = rd_s16(CLIP_SCRATCH + 2);
     p.z = rd_s16(CLIP_SCRATCH + 4);
     out.next = A(1);
     out.count = (uint16_t)D(7);
-    stage_regs(k, &copy);
+    clip_stage_registers(k, &copy);
     clip_stage(k, p, &out);
     flags_logic_l(1); /* MOVEQ #1 before the final MOVEM.W */
     return glue_return();

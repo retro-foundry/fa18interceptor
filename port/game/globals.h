@@ -365,4 +365,7 @@
 #define CLIP_STATES        0xC4E91Au /* per stage ($10 apart): previous, first vertex */
 #define CLIP_OUTPUT        0xC4B990u /* word[3] vertices after clipping */
 
+#define CLIP_INPUT         0xC4BF90u /* word shift, word count, then word[3] vertices */
+#define CLIP_ERRORS        0xC458ECu /* word: polygons dropped for a degenerate closing edge */
+
 #endif

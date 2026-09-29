@@ -2,6 +2,7 @@
 
 #include "fault.h"
 #include "globals.h"
+#include "render_polygon.h"
 
 /* Stage layout: stage k's previous vertex at CLIP_STATES + $10k, its first
  * at + 6; flags: started[k] at CLIP_FLAGS + k, passed[k] at + 4 + k. */
@@ -110,4 +111,108 @@ void clip_stage(int stage, ClipPoint cur, ClipOutput *out) {
 test:
     /* The last stage writes an inside vertex straight to the list. */
     if (inside(stage, cur)) pass(stage, cur, out, stage < CLIP_X_NEG);
+}
+
+/* Stage 0's closing edge and the later stages', in order: the last vertex
+ * to the first, passed on without being counted. 0 on a degenerate edge. */
+static int close_stages(ClipOutput *out) {
+    int stage;
+    for (stage = CLIP_Y_POS; stage <= CLIP_X_NEG; stage++) {
+        ClipPoint last, first, crossing;
+        if (!rd_u8(CLIP_FLAGS + 4 + (gaddr)stage)) continue;
+        last = get(previous_of(stage));
+        first = get(first_of(stage));
+        if (inside(stage, last) == inside(stage, first)) continue;
+        {
+            /* A degenerate closing edge drops the polygon (error 6 + stage). */
+            int y_axis = stage < CLIP_X_POS, negative = stage == CLIP_Y_NEG || stage == CLIP_X_NEG;
+            int16_t delta = (int16_t)((y_axis ? last.y : last.x) - (y_axis ? first.y : first.x));
+            if ((int16_t)((int16_t)(first.z - last.z) + (negative ? (int16_t)-delta : delta)) == 0) {
+                wr_u16(ERROR_CODE, (uint16_t)(6 + stage));
+                fault_hook();
+                return 0;
+            }
+        }
+        crossing = clip_crossing(stage, first, last);
+        if (stage < CLIP_X_NEG) {
+            put(CLIP_SCRATCH, crossing);
+            clip_stage(stage + 1, crossing, out);
+        } else {
+            put(out->next, crossing);
+            out->next += 6;
+            out->count++;
+        }
+    }
+    return 1;
+}
+
+/* Project the clipped vertices into POLY_VERTICES; 0 at z <= 0. */
+static int project(const ClipOutput *out) {
+    gaddr src = CLIP_OUTPUT, dst = POLY_VERTICES;
+    int i;
+    wr_u16(dst, out->count);
+    dst += 2;
+    for (i = 0; i < out->count; i++, src += 6) {
+        ClipPoint p = get(src);
+        int16_t x, y, q, r;
+        if (p.z <= 0) return 0;
+        divs_w((int32_t)p.x * 0xA0, p.z, &q, &r);
+        x = (int16_t)(q + 0xA0);
+        if (x < 0) x = 0; else if (x >= 0x140) x = 0x13F;
+        divs_w((int32_t)p.y * 0x5A, p.z, &q, &r);
+        y = (int16_t)(q + 0x5A);
+        if (y < 0) y = 0; else if (y >= 0xB4) y = 0xB3;
+        wr_s16(dst, (int16_t)(0x13F - x));
+        wr_s16(dst + 2, (int16_t)(0xB3 - y));
+        dst += 4;
+    }
+    return 1;
+}
+
+int clip_and_draw_polygon(void) {
+    int16_t shift = rd_s16(CLIP_INPUT), count = rd_s16(CLIP_INPUT + 2), i;
+    gaddr src = CLIP_INPUT + 4;
+    ClipOutput out;
+
+    if (count < 3) {
+        wr_u16(ERROR_CODE, 0x1F);
+        fault_hook();
+        return 0;
+    }
+    out.next = CLIP_OUTPUT;
+    out.count = 0;
+    for (i = 0; i < 8; i++) wr_u8(CLIP_FLAGS + (gaddr)i, 0);
+
+    /* Stage 0 inline: like clip_stage, but a degenerate crossing only
+     * records error 1 and skips the vertex. */
+    for (i = 0; i < count; i++, src += 6) {
+        ClipPoint cur;
+        int s = shift & 63;
+        cur.x = (int16_t)(s >= 32 ? 0 : (uint32_t)(int32_t)rd_s16(src) << s);
+        cur.y = (int16_t)(s >= 32 ? 0 : (uint32_t)(int32_t)rd_s16(src + 2) << s);
+        cur.z = (int16_t)(s >= 32 ? 0 : (uint32_t)(int32_t)rd_s16(src + 4) << s);
+        if (rd_u8(CLIP_FLAGS)) {
+            ClipPoint prev = get(previous_of(CLIP_Y_POS));
+            if (inside(CLIP_Y_POS, prev) != inside(CLIP_Y_POS, cur)) {
+                int16_t delta = (int16_t)(cur.y - prev.y);
+                if ((int16_t)((int16_t)(prev.z - cur.z) + delta) == 0) {
+                    wr_u16(ERROR_CODE, 1);
+                    fault_hook();
+                    continue;
+                }
+            }
+        }
+        clip_stage(CLIP_Y_POS, cur, &out);
+    }
+    if (!close_stages(&out)) {
+        wr_u16(CLIP_ERRORS, (uint16_t)(rd_u16(CLIP_ERRORS) + 1));
+        wr_u16(ERROR_CODE, 0x0A);
+        fault_hook();
+        return 0;
+    }
+    if (out.count <= 2) return 0;
+    if (!project(&out)) return 0;
+    draw_polygon();
+    wr_u16(LIST_COUNT, (uint16_t)(rd_u16(LIST_COUNT) + 1));
+    return 1;
 }

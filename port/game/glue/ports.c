@@ -226,6 +226,9 @@ const FA18Port fa18_ports[] = {
     {0xC247C0, glue_C247C0, "clip_stage", 900},
     {0xC248B2, glue_C248B2, "clip_stage", 850},
     {0xC24996, glue_C24996, "clip_stage", 800},
+    /* batch 37: outer polygon clipper */
+    {0xC2469E, glue_C2469E, "clip_and_draw_polygon", 20000},
+    {0xC246A0, glue_C246A0, "clip_and_draw_polygon", 20000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -12,13 +12,12 @@ void composite_registers(void);            /* glue_render_polygon.c */
 void clear_mask_registers(void);           /* glue_render_polygon.c */
 void mask_between_registers(void);         /* glue_batch25.c */
 
-int glue_C2FF48(void) {
-    uint16_t last_size = custom_written(BLTSIZE);
-    uint16_t colour = rd_u16(CURRENT_COLOUR);
+/* The registers draw_polygon leaves, run after it: `last_size` and `colour`
+ * are BLTSIZE and CURRENT_COLOUR from before it. */
+void draw_polygon_registers(uint16_t last_size, uint16_t colour) {
     int bit, given;
 
-    draw_polygon();
-    if (prepare_registers(last_size)) return glue_return();
+    if (prepare_registers(last_size)) return;
     given = rd_s16(LINE_COLOUR) >= 0;
     if (given) SET_W(D(5), rd_u16(POLY_MASK_BLIT));
     if (given && rd_u16(POLY_MASK_BLIT)) {
@@ -42,5 +41,13 @@ int glue_C2FF48(void) {
         }
     }
     clear_mask_registers();
+}
+
+int glue_C2FF48(void) {
+    uint16_t last_size = custom_written(BLTSIZE);
+    uint16_t colour = rd_u16(CURRENT_COLOUR);
+
+    draw_polygon();
+    draw_polygon_registers(last_size, colour);
     return glue_return();
 }

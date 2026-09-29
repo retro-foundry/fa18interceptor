@@ -249,4 +249,8 @@ int glue_C247C0(void);
 int glue_C248B2(void);
 int glue_C24996(void);
 
+/* batch 37: outer polygon clipper */
+int glue_C2469E(void);
+int glue_C246A0(void);
+
 #endif
