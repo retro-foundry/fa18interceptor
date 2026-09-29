@@ -56,6 +56,8 @@ const FA18Port fa18_ports[] = {
     {0xC118A0, glue_C118A0, "queue_postflight_failure_message", 240},
     {0xC083E2, glue_C083E2, "begin_mission_reset", 1000},
     {0xC25A00, glue_C25A00, "add_repeated_nibble_weight", 150},
+    {0xC30AE2, glue_C30AE2, "draw_stores_icon_stream", 500},
+    {0xC30A00, glue_C30A00, "draw_stores_icons", 900},
     /* render_line.c, render_state.c */
     {0xC2F490, glue_C2F490, "reset_line_style", 30},
     {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},
