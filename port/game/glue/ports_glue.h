@@ -277,4 +277,10 @@ int glue_C2574A(void);
 /* batch 44: view aiming */
 int glue_C2D9BA(void);
 
+/* batch 45: face toward eye */
+int glue_C1FB8C(void);
+
+/* batch 46: target distance */
+int glue_C1D91A(void);
+
 #endif

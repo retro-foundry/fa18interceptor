@@ -1,6 +1,8 @@
 /* Plane-side tests over face streams. */
 #include "plane_tests.h"
 
+#include "globals.h"
+
 #define POINTS 0xA4 /* a record's point table */
 
 /* 68000 ASR by a register count (modulo 64). */
@@ -58,4 +60,39 @@ int faces_all_behind(gaddr *stream, gaddr record, int16_t shift,
     }
     *stream -= 2;
     return 1;
+}
+
+/* The sign of the true sum of the last ADD.L. */
+static int sum_not_negative(int32_t first, int32_t second, int32_t third) {
+    int32_t sum = (int32_t)((uint32_t)first + (uint32_t)second);
+    return (int64_t)sum + third >= 0;
+}
+
+int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]) {
+    int16_t q[3], n[3], u[3], v[3], p[3];
+    int k, shift;
+
+    if (kind & 0x3000) {
+        gaddr face = points + (gaddr)(int32_t)rd_s16(*faces);
+        int16_t bound = rd_s16(BOUND_SHIFT);
+        *faces += 2;
+        for (k = 0; k < 3; k++) {
+            q[k] = asr_word(rd_s16(face + (gaddr)(2 * k)), bound);
+            n[k] = rd_s16(face + 6 + (gaddr)(2 * k));
+        }
+        q[0] = (int16_t)(q[0] + rd_s16(BOUND_OFFSET_X));
+        q[2] = (int16_t)(q[2] + rd_s16(BOUND_OFFSET_Z));
+        for (k = 0; k < 3; k++) q[k] = (int16_t)(q[k] - eye[k]);
+        return sum_not_negative(q[2] * n[2], q[0] * n[0], q[1] * n[1]);
+    }
+    shift = (kind >> 7) & 7;
+    for (k = 0; k < 3; k++) {
+        p[k] = rd_s16(CLIP_INPUT + 4 + (gaddr)(2 * k));
+        u[k] = (int16_t)((int16_t)(rd_s16(CLIP_INPUT + 10 + (gaddr)(2 * k)) - p[k]) << shift);
+        v[k] = (int16_t)((int16_t)(rd_s16(CLIP_INPUT + 16 + (gaddr)(2 * k)) - p[k]) << shift);
+    }
+    n[0] = (int16_t)((int32_t)((uint32_t)(u[1] * v[2]) - (uint32_t)(v[1] * u[2])) >> 8);
+    n[1] = (int16_t)((int32_t)((uint32_t)(v[0] * u[2]) - (uint32_t)(u[0] * v[2])) >> 8);
+    n[2] = (int16_t)((int32_t)((uint32_t)(u[0] * v[1]) - (uint32_t)(u[1] * v[0])) >> 8);
+    return sum_not_negative(n[2] * p[2], n[0] * p[0], n[1] * p[1]);
 }

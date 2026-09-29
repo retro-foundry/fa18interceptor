@@ -17,4 +17,13 @@
 int faces_all_behind(gaddr *stream, gaddr record, int16_t shift,
                      int16_t eye_x, int32_t eye_y, int16_t eye_z);
 
+/* Whether a face turns toward the eye ($C1FB8C). With `kind` bits 12-13
+ * set the face carries its own point and normal (six words at `points`
+ * plus the next offset of `*faces`, which advances): the point, shifted by
+ * BOUND_SHIFT and offset by BOUND_OFFSET_X/Z, less `eye`, dotted with the
+ * normal. Otherwise the normal is the cross product of the first three
+ * clipper input vertices (shifted up by `kind` bits 7-9, the products down
+ * by 8) dotted with the first vertex. 1 when the dot is not negative. */
+int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]);
+
 #endif

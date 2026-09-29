@@ -6,6 +6,7 @@
 #include "glue.h"
 #include "ports_glue.h"
 
+#include "globals.h"
 #include "memory.h"
 #include "plane_tests.h"
 
@@ -101,5 +102,87 @@ int glue_C27456(void) {
     A(4) = stream;
     D(7) = behind ? 1 : 0;
     flags_logic_l(D(7));
+    return glue_return();
+}
+
+/* face_toward_eye $C1FB8C, called inside the face loop at $C1F76A: D7.w
+ * (also in A3) the face kind, A2 the face stream, the caller's frame long
+ * -$2C(A6) the point table and words -$26..-$22(A6) the eye. The caller
+ * reads the working registers of the mode taken and the MOVEQ / CLR.W
+ * flags. */
+static void result_regs(int toward) {
+    if (toward) {
+        D(7) = 1;
+        flags_logic_l(D(7));
+    } else {
+        SET_W(D(7), 0);
+        flags_logic_w(D(7));
+    }
+}
+
+int glue_C1FB8C(void) {
+    uint16_t kind = (uint16_t)D(7);
+    gaddr points = rd_u32(A(6) - 0x2C), faces = A(2);
+    int16_t eye[3];
+    int k, toward;
+
+    for (k = 0; k < 3; k++) eye[k] = rd_s16(A(6) - 0x26 + (gaddr)(2 * k));
+    if (kind & 0x3000) {
+        gaddr face = points + SEXT(rd_u16(A(2)));
+        int16_t bound = rd_s16(BOUND_SHIFT);
+        toward = face_toward_eye(kind, points, &faces, eye);
+        SET_W(D(7), kind & 0x3000);
+        A(2) = faces;
+        for (k = 0; k < 6; k++) D(k) = SEXT(rd_u16(face + (gaddr)(2 * k)));
+        SET_W(D(7), (uint16_t)bound);
+        for (k = 0; k < 3; k++) asr_word_reg(k, bound);
+        SET_W(D(0), W(0) + rd_s16(BOUND_OFFSET_X));
+        SET_W(D(2), W(2) + rd_s16(BOUND_OFFSET_Z));
+        for (k = 0; k < 3; k++) SET_W(D(k), W(k) - eye[k]);
+        muls(0, 3);
+        muls(1, 4);
+        muls(2, 5);
+        D(2) += D(0);
+        D(2) += D(1);
+    } else {
+        gaddr in = CLIP_INPUT + 4;
+        int shift;
+        toward = face_toward_eye(kind, points, &faces, eye);
+        for (k = 0; k < 6; k++) D(k) = SEXT(rd_u16(in + (gaddr)(2 * k)));
+        for (k = 0; k < 3; k++) SET_W(D(3 + k), W(3 + k) - W(k));
+        D(6) = SEXT(rd_u16(in + 12));
+        D(7) = SEXT(rd_u16(in + 14));
+        SET_W(D(6), W(6) - W(0));
+        SET_W(D(7), W(7) - W(1));
+        SET_W(D(0), rd_u16(in + 16));
+        SET_W(D(0), W(0) - W(2));
+        SET_W(D(1), (uint16_t)A(3));
+        SET_W(D(1), (uint16_t)((W(1) >> 7) & 7));
+        shift = W(1);
+        if (shift) {
+            static const int regs[6] = {3, 4, 5, 6, 7, 0};
+            for (k = 0; k < 6; k++) SET_W(D(regs[k]), (uint16_t)(W(regs[k]) << shift));
+        }
+        SET_W(D(1), D(5));
+        SET_W(D(2), D(0));
+        muls(0, 4);
+        muls(5, 7);
+        D(0) -= D(5);
+        asr_long_reg(0, 8);
+        muls(2, 3);
+        muls(1, 6);
+        D(1) -= D(2);
+        asr_long_reg(1, 8);
+        muls(7, 3);
+        muls(6, 4);
+        D(7) -= D(6);
+        asr_long_reg(7, 8);
+        D(0) = (uint32_t)((int32_t)W(0) * rd_s16(in));
+        D(1) = (uint32_t)((int32_t)W(1) * rd_s16(in + 2));
+        D(7) = (uint32_t)((int32_t)W(7) * rd_s16(in + 4));
+        D(7) += D(0);
+        D(7) += D(1);
+    }
+    result_regs(toward);
     return glue_return();
 }

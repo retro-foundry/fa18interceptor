@@ -208,6 +208,30 @@ int32_t magnitude3(int16_t x, int16_t y, int16_t z) {
 }
 
 /* NEG.W when negative: -32768 stays. */
+static int16_t asr16(int16_t v, int count) {
+    count &= 63;
+    return count >= 16 ? (int16_t)(v < 0 ? -1 : 0) : (int16_t)(v >> count);
+}
+
+int32_t target_distance(int16_t x, int16_t y, int16_t z) {
+    int shift = rd_s16(BOUND_SHIFT) & 63;
+    int16_t dx = (int16_t)(x + asr16(rd_s16(PROJECTION_WORDS), shift));
+    int16_t dz = (int16_t)(z + asr16(rd_s16(PROJECTION_WORDS + 4), shift));
+    int32_t dy;
+
+    if (dx < 0) dx = (int16_t)-dx;
+    if (rd_u8(POSITION_VALID)) dy = rd_s32(POSITION_LEVEL) >> 8;
+    else dy = (int32_t)((uint32_t)(int32_t)y + (uint32_t)(shift >= 32 ? (rd_s32(PROJECTION_Y) < 0 ? -1 : 0)
+                                                                     : rd_s32(PROJECTION_Y) >> shift));
+    if (dy < 0) dy = (int32_t)(0u - (uint32_t)dy);
+    if (dy >= 0x7FFF0) {
+        wr_u16(MAGNITUDE, 0x7FFF);
+        return 0x7FFF;
+    }
+    if (dz < 0) dz = (int16_t)-dz;
+    return magnitude3((int16_t)(dx >> 4), (int16_t)(dy >> 4), (int16_t)(dz >> 4));
+}
+
 static int16_t abs16(int16_t v) {
     return v < 0 ? (int16_t)-v : v;
 }

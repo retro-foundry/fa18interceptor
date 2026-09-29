@@ -53,3 +53,36 @@ int glue_C2574A(void) {
     D(7) = SEXT(rd_u16(NORMALIZED + 4));
     return glue_return();
 }
+
+/* $C1D91A: D2-D4 the point. Every register is live after it: D6 the
+ * shifted target height, D1-D4 as magnitude3 leaves them (or the
+ * saturated height's), D5 and D7 restored. */
+int glue_C1D91A(void) {
+    int16_t x = W(2), y = W(3), z = W(4), shift = rd_s16(BOUND_SHIFT);
+    int count = shift & 63;
+
+    target_distance(x, y, z);
+    SET_W(D(1), rd_u16(PROJECTION_WORDS));
+    D(6) = rd_u32(PROJECTION_Y);
+    SET_W(D(1), (uint16_t)(count >= 16 ? (W(1) < 0 ? -1 : 0) : W(1) >> count));
+    D(6) = (uint32_t)(count >= 32 ? ((int32_t)D(6) < 0 ? -1 : 0) : (int32_t)D(6) >> count);
+    SET_W(D(2), W(2) + W(1));
+    if (W(2) < 0) SET_W(D(2), (uint16_t)-W(2));
+    if (rd_u8(POSITION_VALID)) D(3) = (uint32_t)(rd_s32(POSITION_LEVEL) >> 8);
+    else D(3) = SEXT(D(3)) + D(6);
+    if ((int32_t)D(3) < 0) D(3) = 0u - D(3);
+    if ((int32_t)D(3) >= 0x7FFF0) {
+        SET_W(D(1), 0x7FFF);
+        return glue_return();
+    }
+    {
+        int16_t pz = rd_s16(PROJECTION_WORDS + 4);
+        SET_W(D(4), W(4) + (count >= 16 ? (pz < 0 ? -1 : 0) : pz >> count));
+    }
+    if (W(4) < 0) SET_W(D(4), (uint16_t)-W(4));
+    SET_W(D(2), (uint16_t)(W(2) >> 4));
+    D(3) = (uint32_t)((int32_t)D(3) >> 4);
+    SET_W(D(4), (uint16_t)(W(4) >> 4));
+    magnitude_registers();
+    return glue_return();
+}
