@@ -40,7 +40,7 @@ typedef struct { uint32_t ret; uint16_t regs; uint8_t high; uint8_t flags; } FA1
 extern const FA18CallLiveness fa18_call_liveness[];
 extern const int fa18_call_liveness_count;
 
-typedef enum { FA18_PORTS_OFF, FA18_PORTS_ON, FA18_PORTS_SHADOW } FA18PortMode;
+typedef enum { FA18_PORTS_OFF, FA18_PORTS_ON, FA18_PORTS_SHADOW, FA18_PORTS_SANDBOX } FA18PortMode;
 
 void fa18_ports_init(FA18PortMode mode, const char *only);
 /* SHADOW only: after each compared call, overwrite what the liveness table

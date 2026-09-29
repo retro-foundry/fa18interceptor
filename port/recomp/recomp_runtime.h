@@ -43,6 +43,9 @@ extern const FA18RecompSpan fa18_recomp_spans[];
 extern const int fa18_recomp_span_count;
 
 extern int fa18_recomp_abort;
+/* Where generated code last stopped for due chipset work; the dispatcher
+ * resumes there, which is not a new entry into the routine. */
+extern uint32_t fa18_recomp_stop_pc, fa18_recomp_stop_sp;
 
 typedef struct {
     uint64_t dispatches;          /* hook entries into generated code */
@@ -62,6 +65,7 @@ void fa18_recomp_begin_slice(void);
 int fa18_recomp_pending_cycles(void);
 int fa18_recomp_invoke(int function, int label, uint32_t pc);
 int fa18_recomp_call_dynamic(void);
+int fa18_recomp_resume(uint32_t ret, uint32_t sp);
 /* Game-RAM PCs the interpreter executed, for the next generator run. */
 int fa18_recomp_write_fallback_log(const char *path);
 
@@ -76,6 +80,8 @@ extern int64_t fa18_cycle_origin, fa18_next_event;
         fa18_bus_finish(pc);                                                     \
         if (fa18_cycle_origin - GET_CYCLES() >= fa18_next_event || fa18_recomp_abort) { \
             REG_PC = (pc);                                                       \
+            fa18_recomp_stop_pc = (pc);                                          \
+            fa18_recomp_stop_sp = REG_A[7];                                      \
             return FA18_EXIT_INTERP;                                             \
         }                                                                        \
         fa18_bus_begin(pc);                                                      \

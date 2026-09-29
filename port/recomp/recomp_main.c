@@ -9,6 +9,7 @@
 #include "recomp_runtime.h"
 #include "input.h"
 #include "recomp_ports.h"
+#include "loop_input.h"
 
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb");
@@ -46,8 +47,9 @@ static void usage(void) {
             "                   [--ppm-every DIR] [--rgb444 OUT.bin] [--no-recomp] [--fallback-log OUT.json]\n"
             "                   [--ram-out OUT.bin] [--replay RUN.e9k --start-frame N]\n"
             "                   [--window [--scale N]]   (window: --frames 0 runs until closed)\n"
-            "                   [--ports off|on|shadow] [--ports-only LIST] [--ports-report OUT.json]\n"
-            "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n");
+            "                   [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
+            "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n"
+            "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n");
 }
 
 /* Engine9000 recordings start from a UAE restore, and UAE's first frame
@@ -102,11 +104,13 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
                     if (e.type == SDL_KEYDOWN) { grabbed = 0; SDL_SetRelativeMouseMode(SDL_FALSE); }
                 } else if (!e.key.repeat) {
                     int raw = fa18_amiga_rawkey(e.key.keysym.sym);
-                    if (raw >= 0) fa18_machine_key(m, raw, e.type == SDL_KEYDOWN);
+                    if (raw >= 0 && fa18_loop_recording()) fa18_loop_host_key(raw, e.type == SDL_KEYDOWN);
+                    else if (raw >= 0) fa18_machine_key(m, raw, e.type == SDL_KEYDOWN);
                 }
                 break;
             case SDL_MOUSEMOTION:
-                if (grabbed) fa18_machine_mouse(m, e.motion.xrel, e.motion.yrel);
+                if (grabbed && fa18_loop_recording()) fa18_loop_host_mouse(e.motion.xrel, e.motion.yrel);
+                else if (grabbed) fa18_machine_mouse(m, e.motion.xrel, e.motion.yrel);
                 break;
             case SDL_MOUSEBUTTONDOWN:
             case SDL_MOUSEBUTTONUP:
@@ -114,16 +118,18 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
                     grabbed = 1;
                     SDL_SetRelativeMouseMode(SDL_TRUE);
                 } else if (e.button.button == SDL_BUTTON_LEFT || e.button.button == SDL_BUTTON_RIGHT) {
-                    fa18_machine_button(m, e.button.button == SDL_BUTTON_LEFT ? 0 : 1,
-                                        e.type == SDL_MOUSEBUTTONDOWN);
+                    int button = e.button.button == SDL_BUTTON_LEFT ? 0 : 1;
+                    if (fa18_loop_recording()) fa18_loop_host_button(button, e.type == SDL_MOUSEBUTTONDOWN);
+                    else fa18_machine_button(m, button, e.type == SDL_MOUSEBUTTONDOWN);
                 }
                 break;
             default: break;
             }
         }
         fa18_replay_apply(replay, m, start_frame + frame + 1);
-        if (frame == 0 && restore_lead) fa18_machine_run_frame(m);
+        if (frame == 0 && restore_lead) { fa18_machine_run_frame(m); fa18_loop_frame(); }
         fa18_machine_run_frame(m);
+        fa18_loop_frame();
         frame++;
         for (p = 0; p < FA18_SCREEN_W * FA18_SCREEN_H; p++) {
             uint16_t v = m->last_screen[p];
@@ -149,6 +155,8 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
 int main(int argc, char **argv) {
     const char *state_path = NULL, *rom_path = NULL, *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL,
                *fallback = NULL, *ram_out = NULL;
+    const char *record_path = NULL, *input_path = NULL;
+    int to_end = 0;
     const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL, *edges_path = NULL;
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
@@ -175,7 +183,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--window")) window = 1;
         else if (!strcmp(argv[i], "--ports") && i + 1 < argc) {
             const char *v = argv[++i];
-            ports_mode = !strcmp(v, "on") ? FA18_PORTS_ON : !strcmp(v, "shadow") ? FA18_PORTS_SHADOW : FA18_PORTS_OFF;
+            ports_mode = !strcmp(v, "on") ? FA18_PORTS_ON : !strcmp(v, "shadow") ? FA18_PORTS_SHADOW
+                       : !strcmp(v, "sandbox") ? FA18_PORTS_SANDBOX : FA18_PORTS_OFF;
         }
         else if (!strcmp(argv[i], "--ports-only") && i + 1 < argc) ports_only = argv[++i];
         else if (!strcmp(argv[i], "--ports-report") && i + 1 < argc) ports_report = argv[++i];
@@ -183,6 +192,9 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--edges") && i + 1 < argc) edges_path = argv[++i];
         else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
+        else if (!strcmp(argv[i], "--record") && i + 1 < argc) record_path = argv[++i];
+        else if (!strcmp(argv[i], "--input") && i + 1 < argc) input_path = argv[++i];
+        else if (!strcmp(argv[i], "--to-end")) to_end = 1;
         else { usage(); return 2; }
     }
     if (!state_path || !rom_path) { usage(); return 2; }
@@ -201,9 +213,27 @@ int main(int argc, char **argv) {
         fprintf(stderr, "cannot read E9K_INPUT_V1 replay %s\n", replay_path);
         return 1;
     }
+    if ((record_path || input_path) && !use_recomp) {
+        fprintf(stderr, "--record and --input count main-loop iterations in translated code; drop --no-recomp\n");
+        return 2;
+    }
+    if (record_path && (input_path || replay_path || !window)) {
+        fprintf(stderr, "--record needs --window and no --input or --replay\n");
+        return 2;
+    }
+    if (record_path) {
+        FILE *out = fopen(record_path, "w");
+        if (!out) { fprintf(stderr, "cannot write %s\n", record_path); return 1; }
+        fa18_loop_record(out);
+    }
+    if (input_path && !fa18_loop_replay(input_path)) {
+        fprintf(stderr, "cannot read FA18_LOOP_INPUT_V1 input %s\n", input_path);
+        return 1;
+    }
     if (window) {
 #ifdef FA18_WITH_SDL
         int result = run_window(m, &replay, start_frame, frames, scale);
+        fa18_loop_finish();
         fa18_replay_free(&replay);
         return result;
 #else
@@ -212,11 +242,12 @@ int main(int argc, char **argv) {
 #endif
     }
     if (rgb_path && !(rgb = fopen(rgb_path, "wb"))) { fprintf(stderr, "cannot write %s\n", rgb_path); return 1; }
-    for (i = 0; i < frames; i++) {
+    for (i = 0; to_end ? fa18_loop_iterations() < fa18_loop_replay_end() : i < frames; i++) {
         /* Events recorded for a frame are delivered before that frame runs. */
         fa18_replay_apply(&replay, m, start_frame + i + 1);
-        if (i == 0 && restore_lead) fa18_machine_run_frame(m);
+        if (i == 0 && restore_lead) { fa18_machine_run_frame(m); fa18_loop_frame(); }
         fa18_machine_run_frame(m);
+        fa18_loop_frame();
         if (rgb) fwrite(m->last_screen, sizeof m->last_screen[0], FA18_SCREEN_W * FA18_SCREEN_H, rgb);
         if (ppm_dir) {
             char path[512];
@@ -229,7 +260,7 @@ int main(int argc, char **argv) {
     if (fallback) fa18_recomp_write_fallback_log(fallback);
     if (profile_path) fa18_recomp_write_profile(profile_path);
     if (edges_path) fa18_recomp_write_edges(edges_path);
-    if (ports_mode == FA18_PORTS_SHADOW || ports_report) {
+    if (ports_mode == FA18_PORTS_SHADOW || ports_mode == FA18_PORTS_SANDBOX || ports_report) {
         long bad = fa18_ports_report(ports_report);
         fprintf(stderr, "ports: %ld mismatching calls\n", bad);
         if (bad) return 3;
@@ -256,13 +287,13 @@ int main(int argc, char **argv) {
         printf("{\"frames\": %d, \"recomp\": %d, \"cpu_cycles\": %llu, \"generated_cycles\": %llu, "
                "\"generated_share\": %.4f, \"dispatches\": %llu, \"interpreted_game_instructions\": %llu, "
                "\"code_writes\": %llu, \"disabled_functions\": %d, \"blits\": %llu, \"line_blits\": %llu, "
-               "\"nonblack_pixels\": %d, \"pc\": \"%06X\"}\n",
-               frames, use_recomp, (unsigned long long)total, (unsigned long long)gen,
+               "\"nonblack_pixels\": %d, \"pc\": \"%06X\", \"iterations\": %ld}\n",
+               to_end ? i : frames, use_recomp, (unsigned long long)total, (unsigned long long)gen,
                total ? (double)gen / (double)total : 0.0, (unsigned long long)fa18_recomp_stats.dispatches,
                (unsigned long long)fa18_recomp_stats.interpreted_game,
                (unsigned long long)fa18_recomp_stats.code_writes, fa18_recomp_stats.disabled_functions,
                (unsigned long long)m->blits, (unsigned long long)m->line_blits, nonblack,
-               m68k_get_reg(NULL, M68K_REG_PC));
+               m68k_get_reg(NULL, M68K_REG_PC), fa18_loop_iterations());
     }
     return 0;
 }

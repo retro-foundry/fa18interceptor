@@ -1,5 +1,6 @@
 /* Stage D port dispatch and SHADOW-mode proof (see recomp_ports.h). */
 #include "recomp_ports.h"
+#include "loop_input.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,8 +13,11 @@
 extern int64_t fa18_cycle_origin, fa18_next_event;
 
 /* Write log used by SHADOW mode: every Chip/Slow byte written while active,
- * with its previous value. Hardware (custom/CIA) access while active is not
- * performed; it marks the call as not comparable. */
+ * with its previous value. Active 1 (the sandboxed port): hardware (CIA,
+ * mouse counters) is not touched and marks the call as not comparable, and
+ * custom-register writes are held. Active 2 (the live generated routine):
+ * everything happens as usual; hardware access, or taking an interrupt,
+ * marks the call, and custom writes are recorded as well as performed. */
 int fa18_write_log_active;
 int fa18_write_log_hardware;
 typedef struct { uint32_t address; uint8_t old; } LogEntry;
@@ -192,9 +196,13 @@ static void poison_dead(const FA18CallLiveness *live) {
     if (!(live->flags & 0x10)) FLAG_C ^= CFLAG_SET;
 }
 
-/* SHADOW: reference first, then the port on the same state; the game keeps
- * the reference result. */
-static int run_shadow(int function, int label, int port) {
+/* SANDBOX: the older comparison, reference first with chipset events held
+ * off and custom writes performed at its end, then the port on the same
+ * state; the game keeps the reference result. It compares calls the live
+ * comparison cannot (interrupts or hardware inside the routine) but moves
+ * events and blits, so a sandbox run does not keep the plain run's timing:
+ * use it to prove routines, not to replay recordings. */
+static int run_sandbox(int function, int label, int port) {
     PortStats *s = &stats[port];
     int64_t saved_event = fa18_next_event;
     int cycles_before = GET_CYCLES(), cycles_reference, r, i, mismatch = 0;
@@ -330,6 +338,164 @@ static int run_shadow(int function, int label, int port) {
     return FA18_RET;
 }
 
+
+/* SHADOW: the port first, sandboxed on the state at the call (no chipset
+ * events, hardware blocked, custom writes held, everything undone), then
+ * the generated routine live, exactly as a run without ports would do it,
+ * with its writes recorded. The two results are compared and the game
+ * continues on the live one, so a shadow run keeps the plain run's timing.
+ * A call is not compared when the live routine was interrupted, touched
+ * hardware, or ended mid-routine at a frame boundary; nor when the port
+ * touched hardware. */
+static int run_shadow(int function, int label, int port) {
+    PortStats *s = &stats[port];
+    int64_t saved_event = fa18_next_event;
+    int cycles_before = GET_CYCLES(), r, i, mismatch = 0, port_hardware;
+    size_t port_count, port_custom_count, k;
+    CustomWrite *port_custom;
+    uint32_t caller = fa18_bus_read32(REG_A[7]) & 0xFFFFFF, live_sp;
+    const FA18CallLiveness *live = liveness_after(caller);
+    LogEntry *port_writes;
+    uint8_t *port_new;
+
+    /* The port, sandboxed. */
+    m68k_get_context(context_before);
+    log_count = 0;
+    custom_count = 0;
+    fa18_write_log_active = 1;
+    fa18_write_log_hardware = 0;
+    fa18_next_event = INT64_MAX;
+    r = fa18_ports[port].glue();
+    fa18_next_event = saved_event;
+    fa18_write_log_active = 0;
+    port_hardware = fa18_write_log_hardware;
+    m68k_get_context(context_reference); /* here: the port's registers */
+    port_count = log_count;
+    port_writes = malloc(sizeof *port_writes * (port_count + 1));
+    port_new = malloc(port_count + 1);
+    memcpy(port_writes, log_entries, sizeof *port_writes * port_count);
+    for (i = 0; i < (int)port_count; i++) port_new[i] = *byte_at(port_writes[i].address);
+    port_custom_count = custom_count;
+    port_custom = malloc(sizeof *port_custom * (custom_count + 1));
+    memcpy(port_custom, custom_log, sizeof *port_custom * custom_count);
+    undo_log(0);
+    m68k_set_context(context_before);
+    SET_CYCLES(cycles_before);
+
+    /* The generated routine, live. */
+    custom_count = 0;
+    fa18_write_log_active = 2;
+    fa18_write_log_hardware = 0;
+    {
+        uint32_t sp = REG_A[7] + 4;
+        int live_r = fa18_recomp_functions[function].fn(label);
+        /* Chipset work due mid-routine: service it and carry on, as the
+         * dispatcher would, to the routine's own return. */
+        if (live_r == FA18_EXIT_INTERP && fa18_machine_event_due()) live_r = fa18_recomp_resume(caller, sp);
+        fa18_write_log_active = 0;
+        if (live_r != FA18_RET) {
+            s->incomplete++;
+            log_count = 0;
+            free(port_writes); free(port_new); free(port_custom);
+            return live_r;
+        }
+    }
+    if (fa18_write_log_hardware || port_hardware) {
+        s->hardware++;
+        log_count = 0;
+        free(port_writes); free(port_new); free(port_custom);
+        return FA18_RET;
+    }
+    live_sp = REG_A[7];
+    s->compared++;
+    s->reference_cycles += (uint64_t)(cycles_before - GET_CYCLES());
+
+    if (r != FA18_RET) {
+        report_mismatch(port, "glue did not return", 0, 0, (uint32_t)r);
+        mismatch = 1;
+    } else {
+        unsigned char *now = malloc(m68k_context_size());
+        uint32_t want_sr, got_sr, want_pc, got_pc, flag_mask = sr_flag_mask(live), got[16];
+        /* Registers and flags the caller can observe (liveness table):
+         * "reference" is the live generated run, "port" the sandboxed one. */
+        m68k_get_context(now);
+        for (i = 0; i < 16; i++) got[i] = REG_DA[i];
+        want_sr = m68k_get_reg(NULL, M68K_REG_SR);
+        want_pc = m68k_get_reg(NULL, M68K_REG_PC);
+        m68k_set_context(context_reference);
+        got_sr = m68k_get_reg(NULL, M68K_REG_SR);
+        got_pc = m68k_get_reg(NULL, M68K_REG_PC);
+        for (i = 0; i < 16; i++) {
+            uint32_t want = got[i], mask = register_mask(live, i);
+            if ((REG_DA[i] ^ want) & mask) {
+                report_mismatch(port, i < 8 ? "D" : "A", (uint32_t)(i & 7), want, REG_DA[i]);
+                mismatch = 1;
+            }
+        }
+        m68k_set_context(now);
+        free(now);
+        if ((want_sr ^ got_sr) & (0xFF00 | flag_mask)) {
+            report_mismatch(port, "SR", 0, want_sr, got_sr);
+            mismatch = 1;
+        }
+        if (got_pc != want_pc) {
+            report_mismatch(port, "PC", 0, want_pc, got_pc);
+            mismatch = 1;
+        }
+        /* Hardware: the same custom-register writes in the same order. */
+        if (custom_count != port_custom_count) {
+            report_mismatch(port, "custom write count", 0, (uint32_t)custom_count, (uint32_t)port_custom_count);
+            mismatch = 1;
+        }
+        for (k = 0; !mismatch && k < custom_count; k++) {
+            if (custom_log[k].reg != port_custom[k].reg || custom_log[k].value != port_custom[k].value) {
+                report_mismatch(port, "custom write", custom_log[k].reg, custom_log[k].reg << 16 | custom_log[k].value,
+                                port_custom[k].reg << 16 | port_custom[k].value);
+                mismatch = 1;
+            }
+        }
+        /* Memory: every byte either run wrote must end with the same value,
+         * except the dead stack below the returned-to stack pointer. A byte
+         * the port left alone keeps its value from before the call. */
+        for (i = 0; !mismatch && i < (int)log_count; i++) {
+            uint32_t a = log_entries[i].address;
+            uint8_t want = *byte_at(a), have = log_entries[i].old;
+            int j, first = 1;
+            for (j = 0; j < i; j++)
+                if (log_entries[j].address == a) { first = 0; break; }
+            if (!first || dead_stack(a, live_sp)) continue;
+            for (j = (int)port_count - 1; j >= 0; j--)
+                if (port_writes[j].address == a) { have = port_new[j]; break; }
+            if (have != want) {
+                report_mismatch(port, "byte", a, want, have);
+                mismatch = 1;
+            }
+        }
+        for (i = 0; !mismatch && i < (int)port_count; i++) {
+            uint32_t a = port_writes[i].address;
+            int j, later = 0, written = 0;
+            for (j = i + 1; j < (int)port_count; j++)
+                if (port_writes[j].address == a) { later = 1; break; }
+            if (later || dead_stack(a, live_sp)) continue;
+            for (j = 0; j < (int)log_count; j++)
+                if (log_entries[j].address == a) { written = 1; break; }
+            if (!written && port_new[i] != *byte_at(a)) {
+                report_mismatch(port, "byte", a, *byte_at(a), port_new[i]);
+                mismatch = 1;
+            }
+        }
+    }
+    if (mismatch) s->mismatched++;
+    else s->matched++;
+    log_count = 0;
+    if (poison) poison_dead(live);
+    free(port_writes);
+    free(port_new);
+    free(port_custom);
+    (void)caller;
+    return FA18_RET;
+}
+
 /* Called by the runtime for every entry into a generated routine. */
 /* Observed call edges (return address, routine), for liveness of routines
  * reached through jump tables and indirect calls. */
@@ -365,6 +531,12 @@ int fa18_ports_enter(int function, int label, int via_call) {
     int port;
     if (REG_PC == fa18_recomp_functions[function].entry) {
         profile[function]++;
+        if (REG_PC == FA18_LOOP_UPDATE_ENTRY) {
+            /* A resumption where the update stopped at its first instruction
+             * is the same pass. */
+            if (fa18_recomp_stop_pc == REG_PC && fa18_recomp_stop_sp == REG_A[7]) fa18_recomp_stop_pc = 0;
+            else fa18_loop_iteration();
+        }
         if (via_call || entered_by_call()) note_edge(function);
     }
     port = port_of_function[function];
@@ -373,6 +545,7 @@ int fa18_ports_enter(int function, int label, int via_call) {
         return fa18_recomp_functions[function].fn(label);
     stats[port].calls++;
     if (mode == FA18_PORTS_SHADOW) return run_shadow(function, label, port);
+    if (mode == FA18_PORTS_SANDBOX) return run_sandbox(function, label, port);
     return run_glue(port);
 }
 

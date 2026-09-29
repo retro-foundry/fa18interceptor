@@ -13,9 +13,13 @@ FA18Machine *fa18_machine;
 extern int fa18_write_log_active, fa18_write_log_hardware;
 void fa18_write_log_before(uint32_t address, int size);
 #define LOG_WRITE(a, n) do { if (fa18_write_log_active) fa18_write_log_before((a), (n)); } while (0)
-#define HARDWARE_BLOCKED() (fa18_write_log_active ? (fa18_write_log_hardware = 1) : 0)
+/* Sandboxed (1): hardware is left alone and the call marked; live (2): it
+ * is used, and the call marked. */
+#define HARDWARE_BLOCKED() (fa18_write_log_active ? (fa18_write_log_hardware = 1, fa18_write_log_active == 1) : 0)
 void fa18_write_log_custom(uint32_t reg, uint16_t value);
-#define CUSTOM_LOGGED(reg, v) (fa18_write_log_active ? (fa18_write_log_custom((reg), (v)), 1) : 0)
+#define CUSTOM_LOGGED(reg, v)     (fa18_write_log_active ? (fa18_write_log_custom((reg), (v)), fa18_write_log_active == 1) : 0)
+/* Taking an interrupt reads its autovector ($64-$7C). */
+#define VECTOR_READ(a) do { if (fa18_write_log_active == 2 && (a) >= 0x60 && (a) < 0x80) fa18_write_log_hardware = 1; } while (0)
 
 /* One timeline for interpreter and generated code. While Musashi runs, the
  * current CPU cycle is fa18_cycle_origin - GET_CYCLES(). Chipset work (line
@@ -363,7 +367,10 @@ static int is_cia(uint32_t a) { return (a & 0xFF0000) == 0xBF0000; }
 uint8_t fa18_bus_read8(uint32_t a) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
-    if (a < 0x200000) return m->chip[a & (FA18_CHIP_SIZE - 1)];
+    if (a < 0x200000) {
+        VECTOR_READ(a);
+        return m->chip[a & (FA18_CHIP_SIZE - 1)];
+    }
     if (a >= FA18_SLOW_BASE && a < FA18_SLOW_BASE + FA18_SLOW_SIZE) return m->slow[a - FA18_SLOW_BASE];
     if (a >= 0xF80000) return m->rom[a & (FA18_ROM_SIZE - 1)];
     if ((a & 0xFF0000) == 0xF00000) return m->rtarea[a & 0xFFFF];
@@ -387,6 +394,7 @@ uint16_t fa18_bus_read16(uint32_t a) {
     a &= 0xFFFFFF;
     if (a < 0x200000) {
         a &= FA18_CHIP_SIZE - 1;
+        VECTOR_READ(a);
         return (uint16_t)(m->chip[a] << 8 | m->chip[(a + 1) & (FA18_CHIP_SIZE - 1)]);
     }
     if (a >= FA18_SLOW_BASE && a + 1 < FA18_SLOW_BASE + FA18_SLOW_SIZE) {

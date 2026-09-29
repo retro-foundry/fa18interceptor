@@ -16,5 +16,5 @@ for src in $M/m68kcpu.c $M/m68kops.c $M/m68kdasm.c $M/softfloat/softfloat.c port
 done
 wait
 gcc $CFLAGS -o build/recomp/fa18_recomp.exe port/recomp/recomp_main.c port/recomp/recomp_runtime.c \
-  port/recomp/recomp_ports.c port/machine/machine.c port/machine/bus.c port/machine/blitter.c port/machine/display.c \
+  port/recomp/recomp_ports.c port/recomp/loop_input.c port/machine/machine.c port/machine/bus.c port/machine/blitter.c port/machine/display.c \
   port/machine/input.c $(ls port/game/*.c 2>/dev/null) port/game/glue/*.c $O/*.o

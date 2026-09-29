@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "m68kcpu.h"
+#include "m68kops.h"
 #include "bus.h"
 #include "machine.h"
 #include "recomp_ports.h"
@@ -24,6 +25,7 @@ static uint8_t *code_bits;
 static uint8_t *disabled;
 static uint8_t *fallback_seen;
 static int enabled_flag;
+uint32_t fa18_recomp_stop_pc, fa18_recomp_stop_sp;
 static int depth;
 
 static int fold(uint32_t a) {
@@ -171,6 +173,50 @@ void fa18_machine_instruction_hook(unsigned int pc) {
             fa18_recomp_stats.interpreted_game++;
             fallback_seen[f / 2] = 1;
         }
+    }
+}
+
+/* Carry a routine that stopped for due chipset work on to its return (to
+ * `ret`, stack pointer `sp`), servicing and dispatching exactly as the
+ * instruction hook would. FA18_RET once there; otherwise what stopped it
+ * (a frame end, or code only the interpreter can run), with the machine
+ * where the hook would have it. */
+/* Instructions the translation hands to the interpreter (recomp.py
+ * classify: RTE, STOP, RESET, TRAP, ILLEGAL, BKPT, line A and F). */
+static int interpreter_only(uint16_t op) {
+    return op == 0x4E73 || op == 0x4E72 || op == 0x4E70 || (op & 0xFFF0) == 0x4E40 || op == 0x4AFC ||
+           (op & 0xFFF8) == 0x4848 || (op & 0xF000) == 0xA000 || (op & 0xF000) == 0xF000;
+}
+
+int fa18_recomp_resume(uint32_t ret, uint32_t sp) {
+    for (;;) {
+        const FA18RecompEntry *e;
+        uint32_t pc;
+        uint16_t op;
+        int r;
+        if ((REG_PC & 0xFFFFFF) == ret && REG_A[7] == sp) return FA18_RET;
+        fa18_bus_finish(REG_PC);
+        fa18_bus_instruction();
+        if (fa18_machine_service()) return FA18_EXIT_INTERP;
+        fa18_bus_instruction();
+        if (!enabled_flag) return FA18_EXIT_INTERP;
+        if ((e = lookup(REG_PC)) != NULL) {
+            fa18_recomp_abort = 0;
+            r = fa18_ports_enter((int)e->function, (int)e->label, 0);
+            if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) return r;
+            continue;
+        }
+        /* Between labels: one instruction, as generated code executes it. */
+        pc = REG_PC;
+        op = fa18_bus_read16(pc);
+        if (interpreter_only(op)) return FA18_EXIT_INTERP;
+        fa18_bus_begin(pc);
+        fa18_bus_fetch(pc);
+        REG_PPC = pc;
+        REG_PC = pc + 2;
+        REG_IR = op;
+        m68ki_instruction_jump_table[op]();
+        USE_CYCLES(CYC_INSTRUCTION[op]);
     }
 }
 
