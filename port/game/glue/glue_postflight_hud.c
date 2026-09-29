@@ -317,3 +317,31 @@ int glue_C33370(void) {
     tick_row_registers();
     return glue_return();
 }
+
+/* A recreated routine called as the original calls it: the return address
+ * pushed (dead stack afterwards), its glue run, which returns past it. */
+static void call_port(int (*glue)(void), uint32_t return_to) {
+    A(7) -= 4;
+    wr_u32(A(7), return_to);
+    glue();
+}
+
+/* $C332BC: draw_postflight_hud's steps are each a recreated routine, so its
+ * glue runs theirs in the same order (each with its own C and replay). */
+int glue_C332BC(void) {
+    wr_u32(LINE_STYLE, 0xFFFFF);
+    if (rd_u8(CONTEXT_SELECT)) {
+        wr_u8(SHOOT_CUE, 0);
+        return glue_return();
+    }
+    call_port(glue_C332FE, 0xC332D2);
+    call_port(glue_C34146, 0xC332D6);
+    call_port(glue_C342D0, 0xC332DA);
+    call_port(glue_C33DC8, 0xC332DE);
+    call_port(glue_C31C60, 0xC332E4);
+    if (!rd_u8(POST_INPUT_EXPIRED)) return glue_return();
+    call_port(glue_C31D64, 0xC332F2);
+    call_port(glue_C33370, 0xC332F6);
+    call_port(glue_C33B38, 0xC332FA);
+    return glue_return();
+}

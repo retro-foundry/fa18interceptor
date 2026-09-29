@@ -482,4 +482,7 @@ int glue_C33B38(void);
 /* batch 63c */
 int glue_C33370(void);
 
+/* batch 63d: HUD stage */
+int glue_C332BC(void);
+
 #endif
