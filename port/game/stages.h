@@ -41,7 +41,7 @@ void sort_by_depth(int16_t count);
  * places it relative to a control record (flags bits 8-15). At most 22
  * entries are sorted. The lists are taken in turn from SORT_LIST_NEXT down;
  * `all` goes on through the rest this pass. A list with no entries is a
- * fatal error ($37). Not yet proven: its calls do not match yet. */
+ * fatal error ($37). */
 void sort_display_list(int all);
 
 /* Empty the message queue and reset the message sequence. */

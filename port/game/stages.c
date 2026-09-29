@@ -192,7 +192,7 @@ static int16_t entry_key(gaddr entry) {
     wr_u16(BOUND_SHIFT, (uint16_t)shift);
     if (flags & 0x40) return 0x7FFF;
     depth = rd_s16(entry + 0x10);
-    if (depth) return (int16_t)(depth << shift);
+    if (depth) return (int16_t)((uint16_t)depth << shift);
     x = rd_s16(entry + 6);
     y = rd_s16(entry + 8);
     z = rd_s16(entry + 10);

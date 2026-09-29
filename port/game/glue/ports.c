@@ -82,6 +82,7 @@ const FA18Port fa18_ports[] = {
     {0xC2E370, glue_C2E370, "y_rotation_matrix", 260},
     /* batch 8: depth sort, records, compass, cockpit, context stage */
     {0xC1E4A6, glue_C1E4A6, "sort_by_depth", 900},
+    {0xC1E328, glue_C1E328, "sort_display_list", 2000},
     {0xC1CA82, glue_C1CA82, "flag_all_records", 300},
     {0xC1EC3A, glue_C1EC3A, "read_record_pair", 120},
     {0xC2DAF2, glue_C2DAF2, "update_view_matrix", 320},

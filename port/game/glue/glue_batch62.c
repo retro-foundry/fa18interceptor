@@ -140,12 +140,21 @@ int glue_C322EE(void) {
     return glue_return();
 }
 
-/* Not registered yet: the first recording's calls differ in SORT_LIST_NEXT,
- * BOUND_SHIFT and the sorted list (see CURRENT_PORT_HANDOFF.md).
- *
- * $C1E328 saves and restores every register it uses; `all` is its
- * caller's byte at -$2C(A6). */
+/* $C1E328 saves D0-D7/A0-A5 before it tests the caller's -$2C(A6) byte.
+ * That byte lies inside the saved-register stack area at the observed call
+ * site, so the test reads the newly saved value, not the caller's old local. */
+static uint8_t saved_stack_byte(gaddr address) {
+    gaddr first = A(7) - 56;
+    if (address >= first && address < A(7)) {
+        gaddr offset = address - first;
+        unsigned index = (unsigned)(offset / 4);
+        uint32_t value = index < 8 ? D(index) : A(index - 8);
+        return (uint8_t)(value >> (24 - 8 * (offset & 3)));
+    }
+    return rd_u8(address);
+}
+
 int glue_C1E328(void) {
-    sort_display_list(rd_u8(A(6) - 0x2C) != 0);
+    sort_display_list(saved_stack_byte(A(6) - 0x2C) != 0);
     return glue_return();
 }
