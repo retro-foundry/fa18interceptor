@@ -1,6 +1,8 @@
 /* Small update stages. */
 #include "stages.h"
 
+#include "fault.h"
+#include "fixed_math.h"
 #include "globals.h"
 
 void empty_stage(void) {}
@@ -128,4 +130,67 @@ void load_long_table(gaddr src) {
     int i;
     for (i = 0; i < 16; i++, src += 4, p += 4) wr_u32(p, rd_u32(src));
     wr_u8(TABLE_CLEAR_MODE, 2);
+}
+
+#define ENTRY_BYTES 24
+#define MOST_SORTED 22
+
+/* One entry's key. */
+static int16_t entry_key(gaddr entry) {
+    uint16_t flags = rd_u16(entry);
+    int16_t shift = (int16_t)(flags & 15), x, y, z, depth;
+
+    wr_u16(BOUND_SHIFT, (uint16_t)shift);
+    if (flags & 0x40) return 0x7FFF;
+    depth = rd_s16(entry + 0x10);
+    if (depth) return (int16_t)(depth << shift);
+    x = rd_s16(entry + 6);
+    y = rd_s16(entry + 8);
+    z = rd_s16(entry + 10);
+    wr_u8(POSITION_VALID, 0);
+    if (flags & 0x10) {
+        gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)((flags & 0xFF00) * 2);
+        int s = flags & 15;
+        x = (int16_t)(x + ((rd_s16(record + 0xC) & 0xFFF) >> s));
+        z = (int16_t)(z + ((rd_s16(record + 0xE) & 0xFFF) >> s));
+        y = (int16_t)(rd_s32(record + 0x10) >> s);
+        wr_u32(POSITION_LEVEL, (uint32_t)((int32_t)(rd_u32(record + 0x10) + rd_u32(PROJECTION_Y)) >> s));
+        wr_u8(POSITION_VALID, 1);
+    }
+    return (int16_t)((uint16_t)target_distance(x, y, z) << (rd_s16(BOUND_SHIFT) & 63));
+}
+
+static void sort_list(gaddr list, int16_t count) {
+    gaddr copy = WORKSPACES;
+    int16_t n = count > MOST_SORTED ? MOST_SORTED : count, i;
+
+    for (i = 0; i < n; i++) wr_u16(DEPTH_KEYS_SOURCE + (gaddr)(2 * i), (uint16_t)entry_key(list + (gaddr)(ENTRY_BYTES * i)));
+    sort_by_depth(n);
+    for (i = 0; i < n * ENTRY_BYTES; i++) wr_u8(copy + (gaddr)i, rd_u8(list + (gaddr)i));
+    for (i = 0; i < n; i++) {
+        gaddr from = copy + (gaddr)(int32_t)(int16_t)(rd_s16(DEPTH_ORDER + (gaddr)(2 * i)) * ENTRY_BYTES);
+        int k;
+        for (k = 0; k < ENTRY_BYTES; k++) wr_u8(list + (gaddr)(ENTRY_BYTES * i + k), rd_u8(from + (gaddr)k));
+    }
+}
+
+void sort_display_list(int all) {
+    if (!rd_u8(SORT_LISTS_ON)) return;
+    for (;;) {
+        int8_t index = (int8_t)(rd_u8(SORT_LIST_NEXT) - 1);
+        if (index >= 0) {
+            gaddr slot = SORT_LISTS + (gaddr)(6 * index);
+            int16_t count;
+            if (rd_s16(slot) < 0) return;
+            count = rd_s16(slot + 4);
+            if (count <= 0) fatal_error(0x37);
+            sort_list(rd_u32(slot), count);
+        }
+        wr_u8(SORT_LIST_NEXT, (uint8_t)(rd_u8(SORT_LIST_NEXT) - 1));
+        if ((int8_t)rd_u8(SORT_LIST_NEXT) < 0) {
+            wr_u8(SORT_LIST_NEXT, rd_u8(SORT_LIST_COUNT));
+            return;
+        }
+        if (!all) return;
+    }
 }

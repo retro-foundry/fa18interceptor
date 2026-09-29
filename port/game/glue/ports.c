@@ -377,6 +377,8 @@ const FA18Port fa18_ports[] = {
     {0xC347F2, glue_C347F2, "plot_ring_point", 2500},
     /* batch 61e: missile cue */
     {0xC33DC8, glue_C33DC8, "update_missile_cue", 5000},
+    /* batch 62: message line, display list sort */
+    {0xC322EE, glue_C322EE, "draw_message_line", 9000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

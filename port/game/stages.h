@@ -24,6 +24,15 @@ void load_long_table(gaddr src);
  * smallest (ties keep the earlier key), skipping negative keys. */
 void sort_by_depth(int16_t count);
 
+/* Sort one list of SORT_LISTS by distance, far to near ($C1E328): each
+ * entry's key is $7FFF (bit 6 of its flags), its own depth word, or its
+ * target_distance, all shifted up by the entry's scale (bits 0-3); bit 4
+ * places it relative to a control record (flags bits 8-15). At most 22
+ * entries are sorted. The lists are taken in turn from SORT_LIST_NEXT down;
+ * `all` goes on through the rest this pass. A list with no entries is a
+ * fatal error ($37). Not yet proven: its calls do not match yet. */
+void sort_display_list(int all);
+
 /* Empty the message queue and reset the message sequence. */
 void reset_message_sequence(void);
 

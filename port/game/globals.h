@@ -116,6 +116,11 @@
 #define DEPTH_VALUES       0xC4E7D0u
 #define DEPTH_ORDER        0xC4E828u /* output: values, far to near */
 
+#define SORT_LISTS_ON      0xC457A5u /* byte: sort the lists at SORT_LISTS */
+#define SORT_LISTS         0xC459CEu /* 6 bytes each: long list of 24-byte entries, word count */
+#define SORT_LIST_COUNT    0xC4585Cu /* byte: lists to sort */
+#define SORT_LIST_NEXT     0xC4585Du /* byte: the next list, counting down */
+
 /* ---- post-input sequence, continued --------------------------------------- */
 #define CONTEXT_SELECT     0xC45785u /* byte: dispatcher context (memory map) */
 #define CONTEXT_STARTED    0xC457B4u /* byte */
@@ -477,6 +482,12 @@
 #define SEEKER_MARK        0xC45942u /* word x, y: the seeker mark, slewing toward TARGET_MARK */
 #define SHOOT_CUE          0xC458B4u /* byte: 1 target in reach, 2 in reach and closing fast; the cue shows while set */
 #define RANGE_RATE         0xC45B46u /* word: the change in the target's range (record +$4A) */
+#define MESSAGE_LINE       0xC4580Au /* 26 characters: the message line as drawn */
+#define MESSAGE_DRAWN      0xC45AE4u /* word: the MESSAGE_TABLE entry last copied to MESSAGE_LINE */
+#define INFO_DELAY         0xC45887u /* byte: passes before the target info takes the line */
+#define INFO_REQUEST       0xC45886u /* byte: negative asks for the next info page, bit 0 the same page */
+#define INFO_REDRAWS       0xC4583Cu /* byte: passes left to redraw the message line */
+#define INFO_PAGE          0xC459C4u /* word: 1 altitude, 2 heading, 3 speed of the selected record (bit 15 new); 0 or -1 none */
 #define LOAD_TRIM          0xC45946u /* word: added to the load readout when beyond +-1 */
 
 #endif

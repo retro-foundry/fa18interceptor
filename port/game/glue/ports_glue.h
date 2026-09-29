@@ -435,4 +435,8 @@ int glue_C347F2(void);
 /* batch 61e: missile cue */
 int glue_C33DC8(void);
 
+/* batch 62: message line, display list sort */
+int glue_C322EE(void);
+int glue_C1E328(void);
+
 #endif

@@ -11,8 +11,8 @@ Updated 2026-09-29.
 | Replay parity (run060 from its restore) | game RAM identical to the emulator through frame 93; frames pixel-exact to 540; outcome not yet reproduced |
 | Replay parity (run062) | frame 2475 (back at the menu) pixel-exact |
 | Frame parity (run075, from the menu) | frame 500: 99.6% of pixels match; frame 3000: flying, path has drifted (94%) |
-| Translation | 540 routines, 32,191 instructions; ~70% of CPU cycles in translated code |
-| Recreated C source | 264 routines in `port/game/`, proven on every call over the native recordings (plus a sandbox pass) |
+| Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
+| Recreated C source | 298 routines in `port/game/`, proven on every call over the native recordings (plus a sandbox pass) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
 ## The game program
@@ -35,8 +35,8 @@ Updated 2026-09-29.
   archived read-only in `captures/uae/`. Record with
   `fa18_recomp --window --record OUT.fa18in` (CMake build), seal with
   `python scripts/seal_native_run.py NAME --state START.bin --input OUT.fa18in`
-  into `captures/native/NAME/`. There are none yet; until there are, the
-  proof uses the archived runs.
+  into `captures/native/NAME/`. Three are sealed (demo01,
+  qual_carrier_success, qual_fail_crashes) and the proof uses only them.
 - Input is keyed to main-loop iterations (entries to the update `$C0EFD4`),
   not frames: live input waits for the next iteration and is logged as
   delivered (FA18_LOOP_INPUT_V1, `port/recomp/loop_input.h`). Replays are
