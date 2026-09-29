@@ -57,3 +57,21 @@ void rotate_by_view_matrix(const int16_t v[3], int32_t out[3]) {
     }
     wr_s16(VIEW_DEPTH, (int16_t)out[2]);
 }
+
+void transform_ground_points(gaddr src, int16_t count, int16_t shift, const int16_t offset[3], gaddr out) {
+    int16_t ox = (int16_t)(offset[0] + rd_s16(BOUND_OFFSET_X)), oz = (int16_t)(offset[2] + rd_s16(BOUND_OFFSET_Z));
+    const int16_t *base = offset + 3;
+    int count_bits = shift & 63;
+    do {
+        int16_t x = rd_s16(src), z = rd_s16(src + 2), row;
+        src += 4;
+        x = (int16_t)((count_bits >= 16 ? (x < 0 ? -1 : 0) : x >> count_bits) + ox);
+        z = (int16_t)((count_bits >= 16 ? (z < 0 ? -1 : 0) : z >> count_bits) + oz);
+        for (row = 0; row < 3; row++) {
+            gaddr m = VIEW_ANGLE_MATRIX + (gaddr)(6 * row);
+            int32_t sum = (int32_t)((uint32_t)(x * rd_s16(m)) + (uint32_t)(z * rd_s16(m + 4)));
+            wr_s16(out, (int16_t)((sum >> 8) + base[row]));
+            out += 2;
+        }
+    } while (--count > 0);
+}

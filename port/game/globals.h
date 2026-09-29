@@ -430,12 +430,18 @@
 #define RECORD_WORD_A      0xC45996u /* word: accumulated since the last pass */
 #define RECORD_WORD_B      0xC45998u /* word */
 #define FUNCTION_KEY_LEVEL 0xC45870u /* byte: F1-F9 $0C..$6C, F10 $79 */
-#define SELECTED_EDGE      0xC459B6u /* word: offset of an edge in the selected record's points */
+#define CHOSEN_RECORD      0xC459B6u /* word: offset of a chosen control record */
 #define VIEW_DEPTH         0xC45AB6u /* word: the last view-rotated point's depth (row 3) */
 #define SEGMENT_POINTS     0xC4C592u /* word[6]: two view-space points of a segment */
 #define ALIGNMENT_NEAR     0xC208D4u /* word[12] in code: alignment thresholds by range, low */
 #define ALIGNMENT_FAR      0xC208ECu /* word[12]: the same, high */
 #define SYMBOL_SMALL       0xC349D0u /* dx, dy byte pairs ending 0, 0 */
 #define SYMBOL_LARGE       0xC349EAu
+#define ALERT_VOICE        0xC0A44Cu /* long: voice parameters for the chosen-record alert, or 0 */
+#define MODE_MESSAGES_OFF  0xC45796u /* byte: skips the mode messages once (cleared after) */
+#define EXPECTED_CODE      0xC457CBu /* byte[]: the code to type; a byte <= 0 ends it */
+#define EXPECTED_LENGTH    0xC1AB82u /* word: its length less 2 */
+#define ROUTINE_QUEUE_MESSAGE_FOUR 0xC1072Eu
+#define ROUTINE_AFTER_EVENT        0xC110A4u
 
 #endif

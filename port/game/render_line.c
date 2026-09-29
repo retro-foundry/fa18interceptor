@@ -1,6 +1,7 @@
 /* Blitter line drawing. */
 #include "render_line.h"
 
+#include "clip.h"
 #include "globals.h"
 #include "hardware.h"
 #include "memory.h"
@@ -145,5 +146,96 @@ int draw_projected_segment(void) {
     int16_t x0, y0, x1, y1;
     if (!project_point(SEGMENT_POINTS, &x0, &y0) || !project_point(SEGMENT_POINTS + 6, &x1, &y1)) return 0;
     draw_line(x0, y0, x1, y1);
+    return 1;
+}
+
+/* ---- a segment clipped to the view pyramid ($C2EE4A) ---------------------- */
+
+enum { END_NONE, END_POINT, END_CROSSING };
+
+typedef struct { int16_t x, y, z; } SegmentPoint;
+
+static SegmentPoint segment_point(gaddr a) {
+    SegmentPoint p;
+    p.x = rd_s16(a);
+    p.y = rd_s16(a + 2);
+    p.z = rd_s16(a + 4);
+    return p;
+}
+
+/* Whether the crossing of the plane with the segment from `p` to the second
+ * point is in view (it is left in CLIP_POINT either way). */
+static int enters(SegmentPoint p, int axis, int side) {
+    return !clip_to_view_plane(SEGMENT_POINTS + 6, p.x, p.y, p.z, axis, side, 0);
+}
+
+static int crossing_behind(void) { return rd_s16(CLIP_POINT + 4) < 0; }
+
+/* After the planes on one axis failed: the other axis's planes, tried only
+ * when `p` is beyond one of them (a, qa: that axis of p and of q). */
+static int other_axis(SegmentPoint p, int16_t a, int16_t qa, int16_t qz, int axis) {
+    int first = a < 0 ? -1 : 1;
+    int16_t pa = (int16_t)(first * a), qfirst = (int16_t)(first * qa), qsecond = (int16_t)(-first * qa);
+    if (pa < p.z || qz <= qfirst) return END_NONE;
+    if (enters(p, axis, first)) return END_CROSSING;
+    if (!crossing_behind()) return END_NONE;
+    if ((int16_t)-pa < p.z || qz <= qsecond) return END_NONE;
+    return enters(p, axis, -first) ? END_CROSSING : END_NONE;
+}
+
+/* Beyond the plane axis = side * z: its crossing, else the opposite plane's
+ * if the first crossing is behind the eye, else the other axis. */
+static int beyond(SegmentPoint p, SegmentPoint q, int axis, int side) {
+    int16_t qa = axis == CLIP_X ? q.x : q.y, pb = axis == CLIP_X ? p.y : p.x, qb = axis == CLIP_X ? q.y : q.x;
+    if (q.z <= (int16_t)(side * qa)) return END_NONE;
+    if (enters(p, axis, side)) return END_CROSSING;
+    if (crossing_behind() && q.z > (int16_t)(-side * qa) && enters(p, axis, -side)) return END_CROSSING;
+    return other_axis(p, pb, qb, q.z, axis == CLIP_X ? CLIP_Y : CLIP_X);
+}
+
+static int segment_end(SegmentPoint p, SegmentPoint q) {
+    if (p.x >= p.z) return beyond(p, q, CLIP_X, 1);
+    if ((int16_t)-p.x >= p.z) return beyond(p, q, CLIP_X, -1);
+    if (p.y >= p.z) return beyond(p, q, CLIP_Y, 1);
+    if ((int16_t)-p.y >= p.z) return beyond(p, q, CLIP_Y, -1);
+    return p.z >= 0 ? END_POINT : END_NONE;
+}
+
+static int16_t divs_quotient(int32_t dividend, int16_t divisor) {
+    int32_t q = dividend / divisor;
+    return q == (int16_t)q ? (int16_t)q : (int16_t)dividend;
+}
+
+int draw_clipped_segment(void) {
+    gaddr out = POLY_VERTICES;
+    int pass;
+
+    for (pass = 0; pass < 2; pass++) {
+        SegmentPoint p = segment_point(SEGMENT_POINTS), q = segment_point(SEGMENT_POINTS + 6), e;
+        int16_t sx, sy;
+        switch (segment_end(p, q)) {
+        case END_POINT: e = p; break;
+        case END_CROSSING: e = segment_point(CLIP_POINT); break;
+        default: return 0;
+        }
+        if (e.z <= 0) {
+            wr_u16(ERROR_CODE, 0x16);
+            return 0;
+        }
+        sx = (int16_t)(divs_quotient((int32_t)e.x * 0xA0, e.z) + 0xA0);
+        if (sx < 0) sx = 0; else if (sx >= 0x140) sx = 0x13F;
+        sy = (int16_t)(divs_quotient((int32_t)e.y * 0x5A, e.z) + 0x5A);
+        if (sy < 0) sy = 0; else if (sy >= 0xB4) sy = 0xB3;
+        wr_s16(out, (int16_t)(0x13F - sx));
+        wr_s16(out + 2, (int16_t)(0xB3 - sy));
+        out += 4;
+        if (!pass) {
+            /* The other end next: the two points change places. */
+            SegmentPoint first = p;
+            wr_s16(SEGMENT_POINTS, q.x); wr_s16(SEGMENT_POINTS + 2, q.y); wr_s16(SEGMENT_POINTS + 4, q.z);
+            wr_s16(SEGMENT_POINTS + 6, first.x); wr_s16(SEGMENT_POINTS + 8, first.y); wr_s16(SEGMENT_POINTS + 10, first.z);
+        }
+    }
+    draw_line(rd_s16(POLY_VERTICES), rd_s16(POLY_VERTICES + 2), rd_s16(POLY_VERTICES + 4), rd_s16(POLY_VERTICES + 6));
     return 1;
 }

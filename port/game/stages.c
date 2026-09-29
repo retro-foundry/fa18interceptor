@@ -122,3 +122,10 @@ gaddr skip_if_shown_record_flag(gaddr stream) {
 gaddr skip_word_for_mode_57(gaddr stream) {
     return rd_u16(STREAM_MODE) == 0x57 ? stream + 2 : stream;
 }
+
+void load_long_table(gaddr src) {
+    gaddr p = rd_u32(LONG_TABLE);
+    int i;
+    for (i = 0; i < 16; i++, src += 4, p += 4) wr_u32(p, rd_u32(src));
+    wr_u8(TABLE_CLEAR_MODE, 2);
+}

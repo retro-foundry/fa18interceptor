@@ -1,6 +1,8 @@
 #ifndef FA18_GAME_VIEW_H
 #define FA18_GAME_VIEW_H
 
+#include <stdint.h>
+
 /* Zoom all the way in ($80) and request a display update. */
 void set_zoom_maximum(void);
 
@@ -19,5 +21,12 @@ void update_view_octant(void);
  * LIST_MATRIX from the rotation, and ATTITUDE_A-C from the player's
  * orientation words. */
 void aim_view(void);
+
+/* The observer at (x, y, z): its position, and the negated position with x
+ * and z kept to 22 bits ($C0915A). */
+void set_observer_position(int32_t x, int32_t y, int32_t z);
+
+/* The fixed start position ($C0910C). */
+void start_position(int32_t out[3]);
 
 #endif

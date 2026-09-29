@@ -57,5 +57,12 @@ void restart_after_countdown(void);
 /* Phase 3 once the player record is active, flagged $C080 in +2, with +$6E
  * clear, and PLAYER_PHASE free ($C0A2F0). */
 void begin_phase_three(void);
+/* Once expired: POST_INPUT_EVENT 1, countdown 2, context gate 1, then $C110A4
+ * ($C11078). */
+void raise_event_after_countdown(void);
+/* Once expired: with SEQUENCE_FLAG a context request and the outcome stage;
+ * otherwise queue message $5F (mode 3) or $60 (modes 4-8) unless
+ * MODE_MESSAGES_OFF, then $47, and wait for message four ($C10678). */
+void queue_mode_messages(void);
 
 #endif

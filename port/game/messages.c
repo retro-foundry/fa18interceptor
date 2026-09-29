@@ -143,3 +143,15 @@ void take_warning_events(void) {
     wr_u32(WARNING_CAUSES, rd_u32(WARNING_CAUSES) & ~0x4200u);
     wr_u32(EVENT_BITS, rd_u32(EVENT_BITS) | 8);
 }
+
+void post_message(uint16_t code) {
+    uint16_t kind = (uint16_t)(code & 0xFF00);
+    wr_u16(MESSAGE_CODE, code);
+    set_bits(COCKPIT_FLAGS, POSTED_HELD);
+    if (kind & 0x2000) {
+        clear_bits(MESSAGE_STATE, 0x8000);
+        set_bits(MESSAGE_STATE, TIMING);
+    } else if (kind == 0x4000 || kind == 0x4800) {
+        clear_bits(MESSAGE_STATE, TIMING);
+    }
+}

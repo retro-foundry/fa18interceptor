@@ -262,3 +262,17 @@ void update_voices(void) {
         }
     }
 }
+
+void free_all_voices(void) {
+    int channel;
+    for (channel = 0; channel < 4; channel++) free_voice(channel);
+}
+
+void sound_chosen_record_alert(int32_t volume) {
+    gaddr voice = rd_u32(ALERT_VOICE);
+    if (!(rd_u8(SOUND_FLAGS) & 4) || rd_u16(CHOSEN_RECORD) != rd_u16(VIEW_RECORD) || !voice) return;
+    wr_u32(voice + 8, 0x1360000);
+    wr_u32(voice + 0x18, 0xFFFE0000u);
+    wr_u32(voice + 0x10, 1);
+    play_sound(5, 2, volume);
+}

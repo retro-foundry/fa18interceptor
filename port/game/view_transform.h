@@ -23,4 +23,10 @@ void append_list_point(int16_t x, int16_t y, int16_t z, int shift, uint16_t tag)
  * word also to VIEW_DEPTH ($C2CE82). */
 void rotate_by_view_matrix(const int16_t v[3], int32_t out[3]);
 
+/* Ground points (x, z word pairs at `src`, y = 0): each shifted down by
+ * `shift`, moved by offset[0] + BOUND_OFFSET_X and offset[2] +
+ * BOUND_OFFSET_Z, rotated by VIEW_ANGLE_MATRIX (8 fraction bits) and moved
+ * by offset[3..5], to three words at `out`; at least one point ($C098C6). */
+void transform_ground_points(gaddr src, int16_t count, int16_t shift, const int16_t offset[6], gaddr out);
+
 #endif

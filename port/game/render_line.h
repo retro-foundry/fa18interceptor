@@ -37,6 +37,13 @@ void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
  * pyramid ($C2ED70). */
 int draw_projected_segment(void);
 
+/* The segment at SEGMENT_POINTS clipped to the view pyramid, projected into
+ * POLY_VERTICES and drawn; each end is itself when in view, else where the
+ * segment enters the view through the planes it is beyond. 0 when it does
+ * not ($ERROR_CODE $16 for an end at z <= 0). The two points are left
+ * exchanged ($C2EE4A). */
+int draw_clipped_segment(void);
+
 /* Draw lines into all four planes in the current object colour. */
 void reset_line_style(void);
 

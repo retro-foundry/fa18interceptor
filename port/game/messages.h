@@ -1,6 +1,8 @@
 #ifndef FA18_GAME_MESSAGES_H
 #define FA18_GAME_MESSAGES_H
 
+#include <stdint.h>
+
 /* The cockpit message line: one entry of MESSAGE_TABLE at a time
  * ("STALL", "ALERT: IR MISSILE", ...). */
 
@@ -15,5 +17,9 @@ void update_message(void);
 
 /* Turn WARNING_CAUSES bits 9 and 14 into event bit 3 ($C33DA4). */
 void take_warning_events(void);
+
+/* Post `code` as the message, held until cleared; codes with bit 13 start
+ * timed at once, $40xx and $48xx restart their timing ($C25704). */
+void post_message(uint16_t code);
 
 #endif

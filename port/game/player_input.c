@@ -114,3 +114,17 @@ void set_stick_x(uint8_t value) {
     wr_u8(STICK_X, value);
     if (rd_u8(PAUSE_A) || rd_u8(CONTEXT_STARTED)) set_stick_bits(0xF3, value);
 }
+
+void check_typed_code(void) {
+    gaddr expected = EXPECTED_CODE, typed = KEY_TRANSLATED;
+    int16_t left = (int16_t)(rd_s16(EXPECTED_LENGTH) + 2);
+    do {
+        int8_t want = (int8_t)rd_u8(expected++);
+        if (want <= 0) break;
+        if ((uint8_t)want != rd_u8(typed++)) {
+            wr_u8(CONTEXT_REQUEST, 0xFF);
+            return;
+        }
+    } while (left-- != 0);
+    wr_u8(CONTEXT_REQUEST, 1);
+}

@@ -17,6 +17,8 @@ int zero_result(void);
 
 /* Clear the 16-long table at LONG_TABLE. */
 void clear_long_table(void);
+/* Fill it from `src` instead ($C11ACC). */
+void load_long_table(gaddr src);
 
 /* Depth sort: output the values of the `count` keys from largest to
  * smallest (ties keep the earlier key), skipping negative keys. */

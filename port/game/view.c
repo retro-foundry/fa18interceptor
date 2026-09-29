@@ -120,3 +120,18 @@ void aim_view(void) {
     y_rotation_matrix8(rd_s16(VIEW_ROTATE), LIST_MATRIX);
     for (k = 0; k < 3; k++) wr_s32(ATTITUDE_A + (gaddr)(4 * k), rd_s16(CONTROL_RECORDS + 0x66 + (gaddr)(2 * k)));
 }
+
+void set_observer_position(int32_t x, int32_t y, int32_t z) {
+    wr_s32(OBSERVER + 0xC, x);
+    wr_s32(OBSERVER + 0x10, y);
+    wr_s32(OBSERVER + 0x14, z);
+    wr_s32(OBSERVER, -(x & 0x3FFFFF));
+    wr_s32(OBSERVER + 4, (int32_t)(0u - (uint32_t)y));
+    wr_s32(OBSERVER + 8, -(z & 0x3FFFFF));
+}
+
+void start_position(int32_t out[3]) {
+    out[0] = 0x10C00000;
+    out[1] = 0x05000000;
+    out[2] = 0x11400000;
+}

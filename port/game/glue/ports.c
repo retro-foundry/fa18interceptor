@@ -295,6 +295,18 @@ const FA18Port fa18_ports[] = {
     {0xC2082A, glue_C2082A, "edge_alignment_test", 3000},
     /* batch 50: symbol plot */
     {0xC348B2, glue_C348B2, "plot_symbol", 4000},
+    /* batch 51-52: clipped segment, ground points, voices, messages, observer, stages, long table, alert, start position, typed code */
+    {0xC2EE4A, glue_C2EE4A, "draw_clipped_segment", 5000},
+    {0xC098C6, glue_C098C6, "transform_ground_points", 3000},
+    {0xC0F4A6, glue_C0F4A6, "free_all_voices", 600},
+    {0xC25704, glue_C25704, "post_message", 200},
+    {0xC0915A, glue_C0915A, "set_observer_position", 150},
+    {0xC11078, glue_C11078, "raise_event_after_countdown", 120},
+    {0xC11ACC, glue_C11ACC, "load_long_table", 800},
+    {0xC1803C, glue_C1803C, "sound_chosen_record_alert", 500},
+    {0xC10678, glue_C10678, "queue_mode_messages", 300},
+    {0xC0910C, glue_C0910C, "start_position", 40},
+    {0xC25246, glue_C25246, "check_typed_code", 300},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

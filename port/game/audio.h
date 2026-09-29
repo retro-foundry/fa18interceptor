@@ -51,6 +51,12 @@ void step_voice_program(gaddr voice, gaddr slot, int channel);
 
 /* Free the voice slot of a channel and clear its interrupt. */
 void free_voice(int channel);
+/* All four ($C0F4A6). */
+void free_all_voices(void);
+
+/* While the alert tone is enabled and the chosen record is the one viewed:
+ * sound 5 on channel 2 from ALERT_VOICE's set-up ($C1803C). */
+void sound_chosen_record_alert(int32_t volume);
 
 /* Stop whatever channel 2 is playing. */
 void stop_channel_2(void);

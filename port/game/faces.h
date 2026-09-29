@@ -22,7 +22,7 @@ int draw_outlined_face(gaddr *face);
  * then a word colour ($C099AA). */
 int draw_coloured_face(gaddr *face);
 
-/* split_edge on the selected record's points (SELECTED_EDGE past its $A4
+/* split_edge on the chosen record's points (CHOSEN_RECORD past its $A4
  * table), then on the workspace points the next stream offset names
  * ($C21C2E). */
 void split_record_and_stream_edges(gaddr *stream);

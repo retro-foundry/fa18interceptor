@@ -39,4 +39,8 @@ void release_throttle_keys(void);
 void set_stick_y(uint8_t value);
 void set_stick_x(uint8_t value);
 
+/* Compare the translated keys with EXPECTED_CODE: CONTEXT_REQUEST 1 when
+ * they match, -1 when not ($C25246). */
+void check_typed_code(void);
+
 #endif

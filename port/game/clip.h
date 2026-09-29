@@ -18,4 +18,10 @@ enum { CLIP_X = 0, CLIP_Y = 1 };
  * $C2F156, $C2F128). */
 int clip_to_view_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int axis, int side, int rounded);
 
+/* The same on a point in hand, the crossing to `out` instead of
+ * CLIP_POINT: -1 (and no crossing) when the rounded form finds the segment
+ * parallel to the plane. */
+int view_plane_crossing(const int16_t far[3], int16_t qx, int16_t qy, int16_t qz, int axis, int side, int rounded,
+                        int16_t out[3]);
+
 #endif

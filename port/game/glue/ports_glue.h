@@ -333,4 +333,17 @@ int glue_C2082A(void);
 /* batch 50: symbol plot */
 int glue_C348B2(void);
 
+/* batch 51-52: clipped segment, ground points, voices, messages, observer, stages, long table, alert, start position, typed code */
+int glue_C2EE4A(void);
+int glue_C098C6(void);
+int glue_C0F4A6(void);
+int glue_C25704(void);
+int glue_C0915A(void);
+int glue_C11078(void);
+int glue_C11ACC(void);
+int glue_C1803C(void);
+int glue_C10678(void);
+int glue_C0910C(void);
+int glue_C25246(void);
+
 #endif

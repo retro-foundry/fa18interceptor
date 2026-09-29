@@ -77,7 +77,7 @@ int draw_coloured_face(gaddr *face) {
 }
 
 void split_record_and_stream_edges(gaddr *stream) {
-    split_edge(CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)(rd_s16(SELECTED_EDGE) + 0xA4));
+    split_edge(CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)(rd_s16(CHOSEN_RECORD) + 0xA4));
     split_edge(WORKSPACES + (gaddr)(int32_t)rd_s16(*stream));
     *stream += 2;
 }

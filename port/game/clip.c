@@ -25,8 +25,9 @@ static int16_t rounded_quotient(int32_t dividend, int16_t divisor) {
     return (int16_t)(q < 0 ? q - 1 : q + 1);
 }
 
-int clip_to_view_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int axis, int side, int rounded) {
-    int16_t px = rd_s16(p), py = rd_s16(p + 2), pz = rd_s16(p + 4);
+int view_plane_crossing(const int16_t far[3], int16_t qx, int16_t qy, int16_t qz, int axis, int side, int rounded,
+                        int16_t out[3]) {
+    int16_t px = far[0], py = far[1], pz = far[2];
     int16_t dx, denominator, x, y, z, qy_in, t;
 
     /* The y planes are the x planes with the two axes exchanged. */
@@ -47,7 +48,7 @@ int clip_to_view_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int axis, in
     denominator = (int16_t)(qx - qz + dx);
     if (denominator == 0) {
         if (!rounded) for (;;) {} /* the original spins here (BEQ to itself) */
-        return 1;
+        return -1;
     }
     qy_in = (int16_t)(py - qy);
     if (rounded) {
@@ -65,11 +66,21 @@ int clip_to_view_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int axis, in
         t = x; x = y; y = t;
     }
 
-    wr_s16(CLIP_POINT, x);
-    wr_s16(CLIP_POINT + 2, y);
-    wr_s16(CLIP_POINT + 4, z);
+    out[0] = x;
+    out[1] = y;
+    out[2] = z;
     if (z < 0) return 1;
     if (x > z || (int16_t)-x > z) return 1;
     if (y > z || (int16_t)-y > z) return 1;
     return 0;
+}
+
+int clip_to_view_plane(gaddr p, int16_t qx, int16_t qy, int16_t qz, int axis, int side, int rounded) {
+    int16_t far[3], out[3];
+    int k, outside;
+    for (k = 0; k < 3; k++) far[k] = rd_s16(p + (gaddr)(2 * k));
+    outside = view_plane_crossing(far, qx, qy, qz, axis, side, rounded, out);
+    if (outside < 0) return 1;
+    for (k = 0; k < 3; k++) wr_s16(CLIP_POINT + (gaddr)(2 * k), out[k]);
+    return outside;
 }
