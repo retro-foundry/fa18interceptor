@@ -73,7 +73,7 @@ recordings) are not in git.
 | [RE_COMPLETION_PLAN.md](RE_COMPLETION_PLAN.md) | Analysis plan and how it feeds the C source |
 | [GAME.md](GAME.md) | Game dossier: history, controls, landmarks, experiments |
 | [AMIGA.md](AMIGA.md) | Amiga hardware and OS guide for reverse engineering |
-| [NEXT_PROJECT.md](NEXT_PROJECT.md) | Playbook for the next game, end to end |
+| [REVERSE_ENGINEERING.md](REVERSE_ENGINEERING.md) | The reverse-engineering process, end to end, and its lessons |
 
 ## Recording new scenarios
 
