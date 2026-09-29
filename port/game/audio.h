@@ -65,6 +65,9 @@ void stop_channel_2(void);
  * takes over the channel. Nothing happens for a sound without a record. */
 void play_sound(int sound, int channel, int32_t volume);
 
+/* Choose the menu's two-channel sound pair from the mode flags ($C17B96). */
+void start_menu_sound_pair(int32_t volume);
+
 /* The alert tone on channel 2, when enabled and the view shows the scripted
  * record. */
 void play_alert_tone(int32_t volume);
