@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 298; 848,838 calls matching in shadow and 990,357 in the sandbox pass over the native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 310; 842,401 calls matching in shadow and 995,652 in the sandbox pass over three native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -38,17 +38,16 @@ one at a time, each proven on every call.
    mostly C (`hud_readouts.c`, `hud_bars.c`, `hud_marks.c`,
    `message_line.c`); what is left there: the HUD tapes `$C33370` (BCD
    arithmetic with ABCD/SBCD), `$C33B38` (needs the projector `$C2EC90`,
-   which needs the filled circle `$C2F1C0`), the radar `$C31226`, the
-   stores icons `$C30A00`/`$C30AE2` (they read stray high bits of the
-   caller's D4), and the stage `$C332BC` once those are done. Glue helpers
+   which needs the filled circle `$C2F1C0`), the radar `$C31226`, and the
+   stage `$C332BC` once those are done. The stores icons `$C30A00`/`$C30AE2`
+   are now C; their glue preserves stray high bits of the caller's D4. Glue helpers
    for routines that end in drawing are in `glue_text.h`: the small-text
    line is probed before the C (the last glyph's cell) and replayed after
    it; pixel, line and blit replays read only the plot state, so they run
    after the C in order, with CURRENT_COLOUR set to the value then in force.
-   `$C1E328` (display-list sort) has C (`stages.c`, sort_display_list) and
-   glue but is unregistered: its calls differ in SORT_LIST_NEXT, BOUND_SHIFT
-   and the sorted entries; compare the list walk and key order against
-   the asm first.
+   `$C1E328` (display-list sort) is registered. Its glue reconstructs the
+   stack byte read by the sort after its entry MOVEM has overwritten the
+   caller's stack slot.
    `$C1B27E` (recorder playback) queues a key from a leftover D0; left as is.
    `$C1FB82` (backface predicate) is
    postponed until its callers are C. Face loops ($C21060, $C20C38, $C20C22, $C20A52, $C20A40) have C and glue
