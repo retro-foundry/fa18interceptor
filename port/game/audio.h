@@ -117,6 +117,8 @@ void play_tone(int32_t kind, int32_t pitch);
 
 /* Tone 2 at pitch 2 ($C33180). */
 void play_tone_2(void);
+/* Tone from D0.w at pitch 4 while outside a context ($C3316E). */
+void play_context_tone_4(int16_t kind);
 
 /* Tone 2 at pitch 2 while the volume fades, else at pitch 4 ($C3318E). */
 void play_status_tone(void);

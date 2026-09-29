@@ -118,7 +118,7 @@ void update_flight_input(uint32_t player, uint32_t incoming_d0) {
                     if (difference > 8 || trim < 2) set_throttle_input(1);
                     else set_throttle_input(0);
                 } else if (rd_s8(player + 0x2B) < 0x78 ||
-                           (rd_u8(player + 3) & 8) || (rd_u8(player + 2) & 0x20)) {
+                           (rd_u8(player + 3) & 8) || !(rd_u8(player + 2) & 0x20)) {
                     set_throttle_input(0);
                 }
             }

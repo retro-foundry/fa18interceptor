@@ -285,6 +285,11 @@ void play_tone_2(void) {
     play_tone(2, 2);
 }
 
+void play_context_tone_4(int16_t kind) {
+    int32_t args[9] = {0x12C, 4, 1, 0x12C, 4, 1, 1, kind, kind};
+    if (!rd_u8(CONTEXT_SELECT)) play_programmed_sound(args);
+}
+
 void play_status_tone(void) {
     play_tone(2, rd_u8(VOLUME_FADING) ? 2 : 4);
 }

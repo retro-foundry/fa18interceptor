@@ -30,3 +30,8 @@ int glue_C13176(void) {
     }
     return glue_return();
 }
+
+int glue_C3316E(void) {
+    play_context_tone_4((int16_t)D(0));
+    return glue_return();
+}

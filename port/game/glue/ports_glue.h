@@ -468,5 +468,6 @@ int glue_C0CF98(void);
 int glue_C13176(void);
 int glue_C12098(void);
 int glue_C1B27E(void);
+int glue_C3316E(void);
 
 #endif

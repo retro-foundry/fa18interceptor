@@ -75,6 +75,7 @@ const FA18Port fa18_ports[] = {
     {0xC13176, glue_C13176, "dispatch_event_sound", 650},
     {0xC12098, glue_C12098, "update_view_controls", 2100},
     {0xC1B27E, glue_C1B27E, "update_flight_input", 2400},
+    {0xC3316E, glue_C3316E, "play_context_tone_4", 1200},
     /* render_line.c, render_state.c */
     {0xC2F490, glue_C2F490, "reset_line_style", 30},
     {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},

@@ -107,7 +107,7 @@ static void flight_input_registers(gaddr player) {
                             D(2) = diff > 8 || trim < 2 ? 1 : 0;
                             SET_B(D(1), (played_stick & 0xFC) | (uint8_t)D(2));
                         } else if (rd_s8(player + 0x2B) < 0x78 ||
-                                   (rd_u8(player + 3) & 8) || (rd_u8(player + 2) & 0x20)) {
+                                   (rd_u8(player + 3) & 8) || !(rd_u8(player + 2) & 0x20)) {
                             D(2) = 0;
                             SET_B(D(1), played_stick & 0xFC);
                         }
