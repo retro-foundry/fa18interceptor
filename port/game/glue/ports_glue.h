@@ -564,4 +564,7 @@ int glue_C10C68(void);
 /* static template bit-gate builder () */
 int glue_C1C40C(void);
 
+/* selected-fire record initializer () */
+int glue_C2374C(void);
+
 #endif

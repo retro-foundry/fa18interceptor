@@ -159,6 +159,9 @@
 #define SECONDARY_REQUEST_FLAGS 0xC46986u /* byte: bit 3 set by $C0833E */
 #define SPACE_COMMAND_MODE 0xC461E7u /* byte: high nibble tested by $C0833E */
 #define SPACE_COMMAND_LATCH 0xC457BAu /* byte: set by $C0833E */
+#define FIRE_RECORD_PENDING 0xC457B7u /* byte: set by selected-fire record initializer ($C23752) */
+#define FIRE_ALERT_COUNTDOWN 0xC45797u /* byte: set to 8 for the viewed selected-fire record ($C237E8) */
+#define MODE_TABLE_CHANGED  0xC457C5u /* byte: mode-table counter changed ($C23832/$C23852) */
 #define STORES_REDRAWS    0xC45843u /* byte: stores mark draw count ($C30A00) */
 #define CONTROL_ACCUMULATOR_Y         0xC45778u /* word: cleared by $C1B602 */
 #define CONTROL_ACCUMULATOR_COMPANION 0xC4577Cu /* word: cleared by $C1B602 */
