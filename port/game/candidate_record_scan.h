@@ -22,6 +22,9 @@ typedef struct CandidateScanWork {
 void scan_candidate_record(CandidateScanWork *work,
                            int32_t relative_x, int32_t relative_y,
                            int32_t relative_z);
+void scan_candidate_record_from(CandidateScanWork *work, int16_t start_offset,
+                                int32_t relative_x, int32_t relative_y,
+                                int32_t relative_z);
 
 /* Terminal source blocks $C278D6-$C279C6. */
 int candidate_side_result(gaddr candidate, gaddr selected);

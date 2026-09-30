@@ -26,11 +26,11 @@ static int inside_cube(gaddr candidate, int32_t x, int32_t y, int32_t z,
     return 1;
 }
 
-void scan_candidate_record(CandidateScanWork *work,
-                           int32_t relative_x, int32_t relative_y,
-                           int32_t relative_z) {
-    int16_t offset = rd_s16(SCRIPT_RECORD);
-    gaddr selected = CONTROL_RECORDS + (gaddr)(int32_t)offset;
+void scan_candidate_record_from(CandidateScanWork *work, int16_t start_offset,
+                                int32_t relative_x, int32_t relative_y,
+                                int32_t relative_z) {
+    int16_t offset = start_offset;
+    gaddr selected = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
     uint16_t selected_first = rd_u16(selected);
     uint16_t selected_second = rd_u16(selected + 2);
     uint8_t selected_byte_5e = rd_u8(selected + 0x5E);
@@ -41,10 +41,6 @@ void scan_candidate_record(CandidateScanWork *work,
     work->candidate_offset = 0;
     work->candidate_class = 0;
     work->route = CANDIDATE_SCAN_DONE;
-    wr_u8(0xC4589Fu, 0);
-    wr_u8(selected + 4, rd_u8(selected + 4) & 0x3Fu);
-    if (selected_class == 0x20u) return;
-
     for (;;) {
         gaddr candidate;
         uint16_t first, second;
@@ -52,7 +48,10 @@ void scan_candidate_record(CandidateScanWork *work,
         int32_t far_bound, near_bound;
 
         offset = (int16_t)(offset + 0x200);
-        if (offset > 0x1E00) return;
+        if (offset > 0x1E00) {
+            work->candidate_offset = offset;
+            return;
+        }
         candidate = CONTROL_RECORDS + (gaddr)(int32_t)offset;
         first = rd_u16(candidate);
         second = rd_u16(candidate + 2);
@@ -109,6 +108,24 @@ void scan_candidate_record(CandidateScanWork *work,
         work->route = CANDIDATE_SCAN_SIDE_RESULT;
         return;
     }
+}
+
+void scan_candidate_record(CandidateScanWork *work,
+                           int32_t relative_x, int32_t relative_y,
+                           int32_t relative_z) {
+    int16_t offset = rd_s16(SCRIPT_RECORD);
+    gaddr selected = CONTROL_RECORDS + (gaddr)(int32_t)offset;
+    wr_u8(0xC4589Fu, 0);
+    wr_u8(selected + 4, rd_u8(selected + 4) & 0x3Fu);
+    if ((rd_u8(selected + 0x62) & 0xF0u) == 0x20u) {
+        work->selected_record = selected;
+        work->candidate_record = 0;
+        work->candidate_offset = offset;
+        work->candidate_class = 0;
+        work->route = CANDIDATE_SCAN_DONE;
+        return;
+    }
+    scan_candidate_record_from(work, offset, relative_x, relative_y, relative_z);
 }
 
 int candidate_side_result(gaddr candidate, gaddr selected) {

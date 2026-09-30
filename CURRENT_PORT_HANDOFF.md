@@ -256,8 +256,11 @@ part that is not, stays on the work side.
    `$C27198-$C27218`/`$C2741C-$C2744C` are drafted too. The detailed
    three-point side test, selected-record flag/height writes, and following
    face-list exit `$C27218-$C27418` are also in C. The level/volume walk
-   `$C27504-$C278D0`, parent orchestration and caller-visible register glue
-   still need porting before registration and source comparison.
+   `$C27504-$C278D0` is drafted in `candidate_level_walk.c`, and
+   `candidate_record_update.c` now composes the full memory-side routine.
+   These additions build and pass strict C syntax checks, but remain
+   unregistered; caller-visible register glue and focused source comparison
+   are next.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
