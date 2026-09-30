@@ -2,6 +2,7 @@
 #include "candidate_record_scan.h"
 
 #include "globals.h"
+#include "plane_tests.h"
 
 static int32_t distance_component(int32_t position, int32_t relative) {
     int32_t difference = (int32_t)((uint32_t)position - (uint32_t)relative);
@@ -155,4 +156,55 @@ int candidate_terminal_result(gaddr selected) {
         }
     }
     return result < 0 ? 0x10 : 0;
+}
+
+void prepare_candidate_probe(CandidateProbe *probe, gaddr candidate,
+                             int pass, int32_t relative_x,
+                             int32_t relative_y, int32_t relative_z) {
+    int16_t selected_offset = rd_s16(SCRIPT_RECORD);
+    int16_t other_offset = rd_s16(VIEW_RECORD);
+    int16_t eye_x, eye_z;
+    int32_t eye_y;
+    int16_t shift = rd_u8(candidate + 0x7D) & 0x0F;
+    gaddr list, first;
+
+    eye_x = (int16_t)(((uint32_t)relative_x & 0x3FFFFFu) >> 8);
+    eye_y = relative_y >> 8;
+    eye_z = (int16_t)(((uint32_t)relative_z & 0x3FFFFFu) >> 8);
+    if (other_offset == selected_offset) {
+        gaddr selected = CONTROL_RECORDS + (gaddr)(int32_t)other_offset;
+        gaddr point = selected + (pass ? 0xB6u : 0xA4u);
+        int offset_shift = rd_u8(selected + 0x7D) & 0x0F;
+        eye_x = (int16_t)(eye_x + (rd_s16(point) >> offset_shift));
+        eye_y = (int32_t)((uint32_t)eye_y +
+                          (uint32_t)(int32_t)(rd_s16(point + 2) >> offset_shift));
+        eye_z = (int16_t)(eye_z + (rd_s16(point + 4) >> offset_shift));
+    }
+    list = rd_u8(candidate + 0x62) == 0x20u ? 0xC39168u : 0xC39E48u;
+    first = rd_u32(list);
+    list += 4;
+
+    probe->candidate_record = candidate;
+    probe->face_list = list;
+    probe->first_face = first;
+    probe->eye_x = eye_x;
+    probe->eye_y = eye_y;
+    probe->eye_z = eye_z;
+    probe->shift = shift;
+    probe->first_height = (int16_t)(rd_s16(candidate +
+                            (gaddr)(int32_t)(int16_t)(rd_s16(first) + 0xA4) + 2) >> shift);
+    probe->below_first_height = (int16_t)eye_y < probe->first_height;
+}
+
+int scan_candidate_lower_faces(CandidateProbe *probe) {
+    gaddr stream = probe->face_list;
+    while (rd_s16(stream) >= 0) {
+        if (!faces_all_behind(&stream, probe->candidate_record, probe->shift,
+                              probe->eye_x, probe->eye_y, probe->eye_z)) {
+            probe->face_list = stream;
+            return 0x20;
+        }
+    }
+    probe->face_list = stream;
+    return 0;
 }
