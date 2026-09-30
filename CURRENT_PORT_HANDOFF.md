@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 373; 765,982 calls matching in shadow and 979,382 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 375; 754,388 calls matching in shadow and 962,808 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -234,7 +234,7 @@ part that is not, stays on the work side.
    `c2fdf4_remaining_active_plane_submissions.md`, and
    `c2fede_selected_table_display_stage.md`; the isolated orchestration is
    `port/selected_table_display_stage.c`.
-   Other ready larger candidates include `$C13D84`, `$C26EBE`, and `$C2DEE0`.
+   Other ready larger candidates include `$C13D84`, `$C26EBE`, and `$C2D408`.
    `$C2DEE0` is now registered (`matrix.c`, `glue_transform_matrix.c`). It
    builds the nine-long signed product, converts it through the original
    table/division angle branches, and returns the three shifted angles with
@@ -244,8 +244,10 @@ part that is not, stays on the work side.
    selects the active record's angle tuple, publishes the transformed angles,
    and builds the final row-scaled matrix. The full targeted proof over the
    three native runs matched 3,353 completed shadow calls and 3,353 sandbox
-   calls, zero mismatches. The full combined proof and parity gate is due for
-   this two-routine batch.
+   calls, zero mismatches. The full combined gate passed with 375 routines,
+   754,388 matching shadow calls and 962,808 sandbox calls, with identical
+   poison frames. All 10 parity frames 393-402 were pixel-exact.
+   `$C2D99C` is the newly ready selector for the two matrix routes.
    The post-input parent `$C0F992` depends on `$C08F26`; its deeper
    `$C1C63E`/`$C1C860` calls are still translated.
 2. **Exact UAE timing (dropped for now).** Native recordings make the port
