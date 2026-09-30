@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 370; 796,490 calls matching in shadow and 1,029,168 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 371; 796,490 calls matching in shadow and 1,029,158 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -63,9 +63,12 @@ both demo sandbox calls. The full three-recording proof and 10-frame parity
 check passed on this batch.
 
 `$C0FA04` `finish_post_input_followup` (`stages.c`, `679ef67b`) is committed
-and registered after the full proof above. Its completed demo shadow call and
-all eight demo sandbox calls matched, including the seven buffer clears. The
-Numbers row remains the last full three-recording proof until the next batch.
+and included in the Numbers row. Its completed demo shadow call and all eight
+demo sandbox calls matched, including the seven buffer clears. The full
+three-recording proof and 10-frame parity check passed. Its parent `$C0F992`
+still depends on the untranslated `$C08F26` cold-scene bootstrap; that stage
+also calls `$C1C63E` and `$C1C860`, so work further down that chain is needed
+before the parent can become C.
 
 All of these are registered and matching over all three recordings:
 
