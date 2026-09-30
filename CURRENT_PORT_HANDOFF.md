@@ -227,11 +227,12 @@ part that is not, stays on the work side.
 1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
    `$C3129A` and `$C31312` have their source-order drawing heads in
    `postflight_variants.c`: two guarded tuple lines and four fixed points.
-   Their shared tail is now transcribed through `$C315BF`: the `$C31392`
+   Their shared tail is now transcribed through `$C31721`: the `$C31392`
    gate and 11-entry point table, three-long vector load, `$C3141E`
    normalization and record selection, and `$C3149C-$C315BF` attribute
-   guards and status bits. Continue with the second normalization at
-   `$C315C0`, renderer submission, status resolution, and terminal scan.
+   guards and status bits, then the `$C315C0` second normalization,
+   `$C31612` renderer choice and `$C316C0` table submission and loop. Continue
+   with `$C31722` status resolution and `$C3180C` terminal scan.
    Neither parent is registered or counted until its entire tail and
    register bridge pass the proof.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and

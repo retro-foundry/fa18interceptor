@@ -76,6 +76,7 @@ int begin_postflight_variant_tail(PostflightVariantWork *work) {
     wr_u8(POSTFLIGHT_PREFIX_TICK, (uint8_t)(rd_u8(POSTFLIGHT_PREFIX_TICK) + 1u));
     wr_u8(POSTFLIGHT_PREFIX_BITS, 0);
     work->vector_stream = LIST_BUFFER + 12;
+    work->records_seen = 1;
     for (i = 0; i < 3; ++i)
         work->vector[i] = rd_s32(LIST_BUFFER + (gaddr)(4 * i));
     work->has_vector = (work->vector[0] | work->vector[1] | work->vector[2]) != 0;
@@ -83,6 +84,7 @@ int begin_postflight_variant_tail(PostflightVariantWork *work) {
 }
 
 static int32_t shifted_with_carry(int32_t value, int shift) {
+    if (!shift) return value;
     int32_t shifted = value >> shift;
     return shifted + (((uint32_t)value >> (shift - 1)) & 1u);
 }
@@ -166,4 +168,67 @@ void classify_postflight_variant_record(PostflightVariantWork *work) {
 finish:
     if (work->record_word & 0x10u)
         wr_u8(record, (uint8_t)(rd_u8(record) | 0x40u));
+}
+
+int submit_postflight_variant_record(PostflightVariantWork *work) {
+    gaddr viewed = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+    uint16_t viewed_shift = rd_u8(viewed + 0x63) & 15u;
+    int32_t x = (int32_t)(0u - (uint32_t)shifted_with_carry(work->source_x, viewed_shift));
+    int32_t y = (int32_t)(0u - (uint32_t)shifted_with_carry(work->source_z, viewed_shift));
+    uint16_t offset = (uint16_t)((work->record_word & 0xFF00u) << 1);
+    gaddr selected = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)offset;
+    uint8_t category;
+    int pair;
+    int16_t screen_x, screen_y;
+
+    if (x > 0x1B || x < -0x1B || y >= 0x16 || y < -0x10) return 0;
+    screen_x = add_word(add_word((int16_t)x, 0x9E), rd_s16(SPAN_ORIGIN_Y));
+    if (!horizontal_visible(screen_x) || !(work->record_word & 0x10u)) return 1;
+    screen_y = add_word((int16_t)y, 0xA7);
+    if (offset == rd_u16(SELECTED_RECORD) &&
+        !(rd_u8(POSTFLIGHT_PREFIX_TICK) & 1u)) return 1;
+
+    pair = (int32_t)(0u - (uint32_t)rd_s32(PROJECTION_Y)) <= rd_s32(selected + 0x10);
+    category = rd_u8(selected + 0x62) & 0xF0u;
+    if (category == 0x20u || category == 0x30u) category = 5;
+    else if (!(rd_u8(selected + 0x20) & 0x40u) ||
+             (rd_u8(selected + 0x20) & 2u)) category = 8;
+    else if (rd_u8(selected + 1) & 8u) category = 4;
+    else category = category == 0 ? 2 : 1;
+    wr_u16(CURRENT_COLOUR, category);
+
+    if (work->table >= POSTFLIGHT_POINT_TABLE + (rd_u16(DRAW_PAGE) ? 0x50u : 0x28u))
+        return 1;
+    screen_y = add_word(screen_y, rd_s16(REDRAW_STATE_WORD));
+    work->submit_x = screen_x;
+    work->submit_y = screen_y;
+    wr_u16(work->table, (uint16_t)screen_x | (pair ? 0x8000u : 0u));
+    wr_u16(work->table + 2, (uint16_t)screen_y);
+    work->table += 4;
+    if (pair) plot_pixel_pair(screen_x, screen_y);
+    else plot_pixel(screen_x, screen_y);
+    return 1;
+}
+
+void advance_postflight_variant_record(PostflightVariantWork *work, int marked) {
+    int i;
+    work->record_word = (uint16_t)((work->record_word & ~0x20u) |
+                                    (marked ? 0x20u : 0u));
+    wr_u16(work->vector_stream, work->record_word);
+    work->vector_stream += 16;
+    work->records_seen = (uint16_t)(work->records_seen + 1u);
+    for (i = 0; i < 3; ++i)
+        work->vector[i] = rd_s32(work->vector_stream - 12 + (gaddr)(4 * i));
+    work->has_vector = (work->vector[0] | work->vector[1] | work->vector[2]) != 0;
+}
+
+void process_postflight_variant_records(PostflightVariantWork *work) {
+    while (work->has_vector) {
+        int marked = 0;
+        if (select_postflight_variant_record(work)) {
+            classify_postflight_variant_record(work);
+            marked = submit_postflight_variant_record(work);
+        }
+        advance_postflight_variant_record(work, marked);
+    }
 }
