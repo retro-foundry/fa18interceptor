@@ -225,6 +225,12 @@ part that is not, stays on the work side.
    machine timing or the translation (the check then says the run no
    longer ends as sealed).
 1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
+   `$C3129A` and `$C31312` now have their source-order drawing heads in
+   `postflight_variants.c`: two guarded tuple lines and four fixed points.
+   Both transfer to the shared `$C31392` tail, which is not yet transcribed;
+   neither parent is registered or counted. The corresponding source reports
+   are `analysis/routines/c3129a_postflight_pair_variants.md` and
+   `analysis/routines/c31312_postflight_renderer_quad.md`.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon
