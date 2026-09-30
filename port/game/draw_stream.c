@@ -527,7 +527,24 @@ int draw_face_grid_plain(gaddr *stream) {
     return face_grid(stream);
 }
 
-static int face_lattice(gaddr *stream) {
+static int lattice_face(Vertex p0, Vertex p1, Vertex p2, Vertex p3,
+                        const LatticeFaceHooks *hooks, int back, Vertex along) {
+    int drawn;
+    wr_u32(CLIP_INPUT, 4);
+    put(CLIP_INPUT + 4, p0);
+    put(CLIP_INPUT + 10, p1);
+    put(CLIP_INPUT + 16, p2);
+    put(CLIP_INPUT + 22, p3);
+    if (hooks && hooks->before) {
+        int16_t v[3] = {along.x, along.y, along.z};
+        hooks->before(back, v, hooks->context);
+    }
+    drawn = clip_and_draw_polygon();
+    if (hooks && hooks->after) hooks->after(back, drawn, hooks->context);
+    return drawn;
+}
+
+static int face_lattice(gaddr *stream, const LatticeFaceHooks *hooks) {
     gaddr p2a;
     int16_t count, n;
     Vertex u, v, h, far1, far2, along;
@@ -543,7 +560,7 @@ static int face_lattice(gaddr *stream) {
     along.x = along.y = along.z = 0;
     for (n = count;;) {
         Vertex a = half(along), p = plus(get(p2a), a), r = plus(get(p2a + 6), a);
-        drawn |= grid_face(p, plus(p, u), plus(r, u), r);
+        drawn |= lattice_face(p, plus(p, u), plus(r, u), r, hooks, 0, along);
         if (--n <= 0) break;
         along = plus(along, v);
     }
@@ -551,26 +568,34 @@ static int face_lattice(gaddr *stream) {
     along.x = along.y = along.z = 0;
     for (n = count;;) {
         Vertex a = half(along), p = minus(far1, a), r = minus(far2, a);
-        grid_face(p, minus(p, u), minus(r, u), r);
+        lattice_face(p, minus(p, u), minus(r, u), r, hooks, 1, along);
         if (--n <= 0) break;
         along = plus(along, v);
     }
     return drawn;
 }
 
-int draw_face_lattice(gaddr *stream) {
+int draw_face_lattice_with_hooks(gaddr *stream, const LatticeFaceHooks *hooks) {
     wr_u16(CURRENT_COLOUR, 0x0D);
     wr_u16(LINE_STYLE, 2);
     wr_u16(LINE_STYLE + 2, 0);
     wr_u16(POLY_COMPLEMENT, 2);
     wr_u16(POLY_MASK_BLIT, 0);
-    return face_lattice(stream);
+    return face_lattice(stream, hooks);
+}
+
+int draw_face_lattice_plain_with_hooks(gaddr *stream, const LatticeFaceHooks *hooks) {
+    wr_u32(LINE_STYLE, 0x000FFFFF);
+    wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
+    return face_lattice(stream, hooks);
+}
+
+int draw_face_lattice(gaddr *stream) {
+    return draw_face_lattice_with_hooks(stream, 0);
 }
 
 int draw_face_lattice_plain(gaddr *stream) {
-    wr_u32(LINE_STYLE, 0x000FFFFF);
-    wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
-    return face_lattice(stream);
+    return draw_face_lattice_plain_with_hooks(stream, 0);
 }
 
 int draw_block_face(gaddr *stream) {

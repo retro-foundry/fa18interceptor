@@ -107,6 +107,16 @@ int draw_face_grid_plain(gaddr *stream);
 int draw_face_lattice(gaddr *stream);
 int draw_face_lattice_plain(gaddr *stream);
 
+/* A caller may replay the original registers around each clipper call while
+ * this lattice still has that face's clip output and blit state. */
+typedef struct LatticeFaceHooks {
+    void (*before)(int back, const int16_t along[3], void *context);
+    void (*after)(int back, int drawn, void *context);
+    void *context;
+} LatticeFaceHooks;
+int draw_face_lattice_with_hooks(gaddr *stream, const LatticeFaceHooks *hooks);
+int draw_face_lattice_plain_with_hooks(gaddr *stream, const LatticeFaceHooks *hooks);
+
 /* A face of a workspace block ($C21500): colour word, block offset. Its
  * fourth vertex and the edges from the first to the second and the second
  * to the third make a parallelogram, clipped and drawn unless the view is

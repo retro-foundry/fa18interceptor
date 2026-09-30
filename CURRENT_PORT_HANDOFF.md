@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 381; 742,860 calls matching in shadow and 938,459 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 383; 735,260 calls matching in shadow and 926,187 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -51,6 +51,17 @@ routine. But see the first trap below: the quick probe is not a substitute
 for it.
 
 ## Recently ported
+
+`$C20A52`/`$C20A40` face lattices (`draw_stream.c`, `glue_batch58.c`) are
+registered. The C lattice now offers per-face hooks so the glue replays the
+clipper immediately after each face, while that face's `CLIP_INPUT`,
+`CLIP_OUTPUT`, `POLY_VERTICES`, and pre-draw `BLTSIZE` are available. This
+preserves D7's high word when an earlier face made the last winning write.
+The full three-recording gate passed with 735,260 shadow matches and 926,187
+sandbox matches, identical poison frames, and 10/10 exact parity frames
+393-402. `$C20A52` had 54 shadow and 187 sandbox matches; `$C20A40` had
+793 shadow and 1,593 sandbox matches. Some long draws were incomplete in
+shadow; sandbox compared them where possible.
 
 `$C0D04C` history projection (`history_projection.c`,
 `glue_history_projection.c`) is now registered. Its C path traverses the
@@ -137,16 +148,6 @@ All of these are registered and matching over all three recordings:
 - `$C0924A`/`$C09266`/`$C092A0` `reset_scene_context` /
   `reset_scene_recorder` / `place_scene_root` (`scene_setup.c`) - three entry
   points into one sequence that places the player's record for the scene.
-
-Recreated but **not** registered, each with the blocker written in its glue:
-
-- `$C20A52`/`$C20A40` the two face lattices (`glue_batch58.c`) - they draw a
-  second run of faces back from the far edge, and there the winning write of
-  D7's high word is an earlier face's. Replaying that face exactly needs the
-  BLTSIZE and LINE_LAST_ROW from before *that* draw, and the machine keeps
-  only the last (`fa18_bltsize_at_draw_start`). A per-draw log of those two
-  is not enough on its own: an intermediate face's replay also reads
-  `CLIP_OUTPUT` and `POLY_VERTICES`, which by then hold the last face's data.
 
 ## The problem that was just fixed
 

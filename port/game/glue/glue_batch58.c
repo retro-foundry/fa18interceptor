@@ -1,9 +1,7 @@
-/* Glue for the face grids $C20C38, $C20C22, $C20A52 and $C20A40. Every face
- * reaches the clipper, and D7's high word carries from one of its draws to
- * the next, so every face is replayed: its setup, its corners back into the
- * clipper input, then the clipper's registers (with BLTSIZE from before the
- * last draw, kept by the machine). The grids keep their vectors, counters
- * and result in the caller's frame; those end values are written too. */
+/* Glue for the face grids $C20C38/$C20C22 and lattices $C20A52/$C20A40.
+ * The grids replay their faces after C. The lattices replay each clipper
+ * immediately after C draws that face, while its clip output and previous
+ * BLTSIZE are still available. D7's high word carries between faces. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -157,88 +155,80 @@ static int grid_glue(int plain) {
 int glue_C20C38(void) { return grid_glue(0); }
 int glue_C20C22(void) { return grid_glue(1); }
 
-static int lattice_glue(int plain) {
-    gaddr stream = A(2), s = A(2), base, p2a;
-    uint32_t a1 = A(1), a2, a5 = A(5);
-    uint16_t colour, result;
-    int16_t count;
-    V3 u, v, h, far1, far2, acc, along, a;
-    int16_t n;
-    ClipperSnapshot snap;
+typedef struct {
+    ClipperSnapshot snapshot;
+    gaddr p2a, stream_end;
+    V3 far2;
+    uint16_t colour;
+    uint32_t saved_a3, saved_a4;
+} LatticeGlue;
 
-    clipper_snapshot(&snap);
-    result = (uint16_t)(plain ? draw_face_lattice_plain(&stream) : draw_face_lattice(&stream));
-    colour = rd_u16(CURRENT_COLOUR);
+static void lattice_before(int back, const int16_t along_words[3], void *context) {
+    LatticeGlue *g = (LatticeGlue *)context;
+    V3 along, far = at(CLIP_INPUT + 22), corner = at(CLIP_INPUT + 16);
+    int k;
+    for (k = 0; k < 3; ++k) along.x[k] = along_words[k];
+    regs3(4, back ? g->far2 : at(g->p2a + 6), far);
+    regs3(1, along, corner);
+    A(0) = CLIP_INPUT + 16;
+    A(2) = g->stream_end;
+    if (!back) {
+        A(3) = g->p2a;
+        A(4) = g->p2a + 6;
+    }
+    g->saved_a3 = A(3);
+    g->saved_a4 = A(4);
+    clipper_snapshot(&g->snapshot);
+}
+
+static void lattice_after(int back, int drawn, void *context) {
+    LatticeGlue *g = (LatticeGlue *)context;
+    clipper_registers(&g->snapshot, g->colour, drawn);
+    if (!back) {
+        A(3) = g->saved_a3;
+        A(4) = g->saved_a4;
+    }
+}
+
+static int lattice_glue(int plain) {
+    gaddr stream = A(2), s = A(2), base;
+    uint32_t a1 = A(1), a5 = A(5);
+    uint16_t result;
+    int16_t count;
+    V3 u, v, h, far1, acc;
+    LatticeGlue g;
+    LatticeFaceHooks hooks = {lattice_before, lattice_after, &g};
+
     if (plain) s += 2;
     base = WORKSPACES + SEXT(rd_u16(s));
     count = rd_s16(s + 2);
     s += 4;
-    a2 = s;
-    p2a = base + 12;
-    u = sub(at(base), at(p2a));
-    v = sub(at(base + 6), at(p2a));
+    g.stream_end = s;
+    g.p2a = base + 12;
+    g.colour = plain ? rd_u16(A(2)) : 0x0D;
+    u = sub(at(base), at(g.p2a));
+    v = sub(at(base + 6), at(g.p2a));
     h = halved(v);
-    far1 = add(sub(at(p2a), h), u);
-    far2 = add(sub(at(p2a + 6), h), u);
+    far1 = add(sub(at(g.p2a), h), u);
+    g.far2 = add(sub(at(g.p2a + 6), h), u);
     acc = times(v, (int16_t)(count > 1 ? count - 1 : 0));
-    a = halved(acc);
     frame3(-0x46, u);
     frame3(-0x40, v);
     frame3(-0x4C, far1);
-    frame3(-0x52, far2);
+    frame3(-0x52, g.far2);
     frame3(-0x58, acc);
+    result = (uint16_t)(plain ? draw_face_lattice_plain_with_hooks(&stream, &hooks)
+                             : draw_face_lattice_with_hooks(&stream, &hooks));
     wr_s16(A(6) - 0x38, counted_down(count));
     wr_s16(A(6) - 0x3A, counted_down(count));
     wr_u16(A(6) - 0x7E, result);
-    /* Each face: D4-D6 = the far corner over the vertex it came from, D1-D3
-     * = the corner across from it over the half steps. The second loop runs
-     * back from the far edge, so its faces subtract. */
-    A(0) = CLIP_INPUT + 16;
-    along.x[0] = along.x[1] = along.x[2] = 0;
-    for (n = count;;) {
-        V3 near, far;
-        a = halved(along);
-        near = add(at(p2a), a);
-        far = add(at(p2a + 6), a);
-        write_face(near, add(near, u), add(far, u), far);
-        regs3(4, at(p2a + 6), far);
-        regs3(1, along, add(far, u));
-        A(0) = CLIP_INPUT + 16;
-        A(3) = p2a;
-        A(4) = p2a + 6;
-        face_call(&snap, colour);
-        if (--n <= 0) break;
-        along = add(along, v);
-    }
-    along.x[0] = along.x[1] = along.x[2] = 0;
-    for (n = count;;) {
-        V3 near, far;
-        a = halved(along);
-        near = sub(far1, a);
-        far = sub(far2, a);
-        write_face(near, sub(near, u), sub(far, u), far);
-        regs3(4, far2, far);
-        regs3(1, along, sub(far, u));
-        A(0) = CLIP_INPUT + 16;
-        A(3) = p2a;
-        A(4) = p2a + 6;
-        face_call(&snap, colour);
-        if (--n <= 0) break;
-        along = add(along, v);
-    }
     A(1) = a1;
-    A(2) = a2;
+    A(2) = g.stream_end;
     A(5) = a5;
     SET_W(D(0), result);
     flags_logic_w(D(0));
     return glue_return();
 }
 
-/* Neither lattice is registered. Replaying every face gets D7's high word
- * right only while the last face's draw writes it whole; the lattices draw
- * a second run of faces back from the far edge, and in a few calls the
- * winning write is an earlier face's. Replaying that face exactly needs the
- * BLTSIZE and LINE_LAST_ROW from before its draw, and the machine keeps
- * only the last (fa18_bltsize_at_draw_start). See CURRENT_PORT_HANDOFF.md. */
 int glue_C20A52(void) { return lattice_glue(0); }
 int glue_C20A40(void) { return lattice_glue(1); }
