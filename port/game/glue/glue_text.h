@@ -60,6 +60,15 @@ void signed_readout_registers(void);
 void tick_row_registers(void);
 void bcd_entry(gaddr layout, gaddr rows, int16_t x, int count, int digits, gaddr end, int keep_zeros);
 
+/* $C123FA's D1 and A0 (glue_batch41.c); x, y, z come back adjusted as the
+ * call left them, and nothing here writes game memory. */
+void track_direction_registers(int32_t elevation, int32_t azimuth, int32_t before, int32_t *x_io,
+                               int32_t *y_io, int32_t *z_io, int32_t max_step, int snap);
+
+/* $C2D954's, from the record and the whole D4-D6 it was called with
+ * (glue_batch23.c); safe to replay after the orientation is already set. */
+void record_orientation_registers(gaddr record, uint32_t d4, uint32_t d5, uint32_t d6);
+
 /* $C2F64E's and $C2F63A's the same way. */
 void square_registers(void);
 void square_in_view_registers(void);

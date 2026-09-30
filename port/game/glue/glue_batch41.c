@@ -25,17 +25,19 @@ static int16_t rounded(int32_t numerator, int16_t divisor) {
 
 static int32_t table(int16_t i) { return (int32_t)rd_s16(ARCTAN_TABLE + (gaddr)(2 * (int32_t)i)) * 8; }
 
-int glue_C123FA(void) {
-    gaddr args = A(7) + 4;
-    int32_t elevation = rd_s32(args), azimuth = rd_s32(args + 4), x = rd_s32(args + 8), y = rd_s32(args + 12),
-            z = rd_s32(args + 16), max_step = rd_s32(args + 20), largest, heading, before = azimuth;
-    int x_neg = x < 0, z_neg = z < 0, shift, lift, heading_divided = 1, pitch_divided = 1, snap;
+/* The registers $C123FA leaves (D1 and A0), on their own, for the glue of
+ * routines that end in it. `*x`, `*y` and `*z` come back as the call made
+ * them positive and, when large, divided by 8; `before` is the azimuth as
+ * it was and `snap` the test taken before the C, since it can set
+ * TRACK_STARTED. Nothing here writes game memory. */
+void track_direction_registers(int32_t elevation, int32_t azimuth, int32_t before, int32_t *x_io,
+                               int32_t *y_io, int32_t *z_io, int32_t max_step, int snap) {
+    int32_t x = *x_io, y = *y_io, z = *z_io, largest, heading;
+    int x_neg = x < 0, z_neg = z < 0, shift, lift, heading_divided = 1, pitch_divided = 1;
     int16_t xs, zs, ys, level;
     uint32_t pitch_d1;
 
-    snap = max_step < 0 || !(rd_u8(CONTEXT_STATE) | rd_u8(TRACK_STARTED));
-    track_direction(&elevation, &azimuth, x, y, z, max_step);
-
+    (void)elevation;
     if (x < 0) x = -x;
     if (y < 0) y = -y;
     if (z < 0) z = -z;
@@ -45,11 +47,9 @@ int glue_C123FA(void) {
     else if (largest > 0x800000) { shift = 12; lift = 2; }
     else if (largest > 0x200000) { shift = 10; lift = 4; }
     else { shift = 8; lift = 6; }
-    wr_s32(args + 4, azimuth);
-    wr_s32(args, elevation);
-    wr_s32(args + 8, x);
-    wr_s32(args + 12, y);
-    wr_s32(args + 16, z);
+    *x_io = x;
+    *y_io = y;
+    *z_io = z;
 
     /* The azimuth target, replayed (its quotient is gone from memory). */
     xs = (int16_t)(x >> shift);
@@ -86,5 +86,21 @@ int glue_C123FA(void) {
         else if (d > 0x3840) D(1) = (uint32_t)azimuth;
         else D(1) = (uint32_t)(d >> 2);
     }
+}
+
+int glue_C123FA(void) {
+    gaddr args = A(7) + 4;
+    int32_t elevation = rd_s32(args), azimuth = rd_s32(args + 4), x = rd_s32(args + 8), y = rd_s32(args + 12),
+            z = rd_s32(args + 16), max_step = rd_s32(args + 20), before = azimuth;
+    int snap = max_step < 0 || !(rd_u8(CONTEXT_STATE) | rd_u8(TRACK_STARTED));
+
+    track_direction(&elevation, &azimuth, x, y, z, max_step);
+    track_direction_registers(elevation, azimuth, before, &x, &y, &z, max_step, snap);
+    /* The compiled C updates its argument slots in place. */
+    wr_s32(args + 4, azimuth);
+    wr_s32(args, elevation);
+    wr_s32(args + 8, x);
+    wr_s32(args + 12, y);
+    wr_s32(args + 16, z);
     return glue_return();
 }
