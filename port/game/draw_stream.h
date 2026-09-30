@@ -157,4 +157,19 @@ int draw_record_shadow(gaddr *stream, gaddr frame);
  * caller's frame at `frame` (the point table at -$2C, the eye at -$26). */
 int test_stream_face(gaddr *stream, gaddr frame);
 
+/* A face of at least three vertex offsets, the last flagged by bit 15,
+ * then its kind word ($C2005C). The face is drawn in the kind's colour;
+ * when the kind is not negative the face test runs first, and on a pass
+ * the face is drawn in the colour that follows instead, or dropped when
+ * the kind has no bit 14 (which is skipped when the test fails). The
+ * frame counts the tests at -$32 and the failures at -$34. Nothing is
+ * drawn when every vertex is behind. -1 when nothing was drawn. */
+int draw_tested_face(gaddr *stream, gaddr frame);
+
+/* A base pointer, then offsets from it to such faces until a negative one
+ * ($C20100), each drawn the same way except that the test reads and
+ * advances the stream, not the face. The results are ORed at -$7E in the
+ * frame, which is also the result. */
+int draw_indexed_face_list(gaddr *stream, gaddr frame);
+
 #endif

@@ -446,6 +446,9 @@ const FA18Port fa18_ports[] = {
     {0xC1F99A, glue_C1F99A, "transform_bound_points", 9000},
     /* draw_stream.c */
     {0xC1FF0A, glue_C1FF0A, "test_stream_face", 240},
+    /* draw_stream.c */
+    {0xC2005C, glue_C2005C, "draw_tested_face", 520},
+    {0xC20100, glue_C20100, "draw_indexed_face_list", 620},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

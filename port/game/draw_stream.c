@@ -914,3 +914,93 @@ int test_stream_face(gaddr *stream, gaddr frame) {
     *stream = faces + (passed ? 0x12 : 0);
     return passed;
 }
+
+/* The vertex offsets at `*face`, the last flagged by bit 15, into the
+ * clipper input; at least three are read, and the first two unflagged.
+ * -1 when every vertex is behind, else 0 with the count stored. */
+static int build_face_vertices(gaddr *face) {
+    gaddr in = CLIP_INPUT + 4;
+    int16_t count = 3, behind, offset;
+
+    put(in, get(vertex_at(next_word(face))));
+    behind = rd_s16(in + 4);
+    in += 6;
+    put(in, get(vertex_at(next_word(face))));
+    behind &= rd_s16(in + 4);
+    in += 6;
+    for (;;) {
+        offset = next_word(face);
+        if (offset < 0) break;
+        put(in, get(vertex_at(offset)));
+        behind &= rd_s16(in + 4);
+        in += 6;
+        count++;
+    }
+    put(in, get(vertex_at((int16_t)(offset & 0x7FFF))));
+    behind &= rd_s16(in + 4);
+    if (behind < 0) return -1;
+    wr_u16(CLIP_INPUT + 2, (uint16_t)count);
+    return 0;
+}
+
+/* Whether the face is drawn, and in what colour: the kind's own, or the
+ * colour that follows it when the face test passes. `face` reads the kind
+ * and that colour, `stream` is what the test reads and advances; `tested`
+ * is 1 when the test passed, -1 when it failed, 0 when it did not run. */
+static int face_colour(uint16_t kind, gaddr *face, gaddr *stream, gaddr frame,
+                       uint16_t *colour, int *tested) {
+    gaddr faces = *stream;
+    int16_t eye[3];
+    int k;
+
+    *tested = 0;
+    *colour = kind;
+    if ((int16_t)kind < 0) return 1;
+    for (k = 0; k < 3; k++) eye[k] = rd_s16(frame - 0x26 + (gaddr)(2 * k));
+    *tested = face_test_passes(kind, rd_u32(frame - 0x2C), &faces, eye) ? 1 : -1;
+    *stream = faces;
+    if (*tested < 0) return 1;
+    if (!(kind & 0x4000)) return 0;
+    *colour = (uint16_t)next_word(face);
+    return 1;
+}
+
+int draw_tested_face(gaddr *stream, gaddr frame) {
+    uint16_t kind, colour;
+    int tested, draw;
+
+    wr_u16(CLIP_INPUT, 0);
+    if (build_face_vertices(stream)) return -1;
+    kind = (uint16_t)next_word(stream);
+    draw = face_colour(kind, stream, stream, frame, &colour, &tested);
+    if (tested) wr_u16(frame - 0x32, (uint16_t)(rd_u16(frame - 0x32) + 1));
+    if (tested < 0) {
+        wr_u16(frame - 0x34, (uint16_t)(rd_u16(frame - 0x34) + 1));
+        if (kind & 0x4000) *stream += 2;
+    }
+    if (!draw) return -1;
+    wr_u16(CURRENT_COLOUR, colour);
+    return clip_and_draw_polygon();
+}
+
+int draw_indexed_face_list(gaddr *stream, gaddr frame) {
+    gaddr base = rd_u32(*stream);
+
+    *stream += 4;
+    wr_u16(CLIP_INPUT, 0);
+    wr_u16(frame - 0x7E, 0);
+    for (;;) {
+        int16_t at = next_word(stream);
+        gaddr face;
+        uint16_t kind, colour;
+        int tested;
+
+        if (at < 0) return (int16_t)rd_u16(frame - 0x7E);
+        face = base + (gaddr)(int32_t)at;
+        if (build_face_vertices(&face)) continue;
+        kind = (uint16_t)next_word(&face);
+        if (!face_colour(kind, &face, stream, frame, &colour, &tested)) continue;
+        wr_u16(CURRENT_COLOUR, colour);
+        wr_u16(frame - 0x7E, (uint16_t)(rd_u16(frame - 0x7E) | (uint16_t)clip_and_draw_polygon()));
+    }
+}
