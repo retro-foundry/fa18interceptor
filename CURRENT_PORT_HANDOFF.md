@@ -235,6 +235,11 @@ part that is not, stays on the work side.
    `c2fede_selected_table_display_stage.md`; the isolated orchestration is
    `port/selected_table_display_stage.c`.
    Other ready larger candidates include `$C13D84` and `$C26EBE`.
+   `$C13D84` has an inactive C opening block in `indexed_record_update.c`
+   through `$C1414E`: it selects the indexed record, updates its +$2B phase,
+   +$65 controls, header flags, paired control words and event bytes. The
+   remaining arithmetic and common tail still need C and register glue;
+   this draft is not registered or source-compared.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
