@@ -52,6 +52,11 @@ for it.
 
 ## Recently ported
 
+`$C2374C` `consume_selected_fire_request` (`selected_fire.c`) is committed
+as `2bdb54d5` and registered. Its one recorded call matched in focused shadow
+and sandbox demo probes; the next full proof has not run yet, so the Numbers
+row above still reflects the last fully checked batch.
+
 All of these are registered and matching over all three recordings:
 
 - `$C10C68` `queue_post_input_context_command` (`stages.c`) - once the
