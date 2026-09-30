@@ -57,6 +57,12 @@
 #define SCENE_DISPATCH_BITS     0xC45AF8u /* word: two small signed coordinate adjustments ($C28CAE) */
 #define SCENE_DISPATCH_SHIFT_X  0xC45B18u /* word: first coordinate adjustment ($C28CA6/$C28CC6) */
 #define SCENE_DISPATCH_SHIFT_Z  0xC45B1Au /* word: second coordinate adjustment ($C28CA8/$C28CEE) */
+#define TEMPLATE_SELECTOR_X 0xC42290u /* signed-relative 128-word template directory ($C1C40C) */
+#define TEMPLATE_SELECTOR_Y 0xC42390u
+#define TEMPLATE_SELECTOR_Z 0xC42490u
+#define TEMPLATE_GATES_X    0xC1929Cu /* 128 rows of four long bit words ($C1C40C) */
+#define TEMPLATE_GATES_Y    0xC19A9Cu
+#define TEMPLATE_GATES_Z    0xC1A29Cu
 #define SCENE_POSE_TABLE   0xC42A02u /* 16-byte scene pose entries ($C093A2) */
 #define SCENE_POSE_ENTRY   0xC45848u /* byte: which SCENE_POSE_TABLE entry the root takes */
 #define GRID_ADJUST_WORDS  0xC1D7E2u /* 61 signed word pairs, $C1D7E2-$C1D8D5 ($C0941C) */

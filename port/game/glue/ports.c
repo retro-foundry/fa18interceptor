@@ -475,6 +475,10 @@ const FA18Port fa18_ports[] = {
     {0xC28B34, glue_C28B34, "dispatch_scene_records", 12000},
     /* scene record initialization and aim () */
     {0xC28AFE, glue_C28AFE, "initialize_scene_record", 18000},
+    /* post-input context command and heading marker () */
+    {0xC10C68, glue_C10C68, "queue_post_input_context_command", 3000},
+    /* static template bit-gate builder () */
+    {0xC1C40C, glue_C1C40C, "build_template_bit_gates", 20000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

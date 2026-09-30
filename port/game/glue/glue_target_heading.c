@@ -8,7 +8,7 @@
 #include "target_heading.h"
 #include "glue_text.h"
 
-int glue_C25070(void) {
+void post_input_heading_registers(int apply) {
     gaddr item = rd_u32(POST_INPUT_RECORD_LIST);
     uint8_t type;
     uint32_t packed;
@@ -36,12 +36,12 @@ int glue_C25070(void) {
         break;
     }
     if (!found) {
-        (void)refresh_post_input_heading();
+        if (apply) (void)refresh_post_input_heading();
         D(0) = 0xFFFFFFFFu;
-        return glue_return();
+        return;
     }
 
-    (void)refresh_post_input_heading();
+    if (apply) (void)refresh_post_input_heading();
     D(3) = 0;
     D(4) = 0;
     SET_W(D(5), 0x1F4);
@@ -63,5 +63,9 @@ int glue_C25070(void) {
     A(3) = DISPLAY_VALUE_BCD + 3;
     SET_B(D(1), (rd_u8(DISPLAY_VALUE_BCD + 3) & 15u) + '0');
     D(0) = 0;
+}
+
+int glue_C25070(void) {
+    post_input_heading_registers(1);
     return glue_return();
 }

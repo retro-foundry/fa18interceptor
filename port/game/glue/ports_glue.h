@@ -558,4 +558,10 @@ int glue_C28B34(void);
 /* scene record initialization and aim () */
 int glue_C28AFE(void);
 
+/* post-input context command and heading marker () */
+int glue_C10C68(void);
+
+/* static template bit-gate builder () */
+int glue_C1C40C(void);
+
 #endif

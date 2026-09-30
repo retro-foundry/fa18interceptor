@@ -25,6 +25,9 @@ void queue_postflight_failure_message(void);
  * schedule the next callback. */
 void advance_postflight_reset(void);
 void restart_postflight_scene(void);
+/* $C10C68: after the post-input countdown, queue the context command and
+ * optional heading marker, then install the next callback. */
+void queue_post_input_context_command(void);
 
 /* Count a byte timer down to zero; negative timers are stopped. */
 void tick_timer(gaddr timer);

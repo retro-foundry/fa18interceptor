@@ -9,7 +9,28 @@
 #include "player_input.h"
 #include "render_buffers.h"
 #include "scene_setup.h"
+#include "target_heading.h"
 #include "view.h"
+
+void queue_post_input_context_command(void) {
+    gaddr write = MESSAGE_QUEUE;
+    uint8_t mode;
+
+    if (rd_s16(POST_INPUT_COUNTDOWN) >= 0) return;
+    mode = rd_u8(MODE_SELECT);
+    wr_u8(POST_INPUT_AUX, 0);
+    if ((int8_t)mode >= 3 && (int8_t)mode <= 8 && refresh_post_input_heading() >= 0) {
+        wr_u16(write, 0x58);
+        write += 2;
+    }
+    if (mode == 2) wr_u8(MESSAGE_STATE_C, 0xFF);
+    else {
+        wr_u16(write, (rd_u8(CONTROL_RECORDS + 4) & 8u) ? 0x5Au : 0x59u);
+        write += 2;
+    }
+    wr_u16(write, 0);
+    wr_u32(STAGE_CALLBACK, 0xC10CFEu);
+}
 
 void empty_stage(void) {}
 

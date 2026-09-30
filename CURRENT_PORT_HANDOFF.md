@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 365; 796,489 calls matching in shadow and 1,029,164 in the sandbox pass over three native recordings; poison-clean. The new scene initialization parent contains formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 367; 796,515 calls matching in shadow and 1,029,188 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -54,9 +54,17 @@ for it.
 
 All of these are registered and matching over all three recordings:
 
+- `$C10C68` `queue_post_input_context_command` (`stages.c`) - once the
+  countdown expires, queues the heading marker and context command, then
+  installs the next callback. All 25 recorded calls matched. It now contains
+  the two formerly direct heading-formatter calls.
+- `$C1C40C` `build_template_bit_gates` (`template_gates.c`) - clears and
+  populates three 128-row bit-gate tables from the original signed-relative
+  template directories. All three recorded calls matched.
 - `$C25070` `refresh_post_input_heading` (`target_heading.c`) - scans the
   post-input record list, transforms the selected record's point, tracks its
-  heading and formats the three output digits; both demo calls matched.
+  heading and formats the three output digits; both demo calls matched in the
+  preceding full proof before `$C10C68` contained them.
 - `$C28B34` `dispatch_scene_records` and `$C28AFE`
   `initialize_scene_record` (`scene_dispatch.c`) - copy scene pointers,
   filter entries, create and orient control records, then aim a newly
