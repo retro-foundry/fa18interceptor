@@ -235,12 +235,13 @@ part that is not, stays on the work side.
    `c2fede_selected_table_display_stage.md`; the isolated orchestration is
    `port/selected_table_display_stage.c`.
    Other ready larger candidates include `$C13D84`, `$C26EBE`, and `$C2D408`.
-   `$C2D408` has an inactive C continuation in `record_matrix_update.c` for
-   `$C2D704-$C2D99A`: post-transform angle settling, speed/flag branches,
-   velocity response and the orientation writer. It builds with warnings
-   enabled but is not registered or source-compared. Complete the preceding
-   input/velocity paths and caller-visible register flow, then prove the
-   whole parent before counting it.
+   `$C2D408` has inactive C blocks in `record_matrix_update.c` for its
+   class-$30 tracking route (`$C2D408-$C2D492`) and post-transform
+   continuation (`$C2D704-$C2D99A`): angle settling, speed/flag branches,
+   velocity response and orientation. They build with warnings enabled but
+   are not registered or source-compared. Complete the nonclass input and
+   velocity paths and caller-visible register flow, then prove the whole
+   parent before counting it.
    `$C2DEE0` is now registered (`matrix.c`, `glue_transform_matrix.c`). It
    builds the nine-long signed product, converts it through the original
    table/division angle branches, and returns the three shifted angles with

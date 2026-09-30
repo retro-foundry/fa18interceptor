@@ -4,8 +4,38 @@
 
 #include "globals.h"
 #include "matrix.h"
+#include "tracking.h"
 
 static int16_t sw(uint16_t value) { return (int16_t)value; }
+
+int update_record_class30_matrix(gaddr record) {
+    uint16_t angle = rd_u16(record + 0x6A);
+    int tracked = rd_s16(record + 0x4C) > 0 && !rd_u8(POST_INPUT_EVENT);
+
+    if (tracked) {
+        int32_t elevation = rd_s16(record + 0x66);
+        int32_t azimuth = rd_s16(record + 0x68);
+        if (!rd_u8(CONTEXT_SELECT)) {
+            if (sw(angle) <= 0x3840) {
+                angle = (uint16_t)(angle - 0x7D0);
+                if (sw(angle) < 0) angle = 0;
+            } else {
+                angle = (uint16_t)(angle + 0x7D0);
+                if (sw(angle) >= 0x7080) angle = 0;
+            }
+        } else {
+            angle = 0;
+        }
+        wr_u16(record + 0x6A, angle);
+        track_direction(&elevation, &azimuth, rd_s32(record + 0x3E),
+                        rd_s32(record + 0x42), rd_s32(record + 0x46), 0x7D0);
+        set_record_orientation(record, rd_u16(TRACKED_PITCH), rd_u16(TRACKED_HEADING), angle);
+    } else {
+        set_record_orientation(record, rd_u16(record + 0x66),
+                               rd_u16(record + 0x68), angle);
+    }
+    return tracked;
+}
 
 static uint16_t half_capped_step(uint16_t distance) {
     int16_t step = sw(distance);
