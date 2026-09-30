@@ -580,4 +580,7 @@ int glue_C0FA04(void);
 int glue_C0D74A(void);
 int glue_C0D752(void);
 
+/* signed matrix transform and three returned angles */
+int glue_C2DEE0(void);
+
 #endif

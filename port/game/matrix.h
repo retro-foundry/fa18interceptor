@@ -26,7 +26,18 @@ void rotation_matrix(uint16_t a, uint16_t b, uint16_t c, gaddr out);
 /* First arithmetic block of $C2DEE0: guard its three signed angle words,
  * build the rotation at $C45B90, and write nine full signed sums at $C45BA2.
  * The caller's matrix is nine signed words in row-major order. */
-void build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c);
+uint32_t build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c);
+
+/* Second arithmetic block of $C2DEE0: convert the nine-long product
+ * workspace to its three returned angle words (before the final shift). */
+typedef struct MatrixTransformAngleState {
+    int16_t divisor;
+    int16_t primary_index;
+    uint32_t final_d0;
+    int16_t secondary_raw;
+    int primary_clears_d2_high;
+} MatrixTransformAngleState;
+void extract_transform_angles(int16_t out[3], MatrixTransformAngleState *state);
 
 /* The three-angle rotation in 2.8 fixed point ($C2E3DE): the same terms,
  * each sum kept as the high word of its 2.14 product shifted down by 4, and

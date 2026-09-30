@@ -111,8 +111,9 @@ void scale_matrix_rows(gaddr matrix, gaddr scales) {
     }
 }
 
-void build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c) {
+uint32_t build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c) {
     int row, col, k;
+    uint32_t last_term = 0;
     uint16_t angles[3] = {a, b, c};
     for (k = 0; k < 3; ++k)
         if ((int16_t)angles[k] < 0) angles[k] = (uint16_t)(angles[k] + 0x7080u);
@@ -124,9 +125,142 @@ void build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c) {
                 int32_t term = (int32_t)rd_s16(source + (gaddr)(6 * k + 2 * col)) *
                                rd_s16(MATRIX_TRANSFORM_ROTATION + (gaddr)(6 * row + 2 * k));
                 sum += (uint32_t)term;
+                if (row == 2 && col == 2 && k == 2) last_term = (uint32_t)term;
             }
             wr_u32(MATRIX_TRANSFORM_PRODUCT + (gaddr)(12 * row + 4 * col), sum);
         }
+    }
+    return last_term;
+}
+
+/* The routine uses DIVS.W without rounding for a small divisor. For a larger
+ * divisor it divides the numerator shifted six places, then rounds the word
+ * quotient using the signed remainder. On overflow DIVS leaves D0 intact. */
+static uint32_t transform_ratio(int32_t numerator, int16_t divisor) {
+    int32_t dividend = numerator;
+    int16_t actual = divisor;
+    int64_t quotient;
+    uint32_t packed;
+    if (divisor <= 0x147) actual = (int16_t)((uint16_t)divisor << 6);
+    else dividend >>= 6;
+    quotient = (int64_t)dividend / actual;
+    if (quotient < -32768 || quotient > 32767)
+        packed = (uint32_t)dividend;
+    else
+        packed = ((uint32_t)(uint16_t)(int16_t)(dividend % actual) << 16) |
+                 (uint16_t)(int16_t)quotient;
+    if (divisor > 0x147) {
+        int16_t remainder = (int16_t)(packed >> 16);
+        int16_t half = (int16_t)((divisor < 0 ? -(int32_t)divisor : divisor) >> 1);
+        if (remainder < 0) remainder = (int16_t)-remainder;
+        packed = ((uint32_t)(uint16_t)remainder << 16) | (uint16_t)packed;
+        if (half <= remainder)
+            packed = (packed & 0xFFFF0000u) |
+                     (uint16_t)((int16_t)packed < 0 ? (int16_t)packed - 1
+                                                  : (int16_t)packed + 1);
+    }
+    return packed;
+}
+
+static int16_t transform_table_angle(int16_t index) {
+    return rd_s16(MATRIX_ANGLE_TABLE_FINE + (gaddr)(int32_t)index);
+}
+
+static int16_t transform_axis_angle(int32_t main, int32_t companion,
+                                    int16_t divisor, uint32_t *last_d0,
+                                    int16_t *raw_angle) {
+    uint32_t packed = transform_ratio((int32_t)(0u - (uint32_t)main), divisor);
+    int16_t index = (int16_t)((uint16_t)packed << 1);
+    int negative = index < 0;
+    int16_t angle, other;
+    if (index >= 0) {
+        if (index <= 0x180) angle = transform_table_angle(index);
+        else {
+            packed = transform_ratio(companion, divisor);
+            other = (int16_t)((uint16_t)packed << 1);
+            if (other < 0) other = (int16_t)-other;
+            angle = (int16_t)(0x384 - transform_table_angle(other));
+        }
+    } else {
+        index = (int16_t)-index;
+        if (index <= 0x180) angle = (int16_t)(0xE10 - transform_table_angle(index));
+        else {
+            packed = transform_ratio(companion, divisor);
+            other = (int16_t)((uint16_t)packed << 1);
+            if (other < 0) other = (int16_t)-other;
+            angle = (int16_t)(0xA8C + transform_table_angle(other));
+        }
+    }
+    if (last_d0) {
+        int16_t final_index = (int16_t)((uint16_t)packed << 1);
+        if (index > 0x180) {
+            if (final_index < 0) final_index = (int16_t)-final_index;
+        } else if (negative) final_index = (int16_t)-final_index;
+        *last_d0 = (packed & 0xFFFF0000u) | (uint16_t)final_index;
+    }
+    if (companion < 0) {
+        if (main >= 0 && angle > 0x708) angle = (int16_t)(0x1518 - angle);
+        else angle = (int16_t)(0x708 - angle);
+    }
+    if (raw_angle) *raw_angle = angle;
+    return angle < 0 ? (int16_t)-angle : angle;
+}
+
+void extract_transform_angles(int16_t out[3], MatrixTransformAngleState *state) {
+    int32_t first = (int32_t)(0u - rd_u32(MATRIX_TRANSFORM_PRODUCT + 28));
+    uint32_t magnitude = first < 0 ? 0u - (uint32_t)first : (uint32_t)first;
+    int16_t index, value, angle, divisor;
+    gaddr table;
+    if ((int32_t)magnitude < 0x0E210000) {
+        uint16_t high = (uint16_t)((uint32_t)first >> 16);
+        index = (int16_t)((int16_t)high >> 4);
+        if (high & 8u) index = (int16_t)(index + 1);
+        table = MATRIX_ANGLE_TABLE_FINE;
+    } else {
+        uint32_t shifted;
+        if (magnitude >= 0x0FF60000u) {
+            table = MATRIX_ANGLE_TABLE_COARSE;
+            shifted = (magnitude >> 12) + ((magnitude & 0x800u) != 0);
+            index = (int16_t)(shifted - 0xFF08u);
+            if (index > 0xF8) index = 0xF8;
+        } else {
+            table = MATRIX_ANGLE_TABLE_MID;
+            shifted = (magnitude >> 16) + ((magnitude & 0x8000u) != 0);
+            index = (int16_t)(shifted - 0xDDBu);
+            if (index > 0x225) index = 0x225;
+        }
+        if (first < 0) index = (int16_t)-index;
+    }
+    index = (int16_t)((uint16_t)index << 1);
+    if (index >= 0) {
+        value = rd_s16(table + (gaddr)(int32_t)index);
+        angle = value;
+    } else {
+        value = rd_s16(table + (gaddr)(int32_t)(int16_t)-index);
+        angle = (int16_t)(0xE10 - value);
+    }
+    divisor = (int16_t)((uint16_t)(0x384 - value) << 1);
+    divisor = rd_s16(SINE_TABLE + (gaddr)(int32_t)divisor);
+    if (divisor < 0x8F) {
+        angle = index < 0 ? 0xA82 : 0x38E;
+        divisor = (int16_t)0xFEE2;
+    }
+    if (state) {
+        state->divisor = divisor;
+        state->primary_index = index;
+        state->primary_clears_d2_high = (int32_t)magnitude >= 0x0E210000;
+    }
+    out[0] = (int16_t)((uint16_t)angle << 3);
+    out[1] = (int16_t)((uint16_t)transform_axis_angle(
+        rd_s32(MATRIX_TRANSFORM_PRODUCT + 24),
+        rd_s32(MATRIX_TRANSFORM_PRODUCT + 32), divisor, 0,
+        state ? &state->secondary_raw : 0) << 3);
+    {
+        uint32_t final_d0;
+        out[2] = (int16_t)((uint16_t)transform_axis_angle(
+        rd_s32(MATRIX_TRANSFORM_PRODUCT + 4),
+        rd_s32(MATRIX_TRANSFORM_PRODUCT + 16), divisor, &final_d0, 0) << 3);
+        if (state) state->final_d0 = final_d0;
     }
 }
 
