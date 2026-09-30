@@ -253,6 +253,16 @@ part that is not, stays on the work side.
    linked-volume D2 and the special-point plane choice. The full 379-routine
    gate passed with 738,115 shadow matches, 930,691 sandbox matches,
    identical poison frames, and 10/10 exact parity frames 393-402.
+   The next active-plane candidate `$C2FD8C` already has C and glue in
+   `active_planes.c` and `glue_active_planes.c`. A temporary registration
+   matched all 252 demo01 sandbox calls through 3,000 frames. Shadow
+   compared four calls: two matched and two differed only in busy-counter
+   bytes (`$C4591F`: `$14` source versus `$03` C at call 2;
+   `$C45923`: `$36` source versus `$1B` C at call 9). Another 233 shadow
+   calls were interrupted before comparison. The count helper advances by
+   fixed 56-cycle polls, while the live source waits during chipset
+   activity; prove the source timing before registering this routine.
+   The temporary registration was removed.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
