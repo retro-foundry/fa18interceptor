@@ -6,6 +6,7 @@
 #include "fixed_math.h"
 #include "globals.h"
 #include "messages.h"
+#include "stages.h"
 
 gaddr control_record(uint16_t selector) {
     /* The original adds the doubled high-byte index as a signed word. */
@@ -743,4 +744,58 @@ void check_zone_exit(void) {
         wr_u8(record + 0x38, 0xFF);
         return;
     }
+}
+
+/* Byte pairs a flagged template entry expands to, indexed by the record
+ * header's high nibble ($C1D8B6). */
+#define TEMPLATE_PAIRS 0xC1D8B6u
+#define LEVEL_LIST_BYTES 0x5D
+#define LEVEL_LIST_STRIDE 96
+
+void expand_cell_templates(int16_t row, int16_t column, gaddr templates, gaddr bitmap,
+                           gaddr lists, gaddr cursor, FilingState *state) {
+    gaddr cell = templates + (gaddr)(int32_t)rd_s16(templates + (gaddr)(int32_t)(int16_t)(2 * row));
+    int16_t word = (int16_t)(4 * (int16_t)(column >> 5) + (int16_t)(16 * row));
+
+    if (rd_s16(cell) >= 0 && (rd_u32(bitmap + (gaddr)(int32_t)word) >> (column & 0x1F)) & 1) {
+        gaddr entries = cell + (gaddr)(int32_t)rd_s16(cell) + 2;
+        gaddr stream = rd_u32(entries + (gaddr)(int32_t)(int16_t)(4 * find_sorted_word(cell, column)));
+        uint8_t previous = 0xFF;
+        int left = 0;
+
+        for (;;) {
+            uint8_t header = rd_u8(stream++), level, flags;
+
+            if (header == 0xFF) break;
+            level = (uint8_t)(header & 0x0F);
+            if (level != previous) {
+                cursor = collect_records_in_cell(column, row, (int8_t)previous, cursor);
+                left = 0x10;
+                previous = level;
+                cursor = lists + (gaddr)(LEVEL_LIST_STRIDE * level);
+                wr_u32(LIST_END, cursor + LEVEL_LIST_BYTES);
+            }
+            if (--left < 0) fatal_error(0x38);
+            if (cursor >= rd_u32(LIST_END)) break;
+            flags = rd_u8(stream++);
+            wr_u8(cursor++, (uint8_t)(flags & 0x80));
+            wr_u8(cursor++, (uint8_t)(flags & 0x7F));
+            if (flags & 0x80) {
+                gaddr pair = TEMPLATE_PAIRS + (gaddr)(2 * ((header >> 4) & 0x0F));
+                int16_t first = (int16_t)(int8_t)rd_u8(pair);
+                wr_u16(cursor, (uint16_t)first);
+                cursor += 2;
+                wr_u16(cursor, (uint16_t)((first & 0xFF00) | rd_u8(pair + 1)));
+                cursor += 2;
+            } else {
+                wr_u32(cursor, rd_u32(stream));
+                stream += 4;
+                cursor += 4;
+            }
+            wr_u8(cursor, 0xFF);
+        }
+        cursor = collect_records_in_cell(column, row, (int8_t)previous, cursor);
+    }
+    state->cursor = cursor;
+    file_records_by_level(column, row, lists, state);
 }

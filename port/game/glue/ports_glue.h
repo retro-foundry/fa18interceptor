@@ -531,4 +531,7 @@ int glue_C20100(void);
 /* draw_stream.c */
 int glue_C20002(void);
 
+/* control_records.c */
+int glue_C1D3F4(void);
+
 #endif

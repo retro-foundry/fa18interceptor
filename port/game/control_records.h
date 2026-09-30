@@ -164,6 +164,20 @@ typedef struct {
  * position. */
 void file_records_by_level(int16_t column, int16_t row, gaddr lists, FilingState *state);
 
+/* $C1D3F4: expand cell (column, row) of the template table at `templates`
+ * into the per-level lists at `lists`, when the cell's bit is set in the
+ * bitmap (a long per 32 columns, 16 bytes a row). The cell's records are
+ * found by the column in its sorted word table; each is a header byte (the
+ * level in bits 0-3, a pair-table index in bits 4-7) followed by entries
+ * until $FF. An entry is a flag byte, split into its bit 7 and its low
+ * seven bits, then either the long that follows it or the two words the
+ * pair table $C1D8B6 gives. Sixteen entries a level; a seventeenth is
+ * fatal error $38, and a full list ($5D bytes) ends the expansion. Each
+ * level's records standing in the cell are collected as the level changes,
+ * and the whole cell is then filed by level. */
+void expand_cell_templates(int16_t row, int16_t column, gaddr templates, gaddr bitmap,
+                           gaddr lists, gaddr cursor, FilingState *state);
+
 /* When the record numbered STREAM_MODE (type $1x) has left its zone's box
  * (+$5D, 1-based; 0 none, a negative none), take the zone's exit for it:
  * +$7A 3 or 4 becomes 5, +$0 bit 0 clears, its view comes from the exit
