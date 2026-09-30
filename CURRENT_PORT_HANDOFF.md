@@ -1,6 +1,6 @@
 # Handoff
 
-One page. History is in git. Updated 2026-09-29.
+One page. History is in git. Updated 2026-09-30.
 
 ## Goal
 
@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 347; 850,259 calls matching in shadow and 1,019,096 in the sandbox pass over three native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 353; 841,972 calls matching in shadow and 1,040,334 in the sandbox pass over three native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -58,12 +58,25 @@ one at a time, each proven on every call.
    throttle hold path clears the function-key level. `$C13176` was compared
    in the sandbox pass; `$C3316E` was called but not compared in these
    recordings.
-   `$C1FB82` (backface dispatch) is registered. Face loops ($C21060, $C20C38, $C20C22, $C20A52, $C20A40) have C and glue
-   but stay unregistered: the dispatcher at $C1F942 returns to callers whose
-   liveness is unknown, so D7's high word counts as live, and it comes from
-   the previous face's draw. The glue replays only the last face (BLTSIZE
-   before it is kept by the machine, fa18_bltsize_at_draw_start). Next step:
-   the dispatcher's callers' liveness, or a replay of every face. The `$C0004E` family are stack
+   `$C1FB82` (backface dispatch) is registered, and so are the stream face
+   commands `$C1FF0A` (three vertices and the face test), `$C2005C` (a
+   vertex offset list, the test, and the polygon) and `$C20100` (that face
+   once per offset from a base pointer).
+   The face loops `$C21060`, `$C20C38` and `$C20C22` are registered too. The
+   dispatcher at $C1F942 returns to callers whose liveness is unknown, so
+   D7's high word counts as live and it carries from one clipper draw to the
+   next; their glue therefore puts each face's corners back into the clipper
+   input and replays *every* call, from one snapshot taken before the C
+   (glue_batch57.c, glue_batch58.c).
+   The two lattices `$C20A52` and `$C20A40` still fail that way in a handful
+   of calls: they draw a second run of faces back from the far edge, and
+   there the winning write of D7's high word is an earlier face's, whose
+   draw the replay cannot reproduce exactly — it needs the BLTSIZE and
+   LINE_LAST_ROW from before *that* draw, and the machine keeps only the
+   last (`fa18_bltsize_at_draw_start`). Next step: have the machine keep a
+   small log of each draw's BLTSIZE and last row so a glue can replay any
+   face exactly. That also makes the three registered loops exact rather
+   than right by the last face. The `$C0004E` family are stack
    trampolines, not game logic; leave them.
 2. **Exact UAE timing (dropped for now).** Native recordings make the port
    independent of UAE replays; the bus model stays as it is. Tools: `scripts/recomp_timing.py` (per

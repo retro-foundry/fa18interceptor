@@ -453,7 +453,6 @@ const FA18Port fa18_ports[] = {
     {0xC21060, glue_C21060, "draw_quad_list", 900},
     {0xC20C38, glue_C20C38, "draw_face_grid", 1200},
     {0xC20C22, glue_C20C22, "draw_face_grid_plain", 1200},
-    {0xC20A40, glue_C20A40, "draw_face_lattice_plain", 1400},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

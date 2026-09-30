@@ -234,8 +234,11 @@ static int lattice_glue(int plain) {
     return glue_return();
 }
 
-/* $C20A52 is not registered: two of its calls end with a clipper call that
- * exits early, so D7's high word comes from an earlier face's draw, and
- * that draw's BLTSIZE and last row are gone by the time the glue runs. */
+/* Neither lattice is registered. Replaying every face gets D7's high word
+ * right only while the last face's draw writes it whole; the lattices draw
+ * a second run of faces back from the far edge, and in a few calls the
+ * winning write is an earlier face's. Replaying that face exactly needs the
+ * BLTSIZE and LINE_LAST_ROW from before its draw, and the machine keeps
+ * only the last (fa18_bltsize_at_draw_start). See CURRENT_PORT_HANDOFF.md. */
 int glue_C20A52(void) { return lattice_glue(0); }
 int glue_C20A40(void) { return lattice_glue(1); }
