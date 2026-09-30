@@ -233,9 +233,13 @@ part that is not, stays on the work side.
    guards and status bits, then the `$C315C0` second normalization,
    `$C31612` renderer choice, `$C316C0` table submission and loop,
    `$C31722` status resolution, and `$C3180C` terminal scan. The two C
-   parent functions compose their head with that tail. The C path compiles,
-   but has not passed a source comparison; its register bridge remains to be
-   written. Neither parent is registered or counted until the proof passes.
+   parent functions compose their head with that tail. A temporary focused
+   shadow probe compared custom writes and both directions of logged memory
+   writes while excluding registers and flags: 469 completed `$C3129A`
+   calls and 476 completed `$C31312` calls matched across the three native
+   recordings (demo 198/198, carrier 185/189, crashes 86/89). The probe
+   bridge and harness edits were removed. Register and flag replay remains
+   before either parent can be registered or counted.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon
