@@ -594,5 +594,6 @@ int glue_C2D408(void);
 
 /* indexed control-record update */
 int glue_C13D84(void);
+int glue_C26EBE(void);
 
 #endif

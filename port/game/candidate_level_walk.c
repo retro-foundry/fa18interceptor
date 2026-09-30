@@ -56,7 +56,10 @@ void select_candidate_level(CandidateLevelWork *work) {
         if (delta_z > 1 || delta_z < -1) goto next_level;
 
         work->x_adjustment = (int32_t)delta_x * 0x4000;
-        work->z_adjustment = (int32_t)delta_z * 0x4000;
+        /* D1 still has the pointer's high word when MOVE.B/EXT.W/SWAP/ASR.L
+         * computes this offset ($C27592-$C275AE). */
+        work->z_adjustment = (int32_t)(((uint32_t)(uint16_t)(int16_t)delta_z << 16) |
+                                       (volume >> 16)) >> 2;
         x = (int32_t)((uint32_t)(int32_t)rd_s16(selected + 0xC) +
                       (uint32_t)work->x_adjustment);
         y = rd_s32(selected + 0x10);

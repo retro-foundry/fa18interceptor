@@ -3,8 +3,7 @@
 
 #include "memory.h"
 
-/* Source block $C27504-$C27666 inside $C26EBE. The plane walk that follows
- * is separate; this block is inactive until the parent is registered. */
+/* Source block $C27504-$C27666 inside $C26EBE. The plane walk follows. */
 typedef enum CandidateLevelRoute {
     CANDIDATE_LEVEL_TERMINAL,
     CANDIDATE_LEVEL_STOP_ZERO,

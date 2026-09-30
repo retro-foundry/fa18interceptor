@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 378; 731,823 calls matching in shadow and 920,240 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 379; 738,115 calls matching in shadow and 930,691 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -242,29 +242,17 @@ part that is not, stays on the work side.
    shadow calls and 4,636 sandbox calls with zero mismatches; 120 shadow
    calls were interrupted before comparison. The full 378-routine gate passed:
    731,823 shadow matches, 920,240 sandbox matches and identical poison
-   frames. All 10 parity frames 393-402 remained pixel-exact. `$C26EBE` is
-   the next ready large candidate. `candidate_record_scan.c` contains its
-   bounded record selection, geometry probes, horizontal edge tests, and
-   terminal paths; `candidate_level_walk.c` contains the level/volume scan
-   and plane walk. `candidate_record_update.c` composes the memory-side
-   parent. All three files pass strict C syntax checks and the build.
-   `$C26EBE` remains unregistered. An exploratory demo01 shadow probe through 3,000 frames
-   matched the first two face exits, but 283 completed calls differed after
-   setting the obvious A0/A3 outcomes; the common terminal route still needs
-   D1-D3 register replay. First observed terminal call: selected `$C47584`,
-   input D1/D2/D3 `$60/$11680000/$00100000`, reference
-   `$1000/$1000/$00100003`, after two flagged level words at `$C4F6E2`.
-   The test registration was removed, so the last
-   passing combined gate still covers 378 routines. `glue_candidate_record_update.c`
-   is an inactive starting point for the remaining register work.
-   The later draft now replays the side, face, terminal, and plane-return
-   register paths. It passed focused full-length shadow checks on all three
-   recordings and focused sandbox checks on carrier and crash. Demo sandbox
-   has two remaining register-only mismatches: call 3292 returns D2 `$181`
-   versus source `$1B1` on the linked-volume stop-zero route; call 3368
-   returns A0 `$C3B682` versus source `$C3B68E` on the special-point plane
-   route. Both calls match result and memory. The candidate remains
-   unregistered; 378 is still the last full-gate count.
+   frames. All 10 parity frames 393-402 remained pixel-exact. `$C26EBE`
+   `update_candidate_record` is now registered. Its C source spans
+   `candidate_record_scan.c`, `candidate_level_walk.c`, and
+   `candidate_record_update.c`; the glue replays the live side, face,
+   terminal, and plane-return registers. The final two sandbox differences
+   came from the source's `MOVE.B`/`EXT.W`/`SWAP`/`ASR.L` sequence: D1 keeps
+   the high word of a volume pointer, contributing `$30` to the Z adjustment
+   even when the sector delta is zero. The corrected C reproduces both the
+   linked-volume D2 and the special-point plane choice. The full 379-routine
+   gate passed with 738,115 shadow matches, 930,691 sandbox matches,
+   identical poison frames, and 10/10 exact parity frames 393-402.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
