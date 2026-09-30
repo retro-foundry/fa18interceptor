@@ -243,26 +243,18 @@ part that is not, stays on the work side.
    calls were interrupted before comparison. The full 378-routine gate passed:
    731,823 shadow matches, 920,240 sandbox matches and identical poison
    frames. All 10 parity frames 393-402 remained pixel-exact. `$C26EBE` is
-   the next ready large candidate. Its bounded opening scan through
-   `$C270AA` is drafted in `candidate_record_scan.c`: class and header
-   filters, two three-axis distance bounds, and the immediate record writes.
-   It is inactive and has only a strict C syntax check; the later geometry
-   branches still need porting before registration and proof. The side-result
-   and signed terminal-height blocks `$C278D6-$C279C6` are drafted in the
-   same file. The first geometry setup `$C270AE-$C27194` is also drafted:
-   both selected-record probes, face-list selection, first height test, and
-   the lower-face scan using the existing `$C27456` C helper. It compiles
-   cleanly. The horizontal edge sign and enclosing face-list walk
-   `$C27198-$C27218`/`$C2741C-$C2744C` are drafted too. The detailed
-   three-point side test, selected-record flag/height writes, and following
-   face-list exit `$C27218-$C27418` are also in C. The level/volume walk
-   `$C27504-$C278D0` is drafted in `candidate_level_walk.c`, and
-   `candidate_record_update.c` now composes the full memory-side routine.
-   These additions build and pass strict C syntax checks, but remain
-   unregistered. An exploratory demo01 shadow probe through 3,000 frames
+   the next ready large candidate. `candidate_record_scan.c` contains its
+   bounded record selection, geometry probes, horizontal edge tests, and
+   terminal paths; `candidate_level_walk.c` contains the level/volume scan
+   and plane walk. `candidate_record_update.c` composes the memory-side
+   parent. All three files pass strict C syntax checks and the build.
+   `$C26EBE` remains unregistered. An exploratory demo01 shadow probe through 3,000 frames
    matched the first two face exits, but 283 completed calls differed after
    setting the obvious A0/A3 outcomes; the common terminal route still needs
-   D1-D3 register replay. The test registration was removed, so the last
+   D1-D3 register replay. First observed terminal call: selected `$C47584`,
+   input D1/D2/D3 `$60/$11680000/$00100000`, reference
+   `$1000/$1000/$00100003`, after two flagged level words at `$C4F6E2`.
+   The test registration was removed, so the last
    passing combined gate still covers 378 routines. `glue_candidate_record_update.c`
    is an inactive starting point for the remaining register work.
    `$C2D408` is now registered (`record_matrix_update.c`,
