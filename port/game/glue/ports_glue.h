@@ -567,4 +567,7 @@ int glue_C1C40C(void);
 /* selected-fire record initializer () */
 int glue_C2374C(void);
 
+/* scene stream selection and special scene record () */
+int glue_C28722(void);
+
 #endif

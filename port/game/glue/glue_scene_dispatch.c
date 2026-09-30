@@ -116,12 +116,16 @@ int glue_C28B34(void) {
     return glue_return();
 }
 
-int glue_C28AFE(void) {
+void scene_initialization_registers(void) {
     gaddr original = A(2);
     D(0) = 0;
     D(7) = 0xFFFFFFFEu;
     dispatch_scene_registers(1);
     A(2) = original;
     if ((int16_t)D(7) >= 0) aim_record_registers(0);
+}
+
+int glue_C28AFE(void) {
+    scene_initialization_registers();
     return glue_return();
 }

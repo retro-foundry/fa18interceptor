@@ -22,13 +22,13 @@ int glue_C50158(void) {
 
 /* $C24E2C: ends in print_number with D0 the day, A0 = DATE_LINE, D3 = $15,
  * D2 = 2; its leftovers follow. */
-int glue_C24E2C(void) {
+void date_line_registers(int apply) {
     uint32_t seconds = rd_u32(rd_u32(MODE_TABLE) + 8);
     uint32_t q = seconds / 3600;
     int16_t days = (int16_t)(q > 0xFFFF ? seconds : q);
     int16_t day = (int16_t)((days & 0x1F) + 1);
 
-    format_date_line();
+    if (apply) format_date_line();
     if (day > 30) day = 30;
     /* print_number's leftovers (it prints the same digits again). */
     D(0) = (uint32_t)(int32_t)day;
@@ -36,5 +36,9 @@ int glue_C24E2C(void) {
     D(3) = 0x15;
     D(2) = 2;
     print_number_registers();
+}
+
+int glue_C24E2C(void) {
+    date_line_registers(1);
     return glue_return();
 }

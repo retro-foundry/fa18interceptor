@@ -4,6 +4,9 @@
 #include "globals.h"
 #include "matrix.h"
 #include "control_records.h"
+#include "fixed_math.h"
+#include "numbers.h"
+#include "stages.h"
 
 static int16_t record_offset(uint16_t index) {
     return (int16_t)(uint16_t)(index << 9);
@@ -164,4 +167,77 @@ int initialize_scene_record(gaddr stream) {
         aim_record_at_view(record, stream);
     }
     return status;
+}
+
+static void initialize_special_scene_record(void) {
+    gaddr source = CONTROL_RECORDS;
+    gaddr record = CONTROL_RECORDS + 0x800u;
+    gaddr viewed = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+    int32_t point[3];
+    uint16_t x, z;
+    int i;
+
+    wr_u16(STREAM_MODE, 4);
+    wr_u16(SCRIPT_RECORD, 0x800);
+    for (i = 0; i < 64; ++i) wr_u32(record + (gaddr)(4 * i), rd_u32(source + (gaddr)(4 * i)));
+    for (i = 0; i < 5; ++i)
+        wr_u32(SCENE_POINTERS + 80 + (gaddr)(4 * i), rd_u32(SCENE_POINTER_TABLE + 0x3C + (gaddr)(4 * i)));
+    update_view_matrix();
+    local_to_world(viewed, VIEW_MATRIX, 0, 0, 0x48, point);
+    wr_u8(record + 0x62, 0x10);
+    for (i = 0; i < 3; ++i) wr_s32(record + 0x14 + (gaddr)(4 * i), point[i]);
+    x = (uint16_t)((uint16_t)((uint32_t)point[0] >> 16) >> 6);
+    z = (uint16_t)((uint16_t)((uint32_t)point[2] >> 16) >> 6);
+    wr_u16(record + 6, x);
+    wr_u16(record + 8, z);
+    wr_u8(record + 0x0A, (uint8_t)((3u - (x & 3u)) + 4u * (3u - (z & 3u))));
+    wr_u8(record + 0x5D, 1);
+    wr_u16(record + 0x2C, 0xFFFF);
+    wr_u8(record + 5, 0);
+    wr_u8(record + 0x5E, 4);
+    wr_u8(HISTORY_COUNT, 0);
+    wr_u8(HISTORY_NEXT, 0);
+}
+
+void initialize_scene_from_mode(const SceneDispatchHooks *hooks) {
+    uint8_t raw_mode;
+    int16_t mode, variant, entry_offset, shift;
+    gaddr block, stream;
+    int first = 1;
+
+    format_date_line();
+    if (hooks && hooks->after_date) hooks->after_date(hooks->context);
+    wr_u8(SCENE_DISPATCH_CREATED, 0);
+    wr_u8(SCENE_DISPATCH_AUX, 0);
+    wr_u16(SCENE_DISPATCH_GATE, 0);
+    raw_mode = rd_u8(MODE_SELECT);
+    if (raw_mode == 0x7Du) {
+        initialize_special_scene_record();
+        if (hooks && hooks->special) hooks->special(hooks->context);
+        return;
+    }
+    mode = (raw_mode == 0x7Eu || raw_mode == 0x7Fu) ? 10 : (int8_t)raw_mode;
+    if (mode > 9 && raw_mode != 0x7Eu && raw_mode != 0x7Fu) return;
+    variant = rd_u8(SEQUENCE_FLAG) ? rd_s16(SCENE_DISPATCH_VARIANT) : (rd_u16(SCENE_DISPATCH_BITS) & 3u);
+    if (!rd_u8(SEQUENCE_FLAG) && variant) {
+        --variant;
+        wr_s16(SCENE_DISPATCH_VARIANT, variant);
+    }
+    entry_offset = (int16_t)((mode - 1) * 12 + variant * 4);
+    block = SCENE_DISPATCH_TABLE + (gaddr)(int32_t)rd_s16(SCENE_DISPATCH_TABLE + (gaddr)(int32_t)entry_offset);
+    wr_u8(SCENE_DISPATCH_ADMITTED, rd_u8(SCENE_DISPATCH_TABLE + (gaddr)(int32_t)entry_offset + 3));
+    shift = mode_offset();
+    stream = block + (gaddr)(int32_t)rd_s16(block + (gaddr)(int32_t)shift);
+    wr_u32(POST_INPUT_RECORD_LIST, stream);
+    if (hooks && hooks->selected) hooks->selected(stream, hooks->context);
+
+    for (;;) {
+        int accepted = first || (int8_t)(rd_u16(stream + 8) & 0x7Fu) <= rd_s8(SCENE_DISPATCH_LIMIT);
+        if (hooks && hooks->scan) hooks->scan(stream, accepted, first, hooks->context);
+        else if (accepted) (void)initialize_scene_record(stream);
+        first = 0;
+        stream += 10;
+        if (rd_s16(stream) < 0) break;
+    }
+    if (hooks && hooks->finished) hooks->finished(stream, hooks->context);
 }

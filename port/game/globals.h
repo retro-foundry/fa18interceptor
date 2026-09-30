@@ -54,6 +54,11 @@
 #define SCENE_POINTERS     0xC22188u /* long[5]: the scene's pointers, copied from that table */
 #define SCENE_DISPATCH_ADMITTED 0xC458AAu /* signed byte: must exceed SCENE_DISPATCH_CREATED ($C28BC2) */
 #define SCENE_DISPATCH_CREATED  0xC458A9u /* signed byte: incremented for created class-$10 records ($C28C4A) */
+#define SCENE_DISPATCH_AUX      0xC458ABu /* byte: cleared at scene dispatch entry ($C2872E) */
+#define SCENE_DISPATCH_GATE     0xC45782u /* word: cleared at scene dispatch entry ($C28734) */
+#define SCENE_DISPATCH_LIMIT    0xC458A7u /* byte: maximum low-seven-bit stream selector ($C287A6) */
+#define SCENE_DISPATCH_TABLE    0xC297D2u /* mode/variant stream-offset table ($C28760) */
+#define SCENE_DISPATCH_VARIANT  0xC45B1Cu /* word: retained variant when SEQUENCE_FLAG is set ($C2877A) */
 #define SCENE_DISPATCH_BITS     0xC45AF8u /* word: two small signed coordinate adjustments ($C28CAE) */
 #define SCENE_DISPATCH_SHIFT_X  0xC45B18u /* word: first coordinate adjustment ($C28CA6/$C28CC6) */
 #define SCENE_DISPATCH_SHIFT_Z  0xC45B1Au /* word: second coordinate adjustment ($C28CA8/$C28CEE) */
