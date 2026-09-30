@@ -222,8 +222,12 @@ part that is not, stays on the work side.
    a 22-byte record copy or clear. Its blitter waits and busy-poll counters
    need source-accurate C. A demo01 shadow probe found five counted-wait
    mismatches: the shadow runner holds custom-register writes during the C
-   trial, so its C blits never become busy. The draft is deliberately absent
-   from `ports.c`; prove its hardware path with a sandbox comparison and fix
+   trial, so its C blits never become busy. A targeted demo01 sandbox run
+   compared 2,078 calls with zero mismatches, but the sandbox also holds
+   custom writes. A live `--ports on --ports-only C2FD8C` comparison against
+   `--ports off` first differs in RGB at frame 297, even when the cycle charge
+   is lowered from 65,000 to the sandbox mean of 24,025. The draft is
+   deliberately absent from `ports.c`; resolve live write/busy timing and
    the provisional 56-cycle poll in `fa18_machine_count_blitter_polls` before
    registering it. Evidence is in
    `analysis/routines/c2fd8c_first_active_plane_submission.md`,
