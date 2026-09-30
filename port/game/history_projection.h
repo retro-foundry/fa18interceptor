@@ -9,7 +9,14 @@ typedef struct HistoryProjectionWork {
     int8_t remaining, slot_index;
     int16_t direction, shift;
     int32_t delta[3], absolute[3];
+    int16_t previous[3], previous_radius, previous_shift;
+    int16_t final_vector[3];
+    int32_t final_y_full, final_z_full;
+    uint32_t final_d6;
+    int16_t final_prior_y;
+    int final_interpolated;
     uint16_t drawn;
+    int active;
 } HistoryProjectionWork;
 
 /* $C0D04C-$C0D10A: choose the first slot and traversal direction. Returns
@@ -19,5 +26,9 @@ int begin_history_projection(HistoryProjectionWork *work);
 /* $C0D110-$C0D1D0: load and scale the current slot's relative point, and
  * select the colour used by its projection. */
 void prepare_history_projection_point(HistoryProjectionWork *work);
+
+/* Complete memory and drawing side of $C0D04C. The register bridge replays
+ * caller-visible register results separately. */
+uint16_t draw_history_projection(HistoryProjectionWork *work);
 
 #endif

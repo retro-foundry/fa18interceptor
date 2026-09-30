@@ -52,6 +52,17 @@ for it.
 
 ## Recently ported
 
+`$C0D04C` history projection has a complete C drawing and history traversal
+draft in `history_projection.c` and an unregistered bridge in
+`glue_history_projection.c` (next step after `b05758ab`). A 10,500-frame
+demo sandbox probe matched all tested memory and custom-register writes.
+Register replay still fails on 50 active calls: the first active calls now
+match after accounting for `MOVEM.W` sign extension following intermediate
+projections, but later calls diverge in D4, D5 and A4 when the final
+projection exits by another path. Keep it unregistered until that path is
+traced and all three recordings pass the full gate. The verified count
+remains 380.
+
 `$C0D74A`/`$C0D752` (`display_records.c`, `276be504`) now share the complete
 four-candidate matrix preparation, corner projection, and seven-way record
 selection body. Across the three native recordings they matched 6,129
