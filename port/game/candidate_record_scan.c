@@ -78,6 +78,10 @@ void scan_candidate_record_from(CandidateScanWork *work, int16_t start_offset,
             far_bound = 0x6000;
             near_bound = 0x800;
         }
+        if (candidate_class != 0x20u) {
+            work->near_bound = near_bound;
+            work->near_bound_assigned = 1;
+        }
 
         if (!inside_cube(candidate, relative_x, relative_y, relative_z,
                          far_bound, 0)) continue;
@@ -115,6 +119,8 @@ void scan_candidate_record(CandidateScanWork *work,
                            int32_t relative_z) {
     int16_t offset = rd_s16(SCRIPT_RECORD);
     gaddr selected = CONTROL_RECORDS + (gaddr)(int32_t)offset;
+    work->near_bound = 0;
+    work->near_bound_assigned = 0;
     wr_u8(0xC4589Fu, 0);
     wr_u8(selected + 4, rd_u8(selected + 4) & 0x3Fu);
     if ((rd_u8(selected + 0x62) & 0xF0u) == 0x20u) {
@@ -203,6 +209,7 @@ void prepare_candidate_probe(CandidateProbe *probe, gaddr candidate,
 
     probe->candidate_record = candidate;
     probe->face_list = list;
+    probe->last_face_input = 0;
     probe->first_face = first;
     probe->eye_x = eye_x;
     probe->eye_y = eye_y;
@@ -219,8 +226,9 @@ void prepare_candidate_probe(CandidateProbe *probe, gaddr candidate,
 int scan_candidate_lower_faces(CandidateProbe *probe) {
     gaddr stream = probe->face_list;
     while (rd_s16(stream) >= 0) {
-        if (!faces_all_behind(&stream, probe->candidate_record, probe->shift,
-                              probe->eye_x, probe->eye_y, probe->eye_z)) {
+        probe->last_face_input = stream;
+        if (faces_all_behind(&stream, probe->candidate_record, probe->shift,
+                             probe->eye_x, probe->eye_y, probe->eye_z)) {
             probe->face_list = stream;
             return 0x20;
         }
@@ -371,9 +379,10 @@ int scan_candidate_detail_faces(CandidateProbe *probe, gaddr selected) {
         }
     }
     {
+        probe->last_face_input = list;
         int behind = faces_all_behind(&list, candidate, probe->shift,
                                       probe->eye_x, probe->eye_y, probe->eye_z);
         probe->face_list = list;
-        return behind ? 0 : 0x20;
+        return behind ? 0x20 : 0;
     }
 }

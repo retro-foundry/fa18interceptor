@@ -16,10 +16,14 @@ typedef struct CandidateLevelWork {
     gaddr volume_stream;
     gaddr bounds_stream;
     gaddr level_cursor;
+    gaddr register_a0;
     int16_t table_index;
     int16_t level_iteration;
     int32_t x, y, z;
     int32_t x_adjustment, z_adjustment;
+    int32_t plane_d3, plane_d4;
+    gaddr plane_normals_end;
+    int terminal_from_planes;
     CandidateLevelRoute route;
 } CandidateLevelWork;
 

@@ -19,6 +19,8 @@ typedef struct CandidateUpdateWork {
     CandidateUpdatePath path;
     int result;
     int pass;
+    int had_probe;
+    gaddr final_geometry_a4;
 } CandidateUpdateWork;
 
 /* Complete memory-side path of $C26EBE; caller-visible register glue is

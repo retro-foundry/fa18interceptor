@@ -88,20 +88,26 @@ static int face_regs(int16_t shift, int16_t eye_z) {
     return (int64_t)sum + (int32_t)D(6) < 0;
 }
 
-int glue_C27456(void) {
-    int16_t shift = rd_s16(A(6) - 0x5A), eye_z = rd_s16(A(6) - 0x42);
-    gaddr stream = A(4);
-    int behind = faces_all_behind(&stream, A(3), shift, (int16_t)A(2), (int32_t)A(1), eye_z);
-
+void candidate_face_registers(gaddr input_stream, gaddr final_stream,
+                              int16_t shift, int16_t eye_z, int behind) {
+    A(4) = input_stream;
     for (;;) {
         D(2) = rd_u32(A(4));
         A(4) += 4;
         if ((int32_t)D(2) < 0) break;
         if (!face_regs(shift, eye_z)) break;
     }
-    A(4) = stream;
+    A(4) = final_stream;
     D(7) = behind ? 1 : 0;
     flags_logic_l(D(7));
+}
+
+int glue_C27456(void) {
+    int16_t shift = rd_s16(A(6) - 0x5A), eye_z = rd_s16(A(6) - 0x42);
+    gaddr input_stream = A(4), stream = input_stream;
+    int behind = faces_all_behind(&stream, A(3), shift, (int16_t)A(2),
+                                  (int32_t)A(1), eye_z);
+    candidate_face_registers(input_stream, stream, shift, eye_z, behind);
     return glue_return();
 }
 

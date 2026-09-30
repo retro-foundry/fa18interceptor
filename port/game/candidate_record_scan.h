@@ -16,6 +16,8 @@ typedef struct CandidateScanWork {
     gaddr candidate_record;
     int16_t candidate_offset;
     uint8_t candidate_class;
+    int32_t near_bound;
+    int near_bound_assigned;
     CandidateScanRoute route;
 } CandidateScanWork;
 
@@ -34,6 +36,7 @@ int candidate_terminal_result(gaddr selected);
 typedef struct CandidateProbe {
     gaddr candidate_record;
     gaddr face_list;
+    gaddr last_face_input;
     gaddr first_face;
     int16_t eye_x, eye_z;
     int32_t eye_y;

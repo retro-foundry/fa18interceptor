@@ -21,6 +21,7 @@ void select_candidate_level(CandidateLevelWork *work) {
     work->volume_stream = 0;
     work->bounds_stream = 0;
     work->level_cursor = level;
+    work->register_a0 = CONTROL_RECORDS;
     work->table_index = index;
     work->level_iteration = iteration;
     work->x = work->y = work->z = 0;
@@ -42,8 +43,10 @@ void select_candidate_level(CandidateLevelWork *work) {
         if ((level_word & 0x50u) || index >= 10) goto next_level;
         index = (int16_t)(index + 1);
         work->table_index = index;
+        work->register_a0 = 0xC4D790u;
         volume = rd_u32(0xC4D790u + (gaddr)(4 * index));
         if ((int32_t)volume < 0) goto next_level;
+        work->register_a0 = volume;
         bounds = 0xC4D7BCu + (gaddr)(0x100 * index) + 2;
         delta_x = (int8_t)(rd_u8(selected + 7) - rd_u8(bounds));
         bounds += 1;
@@ -80,6 +83,7 @@ void select_candidate_level(CandidateLevelWork *work) {
             if ((int32_t)next < 0) break;
             bounds = next;
             volume = rd_u32(volume + 0xA);
+            work->register_a0 = volume;
         }
 next_level:
         if (iteration >= count || index >= 10) return;
@@ -87,7 +91,8 @@ next_level:
 }
 
 /* The three MULS products and the final ADD.L sign test ($C276E2-$C27706). */
-static int plane_is_nonnegative(gaddr *normals, gaddr *bounds,
+static int plane_is_nonnegative(CandidateLevelWork *work,
+                                gaddr *normals, gaddr *bounds,
                                 int32_t x, int32_t y, int32_t z) {
     int32_t dx, dz, first, third;
     int16_t dy;
@@ -98,9 +103,12 @@ static int plane_is_nonnegative(gaddr *normals, gaddr *bounds,
     first = (int32_t)((uint32_t)((int32_t)rd_s16(n) * (int16_t)dx) +
                       (uint32_t)((int32_t)rd_s16(n + 2) * dy));
     third = (int32_t)rd_s16(n + 4) * (int16_t)dz;
+    work->plane_d3 = dx;
+    work->plane_d4 = (int32_t)(((uint32_t)y & 0xFFFF0000u) | (uint16_t)dy);
+    work->plane_normals_end = n + 6;
     *normals = n + 6;
     *bounds = b + 6;
-    return (int64_t)first + third >= 0;
+    return (int32_t)((uint32_t)first + (uint32_t)third) >= 0;
 }
 
 static int16_t shift_point(gaddr selected, int offset, int shift) {
@@ -121,13 +129,14 @@ static void point_for_planes(const CandidateLevelWork *work, int point_offset,
     xyz[2] = (int32_t)((uint32_t)xyz[2] + (uint32_t)work->z_adjustment);
 }
 
-static int any_plane_nonnegative(const CandidateLevelWork *work,
+static int any_plane_nonnegative(CandidateLevelWork *work,
                                   const int32_t xyz[3]) {
     gaddr normals = work->volume_stream + 0x10;
     gaddr bounds = work->bounds_stream + 0xE;
     int16_t remaining = rd_s16(work->volume_stream + 0xE);
     for (;;) {
-        if (plane_is_nonnegative(&normals, &bounds, xyz[0], xyz[1], xyz[2]))
+        if (plane_is_nonnegative(work, &normals, &bounds,
+                                 xyz[0], xyz[1], xyz[2]))
             return 1;
         remaining = (int16_t)(remaining - 1);
         if (remaining <= 0) return 0;
@@ -139,8 +148,11 @@ static int special_point_result(CandidateLevelWork *work) {
     point_for_planes(work, 0xAA, xyz);
     if (!any_plane_nonnegative(work, xyz)) return 0x20;
     point_for_planes(work, 0xB0, xyz);
-    return any_plane_nonnegative(work, xyz) ?
-           candidate_terminal_result(work->selected) : 0x20;
+    if (any_plane_nonnegative(work, xyz)) {
+        work->terminal_from_planes = 1;
+        return candidate_terminal_result(work->selected);
+    }
+    return 0x20;
 }
 
 static void settle_zero_class_velocity(CandidateLevelWork *work,

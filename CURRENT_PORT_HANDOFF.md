@@ -257,6 +257,14 @@ part that is not, stays on the work side.
    The test registration was removed, so the last
    passing combined gate still covers 378 routines. `glue_candidate_record_update.c`
    is an inactive starting point for the remaining register work.
+   The later draft now replays the side, face, terminal, and plane-return
+   register paths. It passed focused full-length shadow checks on all three
+   recordings and focused sandbox checks on carrier and crash. Demo sandbox
+   has two remaining register-only mismatches: call 3292 returns D2 `$181`
+   versus source `$1B1` on the linked-volume stop-zero route; call 3368
+   returns A0 `$C3B682` versus source `$C3B68E` on the special-point plane
+   route. Both calls match result and memory. The candidate remains
+   unregistered; 378 is still the last full-gate count.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
