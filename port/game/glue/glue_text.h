@@ -46,6 +46,8 @@ void restored_plot_registers(void);
 void plot_registers(gaddr masks, gaddr writers);
 /* $C2FA7E's from D0-D6 (glue_render_polygon.c). */
 void line_registers(void);
+void line_registers_to_row(int16_t last_row);
+void plot_registers(gaddr masks, gaddr writers);
 
 /* $C348B2's from D0/D1/D4 (glue_batch49.c) and $C31E6C's (glue_batch59.c). */
 void symbol_registers(void);
@@ -73,6 +75,11 @@ void record_orientation_registers(gaddr record, uint32_t d4, uint32_t d5, uint32
 void scene_setup_registers(int8_t which);
 void view_mode_zero_registers(void);
 void clear_render_buffers_registers(void);
+/* $C301F0, $C304FA, $C304B2, $C3019C: polygon work already drawn. */
+int prepare_polygon_to_row_registers(uint16_t last_size);
+void blit_lane_registers(void);
+void clear_mask_registers(void);
+void mark_polygon_registers(uint16_t last_size);
 
 /* $C2F64E's and $C2F63A's the same way. */
 void square_registers(void);

@@ -72,7 +72,7 @@ int glue_C24568(void) {
 
 /* $C304FA: D0.w plane offset, D3 bit 0 the minterm choice. The caller reads
  * D4 (C modulo, word), D5 (C pointer), D6, D7 and the high words of D0-D3. */
-int glue_C304FA(void) {
+void blit_lane_registers(void) {
     int16_t plane_offset = (int16_t)D(0);
     uint16_t size = rd_u16(POLY_BLIT_SIZE);
     gaddr table = rd_u32(PAGE_PLANE_TABLE);
@@ -82,7 +82,6 @@ int glue_C304FA(void) {
     uint32_t d6 = (uint32_t)(int32_t)(int16_t)(row * 4);
     uint32_t d5 = LANE_PATTERN + d6 - 2;
 
-    blit_lane(plane_offset, (int)(D(3) & 1));
     if (modulo != 1) {
         SET_W(d6, (uint16_t)(rd_s16(POLY_MIN_X) >> 4));
         SET_W(D(7), (uint16_t)(rd_s16(SPAN_ORIGIN) + 12));
@@ -96,5 +95,12 @@ int glue_C304FA(void) {
     D(6) = d6;
     A(0) = 0xDFF000u;
     A(2) = table;
+}
+
+int glue_C304FA(void) {
+    int16_t plane_offset = (int16_t)D(0);
+    int pattern = (int)(D(3) & 1);
+    blit_lane(plane_offset, pattern);
+    blit_lane_registers();
     return glue_return();
 }

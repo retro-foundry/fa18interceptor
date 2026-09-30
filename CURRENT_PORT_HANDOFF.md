@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 361; 829,609 calls matching in shadow and 1,028,026 in the sandbox pass over three native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 362; 796,494 calls matching in shadow and 1,029,169 in the sandbox pass over three native recordings; poison-clean. The shadow total fell because the registered panel mark now contains formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -54,6 +54,9 @@ for it.
 
 All of these are registered and matching over all three recordings:
 
+- `$C3003A` `draw_panel_mark` (`hud_bars.c`) - the panel blit, mark polygon,
+  line and individual pixels. Its glue replays the entire chain's register
+  effects; 3,133 shadow calls matched across the three recordings.
 - `$C11788` `advance_postflight_reset` and `$C11830`
   `restart_postflight_scene` (`stages.c`) - the failure-side callback resets
   the scene, decrements its repeat byte and either schedules another reset
@@ -82,8 +85,6 @@ All of these are registered and matching over all three recordings:
 
 Recreated but **not** registered, each with the blocker written in its glue:
 
-- `$C3003A` `draw_panel_mark` (`hud_bars.c`) - waiting on a register split of
-  `$C3019C`'s chain (see below).
 - `$C20A52`/`$C20A40` the two face lattices (`glue_batch58.c`) - they draw a
   second run of faces back from the far edge, and there the winning write of
   D7's high word is an earlier face's. Replaying that face exactly needs the
@@ -112,6 +113,9 @@ not been applied further. Split so far, all declared in `glue_text.h`:
 - `scene_setup_registers`, `view_mode_zero_registers`, and
   `clear_render_buffers_registers` split from their glue so the postflight
   callbacks can replay their register effects without repeating the work.
+- `prepare_polygon_to_row_registers`, `blit_lane_registers`, and
+  `mark_polygon_registers` split the mark polygon's drawing chain so the
+  panel-mark glue can replay every call's register effects in order.
 
 **Effect.** `$C28800` and the `$C0924A` trio then landed in minutes each
 instead of hours. Do the split first when a target ends in a fused callee;
@@ -169,7 +173,7 @@ part that is not, stays on the work side.
    Cheapest first, given the splits that now exist: `$C25070` and `$C28B34`
    both end in `$C2D954` and can use `record_orientation_registers` as it
    stands. After that, split `$C2E758`'s glue to unblock the
-   `$C0D74A`/`$C0D752` pair, and `$C3019C`'s chain to unblock `$C3003A`.
+   `$C0D74A`/`$C0D752` pair.
    Sibling routines are worth seeking out: `$C0924A`/`$C09266`/`$C092A0` are
    three entry points into one body, and the grid and lattice pairs share
    one implementation, so one transcription registers several routines.

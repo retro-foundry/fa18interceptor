@@ -170,9 +170,13 @@ int glue_C301F6(void) {
     return glue_return();
 }
 
+int prepare_polygon_to_row_registers(uint16_t last_size) {
+    return prepare_registers(last_size, 0xC7);
+}
+
 int glue_C301F0(void) {
     uint16_t last_size = custom_written(BLTSIZE);
     (void)prepare_polygon_to_row(0xC7);
-    (void)prepare_registers(last_size, 0xC7);
+    (void)prepare_polygon_to_row_registers(last_size);
     return glue_return();
 }
