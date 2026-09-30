@@ -7,7 +7,7 @@
 #include "globals.h"
 #include "memory.h"
 
-int glue_C1342C(void) {
+void matrix_side_record_with_registers(void) {
     uint32_t saved_d2 = D(2), saved_d3 = D(3);
     gaddr saved_a2 = A(2), saved_a3 = A(3);
     int16_t index = rd_s16(MATRIX_SIDE_RECORD);
@@ -105,5 +105,9 @@ int glue_C1342C(void) {
          * tail returns through $C139CC or $C139FC. */
         A(0) = header;
     }
+}
+
+int glue_C1342C(void) {
+    matrix_side_record_with_registers();
     return glue_return();
 }

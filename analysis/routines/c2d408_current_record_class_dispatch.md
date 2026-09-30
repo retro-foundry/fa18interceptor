@@ -21,6 +21,12 @@ bit 4 of byte `$03(a1)` and branches on its prior state.  This is a direct
 record-triple-to-matrix handoff, not a claim about the substructure's object
 type.
 
+The C port is `record_matrix_update.c` with `glue_record_matrix_update.c`.
+Its focused proof over demo01, qual_carrier_success and qual_fail_crashes
+matched 3,975 completed shadow calls and 4,877 sandbox calls, with zero
+mismatches. The shadow pass leaves interrupted calls incomplete; sandbox
+compared every recorded call.
+
 The post-matrix path then proves a guard sequence: byte `$05(a1)` equals `$0A`,
 bit 6 of `$03(a1)` is set, `$C45784` is nonzero, bit 7 of `$03(a1)` is clear,
 and the record remains class `$10`.  It halves word `$66`, rejects values below

@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 376 registered; last full gate covered 375 with 754,388 calls matching in shadow and 962,808 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 377 registered; last full gate covered 375 with 754,388 calls matching in shadow and 962,808 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -234,14 +234,13 @@ part that is not, stays on the work side.
    `c2fdf4_remaining_active_plane_submissions.md`, and
    `c2fede_selected_table_display_stage.md`; the isolated orchestration is
    `port/selected_table_display_stage.c`.
-   Other ready larger candidates include `$C13D84`, `$C26EBE`, and `$C2D408`.
-   `$C2D408` has inactive C blocks in `record_matrix_update.c` for its
-   class-$30 tracking route (`$C2D408-$C2D492`) and post-transform
-   continuation (`$C2D704-$C2D99A`): angle settling, speed/flag branches,
-   velocity response and orientation. They build with warnings enabled but
-   are not registered or source-compared. Complete the nonclass input and
-   velocity paths and caller-visible register flow, then prove the whole
-   parent before counting it.
+   Other ready larger candidates include `$C13D84` and `$C26EBE`.
+   `$C2D408` is now registered (`record_matrix_update.c`,
+   `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
+   velocity/depth paths and post-transform orientation are C. Focused proof
+   over all three native recordings matched 3,975 completed shadow calls and
+   4,877 sandbox calls with zero mismatches. Include it in the next full
+   combined gate before replacing the last-gate totals above.
    `$C2DEE0` is now registered (`matrix.c`, `glue_transform_matrix.c`). It
    builds the nine-long signed product, converts it through the original
    table/division angle branches, and returns the three shifted angles with

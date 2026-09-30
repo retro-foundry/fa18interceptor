@@ -589,4 +589,7 @@ int glue_C2DB18(void);
 /* matrix route selector */
 int glue_C2D99C(void);
 
+/* current record matrix update */
+int glue_C2D408(void);
+
 #endif
