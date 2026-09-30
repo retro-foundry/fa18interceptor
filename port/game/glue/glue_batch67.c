@@ -12,8 +12,10 @@
 #include "hud_bars.h"
 #include "matrix.h"
 #include "render_span.h"
+#include "scene_setup.h"
 #include "stages.h"
 
+#define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
 #define TEMPLATE_PAIRS 0xC1D8B6u
 
 /* MOVEM.W's sign extension left in the low word by SWAP. */
@@ -219,4 +221,72 @@ int glue_C28800(void) {
     A(1) = record;
     record_orientation_registers(record, 0, 0xFFFF0000u | rd_u16(TRACKED_HEADING), 0);
     return glue_return();
+}
+
+/* $C0924A, $C09266 and $C092A0: three entry points into one sequence, all
+ * ending in the root's orientation. The pose choice is replayed here from
+ * the entry byte as it was before the C, because a rejected negative entry
+ * clears it and leaves the record pointer moved. */
+static int scene_setup_return(int8_t which) {
+    gaddr record = CONTROL_RECORDS, entry;
+    uint32_t d4, d5, d6;
+
+    for (;;) {
+        int16_t v[5], index, tail[3];
+        int k;
+
+        entry = SCENE_POSE_TABLE + (gaddr)(int32_t)(int16_t)((int16_t)which << 4);
+        for (k = 0; k < 5; k++) v[k] = rd_s16(entry + (gaddr)(2 * k));
+        if (v[0] >= 0) {
+            uint32_t product;
+            for (k = 0; k < 3; k++) tail[k] = rd_s16(entry + 10 + (gaddr)(2 * k));
+            product = (uint32_t)((uint16_t)tail[2] * 10u);
+            d4 = 0;
+            d6 = 0;
+            d5 = ((uint32_t)((int32_t)tail[0] << 4) & 0xFFFF0000u)
+               | (uint16_t)((uint16_t)product << 3);
+            A(0) = entry + 16;
+            A(2) = GRID_ADJUST_WORDS;
+            D(1) = rd_u32(record + 0x1C); /* the z it last held */
+            D(3) = (uint32_t)((-(int32_t)rd_s32(TARGET_POINT)) >> 8);
+            break;
+        }
+        index = (int16_t)(v[0] & 0x7FFF);
+        record += (gaddr)(int32_t)(int16_t)((int16_t)(index << 8) * 2);
+        if (!(rd_u8(record + 1) & 0x40)) {
+            which = 0;
+            continue;
+        }
+        d4 = SEXT(rd_u16(CONTROL_RECORDS + 0x66));
+        d5 = SEXT(rd_u16(CONTROL_RECORDS + 0x68));
+        d6 = SEXT(rd_u16(CONTROL_RECORDS + 0x6A));
+        A(0) = entry + 10;
+        A(2) = CONTROL_RECORDS;
+        A(4) = rd_u32(SCENE_POINTERS + 0x10 + (gaddr)(int32_t)(int16_t)(index * 20));
+        /* z and x swapped and masked down to their quadrant bytes. */
+        D(1) = (uint32_t)(uint16_t)rd_u32(CONTROL_RECORDS + 0x1C) << 16;
+        D(3) = (uint32_t)((rd_s32(CONTROL_RECORDS + 0x14) & 0x3FFFFF) >> 8);
+        record = CONTROL_RECORDS; /* $C0952E puts it back before the matrix */
+        break;
+    }
+    record_orientation_registers(record, d4, d5, d6);
+    return glue_return();
+}
+
+int glue_C092A0(void) {
+    int8_t which = (int8_t)rd_u8(SCENE_POSE_ENTRY);
+    place_scene_root();
+    return scene_setup_return(which);
+}
+
+int glue_C09266(void) {
+    int8_t which = (int8_t)rd_u8(SCENE_POSE_ENTRY);
+    reset_scene_recorder();
+    return scene_setup_return(which);
+}
+
+int glue_C0924A(void) {
+    int8_t which = (int8_t)rd_u8(SCENE_POSE_ENTRY);
+    reset_scene_context();
+    return scene_setup_return(which);
 }

@@ -460,6 +460,10 @@ const FA18Port fa18_ports[] = {
     /* hud_bars.c */
     /* control_records.c */
     {0xC28800, glue_C28800, "aim_record_at_view", 9000},
+    /* scene_setup.c */
+    {0xC0924A, glue_C0924A, "reset_scene_context", 3200},
+    {0xC09266, glue_C09266, "reset_scene_recorder", 3100},
+    {0xC092A0, glue_C092A0, "place_scene_root", 3000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

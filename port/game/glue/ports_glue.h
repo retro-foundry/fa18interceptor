@@ -540,4 +540,9 @@ int glue_C3003A(void);
 /* control_records.c */
 int glue_C28800(void);
 
+/* scene_setup.c */
+int glue_C0924A(void);
+int glue_C09266(void);
+int glue_C092A0(void);
+
 #endif

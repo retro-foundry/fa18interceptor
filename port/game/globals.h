@@ -48,6 +48,15 @@
 
 /* ---- control records ------------------------------------------------------
  * Sixteen 512-byte records at $C46184, selected by index << 9 (memory map). */
+#define SCENE_POINTER_TABLE 0xC22048u /* scene pointer triplets, $C22048-$C22C74 */
+#define SCENE_POINTERS     0xC22188u /* long[5]: the scene's pointers, copied from that table */
+#define SCENE_POSE_TABLE   0xC42A02u /* 16-byte scene pose entries ($C093A2) */
+#define SCENE_POSE_ENTRY   0xC45848u /* byte: which SCENE_POSE_TABLE entry the root takes */
+#define GRID_ADJUST_WORDS  0xC1D7E2u /* 61 signed word pairs, $C1D7E2-$C1D8D5 ($C0941C) */
+#define GRID_ADJUST_BYTES  0xC1D8D6u /* 129 signed byte pairs, $C1D8D6-$C1D9D7 ($C093E0) */
+#define RECORDER_COUNT     0xC4592Cu /* word: cleared when the recorder is reset ($C09266) */
+#define PLAYBACK_COUNT     0xC45930u /* word: cleared with it */
+#define SCENE_ROOT_READY   0xC457A0u /* byte: cleared as the scene root is placed ($C092A0) */
 #define VIEW_PARAMETER_TABLE 0xC295E0u /* word offsets to five-word view parameter sets ($C28800) */
 #define CONTROL_RECORDS    0xC46184u
 #define CONTROL_RECORD_BYTES 512
