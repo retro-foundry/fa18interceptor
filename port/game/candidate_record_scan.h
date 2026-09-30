@@ -63,4 +63,12 @@ typedef enum CandidateEdgeRoute {
 CandidateEdgeRoute walk_candidate_edges(CandidateProbe *probe,
                                         gaddr selected, int pass);
 
+/* $C27218-$C273B4: the selected record's three-point side check and
+ * per-pass flag/height write after a detailed edge is found. */
+void settle_candidate_edge_detail(const CandidateProbe *probe,
+                                  gaddr selected, int pass);
+/* $C273BA-$C27418: returns 0x20 for the detailed face exit, otherwise zero
+ * for the next probe pass. */
+int scan_candidate_detail_faces(CandidateProbe *probe, gaddr selected);
+
 #endif

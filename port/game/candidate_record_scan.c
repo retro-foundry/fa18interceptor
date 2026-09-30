@@ -269,3 +269,94 @@ CandidateEdgeRoute walk_candidate_edges(CandidateProbe *probe,
         }
     }
 }
+
+static int16_t point_x(gaddr candidate, int offset) { return rd_s16(candidate + (gaddr)offset); }
+static int16_t point_z(gaddr candidate, int offset) { return rd_s16(candidate + (gaddr)offset + 4); }
+
+static int16_t relative_point_x(const CandidateProbe *probe, int16_t x) {
+    return (int16_t)((int16_t)((x >> probe->shift) +
+                      rd_s16(probe->candidate_record + 0xC)) - probe->eye_x);
+}
+
+static int16_t relative_point_z(const CandidateProbe *probe, int16_t z) {
+    return (int16_t)((int16_t)((z >> probe->shift) +
+                      rd_s16(probe->candidate_record + 0xE)) - probe->eye_z);
+}
+
+static int edge_side_negative(const CandidateProbe *probe,
+                              int16_t dx, int16_t dz,
+                              int16_t x, int16_t z) {
+    int32_t a = (int32_t)dz * relative_point_x(probe, x);
+    int32_t b = (int32_t)dx * relative_point_z(probe, z);
+    return (int64_t)a + b < 0;
+}
+
+void settle_candidate_edge_detail(const CandidateProbe *probe,
+                                  gaddr selected, int pass) {
+    gaddr candidate = probe->candidate_record;
+    int p = rd_u8(candidate + 0x62) == 0x20u ? 0x1E8 : 0x1AC;
+    int m = p + 6, r = p + 12;
+    uint16_t bits = rd_u16(selected + 2);
+    int accepted = 0;
+
+    if (pass && (bits & 0x0080u)) {
+        int16_t px = point_x(candidate, p), pz = point_z(candidate, p);
+        int16_t mx = point_x(candidate, m), mz = point_z(candidate, m);
+        int16_t rx = point_x(candidate, r), rz = point_z(candidate, r);
+        int16_t dx = (int16_t)(px - rx), dz = (int16_t)(rz - pz);
+
+        if (!edge_side_negative(probe, dx, dz, rx, rz) &&
+            edge_side_negative(probe, dx, dz, mx, mz)) {
+            dx = (int16_t)(mx - rx);
+            dz = (int16_t)(rz - mz);
+            if (edge_side_negative(probe, dx, dz, rx, rz)) {
+                int16_t test_x = (int16_t)(px + ((int16_t)(px - rx) >> 1));
+                int16_t test_z = (int16_t)(pz + ((int16_t)(pz - rz) >> 1));
+                if (!edge_side_negative(probe, dx, dz, test_x, test_z)) {
+                    int32_t dot = (int32_t)((uint32_t)((int32_t)rd_s16(selected + 0x96) *
+                                                rd_s16(candidate + 0x96)) +
+                                              (uint32_t)((int32_t)rd_s16(selected + 0xA2) *
+                                                rd_s16(candidate + 0xA2)));
+                    accepted = dot >= 0x0E000000;
+                }
+            }
+        }
+    }
+
+    if (pass) {
+        if (accepted) bits |= 0x4000u;
+        else if ((bits & 0xC000u) != 0xC000u) bits &= (uint16_t)~0x4000u;
+        wr_u16(selected + 2, bits);
+    }
+    wr_u8(selected + 4, rd_u8(selected + 4) | (pass ? 0x80u : 0x40u));
+    wr_u16(selected + 0x4E, (uint16_t)probe->first_height);
+}
+
+int scan_candidate_detail_faces(CandidateProbe *probe, gaddr selected) {
+    gaddr candidate = probe->candidate_record;
+    gaddr list = rd_u8(candidate + 0x62) == 0x20u ? 0xC391E4u : 0xC39E68u;
+    gaddr face = rd_u32(list);
+    int32_t selected_height = rd_s32(selected + 0x10);
+    int16_t offset = (int16_t)(rd_s16(face + 2) + 0xA4);
+    int32_t height = rd_s16(candidate + (gaddr)(int32_t)offset + 2) >> probe->shift;
+
+    list += 4;
+    if (selected_height >= height) {
+        list += 0x12;
+        face = rd_u32(list);
+        list += 4;
+        offset = (int16_t)(rd_s16(face + 2) + 0xA4);
+        height = (int16_t)((rd_s16(candidate + (gaddr)(int32_t)offset + 2) >>
+                            probe->shift) + 7);
+        if (selected_height >= height) {
+            probe->face_list = list;
+            return 0;
+        }
+    }
+    {
+        int behind = faces_all_behind(&list, candidate, probe->shift,
+                                      probe->eye_x, probe->eye_y, probe->eye_z);
+        probe->face_list = list;
+        return behind ? 0 : 0x20;
+    }
+}

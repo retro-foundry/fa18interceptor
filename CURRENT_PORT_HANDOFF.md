@@ -254,8 +254,10 @@ part that is not, stays on the work side.
    the lower-face scan using the existing `$C27456` C helper. It compiles
    cleanly. The horizontal edge sign and enclosing face-list walk
    `$C27198-$C27218`/`$C2741C-$C2744C` are drafted too. The detailed
-   edge/plane and level/volume walks still need porting before the parent
-   can be registered and source-compared.
+   three-point side test, selected-record flag/height writes, and following
+   face-list exit `$C27218-$C27418` are also in C. The level/volume walk
+   `$C27504-$C278D0`, parent orchestration and caller-visible register glue
+   still need porting before registration and source comparison.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
