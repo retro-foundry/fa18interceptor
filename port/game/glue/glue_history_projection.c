@@ -14,6 +14,16 @@ int glue_C0D04C(void) {
     if (work.active) {
         int16_t x = work.final_vector[0], y = work.final_vector[1];
         gaddr matrix = VIEW_ANGLE_MATRIX;
+        if (work.final_interpolated) {
+            int i;
+            for (i = 0; i < 3; ++i) {
+                D(0) = (uint32_t)(int32_t)work.final_intermediate_points[i][0];
+                D(1) = (uint32_t)(int32_t)work.final_intermediate_points[i][1];
+                D(2) = (uint32_t)(int32_t)work.final_intermediate_points[i][2];
+                D(6) = (uint32_t)(int32_t)work.final_intermediate_radii[i];
+                projection_mode_registers(-4, 2);
+            }
+        }
         D(0) = ((uint32_t)((int32_t)rd_s16(matrix + 6) * x) & 0xFFFF0000u) |
                (uint16_t)work.previous[0];
         D(1) = ((uint32_t)((int32_t)rd_s16(matrix + 8) * y) & 0xFFFF0000u) |
@@ -27,6 +37,8 @@ int glue_C0D04C(void) {
         if (work.final_interpolated) {
             D(1) = (uint32_t)(int32_t)(int16_t)D(1);
             D(2) = (uint32_t)(int32_t)(int16_t)D(2);
+            D(3) = (D(3) & 0xFFFFu) |
+                   ((uint32_t)(int32_t)work.final_prior[0] & 0xFFFF0000u);
             D(4) = (D(4) & 0xFFFFu) |
                    ((uint32_t)(int32_t)work.final_prior[1] & 0xFFFF0000u);
             D(6) = (uint32_t)(int32_t)(int16_t)D(6);

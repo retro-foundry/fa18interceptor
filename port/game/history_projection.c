@@ -105,6 +105,8 @@ static void project_intermediate(HistoryProjectionWork *work,
             point[i] = quarter_between(scaled[i], current[i], right);
         scaled_radius = quarter_between(work->previous_radius, radius, right);
     }
+    for (i = 0; i < 3; ++i) work->final_intermediate_points[fraction - 1][i] = point[i];
+    work->final_intermediate_radii[fraction - 1] = scaled_radius;
     work->final_intermediate_drawn = project_view_point_mode(point[0], point[1], point[2],
                                                               -4, work->previous[2], scaled_radius);
     work->drawn |= (uint16_t)work->final_intermediate_drawn;

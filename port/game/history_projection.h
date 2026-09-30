@@ -18,6 +18,7 @@ typedef struct HistoryProjectionWork {
     int16_t final_shift_difference;
     int final_interpolated;
     int final_intermediate_drawn, final_point_drawn;
+    int16_t final_intermediate_points[3][3], final_intermediate_radii[3];
     uint16_t drawn;
     int active;
 } HistoryProjectionWork;

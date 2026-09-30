@@ -56,18 +56,21 @@ for it.
 draft in `history_projection.c` and an unregistered bridge in
 `glue_history_projection.c` (next step after `b05758ab`). A 10,500-frame
 demo sandbox probe matched all tested memory and custom-register writes.
-Register replay still fails on 11 active calls in the 10,500-frame demo probe:
-the first active calls now
+Register replay now passes the full demo recording's focused sandbox probe.
+The first active calls
 match after accounting for `MOVEM.W` sign extension following intermediate
 projections. A trace of source call 777 showed that when the last intermediate
 and final projections both reject, D4/D5 retain the quarter deltas and A4
 retains the shift difference; the C bridge now reproduces that case. The
 the following trace of source call 782 showed that `MOVEM.W` also sign extends
 D1 and that D3 must enter the final projection with the quarter x delta.
-The remaining mismatches begin at port call 801 and affect only D3's high
-word (reference `FFFF`, C `0000`). Trace the matching source call, likely
-826, through the final interpolation and projection to identify that high
-word's provenance.
+Source call 826 established that D3's high word is inherited from the prior
+interpolated x, including when an intermediate projection draws. Replaying
+the three intermediate register calls also fixed the late demo sandbox
+A2 mismatch. The full gate still fails in the demo **shadow** pass on A2
+(first calls 829, 833, 835: source `00016504`/`00051474`, C `00C38B28`).
+Trace the differing shadow versus sandbox intermediate projection state;
+the drawing/memory side matches in the focused sandbox.
 Keep it unregistered until that path is
 traced and all three recordings pass the full gate. The verified count
 remains 380.
