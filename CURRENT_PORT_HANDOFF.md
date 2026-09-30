@@ -238,8 +238,12 @@ part that is not, stays on the work side.
    writes while excluding registers and flags: 469 completed `$C3129A`
    calls and 476 completed `$C31312` calls matched across the three native
    recordings (demo 198/198, carrier 185/189, crashes 86/89). The probe
-   bridge and harness edits were removed. Register and flag replay remains
-   before either parent can be registered or counted.
+   bridge and harness edits were removed. `glue_postflight_variants.c` now
+   replays the two drawing heads' registers in source order, using explicit
+   colour variants of the register-only plot and pair helpers so later
+   `CURRENT_COLOUR` writes cannot change earlier replay. The shared tail's
+   register and flag replay remains before either parent can be registered
+   or counted.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon

@@ -44,6 +44,8 @@ void bound_span_registers(void);
 /* $C2F5D4's (the plot with D0.w/D1.w put back) and $C2F5F4's. */
 void restored_plot_registers(void);
 void plot_registers(gaddr masks, gaddr writers);
+void plot_registers_colour(gaddr masks, gaddr writers, uint16_t colour);
+void pair_registers_colour(uint16_t colour);
 /* $C2FA7E's from D0-D6 (glue_render_polygon.c). */
 void line_registers(void);
 void line_registers_to_row(int16_t last_row);

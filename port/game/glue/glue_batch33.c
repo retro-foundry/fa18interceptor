@@ -12,10 +12,10 @@
 
 /* The shared body at $C2F688 with A3 = `masks`, A4 = `writers`, from the
  * D0.w/D1.w already in the registers. */
-void plot_registers(gaddr masks, gaddr writers);
-void plot_registers(gaddr masks, gaddr writers) {
+void plot_registers_colour(gaddr masks, gaddr writers, uint16_t colour);
+void plot_registers_colour(gaddr masks, gaddr writers, uint16_t colour) {
     int16_t x = (int16_t)D(0), y = (int16_t)D(1);
-    uint16_t mask, offset, row40, colour;
+    uint16_t mask, offset, row40;
     uint8_t planes;
     uint32_t sum;
     int k;
@@ -28,7 +28,7 @@ void plot_registers(gaddr masks, gaddr writers) {
         flags_logic_l(D(2));
         return;
     }
-    colour = rd_u16(CURRENT_COLOUR) & 15;
+    colour &= 15;
     A(4) = rd_u32(writers + (gaddr)(4 * colour));
     mask = rd_u16(masks + (gaddr)(2 * (x & 15)));
     row40 = (uint16_t)(y * 40);
@@ -48,6 +48,10 @@ void plot_registers(gaddr masks, gaddr writers) {
     }
 }
 
+void plot_registers(gaddr masks, gaddr writers) {
+    plot_registers_colour(masks, writers, rd_u16(CURRENT_COLOUR));
+}
+
 int glue_C2F5F4(void) {
     plot_pixel((int16_t)D(0), (int16_t)D(1));
     plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
@@ -56,20 +60,24 @@ int glue_C2F5F4(void) {
 
 /* $C2F60A at a word boundary plots x then x - 1 through $C2F5F4, with D0/D1
  * restored sign-extended from the stack in between. */
-void pair_registers(void);
-void pair_registers(void) {
+void pair_registers_colour(uint16_t colour);
+void pair_registers_colour(uint16_t colour) {
     if ((D(0) & 15) == 0) {
         uint32_t x = D(0), y = D(1);
-        plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
+        plot_registers_colour(PIXEL_MASKS, PLOT_ROWS_1, colour);
         D(0) = (uint32_t)(int32_t)(int16_t)x;
         D(1) = (uint32_t)(int32_t)(int16_t)y;
         FLAG_X = ((uint16_t)D(0) == 0) ? XFLAG_SET : XFLAG_CLEAR; /* SUBQ.W #1 */
         SET_W(D(0), (uint16_t)(D(0) - 1));
-        plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
+        plot_registers_colour(PIXEL_MASKS, PLOT_ROWS_1, colour);
         return;
     }
     SET_W(D(2), (uint16_t)(D(0) & 15));
-    plot_registers(PAIR_MASKS, PLOT_ROWS_1);
+    plot_registers_colour(PAIR_MASKS, PLOT_ROWS_1, colour);
+}
+
+void pair_registers(void) {
+    pair_registers_colour(rd_u16(CURRENT_COLOUR));
 }
 
 int glue_C2F60A(void) {
