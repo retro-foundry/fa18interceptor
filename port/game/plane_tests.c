@@ -136,3 +136,10 @@ int edge_alignment_test(gaddr *stream, int16_t eye_x, int16_t eye_z, int16_t ran
     if (rd_s32(PROJECTION_Y) <= -0x140 || rd_u8(ATTITUDE_NEAR)) return 0;
     return edge_alignment(edge, eye_x, eye_z, range);
 }
+
+/* $C1FB82: face kind bits 10-11 pick the bound-component test, on the
+ * face's word before last as the offset; otherwise the face test itself. */
+int face_test_passes(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]) {
+    if (kind & 0x0C00) return component_beyond_bound(kind, (int16_t)(rd_u16(*faces - 4) & 0x3FFF));
+    return face_toward_eye(kind, points, faces, eye);
+}

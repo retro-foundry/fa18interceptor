@@ -2,6 +2,7 @@
 #include "draw_stream.h"
 
 #include "globals.h"
+#include "plane_tests.h"
 #include "polygon_clip.h"
 #include "render_line.h"
 
@@ -895,4 +896,21 @@ int draw_record_shadow(gaddr *stream, gaddr frame) {
             if (next < 0 || (int32_t)next < rd_s32(record + 0x10)) return 1;
         }
     }
+}
+
+/* ---- face tests ---------------------------------------------------------- */
+
+int test_stream_face(gaddr *stream, gaddr frame) {
+    gaddr in = CLIP_INPUT + 4, faces;
+    int16_t eye[3];
+    uint16_t kind;
+    int k, passed;
+
+    for (k = 0; k < 3; k++) put(in + (gaddr)(6 * k), get(vertex_at(next_word(stream))));
+    kind = (uint16_t)next_word(stream);
+    faces = *stream;
+    for (k = 0; k < 3; k++) eye[k] = rd_s16(frame - 0x26 + (gaddr)(2 * k));
+    passed = face_test_passes(kind, rd_u32(frame - 0x2C), &faces, eye);
+    *stream = faces + (passed ? 0x12 : 0);
+    return passed;
 }

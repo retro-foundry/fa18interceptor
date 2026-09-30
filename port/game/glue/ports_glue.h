@@ -521,4 +521,7 @@ int glue_C1FB82(void);
 /* bound points */
 int glue_C1F99A(void);
 
+/* draw_stream.c */
+int glue_C1FF0A(void);
+
 #endif

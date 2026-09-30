@@ -151,4 +151,10 @@ int draw_square_faces(gaddr *stream);
  * record is far below. */
 int draw_record_shadow(gaddr *stream, gaddr frame);
 
+/* Three vertex offsets and a face kind word ($C1FF0A). The vertices become
+ * the clipper input's first three, where the face test reads them; the 18
+ * bytes after the kind are skipped when the test passes. It works in its
+ * caller's frame at `frame` (the point table at -$2C, the eye at -$26). */
+int test_stream_face(gaddr *stream, gaddr frame);
+
 #endif
