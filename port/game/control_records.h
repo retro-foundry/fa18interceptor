@@ -89,6 +89,18 @@ void refresh_record_view_from_table(gaddr record);
  * Returns after that source exit; the caller chooses this route. */
 void update_linked_record_view(gaddr record);
 
+/* The $C242DE-$C24364 view lookup used when the record's high flag byte has
+ * bit 4. Clears the pending byte on its return path. */
+void resolve_record_zone_view(gaddr record);
+
+/* The $C241A6-$C242DC return path after a record's view point has been
+ * placed: in-sight check and table-driven status selection. */
+void finish_record_view_status(gaddr record, gaddr viewer);
+
+/* $C24056-$C240E2: gate the selected viewer, set the source flag, and mark
+ * close records with selector $80. Returns zero for the zone-view route. */
+int prepare_record_viewer(gaddr record, gaddr viewer);
+
 /* Set bit 4 of byte +1 in every control record and workspace record. */
 void flag_all_records(void);
 

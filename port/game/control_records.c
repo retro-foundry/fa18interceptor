@@ -874,6 +874,119 @@ ease_angle:
     wr_u16(record + 0x6E, angle);
 }
 
+void resolve_record_zone_view(gaddr record) {
+    gaddr list;
+    uint8_t zone;
+
+    if (!(rd_u8(record) & 0x10u)) goto done;
+    list = rd_u32(POST_INPUT_RECORD_LIST);
+    for (;;) {
+        while (rd_s16(list) >= 0) {
+            if ((rd_u16(list + 4) & 0xFFu) == rd_u16(STREAM_MODE)) {
+                gaddr view = VIEW_PARAMETER_TABLE +
+                             (gaddr)(int32_t)rd_s16(VIEW_PARAMETER_TABLE +
+                                                    (gaddr)(int32_t)rd_s16(list + 6));
+                set_record_view(record, rd_s16(view), rd_s16(view + 2),
+                                rd_s16(view + 4), rd_s16(view + 6),
+                                (uint32_t)(int32_t)rd_s16(view + 8));
+                wr_u8(record + 0x38, 0xFF);
+                wr_u8(record + 1, (uint8_t)(rd_u8(record + 1) & ~1u));
+                goto done;
+            }
+            list += 10;
+        }
+        zone = rd_u8(record + 0x5D);
+        if ((int8_t)zone <= 0) {
+            wr_u16(ERROR_CODE, 0x34);
+            fault_hook();
+            goto done;
+        }
+        list = rd_u32(0xC29720u + (gaddr)((zone - 1u) * 4u)) + 10;
+    }
+done:
+    wr_u8(FIRE_RECORD_PENDING, 0);
+}
+
+void finish_record_view_status(gaddr record, gaddr viewer) {
+    gaddr table = 0xC2BB98u;
+    int16_t range = rd_s16(viewer + 0x4A);
+    uint8_t kind;
+    int16_t row;
+
+    if (rd_u8(record + 0x20) & 2u) goto done;
+    update_in_sight(record, viewer);
+    kind = rd_u8(record + 5);
+    if (kind == 6) goto done;
+    if (kind == 8 && (rd_u8(MODE_SELECT) != 5 || !rd_u8(FIRE_RECORD_PENDING)))
+        goto done;
+    if (!(rd_u8(record + 4) & 0x20u)) goto done;
+
+    if (range <= 0x300) {
+        int16_t difference = (int16_t)(rd_u16(record + 0x6C) - rd_u16(viewer + 0x6C));
+        int negative = difference < 0;
+        if (negative) difference = (int16_t)(0u - (uint16_t)difference);
+        if (difference >= 0xC0) table += negative ? 0x20u : 0x40u;
+    } else {
+        table += 0x60;
+        if (range > 0xC00) {
+            table += 0x60;
+            if (range > 0x1E00) {
+                table += 0x60;
+                goto select_row;
+            }
+        }
+        {
+            int16_t difference = (int16_t)(rd_u16(record + 0x6C) - rd_u16(viewer + 0x6C));
+            int negative = difference < 0;
+            if (negative) difference = (int16_t)(0u - (uint16_t)difference);
+            if (difference >= 0xC0) table += negative ? 0x20u : 0x40u;
+        }
+        if (rd_s16(SELECTED_RECORD) >= 0 &&
+            rd_s16(SELECTED_RECORD) == rd_s16(SCRIPT_RECORD) &&
+            rd_u8(FIRE_RECORD_PENDING)) {
+            wr_u8(FIRE_RECORD_PENDING, 0);
+            table += 0x10;
+        }
+    }
+
+select_row:
+    row = rd_s8(SCENE_DISPATCH_LIMIT);
+    if (row > 3) row = 3;
+    table += (gaddr)(int32_t)(int16_t)(row * 4);
+    wr_u16(record + 0x4C, rd_u16(table));
+    kind = rd_u8(table + 3);
+    if (rd_u8(record + 5) == 8 && (rd_u8(record + 1) & 8u)) {
+        wr_u8(record + 1, (uint8_t)(rd_u8(record + 1) & ~8u));
+        wr_u8(SCENE_DISPATCH_CREATED, (uint8_t)(rd_u8(SCENE_DISPATCH_CREATED) + 1u));
+        wr_u8(SCENE_DISPATCH_ADMITTED, (uint8_t)(rd_u8(SCENE_DISPATCH_ADMITTED) + 1u));
+    }
+    wr_u8(record + 5, kind);
+done:
+    wr_u8(FIRE_RECORD_PENDING, 0);
+}
+
+int prepare_record_viewer(gaddr record, gaddr viewer) {
+    int32_t limit;
+    int i;
+
+    if (rd_u8(record + 0x7A) == 5) wr_u8(record + 0x7A, 3);
+    if (!(rd_u8(viewer + 1) & 0x40u)) return 0;
+    wr_u16(record, rd_u16(record) | 1u);
+    if (viewer == CONTROL_RECORDS || rd_u8(record + 5) == 8) return 1;
+
+    if (rd_s8(SCENE_DISPATCH_LIMIT) >= 3) limit = 0x300000;
+    else if (rd_s8(SCENE_DISPATCH_LIMIT) >= 2) limit = 0x240000;
+    else limit = 0x180000;
+    for (i = 0; i < 3; ++i) {
+        uint32_t difference = rd_u32(CONTROL_RECORDS + 0x14 + (gaddr)(4 * i)) -
+                              rd_u32(record + 0x14 + (gaddr)(4 * i));
+        if ((int32_t)difference < 0) difference = 0u - difference;
+        if ((int32_t)difference > limit) return 1;
+    }
+    wr_u8(record + 0x38, 0x80);
+    return 1;
+}
+
 void aim_record_at_view(gaddr record, gaddr source) {
     int16_t select = rd_s16(source + 4);
     int32_t elevation = 0, azimuth = 0, x, z;

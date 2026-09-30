@@ -266,10 +266,14 @@ part that is not, stays on the work side.
    Work on `$C23CA6` has started in `control_records.c` and
    `control_records.h`: `refresh_record_view_from_table` transcribes
    `$C23CA6-$C23D36`, and `update_linked_record_view` transcribes the
-   `$C23FF8-$C24054` route, including its `$4200` angle easing exit. These
-   are memory-side helpers only; the rest of the parent and its live
-   register replay remain to be ported. The helpers build but are inactive,
-   and the verified count remains 379.
+   `$C23FF8-$C24054` route, including its `$4200` angle easing exit.
+   `resolve_record_zone_view` now covers `$C242DE-$C24364`,
+   `finish_record_view_status` covers `$C241A6-$C242DC`, and
+   `prepare_record_viewer` covers `$C24056-$C240E2`. These are memory-side
+   helpers only; `$C240E2-$C241A6` still needs its local-to-world transform
+   and byte-width register semantics, and the parent needs control flow and
+   live register replay. The helpers build with strict C syntax but remain
+   inactive. The verified count remains 379.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
