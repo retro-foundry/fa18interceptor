@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 379; 738,115 calls matching in shadow and 930,691 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 380; 742,192 calls matching in shadow and 936,488 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -263,17 +263,18 @@ part that is not, stays on the work side.
    fixed 56-cycle polls, while the live source waits during chipset
    activity; prove the source timing before registering this routine.
    The temporary registration was removed.
-   Work on `$C23CA6` has started in `control_records.c` and
-   `control_records.h`: `refresh_record_view_from_table` transcribes
-   `$C23CA6-$C23D36`, and `update_linked_record_view` transcribes the
-   `$C23FF8-$C24054` route, including its `$4200` angle easing exit.
-   `resolve_record_zone_view` now covers `$C242DE-$C24364`,
-   `finish_record_view_status` covers `$C241A6-$C242DC`, and
-   `prepare_record_viewer` covers `$C24056-$C240E2`. These are memory-side
-   helpers only; `$C240E2-$C241A6` still needs its local-to-world transform
-   and byte-width register semantics, and the parent needs control flow and
-   live register replay. The helpers build with strict C syntax but remain
-   inactive. The verified count remains 379.
+   `$C23CA6` `update_record_view` is now registered. `control_records.c`
+   contains its table advance, linked view, zone lookup, proximity gate,
+   local-to-world point placement, and status selection. The parent joins
+   the source routes; `glue_record_view_update.c` replays its observed D1
+   dispatch word and return. Focused full-length checks matched 4,088
+   completed sandbox calls and 4,077 shadow calls over the three native
+   recordings. The combined 380-routine gate passed with 742,192 shadow
+   matches, 936,488 sandbox matches, identical poison frames, and 10/10
+   parity frames 393-402. The observed calls averaged about 155 source
+   cycles, so these recordings mainly exercise the short dispatch exits;
+   the longer placement and zone branches remain source transcriptions
+   without independent runtime path coverage.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof

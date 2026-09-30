@@ -99,7 +99,38 @@ void finish_record_view_status(gaddr record, gaddr viewer);
 
 /* $C24056-$C240E2: gate the selected viewer, set the source flag, and mark
  * close records with selector $80. Returns zero for the zone-view route. */
-int prepare_record_viewer(gaddr record, gaddr viewer);
+int prepare_record_viewer(gaddr record, gaddr viewer, uint32_t *d4_state);
+
+typedef struct RecordViewPointWork {
+    int16_t local[3];
+    int32_t world[3];
+} RecordViewPointWork;
+
+/* $C240E2-$C241A6: place a local point using the viewer's inverse matrix
+ * and pack the resulting world point into the record's four words and long. */
+void place_record_view_point(gaddr record, gaddr viewer, uint32_t d4_state,
+                             RecordViewPointWork *work);
+
+typedef enum RecordViewUpdateRoute {
+    RECORD_VIEW_UPDATE_EARLY,
+    RECORD_VIEW_UPDATE_LINKED,
+    RECORD_VIEW_UPDATE_ZONE,
+    RECORD_VIEW_UPDATE_PLACED,
+    RECORD_VIEW_UPDATE_MODE_EIGHT
+} RecordViewUpdateRoute;
+
+typedef struct RecordViewUpdateWork {
+    gaddr record, viewer;
+    uint32_t d4_state;
+    uint16_t dispatch_d1;
+    int dispatch_valid;
+    RecordViewPointWork point;
+    RecordViewUpdateRoute route;
+} RecordViewUpdateWork;
+
+/* Memory-side composition of $C23CA6; the bridge replays its live registers. */
+int update_record_view(gaddr record, gaddr incoming_viewer,
+                       uint32_t incoming_d4, RecordViewUpdateWork *work);
 
 /* Set bit 4 of byte +1 in every control record and workspace record. */
 void flag_all_records(void);

@@ -965,7 +965,7 @@ done:
     wr_u8(FIRE_RECORD_PENDING, 0);
 }
 
-int prepare_record_viewer(gaddr record, gaddr viewer) {
+int prepare_record_viewer(gaddr record, gaddr viewer, uint32_t *d4_state) {
     int32_t limit;
     int i;
 
@@ -974,6 +974,8 @@ int prepare_record_viewer(gaddr record, gaddr viewer) {
     wr_u16(record, rd_u16(record) | 1u);
     if (viewer == CONTROL_RECORDS || rd_u8(record + 5) == 8) return 1;
 
+    if (d4_state) *d4_state = rd_u32(CONTROL_RECORDS + 0x18);
+
     if (rd_s8(SCENE_DISPATCH_LIMIT) >= 3) limit = 0x300000;
     else if (rd_s8(SCENE_DISPATCH_LIMIT) >= 2) limit = 0x240000;
     else limit = 0x180000;
@@ -981,9 +983,94 @@ int prepare_record_viewer(gaddr record, gaddr viewer) {
         uint32_t difference = rd_u32(CONTROL_RECORDS + 0x14 + (gaddr)(4 * i)) -
                               rd_u32(record + 0x14 + (gaddr)(4 * i));
         if ((int32_t)difference < 0) difference = 0u - difference;
+        if (i == 1 && d4_state) *d4_state = difference;
         if ((int32_t)difference > limit) return 1;
     }
     wr_u8(record + 0x38, 0x80);
+    return 1;
+}
+
+void place_record_view_point(gaddr record, gaddr viewer, uint32_t d4_state,
+                             RecordViewPointWork *work) {
+    if (rd_u8(record + 2) & 1u) {
+        uint8_t control = rd_u8(record + 0x64);
+        if (control & 1u) {
+            work->local[0] = 0;
+            work->local[1] = (control & 2u) ? 0x60 : -0x60;
+        } else {
+            work->local[0] = (control & 2u) ? 0xA8 : -0x60;
+            work->local[1] = 0;
+        }
+        work->local[2] = -0x30;
+    } else {
+        if (!(rd_u16(STREAM_SKIP) & 0xFFu)) {
+            uint8_t first = rd_u8(viewer + 0x28);
+            uint16_t d4_word;
+            if ((int8_t)first < 0) first = (uint8_t)(0u - first);
+            d4_word = (uint16_t)((d4_state & 0xFF00u) | first);
+            if ((int16_t)d4_word > 0x14) {
+                wr_u8(RECORD_VIEW_FLAG, (uint8_t)(rd_u16(viewer + 0x16) & 4u));
+            } else {
+                uint8_t second = rd_u8(viewer + 0x2A);
+                if ((int8_t)second < 0) second = (uint8_t)(0u - second);
+                if ((int8_t)second > 0x14)
+                    wr_u8(RECORD_VIEW_FLAG, (uint8_t)(rd_u16(viewer + 0x16) & 4u));
+            }
+        }
+        work->local[0] = 0;
+        work->local[1] = 0;
+        work->local[2] = -0x24;
+    }
+
+    local_to_world(viewer, viewer + RECORD_INVERSE,
+                   work->local[0], work->local[1], work->local[2], work->world);
+    wr_u16(record + 0x2C, (uint16_t)((int16_t)(work->world[0] >> 16) >> 6));
+    wr_u16(record + 0x2E, (uint16_t)((int16_t)(work->world[2] >> 16) >> 6));
+    wr_u16(record + 0x30, (uint16_t)((uint32_t)(work->world[0] >> 8) & 0x3FFFu));
+    wr_u16(record + 0x32, (uint16_t)((uint32_t)(work->world[2] >> 8) & 0x3FFFu));
+    wr_s32(record + 0x34, work->world[1] >> 8);
+}
+
+int update_record_view(gaddr record, gaddr incoming_viewer,
+                       uint32_t incoming_d4, RecordViewUpdateWork *work) {
+    uint8_t selector;
+
+    work->record = record;
+    work->viewer = incoming_viewer;
+    work->d4_state = incoming_d4;
+    work->dispatch_valid = 0;
+    work->route = RECORD_VIEW_UPDATE_EARLY;
+    if (rd_u8(POST_INPUT_EVENT)) return 1;
+
+    refresh_record_view_from_table(record);
+    if (rd_u8(record + 5) == 8) {
+        work->route = RECORD_VIEW_UPDATE_MODE_EIGHT;
+        finish_record_view_status(record, incoming_viewer);
+        return 1;
+    }
+    work->dispatch_d1 = rd_u16(record);
+    work->dispatch_valid = 1;
+    if (rd_u16(record) & 8u) {
+        work->dispatch_d1 &= 2u;
+        if (rd_u16(record) & 2u) {
+            work->route = RECORD_VIEW_UPDATE_LINKED;
+            update_linked_record_view(record);
+        }
+        return 1;
+    }
+
+    selector = rd_u8(record + 0x38);
+    work->viewer = CONTROL_RECORDS;
+    if (selector != 0xFFu)
+        work->viewer += (gaddr)((selector & 0x7Fu) << 9);
+    if (!prepare_record_viewer(record, work->viewer, &work->d4_state)) {
+        work->route = RECORD_VIEW_UPDATE_ZONE;
+        resolve_record_zone_view(record);
+        return 1;
+    }
+    work->route = RECORD_VIEW_UPDATE_PLACED;
+    place_record_view_point(record, work->viewer, work->d4_state, &work->point);
+    finish_record_view_status(record, work->viewer);
     return 1;
 }
 
