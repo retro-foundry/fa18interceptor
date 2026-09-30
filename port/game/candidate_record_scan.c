@@ -194,6 +194,9 @@ void prepare_candidate_probe(CandidateProbe *probe, gaddr candidate,
     probe->first_height = (int16_t)(rd_s16(candidate +
                             (gaddr)(int32_t)(int16_t)(rd_s16(first) + 0xA4) + 2) >> shift);
     probe->below_first_height = (int16_t)eye_y < probe->first_height;
+    probe->edge_cursor = first;
+    probe->edge_a_offset = 0;
+    probe->edge_b_offset = 0;
 }
 
 int scan_candidate_lower_faces(CandidateProbe *probe) {
@@ -207,4 +210,62 @@ int scan_candidate_lower_faces(CandidateProbe *probe) {
     }
     probe->face_list = stream;
     return 0;
+}
+
+int candidate_horizontal_edge_negative(const CandidateProbe *probe,
+                                       int16_t point_a_offset,
+                                       int16_t point_b_offset) {
+    gaddr candidate = probe->candidate_record;
+    gaddr a = candidate + (gaddr)(int32_t)(int16_t)(point_a_offset + 0xA4);
+    gaddr b = candidate + (gaddr)(int32_t)(int16_t)(point_b_offset + 0xA4);
+    int16_t ax = rd_s16(a), az = rd_s16(a + 4);
+    int16_t bx = rd_s16(b), bz = rd_s16(b + 4);
+    int16_t dx = (int16_t)(bx - ax);
+    int16_t dz = (int16_t)(az - bz);
+    int16_t from_x = (int16_t)-(int16_t)((int16_t)((ax >> probe->shift) +
+                                  rd_s16(candidate + 0xC)) - probe->eye_x);
+    int16_t from_z = (int16_t)-(int16_t)((int16_t)((az >> probe->shift) +
+                                  rd_s16(candidate + 0xE)) - probe->eye_z);
+    int32_t first = (int32_t)dx * from_z;
+    int32_t second = (int32_t)dz * from_x;
+    return (int64_t)first + second < 0;
+}
+
+CandidateEdgeRoute walk_candidate_edges(CandidateProbe *probe,
+                                        gaddr selected, int pass) {
+    gaddr cursor = probe->edge_cursor;
+
+    for (;;) {
+        int16_t first = rd_s16(cursor);
+        int wrapped = 0;
+        if (first < 0) {
+            if (!pass && (rd_u8(selected + 4) & 0x40u))
+                wr_u32(selected + 0x42, 0);
+            probe->edge_cursor = cursor;
+            return CANDIDATE_EDGE_NEXT_PASS;
+        }
+        for (;;) {
+            int16_t a = rd_s16(cursor);
+            int16_t b;
+            cursor += 2;
+            if (a < 0) {
+                a = (int16_t)(a & 0x0FFF);
+                b = (int16_t)(first & 0x0FFF);
+                wrapped = 1;
+            } else {
+                b = (int16_t)(rd_u16(cursor) & 0x0FFFu);
+            }
+            if (candidate_horizontal_edge_negative(probe, a, b)) {
+                if (!wrapped) continue;
+                probe->edge_cursor = cursor;
+                probe->edge_a_offset = a;
+                probe->edge_b_offset = b;
+                return CANDIDATE_EDGE_DETAIL;
+            }
+            if (wrapped) break;
+            while (rd_s16(cursor) >= 0) cursor += 2;
+            cursor += 2;
+            break;
+        }
+    }
 }

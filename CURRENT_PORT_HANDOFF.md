@@ -252,8 +252,10 @@ part that is not, stays on the work side.
    same file. The first geometry setup `$C270AE-$C27194` is also drafted:
    both selected-record probes, face-list selection, first height test, and
    the lower-face scan using the existing `$C27456` C helper. It compiles
-   cleanly, but the central edge/plane and level/volume walks still need
-   porting before the parent can be registered and source-compared.
+   cleanly. The horizontal edge sign and enclosing face-list walk
+   `$C27198-$C27218`/`$C2741C-$C2744C` are drafted too. The detailed
+   edge/plane and level/volume walks still need porting before the parent
+   can be registered and source-compared.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof

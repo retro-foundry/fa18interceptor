@@ -37,6 +37,8 @@ typedef struct CandidateProbe {
     int16_t shift;
     int16_t first_height;
     int below_first_height;
+    gaddr edge_cursor;
+    int16_t edge_a_offset, edge_b_offset;
 } CandidateProbe;
 
 void prepare_candidate_probe(CandidateProbe *probe, gaddr candidate,
@@ -46,5 +48,19 @@ void prepare_candidate_probe(CandidateProbe *probe, gaddr candidate,
  * zero when the scan continues to the next candidate. Only called when the
  * probe is below its first height. */
 int scan_candidate_lower_faces(CandidateProbe *probe);
+
+/* $C271D4-$C2720E: signed horizontal side of one record edge. Point
+ * offsets are the raw table words, before the +$A4 point-table base. */
+int candidate_horizontal_edge_negative(const CandidateProbe *probe,
+                                       int16_t point_a_offset,
+                                       int16_t point_b_offset);
+
+typedef enum CandidateEdgeRoute {
+    CANDIDATE_EDGE_NEXT_PASS,
+    CANDIDATE_EDGE_DETAIL
+} CandidateEdgeRoute;
+/* $C27198-$C27218 and $C2741C-$C2744C, before the detailed side checks. */
+CandidateEdgeRoute walk_candidate_edges(CandidateProbe *probe,
+                                        gaddr selected, int pass);
 
 #endif
