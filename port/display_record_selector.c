@@ -57,17 +57,17 @@ int fa18_select_display_record_pairs(const int16_t workspace[8][2],
     case 2:
         output->words[0] = 5; append_relative(workspace, first, second, output->words, &at);
         append_right_zero(output->words, &at); append_right_bottom(output->words, &at); append_zero_bottom(output->words, &at);
-        if (!(input->sequence_flags & 2u)) { at = 1; output->words[at++] = 3; at += 4; append_zero(output->words, &at); }
+        if (!(input->sequence_flags & 2u)) { at = 0; output->words[at++] = 3; at += 4; append_zero(output->words, &at); }
         break;
     case 3:
         output->words[0] = 5; append_relative(workspace, first, second, output->words, &at);
         append_right_bottom(output->words, &at); append_right_zero(output->words, &at); append_zero(output->words, &at);
-        if (input->sequence_flags & 2u) { at = 1; output->words[at++] = 3; at += 4; append_zero_bottom(output->words, &at); }
+        if (input->sequence_flags & 2u) { at = 0; output->words[at++] = 3; at += 4; append_zero_bottom(output->words, &at); }
         break;
     case 4:
         output->words[0] = 5; append_relative(workspace, first, second, output->words, &at);
         append_right_bottom(output->words, &at); append_zero_bottom(output->words, &at); append_zero(output->words, &at);
-        if (!(input->sequence_flags & 2u)) { at = 1; output->words[at++] = 3; at += 4; append_right_zero(output->words, &at); }
+        if (!(input->sequence_flags & 2u)) { at = 0; output->words[at++] = 3; at += 4; append_right_zero(output->words, &at); }
         break;
     case 5:
         output->words[0] = 4; append_relative(workspace, first, second, output->words, &at);
@@ -77,7 +77,7 @@ int fa18_select_display_record_pairs(const int16_t workspace[8][2],
     case 6:
         output->words[0] = 5; append_relative(workspace, first, second, output->words, &at);
         append_right_zero(output->words, &at); append_zero(output->words, &at); append_zero_bottom(output->words, &at);
-        if (input->sequence_flags & 2u) { at = 1; output->words[at++] = 3; at += 4; append_right_bottom(output->words, &at); }
+        if (input->sequence_flags & 2u) { at = 0; output->words[at++] = 3; at += 4; append_right_bottom(output->words, &at); }
         break;
     default:
         output->words[0] = 4; append_zero(output->words, &at); append_right_zero(output->words, &at);
