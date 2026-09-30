@@ -243,7 +243,13 @@ part that is not, stays on the work side.
    colour variants of the register-only plot and pair helpers so later
    `CURRENT_COLOUR` writes cannot change earlier replay. The shared tail's
    register and flag replay remains before either parent can be registered
-   or counted.
+   or counted. A second temporary shadow probe saved D0-D7/A0-A6 after
+   each C head replay and compared them at the generated `$C31392` handoff.
+   In the first 3,000 frames of each native recording, all 165 tuple and
+   165 fixed-head visits matched (demo 12 each, carrier 60 each, crashes
+   93 each). This checks the head even though the C memory path has already
+   run its tail. The temporary probe and registration were removed; full
+   routine comparisons still need the shared tail's register/flag bridge.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon
