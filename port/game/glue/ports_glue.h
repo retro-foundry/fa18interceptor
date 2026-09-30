@@ -545,4 +545,8 @@ int glue_C0924A(void);
 int glue_C09266(void);
 int glue_C092A0(void);
 
+/* postflight scene callbacks (/) */
+int glue_C11788(void);
+int glue_C11830(void);
+
 #endif

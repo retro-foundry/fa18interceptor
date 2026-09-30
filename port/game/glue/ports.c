@@ -464,6 +464,9 @@ const FA18Port fa18_ports[] = {
     {0xC0924A, glue_C0924A, "reset_scene_context", 3200},
     {0xC09266, glue_C09266, "reset_scene_recorder", 3100},
     {0xC092A0, glue_C092A0, "place_scene_root", 3000},
+    /* postflight scene callbacks (/) */
+    {0xC11788, glue_C11788, "advance_postflight_reset", 3200},
+    {0xC11830, glue_C11830, "restart_postflight_scene", 3900},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

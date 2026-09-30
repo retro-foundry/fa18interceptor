@@ -69,6 +69,11 @@ void track_direction_registers(int32_t elevation, int32_t azimuth, int32_t befor
  * (glue_batch23.c); safe to replay after the orientation is already set. */
 void record_orientation_registers(gaddr record, uint32_t d4, uint32_t d5, uint32_t d6);
 
+/* Pure register tails of $C092A0, $C1B906 and $C2FD22. */
+void scene_setup_registers(int8_t which);
+void view_mode_zero_registers(void);
+void clear_render_buffers_registers(void);
+
 /* $C2F64E's and $C2F63A's the same way. */
 void square_registers(void);
 void square_in_view_registers(void);

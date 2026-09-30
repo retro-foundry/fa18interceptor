@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 359; 829,612 calls matching in shadow and 1,028,030 in the sandbox pass over three native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 361; 829,609 calls matching in shadow and 1,028,026 in the sandbox pass over three native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -54,6 +54,11 @@ for it.
 
 All of these are registered and matching over all three recordings:
 
+- `$C11788` `advance_postflight_reset` and `$C11830`
+  `restart_postflight_scene` (`stages.c`) - the failure-side callback resets
+  the scene, decrements its repeat byte and either schedules another reset
+  or clears the render buffers and schedules the failure message. The second
+  callback optionally sets view mode zero before placing the scene root.
 - `$C1FF0A` `test_stream_face` - three vertex offsets into the clipper input
   and the face test; the 18 bytes that follow are skipped when it passes.
   `$C1FB82`'s dispatch is C as `face_test_passes` (`plane_tests.c`).
@@ -104,6 +109,9 @@ not been applied further. Split so far, all declared in `glue_text.h`:
 - `record_orientation_registers` out of `glue_C2D954` (`glue_batch23.c`)
 - `track_direction_registers` out of `glue_C123FA` (`glue_batch41.c`)
 - `world_registers` exported from `glue_batch24.c`
+- `scene_setup_registers`, `view_mode_zero_registers`, and
+  `clear_render_buffers_registers` split from their glue so the postflight
+  callbacks can replay their register effects without repeating the work.
 
 **Effect.** `$C28800` and the `$C0924A` trio then landed in minutes each
 instead of hours. Do the split first when a target ends in a fused callee;

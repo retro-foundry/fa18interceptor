@@ -7,6 +7,8 @@
 #include "fixed_math.h"
 #include "globals.h"
 #include "player_input.h"
+#include "render_buffers.h"
+#include "scene_setup.h"
 #include "view.h"
 
 void empty_stage(void) {}
@@ -154,6 +156,43 @@ void queue_postflight_failure_message(void) {
     wr_u16(MESSAGE_QUEUE, rd_u8(POSTFLIGHT_FAILURE_INPUT) == 0x10 ? 0x62 : 0x63);
     wr_u8(SEQUENCE_FLAG, 0);
     wr_u32(STAGE_CALLBACK, ROUTINE_FAILURE_STATUS_GATE);
+}
+
+void restart_postflight_scene(void) {
+    wr_u8(PLAYER_FLAGS_B, 0);
+    wr_u16(CONTROL_RECORDS + 2, (uint16_t)(rd_u16(CONTROL_RECORDS + 2) | 2));
+    if (!rd_u8(CONTEXT_SELECT)) start_view_mode_zero(0);
+    place_scene_root();
+    wr_u16(POST_INPUT_COUNTDOWN, 5);
+    wr_u32(STAGE_CALLBACK, 0xC11872u);
+}
+
+void advance_postflight_reset(void) {
+    uint16_t flags;
+    int8_t remaining;
+
+    if (!rd_u8(CONTEXT_SELECT)) {
+        if (rd_u8(PLAYER_FLAGS_A)) return;
+    } else if (rd_u16(CONTROL_RECORDS) & 0x0400u) {
+        return;
+    }
+    flags = (uint16_t)(rd_u16(COCKPIT_FLAGS) & 0x9FFFu);
+    wr_u16(COCKPIT_FLAGS, flags);
+    wr_u16(COCKPIT_FLAGS, (uint16_t)(flags & 0xFFFEu));
+    place_scene_root();
+    wr_u8(VIEWPORT_TARGET, 0x0F);
+    wr_u8(PLAYER_FLAGS_E, 0);
+    wr_u16(PLAYER_STATUS_D4, (uint16_t)(rd_u16(PLAYER_STATUS_D4) & 0xFBFFu));
+    remaining = (int8_t)(rd_u8(POSTFLIGHT_RESET_REMAINING) - 1);
+    wr_u8(POSTFLIGHT_RESET_REMAINING, (uint8_t)remaining);
+    if (remaining > 0) {
+        wr_u32(STAGE_CALLBACK, 0xC11830u);
+    } else {
+        clear_render_buffers();
+        wr_u16(POST_INPUT_COUNTDOWN, 5);
+        wr_u8(POST_INPUT_AUX, 0);
+        wr_u32(STAGE_CALLBACK, 0xC118A0u);
+    }
 }
 
 void tick_timer(gaddr timer) {

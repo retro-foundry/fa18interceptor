@@ -227,7 +227,7 @@ int glue_C28800(void) {
  * ending in the root's orientation. The pose choice is replayed here from
  * the entry byte as it was before the C, because a rejected negative entry
  * clears it and leaves the record pointer moved. */
-static int scene_setup_return(int8_t which) {
+void scene_setup_registers(int8_t which) {
     gaddr record = CONTROL_RECORDS, entry;
     uint32_t d4, d5, d6;
 
@@ -270,23 +270,25 @@ static int scene_setup_return(int8_t which) {
         break;
     }
     record_orientation_registers(record, d4, d5, d6);
-    return glue_return();
 }
 
 int glue_C092A0(void) {
     int8_t which = (int8_t)rd_u8(SCENE_POSE_ENTRY);
     place_scene_root();
-    return scene_setup_return(which);
+    scene_setup_registers(which);
+    return glue_return();
 }
 
 int glue_C09266(void) {
     int8_t which = (int8_t)rd_u8(SCENE_POSE_ENTRY);
     reset_scene_recorder();
-    return scene_setup_return(which);
+    scene_setup_registers(which);
+    return glue_return();
 }
 
 int glue_C0924A(void) {
     int8_t which = (int8_t)rd_u8(SCENE_POSE_ENTRY);
     reset_scene_context();
-    return scene_setup_return(which);
+    scene_setup_registers(which);
+    return glue_return();
 }

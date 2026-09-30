@@ -21,6 +21,10 @@ void reset_throttle_input_state(void);
 uint8_t dispatch_space_command_effect(void);
 /* $C118A0: when the countdown expires, queue the selected failure message. */
 void queue_postflight_failure_message(void);
+/* $C11788/$C11830: restart the scene after the postflight result, then
+ * schedule the next callback. */
+void advance_postflight_reset(void);
+void restart_postflight_scene(void);
 
 /* Count a byte timer down to zero; negative timers are stopped. */
 void tick_timer(gaddr timer);

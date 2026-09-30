@@ -98,9 +98,8 @@ int glue_C219AE(void) {
 }
 
 /* $C2FD22: the buffer pointers end past their buffers; D0.w = $FFFF. */
-int glue_C2FD22(void) {
+void clear_render_buffers_registers(void) {
     int used = rd_u8(FIFTH_BUFFER_USED) != 0;
-    clear_render_buffers();
     A(0) = rd_u32(RENDER_BUFFERS_B + 0) + 4 * RENDER_BUFFER_LONGS;
     A(1) = rd_u32(RENDER_BUFFERS_B + 4) + 4 * RENDER_BUFFER_LONGS;
     A(2) = rd_u32(RENDER_BUFFERS_B + 8) + 4 * RENDER_BUFFER_LONGS;
@@ -109,6 +108,11 @@ int glue_C2FD22(void) {
     A(5) = rd_u32(RENDER_BUFFERS_B + 16) + 4 * RENDER_BUFFER_LONGS;
     SET_W(D(0), 0xFFFF);
     flags_logic_l(0); /* the last CLR.L */
+}
+
+int glue_C2FD22(void) {
+    clear_render_buffers();
+    clear_render_buffers_registers();
     return glue_return();
 }
 

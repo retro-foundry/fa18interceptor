@@ -216,6 +216,8 @@
 /* ---- player record setup ($C09620) ------------------------------------------ */
 #define PLAYER_FLAGS_A     0xC45899u
 #define PLAYER_FLAGS_B     0xC4589Au
+#define POSTFLIGHT_RESET_REMAINING 0xC45897u /* byte: decremented by $C11788; positive value repeats at $C11830 */
+#define PLAYER_STATUS_D4   0xC458D4u /* word: bit 10 cleared by $C11788 */
 #define PLAYER_FLAGS_C     0xC458B3u
 #define PLAYER_FLAGS_D     0xC458B1u
 #define PLAYER_FLAGS_E     0xC45889u
