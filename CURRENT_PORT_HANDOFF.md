@@ -206,13 +206,15 @@ part that is not, stays on the work side.
    machine timing or the translation (the check then says the run no
    longer ends as sealed).
 1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
-   Cheapest first, given the splits that now exist: `$C25070` and `$C28B34`
-   both end in `$C2D954` and can use `record_orientation_registers` as it
-   stands. After that, split `$C2E758`'s glue to unblock the
-   `$C0D74A`/`$C0D752` pair.
-   Sibling routines are worth seeking out: `$C0924A`/`$C09266`/`$C092A0` are
-   three entry points into one body, and the grid and lattice pairs share
-   one implementation, so one transcription registers several routines.
+   `$C0D74A`/`$C0D752` are two entry points into the same display-record
+   preparation and selection body. Their `$C2E758` child is already C, and
+   `analysis/routines/c0d752_display_record_prefix.md` links the byte-exact
+   slices for the full range. The earlier isolated C in
+   `port/display_record_{candidates,iterator,selector,pipeline}.c` supplies
+   bounded arithmetic to adapt to `port/game/` memory and register glue.
+   Other ready larger candidates include `$C13D84`, `$C26EBE`, and `$C2DEE0`.
+   The post-input parent `$C0F992` depends on `$C08F26`; its deeper
+   `$C1C63E`/`$C1C860` calls are still translated.
 2. **Exact UAE timing (dropped for now).** Native recordings make the port
    independent of UAE replays; the bus model stays as it is. Tools:
    `scripts/recomp_timing.py` (per instruction against a trace),
