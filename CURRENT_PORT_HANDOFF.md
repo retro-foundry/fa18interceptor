@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 367; 796,515 calls matching in shadow and 1,029,188 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 370; 796,490 calls matching in shadow and 1,029,168 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -52,10 +52,18 @@ for it.
 
 ## Recently ported
 
-`$C2374C` `consume_selected_fire_request` (`selected_fire.c`) is committed
-as `2bdb54d5` and registered. Its one recorded call matched in focused shadow
-and sandbox demo probes; the next full proof has not run yet, so the Numbers
-row above still reflects the last fully checked batch.
+`$C2374C` `consume_selected_fire_request` (`selected_fire.c`, `2bdb54d5`),
+`$C28722` `initialize_scene_from_mode` (`scene_dispatch.c`, `f1937a36`), and
+`$C0FAA4` `initialize_scene_state` (`stages.c`, `e68c7d7d`) are committed and
+included in the Numbers row. The scene selector handles normal streams and
+the `$7D` special record; the initializer runs it, root setup, message reset,
+and final setup in source order. The selector matched eight completed shadow
+calls in focused probes; the initializer matched its completed demo call and
+both demo sandbox calls. The full three-recording proof and 10-frame parity
+check passed on this batch.
+
+`$C0FA04` `finish_post_input_followup` is the next work in progress. It has
+source and glue but is not in the Numbers row until built and proven.
 
 All of these are registered and matching over all three recordings:
 
