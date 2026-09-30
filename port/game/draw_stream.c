@@ -965,14 +965,12 @@ static int face_colour(uint16_t kind, gaddr *face, gaddr *stream, gaddr frame,
     return 1;
 }
 
-int draw_tested_face(gaddr *stream, gaddr frame) {
-    uint16_t kind, colour;
-    int tested, draw;
+/* The kind word and the draw, once the clipper input holds the face: the
+ * test is counted in the frame at -$32 and its failures at -$34. */
+static int tested_face_tail(gaddr *stream, gaddr frame) {
+    uint16_t kind = (uint16_t)next_word(stream), colour;
+    int tested, draw = face_colour(kind, stream, stream, frame, &colour, &tested);
 
-    wr_u16(CLIP_INPUT, 0);
-    if (build_face_vertices(stream)) return -1;
-    kind = (uint16_t)next_word(stream);
-    draw = face_colour(kind, stream, stream, frame, &colour, &tested);
     if (tested) wr_u16(frame - 0x32, (uint16_t)(rd_u16(frame - 0x32) + 1));
     if (tested < 0) {
         wr_u16(frame - 0x34, (uint16_t)(rd_u16(frame - 0x34) + 1));
@@ -981,6 +979,29 @@ int draw_tested_face(gaddr *stream, gaddr frame) {
     if (!draw) return -1;
     wr_u16(CURRENT_COLOUR, colour);
     return clip_and_draw_polygon();
+}
+
+int draw_tested_face(gaddr *stream, gaddr frame) {
+    wr_u16(CLIP_INPUT, 0);
+    if (build_face_vertices(stream)) return -1;
+    return tested_face_tail(stream, frame);
+}
+
+int draw_tested_parallelogram(gaddr *stream, gaddr frame) {
+    gaddr in = CLIP_INPUT + 4;
+    Vertex p0, p1, p2, q;
+
+    wr_u32(CLIP_INPUT, 4);
+    p0 = get(vertex_at(next_word(stream)));
+    p1 = get(vertex_at(next_word(stream)));
+    p2 = get(vertex_at(next_word(stream)));
+    put(in, p0);
+    put(in + 6, p1);
+    put(in + 12, p2);
+    q = minus(p2, minus(p1, p0));
+    if ((int16_t)((uint16_t)p0.z & (uint16_t)p1.z & (uint16_t)p2.z & (uint16_t)q.z) < 0) return -1;
+    put(in + 18, q);
+    return tested_face_tail(stream, frame);
 }
 
 int draw_indexed_face_list(gaddr *stream, gaddr frame) {

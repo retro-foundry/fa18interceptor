@@ -166,6 +166,11 @@ int test_stream_face(gaddr *stream, gaddr frame);
  * drawn when every vertex is behind. -1 when nothing was drawn. */
 int draw_tested_face(gaddr *stream, gaddr frame);
 
+/* Three vertex offsets ($C20002): the parallelogram p0, p1, p2 and the
+ * fourth corner p2 - (p1 - p0), then the kind word as for
+ * draw_tested_face. Nothing when all four corners are behind. */
+int draw_tested_parallelogram(gaddr *stream, gaddr frame);
+
 /* A base pointer, then offsets from it to such faces until a negative one
  * ($C20100), each drawn the same way except that the test reads and
  * advances the stream, not the face. The results are ORed at -$7E in the

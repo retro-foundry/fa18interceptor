@@ -239,3 +239,35 @@ int glue_C20100(void) {
     flags_logic_w(D(0));
     return glue_return();
 }
+
+/* $C20002: the same tail as $C2005C, over a parallelogram built from three
+ * vertex offsets. MOVEM.W sign-extends, so the corner registers keep the
+ * high words of the vertices they were loaded from. */
+int glue_C20002(void) {
+    gaddr stream = A(2), p = A(2), in = CLIP_INPUT + 4;
+    uint32_t a1 = A(1), a5 = A(5);
+    int drawn = draw_tested_parallelogram(&stream, A(6));
+    int k, reached;
+
+    A(3) = WORKSPACES;
+    A(0) = in + 18;
+    for (k = 0; k < 3; k++) D(1 + k) = SEXT(rd_u16(p + (gaddr)(2 * k)));
+    p += 6;
+    for (k = 0; k < 3; k++) D(2 + k) = SEXT(rd_u16(in + (gaddr)(2 * k)));
+    for (k = 0; k < 3; k++) D(5 + k) = SEXT(rd_u16(in + 6 + (gaddr)(2 * k)));
+    SET_W(D(0), (uint16_t)(W(4) & W(7)));
+    for (k = 0; k < 3; k++) SET_W(D(5 + k), (uint16_t)(W(5 + k) - W(2 + k)));
+    for (k = 0; k < 3; k++) D(2 + k) = SEXT(rd_u16(in + 12 + (gaddr)(2 * k)));
+    SET_W(D(0), (uint16_t)(W(0) & W(4)));
+    for (k = 0; k < 3; k++) SET_W(D(2 + k), (uint16_t)(W(2 + k) - W(5 + k)));
+    SET_W(D(0), (uint16_t)(W(0) & W(4)));
+    flags_logic_w(D(0));
+    if (W(0) < 0) return dropped(stream);
+    reached = kind_registers(&p, &p, 0xC200BE, 1);
+    if (reached) last_clipper_call(rd_u16(CURRENT_COLOUR), drawn);
+    A(1) = a1;
+    A(5) = a5;
+    if (!reached) return dropped(stream);
+    A(2) = stream;
+    return glue_return();
+}
