@@ -263,6 +263,13 @@ part that is not, stays on the work side.
    fixed 56-cycle polls, while the live source waits during chipset
    activity; prove the source timing before registering this routine.
    The temporary registration was removed.
+   Work on `$C23CA6` has started in `control_records.c` and
+   `control_records.h`: `refresh_record_view_from_table` transcribes
+   `$C23CA6-$C23D36`, and `update_linked_record_view` transcribes the
+   `$C23FF8-$C24054` route, including its `$4200` angle easing exit. These
+   are memory-side helpers only; the rest of the parent and its live
+   register replay remain to be ported. The helpers build but are inactive,
+   and the verified count remains 379.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof

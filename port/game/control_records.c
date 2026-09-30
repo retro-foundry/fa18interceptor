@@ -808,6 +808,72 @@ static int32_t swapped_word(int16_t v) {
     return (int32_t)(((uint32_t)(uint16_t)v << 16) | (uint16_t)(v < 0 ? 0xFFFF : 0));
 }
 
+void refresh_record_view_from_table(gaddr record) {
+    gaddr entry;
+    uint16_t flags;
+
+    if (rd_u8(POST_INPUT_EVENT) || rd_u8(record + 5) != 8 ||
+        (rd_u8(record + 2) & 1u) || rd_s16(record + 0x4A) > 0x480)
+        return;
+
+    entry = VIEW_PARAMETER_TABLE +
+            (gaddr)(int32_t)rd_s16(VIEW_PARAMETER_TABLE +
+                                   (gaddr)(rd_u8(record + 0x3A) * 2u));
+    while (rd_u32(entry) != rd_u32(record + 0x2C) ||
+           rd_u32(entry + 4) != rd_u32(record + 0x30)) {
+        entry += 10;
+        if (rd_s16(entry) < 0) {
+            wr_u16(ERROR_CODE, 0x35);
+            fault_hook();
+            return;
+        }
+    }
+
+    if (rd_s16(entry + 10) >= 0) {
+        set_record_view(record, rd_s16(entry + 10), rd_s16(entry + 12),
+                        rd_s16(entry + 14), rd_s16(entry + 16),
+                        (uint32_t)(int32_t)rd_s16(entry + 18));
+        wr_u16(record + 0x4A, 0x7FFF);
+        return;
+    }
+    flags = rd_u16(record);
+    wr_u8(record + 1, (uint8_t)(rd_u8(record + 1) & ~0x80u));
+    if ((flags & 0x80u) && rd_u8(record + 0x62) == 0x15)
+        wr_u16(record, rd_u16(record) | 0x0200u);
+}
+
+void update_linked_record_view(gaddr record) {
+    int16_t selected = rd_s16(SELECTED_RECORD);
+    uint16_t angle;
+
+    wr_u16(record, rd_u16(record) & 0xFFFEu);
+    if (rd_u8(record + 1) & 0x08u) {
+        if (selected == -1 || selected == rd_s16(SCRIPT_RECORD)) goto ease_angle;
+        {
+            gaddr source = CONTROL_RECORDS + (gaddr)(int32_t)selected;
+            set_record_view(record, rd_s16(source + 6), rd_s16(source + 8),
+                            rd_s16(source + 0xC), rd_s16(source + 0xE),
+                            rd_u32(source + 0x10));
+            wr_u8(record + 0x38, (uint8_t)(((uint16_t)selected >> 9) | 0x80u));
+        }
+        return;
+    }
+    return;
+
+ease_angle:
+    wr_u32(record + 0x34, 0);
+    angle = rd_u16(record + 0x6C);
+    if ((int16_t)angle <= 0x4200) {
+        angle = (uint16_t)(angle + 0x240u);
+        if ((int16_t)angle > 0x4200) angle = 0x4200;
+    } else {
+        angle = (uint16_t)(angle - 0x240u);
+        if ((int16_t)angle < 0x4200) angle = 0x4200;
+    }
+    wr_u16(record + 0x6C, angle);
+    wr_u16(record + 0x6E, angle);
+}
+
 void aim_record_at_view(gaddr record, gaddr source) {
     int16_t select = rd_s16(source + 4);
     int32_t elevation = 0, azimuth = 0, x, z;

@@ -81,6 +81,14 @@ void aim_record_at_view(gaddr record, gaddr source);
 /* Store view parameters into a record at +$2C..+$37. */
 void set_record_view(gaddr record, int16_t a, int16_t b, int16_t c, int16_t d, uint32_t e);
 
+/* The $C23CA6-$C23D36 prefix: for an eligible mode-eight record, find its
+ * current view in the selected five-word set and advance or clear it. */
+void refresh_record_view_from_table(gaddr record);
+
+/* The linked-record view route and its $4200 easing exit ($C23FF8-$C24054).
+ * Returns after that source exit; the caller chooses this route. */
+void update_linked_record_view(gaddr record);
+
 /* Set bit 4 of byte +1 in every control record and workspace record. */
 void flag_all_records(void);
 
