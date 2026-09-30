@@ -517,6 +517,15 @@
 #define ROUTINE_QUEUE_MESSAGE_FOUR 0xC1072Eu
 #define ROUTINE_AFTER_EVENT        0xC110A4u
 #define CORNER_RECORDS     0xC4B390u /* 16-byte records: x, y, z words, ..., +$E word */
+#define DISPLAY_CANDIDATE_INPUTS 0xC0D720u /* four source word pairs ($C0D752) */
+#define DISPLAY_CANDIDATE_MATRIX 0xC45BD8u /* 3x3 word matrix for $C0D752 */
+#define DISPLAY_CANDIDATE_MATRIX_WIDE 0xC45BEAu /* alternate matrix for $C0D74A */
+#define DISPLAY_SELECTION_THRESHOLD 0xC45A92u /* branch-five selector limit ($C0D9B2) */
+#define DISPLAY_MODE_ZERO_THRESHOLD 0xC45A8Au /* fallback limit in mode zero ($C0DA5A) */
+#define DISPLAY_SELECTION_WORD_A 0xC456E6u /* success return of $C0DA70 */
+#define DISPLAY_SELECTION_WORD_B 0xC456E8u
+#define DISPLAY_SELECTION_LONG   0xC456EAu
+#define DISPLAY_SELECTION_FLAG   0xC4589Eu
 #define CROSSING_COUNTS    0xC4E854u /* word[4]: crossings through y = z, x = z, y = -z, x = -z */
 #define CROSSING_LAST      0xC4E85Cu /* word[4]: the corner of each plane's last crossing */
 #define CORNER_SCREEN      0xC4B990u /* word[2] per corner: its edge's entry point on screen */

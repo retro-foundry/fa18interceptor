@@ -36,13 +36,12 @@ static void screen_reg(int n, int16_t span, int16_t half) {
     else if (W(n) >= span) SET_W(D(n), (uint16_t)(span - 1));
 }
 
-int glue_C2E758(void) {
+void corner_edges_registers(int apply_stack) {
     int16_t last[3];
     int i, k, skip = 0;
 
     for (k = 0; k < 3; k++) last[k] = rd_s16(CLIP_POINT + (gaddr)(2 * k));
-    project_corner_edges();
-    wr_u16(A(7) + 4, 7);
+    if (apply_stack) wr_u16(A(7) + 4, 7);
     A(0) = CORNER_SCREEN;
     A(1) = CORNER_RECORDS;
     for (i = 0; i <= 7; i++) {
@@ -87,5 +86,10 @@ int glue_C2E758(void) {
         }
     }
     SET_W(D(0), 8);
+}
+
+int glue_C2E758(void) {
+    project_corner_edges();
+    corner_edges_registers(1);
     return glue_return();
 }
