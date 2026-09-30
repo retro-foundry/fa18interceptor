@@ -48,6 +48,7 @@
 
 /* ---- control records ------------------------------------------------------
  * Sixteen 512-byte records at $C46184, selected by index << 9 (memory map). */
+#define VIEW_PARAMETER_TABLE 0xC295E0u /* word offsets to five-word view parameter sets ($C28800) */
 #define CONTROL_RECORDS    0xC46184u
 #define CONTROL_RECORD_BYTES 512
 #define SELECTED_RECORD    0xC459C0u /* word: byte offset of the selected record, or -1 ($C230B0) */

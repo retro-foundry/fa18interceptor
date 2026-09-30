@@ -69,6 +69,15 @@ void steer_record_pitch(gaddr record, int16_t climb);
 /* Mark a record pending (+$50 = -1), negating +$54 if it was not already. */
 void mark_record_pending(gaddr record);
 
+/* Point `record` at what the word at `source` + 4 selects ($C28800). A
+ * negative selector picks a five-word set from VIEW_PARAMETER_TABLE by its
+ * bits 8-14, stores it as the record's view and marks +$38 $FF; otherwise
+ * bits 8-15 name another control record, whose view fields are copied and
+ * whose index goes to +$38 with bit 7. The record is then turned toward
+ * that target's x and z, and nothing happens at all when the selector is
+ * empty or the named record is not active (+$0 bit 6). */
+void aim_record_at_view(gaddr record, gaddr source);
+
 /* Store view parameters into a record at +$2C..+$37. */
 void set_record_view(gaddr record, int16_t a, int16_t b, int16_t c, int16_t d, uint32_t e);
 

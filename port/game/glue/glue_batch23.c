@@ -93,11 +93,14 @@ int glue_C18096(void) {
 
 /* $C2D954: A1 record, D4-D6.w angles. Ends through $C2D970 with the angles
  * in D5-D7 and A1 + $92, so every register is as $C2E514 leaves it. */
-int glue_C2D954(void) {
-    uint16_t x = (uint16_t)D(4), y = (uint16_t)D(5), z = (uint16_t)D(6);
-    gaddr record = A(1);
-    uint32_t d4 = D(4), d5 = D(5), d6 = D(6);
-    set_record_orientation(record, x, y, z);
+/* $C2D954's registers on their own, for the glue of routines that end in
+ * it: the record and the whole D4-D6 it was called with. It recomputes the
+ * inverse matrix through alternate_rotation_registers, which writes the
+ * same matrix from the same angles, so a caller may replay this after its
+ * own C has already set the orientation. */
+void record_orientation_registers(gaddr record, uint32_t d4, uint32_t d5, uint32_t d6) {
+    uint16_t x = (uint16_t)d4, y = (uint16_t)d5, z = (uint16_t)d6;
+
     /* MOVEM.L restores D1/D5-D7/A1 from the D1/D4-D6/A1 it saved. */
     D(5) = d4;
     D(6) = d5;
@@ -108,5 +111,13 @@ int glue_C2D954(void) {
     D(4) = z ? (uint16_t)(0x7080 - z) : 0;
     SET_W(D(1), 0x7080);
     alternate_rotation_registers();
+}
+
+int glue_C2D954(void) {
+    gaddr record = A(1);
+    uint32_t d4 = D(4), d5 = D(5), d6 = D(6);
+
+    set_record_orientation(record, (uint16_t)d4, (uint16_t)d5, (uint16_t)d6);
+    record_orientation_registers(record, d4, d5, d6);
     return glue_return();
 }

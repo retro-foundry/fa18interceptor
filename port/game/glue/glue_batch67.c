@@ -10,10 +10,16 @@
 #include "memory.h"
 #include "glue_text.h"
 #include "hud_bars.h"
+#include "matrix.h"
 #include "render_span.h"
 #include "stages.h"
 
 #define TEMPLATE_PAIRS 0xC1D8B6u
+
+/* MOVEM.W's sign extension left in the low word by SWAP. */
+static int32_t swapped_word(int16_t v) {
+    return (int32_t)(((uint32_t)(uint16_t)v << 16) | (uint16_t)(v < 0 ? 0xFFFF : 0));
+}
 
 /* The bounds $C1D4E4 leaves in D6 and D7 (it starts with MOVEQ #0,D6, so
  * D6 is its own search bound from there on, not the bitmap offset). */
@@ -155,5 +161,62 @@ int glue_C3003A(void) {
     SET_W(D(1), (uint16_t)y);
     restored_plot_registers();
     A(5) = 0x25;
+    return glue_return();
+}
+
+/* $C28800: its two callees' registers now come from their replay helpers,
+ * so the glue never repeats their work. Everything the body computes is
+ * overwritten by the orientation's own registers except D1's high word
+ * (from the track), A4 (the view table entry) and the two early returns. */
+int glue_C28800(void) {
+    gaddr record = A(0), source = A(2);
+    int16_t select = rd_s16(source + 4);
+    uint32_t d1 = D(1), d2 = D(2);
+    int32_t x, y = 0, z;
+
+    aim_record_at_view(record, source);
+
+    if (select < 0) {
+        int16_t at = (int16_t)(select & 0x7F00), v[5];
+        gaddr entry;
+        int k;
+
+        SET_W(d1, (uint16_t)at);
+        if (!at) {
+            D(1) = d1;
+            return glue_return();
+        }
+        at = (int16_t)(at >> 7);
+        SET_W(d1, (uint16_t)at);
+        entry = VIEW_PARAMETER_TABLE
+              + (gaddr)(int32_t)rd_s16(VIEW_PARAMETER_TABLE + (gaddr)(int32_t)at);
+        for (k = 0; k < 5; k++) v[k] = rd_s16(entry + (gaddr)(2 * k));
+        A(4) = entry + 10;
+        x = (int32_t)((uint32_t)swapped_word(v[0]) << 6) + (int32_t)((uint32_t)(int32_t)v[2] << 8);
+        z = (int32_t)((uint32_t)swapped_word(v[1]) << 6) + (int32_t)((uint32_t)(int32_t)v[3] << 8);
+    } else {
+        gaddr other = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)((select & 0xFF00) * 2);
+
+        A(1) = other;
+        SET_W(d2, (uint16_t)(select & 0xFF00));
+        SET_W(d1, (uint16_t)(rd_u16(other) & 0x40));
+        if (!(uint16_t)d1) {
+            D(1) = d1;
+            D(2) = d2;
+            return glue_return();
+        }
+        x = rd_s32(other + 0x14);
+        z = rd_s32(other + 0x1C);
+    }
+    x -= rd_s32(record + 0x14);
+    z -= rd_s32(record + 0x1C);
+
+    D(1) = d1;
+    track_direction_registers(0, 0, 0, &x, &y, &z, -1, 1);
+    D(0) = 0;
+    D(3) = 0;
+    A(0) = record;
+    A(1) = record;
+    record_orientation_registers(record, 0, 0xFFFF0000u | rd_u16(TRACKED_HEADING), 0);
     return glue_return();
 }

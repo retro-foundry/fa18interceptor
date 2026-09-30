@@ -458,6 +458,8 @@ const FA18Port fa18_ports[] = {
     /* control_records.c */
     {0xC1D3F4, glue_C1D3F4, "expand_cell_templates", 900},
     /* hud_bars.c */
+    /* control_records.c */
+    {0xC28800, glue_C28800, "aim_record_at_view", 9000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

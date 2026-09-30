@@ -6,7 +6,9 @@
 #include "fixed_math.h"
 #include "globals.h"
 #include "messages.h"
+#include "matrix.h"
 #include "stages.h"
+#include "tracking.h"
 
 gaddr control_record(uint16_t selector) {
     /* The original adds the doubled high-byte index as a signed word. */
@@ -798,4 +800,44 @@ void expand_cell_templates(int16_t row, int16_t column, gaddr templates, gaddr b
     }
     state->cursor = cursor;
     file_records_by_level(column, row, lists, state);
+}
+
+/* MOVEM.W sign-extends into the long, and SWAP then leaves that sign in
+ * the low word. */
+static int32_t swapped_word(int16_t v) {
+    return (int32_t)(((uint32_t)(uint16_t)v << 16) | (uint16_t)(v < 0 ? 0xFFFF : 0));
+}
+
+void aim_record_at_view(gaddr record, gaddr source) {
+    int16_t select = rd_s16(source + 4);
+    int32_t elevation = 0, azimuth = 0, x, z;
+
+    if (select < 0) {
+        int16_t at = (int16_t)(select & 0x7F00), v[5];
+        gaddr entry;
+        int k;
+
+        if (!at) return;
+        entry = VIEW_PARAMETER_TABLE
+              + (gaddr)(int32_t)rd_s16(VIEW_PARAMETER_TABLE + (gaddr)(int32_t)(int16_t)(at >> 7));
+        for (k = 0; k < 5; k++) v[k] = rd_s16(entry + (gaddr)(2 * k));
+        set_record_view(record, v[0], v[1], v[2], v[3], (uint32_t)(int32_t)v[4]);
+        wr_u8(record + 0x38, 0xFF);
+        x = (int32_t)((uint32_t)swapped_word(v[0]) << 6) + (int32_t)((uint32_t)(int32_t)v[2] << 8);
+        z = (int32_t)((uint32_t)swapped_word(v[1]) << 6) + (int32_t)((uint32_t)(int32_t)v[3] << 8);
+    } else {
+        uint16_t index = (uint16_t)(select & 0xFF00);
+        gaddr other = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)(index * 2);
+
+        if (!(rd_u16(other) & 0x40)) return;
+        set_record_view(record, rd_s16(other + 6), rd_s16(other + 8), rd_s16(other + 0x0C),
+                        rd_s16(other + 0x0E), rd_u32(other + 0x10));
+        wr_u8(record + 0x38, (uint8_t)((index >> 8) | 0x80));
+        x = rd_s32(other + 0x14);
+        z = rd_s32(other + 0x1C);
+    }
+    x -= rd_s32(record + 0x14);
+    z -= rd_s32(record + 0x1C);
+    track_direction(&elevation, &azimuth, x, 0, z, -1);
+    set_record_orientation(record, 0, rd_u16(TRACKED_HEADING), 0);
 }
