@@ -7,6 +7,10 @@
 #include "render_line.h"
 
 #define POSTFLIGHT_TUPLES 0xC3128Au
+#define POSTFLIGHT_POINT_TABLE 0xC4E71Cu
+#define POSTFLIGHT_PREFIX_GATE 0xC45838u
+#define POSTFLIGHT_PREFIX_TICK 0xC45883u
+#define POSTFLIGHT_PREFIX_BITS 0xC4586Du
 
 static int16_t add_word(int16_t a, int16_t b) {
     return (int16_t)((uint16_t)a + (uint16_t)b);
@@ -49,4 +53,117 @@ void draw_postflight_fixed_quad(void) {
     plot_pixel(x, y);
     y = add_word(0xA7, rd_s16(REDRAW_STATE_WORD));
     plot_pixel(x, y);
+}
+
+int begin_postflight_variant_tail(PostflightVariantWork *work) {
+    gaddr cursor;
+    int i;
+    if (!rd_u8(POSTFLIGHT_PREFIX_GATE)) return 0;
+
+    work->table = POSTFLIGHT_POINT_TABLE + (rd_u16(DRAW_PAGE) ? 0x28u : 0u);
+    cursor = work->table;
+    wr_u16(CURRENT_COLOUR, 0);
+    for (i = 0; i < 11; ++i) {
+        int16_t x = rd_s16(cursor);
+        int16_t y;
+        cursor += 2;
+        if (x == -1) break;
+        y = rd_s16(cursor);
+        cursor += 2;
+        if (x < 0) plot_pixel_pair((int16_t)((uint16_t)x & 0x7FFFu), y);
+        else plot_pixel(x, y);
+    }
+    wr_u8(POSTFLIGHT_PREFIX_TICK, (uint8_t)(rd_u8(POSTFLIGHT_PREFIX_TICK) + 1u));
+    wr_u8(POSTFLIGHT_PREFIX_BITS, 0);
+    work->vector_stream = LIST_BUFFER + 12;
+    for (i = 0; i < 3; ++i)
+        work->vector[i] = rd_s32(LIST_BUFFER + (gaddr)(4 * i));
+    work->has_vector = (work->vector[0] | work->vector[1] | work->vector[2]) != 0;
+    return 1;
+}
+
+static int32_t shifted_with_carry(int32_t value, int shift) {
+    int32_t shifted = value >> shift;
+    return shifted + (((uint32_t)value >> (shift - 1)) & 1u);
+}
+
+int select_postflight_variant_record(PostflightVariantWork *work) {
+    uint16_t offset;
+    uint8_t flags;
+    if (!work->has_vector) return 0;
+
+    work->source_x = work->vector[0];
+    work->source_z = work->vector[2];
+    work->screen_x = shifted_with_carry(work->source_x, 13);
+    work->screen_y = shifted_with_carry(work->source_z, 13);
+    work->record_word = rd_u16(work->vector_stream);
+    if (!(work->record_word & 0x10u)) return 0;
+
+    offset = (uint16_t)((work->record_word & 0xFF00u) << 1);
+    work->record = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)offset;
+    flags = rd_u8(work->record);
+    if (offset == rd_u16(VIEW_RECORD) || !(rd_u8(work->record + 1) & 0x40u) ||
+        (rd_u8(work->record + 3) & 0x80u)) goto reject;
+
+    work->screen_x = (int32_t)(0u - (uint32_t)work->screen_x);
+    if (work->screen_x > 0x1B || work->screen_x < -0x1B) goto reject;
+    work->screen_y = (int32_t)(0u - (uint32_t)work->screen_y);
+    if (work->screen_y >= 0x16 || work->screen_y < -0x10) goto reject;
+    return 1;
+
+reject:
+    wr_u8(work->record, (uint8_t)(flags & (uint8_t)~0x40u));
+    return 0;
+}
+
+static int32_t abs_long(int32_t value) {
+    return value < 0 ? (int32_t)(0u - (uint32_t)value) : value;
+}
+
+static void set_prefix_bit(unsigned bit) {
+    wr_u8(POSTFLIGHT_PREFIX_BITS,
+          (uint8_t)(rd_u8(POSTFLIGHT_PREFIX_BITS) | (uint8_t)(1u << bit)));
+}
+
+void classify_postflight_variant_record(PostflightVariantWork *work) {
+    gaddr record = work->record;
+    uint8_t mode = rd_u8(MODE_SELECT), category;
+
+    if (mode != 0x7Du && mode != 2u) {
+        if (abs_long(work->source_x) > 0x10000 ||
+            abs_long(work->source_z) > 0x10000) {
+            wr_u8(record + 0x20, (uint8_t)(rd_u8(record + 0x20) & ~0x40u));
+            goto finish;
+        }
+        wr_u8(record + 0x20, (uint8_t)(rd_u8(record + 0x20) | 0x40u));
+        category = rd_u8(record + 0x62) & 0xF0u;
+        if (category != 0x20u) {
+            if (rd_s16(SELECTED_RECORD) >= 0 && category == 0x10u &&
+                rd_u16(VIEW_RECORD) == 0) {
+                int8_t countdown = rd_s8(PLAYER_FLAGS_F);
+                if (countdown == 0) wr_u8(PLAYER_FLAGS_F, 0x1E);
+                else if (countdown > 0)
+                    wr_u8(PLAYER_FLAGS_F, (uint8_t)(countdown == 1 ? 0xFF : countdown - 1));
+            }
+            if (!(rd_u8(record + 0x20) & 2u) &&
+                !(rd_u16(record) & 0x0600u) &&
+                !(rd_u8(record + 3) & 0x80u) && category != 0x30u) {
+                if (category == 0) {
+                    if (!(rd_u8(record + 1) & 8u) &&
+                        (rd_u8(record + 0x38) & 0x7Fu) == rd_u16(TARGET_RECORD)) {
+                        set_prefix_bit(rd_u8(record + 0x62) == 0 ? 4 : 5);
+                    }
+                } else if (rd_u8(record + 1) & 8u) {
+                    set_prefix_bit(1);
+                } else if (rd_u8(record + 0x62) == 0x15u) {
+                    set_prefix_bit(3);
+                } else {
+                    set_prefix_bit(2);
+                }
+            }
+        }
+    }
+finish:
+    if (work->record_word & 0x10u)
+        wr_u8(record, (uint8_t)(rd_u8(record) | 0x40u));
 }
