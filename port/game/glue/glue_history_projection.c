@@ -33,6 +33,12 @@ int glue_C0D04C(void) {
         A(0) = matrix + 18;
         A(3) = (uint32_t)(int32_t)work.previous_shift;
         projection_mode_registers(-4, 2);
+        if (work.final_interpolated && !work.final_intermediate_drawn &&
+            !work.final_point_drawn) {
+            D(4) = (uint32_t)(int32_t)work.final_interpolation_d4;
+            D(5) = (uint32_t)(int32_t)work.final_interpolation_d5;
+            A(4) = (uint32_t)(int32_t)work.final_shift_difference;
+        }
     }
     if (work.record) SET_W(D(0), result);
     else D(0) = 0;

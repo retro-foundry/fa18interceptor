@@ -14,7 +14,10 @@ typedef struct HistoryProjectionWork {
     int32_t final_y_full, final_z_full;
     uint32_t final_d6;
     int16_t final_prior_y;
+    int16_t final_interpolation_d4, final_interpolation_d5;
+    int16_t final_shift_difference;
     int final_interpolated;
+    int final_intermediate_drawn, final_point_drawn;
     uint16_t drawn;
     int active;
 } HistoryProjectionWork;

@@ -105,8 +105,9 @@ static void project_intermediate(HistoryProjectionWork *work,
             point[i] = quarter_between(scaled[i], current[i], right);
         scaled_radius = quarter_between(work->previous_radius, radius, right);
     }
-    work->drawn |= (uint16_t)project_view_point_mode(point[0], point[1], point[2],
-                                                     -4, work->previous[2], scaled_radius);
+    work->final_intermediate_drawn = project_view_point_mode(point[0], point[1], point[2],
+                                                              -4, work->previous[2], scaled_radius);
+    work->drawn |= (uint16_t)work->final_intermediate_drawn;
 }
 
 uint16_t draw_history_projection(HistoryProjectionWork *work) {
@@ -135,6 +136,12 @@ uint16_t draw_history_projection(HistoryProjectionWork *work) {
                                    rd_s8(work->record + 0x3D) > 1;
         work->final_prior_y = work->previous[1];
         if (work->final_interpolated) {
+            int shift = (work->previous_shift - work->shift) & 63;
+            work->final_shift_difference = (int16_t)(work->previous_shift - work->shift);
+            work->final_interpolation_d4 = word_asr((int16_t)
+                ((uint16_t)word_asl(work->previous[1], shift) - (uint16_t)current[1]), 2);
+            work->final_interpolation_d5 = word_asr((int16_t)
+                ((uint16_t)word_asl(work->previous[2], shift) - (uint16_t)current[2]), 2);
             project_intermediate(work, current, radius, 1);
             project_intermediate(work, current, radius, 2);
             project_intermediate(work, current, radius, 3);
@@ -149,8 +156,9 @@ uint16_t draw_history_projection(HistoryProjectionWork *work) {
         work->final_y_full = rotated[1];
         work->final_z_full = rotated[2];
         work->final_d6 = (radius_pack & 0xFFFF0000u) | (uint16_t)radius;
-        work->drawn |= (uint16_t)project_view_point_mode(current[0], current[1],
-                                                         current[2], -4, current[2], radius);
+        work->final_point_drawn = project_view_point_mode(current[0], current[1],
+                                                          current[2], -4, current[2], radius);
+        work->drawn |= (uint16_t)work->final_point_drawn;
 
         if (work->direction >= 0) {
             work->slot_index = (int8_t)((uint8_t)work->slot_index - 1u);
