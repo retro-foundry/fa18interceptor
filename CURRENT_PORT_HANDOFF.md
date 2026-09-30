@@ -247,7 +247,9 @@ part that is not, stays on the work side.
    `$C270AA` is drafted in `candidate_record_scan.c`: class and header
    filters, two three-axis distance bounds, and the immediate record writes.
    It is inactive and has only a strict C syntax check; the later geometry
-   and terminal branches still need porting before registration and proof.
+   branches still need porting before registration and proof. The side-result
+   and signed terminal-height blocks `$C278D6-$C279C6` are drafted in the
+   same file; the central geometry and level/volume walk remain.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof

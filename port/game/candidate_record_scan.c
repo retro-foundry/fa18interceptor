@@ -109,3 +109,50 @@ void scan_candidate_record(CandidateScanWork *work,
         return;
     }
 }
+
+int candidate_side_result(gaddr candidate, gaddr selected) {
+    uint16_t selected_first = rd_u16(selected);
+    uint16_t candidate_first = rd_u16(candidate);
+
+    if (selected_first & 0x08u) {
+        if (!rd_u8(selected + 0x5E)) {
+            gaddr metadata = rd_u32(0xC1AB74u);
+            if (rd_u8(selected + 0x62) == 0 && !(candidate_first & 0x08u))
+                wr_u16(metadata + 0x44, rd_u16(metadata + 0x44) + 1u);
+            else if (rd_u8(selected + 0x62) == 1 && !(candidate_first & 0x08u))
+                wr_u16(metadata + 0x40, rd_u16(metadata + 0x40) + 1u);
+        }
+        if (candidate_first & 0x08u) {
+            wr_u8(candidate + 0x20, rd_u8(candidate + 0x20) | 0x80u);
+            wr_u8(selected + 0x20, rd_u8(selected + 0x20) | 0x80u);
+            return 0x40;
+        }
+    }
+
+    wr_u8(candidate + 0x20, rd_u8(candidate + 0x20) & 0x7Fu);
+    wr_u8(selected + 0x20, rd_u8(selected + 0x20) & 0x7Fu);
+    if (!rd_u16(SCRIPT_RECORD) && !(rd_u8(candidate + 0x62) & 0xF0u)) {
+        gaddr metadata = rd_u32(0xC1AB74u);
+        wr_u16(metadata + 0x48, rd_u16(metadata + 0x48) + 1u);
+    }
+    return 0x40;
+}
+
+int candidate_terminal_result(gaddr selected) {
+    int32_t height = rd_s32(selected + 0x10);
+    int32_t result = height;
+
+    if (rd_s8(selected + 0x7B) >= 0 &&
+        (rd_u8(selected + 0x62) & 0xF0u) == 0x10u &&
+        !(rd_u8(selected + 0x7B) & 0x0Fu)) {
+        int shift = rd_u8(selected + 0x7D) & 0x0Fu;
+        int offset;
+        for (offset = 0xA6; offset <= 0xB2; offset += 6) {
+            result = (int32_t)((uint32_t)height +
+                               (uint32_t)(int32_t)(rd_s16(selected +
+                                    (gaddr)offset) >> shift));
+            if (result < 0) return 0x10;
+        }
+    }
+    return result < 0 ? 0x10 : 0;
+}

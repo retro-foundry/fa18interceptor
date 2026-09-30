@@ -23,4 +23,8 @@ void scan_candidate_record(CandidateScanWork *work,
                            int32_t relative_x, int32_t relative_y,
                            int32_t relative_z);
 
+/* Terminal source blocks $C278D6-$C279C6. */
+int candidate_side_result(gaddr candidate, gaddr selected);
+int candidate_terminal_result(gaddr selected);
+
 #endif
