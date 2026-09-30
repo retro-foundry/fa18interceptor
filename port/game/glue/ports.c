@@ -449,6 +449,11 @@ const FA18Port fa18_ports[] = {
     /* draw_stream.c */
     {0xC2005C, glue_C2005C, "draw_tested_face", 520},
     {0xC20100, glue_C20100, "draw_indexed_face_list", 620},
+    /* draw_stream.c face loops */
+    {0xC21060, glue_C21060, "draw_quad_list", 900},
+    {0xC20C38, glue_C20C38, "draw_face_grid", 1200},
+    {0xC20C22, glue_C20C22, "draw_face_grid_plain", 1200},
+    {0xC20A40, glue_C20A40, "draw_face_lattice_plain", 1400},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

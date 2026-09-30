@@ -1,12 +1,9 @@
-/* Not registered yet: the dispatcher's callers count D7's high word as
- * live, and it comes through from the previous face's draw, which a replay
- * after the C cannot see. See CURRENT_PORT_HANDOFF.md.
- *
- * Glue for the face grids $C20C38, $C20C22, $C20A52 and $C20A40. Every face
- * reaches the clipper, so the last one's registers stand: its setup, then
- * the clipper's (with BLTSIZE from before that last draw, kept by the
- * machine). The grids keep their vectors, counters and result in the
- * caller's frame; those end values are written too. */
+/* Glue for the face grids $C20C38, $C20C22, $C20A52 and $C20A40. Every face
+ * reaches the clipper, and D7's high word carries from one of its draws to
+ * the next, so every face is replayed: its setup, its corners back into the
+ * clipper input, then the clipper's registers (with BLTSIZE from before the
+ * last draw, kept by the machine). The grids keep their vectors, counters
+ * and result in the caller's frame; those end values are written too. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -67,11 +64,22 @@ static void regs3(int first, V3 high, V3 low) {
     for (k = 0; k < 3; k++) D(first + k) = (SEXT((uint16_t)high.x[k]) & 0xFFFF0000u) | (uint16_t)low.x[k];
 }
 
-static void last_face(uint16_t colour) {
-    ClipperSnapshot snapshot;
-    clipper_snapshot(&snapshot);
-    snapshot.last_size = fa18_bltsize_at_draw_start;
-    clipper_registers(&snapshot, colour, -1);
+/* One face's call to the clipper. The snapshot is taken before the C runs
+ * and carried from face to face, so each call replays from the clip state
+ * the one before it left, as the original's did. */
+static void face_call(ClipperSnapshot *s, uint16_t colour) {
+    s->last_size = fa18_bltsize_at_draw_start;
+    clipper_registers(s, colour, -1);
+}
+
+/* One face's corners into the clipper input, as the C wrote them. */
+static void write_face(V3 p0, V3 p1, V3 p2, V3 p3) {
+    const V3 *corner[4];
+    int i, k;
+    corner[0] = &p0; corner[1] = &p1; corner[2] = &p2; corner[3] = &p3;
+    wr_u32(CLIP_INPUT, 4);
+    for (i = 0; i < 4; i++)
+        for (k = 0; k < 3; k++) wr_s16(CLIP_INPUT + 4 + (gaddr)(6 * i + 2 * k), corner[i]->x[k]);
 }
 
 static int16_t counted_down(int16_t n) {
@@ -80,12 +88,14 @@ static int16_t counted_down(int16_t n) {
 }
 
 static int grid_glue(int plain) {
-    gaddr stream = A(2), s = A(2), base, q;
+    gaddr stream = A(2), start = A(2), s = A(2), base, q;
     uint32_t a1 = A(1), a5 = A(5);
     uint16_t colour, result;
     int16_t rows, columns = 0, r;
-    V3 u, v, w, acc, a, qv;
+    V3 u, v, w, acc, along, a, qv;
+    ClipperSnapshot snap;
 
+    clipper_snapshot(&snap);
     result = (uint16_t)(plain ? draw_face_grid_plain(&stream) : draw_face_grid(&stream));
     colour = rd_u16(CURRENT_COLOUR);
     if (plain) s += 2;
@@ -100,10 +110,7 @@ static int grid_glue(int plain) {
         columns = rd_s16(s);
         s += 2;
     }
-    q += (gaddr)(6 * (rows > 1 ? rows - 1 : 0));
     acc = times(v, (int16_t)(columns > 1 ? columns - 1 : 0));
-    a = halved(acc);
-    qv = at(q);
     frame3(-0x46, u);
     frame3(-0x40, v);
     frame3(-0x52, w);
@@ -111,14 +118,33 @@ static int grid_glue(int plain) {
     wr_s16(A(6) - 0x38, counted_down(rows));
     wr_s16(A(6) - 0x3A, counted_down(columns));
     wr_u16(A(6) - 0x7E, result);
-    /* The last face's setup: D4-D6 = q + w + a over q, D1-D3 = that + u over
-     * the half steps; A0 past the first two corners. */
-    regs3(4, qv, add(add(qv, w), a));
-    regs3(1, acc, add(add(add(qv, w), a), u));
-    A(0) = CLIP_INPUT + 16;
-    A(3) = q;
-    A(2) = s;
-    last_face(colour);
+    /* Each face's setup: D4-D6 = q + w + a over q, D1-D3 = that + u over the
+     * half steps; A0 past the first two corners. */
+    s = start + (plain ? 6 : 4);
+    q = base + 18;
+    for (r = rows;;) {
+        int16_t left = rd_s16(s);
+        s += 2;
+        along.x[0] = along.x[1] = along.x[2] = 0;
+        for (;;) {
+            a = halved(along);
+            qv = at(q);
+            {
+                V3 far = add(add(qv, w), a), near = add(qv, a);
+                write_face(near, add(near, u), add(far, u), far);
+                regs3(4, qv, far);
+                regs3(1, along, add(far, u));
+            }
+            A(0) = CLIP_INPUT + 16;
+            A(3) = q;
+            A(2) = s;
+            face_call(&snap, colour);
+            if (--left <= 0) break;
+            along = add(along, v);
+        }
+        if (--r <= 0) break;
+        q += 6;
+    }
     A(2) = s;
     A(3) = q;
     A(1) = a1;
@@ -136,8 +162,11 @@ static int lattice_glue(int plain) {
     uint32_t a1 = A(1), a2, a5 = A(5);
     uint16_t colour, result;
     int16_t count;
-    V3 u, v, h, far1, far2, acc, a;
+    V3 u, v, h, far1, far2, acc, along, a;
+    int16_t n;
+    ClipperSnapshot snap;
 
+    clipper_snapshot(&snap);
     result = (uint16_t)(plain ? draw_face_lattice_plain(&stream) : draw_face_lattice(&stream));
     colour = rd_u16(CURRENT_COLOUR);
     if (plain) s += 2;
@@ -161,15 +190,42 @@ static int lattice_glue(int plain) {
     wr_s16(A(6) - 0x38, counted_down(count));
     wr_s16(A(6) - 0x3A, counted_down(count));
     wr_u16(A(6) - 0x7E, result);
-    /* The last face (second loop): D4-D6 = far2 - a over far2, D1-D3 = that
-     * - u over the half steps. The loop keeps A3/A4 only round the first
-     * loop's calls. */
-    regs3(4, far2, sub(far2, a));
-    regs3(1, acc, sub(sub(far2, a), u));
+    /* Each face: D4-D6 = the far corner over the vertex it came from, D1-D3
+     * = the corner across from it over the half steps. The second loop runs
+     * back from the far edge, so its faces subtract. */
     A(0) = CLIP_INPUT + 16;
-    A(3) = p2a;
-    A(4) = p2a + 6;
-    last_face(colour);
+    along.x[0] = along.x[1] = along.x[2] = 0;
+    for (n = count;;) {
+        V3 near, far;
+        a = halved(along);
+        near = add(at(p2a), a);
+        far = add(at(p2a + 6), a);
+        write_face(near, add(near, u), add(far, u), far);
+        regs3(4, at(p2a + 6), far);
+        regs3(1, along, add(far, u));
+        A(0) = CLIP_INPUT + 16;
+        A(3) = p2a;
+        A(4) = p2a + 6;
+        face_call(&snap, colour);
+        if (--n <= 0) break;
+        along = add(along, v);
+    }
+    along.x[0] = along.x[1] = along.x[2] = 0;
+    for (n = count;;) {
+        V3 near, far;
+        a = halved(along);
+        near = sub(far1, a);
+        far = sub(far2, a);
+        write_face(near, sub(near, u), sub(far, u), far);
+        regs3(4, far2, far);
+        regs3(1, along, sub(far, u));
+        A(0) = CLIP_INPUT + 16;
+        A(3) = p2a;
+        A(4) = p2a + 6;
+        face_call(&snap, colour);
+        if (--n <= 0) break;
+        along = add(along, v);
+    }
     A(1) = a1;
     A(2) = a2;
     A(5) = a5;
@@ -178,5 +234,8 @@ static int lattice_glue(int plain) {
     return glue_return();
 }
 
+/* $C20A52 is not registered: two of its calls end with a clipper call that
+ * exits early, so D7's high word comes from an earlier face's draw, and
+ * that draw's BLTSIZE and last row are gone by the time the glue runs. */
 int glue_C20A52(void) { return lattice_glue(0); }
 int glue_C20A40(void) { return lattice_glue(1); }

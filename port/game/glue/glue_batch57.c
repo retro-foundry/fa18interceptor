@@ -92,21 +92,31 @@ behind:
     return glue_return();
 }
 
-/* ---- $C21060 (not registered yet: D7's high word, as in glue_batch58.c) -- */
+/* ---- $C21060 ------------------------------------------------------------- */
+
+/* One quad's vertices into the clipper input, as the C wrote them: every
+ * call to the clipper is replayed, and each needs its own quad there. */
+static void write_quad(gaddr offsets) {
+    gaddr in = CLIP_INPUT + 4;
+    int k;
+    for (k = 0; k < 4; k++, in += 6) {
+        gaddr v = WORKSPACES + SEXT(rd_u16(offsets + (gaddr)(2 * k)));
+        wr_u32(in, rd_u32(v));
+        wr_u16(in + 4, rd_u16(v + 4));
+    }
+}
 
 int glue_C21060(void) {
-    gaddr stream = A(2), s;
+    gaddr stream = A(2), quad = 0;
     uint32_t a1 = A(1), a5 = A(5);
     uint16_t result = 0;
-    int last = -1, i, k;
+    ClipperSnapshot snap;
+    int i, k;
 
+    /* Taken before the C, and carried from quad to quad: each call replays
+     * from the clip state the one before it left. */
+    clipper_snapshot(&snap);
     result = (uint16_t)draw_quad_list(&stream);
-    /* The last quad that reached the clipper. */
-    for (s = A(2), i = 0; rd_s16(s) >= 0; s += 8, i++) {
-        uint16_t behind = 0xFFFF;
-        for (k = 0; k < 4; k++) behind &= rd_u16(WORKSPACES + SEXT(rd_u16(s + (gaddr)(2 * k))) + 4);
-        if ((int16_t)behind >= 0) last = i;
-    }
     SET_W(D(0), 8);
     SET_W(D(1), 8);
     SET_W(D(2), 0);
@@ -122,15 +132,20 @@ int glue_C21060(void) {
         A(4) = WORKSPACES + SEXT(D(4)) + 4;
         SET_W(D(6), rd_u16(WORKSPACES + SEXT(D(1)) + 4) & rd_u16(WORKSPACES + SEXT(D(2)) + 4) &
                         rd_u16(WORKSPACES + SEXT(D(3)) + 4) & rd_u16(WORKSPACES + SEXT(D(4)) + 4));
+        quad = A(2) - 8;
         if (W(6) < 0) continue;
         {
             uint32_t a2 = A(2);
             /* D0 is ORed into the result whatever the replay leaves it as;
-             * only the last call's registers are rebuilt. */
-            if (i == last) last_clipper_call(12, -1);
+             * D7's high word carries from one call to the next, so every
+             * call is replayed, not just the last. */
+            write_quad(quad);
+            snap.last_size = fa18_bltsize_at_draw_start;
+            clipper_registers(&snap, 12, -1);
             A(2) = a2;
         }
     }
+    if (quad) write_quad(quad);
     wr_u16(A(6) - 0x7E, result);
     A(1) = a1;
     A(5) = a5;
