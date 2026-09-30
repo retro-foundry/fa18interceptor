@@ -134,10 +134,12 @@ uint16_t draw_history_projection(HistoryProjectionWork *work) {
         radius_pack = (radius_pack & 0xFFFF0000u) | (uint16_t)radius;
         work->final_interpolated = work->previous_radius >= 0 &&
                                    rd_s8(work->record + 0x3D) > 1;
-        work->final_prior_y = work->previous[1];
+        for (i = 0; i < 3; ++i) work->final_prior[i] = work->previous[i];
         if (work->final_interpolated) {
             int shift = (work->previous_shift - work->shift) & 63;
             work->final_shift_difference = (int16_t)(work->previous_shift - work->shift);
+            work->final_interpolation_d3 = word_asr((int16_t)
+                ((uint16_t)word_asl(work->previous[0], shift) - (uint16_t)current[0]), 2);
             work->final_interpolation_d4 = word_asr((int16_t)
                 ((uint16_t)word_asl(work->previous[1], shift) - (uint16_t)current[1]), 2);
             work->final_interpolation_d5 = word_asr((int16_t)

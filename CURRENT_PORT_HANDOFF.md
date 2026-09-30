@@ -56,13 +56,18 @@ for it.
 draft in `history_projection.c` and an unregistered bridge in
 `glue_history_projection.c` (next step after `b05758ab`). A 10,500-frame
 demo sandbox probe matched all tested memory and custom-register writes.
-Register replay still fails on 47 active calls: the first active calls now
+Register replay still fails on 11 active calls in the 10,500-frame demo probe:
+the first active calls now
 match after accounting for `MOVEM.W` sign extension following intermediate
 projections. A trace of source call 777 showed that when the last intermediate
 and final projections both reject, D4/D5 retain the quarter deltas and A4
 retains the shift difference; the C bridge now reproduces that case. The
-next 10,500-frame probe starts differing at call 757 in D1's high word and
-D3 (source return versus port), so register replay still needs tracing.
+the following trace of source call 782 showed that `MOVEM.W` also sign extends
+D1 and that D3 must enter the final projection with the quarter x delta.
+The remaining mismatches begin at port call 801 and affect only D3's high
+word (reference `FFFF`, C `0000`). Trace the matching source call, likely
+826, through the final interpolation and projection to identify that high
+word's provenance.
 Keep it unregistered until that path is
 traced and all three recordings pass the full gate. The verified count
 remains 380.

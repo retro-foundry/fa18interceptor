@@ -25,20 +25,25 @@ int glue_C0D04C(void) {
         D(5) = (uint32_t)work.final_z_full;
         D(6) = work.final_d6;
         if (work.final_interpolated) {
+            D(1) = (uint32_t)(int32_t)(int16_t)D(1);
             D(2) = (uint32_t)(int32_t)(int16_t)D(2);
             D(4) = (D(4) & 0xFFFFu) |
-                   ((uint32_t)(int32_t)work.final_prior_y & 0xFFFF0000u);
+                   ((uint32_t)(int32_t)work.final_prior[1] & 0xFFFF0000u);
             D(6) = (uint32_t)(int32_t)(int16_t)D(6);
         }
         A(0) = matrix + 18;
         A(3) = (uint32_t)(int32_t)work.previous_shift;
-        projection_mode_registers(-4, 2);
         if (work.final_interpolated && !work.final_intermediate_drawn &&
             !work.final_point_drawn) {
-            D(4) = (uint32_t)(int32_t)work.final_interpolation_d4;
-            D(5) = (uint32_t)(int32_t)work.final_interpolation_d5;
+            D(3) = ((uint32_t)(int32_t)work.final_prior[0] & 0xFFFF0000u) |
+                   (uint16_t)work.final_interpolation_d3;
+            D(4) = ((uint32_t)(int32_t)work.final_prior[1] & 0xFFFF0000u) |
+                   (uint16_t)work.final_interpolation_d4;
+            D(5) = ((uint32_t)(int32_t)work.final_prior[2] & 0xFFFF0000u) |
+                   (uint16_t)work.final_interpolation_d5;
             A(4) = (uint32_t)(int32_t)work.final_shift_difference;
         }
+        projection_mode_registers(-4, 2);
     }
     if (work.record) SET_W(D(0), result);
     else D(0) = 0;
