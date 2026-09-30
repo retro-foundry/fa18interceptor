@@ -23,3 +23,4 @@ uint16_t custom_written(unsigned reg) { return written[(reg & 0x1FE) >> 1]; }
 uint16_t custom_read(unsigned reg) { return fa18_bus_read16(CUSTOM_BASE + reg); }
 
 void wait_blitter(void) { fa18_machine_wait_blitter(); }
+uint16_t count_blitter_polls(void) { return fa18_machine_count_blitter_polls(); }

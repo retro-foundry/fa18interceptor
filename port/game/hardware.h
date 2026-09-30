@@ -43,5 +43,6 @@ uint16_t custom_written(unsigned reg);
 
 /* Wait until the blitter has finished its current operation. */
 void wait_blitter(void);
+uint16_t count_blitter_polls(void);
 
 #endif

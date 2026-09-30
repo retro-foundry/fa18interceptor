@@ -215,11 +215,17 @@ part that is not, stays on the work side.
    machine timing or the translation (the check then says the run no
    longer ends as sealed).
 1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
-   `$C2FD8C` is newly ready after the display-record pair. It submits four
+   `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
+   `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon
    submission and optional `$C30466` composite, followed by `$C0D74A` and
    a 22-byte record copy or clear. Its blitter waits and busy-poll counters
-   need source-accurate C. Evidence is in
+   need source-accurate C. A demo01 shadow probe found five counted-wait
+   mismatches: the shadow runner holds custom-register writes during the C
+   trial, so its C blits never become busy. The draft is deliberately absent
+   from `ports.c`; prove its hardware path with a sandbox comparison and fix
+   the provisional 56-cycle poll in `fa18_machine_count_blitter_polls` before
+   registering it. Evidence is in
    `analysis/routines/c2fd8c_first_active_plane_submission.md`,
    `c2fdf4_remaining_active_plane_submissions.md`, and
    `c2fede_selected_table_display_stage.md`; the isolated orchestration is

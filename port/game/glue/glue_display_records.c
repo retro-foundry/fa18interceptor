@@ -123,17 +123,19 @@ static void selector_registers(int result) {
     flags_logic_l(D(0));
 }
 
-static int run(int wide) {
+int display_records_with_registers(int wide) {
     DisplayRecordHooks hooks = {project_edges, &wide};
     int result = prepare_display_records(wide, &hooks);
     selector_registers(result);
-    return glue_return();
+    return result;
 }
 
 int glue_C0D74A(void) {
-    return run(1);
+    display_records_with_registers(1);
+    return glue_return();
 }
 
 int glue_C0D752(void) {
-    return run(0);
+    display_records_with_registers(0);
+    return glue_return();
 }

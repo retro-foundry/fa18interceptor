@@ -526,6 +526,10 @@
 #define DISPLAY_SELECTION_WORD_B 0xC456E8u
 #define DISPLAY_SELECTION_LONG   0xC456EAu
 #define DISPLAY_SELECTION_FLAG   0xC4589Eu
+#define DISPLAY_SECONDARY_RECORD 0xC4B432u /* selected wide record copy ($C2FF2E) */
+#define ACTIVE_PLANE_BUSY_1 0xC4591Cu /* long: first counted busy wait ($C2FE0A) */
+#define ACTIVE_PLANE_BUSY_2 0xC45920u /* long: second counted busy wait ($C2FE60) */
+#define ACTIVE_PLANE_BUSY_3 0xC45924u /* long: third counted busy wait ($C2FEAA) */
 #define CROSSING_COUNTS    0xC4E854u /* word[4]: crossings through y = z, x = z, y = -z, x = -z */
 #define CROSSING_LAST      0xC4E85Cu /* word[4]: the corner of each plane's last crossing */
 #define CORNER_SCREEN      0xC4B990u /* word[2] per corner: its edge's entry point on screen */

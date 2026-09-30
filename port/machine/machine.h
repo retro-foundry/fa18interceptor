@@ -119,6 +119,8 @@ void fa18_machine_beam(int *vpos, int *hpos);
 int fa18_machine_service(void);
 int fa18_machine_event_due(void);
 void fa18_machine_wait_blitter(void);
+/* Provisional counted BBUSY loop for the inactive $C2FD8C port. */
+uint16_t fa18_machine_count_blitter_polls(void);
 
 static inline uint16_t fa18_chip16(const FA18Machine *m, uint32_t a) {
     a &= FA18_CHIP_SIZE - 2;

@@ -621,6 +621,15 @@ void fa18_machine_wait_blitter(void) {
     if (blit_pending && now < blit_end) USE_CYCLES((int)(blit_end - now));
 }
 
+uint16_t fa18_machine_count_blitter_polls(void) {
+    uint16_t polls = 0;
+    while (blit_pending && now_cycle() < blit_end) {
+        ++polls;
+        USE_CYCLES(56);
+    }
+    return polls;
+}
+
 int fa18_machine_event_due(void) {
     return frame_done || fa18_cycle_origin - GET_CYCLES() >= fa18_next_event;
 }
