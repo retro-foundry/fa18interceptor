@@ -119,8 +119,12 @@ static void special(void *context) {
     SET_W(D(0), rd_u16(STREAM_MODE));
 }
 
-int glue_C28722(void) {
+void scene_mode_run_with_registers(void) {
     SceneDispatchHooks hooks = {after_date, selected, scan, finished, special, 0};
     initialize_scene_from_mode(&hooks);
+}
+
+int glue_C28722(void) {
+    scene_mode_run_with_registers();
     return glue_return();
 }

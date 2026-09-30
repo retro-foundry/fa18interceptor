@@ -9,8 +9,34 @@
 #include "player_input.h"
 #include "render_buffers.h"
 #include "scene_setup.h"
+#include "scene_dispatch.h"
 #include "target_heading.h"
 #include "view.h"
+
+void initialize_scene_state(const SceneStartHooks *hooks) {
+    wr_u8(SCENE_DISPATCH_LIMIT_PREVIOUS, rd_u8(SCENE_DISPATCH_LIMIT));
+    wr_u8(SCENE_DISPATCH_LIMIT, 0);
+    wr_u8(SCENE_POSE_ENTRY, 4);
+    wr_u8(SCENE_POSE_ENTRY, 3);
+    wr_u8(CONTEXT_STATE, 0);
+    wr_u8(PAUSE_A, 0);
+    wr_u8(RECORDER_ON, 1);
+    if (hooks && hooks->select_scene) hooks->select_scene(hooks->context);
+    else initialize_scene_from_mode(0);
+    wr_u8(MODE_SELECT, 3);
+    if (hooks && hooks->reset_root) hooks->reset_root(hooks->context);
+    else reset_scene_context();
+    if (hooks && hooks->reset_messages) hooks->reset_messages(hooks->context);
+    else reset_message_sequence();
+    wr_u8(CONTEXT_GATE, 0);
+    wr_u8(POST_INPUT_AUX, 1);
+    wr_u16(SPAN_ORIGIN, 0);
+    wr_u16(SPAN_ORIGIN_Y, 0);
+    if (hooks && hooks->finish) hooks->finish(hooks->context);
+    else finish_scene_setup();
+    wr_u8(UPDATE_MASK, 0xFF);
+    wr_u16(POST_INPUT_COUNTDOWN, 1);
+}
 
 void queue_post_input_context_command(void) {
     gaddr write = MESSAGE_QUEUE;

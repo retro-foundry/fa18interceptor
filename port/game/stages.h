@@ -29,6 +29,17 @@ void restart_postflight_scene(void);
  * optional heading marker, then install the next callback. */
 void queue_post_input_context_command(void);
 
+/* $C0FAA4: reset and enter a scene. Glue supplies the ordered child calls
+ * when their register effects must be replayed. */
+typedef struct SceneStartHooks {
+    void (*select_scene)(void *context);
+    void (*reset_root)(void *context);
+    void (*reset_messages)(void *context);
+    void (*finish)(void *context);
+    void *context;
+} SceneStartHooks;
+void initialize_scene_state(const SceneStartHooks *hooks);
+
 /* Count a byte timer down to zero; negative timers are stopped. */
 void tick_timer(gaddr timer);
 

@@ -57,6 +57,7 @@
 #define SCENE_DISPATCH_AUX      0xC458ABu /* byte: cleared at scene dispatch entry ($C2872E) */
 #define SCENE_DISPATCH_GATE     0xC45782u /* word: cleared at scene dispatch entry ($C28734) */
 #define SCENE_DISPATCH_LIMIT    0xC458A7u /* byte: maximum low-seven-bit stream selector ($C287A6) */
+#define SCENE_DISPATCH_LIMIT_PREVIOUS 0xC458A8u /* byte: saved before scene initialization ($C0FAA4) */
 #define SCENE_DISPATCH_TABLE    0xC297D2u /* mode/variant stream-offset table ($C28760) */
 #define SCENE_DISPATCH_VARIANT  0xC45B1Cu /* word: retained variant when SEQUENCE_FLAG is set ($C2877A) */
 #define SCENE_DISPATCH_BITS     0xC45AF8u /* word: two small signed coordinate adjustments ($C28CAE) */
