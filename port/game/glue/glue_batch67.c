@@ -195,13 +195,13 @@ int glue_C3003A(void) {
  * so the glue never repeats their work. Everything the body computes is
  * overwritten by the orientation's own registers except D1's high word
  * (from the track), A4 (the view table entry) and the two early returns. */
-int glue_C28800(void) {
+void aim_record_registers(int apply) {
     gaddr record = A(0), source = A(2);
     int16_t select = rd_s16(source + 4);
     uint32_t d1 = D(1), d2 = D(2);
     int32_t x, y = 0, z;
 
-    aim_record_at_view(record, source);
+    if (apply) aim_record_at_view(record, source);
 
     if (select < 0) {
         int16_t at = (int16_t)(select & 0x7F00), v[5];
@@ -211,7 +211,7 @@ int glue_C28800(void) {
         SET_W(d1, (uint16_t)at);
         if (!at) {
             D(1) = d1;
-            return glue_return();
+            return;
         }
         at = (int16_t)(at >> 7);
         SET_W(d1, (uint16_t)at);
@@ -230,7 +230,7 @@ int glue_C28800(void) {
         if (!(uint16_t)d1) {
             D(1) = d1;
             D(2) = d2;
-            return glue_return();
+            return;
         }
         x = rd_s32(other + 0x14);
         z = rd_s32(other + 0x1C);
@@ -245,6 +245,10 @@ int glue_C28800(void) {
     A(0) = record;
     A(1) = record;
     record_orientation_registers(record, 0, 0xFFFF0000u | rd_u16(TRACKED_HEADING), 0);
+}
+
+int glue_C28800(void) {
+    aim_record_registers(1);
     return glue_return();
 }
 

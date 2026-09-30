@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 362; 796,494 calls matching in shadow and 1,029,169 in the sandbox pass over three native recordings; poison-clean. The shadow total fell because the registered panel mark now contains formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 365; 796,489 calls matching in shadow and 1,029,164 in the sandbox pass over three native recordings; poison-clean. The new scene initialization parent contains formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -54,6 +54,16 @@ for it.
 
 All of these are registered and matching over all three recordings:
 
+- `$C25070` `refresh_post_input_heading` (`target_heading.c`) - scans the
+  post-input record list, transforms the selected record's point, tracks its
+  heading and formats the three output digits; both demo calls matched.
+- `$C28B34` `dispatch_scene_records` and `$C28AFE`
+  `initialize_scene_record` (`scene_dispatch.c`) - copy scene pointers,
+  filter entries, create and orient control records, then aim a newly
+  created record. The dispatcher matched 15 direct shadow calls in focused
+  probes before its parent was registered; the parent matched 14 calls in
+  the full proof. The full report lists the direct dispatcher as uncalled
+  because those calls are now inside the ported parent.
 - `$C3003A` `draw_panel_mark` (`hud_bars.c`) - the panel blit, mark polygon,
   line and individual pixels. Its glue replays the entire chain's register
   effects; 3,133 shadow calls matched across the three recordings.

@@ -42,6 +42,8 @@
 /* ---- numerals ------------------------------------------------------------ */
 #define DISPLAY_VALUE      0xC45B1Eu /* long: value to show ($C25A08) */
 #define DISPLAY_VALUE_BCD  0xC45B22u /* long: the same as eight packed BCD digits */
+#define POST_INPUT_RECORD_LIST 0xC4573Au /* long: signed-word-terminated 10-byte entries scanned by $C25070 */
+#define POST_INPUT_HEADING_TEXT 0xC40E7Fu /* three output bytes from $C25070 (base $C40E6E + $11) */
 
 /* ---- input ---------------------------------------------------------------- */
 #define CIAA_PORT_COPY     0xC1839Au /* byte: last CIA-A port A; bit 6 = /FIR0 ($C1715C) */
@@ -50,6 +52,11 @@
  * Sixteen 512-byte records at $C46184, selected by index << 9 (memory map). */
 #define SCENE_POINTER_TABLE 0xC22048u /* scene pointer triplets, $C22048-$C22C74 */
 #define SCENE_POINTERS     0xC22188u /* long[5]: the scene's pointers, copied from that table */
+#define SCENE_DISPATCH_ADMITTED 0xC458AAu /* signed byte: must exceed SCENE_DISPATCH_CREATED ($C28BC2) */
+#define SCENE_DISPATCH_CREATED  0xC458A9u /* signed byte: incremented for created class-$10 records ($C28C4A) */
+#define SCENE_DISPATCH_BITS     0xC45AF8u /* word: two small signed coordinate adjustments ($C28CAE) */
+#define SCENE_DISPATCH_SHIFT_X  0xC45B18u /* word: first coordinate adjustment ($C28CA6/$C28CC6) */
+#define SCENE_DISPATCH_SHIFT_Z  0xC45B1Au /* word: second coordinate adjustment ($C28CA8/$C28CEE) */
 #define SCENE_POSE_TABLE   0xC42A02u /* 16-byte scene pose entries ($C093A2) */
 #define SCENE_POSE_ENTRY   0xC45848u /* byte: which SCENE_POSE_TABLE entry the root takes */
 #define GRID_ADJUST_WORDS  0xC1D7E2u /* 61 signed word pairs, $C1D7E2-$C1D8D5 ($C0941C) */

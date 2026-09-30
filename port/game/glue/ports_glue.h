@@ -549,4 +549,13 @@ int glue_C092A0(void);
 int glue_C11788(void);
 int glue_C11830(void);
 
+/* post-input heading formatter () */
+int glue_C25070(void);
+
+/* scene record stream dispatch () */
+int glue_C28B34(void);
+
+/* scene record initialization and aim () */
+int glue_C28AFE(void);
+
 #endif

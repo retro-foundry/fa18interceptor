@@ -15,7 +15,7 @@ void vertex_tail_registers(void); /* glue_batch20.c */
 
 /* The transform's leftovers: D0-D2 the result, D3 = x * m6, D5 = z * m8,
  * D6 = x * m3, D7 = z * m5 (full products); D4 is only read. */
-static void world_registers(gaddr record, gaddr matrix) {
+void world_registers(gaddr record, gaddr matrix) {
     int16_t x = (int16_t)D(3), y = (int16_t)D(4), z = (int16_t)D(5);
     int32_t out[3];
     local_to_world(record, matrix, x, y, z, out);

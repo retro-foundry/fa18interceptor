@@ -80,6 +80,8 @@ int prepare_polygon_to_row_registers(uint16_t last_size);
 void blit_lane_registers(void);
 void clear_mask_registers(void);
 void mark_polygon_registers(uint16_t last_size);
+/* $C091E0's transform products and result, from D3-D5 and the record. */
+void world_registers(gaddr record, gaddr matrix);
 
 /* $C2F64E's and $C2F63A's the same way. */
 void square_registers(void);

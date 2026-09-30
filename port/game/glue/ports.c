@@ -469,6 +469,12 @@ const FA18Port fa18_ports[] = {
     {0xC11830, glue_C11830, "restart_postflight_scene", 3900},
     /* panel mark drawing () */
     {0xC3003A, glue_C3003A, "draw_panel_mark", 12000},
+    /* post-input heading formatter () */
+    {0xC25070, glue_C25070, "refresh_post_input_heading", 5500},
+    /* scene record stream dispatch () */
+    {0xC28B34, glue_C28B34, "dispatch_scene_records", 12000},
+    /* scene record initialization and aim () */
+    {0xC28AFE, glue_C28AFE, "initialize_scene_record", 18000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;
