@@ -1,5 +1,4 @@
-/* Selected control-record setup and phase update ($C13D84-$C1414E).
- * The remainder of $C13D84 is not yet registered. */
+/* Indexed control-record phase, signed response, and damping ($C13D84). */
 #include "indexed_record_update.h"
 
 #include "globals.h"
@@ -204,6 +203,105 @@ void settle_empty_indexed_record(IndexedRecordWork *work) {
     work->neg_word_6c = value;
 }
 
+static int16_t toward_bound_without_flag(IndexedRecordWork *work, int16_t bound) {
+    gaddr record = work->record;
+    int16_t current = work->current_word_6c;
+    int16_t neg = work->neg_word_6c;
+
+    bound = (int16_t)(bound - (bound >> 2));
+    if (rd_u8(record + 0x20) & 1u) bound = (int16_t)(bound >> 2);
+    if (bound > 0x1FEF) bound = 0x1FEF;
+    bound = (int16_t)(bound - work->attitude_adjustment);
+    if (rd_u16(record) & 0x0800u) bound = (int16_t)(bound - (bound >> 2));
+    if (!(rd_u8(record + 0x7C) & 0x70u)) bound = (int16_t)(bound - (bound >> 2));
+    work->comparison_bound = bound;
+
+    if (current < bound) {
+        if (neg > 0) neg = (int16_t)(neg - 0x78);
+        else neg = (int16_t)(neg - ((int32_t)bound - current < 0x150 ? 5 : 0x2A));
+        if ((int16_t)-neg > bound) neg = (int16_t)-bound;
+    } else if ((int32_t)current > (int32_t)bound + 0x3C) {
+        if (current > 0x1D4C) neg = (int16_t)(neg + 0x52);
+        else neg = (int16_t)(neg + ((int32_t)current - bound < 0x1E0 ? 7 : 0x3C));
+    }
+    return neg;
+}
+
+static int16_t toward_bound_with_flag(IndexedRecordWork *work, int16_t bound) {
+    gaddr record = work->record;
+    int16_t current = work->current_word_6c;
+    int16_t delta = 0;
+    uint8_t flags = rd_u8(record + 4);
+
+    bound = (int16_t)(bound - (bound >> 2));
+    if (!(flags & 0x08u) && rd_s8(record + 0x2B) < 0x0C) bound = 0;
+    if (!(flags & 0x44u)) bound = (int16_t)(bound >> 1);
+    else if (rd_u8(record + 0x20) & 1u) bound = 0;
+    work->comparison_bound = bound;
+
+    if (current < bound) {
+        if (work->neg_word_6c > 0) delta = -0x78;
+        else delta = (int16_t)-((int16_t)((int16_t)(bound - current) >> 8) +
+                                 ((flags & 0x08u) ? 0x42 : 0x16));
+    } else if ((int32_t)current > (int32_t)bound + 15) delta = 15;
+    ease_record_26(delta);
+    if (delta) work->neg_word_6c = (int16_t)(work->neg_word_6c + rd_s16(record + 0x26));
+    return bound;
+}
+
+void update_indexed_other_route(IndexedRecordWork *work) {
+    gaddr record = work->record;
+    int16_t phase_value = work->phase_byte_scaled;
+    int16_t magnitude = phase_value < 0 ? (int16_t)-phase_value : phase_value;
+    int16_t reduction = (int16_t)(magnitude >> 9);
+    uint16_t h = header(record);
+
+    wr_u32(record + 0x72, rd_u32(record + 0x72) - (uint32_t)(int32_t)reduction);
+    if (phase_value >= 0) {
+        work->current_word_6c = (int16_t)-work->neg_word_6c;
+        if (h & 0x0080u) {
+            int16_t bound = (int16_t)(phase_value >> 3);
+            toward_bound_with_flag(work, bound);
+        } else {
+            int16_t bound = (int16_t)(phase_value >> 1);
+            bound = (int16_t)(bound - (phase_value >> 3));
+            work->neg_word_6c = toward_bound_without_flag(work, bound);
+        }
+    } else if (!(h & 0x0080u)) {
+        int16_t neg = work->neg_word_6c;
+        if (neg < 0) neg = (int16_t)(neg + 0x57);
+        else {
+            int16_t bound = (int16_t)-phase_value;
+            bound = (int16_t)(bound - (bound >> 2));
+            if (neg > bound) neg = (int16_t)(neg - 0x2A);
+            else if (neg < (int16_t)(bound - 0x2A)) neg = (int16_t)(neg + 0x2A);
+        }
+        work->neg_word_6c = neg;
+    } else {
+        int16_t delta = 0;
+        if (work->neg_word_6c < 0) delta = 0x3C;
+        else {
+            int16_t bound = (int16_t)((int16_t)-phase_value >> 4);
+            bound = (int16_t)(bound - (bound >> 2));
+            if (!(rd_u8(record + 4) & 0x04u)) bound = (int16_t)(bound >> 1);
+            if (work->neg_word_6c > bound) delta = -0x16;
+            else if (work->neg_word_6c < (int16_t)(bound - 0x16)) delta = 0x16;
+            work->comparison_bound = bound;
+        }
+        ease_record_26(delta);
+        if (delta) work->neg_word_6c = (int16_t)(work->neg_word_6c + rd_s16(record + 0x26));
+    }
+}
+
+void update_indexed_record(IndexedRecordWork *work) {
+    IndexedSignedRoute route;
+    prepare_indexed_record_context(work);
+    route = prepare_indexed_signed_terms(work);
+    if (route == INDEXED_EMPTY_ROUTE) settle_empty_indexed_record(work);
+    else if (route == INDEXED_OTHER_ROUTE) update_indexed_other_route(work);
+    finish_indexed_record_update(work);
+}
+
 void finish_indexed_record_update(IndexedRecordWork *work) {
     gaddr record = work->record;
     gaddr word_6c = record + 0x6C;
@@ -237,6 +335,11 @@ void finish_indexed_record_update(IndexedRecordWork *work) {
         if (phase_value < 0x6C && phase_value > -0x6C) decay_outside_limit(word_6c, 7, 3);
         else wr_u16(word_6c, (uint16_t)value);
     }
+    work->helper_record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+    work->helper_m6c = rd_s16(work->helper_record + 0x6C);
+    work->helper_m6e = rd_s16(work->helper_record + 0x6E);
+    work->helper_old76 = rd_s16(work->helper_record + 0x76);
+    work->helper_enabled = rd_u8(RECORD_UPDATES_ON) != 0;
     update_record_76_78();
     record = rd_u32(CURRENT_RECORD);
     wr_u16(record + 0x6E, (uint16_t)(rd_u16(record + 0x78) + rd_u16(record + 0x6C)));

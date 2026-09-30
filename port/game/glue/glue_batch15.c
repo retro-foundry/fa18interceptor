@@ -38,19 +38,15 @@ static int16_t sine8_at(int16_t index) {
 
 /* $C26428: leaves the trig terms in D3.w/D4.w; D1's high word is MULS's,
  * D0's is cleared when a table index was clamped. */
-int glue_C26428(void) {
-    gaddr r = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
-    int16_t m6c = rd_s16(r + 0x6C), m6e = rd_s16(r + 0x6E), angle = (int16_t)(rd_s16(r + 0x66) >> 3);
+void record_76_78_registers(gaddr r, int16_t m6c, int16_t m6e,
+                            int16_t old76, int enabled) {
+    int16_t angle = (int16_t)(rd_s16(r + 0x66) >> 3);
     int16_t i6c = (int16_t)((int16_t)(m6c < 0 ? -m6c : m6c) >> 7);
     int16_t i6e = (int16_t)((int16_t)(m6e < 0 ? -m6e : m6e) >> 7);
-    int16_t index, cosine_term, limit, old76 = rd_s16(r + 0x76), target76;
+    int16_t index, cosine_term, limit, target76;
     int32_t product;
 
-    if (!rd_u8(RECORD_UPDATES_ON)) {
-        update_record_76_78();
-        return glue_return();
-    }
-    update_record_76_78();
+    if (!enabled) return;
 
     if (i6c > 30) i6c = 30;
     limit = rd_s16(TABLE_78_LIMIT + (gaddr)(int32_t)(int16_t)(i6c * 2));
@@ -65,5 +61,13 @@ int glue_C26428(void) {
     D(1) = ((uint32_t)product & 0xFFFF0000u) | (uint16_t)(old76 - (int16_t)((int16_t)(old76 - target76) >> 6));
     if ((int16_t)((int16_t)(m6c < 0 ? -m6c : m6c) >> 7) > 30 || i6e > 30) D(0) &= 0xFFFFu;
     SET_W(D(0), (int16_t)((int16_t)(old76 - target76) >> 6));
+}
+
+int glue_C26428(void) {
+    gaddr r = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+    int16_t m6c = rd_s16(r + 0x6C), m6e = rd_s16(r + 0x6E), old76 = rd_s16(r + 0x76);
+    int enabled = rd_u8(RECORD_UPDATES_ON) != 0;
+    update_record_76_78();
+    record_76_78_registers(r, m6c, m6e, old76, enabled);
     return glue_return();
 }

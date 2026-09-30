@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 377; 736,396 calls matching in shadow and 927,924 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 378; 731,823 calls matching in shadow and 920,240 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -234,15 +234,16 @@ part that is not, stays on the work side.
    `c2fdf4_remaining_active_plane_submissions.md`, and
    `c2fede_selected_table_display_stage.md`; the isolated orchestration is
    `port/selected_table_display_stage.c`.
-   Other ready larger candidates include `$C13D84` and `$C26EBE`.
-   `$C13D84` has an inactive C opening block in `indexed_record_update.c`
-   through `$C1414E`: it selects the indexed record, updates its +$2B phase,
-   +$65 controls, header flags, paired control words and event bytes. The
-   signed setup and header-bit-3 route through `$C142A5`, the empty route
-   `$C14600-$C146C1`, and the common tail `$C146C2-$C14874` are also in C.
-   The central `$C142A6-$C145FC` arithmetic routes and caller-visible
-   register glue still need work; this draft is not registered or
-   source-compared.
+   `$C13D84` is now registered (`indexed_record_update.c`,
+   `glue_indexed_record_update.c`). Its indexed selection, phase and control
+   updates, signed response routes, damping, child `$C26428` call and final
+   +$6E result are in C. The glue replays the child's live register effects.
+   Focused proof over the three native recordings matched 4,501 completed
+   shadow calls and 4,636 sandbox calls with zero mismatches; 120 shadow
+   calls were interrupted before comparison. The full 378-routine gate passed:
+   731,823 shadow matches, 920,240 sandbox matches and identical poison
+   frames. All 10 parity frames 393-402 remained pixel-exact. `$C26EBE` is
+   the next ready large candidate.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof

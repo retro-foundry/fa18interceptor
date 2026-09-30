@@ -498,6 +498,8 @@ const FA18Port fa18_ports[] = {
     {0xC2D99C, glue_C2D99C, "dispatch_matrix_route", 12000},
     /* current record matrix update */
     {0xC2D408, glue_C2D408, "update_record_matrix", 9500},
+    /* indexed control-record update */
+    {0xC13D84, glue_C13D84, "update_indexed_record", 18000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

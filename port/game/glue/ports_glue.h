@@ -592,4 +592,7 @@ int glue_C2D99C(void);
 /* current record matrix update */
 int glue_C2D408(void);
 
+/* indexed control-record update */
+int glue_C13D84(void);
+
 #endif
