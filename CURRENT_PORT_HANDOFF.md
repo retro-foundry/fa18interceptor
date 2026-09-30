@@ -259,8 +259,12 @@ part that is not, stays on the work side.
    `$C27504-$C278D0` is drafted in `candidate_level_walk.c`, and
    `candidate_record_update.c` now composes the full memory-side routine.
    These additions build and pass strict C syntax checks, but remain
-   unregistered; caller-visible register glue and focused source comparison
-   are next.
+   unregistered. An exploratory demo01 shadow probe through 3,000 frames
+   matched the first two face exits, but 283 completed calls differed after
+   setting the obvious A0/A3 outcomes; the common terminal route still needs
+   D1-D3 register replay. The test registration was removed, so the last
+   passing combined gate still covers 378 routines. `glue_candidate_record_update.c`
+   is an inactive starting point for the remaining register work.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
