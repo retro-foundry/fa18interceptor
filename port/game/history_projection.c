@@ -87,6 +87,15 @@ static int16_t quarter_between(int16_t start, int16_t end, int shift) {
     return (int16_t)((uint16_t)start + (uint16_t)word_asr(difference, shift));
 }
 
+static void record_projection(HistoryProjectionWork *work, const int16_t point[3],
+                              int16_t radius) {
+    int i, index = work->projection_count;
+    if (index >= 512) return;
+    for (i = 0; i < 3; ++i) work->projection_points[index][i] = point[i];
+    work->projection_radii[index] = radius;
+    work->projection_count = index + 1;
+}
+
 static void project_intermediate(HistoryProjectionWork *work,
                                  const int16_t current[3], int16_t radius,
                                  int fraction) {
@@ -105,8 +114,7 @@ static void project_intermediate(HistoryProjectionWork *work,
             point[i] = quarter_between(scaled[i], current[i], right);
         scaled_radius = quarter_between(work->previous_radius, radius, right);
     }
-    for (i = 0; i < 3; ++i) work->final_intermediate_points[fraction - 1][i] = point[i];
-    work->final_intermediate_radii[fraction - 1] = scaled_radius;
+    record_projection(work, point, scaled_radius);
     work->final_intermediate_drawn = project_view_point_mode(point[0], point[1], point[2],
                                                               -4, work->previous[2], scaled_radius);
     work->drawn |= (uint16_t)work->final_intermediate_drawn;
@@ -160,6 +168,7 @@ uint16_t draw_history_projection(HistoryProjectionWork *work) {
         work->final_y_full = rotated[1];
         work->final_z_full = rotated[2];
         work->final_d6 = (radius_pack & 0xFFFF0000u) | (uint16_t)radius;
+        record_projection(work, current, radius);
         work->final_point_drawn = project_view_point_mode(current[0], current[1],
                                                           current[2], -4, current[2], radius);
         work->drawn |= (uint16_t)work->final_point_drawn;

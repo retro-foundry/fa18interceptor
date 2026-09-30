@@ -10,19 +10,24 @@ void projection_mode_registers(int16_t mode, int entry);
 int glue_C0D04C(void) {
     HistoryProjectionWork work = {0};
     uint16_t result = draw_history_projection(&work);
-    if (work.record) A(1) = work.record;
     if (work.active) {
         int16_t x = work.final_vector[0], y = work.final_vector[1];
         gaddr matrix = VIEW_ANGLE_MATRIX;
-        if (work.final_interpolated) {
+        if (work.projection_count > 1) {
             int i;
-            for (i = 0; i < 3; ++i) {
-                D(0) = (uint32_t)(int32_t)work.final_intermediate_points[i][0];
-                D(1) = (uint32_t)(int32_t)work.final_intermediate_points[i][1];
-                D(2) = (uint32_t)(int32_t)work.final_intermediate_points[i][2];
-                D(6) = (uint32_t)(int32_t)work.final_intermediate_radii[i];
+            int final_start = work.projection_count -
+                              (work.final_interpolated ? 4 : 1);
+            for (i = 0; i < work.projection_count - 1; ++i) {
+                if (i == final_start) A(1) = work.record;
+                D(0) = (uint32_t)(int32_t)work.projection_points[i][0];
+                D(1) = (uint32_t)(int32_t)work.projection_points[i][1];
+                D(2) = (uint32_t)(int32_t)work.projection_points[i][2];
+                D(6) = (uint32_t)(int32_t)work.projection_radii[i];
                 projection_mode_registers(-4, 2);
             }
+            if (final_start == work.projection_count - 1) A(1) = work.record;
+        } else {
+            A(1) = work.record;
         }
         D(0) = ((uint32_t)((int32_t)rd_s16(matrix + 6) * x) & 0xFFFF0000u) |
                (uint16_t)work.previous[0];
@@ -57,6 +62,7 @@ int glue_C0D04C(void) {
         }
         projection_mode_registers(-4, 2);
     }
+    if (!work.active && work.record) A(1) = work.record;
     if (work.record) SET_W(D(0), result);
     else D(0) = 0;
     flags_logic_w(D(0));

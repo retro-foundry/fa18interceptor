@@ -502,6 +502,7 @@ const FA18Port fa18_ports[] = {
     {0xC13D84, glue_C13D84, "update_indexed_record", 18000},
     {0xC26EBE, glue_C26EBE, "update_candidate_record", 25000},
     {0xC23CA6, glue_C23CA6, "update_record_view", 18000},
+    {0xC0D04C, glue_C0D04C, "draw_history_projection", 25000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

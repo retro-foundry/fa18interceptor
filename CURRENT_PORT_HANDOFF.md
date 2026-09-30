@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 380; 742,192 calls matching in shadow and 936,488 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 381; 742,860 calls matching in shadow and 938,459 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -52,28 +52,15 @@ for it.
 
 ## Recently ported
 
-`$C0D04C` history projection has a complete C drawing and history traversal
-draft in `history_projection.c` and an unregistered bridge in
-`glue_history_projection.c` (next step after `b05758ab`). A 10,500-frame
-demo sandbox probe matched all tested memory and custom-register writes.
-Register replay now passes the full demo recording's focused sandbox probe.
-The first active calls
-match after accounting for `MOVEM.W` sign extension following intermediate
-projections. A trace of source call 777 showed that when the last intermediate
-and final projections both reject, D4/D5 retain the quarter deltas and A4
-retains the shift difference; the C bridge now reproduces that case. The
-the following trace of source call 782 showed that `MOVEM.W` also sign extends
-D1 and that D3 must enter the final projection with the quarter x delta.
-Source call 826 established that D3's high word is inherited from the prior
-interpolated x, including when an intermediate projection draws. Replaying
-the three intermediate register calls also fixed the late demo sandbox
-A2 mismatch. The full gate still fails in the demo **shadow** pass on A2
-(first calls 829, 833, 835: source `00016504`/`00051474`, C `00C38B28`).
-Trace the differing shadow versus sandbox intermediate projection state;
-the drawing/memory side matches in the focused sandbox.
-Keep it unregistered until that path is
-traced and all three recordings pass the full gate. The verified count
-remains 380.
+`$C0D04C` history projection (`history_projection.c`,
+`glue_history_projection.c`) is now registered. Its C path traverses the
+history ring, rotates and projects each point, interpolates between points,
+and draws the resulting circles. The register bridge replays projections
+across every slot in source order; earlier slot draws can leave A2 even when
+the final slot rejects every projection. It resets A1 to the record at each
+slot boundary, as the source does at `$C0D110`. The three-recording gate
+passed with 742,860 shadow matches, 938,459 sandbox matches, identical
+poison frames, and 10/10 exact parity frames 393-402.
 
 `$C0D74A`/`$C0D752` (`display_records.c`, `276be504`) now share the complete
 four-candidate matrix preparation, corner projection, and seven-way record
@@ -298,15 +285,11 @@ part that is not, stays on the work side.
    cycles, so these recordings mainly exercise the short dispatch exits;
    the longer placement and zone branches remain source transcriptions
    without independent runtime path coverage.
-   `$C0D04C` history projection is the next large draft.
-   `history_projection.c`/`.h` now transcribe its entry gate, signed facing
-   dot product and first slot choice (`$C0D04C-$C0D10A`), then the slot's
-   relative coordinates, magnitude scaling, and colour selection
-   (`$C0D110-$C0D1D0`). The rest of its projection loop and register bridge
-   remain unported, so it is not registered. At `$C0D214` the source checks
-   local `A6-$26`: initialized to `-1`, it is later overwritten with the
-   previous radius by `$C0D2D8`. The three intermediate projections are
-   therefore reached on later iterations, even though the first skips them.
+   `$C0D04C` history projection was the next large draft and is now registered
+   as described under Recently ported. At `$C0D214` the source checks local
+   `A6-$26`: initialized to `-1`, it is later overwritten with the previous
+   radius by `$C0D2D8`. The three intermediate projections are reached on
+   later iterations, even though the first skips them.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
