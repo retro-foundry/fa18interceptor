@@ -240,7 +240,12 @@ part that is not, stays on the work side.
    table/division angle branches, and returns the three shifted angles with
    the caller-visible registers. Focused proof across the three native runs:
    5,114 completed shadow matches and 5,328 sandbox matches, zero mismatches.
-   The full combined proof and parity gate is due after this larger batch.
+   `$C2DB18` is now registered (`matrix_route.c`, `glue_matrix_route.c`). It
+   selects the active record's angle tuple, publishes the transformed angles,
+   and builds the final row-scaled matrix. The full targeted proof over the
+   three native runs matched 3,353 completed shadow calls and 3,353 sandbox
+   calls, zero mismatches. The full combined proof and parity gate is due for
+   this two-routine batch.
    The post-input parent `$C0F992` depends on `$C08F26`; its deeper
    `$C1C63E`/`$C1C860` calls are still translated.
 2. **Exact UAE timing (dropped for now).** Native recordings make the port

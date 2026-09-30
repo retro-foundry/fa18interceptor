@@ -15,6 +15,9 @@
 #define MATRIX_ANGLE_TABLE_FINE 0xC3DD92u /* signed angle lookup in $C2DEE0 */
 #define MATRIX_ANGLE_TABLE_MID  0xC3DF98u /* middle magnitude lookup */
 #define MATRIX_ANGLE_TABLE_COARSE 0xC3E3E8u /* large magnitude lookup */
+#define MATRIX_ROUTE_TABLE 0xC2DCC2u /* six-byte angle tuples selected by $C2DB18 */
+#define MATRIX_ROUTE_SPECIAL_TABLE 0xC2DD04u /* alternate tuples for record class $30 */
+#define MATRIX_ROUTE_SELECTOR 0xC457B1u /* signed byte selector for the default route */
 #define PAGE_PLANE_TABLE   0xC456B6u /* long: address of the draw page's plane-pointer table */
 #define PAGE_POINTER_TABLE 0xC456BAu /* long: address of the draw page's second table ($C2F558) */
 #define DRAW_PAGE          0xC4566Cu /* word: nonzero when page 1 is the draw page */

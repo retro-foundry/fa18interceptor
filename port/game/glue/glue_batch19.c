@@ -32,11 +32,9 @@ static void three_lookup_registers(void) {
 /* $C2E3DE: D0.w, D2.w, D4.w angles, A1 matrix. Every data register is live
  * after it: D0.w = -(sa >> 6), D1-D5 the lookups, D6 and D7 the last two
  * sums as SWAP / ASR.W #4 leave them. */
-int glue_C2E3DE(void) {
-    uint16_t a = (uint16_t)D(0), b = (uint16_t)D(2), c = (uint16_t)D(4);
+void rotation_matrix8_registers(void) {
     int16_t cb_sa;
     int32_t sum;
-    rotation_matrix8(a, b, c, A(1));
     three_lookup_registers();
     cb_sa = (int16_t)(((int32_t)(int16_t)D(3) * (int16_t)D(0)) >> 14);
     sum = (int32_t)(int16_t)D(2) * (int16_t)D(4) + (int32_t)cb_sa * (int16_t)D(5);
@@ -44,6 +42,11 @@ int glue_C2E3DE(void) {
     D(6) = swapped_product((int16_t)D(3), (int16_t)D(1));
     SET_W(D(0), -(int16_t)((int16_t)D(0) >> 6));
     A(1) += 16;
+}
+
+int glue_C2E3DE(void) {
+    rotation_matrix8((uint16_t)D(0), (uint16_t)D(2), (uint16_t)D(4), A(1));
+    rotation_matrix8_registers();
     return glue_return();
 }
 

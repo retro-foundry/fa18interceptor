@@ -583,4 +583,7 @@ int glue_C0D752(void);
 /* signed matrix transform and three returned angles */
 int glue_C2DEE0(void);
 
+/* active control-record matrix route */
+int glue_C2DB18(void);
+
 #endif
