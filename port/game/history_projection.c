@@ -1,0 +1,68 @@
+/* Slot selection and point preparation of the history renderer ($C0D04C). */
+#include "history_projection.h"
+
+#include "globals.h"
+
+static int32_t neg_if_negative(int32_t value) {
+    return value < 0 ? (int32_t)(0u - (uint32_t)value) : value;
+}
+
+int begin_history_projection(HistoryProjectionWork *work) {
+    gaddr record;
+    int32_t velocity[3], relative[3];
+    uint32_t dot;
+    int i;
+
+    work->drawn = 0;
+    if (rd_u16(SCRIPT_RECORD) != rd_u16(HISTORY_RECORD)) return 0;
+    record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+    work->record = record;
+    work->direction = -1;
+    work->remaining = rd_s8(record + 0x3D);
+    work->slot_index = rd_s8(HISTORY_COUNT) >= 6 ? rd_s8(HISTORY_NEXT) : 0;
+    if (work->remaining <= 0) return 0;
+    if (rd_s8(HISTORY_COUNT) < 6)
+        work->remaining = (int8_t)((uint8_t)work->remaining - 1u);
+
+    for (i = 0; i < 3; ++i) {
+        velocity[i] = rd_s32(record + 0x3E + (gaddr)(4 * i));
+        relative[i] = (int32_t)(rd_u32(record + 0x14 + (gaddr)(4 * i)) -
+                                rd_u32(PROJECTION_ORIGIN + (gaddr)(4 * i)));
+        relative[i] >>= 8;
+        if (rd_s16(record + 0x6E) >= 0x100) velocity[i] >>= 8;
+    }
+    dot = 0;
+    for (i = 0; i < 3; ++i)
+        dot += (uint32_t)((int32_t)(int16_t)velocity[i] * (int16_t)relative[i]);
+    if ((int32_t)dot >= 0) {
+        uint8_t slot = (uint8_t)(rd_u8(HISTORY_NEXT) - rd_u8(HISTORY_COUNT));
+        work->direction = 0;
+        if (rd_s8(HISTORY_COUNT) < 6) slot = (uint8_t)(slot - 1u);
+        slot = (uint8_t)(slot + rd_u8(record + 0x3D));
+        if ((int8_t)slot < 0) slot = (uint8_t)(slot + rd_u8(HISTORY_COUNT));
+        work->slot_index = (int8_t)slot;
+    }
+    return 1;
+}
+
+void prepare_history_projection_point(HistoryProjectionWork *work) {
+    int32_t furthest = 0;
+    int i;
+    int alternate = !!(rd_u8(work->record + 0x20) & 2u);
+
+    work->slot_address = HISTORY_SLOTS +
+                         (gaddr)(int32_t)(int16_t)(work->slot_index * 12);
+    for (i = 0; i < 3; ++i) {
+        work->delta[i] = (int32_t)(rd_u32(work->slot_address + (gaddr)(4 * i)) -
+                                   rd_u32(PROJECTION_ORIGIN + (gaddr)(4 * i)));
+        work->absolute[i] = neg_if_negative(work->delta[i]);
+        if (work->absolute[i] > furthest) furthest = work->absolute[i];
+    }
+    work->shift = furthest <= 0x4000 ? 0 : furthest <= 0x40000 ? 4 : 8;
+    for (i = 0; i < 3; ++i) {
+        work->delta[i] >>= work->shift;
+        work->absolute[i] >>= work->shift;
+    }
+    wr_u16(CURRENT_COLOUR, (work->slot_index & 1) ?
+           (alternate ? 3 : 8) : (alternate ? 12 : 10));
+}

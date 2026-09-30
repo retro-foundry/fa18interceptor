@@ -275,6 +275,15 @@ part that is not, stays on the work side.
    cycles, so these recordings mainly exercise the short dispatch exits;
    the longer placement and zone branches remain source transcriptions
    without independent runtime path coverage.
+   `$C0D04C` history projection is the next large draft.
+   `history_projection.c`/`.h` now transcribe its entry gate, signed facing
+   dot product and first slot choice (`$C0D04C-$C0D10A`), then the slot's
+   relative coordinates, magnitude scaling, and colour selection
+   (`$C0D110-$C0D1D0`). The rest of its projection loop and register bridge
+   remain unported, so it is not registered. At `$C0D214` the source checks
+   local `A6-$26`: initialized to `-1`, it is later overwritten with the
+   previous radius by `$C0D2D8`. The three intermediate projections are
+   therefore reached on later iterations, even though the first skips them.
    `$C2D408` is now registered (`record_matrix_update.c`,
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
