@@ -4,7 +4,9 @@
 #include "control_records.h"
 #include "globals.h"
 #include "hardware.h"
+#include "plot.h"
 #include "render_line.h"
+#include "render_polygon.h"
 #include "render_span.h"
 #include "render_state.h"
 
@@ -305,4 +307,76 @@ void draw_panel_frame(void) {
         }
         restart_blit_cd(k < 2 ? BAR_CLEAR : BAR_SET, dest, size);
     }
+}
+
+/* The panel image behind the mark ($C3003A). */
+#define MARK_PANEL_IMAGE 0x00012A88u
+#define MARK_PANEL_ROWS  0x1990
+#define MARK_PANEL_SIZE  0x0542
+#define MARK_PANEL_MODULO 0x25
+
+/* plot_pixel_in_view moves the column by SPAN_ORIGIN_Y, and the row by
+ * REDRAW_STATE_WORD only while that column is in view; the marks that
+ * follow step on from where it left the pen. */
+static void plot_in_view_from(int16_t *x, int16_t *y) {
+    int32_t across = (int32_t)*x + rd_s16(SPAN_ORIGIN_Y);
+
+    plot_pixel_in_view(*x, *y);
+    *x = (int16_t)across;
+    if (across >= 0 && (int16_t)across < 0x140) *y = (int16_t)(*y + rd_u16(REDRAW_STATE_WORD));
+}
+
+void draw_panel_mark(void) {
+    int16_t position = 0x0C, origin = rd_s16(SPAN_ORIGIN), result, cut;
+    int32_t cursor = MARK_PANEL_ROWS + rd_s32(REDRAW_STATE_LONG);
+    uint16_t first_mask, last_mask;
+    gaddr dest;
+    int16_t x, y;
+
+    if ((int16_t)(0x0C - origin) < 0) return;
+    if ((int16_t)(6 - origin) < 0) return;
+    result = bound_span(&position, 2, &cursor);
+    if (result < 0) return;
+    last_mask = result ? 0xFFFF : 0xFFF0;
+    first_mask = position ? 0xFFFF : 0x0FFF;
+    cut = (int16_t)(result + position);
+    dest = rd_u32(rd_u32(PAGE_PLANE_TABLE) + 4) + (uint32_t)cursor;
+    wait_blitter();
+    custom_write(BLTCON0, 0x0722);
+    custom_write(BLTCON1, 0);
+    custom_write(BLTADAT, 0xFFFF);
+    custom_write(BLTAFWM, first_mask);
+    custom_write(BLTALWM, last_mask);
+    custom_write(BLTBMOD, 1);
+    custom_write(BLTCMOD, (uint16_t)(cut * 2 + MARK_PANEL_MODULO));
+    custom_write(BLTDMOD, (uint16_t)(cut * 2 + MARK_PANEL_MODULO));
+    custom_write_ptr(BLTBPT, MARK_PANEL_IMAGE);
+    custom_write_ptr(BLTCPT, dest);
+    custom_write_ptr(BLTDPT, dest);
+    custom_write(BLTSIZE, (uint16_t)(MARK_PANEL_SIZE - cut));
+
+    draw_mark_polygon();
+
+    wr_u32(LINE_STYLE, 0x0007FFFF);
+    x = (int16_t)(0xCC + rd_s16(SPAN_ORIGIN_Y));
+    y = (int16_t)(0xAC + rd_u16(REDRAW_STATE_WORD));
+    wr_u16(CURRENT_COLOUR, 2);
+    draw_line_to_row(x, y, (int16_t)(x + 0x0A), y, 0xC7);
+
+    x = 0xD1;
+    y = 0xAB;
+    plot_in_view_from(&x, &y);
+    plot_pixel(x, 0xAC);
+
+    wr_u16(CURRENT_COLOUR, 0x0D);
+    x = 0xCE;
+    y = 0xA5;
+    plot_in_view_from(&x, &y);
+    plot_pixel(x = (int16_t)(x - 2), y = (int16_t)(y + 1));
+    plot_pixel(x = (int16_t)(x - 1), y = (int16_t)(y + 1));
+    plot_pixel(x = (int16_t)(x - 2), y = (int16_t)(y + 3));
+    plot_pixel(x = (int16_t)(x + 0x11), y = (int16_t)(y + 1));
+    plot_pixel(x, y = (int16_t)(y + 1));
+    plot_pixel(x, y = (int16_t)(y + 1));
+    plot_pixel(x = (int16_t)(x - 1), y = (int16_t)(y + 2));
 }

@@ -52,4 +52,10 @@ void draw_panel_frame(void);
 /* The panel image at PANEL_IMAGE through the four plane masks ($C309B6). */
 void draw_panel_image(void);
 
+/* The panel area behind the mark redrawn from its image ($C3003A), then
+ * the scaled mark polygon over it and the fixed marks of its scale: a
+ * ten-pixel line in colour 2 and, in colour $D, the pixels stepping out
+ * from (206, 165). Nothing when the area lies beyond the view. */
+void draw_panel_mark(void);
+
 #endif

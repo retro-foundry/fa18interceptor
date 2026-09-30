@@ -457,6 +457,7 @@ const FA18Port fa18_ports[] = {
     {0xC20002, glue_C20002, "draw_tested_parallelogram", 420},
     /* control_records.c */
     {0xC1D3F4, glue_C1D3F4, "expand_cell_templates", 900},
+    /* hud_bars.c */
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -8,6 +8,9 @@
 #include "control_records.h"
 #include "globals.h"
 #include "memory.h"
+#include "glue_text.h"
+#include "hud_bars.h"
+#include "render_span.h"
 #include "stages.h"
 
 #define TEMPLATE_PAIRS 0xC1D8B6u
@@ -107,5 +110,50 @@ int glue_C1D3F4(void) {
         D(1) = (uint32_t)(uint16_t)state.level_offset << 16 | (D(1) & 0xFF00u) | (uint8_t)state.level;
         D(6) = (uint32_t)state.index;
     }
+    return glue_return();
+}
+
+/* $C3003A is not registered. The marks it ends with are replayed from the
+ * pen position below, and their low words match, but every one of them
+ * writes only register low words, so D0 and D4-D7 keep high words from
+ * further back: past the line, past the blit, and through the chain inside
+ * draw_mark_polygon ($C3019C), whose own glue can only replay its
+ * registers by doing its drawing again. Registering this needs that chain
+ * split into work and register replay, as the clipper's is. */
+int glue_C3003A(void) {
+    int16_t origin = rd_s16(SPAN_ORIGIN), x = 0xCE, y = 0xA5;
+    int32_t across;
+    int k;
+
+    draw_panel_mark();
+
+    SET_W(D(7), (uint16_t)(0x0C - origin));
+    if ((int16_t)D(7) < 0) return glue_return();
+    SET_W(D(7), (uint16_t)(6 - origin));
+    if ((int16_t)D(7) < 0) return glue_return();
+    D(1) = (uint32_t)(0x1990 + rd_s32(REDRAW_STATE_LONG));
+    A(4) = 2;
+    SET_W(D(6), 0x542);
+    A(5) = 0x25;
+    SET_W(D(7), 0x0C);
+    bound_span_registers();
+    if ((int16_t)D(5) < 0) return glue_return();
+
+    /* The last mark: the pen where plot_pixel_in_view left it, stepped on. */
+    across = (int32_t)x + rd_s16(SPAN_ORIGIN_Y);
+    x = (int16_t)across;
+    if (across >= 0 && (int16_t)across < 0x140) y = (int16_t)(y + rd_u16(REDRAW_STATE_WORD));
+    {
+        static const int8_t dx[8] = {0, -2, -1, -2, 0x11, 0, 0, -1};
+        static const int8_t dy[8] = {0, 1, 1, 3, 1, 1, 1, 2};
+        for (k = 1; k < 8; k++) {
+            x = (int16_t)(x + dx[k]);
+            y = (int16_t)(y + dy[k]);
+        }
+    }
+    SET_W(D(0), (uint16_t)x);
+    SET_W(D(1), (uint16_t)y);
+    restored_plot_registers();
+    A(5) = 0x25;
     return glue_return();
 }

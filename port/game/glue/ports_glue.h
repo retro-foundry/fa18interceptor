@@ -534,4 +534,7 @@ int glue_C20002(void);
 /* control_records.c */
 int glue_C1D3F4(void);
 
+/* hud_bars.c */
+int glue_C3003A(void);
+
 #endif
