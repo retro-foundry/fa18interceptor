@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 371; 796,490 calls matching in shadow and 1,029,158 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 373; 765,982 calls matching in shadow and 979,382 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -51,6 +51,15 @@ routine. But see the first trap below: the quick probe is not a substitute
 for it.
 
 ## Recently ported
+
+`$C0D74A`/`$C0D752` (`display_records.c`, `276be504`) now share the complete
+four-candidate matrix preparation, corner projection, and seven-way record
+selection body. Across the three native recordings they matched 6,129
+completed shadow calls and 10,857 sandbox calls. The full proof and 10-frame
+parity check passed. Their nested `$C2E758` register replay was separated from
+its C operation so the parents run the projection once. The original extended
+branches also exposed a count/offset error in the older isolated selector C;
+`c43e2d3e` corrects it and its source-backed contract case passes.
 
 `$C2374C` `consume_selected_fire_request` (`selected_fire.c`, `2bdb54d5`),
 `$C28722` `initialize_scene_from_mode` (`scene_dispatch.c`, `f1937a36`), and
@@ -206,12 +215,15 @@ part that is not, stays on the work side.
    machine timing or the translation (the check then says the run no
    longer ends as sealed).
 1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
-   `$C0D74A`/`$C0D752` are two entry points into the same display-record
-   preparation and selection body. Their `$C2E758` child is already C, and
-   `analysis/routines/c0d752_display_record_prefix.md` links the byte-exact
-   slices for the full range. The earlier isolated C in
-   `port/display_record_{candidates,iterator,selector,pipeline}.c` supplies
-   bounded arithmetic to adapt to `port/game/` memory and register glue.
+   `$C2FD8C` is newly ready after the display-record pair. It submits four
+   active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon
+   submission and optional `$C30466` composite, followed by `$C0D74A` and
+   a 22-byte record copy or clear. Its blitter waits and busy-poll counters
+   need source-accurate C. Evidence is in
+   `analysis/routines/c2fd8c_first_active_plane_submission.md`,
+   `c2fdf4_remaining_active_plane_submissions.md`, and
+   `c2fede_selected_table_display_stage.md`; the isolated orchestration is
+   `port/selected_table_display_stage.c`.
    Other ready larger candidates include `$C13D84`, `$C26EBE`, and `$C2DEE0`.
    The post-input parent `$C0F992` depends on `$C08F26`; its deeper
    `$C1C63E`/`$C1C860` calls are still translated.
