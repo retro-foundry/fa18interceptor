@@ -62,8 +62,10 @@ calls in focused probes; the initializer matched its completed demo call and
 both demo sandbox calls. The full three-recording proof and 10-frame parity
 check passed on this batch.
 
-`$C0FA04` `finish_post_input_followup` is the next work in progress. It has
-source and glue but is not in the Numbers row until built and proven.
+`$C0FA04` `finish_post_input_followup` (`stages.c`, `679ef67b`) is committed
+and registered after the full proof above. Its completed demo shadow call and
+all eight demo sandbox calls matched, including the seven buffer clears. The
+Numbers row remains the last full three-recording proof until the next batch.
 
 All of these are registered and matching over all three recordings:
 
