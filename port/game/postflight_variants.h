@@ -44,4 +44,15 @@ void advance_postflight_variant_record(PostflightVariantWork *work, int marked);
  * resolution entry $C31722 when the three-long terminator is reached. */
 void process_postflight_variant_records(PostflightVariantWork *work);
 
+/* $C31722-$C3180B: terminate the point table, compare the current status
+ * byte with its previous value, and publish event bits. */
+void resolve_postflight_variant_status(PostflightVariantWork *work);
+
+/* $C3180C-$C318F5: optional selected-record scan and return. */
+void scan_postflight_variant_records(void);
+
+/* Complete C memory/drawing paths for the two parents. */
+void draw_postflight_tuple_variant(void); /* $C3129A */
+void draw_postflight_fixed_variant(void); /* $C31312 */
+
 #endif

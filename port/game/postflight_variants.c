@@ -11,6 +11,7 @@
 #define POSTFLIGHT_PREFIX_GATE 0xC45838u
 #define POSTFLIGHT_PREFIX_TICK 0xC45883u
 #define POSTFLIGHT_PREFIX_BITS 0xC4586Du
+#define POSTFLIGHT_SCAN_REQUEST 0xC457B9u
 
 static int16_t add_word(int16_t a, int16_t b) {
     return (int16_t)((uint16_t)a + (uint16_t)b);
@@ -231,4 +232,116 @@ void process_postflight_variant_records(PostflightVariantWork *work) {
         }
         advance_postflight_variant_record(work, marked);
     }
+}
+
+static void add_postflight_event(uint32_t bits) {
+    wr_u32(EVENT_BITS, rd_u32(EVENT_BITS) | bits);
+}
+
+void resolve_postflight_variant_status(PostflightVariantWork *work) {
+    uint8_t current = rd_u8(POSTFLIGHT_PREFIX_BITS);
+    uint8_t previous = rd_u8(THREAT_EVENTS);
+    wr_u16(work->table, 0xFFFFu);
+
+    if (current & 0x10u) {
+        if (!(previous & 0x10u)) add_postflight_event(1);
+    } else if (current & 0x20u) {
+        if (!(previous & 0x20u)) add_postflight_event(1);
+    } else if (current & 8u) {
+        if (!(previous & 8u)) {
+            add_postflight_event(2);
+            wr_u8(INFO_DELAY, 0x18);
+        } else if (current & 4u) {
+            if (!(previous & 4u)) {
+                add_postflight_event(2);
+                wr_u8(INFO_DELAY, 0x18);
+            }
+        } else if ((current & 2u) && !(previous & 2u) &&
+                   rd_u8(MODE_SELECT) != 5u) {
+            add_postflight_event(0x800);
+        }
+    } else if (current & 4u) {
+        if (!(previous & 4u)) {
+            add_postflight_event(2);
+            wr_u8(INFO_DELAY, 0x18);
+        } else if ((current & 2u) && !(previous & 2u) &&
+                   rd_u8(MODE_SELECT) != 5u) {
+            add_postflight_event(0x800);
+        }
+    } else if (!(current & 2u) || rd_u8(MODE_SELECT) == 5u) {
+        /* The source masks MESSAGE_CODE to one byte before comparing it
+         * with $800E; no word can satisfy that comparison. */
+    } else if (!(previous & 2u)) {
+        add_postflight_event(0x800);
+    }
+    wr_u8(THREAT_EVENTS, current);
+}
+
+void scan_postflight_variant_records(void) {
+    uint16_t offset = 0;
+    if (!rd_u8(POSTFLIGHT_SCAN_REQUEST)) return;
+    wr_u8(POSTFLIGHT_SCAN_REQUEST, 0);
+
+    if (rd_s16(SELECTED_RECORD) >= 0) {
+        for (;;) {
+            uint16_t word = rd_u16(LIST_BUFFER + offset + 12u);
+            uint16_t record_offset = (uint16_t)((word & 0xFF00u) << 1);
+            if (record_offset == rd_u16(SELECTED_RECORD)) {
+                offset = (uint16_t)(offset + 16u);
+                break;
+            }
+            offset = (uint16_t)(offset + 16u);
+            if (offset >= 0x460u) {
+                wr_u16(MESSAGE_CODE, 0x30u);
+                offset = 0;
+                break;
+            }
+        }
+    }
+    for (;;) {
+        gaddr entry = LIST_BUFFER + offset;
+        uint32_t combined = rd_u32(entry) | rd_u32(entry + 4) | rd_u32(entry + 8);
+        uint16_t word, record_offset;
+        gaddr record;
+        uint8_t category;
+        if (!combined) {
+            wr_u8(SELECTION_ACTIVE, 0);
+            wr_u16(SELECTED_RECORD, 0xFFFFu);
+            return;
+        }
+        word = rd_u16(entry + 12);
+        if ((word & 0x30u) != 0x30u) goto next;
+        record_offset = (uint16_t)((word & 0xFF00u) << 1);
+        record = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)record_offset;
+        category = rd_u8(record + 0x62) & 0xF0u;
+        if (category == 0 || category == 0x20u || category == 0x30u ||
+            (rd_u8(record + 0x20) & 2u)) goto next;
+        wr_u16(SELECTED_RECORD, record_offset);
+        wr_u16(INFO_PAGE, 1);
+        wr_u8(INFO_REQUEST, 1);
+        wr_u8(INFO_DELAY, 0xFFu);
+        wr_u8(SELECTION_ACTIVE, (uint8_t)((offset >> 4) + 1u));
+        wr_u16(MESSAGE_STATE, (uint16_t)(rd_u16(MESSAGE_STATE) & 0xDFFFu));
+        return;
+next:
+        offset = (uint16_t)(offset + 16u);
+    }
+}
+
+static void run_postflight_variant_tail(void) {
+    PostflightVariantWork work = {0};
+    if (!begin_postflight_variant_tail(&work)) return;
+    process_postflight_variant_records(&work);
+    resolve_postflight_variant_status(&work);
+    scan_postflight_variant_records();
+}
+
+void draw_postflight_tuple_variant(void) {
+    draw_postflight_tuple_pairs();
+    run_postflight_variant_tail();
+}
+
+void draw_postflight_fixed_variant(void) {
+    draw_postflight_fixed_quad();
+    run_postflight_variant_tail();
 }
