@@ -4,6 +4,7 @@
 
 #include "globals.h"
 #include "control_records.h"
+#include "fixed_math.h"
 
 static uint8_t phase(gaddr record) { return rd_u8(record + 0x2B); }
 static void set_phase(gaddr record, uint8_t value) { wr_u8(record + 0x2B, value); }
@@ -142,4 +143,101 @@ void prepare_indexed_record_context(IndexedRecordWork *work) {
 
     work->reference_distance = distance;
     work->phase_byte_scaled = (int16_t)((uint32_t)(int32_t)rd_s8(record + 0x2B) << 8);
+}
+
+IndexedSignedRoute prepare_indexed_signed_terms(IndexedRecordWork *work) {
+    gaddr record = work->record;
+    int16_t current = (int16_t)-work->neg_word_6c;
+    int16_t bound;
+
+    work->current_word_6c = current;
+    work->attitude_adjustment = current < 0x800 ? 0 : attitude_term();
+    if (!(rd_u16(COCKPIT_FLAGS) & 0x40u) || (rd_u16(MESSAGE_STATE) & 0x4000u))
+        return INDEXED_COMMON_TAIL;
+    if (!work->phase_byte_scaled && !(header(record) & 0x0008u))
+        return INDEXED_EMPTY_ROUTE;
+    if (!rd_u32(record + 0x72)) return INDEXED_EMPTY_ROUTE;
+    if (!(header(record) & 0x0008u)) return INDEXED_OTHER_ROUTE;
+
+    wr_u32(record + 0x72, rd_u32(record + 0x72) - 0x600u);
+    bound = (int16_t)(0x3A98 - work->attitude_adjustment);
+    if (bound > 0x4650) bound = 0x4650;
+    if (!(rd_u8(record + 0x7C) & 0x70u)) bound = (int16_t)(bound - (bound >> 2));
+    if (rd_u16(record) & 0x0800u) bound = (int16_t)(bound - (bound >> 2));
+    work->comparison_bound = bound;
+
+    if (current < bound) {
+        if (work->neg_word_6c > 0) work->neg_word_6c = (int16_t)(work->neg_word_6c - 0x78);
+        else if (!(header(record) & 0x0080u)) {
+            work->neg_word_6c = (int16_t)(work->neg_word_6c -
+                                        (current > 0x1D4C ? 0x2D : 0x36));
+        } else {
+            ease_record_26(-0x25);
+            work->neg_word_6c = (int16_t)(work->neg_word_6c + rd_s16(record + 0x26));
+        }
+    } else if ((int32_t)current > (int32_t)bound + 0x3C) {
+        work->neg_word_6c = (int16_t)(work->neg_word_6c + 0x3C);
+    }
+    return INDEXED_COMMON_TAIL;
+}
+
+void settle_empty_indexed_record(IndexedRecordWork *work) {
+    gaddr record = work->record;
+    int16_t value = work->neg_word_6c;
+    int16_t current = work->current_word_6c;
+
+    if (header(record) & 0x0080u) {
+        ease_record_26(0);
+        if (value > 0) value = value > 15 ? (int16_t)(value - 15) : 0;
+        else value = current > 15 ? (int16_t)(value + 15) : 0;
+    } else if (value > 0) {
+        if (value > 0x90) value = value > 0x52 ? (int16_t)(value - 0x52) : 0;
+        else value = value > 0x3C ? (int16_t)(value - 0x3C) : 0;
+    } else {
+        if (current > 0x1D4C) value = (int16_t)(value + 0x52);
+        if (current < 0x5DC) {
+            if (current > 0x1E) value = (int16_t)(value + 0x1E);
+        } else {
+            value = current > 0x3C ? (int16_t)(value + 0x3C) : 0;
+        }
+    }
+    work->neg_word_6c = value;
+}
+
+void finish_indexed_record_update(IndexedRecordWork *work) {
+    gaddr record = work->record;
+    gaddr word_6c = record + 0x6C;
+    uint16_t h = header(record);
+    int16_t value = (int16_t)-work->neg_word_6c;
+    int use_bounded_decay = 0;
+
+    work->current_word_6c = value;
+    if (work->index == 0) {
+        uint16_t flags = rd_u16(0xC458D2u);
+        if (value < 0x20D0) wr_u16(0xC458D2u, flags & (uint16_t)~0x4000u);
+        else if (!(flags & 0x4000u)) {
+            wr_u16(0xC458D2u, flags | 0x4000u);
+            wr_u8(0xC457C0u, 3);
+            wr_u8(FIRE_STATE, 0xFA);
+            wr_u8(FIRE_ALERT_COUNTDOWN, 2);
+        }
+    }
+
+    if ((h & 0xC000u) == 0xC000u) decay_outside_limit(word_6c, 7, 3);
+    else if ((h & 0x0080u) && (rd_u16(record) & 0x0800u) && rd_s16(word_6c) > 0x40)
+        decay_outside_limit(word_6c, 15, 4);
+    else if ((h & 0x0080u) && (rd_u8(record + 0x7C) & 0x80u))
+        decay_outside_limit(word_6c, 31, 5);
+    else if (rd_u8(record + 0x20) & 1u) decay_outside_limit(word_6c, 3, 2);
+    else if (rd_u8(record + 4) & 0x08u) use_bounded_decay = 1;
+    else wr_u16(word_6c, (uint16_t)value);
+
+    if (use_bounded_decay) {
+        int32_t phase_value = rd_s8(record + 0x2B);
+        if (phase_value < 0x6C && phase_value > -0x6C) decay_outside_limit(word_6c, 7, 3);
+        else wr_u16(word_6c, (uint16_t)value);
+    }
+    update_record_76_78();
+    record = rd_u32(CURRENT_RECORD);
+    wr_u16(record + 0x6E, (uint16_t)(rd_u16(record + 0x78) + rd_u16(record + 0x6C)));
 }
