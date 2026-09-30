@@ -12,7 +12,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 353; 841,972 calls matching in shadow and 1,040,334 in the sandbox pass over three native recordings; poison-clean |
+| Recreated routines (`port/game/`) | 355; 829,648 calls matching in shadow and 1,028,066 in the sandbox pass over three native recordings; poison-clean |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -60,8 +60,9 @@ one at a time, each proven on every call.
    recordings.
    `$C1FB82` (backface dispatch) is registered, and so are the stream face
    commands `$C1FF0A` (three vertices and the face test), `$C2005C` (a
-   vertex offset list, the test, and the polygon) and `$C20100` (that face
-   once per offset from a base pointer).
+   vertex offset list, the test, and the polygon), `$C20100` (that face
+   once per offset from a base pointer) and `$C20002` (the same tail over a
+   parallelogram). `$C1D3F4` (the cell template expansion) is registered.
    The face loops `$C21060`, `$C20C38` and `$C20C22` are registered too. The
    dispatcher at $C1F942 returns to callers whose liveness is unknown, so
    D7's high word counts as live and it carries from one clipper draw to the
@@ -77,7 +78,19 @@ one at a time, each proven on every call.
    small log of each draw's BLTSIZE and last row so a glue can replay any
    face exactly. That also makes the three registered loops exact rather
    than right by the last face. The `$C0004E` family are stack
-   trampolines, not game logic; leave them.
+   trampolines into Kickstart, not game logic; leave them.
+
+   **What limits the next batch.** Most of what `port_candidates.py` still
+   offers ends in a call whose registers the glue cannot rebuild, because
+   that callee's glue does its work and its registers together, so calling
+   it again would draw or step twice. The way through is the one the
+   clipper, the line and the plotters already take: split each such glue
+   into the C call and a `*_registers()` helper that a caller's glue can
+   replay on its own (`glue_clip.h`, `glue_text.h`). `$C3003A` (the panel
+   mark) is recreated and waiting on exactly that for `$C3019C`'s chain;
+   `$C0D74A`/`$C0D752` wait on `$C2E758`, and `$C28800` on `$C123FA` and
+   `$C2D954` (both of whose glue is already in two halves and only needs
+   the second half lifted out).
 2. **Exact UAE timing (dropped for now).** Native recordings make the port
    independent of UAE replays; the bus model stays as it is. Tools: `scripts/recomp_timing.py` (per
    instruction against a trace), `scripts/recomp_state_diff.py` (first frame
