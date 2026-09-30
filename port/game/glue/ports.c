@@ -485,6 +485,8 @@ const FA18Port fa18_ports[] = {
     {0xC28722, glue_C28722, "initialize_scene_from_mode", 24000},
     /* scene initialization and ordered child calls () */
     {0xC0FAA4, glue_C0FAA4, "initialize_scene_state", 32000},
+    /* timer-gated post-input scene transition () */
+    {0xC0FA04, glue_C0FA04, "finish_post_input_followup", 40000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

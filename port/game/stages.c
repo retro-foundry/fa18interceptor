@@ -38,6 +38,22 @@ void initialize_scene_state(const SceneStartHooks *hooks) {
     wr_u16(POST_INPUT_COUNTDOWN, 1);
 }
 
+void finish_post_input_followup(const PostInputFollowupHooks *hooks) {
+    if (rd_s16(POST_INPUT_COUNTDOWN) >= 0) {
+        if (hooks && hooks->clear_buffers) hooks->clear_buffers(hooks->context);
+        else clear_render_buffers();
+        return;
+    }
+    if (hooks && hooks->start_scene) hooks->start_scene(hooks->context);
+    else initialize_scene_state(0);
+    wr_u8(RECORDER_MODE, 3);
+    wr_u8(CONTEXT_SELECT, 0);
+    wr_u16(POST_INPUT_COUNTDOWN, 2);
+    wr_u8(VIEWPORT_TARGET, 0x0F);
+    wr_u8(VIEWPORT_MODE, 0);
+    wr_u32(STAGE_CALLBACK, ROUTINE_POST_INPUT_MATCH);
+}
+
 void queue_post_input_context_command(void) {
     gaddr write = MESSAGE_QUEUE;
     uint8_t mode;

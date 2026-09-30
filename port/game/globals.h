@@ -122,6 +122,7 @@
 /* Routine addresses stored in STAGE_CALLBACK (function pointers once the
  * callers are C). */
 #define ROUTINE_COMPLETE_POST_INPUT 0xC0FA80u
+#define ROUTINE_POST_INPUT_MATCH    0xC0FA4Cu /* installed by $C0FA04 on expiry */
 #define ROUTINE_AFTER_POST_INPUT    0xC10C08u
 
 /* ---- rounded division ($C25980) ------------------------------------------ */

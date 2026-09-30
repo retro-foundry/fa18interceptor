@@ -573,4 +573,7 @@ int glue_C28722(void);
 /* scene initialization and ordered child calls () */
 int glue_C0FAA4(void);
 
+/* timer-gated post-input scene transition () */
+int glue_C0FA04(void);
+
 #endif

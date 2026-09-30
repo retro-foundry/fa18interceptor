@@ -38,9 +38,13 @@ static void finish(void *context) {
     D(4) = 3;
 }
 
-int glue_C0FAA4(void) {
+void scene_start_run_with_registers(void) {
     SceneStartHooks hooks = {select_scene, reset_root, reset_messages, finish, 0};
     D(0) = 0;
     initialize_scene_state(&hooks);
+}
+
+int glue_C0FAA4(void) {
+    scene_start_run_with_registers();
     return glue_return();
 }

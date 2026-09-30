@@ -39,6 +39,13 @@ typedef struct SceneStartHooks {
     void *context;
 } SceneStartHooks;
 void initialize_scene_state(const SceneStartHooks *hooks);
+/* $C0FA04: expiry starts the scene; earlier ticks clear render buffers. */
+typedef struct PostInputFollowupHooks {
+    void (*start_scene)(void *context);
+    void (*clear_buffers)(void *context);
+    void *context;
+} PostInputFollowupHooks;
+void finish_post_input_followup(const PostInputFollowupHooks *hooks);
 
 /* Count a byte timer down to zero; negative timers are stopped. */
 void tick_timer(gaddr timer);
