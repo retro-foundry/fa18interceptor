@@ -15,6 +15,13 @@ typedef struct PostflightVariantWork {
     int has_vector;
 } PostflightVariantWork;
 
+typedef struct PostflightVariantHooks {
+    void (*after_head)(void *context);
+    /* Also called after the $C31392 gate returns false, with zeroed work. */
+    void (*after_prefix)(const PostflightVariantWork *work, void *context);
+    void *context;
+} PostflightVariantHooks;
+
 /* Drawing heads of the two postflight dispatcher targets. Both fall through
  * to the common $C31392 tail, which is handled separately. */
 void draw_postflight_tuple_pairs(void); /* $C3129A-$C3130E */
@@ -54,5 +61,7 @@ void scan_postflight_variant_records(void);
 /* Complete C memory/drawing paths for the two parents. */
 void draw_postflight_tuple_variant(void); /* $C3129A */
 void draw_postflight_fixed_variant(void); /* $C31312 */
+void draw_postflight_tuple_variant_with_hooks(const PostflightVariantHooks *hooks);
+void draw_postflight_fixed_variant_with_hooks(const PostflightVariantHooks *hooks);
 
 #endif

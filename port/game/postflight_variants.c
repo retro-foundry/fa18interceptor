@@ -328,20 +328,32 @@ next:
     }
 }
 
-static void run_postflight_variant_tail(void) {
+static void run_postflight_variant_tail(const PostflightVariantHooks *hooks) {
     PostflightVariantWork work = {0};
-    if (!begin_postflight_variant_tail(&work)) return;
+    int active = begin_postflight_variant_tail(&work);
+    if (hooks && hooks->after_prefix) hooks->after_prefix(&work, hooks->context);
+    if (!active) return;
     process_postflight_variant_records(&work);
     resolve_postflight_variant_status(&work);
     scan_postflight_variant_records();
 }
 
-void draw_postflight_tuple_variant(void) {
+void draw_postflight_tuple_variant_with_hooks(const PostflightVariantHooks *hooks) {
     draw_postflight_tuple_pairs();
-    run_postflight_variant_tail();
+    if (hooks && hooks->after_head) hooks->after_head(hooks->context);
+    run_postflight_variant_tail(hooks);
+}
+
+void draw_postflight_fixed_variant_with_hooks(const PostflightVariantHooks *hooks) {
+    draw_postflight_fixed_quad();
+    if (hooks && hooks->after_head) hooks->after_head(hooks->context);
+    run_postflight_variant_tail(hooks);
+}
+
+void draw_postflight_tuple_variant(void) {
+    draw_postflight_tuple_variant_with_hooks(0);
 }
 
 void draw_postflight_fixed_variant(void) {
-    draw_postflight_fixed_quad();
-    run_postflight_variant_tail();
+    draw_postflight_fixed_variant_with_hooks(0);
 }

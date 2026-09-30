@@ -251,6 +251,16 @@ part that is not, stays on the work side.
    93 each). This checks the head even though the C memory path has already
    run its tail. The temporary probe and registration were removed; full
    routine comparisons still need the shared tail's register/flag bridge.
+   The shared `$C31392-$C3141D` prefix now has a register replay helper in
+   `glue_postflight_variants.c`. The C parent exposes hooks after its head
+   and prefix so replay can run while the point table still holds the entries
+   the source read. A temporary full-length shadow probe compared D0-D7,
+   A0-A6 and SR at the gate return or vector handoff on all 496 calls of
+   each variant (demo 209 each, carrier 194 each, crashes 93 each): zero
+   differences. The cadence-byte `ADDQ.B` sets X when it wraps, including
+   one observed crash call. The temporary bridge and generated probe were
+   removed. Record selection, submission, status, and scan register replay
+   remain before either parent can be registered.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon
