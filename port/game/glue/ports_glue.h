@@ -586,4 +586,7 @@ int glue_C2DEE0(void);
 /* active control-record matrix route */
 int glue_C2DB18(void);
 
+/* matrix route selector */
+int glue_C2D99C(void);
+
 #endif

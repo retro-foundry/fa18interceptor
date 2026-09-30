@@ -30,7 +30,7 @@ static void follow_registers(void) {
     D(7) = (uint32_t)((int32_t)ahead * rd_s16(record + RECORD_INVERSE + 10));
 }
 
-int glue_C2D9BA(void) {
+void aim_view_with_registers(void) {
     int k;
     if (rd_u8(CONTEXT_STARTED)) follow_registers();
     aim_view();
@@ -43,5 +43,9 @@ int glue_C2D9BA(void) {
     SET_W(D(4), rd_u16(VIEW_ROTATE));
     y_rotation8_registers(rd_s16(VIEW_ROTATE), LIST_MATRIX);
     for (k = 0; k < 3; k++) D(k) = SEXT(rd_u16(CONTROL_RECORDS + 0x66 + (gaddr)(2 * k)));
+}
+
+int glue_C2D9BA(void) {
+    aim_view_with_registers();
     return glue_return();
 }

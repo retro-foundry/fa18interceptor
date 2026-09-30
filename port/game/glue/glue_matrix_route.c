@@ -5,6 +5,7 @@
 #include "memory.h"
 
 void rotation_matrix8_registers(void); /* glue_batch19.c */
+void aim_view_with_registers(void);     /* glue_batch43.c */
 
 static void after_transform(void *context) {
     (void)context;
@@ -30,8 +31,17 @@ static void before_final_scale(void *context) {
     A(1) = VIEW_ANGLE_MATRIX + 12;
 }
 
-int glue_C2DB18(void) {
+void matrix_route_with_registers(void) {
     MatrixRouteHooks hooks = {after_transform, before_final_scale, 0};
     update_control_record_matrix_route(&hooks);
+}
+
+int glue_C2DB18(void) {
+    matrix_route_with_registers();
+    return glue_return();
+}
+
+int glue_C2D99C(void) {
+    dispatch_matrix_route(aim_view_with_registers, matrix_route_with_registers);
     return glue_return();
 }

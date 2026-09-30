@@ -494,6 +494,8 @@ const FA18Port fa18_ports[] = {
     {0xC2DEE0, glue_C2DEE0, "transform_record_matrix", 5100},
     /* active control-record matrix route */
     {0xC2DB18, glue_C2DB18, "update_control_record_matrix_route", 6500},
+    /* matrix route selector */
+    {0xC2D99C, glue_C2D99C, "dispatch_matrix_route", 12000},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

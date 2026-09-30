@@ -6,6 +6,8 @@
 #include "matrix.h"
 #include "memory.h"
 
+#include "view.h"
+
 
 static void record_angles(gaddr record, uint16_t tuple[3]) {
     tuple[0] = rd_u16(record + 0x66);
@@ -17,6 +19,16 @@ static void publish_angles(const uint16_t tuple[3]) {
     int i;
     for (i = 0; i < 3; ++i)
         wr_u32(ATTITUDE_A + (gaddr)(4 * i), tuple[i]);
+}
+
+void dispatch_matrix_route(void (*view_route)(void), void (*record_route)(void)) {
+    if (rd_u8(CONTEXT_SELECT)) {
+        if (view_route) view_route();
+        else aim_view();
+    } else {
+        if (record_route) record_route();
+        else update_control_record_matrix_route(0);
+    }
 }
 
 void update_control_record_matrix_route(const MatrixRouteHooks *hooks) {

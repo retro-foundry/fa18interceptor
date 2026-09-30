@@ -12,4 +12,7 @@ typedef struct MatrixRouteHooks {
 
 void update_control_record_matrix_route(const MatrixRouteHooks *hooks);
 
+/* $C2D99C: dispatch to the view or control-record matrix route. */
+void dispatch_matrix_route(void (*view_route)(void), void (*record_route)(void));
+
 #endif

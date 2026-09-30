@@ -8,3 +8,8 @@ The full `$C2D99C-$C2D9AF` range (20 bytes) is
 `source_amiga/observed/dispatch_matrix_update_route.asm`. The two route bodies
 remain separate structural routines; the state byte has no assigned game-level
 meaning.
+
+Ported as `dispatch_matrix_route` in `port/game/matrix_route.c`, with register
+state from the existing route glue. Focused proof on all three native
+recordings matched 4,082 completed shadow calls and 5,810 sandbox calls,
+with zero mismatches.

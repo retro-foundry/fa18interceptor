@@ -247,7 +247,11 @@ part that is not, stays on the work side.
    calls, zero mismatches. The full combined gate passed with 375 routines,
    754,388 matching shadow calls and 962,808 sandbox calls, with identical
    poison frames. All 10 parity frames 393-402 were pixel-exact.
-   `$C2D99C` is the newly ready selector for the two matrix routes.
+   `$C2D99C` is now registered as the selector for the two matrix routes.
+   Focused proof over all three native recordings matched 4,082 completed
+   shadow calls and 5,810 sandbox calls with zero mismatches. The summary
+   above remains the last full combined gate; include this selector in the
+   next larger batch gate.
    The post-input parent `$C0F992` depends on `$C08F26`; its deeper
    `$C1C63E`/`$C1C860` calls are still translated.
 2. **Exact UAE timing (dropped for now).** Native recordings make the port
