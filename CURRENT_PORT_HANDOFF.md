@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 377 registered; last full gate covered 375 with 754,388 calls matching in shadow and 962,808 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 377; 736,396 calls matching in shadow and 927,924 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -239,8 +239,9 @@ part that is not, stays on the work side.
    `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
    velocity/depth paths and post-transform orientation are C. Focused proof
    over all three native recordings matched 3,975 completed shadow calls and
-   4,877 sandbox calls with zero mismatches. Include it in the next full
-   combined gate before replacing the last-gate totals above.
+   4,877 sandbox calls with zero mismatches. The full 377-routine gate passed:
+   736,396 matching shadow calls, 927,924 sandbox matches and identical
+   poison frames. All 10 parity frames 393-402 were pixel-exact.
    `$C2DEE0` is now registered (`matrix.c`, `glue_transform_matrix.c`). It
    builds the nine-long signed product, converts it through the original
    table/division angle branches, and returns the three shifted angles with
