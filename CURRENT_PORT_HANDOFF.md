@@ -235,6 +235,10 @@ part that is not, stays on the work side.
    `c2fede_selected_table_display_stage.md`; the isolated orchestration is
    `port/selected_table_display_stage.c`.
    Other ready larger candidates include `$C13D84`, `$C26EBE`, and `$C2DEE0`.
+   `$C2DEE0` now has its complete nine-cell signed matrix product block in
+   `matrix.c` (`build_transform_product`), including the three negative-angle
+   guards and rotation call. It is not registered: its subsequent signed
+   table/division angle extraction and live register outputs remain to port.
    The post-input parent `$C0F992` depends on `$C08F26`; its deeper
    `$C1C63E`/`$C1C860` calls are still translated.
 2. **Exact UAE timing (dropped for now).** Native recordings make the port

@@ -23,6 +23,11 @@ typedef struct MatrixDepthAdjustment {
  * (each product shifted down by 14). */
 void rotation_matrix(uint16_t a, uint16_t b, uint16_t c, gaddr out);
 
+/* First arithmetic block of $C2DEE0: guard its three signed angle words,
+ * build the rotation at $C45B90, and write nine full signed sums at $C45BA2.
+ * The caller's matrix is nine signed words in row-major order. */
+void build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c);
+
 /* The three-angle rotation in 2.8 fixed point ($C2E3DE): the same terms,
  * each sum kept as the high word of its 2.14 product shifted down by 4, and
  * the middle bottom term -(sa >> 6). */

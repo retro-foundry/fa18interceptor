@@ -111,6 +111,25 @@ void scale_matrix_rows(gaddr matrix, gaddr scales) {
     }
 }
 
+void build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c) {
+    int row, col, k;
+    uint16_t angles[3] = {a, b, c};
+    for (k = 0; k < 3; ++k)
+        if ((int16_t)angles[k] < 0) angles[k] = (uint16_t)(angles[k] + 0x7080u);
+    rotation_matrix(angles[0], angles[1], angles[2], MATRIX_TRANSFORM_ROTATION);
+    for (row = 0; row < 3; ++row) {
+        for (col = 0; col < 3; ++col) {
+            uint32_t sum = 0;
+            for (k = 0; k < 3; ++k) {
+                int32_t term = (int32_t)rd_s16(source + (gaddr)(6 * k + 2 * col)) *
+                               rd_s16(MATRIX_TRANSFORM_ROTATION + (gaddr)(6 * row + 2 * k));
+                sum += (uint32_t)term;
+            }
+            wr_u32(MATRIX_TRANSFORM_PRODUCT + (gaddr)(12 * row + 4 * col), sum);
+        }
+    }
+}
+
 static uint32_t replace_low_word(uint32_t value, int16_t word) {
     return (value & 0xFFFF0000u) | (uint16_t)word;
 }
