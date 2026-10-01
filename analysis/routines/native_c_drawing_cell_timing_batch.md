@@ -113,3 +113,11 @@ these independent early differences: C3201A/C31F4C/C20A40 at frame 424 by
 `python scripts/probe_recomp_timing.py --frames 500 --rank-fixed 35
 --differences-only` to rerank; each invocation reuses one source stream and
 cleans both scratch streams. Subset effects are not monotonic.
+
+## Followup
+
+The subsequent 20-entry startup/math batch removes the message, scene and
+long-table debt above. New enclosing and terrain traces identify C1E328
+sorting and C09A78 conditions as the next timing targets. See
+[native_c_startup_timing_batch.md](native_c_startup_timing_batch.md) for the
+current proof and boundaries; this report retains the earlier batch evidence.

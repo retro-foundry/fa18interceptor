@@ -35,11 +35,13 @@ int glue_C2FA7E_step(void);
 
 /* fixed_math.c, audio.c, text.c */
 int glue_C2E6DA(void);
+int glue_C2E6DA_step(void);
 int glue_C501E0(void);
 int glue_C24FE8(void);
 int glue_C330FE(void);
 int glue_C32806(void);
 int glue_C25A08(void);
+int glue_C25A08_step(void);
 int glue_C1715C(void);
 int glue_C2F558(void);
 
@@ -83,11 +85,13 @@ int glue_C308E2(void);
 int glue_C30904(void);
 int glue_C2DEA2(void);
 int glue_C28F16(void);
+int glue_C28F16_step(void);
 int glue_C0FA4C(void);
 int glue_C0FA80(void);
 int glue_C1FE20(void);
 int glue_C21960(void);
 int glue_C25980(void);
+int glue_C25980_step(void);
 int glue_C2E370(void);
 
 /* batch 8: depth sort, records, compass, cockpit, context stage */
@@ -100,9 +104,11 @@ int glue_C082B8(void);
 int glue_C082B0(void);
 int glue_C10C08(void);
 int glue_C11B0E(void);
+int glue_C11B0E_step(void);
 
 /* batch 9: hex text, decay, nudge, random, voices, readout, mission, view pan */
 int glue_C0F56A(void);
+int glue_C0F56A_step(void);
 int glue_C13A2A(void);
 int glue_C13CDE(void);
 int glue_C13396(void);
@@ -117,7 +123,9 @@ int glue_C258C8(void);
 /* batch 10: decay, messages, lookups, cell steps, 2.8 matrix, cached display value */
 int glue_C148A2(void);
 int glue_C11312(void);
+int glue_C11312_step(void);
 int glue_C287DA(void);
+int glue_C287DA_step(void);
 int glue_C1FEF2(void);
 int glue_C1ECFC(void);
 int glue_C1ECD4(void);
@@ -151,8 +159,11 @@ int glue_C2651E(void);
 
 /* batch 14: paired sin_cos, print_number, square_root */
 int glue_C2E5F6(void);
+int glue_C2E5F6_step(void);
 int glue_C24F76(void);
+int glue_C24F76_step(void);
 int glue_C2564E(void);
+int glue_C2564E_step(void);
 
 /* batch 15: cell occupancy, record position, record 76/78 */
 int glue_C1D520(void);
@@ -178,12 +189,14 @@ int glue_C16F1C_step(void);
 
 /* batch 19: rotation matrices and row scaling */
 int glue_C2E47A(void);
+int glue_C2E47A_step(void);
 int glue_C2E38E(void);
 int glue_C2E5AC(void);
 
 /* batch 19: three-angle matrix variants */
 int glue_C2E3DE(void);
 int glue_C2E514(void);
+int glue_C2E514_step(void);
 
 /* batch 20: inverse orientation, stream skip, attitude flags, vertex tail, divide, interrupt server */
 int glue_C2D970(void);
@@ -229,6 +242,7 @@ int glue_C17EF2_step(void);
 int glue_C18096(void);
 int glue_C18096_step(void);
 int glue_C2D954(void);
+int glue_C2D954_step(void);
 
 /* batch 24: local to world, shown vertices, normalize, slot scan */
 int glue_C091E0(void);
@@ -282,6 +296,7 @@ int glue_C1BA86(void);
 /* batch 30: audio interrupt, date line */
 int glue_C50158(void);
 int glue_C24E2C(void);
+int glue_C24E2C_step(void);
 
 /* batch 31: condition flags, lost selection */
 int glue_C09A78(void);
@@ -336,6 +351,7 @@ int glue_C27456(void);
 
 /* batch 42: direction tracking */
 int glue_C123FA(void);
+int glue_C123FA_step(void);
 
 /* batch 43: normalize register entry */
 int glue_C2574A(void);
@@ -626,6 +642,7 @@ int glue_C3003A(void);
 
 /* control_records.c */
 int glue_C28800(void);
+int glue_C28800_step(void);
 
 /* scene_setup.c */
 int glue_C0924A(void);
@@ -641,9 +658,11 @@ int glue_C25070(void);
 
 /* scene record stream dispatch () */
 int glue_C28B34(void);
+int glue_C28B34_step(void);
 
 /* scene record initialization and aim () */
 int glue_C28AFE(void);
+int glue_C28AFE_step(void);
 
 /* post-input context command and heading marker () */
 int glue_C10C68(void);
@@ -656,6 +675,7 @@ int glue_C2374C(void);
 
 /* scene stream selection and special scene record () */
 int glue_C28722(void);
+int glue_C28722_step(void);
 
 /* scene initialization and ordered child calls () */
 int glue_C0FAA4(void);

@@ -15,11 +15,12 @@ Hand-written C is replacing the translated routines in source-backed batches;
 419 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-The immediate work is game timing parity. Another 15 polygon, segment, line
-and cell-template entries match all recorded frames and sealed final RAM
-in isolation. The complete registered demo still matches through frame 415;
-startup timing debt is the next target. See the
-[timing evidence](analysis/routines/native_c_drawing_cell_timing_batch.md).
+The immediate work is game timing parity. Another 20 startup, number-field,
+orientation and tracking entries match all recorded frames and sealed final
+RAM in isolation. Startup timing now matches through terrain-refresh entry.
+The complete registered demo still matches through frame 415; display-list
+sorting and condition updates are the next timing targets. See the
+[timing evidence](analysis/routines/native_c_startup_timing_batch.md).
 
 See [STATUS.md](STATUS.md) for the numbers,
 [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) for the next steps, and
@@ -51,7 +52,12 @@ Check the work:
 
 ```sh
 sh scripts/recomp_ports_check.sh   # three sealed native recordings, shadow/sandbox/poison
+sh scripts/recomp_live_check.sh    # fresh source OFF vs live ON frames and sealed final RAM
 ```
+
+Set `PORTS_ONLY` to a comma-separated registered batch for its isolated live
+check. The live gate checks final RAM during the existing ON frame replay
+and removes temporary frame/RAM outputs afterward.
 
 Large replay and trace artifacts are bounded automatically. Headless builds
 prune old disposable files when `build/` exceeds 12 GiB, while preserving

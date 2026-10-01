@@ -1,7 +1,7 @@
 /* Source timing for the sibling normal/wide map packet passes. map_packet.c
  * owns the readable selector, directory walk and projection operations.
  * These steps suspend at the polygon child and at chipset service events. */
-#include "glue_step.h"
+#include "glue_unsigned_division_step.h"
 
 static void map_negate_long(uint32_t *reg) {
     uint32_t old = *reg; *reg = 0; step_subtract_long(reg, old);
@@ -41,27 +41,6 @@ static void map_multiply(uint32_t *reg, uint16_t source, int signed_words) {
     *reg = signed_words ? (uint32_t)((int32_t)(int16_t)*reg * (int32_t)(int16_t)source) :
                          (uint32_t)(uint16_t)*reg * source;
     flags_logic_l(*reg);
-}
-static void map_divide_unsigned(uint32_t *reg, uint16_t divisor) {
-    uint32_t dividend = *reg, quotient, remainder, shifting, high;
-    int cycles = 38, i;
-    if (!divisor) { m68ki_exception_trap(EXCEPTION_ZERO_DIVIDE); return; }
-    if ((dividend >> 16) >= divisor) {
-        USE_CYCLES(10 - 140); FLAG_V = VFLAG_SET; return;
-    }
-    shifting = dividend; high = (uint32_t)divisor << 16;
-    for (i = 0; i < 15; ++i) {
-        uint32_t before = shifting; shifting <<= 1;
-        if ((int32_t)before < 0) shifting -= high;
-        else {
-            cycles += 2;
-            if (shifting >= high) { shifting -= high; --cycles; }
-        }
-    }
-    USE_CYCLES(cycles * 2 - 140);
-    quotient = dividend / divisor; remainder = dividend % divisor;
-    *reg = (remainder << 16) | quotient;
-    FLAG_N = NFLAG_16(quotient); FLAG_Z = quotient; FLAG_V = FLAG_C = 0;
 }
 static void map_load_words(uint32_t address, uint16_t mask) {
     unsigned i, count = 0;
@@ -233,8 +212,8 @@ static int map_packet_instruction(void) {
     case 0xC2AE9A: D(7) = m68ki_read_imm_32(); flags_logic_l(D(7)); break;
     case 0xC2AEA0:
         value = m68ki_read_imm_16(); step_compare_word(value, m68k_read_memory_16(m68ki_read_imm_32())); break;
-    case 0xC2AEAA: map_divide_unsigned(&D(7), m68ki_read_imm_16()); break;
-    case 0xC2AEB0: map_divide_unsigned(&D(7), m68k_read_memory_16(m68ki_read_imm_32())); break;
+    case 0xC2AEAA: step_divide_unsigned(&D(7), m68ki_read_imm_16()); break;
+    case 0xC2AEB0: step_divide_unsigned(&D(7), m68k_read_memory_16(m68ki_read_imm_32())); break;
     case 0xC2AEB6: map_multiply(&D(6), D(7), 0); break;
     case 0xC2AEBC: case 0xC2AECC: case 0xC2AF96:
         D((opcode >> 9) & 7u) = D(opcode & 7u); flags_logic_l(D((opcode >> 9) & 7u)); break;
@@ -340,8 +319,8 @@ int glue_C2AA9C_step(void) {
     case 0xC2AAEC: D(7) = m68ki_read_imm_32(); flags_logic_l(D(7)); break;
     case 0xC2AAF2:
         value = m68ki_read_imm_16(); step_compare_word(value, m68k_read_memory_16(m68ki_read_imm_32())); break;
-    case 0xC2AAFC: map_divide_unsigned(&D(7), m68ki_read_imm_16()); break;
-    case 0xC2AB02: map_divide_unsigned(&D(7), m68k_read_memory_16(m68ki_read_imm_32())); break;
+    case 0xC2AAFC: step_divide_unsigned(&D(7), m68ki_read_imm_16()); break;
+    case 0xC2AB02: step_divide_unsigned(&D(7), m68k_read_memory_16(m68ki_read_imm_32())); break;
     case 0xC2AB08: map_multiply(&D(0), D(7), 0); break;
     case 0xC2AB0C:
         m68k_write_memory_32(step_displacement(A(6)), D(0)); flags_logic_l(D(0)); break;

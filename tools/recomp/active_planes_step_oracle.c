@@ -71,6 +71,55 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if ((pc >= 0xC0F56Au && pc < 0xC0F5F8u) ||
+        (pc >= 0xC11312u && pc < 0xC1134Eu) ||
+        (pc >= 0xC11B0Eu && pc < 0xC11B42u) ||
+        (pc >= 0xC123FAu && pc < 0xC12950u) ||
+        (pc >= 0xC24E2Cu && pc < 0xC25A3Eu) ||
+        (pc >= 0xC28720u && pc < 0xC28F2Cu) ||
+        (pc >= 0xC2D954u && pc < 0xC2D99Cu) ||
+        (pc >= 0xC2E47Au && pc < 0xC2E750u)) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[4] + i * 4, next_value());
+            wr_u32(REG_A[5] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+        if (pc == 0xC24E36u) {
+            static const uint32_t dividends[] = {
+                0, 1, 3599, 3600, 3601, 0x00010000u,
+                (3600u << 16) - 1, 3600u << 16,
+                0x80000000u, 0xffffffffu
+            };
+            REG_D[0] = dividends[scenario % 10u];
+        }
+        if (pc == 0xC25664u || pc == 0xC256A0u || pc == 0xC256D4u) {
+            static const uint32_t dividends[] = {
+                0, 1, 199, 200, 201, (200u << 16) - 1,
+                200u << 16, 0x80000000u, 0xffffffffu
+            };
+            REG_D[2] = dividends[scenario % 9u];
+        }
+        if (pc == 0xC2566Cu || pc == 0xC256A8u || pc == 0xC256DCu) {
+            REG_D[1] = scenario & 16u ? next_value() : next_value() & 0xffffu;
+        }
+        if (pc == 0xC25998u) {
+            static const uint32_t dividends[] = {
+                0, 1, 0xffffffffu, 0x80000000u, 0x7fffffffu,
+                0xffff0000u, 0x00008000u, 0x00010000u
+            };
+            static const uint16_t divisors[] = {0, 1, 0xffff, 2, 0xfffe, 0x7fff, 0x8000, 17};
+            REG_D[0] = dividends[scenario % 8u];
+            REG_D[1] = (REG_D[1] & 0xffff0000u) | divisors[(scenario / 4u) % 8u];
+        }
+    }
     if (pc >= 0xC1D3F4u && pc < 0xC1D722u) {
         static const uint8_t byte_edges[] = {0, 1, 0x7f, 0x80, 0xff, 15, 16, 31};
         REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
