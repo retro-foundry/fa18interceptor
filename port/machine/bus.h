@@ -29,6 +29,10 @@ void fa18_bus_finish(uint32_t pc);
 void fa18_bus_access(uint32_t address);
 /* A program word fetch at `address` (opcode or extension word). */
 void fa18_bus_fetch(uint32_t address);
+/* Optional source-instruction and chipset-event CSV observations. Configured
+ * by FA18_BOUNDARY_TRACE (output path) and FA18_BOUNDARY_RANGE (hex LO-HI). */
+void fa18_bus_trace_boundary(const char *kind, uint32_t source_pc);
+int fa18_bus_trace_close(void);
 /* CPU cycle of the next access (the beam position the CPU observes). */
 int64_t fa18_bus_now(void);
 

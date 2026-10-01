@@ -42,6 +42,37 @@ static uint32_t jump_pc;           /* ... from here */
 static int jump_fetches;           /* its program fetches, not yet charged */
 static int eclock_phase;
 static int copper_carry; /* Copper fetches left over from the previous line */
+static FILE *boundary_trace;
+static uint32_t boundary_low, boundary_high;
+
+extern int fa18_write_log_active;
+extern int64_t fa18_next_event;
+
+int fa18_bus_trace_close(void) {
+    int result = boundary_trace ? fclose(boundary_trace) : 0;
+    boundary_trace = NULL;
+    if (result) fprintf(stderr, "boundary trace: cannot finish output\n");
+    return result == 0;
+}
+
+void fa18_bus_trace_boundary(const char *kind, uint32_t source_pc) {
+    FA18Machine *m = fa18_machine;
+    int i;
+    if (!boundary_trace || source_pc < boundary_low || source_pc >= boundary_high) return;
+    /* Read machine/CPU storage directly: tracing must not issue bus accesses
+     * or consume cycles. log_mode separates sandboxed ports from live source. */
+    if (fprintf(boundary_trace, "%s,%06X,%06X,%lld,%lld,%llu,%d,%llu,%04X,%04X,%04X,%d",
+        kind, source_pc, REG_PC, (long long)fa18_machine_now(),
+        (long long)fa18_next_event, (unsigned long long)m->frame, m->vpos,
+        (unsigned long long)m->blits, m->intreq, m->intena, m->dmacon,
+        fa18_write_log_active) < 0) goto failed;
+    for (i = 0; i < 16; ++i)
+        if (fprintf(boundary_trace, ",%08X", REG_DA[i]) < 0) goto failed;
+    if (fprintf(boundary_trace, ",%04X\n", m68k_get_reg(NULL, M68K_REG_SR)) >= 0) return;
+failed:
+    fprintf(stderr, "boundary trace: cannot write observation at %06X\n", source_pc);
+    abort();
+}
 
 /* The running (or last) blit: one byte per CCK from blit_first, 1 where the
  * blitter or other DMA holds the bus. */
@@ -53,6 +84,28 @@ static void build_lead_table(void);
 
 void fa18_bus_reset(void) {
     const char *phase = getenv("FA18_ECLOCK_PHASE");
+    const char *trace_path = getenv("FA18_BOUNDARY_TRACE");
+    const char *trace_range = getenv("FA18_BOUNDARY_RANGE");
+    char trailing;
+    if (!fa18_bus_trace_close()) abort();
+    if (trace_path || trace_range) {
+        if (!trace_path || !*trace_path || !trace_range ||
+            sscanf(trace_range, "%x-%x%c", &boundary_low, &boundary_high, &trailing) != 2 ||
+            boundary_low >= boundary_high || boundary_high > 0x1000000u) {
+            fprintf(stderr, "boundary trace: set FA18_BOUNDARY_TRACE=PATH and FA18_BOUNDARY_RANGE=LO-HI (hex, exclusive HI)\n");
+            abort();
+        }
+        boundary_trace = fopen(trace_path, "w");
+        if (!boundary_trace) {
+            fprintf(stderr, "boundary trace: cannot open %s\n", trace_path);
+            abort();
+        }
+        if (fputs("kind,source_pc,pc,cycle,next_event,frame,vpos,blits,intreq,intena,dmacon,log_mode,"
+                  "d0,d1,d2,d3,d4,d5,d6,d7,a0,a1,a2,a3,a4,a5,a6,a7,sr\n", boundary_trace) == EOF) {
+            fprintf(stderr, "boundary trace: cannot write header to %s\n", trace_path);
+            abort();
+        }
+    }
     memset(line_dma, 0, sizeof line_dma);
     access_index = 0;
     jumping = 0;
@@ -270,6 +323,7 @@ void fa18_bus_finish(uint32_t target) {
         }
     }
     fetch_next = target + 4;
+    if (boundary_trace) fa18_bus_trace_boundary("flow_target", jump_pc);
 }
 
 static int is_jump(int op) {
@@ -301,6 +355,7 @@ void fa18_bus_begin(uint32_t pc) {
     jumping = is_jump(op);
     jump_pc = pc;
     jump_fetches = 0;
+    if (boundary_trace) fa18_bus_trace_boundary("instruction", pc);
 }
 
 static int is_chip_bus(uint32_t a) {

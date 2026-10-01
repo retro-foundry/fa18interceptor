@@ -6,6 +6,7 @@
 
 #include "m68k.h"
 #include "machine.h"
+#include "bus.h"
 #include "recomp_runtime.h"
 #include "input.h"
 #include "recomp_ports.h"
@@ -282,6 +283,7 @@ int main(int argc, char **argv) {
     if (window) {
 #ifdef FA18_WITH_SDL
         int result = run_window(m, &replay, start_frame, frames, scale);
+        if (!fa18_bus_trace_close()) return 1;
         fa18_loop_finish();
         fa18_replay_free(&replay);
         return result;
@@ -305,6 +307,7 @@ int main(int argc, char **argv) {
         }
     }
     if (rgb) fclose(rgb);
+    if (!fa18_bus_trace_close()) return 1;
     if (ppm && !write_ppm(ppm, m->last_screen)) { fprintf(stderr, "cannot write %s\n", ppm); return 1; }
     if (fallback) fa18_recomp_write_fallback_log(fallback);
     if (profile_path) fa18_recomp_write_profile(profile_path);

@@ -639,15 +639,18 @@ int fa18_machine_event_due(void) {
 int fa18_machine_service(void) {
     FA18Machine *m = fa18_machine;
     int64_t now = fa18_cycle_origin - GET_CYCLES();
+    uint32_t source_pc = REG_PC;
     last_boundary = now;
     if (frame_done) return 1;
     if (now < fa18_next_event) return 0;
+    fa18_bus_trace_boundary("event_before", source_pc);
     while (now >= line_start + FA18_LINE_CYCLES) {
         advance_line(m);
         if (frame_done) {
             /* Keep the cycle count continuous across the end of the slice. */
             fa18_cycle_origin -= GET_CYCLES();
             SET_CYCLES(0);
+            fa18_bus_trace_boundary("frame_end", source_pc);
             return 1;
         }
     }
@@ -658,6 +661,7 @@ int fa18_machine_service(void) {
     m68ki_check_interrupts();
     fa18_next_event = line_start + FA18_LINE_CYCLES;
     if (blit_pending && blit_end < fa18_next_event) fa18_next_event = blit_end;
+    fa18_bus_trace_boundary("event_after", source_pc);
     return 0;
 }
 

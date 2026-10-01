@@ -6,40 +6,123 @@
 #include "glue_clip.h"
 #include "globals.h"
 #include "polygon_clip.h"
+#include "../../map_packet_static_data.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
-static int draw_map_polygon(void *context, MapPacketRegisterEffects *effects) {
+typedef struct {
+    FA18MapPacketPassSelectorResult pass;
+    gaddr component;
+    uint32_t control_cursor;
+} MapPacketBridge;
+
+static int draw_map_polygon(void *context, gaddr projected_end, int16_t origin_x) {
     ClipperSnapshot snapshot;
     uint16_t colour = rd_u16(CURRENT_COLOUR);
-    unsigned i;
+    uint32_t saved_d0 = D(0);
     int drawn;
     (void)context;
-    for (i = 0; i < 6; ++i) A(i) = effects->address[i];
-    for (i = 0; i < 8; ++i) D(i) = effects->data[i];
+    A(5) = projected_end;
+    /* $C2AF8C MOVEM.W sign-extends the origin into D6. */
+    D(6) = (uint32_t)(int32_t)origin_x;
     clipper_snapshot(&snapshot);
     drawn = clip_and_draw_polygon();
     clipper_registers(&snapshot, colour, drawn);
-    for (i = 0; i < 6; ++i) effects->address[i] = A(i);
-    for (i = 0; i < 8; ++i) effects->data[i] = D(i);
+    D(0) = saved_d0; /* $C2AFE8 restores D0 after the child. */
     return 0;
 }
 
+static void begin_map_pass(void *context, gaddr component,
+                           const FA18MapPacketPassSelectorResult *pass) {
+    MapPacketBridge *bridge = context;
+    bridge->pass = *pass;
+    bridge->component = component;
+    A(4) = component;
+    A(0) = pass->control_stream_address;
+}
+
+static void control_registers(void *context, uint8_t mode, const int8_t pair[2]) {
+    MapPacketBridge *bridge = context;
+    const FA18MapPacketPassSelectorResult *pass = &bridge->pass;
+    int16_t row = (int16_t)(uint16_t)((uint16_t)pass->coordinate.row_min +
+                                     (uint16_t)(int16_t)pair[0]);
+    int16_t column = (int16_t)(uint16_t)((uint16_t)pass->coordinate.column_min +
+                                        (uint16_t)(int16_t)pair[1]);
+    uint16_t shifted_column, index;
+
+    A(0) = pass->control_stream_address + ++bridge->control_cursor;
+    A(2) = FA18_MAP_PACKET_CONTROL_RUNTIME_BASE + 2u * mode;
+    SET_W(D(2), 2u * mode);
+    SET_W(D(3), (uint16_t)(int16_t)pair[0]);
+    SET_W(D(0), row);
+    if (row < 0 || row > pass->directory.row_max) return;
+    SET_W(D(3), (uint16_t)(int16_t)pair[1]);
+    SET_W(D(1), column);
+    if (column < 0 || column > pass->directory.column_max) return;
+    shifted_column = (uint16_t)((uint16_t)column <<
+        (pass->directory.layout == FA18_MAP_PACKET_DIRECTORY_WIDE ? 6u : 4u));
+    index = (uint16_t)((uint16_t)row * 2u + shifted_column);
+    SET_W(D(0), index);
+    SET_W(D(1), shifted_column);
+    SET_W(D(0), rd_u16(pass->directory.record_base_address + index));
+    A(1) = A(3) = pass->directory.record_base_address;
+}
+
+static void cursor_registers(void *context, gaddr next_word, int16_t last_word,
+                              uint8_t detail_cutoff) {
+    (void)context;
+    A(3) = next_word;
+    if (detail_cutoff) {
+        uint16_t relative = (uint16_t)(((uint16_t)last_word & 0x7fffu) << 2);
+        D(1) = (uint32_t)(int32_t)(int16_t)relative;
+    } else SET_W(D(1), last_word);
+}
+
+static void packet_registers(void *context, gaddr packet) {
+    (void)context;
+    A(3) = packet;
+}
+
+static void seed_registers(void *context, uint32_t packed_seed) {
+    (void)context;
+    D(0) = packed_seed;
+}
+
+static void transform_registers(void *context, uint32_t last_y) {
+    (void)context;
+    D(7) = last_y;
+}
+
+static void visibility_registers(void *context, uint32_t limit) {
+    (void)context;
+    D(6) = limit;
+}
+
+static void detail_registers(void *context, uint8_t detail, uint16_t visibility) {
+    (void)context;
+    if (!detail && visibility) D(6) = 0; /* $C2AE76 */
+}
+
+static void end_map_pass(void *context, gaddr next_control, int terminated) {
+    MapPacketBridge *bridge = context;
+    A(0) = next_control;
+    if (terminated) SET_W(D(2), 0xffffu);
+    A(4) = bridge->component;
+}
+
 static int map_packet_glue(int wide) {
-    MapPacketRegisterEffects effects;
-    unsigned i;
-    for (i = 0; i < 6; ++i) effects.address[i] = A(i);
-    for (i = 0; i < 8; ++i) effects.data[i] = D(i);
-    effects.draw_polygon = draw_map_polygon;
-    effects.draw_context = 0;
-    if (run_map_packet_pass(A(6), wide, &effects) != 0) {
+    MapPacketBridge bridge = {0};
+    const MapPacketHooks hooks = {
+        &bridge, draw_map_polygon, begin_map_pass, control_registers,
+        cursor_registers, packet_registers, seed_registers,
+        transform_registers, visibility_registers, detail_registers, end_map_pass
+    };
+    if (run_map_packet_pass(A(6), wide, &hooks) != 0) {
         fprintf(stderr, "map packet %s pass failed at A6=%08x\n",
                 wide ? "wide" : "normal", (unsigned)A(6));
         abort();
     }
-    for (i = 0; i < 6; ++i) A(i) = effects.address[i];
-    for (i = 0; i < 8; ++i) D(i) = effects.data[i];
     return glue_return();
 }
 
