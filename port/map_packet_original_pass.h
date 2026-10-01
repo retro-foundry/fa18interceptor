@@ -13,6 +13,13 @@ typedef struct {
     uint8_t allow_negative_packet;
 } FA18MapPacketOriginalPassInput;
 
+/* Bind one selected mode to its original directory and packet payload. The
+ * caller can then supply the live per-record state before running the stage. */
+int fa18_prepare_original_map_packet_record(
+    const FA18MapPacketOriginalPassInput *input,
+    const FA18MapPacketPassSelectorResult *pass, uint8_t mode,
+    FA18MapPacketRecordStageInput *record);
+
 /* `$C2AB34-$C2AFF9`: compose one source-shaped map pass using Hunk 28/68
  * resolvers. The parent still owns all live coordinate, matrix, detail, and
  * page-submission state in `record`. */

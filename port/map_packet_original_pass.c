@@ -12,13 +12,12 @@ static int resolve_control_stream(void *context, uint32_t address,
         (void *)owner->input->static_data, address, stream, size);
 }
 
-static int resolve_record(void *context, const FA18MapPacketPassSelectorResult *pass,
-                          uint8_t mode, FA18MapPacketRecordStageInput *record) {
-    FA18MapPacketOriginalPassContext *owner = context;
-    const FA18MapPacketOriginalPassInput *input;
+int fa18_prepare_original_map_packet_record(
+    const FA18MapPacketOriginalPassInput *input,
+    const FA18MapPacketPassSelectorResult *pass, uint8_t mode,
+    FA18MapPacketRecordStageInput *record) {
     size_t directory_offset;
-    if (!owner || !(input = owner->input) || !pass || !record ||
-        !input->static_data)
+    if (!input || !pass || !record || !input->static_data)
         return -1;
     if (pass->directory.record_base_address < FA18_MAP_PACKET_PACKET_RUNTIME_BASE)
         return -1;
@@ -40,6 +39,13 @@ static int resolve_record(void *context, const FA18MapPacketPassSelectorResult *
         (void *)input->static_data
     };
     return 0;
+}
+
+static int resolve_record(void *context, const FA18MapPacketPassSelectorResult *pass,
+                          uint8_t mode, FA18MapPacketRecordStageInput *record) {
+    FA18MapPacketOriginalPassContext *owner = context;
+    return !owner ? -1 : fa18_prepare_original_map_packet_record(
+        owner->input, pass, mode, record);
 }
 
 int fa18_run_original_map_packet_pass(

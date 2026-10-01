@@ -47,6 +47,8 @@ int main(void) {
     packet[PACKET_OFFSET + 7] = 1;
     packet[PACKET_OFFSET + 8] = 0;
     packet[PACKET_OFFSET + 9] = 2;
+    packet[PACKET_OFFSET + 10] = 0xff;
+    packet[PACKET_OFFSET + 11] = 0xff;
     assert(fa18_run_original_map_packet_pass(&input, records, 0x12, &count,
                                               &pass, &route) == 0);
     assert(route == FA18_MAP_PACKET_CONTROL_TERMINATOR);

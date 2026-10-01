@@ -7,6 +7,8 @@
 typedef int (*FA18MapPacketDisplayStage)(
     void *context, const FA18MapPacketProjectionRecord *records,
     uint16_t record_count, uint16_t coordinate_shift);
+typedef void (*FA18MapPacketOriginStage)(void *context,
+                                         const int16_t origin[3]);
 
 typedef struct {
     FA18MapPacketSelectorInput selector;
@@ -16,6 +18,8 @@ typedef struct {
     uint16_t workspace_shift;
     FA18MapPacketDisplayStage display_stage;
     void *display_context;
+    /* $C2AF3A publishes the origin triple in the parent's A6 frame. */
+    FA18MapPacketOriginStage publish_origin;
 } FA18MapPacketStageInput;
 
 typedef enum {

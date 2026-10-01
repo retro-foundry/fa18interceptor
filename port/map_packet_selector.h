@@ -13,7 +13,7 @@ typedef struct {
     int32_t packet_origin;
     uint8_t origin_adjusted;
     int16_t origin_matrix[3];
-    int16_t detail_metric;
+    int32_t detail_metric;
     uint8_t alternate_stream;
     FA18MapPacketStreamResolver resolve_stream;
     void *context;
