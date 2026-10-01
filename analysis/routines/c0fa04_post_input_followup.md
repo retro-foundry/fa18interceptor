@@ -48,4 +48,6 @@ clean at 721,752 shadow matches and 1,169,610 sandbox matches, with sealed RAM
 and identical poison frames.
 
 With C0FA04 corrected, a 500-frame all-registered demo probe moves to frame 416
-with 361 differing pixels, the same result as isolated C0D752.
+with 361 differing pixels. Subsequent fixed-charge ranking found several
+independent renderer entries around that boundary; C2005C is earliest in
+isolation at frame 414.

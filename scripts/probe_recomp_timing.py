@@ -10,9 +10,11 @@ each probe, and both streams are removed unless --keep is requested.
 from __future__ import annotations
 
 import argparse
+import json
 import mmap
 import os
 from pathlib import Path
+import re
 import subprocess
 
 
@@ -20,6 +22,23 @@ ROOT = Path(__file__).resolve().parents[1]
 WIDTH = 320
 HEIGHT = 256
 BYTES_PER_FRAME = WIDTH * HEIGHT * 2
+
+
+def ranked_fixed_entries(report: Path, limit: int) -> list[str]:
+    registry = (ROOT / "port/game/glue/ports.c").read_text(encoding="utf-8")
+    pattern = re.compile(
+        r'\{0x([0-9A-Fa-f]{6}),[^\n]*?"[^"]+",\s*(-?\d+)(?:\s*[,}])')
+    charges = {match.group(1).upper(): int(match.group(2))
+               for match in pattern.finditer(registry)}
+    rows = json.loads(report.read_text(encoding="utf-8"))
+    ranked = []
+    for row in rows:
+        entry = row["entry"]
+        charge = charges.get(entry, 0)
+        if charge > 0 and row["compared"]:
+            score = abs(charge - row["mean_cycles"]) * row["calls"]
+            ranked.append((score, entry))
+    return [entry for _score, entry in sorted(ranked, reverse=True)[:limit]]
 
 
 def normalize_probe(value: str) -> str:
@@ -77,7 +96,7 @@ def first_difference(reference: Path, actual: Path, frames: int) -> tuple[int, i
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("probes", nargs="+", type=normalize_probe,
+    parser.add_argument("probes", nargs="*", type=normalize_probe,
                         metavar="ENTRY[,ENTRY...]", help="registered entry, entry group, or ALL")
     parser.add_argument("--frames", type=int, default=500)
     parser.add_argument("--recording", type=Path,
@@ -87,9 +106,25 @@ def main() -> int:
     parser.add_argument("--rom", type=Path, default=ROOT / "local/system/kick13.rom")
     parser.add_argument("--keep", action="store_true",
                         help="retain the final source and candidate streams")
+    parser.add_argument("--rank-fixed", type=int, default=0, metavar="N",
+                        help="also probe the N largest fixed-charge drifts in a gate report")
+    parser.add_argument("--report", type=Path,
+                        default=ROOT / "build/recomp/ports_report_demo01.json")
+    parser.add_argument("--differences-only", action="store_true")
     args = parser.parse_args()
     if args.frames <= 0:
         parser.error("--frames must be positive")
+    if args.rank_fixed < 0:
+        parser.error("--rank-fixed must be nonnegative")
+    if args.rank_fixed:
+        report = args.report.resolve()
+        if not report.is_file():
+            parser.error(f"gate report does not exist: {report}")
+        ranked = ranked_fixed_entries(report, args.rank_fixed)
+        args.probes.extend(probe for probe in ranked if probe not in args.probes)
+        print("ranked fixed entries: " + ",".join(ranked))
+    if not args.probes:
+        parser.error("supply at least one probe or --rank-fixed N")
 
     recording = args.recording.resolve()
     executable = args.executable.resolve()
@@ -110,7 +145,8 @@ def main() -> int:
                    None if probe == "ALL" else probe)
             difference = first_difference(reference, actual, args.frames)
             if difference is None:
-                print(f"{probe}: exact through frame {args.frames}")
+                if not args.differences_only:
+                    print(f"{probe}: exact through frame {args.frames}")
             else:
                 frame, pixels = difference
                 print(f"{probe}: first difference frame {frame}, {pixels} pixels")

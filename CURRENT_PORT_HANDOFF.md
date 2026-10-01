@@ -52,9 +52,12 @@ The user explicitly deferred OS work and asked for larger routine batches.
   C31226/C3129A/C31312 postflight group and C305AA polygon edge across all three
   sealed recordings. C0FA04 is also source-timed and exact across the three
   recordings. A fresh 500-frame all-registered demo replay now first differs at
-  one-based frame 416 by 361 pixels, matching C0D752's isolated signature.
-  C0D74A first differs at frame 484 by 17 pixels; C2DEE0, C2DB18 and C2D99C
-  are exact through 500 in isolation.
+  one-based frame 416 by 361 pixels. Fixed-charge ranking finds several
+  independent early differences: C2005C at frame 414; C212B0, C332BC, C23CA6
+  and C246A0 at frame 416; C3201A at frame 424; and C26EBE at frame 441.
+  C0D752 also differs at frame 416 with its original 50,000-cycle charge, while
+  C0D74A first differs at frame 484. C2DEE0, C2DB18 and C2D99C are exact
+  through 500 in isolation.
   Shadow/sandbox matches do not establish live ON fidelity for the whole
   registered set.
 - Plane shadow now replays the live source's ordered DMACONR inputs on saved
@@ -123,10 +126,13 @@ resumable execution boundaries.
    Recheck the map pair and region
    probe as a related timing batch; keep their gameplay and
    register logic source-backed. A new fixed average charge has already failed.
-2. Continue the registered timing audit at C0D752. After C0FA04 became
-   source-timed and exact, the complete registered set and isolated C0D752 both
-   first differ at demo frame 416 by 361 pixels. C0D74A shares the long
-   C0D758-C0DA9E body and should be handled in the same timing bridge. Use
+2. Continue the registered timing audit at C2005C, the earliest isolated
+   difference now measured (demo frame 414, 361 pixels), then group the other
+   frame-416 renderer entries where they share child boundaries. C0D74A and
+   C0D752 share the long C0D758-C0DA9E body and should eventually use one timing
+   bridge. Their measured mean source charges make each isolated entry exact
+   through frame 500, but that diagnostic was not retained because a fixed mean
+   does not prove path-dependent or event-boundary timing. Use
    `python scripts/probe_recomp_timing.py ENTRY... --frames 500` to rank entries;
    it creates one source stream, overwrites one candidate stream per probe and
    removes both on exit. Test entries individually because timing interactions
@@ -179,6 +185,8 @@ resumable execution boundaries.
   `python scripts/probe_recomp_timing.py ENTRY... --frames 500`. Each positional
   argument is one entry, a comma-separated group, or `ALL`. The bounded probe
   reuses a single source stream and removes its scratch streams by default.
+  `--rank-fixed N --differences-only` selects the N largest accumulated drifts
+  from the latest demo gate report before probing them.
 - The headless Ninja graph tracks source and header dependencies and shares
   objects with structural oracles and mutation builds. An unchanged build is
   subsecond. Do not manually touch generated C after a header change.
