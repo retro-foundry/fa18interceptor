@@ -7,6 +7,9 @@ typedef struct {
     FA18MapPacketProjectionRecord record;
     int16_t origin[3];
     uint16_t origins;
+    const uint8_t *cursor;
+    int16_t last_word;
+    uint8_t detail_cutoff;
 } Fixture;
 
 static int display(void *context, const FA18MapPacketProjectionRecord *records,
@@ -23,6 +26,14 @@ static void publish_origin(void *context, const int16_t origin[3]) {
     unsigned i;
     ++fixture->origins;
     for (i = 0; i < 3; ++i) fixture->origin[i] = origin[i];
+}
+
+static void publish_cursor(void *context, const uint8_t *next_word,
+                           int16_t last_word, uint8_t detail_cutoff) {
+    Fixture *fixture = context;
+    fixture->cursor = next_word;
+    fixture->last_word = last_word;
+    fixture->detail_cutoff = detail_cutoff;
 }
 
 int main(void) {
@@ -55,10 +66,13 @@ int main(void) {
         repeated.selector.packet_size = sizeof multiple;
         repeated.display_context = &many;
         repeated.publish_origin = publish_origin;
+        repeated.publish_cursor = publish_cursor;
         assert(fa18_run_map_packet_stage(&repeated, records, 0x12,
                                          &count, &route) == 0);
         assert(route == FA18_MAP_PACKET_STAGE_DISPLAYED);
-        assert(many.calls == 2 && many.origins == 1 && count == 1);
+        assert(many.calls == 2 && many.origins == 1 && count == 1 &&
+               many.cursor == multiple + sizeof multiple &&
+               many.last_word == -1 && !many.detail_cutoff);
         assert(many.origin[0] == -18 && many.origin[1] == 18 &&
                many.origin[2] == -9);
         assert(many.record.value[0] == -5 && many.record.value[1] == 43 &&
@@ -68,7 +82,9 @@ int main(void) {
         assert(fa18_run_map_packet_stage(&repeated, records, 0x12,
                                          &count, &route) == 0);
         assert(route == FA18_MAP_PACKET_STAGE_DISPLAYED &&
-               many.calls == 1 && many.origins == 1);
+               many.calls == 1 && many.origins == 1 &&
+               many.cursor == multiple + 12 &&
+               many.last_word == (int16_t)0x8001 && many.detail_cutoff);
     }
     return 0;
 }

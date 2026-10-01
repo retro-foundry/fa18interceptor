@@ -32,8 +32,10 @@ int fa18_run_map_packet_stage(const FA18MapPacketStageInput *input,
     const uint8_t *stream = selection.pair_stream;
     size_t remaining = selection.pair_stream_size;
     int16_t count = selection.pair_count;
+    uint8_t detail_cutoff = 0;
     for (;;) {
         FA18MapPacketPair pairs[0x12];
+        FA18MapPacketTransformRegisters transformed_registers;
         size_t bytes;
         if (count <= 0 || (size_t)count > record_capacity || count > 0x12)
             return -1;
@@ -45,8 +47,13 @@ int fa18_run_map_packet_stage(const FA18MapPacketStageInput *input,
         }
         if (fa18_transform_map_packet_pairs(&transform, pairs, (uint16_t)count,
                                             count, records, record_capacity,
-                                            record_count) != 0 ||
-            input->display_stage(input->display_context, records, *record_count,
+                                            record_count,
+                                            &transformed_registers) != 0)
+            return -1;
+        if (input->publish_transform)
+            input->publish_transform(input->display_context,
+                                     transformed_registers.last_y_register);
+        if (input->display_stage(input->display_context, records, *record_count,
                                  input->workspace_shift) != 0)
             return -1;
         stream += bytes;
@@ -59,8 +66,10 @@ int fa18_run_map_packet_stage(const FA18MapPacketStageInput *input,
         if (count <= 0) {
             uint16_t relative = ((uint16_t)count & 0x7fffu);
             relative = (uint16_t)(relative << 2);
-            if ((int32_t)(int16_t)relative > input->selector.detail_metric)
+            if ((int32_t)(int16_t)relative > input->selector.detail_metric) {
+                detail_cutoff = 1;
                 break;
+            }
             if (remaining < 2u) return -1;
             count = (int16_t)fa18_be16(stream);
             stream += 2;
@@ -72,6 +81,9 @@ int fa18_run_map_packet_stage(const FA18MapPacketStageInput *input,
             return 0;
         }
     }
+    if (input->publish_cursor)
+        input->publish_cursor(input->display_context, stream,
+                              count, detail_cutoff);
     *route = FA18_MAP_PACKET_STAGE_DISPLAYED;
     return 0;
 }

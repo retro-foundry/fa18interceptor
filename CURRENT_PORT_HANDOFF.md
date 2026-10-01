@@ -20,7 +20,7 @@ game-routine count. Group source-backed routines that share a C implementation
 or completed children; use one quick probe during the batch and one full
 shadow, sandbox, poison, and live frame gate before increasing the count.
 `$C2FD8C` remains inactive because its blitter busy-wait timing changes
-pixels in ON mode (details under Next). The active larger source-backed pair
+pixels in ON mode (details under Next). The current larger source-backed pair
 is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
 existing `port/map_packet_*` composition as the reference. Both share the
 body at `$C2AB7C`; their original callers retain every data and address
@@ -28,19 +28,27 @@ register, so the runtime adapter and register replay must be developed
 together. Avoid counting graph entries that are only mid-function tails
 without independent calls.
 
-The map pair is in progress and is **not registered**. The worktree has a
-source-backed live adapter (`port/game/map_packet.c`), common-core linkage,
-and a packet-stage fix for multiple polygons in one packet. A 500-frame
-focused sandbox probe reached all 20 observed demo01 map calls. After the
-frame origin terms were published, the first several probes reported only
-register differences; polygon input and custom-write sequences matched in
-the traced calls. The adapter still needs complete live-register replay,
-cycle charging, and the full proof. The focused run used temporary trace
-instrumentation, which has since been removed. Do not increase the 413 count
-or re-register the pair until that work is verified. The map packet stage and
-original-pass contract tests pass with the multi-polygon and terminator
-fixtures. Rebuild the recomp before probing again; `scripts/build_recomp.sh`
-does not track generated-code header dependencies.
+The map pair is source backed but **not registered**. Its live adapter,
+register bridge, common-core linkage, and multiple-polygon packet walker are
+implemented. Temporarily registering both entries passed the full
+three-recording gate: 415 routines, 719,423 shadow matches and 1,160,026
+sandbox matches, zero mismatches, poison frames identical; run075 frames
+393-402 were 10/10 exact. The pair itself matched 622 completed shadow
+calls and 8,058 sandbox calls; the other observed calls were incomplete
+because they crossed a chipset event. The crash recording did not call it.
+
+Live ON timing is unresolved. With a fixed 20,000-cycle charge, the first
+demo01 frame different from the previous 413-routine ON build is 350. Charges
+near the observed per-entry means delay that to frame 378. A sweep of fixed
+charges produced a best first difference at frame 416; frame 416 differed in
+29,453 pixels, and the blit count changed. The C pass performs many polygon
+draws before the single fixed charge at return, so blitter timing between
+draws must be accounted for before activation. Keep 413 as the verified
+registered count. The focused trace instrumentation and cycle-override probe
+have been removed. The map/detail contract fixtures now include the source's
+packet terminator. `scripts/build_recomp.sh` does not track generated-code
+header dependencies; after changing `recomp_runtime.h`, touch the affected
+generated source before rebuilding.
 
 ## Numbers
 
@@ -331,13 +339,11 @@ part that is not, stays on the work side.
    routines with an indirect call even when the entry fixes the target:
    inspect small excluded routines against their source before selecting the
    next batch. `$C1FFA4` is registered and verified as described above.
-   The next substantial shared body is the normal/wide map packet
-   `$C2AB5A`/`$C2AB34`. Existing `port/map_packet_*` code resolves static
-   control streams, directory offsets, packet records and display callbacks,
-   but still takes caller-supplied runtime record and matrix state. Build
-   the game-memory adapter from the original A6 frame/global fields, then
-   replay all live register effects in glue. Both entries must be compared
-   on actual calls before counting this pair.
+   The normal/wide map packet `$C2AB5A`/`$C2AB34` has a game-memory adapter
+   and register bridge, with temporary registration proving recorded-call
+   parity. Its live ON timing changes frames, so resolve intermediate polygon
+   draw/blitter timing before counting either entry. The pair also blocks its
+   small parent `$C2AA9C`; keep the registered count at 413.
    `$C31226`/`$C3129A`/`$C31312` are registered (Recently ported); use the
    candidate list for the next source-backed slice.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and

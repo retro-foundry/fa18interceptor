@@ -9,6 +9,11 @@ typedef int (*FA18MapPacketDisplayStage)(
     uint16_t record_count, uint16_t coordinate_shift);
 typedef void (*FA18MapPacketOriginStage)(void *context,
                                          const int16_t origin[3]);
+typedef void (*FA18MapPacketCursorStage)(void *context,
+                                         const uint8_t *next_word,
+                                         int16_t last_word, uint8_t detail_cutoff);
+typedef void (*FA18MapPacketTransformStage)(void *context,
+                                            uint32_t last_y_register);
 
 typedef struct {
     FA18MapPacketSelectorInput selector;
@@ -20,6 +25,9 @@ typedef struct {
     void *display_context;
     /* $C2AF3A publishes the origin triple in the parent's A6 frame. */
     FA18MapPacketOriginStage publish_origin;
+    /* $C2AF46 leaves A3 just past the last consumed count or threshold. */
+    FA18MapPacketCursorStage publish_cursor;
+    FA18MapPacketTransformStage publish_transform;
 } FA18MapPacketStageInput;
 
 typedef enum {

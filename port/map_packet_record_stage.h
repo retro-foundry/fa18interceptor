@@ -14,6 +14,11 @@ typedef struct {
     FA18MapPacketStageInput packet_stage;
     uint8_t use_relative_offset;
     FA18MapPacketRelativeOffsetInput relative_offset;
+    /* $C2ADD4 places A3 at a resolved packet before the header gate. */
+    void (*publish_packet)(void *context, uint32_t packet_address);
+    /* $C2AEF8 holds the completed packed component in D0. */
+    void (*publish_seed)(void *context, uint32_t packed_seed);
+    void (*publish_visibility_limit)(void *context, uint32_t limit_register);
 } FA18MapPacketRecordStageInput;
 
 typedef enum {

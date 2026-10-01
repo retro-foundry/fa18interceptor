@@ -26,7 +26,7 @@ static int resolve_inline_stream(void *context, uint32_t reference,
     const uint8_t *packet = context;
     if (!packet || reference != 0) return -1;
     *stream = packet + 4;
-    *size = 6;
+    *size = 8;
     return 0;
 }
 
@@ -48,7 +48,7 @@ static int resolve_relative_packet(void *context, uint32_t address,
 }
 
 int main(void) {
-    const uint8_t packet[] = {0,0,0,0, 0,1, 0,2, 0,4};
+    const uint8_t packet[] = {0,0,0,0, 0,1, 0,2, 0,4, 0xff,0xff};
     Fixture fixture = {0};
     const FA18MapPacketRecordStageInput input = {
         3,
@@ -88,7 +88,7 @@ int main(void) {
                                             &route) == 0 &&
            route == FA18_MAP_PACKET_RECORD_FRAME_STOP && !count);
 
-    const uint8_t relative_packet[] = {0,0,0,0, 0,1, 0,2, 0,4};
+    const uint8_t relative_packet[] = {0,0,0,0, 0,1, 0,2, 0,4, 0xff,0xff};
     RelativeFixture relative_fixture = {{0}, {0}, relative_packet,
         sizeof relative_packet, UINT32_C(0x00c42ca8) + 0x20};
     relative_fixture.directory[1] = 0x20;

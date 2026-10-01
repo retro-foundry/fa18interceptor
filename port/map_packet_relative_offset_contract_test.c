@@ -57,7 +57,8 @@ int main(void) {
     const uint8_t negative_packet[] = {0x80, 0, 0, 0};
     fixture.packet = negative_packet;
     assert(fa18_select_map_packet_relative_offset(&input, &result, &route) == 0 &&
-           route == FA18_MAP_PACKET_RELATIVE_OFFSET_RETRY);
+           route == FA18_MAP_PACKET_RELATIVE_OFFSET_RETRY &&
+           result.packet_address == fixture.expected_address);
     input.allow_negative_packet = 1;
     assert(fa18_select_map_packet_relative_offset(&input, &result, &route) == 0 &&
            route == FA18_MAP_PACKET_RELATIVE_OFFSET_READY);

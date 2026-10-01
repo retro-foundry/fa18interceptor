@@ -20,7 +20,8 @@ int main(void) {
 
     input.force_visible = 0;
     input.visibility_gate = 0;
-    assert(fa18_apply_map_detail_fields(&input, &result) == 0 && !result.visible);
+    assert(fa18_apply_map_detail_fields(&input, &result) == 0 && !result.visible &&
+           !result.visibility_limit_written);
 
     input.visibility_gate = 1;
     input.detail_metric = 0;
@@ -28,7 +29,9 @@ int main(void) {
     input.coordinate_y = 0;
     input.offset_x = 0;
     input.offset_y = 0;
-    assert(fa18_apply_map_detail_fields(&input, &result) == 0 && !result.visible);
+    assert(fa18_apply_map_detail_fields(&input, &result) == 0 && !result.visible &&
+           result.visibility_limit_written &&
+           result.visibility_limit_register == UINT32_C(0x00840000));
     input.coordinate_x = INT32_C(0x01000000);
     assert(fa18_apply_map_detail_fields(&input, &result) == 0 && result.visible);
 

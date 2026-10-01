@@ -50,16 +50,16 @@ int fa18_select_map_packet_relative_offset(
     if (input->resolve_packet(input->context, packet_address, &packet,
                               &packet_size) != 0 || !packet || packet_size < 2u)
         return -1;
-    if ((int16_t)fa18_be16(packet) < 0 && !input->allow_negative_packet) {
-        *route = FA18_MAP_PACKET_RELATIVE_OFFSET_RETRY;
-        return 0;
-    }
-
     result->row = row;
     result->column = column;
     result->packet_address = packet_address;
     result->packet = packet;
     result->packet_size = packet_size;
+    if ((int16_t)fa18_be16(packet) < 0 && !input->allow_negative_packet) {
+        *route = FA18_MAP_PACKET_RELATIVE_OFFSET_RETRY;
+        return 0;
+    }
+
     result->error_code = 0;
     *route = FA18_MAP_PACKET_RELATIVE_OFFSET_READY;
     return 0;

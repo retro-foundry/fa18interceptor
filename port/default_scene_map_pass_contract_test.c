@@ -69,6 +69,8 @@ int main(void) {
     packet[PACKET_OFFSET + 5] = 1;
     packet[PACKET_OFFSET + 7] = 1;
     packet[PACKET_OFFSET + 9] = 2;
+    packet[PACKET_OFFSET + 10] = 0xff;
+    packet[PACKET_OFFSET + 11] = 0xff;
     fa18_five_plane_page_init(&page);
     assert(fa18_flight_renderer_page_init(&renderer, &page, &pixels, &lines,
                                            179, 111, 106, 0, 0, 0) == 0);

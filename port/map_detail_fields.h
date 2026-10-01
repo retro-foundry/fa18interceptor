@@ -20,6 +20,8 @@ typedef struct {
     uint16_t visible;
     int32_t coordinate_x;
     int32_t coordinate_y;
+    uint8_t visibility_limit_written;
+    uint32_t visibility_limit_register;
 } FA18MapDetailFieldsResult;
 
 /* `$C2AE5A-$C2AEF7`: apply the map detail gate to prepared coordinate terms,

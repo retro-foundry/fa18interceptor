@@ -28,11 +28,14 @@ int fa18_run_map_packet_record_stage(
     if (input->use_relative_offset) {
         FA18MapPacketRelativeOffsetInput relative = input->relative_offset;
         relative.mode = gate.mode;
-        FA18MapPacketRelativeOffsetResult selected;
+        FA18MapPacketRelativeOffsetResult selected = {0};
         FA18MapPacketRelativeOffsetRoute relative_route;
         if (fa18_select_map_packet_relative_offset(&relative, &selected,
                                                    &relative_route) != 0)
             return -1;
+        if (selected.packet_address && input->publish_packet)
+            input->publish_packet(packet_stage.display_context,
+                                  selected.packet_address);
         if (relative_route != FA18_MAP_PACKET_RELATIVE_OFFSET_READY) {
             *record_count = 0;
             *route = FA18_MAP_PACKET_RECORD_REJECTED;
@@ -49,12 +52,18 @@ int fa18_run_map_packet_record_stage(
     fields.detail_metric = input->gate.metric;
     FA18MapDetailFieldsResult detail;
     if (fa18_apply_map_detail_fields(&fields, &detail) != 0) return -1;
+    if (detail.visibility_limit_written && input->publish_visibility_limit)
+        input->publish_visibility_limit(packet_stage.display_context,
+                                         detail.visibility_limit_register);
 
     packet_stage.selector.alternate_stream = detail.visible != 0;
     packet_stage.transform.detail_shift = gate.coordinate_shift;
     packet_stage.transform.packed_seed =
         fa18_complete_map_detail_component_route(detail.coordinate_x,
                                                  detail.coordinate_y);
+    if (input->publish_seed)
+        input->publish_seed(packet_stage.display_context,
+                            packet_stage.transform.packed_seed);
 
     FA18MapPacketStageRoute packet_route;
     if (fa18_run_map_packet_stage(&packet_stage, records, record_capacity,

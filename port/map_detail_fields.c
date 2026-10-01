@@ -54,6 +54,8 @@ int fa18_apply_map_detail_fields(const FA18MapDetailFieldsInput *input,
     coordinate_y = add_long(coordinate_y, offset_y);
 
     result->visible = 0;
+    result->visibility_limit_written = 0;
+    result->visibility_limit_register = 0;
     if (input->force_visible) {
         result->visible = 1;
     } else if (input->visibility_gate) {
@@ -69,6 +71,8 @@ int fa18_apply_map_detail_fields(const FA18MapDetailFieldsInput *input,
             limit = asr_long_8((int32_t)product);
         }
         limit = swap_words(limit);
+        result->visibility_limit_written = 1;
+        result->visibility_limit_register = (uint32_t)limit;
         if (centered_magnitude(coordinate_x) > limit ||
             centered_magnitude(coordinate_y) > limit)
             result->visible = 1;

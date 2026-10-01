@@ -32,7 +32,7 @@ static int display(void *context, const FA18MapPacketProjectionRecord *records,
 
 static int record(void *context, const FA18MapPacketPassSelectorResult *pass,
                   uint8_t mode, FA18MapPacketRecordStageInput *result) {
-    static const uint8_t packet[] = {0,0,0,0, 0,1, 0,2, 0,4};
+    static const uint8_t packet[] = {0,0,0,0, 0,1, 0,2, 0,4, 0xff,0xff};
     Fixture *fixture = context;
     if (pass->directory.layout != FA18_MAP_PACKET_DIRECTORY_NORMAL || mode != 3)
         return -1;

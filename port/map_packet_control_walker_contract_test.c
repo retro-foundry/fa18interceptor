@@ -14,7 +14,7 @@ static int display(void *context, const FA18MapPacketProjectionRecord *records,
 }
 
 static int resolve(void *context, uint8_t mode, FA18MapPacketRecordStageInput *input) {
-    static const uint8_t packet[] = {0,0,0,0, 0,1, 0,2, 0,4};
+    static const uint8_t packet[] = {0,0,0,0, 0,1, 0,2, 0,4, 0xff,0xff};
     Fixture *fixture = context;
     if (!fixture || !input) return -1;
     ++fixture->resolutions;

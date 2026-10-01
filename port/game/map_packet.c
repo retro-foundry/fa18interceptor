@@ -6,7 +6,6 @@
 
 #include "globals.h"
 #include "machine.h"
-#include "polygon_clip.h"
 
 #include "../map_packet_original_pass.h"
 
@@ -16,7 +15,14 @@ typedef struct {
     FA18MapPacketStaticData data;
     FA18MapPacketOriginalPassInput original;
     FA18MapPacketPassSelectorResult pass;
+    MapPacketRegisterEffects *effects;
+    uint32_t control_cursor;
+    int16_t origin_x;
 } MapPacketRuntime;
+
+static void set_word(uint32_t *reg, uint16_t value) {
+    *reg = (*reg & 0xffff0000u) | value;
+}
 
 static void source_data(FA18MapPacketStaticData *data) {
     const uint32_t control = FA18_MAP_PACKET_CONTROL_RUNTIME_BASE - FA18_SLOW_BASE;
@@ -31,13 +37,20 @@ static int display_packet(void *context,
                           const FA18MapPacketProjectionRecord *records,
                           uint16_t count, uint16_t shift) {
     unsigned i, k;
-    (void)context;
+    MapPacketRuntime *runtime = context;
+    uint32_t saved_d0 = runtime->effects->data[0];
     wr_u16(CLIP_INPUT, shift);
     wr_u16(CLIP_INPUT + 2, count);
     for (i = 0; i < count; ++i)
         for (k = 0; k < 3; ++k)
             wr_s16(CLIP_INPUT + 4 + (gaddr)(6 * i + 2 * k), records[i].value[k]);
-    clip_and_draw_polygon(); /* $C2AFE2: JSR $C246A0 */
+    runtime->effects->address[5] = CLIP_INPUT + 4 + 6u * count;
+    /* MOVEM.W from memory sign-extends into a data register on 68000. */
+    runtime->effects->data[6] = (uint32_t)(int32_t)runtime->origin_x;
+    if (runtime->effects->draw_polygon(runtime->effects->draw_context,
+                                       runtime->effects) != 0)
+        return -1;
+    runtime->effects->data[0] = saved_d0; /* $C2AFE8 restores D0. */
     return 0;
 }
 
@@ -46,6 +59,73 @@ static void publish_origin(void *context, const int16_t origin[3]) {
     unsigned i;
     for (i = 0; i < 3; ++i)
         wr_s16(runtime->frame - 8 + (gaddr)(2 * i), origin[i]);
+    runtime->origin_x = origin[0];
+}
+
+static void publish_cursor(void *context, const uint8_t *next_word,
+                           int16_t last_word, uint8_t detail_cutoff) {
+    MapPacketRuntime *runtime = context;
+    runtime->effects->address[3] = FA18_MAP_PACKET_PACKET_RUNTIME_BASE +
+        (gaddr)(next_word - runtime->data.packet_bytes);
+    if (detail_cutoff) {
+        uint16_t relative = (uint16_t)(((uint16_t)last_word & 0x7fffu) << 2);
+        runtime->effects->data[1] = (uint32_t)(int32_t)(int16_t)relative;
+    } else {
+        set_word(&runtime->effects->data[1], (uint16_t)last_word);
+    }
+}
+
+static void publish_packet(void *context, uint32_t packet_address) {
+    MapPacketRuntime *runtime = context;
+    runtime->effects->address[3] = packet_address;
+}
+
+static void publish_seed(void *context, uint32_t packed_seed) {
+    MapPacketRuntime *runtime = context;
+    runtime->effects->data[0] = packed_seed;
+}
+
+static void publish_transform(void *context, uint32_t last_y_register) {
+    MapPacketRuntime *runtime = context;
+    runtime->effects->data[7] = last_y_register;
+}
+
+static void publish_visibility_limit(void *context, uint32_t limit_register) {
+    MapPacketRuntime *runtime = context;
+    runtime->effects->data[6] = limit_register;
+}
+
+static void prepare_control_registers(MapPacketRuntime *runtime, uint8_t mode,
+                                      const int8_t pair[2]) {
+    MapPacketRegisterEffects *effects = runtime->effects;
+    int16_t row = (int16_t)(uint16_t)((uint16_t)runtime->pass.coordinate.row_min +
+                                     (uint16_t)(int16_t)pair[0]);
+    int16_t column = (int16_t)(uint16_t)((uint16_t)runtime->pass.coordinate.column_min +
+                                        (uint16_t)(int16_t)pair[1]);
+    uint16_t shifted_column;
+    uint16_t index;
+
+    effects->address[0] = runtime->pass.control_stream_address +
+                          ++runtime->control_cursor;
+    effects->address[2] = FA18_MAP_PACKET_CONTROL_RUNTIME_BASE + 2u * mode;
+    set_word(&effects->data[2], (uint16_t)(2u * mode));
+    set_word(&effects->data[3], (uint16_t)(int16_t)pair[0]);
+    set_word(&effects->data[0], (uint16_t)row);
+    if (row < 0 || row > runtime->pass.directory.row_max) return;
+
+    set_word(&effects->data[3], (uint16_t)(int16_t)pair[1]);
+    set_word(&effects->data[1], (uint16_t)column);
+    if (column < 0 || column > runtime->pass.directory.column_max) return;
+
+    shifted_column = (uint16_t)((uint16_t)column <<
+        (runtime->pass.directory.layout == FA18_MAP_PACKET_DIRECTORY_WIDE ? 6u : 4u));
+    index = (uint16_t)((uint16_t)row * 2u + shifted_column);
+    set_word(&effects->data[0], index);
+    set_word(&effects->data[1], shifted_column);
+    set_word(&effects->data[0],
+             rd_u16(runtime->pass.directory.record_base_address + index));
+    effects->address[1] = runtime->pass.directory.record_base_address;
+    effects->address[3] = runtime->pass.directory.record_base_address;
 }
 
 static int runtime_record(void *context, uint8_t encoded,
@@ -64,6 +144,8 @@ static int runtime_record(void *context, uint8_t encoded,
         fa18_resolve_map_packet_control_pair(&runtime->data, mode, pair) != 0)
         return -1;
 
+    prepare_control_registers(runtime, mode, pair);
+
     record->gate = (FA18MapDetailGateInput){
         0, runtime->pass.directory.layout == FA18_MAP_PACKET_DIRECTORY_WIDE,
         rd_u8(0xC457ADu), rd_u8(0xC4589Cu), rd_s32(runtime->frame - 0x28)
@@ -76,6 +158,8 @@ static int runtime_record(void *context, uint8_t encoded,
     wr_u16(runtime->frame - 0x22, gate.visibility_flag);
     wr_u16(runtime->frame - 0x20, gate.coordinate_shift);
     wr_u8(runtime->frame - 0x24, gate.detail_byte);
+    if (!gate.detail_byte && gate.visibility_flag)
+        runtime->effects->data[6] = 0; /* $C2AE76: MOVEQ #0,D6 */
 
     record->fields = (FA18MapDetailFieldsInput){0};
     record->fields.zoom_endpoint = rd_u8(0xC457DDu);
@@ -106,10 +190,15 @@ static int runtime_record(void *context, uint8_t encoded,
     record->packet_stage.display_stage = display_packet;
     record->packet_stage.display_context = runtime;
     record->packet_stage.publish_origin = publish_origin;
+    record->packet_stage.publish_cursor = publish_cursor;
+    record->publish_packet = publish_packet;
+    record->publish_seed = publish_seed;
+    record->publish_visibility_limit = publish_visibility_limit;
+    record->packet_stage.publish_transform = publish_transform;
     return 0;
 }
 
-int run_map_packet_pass(gaddr frame, int wide) {
+int run_map_packet_pass(gaddr frame, int wide, MapPacketRegisterEffects *effects) {
     MapPacketRuntime runtime = {0};
     FA18MapPacketControlWalkerInput walker;
     FA18MapPacketControlWalkerRoute route;
@@ -119,7 +208,9 @@ int run_map_packet_pass(gaddr frame, int wide) {
     uint16_t count;
     unsigned i;
 
+    if (!effects || !effects->draw_polygon) return -1;
     runtime.frame = frame;
+    runtime.effects = effects;
     runtime.component = rd_u8(0xC45785u) ? 0xC45C3Eu :
         0xC46184u + (gaddr)(int32_t)rd_s16(0xC458DEu) + 0x14u;
     source_data(&runtime.data);
@@ -150,6 +241,8 @@ int run_map_packet_pass(gaddr frame, int wide) {
     if (fa18_select_map_packet_pass(&runtime.original.selector,
                                      &runtime.pass) != 0)
         return -1;
+    effects->address[4] = runtime.component;
+    effects->address[0] = runtime.pass.control_stream_address;
     wr_s16(frame - 2, runtime.pass.coordinate.origin_component);
     wr_s16(frame - 0x2c, runtime.pass.coordinate.row_min);
     wr_s16(frame - 0x2a, runtime.pass.coordinate.column_min);
@@ -161,6 +254,14 @@ int run_map_packet_pass(gaddr frame, int wide) {
     walker = (FA18MapPacketControlWalkerInput){
         stream, stream_size, runtime_record, &runtime
     };
-    return fa18_walk_map_packet_controls(&walker, records, 0x12,
-                                         &count, &route);
+    if (fa18_walk_map_packet_controls(&walker, records, 0x12,
+                                      &count, &route) != 0)
+        return -1;
+    effects->address[0] = runtime.pass.control_stream_address +
+                          runtime.control_cursor +
+                          (route == FA18_MAP_PACKET_CONTROL_TERMINATOR);
+    if (route == FA18_MAP_PACKET_CONTROL_TERMINATOR)
+        set_word(&effects->data[2], 0xffffu);
+    effects->address[4] = runtime.component;
+    return 0;
 }
