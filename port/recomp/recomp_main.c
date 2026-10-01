@@ -52,6 +52,7 @@ static void usage(void) {
             "                   [--rom-transitions OUT.json] (RAM-to-ROM entry inventory)\n"
             "                   [--no-os-vbeam] (use the ROM VBeamPos)\n"
             "                   [--no-os-exec-interrupts] (use ROM Exec Disable/Enable)\n"
+            "                   [--no-os-getmsg] (use ROM Exec GetMsg)\n"
             "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n");
 }
 
@@ -164,6 +165,7 @@ int main(int argc, char **argv) {
     const char *rom_transitions_path = NULL;
     int os_vbeam = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_exec_interrupts = -1; /* default C with recomp, ROM in interpreter-only mode */
+    int os_getmsg = -1; /* default C with recomp, ROM in interpreter-only mode */
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
@@ -201,6 +203,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--no-os-vbeam")) os_vbeam = 0;
         else if (!strcmp(argv[i], "--os-exec-interrupts")) os_exec_interrupts = 1;
         else if (!strcmp(argv[i], "--no-os-exec-interrupts")) os_exec_interrupts = 0;
+        else if (!strcmp(argv[i], "--os-getmsg")) os_getmsg = 1;
+        else if (!strcmp(argv[i], "--no-os-getmsg")) os_getmsg = 0;
         else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--record") && i + 1 < argc) record_path = argv[++i];
@@ -219,9 +223,11 @@ int main(int argc, char **argv) {
     }
     if (os_vbeam < 0) os_vbeam = use_recomp;
     if (os_exec_interrupts < 0) os_exec_interrupts = use_recomp;
+    if (os_getmsg < 0) os_getmsg = use_recomp;
     fa18_recomp_init(use_recomp);
     if (os_vbeam) fa18_recomp_enable_vbeam_shim();
     if (os_exec_interrupts) fa18_recomp_enable_exec_interrupt_shim();
+    if (os_getmsg) fa18_recomp_enable_exec_get_msg_shim();
     if (rom_transitions_path && !fa18_recomp_track_rom_transitions()) {
         fprintf(stderr, "cannot allocate ROM transition inventory\n");
         return 1;

@@ -14,7 +14,7 @@ one at a time, each proven on every call.
 | Check | Result |
 | --- | --- |
 | Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE` and Exec `Disable`/`Enable` `$FC1428`/`$FC1436` now run in C on the pinned ROM. Their 2,238,856 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md` and `analysis/routines/fc1428_fc1436_exec_interrupts.md`. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, and Exec `GetMsg` `$FC1BEA` now run in C on the pinned ROM. Their 2,276,525 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, and `analysis/routines/fc1bea_exec_get_msg.md`. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -394,9 +394,20 @@ part that is not, stays on the work side.
    check remained 10/10 exact.
    The next frequent crossing `$C00252 -> $FC0E9C` is the Exec interrupt
    dispatcher, not a game library call. `$C00102 -> $FC1BEA` is Exec
-   `GetMsg(port)` (`-$174`), seen 37,669 times across the three recordings;
-   its ROM body removes the first message under interrupt masking. See the
-   transition inventory before porting this service.
+   `GetMsg(port)` (`-$174`), seen 37,669 times across the three recordings.
+   Its 46-byte ROM body removes the first message under interrupt masking.
+   `port/os/exec_glue.c` now runs it in C one source instruction at a time;
+   the pinned bytes are checked before interception. `--no-os-getmsg` restores
+   the ROM path, and `--no-recomp` defaults to ROM. A 300-frame C/ROM
+   comparison matched RAM and runner statistics, with 3,514 ROM entries and
+   zero C-path entries. All three complete C-path trials retained their
+   sealed final RAM hashes and entered this ROM leaf zero times. GNU and MSVC
+   Release matched in the 300-frame C-path probe. Interpreter-only mode
+   entered the ROM leaf 3,640 times in its separate 300-frame probe. See
+   `analysis/routines/fc1bea_exec_get_msg.md` for the source and proof. With
+   `GetMsg` C default-on, the full gate passed: 386 routines, 726,979 shadow
+   matches, 925,873 sandbox matches, zero mismatches, identical poison
+   frames. The run075 frame-392 parity check remained 10/10 exact.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is

@@ -29,6 +29,7 @@ static uint8_t *fallback_seen;
 static int enabled_flag;
 static int vbeam_shim_enabled;
 static int exec_interrupt_shim_enabled;
+static int exec_get_msg_shim_enabled;
 #define ROM_TRANSITION_SLOTS 65536u
 typedef struct {
     uint64_t key; /* source PC in bits 47..24, ROM entry PC in bits 23..0; zero means empty */
@@ -51,6 +52,7 @@ void fa18_recomp_init(int enabled) {
     enabled_flag = enabled;
     vbeam_shim_enabled = 0;
     exec_interrupt_shim_enabled = 0;
+    exec_get_msg_shim_enabled = 0;
     free(entry_map);
     free(code_bits);
     free(disabled);
@@ -85,6 +87,11 @@ int fa18_recomp_enable_vbeam_shim(void) {
 int fa18_recomp_enable_exec_interrupt_shim(void) {
     exec_interrupt_shim_enabled = fa18_os_exec_interrupt_signature_matches(fa18_machine->rom);
     return exec_interrupt_shim_enabled;
+}
+
+int fa18_recomp_enable_exec_get_msg_shim(void) {
+    exec_get_msg_shim_enabled = fa18_os_exec_get_msg_signature_matches(fa18_machine->rom);
+    return exec_get_msg_shim_enabled;
 }
 
 int fa18_recomp_track_rom_transitions(void) {
@@ -223,6 +230,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         fa18_bus_instruction();
         if (vbeam_shim_enabled && fa18_os_vbeam_step()) continue;
         if (exec_interrupt_shim_enabled && fa18_os_exec_interrupt_step()) continue;
+        if (exec_get_msg_shim_enabled && fa18_os_exec_get_msg_step()) continue;
         if (!enabled_flag || (e = lookup(REG_PC)) == NULL) break;
         before = GET_CYCLES();
         fa18_recomp_abort = 0;

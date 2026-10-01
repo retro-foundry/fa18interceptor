@@ -1,4 +1,4 @@
-/* CPU bridge for Kickstart 1.3 Exec Disable/Enable ROM leaves. */
+/* CPU bridge for Kickstart 1.3 Exec Disable, Enable, and GetMsg ROM leaves. */
 #include "exec_glue.h"
 
 #include <string.h>
@@ -18,6 +18,20 @@ int fa18_os_exec_interrupt_signature_matches(const uint8_t *rom) {
         0x4E, 0x75
     };
     return rom && memcmp(rom + 0x1428, source, sizeof source) == 0;
+}
+
+int fa18_os_exec_get_msg_signature_matches(const uint8_t *rom) {
+    static const uint8_t source[] = {
+        0x41, 0xE8, 0x00, 0x14,
+        0x33, 0xFC, 0x40, 0x00, 0x00, 0xDF, 0xF0, 0x9A,
+        0x52, 0x2E, 0x01, 0x26,
+        0x22, 0x50, 0x20, 0x11, 0x67, 0x08,
+        0x20, 0x80, 0xC1, 0x89, 0x23, 0x48, 0x00, 0x04,
+        0x53, 0x2E, 0x01, 0x26, 0x6C, 0x08,
+        0x33, 0xFC, 0xC0, 0x00, 0x00, 0xDF, 0xF0, 0x9A,
+        0x4E, 0x75
+    };
+    return rom && memcmp(rom + 0x1BEA, source, sizeof source) == 0;
 }
 
 static void move_interrupt_word(void) {
@@ -74,6 +88,80 @@ int fa18_os_exec_interrupt_step(void) {
         break;
     case 0xFC1434u:
     case 0xFC1444u:
+        REG_PC = m68k_read_memory_32(REG_A[7]);
+        REG_A[7] += 4;
+        break;
+    }
+    USE_CYCLES(CYC_INSTRUCTION[op]);
+    return 1;
+}
+
+int fa18_os_exec_get_msg_step(void) {
+    uint32_t pc = REG_PC, op, value;
+    if (pc != 0xFC1BEAu && pc != 0xFC1BEEu && pc != 0xFC1BF6u &&
+        pc != 0xFC1BFAu && pc != 0xFC1BFCu && pc != 0xFC1BFEu &&
+        pc != 0xFC1C00u && pc != 0xFC1C02u && pc != 0xFC1C04u &&
+        pc != 0xFC1C08u && pc != 0xFC1C0Cu && pc != 0xFC1C0Eu &&
+        pc != 0xFC1C16u) return 0;
+    op = fa18_bus_read16(pc);
+    fa18_bus_begin(pc);
+    fa18_bus_fetch(pc);
+    REG_PPC = pc;
+    REG_IR = op;
+    REG_PC = pc + 2;
+    switch (pc) {
+    case 0xFC1BEAu: /* The MsgPort message list begins at offset $14. */
+        REG_A[0] += (int16_t)m68k_read_immediate_16(REG_PC);
+        REG_PC += 2;
+        break;
+    case 0xFC1BEEu:
+    case 0xFC1C0Eu:
+        move_interrupt_word();
+        break;
+    case 0xFC1BF6u:
+    case 0xFC1C08u:
+        adjust_interrupt_depth(pc == 0xFC1C08u);
+        break;
+    case 0xFC1BFAu:
+        REG_A[1] = m68k_read_memory_32(REG_A[0]);
+        break;
+    case 0xFC1BFCu:
+        REG_D[0] = m68k_read_memory_32(REG_A[1]);
+        FLAG_N = NFLAG_32(REG_D[0]);
+        FLAG_Z = REG_D[0];
+        FLAG_V = VFLAG_CLEAR;
+        FLAG_C = CFLAG_CLEAR;
+        break;
+    case 0xFC1BFEu:
+        if (COND_EQ()) REG_PC = 0xFC1C08u;
+        else USE_CYCLES(CYC_BCC_NOTAKE_B);
+        break;
+    case 0xFC1C00u:
+        m68k_write_memory_32(REG_A[0], REG_D[0]);
+        FLAG_N = NFLAG_32(REG_D[0]);
+        FLAG_Z = REG_D[0];
+        FLAG_V = VFLAG_CLEAR;
+        FLAG_C = CFLAG_CLEAR;
+        break;
+    case 0xFC1C02u:
+        value = REG_D[0];
+        REG_D[0] = REG_A[1];
+        REG_A[1] = value;
+        break;
+    case 0xFC1C04u:
+        value = (uint32_t)(int16_t)m68k_read_immediate_16(REG_PC);
+        REG_PC += 2;
+        m68k_write_memory_32(REG_A[1] + value, REG_A[0]);
+        FLAG_N = NFLAG_32(REG_A[0]);
+        FLAG_Z = REG_A[0];
+        FLAG_V = VFLAG_CLEAR;
+        FLAG_C = CFLAG_CLEAR;
+        break;
+    case 0xFC1C0Cu:
+        if (COND_GE()) REG_PC = 0xFC1C16u;
+        else USE_CYCLES(CYC_BCC_NOTAKE_B);
+        break;
+    case 0xFC1C16u:
         REG_PC = m68k_read_memory_32(REG_A[7]);
         REG_A[7] += 4;
         break;

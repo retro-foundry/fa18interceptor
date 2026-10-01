@@ -37,7 +37,7 @@ Most frequent pairs across all three:
 | `$C00252` | `$FC0E9C` | 41,338 | Exec interrupt dispatcher; see below |
 | `$C001FE` | `$FC1428` | 40,560 | Exec `Disable()`; see below |
 | `$C001F8` | `$FC1436` | 40,560 | Exec `Enable()`; see below |
-| `$C00102` | `$FC1BEA` | 37,669 | Exec `GetMsg(port)` `-$174(A6)`; see below |
+| `$C00102` | `$FC1BEA` | 37,669 | Exec `GetMsg(port)` `-$174(A6)`; C bridge, see below |
 | `$C023B8` | `$FE44F2` | 36,236 | Byte-exact `JMP` in `source_amiga/observed/jump_c023b8_library_stub.asm` |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
@@ -70,7 +70,11 @@ library call made by the game.
 by the local Kickstart 1.3 `LVO.OFFS`. Its observed jump stub enters ROM at
 `$FC1BEA`; the source there advances A0 to the port's message list, masks
 interrupts, removes the first node if present, and restores the interrupt
-state. This is a direct service candidate for the next source-backed C leaf.
+state. This was the next direct service selected for a C bridge.
+
+The `GetMsg` leaf now runs through the C bridge in translated mode. The
+byte-exact ROM sequence and full native proof are in
+[the GetMsg report](routines/fc1bea_exec_get_msg.md).
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The
