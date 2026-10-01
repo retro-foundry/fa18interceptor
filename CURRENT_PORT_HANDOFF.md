@@ -1,657 +1,128 @@
-# Handoff
+# C port handoff
 
-For whoever picks this up next. History is in git; this page is the state,
-the process, and the traps. Updated 2026-10-01.
+Updated 2026-10-01. This is the current work state. Older notes remain in git
+history (the preceding handoff is in commit 9f2d5ca6); ignored gate logs may
+also remain under build/recomp/.
+PORT.md describes the architecture and source conventions.
 
-## Goal
+## Objective and order
 
-Recreated, readable C source for the whole game ([PORT.md](PORT.md)). The
-translated game runs natively; hand-written C replaces translated routines
-in source-backed batches, each proven on its recorded calls.
+Recreate readable C for the whole game, proven against the original source and
+sealed native recordings. Work in related batches. The order is Stage D game C,
+Stage F native backend, then only the Stage E Kickstart services still needed.
+The user explicitly deferred OS work and asked for larger routine batches.
 
-## Current priority
+## Verified baseline
 
-Complete Stage D game-source work in larger batches. Defer further Stage E OS
-replacement until the game source and native backend expose which ROM services
-are actually still needed; some OS work may be avoidable. The recent Kickstart
-replacements improved OS coverage but moved the registered game count only
-from 385 to 386 over roughly three hours. Keep OS experiments out of the
-game-routine count. Group source-backed routines that share a C implementation
-or completed children; use one quick probe during the batch and one full
-shadow, sandbox, poison, and live frame gate before increasing the count.
-`$C2FD8C` remains inactive because its blitter busy-wait timing changes
-pixels in ON mode (details under Next). A larger source-backed pair awaiting
-timing work is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
-existing `port/map_packet_*` composition as the reference. Both share the
-body at `$C2AB7C`; their original callers retain every data and address
-register, so the runtime adapter and register replay must be developed
-together. Avoid counting graph entries that are only mid-function tails
-without independent calls.
+- 413 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 727,968 completed shadow
+  calls and 1,214,836 sandbox calls across three native recordings, with zero
+  mismatches and identical poison frames. Ported parents absorb some formerly
+  counted child calls, so the aggregate call totals need not rise monotonically.
+- The current recordings are captures/native/demo01,
+  captures/native/qual_carrier_success, and
+  captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
+  run.json with a sealed final RAM hash. Archived captures/uae runs, including
+  run075, are historical evidence and are not an acceptance gate.
+- The headless GNU and MSVC Release builds pass. The typed port's eight
+  affected map/detail contract tests passed with the map source changes.
+- Only .vscode/ is untracked; it belongs to the user. Leave it alone.
+- Ignored build/recomp/ports_report_*.json currently describe a TEMPORARY
+  414-entry experiment. Do not quote them as the 413-entry baseline. Rerun the
+  full gate after a new registered batch to refresh them.
 
-The map pair is source backed but **not registered**. Its live adapter,
-register bridge, common-core linkage, and multiple-polygon packet walker are
-implemented. Temporarily registering both entries passed the full
-three-recording gate: 415 routines, 719,423 shadow matches and 1,160,026
-sandbox matches, zero mismatches, poison frames identical. The pair itself
-matched 622 completed shadow
-calls and 8,058 sandbox calls; the other observed calls were incomplete
-because they crossed a chipset event. The crash recording did not call it.
+## Completed C awaiting live timing
 
-Live ON timing is unresolved. With a fixed 20,000-cycle charge, the first
-demo01 frame different from the previous 413-routine ON build is 350. Charges
-near the observed per-entry means delay that to frame 378. A sweep of fixed
-charges produced a best first difference at frame 416; frame 416 differed in
-29,453 pixels, and the blit count changed. The C pass performs many polygon
-draws before the single fixed charge at return, so blitter timing between
-draws must be accounted for before activation. Keep the map pair out of the
-registered count. The focused trace instrumentation and cycle-override probe
-have been removed. The map/detail contract fixtures now include the source's
-packet terminator. `scripts/build_recomp.sh` does not track generated-code
-header dependencies; after changing `recomp_runtime.h`, touch the affected
-generated source before rebuilding.
+These sources and glue compile, but none of these entries is in ports.c.
+Recorded-call comparison alone does not authorize activation.
 
-## Numbers
+| Entry | Source and recorded-call proof | Live ON blocker |
+| --- | --- | --- |
+| C2AB34 / C2AB5A (wide/normal map packet) | port/game/map_packet.c and glue/glue_map_packet.c use the shared port/map_packet_* core. Temporary 415-entry full gate: zero mismatches; the pair matched 622 completed shadow calls and 8,058 sandbox calls. Multiple polygons per packet and full register effects are implemented. | demo01 first RGB difference at frame 350 with a 20,000-cycle charge. A fixed-charge sweep moved the first difference at best to frame 416, where 29,453 pixels differed; blit count also changed. Drawing many polygons before charging cycles at return loses intermediate chipset timing. |
+| C2B05A (record region probe) | port/game/record_region_probe.c and glue/glue_record_region_probe.c. Temporary 414-entry full gate: zero mismatches; this entry matched 3 completed shadow and 18 sandbox calls. Fourteen shadow calls crossed chipset events. Source D2-D5 save restores into D2/D4-D6; preserve that mapping. | With 20,000 cycles, demo01 final RAM hash, 20,833-frame endpoint, and 555,658 blits matched, but 14 RGB frames differed, first at 19,445. Charging the 31,541 sandbox mean moved the endpoint to 20,835. Observed source calls cost 22,150 to 35,192 cycles. |
+| C2FD8C (active plane submission) | port/game/active_planes.c and glue/glue_active_planes.c; see analysis/routines/c2fd8c_first_active_plane_submission.md and adjacent reports. A focused sandbox probe matched 2,078 calls. | Shadow busy-poll counters differed on five calls because sandboxed custom writes do not start live blits. Live demo01 first differed at RGB frame 297. Source blitter wait and event timing remain unresolved. |
 
-| Check | Result |
-| --- | --- |
-| Recreated routines (`port/game/`) | 413 of 624 translated entries registered; 727,968 calls matching in shadow and 1,214,836 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 412-routine gate and 10-frame parity check passed. Further OS replacement is deferred until after the game source and native backend. See the individual `analysis/routines/` reports below. |
-| Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
-| Ready to recreate next | `python tools/recomp/port_candidates.py` |
+The map pair also blocks the small parent C2AA9C. Do not add any of these
+entries, the parent, or mid-function graph tails to the count to show progress.
+MapPacketRegisterEffects and RecordRegionProbeRegisters currently carry
+68000 register state through port/game/, despite PORT.md's glue boundary.
+Before changing either routine's behavior, move register replay into glue
+and keep game logic behind a small data contract. Preserve the recorded-call
+parity while doing that refactor.
 
-## How to work
+## Next work
 
-The loop, per batch of related routines:
+1. Refactor the register bridge noted above, then resolve the shared timing
+   boundary for long C calls. In the source,
+   instruction boundaries can service Copper, blitter, and interrupts inside
+   these routines. In the current bridge, run_glue in
+   port/recomp/recomp_ports.c charges a single fixed value after the whole C
+   call. Measure source event/cycle boundaries and make the C path advance
+   through equivalent observable boundaries. The bridge has no C continuation
+   today, so an interrupt inside a C call needs an explicit resumption design.
+   Recheck the map pair, region
+   probe, and active planes as one timing batch; keep their gameplay and
+   register logic source-backed. A new fixed average charge has already failed.
+2. Keep porting independent game-source groups while timing work proceeds.
+   python tools/recomp/port_candidates.py -n 40 currently lists C279D0
+   (renderer packet; typed groundwork in port/projection_grid.c and reports
+   under analysis/routines/c279d0_*), C1D10C (terrain/scene template path;
+   typed groundwork under port/terrain_* and analysis/routines/c1d10c_*),
+   the three inactive entries above, and three OS trampolines. Inspect
+   fixed-target indirect callers too; the candidate tool omits them. Group
+   routines that share source logic or already completed children. The three
+   C0004E/C000B4/C000BA candidates are Kickstart trampolines; defer them.
+3. Once game source is complete, build the native backend from plain C memory,
+   drawing, and audio. Reassess which Kickstart services remain; do OS work
+   last as requested.
 
-1. `python tools/recomp/port_candidates.py -n 40` lists routines whose
-   callees are already C, ranked by glue burden. Read the target with
-   `python tools/recomp/port_info.py C2005C`: its instructions, its observed
-   call sites, and the registers, high words and flags live after it.
-2. Check `analysis/routines/` and `analysis/` for a report on the address
-   before inventing any meaning or any global name. Most addresses that look
-   unnamed are already documented somewhere in `analysis/`.
-3. Write the C in the right `port/game/` file, as original source would be
-   written (PORT.md, Conventions).
-4. Write the glue in `port/game/glue/`: read the inputs from registers and
-   memory, call the C, rebuild every live register, flag and high word the
-   original leaves, then `glue_return()`. Register it with
-   `python tools/recomp/register_ports.py "comment" C2005C=name:cycles`.
-5. Build with `sh scripts/build_recomp.sh` and probe the batch with
-   `QUICK=1 sh scripts/recomp_ports_check.sh` (first recording only, about
-   2.5 minutes). Inspect per-entry calls and mismatches.
-6. Commit each verified batch as it lands.
-7. Before updating any count or calling the batch done, run the **full**
-   `sh scripts/recomp_ports_check.sh` over all three native recordings. Then
-   compare live `--ports on` output with the native shadow reference over the
-   affected recording; check RGB frames, not only final RAM and blit totals.
-   Archived UAE runs such as run075 are historical evidence, not a current
-   acceptance gate.
+## Gate for a registered batch
 
-Run the full proof once per batch. See the first trap below: the quick probe
-is not a substitute for it.
+- Read original instructions with python tools/recomp/port_info.py ADDRESS,
+  then the corresponding analysis/routines report and typed port code. Preserve
+  exact word arithmetic, high register halves, MOVEM.W sign extension, memory
+  writes, and child effects. Reuse narrow register-effect helpers; never run a
+  child with side effects twice.
+- Build headless on this Windows workspace with
+  & 'C:\Program Files\Git\bin\bash.exe' scripts/build_recomp.sh
+  and build MSVC with
+  cmake --build build/recomp-cmake --config Release -j 8
+- Probe the new batch, then run
+  & 'C:\Program Files\Git\bin\bash.exe' scripts/recomp_ports_check.sh
+  over all three native recordings. It checks shadow, sandbox, sealed final
+  RAM, and poison frames. Inspect per-entry calls, incomplete calls, and every
+  mismatch. QUICK=1 is only a first-recording probe.
+- Compare live --ports on RGB444 frame output with the native shadow RGB444
+  output for each affected recording, not just final RAM, frame count, or
+  blit totals. The full gate writes build/recomp/frames_shadow_NAME.bin.
+  --ports-only ADDRESS applies only to registered entries. An inactive entry
+  needs temporary registration for a probe and must be removed if live output
+  differs. Demo01 is 20,833 frames and its RGB stream is about 3.4 GB.
 
-## Source work awaiting live timing
+  For demo01, after the full gate (run from the repository root in Git Bash):
 
-`$C2B05A` has source-backed directory crossing and polygon edge probes in
-`record_region_probe.c`, updating bits 1 and 2 of the selected mutable
-record. The C keeps the source's D2-D5 stack save followed by the distinct
-D2/D4-D6 restore mapping; treating that as a same-register restore caused the
-initial comparison failure. Temporary registration passed the full
-414-routine gate: 727,971 shadow
-and 1,214,847 sandbox calls over the three native recordings, with zero
-mismatches and identical poison frames. This entry matched three completed
-shadow calls (14 demo01 calls crossed chipset events) and 18 sandbox calls
-across demo01 and carrier success. GNU and MSVC Release builds passed.
-With a fixed 20,000-cycle charge, live demo01 ON matched the sealed final RAM
-hash, 20,833-frame endpoint and 555,658 blits, but **14 RGB frames differed**
-from the native shadow reference, first at frame 19,445. Charging the 31,541
-sandbox mean moved the endpoint to 20,835 frames. Source call costs range
-from 22,150 to 35,192 cycles; 14 shadow calls crossed chipset events. The
-glue is not registered. Resolve live event timing before counting this entry.
+  ```sh
+  ./build/recomp/fa18_recomp.exe --state captures/native/demo01/state.bin \
+    --input captures/native/demo01/input.fa18in --to-end \
+    --rom local/system/kick13.rom --ports on \
+    --rgb444 build/recomp/frames_on_demo01.bin
+  cmp build/recomp/frames_shadow_demo01.bin build/recomp/frames_on_demo01.bin
+  ```
 
-## Recently ported
+  Repeat with each affected native recording and require exact equality.
+- Increase the registered count and update this file only after every gate
+  passes. Commit a coherent source batch with its evidence.
+- scripts/build_recomp.sh does not track generated-code header dependencies.
+  After changing recomp_runtime.h, touch affected generated C before rebuilding.
 
-`$C1FFA4` now shares `$C1FF9C`'s selected segment source in
-`draw_stream.c` and `glue_selected_segment.c`. Its guard at projection Y
-`>= -$C0` consumes three stream words; the other route copies both selected
-workspace triples, applies the depth gate, and calls the existing clipped
-segment renderer. The full 413-routine gate passed over three native
-recordings with 727,968 completed shadow matches and 1,214,836 sandbox
-matches, zero mismatches, and identical poison frames. For this entry,
-demo01 had 559 calls, 539 completed shadow comparisons (20 incomplete),
-and 556 sandbox matches; the other two recordings did not enter it. GNU and
-MSVC Release builds and run075 frames 393-402 parity passed. `$C500D8`
-audio sample callback was explored but had no observed calls in any native
-recording or the archived run075 replay, so it remains unregistered.
+## References and constraints
 
-The 25 translated renderer mask handlers in the `$C2F826-$C2FA56` source
-tables (`planar_lane_masks.c`, `glue_planar_lane_masks.c`) now share readable C
-for four-plane AND/OR writes at one word or two words one scanline apart.
-Each table selector supplies the lanes to set; the glue preserves data and
-address registers and rebuilds the flags from the last word written. The
-dispatch bridge in `recomp_ports.c` admits only a registered target reached
-from the source's `$C2F764: JMP (A4)`; normal call-entry rules remain in
-place. The original tables specify 32 combinations, but seven targets are
-absent from the translated graph. Their modes are covered by the shared C
-function but are not falsely counted as registered. `register_ports.py` now
-rejects such addresses. All 25 registered entries were compared in the three
-native recordings: 926 completed shadow and 288,900 sandbox calls, zero
-mismatches. The full 412-routine gate matched 727,905 shadow and 1,214,772
-sandbox calls with identical poison frames; 10-frame parity and the MSVC
-Release build passed. A 1,000-frame live ON/OFF run produced identical RGB
-frames, but RAM differed at the low byte of blitter busy counter `$C45923`
-by four polls and at two dead-stack bytes. Treat this as a remaining live
-timing limit if later work depends on that counter.
-
-`$C1FF9C` selected workspace segment (`draw_stream.c`,
-`glue_selected_segment.c`) now reads the two signed vertex offsets and colour
-from the draw stream, copies the chosen triples to `SEGMENT_POINTS`, applies
-the depth gate, then calls the already ported projected-segment renderer. Its
-indirect `JSR (A4)` has a fixed source target at this entry (`$C2ED70`), so
-the standard candidate script did not list it. The bridge restores `A2` after
-the child changes it, as the source's `MOVEM` does. The full three-recording
-gate compared 1,048 completed shadow calls and 1,069 sandbox calls for this
-entry with zero mismatches; all observed calls were in demo01. Across all
-387 routines the gate matched 726,979 shadow calls and 925,872 sandbox calls,
-with identical poison frames. Frame-392 parity stayed 10/10 exact, and the
-MSVC Release build passed. The total call count can decrease when a parent
-absorbs calls to a registered child.
-
-`$C31226` postflight renderer dispatcher (`postflight_variants.c`,
-`glue_postflight_variants.c`) now runs the source bounds gate, the activity
-branch, and the tuple, fixed, or plain shared-tail route in C. Its glue
-replays the pure `$C310E2` bound calculation before the chosen child path.
-Across the three native recordings it matched 3,307 completed shadow calls
-and 2,491 sandbox calls, with zero mismatches. The full 386-routine gate
-passed with 726,979 shadow matches and 925,873 sandbox matches; poison frames
-were identical. The 10-frame parity check and a separate ON-mode run with
-`$C31226`/`$C3129A`/`$C31312` enabled were both pixel-exact. The combined
-call count is lower than the previous gate because calls inside this parent
-are no longer counted separately. The MSVC Release build passed; its focused
-demo01 shadow probe matched 138 completed dispatcher calls with no mismatch.
-
-`$C3129A`/`$C31312` postflight tuple and fixed-point variants
-(`postflight_variants.c`, `glue_postflight_variants.c`) are registered. Their
-heads, point-table prefix, record selection/classification, second
-normalization, renderer and optional point submission, status resolution, and
-terminal selection scan now have a source-order register bridge. The full
-three-recording gate passed with zero mismatches: 469/476 completed shadow
-calls for tuple/fixed, 243/0 completed sandbox calls respectively, 732,278
-total shadow matches and 925,944 sandbox matches across 385 routines, with
-identical poison frames. The fixed variant's sandbox calls all ended before
-comparison; its 476 shadow calls compared completely. The standard frame-392
-parity check remained 10/10 exact. An additional ON-mode check with only these
-two routines enabled was 10/10 exact after charging the fixed variant 8,590
-cycles, the source cost of its single call in that snapshot. Fixed charges
-remain an approximation for calls on other paths.
-
-`$C20A52`/`$C20A40` face lattices (`draw_stream.c`, `glue_batch58.c`) are
-registered. The C lattice now offers per-face hooks so the glue replays the
-clipper immediately after each face, while that face's `CLIP_INPUT`,
-`CLIP_OUTPUT`, `POLY_VERTICES`, and pre-draw `BLTSIZE` are available. This
-preserves D7's high word when an earlier face made the last winning write.
-The full three-recording gate passed with 735,260 shadow matches and 926,187
-sandbox matches, identical poison frames, and 10/10 exact parity frames
-393-402. `$C20A52` had 54 shadow and 187 sandbox matches; `$C20A40` had
-793 shadow and 1,593 sandbox matches. Some long draws were incomplete in
-shadow; sandbox compared them where possible.
-
-`$C0D04C` history projection (`history_projection.c`,
-`glue_history_projection.c`) is now registered. Its C path traverses the
-history ring, rotates and projects each point, interpolates between points,
-and draws the resulting circles. The register bridge replays projections
-across every slot in source order; earlier slot draws can leave A2 even when
-the final slot rejects every projection. It resets A1 to the record at each
-slot boundary, as the source does at `$C0D110`. The three-recording gate
-passed with 742,860 shadow matches, 938,459 sandbox matches, identical
-poison frames, and 10/10 exact parity frames 393-402.
-
-`$C0D74A`/`$C0D752` (`display_records.c`, `276be504`) now share the complete
-four-candidate matrix preparation, corner projection, and seven-way record
-selection body. Across the three native recordings they matched 6,129
-completed shadow calls and 10,857 sandbox calls. The full proof and 10-frame
-parity check passed. Their nested `$C2E758` register replay was separated from
-its C operation so the parents run the projection once. The original extended
-branches also exposed a count/offset error in the older isolated selector C;
-`c43e2d3e` corrects it and its source-backed contract case passes.
-
-`$C2374C` `consume_selected_fire_request` (`selected_fire.c`, `2bdb54d5`),
-`$C28722` `initialize_scene_from_mode` (`scene_dispatch.c`, `f1937a36`), and
-`$C0FAA4` `initialize_scene_state` (`stages.c`, `e68c7d7d`) are committed and
-included in the Numbers row. The scene selector handles normal streams and
-the `$7D` special record; the initializer runs it, root setup, message reset,
-and final setup in source order. The selector matched eight completed shadow
-calls in focused probes; the initializer matched its completed demo call and
-both demo sandbox calls. The full three-recording proof and 10-frame parity
-check passed on this batch.
-
-`$C0FA04` `finish_post_input_followup` (`stages.c`, `679ef67b`) is committed
-and included in the Numbers row. Its completed demo shadow call and all eight
-demo sandbox calls matched, including the seven buffer clears. The full
-three-recording proof and 10-frame parity check passed. Its parent `$C0F992`
-still depends on the untranslated `$C08F26` cold-scene bootstrap; that stage
-also calls `$C1C63E` and `$C1C860`, so work further down that chain is needed
-before the parent can become C.
-
-All of these are registered and matching over all three recordings:
-
-- `$C10C68` `queue_post_input_context_command` (`stages.c`) - once the
-  countdown expires, queues the heading marker and context command, then
-  installs the next callback. All 25 recorded calls matched. It now contains
-  the two formerly direct heading-formatter calls.
-- `$C1C40C` `build_template_bit_gates` (`template_gates.c`) - clears and
-  populates three 128-row bit-gate tables from the original signed-relative
-  template directories. All three recorded calls matched.
-- `$C25070` `refresh_post_input_heading` (`target_heading.c`) - scans the
-  post-input record list, transforms the selected record's point, tracks its
-  heading and formats the three output digits; both demo calls matched in the
-  preceding full proof before `$C10C68` contained them.
-- `$C28B34` `dispatch_scene_records` and `$C28AFE`
-  `initialize_scene_record` (`scene_dispatch.c`) - copy scene pointers,
-  filter entries, create and orient control records, then aim a newly
-  created record. The dispatcher matched 15 direct shadow calls in focused
-  probes before its parent was registered; the parent matched 14 calls in
-  the full proof. The full report lists the direct dispatcher as uncalled
-  because those calls are now inside the ported parent.
-- `$C3003A` `draw_panel_mark` (`hud_bars.c`) - the panel blit, mark polygon,
-  line and individual pixels. Its glue replays the entire chain's register
-  effects; 3,133 shadow calls matched across the three recordings.
-- `$C11788` `advance_postflight_reset` and `$C11830`
-  `restart_postflight_scene` (`stages.c`) - the failure-side callback resets
-  the scene, decrements its repeat byte and either schedules another reset
-  or clears the render buffers and schedules the failure message. The second
-  callback optionally sets view mode zero before placing the scene root.
-- `$C1FF0A` `test_stream_face` - three vertex offsets into the clipper input
-  and the face test; the 18 bytes that follow are skipped when it passes.
-  `$C1FB82`'s dispatch is C as `face_test_passes` (`plane_tests.c`).
-- `$C2005C` `draw_tested_face`, `$C20100` `draw_indexed_face_list`,
-  `$C20002` `draw_tested_parallelogram` - a vertex offset list (or a
-  parallelogram from three offsets), the face test on the kind word, and the
-  polygon drawn in the kind's colour or the one that follows. `$C20100` runs
-  that face once per offset from a base pointer. They share
-  `tested_face_tail` (`draw_stream.c`).
-- `$C21060` `draw_quad_list`, `$C20C38`/`$C20C22` `draw_face_grid`
-  /`draw_face_grid_plain` - these already had C and glue but were blocked on
-  D7's high word. Fixed by replaying **every** face's clipper call rather
-  than only the last (`glue_batch57.c`, `glue_batch58.c`).
-- `$C1D3F4` `expand_cell_templates` (`control_records.c`) - expands a cell of
-  the template table into the per-level record lists.
-- `$C28800` `aim_record_at_view` (`control_records.c`) - points a record at
-  what a selector word names, then turns it toward that target.
-- `$C0924A`/`$C09266`/`$C092A0` `reset_scene_context` /
-  `reset_scene_recorder` / `place_scene_root` (`scene_setup.c`) - three entry
-  points into one sequence that places the player's record for the scene.
-
-## The problem that was just fixed
-
-**Symptom.** Routine after routine ended in a call whose registers the glue
-could not rebuild. Calling that callee's glue again would have redrawn or
-re-stepped, so the analysis dead-ended after the C was already written.
-
-**Cause.** Most callee glue does the C call and the register rebuild in one
-function, so there is no way to get the registers without the work.
-
-**Fix.** Split such a glue into the C call plus a `*_registers()` helper that
-any caller's glue can replay on its own. This is what the clipper, the line
-and the plotters had always done (`glue_clip.h`, `glue_text.h`); it just had
-not been applied further. Split so far, all declared in `glue_text.h`:
-
-- `record_orientation_registers` out of `glue_C2D954` (`glue_batch23.c`)
-- `track_direction_registers` out of `glue_C123FA` (`glue_batch41.c`)
-- `world_registers` exported from `glue_batch24.c`
-- `scene_setup_registers`, `view_mode_zero_registers`, and
-  `clear_render_buffers_registers` split from their glue so the postflight
-  callbacks can replay their register effects without repeating the work.
-- `prepare_polygon_to_row_registers`, `blit_lane_registers`, and
-  `mark_polygon_registers` split the mark polygon's drawing chain so the
-  panel-mark glue can replay every call's register effects in order.
-
-**Effect.** `$C28800` and the `$C0924A` trio then landed in minutes each
-instead of hours. Do the split first when a target ends in a fused callee;
-it is much cheaper than re-analysing that callee from every caller.
-
-A helper is safe to replay only if everything left in it is pure or
-idempotent. `record_orientation_registers` recomputes the same matrix from
-the same angles, so replaying it is harmless; `set_record_orientation`, the
-part that is not, stays on the work side.
-
-## Traps, and how to avoid them
-
-1. **`QUICK=1` runs one recording only.** It has twice passed a routine the
-   full run then rejected (`$C20A40`, `$C092A0`; the latter is never called
-   in demo01 at all). Use it to iterate, never to conclude. Nothing is done
-   until the full three-recording proof passes.
-2. **A mismatch only in a register's high word means look backwards.**
-   `SET_W` preserves the upper half, so a high word can carry from far
-   earlier than the routine's own code - through callees, or from the
-   caller. Most mismatches this session were exactly this. Find the last
-   full-width write to that register and reproduce it.
-3. **`MOVEQ` and `MOVEM.W` write whole registers.** `MOVEQ #0,D6` at the top
-   of `$C1D4E4` is why D6 after it is that routine's search bound, not the
-   bitmap offset its caller had just computed in D6 - 1,648 mismatches came
-   from assuming otherwise. `MOVEM.W` into data registers sign-extends.
-4. **Do not `call_port` a callee whose glue does work.** It will draw or step
-   twice. Split it (see above) or leave the routine unregistered with the
-   reason written down.
-5. **Transcribe control flow literally, including what looks like a bug.**
-   `$C0924A`'s retry path does not put its record pointer back, so a retry
-   writes its pose through the record the rejected entry had named. The C
-   keeps that.
-6. **Check `analysis/` before naming a global.** Nine addresses in the scene
-   setup looked undocumented; `analysis/routines/c093be_positive_scene_pose.md`
-   and `c09498_negative_scene_pose.md` named and bounded almost all of them.
-   Every entry in `globals.h` carries evidence - keep it that way.
-7. **Verify your edits landed.** A silent string-replace failure left one
-   commit claiming two glue splits when only one had applied. When scripting
-   edits, assert the pattern was found before writing, and re-read the file.
-8. **`$C0004E`, `$C000B4`, `$C000BA` are trampolines into Kickstart**, not
-   game logic. They would raise the routine count without recreating any
-   source. Leave them.
-
-## Next
-
-1. **Keep recreating game routines**, bottom-up from `port_candidates.py`.
-   The three sealed native recordings already cover demo, carrier success,
-   and crash failure. Re-record only after a machine-timing or translation
-   change invalidates their sealed endpoints. The candidate script omits
-   routines with an indirect call even when the entry fixes the target:
-   inspect small excluded routines against their source before selecting the
-   next batch. `$C1FFA4` is registered and verified as described above.
-   The normal/wide map packet `$C2AB5A`/`$C2AB34` has a game-memory adapter
-   and register bridge, with temporary registration proving recorded-call
-   parity. Its live ON timing changes frames, so resolve intermediate polygon
-   draw/blitter timing before counting either entry. The pair also blocks its
-   small parent `$C2AA9C`; keep the map pair out of the registered count.
-   `$C31226`/`$C3129A`/`$C31312` are registered (Recently ported); use the
-   candidate list for the next source-backed slice.
-   `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
-   `glue/glue_active_planes.c`. It submits four
-   active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon
-   submission and optional `$C30466` composite, followed by `$C0D74A` and
-   a 22-byte record copy or clear. Its blitter waits and busy-poll counters
-   need source-accurate C. A demo01 shadow probe found five counted-wait
-   mismatches: the shadow runner holds custom-register writes during the C
-   trial, so its C blits never become busy. A targeted demo01 sandbox run
-   compared 2,078 calls with zero mismatches, but the sandbox also holds
-   custom writes. A live `--ports on --ports-only C2FD8C` comparison against
-   `--ports off` first differs in RGB at frame 297, even when the cycle charge
-   is lowered from 65,000 to the sandbox mean of 24,025. The draft is
-   deliberately absent from `ports.c`; resolve live write/busy timing and
-   the provisional 56-cycle poll in `fa18_machine_count_blitter_polls` before
-   registering it. Evidence is in
-   `analysis/routines/c2fd8c_first_active_plane_submission.md`,
-   `c2fdf4_remaining_active_plane_submissions.md`, and
-   `c2fede_selected_table_display_stage.md`; the isolated orchestration is
-   `port/selected_table_display_stage.c`.
-   `$C13D84` is now registered (`indexed_record_update.c`,
-   `glue_indexed_record_update.c`). Its indexed selection, phase and control
-   updates, signed response routes, damping, child `$C26428` call and final
-   +$6E result are in C. The glue replays the child's live register effects.
-   Focused proof over the three native recordings matched 4,501 completed
-   shadow calls and 4,636 sandbox calls with zero mismatches; 120 shadow
-   calls were interrupted before comparison. The full 378-routine gate passed:
-   731,823 shadow matches, 920,240 sandbox matches and identical poison
-   frames. All 10 parity frames 393-402 remained pixel-exact. `$C26EBE`
-   `update_candidate_record` is now registered. Its C source spans
-   `candidate_record_scan.c`, `candidate_level_walk.c`, and
-   `candidate_record_update.c`; the glue replays the live side, face,
-   terminal, and plane-return registers. The final two sandbox differences
-   came from the source's `MOVE.B`/`EXT.W`/`SWAP`/`ASR.L` sequence: D1 keeps
-   the high word of a volume pointer, contributing `$30` to the Z adjustment
-   even when the sector delta is zero. The corrected C reproduces both the
-   linked-volume D2 and the special-point plane choice. The full 379-routine
-   gate passed with 738,115 shadow matches, 930,691 sandbox matches,
-   identical poison frames, and 10/10 exact parity frames 393-402.
-   The next active-plane candidate `$C2FD8C` already has C and glue in
-   `active_planes.c` and `glue_active_planes.c`. A temporary registration
-   matched all 252 demo01 sandbox calls through 3,000 frames. Shadow
-   compared four calls: two matched and two differed only in busy-counter
-   bytes (`$C4591F`: `$14` source versus `$03` C at call 2;
-   `$C45923`: `$36` source versus `$1B` C at call 9). Another 233 shadow
-   calls were interrupted before comparison. The count helper advances by
-   fixed 56-cycle polls, while the live source waits during chipset
-   activity; prove the source timing before registering this routine.
-   The temporary registration was removed.
-   `$C23CA6` `update_record_view` is now registered. `control_records.c`
-   contains its table advance, linked view, zone lookup, proximity gate,
-   local-to-world point placement, and status selection. The parent joins
-   the source routes; `glue_record_view_update.c` replays its observed D1
-   dispatch word and return. Focused full-length checks matched 4,088
-   completed sandbox calls and 4,077 shadow calls over the three native
-   recordings. The combined 380-routine gate passed with 742,192 shadow
-   matches, 936,488 sandbox matches, identical poison frames, and 10/10
-   parity frames 393-402. The observed calls averaged about 155 source
-   cycles, so these recordings mainly exercise the short dispatch exits;
-   the longer placement and zone branches remain source transcriptions
-   without independent runtime path coverage.
-   `$C0D04C` history projection was the next large draft and is now registered
-   as described under Recently ported. At `$C0D214` the source checks local
-   `A6-$26`: initialized to `-1`, it is later overwritten with the previous
-   radius by `$C0D2D8`. The three intermediate projections are reached on
-   later iterations, even though the first skips them.
-   `$C2D408` is now registered (`record_matrix_update.c`,
-   `glue_record_matrix_update.c`). The class-$30 tracking route, nonclass
-   velocity/depth paths and post-transform orientation are C. Focused proof
-   over all three native recordings matched 3,975 completed shadow calls and
-   4,877 sandbox calls with zero mismatches. The full 377-routine gate passed:
-   736,396 matching shadow calls, 927,924 sandbox matches and identical
-   poison frames. All 10 parity frames 393-402 were pixel-exact.
-   `$C2DEE0` is now registered (`matrix.c`, `glue_transform_matrix.c`). It
-   builds the nine-long signed product, converts it through the original
-   table/division angle branches, and returns the three shifted angles with
-   the caller-visible registers. Focused proof across the three native runs:
-   5,114 completed shadow matches and 5,328 sandbox matches, zero mismatches.
-   `$C2DB18` is now registered (`matrix_route.c`, `glue_matrix_route.c`). It
-   selects the active record's angle tuple, publishes the transformed angles,
-   and builds the final row-scaled matrix. The full targeted proof over the
-   three native runs matched 3,353 completed shadow calls and 3,353 sandbox
-   calls, zero mismatches. The full combined gate passed with 375 routines,
-   754,388 matching shadow calls and 962,808 sandbox calls, with identical
-   poison frames. All 10 parity frames 393-402 were pixel-exact.
-   `$C2D99C` is now registered as the selector for the two matrix routes.
-   Focused proof over all three native recordings matched 4,082 completed
-   shadow calls and 5,810 sandbox calls with zero mismatches. The summary
-   above remains the last full combined gate; include this selector in the
-   next larger batch gate.
-   The post-input parent `$C0F992` depends on `$C08F26`; its deeper
-   `$C1C63E`/`$C1C860` calls are still translated.
-2. **Exact UAE timing (dropped for now).** Native recordings make the port
-   independent of UAE replays; the bus model stays as it is. Tools:
-   `scripts/recomp_timing.py` (per instruction against a trace),
-   `scripts/recomp_state_diff.py` (first frame where game RAM differs),
-   `scripts/recomp_outcome.py` (pixels at chosen frames).
-3. **Kickstart calls.** Inventory, then replace with C (PORT.md stage E).
-   The first native entry inventory is now in
-   `analysis/rom_transition_inventory.md`. The runner's
-   `--rom-transitions OUT.json` records source PC, ROM entry PC, and count;
-   it does not classify a crossing as an OS call. All three instrumented
-   recordings ended at their sealed RAM hashes. The byte-exact jump
-   `$C02776 -> $FC5ECE` accounts for 2,157,736 of 2,661,668 observed
-   crossings. Its ROM caller `$FC5E90` invokes graphics.library
-   `VBeamPos()` through LVO `-$180`; the target reads the raster row.
-   This is an internal graphics.library poll, so sort direct game-originated
-   library calls separately before prioritizing OS replacement.
-   The pinned `VBeamPos` leaf at `$FC5ECE` is now replaced by C by default
-   (`port/os/graphics.c` and its temporary CPU bridge). The runner checks
-   its exact ROM bytes before interception; `--no-os-vbeam` selects the ROM
-   comparison path. Its first full native trial matched all three sealed RAM
-   hashes and removed all 2,157,736 recorded entries to that ROM leaf. See
-   `analysis/routines/fc5ece_vbeam_pos.md` for the source and proof. With the
-   C path as the translated runner's default, the full three-recording gate
-   again passed: 386 routines, 726,979 matching shadow calls, 925,873
-   sandbox matches, zero mismatches, and identical poison frames. The run075
-   frame-392 parity check remained 10/10 pixel-exact. `--no-recomp` keeps the
-   interpreter-only baseline on the ROM path unless explicitly overridden.
-   Graphics.library `WaitBlit()` `$FC5A58` is now also C by default, through
-   the `-$E4` vector at `$C02812`. Its pinned 36-byte ROM body polls the
-   blitter-busy bit in DMACONR; the C bridge keeps both initial reads and
-   the NOP wait loop at their original instruction boundaries.
-   `--no-os-waitblit` restores ROM execution. Across the three native
-   recordings its 21,331 original entries became zero, with all final RAM
-   hashes still sealed. A complete demo C/ROM comparison matched final RAM
-   and runner statistics; the ROM path entered it 8,639 times. The first
-   300 demo frames did not call this service, so the complete recording is
-   the focused comparison. The full demo C path also matched MSVC Release
-   byte-for-byte in RAM and ROM transition inventory. With C default-on, the
-   full gate passed: 386 routines, 726,979 shadow matches, 925,873 sandbox
-   matches, zero mismatches, and identical poison frames. The run075
-   frame-392 parity check remained 10/10 exact. See
-   `analysis/routines/fc5a58_wait_blit.md`.
-   The next direct graphics vector was `$C02764 -> $FC5E58`,
-   `WaitBOVP(viewport)` at `-$192(A6)`. It had 16,526 entries over the
-   three recordings and returns to game code at `$C53F98`. The pinned ROM
-   computes a viewport beam-row limit and calls `VBeamPos` until reached;
-   that inner poll already has a C leaf. `port/os/graphics_wait_bovp.c` now
-   runs the outer service at the original instruction boundaries, with the
-   nested `VBeamPos` call on the ordinary path. `--no-os-waitbovp` restores
-   ROM execution, and `--no-recomp` defaults to ROM. A 300-frame demo
-   C/ROM comparison matched RAM and runner statistics; the ROM path entered
-   this leaf 1,735 times and the C path entered it zero times. All three
-   complete C-path runs retained their sealed final RAM hashes with zero
-   entries to the original leaf. GNU and MSVC Release matched RAM and ROM
-   transition inventory in the focused 300-frame C-path run. With C
-   default-on, the full gate passed: 386 routines, 726,979 shadow matches,
-   925,873 sandbox matches, zero mismatches, and identical poison frames.
-   The run075 frame-392 parity check remained 10/10 exact. See
-   `analysis/routines/fc5e58_wait_bovp.md`.
-   The next adjacent graphics vectors were `$C0272E -> $FC64BC`
-   `OwnBlitter()` (`-$1C8`) and `$C02728 -> $FC64D4`
-   `DisownBlitter()` (`-$1CE`). They have 16,012 and 16,010 native entries
-   respectively and return to game code at `$C53FBC`/`$C53FCC`. The pinned
-   ROM adjusts the shared ownership counter and invokes internal helpers;
-   `DisownBlitter` also branches on owner and blitter state and can write
-   interrupt/DMA registers. `port/os/graphics.c` now supplies the word-sized
-   counter operations, and `port/os/graphics_blitter_ownership.c` executes
-   both outer services in C at their original instruction boundaries. The
-   nested helpers stay on the ordinary ROM path. `--no-os-blitter-owner`
-   selects the ROM pair; `--no-recomp` defaults to ROM. A 300-frame demo
-   C/ROM comparison matched RAM and runner statistics, with 1,736/1,735
-   ROM entries versus zero C-path entries. All three complete C-path runs
-   kept their sealed final RAM hashes and recorded zero entries to the
-   original leaves. GNU and MSVC Release matched RAM and transition
-   inventory in the focused probe. See
-   `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`.
-   With both ownership leaves C default-on, the full gate passed: 386
-   routines, 726,979 shadow matches, 925,873 sandbox matches, zero
-   mismatches, and identical poison frames. The run075 frame-392 parity
-   check remained 10/10 exact.
-   The next direct graphics service is `$C02818 -> $FC63CC`,
-   `LoadView(view)` at `-$DE(A6)`, seen 15,979 times across the three native
-   recordings. Its observed return site is `$C53F40`. The vector's four
-   instructions call `$FCD564`, where the display waits and state writes
-   happen. Port the wrapper and that helper together; the transition
-   inventory records the vector and ROM evidence.
-   Exec `Disable()` `$FC1428` and `Enable()` `$FC1436` are now also source-backed
-   C leaves (`port/os/exec.c` and its instruction bridge). The pinned ROM
-   supplies the exact sequence and the Kickstart 1.3 vector table identifies
-   the `-$78`/`-$7E` calls. They update the nesting byte at `ExecBase+$126`
-   and conditionally write `INTENA`. The runner checks all 30 source bytes
-   before enabling the C pair by default in translated mode;
-   `--no-os-exec-interrupts` restores ROM execution. Each leaf had 40,560
-   entries across the three native recordings. A full C-path trial kept all
-   three sealed final RAM hashes and recorded zero entries to either leaf.
-   GNU and MSVC Release matched byte-for-byte in a 300-frame C-path probe;
-   interpreter-only mode entered each ROM leaf 300 times in its default
-   300-frame probe, matching the explicit ROM setting. The source and proof
-   are in `analysis/routines/fc1428_fc1436_exec_interrupts.md`. With both
-   C leaves default-on, the full gate passed: 386 routines, 726,979 shadow
-   matches and 925,873 sandbox matches across all three sealed recordings,
-   zero mismatches, identical poison frames. The run075 frame-392 parity
-   check remained 10/10 exact.
-   The next frequent crossing `$C00252 -> $FC0E9C` is the Exec interrupt
-   dispatcher, not a game library call. `$C00102 -> $FC1BEA` is Exec
-   `GetMsg(port)` (`-$174`), seen 37,669 times across the three recordings.
-   Its 46-byte ROM body removes the first message under interrupt masking.
-   `port/os/exec_glue.c` now runs it in C one source instruction at a time;
-   the pinned bytes are checked before interception. `--no-os-getmsg` restores
-   the ROM path, and `--no-recomp` defaults to ROM. A 300-frame C/ROM
-   comparison matched RAM and runner statistics, with 3,514 ROM entries and
-   zero C-path entries. All three complete C-path trials retained their
-   sealed final RAM hashes and entered this ROM leaf zero times. GNU and MSVC
-   Release matched in the 300-frame C-path probe. Interpreter-only mode
-   entered the ROM leaf 3,640 times in its separate 300-frame probe. See
-   `analysis/routines/fc1bea_exec_get_msg.md` for the source and proof. With
-   `GetMsg` C default-on, the full gate passed: 386 routines, 726,979 shadow
-   matches, 925,873 sandbox matches, zero mismatches, identical poison
-   frames. The run075 frame-392 parity check remained 10/10 exact.
-   The next frequent entry `$C023B8 -> $FE44F2` was potgo.resource
-   `WritePotgo(word,mask)`, invoked through `-$12(A6)` at ROM `$FE584A`.
-   The pinned ROM merges D0/D1 with its cached POTGO word, writes `$DFF034`,
-   and uses Exec `Disable`/`Enable` around the update. It appears 36,236
-   times across the three recordings, once per frame. Its mask, merge, and
-   cached-word operations are now in `port/os/potgo.c`, with the instruction
-   boundary bridge in `port/os/potgo_glue.c`. The nested Exec calls remain
-   on their ordinary path. `--no-os-potgo` selects the ROM comparison path;
-   `--no-recomp` defaults to ROM. All three full C-path runs retained their
-   sealed RAM hashes with zero entries to `$FE44F2`. A 300-frame C/ROM
-   comparison matched RAM and runner statistics, with 300 ROM entries and
-   zero C-path entries. GNU and MSVC Release matched RAM and inventory in
-   that probe. Interpreter-only mode also matched RAM with the C path
-   explicitly enabled, while its default used ROM. See
-   `analysis/routines/fe44f2_potgo_write.md` for the source and proof.
-   With this C leaf default-on, the full gate passed: 386 routines, 726,979
-   shadow matches, 925,873 sandbox matches, zero mismatches, and identical
-   poison frames. The run075 frame-392 parity check remained 10/10 exact.
-   Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
-   (outside the repo, on this machine). Its includes, autodocs and FD/LVO
-   files give each library call's offset, registers and behaviour, which is
-   what a C shim for the game's Kickstart calls needs.
-
-### Where the rest of the port stands
-
-The polygon path is C from the faces (`$C09952`, `$C099F6`) down through the
-clipper and `draw_polygon`; the clipper's register replay is reusable for its
-other callers (`port/game/glue/glue_clip.h`). The cockpit and HUD are mostly
-C (`hud_readouts.c`, `hud_bars.c`, `hud_marks.c`, `message_line.c`,
-`postflight_hud.c`). The HUD stage's parts `$C33370` (tapes), `$C33B38`
-(status mark) and `$C33CD2` (transform) are registered; `$C33370`'s glue
-replays every step in order (the tape forms, record type $10, only
-approximately: the recordings never show them). `$C332BC` is registered: its
-glue runs each step's recreated routine in order, so `draw_postflight_hud`'s
-C itself is a transcription that does not run under the proof. The
-postflight renderer dispatcher `$C31226` is registered. The stores icons
-`$C30A00`/`$C30AE2` are C;
-their glue preserves stray high bits of the caller's D4. Glue helpers for
-routines that end in drawing are in `glue_text.h`: the small-text line is
-probed before the C (the last glyph's cell) and replayed after it; pixel,
-line and blit replays read only the plot state, so they run after the C in
-order, with `CURRENT_COLOUR` set to the value then in force. `$C1E328`
-(display-list sort) is registered; its glue reconstructs the stack byte read
-by the sort after its entry MOVEM has overwritten the caller's stack slot.
-`$C2F1C0` (filled circle), `$C2EC90` and its projection variants, `$C0CF98`
-(scaled circle stream), `$C12098` (view controls) and `$C1B27E` (recorder
-playback and input ramps) are registered. The recorder's end marker advances
-its restarted byte cursor by one; its throttle hold path clears the
-function-key level. `$C13176` was compared in the sandbox pass; `$C3316E` was
-called but not compared in these recordings.
-
-## Commands
-
-```sh
-sh scripts/build_recomp.sh                                 # headless build
-QUICK=1 sh scripts/recomp_ports_check.sh                   # first recording only (probe)
-sh scripts/recomp_ports_check.sh                           # shadow + sandbox + poison proof
-python scripts/recomp_parity.py --start 392 --frames 10    # parity
-python tools/recomp/port_candidates.py -n 40               # what to port next
-python tools/recomp/port_info.py C2FA7E                    # what a routine needs
-python tools/recomp/register_ports.py "comment" C2005C=name:cycles
-python tools/recomp/recomp.py --trace build/recomp/run075_f392_trace10/trace.jsonl \
-    --seeds build/recomp/fallback_3000.json --edges port/recomp/generated/recomp_edges.json
-cmake -S port/recomp -B build/recomp-cmake && cmake --build build/recomp-cmake --config Release
-```
-
-Snapshots and traces come from `scripts/engine9000_bridge.py`
-(`--frames N`, `--trace-frames N`); oracle frames are cached in
-`build/recomp/oracle/`. Regenerating the translation needs the frame-392
-snapshot in `build/recomp/run075_f392/`.
-
-## Standing rules
-
-- Never present an emulator frame as native output.
-- The Engine9000 runs in `captures/uae/` are obsolete; keep them read-only.
-- No Ghidra on this account. The `pcode/raw/` exports are frozen evidence;
-  nothing in the port reads them (REVERSE_ENGINEERING.md, section 4).
-- `scripts/check_native_build.py`, `scripts/native_frame_count.py` and
-  `port/native_data_allowlist.txt` are user-owned; do not edit them.
-- A recreated routine is done only when the full `scripts/recomp_ports_check.sh`
-  passes and parity is unchanged. Commit per verified batch.
+- PORT.md: architecture and source conventions.
+- port/game/glue/ports.c: actual registered set and ON cycle charges.
+- scripts/recomp_ports_check.sh: native proof driver. Archived UAE replay and
+  scripts/recomp_parity.py are not current gates.
+- captures/native/*/run.json: sealed frame endpoints and final RAM hashes.
+- Existing reports under analysis/routines/: original behavior evidence.
+- Do not infer mechanics, constants, or object meaning without original source
+  or capture evidence. Do not edit the user-owned scripts/check_native_build.py,
+  scripts/native_frame_count.py, port/native_data_allowlist.txt, or .vscode/.

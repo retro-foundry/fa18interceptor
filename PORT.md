@@ -56,7 +56,7 @@ is proven against.
 | --- | --- | --- |
 | A | Whole-program translation, interpreter fallback | done (624 routines) |
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
-| C | Frame parity with Engine9000 on every recording | run075 frames 393-402 exact; run060 game RAM identical through frame 93 |
+| C | Machine and frame parity with Engine9000 | historical emulator comparisons documented; current acceptance uses the sealed native recordings |
 | D | Readable C, proven in related batches | 413 registered routines; see CURRENT_PORT_HANDOFF.md for the latest full gate |
 | F | Native backend: plain C memory, direct drawing and audio | not started |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
@@ -137,7 +137,7 @@ When every caller of a routine is C, its glue is no longer reached; delete it.
 | Check | Command | Must hold |
 | --- | --- | --- |
 | Recreated routines | `sh scripts/recomp_ports_check.sh` | 0 mismatches; poison frames identical |
-| Frame parity | `python scripts/recomp_parity.py --start 392 --frames 10` | first diverging frame does not regress |
+| Live frame parity | `--ports on --rgb444` versus native `--ports shadow --rgb444` on affected sealed recordings | RGB444 frames identical; final RAM and blit totals alone are insufficient |
 | Translation vs interpreter | `fa18_recomp ... --ram-out A` vs `--no-recomp --ram-out B` | identical |
 | Machine vs emulator, first steps | `scripts/recomp_lockstep.py` | first divergence understood |
 | Blitter | `build/recomp/blit_replay.exe CHIP WRITES OUT` | identical Chip RAM |

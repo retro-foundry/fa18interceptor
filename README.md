@@ -10,10 +10,10 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 ## Where things stand
 
 The game runs natively as C. A mechanical translation of the original 68000
-code runs on a small Amiga machine model, in an SDL2 window at 50 Hz. It
-plays run075 from its menu into the flight demo and accepts live keyboard and
-mouse input. Hand-written C is replacing the translated routines one by one;
-each replacement is proven against the original on every call.
+code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
+Hand-written C is replacing the translated routines in source-backed batches;
+413 game entries are registered. Three sealed native recordings cover the
+demo, a successful carrier landing, and qualification failure.
 
 See [STATUS.md](STATUS.md) for the numbers,
 [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) for the next steps, and
@@ -29,19 +29,18 @@ cmake --build build/recomp-cmake --config Release
 sh scripts/build_recomp.sh            # headless gcc build: build/recomp/fa18_recomp.exe
 ```
 
-Play run075 from the menu (click the window to capture the mouse, F12 releases
-it):
+Open the native demo start state (click the window to capture the mouse, F12
+releases it):
 
 ```sh
-build/recomp-cmake/Release/fa18_recomp.exe --state captures/uae/run075/restored-state.bin \
-    --rom local/system/kick13.rom --replay captures/uae/run075/playback.e9k --window --frames 0
+build/recomp-cmake/Release/fa18_recomp.exe --state captures/native/demo01/state.bin \
+    --rom local/system/kick13.rom --window --frames 0
 ```
 
 Check the work:
 
 ```sh
-python scripts/recomp_parity.py --start 392 --frames 10   # frames vs the emulator
-sh scripts/recomp_ports_check.sh                          # prove every recreated routine
+sh scripts/recomp_ports_check.sh   # three sealed native recordings, shadow/sandbox/poison
 ```
 
 `local/` (ROM, extracted files, toolchain) and `captures/` (sealed
@@ -68,7 +67,7 @@ recordings) are not in git.
 | File | Purpose |
 | --- | --- |
 | [STATUS.md](STATUS.md) | Current state and numbers |
-| [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) | One-page handoff: next blockers and commands |
+| [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) | Current count, timing blockers, next batch and gates |
 | [PORT.md](PORT.md) | Port architecture, stages, proof method, conventions |
 | [RE_COMPLETION_PLAN.md](RE_COMPLETION_PLAN.md) | Analysis plan and how it feeds the C source |
 | [GAME.md](GAME.md) | Game dossier: history, controls, landmarks, experiments |
@@ -77,17 +76,10 @@ recordings) are not in git.
 
 ## Recording new scenarios
 
-```powershell
-python scripts/record_run.py --name run001                 # play in Engine9000
-python scripts/finalize_run.py captures/uae/run001             # seal it
-python scripts/engine9000_bridge.py --restore captures/uae/run001/initial_state.bin `
-  --config captures/uae/run001/config.uae --playback captures/uae/run001/playback.e9k `
-  --frames 300 --output build/run001_first300              # replay, snapshot, trace
-```
-
-The bridge writes `state.bin`, `chip.bin`, `slow.bin`, `screen.png` and
-registers at the last frame; `--trace-frames N` adds an instruction trace and
-custom-register write log. Sealed runs are never edited.
+Record with `fa18_recomp --window --record OUT.fa18in`, then seal with
+`python scripts/seal_native_run.py NAME --state START.bin --input OUT.fa18in`.
+The result is a read-only `captures/native/NAME/` recording. Archived
+`captures/uae/` runs remain source evidence; they are not the current gate.
 
 ## Rules
 
@@ -99,4 +91,5 @@ custom-register write log. Sealed runs are never edited.
 - `scripts/check_native_build.py`, `scripts/native_frame_count.py` and
   `port/native_data_allowlist.txt` are owned by the user. Do not edit them.
 - A recreated routine is done only when `scripts/recomp_ports_check.sh`
-  passes (shadow proof and poison check) and parity is unchanged.
+  passes on all native recordings and live ON RGB frames match the native
+  shadow reference for affected scenarios.

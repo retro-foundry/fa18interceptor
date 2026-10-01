@@ -8,34 +8,29 @@
 #     calls with an interrupt or hardware access inside (audio, joystick).
 #  3. POISON (first recording): overwrite everything liveness declares dead
 #     after each compared call; the frames must not change.
-# The recordings are captures/native/*/ (FA18_LOOP_INPUT_V1). Until there are
-# any, the archived Engine9000 runs in captures/uae/ stand in (UAE=1 forces
-# them). QUICK=1 runs the first recording only. Fails on any mismatch.
+# The recordings are captures/native/*/ (FA18_LOOP_INPUT_V1). Archived
+# Engine9000 captures are not a proof fallback. QUICK=1 probes the first
+# recording only. Fails on any mismatch.
 set -e
 cd "$(dirname "$0")/.."
 EXE=./build/recomp/fa18_recomp.exe
 ROM=local/system/kick13.rom
 OUT=build/recomp
-rm -f $OUT/ports_report_*.json
 
 # One line per recording: name, then the runner's input arguments.
 RUNS=""
-if [ -z "${UAE:-}" ]; then
-  for d in captures/native/*/; do
-    [ -f "$d/input.fa18in" ] || continue
-    n=$(basename "$d")
-    RUNS="$RUNS$n|--state $d/state.bin --input $d/input.fa18in --to-end
+for d in captures/native/*/; do
+  [ -f "$d/input.fa18in" ] || continue
+  n=$(basename "$d")
+  RUNS="$RUNS$n|--state $d/state.bin --input $d/input.fa18in --to-end
 "
-  done
-fi
+done
 if [ -z "$RUNS" ]; then
-  echo "(no native recordings: using the archived Engine9000 runs)"
-  RUNS="run075|--state captures/uae/run075/restored-state.bin --replay captures/uae/run075/playback.e9k --frames ${FRAMES:-3000}
-run024|--state captures/uae/run024/initial_state.bin --replay captures/uae/run024/playback.e9k --frames 27437
-run060|--state captures/uae/run060/restored-state.bin --replay captures/uae/run060/playback.e9k --frames 10085
-run062|--state captures/uae/run062/restored-state.bin --replay captures/uae/run062/playback.e9k --frames 2470"
+  echo "no sealed native recordings in captures/native/" >&2
+  exit 1
 fi
 [ -n "${QUICK:-}" ] && RUNS=$(printf '%s\n' "$RUNS" | head -1)
+rm -f "$OUT"/ports_report_*.json
 
 FIRST=""
 printf '%s\n' "$RUNS" | while IFS='|' read -r run args; do
