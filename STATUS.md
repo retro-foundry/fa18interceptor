@@ -13,6 +13,7 @@ Updated 2026-10-01.
 | Frame parity (run075, from the menu) | frame 500: 99.6% of pixels match; frame 3000: flying, path has drifted (94%) |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
 | Recreated C source | 386 routines in `port/game/`; 726,979 matching shadow calls and 925,873 sandbox calls over three native recordings; poison frames identical |
+| Kickstart replacement | Entry inventory begun: 2,661,668 RAM-to-ROM transitions across three sealed native sessions; OS shim and cold boot remain open (`analysis/rom_transition_inventory.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
 ## The game program

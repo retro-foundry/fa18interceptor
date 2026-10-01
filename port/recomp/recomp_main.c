@@ -49,6 +49,7 @@ static void usage(void) {
             "                   [--window [--scale N]]   (window: --frames 0 runs until closed)\n"
             "                   [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
             "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n"
+            "                   [--rom-transitions OUT.json] (RAM-to-ROM entry inventory)\n"
             "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n");
 }
 
@@ -158,6 +159,7 @@ int main(int argc, char **argv) {
     const char *record_path = NULL, *input_path = NULL;
     int to_end = 0;
     const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL, *edges_path = NULL;
+    const char *rom_transitions_path = NULL;
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
@@ -190,6 +192,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--ports-report") && i + 1 < argc) ports_report = argv[++i];
         else if (!strcmp(argv[i], "--profile") && i + 1 < argc) profile_path = argv[++i];
         else if (!strcmp(argv[i], "--edges") && i + 1 < argc) edges_path = argv[++i];
+        else if (!strcmp(argv[i], "--rom-transitions") && i + 1 < argc) rom_transitions_path = argv[++i];
         else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--record") && i + 1 < argc) record_path = argv[++i];
@@ -207,6 +210,10 @@ int main(int argc, char **argv) {
         return 1;
     }
     fa18_recomp_init(use_recomp);
+    if (rom_transitions_path && !fa18_recomp_track_rom_transitions()) {
+        fprintf(stderr, "cannot allocate ROM transition inventory\n");
+        return 1;
+    }
     fa18_ports_init(ports_mode, ports_only);
     if (restore_lead < 0) restore_lead = replay_path != NULL && start_frame == 0;
     if (replay_path && !fa18_replay_load(&replay, replay_path)) {
@@ -260,6 +267,10 @@ int main(int argc, char **argv) {
     if (fallback) fa18_recomp_write_fallback_log(fallback);
     if (profile_path) fa18_recomp_write_profile(profile_path);
     if (edges_path) fa18_recomp_write_edges(edges_path);
+    if (rom_transitions_path && !fa18_recomp_write_rom_transitions(rom_transitions_path)) {
+        fprintf(stderr, "cannot write ROM transition inventory %s\n", rom_transitions_path);
+        return 1;
+    }
     if (ports_mode == FA18_PORTS_SHADOW || ports_mode == FA18_PORTS_SANDBOX || ports_report) {
         long bad = fa18_ports_report(ports_report);
         fprintf(stderr, "ports: %ld mismatching calls\n", bad);

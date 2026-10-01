@@ -68,6 +68,9 @@ int fa18_recomp_call_dynamic(void);
 int fa18_recomp_resume(uint32_t ret, uint32_t sp);
 /* Game-RAM PCs the interpreter executed, for the next generator run. */
 int fa18_recomp_write_fallback_log(const char *path);
+/* Optional inventory of interpreter entries from RAM into Kickstart ROM. */
+int fa18_recomp_track_rom_transitions(void);
+int fa18_recomp_write_rom_transitions(const char *path);
 
 #ifdef FA18_RECOMP_GENERATED
 

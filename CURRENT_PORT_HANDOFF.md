@@ -14,6 +14,7 @@ one at a time, each proven on every call.
 | Check | Result |
 | --- | --- |
 | Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Kickstart entry inventory | `--rom-transitions OUT.json` recorded 2,661,668 RAM-to-ROM crossings across the three sealed native recordings; see `analysis/rom_transition_inventory.md`. OS replacement remains to be implemented. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -353,6 +354,13 @@ part that is not, stays on the work side.
    `scripts/recomp_state_diff.py` (first frame where game RAM differs),
    `scripts/recomp_outcome.py` (pixels at chosen frames).
 3. **Kickstart calls.** Inventory, then replace with C (PORT.md stage E).
+   The first native entry inventory is now in
+   `analysis/rom_transition_inventory.md`. The runner's
+   `--rom-transitions OUT.json` records source PC, ROM entry PC, and count;
+   it does not classify a crossing as an OS call. All three instrumented
+   recordings ended at their sealed RAM hashes. The byte-exact jump
+   `$C02776 -> $FC5ECE` accounts for 2,157,736 of 2,661,668 observed
+   crossings; inspect its ROM body and callers first.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is

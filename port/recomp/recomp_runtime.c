@@ -25,6 +25,13 @@ static uint8_t *code_bits;
 static uint8_t *disabled;
 static uint8_t *fallback_seen;
 static int enabled_flag;
+#define ROM_TRANSITION_SLOTS 65536u
+typedef struct {
+    uint64_t key; /* source PC in bits 47..24, ROM entry PC in bits 23..0; zero means empty */
+    uint64_t count;
+} RomTransition;
+static RomTransition *rom_transitions;
+static uint64_t rom_transitions_dropped;
 uint32_t fa18_recomp_stop_pc, fa18_recomp_stop_sp;
 static int depth;
 
@@ -42,6 +49,9 @@ void fa18_recomp_init(int enabled) {
     free(code_bits);
     free(disabled);
     free(fallback_seen);
+    free(rom_transitions);
+    rom_transitions = NULL;
+    rom_transitions_dropped = 0;
     entry_map = calloc(SPACE / 2, sizeof *entry_map);
     code_bits = calloc(SPACE / 8, 1);
     disabled = calloc((size_t)fa18_recomp_function_count + 1, 1);
@@ -59,6 +69,47 @@ void fa18_recomp_init(int enabled) {
             if (f >= 0) code_bits[f >> 3] |= (uint8_t)(1u << (f & 7));
         }
     }
+}
+
+int fa18_recomp_track_rom_transitions(void) {
+    rom_transitions = calloc(ROM_TRANSITION_SLOTS, sizeof *rom_transitions);
+    return rom_transitions != NULL;
+}
+
+static void note_rom_transition(uint32_t source, uint32_t target) {
+    uint64_t key;
+    uint32_t slot, probes;
+    if (!rom_transitions || target < 0xF80000u || source >= 0xF80000u) return;
+    key = ((uint64_t)(source & 0xFFFFFFu) << 24) | (target & 0xFFFFFFu);
+    if (!key) return;
+    slot = (uint32_t)((key * 0x9E3779B97F4A7C15ull) >> 48);
+    for (probes = 0; probes < ROM_TRANSITION_SLOTS && rom_transitions[slot].key && rom_transitions[slot].key != key;
+         probes++)
+        slot = (slot + 1u) & (ROM_TRANSITION_SLOTS - 1u);
+    if (probes == ROM_TRANSITION_SLOTS) { rom_transitions_dropped++; return; }
+    rom_transitions[slot].key = key;
+    rom_transitions[slot].count++;
+}
+
+int fa18_recomp_write_rom_transitions(const char *path) {
+    FILE *out = fopen(path, "w");
+    uint32_t i;
+    int first = 1;
+    if (!out || !rom_transitions || rom_transitions_dropped) {
+        if (out) fclose(out);
+        return 0;
+    }
+    fputs("[\n", out);
+    for (i = 0; i < ROM_TRANSITION_SLOTS; i++) {
+        uint64_t key = rom_transitions[i].key;
+        if (!key) continue;
+        fprintf(out, "%s  {\"source\": \"%06X\", \"rom_entry\": \"%06X\", \"count\": %llu}",
+                first ? "" : ",\n", (unsigned)(key >> 24), (unsigned)(key & 0xFFFFFFu),
+                (unsigned long long)rom_transitions[i].count);
+        first = 0;
+    }
+    fputs("\n]\n", out);
+    return fclose(out) == 0;
 }
 
 void fa18_recomp_note_write(uint32_t address, int size) {
@@ -166,6 +217,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) break;
     }
     fa18_bus_begin(REG_PC); /* the interpreter's opcode fetch follows */
+    note_rom_transition(REG_PPC, REG_PC);
     trace_pc(REG_PC);
     if (enabled_flag) {
         int f = fold(REG_PC);
