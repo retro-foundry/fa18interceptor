@@ -41,6 +41,8 @@ Most frequent pairs across all three:
 | `$C023B8` | `$FE44F2` | 36,236 | potgo.resource `WritePotgo(word,mask)`; see below |
 | `$C02812` | `$FC5A58` | 21,331 | graphics.library `WaitBlit()`; C bridge, see below |
 | `$C02764` | `$FC5E58` | 16,526 | graphics.library `WaitBOVP(viewport)`; see below |
+| `$C0272E` | `$FC64BC` | 16,012 | graphics.library `OwnBlitter()`; see below |
+| `$C02728` | `$FC64D4` | 16,010 | graphics.library `DisownBlitter()`; see below |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
 is an **internal graphics.library callback**, not a game-originated OS call.
@@ -102,6 +104,16 @@ then calls `VBeamPos` at `$FC5E90` until the beam reaches it. Its observed
 return site is game code at `$C53F98`. It now runs through a C bridge in
 translated mode, with the existing C `VBeamPos` leaf handling its inner
 poll. See [the WaitBOVP report](routines/fc5e58_wait_bovp.md).
+
+`$C0272E` and `$C02728` are the graphics.library `-$1C8(A6)` and
+`-$1CE(A6)` vectors, named `OwnBlitter()` and `DisownBlitter()` by the local
+Kickstart 1.3 `LVO.OFFS`. Their pinned ROM entries are `$FC64BC` and
+`$FC64D4`; the observed game return sites are `$C53FBC` and `$C53FCC`.
+The first adjusts the graphics library ownership counter and calls an
+internal ROM helper. The second adjusts the same counter, tests owner and
+blitter state, and can call several internal helpers or write the blitter
+interrupt and DMA registers. These paired services require their branch
+paths and nested calls to be preserved together in a C replacement.
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

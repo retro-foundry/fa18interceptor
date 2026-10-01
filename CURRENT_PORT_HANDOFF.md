@@ -407,6 +407,14 @@ part that is not, stays on the work side.
    925,873 sandbox matches, zero mismatches, and identical poison frames.
    The run075 frame-392 parity check remained 10/10 exact. See
    `analysis/routines/fc5e58_wait_bovp.md`.
+   The next adjacent graphics vectors are `$C0272E -> $FC64BC`
+   `OwnBlitter()` (`-$1C8`) and `$C02728 -> $FC64D4`
+   `DisownBlitter()` (`-$1CE`). They have 16,012 and 16,010 native entries
+   respectively and return to game code at `$C53FBC`/`$C53FCC`. The pinned
+   ROM adjusts the shared ownership counter and invokes internal helpers;
+   `DisownBlitter` also branches on owner and blitter state and can write
+   interrupt/DMA registers. Preserve those paths together in the next C
+   service. The transition inventory records the vector evidence.
    Exec `Disable()` `$FC1428` and `Enable()` `$FC1436` are now also source-backed
    C leaves (`port/os/exec.c` and its instruction bridge). The pinned ROM
    supplies the exact sequence and the Kickstart 1.3 vector table identifies
