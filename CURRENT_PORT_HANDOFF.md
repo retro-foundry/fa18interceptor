@@ -20,8 +20,8 @@ game-routine count. Group source-backed routines that share a C implementation
 or completed children; use one quick probe during the batch and one full
 shadow, sandbox, poison, and live frame gate before increasing the count.
 `$C2FD8C` remains inactive because its blitter busy-wait timing changes
-pixels in ON mode (details under Next). The current larger source-backed pair
-is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
+pixels in ON mode (details under Next). A larger source-backed pair awaiting
+timing work is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
 existing `port/map_packet_*` composition as the reference. Both share the
 body at `$C2AB7C`; their original callers retain every data and address
 register, so the runtime adapter and register replay must be developed
@@ -32,8 +32,8 @@ The map pair is source backed but **not registered**. Its live adapter,
 register bridge, common-core linkage, and multiple-polygon packet walker are
 implemented. Temporarily registering both entries passed the full
 three-recording gate: 415 routines, 719,423 shadow matches and 1,160,026
-sandbox matches, zero mismatches, poison frames identical; run075 frames
-393-402 were 10/10 exact. The pair itself matched 622 completed shadow
+sandbox matches, zero mismatches, poison frames identical. The pair itself
+matched 622 completed shadow
 calls and 8,058 sandbox calls; the other observed calls were incomplete
 because they crossed a chipset event. The crash recording did not call it.
 
@@ -43,7 +43,7 @@ near the observed per-entry means delay that to frame 378. A sweep of fixed
 charges produced a best first difference at frame 416; frame 416 differed in
 29,453 pixels, and the blit count changed. The C pass performs many polygon
 draws before the single fixed charge at return, so blitter timing between
-draws must be accounted for before activation. Keep 413 as the verified
+draws must be accounted for before activation. Keep the map pair out of the
 registered count. The focused trace instrumentation and cycle-override probe
 have been removed. The map/detail contract fixtures now include the source's
 packet terminator. `scripts/build_recomp.sh` does not track generated-code
@@ -54,14 +54,10 @@ generated source before rebuilding.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 413 of 624 translated entries registered; 727,968 calls matching in shadow and 1,214,836 in the sandbox pass over three native recordings; poison-clean. `$C1FFA4` matched on its observed calls. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 413 of 624 translated entries registered; 727,968 calls matching in shadow and 1,214,836 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 412-routine gate and 10-frame parity check passed. Further OS replacement is deferred until after the game source and native backend. See the individual `analysis/routines/` reports below. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
-| run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
-| run060 replay | game RAM identical through frame 93; pixels exact to frame 540; drifts after |
-| run062 replay | frame 2475 exact |
-| Translated vs interpreter-only, 3,000 frames | identical RAM and registers |
 
 ## How to work
 
@@ -85,11 +81,33 @@ The loop, per batch of related routines:
    2.5 minutes). Inspect per-entry calls and mismatches.
 6. Commit each verified batch as it lands.
 7. Before updating any count or calling the batch done, run the **full**
-   `sh scripts/recomp_ports_check.sh` over all three recordings and
-   `python scripts/recomp_parity.py --start 392 --frames 10`.
+   `sh scripts/recomp_ports_check.sh` over all three native recordings. Then
+   compare live `--ports on` output with the native shadow reference over the
+   affected recording; check RGB frames, not only final RAM and blit totals.
+   Archived UAE runs such as run075 are historical evidence, not a current
+   acceptance gate.
 
 Run the full proof once per batch. See the first trap below: the quick probe
 is not a substitute for it.
+
+## Source work awaiting live timing
+
+`$C2B05A` has source-backed directory crossing and polygon edge probes in
+`record_region_probe.c`, updating bits 1 and 2 of the selected mutable
+record. The C keeps the source's D2-D5 stack save followed by the distinct
+D2/D4-D6 restore mapping; treating that as a same-register restore caused the
+initial comparison failure. Temporary registration passed the full
+414-routine gate: 727,971 shadow
+and 1,214,847 sandbox calls over the three native recordings, with zero
+mismatches and identical poison frames. This entry matched three completed
+shadow calls (14 demo01 calls crossed chipset events) and 18 sandbox calls
+across demo01 and carrier success. GNU and MSVC Release builds passed.
+With a fixed 20,000-cycle charge, live demo01 ON matched the sealed final RAM
+hash, 20,833-frame endpoint and 555,658 blits, but **14 RGB frames differed**
+from the native shadow reference, first at frame 19,445. Charging the 31,541
+sandbox mean moved the endpoint to 20,835 frames. Source call costs range
+from 22,150 to 35,192 cycles; 14 shadow calls crossed chipset events. The
+glue is not registered. Resolve live event timing before counting this entry.
 
 ## Recently ported
 
@@ -343,7 +361,7 @@ part that is not, stays on the work side.
    and register bridge, with temporary registration proving recorded-call
    parity. Its live ON timing changes frames, so resolve intermediate polygon
    draw/blitter timing before counting either entry. The pair also blocks its
-   small parent `$C2AA9C`; keep the registered count at 413.
+   small parent `$C2AA9C`; keep the map pair out of the registered count.
    `$C31226`/`$C3129A`/`$C31312` are registered (Recently ported); use the
    candidate list for the next source-backed slice.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
