@@ -71,6 +71,29 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if ((pc >= 0xC0D74Au && pc < 0xC0DAEEu) ||
+        (pc >= 0xC2E758u && pc < 0xC2EC68u)) {
+        REG_A[0] = 0xC61000u; REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u16(REG_A[0] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[1] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[2] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[3] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[4] + i * 2, (uint16_t)next_value());
+        }
+        for (i = 0; i < 32; ++i) wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+    }
+    if ((pc >= 0xC17C62u && pc < 0xC17EF2u) ||
+        (pc >= 0xC1803Cu && pc < 0xC18108u) ||
+        (pc >= 0xC50AB4u && pc < 0xC50B36u)) {
+        REG_A[0] = 0xC61000u; REG_A[6] = 0xC62080u;
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+        }
+        wr_u32(0xC07288u, next_value());
+    }
     if (pc >= 0xC091A8u && pc < 0xC0924Au) {
         for (i = 0; i < 96; ++i) {
             wr_u16(REG_A[1] + i * 2, (uint16_t)next_value());

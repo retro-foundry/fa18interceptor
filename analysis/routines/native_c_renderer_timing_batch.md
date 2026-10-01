@@ -3,6 +3,11 @@
 Updated 2026-10-01. The user requested a return to game timing parity after
 the C279D0 source batch. The registered coverage remains 419/624.
 
+These results describe commit e8ff57f7. The subsequent sound-start and
+screen-frame batch restores the combined first difference to frame 416 and
+activates the screen-frame family mentioned below. See
+[followup evidence](native_c_sound_frame_timing_batch.md) for the current state.
+
 ## Source-backed scope
 
 Eleven existing entries now resume at original instruction boundaries instead

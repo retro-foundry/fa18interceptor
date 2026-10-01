@@ -50,10 +50,15 @@ int glue_C1EBC0(void);
 int glue_C230B0(void);
 int glue_C2DE96(void);
 int glue_C0DAA0(void);
+int glue_C0DAA0_step(void);
 int glue_C0DAD0(void);
+int glue_C0DAD0_step(void);
 int glue_C0DAD4(void);
+int glue_C0DAD4_step(void);
 int glue_C0DADC(void);
+int glue_C0DADC_step(void);
 int glue_C0DAE6(void);
+int glue_C0DAE6_step(void);
 
 /* render_state.c, view.c, stages.c */
 int glue_empty_stage(void);
@@ -101,6 +106,7 @@ int glue_C13A2A(void);
 int glue_C13CDE(void);
 int glue_C13396(void);
 int glue_C50AB4(void);
+int glue_C50AB4_step(void);
 int glue_C17B08(void);
 int glue_C17B08_step(void);
 int glue_C2548A(void);
@@ -122,7 +128,9 @@ int glue_C09620(void);
 int glue_C13BA0(void);
 int glue_C13C64(void);
 int glue_C50B02(void);
+int glue_C50B02_step(void);
 int glue_C180FC(void);
+int glue_C180FC_step(void);
 int glue_C1EC96(void);
 int glue_C21916(void);
 int glue_C21966(void);
@@ -188,7 +196,9 @@ int glue_C17B2C_step(void);
 
 /* batch 21: side-plane clips, view transform */
 int glue_C2EA5A(void);
+int glue_C2EA5A_step(void);
 int glue_C2EAD0(void);
+int glue_C2EAD0_step(void);
 int glue_C2F0C6(void);
 int glue_C2F0F4(void);
 int glue_C1F2EE(void);
@@ -198,14 +208,20 @@ int glue_C1D974(void);
 
 /* batch 23: y-plane clips, sound routines, record orientation */
 int glue_C2EB4C(void);
+int glue_C2EB4C_step(void);
 int glue_C2EBC2(void);
+int glue_C2EBC2_step(void);
 int glue_C2F156(void);
 int glue_C17CF6(void);
+int glue_C17CF6_step(void);
 int glue_C17DAA(void);
+int glue_C17DAA_step(void);
 int glue_C17E4A(void);
+int glue_C17E4A_step(void);
 int glue_C17EF2(void);
 int glue_C17EF2_step(void);
 int glue_C18096(void);
+int glue_C18096_step(void);
 int glue_C2D954(void);
 
 /* batch 24: local to world, shown vertices, normalize, slot scan */
@@ -221,7 +237,9 @@ int glue_C265E8(void);
 
 /* batch 25: main engine, tone, edge vertices, buffers, stage blit, grid position, list point */
 int glue_C17C62(void);
+int glue_C17C62_step(void);
 int glue_C17D6E(void);
+int glue_C17D6E_step(void);
 int glue_C3316A(void);
 int glue_C3316A_step(void);
 int glue_C219AE(void);
@@ -380,6 +398,7 @@ int glue_C0915A(void);
 int glue_C11078(void);
 int glue_C11ACC(void);
 int glue_C1803C(void);
+int glue_C1803C_step(void);
 int glue_C10678(void);
 int glue_C0910C(void);
 int glue_C25246(void);
@@ -406,6 +425,7 @@ int glue_C217EA(void);
 
 /* batch 55: corner edges */
 int glue_C2E758(void);
+int glue_C2E758_step(void);
 
 /* batch 56: fixed-row line, text lines and digits */
 int glue_C2FA78(void);
@@ -631,7 +651,9 @@ int glue_C0FA04_step(void);
 
 /* display-record candidate and selector siblings (/) */
 int glue_C0D74A(void);
+int glue_C0D74A_step(void);
 int glue_C0D752(void);
+int glue_C0D752_step(void);
 
 /* signed matrix transform and three returned angles */
 int glue_C2DEE0(void);

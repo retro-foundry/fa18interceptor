@@ -50,8 +50,8 @@ is proven against.
   Event-bearing glue resumes at original instruction boundaries; instruction
   fixtures include DMA contention and live batches compare fresh source OFF
   frames. Exact isolated batches can still expose combined timing debt in
-  other fixed-charge entries. Current renderer evidence is in
-  `analysis/routines/native_c_renderer_timing_batch.md`.
+  other fixed-charge entries. Current timing evidence is in
+  `analysis/routines/native_c_sound_frame_timing_batch.md`.
 - **OS replacement** (`port/os/`). Source-backed C Kickstart services, with a
   temporary CPU bridge while the game still uses the original register file.
 
