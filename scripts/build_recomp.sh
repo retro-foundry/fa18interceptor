@@ -17,4 +17,11 @@ done
 wait
 gcc $CFLAGS -o build/recomp/fa18_recomp.exe port/recomp/recomp_main.c port/recomp/recomp_runtime.c \
   port/recomp/recomp_ports.c port/recomp/loop_input.c port/machine/machine.c port/machine/bus.c port/machine/blitter.c port/machine/display.c \
-  port/machine/input.c $(ls port/game/*.c 2>/dev/null) port/game/glue/*.c port/os/*.c $O/*.o
+  port/machine/input.c $(ls port/game/*.c 2>/dev/null) port/game/glue/*.c port/os/*.c \
+  port/map_packet_original_pass.c port/map_packet_static_data.c port/map_packet_pass_runner.c \
+  port/map_packet_pass_selector.c port/map_packet_directory.c port/map_packet_coordinate_setup.c \
+  port/map_packet_control_stream.c port/map_packet_wide_control_stream.c port/map_packet_low_filter.c \
+  port/map_packet_column_table.c port/map_packet_control_walker.c port/map_packet_record_stage.c \
+  port/map_packet_relative_offset.c port/map_detail_gate.c port/map_detail_fields.c \
+  port/map_detail_component_route.c port/map_packet_stage.c port/map_packet_selector.c \
+  port/map_packet_transform.c $O/*.o

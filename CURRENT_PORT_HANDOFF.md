@@ -20,13 +20,27 @@ game-routine count. Group source-backed routines that share a C implementation
 or completed children; use one quick probe during the batch and one full
 shadow, sandbox, poison, and live frame gate before increasing the count.
 `$C2FD8C` remains inactive because its blitter busy-wait timing changes
-pixels in ON mode (details under Next). The next larger source-backed pair to
-assess is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
+pixels in ON mode (details under Next). The active larger source-backed pair
+is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
 existing `port/map_packet_*` composition as the reference. Both share the
 body at `$C2AB7C`; their original callers retain every data and address
 register, so the runtime adapter and register replay must be developed
 together. Avoid counting graph entries that are only mid-function tails
 without independent calls.
+
+The map pair is in progress and is **not registered**. The worktree has a
+source-backed live adapter (`port/game/map_packet.c`), common-core linkage,
+and a packet-stage fix for multiple polygons in one packet. A 500-frame
+focused sandbox probe reached all 20 observed demo01 map calls. After the
+frame origin terms were published, the first several probes reported only
+register differences; polygon input and custom-write sequences matched in
+the traced calls. The adapter still needs complete live-register replay,
+cycle charging, and the full proof. The focused run used temporary trace
+instrumentation, which has since been removed. Do not increase the 413 count
+or re-register the pair until that work is verified. The map packet stage and
+original-pass contract tests pass with the multi-polygon and terminator
+fixtures. Rebuild the recomp before probing again; `scripts/build_recomp.sh`
+does not track generated-code header dependencies.
 
 ## Numbers
 

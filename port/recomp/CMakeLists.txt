@@ -34,13 +34,27 @@ file(GLOB FA18_GENERATED CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/generated
 file(GLOB FA18_GAME CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../game/*.c
                                       ${CMAKE_CURRENT_SOURCE_DIR}/../game/glue/*.c)
 file(GLOB FA18_OS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../os/*.c)
+# The source-backed selector, packet and transform core is also used by the
+# earlier typed port. Keep its implementation in one place.
+set(FA18_MAP_PACKET_CORE
+    ../map_packet_original_pass.c ../map_packet_static_data.c
+    ../map_packet_pass_runner.c ../map_packet_pass_selector.c
+    ../map_packet_directory.c ../map_packet_coordinate_setup.c
+    ../map_packet_control_stream.c ../map_packet_wide_control_stream.c
+    ../map_packet_low_filter.c ../map_packet_column_table.c
+    ../map_packet_control_walker.c ../map_packet_record_stage.c
+    ../map_packet_relative_offset.c ../map_detail_gate.c
+    ../map_detail_fields.c ../map_detail_component_route.c
+    ../map_packet_stage.c ../map_packet_selector.c ../map_packet_transform.c)
+add_library(fa18_map_packet_core STATIC ${FA18_MAP_PACKET_CORE})
+target_include_directories(fa18_map_packet_core PRIVATE ../)
 add_executable(fa18_recomp
     recomp_main.c recomp_runtime.c recomp_ports.c
     loop_input.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
     ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})
 target_include_directories(fa18_recomp PRIVATE . generated ../machine ../game ../game/glue ../os)
 target_compile_definitions(fa18_recomp PRIVATE FA18_WITH_SDL SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
-target_link_libraries(fa18_recomp PRIVATE fa18_musashi SDL2-static)
+target_link_libraries(fa18_recomp PRIVATE fa18_musashi fa18_map_packet_core SDL2-static)
 if(MSVC)
     target_compile_definitions(fa18_musashi PRIVATE _CRT_SECURE_NO_WARNINGS)
     target_compile_options(fa18_musashi PRIVATE /w)
