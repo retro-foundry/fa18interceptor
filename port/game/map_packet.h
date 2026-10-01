@@ -3,6 +3,7 @@
 
 #include "memory.h"
 #include "../map_packet_pass_selector.h"
+#include "../map_packet_depth_stage.h"
 
 /* Observations of the packet walk, in source order. The optional observer
  * belongs to the translated-caller bridge; the game never receives CPU state.
@@ -26,5 +27,9 @@ typedef struct {
 /* One normal ($C2AB5A) or wide ($C2AB34) map packet pass. The parent owns
  * the A6 frame and the projection-depth metric at frame -$28. */
 int run_map_packet_pass(gaddr frame, int wide, const MapPacketHooks *hooks);
+
+/* $C2AA9C: publish renderer defaults and the source-selected depth metric
+ * into the caller's frame before the normal/wide pass sequence. */
+FA18MapPacketDepthStageResult prepare_map_packet_depth(gaddr frame);
 
 #endif

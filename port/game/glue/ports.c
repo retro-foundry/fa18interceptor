@@ -7,6 +7,16 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* map_packet.c: shared normal/wide directory and projection walk */
+    {0xC2AA9C, glue_C2AA9C, "run_map_packet_depth_stage", 0, 0,
+     glue_C2AA9C_step, 0xC2AB34},
+    {0xC2AB34, glue_C2AB34, "run_wide_map_packet_pass", 0, 0,
+     glue_C2AB34_step, 0xC2AFFA},
+    {0xC2AB5A, glue_C2AB5A, "run_normal_map_packet_pass", 0, 0,
+     glue_C2AB5A_step, 0xC2AFFA},
+    /* record_region_probe.c */
+    {0xC2B05A, glue_C2B05A, "probe_record_regions", 0, 0,
+     glue_C2B05A_step, 0xC2B3B4, 0, 0xC2B042},
     /* postflight tuple and fixed-point variants */
     {0xC3129A, glue_C3129A, "draw_postflight_tuple_variant", 0, 0,
      glue_C3129A_step, 0xC318F6, 0, 0xC31224},

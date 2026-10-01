@@ -14,18 +14,21 @@ The user explicitly deferred OS work and asked for larger routine batches.
 
 ## Verified baseline
 
-- 414 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 721,752 completed shadow
-  calls and 1,169,653 sandbox calls across three native recordings, with zero
+- 418 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 712,856 completed shadow
+  calls and 1,126,474 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 414-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 418-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
   These isolated bridges match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle matches 1,232 instructions and 39,424 cases. See
+  combined instruction oracle matches 1,967 instructions and 62,944 cases. See
   analysis/routines/native_c_registered_timing_batch.md.
+  The new four-entry map/region batch is independently exact across all
+  36,236 live frames. Its 735 instructions also match 23,520 fixtures with
+  DMA bus contention enabled. See analysis/routines/native_c_map_region_activation.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -34,13 +37,12 @@ The user explicitly deferred OS work and asked for larger routine batches.
 - The headless GNU and MSVC Release builds pass. The typed port's eight
   affected map/detail contract tests passed with the map source changes.
 - Only .vscode/ is untracked; it belongs to the user. Leave it alone.
-- The register bridge refactor for the map pair and region probe is complete.
-  The latest temporary 416-entry gate matched 719,426 completed shadow calls
-  and 1,160,055 sandbox calls with zero mismatches, sealed final RAM unchanged,
-  and identical poison frames. The map pair accounted for 622 shadow and
-  8,058 sandbox matches; the region probe for 3 shadow and 17 sandbox matches.
-  Temporary registration was removed. Its reports are retained under
-  build/recomp/bridge_gate_416_*.json; these are not the registered baseline.
+- C2AA9C, C2AB34, C2AB5A and C2B05A are now registered with resumable source
+  timing. The map parent reuses port/map_packet_depth_stage.c; its normal/wide
+  children reuse the established map packet core. Their readable whole-call
+  glue is checked separately from the instruction steps by
+  python tools/recomp/check_map_region_glue.py. This isolated registry variant
+  matched 281 shadow and 3,988 sandbox calls without changing the normal runner.
 - The region probe additionally matches original registers and RAM on 4,096
   direct structural oracle cases, including signed coordinates, sloped edges,
   endpoint exclusions and randomized high register halves. The oracle found
@@ -69,22 +71,20 @@ The user explicitly deferred OS work and asked for larger routine batches.
   tools/recomp/check_shadow_busy_inputs.py. Full ON replay separately proves
   the actual timing. No mismatch or hardware classification was suppressed.
 
-## Completed C awaiting live timing
+## Newly activated map and region batch
 
-These sources and glue compile, but none of these entries is in ports.c.
-Recorded-call comparison alone does not authorize activation.
+The previous map/region live blockers are resolved. C2AB34/C2AB5A share the
+source-timed packet bridge, C2AA9C supplies the depth-stage frame and pass
+sequence, and C2B05A retains the source's interrupt boundaries and unusual
+D2/D4-D6 restore. Domain observers remain mathematical values; CPU effects
+stay in glue. No new gameplay or placeholder behavior was introduced.
 
-| Entry | Source and recorded-call proof | Live ON blocker |
-| --- | --- | --- |
-| C2AB34 / C2AB5A (wide/normal map packet) | port/game/map_packet.c and glue/glue_map_packet.c use the shared port/map_packet_* core. Latest temporary 416-entry full gate: zero mismatches; the pair matched 622 completed shadow calls and 8,058 sandbox calls. Multiple polygons per packet and full register effects are implemented. | demo01 first RGB difference at frame 350 with a 20,000-cycle charge. A fixed-charge sweep moved the first difference at best to frame 416, where 29,453 pixels differed; blit count also changed. Drawing many polygons before charging cycles at return loses intermediate chipset timing. |
-| C2B05A (record region probe) | port/game/record_region_probe.c and glue/glue_record_region_probe.c. Latest temporary 416-entry full gate: zero mismatches; this entry matched 3 completed shadow and 17 sandbox calls. The earlier isolated 414-entry proof had 18 sandbox matches. Fourteen source calls take interrupts. Source D2-D5 save restores into D2/D4-D6; preserve that mapping. | With 20,000 cycles, demo01 final RAM hash, 20,833-frame endpoint, and 555,658 blits matched, but 14 RGB frames differed, first at 19,445. Charging the 31,541 sandbox mean moved the endpoint to 20,835. The earlier isolated sandbox measured 22,150 to 35,192 cycles; live costs and interrupt sites are recorded below. |
-
-The map pair also blocks the small parent C2AA9C. Do not add any of these
-entries, the parent, or mid-function graph tails to the count to show progress.
-MapPacketHooks and RecordRegionProbeHooks now carry only walk observations,
-mathematical values and the map polygon child callback. Register replay lives
-in glue. The observations establish completed-call parity; they are not
-resumable execution boundaries.
+The first map bridge passed CPU-only instruction fixtures yet accumulated
+bus delays from extra reads on CLR memory instructions. A boundary trace found
+the first difference at C2AD22 in frame 297. Removing those reads made the
+600-frame map trace identical and the complete isolated live batch exact.
+The instruction oracle's new --bus option checks memory-access timing under
+DMA contention so this distinction is covered before expensive full replays.
 
 ## New timing evidence
 
@@ -106,27 +106,21 @@ resumable execution boundaries.
 
 ## Next work
 
-1. Resolve the shared timing boundary for long C calls, using the new CSV
-   observations above. The register bridge refactor is already complete.
-   FA18Port now supports an optional one-instruction step and source range;
-   its dispatcher retains caller PC/SP across children, interrupts and frames.
-   Active planes, the audio group, the 18-entry registered timing batch, the
-   three postflight entries, the C305AA polygon edge, C0FA04 followup and
-   C2005C tested-face parent now have exact isolated live proof. Shared glue
-   helpers live in glue_step.h. The fading bridge uses step_start=C24FE6 for an existing shared
-   early RTS, without adding a registry entry. Extend the mechanism to the
-   inactive map/region stages.
-   In the source,
-   instruction boundaries can service Copper, blitter, and interrupts inside
-   these routines. In the current bridge, run_glue in
-   port/recomp/recomp_ports.c charges a single fixed value after the whole C
-   call for ordinary ports. Measure source event/cycle boundaries and make the C path advance
-   through equivalent observable boundaries. The registered stepped bridges
-   have resumable C continuations today; the map and region observation hooks
-   still need explicit source-backed checkpoints.
-   Recheck the map pair and region
-   probe as a related timing batch; keep their gameplay and
-   register logic source-backed. A new fixed average charge has already failed.
+1. Prioritize additional unregistered game functions in related batches.
+   The user explicitly asked for progress in the function count; avoid another
+   standalone audit of already registered fixed-charge routines as the main
+   batch. Start with C279D0 (271 instructions; projection_grid.c groundwork)
+   and C1D10C (648 instructions; terrain_* groundwork). Inspect indirect-call
+   parents C0F5F8 and the C1CB14/C1CB26 siblings for explicit child contracts;
+   the candidate tool excludes them. Preserve the original-source authority.
+   Group shared bodies and children, prove readable whole-call C independently
+   of timing steps, then run the full gate and isolated live checks.
+   Reuse FA18Port's resumable step and source range for calls that cross
+   chipset events, children or frames; helpers live in glue_step.h. Use
+   --bus instruction fixtures with varied horizontal phases before full
+   replay. Keep unported children explicit rather than counting partial
+   functions or graph tails. The three C0004E/C000B4/C000BA candidates are
+   Kickstart trampolines and remain deferred.
 2. Continue the registered timing audit with the frame-416 renderer group:
    C212B0, C332BC, C23CA6 and C246A0. C2005C is now source-timed and exact in
    isolation, while the complete registered set remains at frame 416. Group
@@ -140,19 +134,6 @@ resumable execution boundaries.
    removes both on exit. Test entries individually because timing interactions
    make recursive subset bisection non-monotonic. Keep
    porting independent game-source groups while timing work proceeds.
-   python tools/recomp/port_candidates.py -n 40 currently lists C279D0
-   (renderer packet; typed groundwork in port/projection_grid.c and reports
-   under analysis/routines/c279d0_*), C1D10C (terrain/scene template path;
-   typed groundwork under port/terrain_* and analysis/routines/c1d10c_*),
-   the inactive map/region entries above, and three OS trampolines. Inspect
-   fixed-target indirect callers too; the candidate tool omits them. Group
-   routines that share source logic or already completed children. The three
-   C0004E/C000B4/C000BA candidates are Kickstart trampolines; defer them.
-   A read-only indirect-call audit also found the game-source parents
-   C0F5F8 (post-input tick; existing port/post_input_tick.c and routine report)
-   and C1CB14/C1CB26 (display-list traversal). Their callbacks need explicit
-   child contracts. The short C53Cxx/C53Fxx leaves found by this audit are
-   library-vector trampolines and remain deferred OS work.
 3. Once game source is complete, build the native backend from plain C memory,
    drawing, and audio. Reassess which Kickstart services remain; do OS work
    last as requested.

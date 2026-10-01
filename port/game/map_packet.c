@@ -8,6 +8,22 @@
 #include "machine.h"
 
 #include "../map_packet_original_pass.h"
+#include <stdlib.h>
+
+FA18MapPacketDepthStageResult prepare_map_packet_depth(gaddr frame) {
+    FA18ProjectionPacket packet = {0, 0, 0, rd_s32(PROJECTION_Y)};
+    FA18MapPacketDepthStageInput input = {
+        &packet, rd_u8(0xc457b0u), rd_u8(ZOOM_FLAGS), rd_u16(ZOOM_SCALE)
+    };
+    FA18MapPacketDepthStageResult result;
+    unsigned i;
+    wr_u8(0xc4589du, 0); wr_u16(CLIP_INPUT, 0);
+    if (fa18_prepare_map_packet_depth_stage(&input, &result) != 0) abort();
+    for (i = 0; i < 4; ++i)
+        wr_s16(LINE_STYLE + 2u * i, result.renderer_words[i]);
+    wr_s32(frame - 0x28, result.metric);
+    return result;
+}
 
 typedef struct {
     gaddr frame;

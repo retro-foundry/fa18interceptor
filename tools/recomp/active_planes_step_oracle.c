@@ -39,9 +39,26 @@ static uint32_t next_value(void) {
     seed ^= seed << 13; seed ^= seed >> 17; seed ^= seed << 5; return seed;
 }
 
+static unsigned fixture_bus_offset;
+static void reset_fixture_bus(void) {
+    fa18_bus_reset();
+    if (fa18_bus_timing) {
+        /* Five low-resolution planes and refresh compete for RAM slots.
+         * Reset the same map before each side of the comparison. */
+        fa18_machine->dmacon = 0x0300;
+        fa18_machine->custom[0x100 >> 1] = 0x5000;
+        fa18_machine->custom[0x08e >> 1] = 0x2081;
+        fa18_machine->custom[0x090 >> 1] = 0x2cc1;
+        fa18_machine->custom[0x092 >> 1] = 0x0038;
+        fa18_machine->custom[0x094 >> 1] = 0x00d0;
+        fa18_bus_line(fa18_machine, 80, fa18_machine_now() - fixture_bus_offset);
+    }
+}
+
 static void fixture(uint32_t pc, unsigned scenario) {
     static const uint16_t boundaries[] = {0, 1, 0x7FFF, 0x8000, 0xFFFF, 0xFC00, 0x03FF, 0x0400, 15, 16, 31, 32, 33, 63, 64, 65};
     unsigned i;
+    fixture_bus_offset = 40 + (scenario % 32u) * 4;
     fa18_write_log_active = 0;
     for (i = 0; i < 16; ++i) REG_DA[i] = next_value();
     for (i = 0; i < 8; ++i)
@@ -53,6 +70,28 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if (pc >= 0xC2AA9Cu && pc < 0xC2AFFAu) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 48; ++i) {
+            wr_u16(REG_A[0] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[1] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[3] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[4] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[6] - 0x46 + i * 2, (uint16_t)next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+    }
+    if (pc >= 0xC2B042u && pc < 0xC2B3B4u) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        for (i = 0; i < 32; ++i) {
+            wr_u16(REG_A[0] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[1] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[3] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[4] + i * 2, (uint16_t)next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+    }
     if (pc >= 0xC2005Cu && pc < 0xC200F6u) {
         REG_A[0] = 0xC61000u; REG_A[2] = 0xC61200u;
         REG_A[3] = 0xC61300u; REG_A[4] = 0xC61400u;
@@ -77,7 +116,7 @@ static void fixture(uint32_t pc, unsigned scenario) {
     fa18_cycle_origin = 100000000;
     fa18_next_event = INT64_MAX;
     SET_CYCLES(100000000);
-    fa18_bus_reset();
+    reset_fixture_bus();
     fa18_write_log_active = 1;
 }
 
@@ -102,7 +141,7 @@ int main(int argc, char **argv) {
     }
     free(state); free(rom);
     fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF, NULL);
-    fa18_bus_timing = 0;
+    fa18_bus_timing = argc > 3 && strcmp(argv[3], "bus") == 0;
     for (item = 0; item < sizeof step_oracle_cases / sizeof step_oracle_cases[0]; ++item) {
         uint16_t opcode;
         pc = step_oracle_cases[item].pc;
@@ -122,7 +161,7 @@ int main(int argc, char **argv) {
             memcpy(reference, m->chip, FA18_CHIP_SIZE);
             memcpy(reference + FA18_CHIP_SIZE, m->slow, FA18_SLOW_SIZE);
             memcpy(m, before, sizeof *m); m68k_set_context(cpu); SET_CYCLES(100000000);
-            fa18_bus_reset();
+            reset_fixture_bus();
             int handled = step_oracle_cases[item].step();
             if (!handled || REG_PC != want_pc ||
                 m68k_get_reg(NULL, M68K_REG_SR) != want_sr || GET_CYCLES() != want_cycles) {
@@ -141,7 +180,7 @@ int main(int argc, char **argv) {
             ++matched;
         }
     }
-    printf("%s step oracle: %u instructions, %u cases matched registers, SR, PC, cycles and RAM\n",
-           group, instructions, matched);
+    printf("%s step oracle (%s): %u instructions, %u cases matched registers, SR, PC, cycles and RAM\n",
+           group, fa18_bus_timing ? "DMA bus" : "CPU", instructions, matched);
     free(cpu); free(reference); free(before); free(m); return 0;
 }

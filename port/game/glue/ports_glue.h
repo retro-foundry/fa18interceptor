@@ -558,6 +558,14 @@ int glue_C1FF0A(void);
 /* draw_stream.c */
 int glue_C2005C(void);
 int glue_C2005C_step(void);
+int glue_C2B05A(void);
+int glue_C2B05A_step(void);
+int glue_C2AB34(void);
+int glue_C2AB34_step(void);
+int glue_C2AB5A(void);
+int glue_C2AB5A_step(void);
+int glue_C2AA9C(void);
+int glue_C2AA9C_step(void);
 int glue_C20100(void);
 
 /* draw_stream.c */

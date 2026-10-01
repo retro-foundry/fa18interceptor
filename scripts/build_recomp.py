@@ -25,6 +25,7 @@ MAP_PACKET_CORE = [
     "port/map_detail_fields.c", "port/map_detail_component_route.c",
     "port/map_packet_stage.c", "port/map_packet_selector.c",
     "port/map_packet_transform.c",
+    "port/map_packet_depth_stage.c",
 ]
 CFLAGS = [
     "-O2", "-w", f"-I{MUSASHI}", "-Iport/machine", "-Iport/recomp",

@@ -15,8 +15,10 @@ def main():
     parser.add_argument("--cases", type=int, default=32,
                         help="fixtures per source instruction (at least 32 for every CCR)")
     parser.add_argument("--bash", default=default_bash())
+    parser.add_argument("--bus", action="store_true",
+                        help="include DMA bus contention in instruction timing fixtures")
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
-                   "command", "buffers", "polygon", "postflight", "followup", "faces")
+                   "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -34,6 +36,8 @@ def main():
         "postflight": ["C31226"],
         "followup": ["C0FA04"],
         "faces": ["C2005C"],
+        "regions": ["C2B05A"],
+        "map": ["C2AA9C", "C2AB34", "C2AB5A"],
     }
     entries = (entry for name in group_names for entry in groups[name]) \
         if args.group == "all" else iter(groups[args.group])
@@ -54,7 +58,8 @@ def main():
         header_path.write_text(header)
     executable = build_oracle("active_planes_step_oracle",
                              "tools/recomp/active_planes_step_oracle.c", args.bash)
-    subprocess.run([str(executable), str(args.cases), args.group], cwd=ROOT, check=True)
+    subprocess.run([str(executable), str(args.cases), args.group,
+                    "bus" if args.bus else "cpu"], cwd=ROOT, check=True)
 
 
 if __name__ == "__main__":

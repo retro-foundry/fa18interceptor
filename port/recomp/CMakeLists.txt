@@ -45,7 +45,8 @@ set(FA18_MAP_PACKET_CORE
     ../map_packet_control_walker.c ../map_packet_record_stage.c
     ../map_packet_relative_offset.c ../map_detail_gate.c
     ../map_detail_fields.c ../map_detail_component_route.c
-    ../map_packet_stage.c ../map_packet_selector.c ../map_packet_transform.c)
+    ../map_packet_stage.c ../map_packet_selector.c ../map_packet_transform.c
+    ../map_packet_depth_stage.c)
 add_library(fa18_map_packet_core STATIC ${FA18_MAP_PACKET_CORE})
 target_include_directories(fa18_map_packet_core PRIVATE ../)
 add_executable(fa18_recomp

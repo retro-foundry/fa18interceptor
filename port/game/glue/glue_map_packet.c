@@ -111,7 +111,7 @@ static void end_map_pass(void *context, gaddr next_control, int terminated) {
     A(4) = bridge->component;
 }
 
-static int map_packet_glue(int wide) {
+static void map_packet_registers(int wide) {
     MapPacketBridge bridge = {0};
     const MapPacketHooks hooks = {
         &bridge, draw_map_polygon, begin_map_pass, control_registers,
@@ -123,8 +123,28 @@ static int map_packet_glue(int wide) {
                 wide ? "wide" : "normal", (unsigned)A(6));
         abort();
     }
-    return glue_return();
 }
 
-int glue_C2AB34(void) { return map_packet_glue(1); }
-int glue_C2AB5A(void) { return map_packet_glue(0); }
+int glue_C2AB34(void) { map_packet_registers(1); return glue_return(); }
+int glue_C2AB5A(void) { map_packet_registers(0); return glue_return(); }
+
+int glue_C2AA9C(void) {
+    uint32_t old_frame = A(6), depth = 0u - rd_u32(PROJECTION_Y);
+    FA18MapPacketDepthStageResult result;
+    A(7) -= 4; wr_u32(A(7), old_frame); A(6) = A(7); A(7) -= 0x46;
+    result = prepare_map_packet_depth(A(6));
+    SET_W(D(0), result.renderer_words[0]); SET_W(D(1), result.renderer_words[1]);
+    SET_W(D(2), 0); SET_W(D(3), 0);
+    D(0) = (uint32_t)result.metric;
+    if (!rd_u8(ZOOM_FLAGS) && (int32_t)depth <= 0x7fff0) {
+        uint16_t scale = rd_u16(ZOOM_SCALE);
+        uint16_t divisor = (int16_t)scale < 2 ? 2u : scale;
+        D(7) = ((0x8000u % divisor) << 16) | (0x8000u / divisor);
+    }
+    if (result.run_normal_pass) {
+        wr_u16(CURRENT_COLOUR, 6); map_packet_registers(0);
+    }
+    wr_u16(CURRENT_COLOUR, 6); map_packet_registers(1);
+    A(7) = A(6); A(6) = rd_u32(A(7)); A(7) += 4;
+    return glue_return();
+}
