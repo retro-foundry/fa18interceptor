@@ -14,7 +14,7 @@ one at a time, each proven on every call.
 | Check | Result |
 | --- | --- |
 | Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE` now runs in C on the pinned ROM; its 2,157,736 observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate still passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE` and Exec `Disable`/`Enable` `$FC1428`/`$FC1436` now run in C on the pinned ROM. Their 2,238,856 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md` and `analysis/routines/fc1428_fc1436_exec_interrupts.md`. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -375,6 +375,23 @@ part that is not, stays on the work side.
    sandbox matches, zero mismatches, and identical poison frames. The run075
    frame-392 parity check remained 10/10 pixel-exact. `--no-recomp` keeps the
    interpreter-only baseline on the ROM path unless explicitly overridden.
+   Exec `Disable()` `$FC1428` and `Enable()` `$FC1436` are now also source-backed
+   C leaves (`port/os/exec.c` and its instruction bridge). The pinned ROM
+   supplies the exact sequence and the Kickstart 1.3 vector table identifies
+   the `-$78`/`-$7E` calls. They update the nesting byte at `ExecBase+$126`
+   and conditionally write `INTENA`. The runner checks all 30 source bytes
+   before enabling the C pair by default in translated mode;
+   `--no-os-exec-interrupts` restores ROM execution. Each leaf had 40,560
+   entries across the three native recordings. A full C-path trial kept all
+   three sealed final RAM hashes and recorded zero entries to either leaf.
+   GNU and MSVC Release matched byte-for-byte in a 300-frame C-path probe;
+   interpreter-only mode entered each ROM leaf 300 times in its default
+   300-frame probe, matching the explicit ROM setting. The source and proof
+   are in `analysis/routines/fc1428_fc1436_exec_interrupts.md`. With both
+   C leaves default-on, the full gate passed: 386 routines, 726,979 shadow
+   matches and 925,873 sandbox matches across all three sealed recordings,
+   zero mismatches, identical poison frames. The run075 frame-392 parity
+   check remained 10/10 exact.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is

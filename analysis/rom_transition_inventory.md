@@ -35,8 +35,8 @@ Most frequent pairs across all three:
 | --- | --- | ---: | --- |
 | `$C02776` | `$FC5ECE` | 2,157,736 | graphics.library `VBeamPos` vector; see below |
 | `$C00252` | `$FC0E9C` | 41,338 | Unclassified |
-| `$C001FE` | `$FC1428` | 40,560 | Unclassified |
-| `$C001F8` | `$FC1436` | 40,560 | Unclassified |
+| `$C001FE` | `$FC1428` | 40,560 | Exec `Disable()`; see below |
+| `$C001F8` | `$FC1436` | 40,560 | Exec `Enable()`; see below |
 | `$C00102` | `$FC1BEA` | 37,669 | Existing Ghidra coverage calls this an external-function thunk; service unclassified |
 | `$C023B8` | `$FE44F2` | 36,236 | Byte-exact `JMP` in `source_amiga/observed/jump_c023b8_library_stub.asm` |
 
@@ -55,6 +55,10 @@ call chains.
 
 The pinned `VBeamPos` leaf is now replaced by C in the translated runner; its
 source and full native proof are in [the VBeamPos report](routines/fc5ece_vbeam_pos.md).
+
+The pinned Exec `Disable()` and `Enable()` leaves are also replaced by C in
+the translated runner. Their source, ROM disassembly, and three-recording
+proof are in [the Exec interrupt report](routines/fc1428_fc1436_exec_interrupts.md).
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

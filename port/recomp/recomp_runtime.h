@@ -73,6 +73,7 @@ int fa18_recomp_track_rom_transitions(void);
 int fa18_recomp_write_rom_transitions(const char *path);
 /* Opt in to the source-backed C implementation of graphics.library VBeamPos. */
 int fa18_recomp_enable_vbeam_shim(void);
+int fa18_recomp_enable_exec_interrupt_shim(void);
 
 #ifdef FA18_RECOMP_GENERATED
 
