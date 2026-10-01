@@ -611,3 +611,64 @@ static int postflight_variant_glue(int fixed) {
 
 int glue_C3129A(void) { return postflight_variant_glue(0); }
 int glue_C31312(void) { return postflight_variant_glue(1); }
+
+/* $C31226-$C31289, including the pure $C310E2 register replay. */
+static void postflight_dispatch_after_bound(void *context) {
+    uint32_t before, source, result;
+    uint8_t mode;
+    (void)context;
+    D(1) = 0x16B8u;
+    flags_logic_l(D(1));
+    A(4) = 4;
+    SET_W(D(7), 8);
+    flags_logic_w(D(7));
+    before = D(1);
+    source = rd_u32(REDRAW_STATE_LONG);
+    result = before + source;
+    D(1) = result;
+    FLAG_N = NFLAG_32(result);
+    FLAG_Z = result;
+    FLAG_V = VFLAG_ADD_32(source, before, result);
+    FLAG_C = CFLAG_ADD_32(source, before, result);
+    FLAG_X = FLAG_C ? XFLAG_SET : XFLAG_CLEAR;
+    bound_span_registers();
+    if ((int16_t)D(5) < 0) return;
+
+    mode = rd_u8(GAUGE_REFRESH);
+    result = (uint8_t)(mode - 1u);
+    FLAG_N = NFLAG_8(result);
+    FLAG_Z = (uint8_t)result;
+    FLAG_V = VFLAG_SUB_8(1u, mode, result);
+    FLAG_C = CFLAG_8((uint32_t)mode - 1u);
+    if ((int8_t)mode > 1) {
+        flags_logic_w(0xFFFFu); /* second point-table terminator write */
+    } else if ((int8_t)mode < 1) {
+        SET_W(D(0), rd_u16(STREAM_SKIP));
+        flags_logic_w(D(0));
+        SET_W(D(0), D(0) & 0xEu);
+        flags_logic_w(D(0));
+        if ((uint16_t)D(0) != 0)
+            postflight_compare_word(8, (uint16_t)D(0));
+    }
+}
+
+int glue_C31226(void) {
+    int tuple = 0, fixed = 1;
+    PostflightVariantHooks tuple_hooks = {
+        postflight_variant_after_head, postflight_variant_after_prefix,
+        postflight_variant_after_select, postflight_variant_before_submit,
+        postflight_variant_after_submit, postflight_variant_after_advance,
+        postflight_variant_after_resolve, &tuple
+    };
+    PostflightVariantHooks fixed_hooks = {
+        postflight_variant_after_head, postflight_variant_after_prefix,
+        postflight_variant_after_select, postflight_variant_before_submit,
+        postflight_variant_after_submit, postflight_variant_after_advance,
+        postflight_variant_after_resolve, &fixed
+    };
+    PostflightDispatchHooks hooks = {
+        postflight_dispatch_after_bound, &tuple_hooks, &fixed_hooks, 0
+    };
+    draw_postflight_renderer_dispatch_with_hooks(&hooks);
+    return glue_return();
+}

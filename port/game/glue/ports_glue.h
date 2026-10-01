@@ -599,5 +599,6 @@ int glue_C23CA6(void);
 int glue_C0D04C(void);
 int glue_C3129A(void);
 int glue_C31312(void);
+int glue_C31226(void);
 
 #endif

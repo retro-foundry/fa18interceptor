@@ -35,6 +35,13 @@ typedef struct PostflightVariantHooks {
     void *context;
 } PostflightVariantHooks;
 
+typedef struct PostflightDispatchHooks {
+    void (*after_bound)(void *context);
+    const PostflightVariantHooks *tuple_hooks;
+    const PostflightVariantHooks *fixed_hooks;
+    void *context;
+} PostflightDispatchHooks;
+
 /* Drawing heads of the two postflight dispatcher targets. Both fall through
  * to the common $C31392 tail, which is handled separately. */
 void draw_postflight_tuple_pairs(void); /* $C3129A-$C3130E */
@@ -76,5 +83,8 @@ void draw_postflight_tuple_variant(void); /* $C3129A */
 void draw_postflight_fixed_variant(void); /* $C31312 */
 void draw_postflight_tuple_variant_with_hooks(const PostflightVariantHooks *hooks);
 void draw_postflight_fixed_variant_with_hooks(const PostflightVariantHooks *hooks);
+/* $C31226-$C31289: bounds gate and tuple/fixed/plain tail dispatch. */
+void draw_postflight_renderer_dispatch(void);
+void draw_postflight_renderer_dispatch_with_hooks(const PostflightDispatchHooks *hooks);
 
 #endif

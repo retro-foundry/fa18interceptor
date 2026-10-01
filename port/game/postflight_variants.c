@@ -5,6 +5,7 @@
 #include "memory.h"
 #include "plot.h"
 #include "render_line.h"
+#include "render_span.h"
 
 #define POSTFLIGHT_TUPLES 0xC3128Au
 #define POSTFLIGHT_POINT_TABLE 0xC4E71Cu
@@ -378,4 +379,39 @@ void draw_postflight_tuple_variant(void) {
 
 void draw_postflight_fixed_variant(void) {
     draw_postflight_fixed_variant_with_hooks(0);
+}
+
+/* $C31226-$C31289. The positive activity route uses two BSR calls, so each
+ * variant runs its complete shared tail before the next one begins. */
+void draw_postflight_renderer_dispatch_with_hooks(const PostflightDispatchHooks *hooks) {
+    int16_t position = 8;
+    int32_t cursor = (int32_t)(0x16B8u + rd_u32(REDRAW_STATE_LONG));
+    int16_t visible;
+    wr_u32(LINE_STYLE, 0xFFFFFu);
+    visible = bound_span(&position, 4, &cursor);
+    if (hooks && hooks->after_bound) hooks->after_bound(hooks->context);
+    if (visible < 0) return;
+
+    if (rd_s8(GAUGE_REFRESH) > 1) {
+        wr_u16(POSTFLIGHT_POINT_TABLE, 0xFFFFu);
+        wr_u16(POSTFLIGHT_POINT_TABLE + 0x28u, 0xFFFFu);
+    } else if (rd_s8(GAUGE_REFRESH) < 1) {
+        uint16_t route = rd_u16(STREAM_SKIP) & 0xEu;
+        if (route == 0) {
+            draw_postflight_tuple_variant_with_hooks(hooks ? hooks->tuple_hooks : 0);
+            return;
+        }
+        if (route == 8) {
+            draw_postflight_fixed_variant_with_hooks(hooks ? hooks->fixed_hooks : 0);
+            return;
+        }
+        run_postflight_variant_tail(hooks ? hooks->tuple_hooks : 0);
+        return;
+    }
+    draw_postflight_tuple_variant_with_hooks(hooks ? hooks->tuple_hooks : 0);
+    draw_postflight_fixed_variant_with_hooks(hooks ? hooks->fixed_hooks : 0);
+}
+
+void draw_postflight_renderer_dispatch(void) {
+    draw_postflight_renderer_dispatch_with_hooks(0);
 }

@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 385; 732,278 calls matching in shadow and 925,944 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -51,6 +51,18 @@ routine. But see the first trap below: the quick probe is not a substitute
 for it.
 
 ## Recently ported
+
+`$C31226` postflight renderer dispatcher (`postflight_variants.c`,
+`glue_postflight_variants.c`) now runs the source bounds gate, the activity
+branch, and the tuple, fixed, or plain shared-tail route in C. Its glue
+replays the pure `$C310E2` bound calculation before the chosen child path.
+Across the three native recordings it matched 3,307 completed shadow calls
+and 2,491 sandbox calls, with zero mismatches. The full 386-routine gate
+passed with 726,979 shadow matches and 925,873 sandbox matches; poison frames
+were identical. The 10-frame parity check and a separate ON-mode run with
+`$C31226`/`$C3129A`/`$C31312` enabled were both pixel-exact. The combined
+call count is lower than the previous gate because calls inside this parent
+are no longer counted separately.
 
 `$C3129A`/`$C31312` postflight tuple and fixed-point variants
 (`postflight_variants.c`, `glue_postflight_variants.c`) are registered. Their
@@ -241,7 +253,7 @@ part that is not, stays on the work side.
    machine timing or the translation (the check then says the run no
    longer ends as sealed).
 1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
-   `$C3129A`/`$C31312` are registered (Recently ported); use the
+   `$C31226`/`$C3129A`/`$C31312` are registered (Recently ported); use the
    candidate list for the next source-backed slice.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
@@ -356,8 +368,9 @@ C (`hud_readouts.c`, `hud_bars.c`, `hud_marks.c`, `message_line.c`,
 replays every step in order (the tape forms, record type $10, only
 approximately: the recordings never show them). `$C332BC` is registered: its
 glue runs each step's recreated routine in order, so `draw_postflight_hud`'s
-C itself is a transcription that does not run under the proof. The remaining
-HUD work is the radar `$C31226`. The stores icons `$C30A00`/`$C30AE2` are C;
+C itself is a transcription that does not run under the proof. The
+postflight renderer dispatcher `$C31226` is registered. The stores icons
+`$C30A00`/`$C30AE2` are C;
 their glue preserves stray high bits of the caller's D4. Glue helpers for
 routines that end in drawing are in `glue_text.h`: the small-text line is
 probed before the C (the last glyph's cell) and replayed after it; pixel,
