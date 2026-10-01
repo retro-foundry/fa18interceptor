@@ -7,24 +7,30 @@ the process, and the traps. Updated 2026-10-01.
 
 Recreated, readable C source for the whole game ([PORT.md](PORT.md)). The
 translated game runs natively; hand-written C replaces translated routines
-one at a time, each proven on every call.
+in source-backed batches, each proven on its recorded calls.
 
 ## Current priority
 
-Resume Stage D game-source work before further Stage E ROM service work. The
-recent Kickstart replacements improved OS coverage but moved the registered
-game count only from 385 to 386 over roughly three hours. Keep OS experiments
-out of the game-routine count. Prefer source-backed gameplay and renderer
-parents with completed C children; use the shadow, sandbox, poison, and live
-frame gates before increasing the count. `$C2FD8C` remains inactive because
-its blitter busy-wait timing changes pixels in ON mode (details under Next).
+Complete Stage D game-source work in larger batches. Defer further Stage E OS
+replacement until the game source and native backend expose which ROM services
+are actually still needed; some OS work may be avoidable. The recent Kickstart
+replacements improved OS coverage but moved the registered game count only
+from 385 to 386 over roughly three hours. Keep OS experiments out of the
+game-routine count. Group source-backed routines that share a C implementation
+or completed children; use one quick probe during the batch and one full
+shadow, sandbox, poison, and live frame gate before increasing the count.
+`$C2FD8C` remains inactive because its blitter busy-wait timing changes
+pixels in ON mode (details under Next). The next larger source-backed pair to
+assess is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
+existing `port/map_packet_*` composition as the reference. `$C1FFA4` is a
+smaller related renderer sibling for a later grouped pass.
 
 ## Numbers
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 387; 726,979 calls matching in shadow and 925,872 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 387-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See the individual `analysis/routines/` reports below. |
+| Recreated routines (`port/game/`) | 412 of 624 translated entries registered; 727,905 calls matching in shadow and 1,214,772 in the sandbox pass over three native recordings; poison-clean. All 25 new planar handlers were exercised. Ported parents contain formerly counted nested calls. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 412-routine gate and 10-frame parity check passed. Further OS replacement is deferred until after the game source and native backend. See the individual `analysis/routines/` reports below. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -34,7 +40,7 @@ its blitter busy-wait timing changes pixels in ON mode (details under Next).
 
 ## How to work
 
-The loop, per routine or small group:
+The loop, per batch of related routines:
 
 1. `python tools/recomp/port_candidates.py -n 40` lists routines whose
    callees are already C, ranked by glue burden. Read the target with
@@ -49,19 +55,37 @@ The loop, per routine or small group:
    memory, call the C, rebuild every live register, flag and high word the
    original leaves, then `glue_return()`. Register it with
    `python tools/recomp/register_ports.py "comment" C2005C=name:cycles`.
-5. Build with `sh scripts/build_recomp.sh` and probe with
+5. Build with `sh scripts/build_recomp.sh` and probe the batch with
    `QUICK=1 sh scripts/recomp_ports_check.sh` (first recording only, about
-   2.5 minutes).
-6. Commit each verified routine or pair as it lands, not once at the end.
+   2.5 minutes). Inspect per-entry calls and mismatches.
+6. Commit each verified batch as it lands.
 7. Before updating any count or calling the batch done, run the **full**
    `sh scripts/recomp_ports_check.sh` over all three recordings and
    `python scripts/recomp_parity.py --start 392 --frames 10`.
 
-Port several routines per full proof run; do not run the full proof per
-routine. But see the first trap below: the quick probe is not a substitute
-for it.
+Run the full proof once per batch. See the first trap below: the quick probe
+is not a substitute for it.
 
 ## Recently ported
+
+The 25 translated renderer mask handlers in the `$C2F826-$C2FA56` source
+tables (`planar_lane_masks.c`, `glue_planar_lane_masks.c`) now share readable C
+for four-plane AND/OR writes at one word or two words one scanline apart.
+Each table selector supplies the lanes to set; the glue preserves data and
+address registers and rebuilds the flags from the last word written. The
+dispatch bridge in `recomp_ports.c` admits only a registered target reached
+from the source's `$C2F764: JMP (A4)`; normal call-entry rules remain in
+place. The original tables specify 32 combinations, but seven targets are
+absent from the translated graph. Their modes are covered by the shared C
+function but are not falsely counted as registered. `register_ports.py` now
+rejects such addresses. All 25 registered entries were compared in the three
+native recordings: 926 completed shadow and 288,900 sandbox calls, zero
+mismatches. The full 412-routine gate matched 727,905 shadow and 1,214,772
+sandbox calls with identical poison frames; 10-frame parity and the MSVC
+Release build passed. A 1,000-frame live ON/OFF run produced identical RGB
+frames, but RAM differed at the low byte of blitter busy counter `$C45923`
+by four polls and at two dead-stack bytes. Treat this as a remaining live
+timing limit if later work depends on that counter.
 
 `$C1FF9C` selected workspace segment (`draw_stream.c`,
 `glue_selected_segment.c`) now reads the two signed vertex offsets and colour

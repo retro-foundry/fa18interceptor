@@ -57,14 +57,17 @@ is proven against.
 | A | Whole-program translation, interpreter fallback | done (624 routines) |
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Frame parity with Engine9000 on every recording | run075 frames 393-402 exact; run060 game RAM identical through frame 93 |
-| D | Readable C, routine by routine, proven | 387 registered routines; see CURRENT_PORT_HANDOFF.md for the latest full gate |
-| E | OS replacement (Kickstart calls), cold boot from the ADF | `VBeamPos`, `WaitBlit`, `WaitBOVP`, `OwnBlitter`/`DisownBlitter`, Exec `Disable`/`Enable`, Exec `GetMsg`, and potgo.resource `WritePotgo` ROM leaves replaced by C and checked on three native sessions; wider OS calls and cold boot remain |
+| D | Readable C, proven in related batches | 412 registered routines; see CURRENT_PORT_HANDOFF.md for the latest full gate |
 | F | Native backend: plain C memory, direct drawing and audio | not started |
+| E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
 
-## Recreating a routine (stage D)
+The work order is D, then F, then only the necessary parts of E.
 
-1. Pick one: `python tools/recomp/port_candidates.py` lists routines whose
-   callees are already C, ranked by glue burden.
+## Recreating game-source batches (stage D)
+
+1. Pick a related batch: `python tools/recomp/port_candidates.py` lists
+   routines whose callees are already C, ranked by glue burden. Also inspect
+   indirect and table-dispatched families that this list cannot rank.
 2. Read it: `python tools/recomp/port_info.py C2FA7E` prints its
    instructions, observed call sites, and the registers and flags live after
    it returns. Read its report in `analysis/routines/`, the memory map, and any

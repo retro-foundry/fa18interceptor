@@ -511,6 +511,32 @@ const FA18Port fa18_ports[] = {
     {0xC0D04C, glue_C0D04C, "draw_history_projection", 25000},
     /* selected projected segment */
     {0xC1FF9C, glue_C1FF9C, "draw_selected_segment", 3500},
+    /* planar lane mask handlers */
+    {0xC2F826, glue_C2F826, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F83A, glue_C2F83A, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F844, glue_C2F844, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F84E, glue_C2F84E, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F858, glue_C2F858, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F862, glue_C2F862, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F86C, glue_C2F86C, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F876, glue_C2F876, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F880, glue_C2F880, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F88A, glue_C2F88A, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F894, glue_C2F894, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F89E, glue_C2F89E, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F8A8, glue_C2F8A8, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F8B2, glue_C2F8B2, "apply_planar_lane_masks", 64, 0xC2F764},
+    {0xC2F8EA, glue_C2F8EA, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F904, glue_C2F904, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F91E, glue_C2F91E, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F96C, glue_C2F96C, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F986, glue_C2F986, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F9A0, glue_C2F9A0, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F9BA, glue_C2F9BA, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F9D4, glue_C2F9D4, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2F9EE, glue_C2F9EE, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2FA08, glue_C2FA08, "apply_planar_lane_masks", 128, 0xC2F764},
+    {0xC2FA22, glue_C2FA22, "apply_planar_lane_masks", 128, 0xC2F764},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

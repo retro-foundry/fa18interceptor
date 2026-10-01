@@ -8,6 +8,7 @@ glue function is glue_ADDRESS unless given as ADDRESS=c_function:cycles:glue.
 """
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -17,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[2]
 def main() -> None:
     comment, specs = sys.argv[1], sys.argv[2:]
     rows, decls = [], []
+    graph = ROOT / "port/recomp/generated/recomp_graph.json"
+    known = {f["entry"] for f in json.loads(graph.read_text())} if graph.is_file() else None
     header = (ROOT / "port/game/glue/ports_glue.h").read_text()
     table = (ROOT / "port/game/glue/ports.c").read_text()
     for spec in specs:
@@ -24,6 +27,8 @@ def main() -> None:
         parts = rest.split(":")
         name, cycles = parts[0], int(parts[1])
         glue = parts[2] if len(parts) > 2 else f"glue_{address.upper()}"
+        if known is not None and address.upper() not in known:
+            raise SystemExit(f"{address} is not a translated routine entry")
         if f"{{0x{address.upper()}," in table:
             raise SystemExit(f"{address} is already registered")
         rows.append(f'    {{0x{address.upper()}, {glue}, "{name}", {cycles}}},\n')

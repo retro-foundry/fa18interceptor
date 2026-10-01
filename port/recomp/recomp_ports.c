@@ -570,6 +570,7 @@ int fa18_recomp_write_edges(const char *path) {
 
 int fa18_ports_enter(int function, int label, int via_call) {
     int port;
+    int tail_call;
     if (REG_PC == fa18_recomp_functions[function].entry) {
         profile[function]++;
         if (REG_PC == FA18_LOOP_UPDATE_ENTRY) {
@@ -581,8 +582,11 @@ int fa18_ports_enter(int function, int label, int via_call) {
         if (via_call || entered_by_call()) note_edge(function);
     }
     port = port_of_function[function];
+    tail_call = port >= 0 && fa18_ports[port].tail_from != 0 &&
+                REG_PPC == fa18_ports[port].tail_from &&
+                fa18_bus_read16(REG_PPC) == 0x4ED4; /* JMP (A4) */
     if (port < 0 || mode == FA18_PORTS_OFF || fa18_write_log_active || REG_PC != fa18_ports[port].entry ||
-        (!via_call && !entered_by_call()))
+        (!via_call && !entered_by_call() && !tail_call))
         return fa18_recomp_functions[function].fn(label);
     stats[port].calls++;
     if (mode == FA18_PORTS_SHADOW) return run_shadow(function, label, port);

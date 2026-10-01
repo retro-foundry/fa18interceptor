@@ -604,4 +604,31 @@ int glue_C31226(void);
 /* selected projected segment */
 int glue_C1FF9C(void);
 
+/* planar lane mask handlers */
+int glue_C2F826(void);
+int glue_C2F83A(void);
+int glue_C2F844(void);
+int glue_C2F84E(void);
+int glue_C2F858(void);
+int glue_C2F862(void);
+int glue_C2F86C(void);
+int glue_C2F876(void);
+int glue_C2F880(void);
+int glue_C2F88A(void);
+int glue_C2F894(void);
+int glue_C2F89E(void);
+int glue_C2F8A8(void);
+int glue_C2F8B2(void);
+int glue_C2F8EA(void);
+int glue_C2F904(void);
+int glue_C2F91E(void);
+int glue_C2F96C(void);
+int glue_C2F986(void);
+int glue_C2F9A0(void);
+int glue_C2F9BA(void);
+int glue_C2F9D4(void);
+int glue_C2F9EE(void);
+int glue_C2FA08(void);
+int glue_C2FA22(void);
+
 #endif

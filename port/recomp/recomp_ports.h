@@ -4,8 +4,8 @@
 /* Stage D: hand-written C routines replacing generated ones.
  *
  * Each port has a glue function (port/game/glue/) that is entered exactly
- * where the original routine is: at its first instruction, just after a
- * JSR/BSR pushed the return address. The glue reads the routine's inputs from
+ * where the original routine is: at its first instruction, after a JSR/BSR
+ * or a registered tail jump. The glue reads the routine's inputs from
  * the 68000 registers and game memory, calls the hand-written C in
  * port/game/, stores the outputs and register effects the original leaves,
  * then performs the RTS. It returns FA18_RET.
@@ -27,6 +27,7 @@ typedef struct {
     FA18PortGlue glue;
     const char *name;     /* the C function it calls */
     int cycles;           /* CPU cycles charged in ON mode (measured in SHADOW) */
+    uint32_t tail_from;   /* optional source address of a verified tail JMP */
 } FA18Port;
 
 extern const FA18Port fa18_ports[];
