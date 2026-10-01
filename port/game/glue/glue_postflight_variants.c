@@ -297,3 +297,118 @@ int postflight_tail_normalize_registers(void) {
     postflight_compare_long((uint32_t)-0x10, D(1));
     return (int32_t)D(1) >= -0x10;
 }
+
+static void postflight_add_word(int n, uint16_t amount) {
+    uint16_t before = (uint16_t)D(n);
+    uint32_t sum = (uint32_t)before + amount;
+    SET_W(D(n), sum);
+    FLAG_N = NFLAG_16(D(n));
+    FLAG_Z = (uint16_t)D(n);
+    FLAG_V = VFLAG_ADD_16(amount, before, (uint16_t)sum);
+    FLAG_C = sum > 0xFFFFu ? CFLAG_SET : CFLAG_CLEAR;
+    FLAG_X = FLAG_C ? XFLAG_SET : XFLAG_CLEAR;
+}
+
+/* $C31612-$C316BF. Returns one at $C316C0's table-capacity check; zero at
+ * $C3170E's status-mark edge. The C submission has already written colour,
+ * so this helper reads record and cadence state but does not repeat drawing. */
+int postflight_tail_renderer_registers(const PostflightVariantWork *work) {
+    uint16_t offset, category;
+    gaddr record;
+    (void)work;
+    postflight_add_word(0, 0x9E);
+    postflight_add_word(0, rd_u16(SPAN_ORIGIN_Y));
+    if ((int16_t)D(0) < 0 || (int16_t)D(0) >= 0x140) return 0;
+    postflight_add_word(1, 0xA7);
+    FLAG_Z = (D(3) & 0x10u) ? 1 : 0;
+    if (!(D(3) & 0x10u)) return 0;
+    D(5) = rd_u32(PROJECTION_Y);
+    flags_logic_l(D(5));
+    SET_W(D(4), D(3));
+    flags_logic_w(D(4));
+    SET_W(D(4), D(4) & 0xFF00u);
+    flags_logic_w(D(4));
+    postflight_add_word(4, (uint16_t)D(4));
+    offset = (uint16_t)D(4);
+    postflight_compare_word(rd_u16(SELECTED_RECORD), offset);
+    if (offset == rd_u16(SELECTED_RECORD)) {
+        FLAG_Z = (rd_u8(POSTFLIGHT_PREFIX_TICK) & 1u) ? 1 : 0;
+        if (!(rd_u8(POSTFLIGHT_PREFIX_TICK) & 1u)) return 0;
+    }
+    record = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)offset;
+    D(5) = 0u - D(5);
+    FLAG_N = NFLAG_32(D(5));
+    FLAG_Z = D(5);
+    FLAG_V = D(5) == 0x80000000u ? VFLAG_SET : VFLAG_CLEAR;
+    FLAG_C = D(5) ? CFLAG_SET : CFLAG_CLEAR;
+    FLAG_X = D(5) ? XFLAG_SET : XFLAG_CLEAR;
+    FLAG_Z = (D(7) & 1u) ? 1 : 0;
+    D(7) &= ~1u;
+    postflight_compare_long(rd_u32(record + 0x10), D(5));
+    if ((int32_t)D(5) <= rd_s32(record + 0x10)) {
+        FLAG_Z = (D(7) & 1u) ? 1 : 0;
+        D(7) |= 1u;
+    }
+    SET_B(D(5), rd_u8(record + 0x62));
+    flags_logic_b(D(5));
+    SET_B(D(5), D(5) & 0xF0u);
+    flags_logic_b(D(5));
+    category = (uint16_t)D(5) & 0xF0u;
+    if (category == 0x20u || category == 0x30u) {
+        SET_W(D(2), 5);
+        flags_logic_w(D(2));
+    } else if (!(rd_u8(record + 0x20) & 0x40u) ||
+               (rd_u8(record + 0x20) & 2u)) {
+        D(2) = 8;
+        flags_logic_l(D(2));
+    } else if (rd_u8(record + 1) & 8u) {
+        D(2) = 4;
+        flags_logic_l(D(2));
+    } else if (category == 0) {
+        SET_W(D(2), 2);
+        flags_logic_w(D(2));
+    } else {
+        D(2) = 1;
+        flags_logic_l(D(2));
+    }
+    flags_logic_w(D(2)); /* MOVE.W D2,CURRENT_COLOUR */
+    return 1;
+}
+
+/* $C316C0-$C3170D. The C path has already written the point table and
+ * plotted its pixel, so replay only the 68000 register effects of that draw.
+ * Stops before the $C3170E BSET status operation. */
+void postflight_tail_table_registers(const PostflightVariantWork *work) {
+    uint32_t bound;
+    uint16_t saved_d3;
+    uint32_t saved_d6, saved_a0, saved_a1, saved_a2;
+    A(2) = work->table - (work->submitted_point ? 4u : 0u);
+    flags_logic_w(rd_u16(DRAW_PAGE));
+    bound = 0xC4E744u + (rd_u16(DRAW_PAGE) ? 0x28u : 0u);
+    postflight_compare_long(bound, A(2)); /* CMPA.L #end,A2 */
+    if ((int32_t)A(2) >= (int32_t)bound) return;
+    if (!work->submitted_point) return;
+    saved_d3 = (uint16_t)D(3);
+    flags_logic_w(saved_d3); /* MOVE.W D3,-(A7) */
+    postflight_add_word(1, rd_u16(REDRAW_STATE_WORD));
+    FLAG_Z = (D(7) & 1u) ? 1 : 0;
+    flags_logic_w(D(0)); /* MOVE.W D0,(A2) or (A2)+ */
+    if (work->submit_pair) {
+        flags_logic_w((uint16_t)D(0) | 0x8000u); /* ORI.W #$8000,(A2)+ */
+    }
+    A(2) += 2;
+    flags_logic_w(D(1)); /* MOVE.W D1,(A2)+ */
+    A(2) += 2;
+    saved_d6 = D(6);
+    saved_a0 = A(0);
+    saved_a1 = A(1);
+    saved_a2 = A(2);
+    if (work->submit_pair) pair_registers_colour(rd_u16(CURRENT_COLOUR));
+    else plot_registers_colour(PIXEL_MASKS, PLOT_ROWS_1, rd_u16(CURRENT_COLOUR));
+    D(6) = saved_d6;
+    A(0) = saved_a0;
+    A(1) = saved_a1;
+    A(2) = saved_a2;
+    SET_W(D(3), saved_d3);
+    flags_logic_w(D(3)); /* MOVE.W (A7)+,D3 */
+}

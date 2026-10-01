@@ -10,6 +10,7 @@ typedef struct PostflightVariantWork {
     int32_t source_x, source_z;
     int32_t screen_x, screen_y;
     int16_t submit_x, submit_y;
+    int submitted_point, submit_pair;
     uint16_t record_word;
     uint16_t records_seen;
     uint8_t record_flags_before_select;
@@ -24,6 +25,8 @@ typedef struct PostflightVariantHooks {
     void (*after_select)(const PostflightVariantWork *work, int selected, void *context);
     /* Called after classification and before $C315C0's second normalization. */
     void (*before_submit)(const PostflightVariantWork *work, void *context);
+    /* Called after the optional point plot, before the $C3170E status write. */
+    void (*after_submit)(const PostflightVariantWork *work, int marked, void *context);
     void *context;
 } PostflightVariantHooks;
 

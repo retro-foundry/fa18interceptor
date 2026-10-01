@@ -183,6 +183,8 @@ int submit_postflight_variant_record(PostflightVariantWork *work) {
     int pair;
     int16_t screen_x, screen_y;
 
+    work->submitted_point = 0;
+
     if (x > 0x1B || x < -0x1B || y >= 0x16 || y < -0x10) return 0;
     screen_x = add_word(add_word((int16_t)x, 0x9E), rd_s16(SPAN_ORIGIN_Y));
     if (!horizontal_visible(screen_x) || !(work->record_word & 0x10u)) return 1;
@@ -204,6 +206,8 @@ int submit_postflight_variant_record(PostflightVariantWork *work) {
     screen_y = add_word(screen_y, rd_s16(REDRAW_STATE_WORD));
     work->submit_x = screen_x;
     work->submit_y = screen_y;
+    work->submitted_point = 1;
+    work->submit_pair = pair;
     wr_u16(work->table, (uint16_t)screen_x | (pair ? 0x8000u : 0u));
     wr_u16(work->table + 2, (uint16_t)screen_y);
     work->table += 4;
@@ -236,6 +240,8 @@ static void process_postflight_variant_records_with_hooks(
             if (hooks && hooks->before_submit)
                 hooks->before_submit(work, hooks->context);
             marked = submit_postflight_variant_record(work);
+            if (hooks && hooks->after_submit)
+                hooks->after_submit(work, marked, hooks->context);
         }
         advance_postflight_variant_record(work, marked);
     }

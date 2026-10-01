@@ -289,7 +289,16 @@ part that is not, stays on the work side.
    D7/A3/A4 from the previous submission. One demo, three carrier, and eight
    crash C handoffs lacked a generated-label comparison. Temporary probes
    and registration were removed.
-   Next replay `$C31612-$C31721` per record, then `$C31722-$C318F4`, before
+   The `$C31612-$C3170D` renderer and table replay now runs after the C
+   submission, using its actual plot result and restoring the registers the
+   source saves around `$C2F5F4`/`$C2F60A`. A temporary `$C3170E` probe over
+   the first 3,000 frames of each native recording matched D0-D7, A0-A6,
+   and SR on all 35 demo, 89 carrier, and 147 crash handoffs it reached,
+   including the formerly differing D7/A3/A4 on second vectors. One demo,
+   three carrier, and nine crash C handoffs lacked a generated-label
+   comparison. The temporary bridge, generated probe, and registration were
+   removed.
+   Next replay `$C3170E-$C31721` per record, then `$C31722-$C318F4`, before
    registering either parent. The two parents are still absent from `ports.c`.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
