@@ -34,10 +34,10 @@ Most frequent pairs across all three:
 | RAM source | ROM entry | Transitions | Established source |
 | --- | --- | ---: | --- |
 | `$C02776` | `$FC5ECE` | 2,157,736 | graphics.library `VBeamPos` vector; see below |
-| `$C00252` | `$FC0E9C` | 41,338 | Unclassified |
+| `$C00252` | `$FC0E9C` | 41,338 | Exec interrupt dispatcher; see below |
 | `$C001FE` | `$FC1428` | 40,560 | Exec `Disable()`; see below |
 | `$C001F8` | `$FC1436` | 40,560 | Exec `Enable()`; see below |
-| `$C00102` | `$FC1BEA` | 37,669 | Existing Ghidra coverage calls this an external-function thunk; service unclassified |
+| `$C00102` | `$FC1BEA` | 37,669 | Exec `GetMsg(port)` `-$174(A6)`; see below |
 | `$C023B8` | `$FE44F2` | 36,236 | Byte-exact `JMP` in `source_amiga/observed/jump_c023b8_library_stub.asm` |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
@@ -59,6 +59,18 @@ source and full native proof are in [the VBeamPos report](routines/fc5ece_vbeam_
 The pinned Exec `Disable()` and `Enable()` leaves are also replaced by C in
 the translated runner. Their source, ROM disassembly, and three-recording
 proof are in [the Exec interrupt report](routines/fc1428_fc1436_exec_interrupts.md).
+
+The pinned ROM at `$FC0E9C` tests the saved exception status on the stack,
+checks ExecBase interrupt/task state, restores saved registers, and returns
+with `RTE` or continues into interrupt server dispatch. `$C00252` is its
+observed RAM jump stub. These crossings count interrupt handling, not a
+library call made by the game.
+
+`$C00102` is the ExecBase `-$174` vector, identified as `GetMsg(port)(A0)`
+by the local Kickstart 1.3 `LVO.OFFS`. Its observed jump stub enters ROM at
+`$FC1BEA`; the source there advances A0 to the port's message list, masks
+interrupts, removes the first node if present, and restores the interrupt
+state. This is a direct service candidate for the next source-backed C leaf.
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

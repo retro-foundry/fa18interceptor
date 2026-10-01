@@ -392,6 +392,11 @@ part that is not, stays on the work side.
    matches and 925,873 sandbox matches across all three sealed recordings,
    zero mismatches, identical poison frames. The run075 frame-392 parity
    check remained 10/10 exact.
+   The next frequent crossing `$C00252 -> $FC0E9C` is the Exec interrupt
+   dispatcher, not a game library call. `$C00102 -> $FC1BEA` is Exec
+   `GetMsg(port)` (`-$174`), seen 37,669 times across the three recordings;
+   its ROM body removes the first message under interrupt masking. See the
+   transition inventory before porting this service.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is
