@@ -360,7 +360,10 @@ part that is not, stays on the work side.
    it does not classify a crossing as an OS call. All three instrumented
    recordings ended at their sealed RAM hashes. The byte-exact jump
    `$C02776 -> $FC5ECE` accounts for 2,157,736 of 2,661,668 observed
-   crossings; inspect its ROM body and callers first.
+   crossings. Its ROM caller `$FC5E90` invokes graphics.library
+   `VBeamPos()` through LVO `-$180`; the target reads the raster row.
+   This is an internal graphics.library poll, so sort direct game-originated
+   library calls separately before prioritizing OS replacement.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is

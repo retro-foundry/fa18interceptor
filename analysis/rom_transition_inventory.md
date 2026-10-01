@@ -33,17 +33,25 @@ Most frequent pairs across all three:
 
 | RAM source | ROM entry | Transitions | Established source |
 | --- | --- | ---: | --- |
-| `$C02776` | `$FC5ECE` | 2,157,736 | Byte-exact `JMP` in `source_amiga/observed/jump_c02776_menu_library_stub.asm` |
+| `$C02776` | `$FC5ECE` | 2,157,736 | graphics.library `VBeamPos` vector; see below |
 | `$C00252` | `$FC0E9C` | 41,338 | Unclassified |
 | `$C001FE` | `$FC1428` | 40,560 | Unclassified |
 | `$C001F8` | `$FC1436` | 40,560 | Unclassified |
 | `$C00102` | `$FC1BEA` | 37,669 | Existing Ghidra coverage calls this an external-function thunk; service unclassified |
 | `$C023B8` | `$FE44F2` | 36,236 | Byte-exact `JMP` in `source_amiga/observed/jump_c023b8_library_stub.asm` |
 
-`$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings. Its
-frequency makes it the first boundary to identify from the pinned ROM and
-observed callers. The report does not establish that this target is safe to
-replace with a single C function; inspect the ROM body and calling context.
+`$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
+is an **internal graphics.library callback**, not a game-originated OS call.
+`port_info.py C02776` gives ROM return site `$FC5E94`. The pinned ROM bytes at
+`$FC5E90` call `-$180(A6)` and then compare the result with a row limit; the
+Kickstart 1.3 `GRAPHICS_LIB.FD` and `LVO.OFFS` on the Amiga Developer CD name
+`-$180` as `VBeamPos()`. The RAM vector at `$C02776` is a byte-exact jump to
+`$FC5ECE`. There, the pinned ROM executes `MOVE.L $DFF004,D0`, `ASR.L #8,D0`,
+`ANDI.L #$1FF,D0`, `RTS`: it returns the raster row. This is strong evidence
+for the identity and behaviour of this one vector, but its frequency mostly
+measures how often graphics.library polls the beam. Stage E should identify
+the game's direct library calls separately before replacing their larger ROM
+call chains.
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The
