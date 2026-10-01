@@ -44,6 +44,8 @@ static int eclock_phase;
 static int copper_carry; /* Copper fetches left over from the previous line */
 static FILE *boundary_trace;
 static uint32_t boundary_low, boundary_high;
+static uint64_t boundary_trace_bytes, boundary_trace_limit;
+static char boundary_trace_path[1024];
 
 extern int fa18_write_log_active;
 extern int64_t fa18_next_event;
@@ -57,18 +59,33 @@ int fa18_bus_trace_close(void) {
 
 void fa18_bus_trace_boundary(const char *kind, uint32_t source_pc) {
     FA18Machine *m = fa18_machine;
-    int i;
+    uint64_t row_bytes = 0;
+    int i, written;
     if (!boundary_trace || source_pc < boundary_low || source_pc >= boundary_high) return;
     /* Read machine/CPU storage directly: tracing must not issue bus accesses
      * or consume cycles. log_mode separates sandboxed ports from live source. */
-    if (fprintf(boundary_trace, "%s,%06X,%06X,%lld,%lld,%llu,%d,%llu,%04X,%04X,%04X,%d",
+    written = fprintf(boundary_trace, "%s,%06X,%06X,%lld,%lld,%llu,%d,%llu,%04X,%04X,%04X,%d",
         kind, source_pc, REG_PC, (long long)fa18_machine_now(),
         (long long)fa18_next_event, (unsigned long long)m->frame, m->vpos,
         (unsigned long long)m->blits, m->intreq, m->intena, m->dmacon,
-        fa18_write_log_active) < 0) goto failed;
-    for (i = 0; i < 16; ++i)
-        if (fprintf(boundary_trace, ",%08X", REG_DA[i]) < 0) goto failed;
-    if (fprintf(boundary_trace, ",%04X\n", m68k_get_reg(NULL, M68K_REG_SR)) >= 0) return;
+        fa18_write_log_active);
+    if (written < 0) goto failed;
+    row_bytes += (unsigned)written;
+    for (i = 0; i < 16; ++i) {
+        written = fprintf(boundary_trace, ",%08X", REG_DA[i]);
+        if (written < 0) goto failed;
+        row_bytes += (unsigned)written;
+    }
+    written = fprintf(boundary_trace, ",%04X\n", m68k_get_reg(NULL, M68K_REG_SR));
+    if (written < 0) goto failed;
+    boundary_trace_bytes += row_bytes + (unsigned)written;
+    if (!boundary_trace_limit || boundary_trace_bytes <= boundary_trace_limit) return;
+    fprintf(stderr, "boundary trace: exceeded %llu MiB; set FA18_BOUNDARY_TRACE_MAX_MIB=0 for unlimited output\n",
+            (unsigned long long)(boundary_trace_limit >> 20));
+    fclose(boundary_trace);
+    boundary_trace = NULL;
+    remove(boundary_trace_path);
+    abort();
 failed:
     fprintf(stderr, "boundary trace: cannot write observation at %06X\n", source_pc);
     abort();
@@ -86,6 +103,9 @@ void fa18_bus_reset(void) {
     const char *phase = getenv("FA18_ECLOCK_PHASE");
     const char *trace_path = getenv("FA18_BOUNDARY_TRACE");
     const char *trace_range = getenv("FA18_BOUNDARY_RANGE");
+    const char *trace_limit = getenv("FA18_BOUNDARY_TRACE_MAX_MIB");
+    char *limit_end;
+    unsigned long long limit_mib = 1024;
     char trailing;
     if (!fa18_bus_trace_close()) abort();
     if (trace_path || trace_range) {
@@ -93,6 +113,20 @@ void fa18_bus_reset(void) {
             sscanf(trace_range, "%x-%x%c", &boundary_low, &boundary_high, &trailing) != 2 ||
             boundary_low >= boundary_high || boundary_high > 0x1000000u) {
             fprintf(stderr, "boundary trace: set FA18_BOUNDARY_TRACE=PATH and FA18_BOUNDARY_RANGE=LO-HI (hex, exclusive HI)\n");
+            abort();
+        }
+        if (trace_limit) {
+            limit_mib = strtoull(trace_limit, &limit_end, 10);
+            if (!*trace_limit || *limit_end || limit_mib > (0xFFFFFFFFFFFFFFFFull >> 20)) {
+                fprintf(stderr, "boundary trace: FA18_BOUNDARY_TRACE_MAX_MIB must be a nonnegative integer\n");
+                abort();
+            }
+        }
+        boundary_trace_limit = (uint64_t)limit_mib << 20;
+        boundary_trace_bytes = 0;
+        if (snprintf(boundary_trace_path, sizeof boundary_trace_path, "%s", trace_path) >=
+            (int)sizeof boundary_trace_path) {
+            fprintf(stderr, "boundary trace: output path is too long\n");
             abort();
         }
         boundary_trace = fopen(trace_path, "w");

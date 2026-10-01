@@ -30,7 +30,9 @@ void fa18_bus_access(uint32_t address);
 /* A program word fetch at `address` (opcode or extension word). */
 void fa18_bus_fetch(uint32_t address);
 /* Optional source-instruction and chipset-event CSV observations. Configured
- * by FA18_BOUNDARY_TRACE (output path) and FA18_BOUNDARY_RANGE (hex LO-HI). */
+ * by FA18_BOUNDARY_TRACE (output path) and FA18_BOUNDARY_RANGE (hex LO-HI).
+ * FA18_BOUNDARY_TRACE_MAX_MIB defaults to 1024; zero explicitly disables the
+ * safety limit. An oversized partial trace is removed before the run aborts. */
 void fa18_bus_trace_boundary(const char *kind, uint32_t source_pc);
 int fa18_bus_trace_close(void);
 /* CPU cycle of the next access (the beam position the CPU observes). */

@@ -183,6 +183,18 @@ int main(int argc, char **argv) {
     char error[256];
     FA18Machine *m;
     FILE *rgb = NULL;
+    uint64_t rgb_bytes = 0, rgb_limit = 4ull << 30;
+    const char *rgb_limit_text = getenv("FA18_RGB444_MAX_MIB");
+    char *rgb_limit_end;
+
+    if (rgb_limit_text) {
+        unsigned long long mib = strtoull(rgb_limit_text, &rgb_limit_end, 10);
+        if (!*rgb_limit_text || *rgb_limit_end || mib > (0xFFFFFFFFFFFFFFFFull >> 20)) {
+            fprintf(stderr, "FA18_RGB444_MAX_MIB must be a nonnegative integer\n");
+            return 2;
+        }
+        rgb_limit = (uint64_t)mib << 20;
+    }
 
     for (i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--state") && i + 1 < argc) state_path = argv[++i];
@@ -299,7 +311,22 @@ int main(int argc, char **argv) {
         if (i == 0 && restore_lead) { fa18_machine_run_frame(m); fa18_loop_frame(); }
         fa18_machine_run_frame(m);
         fa18_loop_frame();
-        if (rgb) fwrite(m->last_screen, sizeof m->last_screen[0], FA18_SCREEN_W * FA18_SCREEN_H, rgb);
+        if (rgb) {
+            size_t pixels = FA18_SCREEN_W * FA18_SCREEN_H;
+            size_t written = fwrite(m->last_screen, sizeof m->last_screen[0], pixels, rgb);
+            rgb_bytes += written * sizeof m->last_screen[0];
+            if (written != pixels || (rgb_limit && rgb_bytes > rgb_limit)) {
+                if (written == pixels)
+                    fprintf(stderr, "RGB444 output exceeded %llu MiB; set FA18_RGB444_MAX_MIB=0 for unlimited output\n",
+                            (unsigned long long)(rgb_limit >> 20));
+                else fprintf(stderr, "cannot write RGB444 output %s\n", rgb_path);
+                fclose(rgb);
+                rgb = NULL;
+                remove(rgb_path);
+                fa18_bus_trace_close();
+                return 1;
+            }
+        }
         if (ppm_dir) {
             char path[512];
             snprintf(path, sizeof path, "%s/frame_%03d.ppm", ppm_dir, i + 1);

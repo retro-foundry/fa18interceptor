@@ -16,6 +16,8 @@ cd "$(dirname "$0")/.."
 EXE=./build/recomp/fa18_recomp.exe
 ROM=local/system/kick13.rom
 OUT=build/recomp
+POISON="$OUT/frames_poison.bin"
+trap 'rm -f "$POISON"' EXIT HUP INT TERM
 
 # One line per recording: name, then the runner's input arguments.
 RUNS=""
@@ -50,9 +52,10 @@ done
 
 FIRST=$(printf '%s\n' "$RUNS" | head -1)
 run=${FIRST%%|*}; args=${FIRST#*|}
-$EXE $args --rom $ROM --ports shadow --poison --rgb444 $OUT/frames_poison.bin >/dev/null 2>&1
-cmp -s "$OUT/frames_shadow_$run.bin" $OUT/frames_poison.bin || {
+$EXE $args --rom $ROM --ports shadow --poison --rgb444 "$POISON" >/dev/null 2>&1
+cmp -s "$OUT/frames_shadow_$run.bin" "$POISON" || {
   echo "POISON: frames differ: a register or flag declared dead is read"; exit 1; }
+rm -f "$POISON"
 cp "$OUT/ports_report_$run.json" $OUT/ports_report.json
 python -c "
 import glob, json
@@ -80,3 +83,4 @@ if unproven: print('never compared:', ', '.join(unproven))
 print(f'{len(first)} routines, {total} matching calls over {len(shadow)} recordings '
       f'(+{sum(compared(sandbox, e) for e in first)} in the sandbox pass); poison: frames identical')
 "
+python scripts/prune_build_artifacts.py --quiet

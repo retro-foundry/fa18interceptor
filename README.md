@@ -43,6 +43,15 @@ Check the work:
 sh scripts/recomp_ports_check.sh   # three sealed native recordings, shadow/sandbox/poison
 ```
 
+Large replay and trace artifacts are bounded automatically. Headless builds
+prune old disposable files when `build/` exceeds 12 GiB, while preserving
+compiler outputs and preferring the current `frames_shadow_*.bin` references.
+Run `python scripts/prune_build_artifacts.py` directly to prune on demand, or
+set `FA18_BUILD_MAX_GIB` to change the cache budget. Individual RGB444 outputs
+are limited to 4 GiB and boundary traces to 1 GiB; set the corresponding
+`FA18_RGB444_MAX_MIB` or `FA18_BOUNDARY_TRACE_MAX_MIB` value to zero only for
+an intentional unlimited capture.
+
 `local/` (ROM, extracted files, toolchain) and `captures/` (sealed
 recordings) are not in git.
 
