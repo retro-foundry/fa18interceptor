@@ -12,6 +12,9 @@
 /* Two workspace offsets and a colour, followed by one projected segment.
  * Both selected triples are copied to SEGMENT_POINTS ($C1FF9C). */
 int draw_selected_segment(gaddr *stream);
+/* The same selected pair when the view is below -$C0, using the clipped
+ * segment route; otherwise consume the three stream words ($C1FFA4). */
+int draw_selected_segment_near(gaddr *stream);
 
 /* Colour, then vertex offset pairs, the second offset of the last pair
  * with bit 15 set: a segment for each pair not wholly behind the eye.

@@ -22,14 +22,17 @@ shadow, sandbox, poison, and live frame gate before increasing the count.
 `$C2FD8C` remains inactive because its blitter busy-wait timing changes
 pixels in ON mode (details under Next). The next larger source-backed pair to
 assess is the normal/wide map packet at `$C2AB5A`/`$C2AB34`, using the
-existing `port/map_packet_*` composition as the reference. `$C1FFA4` is a
-smaller related renderer sibling for a later grouped pass.
+existing `port/map_packet_*` composition as the reference. Both share the
+body at `$C2AB7C`; their original callers retain every data and address
+register, so the runtime adapter and register replay must be developed
+together. Avoid counting graph entries that are only mid-function tails
+without independent calls.
 
 ## Numbers
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 412 of 624 translated entries registered; 727,905 calls matching in shadow and 1,214,772 in the sandbox pass over three native recordings; poison-clean. All 25 new planar handlers were exercised. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 413 of 624 translated entries registered; 727,968 calls matching in shadow and 1,214,836 in the sandbox pass over three native recordings; poison-clean. `$C1FFA4` matched on its observed calls. Ported parents contain formerly counted nested calls. |
 | Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 412-routine gate and 10-frame parity check passed. Further OS replacement is deferred until after the game source and native backend. See the individual `analysis/routines/` reports below. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
@@ -67,6 +70,19 @@ Run the full proof once per batch. See the first trap below: the quick probe
 is not a substitute for it.
 
 ## Recently ported
+
+`$C1FFA4` now shares `$C1FF9C`'s selected segment source in
+`draw_stream.c` and `glue_selected_segment.c`. Its guard at projection Y
+`>= -$C0` consumes three stream words; the other route copies both selected
+workspace triples, applies the depth gate, and calls the existing clipped
+segment renderer. The full 413-routine gate passed over three native
+recordings with 727,968 completed shadow matches and 1,214,836 sandbox
+matches, zero mismatches, and identical poison frames. For this entry,
+demo01 had 559 calls, 539 completed shadow comparisons (20 incomplete),
+and 556 sandbox matches; the other two recordings did not enter it. GNU and
+MSVC Release builds and run075 frames 393-402 parity passed. `$C500D8`
+audio sample callback was explored but had no observed calls in any native
+recording or the archived run075 replay, so it remains unregistered.
 
 The 25 translated renderer mask handlers in the `$C2F826-$C2FA56` source
 tables (`planar_lane_masks.c`, `glue_planar_lane_masks.c`) now share readable C
@@ -300,11 +316,14 @@ part that is not, stays on the work side.
    change invalidates their sealed endpoints. The candidate script omits
    routines with an indirect call even when the entry fixes the target:
    inspect small excluded routines against their source before selecting the
-   next batch. `$C1FFA4` shares the selected-segment copy and depth gate
-   with the newly ported `$C1FF9C`; its near-view guard and fixed indirect
-   `$C2EE4A` clipped-segment target make it a source-backed sibling to
-   investigate next. Prove both the skip and drawing branches before
-   registering it.
+   next batch. `$C1FFA4` is registered and verified as described above.
+   The next substantial shared body is the normal/wide map packet
+   `$C2AB5A`/`$C2AB34`. Existing `port/map_packet_*` code resolves static
+   control streams, directory offsets, packet records and display callbacks,
+   but still takes caller-supplied runtime record and matrix state. Build
+   the game-memory adapter from the original A6 frame/global fields, then
+   replay all live register effects in glue. Both entries must be compared
+   on actual calls before counting this pair.
    `$C31226`/`$C3129A`/`$C31312` are registered (Recently ported); use the
    candidate list for the next source-backed slice.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and

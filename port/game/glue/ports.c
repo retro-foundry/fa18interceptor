@@ -537,6 +537,8 @@ const FA18Port fa18_ports[] = {
     {0xC2F9EE, glue_C2F9EE, "apply_planar_lane_masks", 128, 0xC2F764},
     {0xC2FA08, glue_C2FA08, "apply_planar_lane_masks", 128, 0xC2F764},
     {0xC2FA22, glue_C2FA22, "apply_planar_lane_masks", 128, 0xC2F764},
+    /* selected clipped segment sibling */
+    {0xC1FFA4, glue_C1FFA4, "draw_selected_segment_near", 5500},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

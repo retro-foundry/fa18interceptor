@@ -631,4 +631,7 @@ int glue_C2F9EE(void);
 int glue_C2FA08(void);
 int glue_C2FA22(void);
 
+/* selected clipped segment sibling */
+int glue_C1FFA4(void);
+
 #endif

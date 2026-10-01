@@ -52,7 +52,7 @@ static Vertex edge_after(gaddr a) { return minus(get(a + 6), get(a)); }
 
 /* ---- segments ------------------------------------------------------------ */
 
-int draw_selected_segment(gaddr *stream) {
+static int selected_segment(gaddr *stream, int clipped) {
     gaddr first, second;
     uint16_t depth0, depth1;
     wr_u32(LINE_STYLE, 0xFFFFFFFFu);
@@ -66,7 +66,19 @@ int draw_selected_segment(gaddr *stream) {
     wr_u16(CURRENT_COLOUR, (uint16_t)next_word(stream));
     if ((int16_t)(depth0 & depth1) < 0) return 0;
     wr_u16(SEGMENT_POINTS + 10, depth1);
-    return draw_projected_segment();
+    return clipped ? draw_clipped_segment() : draw_projected_segment();
+}
+
+int draw_selected_segment(gaddr *stream) {
+    return selected_segment(stream, 0);
+}
+
+int draw_selected_segment_near(gaddr *stream) {
+    if (rd_s32(PROJECTION_Y) >= -0xC0) {
+        *stream += 6;
+        return 0;
+    }
+    return selected_segment(stream, 1);
 }
 
 int draw_segment_pairs(gaddr *stream) {
