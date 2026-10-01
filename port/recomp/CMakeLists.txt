@@ -33,11 +33,12 @@ file(GLOB FA18_GENERATED CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/generated
 # The recreated game source and its temporary glue (PORT.md, Stage D).
 file(GLOB FA18_GAME CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../game/*.c
                                       ${CMAKE_CURRENT_SOURCE_DIR}/../game/glue/*.c)
+file(GLOB FA18_OS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../os/*.c)
 add_executable(fa18_recomp
     recomp_main.c recomp_runtime.c recomp_ports.c
     loop_input.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
-    ${FA18_GAME} ${FA18_GENERATED})
-target_include_directories(fa18_recomp PRIVATE . generated ../machine ../game ../game/glue)
+    ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})
+target_include_directories(fa18_recomp PRIVATE . generated ../machine ../game ../game/glue ../os)
 target_compile_definitions(fa18_recomp PRIVATE FA18_WITH_SDL SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_recomp PRIVATE fa18_musashi SDL2-static)
 if(MSVC)

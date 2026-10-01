@@ -9,6 +9,7 @@
 #include "bus.h"
 #include "machine.h"
 #include "recomp_ports.h"
+#include "graphics_glue.h"
 
 extern int64_t fa18_cycle_origin;
 
@@ -25,6 +26,7 @@ static uint8_t *code_bits;
 static uint8_t *disabled;
 static uint8_t *fallback_seen;
 static int enabled_flag;
+static int vbeam_shim_enabled;
 #define ROM_TRANSITION_SLOTS 65536u
 typedef struct {
     uint64_t key; /* source PC in bits 47..24, ROM entry PC in bits 23..0; zero means empty */
@@ -45,6 +47,7 @@ static int fold(uint32_t a) {
 void fa18_recomp_init(int enabled) {
     int i;
     enabled_flag = enabled;
+    vbeam_shim_enabled = 0;
     free(entry_map);
     free(code_bits);
     free(disabled);
@@ -69,6 +72,11 @@ void fa18_recomp_init(int enabled) {
             if (f >= 0) code_bits[f >> 3] |= (uint8_t)(1u << (f & 7));
         }
     }
+}
+
+int fa18_recomp_enable_vbeam_shim(void) {
+    vbeam_shim_enabled = fa18_os_vbeam_signature_matches(fa18_machine->rom);
+    return vbeam_shim_enabled;
 }
 
 int fa18_recomp_track_rom_transitions(void) {
@@ -205,6 +213,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         fa18_bus_instruction();
         if (fa18_machine_service()) break;
         fa18_bus_instruction();
+        if (vbeam_shim_enabled && fa18_os_vbeam_step()) continue;
         if (!enabled_flag || (e = lookup(REG_PC)) == NULL) break;
         before = GET_CYCLES();
         fa18_recomp_abort = 0;

@@ -14,7 +14,7 @@ one at a time, each proven on every call.
 | Check | Result |
 | --- | --- |
 | Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart entry inventory | `--rom-transitions OUT.json` recorded 2,661,668 RAM-to-ROM crossings across the three sealed native recordings; see `analysis/rom_transition_inventory.md`. OS replacement remains to be implemented. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE` now runs in C on the pinned ROM; its 2,157,736 observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate still passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -364,6 +364,17 @@ part that is not, stays on the work side.
    `VBeamPos()` through LVO `-$180`; the target reads the raster row.
    This is an internal graphics.library poll, so sort direct game-originated
    library calls separately before prioritizing OS replacement.
+   The pinned `VBeamPos` leaf at `$FC5ECE` is now replaced by C by default
+   (`port/os/graphics.c` and its temporary CPU bridge). The runner checks
+   its exact ROM bytes before interception; `--no-os-vbeam` selects the ROM
+   comparison path. Its first full native trial matched all three sealed RAM
+   hashes and removed all 2,157,736 recorded entries to that ROM leaf. See
+   `analysis/routines/fc5ece_vbeam_pos.md` for the source and proof. With the
+   C path as the translated runner's default, the full three-recording gate
+   again passed: 386 routines, 726,979 matching shadow calls, 925,873
+   sandbox matches, zero mismatches, and identical poison frames. The run075
+   frame-392 parity check remained 10/10 pixel-exact. `--no-recomp` keeps the
+   interpreter-only baseline on the ROM path unless explicitly overridden.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is

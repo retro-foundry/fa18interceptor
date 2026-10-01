@@ -53,6 +53,9 @@ measures how often graphics.library polls the beam. Stage E should identify
 the game's direct library calls separately before replacing their larger ROM
 call chains.
 
+The pinned `VBeamPos` leaf is now replaced by C in the translated runner; its
+source and full native proof are in [the VBeamPos report](routines/fc5ece_vbeam_pos.md).
+
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The
 full-recording hashes above provide the stronger unchanged-replay check. GNU

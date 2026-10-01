@@ -9,7 +9,7 @@ if [ -n "$dups" ]; then echo "globals.h defines twice: $dups" >&2; exit 1; fi
 M=tools/musashi
 O=build/recomp/obj
 mkdir -p $O
-CFLAGS="-O2 -w -I$M -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue"
+CFLAGS="-O2 -w -I$M -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os"
 for src in $M/m68kcpu.c $M/m68kops.c $M/m68kdasm.c $M/softfloat/softfloat.c port/recomp/generated/*.c; do
   obj=$O/$(basename "$src" .c).o
   if [ ! -f "$obj" ] || [ "$src" -nt "$obj" ]; then gcc $CFLAGS -c "$src" -o "$obj" & fi
@@ -17,4 +17,4 @@ done
 wait
 gcc $CFLAGS -o build/recomp/fa18_recomp.exe port/recomp/recomp_main.c port/recomp/recomp_runtime.c \
   port/recomp/recomp_ports.c port/recomp/loop_input.c port/machine/machine.c port/machine/bus.c port/machine/blitter.c port/machine/display.c \
-  port/machine/input.c $(ls port/game/*.c 2>/dev/null) port/game/glue/*.c $O/*.o
+  port/machine/input.c $(ls port/game/*.c 2>/dev/null) port/game/glue/*.c port/os/*.c $O/*.o

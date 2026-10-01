@@ -71,6 +71,8 @@ int fa18_recomp_write_fallback_log(const char *path);
 /* Optional inventory of interpreter entries from RAM into Kickstart ROM. */
 int fa18_recomp_track_rom_transitions(void);
 int fa18_recomp_write_rom_transitions(const char *path);
+/* Opt in to the source-backed C implementation of graphics.library VBeamPos. */
+int fa18_recomp_enable_vbeam_shim(void);
 
 #ifdef FA18_RECOMP_GENERATED
 
