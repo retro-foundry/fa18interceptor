@@ -41,8 +41,8 @@ Most frequent pairs across all three:
 | `$C023B8` | `$FE44F2` | 36,236 | potgo.resource `WritePotgo(word,mask)`; see below |
 | `$C02812` | `$FC5A58` | 21,331 | graphics.library `WaitBlit()`; C bridge, see below |
 | `$C02764` | `$FC5E58` | 16,526 | graphics.library `WaitBOVP(viewport)`; see below |
-| `$C0272E` | `$FC64BC` | 16,012 | graphics.library `OwnBlitter()`; see below |
-| `$C02728` | `$FC64D4` | 16,010 | graphics.library `DisownBlitter()`; see below |
+| `$C0272E` | `$FC64BC` | 16,012 | graphics.library `OwnBlitter()`; C bridge, see below |
+| `$C02728` | `$FC64D4` | 16,010 | graphics.library `DisownBlitter()`; C bridge, see below |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
 is an **internal graphics.library callback**, not a game-originated OS call.
@@ -113,7 +113,9 @@ The first adjusts the graphics library ownership counter and calls an
 internal ROM helper. The second adjusts the same counter, tests owner and
 blitter state, and can call several internal helpers or write the blitter
 interrupt and DMA registers. These paired services require their branch
-paths and nested calls to be preserved together in a C replacement.
+paths and nested calls to be preserved together in a C replacement. Both
+now run through a C bridge in translated mode; the source and native proof
+are in [the blitter ownership report](routines/fc64bc_fc64d4_blitter_ownership.md).
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

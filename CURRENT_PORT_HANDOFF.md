@@ -14,7 +14,7 @@ one at a time, each proven on every call.
 | Check | Result |
 | --- | --- |
 | Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,350,618 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, and `analysis/routines/fe44f2_potgo_write.md`. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See the individual `analysis/routines/` reports below. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -407,14 +407,27 @@ part that is not, stays on the work side.
    925,873 sandbox matches, zero mismatches, and identical poison frames.
    The run075 frame-392 parity check remained 10/10 exact. See
    `analysis/routines/fc5e58_wait_bovp.md`.
-   The next adjacent graphics vectors are `$C0272E -> $FC64BC`
+   The next adjacent graphics vectors were `$C0272E -> $FC64BC`
    `OwnBlitter()` (`-$1C8`) and `$C02728 -> $FC64D4`
    `DisownBlitter()` (`-$1CE`). They have 16,012 and 16,010 native entries
    respectively and return to game code at `$C53FBC`/`$C53FCC`. The pinned
    ROM adjusts the shared ownership counter and invokes internal helpers;
    `DisownBlitter` also branches on owner and blitter state and can write
-   interrupt/DMA registers. Preserve those paths together in the next C
-   service. The transition inventory records the vector evidence.
+   interrupt/DMA registers. `port/os/graphics.c` now supplies the word-sized
+   counter operations, and `port/os/graphics_blitter_ownership.c` executes
+   both outer services in C at their original instruction boundaries. The
+   nested helpers stay on the ordinary ROM path. `--no-os-blitter-owner`
+   selects the ROM pair; `--no-recomp` defaults to ROM. A 300-frame demo
+   C/ROM comparison matched RAM and runner statistics, with 1,736/1,735
+   ROM entries versus zero C-path entries. All three complete C-path runs
+   kept their sealed final RAM hashes and recorded zero entries to the
+   original leaves. GNU and MSVC Release matched RAM and transition
+   inventory in the focused probe. See
+   `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`.
+   With both ownership leaves C default-on, the full gate passed: 386
+   routines, 726,979 shadow matches, 925,873 sandbox matches, zero
+   mismatches, and identical poison frames. The run075 frame-392 parity
+   check remained 10/10 exact.
    Exec `Disable()` `$FC1428` and `Enable()` `$FC1436` are now also source-backed
    C leaves (`port/os/exec.c` and its instruction bridge). The pinned ROM
    supplies the exact sequence and the Kickstart 1.3 vector table identifies

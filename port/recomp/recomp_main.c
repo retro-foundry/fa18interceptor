@@ -53,6 +53,7 @@ static void usage(void) {
             "                   [--no-os-vbeam] (use the ROM VBeamPos)\n"
             "                   [--no-os-waitblit] (use ROM graphics.library WaitBlit)\n"
             "                   [--no-os-waitbovp] (use ROM graphics.library WaitBOVP)\n"
+            "                   [--no-os-blitter-owner] (use ROM OwnBlitter/DisownBlitter)\n"
             "                   [--no-os-exec-interrupts] (use ROM Exec Disable/Enable)\n"
             "                   [--no-os-getmsg] (use ROM Exec GetMsg)\n"
             "                   [--no-os-potgo] (use ROM potgo.resource WritePotgo)\n"
@@ -169,6 +170,7 @@ int main(int argc, char **argv) {
     int os_vbeam = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_waitblit = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_waitbovp = -1; /* default C with recomp, ROM in interpreter-only mode */
+    int os_blitter_owner = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_exec_interrupts = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_getmsg = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_potgo = -1; /* default C with recomp, ROM in interpreter-only mode */
@@ -211,6 +213,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--no-os-waitblit")) os_waitblit = 0;
         else if (!strcmp(argv[i], "--os-waitbovp")) os_waitbovp = 1;
         else if (!strcmp(argv[i], "--no-os-waitbovp")) os_waitbovp = 0;
+        else if (!strcmp(argv[i], "--os-blitter-owner")) os_blitter_owner = 1;
+        else if (!strcmp(argv[i], "--no-os-blitter-owner")) os_blitter_owner = 0;
         else if (!strcmp(argv[i], "--os-exec-interrupts")) os_exec_interrupts = 1;
         else if (!strcmp(argv[i], "--no-os-exec-interrupts")) os_exec_interrupts = 0;
         else if (!strcmp(argv[i], "--os-getmsg")) os_getmsg = 1;
@@ -236,6 +240,7 @@ int main(int argc, char **argv) {
     if (os_vbeam < 0) os_vbeam = use_recomp;
     if (os_waitblit < 0) os_waitblit = use_recomp;
     if (os_waitbovp < 0) os_waitbovp = use_recomp;
+    if (os_blitter_owner < 0) os_blitter_owner = use_recomp;
     if (os_exec_interrupts < 0) os_exec_interrupts = use_recomp;
     if (os_getmsg < 0) os_getmsg = use_recomp;
     if (os_potgo < 0) os_potgo = use_recomp;
@@ -243,6 +248,7 @@ int main(int argc, char **argv) {
     if (os_vbeam) fa18_recomp_enable_vbeam_shim();
     if (os_waitblit) fa18_recomp_enable_wait_blit_shim();
     if (os_waitbovp) fa18_recomp_enable_wait_bovp_shim();
+    if (os_blitter_owner) fa18_recomp_enable_blitter_ownership_shim();
     if (os_exec_interrupts) fa18_recomp_enable_exec_interrupt_shim();
     if (os_getmsg) fa18_recomp_enable_exec_get_msg_shim();
     if (os_potgo) fa18_recomp_enable_potgo_shim();
