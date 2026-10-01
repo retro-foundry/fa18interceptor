@@ -7,6 +7,9 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* grid_projection_packet.c */
+    {0xC279D0, glue_C279D0, "draw_grid_projection_packet", 0, 0,
+     glue_C279D0_step, 0xC27D24},
     /* map_packet.c: shared normal/wide directory and projection walk */
     {0xC2AA9C, glue_C2AA9C, "run_map_packet_depth_stage", 0, 0,
      glue_C2AA9C_step, 0xC2AB34},

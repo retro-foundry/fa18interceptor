@@ -38,3 +38,13 @@ state those paths update before world placement or landing evaluation.
 specific renderer-packet callback slot in `fa18_run_parent_flight_update`. It
 only binds caller-owned packet inputs to the bounded renderer composition; it
 does not claim the parent update's other child stages or loop cadence.
+
+## Complete C activation, 2026-10-01
+
+The entire C279D0-C27D23 packet is now registered and reaches **port-contract**
+coverage. This includes all three record tables, negative-kind triangles,
+partial output writes, both pixel helpers and screen-edge clamps. Readable C,
+original-register reconstruction and resumable instruction timing are separate.
+The current acceptance evidence is the three sealed native recordings,
+4,096 structural fixtures and DMA instruction fixtures; see
+[native C activation](native_c_grid_projection_activation.md).

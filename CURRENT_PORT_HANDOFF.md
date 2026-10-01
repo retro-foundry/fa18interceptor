@@ -14,21 +14,26 @@ The user explicitly deferred OS work and asked for larger routine batches.
 
 ## Verified baseline
 
-- 418 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 712,856 completed shadow
-  calls and 1,126,474 sandbox calls across three native recordings, with zero
+- 419 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 703,341 completed shadow
+  calls and 1,129,309 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 418-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 419-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
   These isolated bridges match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle matches 1,967 instructions and 62,944 cases. See
+  combined instruction oracle matches 2,238 instructions and 71,616 cases. See
   analysis/routines/native_c_registered_timing_batch.md.
   The new four-entry map/region batch is independently exact across all
   36,236 live frames. Its 735 instructions also match 23,520 fixtures with
   DMA bus contention enabled. See analysis/routines/native_c_map_region_activation.md.
+  C279D0 is also newly registered: its independent live output matches all
+  36,236 frames, and its 271 instructions pass 8,672 DMA-contention fixtures.
+  Readable whole-call C separately matches 3,258 shadow and 1,967 sandbox calls,
+  plus 4,096 structural cases including partial writes and edge clamps. See
+  analysis/routines/native_c_grid_projection_activation.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -71,7 +76,27 @@ The user explicitly deferred OS work and asked for larger routine batches.
   tools/recomp/check_shadow_busy_inputs.py. Full ON replay separately proves
   the actual timing. No mismatch or hardware classification was suppressed.
 
-## Newly activated map and region batch
+## Newly activated grid projection packet
+
+C279D0 now implements the complete three-table packet in
+port/game/grid_projection_packet.c, with CPU effects and resumable timing in
+separate glue files. It preserves source-selected depth gates, sparse-matrix
+projection, negative record kinds, partial triangle writes, coordinate clamps,
+and both pixel helpers. All 36,236 isolated live frames are exact.
+
+The structural oracle found a word-overflow distinction at C27BD6/C27C98:
+BLE after ADD.W tests the signed unwrapped sum, whereas subsequent CMP.W
+instructions compare wrapped depth. That case is retained in 4,096 original-
+instruction fixtures, including 12 partial-write and 13 edge-clamp cases.
+Custom writes are held in these structural fixtures; the separate live replay
+proves actual drawing and event timing.
+
+The generic tools/recomp/check_whole_call_glue.py ENTRY... now supplies
+independent readable-C checks for future batches. It reuses cached objects and
+an isolated registry, running the three recordings concurrently. The earlier
+check_map_region_glue.py delegates to it with its four default entries.
+
+## Previous map and region batch
 
 The previous map/region live blockers are resolved. C2AB34/C2AB5A share the
 source-timed packet bridge, C2AA9C supplies the depth-stage frame and pass
@@ -109,9 +134,9 @@ DMA contention so this distinction is covered before expensive full replays.
 1. Prioritize additional unregistered game functions in related batches.
    The user explicitly asked for progress in the function count; avoid another
    standalone audit of already registered fixed-charge routines as the main
-   batch. Start with C279D0 (271 instructions; projection_grid.c groundwork)
-   and C1D10C (648 instructions; terrain_* groundwork). Inspect indirect-call
-   parents C0F5F8 and the C1CB14/C1CB26 siblings for explicit child contracts;
+   batch. C279D0 is complete and activated. Start with C1D10C (648 instructions;
+   terrain_* groundwork), including its placement emission and cache tail.
+   Inspect indirect-call parents C0F5F8 and the C1CB14/C1CB26 siblings for explicit child contracts;
    the candidate tool excludes them. Preserve the original-source authority.
    Group shared bodies and children, prove readable whole-call C independently
    of timing steps, then run the full gate and isolated live checks.
@@ -170,6 +195,9 @@ DMA contention so this distinction is covered before expensive full replays.
   reuses a single source stream and removes its scratch streams by default.
   `--rank-fixed N --differences-only` selects the N largest accumulated drifts
   from the latest demo gate report before probing them.
+- Independently prove readable whole-call C with
+  `python tools/recomp/check_whole_call_glue.py ENTRY...`; registered timing
+  steps are disabled only in the temporary proof registry.
 - The headless Ninja graph tracks source and header dependencies and shares
   objects with structural oracles and mutation builds. An unchanged build is
   subsecond. Do not manually touch generated C after a header change.

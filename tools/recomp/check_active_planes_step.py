@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--bus", action="store_true",
                         help="include DMA bus contention in instruction timing fixtures")
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
-                   "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map")
+                   "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map", "grid")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -38,6 +38,7 @@ def main():
         "faces": ["C2005C"],
         "regions": ["C2B05A"],
         "map": ["C2AA9C", "C2AB34", "C2AB5A"],
+        "grid": ["C279D0"],
     }
     entries = (entry for name in group_names for entry in groups[name]) \
         if args.group == "all" else iter(groups[args.group])
