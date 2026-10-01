@@ -9,12 +9,22 @@ Recreated, readable C source for the whole game ([PORT.md](PORT.md)). The
 translated game runs natively; hand-written C replaces translated routines
 one at a time, each proven on every call.
 
+## Current priority
+
+Resume Stage D game-source work before further Stage E ROM service work. The
+recent Kickstart replacements improved OS coverage but moved the registered
+game count only from 385 to 386 over roughly three hours. Keep OS experiments
+out of the game-routine count. Prefer source-backed gameplay and renderer
+parents with completed C children; use the shadow, sandbox, poison, and live
+frame gates before increasing the count. `$C2FD8C` remains inactive because
+its blitter busy-wait timing changes pixels in ON mode (details under Next).
+
 ## Numbers
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See the individual `analysis/routines/` reports below. |
+| Recreated routines (`port/game/`) | 387; 726,979 calls matching in shadow and 925,872 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, `OwnBlitter`/`DisownBlitter` `$FC64BC`/`$FC64D4`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,382,640 combined observed native entries were replaced with sealed RAM unchanged. The full 387-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See the individual `analysis/routines/` reports below. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -52,6 +62,20 @@ routine. But see the first trap below: the quick probe is not a substitute
 for it.
 
 ## Recently ported
+
+`$C1FF9C` selected workspace segment (`draw_stream.c`,
+`glue_selected_segment.c`) now reads the two signed vertex offsets and colour
+from the draw stream, copies the chosen triples to `SEGMENT_POINTS`, applies
+the depth gate, then calls the already ported projected-segment renderer. Its
+indirect `JSR (A4)` has a fixed source target at this entry (`$C2ED70`), so
+the standard candidate script did not list it. The bridge restores `A2` after
+the child changes it, as the source's `MOVEM` does. The full three-recording
+gate compared 1,048 completed shadow calls and 1,069 sandbox calls for this
+entry with zero mismatches; all observed calls were in demo01. Across all
+387 routines the gate matched 726,979 shadow calls and 925,872 sandbox calls,
+with identical poison frames. Frame-392 parity stayed 10/10 exact, and the
+MSVC Release build passed. The total call count can decrease when a parent
+absorbs calls to a registered child.
 
 `$C31226` postflight renderer dispatcher (`postflight_variants.c`,
 `glue_postflight_variants.c`) now runs the source bounds gate, the activity
@@ -246,15 +270,17 @@ part that is not, stays on the work side.
 
 ## Next
 
-0. **Record native sessions** (the user plays): menu, demo, a normal
-   flight, a success, a crash, a failure, the post-flight screens.
-   `build/recomp-cmake/Release/fa18_recomp.exe --state captures/uae/run075/restored-state.bin
-   --rom local/system/kick13.rom --window --frames 0 --record local/NAME.fa18in`,
-   then `python scripts/seal_native_run.py NAME --state ... --input local/NAME.fa18in`.
-   Once some exist the check uses only them; re-record after any change to
-   machine timing or the translation (the check then says the run no
-   longer ends as sealed).
-1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
+1. **Keep recreating game routines**, bottom-up from `port_candidates.py`.
+   The three sealed native recordings already cover demo, carrier success,
+   and crash failure. Re-record only after a machine-timing or translation
+   change invalidates their sealed endpoints. The candidate script omits
+   routines with an indirect call even when the entry fixes the target:
+   inspect small excluded routines against their source before selecting the
+   next batch. `$C1FFA4` shares the selected-segment copy and depth gate
+   with the newly ported `$C1FF9C`; its near-view guard and fixed indirect
+   `$C2EE4A` clipped-segment target make it a source-backed sibling to
+   investigate next. Prove both the skip and drawing branches before
+   registering it.
    `$C31226`/`$C3129A`/`$C31312` are registered (Recently ported); use the
    candidate list for the next source-backed slice.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and

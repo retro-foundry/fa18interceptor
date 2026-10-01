@@ -51,8 +51,7 @@ static int project_regs(gaddr p, int x, int y, int z) {
     return 1;
 }
 
-int glue_C2ED70(void) {
-    int drawn = draw_projected_segment();
+void projected_segment_registers(void) {
     A(1) = SEGMENT_POINTS + 12;
     if (project_regs(SEGMENT_POINTS, 0, 1, 2) && project_regs(SEGMENT_POINTS + 6, 2, 3, 4)) {
         line_registers();
@@ -60,8 +59,12 @@ int glue_C2ED70(void) {
     } else {
         D(0) = 0;
     }
-    (void)drawn;
     flags_logic_l(D(0));
+}
+
+int glue_C2ED70(void) {
+    draw_projected_segment();
+    projected_segment_registers();
     return glue_return();
 }
 

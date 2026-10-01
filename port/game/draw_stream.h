@@ -9,6 +9,10 @@
 
 #include "memory.h"
 
+/* Two workspace offsets and a colour, followed by one projected segment.
+ * Both selected triples are copied to SEGMENT_POINTS ($C1FF9C). */
+int draw_selected_segment(gaddr *stream);
+
 /* Colour, then vertex offset pairs, the second offset of the last pair
  * with bit 15 set: a segment for each pair not wholly behind the eye.
  * LINE_STYLE is cleared to "none given" ($C212B0). */

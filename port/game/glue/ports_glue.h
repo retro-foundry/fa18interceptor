@@ -601,4 +601,7 @@ int glue_C3129A(void);
 int glue_C31312(void);
 int glue_C31226(void);
 
+/* selected projected segment */
+int glue_C1FF9C(void);
+
 #endif
