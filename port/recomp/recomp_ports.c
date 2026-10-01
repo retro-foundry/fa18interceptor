@@ -112,6 +112,7 @@ static void undo_log(size_t from) {
 typedef struct {
     uint64_t calls, compared, matched, mismatched, hardware, incomplete;
     uint64_t reference_cycles;
+    uint64_t busy_input_calls, busy_input_reads;
     int reported;
 } PortStats;
 
@@ -127,10 +128,61 @@ typedef struct {
 static SteppedCall *stepped_calls;
 static size_t stepped_count, stepped_capacity;
 
+/* A held BLTSIZE write cannot supply the subsequent live BBUSY inputs.
+ * For opted-in shadow bridges, record the source inputs first, then replay
+ * exactly that PC/read sequence. No source output or write is supplied to C.
+ * Timing remains independently checked by live ON replay and bus traces. */
+typedef struct { uint32_t pc; uint16_t value; } BusyRead;
+static BusyRead *busy_reads;
+static size_t busy_count, busy_cursor, busy_capacity;
+static int busy_phase, busy_port;
+typedef struct {
+    uint8_t chip[FA18_CHIP_SIZE], slow[FA18_SLOW_SIZE], rtarea[0x10000];
+} ShadowRAM;
+static ShadowRAM *shadow_entry_ram, *shadow_live_ram;
+
+uint16_t fa18_shadow_dmaconr(uint16_t value) {
+    if (busy_phase == 1) {
+        if (busy_count == busy_capacity) {
+            size_t capacity = busy_capacity ? busy_capacity * 2 : 256;
+            BusyRead *reads = realloc(busy_reads, capacity * sizeof *reads);
+            if (!reads) { fputs("shadow: cannot allocate busy inputs\n", stderr); abort(); }
+            busy_reads = reads; busy_capacity = capacity;
+        }
+        busy_reads[busy_count].pc = REG_PPC;
+        busy_reads[busy_count++].value = value;
+    } else if (busy_phase == 2) {
+        if (busy_cursor == busy_count || busy_reads[busy_cursor].pc != REG_PPC) {
+            fprintf(stderr, "port %s: unexpected shadow DMACONR read at %06X, input %zu/%zu\n",
+                    fa18_ports[busy_port].name, REG_PPC, busy_cursor, busy_count);
+            abort();
+        }
+        return busy_reads[busy_cursor++].value;
+    }
+    return value;
+}
+
+static void save_shadow_ram(ShadowRAM *ram) {
+    memcpy(ram->chip, fa18_machine->chip, sizeof ram->chip);
+    memcpy(ram->slow, fa18_machine->slow, sizeof ram->slow);
+    memcpy(ram->rtarea, fa18_machine->rtarea, sizeof ram->rtarea);
+}
+
+static void restore_shadow_ram(const ShadowRAM *ram) {
+    memcpy(fa18_machine->chip, ram->chip, sizeof ram->chip);
+    memcpy(fa18_machine->slow, ram->slow, sizeof ram->slow);
+    memcpy(fa18_machine->rtarea, ram->rtarea, sizeof ram->rtarea);
+}
+
+static uint32_t stepped_start(const FA18Port *port) {
+    return port->step_start ? port->step_start : port->entry;
+}
+
 void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     int i, f;
     mode = new_mode;
     stepped_count = 0;
+    busy_phase = 0;
     free(port_of_function);
     free(stats);
     free(profile);
@@ -139,7 +191,9 @@ void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     profile = calloc((size_t)fa18_recomp_function_count + 1, sizeof *profile);
     for (f = 0; f < fa18_recomp_function_count; f++) port_of_function[f] = -1;
     for (i = 0; i < fa18_port_count; i++) {
-        if (fa18_ports[i].step && fa18_ports[i].step_end <= fa18_ports[i].entry) {
+        if ((fa18_ports[i].step && (fa18_ports[i].step_end <= fa18_ports[i].entry ||
+                                  stepped_start(&fa18_ports[i]) > fa18_ports[i].entry)) ||
+            (fa18_ports[i].shadow_busy_reads && !fa18_ports[i].step)) {
             fprintf(stderr, "port %s: invalid stepped source range\n", fa18_ports[i].name);
             abort();
         }
@@ -175,7 +229,7 @@ static int run_port_body(int port) {
     for (;;) {
         int result;
         if (REG_PC == ret && REG_A[7] == sp) return FA18_RET;
-        if (REG_PC >= fa18_ports[port].entry && REG_PC < fa18_ports[port].step_end) {
+        if (REG_PC >= stepped_start(&fa18_ports[port]) && REG_PC < fa18_ports[port].step_end) {
             if (!fa18_ports[port].step()) {
                 fprintf(stderr, "port %s: missing instruction boundary at %06X\n",
                         fa18_ports[port].name, REG_PC);
@@ -203,7 +257,7 @@ int fa18_ports_resume_step(void) {
      * choose the innermost bridge whose source range owns the resumed PC. */
     for (i = stepped_count; i > 0; --i) {
         const FA18Port *port = &fa18_ports[stepped_calls[i - 1].port];
-        if (REG_PC >= port->entry && REG_PC < port->step_end) {
+        if (REG_PC >= stepped_start(port) && REG_PC < port->step_end) {
             if (!port->step()) {
                 fprintf(stderr, "port %s: cannot resume at %06X\n", port->name, REG_PC);
                 abort();
@@ -462,49 +516,62 @@ static int run_sandbox(int function, int label, int port) {
 }
 
 
-/* SHADOW: the port first, sandboxed on the state at the call (no chipset
+/* SHADOW: normally the port first, sandboxed on the state at the call (no chipset
  * events, hardware blocked, custom writes held, everything undone), then
  * the generated routine live, exactly as a run without ports would do it,
  * with its writes recorded. The two results are compared and the game
  * continues on the live one, so a shadow run keeps the plain run's timing.
  * A call is not compared when the live routine was interrupted, touched
  * hardware, or ended mid-routine at a frame boundary; nor when the port
- * touched hardware. */
+ * touched hardware. An opted-in busy-input bridge instead runs source first,
+ * records its DMACONR inputs, then compares C on entry RAM with those inputs.
+ * The source result, comparison masks and exclusion rules remain the same. */
 static int run_shadow(int function, int label, int port) {
     PortStats *s = &stats[port];
     int64_t saved_event = fa18_next_event;
-    int cycles_before = GET_CYCLES(), r, i, mismatch = 0, port_hardware;
-    size_t port_count, port_custom_count, k;
-    CustomWrite *port_custom;
+    int cycles_before = GET_CYCLES(), r = FA18_RET, i, mismatch = 0, port_hardware = 0;
+    int replay_busy = fa18_ports[port].shadow_busy_reads;
+    size_t port_count = 0, port_custom_count = 0, k;
+    CustomWrite *port_custom = NULL;
     uint32_t caller = fa18_bus_read32(REG_A[7]) & 0xFFFFFF, live_sp;
     const FA18CallLiveness *live = liveness_after(caller);
     report_caller = caller;
-    LogEntry *port_writes;
-    uint8_t *port_new;
+    LogEntry *port_writes = NULL;
+    uint8_t *port_new = NULL;
 
     /* The port, sandboxed. */
     m68k_get_context(context_before);
     log_count = 0;
     custom_count = 0;
-    fa18_write_log_active = 1;
-    fa18_write_log_hardware = 0;
-    fa18_next_event = INT64_MAX;
-    r = run_port_body(port);
-    fa18_next_event = saved_event;
-    fa18_write_log_active = 0;
-    port_hardware = fa18_write_log_hardware;
-    m68k_get_context(context_reference); /* here: the port's registers */
-    port_count = log_count;
-    port_writes = malloc(sizeof *port_writes * (port_count + 1));
-    port_new = malloc(port_count + 1);
-    memcpy(port_writes, log_entries, sizeof *port_writes * port_count);
-    for (i = 0; i < (int)port_count; i++) port_new[i] = *byte_at(port_writes[i].address);
-    port_custom_count = custom_count;
-    port_custom = malloc(sizeof *port_custom * (custom_count + 1));
-    memcpy(port_custom, custom_log, sizeof *port_custom * custom_count);
-    undo_log(0);
-    m68k_set_context(context_before);
-    SET_CYCLES(cycles_before);
+    if (replay_busy) {
+        if (!shadow_entry_ram) shadow_entry_ram = malloc(sizeof *shadow_entry_ram);
+        if (!shadow_live_ram) shadow_live_ram = malloc(sizeof *shadow_live_ram);
+        if (!shadow_entry_ram || !shadow_live_ram) {
+            fputs("shadow: cannot allocate RAM snapshots\n", stderr); abort();
+        }
+        save_shadow_ram(shadow_entry_ram);
+        busy_port = port; busy_count = busy_cursor = 0; busy_phase = 1;
+    } else {
+        fa18_write_log_active = 1;
+        fa18_write_log_hardware = 0;
+        fa18_next_event = INT64_MAX;
+        r = run_port_body(port);
+        fa18_next_event = saved_event;
+        fa18_write_log_active = 0;
+        port_hardware = fa18_write_log_hardware;
+        m68k_get_context(context_reference); /* here: the port's registers */
+        port_count = log_count;
+        port_writes = malloc(sizeof *port_writes * (port_count + 1));
+        port_new = malloc(port_count + 1);
+        memcpy(port_writes, log_entries, sizeof *port_writes * port_count);
+        for (i = 0; i < (int)port_count; i++) port_new[i] = *byte_at(port_writes[i].address);
+        port_custom_count = custom_count;
+        port_custom = malloc(sizeof *port_custom * (custom_count + 1));
+        memcpy(port_custom, custom_log, sizeof *port_custom * custom_count);
+        undo_log(0);
+        m68k_set_context(context_before);
+        SET_CYCLES(cycles_before);
+    }
 
     /* The generated routine, live. */
     custom_count = 0;
@@ -519,6 +586,7 @@ static int run_shadow(int function, int label, int port) {
         if (live_r == FA18_EXIT_INTERP && fa18_machine_event_due()) live_r = fa18_recomp_resume(caller, sp);
         fa18_write_log_active = 0;
         if (live_r != FA18_RET) {
+            busy_phase = 0;
             s->incomplete++;
             log_count = 0;
             free(port_writes); free(port_new); free(port_custom);
@@ -526,10 +594,64 @@ static int run_shadow(int function, int label, int port) {
         }
     }
     if (fa18_write_log_hardware || port_hardware) {
+        busy_phase = 0;
         s->hardware++;
         log_count = 0;
         free(port_writes); free(port_new); free(port_custom);
         return FA18_RET;
+    }
+    if (replay_busy) {
+        size_t live_count = log_count, live_custom_count = custom_count;
+        LogEntry *live_writes = malloc(sizeof *live_writes * (live_count + 1));
+        CustomWrite *live_custom = malloc(sizeof *live_custom * (live_custom_count + 1));
+        unsigned char *live_cpu = malloc(m68k_context_size());
+        int live_cycles = GET_CYCLES(), port_touched_hardware;
+        int64_t live_event = fa18_next_event;
+        if (!live_writes || !live_custom || !live_cpu) {
+            fputs("shadow: cannot allocate live result\n", stderr); abort();
+        }
+        memcpy(live_writes, log_entries, sizeof *live_writes * live_count);
+        memcpy(live_custom, custom_log, sizeof *live_custom * live_custom_count);
+        m68k_get_context(live_cpu);
+        save_shadow_ram(shadow_live_ram);
+        restore_shadow_ram(shadow_entry_ram);
+        m68k_set_context(context_before); SET_CYCLES(cycles_before);
+        log_count = custom_count = 0;
+        busy_phase = 2;
+        fa18_write_log_active = 1; fa18_write_log_hardware = 0;
+        fa18_next_event = INT64_MAX;
+        r = run_port_body(port);
+        fa18_next_event = live_event;
+        fa18_write_log_active = 0; busy_phase = 0;
+        port_touched_hardware = fa18_write_log_hardware;
+        m68k_get_context(context_reference);
+        port_count = log_count; port_custom_count = custom_count;
+        port_writes = malloc(sizeof *port_writes * (port_count + 1));
+        port_new = malloc(port_count + 1);
+        port_custom = malloc(sizeof *port_custom * (port_custom_count + 1));
+        if (!port_writes || !port_new || !port_custom) {
+            fputs("shadow: cannot allocate port result\n", stderr); abort();
+        }
+        memcpy(port_writes, log_entries, sizeof *port_writes * port_count);
+        for (k = 0; k < port_count; ++k) port_new[k] = *byte_at(port_writes[k].address);
+        memcpy(port_custom, custom_log, sizeof *port_custom * port_custom_count);
+        restore_shadow_ram(shadow_live_ram);
+        m68k_set_context(live_cpu); SET_CYCLES(live_cycles);
+        memcpy(log_entries, live_writes, sizeof *live_writes * live_count);
+        memcpy(custom_log, live_custom, sizeof *live_custom * live_custom_count);
+        log_count = live_count; custom_count = live_custom_count;
+        free(live_writes); free(live_custom); free(live_cpu);
+        s->busy_input_calls++; s->busy_input_reads += busy_count;
+        if (busy_cursor != busy_count) {
+            report_mismatch(port, "unconsumed busy inputs", 0, (uint32_t)busy_count, (uint32_t)busy_cursor);
+            mismatch = 1;
+        }
+        if (port_touched_hardware) {
+            /* Source was repeatable: a new unsupported native read is a
+             * mismatch, rather than a reason to discard this comparison. */
+            report_mismatch(port, "extra hardware input", 0, 0, 1);
+            mismatch = 1;
+        }
     }
     live_sp = REG_A[7];
     s->compared++;
@@ -690,12 +812,13 @@ long fa18_ports_report(const char *path) {
             fprintf(out,
                     "  {\"entry\": \"%06X\", \"name\": \"%s\", \"calls\": %llu, \"compared\": %llu, "
                     "\"matched\": %llu, \"mismatched\": %llu, \"hardware\": %llu, \"incomplete\": %llu, "
-                    "\"mean_cycles\": %llu}%s\n",
+                    "\"mean_cycles\": %llu, \"busy_input_calls\": %llu, \"busy_input_reads\": %llu}%s\n",
                     fa18_ports[i].entry, fa18_ports[i].name, (unsigned long long)s->calls,
                     (unsigned long long)s->compared, (unsigned long long)s->matched,
                     (unsigned long long)s->mismatched, (unsigned long long)s->hardware,
                     (unsigned long long)s->incomplete,
                     (unsigned long long)(s->compared ? s->reference_cycles / s->compared : 0),
+                    (unsigned long long)s->busy_input_calls, (unsigned long long)s->busy_input_reads,
                     i + 1 < fa18_port_count ? "," : "");
     }
     if (out) {

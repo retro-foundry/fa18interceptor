@@ -3,9 +3,14 @@
 
 /* Glue entry points, one per recreated routine, named by original address. */
 
-/* active_planes.c; stepped bridge is inactive pending the complete proof gate */
+/* active_planes.c and source-timed audio bridges */
 int glue_C2FD8C(void);
 int glue_C2FD8C_step(void);
+int glue_C50158_step(void);
+int glue_C501E0_step(void);
+int glue_C50212_step(void);
+int glue_C4FFB4_step(void);
+int glue_C24FE8_step(void);
 
 /* render_polygon.c */
 int glue_C30466(void);

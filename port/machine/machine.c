@@ -17,6 +17,7 @@ void fa18_write_log_before(uint32_t address, int size);
  * is used, and the call marked. */
 #define HARDWARE_BLOCKED() (fa18_write_log_active ? (fa18_write_log_hardware = 1, fa18_write_log_active == 1) : 0)
 void fa18_write_log_custom(uint32_t reg, uint16_t value);
+uint16_t fa18_shadow_dmaconr(uint16_t value);
 #define CUSTOM_LOGGED(reg, v)     (fa18_write_log_active ? (fa18_write_log_custom((reg), (v)), fa18_write_log_active == 1) : 0)
 /* Taking an interrupt reads its autovector ($64-$7C). */
 #define VECTOR_READ(a) do { if (fa18_write_log_active == 2 && (a) >= 0x60 && (a) < 0x80) fa18_write_log_hardware = 1; } while (0)
@@ -289,8 +290,8 @@ uint16_t fa18_custom_read(FA18Machine *m, uint32_t reg) {
     reg &= 0x1FE;
     switch (reg) {
     case 0x002:
-        return (uint16_t)((m->dmacon & 0x07FF) | (blit_zero ? 0x2000 : 0) |
-                          (blit_pending && fa18_bus_now() < blit_end ? 0x4000 : 0));
+        return fa18_shadow_dmaconr((uint16_t)((m->dmacon & 0x07FF) | (blit_zero ? 0x2000 : 0) |
+                          (blit_pending && fa18_bus_now() < blit_end ? 0x4000 : 0)));
     case 0x004:
         fa18_machine_beam(&v, &h);
         return (uint16_t)(0x8000 | ((v >> 8) & 1));

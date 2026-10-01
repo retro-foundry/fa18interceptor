@@ -1,4 +1,4 @@
-/* One-instruction oracle for the temporary $C2FD8C timing bridge. The
+/* One-instruction oracle for plane and audio timing bridges. The
  * authoritative instruction bytes come from the sealed state; Musashi
  * evaluates them independently. Recorded full-call/live checks complement
  * this structural proof, whose chipset writes are held and DMA waits off. */
@@ -47,6 +47,8 @@ static void fixture(uint32_t pc, unsigned scenario) {
     m68k_set_reg(M68K_REG_SR, 0x2700u | (scenario & 31u));
     REG_A[0] = 0xDFF000u;
     REG_A[2] = 0xC61000u;
+    REG_A[1] = 0xC61200u;
+    REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
     wr_u32(REG_A[7], 0xC70000u);
@@ -56,6 +58,7 @@ static void fixture(uint32_t pc, unsigned scenario) {
     wr_u16(0xC45984u, boundaries[scenario % 8]);
     wr_u8(0xC4589Bu, (uint8_t)scenario);
     wr_u8(0xC45785u, (uint8_t)(scenario >> 1));
+    wr_u16(0xC4FF26u, boundaries[(scenario + 3) % 8]);
     REG_PC = pc;
     fa18_cycle_origin = 100000000;
     fa18_next_event = INT64_MAX;
@@ -74,6 +77,13 @@ int main(int argc, char **argv) {
     unsigned cases = argc > 1 ? (unsigned)strtoul(argv[1], NULL, 10) : 64;
     unsigned instructions = 0, matched = 0, scenario;
     uint32_t pc;
+    int audio = argc > 2 && !strcmp(argv[2], "audio");
+    unsigned span;
+    const uint32_t spans[3][2] = {
+        {audio ? 0xC4FFB4u : 0xC2FD8Cu, audio ? 0xC4FFCAu : 0xC2FF46u},
+        {0xC50158u, 0xC5027Cu},
+        {0xC24FE6u, 0xC2502Eu}
+    };
     char error[256], disassembly[128];
     if (!state || !rom || !m || !before || !reference || !cpu || !cases) {
         fprintf(stderr, "plane step oracle: missing inputs or allocation\n"); return 1;
@@ -84,10 +94,11 @@ int main(int argc, char **argv) {
     free(state); free(rom);
     fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF, NULL);
     fa18_bus_timing = 0;
-    for (pc = 0xC2FD8Cu; pc < 0xC2FF46u;) {
+    for (span = 0; span < (audio ? 3u : 1u); ++span) {
+    for (pc = spans[span][0]; pc < spans[span][1];) {
         unsigned length = m68k_disassemble(disassembly, pc, M68K_CPU_TYPE_68000);
         uint16_t opcode = fa18_bus_read16(pc);
-        if (!length || pc + length > 0xC2FF46u) {
+        if (!length || pc + length > spans[span][1]) {
             fprintf(stderr, "plane step oracle: invalid source instruction at %06X\n", pc); return 1;
         }
         ++instructions;
@@ -106,7 +117,10 @@ int main(int argc, char **argv) {
             memcpy(reference + FA18_CHIP_SIZE, m->slow, FA18_SLOW_SIZE);
             memcpy(m, before, sizeof *m); m68k_set_context(cpu); SET_CYCLES(100000000);
             fa18_bus_reset();
-            if (!glue_C2FD8C_step() || REG_PC != want_pc ||
+            int handled = audio ? (pc < 0xC4FFB4u ? glue_C24FE8_step() : pc < 0xC50158u ? glue_C4FFB4_step() :
+                pc < 0xC501E0u ? glue_C50158_step() : pc < 0xC50212u ?
+                glue_C501E0_step() : glue_C50212_step()) : glue_C2FD8C_step();
+            if (!handled || REG_PC != want_pc ||
                 m68k_get_reg(NULL, M68K_REG_SR) != want_sr || GET_CYCLES() != want_cycles) {
                 fprintf(stderr, "plane step oracle: %06X case %u PC/SR/cycles source %06X/%04X/%d C %06X/%04X/%d\n",
                         pc, scenario, want_pc, want_sr, want_cycles,
@@ -124,7 +138,8 @@ int main(int argc, char **argv) {
         }
         pc += length;
     }
-    printf("plane step oracle: %u instructions, %u cases matched registers, SR, PC, cycles and RAM\n",
-           instructions, matched);
+    }
+    printf("%s step oracle: %u instructions, %u cases matched registers, SR, PC, cycles and RAM\n",
+           audio ? "audio" : "plane", instructions, matched);
     free(cpu); free(reference); free(before); free(m); return 0;
 }

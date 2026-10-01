@@ -3,6 +3,10 @@
 Updated 2026-10-01. Source: `$C2FD8C-$C2FF44`, the original 119-instruction
 plane submission routine, and the three sealed native recordings.
 
+This report records the first timing implementation and its then-failing
+shadow gate. The entry is now registered: the input mismatch is resolved and
+all gates pass, as documented in `native_c_busy_inputs_and_audio_timing.md`.
+
 ## Implementation
 
 `port/game/active_planes.c` retains the readable game operation.

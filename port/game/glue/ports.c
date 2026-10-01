@@ -20,8 +20,8 @@ const FA18Port fa18_ports[] = {
     /* fixed_math.c */
     {0xC2E6DA, glue_C2E6DA, "sin_cos", 120},
     /* audio.c */
-    {0xC501E0, glue_C501E0, "set_voice_output", 110},
-    {0xC24FE8, glue_C24FE8, "fade_master_volume", 60},
+    {0xC501E0, glue_C501E0, "set_voice_output", 0, 0, glue_C501E0_step, 0xC50212},
+    {0xC24FE8, glue_C24FE8, "fade_master_volume", 0, 0, glue_C24FE8_step, 0xC2502E, 0, 0xC24FE6},
     /* text.c */
     {0xC330FE, glue_C330FE, "plot_glyph8", 300},
     {0xC32806, glue_C32806, "plot_glyph3", 300},
@@ -89,11 +89,11 @@ const FA18Port fa18_ports[] = {
     {0xC1D722, glue_C1D722, "fill_column", 280},
     {0xC30F56, glue_C30F56, "start_blit", 90},
     /* audio.c, view.c, control_records.c */
-    {0xC4FFB4, glue_C4FFB4, "clear_voice_interrupt", 60},
+    {0xC4FFB4, glue_C4FFB4, "clear_voice_interrupt", 0, 0, glue_C4FFB4_step, 0xC4FFCA},
     {0xC08324, glue_C08324, "set_zoom_maximum", 60},
     {0xC095C0, glue_C095C0, "reset_player_record", 220},
     {0xC1C7F6, glue_C1C7F6, "classify_record_rate", 120},
-    {0xC50212, glue_C50212, "step_voice_program", 200},
+    {0xC50212, glue_C50212, "step_voice_program", 0, 0, glue_C50212_step, 0xC5027C},
     {0xC4FFB0, glue_C4FFB0, "clear_voice_interrupt", 70},
     {0xC13B5A, glue_C13B5A, "update_record_5a", 120},
     {0xC14876, glue_C14876, "ease_record_26", 100},
@@ -243,7 +243,7 @@ const FA18Port fa18_ports[] = {
     {0xC1FC42, glue_C1FC42, "component_beyond_bound", 250},
     {0xC1BA86, glue_C1BA86, "queue_view_key", 500},
     /* batch 30: audio interrupt, date line */
-    {0xC50158, glue_C50158, "update_voices", 3000},
+    {0xC50158, glue_C50158, "update_voices", 0, 0, glue_C50158_step, 0xC501E0},
     {0xC24E2C, glue_C24E2C, "format_date_line", 1500},
     /* batch 31: condition flags, lost selection */
     {0xC09A78, glue_C09A78, "update_condition_a", 900},
@@ -539,6 +539,7 @@ const FA18Port fa18_ports[] = {
     {0xC2FA22, glue_C2FA22, "apply_planar_lane_masks", 128, 0xC2F764},
     /* selected clipped segment sibling */
     {0xC1FFA4, glue_C1FFA4, "draw_selected_segment_near", 5500},
+    {0xC2FD8C, glue_C2FD8C, "submit_active_planes", 0, 0, glue_C2FD8C_step, 0xC2FF46, 1},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

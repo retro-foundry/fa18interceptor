@@ -36,6 +36,8 @@ typedef struct {
     uint32_t tail_from;   /* optional source address of a verified tail JMP */
     FA18PortStep step;    /* optional resumable bridge, with exact bus/cycle timing */
     uint32_t step_end;    /* exclusive end of its contiguous source instruction range */
+    int shadow_busy_reads; /* proof: replay source DMACONR inputs after held blit writes */
+    uint32_t step_start;   /* optional shared source prefix before entry */
 } FA18Port;
 
 extern const FA18Port fa18_ports[];

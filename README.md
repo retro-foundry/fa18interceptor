@@ -12,7 +12,7 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-413 game entries are registered. Three sealed native recordings cover the
+414 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
 See [STATUS.md](STATUS.md) for the numbers,

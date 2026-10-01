@@ -254,14 +254,15 @@ void fa18_machine_instruction_hook(unsigned int pc) {
     const FA18RecompEntry *e;
     (void)pc;
     for (;;) {
-        int before, r;
+        int r;
+        int64_t before;
         fa18_bus_finish(REG_PC);
         fa18_bus_instruction();
         if (fa18_machine_service()) break;
         fa18_bus_instruction();
-        before = GET_CYCLES();
+        before = fa18_cycle_origin - GET_CYCLES();
         if (fa18_ports_resume_step()) {
-            fa18_recomp_stats.generated_cycles += (uint64_t)(before - GET_CYCLES());
+            fa18_recomp_stats.generated_cycles += (uint64_t)(fa18_cycle_origin - GET_CYCLES() - before);
             continue;
         }
         if (vbeam_shim_enabled && fa18_os_vbeam_step()) continue;
@@ -272,13 +273,15 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         if (exec_get_msg_shim_enabled && fa18_os_exec_get_msg_step()) continue;
         if (potgo_shim_enabled && fa18_os_potgo_step()) continue;
         if (!enabled_flag || (e = lookup(REG_PC)) == NULL) break;
-        before = GET_CYCLES();
+        before = fa18_cycle_origin - GET_CYCLES();
         fa18_recomp_abort = 0;
         fa18_recomp_stats.dispatches++;
         depth = 1;
         r = fa18_ports_enter((int)e->function, (int)e->label, 0);
         depth = 0;
-        fa18_recomp_stats.generated_cycles += (uint64_t)(before - GET_CYCLES());
+        /* A shadow call can end the frame inside resume(), discarding the
+         * unused execute budget. Measure elapsed timeline time, not budget. */
+        fa18_recomp_stats.generated_cycles += (uint64_t)(fa18_cycle_origin - GET_CYCLES() - before);
         /* EXIT_INTERP at a due chipset event resumes after servicing. */
         if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) break;
     }

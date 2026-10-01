@@ -57,7 +57,7 @@ is proven against.
 | A | Whole-program translation, interpreter fallback | done (624 routines) |
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Machine and frame parity with Engine9000 | historical emulator comparisons documented; current acceptance uses the sealed native recordings |
-| D | Readable C, proven in related batches | 413 registered routines; see CURRENT_PORT_HANDOFF.md for the latest full gate |
+| D | Readable C, proven in related batches | 414 registered routines; see CURRENT_PORT_HANDOFF.md for the latest full gate |
 | F | Native backend: plain C memory, direct drawing and audio | not started |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
 
@@ -103,6 +103,14 @@ When every caller of a routine is C, its glue is no longer reached; delete it.
   so a shadow run ends byte-identical to a plain run. Calls with an
   interrupt or hardware access inside, or cut by a frame end, are not
   compared.
+  A stepped bridge can opt into source-first DMACONR input replay when held
+  BLTSIZE writes make the usual port-first input state differ. The source's
+  ordered PC/value read stream supplies hardware inputs only; C still computes
+  its own registers and writes on entry RAM. An extra/reordered read fails
+  immediately, and missing reads fail comparison. The live source result is
+  retained. Reports expose `busy_input_calls` and `busy_input_reads`.
+  Full ON RGB/RAM parity and instruction/event traces independently establish
+  live timing; this shadow input replay is not a timing proof.
 - **Sandbox** (`--ports sandbox`). The older comparison: the generated
   routine first with events held off and its custom writes performed at its
   end, then the glue. It covers the calls shadow cannot (audio, joystick)
