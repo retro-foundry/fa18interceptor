@@ -12,6 +12,7 @@ typedef struct PostflightVariantWork {
     int16_t submit_x, submit_y;
     uint16_t record_word;
     uint16_t records_seen;
+    uint8_t record_flags_before_select;
     int has_vector;
 } PostflightVariantWork;
 
@@ -19,6 +20,8 @@ typedef struct PostflightVariantHooks {
     void (*after_head)(void *context);
     /* Also called after the $C31392 gate returns false, with zeroed work. */
     void (*after_prefix)(const PostflightVariantWork *work, void *context);
+    /* Called at $C3149C or $C31714, before classification changes the record. */
+    void (*after_select)(const PostflightVariantWork *work, int selected, void *context);
     void *context;
 } PostflightVariantHooks;
 

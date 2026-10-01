@@ -259,8 +259,21 @@ part that is not, stays on the work side.
    each variant (demo 209 each, carrier 194 each, crashes 93 each): zero
    differences. The cadence-byte `ADDQ.B` sets X when it wraps, including
    one observed crash call. The temporary bridge and generated probe were
-   removed. Record selection, submission, status, and scan register replay
-   remain before either parent can be registered.
+   removed. The later tail phases still need register replay before either
+   parent can be registered.
+   The next register helper now covers `$C3141E-$C3149B` selection and the
+   `$C31410` vector reload on each loop. `after_select` runs while the chosen
+   record's pre-clear bit 6 is still available in `PostflightVariantWork`.
+   A temporary generated-label probe at `$C3149C`/`$C31714` checked the first
+   3,000 frames of each native recording: 36 demo, 89 carrier, and 148 crash
+   handoffs. Carrier and crash had zero register/SR differences at those
+   handoffs. In demo, 18 second-vector handoffs differed only in D7, A3, and
+   A4, which the earlier record submission changes and the bridge has not
+   replayed yet; all other registers and SR matched. Three carrier and eight
+   crash C handoffs had no generated-label comparison before the run ended.
+   The temporary bridge, generated probes, and registration were removed.
+   Next replay `$C3149C-$C31721` per record, then `$C31722-$C318F4`, before
+   registering either parent. The two parents are still absent from `ports.c`.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon

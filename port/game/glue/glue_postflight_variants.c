@@ -129,3 +129,114 @@ void postflight_tail_prefix_registers(const PostflightVariantWork *work) {
     D(3) = D(0) | D(1) | D(2);
     flags_logic_l(D(3));
 }
+
+static void postflight_compare_long(uint32_t source, uint32_t dest) {
+    uint32_t result = dest - source;
+    FLAG_N = NFLAG_32(result);
+    FLAG_Z = result;
+    FLAG_V = VFLAG_SUB_32(source, dest, result);
+    FLAG_C = CFLAG_SUB_32(source, dest, result);
+}
+
+static void postflight_compare_word(uint16_t source, uint16_t dest) {
+    uint32_t result = (uint16_t)(dest - source);
+    FLAG_N = NFLAG_16(result);
+    FLAG_Z = result;
+    FLAG_V = VFLAG_SUB_16(source, dest, result);
+    FLAG_C = CFLAG_16((uint32_t)dest - source);
+}
+
+static void postflight_negate_long(int n) {
+    uint32_t before = D(n);
+    D(n) = 0u - before;
+    FLAG_N = NFLAG_32(D(n));
+    FLAG_Z = D(n);
+    FLAG_V = before == 0x80000000u ? VFLAG_SET : VFLAG_CLEAR;
+    FLAG_C = before ? CFLAG_SET : CFLAG_CLEAR;
+    FLAG_X = before ? XFLAG_SET : XFLAG_CLEAR;
+}
+
+/* ASR.L D4,Dn and the source's BCC / ADDQ.L #1 rounding pair. */
+static void postflight_shift_round(int n) {
+    uint32_t before = D(n);
+    uint32_t carry = (before >> 12) & 1u;
+    D(n) = (uint32_t)((int32_t)before >> 13);
+    flags_logic_l(D(n));
+    FLAG_C = carry ? CFLAG_SET : CFLAG_CLEAR;
+    FLAG_X = carry ? XFLAG_SET : XFLAG_CLEAR;
+    if (carry) {
+        uint32_t old = D(n);
+        D(n)++;
+        FLAG_N = NFLAG_32(D(n));
+        FLAG_Z = D(n);
+        FLAG_V = VFLAG_ADD_32(1u, old, D(n));
+        FLAG_C = CFLAG_ADD_32(1u, old, D(n));
+        FLAG_X = FLAG_C ? XFLAG_SET : XFLAG_CLEAR;
+    }
+}
+
+/* $C3141E-$C3149B, stopping at the $C3149C classify entry or the
+ * $C31714 skip entry. Called immediately after C selection, before later
+ * writes change the selected record or its status fields. */
+void postflight_tail_select_registers(const PostflightVariantWork *work, int selected) {
+    uint16_t offset;
+    uint32_t sum;
+    (void)selected;
+    /* $C31410 reloads each vector after $C31718 advances A0. */
+    A(0) = work->vector_stream;
+    A(2) = work->table;
+    SET_W(D(6), work->records_seen);
+    D(0) = (uint32_t)work->vector[0];
+    D(1) = (uint32_t)work->vector[1];
+    D(2) = (uint32_t)work->vector[2];
+    D(3) = D(0) | D(1) | D(2);
+    flags_logic_l(D(3));
+    D(1) = (uint32_t)work->vector[2];
+    D(2) = (uint32_t)work->vector[1];
+    D(5) = D(0);
+    A(5) = D(1);
+    SET_W(D(4), 13);
+    flags_logic_w(D(4));
+    postflight_shift_round(0);
+    postflight_shift_round(1);
+    SET_W(D(3), work->record_word);
+    flags_logic_w(D(3));
+    FLAG_Z = (D(3) & 0x10u) ? 1 : 0;
+    if (!(D(3) & 0x10u)) return;
+
+    SET_W(D(4), D(3));
+    flags_logic_w(D(4));
+    SET_W(D(4), D(4) & 0xFF00u);
+    flags_logic_w(D(4));
+    sum = (uint16_t)D(4) * 2u;
+    SET_W(D(4), sum);
+    FLAG_N = NFLAG_16(D(4));
+    FLAG_Z = (uint16_t)D(4);
+    FLAG_V = VFLAG_ADD_16((uint16_t)(sum >> 1), (uint16_t)(sum >> 1), (uint16_t)sum);
+    FLAG_C = sum > 0xFFFFu ? CFLAG_SET : CFLAG_CLEAR;
+    FLAG_X = FLAG_C ? XFLAG_SET : XFLAG_CLEAR;
+    offset = (uint16_t)D(4);
+    A(1) = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)offset;
+    postflight_compare_word(rd_u16(VIEW_RECORD), offset);
+    if (offset == rd_u16(VIEW_RECORD)) goto reject;
+    FLAG_Z = (rd_u8(A(1) + 1) & 0x40u) ? 1 : 0;
+    if (!(rd_u8(A(1) + 1) & 0x40u)) goto reject;
+    FLAG_Z = (rd_u8(A(1) + 3) & 0x80u) ? 1 : 0;
+    if (rd_u8(A(1) + 3) & 0x80u) goto reject;
+
+    postflight_negate_long(0);
+    postflight_compare_long(0x1Bu, D(0));
+    if ((int32_t)D(0) > 0x1B) goto bounds_reject;
+    postflight_compare_long((uint32_t)-0x1B, D(0));
+    if ((int32_t)D(0) < -0x1B) goto bounds_reject;
+    postflight_negate_long(1);
+    postflight_compare_long(0x16u, D(1));
+    if ((int32_t)D(1) >= 0x16) goto bounds_reject;
+    postflight_compare_long((uint32_t)-0x10, D(1));
+    if ((int32_t)D(1) >= -0x10) return;
+
+bounds_reject:
+    FLAG_Z = 1; /* BTST #4,D3 at $C3148A: bit 4 is set here. */
+reject:
+    FLAG_Z = (work->record_flags_before_select & 0x40u) ? 1 : 0;
+}

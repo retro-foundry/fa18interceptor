@@ -105,6 +105,7 @@ int select_postflight_variant_record(PostflightVariantWork *work) {
     offset = (uint16_t)((work->record_word & 0xFF00u) << 1);
     work->record = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)offset;
     flags = rd_u8(work->record);
+    work->record_flags_before_select = flags;
     if (offset == rd_u16(VIEW_RECORD) || !(rd_u8(work->record + 1) & 0x40u) ||
         (rd_u8(work->record + 3) & 0x80u)) goto reject;
 
@@ -223,15 +224,23 @@ void advance_postflight_variant_record(PostflightVariantWork *work, int marked) 
     work->has_vector = (work->vector[0] | work->vector[1] | work->vector[2]) != 0;
 }
 
-void process_postflight_variant_records(PostflightVariantWork *work) {
+static void process_postflight_variant_records_with_hooks(
+    PostflightVariantWork *work, const PostflightVariantHooks *hooks) {
     while (work->has_vector) {
         int marked = 0;
-        if (select_postflight_variant_record(work)) {
+        int selected = select_postflight_variant_record(work);
+        if (hooks && hooks->after_select)
+            hooks->after_select(work, selected, hooks->context);
+        if (selected) {
             classify_postflight_variant_record(work);
             marked = submit_postflight_variant_record(work);
         }
         advance_postflight_variant_record(work, marked);
     }
+}
+
+void process_postflight_variant_records(PostflightVariantWork *work) {
+    process_postflight_variant_records_with_hooks(work, 0);
 }
 
 static void add_postflight_event(uint32_t bits) {
@@ -333,7 +342,7 @@ static void run_postflight_variant_tail(const PostflightVariantHooks *hooks) {
     int active = begin_postflight_variant_tail(&work);
     if (hooks && hooks->after_prefix) hooks->after_prefix(&work, hooks->context);
     if (!active) return;
-    process_postflight_variant_records(&work);
+    process_postflight_variant_records_with_hooks(&work, hooks);
     resolve_postflight_variant_status(&work);
     scan_postflight_variant_records();
 }
