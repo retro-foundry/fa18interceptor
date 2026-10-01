@@ -62,7 +62,8 @@ passed with 726,979 shadow matches and 925,873 sandbox matches; poison frames
 were identical. The 10-frame parity check and a separate ON-mode run with
 `$C31226`/`$C3129A`/`$C31312` enabled were both pixel-exact. The combined
 call count is lower than the previous gate because calls inside this parent
-are no longer counted separately.
+are no longer counted separately. The MSVC Release build passed; its focused
+demo01 shadow probe matched 138 completed dispatcher calls with no mismatch.
 
 `$C3129A`/`$C31312` postflight tuple and fixed-point variants
 (`postflight_variants.c`, `glue_postflight_variants.c`) are registered. Their
