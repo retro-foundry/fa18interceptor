@@ -46,9 +46,11 @@ across child dispatch, chipset service, interrupts and frame ends. The three
 registry entries no longer use fixed cycle charges.
 
 The postflight instruction-oracle group matches registers, SR, PC, cycles and
-RAM for 14,080 fixtures. The combined bridge oracle matches 1,056 instructions
-and 33,792 fixtures. Fresh isolated OFF/ON recordings match every RGB444 frame
+RAM for 14,080 fixtures. With the subsequent C305AA polygon-edge bridge, the
+combined bridge oracle matches 1,163 instructions and 37,216 fixtures. Fresh
+isolated OFF/ON recordings match every RGB444 frame
 across demo01, qual_carrier_success and qual_fail_crashes. The complete
 three-recording gate matched 721,752 shadow calls and 1,169,610 sandbox calls
 with zero mismatches, sealed RAM intact and identical poison frames. This
-resolves the C31226 timing blocker; the next isolated difference is C305AA.
+resolves the C31226 timing blocker. C305AA has since received its own complete
+source-timed bridge and exact isolated live proof.

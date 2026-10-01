@@ -21,10 +21,10 @@ The user explicitly deferred OS work and asked for larger routine batches.
   counted child calls, so the aggregate call totals need not rise monotonically.
   build/recomp/ports_report_*.json describe this 414-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
-  21 registered glyph, input, page, notification, command/audio, buffer,
+  22 registered glyph, input, page, notification, command/audio, buffer,
   polygon and postflight entries now use source-timed steps. Both isolated
   timing batches match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle matches 1,056 instructions and 33,792 cases. See
+  combined instruction oracle matches 1,163 instructions and 37,216 cases. See
   analysis/routines/native_c_registered_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
@@ -47,14 +47,16 @@ The user explicitly deferred OS work and asked for larger routine batches.
   and corrected the old C's near-endpoint exit: $C2B1E4/$C2B1FE abandon the
   directory walk, not just one segment. See
   analysis/routines/c2b05a_record_region_probe.md.
-- The registered all-native path is not yet frame-faithful. The complete
-  C31224-C318F4 postflight timing bridge fixes the former C31226 blocker and
-  restores exact isolated output for C31226/C3129A/C31312 across all three
-  sealed recordings. A fresh 500-frame all-registered demo replay now first
-  differs at one-based frame 419 with 29,453 pixels. C305AA
-  (`draw_polygon_edge`) alone first differs at frame 414 with 361 pixels and is
-  the next measured fixed-charge blocker. Shadow/sandbox matches do not
-  establish live ON fidelity for the whole registered set.
+- The registered all-native path is not yet frame-faithful. Complete
+  source-timed bridges now give exact isolated output for the
+  C31226/C3129A/C31312 postflight group and C305AA polygon edge across all three
+  sealed recordings. A fresh 500-frame all-registered demo replay still first
+  differs at one-based frame 419 with 29,453 pixels. Individual timing probes
+  show distributed fixed-charge debt: C0FA04 first differs at frame 401 by 361
+  pixels, C0D752 at frame 416 by 361 pixels, and C0D74A at frame 484 by 17
+  pixels; C2DEE0, C2DB18 and C2D99C are exact through 500 in isolation.
+  Shadow/sandbox matches do not establish live ON fidelity for the whole
+  registered set.
 - Plane shadow now replays the live source's ordered DMACONR inputs on saved
   entry RAM. It independently checks native outputs and write sequences, and
   fails extra/reordered/missing reads. All five former counter failures now
@@ -104,8 +106,9 @@ resumable execution boundaries.
    observations above. The register bridge refactor is already complete.
    FA18Port now supports an optional one-instruction step and source range;
    its dispatcher retains caller PC/SP across children, interrupts and frames.
-   Active planes, the audio group, the 18-entry registered timing batch, and
-   the three postflight entries now have exact isolated live proof. Shared glue helpers live in
+   Active planes, the audio group, the 18-entry registered timing batch, the
+   three postflight entries and the C305AA polygon edge now have exact isolated
+   live proof. Shared glue helpers live in
    glue_step.h. The fading bridge uses step_start=C24FE6 for an existing shared
    early RTS, without adding a registry entry. Extend the mechanism to the
    inactive map/region stages.
@@ -120,10 +123,14 @@ resumable execution boundaries.
    Recheck the map pair and region
    probe as a related timing batch; keep their gameplay and
    register logic source-backed. A new fixed average charge has already failed.
-2. Continue the registered timing audit at C305AA. It alone now differs at
-   demo frame 414 by 361 pixels after C31226 became exact; the complete
-   registered set first differs at frame 419 by 29,453 pixels. Preserve its
-   polygon-edge child order and source instruction/event boundaries. Keep
+2. Continue the registered timing audit at C0FA04, the earliest isolated
+   fixed-charge difference currently measured (demo frame 401, 361 pixels).
+   C305AA is now source-timed and exact in isolation. Use
+   `python scripts/probe_recomp_timing.py ENTRY... --frames 500` to rank entries;
+   it creates one source stream, overwrites one candidate stream per probe and
+   removes both on exit. Test entries individually because timing interactions
+   make recursive subset bisection non-monotonic. The complete registered set
+   still first differs at frame 419 by 29,453 pixels. Keep
    porting independent game-source groups while timing work proceeds.
    python tools/recomp/port_candidates.py -n 40 currently lists C279D0
    (renderer packet; typed groundwork in port/projection_grid.c and reports
@@ -168,6 +175,10 @@ resumable execution boundaries.
   oracle because source-first hardware-input replay can alter its timing.
 - Increase the registered count and update this file only after every gate
   passes. Commit a coherent source batch with its evidence.
+- Rank registered fixed-charge timing debt with
+  `python scripts/probe_recomp_timing.py ENTRY... --frames 500`. Each positional
+  argument is one entry or a comma-separated group. The bounded probe reuses a
+  single source stream and removes its scratch streams by default.
 - The headless Ninja graph tracks source and header dependencies and shares
   objects with structural oracles and mutation builds. An unchanged build is
   subsecond. Do not manually touch generated C after a header change.

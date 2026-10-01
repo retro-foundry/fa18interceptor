@@ -17,7 +17,7 @@ const FA18Port fa18_ports[] = {
     /* render_polygon.c */
     {0xC30466, glue_C30466, "composite_polygon_plane", 0, 0, glue_C30466_step, 0xC304FA},
     {0xC304B2, glue_C304B2, "clear_polygon_mask", 0, 0, glue_C304B2_step, 0xC304FA},
-    {0xC305AA, glue_C305AA, "draw_polygon_edge", 400},
+    {0xC305AA, glue_C305AA, "draw_polygon_edge", 0, 0, glue_C305AA_step, 0xC306B4},
     /* render_line.c */
     {0xC2FA7E, glue_C2FA7E, "draw_line", 700},
     /* fixed_math.c */

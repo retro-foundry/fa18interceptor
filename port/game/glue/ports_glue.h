@@ -27,6 +27,7 @@ int glue_C30466_step(void);
 int glue_C304B2(void);
 int glue_C304B2_step(void);
 int glue_C305AA(void);
+int glue_C305AA_step(void);
 
 /* render_line.c */
 int glue_C2FA7E(void);

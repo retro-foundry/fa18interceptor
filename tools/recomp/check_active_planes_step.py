@@ -30,7 +30,7 @@ def main():
         "notify": ["C11B44"],
         "command": ["C17B08", "C17B2C", "C17EF2", "C3316A", "C3316E", "C33180", "C3318E", "C33186"],
         "buffers": ["C2FD22"],
-        "polygon": ["C30466", "C304B2"],
+        "polygon": ["C30466", "C304B2", "C305AA"],
         "postflight": ["C31226"],
     }
     entries = (entry for name in group_names for entry in groups[name]) \

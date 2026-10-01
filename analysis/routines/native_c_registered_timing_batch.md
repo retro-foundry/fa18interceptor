@@ -36,7 +36,8 @@ python tools/recomp/check_active_planes_step.py --group all
 ```
 
 With 32 fixtures per instruction, all currently stepped plane, audio and this
-batch's bridges match 616 original instructions over 19,712 cases. Every case
+batch's bridges, plus the subsequent postflight and polygon-edge bridges, match
+1,163 original instructions over 37,216 cases. Every case
 compares all registers, full SR, PC, instruction cycles and RAM. The 32 cases
 cover every CCR value and the arithmetic/shift boundary fixture set. The new
 batch contributes 391 instructions and 12,512 cases. Separate group runs also
@@ -48,8 +49,8 @@ busy-input bridge copies are rejected.
 `scripts/recomp_ports_check.sh` passes all three sealed recordings:
 
 - 414 registered routines;
-- 721,715 completed shadow comparisons;
-- 1,169,611 sandbox comparisons;
+- 721,752 completed shadow comparisons;
+- 1,169,610 sandbox comparisons;
 - zero mismatches and sealed final RAM for every recording;
 - identical demo poison frames.
 
@@ -83,14 +84,16 @@ is the source oracle: a SHADOW stream can differ from plain source timing when
 stepped shadow input replay is active even though all call comparisons and
 poison checks pass.
 
-## Remaining registered timing blocker
+## Remaining registered timing debt
 
 The complete all-registered ON path is not yet frame-faithful. A current
-500-frame demo replay first differs at one-based frame 416. `C31226`
-(`dispatch_postflight_renderer`) alone has the same first frame and the same
-361 differing pixels, establishing it as the next blocker. OFF ends the sealed
-carrier-success replay at 12,353 frames; all-registered ON currently takes
-31,346 frames. This does not weaken the isolated proof above.
+500-frame demo replay first differs at one-based frame 419 by 29,453 pixels.
+The source-timed postflight group and C305AA polygon edge are exact in isolation.
+Individual fixed-charge probes now find C0FA04 at frame 401, C0D752 at frame 416
+and C0D74A at frame 484, while C2DEE0, C2DB18 and C2D99C remain exact through
+500. These independent failures show that timing debt is distributed and that
+subset bisection is not monotonic. `scripts/probe_recomp_timing.py` ranks entries
+against one reused source stream and cleans its bounded scratch streams.
 
 ## Workflow cost and disk use
 
