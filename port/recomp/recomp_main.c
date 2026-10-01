@@ -51,6 +51,7 @@ static void usage(void) {
             "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n"
             "                   [--rom-transitions OUT.json] (RAM-to-ROM entry inventory)\n"
             "                   [--no-os-vbeam] (use the ROM VBeamPos)\n"
+            "                   [--no-os-waitblit] (use ROM graphics.library WaitBlit)\n"
             "                   [--no-os-exec-interrupts] (use ROM Exec Disable/Enable)\n"
             "                   [--no-os-getmsg] (use ROM Exec GetMsg)\n"
             "                   [--no-os-potgo] (use ROM potgo.resource WritePotgo)\n"
@@ -165,6 +166,7 @@ int main(int argc, char **argv) {
     const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL, *edges_path = NULL;
     const char *rom_transitions_path = NULL;
     int os_vbeam = -1; /* default C with recomp, ROM in interpreter-only mode */
+    int os_waitblit = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_exec_interrupts = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_getmsg = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_potgo = -1; /* default C with recomp, ROM in interpreter-only mode */
@@ -203,6 +205,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--rom-transitions") && i + 1 < argc) rom_transitions_path = argv[++i];
         else if (!strcmp(argv[i], "--os-vbeam")) os_vbeam = 1;
         else if (!strcmp(argv[i], "--no-os-vbeam")) os_vbeam = 0;
+        else if (!strcmp(argv[i], "--os-waitblit")) os_waitblit = 1;
+        else if (!strcmp(argv[i], "--no-os-waitblit")) os_waitblit = 0;
         else if (!strcmp(argv[i], "--os-exec-interrupts")) os_exec_interrupts = 1;
         else if (!strcmp(argv[i], "--no-os-exec-interrupts")) os_exec_interrupts = 0;
         else if (!strcmp(argv[i], "--os-getmsg")) os_getmsg = 1;
@@ -226,11 +230,13 @@ int main(int argc, char **argv) {
         return 1;
     }
     if (os_vbeam < 0) os_vbeam = use_recomp;
+    if (os_waitblit < 0) os_waitblit = use_recomp;
     if (os_exec_interrupts < 0) os_exec_interrupts = use_recomp;
     if (os_getmsg < 0) os_getmsg = use_recomp;
     if (os_potgo < 0) os_potgo = use_recomp;
     fa18_recomp_init(use_recomp);
     if (os_vbeam) fa18_recomp_enable_vbeam_shim();
+    if (os_waitblit) fa18_recomp_enable_wait_blit_shim();
     if (os_exec_interrupts) fa18_recomp_enable_exec_interrupt_shim();
     if (os_getmsg) fa18_recomp_enable_exec_get_msg_shim();
     if (os_potgo) fa18_recomp_enable_potgo_shim();

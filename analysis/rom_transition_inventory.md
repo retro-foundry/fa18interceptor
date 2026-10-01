@@ -39,6 +39,7 @@ Most frequent pairs across all three:
 | `$C001F8` | `$FC1436` | 40,560 | Exec `Enable()`; see below |
 | `$C00102` | `$FC1BEA` | 37,669 | Exec `GetMsg(port)` `-$174(A6)`; C bridge, see below |
 | `$C023B8` | `$FE44F2` | 36,236 | potgo.resource `WritePotgo(word,mask)`; see below |
+| `$C02812` | `$FC5A58` | 21,331 | graphics.library `WaitBlit()`; C bridge, see below |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
 is an **internal graphics.library callback**, not a game-originated OS call.
@@ -86,6 +87,12 @@ and `Enable` around that update. The 36,236 crossings are therefore an
 internal ROM-to-resource call, one per observed native frame. This leaf now
 runs through a C bridge in translated mode; its pinned instructions and full
 native proof are in [the WritePotgo report](routines/fe44f2_potgo_write.md).
+
+`$C02812` is the graphics.library `-$E4(A6)` vector, named `WaitBlit()` by
+the local Kickstart 1.3 `LVO.OFFS`. Its pinned ROM target polls the blitter
+busy bit in DMACONR. It now runs through a C bridge in translated mode; the
+source and complete native comparison are in
+[the WaitBlit report](routines/fc5a58_wait_blit.md).
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The
