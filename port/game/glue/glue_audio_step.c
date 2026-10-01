@@ -17,6 +17,8 @@ static int voice_instruction(void) {
     unsigned i, count;
     opcode = step_begin(pc);
     switch (pc) {
+    case 0xC4FFB0:
+        D(0) = m68k_read_memory_32(step_displacement(A(7))); flags_logic_l(D(0)); break;
     /* $C24FE8: fade by the source quarter-unit step, with shared early RTS. */
     case 0xC24FE6: case 0xC25020: m68ki_jump(m68ki_pull_32()); break;
     case 0xC24FE8: flags_logic_b(m68k_read_memory_8(m68ki_read_imm_32())); break;
@@ -148,4 +150,5 @@ int glue_C50158_step(void) { return REG_PC >= 0xC50158 && REG_PC < 0xC501E0 ? vo
 int glue_C501E0_step(void) { return REG_PC >= 0xC501E0 && REG_PC < 0xC50212 ? voice_instruction() : 0; }
 int glue_C50212_step(void) { return REG_PC >= 0xC50212 && REG_PC < 0xC5027C ? voice_instruction() : 0; }
 int glue_C4FFB4_step(void) { return REG_PC >= 0xC4FFB4 && REG_PC < 0xC4FFCA ? voice_instruction() : 0; }
+int glue_C4FFB0_step(void) { return REG_PC >= 0xC4FFB0 && REG_PC < 0xC4FFCA ? voice_instruction() : 0; }
 int glue_C24FE8_step(void) { return REG_PC >= 0xC24FE6 && REG_PC < 0xC2502E ? voice_instruction() : 0; }

@@ -145,7 +145,7 @@ When every caller of a routine is C, its glue is no longer reached; delete it.
 | Check | Command | Must hold |
 | --- | --- | --- |
 | Recreated routines | `sh scripts/recomp_ports_check.sh` | 0 mismatches; poison frames identical |
-| Live frame parity | `--ports on --rgb444` versus native `--ports shadow --rgb444` on affected sealed recordings | RGB444 frames identical; final RAM and blit totals alone are insufficient |
+| Live frame parity | `sh scripts/recomp_live_check.sh` (`PORTS_ONLY=LIST` for an isolated batch) | `--ports on` RGB444 frames identical to fresh `--ports off` source streams on every affected sealed recording; final RAM and blit totals alone are insufficient |
 | Translation vs interpreter | `fa18_recomp ... --ram-out A` vs `--no-recomp --ram-out B` | identical |
 | Machine vs emulator, first steps | `scripts/recomp_lockstep.py` | first divergence understood |
 | Blitter | `build/recomp/blit_replay.exe CHIP WRITES OUT` | identical Chip RAM |

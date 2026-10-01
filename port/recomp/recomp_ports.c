@@ -218,6 +218,29 @@ static int entered_by_call(void) {
     return (op & 0xFF00) == 0x6100 || (op & 0xFFC0) == 0x4E80;
 }
 
+/* A step can dispatch a child after the runtime has serviced a deadline, at
+ * which point REG_PPC no longer necessarily names the source call.  Accept
+ * the return address saved by that call only when it resumes an active
+ * stepped source range and the bytes immediately before it are a BSR/JSR. */
+static int entered_from_stepped_call(void) {
+    uint32_t ret;
+    uint16_t op;
+    size_t i;
+    if (!stepped_count) return 0;
+    ret = fa18_bus_read32(REG_A[7]) & 0xFFFFFFu;
+    for (i = stepped_count; i > 0; --i) {
+        const FA18Port *parent = &fa18_ports[stepped_calls[i - 1].port];
+        if (ret < stepped_start(parent) || ret >= parent->step_end) continue;
+        op = fa18_bus_read16(ret - 2);
+        if ((op & 0xFF00u) == 0x6100u && (op & 0xFFu)) return 1;
+        op = fa18_bus_read16(ret - 4);
+        if (op == 0x6100u || (op & 0xFFC0u) == 0x4E80u) return 1;
+        op = fa18_bus_read16(ret - 6);
+        if ((op & 0xFFC0u) == 0x4E80u) return 1;
+    }
+    return 0;
+}
+
 /* A proof runs a stepped bridge with events held off, exactly like its
  * generated reference. Child calls use their existing dispatch contracts.
  * No stepped-call continuation is retained in a sandbox. */
@@ -777,6 +800,7 @@ int fa18_recomp_write_edges(const char *path) {
 int fa18_ports_enter(int function, int label, int via_call) {
     int port;
     int tail_call;
+    int call_entry = via_call || entered_by_call() || entered_from_stepped_call();
     if (REG_PC == fa18_recomp_functions[function].entry) {
         profile[function]++;
         if (REG_PC == FA18_LOOP_UPDATE_ENTRY) {
@@ -785,14 +809,14 @@ int fa18_ports_enter(int function, int label, int via_call) {
             if (fa18_recomp_stop_pc == REG_PC && fa18_recomp_stop_sp == REG_A[7]) fa18_recomp_stop_pc = 0;
             else fa18_loop_iteration();
         }
-        if (via_call || entered_by_call()) note_edge(function);
+        if (call_entry) note_edge(function);
     }
     port = port_of_function[function];
     tail_call = port >= 0 && fa18_ports[port].tail_from != 0 &&
                 REG_PPC == fa18_ports[port].tail_from &&
                 fa18_bus_read16(REG_PPC) == 0x4ED4; /* JMP (A4) */
     if (port < 0 || mode == FA18_PORTS_OFF || fa18_write_log_active || REG_PC != fa18_ports[port].entry ||
-        (!via_call && !entered_by_call() && !tail_call))
+        (!call_entry && !tail_call))
         return fa18_recomp_functions[function].fn(label);
     stats[port].calls++;
     if (mode == FA18_PORTS_SHADOW) return run_shadow(function, label, port);

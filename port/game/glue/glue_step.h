@@ -67,10 +67,104 @@ static inline void step_subtract_long(uint32_t *reg, uint32_t value) {
     *reg = result;
     step_compare_long(value, old); FLAG_X = FLAG_C;
 }
+static inline void step_subtract_word(uint32_t *reg, uint16_t value) {
+    uint16_t old = (uint16_t)*reg;
+    SET_W(*reg, (uint32_t)old - value);
+    step_compare_word(value, old); FLAG_X = FLAG_C;
+}
+static inline void step_compare_byte(uint8_t source, uint8_t destination) {
+    uint32_t result = (uint32_t)destination - source;
+    FLAG_N = NFLAG_8(result); FLAG_Z = result & 0xFFu;
+    FLAG_V = VFLAG_SUB_8(source, destination, result); FLAG_C = CFLAG_8(result);
+}
+static inline void step_subtract_byte(uint32_t *reg, uint8_t value) {
+    uint8_t old = (uint8_t)*reg;
+    SET_B(*reg, (uint32_t)old - value);
+    step_compare_byte(value, old); FLAG_X = FLAG_C;
+}
+static inline void step_swap(uint32_t *reg) {
+    *reg = (*reg << 16) | (*reg >> 16); flags_logic_l(*reg);
+}
+static inline void step_save_registers(void) {
+    uint16_t mask = m68ki_read_imm_16();
+    unsigned i, count = 0;
+    for (i = 0; i < 16; ++i) if (mask & (1u << i)) {
+        step_predecrement_long(REG_DA[15 - i]); ++count;
+    }
+    USE_CYCLES(count << CYC_MOVEM_L);
+}
+static inline void step_restore_registers(void) {
+    uint16_t mask = m68ki_read_imm_16();
+    uint32_t address = A(7);
+    unsigned i, count = 0;
+    for (i = 0; i < 16; ++i) if (mask & (1u << i)) {
+        REG_DA[i] = m68k_read_memory_32(address); address += 4; ++count;
+    }
+    A(7) = address; USE_CYCLES(count << CYC_MOVEM_L);
+}
+static inline void step_dbf(uint32_t pc, uint32_t *reg) {
+    SET_W(*reg, *reg - 1);
+    if ((uint16_t)*reg != 0xFFFFu) {
+        int16_t displacement = (int16_t)m68ki_read_imm_16();
+        REG_PC = pc + 2 + displacement; USE_CYCLES(CYC_DBCC_F_NOEXP);
+    } else {
+        /* The source skips the extension fetch on the exhausted path. */
+        REG_PC += 2; USE_CYCLES(CYC_DBCC_F_EXP);
+    }
+}
+static inline void step_lsr_long(uint32_t *reg, unsigned count) {
+    uint32_t old = *reg, result;
+    count &= 63;
+    result = count < 32 ? old >> count : 0;
+    flags_logic_l(result);
+    if (count) FLAG_X = FLAG_C = count <= 32 ? ((old >> (count - 1)) & 1u) << 8 : 0;
+    *reg = result; USE_CYCLES(count << CYC_SHIFT);
+}
+static inline uint16_t step_lsr_word_value(uint16_t old, unsigned count) {
+    uint16_t result;
+    count &= 63;
+    result = count < 16 ? (uint16_t)(old >> count) : 0;
+    flags_logic_w(result); FLAG_C = 0;
+    if (count) FLAG_X = FLAG_C = count <= 16 ? ((old >> (count - 1)) & 1u) << 8 : 0;
+    USE_CYCLES(count << CYC_SHIFT);
+    return result;
+}
+static inline void step_asl_long(uint32_t *reg, unsigned count) {
+    uint32_t old = *reg, result, mask;
+    count &= 63;
+    result = count < 32 ? old << count : 0;
+    flags_logic_l(result);
+    FLAG_C = 0; FLAG_V = 0;
+    if (count) {
+        FLAG_X = FLAG_C = count <= 32 ? ((old >> (32 - count)) & 1u) << 8 : 0;
+        if (count < 32) {
+            mask = 0xFFFFFFFFu << (31 - count);
+            old &= mask; FLAG_V = (old != 0 && old != mask) << 7;
+        } else if (count == 32) {
+            FLAG_V = (old != 0 && old != 0xFFFFFFFFu) << 7;
+        } else FLAG_V = (old != 0) << 7;
+    }
+    *reg = result; USE_CYCLES(count << CYC_SHIFT);
+}
+static inline void step_asr_long(uint32_t *reg, unsigned count) {
+    uint32_t old = *reg, result;
+    count &= 63;
+    if (!count) result = old;
+    else if (count < 32) result = (uint32_t)((int32_t)old >> count);
+    else result = (uint32_t)((int32_t)old >> 31);
+    flags_logic_l(result); FLAG_C = 0; FLAG_V = 0;
+    if (count) FLAG_X = FLAG_C = count <= 32 ? ((old >> (count - 1)) & 1u) << 8 : (old >> 31) << 8;
+    *reg = result; USE_CYCLES(count << CYC_SHIFT);
+}
 static inline void step_branch(uint32_t pc, uint16_t opcode, int take) {
     int displacement = (int8_t)opcode;
-    if (!(opcode & 0xFFu)) displacement = (int16_t)m68ki_read_imm_16();
-    if (take) REG_PC = pc + 2 + displacement;
-    else USE_CYCLES((opcode & 0xFFu) ? CYC_BCC_NOTAKE_B : CYC_BCC_NOTAKE_W);
+    if (take) {
+        if (!(opcode & 0xFFu)) displacement = (int16_t)m68ki_read_imm_16();
+        REG_PC = pc + 2 + displacement;
+    } else {
+        /* The 68000 word Bcc not-taken path skips the extension read. */
+        if (!(opcode & 0xFFu)) REG_PC += 2;
+        USE_CYCLES((opcode & 0xFFu) ? CYC_BCC_NOTAKE_B : CYC_BCC_NOTAKE_W);
+    }
 }
 #endif

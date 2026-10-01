@@ -29,6 +29,10 @@ cmake --build build/recomp-cmake --config Release
 sh scripts/build_recomp.sh            # headless gcc build: build/recomp/fa18_recomp.exe
 ```
 
+The headless build uses Ninja to cache each source file and its header
+dependencies. Structural oracles share those objects, so routine bridge edits
+normally require one compile and one link.
+
 Open the native demo start state (click the window to capture the mouse, F12
 releases it):
 

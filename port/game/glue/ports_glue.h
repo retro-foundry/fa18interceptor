@@ -10,11 +10,19 @@ int glue_C50158_step(void);
 int glue_C501E0_step(void);
 int glue_C50212_step(void);
 int glue_C4FFB4_step(void);
+int glue_C4FFB0_step(void);
 int glue_C24FE8_step(void);
+int glue_C330FE_step(void);
+int glue_C32806_step(void);
+int glue_C1715C_step(void);
+int glue_C2F558_step(void);
+int glue_C11B44_step(void);
 
 /* render_polygon.c */
 int glue_C30466(void);
+int glue_C30466_step(void);
 int glue_C304B2(void);
+int glue_C304B2_step(void);
 int glue_C305AA(void);
 
 /* render_line.c */
@@ -90,6 +98,7 @@ int glue_C13CDE(void);
 int glue_C13396(void);
 int glue_C50AB4(void);
 int glue_C17B08(void);
+int glue_C17B08_step(void);
 int glue_C2548A(void);
 int glue_C0840E(void);
 int glue_C258C8(void);
@@ -150,6 +159,7 @@ int glue_C13A8E(void);
 
 /* batch 18: joystick */
 int glue_C16F1C(void);
+int glue_C16F1C_step(void);
 
 /* batch 19: rotation matrices and row scaling */
 int glue_C2E47A(void);
@@ -170,6 +180,7 @@ int glue_C06132(void);
 
 /* batch 20: play_sound */
 int glue_C17B2C(void);
+int glue_C17B2C_step(void);
 
 /* batch 21: side-plane clips, view transform */
 int glue_C2EA5A(void);
@@ -189,6 +200,7 @@ int glue_C17CF6(void);
 int glue_C17DAA(void);
 int glue_C17E4A(void);
 int glue_C17EF2(void);
+int glue_C17EF2_step(void);
 int glue_C18096(void);
 int glue_C2D954(void);
 
@@ -204,14 +216,19 @@ int glue_C265E8(void);
 int glue_C17C62(void);
 int glue_C17D6E(void);
 int glue_C3316A(void);
+int glue_C3316A_step(void);
 int glue_C219AE(void);
 int glue_C2FD22(void);
+int glue_C2FD22_step(void);
 int glue_C3040C(void);
 int glue_C1EBE0(void);
 int glue_C25876(void);
 
 /* batch 26: tones, page plane tops */
 int glue_C33180(void);
+int glue_C33180_step(void);
+int glue_C3318E_step(void);
+int glue_C33186_step(void);
 int glue_C3318E(void);
 int glue_C33186(void);
 int glue_C2F582(void);
@@ -478,6 +495,7 @@ int glue_C13176(void);
 int glue_C12098(void);
 int glue_C1B27E(void);
 int glue_C3316E(void);
+int glue_C3316E_step(void);
 int glue_C244E2(void);
 int glue_C1342C(void);
 int glue_C2DD4E(void);

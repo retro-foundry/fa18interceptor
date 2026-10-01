@@ -19,12 +19,13 @@ The user explicitly deferred OS work and asked for larger routine batches.
   calls and 1,169,611 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 414-entry baseline. The latest
-  log is build/recomp/audio_planes_final_gate_414.log. GNU and MSVC builds pass.
-  Active planes is now registered, and five existing audio entries now use
-  source-timed steps. Their combined isolated ON replay matches all 36,236
-  frames and sealed RAM across three recordings. See
-  analysis/routines/native_c_busy_inputs_and_audio_timing.md.
+  build/recomp/ports_report_*.json describe this 414-entry baseline. GNU and
+  MSVC builds pass. In addition to active planes and the earlier audio batch,
+  18 registered glyph, input, page, notification, command/audio, buffer and
+  polygon entries now use source-timed steps. Their isolated ON replay matches
+  fresh source OFF output on all 36,236 frames. The combined instruction oracle
+  matches 616 instructions and 19,712 cases. See
+  analysis/routines/native_c_registered_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -46,11 +47,12 @@ The user explicitly deferred OS work and asked for larger routine batches.
   and corrected the old C's near-endpoint exit: $C2B1E4/$C2B1FE abandon the
   directory walk, not just one segment. See
   analysis/routines/c2b05a_record_region_probe.md.
-- The registered all-native path is not frame-faithful: the latest 414-entry
-  demo ON run first differs at one-based frame 255. Earlier isolated C501E0
-  and C24FE8 failures are fixed in the source-timed audio batch. New bisection
-  identifies C330FE (`plot_glyph8`) failing alone at frame 260; evidence is
-  build/recomp/audio_planes_final_baseline_bisection_400.json. Shadow/sandbox
+- The registered all-native path is not frame-faithful. The glyph/input/page/
+  notification/command/buffer/polygon timing batch fixes the former C330FE
+  blocker. A current 500-frame demo replay now first differs at one-based frame
+  416; C31226 (`dispatch_postflight_renderer`) alone produces the same frame
+  and 361 differing pixels. The sealed carrier-success endpoint is 12,353
+  source frames versus 31,346 with all registered ports ON. Shadow/sandbox
   matches do not establish live ON fidelity for the whole registered set.
 - Plane shadow now replays the live source's ordered DMACONR inputs on saved
   entry RAM. It independently checks native outputs and write sequences, and
@@ -101,27 +103,28 @@ resumable execution boundaries.
    observations above. The register bridge refactor is already complete.
    FA18Port now supports an optional one-instruction step and source range;
    its dispatcher retains caller PC/SP across children, interrupts and frames.
-   Active planes is the first implementation, with exact live proof above.
-   Its shadow input mismatch is resolved and it is registered. Extend the
-   mechanism to map/region stages. The five-entry audio timing batch is also
-   complete; shared glue helpers now live in glue_step.h. The fading bridge
-   uses step_start=C24FE6 for an existing shared early RTS, without adding
-   a registry entry.
+   Active planes, the audio group, and the 18-entry registered timing batch
+   now have exact isolated live proof. Shared glue helpers live in
+   glue_step.h. The fading bridge uses step_start=C24FE6 for an existing shared
+   early RTS, without adding a registry entry. Extend the mechanism to the
+   inactive map/region stages.
    In the source,
    instruction boundaries can service Copper, blitter, and interrupts inside
    these routines. In the current bridge, run_glue in
    port/recomp/recomp_ports.c charges a single fixed value after the whole C
    call for ordinary ports. Measure source event/cycle boundaries and make the C path advance
-   through equivalent observable boundaries. The stepped plane/audio bridges
+   through equivalent observable boundaries. The registered stepped bridges
    have resumable C continuations today; the map and region observation hooks
    still need explicit source-backed checkpoints.
    Recheck the map pair and region
    probe as a related timing batch; keep their gameplay and
    register logic source-backed. A new fixed average charge has already failed.
-2. Audit the registered ON baseline's early timing failures alongside the
-   inactive batch: C330FE alone now fails at frame 260. Inspect the related
-   glyph/number group, source bus/write order and callers; do not change its
-   fixed charge by guessing. Keep porting independent
+2. Continue the registered timing audit at C31226. It alone reproduces the
+   all-registered first difference at demo frame 416 (361 pixels). Preserve
+   its postflight renderer child order and instruction/event boundaries; a
+   partial bridge that exits into an external generated tail is not a valid
+   sandboxed replacement. C305AA was observed as a later fixed-charge blocker,
+   but must be rechecked only after C31226 is exact. Keep porting independent
    game-source groups while timing work proceeds.
    python tools/recomp/port_candidates.py -n 40 currently lists C279D0
    (renderer packet; typed groundwork in port/projection_grid.c and reports
@@ -156,28 +159,19 @@ resumable execution boundaries.
   over all three native recordings. It checks shadow, sandbox, sealed final
   RAM, and poison frames. Inspect per-entry calls, incomplete calls, and every
   mismatch. QUICK=1 is only a first-recording probe.
-- Compare live --ports on RGB444 frame output with the native shadow RGB444
-  output for each affected recording, not just final RAM, frame count, or
-  blit totals. The full gate writes build/recomp/frames_shadow_NAME.bin.
-  --ports-only ADDRESS applies only to registered entries. An inactive entry
-  needs temporary registration for a probe and must be removed if live output
-  differs. Demo01 is 20,833 frames and its RGB stream is about 3.4 GB.
-
-  For demo01, after the full gate (run from the repository root in Git Bash):
-
-  ```sh
-  ./build/recomp/fa18_recomp.exe --state captures/native/demo01/state.bin \
-    --input captures/native/demo01/input.fa18in --to-end \
-    --rom local/system/kick13.rom --ports on \
-    --rgb444 build/recomp/frames_on_demo01.bin
-  cmp build/recomp/frames_shadow_demo01.bin build/recomp/frames_on_demo01.bin
-  ```
-
-  Repeat with each affected native recording and require exact equality.
+- Compare live `--ports on` RGB444 output with fresh `--ports off` source
+  output for every affected recording, not just final RAM, frame count or blit
+  totals. Set `PORTS_ONLY` to the comma-separated registered batch and run
+  `& 'C:\Program Files\Git\bin\bash.exe' scripts/recomp_live_check.sh`.
+  The recordings run concurrently and temporary streams are removed. An
+  inactive entry needs temporary registration for a probe and must be removed
+  if live output differs. A stepped SHADOW stream is not the live source
+  oracle because source-first hardware-input replay can alter its timing.
 - Increase the registered count and update this file only after every gate
   passes. Commit a coherent source batch with its evidence.
-- scripts/build_recomp.sh does not track generated-code header dependencies.
-  After changing recomp_runtime.h, touch affected generated C before rebuilding.
+- The headless Ninja graph tracks source and header dependencies and shares
+  objects with structural oracles and mutation builds. An unchanged build is
+  subsecond. Do not manually touch generated C after a header change.
 
 ## References and constraints
 

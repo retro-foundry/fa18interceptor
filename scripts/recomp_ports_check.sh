@@ -17,7 +17,10 @@ EXE=./build/recomp/fa18_recomp.exe
 ROM=local/system/kick13.rom
 OUT=build/recomp
 POISON="$OUT/frames_poison.bin"
-trap 'rm -f "$POISON"' EXIT HUP INT TERM
+cleanup_frames() {
+  rm -f "$POISON" "$OUT"/frames_shadow_*.bin
+}
+trap cleanup_frames EXIT HUP INT TERM
 
 # One line per recording: name, then the runner's input arguments.
 RUNS=""
@@ -33,12 +36,16 @@ if [ -z "$RUNS" ]; then
 fi
 [ -n "${QUICK:-}" ] && RUNS=$(printf '%s\n' "$RUNS" | head -1)
 rm -f "$OUT"/ports_report_*.json
+FIRST=$(printf '%s\n' "$RUNS" | head -1)
+FIRST_RUN=${FIRST%%|*}
 
-FIRST=""
-printf '%s\n' "$RUNS" | while IFS='|' read -r run args; do
-  [ -n "$run" ] || continue
+run_one() {
+  run=$1
+  args=$2
+  rgb_args=""
+  [ "$run" = "$FIRST_RUN" ] && rgb_args="--rgb444 $OUT/frames_shadow_$run.bin"
   $EXE $args --rom $ROM --ports shadow --ports-report "$OUT/ports_report_$run.json" \
-    --rgb444 "$OUT/frames_shadow_$run.bin" --ram-out "$OUT/ram_shadow_$run.bin" >/dev/null
+    $rgb_args --ram-out "$OUT/ram_shadow_$run.bin" >/dev/null
   $EXE $args --rom $ROM --ports sandbox --ports-report "$OUT/ports_report_sandbox_$run.json" >/dev/null
   if [ -f "captures/native/$run/run.json" ]; then
     python -c "
@@ -48,9 +55,25 @@ got = hashlib.sha256(open('$OUT/ram_shadow_$run.bin', 'rb').read()).hexdigest()
 if got != want: sys.exit('$run: the shadow run does not end as sealed (machine or translation changed?)')
 "
   fi
-done
+}
 
-FIRST=$(printf '%s\n' "$RUNS" | head -1)
+# Recordings are independent and write disjoint outputs. Run them on separate
+# cores; QUICK still launches only its single selected recording.
+run_all() {
+  pids=""
+  while IFS='|' read -r run args; do
+    [ -n "$run" ] || continue
+    run_one "$run" "$args" &
+    pids="$pids $!"
+  done
+  status=0
+  for pid in $pids; do
+    if ! wait "$pid"; then status=1; fi
+  done
+  return "$status"
+}
+printf '%s\n' "$RUNS" | run_all
+
 run=${FIRST%%|*}; args=${FIRST#*|}
 $EXE $args --rom $ROM --ports shadow --poison --rgb444 "$POISON" >/dev/null 2>&1
 cmp -s "$OUT/frames_shadow_$run.bin" "$POISON" || {

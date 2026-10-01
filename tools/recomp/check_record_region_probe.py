@@ -1,6 +1,6 @@
 """Build and run the original-instruction oracle for the region probe.
 
-Uses the headless build's source list and cached generated objects. Reads the
+Uses the headless build's source list and shared cached objects. Reads the
 sealed demo start state without modifying it. Run from any working directory:
     python tools/recomp/check_record_region_probe.py [--cases 512]
 """
@@ -19,17 +19,11 @@ def default_bash():
 
 def build_oracle(name, source, bash):
     """Reuse exactly the headless runner's current translation and C sources."""
-    build = (ROOT / "scripts/build_recomp.sh").read_text()
-    replacements = {
-        'cd "$(dirname "$0")/.."': "",
-        "-o build/recomp/fa18_recomp.exe": f"-o build/recomp/{name}.exe",
-        "port/recomp/recomp_main.c": source,
-    }
-    for old, new in replacements.items():
-        if build.count(old) != 1:
-            raise SystemExit(f"oracle build: expected one occurrence of {old!r} in build_recomp.sh")
-        build = build.replace(old, new)
-    subprocess.run([bash, "-c", build], cwd=ROOT, check=True)
+    del bash  # Retained as a command-line compatibility option.
+    subprocess.run([
+        "python", "scripts/build_recomp.py", "--output", f"build/recomp/{name}.exe",
+        "--main", source,
+    ], cwd=ROOT, check=True)
     return ROOT / f"build/recomp/{name}.exe"
 
 

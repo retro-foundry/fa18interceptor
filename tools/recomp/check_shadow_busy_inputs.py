@@ -29,20 +29,10 @@ def main():
             raise SystemExit(f"{name}: expected one mutation site")
         stem = f"build/recomp/busy_input_{name}"
         (ROOT / f"{stem}.c").write_text(source.replace(old, new))
-        build = (ROOT / "scripts/build_recomp.sh").read_text()
-        replacements = {
-            'cd "$(dirname "$0")/.."': "",
-            "-o build/recomp/fa18_recomp.exe": f"-o {stem}.exe",
-            "port/game/glue/*.c":
-                '$(for src in port/game/glue/*.c; do case "$src" in '
-                '*glue_active_planes_step.c) ;; *) printf "%s " "$src";; esac; done) '
-                + f"{stem}.c",
-        }
-        for before, after in replacements.items():
-            if build.count(before) != 1:
-                raise SystemExit(f"{name}: headless build source list changed")
-            build = build.replace(before, after)
-        subprocess.run([args.bash, "-c", build], cwd=ROOT, check=True)
+        subprocess.run([
+            "python", "scripts/build_recomp.py", "--output", f"{stem}.exe",
+            "--replace-source", f"port/game/glue/glue_active_planes_step.c={stem}.c",
+        ], cwd=ROOT, check=True)
         result = subprocess.run([
             str(ROOT / f"{stem}.exe"), "--state", "captures/native/demo01/state.bin",
             "--input", "captures/native/demo01/input.fa18in", "--rom", "local/system/kick13.rom",

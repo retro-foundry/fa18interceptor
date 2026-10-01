@@ -105,12 +105,11 @@ remain those in `native_c_stepped_plane_bridge.md`. Final reports and live
 verification are under `build/recomp/audio_planes_final_*`; comparisons run
 after the reference gate finishes writing its streams.
 
-The combined all-414-entry 400-frame ON path still differs at frame 255.
-Exact live equivalence for this timing batch does not prove every other
-registered port. Bisection now isolates C330FE (`plot_glyph8`), failing alone
-at frame 260. Evidence is `audio_planes_final_baseline_bisection_400.json`
-and its per-probe RGB/log files under `build/recomp/`. Continue auditing the
-glyph/number group and the inactive map/region
-batch; finish the remaining readable game C before the native backend and
-the deferred OS services. `CURRENT_PORT_HANDOFF.md` records the current full
-gate and live acceptance results.
+The historical all-414-entry 400-frame ON path differed at frame 255, and that
+bisection isolated C330FE (`plot_glyph8`) at frame 260. The subsequent
+18-entry source-timed batch fixes that blocker. Current evidence and the next
+C31226 blocker are in `native_c_registered_timing_batch.md`. Exact live
+equivalence for either isolated batch does not prove every other registered
+port. Continue the inactive map/region batch and remaining readable game C
+before the native backend and deferred OS services. `CURRENT_PORT_HANDOFF.md`
+records the current full gate and live acceptance results.
