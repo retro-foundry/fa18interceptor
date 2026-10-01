@@ -43,6 +43,7 @@ Most frequent pairs across all three:
 | `$C02764` | `$FC5E58` | 16,526 | graphics.library `WaitBOVP(viewport)`; see below |
 | `$C0272E` | `$FC64BC` | 16,012 | graphics.library `OwnBlitter()`; C bridge, see below |
 | `$C02728` | `$FC64D4` | 16,010 | graphics.library `DisownBlitter()`; C bridge, see below |
+| `$C02818` | `$FC63CC` | 15,979 | graphics.library `LoadView(view)`; see below |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
 is an **internal graphics.library callback**, not a game-originated OS call.
@@ -116,6 +117,14 @@ interrupt and DMA registers. These paired services require their branch
 paths and nested calls to be preserved together in a C replacement. Both
 now run through a C bridge in translated mode; the source and native proof
 are in [the blitter ownership report](routines/fc64bc_fc64d4_blitter_ownership.md).
+
+`$C02818` is graphics.library `-$DE(A6)`, named `LoadView(view)(A1)` by the
+local Kickstart 1.3 `LVO.OFFS`. Its pinned ROM entry `$FC63CC` saves A1 and
+calls the substantive helper at `$FCD564`; the observed return site is game
+code at `$C53F40`. That helper waits on raster state, updates display
+registers and library view pointers, and takes further ROM calls. Replacing
+only the short vector wrapper would leave the actual `LoadView` work in ROM;
+port the wrapper and helper as one service.
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

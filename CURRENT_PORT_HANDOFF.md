@@ -428,6 +428,12 @@ part that is not, stays on the work side.
    routines, 726,979 shadow matches, 925,873 sandbox matches, zero
    mismatches, and identical poison frames. The run075 frame-392 parity
    check remained 10/10 exact.
+   The next direct graphics service is `$C02818 -> $FC63CC`,
+   `LoadView(view)` at `-$DE(A6)`, seen 15,979 times across the three native
+   recordings. Its observed return site is `$C53F40`. The vector's four
+   instructions call `$FCD564`, where the display waits and state writes
+   happen. Port the wrapper and that helper together; the transition
+   inventory records the vector and ROM evidence.
    Exec `Disable()` `$FC1428` and `Enable()` `$FC1436` are now also source-backed
    C leaves (`port/os/exec.c` and its instruction bridge). The pinned ROM
    supplies the exact sequence and the Kickstart 1.3 vector table identifies
