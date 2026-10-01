@@ -22,6 +22,8 @@ typedef struct PostflightVariantHooks {
     void (*after_prefix)(const PostflightVariantWork *work, void *context);
     /* Called at $C3149C or $C31714, before classification changes the record. */
     void (*after_select)(const PostflightVariantWork *work, int selected, void *context);
+    /* Called after classification and before $C315C0's second normalization. */
+    void (*before_submit)(const PostflightVariantWork *work, void *context);
     void *context;
 } PostflightVariantHooks;
 

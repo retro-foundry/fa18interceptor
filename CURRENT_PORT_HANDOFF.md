@@ -281,7 +281,15 @@ part that is not, stays on the work side.
    mode `SUBQ.B`, negative-value `NEG.L`, and countdown `SUBQ.B` all affect X;
    the helper replays them in their source order. Temporary probes and
    registration were removed.
-   Next replay `$C315C0-$C31721` per record, then `$C31722-$C318F4`, before
+   The `$C315C0-$C31611` second normalization now also has a register helper
+   and `before_submit` hook. A temporary probe at `$C31612` or the `$C31714`
+   skip edge checked 35 demo, 89 carrier, and 148 crash handoffs in the first
+   3,000 frames of each recording. All carrier and crash handoffs matched;
+   17 demo second-vector handoffs still differed only in the unreplayed
+   D7/A3/A4 from the previous submission. One demo, three carrier, and eight
+   crash C handoffs lacked a generated-label comparison. Temporary probes
+   and registration were removed.
+   Next replay `$C31612-$C31721` per record, then `$C31722-$C318F4`, before
    registering either parent. The two parents are still absent from `ports.c`.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four

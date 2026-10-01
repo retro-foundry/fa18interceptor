@@ -233,6 +233,8 @@ static void process_postflight_variant_records_with_hooks(
             hooks->after_select(work, selected, hooks->context);
         if (selected) {
             classify_postflight_variant_record(work);
+            if (hooks && hooks->before_submit)
+                hooks->before_submit(work, hooks->context);
             marked = submit_postflight_variant_record(work);
         }
         advance_postflight_variant_record(work, marked);

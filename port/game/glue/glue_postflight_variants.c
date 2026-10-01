@@ -157,13 +157,13 @@ static void postflight_negate_long(int n) {
 }
 
 /* ASR.L D4,Dn and the source's BCC / ADDQ.L #1 rounding pair. */
-static void postflight_shift_round(int n) {
+static void postflight_shift_round_by(int n, unsigned shift) {
     uint32_t before = D(n);
-    uint32_t carry = (before >> 12) & 1u;
-    D(n) = (uint32_t)((int32_t)before >> 13);
+    uint32_t carry = shift ? (before >> (shift - 1)) & 1u : 0u;
+    D(n) = (uint32_t)((int32_t)before >> shift);
     flags_logic_l(D(n));
     FLAG_C = carry ? CFLAG_SET : CFLAG_CLEAR;
-    FLAG_X = carry ? XFLAG_SET : XFLAG_CLEAR;
+    if (shift) FLAG_X = carry ? XFLAG_SET : XFLAG_CLEAR;
     if (carry) {
         uint32_t old = D(n);
         D(n)++;
@@ -197,8 +197,8 @@ void postflight_tail_select_registers(const PostflightVariantWork *work, int sel
     A(5) = D(1);
     SET_W(D(4), 13);
     flags_logic_w(D(4));
-    postflight_shift_round(0);
-    postflight_shift_round(1);
+    postflight_shift_round_by(0, 13);
+    postflight_shift_round_by(1, 13);
     SET_W(D(3), work->record_word);
     flags_logic_w(D(3));
     FLAG_Z = (D(3) & 0x10u) ? 1 : 0;
@@ -271,4 +271,29 @@ void postflight_tail_classify_registers(const PostflightVariantWork *work) {
     D(0) = D(5);
     D(1) = A(5);
     flags_logic_l(D(1));
+}
+
+/* $C315C0-$C31611. The viewed record supplies the low-nibble ASR count.
+ * Stops at $C31612 on success, or just before $C31714 on the reject edge. */
+int postflight_tail_normalize_registers(void) {
+    gaddr viewed = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+    unsigned shift = rd_u8(viewed + 0x63) & 15u;
+    SET_B(D(4), rd_u8(viewed + 0x63));
+    flags_logic_b(D(4));
+    SET_B(D(4), D(4) & 15u);
+    flags_logic_b(D(4));
+    SET_W(D(4), (uint16_t)(int16_t)(int8_t)D(4));
+    flags_logic_w(D(4));
+    postflight_shift_round_by(0, shift);
+    postflight_shift_round_by(1, shift);
+    postflight_negate_long(0);
+    postflight_compare_long(0x1Bu, D(0));
+    if ((int32_t)D(0) > 0x1B) return 0;
+    postflight_compare_long((uint32_t)-0x1B, D(0));
+    if ((int32_t)D(0) < -0x1B) return 0;
+    postflight_negate_long(1);
+    postflight_compare_long(0x16u, D(1));
+    if ((int32_t)D(1) >= 0x16) return 0;
+    postflight_compare_long((uint32_t)-0x10, D(1));
+    return (int32_t)D(1) >= -0x10;
 }
