@@ -1,7 +1,8 @@
-/* One-instruction oracle for plane and audio timing bridges. The
+/* One-instruction oracle for registered game timing bridges. The
  * authoritative instruction bytes come from the sealed state; Musashi
  * evaluates them independently. Recorded full-call/live checks complement
- * this structural proof, whose chipset writes are held and DMA waits off. */
+ * this structural proof, whose chipset writes and events are held. Optional
+ * bus fixtures compare instruction access timing under five-plane DMA. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -70,6 +71,31 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if (pc >= 0xC091A8u && pc < 0xC0924Au) {
+        for (i = 0; i < 96; ++i) {
+            wr_u16(REG_A[1] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[2] + i * 2, (uint16_t)next_value());
+        }
+    }
+    if (pc >= 0xC212B0u && pc < 0xC2131Cu) {
+        REG_A[0] = 0xC61000u; REG_A[6] = 0xC62080u;
+        for (i = 0; i < 64; ++i) {
+            wr_u16(REG_A[4] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[6] - 0x80 + i * 2, (uint16_t)next_value());
+        }
+    }
+    if ((pc >= 0xC23CA6u && pc < 0xC24368u) ||
+        (pc >= 0xC24688u && pc < 0xC24DA8u)) {
+        REG_A[0] = 0xC61000u; REG_A[6] = 0xC62080u;
+        for (i = 0; i < 64; ++i) {
+            wr_u16(REG_A[0] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[1] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[2] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[3] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[4] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[6] - 0x80 + i * 2, (uint16_t)next_value());
+        }
+    }
     if (pc >= 0xC279D0u && pc < 0xC27D24u) {
         REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
         REG_A[6] = 0xC62080u;

@@ -210,6 +210,9 @@ int glue_C2D954(void);
 
 /* batch 24: local to world, shown vertices, normalize, slot scan */
 int glue_C091E0(void);
+int glue_C091E0_step(void);
+int glue_C091CE_step(void);
+int glue_C091A8_step(void);
 int glue_C091CE(void);
 int glue_C091A8(void);
 int glue_C0D334(void);
@@ -276,12 +279,17 @@ int glue_C2FF48(void);
 
 /* batch 36: clip stages */
 int glue_C247C0(void);
+int glue_C247C0_step(void);
 int glue_C248B2(void);
+int glue_C248B2_step(void);
 int glue_C24996(void);
+int glue_C24996_step(void);
 
 /* batch 37: outer polygon clipper */
 int glue_C2469E(void);
+int glue_C2469E_step(void);
 int glue_C246A0(void);
+int glue_C246A0_step(void);
 
 /* batch 38: faces and view marks */
 int glue_C09952(void);
@@ -378,6 +386,7 @@ int glue_C25246(void);
 
 /* batch 53: draw-stream commands */
 int glue_C212B0(void);
+int glue_C212B0_step(void);
 int glue_C2129C(void);
 int glue_C211DC(void);
 int glue_C2131C(void);
@@ -515,6 +524,7 @@ int glue_C33370(void);
 
 /* batch 63d: HUD stage */
 int glue_C332BC(void);
+int glue_C332BC_step(void);
 
 /* polygon to row C7 */
 int glue_C301F0(void);
@@ -639,6 +649,7 @@ int glue_C2D408(void);
 int glue_C13D84(void);
 int glue_C26EBE(void);
 int glue_C23CA6(void);
+int glue_C23CA6_step(void);
 int glue_C0D04C(void);
 int glue_C3129A(void);
 int glue_C31312(void);

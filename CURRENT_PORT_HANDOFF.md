@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-01. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit ebbfc3da); ignored gate logs may
+history (the preceding handoff is in commit e50ba7c8); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -11,12 +11,14 @@ Recreate readable C for the whole game, proven against the original source and
 sealed native recordings. Work in related batches. The order is Stage D game C,
 Stage F native backend, then only the Stage E Kickstart services still needed.
 The user explicitly deferred OS work and asked for larger routine batches.
+After the C279D0 batch, the latest instruction is to return to game timing
+parity. That timing investigation is the immediate priority.
 
 ## Verified baseline
 
 - 419 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 703,341 completed shadow
-  calls and 1,129,309 sandbox calls across three native recordings, with zero
+  The latest full gate for that registered set matched 703,364 completed shadow
+  calls and 1,129,295 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
   build/recomp/ports_report_*.json describe this 419-entry baseline. GNU and
@@ -24,7 +26,8 @@ The user explicitly deferred OS work and asked for larger routine batches.
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
   These isolated bridges match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle matches 2,238 instructions and 71,616 cases. See
+  combined instruction oracle now matches 3,332 instructions and 106,624 cases
+  with DMA contention enabled. See
   analysis/routines/native_c_registered_timing_batch.md.
   The new four-entry map/region batch is independently exact across all
   36,236 live frames. Its 735 instructions also match 23,520 fixtures with
@@ -34,6 +37,11 @@ The user explicitly deferred OS work and asked for larger routine batches.
   Readable whole-call C separately matches 3,258 shadow and 1,967 sandbox calls,
   plus 4,096 structural cases including partial writes and edge clamps. See
   analysis/routines/native_c_grid_projection_activation.md.
+  Eleven additional renderer, clipping, record-view and transform entries now
+  use source timing and independently match all 36,236 live frames. Their
+  1,094 instructions pass 35,008 DMA-contention fixtures. The broader DMA
+  oracle also found and removed an extra stack read in C17B08's older timing
+  bridge. See analysis/routines/native_c_renderer_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -59,10 +67,16 @@ The user explicitly deferred OS work and asked for larger routine batches.
   C31226/C3129A/C31312 postflight group and C305AA polygon edge across all three
   sealed recordings. C0FA04 is also source-timed and exact across the three
   recordings. A fresh 500-frame all-registered demo replay now first differs at
-  one-based frame 416 by 361 pixels. Fixed-charge ranking finds several
-  independent early differences after C2005C became source-timed and exact:
-  C212B0, C332BC, C23CA6 and C246A0 at frame 416; C3201A at frame 424; and
-  C26EBE at frame 441.
+  one-based frame 297 by 5,440 pixels. The preceding committed registry was
+  at frame 416 by 361 pixels. C212B0, C332BC, C23CA6 and the C246A0 clipping
+  family now have exact isolated source timing. A registry variant retaining
+  the preceding baseline's other charges exposes frame 297 when only C23CA6
+  is changed to source timing. At the first C2AA9C entry, all CPU registers
+  and SR match but ON is 8,168 cycles late. The update trace locates earlier
+  timing differences across C0F5F8 and C0D730; the remaining cause is not yet
+  resolved. Do not restore approximate charges to hide this combined drift.
+  Earlier fixed-charge ranking also found C3201A at frame 424 and C26EBE at
+  frame 441.
   C0D752 also differs at frame 416 with its original 50,000-cycle charge, while
   C0D74A first differs at frame 484. C2DEE0, C2DB18 and C2D99C are exact
   through 500 in isolation.
@@ -131,7 +145,28 @@ DMA contention so this distinction is covered before expensive full replays.
 
 ## Next work
 
-1. Prioritize additional unregistered game functions in related batches.
+1. Continue game timing parity, as requested after the C279D0 source batch.
+   The eleven-entry renderer/record-view/transform batch is independently
+   exact, but ALL first differs at frame 297. Read
+   analysis/routines/native_c_renderer_timing_batch.md for the bounded
+   300-frame update trace and registry-variant evidence. Trace the indirect
+   C0FECE transition selected by C0F5F8 and fixed-charge entries before
+   C0D730. A narrower trace identifies -29,066 cycles across C17E4A's
+   noise-start call, then -10,208 across C28722 scene initialization. Start
+   with that game sound-start family and its source children; retain actual
+   wait/interrupt boundaries rather than substituting measured fixed fees.
+   The first map-entry CPU state matches source but arrives 8,168
+   cycles late. Use original source boundaries and --bus fixtures; preserve
+   actual child calls, interrupts, DMA waits and frame crossings.
+   C0D74A/C0D752 also share the long C0D758-C0DA9E screen-frame body and should
+   use one bridge. Their measured mean charges previously made each isolated
+   entry exact through 500, but were not retained because a fixed mean does
+   not prove path-dependent timing. Use
+   `python scripts/probe_recomp_timing.py ENTRY... --frames 500`; it reuses
+   one source stream and removes scratch streams. Subset bisection is not
+   monotonic: exact source timing can expose other routines' approximate
+   charges. Require combined evidence before claiming whole-game parity.
+2. Resume additional unregistered game functions in related batches.
    The user explicitly asked for progress in the function count; avoid another
    standalone audit of already registered fixed-charge routines as the main
    batch. C279D0 is complete and activated. Start with C1D10C (648 instructions;
@@ -146,19 +181,6 @@ DMA contention so this distinction is covered before expensive full replays.
    replay. Keep unported children explicit rather than counting partial
    functions or graph tails. The three C0004E/C000B4/C000BA candidates are
    Kickstart trampolines and remain deferred.
-2. Continue the registered timing audit with the frame-416 renderer group:
-   C212B0, C332BC, C23CA6 and C246A0. C2005C is now source-timed and exact in
-   isolation, while the complete registered set remains at frame 416. Group
-   entries where they share child boundaries. C0D74A and
-   C0D752 share the long C0D758-C0DA9E body and should eventually use one timing
-   bridge. Their measured mean source charges make each isolated entry exact
-   through frame 500, but that diagnostic was not retained because a fixed mean
-   does not prove path-dependent or event-boundary timing. Use
-   `python scripts/probe_recomp_timing.py ENTRY... --frames 500` to rank entries;
-   it creates one source stream, overwrites one candidate stream per probe and
-   removes both on exit. Test entries individually because timing interactions
-   make recursive subset bisection non-monotonic. Keep
-   porting independent game-source groups while timing work proceeds.
 3. Once game source is complete, build the native backend from plain C memory,
    drawing, and audio. Reassess which Kickstart services remain; do OS work
    last as requested.

@@ -227,9 +227,9 @@ const FA18Port fa18_ports[] = {
     {0xC18096, glue_C18096, "play_scripted_sound", 700},
     {0xC2D954, glue_C2D954, "set_record_orientation", 2000},
     /* batch 24: local to world, shown vertices, normalize, slot scan */
-    {0xC091E0, glue_C091E0, "local_to_world", 700},
-    {0xC091CE, glue_C091CE, "local_to_world", 720},
-    {0xC091A8, glue_C091A8, "local_to_world", 2600},
+    {0xC091E0, glue_C091E0, "local_to_world", 0, 0, glue_C091E0_step, 0xC0924A, 0, 0xC091A8},
+    {0xC091CE, glue_C091CE, "local_to_world", 0, 0, glue_C091CE_step, 0xC0924A, 0, 0xC091A8},
+    {0xC091A8, glue_C091A8, "local_to_world", 0, 0, glue_C091A8_step, 0xC0924A},
     {0xC0D334, glue_C0D334, "derive_shown_vertices", 2800},
     {0xC25754, glue_C25754, "normalize_vector", 1600},
     {0xC265E8, glue_C265E8, "flagged_slot_in_range", 3500},
@@ -276,12 +276,12 @@ const FA18Port fa18_ports[] = {
     /* batch 35: polygon submission */
     {0xC2FF48, glue_C2FF48, "draw_polygon", 9000},
     /* batch 36: clip stages */
-    {0xC247C0, glue_C247C0, "clip_stage", 900},
-    {0xC248B2, glue_C248B2, "clip_stage", 850},
-    {0xC24996, glue_C24996, "clip_stage", 800},
+    {0xC247C0, glue_C247C0, "clip_stage", 0, 0, glue_C247C0_step, 0xC24DA8, 0, 0xC24688},
+    {0xC248B2, glue_C248B2, "clip_stage", 0, 0, glue_C248B2_step, 0xC24DA8, 0, 0xC24688},
+    {0xC24996, glue_C24996, "clip_stage", 0, 0, glue_C24996_step, 0xC24DA8, 0, 0xC24688},
     /* batch 37: outer polygon clipper */
-    {0xC2469E, glue_C2469E, "clip_and_draw_polygon", 20000},
-    {0xC246A0, glue_C246A0, "clip_and_draw_polygon", 20000},
+    {0xC2469E, glue_C2469E, "clip_and_draw_polygon", 0, 0, glue_C2469E_step, 0xC24DA8, 0, 0xC24688},
+    {0xC246A0, glue_C246A0, "clip_and_draw_polygon", 0, 0, glue_C246A0_step, 0xC24DA8, 0, 0xC24688},
     /* batch 38: faces and view marks */
     {0xC09952, glue_C09952, "draw_indexed_face", 30000},
     {0xC099F6, glue_C099F6, "draw_outlined_face", 30000},
@@ -361,7 +361,7 @@ const FA18Port fa18_ports[] = {
     {0xC0910C, glue_C0910C, "start_position", 40},
     {0xC25246, glue_C25246, "check_typed_code", 300},
     /* batch 53: draw-stream commands */
-    {0xC212B0, glue_C212B0, "draw_segment_pairs", 20000},
+    {0xC212B0, glue_C212B0, "draw_segment_pairs", 0, 0, glue_C212B0_step, 0xC2131C},
     {0xC2129C, glue_C2129C, "draw_segment_pairs_near", 20000},
     {0xC211DC, glue_C211DC, "draw_segment_run", 20000},
     {0xC2131C, glue_C2131C, "draw_offset_segments", 20000},
@@ -439,7 +439,7 @@ const FA18Port fa18_ports[] = {
     /* batch 63c */
     {0xC33370, glue_C33370, "draw_postflight_tape", 40000},
     /* batch 63d: HUD stage */
-    {0xC332BC, glue_C332BC, "draw_postflight_hud", 90000},
+    {0xC332BC, glue_C332BC, "draw_postflight_hud", 0, 0, glue_C332BC_step, 0xC332FC, 0, 0xC332B4},
     /* polygon to row C7 */
     {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 6000},
     /* zone exit */
@@ -523,7 +523,7 @@ const FA18Port fa18_ports[] = {
     /* indexed control-record update */
     {0xC13D84, glue_C13D84, "update_indexed_record", 18000},
     {0xC26EBE, glue_C26EBE, "update_candidate_record", 25000},
-    {0xC23CA6, glue_C23CA6, "update_record_view", 18000},
+    {0xC23CA6, glue_C23CA6, "update_record_view", 0, 0, glue_C23CA6_step, 0xC24368},
     {0xC0D04C, glue_C0D04C, "draw_history_projection", 25000},
     /* selected projected segment */
     {0xC1FF9C, glue_C1FF9C, "draw_selected_segment", 3500},

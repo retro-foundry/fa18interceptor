@@ -15,6 +15,11 @@ Hand-written C is replacing the translated routines in source-backed batches;
 419 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+The immediate work is game timing parity. Eleven more renderer, record-view
+and transform entries match every recorded frame in isolation; the complete
+registered port still has combined timing drift. See the
+[renderer timing evidence](analysis/routines/native_c_renderer_timing_batch.md).
+
 See [STATUS.md](STATUS.md) for the numbers,
 [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) for the next steps, and
 [PORT.md](PORT.md) for how the port works.

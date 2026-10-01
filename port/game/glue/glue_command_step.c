@@ -26,7 +26,9 @@ static int command_instruction(void) {
     case 0xC17B12: A(0) = D(0); break;
     case 0xC17B14: A(0) += m68ki_read_imm_32(); break;
     case 0xC17B1A: step_write_long(A(0), 0); flags_logic_l(0); break;
-    case 0xC17B1C: step_predecrement_long(m68k_read_memory_32(step_displacement(A(6)))); flags_logic_l(m68k_read_memory_32(A(7))); break;
+    case 0xC17B1C:
+        value = m68k_read_memory_32(step_displacement(A(6)));
+        step_predecrement_long(value); flags_logic_l(value); break;
     case 0xC17B20:
         address = m68ki_read_imm_32(); m68ki_push_32(REG_PC); m68ki_jump(address); break;
     case 0xC17B26: A(7) += 4; break;

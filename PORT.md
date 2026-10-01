@@ -47,6 +47,11 @@ is proven against.
   at any label. Writes to translated bytes invalidate the routine.
 - **Recreated source** (`port/game/`). Hand-written C entered through a glue
   function registered in `port/game/glue/ports.c`.
+  Event-bearing glue resumes at original instruction boundaries; instruction
+  fixtures include DMA contention and live batches compare fresh source OFF
+  frames. Exact isolated batches can still expose combined timing debt in
+  other fixed-charge entries. Current renderer evidence is in
+  `analysis/routines/native_c_renderer_timing_batch.md`.
 - **OS replacement** (`port/os/`). Source-backed C Kickstart services, with a
   temporary CPU bridge while the game still uses the original register file.
 
