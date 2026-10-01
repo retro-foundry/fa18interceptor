@@ -38,7 +38,7 @@ Most frequent pairs across all three:
 | `$C001FE` | `$FC1428` | 40,560 | Exec `Disable()`; see below |
 | `$C001F8` | `$FC1436` | 40,560 | Exec `Enable()`; see below |
 | `$C00102` | `$FC1BEA` | 37,669 | Exec `GetMsg(port)` `-$174(A6)`; C bridge, see below |
-| `$C023B8` | `$FE44F2` | 36,236 | Byte-exact `JMP` in `source_amiga/observed/jump_c023b8_library_stub.asm` |
+| `$C023B8` | `$FE44F2` | 36,236 | potgo.resource `WritePotgo(word,mask)`; see below |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
 is an **internal graphics.library callback**, not a game-originated OS call.
@@ -75,6 +75,16 @@ state. This was the next direct service selected for a C bridge.
 The `GetMsg` leaf now runs through the C bridge in translated mode. The
 byte-exact ROM sequence and full native proof are in
 [the GetMsg report](routines/fc1bea_exec_get_msg.md).
+
+`$C023B8` is a byte-exact jump to `$FE44F2` in
+`source_amiga/observed/jump_c023b8_library_stub.asm`. Its ROM caller at
+`$FE584A` invokes `-$12(A6)`; the local Kickstart 1.3 `POTGO_LIB.FD` and
+`LVO.OFFS` identify that vector as `WritePotgo(word,mask)(D0,D1)` in
+`potgo.resource`. The pinned target masks D0 with D1, merges it with the
+resource's cached word, writes `$DFF034` (POTGO), and calls Exec `Disable`
+and `Enable` around that update. The 36,236 crossings are therefore an
+internal ROM-to-resource call, one per observed native frame. This is the
+next candidate for a source-backed C bridge.
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

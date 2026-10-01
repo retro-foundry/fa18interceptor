@@ -408,6 +408,13 @@ part that is not, stays on the work side.
    `GetMsg` C default-on, the full gate passed: 386 routines, 726,979 shadow
    matches, 925,873 sandbox matches, zero mismatches, identical poison
    frames. The run075 frame-392 parity check remained 10/10 exact.
+   The next frequent entry `$C023B8 -> $FE44F2` is potgo.resource
+   `WritePotgo(word,mask)`, invoked through `-$12(A6)` at ROM `$FE584A`.
+   The pinned ROM merges D0/D1 with its cached POTGO word, writes `$DFF034`,
+   and uses Exec `Disable`/`Enable` around the update. It appears 36,236
+   times across the three recordings, once per frame. Its source and nested
+   Exec calls make it the next Stage E candidate; see the transition
+   inventory for the evidence.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is
