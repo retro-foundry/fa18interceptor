@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-01. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 9f2d5ca6); ignored gate logs may
+history (the preceding handoff is in commit b93251eb); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -21,6 +21,8 @@ The user explicitly deferred OS work and asked for larger routine batches.
   counted child calls, so the aggregate call totals need not rise monotonically.
   This gate was rerun after the bridge refactor and boundary-trace additions;
   build/recomp/ports_report_*.json again describe this 413-entry baseline.
+  It passed again after the resumable plane bridge; the latest log is
+  build/recomp/active_planes_step_gate_413.log.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -42,6 +44,13 @@ The user explicitly deferred OS work and asked for larger routine batches.
   and corrected the old C's near-endpoint exit: $C2B1E4/$C2B1FE abandon the
   directory walk, not just one segment. See
   analysis/routines/c2b05a_record_region_probe.md.
+- The registered all-native path is not frame-faithful: the 413-entry demo
+  ON run first differs at one-based frame 255. An isolated C501E0
+  (`set_voice_output`) ON run also fails, first at frame 256. This predates
+  the inactive plane/map candidates and is a separate completion blocker.
+  Partition evidence is in build/recomp/baseline_bisection_400.json; see
+  analysis/routines/native_c_stepped_plane_bridge.md. Shadow/sandbox matches
+  do not establish live ON fidelity for the registered set.
 
 ## Completed C awaiting live timing
 
@@ -52,7 +61,7 @@ Recorded-call comparison alone does not authorize activation.
 | --- | --- | --- |
 | C2AB34 / C2AB5A (wide/normal map packet) | port/game/map_packet.c and glue/glue_map_packet.c use the shared port/map_packet_* core. Latest temporary 416-entry full gate: zero mismatches; the pair matched 622 completed shadow calls and 8,058 sandbox calls. Multiple polygons per packet and full register effects are implemented. | demo01 first RGB difference at frame 350 with a 20,000-cycle charge. A fixed-charge sweep moved the first difference at best to frame 416, where 29,453 pixels differed; blit count also changed. Drawing many polygons before charging cycles at return loses intermediate chipset timing. |
 | C2B05A (record region probe) | port/game/record_region_probe.c and glue/glue_record_region_probe.c. Latest temporary 416-entry full gate: zero mismatches; this entry matched 3 completed shadow and 17 sandbox calls. The earlier isolated 414-entry proof had 18 sandbox matches. Fourteen source calls take interrupts. Source D2-D5 save restores into D2/D4-D6; preserve that mapping. | With 20,000 cycles, demo01 final RAM hash, 20,833-frame endpoint, and 555,658 blits matched, but 14 RGB frames differed, first at 19,445. Charging the 31,541 sandbox mean moved the endpoint to 20,835. The earlier isolated sandbox measured 22,150 to 35,192 cycles; live costs and interrupt sites are recorded below. |
-| C2FD8C (active plane submission) | port/game/active_planes.c and glue/glue_active_planes.c; see analysis/routines/c2fd8c_first_active_plane_submission.md and adjacent reports. A focused sandbox probe matched 2,078 calls. | Shadow busy-poll counters differed on five calls because sandboxed custom writes do not start live blits. Live demo01 first differed at RGB frame 297. Source blitter wait and event timing remain unresolved. |
+| C2FD8C (active plane submission) | port/game/active_planes.c, glue/glue_active_planes.c and new glue/glue_active_planes_step.c. The resumable bridge passes 7,616 independent instruction cases and 5,796 completed sandbox comparisons across three recordings. | New stepped ON matches every RGB byte and sealed RAM on all 36,236 recorded frames; the first 600 instruction/event trace is byte-identical to source. The temporary 414-entry gate still fails five demo shadow busy-counter comparisons because held custom writes and live source writes supply different DMACONR inputs. No failure was suppressed; registration was removed. The old whole-call bridge's frame-297 failure is resolved by the stepped bridge in live mode. See analysis/routines/native_c_stepped_plane_bridge.md. |
 
 The map pair also blocks the small parent C2AA9C. Do not add any of these
 entries, the parent, or mid-function graph tails to the count to show progress.
@@ -83,17 +92,28 @@ resumable execution boundaries.
 
 1. Resolve the shared timing boundary for long C calls, using the new CSV
    observations above. The register bridge refactor is already complete.
+   FA18Port now supports an optional one-instruction step and source range;
+   its dispatcher retains caller PC/SP across children, interrupts and frames.
+   Active planes is the first implementation, with exact live proof above.
+   Resolve its shadow live-input mismatch without suppressing failed
+   comparisons, then extend the mechanism to map/region stages. Keep the
+   plane entry inactive until the full gate passes.
    In the source,
    instruction boundaries can service Copper, blitter, and interrupts inside
    these routines. In the current bridge, run_glue in
    port/recomp/recomp_ports.c charges a single fixed value after the whole C
-   call. Measure source event/cycle boundaries and make the C path advance
-   through equivalent observable boundaries. The bridge has no C continuation
-   today, so an interrupt inside a C call needs an explicit resumption design.
+   call for ordinary ports. Measure source event/cycle boundaries and make the C path advance
+   through equivalent observable boundaries. Only the stepped plane bridge
+   has a resumable C continuation today; the map and region observation hooks
+   still need explicit source-backed checkpoints.
    Recheck the map pair, region
    probe, and active planes as one timing batch; keep their gameplay and
    register logic source-backed. A new fixed average charge has already failed.
-2. Keep porting independent game-source groups while timing work proceeds.
+2. Audit the registered ON baseline's early timing failures alongside the
+   inactive batch: C501E0 alone fails at frame 256, and registered parent
+   C50158 bypasses that leaf's bridge. Neither this evidence nor a measured
+   mean authorizes a guessed fixed charge. Keep porting independent
+   game-source groups while timing work proceeds.
    python tools/recomp/port_candidates.py -n 40 currently lists C279D0
    (renderer packet; typed groundwork in port/projection_grid.c and reports
    under analysis/routines/c279d0_*), C1D10C (terrain/scene template path;

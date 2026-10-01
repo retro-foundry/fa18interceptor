@@ -9,7 +9,8 @@
 
 static void normalize_busy_count(gaddr count) {
     int16_t first = rd_s16(count), second = rd_s16(count + 2);
-    wr_s32(count, first > second ? first : second);
+    /* CLR.W/SWAP/MOVE.W clears the high word after the signed comparison. */
+    wr_u32(count, (uint16_t)(first > second ? first : second));
 }
 
 static void submit_plane(gaddr table, int index, uint16_t control, uint16_t size,

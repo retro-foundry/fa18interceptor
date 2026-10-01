@@ -8,7 +8,10 @@
  * or a registered tail jump. The glue reads the routine's inputs from
  * the 68000 registers and game memory, calls the hand-written C in
  * port/game/, stores the outputs and register effects the original leaves,
- * then performs the RTS. It returns FA18_RET.
+ * then performs the RTS. It returns FA18_RET. A timing-sensitive bridge can
+ * instead provide one-instruction steps and retain a source-stack
+ * continuation until its eventual RTS; those steps run between chipset
+ * service boundaries and may suspend for children, interrupts or frames.
  *
  * Modes:
  *   OFF     generated code only (the reference).
@@ -21,13 +24,18 @@
 #include <stdint.h>
 
 typedef int (*FA18PortGlue)(void);
+/* Complete one source instruction in a timing-sensitive glue bridge.
+ * Returns 1 when handled, 0 outside that bridge. No opcode handler is run. */
+typedef int (*FA18PortStep)(void);
 
 typedef struct {
     uint32_t entry;       /* original routine address */
     FA18PortGlue glue;
     const char *name;     /* the C function it calls */
-    int cycles;           /* CPU cycles charged in ON mode (measured in SHADOW) */
+    int cycles;           /* fixed ON charge for whole-call glue; unused with step */
     uint32_t tail_from;   /* optional source address of a verified tail JMP */
+    FA18PortStep step;    /* optional resumable bridge, with exact bus/cycle timing */
+    uint32_t step_end;    /* exclusive end of its contiguous source instruction range */
 } FA18Port;
 
 extern const FA18Port fa18_ports[];
@@ -44,6 +52,9 @@ extern const int fa18_call_liveness_count;
 typedef enum { FA18_PORTS_OFF, FA18_PORTS_ON, FA18_PORTS_SHADOW, FA18_PORTS_SANDBOX } FA18PortMode;
 
 void fa18_ports_init(FA18PortMode mode, const char *only);
+/* Resume an active stepped call after chipset work, a child or an interrupt.
+ * Called at an already-serviced instruction boundary; 1 means it advanced. */
+int fa18_ports_resume_step(void);
 /* SHADOW only: after each compared call, overwrite what the liveness table
  * declares dead. The run must still end like the plain generated run. */
 void fa18_ports_set_poison(int on);

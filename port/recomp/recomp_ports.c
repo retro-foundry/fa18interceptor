@@ -120,10 +120,17 @@ static int *port_of_function; /* function id -> port index, or -1 */
 static PortStats *stats;
 static uint64_t *profile;
 static unsigned char *context_before, *context_reference;
+typedef struct {
+    int port;
+    uint32_t return_pc, return_sp;
+} SteppedCall;
+static SteppedCall *stepped_calls;
+static size_t stepped_count, stepped_capacity;
 
 void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     int i, f;
     mode = new_mode;
+    stepped_count = 0;
     free(port_of_function);
     free(stats);
     free(profile);
@@ -132,6 +139,10 @@ void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     profile = calloc((size_t)fa18_recomp_function_count + 1, sizeof *profile);
     for (f = 0; f < fa18_recomp_function_count; f++) port_of_function[f] = -1;
     for (i = 0; i < fa18_port_count; i++) {
+        if (fa18_ports[i].step && fa18_ports[i].step_end <= fa18_ports[i].entry) {
+            fprintf(stderr, "port %s: invalid stepped source range\n", fa18_ports[i].name);
+            abort();
+        }
         if (only && *only) {
             char want[16];
             snprintf(want, sizeof want, "%06X", fa18_ports[i].entry);
@@ -153,7 +164,78 @@ static int entered_by_call(void) {
     return (op & 0xFF00) == 0x6100 || (op & 0xFFC0) == 0x4E80;
 }
 
+/* A proof runs a stepped bridge with events held off, exactly like its
+ * generated reference. Child calls use their existing dispatch contracts.
+ * No stepped-call continuation is retained in a sandbox. */
+static int run_port_body(int port) {
+    uint32_t ret, sp;
+    if (!fa18_ports[port].step) return fa18_ports[port].glue();
+    ret = fa18_bus_read32(REG_A[7]) & 0xffffffu;
+    sp = REG_A[7] + 4;
+    for (;;) {
+        int result;
+        if (REG_PC == ret && REG_A[7] == sp) return FA18_RET;
+        if (REG_PC >= fa18_ports[port].entry && REG_PC < fa18_ports[port].step_end) {
+            if (!fa18_ports[port].step()) {
+                fprintf(stderr, "port %s: missing instruction boundary at %06X\n",
+                        fa18_ports[port].name, REG_PC);
+                abort();
+            }
+        } else {
+            result = fa18_recomp_call_dynamic();
+            if (result != FA18_RET) return result;
+        }
+    }
+}
+
+static void finish_stepped_calls(void) {
+    while (stepped_count &&
+           REG_PC == stepped_calls[stepped_count - 1].return_pc &&
+           REG_A[7] == stepped_calls[stepped_count - 1].return_sp)
+        --stepped_count;
+}
+
+int fa18_ports_resume_step(void) {
+    size_t i;
+    if (mode != FA18_PORTS_ON || fa18_write_log_active) return 0;
+    finish_stepped_calls();
+    /* An interrupt may enter a nested native call while an older one waits;
+     * choose the innermost bridge whose source range owns the resumed PC. */
+    for (i = stepped_count; i > 0; --i) {
+        const FA18Port *port = &fa18_ports[stepped_calls[i - 1].port];
+        if (REG_PC >= port->entry && REG_PC < port->step_end) {
+            if (!port->step()) {
+                fprintf(stderr, "port %s: cannot resume at %06X\n", port->name, REG_PC);
+                abort();
+            }
+            finish_stepped_calls();
+            return 1;
+        }
+    }
+    return 0;
+}
+
 static int run_glue(int port) {
+    if (fa18_ports[port].step) {
+        SteppedCall *call;
+        if (stepped_count == stepped_capacity) {
+            size_t capacity = stepped_capacity ? stepped_capacity * 2 : 16;
+            SteppedCall *calls = realloc(stepped_calls, capacity * sizeof *calls);
+            if (!calls) {
+                fprintf(stderr, "port %s: cannot allocate continuation\n", fa18_ports[port].name);
+                abort();
+            }
+            stepped_calls = calls;
+            stepped_capacity = capacity;
+        }
+        call = &stepped_calls[stepped_count++];
+        call->port = port;
+        call->return_pc = fa18_bus_read32(REG_A[7]) & 0xffffffu;
+        call->return_sp = REG_A[7] + 4;
+        /* The caller's JSR may already have reached a chipset deadline.
+         * Dispatch first so service precedes the first bridge instruction. */
+        return FA18_EXIT_DISPATCH;
+    }
     int r = fa18_ports[port].glue();
     USE_CYCLES(fa18_ports[port].cycles);
     return r;
@@ -287,7 +369,9 @@ static int run_sandbox(int function, int label, int port) {
     SET_CYCLES(cycles_before);
 
     port_start = log_count;
-    r = fa18_ports[port].glue();
+    if (fa18_ports[port].step) fa18_next_event = INT64_MAX;
+    r = run_port_body(port);
+    fa18_next_event = saved_event;
     fa18_write_log_active = 0;
     s->compared++;
     s->reference_cycles += (uint64_t)cycles_reference;
@@ -405,7 +489,7 @@ static int run_shadow(int function, int label, int port) {
     fa18_write_log_active = 1;
     fa18_write_log_hardware = 0;
     fa18_next_event = INT64_MAX;
-    r = fa18_ports[port].glue();
+    r = run_port_body(port);
     fa18_next_event = saved_event;
     fa18_write_log_active = 0;
     port_hardware = fa18_write_log_hardware;

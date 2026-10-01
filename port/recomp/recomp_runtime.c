@@ -259,6 +259,11 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         fa18_bus_instruction();
         if (fa18_machine_service()) break;
         fa18_bus_instruction();
+        before = GET_CYCLES();
+        if (fa18_ports_resume_step()) {
+            fa18_recomp_stats.generated_cycles += (uint64_t)(before - GET_CYCLES());
+            continue;
+        }
         if (vbeam_shim_enabled && fa18_os_vbeam_step()) continue;
         if (wait_blit_shim_enabled && fa18_os_wait_blit_step()) continue;
         if (wait_bovp_shim_enabled && fa18_os_wait_bovp_step()) continue;
@@ -312,6 +317,7 @@ int fa18_recomp_resume(uint32_t ret, uint32_t sp) {
         fa18_bus_instruction();
         if (fa18_machine_service()) return FA18_EXIT_INTERP;
         fa18_bus_instruction();
+        if (fa18_ports_resume_step()) continue;
         if (!enabled_flag) return FA18_EXIT_INTERP;
         if ((e = lookup(REG_PC)) != NULL) {
             fa18_recomp_abort = 0;

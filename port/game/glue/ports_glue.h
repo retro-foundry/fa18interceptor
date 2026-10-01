@@ -3,6 +3,10 @@
 
 /* Glue entry points, one per recreated routine, named by original address. */
 
+/* active_planes.c; stepped bridge is inactive pending the complete proof gate */
+int glue_C2FD8C(void);
+int glue_C2FD8C_step(void);
+
 /* render_polygon.c */
 int glue_C30466(void);
 int glue_C304B2(void);
