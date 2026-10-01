@@ -16,7 +16,7 @@ def main():
                         help="fixtures per source instruction (at least 32 for every CCR)")
     parser.add_argument("--bash", default=default_bash())
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
-                   "command", "buffers", "polygon", "postflight", "followup")
+                   "command", "buffers", "polygon", "postflight", "followup", "faces")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -33,6 +33,7 @@ def main():
         "polygon": ["C30466", "C304B2", "C305AA"],
         "postflight": ["C31226"],
         "followup": ["C0FA04"],
+        "faces": ["C2005C"],
     }
     entries = (entry for name in group_names for entry in groups[name]) \
         if args.group == "all" else iter(groups[args.group])

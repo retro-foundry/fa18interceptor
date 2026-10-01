@@ -16,15 +16,15 @@ The user explicitly deferred OS work and asked for larger routine batches.
 
 - 414 of 624 translated game entries are registered in port/game/glue/ports.c.
   The latest full gate for that registered set matched 721,752 completed shadow
-  calls and 1,169,610 sandbox calls across three native recordings, with zero
+  calls and 1,169,653 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
   build/recomp/ports_report_*.json describe this 414-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
-  23 registered glyph, input, page, notification, command/audio, buffer,
-  polygon, postflight and followup entries now use source-timed steps. These
-  isolated bridges match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle matches 1,178 instructions and 37,696 cases. See
+  24 registered glyph, input, page, notification, command/audio, buffer,
+  polygon, face, postflight and followup entries now use source-timed steps.
+  These isolated bridges match fresh source OFF output on all 36,236 frames. The
+  combined instruction oracle matches 1,232 instructions and 39,424 cases. See
   analysis/routines/native_c_registered_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
@@ -53,8 +53,9 @@ The user explicitly deferred OS work and asked for larger routine batches.
   sealed recordings. C0FA04 is also source-timed and exact across the three
   recordings. A fresh 500-frame all-registered demo replay now first differs at
   one-based frame 416 by 361 pixels. Fixed-charge ranking finds several
-  independent early differences: C2005C at frame 414; C212B0, C332BC, C23CA6
-  and C246A0 at frame 416; C3201A at frame 424; and C26EBE at frame 441.
+  independent early differences after C2005C became source-timed and exact:
+  C212B0, C332BC, C23CA6 and C246A0 at frame 416; C3201A at frame 424; and
+  C26EBE at frame 441.
   C0D752 also differs at frame 416 with its original 50,000-cycle charge, while
   C0D74A first differs at frame 484. C2DEE0, C2DB18 and C2D99C are exact
   through 500 in isolation.
@@ -110,9 +111,9 @@ resumable execution boundaries.
    FA18Port now supports an optional one-instruction step and source range;
    its dispatcher retains caller PC/SP across children, interrupts and frames.
    Active planes, the audio group, the 18-entry registered timing batch, the
-   three postflight entries, the C305AA polygon edge and C0FA04 followup now
-   have exact isolated live proof. Shared glue helpers live in
-   glue_step.h. The fading bridge uses step_start=C24FE6 for an existing shared
+   three postflight entries, the C305AA polygon edge, C0FA04 followup and
+   C2005C tested-face parent now have exact isolated live proof. Shared glue
+   helpers live in glue_step.h. The fading bridge uses step_start=C24FE6 for an existing shared
    early RTS, without adding a registry entry. Extend the mechanism to the
    inactive map/region stages.
    In the source,
@@ -126,9 +127,10 @@ resumable execution boundaries.
    Recheck the map pair and region
    probe as a related timing batch; keep their gameplay and
    register logic source-backed. A new fixed average charge has already failed.
-2. Continue the registered timing audit at C2005C, the earliest isolated
-   difference now measured (demo frame 414, 361 pixels), then group the other
-   frame-416 renderer entries where they share child boundaries. C0D74A and
+2. Continue the registered timing audit with the frame-416 renderer group:
+   C212B0, C332BC, C23CA6 and C246A0. C2005C is now source-timed and exact in
+   isolation, while the complete registered set remains at frame 416. Group
+   entries where they share child boundaries. C0D74A and
    C0D752 share the long C0D758-C0DA9E body and should eventually use one timing
    bridge. Their measured mean source charges make each isolated entry exact
    through frame 500, but that diagnostic was not retained because a fixed mean

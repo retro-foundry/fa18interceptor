@@ -24,7 +24,7 @@ instruction.
 
 Fresh isolated `PORTS_ONLY=C305AA` source-OFF and C-ON streams match every
 RGB444 frame in all three sealed recordings. GNU and MSVC Release builds pass.
-The complete 414-entry gate still matches 721,752 shadow calls and 1,169,610
+The complete 414-entry gate still matches 721,752 shadow calls and 1,169,653
 sandbox calls with zero mismatches, sealed RAM, and identical poison frames.
 
 The complete registered set still first differs in the 500-frame demo at frame

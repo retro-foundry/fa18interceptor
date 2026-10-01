@@ -40,14 +40,14 @@ instruction boundaries and while the expiry path dispatches `$C0FAA4`. The
 former fixed 40,000-cycle return charge is removed.
 
 The direct instruction oracle matches 15 instructions over 480 fixtures,
-including registers, full SR, PC, cycles and RAM. The combined bridge oracle
-matches 1,178 instructions over 37,696 fixtures. Fresh isolated source-OFF and
+including registers, full SR, PC, cycles and RAM. The current combined bridge
+oracle matches 1,232 instructions over 39,424 fixtures. Fresh isolated source-OFF and
 `PORTS_ONLY=C0FA04` streams match all 36,236 frames in the three sealed native
 recordings. GNU and MSVC Release builds pass. The full 414-entry gate remains
-clean at 721,752 shadow matches and 1,169,610 sandbox matches, with sealed RAM
+clean at 721,752 shadow matches and 1,169,653 sandbox matches, with sealed RAM
 and identical poison frames.
 
 With C0FA04 corrected, a 500-frame all-registered demo probe moves to frame 416
 with 361 differing pixels. Subsequent fixed-charge ranking found several
-independent renderer entries around that boundary; C2005C is earliest in
-isolation at frame 414.
+independent renderer entries around that boundary. C2005C has since become
+source-timed and exact in isolation.

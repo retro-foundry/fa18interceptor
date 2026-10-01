@@ -36,9 +36,9 @@ python tools/recomp/check_active_planes_step.py --group all
 ```
 
 With 32 fixtures per instruction, all currently stepped plane, audio and this
-batch's bridges, plus the subsequent postflight, polygon-edge and followup
-bridges, match 1,178 original instructions over 37,696 cases. Every case
-compares all registers, full SR, PC, instruction cycles and RAM. The 32 cases
+batch's bridges, plus the subsequent postflight, polygon-edge, followup and
+tested-face bridges, match 1,232 original instructions over 39,424 cases.
+Every case compares all registers, full SR, PC, instruction cycles and RAM. The 32 cases
 cover every CCR value and the arithmetic/shift boundary fixture set. The new
 batch contributes 391 instructions and 12,512 cases. Separate group runs also
 pass. The region oracle still passes, and both deliberately incorrect
@@ -50,7 +50,7 @@ busy-input bridge copies are rejected.
 
 - 414 registered routines;
 - 721,752 completed shadow comparisons;
-- 1,169,610 sandbox comparisons;
+- 1,169,653 sandbox comparisons;
 - zero mismatches and sealed final RAM for every recording;
 - identical demo poison frames.
 
@@ -88,10 +88,10 @@ poison checks pass.
 
 The complete all-registered ON path is not yet frame-faithful. A current
 500-frame demo replay first differs at one-based frame 416 by 361 pixels. The
-source-timed postflight group, C305AA polygon edge and C0FA04 followup are exact
-in isolation. Fixed-charge ranking finds C2005C at frame 414; C212B0, C332BC,
-C23CA6, C246A0 and C0D752 at frame 416; C3201A at frame 424; C26EBE at frame
-441; and C0D74A at frame 484. C2DEE0, C2DB18 and C2D99C remain exact through
+source-timed postflight group, C305AA polygon edge, C0FA04 followup and C2005C
+tested-face parent are exact in isolation. Fixed-charge ranking finds C212B0,
+C332BC, C23CA6, C246A0 and C0D752 at frame 416; C3201A at frame 424; C26EBE at
+frame 441; and C0D74A at frame 484. C2DEE0, C2DB18 and C2D99C remain exact through
 500. These independent failures show that timing debt is distributed and that
 subset bisection is not monotonic. Measured mean charges made C0D74A/C0D752
 exact through 500 in isolation, but were not retained because they do not prove
