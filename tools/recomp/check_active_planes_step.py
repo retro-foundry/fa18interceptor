@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--bus", action="store_true",
                         help="include DMA bus contention in instruction timing fixtures")
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
-                   "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map", "grid", "renderer", "sound_start", "screen_frame", "drawing", "cells", "startup", "number_field", "orientation", "tracking")
+                   "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map", "grid", "renderer", "sound_start", "screen_frame", "drawing", "cells", "startup", "number_field", "orientation", "tracking", "terrain_sort", "terrain_condition", "terrain_flags", "pixels", "interrupt_count")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -43,6 +43,15 @@ def main():
                      "C091E0", "C091CE", "C091A8"],
         "sound_start": ["C17E4A", "C17CF6", "C17DAA", "C17C62", "C17D6E", "C18096", "C1803C", "C180FC",
                         "C50AB4", "C50B02"],
+        "terrain_sort": ["C1E328", "C1E4A6", "C1D91A", "C1D974"],
+        "terrain_condition": ["C09A78", "C09A98", "C09AB8"],
+        "pixels": ["C2F5C0", "C2F5D4", "C2F5F4", "C2F60A", "C2F63A", "C2F64E", "C2F66E",
+                   "C2F826", "C2F83A", "C2F844", "C2F84E", "C2F858", "C2F862", "C2F86C",
+                   "C2F876", "C2F880", "C2F88A", "C2F894", "C2F89E", "C2F8A8", "C2F8B2",
+                   "C2F8EA", "C2F904", "C2F91E", "C2F96C", "C2F986", "C2F9A0", "C2F9BA",
+                   "C2F9D4", "C2F9EE", "C2FA08", "C2FA22"],
+        "interrupt_count": ["C06132"],
+        "terrain_flags": ["C1CA82"],
         "tracking": ["C123FA", "C25980", "C2564E"],
         "startup": ["C11312", "C11B0E", "C28722", "C287DA", "C28800", "C28AFE", "C28B34", "C28F16"],
         "number_field": ["C24E2C", "C24F76", "C25A08", "C0F56A"],

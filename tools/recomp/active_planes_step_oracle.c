@@ -71,6 +71,50 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if (pc >= 0xC06132u && pc < 0xC06178u) {
+        REG_A[6] = 0xC62080u;
+        wr_u16(REG_A[6] + 0x20, boundaries[scenario % 16u]);
+        for (i = 0; i < 8; ++i)
+            wr_u32(REG_A[7] + i * 4, next_value());
+    }
+    if (pc >= 0xC2F5C0u && pc < 0xC2FA78u) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[3] + i * 4, next_value());
+            wr_u32(REG_A[4] + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+    }
+    if ((pc >= 0xC09A78u && pc < 0xC09B48u) ||
+        (pc >= 0xC1CA82u && pc < 0xC1CB14u) ||
+        (pc >= 0xC1D90Au && pc < 0xC1D9D8u) ||
+        (pc >= 0xC1E328u && pc < 0xC1E504u)) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[4] + i * 4, next_value());
+            wr_u32(REG_A[5] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+        if (pc == 0xC1D994u || pc == 0xC1D9B2u) {
+            static const uint32_t dividends[] = {
+                0, 1, 65535, 65536, 0x7fffffffu, 0x80000000u,
+                (17u << 16) - 1, 17u << 16, 0xffffffffu
+            };
+            static const uint16_t divisors[] = {0, 1, 17, 0x7fff, 0x8000, 0xffff};
+            REG_D[pc == 0xC1D994u ? 3 : 4] = dividends[scenario % 9u];
+            REG_D[2] = (REG_D[2] & 0xffff0000u) | divisors[(scenario / 4u) % 6u];
+        }
+    }
     if ((pc >= 0xC0F56Au && pc < 0xC0F5F8u) ||
         (pc >= 0xC11312u && pc < 0xC1134Eu) ||
         (pc >= 0xC11B0Eu && pc < 0xC11B42u) ||

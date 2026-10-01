@@ -127,3 +127,12 @@ paths. C1D10C and C1E540 remain unregistered; C1D10C is the next actual
 readable-function-count batch. Group shared bodies, preserve child contracts,
 and run DMA fixtures before full live checks. Do not assign the observed
 -9,950/-310 cycle differences as fixed fees.
+
+## Followup
+
+The subsequent 41-entry terrain/pixel/interrupt batch removes the display-sort
+and condition debt above. It also corrects the game interrupt counter's fixed
+charge. Startup and the first terrain return now match; outer-loop rows match
+through frame 295 before C12098 introduces the next update gap. See
+[native_c_terrain_pixel_timing_batch.md](native_c_terrain_pixel_timing_batch.md)
+for the current proof and boundaries. This report retains the earlier evidence.

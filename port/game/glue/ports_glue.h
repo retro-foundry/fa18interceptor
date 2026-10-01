@@ -352,6 +352,49 @@ int glue_C27456(void);
 /* batch 42: direction tracking */
 int glue_C123FA(void);
 int glue_C123FA_step(void);
+int glue_C1E328_step(void);
+int glue_C1E4A6_step(void);
+int glue_C1D91A_step(void);
+int glue_C1D974_step(void);
+int glue_C09A78_step(void);
+int glue_C09A98_step(void);
+int glue_C09AB8_step(void);
+int glue_C1CA82_step(void);
+int glue_C06132_step(void);
+int glue_C2F5C0_step(void);
+int glue_C2F5D4_step(void);
+int glue_C2F5F4_step(void);
+int glue_C2F60A_step(void);
+int glue_C2F63A_step(void);
+int glue_C2F64E_step(void);
+int glue_C2F66E_step(void);
+int glue_C2F826_step(void);
+int glue_C2F83A_step(void);
+int glue_C2F844_step(void);
+int glue_C2F84E_step(void);
+int glue_C2F858_step(void);
+int glue_C2F862_step(void);
+int glue_C2F86C_step(void);
+int glue_C2F876_step(void);
+int glue_C2F880_step(void);
+int glue_C2F88A_step(void);
+int glue_C2F894_step(void);
+int glue_C2F89E_step(void);
+int glue_C2F8A8_step(void);
+int glue_C2F8B2_step(void);
+int glue_C2F8EA_step(void);
+int glue_C2F904_step(void);
+int glue_C2F91E_step(void);
+int glue_C2F96C_step(void);
+int glue_C2F986_step(void);
+int glue_C2F9A0_step(void);
+int glue_C2F9BA_step(void);
+int glue_C2F9D4_step(void);
+int glue_C2F9EE_step(void);
+int glue_C2FA08_step(void);
+int glue_C2FA22_step(void);
+
+
 
 /* batch 43: normalize register entry */
 int glue_C2574A(void);
