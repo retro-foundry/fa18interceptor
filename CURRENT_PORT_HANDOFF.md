@@ -21,10 +21,10 @@ The user explicitly deferred OS work and asked for larger routine batches.
   counted child calls, so the aggregate call totals need not rise monotonically.
   build/recomp/ports_report_*.json describe this 414-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
-  22 registered glyph, input, page, notification, command/audio, buffer,
-  polygon and postflight entries now use source-timed steps. Both isolated
-  timing batches match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle matches 1,163 instructions and 37,216 cases. See
+  23 registered glyph, input, page, notification, command/audio, buffer,
+  polygon, postflight and followup entries now use source-timed steps. These
+  isolated bridges match fresh source OFF output on all 36,236 frames. The
+  combined instruction oracle matches 1,178 instructions and 37,696 cases. See
   analysis/routines/native_c_registered_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
@@ -50,11 +50,11 @@ The user explicitly deferred OS work and asked for larger routine batches.
 - The registered all-native path is not yet frame-faithful. Complete
   source-timed bridges now give exact isolated output for the
   C31226/C3129A/C31312 postflight group and C305AA polygon edge across all three
-  sealed recordings. A fresh 500-frame all-registered demo replay still first
-  differs at one-based frame 419 with 29,453 pixels. Individual timing probes
-  show distributed fixed-charge debt: C0FA04 first differs at frame 401 by 361
-  pixels, C0D752 at frame 416 by 361 pixels, and C0D74A at frame 484 by 17
-  pixels; C2DEE0, C2DB18 and C2D99C are exact through 500 in isolation.
+  sealed recordings. C0FA04 is also source-timed and exact across the three
+  recordings. A fresh 500-frame all-registered demo replay now first differs at
+  one-based frame 416 by 361 pixels, matching C0D752's isolated signature.
+  C0D74A first differs at frame 484 by 17 pixels; C2DEE0, C2DB18 and C2D99C
+  are exact through 500 in isolation.
   Shadow/sandbox matches do not establish live ON fidelity for the whole
   registered set.
 - Plane shadow now replays the live source's ordered DMACONR inputs on saved
@@ -107,8 +107,8 @@ resumable execution boundaries.
    FA18Port now supports an optional one-instruction step and source range;
    its dispatcher retains caller PC/SP across children, interrupts and frames.
    Active planes, the audio group, the 18-entry registered timing batch, the
-   three postflight entries and the C305AA polygon edge now have exact isolated
-   live proof. Shared glue helpers live in
+   three postflight entries, the C305AA polygon edge and C0FA04 followup now
+   have exact isolated live proof. Shared glue helpers live in
    glue_step.h. The fading bridge uses step_start=C24FE6 for an existing shared
    early RTS, without adding a registry entry. Extend the mechanism to the
    inactive map/region stages.
@@ -123,14 +123,14 @@ resumable execution boundaries.
    Recheck the map pair and region
    probe as a related timing batch; keep their gameplay and
    register logic source-backed. A new fixed average charge has already failed.
-2. Continue the registered timing audit at C0FA04, the earliest isolated
-   fixed-charge difference currently measured (demo frame 401, 361 pixels).
-   C305AA is now source-timed and exact in isolation. Use
+2. Continue the registered timing audit at C0D752. After C0FA04 became
+   source-timed and exact, the complete registered set and isolated C0D752 both
+   first differ at demo frame 416 by 361 pixels. C0D74A shares the long
+   C0D758-C0DA9E body and should be handled in the same timing bridge. Use
    `python scripts/probe_recomp_timing.py ENTRY... --frames 500` to rank entries;
    it creates one source stream, overwrites one candidate stream per probe and
    removes both on exit. Test entries individually because timing interactions
-   make recursive subset bisection non-monotonic. The complete registered set
-   still first differs at frame 419 by 29,453 pixels. Keep
+   make recursive subset bisection non-monotonic. Keep
    porting independent game-source groups while timing work proceeds.
    python tools/recomp/port_candidates.py -n 40 currently lists C279D0
    (renderer packet; typed groundwork in port/projection_grid.c and reports
@@ -177,8 +177,8 @@ resumable execution boundaries.
   passes. Commit a coherent source batch with its evidence.
 - Rank registered fixed-charge timing debt with
   `python scripts/probe_recomp_timing.py ENTRY... --frames 500`. Each positional
-  argument is one entry or a comma-separated group. The bounded probe reuses a
-  single source stream and removes its scratch streams by default.
+  argument is one entry, a comma-separated group, or `ALL`. The bounded probe
+  reuses a single source stream and removes its scratch streams by default.
 - The headless Ninja graph tracks source and header dependencies and shares
   objects with structural oracles and mutation builds. An unchanged build is
   subsecond. Do not manually touch generated C after a header change.

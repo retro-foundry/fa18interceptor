@@ -31,3 +31,21 @@ The run075 frame-291 trace proves the nonnegative call reaches `$C2FD22`;
 `FA18DemoController` maps that clear to its native chunky work buffer.
 `fa18_demo_contract_test` reaches the expiry after the five ticks required to
 decrement the entry delay from 4 to -1.
+
+## Source-timed registered bridge
+
+`glue_C0FA04_step` covers all 15 instructions in `$C0FA04-$C0FA4A`. It keeps
+the parent resumable while its `$C2FD22` buffer-clear child runs at source
+instruction boundaries and while the expiry path dispatches `$C0FAA4`. The
+former fixed 40,000-cycle return charge is removed.
+
+The direct instruction oracle matches 15 instructions over 480 fixtures,
+including registers, full SR, PC, cycles and RAM. The combined bridge oracle
+matches 1,178 instructions over 37,696 fixtures. Fresh isolated source-OFF and
+`PORTS_ONLY=C0FA04` streams match all 36,236 frames in the three sealed native
+recordings. GNU and MSVC Release builds pass. The full 414-entry gate remains
+clean at 721,752 shadow matches and 1,169,610 sandbox matches, with sealed RAM
+and identical poison frames.
+
+With C0FA04 corrected, a 500-frame all-registered demo probe moves to frame 416
+with 361 differing pixels, the same result as isolated C0D752.

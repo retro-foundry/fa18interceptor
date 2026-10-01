@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Rank registered C-port timing drift against one bounded source replay.
 
-Each positional probe is an entry address or a comma-separated entry group.
+Each positional probe is an entry address, a comma-separated entry group, or
+ALL for the complete registered set.
 The source stream is generated once, the candidate stream is overwritten for
 each probe, and both streams are removed unless --keep is requested.
 """
@@ -22,6 +23,8 @@ BYTES_PER_FRAME = WIDTH * HEIGHT * 2
 
 
 def normalize_probe(value: str) -> str:
+    if value.strip().upper() == "ALL":
+        return "ALL"
     entries = []
     for entry in value.split(","):
         entry = entry.strip().upper().removeprefix("$").removeprefix("0X")
@@ -75,7 +78,7 @@ def first_difference(reference: Path, actual: Path, frames: int) -> tuple[int, i
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("probes", nargs="+", type=normalize_probe,
-                        metavar="ENTRY[,ENTRY...]", help="registered entry or entry group")
+                        metavar="ENTRY[,ENTRY...]", help="registered entry, entry group, or ALL")
     parser.add_argument("--frames", type=int, default=500)
     parser.add_argument("--recording", type=Path,
                         default=ROOT / "captures/native/demo01")
@@ -103,7 +106,8 @@ def main() -> int:
         replay(executable, recording, rom, args.frames, "off", reference)
         print(f"source: {recording.name}, {args.frames} frames")
         for probe in args.probes:
-            replay(executable, recording, rom, args.frames, "on", actual, probe)
+            replay(executable, recording, rom, args.frames, "on", actual,
+                   None if probe == "ALL" else probe)
             difference = first_difference(reference, actual, args.frames)
             if difference is None:
                 print(f"{probe}: exact through frame {args.frames}")

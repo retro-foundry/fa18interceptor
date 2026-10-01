@@ -606,6 +606,7 @@ int glue_C0FAA4(void);
 
 /* timer-gated post-input scene transition () */
 int glue_C0FA04(void);
+int glue_C0FA04_step(void);
 
 /* display-record candidate and selector siblings (/) */
 int glue_C0D74A(void);

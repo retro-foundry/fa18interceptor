@@ -36,8 +36,8 @@ python tools/recomp/check_active_planes_step.py --group all
 ```
 
 With 32 fixtures per instruction, all currently stepped plane, audio and this
-batch's bridges, plus the subsequent postflight and polygon-edge bridges, match
-1,163 original instructions over 37,216 cases. Every case
+batch's bridges, plus the subsequent postflight, polygon-edge and followup
+bridges, match 1,178 original instructions over 37,696 cases. Every case
 compares all registers, full SR, PC, instruction cycles and RAM. The 32 cases
 cover every CCR value and the arithmetic/shift boundary fixture set. The new
 batch contributes 391 instructions and 12,512 cases. Separate group runs also
@@ -87,13 +87,14 @@ poison checks pass.
 ## Remaining registered timing debt
 
 The complete all-registered ON path is not yet frame-faithful. A current
-500-frame demo replay first differs at one-based frame 419 by 29,453 pixels.
-The source-timed postflight group and C305AA polygon edge are exact in isolation.
-Individual fixed-charge probes now find C0FA04 at frame 401, C0D752 at frame 416
-and C0D74A at frame 484, while C2DEE0, C2DB18 and C2D99C remain exact through
-500. These independent failures show that timing debt is distributed and that
-subset bisection is not monotonic. `scripts/probe_recomp_timing.py` ranks entries
-against one reused source stream and cleans its bounded scratch streams.
+500-frame demo replay first differs at one-based frame 416 by 361 pixels. The
+source-timed postflight group, C305AA polygon edge and C0FA04 followup are exact
+in isolation. Isolated C0D752 now has the same frame-416/361-pixel signature;
+C0D74A first differs at frame 484 by 17 pixels, while C2DEE0, C2DB18 and C2D99C
+remain exact through 500. Earlier independent failures show that timing debt is
+distributed and that subset bisection is not monotonic.
+`scripts/probe_recomp_timing.py` ranks entries or `ALL` against one reused
+source stream and cleans its bounded scratch streams.
 
 ## Workflow cost and disk use
 
