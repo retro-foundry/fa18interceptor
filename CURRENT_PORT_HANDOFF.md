@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-01. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit e8ff57f7); ignored gate logs may
+history (the preceding handoff is in commit f2d0bc6c); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -17,8 +17,8 @@ parity. That timing investigation is the immediate priority.
 ## Verified baseline
 
 - 419 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 703,360 completed shadow
-  calls and 1,129,295 sandbox calls across three native recordings, with zero
+  The latest full gate for that registered set matched 703,346 completed shadow
+  calls and 1,110,694 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
   build/recomp/ports_report_*.json describe this 419-entry baseline. GNU and
@@ -26,7 +26,7 @@ parity. That timing investigation is the immediate priority.
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
   These isolated bridges match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle now matches 4,358 instructions and 139,456 cases
+  combined instruction oracle now matches 5,420 instructions and 173,440 cases
   with DMA contention enabled. See
   analysis/routines/native_c_registered_timing_batch.md.
   The new four-entry map/region batch is independently exact across all
@@ -48,6 +48,11 @@ parity. That timing investigation is the immediate priority.
   combined first difference from frame 297 to frame 416. Isolated ON final
   RAM also matches each recording's sealed SHA-256. See
   analysis/routines/native_c_sound_frame_timing_batch.md.
+  Fifteen more polygon, line, projected-segment and cell-template entries now
+  use source timing and match every live frame and sealed final RAM together.
+  Their 1,062 instructions pass 33,984 DMA fixtures; 83 registered entries
+  now have timing steps. ALL still first differs at frame 416 by 361 pixels.
+  See analysis/routines/native_c_drawing_cell_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -77,13 +82,17 @@ parity. That timing investigation is the immediate priority.
   renderer batch was at frame 297 by 5,440 pixels. Source timing for the
   sound-start/random family removes that early frame difference; the new
   screen-frame/corner family is also exact in isolation through all recordings.
-  No fixed mean fees were substituted. The latest bounded ranking finds
-  C1D3F4 alone at frame 415 by 361 pixels, C2FF48 and C2EE4A at frame 416 by
-  361, C3201A/C31F4C/C20A40 at frame 424 by 34,144, and C26EBE at frame 441
-  by 12,238. C0D04C/C20D68 each differ at frame 484 by 17 pixels.
-  C0D74A/C0D752 now have source timing and match through 600 individually;
-  their former 50,000-cycle fees are gone. See
-  analysis/routines/native_c_sound_frame_timing_batch.md.
+  No fixed mean fees were substituted. The latest 15-entry drawing/cell batch
+  resolves the independent C1D3F4/C2FF48/C2EE4A differences at frames 415/416,
+  matching all 36,236 frames and sealed final RAM in isolation. ALL retains
+  the same frame-416 difference. The remaining bounded ranking finds
+  C3201A/C31F4C/C20A40 at frame 424 by 34,144, C26EBE at frame 441 by
+  12,238 and C0D04C/C20D68 at frame 484 by 17. A fresh startup trace finds
+  the first instruction-cycle difference after C11312 (-36 cycles), then
+  another -10,202 across C28722 and -1,440 across C11B0E in frame 296.
+  C1C860 adds -10,246 at its call boundary. These are timing debt, not
+  substitute charges or proof of which inner instruction causes the pixels.
+  See analysis/routines/native_c_drawing_cell_timing_batch.md.
   Shadow/sandbox matches do not establish live ON fidelity for the whole
   registered set.
 - Plane shadow now replays the live source's ordered DMACONR inputs on saved
@@ -150,22 +159,24 @@ DMA contention so this distinction is covered before expensive full replays.
 ## Next work
 
 1. Continue game timing parity, as requested after the C279D0 source batch.
-   The 22-entry sound-start/screen-frame batch is independently exact. ALL
-   now first differs at frame 416 by 361 pixels. Read
-   analysis/routines/native_c_sound_frame_timing_batch.md for selectors,
-   instruction proof and the fresh 35-entry timing ranking. Prioritize the
-   shared drawing families C2FF48/C301F6/C3040C and C2EE4A with its four clip
-   helpers and C2FA7E line emitter. C1D3F4 is another independent failure
-   (frame 415), sharing terrain groundwork with the C1D10C source candidate.
-   Group source children and shared exits; preserve actual calls, interrupts,
-   DMA waits and frame crossings. Use --bus fixtures before complete live
-   checks. The earlier startup trace still documents scene-initialization
-   timing debt in C28722 and the C0FECE transition, but sound and screen-frame
-   timing are now activated. Do not substitute measured fixed fees.
+   Both the 22-entry sound/frame batch and the 15-entry drawing/cell batch
+   are independently exact. ALL still first differs at frame 416 by 361
+   pixels. Read analysis/routines/native_c_drawing_cell_timing_batch.md for
+   selectors, proof and the fresh startup trace. Target C11312/C11B0E and
+   the scene family C28722/C287DA/C28AFE/C28800/C28B34, including fixed
+   children C24E2C/C28F16/C2D954. The C1C860 call still has timing debt;
+   its fixed children include C09A78/C09A98/C1CA82/C1E328/C2F66E. Inspect
+   their exact child contracts before assigning that debt to an inner call.
+   C1D3F4 and its three lookup/filing children now use source timing.
+   C1D10C and C1E540 remain unregistered. Group shared bodies and exits,
+   preserve calls, interrupts, DMA waits and frame crossings, and run --bus
+   fixtures before full live checks. Do not substitute measured fixed fees.
    Use `python scripts/probe_recomp_timing.py ENTRY... --frames 500` or
    `--rank-fixed 35 --differences-only`; it reuses one source stream and
-   removes scratch streams. Subset bisection is not monotonic. Require
-   combined evidence before claiming whole-game parity.
+   removes scratch streams. Remaining isolated failures include
+   C3201A/C31F4C/C20A40 (424), C26EBE (441), C0D04C/C20D68 (484).
+   Subset bisection is not monotonic. Require combined evidence before
+   claiming whole-game parity.
 2. Resume additional unregistered game functions in related batches.
    The user explicitly asked for progress in the function count; avoid another
    standalone audit of already registered fixed-charge routines as the main

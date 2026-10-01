@@ -106,3 +106,10 @@ observed failure and shares terrain groundwork with the unregistered C1D10C
 source batch. Inspect their exact child contracts before implementation.
 Avoid treating subset bisection as monotonic or substituting fixed mean fees
 to hide a phase difference.
+
+## Followup
+
+The drawing/cell family is now source-timed and independently exact. ALL
+retains the frame-416 difference; fresh startup boundaries identify the next
+timing debt. Current evidence is in
+[native_c_drawing_cell_timing_batch.md](native_c_drawing_cell_timing_batch.md).

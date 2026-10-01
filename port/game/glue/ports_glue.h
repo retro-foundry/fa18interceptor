@@ -31,6 +31,7 @@ int glue_C305AA_step(void);
 
 /* render_line.c */
 int glue_C2FA7E(void);
+int glue_C2FA7E_step(void);
 
 /* fixed_math.c, audio.c, text.c */
 int glue_C2E6DA(void);
@@ -155,6 +156,7 @@ int glue_C2564E(void);
 
 /* batch 15: cell occupancy, record position, record 76/78 */
 int glue_C1D520(void);
+int glue_C1D520_step(void);
 int glue_C1D0B6(void);
 int glue_C26428(void);
 
@@ -167,6 +169,7 @@ int glue_C32736(void);
 /* batch 17: BCD unpack, sorted search, record 56/66 with alert */
 int glue_C259C2(void);
 int glue_C1D4E4(void);
+int glue_C1D4E4_step(void);
 int glue_C13A8E(void);
 
 /* batch 18: joystick */
@@ -200,7 +203,9 @@ int glue_C2EA5A_step(void);
 int glue_C2EAD0(void);
 int glue_C2EAD0_step(void);
 int glue_C2F0C6(void);
+int glue_C2F0C6_step(void);
 int glue_C2F0F4(void);
+int glue_C2F0F4_step(void);
 int glue_C1F2EE(void);
 
 /* batch 22: magnitude */
@@ -212,6 +217,7 @@ int glue_C2EB4C_step(void);
 int glue_C2EBC2(void);
 int glue_C2EBC2_step(void);
 int glue_C2F156(void);
+int glue_C2F156_step(void);
 int glue_C17CF6(void);
 int glue_C17CF6_step(void);
 int glue_C17DAA(void);
@@ -246,6 +252,7 @@ int glue_C219AE(void);
 int glue_C2FD22(void);
 int glue_C2FD22_step(void);
 int glue_C3040C(void);
+int glue_C3040C_step(void);
 int glue_C1EBE0(void);
 int glue_C25876(void);
 
@@ -284,6 +291,7 @@ int glue_C12242(void);
 /* batch 32: fault hook, level lists */
 int glue_C06C02(void);
 int glue_C1D5D8(void);
+int glue_C1D5D8_step(void);
 
 /* batch 33: pixel plots */
 int glue_C2F5F4(void);
@@ -291,9 +299,11 @@ int glue_C2F60A(void);
 
 /* batch 34: polygon preparation */
 int glue_C301F6(void);
+int glue_C301F6_step(void);
 
 /* batch 35: polygon submission */
 int glue_C2FF48(void);
+int glue_C2FF48_step(void);
 
 /* batch 36: clip stages */
 int glue_C247C0(void);
@@ -382,6 +392,7 @@ int glue_C21C2E(void);
 /* batch 49: projected segment, top-plane crossing, in-sight flag, edge alignment */
 int glue_C2ED70(void);
 int glue_C2F128(void);
+int glue_C2F128_step(void);
 int glue_C2436A(void);
 int glue_C2084A(void);
 int glue_C2082A(void);
@@ -391,6 +402,7 @@ int glue_C348B2(void);
 
 /* batch 51-52: clipped segment, ground points, voices, messages, observer, stages, long table, alert, start position, typed code */
 int glue_C2EE4A(void);
+int glue_C2EE4A_step(void);
 int glue_C098C6(void);
 int glue_C0F4A6(void);
 int glue_C25704(void);
@@ -429,6 +441,7 @@ int glue_C2E758_step(void);
 
 /* batch 56: fixed-row line, text lines and digits */
 int glue_C2FA78(void);
+int glue_C2FA78_step(void);
 int glue_C32726(void);
 int glue_C32AB4(void);
 int glue_C32AA6(void);
@@ -548,6 +561,7 @@ int glue_C332BC_step(void);
 
 /* polygon to row C7 */
 int glue_C301F0(void);
+int glue_C301F0_step(void);
 
 /* zone exit */
 int glue_C28E28(void);
@@ -605,6 +619,7 @@ int glue_C20002(void);
 
 /* control_records.c */
 int glue_C1D3F4(void);
+int glue_C1D3F4_step(void);
 
 /* hud_bars.c */
 int glue_C3003A(void);

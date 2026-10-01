@@ -71,6 +71,45 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if (pc >= 0xC1D3F4u && pc < 0xC1D722u) {
+        static const uint8_t byte_edges[] = {0, 1, 0x7f, 0x80, 0xff, 15, 16, 31};
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 8; ++i) {
+            /* Also exercise signed bytes and preservation of bits 8-31. */
+            if (scenario & 16u)
+                REG_D[i] = (REG_D[i] & 0xffffff00u) | byte_edges[(scenario + i) % 8];
+        }
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[3] + i * 4, next_value());
+            wr_u32(REG_A[5] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+    }
+    if ((pc >= 0xC2EE44u && pc < 0xC2F1B8u) ||
+        (pc >= 0xC2FA70u && pc < 0xC30038u) ||
+        (pc >= 0xC301F0u && pc < 0xC30466u)) {
+        REG_A[6] = 0xC62080u;
+        if (pc < 0xC2F1B8u || (pc >= 0xC301F0u && pc < 0xC30316u))
+            REG_A[0] = 0xC61000u;
+        for (i = 0; i < 96; ++i) {
+            wr_u16(0xC61000u + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[1] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[2] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[3] + i * 2, (uint16_t)next_value());
+            wr_u16(REG_A[4] + i * 2, (uint16_t)next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+    }
     if ((pc >= 0xC0D74Au && pc < 0xC0DAEEu) ||
         (pc >= 0xC2E758u && pc < 0xC2EC68u)) {
         REG_A[0] = 0xC61000u; REG_A[6] = 0xC62080u;
