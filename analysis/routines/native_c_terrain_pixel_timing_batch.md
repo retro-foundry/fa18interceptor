@@ -133,3 +133,8 @@ contracts before attributing its child debt. Preserve shared source bodies,
 interrupts, bus contention and all calls; run DMA fixtures before full live
 checks. C1D10C remains the next unregistered readable-C count batch. Native
 backend work and necessary OS replacement remain after complete game source.
+
+Followup: native_c_view_matrix_timing_batch.md records the completed nineteen-
+entry view/rate/matrix family. C12098 now matches source; C22C80's fixed-charge
+selection helpers are the next timing targets. The observations above remain
+the evidence for this earlier 41-entry baseline.

@@ -361,6 +361,27 @@ int glue_C09A98_step(void);
 int glue_C09AB8_step(void);
 int glue_C1CA82_step(void);
 int glue_C06132_step(void);
+int glue_C12098_step(void);
+int glue_C1B906_step(void);
+int glue_C1BA86_step(void);
+int glue_C08324_step(void);
+int glue_C082B8_step(void);
+int glue_C082B0_step(void);
+int glue_C1C7F6_step(void);
+int glue_C2D99C_step(void);
+int glue_C2D9BA_step(void);
+int glue_C2DB18_step(void);
+int glue_C2DEE0_step(void);
+int glue_C2DAF2_step(void);
+int glue_C2E370_step(void);
+int glue_C2E346_step(void);
+int glue_C2E38E_step(void);
+int glue_C2E3DE_step(void);
+int glue_C2E5AC_step(void);
+int glue_C2D970_step(void);
+int glue_C258C8_step(void);
+
+
 int glue_C2F5C0_step(void);
 int glue_C2F5D4_step(void);
 int glue_C2F5F4_step(void);

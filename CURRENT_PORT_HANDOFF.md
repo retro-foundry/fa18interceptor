@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-01. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 6b4ef04e); ignored gate logs may
+history (the preceding handoff is in commit 6c92ab2d); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -17,7 +17,7 @@ parity. That timing investigation is the immediate priority.
 ## Verified baseline
 
 - 419 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 703,360 completed shadow
+  The latest full gate for that registered set matched 703,365 completed shadow
   calls and 1,110,694 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
@@ -26,9 +26,9 @@ parity. That timing investigation is the immediate priority.
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
   These isolated bridges match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle now matches 7,324 instructions and 234,368 cases
+  combined instruction oracle now matches 8,412 instructions and 269,184 cases
   with DMA contention enabled. See
-  analysis/routines/native_c_terrain_pixel_timing_batch.md for the complete
+  analysis/routines/native_c_view_matrix_timing_batch.md for the complete
   current timing set; analysis/routines/native_c_registered_timing_batch.md
   retains the earlier 24-entry evidence.
   The new four-entry map/region batch is independently exact across all
@@ -66,9 +66,16 @@ parity. That timing investigation is the immediate priority.
   Their 611 source instructions pass 19,552 DMA fixtures; 144 registered
   entries now have timing steps. Fresh traces match the entire startup CSV
   and first terrain return, resolving sorting/condition debt. The interrupt
-  counter correction removes the frame-7 loop drift. Current outer-loop rows
-  match through frame 295; C0F008 after C12098 is the next update gap. See
+  counter correction removes the frame-7 loop drift. That batch's outer-loop
+  rows matched through frame 295 and located the C12098 update gap. See
   analysis/routines/native_c_terrain_pixel_timing_batch.md.
+  Nineteen further view-control, record-rate and matrix-pipeline entries now
+  match every isolated live frame and sealed final RAM. Their 1,107 source
+  instructions pass 35,424 DMA fixtures; 163 registered entries now have
+  timing steps. C12098's return now matches source. The first enclosing update
+  gap is after C1C63E; its flight parent first diverges after the existing
+  fixed-charge selection helper C230B0, +48 cycles. See
+  analysis/routines/native_c_view_matrix_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -107,12 +114,15 @@ parity. That timing investigation is the immediate priority.
   removes the sorting/condition debt and the interrupt counter's frame-7
   drift. Fresh startup CSVs and the first terrain-refresh return match source.
   C1612C's 100-frame CSV and the eight-frame ROM CSV are also identical.
-  Outer-loop rows now match through frame 295. The first remaining enclosing
-  update difference is C0F008 after C12098 in machine frame 296, 1,764 cycles
-  late. C1C63E's call then removes 670 cycles of drift, including its children.
-  These differences locate complete-call debt, not substitute charges or proof
-  of which inner instruction causes the frame-416 pixels. See
-  analysis/routines/native_c_terrain_pixel_timing_batch.md.
+  Outer-loop rows match through frame 295. The latest nineteen-entry batch
+  makes C0F008 after C12098 exact. The first enclosing update difference is
+  now C0F01C after C1C63E in machine frame 296, +1,442 cycles. Its unregistered
+  flight parent C22C80 first differs at C22D52 after C230B0, +48 cycles;
+  C244E2 subsequently adds +1,214. The matrix-route call's observed drift
+  increment falls from +9,704 to +6 on an already shifted bus phase. These
+  differences locate complete-call debt, not substitute charges or proof of
+  which inner instruction causes the frame-416 pixels. See
+  analysis/routines/native_c_view_matrix_timing_batch.md.
   Shadow/sandbox matches do not establish live ON fidelity for the whole
   registered set.
 - Plane shadow now replays the live source's ordered DMACONR inputs on saved
@@ -179,15 +189,19 @@ DMA contention so this distinction is covered before expensive full replays.
 ## Next work
 
 1. Continue game timing parity, as requested after the C279D0 source batch.
-   The latest 41-entry terrain/pixel/interrupt batch is independently exact.
+   The latest nineteen-entry view/rate/matrix batch is independently exact.
    ALL still first differs at frame 416 by 361 pixels. Read
-   analysis/routines/native_c_terrain_pixel_timing_batch.md for selectors,
+   analysis/routines/native_c_view_matrix_timing_batch.md for selectors,
    proof and fresh traces. Startup and the first terrain return match source;
    the counter correction makes outer-loop rows exact through frame 295.
-   The next update gap is C0F008 after C12098 (+1,764 cycles in frame 296).
-   Target C12098 with C1B906/C08324/C1BA86/C082B8 and their actual children.
-   C1C63E is unregistered and reaches C22C80/C1C7F6/C29042; inspect those
-   child contracts before assigning its -670 cycle drift change to one helper.
+   C12098's return now matches. C1C63E remains unregistered and first returns
+   +1,442 cycles late in machine frame 296. Target its C22C80 flight parent's
+   existing fixed helpers C230B0 (first +48) and C244E2 (another +1,214).
+   Preserve C244E2's shared tail and C3316E/C1D974 children, already stepped.
+   Inspect C09E06's children before attributing its +42 increment; it remains
+   unregistered. C1C7F6 and twelve matrix helpers now have exact source timing.
+   C29042 enters with inherited drift. C1C54E projection seeding, C254E8 view
+   octant and C122A2 attitude flags are subsequent registered timing targets.
    The ROM trace found the earlier gap at FC1498 after the game counter;
    it was fixed in game glue without changing Kickstart behavior.
    C1D3F4 and its three lookup/filing children now use source timing.
@@ -241,7 +255,7 @@ DMA contention so this distinction is covered before expensive full replays.
   `& 'C:\Program Files\Git\bin\bash.exe' scripts/recomp_live_check.sh`.
   The same ON replay now also checks sealed final RAM, saving three extra
   replays per batch. Recordings run concurrently; temporary RGB/RAM outputs
-  are removed. The latest completed batch leaves build/ at 0.178 GiB. An
+  are removed. The latest completed batch leaves build/ at 0.179 GiB. An
   inactive entry needs temporary registration for a probe and must be removed
   if live output differs. A stepped SHADOW stream is not the live source
   oracle because source-first hardware-input replay can alter its timing.

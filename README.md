@@ -15,13 +15,12 @@ Hand-written C is replacing the translated routines in source-backed batches;
 419 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-The immediate work is game timing parity. Another 41 terrain-sort, condition,
-pixel-lane and interrupt-counter entries match all recorded frames and sealed
-final RAM in isolation. Startup and the first terrain refresh now match the
-original timing; the outer loop matches through frame 295. The complete
-registered demo still matches through frame 415. View-control update timing
-is the next target. See the
-[timing evidence](analysis/routines/native_c_terrain_pixel_timing_batch.md).
+The immediate work is game timing parity. Nineteen further view-control,
+record-rate and matrix entries match all recorded frames and sealed final
+RAM in isolation; 163 registered entries now have source timing. The view-
+control return now matches. The complete registered demo still matches
+through frame 415; flight-update selection helpers are the next timing target.
+See the [timing evidence](analysis/routines/native_c_view_matrix_timing_batch.md).
 
 See [STATUS.md](STATUS.md) for the numbers,
 [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) for the next steps, and

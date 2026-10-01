@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--bus", action="store_true",
                         help="include DMA bus contention in instruction timing fixtures")
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
-                   "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map", "grid", "renderer", "sound_start", "screen_frame", "drawing", "cells", "startup", "number_field", "orientation", "tracking", "terrain_sort", "terrain_condition", "terrain_flags", "pixels", "interrupt_count")
+                   "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map", "grid", "renderer", "sound_start", "screen_frame", "drawing", "cells", "startup", "number_field", "orientation", "tracking", "terrain_sort", "terrain_condition", "terrain_flags", "pixels", "interrupt_count", "view_controls", "record_rate", "matrix_pipeline")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -50,6 +50,10 @@ def main():
                    "C2F876", "C2F880", "C2F88A", "C2F894", "C2F89E", "C2F8A8", "C2F8B2",
                    "C2F8EA", "C2F904", "C2F91E", "C2F96C", "C2F986", "C2F9A0", "C2F9BA",
                    "C2F9D4", "C2F9EE", "C2FA08", "C2FA22"],
+        "matrix_pipeline": ["C2D99C", "C2D9BA", "C2DB18", "C2DEE0", "C2DAF2", "C2E370",
+                            "C2E346", "C2E38E", "C2E3DE", "C2E5AC", "C2D970", "C258C8"],
+        "view_controls": ["C12098", "C1B906", "C1BA86", "C08324", "C082B8", "C082B0"],
+        "record_rate": ["C1C7F6"],
         "interrupt_count": ["C06132"],
         "terrain_flags": ["C1CA82"],
         "tracking": ["C123FA", "C25980", "C2564E"],

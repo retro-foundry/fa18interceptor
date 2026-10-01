@@ -71,6 +71,52 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if ((pc >= 0xC258C8u && pc < 0xC25980u) ||
+        (pc >= 0xC2D970u && pc < 0xC2DCC2u) ||
+        (pc >= 0xC2DEE0u && pc < 0xC2E47Au) ||
+        (pc >= 0xC2E5ACu && pc < 0xC2E5F6u)) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[3] + i * 4, next_value());
+            wr_u32(REG_A[4] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i)
+            wr_u32(REG_A[7] + i * 4, next_value());
+        if (rd_u16(pc) == 0x81c3u) { /* DIVS.W D3,D0 in record composition. */
+            static const uint32_t dividends[] = {0, 1, 0xffffffffu, 0x80000000u,
+                                                0x7fffffffu, 0xffff0000u, 0x8000u, 0x10000u};
+            static const uint16_t divisors[] = {0, 1, 0xffff, 2, 0xfffe, 0x7fff, 0x8000, 17};
+            REG_D[0] = dividends[scenario % 8u];
+            REG_D[3] = (REG_D[3] & 0xffff0000u) | divisors[(scenario / 4u) % 8u];
+        }
+    }
+    if ((pc >= 0xC082B0u && pc < 0xC0833Eu) ||
+        (pc >= 0xC12098u && pc < 0xC12242u) ||
+        (pc >= 0xC1B906u && pc < 0xC1C2B8u) ||
+        (pc >= 0xC1C7F6u && pc < 0xC1C85Eu)) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[3] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+        if (pc >= 0xC1C7F6u && pc < 0xC1C85Eu) {
+            static const uint16_t rates[] = {0, 0x60, 0x61, 0xc0, 0xc1,
+                                            0x1000, 0x1001, 0x7fff, 0x8000, 0xffff};
+            for (i = 0; i < 3; ++i)
+                wr_u16(REG_A[3] + 0x56 + i * 2, rates[(scenario + i) % 10u]);
+            wr_u16(REG_A[3] + 0x6c, rates[(scenario + 3) % 10u]);
+        }
+    }
     if (pc >= 0xC06132u && pc < 0xC06178u) {
         REG_A[6] = 0xC62080u;
         wr_u16(REG_A[6] + 0x20, boundaries[scenario % 16u]);
