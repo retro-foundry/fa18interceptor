@@ -14,6 +14,7 @@ typedef struct PostflightVariantWork {
     uint16_t record_word;
     uint16_t records_seen;
     uint8_t record_flags_before_select;
+    uint8_t previous_status;
     int has_vector;
 } PostflightVariantWork;
 
@@ -27,6 +28,10 @@ typedef struct PostflightVariantHooks {
     void (*before_submit)(const PostflightVariantWork *work, void *context);
     /* Called after the optional point plot, before the $C3170E status write. */
     void (*after_submit)(const PostflightVariantWork *work, int marked, void *context);
+    /* Called after $C31718 advances to the next record or terminal vector. */
+    void (*after_advance)(const PostflightVariantWork *work, int marked, void *context);
+    /* Called after the $C31722 status resolution and before the terminal scan. */
+    void (*after_resolve)(const PostflightVariantWork *work, void *context);
     void *context;
 } PostflightVariantHooks;
 

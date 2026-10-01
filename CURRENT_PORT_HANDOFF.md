@@ -1,7 +1,7 @@
 # Handoff
 
 For whoever picks this up next. History is in git; this page is the state,
-the process, and the traps. Updated 2026-09-30.
+the process, and the traps. Updated 2026-10-01.
 
 ## Goal
 
@@ -13,7 +13,7 @@ one at a time, each proven on every call.
 
 | Check | Result |
 | --- | --- |
-| Recreated routines (`port/game/`) | 383; 735,260 calls matching in shadow and 926,187 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
+| Recreated routines (`port/game/`) | 385; 732,278 calls matching in shadow and 925,944 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -51,6 +51,21 @@ routine. But see the first trap below: the quick probe is not a substitute
 for it.
 
 ## Recently ported
+
+`$C3129A`/`$C31312` postflight tuple and fixed-point variants
+(`postflight_variants.c`, `glue_postflight_variants.c`) are registered. Their
+heads, point-table prefix, record selection/classification, second
+normalization, renderer and optional point submission, status resolution, and
+terminal selection scan now have a source-order register bridge. The full
+three-recording gate passed with zero mismatches: 469/476 completed shadow
+calls for tuple/fixed, 243/0 completed sandbox calls respectively, 732,278
+total shadow matches and 925,944 sandbox matches across 385 routines, with
+identical poison frames. The fixed variant's sandbox calls all ended before
+comparison; its 476 shadow calls compared completely. The standard frame-392
+parity check remained 10/10 exact. An additional ON-mode check with only these
+two routines enabled was 10/10 exact after charging the fixed variant 8,590
+cycles, the source cost of its single call in that snapshot. Fixed charges
+remain an approximation for calls on other paths.
 
 `$C20A52`/`$C20A40` face lattices (`draw_stream.c`, `glue_batch58.c`) are
 registered. The C lattice now offers per-face hooks so the glue replays the
@@ -226,80 +241,8 @@ part that is not, stays on the work side.
    machine timing or the translation (the check then says the run no
    longer ends as sealed).
 1. **Keep recreating routines**, bottom-up from `port_candidates.py`.
-   `$C3129A` and `$C31312` have their source-order drawing heads in
-   `postflight_variants.c`: two guarded tuple lines and four fixed points.
-   Their shared tail is now transcribed through the return at `$C318F4`: the `$C31392`
-   gate and 11-entry point table, three-long vector load, `$C3141E`
-   normalization and record selection, and `$C3149C-$C315BF` attribute
-   guards and status bits, then the `$C315C0` second normalization,
-   `$C31612` renderer choice, `$C316C0` table submission and loop,
-   `$C31722` status resolution, and `$C3180C` terminal scan. The two C
-   parent functions compose their head with that tail. A temporary focused
-   shadow probe compared custom writes and both directions of logged memory
-   writes while excluding registers and flags: 469 completed `$C3129A`
-   calls and 476 completed `$C31312` calls matched across the three native
-   recordings (demo 198/198, carrier 185/189, crashes 86/89). The probe
-   bridge and harness edits were removed. `glue_postflight_variants.c` now
-   replays the two drawing heads' registers in source order, using explicit
-   colour variants of the register-only plot and pair helpers so later
-   `CURRENT_COLOUR` writes cannot change earlier replay. The shared tail's
-   register and flag replay remains before either parent can be registered
-   or counted. A second temporary shadow probe saved D0-D7/A0-A6 after
-   each C head replay and compared them at the generated `$C31392` handoff.
-   In the first 3,000 frames of each native recording, all 165 tuple and
-   165 fixed-head visits matched (demo 12 each, carrier 60 each, crashes
-   93 each). This checks the head even though the C memory path has already
-   run its tail. The temporary probe and registration were removed; full
-   routine comparisons still need the shared tail's register/flag bridge.
-   The shared `$C31392-$C3141D` prefix now has a register replay helper in
-   `glue_postflight_variants.c`. The C parent exposes hooks after its head
-   and prefix so replay can run while the point table still holds the entries
-   the source read. A temporary full-length shadow probe compared D0-D7,
-   A0-A6 and SR at the gate return or vector handoff on all 496 calls of
-   each variant (demo 209 each, carrier 194 each, crashes 93 each): zero
-   differences. The cadence-byte `ADDQ.B` sets X when it wraps, including
-   one observed crash call. The temporary bridge and generated probe were
-   removed. The later tail phases still need register replay before either
-   parent can be registered.
-   The next register helper now covers `$C3141E-$C3149B` selection and the
-   `$C31410` vector reload on each loop. `after_select` runs while the chosen
-   record's pre-clear bit 6 is still available in `PostflightVariantWork`.
-   A temporary generated-label probe at `$C3149C`/`$C31714` checked the first
-   3,000 frames of each native recording: 36 demo, 89 carrier, and 148 crash
-   handoffs. Carrier and crash had zero register/SR differences at those
-   handoffs. In demo, 18 second-vector handoffs differed only in D7, A3, and
-   A4, which the earlier record submission changes and the bridge has not
-   replayed yet; all other registers and SR matched. Three carrier and eight
-   crash C handoffs had no generated-label comparison before the run ended.
-   The temporary bridge, generated probes, and registration were removed.
-   The `$C3149C-$C315BF` classification register replay is now also in the
-   glue. A probe at the `$C315C0` second-normalization entry checked 36 demo,
-   86 carrier, and 148 crash handoffs in those same first 3,000 frames. It
-   found zero carrier or crash differences. The 18 demo second-vector
-   handoffs still differed only in the unreplayed D7/A3/A4 from prior point
-   submission; D0/D1 and SR matched on every completed handoff. The source's
-   mode `SUBQ.B`, negative-value `NEG.L`, and countdown `SUBQ.B` all affect X;
-   the helper replays them in their source order. Temporary probes and
-   registration were removed.
-   The `$C315C0-$C31611` second normalization now also has a register helper
-   and `before_submit` hook. A temporary probe at `$C31612` or the `$C31714`
-   skip edge checked 35 demo, 89 carrier, and 148 crash handoffs in the first
-   3,000 frames of each recording. All carrier and crash handoffs matched;
-   17 demo second-vector handoffs still differed only in the unreplayed
-   D7/A3/A4 from the previous submission. One demo, three carrier, and eight
-   crash C handoffs lacked a generated-label comparison. Temporary probes
-   and registration were removed.
-   The `$C31612-$C3170D` renderer and table replay now runs after the C
-   submission, using its actual plot result and restoring the registers the
-   source saves around `$C2F5F4`/`$C2F60A`. A temporary `$C3170E` probe over
-   the first 3,000 frames of each native recording matched D0-D7, A0-A6,
-   and SR on all 35 demo, 89 carrier, and 147 crash handoffs it reached,
-   including the formerly differing D7/A3/A4 on second vectors. One demo,
-   three carrier, and nine crash C handoffs lacked a generated-label
-   comparison. The temporary bridge, generated probe, and registration were
-   removed.
-   Next replay `$C3170E-$C31721` per record, then `$C31722-$C318F4`, before
-   registering either parent. The two parents are still absent from `ports.c`.
+   `$C3129A`/`$C31312` are registered (Recently ported); use the
+   candidate list for the next source-backed slice.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four
    active cockpit planes, then runs `$C0D752`, the direct `$C301F6` polygon

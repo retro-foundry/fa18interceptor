@@ -10,6 +10,8 @@
 #define POSTFLIGHT_TUPLES 0xC3128Au
 #define POSTFLIGHT_PREFIX_GATE 0xC45838u
 #define POSTFLIGHT_PREFIX_TICK 0xC45883u
+#define POSTFLIGHT_PREFIX_BITS 0xC4586Du
+#define POSTFLIGHT_SCAN_REQUEST 0xC457B9u
 
 static int horizontal_visible(void) {
     return (int16_t)D(0) >= 0 && (int16_t)D(0) < 0x140;
@@ -412,3 +414,200 @@ void postflight_tail_table_registers(const PostflightVariantWork *work) {
     SET_W(D(3), saved_d3);
     flags_logic_w(D(3)); /* MOVE.W (A7)+,D3 */
 }
+
+/* $C3170E/$C31714 through the next $C3141A branch. The C path has already
+ * published the status word and loaded the following vector. */
+void postflight_tail_advance_registers(const PostflightVariantWork *work, int marked) {
+    uint16_t old_d6 = (uint16_t)D(6);
+    uint16_t next_d6;
+    FLAG_Z = (D(3) & 0x20u) ? 1 : 0;
+    if (marked) D(3) |= 0x20u;
+    else D(3) &= ~0x20u;
+    flags_logic_w(D(3)); /* MOVE.W D3,(A0)+ */
+    A(0) += 16;          /* post-word +2, ADDQ.W #2,A0, three-long MOVEM */
+    next_d6 = (uint16_t)(old_d6 + 1u);
+    SET_W(D(6), next_d6);
+    FLAG_N = NFLAG_16(next_d6);
+    FLAG_Z = next_d6;
+    FLAG_V = VFLAG_ADD_16(1u, old_d6, next_d6);
+    FLAG_C = old_d6 == 0xFFFFu ? CFLAG_SET : CFLAG_CLEAR;
+    FLAG_X = FLAG_C ? XFLAG_SET : XFLAG_CLEAR;
+    D(0) = (uint32_t)work->vector[0];
+    D(1) = (uint32_t)work->vector[1];
+    D(2) = (uint32_t)work->vector[2];
+    D(3) = D(0) | D(1) | D(2);
+    flags_logic_l(D(3));
+}
+
+/* $C31722-$C3180B. The only caller-visible data change is D0's current
+ * event byte and D1's previous byte or masked message word. X carries from
+ * the last vector advance. */
+void postflight_tail_status_registers(const PostflightVariantWork *work) {
+    uint8_t current = rd_u8(POSTFLIGHT_PREFIX_BITS);
+    uint8_t previous = work->previous_status;
+    SET_W(D(0), (uint16_t)((D(0) & 0xFF00u) | current));
+    flags_logic_b(D(0));
+    if (current) {
+        SET_B(D(1), previous);
+        flags_logic_b(D(1));
+    }
+    if (!(current & 0x3Cu) && (!(current & 2u) || rd_u8(MODE_SELECT) == 5u)) {
+        SET_W(D(1), rd_u16(MESSAGE_CODE));
+        flags_logic_w(D(1));
+        SET_W(D(1), D(1) & 0xFFu);
+        flags_logic_w(D(1));
+        postflight_compare_word((uint16_t)-0x7FF2, (uint16_t)D(1));
+    }
+    flags_logic_b(D(0)); /* MOVE.B D0,THREAT_EVENTS at $C31806 */
+}
+
+/* $C3180C-$C318F4. Run before the C scan changes its request and selection
+ * bytes; the source reads the same vector list and control-record fields. */
+void postflight_tail_scan_registers(void) {
+    uint16_t offset;
+    uint16_t selected;
+    flags_logic_b(rd_u8(POSTFLIGHT_SCAN_REQUEST));
+    if (!rd_u8(POSTFLIGHT_SCAN_REQUEST)) return;
+    flags_logic_b(0); /* CLR.B POSTFLIGHT_SCAN_REQUEST */
+    A(0) = LIST_BUFFER;
+    D(0) = 0;
+    flags_logic_l(0);
+    selected = rd_u16(SELECTED_RECORD);
+    flags_logic_w(selected);
+    if ((int16_t)selected >= 0) {
+        for (;;) {
+            offset = (uint16_t)D(0);
+            SET_W(D(1), rd_u16(A(0) + offset + 12u));
+            flags_logic_w(D(1));
+            SET_W(D(1), D(1) & 0xFF00u);
+            flags_logic_w(D(1));
+            postflight_add_word(1, (uint16_t)D(1));
+            postflight_compare_word(selected, (uint16_t)D(1));
+            postflight_add_word(0, 0x10u);
+            if ((uint16_t)D(1) == selected) break;
+            postflight_compare_word(0x460u, (uint16_t)D(0));
+            if ((int16_t)D(0) >= 0x460) {
+                flags_logic_w(0x30u); /* MOVE.W #$30,MESSAGE_CODE; C06C02 RTS */
+                D(0) = 0;
+                flags_logic_l(0);
+                break;
+            }
+        }
+    }
+    for (;;) {
+        gaddr entry = A(0) + (gaddr)(int32_t)(int16_t)D(0);
+        uint16_t word;
+        uint8_t category;
+        D(5) = rd_u32(entry);
+        flags_logic_l(D(5));
+        D(5) |= rd_u32(entry + 4);
+        flags_logic_l(D(5));
+        D(5) |= rd_u32(entry + 8);
+        flags_logic_l(D(5));
+        if (!D(5)) {
+            flags_logic_b(0);      /* MOVE.B #0,SELECTION_ACTIVE */
+            flags_logic_w(0xFFFFu); /* MOVE.W #$FFFF,SELECTED_RECORD */
+            return;
+        }
+        word = rd_u16(entry + 12);
+        SET_W(D(2), word);
+        flags_logic_w(D(2));
+        FLAG_Z = (D(2) & 0x10u) ? 1 : 0;
+        if (!(D(2) & 0x10u)) goto next;
+        FLAG_Z = (D(2) & 0x20u) ? 1 : 0;
+        if (!(D(2) & 0x20u)) goto next;
+        A(2) = CONTROL_RECORDS;
+        SET_W(D(2), D(2) & 0xFF00u);
+        flags_logic_w(D(2));
+        postflight_add_word(2, (uint16_t)D(2));
+        SET_B(D(5), rd_u8(A(2) + (gaddr)(int32_t)(int16_t)D(2) + 0x62));
+        flags_logic_b(D(5));
+        SET_B(D(5), D(5) & 0xF0u);
+        flags_logic_b(D(5));
+        category = (uint8_t)D(5);
+        if (category == 0 || category == 0x20u || category == 0x30u ||
+            (rd_u8(A(2) + (gaddr)(int32_t)(int16_t)D(2) + 0x20) & 2u)) goto next;
+        flags_logic_w(D(2));       /* MOVE.W D2,SELECTED_RECORD */
+        flags_logic_w(1);          /* MOVE.W #1,INFO_PAGE */
+        flags_logic_b(1);          /* MOVE.B #1,INFO_REQUEST */
+        flags_logic_b(0xFFu);      /* MOVE.B #$FF,INFO_DELAY */
+        {
+            uint16_t before = (uint16_t)D(0);
+            uint16_t shifted = (uint16_t)((int16_t)before >> 4);
+            uint8_t old_byte;
+            SET_W(D(0), shifted);
+            flags_logic_w(D(0));
+            FLAG_C = (before & 8u) ? CFLAG_SET : CFLAG_CLEAR;
+            FLAG_X = FLAG_C ? XFLAG_SET : XFLAG_CLEAR;
+            old_byte = (uint8_t)D(0);
+            SET_B(D(0), (uint8_t)(old_byte + 1u));
+            FLAG_N = NFLAG_8(D(0));
+            FLAG_Z = (uint8_t)D(0);
+            FLAG_V = VFLAG_ADD_8(1u, old_byte, (uint8_t)D(0));
+            FLAG_C = old_byte == 0xFFu ? CFLAG_SET : CFLAG_CLEAR;
+            FLAG_X = FLAG_C ? XFLAG_SET : XFLAG_CLEAR;
+        }
+        flags_logic_b(D(0));      /* MOVE.B D0,SELECTION_ACTIVE */
+        flags_logic_w(rd_u16(MESSAGE_STATE) & 0xDFFFu);
+        return;
+next:
+        postflight_add_word(0, 0x10u);
+    }
+}
+
+static void postflight_variant_after_head(void *context) {
+    if (*(const int *)context) postflight_fixed_head_registers();
+    else postflight_tuple_head_registers();
+}
+
+static void postflight_variant_after_prefix(const PostflightVariantWork *work, void *context) {
+    (void)context;
+    postflight_tail_prefix_registers(work);
+}
+
+static void postflight_variant_after_select(const PostflightVariantWork *work,
+                                            int selected, void *context) {
+    (void)context;
+    postflight_tail_select_registers(work, selected);
+    if (selected) postflight_tail_classify_registers(work);
+}
+
+static void postflight_variant_before_submit(const PostflightVariantWork *work, void *context) {
+    (void)work;
+    (void)context;
+    postflight_tail_normalize_registers();
+}
+
+static void postflight_variant_after_submit(const PostflightVariantWork *work,
+                                            int marked, void *context) {
+    (void)context;
+    if (marked && postflight_tail_renderer_registers(work))
+        postflight_tail_table_registers(work);
+}
+
+static void postflight_variant_after_advance(const PostflightVariantWork *work,
+                                             int marked, void *context) {
+    (void)context;
+    postflight_tail_advance_registers(work, marked);
+}
+
+static void postflight_variant_after_resolve(const PostflightVariantWork *work, void *context) {
+    (void)context;
+    postflight_tail_status_registers(work);
+    postflight_tail_scan_registers();
+}
+
+static int postflight_variant_glue(int fixed) {
+    PostflightVariantHooks hooks = {
+        postflight_variant_after_head, postflight_variant_after_prefix,
+        postflight_variant_after_select, postflight_variant_before_submit,
+        postflight_variant_after_submit, postflight_variant_after_advance,
+        postflight_variant_after_resolve, &fixed
+    };
+    if (fixed) draw_postflight_fixed_variant_with_hooks(&hooks);
+    else draw_postflight_tuple_variant_with_hooks(&hooks);
+    return glue_return();
+}
+
+int glue_C3129A(void) { return postflight_variant_glue(0); }
+int glue_C31312(void) { return postflight_variant_glue(1); }

@@ -244,6 +244,8 @@ static void process_postflight_variant_records_with_hooks(
                 hooks->after_submit(work, marked, hooks->context);
         }
         advance_postflight_variant_record(work, marked);
+        if (hooks && hooks->after_advance)
+            hooks->after_advance(work, marked, hooks->context);
     }
 }
 
@@ -351,7 +353,10 @@ static void run_postflight_variant_tail(const PostflightVariantHooks *hooks) {
     if (hooks && hooks->after_prefix) hooks->after_prefix(&work, hooks->context);
     if (!active) return;
     process_postflight_variant_records_with_hooks(&work, hooks);
+    work.previous_status = rd_u8(THREAT_EVENTS);
     resolve_postflight_variant_status(&work);
+    if (hooks && hooks->after_resolve)
+        hooks->after_resolve(&work, hooks->context);
     scan_postflight_variant_records();
 }
 

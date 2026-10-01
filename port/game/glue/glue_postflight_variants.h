@@ -11,5 +11,8 @@ void postflight_tail_classify_registers(const PostflightVariantWork *work);
 int postflight_tail_normalize_registers(void);
 int postflight_tail_renderer_registers(const PostflightVariantWork *work);
 void postflight_tail_table_registers(const PostflightVariantWork *work);
+void postflight_tail_advance_registers(const PostflightVariantWork *work, int marked);
+void postflight_tail_status_registers(const PostflightVariantWork *work);
+void postflight_tail_scan_registers(void);
 
 #endif
