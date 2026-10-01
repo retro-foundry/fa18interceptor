@@ -10,6 +10,7 @@
 #include "machine.h"
 #include "recomp_ports.h"
 #include "graphics_glue.h"
+#include "graphics_wait_bovp.h"
 #include "exec_glue.h"
 #include "potgo_glue.h"
 
@@ -30,6 +31,7 @@ static uint8_t *fallback_seen;
 static int enabled_flag;
 static int vbeam_shim_enabled;
 static int wait_blit_shim_enabled;
+static int wait_bovp_shim_enabled;
 static int exec_interrupt_shim_enabled;
 static int exec_get_msg_shim_enabled;
 static int potgo_shim_enabled;
@@ -55,6 +57,7 @@ void fa18_recomp_init(int enabled) {
     enabled_flag = enabled;
     vbeam_shim_enabled = 0;
     wait_blit_shim_enabled = 0;
+    wait_bovp_shim_enabled = 0;
     exec_interrupt_shim_enabled = 0;
     exec_get_msg_shim_enabled = 0;
     potgo_shim_enabled = 0;
@@ -92,6 +95,11 @@ int fa18_recomp_enable_vbeam_shim(void) {
 int fa18_recomp_enable_wait_blit_shim(void) {
     wait_blit_shim_enabled = fa18_os_wait_blit_signature_matches(fa18_machine->rom);
     return wait_blit_shim_enabled;
+}
+
+int fa18_recomp_enable_wait_bovp_shim(void) {
+    wait_bovp_shim_enabled = fa18_os_wait_bovp_signature_matches(fa18_machine->rom);
+    return wait_bovp_shim_enabled;
 }
 
 int fa18_recomp_enable_exec_interrupt_shim(void) {
@@ -245,6 +253,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         fa18_bus_instruction();
         if (vbeam_shim_enabled && fa18_os_vbeam_step()) continue;
         if (wait_blit_shim_enabled && fa18_os_wait_blit_step()) continue;
+        if (wait_bovp_shim_enabled && fa18_os_wait_bovp_step()) continue;
         if (exec_interrupt_shim_enabled && fa18_os_exec_interrupt_step()) continue;
         if (exec_get_msg_shim_enabled && fa18_os_exec_get_msg_step()) continue;
         if (potgo_shim_enabled && fa18_os_potgo_step()) continue;

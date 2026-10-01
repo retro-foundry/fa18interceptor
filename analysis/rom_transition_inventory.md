@@ -99,8 +99,9 @@ source and complete native comparison are in
 `WaitBOVP(viewport)(A0)` by the local Kickstart 1.3 `LVO.OFFS`. The pinned ROM
 entry at `$FC5E58` reads viewport dimensions, computes a beam-row limit,
 then calls `VBeamPos` at `$FC5E90` until the beam reaches it. Its observed
-return site is game code at `$C53F98`. This is the next direct graphics
-service candidate; the existing C `VBeamPos` leaf handles its inner poll.
+return site is game code at `$C53F98`. It now runs through a C bridge in
+translated mode, with the existing C `VBeamPos` leaf handling its inner
+poll. See [the WaitBOVP report](routines/fc5e58_wait_bovp.md).
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

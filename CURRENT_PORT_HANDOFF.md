@@ -14,7 +14,7 @@ one at a time, each proven on every call.
 | Check | Result |
 | --- | --- |
 | Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,334,092 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, and `analysis/routines/fe44f2_potgo_write.md`. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE`, `WaitBlit` `$FC5A58`, `WaitBOVP` `$FC5E58`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,350,618 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, and `analysis/routines/fe44f2_potgo_write.md`. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -390,12 +390,23 @@ part that is not, stays on the work side.
    matches, zero mismatches, and identical poison frames. The run075
    frame-392 parity check remained 10/10 exact. See
    `analysis/routines/fc5a58_wait_blit.md`.
-   The next direct graphics vector is `$C02764 -> $FC5E58`,
+   The next direct graphics vector was `$C02764 -> $FC5E58`,
    `WaitBOVP(viewport)` at `-$192(A6)`. It had 16,526 entries over the
    three recordings and returns to game code at `$C53F98`. The pinned ROM
    computes a viewport beam-row limit and calls `VBeamPos` until reached;
-   that inner poll already has a C leaf. See the transition inventory before
-   porting this outer service.
+   that inner poll already has a C leaf. `port/os/graphics_wait_bovp.c` now
+   runs the outer service at the original instruction boundaries, with the
+   nested `VBeamPos` call on the ordinary path. `--no-os-waitbovp` restores
+   ROM execution, and `--no-recomp` defaults to ROM. A 300-frame demo
+   C/ROM comparison matched RAM and runner statistics; the ROM path entered
+   this leaf 1,735 times and the C path entered it zero times. All three
+   complete C-path runs retained their sealed final RAM hashes with zero
+   entries to the original leaf. GNU and MSVC Release matched RAM and ROM
+   transition inventory in the focused 300-frame C-path run. With C
+   default-on, the full gate passed: 386 routines, 726,979 shadow matches,
+   925,873 sandbox matches, zero mismatches, and identical poison frames.
+   The run075 frame-392 parity check remained 10/10 exact. See
+   `analysis/routines/fc5e58_wait_bovp.md`.
    Exec `Disable()` `$FC1428` and `Enable()` `$FC1436` are now also source-backed
    C leaves (`port/os/exec.c` and its instruction bridge). The pinned ROM
    supplies the exact sequence and the Kickstart 1.3 vector table identifies
