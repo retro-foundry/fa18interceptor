@@ -40,6 +40,7 @@ Most frequent pairs across all three:
 | `$C00102` | `$FC1BEA` | 37,669 | Exec `GetMsg(port)` `-$174(A6)`; C bridge, see below |
 | `$C023B8` | `$FE44F2` | 36,236 | potgo.resource `WritePotgo(word,mask)`; see below |
 | `$C02812` | `$FC5A58` | 21,331 | graphics.library `WaitBlit()`; C bridge, see below |
+| `$C02764` | `$FC5E58` | 16,526 | graphics.library `WaitBOVP(viewport)`; see below |
 
 `$C02776 → $FC5ECE` alone accounts for 81.07% of observed crossings, but it
 is an **internal graphics.library callback**, not a game-originated OS call.
@@ -93,6 +94,13 @@ the local Kickstart 1.3 `LVO.OFFS`. Its pinned ROM target polls the blitter
 busy bit in DMACONR. It now runs through a C bridge in translated mode; the
 source and complete native comparison are in
 [the WaitBlit report](routines/fc5a58_wait_blit.md).
+
+`$C02764` is the graphics.library `-$192(A6)` vector, named
+`WaitBOVP(viewport)(A0)` by the local Kickstart 1.3 `LVO.OFFS`. The pinned ROM
+entry at `$FC5E58` reads viewport dimensions, computes a beam-row limit,
+then calls `VBeamPos` at `$FC5E90` until the beam reaches it. Its observed
+return site is game code at `$C53F98`. This is the next direct graphics
+service candidate; the existing C `VBeamPos` leaf handles its inner poll.
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

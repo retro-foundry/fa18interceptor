@@ -390,6 +390,12 @@ part that is not, stays on the work side.
    matches, zero mismatches, and identical poison frames. The run075
    frame-392 parity check remained 10/10 exact. See
    `analysis/routines/fc5a58_wait_blit.md`.
+   The next direct graphics vector is `$C02764 -> $FC5E58`,
+   `WaitBOVP(viewport)` at `-$192(A6)`. It had 16,526 entries over the
+   three recordings and returns to game code at `$C53F98`. The pinned ROM
+   computes a viewport beam-row limit and calls `VBeamPos` until reached;
+   that inner poll already has a C leaf. See the transition inventory before
+   porting this outer service.
    Exec `Disable()` `$FC1428` and `Enable()` `$FC1436` are now also source-backed
    C leaves (`port/os/exec.c` and its instruction bridge). The pinned ROM
    supplies the exact sequence and the Kickstart 1.3 vector table identifies
