@@ -83,8 +83,9 @@ byte-exact ROM sequence and full native proof are in
 `potgo.resource`. The pinned target masks D0 with D1, merges it with the
 resource's cached word, writes `$DFF034` (POTGO), and calls Exec `Disable`
 and `Enable` around that update. The 36,236 crossings are therefore an
-internal ROM-to-resource call, one per observed native frame. This is the
-next candidate for a source-backed C bridge.
+internal ROM-to-resource call, one per observed native frame. This leaf now
+runs through a C bridge in translated mode; its pinned instructions and full
+native proof are in [the WritePotgo report](routines/fe44f2_potgo_write.md).
 
 An otherwise identical 300-frame demo replay with and without the inventory
 produced the same CPU totals and byte-identical RAM/register output. The

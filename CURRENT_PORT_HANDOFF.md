@@ -14,7 +14,7 @@ one at a time, each proven on every call.
 | Check | Result |
 | --- | --- |
 | Recreated routines (`port/game/`) | 386; 726,979 calls matching in shadow and 925,873 in the sandbox pass over three native recordings; poison-clean. Ported parents contain formerly counted nested calls. |
-| Kickstart replacement | `VBeamPos` `$FC5ECE`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, and Exec `GetMsg` `$FC1BEA` now run in C on the pinned ROM. Their 2,276,525 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, and `analysis/routines/fc1bea_exec_get_msg.md`. |
+| Kickstart replacement | `VBeamPos` `$FC5ECE`, Exec `Disable`/`Enable` `$FC1428`/`$FC1436`, Exec `GetMsg` `$FC1BEA`, and potgo.resource `WritePotgo` `$FE44F2` now run in C on the pinned ROM. Their 2,312,761 combined observed native entries were replaced with sealed RAM unchanged. The full 386-routine gate and 10-frame parity check passed. The wider OS replacement and cold boot remain open. See `analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, and `analysis/routines/fe44f2_potgo_write.md`. |
 | Native recordings (`captures/native/`) | demo01, qual_carrier_success, qual_fail_crashes; each replays byte-identically under the proof |
 | Ready to recreate next | `python tools/recomp/port_candidates.py` |
 | run075 frames 393-402 from the frame-392 snapshot | 10/10 exact |
@@ -408,13 +408,24 @@ part that is not, stays on the work side.
    `GetMsg` C default-on, the full gate passed: 386 routines, 726,979 shadow
    matches, 925,873 sandbox matches, zero mismatches, identical poison
    frames. The run075 frame-392 parity check remained 10/10 exact.
-   The next frequent entry `$C023B8 -> $FE44F2` is potgo.resource
+   The next frequent entry `$C023B8 -> $FE44F2` was potgo.resource
    `WritePotgo(word,mask)`, invoked through `-$12(A6)` at ROM `$FE584A`.
    The pinned ROM merges D0/D1 with its cached POTGO word, writes `$DFF034`,
    and uses Exec `Disable`/`Enable` around the update. It appears 36,236
-   times across the three recordings, once per frame. Its source and nested
-   Exec calls make it the next Stage E candidate; see the transition
-   inventory for the evidence.
+   times across the three recordings, once per frame. Its mask, merge, and
+   cached-word operations are now in `port/os/potgo.c`, with the instruction
+   boundary bridge in `port/os/potgo_glue.c`. The nested Exec calls remain
+   on their ordinary path. `--no-os-potgo` selects the ROM comparison path;
+   `--no-recomp` defaults to ROM. All three full C-path runs retained their
+   sealed RAM hashes with zero entries to `$FE44F2`. A 300-frame C/ROM
+   comparison matched RAM and runner statistics, with 300 ROM entries and
+   zero C-path entries. GNU and MSVC Release matched RAM and inventory in
+   that probe. Interpreter-only mode also matched RAM with the C path
+   explicitly enabled, while its default used ROM. See
+   `analysis/routines/fe44f2_potgo_write.md` for the source and proof.
+   With this C leaf default-on, the full gate passed: 386 routines, 726,979
+   shadow matches, 925,873 sandbox matches, zero mismatches, and identical
+   poison frames. The run075 frame-392 parity check remained 10/10 exact.
    Reference for the shim: the Amiga Developer CD v2.1 at `D:\amiga-dev`
    (outside the repo, on this machine). Its includes, autodocs and FD/LVO
    files give each library call's offset, registers and behaviour, which is

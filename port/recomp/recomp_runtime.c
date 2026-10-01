@@ -11,6 +11,7 @@
 #include "recomp_ports.h"
 #include "graphics_glue.h"
 #include "exec_glue.h"
+#include "potgo_glue.h"
 
 extern int64_t fa18_cycle_origin;
 
@@ -30,6 +31,7 @@ static int enabled_flag;
 static int vbeam_shim_enabled;
 static int exec_interrupt_shim_enabled;
 static int exec_get_msg_shim_enabled;
+static int potgo_shim_enabled;
 #define ROM_TRANSITION_SLOTS 65536u
 typedef struct {
     uint64_t key; /* source PC in bits 47..24, ROM entry PC in bits 23..0; zero means empty */
@@ -53,6 +55,7 @@ void fa18_recomp_init(int enabled) {
     vbeam_shim_enabled = 0;
     exec_interrupt_shim_enabled = 0;
     exec_get_msg_shim_enabled = 0;
+    potgo_shim_enabled = 0;
     free(entry_map);
     free(code_bits);
     free(disabled);
@@ -92,6 +95,11 @@ int fa18_recomp_enable_exec_interrupt_shim(void) {
 int fa18_recomp_enable_exec_get_msg_shim(void) {
     exec_get_msg_shim_enabled = fa18_os_exec_get_msg_signature_matches(fa18_machine->rom);
     return exec_get_msg_shim_enabled;
+}
+
+int fa18_recomp_enable_potgo_shim(void) {
+    potgo_shim_enabled = fa18_os_potgo_signature_matches(fa18_machine->rom);
+    return potgo_shim_enabled;
 }
 
 int fa18_recomp_track_rom_transitions(void) {
@@ -231,6 +239,7 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         if (vbeam_shim_enabled && fa18_os_vbeam_step()) continue;
         if (exec_interrupt_shim_enabled && fa18_os_exec_interrupt_step()) continue;
         if (exec_get_msg_shim_enabled && fa18_os_exec_get_msg_step()) continue;
+        if (potgo_shim_enabled && fa18_os_potgo_step()) continue;
         if (!enabled_flag || (e = lookup(REG_PC)) == NULL) break;
         before = GET_CYCLES();
         fa18_recomp_abort = 0;

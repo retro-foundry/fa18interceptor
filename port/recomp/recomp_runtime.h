@@ -75,6 +75,7 @@ int fa18_recomp_write_rom_transitions(const char *path);
 int fa18_recomp_enable_vbeam_shim(void);
 int fa18_recomp_enable_exec_interrupt_shim(void);
 int fa18_recomp_enable_exec_get_msg_shim(void);
+int fa18_recomp_enable_potgo_shim(void);
 
 #ifdef FA18_RECOMP_GENERATED
 
