@@ -272,7 +272,16 @@ part that is not, stays on the work side.
    replayed yet; all other registers and SR matched. Three carrier and eight
    crash C handoffs had no generated-label comparison before the run ended.
    The temporary bridge, generated probes, and registration were removed.
-   Next replay `$C3149C-$C31721` per record, then `$C31722-$C318F4`, before
+   The `$C3149C-$C315BF` classification register replay is now also in the
+   glue. A probe at the `$C315C0` second-normalization entry checked 36 demo,
+   86 carrier, and 148 crash handoffs in those same first 3,000 frames. It
+   found zero carrier or crash differences. The 18 demo second-vector
+   handoffs still differed only in the unreplayed D7/A3/A4 from prior point
+   submission; D0/D1 and SR matched on every completed handoff. The source's
+   mode `SUBQ.B`, negative-value `NEG.L`, and countdown `SUBQ.B` all affect X;
+   the helper replays them in their source order. Temporary probes and
+   registration were removed.
+   Next replay `$C315C0-$C31721` per record, then `$C31722-$C318F4`, before
    registering either parent. The two parents are still absent from `ports.c`.
    `$C2FD8C` has an inactive C draft in `port/game/active_planes.c` and
    `glue/glue_active_planes.c`. It submits four

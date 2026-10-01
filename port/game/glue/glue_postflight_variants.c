@@ -240,3 +240,35 @@ bounds_reject:
 reject:
     FLAG_Z = (work->record_flags_before_select & 0x40u) ? 1 : 0;
 }
+
+/* $C3149C-$C315BF. The source may alter many status bytes, but restores
+ * D0/D1 from D5/A5 before the second normalization. X can change in the
+ * mode subtraction, the absolute-value negations, and the countdown loop.
+ * Call before the C classification changes the countdown byte. */
+void postflight_tail_classify_registers(const PostflightVariantWork *work) {
+    uint8_t mode = rd_u8(MODE_SELECT);
+    uint8_t category = rd_u8(work->record + 0x62) & 0xF0u;
+    uint32_t x = (uint32_t)work->source_x;
+    uint32_t z = (uint32_t)work->source_z;
+    uint32_t abs_x = work->source_x < 0 ? 0u - x : x;
+    uint32_t abs_z = work->source_z < 0 ? 0u - z : z;
+    if (mode != 0x7Du) {
+        /* SUBQ.B #2,D1 precedes the mode-two exit. */
+        FLAG_X = mode < 2u ? XFLAG_SET : XFLAG_CLEAR;
+        if (mode != 2u) {
+            if (work->source_x < 0) FLAG_X = XFLAG_SET; /* NEG.L D1 */
+            if ((int32_t)abs_x <= 0x10000) {
+                if (work->source_z < 0) FLAG_X = XFLAG_SET; /* NEG.L D1 */
+                if ((int32_t)abs_z <= 0x10000 && category != 0x20u &&
+                    rd_s16(SELECTED_RECORD) >= 0 && category == 0x10u &&
+                    rd_u16(VIEW_RECORD) == 0) {
+                    int8_t count = rd_s8(PLAYER_FLAGS_F);
+                    if (count > 0) FLAG_X = count == 1 ? XFLAG_SET : XFLAG_CLEAR;
+                }
+            }
+        }
+    }
+    D(0) = D(5);
+    D(1) = A(5);
+    flags_logic_l(D(1));
+}
