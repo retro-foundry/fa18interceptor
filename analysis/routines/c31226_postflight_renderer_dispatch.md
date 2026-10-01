@@ -13,3 +13,27 @@ executing the first two entries.
 
 The selector's user-visible meaning remains unproven; this records only the
 demonstrated dispatch and state-write contract.
+
+## Native timing evidence
+
+Updated 2026-10-01. A current sealed-demo source trace through frame 430 covers
+the full `$C31224-$C318F4` function range. Six `$C31226` calls complete at
+source frames 311, 341, 358, 401, 411 and 420. Their elapsed costs are 36,120,
+336, 344, 12,616, 11,178 and 9,180 CPU cycles. The first call takes an
+interrupt at `$C31230` and completes in the next frame. The three long calls
+execute 347-348 instructions through the tuple/shared-tail route and service
+chipset deadlines repeatedly between `$C3129A` and `$C3170E`.
+
+The registered C entry currently charges 15,000 cycles only after its complete
+readable call. In a current 500-frame comparison, C31226 alone and the complete
+registered set both first differ from source at one-based frame 416 with the
+same 361 pixels. This follows the frame-401 and frame-411 long calls, whose
+source costs differ from the fixed charge by 2,384 and 3,822 cycles. The fixed
+charge also cannot represent the interrupt-bearing or short-exit calls.
+
+The registered child entries C3129A and C31312 were independently enabled for
+500-frame replays; each and both together remain RGB444-identical to source.
+The timing blocker is the outer dispatch call. A valid source-timed replacement
+must cover the direct `$C31392` route and the complete shared tail through
+`$C318F4`. Letting a prefix bridge fall into the generated tail is not a
+complete C-port boundary and does not satisfy the sandbox contract.
