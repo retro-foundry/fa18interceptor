@@ -259,8 +259,16 @@ static int run_port_body(int port) {
                 abort();
             }
         } else {
+            uint32_t child_pc = REG_PC, child_sp = REG_A[7];
             result = fa18_recomp_call_dynamic();
-            if (result != FA18_RET) return result;
+            if (result == FA18_RET) continue;
+            /* A generated child may stop at another translated leader after
+             * a nested call or branch. Keep dispatching that continuation;
+             * only hand an unchanged or interpreter-only stop to the proof
+             * caller. */
+            if (result == FA18_EXIT_DISPATCH &&
+                (REG_PC != child_pc || REG_A[7] != child_sp)) continue;
+            return result;
         }
     }
 }

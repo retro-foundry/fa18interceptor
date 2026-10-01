@@ -24,16 +24,31 @@ interrupt at `$C31230` and completes in the next frame. The three long calls
 execute 347-348 instructions through the tuple/shared-tail route and service
 chipset deadlines repeatedly between `$C3129A` and `$C3170E`.
 
-The registered C entry currently charges 15,000 cycles only after its complete
-readable call. In a current 500-frame comparison, C31226 alone and the complete
-registered set both first differ from source at one-based frame 416 with the
-same 361 pixels. This follows the frame-401 and frame-411 long calls, whose
+The former registered C entry charged 15,000 cycles only after its complete
+readable call. In a 500-frame comparison, C31226 alone and the complete
+registered set both first differed from source at one-based frame 416 with the
+same 361 pixels. This followed the frame-401 and frame-411 long calls, whose
 source costs differ from the fixed charge by 2,384 and 3,822 cycles. The fixed
-charge also cannot represent the interrupt-bearing or short-exit calls.
+charge also could not represent the interrupt-bearing or short-exit calls.
 
 The registered child entries C3129A and C31312 were independently enabled for
-500-frame replays; each and both together remain RGB444-identical to source.
-The timing blocker is the outer dispatch call. A valid source-timed replacement
-must cover the direct `$C31392` route and the complete shared tail through
-`$C318F4`. Letting a prefix bridge fall into the generated tail is not a
-complete C-port boundary and does not satisfy the sandbox contract.
+500-frame replays; each and both together remained RGB444-identical to source.
+A valid source-timed replacement therefore had to cover the direct `$C31392`
+route and the complete shared tail through `$C318F4`.
+
+## Resumable C boundary
+
+`port/game/glue/glue_postflight_step.c` now covers every one of the 440 source
+instructions from the shared `$C31224` return through `$C318F4`. C31226,
+C3129A and C31312 share that bridge. External line and pixel routines remain
+ordinary child calls, while the source PC and stack retain continuation state
+across child dispatch, chipset service, interrupts and frame ends. The three
+registry entries no longer use fixed cycle charges.
+
+The postflight instruction-oracle group matches registers, SR, PC, cycles and
+RAM for 14,080 fixtures. The combined bridge oracle matches 1,056 instructions
+and 33,792 fixtures. Fresh isolated OFF/ON recordings match every RGB444 frame
+across demo01, qual_carrier_success and qual_fail_crashes. The complete
+three-recording gate matched 721,752 shadow calls and 1,169,610 sandbox calls
+with zero mismatches, sealed RAM intact and identical poison frames. This
+resolves the C31226 timing blocker; the next isolated difference is C305AA.

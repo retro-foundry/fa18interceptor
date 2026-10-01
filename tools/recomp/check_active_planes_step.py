@@ -1,4 +1,4 @@
-"""Compare resumable plane or audio bridge instructions with original opcodes.
+"""Compare resumable C bridge instructions with original opcodes.
 
 Use --group audio for the voice iterator, its helpers and fading. Run from
 any directory. Fixtures exercise all CCR combinations and word
@@ -16,7 +16,7 @@ def main():
                         help="fixtures per source instruction (at least 32 for every CCR)")
     parser.add_argument("--bash", default=default_bash())
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
-                   "command", "buffers", "polygon")
+                   "command", "buffers", "polygon", "postflight")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -31,6 +31,7 @@ def main():
         "command": ["C17B08", "C17B2C", "C17EF2", "C3316A", "C3316E", "C33180", "C3318E", "C33186"],
         "buffers": ["C2FD22"],
         "polygon": ["C30466", "C304B2"],
+        "postflight": ["C31226"],
     }
     entries = (entry for name in group_names for entry in groups[name]) \
         if args.group == "all" else iter(groups[args.group])

@@ -17,6 +17,9 @@ int glue_C32806_step(void);
 int glue_C1715C_step(void);
 int glue_C2F558_step(void);
 int glue_C11B44_step(void);
+int glue_C31226_step(void);
+int glue_C3129A_step(void);
+int glue_C31312_step(void);
 
 /* render_polygon.c */
 int glue_C30466(void);

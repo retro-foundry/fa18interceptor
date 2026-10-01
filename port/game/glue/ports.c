@@ -8,9 +8,12 @@
 
 const FA18Port fa18_ports[] = {
     /* postflight tuple and fixed-point variants */
-    {0xC3129A, glue_C3129A, "draw_postflight_tuple_variant", 7600},
-    {0xC31312, glue_C31312, "draw_postflight_fixed_variant", 8590},
-    {0xC31226, glue_C31226, "dispatch_postflight_renderer", 15000},
+    {0xC3129A, glue_C3129A, "draw_postflight_tuple_variant", 0, 0,
+     glue_C3129A_step, 0xC318F6, 0, 0xC31224},
+    {0xC31312, glue_C31312, "draw_postflight_fixed_variant", 0, 0,
+     glue_C31312_step, 0xC318F6, 0, 0xC31224},
+    {0xC31226, glue_C31226, "dispatch_postflight_renderer", 0, 0,
+     glue_C31226_step, 0xC318F6, 0, 0xC31224},
     /* render_polygon.c */
     {0xC30466, glue_C30466, "composite_polygon_plane", 0, 0, glue_C30466_step, 0xC304FA},
     {0xC304B2, glue_C304B2, "clear_polygon_mask", 0, 0, glue_C304B2_step, 0xC304FA},
