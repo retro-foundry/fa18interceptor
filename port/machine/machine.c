@@ -18,6 +18,9 @@ void fa18_write_log_before(uint32_t address, int size);
 #define HARDWARE_BLOCKED() (fa18_write_log_active ? (fa18_write_log_hardware = 1, fa18_write_log_active == 1) : 0)
 void fa18_write_log_custom(uint32_t reg, uint16_t value);
 uint16_t fa18_shadow_dmaconr(uint16_t value);
+uint16_t fa18_shadow_mouse(uint32_t address,uint16_t value);
+int fa18_shadow_mouse_enabled(void);
+int fa18_shadow_inputs_replaying(void);
 #define CUSTOM_LOGGED(reg, v)     (fa18_write_log_active ? (fa18_write_log_custom((reg), (v)), fa18_write_log_active == 1) : 0)
 /* Taking an interrupt reads its autovector ($64-$7C). */
 #define VECTOR_READ(a) do { if (fa18_write_log_active == 2 && (a) >= 0x60 && (a) < 0x80) fa18_write_log_hardware = 1; } while (0)
@@ -302,12 +305,14 @@ uint16_t fa18_custom_read(FA18Machine *m, uint32_t reg) {
     case 0x00C:
         /* Reading moves the mouse counters: not repeatable inside a shadow
          * comparison. */
-        if (!HARDWARE_BLOCKED()) read_input(m);
-        return reg == 0x00A ? m->joy0dat : m->joy1dat;
+        if(fa18_shadow_mouse_enabled()) {
+            if(!fa18_shadow_inputs_replaying()) read_input(m);
+        } else if (!HARDWARE_BLOCKED()) read_input(m);
+        return fa18_shadow_mouse(0xdff000u+reg,reg == 0x00A ? m->joy0dat : m->joy1dat);
     case 0x010: return m->adkcon;
     case 0x012: case 0x014: return 0;
     case 0x016: /* DATLY/DATLX/DATRY/DATRX; DATLY low = right mouse button */
-        return (uint16_t)(m->mouse_right ? 0x5100 : 0x5500);
+        return fa18_shadow_mouse(0xdff016u,(uint16_t)(m->mouse_right ? 0x5100 : 0x5500));
     case 0x018: return 0x3000;
     case 0x01A: return 0;
     case 0x01C: return m->intena;

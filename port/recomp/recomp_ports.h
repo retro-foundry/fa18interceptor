@@ -22,6 +22,7 @@
  */
 
 #include <stdint.h>
+#include <stddef.h>
 
 typedef int (*FA18PortGlue)(void);
 /* Complete one source instruction in a timing-sensitive glue bridge.
@@ -36,7 +37,7 @@ typedef struct {
     uint32_t tail_from;   /* optional source address of a verified tail JMP */
     FA18PortStep step;    /* optional resumable bridge, with exact bus/cycle timing */
     uint32_t step_end;    /* exclusive end of its contiguous source instruction range */
-    int shadow_busy_reads; /* proof: replay source DMACONR inputs after held blit writes */
+    int shadow_busy_reads; /* proof bits: 1 DMACONR, 2 JOY0DAT/JOY1DAT/POTINP; source read order checked */
     uint32_t step_start;   /* optional shared source prefix before entry */
 } FA18Port;
 
@@ -57,6 +58,8 @@ void fa18_ports_init(FA18PortMode mode, const char *only);
 /* Resume an active stepped call after chipset work, a child or an interrupt.
  * Called at an already-serviced instruction boundary; 1 means it advanced. */
 int fa18_ports_resume_step(void);
+/* Read-only continuation count for bounded source timing audits. */
+size_t fa18_ports_active_steps(void);
 /* SHADOW only: after each compared call, overwrite what the liveness table
  * declares dead. The run must still end like the plain generated run. */
 void fa18_ports_set_poison(int on);

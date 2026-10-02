@@ -52,5 +52,14 @@ int main(void) {
     state.signed_stage_value = INT32_MIN;
     assert(fa18_run_parent_flight_update(&state, &ops, &route) == 0);
     assert(route == FA18_PARENT_FLIGHT_UPDATE_SKIPPED && !log.count);
+    state.signed_stage_value = -0x08000000;
+    assert(fa18_run_parent_flight_update(&state, &ops, &route) == 0);
+    assert(route == FA18_PARENT_FLIGHT_UPDATE_SKIPPED && !log.count);
+    state.signed_stage_value = -0x08000001;
+    assert(fa18_run_parent_flight_update(&state, &ops, &route) == 0);
+    assert(route == FA18_PARENT_FLIGHT_UPDATE_SKIPPED && !log.count);
+    state.signed_stage_value = -0x07ffffff;
+    assert(fa18_run_parent_flight_update(&state, &ops, &route) == 0);
+    assert(route == FA18_PARENT_FLIGHT_UPDATE_FLAGGED_BRANCH && log.count == 4);
     return 0;
 }

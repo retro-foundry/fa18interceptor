@@ -42,10 +42,15 @@ def check_recording(recording, executable, entries):
 
 def build_variant(entries, registry):
     for entry in entries:
-        # Retain entry, whole-call glue and name; disable only the step path.
+        # Retain the source-first busy-input contract when disabling steps.
+        # Parents of C2FD8C need the same independently recorded DMACONR reads.
+        def whole_call_row(match):
+            columns=match[0][:-1].split(",")
+            busy=columns[7].strip() if len(columns)>7 else "0"
+            return ",".join(columns[:3])+", 0, 0, NULL, 0, "+busy+"}"
         registry, count = re.subn(
             r"\{0x" + entry + r",[^}]+\}",
-            lambda m: ",".join(m[0].split(",")[:3]) + ", 0}", registry)
+            whole_call_row, registry)
         if count != 1:
             raise RuntimeError(f"expected exactly one registered {entry}")
     output = ROOT / "build/recomp"

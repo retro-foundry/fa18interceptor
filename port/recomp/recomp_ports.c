@@ -124,15 +124,17 @@ static unsigned char *context_before, *context_reference;
 typedef struct {
     int port;
     uint32_t return_pc, return_sp;
+    uint32_t frame_exit_pc, frame_exit_sp;
 } SteppedCall;
 static SteppedCall *stepped_calls;
 static size_t stepped_count, stepped_capacity;
 
-/* A held BLTSIZE write cannot supply the subsequent live BBUSY inputs.
- * For opted-in shadow bridges, record the source inputs first, then replay
- * exactly that PC/read sequence. No source output or write is supplied to C.
- * Timing remains independently checked by live ON replay and bus traces. */
-typedef struct { uint32_t pc; uint16_t value; } BusyRead;
+/* Held BLTSIZE writes and mouse-counter reads cannot supply repeatable live
+ * inputs. Opted-in proofs record source inputs first, then replay the exact
+ * PC/address/read sequence. No source output or write is supplied to C.
+ * Unsupported hardware/interrupts remain classified, and live ON timing is
+ * checked independently. Bits select DMACONR and/or JOY0DAT/JOY1DAT/POTINP. */
+typedef struct { uint32_t pc,address; uint16_t value; } BusyRead;
 static BusyRead *busy_reads;
 static size_t busy_count, busy_cursor, busy_capacity;
 static int busy_phase, busy_port;
@@ -141,7 +143,8 @@ typedef struct {
 } ShadowRAM;
 static ShadowRAM *shadow_entry_ram, *shadow_live_ram;
 
-uint16_t fa18_shadow_dmaconr(uint16_t value) {
+static uint16_t shadow_input(uint32_t address,uint16_t value,unsigned kind) {
+    if(!busy_phase || !(fa18_ports[busy_port].shadow_busy_reads&kind)) return value;
     if (busy_phase == 1) {
         if (busy_count == busy_capacity) {
             size_t capacity = busy_capacity ? busy_capacity * 2 : 256;
@@ -150,17 +153,25 @@ uint16_t fa18_shadow_dmaconr(uint16_t value) {
             busy_reads = reads; busy_capacity = capacity;
         }
         busy_reads[busy_count].pc = REG_PPC;
+        busy_reads[busy_count].address = address;
         busy_reads[busy_count++].value = value;
     } else if (busy_phase == 2) {
-        if (busy_cursor == busy_count || busy_reads[busy_cursor].pc != REG_PPC) {
-            fprintf(stderr, "port %s: unexpected shadow DMACONR read at %06X, input %zu/%zu\n",
-                    fa18_ports[busy_port].name, REG_PPC, busy_cursor, busy_count);
+        if (busy_cursor == busy_count || busy_reads[busy_cursor].pc != REG_PPC ||
+            busy_reads[busy_cursor].address != address) {
+            fprintf(stderr, "port %s: unexpected shadow input %06X at %06X, input %zu/%zu\n",
+                    fa18_ports[busy_port].name,address,REG_PPC,busy_cursor,busy_count);
             abort();
         }
         return busy_reads[busy_cursor++].value;
     }
     return value;
 }
+uint16_t fa18_shadow_dmaconr(uint16_t value) { return shadow_input(0xdff002u,value,1); }
+int fa18_shadow_mouse_enabled(void) {
+    return busy_phase && (fa18_ports[busy_port].shadow_busy_reads&2);
+}
+int fa18_shadow_inputs_replaying(void) { return busy_phase==2; }
+uint16_t fa18_shadow_mouse(uint32_t address,uint16_t value) { return shadow_input(address,value,2); }
 
 static void save_shadow_ram(ShadowRAM *ram) {
     memcpy(ram->chip, fa18_machine->chip, sizeof ram->chip);
@@ -192,8 +203,7 @@ void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     for (f = 0; f < fa18_recomp_function_count; f++) port_of_function[f] = -1;
     for (i = 0; i < fa18_port_count; i++) {
         if ((fa18_ports[i].step && (fa18_ports[i].step_end <= fa18_ports[i].entry ||
-                                  stepped_start(&fa18_ports[i]) > fa18_ports[i].entry)) ||
-            (fa18_ports[i].shadow_busy_reads && !fa18_ports[i].step)) {
+                                  stepped_start(&fa18_ports[i]) > fa18_ports[i].entry))) {
             fprintf(stderr, "port %s: invalid stepped source range\n", fa18_ports[i].name);
             abort();
         }
@@ -269,6 +279,9 @@ static int run_port_body(int port) {
                 uint32_t child_pc=REG_PC,child_sp=REG_A[7];
                 if(REG_PC==child_ret && REG_A[7]==child_return_sp) break;
                 result=fa18_recomp_call_dynamic();
+                /* C0DA38 deliberately unlinks the enclosing update frame.
+                 * Preserve that source return instead of dispatching past it. */
+                if(result==FA18_RET && REG_A[7]>=sp) return FA18_RET;
                 if(result==FA18_RET) continue;
                 if(result==FA18_EXIT_DISPATCH &&
                    (REG_PC!=child_pc || REG_A[7]!=child_sp)) continue;
@@ -285,11 +298,15 @@ static int run_port_body(int port) {
 }
 
 static void finish_stepped_calls(void) {
-    while (stepped_count &&
-           REG_PC == stepped_calls[stepped_count - 1].return_pc &&
-           REG_A[7] == stepped_calls[stepped_count - 1].return_sp)
-        --stepped_count;
+    size_t i;
+    for(i=stepped_count;i>0;--i) {
+        const SteppedCall *call=&stepped_calls[i-1];
+        if((REG_PC==call->return_pc && REG_A[7]==call->return_sp) ||
+           (call->frame_exit_sp && REG_PC==call->frame_exit_pc && REG_A[7]==call->frame_exit_sp))
+            stepped_count=i-1;
+    }
 }
+size_t fa18_ports_active_steps(void) { return stepped_count; }
 
 int fa18_ports_resume_step(void) {
     size_t i;
@@ -328,6 +345,11 @@ static int run_glue(int port) {
         call->port = port;
         call->return_pc = fa18_bus_read32(REG_A[7]) & 0xffffffu;
         call->return_sp = REG_A[7] + 4;
+        call->frame_exit_pc=call->frame_exit_sp=0;
+        if(fa18_ports[port].entry==0xc0d730u) {
+            call->frame_exit_pc=fa18_bus_read32(REG_A[6]+4)&0xffffffu;
+            call->frame_exit_sp=REG_A[6]+8;
+        }
         /* The caller's JSR may already have reached a chipset deadline.
          * Dispatch first so service precedes the first bridge instruction. */
         return FA18_EXIT_DISPATCH;
@@ -425,6 +447,7 @@ static int run_sandbox(int function, int label, int port) {
     size_t reference_end, port_start, reference_custom_count, k;
     CustomWrite *reference_custom;
     uint32_t caller = fa18_bus_read32(REG_A[7]) & 0xFFFFFF, reference_sp;
+    uint32_t entry_return_sp=REG_A[7]+4;
     const FA18CallLiveness *live = liveness_after(caller);
     report_caller = caller;
     LogEntry *reference;
@@ -437,6 +460,9 @@ static int run_sandbox(int function, int label, int port) {
     fa18_write_log_hardware = 0;
     fa18_next_event = INT64_MAX; /* no chipset servicing inside the comparison */
     r = fa18_recomp_functions[function].fn(label);
+    /* A cold source callback can have bytes without a generated entry.
+     * Complete that dispatch through the runtime before classifying the call. */
+    if(r==FA18_EXIT_DISPATCH) r=fa18_recomp_resume(caller,entry_return_sp);
     fa18_next_event = saved_event;
     if (r != FA18_RET || fa18_write_log_hardware) {
         /* Not comparable: undo and let the generated routine run for real. */
@@ -625,7 +651,9 @@ static int run_shadow(int function, int label, int port) {
         int live_r = fa18_recomp_functions[function].fn(label);
         /* Chipset work due mid-routine: service it and carry on, as the
          * dispatcher would, to the routine's own return. */
-        if (live_r == FA18_EXIT_INTERP && fa18_machine_event_due()) live_r = fa18_recomp_resume(caller, sp);
+        if (live_r == FA18_EXIT_DISPATCH ||
+            (live_r == FA18_EXIT_INTERP && fa18_machine_event_due()))
+            live_r = fa18_recomp_resume(caller, sp);
         fa18_write_log_active = 0;
         if (live_r != FA18_RET) {
             busy_phase = 0;

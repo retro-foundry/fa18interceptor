@@ -1,0 +1,801 @@
+{
+  "date": "2026-10-02",
+  "entries_added": [
+    "C0EFD4",
+    "C0F3C4",
+    "C0D730"
+  ],
+  "registered_entries": 438,
+  "registered_timing_entries": 229,
+  "source": {
+    "manifest": "analysis/data/update_sequence_source_scope.json",
+    "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "instruction_counts": {
+      "C0EFD4": 210,
+      "C0F3C4": 53,
+      "C0D730": 7
+    },
+    "total_instructions": 270,
+    "parent_child_call_sites": 68,
+    "internal_labels_not_added": [
+      "C0F090",
+      "C0F132"
+    ],
+    "display_alternate_unlinks_enclosing_frame": true
+  },
+  "structural_real_children": {
+    "command": "python tools/recomp/check_update_sequence.py",
+    "cases_per_entry": 8192,
+    "total": 24576,
+    "all_registers_high_words_pc_full_sr_ram": true,
+    "ram_exclusion_bytes": 0,
+    "patched_original_instructions": false,
+    "real_original_children": true,
+    "chipset_events_held": true,
+    "observed_parent_boundaries": {
+      "C0EFD4": 166,
+      "C0F3C4": 49,
+      "C0D730": 6
+    }
+  },
+  "structural_child_contracts": {
+    "cases_per_entry": 1024,
+    "total": 3072,
+    "real_original_children": false,
+    "scope": "all parent outputs and every child entry/return/CPU/full-SR/all-RAM boundary",
+    "observed_parent_boundaries": {
+      "C0EFD4": 210,
+      "C0F3C4": 53,
+      "C0D730": 6
+    },
+    "bypassed_display_instruction": "C0D748",
+    "all_ram_compared_directly": true,
+    "no_source_instruction_patches": true
+  },
+  "cold_display_timing_continuation": {
+    "cases": 256,
+    "full_cpu_ram_exact": true,
+    "remaining_continuations": 0
+  },
+  "normal_whole_call": {
+    "command": "python tools/recomp/check_whole_call_glue.py C0EFD4 C0F3C4 C0D730",
+    "steps_disabled": true,
+    "normal_liveness_preserved": true,
+    "source_inputs_replayed": [
+      "DMACONR",
+      "JOY0DAT",
+      "JOY1DAT",
+      "POTINP"
+    ],
+    "source_pc_address_read_sequence_checked": true,
+    "source_outputs_or_writes_supplied_to_c": false,
+    "totals": {
+      "shadow": {
+        "calls": 20085,
+        "compared": 13083,
+        "matched": 13083,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 7002
+      },
+      "sandbox": {
+        "calls": 38678,
+        "compared": 5798,
+        "matched": 5798,
+        "mismatched": 0,
+        "hardware": 32880,
+        "incomplete": 0
+      }
+    },
+    "per_entry": {
+      "C0EFD4": {
+        "shadow": {
+          "calls": 16012,
+          "compared": 11374,
+          "matched": 11374,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 4638
+        },
+        "sandbox": {
+          "calls": 16658,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 16658,
+          "incomplete": 0
+        }
+      },
+      "C0F3C4": {
+        "shadow": {
+          "calls": 59,
+          "compared": 49,
+          "matched": 49,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 10
+        },
+        "sandbox": {
+          "calls": 16222,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 16222,
+          "incomplete": 0
+        }
+      },
+      "C0D730": {
+        "shadow": {
+          "calls": 4014,
+          "compared": 1660,
+          "matched": 1660,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 2354
+        },
+        "sandbox": {
+          "calls": 5798,
+          "compared": 5798,
+          "matched": 5798,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C0EFD4",
+            "name": "run_game_update_sequence",
+            "calls": 4892,
+            "compared": 2733,
+            "matched": 2733,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2159,
+            "mean_cycles": 4161,
+            "busy_input_calls": 2733,
+            "busy_input_reads": 5466
+          },
+          {
+            "entry": "C0F3C4",
+            "name": "process_pending_key_events",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D730",
+            "name": "submit_update_display_buffers",
+            "calls": 2046,
+            "compared": 780,
+            "matched": 780,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1266,
+            "mean_cycles": 98531,
+            "busy_input_calls": 780,
+            "busy_input_reads": 611585
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C0EFD4",
+            "name": "run_game_update_sequence",
+            "calls": 5097,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 5097,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F3C4",
+            "name": "process_pending_key_events",
+            "calls": 4951,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 4951,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D730",
+            "name": "submit_update_display_buffers",
+            "calls": 2078,
+            "compared": 2078,
+            "matched": 2078,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 24099,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C0EFD4",
+            "name": "run_game_update_sequence",
+            "calls": 8038,
+            "compared": 6036,
+            "matched": 6036,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2002,
+            "mean_cycles": 4369,
+            "busy_input_calls": 6036,
+            "busy_input_reads": 12072
+          },
+          {
+            "entry": "C0F3C4",
+            "name": "process_pending_key_events",
+            "calls": 47,
+            "compared": 41,
+            "matched": 41,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 6,
+            "mean_cycles": 6270,
+            "busy_input_calls": 41,
+            "busy_input_reads": 82
+          },
+          {
+            "entry": "C0D730",
+            "name": "submit_update_display_buffers",
+            "calls": 1622,
+            "compared": 879,
+            "matched": 879,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 743,
+            "mean_cycles": 103484,
+            "busy_input_calls": 879,
+            "busy_input_reads": 627342
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C0EFD4",
+            "name": "run_game_update_sequence",
+            "calls": 8365,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 8365,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F3C4",
+            "name": "process_pending_key_events",
+            "calls": 8132,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 8132,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D730",
+            "name": "submit_update_display_buffers",
+            "calls": 3369,
+            "compared": 3369,
+            "matched": 3369,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 28469,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C0EFD4",
+            "name": "run_game_update_sequence",
+            "calls": 3082,
+            "compared": 2605,
+            "matched": 2605,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 477,
+            "mean_cycles": 4235,
+            "busy_input_calls": 2605,
+            "busy_input_reads": 5210
+          },
+          {
+            "entry": "C0F3C4",
+            "name": "process_pending_key_events",
+            "calls": 12,
+            "compared": 8,
+            "matched": 8,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 4,
+            "mean_cycles": 6726,
+            "busy_input_calls": 8,
+            "busy_input_reads": 16
+          },
+          {
+            "entry": "C0D730",
+            "name": "submit_update_display_buffers",
+            "calls": 346,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 345,
+            "mean_cycles": 120298,
+            "busy_input_calls": 1,
+            "busy_input_reads": 911
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C0EFD4",
+            "name": "run_game_update_sequence",
+            "calls": 3196,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 3196,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F3C4",
+            "name": "process_pending_key_events",
+            "calls": 3139,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 3139,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D730",
+            "name": "submit_update_display_buffers",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 28684,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    }
+  },
+  "timing": {
+    "local_instructions": 270,
+    "local_dma_cases": 8640,
+    "combined_instructions": 13115,
+    "combined_dma_cases": 419680,
+    "sealed_machine_reset_per_case": true,
+    "all_registers_full_sr_pc_cycles_ram": true,
+    "dma_bus_contention_enabled": true
+  },
+  "full_registered_gate": {
+    "totals": {
+      "shadow": {
+        "calls": 589610,
+        "compared": 554286,
+        "matched": 554286,
+        "mismatched": 0,
+        "hardware": 569,
+        "incomplete": 34755
+      },
+      "sandbox": {
+        "calls": 444843,
+        "compared": 394909,
+        "matched": 394909,
+        "mismatched": 0,
+        "hardware": 49934,
+        "incomplete": 0
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "all_entries": {
+            "calls": 323416,
+            "compared": 303756,
+            "matched": 303756,
+            "mismatched": 0,
+            "hardware": 11,
+            "incomplete": 19649
+          },
+          "new_entries": [
+            {
+              "entry": "C0EFD4",
+              "name": "run_game_update_sequence",
+              "calls": 4892,
+              "compared": 2733,
+              "matched": 2733,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 2159,
+              "mean_cycles": 4161,
+              "busy_input_calls": 2733,
+              "busy_input_reads": 5466
+            },
+            {
+              "entry": "C0F3C4",
+              "name": "process_pending_key_events",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0D730",
+              "name": "submit_update_display_buffers",
+              "calls": 2047,
+              "compared": 781,
+              "matched": 781,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1266,
+              "mean_cycles": 98528,
+              "busy_input_calls": 781,
+              "busy_input_reads": 612272
+            }
+          ]
+        },
+        "sandbox": {
+          "all_entries": {
+            "calls": 149777,
+            "compared": 134496,
+            "matched": 134496,
+            "mismatched": 0,
+            "hardware": 15281,
+            "incomplete": 0
+          },
+          "new_entries": [
+            {
+              "entry": "C0EFD4",
+              "name": "run_game_update_sequence",
+              "calls": 5100,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 5100,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F3C4",
+              "name": "process_pending_key_events",
+              "calls": 4944,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 4944,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0D730",
+              "name": "submit_update_display_buffers",
+              "calls": 2072,
+              "compared": 2072,
+              "matched": 2072,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 24042,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "all_entries": {
+            "calls": 212361,
+            "compared": 199575,
+            "matched": 199575,
+            "mismatched": 0,
+            "hardware": 434,
+            "incomplete": 12352
+          },
+          "new_entries": [
+            {
+              "entry": "C0EFD4",
+              "name": "run_game_update_sequence",
+              "calls": 8038,
+              "compared": 6036,
+              "matched": 6036,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 2002,
+              "mean_cycles": 4369,
+              "busy_input_calls": 6036,
+              "busy_input_reads": 12072
+            },
+            {
+              "entry": "C0F3C4",
+              "name": "process_pending_key_events",
+              "calls": 46,
+              "compared": 40,
+              "matched": 40,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 6,
+              "mean_cycles": 6173,
+              "busy_input_calls": 40,
+              "busy_input_reads": 80
+            },
+            {
+              "entry": "C0D730",
+              "name": "submit_update_display_buffers",
+              "calls": 1622,
+              "compared": 879,
+              "matched": 879,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 743,
+              "mean_cycles": 103489,
+              "busy_input_calls": 879,
+              "busy_input_reads": 627309
+            }
+          ]
+        },
+        "sandbox": {
+          "all_entries": {
+            "calls": 246163,
+            "compared": 221111,
+            "matched": 221111,
+            "mismatched": 0,
+            "hardware": 25052,
+            "incomplete": 0
+          },
+          "new_entries": [
+            {
+              "entry": "C0EFD4",
+              "name": "run_game_update_sequence",
+              "calls": 8394,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 8394,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F3C4",
+              "name": "process_pending_key_events",
+              "calls": 8143,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 8143,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0D730",
+              "name": "submit_update_display_buffers",
+              "calls": 3371,
+              "compared": 3371,
+              "matched": 3371,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 28467,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "all_entries": {
+            "calls": 53833,
+            "compared": 50955,
+            "matched": 50955,
+            "mismatched": 0,
+            "hardware": 124,
+            "incomplete": 2754
+          },
+          "new_entries": [
+            {
+              "entry": "C0EFD4",
+              "name": "run_game_update_sequence",
+              "calls": 3082,
+              "compared": 2605,
+              "matched": 2605,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 477,
+              "mean_cycles": 4235,
+              "busy_input_calls": 2605,
+              "busy_input_reads": 5210
+            },
+            {
+              "entry": "C0F3C4",
+              "name": "process_pending_key_events",
+              "calls": 11,
+              "compared": 8,
+              "matched": 8,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 3,
+              "mean_cycles": 6839,
+              "busy_input_calls": 8,
+              "busy_input_reads": 16
+            },
+            {
+              "entry": "C0D730",
+              "name": "submit_update_display_buffers",
+              "calls": 346,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 345,
+              "mean_cycles": 120298,
+              "busy_input_calls": 1,
+              "busy_input_reads": 911
+            }
+          ]
+        },
+        "sandbox": {
+          "all_entries": {
+            "calls": 48903,
+            "compared": 39302,
+            "matched": 39302,
+            "mismatched": 0,
+            "hardware": 9601,
+            "incomplete": 0
+          },
+          "new_entries": [
+            {
+              "entry": "C0EFD4",
+              "name": "run_game_update_sequence",
+              "calls": 3200,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 3200,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F3C4",
+              "name": "process_pending_key_events",
+              "calls": 3143,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 3143,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0D730",
+              "name": "submit_update_display_buffers",
+              "calls": 351,
+              "compared": 351,
+              "matched": 351,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 28681,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      }
+    },
+    "final_ram_seals_match": {
+      "demo01": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103",
+      "qual_carrier_success": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30",
+      "qual_fail_crashes": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+    },
+    "poison_frames_identical": true
+  },
+  "live": {
+    "command": "PORTS_ONLY=C0EFD4,C0F3C4,C0D730 scripts/recomp_live_check.sh",
+    "total_frames": 36236,
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "rgb444_exact": true,
+        "final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "rgb444_exact": true,
+        "final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "rgb444_exact": true,
+        "final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+      }
+    },
+    "temporary_rgb_ram_removed": true
+  },
+  "bounded_probe": {
+    "frames": 600,
+    "new_entries": "exact",
+    "ALL": {
+      "first_difference_frame": 416,
+      "different_pixels": 361
+    },
+    "copper_fade": "deferred by user"
+  },
+  "typed_groundwork": {
+    "flight_threshold_corrected": "signed <= F8000000",
+    "focused_gnu_contract": "pass",
+    "split_pipeline_not_complete_owner": true
+  },
+  "build": {
+    "gnu": "pass",
+    "msvc": "pass",
+    "bytes": 390624878,
+    "gib": 0.364
+  },
+  "next": {
+    "entries": [
+      "C16EAE",
+      "C16BF2",
+      "C16C56",
+      "C13D34"
+    ],
+    "scope": "complete event-source/raw-key and changed-button owners; inspect source child contracts first"
+  }
+}

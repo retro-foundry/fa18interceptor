@@ -15,19 +15,19 @@ After the C279D0 batch, the latest instruction is to return to game timing
 parity. Selector, placement, post-input, context-refresh and bootstrap milestones
 are complete at 432/624; the complete record-update and enclosing update-stage
 parents raised coverage to 434/624; the complete C29042 selector-origin owner
-now raises it to 435/624.
+raised it to 435/624; the complete update/input/display owners now raise it to 438/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 435 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 598,726 completed shadow
-  calls and 817,657 sandbox calls across three native recordings, with zero
+- 438 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 554,286 completed shadow
+  calls and 394,909 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 435-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 438-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -551,11 +551,30 @@ the chosen shift. The older typed shift-only callback is now corrected and
 its focused GNU contract passes. The complete owner uses real original children.
 See analysis/routines/native_c_selector_origin.md and
 analysis/figures/native_selector_origin_checkpoint.json. Do not redo C29042.
-Next complete the whole C0EFD4 update sequence: sealed-byte decoding confirms
-210 instructions and 68 child calls across its full 1,008-byte range, with no
-missing cold paths. See analysis/data/update_sequence_source_scope.json.
-C0F090/C0F132 are internal labels, not extra functions. No handwritten glue
-may invoke opcode handlers.
+Complete C0EFD4 update, C0F3C4 pending input and C0D730 display owners are
+now registered: **438/624, 229 timed entries**. The parent preserves all 210
+instructions/68 child boundaries, live global rereads and saved-tick scheduling.
+C0DA38 unlinks the enclosing frame; both C and timing continuations stop there.
+All 24,576 real-child CPU/RAM cases, 3,072 distinct child-contract cases and
+256 cold display timing calls pass with zero remaining continuations. The
+child-contract fixtures cover every reachable parent boundary and compare
+full CPU/SR/RAM before each child; they are not real-child execution claims.
+Normal readable-C proof passes 13,083 shadow / 5,798 sandbox comparisons.
+Source-first DMACONR and JOY0DAT/JOY1DAT/POTINP inputs are checked by PC,
+address and read order; unsupported hardware/incomplete calls stay classified.
+The proof registry retains these contracts when disabling timing steps, and
+cold byte dispatches resume to the captured return/SP before classification.
+Local timing passes 270 / 8,640 DMA cases; the combined oracle passes
+13,115 / 419,680. Every isolated live frame (36,236) and RAM seal matches.
+The full 438-entry gate passes 554,286 shadow / 394,909 sandbox comparisons,
+all seals/poison exact. GNU/MSVC pass; build/ is 0.364 GiB. ALL stays 416/361.
+The old typed flight threshold is corrected; the split pipeline remains
+explicitly bounded groundwork. No handwritten glue invokes opcode handlers.
+See analysis/routines/native_c_update_sequence.md and
+analysis/figures/native_update_sequence_checkpoint.json. Do not redo these owners.
+Next inspect complete C16EAE/C16BF2/C16C56/C13D34 external-event, keyboard-source,
+raw-poll and changed-button owners as one source-owned readable batch.
+C0F090/C0F132 remain internal labels, not additional functions.
 
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
 difference may be ignored for current work and revisited later. Source/ALL
@@ -596,11 +615,11 @@ item 1's failing combined checkpoint rather than chasing another early gap.
 2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84, scene-placement
    pair C1CB14/C1CB26, follow-up parent C1CCBC/workspace helper C1D0A4,
    post-input parent C0F5F8, context/bootstrap/callback batch and C22C80/C1C63E
-   parents and complete C29042 active origin are registered at 435/624.
+   parents, complete C29042 active origin and the C0EFD4/C0F3C4/C0D730 update/input/display owners are registered at 438/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Complete C0EFD4's whole update
-   sequence next, including all 210 source instructions and 68 child calls;
+   or count internal labels as extra routines. Inspect complete C16EAE/C16BF2/
+   C16C56/C13D34 event-source/raw-key and changed-button owners next;
    the leaf tool excludes indirect calls. Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
@@ -618,8 +637,8 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    batches; if ALL still does not improve, return to complete readable parent
    batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
-   Complete the full C0EFD4 update parent next; preserve its explicit child
-   contracts and full local frame rather than registering internal labels.
+   The complete update owner is proven. Continue complete related input owners,
+   preserving their source child contracts and local frames.
 4. Reduce repeated work: cache one source stream within each bounded probe
    round; run changed-group DMA fixtures and short live probes while editing.
    Run the full shadow/sandbox/sealed-RAM/poison gate and isolated full live

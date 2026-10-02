@@ -7,10 +7,10 @@ Updated 2026-10-02.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 435 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete C29042 and its cold candidate contracts match 32,768 all-register/full-SR/all-RAM cases without exclusions. Independent readable-C proof matches 732 shadow / 732 sandbox calls, with no hardware or incomplete classifications. Full-set hardware/incomplete calls remain separate. Archived UAE runs are historical evidence. |
+| Current proof | The 438 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete update/input/display owners match 24,576 real-child CPU/RAM cases plus 3,072 separate child-contract cases without exclusions. Independent readable-C proof matches 13,083 shadow / 5,798 sandbox calls; hardware/incomplete classifications remain explicit. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 435 registered game entries in `port/game/`; 598,726 matching shadow / 817,657 sandbox calls over three native recordings, zero mismatches, poison identical. Latest complete owner: C29042 selector-origin update, including 229 cold instructions beyond the generated list. Parent absorption changes aggregate totals. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | There are 226 timing-step entries. Selector origin matches 382 instructions / 12,224 DMA cases; the combined oracle passes 12,845 / 411,040, resetting the sealed machine per fixture. C29042 matches all 36,236 isolated live frames and sealed RAM. ALL still first differs at frame 416 by 361 pixels. The Copper fade finishes one frame late (436/437), deferred on 2026-10-02. See `analysis/routines/native_c_selector_origin.md` and `CURRENT_PORT_HANDOFF.md`. |
+| Recreated C source | 438 registered game entries in `port/game/`; 554,286 matching shadow / 394,909 sandbox calls over three native recordings, zero mismatches, poison identical. Latest owners: C0EFD4 update, C0F3C4 pending input and C0D730 display gate, including its enclosing-frame exit. Parent absorption and completed cold dispatches change aggregate totals. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | There are 229 timing-step entries. The update/input/display group matches 270 instructions / 8,640 DMA cases; the combined oracle passes 13,115 / 419,680, resetting the sealed machine per fixture. The group matches all 36,236 isolated live frames and sealed RAM; 256 cold display timing calls leave zero continuations. ALL still first differs at 416/361. Copper fade remains deferred. See `analysis/routines/native_c_update_sequence.md` and `CURRENT_PORT_HANDOFF.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -23,7 +23,7 @@ complete readable parent batch; C1D10C, C1E540
 and the two workspace helpers are now complete; the scene-placement pair
 and follow-up placement parent, then C0F5F8 and the context/bootstrap batch,
 raise coverage to 432 entries; C22C80/C1C63E raised it to 434, and complete
-C29042 now raises it to 435. The visible
+C29042 raised it to 435; the update/input/display owners now raise it to 438. The visible
 checkpoint also confirms a
 fade reset and completion two machine frames late. The initializer correction
 removes the frame it introduced; the inherited frame remains. A 17-entry HUD
@@ -76,9 +76,15 @@ and all nine mode policies. Its CPU/RAM, readable body, timing and live proofs
 are in `analysis/routines/native_c_selector_origin.md`. The older typed
 adjustment callback now consumes the normalizer's changed triple and preserves
 the selected shift; its focused GNU contract passes.
-Next complete C0EFD4's whole update sequence: a sealed-byte audit confirms
-210 instructions, 68 child calls and no missing cold range. C0F090/C0F132 are
-internal labels. See `analysis/data/update_sequence_source_scope.json`.
+C0EFD4's complete 210-instruction update sequence, C0F3C4 pending input and
+C0D730 display owner now pass CPU/RAM, readable-body and timing checks. The
+display alternative unlinks the enclosing frame; its C and timing adapters
+preserve that exit. The proof tools now retain source input replay contracts
+and complete cold byte dispatches before classification. See
+`analysis/routines/native_c_update_sequence.md` and
+`analysis/figures/native_update_sequence_checkpoint.json`.
+Next inspect C16EAE/C16BF2/C16C56/C13D34's complete related input owners;
+C0F090/C0F132 remain internal labels.
 
 ## The game program
 

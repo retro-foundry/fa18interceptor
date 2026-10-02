@@ -1,7 +1,5 @@
 #include "parent_flight_update.h"
 
-#include <limits.h>
-
 static int run_stage(FA18ParentFlightUpdateStage stage, void *context) {
     return stage && stage(context) == 0 ? 0 : -1;
 }
@@ -14,7 +12,8 @@ int fa18_run_parent_flight_update(FA18ParentFlightUpdateState *state,
         !ops->second_update_stage || !ops->renderer_packet ||
         !ops->branch_stage || !ops->followup_stage)
         return -1;
-    if (state->signed_stage_value == INT32_MIN) {
+    /* C0F090 compares against $F8000000, then branches on signed <=. */
+    if (state->signed_stage_value <= -0x08000000) {
         *route = FA18_PARENT_FLIGHT_UPDATE_SKIPPED;
         return 0;
     }

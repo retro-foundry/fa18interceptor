@@ -12,14 +12,14 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-435 game entries are registered. Three sealed native recordings cover the
+438 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
 The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 226 registered entries now have source timing. The complete
+isolation; 229 registered entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent
@@ -47,7 +47,13 @@ The complete C29042 active-origin parent includes all 229 cold instructions
 beyond its generated list. It passes 32,768 complete CPU/RAM cases, independent
 readable-C comparisons, every isolated live frame and final seal. See
 [selector-origin proof](analysis/routines/native_c_selector_origin.md).
-Next is C0EFD4's complete 210-instruction update sequence.
+C0EFD4's complete update sequence and its pending-input/display owners now
+pass independent readable-C, cold-path and live timing proofs. Coverage is
+438/624; the full gate matches 554,286 shadow / 394,909 sandbox calls with
+all RAM seals and poison frames exact. See
+[update-sequence proof](analysis/routines/native_c_update_sequence.md).
+Next inspect the complete event-source/raw-key and changed-button owners
+C16EAE, C16BF2, C16C56 and C13D34 as a related batch.
 The frame-416 comparison
 confirmed a fade starting and finishing two frames late. Source timing for
 the scene initializer has removed one delayed frame; one remains inherited

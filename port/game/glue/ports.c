@@ -7,6 +7,9 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    {0xC0EFD4, glue_C0EFD4, "run_game_update_sequence", 0, 0, glue_C0EFD4_step, 0xC0F3C4, 3},
+    {0xC0F3C4, glue_C0F3C4, "process_pending_key_events", 0, 0, glue_C0F3C4_step, 0xC0F4A6, 2},
+    {0xC0D730, glue_C0D730, "submit_update_display_buffers", 0, 0, glue_C0D730_step, 0xC0D74A, 1},
     {0xC29042, glue_C29042, "publish_selector_origin", 0, 0, glue_C29042_step, 0xC295D2, 0, 0xC29040},
     {0xC22C80, glue_C22C80, "update_control_records", 0, 0, glue_C22C80_step, 0xC230B0},
     {0xC1C63E, glue_C1C63E, "run_record_update_stage", 0, 0, glue_C1C63E_step, 0xC1C7F6},

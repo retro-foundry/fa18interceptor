@@ -6,7 +6,9 @@
 
 extern int64_t fa18_next_event;
 
-int32_t glue_complete_child(uint32_t routine, uint32_t ret) {
+int32_t glue_complete_child_or_frame_exit(uint32_t routine, uint32_t ret,
+                                         uint32_t exit_pc, uint32_t exit_sp,
+                                         int *frame_exited) {
     uint32_t sp = A(7);
     int64_t event = fa18_next_event;
     /* This bridge is the whole-call CPU/RAM proof path. Source timing uses
@@ -19,6 +21,11 @@ int32_t glue_complete_child(uint32_t routine, uint32_t ret) {
     for (;;) {
         uint32_t before_pc = REG_PC, before_sp = A(7);
         int result;
+        if(frame_exited && REG_PC == exit_pc && A(7) == exit_sp) {
+            *frame_exited=1;
+            fa18_next_event=event;
+            return (int32_t)D(0);
+        }
         if (REG_PC == ret && A(7) == sp) {
             fa18_next_event = event;
             return (int32_t)D(0);
@@ -35,4 +42,7 @@ int32_t glue_complete_child(uint32_t routine, uint32_t ret) {
             abort();
         }
     }
+}
+int32_t glue_complete_child(uint32_t routine,uint32_t ret) {
+    return glue_complete_child_or_frame_exit(routine,ret,0,0,NULL);
 }

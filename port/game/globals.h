@@ -623,4 +623,19 @@
 #define ORIGIN_ROOT_PRESET          0xC46198u
 #define ORIGIN_ALTERNATE_PRESET     0xC46998u
 
+/* ---- complete update owner and pending input (C0EFD4/C0F3C4) ------------ */
+#define UPDATE_ACTIVE              POST_INPUT_AUX
+#define UPDATE_STAGE_MARKER        CELL_TIMER
+#define UPDATE_TICK                STREAM_SKIP
+#define UPDATE_ACTIVITY            GAUGE_REFRESH
+#define UPDATE_HUD_MODE            REDRAW_FIRST
+#define UPDATE_MAP_OVERRIDE        0xC457B0u
+#define UPDATE_MAP_FLAGS           0xC4589Bu
+#define UPDATE_TAIL_CONDITION      0xC457B2u
+#define UPDATE_DISPLAY_FLAGS       0xC458D2u
+#define INPUT_STATE_WORD           0xC4577Eu
+#define INPUT_STATE_MIRROR         0xC45780u
+#define PENDING_COMMAND_WORD_A     0xC4599Au
+#define PENDING_COMMAND_WORD_B     0xC4599Cu
+
 #endif
