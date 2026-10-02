@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-02. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 29bd43c9); ignored gate logs may
+history (the preceding handoff is in commit 50f6d6a7); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -212,53 +212,110 @@ DMA contention so this distinction is covered before expensive full replays.
   omit chipset events inside children and interrupt handlers outside the
   selected address range; start/end frames still prove those crossings.
 
+## Planning review, 2026-10-02
+
+The user asked to step back and plan because progress was too slow. The seven
+batches after f2d0bc6c added 119 timing bridges (68 -> 187), but readable
+coverage stayed 419/624 and ALL retained its frame-416, 361-pixel difference.
+Those bridges have useful independent proof, but their count is not progress
+in readable game coverage or the combined first-difference milestone.
+
+The integration cost comes from mixing two execution models. Mechanical
+translation preserves original instruction/event boundaries through the CPU
+model. Many readable whole-call replacements still use fixed charges, so
+matching registers and writes does not imply matching interrupt, drawing or
+frame timing. Shadow retains the source timeline; live ON exposes this gap.
+The final deliverable is readable game C with a plain-C backend, not another
+complete CPU bridge. These proof and delivery milestones must stay explicit.
+
+Following the earliest CPU-cycle gap selected C11BFC in machine frame 311.
+That gap is real; it has not been shown to cause the first visible difference.
+Do not automatically source-time it, then chase the next unrelated return.
+
+Fresh 500-frame demo probes with the unchanged 50f6d6a7 executable give:
+
+| Enabled entries | First RGB difference |
+| --- | --- |
+| ALL 419 | Frame 416, 361 pixels |
+| All 187 source-timed entries together | None through frame 500 |
+| All 232 entries without timing steps together | Frame 416, 361 pixels |
+| ALL except C11BFC | Frame 416, 361 pixels |
+| C30918 alone | Frame 416, 361 pixels |
+| All 187 timing entries plus C30918 | Frame 416, 361 pixels |
+| C321D2 and C32260 together | Frame 415, 361 pixels; each alone starts at 424, 34,144 pixels |
+| C30D34, C30EAA, C309B6 and C30F78 together | Frame 416, 361 pixels; neither tested two-entry half differs through 500 |
+| ALL except the seven HUD entries in the preceding three rows | Frame 416, 361 pixels |
+
+The subset/complement controls expose multiple and interacting failures.
+Equal pixel counts do not prove equal changed pixels or a single root cause.
+Removing one failing subset does not eliminate the full failure. These are
+bounded diagnostic results, not full-recording proof or independent Amiga
+machine parity. Logs/selectors/results are cached as build/recomp/planning_*;
+RGB scratch streams are removed automatically. The first four probes took
+4.29 seconds, eight partition controls 7.55 seconds, 35 minimization queries
+(32 distinct candidate replays) 28.67 seconds, and six further controls
+5.92 seconds. Minimization reuses one source stream and cached repeated
+selectors. C30918's 35 original instructions
+and sole C2F60A child give a smaller visual reproducer than the unrelated
+256-instruction C11BFC message update.
+
+The candidate tool currently reports four ready leaves: C1D10C and three
+already deferred Kickstart trampolines. This does not mean only one game
+function remains feasible. Whole-family selection and explicit indirect-child
+contracts are needed to move beyond the leaf-only ranking.
+
 ## Next work
 
-1. Continue game timing parity, as requested after the C279D0 source batch.
-   The latest five-entry face predicate/line-style batch is independently exact.
-   ALL still first differs at frame 416 by 361 pixels. Read
-   analysis/routines/native_c_face_predicate_timing_batch.md for selectors,
-   proof and fresh traces. The first update is exact through both scene-stream
-   returns, the grid and the first record scan. The next enclosing gap is
-   C0F132 after C11BFC in frame 311, +2,344 cycles, with SR 0004/0000.
-   Source-time C11BFC's complete message-update paths and stack locals.
-   It has no child calls; its entry context is exact. C1FB82/C1FB8C/C1FB9C/
-   C1FC42 and C2F490 now have source timing. C1EE14 is a shared span inside
-   C1ED3C, not a standalone catalogued function; do not register/count it.
-   C1CB14/C1CB26/C1ED3C/C1518C remain original
-   parents. Preserve signed widths, flags, DMA contention and all source calls.
-   Later marker and flight entries inherit drift from intervening work; do not
-   infer entry fees from those offsets.
-   The ROM trace found the earlier gap at FC1498 after the game counter;
-   it was fixed in game glue without changing Kickstart behavior.
-   C1D3F4 and its three lookup/filing children now use source timing.
-   C1D10C and C1E540 remain unregistered. Group shared bodies and exits,
-   preserve calls, interrupts, DMA waits and frame crossings, and run --bus
-   fixtures before full live checks. Do not substitute measured fixed fees.
-   Use `python scripts/probe_recomp_timing.py ENTRY... --frames 500` or
-   `--rank-fixed 35 --differences-only`; it reuses one source stream and
-   removes scratch streams. Remaining isolated failures include
-   C3201A/C31F4C/C20A40 (424), C26EBE (441), C0D04C/C20D68 (484).
-   Subset bisection is not monotonic. Require combined evidence before
-   claiming whole-game parity.
-2. Resume additional unregistered game functions in related batches.
-   The user explicitly asked for progress in the function count; avoid another
-   standalone audit of already registered fixed-charge routines as the main
-   batch. C279D0 is complete and activated. Start with C1D10C (648 instructions;
-   terrain_* groundwork), including its placement emission and cache tail.
-   Inspect indirect-call parents C0F5F8 and the C1CB14/C1CB26 siblings for explicit child contracts;
-   the candidate tool excludes them. Preserve the original-source authority.
-   Group shared bodies and children, prove readable whole-call C independently
-   of timing steps, then run the full gate and isolated live checks.
-   Reuse FA18Port's resumable step and source range for calls that cross
-   chipset events, children or frames; helpers live in glue_step.h. Use
-   --bus instruction fixtures with varied horizontal phases before full
-   replay. Keep unported children explicit rather than counting partial
-   functions or graph tails. The three C0004E/C000B4/C000BA candidates are
-   Kickstart trampolines and remain deferred.
-3. Once game source is complete, build the native backend from plain C memory,
-   drawing, and audio. Reassess which Kickstart services remain; do OS work
-   last as requested.
+1. Diagnose the visible failure with a bounded renderer checkpoint. Start
+   with C30918 alone and source OFF over demo frames 410-420, preserving the
+   existing sealed state/input. Locate the changed pixel coordinates and
+   colours at one-based frame 416, map them to display/bitplane writes and
+   compare the gauge's source entry/return state, plot-child effects, page
+   ownership, interrupt/event crossings and update cadence. Preserve byte
+   artifacts or hashes for this small checkpoint. A 361-pixel count alone
+   is not a causal trace. Add only the targeted observation needed if existing
+   boundary traces cannot expose the writer; keep outputs capped and removed.
+   C30918's readable body is already in view_marks.c and C2F60A already has
+   source timing. Correct only source-proven behavior/timing. Repeat both
+   the isolated reproducer and ALL after each candidate correction. Require
+   a changed combined result before claiming the frame-416 issue improved.
+   C321D2/C32260 and the four-entry panel group are further reproducers, not
+   an automatic instruction-transcription queue. C11BFC remains timing debt.
+2. Make the next readable-source milestone explicit: complete the selector
+   family C1D10C, C1E540, C1EBB0 and C1EC84, aiming for 423/624 after proof.
+   C1D10C has 648 source instructions and no unported static children;
+   C1E540 has 523 and needs the 11/23-instruction C1EBB0/C1EC84 helpers.
+   Reuse the existing terrain selector, template and placement groundwork.
+   Preserve all shared spans, emission/cache paths and signed word behavior;
+   do not count prefixes or internal labels as completed functions.
+   Plan original-byte entry/exit checkpoints for each source-owned selector
+   pack and cache path: input globals/frame locals -> template/placement and
+   cache writes, preserving pointers, live outputs and partial-write order.
+   Use recorded whole-call comparisons plus structural cases for paths not
+   reached by recordings. Prove readable domain C independently of its timing
+   bridge with check_whole_call_glue.py, then run the required gates below.
+3. Keep parity and source coverage as separate measured outcomes. Do not
+   spend another chain of timing-only batches without moving either ALL's
+   first difference or readable coverage. Review after at most two such
+   batches; if ALL still does not improve, return to the complete selector
+   family while retaining the failing renderer checkpoint. This is a work
+   selection limit, not permission to weaken proofs or declare parity done.
+   Inspect C1CB14/C1CB26 and C0F5F8 as later complete parent batches; the
+   leaf tool excludes their indirect calls. Preserve explicit child contracts.
+4. Reduce repeated work: cache one source stream within each bounded probe
+   round; run changed-group DMA fixtures and short live probes while editing.
+   Run the full shadow/sandbox/sealed-RAM/poison gate and isolated full live
+   replay once per coherent completed batch. Rerun the full combined
+   instruction oracle when shared CPU/bus/math helpers or fixture setup change,
+   or at an integration checkpoint; unchanged groups already have independent
+   proof. Preserve all required comparisons and incomplete/cold classifications.
+   Keep Ninja's shared objects, size caps, cleanup traps and disjoint recording
+   parallelism; never relink executables still used by active checks.
+5. Finish all game source before the plain-C native backend, then reassess
+   only the remaining Kickstart services. Stage D -> F -> E remains the
+   full objective. Fresh OFF/ON comparisons test our replacements on the
+   same machine model; an independent UAE/Amiga timing check is a distinct
+   proof and must not be inferred from them.
 
 ## Gate for a registered batch
 

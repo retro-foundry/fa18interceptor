@@ -14,6 +14,14 @@ Updated 2026-10-02.
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
+The 2026-10-02 planning review found that all 187 timed entries together match
+500 demo frames, while C30918 alone reproduces the frame-416 difference.
+Other HUD combinations also fail; removing the seven narrowed HUD entries from
+ALL leaves the same first difference. The revised work starts with a targeted
+renderer checkpoint and then the complete four-entry selector family, aiming
+for 423 registered entries. See `CURRENT_PORT_HANDOFF.md` for evidence, scope
+and the work selection/validation schedule.
+
 ## The game program
 
 - One Amiga Hunk executable (`F-18 Interceptor` on the ADF): 185 hunks,

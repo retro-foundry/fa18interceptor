@@ -103,3 +103,9 @@ C1EE14 is a shared span, not a standalone catalogued function. C1D10C remains
 the next unregistered readable-C count batch after the timing priority.
 Complete game source, native backend and necessary OS replacement remain
 the full objective.
+
+Planning followup, 2026-10-02: C11BFC's measured return gap remains real, but
+bypassing that entry does not move ALL's first RGB difference. Fresh bounded
+probes isolate C30918 and interacting HUD groups as visual reproducers. The
+next implementation priority is revised in CURRENT_PORT_HANDOFF.md; this
+report retains the completed batch's proof and historical boundary evidence.

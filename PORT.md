@@ -167,4 +167,6 @@ When every caller of a routine is C, its glue is no longer reached; delete it.
   replaces the ROM calls the game uses.
 - **Start state** is a savestate; cold boot from the ADF needs disk loading.
 - **Audio** (Paula) is not modelled; sprites are not drawn.
-- The glue charges fixed instruction cycles in ON mode, not measured ones.
+- ON mode mixes source-timed bridges with remaining fixed-charge entries.
+  These CPU bridges are transitional proof machinery; readable domain C and
+  the final native backend remain the deliverable.

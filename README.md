@@ -19,9 +19,11 @@ The immediate work is game timing parity. Five further face predicates and
 scan line-style helpers match all recorded frames and sealed final RAM in
 isolation; 187 registered entries now have source timing. The enclosing first
 update matches through both scene-stream returns, the grid and the record scan.
-The complete registered demo still matches through frame 415. Message update
-C11BFC is the next source-timing target. See the
-[timing evidence](analysis/routines/native_c_face_predicate_timing_batch.md).
+The complete registered demo still matches through frame 415. The revised plan
+starts with a small gauge-renderer reproducer and then completes the four-entry
+selector family to advance readable coverage. See the
+[timing evidence](analysis/routines/native_c_face_predicate_timing_batch.md) and
+[planning review](CURRENT_PORT_HANDOFF.md#planning-review-2026-10-02).
 
 See [STATUS.md](STATUS.md) for the numbers,
 [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) for the next steps, and
