@@ -1,0 +1,235 @@
+{
+  "registered_entries": 422,
+  "registered_timing_entries": 204,
+  "entry": "C1E540",
+  "source_parent_instructions": 523,
+  "structural_adapter_cases": 8192,
+  "adapter_liveness": "original C1C9AE: D5 low; D6/D7 full; A1-A7 full; SR control; CCR dead",
+  "isolated_whole_call": {
+    "shadow_matches": 4075,
+    "sandbox_matches": 4090,
+    "shadow_incomplete": 15,
+    "mismatches": 0,
+    "hardware": 0
+  },
+  "isolated_timing": {
+    "entries": [
+      "C1E540",
+      "C1EBB0",
+      "C1EBC0",
+      "C1EBE0",
+      "C1EC3A",
+      "C1EC84",
+      "C1EC96",
+      "C1ECD4",
+      "C1ECFC"
+    ],
+    "instructions": 649,
+    "dma_cases": 20768,
+    "short_demo_frames": 600,
+    "full_frames": 36236,
+    "recordings": 3,
+    "rgb_exact": true,
+    "sealed_final_ram_exact": true
+  },
+  "fresh_combined_instruction_oracle": {
+    "instructions": 10622,
+    "dma_cases": 339904
+  },
+  "full_registered_gate": {
+    "shadow_matches": 688103,
+    "sandbox_matches": 1111316,
+    "mismatches": 0,
+    "sealed_final_ram_exact": true,
+    "poison_frames_identical": true,
+    "family_totals": {
+      "C1E540": {
+        "shadow": {
+          "matched": 4075,
+          "incomplete": 15,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 5796,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1EBB0": {
+        "shadow": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1EBC0": {
+        "shadow": {
+          "matched": 6,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1EBE0": {
+        "shadow": {
+          "matched": 62,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1EC3A": {
+        "shadow": {
+          "matched": 2,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1EC84": {
+        "shadow": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1EC96": {
+        "shadow": {
+          "matched": 8,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1ECD4": {
+        "shadow": {
+          "matched": 33,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      },
+      "C1ECFC": {
+        "shadow": {
+          "matched": 2,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        },
+        "sandbox": {
+          "matched": 0,
+          "incomplete": 0,
+          "hardware": 0,
+          "mismatched": 0
+        }
+      }
+    }
+  },
+  "all_rgb_checkpoint": {
+    "first_difference": [
+      416,
+      361
+    ],
+    "changed_pixels": 361,
+    "nearby_frames": [
+      {
+        "frame": 414,
+        "source_nonblack": 0,
+        "on_nonblack": 0,
+        "on_matches_source_checkpoint": false,
+        "changed_pixels": 0
+      },
+      {
+        "frame": 415,
+        "source_nonblack": 0,
+        "on_nonblack": 0,
+        "on_matches_source_checkpoint": false,
+        "changed_pixels": 0
+      },
+      {
+        "frame": 416,
+        "source_nonblack": 361,
+        "on_nonblack": 0,
+        "on_matches_source_checkpoint": false,
+        "changed_pixels": 361
+      },
+      {
+        "frame": 417,
+        "source_nonblack": 361,
+        "on_nonblack": 361,
+        "on_matches_source_checkpoint": true,
+        "changed_pixels": 0
+      },
+      {
+        "frame": 418,
+        "source_nonblack": 361,
+        "on_nonblack": 361,
+        "on_matches_source_checkpoint": true,
+        "changed_pixels": 0
+      },
+      {
+        "frame": 419,
+        "source_nonblack": 29453,
+        "on_nonblack": 361,
+        "on_matches_source_checkpoint": true,
+        "changed_pixels": 29453
+      },
+      {
+        "frame": 420,
+        "source_nonblack": 29453,
+        "on_nonblack": 29453,
+        "on_matches_source_checkpoint": false,
+        "changed_pixels": 0
+      }
+    ],
+    "source_frame_sha256": "de4e8b22018529118b2a4125b19a5a92b9ae30489a4dbcdf430f720e1d5d2c89",
+    "on_frame_sha256": "6cdd259c8ecbe61fbc369f3293c1961541386954a223b17a37899d7fd9ad42da"
+  },
+  "all_rgb_checked_frames": 420
+}

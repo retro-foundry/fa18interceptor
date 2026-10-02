@@ -852,4 +852,14 @@ int glue_C2FA22(void);
 /* selected clipped segment sibling */
 int glue_C1FFA4(void);
 
+/* Complete placement ordering and packed-cell helper timing. */
+int glue_C1E540(void);
+int glue_C1E540_step(void);
+int glue_C1EBC0_step(void);
+int glue_C1EBE0_step(void);
+int glue_C1EC3A_step(void);
+int glue_C1EC96_step(void);
+int glue_C1ECD4_step(void);
+int glue_C1ECFC_step(void);
+
 #endif

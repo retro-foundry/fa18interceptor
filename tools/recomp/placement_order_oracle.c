@@ -1,6 +1,7 @@
-/* Whole $C1E540 domain-memory oracle. Fixtures keep source-owned lists
+/* Whole $C1E540 domain/adapter oracle. Fixtures keep source-owned lists
  * terminated and exercise the descriptor, plane, polygon and partition paths.
- * CPU effects and live event timing are separate evidence, not inferred here. */
+ * --glue compares original C1C9AE live CPU outputs. Live event timing has
+ * separate independent-instruction and full-recording gates. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,6 +16,7 @@
 
 extern int fa18_write_log_active;
 extern int64_t fa18_cycle_origin, fa18_next_event;
+extern int glue_C1E540(void);
 
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb");
@@ -128,7 +130,10 @@ int main(int argc, char **argv) {
     uint8_t *reference = malloc(FA18_CHIP_SIZE + FA18_SLOW_SIZE);
     unsigned char *cpu = malloc(m68k_context_size());
     char error[256];
-    int captured = argc == 3 && !strcmp(argv[1], "--fixture");
+    int glue = argc > 1 && !strcmp(argv[argc - 1], "--glue");
+    int captured;
+    if (glue) --argc;
+    captured = argc == 3 && !strcmp(argv[1], "--fixture");
     unsigned count = captured ? 1 : argc > 1 ? (unsigned)strtoul(argv[1], NULL, 10) : 2048, scenario;
     if (!state || !rom || !m || !before || !reference || !cpu || !count) {
         fprintf(stderr, "placement oracle: need sealed state, ROM and nonzero cases\n"); return 1;
@@ -141,6 +146,7 @@ int main(int argc, char **argv) {
     for (scenario = 0; scenario < count; ++scenario) {
         unsigned i;
         uint32_t return_pc, return_sp;
+        uint32_t reference_registers[16], reference_sr;
         int result;
         if (captured) {
             uint32_t registers[18];
@@ -164,8 +170,27 @@ int main(int argc, char **argv) {
         }
         memcpy(reference, m->chip, FA18_CHIP_SIZE);
         memcpy(reference + FA18_CHIP_SIZE, m->slow, FA18_SLOW_SIZE);
+        for (i = 0; i < 16; ++i) reference_registers[i] = REG_DA[i];
+        reference_sr = m68k_get_reg(NULL, M68K_REG_SR);
         memcpy(m, before, sizeof *m); m68k_set_context(cpu);
-        order_placement_cache(); fa18_write_log_active = 0;
+        if (glue) glue_C1E540(); else order_placement_cache();
+        fa18_write_log_active = 0;
+        if (glue) {
+            /* Original C1C9AE mask: D5 low, D6/D7 full, A1-A7 full;
+             * CCR and other registers are dead. SR control remains live. */
+            for (i = 5; i < 16; ++i) {
+                uint32_t mask = i == 5 ? 0xFFFFu : 0xFFFFFFFFu;
+                if (i == 8) continue;
+                if ((REG_DA[i] & mask) != (reference_registers[i] & mask)) {
+                    fprintf(stderr, "placement oracle: case %u %c%u source %08X C %08X\n",
+                            scenario, i < 8 ? 'D' : 'A', i & 7u, reference_registers[i], REG_DA[i]); return 1;
+                }
+            }
+            if ((REG_PC & 0xFFFFFFu) != return_pc
+                || ((m68k_get_reg(NULL, M68K_REG_SR) ^ reference_sr) & 0xFF00u)) {
+                fprintf(stderr, "placement oracle: case %u PC/SR control mismatch\n", scenario); return 1;
+            }
+        }
         for (i = 0; i < FA18_CHIP_SIZE + FA18_SLOW_SIZE; ++i) {
             uint8_t got = i < FA18_CHIP_SIZE ? m->chip[i] : m->slow[i - FA18_CHIP_SIZE];
             gaddr address = i < FA18_CHIP_SIZE ? i : i - FA18_CHIP_SIZE + FA18_SLOW_BASE;
@@ -176,6 +201,7 @@ int main(int argc, char **argv) {
             }
         }
     }
-    printf("placement oracle: %u complete C1E540 domain calls matched original Chip/Slow RAM outside dead private stack\n", count);
+    printf("placement oracle: %u complete C1E540 %s calls matched original Chip/Slow RAM outside dead private stack%s\n",
+           count, glue ? "adapter" : "domain", glue ? " and original C1C9AE live CPU outputs" : "");
     free(cpu); free(reference); free(before); free(m); return 0;
 }

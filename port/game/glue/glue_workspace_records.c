@@ -35,14 +35,16 @@ int glue_C1EBB0_step(void) {
     if (pc < 0xC1EBB0u || pc >= 0xC1EBE0u) return 0;
     opcode = step_begin(pc);
     switch (pc) {
-    case 0xC1EBB0:
+    case 0xC1EBB0: case 0xC1EBC0:
         value = m68ki_read_imm_16(); SET_W(D(1), D(1) & value);
         flags_logic_w(D(1)); break;
     case 0xC1EBB4:
         SET_W(D(1), step_lsr_word_value((uint16_t)D(1), 3)); break;
-    case 0xC1EBB6:
+    case 0xC1EBC4:
+        step_add_word(&D(1), D(1)); break;
+    case 0xC1EBB6: case 0xC1EBC6:
         A(2) = m68ki_read_imm_32(); break;
-    case 0xC1EBBC:
+    case 0xC1EBBC: case 0xC1EBCC:
         A(2) += (uint32_t)(int32_t)(int16_t)D(1); break;
     case 0xC1EBBE:
         step_branch(pc, opcode, 1); break;
@@ -72,16 +74,18 @@ int glue_C1EC84_step(void) {
     if (pc < 0xC1EC84u || pc >= 0xC1ECD4u) return 0;
     opcode = step_begin(pc);
     switch (pc) {
-    case 0xC1EC84:
+    case 0xC1EC84: case 0xC1EC96:
         step_predecrement_long(A(2)); flags_logic_l(A(2)); break;
-    case 0xC1EC86:
+    case 0xC1EC86: case 0xC1EC98:
         value = m68k_read_memory_16(A(1)); SET_W(D(1), value); flags_logic_w(value); break;
-    case 0xC1EC88: case 0xC1ECAE: case 0xC1ECC2:
+    case 0xC1EC88: case 0xC1EC9A: case 0xC1ECAE: case 0xC1ECC2:
         value = m68ki_read_imm_16(); SET_W(D(1), D(1) & value);
         flags_logic_w(D(1)); break;
     case 0xC1EC8C:
         SET_W(D(1), step_lsr_word_value((uint16_t)D(1), 3)); break;
-    case 0xC1EC8E:
+    case 0xC1EC9E:
+        step_add_word(&D(1), D(1)); break;
+    case 0xC1EC8E: case 0xC1ECA0:
         A(2) = m68ki_read_imm_32(); break;
     case 0xC1EC94:
         step_branch(pc, opcode, 1); break;
@@ -112,3 +116,6 @@ int glue_C1EC84_step(void) {
     USE_CYCLES(CYC_INSTRUCTION[opcode]);
     return 1;
 }
+
+int glue_C1EBC0_step(void) { return glue_C1EBB0_step(); }
+int glue_C1EC96_step(void) { return glue_C1EC84_step(); }

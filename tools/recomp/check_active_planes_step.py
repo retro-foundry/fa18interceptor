@@ -19,7 +19,7 @@ def main():
                         help="include DMA bus contention in instruction timing fixtures")
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
                    "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map", "grid", "renderer", "sound_start", "screen_frame", "drawing", "cells", "startup", "number_field", "orientation", "tracking", "terrain_sort", "terrain_condition", "terrain_flags", "pixels", "interrupt_count", "view_controls", "record_rate", "matrix_pipeline", "flight_update", "marker_projection", "face_predicates")
-    group_names += ("gauge", "workspace_records", "scene_transition")
+    group_names += ("gauge", "workspace_records", "scene_transition", "placement_order")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -28,6 +28,7 @@ def main():
         "planes": ["C2FD8C"],
         "gauge": ["C30918"],
         "workspace_records": ["C1EBB0", "C1EC84"],
+        "placement_order": ["C1E540", "C1EBB0", "C1EBC0", "C1EBE0", "C1EC3A", "C1EC84", "C1EC96", "C1ECD4", "C1ECFC"],
         "scene_transition": ["C0FAA4", "C0924A", "C09266", "C092A0", "C095C0", "C09620", "C0840E"],
         "audio": ["C4FFB0", "C4FFB4", "C50158", "C501E0", "C50212", "C24FE8"],
         "glyphs": ["C330FE", "C32806"],

@@ -7,6 +7,9 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* placement_order.c: complete cache classification and partition */
+    {0xC1E540, glue_C1E540, "order_placement_cache", 0, 0,
+     glue_C1E540_step, 0xC1EBB0, 0, 0xC1E53C},
     /* control_records.c: workspace selector variants, complete shared tails */
     {0xC1EBB0, glue_C1EBB0, "read_workspace_record_fields", 0, 0,
      glue_C1EBB0_step, 0xC1EBE0},
@@ -57,7 +60,7 @@ const FA18Port fa18_ports[] = {
     /* render_span.c */
     {0xC310E2, glue_C310E2, "bound_span", 80},
     /* control_records.c */
-    {0xC1EBC0, glue_C1EBC0, "read_record_fields", 90},
+    {0xC1EBC0, glue_C1EBC0, "read_record_fields", 0, 0, glue_C1EBC0_step, 0xC1EBE0},
     {0xC230B0, glue_C230B0, "release_lost_selection", 0, 0, glue_C230B0_step, 0xC230E8},
     {0xC2DE96, glue_C2DE96, "settle_record", 50},
     /* screen_frame.c */
@@ -132,7 +135,7 @@ const FA18Port fa18_ports[] = {
     {0xC1E4A6, glue_C1E4A6, "sort_by_depth", 0, 0, glue_C1E4A6_step, 0xC1E504},
     {0xC1E328, glue_C1E328, "sort_display_list", 0, 0, glue_C1E328_step, 0xC1E504},
     {0xC1CA82, glue_C1CA82, "flag_all_records", 0, 0, glue_C1CA82_step, 0xC1CB14},
-    {0xC1EC3A, glue_C1EC3A, "read_record_pair", 120},
+    {0xC1EC3A, glue_C1EC3A, "read_record_pair", 0, 0, glue_C1EC3A_step, 0xC1EC84},
     {0xC2DAF2, glue_C2DAF2, "update_view_matrix", 0, 0, glue_C2DAF2_step, 0xC2DB18},
     {0xC310AA, glue_C310AA, "update_compass", 300},
     {0xC082B8, glue_C082B8, "request_cockpit_redraw", 0, 0, glue_C082B8_step, 0xC08324},
@@ -154,8 +157,8 @@ const FA18Port fa18_ports[] = {
     {0xC11312, glue_C11312, "reset_message_sequence", 0, 0, glue_C11312_step, 0xC1134E},
     {0xC287DA, glue_C287DA, "mode_offset", 0, 0, glue_C287DA_step, 0xC28800},
     {0xC1FEF2, glue_C1FEF2, "skip_stream_records", 60},
-    {0xC1ECFC, glue_C1ECFC, "cell_step", 100},
-    {0xC1ECD4, glue_C1ECD4, "cell_step", 100},
+    {0xC1ECFC, glue_C1ECFC, "cell_step", 0, 0, glue_C1ECFC_step, 0xC1ED2A},
+    {0xC1ECD4, glue_C1ECD4, "cell_step", 0, 0, glue_C1ECD4_step, 0xC1ECFC},
     {0xC2E346, glue_C2E346, "y_rotation_matrix8", 0, 0, glue_C2E346_step, 0xC2E370},
     {0xC31C20, glue_C31C20, "display_value_to_draw", 80},
     /* batch 11: player setup, steering, random bits, channel stop, cockpit script */
@@ -164,7 +167,7 @@ const FA18Port fa18_ports[] = {
     {0xC13C64, glue_C13C64, "steer_record_5a", 240},
     {0xC50B02, glue_C50B02, "random_bits", 0, 0, glue_C50B02_step, 0xC50B36},
     {0xC180FC, glue_C180FC, "stop_channel_2", 0, 0, glue_C180FC_step, 0xC18108},
-    {0xC1EC96, glue_C1EC96, "cell_step", 130},
+    {0xC1EC96, glue_C1EC96, "cell_step", 0, 0, glue_C1EC96_step, 0xC1ECD4},
     {0xC21916, glue_C21916, "skip_for_type_3_to_6", 70},
     {0xC21966, glue_C21966, "skip_counted_entries", 90},
     {0xC2198C, glue_C2198C, "skip_for_low_class", 70},
@@ -245,7 +248,7 @@ const FA18Port fa18_ports[] = {
     {0xC219AE, glue_C219AE, "derive_edge_vertices", 400},
     {0xC2FD22, glue_C2FD22, "clear_render_buffers", 0, 0, glue_C2FD22_step, 0xC2FD8C},
     {0xC3040C, glue_C3040C, "blit_mask_between_planes", 0, 0, glue_C3040C_step, 0xC30466, 0, 0xC301F0},
-    {0xC1EBE0, glue_C1EBE0, "grid_relative_position", 300},
+    {0xC1EBE0, glue_C1EBE0, "grid_relative_position", 0, 0, glue_C1EBE0_step, 0xC1EC3A},
     {0xC25876, glue_C25876, "append_list_point", 600},
     /* batch 26: tones, page plane tops */
     {0xC33180, glue_C33180, "play_tone_2", 0, 0, glue_C33180_step, 0xC331CE},
