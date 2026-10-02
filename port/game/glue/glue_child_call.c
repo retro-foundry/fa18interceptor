@@ -24,6 +24,11 @@ int32_t glue_complete_child(uint32_t routine, uint32_t ret) {
             return (int32_t)D(0);
         }
         result = fa18_recomp_call_dynamic();
+        /* Some installed source callbacks have no generated entry. Resume
+         * their original bytes through the existing runtime between-label
+         * path; opcode execution stays there, never in handwritten glue. */
+        if (result == FA18_EXIT_DISPATCH && REG_PC == before_pc && A(7) == before_sp)
+            result = fa18_recomp_resume(ret,sp);
         if (result == FA18_EXIT_INTERP ||
             (REG_PC == before_pc && A(7) == before_sp)) {
             fprintf(stderr, "whole-call child cannot complete at %06X\n", REG_PC);

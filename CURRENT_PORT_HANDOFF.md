@@ -12,19 +12,19 @@ sealed native recordings. Work in related batches. The order is Stage D game C,
 Stage F native backend, then only the Stage E Kickstart services still needed.
 The user explicitly deferred OS work and asked for larger routine batches.
 After the C279D0 batch, the latest instruction is to return to game timing
-parity. The selector and scene/follow-up placement milestones are complete at 427/624.
+parity. The selector, placement and post-input tick milestones are complete at 428/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 427 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 633,759 completed shadow
-  calls and 932,215 sandbox calls across three native recordings, with zero
+- 428 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 644,155 completed shadow
+  calls and 944,089 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 427-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 428-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -146,6 +146,16 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   source bytes. ALL remains 416/361. See
   analysis/routines/native_c_followup_placements.md and
   analysis/figures/native_followup_placements_checkpoint.json.
+  The complete C0F5F8 post-input parent is now registered: 428/624, with
+  213 timing-step entries. All 16,384 complete original CPU/RAM cases match
+  every register, full SR and all RAM without exclusions. Normal isolated
+  readable C passes 15,929 shadow / 16,001 sandbox completed comparisons,
+  retaining four hardware and 79 incomplete shadow calls and ten incomplete
+  sandbox calls. Local timing passes 118 / 3,776 DMA cases; the fresh combined
+  oracle passes 11,853 / 379,296. All 36,236 isolated live frames and sealed
+  RAM match. ALL remains 416/361. GNU/MSVC pass; build/ is 0.305 GiB.
+  See analysis/routines/native_c_post_input_tick.md and
+  analysis/figures/native_post_input_tick_checkpoint.json.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -443,12 +453,27 @@ analysis/routines/native_c_followup_placements.md and
 analysis/figures/native_followup_placements_checkpoint.json. Do not redo these
 complete parent/helper milestones or count their internal labels separately.
 
-The next parent remains C0F5F8. Source review corrected the existing typed
-post_input_tick.c limit from decimal 4650 to source hexadecimal $4650 (18,000);
-its contract test passes 5,000/17,999 as valid and 18,000 as invalid. This
-groundwork correction is not a new registered parent. Preserve the actual
-LINK frame, all normal caller-live outputs, source callback pointer/return
-boundary and partial writes when completing its normal CPU/timing integration.
+C0F5F8 is now complete and registered at 428/624, with 213 timing-step entries.
+Its LINK -4 frame, optional D1 offset terms, D0 high word, phase MOVEQ resets,
+callback CCR input, actual C0F806/C0F808 call/return and child-owned state
+changes match independent original execution. The older C0F804 report address
+was a transcription error and is corrected. The domain retains the source
+hexadecimal $4650 limit (18,000) and partial-write order. Its 16,384 structural
+cases match all registers, full SR and all RAM, including stack, with no
+exclusions. Normal readable-C replay matches 31,930 completed comparisons;
+the full gate matches 644,155 shadow / 944,089 sandbox calls with no mismatches,
+all seals and poison passing. All 36,236 isolated live frames and final RAM
+match. Fresh combined timing passes 11,853 / 379,296 DMA cases. GNU/MSVC pass;
+build/ is 0.305 GiB; ALL remains 416/361. Detailed classifications are in
+analysis/figures/native_post_input_tick_checkpoint.json. Do not redo this parent.
+
+Next complete the related C1C860 context-refresh parent and C08F26 bootstrap,
+then their C0F920/C0F992 callback wrappers as one source-owned batch. C08F26
+has 80 instructions including the final C1C40C/C1C63E/C1C860 calls after
+C090AE; its older initialization slice ending at C090AD is not the complete
+contract. Preserve explicit children and normal all-register/high-word masks.
+The runtime between-label source path handles callbacks with no generated
+entry; no handwritten glue may invoke opcode handlers. Keep the fade deferred.
 
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
 difference may be ignored for current work and revisited later. Source/ALL
@@ -487,14 +512,14 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84, scene-placement
-   pair C1CB14/C1CB26, and follow-up parent C1CCBC/workspace helper C1D0A4
-   are complete and registered at 427/624.
+   pair C1CB14/C1CB26, follow-up parent C1CCBC/workspace helper C1D0A4,
+   and post-input parent C0F5F8 are complete and registered at 428/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Complete C0F5F8's post-input
-   parent next; the leaf tool excludes
-   their indirect calls. Select using source-owned semantics and explicit
-   child contracts, without reopening the deferred fade investigation.
+   or count internal labels as extra routines. Complete the related C1C860
+   context-refresh/C08F26 bootstrap and C0F920/C0F992 callback batch next;
+   the leaf tool excludes indirect calls. Select using source-owned semantics
+   and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
    Preserve all shared spans, emission/cache paths and signed word behavior;
    do not count prefixes or internal labels as completed functions.
@@ -510,8 +535,8 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    batches; if ALL still does not improve, return to complete readable parent
    batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
-   Complete C0F5F8 as the next parent batch; the leaf tool excludes its
-   indirect calls. Preserve explicit child contracts.
+   Complete the context-refresh/bootstrap/callback batch next; the leaf tool
+   excludes its indirect calls. Preserve explicit child contracts.
 4. Reduce repeated work: cache one source stream within each bounded probe
    round; run changed-group DMA fixtures and short live probes while editing.
    Run the full shadow/sandbox/sealed-RAM/poison gate and isolated full live

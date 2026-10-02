@@ -19,12 +19,13 @@ def main():
                         help="include DMA bus contention in instruction timing fixtures")
     group_names = ("planes", "audio", "glyphs", "input", "page", "notify",
                    "command", "buffers", "polygon", "postflight", "followup", "faces", "regions", "map", "grid", "renderer", "sound_start", "screen_frame", "drawing", "cells", "startup", "number_field", "orientation", "tracking", "terrain_sort", "terrain_condition", "terrain_flags", "pixels", "interrupt_count", "view_controls", "record_rate", "matrix_pipeline", "flight_update", "marker_projection", "face_predicates")
-    group_names += ("gauge", "workspace_records", "scene_transition", "placement_order", "template_placements", "scene_placements", "followup_placements")
+    group_names += ("gauge", "workspace_records", "scene_transition", "placement_order", "template_placements", "scene_placements", "followup_placements", "post_input_tick")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "post_input_tick": ["C0F5F8"],
         "followup_placements": ["C1CCBC", "C1D0A4", "C1D0B6", "C25876"],
         "scene_placements": ["C1CB14", "C1CB26"],
         "planes": ["C2FD8C"],

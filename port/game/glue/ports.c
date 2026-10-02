@@ -7,6 +7,8 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    {0xC0F5F8, glue_C0F5F8, "run_post_input_tick", 0, 0,
+     glue_C0F5F8_step, 0xC0F812},
     /* Complete follow-up placements and signed workspace accumulation. */
     {0xC1CCBC, glue_C1CCBC, "visit_followup_placements", 0, 0,
      glue_C1CCBC_step, 0xC1D0A4},

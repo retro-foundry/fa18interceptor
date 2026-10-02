@@ -4,7 +4,12 @@ Source review on 2026-10-02 corrected the typed port's offset limit:
 $C0F69A uses hexadecimal $4650 (18,000), whereas the earlier C used decimal
 4650. The contract check now covers 5,000 and 17,999 as valid and 18,000 as
 invalid. This is a source-backed groundwork correction; the complete normal
-CPU adapter and live source-timing registration for $C0F5F8 remain next work.
+CPU adapter and live source-timing registration are now implemented in
+`port/game/post_input_tick.c` and `port/game/glue/glue_post_input_tick*.c`.
+Independent proof covers 16,384 complete all-register/full-SR/all-RAM cases
+without exclusions, plus 31,930 normal recorded whole-call comparisons.
+See `analysis/routines/native_c_post_input_tick.md` for current integration
+evidence; the older static/archived route evidence below remains historical.
 
 Classification: **static complete routine with a bounded tail route**.
 
@@ -40,8 +45,9 @@ phase-three, valid-offset, and invalid-offset routes.
 The sealed run060 success activation supplies a second, distinct callback
 fixture.  At entry to the directly traced `$C110A4` sequence writer, the
 active stack return address is `$C0F808`; the byte-exact tail places
-`JSR (A0)` at `$C0F804`.  Thus the live callback pointer dispatch at
-`$C0F804` invoked `$C110A4` on this activation.  That routine sees the
+`JSR (A0)` at `$C0F806` (the earlier report's `$C0F804` was a transcription
+error). Thus the live callback pointer dispatch at `$C0F806` invoked
+`$C110A4` on this activation. That routine sees the
 countdown `$C45AD6=-1`, installs `$C10DAE`, and takes its observed mode-9
 selector-writing route.  This proves the callback edge and countdown gate;
 the same bounded run060 walk identifies `$C0F7FA` as the zero-to-negative
