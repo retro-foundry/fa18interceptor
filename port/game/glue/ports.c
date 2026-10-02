@@ -7,6 +7,11 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* control_records.c: workspace selector variants, complete shared tails */
+    {0xC1EBB0, glue_C1EBB0, "read_workspace_record_fields", 0, 0,
+     glue_C1EBB0_step, 0xC1EBE0},
+    {0xC1EC84, glue_C1EC84, "add_workspace_cell_steps", 0, 0,
+     glue_C1EC84_step, 0xC1ECD4},
     /* grid_projection_packet.c */
     {0xC279D0, glue_C279D0, "draw_grid_projection_packet", 0, 0,
      glue_C279D0_step, 0xC27D24},

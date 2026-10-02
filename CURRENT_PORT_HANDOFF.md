@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-02. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit f850ac95); ignored gate logs may
+history (the preceding handoff is in commit 4ee1df1e); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -16,12 +16,12 @@ parity. That timing investigation is the immediate priority.
 
 ## Verified baseline
 
-- 419 of 624 translated game entries are registered in port/game/glue/ports.c.
+- 421 of 624 translated game entries are registered in port/game/glue/ports.c.
   The latest full gate for that registered set matched 703,337 completed shadow
   calls and 1,110,694 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 419-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 421-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -266,6 +266,35 @@ contracts are needed to move beyond the leaf-only ranking.
 
 ## Next work
 
+Readable milestone completed: C1EBB0 and C1EC84 are now complete, registered
+workspace-selector helpers, including their shared tails. Coverage is 421/624,
+with 190 timing-step entries. Each readable whole-call adapter matches 16,384
+original-instruction structural calls (all registers, full SR, PC and RAM);
+their 34 instructions pass 1,088 DMA cases. Both helpers are cold in sealed
+recordings: the temporary recorded whole-call tool correctly rejects zero
+completed comparisons, and its rejection is retained. The independent
+complete-call oracle supplies their proof; full isolated live runs are
+nonregression checks, exact on all 36,236 frames and sealed RAM. The full
+421-entry shadow/sandbox/sealed-RAM/poison gate passes with unchanged completed
+call totals. GNU/MSVC pass. Independent instruction groups now total 9,696 /
+310,272 cases; the combined oracle was not rerun for these local groups.
+See analysis/routines/native_c_workspace_record_helpers.md. C1D10C and C1E540
+remain the two outstanding parents for the 423-entry milestone.
+
+Latest visible checkpoint: the user's Copper-fade observation is confirmed.
+ALL's fade resets and finishes two machine frames late. Its mode increments
+still occur every three frames, and the existing C1718E callback is timed.
+The scene initializer is entered one frame late; its fixed 32,000-cycle
+replacement crosses another vertical blank before C0FA32 resets the mode.
+Source/ALL terminal state writes occur at machine frames 436/438. Restoring
+original C0FAA4 in an otherwise ALL control removes one delayed frame, but
+the first RGB difference remains 416/361. The other frame is inherited at
+the C0FA0E entry. See analysis/routines/native_frame_416_checkpoint.md and its
+small comparison PNG/JSON. The next parity work is source/event timing for
+C0FAA4 (24 instructions, four static children) and the inherited delay at
+the transition; do not adjust a fixed fee or shift replay/frame conditions.
+Keep the selector-parent milestone and work-selection limit below.
+
 Gauge checkpoint completed after the planning review: $C30918 now has source
 timing. Its 35 instructions pass 1,120 DMA fixtures; all 36,236 isolated live
 frames and sealed RAM match. All 49 bounded parent trace rows match every
@@ -278,26 +307,25 @@ matches, zero mismatches, sealed RAM exact and poison identical. There are
 309,184 DMA cases (the combined oracle was not rerun for this local bridge).
 See analysis/routines/native_c_gauge_timing_checkpoint.md for byte hashes and
 call classifications. This is one timing-only batch since the review. The
-next implementation work is item 2, the complete selector family; retain
+next readable implementation work is item 2, the remaining selector parents; retain
 item 1's failing combined checkpoint rather than chasing another early gap.
 
-1. Diagnose the visible failure with a bounded renderer checkpoint. Start
-   with C30918 alone and source OFF over demo frames 410-420, preserving the
-   existing sealed state/input. Locate the changed pixel coordinates and
-   colours at one-based frame 416, map them to display/bitplane writes and
-   compare the gauge's source entry/return state, plot-child effects, page
-   ownership, interrupt/event crossings and update cadence. Preserve byte
-   artifacts or hashes for this small checkpoint. A 361-pixel count alone
-   is not a causal trace. Add only the targeted observation needed if existing
-   boundary traces cannot expose the writer; keep outputs capped and removed.
-   C30918's readable body is already in view_marks.c and C2F60A already has
-   source timing. Correct only source-proven behavior/timing. Repeat both
-   the isolated reproducer and ALL after each candidate correction. Require
-   a changed combined result before claiming the frame-416 issue improved.
-   C321D2/C32260 and the four-entry panel group are further reproducers, not
-   an automatic instruction-transcription queue. C11BFC remains timing debt.
+1. Continue from the preserved frame-416 comparison and fade callback
+   checkpoint. The gauge's isolated failure is corrected; ALL remains
+   416/361 with identical incorrect bytes. Preserve source-backed timing
+   through C0FAA4 and its four children; compare C0FA0E/C0FA12/C0FA32 and
+   the terminal C1741A boundary. Locate the already inherited one-frame
+   delay at C0FA0E using the transition's actual enclosing path, rather than
+   returning to an unrelated first cycle gap in frame 311. The initializer
+   bypass removes one delayed fade frame but leaves the first RGB mismatch,
+   so neither a fixed-fee adjustment nor a frame shift is a completed fix.
+   Repeat the bounded RGB and callback checkpoints with ALL after each
+   candidate; require a changed combined result before claiming improvement.
+   C321D2/C32260 and the panel group remain further reproducers, not an
+   automatic instruction-transcription queue. C11BFC remains timing debt.
 2. Make the next readable-source milestone explicit: complete the selector
    family C1D10C, C1E540, C1EBB0 and C1EC84, aiming for 423/624 after proof.
+   The two helpers are now proven/registered; complete C1D10C and C1E540 next.
    C1D10C has 648 source instructions and no unported static children;
    C1E540 has 523 and needs the 11/23-instruction C1EBB0/C1EC84 helpers.
    Reuse the existing terrain selector, template and placement groundwork.
@@ -354,7 +382,7 @@ item 1's failing combined checkpoint rather than chasing another early gap.
   `& 'C:\Program Files\Git\bin\bash.exe' scripts/recomp_live_check.sh`.
   The same ON replay now also checks sealed final RAM, saving three extra
   replays per batch. Recordings run concurrently; temporary RGB/RAM outputs
-  are removed. The latest completed batch leaves build/ at 0.180 GiB. An
+  are removed. The latest completed batch leaves build/ at 0.192 GiB. An
   inactive entry needs temporary registration for a probe and must be removed
   if live output differs. A stepped SHADOW stream is not the live source
   oracle because source-first hardware-input replay can alter its timing.

@@ -12,16 +12,18 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-419 game entries are registered. Three sealed native recordings cover the
+421 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
 The immediate work is game timing parity and the next readable source batch.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 188 registered entries now have source timing. The complete
+isolation; 190 registered entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
-is complete; the next work completes the four-entry selector family to advance
-readable coverage. See the
-[timing evidence](analysis/routines/native_c_gauge_timing_checkpoint.md) and
+is complete and two new workspace selector helpers are proven. The remaining
+selector parents are the next readable milestone. The frame-416 comparison
+confirms a fade starting and finishing two frames late; its reset straddles
+an extra vertical blank during scene initialization. See the
+[visible checkpoint](analysis/routines/native_frame_416_checkpoint.md) and
 [planning review](CURRENT_PORT_HANDOFF.md#planning-review-2026-10-02).
 
 See [STATUS.md](STATUS.md) for the numbers,

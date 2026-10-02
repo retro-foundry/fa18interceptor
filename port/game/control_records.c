@@ -15,6 +15,20 @@ gaddr control_record(uint16_t selector) {
     return CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)((selector & 0xFF00) * 2);
 }
 
+gaddr workspace_record(uint16_t selector) {
+    return WORKSPACE_RECORDS + ((selector & 0xFF00u) >> 3);
+}
+
+int32_t add_workspace_cell_steps(gaddr entry, int16_t column, int16_t row,
+                                 uint32_t *x, uint32_t *z) {
+    gaddr record = workspace_record(rd_u16(entry));
+    int32_t dx = cell_step((int16_t)((rd_u16(record + 6) & 0xFFu) - column));
+    int32_t dz = cell_step((int16_t)((rd_u16(record + 8) & 0xFFu) - row));
+    *x += (uint32_t)dx;
+    *z += (uint32_t)dz;
+    return dz;
+}
+
 void read_record_fields(gaddr record, int32_t *field_0c, int32_t *field_10, int32_t *field_0e) {
     *field_0c = rd_s16(record + REC_FIELD_0C);
     *field_10 = rd_s32(record + REC_FIELD_10);

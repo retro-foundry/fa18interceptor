@@ -1,0 +1,579 @@
+{
+  "recording": "captures/native/demo01",
+  "frames": 500,
+  "source": "fresh OFF",
+  "candidate": "fresh ON ALL",
+  "frame_convention": "machine frame counter; RGB output uses one-based frame numbers",
+  "start": {
+    "off": [
+      {
+        "pc": "C0FA0E",
+        "machine_frame": 393,
+        "vpos": 251,
+        "cycle": 55958822,
+        "d0_low_byte": 255,
+        "a0": "00C0FA04"
+      },
+      {
+        "pc": "C0FA12",
+        "machine_frame": 393,
+        "vpos": 287,
+        "cycle": 55975102,
+        "d0_low_byte": 0,
+        "a0": "00C4574E"
+      },
+      {
+        "pc": "C0FA2A",
+        "machine_frame": 393,
+        "vpos": 287,
+        "cycle": 55975162,
+        "d0_low_byte": 0,
+        "a0": "00C4574E"
+      },
+      {
+        "pc": "C0FA32",
+        "machine_frame": 393,
+        "vpos": 287,
+        "cycle": 55975182,
+        "d0_low_byte": 0,
+        "a0": "00C4574E"
+      }
+    ],
+    "on": [
+      {
+        "pc": "C0FA0E",
+        "machine_frame": 394,
+        "vpos": 251,
+        "cycle": 56100972,
+        "d0_low_byte": 255,
+        "a0": "00C0FA04"
+      },
+      {
+        "pc": "C0FA12",
+        "machine_frame": 395,
+        "vpos": 3,
+        "cycle": 56132990,
+        "d0_low_byte": 0,
+        "a0": "00C4574E"
+      },
+      {
+        "pc": "C0FA2A",
+        "machine_frame": 395,
+        "vpos": 25,
+        "cycle": 56140432,
+        "d0_low_byte": 0,
+        "a0": "00C4574E"
+      },
+      {
+        "pc": "C0FA32",
+        "machine_frame": 395,
+        "vpos": 25,
+        "cycle": 56140452,
+        "d0_low_byte": 0,
+        "a0": "00C4574E"
+      }
+    ]
+  },
+  "fade": {
+    "off": [
+      {
+        "pc": "C17322",
+        "machine_frame": 394,
+        "vpos": 11,
+        "cycle": 55992042,
+        "d0_low_byte": 1,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 394,
+        "vpos": 11,
+        "cycle": 55992224,
+        "d0_low_byte": 16,
+        "a0": "00C086D0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 397,
+        "vpos": 11,
+        "cycle": 56418340,
+        "d0_low_byte": 2,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 397,
+        "vpos": 11,
+        "cycle": 56418522,
+        "d0_low_byte": 16,
+        "a0": "00C086B0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 400,
+        "vpos": 11,
+        "cycle": 56844654,
+        "d0_low_byte": 3,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 400,
+        "vpos": 11,
+        "cycle": 56844836,
+        "d0_low_byte": 16,
+        "a0": "00C08690"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 403,
+        "vpos": 11,
+        "cycle": 57270952,
+        "d0_low_byte": 4,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 403,
+        "vpos": 11,
+        "cycle": 57271134,
+        "d0_low_byte": 16,
+        "a0": "00C08670"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 406,
+        "vpos": 14,
+        "cycle": 57698504,
+        "d0_low_byte": 5,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 406,
+        "vpos": 14,
+        "cycle": 57698768,
+        "d0_low_byte": 16,
+        "a0": "00C08650"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 409,
+        "vpos": 11,
+        "cycle": 58123560,
+        "d0_low_byte": 6,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 409,
+        "vpos": 11,
+        "cycle": 58123742,
+        "d0_low_byte": 16,
+        "a0": "00C08630"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 412,
+        "vpos": 11,
+        "cycle": 58549930,
+        "d0_low_byte": 7,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 412,
+        "vpos": 12,
+        "cycle": 58550126,
+        "d0_low_byte": 16,
+        "a0": "00C08610"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 415,
+        "vpos": 11,
+        "cycle": 58976366,
+        "d0_low_byte": 8,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 415,
+        "vpos": 12,
+        "cycle": 58976566,
+        "d0_low_byte": 16,
+        "a0": "00C085F0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 418,
+        "vpos": 11,
+        "cycle": 59402482,
+        "d0_low_byte": 9,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 418,
+        "vpos": 11,
+        "cycle": 59402664,
+        "d0_low_byte": 16,
+        "a0": "00C085D0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 421,
+        "vpos": 11,
+        "cycle": 59828788,
+        "d0_low_byte": 10,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 421,
+        "vpos": 11,
+        "cycle": 59828970,
+        "d0_low_byte": 16,
+        "a0": "00C085B0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 424,
+        "vpos": 11,
+        "cycle": 60255102,
+        "d0_low_byte": 11,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 424,
+        "vpos": 11,
+        "cycle": 60255284,
+        "d0_low_byte": 16,
+        "a0": "00C08590"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 427,
+        "vpos": 11,
+        "cycle": 60681400,
+        "d0_low_byte": 12,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 427,
+        "vpos": 11,
+        "cycle": 60681582,
+        "d0_low_byte": 16,
+        "a0": "00C08570"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 430,
+        "vpos": 11,
+        "cycle": 61107722,
+        "d0_low_byte": 13,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 430,
+        "vpos": 11,
+        "cycle": 61107904,
+        "d0_low_byte": 16,
+        "a0": "00C08550"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 433,
+        "vpos": 11,
+        "cycle": 61534012,
+        "d0_low_byte": 14,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 433,
+        "vpos": 11,
+        "cycle": 61534194,
+        "d0_low_byte": 16,
+        "a0": "00C08530"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 436,
+        "vpos": 11,
+        "cycle": 61960334,
+        "d0_low_byte": 15,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 436,
+        "vpos": 11,
+        "cycle": 61960516,
+        "d0_low_byte": 16,
+        "a0": "00C08510"
+      },
+      {
+        "pc": "C1741A",
+        "machine_frame": 436,
+        "vpos": 142,
+        "cycle": 62019786,
+        "d0_low_byte": 15,
+        "a0": "00C0852E"
+      }
+    ],
+    "on": [
+      {
+        "pc": "C17322",
+        "machine_frame": 396,
+        "vpos": 11,
+        "cycle": 56276234,
+        "d0_low_byte": 1,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 396,
+        "vpos": 11,
+        "cycle": 56276416,
+        "d0_low_byte": 16,
+        "a0": "00C086D0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 399,
+        "vpos": 11,
+        "cycle": 56702540,
+        "d0_low_byte": 2,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 399,
+        "vpos": 11,
+        "cycle": 56702722,
+        "d0_low_byte": 16,
+        "a0": "00C086B0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 402,
+        "vpos": 42,
+        "cycle": 57142942,
+        "d0_low_byte": 3,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 402,
+        "vpos": 43,
+        "cycle": 57143176,
+        "d0_low_byte": 16,
+        "a0": "00C08690"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 405,
+        "vpos": 11,
+        "cycle": 57555164,
+        "d0_low_byte": 4,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 405,
+        "vpos": 11,
+        "cycle": 57555346,
+        "d0_low_byte": 16,
+        "a0": "00C08670"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 408,
+        "vpos": 11,
+        "cycle": 57981462,
+        "d0_low_byte": 5,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 408,
+        "vpos": 11,
+        "cycle": 57981644,
+        "d0_low_byte": 16,
+        "a0": "00C08650"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 411,
+        "vpos": 11,
+        "cycle": 58407768,
+        "d0_low_byte": 6,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 411,
+        "vpos": 11,
+        "cycle": 58407950,
+        "d0_low_byte": 16,
+        "a0": "00C08630"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 414,
+        "vpos": 11,
+        "cycle": 58834082,
+        "d0_low_byte": 7,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 414,
+        "vpos": 11,
+        "cycle": 58834264,
+        "d0_low_byte": 16,
+        "a0": "00C08610"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 417,
+        "vpos": 11,
+        "cycle": 59260380,
+        "d0_low_byte": 8,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 417,
+        "vpos": 11,
+        "cycle": 59260562,
+        "d0_low_byte": 16,
+        "a0": "00C085F0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 420,
+        "vpos": 12,
+        "cycle": 59687196,
+        "d0_low_byte": 9,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 420,
+        "vpos": 13,
+        "cycle": 59687378,
+        "d0_low_byte": 16,
+        "a0": "00C085D0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 423,
+        "vpos": 13,
+        "cycle": 60113726,
+        "d0_low_byte": 10,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 423,
+        "vpos": 13,
+        "cycle": 60113908,
+        "d0_low_byte": 16,
+        "a0": "00C085B0"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 426,
+        "vpos": 11,
+        "cycle": 60539294,
+        "d0_low_byte": 11,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 426,
+        "vpos": 11,
+        "cycle": 60539476,
+        "d0_low_byte": 16,
+        "a0": "00C08590"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 429,
+        "vpos": 14,
+        "cycle": 60967094,
+        "d0_low_byte": 12,
+        "a0": "00C0040C"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 429,
+        "vpos": 15,
+        "cycle": 60967278,
+        "d0_low_byte": 16,
+        "a0": "00C08570"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 432,
+        "vpos": 11,
+        "cycle": 61391922,
+        "d0_low_byte": 13,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 432,
+        "vpos": 11,
+        "cycle": 61392104,
+        "d0_low_byte": 16,
+        "a0": "00C08550"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 435,
+        "vpos": 11,
+        "cycle": 61818212,
+        "d0_low_byte": 14,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 435,
+        "vpos": 11,
+        "cycle": 61818394,
+        "d0_low_byte": 16,
+        "a0": "00C08530"
+      },
+      {
+        "pc": "C17322",
+        "machine_frame": 438,
+        "vpos": 11,
+        "cycle": 62244522,
+        "d0_low_byte": 15,
+        "a0": "00C00276"
+      },
+      {
+        "pc": "C1735A",
+        "machine_frame": 438,
+        "vpos": 11,
+        "cycle": 62244704,
+        "d0_low_byte": 16,
+        "a0": "00C08510"
+      },
+      {
+        "pc": "C1741A",
+        "machine_frame": 438,
+        "vpos": 142,
+        "cycle": 62303986,
+        "d0_low_byte": 15,
+        "a0": "00C0852E"
+      }
+    ]
+  }
+}

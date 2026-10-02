@@ -19,6 +19,15 @@ enum {
 /* The record whose index is the high byte of `selector`. */
 gaddr control_record(uint16_t selector);
 
+/* $C1EBB0/$C1EC84: the high selector byte indexes 32-byte workspace records. */
+gaddr workspace_record(uint16_t selector);
+
+/* Add the selected workspace record's low-byte +6/+8 cell displacements,
+ * relative to column/row, to x/z. Differences wrap as signed words before
+ * conversion to fixed point. Returns the z displacement ($C1EC84). */
+int32_t add_workspace_cell_steps(gaddr entry, int16_t column, int16_t row,
+                                 uint32_t *x, uint32_t *z);
+
 /* Read a record's +$0C, +$10 and +$0E fields (the words sign-extended). */
 void read_record_fields(gaddr record, int32_t *field_0c, int32_t *field_10, int32_t *field_0e);
 

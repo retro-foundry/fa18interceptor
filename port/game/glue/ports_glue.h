@@ -3,6 +3,12 @@
 
 /* Glue entry points, one per recreated routine, named by original address. */
 
+/* Workspace selector helpers, including their shared source tails. */
+int glue_C1EBB0(void);
+int glue_C1EBB0_step(void);
+int glue_C1EC84(void);
+int glue_C1EC84_step(void);
+
 /* active_planes.c and source-timed audio bridges */
 int glue_C2FD8C(void);
 int glue_C2FD8C_step(void);

@@ -7,10 +7,10 @@ Updated 2026-10-02.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 419 registered game entries passed shadow, sandbox, sealed final RAM, and poison checks on all three native recordings. New batches also require live ON RGB comparison with fresh source OFF output. Archived UAE runs are historical evidence. |
+| Current proof | The 421 registered game entries passed shadow, sandbox, sealed final RAM, and poison checks on all three native recordings. The two new workspace helpers are cold there and independently match 32,768 complete original-instruction fixtures. New batches also require live ON RGB comparison with fresh source OFF output. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 419 registered game entries in `port/game/`; 703,337 matching shadow calls and 1,110,694 sandbox calls over three native recordings; poison frames identical. New grid projection entry: C279D0; previous map/region batch: C2AA9C, C2AB34, C2AB5A, C2B05A. See `CURRENT_PORT_HANDOFF.md` for remaining work. |
-| Live C timing | The gauge correction matches all 36,236 isolated live frames, sealed RAM and all 49 bounded parent trace rows. There are 188 timing-step entries; independent group proofs cover 9,662 instructions and 309,184 DMA cases. The last full combined oracle covered 9,627 instructions; the gauge added 35/1,120 independently. ALL still first differs at frame 416 by 361 pixels. See `analysis/routines/native_c_gauge_timing_checkpoint.md` and `CURRENT_PORT_HANDOFF.md`. |
+| Recreated C source | 421 registered game entries in `port/game/`; 703,337 matching shadow calls and 1,110,694 sandbox calls over three native recordings; poison frames identical. New entries: complete workspace helpers C1EBB0 and C1EC84. They have zero recorded calls; independent structural proof supplies their evidence. See `CURRENT_PORT_HANDOFF.md` for remaining work. |
+| Live C timing | The gauge correction matches all 36,236 isolated live frames, sealed RAM and all 49 bounded parent trace rows. There are 190 timing-step entries; independent group proofs cover 9,696 instructions and 310,272 DMA cases. The last full combined oracle covered 9,627 instructions; local gauge/workspace groups added 69/2,208 independently. ALL still first differs at frame 416 by 361 pixels: its Copper fade starts and finishes two frames late. See `analysis/routines/native_frame_416_checkpoint.md` and `CURRENT_PORT_HANDOFF.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -19,8 +19,11 @@ The 2026-10-02 planning review found that all 187 timed entries together match
 Other HUD combinations also fail; removing the seven narrowed HUD entries from
 ALL leaves the same first difference. The targeted gauge checkpoint is now
 corrected, with ALL's first difference unchanged. The next work is the
-complete four-entry selector family, aiming
-for 423 registered entries. See `CURRENT_PORT_HANDOFF.md` for evidence, scope
+remaining two selector parents, aiming for 423 registered entries; their two
+workspace helpers are now complete. The visible checkpoint also confirms a
+fade reset and completion two machine frames late, with one frame inherited
+at scene entry and one introduced by the initializer replacement. See
+`CURRENT_PORT_HANDOFF.md` for evidence, scope
 and the work selection/validation schedule.
 
 ## The game program
