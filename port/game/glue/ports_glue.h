@@ -694,6 +694,11 @@ int glue_C3019C(void);
 
 /* face test dispatch */
 int glue_C1FB82(void);
+int glue_C1FB82_step(void);
+int glue_C2F490_step(void);
+int glue_C1FB8C_step(void);
+int glue_C1FB9C_step(void);
+int glue_C1FC42_step(void);
 
 /* bound points */
 int glue_C1F99A(void);

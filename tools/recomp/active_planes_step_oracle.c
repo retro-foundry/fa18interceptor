@@ -71,6 +71,27 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if (pc >= 0xC1FB82u && pc < 0xC1FCDEu) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[4] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+        wr_u32(REG_A[6] - 0x2c, REG_A[0]);
+        wr_u16(REG_A[6] - 0x26, boundaries[scenario % 16u]);
+        wr_u16(REG_A[6] - 0x24, boundaries[(scenario + 1) % 16u]);
+        wr_u16(REG_A[6] - 0x22, boundaries[(scenario + 2) % 16u]);
+        wr_u16(0xC45AB8u, boundaries[(scenario + 3) % 16u]);
+        for (i = 0; i < 3; ++i)
+            wr_u16(0xC45B2Au + i * 2, boundaries[(scenario + i + 4) % 16u]);
+    }
     if ((pc >= 0xC0DAEEu && pc < 0xC0DB42u) ||
         (pc >= 0xC2EC70u && pc < 0xC2ED6Cu) ||
         (pc >= 0xC2F1B8u && pc < 0xC2F482u)) {

@@ -51,7 +51,7 @@ is proven against.
   fixtures include DMA contention and live batches compare fresh source OFF
   frames. Exact isolated batches can still expose combined timing debt in
   other fixed-charge entries. Current timing evidence is in
-  `analysis/routines/native_c_marker_projection_timing_batch.md`.
+  `analysis/routines/native_c_face_predicate_timing_batch.md`.
 - **OS replacement** (`port/os/`). Source-backed C Kickstart services, with a
   temporary CPU bridge while the game still uses the original register file.
 

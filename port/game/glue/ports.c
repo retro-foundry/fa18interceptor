@@ -100,7 +100,7 @@ const FA18Port fa18_ports[] = {
     {0xC1342C, glue_C1342C, "update_matrix_side_record", 3500},
     {0xC2DD4E, glue_C2DD4E, "adjust_matrix_record_depth", 1300},
     /* render_line.c, render_state.c */
-    {0xC2F490, glue_C2F490, "reset_line_style", 30},
+    {0xC2F490, glue_C2F490, "reset_line_style", 0, 0, glue_C2F490_step, 0xC2F49C},
     {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},
     {0xC1D722, glue_C1D722, "fill_column", 280},
     {0xC30F56, glue_C30F56, "start_blit", 90},
@@ -256,7 +256,7 @@ const FA18Port fa18_ports[] = {
     {0xC1C54E, glue_C1C54E, "seed_projection", 0, 0, glue_C1C54E_step, 0xC1C63E},
     {0xC09AB8, glue_C09AB8, "condition_table_matches", 0, 0, glue_C09AB8_step, 0xC09B48},
     /* batch 29: component bound, repeated sum, view key */
-    {0xC1FC42, glue_C1FC42, "component_beyond_bound", 250},
+    {0xC1FC42, glue_C1FC42, "component_beyond_bound", 0, 0, glue_C1FC42_step, 0xC1FCDE},
     {0xC1BA86, glue_C1BA86, "queue_view_key", 0, 0, glue_C1BA86_step, 0xC1C2B8},
     /* batch 30: audio interrupt, date line */
     {0xC50158, glue_C50158, "update_voices", 0, 0, glue_C50158_step, 0xC501E0},
@@ -298,7 +298,7 @@ const FA18Port fa18_ports[] = {
     /* batch 44: view aiming */
     {0xC2D9BA, glue_C2D9BA, "aim_view", 0, 0, glue_C2D9BA_step, 0xC2DAF2, 0, 0xC2D9B0},
     /* batch 45: face toward eye */
-    {0xC1FB8C, glue_C1FB8C, "face_toward_eye", 900},
+    {0xC1FB8C, glue_C1FB8C, "face_toward_eye", 0, 0, glue_C1FB8C_step, 0xC1FC3A},
     /* batch 46: target distance */
     {0xC1D91A, glue_C1D91A, "target_distance", 0, 0, glue_C1D91A_step, 0xC1D9D8, 0, 0xC1D90A},
     /* batch 47: post-input stages, stick and throttle, flight recorder */
@@ -333,7 +333,7 @@ const FA18Port fa18_ports[] = {
     {0xC345A0, glue_C345A0, "plot_ring", 20000},
     /* batch 48: coloured face, stored-normal test, record steering, view rotation, edge split */
     {0xC099AA, glue_C099AA, "draw_coloured_face", 30000},
-    {0xC1FB9C, glue_C1FB9C, "point_toward_eye", 300},
+    {0xC1FB9C, glue_C1FB9C, "point_toward_eye", 0, 0, glue_C1FB9C_step, 0xC1FBD4},
     {0xC2CAA0, glue_C2CAA0, "steer_record_neutral", 60},
     {0xC2CA92, glue_C2CA92, "steer_record_roll", 80},
     {0xC2CA26, glue_C2CA26, "steer_record_turn", 200},
@@ -461,7 +461,7 @@ const FA18Port fa18_ports[] = {
     /* mark polygon */
     {0xC3019C, glue_C3019C, "draw_mark_polygon", 9000},
     /* face test dispatch */
-    {0xC1FB82, glue_C1FB82, "face_toward_eye", 900},
+    {0xC1FB82, glue_C1FB82, "face_toward_eye", 0, 0, glue_C1FB82_step, 0xC1FCDE},
     /* bound points */
     {0xC1F99A, glue_C1F99A, "transform_bound_points", 9000},
     /* draw_stream.c */

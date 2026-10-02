@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-02. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 9e8ff77b); ignored gate logs may
+history (the preceding handoff is in commit 29bd43c9); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -17,7 +17,7 @@ parity. That timing investigation is the immediate priority.
 ## Verified baseline
 
 - 419 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 703,356 completed shadow
+  The latest full gate for that registered set matched 703,337 completed shadow
   calls and 1,110,694 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
@@ -26,9 +26,9 @@ parity. That timing investigation is the immediate priority.
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
   These isolated bridges match fresh source OFF output on all 36,236 frames. The
-  combined instruction oracle now matches 9,502 instructions and 304,064 cases
+  combined instruction oracle now matches 9,627 instructions and 308,064 cases
   with DMA contention enabled. See
-  analysis/routines/native_c_marker_projection_timing_batch.md for the complete
+  analysis/routines/native_c_face_predicate_timing_batch.md for the complete
   current timing set; analysis/routines/native_c_registered_timing_batch.md
   retains the earlier 24-entry evidence.
   The new four-entry map/region batch is independently exact across all
@@ -88,11 +88,22 @@ parity. That timing investigation is the immediate priority.
   marker return now matches; the enclosing first gap is after C1CB26 in frame
   311. Nested traces locate C1FB82 after the already stepped C2005C dispatch.
   See analysis/routines/native_c_marker_projection_timing_batch.md.
+  Five further face/component predicates and scan line-style entries match
+  all 36,236 isolated frames and sealed RAM. Their 125 instructions pass
+  4,000 DMA fixtures; 187 registered entries now have timing steps. The
+  scene-stream/grid/first scan returns now match. The enclosing first gap
+  is C0F132 after C11BFC in frame 311, +2,344 cycles and SR 0004/0000.
+  See analysis/routines/native_c_face_predicate_timing_batch.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
   run.json with a sealed final RAM hash. Archived captures/uae runs, including
   run075, are historical evidence and are not an acceptance gate.
+  Current RGB timing checks generate fresh source OFF and recreated-C ON
+  streams with the same executable, state, input and machine model. The
+  starting snapshot originated in UAE, but is shared by both runs. Their
+  difference tests the replacement paths; agreement cannot detect a machine
+  error shared by both runs or establish independent Amiga timing parity.
 - The headless GNU and MSVC Release builds pass. The typed port's eight
   affected map/detail contract tests passed with the map source changes.
 - Only .vscode/ is untracked; it belongs to the user. Leave it alone.
@@ -128,15 +139,16 @@ parity. That timing investigation is the immediate priority.
   C1612C's 100-frame CSV and the eight-frame ROM CSV are also identical.
   Outer-loop rows match through frame 295. The first flight parent and view,
   projection, attitude, terrain, cockpit, map and matrix-marker returns now
-  match. The enclosing update's first 31,266 instruction rows match every
-  field. Its first difference is C0F0BA after C1CB26 in frame 311, +2,024
-  cycles. The first scene-stream pass returns exactly. Within the second
-  stream pass, C1CC88 inherits +2,056 after the indirect C1EE14 shared span.
-  That span first differs after its C2005C child; the tested-face trace first
-  differs after fixed-helper C1FB82, +488 cycles with a dead A0 difference.
+  match. The enclosing update's first 31,275 instruction rows match every
+  field, including the scene-stream, grid and first record-scan returns.
+  Its first difference is C0F132 after C11BFC in frame 311, +2,344 cycles
+  (source/ON 44,324,676/44,327,020), with SR 0004/0000. The face predicate
+  bridges removed the earlier +2,024-cycle stream gap; source timing for
+  C2F490 removed the subsequent -16-cycle record-scan gap. C11BFC is a
+  registered message update with a fixed charge and no child calls.
   These observations locate complete-call debt, not substitute charges or
   proof of which instruction causes the frame-416 pixels. See
-  analysis/routines/native_c_marker_projection_timing_batch.md.
+  analysis/routines/native_c_face_predicate_timing_batch.md.
   Shadow/sandbox matches do not establish live ON fidelity for the whole
   registered set.
 - Plane shadow now replays the live source's ordered DMACONR inputs on saved
@@ -203,16 +215,17 @@ DMA contention so this distinction is covered before expensive full replays.
 ## Next work
 
 1. Continue game timing parity, as requested after the C279D0 source batch.
-   The latest seven-entry marker/projection/circle batch is independently exact.
+   The latest five-entry face predicate/line-style batch is independently exact.
    ALL still first differs at frame 416 by 361 pixels. Read
-   analysis/routines/native_c_marker_projection_timing_batch.md for selectors,
-   proof and fresh traces. The first update is exact through the first stream
-   pass; the next enclosing gap is C0F0BA after C1CB26 in frame 311, +2,024.
-   Source-time C1FB82 with C1FB8C/C1FB9C/C1FC42 and their shared tails.
-   Nested traces locate the first +488 cycles at C200BE after C1FB82.
-   C2005C is already stepped; its original calling context is exact beforehand.
-   C1EE14 is a shared span inside C1ED3C, not a standalone catalogued function;
-   do not register/count that label. C1CB14/C1CB26/C1ED3C remain original
+   analysis/routines/native_c_face_predicate_timing_batch.md for selectors,
+   proof and fresh traces. The first update is exact through both scene-stream
+   returns, the grid and the first record scan. The next enclosing gap is
+   C0F132 after C11BFC in frame 311, +2,344 cycles, with SR 0004/0000.
+   Source-time C11BFC's complete message-update paths and stack locals.
+   It has no child calls; its entry context is exact. C1FB82/C1FB8C/C1FB9C/
+   C1FC42 and C2F490 now have source timing. C1EE14 is a shared span inside
+   C1ED3C, not a standalone catalogued function; do not register/count it.
+   C1CB14/C1CB26/C1ED3C/C1518C remain original
    parents. Preserve signed widths, flags, DMA contention and all source calls.
    Later marker and flight entries inherit drift from intervening work; do not
    infer entry fees from those offsets.

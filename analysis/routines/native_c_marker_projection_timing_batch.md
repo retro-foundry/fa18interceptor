@@ -119,3 +119,9 @@ C2005C-C200F6; use the demo state/input, 500 frames, `--ports off`/`on`, and
 removed after evidence is recorded; small proof logs and cached objects remain.
 C1D10C remains the next unregistered readable-C count batch. Complete game
 source, native backend and necessary OS replacement remain the full objective.
+
+Followup on 2026-10-02: the five-entry face-predicate/line-style batch removes
+both the +2,024-cycle stream gap and a subsequent -16-cycle scan gap. The first
+enclosing difference now follows C11BFC. See
+[native_c_face_predicate_timing_batch.md](native_c_face_predicate_timing_batch.md)
+for the fresh proof; the measurements above retain this checkpoint's scope.
