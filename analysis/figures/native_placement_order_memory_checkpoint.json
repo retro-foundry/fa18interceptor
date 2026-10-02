@@ -1,0 +1,89 @@
+{
+  "entry": "C1E540",
+  "domain": "order_placement_cache",
+  "registered": false,
+  "proof_scope": "domain memory effects; full CPU adapter and live timing still pending",
+  "structural_calls": 8192,
+  "captured_demo_call": 1044,
+  "captured_entry_memory_matches": true,
+  "recorded": {
+    "demo01_sandbox": {
+      "entry": "C1E540",
+      "name": "order_placement_cache_memory_only",
+      "calls": 2087,
+      "compared": 2087,
+      "matched": 2087,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 0,
+      "mean_cycles": 3863,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    },
+    "demo01_shadow": {
+      "entry": "C1E540",
+      "name": "order_placement_cache_memory_only",
+      "calls": 2087,
+      "compared": 2072,
+      "matched": 2072,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 15,
+      "mean_cycles": 3830,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    },
+    "qual_carrier_success_sandbox": {
+      "entry": "C1E540",
+      "name": "order_placement_cache_memory_only",
+      "calls": 1650,
+      "compared": 1650,
+      "matched": 1650,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 0,
+      "mean_cycles": 2358,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    },
+    "qual_carrier_success_shadow": {
+      "entry": "C1E540",
+      "name": "order_placement_cache_memory_only",
+      "calls": 1650,
+      "compared": 1650,
+      "matched": 1650,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 0,
+      "mean_cycles": 2358,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    },
+    "qual_fail_crashes_sandbox": {
+      "entry": "C1E540",
+      "name": "order_placement_cache_memory_only",
+      "calls": 353,
+      "compared": 353,
+      "matched": 353,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 0,
+      "mean_cycles": 5614,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    },
+    "qual_fail_crashes_shadow": {
+      "entry": "C1E540",
+      "name": "order_placement_cache_memory_only",
+      "calls": 353,
+      "compared": 353,
+      "matched": 353,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 0,
+      "mean_cycles": 5606,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    }
+  }
+}

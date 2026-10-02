@@ -29,6 +29,12 @@ not a completed port correction. See
 `CURRENT_PORT_HANDOFF.md` for evidence, scope
 and the work selection/validation schedule.
 
+The complete C1E540 placement-ordering domain body is now implemented and
+matches 8,192 structural memory fixtures plus 4,075 shadow / 4,090 sandbox
+domain-memory comparisons across the three full recordings. Its CPU adapter
+and live timing proof are still pending, so it is not counted among the 421
+registered entries. See `analysis/routines/native_c_placement_order_domain.md`.
+
 ## The game program
 
 - One Amiga Hunk executable (`F-18 Interceptor` on the ADF): 185 hunks,

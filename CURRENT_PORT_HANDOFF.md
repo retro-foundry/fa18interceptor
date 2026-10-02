@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-02. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 6b23723c); ignored gate logs may
+history (the preceding handoff is in commit a611b39b); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -307,6 +307,22 @@ after frame/fade JSONs are preserved separately under analysis/figures/.
 This is the second timing-only batch since the review; return to the complete
 selector parents next, retaining the causal HUD checkpoint for later parity.
 
+Selector work resumed: the complete C1E540 domain-memory body now exists in
+port/game/placement_order.c, including all selection, proximity, special
+height, plane, indexed polygon/triangle and scratch-partition paths. It
+matches 8,192 complete original-instruction fixtures and 4,075 shadow /
+4,090 sandbox domain-memory comparisons across all three full recordings,
+zero mismatches. Fifteen shadow calls remain incomplete. A recorded demo
+failure exposed C1E7F6's inherited zero shift; the body and reference-shift
+fixtures now preserve it. GNU/MSVC builds pass. This is a deliberately
+separate memory-only proof; the temporary proof runner excludes CPU outputs
+other than A6/A7, leaving production masks/registry intact. C1E540 is not
+registered and coverage stays 421. Next implement its CPU adapter and full
+source timing, reusing the completed domain rather than recreating a prefix.
+See analysis/routines/native_c_placement_order_domain.md for exact evidence,
+commands, inherited argument dependency and pending gates. C1D10C remains
+the other complete parent to port.
+
 Gauge checkpoint completed after the planning review: $C30918 now has source
 timing. Its 35 instructions pass 1,120 DMA fixtures; all 36,236 isolated live
 frames and sealed RAM match. All 49 bounded parent trace rows match every
@@ -335,6 +351,9 @@ item 1's failing combined checkpoint rather than chasing another early gap.
 2. Make the next readable-source milestone explicit: complete the selector
    family C1D10C, C1E540, C1EBB0 and C1EC84, aiming for 423/624 after proof.
    The two helpers are now proven/registered; complete C1D10C and C1E540 next.
+   C1E540's complete domain body is now proven for memory effects. Finish
+   its live CPU adapter and parent/child event timing before registering it;
+   its temporary memory-only runner is not a substitute for the normal gate.
    C1D10C has 648 source instructions and no unported static children;
    C1E540 has 523 and needs the 11/23-instruction C1EBB0/C1EC84 helpers.
    Reuse the existing terrain selector, template and placement groundwork.
