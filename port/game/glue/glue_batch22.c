@@ -16,9 +16,9 @@ static uint32_t divu_w(uint32_t dividend, uint16_t divisor) {
  * reads D3 and D4 as the two table lookups leave them (D2 the last divisor),
  * and the flags of the final MOVE.W D1 store. */
 void magnitude_registers(void);
-void magnitude_registers(void) {
+void magnitude_register_outputs(int apply, int32_t result);
+void magnitude_register_outputs(int apply, int32_t result) {
     uint32_t d2 = D(2), d3 = D(3), d4 = D(4), t;
-    int32_t result;
 
     if ((int16_t)d3 > (int16_t)d2) {
         t = d2;
@@ -50,13 +50,15 @@ void magnitude_registers(void) {
         SET_W(d4, (uint16_t)(d4 * 2));
     }
 
-    result = magnitude3((int16_t)D(2), (int16_t)D(3), (int16_t)D(4));
+    if (apply) result = magnitude3((int16_t)D(2), (int16_t)D(3), (int16_t)D(4));
     D(1) = (uint32_t)result;
     D(2) = d2;
     D(3) = d3;
     D(4) = d4;
     flags_logic_w(D(1));
 }
+
+void magnitude_registers(void) { magnitude_register_outputs(1, 0); }
 
 int glue_C1D974(void) {
     magnitude_registers();

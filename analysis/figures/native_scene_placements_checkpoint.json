@@ -1,0 +1,315 @@
+{
+  "date": "2026-10-02",
+  "entries": [
+    "C1CB14",
+    "C1CB26"
+  ],
+  "registered": true,
+  "registered_entries": 425,
+  "registered_timing_entries": 208,
+  "unique_source_instructions": 99,
+  "scope": "Complete readable primary/alternate scene-placement traversal; independent normal CPU adapter and source timing",
+  "production_return_masks": {
+    "C0F0AC": "FFFF/FF/00",
+    "C0F0BA": "FFFF/FF/00"
+  },
+  "child_contract": "Explicit descriptor consumer; recorded C096BC/C096CA/C1ED3C children remain independently owned source execution",
+  "structural": {
+    "cases": 8192,
+    "cases_per_entry": 4096,
+    "all_registers_and_high_words": true,
+    "pc_and_sr_control": true,
+    "private_child_stack_exclusion_bytes": 160,
+    "original_code_patched": false,
+    "limitations": [
+      "Synthetic descriptor children use terminated bounded renderer streams; these are not whole renderer-parent proofs",
+      "Callback mutations of selected list/offset are preserved by rereads but are not independently synthesized"
+    ]
+  },
+  "isolated_normal_whole_call": {
+    "recorded": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C1CB14",
+            "name": "visit_primary_scene_placements",
+            "calls": 2085,
+            "compared": 714,
+            "matched": 714,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1371,
+            "mean_cycles": 20904,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1CB26",
+            "name": "visit_alternate_scene_placements",
+            "calls": 2085,
+            "compared": 1221,
+            "matched": 1221,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 864,
+            "mean_cycles": 32313,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1CB14",
+            "name": "visit_primary_scene_placements",
+            "calls": 2099,
+            "compared": 1945,
+            "matched": 1945,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 154,
+            "mean_cycles": 129727,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1CB26",
+            "name": "visit_alternate_scene_placements",
+            "calls": 2092,
+            "compared": 2059,
+            "matched": 2059,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 33,
+            "mean_cycles": 54761,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C1CB14",
+            "name": "visit_primary_scene_placements",
+            "calls": 1647,
+            "compared": 1389,
+            "matched": 1389,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 258,
+            "mean_cycles": 20997,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1CB26",
+            "name": "visit_alternate_scene_placements",
+            "calls": 1647,
+            "compared": 1578,
+            "matched": 1578,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 69,
+            "mean_cycles": 8372,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1CB14",
+            "name": "visit_primary_scene_placements",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2937,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1CB26",
+            "name": "visit_alternate_scene_placements",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6709,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C1CB14",
+            "name": "visit_primary_scene_placements",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 384,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1CB26",
+            "name": "visit_alternate_scene_placements",
+            "calls": 351,
+            "compared": 348,
+            "matched": 348,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 14579,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1CB14",
+            "name": "visit_primary_scene_placements",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 383,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1CB26",
+            "name": "visit_alternate_scene_placements",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 14853,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "totals": {
+      "shadow": {
+        "matched": 5601,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 2565
+      },
+      "sandbox": {
+        "matched": 11446,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 187
+      }
+    },
+    "original_liveness_retained": true
+  },
+  "local_instruction_oracle": {
+    "instructions": 99,
+    "dma_cases": 3168
+  },
+  "fresh_combined_instruction_oracle": {
+    "instructions": 11402,
+    "dma_cases": 364864
+  },
+  "full_registered_gate": {
+    "recorded_totals": {
+      "shadow": {
+        "matched": 653694,
+        "mismatched": 0,
+        "hardware": 15996,
+        "incomplete": 30490
+      },
+      "sandbox": {
+        "matched": 1069233,
+        "mismatched": 0,
+        "hardware": 16986,
+        "incomplete": 411892
+      }
+    },
+    "parent_totals": {
+      "shadow": {
+        "matched": 5601,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 2565
+      },
+      "sandbox": {
+        "matched": 11401,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 192
+      }
+    },
+    "shadow_matches": 653694,
+    "sandbox_matches": 1069233,
+    "mismatches": 0,
+    "sealed_final_ram_exact": true,
+    "poison_frames_identical": true
+  },
+  "isolated_live": {
+    "entries": [
+      "C1CB14",
+      "C1CB26"
+    ],
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "iterations": 4892,
+        "final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "iterations": 8038,
+        "final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "iterations": 3082,
+        "final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+      }
+    },
+    "frames": 36236,
+    "rgb_exact": true,
+    "sealed_final_ram_exact": true
+  },
+  "all_demo_probe": {
+    "frames": 600,
+    "first_difference_frame": 416,
+    "changed_pixels": 361
+  },
+  "builds": [
+    "GNU headless",
+    "MSVC Release"
+  ],
+  "build_size_gib": 0.283,
+  "deferred_copper_fade": {
+    "user_instruction_date": "2026-10-02",
+    "scope": "Minor fade difference deferred; automated comparisons unchanged",
+    "reset_source_all": [
+      393,
+      394
+    ],
+    "terminal_source_all": [
+      436,
+      437
+    ],
+    "evidence": "analysis/routines/native_c_scene_transition_timing.md"
+  },
+  "next": "Inspect complete C1CCBC follow-up placement traversal and C0F5F8 parent; preserve explicit child owners and deferred fade evidence"
+}

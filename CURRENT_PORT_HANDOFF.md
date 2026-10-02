@@ -12,19 +12,19 @@ sealed native recordings. Work in related batches. The order is Stage D game C,
 Stage F native backend, then only the Stage E Kickstart services still needed.
 The user explicitly deferred OS work and asked for larger routine batches.
 After the C279D0 batch, the latest instruction is to return to game timing
-parity. The selector milestone is complete at 423/624. The latest user
-instruction defers the minor Copper-fade difference: keep its frame-313
+parity. The selector and scene-placement milestones are complete at 425/624.
+The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 423 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 669,031 completed shadow
-  calls and 1,075,296 sandbox calls across three native recordings, with zero
+- 425 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 653,694 completed shadow
+  calls and 1,069,233 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 423-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 425-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -116,13 +116,23 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   classifications. ALL remains 416/361. See
   analysis/routines/native_c_placement_order_domain.md.
   The complete C1D10C template-placement parent is now registered as entry
-  423, with its normal CPU adapter and C1D722 source timing. There are 206
-  timing-step entries. All 8,192 structural adapter cases and 492 shadow /
-  1,046 sandbox isolated whole-call comparisons pass with original liveness.
+  423, with its normal CPU adapter and C1D722 source timing. At that checkpoint
+  there were 206 timing-step entries. All 8,192 structural adapter cases and
+  492 shadow / 1,046 sandbox isolated whole-call comparisons pass with original liveness.
   The seven-entry isolated group matches all 36,236 live frames and sealed
   RAM. Local timing passes 681 instructions / 21,792 DMA cases; the fresh
   combined oracle passes 11,303 / 361,696. ALL remains 416/361. See
   analysis/routines/native_c_template_placements_domain.md.
+  The complete C1CB14/C1CB26 scene-placement pair is now registered, including
+  the shared distance refresh, countdown/skip gate and descriptor-result tail.
+  There are 208 timing-step entries. All 8,192 structural CPU/RAM cases and
+  5,601 shadow / 11,446 sandbox normal isolated whole-call comparisons pass;
+  2,565 shadow and 187 sandbox calls are incomplete, zero hardware/mismatches.
+  Local source timing passes 99 instructions / 3,168 DMA cases; a fresh combined
+  oracle passes 11,402 / 364,864. The 600-frame pair probe is exact; ALL remains
+  416/361. The isolated pair also matches all 36,236 live frames and sealed
+  final RAM. See analysis/routines/native_c_scene_placements.md and
+  analysis/figures/native_scene_placements_checkpoint.json.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -288,9 +298,9 @@ selectors. C30918's 35 original instructions
 and sole C2F60A child give a smaller visual reproducer than the unrelated
 256-instruction C11BFC message update.
 
-The candidate tool currently reports four ready leaves: C1D10C and three
-already deferred Kickstart trampolines. This does not mean only one game
-function remains feasible. Whole-family selection and explicit indirect-child
+At the planning review the candidate tool reported four ready leaves:
+C1D10C and three already deferred Kickstart trampolines. This did not mean
+only one game function remained feasible. Whole-family selection and explicit indirect-child
 contracts are needed to move beyond the leaf-only ranking.
 
 ## Next work
@@ -376,6 +386,26 @@ analysis/routines/native_c_template_placements_domain.md and
 analysis/figures/native_template_placements_checkpoint.json. The earlier
 native_template_placements_domain_checkpoint.json is historical domain proof.
 
+The complete primary/alternate scene-placement pair C1CB14/C1CB26 is now
+registered at 425/624, with 208 timing-step entries. It owns the entire
+99-instruction shared traversal, including distance refresh, negative-result
+countdown and descriptor return storage; consumers remain explicit children.
+The earlier typed traversal omitted these full-parent gates and cannot be
+substituted for this complete domain. Original source distinguishes C1ED3C's
+bypass and the -128 countdown overflow branch; both are retained.
+All 8,192 structural cases match every register/high word, PC, SR control and
+RAM outside a bounded 160-byte child stack. Normal isolated whole-call proof
+passes 5,601 shadow / 11,446 sandbox calls, zero mismatches/hardware; 2,565
+shadow and 187 sandbox calls remain incomplete. Caller masks are unchanged.
+Local timing passes 99 / 3,168 DMA cases; fresh ALL instruction proof passes
+11,402 / 364,864. GNU/MSVC pass. The full 425-entry gate passes 653,694 shadow /
+1,069,233 sandbox calls, sealed RAM exact and poison identical. Changed call
+totals reflect parents absorbing their children. The pair matches all 36,236
+isolated live frames and sealed final RAM; ALL remains 416/361. Build/ is
+0.283 GiB after automatic replay cleanup. The full live proof and retained call
+classifications are in analysis/figures/native_scene_placements_checkpoint.json.
+See analysis/routines/native_c_scene_placements.md. Do not redo this pair.
+
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
 difference may be ignored for current work and revisited later. Source/ALL
 reset writes are machine frames 393/394 and terminal writes 436/437; each
@@ -412,11 +442,13 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    Require a changed combined result before claiming improvement. Do not
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
-2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84 is complete and
-   registered at 423/624. Preserve normal caller masks and the independent
+2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84 and scene-placement
+   pair C1CB14/C1CB26 are complete and registered at 425/624.
+   Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Inspect C1CB14/C1CB26 and
-   C0F5F8 as subsequent complete parent batches; the leaf tool excludes
+   or count internal labels as extra routines. Inspect C1CCBC's complete
+   follow-up placement/record traversal, then C0F5F8, as subsequent complete
+   parent batches; the leaf tool excludes
    their indirect calls. Select using source-owned semantics and explicit
    child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
@@ -434,7 +466,7 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    batches; if ALL still does not improve, return to complete readable parent
    batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
-   Inspect C1CB14/C1CB26 and C0F5F8 as later complete parent batches; the
+   Inspect C1CCBC and C0F5F8 as later complete parent batches; the
    leaf tool excludes their indirect calls. Preserve explicit child contracts.
 4. Reduce repeated work: cache one source stream within each bounded probe
    round; run changed-group DMA fixtures and short live probes while editing.

@@ -1,5 +1,11 @@
 # Flight update stage at `$C1CB14` (Hunk 8 +`$84C`)
 
+Later independent checkpoint (2026-10-02): the complete $C1CB14/$C1CB26
+scene-placement traversal is now implemented and registered. Its normal
+CPU/RAM and source-timing proofs are documented in
+[native_c_scene_placements.md](native_c_scene_placements.md). The historical
+packet below remains capped and must not be cited as a completed invocation.
+
 Classification: **structural, capped**. This is a human-flight invocation of a
 direct child of the long update sequence. It is not a completed function
 contract and is not assigned a subsystem name beyond its observed placement.

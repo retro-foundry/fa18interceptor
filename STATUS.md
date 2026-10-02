@@ -7,10 +7,10 @@ Updated 2026-10-02.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 423 registered game entries passed shadow, sandbox, sealed final RAM, and poison checks on all three native recordings. The two workspace helpers are cold there and independently match 32,768 complete original-instruction fixtures. C1E540 and C1D10C each match 8,192 complete structural adapter cases. C1D10C also matches 492 shadow / 1,046 sandbox isolated whole-call comparisons with normal liveness; 539 shadow calls are incomplete. Archived UAE runs are historical evidence. |
+| Current proof | The 425 registered game entries passed shadow, sandbox, sealed final RAM, and poison checks on all three native recordings. The two workspace helpers are cold there and independently match 32,768 complete original-instruction fixtures. C1E540 and C1D10C each match 8,192 complete structural adapter cases. The complete C1CB14/C1CB26 pair matches 8,192 structural cases and 5,601 shadow / 11,446 sandbox normal isolated whole-call comparisons; 2,565 shadow and 187 sandbox calls remain incomplete. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 423 registered game entries in `port/game/`; 669,031 matching shadow calls and 1,075,296 sandbox calls over three native recordings; poison frames identical. Latest new entry: the complete 648-instruction C1D10C template-placement parent. Child calls absorbed by a ported parent change aggregate totals. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | The template-placement parent and C1D722 now use source timing. There are 206 timing-step entries. Their 681 instructions pass 21,792 DMA cases; a fresh full combined oracle passes 11,303 instructions / 361,696 DMA cases. ALL still first differs at frame 416 by 361 pixels. The Copper fade finishes one frame late (436/437), deferred by the user on 2026-10-02. See `analysis/routines/native_c_template_placements_domain.md`, `analysis/routines/native_c_scene_transition_timing.md` and `CURRENT_PORT_HANDOFF.md`. |
+| Recreated C source | 425 registered game entries in `port/game/`; 653,694 matching shadow calls and 1,069,233 sandbox calls over three native recordings; poison frames identical. Latest new entries: the complete C1CB14/C1CB26 scene-placement pair and shared 99-instruction traversal. Child calls absorbed by a ported parent change aggregate totals. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | The scene-placement pair now uses source timing. There are 208 timing-step entries. Its 99 instructions pass 3,168 DMA cases; a fresh full combined oracle passes 11,402 instructions / 364,864 DMA cases. The pair matches all 36,236 isolated live frames and sealed RAM. ALL still first differs at frame 416 by 361 pixels. The Copper fade finishes one frame late (436/437), deferred by the user on 2026-10-02. See `analysis/routines/native_c_scene_placements.md`, `analysis/routines/native_c_scene_transition_timing.md` and `CURRENT_PORT_HANDOFF.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -20,7 +20,8 @@ Other HUD combinations also fail; removing the seven narrowed HUD entries from
 ALL leaves the same first difference. The targeted gauge checkpoint is now
 corrected, with ALL's first difference unchanged. The next work is a
 complete readable parent batch; C1D10C, C1E540
-and the two workspace helpers are now complete at 423 entries. The visible checkpoint also confirms a
+and the two workspace helpers are now complete; the scene-placement pair
+raises coverage to 425 entries. The visible checkpoint also confirms a
 fade reset and completion two machine frames late. The initializer correction
 removes the frame it introduced; the inherited frame remains. A 17-entry HUD
 original-code control also removes that frame, moving the first RGB difference
@@ -43,6 +44,12 @@ recorded whole-call comparisons without relaxing production liveness. Its
 parent and C1D722 timing are implemented and registered at 423/624. Their
 seven-entry isolated live group matches all 36,236 frames and sealed RAM. See
 `analysis/routines/native_c_template_placements_domain.md`.
+
+The complete primary/alternate scene-placement pair C1CB14/C1CB26 now
+preserves the distance refresh, countdown/skip and descriptor-result paths,
+including the C1ED3C bypass and signed countdown overflow. Domain C, normal
+CPU adaptation and source timing are proven separately. Descriptor consumers
+remain explicit children. See `analysis/routines/native_c_scene_placements.md`.
 
 ## The game program
 

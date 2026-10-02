@@ -13,6 +13,7 @@
 #define W(n) ((int16_t)D(n))
 
 void magnitude_registers(void); /* glue_batch22.c */
+void magnitude_register_outputs(int apply, int32_t result);
 
 static uint32_t divu_w(uint32_t dividend, uint16_t divisor) {
     uint32_t q = dividend / divisor;
@@ -64,11 +65,11 @@ int glue_C2574A(void) {
 /* $C1D91A: D2-D4 the point. Every register is live after it: D6 the
  * shifted target height, D1-D4 as magnitude3 leaves them (or the
  * saturated height's), D5 and D7 restored. */
-int glue_C1D91A(void) {
+void target_distance_registers(int apply, int32_t result) {
     int16_t x = W(2), y = W(3), z = W(4), shift = rd_s16(BOUND_SHIFT);
     int count = shift & 63;
 
-    target_distance(x, y, z);
+    if (apply) result = target_distance(x, y, z);
     SET_W(D(1), rd_u16(PROJECTION_WORDS));
     D(6) = rd_u32(PROJECTION_Y);
     SET_W(D(1), (uint16_t)(count >= 16 ? (W(1) < 0 ? -1 : 0) : W(1) >> count));
@@ -80,7 +81,7 @@ int glue_C1D91A(void) {
     if ((int32_t)D(3) < 0) D(3) = 0u - D(3);
     if ((int32_t)D(3) >= 0x7FFF0) {
         SET_W(D(1), 0x7FFF);
-        return glue_return();
+        return;
     }
     {
         int16_t pz = rd_s16(PROJECTION_WORDS + 4);
@@ -90,6 +91,10 @@ int glue_C1D91A(void) {
     SET_W(D(2), (uint16_t)(W(2) >> 4));
     D(3) = (uint32_t)((int32_t)D(3) >> 4);
     SET_W(D(4), (uint16_t)(W(4) >> 4));
-    magnitude_registers();
+    magnitude_register_outputs(0, result);
+}
+
+int glue_C1D91A(void) {
+    target_distance_registers(1, 0);
     return glue_return();
 }

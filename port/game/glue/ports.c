@@ -7,6 +7,11 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* scene_placements.c: both complete descriptor-dispatch parents */
+    {0xC1CB14, glue_C1CB14, "visit_primary_scene_placements", 0, 0,
+     glue_C1CB14_step, 0xC1CCBC},
+    {0xC1CB26, glue_C1CB26, "visit_alternate_scene_placements", 0, 0,
+     glue_C1CB26_step, 0xC1CCBC, 0, 0xC1CB14},
     /* template_placements.c: complete static-band/cache refresh */
     {0xC1D10C, glue_C1D10C, "refresh_template_placements", 0, 0,
      glue_C1D10C_step, 0xC1E328},
