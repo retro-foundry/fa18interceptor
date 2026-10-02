@@ -36,6 +36,12 @@ The earlier memory-only proof remains separately reproducible and is no
 longer the integration claim. See
 `analysis/routines/native_c_placement_order_domain.md`.
 
+The complete C1D10C template-placement domain now independently matches
+8,192 original-instruction RAM fixtures and 492 shadow / 1,046 sandbox
+recorded memory comparisons. Its CPU adapter and event timing remain to be
+implemented before registration, so coverage remains 422/624. See
+`analysis/routines/native_c_template_placements_domain.md`.
+
 ## The game program
 
 - One Amiga Hunk executable (`F-18 Interceptor` on the ADF): 185 hunks,

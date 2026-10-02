@@ -1,0 +1,144 @@
+{
+  "entry": "C1D10C",
+  "registered": false,
+  "registered_baseline_entries": 422,
+  "scope": "Complete readable domain memory; CPU outputs and instruction/event timing remain unproved",
+  "source_instruction_count": 648,
+  "recorded": {
+    "demo01": {
+      "shadow": {
+        "entry": "C1D10C",
+        "name": "refresh_template_placements_memory_only",
+        "calls": 800,
+        "compared": 343,
+        "matched": 343,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 457,
+        "mean_cycles": 63132,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      },
+      "sandbox": {
+        "entry": "C1D10C",
+        "name": "refresh_template_placements_memory_only",
+        "calls": 800,
+        "compared": 800,
+        "matched": 800,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0,
+        "mean_cycles": 84581,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      }
+    },
+    "qual_carrier_success": {
+      "shadow": {
+        "entry": "C1D10C",
+        "name": "refresh_template_placements_memory_only",
+        "calls": 204,
+        "compared": 134,
+        "matched": 134,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 70,
+        "mean_cycles": 47827,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      },
+      "sandbox": {
+        "entry": "C1D10C",
+        "name": "refresh_template_placements_memory_only",
+        "calls": 219,
+        "compared": 219,
+        "matched": 219,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0,
+        "mean_cycles": 47031,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      }
+    },
+    "qual_fail_crashes": {
+      "shadow": {
+        "entry": "C1D10C",
+        "name": "refresh_template_placements_memory_only",
+        "calls": 27,
+        "compared": 15,
+        "matched": 15,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 12,
+        "mean_cycles": 33208,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      },
+      "sandbox": {
+        "entry": "C1D10C",
+        "name": "refresh_template_placements_memory_only",
+        "calls": 27,
+        "compared": 27,
+        "matched": 27,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0,
+        "mean_cycles": 55037,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      }
+    }
+  },
+  "totals": {
+    "shadow": {
+      "calls": 1031,
+      "matched": 492,
+      "incomplete": 539,
+      "hardware": 0,
+      "mismatched": 0
+    },
+    "sandbox": {
+      "calls": 1046,
+      "matched": 1046,
+      "incomplete": 0,
+      "hardware": 0,
+      "mismatched": 0
+    }
+  },
+  "temporary_domain_return_masks": {
+    "C1C924": "C000/00/00",
+    "C1C94A": "C000/00/00",
+    "C1C982": "C000/00/00"
+  },
+  "production_return_masks": {
+    "C1C924": "FFFF/FF/1A",
+    "C1C94A": "FFFF/FF/00",
+    "C1C982": "FFFF/FF/00"
+  },
+  "structural": {
+    "cases": 8192,
+    "comparison": "Original execution vs domain; all Chip/Slow RAM outside 128-byte private stack",
+    "contexts": {
+      "A": 2049,
+      "B": 2048,
+      "append": 4095
+    },
+    "empty": 1419,
+    "cache_limit": 2743,
+    "linked_copies": 1941,
+    "recoverable_shift_errors": 621,
+    "recorded_entry_fixture": "build/recomp/template_demo01_shadow_call1.bin",
+    "fixture_bytes": 1048648,
+    "fixture_sha256": "20ea1bc45df9630a457aa7eedcd9f380aa571f8afdb2a850772cc9aa54fbee6e",
+    "other_recorded_entries_replayed": [
+      "qual_carrier_success call 1",
+      "qual_fail_crashes call 1"
+    ]
+  },
+  "builds": [
+    "GNU headless",
+    "MSVC Release"
+  ],
+  "next": "Complete normal CPU adapter and source timing, including C1D722; then register with original liveness and run all integration gates"
+}

@@ -343,6 +343,22 @@ See analysis/routines/native_c_placement_order_domain.md and
 analysis/figures/native_placement_order_checkpoint.json. C1D10C is next for
 423/624; then return to the causal frame-313 HUD/fade checkpoint.
 
+C1D10C domain milestone is now complete in port/game/template_placements.c/h:
+all selector packs, fourteen-band expansion, 24-byte cache emission, reverse
+linked descriptor copies and final control-list publication. It is not yet
+registered; coverage remains 422/624 and timing-step entries remain 204.
+All 8,192 original-instruction memory fixtures pass outside the source's
+bounded 128-byte private stack, including 2,743 cache-limit and 1,941 linked
+copy cases. Full isolated recorded domain checks pass 492 shadow / 1,046
+sandbox calls, zero mismatches/hardware; 539 shadow calls are incomplete.
+These temporary domain-only masks preserve A6/A7 and prove no other CPU
+outputs. Production liveness and registry are unchanged. GNU/MSVC pass.
+The next action is the normal all-register/partial-width CPU adapter and
+complete parent timing, including C1D722; do not redo domain implementation
+or register the memory-only bridge. See
+analysis/routines/native_c_template_placements_domain.md and
+analysis/figures/native_template_placements_domain_checkpoint.json.
+
 Gauge checkpoint completed after the planning review: $C30918 now has source
 timing. Its 35 instructions pass 1,120 DMA fixtures; all 36,236 isolated live
 frames and sealed RAM match. All 49 bounded parent trace rows match every
@@ -370,7 +386,9 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    timing debt; the HUD list is not an automatic transcription queue.
 2. Make the next readable-source milestone explicit: complete the selector
    family C1D10C, C1E540, C1EBB0 and C1EC84, aiming for 423/624 after proof.
-   C1E540 and the two helpers are now proven/registered. Complete C1D10C next.
+   C1E540 and the two helpers are now proven/registered. C1D10C's complete
+   domain and independent memory proof are ready; finish its CPU adapter
+   and source timing next, preserving the original caller masks.
    C1E540's domain, live CPU adapter and parent/child event timing all pass
    the independent and normal gates; do not repeat the narrower memory-only
    milestone or count internal labels as extra routines.
