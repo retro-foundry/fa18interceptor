@@ -1,6 +1,14 @@
 #ifndef FA18_PORTS_GLUE_H
 #define FA18_PORTS_GLUE_H
 #include <stdint.h>
+int glue_C16EAE(void);
+int glue_C16BF2(void);
+int glue_C16C56(void);
+int glue_C13D34(void);
+int glue_C16EAE_step(void);
+int glue_C16BF2_step(void);
+int glue_C16C56_step(void);
+int glue_C13D34_step(void);
 int glue_C0EFD4(void);
 int glue_C0EFD4_step(void);
 int glue_C0F3C4(void);

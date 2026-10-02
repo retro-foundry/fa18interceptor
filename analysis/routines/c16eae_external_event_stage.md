@@ -9,7 +9,8 @@ when it is zero. On a nonzero return it reads a word at `+$06` through the
 pointer held at `$C1ABCA`, dispatches exact values `$0068` and `$00E8` to
 `$C0833E` and `$C08394`, then clears that word.
 
-Both paths pass `$C1ABCE` through `$C53C8C` and call `$C16F1C` before return.
+Only the nonzero path passes `$C1ABCE` through `$C53C8C`. Both paths call
+`$C16F1C` before return. The empty branch jumps directly to `$C16F16`.
 The trace establishes the control/data flow and consumed-word clear; it does
 not identify the external object, event protocol, the two code meanings, or
 the semantics of the called dispatchers.

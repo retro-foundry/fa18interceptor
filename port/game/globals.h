@@ -638,4 +638,17 @@
 #define PENDING_COMMAND_WORD_A     0xC4599Au
 #define PENDING_COMMAND_WORD_B     0xC4599Cu
 
+/* Complete event-source and button owners (C16EAE/C16BF2/C16C56/C13D34). */
+#define EXTERNAL_INPUT_HANDLE          0xC1ABECu
+#define EXTERNAL_INPUT_DESCRIPTOR      0xC1ABCAu
+#define EXTERNAL_INPUT_RELEASE_HANDLE  0xC1ABCEu
+#define EXTERNAL_INPUT_LATCH           0xC4582Du
+#define KEYBOARD_INPUT_HANDLE          0xC0815Cu
+#define KEYBOARD_INPUT_DESCRIPTOR      0xC1ABACu
+#define KEYBOARD_RELEASE_HANDLE        0xC08134u
+#define RAW_KEY_LATCH                  0xC08182u
+#define RAW_KEY_WORD                   0xC1ABC8u
+#define BUTTON_COMMAND_FLAGS          0xC46186u
+#define BUTTON_COMMAND_LEVEL          0xC461AFu
+
 #endif

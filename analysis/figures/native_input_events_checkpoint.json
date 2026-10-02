@@ -1,0 +1,825 @@
+{
+  "date": "2026-10-02",
+  "entries_added": [
+    "C16EAE",
+    "C16BF2",
+    "C16C56",
+    "C13D34"
+  ],
+  "registered_entries": 442,
+  "registered_timing_entries": 233,
+  "source": {
+    "manifest": "analysis/data/input_events_source_scope.json",
+    "manifest_sha256": "ba42b30951f172e94f1a89e6960237c6d951c411bd34b5a9e33a8073d8ffb850",
+    "instruction_counts": {
+      "C16EAE": 29,
+      "C16BF2": 20,
+      "C16C56": 41,
+      "C13D34": 19
+    },
+    "total_instructions": 109
+  },
+  "structural_real_children": {
+    "cases_per_entry": 16384,
+    "total": 65536,
+    "all_registers_pc_full_sr_all_ram": true,
+    "chipset_events_held": true,
+    "ram_exclusion_bytes": 0,
+    "patched_original_instructions": false,
+    "observed_parent_boundaries": {
+      "C16EAE": 12,
+      "C16BF2": 10,
+      "C16C56": 14,
+      "C13D34": 19
+    }
+  },
+  "structural_child_contracts": {
+    "cases_per_entry": 16384,
+    "total": 65536,
+    "real_child_execution": false,
+    "all_parent_and_child_cpu_sr_ram_boundaries_compared": true,
+    "patched_original_instructions": false,
+    "observed_parent_boundaries": {
+      "C16EAE": 29,
+      "C16BF2": 20,
+      "C16C56": 41,
+      "C13D34": 19
+    }
+  },
+  "normal_whole_call": {
+    "command": "python tools/recomp/check_whole_call_glue.py C16EAE C16BF2 C16C56",
+    "steps_disabled": true,
+    "normal_liveness_preserved": true,
+    "source_inputs_only_no_outputs_or_writes": true,
+    "totals": {
+      "shadow": {
+        "calls": 32756,
+        "compared": 32126,
+        "matched": 32126,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 630
+      },
+      "sandbox": {
+        "calls": 33127,
+        "compared": 16736,
+        "matched": 16736,
+        "mismatched": 0,
+        "hardware": 16391,
+        "incomplete": 0
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "report": "build/recomp/whole_call_C16EAE_C16BF2_C16C56_demo01_shadow.json",
+          "report_sha256": "319316f369af271b157717a1503049977a0f3b2b6ef2ffa2dc6daca1143ee026",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 4892,
+              "compared": 4869,
+              "matched": 4869,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 23,
+              "mean_cycles": 858,
+              "busy_input_calls": 4869,
+              "busy_input_reads": 4869
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 2,
+              "compared": 2,
+              "matched": 2,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 377,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 4894,
+              "compared": 4882,
+              "matched": 4882,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 12,
+              "mean_cycles": 498,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/whole_call_C16EAE_C16BF2_C16C56_demo01_sandbox.json",
+          "report_sha256": "138bb002d14bbb96ec45bb94af8b7d01c21eeffd7da74e0fce270edabab7e975",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 5006,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 5006,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 4894,
+              "compared": 4894,
+              "matched": 4894,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 499,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "report": "build/recomp/whole_call_C16EAE_C16BF2_C16C56_qual_carrier_success_shadow.json",
+          "report_sha256": "2d8abf3478753ca93609d329664bb93e8a4946e13e40c2143bfa42df77ebf13a",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 8038,
+              "compared": 7611,
+              "matched": 7611,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 427,
+              "mean_cycles": 859,
+              "busy_input_calls": 7611,
+              "busy_input_reads": 7611
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 5,
+              "compared": 5,
+              "matched": 5,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 1519,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 8592,
+              "compared": 8553,
+              "matched": 8553,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 39,
+              "mean_cycles": 634,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/whole_call_C16EAE_C16BF2_C16C56_qual_carrier_success_sandbox.json",
+          "report_sha256": "bf310f396729a27ce88a2be3f93617456f3f91ae0477c45c69f81d38800ae6b0",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 8214,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 8214,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 8592,
+              "compared": 8592,
+              "matched": 8592,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 641,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "report": "build/recomp/whole_call_C16EAE_C16BF2_C16C56_qual_fail_crashes_shadow.json",
+          "report_sha256": "18c6f4b8954bfe67b108a4c1f45e1af768407a8122abd869cd80c2235efa5f9e",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 3082,
+              "compared": 2959,
+              "matched": 2959,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 123,
+              "mean_cycles": 859,
+              "busy_input_calls": 2959,
+              "busy_input_reads": 2959
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 1,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 376,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 3250,
+              "compared": 3244,
+              "matched": 3244,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 6,
+              "mean_cycles": 609,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/whole_call_C16EAE_C16BF2_C16C56_qual_fail_crashes_sandbox.json",
+          "report_sha256": "dddd064e2081665a5c7a4ca291789b30969d7eb427bd182608a473934c1f9405",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 3171,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 3171,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 3250,
+              "compared": 3250,
+              "matched": 3250,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 610,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "cold_entry": {
+    "entry": "C13D34",
+    "recorded_calls": 0,
+    "proof": "independent original CPU/RAM oracle covers all 19 boundaries; no replay coverage claimed"
+  },
+  "source_timing": {
+    "local_instructions": 109,
+    "local_dma_cases": 3488,
+    "combined_instructions": 13224,
+    "combined_dma_cases": 423168,
+    "all_registers_full_sr_pc_cycles_ram": true,
+    "dma_bus_contention_enabled": true,
+    "sealed_state_reset_per_fixture": true,
+    "raw_bus_access_log_asserted": false
+  },
+  "full_registered_gate": {
+    "command": "scripts/recomp_ports_check.sh",
+    "totals": {
+      "shadow": {
+        "calls": 590880,
+        "compared": 555538,
+        "matched": 555538,
+        "mismatched": 0,
+        "hardware": 558,
+        "incomplete": 34784
+      },
+      "sandbox": {
+        "calls": 479245,
+        "compared": 412898,
+        "matched": 412898,
+        "mismatched": 0,
+        "hardware": 66347,
+        "incomplete": 0
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "report": "build/recomp/ports_report_demo01.json",
+          "report_sha256": "620024182c9a88c2506a92938fb78849a26fce10f1ef4b51879d14404a32d61a",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 1,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 856,
+              "busy_input_calls": 1,
+              "busy_input_reads": 1
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 2,
+              "compared": 2,
+              "matched": 2,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 377,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 38,
+              "compared": 38,
+              "matched": 38,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 621,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C13D34",
+              "name": "consume_changed_buttons",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/ports_report_sandbox_demo01.json",
+          "report_sha256": "7ed04a813188383c41e079a837926f2b3905951efbf0c4b094ac32ee551faba0",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 5003,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 5003,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 4894,
+              "compared": 4894,
+              "matched": 4894,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 499,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C13D34",
+              "name": "consume_changed_buttons",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "report": "build/recomp/ports_report_qual_carrier_success.json",
+          "report_sha256": "97323d446c4c604f9bfa2f60ed9a452ff3d592107f8e37acfaa162423a52a1f0",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 9,
+              "compared": 9,
+              "matched": 9,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 858,
+              "busy_input_calls": 9,
+              "busy_input_reads": 9
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 4,
+              "compared": 4,
+              "matched": 4,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 1804,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 940,
+              "compared": 913,
+              "matched": 913,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 27,
+              "mean_cycles": 1630,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C13D34",
+              "name": "consume_changed_buttons",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "report_sha256": "4f96ce4b5004cc1ba357521322e54f2a478c19b27de9968e9006291f155e89ba",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 8223,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 8223,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 8592,
+              "compared": 8592,
+              "matched": 8592,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 642,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C13D34",
+              "name": "consume_changed_buttons",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "report": "build/recomp/ports_report_qual_fail_crashes.json",
+          "report_sha256": "36b5fa5dd384a84ed8997bbe0ff9b9b0290c6dcdb85bba7b3d41ba1adccf6aa3",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 1,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 858,
+              "busy_input_calls": 1,
+              "busy_input_reads": 1
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 1,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 376,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 285,
+              "compared": 283,
+              "matched": 283,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 2,
+              "mean_cycles": 1688,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C13D34",
+              "name": "consume_changed_buttons",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "report_sha256": "0bf367b8867bee6cb954915b53e01b15caf5463ff87279d583d8909963dd2073",
+          "entries": [
+            {
+              "entry": "C16EAE",
+              "name": "consume_external_input_event",
+              "calls": 3161,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 3161,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16BF2",
+              "name": "read_keyboard_event_source",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C16C56",
+              "name": "poll_raw_keyboard_event",
+              "calls": 3250,
+              "compared": 3250,
+              "matched": 3250,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 611,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C13D34",
+              "name": "consume_changed_buttons",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      }
+    },
+    "poison_frames_exact": true
+  },
+  "live_group": {
+    "entries": [
+      "C16EAE",
+      "C16BF2",
+      "C16C56",
+      "C13D34"
+    ],
+    "frames": 36236,
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "expected_final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103",
+        "shadow_ram_exact": true,
+        "live_rgb444_and_ram_exact": true
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "expected_final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30",
+        "shadow_ram_exact": true,
+        "live_rgb444_and_ram_exact": true
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "expected_final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69",
+        "shadow_ram_exact": true,
+        "live_rgb444_and_ram_exact": true
+      }
+    }
+  },
+  "bounded_probe": {
+    "frames": 600,
+    "group_exact": true,
+    "all_first_difference_frame": 416,
+    "all_differing_pixels": 361,
+    "copper_fade_deferred": true
+  },
+  "build": {
+    "gnu_pass": true,
+    "msvc_release_pass": true,
+    "bytes_after_stream_cleanup": 414597982,
+    "gib": 0.386
+  },
+  "gate_logs": {
+    "gnu": {
+      "path": "build/recomp/input_events_gnu_gate.log",
+      "sha256": "eec440594717fbc17e4bb747840a7413dbfeb5099f383db712c1da5f869cbe0b"
+    },
+    "msvc": {
+      "path": "build/recomp/input_events_msvc_gate.log",
+      "sha256": "fd224058f74e661db461324ee1fdd0afa36e8938103e423f7442c48772f569f0"
+    },
+    "struct": {
+      "path": "build/recomp/input_events_struct_gate.log",
+      "sha256": "eff3a70ab45c001e43202c3e96d19d5a1e94f0a5bdfd98055dac2c135602b51b"
+    },
+    "step": {
+      "path": "build/recomp/input_events_step_gate.log",
+      "sha256": "e05df3861a44e494c09ffa699b94f5387f13492a9ad31588cd1da9e0b2e9b638"
+    },
+    "combined": {
+      "path": "build/recomp/input_events_combined_gate.log",
+      "sha256": "d7fc67263e496c2062b72802375afe3776f01a068e2317fb145f5229a979476a"
+    },
+    "whole": {
+      "path": "build/recomp/input_events_whole_gate.log",
+      "sha256": "62bdc7281f14f18f243860c29a36593fd306c8fe282134b8a6c8813562eb918f"
+    },
+    "full": {
+      "path": "build/recomp/input_events_full_gate.log",
+      "sha256": "e327d611550513f31b7c31f87f56e1ca9444dff17e4899ae8aa3a3e326beab3b"
+    },
+    "live": {
+      "path": "build/recomp/input_events_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    "probe": {
+      "path": "build/recomp/input_events_probe_gate.log",
+      "sha256": "6793540bfe3d4784d412a5c9c004dc9b1cff439825f5850258b9cf9153729cd6"
+    }
+  },
+  "next_batch": "Audit full C1AC28/C1AD74 shared command dispatch ownership; generated lists have 1104 unique boundaries, including 482 shared."
+}

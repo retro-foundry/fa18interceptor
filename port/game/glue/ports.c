@@ -7,6 +7,10 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    {0xC16EAE, glue_C16EAE, "consume_external_input_event", 0, 0, glue_C16EAE_step, 0xC16F1C, 2},
+    {0xC16BF2, glue_C16BF2, "read_keyboard_event_source", 0, 0, glue_C16BF2_step, 0xC16C3A},
+    {0xC16C56, glue_C16C56, "poll_raw_keyboard_event", 0, 0, glue_C16C56_step, 0xC16CD8},
+    {0xC13D34, glue_C13D34, "consume_changed_buttons", 0, 0, glue_C13D34_step, 0xC13D84},
     {0xC0EFD4, glue_C0EFD4, "run_game_update_sequence", 0, 0, glue_C0EFD4_step, 0xC0F3C4, 3},
     {0xC0F3C4, glue_C0F3C4, "process_pending_key_events", 0, 0, glue_C0F3C4_step, 0xC0F4A6, 2},
     {0xC0D730, glue_C0D730, "submit_update_display_buffers", 0, 0, glue_C0D730_step, 0xC0D74A, 1},

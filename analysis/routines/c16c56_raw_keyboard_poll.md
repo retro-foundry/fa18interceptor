@@ -12,7 +12,9 @@ The routine first consumes a pending word at `$C08182/$C1ABC8`. Otherwise it
 calls `$C16BF2`, returns `$FF` when that source yields zero, strips bit 7 into
 a seven-bit base value, filters values whose masked `$70` bits equal `$70`,
 and restores bit 7 when the input carried it. It returns the resulting byte
-sign-extended in `D0`.
+sign-extended to `D0.W`. The press path preserves `D0`'s high word;
+the release path explicitly extends to a long before adding `$80`. Empty
+and filtered returns write positive `$00FF` to `D0.W`.
 
 This exactly accounts for the observed `$25` press, `$A5` release, and `$FF`
 empty-poll values. It does not establish a complete mapping between physical
