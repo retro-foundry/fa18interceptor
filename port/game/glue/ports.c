@@ -7,6 +7,8 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    {0xC22C80, glue_C22C80, "update_control_records", 0, 0, glue_C22C80_step, 0xC230B0},
+    {0xC1C63E, glue_C1C63E, "run_record_update_stage", 0, 0, glue_C1C63E_step, 0xC1C7F6},
     {0xC1C860, glue_C1C860, "refresh_context_packet", 0, 0, glue_C1C860_step, 0xC1CA2E, 0, 0xC1C85E},
     {0xC08F26, glue_C08F26, "bootstrap_scene", 0, 0, glue_C08F26_step, 0xC090C2},
     {0xC0F920, glue_C0F920, "reset_sequence_after_bootstrap", 0, 0, glue_C0F920_step, 0xC0F946},

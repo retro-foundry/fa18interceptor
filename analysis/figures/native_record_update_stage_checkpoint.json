@@ -1,0 +1,888 @@
+{
+  "date": "2026-10-02",
+  "entries_added": [
+    "C22C80",
+    "C1C63E"
+  ],
+  "entries_newly_timed": [
+    "C22C80",
+    "C1C63E"
+  ],
+  "registered_entries": 434,
+  "registered_timing_entries": 225,
+  "source_instructions": {
+    "C22C80": 226,
+    "C1C63E": 112
+  },
+  "source_instructions_total": 338,
+  "scope": "Complete control-record update dispatch and enclosing update stage, preserving original children, partial widths and local source frames",
+  "structural_parent": {
+    "command": "python tools/recomp/check_record_update_stage.py --cases 8192",
+    "cases_per_entry": 8192,
+    "cases": 16384,
+    "all_registers_and_high_words": true,
+    "pc_and_full_sr": true,
+    "all_chip_and_slow_ram": true,
+    "ram_exclusion_bytes": 0,
+    "original_instructions_patched": false,
+    "children": "Real original children, once per explicit source boundary",
+    "fixtures": [
+      "all byte-counter values and word-wrap boundaries",
+      "per-slot dormant activation and all slots active",
+      "both group gates and all periodic low nibbles",
+      "view-octant/attitude request gates",
+      "signed long threshold/extreme values",
+      "selected-record and active-origin routes",
+      "mode/projection request guards"
+    ]
+  },
+  "normal_whole_call": {
+    "batch_command": "python tools/recomp/check_whole_call_glue.py C22C80 C1C63E",
+    "batch_passed": true,
+    "raw_batch": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 5,
+            "compared": 5,
+            "matched": 5,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 43608,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 2087,
+            "compared": 121,
+            "matched": 121,
+            "mismatched": 0,
+            "hardware": 1,
+            "incomplete": 1965,
+            "mean_cycles": 48331,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 804,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 804,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 2091,
+            "compared": 1350,
+            "matched": 1350,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 741,
+            "mean_cycles": 37135,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 3,
+            "compared": 3,
+            "matched": 3,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 33901,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 1649,
+            "compared": 148,
+            "matched": 148,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1501,
+            "mean_cycles": 35764,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 2,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 3372,
+            "compared": 3371,
+            "matched": 3371,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 35643,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 34232,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 352,
+            "compared": 27,
+            "matched": 27,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 325,
+            "mean_cycles": 41910,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 3,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 352,
+            "compared": 349,
+            "matched": 349,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 44460,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "record_only_command": "python tools/recomp/check_whole_call_glue.py C22C80",
+    "record_only_passed": true,
+    "independent_record_body": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 2087,
+            "compared": 126,
+            "matched": 126,
+            "mismatched": 0,
+            "hardware": 1,
+            "incomplete": 1960,
+            "mean_cycles": 46562,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 2154,
+            "compared": 1350,
+            "matched": 1350,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 804,
+            "mean_cycles": 35293,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 1649,
+            "compared": 151,
+            "matched": 151,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1498,
+            "mean_cycles": 34971,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 3373,
+            "compared": 3371,
+            "matched": 3371,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 34928,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 352,
+            "compared": 28,
+            "matched": 28,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 324,
+            "mean_cycles": 40852,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 352,
+            "compared": 349,
+            "matched": 349,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 43713,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "accepted_proof_per_entry": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 2087,
+            "compared": 126,
+            "matched": 126,
+            "mismatched": 0,
+            "hardware": 1,
+            "incomplete": 1960,
+            "mean_cycles": 46562,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 2087,
+            "compared": 121,
+            "matched": 121,
+            "mismatched": 0,
+            "hardware": 1,
+            "incomplete": 1965,
+            "mean_cycles": 48331,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 2154,
+            "compared": 1350,
+            "matched": 1350,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 804,
+            "mean_cycles": 35293,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 2091,
+            "compared": 1350,
+            "matched": 1350,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 741,
+            "mean_cycles": 37135,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 1649,
+            "compared": 151,
+            "matched": 151,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1498,
+            "mean_cycles": 34971,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 1649,
+            "compared": 148,
+            "matched": 148,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1501,
+            "mean_cycles": 35764,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 3373,
+            "compared": 3371,
+            "matched": 3371,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 34928,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 3372,
+            "compared": 3371,
+            "matched": 3371,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 35643,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 352,
+            "compared": 28,
+            "matched": 28,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 324,
+            "mean_cycles": 40852,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 352,
+            "compared": 27,
+            "matched": 27,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 325,
+            "mean_cycles": 41910,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C22C80",
+            "name": "update_control_records",
+            "calls": 352,
+            "compared": 349,
+            "matched": 349,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 43713,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1C63E",
+            "name": "run_record_update_stage",
+            "calls": 352,
+            "compared": 349,
+            "matched": 349,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 44460,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "totals": {
+      "shadow": {
+        "calls": 8176,
+        "compared": 601,
+        "matched": 601,
+        "mismatched": 0,
+        "hardware": 2,
+        "incomplete": 7573
+      },
+      "sandbox": {
+        "calls": 11694,
+        "compared": 10140,
+        "matched": 10140,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 1554
+      }
+    },
+    "note": "Child batch sandbox comparisons are absorbed/incomplete; the isolated record body supplies its own completed comparisons on each recording. Incomplete/hardware calls stay separate."
+  },
+  "instruction_oracle": {
+    "group": "record_update_stage",
+    "unique_instructions": 338,
+    "dma_cases": 10816,
+    "passed": true,
+    "combined_unique_instructions": 12463,
+    "combined_dma_cases": 398816,
+    "combined_passed": true,
+    "sealed_machine_reset_per_fixture": true,
+    "checks": [
+      "registers",
+      "PC",
+      "full SR",
+      "RAM",
+      "cycles",
+      "bus timing"
+    ]
+  },
+  "source_child_proof_runner": {
+    "file": "port/recomp/recomp_ports.c",
+    "behavior": "Capture child return PC and stack depth at entry, retain them across generated and original-byte continuations, then resume the native parent. Runtime owns original opcode execution. Interpreter-only/incomplete results retain failure classification.",
+    "comparison_masks_changed": false,
+    "ram_exclusions_changed": false,
+    "failed_experiments": "build/recomp/record_update_stage_full_gate_before_resume.log and record_update_stage_full_gate_before_child_frame_fix.log",
+    "final_full_gate_exit": 0,
+    "bounded_600_frame_full_registry_shadow_mismatches": 0
+  },
+  "full_registered_gate": {
+    "command": "scripts/recomp_ports_check.sh",
+    "passed": true,
+    "registered_entries": 434,
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "totals": {
+            "calls": 345394,
+            "compared": 320909,
+            "matched": 320909,
+            "mismatched": 0,
+            "hardware": 4884,
+            "incomplete": 19601
+          },
+          "new_entries": [
+            {
+              "entry": "C22C80",
+              "name": "update_control_records",
+              "calls": 5,
+              "compared": 5,
+              "matched": 5,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 43608,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1C63E",
+              "name": "run_record_update_stage",
+              "calls": 2087,
+              "compared": 121,
+              "matched": 121,
+              "mismatched": 0,
+              "hardware": 1,
+              "incomplete": 1965,
+              "mean_cycles": 48388,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "totals": {
+            "calls": 465121,
+            "compared": 315061,
+            "matched": 315061,
+            "mismatched": 0,
+            "hardware": 5228,
+            "incomplete": 144832
+          },
+          "new_entries": [
+            {
+              "entry": "C22C80",
+              "name": "update_control_records",
+              "calls": 770,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 770,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1C63E",
+              "name": "run_record_update_stage",
+              "calls": 2079,
+              "compared": 1348,
+              "matched": 1348,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 731,
+              "mean_cycles": 37120,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "totals": {
+            "calls": 240010,
+            "compared": 220145,
+            "matched": 220145,
+            "mismatched": 0,
+            "hardware": 8035,
+            "incomplete": 11830
+          },
+          "new_entries": [
+            {
+              "entry": "C22C80",
+              "name": "update_control_records",
+              "calls": 4,
+              "compared": 4,
+              "matched": 4,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 33661,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1C63E",
+              "name": "run_record_update_stage",
+              "calls": 1649,
+              "compared": 147,
+              "matched": 147,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1502,
+              "mean_cycles": 35778,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "totals": {
+            "calls": 667473,
+            "compared": 429226,
+            "matched": 429226,
+            "mismatched": 0,
+            "hardware": 8533,
+            "incomplete": 229714
+          },
+          "new_entries": [
+            {
+              "entry": "C22C80",
+              "name": "update_control_records",
+              "calls": 1,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1C63E",
+              "name": "run_record_update_stage",
+              "calls": 3370,
+              "compared": 3369,
+              "matched": 3369,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1,
+              "mean_cycles": 35245,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "totals": {
+            "calls": 64047,
+            "compared": 58368,
+            "matched": 58368,
+            "mismatched": 0,
+            "hardware": 3082,
+            "incomplete": 2597
+          },
+          "new_entries": [
+            {
+              "entry": "C22C80",
+              "name": "update_control_records",
+              "calls": 1,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 34232,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1C63E",
+              "name": "run_record_update_stage",
+              "calls": 352,
+              "compared": 27,
+              "matched": 27,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 325,
+              "mean_cycles": 41921,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "totals": {
+            "calls": 113833,
+            "compared": 73552,
+            "matched": 73552,
+            "mismatched": 0,
+            "hardware": 3249,
+            "incomplete": 37032
+          },
+          "new_entries": [
+            {
+              "entry": "C22C80",
+              "name": "update_control_records",
+              "calls": 3,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 3,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1C63E",
+              "name": "run_record_update_stage",
+              "calls": 350,
+              "compared": 347,
+              "matched": 347,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 3,
+              "mean_cycles": 44630,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      }
+    },
+    "totals": {
+      "shadow": {
+        "calls": 649451,
+        "compared": 599422,
+        "matched": 599422,
+        "mismatched": 0,
+        "hardware": 16001,
+        "incomplete": 34028
+      },
+      "sandbox": {
+        "calls": 1246427,
+        "compared": 817839,
+        "matched": 817839,
+        "mismatched": 0,
+        "hardware": 17010,
+        "incomplete": 411578
+      }
+    },
+    "all_final_ram_seals_match": true,
+    "poison_frames_identical": true,
+    "note": "Parent absorption changes aggregate call counts."
+  },
+  "isolated_live": {
+    "entries": [
+      "C22C80",
+      "C1C63E"
+    ],
+    "frames": 36236,
+    "all_rgb444_frames_exact": true,
+    "all_final_ram_seals_match": true,
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "iterations": 4892,
+        "final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "iterations": 8038,
+        "final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "iterations": 3082,
+        "final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+      }
+    },
+    "reference": "Fresh source OFF on the same native machine model; archived UAE is historical evidence",
+    "temporary_rgb_and_ram_removed": true
+  },
+  "short_probe": {
+    "frames": 600,
+    "isolated_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "passed",
+    "msvc_release": "passed",
+    "build_directory_bytes": 353711892,
+    "build_directory_gib": 0.329
+  },
+  "typed_direct_origin": {
+    "files": [
+      "port/terrain_selector_origin.c",
+      "port/terrain_selector_origin_contract_test.c"
+    ],
+    "correction": "C2908A bypasses the matrix floor; direct record route preserves the existing middle origin",
+    "focused_contract": "GNU -O2 -Wall -Wextra; passed",
+    "additional_registered_functions": 0
+  },
+  "remaining_origin": {
+    "entry": "C29042",
+    "registered": false,
+    "generated_instructions": 153,
+    "additional_cold_instructions": 229,
+    "unique_complete_source_instructions": 382,
+    "source_manifest": "analysis/data/active_origin_complete_source.json",
+    "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "cold_bytes_sha256": "191acaf88c193fb64573b4aa81fe7ec04f85673f8ead4a48cea60896636728b9",
+    "mode_targets": [
+      "C29226",
+      "C29258",
+      "C2927C",
+      "C292A0",
+      "C292DC",
+      "C292F4",
+      "C29530",
+      "C292FA",
+      "C29346"
+    ],
+    "port_info_includes_cold_paths": true,
+    "port_info_checks_state_hash": true,
+    "next": "Complete all modes, local preset frame, blend, terminated record scan, matrix variants, mode-six countdown and scale/smoothing routes; then the whole C0EFD4 owner, not its C0F090/C0F132 internal labels."
+  },
+  "deferred_copper": {
+    "user_instruction_date": "2026-10-02",
+    "source_all_reset_frames": [
+      393,
+      394
+    ],
+    "source_all_terminal_frames": [
+      436,
+      437
+    ],
+    "automated_comparisons_unchanged": true
+  }
+}

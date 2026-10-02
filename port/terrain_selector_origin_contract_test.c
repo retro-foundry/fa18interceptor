@@ -32,10 +32,10 @@ int main(void) {
     put16(record + 0x4e, 0xfffe);
     assert(fa18_publish_terrain_selector_origin_direct(&state, &result) == 0);
     assert(calls == 1 && result == FA18_TERRAIN_SELECTOR_ORIGIN_DIRECT_PUBLISHED);
-    assert(state.origin[0] == 0x10203040 && state.origin[1] == 0x500 &&
+    assert(state.origin[0] == 0x10203040 && state.origin[1] == -0x100 &&
            (uint32_t)state.origin[2] == 0xfedcba98);
     assert(state.negated_companion[0] == -0x203040 &&
-           state.negated_companion[1] == -0x500 &&
+           state.negated_companion[1] == 0x100 &&
            state.negated_companion[2] == -0x1cba98);
     assert(fa18_publish_terrain_selector_origin_direct_callback(&state, origin) == 0);
     assert(calls == 2 && origin[0] == state.origin[0] && origin[1] == state.origin[1] &&

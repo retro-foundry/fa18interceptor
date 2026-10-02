@@ -1,5 +1,9 @@
 #ifndef FA18_PORTS_GLUE_H
 #define FA18_PORTS_GLUE_H
+int glue_C22C80(void);
+int glue_C1C63E(void);
+int glue_C22C80_step(void);
+int glue_C1C63E_step(void);
 int glue_C1C860(void);
 int glue_C08F26(void);
 int glue_C0F920(void);

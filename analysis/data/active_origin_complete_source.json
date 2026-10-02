@@ -1,0 +1,1404 @@
+{
+  "date": "2026-10-02",
+  "entry": "C29042",
+  "state": "captures/native/demo01/state.bin",
+  "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "generated_instruction_count": 153,
+  "additional_cold_instructions": 229,
+  "unique_complete_instruction_count": 382,
+  "cold_range": [
+    "C29226",
+    "C295B6"
+  ],
+  "cold_range_end_exclusive": true,
+  "cold_bytes_sha256": "191acaf88c193fb64573b4aa81fe7ec04f85673f8ead4a48cea60896636728b9",
+  "jump_table": "C28F2C",
+  "jump_targets_for_modes_0_through_8": [
+    "C29226",
+    "C29258",
+    "C2927C",
+    "C292A0",
+    "C292DC",
+    "C292F4",
+    "C29530",
+    "C292FA",
+    "C29346"
+  ],
+  "cold_instructions": [
+    {
+      "pc": "C29226",
+      "length": 2,
+      "opcode": "780D",
+      "instruction": "moveq   #$d, D4"
+    },
+    {
+      "pc": "C29228",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$1c00000, D3"
+    },
+    {
+      "pc": "C2922E",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29506"
+    },
+    {
+      "pc": "C29232",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$1, $c457b4.l"
+    },
+    {
+      "pc": "C2923A",
+      "length": 6,
+      "opcode": "4239",
+      "instruction": "clr.b   $c457ad.l"
+    },
+    {
+      "pc": "C29240",
+      "length": 2,
+      "opcode": "780B",
+      "instruction": "moveq   #$b, D4"
+    },
+    {
+      "pc": "C29242",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$d00000, D3"
+    },
+    {
+      "pc": "C29248",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29506"
+    },
+    {
+      "pc": "C2924C",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$1, $c457b6.l"
+    },
+    {
+      "pc": "C29254",
+      "length": 4,
+      "opcode": "6000",
+      "instruction": "bra     $c2940a"
+    },
+    {
+      "pc": "C29258",
+      "length": 2,
+      "opcode": "780B",
+      "instruction": "moveq   #$b, D4"
+    },
+    {
+      "pc": "C2925A",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$200000, D3"
+    },
+    {
+      "pc": "C29260",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29506"
+    },
+    {
+      "pc": "C29264",
+      "length": 2,
+      "opcode": "780A",
+      "instruction": "moveq   #$a, D4"
+    },
+    {
+      "pc": "C29266",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$60000, D3"
+    },
+    {
+      "pc": "C2926C",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29506"
+    },
+    {
+      "pc": "C29270",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$2, $c457b6.l"
+    },
+    {
+      "pc": "C29278",
+      "length": 4,
+      "opcode": "6000",
+      "instruction": "bra     $c2940a"
+    },
+    {
+      "pc": "C2927C",
+      "length": 2,
+      "opcode": "7809",
+      "instruction": "moveq   #$9, D4"
+    },
+    {
+      "pc": "C2927E",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$60000, D3"
+    },
+    {
+      "pc": "C29284",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c2940a"
+    },
+    {
+      "pc": "C29288",
+      "length": 2,
+      "opcode": "7807",
+      "instruction": "moveq   #$7, D4"
+    },
+    {
+      "pc": "C2928A",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$30000, D3"
+    },
+    {
+      "pc": "C29290",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c2940a"
+    },
+    {
+      "pc": "C29294",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$3, $c457b6.l"
+    },
+    {
+      "pc": "C2929C",
+      "length": 4,
+      "opcode": "6000",
+      "instruction": "bra     $c29488"
+    },
+    {
+      "pc": "C292A0",
+      "length": 2,
+      "opcode": "7807",
+      "instruction": "moveq   #$7, D4"
+    },
+    {
+      "pc": "C292A2",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$60000, D3"
+    },
+    {
+      "pc": "C292A8",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29488"
+    },
+    {
+      "pc": "C292AC",
+      "length": 2,
+      "opcode": "7806",
+      "instruction": "moveq   #$6, D4"
+    },
+    {
+      "pc": "C292AE",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$60000, D3"
+    },
+    {
+      "pc": "C292B4",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29488"
+    },
+    {
+      "pc": "C292B8",
+      "length": 2,
+      "opcode": "7805",
+      "instruction": "moveq   #$5, D4"
+    },
+    {
+      "pc": "C292BA",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$d000, D3"
+    },
+    {
+      "pc": "C292C0",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29488"
+    },
+    {
+      "pc": "C292C4",
+      "length": 2,
+      "opcode": "7803",
+      "instruction": "moveq   #$3, D4"
+    },
+    {
+      "pc": "C292C6",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$8000, D3"
+    },
+    {
+      "pc": "C292CC",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29488"
+    },
+    {
+      "pc": "C292D0",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$4, $c457b6.l"
+    },
+    {
+      "pc": "C292D8",
+      "length": 4,
+      "opcode": "6000",
+      "instruction": "bra     $c294ac"
+    },
+    {
+      "pc": "C292DC",
+      "length": 2,
+      "opcode": "7802",
+      "instruction": "moveq   #$2, D4"
+    },
+    {
+      "pc": "C292DE",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$2800, D3"
+    },
+    {
+      "pc": "C292E4",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29506"
+    },
+    {
+      "pc": "C292E8",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$5, $c457b6.l"
+    },
+    {
+      "pc": "C292F0",
+      "length": 4,
+      "opcode": "6000",
+      "instruction": "bra     $c294d2"
+    },
+    {
+      "pc": "C292F4",
+      "length": 2,
+      "opcode": "7801",
+      "instruction": "moveq   #$1, D4"
+    },
+    {
+      "pc": "C292F6",
+      "length": 4,
+      "opcode": "6000",
+      "instruction": "bra     $c29506"
+    },
+    {
+      "pc": "C292FA",
+      "length": 6,
+      "opcode": "4A39",
+      "instruction": "tst.b   $c458af.l"
+    },
+    {
+      "pc": "C29300",
+      "length": 2,
+      "opcode": "6E24",
+      "instruction": "bgt     $c29326"
+    },
+    {
+      "pc": "C29302",
+      "length": 2,
+      "opcode": "780E",
+      "instruction": "moveq   #$e, D4"
+    },
+    {
+      "pc": "C29304",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$800000, D3"
+    },
+    {
+      "pc": "C2930A",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29548"
+    },
+    {
+      "pc": "C2930E",
+      "length": 2,
+      "opcode": "780C",
+      "instruction": "moveq   #$c, D4"
+    },
+    {
+      "pc": "C29310",
+      "length": 10,
+      "opcode": "0CB9",
+      "instruction": "cmpi.l  #-$100000, $c45c4e.l"
+    },
+    {
+      "pc": "C2931A",
+      "length": 2,
+      "opcode": "6C0A",
+      "instruction": "bge     $c29326"
+    },
+    {
+      "pc": "C2931C",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$100000, D3"
+    },
+    {
+      "pc": "C29322",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29548"
+    },
+    {
+      "pc": "C29326",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$3, $c458ae.l"
+    },
+    {
+      "pc": "C2932E",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$8, $c457b6.l"
+    },
+    {
+      "pc": "C29336",
+      "length": 6,
+      "opcode": "4EB9",
+      "instruction": "jsr     $c0910c.l"
+    },
+    {
+      "pc": "C2933C",
+      "length": 8,
+      "opcode": "48F9",
+      "instruction": "movem.l D0-D2, $c45c56.l"
+    },
+    {
+      "pc": "C29344",
+      "length": 2,
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C29346",
+      "length": 2,
+      "opcode": "780E",
+      "instruction": "moveq   #$e, D4"
+    },
+    {
+      "pc": "C29348",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$800000, D3"
+    },
+    {
+      "pc": "C2934E",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29548"
+    },
+    {
+      "pc": "C29352",
+      "length": 2,
+      "opcode": "780C",
+      "instruction": "moveq   #$c, D4"
+    },
+    {
+      "pc": "C29354",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$100000, D3"
+    },
+    {
+      "pc": "C2935A",
+      "length": 4,
+      "opcode": "6E00",
+      "instruction": "bgt     $c29548"
+    },
+    {
+      "pc": "C2935E",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$4, $c458ae.l"
+    },
+    {
+      "pc": "C29366",
+      "length": 2,
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C29368",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$1, $c458af.l"
+    },
+    {
+      "pc": "C29370",
+      "length": 6,
+      "opcode": "4279",
+      "instruction": "clr.w   $c459ba.l"
+    },
+    {
+      "pc": "C29376",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$7, $c457b6.l"
+    },
+    {
+      "pc": "C2937E",
+      "length": 6,
+      "opcode": "41F9",
+      "instruction": "lea     $c46184.l, A0"
+    },
+    {
+      "pc": "C29384",
+      "length": 6,
+      "opcode": "2479",
+      "instruction": "movea.l $c4573a.l, A2"
+    },
+    {
+      "pc": "C2938A",
+      "length": 2,
+      "opcode": "4A52",
+      "instruction": "tst.w   (A2)"
+    },
+    {
+      "pc": "C2938C",
+      "length": 2,
+      "opcode": "6D32",
+      "instruction": "blt     $c293c0"
+    },
+    {
+      "pc": "C2938E",
+      "length": 4,
+      "opcode": "362A",
+      "instruction": "move.w  ($4,A2), D3"
+    },
+    {
+      "pc": "C29392",
+      "length": 4,
+      "opcode": "D4FC",
+      "instruction": "adda.w  #$a, A2"
+    },
+    {
+      "pc": "C29396",
+      "length": 2,
+      "opcode": "E14B",
+      "instruction": "lsl.w   #8, D3"
+    },
+    {
+      "pc": "C29398",
+      "length": 2,
+      "opcode": "D643",
+      "instruction": "add.w   D3, D3"
+    },
+    {
+      "pc": "C2939A",
+      "length": 4,
+      "opcode": "1230",
+      "instruction": "move.b  ($62,A0,D3.w), D1"
+    },
+    {
+      "pc": "C2939E",
+      "length": 4,
+      "opcode": "0201",
+      "instruction": "andi.b  #$f0, D1"
+    },
+    {
+      "pc": "C293A2",
+      "length": 4,
+      "opcode": "0C01",
+      "instruction": "cmpi.b  #$10, D1"
+    },
+    {
+      "pc": "C293A6",
+      "length": 2,
+      "opcode": "66E2",
+      "instruction": "bne     $c2938a"
+    },
+    {
+      "pc": "C293A8",
+      "length": 6,
+      "opcode": "0830",
+      "instruction": "btst    #$6, ($1,A0,D3.w)"
+    },
+    {
+      "pc": "C293AE",
+      "length": 2,
+      "opcode": "67DA",
+      "instruction": "beq     $c2938a"
+    },
+    {
+      "pc": "C293B0",
+      "length": 6,
+      "opcode": "33C3",
+      "instruction": "move.w  D3, $c459ba.l"
+    },
+    {
+      "pc": "C293B6",
+      "length": 6,
+      "opcode": "0830",
+      "instruction": "btst    #$3, ($1,A0,D3.w)"
+    },
+    {
+      "pc": "C293BC",
+      "length": 2,
+      "opcode": "6720",
+      "instruction": "beq     $c293de"
+    },
+    {
+      "pc": "C293BE",
+      "length": 2,
+      "opcode": "60CA",
+      "instruction": "bra     $c2938a"
+    },
+    {
+      "pc": "C293C0",
+      "length": 6,
+      "opcode": "4A79",
+      "instruction": "tst.w   $c459ba.l"
+    },
+    {
+      "pc": "C293C6",
+      "length": 2,
+      "opcode": "6616",
+      "instruction": "bne     $c293de"
+    },
+    {
+      "pc": "C293C8",
+      "length": 8,
+      "opcode": "33FC",
+      "instruction": "move.w  #$3e, $c4599e.l"
+    },
+    {
+      "pc": "C293D0",
+      "length": 6,
+      "opcode": "4EB9",
+      "instruction": "jsr     $c06c02.l"
+    },
+    {
+      "pc": "C293D6",
+      "length": 6,
+      "opcode": "4EB9",
+      "instruction": "jsr     $c0910c.l"
+    },
+    {
+      "pc": "C293DC",
+      "length": 2,
+      "opcode": "6022",
+      "instruction": "bra     $c29400"
+    },
+    {
+      "pc": "C293DE",
+      "length": 6,
+      "opcode": "3639",
+      "instruction": "move.w  $c459ba.l, D3"
+    },
+    {
+      "pc": "C293E4",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$ff, $c458af.l"
+    },
+    {
+      "pc": "C293EC",
+      "length": 4,
+      "opcode": "2030",
+      "instruction": "move.l  ($14,A0,D3.w), D0"
+    },
+    {
+      "pc": "C293F0",
+      "length": 4,
+      "opcode": "2430",
+      "instruction": "move.l  ($1c,A0,D3.w), D2"
+    },
+    {
+      "pc": "C293F4",
+      "length": 6,
+      "opcode": "2239",
+      "instruction": "move.l  $c45c42.l, D1"
+    },
+    {
+      "pc": "C293FA",
+      "length": 2,
+      "opcode": "2601",
+      "instruction": "move.l  D1, D3"
+    },
+    {
+      "pc": "C293FC",
+      "length": 2,
+      "opcode": "E483",
+      "instruction": "asr.l   #2, D3"
+    },
+    {
+      "pc": "C293FE",
+      "length": 2,
+      "opcode": "9283",
+      "instruction": "sub.l   D3, D1"
+    },
+    {
+      "pc": "C29400",
+      "length": 8,
+      "opcode": "48F9",
+      "instruction": "movem.l D0-D2, $c45c56.l"
+    },
+    {
+      "pc": "C29408",
+      "length": 2,
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C2940A",
+      "length": 4,
+      "opcode": "48E7",
+      "instruction": "movem.l D3-D6, -(A7)"
+    },
+    {
+      "pc": "C2940E",
+      "length": 6,
+      "opcode": "45F9",
+      "instruction": "lea     $c46184.l, A2"
+    },
+    {
+      "pc": "C29414",
+      "length": 6,
+      "opcode": "D4F9",
+      "instruction": "adda.w  $c458de.l, A2"
+    },
+    {
+      "pc": "C2941A",
+      "length": 8,
+      "opcode": "4CF9",
+      "instruction": "movem.l $c45c3e.l, D0-D2"
+    },
+    {
+      "pc": "C29422",
+      "length": 4,
+      "opcode": "D0AA",
+      "instruction": "add.l   ($14,A2), D0"
+    },
+    {
+      "pc": "C29426",
+      "length": 4,
+      "opcode": "D2AA",
+      "instruction": "add.l   ($18,A2), D1"
+    },
+    {
+      "pc": "C2942A",
+      "length": 4,
+      "opcode": "D4AA",
+      "instruction": "add.l   ($1c,A2), D2"
+    },
+    {
+      "pc": "C2942E",
+      "length": 2,
+      "opcode": "E280",
+      "instruction": "asr.l   #1, D0"
+    },
+    {
+      "pc": "C29430",
+      "length": 2,
+      "opcode": "E281",
+      "instruction": "asr.l   #1, D1"
+    },
+    {
+      "pc": "C29432",
+      "length": 2,
+      "opcode": "E282",
+      "instruction": "asr.l   #1, D2"
+    },
+    {
+      "pc": "C29434",
+      "length": 4,
+      "opcode": "48E7",
+      "instruction": "movem.l D0-D2, -(A7)"
+    },
+    {
+      "pc": "C29438",
+      "length": 6,
+      "opcode": "D0B9",
+      "instruction": "add.l   $c45c3e.l, D0"
+    },
+    {
+      "pc": "C2943E",
+      "length": 6,
+      "opcode": "D4B9",
+      "instruction": "add.l   $c45c46.l, D2"
+    },
+    {
+      "pc": "C29444",
+      "length": 2,
+      "opcode": "E280",
+      "instruction": "asr.l   #1, D0"
+    },
+    {
+      "pc": "C29446",
+      "length": 2,
+      "opcode": "E281",
+      "instruction": "asr.l   #1, D1"
+    },
+    {
+      "pc": "C29448",
+      "length": 2,
+      "opcode": "E282",
+      "instruction": "asr.l   #1, D2"
+    },
+    {
+      "pc": "C2944A",
+      "length": 4,
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, D3-D5"
+    },
+    {
+      "pc": "C2944E",
+      "length": 2,
+      "opcode": "D083",
+      "instruction": "add.l   D3, D0"
+    },
+    {
+      "pc": "C29450",
+      "length": 2,
+      "opcode": "D284",
+      "instruction": "add.l   D4, D1"
+    },
+    {
+      "pc": "C29452",
+      "length": 2,
+      "opcode": "D485",
+      "instruction": "add.l   D5, D2"
+    },
+    {
+      "pc": "C29454",
+      "length": 2,
+      "opcode": "E280",
+      "instruction": "asr.l   #1, D0"
+    },
+    {
+      "pc": "C29456",
+      "length": 2,
+      "opcode": "E281",
+      "instruction": "asr.l   #1, D1"
+    },
+    {
+      "pc": "C29458",
+      "length": 2,
+      "opcode": "E282",
+      "instruction": "asr.l   #1, D2"
+    },
+    {
+      "pc": "C2945A",
+      "length": 4,
+      "opcode": "48E7",
+      "instruction": "movem.l D0-D2, -(A7)"
+    },
+    {
+      "pc": "C2945E",
+      "length": 2,
+      "opcode": "D083",
+      "instruction": "add.l   D3, D0"
+    },
+    {
+      "pc": "C29460",
+      "length": 2,
+      "opcode": "D284",
+      "instruction": "add.l   D4, D1"
+    },
+    {
+      "pc": "C29462",
+      "length": 2,
+      "opcode": "D485",
+      "instruction": "add.l   D5, D2"
+    },
+    {
+      "pc": "C29464",
+      "length": 2,
+      "opcode": "E280",
+      "instruction": "asr.l   #1, D0"
+    },
+    {
+      "pc": "C29466",
+      "length": 2,
+      "opcode": "E281",
+      "instruction": "asr.l   #1, D1"
+    },
+    {
+      "pc": "C29468",
+      "length": 2,
+      "opcode": "E282",
+      "instruction": "asr.l   #1, D2"
+    },
+    {
+      "pc": "C2946A",
+      "length": 4,
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, D3-D5"
+    },
+    {
+      "pc": "C2946E",
+      "length": 2,
+      "opcode": "D083",
+      "instruction": "add.l   D3, D0"
+    },
+    {
+      "pc": "C29470",
+      "length": 2,
+      "opcode": "D284",
+      "instruction": "add.l   D4, D1"
+    },
+    {
+      "pc": "C29472",
+      "length": 2,
+      "opcode": "D485",
+      "instruction": "add.l   D5, D2"
+    },
+    {
+      "pc": "C29474",
+      "length": 2,
+      "opcode": "E280",
+      "instruction": "asr.l   #1, D0"
+    },
+    {
+      "pc": "C29476",
+      "length": 2,
+      "opcode": "E281",
+      "instruction": "asr.l   #1, D1"
+    },
+    {
+      "pc": "C29478",
+      "length": 2,
+      "opcode": "E282",
+      "instruction": "asr.l   #1, D2"
+    },
+    {
+      "pc": "C2947A",
+      "length": 8,
+      "opcode": "48F9",
+      "instruction": "movem.l D0-D2, $c45c56.l"
+    },
+    {
+      "pc": "C29482",
+      "length": 4,
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, D3-D6"
+    },
+    {
+      "pc": "C29486",
+      "length": 2,
+      "opcode": "607E",
+      "instruction": "bra     $c29506"
+    },
+    {
+      "pc": "C29488",
+      "length": 4,
+      "opcode": "6100",
+      "instruction": "bsr     $c2949a"
+    },
+    {
+      "pc": "C2948C",
+      "length": 4,
+      "opcode": "6000",
+      "instruction": "bra     $c29506"
+    },
+    {
+      "pc": "C29490",
+      "length": 8,
+      "opcode": "4CF9",
+      "instruction": "movem.l $c46998.l, D0-D2"
+    },
+    {
+      "pc": "C29498",
+      "length": 2,
+      "opcode": "6008",
+      "instruction": "bra     $c294a2"
+    },
+    {
+      "pc": "C2949A",
+      "length": 8,
+      "opcode": "4CF9",
+      "instruction": "movem.l $c46198.l, D0-D2"
+    },
+    {
+      "pc": "C294A2",
+      "length": 8,
+      "opcode": "48F9",
+      "instruction": "movem.l D0-D2, $c45c56.l"
+    },
+    {
+      "pc": "C294AA",
+      "length": 2,
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C294AC",
+      "length": 4,
+      "opcode": "48E7",
+      "instruction": "movem.l D3-D7, -(A7)"
+    },
+    {
+      "pc": "C294B0",
+      "length": 2,
+      "opcode": "7804",
+      "instruction": "moveq   #$4, D4"
+    },
+    {
+      "pc": "C294B2",
+      "length": 8,
+      "opcode": "0C39",
+      "instruction": "cmpi.b  #$1, $c45848.l"
+    },
+    {
+      "pc": "C294BA",
+      "length": 2,
+      "opcode": "6710",
+      "instruction": "beq     $c294cc"
+    },
+    {
+      "pc": "C294BC",
+      "length": 8,
+      "opcode": "0C39",
+      "instruction": "cmpi.b  #$2, $c45848.l"
+    },
+    {
+      "pc": "C294C4",
+      "length": 2,
+      "opcode": "6706",
+      "instruction": "beq     $c294cc"
+    },
+    {
+      "pc": "C294C6",
+      "length": 2,
+      "opcode": "76FA",
+      "instruction": "moveq   #-$6, D3"
+    },
+    {
+      "pc": "C294C8",
+      "length": 2,
+      "opcode": "7AF7",
+      "instruction": "moveq   #-$9, D5"
+    },
+    {
+      "pc": "C294CA",
+      "length": 2,
+      "opcode": "6028",
+      "instruction": "bra     $c294f4"
+    },
+    {
+      "pc": "C294CC",
+      "length": 2,
+      "opcode": "7606",
+      "instruction": "moveq   #$6, D3"
+    },
+    {
+      "pc": "C294CE",
+      "length": 2,
+      "opcode": "7A03",
+      "instruction": "moveq   #$3, D5"
+    },
+    {
+      "pc": "C294D0",
+      "length": 2,
+      "opcode": "6022",
+      "instruction": "bra     $c294f4"
+    },
+    {
+      "pc": "C294D2",
+      "length": 4,
+      "opcode": "48E7",
+      "instruction": "movem.l D3-D7, -(A7)"
+    },
+    {
+      "pc": "C294D6",
+      "length": 2,
+      "opcode": "7801",
+      "instruction": "moveq   #$1, D4"
+    },
+    {
+      "pc": "C294D8",
+      "length": 2,
+      "opcode": "7A06",
+      "instruction": "moveq   #$6, D5"
+    },
+    {
+      "pc": "C294DA",
+      "length": 8,
+      "opcode": "0C39",
+      "instruction": "cmpi.b  #$1, $c45848.l"
+    },
+    {
+      "pc": "C294E2",
+      "length": 2,
+      "opcode": "670E",
+      "instruction": "beq     $c294f2"
+    },
+    {
+      "pc": "C294E4",
+      "length": 8,
+      "opcode": "0C39",
+      "instruction": "cmpi.b  #$2, $c45848.l"
+    },
+    {
+      "pc": "C294EC",
+      "length": 2,
+      "opcode": "6704",
+      "instruction": "beq     $c294f2"
+    },
+    {
+      "pc": "C294EE",
+      "length": 2,
+      "opcode": "76FA",
+      "instruction": "moveq   #-$6, D3"
+    },
+    {
+      "pc": "C294F0",
+      "length": 2,
+      "opcode": "6002",
+      "instruction": "bra     $c294f4"
+    },
+    {
+      "pc": "C294F2",
+      "length": 2,
+      "opcode": "7606",
+      "instruction": "moveq   #$6, D3"
+    },
+    {
+      "pc": "C294F4",
+      "length": 6,
+      "opcode": "4EB9",
+      "instruction": "jsr     $c091ce.l"
+    },
+    {
+      "pc": "C294FA",
+      "length": 8,
+      "opcode": "48F9",
+      "instruction": "movem.l D0-D2, $c45c56.l"
+    },
+    {
+      "pc": "C29502",
+      "length": 4,
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, D3-D7"
+    },
+    {
+      "pc": "C29506",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$240, D3"
+    },
+    {
+      "pc": "C2950C",
+      "length": 2,
+      "opcode": "6E3A",
+      "instruction": "bgt     $c29548"
+    },
+    {
+      "pc": "C2950E",
+      "length": 8,
+      "opcode": "0C39",
+      "instruction": "cmpi.b  #$6, $c458ae.l"
+    },
+    {
+      "pc": "C29516",
+      "length": 2,
+      "opcode": "6D2E",
+      "instruction": "blt     $c29546"
+    },
+    {
+      "pc": "C29518",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$6, $c457b6.l"
+    },
+    {
+      "pc": "C29520",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$5, $c458a5.l"
+    },
+    {
+      "pc": "C29528",
+      "length": 8,
+      "opcode": "13FC",
+      "instruction": "move.b  #$0, $c457b4.l"
+    },
+    {
+      "pc": "C29530",
+      "length": 6,
+      "opcode": "5339",
+      "instruction": "subq.b  #1, $c458a5.l"
+    },
+    {
+      "pc": "C29536",
+      "length": 2,
+      "opcode": "6E0E",
+      "instruction": "bgt     $c29546"
+    },
+    {
+      "pc": "C29538",
+      "length": 8,
+      "opcode": "0079",
+      "instruction": "ori.w   #$2, $c458c6.l"
+    },
+    {
+      "pc": "C29540",
+      "length": 6,
+      "opcode": "4239",
+      "instruction": "clr.b   $c458ae.l"
+    },
+    {
+      "pc": "C29546",
+      "length": 2,
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C29548",
+      "length": 6,
+      "opcode": "0C83",
+      "instruction": "cmpi.l  #$4800, D3"
+    },
+    {
+      "pc": "C2954E",
+      "length": 2,
+      "opcode": "6D0A",
+      "instruction": "blt     $c2955a"
+    },
+    {
+      "pc": "C29550",
+      "length": 2,
+      "opcode": "E485",
+      "instruction": "asr.l   #2, D5"
+    },
+    {
+      "pc": "C29552",
+      "length": 2,
+      "opcode": "E486",
+      "instruction": "asr.l   #2, D6"
+    },
+    {
+      "pc": "C29554",
+      "length": 2,
+      "opcode": "E487",
+      "instruction": "asr.l   #2, D7"
+    },
+    {
+      "pc": "C29556",
+      "length": 2,
+      "opcode": "E483",
+      "instruction": "asr.l   #2, D3"
+    },
+    {
+      "pc": "C29558",
+      "length": 2,
+      "opcode": "60EE",
+      "instruction": "bra     $c29548"
+    },
+    {
+      "pc": "C2955A",
+      "length": 2,
+      "opcode": "3F04",
+      "instruction": "move.w  D4, -(A7)"
+    },
+    {
+      "pc": "C2955C",
+      "length": 4,
+      "opcode": "303C",
+      "instruction": "move.w  #$200, D0"
+    },
+    {
+      "pc": "C29560",
+      "length": 6,
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2574a.l"
+    },
+    {
+      "pc": "C29566",
+      "length": 2,
+      "opcode": "381F",
+      "instruction": "move.w  (A7)+, D4"
+    },
+    {
+      "pc": "C29568",
+      "length": 2,
+      "opcode": "48C5",
+      "instruction": "ext.l   D5"
+    },
+    {
+      "pc": "C2956A",
+      "length": 2,
+      "opcode": "48C6",
+      "instruction": "ext.l   D6"
+    },
+    {
+      "pc": "C2956C",
+      "length": 2,
+      "opcode": "48C7",
+      "instruction": "ext.l   D7"
+    },
+    {
+      "pc": "C2956E",
+      "length": 2,
+      "opcode": "E9A5",
+      "instruction": "asl.l   D4, D5"
+    },
+    {
+      "pc": "C29570",
+      "length": 2,
+      "opcode": "E9A6",
+      "instruction": "asl.l   D4, D6"
+    },
+    {
+      "pc": "C29572",
+      "length": 2,
+      "opcode": "E9A7",
+      "instruction": "asl.l   D4, D7"
+    },
+    {
+      "pc": "C29574",
+      "length": 8,
+      "opcode": "4CF9",
+      "instruction": "movem.l $c45c4a.l, D0-D2"
+    },
+    {
+      "pc": "C2957C",
+      "length": 2,
+      "opcode": "2600",
+      "instruction": "move.l  D0, D3"
+    },
+    {
+      "pc": "C2957E",
+      "length": 2,
+      "opcode": "8681",
+      "instruction": "or.l    D1, D3"
+    },
+    {
+      "pc": "C29580",
+      "length": 2,
+      "opcode": "8682",
+      "instruction": "or.l    D2, D3"
+    },
+    {
+      "pc": "C29582",
+      "length": 2,
+      "opcode": "6714",
+      "instruction": "beq     $c29598"
+    },
+    {
+      "pc": "C29584",
+      "length": 2,
+      "opcode": "9A80",
+      "instruction": "sub.l   D0, D5"
+    },
+    {
+      "pc": "C29586",
+      "length": 2,
+      "opcode": "9C81",
+      "instruction": "sub.l   D1, D6"
+    },
+    {
+      "pc": "C29588",
+      "length": 2,
+      "opcode": "9E82",
+      "instruction": "sub.l   D2, D7"
+    },
+    {
+      "pc": "C2958A",
+      "length": 2,
+      "opcode": "7801",
+      "instruction": "moveq   #$1, D4"
+    },
+    {
+      "pc": "C2958C",
+      "length": 2,
+      "opcode": "E8A5",
+      "instruction": "asr.l   D4, D5"
+    },
+    {
+      "pc": "C2958E",
+      "length": 2,
+      "opcode": "E8A6",
+      "instruction": "asr.l   D4, D6"
+    },
+    {
+      "pc": "C29590",
+      "length": 2,
+      "opcode": "E8A7",
+      "instruction": "asr.l   D4, D7"
+    },
+    {
+      "pc": "C29592",
+      "length": 2,
+      "opcode": "DA80",
+      "instruction": "add.l   D0, D5"
+    },
+    {
+      "pc": "C29594",
+      "length": 2,
+      "opcode": "DC81",
+      "instruction": "add.l   D1, D6"
+    },
+    {
+      "pc": "C29596",
+      "length": 2,
+      "opcode": "DE82",
+      "instruction": "add.l   D2, D7"
+    },
+    {
+      "pc": "C29598",
+      "length": 8,
+      "opcode": "48F9",
+      "instruction": "movem.l D5-D7, $c45c4a.l"
+    },
+    {
+      "pc": "C295A0",
+      "length": 8,
+      "opcode": "4CF9",
+      "instruction": "movem.l $c45c3e.l, D0-D2"
+    },
+    {
+      "pc": "C295A8",
+      "length": 2,
+      "opcode": "DA80",
+      "instruction": "add.l   D0, D5"
+    },
+    {
+      "pc": "C295AA",
+      "length": 2,
+      "opcode": "DC81",
+      "instruction": "add.l   D1, D6"
+    },
+    {
+      "pc": "C295AC",
+      "length": 2,
+      "opcode": "DE82",
+      "instruction": "add.l   D2, D7"
+    },
+    {
+      "pc": "C295AE",
+      "length": 8,
+      "opcode": "48F9",
+      "instruction": "movem.l D5-D7, $c45c3e.l"
+    }
+  ],
+  "status": "Original cold internal paths, not registered/readable C. Generated instructions alone do not cover the complete active-origin parent. Preserve real source frames at local preset and matrix/scale children."
+}

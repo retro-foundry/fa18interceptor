@@ -5,15 +5,9 @@ static int32_t read_be32(const uint8_t *bytes) {
                      (uint32_t)bytes[2] << 8 | bytes[3]);
 }
 
-static int16_t read_be16(const uint8_t *bytes) {
-    return (int16_t)((uint16_t)bytes[0] << 8 | bytes[1]);
-}
-
 int fa18_publish_terrain_selector_origin_direct(
     FA18TerrainSelectorOriginDirectState *state,
     FA18TerrainSelectorOriginResult *result) {
-    int32_t floor;
-
     if (!state || !result)
         return -1;
     if (state->prepare_matrix)
@@ -31,9 +25,8 @@ int fa18_publish_terrain_selector_origin_direct(
         return -1;
 
     state->origin[0] = read_be32(state->active_record + 0x14);
-    floor = (int32_t)(int16_t)(read_be16(state->active_record + 0x4e) + 7) * 256;
-    if (state->origin[1] < floor)
-        state->origin[1] = floor;
+    /* C2908A jumps straight to C291C8. The floor calculation at C291A8
+     * belongs to the matrix lane; the direct record route preserves Y. */
     state->origin[2] = read_be32(state->active_record + 0x1c);
     state->negated_companion[0] = (int32_t)(UINT32_C(0) -
         ((uint32_t)state->origin[0] & UINT32_C(0x003fffff)));

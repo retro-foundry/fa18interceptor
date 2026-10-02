@@ -1,5 +1,12 @@
 # `$C1C63E` observed update stage (Hunk 8 +`$2AE`)
 
+The complete 112-instruction parent is now readable in `port/game/update_stage.c`.
+All 8,192 complete original-byte calls match every register/high word, PC,
+full SR and all Chip/Slow RAM, without exclusions. Normal readable-C
+replay and source-timing proofs remain separate. See
+`native_c_record_update_stage.md` for the current integration proof;
+the older bounded observations below remain historical evidence.
+
 Classification: **structural**. This routine is a bounded, expensive callee in
 the `$C0EFD4` update sequence. Its semantic role is still unknown.
 

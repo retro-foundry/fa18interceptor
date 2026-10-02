@@ -13,19 +13,20 @@ Stage F native backend, then only the Stage E Kickstart services still needed.
 The user explicitly deferred OS work and asked for larger routine batches.
 After the C279D0 batch, the latest instruction is to return to game timing
 parity. Selector, placement, post-input, context-refresh and bootstrap milestones
-are complete at 432/624.
+are complete at 432/624; the complete record-update and enclosing update-stage
+parents now raise coverage to 434/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 432 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 636,016 completed shadow
-  calls and 930,150 sandbox calls across three native recordings, with zero
+- 434 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 599,422 completed shadow
+  calls and 817,839 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 432-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 434-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -507,14 +508,43 @@ the captured condition route; its focused contract passes. See
 analysis/routines/native_c_scene_bootstrap.md and
 analysis/figures/native_scene_bootstrap_checkpoint.json. Do not redo this batch.
 
-Next complete C22C80's record-update and C29042's active-origin parents,
-then C1C63E's update-stage owner as a related batch (226 + 153 + 112 source
-instructions). Reuse the stride/indexed-record and flight-update groundwork,
-preserve explicit children, signed widths, D5 save/restore and all normal
-caller outputs. C08F26 still calls original C1C63E; do not claim it as ported.
-Later complete the whole C0EFD4 update sequence; C0F090/C0F132 are its internal
-labels, not extra functions. No handwritten glue may invoke opcode handlers.
-Keep the fade deferred.
+The complete C22C80 record-update and C1C63E update-stage parents are now
+registered at 434/624, with 225 source-timed entries. Their 338 instructions
+pass 10,816 DMA cases; the combined oracle passes 12,463 / 398,816. All 16,384
+complete original-byte CPU/RAM cases match full registers, PC, full SR and
+all RAM without exclusions. Normal independent proof per entry matches
+601 shadow / 10,140 sandbox calls, including an isolated C22C80 body check
+on every recording; all incomplete/hardware classifications remain separate.
+The full gate matches 599,422 shadow / 817,839 sandbox with all seals and poison.
+Both entries match all 36,236 isolated live frames and sealed final RAM.
+GNU/MSVC and the typed direct-origin contract pass; build/ is 0.329 GiB.
+The 600-frame isolated probe is exact; ALL still first differs at 416/361.
+C22C80 preserves slot 7's preparation-only sequence, slot 15's untouched
+bit-zero mask, signed byte gates, child Z decisions and actual D5 save frame.
+C1C63E preserves threshold requests, both key routes, partial D5.W restore
+around the original C29042 child and final request publication. The proof
+runner captures the child's return before local save frames, then carries
+cold original bytes through runtime execution. No masks or exclusions change.
+See analysis/routines/native_c_record_update_stage.md and
+analysis/figures/native_record_update_stage_checkpoint.json. Do not redo these
+parents; C08F26 now reaches the registered C1C63E owner.
+
+Next complete C29042 active origin, including **382** unique source instructions.
+Its generated 153-instruction list omits 229 cold internal instructions reached
+through C28F2C's nine mode targets. The earlier 491-instruction batch estimate
+was therefore incomplete: the two completed parents plus this full source
+span total 720. analysis/data/active_origin_complete_source.json records the
+sealed bytes, all targets and disassembly; port_info.instructions now includes
+these paths and checks the source state hash. C29042 remains original code,
+not a ported parent with an opaque internal continuation. Cover its threshold
+policy, terminated record scan, local preset call, blend, small matrix variants,
+mode-six countdown and scale/smoothing tail. Preserve all local save frames,
+signed widths and child-owned outputs. The typed direct-origin groundwork
+now correctly preserves Y: C2908A bypasses the matrix-route floor clamp;
+its contract passes but it is not an extra registered function.
+After C29042, complete the whole C0EFD4 update sequence; C0F090/C0F132 are
+internal labels, not extra functions. No handwritten glue may invoke opcode
+handlers. Keep the fade deferred.
 
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
 difference may be ignored for current work and revisited later. Source/ALL
@@ -554,12 +584,12 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    timing debt; the HUD list is not an automatic transcription queue.
 2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84, scene-placement
    pair C1CB14/C1CB26, follow-up parent C1CCBC/workspace helper C1D0A4,
-   post-input parent C0F5F8 and context/bootstrap/callback batch are complete
-   and registered at 432/624.
+   post-input parent C0F5F8, context/bootstrap/callback batch and C22C80/C1C63E
+   parents are complete and registered at 434/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Complete the related C22C80
-   record-update/C29042 active-origin and C1C63E update-stage batch next;
+   or count internal labels as extra routines. Complete C29042 active origin
+   next, including its verified 229 cold internal instructions;
    the leaf tool excludes indirect calls. Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
@@ -577,7 +607,7 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    batches; if ALL still does not improve, return to complete readable parent
    batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
-   Complete the record-update/active-origin/update-stage batch next; the leaf tool
+   Complete the full active-origin parent next; the leaf tool
    excludes its indirect calls. Preserve explicit child contracts.
 4. Reduce repeated work: cache one source stream within each bounded probe
    round; run changed-group DMA fixtures and short live probes while editing.

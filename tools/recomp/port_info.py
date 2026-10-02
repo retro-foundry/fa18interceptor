@@ -6,6 +6,7 @@ glue must reproduce).
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -14,6 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 GEN = ROOT / "port/recomp/generated"
 NAMES = [f"D{i}" for i in range(8)] + [f"A{i}" for i in range(8)]
+SOURCE_MANIFESTS = {"C29042": "analysis/data/active_origin_complete_source.json"}
 
 
 def instructions(entry: str) -> list[str]:
@@ -24,7 +26,24 @@ def instructions(entry: str) -> list[str]:
         if start < 0:
             continue
         end = text.find("\n}\n", start)
-        return [m.group(1) for m in re.finditer(r"/\* ([0-9A-F]{6}: .*?) \*/", text[start:end])]
+        original = [m.group(1) for m in re.finditer(r"/\* ([0-9A-F]{6}: .*?) \*/", text[start:end])]
+        if entry in SOURCE_MANIFESTS:
+            # Recorded recursive descent can omit cold internal jump-table
+            # paths. Include the byte-backed disassembly in whole-parent
+            # planning and future instruction oracles, once per address.
+            manifest = json.loads((ROOT / SOURCE_MANIFESTS[entry]).read_text())
+            state = (ROOT / manifest["state"]).read_bytes()
+            if hashlib.sha256(state).hexdigest() != manifest["state_sha256"]:
+                raise ValueError(f"{entry}: cold-path source state hash changed")
+            complete = {line.split(":")[0]: line for line in original}
+            for row in manifest["cold_instructions"]:
+                if row["pc"] in complete:
+                    raise ValueError(f"{entry}: duplicate cold source PC {row['pc']}")
+                complete[row["pc"]] = row["pc"] + ": " + row["instruction"]
+            if len(complete) != manifest["unique_complete_instruction_count"]:
+                raise ValueError(f"{entry}: incomplete cold source manifest")
+            return [complete[pc] for pc in sorted(complete)]
+        return original
     return []
 
 

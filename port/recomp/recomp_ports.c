@@ -259,16 +259,27 @@ static int run_port_body(int port) {
                 abort();
             }
         } else {
-            uint32_t child_pc = REG_PC, child_sp = REG_A[7];
-            result = fa18_recomp_call_dynamic();
-            if (result == FA18_RET) continue;
-            /* A generated child may stop at another translated leader after
-             * a nested call or branch. Keep dispatching that continuation;
-             * only hand an unchanged or interpreter-only stop to the proof
-             * caller. */
-            if (result == FA18_EXIT_DISPATCH &&
-                (REG_PC != child_pc || REG_A[7] != child_sp)) continue;
-            return result;
+            /* Capture the source child return BEFORE it executes LINK,
+             * MOVEM or local calls. At a later cold-path dispatch, (A7)
+             * can be saved data rather than that return address. Keep this
+             * boundary across all generated and original-byte continuations. */
+            uint32_t child_ret=fa18_bus_read32(REG_A[7]) & 0xffffffu;
+            uint32_t child_return_sp=REG_A[7]+4;
+            for (;;) {
+                uint32_t child_pc=REG_PC,child_sp=REG_A[7];
+                if(REG_PC==child_ret && REG_A[7]==child_return_sp) break;
+                result=fa18_recomp_call_dynamic();
+                if(result==FA18_RET) continue;
+                if(result==FA18_EXIT_DISPATCH &&
+                   (REG_PC!=child_pc || REG_A[7]!=child_sp)) continue;
+                if(result==FA18_EXIT_DISPATCH) {
+                    /* No generated entry: the runtime owns original-byte
+                     * execution. Game glue never calls opcode handlers. */
+                    result=fa18_recomp_resume(child_ret,child_return_sp);
+                    if(result==FA18_RET) continue;
+                }
+                return result;
+            }
         }
     }
 }

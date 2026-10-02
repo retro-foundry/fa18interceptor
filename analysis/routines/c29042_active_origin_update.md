@@ -34,6 +34,24 @@ or map-page table.
   Together with the prior slices, this completes byte-exact reconstruction of
   the producer continuation `$C291D4-$C295D0`.
 
+## Complete-port scope audit (2026-10-02)
+
+C29042 is still original code. The generated list contains 153 instructions,
+but its mode-table jump also reaches 229 source instructions at
+C29226-C295B5. The complete static span is **382 unique instructions**,
+including the shared final tail once. All nine original mode-table targets,
+their instruction lengths/opcodes and sealed-byte hashes are retained in
+`../data/active_origin_complete_source.json`. These are internal cold paths,
+not nine newly ported functions. The next implementation must cover the
+threshold policy, terminated record scan, local preset child, blend, small
+matrix variants, mode-six countdown, scale and smoothing routes.
+
+The direct C29070-C2908A record route preserves the existing middle origin:
+C2908A jumps to C291C8 and skips the floor calculation at C291A8-C291C6.
+That clamp belongs to the matrix route. The older typed direct-origin helper
+and its contract now preserve Y accordingly. This correction does not
+register C29042 or complete its remaining routes.
+
 ## Observed producer path
 
 The entry calls `$C2DAF2`, then applies state gates before selecting the active
@@ -42,7 +60,7 @@ matrix/record transform helpers (`$C091A8` or `$C091CE`) based on observed
 record type and mode fields. Their output triple is first retained at
 `$C45C56-$C45C61` and loaded into `D5-D7`.
 
-At `$C291B6-$C291C6`, the path derives a lower bound from the selected
+On the matrix route at `$C291B6-$C291C6`, the path derives a lower bound from the selected
 record's word `+$4E` (`(word + 7) << 8`) and clamps the middle output component
 against it. `$C291C8` then performs the direct store:
 

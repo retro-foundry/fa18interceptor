@@ -1,5 +1,12 @@
 # `$C22C80` record-update stage
 
+The complete 226-instruction parent is now readable in `port/game/record_update_stage.c`.
+All 8,192 complete original-byte calls match every register/high word, PC,
+full SR and all Chip/Slow RAM, without exclusions. Normal readable-C
+replay and source-timing proofs remain separate. See
+`native_c_record_update_stage.md` for the current integration proof;
+the older bounded observations below remain historical evidence.
+
 Classification: **behavioural record-update evidence**. The record class is
 unknown, so this is not named as player, camera, or AI state.
 

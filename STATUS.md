@@ -7,10 +7,10 @@ Updated 2026-10-02.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 432 registered game entries passed shadow, sandbox, sealed final RAM and poison on all three native recordings. The complete C1C860/C08F26/C0F920/C0F992 batch matches 32,768 all-register/full-SR/all-RAM cases without exclusions and 3,743 shadow / 5,815 sandbox normal readable-C comparisons. Bootstrap's own body is checked independently on each recording. Incomplete calls and parent absorption remain explicit. Earlier workspace helpers retain cold-entry structural proof. Archived UAE runs are historical evidence. |
+| Current proof | The 434 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete C22C80/C1C63E parents match 16,384 all-register/full-SR/all-RAM cases without exclusions. Independent readable-C proof per entry matches 601 shadow / 10,140 sandbox calls; the record parent is checked separately on every recording. Hardware/incomplete calls remain separate. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 432 registered game entries in `port/game/`; 636,016 matching shadow calls and 930,150 sandbox calls over three native recordings; poison frames identical. Latest new entries: complete context refresh, scene bootstrap and two callback wrappers. Child calls absorbed by a ported parent change aggregate totals. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | There are 223 timing-step entries. The context/bootstrap batch and six existing children match 272 instructions / 8,704 DMA cases. A fresh combined oracle passes 12,125 instructions / 388,000 DMA cases, restoring the sealed machine before each case. All ten entries together match all 36,236 isolated live frames and sealed RAM. ALL still first differs at frame 416 by 361 pixels. The Copper fade finishes one frame late (436/437), deferred by the user on 2026-10-02. See `analysis/routines/native_c_scene_bootstrap.md`, `analysis/routines/native_c_scene_transition_timing.md` and `CURRENT_PORT_HANDOFF.md`. |
+| Recreated C source | 434 registered game entries in `port/game/`; 599,422 matching shadow / 817,839 sandbox calls over three native recordings, zero mismatches, poison identical. Latest complete parents: C22C80 control-record update and C1C63E update stage. Parent absorption changes aggregate totals. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | There are 225 timing-step entries. The record/update-stage batch matches 338 instructions / 10,816 DMA cases; the combined oracle passes 12,463 / 398,816, resetting the sealed machine per fixture. Both entries match all 36,236 isolated live frames and sealed RAM. ALL still first differs at frame 416 by 361 pixels. The Copper fade finishes one frame late (436/437), deferred on 2026-10-02. See `analysis/routines/native_c_record_update_stage.md` and `CURRENT_PORT_HANDOFF.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -22,7 +22,7 @@ corrected, with ALL's first difference unchanged. The next work is a
 complete readable parent batch; C1D10C, C1E540
 and the two workspace helpers are now complete; the scene-placement pair
 and follow-up placement parent, then C0F5F8 and the context/bootstrap batch,
-raise coverage to 432 entries. The visible
+raise coverage to 432 entries; C22C80/C1C63E now raise it to 434. The visible
 checkpoint also confirms a
 fade reset and completion two machine frames late. The initializer correction
 removes the frame it introduced; the inherited frame remains. A 17-entry HUD
@@ -65,8 +65,17 @@ refresh, C08F26 bootstrap and C0F920/C0F992 callbacks now pass their independent
 readable-C and live timing gates. The proof tool automatically isolates a
 recorded child when its parent absorbs the batch comparison, while still
 rejecting unproven entries. See `analysis/routines/native_c_scene_bootstrap.md`.
-The next related batch is C22C80 record update, C29042 active-origin update
-and their C1C63E update-stage owner.
+The complete C22C80 record-update and C1C63E update-stage parents now pass
+independent readable-C, source-timing and live gates. The stepped proof runner
+captures child returns before local save frames, preserving that boundary
+through cold original-byte continuations. See
+`analysis/routines/native_c_record_update_stage.md`.
+Next complete C29042 active origin. Its generated list omits 229 cold internal
+instructions; the full static scope is 382, with all nine mode targets and
+sealed-byte disassembly in `analysis/data/active_origin_complete_source.json`.
+The source planning tool now includes those paths and verifies the state hash.
+The typed direct-origin helper also now preserves Y, following the original
+jump that bypasses the matrix-route floor clamp. C29042 remains unregistered.
 
 ## The game program
 
