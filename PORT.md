@@ -62,7 +62,7 @@ is proven against.
 | A | Whole-program translation, interpreter fallback | done (624 routines) |
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Machine and frame parity with Engine9000 | historical emulator comparisons documented; current acceptance uses the sealed native recordings |
-| D | Readable C, proven in related batches | 434 registered routines; see CURRENT_PORT_HANDOFF.md for the latest full gate and cold-entry structural evidence |
+| D | Readable C, proven in related batches | 435 registered routines; see CURRENT_PORT_HANDOFF.md for the latest full gate and cold-entry structural evidence |
 | F | Native backend: plain C memory, direct drawing and audio | not started |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
 

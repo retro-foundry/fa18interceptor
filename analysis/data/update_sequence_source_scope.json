@@ -1,0 +1,19 @@
+{
+  "entry": "C0EFD4",
+  "range": [
+    "C0EFD4",
+    "C0F3C4"
+  ],
+  "end_exclusive": true,
+  "bytes": 1008,
+  "instruction_count": 210,
+  "additional_cold_instructions": 0,
+  "state": "captures/native/demo01/state.bin",
+  "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "source_bytes_sha256": "e11c4dbe6317958b8febcddf3d9f4dec8395bd733b14669be8a107f750ba8564",
+  "internal_labels_not_functions": [
+    "C0F090",
+    "C0F132"
+  ],
+  "child_call_count": 68
+}

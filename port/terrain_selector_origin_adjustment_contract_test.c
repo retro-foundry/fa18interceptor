@@ -2,10 +2,13 @@
 
 #include <assert.h>
 
-static int scale(void *context, uint16_t input, int16_t *shift) {
+static int normalize(void *context, uint16_t length, int32_t candidate[3]) {
     (void)context;
-    assert(input == 0x200);
-    *shift = 1;
+    assert(length == 0x200);
+    assert(candidate[0] == 0x48 && candidate[1] == -0x10 && candidate[2] == 8);
+    /* Distinct child outputs catch the old, incorrect shift-only callback
+     * that never consumed the normalizer's modified triple. */
+    candidate[0] = 0x101; candidate[1] = -0x22; candidate[2] = 0x33;
     return 0;
 }
 
@@ -13,16 +16,16 @@ int main(void) {
     FA18TerrainSelectorOriginAdjustmentState state = {
         .magnitude = 0x4800, .candidate = {0x120, -0x40, 0x20},
         .smoothed_delta = {0, 0, 0}, .origin = {0x401000, 0x2000, 0x3000},
-        .scale = scale
+        .shift = 1, .normalize = normalize
     };
     assert(fa18_adjust_terrain_selector_origin(&state) == 0);
-    /* Candidate is quartered, sign-extended from its low word, then doubled. */
-    assert(state.smoothed_delta[0] == 0x90 && state.smoothed_delta[1] == -0x20 &&
-           state.smoothed_delta[2] == 0x10);
-    assert(state.origin[0] == 0x401090 && state.origin[1] == 0x1fe0 &&
-           state.origin[2] == 0x3010);
-    assert(state.negated_companion[0] == -0x1090 && state.negated_companion[1] == -0x1fe0 &&
-           state.negated_companion[2] == -0x3010);
+    /* The quartered triple enters the child; its output uses the saved shift. */
+    assert(state.smoothed_delta[0] == 0x202 && state.smoothed_delta[1] == -0x44 &&
+           state.smoothed_delta[2] == 0x66);
+    assert(state.origin[0] == 0x401202 && state.origin[1] == 0x1fbc &&
+           state.origin[2] == 0x3066);
+    assert(state.negated_companion[0] == -0x1202 && state.negated_companion[1] == -0x1fbc &&
+           state.negated_companion[2] == -0x3066);
     assert(fa18_adjust_terrain_selector_origin(0) == -1);
     return 0;
 }

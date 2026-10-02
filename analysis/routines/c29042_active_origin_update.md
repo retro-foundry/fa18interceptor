@@ -36,13 +36,16 @@ or map-page table.
 
 ## Complete-port scope audit (2026-10-02)
 
-C29042 is still original code. The generated list contains 153 instructions,
+C29042 is now complete readable C, registered at 435/624. Its independent
+whole-call, full CPU/RAM, source timing and live-frame proofs are recorded in
+[`native_c_selector_origin.md`](native_c_selector_origin.md). The following
+scope audit preceded this implementation. The generated list contains 153 instructions,
 but its mode-table jump also reaches 229 source instructions at
 C29226-C295B5. The complete static span is **382 unique instructions**,
 including the shared final tail once. All nine original mode-table targets,
 their instruction lengths/opcodes and sealed-byte hashes are retained in
 `../data/active_origin_complete_source.json`. These are internal cold paths,
-not nine newly ported functions. The next implementation must cover the
+not nine newly ported functions. The implementation covers the
 threshold policy, terminated record scan, local preset child, blend, small
 matrix variants, mode-six countdown, scale and smoothing routes.
 
@@ -50,7 +53,7 @@ The direct C29070-C2908A record route preserves the existing middle origin:
 C2908A jumps to C291C8 and skips the floor calculation at C291A8-C291C6.
 That clamp belongs to the matrix route. The older typed direct-origin helper
 and its contract now preserve Y accordingly. This correction does not
-register C29042 or complete its remaining routes.
+register an extra function; the complete domain now owns all routes.
 
 ## Observed producer path
 
@@ -76,7 +79,8 @@ The reconstructed common tail later updates these values again through the
 not bytes copied directly from a static terrain template.
 
 The tail repeatedly quarters a candidate while its supplied magnitude `D3` is
-at least `$4800`, obtains a variable shift from `$C2574A`, and averages a
+at least `$4800`, normalizes the reduced triple with length `$200` through
+`$C2574A`, restores the caller-selected shift saved around that child, and averages a
 nonzero candidate with the previous `$C45C4A` triple before adding it to the
 live origin. This proves an adjustment/smoothing dataflow. It does not prove
 what physical quantity `D3` represents, nor that any preceding threshold is a

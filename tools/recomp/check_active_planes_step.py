@@ -22,11 +22,13 @@ def main():
     group_names += ("gauge", "workspace_records", "scene_transition", "placement_order", "template_placements", "scene_placements", "followup_placements", "post_input_tick")
     group_names += ("scene_bootstrap",)
     group_names += ("record_update_stage",)
+    group_names += ("selector_origin",)
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "selector_origin": ["C29042"],
         "record_update_stage": ["C22C80", "C1C63E"],
         "scene_bootstrap": ["C1C860", "C08F26", "C0F920", "C0F992", "C090C2", "C090F2", "C0910C", "C0915A", "C0F4A6", "C11ACC"],
         "post_input_tick": ["C0F5F8"],

@@ -1,6 +1,13 @@
 # `$C0EFD4` observed update sequence (Hunk 0 +`$1124`)
 
-Classification: **structural**. `$C0EFD4` is a verified Hunk-0 routine above
+The next complete port target after C29042. A fresh sealed-byte audit verifies
+all 1,008 bytes at C0EFD4-C0F3C3: **210 instructions / 68 child calls**, with
+no instruction addresses missing from the generated list. The source hash and
+boundaries are in `../data/update_sequence_source_scope.json`. C0F090/C0F132
+are internal labels, not extra functions. This audit proves source scope;
+the historical dynamic cap below does not prove a complete C implementation.
+
+Historical classification: **structural**. `$C0EFD4` is a verified Hunk-0 routine above
 the bounded input phase, but no return-to-main-loop claim has been made.
 
 ## Capped no-input packet

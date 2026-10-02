@@ -1,5 +1,10 @@
 #ifndef FA18_PORTS_GLUE_H
 #define FA18_PORTS_GLUE_H
+#include <stdint.h>
+int glue_C29042(void);
+int glue_C29042_step(void);
+int glue_origin_control_record(void);
+int glue_origin_candidate_preset(uint32_t preset);
 int glue_C22C80(void);
 int glue_C1C63E(void);
 int glue_C22C80_step(void);

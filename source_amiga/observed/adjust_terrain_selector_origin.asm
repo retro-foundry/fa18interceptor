@@ -1,6 +1,7 @@
 ; Byte-exact static adjustment/publish tail $C29548-$C295D0.
 ; This tail receives a magnitude in D3 and a three-component candidate in
-; D5-D7.  It reduces over-large candidates, obtains a scale from $C2574A,
+; D5-D7. It reduces over-large candidates, normalizes them through $C2574A
+; with length $200, restores the caller-selected shift saved around that child,
 ; smooths against C45C4A, adds the live selector origin, then publishes both
 ; the origin and its masked/negated companion.  The caller-selected threshold
 ; policy and any flight-distance interpretation remain unproven.

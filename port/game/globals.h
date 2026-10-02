@@ -587,4 +587,40 @@
 #define SHADOW_OFFSET_Y    0xC45B34u /* long */
 #define LOAD_TRIM          0xC45946u /* word: added to the load readout when beyond +-1 */
 
+
+/* ---- selector-origin producer and internal candidate policy (C29042) ----
+ * Byte-exact source: the terrain-origin ASM modules in source_amiga/observed/.
+ * Triples are selector inputs; physical-coordinate meanings stay unassigned. */
+#define ORIGIN_ENABLE               0xC45785u
+#define ORIGIN_GATE_B               0xC457B5u
+#define ORIGIN_GATE_A               0xC457AEu
+#define ORIGIN_GATE_MODE            0xC457ADu
+#define ORIGIN_DETAIL_MODE          0xC458AEu
+#define ORIGIN_DETAIL_INDEX         0xC458B2u
+#define ORIGIN_RECORD_OFFSET        0xC458DEu
+#define ORIGIN_ANGLE_HISTORY        0xC4592Au
+#define ORIGIN_CANDIDATE_TRIPLE     0xC45C56u
+#define SELECTOR_ORIGIN             0xC45C3Eu
+#define SELECTOR_ORIGIN_MIDDLE      0xC45C42u
+#define SELECTOR_ORIGIN_THIRD       0xC45C46u
+#define ORIGIN_NEGATED_COMPANION    0xC45C32u
+#define ORIGIN_SMOOTHED_DELTA       0xC45C4Au
+#define ORIGIN_AUXILIARY_DELTA      0xC45C4Eu
+#define ORIGIN_ADJUSTMENT_MODE      0xC457B6u
+#define ORIGIN_THRESHOLD_FLAG       0xC457B4u
+#define ORIGIN_AUXILIARY_FLAG       0xC458AFu
+#define ORIGIN_VARIANT_SELECTOR     0xC45848u
+#define ORIGIN_DETAIL_COUNTER       0xC458A5u
+#define ORIGIN_STATUS_WORD          0xC458C6u
+#define ORIGIN_RECORD_LIST          0xC4573Au
+#define ORIGIN_SELECTED_OFFSET      0xC459BAu
+#define ORIGIN_FALLBACK_WORD        0xC4599Eu
+#define ORIGIN_MODE_TABLE           0xC28F2Cu
+#define ORIGIN_MATRIX_TABLE         0xC28F50u
+#define ORIGIN_MATRIX_CLASS_11      0xC28F8Cu
+#define ORIGIN_MATRIX_CLASS_14      0xC28FC8u
+#define ORIGIN_MATRIX_CLASS_30      0xC29004u
+#define ORIGIN_ROOT_PRESET          0xC46198u
+#define ORIGIN_ALTERNATE_PRESET     0xC46998u
+
 #endif

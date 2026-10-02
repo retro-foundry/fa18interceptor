@@ -1,0 +1,383 @@
+{
+  "date": "2026-10-02",
+  "entries_added": [
+    "C29042"
+  ],
+  "registered_entries": 435,
+  "registered_timing_entries": 226,
+  "source": {
+    "manifest": "analysis/data/active_origin_complete_source.json",
+    "complete_instructions": 382,
+    "cold_instructions": 229,
+    "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "contract": "Complete direct/matrix/threshold/blend/preset/small-transform/countdown/normalization/smoothing producer",
+    "internal_helpers_not_additional_registered_functions": [
+      "C29368",
+      "C29490",
+      "C2949A"
+    ]
+  },
+  "structural": {
+    "command": "python tools/recomp/check_selector_origin.py --cases 8192",
+    "entries": [
+      "C29042",
+      "C29368",
+      "C29490",
+      "C2949A"
+    ],
+    "cases_per_entry": 8192,
+    "total": 32768,
+    "all_registers_high_words_pc_full_sr_ram": true,
+    "ram_exclusion_bytes": 0,
+    "patched_original_instructions": false,
+    "real_original_children": true,
+    "fixtures": [
+      "all nine modes and signed magnitude threshold boundaries",
+      "signed auxiliary flag/delta boundaries",
+      "zero and nonzero smoothing history",
+      "countdown expiry and signed byte wrap",
+      "matrix types, index rotation, input shifts and floor-word wrap",
+      "terminated record scans and both static presets"
+    ]
+  },
+  "normal_whole_call": {
+    "command": "python tools/recomp/check_whole_call_glue.py C29042",
+    "steps_disabled": true,
+    "normal_liveness_preserved": true,
+    "totals": {
+      "shadow": {
+        "calls": 732,
+        "compared": 732,
+        "matched": 732,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      },
+      "sandbox": {
+        "calls": 732,
+        "compared": 732,
+        "matched": 732,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "entry": "C29042",
+          "name": "publish_selector_origin",
+          "calls": 730,
+          "compared": 730,
+          "matched": 730,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 2548,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C29042",
+          "name": "publish_selector_origin",
+          "calls": 730,
+          "compared": 730,
+          "matched": 730,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 2547,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "entry": "C29042",
+          "name": "publish_selector_origin",
+          "calls": 1,
+          "compared": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 488,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C29042",
+          "name": "publish_selector_origin",
+          "calls": 1,
+          "compared": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 488,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "entry": "C29042",
+          "name": "publish_selector_origin",
+          "calls": 1,
+          "compared": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 490,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C29042",
+          "name": "publish_selector_origin",
+          "calls": 1,
+          "compared": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 490,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      }
+    }
+  },
+  "timing": {
+    "local_instructions": 382,
+    "local_dma_cases": 12224,
+    "combined_instructions": 12845,
+    "combined_dma_cases": 411040,
+    "all_registers_full_sr_pc_cycles_ram": true,
+    "sealed_machine_reset_per_case": true
+  },
+  "full_registered_gate": {
+    "command": "scripts/recomp_ports_check.sh",
+    "totals": {
+      "shadow": {
+        "calls": 648756,
+        "compared": 598726,
+        "matched": 598726,
+        "mismatched": 0,
+        "hardware": 16001,
+        "incomplete": 34029
+      },
+      "sandbox": {
+        "calls": 1246247,
+        "compared": 817657,
+        "matched": 817657,
+        "mismatched": 0,
+        "hardware": 17009,
+        "incomplete": 411581
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "all_entries": {
+            "calls": 344699,
+            "compared": 320213,
+            "matched": 320213,
+            "mismatched": 0,
+            "hardware": 4884,
+            "incomplete": 19602
+          },
+          "new_entry": {
+            "entry": "C29042",
+            "name": "publish_selector_origin",
+            "calls": 687,
+            "compared": 687,
+            "matched": 687,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2563,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        },
+        "sandbox": {
+          "all_entries": {
+            "calls": 464941,
+            "compared": 314879,
+            "matched": 314879,
+            "mismatched": 0,
+            "hardware": 5227,
+            "incomplete": 144835
+          },
+          "new_entry": {
+            "entry": "C29042",
+            "name": "publish_selector_origin",
+            "calls": 164,
+            "compared": 164,
+            "matched": 164,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2596,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "all_entries": {
+            "calls": 240010,
+            "compared": 220145,
+            "matched": 220145,
+            "mismatched": 0,
+            "hardware": 8035,
+            "incomplete": 11830
+          },
+          "new_entry": {
+            "entry": "C29042",
+            "name": "publish_selector_origin",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        },
+        "sandbox": {
+          "all_entries": {
+            "calls": 667473,
+            "compared": 429226,
+            "matched": 429226,
+            "mismatched": 0,
+            "hardware": 8533,
+            "incomplete": 229714
+          },
+          "new_entry": {
+            "entry": "C29042",
+            "name": "publish_selector_origin",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "all_entries": {
+            "calls": 64047,
+            "compared": 58368,
+            "matched": 58368,
+            "mismatched": 0,
+            "hardware": 3082,
+            "incomplete": 2597
+          },
+          "new_entry": {
+            "entry": "C29042",
+            "name": "publish_selector_origin",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        },
+        "sandbox": {
+          "all_entries": {
+            "calls": 113833,
+            "compared": 73552,
+            "matched": 73552,
+            "mismatched": 0,
+            "hardware": 3249,
+            "incomplete": 37032
+          },
+          "new_entry": {
+            "entry": "C29042",
+            "name": "publish_selector_origin",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      }
+    },
+    "final_ram_seals_match": {
+      "demo01": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103",
+      "qual_carrier_success": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30",
+      "qual_fail_crashes": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+    },
+    "poison_frames_identical": true
+  },
+  "live": {
+    "command": "PORTS_ONLY=C29042 scripts/recomp_live_check.sh",
+    "total_frames": 36236,
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "rgb444_exact": true,
+        "final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "rgb444_exact": true,
+        "final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "rgb444_exact": true,
+        "final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+      }
+    },
+    "temporary_rgb_ram_removed": true
+  },
+  "bounded_probe": {
+    "frames": 600,
+    "C29042": "exact",
+    "ALL": {
+      "first_difference_frame": 416,
+      "different_pixels": 361
+    },
+    "copper_fade": "deferred by user"
+  },
+  "typed_adjustment": {
+    "contract": "C2574A changes the reduced triple; the selected shift is saved by the caller",
+    "old_shift_only_callback_removed": true,
+    "focused_gnu_contract": "pass",
+    "complete_parent_proof_uses_real_original_normalizer": true
+  },
+  "build": {
+    "gnu": "pass",
+    "msvc": "pass",
+    "bytes": 366173739,
+    "gib": 0.341
+  },
+  "next": {
+    "entry": "C0EFD4",
+    "scope_manifest": "analysis/data/update_sequence_source_scope.json",
+    "instructions": 210,
+    "child_calls": 68,
+    "cold_instructions_missing_from_generated_list": 0
+  }
+}
