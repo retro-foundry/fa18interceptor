@@ -1,5 +1,10 @@
 # `$C0F920-$C0F991`: post-input callback chain
 
+C0F920 is now a complete registered domain/CPU/timing owner in
+`port/game/scene_bootstrap.c`. Its eight instructions and required bootstrap
+child are proven by 8,192 full-register/full-SR/all-RAM cases and the failure
+recording's completed normal sandbox call. See `native_c_scene_bootstrap.md`.
+
 ## Evidence
 
 Static 68000 disassembly, reconstructed byte-for-byte in

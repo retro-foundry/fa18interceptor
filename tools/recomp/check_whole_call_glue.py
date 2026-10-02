@@ -4,6 +4,8 @@ Builds an isolated registry variant using the shared object cache, then checks
 shadow and sandbox calls on every sealed recording. The normal runner and
 source registry are unchanged. Live timing is checked separately by
 scripts/recomp_live_check.sh with PORTS_ONLY set to the selected entries.
+Entries called but absorbed by a batch parent are checked again in isolation;
+every entry still requires a completed original comparison.
 """
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -38,19 +40,7 @@ def check_recording(recording, executable, entries):
     return results
 
 
-def main(default_entries=()):
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("entries", nargs="*" if default_entries else "+",
-                        default=default_entries,
-                        help="registered six-digit hexadecimal entries")
-    parser.add_argument("--jobs", type=int, default=3)
-    args = parser.parse_args()
-    entries = tuple(entry.upper().removeprefix("0X") for entry in args.entries)
-    if any(not re.fullmatch(r"[0-9A-F]{6}", e) for e in entries):
-        parser.error("entries must be six-digit hexadecimal addresses")
-    if args.jobs <= 0:
-        parser.error("--jobs must be positive")
-    registry = (ROOT / "port/game/glue/ports.c").read_text()
+def build_variant(entries, registry):
     for entry in entries:
         # Retain entry, whole-call glue and name; disable only the step path.
         registry, count = re.subn(
@@ -68,15 +58,49 @@ def main(default_entries=()):
         "python", "scripts/build_recomp.py", "--output", str(executable.relative_to(ROOT)),
         "--replace-source", "port/game/glue/ports.c=" + str(variant.relative_to(ROOT)),
     ], cwd=ROOT, check=True)
+    return executable
+
+
+def check_entries(entries, registry, recordings, jobs):
+    executable = build_variant(entries, registry)
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        return list(pool.map(lambda d: check_recording(d, executable, entries), recordings))
+
+
+def main(default_entries=()):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("entries", nargs="*" if default_entries else "+",
+                        default=default_entries,
+                        help="registered six-digit hexadecimal entries")
+    parser.add_argument("--jobs", type=int, default=3)
+    args = parser.parse_args()
+    entries = tuple(entry.upper().removeprefix("0X") for entry in args.entries)
+    if any(not re.fullmatch(r"[0-9A-F]{6}", e) for e in entries):
+        parser.error("entries must be six-digit hexadecimal addresses")
+    if args.jobs <= 0:
+        parser.error("--jobs must be positive")
+    registry = (ROOT / "port/game/glue/ports.c").read_text()
     recordings = sorted(p.parent for p in (ROOT / "captures/native").glob("*/input.fa18in"))
     if not recordings:
         raise RuntimeError("no sealed recordings")
-    with ThreadPoolExecutor(max_workers=args.jobs) as pool:
-        results = list(pool.map(lambda d: check_recording(d, executable, entries), recordings))
+    results = check_entries(entries, registry, recordings, args.jobs)
     for entry in entries:
         if not any(result[mode][entry]["matched"] for result in results
                    for mode in ("shadow", "sandbox")):
-            raise RuntimeError(f"{entry}: no completed comparisons")
+            if len(entries) == 1 or not any(result[mode][entry]["calls"] for result in results
+                                          for mode in ("shadow", "sandbox")):
+                raise RuntimeError(f"{entry}: no completed comparisons")
+            print(f"{entry}: called without a completed batch comparison; checking independently",
+                  flush=True)
+            isolated = check_entries((entry,), registry, recordings, args.jobs)
+            if not any(result[mode][entry]["matched"] for result in isolated
+                       for mode in ("shadow", "sandbox")):
+                raise RuntimeError(f"{entry}: no completed comparisons in isolation")
+            # Aggregate one independent proof per entry. Raw batch and isolated
+            # reports remain separate, including hardware/incomplete counts.
+            for batch_row, isolated_row in zip(results, isolated):
+                for mode in ("shadow", "sandbox"):
+                    batch_row[mode][entry] = isolated_row[mode][entry]
     print("whole-call C proof: " + ", ".join(
         f"{sum(row[mode][e]['matched'] for row in results for e in entries)} {mode} matches"
         for mode in ("shadow", "sandbox")))

@@ -12,19 +12,20 @@ sealed native recordings. Work in related batches. The order is Stage D game C,
 Stage F native backend, then only the Stage E Kickstart services still needed.
 The user explicitly deferred OS work and asked for larger routine batches.
 After the C279D0 batch, the latest instruction is to return to game timing
-parity. The selector, placement and post-input tick milestones are complete at 428/624.
+parity. Selector, placement, post-input, context-refresh and bootstrap milestones
+are complete at 432/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 428 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 644,155 completed shadow
-  calls and 944,089 sandbox calls across three native recordings, with zero
+- 432 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 636,016 completed shadow
+  calls and 930,150 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 428-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 432-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -156,6 +157,19 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   RAM match. ALL remains 416/361. GNU/MSVC pass; build/ is 0.305 GiB.
   See analysis/routines/native_c_post_input_tick.md and
   analysis/figures/native_post_input_tick_checkpoint.json.
+  The complete C1C860 context-refresh, C08F26 bootstrap and C0F920/C0F992
+  callback wrappers are now registered: 432/624, with 223 timing-step entries.
+  All 32,768 complete CPU/RAM cases match every register, full SR and all RAM
+  without exclusions. Normal readable C passes 3,743 shadow / 5,815 sandbox
+  comparisons, including three independent bootstrap body comparisons.
+  Incomplete calls stay separate. The proof tool now automatically isolates
+  a called child when its parent absorbs the batch comparison; it still
+  requires a completed original comparison for every entry. The ten-entry
+  timing group passes 272 / 8,704 DMA cases and all 36,236 live frames/sealed
+  RAM. Fresh combined timing passes 12,125 / 388,000. ALL remains 416/361.
+  GNU/MSVC and the corrected typed context contract pass; build/ is 0.317 GiB.
+  See analysis/routines/native_c_scene_bootstrap.md and
+  analysis/figures/native_scene_bootstrap_checkpoint.json.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -467,13 +481,40 @@ match. Fresh combined timing passes 11,853 / 379,296 DMA cases. GNU/MSVC pass;
 build/ is 0.305 GiB; ALL remains 416/361. Detailed classifications are in
 analysis/figures/native_post_input_tick_checkpoint.json. Do not redo this parent.
 
-Next complete the related C1C860 context-refresh parent and C08F26 bootstrap,
-then their C0F920/C0F992 callback wrappers as one source-owned batch. C08F26
-has 80 instructions including the final C1C40C/C1C63E/C1C860 calls after
-C090AE; its older initialization slice ending at C090AD is not the complete
-contract. Preserve explicit children and normal all-register/high-word masks.
-The runtime between-label source path handles callbacks with no generated
-entry; no handwritten glue may invoke opcode handlers. Keep the fade deferred.
+The complete context-refresh/bootstrap/callback batch now raises the registered
+set to 432/624 and source-timed entries to 223. C1C860 preserves request-bit
+ownership, actual record flagging, both selector shifts, source save-frame
+aliasing, ordered sort/cache/condition children and guarded pixel submission.
+C08F26 includes all 80 instructions and all ten children, including the
+C1C40C/C1C63E/C1C860 calls after C090AE. Its old initialization-only slice
+ending at C090AD was not a complete parent. Both callback wrappers retain
+their complete source branches and child-owned effects.
+
+All 8,192 complete cases per new entry (32,768 total) match every register,
+PC, full SR and all RAM without exclusions. Normal recorded proof matches
+3,743 shadow / 5,815 sandbox completed comparisons, including C08F26's
+independent body check on every recording. Shadow retains 347 context, three
+wrapper and three standalone-bootstrap incomplete calls; no hardware/mismatch
+calls are accepted. The proof tool now isolates recorded children whose batch
+comparisons are absorbed by a parent; cold/unproven entries still fail, and
+raw reports retain all classifications. The fresh combined oracle passes
+12,125 / 388,000 DMA cases. Full registered proof passes 636,016 shadow /
+930,150 sandbox calls, all seals and poison. The ten-entry timing group
+matches all 36,236 live frames and sealed RAM. GNU/MSVC pass; build/ is
+0.317 GiB; ALL remains 416/361. The typed context groundwork was corrected
+to record flagging, ASR.W #8 for alternate origins, later request rereads and
+the captured condition route; its focused contract passes. See
+analysis/routines/native_c_scene_bootstrap.md and
+analysis/figures/native_scene_bootstrap_checkpoint.json. Do not redo this batch.
+
+Next complete C22C80's record-update and C29042's active-origin parents,
+then C1C63E's update-stage owner as a related batch (226 + 153 + 112 source
+instructions). Reuse the stride/indexed-record and flight-update groundwork,
+preserve explicit children, signed widths, D5 save/restore and all normal
+caller outputs. C08F26 still calls original C1C63E; do not claim it as ported.
+Later complete the whole C0EFD4 update sequence; C0F090/C0F132 are its internal
+labels, not extra functions. No handwritten glue may invoke opcode handlers.
+Keep the fade deferred.
 
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
 difference may be ignored for current work and revisited later. Source/ALL
@@ -513,11 +554,12 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    timing debt; the HUD list is not an automatic transcription queue.
 2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84, scene-placement
    pair C1CB14/C1CB26, follow-up parent C1CCBC/workspace helper C1D0A4,
-   and post-input parent C0F5F8 are complete and registered at 428/624.
+   post-input parent C0F5F8 and context/bootstrap/callback batch are complete
+   and registered at 432/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Complete the related C1C860
-   context-refresh/C08F26 bootstrap and C0F920/C0F992 callback batch next;
+   or count internal labels as extra routines. Complete the related C22C80
+   record-update/C29042 active-origin and C1C63E update-stage batch next;
    the leaf tool excludes indirect calls. Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
@@ -535,7 +577,7 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    batches; if ALL still does not improve, return to complete readable parent
    batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
-   Complete the context-refresh/bootstrap/callback batch next; the leaf tool
+   Complete the record-update/active-origin/update-stage batch next; the leaf tool
    excludes its indirect calls. Preserve explicit child contracts.
 4. Reduce repeated work: cache one source stream within each bounded probe
    round; run changed-group DMA fixtures and short live probes while editing.
@@ -588,7 +630,11 @@ item 1's failing combined checkpoint rather than chasing another early gap.
   from the latest demo gate report before probing them.
 - Independently prove readable whole-call C with
   `python tools/recomp/check_whole_call_glue.py ENTRY...`; registered timing
-  steps are disabled only in the temporary proof registry.
+  steps are disabled only in the temporary proof registry. A called child with
+  no completed batch comparison is checked again in isolation automatically;
+  each entry still needs a completed comparison. Raw batch/isolated reports
+  retain hardware/incomplete classifications. The tool never relinks its
+  temporary executable while a previous recording check is running.
 - The headless Ninja graph tracks source and header dependencies and shares
   objects with structural oracles and mutation builds. An unchanged build is
   subsecond. Do not manually touch generated C after a header change.

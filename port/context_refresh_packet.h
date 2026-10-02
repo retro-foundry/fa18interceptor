@@ -5,7 +5,6 @@
 #include <stdint.h>
 
 typedef int (*FA18ContextRefreshStage)(void *context);
-typedef int (*FA18ContextRefreshClassify)(void *context, uint8_t *result);
 typedef int (*FA18ContextRefreshError)(void *context, uint16_t code);
 
 typedef struct {
@@ -31,7 +30,7 @@ typedef struct {
 } FA18ContextRefreshPacketState;
 
 typedef struct {
-    FA18ContextRefreshClassify classify;
+    FA18ContextRefreshStage flag_records;
     FA18ContextRefreshError report_error;
     FA18ContextRefreshStage scene_selector;
     FA18ContextRefreshStage stage_a;

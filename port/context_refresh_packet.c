@@ -21,10 +21,11 @@ int fa18_run_context_refresh_packet(FA18ContextRefreshPacketState *state,
     state->frame_local_enable = 0;
     requests = state->request_bits;
     if (requests) {
-        uint8_t class_value;
-        if (!ops->classify || ops->classify(ops->context, &class_value) != 0)
+        state->trace_word = 0x49;
+        /* C1CA82 marks the records and preserves D0's request byte. */
+        if (call(ops->flag_records, ops->context) != 0)
             return -1;
-        switch (class_value & 0x0fu) {
+        switch (requests & 0x0fu) {
         case 0x0b: case 0x0c: case 0x0f: break;
         default:
             state->error_word = 0x27;
@@ -33,10 +34,11 @@ int fa18_run_context_refresh_packet(FA18ContextRefreshPacketState *state,
             break;
         }
         if (state->context_selection) {
-            state->selector_x = asr_word_2((int16_t)(((uint32_t)state->origin[0] &
-                                                       UINT32_C(0x1fffffff)) >> 16));
-            state->selector_z = asr_word_2((int16_t)(((uint32_t)state->origin[2] &
-                                                       UINT32_C(0x1fffffff)) >> 16));
+            /* Mask, SWAP and ASR.W #8: the masked high word is positive. */
+            state->selector_x = (int16_t)(((uint32_t)state->origin[0] &
+                                           UINT32_C(0x1fffffff)) >> 24);
+            state->selector_z = (int16_t)(((uint32_t)state->origin[2] &
+                                           UINT32_C(0x1fffffff)) >> 24);
         } else {
             if (!state->active_record || state->active_record_size < 10) return -1;
             state->selector_x = asr_word_2(read_be16(state->active_record + 6));
@@ -49,14 +51,14 @@ int fa18_run_context_refresh_packet(FA18ContextRefreshPacketState *state,
             state->request_bits &= (uint8_t)~1u;
             if (call(ops->scene_selector, ops->context) != 0) return -1;
         }
-        if (requests & 2u) {
+        if (state->request_bits & 2u) {
             state->request_bits &= (uint8_t)~2u;
             state->callback_b_flag = 1;
             if (call(ops->scene_selector, ops->context) != 0) return -1;
         }
         state->callback_a_flag = 1;
-        if (requests & 4u) state->request_bits &= (uint8_t)~4u;
-        if (requests & 8u) {
+        if (state->request_bits & 4u) state->request_bits &= (uint8_t)~4u;
+        if (state->request_bits & 8u) {
             state->request_bits &= (uint8_t)~8u;
             if (call(ops->scene_selector, ops->context) != 0) return -1;
             state->trace_word = 0x4a;
@@ -69,10 +71,12 @@ int fa18_run_context_refresh_packet(FA18ContextRefreshPacketState *state,
     state->frame_local_enable = 0;
     if (call(ops->stage_b, ops->context) != 0) return -1;
     state->trace_word = 0x4c;
-    if (call((state->stage_c_selector & 1u) ? ops->stage_c_set : ops->stage_c_clear,
-             ops->context) != 0)
-        return -1;
-    state->trace_word = (state->stage_c_selector & 1u) ? 0x4e : 0x4d;
+    {
+        unsigned selected = state->stage_c_selector & 1u;
+        if (call(selected ? ops->stage_c_set : ops->stage_c_clear, ops->context) != 0)
+            return -1;
+        state->trace_word = selected ? 0x4e : 0x4d;
+    }
     if (!state->render_guard_a && state->render_guard_b) {
         state->render_selector = state->prepared_flag ? 0x0f : 6;
         if (state->prepared_flag) state->render_flag = 0x000fffff;

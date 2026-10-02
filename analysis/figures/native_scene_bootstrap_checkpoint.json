@@ -1,0 +1,1367 @@
+{
+  "date": "2026-10-02",
+  "entries_added": [
+    "C1C860",
+    "C08F26",
+    "C0F920",
+    "C0F992"
+  ],
+  "entries_newly_timed": [
+    "C1C860",
+    "C08F26",
+    "C0F920",
+    "C0F992",
+    "C090C2",
+    "C090F2",
+    "C0910C",
+    "C0915A",
+    "C0F4A6",
+    "C11ACC"
+  ],
+  "registered_entries": 432,
+  "registered_timing_entries": 223,
+  "parent_source_instructions": {
+    "C1C860": 92,
+    "C08F26": 80,
+    "C0F920": 8,
+    "C0F992": 23
+  },
+  "parent_instructions_total": 203,
+  "existing_child_instructions_newly_timed": 69,
+  "scope": "Complete context refresh, bootstrap and both post-input callback parents; explicit original children and CPU/source-frame boundaries",
+  "structural_parent": {
+    "command": "python tools/recomp/check_scene_bootstrap.py --cases 8192",
+    "cases_per_entry": 8192,
+    "cases": 32768,
+    "all_registers_and_high_words": true,
+    "pc_and_full_sr": true,
+    "all_chip_and_slow_ram": true,
+    "ram_exclusion_bytes": 0,
+    "original_instructions_patched": false,
+    "children": "Real original child execution, once at explicit source call boundaries",
+    "fixtures": [
+      "all 256 request bytes",
+      "signed guard boundaries",
+      "selector routes and low-word shifts",
+      "child-consumed later request bits",
+      "condition/render guards",
+      "caller-frame save-stack alias",
+      "clear extents, padding and overlapping fills",
+      "mode remaps and recorder branch values"
+    ]
+  },
+  "normal_whole_call": {
+    "command": "python tools/recomp/check_whole_call_glue.py C1C860 C08F26 C0F920 C0F992",
+    "passed": true,
+    "raw_batch": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 2087,
+            "compared": 1820,
+            "matched": 1820,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 267,
+            "mean_cycles": 8261,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 2086,
+            "compared": 2086,
+            "matched": 2086,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 41583,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1036710,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 1650,
+            "compared": 1581,
+            "matched": 1581,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 69,
+            "mean_cycles": 5668,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 3372,
+            "compared": 3372,
+            "matched": 3372,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9145,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 353,
+            "compared": 342,
+            "matched": 342,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 11,
+            "mean_cycles": 11096,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 352,
+            "compared": 352,
+            "matched": 352,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 14810,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1035586,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "independent_bootstrap": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1043118,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1044388,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1035350,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "accepted_proof_per_entry": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 2087,
+            "compared": 1820,
+            "matched": 1820,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 267,
+            "mean_cycles": 8261,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 2086,
+            "compared": 2086,
+            "matched": 2086,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 41583,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1036710,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1043118,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 1650,
+            "compared": 1581,
+            "matched": 1581,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 69,
+            "mean_cycles": 5668,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 3372,
+            "compared": 3372,
+            "matched": 3372,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9145,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1044388,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 353,
+            "compared": 342,
+            "matched": 342,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 11,
+            "mean_cycles": 11096,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1C860",
+            "name": "refresh_context_packet",
+            "calls": 352,
+            "compared": 352,
+            "matched": 352,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 14810,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F920",
+            "name": "reset_sequence_after_bootstrap",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1035586,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0F992",
+            "name": "begin_sequence_after_bootstrap",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C08F26",
+            "name": "bootstrap_scene",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1035350,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "totals": {
+      "shadow": {
+        "calls": 4096,
+        "compared": 3743,
+        "matched": 3743,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 353
+      },
+      "sandbox": {
+        "calls": 5815,
+        "compared": 5815,
+        "matched": 5815,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      }
+    },
+    "automatic_isolation": "A called entry without a completed batch comparison is checked independently; original mismatches remain failures; every entry requires a completed comparison. Raw incomplete/hardware classifications remain separate."
+  },
+  "typed_groundwork": {
+    "files": [
+      "port/context_refresh_packet.c",
+      "port/context_refresh_packet.h"
+    ],
+    "source_corrections": [
+      "record flagging preserves sampled request class",
+      "alternate origin ASR.W #8",
+      "later request bits reread after children",
+      "condition trace retains selected route"
+    ],
+    "focused_contract": "GNU -O2 -Wall -Wextra; passed",
+    "additional_registered_functions": 0
+  },
+  "instruction_oracle": {
+    "group": "scene_bootstrap",
+    "unique_instructions": 272,
+    "dma_cases": 8704,
+    "passed": true,
+    "combined_unique_instructions": 12125,
+    "combined_dma_cases": 388000,
+    "combined_passed": true,
+    "fixture_machine_reset": true,
+    "checks": [
+      "registers",
+      "PC",
+      "full SR",
+      "RAM",
+      "cycles",
+      "bus timing"
+    ]
+  },
+  "full_registered_gate": {
+    "command": "scripts/recomp_ports_check.sh",
+    "passed": true,
+    "registered_entries": 432,
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "totals": {
+            "calls": 364678,
+            "compared": 340629,
+            "matched": 340629,
+            "mismatched": 0,
+            "hardware": 4883,
+            "incomplete": 19166
+          },
+          "new_entries": [
+            {
+              "entry": "C1C860",
+              "name": "refresh_context_packet",
+              "calls": 2087,
+              "compared": 1820,
+              "matched": 1820,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 267,
+              "mean_cycles": 8261,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C08F26",
+              "name": "bootstrap_scene",
+              "calls": 1,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F920",
+              "name": "reset_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F992",
+              "name": "begin_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "totals": {
+            "calls": 489040,
+            "compared": 340259,
+            "matched": 340259,
+            "mismatched": 0,
+            "hardware": 5243,
+            "incomplete": 143538
+          },
+          "new_entries": [
+            {
+              "entry": "C1C860",
+              "name": "refresh_context_packet",
+              "calls": 2073,
+              "compared": 2073,
+              "matched": 2073,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 41873,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C08F26",
+              "name": "bootstrap_scene",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F920",
+              "name": "reset_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F992",
+              "name": "begin_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "totals": {
+            "calls": 254004,
+            "compared": 234473,
+            "matched": 234473,
+            "mismatched": 0,
+            "hardware": 8035,
+            "incomplete": 11496
+          },
+          "new_entries": [
+            {
+              "entry": "C1C860",
+              "name": "refresh_context_packet",
+              "calls": 1650,
+              "compared": 1581,
+              "matched": 1581,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 69,
+              "mean_cycles": 5668,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C08F26",
+              "name": "bootstrap_scene",
+              "calls": 1,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F920",
+              "name": "reset_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F992",
+              "name": "begin_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "totals": {
+            "calls": 751290,
+            "compared": 510486,
+            "matched": 510486,
+            "mismatched": 0,
+            "hardware": 8496,
+            "incomplete": 232308
+          },
+          "new_entries": [
+            {
+              "entry": "C1C860",
+              "name": "refresh_context_packet",
+              "calls": 3368,
+              "compared": 3368,
+              "matched": 3368,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 9259,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C08F26",
+              "name": "bootstrap_scene",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F920",
+              "name": "reset_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F992",
+              "name": "begin_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "totals": {
+            "calls": 66585,
+            "compared": 60914,
+            "matched": 60914,
+            "mismatched": 0,
+            "hardware": 3082,
+            "incomplete": 2589
+          },
+          "new_entries": [
+            {
+              "entry": "C1C860",
+              "name": "refresh_context_packet",
+              "calls": 353,
+              "compared": 342,
+              "matched": 342,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 11,
+              "mean_cycles": 11093,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C08F26",
+              "name": "bootstrap_scene",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F920",
+              "name": "reset_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F992",
+              "name": "begin_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "totals": {
+            "calls": 119845,
+            "compared": 79405,
+            "matched": 79405,
+            "mismatched": 0,
+            "hardware": 3248,
+            "incomplete": 37192
+          },
+          "new_entries": [
+            {
+              "entry": "C1C860",
+              "name": "refresh_context_packet",
+              "calls": 352,
+              "compared": 352,
+              "matched": 352,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 14812,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C08F26",
+              "name": "bootstrap_scene",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F920",
+              "name": "reset_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C0F992",
+              "name": "begin_sequence_after_bootstrap",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      }
+    },
+    "totals": {
+      "shadow": {
+        "calls": 685267,
+        "compared": 636016,
+        "matched": 636016,
+        "mismatched": 0,
+        "hardware": 16000,
+        "incomplete": 33251
+      },
+      "sandbox": {
+        "calls": 1360175,
+        "compared": 930150,
+        "matched": 930150,
+        "mismatched": 0,
+        "hardware": 16987,
+        "incomplete": 413038
+      }
+    },
+    "all_final_ram_seals_match": true,
+    "poison_frames_identical": true,
+    "note": "Ported parents absorb child comparisons; aggregate totals need not rise."
+  },
+  "isolated_live": {
+    "entries": [
+      "C1C860",
+      "C08F26",
+      "C0F920",
+      "C0F992",
+      "C090C2",
+      "C090F2",
+      "C0910C",
+      "C0915A",
+      "C0F4A6",
+      "C11ACC"
+    ],
+    "frames": 36236,
+    "all_rgb444_frames_exact": true,
+    "all_final_ram_seals_match": true,
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "iterations": 4892,
+        "final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "iterations": 8038,
+        "final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "iterations": 3082,
+        "final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+      }
+    },
+    "reference": "Fresh source OFF on the same native machine model; archived UAE is historical evidence",
+    "temporary_rgb_and_ram_removed": true
+  },
+  "short_probe": {
+    "frames": 600,
+    "isolated_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "passed",
+    "msvc_release": "passed",
+    "build_directory_bytes": 340075500,
+    "build_directory_gib": 0.317
+  },
+  "deferred_copper": {
+    "user_instruction_date": "2026-10-02",
+    "source_all_reset_frames": [
+      393,
+      394
+    ],
+    "source_all_terminal_frames": [
+      436,
+      437
+    ],
+    "automated_comparisons_unchanged": true
+  },
+  "next_batch": {
+    "entries": [
+      "C22C80",
+      "C29042",
+      "C1C63E"
+    ],
+    "source_instructions": [
+      226,
+      153,
+      112
+    ],
+    "total_instructions": 491,
+    "bootstrap_still_calls_original_C1C63E": true,
+    "later_parent": "C0EFD4",
+    "internal_labels_not_functions": [
+      "C0F090",
+      "C0F132"
+    ]
+  }
+}

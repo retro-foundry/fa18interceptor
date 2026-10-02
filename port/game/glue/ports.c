@@ -7,6 +7,10 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    {0xC1C860, glue_C1C860, "refresh_context_packet", 0, 0, glue_C1C860_step, 0xC1CA2E, 0, 0xC1C85E},
+    {0xC08F26, glue_C08F26, "bootstrap_scene", 0, 0, glue_C08F26_step, 0xC090C2},
+    {0xC0F920, glue_C0F920, "reset_sequence_after_bootstrap", 0, 0, glue_C0F920_step, 0xC0F946},
+    {0xC0F992, glue_C0F992, "begin_sequence_after_bootstrap", 0, 0, glue_C0F992_step, 0xC0FA04},
     {0xC0F5F8, glue_C0F5F8, "run_post_input_tick", 0, 0,
      glue_C0F5F8_step, 0xC0F812},
     /* Complete follow-up placements and signed workspace accumulation. */
@@ -91,8 +95,8 @@ const FA18Port fa18_ports[] = {
     {0xC25864, glue_C25864, "reset_list", 0, 0, glue_C25864_step, 0xC25876},
     {0xC25482, glue_C25482, "tick_timer", 30},
     {0xC08394, glue_C08394, "set_event_bit_and_clear_command_word_bit", 48},
-    {0xC090C2, glue_C090C2, "clear_scene_startup_state", 1200},
-    {0xC090F2, glue_C090F2, "enable_scene_record_updates", 180},
+    {0xC090C2, glue_C090C2, "clear_scene_startup_state", 0, 0, glue_C090C2_step, 0xC090F2},
+    {0xC090F2, glue_C090F2, "enable_scene_record_updates", 0, 0, glue_C090F2_step, 0xC0910C},
     {0xC1B602, glue_C1B602, "reset_throttle_input_state", 42},
     {0xC0833E, glue_C0833E, "dispatch_space_command_effect", 110},
     {0xC133B2, glue_C133B2, "record_6e_step", 220},
@@ -376,14 +380,14 @@ const FA18Port fa18_ports[] = {
     /* batch 51-52: clipped segment, ground points, voices, messages, observer, stages, long table, alert, start position, typed code */
     {0xC2EE4A, glue_C2EE4A, "draw_clipped_segment", 0, 0, glue_C2EE4A_step, 0xC2F1B8, 0, 0xC2EE44},
     {0xC098C6, glue_C098C6, "transform_ground_points", 3000},
-    {0xC0F4A6, glue_C0F4A6, "free_all_voices", 600},
+    {0xC0F4A6, glue_C0F4A6, "free_all_voices", 0, 0, glue_C0F4A6_step, 0xC0F4D6},
     {0xC25704, glue_C25704, "post_message", 0, 0, glue_C25704_step, 0xC2574A},
-    {0xC0915A, glue_C0915A, "set_observer_position", 150},
+    {0xC0915A, glue_C0915A, "set_observer_position", 0, 0, glue_C0915A_step, 0xC09192},
     {0xC11078, glue_C11078, "raise_event_after_countdown", 120},
-    {0xC11ACC, glue_C11ACC, "load_long_table", 800},
+    {0xC11ACC, glue_C11ACC, "load_long_table", 0, 0, glue_C11ACC_step, 0xC11B0E},
     {0xC1803C, glue_C1803C, "sound_chosen_record_alert", 0, 0, glue_C1803C_step, 0xC18096},
     {0xC10678, glue_C10678, "queue_mode_messages", 300},
-    {0xC0910C, glue_C0910C, "start_position", 40},
+    {0xC0910C, glue_C0910C, "start_position", 0, 0, glue_C0910C_step, 0xC09120},
     {0xC25246, glue_C25246, "check_typed_code", 300},
     /* batch 53: draw-stream commands */
     {0xC212B0, glue_C212B0, "draw_segment_pairs", 0, 0, glue_C212B0_step, 0xC2131C},

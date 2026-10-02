@@ -1,5 +1,13 @@
 # `$C08F26-$C090AD`: cold-boot scene bootstrap
 
+The heading describes the earlier initialization slice. The **complete**
+routine ends at C090C0, with 80 original instructions including the final
+C1C40C/C1C63E/C1C860 parent calls after C090AE. It is now implemented by
+`port/game/scene_bootstrap.c`, with a normal CPU adapter and source timing.
+All 8,192 independent full-register/full-SR/all-RAM cases and three recorded
+sandbox comparisons of the standalone readable body pass. See
+`native_c_scene_bootstrap.md`; nested parent comparisons are kept distinct.
+
 Classification: **scenario-backed direct initialization contract**.
 
 The cold-boot-to-menu trace executes this complete body in chipset frame 7769.
