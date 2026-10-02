@@ -156,14 +156,14 @@ int glue_C1EBE0(void) {
  * it: D2-D4 the second row's products and sum, D5/D6 the first row's
  * x and y products, D7.w the tag over the first sum's high word, A0 past
  * the matrix, A3 the new list end. */
-int glue_C25876(void) {
+void append_list_point_registers(int apply) {
     int16_t x = (int16_t)D(2), y = (int16_t)D(3), z = (int16_t)D(4);
     int count = (int)(D(1) & 63);
     uint16_t tag = (uint16_t)D(7);
     int32_t first, second;
-    append_list_point(x, y, z, (int)D(1), tag);
-    first = ((int32_t)x * rd_s16(LIST_MATRIX) + (int32_t)y * rd_s16(LIST_MATRIX + 2) + (int32_t)z * rd_s16(LIST_MATRIX + 4)) >> 8;
-    second = ((int32_t)x * rd_s16(LIST_MATRIX + 12) + (int32_t)y * rd_s16(LIST_MATRIX + 14) + (int32_t)z * rd_s16(LIST_MATRIX + 16)) >> 8;
+    if (apply) append_list_point(x, y, z, (int)D(1), tag);
+    first = (int32_t)((uint32_t)((int32_t)x * rd_s16(LIST_MATRIX)) + (uint32_t)((int32_t)y * rd_s16(LIST_MATRIX + 2)) + (uint32_t)((int32_t)z * rd_s16(LIST_MATRIX + 4))) >> 8;
+    second = (int32_t)((uint32_t)((int32_t)x * rd_s16(LIST_MATRIX + 12)) + (uint32_t)((int32_t)y * rd_s16(LIST_MATRIX + 14)) + (uint32_t)((int32_t)z * rd_s16(LIST_MATRIX + 16))) >> 8;
     first = count >= 32 ? 0 : (int32_t)((uint32_t)first << count);
     second = count >= 32 ? 0 : (int32_t)((uint32_t)second << count);
     D(5) = (uint32_t)((int32_t)x * rd_s16(LIST_MATRIX));
@@ -174,6 +174,10 @@ int glue_C25876(void) {
     D(4) = (uint32_t)second;
     A(0) = LIST_MATRIX + 18;
     A(3) = rd_u32(LIST_WRITE);
+}
+
+int glue_C25876(void) {
+    append_list_point_registers(1);
     return glue_return();
 }
 

@@ -12,19 +12,19 @@ sealed native recordings. Work in related batches. The order is Stage D game C,
 Stage F native backend, then only the Stage E Kickstart services still needed.
 The user explicitly deferred OS work and asked for larger routine batches.
 After the C279D0 batch, the latest instruction is to return to game timing
-parity. The selector and scene-placement milestones are complete at 425/624.
+parity. The selector and scene/follow-up placement milestones are complete at 427/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 425 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 653,694 completed shadow
-  calls and 1,069,233 sandbox calls across three native recordings, with zero
+- 427 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 633,759 completed shadow
+  calls and 932,215 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 425-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 427-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -133,6 +133,19 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   416/361. The isolated pair also matches all 36,236 live frames and sealed
   final RAM. See analysis/routines/native_c_scene_placements.md and
   analysis/figures/native_scene_placements_checkpoint.json.
+  The complete C1CCBC follow-up placement parent and C1D0A4 workspace-position
+  entry are now registered, bringing the total to 427 and timed entries to 212.
+  The parent matches 8,192 structural CPU/RAM cases and 288 shadow / 5,131
+  sandbox normal whole-call comparisons; 3,790 shadow and 699 sandbox calls
+  remain incomplete. Both position variants separately match 16,384 complete
+  all-register/full-SR/all-RAM cases, without exclusions; C1D0A4 is cold in
+  recordings. The parent, both position entries and C25876 match every isolated
+  live frame and sealed RAM. Local timing passes 333 / 10,656 DMA cases and the
+  fresh combined oracle passes 11,735 / 375,520, now restoring the sealed
+  machine before every case so synthetic writes cannot contaminate later
+  source bytes. ALL remains 416/361. See
+  analysis/routines/native_c_followup_placements.md and
+  analysis/figures/native_followup_placements_checkpoint.json.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -406,6 +419,37 @@ isolated live frames and sealed final RAM; ALL remains 416/361. Build/ is
 classifications are in analysis/figures/native_scene_placements_checkpoint.json.
 See analysis/routines/native_c_scene_placements.md. Do not redo this pair.
 
+C1CCBC's complete selected-record, alternate-placement and final relative-point
+parent is now registered, together with the complete signed workspace-position
+entry C1D0A4: 427/624, with 212 timing-step entries. C1D0B6's shared position
+body and C25876's list-point child also use source timing. The domain retains
+bit-6/bit-4 precedence, signed workspace indexing, overflow-aware depth and
+countdown branches, selected distance's partial publication, and all sixteen
+relative-point slots. Position additions and list-matrix sums wrap explicitly.
+Normal CPU outputs stay in glue and children are not repeated for outputs.
+All 8,192 complete parent fixtures and 16,384 direct position-child fixtures
+pass. Parent proof excludes only 160 private child-stack bytes; position proof
+retains full SR and all RAM, without any exclusion. C1D0A4 is cold in native
+recordings, so its live run is nonregression only. Normal isolated parent
+proof passes 288 shadow / 5,131 sandbox calls, zero mismatches/hardware, with
+3,790 shadow and 699 sandbox calls incomplete. Caller masks remain unchanged.
+Local timing passes 333 / 10,656 DMA cases; fresh combined proof passes
+11,735 / 375,520 with a sealed machine reset before every case/opcode read.
+The full 427-entry gate passes 633,759 shadow / 932,215 sandbox calls, sealed
+RAM exact and poison identical. All four entries together match all 36,236
+isolated live frames and sealed final RAM. GNU/MSVC pass; build/ is 0.294 GiB.
+ALL still first differs at 416/361. See
+analysis/routines/native_c_followup_placements.md and
+analysis/figures/native_followup_placements_checkpoint.json. Do not redo these
+complete parent/helper milestones or count their internal labels separately.
+
+The next parent remains C0F5F8. Source review corrected the existing typed
+post_input_tick.c limit from decimal 4650 to source hexadecimal $4650 (18,000);
+its contract test passes 5,000/17,999 as valid and 18,000 as invalid. This
+groundwork correction is not a new registered parent. Preserve the actual
+LINK frame, all normal caller-live outputs, source callback pointer/return
+boundary and partial writes when completing its normal CPU/timing integration.
+
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
 difference may be ignored for current work and revisited later. Source/ALL
 reset writes are machine frames 393/394 and terminal writes 436/437; each
@@ -442,13 +486,13 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    Require a changed combined result before claiming improvement. Do not
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
-2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84 and scene-placement
-   pair C1CB14/C1CB26 are complete and registered at 425/624.
+2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84, scene-placement
+   pair C1CB14/C1CB26, and follow-up parent C1CCBC/workspace helper C1D0A4
+   are complete and registered at 427/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Inspect C1CCBC's complete
-   follow-up placement/record traversal, then C0F5F8, as subsequent complete
-   parent batches; the leaf tool excludes
+   or count internal labels as extra routines. Complete C0F5F8's post-input
+   parent next; the leaf tool excludes
    their indirect calls. Select using source-owned semantics and explicit
    child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
@@ -466,8 +510,8 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    batches; if ALL still does not improve, return to complete readable parent
    batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
-   Inspect C1CCBC and C0F5F8 as later complete parent batches; the
-   leaf tool excludes their indirect calls. Preserve explicit child contracts.
+   Complete C0F5F8 as the next parent batch; the leaf tool excludes its
+   indirect calls. Preserve explicit child contracts.
 4. Reduce repeated work: cache one source stream within each bounded probe
    round; run changed-group DMA fixtures and short live probes while editing.
    Run the full shadow/sandbox/sealed-RAM/poison gate and isolated full live

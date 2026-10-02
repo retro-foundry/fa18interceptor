@@ -1,5 +1,10 @@
 # `$C1D0B6`: descriptor-indexed component accumulation
 
+The complete shared $C1D0A4 workspace/$C1D0B6 control-position body now has
+independent full-register, full-SR and all-RAM proof on 16,384 original calls.
+Its source timing and complete parent integration are documented in
+[native_c_followup_placements.md](native_c_followup_placements.md).
+
 Classification: **behavioral dataflow helper**. The normal `$C1CCBC` descriptor
 route enters this helper with descriptor word `D7` and component values in
 `D2/D4`.

@@ -32,8 +32,8 @@ void append_list_point(int16_t x, int16_t y, int16_t z, int shift, uint16_t tag)
     gaddr p = rd_u32(LIST_WRITE);
     int count = shift & 63;
     int32_t a, b;
-    a = ((int32_t)x * rd_s16(LIST_MATRIX) + (int32_t)y * rd_s16(LIST_MATRIX + 2) + (int32_t)z * rd_s16(LIST_MATRIX + 4)) >> 8;
-    b = ((int32_t)x * rd_s16(LIST_MATRIX + 12) + (int32_t)y * rd_s16(LIST_MATRIX + 14) + (int32_t)z * rd_s16(LIST_MATRIX + 16)) >> 8;
+    a = (int32_t)((uint32_t)((int32_t)x * rd_s16(LIST_MATRIX)) + (uint32_t)((int32_t)y * rd_s16(LIST_MATRIX + 2)) + (uint32_t)((int32_t)z * rd_s16(LIST_MATRIX + 4))) >> 8;
+    b = (int32_t)((uint32_t)((int32_t)x * rd_s16(LIST_MATRIX + 12)) + (uint32_t)((int32_t)y * rd_s16(LIST_MATRIX + 14)) + (uint32_t)((int32_t)z * rd_s16(LIST_MATRIX + 16))) >> 8;
     a = count >= 32 ? 0 : (int32_t)((uint32_t)a << count);
     b = count >= 32 ? 0 : (int32_t)((uint32_t)b << count);
     wr_s32(p, a);

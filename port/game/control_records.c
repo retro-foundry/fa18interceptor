@@ -369,10 +369,10 @@ gaddr collect_records_in_cell(int16_t column, int16_t row, int8_t level, gaddr e
 
 void accumulate_record_position(gaddr record, int shift, int32_t *x, int32_t *y, int32_t *z) {
     int32_t level = rd_s32(record + 0x18);
-    *x = (int32_t)((uint32_t)*x << 8) + ((int32_t)(rd_u32(record + 0x14) & 0xFFFFF) >> shift);
-    *z = (int32_t)((uint32_t)*z << 8) + ((int32_t)(rd_u32(record + 0x1C) & 0xFFFFF) >> shift);
+    *x = (int32_t)(((uint32_t)*x << 8) + ((rd_u32(record + 0x14) & 0xFFFFF) >> shift));
+    *z = (int32_t)(((uint32_t)*z << 8) + ((rd_u32(record + 0x1C) & 0xFFFFF) >> shift));
     *y = level >> shift;
-    wr_s32(POSITION_LEVEL, (int32_t)(level + rd_s32(POSITION_BIAS)) >> shift);
+    wr_s32(POSITION_LEVEL, (int32_t)((uint32_t)level + rd_u32(POSITION_BIAS)) >> shift);
     wr_u8(POSITION_VALID, 1);
 }
 

@@ -1,0 +1,314 @@
+{
+  "date": "2026-10-02",
+  "entries_added": [
+    "C1CCBC",
+    "C1D0A4"
+  ],
+  "entries_newly_timed": [
+    "C1CCBC",
+    "C1D0A4",
+    "C1D0B6",
+    "C25876"
+  ],
+  "registered_entries": 427,
+  "registered_timing_entries": 212,
+  "source_parent_instructions": 269,
+  "source_position_unique_instructions": 31,
+  "source_list_child_instructions": 33,
+  "scope": "Complete selected-record, alternate-placement and relative-point parent; signed workspace/control position children",
+  "production_return_masks": {
+    "C0F116": "FFFF/FF/00",
+    "C1D0A4": "Unobserved entry: conservative default; direct full-SR/all-register/all-RAM proof"
+  },
+  "structural_parent": {
+    "cases": 8192,
+    "all_registers_and_high_words": true,
+    "pc_and_sr_control": true,
+    "private_child_stack_exclusion_bytes": 160,
+    "original_instructions_patched": false,
+    "limitations": [
+      "Synthetic renderer consumers use terminated streams; not proofs of complete renderer parents",
+      "Real recorded consumers are exercised by the separate normal whole-call tool"
+    ]
+  },
+  "structural_position_children": {
+    "cases": 16384,
+    "cases_per_entry": 8192,
+    "entries": [
+      "C1D0A4",
+      "C1D0B6"
+    ],
+    "all_registers_and_high_words": true,
+    "pc_and_full_sr": true,
+    "ram_exclusion_bytes": 0
+  },
+  "isolated_normal_whole_call": {
+    "recorded": {
+      "demo01": {
+        "shadow": [
+          {
+            "entry": "C1CCBC",
+            "name": "visit_followup_placements",
+            "calls": 2080,
+            "compared": 239,
+            "matched": 239,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1841,
+            "mean_cycles": 57443,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1CCBC",
+            "name": "visit_followup_placements",
+            "calls": 2099,
+            "compared": 1606,
+            "matched": 1606,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 493,
+            "mean_cycles": 269390,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_carrier_success": {
+        "shadow": [
+          {
+            "entry": "C1CCBC",
+            "name": "visit_followup_placements",
+            "calls": 1647,
+            "compared": 49,
+            "matched": 49,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1598,
+            "mean_cycles": 91389,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1CCBC",
+            "name": "visit_followup_placements",
+            "calls": 3380,
+            "compared": 3174,
+            "matched": 3174,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 206,
+            "mean_cycles": 172015,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "qual_fail_crashes": {
+        "shadow": [
+          {
+            "entry": "C1CCBC",
+            "name": "visit_followup_placements",
+            "calls": 351,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 351,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C1CCBC",
+            "name": "visit_followup_placements",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 217015,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      }
+    },
+    "totals": {
+      "shadow": {
+        "matched": 288,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 3790
+      },
+      "sandbox": {
+        "matched": 5131,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 699
+      }
+    },
+    "original_liveness_retained": true
+  },
+  "local_instruction_oracle": {
+    "instructions": 333,
+    "dma_cases": 10656
+  },
+  "fresh_combined_instruction_oracle": {
+    "instructions": 11735,
+    "dma_cases": 375520,
+    "sealed_machine_reset_per_case": true,
+    "source_opcode_loaded_from_restored_seal": true
+  },
+  "full_registered_gate": {
+    "recorded_totals": {
+      "shadow": {
+        "matched": 633759,
+        "mismatched": 0,
+        "hardware": 15996,
+        "incomplete": 33195
+      },
+      "sandbox": {
+        "matched": 932215,
+        "mismatched": 0,
+        "hardware": 17004,
+        "incomplete": 413653
+      }
+    },
+    "batch_entry_totals": {
+      "shadow": {
+        "C1CCBC": {
+          "matched": 288,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 3790
+        },
+        "C1D0A4": {
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1D0B6": {
+          "matched": 3726,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 11
+        },
+        "C25876": {
+          "matched": 1288,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 4
+        }
+      },
+      "sandbox": {
+        "C1CCBC": {
+          "matched": 5271,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 549
+        },
+        "C1D0A4": {
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1D0B6": {
+          "matched": 966,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C25876": {
+          "matched": 236,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "shadow_matches": 633759,
+    "sandbox_matches": 932215,
+    "mismatches": 0,
+    "sealed_final_ram_exact": true,
+    "poison_frames_identical": true
+  },
+  "isolated_live": {
+    "entries": [
+      "C1CCBC",
+      "C1D0A4",
+      "C1D0B6",
+      "C25876"
+    ],
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "iterations": 4892,
+        "final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "iterations": 8038,
+        "final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "iterations": 3082,
+        "final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+      }
+    },
+    "frames": 36236,
+    "rgb_exact": true,
+    "sealed_final_ram_exact": true,
+    "cold_entries": [
+      "C1D0A4"
+    ],
+    "cold_live_scope": "Nonregression; independent complete structural proof supplies cold-entry coverage"
+  },
+  "all_demo_probe": {
+    "frames": 600,
+    "first_difference_frame": 416,
+    "changed_pixels": 361
+  },
+  "builds": [
+    "GNU headless",
+    "MSVC Release"
+  ],
+  "build_size_gib": 0.294,
+  "deferred_copper_fade": {
+    "user_instruction_date": "2026-10-02",
+    "scope": "Minor fade difference deferred; automated comparisons unchanged",
+    "reset_source_all": [
+      393,
+      394
+    ],
+    "terminal_source_all": [
+      436,
+      437
+    ],
+    "evidence": "analysis/routines/native_c_scene_transition_timing.md"
+  },
+  "next": "Complete C0F5F8 post-input parent with original callback boundaries; do not reopen the deferred fade investigation",
+  "next_parent_groundwork": {
+    "entry": "C0F5F8",
+    "registered": false,
+    "source_offset_limit": 18000,
+    "previous_typed_limit": 4650,
+    "source_reference": "C0F69A / source_amiga/observed/run_post_input_tick_prefix.asm: POST_TICK_OFFSET_LIMIT equ $4650",
+    "contract_boundaries_checked": [
+      5000,
+      17999,
+      18000
+    ],
+    "validation": "GNU -O2 -Wall -Wextra: post-input tick contract passed"
+  }
+}

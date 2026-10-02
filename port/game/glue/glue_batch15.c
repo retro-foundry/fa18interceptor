@@ -16,21 +16,8 @@ int glue_C1D520(void) {
 /* $C1D0B6: D7 selects the record (high byte) and shift (low nibble);
  * D2/D4 accumulate, D3 = level; leaves D1 = the biased level, D6.w =
  * shift and A2 = the record. */
-int glue_C1D0B6(void) {
-    gaddr record = control_record((uint16_t)D(7));
-    int shift = (int)(D(7) & 15);
-    int32_t x = (int32_t)D(2), y = 0, z = (int32_t)D(4);
-
-    accumulate_record_position(record, shift, &x, &y, &z);
-
-    D(2) = (uint32_t)x;
-    D(3) = (uint32_t)y;
-    D(4) = (uint32_t)z;
-    D(1) = rd_u32(POSITION_LEVEL);
-    SET_W(D(6), shift);
-    A(2) = record;
-    return glue_return();
-}
+int glue_selected_position(int workspace);
+int glue_C1D0B6(void) { return glue_selected_position(0); }
 
 static int16_t sine8_at(int16_t index) {
     return (int16_t)(rd_s16(SINE_TABLE + (gaddr)(int32_t)(int16_t)(index * 2)) >> 6);

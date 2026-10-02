@@ -15,6 +15,24 @@ int main(void) {
     if (fa18_run_post_input_tick(&state, &hooks) || state.primary_offset || state.result_target_offset8 != 108 || state.result_flag != 1 || calls.invalid_calls) goto fail;
     state = (FA18PostInputTickState){.enable = 1, .phase = 1, .signed_guard = -1, .primary_offset = 1}; calls = (Calls){0};
     if (fa18_run_post_input_tick(&state, &hooks) || state.primary_offset || state.result_code != 0x003f || calls.invalid_calls != 1) goto fail;
+    /* Original C0F69A uses hexadecimal $4650. Values beyond decimal 4650
+     * remain valid through 17,999; 18,000 takes the returning fault edge. */
+    {
+        static const uint32_t offsets[] = {5000, 17999, 18000};
+        unsigned i;
+        for (i = 0; i < 3; ++i) {
+            state = (FA18PostInputTickState){.enable = 1, .phase = 1,
+                .signed_guard = -1, .counter_source = offsets[i] + 1,
+                .primary_offset = 1, .result_target_offset8 = 10};
+            calls = (Calls){0};
+            if (fa18_run_post_input_tick(&state, &hooks) || state.primary_offset ||
+                calls.invalid_calls != (i == 2) || calls.callback_calls != 1 ||
+                (i < 2 && (state.result_target_offset8 != offsets[i] + 10 ||
+                           state.result_flag != 1)) ||
+                (i == 2 && (state.result_code != 0x003f ||
+                            state.result_target_offset8 != 10))) goto fail;
+        }
+    }
     puts("post-input tick contract passed"); return 0;
 fail: fputs("post-input tick contract failed\n", stderr); return 1;
 }

@@ -7,6 +7,11 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete follow-up placements and signed workspace accumulation. */
+    {0xC1CCBC, glue_C1CCBC, "visit_followup_placements", 0, 0,
+     glue_C1CCBC_step, 0xC1D0A4},
+    {0xC1D0A4, glue_C1D0A4, "accumulate_workspace_position", 0, 0,
+     glue_C1D0A4_step, 0xC1D10C},
     /* scene_placements.c: both complete descriptor-dispatch parents */
     {0xC1CB14, glue_C1CB14, "visit_primary_scene_placements", 0, 0,
      glue_C1CB14_step, 0xC1CCBC},
@@ -195,7 +200,8 @@ const FA18Port fa18_ports[] = {
     {0xC2564E, glue_C2564E, "square_root", 0, 0, glue_C2564E_step, 0xC25704},
     /* batch 15: cell occupancy, record position, record 76/78 */
     {0xC1D520, glue_C1D520, "collect_records_in_cell", 0, 0, glue_C1D520_step, 0xC1D722, 0, 0xC1D3F4},
-    {0xC1D0B6, glue_C1D0B6, "accumulate_record_position", 250},
+    {0xC1D0B6, glue_C1D0B6, "accumulate_record_position", 0, 0,
+     glue_C1D0B6_step, 0xC1D10C, 0, 0xC1D0A4},
     {0xC26428, glue_C26428, "update_record_76_78", 500},
     /* batch 16: small text */
     {0xC32794, glue_C32794, "draw_small_text", 400},
@@ -257,7 +263,8 @@ const FA18Port fa18_ports[] = {
     {0xC2FD22, glue_C2FD22, "clear_render_buffers", 0, 0, glue_C2FD22_step, 0xC2FD8C},
     {0xC3040C, glue_C3040C, "blit_mask_between_planes", 0, 0, glue_C3040C_step, 0xC30466, 0, 0xC301F0},
     {0xC1EBE0, glue_C1EBE0, "grid_relative_position", 0, 0, glue_C1EBE0_step, 0xC1EC3A},
-    {0xC25876, glue_C25876, "append_list_point", 600},
+    {0xC25876, glue_C25876, "append_list_point", 0, 0,
+     glue_C25876_step, 0xC258C8},
     /* batch 26: tones, page plane tops */
     {0xC33180, glue_C33180, "play_tone_2", 0, 0, glue_C33180_step, 0xC331CE},
     {0xC3318E, glue_C3318E, "play_status_tone", 0, 0, glue_C3318E_step, 0xC331CE, 0, 0xC33180},

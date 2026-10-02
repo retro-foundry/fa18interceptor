@@ -23,7 +23,8 @@ int fa18_run_post_input_tick(FA18PostInputTickState *state,
             offset -= state->quaternary_offset;
             if (state->additional_offset != 0)
                 offset -= state->counter_source - state->additional_offset;
-            if ((int32_t)offset < 0 || (int32_t)offset >= 4650) {
+            /* C0F69A compares against #$4650, hexadecimal 18,000. */
+            if ((int32_t)offset < 0 || (int32_t)offset >= 0x4650) {
                 state->result_code = 0x003f;
                 result = invoke_invalid(hooks);
             } else {

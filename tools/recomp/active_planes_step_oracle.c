@@ -71,6 +71,15 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if ((pc >= 0xC1CCBCu && pc < 0xC1D10Cu) ||
+        (pc >= 0xC25876u && pc < 0xC258C8u)) {
+        REG_A[0] = 0xC61000u; REG_A[2] = 0xC61400u;
+        for (i = 0; i < 64; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+        }
+    }
     if (pc >= 0xC1CB14u && pc < 0xC1CCBCu) {
         REG_A[0] = 0xC61000u; REG_A[2] = 0xC61100u;
         for (i = 0; i < 32; ++i) {
@@ -494,7 +503,8 @@ int main(int argc, char **argv) {
     size_t state_size = 0, rom_size = 0;
     uint8_t *state = read_file("captures/native/demo01/state.bin", &state_size);
     uint8_t *rom = read_file("local/system/kick13.rom", &rom_size);
-    FA18Machine *m = calloc(1, sizeof *m), *before = malloc(sizeof *before);
+    FA18Machine *m = calloc(1, sizeof *m), *before = malloc(sizeof *before),
+                *base = malloc(sizeof *base);
     uint8_t *reference = malloc(FA18_CHIP_SIZE + FA18_SLOW_SIZE);
     unsigned char *cpu = malloc(m68k_context_size());
     unsigned cases = argc > 1 ? (unsigned)strtoul(argv[1], NULL, 10) : 64;
@@ -503,24 +513,30 @@ int main(int argc, char **argv) {
     const char *group = argc > 2 ? argv[2] : "planes";
     unsigned item;
     char error[256], disassembly[128];
-    if (!state || !rom || !m || !before || !reference || !cpu || !cases) {
+    if (!state || !rom || !m || !before || !base || !reference || !cpu || !cases) {
         fprintf(stderr, "plane step oracle: missing inputs or allocation\n"); return 1;
     }
     if (!fa18_machine_load_state(m, state, state_size, rom, rom_size, error, sizeof error)) {
         fprintf(stderr, "plane step oracle: %s\n", error); return 1;
     }
     free(state); free(rom);
+    memcpy(base, m, sizeof *m);
     fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF, NULL);
     fa18_bus_timing = argc > 3 && strcmp(argv[3], "bus") == 0;
     for (item = 0; item < sizeof step_oracle_cases / sizeof step_oracle_cases[0]; ++item) {
         uint16_t opcode;
         pc = step_oracle_cases[item].pc;
+        memcpy(m, base, sizeof *m);
         opcode = fa18_bus_read16(pc);
         ++instructions;
         for (scenario = 0; scenario < cases; ++scenario) {
             uint32_t regs[16], want_pc, want_sr;
             int want_cycles;
             unsigned i;
+            /* A synthetic indexed operand can write into game code. Every
+             * case must start from the sealed bytes, not a previous case's
+             * mutated RAM or chipset state. */
+            memcpy(m, base, sizeof *m);
             fixture(pc, scenario);
             memcpy(before, m, sizeof *m); m68k_get_context(cpu);
             fa18_bus_begin(pc); fa18_bus_fetch(pc);
@@ -552,5 +568,5 @@ int main(int argc, char **argv) {
     }
     printf("%s step oracle (%s): %u instructions, %u cases matched registers, SR, PC, cycles and RAM\n",
            group, fa18_bus_timing ? "DMA bus" : "CPU", instructions, matched);
-    free(cpu); free(reference); free(before); free(m); return 0;
+    free(cpu); free(reference); free(before); free(base); free(m); return 0;
 }

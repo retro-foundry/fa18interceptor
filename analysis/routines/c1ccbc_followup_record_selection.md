@@ -1,5 +1,12 @@
 # `$C1CCBC`: follow-up reset and record selection prefix
 
+Later independent checkpoint (2026-10-02): the complete parent, including
+positive selectors, alternate placements and the final relative-point pass,
+is implemented in `port/game/followup_placements.c`. See
+[native_c_followup_placements.md](native_c_followup_placements.md) for complete
+CPU/RAM and timing proof. The historical prefix evidence below remains
+limited to the stated source spans.
+
 Classification: **static/dataflow prefix, shared flight follow-up**. Both
 outcomes of the `$C265E8` parent decision call this helper.
 

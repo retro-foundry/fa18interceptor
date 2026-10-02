@@ -1,5 +1,11 @@
 # `$C0F5F8`: post-input tick
 
+Source review on 2026-10-02 corrected the typed port's offset limit:
+$C0F69A uses hexadecimal $4650 (18,000), whereas the earlier C used decimal
+4650. The contract check now covers 5,000 and 17,999 as valid and 18,000 as
+invalid. This is a source-backed groundwork correction; the complete normal
+CPU adapter and live source-timing registration for $C0F5F8 remain next work.
+
 Classification: **static complete routine with a bounded tail route**.
 
 ## Evidence
