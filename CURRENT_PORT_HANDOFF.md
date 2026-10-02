@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-02. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 50f6d6a7); ignored gate logs may
+history (the preceding handoff is in commit f850ac95); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -265,6 +265,21 @@ function remains feasible. Whole-family selection and explicit indirect-child
 contracts are needed to move beyond the leaf-only ranking.
 
 ## Next work
+
+Gauge checkpoint completed after the planning review: $C30918 now has source
+timing. Its 35 instructions pass 1,120 DMA fixtures; all 36,236 isolated live
+frames and sealed RAM match. All 49 bounded parent trace rows match every
+field, including skip and drawing returns. Before correction its isolated
+frame-416 bytes exactly matched ALL's incorrect bytes; after correction the
+isolated 600-frame probe is exact, while ALL still differs at frame 416 by
+361 pixels. The full 419-entry gate remains 703,337 shadow/1,110,694 sandbox
+matches, zero mismatches, sealed RAM exact and poison identical. There are
+188 timing-step entries; independent group proofs total 9,662 instructions /
+309,184 DMA cases (the combined oracle was not rerun for this local bridge).
+See analysis/routines/native_c_gauge_timing_checkpoint.md for byte hashes and
+call classifications. This is one timing-only batch since the review. The
+next implementation work is item 2, the complete selector family; retain
+item 1's failing combined checkpoint rather than chasing another early gap.
 
 1. Diagnose the visible failure with a bounded renderer checkpoint. Start
    with C30918 alone and source OFF over demo frames 410-420, preserving the

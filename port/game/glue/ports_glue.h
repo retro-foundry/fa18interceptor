@@ -353,6 +353,7 @@ int glue_C09952(void);
 int glue_C099F6(void);
 int glue_C332FE(void);
 int glue_C30918(void);
+int glue_C30918_step(void);
 
 /* batch 39: cockpit messages */
 int glue_C11BFC(void);

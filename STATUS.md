@@ -10,15 +10,16 @@ Updated 2026-10-02.
 | Current proof | The 419 registered game entries passed shadow, sandbox, sealed final RAM, and poison checks on all three native recordings. New batches also require live ON RGB comparison with fresh source OFF output. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
 | Recreated C source | 419 registered game entries in `port/game/`; 703,337 matching shadow calls and 1,110,694 sandbox calls over three native recordings; poison frames identical. New grid projection entry: C279D0; previous map/region batch: C2AA9C, C2AB34, C2AB5A, C2B05A. See `CURRENT_PORT_HANDOFF.md` for remaining work. |
-| Live C timing | Five further face predicate/line-style entries match all 36,236 live frames and sealed RAM in isolation. There are 187 timing-step entries; the full oracle passes 9,627 instructions and 308,064 DMA cases. ALL still first differs at frame 416 by 361 pixels. The first enclosing update gap is now C0F132 after C11BFC in frame 311, +2,344 cycles with SR 0004/0000. See `analysis/routines/native_c_face_predicate_timing_batch.md` and `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | The gauge correction matches all 36,236 isolated live frames, sealed RAM and all 49 bounded parent trace rows. There are 188 timing-step entries; independent group proofs cover 9,662 instructions and 309,184 DMA cases. The last full combined oracle covered 9,627 instructions; the gauge added 35/1,120 independently. ALL still first differs at frame 416 by 361 pixels. See `analysis/routines/native_c_gauge_timing_checkpoint.md` and `CURRENT_PORT_HANDOFF.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
 The 2026-10-02 planning review found that all 187 timed entries together match
 500 demo frames, while C30918 alone reproduces the frame-416 difference.
 Other HUD combinations also fail; removing the seven narrowed HUD entries from
-ALL leaves the same first difference. The revised work starts with a targeted
-renderer checkpoint and then the complete four-entry selector family, aiming
+ALL leaves the same first difference. The targeted gauge checkpoint is now
+corrected, with ALL's first difference unchanged. The next work is the
+complete four-entry selector family, aiming
 for 423 registered entries. See `CURRENT_PORT_HANDOFF.md` for evidence, scope
 and the work selection/validation schedule.
 
