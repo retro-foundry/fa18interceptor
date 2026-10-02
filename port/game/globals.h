@@ -651,4 +651,22 @@
 #define BUTTON_COMMAND_FLAGS          0xC46186u
 #define BUTTON_COMMAND_LEVEL          0xC461AFu
 
+/* C1AD74 dispatch policy; these names describe the proven gate mechanics. */
+#define COMMAND_EVENT_COUNTER         0xC457D5u
+#define COMMAND_RETURN_STATE          0xC457D3u
+#define COMMAND_ENABLE_GATE           0xC45791u
+#define COMMAND_MODE_GATE             0xC45787u
+#define COMMAND_BLOCK_FLAGS           0xC46200u
+
+/* Shared flight actions (C1B126-C1C23C). */
+#define COMMAND_NEXT_TARGET_FLAG      0xC457B9u
+#define COMMAND_TRIM_INPUT            0xC4582Fu
+#define COMMAND_FLARE_TIMER           0xC4584Fu
+#define COMMAND_CHAFF_TIMER           0xC4584Eu
+#define COMMAND_WEAPON_MODE_REDRAWS   0xC45843u
+#define COMMAND_GEAR_GATE             0xC45B58u
+#define COMMAND_GEAR_MESSAGE          0xC45885u
+#define COMMAND_SPAWN_GATE            0xC458C2u
+#define COMMAND_WEAPON_PAUSE          0xC4579Au
+
 #endif

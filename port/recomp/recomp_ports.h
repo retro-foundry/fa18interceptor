@@ -28,6 +28,10 @@ typedef int (*FA18PortGlue)(void);
 /* Complete one source instruction in a timing-sensitive glue bridge.
  * Returns 1 when handled, 0 outside that bridge. No opcode handler is run. */
 typedef int (*FA18PortStep)(void);
+/* Some owners jump to shared tails with child routines between their source
+ * regions. The predicate selects owned instruction boundaries within the
+ * outer range; absent predicates retain the contiguous-range contract. */
+typedef int (*FA18PortStepOwns)(uint32_t pc);
 
 typedef struct {
     uint32_t entry;       /* original routine address */
@@ -36,9 +40,10 @@ typedef struct {
     int cycles;           /* fixed ON charge for whole-call glue; unused with step */
     uint32_t tail_from;   /* optional source address of a verified tail JMP */
     FA18PortStep step;    /* optional resumable bridge, with exact bus/cycle timing */
-    uint32_t step_end;    /* exclusive end of its contiguous source instruction range */
+    uint32_t step_end;    /* exclusive end of the outer source instruction range */
     int shadow_busy_reads; /* proof bits: 1 DMACONR, 2 JOY0DAT/JOY1DAT/POTINP; source read order checked */
     uint32_t step_start;   /* optional shared source prefix before entry */
+    FA18PortStepOwns step_owns; /* optional noncontiguous instruction ownership */
 } FA18Port;
 
 extern const FA18Port fa18_ports[];

@@ -1,5 +1,6 @@
 /* Player input. */
 #include "player_input.h"
+#include "command_publication.h"
 
 #include "cockpit.h"
 
@@ -56,26 +57,9 @@ static uint16_t last_row_for_mode(int8_t mode) {
 }
 
 void queue_view_key(uint8_t raw) {
-    int8_t slot;
-    uint8_t translated;
-
     request_cockpit_redraw();
     wr_u16(LINE_LAST_ROW, last_row_for_mode((int8_t)rd_u8(VIEW_MODE)));
-    if (!rd_u8(KEY_TAKEN) && !(raw & 0x80)) {
-        wr_u8(KEY_TAKEN, 1);
-        if ((int8_t)rd_u8(KEY_COUNT) < 10) {
-            slot = (int8_t)rd_u8(KEY_WRITE);
-            if (slot >= 10) slot = 0;
-            wr_u8(KEY_RAW + (gaddr)(int32_t)slot, raw);
-            translated = rd_u8(KEY_TABLE + raw);
-            wr_u8(KEY_WRITE, (uint8_t)(slot + 1));
-            wr_u8(KEY_COUNT, (uint8_t)(rd_u8(KEY_COUNT) + 1));
-            wr_u8(KEY_TRANSLATED + (gaddr)(int32_t)(int8_t)rd_u8(KEY_TRANSLATED_WRITE), translated);
-        }
-    }
-    wr_u8(KEY_STATE, 0);
-    wr_u8(KEY_STATE + 1, 0);
-    wr_u8(KEY_STATE + 2, 0);
+    publish_command_event(raw,NULL);
 }
 
 void drop_lost_selection(void) {

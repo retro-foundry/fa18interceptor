@@ -1,6 +1,6 @@
 # C port handoff
 
-Updated 2026-10-02. This is the current work state. Older notes remain in git
+Updated 2026-10-03. This is the current work state. Older notes remain in git
 history (the preceding handoff is in commit 0a19d5be); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
@@ -16,20 +16,26 @@ parity. Selector, placement, post-input, context-refresh and bootstrap milestone
 are complete at 432/624; the complete record-update and enclosing update-stage
 parents raised coverage to 434/624; the complete C29042 selector-origin owner
 raised it to 435/624; complete update/input/display owners raised it to 438/624;
-four complete input-event owners now raise it to 442/624.
+four complete input-event owners raised it to 442/624; complete C1AC28/C1AD74
+command dispatch owners now raise it to 444/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 442 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 555,538 completed shadow
-  calls and 412,898 sandbox calls across three native recordings, with zero
+- 444 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 555,784 completed shadow
+  calls and 413,307 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 442-entry baseline. GNU and
-  MSVC builds pass. In addition to active planes and the earlier audio batch,
+  build/recomp/ports_report_*.json describe this 444-entry baseline. GNU and
+  MSVC builds pass. There are 235 source-timed entries; the fresh combined
+  DMA oracle passes 14,240 instructions / 455,680 cases. The command pair
+  matches all 36,236 isolated live frames and RAM seals; build/ is 0.472 GiB.
+  See analysis/routines/native_c_command_dispatch.md and
+  analysis/figures/native_command_dispatch_checkpoint.json.
+  In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
   These isolated bridges match fresh source OFF output on all 36,236 frames. The
@@ -590,9 +596,32 @@ The full 442-entry gate passes 555,538 shadow / 412,898 sandbox comparisons,
 all seals and poison exact. GNU/MSVC pass; build/ is 0.386 GiB. ALL stays
 416/361. See analysis/routines/native_c_input_events.md and
 analysis/figures/native_input_events_checkpoint.json. Do not redo these owners.
-Next audit complete C1AC28 command-word and C1AD74 keyboard dispatch ownership
-together. The generated lists share 482 boundaries (1,104 unique); audit cold
-bytes, shared tails and the out-of-range C06BF0 path before implementation.
+The complete C1AC28 pending-command and C1AD74 keyboard owners are now
+registered: **444/624, 235 timed entries**. The sealed source audit follows
+all branches and shared tails, including C06BF0 reset and C1AC18 error exits:
+562/1,024 instructions, 482 shared, 1,104 unique, no omitted cold paths.
+Native domain C separates selection, aircraft, view/origin/zoom, indexed,
+context and publication behavior. Existing view queue callers share the
+proven publication body, preserving signed indices and aliasing write order.
+Each owner passes 8,192 real-child complete CPU/RAM calls and another 8,192
+child-contract calls. Component proofs add 190,464 cases; their union with
+real-owner proof covers every source boundary without exclusions or code
+patches. Controlled contracts compare full child entry CPU/SR/RAM and exact
+entry/return addresses, then vary child outputs; they are not real children.
+Normal readable-C replay passes 798 shadow / 891 sandbox comparisons with
+timing bridges disabled and normal liveness retained. Both owners have
+completed replay proof; internal action labels are not additional entries.
+Local timing passes 1,104 / 35,328 DMA fixtures; the fresh combined oracle
+passes 14,240 / 455,680. Exact owned-PC predicates allow noncontiguous tails
+without treating children in source gaps as parent instructions. All 36,236
+isolated live frames and RAM seals match. The full 444-entry gate passes
+555,784 shadow / 413,307 sandbox calls, all seals/poison exact. GNU/MSVC pass;
+build/ is 0.472 GiB. ALL stays 416/361. See
+analysis/routines/native_c_command_dispatch.md and
+analysis/figures/native_command_dispatch_checkpoint.json. Do not redo these
+owners or count selector prefixes as completed functions. Next audit remaining
+complete command/context publisher peers and the postflight-mode scheduler
+family, preserving true child owners and explicitly proving cold peers.
 C0F090/C0F132 remain internal labels, not additional functions.
 
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
@@ -635,11 +664,11 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    pair C1CB14/C1CB26, follow-up parent C1CCBC/workspace helper C1D0A4,
    post-input parent C0F5F8, context/bootstrap/callback batch and C22C80/C1C63E
    parents, complete C29042 active origin, update/input/display owners and
-   the complete input-event batch are registered at 442/624.
+   the complete input-event and command-dispatch batches are registered at 444/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Audit complete C1AC28/C1AD74
-   command-word/keyboard dispatch ownership and shared tails next;
+   or count internal labels as extra routines. Audit remaining complete
+   command/context publisher peers and the postflight-mode scheduler family next;
    the leaf tool excludes indirect calls. Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
@@ -657,8 +686,9 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    batches; if ALL still does not improve, return to complete readable parent
    batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
-   The complete update owner is proven. Continue complete command dispatch owners,
-   preserving their shared tails, source child contracts and local frames.
+   The complete update and command dispatch owners are proven. Continue related
+   complete command/context and postflight owners, preserving their shared tails,
+   source child contracts and local frames.
 4. Reduce repeated work: cache one source stream within each bounded probe
    round; run changed-group DMA fixtures and short live probes while editing.
    Run the full shadow/sandbox/sealed-RAM/poison gate and isolated full live

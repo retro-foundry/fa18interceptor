@@ -188,6 +188,10 @@ static void restore_shadow_ram(const ShadowRAM *ram) {
 static uint32_t stepped_start(const FA18Port *port) {
     return port->step_start ? port->step_start : port->entry;
 }
+static int stepped_owns(const FA18Port *port,uint32_t pc) {
+    return pc>=stepped_start(port) && pc<port->step_end &&
+           (!port->step_owns || port->step_owns(pc));
+}
 
 void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     int i, f;
@@ -240,7 +244,7 @@ static int entered_from_stepped_call(void) {
     ret = fa18_bus_read32(REG_A[7]) & 0xFFFFFFu;
     for (i = stepped_count; i > 0; --i) {
         const FA18Port *parent = &fa18_ports[stepped_calls[i - 1].port];
-        if (ret < stepped_start(parent) || ret >= parent->step_end) continue;
+        if (!stepped_owns(parent,ret)) continue;
         op = fa18_bus_read16(ret - 2);
         if ((op & 0xFF00u) == 0x6100u && (op & 0xFFu)) return 1;
         op = fa18_bus_read16(ret - 4);
@@ -262,7 +266,7 @@ static int run_port_body(int port) {
     for (;;) {
         int result;
         if (REG_PC == ret && REG_A[7] == sp) return FA18_RET;
-        if (REG_PC >= stepped_start(&fa18_ports[port]) && REG_PC < fa18_ports[port].step_end) {
+        if (stepped_owns(&fa18_ports[port],REG_PC)) {
             if (!fa18_ports[port].step()) {
                 fprintf(stderr, "port %s: missing instruction boundary at %06X\n",
                         fa18_ports[port].name, REG_PC);
@@ -313,10 +317,10 @@ int fa18_ports_resume_step(void) {
     if (mode != FA18_PORTS_ON || fa18_write_log_active) return 0;
     finish_stepped_calls();
     /* An interrupt may enter a nested native call while an older one waits;
-     * choose the innermost bridge whose source range owns the resumed PC. */
+     * choose the innermost bridge that owns the resumed instruction. */
     for (i = stepped_count; i > 0; --i) {
         const FA18Port *port = &fa18_ports[stepped_calls[i - 1].port];
-        if (REG_PC >= stepped_start(port) && REG_PC < port->step_end) {
+        if (stepped_owns(port,REG_PC)) {
             if (!port->step()) {
                 fprintf(stderr, "port %s: cannot resume at %06X\n", port->name, REG_PC);
                 abort();

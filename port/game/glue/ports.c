@@ -7,6 +7,8 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    {0xC1AC28, glue_C1AC28, "dispatch_pending_command", 0, 0, glue_C1AC28_step, 0xC1C2BE, 0, 0xC1AC18, glue_C1AC28_owns},
+    {0xC1AD74, glue_C1AD74, "dispatch_keyboard_command", 0, 0, glue_C1AD74_step, 0xC1C2BE, 0, 0xC06BF0, glue_C1AD74_owns},
     {0xC16EAE, glue_C16EAE, "consume_external_input_event", 0, 0, glue_C16EAE_step, 0xC16F1C, 2},
     {0xC16BF2, glue_C16BF2, "read_keyboard_event_source", 0, 0, glue_C16BF2_step, 0xC16C3A},
     {0xC16C56, glue_C16C56, "poll_raw_keyboard_event", 0, 0, glue_C16C56_step, 0xC16CD8},

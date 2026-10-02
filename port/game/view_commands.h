@@ -1,0 +1,29 @@
+#ifndef FA18_VIEW_COMMANDS_H
+#define FA18_VIEW_COMMANDS_H
+#include "command_selection.h"
+/* Shared view/origin/zoom actions of C1AC28/C1AD74, before queue publication. */
+enum ViewCommandChild { VIEW_COMMAND_ZOOM_MAXIMUM, VIEW_COMMAND_REDRAW };
+enum ViewCommandPhase {
+    VIEW_BYTE_TEST, VIEW_BYTE_STORE, VIEW_WORD_STORE, VIEW_LONG_STORE,
+    VIEW_REQUEST_BIT, VIEW_ORIGIN_TEST, VIEW_ORIGIN_READ,
+    VIEW_DETAIL_SET, VIEW_ORIGIN_DECREMENT, VIEW_ORIGIN_INCREMENT,
+    VIEW_ORIGIN_COMPARE, VIEW_ORIGIN_SET,
+    VIEW_MIDDLE_READ, VIEW_MIDDLE_DECREASE, VIEW_MIDDLE_INCREASE,
+    VIEW_MIDDLE_COMPARE, VIEW_MIDDLE_SET,
+    VIEW_MODE_ZERO, VIEW_MODE_SET, VIEW_MODE_DECREMENT, VIEW_MODE_INCREMENT,
+    VIEW_BYTE_COMPARE, VIEW_RECORD_ADDRESS, VIEW_RECORD_TYPE_READ,
+    VIEW_RECORD_TYPE_MASK, VIEW_MODE_READ, VIEW_ROW_SET, VIEW_ROW_COMPARE,
+    VIEW_SPAN_TABLE, VIEW_SPAN_INDEX, VIEW_SPAN_READ, VIEW_SPAN_SCALE,
+    VIEW_ZOOM_OUT_BEGIN, VIEW_ZOOM_OUT_COMPARE, VIEW_ZOOM_IN_COMPARE,
+    VIEW_ZOOM_DECREASE, VIEW_ZOOM_INCREASE, VIEW_ZOOM_FLAGS_READ,
+    VIEW_ZOOM_FLAGS_MASK, VIEW_ZOOM_FLAGS_CLEAR, VIEW_ZOOM_FLAGS_SET
+};
+typedef struct {
+    uint32_t (*consume)(void *context,enum ViewCommandChild child);
+    void (*observe)(void *context,enum ViewCommandPhase phase,
+                    uint32_t value,uint32_t limit,gaddr address);
+    void *context;
+} ViewCommandHooks;
+int is_view_command(enum CommandAction action);
+uint32_t execute_view_command(const CommandRequest *request,const ViewCommandHooks *hooks);
+#endif

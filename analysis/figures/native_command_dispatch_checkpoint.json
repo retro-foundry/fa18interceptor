@@ -1,0 +1,1037 @@
+{
+  "date": "2026-10-03",
+  "entries_added": [
+    "C1AC28",
+    "C1AD74"
+  ],
+  "registered_entries": 444,
+  "registered_timing_entries": 235,
+  "source": {
+    "manifest": "analysis/data/command_dispatch_source_scope.json",
+    "manifest_sha256": "b1d2c56f1d4a1ebedd6be089c3d1b55681604fb3cfa195032524368a8037fe74",
+    "instruction_counts": {
+      "C1AC28": 562,
+      "C1AD74": 1024
+    },
+    "unique_instructions": 1104,
+    "shared_instructions": 482,
+    "additional_cold_instructions": 0
+  },
+  "structural": {
+    "complete_owners": {
+      "real": {
+        "total_cases": 16384,
+        "real_child_execution": true,
+        "observed_boundaries": 947,
+        "logs": {
+          "C1AC28": {
+            "path": "build/recomp/command_dispatch_real_C1AC28.log",
+            "sha256": "c9a3cc6e4fa7572a4f7db1d2dd4400619af684e3c5146f55913116ce7dd7d8b1",
+            "summary": "command-dispatch oracle C1AC28: 8192 complete calls matched all registers, PC, full SR and all RAM; 429 parent boundaries observed",
+            "cases": 8192,
+            "observed_boundaries": 429
+          },
+          "C1AD74": {
+            "path": "build/recomp/command_dispatch_real_C1AD74.log",
+            "sha256": "0c2a2abe11e6beb116cdd6c7270481ac96231266136e5b578f668ba72d22f759",
+            "summary": "command-dispatch oracle C1AD74: 8192 complete calls matched all registers, PC, full SR and all RAM; 759 parent boundaries observed",
+            "cases": 8192,
+            "observed_boundaries": 759
+          }
+        }
+      },
+      "contract": {
+        "total_cases": 16384,
+        "real_child_execution": false,
+        "observed_boundaries": 948,
+        "logs": {
+          "C1AC28": {
+            "path": "build/recomp/command_dispatch_contract_C1AC28.log",
+            "sha256": "cc7bd650fd844dcf1d8b04025a431af8fc7755f68525053240bc9da37b2ba8fc",
+            "summary": "command-dispatch child-contract oracle C1AC28: 8192 complete calls matched all registers, PC, full SR and all RAM; 432 parent boundaries observed",
+            "cases": 8192,
+            "observed_boundaries": 432
+          },
+          "C1AD74": {
+            "path": "build/recomp/command_dispatch_contract_C1AD74.log",
+            "sha256": "9145137d28df607a3ed3955ba71d0e7482a7ffc9e6d70aa55d6a6cb3679cee2d",
+            "summary": "command-dispatch child-contract oracle C1AD74: 8192 complete calls matched all registers, PC, full SR and all RAM; 757 parent boundaries observed",
+            "cases": 8192,
+            "observed_boundaries": 757
+          }
+        }
+      }
+    },
+    "components": {
+      "selection": {
+        "total_cases": 16384,
+        "observed_boundaries": 317,
+        "registered_as_additional_functions": false,
+        "logs": [
+          {
+            "path": "build/recomp/command_selection_C1AC28.log",
+            "sha256": "abf0b2b1617d06ffea571bf812ff0e16b8823dd5d2a45233b5bfd81b47036385",
+            "summary": "command-selection oracle C1AC28: 8192 selection prefixes matched all registers, PC, full SR and all RAM; 74 selection boundaries observed",
+            "cases": 8192,
+            "observed_boundaries": 74
+          },
+          {
+            "path": "build/recomp/command_selection_C1AD74.log",
+            "sha256": "79377bc8ea43157d4aa8576f08a44c29111047b6b6665acb5e0f4dbf926655ad",
+            "summary": "command-selection oracle C1AD74: 8192 selection prefixes matched all registers, PC, full SR and all RAM; 243 selection boundaries observed",
+            "cases": 8192,
+            "observed_boundaries": 243
+          }
+        ]
+      },
+      "publication": {
+        "total_cases": 8192,
+        "observed_boundaries": 28,
+        "registered_as_additional_functions": false,
+        "logs": [
+          {
+            "path": "build/recomp/command_publication.log",
+            "sha256": "b3ef15961047b1f77a387e55151cb83643f4467b6ac6260cff661b60542b348c",
+            "summary": "command-publication oracle C1C23C: 8192 complete calls matched all registers, PC, full SR and all RAM; 28 parent boundaries observed",
+            "cases": 8192,
+            "observed_boundaries": 28
+          }
+        ]
+      },
+      "flight": {
+        "total_cases": 14336,
+        "observed_boundaries": 250,
+        "registered_as_additional_functions": false,
+        "logs": [
+          {
+            "path": "build/recomp/flight_commands_C1B126.log",
+            "sha256": "84d34b1dd25c6ae00077045cf07cc54bad22680e5cff8e7eb51f63ebdc69d59f",
+            "summary": "flight-command oracle C1B126: 512 complete calls matched all registers, PC, full SR and all RAM; 43 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 43
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B1A4.log",
+            "sha256": "96c693335f0b38de5ebfd20c7b1f1f6bad465e1920d13af4c982890277a9f76e",
+            "summary": "flight-command oracle C1B1A4: 512 complete calls matched all registers, PC, full SR and all RAM; 32 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 32
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B1C8.log",
+            "sha256": "fe0981a9cc2cc8c3813316229c38b9e0665744c45f56fbccc5a657e0542e0c42",
+            "summary": "flight-command oracle C1B1C8: 512 complete calls matched all registers, PC, full SR and all RAM; 47 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 47
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B21C.log",
+            "sha256": "85209f6f0ffe151d38d18e0869c6c21c9cb9889aafab4de932828828e21ec0ee",
+            "summary": "flight-command oracle C1B21C: 512 complete calls matched all registers, PC, full SR and all RAM; 32 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 32
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B22C.log",
+            "sha256": "d08a4323f1f02cb354ef3a6210de06a757299cac7de6cb60952917020a48ed9b",
+            "summary": "flight-command oracle C1B22C: 512 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 30
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B236.log",
+            "sha256": "f68e9485f800100256888c8204683b2fbdecb297faba5d22f192c1a725ebb531",
+            "summary": "flight-command oracle C1B236: 512 complete calls matched all registers, PC, full SR and all RAM; 38 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 38
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B264.log",
+            "sha256": "6787c65ca572b49e24a8dd15b5938ea73b256447287a2223aedad5184864e8a5",
+            "summary": "flight-command oracle C1B264: 512 complete calls matched all registers, PC, full SR and all RAM; 35 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 35
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B4F4.log",
+            "sha256": "7ac4f6a924e7a62cfc9251bfdda4e6a86a3184b1215f1674e0ab0e07b15cff68",
+            "summary": "flight-command oracle C1B4F4: 512 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 30
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B4FC.log",
+            "sha256": "7370a6ef7d07873ecd8a7b50e89ef7ced86b12f773428a883d04e810d2130458",
+            "summary": "flight-command oracle C1B4FC: 512 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 30
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B504.log",
+            "sha256": "b96c07c91a7c473d8d72b4902dfb625d06d79e576583a92411c291325868fef7",
+            "summary": "flight-command oracle C1B504: 512 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 30
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B540.log",
+            "sha256": "ec9411b7e3215311d7f516a00b2b88d9836a9eeddf5ff13fb7bf8ec1fa642d37",
+            "summary": "flight-command oracle C1B540: 512 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 30
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B548.log",
+            "sha256": "91bc97f5b713259a23bc1518df6608af968377e59ebca5e51ca0cb34cbcffb15",
+            "summary": "flight-command oracle C1B548: 512 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 30
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B550.log",
+            "sha256": "1e8efd67519c7d22d5e69f1971ebf6f2286754841f119210f5ef72c6b67a15bc",
+            "summary": "flight-command oracle C1B550: 512 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 30
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B58E.log",
+            "sha256": "52d2fe1471408a96ea4a7c72c8afe9e68dcc0f1633412556493df15bc057725e",
+            "summary": "flight-command oracle C1B58E: 512 complete calls matched all registers, PC, full SR and all RAM; 36 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 36
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B594.log",
+            "sha256": "9dbdbc21f28a74ca418dbde1454410c1ca3529dcd3685f2dba99dd4ba7f1dd28",
+            "summary": "flight-command oracle C1B594: 512 complete calls matched all registers, PC, full SR and all RAM; 36 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 36
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B59A.log",
+            "sha256": "70cccaa111dbea0a9b78dfeb3038662e4a308378154e5224b79578cf5efc00e8",
+            "summary": "flight-command oracle C1B59A: 512 complete calls matched all registers, PC, full SR and all RAM; 35 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 35
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B5B8.log",
+            "sha256": "b4a8d8d89f2ecca9d8d15cfdc074adc76d0b43cec887de540fb863674a22ae82",
+            "summary": "flight-command oracle C1B5B8: 512 complete calls matched all registers, PC, full SR and all RAM; 36 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 36
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B5BC.log",
+            "sha256": "eead5fed0565f21b5b86f28c6d1bbb8735136259eb5a5ed8b54844763662982a",
+            "summary": "flight-command oracle C1B5BC: 512 complete calls matched all registers, PC, full SR and all RAM; 36 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 36
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B5C0.log",
+            "sha256": "511779c35ebf0fda70ad29adba3d87f93cd7a9c713f26bd57ec063ec63806499",
+            "summary": "flight-command oracle C1B5C0: 512 complete calls matched all registers, PC, full SR and all RAM; 35 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 35
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B5DC.log",
+            "sha256": "f6ee00ce3d1a1f876cc1c26a8b23bbad901fefed48404d4690a81c895338b8aa",
+            "summary": "flight-command oracle C1B5DC: 512 complete calls matched all registers, PC, full SR and all RAM; 34 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 34
+          },
+          {
+            "path": "build/recomp/flight_commands_C1B616.log",
+            "sha256": "b8e7499e345de033a2f0b06b595341f760506617a4f4785e69ebda6a872e56b6",
+            "summary": "flight-command oracle C1B616: 512 complete calls matched all registers, PC, full SR and all RAM; 42 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 42
+          },
+          {
+            "path": "build/recomp/flight_commands_C1BB7A.log",
+            "sha256": "99c9a6dd7a06983bb96c7d3d45460ba2ebdb4a5030ab8ecb36c73dfd9fe116fb",
+            "summary": "flight-command oracle C1BB7A: 512 complete calls matched all registers, PC, full SR and all RAM; 58 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 58
+          },
+          {
+            "path": "build/recomp/flight_commands_C1BC12.log",
+            "sha256": "4d973c92a5f5866c0e5aa485bfbc494c8e72dfb9e89f613ecde71e1196fc942f",
+            "summary": "flight-command oracle C1BC12: 512 complete calls matched all registers, PC, full SR and all RAM; 39 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 39
+          },
+          {
+            "path": "build/recomp/flight_commands_C1C052.log",
+            "sha256": "c47dba618775527c967cd0ec9af95ee4d064558cee354f0783280842c9294cc5",
+            "summary": "flight-command oracle C1C052: 512 complete calls matched all registers, PC, full SR and all RAM; 33 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 33
+          },
+          {
+            "path": "build/recomp/flight_commands_C1C0E0.log",
+            "sha256": "5e7895ed4aba373100dd518eb8797254e510d8cf8cb8548710351eb995754773",
+            "summary": "flight-command oracle C1C0E0: 512 complete calls matched all registers, PC, full SR and all RAM; 63 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 63
+          },
+          {
+            "path": "build/recomp/flight_commands_C1C172.log",
+            "sha256": "22cce9bdb47a12be24f106d567ddf2706c7afddb98ac3c956db0861eb0c52e46",
+            "summary": "flight-command oracle C1C172: 512 complete calls matched all registers, PC, full SR and all RAM; 41 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 41
+          },
+          {
+            "path": "build/recomp/flight_commands_C1C1F2.log",
+            "sha256": "4298f85d05598d2a43b3c38f619b3423e368d8bd41e57767611c7a9f12cf3116",
+            "summary": "flight-command oracle C1C1F2: 512 complete calls matched all registers, PC, full SR and all RAM; 39 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 39
+          },
+          {
+            "path": "build/recomp/flight_commands_C1C224.log",
+            "sha256": "32c4c59fd0a00d619996e85cc1bae471ccfe8d179a52c4235f10d4414ac8caa0",
+            "summary": "flight-command oracle C1C224: 512 complete calls matched all registers, PC, full SR and all RAM; 34 parent boundaries observed",
+            "cases": 512,
+            "observed_boundaries": 34
+          }
+        ]
+      },
+      "view": {
+        "total_cases": 32768,
+        "observed_boundaries": 247,
+        "registered_as_additional_functions": false,
+        "logs": [
+          {
+            "path": "build/recomp/view_commands_C1B780.log",
+            "sha256": "fe20e5240909694cc4f7e656f317ba67b42470df26bbd540354b42b02973f9e4",
+            "summary": "view-command oracle C1B780: 2048 complete calls matched all registers, PC, full SR and all RAM; 72 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 72
+          },
+          {
+            "path": "build/recomp/view_commands_C1B79A.log",
+            "sha256": "2eddfefad0ea233a5bccc2720cdd2842fc732f3a414a6cdc78f00c9f7b25339f",
+            "summary": "view-command oracle C1B79A: 2048 complete calls matched all registers, PC, full SR and all RAM; 37 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 37
+          },
+          {
+            "path": "build/recomp/view_commands_C1B7B6.log",
+            "sha256": "c123afb7b7164145a588418766a45fb24ed0e6ec0f2bf8c17bf82b4ca49033a3",
+            "summary": "view-command oracle C1B7B6: 2048 complete calls matched all registers, PC, full SR and all RAM; 37 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 37
+          },
+          {
+            "path": "build/recomp/view_commands_C1B7C2.log",
+            "sha256": "f6416ba8f36bf1bc9b909d75d7718ddfb3391cc9b6aba8da4908c5ad2bf0ab25",
+            "summary": "view-command oracle C1B7C2: 2048 complete calls matched all registers, PC, full SR and all RAM; 36 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 36
+          },
+          {
+            "path": "build/recomp/view_commands_C1B7F0.log",
+            "sha256": "eea166ab3db9be511bf9cc87eb56e27f24b8308436966395e31412cd97fbd7e8",
+            "summary": "view-command oracle C1B7F0: 2048 complete calls matched all registers, PC, full SR and all RAM; 60 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 60
+          },
+          {
+            "path": "build/recomp/view_commands_C1B7F8.log",
+            "sha256": "a995848a83292c2a1eba7ea4a7471bb79495db1209cd793d9526fd7d578854a1",
+            "summary": "view-command oracle C1B7F8: 2048 complete calls matched all registers, PC, full SR and all RAM; 43 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 43
+          },
+          {
+            "path": "build/recomp/view_commands_C1B890.log",
+            "sha256": "54298b17c3df913ded1e54de9869c15ad483c3ef533233d22309f4496c6df2fc",
+            "summary": "view-command oracle C1B890: 2048 complete calls matched all registers, PC, full SR and all RAM; 57 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 57
+          },
+          {
+            "path": "build/recomp/view_commands_C1B8F8.log",
+            "sha256": "1a3f167ad118a62f4699307e9196a64f88dc7883600274f2aaef3a3ffa5639d3",
+            "summary": "view-command oracle C1B8F8: 2048 complete calls matched all registers, PC, full SR and all RAM; 72 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 72
+          },
+          {
+            "path": "build/recomp/view_commands_C1B914.log",
+            "sha256": "d31a554792ce35d347b411144885dd0ea27062f0051dd0b484ba0962d0b1729d",
+            "summary": "view-command oracle C1B914: 2048 complete calls matched all registers, PC, full SR and all RAM; 90 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 90
+          },
+          {
+            "path": "build/recomp/view_commands_C1B930.log",
+            "sha256": "39c5148aae4a8d5a38f02efae33967396b64ce129bf6cddee680df51bfa5297c",
+            "summary": "view-command oracle C1B930: 2048 complete calls matched all registers, PC, full SR and all RAM; 104 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 104
+          },
+          {
+            "path": "build/recomp/view_commands_C1B960.log",
+            "sha256": "5b1ac5add03578b644ea42f68549cbcb7ca5eac56e0d4662c4839bd623ac4a8d",
+            "summary": "view-command oracle C1B960: 2048 complete calls matched all registers, PC, full SR and all RAM; 100 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 100
+          },
+          {
+            "path": "build/recomp/view_commands_C1B98A.log",
+            "sha256": "95cb86e7f3610b539766c1b012b76b25dc530fc5ac33920dfc278671a67ca571",
+            "summary": "view-command oracle C1B98A: 2048 complete calls matched all registers, PC, full SR and all RAM; 96 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 96
+          },
+          {
+            "path": "build/recomp/view_commands_C1B9AC.log",
+            "sha256": "05c58c411e4ce583bd70cf059af369a2e8d1505d097b58a36bc2610fd049adf1",
+            "summary": "view-command oracle C1B9AC: 2048 complete calls matched all registers, PC, full SR and all RAM; 95 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 95
+          },
+          {
+            "path": "build/recomp/view_commands_C1BAE2.log",
+            "sha256": "900f351d2de1e05adce23865b179a76495d5abcad055b4823f032c14ab11df0b",
+            "summary": "view-command oracle C1BAE2: 2048 complete calls matched all registers, PC, full SR and all RAM; 70 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 70
+          },
+          {
+            "path": "build/recomp/view_commands_C1BB02.log",
+            "sha256": "45aef63fd6224204e4d1a63383e14d29dafc915a25bd7d778019e368833815ab",
+            "summary": "view-command oracle C1BB02: 2048 complete calls matched all registers, PC, full SR and all RAM; 74 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 74
+          },
+          {
+            "path": "build/recomp/view_commands_C1BB66.log",
+            "sha256": "c562c10a454689fbbefdf86e8ad959a8a040b099b81a6b055cbfdaa1a342568b",
+            "summary": "view-command oracle C1BB66: 2048 complete calls matched all registers, PC, full SR and all RAM; 31 parent boundaries observed",
+            "cases": 2048,
+            "observed_boundaries": 31
+          }
+        ]
+      },
+      "indexed": {
+        "total_cases": 98304,
+        "observed_boundaries": 212,
+        "registered_as_additional_functions": false,
+        "logs": [
+          {
+            "path": "build/recomp/indexed_commands_C1BC50.log",
+            "sha256": "aba0dd02e8992fd82bbd6b416fb0d17da2508155379b4687ab08c8f73fc8ae22",
+            "summary": "indexed-command oracle C1BC50: 32768 complete calls matched all registers, PC, full SR and all RAM; 172 parent boundaries observed",
+            "cases": 32768,
+            "observed_boundaries": 172
+          },
+          {
+            "path": "build/recomp/indexed_commands_C1BC72.log",
+            "sha256": "7bf233bd3bff120bd879e467ea95c5036cbad563bda7a4ac408cb2c9e133ee3f",
+            "summary": "indexed-command oracle C1BC72: 32768 complete calls matched all registers, PC, full SR and all RAM; 130 parent boundaries observed",
+            "cases": 32768,
+            "observed_boundaries": 130
+          },
+          {
+            "path": "build/recomp/indexed_commands_C1BC78.log",
+            "sha256": "b5c0558f9482cc5fc7622a407d250ce21e0efcd2854a54520c94de9525f01a16",
+            "summary": "indexed-command oracle C1BC78: 32768 complete calls matched all registers, PC, full SR and all RAM; 153 parent boundaries observed",
+            "cases": 32768,
+            "observed_boundaries": 153
+          }
+        ]
+      },
+      "context": {
+        "total_cases": 20480,
+        "observed_boundaries": 162,
+        "registered_as_additional_functions": false,
+        "logs": [
+          {
+            "path": "build/recomp/context_commands_C1B664.log",
+            "sha256": "ba6fc7da69d18cd4d9e88d29cab044c8130d1c3bac54e7752b88ad933017defd",
+            "summary": "context-command oracle C1B664: 4096 complete calls matched all registers, PC, full SR and all RAM; 76 parent boundaries observed",
+            "cases": 4096,
+            "observed_boundaries": 76
+          },
+          {
+            "path": "build/recomp/context_commands_C1B66C.log",
+            "sha256": "34ed26f6fa2d8da03cd6b523be9244d8fc7cf34363ba58b2cd71685dbaf08680",
+            "summary": "context-command oracle C1B66C: 4096 complete calls matched all registers, PC, full SR and all RAM; 97 parent boundaries observed",
+            "cases": 4096,
+            "observed_boundaries": 97
+          },
+          {
+            "path": "build/recomp/context_commands_C1B6C2.log",
+            "sha256": "174a5209a877d693d0efe49571226cba0a6615714ae2d146d5bd75ef200e0c22",
+            "summary": "context-command oracle C1B6C2: 4096 complete calls matched all registers, PC, full SR and all RAM; 90 parent boundaries observed",
+            "cases": 4096,
+            "observed_boundaries": 90
+          },
+          {
+            "path": "build/recomp/context_commands_C1BF8C.log",
+            "sha256": "0c940b0b2f5ffa86a420c73543288ea45190cf537ad24713d351f4bb085520f0",
+            "summary": "context-command oracle C1BF8C: 4096 complete calls matched all registers, PC, full SR and all RAM; 73 parent boundaries observed",
+            "cases": 4096,
+            "observed_boundaries": 73
+          },
+          {
+            "path": "build/recomp/context_commands_C1C06E.log",
+            "sha256": "72ddefddec2648fcefd3c5b4e83c78314f806fa6d5f79cb31d0863dad2a9f4a5",
+            "summary": "context-command oracle C1C06E: 4096 complete calls matched all registers, PC, full SR and all RAM; 56 parent boundaries observed",
+            "cases": 4096,
+            "observed_boundaries": 56
+          }
+        ]
+      }
+    },
+    "total_cases": 223232,
+    "all_source_boundaries_covered_by_component_and_real_owner_union": 1104,
+    "all_registers_pc_full_sr_all_chip_slow_ram": true,
+    "chipset_events_held": true,
+    "ram_exclusion_bytes": 0,
+    "patched_original_instructions": false,
+    "contracts_compare_child_entry_cpu_sr_ram_and_exact_entry_return_addresses": true
+  },
+  "normal_whole_call": {
+    "command": "python tools/recomp/check_whole_call_glue.py C1AC28 C1AD74",
+    "steps_disabled": true,
+    "normal_liveness_preserved": true,
+    "totals": {
+      "shadow": {
+        "calls": 891,
+        "compared": 798,
+        "matched": 798,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 93
+      },
+      "sandbox": {
+        "calls": 891,
+        "compared": 891,
+        "matched": 891,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "report": "build/recomp/whole_call_C1AC28_C1AD74_demo01_shadow.json",
+          "report_sha256": "743fdfab45b0eb93ca01755a2b99f46a47e96036f5487c1277e0cb904f0b600e",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 167,
+              "compared": 162,
+              "matched": 162,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 5,
+              "mean_cycles": 914,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 2,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1,
+              "mean_cycles": 1338,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/whole_call_C1AC28_C1AD74_demo01_sandbox.json",
+          "report_sha256": "554685448d3a1d34681ba79302db011caa0d9c6d8f68f3dac5169ac1c0628abe",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 167,
+              "compared": 167,
+              "matched": 167,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 966,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 2,
+              "compared": 2,
+              "matched": 2,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 2603,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "report": "build/recomp/whole_call_C1AC28_C1AD74_qual_carrier_success_shadow.json",
+          "report_sha256": "4150548d2454b2b8a1a7b4ee843cad7c541bfc50d78568c08ddabfad9ff5d7ee",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 554,
+              "compared": 507,
+              "matched": 507,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 47,
+              "mean_cycles": 1479,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/whole_call_C1AC28_C1AD74_qual_carrier_success_sandbox.json",
+          "report_sha256": "a1ec6df003e3f52b7599cb9f114af6c47d06264faaa110d732873d761aa52b81",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 554,
+              "compared": 554,
+              "matched": 554,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 1535,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "report": "build/recomp/whole_call_C1AC28_C1AD74_qual_fail_crashes_shadow.json",
+          "report_sha256": "54b9439840e9bc50b766f31dfbdfba0449e9db286a46071c84b59c289aec19d1",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 168,
+              "compared": 128,
+              "matched": 128,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 40,
+              "mean_cycles": 2028,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/whole_call_C1AC28_C1AD74_qual_fail_crashes_sandbox.json",
+          "report_sha256": "845cd56772d83abb4e19c6ac77e68deffac4d8b046cb1b6fb7da0307cc36d723",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 168,
+              "compared": 168,
+              "matched": 168,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 2126,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "source_timing": {
+    "local_instructions": 1104,
+    "local_dma_cases": 35328,
+    "combined_instructions": 14240,
+    "combined_dma_cases": 455680,
+    "all_registers_full_sr_pc_cycles_ram": true,
+    "dma_bus_contention_enabled": true,
+    "sealed_state_reset_per_fixture": true,
+    "raw_bus_access_log_asserted": false,
+    "noncontiguous_owned_instruction_predicate": true
+  },
+  "full_registered_gate": {
+    "command": "scripts/recomp_ports_check.sh",
+    "totals": {
+      "shadow": {
+        "calls": 591194,
+        "compared": 555784,
+        "matched": 555784,
+        "mismatched": 0,
+        "hardware": 558,
+        "incomplete": 34852
+      },
+      "sandbox": {
+        "calls": 479657,
+        "compared": 413307,
+        "matched": 413307,
+        "mismatched": 0,
+        "hardware": 66350,
+        "incomplete": 0
+      }
+    },
+    "recordings": {
+      "demo01": {
+        "shadow": {
+          "report": "build/recomp/ports_report_demo01.json",
+          "report_sha256": "ff3f546ff36e196812af9fd309da7912407bcff3d969be80d47ae914558f6f7c",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 2,
+              "compared": 1,
+              "matched": 1,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1,
+              "mean_cycles": 1338,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/ports_report_sandbox_demo01.json",
+          "report_sha256": "c80663cb33833d5474685afa4ae230d2640c47a8acbbc23c0890d0e22d9b7d2e",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 167,
+              "compared": 167,
+              "matched": 167,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 967,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 2,
+              "compared": 2,
+              "matched": 2,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 2602,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "report": "build/recomp/ports_report_qual_carrier_success.json",
+          "report_sha256": "0f05c9da7f770c967ba001d26ef57e457a6c575a7773029ae35ad5cbb50c98c9",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 493,
+              "compared": 451,
+              "matched": 451,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 42,
+              "mean_cycles": 1457,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "report_sha256": "36147e2897a473cc4335c168b64c197ec46ac684486bcee7da13f2e2dc4498d0",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 554,
+              "compared": 554,
+              "matched": 554,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 1548,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "report": "build/recomp/ports_report_qual_fail_crashes.json",
+          "report_sha256": "6288904fa268ba1a5b7fa57e45d1fb473df0ea5a8b4452c345605cfd3b8e4475",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 157,
+              "compared": 120,
+              "matched": 120,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 37,
+              "mean_cycles": 2020,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        },
+        "sandbox": {
+          "report": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "report_sha256": "d4f4c15d2e58e8340e53977a3f6ad9c87047c575b4a3eb1c1298588494b9e10e",
+          "entries": [
+            {
+              "entry": "C1AC28",
+              "name": "dispatch_pending_command",
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 0,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            },
+            {
+              "entry": "C1AD74",
+              "name": "dispatch_keyboard_command",
+              "calls": 168,
+              "compared": 168,
+              "matched": 168,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0,
+              "mean_cycles": 2129,
+              "busy_input_calls": 0,
+              "busy_input_reads": 0
+            }
+          ]
+        }
+      }
+    },
+    "poison_frames_exact": true
+  },
+  "live_group": {
+    "entries": [
+      "C1AC28",
+      "C1AD74"
+    ],
+    "frames": 36236,
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "expected_final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103",
+        "shadow_ram_exact": true,
+        "live_rgb444_and_ram_exact": true
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "expected_final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30",
+        "shadow_ram_exact": true,
+        "live_rgb444_and_ram_exact": true
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "expected_final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69",
+        "shadow_ram_exact": true,
+        "live_rgb444_and_ram_exact": true
+      }
+    }
+  },
+  "bounded_probe": {
+    "frames": 600,
+    "group_exact": true,
+    "all_first_difference_frame": 416,
+    "all_differing_pixels": 361,
+    "copper_fade_deferred": true
+  },
+  "build": {
+    "gnu_pass": true,
+    "msvc_release_pass": true,
+    "bytes_after_stream_cleanup": 507234781,
+    "gib": 0.472
+  },
+  "gate_logs": {
+    "gnu": {
+      "path": "build/recomp/command_dispatch_gnu_gate.log",
+      "sha256": "152aa2d8118dc871958fe45f40d76db39b5d738da11e79caab1ea2695fb234c2"
+    },
+    "msvc": {
+      "path": "build/recomp/command_dispatch_msvc_gate.log",
+      "sha256": "3988db64311bb7975e0bab0510b74ed89ad5bb259aad7f47eb7f2a7a4df5e34b"
+    },
+    "struct": {
+      "path": "build/recomp/command_dispatch_struct_gate.log",
+      "sha256": "91444798187007b5d8cec7370152518be46540da6b80f3e0f21e2eac393a1e03"
+    },
+    "step": {
+      "path": "build/recomp/command_dispatch_step_gate.log",
+      "sha256": "fbe71496d1ba8e306d397c0995025911982b2234011b58ac6cd48d09b0cf5428"
+    },
+    "combined": {
+      "path": "build/recomp/command_dispatch_combined_gate.log",
+      "sha256": "3d6ec49ec7a6927aae806f002b685cbb0eba4e9490a8d959b12cd3925b920d6e"
+    },
+    "whole": {
+      "path": "build/recomp/command_dispatch_whole_gate.log",
+      "sha256": "63d5179e7f336d1c8537c992b2d10cca98a9444e9c4b6a3138fa556dabf282f7"
+    },
+    "full": {
+      "path": "build/recomp/command_dispatch_full_gate.log",
+      "sha256": "3e64aa0e39c2becf29ed786282cc7684ea6913a70f16ae7ac8bb6f54f88b75f4"
+    },
+    "live": {
+      "path": "build/recomp/command_dispatch_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    "probe": {
+      "path": "build/recomp/command_dispatch_probe_gate.log",
+      "sha256": "2a463175771e4b5682c5fd1cdfa97ec5f261e9fed1ef06ad4a656d5a45be0b8e"
+    }
+  },
+  "next_batch": "Audit remaining complete command/context publisher peers and the postflight-mode scheduler family; preserve true child owners."
+}

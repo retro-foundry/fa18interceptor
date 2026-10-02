@@ -1,5 +1,6 @@
 /* Small update stages. */
 #include "stages.h"
+#include "command_publication.h"
 
 #include "cockpit.h"
 #include "audio.h"
@@ -105,24 +106,7 @@ void start_view_mode_zero(uint8_t raw_key) {
         request_cockpit_redraw();
         wr_u16(LINE_LAST_ROW, 0x90);
     }
-    if (!rd_u8(KEY_TAKEN) && !(raw_key & 0x80)) {
-        int8_t count;
-        wr_u8(KEY_TAKEN, 1);
-        count = rd_s8(KEY_COUNT);
-        if (count < 10) {
-            int8_t slot = rd_s8(KEY_WRITE);
-            int8_t dst = rd_s8(KEY_TRANSLATED_WRITE);
-            if (slot >= 10) slot = 0;
-            wr_u8(KEY_RAW + (gaddr)(int32_t)slot, raw_key);
-            wr_u8(KEY_WRITE, (uint8_t)(slot + 1));
-            wr_u8(KEY_COUNT, (uint8_t)(count + 1));
-            wr_u8(KEY_TRANSLATED + (gaddr)(int32_t)dst,
-                  rd_u8(0xC331CEu + raw_key));
-        }
-    }
-    wr_u8(0xC45878u, 0);
-    wr_u8(0xC45879u, 0);
-    wr_u8(0xC4587Au, 0);
+    publish_command_event(raw_key,NULL);
 }
 
 void update_view_controls(void) {
