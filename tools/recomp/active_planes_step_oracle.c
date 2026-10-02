@@ -71,6 +71,32 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if ((pc >= 0xC0DAEEu && pc < 0xC0DB42u) ||
+        (pc >= 0xC2EC70u && pc < 0xC2ED6Cu) ||
+        (pc >= 0xC2F1B8u && pc < 0xC2F482u)) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[3] + i * 4, next_value());
+            wr_u32(REG_A[4] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+        if (pc == 0xC2ECCAu || pc == 0xC2ECDCu) {
+            static const uint32_t dividends[] = {
+                0, 1, 0xffffffffu, 0x80000000u, 0x7fffffffu,
+                0xffff0000u, 0x00008000u, 0x00010000u
+            };
+            static const uint16_t divisors[] = {0, 1, 0xffff, 2, 0xfffe, 0x7fff, 0x8000, 17};
+            REG_D[pc == 0xC2ECCAu ? 0 : 1] = dividends[scenario % 8u];
+            REG_D[2] = (REG_D[2] & 0xffff0000u) | divisors[(scenario / 4u) % 8u];
+        }
+    }
     if ((pc >= 0xC122A2u && pc < 0xC123FAu) ||
         (pc >= 0xC1C2C8u && pc < 0xC1C40Cu) ||
         (pc >= 0xC1C54Eu && pc < 0xC1C63Eu) ||
@@ -386,6 +412,11 @@ static void fixture(uint32_t pc, unsigned scenario) {
             wr_u8(REG_A[0] + i, (uint8_t)next_value());
             wr_u32(REG_A[3] + i * 4, next_value());
         }
+    }
+    if (pc >= 0xC2F2CAu && pc < 0xC2F47Eu) {
+        /* The source's four-plane circle loop uses A2 as the custom base.
+         * Set it after fixture RAM seeding so setup itself does not touch MMIO. */
+        REG_A[2] = 0xDFF000u;
     }
     REG_PC = pc;
     fa18_cycle_origin = 100000000;

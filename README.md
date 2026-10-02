@@ -15,13 +15,13 @@ Hand-written C is replacing the translated routines in source-backed batches;
 419 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-The immediate work is game timing parity. Twelve further flight, projection
-and cockpit helpers match all recorded frames and sealed final RAM in isolation;
-175 registered entries now have source timing. The first flight-update call
-and enclosing updates through the first map return now match. The complete
-registered demo still matches through frame 415; the matrix marker and its
-projection children are the next timing target. See the
-[timing evidence](analysis/routines/native_c_flight_update_timing_batch.md).
+The immediate work is game timing parity. Seven further marker, projection
+and circle helpers match all recorded frames and sealed final RAM in isolation;
+182 registered entries now have source timing. The enclosing first update
+matches through the first scene-stream return. The complete registered demo
+still matches through frame 415; face-orientation predicates are the next
+source-timing target. See the
+[timing evidence](analysis/routines/native_c_marker_projection_timing_batch.md).
 
 See [STATUS.md](STATUS.md) for the numbers,
 [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) for the next steps, and

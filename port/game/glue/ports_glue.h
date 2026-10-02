@@ -626,6 +626,14 @@ int glue_C2ECA4(void);
 int glue_C1FE24(void);
 int glue_C1FE46(void);
 int glue_C0DAEE(void);
+int glue_C0DAEE_step(void);
+int glue_C2EC90_step(void);
+int glue_C2EC94_step(void);
+int glue_C2EC9C_step(void);
+int glue_C2ECA4_step(void);
+int glue_C2F1C0_step(void);
+int glue_C06C02_step(void);
+
 int glue_C17F8C(void);
 int glue_C18108(void);
 int glue_C1B906(void);

@@ -132,3 +132,8 @@ scaffolding are removed after recording evidence; small proof logs/reports
 remain cached. C1D10C remains the next unregistered readable-C count batch.
 Complete game source, then native backend and necessary OS replacement remain
 the full objective.
+
+Followup: native_c_marker_projection_timing_batch.md records the seven-entry
+marker/projection/circle family. The marker now returns exactly; nested traces
+locate the next gap after C1FB82 in the tested-face path. The observations
+above remain the evidence for this earlier twelve-entry baseline.
