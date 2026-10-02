@@ -1,0 +1,222 @@
+{
+  "entry": "C1D10C",
+  "registered": true,
+  "registered_entries": 423,
+  "registered_timing_entries": 206,
+  "source_parent_instructions": 648,
+  "scope": "Complete readable domain, normal caller CPU adapter and resumable source timing",
+  "production_return_masks": {
+    "C1C924": "FFFF/FF/1A",
+    "C1C94A": "FFFF/FF/00",
+    "C1C982": "FFFF/FF/00"
+  },
+  "adapter_comparison": "All sixteen registers and high words, PC, SR control/NVC; original caller masks retained",
+  "structural": {
+    "cases": 8192,
+    "private_stack_exclusion_bytes": 128,
+    "contexts": {
+      "A": 2049,
+      "B": 2048,
+      "append": 4095
+    },
+    "empty": 1419,
+    "cache_limit": 2743,
+    "linked_copies": 1941,
+    "recoverable_shift_errors": 621,
+    "fixture_path": "build/recomp/template_demo01_shadow_call1.bin",
+    "fixture_bytes": 1048648,
+    "fixture_sha256": "20ea1bc45df9630a457aa7eedcd9f380aa571f8afdb2a850772cc9aa54fbee6e",
+    "limitations": [
+      "Zero-count descriptor DBRA path preserved but not independently exercised by complete structural fixtures"
+    ]
+  },
+  "isolated_normal_whole_call": {
+    "recorded": {
+      "demo01": {
+        "shadow": {
+          "entry": "C1D10C",
+          "name": "refresh_template_placements_adapter",
+          "calls": 800,
+          "compared": 343,
+          "matched": 343,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 457,
+          "mean_cycles": 63132,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C1D10C",
+          "name": "refresh_template_placements_adapter",
+          "calls": 800,
+          "compared": 800,
+          "matched": 800,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 84581,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "qual_carrier_success": {
+        "shadow": {
+          "entry": "C1D10C",
+          "name": "refresh_template_placements_adapter",
+          "calls": 204,
+          "compared": 134,
+          "matched": 134,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 70,
+          "mean_cycles": 47827,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C1D10C",
+          "name": "refresh_template_placements_adapter",
+          "calls": 219,
+          "compared": 219,
+          "matched": 219,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 47031,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "qual_fail_crashes": {
+        "shadow": {
+          "entry": "C1D10C",
+          "name": "refresh_template_placements_adapter",
+          "calls": 27,
+          "compared": 15,
+          "matched": 15,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 12,
+          "mean_cycles": 33208,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C1D10C",
+          "name": "refresh_template_placements_adapter",
+          "calls": 27,
+          "compared": 27,
+          "matched": 27,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 55037,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      }
+    },
+    "shadow_matches": 492,
+    "sandbox_matches": 1046,
+    "shadow_incomplete": 539,
+    "mismatches": 0,
+    "hardware": 0,
+    "generic_gate_passed": true
+  },
+  "isolated_timing": {
+    "entries": [
+      "C1D10C",
+      "C1D722",
+      "C1D3F4",
+      "C1D4E4",
+      "C1D520",
+      "C1D5D8",
+      "C06C02"
+    ],
+    "instructions": 681,
+    "dma_cases": 21792,
+    "short_demo_frames": 600,
+    "full_frames": 36236,
+    "recordings": {
+      "demo01": {
+        "frames": 20833,
+        "iterations": 4892,
+        "final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
+      },
+      "qual_carrier_success": {
+        "frames": 12353,
+        "iterations": 8038,
+        "final_ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
+      },
+      "qual_fail_crashes": {
+        "frames": 3050,
+        "iterations": 3082,
+        "final_ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
+      }
+    },
+    "rgb_exact": true,
+    "sealed_final_ram_exact": true
+  },
+  "fresh_combined_instruction_oracle": {
+    "instructions": 11303,
+    "dma_cases": 361696
+  },
+  "full_registered_gate": {
+    "recorded_totals": {
+      "shadow": {
+        "matched": 669031,
+        "mismatched": 0,
+        "hardware": 15996,
+        "incomplete": 29375,
+        "parent": {
+          "matched": 492,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 539
+        }
+      },
+      "sandbox": {
+        "matched": 1075296,
+        "mismatched": 0,
+        "hardware": 17026,
+        "incomplete": 409031,
+        "parent": {
+          "matched": 1067,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "shadow_matches": 669031,
+    "sandbox_matches": 1075296,
+    "mismatches": 0,
+    "sealed_final_ram_exact": true,
+    "poison_frames_identical": true
+  },
+  "all_demo_probe": {
+    "frames": 600,
+    "first_difference_frame": 416,
+    "changed_pixels": 361
+  },
+  "builds": [
+    "GNU headless",
+    "MSVC Release"
+  ],
+  "build_size_gib": 0.271,
+  "deferred_copper_fade": {
+    "user_instruction_date": "2026-10-02",
+    "scope": "Minor fade difference deferred; automated comparisons unchanged",
+    "reset_source_all": [
+      393,
+      394
+    ],
+    "terminal_source_all": [
+      436,
+      437
+    ],
+    "evidence": "analysis/routines/native_c_scene_transition_timing.md"
+  },
+  "next": "Complete readable parent batches; retain deferred frame-313 HUD/countdown evidence for later parity work"
+}

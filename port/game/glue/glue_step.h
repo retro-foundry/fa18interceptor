@@ -140,8 +140,6 @@ static inline void step_asl_long(uint32_t *reg, unsigned count) {
         if (count < 32) {
             mask = 0xFFFFFFFFu << (31 - count);
             old &= mask; FLAG_V = (old != 0 && old != mask) << 7;
-        } else if (count == 32) {
-            FLAG_V = (old != 0 && old != 0xFFFFFFFFu) << 7;
         } else FLAG_V = (old != 0) << 7;
     }
     *reg = result; USE_CYCLES(count << CYC_SHIFT);

@@ -17,6 +17,7 @@
 
 extern int fa18_write_log_active;
 extern int64_t fa18_cycle_origin, fa18_next_event;
+extern int glue_C1D10C(void);
 
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *file = fopen(path, "rb");
@@ -166,6 +167,8 @@ static int source_call(uint32_t return_pc, uint32_t return_sp) {
 }
 
 int main(int argc, char **argv) {
+    int glue = argc > 1 && !strcmp(argv[argc - 1], "--glue");
+    if (glue) --argc;
     size_t state_size = 0, rom_size = 0, fixture_size = 0;
     uint8_t *state = read_file("captures/native/demo01/state.bin", &state_size);
     uint8_t *rom = read_file("local/system/kick13.rom", &rom_size);
@@ -190,6 +193,7 @@ int main(int argc, char **argv) {
     for (scenario = 0; scenario < count; ++scenario) {
         unsigned i;
         uint32_t return_pc, return_sp;
+        uint32_t expected_registers[16], expected_sr;
         int result;
         memcpy(m->chip, entry + sizeof registers, FA18_CHIP_SIZE);
         memcpy(m->slow, entry + sizeof registers + FA18_CHIP_SIZE, FA18_SLOW_SIZE);
@@ -221,8 +225,22 @@ int main(int argc, char **argv) {
         recoverable += rd_u16(ERROR_CODE) == 0x0f;
         memcpy(reference, m->chip, FA18_CHIP_SIZE);
         memcpy(reference + FA18_CHIP_SIZE, m->slow, FA18_SLOW_SIZE);
+        for (i = 0; i < 16; ++i) expected_registers[i] = REG_DA[i];
+        expected_sr = m68k_get_reg(NULL, M68K_REG_SR);
         memcpy(m, before, sizeof *m); m68k_set_context(cpu);
-        refresh_template_placements(); fa18_write_log_active = 0;
+        if (glue) glue_C1D10C(); else refresh_template_placements();
+        fa18_write_log_active = 0;
+        if (glue) {
+            for (i = 0; i < 16; ++i) if (REG_DA[i] != expected_registers[i]) {
+                fprintf(stderr, "template oracle: case %u %c%u source %08X C %08X\n",
+                        scenario, i < 8 ? 'D' : 'A', i & 7u, expected_registers[i], REG_DA[i]); return 1;
+            }
+            if ((REG_PC & 0xffffffu) != return_pc
+                || ((m68k_get_reg(NULL, M68K_REG_SR) ^ expected_sr) & 0xff0bu)) {
+                fprintf(stderr, "template oracle: case %u PC/SR control/NVC mismatch PC %06X/%06X SR %04X/%04X\n",
+                        scenario, return_pc, REG_PC, expected_sr, m68k_get_reg(NULL, M68K_REG_SR)); return 1;
+            }
+        }
         for (i = 0; i < FA18_CHIP_SIZE + FA18_SLOW_SIZE; ++i) {
             uint8_t got = i < FA18_CHIP_SIZE ? m->chip[i] : m->slow[i - FA18_CHIP_SIZE];
             gaddr address = i < FA18_CHIP_SIZE ? i : i - FA18_CHIP_SIZE + FA18_SLOW_BASE;
@@ -236,8 +254,8 @@ int main(int argc, char **argv) {
             }
         }
     }
-    printf("template oracle: %u complete C1D10C domain calls matched original Chip/Slow RAM outside 128-byte private stack\n",
-           count);
+    printf("template oracle: %u complete C1D10C %s calls matched original Chip/Slow RAM outside 128-byte private stack%s\n",
+           count, glue ? "adapter" : "domain", glue ? " and all caller-live CPU outputs" : "");
     printf("contexts A/B/append %u/%u/%u; empty %u, capped %u, linked-copies %u, recoverable-shift %u\n",
            modes[0], modes[1], modes[2], empty, capped, linked, recoverable);
     free(entry); free(cpu); free(reference); free(before); free(m); return 0;

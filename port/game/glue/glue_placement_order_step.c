@@ -4,57 +4,7 @@
 #include "glue_renderer_step_math.h"
 #include <stdlib.h>
 
-/* Only the operand forms used by this source family are accepted. */
-static uint32_t placement_address(unsigned mode, unsigned reg, unsigned width) {
-    uint32_t address;
-    switch (mode) {
-    case 2: return A(reg);
-    case 3: address = A(reg); A(reg) += width; return address;
-    case 4: A(reg) -= width; return A(reg);
-    case 5: return step_displacement(A(reg));
-    case 6: return step_indexed(A(reg));
-    case 7:
-        if (reg == 1) return m68ki_read_imm_32();
-        break;
-    }
-    abort();
-}
-
-static uint32_t placement_read_memory(uint32_t address, unsigned width) {
-    if (width == 1) return m68k_read_memory_8(address);
-    if (width == 2) return m68k_read_memory_16(address);
-    return m68k_read_memory_32(address);
-}
-static void placement_write_memory(uint32_t address, uint32_t value,
-                                   unsigned width, int predecrement) {
-    if (width == 1) m68k_write_memory_8(address, value);
-    else if (width == 2) step_write_word(address, value);
-    else if (predecrement) {
-        m68k_write_memory_16(address + 2, value);
-        m68k_write_memory_16(address, value >> 16);
-    } else step_write_long(address, value);
-}
-static uint32_t placement_read(unsigned mode, unsigned reg, unsigned width) {
-    if (mode == 0) return D(reg);
-    if (mode == 1) return A(reg);
-    if (mode == 7 && reg == 4)
-        return width == 4 ? m68ki_read_imm_32() : m68ki_read_imm_16();
-    return placement_read_memory(placement_address(mode, reg, width), width);
-}
-static void placement_logic(uint32_t value, unsigned width) {
-    if (width == 1) flags_logic_b(value);
-    else if (width == 2) flags_logic_w(value);
-    else flags_logic_l(value);
-}
-static void placement_write(unsigned mode, unsigned reg, unsigned width, uint32_t value) {
-    if (mode == 0) {
-        if (width == 1) SET_B(D(reg), value);
-        else if (width == 2) SET_W(D(reg), value);
-        else D(reg) = value;
-    } else if (mode == 1) {
-        A(reg) = width == 2 ? (uint32_t)(int32_t)(int16_t)value : value;
-    } else placement_write_memory(placement_address(mode, reg, width), value, width, mode == 4);
-}
+#include "glue_cache_step_operands.h"
 
 static int placement_step(uint32_t first, uint32_t end) {
     uint32_t pc = REG_PC, value, address, other;
@@ -78,7 +28,7 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1E980: case 0xC1E988: case 0xC1EA74: case 0xC1EA7C:
     case 0xC1EAF6: case 0xC1EAFC: case 0xC1EB14: case 0xC1EB16:
     case 0xC1EB28: case 0xC1EC60:
-        A(destination) = placement_address(mode, reg, 4); break;
+        A(destination) = cache_step_address(mode, reg, 4); break;
     case 0xC1E54A: case 0xC1EBF8: case 0xC1EBFA: case 0xC1ECD4:
     case 0xC1ECE6: case 0xC1ECFC: case 0xC1ED12:
         D(destination) = (uint32_t)(int32_t)(int8_t)opcode;
@@ -118,16 +68,16 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1E802: case 0xC1E890: case 0xC1E956: case 0xC1E95C:
     case 0xC1E960: case 0xC1EA5A: case 0xC1EC80:
         width = (opcode >> 12) == 1 ? 1 : (opcode >> 12) == 3 ? 2 : 4;
-        value = placement_read(mode, reg, width);
+        value = cache_step_read(mode, reg, width);
         mode = (opcode >> 6) & 7u;
-        placement_write(mode, destination, width, value);
-        if (mode != 1) placement_logic(value, width);
+        cache_step_write(mode, destination, width, value);
+        if (mode != 1) cache_step_logic(value, width);
         break;
     case 0xC1E54C: case 0xC1E656: case 0xC1E93E: case 0xC1E94E:
     case 0xC1EA54: case 0xC1EB2C: case 0xC1EB80: case 0xC1E864:
     case 0xC1EA4E:
         width = (opcode & 0x40u) ? 2 : 4;
-        placement_logic(placement_read(mode, reg, width), width); break;
+        cache_step_logic(cache_step_read(mode, reg, width), width); break;
     case 0xC1E556: case 0xC1E57E: case 0xC1E5A0: case 0xC1E5DA:
     case 0xC1E604: case 0xC1E614: case 0xC1E650: case 0xC1E672:
     case 0xC1E692: case 0xC1E6A2: case 0xC1E6FA: case 0xC1E73A:
@@ -172,7 +122,7 @@ static int placement_step(uint32_t first, uint32_t end) {
         step_dbf(pc, &D(reg)); break;
     case 0xC1E558: case 0xC1E584: case 0xC1EB38: case 0xC1EB8C:
         value = m68ki_read_imm_16();
-        step_compare_word(value, placement_read(mode, reg, 2)); break;
+        step_compare_word(value, cache_step_read(mode, reg, 2)); break;
     case 0xC1E894: case 0xC1E8DC: case 0xC1E8E0: case 0xC1E96C:
     case 0xC1E970: case 0xC1E974: case 0xC1EA64: case 0xC1EA68:
         value = m68ki_read_imm_16(); step_add_word(&D(reg), value); break;
@@ -187,12 +137,12 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1EAD8:
         width = (opcode & 0x40u) ? 2 : 1;
         other = m68ki_read_imm_16();
-        address = mode == 0 ? 0 : placement_address(mode, reg, width);
-        value = mode == 0 ? D(reg) : placement_read_memory(address, width);
+        address = mode == 0 ? 0 : cache_step_address(mode, reg, width);
+        value = mode == 0 ? D(reg) : cache_step_read_memory(address, width);
         value = (opcode & 0x0200u) ? value & other : value | other;
-        if (mode == 0) placement_write(0, reg, width, value);
-        else placement_write_memory(address, value, width, 0);
-        placement_logic(value, width); break;
+        if (mode == 0) cache_step_write(0, reg, width, value);
+        else cache_step_write_memory(address, value, width, 0);
+        cache_step_logic(value, width); break;
     case 0xC1E550: case 0xC1E640: case 0xC1E800: case 0xC1E832:
     case 0xC1E8D0: case 0xC1E95E: case 0xC1EADE: case 0xC1E598:
     case 0xC1E5EC: case 0xC1EA42: case 0xC1EAC8:
@@ -200,8 +150,8 @@ static int placement_step(uint32_t first, uint32_t end) {
         if (mode == 1) {
             if (opcode & 0x0100u) A(reg) -= value; else A(reg) += value;
         } else {
-            address = mode == 0 ? 0 : placement_address(mode, reg, 2);
-            other = mode == 0 ? D(reg) : placement_read_memory(address, 2);
+            address = mode == 0 ? 0 : cache_step_address(mode, reg, 2);
+            other = mode == 0 ? D(reg) : cache_step_read_memory(address, 2);
             if (opcode & 0x0100u) step_subtract_word(&other, value);
             else step_add_word(&other, value);
             if (mode == 0) SET_W(D(reg), other);
@@ -213,7 +163,7 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1EB50: case 0xC1EB54: case 0xC1EB7A: case 0xC1EBA0:
     case 0xC1EBA4: case 0xC1EC66: case 0xC1E55E: case 0xC1E59C:
     case 0xC1E5F0:
-        value = (uint32_t)(int32_t)(int16_t)placement_read(mode, reg, 2);
+        value = (uint32_t)(int32_t)(int16_t)cache_step_read(mode, reg, 2);
         if ((opcode >> 12) == 9) A(destination) -= value;
         else A(destination) += value;
         break;
@@ -250,7 +200,7 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1EAC4: case 0xC1ECE4: case 0xC1ECF8: case 0xC1ED10:
     case 0xC1ED26:
         width = (opcode & 0x40u) ? 2 : 4;
-        value = placement_read(mode, reg, width);
+        value = cache_step_read(mode, reg, width);
         if (width == 2) step_add_word(&D(destination), value);
         else step_add_long(&D(destination), value); break;
     case 0xC1E812: case 0xC1E816: case 0xC1E8F2: case 0xC1E8F4:
@@ -264,14 +214,14 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1E9B6: case 0xC1E9BE: case 0xC1E9C6: case 0xC1E9EE:
     case 0xC1EA22: case 0xC1EA2C: case 0xC1EC28: case 0xC1EC2A:
         width = (opcode & 0x40u) ? 2 : 4;
-        value = placement_read(mode, reg, width);
+        value = cache_step_read(mode, reg, width);
         if (width == 2) step_subtract_word(&D(destination), value);
         else step_subtract_long(&D(destination), value); break;
     case 0xC1E8B2: case 0xC1E624: case 0xC1E62E: case 0xC1E638:
     case 0xC1E65E: case 0xC1E6B8: case 0xC1E6C4: case 0xC1E6D0:
     case 0xC1E75C: case 0xC1E7DC:
         width = (opcode & 0x40u) ? 2 : 4;
-        value = placement_read(mode, reg, width);
+        value = cache_step_read(mode, reg, width);
         if (width == 2) step_compare_word(value, D(destination));
         else step_compare_long(value, D(destination)); break;
     case 0xC1E674: case 0xC1E67A: case 0xC1E7F4: case 0xC1E7FA:
@@ -305,7 +255,7 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1EB76: case 0xC1EB98: case 0xC1EB9C:
         mask = m68ki_read_imm_16(); width = (opcode & 0x40u) ? 4 : 2;
         if (mode == 3 || mode == 4) address = A(reg);
-        else address = placement_address(mode, reg, width);
+        else address = cache_step_address(mode, reg, width);
         if (opcode & 0x0400u) renderer_load(address, mask, width, mode == 3 ? (int)reg : -1);
         else renderer_store(address, mask, width, mode == 4 ? (int)reg : -1);
         break;
@@ -316,9 +266,9 @@ static int placement_step(uint32_t first, uint32_t end) {
     case 0xC1E9FC: case 0xC1E9FE: case 0xC1EA00: case 0xC1EA36:
     case 0xC1EA38: case 0xC1EA3A: case 0xC1EA94: case 0xC1EA9A:
     case 0xC1EAC0: case 0xC1EAC2:
-        renderer_multiply(&D(destination), placement_read(mode, reg, 2)); break;
+        renderer_multiply(&D(destination), cache_step_read(mode, reg, 2)); break;
     case 0xC1E8B8:
-        step_write_word(placement_address(mode, reg, 2), 0); flags_logic_w(0); break;
+        step_write_word(cache_step_address(mode, reg, 2), 0); flags_logic_w(0); break;
     case 0xC1EC20: case 0xC1EC22: case 0xC1ECE0: case 0xC1ECF4:
     case 0xC1ED0C: case 0xC1ED22:
         step_swap(&D(reg)); break;

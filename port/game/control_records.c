@@ -458,6 +458,7 @@ static int file_bank(gaddr base, int stride, uint8_t kind, int16_t column, int16
             s->level = level;
             if (level < 0) fatal_error(error);
             s->level_offset = (int16_t)(level * 32);
+            s->level_offset_valid = 1;
             s->cursor = lists + (gaddr)(int32_t)(int16_t)(level * 96);
             end = s->cursor + 0x5D;
             wr_u32(LIST_END, end);
@@ -479,6 +480,7 @@ static int file_bank(gaddr base, int stride, uint8_t kind, int16_t column, int16
 }
 
 void file_records_by_level(int16_t column, int16_t row, gaddr lists, FilingState *state) {
+    state->level_offset_valid = 0;
     if (!rd_u8(CELL_CHECKS)) return;
     wr_u16(CELL_TIMER, 0x51);
     if (!file_bank(CONTROL_RECORDS, CONTROL_RECORD_BYTES, 0x10, column, row, lists, state, 0x0E)) return;

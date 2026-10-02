@@ -12,17 +12,19 @@ sealed native recordings. Work in related batches. The order is Stage D game C,
 Stage F native backend, then only the Stage E Kickstart services still needed.
 The user explicitly deferred OS work and asked for larger routine batches.
 After the C279D0 batch, the latest instruction is to return to game timing
-parity. After the planning review, finish the selector milestone at 423/624,
-then resume the demonstrated frame-313 HUD/countdown cause of the fade delay.
+parity. The selector milestone is complete at 423/624. The latest user
+instruction defers the minor Copper-fade difference: keep its frame-313
+HUD/countdown evidence for later and continue complete readable game batches.
+Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 422 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 688,103 completed shadow
-  calls and 1,111,316 sandbox calls across three native recordings, with zero
+- 423 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 669,031 completed shadow
+  calls and 1,075,296 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 422-entry baseline. GNU and
+  build/recomp/ports_report_*.json describe this 423-entry baseline. GNU and
   MSVC builds pass. In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -113,6 +115,14 @@ then resume the demonstrated frame-313 HUD/countdown cause of the fade delay.
   parent counts are 4,075 shadow / 5,796 sandbox, zero mismatches or hardware
   classifications. ALL remains 416/361. See
   analysis/routines/native_c_placement_order_domain.md.
+  The complete C1D10C template-placement parent is now registered as entry
+  423, with its normal CPU adapter and C1D722 source timing. There are 206
+  timing-step entries. All 8,192 structural adapter cases and 492 shadow /
+  1,046 sandbox isolated whole-call comparisons pass with original liveness.
+  The seven-entry isolated group matches all 36,236 live frames and sealed
+  RAM. Local timing passes 681 instructions / 21,792 DMA cases; the fresh
+  combined oracle passes 11,303 / 361,696. ALL remains 416/361. See
+  analysis/routines/native_c_template_placements_domain.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -298,7 +308,7 @@ nonregression checks, exact on all 36,236 frames and sealed RAM. The full
 call totals. GNU/MSVC pass. Independent instruction groups now total 9,696 /
 310,272 cases; the combined oracle was not rerun for these local groups.
 See analysis/routines/native_c_workspace_record_helpers.md. This was the
-421-entry checkpoint; C1E540 is now complete below and C1D10C remains for 423.
+421-entry checkpoint; both complete selector parents are now registered below.
 
 Latest visible checkpoint: the user's Copper-fade observation led to a
 verified correction. C0FAA4 and six root-setup entries now preserve source
@@ -341,23 +351,40 @@ are 204 timing-step entries. A fresh bounded ALL probe is still 416/361;
 coverage advanced, combined parity did not. Build/ is 0.228 GiB after cleanup.
 See analysis/routines/native_c_placement_order_domain.md and
 analysis/figures/native_placement_order_checkpoint.json. C1D10C is next for
-423/624; then return to the causal frame-313 HUD/fade checkpoint.
+423/624, as completed below. The user has since deferred the HUD/fade work.
 
-C1D10C domain milestone is now complete in port/game/template_placements.c/h:
+C1D10C integration milestone is now complete in port/game/template_placements.c/h:
 all selector packs, fourteen-band expansion, 24-byte cache emission, reverse
-linked descriptor copies and final control-list publication. It is not yet
-registered; coverage remains 422/624 and timing-step entries remain 204.
-All 8,192 original-instruction memory fixtures pass outside the source's
+linked descriptor copies and final control-list publication. It is registered
+as entry 423; there are 206 timing-step entries. All 8,192 complete adapter
+fixtures match original caller-live CPU outputs and RAM outside the source's
 bounded 128-byte private stack, including 2,743 cache-limit and 1,941 linked
-copy cases. Full isolated recorded domain checks pass 492 shadow / 1,046
+copy cases. Full isolated normal whole-call checks pass 492 shadow / 1,046
 sandbox calls, zero mismatches/hardware; 539 shadow calls are incomplete.
-These temporary domain-only masks preserve A6/A7 and prove no other CPU
-outputs. Production liveness and registry are unchanged. GNU/MSVC pass.
-The next action is the normal all-register/partial-width CPU adapter and
-complete parent timing, including C1D722; do not redo domain implementation
-or register the memory-only bridge. See
+Production caller masks are retained: all sixteen registers and all eight
+data-register high words, plus N/V/C at C1C924. The historical memory-only
+proof remains separately reproducible and is not the integration claim.
+The parent and C1D722 timing match 681 instructions / 21,792 DMA fixtures;
+a fresh combined oracle matches 11,303 / 361,696. The full registered gate
+passes 669,031 shadow / 1,075,296 sandbox calls, sealed RAM exact and poison
+identical. GNU/MSVC pass. The seven-entry isolated live group matches all
+36,236 frames and sealed final RAM across all three native recordings.
+ALL still first differs at 416/361; coverage advanced, combined parity did
+not. Build/ is 0.271 GiB after replay cleanup. Do not redo this selector
+milestone. See
 analysis/routines/native_c_template_placements_domain.md and
-analysis/figures/native_template_placements_domain_checkpoint.json.
+analysis/figures/native_template_placements_checkpoint.json. The earlier
+native_template_placements_domain_checkpoint.json is historical domain proof.
+
+Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
+difference may be ignored for current work and revisited later. Source/ALL
+reset writes are machine frames 393/394 and terminal writes 436/437; each
+fade step is three frames apart. The first visible RGB difference remains
+416/361. The delay is inherited between countdown ticks (313/342 versus
+313/343), with the demonstrated frame-313 HUD interaction preserved in
+analysis/routines/native_c_scene_transition_timing.md and
+analysis/figures/native_scene_countdown_checkpoint.json. This is an accepted
+deferral, not a parity fix or a change to automated comparisons.
 
 Gauge checkpoint completed after the planning review: $C30918 now has source
 timing. Its 35 instructions pass 1,120 DMA fixtures; all 36,236 isolated live
@@ -371,11 +398,12 @@ matches, zero mismatches, sealed RAM exact and poison identical. There are
 309,184 DMA cases (the combined oracle was not rerun for this local bridge).
 See analysis/routines/native_c_gauge_timing_checkpoint.md for byte hashes and
 call classifications. That was the first timing-only batch since the review. The
-next readable implementation work is item 2, the remaining selector parents; retain
+next readable implementation work is item 2, complete parent batches; retain
 item 1's failing combined checkpoint rather than chasing another early gap.
 
-1. Preserve the now-corrected initializer and the remaining frame-416
-   checkpoint while completing item 2 next. Later parity work must follow the
+1. Defer further Copper-fade timing work as the user requested. Preserve the
+   corrected initializer and remaining frame-416 checkpoint. When revisited,
+   parity work must follow the
    actual frame-313 update/countdown and the proven 17-entry HUD interaction,
    not return to an unrelated first cycle gap in frame 311. Compare
    C0FA0E/C0FA12/C0FA32 and terminal C1741A; original-code complements can
@@ -384,18 +412,14 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    Require a changed combined result before claiming improvement. Do not
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
-2. Make the next readable-source milestone explicit: complete the selector
-   family C1D10C, C1E540, C1EBB0 and C1EC84, aiming for 423/624 after proof.
-   C1E540 and the two helpers are now proven/registered. C1D10C's complete
-   domain and independent memory proof are ready; finish its CPU adapter
-   and source timing next, preserving the original caller masks.
-   C1E540's domain, live CPU adapter and parent/child event timing all pass
-   the independent and normal gates; do not repeat the narrower memory-only
-   milestone or count internal labels as extra routines.
-   C1D10C has 648 source instructions and no unported static children;
-   The completed C1E540 has 523 and reuses the proven 11/23-instruction
-   C1EBB0/C1EC84 helpers.
-   Reuse the existing terrain selector, template and placement groundwork.
+2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84 is complete and
+   registered at 423/624. Preserve normal caller masks and the independent
+   CPU, memory and timing proofs; do not repeat the memory-only milestones
+   or count internal labels as extra routines. Inspect C1CB14/C1CB26 and
+   C0F5F8 as subsequent complete parent batches; the leaf tool excludes
+   their indirect calls. Select using source-owned semantics and explicit
+   child contracts, without reopening the deferred fade investigation.
+   Reuse the existing terrain, template and placement groundwork.
    Preserve all shared spans, emission/cache paths and signed word behavior;
    do not count prefixes or internal labels as completed functions.
    Plan original-byte entry/exit checkpoints for each source-owned selector
@@ -407,8 +431,8 @@ item 1's failing combined checkpoint rather than chasing another early gap.
 3. Keep parity and source coverage as separate measured outcomes. Do not
    spend another chain of timing-only batches without moving either ALL's
    first difference or readable coverage. Review after at most two such
-   batches; if ALL still does not improve, return to the complete selector
-   family while retaining the failing renderer checkpoint. This is a work
+   batches; if ALL still does not improve, return to complete readable parent
+   batches while retaining the failing renderer checkpoint. This is a work
    selection limit, not permission to weaken proofs or declare parity done.
    Inspect C1CB14/C1CB26 and C0F5F8 as later complete parent batches; the
    leaf tool excludes their indirect calls. Preserve explicit child contracts.
@@ -449,7 +473,7 @@ item 1's failing combined checkpoint rather than chasing another early gap.
   `& 'C:\Program Files\Git\bin\bash.exe' scripts/recomp_live_check.sh`.
   The same ON replay now also checks sealed final RAM, saving three extra
   replays per batch. Recordings run concurrently; temporary RGB/RAM outputs
-  are removed. The latest completed batch leaves build/ at 0.228 GiB. An
+  are removed. Build size is recorded with each integration checkpoint. An
   inactive entry needs temporary registration for a probe and must be removed
   if live output differs. A stepped SHADOW stream is not the live source
   oracle because source-first hardware-input replay can alter its timing.

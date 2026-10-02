@@ -219,6 +219,7 @@ void update_record_56_from_66(void);
 typedef struct {
     int8_t level; /* level of the last record filed ($FF: none) */
     int16_t level_offset; /* that level's list offset / 3 (level * 32) */
+    int level_offset_valid; /* a filing pass selected a level this call */
     int index;    /* record index where filing stopped (16: all) */
     gaddr cursor; /* the list position last used */
 } FilingState;

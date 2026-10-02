@@ -1,11 +1,11 @@
-# Complete template-placement domain: C1D10C
+# Complete template-placement parent: C1D10C
 
 2026-10-02. `port/game/template_placements.c` recreates the complete memory
-behavior of the 648-instruction $C1D10C parent. The domain is independently
-proven but **not registered**: readable coverage remains 422/624, with 204
-registered timing-step entries. Its normal CPU adapter and instruction/event
-timing are the next implementation work. This is not an integration or live
-frame-parity claim.
+behavior of the 648-instruction $C1D10C parent. Its complete normal CPU adapter
+and resumable source timing are now independently proven and registered:
+readable coverage is 423/624, with 206 registered timing-step entries.
+The earlier domain-only checkpoint remains historical evidence, separately
+reproducible without claiming CPU or live timing parity.
 
 ## Complete source contract
 
@@ -67,7 +67,7 @@ The complete source contains several consequential distinctions:
 `tools/recomp/check_template_placements.py --recorded` builds an isolated
 single-entry registry. Its temporary caller masks retain A6/A7 only, so it
 proves domain memory, not CPU results. Production `ports.c` and the generated
-liveness table remain unchanged. The normal masks retain all sixteen
+liveness table are not relaxed by that proof. The normal masks retain all sixteen
 registers and all eight data-register high words at $C1C924/$C1C94A/$C1C982;
 $C1C924 also retains N/V/C.
 
@@ -111,16 +111,65 @@ python tools/recomp/check_template_placements.py --fixture build/recomp/template
 python tools/recomp/check_template_placements.py --recorded
 ```
 
-## Next integration work
+## Normal CPU adapter and source timing
 
-Publish semantic expansion, placement and descriptor-copy outputs for the
-normal CPU adapter, preserving all live register widths and N/V/C without
-repeating child writes. Add the complete parent timing bridge and replace
-$C1D722's fixed charge with its 33 source instructions; the other static
-children already have timing steps. Prove the adapter separately with original
-liveness, then run instruction/DMA, isolated live RGB/sealed RAM, and full
-shadow/sandbox/sealed-RAM/poison gates before registering entry 423.
+Synchronous domain observations publish actual expansion, placement and
+descriptor-copy results. `glue_template_placements.c` reconstructs the live
+register widths and N/V/C without repeating children or memory writes.
+The shared cell-output preparation is read-only; filing explicitly reports
+whether it selected a level offset so an unchanged high word is preserved.
+All CPU, CCR and source-instruction effects remain in `port/game/glue`.
 
-After that milestone, return to the causal frame-313 HUD/countdown checkpoint.
-The Copper fade remains one frame late (reset 394 versus 393, terminal write
-437 versus 436); this domain-only work does not change the registered path.
+Both `check_template_placements.py --recorded --glue` and the generic
+`check_whole_call_glue.py C1D10C` retain the original caller masks and match
+492 shadow / 1,046 sandbox calls across all three recordings. Per-recording
+counts are identical to the domain table above. All 539 incomplete shadow
+calls retain that classification; there are zero mismatches/hardware cases.
+The structural adapter oracle independently matches all 8,192 fixtures,
+checking all sixteen registers (including all high words and A6/A7), PC,
+SR control bits and N/V/C, plus RAM outside only the 128-byte private stack.
+The liveness mask `1A` encodes N/V/C in the runner's X,N,Z,V,C order;
+the corresponding actual SR-bit comparison mask is `0B`.
+
+`glue_template_placements_step.c` implements the complete bounded parent
+and replaces $C1D722's fixed charge with its 33 source instructions. The
+parent's broad address span encloses existing cell-expansion source islands;
+those PCs delegate to the proven $C1D3F4 bridge before fetching instructions.
+The 681 local source instructions pass 21,792 DMA-contention cases comparing
+registers, full SR, PC, cycles and RAM. A fresh combined oracle passes
+11,303 instructions / 361,696 cases. It exposed a shared ASL edge case:
+shifting an all-ones operand by its full word/long width must set overflow.
+Both shared math helpers now preserve the original CPU behavior.
+
+The full 423-entry registered gate passes 669,031 completed shadow and
+1,075,296 sandbox comparisons, zero mismatches, sealed final RAM exact and
+poison frames identical. Aggregate calls decrease when the parent absorbs
+child calls. The registered parent itself has 492 shadow / 1,067 sandbox
+matches, zero mismatches/hardware and 539 incomplete shadow calls; the full
+registry can change call counts relative to its single-entry control.
+GNU headless and MSVC Release builds pass. Build/ is 0.271 GiB after replay
+cleanup; no bulk RGB scratch streams remain.
+
+Reproduction commands for the integration proof:
+
+```text
+python tools/recomp/check_template_placements.py --recorded --glue --capture-call 9
+python tools/recomp/check_template_placements.py --glue --fixture build/recomp/template_demo01_shadow_call1.bin --cases 8192
+python tools/recomp/check_whole_call_glue.py C1D10C
+python tools/recomp/check_active_planes_step.py --group template_placements --bus
+python tools/recomp/check_active_planes_step.py --group all --bus
+```
+
+The isolated seven-entry live group matches all 36,236 frames and sealed
+final RAM (demo01 20,833; carrier success 12,353; qualification failure 3,050).
+The bounded group also matches through demo frame 600;
+ALL still first differs at frame 416 by 361 pixels. This advances readable
+coverage without claiming a combined parity improvement. The full live gate
+uses `PORTS_ONLY=C1D10C,C1D722,C1D3F4,C1D4E4,C1D520,C1D5D8,C06C02`.
+The integration checkpoint is
+`analysis/figures/native_template_placements_checkpoint.json`.
+
+The user deferred the minor Copper fade on 2026-10-02. Preserve its source/ALL
+reset 393/394 and terminal 436/437 comparisons and the causal frame-313
+HUD/countdown evidence for later; continue complete readable parent batches.
+This deferral does not change automated parity comparisons.

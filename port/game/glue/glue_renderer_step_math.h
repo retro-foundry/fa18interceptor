@@ -28,8 +28,7 @@ static void renderer_asl_word(uint32_t *reg, unsigned count) {
         if (count < 16) {
             mask = (0xffffu << (15 - count)) & 0xffffu;
             old &= mask; FLAG_V = (old != 0 && old != mask) << 7;
-        } else if (count == 16) FLAG_V = (old != 0 && old != 0xffffu) << 7;
-        else FLAG_V = (old != 0) << 7;
+        } else FLAG_V = (old != 0) << 7;
     }
     USE_CYCLES(count << CYC_SHIFT);
 }

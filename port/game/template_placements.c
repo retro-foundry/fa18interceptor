@@ -35,7 +35,13 @@ typedef struct {
     gaddr origin_pairs, translation_pairs, row_helpers, group_helpers, translate;
     int16_t column_term, row_term;
     int8_t selector;
+    const TemplatePlacementObserver *observer;
 } TemplateContext;
+
+static void publish(const TemplateContext *c, TemplatePlacementEvent event) {
+    if (c->observer && c->observer->observe)
+        c->observer->observe(c->observer->context, &event);
+}
 
 static int16_t word_add(int32_t a, int32_t b) { return (int16_t)((uint32_t)a + (uint32_t)b); }
 static int32_t long_add(int32_t a, int32_t b) { return (int32_t)((uint32_t)a + (uint32_t)b); }
@@ -56,10 +62,11 @@ static int16_t word_lsl(uint16_t a, unsigned count) {
 static gaddr at_word(gaddr base, int32_t offset) { return base + (gaddr)(int32_t)(int16_t)offset; }
 
 /* $C1D10C-$C1D272: three source-owned packs share the helper maps. */
-static TemplateContext select_context(void) {
+static TemplateContext select_context(const TemplatePlacementObserver *observer) {
     TemplateContext c;
     gaddr terms;
     int16_t mapped;
+    c.observer = observer;
     wr_u8(DERIVED_ROOT, 0);
     if (rd_u8(CELL_CHECKS)) {
         c.root = rd_u8(ROUTE_FLAG) ? ROOT_ROUTE : ROOT_NORMAL;
@@ -87,16 +94,20 @@ static TemplateContext select_context(void) {
     c.row_helpers = at_word(ROW_HELPERS, mapped * 8);
     c.group_helpers = at_word(GROUP_HELPERS, mapped * 16);
     c.translate = at_word(CONTROL_TRANSLATE, mapped * 24);
+    publish(&c, (TemplatePlacementEvent){.phase=TEMPLATE_HELPERS,
+        .word=mapped, .table=c.translate});
     return c;
 }
 
 static gaddr control_cursor(const TemplateContext *c) {
-    int16_t offset, extra;
+    int16_t offset, extra = 0;
+    gaddr helper = 0;
     if (rd_u8(DERIVED_ROOT)) {
         int8_t selector = rd_s8(SELECTOR_A);
         int16_t mapped = rd_s8(at_word(SELECTOR_MAP, selector));
         offset = word_lsl(rd_s8(at_word(CURSOR_MAP, selector)), 5);
         extra = rd_s8(at_word(at_word(GROUP_HELPERS, mapped * 16), rd_s8(SELECTOR_B)));
+        helper = at_word(GROUP_HELPERS, mapped * 16);
         offset = word_add(offset, word_add(extra, extra));
     } else {
         offset = rd_s8(at_word(CURSOR_MAP, c->selector));
@@ -112,6 +123,9 @@ static gaddr control_cursor(const TemplateContext *c) {
     }
     offset = rd_s16(at_word(c->root, offset));
     if (offset <= 0) fatal_error(0x42);
+    publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_CURSOR,
+        .cursor=at_word(c->root, offset), .word=offset, .extra=extra,
+        .table=helper, .flags=rd_u8(DERIVED_ROOT) || !rd_u8(ROUTE_FLAG)});
     return at_word(c->root, offset);
 }
 
@@ -123,13 +137,14 @@ static int16_t band_term(int16_t term, int8_t delta, int16_t maximum) {
 }
 
 static void expand_bands(const TemplateContext *c, gaddr cursor) {
-    gaddr markers = WORKSPACE, band = WORKSPACE;
-    int remaining = 14, i;
-    for (i = 0; i < 14; ++i) fill_column(&markers, 0xFFFF, CELL_BYTES);
+    gaddr band = WORKSPACE;
+    int remaining = 14;
     for (;;) {
         int8_t type = rd_s8(cursor++), skip;
         int16_t mapped, maximum, column, row;
         FilingState filing = {0};
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_BAND_TYPE,
+            .type=(uint8_t)type, .cursor=cursor});
         if (type < 0) break;
         if (--remaining < 0) fatal_error(0x0D);
         if (type > 20) fatal_error(0x0C);
@@ -137,9 +152,15 @@ static void expand_bands(const TemplateContext *c, gaddr cursor) {
         maximum = rd_u8(CELL_CHECKS) ? 127 : 30;
         column = band_term(c->column_term, rd_s8(at_word(CONTROL_DELTAS, mapped)), maximum);
         row = band_term(c->row_term, rd_s8(at_word(CONTROL_DELTAS, word_add(mapped, 1))), maximum);
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_EXPAND_BEGIN,
+            .x=row, .y=column, .word=maximum, .extra=rd_s8(at_word(CONTROL_DELTAS, word_add(mapped, 1))),
+            .cursor=CONTROL_DELTAS, .cell=band, .table=c->templates, .other=c->gates});
         expand_cell_templates(row, column, c->templates, c->gates, band, CONTROL_DELTAS, &filing);
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_EXPAND_END, .filing=&filing});
         skip = rd_s8(cursor++); cursor = at_word(cursor, skip);
         band += BAND_BYTES;
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_BAND_NEXT,
+            .cursor=cursor, .cell=band, .word=skip});
     }
     wr_u16(CELL_TIMER, 0x52);
 }
@@ -152,9 +173,9 @@ static int32_t magnitude_add(int32_t value, int32_t adjustment, unsigned shift) 
     return long_asr(sum, shift);
 }
 
-static unsigned placement_shift(uint8_t flags, uint16_t index, int32_t x, int32_t z) {
+static unsigned placement_shift(const TemplateContext *c, uint8_t flags, uint16_t index, int32_t x, int32_t z) {
     gaddr components = GRID_ADJUST_WORDS;
-    int32_t y;
+    int32_t y, x_magnitude, z_magnitude;
     int16_t maximum, other;
     uint16_t shift_index;
     if (flags & 0x10u) {
@@ -164,9 +185,11 @@ static unsigned placement_shift(uint8_t flags, uint16_t index, int32_t x, int32_
             wr_u8(components + 1, rd_u8(components + 1) & ~4u);
         x = long_add(x, rd_u16(components + 12) & 0x0FFFu);
     }
-    maximum = (int16_t)magnitude_add(x, rd_s16(PROJECTION_WORDS), 12);
+    x_magnitude = magnitude_add(x, rd_s16(PROJECTION_WORDS), 12);
+    maximum = (int16_t)x_magnitude;
     if (flags & 0x50u) z = long_add(z, rd_u16(components + 14) & 0x0FFFu);
-    other = (int16_t)magnitude_add(z, rd_s16(PROJECTION_WORDS + 4), 12);
+    z_magnitude = magnitude_add(z, rd_s16(PROJECTION_WORDS + 4), 12);
+    other = (int16_t)z_magnitude;
     if (other > maximum) maximum = other;
     if (flags & 0x50u) y = magnitude_add(rd_s32(components + 16), rd_s32(PROJECTION_Y), 11);
     else y = long_asr(long_negate(rd_s32(PROJECTION_Y)), 11);
@@ -175,22 +198,32 @@ static unsigned placement_shift(uint8_t flags, uint16_t index, int32_t x, int32_
     if ((int16_t)shift_index > 0xEF) {
         wr_u16(ERROR_CODE, 0x0F); fault_hook(); shift_index = 0xEF;
     }
-    return (uint16_t)(int16_t)rd_s8(at_word(SHIFT_TABLE, shift_index));
+    {
+        unsigned shift = (uint16_t)(int16_t)rd_s8(at_word(SHIFT_TABLE, shift_index));
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_SHIFT,
+            .x=x_magnitude, .y=z_magnitude, .z=y, .word=(int16_t)shift_index, .value=shift});
+        return shift;
+    }
 }
 
 static void advance_context(const TemplateContext *c) {
     int32_t depth;
     int16_t threshold;
+    uint32_t before_threshold;
     if (rd_u8(RETAIN_CONTEXT)) return;
     depth = long_asr(long_negate(rd_s32(PROJECTION_Y)), 11);
-    if (depth > 3) threshold = 70;
+    if (depth > 3) { threshold = 70; before_threshold = (uint32_t)depth; }
     else {
         uint32_t offset = (uint32_t)depth << 2;
         if (rd_u8(ROUTE_FLAG)) offset = (offset & 0xFFFF0000u) | (uint16_t)(offset + 2);
+        before_threshold = offset;
         threshold = rd_s16(CACHE_THRESHOLDS + offset);
     }
     if (threshold < rd_s16(CACHE_COUNT))
         wr_u16(c->context, rd_u16(c->context) + PLACEMENT_BYTES);
+    publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_CONTEXT,
+        .value=before_threshold, .word=threshold,
+        .table=threshold < rd_s16(CACHE_COUNT) ? c->context : CACHE_THRESHOLDS});
 }
 
 static void emit_cell(const TemplateContext *c, gaddr cell, int32_t origin[2],
@@ -225,7 +258,7 @@ static void emit_cell(const TemplateContext *c, gaddr cell, int32_t origin[2],
         z = long_sub(payload_z, (int32_t)rd_s16(at_word(GRID_ADJUST_WORDS, word_add(rd_s8(SELECTOR_A) * 4, 2))) * 4);
         z = long_add(long_add(z, translation[1]), origin[1]);
         wr_s32(WORK_Z, z);
-        shift = placement_shift(flags, index, x, z);
+        shift = placement_shift(c, flags, index, x, z);
         wr_u8(*output + 1, rd_u8(*output + 1) | (uint8_t)shift);
         wr_s16(*output + 6, (int16_t)long_asr(x, shift));
         wr_s16(*output + 8, word_asr(rd_s16(WORK_Y), shift));
@@ -241,8 +274,13 @@ static void emit_cell(const TemplateContext *c, gaddr cell, int32_t origin[2],
         wr_u16(CELL_PACKET, (uint16_t)(tail >> 16));
         wr_u16(CACHE_COUNT, rd_u16(CACHE_COUNT) + 1);
         *output += PLACEMENT_BYTES;
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_PLACEMENT,
+            .x=z, .value=tail, .word=(int16_t)shift, .cycle=*cycle,
+            .ordinal=*ordinal, .cell=cell, .output=*output});
         advance_context(c);
         if (rd_s16(CACHE_COUNT) >= 70) *output -= PLACEMENT_BYTES;
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_CONTEXT,
+            .output=*output});
     }
 }
 
@@ -252,12 +290,16 @@ static gaddr build_placements(const TemplateContext *c, gaddr cursor) {
     if (!rd_u8(RETAIN_CONTEXT)) wr_u16(c->context, 0);
     wr_u16(CACHE_COUNT, 0); wr_u8(GROUP_COUNT, 0);
     wr_u8(EMITTED_COUNT, 0); wr_u8(0xC45867, 0);
+    publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_BUILD_BEGIN,
+        .cursor=cursor, .output=output, .table=c->context});
     for (;;) {
         int8_t type = rd_s8(cursor++);
         int16_t mapped;
         int32_t origin[2];
         uint8_t count;
         unsigned k;
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_BUILD_TYPE,
+            .type=(uint8_t)type, .cursor=cursor});
         if (type < 0) break;
         if (type > 20) fatal_error(0x11);
         mapped = rd_s8(at_word(c->translate, type));
@@ -275,6 +317,11 @@ static gaddr build_placements(const TemplateContext *c, gaddr cursor) {
             origin[k] = (int32_t)((uint32_t)origin[k] << 2);
         }
         count = rd_u8(cursor++);
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_ORIGIN,
+            .x=origin[0], .y=origin[1], .word=mapped,
+            .table=rd_u8(CELL_CHECKS) ? GRID_ADJUST_WORDS : c->origin_pairs});
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_COUNT,
+            .count=count, .cursor=cursor});
         do {
             int8_t selector = rd_s8(cursor++), selected;
             int32_t translation[2];
@@ -287,23 +334,30 @@ static gaddr build_placements(const TemplateContext *c, gaddr cursor) {
                 translation[k] = (int32_t)rd_s16(at_word(c->translation_pairs, word_add(selected * 4, k * 2))) * 4;
             cell = at_word(band, selected * CELL_BYTES);
             wr_u32(group, output);
+            publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_CELL,
+                .type=(uint8_t)selector, .word=selected, .x=translation[0], .y=translation[1],
+                .cursor=cursor, .cell=cell, .group=group, .table=c->translation_pairs});
             emit_cell(c, cell, origin, translation, &cycle, &output, &ordinal);
             if (rd_u8(CELL_CHECKS) && !rd_u8(RETAIN_CONTEXT)) {
                 if ((int8_t)ordinal <= 1) wr_u32(group, 0xFFFFFFFFu);
                 else { group += 4; wr_u16(group, ordinal); group += 2; wr_u32(group, 0xFFFFFFFFu); wr_u8(GROUP_COUNT, rd_u8(GROUP_COUNT) + 1); }
             }
             count = (uint8_t)(count - 1);
+            publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_CELL_END,
+                .count=count, .group=group, .cell=cell});
         } while ((int8_t)count > 0);
         band += BAND_BYTES;
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_BUILD_NEXT, .cell=band});
     }
     wr_u16(output, 0xFFFF); wr_u8(PLACEMENTS_READY, 1);
     wr_u8(GROUP_COUNT_COPY, rd_u8(GROUP_COUNT));
+    publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_BUILD_END, .output=output});
     return output;
 }
 
 /* $C1E230-$C1E2A4: translate bounds/vertices and preserve linked sections.
  * Positive links are replaced with the address of the next output section. */
-static void copy_descriptor_packet(gaddr source, gaddr destination, uint32_t tail,
+static void copy_descriptor_packet(const TemplateContext *c, gaddr source, gaddr destination, uint32_t tail,
                                    int16_t x, int16_t z) {
     uint32_t next;
     uint32_t count, i;
@@ -315,6 +369,7 @@ static void copy_descriptor_packet(gaddr source, gaddr destination, uint32_t tai
         source += 2; destination += 2;
     }
     for (;;) {
+        int16_t last_z = 0;
         wr_u16(destination, rd_u16(source)); source += 2; destination += 2;
         for (i = 0; i < 4; ++i) {
             wr_s16(destination, word_add(rd_s16(source), i < 2 ? x : z));
@@ -329,17 +384,23 @@ static void copy_descriptor_packet(gaddr source, gaddr destination, uint32_t tai
         for (i = 0; i < count; ++i) {
             wr_s16(destination, word_add(rd_s16(source), x));
             wr_u16(destination + 2, rd_u16(source + 2));
-            wr_s16(destination + 4, word_add(rd_s16(source + 4), z));
+            last_z = word_add(rd_s16(source + 4), z);
+            wr_s16(destination + 4, last_z);
             source += 12; destination += 6;
         }
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_PACKET_SECTION,
+            .cursor=source, .output=destination, .value=next, .word=last_z});
         if ((int32_t)next <= 0) break;
         wr_u32(link, destination); source = next;
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_PACKET_LINK,
+            .cursor=source, .output=destination, .other=link});
     }
 }
 
-static void publish_descriptor_packets(gaddr output) {
+static void publish_descriptor_packets(const TemplateContext *c, gaddr output) {
     gaddr placement;
     uint8_t accepted = 0;
+    publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_REVERSE_BEGIN, .output=output});
     if ((int32_t)output < CACHE_APPEND) fatal_error(0x10);
     if (output == CACHE_APPEND) return;
     placement = output - PLACEMENT_BYTES;
@@ -347,13 +408,20 @@ static void publish_descriptor_packets(gaddr output) {
     for (;;) {
         uint16_t header = rd_u16(placement);
         gaddr descriptor = rd_u32(placement + 2);
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_REVERSE_RECORD,
+            .cell=placement, .word=(int16_t)header, .table=descriptor,
+            .x=rd_s16(placement + 6), .y=rd_s16(placement + 8), .z=rd_s16(placement + 10),
+            .value=rd_u32(placement + 12)});
         if (!(header & 0x50u)) {
             gaddr flags = rd_u32(descriptor + 4), packet = 0;
+            publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_DESCRIPTOR_FLAGS, .value=flags});
             if ((int32_t)flags > 0) {
                 int16_t index = rd_s16(flags);
                 if (index >= 0) index = rd_s16(flags + ((index & 0x4000u) ? 2u : 4u));
+                publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_DESCRIPTOR_WORD, .word=index});
                 if (index != -1) {
                     int16_t offset = rd_s16(at_word(flags, index & 0x0FFFu));
+                    publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_DESCRIPTOR_OFFSET, .word=offset});
                     if (offset >= 0) packet = at_word(flags, offset);
                 }
             }
@@ -361,19 +429,26 @@ static void publish_descriptor_packets(gaddr output) {
                 int16_t x = word_lsl(rd_u16(placement + 6), header & 15u) & 0x3FFF;
                 int16_t z = word_lsl(rd_u16(placement + 10), header & 15u) & 0x3FFF;
                 wr_u32(at_word(DESCRIPTOR_POINTERS, accepted * 4), packet);
+                publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_PACKET_BEGIN,
+                    .cursor=packet, .count=accepted, .word=(int16_t)header});
                 /* C1E228/C1E22A already multiply the slot by four before
                  * C1E236 shifts it another six bits: packets stride 256. */
-                copy_descriptor_packet(packet, at_word(DESCRIPTOR_PACKETS, accepted * 256), rd_u32(placement + 12), x, z);
-            } else wr_u32(at_word(DESCRIPTOR_POINTERS, accepted * 4), 0xFFFFFFFFu);
+                copy_descriptor_packet(c, packet, at_word(DESCRIPTOR_PACKETS, accepted * 256), rd_u32(placement + 12), x, z);
+            } else {
+                wr_u32(at_word(DESCRIPTOR_POINTERS, accepted * 4), 0xFFFFFFFFu);
+                publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_PACKET_MISSING, .count=accepted});
+            }
+            publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_PACKET_ACCEPT, .count=(uint8_t)(accepted + 1)});
             if (++accepted >= 11) break;
         }
         wr_u8(REVERSE_COUNT, rd_u8(REVERSE_COUNT) + 1);
+        publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_REVERSE_VISIT, .count=rd_u8(REVERSE_COUNT)});
         if (rd_s8(REVERSE_COUNT) >= rd_s8(EMITTED_COUNT)) break;
         placement -= PLACEMENT_BYTES;
     }
 }
 
-static void publish_control_list(void) {
+static void publish_control_list(const TemplateContext *c) {
     gaddr output = CONTROL_LIST, record = CONTROL_RECORDS;
     uint16_t index;
     wr_u16(output, 0xFFFF);
@@ -382,13 +457,23 @@ static void publish_control_list(void) {
             wr_u16(output, index); output += 2; wr_u16(output, 0xFFFF);
         }
     }
+    publish(c, (TemplatePlacementEvent){.phase=TEMPLATE_CONTROL_END, .cursor=output});
+}
+
+void refresh_template_placements_observed(const TemplatePlacementObserver *observer) {
+    TemplateContext context = select_context(observer);
+    gaddr markers = WORKSPACE, cursor, output;
+    int i;
+    for (i = 0; i < 14; ++i) fill_column(&markers, 0xFFFF, CELL_BYTES);
+    publish(&context, (TemplatePlacementEvent){.phase=TEMPLATE_MARKERS, .cursor=markers});
+    cursor = control_cursor(&context);
+    expand_bands(&context, cursor);
+    output = build_placements(&context, cursor);
+    if (rd_u8(CELL_CHECKS)) publish_descriptor_packets(&context, output);
+    if (rd_u8(CELL_CHECKS) && !rd_u8(RETAIN_CONTEXT)) publish_control_list(&context);
+    publish(&context, (TemplatePlacementEvent){.phase=TEMPLATE_FINISH});
 }
 
 void refresh_template_placements(void) {
-    TemplateContext context = select_context();
-    gaddr cursor = control_cursor(&context), output;
-    expand_bands(&context, cursor);
-    output = build_placements(&context, cursor);
-    if (rd_u8(CELL_CHECKS)) publish_descriptor_packets(output);
-    if (rd_u8(CELL_CHECKS) && !rd_u8(RETAIN_CONTEXT)) publish_control_list();
+    refresh_template_placements_observed(NULL);
 }

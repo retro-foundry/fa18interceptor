@@ -133,3 +133,9 @@ phase improved, but readable coverage and ALL's first failing frame did not.
 The next implementation milestone remains the complete $C1D10C/$C1E540
 selector parents. Preserve the demonstrated HUD interaction for the next
 parity work; do not resume a queue of unrelated early cycle gaps.
+
+2026-10-02 follow-up: the selector parents are now complete at 423/624.
+The user has deferred the minor Copper-fade difference and asked to keep a
+note for later. Retain the source/ALL reset 393/394, terminal 436/437 and
+frame-313 HUD/countdown checkpoints; continue readable game batches.
+This acceptance of a temporary difference does not change automated gates.

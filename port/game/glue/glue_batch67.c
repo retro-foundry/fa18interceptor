@@ -14,6 +14,7 @@
 #include "render_span.h"
 #include "scene_setup.h"
 #include "stages.h"
+#include "glue_cell_template_outputs.h"
 
 #define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
 #define TEMPLATE_PAIRS 0xC1D8B6u
@@ -42,12 +43,11 @@ static void sorted_word_bounds(gaddr table, int16_t key, int16_t *low_out, int16
     *high_out = high;
 }
 
-int glue_C1D3F4(void) {
-    gaddr frame = A(6), templates = rd_u32(frame - 4), bitmap = rd_u32(frame - 8), cell, lists = A(1);
-    int16_t row = (int16_t)D(0), column = (int16_t)D(1);
+void cell_template_outputs_begin(int16_t row, int16_t column, gaddr templates,
+                                 gaddr bitmap, gaddr lists, gaddr input_cursor,
+                                 CellTemplateOutputs *outputs) {
+    gaddr cell;
     uint32_t d0 = D(0), d1 = D(1), d6 = D(6), d7 = D(7);
-    int enabled = rd_u8(CELL_CHECKS) != 0;
-    FilingState state;
 
     SET_W(d0, (uint16_t)(2 * row));
     cell = templates + (gaddr)(int32_t)rd_s16(templates + (gaddr)(int32_t)(int16_t)d0);
@@ -58,7 +58,7 @@ int glue_C1D3F4(void) {
         SET_W(d6, (uint16_t)word);
         if ((rd_u32(bitmap + (gaddr)(int32_t)word) >> (column & 0x1F)) & 1) {
             gaddr entries = cell + (gaddr)(int32_t)rd_s16(cell) + 2;
-            gaddr stream, cursor = A(2), list_end = 0;
+            gaddr stream, cursor = input_cursor, list_end = 0;
             int16_t index = find_sorted_word(cell, column), low, high;
             int left = 0;
 
@@ -105,19 +105,29 @@ int glue_C1D3F4(void) {
         }
     }
 
-    state.level = -1;
-    state.level_offset = (int16_t)(d1 >> 16);
-    state.index = (int)d6;
-    expand_cell_templates(row, column, templates, bitmap, lists, A(2), &state);
+    outputs->d0 = d0; outputs->d1 = d1; outputs->d6 = d6; outputs->d7 = d7;
+}
 
-    D(0) = d0;
-    D(1) = d1;
-    D(6) = d6;
-    D(7) = d7;
+void cell_template_outputs_end(const CellTemplateOutputs *outputs,
+                               const FilingState *state, int enabled) {
+    D(0) = outputs->d0; D(1) = outputs->d1;
+    D(6) = outputs->d6; D(7) = outputs->d7;
     if (enabled) {
-        D(1) = (uint32_t)(uint16_t)state.level_offset << 16 | (D(1) & 0xFF00u) | (uint8_t)state.level;
-        D(6) = (uint32_t)state.index;
+        D(1) = (uint32_t)(uint16_t)state->level_offset << 16 | (D(1) & 0xFF00u) | (uint8_t)state->level;
+        D(6) = (uint32_t)state->index;
     }
+}
+
+int glue_C1D3F4(void) {
+    gaddr frame = A(6), templates = rd_u32(frame - 4), bitmap = rd_u32(frame - 8);
+    int16_t row = (int16_t)D(0), column = (int16_t)D(1);
+    CellTemplateOutputs outputs;
+    FilingState state;
+    int enabled = rd_u8(CELL_CHECKS) != 0;
+    cell_template_outputs_begin(row, column, templates, bitmap, A(1), A(2), &outputs);
+    state.level = -1; state.level_offset = (int16_t)(outputs.d1 >> 16); state.index = (int)outputs.d6;
+    expand_cell_templates(row, column, templates, bitmap, A(1), A(2), &state);
+    cell_template_outputs_end(&outputs, &state, enabled);
     return glue_return();
 }
 

@@ -1,5 +1,8 @@
 #ifndef FA18_PORTS_GLUE_H
 #define FA18_PORTS_GLUE_H
+int glue_C1D10C(void);
+int glue_C1D10C_step(void);
+int glue_C1D722_step(void);
 
 /* Glue entry points, one per recreated routine, named by original address. */
 

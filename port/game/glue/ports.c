@@ -7,6 +7,9 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* template_placements.c: complete static-band/cache refresh */
+    {0xC1D10C, glue_C1D10C, "refresh_template_placements", 0, 0,
+     glue_C1D10C_step, 0xC1E328},
     /* placement_order.c: complete cache classification and partition */
     {0xC1E540, glue_C1E540, "order_placement_cache", 0, 0,
      glue_C1E540_step, 0xC1EBB0, 0, 0xC1E53C},
@@ -110,7 +113,7 @@ const FA18Port fa18_ports[] = {
     /* render_line.c, render_state.c */
     {0xC2F490, glue_C2F490, "reset_line_style", 0, 0, glue_C2F490_step, 0xC2F49C},
     {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},
-    {0xC1D722, glue_C1D722, "fill_column", 280},
+    {0xC1D722, glue_C1D722, "fill_column", 0, 0, glue_C1D722_step, 0xC1D764},
     {0xC30F56, glue_C30F56, "start_blit", 90},
     /* audio.c, view.c, control_records.c */
     {0xC4FFB4, glue_C4FFB4, "clear_voice_interrupt", 0, 0, glue_C4FFB4_step, 0xC4FFCA},

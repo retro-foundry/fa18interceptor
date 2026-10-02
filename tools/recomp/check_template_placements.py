@@ -1,7 +1,8 @@
-"""Prove complete C1D10C domain memory against original execution.
+"""Prove complete C1D10C domain or normal CPU adapter against original execution.
 
-The isolated recording registry deliberately checks only restored A6/A7;
-this is NOT the normal CPU adapter or an instruction/event timing proof.
+Use --glue to retain production caller masks and compare live CPU/RAM outputs.
+Without --glue the isolated recording registry checks only restored A6/A7
+and proves domain memory. Neither mode proves instruction/event timing.
 Captured entry fixtures additionally compare all Chip/Slow bytes outside
 the source's bounded private stack, without a caller liveness exemption.
 """
@@ -20,10 +21,11 @@ def write_if_changed(path, text):
         path.write_text(text)
 
 
-def recorded_proof(capture_call=0, frames=0):
+def recorded_proof(capture_call=0, frames=0, glue=False):
     output = ROOT / "build/recomp"
     output.mkdir(parents=True, exist_ok=True)
-    registry = output / "template_memory_registry.c"
+    proof = "adapter" if glue else "memory"
+    registry = output / f"template_{proof}_registry.c"
     write_if_changed(registry, '''/* Domain memory only; no CPU or timing claim. */
 #include "recomp_ports.h"
 #include "glue.h"
@@ -32,6 +34,7 @@ def recorded_proof(capture_call=0, frames=0):
 #include "machine.h"
 #include <stdio.h>
 #include <stdlib.h>
+extern int glue_C1D10C(void);
 static int memory_only_call(void) {
     static unsigned calls;
     if (++calls == CAPTURE_CALL) {
@@ -55,29 +58,37 @@ const FA18Port fa18_ports[] = {
     {0,0,0,0}
 };
 const int fa18_port_count = 1;
-'''.replace("CAPTURE_CALL", str(capture_call)))
-    # These are temporary domain-proof masks. Never alter the production
-    # generated masks or claim that this validates any live CPU output.
+'''.replace("/* Domain memory only; no CPU or timing claim. */",
+             "/* Normal caller CPU/RAM outputs; no live timing claim. */" if glue
+             else "/* Domain memory only; no CPU or timing claim. */")
+        .replace("CAPTURE_CALL", str(capture_call))
+        .replace("refresh_template_placements(); return glue_return();",
+                 "return glue_C1D10C();" if glue else "refresh_template_placements(); return glue_return();")
+        .replace("memory_only", "adapter" if glue else "memory_only"))
+    # Only memory mode relaxes these temporary masks. Adapter mode retains
+    # the production generated masks and independently proves CPU outputs.
     liveness = (ROOT / "port/recomp/generated/recomp_liveness.c").read_text()
-    for address in ("C1C924", "C1C94A", "C1C982"):
+    for address in (() if glue else ("C1C924", "C1C94A", "C1C982")):
         liveness, count = re.subn(
             r"\{0x" + address + r", 0x[0-9A-F]+, 0x[0-9A-F]+, 0x[0-9A-F]+\}",
             "{0x" + address + ", 0xC000, 0x00, 0x00}", liveness)
         if count != 1:
             raise RuntimeError(f"expected one original caller mask at {address}")
-    masks = output / "template_memory_liveness.c"
+    masks = output / f"template_{proof}_liveness.c"
     write_if_changed(masks, liveness)
-    executable = output / "template_memory.exe"
-    subprocess.run([
+    executable = output / f"template_{proof}.exe"
+    build = [
         "python", "scripts/build_recomp.py", "--output", str(executable.relative_to(ROOT)),
         "--replace-source", "port/game/glue/ports.c=" + str(registry.relative_to(ROOT)),
-        "--replace-source", "port/recomp/generated/recomp_liveness.c=" + str(masks.relative_to(ROOT)),
-    ], cwd=ROOT, check=True)
+    ]
+    if not glue:
+        build += ["--replace-source", "port/recomp/generated/recomp_liveness.c=" + str(masks.relative_to(ROOT))]
+    subprocess.run(build, cwd=ROOT, check=True)
 
     def check(recording):
         results = {}
         for mode in ("shadow", "sandbox"):
-            report = output / f"template_memory_{recording.name}_{mode}.json"
+            report = output / f"template_{proof}_{recording.name}_{mode}.json"
             environment = dict(os.environ)
             if capture_call:
                 capture = output / f"template_{recording.name}_{mode}_call{capture_call}.bin"
@@ -98,7 +109,7 @@ const int fa18_port_count = 1;
             if capture_call and capture.exists():
                 print(f"captured entry: {capture.relative_to(ROOT)}", flush=True)
             results[mode] = rows[0]
-            print(f"{recording.name} {mode}: {rows[0]['matched']} memory matches, "
+            print(f"{recording.name} {mode}: {rows[0]['matched']} {proof} matches, "
                   f"{rows[0]['incomplete']} incomplete", flush=True)
         return results
 
@@ -109,7 +120,8 @@ const int fa18_port_count = 1;
         results = list(pool.map(check, recordings))
     if not any(r[mode]["matched"] for r in results for mode in ("shadow", "sandbox")):
         raise RuntimeError("C1D10C: no completed recorded memory comparisons")
-    print("C1D10C domain memory only; CPU/live timing NOT tested: " + ", ".join(
+    scope = "normal CPU/RAM outputs; live timing NOT tested" if glue else "domain memory only; CPU/live timing NOT tested"
+    print("C1D10C " + scope + ": " + ", ".join(
         f"{sum(r[mode]['matched'] for r in results)} {mode} matches"
         for mode in ("shadow", "sandbox")))
     return results
@@ -118,6 +130,7 @@ const int fa18_port_count = 1;
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--recorded", action="store_true")
+    parser.add_argument("--glue", action="store_true", help="also prove normal caller CPU outputs; retain production liveness")
     parser.add_argument("--capture-call", type=int, default=0)
     parser.add_argument("--frames", type=int, default=0, help="bounded recording probe; zero checks to end")
     parser.add_argument("--fixture", type=Path, help="compare one captured original entry")
@@ -132,9 +145,11 @@ def main():
     if args.fixture:
         executable = build_oracle("template_placements_oracle",
                                   "tools/recomp/template_placements_oracle.c", default_bash())
-        subprocess.run([str(executable), str(args.fixture.resolve()), str(args.cases)], cwd=ROOT, check=True)
+        command = [str(executable), str(args.fixture.resolve()), str(args.cases)]
+        if args.glue: command += ["--glue"]
+        subprocess.run(command, cwd=ROOT, check=True)
     if args.recorded:
-        recorded_proof(args.capture_call, args.frames)
+        recorded_proof(args.capture_call, args.frames, args.glue)
 
 
 if __name__ == "__main__":
