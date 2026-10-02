@@ -17,12 +17,13 @@ demo, a successful carrier landing, and qualification failure.
 
 The immediate work is game timing parity and the next readable source batch.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 190 registered entries now have source timing. The complete
+isolation; 197 registered entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete and two new workspace selector helpers are proven. The remaining
 selector parents are the next readable milestone. The frame-416 comparison
-confirms a fade starting and finishing two frames late; its reset straddles
-an extra vertical blank during scene initialization. See the
+confirmed a fade starting and finishing two frames late. Source timing for
+the scene initializer has removed one delayed frame; one remains inherited
+from preceding HUD updates. See the
 [visible checkpoint](analysis/routines/native_frame_416_checkpoint.md) and
 [planning review](CURRENT_PORT_HANDOFF.md#planning-review-2026-10-02).
 

@@ -3,6 +3,15 @@
 
 /* Glue entry points, one per recreated routine, named by original address. */
 
+/* Scene transition and complete root-setup timing chain. */
+int glue_C0FAA4_step(void);
+int glue_C0924A_step(void);
+int glue_C09266_step(void);
+int glue_C092A0_step(void);
+int glue_C095C0_step(void);
+int glue_C09620_step(void);
+int glue_C0840E_step(void);
+
 /* Workspace selector helpers, including their shared source tails. */
 int glue_C1EBB0(void);
 int glue_C1EBB0_step(void);

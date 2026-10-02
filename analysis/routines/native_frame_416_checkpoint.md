@@ -1,5 +1,12 @@
 # First visible difference: demo frame 416
 
+The tables and original image below preserve the before-correction checkpoint.
+The subsequent scene initializer correction removes one delayed fade frame;
+completion is now machine frame 437 versus source 436, and the first dim
+image appears in RGB frame 417. The first ALL difference remains 416/361.
+See [the correction and countdown evidence](native_c_scene_transition_timing.md)
+for the separate after-checkpoints and the remaining HUD timing interaction.
+
 2026-10-02, after the gauge correction and with the workspace helper batch
 temporarily registered. These are fresh runs of the same native executable,
 machine model, sealed demo state and input. Source OFF executes the original

@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-02. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 4ee1df1e); ignored gate logs may
+history (the preceding handoff is in commit 6b23723c); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -94,6 +94,13 @@ parity. That timing investigation is the immediate priority.
   scene-stream/grid/first scan returns now match. The enclosing first gap
   is C0F132 after C11BFC in frame 311, +2,344 cycles and SR 0004/0000.
   See analysis/routines/native_c_face_predicate_timing_batch.md.
+  Seven scene initializer/root-setup entries now preserve source timing and
+  match every isolated live frame and sealed final RAM. Their 311 instructions
+  match 9,952 DMA fixtures; there are 197 timing-step entries. The initializer
+  span now matches 16,280 source cycles and removes one of two delayed fade
+  frames. Independent group coverage is 10,007 instructions / 320,224 cases;
+  this is not a fresh full combined oracle run. ALL still first differs at
+  416/361. See analysis/routines/native_c_scene_transition_timing.md.
 - The current recordings are captures/native/demo01,
   captures/native/qual_carrier_success, and
   captures/native/qual_fail_crashes. Each has state.bin, input.fa18in, and
@@ -281,19 +288,24 @@ call totals. GNU/MSVC pass. Independent instruction groups now total 9,696 /
 See analysis/routines/native_c_workspace_record_helpers.md. C1D10C and C1E540
 remain the two outstanding parents for the 423-entry milestone.
 
-Latest visible checkpoint: the user's Copper-fade observation is confirmed.
-ALL's fade resets and finishes two machine frames late. Its mode increments
-still occur every three frames, and the existing C1718E callback is timed.
-The scene initializer is entered one frame late; its fixed 32,000-cycle
-replacement crosses another vertical blank before C0FA32 resets the mode.
-Source/ALL terminal state writes occur at machine frames 436/438. Restoring
-original C0FAA4 in an otherwise ALL control removes one delayed frame, but
-the first RGB difference remains 416/361. The other frame is inherited at
-the C0FA0E entry. See analysis/routines/native_frame_416_checkpoint.md and its
-small comparison PNG/JSON. The next parity work is source/event timing for
-C0FAA4 (24 instructions, four static children) and the inherited delay at
-the transition; do not adjust a fixed fee or shift replay/frame conditions.
-Keep the selector-parent milestone and work-selection limit below.
+Latest visible checkpoint: the user's Copper-fade observation led to a
+verified correction. C0FAA4 and six root-setup entries now preserve source
+timing. The initializer span matches the original 16,280 cycles and no longer
+crosses an extra vertical blank. Source/ALL terminal state writes now occur
+at machine frames 436/437, improved from 436/438. The fade increments remain
+three frames apart; first dim output is now RGB frame 417 instead of 418.
+ALL still first differs at 416/361. The remaining delay is inherited between
+the first two C0F5F8 countdown ticks: source 313/342, ALL 313/343. The actual
+C0EFD4 update entered in frame 313 has the same 152 instruction PCs but
+returns 70,498 cycles later in ALL, accumulating debt through HUD calls.
+Restoring original execution for the 17 HUD entries listed in
+analysis/routines/native_c_scene_transition_timing.md matches the fade reset
+and completion and moves the first RGB difference to 425/36,650. Neither
+tested half nor any of three individual entries suffices. This is a diagnostic
+complement, not removal of registered C or a complete parity fix. Before and
+after frame/fade JSONs are preserved separately under analysis/figures/.
+This is the second timing-only batch since the review; return to the complete
+selector parents next, retaining the causal HUD checkpoint for later parity.
 
 Gauge checkpoint completed after the planning review: $C30918 now has source
 timing. Its 35 instructions pass 1,120 DMA fixtures; all 36,236 isolated live
@@ -306,23 +318,20 @@ matches, zero mismatches, sealed RAM exact and poison identical. There are
 188 timing-step entries; independent group proofs total 9,662 instructions /
 309,184 DMA cases (the combined oracle was not rerun for this local bridge).
 See analysis/routines/native_c_gauge_timing_checkpoint.md for byte hashes and
-call classifications. This is one timing-only batch since the review. The
+call classifications. That was the first timing-only batch since the review. The
 next readable implementation work is item 2, the remaining selector parents; retain
 item 1's failing combined checkpoint rather than chasing another early gap.
 
-1. Continue from the preserved frame-416 comparison and fade callback
-   checkpoint. The gauge's isolated failure is corrected; ALL remains
-   416/361 with identical incorrect bytes. Preserve source-backed timing
-   through C0FAA4 and its four children; compare C0FA0E/C0FA12/C0FA32 and
-   the terminal C1741A boundary. Locate the already inherited one-frame
-   delay at C0FA0E using the transition's actual enclosing path, rather than
-   returning to an unrelated first cycle gap in frame 311. The initializer
-   bypass removes one delayed fade frame but leaves the first RGB mismatch,
-   so neither a fixed-fee adjustment nor a frame shift is a completed fix.
-   Repeat the bounded RGB and callback checkpoints with ALL after each
-   candidate; require a changed combined result before claiming improvement.
-   C321D2/C32260 and the panel group remain further reproducers, not an
-   automatic instruction-transcription queue. C11BFC remains timing debt.
+1. Preserve the now-corrected initializer and the remaining frame-416
+   checkpoint while completing item 2 next. Later parity work must follow the
+   actual frame-313 update/countdown and the proven 17-entry HUD interaction,
+   not return to an unrelated first cycle gap in frame 311. Compare
+   C0FA0E/C0FA12/C0FA32 and terminal C1741A; original-code complements can
+   reproduce the remaining cause but are not port fixes. ALL is still 416/361.
+   Repeat bounded RGB and callback checkpoints after a source-backed candidate.
+   Require a changed combined result before claiming improvement. Do not
+   adjust average fees, counters or replay/frame conditions. C11BFC remains
+   timing debt; the HUD list is not an automatic transcription queue.
 2. Make the next readable-source milestone explicit: complete the selector
    family C1D10C, C1E540, C1EBB0 and C1EC84, aiming for 423/624 after proof.
    The two helpers are now proven/registered; complete C1D10C and C1E540 next.

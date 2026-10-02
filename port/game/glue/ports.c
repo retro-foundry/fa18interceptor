@@ -112,7 +112,7 @@ const FA18Port fa18_ports[] = {
     /* audio.c, view.c, control_records.c */
     {0xC4FFB4, glue_C4FFB4, "clear_voice_interrupt", 0, 0, glue_C4FFB4_step, 0xC4FFCA},
     {0xC08324, glue_C08324, "set_zoom_maximum", 0, 0, glue_C08324_step, 0xC0833E},
-    {0xC095C0, glue_C095C0, "reset_player_record", 220},
+    {0xC095C0, glue_C095C0, "reset_player_record", 0, 0, glue_C095C0_step, 0xC09620},
     {0xC1C7F6, glue_C1C7F6, "classify_record_rate", 0, 0, glue_C1C7F6_step, 0xC1C85E},
     {0xC50212, glue_C50212, "step_voice_program", 0, 0, glue_C50212_step, 0xC5027C},
     {0xC4FFB0, glue_C4FFB0, "clear_voice_interrupt", 0, 0, glue_C4FFB0_step, 0xC4FFCA},
@@ -147,7 +147,7 @@ const FA18Port fa18_ports[] = {
     {0xC50AB4, glue_C50AB4, "random_bit", 0, 0, glue_C50AB4_step, 0xC50B02},
     {0xC17B08, glue_C17B08, "free_voice", 0, 0, glue_C17B08_step, 0xC17B2C},
     {0xC2548A, glue_C2548A, "update_readout", 250},
-    {0xC0840E, glue_C0840E, "reset_mission_objects", 900},
+    {0xC0840E, glue_C0840E, "reset_mission_objects", 0, 0, glue_C0840E_step, 0xC08488},
     {0xC258C8, glue_C258C8, "pan_view_from_keys", 0, 0, glue_C258C8_step, 0xC25980},
     /* batch 10: decay, messages, lookups, cell steps, 2.8 matrix, cached display value */
     {0xC148A2, glue_C148A2, "decay_outside_limit", 130},
@@ -159,7 +159,7 @@ const FA18Port fa18_ports[] = {
     {0xC2E346, glue_C2E346, "y_rotation_matrix8", 0, 0, glue_C2E346_step, 0xC2E370},
     {0xC31C20, glue_C31C20, "display_value_to_draw", 80},
     /* batch 11: player setup, steering, random bits, channel stop, cockpit script */
-    {0xC09620, glue_C09620, "prepare_player_record", 700},
+    {0xC09620, glue_C09620, "prepare_player_record", 0, 0, glue_C09620_step, 0xC096AA},
     {0xC13BA0, glue_C13BA0, "steer_record_56", 220},
     {0xC13C64, glue_C13C64, "steer_record_5a", 240},
     {0xC50B02, glue_C50B02, "random_bits", 0, 0, glue_C50B02_step, 0xC50B36},
@@ -488,9 +488,9 @@ const FA18Port fa18_ports[] = {
     /* control_records.c */
     {0xC28800, glue_C28800, "aim_record_at_view", 0, 0, glue_C28800_step, 0xC288C6},
     /* scene_setup.c */
-    {0xC0924A, glue_C0924A, "reset_scene_context", 3200},
-    {0xC09266, glue_C09266, "reset_scene_recorder", 3100},
-    {0xC092A0, glue_C092A0, "place_scene_root", 3000},
+    {0xC0924A, glue_C0924A, "reset_scene_context", 0, 0, glue_C0924A_step, 0xC095C0},
+    {0xC09266, glue_C09266, "reset_scene_recorder", 0, 0, glue_C09266_step, 0xC095C0},
+    {0xC092A0, glue_C092A0, "place_scene_root", 0, 0, glue_C092A0_step, 0xC095C0},
     /* postflight scene callbacks (/) */
     {0xC11788, glue_C11788, "advance_postflight_reset", 3200},
     {0xC11830, glue_C11830, "restart_postflight_scene", 3900},
@@ -511,7 +511,7 @@ const FA18Port fa18_ports[] = {
     /* scene stream selection and special scene record () */
     {0xC28722, glue_C28722, "initialize_scene_from_mode", 0, 0, glue_C28722_step, 0xC28E12, 0, 0xC28720},
     /* scene initialization and ordered child calls () */
-    {0xC0FAA4, glue_C0FAA4, "initialize_scene_state", 32000},
+    {0xC0FAA4, glue_C0FAA4, "initialize_scene_state", 0, 0, glue_C0FAA4_step, 0xC0FB28},
     /* timer-gated post-input scene transition () */
     {0xC0FA04, glue_C0FA04, "finish_post_input_followup", 0, 0, glue_C0FA04_step, 0xC0FA4C},
     /* display-record candidate and selector siblings (/) */
