@@ -155,3 +155,9 @@ selectors and the task scaffold are removed after recording evidence; small
 build/gate logs and JSON proof reports remain cached. C1D10C remains the next
 unregistered readable-C count batch; backend and necessary OS work remain
 after complete game source.
+
+Followup: native_c_flight_update_timing_batch.md records the twelve-entry
+flight/projection/cockpit family. The complete first flight parent now matches;
+the enclosing update's next timing gap is after C0DAEE in machine frame 310.
+The observations above remain the evidence for this earlier nineteen-entry
+baseline.

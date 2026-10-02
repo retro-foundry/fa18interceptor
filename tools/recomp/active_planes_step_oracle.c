@@ -71,6 +71,43 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if ((pc >= 0xC122A2u && pc < 0xC123FAu) ||
+        (pc >= 0xC1C2C8u && pc < 0xC1C40Cu) ||
+        (pc >= 0xC1C54Eu && pc < 0xC1C63Eu) ||
+        (pc >= 0xC230B0u && pc < 0xC23228u) ||
+        (pc >= 0xC23744u && pc < 0xC23A26u) ||
+        (pc >= 0xC244E2u && pc < 0xC2467Eu) ||
+        (pc >= 0xC254E8u && pc < 0xC2564Eu) ||
+        (pc >= 0xC25864u && pc < 0xC25876u) ||
+        (pc >= 0xC25704u && pc < 0xC257DCu)) {
+        REG_A[0] = 0xC61000u; REG_A[5] = 0xC61400u;
+        REG_A[6] = 0xC62080u;
+        for (i = 0; i < 96; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[2] + i * 4, next_value());
+            wr_u32(REG_A[4] + i * 4, next_value());
+            wr_u32(REG_A[5] + i * 4, next_value());
+        }
+        for (i = 0; i < 32; ++i) {
+            wr_u32(REG_A[6] - 0x40 + i * 4, next_value());
+            wr_u32(REG_A[7] + i * 4, next_value());
+        }
+        wr_u16(0xC459C0u, boundaries[scenario % 16u]);
+        wr_u16(REG_A[1] + 0x4a, boundaries[(scenario + 1) % 16u]);
+        wr_u16(REG_A[1] + 0x6c, boundaries[(scenario + 2) % 16u]);
+        if (pc == 0xC1C35Cu || pc == 0xC1C3BCu || pc == 0xC257A8u) {
+            static const uint32_t dividends[] = {
+                0, 1, 65535, 65536, 0x7fffffffu, 0x80000000u,
+                (17u << 16) - 1, 17u << 16, 0xffffffffu
+            };
+            static const uint16_t divisors[] = {0, 1, 17, 0x7fff, 0x8000, 0xffff};
+            unsigned destination = pc == 0xC1C35Cu ? 6 : pc == 0xC1C3BCu ? 1 : 0;
+            unsigned source = pc == 0xC257A8u ? 1 : 5;
+            REG_D[destination] = dividends[scenario % 9u];
+            REG_D[source] = (REG_D[source] & 0xffff0000u) | divisors[(scenario / 4u) % 6u];
+        }
+    }
     if ((pc >= 0xC258C8u && pc < 0xC25980u) ||
         (pc >= 0xC2D970u && pc < 0xC2DCC2u) ||
         (pc >= 0xC2DEE0u && pc < 0xC2E47Au) ||

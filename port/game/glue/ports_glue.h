@@ -51,6 +51,16 @@ int glue_C15138(void);
 int glue_C310E2(void);
 int glue_C1EBC0(void);
 int glue_C230B0(void);
+int glue_C230B0_step(void);
+int glue_C244E2_step(void);
+int glue_C1C54E_step(void);
+int glue_C254E8_step(void);
+int glue_C122A2_step(void);
+int glue_C1C2C8_step(void);
+int glue_C2374C_step(void);
+int glue_C2574A_step(void);
+int glue_C25704_step(void);
+
 int glue_C2DE96(void);
 int glue_C0DAA0(void);
 int glue_C0DAA0_step(void);
@@ -150,6 +160,10 @@ int glue_C207FE(void);
 /* batch 12: view octant, paired records, attitude term */
 int glue_C254E8(void);
 int glue_C231A2(void);
+int glue_C231A2_step(void);
+int glue_C2559A_step(void);
+int glue_C25864_step(void);
+
 int glue_C148E2(void);
 
 /* batch 13: decimal format, cockpit slide, position history */

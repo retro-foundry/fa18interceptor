@@ -1,6 +1,6 @@
 # Status
 
-Updated 2026-10-01.
+Updated 2026-10-02.
 
 ## Summary
 
@@ -9,8 +9,8 @@ Updated 2026-10-01.
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
 | Current proof | The 419 registered game entries passed shadow, sandbox, sealed final RAM, and poison checks on all three native recordings. New batches also require live ON RGB comparison with fresh source OFF output. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 419 registered game entries in `port/game/`; 703,365 matching shadow calls and 1,110,694 sandbox calls over three native recordings; poison frames identical. New grid projection entry: C279D0; previous map/region batch: C2AA9C, C2AB34, C2AB5A, C2B05A. See `CURRENT_PORT_HANDOFF.md` for remaining work. |
-| Live C timing | Nineteen further view-control/record-rate/matrix entries match all 36,236 live frames and sealed final RAM in isolation. There are 163 timing-step entries; the full oracle passes 8,412 instructions and 269,184 DMA-contention cases. ALL still matches through frame 415 and first differs at frame 416 by 361 pixels. The view-control return now matches; the first remaining flight-update gap is after selection helper C230B0, +48 cycles. See `analysis/routines/native_c_view_matrix_timing_batch.md` and `CURRENT_PORT_HANDOFF.md`. |
+| Recreated C source | 419 registered game entries in `port/game/`; 703,357 matching shadow calls and 1,110,694 sandbox calls over three native recordings; poison frames identical. New grid projection entry: C279D0; previous map/region batch: C2AA9C, C2AB34, C2AB5A, C2B05A. See `CURRENT_PORT_HANDOFF.md` for remaining work. |
+| Live C timing | Twelve further flight/projection/cockpit entries match all 36,236 live frames and sealed final RAM in isolation. There are 175 timing-step entries; the full oracle passes 9,158 instructions and 293,056 DMA-contention cases. ALL still matches through frame 415 and first differs at frame 416 by 361 pixels. The first complete flight update now matches; the enclosing update's first gap is after C0DAEE in machine frame 310, +386 cycles. See `analysis/routines/native_c_flight_update_timing_batch.md` and `CURRENT_PORT_HANDOFF.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
