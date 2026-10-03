@@ -14,6 +14,8 @@ static uint32_t cache_step_address(unsigned mode, unsigned reg, unsigned width) 
     case 6: return step_indexed(A(reg));
     case 7:
         if (reg == 1) return m68ki_read_imm_32();
+        if (reg == 2) return step_displacement(REG_PC);
+        if (reg == 3) return step_indexed(REG_PC);
         break;
     }
     abort();

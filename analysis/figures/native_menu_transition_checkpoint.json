@@ -1,0 +1,693 @@
+{
+  "date": "2026-10-03",
+  "entries_added": [
+    "C0FCB4",
+    "C0FECE",
+    "C0FFE2",
+    "C1000A",
+    "C17C2A",
+    "C24E8A"
+  ],
+  "registered_entries": 465,
+  "registered_timing_entries": 257,
+  "source": {
+    "manifest": "analysis/data/menu_transition_source_scope.json",
+    "sha256": "5fa0d0cea957e84e900c23c39de6997cb68dd7100d17917a125e61e64d23450b",
+    "unique_instructions": 324,
+    "shared_instructions": 31,
+    "delayed_owner_cold_instructions": 66,
+    "indexed_table_rows": [
+      {
+        "pc": "C0FFDE",
+        "mode": 9,
+        "bytes": "000000096000011e",
+        "arm": "C0FFE2",
+        "target": "C10102"
+      },
+      {
+        "pc": "C0FFE6",
+        "mode": 125,
+        "bytes": "0000007d600000c6",
+        "arm": "C0FFEA",
+        "target": "C100B2"
+      },
+      {
+        "pc": "C0FFEE",
+        "mode": 3,
+        "bytes": "00000003600000b4",
+        "arm": "C0FFF2",
+        "target": "C100A8"
+      },
+      {
+        "pc": "C0FFF6",
+        "mode": 2,
+        "bytes": "0000000260000044",
+        "arm": "C0FFFA",
+        "target": "C10040"
+      },
+      {
+        "pc": "C0FFFE",
+        "mode": 1,
+        "bytes": "0000000160000020",
+        "arm": "C10002",
+        "target": "C10024"
+      },
+      {
+        "pc": "C10006",
+        "mode": 127,
+        "bytes": "0000007f60000002",
+        "arm": "C1000A",
+        "target": "C1000E"
+      }
+    ]
+  },
+  "structural": {
+    "total_cases": 147456,
+    "real_child_cases": 98304,
+    "controlled_child_cases": 49152,
+    "all_registers_full_sr_all_ram": true,
+    "exclusions": [],
+    "each_layer_covers_every_owner_boundary": true,
+    "real": {
+      "C0FCB4": {
+        "path": "build/recomp/menu_transition_real_C0FCB4.log",
+        "sha256": "55891fba4c9944ac65e8ed584174aa315fabebb87fbfafc9e87d5ad491e0f283",
+        "summary": "menu-transition oracle C0FCB4: 16384 complete calls matched all registers, PC, full SR and all RAM; 172 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 93,
+        "additional_cold_instructions": 0
+      },
+      "C0FECE": {
+        "path": "build/recomp/menu_transition_real_C0FECE.log",
+        "sha256": "573b6d24cc9e436c26f0f81f4efa60babd02ca011747a686a20fa5ed8241fe95",
+        "summary": "menu-transition oracle C0FECE: 16384 complete calls matched all registers, PC, full SR and all RAM; 152 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 134,
+        "additional_cold_instructions": 66
+      },
+      "C0FFE2": {
+        "path": "build/recomp/menu_transition_real_C0FFE2.log",
+        "sha256": "3809a493448de5d8005ae764e9f2c2c499b90150d1d8d98fe00dfc9cc5b6683f",
+        "summary": "menu-transition oracle C0FFE2: 16384 complete calls matched all registers, PC, full SR and all RAM; 26 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 26,
+        "additional_cold_instructions": 0
+      },
+      "C1000A": {
+        "path": "build/recomp/menu_transition_real_C1000A.log",
+        "sha256": "99e54df8c9df8ef8be1926a29b1d1b6e9ad48c31cf303fdd4cd1605d11841db7",
+        "summary": "menu-transition oracle C1000A: 16384 complete calls matched all registers, PC, full SR and all RAM; 12 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 12,
+        "additional_cold_instructions": 0
+      },
+      "C17C2A": {
+        "path": "build/recomp/menu_transition_real_C17C2A.log",
+        "sha256": "40ed86d9c00415f67f6a3e8c907046651539312e0dc53847d7507e84c2223383",
+        "summary": "menu-transition oracle C17C2A: 16384 complete calls matched all registers, PC, full SR and all RAM; 18 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 18,
+        "additional_cold_instructions": 0
+      },
+      "C24E8A": {
+        "path": "build/recomp/menu_transition_real_C24E8A.log",
+        "sha256": "5a90b1a6e44b5972eaa8cc0d97f17596318cf435921cde2c17544de4a868f2c2",
+        "summary": "menu-transition oracle C24E8A: 16384 complete calls matched all registers, PC, full SR and all RAM; 79 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 79,
+        "additional_cold_instructions": 0
+      }
+    },
+    "contract": {
+      "C0FCB4": {
+        "path": "build/recomp/menu_transition_contract_C0FCB4.log",
+        "sha256": "9dcee235accc2474a9f18778790568652301738bd33a0e037fd0f09572a3b34e",
+        "summary": "menu-transition oracle C0FCB4: 8192 complete calls matched all registers, PC, full SR and all RAM; 93 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 93,
+        "additional_cold_instructions": 0
+      },
+      "C0FECE": {
+        "path": "build/recomp/menu_transition_contract_C0FECE.log",
+        "sha256": "712e5a28bc7f266312ee0453936327041f685ae30856cc90d86737d80e9fb4c9",
+        "summary": "menu-transition oracle C0FECE: 8192 complete calls matched all registers, PC, full SR and all RAM; 134 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 134,
+        "additional_cold_instructions": 66
+      },
+      "C0FFE2": {
+        "path": "build/recomp/menu_transition_contract_C0FFE2.log",
+        "sha256": "319bcfba09a408d281d0f1dbfac3968fcd858cb6eaa2eae36addfba20b26a502",
+        "summary": "menu-transition oracle C0FFE2: 8192 complete calls matched all registers, PC, full SR and all RAM; 26 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 26,
+        "additional_cold_instructions": 0
+      },
+      "C1000A": {
+        "path": "build/recomp/menu_transition_contract_C1000A.log",
+        "sha256": "e0200d4f75d413cb42a55a4a9956311a558e7f3dea61d966f188eb7fe510af49",
+        "summary": "menu-transition oracle C1000A: 8192 complete calls matched all registers, PC, full SR and all RAM; 12 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 12,
+        "additional_cold_instructions": 0
+      },
+      "C17C2A": {
+        "path": "build/recomp/menu_transition_contract_C17C2A.log",
+        "sha256": "97e4f21e0729f1662c29df03504f4accff0ca44598b635c6932e2e0ab69a3d7c",
+        "summary": "menu-transition oracle C17C2A: 8192 complete calls matched all registers, PC, full SR and all RAM; 18 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 18,
+        "additional_cold_instructions": 0
+      },
+      "C24E8A": {
+        "path": "build/recomp/menu_transition_contract_C24E8A.log",
+        "sha256": "4d11859f69b1c0b39a011d13bb40abdbf4fbbfff8a9768ab72ea73856251b54b",
+        "summary": "menu-transition oracle C24E8A: 8192 complete calls matched all registers, PC, full SR and all RAM; 79 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 79,
+        "additional_cold_instructions": 0
+      }
+    },
+    "contract_mutations": [
+      "returned register high halves and flags",
+      "MODE_SELECT after reset/clear children",
+      "returned A1 and MODE_TABLE for formatting children"
+    ]
+  },
+  "whole_call": {
+    "active_entries": [
+      "C0FCB4",
+      "C0FECE"
+    ],
+    "shadow_matches": 5476,
+    "sandbox_matches": 5332,
+    "shadow_incomplete": 8,
+    "sandbox_incomplete": 0,
+    "hardware": 0,
+    "mismatches": 0,
+    "cold_entries": [
+      "C0FFE2",
+      "C1000A",
+      "C17C2A",
+      "C24E8A"
+    ],
+    "active_evidence": {
+      "path": "build/recomp/menu_transition_active_whole_call.log",
+      "sha256": "c51ba471b3e2f84335145ed80fbab633bda96e0c4d7df91f58c2e659ec13af2b",
+      "summary": "whole-call C proof: 5476 shadow matches, 5332 sandbox matches"
+    },
+    "active_reports": {
+      "whole_call_C0FCB4_C0FECE_demo01_sandbox.json": {
+        "sha256": "c1e2399d9fb24d826a79ba41a0070f142556bdc0dcfa9688a2a48e00aae98df5",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1525,
+            "matched": 1525,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 211,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_demo01_shadow.json": {
+        "sha256": "914f8829807d09eb00a6fe3d783807f0b303a305e3b929ea01222fbd0b92f2ec",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1525,
+            "matched": 1524,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 210,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_qual_carrier_success_sandbox.json": {
+        "sha256": "4c77b8a89fef4c2f7cd925c82f81335ec1dabf919422b4a69c32f118cbfe9996",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1897,
+            "matched": 1897,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 211,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_qual_carrier_success_shadow.json": {
+        "sha256": "ace645537c005cedc7d41f6d61fb1c8bd1c171f3caa8344ae8f12903723c8c0a",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1898,
+            "matched": 1896,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2
+          },
+          "C0FECE": {
+            "calls": 362,
+            "matched": 360,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_qual_fail_crashes_sandbox.json": {
+        "sha256": "7bf18f5739a0fedb9ef09ae48c2a6cc553b68643047e6c51451f298584b49951",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1277,
+            "matched": 1277,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 211,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_qual_fail_crashes_shadow.json": {
+        "sha256": "08d20e13321a3402238303d340db4735624d327b17d88db972448c8aafd6895f",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1277,
+            "matched": 1276,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 210,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          }
+        }
+      }
+    },
+    "cold_rejection_evidence": {
+      "path": "build/recomp/menu_transition_whole_call.log",
+      "sha256": "a25a0480816c9f81680a34ebc9e38411a10c24703ceccf51dcdfb7e5adcc8f72",
+      "summary": "RuntimeError: C0FFE2: no completed comparisons"
+    },
+    "six_entry_reports": {
+      "whole_call_C0FCB4_C0FECE_C0FFE2_C1000A_C17C2A_C24E8A_demo01_sandbox.json": {
+        "sha256": "c1e2399d9fb24d826a79ba41a0070f142556bdc0dcfa9688a2a48e00aae98df5",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1525,
+            "matched": 1525,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 211,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FFE2": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1000A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17C2A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24E8A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_C0FFE2_C1000A_C17C2A_C24E8A_demo01_shadow.json": {
+        "sha256": "914f8829807d09eb00a6fe3d783807f0b303a305e3b929ea01222fbd0b92f2ec",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1525,
+            "matched": 1524,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 210,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C0FFE2": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1000A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17C2A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24E8A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_C0FFE2_C1000A_C17C2A_C24E8A_qual_carrier_success_sandbox.json": {
+        "sha256": "4c77b8a89fef4c2f7cd925c82f81335ec1dabf919422b4a69c32f118cbfe9996",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1897,
+            "matched": 1897,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 211,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FFE2": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1000A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17C2A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24E8A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_C0FFE2_C1000A_C17C2A_C24E8A_qual_carrier_success_shadow.json": {
+        "sha256": "ace645537c005cedc7d41f6d61fb1c8bd1c171f3caa8344ae8f12903723c8c0a",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1898,
+            "matched": 1896,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2
+          },
+          "C0FECE": {
+            "calls": 362,
+            "matched": 360,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2
+          },
+          "C0FFE2": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1000A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17C2A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24E8A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_C0FFE2_C1000A_C17C2A_C24E8A_qual_fail_crashes_sandbox.json": {
+        "sha256": "7bf18f5739a0fedb9ef09ae48c2a6cc553b68643047e6c51451f298584b49951",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1277,
+            "matched": 1277,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 211,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FFE2": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1000A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17C2A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24E8A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FCB4_C0FECE_C0FFE2_C1000A_C17C2A_C24E8A_qual_fail_crashes_shadow.json": {
+        "sha256": "08d20e13321a3402238303d340db4735624d327b17d88db972448c8aafd6895f",
+        "entries": {
+          "C0FCB4": {
+            "calls": 1277,
+            "matched": 1276,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C0FECE": {
+            "calls": 211,
+            "matched": 210,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C0FFE2": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1000A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17C2A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24E8A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      }
+    }
+  },
+  "timing": {
+    "local_instructions": 324,
+    "local_dma_cases": 10368,
+    "fresh_combined_instructions": 14963,
+    "fresh_combined_dma_cases": 478816,
+    "local_evidence": {
+      "path": "build/recomp/menu_transition_local_dma.log",
+      "sha256": "4bf2f5d36c3e6381730c322ee8371eac0e1e69bf3a9bf590525f1a4ca69795dd",
+      "summary": "menu_transition step oracle (DMA bus): 324 instructions, 10368 cases matched registers, SR, PC, cycles and RAM"
+    },
+    "combined_evidence": {
+      "path": "build/recomp/menu_transition_combined_dma.log",
+      "sha256": "39bcfe2562ab1594560c07776a67b5d35edf2845c71a8f1bea916c1eeb202944",
+      "summary": "all step oracle (DMA bus): 14963 instructions, 478816 cases matched registers, SR, PC, cycles and RAM"
+    }
+  },
+  "integration": {
+    "shadow_matches": 554025,
+    "sandbox_matches": 413303,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/menu_transition_full_gate.log",
+      "sha256": "11538257835f98a3e9a0398915ecd920b171de317e481e7cec00f96199eac88c",
+      "summary": "465 routines, 554025 matching calls over 3 recordings (+413303 in the sandbox pass); poison: frames identical"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "sha256": "c1de162094d6f82036a5adbd73e4f8e6b0985369c6ba14c4a3e3589319129fdb",
+        "matched": 303802,
+        "mismatched": 0
+      },
+      "ports_report_qual_carrier_success.json": {
+        "sha256": "95940cd02416de12130d2a4a150513a5c46a3e24d255d092f8e9b6ae7522347e",
+        "matched": 199167,
+        "mismatched": 0
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "sha256": "1b4b9bc7b7d64231704387f4bc599664814fdaeb7f4064fa8dbdf6164542dd5f",
+        "matched": 51056,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_demo01.json": {
+        "sha256": "a64d53dee014dab8cd7745a8b75a7a984291fe2c66f3d3aab8b092678296d79d",
+        "matched": 139485,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "sha256": "b483f3443b4194788a8353640ec73c7daf1ba097e453fbf2a43d428b6fe4e78c",
+        "matched": 231117,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "sha256": "e8caf12a5d6dc031361c0a79320bb0cf92e6ed4a155b3ee7d56eab52675d487b",
+        "matched": 42701,
+        "mismatched": 0
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "live_evidence": {
+      "path": "build/recomp/menu_transition_live_gate.log",
+      "sha256": "84f5651ae281dc1b829d2e99d6b369454c93c698dd7c11bba209b0eb5a74dafd",
+      "summary": "qual_fail_crashes: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe_evidence": {
+      "path": "build/recomp/menu_transition_probe.log",
+      "sha256": "8462910af5fbf0c5b0115a2cbec7b753cb5a0b1b6c46a7ee79897557762df10e",
+      "summary": "ALL: first difference frame 416, 361 pixels"
+    }
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/menu_transition_headless.log",
+      "sha256": "d9d153f5810630db03a3107e738e82af35f8928c2cd2dba322167fe0217d296e",
+      "summary": "[1/1] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -o build/recomp/fa18_recomp.exe @build/recomp/fa18_recomp.exe.rsp"
+    },
+    "msvc_release": {
+      "path": "build/recomp/menu_transition_msvc.log",
+      "sha256": "01ae8b9436f0f50638b04c0ee59b53ecf1a0c882b045e0246cb59d3da550e70a",
+      "summary": "  fa18_recomp.vcxproj -> C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp-cmake\\Release\\fa18_recomp.exe"
+    },
+    "artifacts_gib": 0.541
+  }
+}

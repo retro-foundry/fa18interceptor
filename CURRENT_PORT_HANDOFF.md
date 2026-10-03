@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 60dede75); ignored gate logs may
+history (the preceding handoff is in commit 953955c4); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -19,23 +19,37 @@ raised it to 435/624; complete update/input/display owners raised it to 438/624;
 four complete input-event owners raised it to 442/624; complete C1AC28/C1AD74
 command dispatch owners raised it to 444/624; the complete postflight mode
 scheduler family raised it to 454/624; complete context publishers and
-selected-record helpers now raise it to 459/624.
+selected-record helpers raised it to 459/624; complete menu-transition
+callbacks and their sound/summary helpers now raise it to 465/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 459 of 624 translated game entries are registered in port/game/glue/ports.c.
+- 465 of 624 translated game entries are registered in port/game/glue/ports.c.
   The latest full gate for that registered set matched 554,025 completed shadow
   calls and 413,303 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 459-entry baseline. GNU and
-  MSVC builds pass. There are 251 source-timed entries. The new five-entry
+  build/recomp/ports_report_*.json describe this 465-entry baseline. GNU and
+  MSVC builds pass. There are 257 source-timed entries. The six-entry complete
+  menu-transition family covers 324 unique boundaries, including all six
+  original table arms and 66 cold C0FECE instructions absent from its generated
+  listing. Every boundary passes separate real-child and controlled-child
+  proof: 147,456 complete CPU/RAM cases without exclusions. Main callback
+  readable C passes 5,476 shadow / 5,332 sandbox comparisons; eight incomplete
+  shadow calls remain retained. Four peers are cold; the generic zero-call
+  rejection remains retained. Local DMA passes 324 / 10,368; the fresh
+  combined oracle passes 14,963 instructions / 478,816 cases after adding
+  source PC-relative forms to the shared operand helper. All 36,236 isolated
+  live frames and RAM seals match. Build/ is 0.541 GiB. See
+  analysis/routines/native_c_menu_transition.md and
+  analysis/figures/native_menu_transition_checkpoint.json.
+  The preceding five-entry
   context-publication group passes 153 instructions / 4,896 DMA cases;
-  independent instruction coverage is 14,650 / 468,800. The last fresh
-  combined run remains 14,599 / 467,168; it was not repeated for this batch
+  independent instruction coverage at that checkpoint was 14,650 / 468,800.
+  Its last fresh combined run was 14,599 / 467,168; it was not repeated for that batch
   because shared runtime CPU/bus/math and fixture setup did not change.
   Its separate original-byte real-child, shared-body and controlled-child
   proofs pass 106,496 full CPU/RAM cases without exclusions, covering all
@@ -715,14 +729,18 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    post-input parent C0F5F8, context/bootstrap/callback batch and C22C80/C1C63E
    parents, complete C29042 active origin, update/input/display owners and
    the complete input-event and command-dispatch batches and postflight mode
-   scheduler family and context-publication/selected-record helpers are
-   registered at 459/624.
+   scheduler family, context-publication/selected-record helpers and complete
+   menu-transition callback family are registered at 465/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
    or count internal labels as extra routines. Audit remaining complete
-   postflight/menu callbacks C0FCB4/C0FECE/C0FFE2/C1000A and their remaining
-   children C17C2A/C24E8A next. C0FFE2/C1000A share continuations that UNLK
-   the enclosing A6 frame: source-owned frame fixtures are required;
+   top-level menu owner C0FBE0 with sound child C17B96 and complete
+   C1082C/C11BB0/C24FA4 menu/input helpers next. Preserve the existing C0E78A
+   child contract in the game owner; OS work remains deferred. C1082C returns
+   through an enclosing frame and needs the same original frame fixtures as
+   the now proven C0FFE2/C1000A. Audit installed source-only callbacks
+   C0FE36/C1017E/C10272/C103E4 separately: they are absent from the seeded
+   624-entry translation, so this denominator does not prove whole-game scope;
    the leaf tool excludes indirect calls. Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
@@ -757,6 +775,9 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    full objective. Fresh OFF/ON comparisons test our replacements on the
    same machine model; an independent UAE/Amiga timing check is a distinct
    proof and must not be inferred from them.
+   Reconcile the complete original callback/call graph before declaring
+   Stage D finished. The 624 translated entries are seeded from recordings;
+   installed cold source-only owners and indirect targets also require C.
 
 ## Gate for a registered batch
 

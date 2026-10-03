@@ -14,7 +14,7 @@ MANIFEST=ROOT/"analysis/data/command_dispatch_source_scope.json"
 STATE=ROOT/"captures/native/demo01/state.bin"
 ENTRIES=("C1AC28", "C1AD74")
 
-def audit(entries=ENTRIES):
+def source_decoder():
     state=STATE.read_bytes()
     regions=[]
     offset=0
@@ -27,7 +27,11 @@ def audit(entries=ENTRIES):
         if tag in (b"CRAM",b"BRAM"):
             regions.append((0 if tag==b"CRAM" else 0xc00000,state[offset+12:offset+length]))
         offset+=(length+3)&~3
-    decoder=Decoder((ROOT/"build/recomp/dasm_helper.dll").resolve(),regions)
+    return state,Decoder((ROOT/"build/recomp/dasm_helper.dll").resolve(),regions)
+
+def audit(entries=ENTRIES, dynamic_targets=None, additional_cold_entries=()):
+    state,decoder=source_decoder()
+    dynamic_targets=dynamic_targets or {}
     rows={}
     owners={}
     for entry in entries:
@@ -48,6 +52,8 @@ def audit(entries=ENTRIES):
                       "opcode":f"{opcode:04X}","instruction":assembly}
             if kind=="rts": continue
             if kind=="interp": raise ValueError(f"{entry}: exceptional source exit {pc:06X}")
+            if kind=="jmp" and target is None and pc in dynamic_targets:
+                pending.extend(dynamic_targets[pc]); continue
             if kind in ("bra","jmp","bcc","dbcc","bsr","jsr") and target is None:
                 raise ValueError(f"{entry}: dynamic transfer needs further evidence at {pc:06X}")
             if kind in ("bra","jmp"): pending.append(target)
@@ -58,9 +64,9 @@ def audit(entries=ENTRIES):
                                   "return_pc":f"{pc+length:06X}"})
                 pending.append(pc+length)
         generated={int(line.split(":")[0],16) for line in instructions(entry)}
-        if generated!=visited:
+        if generated-visited or (generated!=visited and entry not in additional_cold_entries):
             raise ValueError(f"{entry}: generated/source difference {sorted(generated^visited)}")
-        owners[entry]={"instruction_count":len(visited),"additional_cold_instructions":0,
+        owners[entry]={"instruction_count":len(visited),"additional_cold_instructions":len(visited-generated),
                        "source_pcs":[f"{pc:06X}" for pc in sorted(visited)],
                        "child_call_sites":sorted(calls,key=lambda row:row["pc"])}
     sets=[set(owner["source_pcs"]) for owner in owners.values()]

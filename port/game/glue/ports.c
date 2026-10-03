@@ -7,6 +7,13 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete menu callback owners, including all six delayed table arms. */
+    {0xC0FCB4, glue_C0FCB4, "follow_top_level_menu", 0, 0, glue_C0FCB4_step, 0xC0FE36, 0, 0, glue_C0FCB4_owns},
+    {0xC0FECE, glue_C0FECE, "advance_delayed_menu", 0, 0, glue_C0FECE_step, 0xC1017E, 0, 0, glue_C0FECE_owns},
+    {0xC0FFE2, glue_C0FFE2, "enter_menu_mode_nine", 0, 0, glue_C0FFE2_step, 0xC1017E, 0, 0, glue_C0FFE2_owns},
+    {0xC1000A, glue_C1000A, "enter_menu_demonstration", 0, 0, glue_C1000A_step, 0xC1017E, 0, 0, glue_C1000A_owns},
+    {0xC17C2A, glue_C17C2A, "start_menu_alert_pair", 0, 0, glue_C17C2A_step, 0xC17C62, 0, 0, glue_C17C2A_owns},
+    {0xC24E8A, glue_C24E8A, "format_menu_summary", 0, 0, glue_C24E8A_step, 0xC24FA4, 0, 0, glue_C24E8A_owns},
     /* Complete command/context and selected-record publication owners. */
     {0xC1B7A6, glue_C1B7A6, "publish_context_detail_command", 0, 0, glue_C1B7A6_step, 0xC1C2B8, 0, 0, glue_C1B7A6_owns},
     {0xC1BEE8, glue_C1BEE8, "publish_context_record_command", 0, 0, glue_C1BEE8_step, 0xC1C2B8, 0, 0xC1B906, glue_C1BEE8_owns},

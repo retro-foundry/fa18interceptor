@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -25,7 +25,10 @@ body={
  "moveq":"D(destination)=(uint32_t)(int32_t)(int8_t)opcode; flags_logic_l(D(destination)); break;",
  "lea":"A(destination)=cache_step_address(mode,reg,4); break;",
  "adda.w":"A(destination)+=(uint32_t)(int32_t)(int16_t)cache_step_read(mode,reg,2); break;",
+ "adda.l":"A(destination)+=cache_step_read(mode,reg,4); break;",
  "ext.w":"SET_W(D(reg),(int16_t)(int8_t)D(reg)); flags_logic_w(D(reg)); break;",
+ "ext.l":"D(reg)=(uint32_t)(int32_t)(int16_t)D(reg); flags_logic_l(D(reg)); break;",
+ "divu.w":"step_divide_unsigned(&D(destination),(uint16_t)cache_step_read(mode,reg,2)); break;",
  "swap":"step_swap(&D(reg)); break;",
  "asl.l":"step_asl_long(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;",
  "movem.w":"mask=m68ki_read_imm_16(); address=cache_step_address(mode,reg,2); renderer_load(address,mask,2,mode==3?(int)reg:-1); break;",
@@ -33,7 +36,7 @@ body={
  "exg":"value=A(destination); A(destination)=A(reg); A(reg)=value; break;",
  "neg.l":"renderer_negate(&D(reg),4); break;",
 }
-for mnemonic,condition in {"bra":"1","beq":"COND_EQ()","bne":"COND_NE()","blt":"COND_LT()","ble":"COND_LE()","bge":"COND_GE()","bgt":"COND_GT()"}.items():
+for mnemonic,condition in {"bra":"1","beq":"COND_EQ()","bne":"COND_NE()","blt":"COND_LT()","ble":"COND_LE()","bge":"COND_GE()","bgt":"COND_GT()","bpl":"COND_PL()","bmi":"COND_MI()","bcs":"COND_CS()","bhi":"COND_HI()"}.items():
  body[mnemonic]=f"step_branch(pc,opcode,{condition}); break;"
 for suffix,width,name in (("b",1,"byte"),("w",2,"word"),("l",4,"long")):
  imm=f"m68ki_read_imm_{32 if width==4 else 16}()"
@@ -62,6 +65,7 @@ out="""/* Complete C1AC28/C1AD74 source CPU/bus/event boundaries.
  * Reproduce with tools/recomp/make_command_dispatch_step.py. */
 #include "glue_renderer_step_math.h"
 #include "glue_cache_step_operands.h"
+#include "glue_unsigned_division_step.h"
 #include "glue_command_dispatch.h"
 
 static int command_step(void) {

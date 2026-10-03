@@ -25,11 +25,13 @@ def main():
     group_names += ("selector_origin", "update_sequence", "input_events", "command_dispatch")
     group_names += ("postflight_scheduler",)
     group_names += ("context_publication",)
+    group_names += ("menu_transition",)
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "menu_transition": ["C0FCB4","C0FECE","C0FFE2","C1000A","C17C2A","C24E8A"],
         "context_publication": ["C1B7A6","C1BEE8","C1C214","C083A6","C09DD0"],
         "postflight_scheduler": ["C09E06","C09E98","C09EC4","C0A002","C0A12E","C0A15C",
                                  "C0A1E0","C0A2F0","C0A334","C0A364","C0A3EA"],
@@ -94,7 +96,14 @@ def main():
     entries = (entry for name in group_names for entry in groups[name]) \
         if args.group == "all" else iter(groups[args.group])
     addresses = {}
+    # The delayed menu owner includes 66 unrecorded instructions behind its
+    # original indexed jump. Use the audited complete byte scope for this group.
+    import json
+    menu_owners = json.loads((ROOT / "analysis/data/menu_transition_source_scope.json").read_text())["owners"]
     for entry in entries:
+        if entry in menu_owners:
+            for pc in menu_owners[entry]["source_pcs"]: addresses.setdefault(pc,entry)
+            continue
         source = instructions(entry)
         if not source:
             raise SystemExit(f"missing original instructions for {entry}")
