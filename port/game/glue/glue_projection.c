@@ -86,16 +86,3 @@ rejected:
     flags_logic_l(0xFFFFFFFFu); /* the invalid pair's MOVE.L */
     return;
 }
-
-static int projection_mode(int16_t mode, int entry) {
-    int16_t x = W(0), y = W(1), depth = W(2);
-    if (entry == 0) project_view_point(x, y, depth);
-    else project_view_point_mode(x, y, depth, mode, rd_s16(A(6) - 0x28), W(6));
-    projection_mode_registers(mode, entry);
-    return glue_return();
-}
-
-int glue_C2EC90(void) { return projection_mode(-5, 0); }
-int glue_C2EC94(void) { return projection_mode(rd_s16(0xC45AB8u), 1); }
-int glue_C2EC9C(void) { return projection_mode(-4, 2); }
-int glue_C2ECA4(void) { return projection_mode(-2, 2); }

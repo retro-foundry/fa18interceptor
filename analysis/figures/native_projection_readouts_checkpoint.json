@@ -1,0 +1,4375 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "208efadd",
+  "new_registered_owners": [
+    "C2ECA8",
+    "C32A44",
+    "C32AC8",
+    "C33F70",
+    "C33F8A",
+    "C33FB4"
+  ],
+  "upgraded_registered_owners": [
+    "C2EC90",
+    "C2EC94",
+    "C2EC9C",
+    "C2ECA4"
+  ],
+  "registered_translated_entries": 520,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 586,
+  "registered_timing_entries": 410,
+  "registered_translated_timing_entries": 344,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/projection_readouts_source_scope.json",
+      "sha256": "8ca3fd4e10967bea5f7f5cb69f3325aa8d3914d0a250930b98416d8d9110f96c"
+    },
+    "unique_instructions": 272,
+    "shared_within_batch": 163,
+    "distinct_child_sites": 16,
+    "child_sites_by_owner": 41,
+    "actual_original_callability": {
+      "C2EC90": [
+        {
+          "pc": "C1F1D0",
+          "return_pc": "C1F1D6",
+          "instruction": "jsr     $c2ec90.l",
+          "bytes": "4eb900c2ec90"
+        },
+        {
+          "pc": "C2B938",
+          "return_pc": "C2B93E",
+          "instruction": "jsr     $c2ec90.l",
+          "bytes": "4eb900c2ec90"
+        },
+        {
+          "pc": "C2B978",
+          "return_pc": "C2B97E",
+          "instruction": "jsr     $c2ec90.l",
+          "bytes": "4eb900c2ec90"
+        },
+        {
+          "pc": "C33D34",
+          "return_pc": "C33D3A",
+          "instruction": "jsr     $c2ec90.l",
+          "bytes": "4eb900c2ec90"
+        }
+      ],
+      "C2EC94": [
+        {
+          "pc": "C1FE3A",
+          "return_pc": "C1FE40",
+          "instruction": "jsr     $c2ec94.l",
+          "bytes": "4eb900c2ec94"
+        }
+      ],
+      "C2EC9C": [
+        {
+          "pc": "C0D040",
+          "return_pc": "C0D046",
+          "instruction": "jsr     $c2ec9c.l",
+          "bytes": "4eb900c2ec9c"
+        },
+        {
+          "pc": "C0D256",
+          "return_pc": "C0D25C",
+          "instruction": "jsr     $c2ec9c.l",
+          "bytes": "4eb900c2ec9c"
+        },
+        {
+          "pc": "C0D290",
+          "return_pc": "C0D296",
+          "instruction": "jsr     $c2ec9c.l",
+          "bytes": "4eb900c2ec9c"
+        },
+        {
+          "pc": "C0D2CA",
+          "return_pc": "C0D2D0",
+          "instruction": "jsr     $c2ec9c.l",
+          "bytes": "4eb900c2ec9c"
+        },
+        {
+          "pc": "C0D2EA",
+          "return_pc": "C0D2F0",
+          "instruction": "jsr     $c2ec9c.l",
+          "bytes": "4eb900c2ec9c"
+        },
+        {
+          "pc": "C0DB3A",
+          "return_pc": "C0DB40",
+          "instruction": "jsr     $c2ec9c.l",
+          "bytes": "4eb900c2ec9c"
+        }
+      ],
+      "C2ECA4": [
+        {
+          "pc": "C1FE5C",
+          "return_pc": "C1FE62",
+          "instruction": "jsr     $c2eca4.l",
+          "bytes": "4eb900c2eca4"
+        }
+      ],
+      "C2ECA8": [
+        {
+          "pc": "C2B528",
+          "return_pc": "C2B52E",
+          "instruction": "jsr     $c2eca8.l",
+          "bytes": "4eb900c2eca8"
+        },
+        {
+          "pc": "C2CD0C",
+          "return_pc": "C2CD12",
+          "instruction": "jsr     $c2eca8.l",
+          "bytes": "4eb900c2eca8"
+        }
+      ],
+      "C32A44": [
+        {
+          "pc": "C2B54E",
+          "return_pc": "C2B554",
+          "instruction": "jsr     $c32a44.l",
+          "bytes": "4eb900c32a44"
+        },
+        {
+          "pc": "C2B646",
+          "return_pc": "C2B64C",
+          "instruction": "jsr     $c32a44.l",
+          "bytes": "4eb900c32a44"
+        },
+        {
+          "pc": "C2B70A",
+          "return_pc": "C2B710",
+          "instruction": "jsr     $c32a44.l",
+          "bytes": "4eb900c32a44"
+        }
+      ],
+      "C32AC8": [
+        {
+          "pc": "C31BAA",
+          "return_pc": "C31BAE",
+          "instruction": "bsr     $c32ac8",
+          "bytes": "61000f1c"
+        },
+        {
+          "pc": "C31BE6",
+          "return_pc": "C31BEA",
+          "instruction": "bsr     $c32ac8",
+          "bytes": "61000ee0"
+        },
+        {
+          "pc": "C31C1A",
+          "return_pc": "C31C1E",
+          "instruction": "bsr     $c32ac8",
+          "bytes": "61000eac"
+        }
+      ],
+      "C33F70": [
+        {
+          "pc": "C336F4",
+          "return_pc": "C336F8",
+          "instruction": "bsr     $c33f70",
+          "bytes": "6100087a"
+        },
+        {
+          "pc": "C33732",
+          "return_pc": "C33736",
+          "instruction": "bsr     $c33f70",
+          "bytes": "6100083c"
+        },
+        {
+          "pc": "C33772",
+          "return_pc": "C33776",
+          "instruction": "bsr     $c33f70",
+          "bytes": "610007fc"
+        }
+      ],
+      "C33F8A": [
+        {
+          "pc": "C334E8",
+          "return_pc": "C334EC",
+          "instruction": "bsr     $c33f8a",
+          "bytes": "61000aa0"
+        },
+        {
+          "pc": "C3353E",
+          "return_pc": "C33542",
+          "instruction": "bsr     $c33f8a",
+          "bytes": "61000a4a"
+        },
+        {
+          "pc": "C33598",
+          "return_pc": "C3359C",
+          "instruction": "bsr     $c33f8a",
+          "bytes": "610009f0"
+        }
+      ],
+      "C33FB4": [
+        {
+          "pc": "C335AA",
+          "return_pc": "C335AE",
+          "instruction": "bsr     $c33fb4",
+          "bytes": "61000a08"
+        },
+        {
+          "pc": "C33782",
+          "return_pc": "C33786",
+          "instruction": "bsr     $c33fb4",
+          "bytes": "61000830"
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 327680,
+  "controlled_child_completed_calls": 163840,
+  "real_child_completed_calls": 163840,
+  "fixture_coverage": [
+    {
+      "owner": "C2EC90",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 59,
+      "raw_observed_pcs": 59,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C2EC90.log",
+        "sha256": "b9a8a6578e7bc8063e158eacc87ae4c55a6a9e2c48ca4d5ba4c7d76e741bad6a"
+      }
+    },
+    {
+      "owner": "C2EC94",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 76,
+      "unobserved_owner_pcs": [
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C2EC94.log",
+        "sha256": "52b95a58886823b759a7e51e7b45e1f09acc7d49780c0a8c9760461de2e87b83"
+      }
+    },
+    {
+      "owner": "C2EC9C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 60,
+      "raw_observed_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C2EC9C.log",
+        "sha256": "f61e6403d7ff1198b1e6c9aa50717424bc47a4bdd64f3ca55c9e839b95467c13"
+      }
+    },
+    {
+      "owner": "C2ECA4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 57,
+      "raw_observed_pcs": 57,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C2ECA4.log",
+        "sha256": "3ab02f37f7c11c7f6708a26e29c4f1686f3894046c5104c3926e26cb31d97763"
+      }
+    },
+    {
+      "owner": "C2ECA8",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 54,
+      "raw_observed_pcs": 54,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C2ECA8.log",
+        "sha256": "fcd332e5cce4cc50e1d3a037f41ca58e92117a047c178db723276a7d6f29629a"
+      }
+    },
+    {
+      "owner": "C32A44",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 110,
+      "observed_owner_pcs": 104,
+      "raw_observed_pcs": 104,
+      "unobserved_owner_pcs": [
+        "C32AEE",
+        "C32AF0",
+        "C32AF4",
+        "C32AF6",
+        "C32AFC",
+        "C32AFE"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C32A44.log",
+        "sha256": "e5aa36e9a81de7c71722a3edce7d8fe48063cd99cc2bb19a664b9c016fd7856b"
+      }
+    },
+    {
+      "owner": "C32AC8",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "raw_observed_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C32AC8.log",
+        "sha256": "16c68b1f9bfbb7b723185c971ef85d5f616ba36cf76aa4f0440a025ac7aff879"
+      }
+    },
+    {
+      "owner": "C33F70",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 14,
+      "observed_owner_pcs": 14,
+      "raw_observed_pcs": 14,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C33F70.log",
+        "sha256": "71606c819623f18198efb7705117a049e65ccd4a6c548c2ac785b5e143efebfb"
+      }
+    },
+    {
+      "owner": "C33F8A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "raw_observed_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C33F8A.log",
+        "sha256": "15010667df9344d56677b2555f11f37332291de623f46d85b1f520f5a0f29ad4"
+      }
+    },
+    {
+      "owner": "C33FB4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 50,
+      "raw_observed_pcs": 50,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_C33FB4.log",
+        "sha256": "200480f983700ba0d245e81aa533ca2704692d2819e0c53c4de4a72ab8a95b51"
+      }
+    },
+    {
+      "owner": "C2EC90",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 59,
+      "raw_observed_pcs": 59,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C2EC90.log",
+        "sha256": "8bcfc892bb0e58c65c950aabe5de4a68a594f645bce3dc3935cdb1e8cb4825da"
+      }
+    },
+    {
+      "owner": "C2EC94",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 76,
+      "unobserved_owner_pcs": [
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C2EC94.log",
+        "sha256": "2572558bc38fc1d0d9613b2db2f8f56d752dfa55ccc568917843f0a9e410e397"
+      }
+    },
+    {
+      "owner": "C2EC9C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 60,
+      "raw_observed_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C2EC9C.log",
+        "sha256": "361e72b2dc03b868a0fe6fd6a2b104203a331df9281827263d7265c9723b989e"
+      }
+    },
+    {
+      "owner": "C2ECA4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 57,
+      "raw_observed_pcs": 57,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C2ECA4.log",
+        "sha256": "ad1dc6ec4bf9020005dd5d5a1eb0b7603e499b61c92a5f9facb55c95e6b111a8"
+      }
+    },
+    {
+      "owner": "C2ECA8",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 54,
+      "raw_observed_pcs": 54,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C2ECA8.log",
+        "sha256": "6179acf4b0f729e355c22d25bd7be0f1ee6659f6be0ff1cf924e2e3e9ebf0321"
+      }
+    },
+    {
+      "owner": "C32A44",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 110,
+      "observed_owner_pcs": 104,
+      "raw_observed_pcs": 104,
+      "unobserved_owner_pcs": [
+        "C32AEE",
+        "C32AF0",
+        "C32AF4",
+        "C32AF6",
+        "C32AFC",
+        "C32AFE"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C32A44.log",
+        "sha256": "4727ed436d2365cc7fb6d04a9ce219ee477dbb99c7c2c9a43f243d6feb86c90b"
+      }
+    },
+    {
+      "owner": "C32AC8",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "raw_observed_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C32AC8.log",
+        "sha256": "691559f497c50928862db25d5be4bf3d890ce7123f12352a693d0edf9e3cd8f7"
+      }
+    },
+    {
+      "owner": "C33F70",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 14,
+      "observed_owner_pcs": 14,
+      "raw_observed_pcs": 14,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C33F70.log",
+        "sha256": "0d48c4ae32821e05648e49ed3f6ea36465a5a8737006a1e4d95d9e4a979745f2"
+      }
+    },
+    {
+      "owner": "C33F8A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "raw_observed_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C33F8A.log",
+        "sha256": "677bc6eb6b4fe8ed9e260ebfcea96f196e999d92501522e751dcb2cdd4f06696"
+      }
+    },
+    {
+      "owner": "C33FB4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 50,
+      "raw_observed_pcs": 50,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_C33FB4.log",
+        "sha256": "f153382ae173337a3fef6547292f34e37794b7836d032ac1f6b8034866449e4c"
+      }
+    }
+  ],
+  "internal_segment_completed_calls": 65536,
+  "internal_segment_fixtures": [
+    {
+      "source_boundary": "C2ECD2",
+      "kind": "contract",
+      "completed_segments": 16384,
+      "observed_source_pcs": [
+        "C2EC82",
+        "C2EC84",
+        "C2EC8E",
+        "C2ECD2",
+        "C2ECD6",
+        "C2ECD8",
+        "C2ECDC",
+        "C2ECDE",
+        "C2ECE2",
+        "C2ECE4",
+        "C2ECE8",
+        "C2ECEA",
+        "C2ECEE",
+        "C2ECF0",
+        "C2ECF4",
+        "C2ECF6",
+        "C2ECF8",
+        "C2ECFE",
+        "C2ED00",
+        "C2ED08",
+        "C2ED0A",
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED48",
+        "C2ED4A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED58",
+        "C2ED5A",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_segment_C2ECD2.log",
+        "sha256": "07f3da935a0c31f01db3be3ce0b84e2dd634d9b106131be12238c97328e33d8a"
+      }
+    },
+    {
+      "source_boundary": "C2ECE4",
+      "kind": "contract",
+      "completed_segments": 16384,
+      "observed_source_pcs": [
+        "C2EC82",
+        "C2EC84",
+        "C2EC8E",
+        "C2ECE4",
+        "C2ECE8",
+        "C2ECEA",
+        "C2ECEE",
+        "C2ECF0",
+        "C2ECF4",
+        "C2ECF6",
+        "C2ECF8",
+        "C2ECFE",
+        "C2ED00",
+        "C2ED08",
+        "C2ED0A",
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED52",
+        "C2ED56",
+        "C2ED58",
+        "C2ED5A",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_contract_segment_C2ECE4.log",
+        "sha256": "20dff54bc442c632ee3c8f91f5f86d68de22e9e0dcaeb4016670b35d57d16ae4"
+      }
+    },
+    {
+      "source_boundary": "C2ECD2",
+      "kind": "real",
+      "completed_segments": 16384,
+      "observed_source_pcs": [
+        "C2EC82",
+        "C2EC84",
+        "C2EC8E",
+        "C2ECD2",
+        "C2ECD6",
+        "C2ECD8",
+        "C2ECDC",
+        "C2ECDE",
+        "C2ECE2",
+        "C2ECE4",
+        "C2ECE8",
+        "C2ECEA",
+        "C2ECEE",
+        "C2ECF0",
+        "C2ECF4",
+        "C2ECF6",
+        "C2ECF8",
+        "C2ECFE",
+        "C2ED00",
+        "C2ED08",
+        "C2ED0A",
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED48",
+        "C2ED4A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED58",
+        "C2ED5A",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_segment_C2ECD2.log",
+        "sha256": "f94c8955e603a828e2b1cde3e6f78ad12161819e235c6dbc91ea42407255683c"
+      }
+    },
+    {
+      "source_boundary": "C2ECE4",
+      "kind": "real",
+      "completed_segments": 16384,
+      "observed_source_pcs": [
+        "C2EC82",
+        "C2EC84",
+        "C2EC8E",
+        "C2ECE4",
+        "C2ECE8",
+        "C2ECEA",
+        "C2ECEE",
+        "C2ECF0",
+        "C2ECF4",
+        "C2ECF6",
+        "C2ECF8",
+        "C2ECFE",
+        "C2ED00",
+        "C2ED08",
+        "C2ED0A",
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED52",
+        "C2ED56",
+        "C2ED58",
+        "C2ED5A",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_real_segment_C2ECE4.log",
+        "sha256": "dc295ea3cade354ed5c09be65b70e52cafc5c8c739d8c6e68223a438993ef6dc"
+      }
+    }
+  ],
+  "controlled_whole_owner_union_pcs": 268,
+  "controlled_union_with_internal_segments_pcs": 272,
+  "internal_segments_not_function_owners": true,
+  "actual_dispatch_completed_calls": 491520,
+  "dispatch_fixtures": [
+    {
+      "owner": "C2EC90",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 59,
+      "raw_observed_pcs": 59,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC90_on.log",
+        "sha256": "526e90c5291bd7a470ffc1c06ad0ede463e81135cd8a4b49836866e28875ada6"
+      }
+    },
+    {
+      "owner": "C2EC90",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 59,
+      "raw_observed_pcs": 59,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC90_shadow.log",
+        "sha256": "526e90c5291bd7a470ffc1c06ad0ede463e81135cd8a4b49836866e28875ada6"
+      }
+    },
+    {
+      "owner": "C2EC90",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 59,
+      "raw_observed_pcs": 59,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC90_sandbox.log",
+        "sha256": "526e90c5291bd7a470ffc1c06ad0ede463e81135cd8a4b49836866e28875ada6"
+      }
+    },
+    {
+      "owner": "C2EC94",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 76,
+      "unobserved_owner_pcs": [
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC94_on.log",
+        "sha256": "65b1274ab1b47d3ab0c5ba565f439a513e2965650fb0a9915922dfea4332c9a1"
+      }
+    },
+    {
+      "owner": "C2EC94",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 76,
+      "unobserved_owner_pcs": [
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC94_shadow.log",
+        "sha256": "65b1274ab1b47d3ab0c5ba565f439a513e2965650fb0a9915922dfea4332c9a1"
+      }
+    },
+    {
+      "owner": "C2EC94",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 76,
+      "unobserved_owner_pcs": [
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC94_sandbox.log",
+        "sha256": "65b1274ab1b47d3ab0c5ba565f439a513e2965650fb0a9915922dfea4332c9a1"
+      }
+    },
+    {
+      "owner": "C2EC9C",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 60,
+      "raw_observed_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC9C_on.log",
+        "sha256": "10c9492d2eeae07dabd26dd85241436ef0f07bbcaee8d092b52cb6aba059df50"
+      }
+    },
+    {
+      "owner": "C2EC9C",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 60,
+      "raw_observed_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC9C_shadow.log",
+        "sha256": "10c9492d2eeae07dabd26dd85241436ef0f07bbcaee8d092b52cb6aba059df50"
+      }
+    },
+    {
+      "owner": "C2EC9C",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 60,
+      "raw_observed_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2EC9C_sandbox.log",
+        "sha256": "10c9492d2eeae07dabd26dd85241436ef0f07bbcaee8d092b52cb6aba059df50"
+      }
+    },
+    {
+      "owner": "C2ECA4",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 57,
+      "raw_observed_pcs": 57,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2ECA4_on.log",
+        "sha256": "d0eb41e1c5f8f9de1bc55546b9119d8c43af466f7e84c7feb84b4f41f2c38207"
+      }
+    },
+    {
+      "owner": "C2ECA4",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 57,
+      "raw_observed_pcs": 57,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2ECA4_shadow.log",
+        "sha256": "d0eb41e1c5f8f9de1bc55546b9119d8c43af466f7e84c7feb84b4f41f2c38207"
+      }
+    },
+    {
+      "owner": "C2ECA4",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 57,
+      "raw_observed_pcs": 57,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2ECA4_sandbox.log",
+        "sha256": "d0eb41e1c5f8f9de1bc55546b9119d8c43af466f7e84c7feb84b4f41f2c38207"
+      }
+    },
+    {
+      "owner": "C2ECA8",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 54,
+      "raw_observed_pcs": 54,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2ECA8_on.log",
+        "sha256": "4ad9bc61d4682a0e809fc86e508ef8b7b5abea79874b549366cfcbdda5435096"
+      }
+    },
+    {
+      "owner": "C2ECA8",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 54,
+      "raw_observed_pcs": 54,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2ECA8_shadow.log",
+        "sha256": "4ad9bc61d4682a0e809fc86e508ef8b7b5abea79874b549366cfcbdda5435096"
+      }
+    },
+    {
+      "owner": "C2ECA8",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 54,
+      "raw_observed_pcs": 54,
+      "unobserved_owner_pcs": [
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C2ECA8_sandbox.log",
+        "sha256": "4ad9bc61d4682a0e809fc86e508ef8b7b5abea79874b549366cfcbdda5435096"
+      }
+    },
+    {
+      "owner": "C32A44",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 110,
+      "observed_owner_pcs": 104,
+      "raw_observed_pcs": 104,
+      "unobserved_owner_pcs": [
+        "C32AEE",
+        "C32AF0",
+        "C32AF4",
+        "C32AF6",
+        "C32AFC",
+        "C32AFE"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C32A44_on.log",
+        "sha256": "460309bbebda360813df752ef40b2f4cfd3514f6ee3766542c3cb3902969580e"
+      }
+    },
+    {
+      "owner": "C32A44",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 110,
+      "observed_owner_pcs": 104,
+      "raw_observed_pcs": 104,
+      "unobserved_owner_pcs": [
+        "C32AEE",
+        "C32AF0",
+        "C32AF4",
+        "C32AF6",
+        "C32AFC",
+        "C32AFE"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C32A44_shadow.log",
+        "sha256": "460309bbebda360813df752ef40b2f4cfd3514f6ee3766542c3cb3902969580e"
+      }
+    },
+    {
+      "owner": "C32A44",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 110,
+      "observed_owner_pcs": 104,
+      "raw_observed_pcs": 104,
+      "unobserved_owner_pcs": [
+        "C32AEE",
+        "C32AF0",
+        "C32AF4",
+        "C32AF6",
+        "C32AFC",
+        "C32AFE"
+      ],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C32A44_sandbox.log",
+        "sha256": "460309bbebda360813df752ef40b2f4cfd3514f6ee3766542c3cb3902969580e"
+      }
+    },
+    {
+      "owner": "C32AC8",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "raw_observed_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C32AC8_on.log",
+        "sha256": "d47c907610cc18ed188386fddc9baa1dce81b944ff7ab9742d2cb69fb2807a28"
+      }
+    },
+    {
+      "owner": "C32AC8",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "raw_observed_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C32AC8_shadow.log",
+        "sha256": "d47c907610cc18ed188386fddc9baa1dce81b944ff7ab9742d2cb69fb2807a28"
+      }
+    },
+    {
+      "owner": "C32AC8",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "raw_observed_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C32AC8_sandbox.log",
+        "sha256": "d47c907610cc18ed188386fddc9baa1dce81b944ff7ab9742d2cb69fb2807a28"
+      }
+    },
+    {
+      "owner": "C33F70",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 14,
+      "observed_owner_pcs": 14,
+      "raw_observed_pcs": 14,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33F70_on.log",
+        "sha256": "ce2f4a0a01f2e6bdf0ea1b8950e9c13d029c96906f3c00a1d2ab54ec69504768"
+      }
+    },
+    {
+      "owner": "C33F70",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 14,
+      "observed_owner_pcs": 14,
+      "raw_observed_pcs": 14,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33F70_shadow.log",
+        "sha256": "ce2f4a0a01f2e6bdf0ea1b8950e9c13d029c96906f3c00a1d2ab54ec69504768"
+      }
+    },
+    {
+      "owner": "C33F70",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 14,
+      "observed_owner_pcs": 14,
+      "raw_observed_pcs": 14,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33F70_sandbox.log",
+        "sha256": "ce2f4a0a01f2e6bdf0ea1b8950e9c13d029c96906f3c00a1d2ab54ec69504768"
+      }
+    },
+    {
+      "owner": "C33F8A",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "raw_observed_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33F8A_on.log",
+        "sha256": "0ebafd1429fbfc3c30b01226266d20d4ff5054c4d2a8a705b3805fdeabb9b7e5"
+      }
+    },
+    {
+      "owner": "C33F8A",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "raw_observed_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33F8A_shadow.log",
+        "sha256": "0ebafd1429fbfc3c30b01226266d20d4ff5054c4d2a8a705b3805fdeabb9b7e5"
+      }
+    },
+    {
+      "owner": "C33F8A",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "raw_observed_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33F8A_sandbox.log",
+        "sha256": "0ebafd1429fbfc3c30b01226266d20d4ff5054c4d2a8a705b3805fdeabb9b7e5"
+      }
+    },
+    {
+      "owner": "C33FB4",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 50,
+      "raw_observed_pcs": 50,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33FB4_on.log",
+        "sha256": "c2c608f4cee30aefb376c184a05e74f156b102712bcca72c4864b53a1a1ee09c"
+      }
+    },
+    {
+      "owner": "C33FB4",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 50,
+      "raw_observed_pcs": 50,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33FB4_shadow.log",
+        "sha256": "c2c608f4cee30aefb376c184a05e74f156b102712bcca72c4864b53a1a1ee09c"
+      }
+    },
+    {
+      "owner": "C33FB4",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 50,
+      "raw_observed_pcs": 50,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/projection_readouts_dispatch_C33FB4_sandbox.log",
+        "sha256": "c2c608f4cee30aefb376c184a05e74f156b102712bcca72c4864b53a1a1ee09c"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "groups": [
+      {
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "totals": {
+          "shadow": {
+            "C2EC90": {
+              "calls": 2686,
+              "compared": 2675,
+              "matched": 2675,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 11
+            },
+            "C2EC94": {
+              "calls": 935,
+              "compared": 928,
+              "matched": 928,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 7
+            },
+            "C2EC9C": {
+              "calls": 6605,
+              "compared": 6575,
+              "matched": 6575,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 30
+            },
+            "C2ECA4": {
+              "calls": 134,
+              "compared": 134,
+              "matched": 134,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2ECA8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32A44": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32AC8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F70": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F8A": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33FB4": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C2EC90": {
+              "calls": 2686,
+              "compared": 2686,
+              "matched": 2686,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2EC94": {
+              "calls": 935,
+              "compared": 935,
+              "matched": 935,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2EC9C": {
+              "calls": 6605,
+              "compared": 6605,
+              "matched": 6605,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2ECA4": {
+              "calls": 134,
+              "compared": 134,
+              "matched": 134,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2ECA8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32A44": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32AC8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F70": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F8A": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33FB4": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 10312,
+        "sandbox_matches": 10360
+      },
+      {
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "totals": {
+          "shadow": {
+            "C2ECA8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32A44": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32AC8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F70": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F8A": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33FB4": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C2ECA8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32A44": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C32AC8": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F70": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33F8A": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33FB4": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 0,
+        "sandbox_matches": 0
+      },
+      {
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4"
+        ],
+        "totals": {
+          "shadow": {
+            "C2EC90": {
+              "calls": 2686,
+              "compared": 2675,
+              "matched": 2675,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 11
+            },
+            "C2EC94": {
+              "calls": 935,
+              "compared": 928,
+              "matched": 928,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 7
+            },
+            "C2EC9C": {
+              "calls": 6605,
+              "compared": 6575,
+              "matched": 6575,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 30
+            },
+            "C2ECA4": {
+              "calls": 134,
+              "compared": 134,
+              "matched": 134,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C2EC90": {
+              "calls": 2686,
+              "compared": 2686,
+              "matched": 2686,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2EC94": {
+              "calls": 935,
+              "compared": 935,
+              "matched": 935,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2EC9C": {
+              "calls": 6605,
+              "compared": 6605,
+              "matched": 6605,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2ECA4": {
+              "calls": 134,
+              "compared": 134,
+              "matched": 134,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 10312,
+        "sandbox_matches": 10360
+      }
+    ],
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 1549,
+            "compared": 1540,
+            "matched": 1540,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 9,
+            "mean_cycles": 620,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 935,
+            "compared": 928,
+            "matched": 928,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 7,
+            "mean_cycles": 1350,
+            "busy_input_calls": 928,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 4607,
+            "compared": 4577,
+            "matched": 4577,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 30,
+            "mean_cycles": 1084,
+            "busy_input_calls": 4577,
+            "busy_input_reads": 9180
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 134,
+            "compared": 134,
+            "matched": 134,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1222,
+            "busy_input_calls": 134,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_demo01_shadow.json",
+          "sha256": "cc58a83fe0e4e4f196743742b63453535cbbbc4c227f650829047aa88f03e729"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 812,
+            "compared": 810,
+            "matched": 810,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 735,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 369,
+            "busy_input_calls": 1647,
+            "busy_input_reads": 1250
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_carrier_success_shadow.json",
+          "sha256": "a07f01a28c56316b86199b52441dd623ce785ff6c2d731cee6d802b08b4453d8"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 325,
+            "compared": 325,
+            "matched": 325,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 729,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 93,
+            "busy_input_calls": 351,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_fail_crashes_shadow.json",
+          "sha256": "44406660ace0427b740f2ba85f9532d634ac74787485e0ee0f2c76a83b90c698"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 1549,
+            "compared": 1549,
+            "matched": 1549,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 620,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 935,
+            "compared": 935,
+            "matched": 935,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1349,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 4607,
+            "compared": 4607,
+            "matched": 4607,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1088,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 134,
+            "compared": 134,
+            "matched": 134,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1222,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_demo01_sandbox.json",
+          "sha256": "784fa9c18df6d5e0bbe989131ac9dc76d30ff674d934128dc32b35200c5b5b2e"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 812,
+            "compared": 812,
+            "matched": 812,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 735,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 360,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_carrier_success_sandbox.json",
+          "sha256": "75b3f997193a0906cc70e752968e9714174d1cf03d1f811ca954c4a0bc5b9e15"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 325,
+            "compared": 325,
+            "matched": 325,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 729,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 93,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_fail_crashes_sandbox.json",
+          "sha256": "3baf194b62221c60e1e886f3067e15c99c64bae22adb9fb4b43e80dedbf65ae5"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_demo01_shadow.json",
+          "sha256": "12bfa42cdc28d03e736951f47b9af20af3f31e2cefc5b67d6af1b045925fb582"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_carrier_success_shadow.json",
+          "sha256": "12bfa42cdc28d03e736951f47b9af20af3f31e2cefc5b67d6af1b045925fb582"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_fail_crashes_shadow.json",
+          "sha256": "12bfa42cdc28d03e736951f47b9af20af3f31e2cefc5b67d6af1b045925fb582"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_demo01_sandbox.json",
+          "sha256": "12bfa42cdc28d03e736951f47b9af20af3f31e2cefc5b67d6af1b045925fb582"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_carrier_success_sandbox.json",
+          "sha256": "12bfa42cdc28d03e736951f47b9af20af3f31e2cefc5b67d6af1b045925fb582"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "rows": [
+          {
+            "entry": "C2ECA8",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32A44",
+            "name": "draw_scene_numeric_label",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AC8",
+            "name": "draw_packed_numeric_readout",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F70",
+            "name": "draw_speed_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33F8A",
+            "name": "draw_altitude_readout_tick",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33FB4",
+            "name": "draw_bounded_readout_sweep",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2ECA8_C32A44_C32AC8_C33F70_C33F8A_C33FB4_qual_fail_crashes_sandbox.json",
+          "sha256": "12bfa42cdc28d03e736951f47b9af20af3f31e2cefc5b67d6af1b045925fb582"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 1549,
+            "compared": 1540,
+            "matched": 1540,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 9,
+            "mean_cycles": 620,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 935,
+            "compared": 928,
+            "matched": 928,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 7,
+            "mean_cycles": 1350,
+            "busy_input_calls": 928,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 4607,
+            "compared": 4577,
+            "matched": 4577,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 30,
+            "mean_cycles": 1084,
+            "busy_input_calls": 4577,
+            "busy_input_reads": 9180
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 134,
+            "compared": 134,
+            "matched": 134,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1222,
+            "busy_input_calls": 134,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_demo01_shadow.json",
+          "sha256": "cc58a83fe0e4e4f196743742b63453535cbbbc4c227f650829047aa88f03e729"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 812,
+            "compared": 810,
+            "matched": 810,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 735,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 369,
+            "busy_input_calls": 1647,
+            "busy_input_reads": 1250
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_qual_carrier_success_shadow.json",
+          "sha256": "a07f01a28c56316b86199b52441dd623ce785ff6c2d731cee6d802b08b4453d8"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 325,
+            "compared": 325,
+            "matched": 325,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 729,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 93,
+            "busy_input_calls": 351,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_qual_fail_crashes_shadow.json",
+          "sha256": "44406660ace0427b740f2ba85f9532d634ac74787485e0ee0f2c76a83b90c698"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 1549,
+            "compared": 1549,
+            "matched": 1549,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 620,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 935,
+            "compared": 935,
+            "matched": 935,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1349,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 4607,
+            "compared": 4607,
+            "matched": 4607,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1088,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 134,
+            "compared": 134,
+            "matched": 134,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1222,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_demo01_sandbox.json",
+          "sha256": "784fa9c18df6d5e0bbe989131ac9dc76d30ff674d934128dc32b35200c5b5b2e"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 812,
+            "compared": 812,
+            "matched": 812,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 735,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 360,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_qual_carrier_success_sandbox.json",
+          "sha256": "75b3f997193a0906cc70e752968e9714174d1cf03d1f811ca954c4a0bc5b9e15"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4"
+        ],
+        "rows": [
+          {
+            "entry": "C2EC90",
+            "name": "project_and_plot_point",
+            "calls": 325,
+            "compared": 325,
+            "matched": 325,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 729,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC94",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EC9C",
+            "name": "project_and_plot_point",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 93,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ECA4",
+            "name": "project_and_plot_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2EC90_C2EC94_C2EC9C_C2ECA4_qual_fail_crashes_sandbox.json",
+          "sha256": "3baf194b62221c60e1e886f3067e15c99c64bae22adb9fb4b43e80dedbf65ae5"
+        }
+      }
+    ],
+    "generic_rejections": [
+      {
+        "selection": [
+          "C2EC90",
+          "C2EC94",
+          "C2EC9C",
+          "C2ECA4",
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "reason": "C2ECA8: no completed comparisons",
+        "log": {
+          "path": "build/recomp/readouts_whole_call_all.log",
+          "sha256": "05429b2dbf553ee19741c520cfd557bf788388164583391f614f6c7214af24b5"
+        }
+      },
+      {
+        "selection": [
+          "C2ECA8",
+          "C32A44",
+          "C32AC8",
+          "C33F70",
+          "C33F8A",
+          "C33FB4"
+        ],
+        "reason": "all six new owners have zero calls/comparisons with old projection owners omitted",
+        "log": {
+          "path": "build/recomp/readouts_cold_whole_call.log",
+          "sha256": "596ec9ba19e62ac102cead660a91b705879f99bc3da194660b3875c1fa13cdcd"
+        }
+      }
+    ]
+  },
+  "instruction_dma": {
+    "local_instructions": 272,
+    "local_cases": 8704,
+    "previous_unique_instructions": 23061,
+    "overlap_instructions": 86,
+    "combined_unique_instructions": 23247,
+    "combined_cases": 743904,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 24,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_main_loop_flight_controls_math.h",
+      "sha256": "b141699adbda2a39bc0009942f6f1f7d69e27d08080fbf372ddf6d945ff37f4d"
+    },
+    {
+      "path": "port/game/glue/glue_flight_record_actions_math.h",
+      "sha256": "3412841f5494bb57bcb434b60f58b7a44457fb6fe938cba37aa2b80020da0753"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers_math.h",
+      "sha256": "d32d6c42c74e096dd5c670f285a91d9d1c91f8786d3c4c3d0d9a762d899d0315"
+    },
+    {
+      "path": "port/game/glue/glue_flight_dynamics_math.h",
+      "sha256": "8d0c355abe117c5ca736c5d1a5f222e0c0d1b3755bb54c54ac732d7b3c5bb92f"
+    },
+    {
+      "path": "port/game/glue/glue_flight_geometry_math.h",
+      "sha256": "087e7193e628efef601ac55e951d9c9ec6e4664a2e4e7efca49aa8bdbe59d157"
+    },
+    {
+      "path": "port/game/glue/glue_flight_markers_math.h",
+      "sha256": "f8d40ddd318933fcb20fdb362694b9f9bc5c2f7c93ece7e6745719c4e09f63e7"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    }
+  ],
+  "full_gate": {
+    "rows": 586,
+    "recordings": 3,
+    "shadow_matches": 568155,
+    "sandbox_matches": 439147,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308060,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "2d0f9652266b9979245c06964d78bb99f0ff8fb3faf2414146cdd91627a3356d"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207247,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "162401ee1521e36e88b20f22105d462b01ec15967222dafe688b4e62c8f56cd7"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52848,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "24039495dea4592ec99b78e664562f27c8698135652fd841b73db06677fb32c8"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150621,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "154009f90dbafeb945f381a06640d92a3b57702f4dbdc6e99fa4a635a35293fa"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 243277,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "8fae828edf125a280ece367263d48030f37c40fb6dab3dcbe18a4dd48ff17eea"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45249,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "8a93ef55427a1f501491aaad544953c4894197341060a879374bf2b11826aa8b"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1437355011,
+    "build_gib": 1.339
+  },
+  "limits": [
+    "Five projection modes share their body. Per-owner static CFG contains mode branches excluded by its fixed mode. Report bounded coverage individually; shared whole-call union covers 268/272 PCs.",
+    "Four upper-clamp PCs are unreachable behind the original projection entry bounds. Actual production helper segments started at C2ECD2/C2ECE4 match original source; these are not additional functions or whole-entry branch claims.",
+    "Scene numeric label sets glyph mode 1, excluding six shared leading-blank PCs; C32AC8 separately covers all 83 PCs.",
+    "All six new owners are cold in the sealed recordings, including with four old projection owners omitted. The strict generic normal-C rejection remains unchanged.",
+    "Drawing registrations retain the existing source-first DMACONR proof contract. No shared runtime/bus or classification change was made.",
+    "Older drawing parents still use legacy projection replay; their full original-child/CPU behavior remains part of function-completion work.",
+    "Complete original game-call/callback coverage remains open. C2C392 signed computed transfer and C1612C graphics-wait integration remain unregistered.",
+    "ALL frame416/361, deferred Copper fade and Kickstart exception/service return remain debt."
+  ],
+  "next": {
+    "entries": [
+      "C308D8",
+      "C308F4",
+      "C30F46",
+      "C31B76",
+      "C33AD6",
+      "C33B06"
+    ],
+    "unique_instructions": 100,
+    "shared_instructions": 0,
+    "manifest": {
+      "path": "analysis/data/hud_stream_scope_inventory.json",
+      "sha256": "55d971635a51733be704f3e71f7210a398b1ad3dd6276bd18272f96531e268f4"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/projection_readouts.c",
+      "sha256": "5ecf6a2019196e39be01437cf97ae77d713ad54dd05cae7f02c601dfe82827e8"
+    },
+    {
+      "path": "port/game/projection_readouts.h",
+      "sha256": "039d8397a5d8fa48f3a8f3afc98a6021820a61f64245979eac41695dc4522585"
+    },
+    {
+      "path": "port/game/glue/glue_projection_readouts.c",
+      "sha256": "8225282449ea1d440311f6766d4c31c89f14d678f971aaa33ea81a09a27bff74"
+    },
+    {
+      "path": "port/game/glue/glue_projection_readouts.h",
+      "sha256": "5e97ee9cde56c2466fce03859db82c479e5e7ff14861c97ad6b850b64b1c39f9"
+    },
+    {
+      "path": "port/game/glue/glue_projection_readouts_math.h",
+      "sha256": "eab4d0d9b6ed4a8a1e5c1d4e24a8b29d006d761785ded32ab26fe489e2753413"
+    },
+    {
+      "path": "port/game/glue/glue_projection_readouts_step.c",
+      "sha256": "3a70c0d65166aa229eb902943d9ed87d8467f67d39437de6ea39bfee8fbb8e90"
+    },
+    {
+      "path": "port/game/glue/glue_projection.c",
+      "sha256": "91781a4c6b7fa521d293188777764c468641a16b08055f37c52b4b0fef83dca4"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "cfe3383707abbe31446f6c03c85d5d6e5dc694ae18a1d1fb7f28fb432d70ae39"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "0da1fecdccd1dda1043e60ccbf3c8d220af6848c6eba08d66b8c529132e94af1"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_projection_readouts_source.py",
+      "sha256": "2f1072d495dbf33bcc684b4740a4d4464113f639ee72a852fa99d1ab4f75540c"
+    },
+    {
+      "path": "tools/recomp/check_projection_readouts.py",
+      "sha256": "a00802332121ae6246370053ea0e057cc2ce29655d0db3f9fe0f02454bf05926"
+    },
+    {
+      "path": "tools/recomp/check_projection_readouts_dispatch.py",
+      "sha256": "9e818a3c88f68017551fa5918607b887a653c8581202336519deec885b69ef82"
+    },
+    {
+      "path": "tools/recomp/projection_readouts_bus_budget.c",
+      "sha256": "0dd8f518d677239a95ab8f586a5dd3e3e448da13b8cf7f589a8cacd0b6991cfb"
+    },
+    {
+      "path": "tools/recomp/projection_readouts_contract_children.c",
+      "sha256": "d7ac7016a6a3d670e1bee0eb1c5ee1b202f436c4842fd066acb7c15eca847ec8"
+    },
+    {
+      "path": "tools/recomp/projection_readouts_contract_oracle.c",
+      "sha256": "69758447b7df8883afe91400f0bd5443daf08579c871187739fabb47f6b4f7ae"
+    },
+    {
+      "path": "tools/recomp/projection_readouts_dispatch_oracle.c",
+      "sha256": "2519b21cf86a7a6d04e33d8cd4e85e93039b0f5b46f89532004f9ea9942785c3"
+    },
+    {
+      "path": "tools/recomp/projection_readouts_fixture.h",
+      "sha256": "1722d380f5497ee7fa9e93bdfd35421f946deb1245f9c59ce67bbff5a2c60553"
+    },
+    {
+      "path": "tools/recomp/projection_readouts_oracle.c",
+      "sha256": "ad2cbb707aebe0cc2d049c3fa37f0aeb98a4db756343a9c0e7beb8d9088e9673"
+    },
+    {
+      "path": "tools/recomp/audit_projection_readout_scope.py",
+      "sha256": "1f715d67c188f4a82c86c393b641ba80ca7b3cf7699e4e58b54a62e963b02d74"
+    },
+    {
+      "path": "tools/recomp/audit_hud_stream_scope.py",
+      "sha256": "72c745dd1bd34a45ccfb380e86f62ad0708c4096a8eb45f119dfaf95375385c7"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/readouts_contract_final.log",
+      "sha256": "c599330da8b73e752fe95c99316b5d376838081e8537cdd17fa991203950c4a4"
+    },
+    {
+      "path": "build/recomp/readouts_real_final.log",
+      "sha256": "9889ad3e5cac13c272781c18184f9fc3fede8d0d78c98129ab19f4796d9eafb7"
+    },
+    {
+      "path": "build/recomp/readouts_contract_full.log",
+      "sha256": "6c368a0d8e12c5f24593e2749e65c8df40d74eb5c0b4e1f3fb17d34513a29471"
+    },
+    {
+      "path": "build/recomp/readouts_dispatch_full.log",
+      "sha256": "616ef941e0cf9a5f42eb258e757ec2e66f6be4dff8fdcadb3cc47d9553999991"
+    },
+    {
+      "path": "build/recomp/readouts_dma_local_final.log",
+      "sha256": "49c1d0c22881cf1a51703a7b624d0670b225f4697a289e74a702a32a4b2cfcfb"
+    },
+    {
+      "path": "build/recomp/readouts_dma_union.log",
+      "sha256": "ece9f0ea039d17535685e6f84cd80628c40eb36b86a390a0aca5cf01ab3376fc"
+    },
+    {
+      "path": "build/recomp/readouts_compatibility.log",
+      "sha256": "dd5f39662c391fbe96547cac870df8107fa57b49ff349f9c8b9c47414e11dcee"
+    },
+    {
+      "path": "build/recomp/readouts_normal_build.log",
+      "sha256": "929eea61cca7f10c1ac950a9a5d75970e323f9180e283c2c5ad0704816525bbf"
+    },
+    {
+      "path": "build/recomp/readouts_msvc.log",
+      "sha256": "f8e343b6d36921f0fb4e283c45192c5fcc1bd4503a187b34a9ee61d27cabe379"
+    },
+    {
+      "path": "build/recomp/readouts_ports_gate.log",
+      "sha256": "b2ba148443cf92aa71969095739dcd3df08b189192796eb0ea907aa3b10bd13f"
+    },
+    {
+      "path": "build/recomp/readouts_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/readouts_timing.log",
+      "sha256": "1c3b220c90c10c92e4bed54faf020cff3c3cf22573af1b9b8722bb7e310af455"
+    },
+    {
+      "path": "build/recomp/readouts_whole_call_all.log",
+      "sha256": "05429b2dbf553ee19741c520cfd557bf788388164583391f614f6c7214af24b5"
+    },
+    {
+      "path": "build/recomp/readouts_cold_whole_call.log",
+      "sha256": "596ec9ba19e62ac102cead660a91b705879f99bc3da194660b3875c1fa13cdcd"
+    },
+    {
+      "path": "build/recomp/readouts_hot_whole_call.log",
+      "sha256": "c65e17d0e9f440984c4f3442f0f5f93626c4c7ea9524caedb0f75f8d1aa7c682"
+    }
+  ]
+}

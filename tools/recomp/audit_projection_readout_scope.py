@@ -5,9 +5,9 @@ from recomp import classify,static_target
 ENTRIES=('C2ECA8','C32A44','C32AC8','C33F70','C33F8A','C33FB4')
 MANIFEST=ROOT/'analysis/data/projection_readout_scope_inventory.json'
 
-def inventory():
-    result=audit(ENTRIES,additional_cold_entries=ENTRIES)
-    _,decoder=source_decoder(); incoming={e:[] for e in ENTRIES}; candidates=set()
+def inventory(entries=ENTRIES):
+    result=audit(entries,additional_cold_entries=entries)
+    _,decoder=source_decoder(); incoming={e:[] for e in entries}; candidates=set()
     for path in (ROOT/'port/recomp/generated').glob('recomp_*.c'):
         candidates.update(int(pc,16) for pc in re.findall(r'/\* ([0-9A-F]{6}): (?:jsr|bsr)\s',path.read_text()))
     for pc in sorted(candidates):

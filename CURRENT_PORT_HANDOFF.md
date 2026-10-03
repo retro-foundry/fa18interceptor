@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 53bf9549); ignored gate logs may
+history (the preceding handoff is in commit 208efadd); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -50,6 +50,8 @@ upgrade raised it to 509/624. Four complete history, zone-exit and candidate-
 geometry upgrades retain that translated count and raise source-timed entries
 to 399. Five complete grid, scene-label and record-marker owners now raise
 translated coverage to 514/624 and source-timed entries to 404.
+Six complete projection/readout/sweep owners and four projection upgrades now
+raise translated coverage to 520/624 and source-timed entries to 410.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -57,6 +59,45 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 520 of 624 translated entries plus sixty-six source-only callable entries
+  are registered: 586 rows and 410 source-timed entries (344 translated,
+  sixty-six source-only). Complete new C2ECA8/C32A44/C32AC8/C33F70/C33F8A/
+  C33FB4 and upgrades C2EC90/C2EC94/C2EC9C/C2ECA4 own 272 unique / 163 shared
+  boundaries, with original incoming calls and 16 distinct / 41 per-owner
+  child sites sealed. All 327,680 whole calls pass full CPU/PC/SR/all-RAM:
+  16,384 controlled and 16,384 original-child calls per owner. Per-owner
+  coverage is 59/80, 76/80, 60/80, 57/80, 54/79, 104/110, 83/83, 14/14,
+  13/13 and 50/50 in that upgrade-then-new order, for both proof kinds.
+  The shared whole-call union is 268/272. Original entry bounds exclude four
+  upper-clamp PCs; 65,536 internal segment comparisons from C2ECD2/C2ECE4
+  prove the actual production helpers and complete 272/272 shared coverage.
+  These segments are not new functions or whole-entry coverage claims; the
+  initial strict union rejection remains evidence. Fixed modes exclude
+  sibling mode paths; the label's six leading-blank PCs are covered by the
+  shared packed-readout owner. Actual ON/shadow/sandbox passes 491,520
+  hardware-free completed fixtures, exact classification and all guards.
+  Normal C passes 10,312 shadow / 10,360 sandbox matches for the four
+  upgrades. All six new owners are cold in all three recordings, including
+  with projectors omitted; both strict zero-comparison rejections remain
+  explicit. Drawing rows retain the source-first DMACONR proof contract.
+  Local DMA passes 272 / 8,704; fresh combined DMA and independent union
+  pass 23,247 / 743,904 (previous 23,061 plus 272, overlap 86). All 24 older
+  generator outputs and shared CPU/bus/math/classification proofs are
+  unchanged. GNU/MSVC Release pass; build/ is 1.339 GiB. The full 586-row
+  gate passes 568,155 shadow / 439,147 sandbox matches, zero mismatches,
+  exact seals and poison frames. All 36,236 isolated live frames and RAM
+  seals match. Family exact through frame 600; ALL remains 416/361. See
+  analysis/routines/native_c_projection_readouts.md and
+  analysis/figures/native_projection_readouts_checkpoint.json.
+  Next reconstruct C308D8/C308F4/C30F46/C31B76/C33AD6/C33B06, 100 unique /
+  zero shared boundaries, sealed with actual incoming calls in
+  analysis/data/hud_stream_scope_inventory.json. Related existing C308E2/
+  C30904 stores need complete CPU/A0-base upgrades in that batch. Older
+  drawing parents still use legacy projection replay and require complete
+  original-child/CPU upgrades. Complete original game-call/callback coverage,
+  C2C392's computed transfer and C1612C graphics-wait integration remain
+  open. No service replacement or timing-only work is selected.
 
 - 514 of 624 translated entries plus sixty-six source-only callable entries
   are registered: 580 rows and 404 source-timed entries (338 translated,
@@ -1511,11 +1552,19 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 514/624 translated plus sixty-six source-only callable entries. Next
-   reconstruct C2ECA8/C32A44/C32AC8/C33F70/C33F8A/C33FB4 from
-   analysis/data/projection_readout_scope_inventory.json
-   (264 unique / 85 shared boundaries, actual incoming calls sealed).
-   These six are unregistered translated entries. All five grid/marker
+   is 520/624 translated plus sixty-six source-only callable entries. Next
+   reconstruct C308D8/C308F4/C30F46/C31B76/C33AD6/C33B06 from
+   analysis/data/hud_stream_scope_inventory.json
+   (100 unique / zero shared boundaries, actual incoming calls sealed),
+   upgrading related C308E2/C30904 store adapters for full CPU and A0-base
+   behavior. The six new projection/readout owners and four shared projector
+   upgrades are now complete. Their shared whole-call union is 268/272;
+   actual production clamp segments from original internal boundaries prove
+   the four otherwise unreachable PCs, separately from whole-entry coverage.
+   Preserve individual bounded coverage and all generic cold rejections.
+   Other older drawing parents still use legacy projection replay; complete
+   their original-child/CPU behavior before declaring function porting done.
+   All five grid/marker
    owners are now complete, with 468 unique source boundaries and full
    controlled complete-call coverage. All four previously
    registered geometry/history upgrades are now complete, with 1,015 unique

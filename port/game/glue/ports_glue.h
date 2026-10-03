@@ -941,3 +941,4 @@ int glue_C1ECFC_step(void);
 #include "glue_flight_geometry.h"
 
 #include "glue_flight_markers.h"
+#include "glue_projection_readouts.h"
