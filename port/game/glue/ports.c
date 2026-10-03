@@ -7,6 +7,18 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Original cold callback/helper entries absent from the seeded translation.
+     * Track these ten separately from the 624 translated-entry denominator. */
+    {0xC0FE36, glue_C0FE36, "consume_menu_table_action", 0, 0, glue_C0FE36_step, 0xC0FECE, 0, 0, glue_C0FE36_owns},
+    {0xC1017E, glue_C1017E, "queue_available_menu_modes", 0, 0, glue_C1017E_step, 0xC101FC, 0, 0, glue_C1017E_owns},
+    {0xC10272, glue_C10272, "leave_menu_after_countdown", 0, 0, glue_C10272_step, 0xC1029E, 0, 0, glue_C10272_owns},
+    {0xC103E4, glue_C103E4, "leave_menu_after_countdown", 0, 0, glue_C103E4_step, 0xC10418, 0, 0, glue_C103E4_owns},
+    {0xC09120, glue_C09120, "set_menu_position_preset", 0, 0, glue_C09120_step, 0xC09192, 0, 0, glue_C09120_owns},
+    {0xC09148, glue_C09148, "set_menu_position_preset", 0, 0, glue_C09148_step, 0xC09192, 0, 0, glue_C09148_owns},
+    {0xC29490, glue_C29490, "load_origin_candidate_preset", 0, 0, glue_C29490_step, 0xC294AC, 0, 0, glue_C29490_owns},
+    {0xC2949A, glue_C2949A, "load_origin_candidate_preset", 0, 0, glue_C2949A_step, 0xC294AC, 0, 0, glue_C2949A_owns},
+    {0xC10B90, glue_C10B90, "refresh_menu_cockpit", 0, 0, glue_C10B90_step, 0xC10BAE, 0, 0, glue_C10B90_owns},
+    {0xC16406, glue_C16406, "clear_menu_mode_table", 0, 0, glue_C16406_step, 0xC1643A, 0, 0, glue_C16406_owns},
     /* Complete menu setup and source-owned input/message helpers. */
     {0xC0FBE0, glue_C0FBE0, "start_top_level_menu", 0, 0, glue_C0FBE0_step, 0xC0FCB4, 0, 0, glue_C0FBE0_owns},
     {0xC1082C, glue_C1082C, "begin_menu_countdown", 0, 0, glue_C1082C_step, 0xC108DA, 0, 0, glue_C1082C_owns},

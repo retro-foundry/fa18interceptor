@@ -178,6 +178,9 @@
 #define RECORD_VIEW_FLAG    0xC4578Au /* byte: selected viewer +$16 bit 2 at $C24150 */
 #define FIRE_ALERT_COUNTDOWN 0xC45797u /* byte: set to 8 for the viewed selected-fire record ($C237E8) */
 #define MODE_TABLE_CHANGED  0xC457C5u /* byte: mode-table counter changed ($C23832/$C23852) */
+#define MENU_TABLE_ACTION   0xC45792u /* byte consumed by C0FE36: 1 load, 2 clear */
+#define MENU_TABLE_STATUS   0xC45928u /* word returned by the source table-load check */
+#define MENU_AVAILABLE_CODES 0xC3ED00u /* word queue codes, advanced only for enabled modes */
 #define STORES_REDRAWS    0xC45843u /* byte: stores mark draw count ($C30A00) */
 #define CONTROL_ACCUMULATOR_Y         0xC45778u /* word: cleared by $C1B602 */
 #define CONTROL_ACCUMULATOR_COMPANION 0xC4577Cu /* word: cleared by $C1B602 */

@@ -60,6 +60,11 @@ extern const int fa18_call_liveness_count;
 typedef enum { FA18_PORTS_OFF, FA18_PORTS_ON, FA18_PORTS_SHADOW, FA18_PORTS_SANDBOX } FA18PortMode;
 
 void fa18_ports_init(FA18PortMode mode, const char *only);
+/* Dispatch a registered original owner absent from the seeded translation.
+ * Returns 1 only when it handled the entry; reference execution stays in the
+ * existing runtime. Selection and call/tail guards match translated ports. */
+int fa18_ports_enter_source_only(int via_call,int *result);
+void fa18_ports_note_source_write(uint32_t address,int size);
 /* Resume an active stepped call after chipset work, a child or an interrupt.
  * Called at an already-serviced instruction boundary; 1 means it advanced. */
 int fa18_ports_resume_step(void);

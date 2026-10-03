@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 7f3a9337); ignored gate logs may
+history (the preceding handoff is in commit 3b3900a8); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -22,19 +22,53 @@ scheduler family raised it to 454/624; complete context publishers and
 selected-record helpers raised it to 459/624; complete menu-transition
 callbacks and their sound/summary helpers raised it to 465/624; complete
 top-level menu setup and input/message helpers now raise it to 469/624.
+Ten original source-only callable menu entries are now additionally recreated,
+proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 469 of 624 translated game entries are registered in port/game/glue/ports.c.
+- 469 of 624 translated game entries plus ten original source-only callable
+  entries are registered in port/game/glue/ports.c: 479 total rows. There are
+  272 source-timed entries (262 translated plus ten source-only). Complete
+  C0FE36/C1017E/C10272/C103E4 callbacks and C09120/C09148/C29490/C2949A/
+  C10B90/C16406 helpers cover 132 unique / 14 shared original boundaries.
+  Their readable adapters pass 245,760 full CPU/RAM cases without RAM/register
+  exclusions. Controlled-child proof covers every owned boundary; the real-
+  child layer excludes eight C0FE36 load-path boundaries after original OS
+  execution stopped at FC0EC0, case 352, in the held-event environment. Its
+  returning fixtures retain a nonzero load-status gate for that route. Keep
+  the actual source-stop diagnostic and full controlled-child proof distinct;
+  production still calls original C1643A and OS children. All ten entries are
+  cold in recordings, and the generic zero-call rejection remains retained.
+  Actual source-only ON/shadow/sandbox dispatch passes 7,680 complete CPU/RAM
+  fixtures, including non-call, selection and source-write entry guards.
+  Source-only references run original bytes in the existing runtime; normal
+  glue contains no opcode handlers. The expanded dispatch proof exposed slow
+  repeated write-log scans; the indexed lookup preserves raw addresses and
+  exact first/last-write semantics. Its 4,096 independent sorted-sequence cases
+  and both deliberate-byte-mismatch reference-mode tests pass. No liveness,
+  custom-write ordering or stack/DMA exclusions changed. Active C0FCB4/C0FECE
+  normal C still passes 5,476 shadow / 5,332 sandbox calls with eight incomplete
+  shadow calls retained. Local DMA passes 132 / 4,224; the fresh combined
+  oracle passes 15,219 instructions / 487,008 cases. The full 479-entry gate
+  passes 554,025 shadow / 413,303 sandbox calls, zero mismatches, all RAM seals
+  and poison exact. All 36,236 isolated live frames and seals match. GNU and
+  MSVC Release builds pass; build/ is 0.620 GiB. See analysis/routines/native_c_menu_cold.md and
+  analysis/figures/native_menu_cold_checkpoint.json for hashes and build size.
+  Next reconstruct the five sealed follow-up/file-load owners (151 unique /
+  zero shared boundaries); source-only registration does not close the
+  remaining original callback/call graph or complete Stage D.
+  The preceding menu-setup baseline had 469 registered translated entries.
   The latest full gate for that registered set matched 554,025 completed shadow
   calls and 413,303 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 469-entry baseline. GNU and
-  MSVC builds pass. There are 262 source-timed entries. Complete C0FBE0 menu
+  Its earlier build/recomp/ports_report_*.json described that 469-entry baseline;
+  current reports have 479 rows. GNU and MSVC builds passed at 262 source-timed
+  entries. Complete C0FBE0 menu
   setup and C1082C/C11BB0/C24FA4 helpers are newly registered; the existing
   C17B96 sound selector now has a complete normal adapter and source timing.
   Their 141 unique / zero shared boundaries each pass separate real-child
@@ -56,8 +90,9 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   analysis/figures/native_menu_setup_checkpoint.json.
   The separate menu_cold_scope_inventory.json seals 191 unique / 14 shared
   boundaries across ten source-only owners and one translated required helper,
-  C1643A. It implements none of them. These owners require reconstruction and
-  activation beyond the seeded 624-entry registry; see the next work item.
+  C1643A. That inventory is not implementation evidence; the subsequent cold
+  menu batch implements and activates its ten source-only entries. C1643A
+  remains a required original child and is in the next reconstruction inventory.
   The preceding six-entry complete
   menu-transition family covers 324 unique boundaries, including all six
   original table arms and 66 cold C0FECE instructions absent from its generated
@@ -756,20 +791,24 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    the complete input-event and command-dispatch batches and postflight mode
    scheduler family, context-publication/selected-record helpers and complete
    menu-transition callback family, complete top-level menu setup and its
-   input/message helpers are registered at 469/624.
+   input/message helpers are registered at 469/624, plus ten original
+   source-only menu entries outside that denominator.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Reconstruct the sealed cold
-   menu family next: C0FE36/C1017E/C10272/C103E4/C09120/C29490/C2949A/C09148/
-   C10B90/C16406 are ten source-only owners; C1643A is their translated
-   59-instruction file-loading helper. See tools/recomp/audit_menu_source_only.py
-   and analysis/data/menu_cold_scope_inventory.json for source bytes, shared
-   tails and actual child boundaries (191 unique / 14 shared instructions).
-   Preserve the existing file/OS child contracts; OS work remains deferred.
-   Current port lookup initially maps generated function entries, so source-only
-   activation needs explicit reconciliation and original-byte proof. Track these
-   owners separately from the seeded 624-entry count; this denominator does
-   not prove whole-game scope and the leaf tool excludes indirect calls.
+   or count internal labels as extra routines. The ten-entry cold menu family
+   is now recreated and activated through source-only dispatch. Reconstruct
+   the sealed follow-up family next: C1029E/C10418/C10458 are source-only;
+   C10678 has an older registered adapter requiring complete reconstruction;
+   C1643A is the translated 59-instruction file-loading helper. See
+   tools/recomp/audit_menu_followup.py and
+   analysis/data/menu_followup_scope_inventory.json (151 unique / zero shared
+   boundaries) for complete bytes and actual child sites. Preserve existing
+   file/OS children; OS work remains deferred. Keep the retained C0FE36 original
+   OS source-stop diagnostic distinct from its complete child-contract proof.
+   Reconcile subsequent installed C104C2/C105F4/C1078A callbacks and the older
+   C1072E adapter as part of the remaining original graph. Track source-only
+   callable entries separately from the seeded 624-entry count; this denominator
+   does not prove whole-game scope and the leaf tool excludes indirect calls.
    C1082C and the previously proven table arms retain enclosing-frame proofs.
    Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.

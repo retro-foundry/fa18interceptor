@@ -21,6 +21,7 @@ extern int64_t fa18_cycle_origin, fa18_next_event;
 int fa18_write_log_active;
 int fa18_write_log_hardware;
 typedef struct { uint32_t address; uint8_t old; } LogEntry;
+#include "recomp_write_index.h"
 static LogEntry *log_entries;
 static size_t log_count, log_capacity;
 
@@ -118,6 +119,9 @@ typedef struct {
 
 static FA18PortMode mode;
 static int *port_of_function; /* function id -> port index, or -1 */
+static unsigned char *source_only_enabled;
+static int source_only_reference;
+static uint32_t source_only_min,source_only_end;
 static PortStats *stats;
 static uint64_t *profile;
 static unsigned char *context_before, *context_reference;
@@ -196,11 +200,15 @@ static int stepped_owns(const FA18Port *port,uint32_t pc) {
 void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     int i, f;
     mode = new_mode;
+    source_only_reference=0;
+    source_only_min=UINT32_MAX; source_only_end=0;
     stepped_count = 0;
     busy_phase = 0;
     free(port_of_function);
     free(stats);
     free(profile);
+    free(source_only_enabled);
+    source_only_enabled = calloc((size_t)fa18_port_count + 1,1);
     port_of_function = malloc(sizeof(int) * (size_t)(fa18_recomp_function_count + 1));
     stats = calloc((size_t)fa18_port_count + 1, sizeof *stats);
     profile = calloc((size_t)fa18_recomp_function_count + 1, sizeof *profile);
@@ -218,11 +226,36 @@ void fa18_ports_init(FA18PortMode new_mode, const char *only) {
         }
         for (f = 0; f < fa18_recomp_function_count; f++)
             if (fa18_recomp_functions[f].entry == fa18_ports[i].entry) port_of_function[f] = i;
+        source_only_enabled[i] = 1;
+        for (f = 0; f < fa18_recomp_function_count; f++)
+            if (fa18_recomp_functions[f].entry == fa18_ports[i].entry) source_only_enabled[i] = 0;
+        if(source_only_enabled[i]) {
+            if(!fa18_ports[i].step_owns || fa18_ports[i].step_end<=fa18_ports[i].entry ||
+               stepped_start(&fa18_ports[i])>fa18_ports[i].entry) {
+                fputs("source-only port requires a complete source timing/ownership bridge\n",stderr); abort();
+            }
+            if(stepped_start(&fa18_ports[i])<source_only_min) source_only_min=stepped_start(&fa18_ports[i]);
+            if(fa18_ports[i].step_end>source_only_end) source_only_end=fa18_ports[i].step_end;
+        }
     }
     free(context_before);
     free(context_reference);
     context_before = malloc(m68k_context_size());
     context_reference = malloc(m68k_context_size());
+}
+
+/* Disable a source-only owner conservatively on any write in its outer
+ * instruction range, including extension words and shared source tails. */
+void fa18_ports_note_source_write(uint32_t address,int size) {
+    int i,n;
+    address &= 0xffffffu;
+    if(!source_only_enabled || address+(uint32_t)size<=source_only_min || address>=source_only_end) return;
+    for(i=0;i<fa18_port_count;++i) if(source_only_enabled[i])
+        for(n=0;n<size;++n) {
+            uint32_t a=(address+(uint32_t)n)&0xffffffu;
+            if(a>=stepped_start(&fa18_ports[i]) && a<fa18_ports[i].step_end)
+                source_only_enabled[i]=0;
+        }
 }
 
 /* The instruction before the routine entry must be the JSR/BSR that called
@@ -366,6 +399,19 @@ static int run_glue(int port) {
 /* The compared call's return address, taken at its entry. */
 static uint32_t report_caller;
 
+/* A source-only reference uses original bytes in the runtime, with native
+ * entry dispatch suppressed for the duration. No opcode handler lives here. */
+static int run_reference(int function,int label) {
+    int result;
+    uint32_t ret,sp;
+    if(function>=0) return fa18_recomp_functions[function].fn(label);
+    ret=fa18_bus_read32(REG_A[7])&0xffffffu; sp=REG_A[7]+4;
+    ++source_only_reference;
+    result=fa18_recomp_resume(ret,sp);
+    --source_only_reference;
+    return result;
+}
+
 static void report_mismatch(int port, const char *what, uint32_t detail, uint32_t ref, uint32_t got) {
     PortStats *s = &stats[port];
     if (s->reported >= 8) return;
@@ -463,7 +509,7 @@ static int run_sandbox(int function, int label, int port) {
     fa18_write_log_active = 1;
     fa18_write_log_hardware = 0;
     fa18_next_event = INT64_MAX; /* no chipset servicing inside the comparison */
-    r = fa18_recomp_functions[function].fn(label);
+    r = run_reference(function,label);
     /* A cold source callback can have bytes without a generated entry.
      * Complete that dispatch through the runtime before classifying the call. */
     if(r==FA18_EXIT_DISPATCH) r=fa18_recomp_resume(caller,entry_return_sp);
@@ -476,7 +522,7 @@ static int run_sandbox(int function, int label, int port) {
         SET_CYCLES(cycles_before);
         if (r != FA18_RET) s->incomplete++;
         else s->hardware++;
-        return fa18_recomp_functions[function].fn(label);
+        return run_reference(function,label);
     }
     cycles_reference = cycles_before - GET_CYCLES();
     m68k_get_context(context_reference);
@@ -557,17 +603,20 @@ static int run_sandbox(int function, int label, int port) {
                 break;
             }
         }
+        {
+        WriteIndex reference_index=write_index_build(reference,reference_end);
         for (i = (int)port_start; !mismatch && i < (int)log_count; i++) {
             uint32_t a = log_entries[i].address;
             uint8_t want = log_entries[i].old; /* unchanged by the reference unless logged */
-            int k;
-            for (k = (int)reference_end - 1; k >= 0; k--)
-                if (reference[k].address == a) { want = reference_new[k]; break; }
+            size_t last=write_index_last(&reference_index,a);
+            if(last) want=reference_new[last-1];
             if (dead_stack(a, reference_sp)) continue;
             if (*byte_at(a) != want) {
                 report_mismatch(port, "byte", a, want, *byte_at(a));
                 mismatch = 1;
             }
+        }
+        write_index_free(&reference_index);
         }
     }
     if (mismatch) s->mismatched++;
@@ -652,7 +701,7 @@ static int run_shadow(int function, int label, int port) {
     fa18_write_log_hardware = 0;
     {
         uint32_t sp = REG_A[7] + 4;
-        int live_r = fa18_recomp_functions[function].fn(label);
+        int live_r = run_reference(function,label);
         /* Chipset work due mid-routine: service it and carry on, as the
          * dispatcher would, to the routine's own return. */
         if (live_r == FA18_EXIT_DISPATCH ||
@@ -778,15 +827,16 @@ static int run_shadow(int function, int label, int port) {
         /* Memory: every byte either run wrote must end with the same value,
          * except the dead stack below the returned-to stack pointer. A byte
          * the port left alone keeps its value from before the call. */
+        {
+        WriteIndex live_index=write_index_build(log_entries,log_count);
+        WriteIndex port_index=write_index_build(port_writes,port_count);
         for (i = 0; !mismatch && i < (int)log_count; i++) {
             uint32_t a = log_entries[i].address;
             uint8_t want = *byte_at(a), have = log_entries[i].old;
-            int j, first = 1;
-            for (j = 0; j < i; j++)
-                if (log_entries[j].address == a) { first = 0; break; }
-            if (!first || dead_stack(a, live_sp) || dma_written(a)) continue;
-            for (j = (int)port_count - 1; j >= 0; j--)
-                if (port_writes[j].address == a) { have = port_new[j]; break; }
+            size_t last;
+            if(write_index_first(&live_index,a)!=(size_t)i+1 || dead_stack(a, live_sp) || dma_written(a)) continue;
+            last=write_index_last(&port_index,a);
+            if(last) have=port_new[last-1];
             if (have != want) {
                 report_mismatch(port, "byte", a, want, have);
                 mismatch = 1;
@@ -794,16 +844,13 @@ static int run_shadow(int function, int label, int port) {
         }
         for (i = 0; !mismatch && i < (int)port_count; i++) {
             uint32_t a = port_writes[i].address;
-            int j, later = 0, written = 0;
-            for (j = i + 1; j < (int)port_count; j++)
-                if (port_writes[j].address == a) { later = 1; break; }
-            if (later || dead_stack(a, live_sp) || dma_written(a)) continue;
-            for (j = 0; j < (int)log_count; j++)
-                if (log_entries[j].address == a) { written = 1; break; }
-            if (!written && port_new[i] != *byte_at(a)) {
+            if(write_index_last(&port_index,a)!=(size_t)i+1 || dead_stack(a, live_sp) || dma_written(a)) continue;
+            if (!write_index_first(&live_index,a) && port_new[i] != *byte_at(a)) {
                 report_mismatch(port, "byte", a, *byte_at(a), port_new[i]);
                 mismatch = 1;
             }
+        }
+        write_index_free(&port_index); write_index_free(&live_index);
         }
     }
     if (mismatch) s->mismatched++;
@@ -873,6 +920,24 @@ int fa18_ports_enter(int function, int label, int via_call) {
     if (mode == FA18_PORTS_SHADOW) return run_shadow(function, label, port);
     if (mode == FA18_PORTS_SANDBOX) return run_sandbox(function, label, port);
     return run_glue(port);
+}
+
+int fa18_ports_enter_source_only(int via_call,int *result) {
+    int i,call_entry;
+    if(mode==FA18_PORTS_OFF || fa18_write_log_active || source_only_reference || !source_only_enabled) return 0;
+    if(REG_PC<source_only_min || REG_PC>=source_only_end) return 0;
+    call_entry=via_call || entered_by_call() || entered_from_stepped_call();
+    for(i=0;i<fa18_port_count;++i) if(source_only_enabled[i] && REG_PC==fa18_ports[i].entry) {
+        int tail=fa18_ports[i].tail_from && REG_PPC==fa18_ports[i].tail_from && fa18_bus_read16(REG_PPC)==0x4ed4;
+        if(!call_entry && !tail) return 0;
+        fa18_recomp_abort=0;
+        stats[i].calls++;
+        if(mode==FA18_PORTS_SHADOW) *result=run_shadow(-1,0,i);
+        else if(mode==FA18_PORTS_SANDBOX) *result=run_sandbox(-1,0,i);
+        else *result=run_glue(i);
+        return 1;
+    }
+    return 0;
 }
 
 long fa18_ports_report(const char *path) {

@@ -47,7 +47,13 @@ def build_variant(entries, registry):
         def whole_call_row(match):
             columns=match[0][:-1].split(",")
             busy=columns[7].strip() if len(columns)>7 else "0"
-            return ",".join(columns[:3])+", 0, 0, NULL, 0, "+busy+"}"
+            tail=columns[4].strip() if len(columns)>4 else "0"
+            end=columns[6].strip() if len(columns)>6 else "0"
+            start=columns[8].strip() if len(columns)>8 else "0"
+            owns=columns[9].strip() if len(columns)>9 else "NULL"
+            # Source-only references need their byte range/ownership even
+            # when normal C replaces timing steps in this test registry.
+            return ",".join(columns[:3])+", 0, "+tail+", NULL, "+end+", "+busy+", "+start+", "+owns+"}"
         registry, count = re.subn(
             r"\{0x" + entry + r",[^}]+\}",
             whole_call_row, registry)

@@ -169,6 +169,7 @@ int fa18_recomp_write_rom_transitions(const char *path) {
 void fa18_recomp_note_write(uint32_t address, int size) {
     int n;
     if (!enabled_flag) return;
+    fa18_ports_note_source_write(address,size);
     for (n = 0; n < size; n++) {
         int f = fold(address + (uint32_t)n);
         int i;
@@ -217,7 +218,13 @@ static const FA18RecompEntry *lookup(uint32_t pc) {
 int fa18_recomp_call_dynamic(void) {
     const FA18RecompEntry *e = lookup(REG_PC);
     int r;
-    if (!e || depth > 4000) return FA18_EXIT_DISPATCH;
+    if(depth > 4000) return FA18_EXIT_DISPATCH;
+    if(!e) {
+        depth++;
+        if(!fa18_ports_enter_source_only(1,&r)) r=FA18_EXIT_DISPATCH;
+        depth--;
+        return r;
+    }
     depth++;
     r = fa18_ports_enter((int)e->function, (int)e->label, 1);
     depth--;
@@ -272,13 +279,17 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         if (exec_interrupt_shim_enabled && fa18_os_exec_interrupt_step()) continue;
         if (exec_get_msg_shim_enabled && fa18_os_exec_get_msg_step()) continue;
         if (potgo_shim_enabled && fa18_os_potgo_step()) continue;
-        if (!enabled_flag || (e = lookup(REG_PC)) == NULL) break;
+        if (!enabled_flag) break;
+        e = lookup(REG_PC);
         before = fa18_cycle_origin - GET_CYCLES();
-        fa18_recomp_abort = 0;
-        fa18_recomp_stats.dispatches++;
         depth = 1;
-        r = fa18_ports_enter((int)e->function, (int)e->label, 0);
+        if(e) {
+            fa18_recomp_abort = 0;
+            r = fa18_ports_enter((int)e->function, (int)e->label, 0);
+        }
+        else if(!fa18_ports_enter_source_only(0,&r)) { depth=0; break; }
         depth = 0;
+        fa18_recomp_stats.dispatches++;
         /* A shadow call can end the frame inside resume(), discarding the
          * unused execute budget. Measure elapsed timeline time, not budget. */
         fa18_recomp_stats.generated_cycles += (uint64_t)(fa18_cycle_origin - GET_CYCLES() - before);
@@ -326,6 +337,10 @@ int fa18_recomp_resume(uint32_t ret, uint32_t sp) {
             fa18_recomp_abort = 0;
             r = fa18_ports_enter((int)e->function, (int)e->label, 0);
             if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) return r;
+            continue;
+        }
+        if(fa18_ports_enter_source_only(0,&r)) {
+            if(r==FA18_EXIT_INTERP && !fa18_machine_event_due()) return r;
             continue;
         }
         /* Between labels: one instruction, as generated code executes it. */
