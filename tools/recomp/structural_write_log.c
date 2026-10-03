@@ -18,3 +18,10 @@ int fa18_structural_port_matched(uint32_t entry) {
         return stats[i].matched==1 && !stats[i].mismatched && !stats[i].hardware && !stats[i].incomplete;
     return 0;
 }
+
+int fa18_structural_port_unused(uint32_t entry) {
+    int i;
+    for(i=0;i<fa18_port_count;++i) if(fa18_ports[i].entry==entry)
+        return stats[i].calls==0 && stats[i].compared==0;
+    return 0;
+}

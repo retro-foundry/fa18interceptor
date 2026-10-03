@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 3b3900a8); ignored gate logs may
+history (the preceding handoff is in commit 2f91c6c3); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -21,8 +21,9 @@ command dispatch owners raised it to 444/624; the complete postflight mode
 scheduler family raised it to 454/624; complete context publishers and
 selected-record helpers raised it to 459/624; complete menu-transition
 callbacks and their sound/summary helpers raised it to 465/624; complete
-top-level menu setup and input/message helpers now raise it to 469/624.
-Ten original source-only callable menu entries are now additionally recreated,
+top-level menu setup and input/message helpers raised it to 469/624; complete
+menu follow-ups and the table-file owner now raise it to 470/624.
+Thirteen original source-only callable menu entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
@@ -30,7 +31,36 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 469 of 624 translated game entries plus ten original source-only callable
+- 470 of 624 translated game entries plus thirteen original source-only callable
+  entries are registered: 483 total rows and 277 source-timed entries (264
+  translated plus thirteen source-only). C1029E/C10418/C10458/C10678/C1643A
+  cover 151 unique / zero shared original boundaries. Their normal C adapters
+  pass 122,880 full CPU/RAM calls without exclusions; controlled children cover
+  every boundary and compare complete child-entry CPU/RAM. Real children cover
+  all four callback/message owners. Original C1643A stopped at FC0EC0, case zero,
+  before the C comparison; its returning real fixtures retain nonzero initial
+  status and cover six gate boundaries. Its remaining 53 file-owner boundaries
+  require controlled-child proof. Keep the actual source-stop diagnostic distinct
+  from original OS/file-load parity; production still calls actual OS children.
+  Recorded normal C matches 19 shadow / 19 sandbox calls (18 C10678 and one
+  C1643A in each mode), zero mismatch/hardware/incomplete. The file call's 74
+  source cycles identify the initial status gate. Three source-only callbacks
+  are cold; their generic zero-call rejection and raw reports remain retained.
+  Actual ON/shadow/sandbox dispatch passes 3,840 complete CPU/RAM fixtures and
+  non-call, OFF, selection and entry-write guards for all five owners. Local
+  DMA passes 151 / 4,832; the fresh combined oracle passes 15,370 / 491,840.
+  The full 483-entry gate passes 554,025 shadow / 413,303 sandbox calls, zero
+  mismatches, exact RAM seals and poison. All 36,236 isolated live frames and
+  seals match. The 600-frame group probe is exact; ALL remains 416/361.
+  GNU and MSVC Release pass; build/ is 0.654 GiB. See
+  analysis/routines/native_c_menu_followup.md and
+  analysis/figures/native_menu_followup_checkpoint.json for scope and hashes.
+  Next reconstruct C104C2/C105F4/C1072E/C1078A: the sealed inventory has
+  159 unique / zero shared boundaries and four original indirect-table arms.
+  It implements none of those owners. Continue their installed continuations
+  and the remaining original graph; Stage D and the whole C port remain open.
+- The preceding cold-menu baseline had 469 translated entries plus ten
+  source-only callable entries. Those
   entries are registered in port/game/glue/ports.c: 479 total rows. There are
   272 source-timed entries (262 translated plus ten source-only). Complete
   C0FE36/C1017E/C10272/C103E4 callbacks and C09120/C09148/C29490/C2949A/
@@ -41,7 +71,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   execution stopped at FC0EC0, case 352, in the held-event environment. Its
   returning fixtures retain a nonzero load-status gate for that route. Keep
   the actual source-stop diagnostic and full controlled-child proof distinct;
-  production still calls original C1643A and OS children. All ten entries are
+  that batch retained original C1643A and OS children. All ten entries are
   cold in recordings, and the generic zero-call rejection remains retained.
   Actual source-only ON/shadow/sandbox dispatch passes 7,680 complete CPU/RAM
   fixtures, including non-call, selection and source-write entry guards.
@@ -58,8 +88,8 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   and poison exact. All 36,236 isolated live frames and seals match. GNU and
   MSVC Release builds pass; build/ is 0.620 GiB. See analysis/routines/native_c_menu_cold.md and
   analysis/figures/native_menu_cold_checkpoint.json for hashes and build size.
-  Next reconstruct the five sealed follow-up/file-load owners (151 unique /
-  zero shared boundaries); source-only registration does not close the
+  The subsequent follow-up/file-load batch now completes its five sealed owners
+  (151 unique / zero shared boundaries); source-only registration does not close the
   remaining original callback/call graph or complete Stage D.
   The preceding menu-setup baseline had 469 registered translated entries.
   The latest full gate for that registered set matched 554,025 completed shadow
@@ -67,7 +97,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
   Its earlier build/recomp/ports_report_*.json described that 469-entry baseline;
-  current reports have 479 rows. GNU and MSVC builds passed at 262 source-timed
+  current reports have 483 rows. GNU and MSVC builds passed at 262 source-timed
   entries. Complete C0FBE0 menu
   setup and C1082C/C11BB0/C24FA4 helpers are newly registered; the existing
   C17B96 sound selector now has a complete normal adapter and source timing.
@@ -92,7 +122,8 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   boundaries across ten source-only owners and one translated required helper,
   C1643A. That inventory is not implementation evidence; the subsequent cold
   menu batch implements and activates its ten source-only entries. C1643A
-  remains a required original child and is in the next reconstruction inventory.
+  was then a required original child; the current batch completes its normal
+  C and timing while retaining the original OS children and proof limitation.
   The preceding six-entry complete
   menu-transition family covers 324 unique boundaries, including all six
   original table arms and 66 cold C0FECE instructions absent from its generated
@@ -791,22 +822,22 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    the complete input-event and command-dispatch batches and postflight mode
    scheduler family, context-publication/selected-record helpers and complete
    menu-transition callback family, complete top-level menu setup and its
-   input/message helpers are registered at 469/624, plus ten original
+   input/message helpers, complete menu follow-ups and file owner are registered
+   at 470/624, plus thirteen original
    source-only menu entries outside that denominator.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. The ten-entry cold menu family
-   is now recreated and activated through source-only dispatch. Reconstruct
-   the sealed follow-up family next: C1029E/C10418/C10458 are source-only;
-   C10678 has an older registered adapter requiring complete reconstruction;
-   C1643A is the translated 59-instruction file-loading helper. See
-   tools/recomp/audit_menu_followup.py and
-   analysis/data/menu_followup_scope_inventory.json (151 unique / zero shared
-   boundaries) for complete bytes and actual child sites. Preserve existing
-   file/OS children; OS work remains deferred. Keep the retained C0FE36 original
-   OS source-stop diagnostic distinct from its complete child-contract proof.
-   Reconcile subsequent installed C104C2/C105F4/C1078A callbacks and the older
-   C1072E adapter as part of the remaining original graph. Track source-only
+   or count internal labels as extra routines. The cold menu and five-entry
+   follow-up/file owner families are complete and activated. Reconstruct the
+   sealed delayed-menu/outcome family next: C104C2/C105F4/C1078A are source-only,
+   and C1072E has an older registered adapter. See tools/recomp/audit_menu_outcome.py
+   and analysis/data/menu_outcome_scope_inventory.json (159 unique / zero shared
+   boundaries, four sealed C1078A indirect-table arms). Follow the installed
+   C105A6/C10626/C1075A/C10900/C10970/C102D8/C0FB70/C108DA continuations;
+   the four-owner inventory does not implement or close those next owners.
+   Preserve existing file/OS children; OS work remains deferred. Keep both the
+   retained C0FE36 and C1643A original OS source-stop diagnostics distinct from
+   their complete child-contract proofs. Track source-only
    callable entries separately from the seeded 624-entry count; this denominator
    does not prove whole-game scope and the leaf tool excludes indirect calls.
    C1082C and the previously proven table arms retain enclosing-frame proofs.

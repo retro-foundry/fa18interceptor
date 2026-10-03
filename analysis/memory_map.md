@@ -187,6 +187,9 @@ Rules for reconstruction:
 | `$C4582A/$C4582B` | bytes | static `$C0F5F8` phase and associated flag fields; phase values `$FF`, 1, 2, and 3 select documented routes. |
 | `$C45904/$C45908/$C4590C/$C45910/$C45914` | longwords | static `$C0F5F8` offset inputs combined with `$C45AF2`; gameplay meaning unassigned. |
 | `$C1AB74` | long pointer | `$C15C4E` stores the result of a static 78-byte allocation here; `$C0F5F8` and `$C1017E` consume pointer-relative state. The allocation entry is not yet directly traced. |
+| `$C08010` | word | `MENU_FILE_READY`: original `$C1643A` gates DOS Open on this word after its first Delay, and clears it when the returned signed handle is nonpositive. Sealed owner bytes and CPU/RAM contracts are in `analysis/data/menu_followup_source_scope.json`. |
+| `$C08028` | byte string | `MENU_FILE_NAME`: `$C1643A` passes this original address to DOS Open with mode `$3ED`; its Read requests 78 bytes into the current `$C1AB74` buffer. No filename contents or OS behavior are substituted. |
+| `$C45857` | byte | `MENU_TRANSITION_FLAG`: original `$C10418` sets it to 1 on viewport equality; `$C10458` clears it on the negative-countdown path before installing `$C104C2`. The name describes these writes, without assigning an undocumented global meaning. |
 | `$C457C5` | byte | set to one after the static `$C0F5F8` in-range offset route. |
 | `$C4599E` | word | set to `$003F` before `$C0F5F8` calls `$C06C02` on an out-of-range calculated offset. |
 | `$C458C0` | word | copied to `$C45AD6` by static `$C0F5F8` phase-three route. |

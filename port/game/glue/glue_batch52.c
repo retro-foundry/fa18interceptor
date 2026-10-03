@@ -120,22 +120,6 @@ int glue_C1803C(void) {
     return glue_return();
 }
 
-int glue_C10678(void) {
-    SET_W(D(0), rd_u16(POST_INPUT_COUNTDOWN));
-    if (rd_s16(POST_INPUT_COUNTDOWN) < 0) {
-        if (rd_u8(SEQUENCE_FLAG)) {
-            A(0) = ROUTINE_OUTCOME;
-        } else {
-            SET_W(D(0), SEXT(rd_u8(MODE_SELECT) | (rd_u8(MODE_SELECT) & 0x80 ? 0xFF00 : 0)));
-            SET_B(D(1), rd_u8(MODE_MESSAGES_OFF));
-            if (!(uint8_t)D(1) && (uint16_t)D(0) >= 3 && (uint16_t)D(0) <= 8) SET_W(D(0), W(0) - 3);
-            A(0) = ROUTINE_QUEUE_MESSAGE_FOUR;
-        }
-    }
-    queue_mode_messages();
-    return glue_return();
-}
-
 int glue_C0910C(void) {
     int32_t p[3];
     start_position(p);

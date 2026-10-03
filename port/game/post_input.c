@@ -1,6 +1,7 @@
 /* Post-input stage sequence (STAGE_CALLBACK chain). */
 #include "post_input.h"
 #include "postflight_scheduler.h"
+#include "menu_followup.h"
 
 #include "audio.h"
 #include "stages.h"
@@ -170,25 +171,5 @@ void raise_event_after_countdown(void) {
 }
 
 void queue_mode_messages(void) {
-    gaddr queue = MESSAGE_QUEUE;
-    int16_t mode;
-
-    if (!countdown_expired()) return;
-    wr_u8(POST_INPUT_AUX, 0);
-    if (rd_u8(SEQUENCE_FLAG)) {
-        wr_u8(CONTEXT_REQUEST, 1);
-        wr_u8(CONTEXT_GATE, 2);
-        wr_u16(POST_INPUT_COUNTDOWN, 3);
-        next_stage(ROUTINE_OUTCOME);
-        return;
-    }
-    mode = (int8_t)rd_u8(MODE_SELECT);
-    if (!rd_u8(MODE_MESSAGES_OFF) && (uint16_t)mode >= 3 && (uint16_t)mode <= 8) {
-        wr_u16(queue, mode == 3 ? 0x5F : 0x60);
-        queue += 2;
-    }
-    wr_u8(MODE_MESSAGES_OFF, 0);
-    wr_u16(queue, 0x47);
-    wr_u16(queue + 2, 0);
-    next_stage(ROUTINE_QUEUE_MESSAGE_FOUR);
+    advance_menu_mode_messages(NULL);
 }

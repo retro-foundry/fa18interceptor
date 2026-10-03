@@ -1,0 +1,8 @@
+#ifndef FA18_GLUE_MENU_FOLLOWUP_H
+#define FA18_GLUE_MENU_FOLLOWUP_H
+#include <stdint.h>
+#define MENU_FOLLOWUP_DECLARE(entry) int glue_##entry(void); int glue_##entry##_step(void); int glue_##entry##_owns(uint32_t pc)
+MENU_FOLLOWUP_DECLARE(C1029E); MENU_FOLLOWUP_DECLARE(C10418); MENU_FOLLOWUP_DECLARE(C10458);
+MENU_FOLLOWUP_DECLARE(C10678); MENU_FOLLOWUP_DECLARE(C1643A);
+#undef MENU_FOLLOWUP_DECLARE
+#endif

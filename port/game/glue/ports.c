@@ -7,6 +7,12 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete menu follow-ups and original table-file owner. Three callbacks
+     * are source-only; C1643A is a translated entry and C10678 was registered. */
+    {0xC1029E, glue_C1029E, "poll_menu_viewport", 0, 0, glue_C1029E_step, 0xC102D8, 0, 0, glue_C1029E_owns},
+    {0xC10418, glue_C10418, "poll_menu_viewport", 0, 0, glue_C10418_step, 0xC10458, 0, 0, glue_C10418_owns},
+    {0xC10458, glue_C10458, "follow_menu_key_or_countdown", 0, 0, glue_C10458_step, 0xC104C2, 0, 0, glue_C10458_owns},
+    {0xC1643A, glue_C1643A, "load_menu_mode_file", 0, 0, glue_C1643A_step, 0xC16512, 0, 0, glue_C1643A_owns},
     /* Original cold callback/helper entries absent from the seeded translation.
      * Track these ten separately from the 624 translated-entry denominator. */
     {0xC0FE36, glue_C0FE36, "consume_menu_table_action", 0, 0, glue_C0FE36_step, 0xC0FECE, 0, 0, glue_C0FE36_owns},
@@ -439,7 +445,7 @@ const FA18Port fa18_ports[] = {
     {0xC11078, glue_C11078, "raise_event_after_countdown", 120},
     {0xC11ACC, glue_C11ACC, "load_long_table", 0, 0, glue_C11ACC_step, 0xC11B0E},
     {0xC1803C, glue_C1803C, "sound_chosen_record_alert", 0, 0, glue_C1803C_step, 0xC18096},
-    {0xC10678, glue_C10678, "queue_mode_messages", 300},
+    {0xC10678, glue_C10678, "queue_mode_messages", 0, 0, glue_C10678_step, 0xC1072E, 0, 0, glue_C10678_owns},
     {0xC0910C, glue_C0910C, "start_position", 0, 0, glue_C0910C_step, 0xC09120},
     {0xC25246, glue_C25246, "check_typed_code", 300},
     /* batch 53: draw-stream commands */
