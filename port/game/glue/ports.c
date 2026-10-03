@@ -741,6 +741,11 @@ const FA18Port fa18_ports[] = {
     /* selected clipped segment sibling */
     {0xC1FFA4, glue_C1FFA4, "draw_selected_segment_near", 5500},
     {0xC2FD8C, glue_C2FD8C, "submit_active_planes", 0, 0, glue_C2FD8C_step, 0xC2FF46, 1},
+    {0xC26322, glue_C26322, "project_record_motion", 0, 0, glue_C26322_step, 0xC26352, 0, 0xC26322, glue_C26322_owns},
+    {0xC26352, glue_C26352, "publish_motion_slot", 0, 0, glue_C26352_step, 0xC2639C, 0, 0xC26352, glue_C26352_owns},
+    {0xC26C72, glue_C26C72, "project_scene_motion", 0, 0, glue_C26C72_step, 0xC26CC0, 0, 0xC26C72, glue_C26C72_owns},
+    {0xC26CC0, glue_C26CC0, "test_component_motion", 0, 0, glue_C26CC0_step, 0xC26D8A, 0, 0xC26CC0, glue_C26CC0_owns},
+    {0xC26D8A, glue_C26D8A, "test_face_motion", 0, 0, glue_C26D8A_step, 0xC26EAC, 0, 0xC26D8A, glue_C26D8A_owns},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit fb3ce50f); ignored gate logs may
+history (the preceding handoff is in commit 989a2c84); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -43,7 +43,9 @@ to 481/624 and source-only coverage to sixty-six. Complete main-loop control
 records and message sequences raise translated coverage to 483/624. Complete
 control-record action and alert owners raise it to 488/624. Complete control/
 flight parents and four existing helper upgrades raised it to 490/624. Ten
-complete flight-record action/control-stream owners now raise it to 500/624.
+complete flight-record action/control-stream owners raised it to 500/624.
+Five complete motion-projection, publication and collision helpers now raise
+it to 505/624.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -52,7 +54,42 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 500 of 624 translated entries plus sixty-six original source-only callable
+- 505 of 624 translated entries plus sixty-six original source-only callable
+  entries are registered: 571 rows and 391 source-timed entries (325 translated,
+  sixty-six source-only). Complete C26322/C26352/C26C72/C26CC0/C26D8A own
+  229 unique / zero shared boundaries and retain sealed original incoming
+  JSR/BSR evidence. All 163,840 completed calls pass full CPU/PC/SR/all-RAM:
+  16,384 controlled and 16,384 real-child calls per owner. Both layers cover
+  every owner's 20/20, 20/20, 29/29, 61/61 and 99/99 PCs. The two original
+  C27456 child sites retain complete input CPU/SR/RAM contracts and changed
+  return flags, working values and cursors. Signed divide overflow, the
+  minimum-long/-1 source result, partial writes, caller-frame locals, saved
+  cursors and signed ADD overflow branches are preserved. Divide-zero still
+  uses the actual exception backend; full Kickstart-handler return is unproven.
+  Actual ON/shadow/sandbox dispatch passes 3,840 hardware-free completed
+  fixtures and all OFF/selection/non-call/source-write guards. All five owners
+  have zero calls in all six normal-C recording reports with their parents
+  omitted. The unchanged generic checker rejects C26322 for zero completed
+  comparisons; no recorded normal-C comparison is claimed for these cold
+  owners. Local DMA passes 229 / 7,328. Fresh combined and independently
+  derived union pass 20,488 / 655,616, adding all 229 PCs with no previous
+  overlap. Twenty older generator outputs and shared production/proof files
+  remain unchanged. GNU/MSVC Release pass. The full 571-row gate passes
+  567,984 shadow / 417,363 sandbox matches, zero mismatches, exact seals and
+  poison frames. All 36,236 isolated live frames/seals match. Family exact
+  through frame 600; ALL remains 416/361. build/ is 1.172 GiB. See
+  analysis/routines/native_c_flight_motion_helpers.md and
+  analysis/figures/native_flight_motion_helpers_checkpoint.json.
+  Next complete C25B66/C266AE/C28996/C28B16: 1,308 unique / zero shared
+  boundaries, retaining actual original calls, sealed in
+  analysis/data/flight_dynamics_remaining_scope_inventory.json and reproduced
+  by tools/recomp/audit_remaining_flight_dynamics.py. These four complete
+  owners remain implementation work. Related C2C392 still requires its
+  computed transfer at C2C46E to be reconciled. No service/timing-only work
+  is selected, and complete original call/callback coverage remains open.
+
+- The preceding flight-record checkpoint registered 500 translated entries
+  plus sixty-six original source-only callable
   entries are registered: 566 rows and 386 source-timed entries (320 translated
   plus sixty-six source-only). Complete C230E8/C23116/C23186/C23228/C233AA/
   C23578/C236AA/C23716/C2377E/C257EC cover 575 unique / 245 shared boundaries
@@ -94,7 +131,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   600, ALL still 416/361. build/ is 1.137 GiB. See
   analysis/routines/native_c_flight_record_actions.md and
   analysis/figures/native_flight_record_actions_checkpoint.json.
-  Next complete C25B66/C26322/C26352/C266AE/C26C72/C26CC0/C26D8A/C28996/C28B16:
+  Its following inventory sealed C25B66/C26322/C26352/C266AE/C26C72/C26CC0/C26D8A/C28996/C28B16:
   1,537 unique / zero shared boundaries, sealed with original callability in
   analysis/data/flight_dynamics_scope_inventory.json. Reproduce its audit
   with tools/recomp/audit_flight_dynamics.py. Related C2C392 has actual call
@@ -1366,12 +1403,13 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 500/624 translated plus sixty-six source-only callable entries. Next
-   reconstruct complete C25B66/C26322/C26352/C266AE/C26C72/C26CC0/C26D8A/
-   C28996/C28B16 from analysis/data/flight_dynamics_scope_inventory.json
-   (1,537 unique / zero shared boundaries, actual incoming calls sealed).
+   is 505/624 translated plus sixty-six source-only callable entries. Next
+   reconstruct complete C25B66/C266AE/C28996/C28B16 from
+   analysis/data/flight_dynamics_remaining_scope_inventory.json
+   (1,308 unique / zero shared boundaries, actual incoming calls sealed).
    Reconcile related C2C392's computed transfer at C2C46E before assigning
-   its complete scope. This inventory implements none of the nine owners. Keep
+   its complete scope. Five helpers from the earlier nine-owner inventory are
+   now complete; this remaining inventory implements none of its four owners. Keep
    C1612C unregistered until its frozen-event graphics-wait comparison can
    complete safely; its domain/CPU/step source, failed gates and successful
    temporary native replay remain explicit integration evidence.

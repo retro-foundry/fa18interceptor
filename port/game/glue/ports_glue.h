@@ -936,3 +936,4 @@ int glue_C1ECFC_step(void);
 #endif
 
 #include "glue_flight_record_actions.h"
+#include "glue_flight_motion_helpers.h"

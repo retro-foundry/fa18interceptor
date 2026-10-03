@@ -12,20 +12,29 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-500 translated game entries and sixty-six original source-only callable entries are
+505 translated game entries and sixty-six original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-Complete flight-record action and control-stream owners pass 327,680 full
+Five complete motion-projection, publication and collision helpers pass
+163,840 full CPU/PC/SR/RAM calls, all 229 source boundaries with controlled
+and real children, 3,840 dispatch fixtures and all 36,236 isolated live
+frames/seals. These five owners are cold in all three recordings; the strict
+normal-C checker retains its zero-comparison rejection. A fresh combined DMA
+check passes 20,488 instruction boundaries / 655,616 cases. See
+[motion-helper proof](analysis/routines/native_c_flight_motion_helpers.md).
+The remaining four enclosing flight-dynamics owners have a sealed
+1,308-boundary inventory. Game-function porting remains incomplete; stop when
+only Kickstart services and timing remain, after reconciling cold and indirect
+original owners.
+
+The preceding complete flight-record action and control-stream owners pass 327,680 full
 CPU/SR/RAM completed calls, 7,680 dispatch fixtures and all 36,236 isolated
 live frames/seals. Internal segments and nonreturning fault observations are
 proved separately. Three recorded owners pass 40,695 independent normal-C
 comparisons; seven cold owners retain fixture and original-call proof.
-A fresh combined DMA check passes 20,259 instruction boundaries / 648,288
+Their combined DMA checkpoint passed 20,259 instruction boundaries / 648,288
 cases. See [flight-record action proof](analysis/routines/native_c_flight_record_actions.md).
-The next nine flight-dynamics owners have a sealed 1,537-boundary inventory.
-Game-function porting remains incomplete; stop when only Kickstart services
-and timing remain, after reconciling cold and indirect original owners.
 
 Complete control/flight parents and four helper upgrades pass 196,608 full
 CPU/SR/RAM calls, 4,608 dispatch fixtures and all 36,236 isolated live frames/
@@ -51,7 +60,7 @@ The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 386 registered callable entries now have source timing. The complete
+isolation; 391 registered callable entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent

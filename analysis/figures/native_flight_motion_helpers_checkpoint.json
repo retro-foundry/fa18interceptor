@@ -1,0 +1,1108 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "989a2c84",
+  "new_registered_owners": [
+    "C26322",
+    "C26352",
+    "C26C72",
+    "C26CC0",
+    "C26D8A"
+  ],
+  "registered_translated_entries": 505,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 571,
+  "registered_timing_entries": 391,
+  "registered_translated_timing_entries": 325,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/flight_motion_helpers_source_scope.json",
+      "sha256": "cbdb79d02e06157dcdb182c7f23efbb25eecfa6f7c85f4e260ac94372a8c45ee"
+    },
+    "unique_instructions": 229,
+    "shared_within_batch": 0,
+    "actual_child_sites": 2,
+    "actual_original_callability": {
+      "C26322": [
+        {
+          "pc": "C26242",
+          "return_pc": "C26246",
+          "instruction": "bsr     $c26322",
+          "bytes": "610000de"
+        }
+      ],
+      "C26352": [
+        {
+          "pc": "C2625A",
+          "return_pc": "C2625E",
+          "instruction": "bsr     $c26352",
+          "bytes": "610000f6"
+        }
+      ],
+      "C26C72": [
+        {
+          "pc": "C154BA",
+          "return_pc": "C154C0",
+          "instruction": "jsr     $c26c72.l",
+          "bytes": "4eb900c26c72"
+        }
+      ],
+      "C26CC0": [
+        {
+          "pc": "C26AEE",
+          "return_pc": "C26AF2",
+          "instruction": "bsr     $c26cc0",
+          "bytes": "610001d0"
+        }
+      ],
+      "C26D8A": [
+        {
+          "pc": "C26AF4",
+          "return_pc": "C26AF8",
+          "instruction": "bsr     $c26d8a",
+          "bytes": "61000294"
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 163840,
+  "controlled_child_completed_calls": 81920,
+  "real_child_completed_calls": 81920,
+  "fixture_coverage": [
+    {
+      "owner": "C26322",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 20,
+      "observed_owner_pcs": 20,
+      "raw_observed_pcs": 20,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_contract_C26322.log",
+        "sha256": "832b4265045a372acc86b72476ccf608cf8c8ead1d3c367c63f0aeb1d0ed14f2"
+      }
+    },
+    {
+      "owner": "C26352",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 20,
+      "observed_owner_pcs": 20,
+      "raw_observed_pcs": 20,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_contract_C26352.log",
+        "sha256": "66f32d4788602723e36819ea5505355c719c5a0e07f476e05e5166f9a49e9cb1"
+      }
+    },
+    {
+      "owner": "C26C72",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 29,
+      "observed_owner_pcs": 29,
+      "raw_observed_pcs": 29,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_contract_C26C72.log",
+        "sha256": "8a443628eb3572e641aa8ce59ab74ad6b9a8e5a4fbfb28795a430ad5cca7a423"
+      }
+    },
+    {
+      "owner": "C26CC0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 61,
+      "observed_owner_pcs": 61,
+      "raw_observed_pcs": 61,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_contract_C26CC0.log",
+        "sha256": "fae966c11cd1f802c45bf63bb645e3ae37f13ed394cb7965896a6b119e793fd7"
+      }
+    },
+    {
+      "owner": "C26D8A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 99,
+      "observed_owner_pcs": 99,
+      "raw_observed_pcs": 99,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_contract_C26D8A.log",
+        "sha256": "5697a1105933676f450951a7c3e089e21a797c231dfc4e87ed2ea1e1ea8c9076"
+      }
+    },
+    {
+      "owner": "C26322",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 20,
+      "observed_owner_pcs": 20,
+      "raw_observed_pcs": 20,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_real_C26322.log",
+        "sha256": "1d3b36e38d42d5fc42367b4d712bf4708d23fb25ab756464f5989700840527f4"
+      }
+    },
+    {
+      "owner": "C26352",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 20,
+      "observed_owner_pcs": 20,
+      "raw_observed_pcs": 20,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_real_C26352.log",
+        "sha256": "88ebd5402c500baf804aa7f13cd752b8475447c63b12dd2978170f8c1d960e26"
+      }
+    },
+    {
+      "owner": "C26C72",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 29,
+      "observed_owner_pcs": 29,
+      "raw_observed_pcs": 29,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_real_C26C72.log",
+        "sha256": "365c559f74d476991d52bfbc5718fc9c00401a123b7e6a406050b0566ba87c99"
+      }
+    },
+    {
+      "owner": "C26CC0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 61,
+      "observed_owner_pcs": 61,
+      "raw_observed_pcs": 61,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_real_C26CC0.log",
+        "sha256": "dbf19d88222ff9a0f1650b85989ee842406b44097011be5515b3a871169121ed"
+      }
+    },
+    {
+      "owner": "C26D8A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 99,
+      "observed_owner_pcs": 99,
+      "raw_observed_pcs": 99,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_real_C26D8A.log",
+        "sha256": "93308f6878b4dd5dff7d6407891c745b8aaf3d5c348ea98022643955c7d7af76"
+      }
+    }
+  ],
+  "actual_dispatch_completed_calls": 3840,
+  "dispatch_fixtures": [
+    {
+      "owner": "C26322",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26322_on.log",
+        "sha256": "6ead03654ce8ce3af3700cf87252f1c4e43d8e09751905d72bf9905561e190d4"
+      }
+    },
+    {
+      "owner": "C26322",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26322_shadow.log",
+        "sha256": "6ead03654ce8ce3af3700cf87252f1c4e43d8e09751905d72bf9905561e190d4"
+      }
+    },
+    {
+      "owner": "C26322",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26322_sandbox.log",
+        "sha256": "6ead03654ce8ce3af3700cf87252f1c4e43d8e09751905d72bf9905561e190d4"
+      }
+    },
+    {
+      "owner": "C26352",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26352_on.log",
+        "sha256": "aad5b455662387c9334ff808e3ba7726d5c3bd89c6e64447e44d4787017f1258"
+      }
+    },
+    {
+      "owner": "C26352",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26352_shadow.log",
+        "sha256": "aad5b455662387c9334ff808e3ba7726d5c3bd89c6e64447e44d4787017f1258"
+      }
+    },
+    {
+      "owner": "C26352",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26352_sandbox.log",
+        "sha256": "aad5b455662387c9334ff808e3ba7726d5c3bd89c6e64447e44d4787017f1258"
+      }
+    },
+    {
+      "owner": "C26C72",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26C72_on.log",
+        "sha256": "f3d4f303ba6faed67c480f531da0207c94d73440e125612945639f3a4fb8c8a5"
+      }
+    },
+    {
+      "owner": "C26C72",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26C72_shadow.log",
+        "sha256": "f3d4f303ba6faed67c480f531da0207c94d73440e125612945639f3a4fb8c8a5"
+      }
+    },
+    {
+      "owner": "C26C72",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26C72_sandbox.log",
+        "sha256": "f3d4f303ba6faed67c480f531da0207c94d73440e125612945639f3a4fb8c8a5"
+      }
+    },
+    {
+      "owner": "C26CC0",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26CC0_on.log",
+        "sha256": "e29debe7ef07004067c9860badfc2244891c18664507fead4bd60768b4dd07b3"
+      }
+    },
+    {
+      "owner": "C26CC0",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26CC0_shadow.log",
+        "sha256": "e29debe7ef07004067c9860badfc2244891c18664507fead4bd60768b4dd07b3"
+      }
+    },
+    {
+      "owner": "C26CC0",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26CC0_sandbox.log",
+        "sha256": "e29debe7ef07004067c9860badfc2244891c18664507fead4bd60768b4dd07b3"
+      }
+    },
+    {
+      "owner": "C26D8A",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26D8A_on.log",
+        "sha256": "2f0275c449cd4b87d169dadf9709c07d4dae0339992dc6d9d7dcc859fa7037e7"
+      }
+    },
+    {
+      "owner": "C26D8A",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26D8A_shadow.log",
+        "sha256": "2f0275c449cd4b87d169dadf9709c07d4dae0339992dc6d9d7dcc859fa7037e7"
+      }
+    },
+    {
+      "owner": "C26D8A",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "log": {
+        "path": "build/recomp/flight_motion_helpers_dispatch_C26D8A_sandbox.log",
+        "sha256": "2f0275c449cd4b87d169dadf9709c07d4dae0339992dc6d9d7dcc859fa7037e7"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "classification": "all five cold with enclosing parents omitted",
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C26322",
+            "name": "project_record_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26352",
+            "name": "publish_motion_slot",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26C72",
+            "name": "project_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26CC0",
+            "name": "test_component_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26D8A",
+            "name": "test_face_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C26322_C26352_C26C72_C26CC0_C26D8A_demo01_shadow.json",
+          "sha256": "e338c6985e38f16f95f2c1ed4f895956d14fd36763e9721e2f024c18b48c7597"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C26322",
+            "name": "project_record_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26352",
+            "name": "publish_motion_slot",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26C72",
+            "name": "project_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26CC0",
+            "name": "test_component_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26D8A",
+            "name": "test_face_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C26322_C26352_C26C72_C26CC0_C26D8A_qual_carrier_success_shadow.json",
+          "sha256": "e338c6985e38f16f95f2c1ed4f895956d14fd36763e9721e2f024c18b48c7597"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C26322",
+            "name": "project_record_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26352",
+            "name": "publish_motion_slot",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26C72",
+            "name": "project_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26CC0",
+            "name": "test_component_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26D8A",
+            "name": "test_face_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C26322_C26352_C26C72_C26CC0_C26D8A_qual_fail_crashes_shadow.json",
+          "sha256": "e338c6985e38f16f95f2c1ed4f895956d14fd36763e9721e2f024c18b48c7597"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C26322",
+            "name": "project_record_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26352",
+            "name": "publish_motion_slot",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26C72",
+            "name": "project_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26CC0",
+            "name": "test_component_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26D8A",
+            "name": "test_face_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C26322_C26352_C26C72_C26CC0_C26D8A_demo01_sandbox.json",
+          "sha256": "e338c6985e38f16f95f2c1ed4f895956d14fd36763e9721e2f024c18b48c7597"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C26322",
+            "name": "project_record_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26352",
+            "name": "publish_motion_slot",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26C72",
+            "name": "project_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26CC0",
+            "name": "test_component_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26D8A",
+            "name": "test_face_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C26322_C26352_C26C72_C26CC0_C26D8A_qual_carrier_success_sandbox.json",
+          "sha256": "e338c6985e38f16f95f2c1ed4f895956d14fd36763e9721e2f024c18b48c7597"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C26322",
+            "name": "project_record_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26352",
+            "name": "publish_motion_slot",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26C72",
+            "name": "project_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26CC0",
+            "name": "test_component_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26D8A",
+            "name": "test_face_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C26322_C26352_C26C72_C26CC0_C26D8A_qual_fail_crashes_sandbox.json",
+          "sha256": "e338c6985e38f16f95f2c1ed4f895956d14fd36763e9721e2f024c18b48c7597"
+        }
+      }
+    ],
+    "generic_checker_exit": 1,
+    "generic_rejection": "C26322: no completed comparisons",
+    "recorded_comparisons_claimed": 0
+  },
+  "instruction_dma": {
+    "local_instructions": 229,
+    "local_cases": 7328,
+    "previous_unique_instructions": 20259,
+    "overlap_instructions": 0,
+    "combined_unique_instructions": 20488,
+    "combined_cases": 655616,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 20,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_main_loop_flight_controls_math.h",
+      "sha256": "b141699adbda2a39bc0009942f6f1f7d69e27d08080fbf372ddf6d945ff37f4d"
+    },
+    {
+      "path": "port/game/glue/glue_flight_record_actions_math.h",
+      "sha256": "3412841f5494bb57bcb434b60f58b7a44457fb6fe938cba37aa2b80020da0753"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    }
+  ],
+  "full_gate": {
+    "rows": 571,
+    "recordings": 3,
+    "shadow_matches": 567984,
+    "sandbox_matches": 417363,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 309908,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "38682be977b18dad25df3e995ef124a0b96b61539ea655cad2834dec4f27a2d7"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 205605,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "4b920a91019b5c570fdf537003aba110db98725d913324a015351d1b82f486fa"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52471,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "e925575da38d98e619e17fcfa588bdc484f193c20ad3978fdfa4e046e3e92b25"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 143663,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "50d25af23642f83829e8e13e18d39aad4b00193d4aeeb55f852782d4494eb497"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 231880,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "f0ec9ca1b6121bef464a6b5d537e56895e7a279d299d44502918d9556ea157f4"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 41820,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "bd761fe9bde1008e5bd4326d50ca2b942c9d80a59aca2a241478e72182737481"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1258866448,
+    "build_gib": 1.172
+  },
+  "limits": [
+    "All five are cold in recordings; the generic normal-C zero-comparison rejection remains strict.",
+    "Full projection return through the Kickstart divide-zero handler is unproven; original exception backend is retained.",
+    "Complete original game-call/callback coverage remains open.",
+    "C1612C remains unregistered pending graphics-wait integration.",
+    "ALL frame416/361 and deferred Copper fade remain timing debt."
+  ],
+  "next": {
+    "entries": [
+      "C25B66",
+      "C266AE",
+      "C28996",
+      "C28B16"
+    ],
+    "unique_instructions": 1308,
+    "shared_instructions": 0,
+    "manifest": {
+      "path": "analysis/data/flight_dynamics_remaining_scope_inventory.json",
+      "sha256": "d45f39ec69f68dcedb557ac4975c3b78a62af408082b5218f5857795fe845570"
+    },
+    "related_unsealed_owner": "C2C392 computed transfer C2C46E"
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/flight_motion_helpers.c",
+      "sha256": "e5a292636fceb698914533afecac5777b5bfcffef369c912be6627bdba590b66"
+    },
+    {
+      "path": "port/game/flight_motion_helpers.h",
+      "sha256": "055c5da7070e909c0975629bb11a41b2bbfe33ca90ccd1a8c96ae31e80dc424c"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers.c",
+      "sha256": "c4e255cbc58e78372eeab8cafb26da479dd8490afa99b08656ad2f334d0c05f9"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers.h",
+      "sha256": "ac4b2fd0869708dbf59551153c374d9e2a87847d041ae2ce95b49b3d95ac488b"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers_math.h",
+      "sha256": "d32d6c42c74e096dd5c670f285a91d9d1c91f8786d3c4c3d0d9a762d899d0315"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers_step.c",
+      "sha256": "e5b7ea3ccc7667596f85d7140118816eb975dbab9d3f18fd1a5585f8cf600599"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "fddbb1608c3fadac28bc0ff2629c617c097f6d80a481029ad0fd7c077f5b7a9b"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "60031c8802a64791f2a20138a9a66cee788c9559a43980b385c245dfcfd8a25e"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_flight_motion_helpers_source.py",
+      "sha256": "a66973940a68227cd7fc862f958991d2555a3a2b9dcda61ed0f334b7a43f63e9"
+    },
+    {
+      "path": "tools/recomp/check_flight_motion_helpers.py",
+      "sha256": "14bc86b9f9ea27ba4b89b8c890334b831961a073c0dd1b4d502acddf3025d730"
+    },
+    {
+      "path": "tools/recomp/check_flight_motion_helpers_dispatch.py",
+      "sha256": "d019b98575fb5a213c3ddda277829ac79f2f48e84cdcb8a089207bd37bb7a7d8"
+    },
+    {
+      "path": "tools/recomp/flight_motion_helpers_bus_budget.c",
+      "sha256": "5db9f3391c7d43313b1aeea92f3edf918ae119c87347af4aaf22a3bee8b167cd"
+    },
+    {
+      "path": "tools/recomp/flight_motion_helpers_contract_children.c",
+      "sha256": "4336186cedd357b36ef5a8e6350aa35f8ce1f2437e16beb16cd6bff45b95ad03"
+    },
+    {
+      "path": "tools/recomp/flight_motion_helpers_contract_oracle.c",
+      "sha256": "58a377ee167b7f17d123ee8caf913ba7c34105e8b22f2a69354f3a6bc6a23149"
+    },
+    {
+      "path": "tools/recomp/flight_motion_helpers_dispatch_oracle.c",
+      "sha256": "08b18874e56276fd598dd53d9e97a32ab87039234ee1920849e2ce98ded921b9"
+    },
+    {
+      "path": "tools/recomp/flight_motion_helpers_oracle.c",
+      "sha256": "a2d9c98757719a654d4077072429cf8f98b5cdd6fcfd3750580e319c6f781a59"
+    },
+    {
+      "path": "tools/recomp/audit_remaining_flight_dynamics.py",
+      "sha256": "04d292300147c70d281e493fcc0ceae6d0227f24e94179bc48cab421a13554be"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/motion_whole_proof.log",
+      "sha256": "7399176af818770c97e135470fac4805e7df7b6740c4fc244289511d01240605"
+    },
+    {
+      "path": "build/recomp/motion_dispatch_proof.log",
+      "sha256": "95614069387c0b3521eed74908f02ab5bdf3d36da2175e9e77851108717282c1"
+    },
+    {
+      "path": "build/recomp/motion_instruction_dma.log",
+      "sha256": "494b96956a0260fc66620bf86045d8c0d8bd1bd744a12fa4851c38197d5fb2a0"
+    },
+    {
+      "path": "build/recomp/motion_all_dma.log",
+      "sha256": "fdb48255b0e23dd949f9ed693e33b1f8029d22c98be076e01d4c6ed005c32e6c"
+    },
+    {
+      "path": "build/recomp/motion_instruction_union.log",
+      "sha256": "54cbdfe0afc2ddd392933d6482abcd4645dd66912486fc6f5ba9ed10922424aa"
+    },
+    {
+      "path": "build/recomp/motion_generator_compatibility.log",
+      "sha256": "fc5eab605a5516867bd12a0785dbabaf4762414f0c4adb6a7b396716249247f0"
+    },
+    {
+      "path": "build/recomp/motion_gnu.log",
+      "sha256": "ddf04117bca76e1e490bb2ef9ad170cdbb6d78ca7bb21e0a726432ee18c3f390"
+    },
+    {
+      "path": "build/recomp/motion_msvc.log",
+      "sha256": "07a719d6aea1cb0c6ba6cabbea8f2d2a933b5a292c82f889c4b56ffa9f56b9b8"
+    },
+    {
+      "path": "build/recomp/motion_full_gate.log",
+      "sha256": "9bf5ec72982975200192166bcc89355bfa69985c204d5ac7f4dcf92206e7574c"
+    },
+    {
+      "path": "build/recomp/motion_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/motion_timing_600.log",
+      "sha256": "be98b4c0879ae3e180119bc35f35bbb8b10b10f59fa3aa929b844f3cdf5c4439"
+    },
+    {
+      "path": "build/recomp/motion_normal_c.log",
+      "sha256": "bb780e5c8e9964860f6f248ad33f5c555d11dc735a77aa16930f89b3afd78bac"
+    }
+  ]
+}
