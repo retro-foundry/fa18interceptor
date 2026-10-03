@@ -1,5 +1,5 @@
 /* Glue for local_to_world ($C091E0, $C091CE, $C091A8), the shown-record
- * vertices $C0D334, normalize_vector $C25754 and the slot scan $C265E8. */
+ * vertices $C0D334 and the slot scan $C265E8. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -72,28 +72,6 @@ int glue_C0D334(void) {
     D(5) = ((uint32_t)(int32_t)hz & 0xFFFF0000u) | rd_u16(w + 0x298);
     D(0) = 0;
     flags_logic_l(0);
-    return glue_return();
-}
-
-static uint16_t neg_abs(uint32_t v) {
-    return (int16_t)v < 0 ? (uint16_t)-(int16_t)v : (uint16_t)v;
-}
-
-/* $C25754: normalize_vector(scale, x, y, z), long arguments at 4(A7). The
- * caller reads D3/D4 as magnitude3 leaves them and D5-D7 = the result words
- * sign-extended. */
-int glue_C25754(void) {
-    int32_t scale = rd_s32(A(7) + 4), x = rd_s32(A(7) + 8), y = rd_s32(A(7) + 12), z = rd_s32(A(7) + 16);
-    if ((int16_t)scale != 0) {
-        SET_W(D(2), neg_abs((uint32_t)x));
-        SET_W(D(3), neg_abs((uint32_t)y));
-        SET_W(D(4), neg_abs((uint32_t)z));
-        magnitude_registers();
-    }
-    normalize_vector(scale, x, y, z);
-    D(5) = (uint32_t)(int32_t)rd_s16(NORMALIZED);
-    D(6) = (uint32_t)(int32_t)rd_s16(NORMALIZED + 2);
-    D(7) = (uint32_t)(int32_t)rd_s16(NORMALIZED + 4);
     return glue_return();
 }
 

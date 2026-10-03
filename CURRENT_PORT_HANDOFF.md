@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 4a6f34c6); ignored gate logs may
+history (the preceding handoff is in commit bff5d5df); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -19,8 +19,7 @@ explicit in the final handoff; do not continue into Kickstart replacement or
 standalone timing work after game-function porting is complete. Any remaining
 game implementation or behavior gap prevents claiming this stopping point.
 The user explicitly deferred OS work and asked for larger routine batches.
-After the C279D0 batch, the latest instruction is to return to game timing
-parity. Selector, placement, post-input, context-refresh and bootstrap milestones
+Selector, placement, post-input, context-refresh and bootstrap milestones
 are complete at 432/624; the complete record-update and enclosing update-stage
 parents raised coverage to 434/624; the complete C29042 selector-origin owner
 raised it to 435/624; complete update/input/display owners raised it to 438/624;
@@ -42,7 +41,8 @@ setup owners retain that count and extend source-only coverage to sixty-five.
 Complete main-loop timer/readout and setup-bounds owners now raise coverage
 to 481/624 and source-only coverage to sixty-six. Complete main-loop control
 records and message sequences raise translated coverage to 483/624. Complete
-control-record action and alert owners now raise it to 488/624.
+control-record action and alert owners raise it to 488/624. Complete control/
+flight parents and four existing helper upgrades now raise it to 490/624.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -51,7 +51,51 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 488 of 624 translated entries plus sixty-six original source-only callable
+- 490 of 624 translated entries plus sixty-six original source-only callable
+  entries are registered: 556 rows and 376 source-timed entries (310 translated
+  plus sixty-six source-only). Complete C149BE/C23A7E and upgraded existing
+  C083E2/C25754/C24568/C2436A cover 1,416 unique / zero shared boundaries within
+  this batch and 22 actual child sites. Four older adapters and their unused
+  register helpers are removed. Full CPU/PC/SR/all-RAM proof passes 196,608
+  complete cases without exclusions: 98,304 controlled-child and 98,304
+  real-child. Controlled cases cover all 493/35/56/711/82/39 owned PCs and
+  compare complete child-entry CPU/SR/RAM. Real owner coverage is 168/493,
+  35/35, 55/56, 102/711, 70/82 and 39/39. C149BE's raw 217-PC observation
+  includes nested owners; report only its 168-PC intersection. Real fixtures
+  retain actual normalization/attenuation children and original class paths;
+  no all-path real clock/sound/fault/projection-service completion is claimed.
+  Test-only ordered word/byte read contracts prove the two original flag
+  reloads. Minimum-word scale loop remains source behavior, not a completed
+  whole-call fixture. DIVU-zero exception entry has instruction proof; the
+  normalizer's complete ROM-handler return remains unproven.
+  Actual ON/shadow/sandbox dispatch passes 4,608 complete fixtures and guards,
+  requiring hardware-free completed classification. Independent normal C
+  passes 15,468 shadow / 15,714 sandbox matches: parent checker 9,444 / 9,637,
+  helper checker 6,024 / 6,077. C149BE retains five shadow / eight sandbox
+  hardware classifications and 199 shadow incompletes; C25754 retains 53
+  shadow incompletes. No mismatches or sandbox incompletes. The six-owner
+  generic batch's C083E2 zero-comparison rejection and three absorbed-helper
+  zero-count reports are retained; both separate unchanged checkers pass.
+  Local DMA passes 1,416 / 45,312. A fresh combined run and the independently
+  proven union pass 19,855 / 635,360, counting the 450 previous-overlap PCs
+  once. All eighteen older generator outputs and shared runtime CPU/bus/
+  memory/math/instruction fixtures remain unchanged. GNU/MSVC Release pass.
+  The full 556-row gate passes 553,158 shadow / 417,328 sandbox matches, zero
+  mismatches, exact seals and identical poison frames. Whole parents absorb
+  nested calls, so the aggregate comparison count does not have to increase.
+  All 36,236 isolated live frames/seals match; group exact through frame 600,
+  ALL remains 416/361. Build/ is 1.100 GiB. C1612C remains inactive with frozen
+  graphics-wait failure explicit. See
+  analysis/routines/native_c_main_loop_flight_controls.md and
+  analysis/figures/native_main_loop_flight_controls_checkpoint.json.
+  Next complete C230E8/C23116/C23186/C23228/C233AA/C23578/C236AA/C23716/C2377E/
+  C257EC: 575 unique / 245 shared boundaries, sealed in
+  analysis/data/flight_record_actions_scope_inventory.json. Every owner has
+  byte-backed original JSR/BSR evidence. This inventory implements none of
+  them and replaces no OS service. Game-function porting remains incomplete;
+  retain the stopping point and defer Kickstart and standalone timing work.
+- At the preceding control-action checkpoint, 488 of 624 translated entries
+  plus sixty-six original source-only callable
   entries are registered: 554 rows and 370 source-timed entries (304 translated
   plus sixty-six source-only). Complete C153FC/C15688/C159AE/C15AD4/C181A0 and
   the upgraded C15138 cover 537 unique / zero shared boundaries and ten actual

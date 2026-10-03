@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup","main_loop_timers","main_loop_control_messages","record_control_actions"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup","main_loop_timers","main_loop_control_messages","record_control_actions","main_loop_flight_controls"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -85,6 +85,16 @@ if family=="main_loop_control_messages":
 if family=="record_control_actions":
  body["neg.w"]="address=cache_step_address(mode,reg,2); old=cache_step_read_memory(address,2); renderer_negate(&old,2); cache_step_write_memory(address,old,2,0); break;"
  body["add.l"]="width=4; if(opcode&0x100u) { value=D(destination); operation='+'; goto arithmetic; } value=cache_step_read(mode,reg,4); mode=0; reg=destination; operation='+'; goto arithmetic;"
+if family=="main_loop_flight_controls":
+ body["neg.w"]="if(mode==0) renderer_negate(&D(reg),2); else { address=cache_step_address(mode,reg,2); old=cache_step_read_memory(address,2); renderer_negate(&old,2); cache_step_write_memory(address,old,2,0); } break;"
+ body["neg.b"]="if(mode==0) renderer_negate(&D(reg),1); else { address=cache_step_address(mode,reg,1); old=cache_step_read_memory(address,1); renderer_negate(&old,1); cache_step_write_memory(address,old,1,0); } break;"
+ body["movem.w"]="mask=m68ki_read_imm_16(); address=cache_step_address(mode,reg,2); if(opcode&0x400u) renderer_load(address,mask,2,mode==3?(int)reg:-1); else renderer_store(address,mask,2,-1); break;"
+ body["exg"]="if((opcode&0xf8u)==0x48u) { value=A(destination); A(destination)=A(reg); A(reg)=value; } else if((opcode&0xf8u)==0x40u) { value=D(destination); D(destination)=D(reg); D(reg)=value; } else { value=D(destination); D(destination)=A(reg); A(reg)=value; } break;"
+ body["lsr.w"]="flight_lsr_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
+ body["dbra"]="step_dbf(pc,&D(reg)); break;"
+ for suffix,width in (("w",2),("l",4)):
+  for mnemonic,operation in (("add","+"),("sub","-")):
+   body[mnemonic+"."+suffix]=f"width={width}; if(opcode&0x100u) {{ value=D(destination); operation='{operation}'; goto arithmetic; }} value=cache_step_read(mode,reg,width); reg=destination; mode=0; operation='{operation}'; goto arithmetic;"
 missing=set(groups)-set(body)
 if missing: raise ValueError(f"unsupported owned source operations: {sorted(missing)}")
 if family=="menu_context_finish":
@@ -119,6 +129,8 @@ if family=="main_loop_control_messages":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_main_loop_control_messages_math.h"')
 if family=="menu_context_finish":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_menu_context_math.h"')
+if family=="main_loop_flight_controls":
+ out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_main_loop_flight_controls_math.h"')
 for key,pcs in groups.items():
  for j in range(0,len(pcs),4): out+="    "+" ".join("case 0x"+pc+":" for pc in pcs[j:j+4])+"\n"
  out+="        "+body[key]+"\n"

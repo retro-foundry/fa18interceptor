@@ -1,8 +1,7 @@
 /* Glue for the projected segment $C2ED70, the top-plane crossing $C2F128,
- * the in-sight flag $C2436A and the edge alignment tests $C2082A/$C2084A.
+ * and the edge alignment tests $C2082A/$C2084A.
  * The register flows are replayed after the C: the projection keeps each
- * DIVS remainder in the upper word, and normalize_vector's register entry
- * is re-run through its idempotent helper. */
+ * DIVS remainder in the upper word. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -65,41 +64,6 @@ void projected_segment_registers(void) {
 int glue_C2ED70(void) {
     draw_projected_segment();
     projected_segment_registers();
-    return glue_return();
-}
-
-static void muls_mem(int n, gaddr a) { D(n) = (uint32_t)((int32_t)W(n) * rd_s16(a)); }
-
-/* $C2436A: A1 target, A3 viewer. */
-int glue_C2436A(void) {
-    gaddr t = A(1), v = A(3);
-    int k;
-
-    SET_B(D(0), rd_u8(t + 0x39) & 0xF0);
-    if ((uint8_t)D(0) == 0x10 && rd_s16(v + 0x4A) <= 0x3000) {
-        for (k = 0; k < 3; k++)
-            D(5 + k) = (uint32_t)((int32_t)(rd_u32(v + 0x14 + (gaddr)(4 * k)) - rd_u32(t + 0x14 + (gaddr)(4 * k))) >> 8);
-        SET_W(D(0), 0xC0);
-        normalize_registers();
-        muls_mem(5, v + 0x96);
-        muls_mem(6, v + 0x9C);
-        muls_mem(7, v + 0xA2);
-        {
-            int32_t first = (int32_t)(D(7) + D(5));
-            D(7) = (uint32_t)first + D(6);
-            if ((int64_t)first + (int32_t)D(6) < 0 && (int32_t)D(7) <= -0x2C0000) {
-                SET_W(D(2), rd_u16(v + 0x96));
-                SET_W(D(3), rd_u16(v + 0x9C));
-                SET_W(D(4), rd_u16(v + 0xA2));
-                muls_mem(2, t + 0x96);
-                muls_mem(3, t + 0x9C);
-                muls_mem(4, t + 0xA2);
-                D(4) += D(2);
-                D(4) += D(3);
-            }
-        }
-    }
-    update_in_sight(t, v);
     return glue_return();
 }
 

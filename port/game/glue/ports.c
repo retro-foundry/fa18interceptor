@@ -7,7 +7,9 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
-    /* Complete main-loop control and message sequence owners. */
+    /* Complete main-loop control, flight and message owners. */
+    {0xC149BE, glue_C149BE, "advance_main_loop_flight_controls", 0, 0, glue_C149BE_step, 0xC15138, 0, 0, glue_C149BE_owns},
+    {0xC23A7E, glue_C23A7E, "advance_main_loop_flight_record", 0, 0, glue_C23A7E_step, 0xC244E2, 0, 0xC23A7A, glue_C23A7E_owns},
     {0xC153FC, glue_C153FC, "advance_control_record_action", 0, 0, glue_C153FC_step, 0xC15688, 0, 0, glue_C153FC_owns},
     {0xC15688, glue_C15688, "initialise_control_record_action", 0, 0, glue_C15688_step, 0xC158D8, 0, 0, glue_C15688_owns},
     {0xC159AE, glue_C159AE, "aim_control_record_action", 0, 0, glue_C159AE_step, 0xC15AD4, 0, 0, glue_C159AE_owns},
@@ -244,7 +246,7 @@ const FA18Port fa18_ports[] = {
     {0xC0833E, glue_C0833E, "dispatch_space_command_effect", 110},
     {0xC133B2, glue_C133B2, "record_6e_step", 220},
     {0xC118A0, glue_C118A0, "queue_postflight_failure_message", 0, 0, glue_C118A0_step, 0xC118E6, 0, 0, glue_C118A0_owns},
-    {0xC083E2, glue_C083E2, "begin_mission_reset", 1000},
+    {0xC083E2, glue_C083E2, "begin_main_loop_mission_reset", 0, 0, glue_C083E2_step, 0xC08488, 0, 0, glue_C083E2_owns},
     {0xC25A00, glue_C25A00, "add_repeated_nibble_weight", 150},
     {0xC30AE2, glue_C30AE2, "draw_stores_icon_stream", 500},
     {0xC30A00, glue_C30A00, "draw_stores_icons", 900},
@@ -402,7 +404,7 @@ const FA18Port fa18_ports[] = {
     {0xC091CE, glue_C091CE, "local_to_world", 0, 0, glue_C091CE_step, 0xC0924A, 0, 0xC091A8},
     {0xC091A8, glue_C091A8, "local_to_world", 0, 0, glue_C091A8_step, 0xC0924A},
     {0xC0D334, glue_C0D334, "derive_shown_vertices", 2800},
-    {0xC25754, glue_C25754, "normalize_vector", 1600},
+    {0xC25754, glue_C25754, "normalise_main_loop_control_vector", 0, 0, glue_C25754_step, 0xC257DC, 0, 0, glue_C25754_owns},
     {0xC265E8, glue_C265E8, "flagged_slot_in_range", 3500},
     /* batch 25: main engine, tone, edge vertices, buffers, stage blit, grid position, list point */
     {0xC17C62, glue_C17C62, "play_main_engine", 0, 0, glue_C17C62_step, 0xC17CF6},
@@ -421,7 +423,7 @@ const FA18Port fa18_ports[] = {
     {0xC2F582, glue_C2F582, "clear_page_plane_tops", 600},
     /* batch 27: target point, record range, lane blit */
     {0xC1C2C8, glue_C1C2C8, "update_target_point", 0, 0, glue_C1C2C8_step, 0xC1C40C},
-    {0xC24568, glue_C24568, "classify_record_range", 1200},
+    {0xC24568, glue_C24568, "classify_main_loop_record_range", 0, 0, glue_C24568_step, 0xC2467E, 0, 0xC24566, glue_C24568_owns},
     {0xC304FA, glue_C304FA, "blit_lane", 400},
     /* batch 28: post-input expiry, projection seed, condition tables */
     {0xC10D8A, glue_C10D8A, "check_post_input_expiry", 0, 0, glue_C10D8A_step, 0xC10DAE, 0, 0, glue_C10D8A_owns},
@@ -515,7 +517,7 @@ const FA18Port fa18_ports[] = {
     /* batch 49: projected segment, top-plane crossing, in-sight flag, edge alignment */
     {0xC2ED70, glue_C2ED70, "draw_projected_segment", 3000},
     {0xC2F128, glue_C2F128, "clip_to_view_plane", 0, 0, glue_C2F128_step, 0xC2F1B8, 0, 0xC2EE44},
-    {0xC2436A, glue_C2436A, "update_in_sight", 2500},
+    {0xC2436A, glue_C2436A, "update_main_loop_record_sight", 0, 0, glue_C2436A_step, 0xC243F2, 0, 0xC24368, glue_C2436A_owns},
     {0xC2084A, glue_C2084A, "edge_alignment", 3000},
     {0xC2082A, glue_C2082A, "edge_alignment_test", 3000},
     /* batch 50: symbol plot */

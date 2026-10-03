@@ -46,11 +46,7 @@ int glue_C133B2(void) {
     return glue_return();
 }
 
-int glue_C083E2(void) {
-    begin_mission_reset();
-    D(0) = (D(0) & 0x0000FFFFu) | 0x40000000u;
-    return glue_return();
-}
+
 
 int glue_C25A00(void) {
     uint16_t repeats = (uint16_t)D(6);

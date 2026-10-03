@@ -1,0 +1,12 @@
+#ifndef FA18_GLUE_MAIN_LOOP_FLIGHT_CONTROLS_H
+#define FA18_GLUE_MAIN_LOOP_FLIGHT_CONTROLS_H
+#include "glue.h"
+#define FLIGHT_OWNER(e) int glue_##e(void); int glue_##e##_step(void); int glue_##e##_owns(uint32_t pc);
+FLIGHT_OWNER(C149BE)
+FLIGHT_OWNER(C083E2)
+FLIGHT_OWNER(C25754)
+FLIGHT_OWNER(C23A7E)
+FLIGHT_OWNER(C24568)
+FLIGHT_OWNER(C2436A)
+#undef FLIGHT_OWNER
+#endif
