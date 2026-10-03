@@ -679,7 +679,7 @@ const FA18Port fa18_ports[] = {
     /* post-input heading formatter () */
     {0xC25070, glue_C25070, "refresh_post_input_heading", 0, 0, glue_C25070_step, 0xC25176, 0, 0xC2506C, glue_C25070_owns},
     /* scene record stream dispatch () */
-    {0xC28B34, glue_C28B34, "dispatch_scene_records", 0, 0, glue_C28B34_step, 0xC28E12},
+    {0xC28B34, glue_C28B34, "dispatch_scene_records", 0, 0, glue_C28B34_complete_step, 0xC28E12, 0, 0xC28B34, glue_C28B34_owns},
     /* scene record initialization and aim () */
     {0xC28AFE, glue_C28AFE, "initialize_scene_record", 0, 0, glue_C28AFE_step, 0xC28E12},
     /* post-input context command and heading marker () */
@@ -746,6 +746,10 @@ const FA18Port fa18_ports[] = {
     {0xC26C72, glue_C26C72, "project_scene_motion", 0, 0, glue_C26C72_step, 0xC26CC0, 0, 0xC26C72, glue_C26C72_owns},
     {0xC26CC0, glue_C26CC0, "test_component_motion", 0, 0, glue_C26CC0_step, 0xC26D8A, 0, 0xC26CC0, glue_C26CC0_owns},
     {0xC26D8A, glue_C26D8A, "test_face_motion", 0, 0, glue_C26D8A_step, 0xC26EAC, 0, 0xC26D8A, glue_C26D8A_owns},
+    {0xC25B66, glue_C25B66, "advance_indexed_record_dynamics", 0, 0, glue_C25B66_step, 0xC26322, 0, 0xC25B22, glue_C25B66_owns},
+    {0xC266AE, glue_C266AE, "collide_scene_motion", 0, 0, glue_C266AE_step, 0xC26C68, 0, 0xC266AC, glue_C266AE_owns},
+    {0xC28996, glue_C28996, "update_scene_regions", 0, 0, glue_C28996_step, 0xC28AFC, 0, 0xC28994, glue_C28996_owns},
+    {0xC28B16, glue_C28B16, "spawn_region_records", 0, 0, glue_C28B16_step, 0xC28E16, 0, 0xC28B14, glue_C28B16_owns},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

@@ -1,0 +1,1715 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "0155d2b6",
+  "new_registered_owners": [
+    "C25B66",
+    "C266AE",
+    "C28996",
+    "C28B16"
+  ],
+  "upgraded_registered_owners": [
+    "C28B34"
+  ],
+  "registered_translated_entries": 509,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 575,
+  "registered_timing_entries": 395,
+  "registered_translated_timing_entries": 329,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/flight_dynamics_source_scope.json",
+      "sha256": "db46d9cfa2a3cf0cedaddb13cb7fc87142aa4e38bdd2f348b589a015ab37af08"
+    },
+    "unique_instructions": 1308,
+    "shared_within_batch": 218,
+    "distinct_child_sites": 25,
+    "child_sites_by_owner": 27,
+    "actual_original_callability": {
+      "C25B66": [
+        {
+          "pc": "C22D88",
+          "return_pc": "C22D8E",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22DCE",
+          "return_pc": "C22DD4",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22E12",
+          "return_pc": "C22E18",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22E56",
+          "return_pc": "C22E5C",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22E84",
+          "return_pc": "C22E8A",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22EC8",
+          "return_pc": "C22ECE",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22EF2",
+          "return_pc": "C22EF8",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22F3E",
+          "return_pc": "C22F44",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22F78",
+          "return_pc": "C22F7E",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22FA2",
+          "return_pc": "C22FA8",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C22FDC",
+          "return_pc": "C22FE2",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C23006",
+          "return_pc": "C2300C",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C23040",
+          "return_pc": "C23046",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C23070",
+          "return_pc": "C23076",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        },
+        {
+          "pc": "C230A0",
+          "return_pc": "C230A6",
+          "instruction": "jsr     $c25b66.l",
+          "bytes": "4eb900c25b66"
+        }
+      ],
+      "C266AE": [
+        {
+          "pc": "C1544A",
+          "return_pc": "C15450",
+          "instruction": "jsr     $c266ae.l",
+          "bytes": "4eb900c266ae"
+        }
+      ],
+      "C28996": [
+        {
+          "pc": "C22CDE",
+          "return_pc": "C22CE4",
+          "instruction": "jsr     $c28996.l",
+          "bytes": "4eb900c28996"
+        }
+      ],
+      "C28B16": [
+        {
+          "pc": "C289D6",
+          "return_pc": "C289DA",
+          "instruction": "bsr     $c28b16",
+          "bytes": "6100013e"
+        },
+        {
+          "pc": "C289F2",
+          "return_pc": "C289F6",
+          "instruction": "bsr     $c28b16",
+          "bytes": "61000122"
+        }
+      ],
+      "C28B34": [
+        {
+          "pc": "C28B04",
+          "return_pc": "C28B08",
+          "instruction": "bsr     $c28b34",
+          "bytes": "6100002e"
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 163840,
+  "controlled_child_completed_calls": 81920,
+  "real_child_completed_calls": 81920,
+  "fixture_coverage": [
+    {
+      "owner": "C25B66",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 554,
+      "observed_owner_pcs": 554,
+      "raw_observed_pcs": 554,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_contract_C25B66.log",
+        "sha256": "6b8e66344fb88b8a2e8400169d670431296c0462a96a495c0e4c68c1ac60a032"
+      }
+    },
+    {
+      "owner": "C266AE",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 416,
+      "observed_owner_pcs": 416,
+      "raw_observed_pcs": 416,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_contract_C266AE.log",
+        "sha256": "30887aba1853003bc18e2f6cad6dcbd34981ad93e4f93e9ab191121ea20c724d"
+      }
+    },
+    {
+      "owner": "C28996",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 107,
+      "observed_owner_pcs": 107,
+      "raw_observed_pcs": 107,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_contract_C28996.log",
+        "sha256": "3ff87530f7850a542d11d3cf53353f4aaf66b779e70a3835ce5d329746178316"
+      }
+    },
+    {
+      "owner": "C28B16",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 231,
+      "observed_owner_pcs": 231,
+      "raw_observed_pcs": 231,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_contract_C28B16.log",
+        "sha256": "0d85db26c05e9facd8bf673e67d027fcb738fa2e4334b92882e7ccd81da5bc4f"
+      }
+    },
+    {
+      "owner": "C28B34",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 218,
+      "observed_owner_pcs": 218,
+      "raw_observed_pcs": 218,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_contract_C28B34.log",
+        "sha256": "4574f2ab01246028468b96a387805214ac57fb3eaf8a11bab6ec09247c3cddeb"
+      }
+    },
+    {
+      "owner": "C25B66",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 554,
+      "observed_owner_pcs": 415,
+      "raw_observed_pcs": 415,
+      "unobserved_owner_pcs": [
+        "C2601C",
+        "C26022",
+        "C26026",
+        "C26028",
+        "C2602C",
+        "C26030",
+        "C26034",
+        "C26036",
+        "C2603A",
+        "C2603C",
+        "C26040",
+        "C26044",
+        "C26048",
+        "C2604A",
+        "C2604E",
+        "C26052",
+        "C26056",
+        "C26058",
+        "C2605A",
+        "C2605C",
+        "C2605E",
+        "C26060",
+        "C26062",
+        "C26064",
+        "C26066",
+        "C26068",
+        "C2606A",
+        "C26070",
+        "C26072",
+        "C26076",
+        "C2607A",
+        "C2607E",
+        "C26084",
+        "C2608A",
+        "C26090",
+        "C26092",
+        "C26094",
+        "C26096",
+        "C2609A",
+        "C2609E",
+        "C260A2",
+        "C260A6",
+        "C260A8",
+        "C260AC",
+        "C260B0",
+        "C260B4",
+        "C260B8",
+        "C260BC",
+        "C260BE",
+        "C260C4",
+        "C260C6",
+        "C260CC",
+        "C260D0",
+        "C260D4",
+        "C260D6",
+        "C260DC",
+        "C260DE",
+        "C260E2",
+        "C260E4",
+        "C260E8",
+        "C260EA",
+        "C260EC",
+        "C260F2",
+        "C260F8",
+        "C260FE",
+        "C26100",
+        "C26102",
+        "C26108",
+        "C2610C",
+        "C26110",
+        "C26116",
+        "C2611A",
+        "C2611E",
+        "C26120",
+        "C26128",
+        "C2612A",
+        "C26130",
+        "C26136",
+        "C2613A",
+        "C26140",
+        "C26144",
+        "C2614C",
+        "C2614E",
+        "C26152",
+        "C2615A",
+        "C2615C",
+        "C26160",
+        "C26162",
+        "C26164",
+        "C2616A",
+        "C2616C",
+        "C26174",
+        "C26178",
+        "C2617E",
+        "C26182",
+        "C26184",
+        "C2618A",
+        "C2618E",
+        "C26196",
+        "C2619E",
+        "C261A4",
+        "C261A6",
+        "C261AA",
+        "C261AE",
+        "C261B0",
+        "C261B6",
+        "C261BC",
+        "C261BE",
+        "C261C4",
+        "C261C8",
+        "C261D0",
+        "C261D6",
+        "C261DA",
+        "C261DE",
+        "C261E2",
+        "C261E6",
+        "C261E8",
+        "C261EE",
+        "C261F2",
+        "C261F8",
+        "C261FC",
+        "C261FE",
+        "C26204",
+        "C26208",
+        "C2620A",
+        "C26210",
+        "C26212",
+        "C26216",
+        "C26218",
+        "C26222",
+        "C26228",
+        "C2622E",
+        "C26234",
+        "C26238",
+        "C26284",
+        "C2628A",
+        "C26292",
+        "C262F4",
+        "C262FA"
+      ],
+      "log": {
+        "path": "build/recomp/flight_dynamics_real_C25B66.log",
+        "sha256": "22c52a61c6db870a04b4fe110828c508ba02e486d4917f022377ffb4380b0a0b"
+      }
+    },
+    {
+      "owner": "C266AE",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 416,
+      "observed_owner_pcs": 416,
+      "raw_observed_pcs": 416,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_real_C266AE.log",
+        "sha256": "86196d081c87962a0e4e64223485b06a2b5d93c6911a077f70ee9305461328b2"
+      }
+    },
+    {
+      "owner": "C28996",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 107,
+      "observed_owner_pcs": 107,
+      "raw_observed_pcs": 338,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_real_C28996.log",
+        "sha256": "18e123c997726c3681811c94617f2a3cd3bb016e183327d661661d8a9087ae4f"
+      }
+    },
+    {
+      "owner": "C28B16",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 231,
+      "observed_owner_pcs": 231,
+      "raw_observed_pcs": 231,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_real_C28B16.log",
+        "sha256": "c48073faea0111d04e0dc553417eafd784780bbf4b3043bd04b139b6f4db4d5a"
+      }
+    },
+    {
+      "owner": "C28B34",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 218,
+      "observed_owner_pcs": 218,
+      "raw_observed_pcs": 218,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_dynamics_real_C28B34.log",
+        "sha256": "217b966fbd293497d168b1d9f8b7b1c2903fd0600cedfc8814fb7851167e3b2e"
+      }
+    }
+  ],
+  "actual_dispatch_completed_calls": 3840,
+  "dispatch_fixtures": [
+    {
+      "owner": "C25B66",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 554,
+      "observed_owner_pcs": 371,
+      "raw_observed_pcs": 376,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C25B66_on.log",
+        "sha256": "06bc505b0ba409d3442884f4311fd6865a118131af6f3f5b43eb4faacdbe16a1"
+      }
+    },
+    {
+      "owner": "C25B66",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 554,
+      "observed_owner_pcs": 371,
+      "raw_observed_pcs": 376,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C25B66_shadow.log",
+        "sha256": "06bc505b0ba409d3442884f4311fd6865a118131af6f3f5b43eb4faacdbe16a1"
+      }
+    },
+    {
+      "owner": "C25B66",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 554,
+      "observed_owner_pcs": 371,
+      "raw_observed_pcs": 376,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C25B66_sandbox.log",
+        "sha256": "06bc505b0ba409d3442884f4311fd6865a118131af6f3f5b43eb4faacdbe16a1"
+      }
+    },
+    {
+      "owner": "C266AE",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 416,
+      "observed_owner_pcs": 261,
+      "raw_observed_pcs": 266,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C266AE_on.log",
+        "sha256": "1d7bf38e08461004574c7f0a708a9cb51644abe94992119cca8d4b15310e32fb"
+      }
+    },
+    {
+      "owner": "C266AE",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 416,
+      "observed_owner_pcs": 261,
+      "raw_observed_pcs": 266,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C266AE_shadow.log",
+        "sha256": "1d7bf38e08461004574c7f0a708a9cb51644abe94992119cca8d4b15310e32fb"
+      }
+    },
+    {
+      "owner": "C266AE",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 416,
+      "observed_owner_pcs": 261,
+      "raw_observed_pcs": 266,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C266AE_sandbox.log",
+        "sha256": "1d7bf38e08461004574c7f0a708a9cb51644abe94992119cca8d4b15310e32fb"
+      }
+    },
+    {
+      "owner": "C28996",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 107,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 282,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28996_on.log",
+        "sha256": "7b265f99d4810c2ae5211fc5eeabd174b313b4cdeabdbabcdff1a1a75b4f57c1"
+      }
+    },
+    {
+      "owner": "C28996",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 107,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 282,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28996_shadow.log",
+        "sha256": "7b265f99d4810c2ae5211fc5eeabd174b313b4cdeabdbabcdff1a1a75b4f57c1"
+      }
+    },
+    {
+      "owner": "C28996",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 107,
+      "observed_owner_pcs": 76,
+      "raw_observed_pcs": 282,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28996_sandbox.log",
+        "sha256": "7b265f99d4810c2ae5211fc5eeabd174b313b4cdeabdbabcdff1a1a75b4f57c1"
+      }
+    },
+    {
+      "owner": "C28B16",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 231,
+      "observed_owner_pcs": 213,
+      "raw_observed_pcs": 218,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28B16_on.log",
+        "sha256": "472cec9c85a270bc58585d792d12ce932e2bf529d4c7cefcdf6a10572b121cad"
+      }
+    },
+    {
+      "owner": "C28B16",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 231,
+      "observed_owner_pcs": 213,
+      "raw_observed_pcs": 218,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28B16_shadow.log",
+        "sha256": "472cec9c85a270bc58585d792d12ce932e2bf529d4c7cefcdf6a10572b121cad"
+      }
+    },
+    {
+      "owner": "C28B16",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 231,
+      "observed_owner_pcs": 213,
+      "raw_observed_pcs": 218,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28B16_sandbox.log",
+        "sha256": "472cec9c85a270bc58585d792d12ce932e2bf529d4c7cefcdf6a10572b121cad"
+      }
+    },
+    {
+      "owner": "C28B34",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 218,
+      "observed_owner_pcs": 200,
+      "raw_observed_pcs": 206,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28B34_on.log",
+        "sha256": "b4aab90693f689746c47950aa931fb3f837319560c6e95a425fc524337dccafb"
+      }
+    },
+    {
+      "owner": "C28B34",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 218,
+      "observed_owner_pcs": 200,
+      "raw_observed_pcs": 206,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28B34_shadow.log",
+        "sha256": "b4aab90693f689746c47950aa931fb3f837319560c6e95a425fc524337dccafb"
+      }
+    },
+    {
+      "owner": "C28B34",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 218,
+      "observed_owner_pcs": 200,
+      "raw_observed_pcs": 206,
+      "log": {
+        "path": "build/recomp/flight_dynamics_dispatch_C28B34_sandbox.log",
+        "sha256": "b4aab90693f689746c47950aa931fb3f837319560c6e95a425fc524337dccafb"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "hot_owners": [
+      "C25B66",
+      "C28996",
+      "C28B34"
+    ],
+    "cold_owners": [
+      "C266AE",
+      "C28B16"
+    ],
+    "shadow_matches": 5711,
+    "sandbox_matches": 14168,
+    "totals": {
+      "shadow": {
+        "C25B66": {
+          "calls": 8986,
+          "compared": 5439,
+          "matched": 5439,
+          "mismatched": 0,
+          "hardware": 1,
+          "incomplete": 3546
+        },
+        "C266AE": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C28996": {
+          "calls": 258,
+          "compared": 257,
+          "matched": 257,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1
+        },
+        "C28B16": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C28B34": {
+          "calls": 15,
+          "compared": 15,
+          "matched": 15,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      },
+      "sandbox": {
+        "C25B66": {
+          "calls": 13794,
+          "compared": 13788,
+          "matched": 13788,
+          "mismatched": 0,
+          "hardware": 6,
+          "incomplete": 0
+        },
+        "C266AE": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C28996": {
+          "calls": 367,
+          "compared": 367,
+          "matched": 367,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C28B16": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C28B34": {
+          "calls": 13,
+          "compared": 13,
+          "matched": 13,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C25B66",
+          "C28996",
+          "C28B34"
+        ],
+        "rows": [
+          {
+            "entry": "C28B34",
+            "name": "dispatch_scene_records",
+            "calls": 9,
+            "compared": 9,
+            "matched": 9,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3087,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C25B66",
+            "name": "advance_indexed_record_dynamics",
+            "calls": 4987,
+            "compared": 3106,
+            "matched": 3106,
+            "mismatched": 0,
+            "hardware": 1,
+            "incomplete": 1880,
+            "mean_cycles": 9747,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28996",
+            "name": "update_scene_regions",
+            "calls": 131,
+            "compared": 131,
+            "matched": 131,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 42,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C25B66_C28996_C28B34_demo01_shadow.json",
+          "sha256": "630c2ffe9779e6b0aaf0ac32e4e4c9c4dfb7a4b9e50eb6fead97e68480057e60"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C25B66",
+          "C28996",
+          "C28B34"
+        ],
+        "rows": [
+          {
+            "entry": "C28B34",
+            "name": "dispatch_scene_records",
+            "calls": 4,
+            "compared": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3393,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C25B66",
+            "name": "advance_indexed_record_dynamics",
+            "calls": 3296,
+            "compared": 1952,
+            "matched": 1952,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1344,
+            "mean_cycles": 5593,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28996",
+            "name": "update_scene_regions",
+            "calls": 104,
+            "compared": 103,
+            "matched": 103,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 733,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C25B66_C28996_C28B34_qual_carrier_success_shadow.json",
+          "sha256": "968cbe96f20becc4b11d48cb4671fb2f830300de8545aeb41fbc439814d0538d"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C25B66",
+          "C28996",
+          "C28B34"
+        ],
+        "rows": [
+          {
+            "entry": "C28B34",
+            "name": "dispatch_scene_records",
+            "calls": 2,
+            "compared": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3398,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C25B66",
+            "name": "advance_indexed_record_dynamics",
+            "calls": 703,
+            "compared": 381,
+            "matched": 381,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 322,
+            "mean_cycles": 4337,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28996",
+            "name": "update_scene_regions",
+            "calls": 23,
+            "compared": 23,
+            "matched": 23,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 732,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C25B66_C28996_C28B34_qual_fail_crashes_shadow.json",
+          "sha256": "2955c2d13c8a80cb4c1c9fc4ecb94b6daed9c6d6f73d2186ea21da9e8ca9c37a"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C25B66",
+          "C28996",
+          "C28B34"
+        ],
+        "rows": [
+          {
+            "entry": "C28B34",
+            "name": "dispatch_scene_records",
+            "calls": 9,
+            "compared": 9,
+            "matched": 9,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3230,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C25B66",
+            "name": "advance_indexed_record_dynamics",
+            "calls": 5008,
+            "compared": 5006,
+            "matched": 5006,
+            "mismatched": 0,
+            "hardware": 2,
+            "incomplete": 0,
+            "mean_cycles": 17226,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28996",
+            "name": "update_scene_regions",
+            "calls": 132,
+            "compared": 132,
+            "matched": 132,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 42,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C25B66_C28996_C28B34_demo01_sandbox.json",
+          "sha256": "526ed82faba11fa5c2d2b2e3aea10adcbe2a8983eda62277ed32b050da250b3e"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C25B66",
+          "C28996",
+          "C28B34"
+        ],
+        "rows": [
+          {
+            "entry": "C28B34",
+            "name": "dispatch_scene_records",
+            "calls": 2,
+            "compared": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3725,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C25B66",
+            "name": "advance_indexed_record_dynamics",
+            "calls": 8083,
+            "compared": 8082,
+            "matched": 8082,
+            "mismatched": 0,
+            "hardware": 1,
+            "incomplete": 0,
+            "mean_cycles": 17185,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28996",
+            "name": "update_scene_regions",
+            "calls": 212,
+            "compared": 212,
+            "matched": 212,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 861,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C25B66_C28996_C28B34_qual_carrier_success_sandbox.json",
+          "sha256": "6c1c84edb16dda04a464a163ace58b503c523ae1caed371b3b6056ea44a9d8c4"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C25B66",
+          "C28996",
+          "C28B34"
+        ],
+        "rows": [
+          {
+            "entry": "C28B34",
+            "name": "dispatch_scene_records",
+            "calls": 2,
+            "compared": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3709,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C25B66",
+            "name": "advance_indexed_record_dynamics",
+            "calls": 703,
+            "compared": 700,
+            "matched": 700,
+            "mismatched": 0,
+            "hardware": 3,
+            "incomplete": 0,
+            "mean_cycles": 19457,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28996",
+            "name": "update_scene_regions",
+            "calls": 23,
+            "compared": 23,
+            "matched": 23,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 737,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C25B66_C28996_C28B34_qual_fail_crashes_sandbox.json",
+          "sha256": "e1b95cbbbe8e3fffd17f484d4d4389233f5f5f938742f54bc50aed06c9a2eb20"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C266AE"
+        ],
+        "rows": [
+          {
+            "entry": "C266AE",
+            "name": "collide_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C266AE_demo01_shadow.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C266AE"
+        ],
+        "rows": [
+          {
+            "entry": "C266AE",
+            "name": "collide_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C266AE_qual_carrier_success_shadow.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C266AE"
+        ],
+        "rows": [
+          {
+            "entry": "C266AE",
+            "name": "collide_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C266AE_qual_fail_crashes_shadow.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C266AE"
+        ],
+        "rows": [
+          {
+            "entry": "C266AE",
+            "name": "collide_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C266AE_demo01_sandbox.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C266AE"
+        ],
+        "rows": [
+          {
+            "entry": "C266AE",
+            "name": "collide_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C266AE_qual_carrier_success_sandbox.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C266AE"
+        ],
+        "rows": [
+          {
+            "entry": "C266AE",
+            "name": "collide_scene_motion",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C266AE_qual_fail_crashes_sandbox.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C28B16"
+        ],
+        "rows": [
+          {
+            "entry": "C28B16",
+            "name": "spawn_region_records",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C28B16_demo01_shadow.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C28B16"
+        ],
+        "rows": [
+          {
+            "entry": "C28B16",
+            "name": "spawn_region_records",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C28B16_qual_carrier_success_shadow.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C28B16"
+        ],
+        "rows": [
+          {
+            "entry": "C28B16",
+            "name": "spawn_region_records",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C28B16_qual_fail_crashes_shadow.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C28B16"
+        ],
+        "rows": [
+          {
+            "entry": "C28B16",
+            "name": "spawn_region_records",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C28B16_demo01_sandbox.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C28B16"
+        ],
+        "rows": [
+          {
+            "entry": "C28B16",
+            "name": "spawn_region_records",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C28B16_qual_carrier_success_sandbox.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C28B16"
+        ],
+        "rows": [
+          {
+            "entry": "C28B16",
+            "name": "spawn_region_records",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C28B16_qual_fail_crashes_sandbox.json",
+          "sha256": "4cd08e0e91e84717ec60906edd2b2042a538ba47f758a1e2a5100f950395dc79"
+        }
+      }
+    ],
+    "generic_rejections": [
+      "C266AE: no completed comparisons",
+      "C28B16: no completed comparisons"
+    ]
+  },
+  "instruction_dma": {
+    "local_instructions": 1308,
+    "local_cases": 41856,
+    "previous_unique_instructions": 20488,
+    "overlap_instructions": 218,
+    "combined_unique_instructions": 21578,
+    "combined_cases": 690496,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 21,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_main_loop_flight_controls_math.h",
+      "sha256": "b141699adbda2a39bc0009942f6f1f7d69e27d08080fbf372ddf6d945ff37f4d"
+    },
+    {
+      "path": "port/game/glue/glue_flight_record_actions_math.h",
+      "sha256": "3412841f5494bb57bcb434b60f58b7a44457fb6fe938cba37aa2b80020da0753"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers_math.h",
+      "sha256": "d32d6c42c74e096dd5c670f285a91d9d1c91f8786d3c4c3d0d9a762d899d0315"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    }
+  ],
+  "full_gate": {
+    "rows": 575,
+    "recordings": 3,
+    "shadow_matches": 559969,
+    "sandbox_matches": 417343,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 303887,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "049dbdcfdfa3e733bc6e05540d776b11f5d28775960212dee25ef1ee2f9e12b6"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 203946,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "be54767b24894749a10ff4e3e754922a55bd7d4075556651825137ecf6f907fa"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52136,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "cc2d5ce9a2d1775131870583feecf1e2b674401114d5fa86f2ce6567af40d87f"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 143656,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "12b83a1b3ba34dbbfe26439d2c4266775deaaed9ce2ad59ba616a226d3b54ae5"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 231871,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "c9804c7305825ce685752fe211f19ef830e9b7b27cc01f229e6e8d0ad789e5c5"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 41816,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "d09dca9746ddf0517592b36fe5ae5ae46b7da10c36ef71eb10785ade1c257153"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1300265389,
+    "build_gib": 1.211
+  },
+  "limits": [
+    "C25B66 real-child fixture covers 415/554 owner PCs; controlled children cover all 554, with complete entry CPU/SR/RAM contracts.",
+    "The duplicate class-read arm uses an explicit test-only ordered publication contract; the original interrupt publisher is not claimed reconstructed.",
+    "Cold C266AE/C28B16 retain strict generic zero-comparison rejections; no recorded normal-C comparisons are claimed for these two.",
+    "Complete original game-call/callback coverage remains open. C1612C remains unregistered pending graphics-wait integration.",
+    "ALL frame416/361, deferred Copper fade and Kickstart exception/service return remain debt."
+  ],
+  "next": {
+    "entries": [
+      "C2651E",
+      "C28E28",
+      "C26EBE",
+      "C27456"
+    ],
+    "unique_instructions": 1015,
+    "shared_instructions": 0,
+    "manifest": {
+      "path": "analysis/data/flight_geometry_remaining_scope_inventory.json",
+      "sha256": "d586f7ee32ad5e2bf42ad8a65554b6f08cc75151b3091785d42a16d65f9c4b02"
+    },
+    "related_unsealed_owner": "C2C392 computed transfer C2C46E"
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/flight_dynamics.c",
+      "sha256": "ec5540a1acc372c156b587fac9d0ea9a3b42c8a12c367b73f6cd532da465eaa4"
+    },
+    {
+      "path": "port/game/flight_dynamics.h",
+      "sha256": "82605c8c53401552955d823ceb40ece13111a1adea88a06ecd575cd99f2f0b97"
+    },
+    {
+      "path": "port/game/glue/glue_flight_dynamics.c",
+      "sha256": "151df2f74b45e7a7e7bd7d30d544ba632e4a5e0aa7e7f9ee540467b222f3ea43"
+    },
+    {
+      "path": "port/game/glue/glue_flight_dynamics.h",
+      "sha256": "07e1c2da59e4b54aac9aeb7986dacc5906d5d3c34774952234c585418dde17f1"
+    },
+    {
+      "path": "port/game/glue/glue_flight_dynamics_math.h",
+      "sha256": "8d0c355abe117c5ca736c5d1a5f222e0c0d1b3755bb54c54ac732d7b3c5bb92f"
+    },
+    {
+      "path": "port/game/glue/glue_flight_dynamics_step.c",
+      "sha256": "0325bfc6cc2af3206e7c0f544dd14e13bb323bdae1b8a4bc95f393808814a5bf"
+    },
+    {
+      "path": "port/game/glue/glue_scene_dispatch.c",
+      "sha256": "8cc672e641457dded7b7c386ae74bd3d27cdd70f17605d1579520fe84221f09f"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "78b2f0cbf4c8ab91feb335264d0fa4277125d9ffb0b8e31f0c1536e128c63ee9"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "ccb1eaabe8cbb4adf23d19ee408d6b8bf084d377f8e04739002407ca08c1f6ec"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_flight_dynamics.py",
+      "sha256": "44124c08c2b1b6e323157d9bdd80dd7a9d4d2ef0150bdede3faad9383d65bb6f"
+    },
+    {
+      "path": "tools/recomp/audit_flight_dynamics_source.py",
+      "sha256": "6c3f72e008d12bb7977f08569db06f18a52005ec64289bbb18969d530b8c225d"
+    },
+    {
+      "path": "tools/recomp/audit_remaining_flight_dynamics.py",
+      "sha256": "04d292300147c70d281e493fcc0ceae6d0227f24e94179bc48cab421a13554be"
+    },
+    {
+      "path": "tools/recomp/check_flight_dynamics.py",
+      "sha256": "686ad13c889417d7194f9de304ff68de81a8f7470b54896453454df2be931b9e"
+    },
+    {
+      "path": "tools/recomp/check_flight_dynamics_dispatch.py",
+      "sha256": "9534b617b827aace58f76216796a48f48477f4993ff08c14e9aba770fcf46655"
+    },
+    {
+      "path": "tools/recomp/flight_dynamics_bus_budget.c",
+      "sha256": "0b99fcb61dcbb012860e093732ab1a49e2da31fd0dcce35a86ebdbad2f8a1296"
+    },
+    {
+      "path": "tools/recomp/flight_dynamics_contract_bus.c",
+      "sha256": "00452a568e47f870d1192c3addfc90ffaef45cc9046c21ed72366047381e438d"
+    },
+    {
+      "path": "tools/recomp/flight_dynamics_contract_children.c",
+      "sha256": "b2a9945c98844e2cd399a175ee22e4a824744bee7e5644d7eb2340bd8ba00317"
+    },
+    {
+      "path": "tools/recomp/flight_dynamics_contract_oracle.c",
+      "sha256": "7f145699c56609d74f04aafb027ba365214cd3a737f52c1238f6744517239b2e"
+    },
+    {
+      "path": "tools/recomp/flight_dynamics_dispatch_oracle.c",
+      "sha256": "499592607aef8987dd5f3ed52830fc78f1b9ccc3db8772a3bd49b8c144cf4df2"
+    },
+    {
+      "path": "tools/recomp/flight_dynamics_fixture.h",
+      "sha256": "cab2998082836b76f16aacbeab6cb6754b3e7c97f320d16719f296563b668342"
+    },
+    {
+      "path": "tools/recomp/flight_dynamics_oracle.c",
+      "sha256": "e5c1cb5522789810dc9fae8c5b08e75c65ae7528bb7726a34d512f4287527a1d"
+    },
+    {
+      "path": "tools/recomp/audit_flight_geometry_remaining.py",
+      "sha256": "38ba17eb135aa1e6748effa867bb6db5ae88b0cd086e0e8fea9903f613c92a67"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/dynamics_contract_final.log",
+      "sha256": "ec830e85ab46072c224ed045145d57a884c7cc19f8f1df1467ca8ec5f4b9a321"
+    },
+    {
+      "path": "build/recomp/dynamics_real_final.log",
+      "sha256": "6b8d075267b78907a58ca99a82d38002b141dba7319d9393e45fc0f3ee02ecde"
+    },
+    {
+      "path": "build/recomp/dynamics_dispatch_final.log",
+      "sha256": "7a931c07662802285475189c8c885c6c2a0f0c2a34a81cfad791ebee2e069882"
+    },
+    {
+      "path": "build/recomp/dynamics_dma_local.log",
+      "sha256": "17e0ff55aa5f5c0aed9299ad96a536a813be719cd4c82b705764a45dfb4a2283"
+    },
+    {
+      "path": "build/recomp/dynamics_all_dma.log",
+      "sha256": "c17a8a096b963c9068a5aab1e24426bbd6a0341b1fc881947d84789d4365a08c"
+    },
+    {
+      "path": "build/recomp/dynamics_compatibility.log",
+      "sha256": "20d9cf19af8d6dde204bd1dbd7c2db00d4e4d26525ba58f1795b5debde5c2b55"
+    },
+    {
+      "path": "build/recomp/dynamics_build.log",
+      "sha256": "fbf7d5e55231d63d3e5cd7bc80ecc1b2febe806a11a9771c8c8964220ae406b4"
+    },
+    {
+      "path": "build/recomp/dynamics_msvc.log",
+      "sha256": "6a2edad2aee8640e04f2c6533d631e40eeb9cd5521e1d67e72ed180866e0eec0"
+    },
+    {
+      "path": "build/recomp/dynamics_full_gate.log",
+      "sha256": "24e0bae5186d2c29518963f95ede4eb07c2b73ee998c65d6df2814420dcb32d3"
+    },
+    {
+      "path": "build/recomp/dynamics_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/dynamics_timing_600.log",
+      "sha256": "6c59b9ea1b0e1bd4e47479629541c6f3e6751e15f80cc4419382c062f3c896bf"
+    },
+    {
+      "path": "build/recomp/dynamics_normal_c.log",
+      "sha256": "fbe5007c7bf2d57c5bf1e8fef91e61938a34a78a8c08d7fd54666d31833a1f85"
+    },
+    {
+      "path": "build/recomp/dynamics_normal_hot.log",
+      "sha256": "3a3a86119c19f800caaac8bca04d0d9ec106ac6a13951363a686908b8f268ff5"
+    },
+    {
+      "path": "build/recomp/dynamics_normal_spawn.log",
+      "sha256": "c6fed1423f2ab4a3dd32d00c6d792457d53b6a1cfb2f2a7501b95c3fc4164345"
+    },
+    {
+      "path": "build/recomp/dynamics_normal_collision.log",
+      "sha256": "8903ef7882ce44d8d4688539000a8fa6d6591d5e0de280db8aada86751615c49"
+    }
+  ]
+}

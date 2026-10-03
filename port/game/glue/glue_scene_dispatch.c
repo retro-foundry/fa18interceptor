@@ -112,8 +112,8 @@ next:
 }
 
 int glue_C28B34(void) {
-    dispatch_scene_registers(0);
-    return glue_return();
+    extern int glue_complete_region_dispatch(void);
+    return glue_complete_region_dispatch();
 }
 
 void scene_initialization_registers(void) {

@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 989a2c84); ignored gate logs may
+history (the preceding handoff is in commit 0155d2b6); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -44,8 +44,9 @@ records and message sequences raise translated coverage to 483/624. Complete
 control-record action and alert owners raise it to 488/624. Complete control/
 flight parents and four existing helper upgrades raised it to 490/624. Ten
 complete flight-record action/control-stream owners raised it to 500/624.
-Five complete motion-projection, publication and collision helpers now raise
-it to 505/624.
+Five complete motion-projection, publication and collision helpers raised
+it to 505/624. Four complete flight-dynamics parents and the shared C28B34
+upgrade now raise it to 509/624.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -54,7 +55,45 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 505 of 624 translated entries plus sixty-six original source-only callable
+- 509 of 624 translated entries plus sixty-six original source-only callable
+  entries are registered: 575 rows and 395 source-timed entries (329 translated,
+  sixty-six source-only). Complete C25B66/C266AE/C28996/C28B16 and upgraded
+  C28B34 own 1,308 unique / 218 shared boundaries; all actual incoming calls
+  and 25 distinct / 27 per-owner child sites are sealed. All 163,840 complete
+  calls pass full CPU/PC/SR/all-RAM: 16,384 controlled and 16,384 real-child
+  calls per owner. Controlled coverage is every owner's 554/554, 416/416,
+  107/107, 231/231 and 218/218 PCs. Real coverage is 415/554, 416/416,
+  107/107, 231/231 and 218/218; C28996's raw trace includes nested body PCs.
+  Complete child-entry CPU/SR/RAM contracts return changed values, cursors
+  and flags. The duplicate collision-class read arm uses an explicit test-only
+  ordered publication contract; its original interrupt publisher is not
+  claimed reconstructed. Frames, saved RAM values, mixed-width halves,
+  stream order and signed ADD/SUB overflow branches are retained. Actual
+  ON/shadow/sandbox dispatch passes 3,840 hardware-free complete fixtures
+  and all guards. Independent normal C for C25B66/C28996/C28B34 passes
+  5,711 shadow / 14,168 sandbox matches. Hardware/incomplete rows remain
+  recorded. C266AE and C28B16 are cold in all six independent reports each,
+  with parents omitted; both strict generic zero-comparison rejections remain.
+  Local DMA passes 1,308 / 41,856. Fresh combined and independently derived
+  union pass 21,578 / 690,496: 20,488 + 1,308, overlapping 218 old C28B34 PCs.
+  Twenty-one older generator outputs and shared production/proof files remain
+  unchanged. GNU/MSVC Release pass. The full 575-row gate passes 559,969
+  shadow / 417,343 sandbox matches, zero mismatches, exact seals and poison
+  frames. All 36,236 isolated live frames/seals match. Family exact through
+  frame 600; ALL remains 416/361. build/ is 1.211 GiB. See
+  analysis/routines/native_c_flight_dynamics.md and
+  analysis/figures/native_flight_dynamics_checkpoint.json.
+  Next upgrade complete C2651E/C28E28/C26EBE/C27456: 1,015 unique / zero
+  shared boundaries and actual incoming calls, sealed in
+  analysis/data/flight_geometry_remaining_scope_inventory.json and reproduced
+  by tools/recomp/audit_flight_geometry_remaining.py. These four are already
+  registered and must not increase the translated count. Related C2C392 still
+  requires its signed action-byte computed transfer at C2C46E to be reconciled.
+  Complete original game-call/callback coverage remains open. No service or
+  timing-only work is selected.
+
+- The preceding motion-helper checkpoint registered 505 of 624 translated
+  entries plus sixty-six original source-only callable
   entries are registered: 571 rows and 391 source-timed entries (325 translated,
   sixty-six source-only). Complete C26322/C26352/C26C72/C26CC0/C26D8A own
   229 unique / zero shared boundaries and retain sealed original incoming
@@ -80,13 +119,9 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   through frame 600; ALL remains 416/361. build/ is 1.172 GiB. See
   analysis/routines/native_c_flight_motion_helpers.md and
   analysis/figures/native_flight_motion_helpers_checkpoint.json.
-  Next complete C25B66/C266AE/C28996/C28B16: 1,308 unique / zero shared
-  boundaries, retaining actual original calls, sealed in
-  analysis/data/flight_dynamics_remaining_scope_inventory.json and reproduced
-  by tools/recomp/audit_remaining_flight_dynamics.py. These four complete
-  owners remain implementation work. Related C2C392 still requires its
-  computed transfer at C2C46E to be reconciled. No service/timing-only work
-  is selected, and complete original call/callback coverage remains open.
+  Its four enclosing owners and the shared stream are now complete in the
+  latest checkpoint above; the earlier remaining inventory is historical
+  source evidence. Complete original call/callback coverage remains open.
 
 - The preceding flight-record checkpoint registered 500 translated entries
   plus sixty-six original source-only callable
@@ -1403,13 +1438,16 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 505/624 translated plus sixty-six source-only callable entries. Next
-   reconstruct complete C25B66/C266AE/C28996/C28B16 from
-   analysis/data/flight_dynamics_remaining_scope_inventory.json
-   (1,308 unique / zero shared boundaries, actual incoming calls sealed).
+   is 509/624 translated plus sixty-six source-only callable entries. Next
+   upgrade complete C2651E/C28E28/C26EBE/C27456 from
+   analysis/data/flight_geometry_remaining_scope_inventory.json
+   (1,015 unique / zero shared boundaries, actual incoming calls sealed).
+   These four entries are already registered; their complete upgrades must
+   not increase the translated count. C26EBE owns 819 PCs and two original
+   C27456 children; C2651E/C28E28/C27456 own 50/79/67 PCs respectively.
    Reconcile related C2C392's computed transfer at C2C46E before assigning
    its complete scope. Five helpers from the earlier nine-owner inventory are
-   now complete; this remaining inventory implements none of its four owners. Keep
+   now complete, as are all four parents and the shared C28B34 stream. Keep
    C1612C unregistered until its frozen-event graphics-wait comparison can
    complete safely; its domain/CPU/step source, failed gates and successful
    temporary native replay remain explicit integration evidence.
