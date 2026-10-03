@@ -27,12 +27,13 @@ def main():
     group_names += ("context_publication",)
     group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion", "postflight_messages", "postflight_file_callers", "input_device_callbacks", "input_display_setup", "main_loop_timers", "main_loop_control_messages", "record_control_actions", "main_loop_flight_controls", "flight_record_actions")
     group_names += ("flight_motion_helpers",)
-    group_names += ("flight_dynamics", "flight_geometry")
+    group_names += ("flight_dynamics", "flight_geometry", "flight_markers")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "flight_markers": ["C2AFFA","C2B3C2","C2B564","C2B928","C2B952"],
         "flight_geometry": ["C2651E","C28E28","C26EBE","C27456"],
         "flight_dynamics": ["C25B66","C266AE","C28996","C28B16","C28B34"],
         "flight_motion_helpers": ["C26322","C26352","C26C72","C26CC0","C26D8A"],
@@ -139,6 +140,7 @@ def main():
     menu_owners.update(json.loads((ROOT / "analysis/data/flight_motion_helpers_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/flight_dynamics_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/flight_geometry_source_scope.json").read_text())["owners"])
+    menu_owners.update(json.loads((ROOT / "analysis/data/flight_markers_source_scope.json").read_text())["owners"])
     for entry in entries:
         if entry in menu_owners:
             for pc in menu_owners[entry]["source_pcs"]: addresses.setdefault(pc,entry)

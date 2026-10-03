@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit fa1e28b4); ignored gate logs may
+history (the preceding handoff is in commit 53bf9549); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -48,7 +48,8 @@ Five complete motion-projection, publication and collision helpers raised
 it to 505/624. Four complete flight-dynamics parents and the shared C28B34
 upgrade raised it to 509/624. Four complete history, zone-exit and candidate-
 geometry upgrades retain that translated count and raise source-timed entries
-to 399.
+to 399. Five complete grid, scene-label and record-marker owners now raise
+translated coverage to 514/624 and source-timed entries to 404.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -56,6 +57,42 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 514 of 624 translated entries plus sixty-six source-only callable entries
+  are registered: 580 rows and 404 source-timed entries (338 translated,
+  sixty-six source-only). Complete C2AFFA/C2B3C2/C2B564/C2B928/C2B952 own
+  468 unique / 32 shared boundaries; actual incoming calls and 17 distinct /
+  18 per-owner child sites are sealed. All 163,840 completed calls pass full
+  CPU/PC/SR/all-RAM: 16,384 controlled and 16,384 original-child calls per
+  owner. Controlled coverage is 34/34, 124/124, 167/167, 40/40 and 135/135;
+  original-child coverage is 34/34, 120/124, 132/167, 40/40 and 129/135.
+  Complete child-entry contracts preserve CPU/SR/RAM and return changed
+  values, flags, cursors and RAM. Raw grid/record traces include nested point
+  and marker PCs; coverage intersects each sealed owner scope. Actual ON/
+  shadow/sandbox dispatch passes 30,720 hardware-free completed fixtures and
+  all guards; bounded owner coverage is 34/34, 120/124, 132/167, 40/40 and
+  121/135. Independent normal C passes 20,090 shadow / 20,093 sandbox matches
+  for the two recorded parents. The other three owners have zero calls in
+  all three recordings, including with parents omitted; strict generic
+  zero-comparison rejections remain explicit. Drawing registrations retain
+  the existing source-first DMACONR proof contract. Omitting it failed the
+  carrier RAM seal; the final registrations pass it exactly, without changing
+  shared runtime/bus/classification code. Local DMA passes 468 / 14,976.
+  Fresh combined DMA and independently derived union pass 23,061 / 737,952:
+  previous 22,593 plus all 468, no overlap. All twenty-three older generator
+  outputs and shared CPU/bus/math/classification proofs remain unchanged.
+  GNU/MSVC Release pass; build/ is 1.301 GiB. The full 580-row gate passes 568,155 shadow /
+  439,147 sandbox matches, zero mismatches, exact seals and poison frames.
+  All 36,236 isolated live frames and RAM seals match. Family exact through
+  frame 600; ALL remains 416/361. See
+  analysis/routines/native_c_flight_markers.md and
+  analysis/figures/native_flight_markers_checkpoint.json.
+  Next reconstruct C2ECA8/C32A44/C32AC8/C33F70/C33F8A/C33FB4, 264 unique /
+  85 shared boundaries, sealed with actual incoming calls in
+  analysis/data/projection_readout_scope_inventory.json. Complete original
+  game-call/callback coverage remains open; C2C392's computed transfer and
+  C1612C graphics-wait integration remain separate. No service or timing-only
+  work is selected.
 
 - 509 of 624 translated entries plus sixty-six source-only callable entries
   remain registered: 575 rows and 399 source-timed entries (333 translated,
@@ -1474,11 +1511,13 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 509/624 translated plus sixty-six source-only callable entries. Next
-   reconstruct C2AFFA/C2B3C2/C2B564/C2B928/C2B952 from
-   analysis/data/flight_action_setup_scope_inventory.json
-   (468 unique / 32 shared boundaries, actual incoming calls sealed).
-   These five are unregistered translated entries. All four previously
+   is 514/624 translated plus sixty-six source-only callable entries. Next
+   reconstruct C2ECA8/C32A44/C32AC8/C33F70/C33F8A/C33FB4 from
+   analysis/data/projection_readout_scope_inventory.json
+   (264 unique / 85 shared boundaries, actual incoming calls sealed).
+   These six are unregistered translated entries. All five grid/marker
+   owners are now complete, with 468 unique source boundaries and full
+   controlled complete-call coverage. All four previously
    registered geometry/history upgrades are now complete, with 1,015 unique
    source boundaries and full controlled complete-call coverage. The candidate
    owner's actual-child coverage is 816/819; its three unobserved PCs and the

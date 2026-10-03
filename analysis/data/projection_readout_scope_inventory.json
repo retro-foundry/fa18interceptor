@@ -1,0 +1,2477 @@
+{
+  "state": "captures/native/demo01/state.bin",
+  "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "scope": "static owner flow: follow jumps, stop at returns; calls are child boundaries",
+  "owners": {
+    "C2ECA8": {
+      "instruction_count": 79,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C2EC70",
+        "C2EC78",
+        "C2EC7E",
+        "C2EC80",
+        "C2EC82",
+        "C2EC84",
+        "C2EC8E",
+        "C2ECA8",
+        "C2ECAA",
+        "C2ECAC",
+        "C2ECAE",
+        "C2ECB0",
+        "C2ECB2",
+        "C2ECB4",
+        "C2ECB6",
+        "C2ECB8",
+        "C2ECBA",
+        "C2ECBC",
+        "C2ECBE",
+        "C2ECC0",
+        "C2ECC2",
+        "C2ECC4",
+        "C2ECC6",
+        "C2ECCA",
+        "C2ECCC",
+        "C2ECD0",
+        "C2ECD2",
+        "C2ECD6",
+        "C2ECD8",
+        "C2ECDC",
+        "C2ECDE",
+        "C2ECE2",
+        "C2ECE4",
+        "C2ECE8",
+        "C2ECEA",
+        "C2ECEE",
+        "C2ECF0",
+        "C2ECF4",
+        "C2ECF6",
+        "C2ECF8",
+        "C2ECFE",
+        "C2ED00",
+        "C2ED08",
+        "C2ED0A",
+        "C2ED0C",
+        "C2ED10",
+        "C2ED12",
+        "C2ED16",
+        "C2ED18",
+        "C2ED1C",
+        "C2ED1E",
+        "C2ED22",
+        "C2ED24",
+        "C2ED2A",
+        "C2ED2C",
+        "C2ED32",
+        "C2ED34",
+        "C2ED3A",
+        "C2ED3C",
+        "C2ED40",
+        "C2ED42",
+        "C2ED44",
+        "C2ED46",
+        "C2ED48",
+        "C2ED4A",
+        "C2ED4C",
+        "C2ED50",
+        "C2ED52",
+        "C2ED56",
+        "C2ED58",
+        "C2ED5A",
+        "C2ED5C",
+        "C2ED5E",
+        "C2ED60",
+        "C2ED62",
+        "C2ED64",
+        "C2ED66",
+        "C2ED68",
+        "C2ED6A"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C2EC78",
+          "target": "C06C02",
+          "return_pc": "C2EC7E"
+        },
+        {
+          "pc": "C2ED24",
+          "target": "C2F5F4",
+          "return_pc": "C2ED2A"
+        },
+        {
+          "pc": "C2ED2C",
+          "target": "C2F60A",
+          "return_pc": "C2ED32"
+        },
+        {
+          "pc": "C2ED34",
+          "target": "C2F66E",
+          "return_pc": "C2ED3A"
+        },
+        {
+          "pc": "C2ED3C",
+          "target": "C2F1C0",
+          "return_pc": "C2ED40"
+        }
+      ]
+    },
+    "C32A44": {
+      "instruction_count": 110,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C32A44",
+        "C32A46",
+        "C32A4C",
+        "C32A52",
+        "C32A56",
+        "C32A5C",
+        "C32A5E",
+        "C32A62",
+        "C32A64",
+        "C32A68",
+        "C32A6A",
+        "C32A6C",
+        "C32A6E",
+        "C32A70",
+        "C32A72",
+        "C32A74",
+        "C32A76",
+        "C32A78",
+        "C32A7A",
+        "C32A7C",
+        "C32A7E",
+        "C32A80",
+        "C32A82",
+        "C32A84",
+        "C32A88",
+        "C32A8A",
+        "C32A8C",
+        "C32A8E",
+        "C32A90",
+        "C32A92",
+        "C32A94",
+        "C32AD0",
+        "C32AD6",
+        "C32AD8",
+        "C32ADA",
+        "C32ADE",
+        "C32AE2",
+        "C32AE4",
+        "C32AE6",
+        "C32AEA",
+        "C32AEC",
+        "C32AEE",
+        "C32AF0",
+        "C32AF4",
+        "C32AF6",
+        "C32AFC",
+        "C32AFE",
+        "C32B00",
+        "C32B02",
+        "C32B06",
+        "C32B0C",
+        "C32B0E",
+        "C32B10",
+        "C32B12",
+        "C32B14",
+        "C32B18",
+        "C32B1C",
+        "C32B1E",
+        "C32B20",
+        "C32B22",
+        "C32B24",
+        "C32B26",
+        "C32B2A",
+        "C32B2E",
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8",
+        "C32BCC",
+        "C32BD0"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C32A4C",
+          "target": "C25A08",
+          "return_pc": "C32A52"
+        },
+        {
+          "pc": "C32B6E",
+          "target": "C330FE",
+          "return_pc": "C32B72"
+        },
+        {
+          "pc": "C32B8C",
+          "target": "C330FE",
+          "return_pc": "C32B90"
+        },
+        {
+          "pc": "C32BAA",
+          "target": "C330FE",
+          "return_pc": "C32BAE"
+        },
+        {
+          "pc": "C32BC8",
+          "target": "C330FE",
+          "return_pc": "C32BCC"
+        }
+      ]
+    },
+    "C32AC8": {
+      "instruction_count": 83,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C32AC8",
+        "C32ACA",
+        "C32ACC",
+        "C32ACE",
+        "C32AD0",
+        "C32AD6",
+        "C32AD8",
+        "C32ADA",
+        "C32ADE",
+        "C32AE2",
+        "C32AE4",
+        "C32AE6",
+        "C32AEA",
+        "C32AEC",
+        "C32AEE",
+        "C32AF0",
+        "C32AF4",
+        "C32AF6",
+        "C32AFC",
+        "C32AFE",
+        "C32B00",
+        "C32B02",
+        "C32B06",
+        "C32B0C",
+        "C32B0E",
+        "C32B10",
+        "C32B12",
+        "C32B14",
+        "C32B18",
+        "C32B1C",
+        "C32B1E",
+        "C32B20",
+        "C32B22",
+        "C32B24",
+        "C32B26",
+        "C32B2A",
+        "C32B2E",
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8",
+        "C32BCC",
+        "C32BD0"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C32B6E",
+          "target": "C330FE",
+          "return_pc": "C32B72"
+        },
+        {
+          "pc": "C32B8C",
+          "target": "C330FE",
+          "return_pc": "C32B90"
+        },
+        {
+          "pc": "C32BAA",
+          "target": "C330FE",
+          "return_pc": "C32BAE"
+        },
+        {
+          "pc": "C32BC8",
+          "target": "C330FE",
+          "return_pc": "C32BCC"
+        }
+      ]
+    },
+    "C33F70": {
+      "instruction_count": 14,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C33F70",
+        "C33F72",
+        "C33F76",
+        "C33F7A",
+        "C33F7C",
+        "C33F7E",
+        "C33F84",
+        "C33F88",
+        "C33FA2",
+        "C33FA4",
+        "C33FA6",
+        "C33FA8",
+        "C33FAA",
+        "C33FB0"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C33FAA",
+          "target": "C32AA6",
+          "return_pc": "C33FB0"
+        }
+      ]
+    },
+    "C33F8A": {
+      "instruction_count": 13,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C33F8A",
+        "C33F8C",
+        "C33F90",
+        "C33F94",
+        "C33F96",
+        "C33F98",
+        "C33F9E",
+        "C33FA2",
+        "C33FA4",
+        "C33FA6",
+        "C33FA8",
+        "C33FAA",
+        "C33FB0"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C33FAA",
+          "target": "C32AA6",
+          "return_pc": "C33FB0"
+        }
+      ]
+    },
+    "C33FB4": {
+      "instruction_count": 50,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C33FB2",
+        "C33FB4",
+        "C33FBA",
+        "C33FBC",
+        "C33FC0",
+        "C33FC2",
+        "C33FC6",
+        "C33FCA",
+        "C33FCE",
+        "C33FD0",
+        "C33FD6",
+        "C33FD8",
+        "C33FDE",
+        "C33FE0",
+        "C33FE6",
+        "C33FEA",
+        "C33FEC",
+        "C33FF0",
+        "C33FF2",
+        "C33FF4",
+        "C33FFA",
+        "C33FFC",
+        "C34002",
+        "C34004",
+        "C3400A",
+        "C3400C",
+        "C34010",
+        "C34016",
+        "C34018",
+        "C3401C",
+        "C3401E",
+        "C34024",
+        "C3402A",
+        "C3402E",
+        "C34030",
+        "C34034",
+        "C34036",
+        "C34038",
+        "C3403E",
+        "C34040",
+        "C34046",
+        "C34048",
+        "C3404E",
+        "C34050",
+        "C34054",
+        "C3405A",
+        "C3405C",
+        "C34060",
+        "C34062",
+        "C34064"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C33FD8",
+          "target": "C2F60A",
+          "return_pc": "C33FDE"
+        },
+        {
+          "pc": "C34004",
+          "target": "C2F5F4",
+          "return_pc": "C3400A"
+        },
+        {
+          "pc": "C34010",
+          "target": "C2F60A",
+          "return_pc": "C34016"
+        },
+        {
+          "pc": "C34048",
+          "target": "C2F5F4",
+          "return_pc": "C3404E"
+        },
+        {
+          "pc": "C34054",
+          "target": "C2F60A",
+          "return_pc": "C3405A"
+        }
+      ]
+    }
+  },
+  "unique_instruction_count": 264,
+  "shared_instruction_count": 85,
+  "owned_pc_and_source_bytes_sha256": "1dd229b8611f88794db8254eeb7a84a1d6c757d45e7ac78267d0c343350d53c9",
+  "instructions": [
+    {
+      "pc": "C2EC70",
+      "length": 8,
+      "bytes": "33fc001b00c4599e",
+      "opcode": "33FC",
+      "instruction": "move.w  #$1b, $c4599e.l"
+    },
+    {
+      "pc": "C2EC78",
+      "length": 6,
+      "bytes": "4eb900c06c02",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c06c02.l"
+    },
+    {
+      "pc": "C2EC7E",
+      "length": 2,
+      "bytes": "7000",
+      "opcode": "7000",
+      "instruction": "moveq   #$0, D0"
+    },
+    {
+      "pc": "C2EC80",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C2EC82",
+      "length": 2,
+      "bytes": "7000",
+      "opcode": "7000",
+      "instruction": "moveq   #$0, D0"
+    },
+    {
+      "pc": "C2EC84",
+      "length": 10,
+      "bytes": "23fcffffffff00c45958",
+      "opcode": "23FC",
+      "instruction": "move.l  #$ffffffff, $c45958.l"
+    },
+    {
+      "pc": "C2EC8E",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C2ECA8",
+      "length": 2,
+      "bytes": "7eff",
+      "opcode": "7EFF",
+      "instruction": "moveq   #-$1, D7"
+    },
+    {
+      "pc": "C2ECAA",
+      "length": 2,
+      "bytes": "b042",
+      "opcode": "B042",
+      "instruction": "cmp.w   D2, D0"
+    },
+    {
+      "pc": "C2ECAC",
+      "length": 2,
+      "bytes": "6cd4",
+      "opcode": "6CD4",
+      "instruction": "bge     $c2ec82"
+    },
+    {
+      "pc": "C2ECAE",
+      "length": 2,
+      "bytes": "b242",
+      "opcode": "B242",
+      "instruction": "cmp.w   D2, D1"
+    },
+    {
+      "pc": "C2ECB0",
+      "length": 2,
+      "bytes": "6cd0",
+      "opcode": "6CD0",
+      "instruction": "bge     $c2ec82"
+    },
+    {
+      "pc": "C2ECB2",
+      "length": 2,
+      "bytes": "3600",
+      "opcode": "3600",
+      "instruction": "move.w  D0, D3"
+    },
+    {
+      "pc": "C2ECB4",
+      "length": 2,
+      "bytes": "4443",
+      "opcode": "4443",
+      "instruction": "neg.w   D3"
+    },
+    {
+      "pc": "C2ECB6",
+      "length": 2,
+      "bytes": "b642",
+      "opcode": "B642",
+      "instruction": "cmp.w   D2, D3"
+    },
+    {
+      "pc": "C2ECB8",
+      "length": 2,
+      "bytes": "6cc8",
+      "opcode": "6CC8",
+      "instruction": "bge     $c2ec82"
+    },
+    {
+      "pc": "C2ECBA",
+      "length": 2,
+      "bytes": "3601",
+      "opcode": "3601",
+      "instruction": "move.w  D1, D3"
+    },
+    {
+      "pc": "C2ECBC",
+      "length": 2,
+      "bytes": "4443",
+      "opcode": "4443",
+      "instruction": "neg.w   D3"
+    },
+    {
+      "pc": "C2ECBE",
+      "length": 2,
+      "bytes": "b642",
+      "opcode": "B642",
+      "instruction": "cmp.w   D2, D3"
+    },
+    {
+      "pc": "C2ECC0",
+      "length": 2,
+      "bytes": "6cc0",
+      "opcode": "6CC0",
+      "instruction": "bge     $c2ec82"
+    },
+    {
+      "pc": "C2ECC2",
+      "length": 2,
+      "bytes": "4a42",
+      "opcode": "4A42",
+      "instruction": "tst.w   D2"
+    },
+    {
+      "pc": "C2ECC4",
+      "length": 2,
+      "bytes": "6faa",
+      "opcode": "6FAA",
+      "instruction": "ble     $c2ec70"
+    },
+    {
+      "pc": "C2ECC6",
+      "length": 4,
+      "bytes": "c1fc00a0",
+      "opcode": "C1FC",
+      "instruction": "muls.w  #$a0, D0"
+    },
+    {
+      "pc": "C2ECCA",
+      "length": 2,
+      "bytes": "81c2",
+      "opcode": "81C2",
+      "instruction": "divs.w  D2, D0"
+    },
+    {
+      "pc": "C2ECCC",
+      "length": 4,
+      "bytes": "064000a0",
+      "opcode": "0640",
+      "instruction": "addi.w  #$a0, D0"
+    },
+    {
+      "pc": "C2ECD0",
+      "length": 2,
+      "bytes": "6d72",
+      "opcode": "6D72",
+      "instruction": "blt     $c2ed44"
+    },
+    {
+      "pc": "C2ECD2",
+      "length": 4,
+      "bytes": "0c400140",
+      "opcode": "0C40",
+      "instruction": "cmpi.w  #$140, D0"
+    },
+    {
+      "pc": "C2ECD6",
+      "length": 2,
+      "bytes": "6c74",
+      "opcode": "6C74",
+      "instruction": "bge     $c2ed4c"
+    },
+    {
+      "pc": "C2ECD8",
+      "length": 4,
+      "bytes": "c3fc005a",
+      "opcode": "C3FC",
+      "instruction": "muls.w  #$5a, D1"
+    },
+    {
+      "pc": "C2ECDC",
+      "length": 2,
+      "bytes": "83c2",
+      "opcode": "83C2",
+      "instruction": "divs.w  D2, D1"
+    },
+    {
+      "pc": "C2ECDE",
+      "length": 4,
+      "bytes": "0641005a",
+      "opcode": "0641",
+      "instruction": "addi.w  #$5a, D1"
+    },
+    {
+      "pc": "C2ECE2",
+      "length": 2,
+      "bytes": "6d64",
+      "opcode": "6D64",
+      "instruction": "blt     $c2ed48"
+    },
+    {
+      "pc": "C2ECE4",
+      "length": 4,
+      "bytes": "0c4100b4",
+      "opcode": "0C41",
+      "instruction": "cmpi.w  #$b4, D1"
+    },
+    {
+      "pc": "C2ECE8",
+      "length": 2,
+      "bytes": "6c68",
+      "opcode": "6C68",
+      "instruction": "bge     $c2ed52"
+    },
+    {
+      "pc": "C2ECEA",
+      "length": 4,
+      "bytes": "0440013f",
+      "opcode": "0440",
+      "instruction": "subi.w  #$13f, D0"
+    },
+    {
+      "pc": "C2ECEE",
+      "length": 2,
+      "bytes": "4440",
+      "opcode": "4440",
+      "instruction": "neg.w   D0"
+    },
+    {
+      "pc": "C2ECF0",
+      "length": 4,
+      "bytes": "044100b3",
+      "opcode": "0441",
+      "instruction": "subi.w  #$b3, D1"
+    },
+    {
+      "pc": "C2ECF4",
+      "length": 2,
+      "bytes": "4441",
+      "opcode": "4441",
+      "instruction": "neg.w   D1"
+    },
+    {
+      "pc": "C2ECF6",
+      "length": 2,
+      "bytes": "5241",
+      "opcode": "5241",
+      "instruction": "addq.w  #1, D1"
+    },
+    {
+      "pc": "C2ECF8",
+      "length": 6,
+      "bytes": "b27900c45984",
+      "opcode": "B279",
+      "instruction": "cmp.w   $c45984.l, D1"
+    },
+    {
+      "pc": "C2ECFE",
+      "length": 2,
+      "bytes": "6e82",
+      "opcode": "6E82",
+      "instruction": "bgt     $c2ec82"
+    },
+    {
+      "pc": "C2ED00",
+      "length": 8,
+      "bytes": "48b9000300c45958",
+      "opcode": "48B9",
+      "instruction": "movem.w D0-D1, $c45958.l"
+    },
+    {
+      "pc": "C2ED08",
+      "length": 2,
+      "bytes": "4a47",
+      "opcode": "4A47",
+      "instruction": "tst.w   D7"
+    },
+    {
+      "pc": "C2ED0A",
+      "length": 2,
+      "bytes": "6d4c",
+      "opcode": "6D4C",
+      "instruction": "blt     $c2ed58"
+    },
+    {
+      "pc": "C2ED0C",
+      "length": 4,
+      "bytes": "343c0030",
+      "opcode": "343C",
+      "instruction": "move.w  #$30, D2"
+    },
+    {
+      "pc": "C2ED10",
+      "length": 2,
+      "bytes": "ee62",
+      "opcode": "EE62",
+      "instruction": "asr.w   D7, D2"
+    },
+    {
+      "pc": "C2ED12",
+      "length": 4,
+      "bytes": "b46effd8",
+      "opcode": "B46E",
+      "instruction": "cmp.w   (-$28,A6), D2"
+    },
+    {
+      "pc": "C2ED16",
+      "length": 2,
+      "bytes": "6c1c",
+      "opcode": "6C1C",
+      "instruction": "bge     $c2ed34"
+    },
+    {
+      "pc": "C2ED18",
+      "length": 4,
+      "bytes": "343c0050",
+      "opcode": "343C",
+      "instruction": "move.w  #$50, D2"
+    },
+    {
+      "pc": "C2ED1C",
+      "length": 2,
+      "bytes": "ee62",
+      "opcode": "EE62",
+      "instruction": "asr.w   D7, D2"
+    },
+    {
+      "pc": "C2ED1E",
+      "length": 4,
+      "bytes": "b46effd8",
+      "opcode": "B46E",
+      "instruction": "cmp.w   (-$28,A6), D2"
+    },
+    {
+      "pc": "C2ED22",
+      "length": 2,
+      "bytes": "6c08",
+      "opcode": "6C08",
+      "instruction": "bge     $c2ed2c"
+    },
+    {
+      "pc": "C2ED24",
+      "length": 6,
+      "bytes": "4eb900c2f5f4",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f5f4.l"
+    },
+    {
+      "pc": "C2ED2A",
+      "length": 2,
+      "bytes": "6014",
+      "opcode": "6014",
+      "instruction": "bra     $c2ed40"
+    },
+    {
+      "pc": "C2ED2C",
+      "length": 6,
+      "bytes": "4eb900c2f60a",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f60a.l"
+    },
+    {
+      "pc": "C2ED32",
+      "length": 2,
+      "bytes": "600c",
+      "opcode": "600C",
+      "instruction": "bra     $c2ed40"
+    },
+    {
+      "pc": "C2ED34",
+      "length": 6,
+      "bytes": "4eb900c2f66e",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f66e.l"
+    },
+    {
+      "pc": "C2ED3A",
+      "length": 2,
+      "bytes": "6004",
+      "opcode": "6004",
+      "instruction": "bra     $c2ed40"
+    },
+    {
+      "pc": "C2ED3C",
+      "length": 4,
+      "bytes": "61000482",
+      "opcode": "6100",
+      "instruction": "bsr     $c2f1c0"
+    },
+    {
+      "pc": "C2ED40",
+      "length": 2,
+      "bytes": "7001",
+      "opcode": "7001",
+      "instruction": "moveq   #$1, D0"
+    },
+    {
+      "pc": "C2ED42",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C2ED44",
+      "length": 2,
+      "bytes": "4240",
+      "opcode": "4240",
+      "instruction": "clr.w   D0"
+    },
+    {
+      "pc": "C2ED46",
+      "length": 2,
+      "bytes": "6090",
+      "opcode": "6090",
+      "instruction": "bra     $c2ecd8"
+    },
+    {
+      "pc": "C2ED48",
+      "length": 2,
+      "bytes": "4241",
+      "opcode": "4241",
+      "instruction": "clr.w   D1"
+    },
+    {
+      "pc": "C2ED4A",
+      "length": 2,
+      "bytes": "609e",
+      "opcode": "609E",
+      "instruction": "bra     $c2ecea"
+    },
+    {
+      "pc": "C2ED4C",
+      "length": 4,
+      "bytes": "303c013f",
+      "opcode": "303C",
+      "instruction": "move.w  #$13f, D0"
+    },
+    {
+      "pc": "C2ED50",
+      "length": 2,
+      "bytes": "6086",
+      "opcode": "6086",
+      "instruction": "bra     $c2ecd8"
+    },
+    {
+      "pc": "C2ED52",
+      "length": 4,
+      "bytes": "323c00b3",
+      "opcode": "323C",
+      "instruction": "move.w  #$b3, D1"
+    },
+    {
+      "pc": "C2ED56",
+      "length": 2,
+      "bytes": "6092",
+      "opcode": "6092",
+      "instruction": "bra     $c2ecea"
+    },
+    {
+      "pc": "C2ED58",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C2ED5A",
+      "length": 2,
+      "bytes": "6cc8",
+      "opcode": "6CC8",
+      "instruction": "bge     $c2ed24"
+    },
+    {
+      "pc": "C2ED5C",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C2ED5E",
+      "length": 2,
+      "bytes": "6ccc",
+      "opcode": "6CCC",
+      "instruction": "bge     $c2ed2c"
+    },
+    {
+      "pc": "C2ED60",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C2ED62",
+      "length": 2,
+      "bytes": "6cd0",
+      "opcode": "6CD0",
+      "instruction": "bge     $c2ed34"
+    },
+    {
+      "pc": "C2ED64",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C2ED66",
+      "length": 2,
+      "bytes": "6cd4",
+      "opcode": "6CD4",
+      "instruction": "bge     $c2ed3c"
+    },
+    {
+      "pc": "C2ED68",
+      "length": 2,
+      "bytes": "3000",
+      "opcode": "3000",
+      "instruction": "move.w  D0, D0"
+    },
+    {
+      "pc": "C2ED6A",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C32A44",
+      "length": 2,
+      "bytes": "48c2",
+      "opcode": "48C2",
+      "instruction": "ext.l   D2"
+    },
+    {
+      "pc": "C32A46",
+      "length": 6,
+      "bytes": "23c200c45b1e",
+      "opcode": "23C2",
+      "instruction": "move.l  D2, $c45b1e.l"
+    },
+    {
+      "pc": "C32A4C",
+      "length": 6,
+      "bytes": "4eb900c25a08",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c25a08.l"
+    },
+    {
+      "pc": "C32A52",
+      "length": 4,
+      "bytes": "43faef38",
+      "opcode": "43FA",
+      "instruction": "lea     (-$10c8,PC), A1; ($c3198c)"
+    },
+    {
+      "pc": "C32A56",
+      "length": 6,
+      "bytes": "45f900c457fa",
+      "opcode": "45F9",
+      "instruction": "lea     $c457fa.l, A2"
+    },
+    {
+      "pc": "C32A5C",
+      "length": 2,
+      "bytes": "3403",
+      "opcode": "3403",
+      "instruction": "move.w  D3, D2"
+    },
+    {
+      "pc": "C32A5E",
+      "length": 4,
+      "bytes": "41f22001",
+      "opcode": "41F2",
+      "instruction": "lea     ($1,A2,D2.w), A0"
+    },
+    {
+      "pc": "C32A62",
+      "length": 2,
+      "bytes": "3600",
+      "opcode": "3600",
+      "instruction": "move.w  D0, D3"
+    },
+    {
+      "pc": "C32A64",
+      "length": 4,
+      "bytes": "0243000f",
+      "opcode": "0243",
+      "instruction": "andi.w  #$f, D3"
+    },
+    {
+      "pc": "C32A68",
+      "length": 2,
+      "bytes": "e443",
+      "opcode": "E443",
+      "instruction": "asr.w   #2, D3"
+    },
+    {
+      "pc": "C32A6A",
+      "length": 2,
+      "bytes": "5443",
+      "opcode": "5443",
+      "instruction": "addq.w  #2, D3"
+    },
+    {
+      "pc": "C32A6C",
+      "length": 2,
+      "bytes": "d643",
+      "opcode": "D643",
+      "instruction": "add.w   D3, D3"
+    },
+    {
+      "pc": "C32A6E",
+      "length": 2,
+      "bytes": "d643",
+      "opcode": "D643",
+      "instruction": "add.w   D3, D3"
+    },
+    {
+      "pc": "C32A70",
+      "length": 2,
+      "bytes": "d2c3",
+      "opcode": "D2C3",
+      "instruction": "adda.w  D3, A1"
+    },
+    {
+      "pc": "C32A72",
+      "length": 2,
+      "bytes": "e640",
+      "opcode": "E640",
+      "instruction": "asr.w   #3, D0"
+    },
+    {
+      "pc": "C32A74",
+      "length": 2,
+      "bytes": "48c0",
+      "opcode": "48C0",
+      "instruction": "ext.l   D0"
+    },
+    {
+      "pc": "C32A76",
+      "length": 2,
+      "bytes": "e741",
+      "opcode": "E741",
+      "instruction": "asl.w   #3, D1"
+    },
+    {
+      "pc": "C32A78",
+      "length": 2,
+      "bytes": "3601",
+      "opcode": "3601",
+      "instruction": "move.w  D1, D3"
+    },
+    {
+      "pc": "C32A7A",
+      "length": 2,
+      "bytes": "d643",
+      "opcode": "D643",
+      "instruction": "add.w   D3, D3"
+    },
+    {
+      "pc": "C32A7C",
+      "length": 2,
+      "bytes": "d643",
+      "opcode": "D643",
+      "instruction": "add.w   D3, D3"
+    },
+    {
+      "pc": "C32A7E",
+      "length": 2,
+      "bytes": "d243",
+      "opcode": "D243",
+      "instruction": "add.w   D3, D1"
+    },
+    {
+      "pc": "C32A80",
+      "length": 2,
+      "bytes": "48c1",
+      "opcode": "48C1",
+      "instruction": "ext.l   D1"
+    },
+    {
+      "pc": "C32A82",
+      "length": 2,
+      "bytes": "2841",
+      "opcode": "2841",
+      "instruction": "movea.l D1, A4"
+    },
+    {
+      "pc": "C32A84",
+      "length": 4,
+      "bytes": "08800000",
+      "opcode": "0880",
+      "instruction": "bclr    #$0, D0"
+    },
+    {
+      "pc": "C32A88",
+      "length": 2,
+      "bytes": "d9c0",
+      "opcode": "D9C0",
+      "instruction": "adda.l  D0, A4"
+    },
+    {
+      "pc": "C32A8A",
+      "length": 2,
+      "bytes": "4840",
+      "opcode": "4840",
+      "instruction": "swap    D0"
+    },
+    {
+      "pc": "C32A8C",
+      "length": 2,
+      "bytes": "3002",
+      "opcode": "3002",
+      "instruction": "move.w  D2, D0"
+    },
+    {
+      "pc": "C32A8E",
+      "length": 2,
+      "bytes": "7c00",
+      "opcode": "7C00",
+      "instruction": "moveq   #$0, D6"
+    },
+    {
+      "pc": "C32A90",
+      "length": 2,
+      "bytes": "7e00",
+      "opcode": "7E00",
+      "instruction": "moveq   #$0, D7"
+    },
+    {
+      "pc": "C32A92",
+      "length": 2,
+      "bytes": "7801",
+      "opcode": "7801",
+      "instruction": "moveq   #$1, D4"
+    },
+    {
+      "pc": "C32A94",
+      "length": 2,
+      "bytes": "603a",
+      "opcode": "603A",
+      "instruction": "bra     $c32ad0"
+    },
+    {
+      "pc": "C32AC8",
+      "length": 2,
+      "bytes": "7c00",
+      "opcode": "7C00",
+      "instruction": "moveq   #$0, D6"
+    },
+    {
+      "pc": "C32ACA",
+      "length": 2,
+      "bytes": "7e00",
+      "opcode": "7E00",
+      "instruction": "moveq   #$0, D7"
+    },
+    {
+      "pc": "C32ACC",
+      "length": 2,
+      "bytes": "3400",
+      "opcode": "3400",
+      "instruction": "move.w  D0, D2"
+    },
+    {
+      "pc": "C32ACE",
+      "length": 2,
+      "bytes": "7800",
+      "opcode": "7800",
+      "instruction": "moveq   #$0, D4"
+    },
+    {
+      "pc": "C32AD0",
+      "length": 6,
+      "bytes": "263900c45b22",
+      "opcode": "2639",
+      "instruction": "move.l  $c45b22.l, D3"
+    },
+    {
+      "pc": "C32AD6",
+      "length": 2,
+      "bytes": "3a02",
+      "opcode": "3A02",
+      "instruction": "move.w  D2, D5"
+    },
+    {
+      "pc": "C32AD8",
+      "length": 2,
+      "bytes": "3203",
+      "opcode": "3203",
+      "instruction": "move.w  D3, D1"
+    },
+    {
+      "pc": "C32ADA",
+      "length": 4,
+      "bytes": "0241000f",
+      "opcode": "0241",
+      "instruction": "andi.w  #$f, D1"
+    },
+    {
+      "pc": "C32ADE",
+      "length": 4,
+      "bytes": "06410030",
+      "opcode": "0641",
+      "instruction": "addi.w  #$30, D1"
+    },
+    {
+      "pc": "C32AE2",
+      "length": 2,
+      "bytes": "1101",
+      "opcode": "1101",
+      "instruction": "move.b  D1, -(A0)"
+    },
+    {
+      "pc": "C32AE4",
+      "length": 2,
+      "bytes": "e88b",
+      "opcode": "E88B",
+      "instruction": "lsr.l   #4, D3"
+    },
+    {
+      "pc": "C32AE6",
+      "length": 4,
+      "bytes": "51cafff0",
+      "opcode": "51CA",
+      "instruction": "dbra    D2, $c32ad8"
+    },
+    {
+      "pc": "C32AEA",
+      "length": 2,
+      "bytes": "4a04",
+      "opcode": "4A04",
+      "instruction": "tst.b   D4"
+    },
+    {
+      "pc": "C32AEC",
+      "length": 2,
+      "bytes": "6612",
+      "opcode": "6612",
+      "instruction": "bne     $c32b00"
+    },
+    {
+      "pc": "C32AEE",
+      "length": 2,
+      "bytes": "5345",
+      "opcode": "5345",
+      "instruction": "subq.w  #1, D5"
+    },
+    {
+      "pc": "C32AF0",
+      "length": 4,
+      "bytes": "0c180030",
+      "opcode": "0C18",
+      "instruction": "cmpi.b  #$30, (A0)+"
+    },
+    {
+      "pc": "C32AF4",
+      "length": 2,
+      "bytes": "660a",
+      "opcode": "660A",
+      "instruction": "bne     $c32b00"
+    },
+    {
+      "pc": "C32AF6",
+      "length": 6,
+      "bytes": "117c0020ffff",
+      "opcode": "117C",
+      "instruction": "move.b  #$20, (-$1,A0)"
+    },
+    {
+      "pc": "C32AFC",
+      "length": 2,
+      "bytes": "5345",
+      "opcode": "5345",
+      "instruction": "subq.w  #1, D5"
+    },
+    {
+      "pc": "C32AFE",
+      "length": 2,
+      "bytes": "6cf0",
+      "opcode": "6CF0",
+      "instruction": "bge     $c32af0"
+    },
+    {
+      "pc": "C32B00",
+      "length": 2,
+      "bytes": "d9c7",
+      "opcode": "D9C7",
+      "instruction": "adda.l  D7, A4"
+    },
+    {
+      "pc": "C32B02",
+      "length": 4,
+      "bytes": "3e3c0142",
+      "opcode": "3E3C",
+      "instruction": "move.w  #$142, D7"
+    },
+    {
+      "pc": "C32B06",
+      "length": 6,
+      "bytes": "2a7900c456b6",
+      "opcode": "2A79",
+      "instruction": "movea.l $c456b6.l, A5"
+    },
+    {
+      "pc": "C32B0C",
+      "length": 2,
+      "bytes": "dc46",
+      "opcode": "DC46",
+      "instruction": "add.w   D6, D6"
+    },
+    {
+      "pc": "C32B0E",
+      "length": 2,
+      "bytes": "3a19",
+      "opcode": "3A19",
+      "instruction": "move.w  (A1)+, D5"
+    },
+    {
+      "pc": "C32B10",
+      "length": 2,
+      "bytes": "3619",
+      "opcode": "3619",
+      "instruction": "move.w  (A1)+, D3"
+    },
+    {
+      "pc": "C32B12",
+      "length": 2,
+      "bytes": "181a",
+      "opcode": "181A",
+      "instruction": "move.b  (A2)+, D4"
+    },
+    {
+      "pc": "C32B14",
+      "length": 4,
+      "bytes": "0c040020",
+      "opcode": "0C04",
+      "instruction": "cmpi.b  #$20, D4"
+    },
+    {
+      "pc": "C32B18",
+      "length": 4,
+      "bytes": "670000b2",
+      "opcode": "6700",
+      "instruction": "beq     $c32bcc"
+    },
+    {
+      "pc": "C32B1C",
+      "length": 2,
+      "bytes": "4840",
+      "opcode": "4840",
+      "instruction": "swap    D0"
+    },
+    {
+      "pc": "C32B1E",
+      "length": 2,
+      "bytes": "3400",
+      "opcode": "3400",
+      "instruction": "move.w  D0, D2"
+    },
+    {
+      "pc": "C32B20",
+      "length": 2,
+      "bytes": "4840",
+      "opcode": "4840",
+      "instruction": "swap    D0"
+    },
+    {
+      "pc": "C32B22",
+      "length": 2,
+      "bytes": "d446",
+      "opcode": "D446",
+      "instruction": "add.w   D6, D2"
+    },
+    {
+      "pc": "C32B24",
+      "length": 2,
+      "bytes": "d445",
+      "opcode": "D445",
+      "instruction": "add.w   D5, D2"
+    },
+    {
+      "pc": "C32B26",
+      "length": 4,
+      "bytes": "6d0000a4",
+      "opcode": "6D00",
+      "instruction": "blt     $c32bcc"
+    },
+    {
+      "pc": "C32B2A",
+      "length": 4,
+      "bytes": "0c420028",
+      "opcode": "0C42",
+      "instruction": "cmpi.w  #$28, D2"
+    },
+    {
+      "pc": "C32B2E",
+      "length": 4,
+      "bytes": "6c00009c",
+      "opcode": "6C00",
+      "instruction": "bge     $c32bcc"
+    },
+    {
+      "pc": "C32B32",
+      "length": 2,
+      "bytes": "da46",
+      "opcode": "DA46",
+      "instruction": "add.w   D6, D5"
+    },
+    {
+      "pc": "C32B34",
+      "length": 2,
+      "bytes": "48c5",
+      "opcode": "48C5",
+      "instruction": "ext.l   D5"
+    },
+    {
+      "pc": "C32B36",
+      "length": 2,
+      "bytes": "da8c",
+      "opcode": "DA8C",
+      "instruction": "add.l   A4, D5"
+    },
+    {
+      "pc": "C32B38",
+      "length": 4,
+      "bytes": "024400ff",
+      "opcode": "0244",
+      "instruction": "andi.w  #$ff, D4"
+    },
+    {
+      "pc": "C32B3C",
+      "length": 4,
+      "bytes": "04440020",
+      "opcode": "0444",
+      "instruction": "subi.w  #$20, D4"
+    },
+    {
+      "pc": "C32B40",
+      "length": 2,
+      "bytes": "d844",
+      "opcode": "D844",
+      "instruction": "add.w   D4, D4"
+    },
+    {
+      "pc": "C32B42",
+      "length": 6,
+      "bytes": "47f900c3d790",
+      "opcode": "47F9",
+      "instruction": "lea     $c3d790.l, A3"
+    },
+    {
+      "pc": "C32B48",
+      "length": 4,
+      "bytes": "d6f34000",
+      "opcode": "D6F3",
+      "instruction": "adda.w  (A3,D4.w), A3"
+    },
+    {
+      "pc": "C32B4C",
+      "length": 2,
+      "bytes": "280b",
+      "opcode": "280B",
+      "instruction": "move.l  A3, D4"
+    },
+    {
+      "pc": "C32B4E",
+      "length": 2,
+      "bytes": "2215",
+      "opcode": "2215",
+      "instruction": "move.l  (A5), D1"
+    },
+    {
+      "pc": "C32B50",
+      "length": 2,
+      "bytes": "d285",
+      "opcode": "D285",
+      "instruction": "add.l   D5, D1"
+    },
+    {
+      "pc": "C32B52",
+      "length": 4,
+      "bytes": "08010000",
+      "opcode": "0801",
+      "instruction": "btst    #$0, D1"
+    },
+    {
+      "pc": "C32B56",
+      "length": 2,
+      "bytes": "6702",
+      "opcode": "6702",
+      "instruction": "beq     $c32b5a"
+    },
+    {
+      "pc": "C32B58",
+      "length": 2,
+      "bytes": "6072",
+      "opcode": "6072",
+      "instruction": "bra     $c32bcc"
+    },
+    {
+      "pc": "C32B5A",
+      "length": 4,
+      "bytes": "343c0b0a",
+      "opcode": "343C",
+      "instruction": "move.w  #$b0a, D2"
+    },
+    {
+      "pc": "C32B5E",
+      "length": 8,
+      "bytes": "0839000300c45955",
+      "opcode": "0839",
+      "instruction": "btst    #$3, $c45955.l"
+    },
+    {
+      "pc": "C32B66",
+      "length": 2,
+      "bytes": "6704",
+      "opcode": "6704",
+      "instruction": "beq     $c32b6c"
+    },
+    {
+      "pc": "C32B68",
+      "length": 4,
+      "bytes": "343c0bfa",
+      "opcode": "343C",
+      "instruction": "move.w  #$bfa, D2"
+    },
+    {
+      "pc": "C32B6C",
+      "length": 2,
+      "bytes": "8443",
+      "opcode": "8443",
+      "instruction": "or.w    D3, D2"
+    },
+    {
+      "pc": "C32B6E",
+      "length": 4,
+      "bytes": "6100058e",
+      "opcode": "6100",
+      "instruction": "bsr     $c330fe"
+    },
+    {
+      "pc": "C32B72",
+      "length": 4,
+      "bytes": "222d0004",
+      "opcode": "222D",
+      "instruction": "move.l  ($4,A5), D1"
+    },
+    {
+      "pc": "C32B76",
+      "length": 2,
+      "bytes": "d285",
+      "opcode": "D285",
+      "instruction": "add.l   D5, D1"
+    },
+    {
+      "pc": "C32B78",
+      "length": 4,
+      "bytes": "343c0b0a",
+      "opcode": "343C",
+      "instruction": "move.w  #$b0a, D2"
+    },
+    {
+      "pc": "C32B7C",
+      "length": 8,
+      "bytes": "0839000200c45955",
+      "opcode": "0839",
+      "instruction": "btst    #$2, $c45955.l"
+    },
+    {
+      "pc": "C32B84",
+      "length": 2,
+      "bytes": "6704",
+      "opcode": "6704",
+      "instruction": "beq     $c32b8a"
+    },
+    {
+      "pc": "C32B86",
+      "length": 4,
+      "bytes": "343c0bfa",
+      "opcode": "343C",
+      "instruction": "move.w  #$bfa, D2"
+    },
+    {
+      "pc": "C32B8A",
+      "length": 2,
+      "bytes": "8443",
+      "opcode": "8443",
+      "instruction": "or.w    D3, D2"
+    },
+    {
+      "pc": "C32B8C",
+      "length": 4,
+      "bytes": "61000570",
+      "opcode": "6100",
+      "instruction": "bsr     $c330fe"
+    },
+    {
+      "pc": "C32B90",
+      "length": 4,
+      "bytes": "222d0008",
+      "opcode": "222D",
+      "instruction": "move.l  ($8,A5), D1"
+    },
+    {
+      "pc": "C32B94",
+      "length": 2,
+      "bytes": "d285",
+      "opcode": "D285",
+      "instruction": "add.l   D5, D1"
+    },
+    {
+      "pc": "C32B96",
+      "length": 4,
+      "bytes": "343c0b0a",
+      "opcode": "343C",
+      "instruction": "move.w  #$b0a, D2"
+    },
+    {
+      "pc": "C32B9A",
+      "length": 8,
+      "bytes": "0839000100c45955",
+      "opcode": "0839",
+      "instruction": "btst    #$1, $c45955.l"
+    },
+    {
+      "pc": "C32BA2",
+      "length": 2,
+      "bytes": "6704",
+      "opcode": "6704",
+      "instruction": "beq     $c32ba8"
+    },
+    {
+      "pc": "C32BA4",
+      "length": 4,
+      "bytes": "343c0bfa",
+      "opcode": "343C",
+      "instruction": "move.w  #$bfa, D2"
+    },
+    {
+      "pc": "C32BA8",
+      "length": 2,
+      "bytes": "8443",
+      "opcode": "8443",
+      "instruction": "or.w    D3, D2"
+    },
+    {
+      "pc": "C32BAA",
+      "length": 4,
+      "bytes": "61000552",
+      "opcode": "6100",
+      "instruction": "bsr     $c330fe"
+    },
+    {
+      "pc": "C32BAE",
+      "length": 4,
+      "bytes": "222d000c",
+      "opcode": "222D",
+      "instruction": "move.l  ($c,A5), D1"
+    },
+    {
+      "pc": "C32BB2",
+      "length": 2,
+      "bytes": "d285",
+      "opcode": "D285",
+      "instruction": "add.l   D5, D1"
+    },
+    {
+      "pc": "C32BB4",
+      "length": 4,
+      "bytes": "343c0b0a",
+      "opcode": "343C",
+      "instruction": "move.w  #$b0a, D2"
+    },
+    {
+      "pc": "C32BB8",
+      "length": 8,
+      "bytes": "0839000000c45955",
+      "opcode": "0839",
+      "instruction": "btst    #$0, $c45955.l"
+    },
+    {
+      "pc": "C32BC0",
+      "length": 2,
+      "bytes": "6704",
+      "opcode": "6704",
+      "instruction": "beq     $c32bc6"
+    },
+    {
+      "pc": "C32BC2",
+      "length": 4,
+      "bytes": "343c0bfa",
+      "opcode": "343C",
+      "instruction": "move.w  #$bfa, D2"
+    },
+    {
+      "pc": "C32BC6",
+      "length": 2,
+      "bytes": "8443",
+      "opcode": "8443",
+      "instruction": "or.w    D3, D2"
+    },
+    {
+      "pc": "C32BC8",
+      "length": 4,
+      "bytes": "61000534",
+      "opcode": "6100",
+      "instruction": "bsr     $c330fe"
+    },
+    {
+      "pc": "C32BCC",
+      "length": 4,
+      "bytes": "51c8ff40",
+      "opcode": "51C8",
+      "instruction": "dbra    D0, $c32b0e"
+    },
+    {
+      "pc": "C32BD0",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C33F70",
+      "length": 2,
+      "bytes": "7800",
+      "opcode": "7800",
+      "instruction": "moveq   #$0, D4"
+    },
+    {
+      "pc": "C33F72",
+      "length": 4,
+      "bytes": "43faf2f0",
+      "opcode": "43FA",
+      "instruction": "lea     (-$d10,PC), A1; ($c33264)"
+    },
+    {
+      "pc": "C33F76",
+      "length": 4,
+      "bytes": "303c000a",
+      "opcode": "303C",
+      "instruction": "move.w  #$a, D0"
+    },
+    {
+      "pc": "C33F7A",
+      "length": 2,
+      "bytes": "7c02",
+      "opcode": "7C02",
+      "instruction": "moveq   #$2, D6"
+    },
+    {
+      "pc": "C33F7C",
+      "length": 2,
+      "bytes": "7e02",
+      "opcode": "7E02",
+      "instruction": "moveq   #$2, D7"
+    },
+    {
+      "pc": "C33F7E",
+      "length": 6,
+      "bytes": "45f900c457fa",
+      "opcode": "45F9",
+      "instruction": "lea     $c457fa.l, A2"
+    },
+    {
+      "pc": "C33F84",
+      "length": 4,
+      "bytes": "41ea0003",
+      "opcode": "41EA",
+      "instruction": "lea     ($3,A2), A0"
+    },
+    {
+      "pc": "C33F88",
+      "length": 2,
+      "bytes": "6018",
+      "opcode": "6018",
+      "instruction": "bra     $c33fa2"
+    },
+    {
+      "pc": "C33F8A",
+      "length": 2,
+      "bytes": "7801",
+      "opcode": "7801",
+      "instruction": "moveq   #$1, D4"
+    },
+    {
+      "pc": "C33F8C",
+      "length": 4,
+      "bytes": "43faf2ca",
+      "opcode": "43FA",
+      "instruction": "lea     (-$d36,PC), A1; ($c33258)"
+    },
+    {
+      "pc": "C33F90",
+      "length": 4,
+      "bytes": "303c001a",
+      "opcode": "303C",
+      "instruction": "move.w  #$1a, D0"
+    },
+    {
+      "pc": "C33F94",
+      "length": 2,
+      "bytes": "7c02",
+      "opcode": "7C02",
+      "instruction": "moveq   #$2, D6"
+    },
+    {
+      "pc": "C33F96",
+      "length": 2,
+      "bytes": "7e02",
+      "opcode": "7E02",
+      "instruction": "moveq   #$2, D7"
+    },
+    {
+      "pc": "C33F98",
+      "length": 6,
+      "bytes": "45f900c457fa",
+      "opcode": "45F9",
+      "instruction": "lea     $c457fa.l, A2"
+    },
+    {
+      "pc": "C33F9E",
+      "length": 4,
+      "bytes": "41ea0003",
+      "opcode": "41EA",
+      "instruction": "lea     ($3,A2), A0"
+    },
+    {
+      "pc": "C33FA2",
+      "length": 2,
+      "bytes": "3407",
+      "opcode": "3407",
+      "instruction": "move.w  D7, D2"
+    },
+    {
+      "pc": "C33FA4",
+      "length": 2,
+      "bytes": "2845",
+      "opcode": "2845",
+      "instruction": "movea.l D5, A4"
+    },
+    {
+      "pc": "C33FA6",
+      "length": 2,
+      "bytes": "4840",
+      "opcode": "4840",
+      "instruction": "swap    D0"
+    },
+    {
+      "pc": "C33FA8",
+      "length": 2,
+      "bytes": "3006",
+      "opcode": "3006",
+      "instruction": "move.w  D6, D0"
+    },
+    {
+      "pc": "C33FAA",
+      "length": 6,
+      "bytes": "4eb900c32aa6",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c32aa6.l"
+    },
+    {
+      "pc": "C33FB0",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C33FB2",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C33FB4",
+      "length": 6,
+      "bytes": "d07900c45988",
+      "opcode": "D079",
+      "instruction": "add.w   $c45988.l, D0"
+    },
+    {
+      "pc": "C33FBA",
+      "length": 2,
+      "bytes": "6ff6",
+      "opcode": "6FF6",
+      "instruction": "ble     $c33fb2"
+    },
+    {
+      "pc": "C33FBC",
+      "length": 4,
+      "bytes": "0c40013f",
+      "opcode": "0C40",
+      "instruction": "cmpi.w  #$13f, D0"
+    },
+    {
+      "pc": "C33FC0",
+      "length": 2,
+      "bytes": "6cf0",
+      "opcode": "6CF0",
+      "instruction": "bge     $c33fb2"
+    },
+    {
+      "pc": "C33FC2",
+      "length": 4,
+      "bytes": "4e56fff8",
+      "opcode": "4E56",
+      "instruction": "link    A6, #-$8"
+    },
+    {
+      "pc": "C33FC6",
+      "length": 4,
+      "bytes": "3d40fffc",
+      "opcode": "3D40",
+      "instruction": "move.w  D0, (-$4,A6)"
+    },
+    {
+      "pc": "C33FCA",
+      "length": 4,
+      "bytes": "3d41fffa",
+      "opcode": "3D41",
+      "instruction": "move.w  D1, (-$6,A6)"
+    },
+    {
+      "pc": "C33FCE",
+      "length": 2,
+      "bytes": "d041",
+      "opcode": "D041",
+      "instruction": "add.w   D1, D0"
+    },
+    {
+      "pc": "C33FD0",
+      "length": 6,
+      "bytes": "323900c4598c",
+      "opcode": "3239",
+      "instruction": "move.w  $c4598c.l, D1"
+    },
+    {
+      "pc": "C33FD6",
+      "length": 2,
+      "bytes": "3f01",
+      "opcode": "3F01",
+      "instruction": "move.w  D1, -(A7)"
+    },
+    {
+      "pc": "C33FD8",
+      "length": 6,
+      "bytes": "4eb900c2f60a",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f60a.l"
+    },
+    {
+      "pc": "C33FDE",
+      "length": 2,
+      "bytes": "321f",
+      "opcode": "321F",
+      "instruction": "move.w  (A7)+, D1"
+    },
+    {
+      "pc": "C33FE0",
+      "length": 6,
+      "bytes": "3d7c0000fffe",
+      "opcode": "3D7C",
+      "instruction": "move.w  #$0, (-$2,A6)"
+    },
+    {
+      "pc": "C33FE6",
+      "length": 4,
+      "bytes": "302efffc",
+      "opcode": "302E",
+      "instruction": "move.w  (-$4,A6), D0"
+    },
+    {
+      "pc": "C33FEA",
+      "length": 2,
+      "bytes": "5741",
+      "opcode": "5741",
+      "instruction": "subq.w  #3, D1"
+    },
+    {
+      "pc": "C33FEC",
+      "length": 4,
+      "bytes": "0c410047",
+      "opcode": "0C41",
+      "instruction": "cmpi.w  #$47, D1"
+    },
+    {
+      "pc": "C33FF0",
+      "length": 2,
+      "bytes": "6f2c",
+      "opcode": "6F2C",
+      "instruction": "ble     $c3401e"
+    },
+    {
+      "pc": "C33FF2",
+      "length": 2,
+      "bytes": "3f01",
+      "opcode": "3F01",
+      "instruction": "move.w  D1, -(A7)"
+    },
+    {
+      "pc": "C33FF4",
+      "length": 6,
+      "bytes": "0c6e0004fffe",
+      "opcode": "0C6E",
+      "instruction": "cmpi.w  #$4, (-$2,A6)"
+    },
+    {
+      "pc": "C33FFA",
+      "length": 2,
+      "bytes": "6710",
+      "opcode": "6710",
+      "instruction": "beq     $c3400c"
+    },
+    {
+      "pc": "C33FFC",
+      "length": 6,
+      "bytes": "0c6e0009fffe",
+      "opcode": "0C6E",
+      "instruction": "cmpi.w  #$9, (-$2,A6)"
+    },
+    {
+      "pc": "C34002",
+      "length": 2,
+      "bytes": "6708",
+      "opcode": "6708",
+      "instruction": "beq     $c3400c"
+    },
+    {
+      "pc": "C34004",
+      "length": 6,
+      "bytes": "4eb900c2f5f4",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f5f4.l"
+    },
+    {
+      "pc": "C3400A",
+      "length": 2,
+      "bytes": "600a",
+      "opcode": "600A",
+      "instruction": "bra     $c34016"
+    },
+    {
+      "pc": "C3400C",
+      "length": 4,
+      "bytes": "d06efffa",
+      "opcode": "D06E",
+      "instruction": "add.w   (-$6,A6), D0"
+    },
+    {
+      "pc": "C34010",
+      "length": 6,
+      "bytes": "4eb900c2f60a",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f60a.l"
+    },
+    {
+      "pc": "C34016",
+      "length": 2,
+      "bytes": "321f",
+      "opcode": "321F",
+      "instruction": "move.w  (A7)+, D1"
+    },
+    {
+      "pc": "C34018",
+      "length": 4,
+      "bytes": "526efffe",
+      "opcode": "526E",
+      "instruction": "addq.w  #1, (-$2,A6)"
+    },
+    {
+      "pc": "C3401C",
+      "length": 2,
+      "bytes": "60c8",
+      "opcode": "60C8",
+      "instruction": "bra     $c33fe6"
+    },
+    {
+      "pc": "C3401E",
+      "length": 6,
+      "bytes": "323900c4598c",
+      "opcode": "3239",
+      "instruction": "move.w  $c4598c.l, D1"
+    },
+    {
+      "pc": "C34024",
+      "length": 6,
+      "bytes": "3d7c0000fffe",
+      "opcode": "3D7C",
+      "instruction": "move.w  #$0, (-$2,A6)"
+    },
+    {
+      "pc": "C3402A",
+      "length": 4,
+      "bytes": "302efffc",
+      "opcode": "302E",
+      "instruction": "move.w  (-$4,A6), D0"
+    },
+    {
+      "pc": "C3402E",
+      "length": 2,
+      "bytes": "5641",
+      "opcode": "5641",
+      "instruction": "addq.w  #3, D1"
+    },
+    {
+      "pc": "C34030",
+      "length": 4,
+      "bytes": "0c410070",
+      "opcode": "0C41",
+      "instruction": "cmpi.w  #$70, D1"
+    },
+    {
+      "pc": "C34034",
+      "length": 2,
+      "bytes": "6c2c",
+      "opcode": "6C2C",
+      "instruction": "bge     $c34062"
+    },
+    {
+      "pc": "C34036",
+      "length": 2,
+      "bytes": "3f01",
+      "opcode": "3F01",
+      "instruction": "move.w  D1, -(A7)"
+    },
+    {
+      "pc": "C34038",
+      "length": 6,
+      "bytes": "0c6e0004fffe",
+      "opcode": "0C6E",
+      "instruction": "cmpi.w  #$4, (-$2,A6)"
+    },
+    {
+      "pc": "C3403E",
+      "length": 2,
+      "bytes": "6710",
+      "opcode": "6710",
+      "instruction": "beq     $c34050"
+    },
+    {
+      "pc": "C34040",
+      "length": 6,
+      "bytes": "0c6e0009fffe",
+      "opcode": "0C6E",
+      "instruction": "cmpi.w  #$9, (-$2,A6)"
+    },
+    {
+      "pc": "C34046",
+      "length": 2,
+      "bytes": "6708",
+      "opcode": "6708",
+      "instruction": "beq     $c34050"
+    },
+    {
+      "pc": "C34048",
+      "length": 6,
+      "bytes": "4eb900c2f5f4",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f5f4.l"
+    },
+    {
+      "pc": "C3404E",
+      "length": 2,
+      "bytes": "600a",
+      "opcode": "600A",
+      "instruction": "bra     $c3405a"
+    },
+    {
+      "pc": "C34050",
+      "length": 4,
+      "bytes": "d06efffa",
+      "opcode": "D06E",
+      "instruction": "add.w   (-$6,A6), D0"
+    },
+    {
+      "pc": "C34054",
+      "length": 6,
+      "bytes": "4eb900c2f60a",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2f60a.l"
+    },
+    {
+      "pc": "C3405A",
+      "length": 2,
+      "bytes": "321f",
+      "opcode": "321F",
+      "instruction": "move.w  (A7)+, D1"
+    },
+    {
+      "pc": "C3405C",
+      "length": 4,
+      "bytes": "526efffe",
+      "opcode": "526E",
+      "instruction": "addq.w  #1, (-$2,A6)"
+    },
+    {
+      "pc": "C34060",
+      "length": 2,
+      "bytes": "60c8",
+      "opcode": "60C8",
+      "instruction": "bra     $c3402a"
+    },
+    {
+      "pc": "C34062",
+      "length": 2,
+      "bytes": "4e5e",
+      "opcode": "4E5E",
+      "instruction": "unlk    A6"
+    },
+    {
+      "pc": "C34064",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    }
+  ],
+  "actual_original_callability": {
+    "C2ECA8": [
+      {
+        "pc": "C2B528",
+        "return_pc": "C2B52E",
+        "instruction": "jsr     $c2eca8.l",
+        "bytes": "4eb900c2eca8"
+      },
+      {
+        "pc": "C2CD0C",
+        "return_pc": "C2CD12",
+        "instruction": "jsr     $c2eca8.l",
+        "bytes": "4eb900c2eca8"
+      }
+    ],
+    "C32A44": [
+      {
+        "pc": "C2B54E",
+        "return_pc": "C2B554",
+        "instruction": "jsr     $c32a44.l",
+        "bytes": "4eb900c32a44"
+      },
+      {
+        "pc": "C2B646",
+        "return_pc": "C2B64C",
+        "instruction": "jsr     $c32a44.l",
+        "bytes": "4eb900c32a44"
+      },
+      {
+        "pc": "C2B70A",
+        "return_pc": "C2B710",
+        "instruction": "jsr     $c32a44.l",
+        "bytes": "4eb900c32a44"
+      }
+    ],
+    "C32AC8": [
+      {
+        "pc": "C31BAA",
+        "return_pc": "C31BAE",
+        "instruction": "bsr     $c32ac8",
+        "bytes": "61000f1c"
+      },
+      {
+        "pc": "C31BE6",
+        "return_pc": "C31BEA",
+        "instruction": "bsr     $c32ac8",
+        "bytes": "61000ee0"
+      },
+      {
+        "pc": "C31C1A",
+        "return_pc": "C31C1E",
+        "instruction": "bsr     $c32ac8",
+        "bytes": "61000eac"
+      }
+    ],
+    "C33F70": [
+      {
+        "pc": "C336F4",
+        "return_pc": "C336F8",
+        "instruction": "bsr     $c33f70",
+        "bytes": "6100087a"
+      },
+      {
+        "pc": "C33732",
+        "return_pc": "C33736",
+        "instruction": "bsr     $c33f70",
+        "bytes": "6100083c"
+      },
+      {
+        "pc": "C33772",
+        "return_pc": "C33776",
+        "instruction": "bsr     $c33f70",
+        "bytes": "610007fc"
+      }
+    ],
+    "C33F8A": [
+      {
+        "pc": "C334E8",
+        "return_pc": "C334EC",
+        "instruction": "bsr     $c33f8a",
+        "bytes": "61000aa0"
+      },
+      {
+        "pc": "C3353E",
+        "return_pc": "C33542",
+        "instruction": "bsr     $c33f8a",
+        "bytes": "61000a4a"
+      },
+      {
+        "pc": "C33598",
+        "return_pc": "C3359C",
+        "instruction": "bsr     $c33f8a",
+        "bytes": "610009f0"
+      }
+    ],
+    "C33FB4": [
+      {
+        "pc": "C335AA",
+        "return_pc": "C335AE",
+        "instruction": "bsr     $c33fb4",
+        "bytes": "61000a08"
+      },
+      {
+        "pc": "C33782",
+        "return_pc": "C33786",
+        "instruction": "bsr     $c33fb4",
+        "bytes": "61000830"
+      }
+    ]
+  },
+  "classification": {
+    "purpose": "Next six complete projection, numeric readout and bounded sweep owners",
+    "implementation": false,
+    "os_service_replacement": false
+  }
+}

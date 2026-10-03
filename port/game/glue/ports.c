@@ -750,6 +750,13 @@ const FA18Port fa18_ports[] = {
     {0xC266AE, glue_C266AE, "collide_scene_motion", 0, 0, glue_C266AE_step, 0xC26C68, 0, 0xC266AC, glue_C266AE_owns},
     {0xC28996, glue_C28996, "update_scene_regions", 0, 0, glue_C28996_step, 0xC28AFC, 0, 0xC28994, glue_C28996_owns},
     {0xC28B16, glue_C28B16, "spawn_region_records", 0, 0, glue_C28B16_step, 0xC28E16, 0, 0xC28B14, glue_C28B16_owns},
+    /* Complete grid, scene labels and record markers, including shared tails.
+     * Drawing parents preserve their original children's DMACONR inputs. */
+    {0xC2AFFA, glue_C2AFFA, "transform_marker_point", 0, 0, glue_C2AFFA_step, 0xC2B042, 0, 0xC2AFFA, glue_C2AFFA_owns},
+    {0xC2B3C2, glue_C2B3C2, "draw_scene_position_labels", 0, 0, glue_C2B3C2_step, 0xC2B562, 1, 0xC2B3C0, glue_C2B3C2_owns},
+    {0xC2B564, glue_C2B564, "draw_view_grid_and_markers", 0, 0, glue_C2B564_step, 0xC2B7E4, 1, 0xC2B562, glue_C2B564_owns},
+    {0xC2B928, glue_C2B928, "draw_class_twenty_marker", 0, 0, glue_C2B928_step, 0xC2BAF0, 1, 0xC2B928, glue_C2B928_owns},
+    {0xC2B952, glue_C2B952, "draw_record_position_marker", 0, 0, glue_C2B952_step, 0xC2BAF0, 1, 0xC2B950, glue_C2B952_owns},
     {0, 0, 0, 0}, /* sentinel; entries are added above it */
 };
 const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;

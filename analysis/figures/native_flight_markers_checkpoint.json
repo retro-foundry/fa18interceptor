@@ -1,0 +1,2111 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "53bf9549",
+  "new_registered_owners": [
+    "C2AFFA",
+    "C2B3C2",
+    "C2B564",
+    "C2B928",
+    "C2B952"
+  ],
+  "upgraded_registered_owners": [],
+  "registered_translated_entries": 514,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 580,
+  "registered_timing_entries": 404,
+  "registered_translated_timing_entries": 338,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/flight_markers_source_scope.json",
+      "sha256": "5fd686c0394b51a435334df1c9dcb317a8d8f0324f624bbcf0b3ec5a829daeaf"
+    },
+    "unique_instructions": 468,
+    "shared_within_batch": 32,
+    "distinct_child_sites": 17,
+    "child_sites_by_owner": 18,
+    "actual_original_callability": {
+      "C2AFFA": [
+        {
+          "pc": "C2B5D2",
+          "return_pc": "C2B5D8",
+          "instruction": "jsr     $c2affa.l",
+          "bytes": "4eb900c2affa"
+        },
+        {
+          "pc": "C2B5E4",
+          "return_pc": "C2B5EA",
+          "instruction": "jsr     $c2affa.l",
+          "bytes": "4eb900c2affa"
+        },
+        {
+          "pc": "C2B698",
+          "return_pc": "C2B69E",
+          "instruction": "jsr     $c2affa.l",
+          "bytes": "4eb900c2affa"
+        },
+        {
+          "pc": "C2B6AA",
+          "return_pc": "C2B6B0",
+          "instruction": "jsr     $c2affa.l",
+          "bytes": "4eb900c2affa"
+        },
+        {
+          "pc": "C2B770",
+          "return_pc": "C2B776",
+          "instruction": "jsr     $c2affa.l",
+          "bytes": "4eb900c2affa"
+        },
+        {
+          "pc": "C2B96A",
+          "return_pc": "C2B970",
+          "instruction": "jsr     $c2affa.l",
+          "bytes": "4eb900c2affa"
+        }
+      ],
+      "C2B3C2": [
+        {
+          "pc": "C0F380",
+          "return_pc": "C0F386",
+          "instruction": "jsr     $c2b3c2.l",
+          "bytes": "4eb900c2b3c2"
+        }
+      ],
+      "C2B564": [
+        {
+          "pc": "C0F2F0",
+          "return_pc": "C0F2F6",
+          "instruction": "jsr     $c2b564.l",
+          "bytes": "4eb900c2b564"
+        }
+      ],
+      "C2B928": [
+        {
+          "pc": "C2B790",
+          "return_pc": "C2B794",
+          "instruction": "bsr     $c2b928",
+          "bytes": "61000196"
+        }
+      ],
+      "C2B952": [
+        {
+          "pc": "C2B7CC",
+          "return_pc": "C2B7D0",
+          "instruction": "bsr     $c2b952",
+          "bytes": "61000184"
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 163840,
+  "controlled_child_completed_calls": 81920,
+  "real_child_completed_calls": 81920,
+  "fixture_coverage": [
+    {
+      "owner": "C2AFFA",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 34,
+      "raw_observed_pcs": 34,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_markers_contract_C2AFFA.log",
+        "sha256": "4a66959672608010fb369356e45721e832b2d7af10ba1eb74d4ec1f4ff5961a9"
+      }
+    },
+    {
+      "owner": "C2B3C2",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 124,
+      "observed_owner_pcs": 124,
+      "raw_observed_pcs": 124,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_markers_contract_C2B3C2.log",
+        "sha256": "fabb966ad6bc9f30eb3ec1f3acb5790a4b65a6961e39550de8c6d3bdd9c80058"
+      }
+    },
+    {
+      "owner": "C2B564",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 167,
+      "observed_owner_pcs": 167,
+      "raw_observed_pcs": 167,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_markers_contract_C2B564.log",
+        "sha256": "3113ef5b10044c92d8b011bcf3eca2497ad96411ab4c3f4c377e235a54782435"
+      }
+    },
+    {
+      "owner": "C2B928",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 40,
+      "observed_owner_pcs": 40,
+      "raw_observed_pcs": 40,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_markers_contract_C2B928.log",
+        "sha256": "5978ed1a89be6778dd29621ad607091b8712f61e721a4ebb4e0ba4f90521ce11"
+      }
+    },
+    {
+      "owner": "C2B952",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 135,
+      "observed_owner_pcs": 135,
+      "raw_observed_pcs": 135,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_markers_contract_C2B952.log",
+        "sha256": "33da058852f5b330dc18dfbb716ca3f8e4bb3c7e035659209b467bb44ae7f52b"
+      }
+    },
+    {
+      "owner": "C2AFFA",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 34,
+      "raw_observed_pcs": 34,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_markers_real_C2AFFA.log",
+        "sha256": "adc4e765e9491bd8325b0010e9321e1afac0d8fef0db7a09f30b2a42e26271d8"
+      }
+    },
+    {
+      "owner": "C2B3C2",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 124,
+      "observed_owner_pcs": 120,
+      "raw_observed_pcs": 120,
+      "unobserved_owner_pcs": [
+        "C2B53E",
+        "C2B544",
+        "C2B546",
+        "C2B54E"
+      ],
+      "log": {
+        "path": "build/recomp/flight_markers_real_C2B3C2.log",
+        "sha256": "9f744555d5608cce9b3ec6cbf61fd3ad0cb90dfbb3f43118b35ff782f2c37604"
+      }
+    },
+    {
+      "owner": "C2B564",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 167,
+      "observed_owner_pcs": 132,
+      "raw_observed_pcs": 184,
+      "unobserved_owner_pcs": [
+        "C2B612",
+        "C2B616",
+        "C2B618",
+        "C2B61E",
+        "C2B620",
+        "C2B622",
+        "C2B626",
+        "C2B628",
+        "C2B62C",
+        "C2B62E",
+        "C2B632",
+        "C2B634",
+        "C2B638",
+        "C2B63A",
+        "C2B63E",
+        "C2B646",
+        "C2B64C",
+        "C2B6D8",
+        "C2B6DC",
+        "C2B6DE",
+        "C2B6E4",
+        "C2B6E6",
+        "C2B6E8",
+        "C2B6EA",
+        "C2B6EE",
+        "C2B6F0",
+        "C2B6F2",
+        "C2B6F6",
+        "C2B6F8",
+        "C2B6FC",
+        "C2B6FE",
+        "C2B700",
+        "C2B702",
+        "C2B70A",
+        "C2B710"
+      ],
+      "log": {
+        "path": "build/recomp/flight_markers_real_C2B564.log",
+        "sha256": "7b1a806382946724eede316d8bb2f898f7955728bb912ab2860c5a478ecfc7ea"
+      }
+    },
+    {
+      "owner": "C2B928",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 40,
+      "observed_owner_pcs": 40,
+      "raw_observed_pcs": 40,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_markers_real_C2B928.log",
+        "sha256": "ec9e504a32e80abaa3ba667f5566162f8fd3444af24f1ce049b993a6ce019301"
+      }
+    },
+    {
+      "owner": "C2B952",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 135,
+      "observed_owner_pcs": 129,
+      "raw_observed_pcs": 163,
+      "unobserved_owner_pcs": [
+        "C2BA04",
+        "C2BA08",
+        "C2BA0A",
+        "C2BA0E",
+        "C2BA30",
+        "C2BA34"
+      ],
+      "log": {
+        "path": "build/recomp/flight_markers_real_C2B952.log",
+        "sha256": "67a8a428703bbceb4838edfbb50667728e1ce3d052716b97e014c808fa8194a9"
+      }
+    }
+  ],
+  "actual_dispatch_completed_calls": 30720,
+  "dispatch_fixtures": [
+    {
+      "owner": "C2AFFA",
+      "mode": "on",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 34,
+      "raw_observed_pcs": 34,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2AFFA_on.log",
+        "sha256": "e5d2a27021b0a5c0b5e69909cd4fca8b86e7f4c80cce5d3d56b8d3f4da0ffb8a"
+      }
+    },
+    {
+      "owner": "C2AFFA",
+      "mode": "shadow",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 34,
+      "raw_observed_pcs": 34,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2AFFA_shadow.log",
+        "sha256": "e5d2a27021b0a5c0b5e69909cd4fca8b86e7f4c80cce5d3d56b8d3f4da0ffb8a"
+      }
+    },
+    {
+      "owner": "C2AFFA",
+      "mode": "sandbox",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 34,
+      "raw_observed_pcs": 34,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2AFFA_sandbox.log",
+        "sha256": "e5d2a27021b0a5c0b5e69909cd4fca8b86e7f4c80cce5d3d56b8d3f4da0ffb8a"
+      }
+    },
+    {
+      "owner": "C2B3C2",
+      "mode": "on",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 124,
+      "observed_owner_pcs": 120,
+      "raw_observed_pcs": 120,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B3C2_on.log",
+        "sha256": "2560baf90ffca4d7f26437b13c48fafacbd55004e6cf99d90c24f155fef49d17"
+      }
+    },
+    {
+      "owner": "C2B3C2",
+      "mode": "shadow",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 124,
+      "observed_owner_pcs": 120,
+      "raw_observed_pcs": 120,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B3C2_shadow.log",
+        "sha256": "2560baf90ffca4d7f26437b13c48fafacbd55004e6cf99d90c24f155fef49d17"
+      }
+    },
+    {
+      "owner": "C2B3C2",
+      "mode": "sandbox",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 124,
+      "observed_owner_pcs": 120,
+      "raw_observed_pcs": 120,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B3C2_sandbox.log",
+        "sha256": "2560baf90ffca4d7f26437b13c48fafacbd55004e6cf99d90c24f155fef49d17"
+      }
+    },
+    {
+      "owner": "C2B564",
+      "mode": "on",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 167,
+      "observed_owner_pcs": 132,
+      "raw_observed_pcs": 184,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B564_on.log",
+        "sha256": "84cf256a94c3ce3c1f8e28a1519d5428ad5ed662c65c2eecc532fc59ebbd3989"
+      }
+    },
+    {
+      "owner": "C2B564",
+      "mode": "shadow",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 167,
+      "observed_owner_pcs": 132,
+      "raw_observed_pcs": 184,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B564_shadow.log",
+        "sha256": "84cf256a94c3ce3c1f8e28a1519d5428ad5ed662c65c2eecc532fc59ebbd3989"
+      }
+    },
+    {
+      "owner": "C2B564",
+      "mode": "sandbox",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 167,
+      "observed_owner_pcs": 132,
+      "raw_observed_pcs": 184,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B564_sandbox.log",
+        "sha256": "84cf256a94c3ce3c1f8e28a1519d5428ad5ed662c65c2eecc532fc59ebbd3989"
+      }
+    },
+    {
+      "owner": "C2B928",
+      "mode": "on",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 40,
+      "observed_owner_pcs": 40,
+      "raw_observed_pcs": 40,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B928_on.log",
+        "sha256": "ce4bcc5e5446cc3615d06fbf64f92a9aa8c41a0e4b10c9d6197f7eab299120c5"
+      }
+    },
+    {
+      "owner": "C2B928",
+      "mode": "shadow",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 40,
+      "observed_owner_pcs": 40,
+      "raw_observed_pcs": 40,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B928_shadow.log",
+        "sha256": "ce4bcc5e5446cc3615d06fbf64f92a9aa8c41a0e4b10c9d6197f7eab299120c5"
+      }
+    },
+    {
+      "owner": "C2B928",
+      "mode": "sandbox",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 40,
+      "observed_owner_pcs": 40,
+      "raw_observed_pcs": 40,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B928_sandbox.log",
+        "sha256": "ce4bcc5e5446cc3615d06fbf64f92a9aa8c41a0e4b10c9d6197f7eab299120c5"
+      }
+    },
+    {
+      "owner": "C2B952",
+      "mode": "on",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 135,
+      "observed_owner_pcs": 121,
+      "raw_observed_pcs": 155,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B952_on.log",
+        "sha256": "97057b0209c2399d06993115c1f655b52a1bf0d35694dfb0fadca45a544d5e71"
+      }
+    },
+    {
+      "owner": "C2B952",
+      "mode": "shadow",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 135,
+      "observed_owner_pcs": 121,
+      "raw_observed_pcs": 155,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B952_shadow.log",
+        "sha256": "97057b0209c2399d06993115c1f655b52a1bf0d35694dfb0fadca45a544d5e71"
+      }
+    },
+    {
+      "owner": "C2B952",
+      "mode": "sandbox",
+      "completed_calls": 2048,
+      "hardware_bearing": 0,
+      "owner_pcs": 135,
+      "observed_owner_pcs": 121,
+      "raw_observed_pcs": 155,
+      "log": {
+        "path": "build/recomp/flight_markers_dispatch_C2B952_sandbox.log",
+        "sha256": "97057b0209c2399d06993115c1f655b52a1bf0d35694dfb0fadca45a544d5e71"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "groups": [
+      {
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "totals": {
+          "shadow": {
+            "C2AFFA": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B3C2": {
+              "calls": 16010,
+              "compared": 16009,
+              "matched": 16009,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1
+            },
+            "C2B564": {
+              "calls": 4083,
+              "compared": 4081,
+              "matched": 4081,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 2
+            },
+            "C2B928": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B952": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C2AFFA": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B3C2": {
+              "calls": 16010,
+              "compared": 16010,
+              "matched": 16010,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B564": {
+              "calls": 4083,
+              "compared": 4083,
+              "matched": 4083,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B928": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B952": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 20090,
+        "sandbox_matches": 20093
+      },
+      {
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "totals": {
+          "shadow": {
+            "C2AFFA": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B928": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B952": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C2AFFA": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B928": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B952": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 0,
+        "sandbox_matches": 0
+      },
+      {
+        "selection": [
+          "C2B3C2",
+          "C2B564"
+        ],
+        "totals": {
+          "shadow": {
+            "C2B3C2": {
+              "calls": 16010,
+              "compared": 16009,
+              "matched": 16009,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1
+            },
+            "C2B564": {
+              "calls": 4083,
+              "compared": 4081,
+              "matched": 4081,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 2
+            }
+          },
+          "sandbox": {
+            "C2B3C2": {
+              "calls": 16010,
+              "compared": 16010,
+              "matched": 16010,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C2B564": {
+              "calls": 4083,
+              "compared": 4083,
+              "matched": 4083,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 20090,
+        "sandbox_matches": 20093
+      }
+    ],
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 4891,
+            "compared": 4890,
+            "matched": 4890,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 48,
+            "busy_input_calls": 4890,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 2085,
+            "compared": 2084,
+            "matched": 2084,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 46,
+            "busy_input_calls": 2084,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B3C2_C2B564_C2B928_C2B952_demo01_shadow.json",
+          "sha256": "c16a33da5938f709c05e84037676338642ed4506c3fbd0e5fcf323c35eb2cf59"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 8037,
+            "compared": 8037,
+            "matched": 8037,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 8037,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 1647,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B3C2_C2B564_C2B928_C2B952_qual_carrier_success_shadow.json",
+          "sha256": "7183b73bfb6a3b2db8dd4ed6814b12b781441b8ed63e7915063099c394f236c6"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 3082,
+            "compared": 3082,
+            "matched": 3082,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46,
+            "busy_input_calls": 3082,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 351,
+            "compared": 350,
+            "matched": 350,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 48,
+            "busy_input_calls": 350,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B3C2_C2B564_C2B928_C2B952_qual_fail_crashes_shadow.json",
+          "sha256": "64bd1b2fb10962484fb99f39e2e7805b20bba02d2e1717126237688fc02c0f8a"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 4891,
+            "compared": 4891,
+            "matched": 4891,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 48,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 2085,
+            "compared": 2085,
+            "matched": 2085,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B3C2_C2B564_C2B928_C2B952_demo01_sandbox.json",
+          "sha256": "48be9d70908bec9382a3bc159a54df0d9281d4ce9d7c87d94af29cfe001e3549"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 8037,
+            "compared": 8037,
+            "matched": 8037,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B3C2_C2B564_C2B928_C2B952_qual_carrier_success_sandbox.json",
+          "sha256": "e8754591b417ad8cede4240bd2a36357ad867587c8b0bdf46b8a6b474b5b25b3"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 3082,
+            "compared": 3082,
+            "matched": 3082,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 48,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B3C2_C2B564_C2B928_C2B952_qual_fail_crashes_sandbox.json",
+          "sha256": "c479a9ba17f58dd0953618272482ab0b4a2fcdb7cf82004bff5dc07382e7ac77"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B928_C2B952_demo01_shadow.json",
+          "sha256": "dd08e44a7f31d9bf7f32bccabac959f198554ec395d25d05fac00c52bb1eb071"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B928_C2B952_qual_carrier_success_shadow.json",
+          "sha256": "dd08e44a7f31d9bf7f32bccabac959f198554ec395d25d05fac00c52bb1eb071"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B928_C2B952_qual_fail_crashes_shadow.json",
+          "sha256": "dd08e44a7f31d9bf7f32bccabac959f198554ec395d25d05fac00c52bb1eb071"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B928_C2B952_demo01_sandbox.json",
+          "sha256": "dd08e44a7f31d9bf7f32bccabac959f198554ec395d25d05fac00c52bb1eb071"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B928_C2B952_qual_carrier_success_sandbox.json",
+          "sha256": "dd08e44a7f31d9bf7f32bccabac959f198554ec395d25d05fac00c52bb1eb071"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "rows": [
+          {
+            "entry": "C2AFFA",
+            "name": "transform_marker_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B928",
+            "name": "draw_class_twenty_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B952",
+            "name": "draw_record_position_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2AFFA_C2B928_C2B952_qual_fail_crashes_sandbox.json",
+          "sha256": "dd08e44a7f31d9bf7f32bccabac959f198554ec395d25d05fac00c52bb1eb071"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C2B3C2",
+          "C2B564"
+        ],
+        "rows": [
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 4891,
+            "compared": 4890,
+            "matched": 4890,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 48,
+            "busy_input_calls": 4890,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 2085,
+            "compared": 2084,
+            "matched": 2084,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 46,
+            "busy_input_calls": 2084,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2B3C2_C2B564_demo01_shadow.json",
+          "sha256": "c16a33da5938f709c05e84037676338642ed4506c3fbd0e5fcf323c35eb2cf59"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C2B3C2",
+          "C2B564"
+        ],
+        "rows": [
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 8037,
+            "compared": 8037,
+            "matched": 8037,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 8037,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 1647,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2B3C2_C2B564_qual_carrier_success_shadow.json",
+          "sha256": "7183b73bfb6a3b2db8dd4ed6814b12b781441b8ed63e7915063099c394f236c6"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C2B3C2",
+          "C2B564"
+        ],
+        "rows": [
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 3082,
+            "compared": 3082,
+            "matched": 3082,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46,
+            "busy_input_calls": 3082,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 351,
+            "compared": 350,
+            "matched": 350,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 48,
+            "busy_input_calls": 350,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2B3C2_C2B564_qual_fail_crashes_shadow.json",
+          "sha256": "64bd1b2fb10962484fb99f39e2e7805b20bba02d2e1717126237688fc02c0f8a"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C2B3C2",
+          "C2B564"
+        ],
+        "rows": [
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 4891,
+            "compared": 4891,
+            "matched": 4891,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 48,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 2085,
+            "compared": 2085,
+            "matched": 2085,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2B3C2_C2B564_demo01_sandbox.json",
+          "sha256": "48be9d70908bec9382a3bc159a54df0d9281d4ce9d7c87d94af29cfe001e3549"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C2B3C2",
+          "C2B564"
+        ],
+        "rows": [
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 8037,
+            "compared": 8037,
+            "matched": 8037,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 1647,
+            "compared": 1647,
+            "matched": 1647,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 47,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2B3C2_C2B564_qual_carrier_success_sandbox.json",
+          "sha256": "e8754591b417ad8cede4240bd2a36357ad867587c8b0bdf46b8a6b474b5b25b3"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C2B3C2",
+          "C2B564"
+        ],
+        "rows": [
+          {
+            "entry": "C2B3C2",
+            "name": "draw_scene_position_labels",
+            "calls": 3082,
+            "compared": 3082,
+            "matched": 3082,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2B564",
+            "name": "draw_view_grid_and_markers",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 48,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2B3C2_C2B564_qual_fail_crashes_sandbox.json",
+          "sha256": "c479a9ba17f58dd0953618272482ab0b4a2fcdb7cf82004bff5dc07382e7ac77"
+        }
+      }
+    ],
+    "generic_rejections": [
+      {
+        "selection": [
+          "C2AFFA",
+          "C2B3C2",
+          "C2B564",
+          "C2B928",
+          "C2B952"
+        ],
+        "reason": "C2AFFA: no completed comparisons",
+        "log": {
+          "path": "build/recomp/markers_whole_call_final.log",
+          "sha256": "d37df13fb1a111a441e017293415f33e90b443e262a00ae1f8a0cede84482d89"
+        }
+      },
+      {
+        "selection": [
+          "C2AFFA",
+          "C2B928",
+          "C2B952"
+        ],
+        "reason": "all three children have zero calls/comparisons with parents omitted",
+        "log": {
+          "path": "build/recomp/markers_children_whole_call.log",
+          "sha256": "a8033dc7f2449372600602ffcfdfbb8aba977a405b758ce926fea7822f7ac9c7"
+        }
+      }
+    ]
+  },
+  "instruction_dma": {
+    "local_instructions": 468,
+    "local_cases": 14976,
+    "previous_unique_instructions": 22593,
+    "overlap_instructions": 0,
+    "combined_unique_instructions": 23061,
+    "combined_cases": 737952,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 23,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_main_loop_flight_controls_math.h",
+      "sha256": "b141699adbda2a39bc0009942f6f1f7d69e27d08080fbf372ddf6d945ff37f4d"
+    },
+    {
+      "path": "port/game/glue/glue_flight_record_actions_math.h",
+      "sha256": "3412841f5494bb57bcb434b60f58b7a44457fb6fe938cba37aa2b80020da0753"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers_math.h",
+      "sha256": "d32d6c42c74e096dd5c670f285a91d9d1c91f8786d3c4c3d0d9a762d899d0315"
+    },
+    {
+      "path": "port/game/glue/glue_flight_dynamics_math.h",
+      "sha256": "8d0c355abe117c5ca736c5d1a5f222e0c0d1b3755bb54c54ac732d7b3c5bb92f"
+    },
+    {
+      "path": "port/game/glue/glue_flight_geometry_math.h",
+      "sha256": "087e7193e628efef601ac55e951d9c9ec6e4664a2e4e7efca49aa8bdbe59d157"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    }
+  ],
+  "full_gate": {
+    "rows": 580,
+    "recordings": 3,
+    "shadow_matches": 568155,
+    "sandbox_matches": 439147,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308060,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "f95d5074041e23ebb76bb2fd98e14570814307c3bbe3a3abdeb822332d7b44dd"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207247,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "6efb6736ec1fa137bf6d6684a57e00b58da8a35cdfe546c5e3fe64ea74fa961c"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52848,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "8f476c5e153590a91e392b2c042558d3ce65cd00494b7b85013c4ca1c1714bd6"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150621,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "03a228d97f500edd33a849f11f3ba4b90210dc98aac6770f604c42793a858371"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 243277,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "e5279095024377335a05a6598231f87283a734625f4549ddfe8ee56f6d1f1b25"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45249,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "99a2dc3612be72a8e06367755a028a55fcea9a42a372375e2bc12bd1abe4ded7"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1396532193,
+    "build_gib": 1.301
+  },
+  "limits": [
+    "Original-child fixture coverage is bounded: scene-label 120/124, grid 132/167, record-marker 129/135. Controlled complete child-entry/return contracts cover all owner PCs.",
+    "Raw parent traces include nested point-transform and marker PCs; owner counts intersect the sealed ownership set.",
+    "Three marker children are cold in all sealed recordings, including with their parents omitted. The strict generic normal-C rejection remains unchanged.",
+    "Drawing registrations use the existing source-first DMACONR proof contract; omitting it failed the carrier final-RAM seal. No shared runtime/bus or classification change was made.",
+    "Complete original game-call/callback coverage remains open. C2C392 signed computed transfer and C1612C graphics-wait integration remain unregistered.",
+    "ALL frame416/361, deferred Copper fade and Kickstart exception/service return remain debt."
+  ],
+  "next": {
+    "entries": [
+      "C2ECA8",
+      "C32A44",
+      "C32AC8",
+      "C33F70",
+      "C33F8A",
+      "C33FB4"
+    ],
+    "unique_instructions": 264,
+    "shared_instructions": 85,
+    "manifest": {
+      "path": "analysis/data/projection_readout_scope_inventory.json",
+      "sha256": "26cfe09c651df21e81b949936909c73a28295dcea2424a4e93a1944c26983aac"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/flight_markers.c",
+      "sha256": "932cfceb641564e456909852bcffde6edf5a43e361e49abb815c561e7bdbf126"
+    },
+    {
+      "path": "port/game/flight_markers.h",
+      "sha256": "954e7a4d91aee137a9d44fcf58867bb4f0eda4178d74924421a31fd4aa0dbe21"
+    },
+    {
+      "path": "port/game/glue/glue_flight_markers.c",
+      "sha256": "92bd87340fc709fd054c7a7cfb8910005bff61350e951a74c0e2b630310b9280"
+    },
+    {
+      "path": "port/game/glue/glue_flight_markers.h",
+      "sha256": "8ff46d072322d40c86500e39c985979a92549b6f92a080e7fdafc06f64baaf9a"
+    },
+    {
+      "path": "port/game/glue/glue_flight_markers_math.h",
+      "sha256": "f8d40ddd318933fcb20fdb362694b9f9bc5c2f7c93ece7e6745719c4e09f63e7"
+    },
+    {
+      "path": "port/game/glue/glue_flight_markers_step.c",
+      "sha256": "f78c8750ba79f7577e5da13b864e27fb6d92ef7e90ad17badface2720f4a3fa2"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "cb53c19a67c1c3f7a71f0e8795b3eddea96509cf4dbe29623ee71b99a2ea70ce"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "e66807970af445ce6831801b4091c7d70af2b72ed8e38c2538fe6bb8329ed745"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_flight_markers_source.py",
+      "sha256": "64b832b94599886e05b8bf1c9e1d50fda31323832cdd5805b263cec86cc9a0cf"
+    },
+    {
+      "path": "tools/recomp/check_flight_markers.py",
+      "sha256": "795594ba3b877242926b3cd85490e77818ea9deb4b430de33f53f7207f20df58"
+    },
+    {
+      "path": "tools/recomp/check_flight_markers_dispatch.py",
+      "sha256": "3fff143f1da88d4daa890d52b7dcc8df883ac9d0bf4663d6b7e0c3fa702b4331"
+    },
+    {
+      "path": "tools/recomp/flight_markers_bus_budget.c",
+      "sha256": "48208675804240b1e704ab228d4102797a9726a8d4348b467c13d50a26cc433c"
+    },
+    {
+      "path": "tools/recomp/flight_markers_contract_children.c",
+      "sha256": "c5cf9c040a2e012fda778c4ac3fae75d520fd8c7c303332836d58a1b87c02932"
+    },
+    {
+      "path": "tools/recomp/flight_markers_contract_oracle.c",
+      "sha256": "a41ba0d6db170476d3723f7be76de2f1d3599e42038fca05b42b34cd3364a889"
+    },
+    {
+      "path": "tools/recomp/flight_markers_dispatch_oracle.c",
+      "sha256": "1f769e1b68ba08ef337ff5c6dd4f26702421d5c7a6cf0555793e77d7c7f64064"
+    },
+    {
+      "path": "tools/recomp/flight_markers_fixture.h",
+      "sha256": "ad44b1f7b8a28fdbe147123a2c685c018982de470f112ac8d94a2e1fa707e08a"
+    },
+    {
+      "path": "tools/recomp/flight_markers_oracle.c",
+      "sha256": "4a3aa5ef16a293a16a672171128880db05a559674993ccb492de990aa95f029f"
+    },
+    {
+      "path": "tools/recomp/audit_projection_readout_scope.py",
+      "sha256": "79473f5fa7761311b8d7277878959ee79a615a1add364f9a17807bbfb57efab0"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/markers_complete_proof.log",
+      "sha256": "d54e6b958b717e91b103eba59658f33cb8afde4969efe03b0556a0a8fa6b3a22"
+    },
+    {
+      "path": "build/recomp/markers_dispatch_final.log",
+      "sha256": "f7ac888061c5b7bacb6278f9ed2a5c95db747b9badbee6915402f54daaf2ddb0"
+    },
+    {
+      "path": "build/recomp/markers_dma_local.log",
+      "sha256": "11c02a9817e97e369e8f3ed665ebfee738dd1b8606c5444b380ffb6ab7029365"
+    },
+    {
+      "path": "build/recomp/markers_dma_union.log",
+      "sha256": "700294571a76b0718e5c528294275ad6029653c010619fa48a83fc1d13cf574e"
+    },
+    {
+      "path": "build/recomp/markers_compatibility.log",
+      "sha256": "c4c98fa662c8f5bc61e0cc3ecd0a8a44661b3bf0594aa3940f3bed5c0067eb49"
+    },
+    {
+      "path": "build/recomp/markers_normal_build.log",
+      "sha256": "7a1f9b18466c20cf74f46352d7b4504b6f8cb96bc37f42d2a2e049456098db17"
+    },
+    {
+      "path": "build/recomp/markers_msvc_final.log",
+      "sha256": "b559007919ea582dce47e01a55572101cee09a3fcd131fe3c4abe515e5eca48c"
+    },
+    {
+      "path": "build/recomp/markers_ports_gate.log",
+      "sha256": "a75f0d35cdf830796c265235882cce348fbb3ffa49aeb3240aac38117df23306"
+    },
+    {
+      "path": "build/recomp/markers_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/markers_timing.log",
+      "sha256": "fd50049a03e1ffdac26c55d99929f1e6a7db4d76f9f4db9db9293087441b660f"
+    },
+    {
+      "path": "build/recomp/markers_whole_call_final.log",
+      "sha256": "d37df13fb1a111a441e017293415f33e90b443e262a00ae1f8a0cede84482d89"
+    },
+    {
+      "path": "build/recomp/markers_children_whole_call.log",
+      "sha256": "a8033dc7f2449372600602ffcfdfbb8aba977a405b758ce926fea7822f7ac9c7"
+    },
+    {
+      "path": "build/recomp/markers_hot_whole_call.log",
+      "sha256": "b84e27a64e4929091186e08fa68855a20f00c859c3b6f275331d21b7a14b5bbd"
+    },
+    {
+      "path": "build/recomp/markers_ports_gate_without_source_first.log",
+      "sha256": "5c4768501468f415499c5363ab01ac5f9570f68d640ceb630551063636544f54"
+    },
+    {
+      "path": "build/recomp/markers_carrier_source_first.log",
+      "sha256": "288600a85f10db6ba1fc59b2f7fb4d1253d56d07008e1aaad1e33c426a95dfcf"
+    }
+  ]
+}
