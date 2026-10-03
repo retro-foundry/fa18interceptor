@@ -84,15 +84,7 @@ int glue_C0915A(void) {
     return glue_return();
 }
 
-int glue_C11078(void) {
-    SET_W(D(0), rd_u16(POST_INPUT_COUNTDOWN));
-    if (rd_s16(POST_INPUT_COUNTDOWN) < 0) {
-        D(0) = 1;
-        A(0) = ROUTINE_AFTER_EVENT;
-    }
-    raise_event_after_countdown();
-    return glue_return();
-}
+
 
 /* $C11ACC: the source long at 4(A7); A0/A1 at the last long copied. */
 int glue_C11ACC(void) {

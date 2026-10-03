@@ -25,12 +25,13 @@ def main():
     group_names += ("selector_origin", "update_sequence", "input_events", "command_dispatch")
     group_names += ("postflight_scheduler",)
     group_names += ("context_publication",)
-    group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion")
+    group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion", "postflight_messages")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "postflight_messages": ['C0F4D8', 'C0F812', 'C11078', 'C110A4', 'C11350', 'C113E4', 'C1141E', 'C11446', 'C11478', 'C114D2', 'C1159E', 'C115BA', 'C1169A', 'C116B0', 'C116CE', 'C11738'],
         "postflight_completion": ['C11788', 'C11830', 'C11872', 'C118A0', 'C118E6', 'C118FC', 'C11934', 'C11958', 'C119D4', 'C1104C', 'C0F946', 'C0F974', 'C091E6'],
         "menu_context_finish": ['C10A24', 'C10C08', 'C10C68', 'C10AB2', 'C10AE6', 'C10B1E', 'C10CFE', 'C10D8A', 'C10DAE', 'C11A26', 'C11A50', 'C09192', 'C16D04', 'C25070'],
         "menu_return": ["C1064C","C108FE","C10900","C10970","C102D8","C0FB70","C0FBB6","C101FC","C10228","C10942","C109AC","C10302","C10BAE","C10362"],
@@ -113,6 +114,7 @@ def main():
     menu_owners.update(json.loads((ROOT / "analysis/data/menu_return_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/menu_context_finish_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/postflight_completion_source_scope.json").read_text())["owners"])
+    menu_owners.update(json.loads((ROOT / "analysis/data/postflight_messages_source_scope.json").read_text())["owners"])
     for entry in entries:
         if entry in menu_owners:
             for pc in menu_owners[entry]["source_pcs"]: addresses.setdefault(pc,entry)

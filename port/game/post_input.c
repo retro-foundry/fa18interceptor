@@ -2,6 +2,7 @@
 #include "post_input.h"
 #include "menu_context_finish.h"
 #include "postflight_completion.h"
+#include "postflight_messages.h"
 #include "postflight_scheduler.h"
 #include "menu_followup.h"
 #include "menu_outcome.h"
@@ -82,13 +83,7 @@ void begin_phase_three(void) {
     schedule_postflight(POSTFLIGHT_MODE_NINE,0,0,NULL);
 }
 
-void raise_event_after_countdown(void) {
-    if (!countdown_expired()) return;
-    wr_u8(POST_INPUT_EVENT, 1);
-    wr_u16(POST_INPUT_COUNTDOWN, 2);
-    next_stage(ROUTINE_AFTER_EVENT);
-    wr_u8(CONTEXT_GATE, 1);
-}
+void raise_event_after_countdown(void) { raise_postflight_message_event(NULL); }
 
 void queue_mode_messages(void) {
     advance_menu_mode_messages(NULL);

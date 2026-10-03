@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -40,7 +40,7 @@ body={
  "exg":"value=A(destination); A(destination)=A(reg); A(reg)=value; break;",
  "neg.l":"renderer_negate(&D(reg),4); break;",
 }
-for mnemonic,condition in {"bra":"1","beq":"COND_EQ()","bne":"COND_NE()","blt":"COND_LT()","ble":"COND_LE()","bge":"COND_GE()","bgt":"COND_GT()","bpl":"COND_PL()","bmi":"COND_MI()","bcs":"COND_CS()","bhi":"COND_HI()"}.items():
+for mnemonic,condition in {"bra":"1","beq":"COND_EQ()","bne":"COND_NE()","blt":"COND_LT()","ble":"COND_LE()","bge":"COND_GE()","bgt":"COND_GT()","bpl":"COND_PL()","bmi":"COND_MI()","bcs":"COND_CS()","bhi":"COND_HI()","bls":"COND_LS()"}.items():
  body[mnemonic]=f"step_branch(pc,opcode,{condition}); break;"
 for suffix,width,name in (("b",1,"byte"),("w",2,"word"),("l",4,"long")):
  imm=f"m68ki_read_imm_{32 if width==4 else 16}()"

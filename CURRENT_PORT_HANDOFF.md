@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 661e156b); ignored gate logs may
+history (the preceding handoff is in commit 35a94f4d); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -26,8 +26,9 @@ menu follow-ups and the table-file owner raised it to 470/624; complete
 delayed-menu/outcome callbacks raised it to 471/624; fourteen complete
 menu/context return owners retain that translated count; fourteen complete
 menu/context completion owners now raise it to 474/624; thirteen complete
-postflight/reset/restart owners retain that translated count.
-Forty original source-only callable entries are additionally recreated,
+postflight/reset/restart owners retain that translated count; sixteen complete
+postflight-message/text owners now raise it to 476/624.
+Fifty-three original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
@@ -35,6 +36,50 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
+- 476 of 624 translated entries plus fifty-three source-only callable entries
+  are registered: 529 rows and 343 source-timed entries (290 translated plus
+  fifty-three source-only). Sixteen complete postflight-message/text owners
+  cover 513 unique / zero shared boundaries within this batch, including all
+  four original C111E8 table arms. C110A4/C11350 and thirteen source-only entries
+  are added; C11078's fixed-charge adapter is completed. C15C36's original
+  external JSR proves C0F4D8's independent callability. Thirty-seven actual
+  child sites retain their source return PCs and stack arguments.
+  Controlled children cover every 513 boundary in 131,072 complete full-CPU/
+  full-SR/all-RAM cases, without exclusions. Real children cover thirteen owners
+  and all 411 of their boundaries in 212,992 cases. The total is 344,064,
+  without counting failed or replaced tests. Real children permit actual CIA
+  reads (write-log mode 2). C0F4D8/C11478/C114D2 retain original service stops
+  at FC1FC4/FC0FF0/FC0FF0; no complete real-child proof is counted for those
+  owners. C110A4's actual file child uses its original nonzero global status
+  gate; actual file-loading parity remains open. Actual ON/shadow/sandbox
+  dispatch passes 9,984 complete fixtures over the thirteen real-completing
+  owners, covering all their boundaries in every mode and retaining entry/
+  mode/selection/write guards. The three service-dependent owners retain
+  separate complete controlled-child proof, not real dispatch proof.
+  Normal step-disabled C matches four shadow / four sandbox calls:
+  C11078 once and C110A4 three times. The other fourteen owners are cold;
+  raw zero rows and generic C0F4D8 rejection remain retained. No exclusions,
+  fabricated child results or RAM-only CPU claims are introduced.
+  Local DMA passes 513 / 16,416; the independently tested instruction union
+  is 16,897 / 540,704, with 0 overlapping PCs. No fresh combined run
+  this batch; the last fresh combined run remains 16,384 / 524,288.
+  Shared runtime CPU/bus/math and instruction fixtures are unchanged;
+  all eleven preceding generator outputs are byte-for-byte unchanged.
+  The full 529-row gate passes 554,063 shadow / 413,303 sandbox matches,
+  zero mismatches, exact seals and identical poison frames. All 36,236 isolated
+  live frames and RAM seals match; the group is exact through frame 600 and
+  ALL remains 416/361. GNU and MSVC Release pass; build/ is 0.833 GiB.
+  See analysis/routines/native_c_postflight_messages.md and
+  analysis/figures/native_postflight_messages_checkpoint.json for evidence.
+  The earlier queue_mode_messages correction proposal was mistaken: its
+  documented C10678 mapping and advance_menu_mode_messages delegate are
+  correct. prepare_postflight_messages independently implements C110A4.
+  Next reconstruct C0F56A/C0EF08/C162E4/C1631C/C16386, the related formatter
+  and game-side mode-file callers: 174 unique / zero shared boundaries.
+  analysis/data/postflight_file_callers_scope_inventory.json implements none
+  of them and replaces no OS service. Continue the original game graph,
+  then Stage F and only needed Stage E. Stage D and the whole C port remain
+  open; Copper fade remains deferred.
 - 474 of 624 translated entries plus forty source-only callable entries are
   registered: 514 rows and 327 source-timed entries (287 translated plus forty
   source-only). Thirteen complete postflight/reset/restart owners cover 205
@@ -73,9 +118,9 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   the complete C110A4 parent, C11350 and C0F4D8/C0F812 publishers: 513 unique /
   zero shared boundaries and all four original C111E8 table arms. See
   analysis/data/postflight_messages_scope_inventory.json; it implements none
-  of them. Correct the legacy typed queue_mode_messages delegation to the
-  distinct complete C110A4 domain when that owner is reconstructed; its current
-  C10678 advance_menu_mode_messages delegate is a different source owner.
+  of them. The typed queue_mode_messages API correctly names C10678 and
+  delegates to advance_menu_mode_messages. C110A4 requires a distinct domain;
+  the earlier proposed delegation correction was mistaken.
   Keep actual OS/file children and the preceding parity limitation. Continue
   the original graph, then Stage F and only necessary Stage E. Stage D and the
   complete C port remain open; Copper fade stays deferred.

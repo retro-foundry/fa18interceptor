@@ -1577,6 +1577,6 @@
         ]
       }
     },
-    "legacy_typed_api_correction_needed": "queue_mode_messages currently delegates C10678 advance_menu_mode_messages, while its C110A4 authority is a distinct complete message-sequence owner; correct this when C110A4 is reconstructed."
+    "legacy_typed_api_mapping": "queue_mode_messages correctly names C10678 and delegates advance_menu_mode_messages; C110A4 requires its own distinct domain. The earlier delegation-correction proposal was mistaken."
   }
 }

@@ -7,6 +7,22 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete postflight message and text callback owners. */
+    {0xC0F4D8, glue_C0F4D8, "initialise_postflight_text", 0, 0, glue_C0F4D8_step, 0xC0F56A, 0, 0, glue_C0F4D8_owns},
+    {0xC0F812, glue_C0F812, "copy_postflight_text", 0, 0, glue_C0F812_step, 0xC0F920, 0, 0, glue_C0F812_owns},
+    {0xC110A4, glue_C110A4, "prepare_postflight_messages", 0, 0, glue_C110A4_step, 0xC11312, 0, 0, glue_C110A4_owns},
+    {0xC11350, glue_C11350, "record_postflight_outcome", 0, 0, glue_C11350_step, 0xC113E4, 0, 0, glue_C11350_owns},
+    {0xC113E4, glue_C113E4, "queue_postflight_text_error", 0, 0, glue_C113E4_step, 0xC1141E, 0, 0, glue_C113E4_owns},
+    {0xC1141E, glue_C1141E, "wait_postflight_text_error", 0, 0, glue_C1141E_step, 0xC11446, 0, 0, glue_C1141E_owns},
+    {0xC11446, glue_C11446, "queue_postflight_intro", 0, 0, glue_C11446_step, 0xC11478, 0, 0, glue_C11446_owns},
+    {0xC11478, glue_C11478, "accept_postflight_return", 0, 0, glue_C11478_step, 0xC114D2, 0, 0, glue_C11478_owns},
+    {0xC114D2, glue_C114D2, "prepare_postflight_status", 0, 0, glue_C114D2_step, 0xC1159E, 0, 0, glue_C114D2_owns},
+    {0xC1159E, glue_C1159E, "wait_postflight_status", 0, 0, glue_C1159E_step, 0xC115BA, 0, 0, glue_C1159E_owns},
+    {0xC115BA, glue_C115BA, "prepare_postflight_retry", 0, 0, glue_C115BA_step, 0xC1169A, 0, 0, glue_C115BA_owns},
+    {0xC1169A, glue_C1169A, "wait_postflight_retry_message", 0, 0, glue_C1169A_step, 0xC116B0, 0, 0, glue_C1169A_owns},
+    {0xC116B0, glue_C116B0, "wait_postflight_retry_input", 0, 0, glue_C116B0_step, 0xC116CE, 0, 0, glue_C116B0_owns},
+    {0xC116CE, glue_C116CE, "advance_postflight_retry", 0, 0, glue_C116CE_step, 0xC11738, 0, 0, glue_C116CE_owns},
+    {0xC11738, glue_C11738, "finish_postflight_retry", 0, 0, glue_C11738_step, 0xC1175C, 0, 0, glue_C11738_owns},
     /* Complete postflight/reset/restart callbacks and root transform. */
     {0xC118FC, glue_C118FC, "follow_postflight_message", 0, 0, glue_C118FC_step, 0xC11934, 0, 0, glue_C118FC_owns},
     {0xC11934, glue_C11934, "clear_postflight_phase", 0, 0, glue_C11934_step, 0xC11958, 0, 0, glue_C11934_owns},
@@ -477,7 +493,7 @@ const FA18Port fa18_ports[] = {
     {0xC0F4A6, glue_C0F4A6, "free_all_voices", 0, 0, glue_C0F4A6_step, 0xC0F4D6},
     {0xC25704, glue_C25704, "post_message", 0, 0, glue_C25704_step, 0xC2574A},
     {0xC0915A, glue_C0915A, "set_observer_position", 0, 0, glue_C0915A_step, 0xC09192},
-    {0xC11078, glue_C11078, "raise_event_after_countdown", 120},
+    {0xC11078, glue_C11078, "raise_event_after_countdown", 0, 0, glue_C11078_step, 0xC110A4, 0, 0, glue_C11078_owns},
     {0xC11ACC, glue_C11ACC, "load_long_table", 0, 0, glue_C11ACC_step, 0xC11B0E},
     {0xC1803C, glue_C1803C, "sound_chosen_record_alert", 0, 0, glue_C1803C_step, 0xC18096},
     {0xC10678, glue_C10678, "queue_mode_messages", 0, 0, glue_C10678_step, 0xC1072E, 0, 0, glue_C10678_owns},

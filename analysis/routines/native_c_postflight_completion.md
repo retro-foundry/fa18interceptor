@@ -102,8 +102,9 @@ are in `analysis/figures/native_postflight_completion_checkpoint.json`.
 original C111E8 table arms. It implements none of them. Include the C0F4D8/
 C0F812 text publisher and the actual C11350/OS children when reconstructing
 the complete message and restart chain. The legacy typed `queue_mode_messages`
-currently delegates to C10678's `advance_menu_mode_messages`; C110A4 is a
-distinct owner, so correct that delegation with the complete next domain.
+correctly names C10678 and delegates to `advance_menu_mode_messages`;
+C110A4 needs its own distinct domain. The earlier delegation correction
+proposal was mistaken.
 Preserve the preceding OS/file-load limitation and do not substitute returning
 children. Continue the original graph, then the plain native backend and only
 necessary OS services. Stage D and the whole C port remain open.
