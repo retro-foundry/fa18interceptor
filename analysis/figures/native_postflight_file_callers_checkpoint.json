@@ -1,0 +1,674 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "43566bf7",
+  "entries": [
+    "C0F56A",
+    "C0EF08",
+    "C162E4",
+    "C1631C",
+    "C16386"
+  ],
+  "entries_added_in_seeded_translation": [
+    "C0EF08"
+  ],
+  "entries_added_outside_seeded_translation": [
+    "C162E4",
+    "C1631C",
+    "C16386"
+  ],
+  "existing_adapters_completed": [
+    "C0F56A"
+  ],
+  "registered_translated_entries": 477,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 56,
+  "registered_total_entries": 533,
+  "registered_timing_entries": 347,
+  "registered_translated_timing_entries": 291,
+  "registered_source_only_timing_entries": 56,
+  "source": {
+    "manifest": "analysis/data/postflight_file_callers_source_scope.json",
+    "sha256": "b83dad0804033a83bd7865a531f7df91dbde63e969026401e625cc69445cc8ff",
+    "unique_instructions": 174,
+    "shared_instructions_within_batch": 0,
+    "shared_with_previous_instruction_union": 41,
+    "timing_reuse": {
+      "C0F56A": "glue_C24E2C_step"
+    },
+    "independent_entry_evidence": {
+      "C162E4": [
+        "C114C0: jsr     $c162e4.l",
+        "C114EE: jsr     $c162e4.l"
+      ],
+      "C1631C": [
+        "C16312: bsr     $c1631c"
+      ],
+      "C16386": [
+        "C162FA: bsr     $c16386"
+      ]
+    },
+    "actual_child_sites": 16
+  },
+  "structural": {
+    "total_cases": 57344,
+    "real_child_cases": 16384,
+    "controlled_child_cases": 40960,
+    "all_registers_full_sr_all_ram": true,
+    "ram_or_register_exclusions": [],
+    "controlled_layer_covers_every_owned_boundary": true,
+    "real_layer_owners": [
+      "C0F56A"
+    ],
+    "real_layer_boundaries": 41,
+    "formatter_argument_aliasing": true,
+    "formatter_wrapped_width_128": true,
+    "real_service_stops": [
+      {
+        "entry": "C0EF08",
+        "returncode": 1,
+        "diagnostic": "postflight-file-callers oracle: case 0 source did not return at FC0FF0",
+        "completed_real_proof": false
+      },
+      {
+        "entry": "C162E4",
+        "returncode": 1,
+        "diagnostic": "postflight-file-callers oracle: case 0 source did not return at FC0FF0",
+        "completed_real_proof": false
+      },
+      {
+        "entry": "C1631C",
+        "returncode": 1,
+        "diagnostic": "postflight-file-callers oracle: case 0 source did not return at FC0FF0",
+        "completed_real_proof": false
+      },
+      {
+        "entry": "C16386",
+        "returncode": 1,
+        "diagnostic": "postflight-file-callers oracle: case 0 source did not return at FC0FF0",
+        "completed_real_proof": false
+      }
+    ],
+    "real_service_stops_evidence": {
+      "path": "build/recomp/postflight_file_callers_service_stops.json",
+      "sha256": "04ee53090e22742ae2736b50cdc0f89a72ac6155fb2255f88b2fc928a759aded",
+      "summary": "]"
+    },
+    "real_write_log_mode": 2,
+    "independent_os_hardware_timing_proof": false,
+    "layers": {
+      "real": {
+        "C0F56A": {
+          "path": "build/recomp/postflight_file_callers_real_C0F56A.log",
+          "sha256": "e981dfe3110930920c38f4e3c969195bebbcd3a0ef9f0a20437328048e6ba0e7",
+          "summary": "postflight-file-callers oracle C0F56A: 16384 complete calls matched all registers, PC, full SR and all RAM; 41 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 41,
+          "covered_owned_boundaries": 41,
+          "uncovered_owned_boundaries": []
+        }
+      },
+      "contract": {
+        "C0F56A": {
+          "path": "build/recomp/postflight_file_callers_contract_C0F56A.log",
+          "sha256": "75b3e1bcc1aae8d10cf6178cda4cb79b48301d1f031c84690d070635ab9b5d02",
+          "summary": "postflight-file-callers oracle C0F56A: 8192 complete calls matched all registers, PC, full SR and all RAM; 41 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 41,
+          "covered_owned_boundaries": 41,
+          "uncovered_owned_boundaries": []
+        },
+        "C0EF08": {
+          "path": "build/recomp/postflight_file_callers_contract_C0EF08.log",
+          "sha256": "8399ea3e78f8f92afcb65e0f9a305ae8c29661e91f2e575db02feebe13d57c73",
+          "summary": "postflight-file-callers oracle C0EF08: 8192 complete calls matched all registers, PC, full SR and all RAM; 54 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 54,
+          "covered_owned_boundaries": 54,
+          "uncovered_owned_boundaries": []
+        },
+        "C162E4": {
+          "path": "build/recomp/postflight_file_callers_contract_C162E4.log",
+          "sha256": "10ad5f654fb170bd7b9e4b9300359bb68392fee1b9a0f7e94bc04822f7ba6faa",
+          "summary": "postflight-file-callers oracle C162E4: 8192 complete calls matched all registers, PC, full SR and all RAM; 14 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 14,
+          "covered_owned_boundaries": 14,
+          "uncovered_owned_boundaries": []
+        },
+        "C1631C": {
+          "path": "build/recomp/postflight_file_callers_contract_C1631C.log",
+          "sha256": "c8ad76600bad34d7a03e43eb99c9e37aa6d8188f90d064ba58793b7eb34633d4",
+          "summary": "postflight-file-callers oracle C1631C: 8192 complete calls matched all registers, PC, full SR and all RAM; 31 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 31,
+          "covered_owned_boundaries": 31,
+          "uncovered_owned_boundaries": []
+        },
+        "C16386": {
+          "path": "build/recomp/postflight_file_callers_contract_C16386.log",
+          "sha256": "ef51e1674c1299dce0611acba60697bc9cc3bcb537d5bca845b6b51b2c1bffe5",
+          "summary": "postflight-file-callers oracle C16386: 8192 complete calls matched all registers, PC, full SR and all RAM; 34 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 34,
+          "covered_owned_boundaries": 34,
+          "uncovered_owned_boundaries": []
+        }
+      }
+    }
+  },
+  "dispatch": {
+    "cases": 768,
+    "cases_per_entry_per_mode": 256,
+    "entries": [
+      "C0F56A"
+    ],
+    "excluded_service_dependent_entries": [
+      "C0EF08",
+      "C162E4",
+      "C1631C",
+      "C16386"
+    ],
+    "modes": [
+      "on",
+      "shadow",
+      "sandbox"
+    ],
+    "full_cpu_sr_ram": true,
+    "ram_or_register_exclusions": [],
+    "every_mode_covers_every_proven_owner_boundary": true,
+    "on_requires_native_continuation": true,
+    "reference_modes_require_completed_matches": true,
+    "hardware_source_calls": 0,
+    "guards": [
+      "non-call entry",
+      "OFF mode",
+      "ports-only selection",
+      "source write invalidates entry dispatch"
+    ],
+    "evidence": {
+      "path": "build/recomp/postflight_file_callers_dispatch.log",
+      "sha256": "28a00d770c5bacdc0a178cd1ab234da0854509872175720631b21e9fb03479fe",
+      "summary": "postflight file callers dispatch: 768 complete formatter CPU/RAM fixtures and entry/mode/selection/write guards passed; file owners retain original service-stop classification"
+    },
+    "per_mode": {
+      "on": {
+        "path": "build/recomp/postflight_file_callers_dispatch_C0F56A_on.log",
+        "sha256": "6ee0799cb152bfd9ce394fa6f8954e1ed22c3130691bca032b1ed511100eb4ab",
+        "summary": "recomp: write to $C0F56A invalidates C0F56A",
+        "source_hardware_calls": 0,
+        "completed_reference_matches": null
+      },
+      "shadow": {
+        "path": "build/recomp/postflight_file_callers_dispatch_C0F56A_shadow.log",
+        "sha256": "6ee0799cb152bfd9ce394fa6f8954e1ed22c3130691bca032b1ed511100eb4ab",
+        "summary": "recomp: write to $C0F56A invalidates C0F56A",
+        "source_hardware_calls": 0,
+        "completed_reference_matches": 256
+      },
+      "sandbox": {
+        "path": "build/recomp/postflight_file_callers_dispatch_C0F56A_sandbox.log",
+        "sha256": "6ee0799cb152bfd9ce394fa6f8954e1ed22c3130691bca032b1ed511100eb4ab",
+        "summary": "recomp: write to $C0F56A invalidates C0F56A",
+        "source_hardware_calls": 0,
+        "completed_reference_matches": 256
+      }
+    }
+  },
+  "recorded_normal_c": {
+    "totals": {
+      "shadow": {
+        "calls": 9,
+        "matched": 9,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      },
+      "sandbox": {
+        "calls": 9,
+        "matched": 9,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      }
+    },
+    "per_entry_totals": {
+      "shadow": {
+        "C0F56A": {
+          "calls": 9,
+          "matched": 9,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C0EF08": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C162E4": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1631C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C16386": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      },
+      "sandbox": {
+        "C0F56A": {
+          "calls": 9,
+          "matched": 9,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C0EF08": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C162E4": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1631C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C16386": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "cold_entries": [
+      "C0EF08",
+      "C162E4",
+      "C1631C",
+      "C16386"
+    ],
+    "generic_cold_rejection": {
+      "path": "build/recomp/postflight_file_callers_whole_call.log",
+      "sha256": "a5a3e924e5d99ecc5ebf565bead6e65aab93b9694af9c7664ce66f608974de82",
+      "summary": "RuntimeError: C0EF08: no completed comparisons"
+    },
+    "reports": {
+      "whole_call_C0F56A_C0EF08_C162E4_C1631C_C16386_demo01_sandbox.json": {
+        "sha256": "2c710df754af5949816833768ae9792b01ecd6c633a9885f8123e83bae6da351",
+        "entries": {
+          "C0EF08": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C162E4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1631C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16386": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0F56A": {
+            "calls": 3,
+            "matched": 3,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0F56A_C0EF08_C162E4_C1631C_C16386_demo01_shadow.json": {
+        "sha256": "82e724efbea0dfaeeac8b12a4f875e85daf4314d4c2fea6a686e5f7093b6cbd3",
+        "entries": {
+          "C0EF08": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C162E4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1631C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16386": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0F56A": {
+            "calls": 3,
+            "matched": 3,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0F56A_C0EF08_C162E4_C1631C_C16386_qual_carrier_success_sandbox.json": {
+        "sha256": "16faf0de416702e085dd9d6bae01d0037be96419ab69266372bce60ee40e3adf",
+        "entries": {
+          "C0EF08": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C162E4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1631C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16386": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0F56A": {
+            "calls": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0F56A_C0EF08_C162E4_C1631C_C16386_qual_carrier_success_shadow.json": {
+        "sha256": "d3d9bb2d55661c51e4b1651b6ec4d74f1cd09d22f5fd808e515fbef51bb4893d",
+        "entries": {
+          "C0EF08": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C162E4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1631C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16386": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0F56A": {
+            "calls": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0F56A_C0EF08_C162E4_C1631C_C16386_qual_fail_crashes_sandbox.json": {
+        "sha256": "bcc2f2b8131fb5854c301f8465737713c31aefe88419352c8c03e5fd047c5c08",
+        "entries": {
+          "C0EF08": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C162E4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1631C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16386": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0F56A": {
+            "calls": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0F56A_C0EF08_C162E4_C1631C_C16386_qual_fail_crashes_shadow.json": {
+        "sha256": "c9324db53bf7c033284dc08bb5d146101e15aa3a0d6e823462ee0a6cd7adf76c",
+        "entries": {
+          "C0EF08": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C162E4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1631C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16386": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0F56A": {
+            "calls": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      }
+    }
+  },
+  "timing": {
+    "local_instructions": 174,
+    "local_dma_cases": 5568,
+    "independently_tested_instruction_union": 17030,
+    "independently_tested_dma_cases": 544960,
+    "fresh_combined_run_this_batch": false,
+    "last_fresh_combined_instructions": 16384,
+    "last_fresh_combined_dma_cases": 524288,
+    "reason": "The formatter reuses its proven original timing engine with exact PC ownership. Shared runtime CPU/bus/math and instruction fixtures are unchanged; all twelve older generator outputs are unchanged.",
+    "local_evidence": {
+      "path": "build/recomp/postflight_file_callers_dma.log",
+      "sha256": "4b7efaed49e28ac564c1530318d9923162e5d54b05a4dd81ed266fd9f42f6806",
+      "summary": "postflight_file_callers step oracle (DMA bus): 174 instructions, 5568 cases matched registers, SR, PC, cycles and RAM"
+    },
+    "generator_compatibility": {
+      "path": "build/recomp/postflight_file_callers_generator_compatibility.log",
+      "sha256": "c4a1cd54112668cb7eca98ec84e6dbfe5774cf76c1904c8eac0cdfbb61fed34f",
+      "summary": "postflight_messages: generator output unchanged"
+    }
+  },
+  "integration": {
+    "shadow_matches": 554063,
+    "sandbox_matches": 413303,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/postflight_file_callers_full_gate.log",
+      "sha256": "5fe104e0bcc6ad3c147df7cb731de765184bbf9b8b21a2c5e74aff18fb3a9320",
+      "summary": "533 routines, 554063 matching calls over 3 recordings (+413303 in the sandbox pass); poison: frames identical"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "sha256": "c1742768a569d3679778bba76e7b3b0da783c0aa30cd0c0c8836754f2ca3b98d",
+        "matched": 303811,
+        "mismatches": 0
+      },
+      "ports_report_qual_carrier_success.json": {
+        "sha256": "f8f7e35a6c0298204ca16f7933e7f44a793ad0e1edd2321cdaec4917fb7c5332",
+        "matched": 199191,
+        "mismatches": 0
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "sha256": "4bbf289abc622c9ab2d69014ce9a24ee3209789c5db17a8438497135f76d33c7",
+        "matched": 51061,
+        "mismatches": 0
+      },
+      "ports_report_sandbox_demo01.json": {
+        "sha256": "a63e1f2bda1325fca4090586554c1be10d8b57f121faa5851b532824016f369e",
+        "matched": 139485,
+        "mismatches": 0
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "sha256": "ad1c89a6536e2390ef028ce47b5874575c1a5975fd18c6a317872d95e8db086a",
+        "matched": 231117,
+        "mismatches": 0
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "sha256": "f0983ed069c73aff6357be53941457023f6a39daf58d4649f80656e97629e247",
+        "matched": 42701,
+        "mismatches": 0
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "live_evidence": {
+      "path": "build/recomp/postflight_file_callers_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384",
+      "summary": "demo01: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe": {
+      "path": "build/recomp/postflight_file_callers_probe.log",
+      "sha256": "8c5d4bbe3f4c5644599d4c94de59b5c680dc48f4c43140c9b9cdb91d5f3e1277",
+      "summary": "ALL: first difference frame 416, 361 pixels"
+    }
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/postflight_file_callers_gnu.log",
+      "sha256": "c1b24c597a5af2eb6a781b0e5e2d336b6c97256d1fc68f43e8c464275c7002fa",
+      "summary": "[3/3] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -o build/recomp/fa18_recomp.exe @build/recomp/fa18_recomp.exe.rsp"
+    },
+    "msvc_release": {
+      "path": "build/recomp/postflight_file_callers_msvc.log",
+      "sha256": "26a2afffebe91a76008bb6bd669350d57488399f14139d304bb7f4cbdc63da42",
+      "summary": "  fa18_recomp.vcxproj -> C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp-cmake\\Release\\fa18_recomp.exe"
+    },
+    "artifacts_gib": 0.867
+  },
+  "next_original_scope": {
+    "manifest": "analysis/data/input_device_callbacks_scope_inventory.json",
+    "sha256": "665a4171f2f2239323e4940c7dd725b2bfe9ca96923cbe3a36a450e53439f5e7",
+    "entries": [
+      "C1718E",
+      "C17456",
+      "C1748C",
+      "C174A0",
+      "C16CD8",
+      "C16B8C",
+      "C17104",
+      "C1712C"
+    ],
+    "unique_instructions": 274,
+    "shared_instructions": 0,
+    "implemented_by_inventory": false,
+    "os_service_replacement": false
+  }
+}

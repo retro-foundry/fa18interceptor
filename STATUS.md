@@ -7,10 +7,10 @@ Updated 2026-10-03.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | All 529 registered entries pass the three-recording shadow/sandbox/sealed-RAM/poison gate. Sixteen postflight-message/text owners pass 344,064 full CPU/SR/RAM cases: all 513 boundaries with controlled children, and thirteen real-completing owners / 411 boundaries with actual children. The three original service stops remain explicit. Actual dispatch passes 9,984 fixtures across those thirteen owners. Normal C matches four calls per mode; fourteen owners are cold. Original OS/file parity remains open. Archived UAE runs are historical evidence. |
+| Current proof | All 533 registered entries pass the three-recording shadow/sandbox/sealed-RAM/poison gate. Complete formatter/game-side file owners pass 57,344 full CPU/SR/RAM cases: controlled children cover all 174 PCs; real formatter proof covers all 41 PCs. Actual formatter dispatch passes 768 fixtures. Four original FC0FF0 file-service stops and their cold zero-call recording rows remain explicit; no real file/OS parity is inferred. Normal formatter C matches nine calls per mode. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 476/624 translated entries plus 53 original source-only callable entries: 529 rows. The full gate passes 554,063 shadow / 413,303 sandbox matches, zero mismatches and identical poison frames. Complete postflight-message/text domains are added; the remaining original graph still needs reconstruction. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | 343 timing entries (290 translated plus 53 source-only). Local postflight-message DMA passes 513 / 16,416. The independently tested union is 16,897 / 540,704; no fresh combined run this batch. Last fresh combined remains 16,384 / 524,288. All 36,236 isolated live frames and RAM seals match. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_postflight_messages.md`. |
+| Recreated C source | 477/624 translated entries plus 56 original source-only callable entries: 533 rows. Full gate passes 554,063 shadow / 413,303 sandbox matches, zero mismatches and identical poison frames. The formatter and game-side mode-file decisions are complete; original file services and the remaining game graph are open. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | 347 timing entries (291 translated plus 56 source-only). Local formatter/file timing passes 174 / 5,568; the formatter reuses its existing timing engine. Independently tested union: 17,030 / 544,960, with 41 shared PCs. No fresh combined run this batch; last fresh combined remains 16,384 / 524,288. All 36,236 isolated live frames and RAM seals match. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_postflight_file_callers.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -42,6 +42,8 @@ Thirteen complete postflight/reset/restart owners retain that translated count
 and extend source-only entries to forty, with 514 rows and 327 timed entries.
 Sixteen complete postflight-message/text owners raise coverage to 476/624
 plus 53 source-only entries, with 529 rows and 343 timed entries.
+The complete formatter and four game-side file callers raise coverage to
+477/624 plus 56 source-only entries, with 533 rows and 347 timed entries.
 The visible checkpoint
 also confirms a
 fade reset and completion two machine frames late. The initializer correction

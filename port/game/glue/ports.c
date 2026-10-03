@@ -7,6 +7,11 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete game-side mode-file callers; actual OS children remain. */
+    {0xC0EF08, glue_C0EF08, "check_postflight_mode_file", 0, 0, glue_C0EF08_step, 0xC0EFD2, 0, 0, glue_C0EF08_owns},
+    {0xC162E4, glue_C162E4, "refresh_postflight_mode_file", 0, 0, glue_C162E4_step, 0xC1631C, 0, 0, glue_C162E4_owns},
+    {0xC1631C, glue_C1631C, "save_postflight_mode_file", 0, 0, glue_C1631C_step, 0xC16386, 0, 0, glue_C1631C_owns},
+    {0xC16386, glue_C16386, "read_postflight_mode_file", 0, 0, glue_C16386_step, 0xC16406, 0, 0, glue_C16386_owns},
     /* Complete postflight message and text callback owners. */
     {0xC0F4D8, glue_C0F4D8, "initialise_postflight_text", 0, 0, glue_C0F4D8_step, 0xC0F56A, 0, 0, glue_C0F4D8_owns},
     {0xC0F812, glue_C0F812, "copy_postflight_text", 0, 0, glue_C0F812_step, 0xC0F920, 0, 0, glue_C0F812_owns},
@@ -272,7 +277,7 @@ const FA18Port fa18_ports[] = {
     {0xC10C08, glue_C10C08, "start_context_stage", 0, 0, glue_C10C08_step, 0xC10C68, 0, 0, glue_C10C08_owns},
     {0xC11B0E, glue_C11B0E, "clear_long_table", 0, 0, glue_C11B0E_step, 0xC11B42},
     /* batch 9: hex text, decay, nudge, random, voices, readout, mission, view pan */
-    {0xC0F56A, glue_C0F56A, "format_hex", 0, 0, glue_C0F56A_step, 0xC0F5F8},
+    {0xC0F56A, glue_C0F56A, "format_hex", 0, 0, glue_C0F56A_step, 0xC0F5F8, 0, 0, glue_C0F56A_owns},
     {0xC13A2A, glue_C13A2A, "decay_toward_zero", 120},
     {0xC13CDE, glue_C13CDE, "nudge_outside_dead_zone", 120},
     {0xC13396, glue_C13396, "five_eighths", 80},

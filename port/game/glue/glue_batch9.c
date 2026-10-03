@@ -1,4 +1,4 @@
-/* Glue for format_hex, decay/nudge helpers, five_eighths, random_bit,
+/* Glue for decay/nudge helpers, five_eighths, random_bit,
  * free_voice, update_readout, reset_mission_objects and pan_view_from_keys.
  * Several are compiled C that assign to their parameters, which rewrites the
  * caller's argument slots; the glue reproduces those writes. */
@@ -13,25 +13,6 @@
 #include "readouts.h"
 #include "text.h"
 #include "view.h"
-
-/* $C0F56A: format_hex(char *p, unsigned long value, char width). */
-int glue_C0F56A(void) {
-    gaddr args = A(7) + 4;
-    gaddr p = rd_u32(args);
-    uint32_t value = rd_u32(args + 4);
-    int8_t width = (int8_t)rd_u8(args + 11);
-    int blanks = 0;
-
-    format_hex(p, value, width);
-
-    while (blanks < width - 1 && rd_u8(p + 1 + (gaddr)blanks) == ' ') blanks++;
-    /* The digit loop moves the pointer back by `width`, when it runs. */
-    wr_u32(args, (width > 0 ? p : p + (gaddr)(int32_t)width) + 1 + (gaddr)blanks);
-    wr_u32(args + 4, width > 0 ? value >> (4 * (width < 8 ? width : 8)) : value);
-    if (width >= 8) wr_u32(args + 4, 0);
-    wr_u8(args + 11, (uint8_t)(width - 1));
-    return glue_return();
-}
 
 /* $C13A2A: decay_toward_zero(short *value, int shift); A0 = value, and
  * D1.w = the new value when |value| > 15. */

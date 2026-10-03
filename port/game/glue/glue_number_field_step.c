@@ -218,5 +218,3 @@ int glue_C24E2C_step(void) {
 int glue_C24F76_step(void) { return glue_C24E2C_step(); }
 
 int glue_C25A08_step(void) { return glue_C24E2C_step(); }
-
-int glue_C0F56A_step(void) { return glue_C24E2C_step(); }

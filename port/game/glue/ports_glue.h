@@ -13,6 +13,7 @@
 #include "glue_menu_context_finish.h"
 #include "glue_postflight_completion.h"
 #include "glue_postflight_messages.h"
+#include "glue_postflight_file_callers.h"
 int glue_C16EAE(void);
 int glue_C16BF2(void);
 int glue_C16C56(void);

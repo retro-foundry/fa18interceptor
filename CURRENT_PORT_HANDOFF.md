@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 35a94f4d); ignored gate logs may
+history (the preceding handoff is in commit 43566bf7); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -27,8 +27,9 @@ delayed-menu/outcome callbacks raised it to 471/624; fourteen complete
 menu/context return owners retain that translated count; fourteen complete
 menu/context completion owners now raise it to 474/624; thirteen complete
 postflight/reset/restart owners retain that translated count; sixteen complete
-postflight-message/text owners now raise it to 476/624.
-Fifty-three original source-only callable entries are additionally recreated,
+postflight-message/text owners raise it to 476/624; the complete formatter
+and four game-side mode-file callers now raise it to 477/624.
+Fifty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
@@ -36,6 +37,47 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
+- 477 of 624 translated entries plus fifty-six source-only callable entries
+  are registered: 533 rows and 347 source-timed entries (291 translated plus
+  fifty-six source-only). Five complete formatter/game-side file owners cover
+  174 unique / zero shared boundaries within this batch. C0EF08 and three
+  source-only callers are added. C0F56A was already registered/timed; its old
+  whole-call adapter is now complete without counting a new entry. Its 41 PCs
+  reuse the proven number-field timing engine through exact source ownership.
+  Sixteen actual child sites retain the original return PCs/stack arguments.
+  Full CPU/SR/all-RAM proof passes 57,344 complete calls, without exclusions:
+  40,960 controlled-child cases cover all five owners and all 174 boundaries;
+  16,384 real formatter cases cover all 41 formatter boundaries. Formatter
+  fixtures include width 0x80 wrapping to 0x7F, all CCR combinations and
+  output overlapping rewritten caller arguments. Actual ON/shadow/sandbox
+  formatter dispatch passes 768 fixtures and entry/mode/selection/write
+  guards; every mode covers every formatter PC and requires native ON or
+  completed reference comparisons. The four file owners retain original
+  case-0 FC0FF0 service stops: no complete real-child or real dispatch proof
+  is counted for them. File-loading/independent OS timing parity stays open;
+  production children remain actual source calls. Controlled contracts verify
+  changed handles, buffers and saved result reloads across close.
+  Normal step-disabled C matches nine formatter calls per mode, with zero
+  hardware/incomplete/mismatches. The four file owners are cold; all raw zero
+  rows and the generic C0EF08 rejection remain retained.
+  Local DMA passes 174 / 5,568. The independently tested union is 17,030 /
+  544,960, after the 41-PC overlap: 133 new PCs. No fresh combined run this
+  batch; last fresh combined remains 16,384 / 524,288. Shared runtime CPU/
+  bus/math and instruction fixtures are unchanged; all twelve preceding
+  generator outputs are unchanged. The full 533-row gate passes 554,063
+  shadow / 413,303 sandbox matches, zero mismatches, exact seals and identical
+  poison frames. All 36,236 isolated live frames/seals match source OFF;
+  group exact through frame 600, ALL still 416/361. GNU and MSVC Release
+  pass; build/ is 0.867 GiB. See
+  analysis/routines/native_c_postflight_file_callers.md and
+  analysis/figures/native_postflight_file_callers_checkpoint.json.
+  Next reconstruct eight complete game input callback/setup owners:
+  C1718E/C17456/C1748C/C174A0/C16CD8/C16B8C/C17104/C1712C,
+  274 unique / zero shared boundaries, sealed in
+  analysis/data/input_device_callbacks_scope_inventory.json. That inventory
+  implements none of them and replaces no OS service. Continue the original
+  game graph, then Stage F and only necessary Stage E. Stage D and the full
+  C port remain open; Copper fade remains deferred.
 - 476 of 624 translated entries plus fifty-three source-only callable entries
   are registered: 529 rows and 343 source-timed entries (290 translated plus
   fifty-three source-only). Sixteen complete postflight-message/text owners
