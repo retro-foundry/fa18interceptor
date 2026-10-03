@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit aaf76818); ignored gate logs may
+history (the preceding handoff is in commit 58cfe798); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -40,7 +40,8 @@ and four game-side mode-file callers raise it to 477/624; eight complete
 input-device callback/setup owners raise it to 480/624. Four gameport/text
 setup owners retain that count and extend source-only coverage to sixty-five.
 Complete main-loop timer/readout and setup-bounds owners now raise coverage
-to 481/624 and source-only coverage to sixty-six.
+to 481/624 and source-only coverage to sixty-six. Complete main-loop control
+records and message sequences now raise translated coverage to 483/624.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -49,7 +50,41 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 481 of 624 translated entries plus sixty-six original source-only callable
+- 483 of 624 translated entries plus sixty-six original source-only callable
+  entries are registered: 549 rows and 364 source-timed entries (298 translated
+  plus sixty-six source-only). Complete C1518C/C32CEE owners cover 503 unique /
+  zero shared boundaries and fifteen actual child sites. The message owner's
+  earlier tails begin at C32BD2 and retain explicit ownership/start bounds.
+  Full CPU/SR/all-RAM proof passes 49,152 complete cases without exclusions:
+  16,384 controlled-child and 32,768 real-child cases. Controlled cases cover
+  all 178/325 boundaries and compare every child-entry CPU/SR/RAM snapshot.
+  Real coverage is partial at 57/178 and 273/325; the real control fixture keeps
+  request/action children guarded off. No all-path real-service claim is made.
+  Actual ON/shadow/sandbox dispatch passes 1,536 complete fixtures and guards;
+  both real fixtures require hardware-free completed classification. Independent
+  step-disabled readable C passes 19,397 shadow / 21,815 sandbox comparisons,
+  with 153 control and 543 message shadow incompletes retained, zero hardware
+  classifications/mismatches and no sandbox incompletes. The generic checker
+  passes unchanged. Local DMA passes 503 / 16,096; the independently tested
+  union is 18,352 / 587,264 with zero new overlap. Last fresh combined remains
+  16,384 / 524,288; no fresh combined run this batch. Family-local LSR.W and
+  existing DBRA expiry keep all sixteen older generator outputs unchanged;
+  shared runtime CPU/bus/math/instruction fixtures remain unchanged.
+  GNU/MSVC Release pass. The full 549-row gate passes 555,565 shadow / 417,331
+  sandbox matches, zero mismatches, exact seals and identical poison frames.
+  All 36,236 isolated live frames/seals match; group exact through frame 600,
+  ALL remains 416/361. Build/ is 1.026 GiB. C1612C remains inactive with its
+  frozen graphics-wait integration failure explicit. See
+  analysis/routines/native_c_main_loop_control_messages.md and
+  analysis/figures/native_main_loop_control_messages_checkpoint.json.
+  Next complete six control-record/alert consumers C153FC/C15688/C159AE/
+  C15AD4/C181A0/C15138: 537 unique / zero shared boundaries, sealed in
+  analysis/data/record_control_actions_scope_inventory.json. C15138's existing
+  fixed-charge adapter needs complete CPU/SR/source timing. The inventory
+  implements none of these changes. Game-function porting remains incomplete;
+  retain the user's stopping point and defer Kickstart and standalone timing.
+- At the preceding timer/bounds checkpoint, 481 of 624 translated entries
+  plus sixty-six original source-only callable
   entries are registered: 547 rows and 362 source-timed entries (296 translated
   plus sixty-six source-only). Complete C2527C/C25312/C2548A owners cover 157
   unique / zero shared boundaries and six actual child sites. The bounds owner

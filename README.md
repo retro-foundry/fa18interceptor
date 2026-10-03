@@ -12,15 +12,20 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-481 translated game entries and sixty-six original source-only callable entries are
+483 translated game entries and sixty-six original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
+
+Complete control-record and message-sequence owners now pass 49,152 full
+CPU/SR/RAM calls and 41,212 independent readable-C recording comparisons;
+all 36,236 isolated live frames and seals match. See
+[control/message proof](analysis/routines/native_c_main_loop_control_messages.md).
 
 The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 362 registered callable entries now have source timing. The complete
+isolation; 364 registered callable entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent

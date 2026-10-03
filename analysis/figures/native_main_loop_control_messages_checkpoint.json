@@ -1,0 +1,772 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "58cfe798",
+  "activated_owners": [
+    "C1518C",
+    "C32CEE"
+  ],
+  "registered_translated_entries": 483,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 549,
+  "registered_timing_entries": 364,
+  "registered_translated_timing_entries": 298,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": "analysis/data/main_loop_control_messages_source_scope.json",
+    "path": "analysis/data/main_loop_control_messages_source_scope.json",
+    "sha256": "4b77275480b23fb87c75f3aaaedd81780c681db45cb049d04e7803bc5fbe442e",
+    "unique_instructions": 503,
+    "shared_instructions_within_batch": 0,
+    "actual_child_sites": 15,
+    "actual_original_calls": {
+      "C1518C": {
+        "pc": "C0F11E",
+        "instruction": "jsr     $c1518c.l",
+        "bytes": "4eb900c1518c"
+      },
+      "C32CEE": {
+        "pc": "C0F3BA",
+        "instruction": "jsr     $c32cee.l",
+        "bytes": "4eb900c32cee"
+      }
+    }
+  },
+  "structural": {
+    "total_completed_cases": 49152,
+    "controlled_child_cases": 16384,
+    "real_child_cases": 32768,
+    "all_registers_full_sr_all_ram": true,
+    "ram_or_register_exclusions": [],
+    "controlled_layer_covers_every_owned_boundary": true,
+    "real_layer_coverage_is_partial": true,
+    "no_real_control_sound_or_record_action_path_completion_claim": true,
+    "layers": {
+      "contract": {
+        "C1518C": {
+          "path": "build/recomp/main_loop_control_messages_contract_C1518C.log",
+          "sha256": "b463efef1ef447fc3be3719d6b4a5b91324c57c7af279a66fc3178e32f127565",
+          "cases": 8192,
+          "owned_boundaries": 178,
+          "covered_boundaries": 178,
+          "uncovered_boundaries": []
+        },
+        "C32CEE": {
+          "path": "build/recomp/main_loop_control_messages_contract_C32CEE.log",
+          "sha256": "912fc79a207ae5430cbef5a9e007f6d8b0d2146e49bf8939bc9b0e65c00c2064",
+          "cases": 8192,
+          "owned_boundaries": 325,
+          "covered_boundaries": 325,
+          "uncovered_boundaries": []
+        }
+      },
+      "real": {
+        "C1518C": {
+          "path": "build/recomp/main_loop_control_messages_real_C1518C.log",
+          "sha256": "f25dd707cfb78b67b158fd0174cd39cee2670743f98222a6467c089d0a83faa9",
+          "cases": 16384,
+          "owned_boundaries": 178,
+          "covered_boundaries": 57,
+          "uncovered_boundaries": [
+            "C1522E",
+            "C15232",
+            "C15234",
+            "C15238",
+            "C1523C",
+            "C15240",
+            "C15244",
+            "C15248",
+            "C1524A",
+            "C1524E",
+            "C15250",
+            "C15254",
+            "C1525A",
+            "C1525E",
+            "C15262",
+            "C15266",
+            "C15268",
+            "C1526C",
+            "C15270",
+            "C15274",
+            "C15278",
+            "C1527C",
+            "C1527E",
+            "C15280",
+            "C15284",
+            "C15288",
+            "C1528E",
+            "C15292",
+            "C15294",
+            "C1529A",
+            "C1529E",
+            "C152A6",
+            "C152AA",
+            "C152AE",
+            "C152B4",
+            "C152B8",
+            "C152BC",
+            "C152C2",
+            "C152C4",
+            "C152CA",
+            "C152CC",
+            "C152CE",
+            "C152D0",
+            "C152D2",
+            "C152D4",
+            "C152D6",
+            "C152DC",
+            "C152DE",
+            "C152E4",
+            "C152E6",
+            "C152E8",
+            "C152EC",
+            "C152EE",
+            "C152F2",
+            "C152F4",
+            "C152F8",
+            "C152FA",
+            "C152FC",
+            "C15302",
+            "C15304",
+            "C15308",
+            "C1530A",
+            "C1530E",
+            "C15310",
+            "C15314",
+            "C15316",
+            "C15318",
+            "C1531E",
+            "C15324",
+            "C15326",
+            "C1532C",
+            "C1532E",
+            "C15330",
+            "C15338",
+            "C1533A",
+            "C15340",
+            "C15342",
+            "C15344",
+            "C15346",
+            "C15348",
+            "C1534A",
+            "C15350",
+            "C15352",
+            "C15354",
+            "C15356",
+            "C15358",
+            "C1535A",
+            "C1535C",
+            "C15362",
+            "C15364",
+            "C15366",
+            "C15368",
+            "C1536A",
+            "C1536C",
+            "C1536E",
+            "C15374",
+            "C15376",
+            "C1537C",
+            "C1537E",
+            "C15384",
+            "C15386",
+            "C15388",
+            "C1538E",
+            "C15396",
+            "C1539A",
+            "C1539E",
+            "C153A2",
+            "C153A4",
+            "C153A6",
+            "C153AA",
+            "C153AC",
+            "C153AE",
+            "C153B2",
+            "C153B4",
+            "C153B6",
+            "C153B8",
+            "C153C8",
+            "C153CC",
+            "C153CE",
+            "C153D0",
+            "C153D2"
+          ]
+        },
+        "C32CEE": {
+          "path": "build/recomp/main_loop_control_messages_real_C32CEE.log",
+          "sha256": "2d5b9cb47fa96c8a9d684aefdd70427822989f6f2fd1eaca7b46fe0e8020d293",
+          "cases": 16384,
+          "owned_boundaries": 325,
+          "covered_boundaries": 273,
+          "uncovered_boundaries": [
+            "C32BD2",
+            "C32BD8",
+            "C32BDE",
+            "C32BE0",
+            "C32BE4",
+            "C32BE6",
+            "C32BEC",
+            "C32BF0",
+            "C32BF8",
+            "C32C00",
+            "C32C94",
+            "C32C9C",
+            "C32CB6",
+            "C32CBC",
+            "C32CC2",
+            "C32CDE",
+            "C32D34",
+            "C32D3A",
+            "C32D40",
+            "C32D54",
+            "C32D56",
+            "C32DF8",
+            "C32E00",
+            "C32EA2",
+            "C32F94",
+            "C32F9A",
+            "C32F9C",
+            "C32FA4",
+            "C32FA6",
+            "C32FAC",
+            "C32FB0",
+            "C32FB6",
+            "C32FB8",
+            "C32FBC",
+            "C32FC2",
+            "C32FC8",
+            "C32FCA",
+            "C32FCC",
+            "C33014",
+            "C3301C",
+            "C3301E",
+            "C33024",
+            "C33028",
+            "C3302A",
+            "C3302C",
+            "C3302E",
+            "C33036",
+            "C3306C",
+            "C3308C",
+            "C330C4",
+            "C330F0",
+            "C330F2"
+          ]
+        }
+      }
+    },
+    "independent_os_hardware_timing_proof": false,
+    "summary_evidence": {
+      "path": "build/recomp/main_loop_control_messages_structural.log",
+      "sha256": "d47bffcdf7b203cfc8bd21ef0da5a19f3e83d568821939227da234a49e837036"
+    }
+  },
+  "dispatch": {
+    "cases": 1536,
+    "cases_per_entry_per_mode": 256,
+    "modes": [
+      "on",
+      "shadow",
+      "sandbox"
+    ],
+    "on_requires_native_continuation": true,
+    "reference_modes_require_exact_completed_match_or_hardware_classification": true,
+    "guards": [
+      "non-call",
+      "OFF",
+      "selection",
+      "source-write invalidation"
+    ],
+    "per_mode": {
+      "on": {
+        "C1518C": {
+          "path": "build/recomp/main_loop_control_messages_dispatch_C1518C_on.log",
+          "sha256": "ce4e70b4cf484f21e75ece0f753aa0830b72ce85d04a6fc62fea5c975d598fef",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 57
+        },
+        "C32CEE": {
+          "path": "build/recomp/main_loop_control_messages_dispatch_C32CEE_on.log",
+          "sha256": "1d188237aadb358c73fb385923f6806a44f85bae153ae7e38f64e374a5244fce",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 273
+        }
+      },
+      "shadow": {
+        "C1518C": {
+          "path": "build/recomp/main_loop_control_messages_dispatch_C1518C_shadow.log",
+          "sha256": "ce4e70b4cf484f21e75ece0f753aa0830b72ce85d04a6fc62fea5c975d598fef",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 57
+        },
+        "C32CEE": {
+          "path": "build/recomp/main_loop_control_messages_dispatch_C32CEE_shadow.log",
+          "sha256": "1d188237aadb358c73fb385923f6806a44f85bae153ae7e38f64e374a5244fce",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 273
+        }
+      },
+      "sandbox": {
+        "C1518C": {
+          "path": "build/recomp/main_loop_control_messages_dispatch_C1518C_sandbox.log",
+          "sha256": "ce4e70b4cf484f21e75ece0f753aa0830b72ce85d04a6fc62fea5c975d598fef",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 57
+        },
+        "C32CEE": {
+          "path": "build/recomp/main_loop_control_messages_dispatch_C32CEE_sandbox.log",
+          "sha256": "1d188237aadb358c73fb385923f6806a44f85bae153ae7e38f64e374a5244fce",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 273
+        }
+      }
+    },
+    "evidence": {
+      "path": "build/recomp/main_loop_control_messages_dispatch.log",
+      "sha256": "c5b318f62f38523290978cbc331c9c66510dc72df5e29cd4e0387f4611ff82a6"
+    }
+  },
+  "recorded_normal_c": {
+    "totals": {
+      "shadow": {
+        "C1518C": {
+          "calls": 4083,
+          "matched": 3930,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 153
+        },
+        "C32CEE": {
+          "calls": 16010,
+          "matched": 15467,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 543
+        }
+      },
+      "sandbox": {
+        "C1518C": {
+          "calls": 5806,
+          "matched": 5806,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C32CEE": {
+          "calls": 16009,
+          "matched": 16009,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "reports": {
+      "whole_call_C1518C_C32CEE_demo01_sandbox.json": {
+        "path": "build\\recomp\\whole_call_C1518C_C32CEE_demo01_sandbox.json",
+        "sha256": "6ce6b4744768d4c090f97539a37f801af8270becc9278a4ef6aad165c0b06e2b",
+        "entries": {
+          "C1518C": {
+            "calls": 2085,
+            "matched": 2085,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C32CEE": {
+            "calls": 4891,
+            "matched": 4891,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1518C_C32CEE_demo01_shadow.json": {
+        "path": "build\\recomp\\whole_call_C1518C_C32CEE_demo01_shadow.json",
+        "sha256": "79feb44644d8644c72acb094828962d15fd2394244614336d4d2e9d38561060b",
+        "entries": {
+          "C1518C": {
+            "calls": 2085,
+            "matched": 2009,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 76
+          },
+          "C32CEE": {
+            "calls": 4891,
+            "matched": 4820,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 71
+          }
+        }
+      },
+      "whole_call_C1518C_C32CEE_qual_carrier_success_sandbox.json": {
+        "path": "build\\recomp\\whole_call_C1518C_C32CEE_qual_carrier_success_sandbox.json",
+        "sha256": "46d4700c330468b12f9146b6380e8847eaf3ad4175c3fb717dbe6a987e2a8963",
+        "entries": {
+          "C1518C": {
+            "calls": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C32CEE": {
+            "calls": 8036,
+            "matched": 8036,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1518C_C32CEE_qual_carrier_success_shadow.json": {
+        "path": "build\\recomp\\whole_call_C1518C_C32CEE_qual_carrier_success_shadow.json",
+        "sha256": "3121fc715f7c07b346df7b2e6e060f41cdcb33b3a286b23938cc49ec69a2c522",
+        "entries": {
+          "C1518C": {
+            "calls": 1647,
+            "matched": 1584,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 63
+          },
+          "C32CEE": {
+            "calls": 8037,
+            "matched": 7685,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 352
+          }
+        }
+      },
+      "whole_call_C1518C_C32CEE_qual_fail_crashes_sandbox.json": {
+        "path": "build\\recomp\\whole_call_C1518C_C32CEE_qual_fail_crashes_sandbox.json",
+        "sha256": "c8d6f1365c694c7d734dec7b4d90d8936515377934f8a61437999031da44b8fc",
+        "entries": {
+          "C1518C": {
+            "calls": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C32CEE": {
+            "calls": 3082,
+            "matched": 3082,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1518C_C32CEE_qual_fail_crashes_shadow.json": {
+        "path": "build\\recomp\\whole_call_C1518C_C32CEE_qual_fail_crashes_shadow.json",
+        "sha256": "da37e0395fec45786b667009e56a7481a4c1fefd5b4efbe3e4b021115ef3fd31",
+        "entries": {
+          "C1518C": {
+            "calls": 351,
+            "matched": 337,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 14
+          },
+          "C32CEE": {
+            "calls": 3082,
+            "matched": 2962,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 120
+          }
+        }
+      }
+    },
+    "generic_checker_passed": true,
+    "step_disabled": true,
+    "ownership_start_end_busy_tail_retained": true,
+    "evidence": {
+      "path": "build/recomp/main_loop_control_messages_whole_call.log",
+      "sha256": "93544c779963cf8998b7046b651b631a5c8a99ae39d5b11fc1cf9915ab077f65"
+    }
+  },
+  "timing": {
+    "local_instructions": 503,
+    "local_dma_cases": 16096,
+    "independently_tested_instruction_union": 18352,
+    "independently_tested_dma_cases": 587264,
+    "shared_with_previous_instruction_union": 0,
+    "fresh_combined_run_this_batch": false,
+    "last_fresh_combined_instructions": 16384,
+    "last_fresh_combined_dma_cases": 524288,
+    "shared_runtime_cpu_bus_math_instruction_fixtures_unchanged": true,
+    "older_generator_outputs_unchanged": 16,
+    "local_evidence": {
+      "path": "build/recomp/main_loop_control_messages_dma.log",
+      "sha256": "9d239fc91925f10be880accdaf03127b156f8ca6286f51ef9b512cad68b0bad9"
+    },
+    "generator_compatibility": {
+      "path": "build/recomp/main_loop_control_messages_generator_compatibility.log",
+      "sha256": "ee27c75589ff2aef2bcc7257434a6905c40e77e9c64e447bf35ba8fd830b79d4"
+    }
+  },
+  "integration": {
+    "shadow_matches": 555565,
+    "sandbox_matches": 417331,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/main_loop_control_messages_full_gate.log",
+      "sha256": "7657f0c29752d95d4ed12cbbd34c63876c10979d043d8c37d135f246266c38fb"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "path": "build\\recomp\\ports_report_demo01.json",
+        "sha256": "64ac16d406f2e9b6ebd51e9722c74abfc57a0ab7e457bac5674804f0a71b8016",
+        "matched": 304587,
+        "entries": {
+          "C1518C": {
+            "entry": "C1518C",
+            "name": "advance_main_loop_control_records",
+            "calls": 2085,
+            "compared": 2010,
+            "matched": 2010,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 75,
+            "mean_cycles": 4661,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C32CEE": {
+            "entry": "C32CEE",
+            "name": "advance_main_loop_message_sequence",
+            "calls": 2090,
+            "compared": 2087,
+            "matched": 2087,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 182,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_carrier_success.json": {
+        "path": "build\\recomp\\ports_report_qual_carrier_success.json",
+        "sha256": "82e8f7d7c2b804f7546ec9432a12946104e47883d30387267e071f253958727e",
+        "matched": 199992,
+        "entries": {
+          "C1518C": {
+            "entry": "C1518C",
+            "name": "advance_main_loop_control_records",
+            "calls": 1647,
+            "compared": 1585,
+            "matched": 1585,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 62,
+            "mean_cycles": 4661,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C32CEE": {
+            "entry": "C32CEE",
+            "name": "advance_main_loop_message_sequence",
+            "calls": 1654,
+            "compared": 1649,
+            "matched": 1649,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 5,
+            "mean_cycles": 180,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "path": "build\\recomp\\ports_report_qual_fail_crashes.json",
+        "sha256": "13f5c2b56f58069485dc4c0702adf9f81d8daea4fd1dec310493f640152176e5",
+        "matched": 50986,
+        "entries": {
+          "C1518C": {
+            "entry": "C1518C",
+            "name": "advance_main_loop_control_records",
+            "calls": 351,
+            "compared": 338,
+            "matched": 338,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 13,
+            "mean_cycles": 4507,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C32CEE": {
+            "entry": "C32CEE",
+            "name": "advance_main_loop_message_sequence",
+            "calls": 363,
+            "compared": 357,
+            "matched": 357,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 6,
+            "mean_cycles": 202,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_demo01.json": {
+        "path": "build\\recomp\\ports_report_sandbox_demo01.json",
+        "sha256": "56a97a736b00329aad261a0f76a67c38ff60cf345dc3c7fd6eeee85c8be73d06",
+        "matched": 143656,
+        "entries": {
+          "C1518C": {
+            "entry": "C1518C",
+            "name": "advance_main_loop_control_records",
+            "calls": 2071,
+            "compared": 2071,
+            "matched": 2071,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4626,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C32CEE": {
+            "entry": "C32CEE",
+            "name": "advance_main_loop_message_sequence",
+            "calls": 4893,
+            "compared": 4893,
+            "matched": 4893,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 398,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "path": "build\\recomp\\ports_report_sandbox_qual_carrier_success.json",
+        "sha256": "f75889b6bbce04b925957d8b101345d4bdbc6b4a956ea0beffa1b3a303ed2f08",
+        "matched": 231873,
+        "entries": {
+          "C1518C": {
+            "entry": "C1518C",
+            "name": "advance_main_loop_control_records",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4619,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C32CEE": {
+            "entry": "C32CEE",
+            "name": "advance_main_loop_message_sequence",
+            "calls": 8036,
+            "compared": 8036,
+            "matched": 8036,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 675,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "path": "build\\recomp\\ports_report_sandbox_qual_fail_crashes.json",
+        "sha256": "a0a143ad6d1a4403a6481f011c1591504394e9a4daa1553615622a5e197d49ef",
+        "matched": 41802,
+        "entries": {
+          "C1518C": {
+            "entry": "C1518C",
+            "name": "advance_main_loop_control_records",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4555,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C32CEE": {
+            "entry": "C32CEE",
+            "name": "advance_main_loop_message_sequence",
+            "calls": 3082,
+            "compared": 3082,
+            "matched": 3082,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1990,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "live_evidence": {
+      "path": "build/recomp/main_loop_control_messages_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe": {
+      "path": "build/recomp/main_loop_control_messages_timing.log",
+      "sha256": "58ac5bf7754c35cb0e2584cfe20e2f2168f41e7667c19a4ce5bb9822175bb831"
+    },
+    "inactive_display_parent": "C1612C"
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/main_loop_control_messages_gnu.log",
+      "sha256": "eec440594717fbc17e4bb747840a7413dbfeb5099f383db712c1da5f869cbe0b"
+    },
+    "msvc_release": {
+      "path": "build/recomp/main_loop_control_messages_msvc.log",
+      "sha256": "d2096a0d651c26e011f467dbd0f755c7c7bece28eeb379dae45844bd93cea863"
+    },
+    "artifacts_gib": 1.026
+  },
+  "next_original_scope": {
+    "manifest": "analysis/data/record_control_actions_scope_inventory.json",
+    "path": "analysis/data/record_control_actions_scope_inventory.json",
+    "sha256": "add66a518474b54571f2be1ee62c048c1ccf615b03d8f1b2c05319810ffa290a",
+    "entries": [
+      "C153FC",
+      "C15688",
+      "C159AE",
+      "C15AD4",
+      "C181A0",
+      "C15138"
+    ],
+    "unique_instructions": 537,
+    "shared_instructions": 0,
+    "implemented_by_inventory": false,
+    "os_service_replacement": false
+  }
+}

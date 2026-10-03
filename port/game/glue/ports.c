@@ -7,6 +7,9 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete main-loop control and message sequence owners. */
+    {0xC1518C, glue_C1518C, "advance_main_loop_control_records", 0, 0, glue_C1518C_step, 0xC153FC, 0, 0, glue_C1518C_owns},
+    {0xC32CEE, glue_C32CEE, "advance_main_loop_message_sequence", 0, 0, glue_C32CEE_step, 0xC330FE, 0, 0xC32BD2, glue_C32CEE_owns},
     /* Complete main-loop timer/readout and setup-bounds owners. */
     {0xC2527C, glue_C2527C, "prepare_setup_bounds", 0, 0, glue_C2527C_step, 0xC25312, 0, 0xC2527A, glue_C2527C_owns},
     {0xC25312, glue_C25312, "advance_main_loop_timers", 0, 0, glue_C25312_step, 0xC25482, 0, 0, glue_C25312_owns},

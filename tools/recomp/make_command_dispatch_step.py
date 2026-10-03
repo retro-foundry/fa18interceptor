@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup","main_loop_timers"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup","main_loop_timers","main_loop_control_messages"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -79,6 +79,9 @@ if family=="main_loop_timers":
  body["neg.w"]="renderer_negate(&D(reg),2); break;"
  body["add.l"]="width=4; if(opcode&0x100u) { value=D(destination); operation='+'; goto arithmetic; } value=cache_step_read(mode,reg,4); mode=0; reg=destination; operation='+'; goto arithmetic;"
  body["add.w"]="width=2; if(opcode&0x100u) { value=D(destination); operation='+'; goto arithmetic; } value=cache_step_read(mode,reg,2); mode=0; reg=destination; operation='+'; goto arithmetic;"
+if family=="main_loop_control_messages":
+ body["lsr.w"]="message_lsr_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
+ body["dbra"]="step_dbf(pc,&D(reg)); break;"
 missing=set(groups)-set(body)
 if missing: raise ValueError(f"unsupported owned source operations: {sorted(missing)}")
 if family=="menu_context_finish":
@@ -109,6 +112,8 @@ if family!="command_dispatch":
      '"glue_command_dispatch.h"','"glue_'+family+'.h"').replace("command_step",step_name)
 if family=="main_loop_timers":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_main_loop_timers_math.h"')
+if family=="main_loop_control_messages":
+ out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_main_loop_control_messages_math.h"')
 if family=="menu_context_finish":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_menu_context_math.h"')
 for key,pcs in groups.items():
