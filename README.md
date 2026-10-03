@@ -16,7 +16,18 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-Six complete stream/numeric/marker owners and two store upgrades pass 262,144
+Eight complete HUD display-parent upgrades pass 262,144 full CPU/PC/SR/RAM
+calls, all 595 controlled source boundaries and 6,144 bounded actual dispatch
+fixtures. Independent normal C passes all eight owners: 27,001 shadow /
+41,163 sandbox comparisons. All 36,236 isolated live frames and RAM seals
+match. Frozen-clock original-child fixtures retain explicit no-draw limits;
+active drawing is checked independently on the recordings. Combined DMA
+passes 23,942 boundaries / 766,144 cases; source-timed entries rise to 426.
+See [HUD parent proof](analysis/routines/native_c_hud_parents.md).
+The next thirteen readout, cue and status parents have 606 unique / 70 shared
+sealed boundaries. Original game-function and callback coverage remains open.
+
+The preceding six complete stream/numeric/marker owners and two store upgrades pass 262,144
 whole CPU/PC/SR/RAM calls, ordered Custom writes and terminal hardware state.
 Both proof kinds cover all 100 source boundaries. All 36,236 isolated live
 frames and RAM seals match; five recorded owners pass 9,146 shadow / 9,278
@@ -24,7 +35,7 @@ sandbox independent normal-C comparisons. Three cold owners retain strict
 recording rejections. Original marker fixtures keep their bounded vertical
 offsets and zero/one-plane limits explicit. Combined DMA passes 23,347
 boundaries / 747,104 cases. See [stream proof](analysis/routines/native_c_hud_stream.md).
-The next eight display parents have 595 unique / 63 shared sealed boundaries.
+Their eight display parents are now complete as described above.
 Game-function porting remains incomplete; stop when only Kickstart services
 and timing remain, after reconciling cold and indirect owners.
 

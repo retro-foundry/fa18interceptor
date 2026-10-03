@@ -589,8 +589,8 @@ const FA18Port fa18_ports[] = {
     /* batch 59: cockpit readouts */
     {0xC2F5C0, glue_C2F5C0, "plot_pixel_in_view", 0, 0, glue_C2F5C0_step, 0xC2FA78, 0, 0xC2F5C0},
     {0xC2F5D4, glue_C2F5D4, "plot_pixel", 0, 0, glue_C2F5D4_step, 0xC2FA78, 0, 0xC2F5C0},
-    {0xC31A64, glue_C31A64, "draw_scale_readout", 900},
-    {0xC31ACC, glue_C31ACC, "draw_zoom_readout", 1100},
+    {0xC31A64, glue_C31A64, "draw_record_class_digits", 0, 0, glue_C31A64_complete_step, 0xC32806, 1, 0, glue_C31A64_owns},
+    {0xC31ACC, glue_C31ACC, "draw_record_scale_digits", 0, 0, glue_C31ACC_complete_step, 0xC32806, 1, 0xC31ACA, glue_C31ACC_owns},
     {0xC31F4C, glue_C31F4C, "draw_speed_readout", 1000},
     {0xC3201A, glue_C3201A, "draw_altitude_readout", 1000},
     {0xC3212A, glue_C3212A, "draw_record_72_readout", 900},
@@ -607,17 +607,17 @@ const FA18Port fa18_ports[] = {
     {0xC2F64E, glue_C2F64E, "plot_square", 0, 0, glue_C2F64E_step, 0xC2FA78, 0, 0xC2F5C0},
     {0xC2F63A, glue_C2F63A, "plot_square_in_view", 0, 0, glue_C2F63A_step, 0xC2FA78, 0, 0xC2F5C0},
     {0xC328A8, glue_C328A8, "draw_weapon_status", 1500},
-    {0xC3112A, glue_C3112A, "draw_threat_lights", 3000},
+    {0xC3112A, glue_C3112A, "draw_bit_selected_points", 0, 0, glue_C3112A_complete_step, 0xC31224, 1, 0xC31128, glue_C3112A_owns},
     /* batch 60: cockpit bars and panel image */
     {0xC30CC4, glue_C30CC4, "fill_bar_words", 900},
-    {0xC30B5C, glue_C30B5C, "draw_indicator_bars", 2500},
-    {0xC30D34, glue_C30D34, "draw_mode_bar", 2500},
+    {0xC30B5C, glue_C30B5C, "draw_status_stream_display", 0, 0, glue_C30B5C_complete_step, 0xC30D22, 1, 0, glue_C30B5C_owns},
+    {0xC30D34, glue_C30D34, "draw_record_stream_display", 0, 0, glue_C30D34_complete_step, 0xC30EAA, 1, 0xC30D32, glue_C30D34_owns},
     {0xC30EAA, glue_C30EAA, "blit_image", 3000},
-    {0xC309B6, glue_C309B6, "draw_panel_image", 3000},
+    {0xC309B6, glue_C309B6, "draw_table_stream_display", 0, 0, glue_C309B6_complete_step, 0xC309E2, 1, 0, glue_C309B6_owns},
     /* batch 60b: compass tape */
-    {0xC30F78, glue_C30F78, "draw_compass_tape", 3000},
+    {0xC30F78, glue_C30F78, "draw_cached_stream_display", 0, 0, glue_C30F78_complete_step, 0xC310AA, 1, 0xC30F76, glue_C30F78_owns},
     /* batch 60c: panel frame */
-    {0xC30764, glue_C30764, "draw_panel_frame", 4000},
+    {0xC30764, glue_C30764, "draw_counter_stream_display", 0, 0, glue_C30764_complete_step, 0xC308D8, 1, 0xC30762, glue_C30764_owns},
     /* batch 61: HUD marks */
     {0xC34146, glue_C34146, "draw_hud_marks", 6000},
     {0xC34066, glue_C34066, "draw_tick_row", 3000},

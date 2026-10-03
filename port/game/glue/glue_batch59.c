@@ -65,46 +65,6 @@ static void two_tails(const TwoLines *t, gaddr end, int digits, int keep_zeros, 
 
 /* ---- small text ---------------------------------------------------------- */
 
-int glue_C31A64(void) {
-    SmallTextProbe p;
-    SmallText line;
-
-    if ((int8_t)rd_u8(SCALE_REDRAWS) <= 0) return glue_return();
-    line = small_text_line(3, TEXT_LINE, 0xC3198Cu, 0x1CD2, 0x12, 4, DRAW, 1);
-    small_text_probe(&p, &line);
-    draw_scale_readout();
-    small_tail(&p, TEXT_LINE + 3, 3, 0, 1);
-    return glue_return();
-}
-
-int glue_C31ACC(void) {
-    SmallTextProbe p;
-    SmallText line;
-    int16_t zoom = rd_s16(ZOOM_SCALE);
-    uint16_t mode = DRAW;
-    int32_t shown;
-
-    if ((int8_t)rd_u8(DISPLAY_UPDATE) <= 0) return glue_return();
-    if (zoom == 0x80) {
-        shown = 10;
-    } else {
-        shown = zoom == 0x40 ? 20 : 40;
-        if (rd_u8(ZOOM_READOUT_FLAGS) & 1) mode = CLEAR;
-    }
-    line = small_text_line(2, TEXT_LINE, 0xC31A1Cu, 0x1CDE, 0x1E, 4, mode, 1);
-    small_text_probe(&p, &line);
-    draw_zoom_readout();
-    D(0) = (uint32_t)shown;
-    SET_W(D(0), 0xF6);
-    SET_W(D(1), 0xBC);
-    plot_in_view_registers();
-    D(0) = (uint32_t)shown; /* MOVEM.W back: sign-extended */
-    D(5) = 4;
-    D(6) = mode;
-    small_tail(&p, TEXT_LINE + 2, 2, 0, 1);
-    return glue_return();
-}
-
 int glue_C31F4C(void) {
     gaddr record = viewed_record(), chars = TEXT_LINE + 5;
     int16_t speed = 0;
@@ -418,28 +378,5 @@ int glue_C328A8(void) {
     if (kind) SET_W(D(0), left);
     plain_entry(&bottom, 1);
     small_text_registers(&pb);
-    return glue_return();
-}
-
-int glue_C3112A(void) {
-    uint8_t events = rd_u8(THREAT_EVENTS);
-    int32_t across = (int32_t)0x125 + rd_s16(SPAN_ORIGIN_Y);
-    uint16_t down = (uint16_t)(0x9C + rd_u16(REDRAW_STATE_WORD));
-    gaddr record = viewed_record();
-
-    draw_threat_lights();
-    SET_W(D(2), events & 4 ? 1 : 3);
-    SET_W(D(0), 0x125);
-    SET_W(D(1), 0x9C);
-    if (across < 0 || (int16_t)across >= 0x13F) {
-        square_in_view_registers();
-        return glue_return();
-    }
-    /* Each square's registers replace the last's: only the last stand. */
-    A(0) = record;
-    SET_W(D(2), (rd_u8(record + 0x20) & 4) && (rd_u8(DISPLAY_FORCE) & 2) ? 1 : 3);
-    SET_W(D(0), (uint16_t)(across + 12));
-    SET_W(D(1), (uint16_t)(down + 3));
-    square_registers();
     return glue_return();
 }
