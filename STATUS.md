@@ -2,6 +2,11 @@
 
 Updated 2026-10-03.
 
+The active goal now stops after original game-function porting is complete and
+only Kickstart services and timing parity remain. Cold and indirect game owners
+must be reconciled before that stopping point. Do not continue into service
+replacement or standalone timing fixes after game-function porting is complete.
+
 ## Summary
 
 | Area | State |

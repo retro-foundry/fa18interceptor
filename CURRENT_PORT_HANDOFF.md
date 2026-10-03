@@ -1,15 +1,23 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit c72a1a48); ignored gate logs may
+history (the preceding handoff is in commit 2e869f4d); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
 ## Objective and order
 
 Recreate readable C for the whole game, proven against the original source and
-sealed native recordings. Work in related batches. The order is Stage D game C,
-Stage F native backend, then only the Stage E Kickstart services still needed.
+sealed native recordings. Work in related batches. The current stopping point
+is complete original game-function porting: stop when the only remaining work
+is Kickstart services and timing parity. This user instruction supersedes the
+earlier open-ended full-port objective. Reconcile
+the complete original call/callback graph, including cold and indirect owners,
+before declaring game-function porting complete. The seeded 624-entry count
+alone is not a completion criterion. Keep remaining service and timing debt
+explicit in the final handoff; do not continue into Kickstart replacement or
+standalone timing work after game-function porting is complete. Any remaining
+game implementation or behavior gap prevents claiming this stopping point.
 The user explicitly deferred OS work and asked for larger routine batches.
 After the C279D0 batch, the latest instruction is to return to game timing
 parity. Selector, placement, post-input, context-refresh and bootstrap milestones
@@ -79,7 +87,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   owners: C16D4C/C16FF4/C17066/C1787A/C1612C, 388 unique / zero shared
   boundaries, sealed in analysis/data/input_display_setup_scope_inventory.json.
   This inventory implements none of them and replaces no OS service.
-  Continue the original game graph, then Stage F and only necessary Stage E.
+  Continue the original game graph to the stopping point stated above.
   Stage D and the full C port remain open; Copper fade remains deferred.
 - 477 of 624 translated entries plus fifty-six source-only callable entries
   are registered: 533 rows and 347 source-timed entries (291 translated plus
@@ -1135,9 +1143,10 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    proof. Preserve all required comparisons and incomplete/cold classifications.
    Keep Ninja's shared objects, size caps, cleanup traps and disjoint recording
    parallelism; never relink executables still used by active checks.
-5. Finish all game source before the plain-C native backend, then reassess
-   only the remaining Kickstart services. Stage D -> F -> E remains the
-   full objective. Fresh OFF/ON comparisons test our replacements on the
+5. Finish all original game functions, then stop when only Kickstart services
+   and timing issues remain, as the user now requested. Do not proceed into
+   service replacement or standalone timing fixes merely to satisfy the
+   earlier full-port objective. Fresh OFF/ON comparisons test replacements on the
    same machine model; an independent UAE/Amiga timing check is a distinct
    proof and must not be inferred from them.
    Reconcile the complete original callback/call graph before declaring

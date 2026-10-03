@@ -66,7 +66,9 @@ is proven against.
 | F | Native backend: plain C memory, direct drawing and audio | not started |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
 
-The work order is D, then F, then only the necessary parts of E.
+The project work order is D, then F, then only the necessary parts of E.
+The current user-directed run stops after game-function porting is complete,
+with Kickstart/service and timing work recorded separately in the handoff.
 
 ## Recreating game-source batches (stage D)
 
