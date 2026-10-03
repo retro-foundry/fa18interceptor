@@ -23,11 +23,14 @@ def main():
     group_names += ("scene_bootstrap",)
     group_names += ("record_update_stage",)
     group_names += ("selector_origin", "update_sequence", "input_events", "command_dispatch")
+    group_names += ("postflight_scheduler",)
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "postflight_scheduler": ["C09E06","C09E98","C09EC4","C0A002","C0A12E","C0A15C",
+                                 "C0A1E0","C0A2F0","C0A334","C0A364","C0A3EA"],
         "command_dispatch": ["C1AC28", "C1AD74"],
         "input_events": ["C16EAE", "C16BF2", "C16C56", "C13D34"],
         "update_sequence": ["C0EFD4", "C0F3C4", "C0D730"],

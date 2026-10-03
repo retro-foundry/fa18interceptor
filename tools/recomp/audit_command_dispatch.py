@@ -14,7 +14,7 @@ MANIFEST=ROOT/"analysis/data/command_dispatch_source_scope.json"
 STATE=ROOT/"captures/native/demo01/state.bin"
 ENTRIES=("C1AC28", "C1AD74")
 
-def audit():
+def audit(entries=ENTRIES):
     state=STATE.read_bytes()
     regions=[]
     offset=0
@@ -30,7 +30,7 @@ def audit():
     decoder=Decoder((ROOT/"build/recomp/dasm_helper.dll").resolve(),regions)
     rows={}
     owners={}
-    for entry in ENTRIES:
+    for entry in entries:
         pending=[int(entry,16)]
         visited=set()
         calls=[]
@@ -63,15 +63,15 @@ def audit():
         owners[entry]={"instruction_count":len(visited),"additional_cold_instructions":0,
                        "source_pcs":[f"{pc:06X}" for pc in sorted(visited)],
                        "child_call_sites":sorted(calls,key=lambda row:row["pc"])}
-    first=set(owners[ENTRIES[0]]["source_pcs"])
-    second=set(owners[ENTRIES[1]]["source_pcs"])
+    sets=[set(owner["source_pcs"]) for owner in owners.values()]
+    shared=sum(sum(pc in pcs for pcs in sets)>1 for pc in set.union(*sets))
     packed=b"".join(int(row["pc"],16).to_bytes(4,"big")+bytes.fromhex(row["bytes"])
                     for pc,row in sorted(rows.items()))
     return {"state":"captures/native/demo01/state.bin",
             "state_sha256":hashlib.sha256(state).hexdigest(),
             "scope":"static owner flow: follow jumps, stop at returns; calls are child boundaries",
             "owners":owners,"unique_instruction_count":len(rows),
-            "shared_instruction_count":len(first&second),
+            "shared_instruction_count":shared,
             "owned_pc_and_source_bytes_sha256":hashlib.sha256(packed).hexdigest(),
             "instructions":[rows[pc] for pc in sorted(rows)]}
 

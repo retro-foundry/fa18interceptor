@@ -7,10 +7,10 @@ Updated 2026-10-03.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 444 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete command-dispatch owners each pass 8,192 real-child CPU/RAM cases and 8,192 separate child-contract cases; 190,464 component cases cover remaining cold actions. The component/real-owner union covers all 1,104 source boundaries without exclusions. Independent readable-C replay matches 798 shadow / 891 sandbox calls with timing disabled. Hardware/incomplete classifications remain explicit. Archived UAE runs are historical evidence. |
+| Current proof | The 454 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete postflight scheduler adapters pass 180,224 full-register/full-SR/all-RAM cases, covering every owned boundary without exclusions. Active dispatch/mode-nine readable-C replay matches 6,005 shadow / 6,005 sandbox calls with timing disabled; nine peers are cold and independently proven structurally. Generic zero-comparison rejections are retained. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 444 registered game entries; 555,784 matching shadow / 413,307 sandbox calls over three native recordings, zero mismatches, poison identical. Latest owners: C1AC28 pending-command and C1AD74 keyboard dispatch, including shared actions and reset/error exits. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | There are 235 timing-step entries. Local command-dispatch timing passes 1,104 instructions / 35,328 DMA cases; fresh combined timing passes 14,240 / 455,680 with sealed reset per fixture. The isolated pair matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_command_dispatch.md`. |
+| Recreated C source | 454 registered game entries; 554,025 matching shadow / 413,303 sandbox calls over three native recordings, zero mismatches, poison identical. Latest complete family: C09E06 postflight mode dispatch, eight mode handlers and two helpers, retaining the shared completion/readiness tails. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | There are 246 timing-step entries. Local scheduler timing passes 359 instructions / 11,488 DMA cases; fresh combined timing passes 14,599 / 467,168 with sealed reset per fixture. The isolated family matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_postflight_scheduler.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -25,7 +25,8 @@ and follow-up placement parent, then C0F5F8 and the context/bootstrap batch,
 raise coverage to 432 entries; C22C80/C1C63E raised it to 434, and complete
 C29042 raised it to 435; update/input/display owners raised it to 438, and
 four complete input-event owners raised it to 442; complete command dispatch
-owners now raise it to 444. The visible checkpoint
+owners raised it to 444; the complete postflight scheduler family now raises
+it to 454. The visible checkpoint
 also confirms a
 fade reset and completion two machine frames late. The initializer correction
 removes the frame it introduced; the inherited frame remains. A 17-entry HUD
@@ -93,6 +94,10 @@ The complete C1AC28/C1AD74 command owners now pass independent readable-C,
 full CPU/RAM and source-timing checks, including cold actions and reset/error
 exits. See `analysis/routines/native_c_command_dispatch.md` and
 `analysis/figures/native_command_dispatch_checkpoint.json`.
+The complete postflight scheduler family, including its shared tails and
+cold mode paths, now passes independent readable-C CPU/RAM, DMA timing and
+live integration gates. See `analysis/routines/native_c_postflight_scheduler.md`
+and `analysis/figures/native_postflight_scheduler_checkpoint.json`.
 Next audit remaining complete command/context peers and postflight owners;
 C0F090/C0F132 remain internal labels.
 

@@ -124,19 +124,6 @@ int glue_C119D4(void) {
     return glue_return();
 }
 
-int glue_C0A2F0(void) {
-    gaddr player = CONTROL_RECORDS;
-    if (!rd_u8(PLAYER_PHASE)) {
-        A(1) = player;
-        if (rd_u8(player + 1) & 0x40) {
-            SET_W(D(0), rd_u16(player + 2) & 0xC080);
-            if ((uint16_t)D(0) == 0xC080 && !rd_u16(player + 0x6E) && rd_u8(SEQUENCE_PHASE) != 3) D(0) = 0;
-        }
-    }
-    begin_phase_three();
-    return glue_return();
-}
-
 /* ---- throttle and stick: D1 the byte stored, D2 the field value -------- */
 
 static int throttle_glue(uint8_t value, int release) {

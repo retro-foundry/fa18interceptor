@@ -258,6 +258,12 @@
 #define PLAYER_LIMIT       0xC45B42u /* word: reset to $7FFF */
 #define PLAYER_READY       0xC457D8u /* byte: set to 1 */
 #define PLAYER_PHASE       0xC45798u /* byte: set to 4 when nonzero */
+/* Complete postflight scheduler, C09E06-C0A42A. These are source roles;
+ * SCHEDULE_TARGET aliases the mode-dependent MISSION_COUNTER word. */
+#define SCHEDULE_STATUS     0xC458CDu /* byte: bit 6 enables C09E06 mode dispatch */
+#define SCHEDULE_BLOCKED    0xC45790u /* byte: active recorder blocks dispatch */
+#define SCHEDULE_TARGET     0xC458C2u /* signed word: record offset in mode 6 */
+#define SCHEDULE_SAVED_VIEW 0xC457BEu /* byte: saved VIEW_SIDE, bit 7 marks it taken */
 
 /* ---- view octant ($C254E8; earlier port: angle_octant) ---------------------- */
 #define VIEW_OCTANT        0xC45854u /* byte: 0-7, 45-degree sector of the view angle */

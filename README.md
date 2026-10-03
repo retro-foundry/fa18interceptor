@@ -12,14 +12,14 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-444 game entries are registered. Three sealed native recordings cover the
+454 game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
 The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 235 registered entries now have source timing. The complete
+isolation; 246 registered entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent
@@ -65,8 +65,16 @@ matches 798 shadow / 891 sandbox calls. The full registered gate passes
 555,784 shadow / 413,307 sandbox comparisons, all seals and poison exact.
 The isolated pair matches all 36,236 live frames; build/ is 0.472 GiB.
 See [command-dispatch proof](analysis/routines/native_c_command_dispatch.md).
-Next audit remaining complete command/context publisher peers and the
-postflight-mode scheduler family.
+The complete postflight scheduler family now raises coverage to 454/624.
+Its eleven adapters pass 180,224 full-register/full-SR/all-RAM cases covering
+every owned boundary. Nine entries are cold in recordings; their structural
+proof stays distinct from the active dispatch/mode-nine replay comparisons.
+All 36,236 isolated live frames and seals match. The full registered gate
+passes 554,025 shadow / 413,303 sandbox comparisons with poison identical;
+the fresh combined DMA oracle passes 14,599 instructions / 467,168 cases.
+See [scheduler proof](analysis/routines/native_c_postflight_scheduler.md).
+Next audit complete C1B7A6/C1BEE8/C1C214 command/context publishers and
+the remaining postflight callback owners.
 The frame-416 comparison
 confirmed a fade starting and finishing two frames late. Source timing for
 the scene initializer has removed one delayed frame; one remains inherited

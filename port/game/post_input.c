@@ -1,5 +1,6 @@
 /* Post-input stage sequence (STAGE_CALLBACK chain). */
 #include "post_input.h"
+#include "postflight_scheduler.h"
 
 #include "audio.h"
 #include "stages.h"
@@ -157,16 +158,7 @@ void restart_after_countdown(void) {
 }
 
 void begin_phase_three(void) {
-    gaddr player = CONTROL_RECORDS;
-    if (rd_u8(PLAYER_PHASE)) return;
-    if (!(rd_u8(player + 1) & 0x40)) return;
-    if ((rd_u16(player + 2) & 0xC080) != 0xC080 || rd_u16(player + 0x6E)) return;
-    if (rd_u8(SEQUENCE_PHASE) == 3) return;
-    wr_u8(PLAYER_PHASE, 0xFF);
-    wr_u16(PHASE_WORD, 0);
-    wr_u8(SEQUENCE_PHASE, 3);
-    wr_u8(SEQUENCE_STEP, 4);
-    wr_u8(CONTEXT_GATE, 1);
+    schedule_postflight(POSTFLIGHT_MODE_NINE,0,0,NULL);
 }
 
 void raise_event_after_countdown(void) {

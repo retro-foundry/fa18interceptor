@@ -17,24 +17,29 @@ are complete at 432/624; the complete record-update and enclosing update-stage
 parents raised coverage to 434/624; the complete C29042 selector-origin owner
 raised it to 435/624; complete update/input/display owners raised it to 438/624;
 four complete input-event owners raised it to 442/624; complete C1AC28/C1AD74
-command dispatch owners now raise it to 444/624.
+command dispatch owners raised it to 444/624; the complete postflight mode
+scheduler family now raises it to 454/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 444 of 624 translated game entries are registered in port/game/glue/ports.c.
-  The latest full gate for that registered set matched 555,784 completed shadow
-  calls and 413,307 sandbox calls across three native recordings, with zero
+- 454 of 624 translated game entries are registered in port/game/glue/ports.c.
+  The latest full gate for that registered set matched 554,025 completed shadow
+  calls and 413,303 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 444-entry baseline. GNU and
-  MSVC builds pass. There are 235 source-timed entries; the fresh combined
-  DMA oracle passes 14,240 instructions / 455,680 cases. The command pair
-  matches all 36,236 isolated live frames and RAM seals; build/ is 0.472 GiB.
-  See analysis/routines/native_c_command_dispatch.md and
-  analysis/figures/native_command_dispatch_checkpoint.json.
+  build/recomp/ports_report_*.json describe this 454-entry baseline. GNU and
+  MSVC builds pass. There are 246 source-timed entries; the fresh combined
+  DMA oracle passes 14,599 instructions / 467,168 cases. The eleven-entry
+  scheduler group matches all 36,236 isolated live frames and RAM seals;
+  build/ is 0.485 GiB. Its 180,224 full CPU/RAM cases cover every owned boundary
+  without exclusions, including nine cold entries. Active dispatcher and
+  mode-nine independent C matches 6,005 shadow / 6,005 sandbox comparisons;
+  generic zero-comparison rejections stay retained. See
+  analysis/routines/native_c_postflight_scheduler.md and
+  analysis/figures/native_postflight_scheduler_checkpoint.json.
   In addition to active planes and the earlier audio batch,
   24 registered glyph, input, page, notification, command/audio, buffer,
   polygon, face, postflight and followup entries now use source-timed steps.
@@ -624,6 +629,37 @@ complete command/context publisher peers and the postflight-mode scheduler
 family, preserving true child owners and explicitly proving cold peers.
 C0F090/C0F132 remain internal labels, not additional functions.
 
+The complete postflight mode scheduler family is now registered at
+**454/624, 246 timed entries**. New owners are C09E06/C09E98/C09EC4/C0A002/
+C0A12E/C0A15C/C0A1E0/C0A334/C0A364/C0A3EA; existing C0A2F0 now shares the
+domain and has full source timing. C0A3A6/C0A3C6 shared tails are part of
+their complete owners, not extra functions. The sealed source audit covers
+359 unique instructions, 16 shared, with no omitted static paths.
+
+All eleven normal CPU adapters pass 16,384 real-child original-byte cases
+each (180,224 total), matching all registers/high words, PC, full SR and all
+RAM including stack, without exclusions. Every owned boundary is exercised;
+the pair/target fixtures explicitly cover their restore and near/far paths.
+C0A364 preserves the event word high byte at completion. Long differences
+preserve SUB/BGE overflow semantics, and the saved view is C458B2, not C457A7.
+The older mode-nine API delegates to the same native domain.
+
+Independent normal recorded C passes 4,086 shadow / 4,086 sandbox dispatcher
+calls and 1,919 / 1,919 separate mode-nine calls, no hardware/incomplete or
+mismatching classifications. The nine other entries have zero calls with
+the dispatcher restored to source; generic whole-call checks reject their
+zero-comparison groups and retain both rejection logs. Their complete
+structural CPU/RAM proof supplies cold-entry evidence; live replay is only
+nonregression for them. No caller masks or generic proof gates were weakened.
+Local timing passes 359 / 11,488 DMA cases; fresh combined timing passes
+14,599 / 467,168. All 36,236 isolated frames and seals match. The full gate
+passes 554,025 shadow / 413,303 sandbox comparisons, all seals and poison
+exact. GNU/MSVC pass; build/ is 0.485 GiB. ALL stays 416/361. See
+analysis/routines/native_c_postflight_scheduler.md and
+analysis/figures/native_postflight_scheduler_checkpoint.json. Do not redo
+this family. Audit complete C1B7A6/C1BEE8/C1C214 command/context peers next;
+C1B9CC is their shared internal publisher, not a separate translated entry.
+
 Deferred Copper fade, by user instruction on 2026-10-02: the minor visible
 difference may be ignored for current work and revisited later. Source/ALL
 reset writes are machine frames 393/394 and terminal writes 436/437; each
@@ -664,11 +700,13 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    pair C1CB14/C1CB26, follow-up parent C1CCBC/workspace helper C1D0A4,
    post-input parent C0F5F8, context/bootstrap/callback batch and C22C80/C1C63E
    parents, complete C29042 active origin, update/input/display owners and
-   the complete input-event and command-dispatch batches are registered at 444/624.
+   the complete input-event and command-dispatch batches and postflight mode
+   scheduler family are registered at 454/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
    or count internal labels as extra routines. Audit remaining complete
-   command/context publisher peers and the postflight-mode scheduler family next;
+   command/context publisher peers C1B7A6/C1BEE8/C1C214 and the remaining
+   postflight callback owners next;
    the leaf tool excludes indirect calls. Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.

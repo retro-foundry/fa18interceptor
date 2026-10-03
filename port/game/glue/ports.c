@@ -7,6 +7,17 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete postflight mode scheduler and source-owned shared tails. */
+    {0xC09E06, glue_C09E06, "dispatch_postflight_mode", 0, 0, glue_C09E06_step, 0xC09E96, 0, 0, glue_C09E06_owns},
+    {0xC09E98, glue_C09E98, "schedule_postflight_mode_three", 0, 0, glue_C09E98_step, 0xC0A3EA, 0, 0xC09E96, glue_C09E98_owns},
+    {0xC09EC4, glue_C09EC4, "schedule_postflight_mode_four", 0, 0, glue_C09EC4_step, 0xC0A3EA, 0, 0xC09EC2, glue_C09EC4_owns},
+    {0xC0A002, glue_C0A002, "schedule_postflight_mode_five", 0, 0, glue_C0A002_step, 0xC0A3EA, 0, 0, glue_C0A002_owns},
+    {0xC0A12E, glue_C0A12E, "restore_postflight_record_parameters", 0, 0, glue_C0A12E_step, 0xC0A15A, 0, 0, glue_C0A12E_owns},
+    {0xC0A15C, glue_C0A15C, "schedule_postflight_mode_six", 0, 0, glue_C0A15C_step, 0xC0A3EA, 0, 0xC0A15A, glue_C0A15C_owns},
+    {0xC0A1E0, glue_C0A1E0, "schedule_postflight_mode_seven", 0, 0, glue_C0A1E0_step, 0xC0A3EA, 0, 0xC0A1DE, glue_C0A1E0_owns},
+    {0xC0A334, glue_C0A334, "schedule_postflight_mode_125", 0, 0, glue_C0A334_step, 0xC0A3C6, 0, 0xC0A332, glue_C0A334_owns},
+    {0xC0A364, glue_C0A364, "schedule_other_postflight_modes", 0, 0, glue_C0A364_step, 0xC0A3EA, 0, 0xC0A362, glue_C0A364_owns},
+    {0xC0A3EA, glue_C0A3EA, "check_postflight_player_ready", 0, 0, glue_C0A3EA_step, 0xC0A42C, 0, 0, glue_C0A3EA_owns},
     {0xC1AC28, glue_C1AC28, "dispatch_pending_command", 0, 0, glue_C1AC28_step, 0xC1C2BE, 0, 0xC1AC18, glue_C1AC28_owns},
     {0xC1AD74, glue_C1AD74, "dispatch_keyboard_command", 0, 0, glue_C1AD74_step, 0xC1C2BE, 0, 0xC06BF0, glue_C1AD74_owns},
     {0xC16EAE, glue_C16EAE, "consume_external_input_event", 0, 0, glue_C16EAE_step, 0xC16F1C, 2},
@@ -355,7 +366,7 @@ const FA18Port fa18_ports[] = {
     {0xC118E6, glue_C118E6, "end_on_message", 60},
     {0xC11958, glue_C11958, "follow_message_or_phase", 150},
     {0xC119D4, glue_C119D4, "restart_after_countdown", 200},
-    {0xC0A2F0, glue_C0A2F0, "begin_phase_three", 150},
+    {0xC0A2F0, glue_C0A2F0, "begin_phase_three", 0, 0, glue_C0A2F0_step, 0xC0A3C6, 0, 0xC0A2EE, glue_C0A2F0_owns},
     {0xC1B4D0, glue_C1B4D0, "set_throttle_input", 60},
     {0xC1B4D4, glue_C1B4D4, "set_throttle_input", 60},
     {0xC1B4D8, glue_C1B4D8, "release_throttle_keys", 70},

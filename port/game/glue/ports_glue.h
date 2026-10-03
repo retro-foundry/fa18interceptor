@@ -2,6 +2,7 @@
 #define FA18_PORTS_GLUE_H
 #include <stdint.h>
 #include "glue_command_dispatch.h"
+#include "glue_postflight_scheduler.h"
 int glue_C16EAE(void);
 int glue_C16BF2(void);
 int glue_C16C56(void);
