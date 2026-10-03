@@ -185,6 +185,7 @@
 #define MENU_FILE_NAME      0xC08028u /* original filename passed to DOS Open */
 #define MENU_TRANSITION_FLAG 0xC45857u /* byte set/cleared by alternate menu callbacks */
 #define MENU_OUTCOME_CASE_TABLE 0xC10828u /* four original long keys followed by branch instructions */
+#define MENU_RETURN_WORD    0xC4FDA2u /* word cleared by C10362's non-125 return path */
 #define STORES_REDRAWS    0xC45843u /* byte: stores mark draw count ($C30A00) */
 #define CONTROL_ACCUMULATOR_Y         0xC45778u /* word: cleared by $C1B602 */
 #define CONTROL_ACCUMULATOR_COMPANION 0xC4577Cu /* word: cleared by $C1B602 */

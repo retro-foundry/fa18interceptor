@@ -3,6 +3,7 @@
 #include "postflight_scheduler.h"
 #include "menu_followup.h"
 #include "menu_outcome.h"
+#include "menu_return.h"
 
 #include "audio.h"
 #include "stages.h"
@@ -66,42 +67,19 @@ void mark_viewport_ready(void) {
 }
 
 void choose_after_countdown(void) {
-    if (!countdown_expired()) return;
-    if (!rd_u8(SEQUENCE_FLAG)) {
-        wr_u8(POST_INPUT_AUX, 0);
-        wr_u16(MESSAGE_QUEUE, 0x49);
-        next_stage(ROUTINE_LEAVE_ON_KEY);
-    } else {
-        wr_u8(POST_INPUT_AUX, 1);
-        reset_message_sequence();
-        next_stage(ROUTINE_AFTER_POST_INPUT);
-    }
+    choose_menu_exit_after_countdown(NULL);
 }
 
 void leave_on_key_or_message(void) {
-    if ((int8_t)rd_u8(MESSAGE_STATE_C) >= 0 && !rd_u8(KEY_TAKEN)) return;
-    wr_u8(POST_INPUT_AUX, 1);
-    reset_message_sequence();
-    next_stage(ROUTINE_AFTER_POST_INPUT);
+    leave_menu_on_key_or_message(NULL);
 }
 
 void reset_viewport_after_countdown(void) {
-    if (!countdown_expired()) return;
-    wr_u8(POST_INPUT_AUX, 0);
-    wr_u8(VIEWPORT_TARGET, 0x0F);
-    wr_u8(VIEWPORT_MODE, 0);
-    next_stage(ROUTINE_ENTER_MODE_FOUR);
+    reset_menu_viewport_after_countdown(NULL);
 }
 
 void enter_mode_four_when_ready(void) {
-    if (rd_u8(VIEWPORT_MODE) != rd_u8(VIEWPORT_TARGET)) return;
-    wr_u16(POST_INPUT_COUNTDOWN, 2);
-    wr_u8(POST_INPUT_AUX, 1);
-    wr_u8(UPDATE_MASK, 0xFF);
-    wr_u8(CONTEXT_STATE, 4);
-    wr_u8(CONTEXT_GATE, 1);
-    wr_u16(POST_INPUT_COUNTDOWN, 5);
-    next_stage(ROUTINE_MODE_FOUR);
+    enter_menu_mode_four(NULL);
 }
 
 void queue_message_four(void) {

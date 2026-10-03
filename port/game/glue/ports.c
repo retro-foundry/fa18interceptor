@@ -7,6 +7,17 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete menu/context return owners, including source-only callbacks. */
+    {0xC1064C, glue_C1064C, "finish_menu_context_three", 0, 0, glue_C1064C_step, 0xC10678, 0, 0, glue_C1064C_owns},
+    {0xC108FE, glue_C108FE, "return_only_menu_callback", 0, 0, glue_C108FE_step, 0xC10900, 0, 0, glue_C108FE_owns},
+    {0xC10900, glue_C10900, "follow_menu_return_message", 0, 0, glue_C10900_step, 0xC10942, 0, 0, glue_C10900_owns},
+    {0xC10970, glue_C10970, "follow_menu_return_context", 0, 0, glue_C10970_step, 0xC109AC, 0, 0, glue_C10970_owns},
+    {0xC102D8, glue_C102D8, "begin_menu_context_ready", 0, 0, glue_C102D8_step, 0xC10302, 0, 0, glue_C102D8_owns},
+    {0xC10942, glue_C10942, "start_menu_smoothing", 0, 0, glue_C10942_step, 0xC10970, 0, 0, glue_C10942_owns},
+    {0xC109AC, glue_C109AC, "complete_menu_return_after_countdown", 0, 0, glue_C109AC_step, 0xC10A24, 0, 0, glue_C109AC_owns},
+    {0xC10302, glue_C10302, "select_menu_return_message", 0, 0, glue_C10302_step, 0xC10362, 0, 0, glue_C10302_owns},
+    {0xC10BAE, glue_C10BAE, "cancel_menu_return", 0, 0, glue_C10BAE_step, 0xC10C08, 0, 0, glue_C10BAE_owns},
+    {0xC10362, glue_C10362, "leave_menu_return_on_key", 0, 0, glue_C10362_step, 0xC103E4, 0, 0, glue_C10362_owns},
     /* Complete delayed-menu/outcome owners and immediate continuations. */
     {0xC104C2, glue_C104C2, "select_delayed_menu_message", 0, 0, glue_C104C2_step, 0xC105A6, 0, 0, glue_C104C2_owns},
     {0xC105F4, glue_C105F4, "pause_menu_after_countdown", 0, 0, glue_C105F4_step, 0xC10626, 0, 0, glue_C105F4_owns},
@@ -400,10 +411,10 @@ const FA18Port fa18_ports[] = {
     /* batch 47: post-input stages, stick and throttle, flight recorder */
     {0xC0F946, glue_C0F946, "await_viewport_then_ready", 120},
     {0xC0F974, glue_C0F974, "mark_viewport_ready", 80},
-    {0xC0FB70, glue_C0FB70, "choose_after_countdown", 250},
-    {0xC0FBB6, glue_C0FBB6, "leave_on_key_or_message", 250},
-    {0xC101FC, glue_C101FC, "reset_viewport_after_countdown", 100},
-    {0xC10228, glue_C10228, "enter_mode_four_when_ready", 150},
+    {0xC0FB70, glue_C0FB70, "choose_after_countdown", 0, 0, glue_C0FB70_step, 0xC0FBB6, 0, 0, glue_C0FB70_owns},
+    {0xC0FBB6, glue_C0FBB6, "leave_on_key_or_message", 0, 0, glue_C0FBB6_step, 0xC0FBE0, 0, 0, glue_C0FBB6_owns},
+    {0xC101FC, glue_C101FC, "reset_viewport_after_countdown", 0, 0, glue_C101FC_step, 0xC10228, 0, 0, glue_C101FC_owns},
+    {0xC10228, glue_C10228, "enter_mode_four_when_ready", 0, 0, glue_C10228_step, 0xC10272, 0, 0, glue_C10228_owns},
     {0xC1072E, glue_C1072E, "queue_message_four", 0, 0, glue_C1072E_step, 0xC1075A, 0, 0, glue_C1072E_owns},
     {0xC1075A, glue_C1075A, "start_outcome_countdown", 0, 0, glue_C1075A_step, 0xC1078A, 0, 0, glue_C1075A_owns},
     {0xC11872, glue_C11872, "expire_to_fire_state", 120},

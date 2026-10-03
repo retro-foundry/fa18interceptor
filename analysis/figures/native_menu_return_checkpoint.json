@@ -1,0 +1,1363 @@
+{
+  "date": "2026-10-03",
+  "entries": [
+    "C1064C",
+    "C108FE",
+    "C10900",
+    "C10970",
+    "C102D8",
+    "C0FB70",
+    "C0FBB6",
+    "C101FC",
+    "C10228",
+    "C10942",
+    "C109AC",
+    "C10302",
+    "C10BAE",
+    "C10362"
+  ],
+  "entries_added_in_seeded_translation": [],
+  "entries_added_outside_seeded_translation": [
+    "C1064C",
+    "C108FE",
+    "C10900",
+    "C10970",
+    "C102D8",
+    "C10942",
+    "C109AC",
+    "C10302",
+    "C10BAE",
+    "C10362"
+  ],
+  "existing_adapters_completed": [
+    "C0FB70",
+    "C0FBB6",
+    "C101FC",
+    "C10228"
+  ],
+  "registered_translated_entries": 471,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 29,
+  "registered_total_entries": 500,
+  "registered_timing_entries": 300,
+  "source": {
+    "manifest": "analysis/data/menu_return_source_scope.json",
+    "sha256": "7214562139046e7151c60fbae0cf545134b0dbae39300869ce3d016cf2efe01b",
+    "unique_instructions": 207,
+    "shared_instructions_within_batch": 0,
+    "shared_with_previous_instruction_union": 0,
+    "independent_entry_evidence": {
+      "C1064C": [
+        "C10640: lea     ($a,PC), A0; ($c1064c)"
+      ],
+      "C108FE": [
+        "C108F2: lea     ($a,PC), A0; ($c108fe)"
+      ],
+      "C10900": [
+        "C107B2: lea     ($14c,PC), A0; ($c10900)"
+      ],
+      "C10970": [
+        "C10848: lea     ($126,PC), A0; ($c10970)",
+        "C10964: lea     ($a,PC), A0; ($c10970)"
+      ],
+      "C102D8": [
+        "C10856: lea     (-$580,PC), A0; ($c102d8)",
+        "C10862: lea     (-$58c,PC), A0; ($c102d8)"
+      ],
+      "C10942": [
+        "C10936: lea     ($a,PC), A0; ($c10942)"
+      ],
+      "C109AC": [
+        "C109A0: lea     ($a,PC), A0; ($c109ac)"
+      ],
+      "C10302": [
+        "C102F6: lea     ($a,PC), A0; ($c10302)"
+      ],
+      "C10BAE": [
+        "C1090A: bsr     $c10bae",
+        "C1094C: bsr     $c10bae",
+        "C1097A: bsr     $c10bae",
+        "C109B6: bsr     $c10bae"
+      ],
+      "C10362": [
+        "C10316: bsr     $c10362",
+        "C10354: lea     ($c,PC), A0; ($c10362)"
+      ]
+    },
+    "return_only_callback": "C108DA installs C108FE; the latter has exactly one original RTS instruction, reproduced by glue_return."
+  },
+  "structural": {
+    "total_cases": 344064,
+    "real_child_cases": 229376,
+    "controlled_child_cases": 114688,
+    "all_registers_full_sr_all_ram": true,
+    "ram_or_register_exclusions": [],
+    "both_layers_cover_every_owned_boundary": true,
+    "layers": {
+      "real": {
+        "C1064C": {
+          "path": "build/recomp/menu_return_real_C1064C.log",
+          "sha256": "e5be7d6c0f54600364a1fc527d05a51a214e6d5851fcf7332c7d0e015820c04f",
+          "summary": "menu-return oracle C1064C: 16384 complete calls matched all registers, PC, full SR and all RAM; 10 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 10,
+          "covered_owned_boundaries": 10,
+          "uncovered_owned_boundaries": []
+        },
+        "C108FE": {
+          "path": "build/recomp/menu_return_real_C108FE.log",
+          "sha256": "ca331ddae2e3a7e4af7c4d2a4d3bf2613a57dd4fc14e734d8c17e94bb39a95bd",
+          "summary": "menu-return oracle C108FE: 16384 complete calls matched all registers, PC, full SR and all RAM; 1 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 1,
+          "covered_owned_boundaries": 1,
+          "uncovered_owned_boundaries": []
+        },
+        "C10900": {
+          "path": "build/recomp/menu_return_real_C10900.log",
+          "sha256": "cbdfc49438f4f13844311e2b9a9501411dfb15c6efc972b01509112351974af6",
+          "summary": "menu-return oracle C10900: 16384 complete calls matched all registers, PC, full SR and all RAM; 33 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 15,
+          "covered_owned_boundaries": 15,
+          "uncovered_owned_boundaries": []
+        },
+        "C10970": {
+          "path": "build/recomp/menu_return_real_C10970.log",
+          "sha256": "a18bbc5734c9e3749982583005bdb02a8487cb4ef28a470347c098781d17d516",
+          "summary": "menu-return oracle C10970: 16384 complete calls matched all registers, PC, full SR and all RAM; 33 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 15,
+          "covered_owned_boundaries": 15,
+          "uncovered_owned_boundaries": []
+        },
+        "C102D8": {
+          "path": "build/recomp/menu_return_real_C102D8.log",
+          "sha256": "46b0d4113fb9f918902525eaba970a55363f10cd761144807cb38e17eafdf710",
+          "summary": "menu-return oracle C102D8: 16384 complete calls matched all registers, PC, full SR and all RAM; 8 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 8,
+          "covered_owned_boundaries": 8,
+          "uncovered_owned_boundaries": []
+        },
+        "C0FB70": {
+          "path": "build/recomp/menu_return_real_C0FB70.log",
+          "sha256": "7efb694935592dc586b136384e28cb2cf74bab41b5f6604297b54457557787bd",
+          "summary": "menu-return oracle C0FB70: 16384 complete calls matched all registers, PC, full SR and all RAM; 16 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 16,
+          "covered_owned_boundaries": 16,
+          "uncovered_owned_boundaries": []
+        },
+        "C0FBB6": {
+          "path": "build/recomp/menu_return_real_C0FBB6.log",
+          "sha256": "0334665a9a026e6a5b3c4aa2e86319d4c6b2793f730bad2a3a2687aa2f87f94e",
+          "summary": "menu-return oracle C0FBB6: 16384 complete calls matched all registers, PC, full SR and all RAM; 10 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 10,
+          "covered_owned_boundaries": 10,
+          "uncovered_owned_boundaries": []
+        },
+        "C101FC": {
+          "path": "build/recomp/menu_return_real_C101FC.log",
+          "sha256": "523684adbe8b23af7aaf0530534fb2b98372c32b6f187add511e1b160de0b9cf",
+          "summary": "menu-return oracle C101FC: 16384 complete calls matched all registers, PC, full SR and all RAM; 10 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 10,
+          "covered_owned_boundaries": 10,
+          "uncovered_owned_boundaries": []
+        },
+        "C10228": {
+          "path": "build/recomp/menu_return_real_C10228.log",
+          "sha256": "4629fd86f02050dc12480df1b8917f774e1cb05c2d8502060e687cf85b98619e",
+          "summary": "menu-return oracle C10228: 16384 complete calls matched all registers, PC, full SR and all RAM; 14 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 14,
+          "covered_owned_boundaries": 14,
+          "uncovered_owned_boundaries": []
+        },
+        "C10942": {
+          "path": "build/recomp/menu_return_real_C10942.log",
+          "sha256": "ac372f796d027779b307791395c1760757dc310c5b60967d9c7dd72809acf76a",
+          "summary": "menu-return oracle C10942: 16384 complete calls matched all registers, PC, full SR and all RAM; 30 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 12,
+          "covered_owned_boundaries": 12,
+          "uncovered_owned_boundaries": []
+        },
+        "C109AC": {
+          "path": "build/recomp/menu_return_real_C109AC.log",
+          "sha256": "a1b87d53cac002b6e768aeb07b10e872c6fb108a6265f1f047ca0eb4eb6437de",
+          "summary": "menu-return oracle C109AC: 16384 complete calls matched all registers, PC, full SR and all RAM; 45 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 27,
+          "covered_owned_boundaries": 27,
+          "uncovered_owned_boundaries": []
+        },
+        "C10302": {
+          "path": "build/recomp/menu_return_real_C10302.log",
+          "sha256": "781e7336f2696a3479430b97228f1c0a34934eb510103e6df784f491286fb3f4",
+          "summary": "menu-return oracle C10302: 16384 complete calls matched all registers, PC, full SR and all RAM; 51 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 25,
+          "covered_owned_boundaries": 25,
+          "uncovered_owned_boundaries": []
+        },
+        "C10BAE": {
+          "path": "build/recomp/menu_return_real_C10BAE.log",
+          "sha256": "88ad2d93f178e2f6e955001292a36cd190de44ffbeb9ef71c75a2afe547e6f8a",
+          "summary": "menu-return oracle C10BAE: 16384 complete calls matched all registers, PC, full SR and all RAM; 18 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 18,
+          "covered_owned_boundaries": 18,
+          "uncovered_owned_boundaries": []
+        },
+        "C10362": {
+          "path": "build/recomp/menu_return_real_C10362.log",
+          "sha256": "cbc630f61f5a519cf1b1900e3dbeafa34c65a1eeef9716926ac29fa8f0c82d65",
+          "summary": "menu-return oracle C10362: 16384 complete calls matched all registers, PC, full SR and all RAM; 26 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 26,
+          "covered_owned_boundaries": 26,
+          "uncovered_owned_boundaries": []
+        }
+      },
+      "contract": {
+        "C1064C": {
+          "path": "build/recomp/menu_return_contract_C1064C.log",
+          "sha256": "7c6dd3fca6a3b61095c78d868b50fd67d13d5ed69474d6406b67561f5173ed6f",
+          "summary": "menu-return oracle C1064C: 8192 complete calls matched all registers, PC, full SR and all RAM; 10 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 10,
+          "covered_owned_boundaries": 10,
+          "uncovered_owned_boundaries": []
+        },
+        "C108FE": {
+          "path": "build/recomp/menu_return_contract_C108FE.log",
+          "sha256": "7da8b8b7db77629b4608deb7e2ba6b28adb7c7a10e286eee804f0fdd2404ac18",
+          "summary": "menu-return oracle C108FE: 8192 complete calls matched all registers, PC, full SR and all RAM; 1 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 1,
+          "covered_owned_boundaries": 1,
+          "uncovered_owned_boundaries": []
+        },
+        "C10900": {
+          "path": "build/recomp/menu_return_contract_C10900.log",
+          "sha256": "f9421b7894d9fc9b79cf8e26c97b08e0c75e74520ba2032c263f3ab24059d8af",
+          "summary": "menu-return oracle C10900: 8192 complete calls matched all registers, PC, full SR and all RAM; 15 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 15,
+          "covered_owned_boundaries": 15,
+          "uncovered_owned_boundaries": []
+        },
+        "C10970": {
+          "path": "build/recomp/menu_return_contract_C10970.log",
+          "sha256": "5cef69da5de1acbed8175f2faf35b14dd3f6967c436f90c3d7fd2e96b90adc1e",
+          "summary": "menu-return oracle C10970: 8192 complete calls matched all registers, PC, full SR and all RAM; 15 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 15,
+          "covered_owned_boundaries": 15,
+          "uncovered_owned_boundaries": []
+        },
+        "C102D8": {
+          "path": "build/recomp/menu_return_contract_C102D8.log",
+          "sha256": "f521615f814518b7cbc5b9c3c3d933b26424967f27d563b7f9c172c86ba8bbcd",
+          "summary": "menu-return oracle C102D8: 8192 complete calls matched all registers, PC, full SR and all RAM; 8 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 8,
+          "covered_owned_boundaries": 8,
+          "uncovered_owned_boundaries": []
+        },
+        "C0FB70": {
+          "path": "build/recomp/menu_return_contract_C0FB70.log",
+          "sha256": "7e9d4d387b50c2e6cdfc9925ac3bb66f66a41478a40e576eb1cb8e337fab7e18",
+          "summary": "menu-return oracle C0FB70: 8192 complete calls matched all registers, PC, full SR and all RAM; 16 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 16,
+          "covered_owned_boundaries": 16,
+          "uncovered_owned_boundaries": []
+        },
+        "C0FBB6": {
+          "path": "build/recomp/menu_return_contract_C0FBB6.log",
+          "sha256": "be5c51a158a7899a80bf4b586618460374b9a5d690e289eb14ba2a9c334a8c36",
+          "summary": "menu-return oracle C0FBB6: 8192 complete calls matched all registers, PC, full SR and all RAM; 10 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 10,
+          "covered_owned_boundaries": 10,
+          "uncovered_owned_boundaries": []
+        },
+        "C101FC": {
+          "path": "build/recomp/menu_return_contract_C101FC.log",
+          "sha256": "b67f0dc7e3e3bd488535b0170ab10e534b8283ab8084c67a5efb91f455cfe724",
+          "summary": "menu-return oracle C101FC: 8192 complete calls matched all registers, PC, full SR and all RAM; 10 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 10,
+          "covered_owned_boundaries": 10,
+          "uncovered_owned_boundaries": []
+        },
+        "C10228": {
+          "path": "build/recomp/menu_return_contract_C10228.log",
+          "sha256": "9ea2901eb93e6cb130286d3589fa68467134434815eb5b5291a8558ad5e104c8",
+          "summary": "menu-return oracle C10228: 8192 complete calls matched all registers, PC, full SR and all RAM; 14 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 14,
+          "covered_owned_boundaries": 14,
+          "uncovered_owned_boundaries": []
+        },
+        "C10942": {
+          "path": "build/recomp/menu_return_contract_C10942.log",
+          "sha256": "e13a60173c85258fce526be659845d373b628748859e7cba4d00a5593d8305b2",
+          "summary": "menu-return oracle C10942: 8192 complete calls matched all registers, PC, full SR and all RAM; 12 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 12,
+          "covered_owned_boundaries": 12,
+          "uncovered_owned_boundaries": []
+        },
+        "C109AC": {
+          "path": "build/recomp/menu_return_contract_C109AC.log",
+          "sha256": "b7aa85594118c2b4a5b944561dc0a4345c90b8719d3785f971f96e1f6c9a29ae",
+          "summary": "menu-return oracle C109AC: 8192 complete calls matched all registers, PC, full SR and all RAM; 27 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 27,
+          "covered_owned_boundaries": 27,
+          "uncovered_owned_boundaries": []
+        },
+        "C10302": {
+          "path": "build/recomp/menu_return_contract_C10302.log",
+          "sha256": "23be83f9f43cb45590c327ee85ceffa4ce434122c3cf72cf75b15a0778d7abc6",
+          "summary": "menu-return oracle C10302: 8192 complete calls matched all registers, PC, full SR and all RAM; 25 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 25,
+          "covered_owned_boundaries": 25,
+          "uncovered_owned_boundaries": []
+        },
+        "C10BAE": {
+          "path": "build/recomp/menu_return_contract_C10BAE.log",
+          "sha256": "41066b2bc8729f2bc1be07928d0fdb1bab0e080f3e9b1a73aa804d06ab33d3ee",
+          "summary": "menu-return oracle C10BAE: 8192 complete calls matched all registers, PC, full SR and all RAM; 18 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 18,
+          "covered_owned_boundaries": 18,
+          "uncovered_owned_boundaries": []
+        },
+        "C10362": {
+          "path": "build/recomp/menu_return_contract_C10362.log",
+          "sha256": "1d4328261ab1b2f87d9d501a7f7118471fe2ade7aa075a663f9ca735d3904c55",
+          "summary": "menu-return oracle C10362: 8192 complete calls matched all registers, PC, full SR and all RAM; 26 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 26,
+          "covered_owned_boundaries": 26,
+          "uncovered_owned_boundaries": []
+        }
+      }
+    }
+  },
+  "dispatch": {
+    "cases": 10752,
+    "cases_per_entry_per_mode": 256,
+    "modes": [
+      "on",
+      "shadow",
+      "sandbox"
+    ],
+    "full_cpu_sr_ram": true,
+    "ram_or_register_exclusions": [],
+    "every_mode_covers_every_owned_boundary": true,
+    "on_requires_native_continuation": true,
+    "reference_modes_require_completed_match": true,
+    "guards": [
+      "non-call entry",
+      "OFF mode",
+      "ports-only selection",
+      "source write invalidates entry dispatch"
+    ],
+    "evidence": {
+      "path": "build/recomp/menu_return_dispatch.log",
+      "sha256": "4b6c9d2cc8db998f4c5f7f2d4ac41300ca28cfe8084844062c1e09a16edfe1b4",
+      "summary": "menu return dispatch: 10752 complete CPU/RAM fixtures and entry/mode/selection/write guards passed"
+    },
+    "per_mode": {
+      "on": {
+        "C1064C": {
+          "path": "build/recomp/menu_return_dispatch_C1064C_on.log",
+          "sha256": "05d0f39183cfbedd8500c6fd587f7daeb041fc991640943447cf818dc51efa4a",
+          "summary": "visited: C1064C C10652 C10654 C10656 C10658 C1065E C10664 C1066C C10670 C10676"
+        },
+        "C108FE": {
+          "path": "build/recomp/menu_return_dispatch_C108FE_on.log",
+          "sha256": "d18ad7e3d42ec307d47530c0474db62f15b7c77331865413c7d96f0521192d4c",
+          "summary": "visited: C108FE"
+        },
+        "C10900": {
+          "path": "build/recomp/menu_return_dispatch_C10900_on.log",
+          "sha256": "f4e1efe6e40d4bd10314e395c8cafb00cd1649f37ea78a60d580b2a1cdda757a",
+          "summary": "visited: C10900 C10906 C10908 C1090A C1090E C10910 C10916 C10918 C1091A C10922 C10926 C1092E C10936 C1093A C10940 C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10970": {
+          "path": "build/recomp/menu_return_dispatch_C10970_on.log",
+          "sha256": "d3671556450a1a51e38530301eb9a64b3662bf80b9fc5930a8c0f3efda54cf58",
+          "summary": "visited: C10970 C10976 C10978 C1097A C1097E C10980 C10986 C10988 C1098A C1098C C10992 C10998 C109A0 C109A4 C109AA C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C102D8": {
+          "path": "build/recomp/menu_return_dispatch_C102D8_on.log",
+          "sha256": "cecd14e468796f11f3982c8a1ac24b0a8de40575dd3d01e81c8dc776ced37b75",
+          "summary": "visited: C102D8 C102DA C102E0 C102E8 C102EE C102F6 C102FA C10300"
+        },
+        "C0FB70": {
+          "path": "build/recomp/menu_return_dispatch_C0FB70_on.log",
+          "sha256": "dfa7308bb7b1fba68233df7b46c2cc4b2a7ed97ee56bb0e6b3898758a9e530bb",
+          "summary": "recomp: write to $C0FB70 invalidates C0FB70"
+        },
+        "C0FBB6": {
+          "path": "build/recomp/menu_return_dispatch_C0FBB6_on.log",
+          "sha256": "0eb055d3e1c95f842ee1ab0778efb5e35e0e576f2b1d2cca3cb7af317b3a68fe",
+          "summary": "recomp: write to $C0FBB6 invalidates C0FBB6"
+        },
+        "C101FC": {
+          "path": "build/recomp/menu_return_dispatch_C101FC_on.log",
+          "sha256": "a1b3e28fe00d8b890b3c8d1db6b0e8498b095ebfeb1d2bc45cb2a96c0741a061",
+          "summary": "recomp: write to $C101FC invalidates C101FC"
+        },
+        "C10228": {
+          "path": "build/recomp/menu_return_dispatch_C10228_on.log",
+          "sha256": "418b2a4928212d97e424741066fd3f6ba83831fbacd0d99952bfe2d5c4bb00b6",
+          "summary": "recomp: write to $C10228 invalidates C10228"
+        },
+        "C10942": {
+          "path": "build/recomp/menu_return_dispatch_C10942_on.log",
+          "sha256": "439505c06e2e5ec28f88d6ce3c4d2a8af2cc8b4ae00f5976b8f88a81bbc5e4e6",
+          "summary": "visited: C10942 C10948 C1094A C1094C C10950 C10952 C10958 C1095A C1095C C10964 C10968 C1096E C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C109AC": {
+          "path": "build/recomp/menu_return_dispatch_C109AC_on.log",
+          "sha256": "9226260640951e0361f8f76da63fc215f73aefada2b8890c3a413e2a01979c75",
+          "summary": "visited: C109AC C109B2 C109B4 C109B6 C109BA C109BC C109C2 C109C4 C109C6 C109CC C109D2 C109D6 C109D8 C109E0 C109E6 C109E8 C109EA C109F0 C109F2 C109FA C10A02 C10A0A C10A0C C10A12 C10A18 C10A1C C10A22 C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10302": {
+          "path": "build/recomp/menu_return_dispatch_C10302_on.log",
+          "sha256": "afed6ed5530f2028687fd8c4f02d7425d28cb952b3dbc628fd79d13a5f7fa920",
+          "summary": "visited: C10302 C10306 C1030E C10314 C10316 C10318 C1031A C10320 C10322 C10324 C1032A C10330 C10332 C10334 C10338 C1033C C10340 C10342 C10346 C1034A C1034E C10354 C10358 C1035E C10360 C10362 C10368 C1036A C1036C C10372 C10374 C1037C C10384 C10388 C1038A C10390 C10396 C1039C C103A2 C103A6 C103A8 C103B0 C103B4 C103BA C103BC C103C4 C103CA C103D0 C103D8 C103DC C103E2"
+        },
+        "C10BAE": {
+          "path": "build/recomp/menu_return_dispatch_C10BAE_on.log",
+          "sha256": "d83e84c1328dd371f8cc5fcb0e96f59f80bbd6b55b634e895066fc90650bd6bd",
+          "summary": "visited: C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10362": {
+          "path": "build/recomp/menu_return_dispatch_C10362_on.log",
+          "sha256": "bd7f51d7356dddbb52bb80624a95e3c1e728e759af4a61aec8dfcc1b35c53966",
+          "summary": "visited: C10362 C10368 C1036A C1036C C10372 C10374 C1037C C10384 C10388 C1038A C10390 C10396 C1039C C103A2 C103A6 C103A8 C103B0 C103B4 C103BA C103BC C103C4 C103CA C103D0 C103D8 C103DC C103E2"
+        }
+      },
+      "shadow": {
+        "C1064C": {
+          "path": "build/recomp/menu_return_dispatch_C1064C_shadow.log",
+          "sha256": "05d0f39183cfbedd8500c6fd587f7daeb041fc991640943447cf818dc51efa4a",
+          "summary": "visited: C1064C C10652 C10654 C10656 C10658 C1065E C10664 C1066C C10670 C10676"
+        },
+        "C108FE": {
+          "path": "build/recomp/menu_return_dispatch_C108FE_shadow.log",
+          "sha256": "d18ad7e3d42ec307d47530c0474db62f15b7c77331865413c7d96f0521192d4c",
+          "summary": "visited: C108FE"
+        },
+        "C10900": {
+          "path": "build/recomp/menu_return_dispatch_C10900_shadow.log",
+          "sha256": "f4e1efe6e40d4bd10314e395c8cafb00cd1649f37ea78a60d580b2a1cdda757a",
+          "summary": "visited: C10900 C10906 C10908 C1090A C1090E C10910 C10916 C10918 C1091A C10922 C10926 C1092E C10936 C1093A C10940 C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10970": {
+          "path": "build/recomp/menu_return_dispatch_C10970_shadow.log",
+          "sha256": "d3671556450a1a51e38530301eb9a64b3662bf80b9fc5930a8c0f3efda54cf58",
+          "summary": "visited: C10970 C10976 C10978 C1097A C1097E C10980 C10986 C10988 C1098A C1098C C10992 C10998 C109A0 C109A4 C109AA C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C102D8": {
+          "path": "build/recomp/menu_return_dispatch_C102D8_shadow.log",
+          "sha256": "cecd14e468796f11f3982c8a1ac24b0a8de40575dd3d01e81c8dc776ced37b75",
+          "summary": "visited: C102D8 C102DA C102E0 C102E8 C102EE C102F6 C102FA C10300"
+        },
+        "C0FB70": {
+          "path": "build/recomp/menu_return_dispatch_C0FB70_shadow.log",
+          "sha256": "dfa7308bb7b1fba68233df7b46c2cc4b2a7ed97ee56bb0e6b3898758a9e530bb",
+          "summary": "recomp: write to $C0FB70 invalidates C0FB70"
+        },
+        "C0FBB6": {
+          "path": "build/recomp/menu_return_dispatch_C0FBB6_shadow.log",
+          "sha256": "0eb055d3e1c95f842ee1ab0778efb5e35e0e576f2b1d2cca3cb7af317b3a68fe",
+          "summary": "recomp: write to $C0FBB6 invalidates C0FBB6"
+        },
+        "C101FC": {
+          "path": "build/recomp/menu_return_dispatch_C101FC_shadow.log",
+          "sha256": "a1b3e28fe00d8b890b3c8d1db6b0e8498b095ebfeb1d2bc45cb2a96c0741a061",
+          "summary": "recomp: write to $C101FC invalidates C101FC"
+        },
+        "C10228": {
+          "path": "build/recomp/menu_return_dispatch_C10228_shadow.log",
+          "sha256": "418b2a4928212d97e424741066fd3f6ba83831fbacd0d99952bfe2d5c4bb00b6",
+          "summary": "recomp: write to $C10228 invalidates C10228"
+        },
+        "C10942": {
+          "path": "build/recomp/menu_return_dispatch_C10942_shadow.log",
+          "sha256": "439505c06e2e5ec28f88d6ce3c4d2a8af2cc8b4ae00f5976b8f88a81bbc5e4e6",
+          "summary": "visited: C10942 C10948 C1094A C1094C C10950 C10952 C10958 C1095A C1095C C10964 C10968 C1096E C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C109AC": {
+          "path": "build/recomp/menu_return_dispatch_C109AC_shadow.log",
+          "sha256": "9226260640951e0361f8f76da63fc215f73aefada2b8890c3a413e2a01979c75",
+          "summary": "visited: C109AC C109B2 C109B4 C109B6 C109BA C109BC C109C2 C109C4 C109C6 C109CC C109D2 C109D6 C109D8 C109E0 C109E6 C109E8 C109EA C109F0 C109F2 C109FA C10A02 C10A0A C10A0C C10A12 C10A18 C10A1C C10A22 C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10302": {
+          "path": "build/recomp/menu_return_dispatch_C10302_shadow.log",
+          "sha256": "afed6ed5530f2028687fd8c4f02d7425d28cb952b3dbc628fd79d13a5f7fa920",
+          "summary": "visited: C10302 C10306 C1030E C10314 C10316 C10318 C1031A C10320 C10322 C10324 C1032A C10330 C10332 C10334 C10338 C1033C C10340 C10342 C10346 C1034A C1034E C10354 C10358 C1035E C10360 C10362 C10368 C1036A C1036C C10372 C10374 C1037C C10384 C10388 C1038A C10390 C10396 C1039C C103A2 C103A6 C103A8 C103B0 C103B4 C103BA C103BC C103C4 C103CA C103D0 C103D8 C103DC C103E2"
+        },
+        "C10BAE": {
+          "path": "build/recomp/menu_return_dispatch_C10BAE_shadow.log",
+          "sha256": "d83e84c1328dd371f8cc5fcb0e96f59f80bbd6b55b634e895066fc90650bd6bd",
+          "summary": "visited: C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10362": {
+          "path": "build/recomp/menu_return_dispatch_C10362_shadow.log",
+          "sha256": "bd7f51d7356dddbb52bb80624a95e3c1e728e759af4a61aec8dfcc1b35c53966",
+          "summary": "visited: C10362 C10368 C1036A C1036C C10372 C10374 C1037C C10384 C10388 C1038A C10390 C10396 C1039C C103A2 C103A6 C103A8 C103B0 C103B4 C103BA C103BC C103C4 C103CA C103D0 C103D8 C103DC C103E2"
+        }
+      },
+      "sandbox": {
+        "C1064C": {
+          "path": "build/recomp/menu_return_dispatch_C1064C_sandbox.log",
+          "sha256": "05d0f39183cfbedd8500c6fd587f7daeb041fc991640943447cf818dc51efa4a",
+          "summary": "visited: C1064C C10652 C10654 C10656 C10658 C1065E C10664 C1066C C10670 C10676"
+        },
+        "C108FE": {
+          "path": "build/recomp/menu_return_dispatch_C108FE_sandbox.log",
+          "sha256": "d18ad7e3d42ec307d47530c0474db62f15b7c77331865413c7d96f0521192d4c",
+          "summary": "visited: C108FE"
+        },
+        "C10900": {
+          "path": "build/recomp/menu_return_dispatch_C10900_sandbox.log",
+          "sha256": "f4e1efe6e40d4bd10314e395c8cafb00cd1649f37ea78a60d580b2a1cdda757a",
+          "summary": "visited: C10900 C10906 C10908 C1090A C1090E C10910 C10916 C10918 C1091A C10922 C10926 C1092E C10936 C1093A C10940 C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10970": {
+          "path": "build/recomp/menu_return_dispatch_C10970_sandbox.log",
+          "sha256": "d3671556450a1a51e38530301eb9a64b3662bf80b9fc5930a8c0f3efda54cf58",
+          "summary": "visited: C10970 C10976 C10978 C1097A C1097E C10980 C10986 C10988 C1098A C1098C C10992 C10998 C109A0 C109A4 C109AA C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C102D8": {
+          "path": "build/recomp/menu_return_dispatch_C102D8_sandbox.log",
+          "sha256": "cecd14e468796f11f3982c8a1ac24b0a8de40575dd3d01e81c8dc776ced37b75",
+          "summary": "visited: C102D8 C102DA C102E0 C102E8 C102EE C102F6 C102FA C10300"
+        },
+        "C0FB70": {
+          "path": "build/recomp/menu_return_dispatch_C0FB70_sandbox.log",
+          "sha256": "dfa7308bb7b1fba68233df7b46c2cc4b2a7ed97ee56bb0e6b3898758a9e530bb",
+          "summary": "recomp: write to $C0FB70 invalidates C0FB70"
+        },
+        "C0FBB6": {
+          "path": "build/recomp/menu_return_dispatch_C0FBB6_sandbox.log",
+          "sha256": "0eb055d3e1c95f842ee1ab0778efb5e35e0e576f2b1d2cca3cb7af317b3a68fe",
+          "summary": "recomp: write to $C0FBB6 invalidates C0FBB6"
+        },
+        "C101FC": {
+          "path": "build/recomp/menu_return_dispatch_C101FC_sandbox.log",
+          "sha256": "a1b3e28fe00d8b890b3c8d1db6b0e8498b095ebfeb1d2bc45cb2a96c0741a061",
+          "summary": "recomp: write to $C101FC invalidates C101FC"
+        },
+        "C10228": {
+          "path": "build/recomp/menu_return_dispatch_C10228_sandbox.log",
+          "sha256": "418b2a4928212d97e424741066fd3f6ba83831fbacd0d99952bfe2d5c4bb00b6",
+          "summary": "recomp: write to $C10228 invalidates C10228"
+        },
+        "C10942": {
+          "path": "build/recomp/menu_return_dispatch_C10942_sandbox.log",
+          "sha256": "439505c06e2e5ec28f88d6ce3c4d2a8af2cc8b4ae00f5976b8f88a81bbc5e4e6",
+          "summary": "visited: C10942 C10948 C1094A C1094C C10950 C10952 C10958 C1095A C1095C C10964 C10968 C1096E C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C109AC": {
+          "path": "build/recomp/menu_return_dispatch_C109AC_sandbox.log",
+          "sha256": "9226260640951e0361f8f76da63fc215f73aefada2b8890c3a413e2a01979c75",
+          "summary": "visited: C109AC C109B2 C109B4 C109B6 C109BA C109BC C109C2 C109C4 C109C6 C109CC C109D2 C109D6 C109D8 C109E0 C109E6 C109E8 C109EA C109F0 C109F2 C109FA C10A02 C10A0A C10A0C C10A12 C10A18 C10A1C C10A22 C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10302": {
+          "path": "build/recomp/menu_return_dispatch_C10302_sandbox.log",
+          "sha256": "afed6ed5530f2028687fd8c4f02d7425d28cb952b3dbc628fd79d13a5f7fa920",
+          "summary": "visited: C10302 C10306 C1030E C10314 C10316 C10318 C1031A C10320 C10322 C10324 C1032A C10330 C10332 C10334 C10338 C1033C C10340 C10342 C10346 C1034A C1034E C10354 C10358 C1035E C10360 C10362 C10368 C1036A C1036C C10372 C10374 C1037C C10384 C10388 C1038A C10390 C10396 C1039C C103A2 C103A6 C103A8 C103B0 C103B4 C103BA C103BC C103C4 C103CA C103D0 C103D8 C103DC C103E2"
+        },
+        "C10BAE": {
+          "path": "build/recomp/menu_return_dispatch_C10BAE_sandbox.log",
+          "sha256": "d83e84c1328dd371f8cc5fcb0e96f59f80bbd6b55b634e895066fc90650bd6bd",
+          "summary": "visited: C10BAE C10BB6 C10BB8 C10BC0 C10BC6 C10BCA C10BCC C10BD2 C10BD8 C10BDA C10BE0 C10BE6 C10BE8 C10BEE C10BF4 C10BFC C10C00 C10C06"
+        },
+        "C10362": {
+          "path": "build/recomp/menu_return_dispatch_C10362_sandbox.log",
+          "sha256": "bd7f51d7356dddbb52bb80624a95e3c1e728e759af4a61aec8dfcc1b35c53966",
+          "summary": "visited: C10362 C10368 C1036A C1036C C10372 C10374 C1037C C10384 C10388 C1038A C10390 C10396 C1039C C103A2 C103A6 C103A8 C103B0 C103B4 C103BA C103BC C103C4 C103CA C103D0 C103D8 C103DC C103E2"
+        }
+      }
+    }
+  },
+  "recorded_normal_c": {
+    "shadow_matches": 2667,
+    "sandbox_matches": 2667,
+    "mismatches": 0,
+    "hardware": 0,
+    "incomplete": 0,
+    "cold_entries": [
+      "C1064C",
+      "C108FE",
+      "C10900",
+      "C10970",
+      "C102D8",
+      "C10942",
+      "C109AC",
+      "C10302",
+      "C10BAE",
+      "C10362"
+    ],
+    "active_entry_matches_per_mode": {
+      "C0FB70": 12,
+      "C0FBB6": 1863,
+      "C101FC": 15,
+      "C10228": 777
+    },
+    "generic_zero_call_rejection": {
+      "path": "build/recomp/menu_return_whole_call.log",
+      "sha256": "d77facad6ae1631fc9b9674a67c4417f9eb2daf4986ec8faeba7d6f64d93af65",
+      "summary": "RuntimeError: C1064C: no completed comparisons"
+    },
+    "reports": {
+      "whole_call_C1064C_C108FE_C10900_C10970_C102D8_C0FB70_C0FBB6_C101FC_C10228_C10942_C109AC_C10302_C10BAE_C10362_demo01_sandbox.json": {
+        "sha256": "0530732a03eb4ec819f7299221b2d86b3baecae38ebceb98e1fba16846c70349",
+        "entries": {
+          "C1064C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C108FE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10900": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10970": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C102D8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10942": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C109AC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10302": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10BAE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10362": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FB70": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FBB6": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C101FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10228": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1064C_C108FE_C10900_C10970_C102D8_C0FB70_C0FBB6_C101FC_C10228_C10942_C109AC_C10302_C10BAE_C10362_demo01_shadow.json": {
+        "sha256": "0530732a03eb4ec819f7299221b2d86b3baecae38ebceb98e1fba16846c70349",
+        "entries": {
+          "C1064C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C108FE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10900": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10970": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C102D8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10942": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C109AC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10302": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10BAE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10362": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FB70": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FBB6": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C101FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10228": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1064C_C108FE_C10900_C10970_C102D8_C0FB70_C0FBB6_C101FC_C10228_C10942_C109AC_C10302_C10BAE_C10362_qual_carrier_success_sandbox.json": {
+        "sha256": "64deddd01588eefceffdb19f0e947eb158d6be2c63afd5dccc749f827e98df0e",
+        "entries": {
+          "C1064C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C108FE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10900": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10970": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C102D8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10942": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C109AC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10302": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10BAE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10362": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FB70": {
+            "calls": 8,
+            "matched": 8,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FBB6": {
+            "calls": 1826,
+            "matched": 1826,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C101FC": {
+            "calls": 10,
+            "matched": 10,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10228": {
+            "calls": 520,
+            "matched": 520,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1064C_C108FE_C10900_C10970_C102D8_C0FB70_C0FBB6_C101FC_C10228_C10942_C109AC_C10302_C10BAE_C10362_qual_carrier_success_shadow.json": {
+        "sha256": "64deddd01588eefceffdb19f0e947eb158d6be2c63afd5dccc749f827e98df0e",
+        "entries": {
+          "C1064C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C108FE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10900": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10970": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C102D8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10942": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C109AC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10302": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10BAE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10362": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FB70": {
+            "calls": 8,
+            "matched": 8,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FBB6": {
+            "calls": 1826,
+            "matched": 1826,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C101FC": {
+            "calls": 10,
+            "matched": 10,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10228": {
+            "calls": 520,
+            "matched": 520,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1064C_C108FE_C10900_C10970_C102D8_C0FB70_C0FBB6_C101FC_C10228_C10942_C109AC_C10302_C10BAE_C10362_qual_fail_crashes_sandbox.json": {
+        "sha256": "82c93ca40c237b01e570ad6ac5fa25c17cd96f5a6c37e39780f30f96de111335",
+        "entries": {
+          "C1064C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C108FE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10900": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10970": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C102D8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10942": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C109AC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10302": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10BAE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10362": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FB70": {
+            "calls": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FBB6": {
+            "calls": 37,
+            "matched": 37,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C101FC": {
+            "calls": 5,
+            "matched": 5,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10228": {
+            "calls": 257,
+            "matched": 257,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1064C_C108FE_C10900_C10970_C102D8_C0FB70_C0FBB6_C101FC_C10228_C10942_C109AC_C10302_C10BAE_C10362_qual_fail_crashes_shadow.json": {
+        "sha256": "82c93ca40c237b01e570ad6ac5fa25c17cd96f5a6c37e39780f30f96de111335",
+        "entries": {
+          "C1064C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C108FE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10900": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10970": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C102D8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10942": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C109AC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10302": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10BAE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10362": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FB70": {
+            "calls": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C0FBB6": {
+            "calls": 37,
+            "matched": 37,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C101FC": {
+            "calls": 5,
+            "matched": 5,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C10228": {
+            "calls": 257,
+            "matched": 257,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      }
+    }
+  },
+  "timing": {
+    "local_instructions": 207,
+    "local_dma_cases": 6624,
+    "independently_tested_instruction_union": 15770,
+    "independently_tested_dma_cases": 504640,
+    "fresh_combined_run_this_batch": false,
+    "last_fresh_combined_instructions": 15370,
+    "last_fresh_combined_dma_cases": 491840,
+    "reason": "No shared runtime CPU/bus/math helpers or instruction-oracle fixtures changed. Only menu_return group/ownership and generator family selection were added. All 207 local PCs are new to the independently tested union.",
+    "local_evidence": {
+      "path": "build/recomp/menu_return_dma.log",
+      "sha256": "a2e1adec11e1bf19cccea14a7b4983653c9360803ecca0095074310d3b13ef06",
+      "summary": "menu_return step oracle (DMA bus): 207 instructions, 6624 cases matched registers, SR, PC, cycles and RAM"
+    },
+    "last_fresh_combined_evidence": {
+      "path": "build/recomp/menu_followup_combined_dma.log",
+      "sha256": "7581be54c0985e71813dea320166d6681a3b01bdba242d5067d98418f8199505",
+      "summary": "all step oracle (DMA bus): 15370 instructions, 491840 cases matched registers, SR, PC, cycles and RAM"
+    }
+  },
+  "integration": {
+    "shadow_matches": 554025,
+    "sandbox_matches": 413303,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/menu_return_full_gate.log",
+      "sha256": "9df422fa3230d8a5d5ddba1b1406606acdf58be28657ebf6d0e821ade2ad7bfc",
+      "summary": "500 routines, 554025 matching calls over 3 recordings (+413303 in the sandbox pass); poison: frames identical"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "sha256": "c8018dfac52a72644cdabcc30a8d18da9cab9e440c60665476f766993c8c368b",
+        "matched": 303802,
+        "mismatches": 0
+      },
+      "ports_report_qual_carrier_success.json": {
+        "sha256": "8b896bb211d983601caa67999661721c14134b3ab88752da2e59e3feb531a431",
+        "matched": 199167,
+        "mismatches": 0
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "sha256": "abf155ce366b628d5c6b7f54c088c6ae917194d4106869d2fb5d779185b2d8bd",
+        "matched": 51056,
+        "mismatches": 0
+      },
+      "ports_report_sandbox_demo01.json": {
+        "sha256": "5693599ee558062023bb37f182ceb667115a3253c1663aaa8a125b5371de3b58",
+        "matched": 139485,
+        "mismatches": 0
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "sha256": "5a276fb569d1b15efb1b96975252e55208fce3062749051320345eb4f6384c25",
+        "matched": 231117,
+        "mismatches": 0
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "sha256": "312f3d6ea006f626c9ab851764b821c04ceaa1ed4e48b333e364f0c06efe466b",
+        "matched": 42701,
+        "mismatches": 0
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "live_evidence": {
+      "path": "build/recomp/menu_return_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384",
+      "summary": "demo01: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe": {
+      "path": "build/recomp/menu_return_probe.log",
+      "sha256": "1956208855af800d4cc6dbfe87abc1c58db1d3cdc15f05fbf2a2f4db071f5fa6",
+      "summary": "ALL: first difference frame 416, 361 pixels"
+    }
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/menu_return_gnu.log",
+      "sha256": "1d17675f3f581830b92b1215282c3938e2a5d60d1ef28d42e529792e80702e31",
+      "summary": "[2/2] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -o build/recomp/fa18_recomp.exe @build/recomp/fa18_recomp.exe.rsp"
+    },
+    "msvc_release": {
+      "path": "build/recomp/menu_return_msvc.log",
+      "sha256": "d6b5d5b460797a4c2b63a37bdbc603bc7d976e1fa504c25c6064fe1252ebcc66",
+      "summary": "  fa18_recomp.vcxproj -> C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp-cmake\\Release\\fa18_recomp.exe"
+    },
+    "artifacts_gib": 0.719
+  },
+  "next_original_scope": {
+    "manifest": "analysis/data/menu_context_finish_scope_inventory.json",
+    "sha256": "704e5364880ec1ae5fc35293ef87b37422b2046216b310e21f1e16dc180250f2",
+    "entries": [
+      "C10A24",
+      "C10C08",
+      "C10C68",
+      "C10AB2",
+      "C10AE6",
+      "C10B1E",
+      "C10CFE",
+      "C10D8A",
+      "C10DAE",
+      "C11A26",
+      "C11A50",
+      "C09192",
+      "C16D04",
+      "C25070"
+    ],
+    "unique_instructions": 441,
+    "shared_instructions": 0,
+    "implemented_by_inventory": false
+  }
+}

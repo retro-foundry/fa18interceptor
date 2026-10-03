@@ -25,12 +25,13 @@ def main():
     group_names += ("selector_origin", "update_sequence", "input_events", "command_dispatch")
     group_names += ("postflight_scheduler",)
     group_names += ("context_publication",)
-    group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome")
+    group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "menu_return": ["C1064C","C108FE","C10900","C10970","C102D8","C0FB70","C0FBB6","C101FC","C10228","C10942","C109AC","C10302","C10BAE","C10362"],
         "menu_outcome": ["C104C2","C105F4","C1072E","C1078A","C105A6","C10626","C1075A","C108DA","C29368"],
         "menu_followup": ["C1029E","C10418","C10458","C10678","C1643A"],
         "menu_cold": ["C0FE36","C1017E","C10272","C103E4","C09120","C29490","C2949A","C09148","C10B90","C16406"],
@@ -107,6 +108,7 @@ def main():
     menu_owners.update(json.loads((ROOT / "analysis/data/menu_cold_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/menu_followup_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/menu_outcome_source_scope.json").read_text())["owners"])
+    menu_owners.update(json.loads((ROOT / "analysis/data/menu_return_source_scope.json").read_text())["owners"])
     for entry in entries:
         if entry in menu_owners:
             for pc in menu_owners[entry]["source_pcs"]: addresses.setdefault(pc,entry)

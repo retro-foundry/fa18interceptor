@@ -18,12 +18,6 @@
 
 #define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
 
-/* $C11312's registers (glue_batch10.c). */
-static void reset_regs(void) {
-    D(0) = 0;
-    A(0) = MESSAGE_QUEUE + 4;
-}
-
 static int countdown_regs(void) {
     SET_W(D(0), rd_u16(POST_INPUT_COUNTDOWN));
     return rd_s16(POST_INPUT_COUNTDOWN) < 0;
@@ -42,37 +36,6 @@ int glue_C0F946(void) {
 int glue_C0F974(void) {
     if (countdown_regs()) A(0) = ROUTINE_AFTER_VIEWPORT;
     mark_viewport_ready();
-    return glue_return();
-}
-
-int glue_C0FB70(void) {
-    if (countdown_regs()) {
-        SET_B(D(0), rd_u8(SEQUENCE_FLAG));
-        if (!(uint8_t)D(0)) A(0) = ROUTINE_LEAVE_ON_KEY;
-        else { reset_regs(); A(0) = ROUTINE_AFTER_POST_INPUT; }
-    }
-    choose_after_countdown();
-    return glue_return();
-}
-
-int glue_C0FBB6(void) {
-    SET_B(D(0), rd_u8(MESSAGE_STATE_C));
-    if ((int8_t)D(0) < 0 || rd_u8(KEY_TAKEN)) { reset_regs(); A(0) = ROUTINE_AFTER_POST_INPUT; }
-    leave_on_key_or_message();
-    return glue_return();
-}
-
-int glue_C101FC(void) {
-    if (countdown_regs()) { D(0) = 0; A(0) = ROUTINE_ENTER_MODE_FOUR; }
-    reset_viewport_after_countdown();
-    return glue_return();
-}
-
-int glue_C10228(void) {
-    SET_B(D(0), rd_u8(VIEWPORT_MODE));
-    SET_B(D(1), rd_u8(VIEWPORT_TARGET));
-    if ((uint8_t)D(0) == (uint8_t)D(1)) { D(0) = 1; A(0) = ROUTINE_MODE_FOUR; }
-    enter_mode_four_when_ready();
     return glue_return();
 }
 
