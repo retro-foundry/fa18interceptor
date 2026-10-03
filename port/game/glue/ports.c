@@ -7,6 +7,12 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete command/context and selected-record publication owners. */
+    {0xC1B7A6, glue_C1B7A6, "publish_context_detail_command", 0, 0, glue_C1B7A6_step, 0xC1C2B8, 0, 0, glue_C1B7A6_owns},
+    {0xC1BEE8, glue_C1BEE8, "publish_context_record_command", 0, 0, glue_C1BEE8_step, 0xC1C2B8, 0, 0xC1B906, glue_C1BEE8_owns},
+    {0xC1C214, glue_C1C214, "publish_context_toggle_command", 0, 0, glue_C1C214_step, 0xC1C2B8, 0, 0, glue_C1C214_owns},
+    {0xC083A6, glue_C083A6, "set_selected_record_request", 0, 0, glue_C083A6_step, 0xC083E2, 0, 0, glue_C083A6_owns},
+    {0xC09DD0, glue_C09DD0, "clear_matching_record_selection", 0, 0, glue_C09DD0_step, 0xC09E06, 0, 0, glue_C09DD0_owns},
     /* Complete postflight mode scheduler and source-owned shared tails. */
     {0xC09E06, glue_C09E06, "dispatch_postflight_mode", 0, 0, glue_C09E06_step, 0xC09E96, 0, 0, glue_C09E06_owns},
     {0xC09E98, glue_C09E98, "schedule_postflight_mode_three", 0, 0, glue_C09E98_step, 0xC0A3EA, 0, 0xC09E96, glue_C09E98_owns},

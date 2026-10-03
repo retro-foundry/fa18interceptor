@@ -1,0 +1,475 @@
+{
+  "date": "2026-10-03",
+  "entries_added": [
+    "C1B7A6",
+    "C1BEE8",
+    "C1C214",
+    "C083A6",
+    "C09DD0"
+  ],
+  "registered_entries": 459,
+  "registered_timing_entries": 251,
+  "source": {
+    "manifest": "analysis/data/context_publication_source_scope.json",
+    "sha256": "5ced007b964c002c4a77c5843d1f4762ba4a6609a4f76980df8edcdeac67566d",
+    "unique_instructions": 153,
+    "shared_instructions": 28
+  },
+  "structural": {
+    "total_cases": 106496,
+    "real_child_cases": 81920,
+    "shared_body_cases": 8192,
+    "controlled_child_cases": 16384,
+    "all_registers_full_sr_all_ram": true,
+    "exclusions": [],
+    "all_owned_boundaries_covered": true,
+    "real_children": {
+      "C1B7A6": {
+        "path": "build/recomp/context_publication_real_C1B7A6.log",
+        "sha256": "b559a2add1ed88e9c22f9b1b3a836930e19f5f1eb683d08f3fb9a43e53bdc862",
+        "summary": "context-publication oracle C1B7A6: 16384 complete calls matched all registers, PC, full SR and all RAM; 36 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 36
+      },
+      "C1BEE8": {
+        "path": "build/recomp/context_publication_real_C1BEE8.log",
+        "sha256": "6deb101d06e3848a8cbcf81b4db1e636ed4210b23f3a9636a25e29540f01855d",
+        "summary": "context-publication oracle C1BEE8: 16384 complete calls matched all registers, PC, full SR and all RAM; 86 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 113
+      },
+      "C1C214": {
+        "path": "build/recomp/context_publication_real_C1C214.log",
+        "sha256": "2acbc841fa4e5364000b77b29a5c2bced341b02841e20103a9f2264fa5edcc84",
+        "summary": "context-publication oracle C1C214: 16384 complete calls matched all registers, PC, full SR and all RAM; 34 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 34
+      },
+      "C083A6": {
+        "path": "build/recomp/context_publication_real_C083A6.log",
+        "sha256": "2aa5e7d3818bd31c696e0699e7692cb8c6650c89b8334da22d9380c458b6ea84",
+        "summary": "context-publication oracle C083A6: 16384 complete calls matched all registers, PC, full SR and all RAM; 12 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 14
+      },
+      "C09DD0": {
+        "path": "build/recomp/context_publication_real_C09DD0.log",
+        "sha256": "6f5d8a032d6a2a706f2a3ba1f42b676396a3921339f95874278aff2d88f8023c",
+        "summary": "context-publication oracle C09DD0: 16384 complete calls matched all registers, PC, full SR and all RAM; 12 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 12
+      }
+    },
+    "shared_body": {
+      "path": "build/recomp/context_publication_body_C083B6.log",
+      "sha256": "a4a9fdaff551098cd864060ab39fcc8a42860e5ecc58012a5ecc29ab3c231995",
+      "summary": "context-publication oracle C083B6: 8192 complete calls matched all registers, PC, full SR and all RAM; 11 parent boundaries observed",
+      "cases": 8192,
+      "all_256_byte_levels_and_32_ccr_values": true
+    },
+    "controlled_children": {
+      "C1BEE8": {
+        "path": "build/recomp/context_publication_contract_C1BEE8.log",
+        "sha256": "7586664ec37df6d3fbceec93ba4ba9159eafde943212f5136613005babe936cc",
+        "summary": "context-publication child-contract oracle C1BEE8: 8192 complete calls matched all registers, PC, full SR and all RAM; 113 parent boundaries observed",
+        "cases": 8192
+      },
+      "C09DD0": {
+        "path": "build/recomp/context_publication_contract_C09DD0.log",
+        "sha256": "9880cef88f1ed79127e45d0e7d159abc1d230b2e4cf6ba004e99ddb7ac76d1d6",
+        "summary": "context-publication child-contract oracle C09DD0: 8192 complete calls matched all registers, PC, full SR and all RAM; 12 parent boundaries observed",
+        "cases": 8192
+      }
+    }
+  },
+  "recorded_whole_call": {
+    "cold_entries": [
+      "C1B7A6",
+      "C1BEE8",
+      "C1C214",
+      "C083A6",
+      "C09DD0"
+    ],
+    "rejection": "C1B7A6: no completed comparisons",
+    "rejection_evidence": {
+      "path": "build/recomp/context_publication_whole_call.log",
+      "sha256": "9b803bef1540abe729c2bbf60ad67e0fc5b7f33e9031890470c04942a25aa1af",
+      "summary": "[1/2] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -MMD -MF build/recomp/obj/build/recomp/selected_whole_call_registry.c.o.d -c build/recomp/selected_whole_call_registry.c -o build/recomp/obj/build/recomp/selected_whole_call_registry.c.o"
+    },
+    "raw_reports": {
+      "whole_call_C1B7A6_C1BEE8_C1C214_C083A6_C09DD0_demo01_sandbox.json": {
+        "sha256": "1605d095cf53348595ba8ede6978546c7096440b623413f3d3c3aedb65aadeb8",
+        "entries": {
+          "C1B7A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1BEE8": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1C214": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C083A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C09DD0": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1B7A6_C1BEE8_C1C214_C083A6_C09DD0_demo01_shadow.json": {
+        "sha256": "1605d095cf53348595ba8ede6978546c7096440b623413f3d3c3aedb65aadeb8",
+        "entries": {
+          "C1B7A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1BEE8": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1C214": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C083A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C09DD0": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1B7A6_C1BEE8_C1C214_C083A6_C09DD0_qual_carrier_success_sandbox.json": {
+        "sha256": "1605d095cf53348595ba8ede6978546c7096440b623413f3d3c3aedb65aadeb8",
+        "entries": {
+          "C1B7A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1BEE8": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1C214": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C083A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C09DD0": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1B7A6_C1BEE8_C1C214_C083A6_C09DD0_qual_carrier_success_shadow.json": {
+        "sha256": "1605d095cf53348595ba8ede6978546c7096440b623413f3d3c3aedb65aadeb8",
+        "entries": {
+          "C1B7A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1BEE8": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1C214": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C083A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C09DD0": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1B7A6_C1BEE8_C1C214_C083A6_C09DD0_qual_fail_crashes_sandbox.json": {
+        "sha256": "1605d095cf53348595ba8ede6978546c7096440b623413f3d3c3aedb65aadeb8",
+        "entries": {
+          "C1B7A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1BEE8": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1C214": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C083A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C09DD0": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1B7A6_C1BEE8_C1C214_C083A6_C09DD0_qual_fail_crashes_shadow.json": {
+        "sha256": "1605d095cf53348595ba8ede6978546c7096440b623413f3d3c3aedb65aadeb8",
+        "entries": {
+          "C1B7A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1BEE8": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1C214": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C083A6": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C09DD0": {
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      }
+    }
+  },
+  "view_refactor": {
+    "component_cases": 32768,
+    "source_boundaries": 247,
+    "whole_call_shadow": 798,
+    "whole_call_sandbox": 891,
+    "component_evidence": {
+      "path": "build/recomp/context_publication_view_refactor.log",
+      "sha256": "0c7763509d714884d77c76fe4de4ad70039ee6bccb4b8ac9f8e1c94147a88928",
+      "summary": "command source audit: 1104 unique / 482 shared instructions; no missing static paths"
+    },
+    "whole_call_evidence": {
+      "path": "build/recomp/context_publication_command_owner_refactor.log",
+      "sha256": "247d441649c0a4e71e8883b19674072d6e7699fe61262fe06279b9b37c16e179",
+      "summary": "[1/2] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -MMD -MF build/recomp/obj/build/recomp/selected_whole_call_registry.c.o.d -c build/recomp/selected_whole_call_registry.c -o build/recomp/obj/build/recomp/selected_whole_call_registry.c.o"
+    }
+  },
+  "timing": {
+    "local_instructions": 153,
+    "local_dma_cases": 4896,
+    "new_unique_instructions": 51,
+    "independent_union_instructions": 14650,
+    "independent_union_dma_cases": 468800,
+    "fresh_combined_this_batch": false,
+    "last_fresh_combined_instructions": 14599,
+    "last_fresh_combined_dma_cases": 467168,
+    "local_evidence": {
+      "path": "build/recomp/context_publication_local_dma.log",
+      "sha256": "fbcfde39b12afc2ba2bbde31fe78bf316a8b921842c4ff0c2a5f934a7eed002e",
+      "summary": "[1/2] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -MMD -MF build/recomp/obj/tools/recomp/active_planes_step_oracle.c.o.d -c tools/recomp/active_planes_step_oracle.c -o build/recomp/obj/tools/recomp/active_planes_step_oracle.c.o"
+    }
+  },
+  "integration": {
+    "shadow_matches": 554025,
+    "sandbox_matches": 413303,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/context_publication_full_gate.log",
+      "sha256": "809cc0248bc5bcc6934a4218a23fb946ff006421d58d64f2d7acf1077c003a97",
+      "summary": "bash.exe : ports: 0 mismatching calls"
+    },
+    "reports": {
+      "ports_report_demo01.json": {
+        "sha256": "170f57b6cf9fe0e2bc03076a0e598507fcedb2abffd111c3ca8b61448436a245",
+        "matched": 303802,
+        "mismatched": 0
+      },
+      "ports_report_qual_carrier_success.json": {
+        "sha256": "a6c6dc7e369f3b7b297be8e77894b5e6e4722f91a214387e3d92637ac7f7a8f0",
+        "matched": 199167,
+        "mismatched": 0
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "sha256": "8e46ba51cd1765d64004247b22a8cec38e2eceff8d8feaa8c82b891b11295fa0",
+        "matched": 51056,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_demo01.json": {
+        "sha256": "a04065948bbf7e84e5494262219412dbdbe0c4aa7d64a816ed5e274398735177",
+        "matched": 139485,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "sha256": "6e862151007434e07a3dd22445ccd8d165d5eaac92249312321d11f1e412c157",
+        "matched": 231117,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "sha256": "2fb160858ddd08f5258e2d5e534d73bf470c660594cd6d6ea2281ba98559a517",
+        "matched": 42701,
+        "mismatched": 0
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_evidence": {
+      "path": "build/recomp/context_publication_live_gate.log",
+      "sha256": "84f5651ae281dc1b829d2e99d6b369454c93c698dd7c11bba209b0eb5a74dafd",
+      "summary": "qual_fail_crashes: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "isolated_probe_frames": 600,
+    "isolated_probe_exact": true,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe_evidence": {
+      "path": "build/recomp/context_publication_probe.log",
+      "sha256": "3a3278dcfe6d63765af7d0254f55fc7bde0fc619463318b32f6715231e34cb7e",
+      "output": "source: demo01, 600 frames\n\nC1B7A6,C1BEE8,C1C214,C083A6,C09DD0: exact through frame 600\n\nALL: first difference frame 416, 361 pixels"
+    }
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/context_publication_headless.log",
+      "sha256": "3a6f0f05acf74c6cd9748c8d31c9066d85d48a109a2b2f917b8ff3d1f9c933db",
+      "summary": "[1/2] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -MMD -MF build/recomp/obj/port/game/glue/ports.c.o.d -c port/game/glue/ports.c -o build/recomp/obj/port/game/glue/ports.c.o"
+    },
+    "msvc_release": {
+      "path": "build/recomp/context_publication_msvc.log",
+      "sha256": "e37cd23e9de7c28db1c910921624347a9e15b7528ccbea4cedcc5f92f204d550",
+      "summary": "MSBuild version 17.14.60+43b635718 for .NET Framework"
+    },
+    "artifacts_gib": 0.506
+  }
+}

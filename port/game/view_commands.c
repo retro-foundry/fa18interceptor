@@ -28,7 +28,7 @@ static void request(const ViewCommandHooks *h,gaddr address,unsigned bit) {
 static int compare(const ViewCommandHooks *h,uint8_t value,uint8_t limit) {
     observe(h,VIEW_BYTE_COMPARE,value,limit,0); return (int8_t)value-(int8_t)limit;
 }
-static void detail(const ViewCommandHooks *h,unsigned value) {
+void set_context_view_detail(unsigned value,const ViewCommandHooks *h) {
     observe(h,VIEW_DETAIL_SET,value,0,0);
     byte(h,ORIGIN_DETAIL_INDEX,(uint8_t)value); byte(h,UPDATE_MASK,0xff);
     if(!test(h,FIRE_STATE)) byte(h,FIRE_STATE,0xff);
@@ -114,6 +114,10 @@ extended_row:
     else row=0xb3;
     word(h,LINE_LAST_ROW,row); return event;
 }
+uint32_t select_zero_view_mode(uint32_t event,const ViewCommandHooks *h) {
+    observe(h,VIEW_MODE_ZERO,0,0,0); byte(h,VIEW_MODE_AUXILIARY,0);
+    byte(h,VIEW_MODE,0); byte(h,REDRAW_FIRST,3); return finish_mode(event,h);
+}
 
 int is_view_command(enum CommandAction action) {
     switch(action) {
@@ -138,41 +142,41 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
         if(value) { origin_range(h,0); break; }
         /* The source then loads the same byte into its detail working value. */
         value=rd_u8(ORIGIN_ENABLE); observe(h,VIEW_ORIGIN_READ,value,0,0);
-        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); detail(h,8); }
+        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); set_context_view_detail(8,h); }
         else { request(h,PENDING_COMMAND_WORD_B,3); byte(h,VIEW_REFRESH_REQUEST,0xff); }
         break;
     case COMMAND_CONTEXT_VIEW_ALTERNATE:
         value=rd_u8(ORIGIN_ENABLE); observe(h,VIEW_ORIGIN_READ,value,0,0);
-        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); detail(h,8); }
+        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); set_context_view_detail(8,h); }
         else { request(h,PENDING_COMMAND_WORD_B,3); byte(h,VIEW_REFRESH_REQUEST,0xff); }
         break;
     case COMMAND_CONTEXT_VIEW_INCREMENT:
         request(h,PENDING_COMMAND_WORD_B+1,7); origin_range(h,1); break;
     case COMMAND_VIEW_THREE:
-        request(h,PENDING_COMMAND_WORD_B,7); detail(h,3); break;
+        request(h,PENDING_COMMAND_WORD_B,7); set_context_view_detail(3,h); break;
     case COMMAND_VIEW_NINE:
-        request(h,PENDING_COMMAND_WORD_B+1,5); detail(h,9); break;
+        request(h,PENDING_COMMAND_WORD_B+1,5); set_context_view_detail(9,h); break;
     case COMMAND_VIEW_EIGHT:
-        request(h,PENDING_COMMAND_WORD_B+1,4); detail(h,8); break;
+        request(h,PENDING_COMMAND_WORD_B+1,4); set_context_view_detail(8,h); break;
     case COMMAND_VIEW_TOGGLE:
         request(h,PENDING_COMMAND_WORD_B,5);
-        if(test(h,ORIGIN_ENABLE)) { detail(h,1); break; }
+        if(test(h,ORIGIN_ENABLE)) { set_context_view_detail(1,h); break; }
         goto mode_zero;
     case COMMAND_VIEW_ZERO:
         request(h,PENDING_COMMAND_WORD_B,4);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { detail(h,0); break; }
+        if(r->origin_mode) { set_context_view_detail(0,h); break; }
     mode_zero:
-        mode=0; observe(h,VIEW_MODE_ZERO,0,0,0); goto set_mode;
+        return select_zero_view_mode(event,h);
     case COMMAND_VIEW_ONE:
         request(h,PENDING_COMMAND_WORD_B+1,0);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { detail(h,4); break; }
+        if(r->origin_mode) { set_context_view_detail(4,h); break; }
         mode=6; observe(h,VIEW_MODE_SET,mode,0,0); goto set_mode;
     case COMMAND_VIEW_INCREMENT:
         request(h,PENDING_COMMAND_WORD_B,6);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { detail(h,2); break; }
+        if(r->origin_mode) { set_context_view_detail(2,h); break; }
         byte(h,VIEW_MODE_AUXILIARY,0);
         old=rd_u8(VIEW_MODE); value=(uint8_t)(old+1); wr_u8(VIEW_MODE,value);
         observe(h,VIEW_MODE_INCREMENT,old,0,0);
@@ -181,7 +185,7 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
     case COMMAND_VIEW_DECREMENT:
         request(h,PENDING_COMMAND_WORD_B+1,2);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { detail(h,6); break; }
+        if(r->origin_mode) { set_context_view_detail(6,h); break; }
         byte(h,VIEW_MODE_AUXILIARY,0);
         old=rd_u8(VIEW_MODE); value=(uint8_t)(old-1); wr_u8(VIEW_MODE,value);
         observe(h,VIEW_MODE_DECREMENT,old,0,0);
@@ -191,7 +195,7 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
     case COMMAND_VIEW_TWELVE: case COMMAND_VIEW_THIRTEEN:
         request(h,PENDING_COMMAND_WORD_B+1,r->action==COMMAND_VIEW_TWELVE?3:1);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { detail(h,r->action==COMMAND_VIEW_TWELVE?7:5); break; }
+        if(r->origin_mode) { set_context_view_detail(r->action==COMMAND_VIEW_TWELVE?7:5,h); break; }
         mode=r->action==COMMAND_VIEW_TWELVE?12:13;
         observe(h,VIEW_MODE_SET,mode,0,0); byte(h,VIEW_MODE_AUXILIARY,0);
         byte(h,UPDATE_MASK,0xff); goto store_mode;

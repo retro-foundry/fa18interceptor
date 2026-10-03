@@ -7,10 +7,10 @@ Updated 2026-10-03.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 454 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete postflight scheduler adapters pass 180,224 full-register/full-SR/all-RAM cases, covering every owned boundary without exclusions. Active dispatch/mode-nine readable-C replay matches 6,005 shadow / 6,005 sandbox calls with timing disabled; nine peers are cold and independently proven structurally. Generic zero-comparison rejections are retained. Archived UAE runs are historical evidence. |
+| Current proof | The 459 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Five complete context publishers/selected-record helpers pass 106,496 full CPU/RAM real-child, shared-body and controlled-child cases, covering all 153 source boundaries without exclusions. All five are cold in recordings; generic zero-comparison rejection is retained. Existing command owners still pass 798 shadow / 891 sandbox comparisons after the shared view-helper refactor. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 454 registered game entries; 554,025 matching shadow / 413,303 sandbox calls over three native recordings, zero mismatches, poison identical. Latest complete family: C09E06 postflight mode dispatch, eight mode handlers and two helpers, retaining the shared completion/readiness tails. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | There are 246 timing-step entries. Local scheduler timing passes 359 instructions / 11,488 DMA cases; fresh combined timing passes 14,599 / 467,168 with sealed reset per fixture. The isolated family matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_postflight_scheduler.md`. |
+| Recreated C source | 459 registered game entries; 554,025 matching shadow / 413,303 sandbox calls over three native recordings, zero mismatches, poison identical. Latest complete family: C1B7A6/C1BEE8/C1C214 context publishers and C083A6/C09DD0 selected-record helpers, retaining shared view/publication tails. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | There are 251 timing-step entries. Local context-publication timing passes 153 instructions / 4,896 DMA cases. Independent instruction coverage is 14,650 / 468,800; the last fresh combined run remains 14,599 / 467,168. The isolated family matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_context_publication.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -26,7 +26,8 @@ raise coverage to 432 entries; C22C80/C1C63E raised it to 434, and complete
 C29042 raised it to 435; update/input/display owners raised it to 438, and
 four complete input-event owners raised it to 442; complete command dispatch
 owners raised it to 444; the complete postflight scheduler family now raises
-it to 454. The visible checkpoint
+it to 454; the context-publication/selected-record family now raises it to 459.
+The visible checkpoint
 also confirms a
 fade reset and completion two machine frames late. The initializer correction
 removes the frame it introduced; the inherited frame remains. A 17-entry HUD
@@ -98,7 +99,12 @@ The complete postflight scheduler family, including its shared tails and
 cold mode paths, now passes independent readable-C CPU/RAM, DMA timing and
 live integration gates. See `analysis/routines/native_c_postflight_scheduler.md`
 and `analysis/figures/native_postflight_scheduler_checkpoint.json`.
-Next audit remaining complete command/context peers and postflight owners;
+The complete context-publication and selected-record family now passes
+106,496 full CPU/RAM cases, local DMA timing, full registered gates and
+all isolated live frames and seals. Its cold recording classification stays
+explicit. See `analysis/routines/native_c_context_publication.md` and
+`analysis/figures/native_context_publication_checkpoint.json`.
+Next audit complete postflight/menu callbacks C0FCB4/C0FECE/C0FFE2/C1000A;
 C0F090/C0F132 remain internal labels.
 
 ## The game program

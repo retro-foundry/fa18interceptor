@@ -187,6 +187,7 @@
 #define CONTEXT_STARTED    0xC457B4u /* byte */
 #define CONTEXT_STATE      0xC458AEu /* byte */
 #define CONTEXT_GATE       0xC458ADu /* byte */
+#define CONTEXT_PUBLISH_RETURN_MODE 0xC45833u /* byte: copied to CONTEXT_SELECT by C1BF1E */
 #define CONTEXT_AUX        0xC45788u /* byte */
 #define ROUTINE_CONTEXT_STAGE      0xC10C68u
 #define ROUTINE_VIEWPORT_CHANGE    0xC11A26u

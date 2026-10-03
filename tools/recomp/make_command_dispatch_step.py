@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -29,7 +29,7 @@ body={
  "swap":"step_swap(&D(reg)); break;",
  "asl.l":"step_asl_long(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;",
  "movem.w":"mask=m68ki_read_imm_16(); address=cache_step_address(mode,reg,2); renderer_load(address,mask,2,mode==3?(int)reg:-1); break;",
- "movem.l":"mask=m68ki_read_imm_16(); address=cache_step_address(mode,reg,4); renderer_load(address,mask,4,mode==3?(int)reg:-1); break;",
+ "movem.l":"mask=m68ki_read_imm_16(); if(!(opcode&0x400u) && mode==4) renderer_store(A(reg),mask,4,(int)reg); else { address=cache_step_address(mode,reg,4); if(opcode&0x400u) renderer_load(address,mask,4,mode==3?(int)reg:-1); else renderer_store(address,mask,4,-1); } break;",
  "exg":"value=A(destination); A(destination)=A(reg); A(reg)=value; break;",
  "neg.l":"renderer_negate(&D(reg),4); break;",
 }
@@ -72,11 +72,12 @@ static int command_step(void) {
     opcode=step_begin(pc); mode=(opcode>>3)&7u; reg=opcode&7u; destination=(opcode>>9)&7u;
     switch(pc) {
 """
-if family=="postflight_scheduler":
- out=out.replace("Complete C1AC28/C1AD74", "Complete postflight scheduler family").replace(
-     "command_dispatch.c and its action modules", "postflight_scheduler.c").replace(
-     "make_command_dispatch_step.py.", "make_command_dispatch_step.py --family postflight_scheduler.").replace(
-     '"glue_command_dispatch.h"','"glue_postflight_scheduler.h"').replace("command_step", "schedule_step")
+step_name="command_step" if family=="command_dispatch" else family+"_step"
+if family!="command_dispatch":
+ out=out.replace("Complete C1AC28/C1AD74", "Complete "+family.replace("_"," ")+" family").replace(
+     "command_dispatch.c and its action modules", family+".c").replace(
+     "make_command_dispatch_step.py.", "make_command_dispatch_step.py --family "+family+".").replace(
+     '"glue_command_dispatch.h"','"glue_'+family+'.h"').replace("command_step",step_name)
 for key,pcs in groups.items():
  for j in range(0,len(pcs),4): out+="    "+" ".join("case 0x"+pc+":" for pc in pcs[j:j+4])+"\n"
  out+="        "+body[key]+"\n"
@@ -128,7 +129,7 @@ for entry,owner in manifest["owners"].items():
  for j in range(0,len(pcs),8): out+="    "+",".join("0x"+pc for pc in pcs[j:j+8])+",\n"
  out+="};\n"
  out+=f"int glue_{entry}_owns(uint32_t pc) {{ return owns_pc(owned_{entry},sizeof owned_{entry}/sizeof owned_{entry}[0],pc); }}\n"
- out+=f"int glue_{entry}_step(void) {{ if(!glue_{entry}_owns(REG_PC)) return 0; return {'schedule_step' if family=='postflight_scheduler' else 'command_step'}(); }}\n"
+ out+=f"int glue_{entry}_step(void) {{ if(!glue_{entry}_owns(REG_PC)) return 0; return {step_name}(); }}\n"
 path=ROOT/f"port/game/glue/glue_{family}_step.c"
 path.write_text(out)
 print(f"{family} timing bridge: {len(manifest['instructions'])} unique original boundaries")

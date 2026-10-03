@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 0a19d5be); ignored gate logs may
+history (the preceding handoff is in commit 60dede75); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -18,21 +18,35 @@ parents raised coverage to 434/624; the complete C29042 selector-origin owner
 raised it to 435/624; complete update/input/display owners raised it to 438/624;
 four complete input-event owners raised it to 442/624; complete C1AC28/C1AD74
 command dispatch owners raised it to 444/624; the complete postflight mode
-scheduler family now raises it to 454/624.
+scheduler family raised it to 454/624; complete context publishers and
+selected-record helpers now raise it to 459/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 454 of 624 translated game entries are registered in port/game/glue/ports.c.
+- 459 of 624 translated game entries are registered in port/game/glue/ports.c.
   The latest full gate for that registered set matched 554,025 completed shadow
   calls and 413,303 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 454-entry baseline. GNU and
-  MSVC builds pass. There are 246 source-timed entries; the fresh combined
-  DMA oracle passes 14,599 instructions / 467,168 cases. The eleven-entry
+  build/recomp/ports_report_*.json describe this 459-entry baseline. GNU and
+  MSVC builds pass. There are 251 source-timed entries. The new five-entry
+  context-publication group passes 153 instructions / 4,896 DMA cases;
+  independent instruction coverage is 14,650 / 468,800. The last fresh
+  combined run remains 14,599 / 467,168; it was not repeated for this batch
+  because shared runtime CPU/bus/math and fixture setup did not change.
+  Its separate original-byte real-child, shared-body and controlled-child
+  proofs pass 106,496 full CPU/RAM cases without exclusions, covering all
+  153 source boundaries. All five entries are cold in recordings, and the
+  generic zero-comparison rejection remains retained. All 36,236 isolated
+  live frames and seals match; build/ is 0.506 GiB. Existing command owners
+  still pass 798 shadow /
+  891 sandbox comparisons after the shared view-helper refactor. See
+  analysis/routines/native_c_context_publication.md and
+  analysis/figures/native_context_publication_checkpoint.json.
+  The preceding eleven-entry
   scheduler group matches all 36,236 isolated live frames and RAM seals;
   build/ is 0.485 GiB. Its 180,224 full CPU/RAM cases cover every owned boundary
   without exclusions, including nine cold entries. Active dispatcher and
@@ -701,12 +715,14 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    post-input parent C0F5F8, context/bootstrap/callback batch and C22C80/C1C63E
    parents, complete C29042 active origin, update/input/display owners and
    the complete input-event and command-dispatch batches and postflight mode
-   scheduler family are registered at 454/624.
+   scheduler family and context-publication/selected-record helpers are
+   registered at 459/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
    or count internal labels as extra routines. Audit remaining complete
-   command/context publisher peers C1B7A6/C1BEE8/C1C214 and the remaining
-   postflight callback owners next;
+   postflight/menu callbacks C0FCB4/C0FECE/C0FFE2/C1000A and their remaining
+   children C17C2A/C24E8A next. C0FFE2/C1000A share continuations that UNLK
+   the enclosing A6 frame: source-owned frame fixtures are required;
    the leaf tool excludes indirect calls. Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
