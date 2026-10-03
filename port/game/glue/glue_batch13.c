@@ -63,29 +63,5 @@ int glue_C2559A(void) {
  * flags, an event TST.B's, otherwise MOVE.B D0,+$3D's. A0 ends past the
  * slots copied, D3.w = the slot index * 4. */
 int glue_C2651E(void) {
-    uint16_t offset = rd_u16(SCRIPT_RECORD), follow = rd_u16(HISTORY_RECORD);
-    int8_t index = (int8_t)rd_u8(HISTORY_NEXT);
-    int copies = (int8_t)rd_u8(HISTORY_COUNT) < 5 ? 2 : 1;
-
-    record_position_history();
-
-    SET_W(D(0), offset);
-    if (offset != follow) {
-        uint32_t r = (uint32_t)offset - follow;
-        FLAG_N = NFLAG_16(r);
-        FLAG_Z = r & 0xFFFF;
-        FLAG_V = VFLAG_SUB_16(follow, offset, r);
-        FLAG_C = CFLAG_16(r);
-        return glue_return();
-    }
-    A(1) = CONTROL_RECORDS + (gaddr)(int32_t)(int16_t)offset;
-    if (rd_u8(POST_INPUT_EVENT)) {
-        flags_logic_b(rd_u8(POST_INPUT_EVENT));
-        return glue_return();
-    }
-    A(0) = HISTORY_SLOTS + (gaddr)(int32_t)(int16_t)(index * 12) + (gaddr)(12 * copies);
-    SET_W(D(3), index * 4);
-    SET_W(D(0), rd_u8(A(1) + 0x3D));
-    flags_logic_b(rd_u8(A(1) + 0x3D));
-    return glue_return();
+    return glue_complete_record_history();
 }

@@ -1,0 +1,1372 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "fa1e28b4",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C2651E",
+    "C28E28",
+    "C26EBE",
+    "C27456"
+  ],
+  "registered_translated_entries": 509,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 575,
+  "registered_timing_entries": 399,
+  "registered_translated_timing_entries": 333,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/flight_geometry_source_scope.json",
+      "sha256": "ea4a0d3a20d6ace617a428cec2ceffbc04ee7b9d4ad043d5ba47b8941d3d787a"
+    },
+    "unique_instructions": 1015,
+    "shared_within_batch": 0,
+    "distinct_child_sites": 4,
+    "child_sites_by_owner": 4,
+    "actual_original_callability": {
+      "C2651E": [
+        {
+          "pc": "C2627E",
+          "return_pc": "C26282",
+          "instruction": "bsr     $c2651e",
+          "bytes": "6100029e"
+        }
+      ],
+      "C28E28": [
+        {
+          "pc": "C25BA6",
+          "return_pc": "C25BAC",
+          "instruction": "jsr     $c28e28.l",
+          "bytes": "4eb900c28e28"
+        }
+      ],
+      "C26EBE": [
+        {
+          "pc": "C2600E",
+          "return_pc": "C26014",
+          "instruction": "jsr     $c26ebe.l",
+          "bytes": "4eb900c26ebe"
+        }
+      ],
+      "C27456": [
+        {
+          "pc": "C26D28",
+          "return_pc": "C26D2E",
+          "instruction": "jsr     $c27456.l",
+          "bytes": "4eb900c27456"
+        },
+        {
+          "pc": "C26D76",
+          "return_pc": "C26D7C",
+          "instruction": "jsr     $c27456.l",
+          "bytes": "4eb900c27456"
+        },
+        {
+          "pc": "C27180",
+          "return_pc": "C27184",
+          "instruction": "bsr     $c27456",
+          "bytes": "610002d4"
+        },
+        {
+          "pc": "C27410",
+          "return_pc": "C27414",
+          "instruction": "bsr     $c27456",
+          "bytes": "61000044"
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 131072,
+  "controlled_child_completed_calls": 65536,
+  "real_child_completed_calls": 65536,
+  "fixture_coverage": [
+    {
+      "owner": "C2651E",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 50,
+      "raw_observed_pcs": 50,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_geometry_contract_C2651E.log",
+        "sha256": "d0040a77bf44ddd00def17a720e2c4cd6c40c0ab9d9f800c013f32203ed50f4c"
+      }
+    },
+    {
+      "owner": "C28E28",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 79,
+      "raw_observed_pcs": 79,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_geometry_contract_C28E28.log",
+        "sha256": "12b4fe26d2365de083d5a8dc45752a9e5b90d82f50fba648d0f0b92b7a9d966c"
+      }
+    },
+    {
+      "owner": "C26EBE",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 819,
+      "observed_owner_pcs": 819,
+      "raw_observed_pcs": 819,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_geometry_contract_C26EBE.log",
+        "sha256": "0587f1a18f3c20d3502526dd3464c1a0d54a8f721e9e07c41c676e72e3ba105f"
+      }
+    },
+    {
+      "owner": "C27456",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 67,
+      "observed_owner_pcs": 67,
+      "raw_observed_pcs": 67,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_geometry_contract_C27456.log",
+        "sha256": "1911e769c0e146c4e4b627c652c3c14c689284de424a1d0682a407ec55563ebb"
+      }
+    },
+    {
+      "owner": "C2651E",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 50,
+      "raw_observed_pcs": 50,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_geometry_real_C2651E.log",
+        "sha256": "047f9fe3bcf31daf2cd4bf7adf917a9d990d8e2a34988cac3b286945ed5b5f86"
+      }
+    },
+    {
+      "owner": "C28E28",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 79,
+      "raw_observed_pcs": 79,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_geometry_real_C28E28.log",
+        "sha256": "f6ab82fdbc047e6fa83fb2558685a32bea65128fbf64d5c9294ec36ef96df1ec"
+      }
+    },
+    {
+      "owner": "C26EBE",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 819,
+      "observed_owner_pcs": 816,
+      "raw_observed_pcs": 883,
+      "unobserved_owner_pcs": [
+        "C27186",
+        "C27188",
+        "C27448"
+      ],
+      "log": {
+        "path": "build/recomp/flight_geometry_real_C26EBE.log",
+        "sha256": "3cc0212220089acbef4c5a5d3bffff2b13d8362bd1cac6073bff23fc26d81147"
+      }
+    },
+    {
+      "owner": "C27456",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 67,
+      "observed_owner_pcs": 67,
+      "raw_observed_pcs": 67,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/flight_geometry_real_C27456.log",
+        "sha256": "db759a393aebf9deec071e77349325f672ea8d60c6dbac4f6e217d8f9118dc18"
+      }
+    }
+  ],
+  "actual_dispatch_completed_calls": 3072,
+  "dispatch_fixtures": [
+    {
+      "owner": "C2651E",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 47,
+      "raw_observed_pcs": 47,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C2651E_on.log",
+        "sha256": "5e4dd840f4dc98c95aec999630b7eeec61136e5f53051e0fbddb89f9cdc139c1"
+      }
+    },
+    {
+      "owner": "C2651E",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 47,
+      "raw_observed_pcs": 47,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C2651E_shadow.log",
+        "sha256": "5e4dd840f4dc98c95aec999630b7eeec61136e5f53051e0fbddb89f9cdc139c1"
+      }
+    },
+    {
+      "owner": "C2651E",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 50,
+      "observed_owner_pcs": 47,
+      "raw_observed_pcs": 47,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C2651E_sandbox.log",
+        "sha256": "5e4dd840f4dc98c95aec999630b7eeec61136e5f53051e0fbddb89f9cdc139c1"
+      }
+    },
+    {
+      "owner": "C28E28",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 77,
+      "raw_observed_pcs": 77,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C28E28_on.log",
+        "sha256": "5b45219eefe0b3de5b3bc260cf9a9cb0d474f2f0e070a28ca62f30f616942b1e"
+      }
+    },
+    {
+      "owner": "C28E28",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 77,
+      "raw_observed_pcs": 77,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C28E28_shadow.log",
+        "sha256": "5b45219eefe0b3de5b3bc260cf9a9cb0d474f2f0e070a28ca62f30f616942b1e"
+      }
+    },
+    {
+      "owner": "C28E28",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 79,
+      "observed_owner_pcs": 77,
+      "raw_observed_pcs": 77,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C28E28_sandbox.log",
+        "sha256": "5b45219eefe0b3de5b3bc260cf9a9cb0d474f2f0e070a28ca62f30f616942b1e"
+      }
+    },
+    {
+      "owner": "C26EBE",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 819,
+      "observed_owner_pcs": 702,
+      "raw_observed_pcs": 766,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C26EBE_on.log",
+        "sha256": "55eb400ba48ee6048e5f4bbe693511435e2e6977cecd2d0bd2a669f776685a41"
+      }
+    },
+    {
+      "owner": "C26EBE",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 819,
+      "observed_owner_pcs": 702,
+      "raw_observed_pcs": 766,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C26EBE_shadow.log",
+        "sha256": "55eb400ba48ee6048e5f4bbe693511435e2e6977cecd2d0bd2a669f776685a41"
+      }
+    },
+    {
+      "owner": "C26EBE",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 819,
+      "observed_owner_pcs": 702,
+      "raw_observed_pcs": 766,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C26EBE_sandbox.log",
+        "sha256": "55eb400ba48ee6048e5f4bbe693511435e2e6977cecd2d0bd2a669f776685a41"
+      }
+    },
+    {
+      "owner": "C27456",
+      "mode": "on",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 67,
+      "observed_owner_pcs": 67,
+      "raw_observed_pcs": 67,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C27456_on.log",
+        "sha256": "279928d4974ddfecacd7e0ca38eb8565ffcfb6cd1890d7598386c0afea8e9f49"
+      }
+    },
+    {
+      "owner": "C27456",
+      "mode": "shadow",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 67,
+      "observed_owner_pcs": 67,
+      "raw_observed_pcs": 67,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C27456_shadow.log",
+        "sha256": "279928d4974ddfecacd7e0ca38eb8565ffcfb6cd1890d7598386c0afea8e9f49"
+      }
+    },
+    {
+      "owner": "C27456",
+      "mode": "sandbox",
+      "completed_calls": 256,
+      "hardware_bearing": 0,
+      "owner_pcs": 67,
+      "observed_owner_pcs": 67,
+      "raw_observed_pcs": 67,
+      "log": {
+        "path": "build/recomp/flight_geometry_dispatch_C27456_sandbox.log",
+        "sha256": "279928d4974ddfecacd7e0ca38eb8565ffcfb6cd1890d7598386c0afea8e9f49"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "groups": [
+      {
+        "selection": [
+          "C2651E",
+          "C28E28",
+          "C26EBE",
+          "C27456"
+        ],
+        "totals": {
+          "shadow": {
+            "C2651E": {
+              "calls": 8888,
+              "compared": 8880,
+              "matched": 8880,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 8
+            },
+            "C28E28": {
+              "calls": 149,
+              "compared": 149,
+              "matched": 149,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C26EBE": {
+              "calls": 8861,
+              "compared": 6988,
+              "matched": 6988,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1873
+            },
+            "C27456": {
+              "calls": 809,
+              "compared": 809,
+              "matched": 809,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C2651E": {
+              "calls": 8888,
+              "compared": 8888,
+              "matched": 8888,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C28E28": {
+              "calls": 149,
+              "compared": 149,
+              "matched": 149,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C26EBE": {
+              "calls": 8862,
+              "compared": 8862,
+              "matched": 8862,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C27456": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 16826,
+        "sandbox_matches": 17899
+      },
+      {
+        "selection": [
+          "C27456"
+        ],
+        "totals": {
+          "shadow": {
+            "C27456": {
+              "calls": 1566,
+              "compared": 1505,
+              "matched": 1505,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 61
+            }
+          },
+          "sandbox": {
+            "C27456": {
+              "calls": 1564,
+              "compared": 1564,
+              "matched": 1564,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 1505,
+        "sandbox_matches": 1564
+      }
+    ],
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C2651E",
+          "C28E28",
+          "C26EBE",
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C2651E",
+            "name": "record_position_history",
+            "calls": 4946,
+            "compared": 4946,
+            "matched": 4946,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 71,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 205,
+            "compared": 205,
+            "matched": 205,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2999,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28E28",
+            "name": "check_zone_exit",
+            "calls": 89,
+            "compared": 89,
+            "matched": 89,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 151,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26EBE",
+            "name": "update_candidate_record",
+            "calls": 4918,
+            "compared": 3782,
+            "matched": 3782,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1136,
+            "mean_cycles": 1533,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2651E_C28E28_C26EBE_C27456_demo01_shadow.json",
+          "sha256": "8a8dfa79d687a6588330d18cc7801219fc593862b30a692a86a8f257ed3b8c03"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C2651E",
+          "C28E28",
+          "C26EBE",
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C2651E",
+            "name": "record_position_history",
+            "calls": 3255,
+            "compared": 3247,
+            "matched": 3247,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 8,
+            "mean_cycles": 61,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 175,
+            "compared": 175,
+            "matched": 175,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2267,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28E28",
+            "name": "check_zone_exit",
+            "calls": 50,
+            "compared": 50,
+            "matched": 50,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 139,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26EBE",
+            "name": "update_candidate_record",
+            "calls": 3256,
+            "compared": 2706,
+            "matched": 2706,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 550,
+            "mean_cycles": 1714,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2651E_C28E28_C26EBE_C27456_qual_carrier_success_shadow.json",
+          "sha256": "cdf015784f148430e730f548e9563a5891a97281a32f5463c9564b703abebbf5"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C2651E",
+          "C28E28",
+          "C26EBE",
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C2651E",
+            "name": "record_position_history",
+            "calls": 687,
+            "compared": 687,
+            "matched": 687,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 63,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 429,
+            "compared": 429,
+            "matched": 429,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2562,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28E28",
+            "name": "check_zone_exit",
+            "calls": 10,
+            "compared": 10,
+            "matched": 10,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 127,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26EBE",
+            "name": "update_candidate_record",
+            "calls": 687,
+            "compared": 500,
+            "matched": 500,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 187,
+            "mean_cycles": 5873,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2651E_C28E28_C26EBE_C27456_qual_fail_crashes_shadow.json",
+          "sha256": "3d42ccd11d1f8abc892de99dc1ef93f355338c8f631c0e7aa6157be605f01aa9"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C2651E",
+          "C28E28",
+          "C26EBE",
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C2651E",
+            "name": "record_position_history",
+            "calls": 4946,
+            "compared": 4946,
+            "matched": 4946,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 71,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28E28",
+            "name": "check_zone_exit",
+            "calls": 89,
+            "compared": 89,
+            "matched": 89,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 145,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26EBE",
+            "name": "update_candidate_record",
+            "calls": 4919,
+            "compared": 4919,
+            "matched": 4919,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2343,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2651E_C28E28_C26EBE_C27456_demo01_sandbox.json",
+          "sha256": "403399676c0acb3875aa9e63bd54ec9de55f21a49032fd1aef2e01893376a6d0"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C2651E",
+          "C28E28",
+          "C26EBE",
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C2651E",
+            "name": "record_position_history",
+            "calls": 3255,
+            "compared": 3255,
+            "matched": 3255,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 61,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28E28",
+            "name": "check_zone_exit",
+            "calls": 50,
+            "compared": 50,
+            "matched": 50,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 137,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26EBE",
+            "name": "update_candidate_record",
+            "calls": 3256,
+            "compared": 3256,
+            "matched": 3256,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2289,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2651E_C28E28_C26EBE_C27456_qual_carrier_success_sandbox.json",
+          "sha256": "3e942dbe16aa4fc612a5b1d16fba19dc899389952d1c68d44d904b2ced38d36a"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C2651E",
+          "C28E28",
+          "C26EBE",
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C2651E",
+            "name": "record_position_history",
+            "calls": 687,
+            "compared": 687,
+            "matched": 687,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 64,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C28E28",
+            "name": "check_zone_exit",
+            "calls": 10,
+            "compared": 10,
+            "matched": 10,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 137,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C26EBE",
+            "name": "update_candidate_record",
+            "calls": 687,
+            "compared": 687,
+            "matched": 687,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8691,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2651E_C28E28_C26EBE_C27456_qual_fail_crashes_sandbox.json",
+          "sha256": "0ce9ba2615b1674a7f1ba5b62654df623c52d02654948c546b05318970871c64"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 284,
+            "compared": 272,
+            "matched": 272,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 12,
+            "mean_cycles": 3034,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C27456_demo01_shadow.json",
+          "sha256": "c1ca8fdfebfb0a2aa1d8f27d7b2003fdf6d1a18d5e283657a623c3666daba278"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 435,
+            "compared": 412,
+            "matched": 412,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 23,
+            "mean_cycles": 2213,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C27456_qual_carrier_success_shadow.json",
+          "sha256": "bfdd8a846a23980f5e6e76fd9fc744bc4a4db034c0712099c023d1b5f3a22c91"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 847,
+            "compared": 821,
+            "matched": 821,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 26,
+            "mean_cycles": 2737,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C27456_qual_fail_crashes_shadow.json",
+          "sha256": "076a5c5e413776c785dfa9e6f03de079bf38407dbeb4298259735b3d4ca3d7eb"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 284,
+            "compared": 284,
+            "matched": 284,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3028,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C27456_demo01_sandbox.json",
+          "sha256": "e52a898ea91903e89437a0dcaa41c19b668282c20b476ba5b33cc9969f6c9c5f"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 435,
+            "compared": 435,
+            "matched": 435,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2240,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C27456_qual_carrier_success_sandbox.json",
+          "sha256": "e16cd847f386355923a3b1f1407f12b5729fe6fcd3f834cd4882f71c750eb563"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C27456"
+        ],
+        "rows": [
+          {
+            "entry": "C27456",
+            "name": "faces_all_behind",
+            "calls": 845,
+            "compared": 845,
+            "matched": 845,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2735,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C27456_qual_fail_crashes_sandbox.json",
+          "sha256": "b2b95ae9310706bc388b9738cc158c055f6c820128d89421648f76d5cdf52079"
+        }
+      }
+    ],
+    "generic_rejections": []
+  },
+  "instruction_dma": {
+    "local_instructions": 1015,
+    "local_cases": 32480,
+    "previous_unique_instructions": 21578,
+    "overlap_instructions": 0,
+    "combined_unique_instructions": 22593,
+    "combined_cases": 722976,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 22,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_main_loop_flight_controls_math.h",
+      "sha256": "b141699adbda2a39bc0009942f6f1f7d69e27d08080fbf372ddf6d945ff37f4d"
+    },
+    {
+      "path": "port/game/glue/glue_flight_record_actions_math.h",
+      "sha256": "3412841f5494bb57bcb434b60f58b7a44457fb6fe938cba37aa2b80020da0753"
+    },
+    {
+      "path": "port/game/glue/glue_flight_motion_helpers_math.h",
+      "sha256": "d32d6c42c74e096dd5c670f285a91d9d1c91f8786d3c4c3d0d9a762d899d0315"
+    },
+    {
+      "path": "port/game/glue/glue_flight_dynamics_math.h",
+      "sha256": "8d0c355abe117c5ca736c5d1a5f222e0c0d1b3755bb54c54ac732d7b3c5bb92f"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    }
+  ],
+  "full_gate": {
+    "rows": 575,
+    "recordings": 3,
+    "shadow_matches": 559969,
+    "sandbox_matches": 417343,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 303887,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "049dbdcfdfa3e733bc6e05540d776b11f5d28775960212dee25ef1ee2f9e12b6"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 203946,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "be54767b24894749a10ff4e3e754922a55bd7d4075556651825137ecf6f907fa"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52136,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "cc2d5ce9a2d1775131870583feecf1e2b674401114d5fa86f2ce6567af40d87f"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 143656,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "12b83a1b3ba34dbbfe26439d2c4266775deaaed9ce2ad59ba616a226d3b54ae5"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 231871,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "c9804c7305825ce685752fe211f19ef830e9b7b27cc01f229e6e8d0ad789e5c5"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 41816,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "d09dca9746ddf0517592b36fe5ae5ae46b7da10c36ef71eb10785ade1c257153"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1352716264,
+    "build_gib": 1.26
+  },
+  "limits": [
+    "Actual original children cover 816/819 candidate-scan owner PCs; controlled complete CPU/SR/RAM returns cover all 819.",
+    "The velocity-clear branch is exercised by an explicit controlled child RAM return that changes the saved pass index and polygon terminator. Original C27456 is not claimed to publish those values.",
+    "C26EBE raw traces include nested C27456 PCs; coverage is intersected with sealed owner scope.",
+    "Complete original game-call/callback coverage remains open. C1612C remains unregistered pending graphics-wait integration.",
+    "ALL frame416/361, deferred Copper fade and Kickstart exception/service return remain debt."
+  ],
+  "next": {
+    "entries": [
+      "C2AFFA",
+      "C2B3C2",
+      "C2B564",
+      "C2B928",
+      "C2B952"
+    ],
+    "unique_instructions": 468,
+    "shared_instructions": 32,
+    "manifest": {
+      "path": "analysis/data/flight_action_setup_scope_inventory.json",
+      "sha256": "67485b3967be914c28071d344685e0d96c72b003a903c4894708c1ec796ea942"
+    },
+    "related_unsealed_owner": "C2C392 computed transfer C2C46E"
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/flight_geometry.c",
+      "sha256": "631cead0491be6e22a96d7accdc0e532b570512a0bc5a596aef0d6d34628a70f"
+    },
+    {
+      "path": "port/game/flight_geometry.h",
+      "sha256": "020de291383f033985f2e1217cf2477697dd9c45a88f14ea1ba810953ee74699"
+    },
+    {
+      "path": "port/game/glue/glue_flight_geometry.c",
+      "sha256": "59370ede3080f359347a22fb432adcb4f3255238472ef69e19cf66f852aa887f"
+    },
+    {
+      "path": "port/game/glue/glue_flight_geometry.h",
+      "sha256": "512ddcbf91a27ca4d19fc9577ab4253761c3a2c853a022449f4250fb75a2b878"
+    },
+    {
+      "path": "port/game/glue/glue_flight_geometry_math.h",
+      "sha256": "087e7193e628efef601ac55e951d9c9ec6e4664a2e4e7efca49aa8bdbe59d157"
+    },
+    {
+      "path": "port/game/glue/glue_flight_geometry_step.c",
+      "sha256": "83728f72c52531f7b471e830d169f42e3b648472206af0c7c8556df16e10c43e"
+    },
+    {
+      "path": "port/game/glue/glue_batch13.c",
+      "sha256": "2bff2f98fe418f0e0e50f564980ed7d36c3ed8bb4b5c67d403dadd370da0f47b"
+    },
+    {
+      "path": "port/game/glue/glue_batch40.c",
+      "sha256": "e69b5e25cd7a595a057b180de58ac287a6b37cd553b82b63ab71c5f4f50f3ebc"
+    },
+    {
+      "path": "port/game/glue/glue_candidate_record_update.c",
+      "sha256": "2c2db068573eb673c3a522e8100006ddb3de4f114114ecdd8a0f5ca12766f2a9"
+    },
+    {
+      "path": "port/game/glue/glue_postflight_hud.c",
+      "sha256": "3b0cd913f3f89fc05449bf53760a2daca2f395a56cd0a0931fc7e8b72953dff2"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "0ae7e00b15d0e50243975f5704d3c415045402a9ed6f9287dbd3753a024f41e0"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "ec5618697c4bfa75d8ff61d3f564cb9a52baec4a363fb026ddd6f46959c361c4"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_flight_geometry_remaining.py",
+      "sha256": "38ba17eb135aa1e6748effa867bb6db5ae88b0cd086e0e8fea9903f613c92a67"
+    },
+    {
+      "path": "tools/recomp/audit_flight_geometry_source.py",
+      "sha256": "e439eeb2ce0c49dea6aa7d33db8352c9f023d5cb843c17ea6c4a470886b83c2d"
+    },
+    {
+      "path": "tools/recomp/check_flight_geometry.py",
+      "sha256": "493cca75724d90f6bcc65fdcf3ffe689e84b0d92ed36b4b6ee65eb8313f2dc43"
+    },
+    {
+      "path": "tools/recomp/check_flight_geometry_dispatch.py",
+      "sha256": "b280763efc41f87a08dfa9f63a2d1e6007bdc4806d2ec432346a63a0504fa5e2"
+    },
+    {
+      "path": "tools/recomp/flight_geometry_bus_budget.c",
+      "sha256": "8cbef9adaf7d525f645cc4380e10ca490143e4fac49fe0a9d55b0856a2fa2f30"
+    },
+    {
+      "path": "tools/recomp/flight_geometry_contract_children.c",
+      "sha256": "0ca84f1678912153ba2405e99717a7287020de66076fd842a1d4dde4dfd95638"
+    },
+    {
+      "path": "tools/recomp/flight_geometry_contract_oracle.c",
+      "sha256": "15c6074fefa3b91e4302d8b2688d9b8806376f811f6b75f0f75e7d4d02651a7a"
+    },
+    {
+      "path": "tools/recomp/flight_geometry_dispatch_oracle.c",
+      "sha256": "3c4cd906595992ed36012a6df788e61447378c511e843d2216c2a69f067259ed"
+    },
+    {
+      "path": "tools/recomp/flight_geometry_fixture.h",
+      "sha256": "b4ea8e36d8564447b89b6acc910a8c666b76ca598939c86c3571497d31987291"
+    },
+    {
+      "path": "tools/recomp/flight_geometry_oracle.c",
+      "sha256": "ea9e176a7949d1b824b7a14e99d87926afd560919d8cda0ad823d00fac650cd7"
+    },
+    {
+      "path": "tools/recomp/audit_flight_action_setup_scope.py",
+      "sha256": "1084cff3cc1edb4490a4dcd4dfe4fbea60730bd53d1762346928d02d209bd94f"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/geometry_contract_strict.log",
+      "sha256": "330fb8e525b5ec16dcbe6f80f672ffac242db9957fc4c23b3aa00a38ed9d3882"
+    },
+    {
+      "path": "build/recomp/geometry_real_complete.log",
+      "sha256": "daa04ca07e46de7870fb096402606ebf98674469e87ef01fc5d4939096b8982c"
+    },
+    {
+      "path": "build/recomp/geometry_dispatch.log",
+      "sha256": "1b254bcb47a861a19593dd07199fa5770e565b37e65c94109b3fce493d908fe9"
+    },
+    {
+      "path": "build/recomp/geometry_dma_local.log",
+      "sha256": "5edf326c09b1e119d370254e31af2a8882c886771edbb44ec50855b942357478"
+    },
+    {
+      "path": "build/recomp/geometry_dma_union.log",
+      "sha256": "96d9f7ec3e1d99daf13b438a5c8a5d6970ba39526c29ca737fb5604d60da8969"
+    },
+    {
+      "path": "build/recomp/geometry_compatibility.log",
+      "sha256": "576731b1c7e3c38dc5768ad41e0bcda5d0f48600520599cd206204a7853b298e"
+    },
+    {
+      "path": "build/recomp/geometry_normal_build.log",
+      "sha256": "44cf20b76b635a8d8f98a352e2d94a9c167e5efb176151c4025b48e1aad3acc6"
+    },
+    {
+      "path": "build/recomp/geometry_msvc.log",
+      "sha256": "cfa8f86f28236adbbf20e3496685f3f727c43062315cbfe84b9fcc1feb13a6c7"
+    },
+    {
+      "path": "build/recomp/geometry_ports_gate.log",
+      "sha256": "24e0bae5186d2c29518963f95ede4eb07c2b73ee998c65d6df2814420dcb32d3"
+    },
+    {
+      "path": "build/recomp/geometry_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/geometry_timing.log",
+      "sha256": "b45acb45be163a5aad128d2672bb16faea314adf1952ce61b482878e6ccd4b1c"
+    },
+    {
+      "path": "build/recomp/geometry_whole_call.log",
+      "sha256": "d04d319094eccc8d6a0325a7722851caaa595be331dd520b74ec2cf326b5dfb6"
+    },
+    {
+      "path": "build/recomp/geometry_faces_whole_call.log",
+      "sha256": "2ce38cdf4de0b4675010d638f7a7a170b857757d4cf994107bdd47726b10549c"
+    }
+  ]
+}

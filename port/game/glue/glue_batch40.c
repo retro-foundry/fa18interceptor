@@ -103,12 +103,7 @@ void candidate_face_registers(gaddr input_stream, gaddr final_stream,
 }
 
 int glue_C27456(void) {
-    int16_t shift = rd_s16(A(6) - 0x5A), eye_z = rd_s16(A(6) - 0x42);
-    gaddr input_stream = A(4), stream = input_stream;
-    int behind = faces_all_behind(&stream, A(3), shift, (int16_t)A(2),
-                                  (int32_t)A(1), eye_z);
-    candidate_face_registers(input_stream, stream, shift, eye_z, behind);
-    return glue_return();
+    return glue_complete_candidate_faces();
 }
 
 /* face_toward_eye $C1FB8C, called inside the face loop at $C1F76A: D7.w

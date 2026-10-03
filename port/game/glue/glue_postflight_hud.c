@@ -377,40 +377,7 @@ static int zone_exit_registers(int16_t index) {
 }
 
 int glue_C28E28(void) {
-    int16_t index = rd_s16(STREAM_MODE), x, y;
-    gaddr record;
-    uint8_t mode;
-    int8_t zone;
-    int k;
-
-    record = CONTROL_RECORDS + SEXT((uint16_t)(index << 9));
-    mode = rd_u8(record + 0x7A);
-    check_zone_exit();
-    A(0) = CONTROL_RECORDS;
-    SET_W(D(0), (uint16_t)(index << 9));
-    if (!W(0)) return glue_return();
-    A(0) = record;
-    SET_B(D(5), rd_u8(record + 0x62) & 0xF0);
-    if ((uint8_t)D(5) != 0x10 || rd_u8(record + 5) == 8) return glue_return();
-    zone = (int8_t)rd_u8(record + 0x5D);
-    SET_B(D(0), (uint8_t)zone);
-    if (zone < 0) return glue_return();
-    SET_B(D(0), (uint8_t)(zone - 1));
-    if ((int8_t)D(0) < 0) return glue_return();
-    SET_W(D(0), (uint16_t)((int8_t)D(0) * 4));
-    x = rd_s16(record + 6);
-    y = rd_s16(record + 8);
-    SET_W(D(5), (uint16_t)x);
-    SET_W(D(6), (uint16_t)y);
-    A(3) = rd_u32(0xC29720u + SEXT(D(0)));
-    for (k = 0; k < 4; k++) D(1 + k) = SEXT(rd_u16(A(3) + (gaddr)(2 * k)));
-    A(3) += 8;
-    if (x >= W(1) && x <= W(2) && y >= W(3) && y <= W(4)) {
-        if (mode == 5) zone_exit_registers(index);
-        return glue_return();
-    }
-    zone_exit_registers(index);
-    return glue_return();
+    return glue_complete_zone_exit();
 }
 
 void draw_polygon_registers(uint16_t last_size, uint16_t colour); /* glue_batch35.c */

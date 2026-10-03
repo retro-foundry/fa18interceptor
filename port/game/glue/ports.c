@@ -355,7 +355,7 @@ const FA18Port fa18_ports[] = {
     /* batch 13: decimal format, cockpit slide, position history */
     {0xC3267A, glue_C3267A, "format_decimal", 500},
     {0xC2559A, glue_C2559A, "step_cockpit_slide", 0, 0, glue_C2559A_step, 0xC2564E, 0, 0xC25592},
-    {0xC2651E, glue_C2651E, "record_position_history", 350},
+    {0xC2651E, glue_C2651E, "record_position_history", 0, 0, glue_C2651E_complete_step, 0xC265DC, 0, 0xC2651C, glue_C2651E_owns},
     /* batch 14: paired sin_cos, print_number, square_root */
     {0xC2E5F6, glue_C2E5F6, "sin_cos", 0, 0, glue_C2E5F6_step, 0xC2E6DA},
     {0xC24F76, glue_C24F76, "print_number", 0, 0, glue_C24F76_step, 0xC24FA4},
@@ -475,7 +475,7 @@ const FA18Port fa18_ports[] = {
     /* batch 39: cockpit messages */
     {0xC11BFC, glue_C11BFC, "update_message", 3000},
     /* batch 41: plane-side test */
-    {0xC27456, glue_C27456, "faces_all_behind", 2500},
+    {0xC27456, glue_C27456, "faces_all_behind", 0, 0, glue_C27456_complete_step, 0xC27504, 0, 0xC27450, glue_C27456_owns},
     /* batch 42: direction tracking */
     {0xC123FA, glue_C123FA, "track_direction", 0, 0, glue_C123FA_step, 0xC12950},
     /* batch 43: normalize register entry */
@@ -628,7 +628,7 @@ const FA18Port fa18_ports[] = {
     /* polygon to row C7 */
     {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 0, 0, glue_C301F0_step, 0xC30466, 0, 0xC301F0},
     /* zone exit */
-    {0xC28E28, glue_C28E28, "check_zone_exit", 1500},
+    {0xC28E28, glue_C28E28, "check_zone_exit", 0, 0, glue_C28E28_complete_step, 0xC28F16, 0, 0xC28E16, glue_C28E28_owns},
     /* shape */
     {0xC2D16C, glue_C2D16C, "draw_shape", 20000},
     /* block face */
@@ -707,7 +707,7 @@ const FA18Port fa18_ports[] = {
     {0xC2D408, glue_C2D408, "update_record_matrix", 9500},
     /* indexed control-record update */
     {0xC13D84, glue_C13D84, "update_indexed_record", 18000},
-    {0xC26EBE, glue_C26EBE, "update_candidate_record", 25000},
+    {0xC26EBE, glue_C26EBE, "update_candidate_record", 0, 0, glue_C26EBE_complete_step, 0xC279C8, 0, 0xC26EB8, glue_C26EBE_owns},
     {0xC23CA6, glue_C23CA6, "update_record_view", 0, 0, glue_C23CA6_step, 0xC24368},
     {0xC0D04C, glue_C0D04C, "draw_history_projection", 25000},
     /* selected projected segment */

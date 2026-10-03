@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 0155d2b6); ignored gate logs may
+history (the preceding handoff is in commit fa1e28b4); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -46,7 +46,9 @@ flight parents and four existing helper upgrades raised it to 490/624. Ten
 complete flight-record action/control-stream owners raised it to 500/624.
 Five complete motion-projection, publication and collision helpers raised
 it to 505/624. Four complete flight-dynamics parents and the shared C28B34
-upgrade now raise it to 509/624.
+upgrade raised it to 509/624. Four complete history, zone-exit and candidate-
+geometry upgrades retain that translated count and raise source-timed entries
+to 399.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -54,6 +56,40 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 509 of 624 translated entries plus sixty-six source-only callable entries
+  remain registered: 575 rows and 399 source-timed entries (333 translated,
+  sixty-six source-only). Complete upgrades C2651E/C28E28/C26EBE/C27456 own
+  1,015 unique / zero shared boundaries; actual incoming calls and four child
+  sites are sealed. All 131,072 completed calls pass full CPU/PC/SR/all-RAM:
+  16,384 controlled and 16,384 actual-child calls per owner. Controlled owner
+  coverage is 50/50, 79/79, 819/819 and 67/67; actual-child coverage is 50/50,
+  79/79, 816/819 and 67/67. The candidate raw trace includes nested face PCs.
+  Complete child-entry contracts preserve CPU/SR/RAM and return changed values,
+  flags, cursors and RAM. An explicit controlled RAM return changes the saved
+  pass index and polygon terminator to exercise the parent's velocity-clear
+  arm; the original C27456 is not claimed to publish those writes. Actual
+  ON/shadow/sandbox dispatch passes 3,072 hardware-free complete fixtures and
+  all guards; bounded owner coverage is 47/50, 77/79, 702/819 and 67/67.
+  Independent normal C passes 16,826 shadow / 17,899 sandbox comparisons for
+  the four-owner selection. A separate C27456 selection, with its parent
+  omitted, passes 1,505 / 1,564. Hardware/incomplete classifications remain
+  explicit. Local DMA passes 1,015 / 32,480. Fresh combined and independently
+  derived union pass 22,593 / 722,976: previous 21,578 plus all 1,015, with
+  no overlap. All twenty-two older generator outputs and shared CPU/bus/math/
+  classification proofs remain unchanged. GNU/MSVC Release pass. The full
+  575-row gate passes 559,969 shadow / 417,343 sandbox matches, zero mismatches,
+  exact seals and poison frames. All 36,236 isolated live frames/seals match.
+  Family exact through frame 600; ALL remains 416/361. build/ is 1.260 GiB. See
+  analysis/routines/native_c_flight_geometry.md and
+  analysis/figures/native_flight_geometry_checkpoint.json.
+  Next reconstruct C2AFFA/C2B3C2/C2B564/C2B928/C2B952, 468 unique / 32 shared
+  boundaries, sealed with actual incoming calls in
+  analysis/data/flight_action_setup_scope_inventory.json. These five are
+  unregistered translated entries. Related C2C392 still requires its signed
+  action-byte computed transfer at C2C46E reconciled. Complete original
+  game-call/callback coverage remains open; no service or timing-only work
+  is selected.
 
 - 509 of 624 translated entries plus sixty-six original source-only callable
   entries are registered: 575 rows and 395 source-timed entries (329 translated,
@@ -83,11 +119,11 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   frame 600; ALL remains 416/361. build/ is 1.211 GiB. See
   analysis/routines/native_c_flight_dynamics.md and
   analysis/figures/native_flight_dynamics_checkpoint.json.
-  Next upgrade complete C2651E/C28E28/C26EBE/C27456: 1,015 unique / zero
+  Its next inventory was complete C2651E/C28E28/C26EBE/C27456: 1,015 unique / zero
   shared boundaries and actual incoming calls, sealed in
   analysis/data/flight_geometry_remaining_scope_inventory.json and reproduced
   by tools/recomp/audit_flight_geometry_remaining.py. These four are already
-  registered and must not increase the translated count. Related C2C392 still
+  registered; their completed upgrades above retain the translated count. Related C2C392 still
   requires its signed action-byte computed transfer at C2C46E to be reconciled.
   Complete original game-call/callback coverage remains open. No service or
   timing-only work is selected.
@@ -1439,12 +1475,14 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
    is 509/624 translated plus sixty-six source-only callable entries. Next
-   upgrade complete C2651E/C28E28/C26EBE/C27456 from
-   analysis/data/flight_geometry_remaining_scope_inventory.json
-   (1,015 unique / zero shared boundaries, actual incoming calls sealed).
-   These four entries are already registered; their complete upgrades must
-   not increase the translated count. C26EBE owns 819 PCs and two original
-   C27456 children; C2651E/C28E28/C27456 own 50/79/67 PCs respectively.
+   reconstruct C2AFFA/C2B3C2/C2B564/C2B928/C2B952 from
+   analysis/data/flight_action_setup_scope_inventory.json
+   (468 unique / 32 shared boundaries, actual incoming calls sealed).
+   These five are unregistered translated entries. All four previously
+   registered geometry/history upgrades are now complete, with 1,015 unique
+   source boundaries and full controlled complete-call coverage. The candidate
+   owner's actual-child coverage is 816/819; its three unobserved PCs and the
+   explicit controlled RAM return are recorded in the geometry checkpoint.
    Reconcile related C2C392's computed transfer at C2C46E before assigning
    its complete scope. Five helpers from the earlier nine-owner inventory are
    now complete, as are all four parents and the shared C28B34 stream. Keep

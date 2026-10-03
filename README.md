@@ -16,16 +16,26 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-Four complete flight-dynamics parents and the upgraded shared region stream
+Four complete history, zone-exit and candidate-geometry upgrades pass 131,072
+full CPU/PC/SR/RAM calls, all 1,015 controlled source boundaries, 3,072 dispatch
+fixtures and all 36,236 isolated live frames/seals. Independent normal C passes
+16,826 shadow / 17,899 sandbox comparisons; a separate face-helper selection
+passes another 1,505 / 1,564. Actual children cover 816/819 candidate-scan PCs;
+the controlled-only paths remain explicit. The combined DMA proof passes
+22,593 boundaries / 722,976 cases. See
+[flight-geometry proof](analysis/routines/native_c_flight_geometry.md).
+The next five flight-action setup owners have a sealed 468-unique / 32-shared
+boundary inventory. Game-function porting remains incomplete; stop when only
+Kickstart services and timing remain, after reconciling cold and indirect owners.
+
+The preceding four complete flight-dynamics parents and the upgraded shared region stream
 pass 163,840 full CPU/PC/SR/RAM calls, all 1,308 controlled source boundaries,
 3,840 dispatch fixtures and all 36,236 isolated live frames/seals. Three hot
 owners pass 19,879 independent normal-C comparisons; two cold owners retain
 strict zero-comparison rejections. The combined DMA check passes 21,578
 boundaries / 690,496 cases. See
 [flight-dynamics proof](analysis/routines/native_c_flight_dynamics.md).
-The next four registered geometry/record helpers have a sealed 1,015-boundary
-inventory. Game-function porting remains incomplete; stop when only Kickstart
-services and timing remain, after reconciling cold and indirect original owners.
+Their four geometry/record helper successors are now complete as described above.
 
 The preceding five complete motion-projection, publication and collision helpers pass
 163,840 full CPU/PC/SR/RAM calls, all 229 source boundaries with controlled
@@ -67,7 +77,7 @@ The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 395 registered callable entries now have source timing. The complete
+isolation; 399 registered callable entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent
