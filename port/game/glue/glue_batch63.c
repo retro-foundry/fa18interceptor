@@ -46,18 +46,6 @@ int glue_C133B2(void) {
     return glue_return();
 }
 
-int glue_C118A0(void) {
-    int16_t countdown = rd_s16(POST_INPUT_COUNTDOWN);
-    SET_W(D(0), (uint16_t)countdown);
-    queue_postflight_failure_message();
-    if (countdown < 0) {
-        SET_B(D(0), rd_u8(POSTFLIGHT_FAILURE_INPUT));
-        A(0) = ROUTINE_FAILURE_STATUS_GATE;
-        A(1) = rd_u32(LONG_TABLE) + 60;
-    }
-    return glue_return();
-}
-
 int glue_C083E2(void) {
     begin_mission_reset();
     D(0) = (D(0) & 0x0000FFFFu) | 0x40000000u;

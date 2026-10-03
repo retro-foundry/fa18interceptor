@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -63,6 +63,7 @@ for mnemonic,operation in (("btst","?"),("bset","|"),("bclr","&"),("bchg","^")):
 for mnemonic in ("asl","asr"):
  body[mnemonic+".w"]=f"if((opcode&0xc0u)!=0xc0u) {{ renderer_{mnemonic}_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break; }} address=cache_step_address(mode,reg,2); old=cache_step_read_memory(address,2); renderer_{mnemonic}_word(&old,1); USE_CYCLES(-2); cache_step_write_memory(address,old,2,0); break;"
 body["suba.l"]="A(destination)-=cache_step_read(mode,reg,4); break;"
+body["muls.w"]="renderer_multiply(&D(destination),(uint16_t)cache_step_read(mode,reg,2)); break;"
 body["asr.l"]="step_asr_long(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
 body["lsl.w"]="menu_lsl_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
 body["lsr.b"]="menu_lsr_byte(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"

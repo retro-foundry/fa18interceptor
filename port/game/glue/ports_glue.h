@@ -11,6 +11,7 @@
 #include "glue_menu_outcome.h"
 #include "glue_menu_return.h"
 #include "glue_menu_context_finish.h"
+#include "glue_postflight_completion.h"
 int glue_C16EAE(void);
 int glue_C16BF2(void);
 int glue_C16C56(void);

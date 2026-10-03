@@ -199,6 +199,9 @@ Rules for reconstruction:
 | `$C45908` | longword | `MENU_TIME_TOTAL`: `$C11A50` adds the elapsed `$C45904` long to this field. |
 | `$C4590C` | longword | `MENU_TIME_OPTIONAL`: `$C11A50` adds the same elapsed long only when this field is nonzero. |
 | `$C45914` | longword | `MENU_TIME_SAVED`: `$C10CFE` copies the first `$C45AF2` timer sample here before installing `$C10D8A`. These context/timer accesses are sealed in `analysis/data/menu_context_finish_source_scope.json`; wider gameplay meanings remain unassigned. |
+| `$C45897` | byte | `POSTFLIGHT_RESET_REMAINING`: `$C11788` reloads this after actual scene reset, subtracts one with byte wrapping, and tests the stored byte as signed to choose `$C11830` or the render-clear/failure callback path. |
+| `$C458D4` | word | `PLAYER_STATUS_D4`: `$C11788` clears bit ten after the scene child, using that child's changed value. |
+| `$C46216-$C46227` | nine signed words | Root inverse matrix at `$C46184 + $92`, read by independently called `$C091E6`. Signed word products wrap as longs before ASR.L #4; root position longs at +$14/+18/+1C are then added. Stack/register outputs and exact owned boundaries are sealed in `analysis/data/postflight_completion_source_scope.json`; this matrix is part of the existing control-record layout. |
 | `$C457C5` | byte | set to one after the static `$C0F5F8` in-range offset route. |
 | `$C4599E` | word | set to `$003F` before `$C0F5F8` calls `$C06C02` on an out-of-range calculated offset. |
 | `$C458C0` | word | copied to `$C45AD6` by static `$C0F5F8` phase-three route. |

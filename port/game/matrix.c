@@ -405,7 +405,12 @@ void local_to_world(gaddr record, gaddr matrix, int16_t x, int16_t y, int16_t z,
     int row;
     for (row = 0; row < 3; row++) {
         gaddr m = matrix + (gaddr)(6 * row);
-        int32_t sum = (int32_t)x * rd_s16(m) + (int32_t)y * rd_s16(m + 2) + (int32_t)z * rd_s16(m + 4);
-        out[row] = (sum >> 4) + rd_s32(record + RECORD_POSITION + (gaddr)(4 * row));
+        /* Original ADD.L wraps before ASR.L; three signed products can
+         * overflow even though each MULS.W product fits in a long. */
+        uint32_t sum = (uint32_t)((int32_t)x * rd_s16(m)) +
+                       (uint32_t)((int32_t)y * rd_s16(m + 2)) +
+                       (uint32_t)((int32_t)z * rd_s16(m + 4));
+        out[row] = (int32_t)((uint32_t)((int32_t)sum >> 4) +
+                   rd_u32(record + RECORD_POSITION + (gaddr)(4 * row)));
     }
 }

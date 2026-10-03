@@ -1,8 +1,5 @@
-/* Glue for the post-input stages, the throttle and stick setters, the
- * flight recorder and small helpers. The stages' caller ($C0F808, through
- * STAGE_CALLBACK) reads every register: what each stage last loaded into D0
- * (MOVE.B and MOVE.W keep the upper bits), and A0 as its LEA of the next
- * stage leaves it (reset_message_sequence leaves its own first). */
+/* Glue for the throttle and stick setters, flight recorder and small helpers.
+ * Complete postflight callbacks now live in glue_postflight_completion.c. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -17,62 +14,6 @@
 #include "stages.h"
 
 #define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
-
-static int countdown_regs(void) {
-    SET_W(D(0), rd_u16(POST_INPUT_COUNTDOWN));
-    return rd_s16(POST_INPUT_COUNTDOWN) < 0;
-}
-
-int glue_C0F946(void) {
-    if (countdown_regs()) {
-        SET_B(D(0), rd_u8(VIEWPORT_MODE));
-        SET_B(D(1), rd_u8(VIEWPORT_TARGET));
-        if ((uint8_t)D(0) == (uint8_t)D(1)) A(0) = ROUTINE_VIEWPORT_READY;
-    }
-    await_viewport_then_ready();
-    return glue_return();
-}
-
-int glue_C0F974(void) {
-    if (countdown_regs()) A(0) = ROUTINE_AFTER_VIEWPORT;
-    mark_viewport_ready();
-    return glue_return();
-}
-
-int glue_C11872(void) {
-    if (countdown_regs()) SET_W(D(0), rd_u16(COCKPIT_FLAGS) | 0x40);
-    expire_to_fire_state();
-    return glue_return();
-}
-
-int glue_C118E6(void) {
-    SET_B(D(0), rd_u8(MESSAGE_STATE_C));
-    end_on_message();
-    return glue_return();
-}
-
-int glue_C11958(void) {
-    SET_B(D(0), rd_u8(MESSAGE_STATE_C));
-    if ((int8_t)D(0) < 0) {
-        SET_W(D(0), rd_u16(COCKPIT_FLAGS) & 0xFFBF & 0x9FFF);
-        A(0) = ROUTINE_RESTART_SEQUENCE;
-    } else {
-        SET_B(D(0), rd_u8(SEQUENCE_PHASE));
-        if ((uint8_t)D(0) == 0xFF) D(0) = 0;
-        else {
-            SET_B(D(0), (uint8_t)(rd_u8(SEQUENCE_PHASE) - 1));
-            if (!(uint8_t)D(0)) A(0) = ROUTINE_RESTART_SEQUENCE;
-        }
-    }
-    follow_message_or_phase();
-    return glue_return();
-}
-
-int glue_C119D4(void) {
-    if (countdown_regs()) D(0) = 0;
-    restart_after_countdown();
-    return glue_return();
-}
 
 /* ---- throttle and stick: D1 the byte stored, D2 the field value -------- */
 

@@ -1,6 +1,7 @@
 /* Post-input stage sequence (STAGE_CALLBACK chain). */
 #include "post_input.h"
 #include "menu_context_finish.h"
+#include "postflight_completion.h"
 #include "postflight_scheduler.h"
 #include "menu_followup.h"
 #include "menu_outcome.h"
@@ -41,17 +42,9 @@ void check_post_input_expiry(void) {
 static int countdown_expired(void) { return rd_s16(POST_INPUT_COUNTDOWN) < 0; }
 static void next_stage(gaddr routine) { wr_u32(STAGE_CALLBACK, routine); }
 
-void await_viewport_then_ready(void) {
-    if (!countdown_expired() || rd_u8(VIEWPORT_MODE) != rd_u8(VIEWPORT_TARGET)) return;
-    wr_u16(POST_INPUT_COUNTDOWN, 2);
-    next_stage(ROUTINE_VIEWPORT_READY);
-}
+void await_viewport_then_ready(void) { await_postflight_viewport(NULL); }
 
-void mark_viewport_ready(void) {
-    if (!countdown_expired()) return;
-    wr_u8(POST_INPUT_AUX, 1);
-    next_stage(ROUTINE_AFTER_VIEWPORT);
-}
+void mark_viewport_ready(void) { mark_postflight_viewport_ready(NULL); }
 
 void choose_after_countdown(void) {
     choose_menu_exit_after_countdown(NULL);
@@ -77,44 +70,13 @@ void start_outcome_countdown(void) {
     start_menu_outcome(NULL);
 }
 
-void expire_to_fire_state(void) {
-    if (!countdown_expired()) return;
-    wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) | 0x40));
-    wr_u8(FIRE_STATE, 0xFE);
-    next_stage(STAGE_AFTER_EXPIRY);
-}
+void expire_to_fire_state(void) { expire_postflight_completion(NULL); }
 
-void end_on_message(void) {
-    if ((int8_t)rd_u8(MESSAGE_STATE_C) < 0) next_stage(ROUTINE_END_SEQUENCE);
-}
+void end_on_message(void) { end_postflight_message(NULL); }
 
-void follow_message_or_phase(void) {
-    if ((int8_t)rd_u8(MESSAGE_STATE_C) < 0) {
-        wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) & 0xFFBF));
-        wr_u16(COCKPIT_FLAGS, (uint16_t)(rd_u16(COCKPIT_FLAGS) & 0x9FFF));
-        wr_u16(POST_INPUT_COUNTDOWN, 0x64);
-        next_stage(ROUTINE_RESTART_SEQUENCE);
-    } else if (rd_u8(SEQUENCE_PHASE) == 0xFF) {
-        wr_u8(SEQUENCE_PHASE, 0);
-        wr_u8(SEQUENCE_FLAG, 0);
-        next_stage(ROUTINE_END_SEQUENCE);
-    } else if (rd_u8(SEQUENCE_PHASE) == 1) {
-        wr_u16(POST_INPUT_COUNTDOWN, 0xFFFF);
-        next_stage(ROUTINE_RESTART_SEQUENCE);
-    }
-}
+void follow_message_or_phase(void) { follow_postflight_message_or_phase(NULL); }
 
-void restart_after_countdown(void) {
-    if (!countdown_expired()) return;
-    wr_u8(SEQUENCE_PHASE, 0);
-    wr_u8(PLAYER_PHASE, 0);
-    if (rd_u8(CONTEXT_REQUEST)) wr_u8(SEQUENCE_FLAG, 1);
-    wr_u8(POST_INPUT_EVENT, 1);
-    wr_u16(POST_INPUT_COUNTDOWN, 3);
-    wr_u8(POST_INPUT_AUX, 0);
-    wr_u8(VIEWPORT_TARGET, 0);
-    next_stage(ROUTINE_AWAIT_VIEWPORT);
-}
+void restart_after_countdown(void) { restart_postflight_after_countdown(NULL); }
 
 void begin_phase_three(void) {
     schedule_postflight(POSTFLIGHT_MODE_NINE,0,0,NULL);

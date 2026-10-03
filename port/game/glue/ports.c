@@ -7,6 +7,11 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete postflight/reset/restart callbacks and root transform. */
+    {0xC118FC, glue_C118FC, "follow_postflight_message", 0, 0, glue_C118FC_step, 0xC11934, 0, 0, glue_C118FC_owns},
+    {0xC11934, glue_C11934, "clear_postflight_phase", 0, 0, glue_C11934_step, 0xC11958, 0, 0, glue_C11934_owns},
+    {0xC1104C, glue_C1104C, "queue_postflight_end", 0, 0, glue_C1104C_step, 0xC11078, 0, 0, glue_C1104C_owns},
+    {0xC091E6, glue_C091E6, "root_to_world", 0, 0, glue_C091E6_step, 0xC0924A, 0, 0, glue_C091E6_owns},
     /* Complete menu/context completion owners and source children. */
     {0xC10A24, glue_C10A24, "follow_menu_smoothing", 0, 0, glue_C10A24_step, 0xC10AB2, 0, 0, glue_C10A24_owns},
     {0xC10AB2, glue_C10AB2, "queue_menu_smoothing_message", 0, 0, glue_C10AB2_step, 0xC10AE6, 0, 0, glue_C10AB2_owns},
@@ -189,7 +194,7 @@ const FA18Port fa18_ports[] = {
     {0xC1B602, glue_C1B602, "reset_throttle_input_state", 42},
     {0xC0833E, glue_C0833E, "dispatch_space_command_effect", 110},
     {0xC133B2, glue_C133B2, "record_6e_step", 220},
-    {0xC118A0, glue_C118A0, "queue_postflight_failure_message", 240},
+    {0xC118A0, glue_C118A0, "queue_postflight_failure_message", 0, 0, glue_C118A0_step, 0xC118E6, 0, 0, glue_C118A0_owns},
     {0xC083E2, glue_C083E2, "begin_mission_reset", 1000},
     {0xC25A00, glue_C25A00, "add_repeated_nibble_weight", 150},
     {0xC30AE2, glue_C30AE2, "draw_stores_icon_stream", 500},
@@ -420,18 +425,18 @@ const FA18Port fa18_ports[] = {
     /* batch 46: target distance */
     {0xC1D91A, glue_C1D91A, "target_distance", 0, 0, glue_C1D91A_step, 0xC1D9D8, 0, 0xC1D90A},
     /* batch 47: post-input stages, stick and throttle, flight recorder */
-    {0xC0F946, glue_C0F946, "await_viewport_then_ready", 120},
-    {0xC0F974, glue_C0F974, "mark_viewport_ready", 80},
+    {0xC0F946, glue_C0F946, "await_viewport_then_ready", 0, 0, glue_C0F946_step, 0xC0F974, 0, 0, glue_C0F946_owns},
+    {0xC0F974, glue_C0F974, "mark_viewport_ready", 0, 0, glue_C0F974_step, 0xC0F992, 0, 0, glue_C0F974_owns},
     {0xC0FB70, glue_C0FB70, "choose_after_countdown", 0, 0, glue_C0FB70_step, 0xC0FBB6, 0, 0, glue_C0FB70_owns},
     {0xC0FBB6, glue_C0FBB6, "leave_on_key_or_message", 0, 0, glue_C0FBB6_step, 0xC0FBE0, 0, 0, glue_C0FBB6_owns},
     {0xC101FC, glue_C101FC, "reset_viewport_after_countdown", 0, 0, glue_C101FC_step, 0xC10228, 0, 0, glue_C101FC_owns},
     {0xC10228, glue_C10228, "enter_mode_four_when_ready", 0, 0, glue_C10228_step, 0xC10272, 0, 0, glue_C10228_owns},
     {0xC1072E, glue_C1072E, "queue_message_four", 0, 0, glue_C1072E_step, 0xC1075A, 0, 0, glue_C1072E_owns},
     {0xC1075A, glue_C1075A, "start_outcome_countdown", 0, 0, glue_C1075A_step, 0xC1078A, 0, 0, glue_C1075A_owns},
-    {0xC11872, glue_C11872, "expire_to_fire_state", 120},
-    {0xC118E6, glue_C118E6, "end_on_message", 60},
-    {0xC11958, glue_C11958, "follow_message_or_phase", 150},
-    {0xC119D4, glue_C119D4, "restart_after_countdown", 200},
+    {0xC11872, glue_C11872, "expire_to_fire_state", 0, 0, glue_C11872_step, 0xC118A0, 0, 0, glue_C11872_owns},
+    {0xC118E6, glue_C118E6, "end_on_message", 0, 0, glue_C118E6_step, 0xC118FC, 0, 0, glue_C118E6_owns},
+    {0xC11958, glue_C11958, "follow_message_or_phase", 0, 0, glue_C11958_step, 0xC119D4, 0, 0, glue_C11958_owns},
+    {0xC119D4, glue_C119D4, "restart_after_countdown", 0, 0, glue_C119D4_step, 0xC11A26, 0, 0, glue_C119D4_owns},
     {0xC0A2F0, glue_C0A2F0, "begin_phase_three", 0, 0, glue_C0A2F0_step, 0xC0A3C6, 0, 0xC0A2EE, glue_C0A2F0_owns},
     {0xC1B4D0, glue_C1B4D0, "set_throttle_input", 60},
     {0xC1B4D4, glue_C1B4D4, "set_throttle_input", 60},
@@ -605,8 +610,8 @@ const FA18Port fa18_ports[] = {
     {0xC09266, glue_C09266, "reset_scene_recorder", 0, 0, glue_C09266_step, 0xC095C0},
     {0xC092A0, glue_C092A0, "place_scene_root", 0, 0, glue_C092A0_step, 0xC095C0},
     /* postflight scene callbacks (/) */
-    {0xC11788, glue_C11788, "advance_postflight_reset", 3200},
-    {0xC11830, glue_C11830, "restart_postflight_scene", 3900},
+    {0xC11788, glue_C11788, "advance_postflight_reset", 0, 0, glue_C11788_step, 0xC11830, 0, 0, glue_C11788_owns},
+    {0xC11830, glue_C11830, "restart_postflight_scene", 0, 0, glue_C11830_step, 0xC11872, 0, 0, glue_C11830_owns},
     /* panel mark drawing () */
     {0xC3003A, glue_C3003A, "draw_panel_mark", 12000},
     /* post-input heading formatter () */
