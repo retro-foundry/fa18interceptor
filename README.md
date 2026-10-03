@@ -12,7 +12,7 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-470 translated game entries and thirteen original source-only callable entries are
+471 translated game entries and nineteen original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
@@ -20,7 +20,7 @@ The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 277 registered callable entries now have source timing. The complete
+isolation; 286 registered callable entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent
@@ -113,8 +113,15 @@ passes 3,840 fixtures; normal C matches 19 calls in each reference mode. All
 live frames, seals and full gates pass. The fresh combined DMA oracle passes
 15,370 instructions / 491,840 cases. See
 [menu follow-up proof](analysis/routines/native_c_menu_followup.md).
-Next reconstruct the sealed delayed-menu/outcome callbacks, including all four
-original indirect-table arms. The seeded 624 entries do not cover the whole game.
+The nine complete delayed-menu/outcome owners now raise coverage to 471/624
+plus nineteen source-only entries. Separate real and controlled children cover
+all 238 boundaries in 221,184 full CPU/RAM calls, including the four outcome
+table arms. Actual dispatch passes 6,912 fixtures; normal C matches 724 calls
+per reference mode. All live frames, seals and full gates pass. The independent
+instruction union is 15,563 / 498,016; the last fresh combined run remains
+15,370 / 491,840. See [outcome proof](analysis/routines/native_c_menu_outcome.md).
+Next reconstruct the sealed menu/context return callbacks and required child.
+The seeded 624 entries do not cover the whole game.
 The frame-416 comparison
 confirmed a fade starting and finishing two frames late. Source timing for
 the scene initializer has removed one delayed frame; one remains inherited

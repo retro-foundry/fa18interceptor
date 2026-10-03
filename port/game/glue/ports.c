@@ -7,6 +7,14 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete delayed-menu/outcome owners and immediate continuations. */
+    {0xC104C2, glue_C104C2, "select_delayed_menu_message", 0, 0, glue_C104C2_step, 0xC105A6, 0, 0, glue_C104C2_owns},
+    {0xC105F4, glue_C105F4, "pause_menu_after_countdown", 0, 0, glue_C105F4_step, 0xC10626, 0, 0, glue_C105F4_owns},
+    {0xC1078A, glue_C1078A, "finish_menu_outcome", 0, 0, glue_C1078A_step, 0xC108DA, 0, 0, glue_C1078A_owns},
+    {0xC105A6, glue_C105A6, "leave_delayed_menu_message", 0, 0, glue_C105A6_step, 0xC105F4, 0, 0, glue_C105A6_owns},
+    {0xC10626, glue_C10626, "start_menu_context_after_countdown", 0, 0, glue_C10626_step, 0xC1064C, 0, 0, glue_C10626_owns},
+    {0xC108DA, glue_C108DA, "queue_menu_attempts_exhausted", 0, 0, glue_C108DA_step, 0xC108FE, 0, 0, glue_C108DA_owns},
+    {0xC29368, glue_C29368, "select_origin_control_record", 0, 0, glue_C29368_step, 0xC2940A, 0, 0, glue_C29368_owns},
     /* Complete menu follow-ups and original table-file owner. Three callbacks
      * are source-only; C1643A is a translated entry and C10678 was registered. */
     {0xC1029E, glue_C1029E, "poll_menu_viewport", 0, 0, glue_C1029E_step, 0xC102D8, 0, 0, glue_C1029E_owns},
@@ -396,8 +404,8 @@ const FA18Port fa18_ports[] = {
     {0xC0FBB6, glue_C0FBB6, "leave_on_key_or_message", 250},
     {0xC101FC, glue_C101FC, "reset_viewport_after_countdown", 100},
     {0xC10228, glue_C10228, "enter_mode_four_when_ready", 150},
-    {0xC1072E, glue_C1072E, "queue_message_four", 100},
-    {0xC1075A, glue_C1075A, "start_outcome_countdown", 250},
+    {0xC1072E, glue_C1072E, "queue_message_four", 0, 0, glue_C1072E_step, 0xC1075A, 0, 0, glue_C1072E_owns},
+    {0xC1075A, glue_C1075A, "start_outcome_countdown", 0, 0, glue_C1075A_step, 0xC1078A, 0, 0, glue_C1075A_owns},
     {0xC11872, glue_C11872, "expire_to_fire_state", 120},
     {0xC118E6, glue_C118E6, "end_on_message", 60},
     {0xC11958, glue_C11958, "follow_message_or_phase", 150},

@@ -10,11 +10,14 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
-for row in manifest["instructions"]: groups[row["instruction"].split()[0]].append(row["pc"])
+reused_steps=manifest.get("timing_reuse",{})
+generated_pcs={pc for entry,owner in manifest['owners'].items() if entry not in reused_steps for pc in owner['source_pcs']}
+for row in manifest["instructions"]:
+ if row['pc'] in generated_pcs: groups[row["instruction"].split()[0]].append(row["pc"])
 body={
  "rts":"REG_PC=m68ki_pull_32(); break;",
  "jsr":"address=cache_step_address(mode,reg,4); m68ki_push_32(REG_PC); REG_PC=address; break;",
@@ -134,7 +137,8 @@ for entry,owner in manifest["owners"].items():
  for j in range(0,len(pcs),8): out+="    "+",".join("0x"+pc for pc in pcs[j:j+8])+",\n"
  out+="};\n"
  out+=f"int glue_{entry}_owns(uint32_t pc) {{ return owns_pc(owned_{entry},sizeof owned_{entry}/sizeof owned_{entry}[0],pc); }}\n"
- out+=f"int glue_{entry}_step(void) {{ if(!glue_{entry}_owns(REG_PC)) return 0; return {step_name}(); }}\n"
+ if entry in reused_steps: out+=f"extern int {reused_steps[entry]}(void);\n"
+ out+=f"int glue_{entry}_step(void) {{ if(!glue_{entry}_owns(REG_PC)) return 0; return {reused_steps.get(entry,step_name)}(); }}\n"
 path=ROOT/f"port/game/glue/glue_{family}_step.c"
 path.write_text(out)
 print(f"{family} timing bridge: {len(manifest['instructions'])} unique original boundaries")

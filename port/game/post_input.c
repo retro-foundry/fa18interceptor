@@ -2,6 +2,7 @@
 #include "post_input.h"
 #include "postflight_scheduler.h"
 #include "menu_followup.h"
+#include "menu_outcome.h"
 
 #include "audio.h"
 #include "stages.h"
@@ -104,19 +105,11 @@ void enter_mode_four_when_ready(void) {
 }
 
 void queue_message_four(void) {
-    if (rd_u8(MESSAGE_STATE_C) != 1) return;
-    wr_u16(MESSAGE_QUEUE, 4);
-    wr_u8(MESSAGE_STATE_B, 0);
-    wr_u8(MESSAGE_STATE_C, 3);
-    next_stage(ROUTINE_START_OUTCOME);
+    queue_menu_message_four(NULL);
 }
 
 void start_outcome_countdown(void) {
-    if (!rd_u8(CONTEXT_REQUEST)) return;
-    if (rd_u8(CONTEXT_SELECT)) wr_u8(CONTEXT_GATE, 2);
-    reset_message_sequence();
-    wr_u16(POST_INPUT_COUNTDOWN, 3);
-    next_stage(ROUTINE_OUTCOME);
+    start_menu_outcome(NULL);
 }
 
 void expire_to_fire_state(void) {

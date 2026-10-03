@@ -76,19 +76,6 @@ int glue_C10228(void) {
     return glue_return();
 }
 
-int glue_C1072E(void) {
-    SET_B(D(0), (uint8_t)(rd_u8(MESSAGE_STATE_C) - 1));
-    if (!(uint8_t)D(0)) A(0) = ROUTINE_START_OUTCOME;
-    queue_message_four();
-    return glue_return();
-}
-
-int glue_C1075A(void) {
-    if (rd_u8(CONTEXT_REQUEST)) { reset_regs(); A(0) = ROUTINE_OUTCOME; }
-    start_outcome_countdown();
-    return glue_return();
-}
-
 int glue_C11872(void) {
     if (countdown_regs()) SET_W(D(0), rd_u16(COCKPIT_FLAGS) | 0x40);
     expire_to_fire_state();

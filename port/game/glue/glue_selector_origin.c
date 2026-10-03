@@ -204,8 +204,8 @@ int glue_C29042(void) {
     OriginCPU cpu={0}; SelectorOriginHooks hooks={consume,origin_outputs,&cpu};
     publish_selector_origin(&hooks); return glue_return();
 }
-/* Cold internal entries are tested as parts of the owner, never counted as
- * newly registered functions. Other original callers can still execute them. */
+/* Shared cold bodies remain parts of the original owner. Register an
+ * independent entry only with original external call-site evidence. */
 int glue_origin_control_record(void) {
     OriginCPU cpu={0}; SelectorOriginHooks hooks={consume,origin_outputs,&cpu};
     select_origin_control_record(&hooks); return glue_return();
