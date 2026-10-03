@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -62,8 +62,17 @@ for mnemonic,operation in (("btst","?"),("bset","|"),("bclr","&"),("bchg","^")):
  body[mnemonic]=f"value=(opcode&0x0100u)?D(destination):m68ki_read_imm_16(); operation='{operation}'; goto bit_value;"
 for mnemonic in ("asl","asr"):
  body[mnemonic+".w"]=f"if((opcode&0xc0u)!=0xc0u) {{ renderer_{mnemonic}_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break; }} address=cache_step_address(mode,reg,2); old=cache_step_read_memory(address,2); renderer_{mnemonic}_word(&old,1); USE_CYCLES(-2); cache_step_write_memory(address,old,2,0); break;"
+body["suba.l"]="A(destination)-=cache_step_read(mode,reg,4); break;"
+body["asr.l"]="step_asr_long(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
+body["lsl.w"]="menu_lsl_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
+body["lsr.b"]="menu_lsr_byte(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
+body["abcd"]="value=cache_step_read_memory(A(reg)-=reg==7?2:1,1); address=(A(destination)-=destination==7?2:1); old=cache_step_read_memory(address,1); cache_step_write_memory(address,menu_decimal_flags((uint8_t)value,(uint8_t)old),1,0); break;"
 missing=set(groups)-set(body)
 if missing: raise ValueError(f"unsupported owned source operations: {sorted(missing)}")
+if family=="menu_context_finish":
+ for suffix,width in (("b",1),("w",2),("l",4)):
+  for mnemonic,operation in (("add","+"),("sub","-")):
+   body[mnemonic+"."+suffix]=f"width={width}; if(opcode&0x100u) {{ value=D(destination); operation='{operation}'; goto arithmetic; }} value=cache_step_read(mode,reg,width); reg=destination; mode=0; operation='{operation}'; goto arithmetic;"
 out="""/* Complete C1AC28/C1AD74 source CPU/bus/event boundaries.
  * Readable behavior lives in command_dispatch.c and its action modules.
  * Reproduce with tools/recomp/make_command_dispatch_step.py. */
@@ -86,6 +95,8 @@ if family!="command_dispatch":
      "command_dispatch.c and its action modules", family+".c").replace(
      "make_command_dispatch_step.py.", "make_command_dispatch_step.py --family "+family+".").replace(
      '"glue_command_dispatch.h"','"glue_'+family+'.h"').replace("command_step",step_name)
+if family=="menu_context_finish":
+ out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_menu_context_math.h"')
 for key,pcs in groups.items():
  for j in range(0,len(pcs),4): out+="    "+" ".join("case 0x"+pc+":" for pc in pcs[j:j+4])+"\n"
  out+="        "+body[key]+"\n"

@@ -7,6 +7,17 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete menu/context completion owners and source children. */
+    {0xC10A24, glue_C10A24, "follow_menu_smoothing", 0, 0, glue_C10A24_step, 0xC10AB2, 0, 0, glue_C10A24_owns},
+    {0xC10AB2, glue_C10AB2, "queue_menu_smoothing_message", 0, 0, glue_C10AB2_step, 0xC10AE6, 0, 0, glue_C10AB2_owns},
+    {0xC10AE6, glue_C10AE6, "restart_menu_smoothing", 0, 0, glue_C10AE6_step, 0xC10B1E, 0, 0, glue_C10AE6_owns},
+    {0xC10B1E, glue_C10B1E, "reset_menu_smoothing_view", 0, 0, glue_C10B1E_step, 0xC10B90, 0, 0, glue_C10B1E_owns},
+    {0xC10CFE, glue_C10CFE, "finish_menu_context_message", 0, 0, glue_C10CFE_step, 0xC10D8A, 0, 0, glue_C10CFE_owns},
+    {0xC10DAE, glue_C10DAE, "update_menu_context", 0, 0, glue_C10DAE_step, 0xC1104C, 0, 0, glue_C10DAE_owns},
+    {0xC11A26, glue_C11A26, "queue_menu_viewport_message", 0, 0, glue_C11A26_step, 0xC11A50, 0, 0, glue_C11A26_owns},
+    {0xC11A50, glue_C11A50, "finish_menu_viewport_message", 0, 0, glue_C11A50_step, 0xC11ACC, 0, 0, glue_C11A50_owns},
+    {0xC09192, glue_C09192, "load_menu_position_preset", 0, 0, glue_C09192_step, 0xC091A8, 0, 0, glue_C09192_owns},
+    {0xC16D04, glue_C16D04, "read_menu_time_sample", 0, 0, glue_C16D04_step, 0xC16D4C, 0, 0, glue_C16D04_owns},
     /* Complete menu/context return owners, including source-only callbacks. */
     {0xC1064C, glue_C1064C, "finish_menu_context_three", 0, 0, glue_C1064C_step, 0xC10678, 0, 0, glue_C1064C_owns},
     {0xC108FE, glue_C108FE, "return_only_menu_callback", 0, 0, glue_C108FE_step, 0xC10900, 0, 0, glue_C108FE_owns},
@@ -237,7 +248,7 @@ const FA18Port fa18_ports[] = {
     {0xC310AA, glue_C310AA, "update_compass", 300},
     {0xC082B8, glue_C082B8, "request_cockpit_redraw", 0, 0, glue_C082B8_step, 0xC08324},
     {0xC082B0, glue_C082B0, "finish_scene_setup", 0, 0, glue_C082B0_step, 0xC08324},
-    {0xC10C08, glue_C10C08, "start_context_stage", 120},
+    {0xC10C08, glue_C10C08, "start_context_stage", 0, 0, glue_C10C08_step, 0xC10C68, 0, 0, glue_C10C08_owns},
     {0xC11B0E, glue_C11B0E, "clear_long_table", 0, 0, glue_C11B0E_step, 0xC11B42},
     /* batch 9: hex text, decay, nudge, random, voices, readout, mission, view pan */
     {0xC0F56A, glue_C0F56A, "format_hex", 0, 0, glue_C0F56A_step, 0xC0F5F8},
@@ -359,7 +370,7 @@ const FA18Port fa18_ports[] = {
     {0xC24568, glue_C24568, "classify_record_range", 1200},
     {0xC304FA, glue_C304FA, "blit_lane", 400},
     /* batch 28: post-input expiry, projection seed, condition tables */
-    {0xC10D8A, glue_C10D8A, "check_post_input_expiry", 1300},
+    {0xC10D8A, glue_C10D8A, "check_post_input_expiry", 0, 0, glue_C10D8A_step, 0xC10DAE, 0, 0, glue_C10D8A_owns},
     {0xC1C54E, glue_C1C54E, "seed_projection", 0, 0, glue_C1C54E_step, 0xC1C63E},
     {0xC09AB8, glue_C09AB8, "condition_table_matches", 0, 0, glue_C09AB8_step, 0xC09B48},
     /* batch 29: component bound, repeated sum, view key */
@@ -599,13 +610,13 @@ const FA18Port fa18_ports[] = {
     /* panel mark drawing () */
     {0xC3003A, glue_C3003A, "draw_panel_mark", 12000},
     /* post-input heading formatter () */
-    {0xC25070, glue_C25070, "refresh_post_input_heading", 5500},
+    {0xC25070, glue_C25070, "refresh_post_input_heading", 0, 0, glue_C25070_step, 0xC25176, 0, 0xC2506C, glue_C25070_owns},
     /* scene record stream dispatch () */
     {0xC28B34, glue_C28B34, "dispatch_scene_records", 0, 0, glue_C28B34_step, 0xC28E12},
     /* scene record initialization and aim () */
     {0xC28AFE, glue_C28AFE, "initialize_scene_record", 0, 0, glue_C28AFE_step, 0xC28E12},
     /* post-input context command and heading marker () */
-    {0xC10C68, glue_C10C68, "queue_post_input_context_command", 3000},
+    {0xC10C68, glue_C10C68, "queue_post_input_context_command", 0, 0, glue_C10C68_step, 0xC10CFE, 0, 0, glue_C10C68_owns},
     /* static template bit-gate builder () */
     {0xC1C40C, glue_C1C40C, "build_template_bit_gates", 20000},
     /* selected-fire record initializer () */

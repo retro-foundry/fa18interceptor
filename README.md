@@ -12,7 +12,7 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-471 translated game entries and twenty-nine original source-only callable entries are
+474 translated game entries and thirty-six original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
@@ -20,7 +20,7 @@ The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 300 registered callable entries now have source timing. The complete
+isolation; 314 registered callable entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent
@@ -128,8 +128,17 @@ full CPU/RAM calls. Actual dispatch passes 10,752 fixtures; normal C matches
 The independent instruction union is 15,770 / 504,640; the last fresh combined
 run remains 15,370 / 491,840. See
 [return proof](analysis/routines/native_c_menu_return.md).
-Next reconstruct the fourteen sealed completion owners, including C10DAE
-and their heading/reset helpers, then continue the original call graph.
+The fourteen complete menu/context completion owners raise coverage to 474/624
+plus thirty-six source-only entries: 510 rows and 314 timed entries. Separate
+real and controlled children cover all 441 boundaries in 344,064 full CPU/RAM
+calls. Actual dispatch passes 10,752 fixtures, retaining hardware classifications
+separately from completed reference C matches. Normal C matches 4,998 shadow /
+5,020 sandbox calls; the timer has no completed recorded C comparisons.
+All live frames, seals and full gates pass. The independent instruction union
+is 16,211 / 518,752; the last fresh combined run remains 15,370 / 491,840. See
+[completion proof](analysis/routines/native_c_menu_context_finish.md).
+Next reconstruct the thirteen sealed postflight/reset/restart owners and root
+transform, then continue the original call graph.
 The seeded 624 entries do not cover the whole game.
 The frame-416 comparison
 confirmed a fade starting and finishing two frames late. Source timing for

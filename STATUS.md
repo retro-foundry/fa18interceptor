@@ -7,10 +7,10 @@ Updated 2026-10-03.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 500 registered callable entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Fourteen menu/context return owners pass 344,064 full CPU/RAM calls and 10,752 actual dispatch fixtures. Real and controlled children independently cover all 207 boundaries. Normal C matches 2,667 calls per reference mode; ten peers are cold and their generic rejection remains retained. Original OS/file-loading parity retains the preceding checkpoint's limitation. Archived UAE runs are historical evidence. |
+| Current proof | The 510 registered callable entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Fourteen menu/context completion owners pass 344,064 full CPU/RAM calls and 10,752 actual dispatch fixtures. Real and controlled children independently cover all 441 boundaries. Dispatch hardware classifications remain separate from completed reference C matches. Normal C matches 4,998 shadow / 5,020 sandbox calls; seven peers are cold and the timer has zero recorded comparisons. Their generic rejections and raw hardware/incomplete reports remain retained. Original OS/file-loading parity retains the preceding limitation. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 471/624 translated entries plus twenty-nine original source-only callable entries, 500 total rows; 554,025 matching shadow / 413,303 sandbox calls over three native recordings, zero mismatches, poison identical. Menu/context return owners are complete; completion owners and the remaining original graph still require reconstruction. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | There are 300 timing-step entries (271 translated plus twenty-nine source-only). Local return timing passes 207 instructions / 6,624 DMA cases. The independent union is 15,770 / 504,640; no fresh combined run this batch, last fresh 15,370 / 491,840. The isolated family matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_menu_return.md`. |
+| Recreated C source | 474/624 translated entries plus thirty-six original source-only callable entries, 510 total rows; 554,063 matching shadow / 413,303 sandbox calls over three native recordings, zero mismatches, poison identical. Menu/context completion owners are complete; postflight/reset/restart callbacks, root transform and the remaining original graph still require reconstruction. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | There are 314 timing-step entries (278 translated plus thirty-six source-only). Local completion timing passes 441 instructions / 14,112 DMA cases. The independent union is 16,211 / 518,752; no fresh combined run this batch, last fresh 15,370 / 491,840. The isolated family matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_menu_context_finish.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -36,6 +36,8 @@ source-only callable entries. The nine-owner delayed-menu/outcome batch now
 raised it to 471/624 plus nineteen source-only entries. Fourteen complete
 menu/context return owners retain that translated count and extend
 source-only entries to twenty-nine, with 500 total rows and 300 timed entries.
+Fourteen complete menu/context completion owners now raise coverage to 474/624
+plus thirty-six source-only entries, with 510 rows and 314 timed entries.
 The visible checkpoint
 also confirms a
 fade reset and completion two machine frames late. The initializer correction
@@ -144,9 +146,15 @@ Those fourteen menu/context return owners are now complete, with all 207
 boundaries independently covered by real and controlled children. See
 `analysis/routines/native_c_menu_return.md` and
 `analysis/figures/native_menu_return_checkpoint.json`.
-Next reconstruct the fourteen completion owners from the 441-boundary
-`analysis/data/menu_context_finish_scope_inventory.json`, including C10DAE
-and C09192/C16D04/C25070 helpers, then continue the original graph;
+Those fourteen completion owners are now complete, including all 137 C10DAE
+boundaries, the heading negative-return prefix and actual timer OS child.
+Real fixtures permit actual CIA reads; dispatch hardware classifications and
+zero-match recorded timer reports remain distinct from completed C comparisons.
+See `analysis/routines/native_c_menu_context_finish.md` and
+`analysis/figures/native_menu_context_finish_checkpoint.json`.
+Next reconstruct the thirteen postflight/reset/restart callbacks and root
+transform from the 205-boundary
+`analysis/data/postflight_completion_scope_inventory.json`, then continue the original graph;
 C0F090/C0F132 remain internal labels.
 
 ## The game program

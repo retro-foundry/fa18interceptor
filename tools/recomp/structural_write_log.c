@@ -25,3 +25,15 @@ int fa18_structural_port_unused(uint32_t entry) {
         return stats[i].calls==0 && stats[i].compared==0;
     return 0;
 }
+
+/* A hardware-bearing original child is retained by the reference dispatcher.
+ * This assertion distinguishes its explicit hardware classification from a
+ * completed C comparison, rather than treating it as a matched call. */
+int fa18_structural_port_classified(uint32_t entry,int hardware) {
+    int i;
+    if(!hardware) return fa18_structural_port_matched(entry);
+    for(i=0;i<fa18_port_count;++i) if(fa18_ports[i].entry==entry)
+        return stats[i].calls==1 && stats[i].hardware==1 && !stats[i].matched &&
+            !stats[i].mismatched && !stats[i].incomplete;
+    return 0;
+}

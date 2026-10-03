@@ -8,20 +8,6 @@
 #include "memory.h"
 #include "post_input.h"
 
-/* $C10D8A: D0.w = the countdown; when it expired, the tone's D0 = D1 = 2
- * and A0 = the new callback. */
-int glue_C10D8A(void) {
-    int expired = rd_s16(POST_INPUT_COUNTDOWN) < 0;
-    SET_W(D(0), rd_u16(POST_INPUT_COUNTDOWN));
-    check_post_input_expiry();
-    if (expired) {
-        D(0) = 2;
-        D(1) = 2;
-        A(0) = STAGE_AFTER_EXPIRY;
-    }
-    return glue_return();
-}
-
 /* $C1C54E: every register is live after it. D0-D2 = TARGET_POINT >> 8;
  * from the record: D3 = its z masked, D4/D5 = PROJECTION_ORIGIN y/z,
  * D6 = 0 (a product with the zero eye x), D7 = eye z * the matrix's +$9C,

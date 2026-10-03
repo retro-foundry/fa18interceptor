@@ -94,23 +94,6 @@ int glue_C082B0(void) {
     return glue_return();
 }
 
-/* $C10C08: D0 = 0 and A0 = the scheduled stage when a context starts;
- * otherwise D0.b holds the last byte tested. */
-int glue_C10C08(void) {
-    int starting = rd_u8(CONTEXT_SELECT) == 0;
-    uint8_t event = rd_u8(POST_INPUT_EVENT);
-
-    start_context_stage();
-
-    if (starting) {
-        D(0) = 0;
-        A(0) = ROUTINE_CONTEXT_STAGE;
-    } else {
-        SET_B(D(0), event);
-    }
-    return glue_return();
-}
-
 /* $C11B0E: compiled C; leaves the last cleared address in A0. */
 int glue_C11B0E(void) {
     gaddr table = rd_u32(LONG_TABLE);

@@ -192,6 +192,13 @@ Rules for reconstruction:
 | `$C45857` | byte | `MENU_TRANSITION_FLAG`: original `$C10418` sets it to 1 on viewport equality; `$C10458` clears it on the negative-countdown path before installing `$C104C2`. The name describes these writes, without assigning an undocumented global meaning. |
 | `$C10828-$C10847` | four 8-byte records | `MENU_OUTCOME_CASE_TABLE`: original `$C1078A` searches long keys 9, `$7D`, 2 and 1 in reverse, then jumps to the matching record's branch instruction. Keys, raw bytes, branch destinations and bounded D1 search are sealed in `analysis/data/menu_outcome_source_scope.json`. These are four table arms within one owner, rather than four callable routines. |
 | `$C4FDA2` | word | `MENU_RETURN_WORD`: original `$C10362` clears this word on its post-reset non-125 mode route, before publishing `$C10C68`. Width and writes are sealed in `analysis/data/menu_return_source_scope.json`; gameplay meaning remains unassigned. |
+| `$C4578C` | byte | `MENU_CONTEXT_FLAG`: `$C10DAE` tests this on its control-record bit-nine route; the zero/nonzero gates retain their original callback choices. |
+| `$C45834` | byte | `MENU_CONTEXT_SAVED_SELECT`: `$C10DAE` copies this into `$C45785` (`CONTEXT_SELECT`) on its saved-view reset route. |
+| `$C1AB84` | request structure | `MENU_TIME_REQUEST`: `$C16D04` writes command byte 5 at +8, clears +9/+10/+14, stores word 10 at +28, and passes its address to actual `$C53C78`. It copies returned longs +32/+36 into `$C45AF2/+4`; no clock or OS return is substituted. |
+| `$C45904` | longword | `MENU_TIME_PENDING`: `$C10DAE` saves the first `$C45AF2` sample here before installing `$C11A26`; `$C11A50` replaces it with the unsigned wrapping elapsed difference. |
+| `$C45908` | longword | `MENU_TIME_TOTAL`: `$C11A50` adds the elapsed `$C45904` long to this field. |
+| `$C4590C` | longword | `MENU_TIME_OPTIONAL`: `$C11A50` adds the same elapsed long only when this field is nonzero. |
+| `$C45914` | longword | `MENU_TIME_SAVED`: `$C10CFE` copies the first `$C45AF2` timer sample here before installing `$C10D8A`. These context/timer accesses are sealed in `analysis/data/menu_context_finish_source_scope.json`; wider gameplay meanings remain unassigned. |
 | `$C457C5` | byte | set to one after the static `$C0F5F8` in-range offset route. |
 | `$C4599E` | word | set to `$003F` before `$C0F5F8` calls `$C06C02` on an out-of-range calculated offset. |
 | `$C458C0` | word | copied to `$C45AD6` by static `$C0F5F8` phase-three route. |

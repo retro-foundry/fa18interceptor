@@ -186,6 +186,13 @@
 #define MENU_TRANSITION_FLAG 0xC45857u /* byte set/cleared by alternate menu callbacks */
 #define MENU_OUTCOME_CASE_TABLE 0xC10828u /* four original long keys followed by branch instructions */
 #define MENU_RETURN_WORD    0xC4FDA2u /* word cleared by C10362's non-125 return path */
+#define MENU_CONTEXT_FLAG 0xC4578Cu /* byte tested by C10DAE's bit-nine route */
+#define MENU_CONTEXT_SAVED_SELECT 0xC45834u /* byte restored into CONTEXT_SELECT by C10DAE */
+#define MENU_TIME_REQUEST 0xC1AB84u /* timer request consumed by C16D04 */
+#define MENU_TIME_PENDING 0xC45904u /* long: saved sample, then elapsed delta in C11A50 */
+#define MENU_TIME_TOTAL 0xC45908u /* long: accumulated by C11A50 */
+#define MENU_TIME_OPTIONAL 0xC4590Cu /* long: accumulated when nonzero */
+#define MENU_TIME_SAVED 0xC45914u /* long: sample copied by C10CFE */
 #define STORES_REDRAWS    0xC45843u /* byte: stores mark draw count ($C30A00) */
 #define CONTROL_ACCUMULATOR_Y         0xC45778u /* word: cleared by $C1B602 */
 #define CONTROL_ACCUMULATOR_COMPANION 0xC4577Cu /* word: cleared by $C1B602 */

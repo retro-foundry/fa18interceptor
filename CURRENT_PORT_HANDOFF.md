@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 1f61a797); ignored gate logs may
+history (the preceding handoff is in commit 4726312a); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -24,8 +24,9 @@ callbacks and their sound/summary helpers raised it to 465/624; complete
 top-level menu setup and input/message helpers raised it to 469/624; complete
 menu follow-ups and the table-file owner raised it to 470/624; complete
 delayed-menu/outcome callbacks raised it to 471/624; fourteen complete
-menu/context return owners retain that translated count.
-Twenty-nine original source-only callable menu entries are additionally recreated,
+menu/context return owners retain that translated count; fourteen complete
+menu/context completion owners now raise it to 474/624.
+Thirty-six original source-only callable menu entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
@@ -33,6 +34,50 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
+- 474 of 624 translated entries plus thirty-six source-only callable entries
+  are registered: 510 rows and 314 source-timed entries (278 translated plus
+  thirty-six source-only). Fourteen complete menu/context completion owners
+  cover 441 unique / zero shared boundaries; all are new to the instruction
+  union. Three translated and seven source-only entries are added; four older
+  fixed-cycle adapters are completed. C10DAE includes all 137 instructions;
+  C25070 owns its negative-return prefix C2506C without counting another entry.
+  Real and controlled children independently cover every boundary, passing
+  344,064 complete CPU/full-SR/all-RAM calls without exclusions. The real layer
+  permits actual CIA reads (write-log mode 2). Its earlier blocking-mode fixture
+  and the FE9136 divergence trace remain diagnostics, not real timer proof.
+  Actual ON/shadow/sandbox dispatch passes 10,752 fixtures and entry/mode/
+  selection/write guards. Each mode includes 3,040 hardware-free and 544
+  hardware-bearing source calls. Reference modes require completed C matches
+  only for hardware-free calls; hardware calls must retain exactly one hardware
+  classification and zero matches/incomplete/mismatches. ON completes both
+  categories with native continuations and full CPU/RAM parity.
+  Normal C matches 4,998 shadow / 5,020 sandbox calls, including two independent
+  C25070 matches per mode after the parent absorbs its batch calls. Four C10CFE
+  calls per mode retain hardware classification; shadow retains four C10D8A
+  and eighteen C10DAE incomplete calls. C16D04 has zero completed recorded
+  comparisons: batch shadow 8,114 hardware / 112 incomplete, sandbox 8,578
+  hardware; independent isolation shadow 8,118 hardware / 112 incomplete,
+  sandbox 8,579 hardware. Preserve these separate reports and generic timer
+  rejection. Seven source-only peers are cold; raw zeros and generic C10A24
+  rejection remain retained. CPU/RAM timer proof does not complete independent
+  OS/hardware timing parity; production still calls actual C53C78.
+  Local DMA passes 441 / 14,112. The independently tested instruction union is
+  16,211 / 518,752; no fresh combined run this batch. Last fresh combined remains
+  15,370 / 491,840. Shared runtime CPU/bus/math and instruction-oracle fixtures
+  did not change. Shift/decimal helpers and memory-ADD direction handling are
+  family-local; all nine older generator outputs are unchanged.
+  The full 510-row gate passes 554,063 shadow / 413,303 sandbox calls, zero
+  mismatches, exact final RAM seals and poison. All 36,236 isolated live frames
+  and seals match; the group probe is exact through frame 600, ALL still 416/361.
+  GNU and MSVC Release pass; build/ is 0.765 GiB. See
+  analysis/routines/native_c_menu_context_finish.md and
+  analysis/figures/native_menu_context_finish_checkpoint.json for evidence hashes.
+  Next reconstruct thirteen sealed postflight/reset/restart owners and the
+  independently called root transform: 205 unique / zero shared boundaries.
+  See analysis/data/postflight_completion_scope_inventory.json; its inventory
+  implements none of them. Continue the original callback/call graph, then
+  Stage F and only necessary Stage E services. Original OS/file-load parity
+  retains the preceding limitation. Stage D and the complete C port remain open.
 - 471 of 624 translated entries plus twenty-nine source-only callable entries
   are registered: 500 rows and 300 source-timed entries (271 translated plus
   twenty-nine source-only). Fourteen complete menu/context return owners cover
@@ -56,12 +101,12 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   GNU and MSVC Release pass; build/ is 0.719 GiB. See
   analysis/routines/native_c_menu_return.md and
   analysis/figures/native_menu_return_checkpoint.json for evidence hashes.
-  Next reconstruct fourteen sealed completion owners, including the larger
-  C10DAE parent and C09192/C16D04/C25070 helpers: 441 unique / zero shared
-  boundaries. See analysis/data/menu_context_finish_scope_inventory.json.
-  Its inventory implements none of them. Continue the original callback/call
-  graph; original OS/file-load parity retains the preceding limitation.
-  Stage D and the complete C port remain open.
+  Its then-next fourteen sealed completion owners, including the larger
+  C10DAE parent and C09192/C16D04/C25070 helpers, cover 441 unique / zero shared
+  boundaries in analysis/data/menu_context_finish_scope_inventory.json.
+  They were subsequently completed by the latest checkpoint above. The inventory
+  itself implements none of them; remaining callbacks and the original graph
+  still require reconstruction.
 - The preceding baseline had 471 translated entries plus nineteen source-only
   callable entries: 490 rows and 286 source-timed entries (267 translated plus
   nineteen source-only). The nine delayed-menu/outcome and scan owners
@@ -157,7 +202,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
   Its earlier build/recomp/ports_report_*.json described that 469-entry baseline;
-  current reports have 500 rows. GNU and MSVC builds passed at 262 source-timed
+  current reports have 510 rows. GNU and MSVC builds passed at 262 source-timed
   entries. Complete C0FBE0 menu
   setup and C1082C/C11BB0/C24FA4 helpers are newly registered; the existing
   C17B96 sound selector now has a complete normal adapter and source timing.
