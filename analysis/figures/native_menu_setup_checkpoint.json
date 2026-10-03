@@ -1,0 +1,1221 @@
+{
+  "date": "2026-10-03",
+  "entries_added": [
+    "C0FBE0",
+    "C1082C",
+    "C11BB0",
+    "C24FA4"
+  ],
+  "existing_entry_recreated_and_timed": "C17B96",
+  "registered_entries": 469,
+  "registered_timing_entries": 262,
+  "source": {
+    "manifest": "analysis/data/menu_setup_source_scope.json",
+    "sha256": "3fc00bba6e34fc6ab5092c50d417fb4f23069db35a18abb6e84efaa83d57bc3b",
+    "unique_instructions": 141,
+    "shared_instructions": 0
+  },
+  "structural": {
+    "total_cases": 122880,
+    "real_child_cases": 81920,
+    "controlled_child_cases": 40960,
+    "all_registers_full_sr_all_ram": true,
+    "exclusions": [],
+    "each_layer_covers_every_owner_boundary": true,
+    "fixture_bookkeeping": "Test-only inactive/OFF write-log reset before every fixture; real source busy-wait and library children remain unchanged.",
+    "real": {
+      "C0FBE0": {
+        "path": "build/recomp/menu_setup_real_C0FBE0.log",
+        "sha256": "7a03156533be4cb443acea69b51cdf5eb3eab9680c17e49cf625df8a38ecabf8",
+        "summary": "menu-setup oracle C0FBE0: 16384 complete calls matched all registers, PC, full SR and all RAM; 96 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 52,
+        "all_owned_boundaries_covered": true
+      },
+      "C17B96": {
+        "path": "build/recomp/menu_setup_real_C17B96.log",
+        "sha256": "89c9e001284e7dc1a1022bf353474828095e56a8ddbbde60436218fa2f9a24d5",
+        "summary": "menu-setup oracle C17B96: 16384 complete calls matched all registers, PC, full SR and all RAM; 44 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 44,
+        "all_owned_boundaries_covered": true
+      },
+      "C1082C": {
+        "path": "build/recomp/menu_setup_real_C1082C.log",
+        "sha256": "6a1fd4b0bf4bd91466778df3ab80d9189516be5b04a69a6dcb0642e164621511",
+        "summary": "menu-setup oracle C1082C: 16384 complete calls matched all registers, PC, full SR and all RAM; 8 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 8,
+        "all_owned_boundaries_covered": true
+      },
+      "C11BB0": {
+        "path": "build/recomp/menu_setup_real_C11BB0.log",
+        "sha256": "9d0aee6fd16d805056313740bf3d258ff7511661a2e489b818c77f3ec6bcd3df",
+        "summary": "menu-setup oracle C11BB0: 16384 complete calls matched all registers, PC, full SR and all RAM; 19 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 19,
+        "all_owned_boundaries_covered": true
+      },
+      "C24FA4": {
+        "path": "build/recomp/menu_setup_real_C24FA4.log",
+        "sha256": "9827b7303c7ee233258c85911a6c900ec8f915b35a900fe5feee3bc4b8b25ab9",
+        "summary": "menu-setup oracle C24FA4: 16384 complete calls matched all registers, PC, full SR and all RAM; 18 parent boundaries observed",
+        "cases": 16384,
+        "owned_boundaries": 18,
+        "all_owned_boundaries_covered": true
+      }
+    },
+    "contract": {
+      "C0FBE0": {
+        "path": "build/recomp/menu_setup_contract_C0FBE0.log",
+        "sha256": "30082243ec82e9cb724bfa8550a06d0293cb0a34a1bed51eada1626aca5bf764",
+        "summary": "menu-setup oracle C0FBE0: 8192 complete calls matched all registers, PC, full SR and all RAM; 52 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 52,
+        "all_owned_boundaries_covered": true
+      },
+      "C17B96": {
+        "path": "build/recomp/menu_setup_contract_C17B96.log",
+        "sha256": "06cff44163207cb56df744231d460c4c1372d9201d3bec24737d7b7b9361dc5b",
+        "summary": "menu-setup oracle C17B96: 8192 complete calls matched all registers, PC, full SR and all RAM; 44 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 44,
+        "all_owned_boundaries_covered": true
+      },
+      "C1082C": {
+        "path": "build/recomp/menu_setup_contract_C1082C.log",
+        "sha256": "94bb030dfbd9603ff01026895c206cc74d66f29e9f32ecd6d135f166b68cfff6",
+        "summary": "menu-setup oracle C1082C: 8192 complete calls matched all registers, PC, full SR and all RAM; 8 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 8,
+        "all_owned_boundaries_covered": true
+      },
+      "C11BB0": {
+        "path": "build/recomp/menu_setup_contract_C11BB0.log",
+        "sha256": "fa8894eb6b423c1ac0328031e5ab2aec933f3b5e77f0707661d79495f265ddda",
+        "summary": "menu-setup oracle C11BB0: 8192 complete calls matched all registers, PC, full SR and all RAM; 19 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 19,
+        "all_owned_boundaries_covered": true
+      },
+      "C24FA4": {
+        "path": "build/recomp/menu_setup_contract_C24FA4.log",
+        "sha256": "25d892d8cb9382208bbb779498f01b40c94a85b16d9e2e49c7ed1e65b62ff194",
+        "summary": "menu-setup oracle C24FA4: 8192 complete calls matched all registers, PC, full SR and all RAM; 18 parent boundaries observed",
+        "cases": 8192,
+        "owned_boundaries": 18,
+        "all_owned_boundaries_covered": true
+      }
+    }
+  },
+  "normal_c": {
+    "independently_isolated_active_entries": [
+      "C0FBE0",
+      "C17B96"
+    ],
+    "cold_entries": [
+      "C1082C",
+      "C11BB0",
+      "C24FA4"
+    ],
+    "shadow_matches": 0,
+    "sandbox_matches": 2,
+    "shadow_incomplete": 2,
+    "sandbox_incomplete": 0,
+    "hardware": 0,
+    "mismatches": 0,
+    "batch_rejection": "C17B96: no completed comparisons; the complete C0FBE0 parent absorbs child-call statistics. Standalone C17B96 proof succeeds.",
+    "cold_rejection": "C1082C: no completed comparisons",
+    "reports": {
+      "whole_call_C0FBE0_C17B96_C1082C_C11BB0_C24FA4_demo01_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_C17B96_C1082C_C11BB0_C24FA4_demo01_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_C17B96_C1082C_C11BB0_C24FA4_qual_carrier_success_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_C17B96_C1082C_C11BB0_C24FA4_qual_carrier_success_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_C17B96_C1082C_C11BB0_C24FA4_qual_fail_crashes_sandbox.json": {
+        "sha256": "b0071ed2b3a2b8ef482c97431691157a5833d52d3fb79f64f2cbaab2f9904250",
+        "entries": {
+          "C0FBE0": {
+            "calls": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_C17B96_C1082C_C11BB0_C24FA4_qual_fail_crashes_shadow.json": {
+        "sha256": "9f058f00d50920233cc48a9f8661ce946130b81a795bfcebd13fb9c763083d93",
+        "entries": {
+          "C0FBE0": {
+            "calls": 1,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_demo01_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_demo01_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_qual_carrier_success_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_qual_carrier_success_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_qual_fail_crashes_sandbox.json": {
+        "sha256": "b0071ed2b3a2b8ef482c97431691157a5833d52d3fb79f64f2cbaab2f9904250",
+        "entries": {
+          "C0FBE0": {
+            "calls": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C0FBE0_qual_fail_crashes_shadow.json": {
+        "sha256": "9f058f00d50920233cc48a9f8661ce946130b81a795bfcebd13fb9c763083d93",
+        "entries": {
+          "C0FBE0": {
+            "calls": 1,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1082C_C11BB0_C24FA4_demo01_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1082C_C11BB0_C24FA4_demo01_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1082C_C11BB0_C24FA4_qual_carrier_success_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1082C_C11BB0_C24FA4_qual_carrier_success_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1082C_C11BB0_C24FA4_qual_fail_crashes_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1082C_C11BB0_C24FA4_qual_fail_crashes_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C17B96_demo01_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C17B96_demo01_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C17B96_qual_carrier_success_sandbox.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C17B96_qual_carrier_success_shadow.json": {
+        "sha256": "9a21a4e9e52a466b7faca5dba82f374ad259940a55bbc4f2e783c313b2207a70",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C17B96_qual_fail_crashes_sandbox.json": {
+        "sha256": "cc23a91a0e822bfb175295fe73dfe766baacea7cc0651a90c8b6505fe4f43f52",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C17B96_qual_fail_crashes_shadow.json": {
+        "sha256": "99f02e4890ac36f2657a43fa8e03d1a9ba33b2718b3f6ac4b8e0ff109e936166",
+        "entries": {
+          "C0FBE0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1082C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C11BB0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C24FA4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17B96": {
+            "calls": 1,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1
+          }
+        }
+      }
+    },
+    "batch_rejection_evidence": {
+      "path": "build/recomp/menu_setup_whole_call.log",
+      "sha256": "8f1adacc192558a4415ac78535c1e2b448b54fea8e89777d6329d3a3244e703b",
+      "summary": "RuntimeError: C17B96: no completed comparisons"
+    },
+    "cold_rejection_evidence": {
+      "path": "build/recomp/menu_setup_cold_whole_call.log",
+      "sha256": "c8d2eb49d501913a9875bdf6563887dea32c3fa8b86c1b87b8c3b0784647e3a0",
+      "summary": "RuntimeError: C1082C: no completed comparisons"
+    },
+    "isolated_parent_evidence": {
+      "path": "build/recomp/menu_setup_active_whole_call.log",
+      "sha256": "a49d127ce3d08d353e5a18bd78762b8d68622157498b27a1cf33dba52d284322",
+      "summary": "whole-call C proof: 0 shadow matches, 1 sandbox matches"
+    },
+    "isolated_selector_evidence": {
+      "path": "build/recomp/menu_setup_sound_whole_call.log",
+      "sha256": "a615823aa143ecad973a10e8cf895581d61bbc00df976ea64cb0a9168f4e1b3b",
+      "summary": "whole-call C proof: 0 shadow matches, 1 sandbox matches"
+    }
+  },
+  "timing": {
+    "local_instructions": 141,
+    "local_dma_cases": 4512,
+    "independent_union_instructions": 15104,
+    "independent_union_dma_cases": 483328,
+    "fresh_combined_this_batch": false,
+    "last_fresh_combined_instructions": 14963,
+    "last_fresh_combined_dma_cases": 478816,
+    "last_combined_checkpoint": "analysis/figures/native_menu_transition_checkpoint.json",
+    "local_evidence": {
+      "path": "build/recomp/menu_setup_local_dma.log",
+      "sha256": "73f9388f024a702e471b73ce6b17c39066d3ed436c63ec7e24e0ff7a59b6e396",
+      "summary": "menu_setup step oracle (DMA bus): 141 instructions, 4512 cases matched registers, SR, PC, cycles and RAM"
+    }
+  },
+  "integration": {
+    "shadow_matches": 554025,
+    "sandbox_matches": 413303,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/menu_setup_full_gate.log",
+      "sha256": "6e3ac3ba3c413640455ef1466051a4575e01503938ad1f0216485d5709e3eb68",
+      "summary": "469 routines, 554025 matching calls over 3 recordings (+413303 in the sandbox pass); poison: frames identical"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "sha256": "39a162a8bee23863ac6645d57fe4693294d2648fdb8b0f1d3477e0ae75398a72",
+        "matched": 303802,
+        "mismatched": 0
+      },
+      "ports_report_qual_carrier_success.json": {
+        "sha256": "8d8170e6eebb3921dbb1d97d18e64c5ba929294c442484f3fcb6c366961f4850",
+        "matched": 199167,
+        "mismatched": 0
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "sha256": "14ad510e7405eca96ffb0b9352572b34ed73ff7757050558dfc57b05c0618138",
+        "matched": 51056,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_demo01.json": {
+        "sha256": "3eb1ce1d06bf124626c648aa3b5a54dd851c7ca7930e897c39f924211119acdd",
+        "matched": 139485,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "sha256": "6130e65b7b51ffe472be28a342624d523dc809141390d177594afdd061ecde5d",
+        "matched": 231117,
+        "mismatched": 0
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "sha256": "50dd23e06c7383a5584795964d30d320369d749746b0ae9a82463ea890400fce",
+        "matched": 42701,
+        "mismatched": 0
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "live_evidence": {
+      "path": "build/recomp/menu_setup_live_gate.log",
+      "sha256": "631c2ce162d4f790efc02968293ef0c9aeb9ed25417a5b029895619053d8a67d",
+      "summary": "qual_fail_crashes: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe_evidence": {
+      "path": "build/recomp/menu_setup_probe.log",
+      "sha256": "7bfeddf494ae6614d5a52de3681e2dc70c7e3b5b4cba686787c58ba4131e394d",
+      "summary": "ALL: first difference frame 416, 361 pixels"
+    }
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/menu_setup_headless.log",
+      "sha256": "eec440594717fbc17e4bb747840a7413dbfeb5099f383db712c1da5f869cbe0b",
+      "summary": "[1/1] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -o build/recomp/fa18_recomp.exe @build/recomp/fa18_recomp.exe.rsp"
+    },
+    "msvc_release": {
+      "path": "build/recomp/menu_setup_msvc.log",
+      "sha256": "85466d5fed598572c72c865776f32f0a27c8f2e15c788b947f975b528516eb49",
+      "summary": "  fa18_recomp.vcxproj -> C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp-cmake\\Release\\fa18_recomp.exe"
+    },
+    "artifacts_gib": 0.575
+  },
+  "remaining_menu_scope": {
+    "manifest": "analysis/data/menu_cold_scope_inventory.json",
+    "sha256": "178b7eb4224830fca4f2c2f2e4091e0c6a5a69cba58d4b99cddee6393b094582",
+    "unique_instructions": 191,
+    "shared_instructions": 14,
+    "source_only_owners": [
+      "C0FE36",
+      "C1017E",
+      "C10272",
+      "C103E4",
+      "C09120",
+      "C29490",
+      "C2949A",
+      "C09148",
+      "C10B90",
+      "C16406"
+    ],
+    "translated_required_helpers": [
+      "C1643A"
+    ],
+    "implemented_by_inventory": false
+  }
+}

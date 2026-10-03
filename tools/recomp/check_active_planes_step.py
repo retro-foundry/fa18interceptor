@@ -25,12 +25,13 @@ def main():
     group_names += ("selector_origin", "update_sequence", "input_events", "command_dispatch")
     group_names += ("postflight_scheduler",)
     group_names += ("context_publication",)
-    group_names += ("menu_transition",)
+    group_names += ("menu_transition", "menu_setup")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "menu_setup": ["C0FBE0","C17B96","C1082C","C11BB0","C24FA4"],
         "menu_transition": ["C0FCB4","C0FECE","C0FFE2","C1000A","C17C2A","C24E8A"],
         "context_publication": ["C1B7A6","C1BEE8","C1C214","C083A6","C09DD0"],
         "postflight_scheduler": ["C09E06","C09E98","C09EC4","C0A002","C0A12E","C0A15C",

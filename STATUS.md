@@ -7,10 +7,10 @@ Updated 2026-10-03.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | The 465 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete menu-transition adapters pass 147,456 full CPU/RAM cases; real-child and controlled-child layers each cover all 324 owned boundaries without exclusions. Active readable C matches 5,476 shadow / 5,332 sandbox calls, retaining eight incomplete shadow calls. Four peers are cold and the generic zero-comparison rejection is retained. Archived UAE runs are historical evidence. |
+| Current proof | The 469 registered entries pass shadow, sandbox, sealed RAM and poison on all three native recordings. Complete menu-setup adapters pass 122,880 full CPU/RAM cases; real-child and controlled-child layers each cover all 141 owned boundaries without exclusions. Independently isolated readable C completes two sandbox comparisons, retaining two incomplete shadow calls; three helpers are cold and the generic zero-comparison rejection remains retained. Archived UAE runs are historical evidence. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 465 registered translated game entries; 554,025 matching shadow / 413,303 sandbox calls over three native recordings, zero mismatches, poison identical. Latest complete family: C0FCB4/C0FECE owners, C0FFE2/C1000A table-arm entries and C17C2A/C24E8A sound/summary helpers. Installed source-only callbacks outside the seeded translation still require reconciliation. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | There are 257 timing-step entries. Local menu-transition timing passes 324 instructions / 10,368 DMA cases; the fresh combined oracle passes 14,963 / 478,816 after adding source PC-relative operand forms. The isolated family matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_menu_transition.md`. |
+| Recreated C source | 469 registered translated game entries; 554,025 matching shadow / 413,303 sandbox calls over three native recordings, zero mismatches, poison identical. Latest complete family: C0FBE0/C17B96 menu setup/sound selector and C1082C/C11BB0/C24FA4 countdown/input/message helpers. Ten sealed source-only menu owners and their translated file-loading child still require reconstruction. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | There are 262 timing-step entries. Local menu-setup timing passes 141 instructions / 4,512 DMA cases. Independent union coverage is 15,104 / 483,328; no fresh combined run this batch. The last fresh combined oracle remains 14,963 / 478,816. The isolated family matches all 36,236 frames and sealed RAM. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_menu_setup.md`. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -27,7 +27,8 @@ C29042 raised it to 435; update/input/display owners raised it to 438, and
 four complete input-event owners raised it to 442; complete command dispatch
 owners raised it to 444; the complete postflight scheduler family now raises
 it to 454; the context-publication/selected-record family raised it to 459,
-and the complete menu-transition family now raises it to 465.
+and the complete menu-transition family raised it to 465; complete menu
+setup and input/message helpers now raise it to 469.
 The visible checkpoint
 also confirms a
 fade reset and completion two machine frames late. The initializer correction
@@ -110,8 +111,14 @@ and controlled-child proofs for every original table arm, source timing,
 active readable-C replay and full live gates. See
 `analysis/routines/native_c_menu_transition.md` and
 `analysis/figures/native_menu_transition_checkpoint.json`.
-Next audit C0FBE0/C17B96 and complete menu/input helpers, then reconcile
-installed source-only callbacks outside the seeded 624-entry translation;
+Complete C0FBE0/C17B96 menu setup and C1082C/C11BB0/C24FA4 helpers now pass
+122,880 full CPU/RAM cases, local source timing and full live gates. The
+source-only menu callback/helper inventory distinguishes ten unimplemented
+original owners from the translated C1643A file-loading helper. See
+`analysis/routines/native_c_menu_setup.md` and
+`analysis/figures/native_menu_setup_checkpoint.json`.
+Next reconstruct this complete cold menu family and reconcile activation
+outside the seeded 624-entry translation;
 C0F090/C0F132 remain internal labels.
 
 ## The game program

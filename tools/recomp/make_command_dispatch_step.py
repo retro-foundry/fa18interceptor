@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -23,6 +23,7 @@ body={
  "link":"m68ki_push_32(A(reg)); A(reg)=A(7); A(7)+=(uint32_t)(int32_t)(int16_t)m68ki_read_imm_16(); break;",
  "unlk":"A(7)=A(reg); A(reg)=m68ki_pull_32(); break;",
  "moveq":"D(destination)=(uint32_t)(int32_t)(int8_t)opcode; flags_logic_l(D(destination)); break;",
+ "pea":"address=cache_step_address(mode,reg,4); m68ki_push_32(address); break;",
  "lea":"A(destination)=cache_step_address(mode,reg,4); break;",
  "adda.w":"A(destination)+=(uint32_t)(int32_t)(int16_t)cache_step_read(mode,reg,2); break;",
  "adda.l":"A(destination)+=cache_step_read(mode,reg,4); break;",

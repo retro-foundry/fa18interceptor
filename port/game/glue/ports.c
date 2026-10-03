@@ -7,6 +7,11 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete menu setup and source-owned input/message helpers. */
+    {0xC0FBE0, glue_C0FBE0, "start_top_level_menu", 0, 0, glue_C0FBE0_step, 0xC0FCB4, 0, 0, glue_C0FBE0_owns},
+    {0xC1082C, glue_C1082C, "begin_menu_countdown", 0, 0, glue_C1082C_step, 0xC108DA, 0, 0, glue_C1082C_owns},
+    {0xC11BB0, glue_C11BB0, "filter_cockpit_message", 0, 0, glue_C11BB0_step, 0xC11BFC, 0, 0, glue_C11BB0_owns},
+    {0xC24FA4, glue_C24FA4, "queue_indexed_menu_message", 0, 0, glue_C24FA4_step, 0xC24FE4, 0, 0, glue_C24FA4_owns},
     /* Complete menu callback owners, including all six delayed table arms. */
     {0xC0FCB4, glue_C0FCB4, "follow_top_level_menu", 0, 0, glue_C0FCB4_step, 0xC0FE36, 0, 0, glue_C0FCB4_owns},
     {0xC0FECE, glue_C0FECE, "advance_delayed_menu", 0, 0, glue_C0FECE_step, 0xC1017E, 0, 0, glue_C0FECE_owns},
@@ -141,7 +146,7 @@ const FA18Port fa18_ports[] = {
     {0xC25A00, glue_C25A00, "add_repeated_nibble_weight", 150},
     {0xC30AE2, glue_C30AE2, "draw_stores_icon_stream", 500},
     {0xC30A00, glue_C30A00, "draw_stores_icons", 900},
-    {0xC17B96, glue_C17B96, "start_menu_sound_pair", 600},
+    {0xC17B96, glue_C17B96, "start_menu_sound_pair", 0, 0, glue_C17B96_step, 0xC17C2A, 0, 0, glue_C17B96_owns},
     {0xC2F1C0, glue_C2F1C0, "draw_filled_circle", 0, 0, glue_C2F1C0_step, 0xC2F482, 0, 0xC2F1B8},
     {0xC2EC90, glue_C2EC90, "project_view_point", 0, 0, glue_C2EC90_step, 0xC2ED6C, 0, 0xC2EC70},
     {0xC2EC94, glue_C2EC94, "project_view_point_mode", 0, 0, glue_C2EC94_step, 0xC2ED6C, 0, 0xC2EC70},

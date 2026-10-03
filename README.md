@@ -12,14 +12,14 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-465 game entries are registered. Three sealed native recordings cover the
+469 translated game entries are registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
 The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 257 registered entries now have source timing. The complete
+isolation; 262 registered entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent
@@ -90,8 +90,16 @@ matches 5,476 shadow / 5,332 sandbox calls; four peers remain cold. All isolated
 live frames and seals and the full gate pass. The fresh combined DMA oracle
 passes 14,963 instructions / 478,816 cases.
 See [menu-transition proof](analysis/routines/native_c_menu_transition.md).
-Next audit the complete top-level menu owner and remaining menu/input helpers,
-then reconcile cold source-only callbacks outside the seeded translation.
+The complete menu setup and input/message family raises coverage to 469/624,
+including a complete replacement for the existing sound-selector adapter.
+Its 122,880 full CPU/RAM cases cover all 141 boundaries separately with real
+and controlled children. Independent readable C completes two sandbox calls;
+three helpers remain cold and two incomplete shadow calls remain retained.
+All live frames, seals and full gates pass. Local DMA timing passes 141 / 4,512;
+the independent instruction union is 15,104 / 483,328, without a fresh combined
+run for this batch. See [menu-setup proof](analysis/routines/native_c_menu_setup.md).
+Next reconcile the ten sealed source-only menu callbacks/helpers and their
+translated file-loading child. The seeded 624 entries do not cover the whole game.
 The frame-416 comparison
 confirmed a fade starting and finishing two frames late. Source timing for
 the scene initializer has removed one delayed frame; one remains inherited

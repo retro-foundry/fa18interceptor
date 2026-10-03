@@ -1,5 +1,6 @@
 /* Sound output levels. */
 #include "audio.h"
+#include "menu_setup.h"
 
 #include "fixed_math.h"
 
@@ -96,20 +97,20 @@ void play_sound(int sound, int channel, int32_t volume) {
     clear_voice_interrupt(channel);
 }
 
-void start_menu_sound_pair(int32_t volume) {
-    if (rd_u8(VOLUME_FADING)) return;
-    if (rd_u8(SOUND_FLAGS) & 0x80) {
-        free_all_voices();
-        play_sound(13, 0, 63);
-        play_sound(14, 1, 63);
-        wr_u8(VOLUME_FADING, 2);
-    } else if (rd_u8(SOUND_FLAGS - 1) & 0x04) {
-        play_sound(35, 0, volume);
-        play_sound(36, 1, volume);
-        wr_u8(VOLUME_FADING, 2);
-    } else {
-        free_all_voices();
+static void menu_sound_child(void *context,enum MenuSetupCall call,uint32_t value) {
+    (void)context;
+    switch(call) {
+    case MENU_SOUND_FREE_BEFORE: case MENU_SOUND_FREE_OTHER: free_all_voices(); break;
+    case MENU_SOUND_FIXED_FIRST: play_sound(13,0,(int32_t)value); break;
+    case MENU_SOUND_FIXED_SECOND: play_sound(14,1,(int32_t)value); break;
+    case MENU_SOUND_ARGUMENT_FIRST: play_sound(35,0,(int32_t)value); break;
+    case MENU_SOUND_ARGUMENT_SECOND: play_sound(36,1,(int32_t)value); break;
+    default: break;
     }
+}
+void start_menu_sound_pair(int32_t volume) {
+    static const MenuSetupHooks hooks={menu_sound_child,NULL,NULL};
+    select_menu_sound_pair((uint32_t)volume,&hooks);
 }
 
 void start_sound_6(int32_t period, int32_t ticks) {

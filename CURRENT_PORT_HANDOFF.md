@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 953955c4); ignored gate logs may
+history (the preceding handoff is in commit 7f3a9337); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -20,20 +20,45 @@ four complete input-event owners raised it to 442/624; complete C1AC28/C1AD74
 command dispatch owners raised it to 444/624; the complete postflight mode
 scheduler family raised it to 454/624; complete context publishers and
 selected-record helpers raised it to 459/624; complete menu-transition
-callbacks and their sound/summary helpers now raise it to 465/624.
+callbacks and their sound/summary helpers raised it to 465/624; complete
+top-level menu setup and input/message helpers now raise it to 469/624.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 465 of 624 translated game entries are registered in port/game/glue/ports.c.
+- 469 of 624 translated game entries are registered in port/game/glue/ports.c.
   The latest full gate for that registered set matched 554,025 completed shadow
   calls and 413,303 sandbox calls across three native recordings, with zero
   mismatches and identical poison frames. Ported parents absorb some formerly
   counted child calls, so the aggregate call totals need not rise monotonically.
-  build/recomp/ports_report_*.json describe this 465-entry baseline. GNU and
-  MSVC builds pass. There are 257 source-timed entries. The six-entry complete
+  build/recomp/ports_report_*.json describe this 469-entry baseline. GNU and
+  MSVC builds pass. There are 262 source-timed entries. Complete C0FBE0 menu
+  setup and C1082C/C11BB0/C24FA4 helpers are newly registered; the existing
+  C17B96 sound selector now has a complete normal adapter and source timing.
+  Their 141 unique / zero shared boundaries each pass separate real-child
+  and controlled-child proof: 122,880 complete CPU/RAM cases without exclusions.
+  Independently isolated C0FBE0 and C17B96 complete one sandbox comparison each,
+  zero shadow; two incomplete shadow calls remain retained, hardware/mismatches
+  zero. The parent absorbs the selector's batch statistics, so the initial
+  generic C17B96 zero-call rejection remains retained alongside its successful
+  standalone proof. Three peers are cold; their generic zero-call rejection
+  also remains retained. Local DMA passes 141 / 4,512. Independent instruction
+  union coverage is 15,104 / 483,328; no fresh combined run this batch. The last
+  fresh combined oracle remains 14,963 / 478,816. Shared runtime CPU/bus/math
+  and instruction-oracle fixture setup did not change. The structural test-only
+  variant resets inactive/OFF write-log bookkeeping between fixtures to avoid
+  accumulated original busy-loop writes exhausting allocation; actual children,
+  delays and complete RAM comparisons remain unchanged. All 36,236 isolated
+  live frames and RAM seals match. Build/ is 0.575 GiB. See
+  analysis/routines/native_c_menu_setup.md and
+  analysis/figures/native_menu_setup_checkpoint.json.
+  The separate menu_cold_scope_inventory.json seals 191 unique / 14 shared
+  boundaries across ten source-only owners and one translated required helper,
+  C1643A. It implements none of them. These owners require reconstruction and
+  activation beyond the seeded 624-entry registry; see the next work item.
+  The preceding six-entry complete
   menu-transition family covers 324 unique boundaries, including all six
   original table arms and 66 cold C0FECE instructions absent from its generated
   listing. Every boundary passes separate real-child and controlled-child
@@ -730,18 +755,23 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    parents, complete C29042 active origin, update/input/display owners and
    the complete input-event and command-dispatch batches and postflight mode
    scheduler family, context-publication/selected-record helpers and complete
-   menu-transition callback family are registered at 465/624.
+   menu-transition callback family, complete top-level menu setup and its
+   input/message helpers are registered at 469/624.
    Preserve normal caller masks and the independent
    CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. Audit remaining complete
-   top-level menu owner C0FBE0 with sound child C17B96 and complete
-   C1082C/C11BB0/C24FA4 menu/input helpers next. Preserve the existing C0E78A
-   child contract in the game owner; OS work remains deferred. C1082C returns
-   through an enclosing frame and needs the same original frame fixtures as
-   the now proven C0FFE2/C1000A. Audit installed source-only callbacks
-   C0FE36/C1017E/C10272/C103E4 separately: they are absent from the seeded
-   624-entry translation, so this denominator does not prove whole-game scope;
-   the leaf tool excludes indirect calls. Select using source-owned semantics
+   or count internal labels as extra routines. Reconstruct the sealed cold
+   menu family next: C0FE36/C1017E/C10272/C103E4/C09120/C29490/C2949A/C09148/
+   C10B90/C16406 are ten source-only owners; C1643A is their translated
+   59-instruction file-loading helper. See tools/recomp/audit_menu_source_only.py
+   and analysis/data/menu_cold_scope_inventory.json for source bytes, shared
+   tails and actual child boundaries (191 unique / 14 shared instructions).
+   Preserve the existing file/OS child contracts; OS work remains deferred.
+   Current port lookup initially maps generated function entries, so source-only
+   activation needs explicit reconciliation and original-byte proof. Track these
+   owners separately from the seeded 624-entry count; this denominator does
+   not prove whole-game scope and the leaf tool excludes indirect calls.
+   C1082C and the previously proven table arms retain enclosing-frame proofs.
+   Select using source-owned semantics
    and explicit child contracts, without reopening the deferred fade investigation.
    Reuse the existing terrain, template and placement groundwork.
    Preserve all shared spans, emission/cache paths and signed word behavior;
@@ -820,6 +850,9 @@ item 1's failing combined checkpoint rather than chasing another early gap.
   each entry still needs a completed comparison. Raw batch/isolated reports
   retain hardware/incomplete classifications. The tool never relinks its
   temporary executable while a previous recording check is running.
+  If a parent absorbs every child-call statistic, the generic batch correctly
+  rejects the zero row without automatic isolation; run that child separately
+  and retain both reports, as for the complete C0FBE0/C17B96 pair.
 - The headless Ninja graph tracks source and header dependencies and shares
   objects with structural oracles and mutation builds. An unchanged build is
   subsecond. Do not manually touch generated C after a header change.

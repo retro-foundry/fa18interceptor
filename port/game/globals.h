@@ -227,6 +227,8 @@
 
 /* ---- message sequence (earlier port: message_sequence) -------------------- */
 #define MESSAGE_QUEUE      0xC4574Au /* words: queued message codes */
+#define MENU_SELECTOR_RECORDS 0xC3ED0Au /* word tables selected by C24FA4 */
+#define MENU_SELECTOR_DIRECTORY 0xC3EDE6u /* signed relative words in C24FA4 */
 #define POSTFLIGHT_FAILURE_INPUT 0xC45849u /* byte: $10 selects queue code $62 ($C118A0) */
 #define MESSAGE_TIMER      0xC4573Eu /* long */
 #define MESSAGE_STATE_A    0xC457C6u /* byte */

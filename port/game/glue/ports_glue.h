@@ -5,6 +5,7 @@
 #include "glue_postflight_scheduler.h"
 #include "glue_context_publication.h"
 #include "glue_menu_transition.h"
+#include "glue_menu_setup.h"
 int glue_C16EAE(void);
 int glue_C16BF2(void);
 int glue_C16C56(void);
