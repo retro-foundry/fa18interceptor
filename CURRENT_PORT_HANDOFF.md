@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 43566bf7); ignored gate logs may
+history (the preceding handoff is in commit c72a1a48); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -28,8 +28,9 @@ menu/context return owners retain that translated count; fourteen complete
 menu/context completion owners now raise it to 474/624; thirteen complete
 postflight/reset/restart owners retain that translated count; sixteen complete
 postflight-message/text owners raise it to 476/624; the complete formatter
-and four game-side mode-file callers now raise it to 477/624.
-Fifty-six original source-only callable entries are additionally recreated,
+and four game-side mode-file callers raise it to 477/624; eight complete
+input-device callback/setup owners now raise it to 480/624.
+Sixty-one original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
@@ -37,6 +38,49 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
+- 480 of 624 translated entries plus sixty-one source-only callable entries
+  are registered: 541 rows and 355 source-timed entries (294 translated plus
+  sixty-one source-only). Eight complete input-device callback/setup owners
+  cover 274 unique / zero shared boundaries. C1718E/C17456/C1748C add three
+  translated entries; C174A0/C16CD8/C16B8C/C17104/C1712C add five source-only
+  entries, each with an original call site. C17456 publishes the actual C1718E
+  callback. Fourteen actual child sites retain original return PCs and stack
+  arguments. Full CPU/SR/all-RAM proof passes 196,608 complete calls without
+  exclusions: 65,536 controlled-child and 131,072 real-child cases; both
+  layers cover all eight owners and all 274 boundaries. Contracts change
+  caller arguments, request/port globals, saved page index and palette source
+  across child calls to verify original reloads and partial-write order.
+  Actual ON/shadow/sandbox dispatch passes 6,144 fixtures; each mode covers
+  every owner PC and checks entry/mode/selection/source-write guards. Native
+  ON continuation and exact reference classifications remain required.
+  Shadow captures and replays the actual original mouse-counter read; sandbox
+  retains its uncaptured hardware classification. The initial test-reference
+  capture discrepancy is retained in the checkpoint; production dispatch and
+  the strict classification assertion were unchanged by that fixture fix.
+  Normal step-disabled callback C matches 36,236 shadow calls, with zero
+  hardware/incomplete/mismatches. Sandbox classifies 36,385 hardware calls,
+  zero matches/incomplete/mismatches. Seven setup/removal owners are cold;
+  all six raw batch reports and generic C17456 rejection remain retained.
+  An isolated normal-callback check passes separately. These full-call tests
+  do not establish independent OS/hardware timing or resolve earlier file
+  service source stops. Original service children remain actual calls.
+  Local DMA passes 274 / 8,768. The independently tested union is 17,304 /
+  553,728, with no overlap this batch. No fresh combined run this batch;
+  last fresh combined remains 16,384 / 524,288. Shared runtime CPU/bus/math
+  and instruction fixtures are unchanged; all thirteen older generator
+  outputs are unchanged. The local instruction proof covers the new NOP
+  generator recipe. The full 541-row gate passes 554,068 shadow / 413,271
+  sandbox matches, zero mismatches, exact seals and identical poison frames.
+  All 36,236 isolated live frames/seals match source OFF; group exact through
+  frame 600, ALL still 416/361. GNU and MSVC Release pass; build/ is
+  0.902 GiB. See analysis/routines/native_c_input_device_callbacks.md
+  and analysis/figures/native_input_device_callbacks_checkpoint.json.
+  Next reconstruct five complete game input/display setup and synchronization
+  owners: C16D4C/C16FF4/C17066/C1787A/C1612C, 388 unique / zero shared
+  boundaries, sealed in analysis/data/input_display_setup_scope_inventory.json.
+  This inventory implements none of them and replaces no OS service.
+  Continue the original game graph, then Stage F and only necessary Stage E.
+  Stage D and the full C port remain open; Copper fade remains deferred.
 - 477 of 624 translated entries plus fifty-six source-only callable entries
   are registered: 533 rows and 347 source-timed entries (291 translated plus
   fifty-six source-only). Five complete formatter/game-side file owners cover
@@ -1052,45 +1096,27 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    Require a changed combined result before claiming improvement. Do not
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
-2. The selector family C1D10C, C1E540, C1EBB0 and C1EC84, scene-placement
-   pair C1CB14/C1CB26, follow-up parent C1CCBC/workspace helper C1D0A4,
-   post-input parent C0F5F8, context/bootstrap/callback batch and C22C80/C1C63E
-   parents, complete C29042 active origin, update/input/display owners and
-   the complete input-event and command-dispatch batches and postflight mode
-   scheduler family, context-publication/selected-record helpers and complete
-   menu-transition callback family, complete top-level menu setup and its
-   input/message helpers, complete menu follow-ups/file owner and delayed-menu/
-   outcome and menu/context return owners are registered at 471/624, plus twenty-nine original
-   source-only menu entries outside that denominator.
-   Preserve normal caller masks and the independent
-   CPU, memory and timing proofs; do not repeat the memory-only milestones
-   or count internal labels as extra routines. The cold menu and five-entry
-   follow-up/file, nine-owner outcome and fourteen-owner return families are
-   complete and activated. Reconstruct the sealed completion family next:
-   C10A24/C10C08/C10C68/C10AB2/C10AE6/C10B1E/C10CFE/C10D8A/C10DAE/
-   C11A26/C11A50/C09192/C16D04/C25070. See
-   tools/recomp/audit_menu_context_finish.py and
-   analysis/data/menu_context_finish_scope_inventory.json (441 unique / zero
-   shared boundaries). The inventory implements none of those next owners.
-   Preserve complete C10DAE parent behavior, actual children, local state and
-   changed child outputs. Existing timed audio children remain distinct owners.
-   Preserve existing file/OS children; OS work remains deferred. Keep both the
-   retained C0FE36 and C1643A original OS source-stop diagnostics distinct from
-   their complete child-contract proofs. Track source-only
-   callable entries separately from the seeded 624-entry count; this denominator
-   does not prove whole-game scope and the leaf tool excludes indirect calls.
-   C1082C and the previously proven table arms retain enclosing-frame proofs.
-   Select using source-owned semantics
-   and explicit child contracts, without reopening the deferred fade investigation.
-   Reuse the existing terrain, template and placement groundwork.
-   Preserve all shared spans, emission/cache paths and signed word behavior;
-   do not count prefixes or internal labels as completed functions.
-   Plan original-byte entry/exit checkpoints for each source-owned selector
-   pack and cache path: input globals/frame locals -> template/placement and
-   cache writes, preserving pointers, live outputs and partial-write order.
-   Use recorded whole-call comparisons plus structural cases for paths not
-   reached by recordings. Prove readable domain C independently of its timing
-   bridge with check_whole_call_glue.py, then run the required gates below.
+2. Complete readable game owners in related batches. The current baseline
+   is 480/624 translated plus sixty-one source-only callable entries; the
+   leading checkpoint above supersedes older batch-selection notes. Next
+   reconstruct complete C16D4C/C16FF4/C17066/C1787A/C1612C input/display
+   setup and synchronization owners from
+   analysis/data/input_display_setup_scope_inventory.json (388 unique / zero
+   shared boundaries). The inventory implements none of those owners.
+   Preserve complete parent behavior, actual children, local frames, changed
+   child outputs, original partial-write order and exact source ownership.
+   C16084/C160D6 bounded initialization slices are not independently callable
+   owners merely because historical reports discuss them separately.
+   Preserve file/OS children; OS work remains deferred. Earlier C0FE36,
+   C1643A and the mode-file family source-stop diagnostics remain distinct
+   from their controlled-child proofs. Successful input-device fixtures do
+   not resolve those separate stops. Track source-only callable entries
+   outside the seeded 624-entry denominator, and require actual original
+   calls or installed callbacks as entry evidence. Do not count table arms
+   as extra routines. Prove readable domain C independently of its timing
+   bridge, retain cold/hardware/incomplete rows and generic rejections, then
+   run the required gates below. Keep whole-game graph coverage and native
+   backend work open until their original-source requirements are met.
 3. Keep parity and source coverage as separate measured outcomes. Do not
    spend another chain of timing-only batches without moving either ALL's
    first difference or readable coverage. Review after at most two such

@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -19,6 +19,7 @@ generated_pcs={pc for entry,owner in manifest['owners'].items() if entry not in 
 for row in manifest["instructions"]:
  if row['pc'] in generated_pcs: groups[row["instruction"].split()[0]].append(row["pc"])
 body={
+ "nop":"break;",
  "rts":"REG_PC=m68ki_pull_32(); break;",
  "jsr":"address=cache_step_address(mode,reg,4); m68ki_push_32(REG_PC); REG_PC=address; break;",
  "jmp":"REG_PC=cache_step_address(mode,reg,4); break;",

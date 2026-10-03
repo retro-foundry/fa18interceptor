@@ -7,6 +7,15 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete game input callback and setup owners. */
+    {0xC1718E, glue_C1718E, "advance_input_device_callback", 0, 0, glue_C1718E_step, 0xC17456, 2, 0, glue_C1718E_owns},
+    {0xC17456, glue_C17456, "install_input_device_callback", 0, 0, glue_C17456_step, 0xC1748C, 0, 0, glue_C17456_owns},
+    {0xC1748C, glue_C1748C, "remove_input_device_callback", 0, 0, glue_C1748C_step, 0xC174A0, 0, 0, glue_C1748C_owns},
+    {0xC174A0, glue_C174A0, "prepare_input_device_port", 0, 0, glue_C174A0_step, 0xC174F4, 0, 0, glue_C174A0_owns},
+    {0xC16CD8, glue_C16CD8, "open_input_device_timer", 0, 0, glue_C16CD8_step, 0xC16D04, 0, 0, glue_C16CD8_owns},
+    {0xC16B8C, glue_C16B8C, "open_input_device_request", 0, 0, glue_C16B8C_step, 0xC16BF2, 0, 0, glue_C16B8C_owns},
+    {0xC17104, glue_C17104, "set_input_device_bounds", 0, 0, glue_C17104_step, 0xC1712C, 0, 0, glue_C17104_owns},
+    {0xC1712C, glue_C1712C, "initialise_input_device_counters", 0, 0, glue_C1712C_step, 0xC1715C, 2, 0, glue_C1712C_owns},
     /* Complete game-side mode-file callers; actual OS children remain. */
     {0xC0EF08, glue_C0EF08, "check_postflight_mode_file", 0, 0, glue_C0EF08_step, 0xC0EFD2, 0, 0, glue_C0EF08_owns},
     {0xC162E4, glue_C162E4, "refresh_postflight_mode_file", 0, 0, glue_C162E4_step, 0xC1631C, 0, 0, glue_C162E4_owns},

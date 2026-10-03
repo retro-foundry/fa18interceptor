@@ -1,0 +1,1864 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "c72a1a48",
+  "entries": [
+    "C1718E",
+    "C17456",
+    "C1748C",
+    "C174A0",
+    "C16CD8",
+    "C16B8C",
+    "C17104",
+    "C1712C"
+  ],
+  "entries_added_in_seeded_translation": [
+    "C1718E",
+    "C17456",
+    "C1748C"
+  ],
+  "entries_added_outside_seeded_translation": [
+    "C174A0",
+    "C16CD8",
+    "C16B8C",
+    "C17104",
+    "C1712C"
+  ],
+  "registered_translated_entries": 480,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 61,
+  "registered_total_entries": 541,
+  "registered_timing_entries": 355,
+  "registered_translated_timing_entries": 294,
+  "registered_source_only_timing_entries": 61,
+  "source": {
+    "manifest": "analysis/data/input_device_callbacks_source_scope.json",
+    "sha256": "256397808e90b624256b436c9f494dd1f4ed827dece672bf1168f314114a4775",
+    "unique_instructions": 274,
+    "shared_instructions_within_batch": 0,
+    "shared_with_previous_instruction_union": 0,
+    "independent_entry_evidence": {
+      "C174A0": [
+        "C16BB4: jsr     $c174a0.l"
+      ],
+      "C16CD8": [
+        "C0F4DC: jsr     $c16cd8.l"
+      ],
+      "C16B8C": [
+        "C0F4E2: jsr     $c16b8c.l"
+      ],
+      "C17104": [
+        "C0F52E: jsr     $c17104.l"
+      ],
+      "C1712C": [
+        "C0F542: jsr     $c1712c.l"
+      ]
+    },
+    "actual_child_sites": 14,
+    "callback_installation": "C1746E takes C1718E; C17472 publishes it to C1AC02"
+  },
+  "structural": {
+    "total_cases": 196608,
+    "real_child_cases": 131072,
+    "controlled_child_cases": 65536,
+    "all_registers_full_sr_all_ram": true,
+    "ram_or_register_exclusions": [],
+    "controlled_layer_covers_every_owned_boundary": true,
+    "real_layer_covers_every_owned_boundary": true,
+    "real_write_log_mode": 2,
+    "independent_os_hardware_timing_proof": false,
+    "layers": {
+      "real": {
+        "C1718E": {
+          "path": "build/recomp/input_device_callbacks_real_C1718E.log",
+          "sha256": "4d584d0910d2e933a233a93c21215ac80a15d3e5244e4cc378e59a38902457d0",
+          "summary": "input-device-callbacks oracle C1718E: 16384 complete calls matched all registers, PC, full SR and all RAM; 178 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 178,
+          "covered_owned_boundaries": 178,
+          "uncovered_owned_boundaries": []
+        },
+        "C17456": {
+          "path": "build/recomp/input_device_callbacks_real_C17456.log",
+          "sha256": "0d7b2aa1a8a5bcee0e52f9299f73cd61861383bd29e99a7bbf51a291ccdf2acc",
+          "summary": "input-device-callbacks oracle C17456: 16384 complete calls matched all registers, PC, full SR and all RAM; 11 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 11,
+          "covered_owned_boundaries": 11,
+          "uncovered_owned_boundaries": []
+        },
+        "C1748C": {
+          "path": "build/recomp/input_device_callbacks_real_C1748C.log",
+          "sha256": "1c98c9828198c5e65745f49f7e753c0effcadbb9f9cf0db4072b650b4400e778",
+          "summary": "input-device-callbacks oracle C1748C: 16384 complete calls matched all registers, PC, full SR and all RAM; 6 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 6,
+          "covered_owned_boundaries": 6,
+          "uncovered_owned_boundaries": []
+        },
+        "C174A0": {
+          "path": "build/recomp/input_device_callbacks_real_C174A0.log",
+          "sha256": "429d5af72dd2b05dd226d82c9132deda80e4c5b5b85a1f4558adf21172be6321",
+          "summary": "input-device-callbacks oracle C174A0: 16384 complete calls matched all registers, PC, full SR and all RAM; 24 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 24,
+          "covered_owned_boundaries": 24,
+          "uncovered_owned_boundaries": []
+        },
+        "C16CD8": {
+          "path": "build/recomp/input_device_callbacks_real_C16CD8.log",
+          "sha256": "d93786ed07c6618e7577d3cd59f338a5ec12204f63ae87900562b1f45dde0d7d",
+          "summary": "input-device-callbacks oracle C16CD8: 16384 complete calls matched all registers, PC, full SR and all RAM; 13 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 13,
+          "covered_owned_boundaries": 13,
+          "uncovered_owned_boundaries": []
+        },
+        "C16B8C": {
+          "path": "build/recomp/input_device_callbacks_real_C16B8C.log",
+          "sha256": "4822a90eb4200fe447c4bf07db96757d7d25a9863f0674482b00cada054a3f20",
+          "summary": "input-device-callbacks oracle C16B8C: 16384 complete calls matched all registers, PC, full SR and all RAM; 47 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 23,
+          "covered_owned_boundaries": 23,
+          "uncovered_owned_boundaries": []
+        },
+        "C17104": {
+          "path": "build/recomp/input_device_callbacks_real_C17104.log",
+          "sha256": "e01aa19401b06ba43fd132a6cd48595cc8d6b6cf3588ce348214c51b6de8af72",
+          "summary": "input-device-callbacks oracle C17104: 16384 complete calls matched all registers, PC, full SR and all RAM; 7 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 7,
+          "covered_owned_boundaries": 7,
+          "uncovered_owned_boundaries": []
+        },
+        "C1712C": {
+          "path": "build/recomp/input_device_callbacks_real_C1712C.log",
+          "sha256": "7b5332bad7142a88d4480db44096179380d6e140fa950acf3bc4f70616e281f2",
+          "summary": "input-device-callbacks oracle C1712C: 16384 complete calls matched all registers, PC, full SR and all RAM; 23 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 12,
+          "covered_owned_boundaries": 12,
+          "uncovered_owned_boundaries": []
+        }
+      },
+      "contract": {
+        "C1718E": {
+          "path": "build/recomp/input_device_callbacks_contract_C1718E.log",
+          "sha256": "fa9ac78bb1fcb622cc1c7c44bc3966113ca1a8869794b7ac6a2431e408d7b07e",
+          "summary": "input-device-callbacks oracle C1718E: 8192 complete calls matched all registers, PC, full SR and all RAM; 178 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 178,
+          "covered_owned_boundaries": 178,
+          "uncovered_owned_boundaries": []
+        },
+        "C17456": {
+          "path": "build/recomp/input_device_callbacks_contract_C17456.log",
+          "sha256": "0ff9e0ff4ac8ca85bbc5d76ab0e22951ac0d9df63007dc30d75cf6f974a22330",
+          "summary": "input-device-callbacks oracle C17456: 8192 complete calls matched all registers, PC, full SR and all RAM; 11 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 11,
+          "covered_owned_boundaries": 11,
+          "uncovered_owned_boundaries": []
+        },
+        "C1748C": {
+          "path": "build/recomp/input_device_callbacks_contract_C1748C.log",
+          "sha256": "de3729ad1212a5525ffd9b60aa86a8ffbbf85d730f8da8a4f8415d8894c35cf1",
+          "summary": "input-device-callbacks oracle C1748C: 8192 complete calls matched all registers, PC, full SR and all RAM; 6 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 6,
+          "covered_owned_boundaries": 6,
+          "uncovered_owned_boundaries": []
+        },
+        "C174A0": {
+          "path": "build/recomp/input_device_callbacks_contract_C174A0.log",
+          "sha256": "ae6932267a80e8bcc187ea3e4b55c2aef4000f1baecd37bc3ad4118589d303df",
+          "summary": "input-device-callbacks oracle C174A0: 8192 complete calls matched all registers, PC, full SR and all RAM; 24 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 24,
+          "covered_owned_boundaries": 24,
+          "uncovered_owned_boundaries": []
+        },
+        "C16CD8": {
+          "path": "build/recomp/input_device_callbacks_contract_C16CD8.log",
+          "sha256": "7ebbeebad90d9db1d4c043afd204756f1bb3de5f988cee93b76ed30def7e07b9",
+          "summary": "input-device-callbacks oracle C16CD8: 8192 complete calls matched all registers, PC, full SR and all RAM; 13 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 13,
+          "covered_owned_boundaries": 13,
+          "uncovered_owned_boundaries": []
+        },
+        "C16B8C": {
+          "path": "build/recomp/input_device_callbacks_contract_C16B8C.log",
+          "sha256": "c2df166b6222564a43ac02c1f326f0bbc1198f98e636d8245e5a3e772223e01b",
+          "summary": "input-device-callbacks oracle C16B8C: 8192 complete calls matched all registers, PC, full SR and all RAM; 23 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 23,
+          "covered_owned_boundaries": 23,
+          "uncovered_owned_boundaries": []
+        },
+        "C17104": {
+          "path": "build/recomp/input_device_callbacks_contract_C17104.log",
+          "sha256": "bae94757c8f253f88d38951a1b6239691030a7656c82fad29cfc80d5cc904791",
+          "summary": "input-device-callbacks oracle C17104: 8192 complete calls matched all registers, PC, full SR and all RAM; 7 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 7,
+          "covered_owned_boundaries": 7,
+          "uncovered_owned_boundaries": []
+        },
+        "C1712C": {
+          "path": "build/recomp/input_device_callbacks_contract_C1712C.log",
+          "sha256": "d6b6b0eae85fd30ce3e99d2dad66d6625101ce3b3153b4f5bd945908f69aab68",
+          "summary": "input-device-callbacks oracle C1712C: 8192 complete calls matched all registers, PC, full SR and all RAM; 12 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 12,
+          "covered_owned_boundaries": 12,
+          "uncovered_owned_boundaries": []
+        }
+      }
+    }
+  },
+  "dispatch": {
+    "cases": 6144,
+    "cases_per_entry_per_mode": 256,
+    "entries": [
+      "C1718E",
+      "C17456",
+      "C1748C",
+      "C174A0",
+      "C16CD8",
+      "C16B8C",
+      "C17104",
+      "C1712C"
+    ],
+    "modes": [
+      "on",
+      "shadow",
+      "sandbox"
+    ],
+    "full_cpu_sr_ram": true,
+    "ram_or_register_exclusions": [],
+    "every_mode_covers_every_owner_boundary": true,
+    "on_requires_native_continuation": true,
+    "reference_modes_require_exact_classification": true,
+    "input_capture_policy": "Shadow reference records actual original inputs using the unchanged registry policy; sandbox reference retains uncaptured hardware classification.",
+    "initial_fixture_capture_diagnostic": {
+      "path": "build/recomp/input_device_callbacks_dispatch_initial_capture_report.json",
+      "sha256": "5463b72456ea921efd3960b4b22a4db436e3cb981c7211db7bb2d893d2dbb0d2",
+      "summary": "]",
+      "callback_row": {
+        "entry": "C1718E",
+        "name": "advance_input_device_callback",
+        "calls": 1,
+        "compared": 1,
+        "matched": 1,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0,
+        "mean_cycles": 59826,
+        "busy_input_calls": 1,
+        "busy_input_reads": 1
+      },
+      "explanation": "The original fixture disabled input capture and expected hardware=1; unchanged production shadow correctly completed a captured-input match with hardware=0. The test reference now mirrors the mode-specific original-input capture policy."
+    },
+    "strict_classification_assertion_unchanged": true,
+    "guards": [
+      "non-call entry",
+      "OFF mode",
+      "ports-only selection",
+      "source write invalidates entry dispatch"
+    ],
+    "evidence": {
+      "path": "build/recomp/input_device_callbacks_dispatch.log",
+      "sha256": "151900f3cd6bc9a5f5abb5bfa32e548a9ab25984a3f964edb15f1ce64f5ff1eb",
+      "summary": "input device dispatch: 6144 complete CPU/RAM fixtures and entry/mode/selection/write guards passed"
+    },
+    "per_mode": {
+      "on": {
+        "C1718E": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1718E_on.log",
+          "sha256": "3f39c2550598cb17cb73db4c1c375666d5c45bac7eb895a69d2b2c0310d66260",
+          "summary": "recomp: write to $C1718E invalidates C1718E",
+          "source_hardware_calls": 256,
+          "source_hardware_free_calls": 0,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        },
+        "C17456": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C17456_on.log",
+          "sha256": "043de2368037ddc36805792809d953d5dc8f451ca13b6ab2fa32098f3b406eb7",
+          "summary": "recomp: write to $C17456 invalidates C17456",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        },
+        "C1748C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1748C_on.log",
+          "sha256": "8f2eb7b9d3cbeee18e5f2ea977d66bc2657946a1da213eaf8ed4bb1e26c7e497",
+          "summary": "recomp: write to $C1748C invalidates C1748C",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        },
+        "C174A0": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C174A0_on.log",
+          "sha256": "554522c56f4c817b15366185c32fbe5b99b5dcfa3392f8b99fff1fd6d7f3c756",
+          "summary": "visited: C174A0 C174A4 C174A6 C174AA C174AE C174B2 C174B6 C174BC C174BE C174C0 C174C6 C174C8 C174CC C174D0 C174D2 C174D8 C174DA C174DE C174E2 C174E6 C174E8 C174EE C174F0 C174F2",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        },
+        "C16CD8": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C16CD8_on.log",
+          "sha256": "bb904704438680b19b4abe6707a8c2baf6cd457e44ad5bb4ce149bb65ac9c804",
+          "summary": "visited: C16CD8 C16CDC C16CDE C16CE0 C16CE6 C16CE8 C16CEE C16CF4 C16CF8 C16CFC C16CFE C16D00 C16D02",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        },
+        "C16B8C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C16B8C_on.log",
+          "sha256": "bed8a142b55734e422879e89b87e30ff1d42c5de9467f3290dc67ae7f2f8485f",
+          "summary": "visited: C16B8C C16B8E C16B90 C16B96 C16B98 C16B9E C16BA4 C16BA8 C16BAE C16BB4 C16BBA C16BBC C16BC2 C16BCA C16BCC C16BD0 C16BD6 C16BDA C16BE0 C16BE2 C16BE8 C16BEE C16BF0 C174A0 C174A4 C174A6 C174AA C174AE C174B2 C174B6 C174BC C174BE C174C0 C174C6 C174C8 C174CC C174D0 C174D2 C174D8 C174DA C174DE C174E2 C174E6 C174E8 C174EE C174F0 C174F2",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        },
+        "C17104": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C17104_on.log",
+          "sha256": "2ff749328e5858e38cf5611cb505a3b9bfb4c6abca98dd0723a397560734a205",
+          "summary": "visited: C17104 C17108 C17110 C17118 C17120 C17128 C1712A",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        },
+        "C1712C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1712C_on.log",
+          "sha256": "0377db3f53837d013302277a6c4ee115e818cc4dff72618db8fdb08a1d115b83",
+          "summary": "visited: C1712C C17130 C17136 C1713A C1713E C17142 C17144 C17148 C1714E C17154 C17158 C1715A C17456 C1745E C17464 C1746E C17472 C17478 C1747E C17480 C17482 C17488 C1748A",
+          "source_hardware_calls": 256,
+          "source_hardware_free_calls": 0,
+          "completed_reference_matches": null,
+          "hardware_reference_classifications": null
+        }
+      },
+      "shadow": {
+        "C1718E": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1718E_shadow.log",
+          "sha256": "5b67ba286c0728b00b6cceda1066903c8fd10d3c80aa4084f336c199a5894174",
+          "summary": "recomp: write to $C1718E invalidates C1718E",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C17456": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C17456_shadow.log",
+          "sha256": "043de2368037ddc36805792809d953d5dc8f451ca13b6ab2fa32098f3b406eb7",
+          "summary": "recomp: write to $C17456 invalidates C17456",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C1748C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1748C_shadow.log",
+          "sha256": "8f2eb7b9d3cbeee18e5f2ea977d66bc2657946a1da213eaf8ed4bb1e26c7e497",
+          "summary": "recomp: write to $C1748C invalidates C1748C",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C174A0": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C174A0_shadow.log",
+          "sha256": "554522c56f4c817b15366185c32fbe5b99b5dcfa3392f8b99fff1fd6d7f3c756",
+          "summary": "visited: C174A0 C174A4 C174A6 C174AA C174AE C174B2 C174B6 C174BC C174BE C174C0 C174C6 C174C8 C174CC C174D0 C174D2 C174D8 C174DA C174DE C174E2 C174E6 C174E8 C174EE C174F0 C174F2",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C16CD8": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C16CD8_shadow.log",
+          "sha256": "bb904704438680b19b4abe6707a8c2baf6cd457e44ad5bb4ce149bb65ac9c804",
+          "summary": "visited: C16CD8 C16CDC C16CDE C16CE0 C16CE6 C16CE8 C16CEE C16CF4 C16CF8 C16CFC C16CFE C16D00 C16D02",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C16B8C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C16B8C_shadow.log",
+          "sha256": "bed8a142b55734e422879e89b87e30ff1d42c5de9467f3290dc67ae7f2f8485f",
+          "summary": "visited: C16B8C C16B8E C16B90 C16B96 C16B98 C16B9E C16BA4 C16BA8 C16BAE C16BB4 C16BBA C16BBC C16BC2 C16BCA C16BCC C16BD0 C16BD6 C16BDA C16BE0 C16BE2 C16BE8 C16BEE C16BF0 C174A0 C174A4 C174A6 C174AA C174AE C174B2 C174B6 C174BC C174BE C174C0 C174C6 C174C8 C174CC C174D0 C174D2 C174D8 C174DA C174DE C174E2 C174E6 C174E8 C174EE C174F0 C174F2",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C17104": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C17104_shadow.log",
+          "sha256": "2ff749328e5858e38cf5611cb505a3b9bfb4c6abca98dd0723a397560734a205",
+          "summary": "visited: C17104 C17108 C17110 C17118 C17120 C17128 C1712A",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C1712C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1712C_shadow.log",
+          "sha256": "5dfdba34bd329e9c22c0e017c92293a47deac303562800fc73a4092303a9dc01",
+          "summary": "visited: C1712C C17130 C17136 C1713A C1713E C17142 C17144 C17148 C1714E C17154 C17158 C1715A C17456 C1745E C17464 C1746E C17472 C17478 C1747E C17480 C17482 C17488 C1748A",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        }
+      },
+      "sandbox": {
+        "C1718E": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1718E_sandbox.log",
+          "sha256": "3f39c2550598cb17cb73db4c1c375666d5c45bac7eb895a69d2b2c0310d66260",
+          "summary": "recomp: write to $C1718E invalidates C1718E",
+          "source_hardware_calls": 256,
+          "source_hardware_free_calls": 0,
+          "completed_reference_matches": 0,
+          "hardware_reference_classifications": 256
+        },
+        "C17456": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C17456_sandbox.log",
+          "sha256": "043de2368037ddc36805792809d953d5dc8f451ca13b6ab2fa32098f3b406eb7",
+          "summary": "recomp: write to $C17456 invalidates C17456",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C1748C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1748C_sandbox.log",
+          "sha256": "8f2eb7b9d3cbeee18e5f2ea977d66bc2657946a1da213eaf8ed4bb1e26c7e497",
+          "summary": "recomp: write to $C1748C invalidates C1748C",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C174A0": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C174A0_sandbox.log",
+          "sha256": "554522c56f4c817b15366185c32fbe5b99b5dcfa3392f8b99fff1fd6d7f3c756",
+          "summary": "visited: C174A0 C174A4 C174A6 C174AA C174AE C174B2 C174B6 C174BC C174BE C174C0 C174C6 C174C8 C174CC C174D0 C174D2 C174D8 C174DA C174DE C174E2 C174E6 C174E8 C174EE C174F0 C174F2",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C16CD8": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C16CD8_sandbox.log",
+          "sha256": "bb904704438680b19b4abe6707a8c2baf6cd457e44ad5bb4ce149bb65ac9c804",
+          "summary": "visited: C16CD8 C16CDC C16CDE C16CE0 C16CE6 C16CE8 C16CEE C16CF4 C16CF8 C16CFC C16CFE C16D00 C16D02",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C16B8C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C16B8C_sandbox.log",
+          "sha256": "bed8a142b55734e422879e89b87e30ff1d42c5de9467f3290dc67ae7f2f8485f",
+          "summary": "visited: C16B8C C16B8E C16B90 C16B96 C16B98 C16B9E C16BA4 C16BA8 C16BAE C16BB4 C16BBA C16BBC C16BC2 C16BCA C16BCC C16BD0 C16BD6 C16BDA C16BE0 C16BE2 C16BE8 C16BEE C16BF0 C174A0 C174A4 C174A6 C174AA C174AE C174B2 C174B6 C174BC C174BE C174C0 C174C6 C174C8 C174CC C174D0 C174D2 C174D8 C174DA C174DE C174E2 C174E6 C174E8 C174EE C174F0 C174F2",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C17104": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C17104_sandbox.log",
+          "sha256": "2ff749328e5858e38cf5611cb505a3b9bfb4c6abca98dd0723a397560734a205",
+          "summary": "visited: C17104 C17108 C17110 C17118 C17120 C17128 C1712A",
+          "source_hardware_calls": 0,
+          "source_hardware_free_calls": 256,
+          "completed_reference_matches": 256,
+          "hardware_reference_classifications": 0
+        },
+        "C1712C": {
+          "path": "build/recomp/input_device_callbacks_dispatch_C1712C_sandbox.log",
+          "sha256": "0377db3f53837d013302277a6c4ee115e818cc4dff72618db8fdb08a1d115b83",
+          "summary": "visited: C1712C C17130 C17136 C1713A C1713E C17142 C17144 C17148 C1714E C17154 C17158 C1715A C17456 C1745E C17464 C1746E C17472 C17478 C1747E C17480 C17482 C17488 C1748A",
+          "source_hardware_calls": 256,
+          "source_hardware_free_calls": 0,
+          "completed_reference_matches": 0,
+          "hardware_reference_classifications": 256
+        }
+      }
+    }
+  },
+  "recorded_normal_c": {
+    "totals": {
+      "shadow": {
+        "calls": 36236,
+        "matched": 36236,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      },
+      "sandbox": {
+        "calls": 36385,
+        "matched": 0,
+        "mismatched": 0,
+        "hardware": 36385,
+        "incomplete": 0
+      }
+    },
+    "per_entry_totals": {
+      "shadow": {
+        "C1718E": {
+          "calls": 36236,
+          "matched": 36236,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C17456": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1748C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C174A0": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C16CD8": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C16B8C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C17104": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1712C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      },
+      "sandbox": {
+        "C1718E": {
+          "calls": 36385,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 36385,
+          "incomplete": 0
+        },
+        "C17456": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1748C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C174A0": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C16CD8": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C16B8C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C17104": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1712C": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "cold_entries": [
+      "C17456",
+      "C1748C",
+      "C174A0",
+      "C16CD8",
+      "C16B8C",
+      "C17104",
+      "C1712C"
+    ],
+    "generic_cold_rejection": {
+      "path": "build/recomp/input_device_callbacks_whole_call.log",
+      "sha256": "17fa505e4310cc4ab39f49c513367fe6cce2cc54178c9befbc9b99c5581a9970",
+      "summary": "RuntimeError: C17456: no completed comparisons"
+    },
+    "reports": {
+      "whole_call_C1718E_C17456_C1748C_C174A0_C16CD8_C16B8C_C17104_C1712C_demo01_sandbox.json": {
+        "sha256": "ebe4e28d6264d1f83de47d735578b904849b63676c4336d6ac002896b943300e",
+        "entries": {
+          "C1718E": {
+            "calls": 20925,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 20925,
+            "incomplete": 0
+          },
+          "C17456": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1748C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C174A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16CD8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16B8C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17104": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1712C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1718E_C17456_C1748C_C174A0_C16CD8_C16B8C_C17104_C1712C_demo01_shadow.json": {
+        "sha256": "cd9362d868009c1b46e2f881eee904066553e370c521aacfecd344a8c43259b4",
+        "entries": {
+          "C1718E": {
+            "calls": 20833,
+            "matched": 20833,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17456": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1748C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C174A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16CD8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16B8C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17104": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1712C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1718E_C17456_C1748C_C174A0_C16CD8_C16B8C_C17104_C1712C_qual_carrier_success_sandbox.json": {
+        "sha256": "85bc53b4fe2b0d89be1260bc540c8b5d2431193684f721a60250687ff181476f",
+        "entries": {
+          "C1718E": {
+            "calls": 12400,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 12400,
+            "incomplete": 0
+          },
+          "C17456": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1748C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C174A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16CD8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16B8C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17104": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1712C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1718E_C17456_C1748C_C174A0_C16CD8_C16B8C_C17104_C1712C_qual_carrier_success_shadow.json": {
+        "sha256": "1476b9b886525318bd24d82ad2aafcfb69e842045e24e5880d22d8067d96abce",
+        "entries": {
+          "C1718E": {
+            "calls": 12353,
+            "matched": 12353,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17456": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1748C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C174A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16CD8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16B8C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17104": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1712C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1718E_C17456_C1748C_C174A0_C16CD8_C16B8C_C17104_C1712C_qual_fail_crashes_sandbox.json": {
+        "sha256": "518185d3839c7867d0f56776bb4e0121c7e53c0e2f20acc809d79716abad9d99",
+        "entries": {
+          "C1718E": {
+            "calls": 3060,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 3060,
+            "incomplete": 0
+          },
+          "C17456": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1748C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C174A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16CD8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16B8C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17104": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1712C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C1718E_C17456_C1748C_C174A0_C16CD8_C16B8C_C17104_C1712C_qual_fail_crashes_shadow.json": {
+        "sha256": "a5e77a2a883d8df7c3fc35d1226beee5cf711b67b8b65e9d90567f7e640c73d4",
+        "entries": {
+          "C1718E": {
+            "calls": 3050,
+            "matched": 3050,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17456": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1748C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C174A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16CD8": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16B8C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17104": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1712C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      }
+    },
+    "isolated_callback_evidence": {
+      "path": "build/recomp/input_device_callbacks_whole_callback.log",
+      "sha256": "6e9185afa54d5dee3fc83eae7a5f8e87aa3fa0e7648e1d7488142877aa8df9f1",
+      "summary": "whole-call C proof: 36236 shadow matches, 0 sandbox matches"
+    },
+    "isolated_callback_reports": {
+      "whole_call_C1718E_demo01_sandbox.json": {
+        "sha256": "ebe4e28d6264d1f83de47d735578b904849b63676c4336d6ac002896b943300e",
+        "entry": {
+          "entry": "C1718E",
+          "name": "advance_input_device_callback",
+          "calls": 20925,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 20925,
+          "incomplete": 0,
+          "mean_cycles": 0,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "whole_call_C1718E_demo01_shadow.json": {
+        "sha256": "cd9362d868009c1b46e2f881eee904066553e370c521aacfecd344a8c43259b4",
+        "entry": {
+          "entry": "C1718E",
+          "name": "advance_input_device_callback",
+          "calls": 20833,
+          "compared": 20833,
+          "matched": 20833,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 1232,
+          "busy_input_calls": 20833,
+          "busy_input_reads": 20833
+        }
+      },
+      "whole_call_C1718E_qual_carrier_success_sandbox.json": {
+        "sha256": "85bc53b4fe2b0d89be1260bc540c8b5d2431193684f721a60250687ff181476f",
+        "entry": {
+          "entry": "C1718E",
+          "name": "advance_input_device_callback",
+          "calls": 12400,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 12400,
+          "incomplete": 0,
+          "mean_cycles": 0,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "whole_call_C1718E_qual_carrier_success_shadow.json": {
+        "sha256": "1476b9b886525318bd24d82ad2aafcfb69e842045e24e5880d22d8067d96abce",
+        "entry": {
+          "entry": "C1718E",
+          "name": "advance_input_device_callback",
+          "calls": 12353,
+          "compared": 12353,
+          "matched": 12353,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 1457,
+          "busy_input_calls": 12353,
+          "busy_input_reads": 12353
+        }
+      },
+      "whole_call_C1718E_qual_fail_crashes_sandbox.json": {
+        "sha256": "518185d3839c7867d0f56776bb4e0121c7e53c0e2f20acc809d79716abad9d99",
+        "entry": {
+          "entry": "C1718E",
+          "name": "advance_input_device_callback",
+          "calls": 3060,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 3060,
+          "incomplete": 0,
+          "mean_cycles": 0,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "whole_call_C1718E_qual_fail_crashes_shadow.json": {
+        "sha256": "a5e77a2a883d8df7c3fc35d1226beee5cf711b67b8b65e9d90567f7e640c73d4",
+        "entry": {
+          "entry": "C1718E",
+          "name": "advance_input_device_callback",
+          "calls": 3050,
+          "compared": 3050,
+          "matched": 3050,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 1749,
+          "busy_input_calls": 3050,
+          "busy_input_reads": 3050
+        }
+      }
+    }
+  },
+  "timing": {
+    "local_instructions": 274,
+    "local_dma_cases": 8768,
+    "independently_tested_instruction_union": 17304,
+    "independently_tested_dma_cases": 553728,
+    "fresh_combined_run_this_batch": false,
+    "last_fresh_combined_instructions": 16384,
+    "last_fresh_combined_dma_cases": 524288,
+    "reason": "Shared runtime CPU/bus/math and instruction fixtures are unchanged; all thirteen older generator outputs are unchanged. The new NOP generator recipe is covered by the local instruction oracle.",
+    "local_evidence": {
+      "path": "build/recomp/input_device_callbacks_dma.log",
+      "sha256": "ebe16d527b7be70c7aee8b9ccc893fa907ef26b9e6189dffe5bab80f1a604e82",
+      "summary": "input_device_callbacks step oracle (DMA bus): 274 instructions, 8768 cases matched registers, SR, PC, cycles and RAM"
+    },
+    "generator_compatibility": {
+      "path": "build/recomp/input_device_callbacks_generator_compatibility.log",
+      "sha256": "aa76e7beeb6c60e836a640bff52d31e023d7ba3b4aef572653e7de2ffe7eb5f7",
+      "summary": "postflight_file_callers: generator output unchanged"
+    }
+  },
+  "integration": {
+    "shadow_matches": 554068,
+    "sandbox_matches": 413271,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/input_device_callbacks_full_gate.log",
+      "sha256": "250df369c73fb655d54b5569b19c5821ced21774458a20bb7f0b4e3857b0715c",
+      "summary": "541 routines, 554068 matching calls over 3 recordings (+413271 in the sandbox pass); poison: frames identical"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "sha256": "f34a6aea9397ccfc8040ef064e09dc61f2ce9868eb734fb1fe1ae6060a091db6",
+        "matched": 303814,
+        "mismatches": 0,
+        "input_device_entries": {
+          "C1718E": {
+            "entry": "C1718E",
+            "name": "advance_input_device_callback",
+            "calls": 20833,
+            "compared": 20833,
+            "matched": 20833,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1232,
+            "busy_input_calls": 20833,
+            "busy_input_reads": 20833
+          },
+          "C17456": {
+            "entry": "C17456",
+            "name": "install_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1748C": {
+            "entry": "C1748C",
+            "name": "remove_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C174A0": {
+            "entry": "C174A0",
+            "name": "prepare_input_device_port",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16CD8": {
+            "entry": "C16CD8",
+            "name": "open_input_device_timer",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16B8C": {
+            "entry": "C16B8C",
+            "name": "open_input_device_request",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17104": {
+            "entry": "C17104",
+            "name": "set_input_device_bounds",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1712C": {
+            "entry": "C1712C",
+            "name": "initialise_input_device_counters",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_carrier_success.json": {
+        "sha256": "08d21608a040fc47ad96400f5b52602d3efa6bdd71d45895f1234520ca0d70a4",
+        "matched": 199187,
+        "mismatches": 0,
+        "input_device_entries": {
+          "C1718E": {
+            "entry": "C1718E",
+            "name": "advance_input_device_callback",
+            "calls": 12353,
+            "compared": 12353,
+            "matched": 12353,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1457,
+            "busy_input_calls": 12353,
+            "busy_input_reads": 12353
+          },
+          "C17456": {
+            "entry": "C17456",
+            "name": "install_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1748C": {
+            "entry": "C1748C",
+            "name": "remove_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C174A0": {
+            "entry": "C174A0",
+            "name": "prepare_input_device_port",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16CD8": {
+            "entry": "C16CD8",
+            "name": "open_input_device_timer",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16B8C": {
+            "entry": "C16B8C",
+            "name": "open_input_device_request",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17104": {
+            "entry": "C17104",
+            "name": "set_input_device_bounds",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1712C": {
+            "entry": "C1712C",
+            "name": "initialise_input_device_counters",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "sha256": "109a737a902dca5873ad3b2cceb499ee18c239ba72961fff90e78ae56233ee6e",
+        "matched": 51067,
+        "mismatches": 0,
+        "input_device_entries": {
+          "C1718E": {
+            "entry": "C1718E",
+            "name": "advance_input_device_callback",
+            "calls": 3050,
+            "compared": 3050,
+            "matched": 3050,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1749,
+            "busy_input_calls": 3050,
+            "busy_input_reads": 3050
+          },
+          "C17456": {
+            "entry": "C17456",
+            "name": "install_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1748C": {
+            "entry": "C1748C",
+            "name": "remove_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C174A0": {
+            "entry": "C174A0",
+            "name": "prepare_input_device_port",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16CD8": {
+            "entry": "C16CD8",
+            "name": "open_input_device_timer",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16B8C": {
+            "entry": "C16B8C",
+            "name": "open_input_device_request",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17104": {
+            "entry": "C17104",
+            "name": "set_input_device_bounds",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1712C": {
+            "entry": "C1712C",
+            "name": "initialise_input_device_counters",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_demo01.json": {
+        "sha256": "3bf17f0a07889311774e673d3eb00365bc0ff01c21c318fc0d0af1a593b6443a",
+        "matched": 139459,
+        "mismatches": 0,
+        "input_device_entries": {
+          "C1718E": {
+            "entry": "C1718E",
+            "name": "advance_input_device_callback",
+            "calls": 11900,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 11900,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17456": {
+            "entry": "C17456",
+            "name": "install_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1748C": {
+            "entry": "C1748C",
+            "name": "remove_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C174A0": {
+            "entry": "C174A0",
+            "name": "prepare_input_device_port",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16CD8": {
+            "entry": "C16CD8",
+            "name": "open_input_device_timer",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16B8C": {
+            "entry": "C16B8C",
+            "name": "open_input_device_request",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17104": {
+            "entry": "C17104",
+            "name": "set_input_device_bounds",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1712C": {
+            "entry": "C1712C",
+            "name": "initialise_input_device_counters",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "sha256": "631be397b7bcd70a1fe5d747232dcc05235ce17be072285b7e049a51815ea4d1",
+        "matched": 231111,
+        "mismatches": 0,
+        "input_device_entries": {
+          "C1718E": {
+            "entry": "C1718E",
+            "name": "advance_input_device_callback",
+            "calls": 15089,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 15089,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17456": {
+            "entry": "C17456",
+            "name": "install_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1748C": {
+            "entry": "C1748C",
+            "name": "remove_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C174A0": {
+            "entry": "C174A0",
+            "name": "prepare_input_device_port",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16CD8": {
+            "entry": "C16CD8",
+            "name": "open_input_device_timer",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16B8C": {
+            "entry": "C16B8C",
+            "name": "open_input_device_request",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17104": {
+            "entry": "C17104",
+            "name": "set_input_device_bounds",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1712C": {
+            "entry": "C1712C",
+            "name": "initialise_input_device_counters",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "sha256": "9f9a7057768b37e14820b9e51a0a963073cd6b073705bdc460281cffa5ee21ee",
+        "matched": 42701,
+        "mismatches": 0,
+        "input_device_entries": {
+          "C1718E": {
+            "entry": "C1718E",
+            "name": "advance_input_device_callback",
+            "calls": 2480,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 2480,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17456": {
+            "entry": "C17456",
+            "name": "install_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1748C": {
+            "entry": "C1748C",
+            "name": "remove_input_device_callback",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C174A0": {
+            "entry": "C174A0",
+            "name": "prepare_input_device_port",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16CD8": {
+            "entry": "C16CD8",
+            "name": "open_input_device_timer",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16B8C": {
+            "entry": "C16B8C",
+            "name": "open_input_device_request",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17104": {
+            "entry": "C17104",
+            "name": "set_input_device_bounds",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1712C": {
+            "entry": "C1712C",
+            "name": "initialise_input_device_counters",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "live_evidence": {
+      "path": "build/recomp/input_device_callbacks_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384",
+      "summary": "demo01: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe": {
+      "path": "build/recomp/input_device_callbacks_probe.log",
+      "sha256": "cca80f0a577f91572b4b60d427741b9b7aa45881f4843c9e329f6a1d849aa1a4",
+      "summary": "ALL: first difference frame 416, 361 pixels"
+    }
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/input_device_callbacks_gnu.log",
+      "sha256": "eec440594717fbc17e4bb747840a7413dbfeb5099f383db712c1da5f869cbe0b",
+      "summary": "[1/1] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -o build/recomp/fa18_recomp.exe @build/recomp/fa18_recomp.exe.rsp"
+    },
+    "msvc_release": {
+      "path": "build/recomp/input_device_callbacks_msvc.log",
+      "sha256": "6ab067e51e158c0928dd9366a79412c80e10610ce6053542f03b55c7b2c6865f",
+      "summary": "  fa18_recomp.vcxproj -> C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp-cmake\\Release\\fa18_recomp.exe"
+    },
+    "artifacts_gib": 0.902
+  },
+  "next_original_scope": {
+    "manifest": "analysis/data/input_display_setup_scope_inventory.json",
+    "sha256": "3cd837e2543c5ac3a4b01374d4411e8de564cf5b2cd45c1f0dbb798138c0a441",
+    "entries": [
+      "C16D4C",
+      "C16FF4",
+      "C17066",
+      "C1787A",
+      "C1612C"
+    ],
+    "unique_instructions": 388,
+    "shared_instructions": 0,
+    "implemented_by_inventory": false,
+    "os_service_replacement": false
+  }
+}
