@@ -1,5 +1,4 @@
-/* Glue for notify.c, control_records.c, screen_frame.c, render_span.c and
- * attenuate_offset. */
+/* Glue for notify.c, control_records.c, screen_frame.c and render_span.c. */
 #include "glue.h"
 #include "glue_text.h"
 #include "ports_glue.h"
@@ -22,17 +21,6 @@ int glue_C11B44(void) {
     else if (step == 4) SET_B(D(0), 0);
     else if ((step & 3) == 2) SET_B(D(0), 0);
     else SET_B(D(0), step);
-    return glue_return();
-}
-
-/* $C15138: compiled C, int f(int x, int y) with the arguments on the stack.
- * It assigns the result to x, which rewrites the caller's argument slot. */
-int glue_C15138(void) {
-    gaddr args = A(7) + 4;
-    int16_t result = attenuate_offset(rd_s16(args + 2), rd_s16(args + 6));
-
-    wr_s16(args + 2, result);
-    D(0) = (uint32_t)(int32_t)result;
     return glue_return();
 }
 

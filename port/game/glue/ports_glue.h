@@ -18,6 +18,7 @@
 #include "glue_input_display_setup.h"
 #include "glue_main_loop_timers.h"
 #include "glue_main_loop_control_messages.h"
+#include "glue_record_control_actions.h"
 int glue_C16EAE(void);
 int glue_C16BF2(void);
 int glue_C16C56(void);

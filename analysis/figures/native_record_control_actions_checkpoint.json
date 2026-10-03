@@ -1,0 +1,1547 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "4a6f34c6",
+  "activated_owners": [
+    "C153FC",
+    "C15688",
+    "C159AE",
+    "C15AD4",
+    "C181A0",
+    "C15138"
+  ],
+  "registered_translated_entries": 488,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 554,
+  "registered_timing_entries": 370,
+  "registered_translated_timing_entries": 304,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": "analysis/data/record_control_actions_source_scope.json",
+    "path": "analysis/data/record_control_actions_source_scope.json",
+    "sha256": "a93500546d6f80781f29805c67e4948dcb47fdaeffff75e234924b5fe422b2a2",
+    "unique_instructions": 537,
+    "shared_instructions_within_batch": 0,
+    "actual_child_sites": 10,
+    "actual_original_calls": {
+      "C153FC": {
+        "pc": "C153D0",
+        "instruction": "bsr     $c153fc",
+        "bytes": "612a"
+      },
+      "C15688": {
+        "pc": "C153A6",
+        "instruction": "bsr     $c15688",
+        "bytes": "610002e0"
+      },
+      "C159AE": {
+        "pc": "C158CA",
+        "instruction": "bsr     $c159ae",
+        "bytes": "610000e2"
+      },
+      "C15AD4": {
+        "pc": "C15AC6",
+        "instruction": "bsr     $c15ad4",
+        "bytes": "610c"
+      },
+      "C181A0": {
+        "pc": "C1534A",
+        "instruction": "jsr     $c181a0.l",
+        "bytes": "4eb900c181a0"
+      },
+      "C15138": {
+        "pc": "C14ACE",
+        "instruction": "bsr     $c15138",
+        "bytes": "61000668"
+      }
+    }
+  },
+  "structural": {
+    "total_completed_cases": 147456,
+    "controlled_child_cases": 49152,
+    "real_child_cases": 98304,
+    "all_registers_full_sr_all_ram": true,
+    "ram_or_register_exclusions": [],
+    "controlled_layer_covers_every_owned_boundary": true,
+    "real_layer_coverage_is_partial": true,
+    "real_advance_fixture_uses_original_expiry_branch": true,
+    "real_alert_fixture_uses_original_null_guard": true,
+    "layers": {
+      "contract": {
+        "C153FC": {
+          "path": "build/recomp/record_control_actions_contract_C153FC.log",
+          "sha256": "89dc24c4b996e0fc9fa3f6d584137292e4a277e4b07ff8252d720f10f05b2831",
+          "cases": 8192,
+          "owned_boundaries": 185,
+          "covered_boundaries": 185,
+          "uncovered_boundaries": []
+        },
+        "C15688": {
+          "path": "build/recomp/record_control_actions_contract_C15688.log",
+          "sha256": "e5965570eed41587d881468c2573d94523989bd949d289d4ada1f47b4795358a",
+          "cases": 8192,
+          "owned_boundaries": 147,
+          "covered_boundaries": 147,
+          "uncovered_boundaries": []
+        },
+        "C159AE": {
+          "path": "build/recomp/record_control_actions_contract_C159AE.log",
+          "sha256": "57f59e4b6a0d4b0498a8252a79b7e5f79aa5797097c4f60723010b1ea4c85793",
+          "cases": 8192,
+          "owned_boundaries": 80,
+          "covered_boundaries": 80,
+          "uncovered_boundaries": []
+        },
+        "C15AD4": {
+          "path": "build/recomp/record_control_actions_contract_C15AD4.log",
+          "sha256": "52e1f431ccb27224faa08e651b917ab74b87b4233db9486ca06210aba0b5a3e3",
+          "cases": 8192,
+          "owned_boundaries": 72,
+          "covered_boundaries": 72,
+          "uncovered_boundaries": []
+        },
+        "C181A0": {
+          "path": "build/recomp/record_control_actions_contract_C181A0.log",
+          "sha256": "9134fb3340106f000af72212c0e0d6de81c450cfd2599de79e924118679632a2",
+          "cases": 8192,
+          "owned_boundaries": 28,
+          "covered_boundaries": 28,
+          "uncovered_boundaries": []
+        },
+        "C15138": {
+          "path": "build/recomp/record_control_actions_contract_C15138.log",
+          "sha256": "1fd8bb8a49000b2efa3130b3208c84fdc4c3adcf22d48a935f406203b4b8b9dd",
+          "cases": 8192,
+          "owned_boundaries": 25,
+          "covered_boundaries": 25,
+          "uncovered_boundaries": []
+        }
+      },
+      "real": {
+        "C153FC": {
+          "path": "build/recomp/record_control_actions_real_C153FC.log",
+          "sha256": "73a586ca59f6f22fb8d9844006b04a0d1abf86a6ea2d33b28c31d9e21f4f5225",
+          "cases": 16384,
+          "owned_boundaries": 185,
+          "covered_boundaries": 33,
+          "uncovered_boundaries": [
+            "C15422",
+            "C15426",
+            "C15428",
+            "C1542E",
+            "C15430",
+            "C15432",
+            "C15436",
+            "C1543A",
+            "C1543E",
+            "C15442",
+            "C15446",
+            "C15448",
+            "C1544A",
+            "C15450",
+            "C15452",
+            "C15454",
+            "C15456",
+            "C1545A",
+            "C1545C",
+            "C15460",
+            "C15464",
+            "C15466",
+            "C1546C",
+            "C15472",
+            "C15476",
+            "C1547A",
+            "C1547C",
+            "C1547E",
+            "C15482",
+            "C15484",
+            "C15488",
+            "C1548C",
+            "C1548E",
+            "C15494",
+            "C1549A",
+            "C154A0",
+            "C154A4",
+            "C154A6",
+            "C154AC",
+            "C154AE",
+            "C154B2",
+            "C154B6",
+            "C154B8",
+            "C154BA",
+            "C154C0",
+            "C154C2",
+            "C154C4",
+            "C154C8",
+            "C154CC",
+            "C154CE",
+            "C154D2",
+            "C154D4",
+            "C154D8",
+            "C154DC",
+            "C154DE",
+            "C154E0",
+            "C154E6",
+            "C154EA",
+            "C154EC",
+            "C154F2",
+            "C154F6",
+            "C154F8",
+            "C154FA",
+            "C15500",
+            "C15504",
+            "C1550A",
+            "C1550C",
+            "C15510",
+            "C15516",
+            "C15518",
+            "C1551E",
+            "C15522",
+            "C15524",
+            "C1552A",
+            "C1552E",
+            "C15532",
+            "C15534",
+            "C15538",
+            "C1553C",
+            "C15542",
+            "C15546",
+            "C15548",
+            "C1554A",
+            "C15550",
+            "C15554",
+            "C15556",
+            "C1555C",
+            "C15560",
+            "C15562",
+            "C15564",
+            "C1556A",
+            "C1556E",
+            "C15574",
+            "C15576",
+            "C1557A",
+            "C15580",
+            "C15582",
+            "C15588",
+            "C1558C",
+            "C1558E",
+            "C15594",
+            "C15598",
+            "C1559C",
+            "C1559E",
+            "C155A2",
+            "C155A6",
+            "C155AC",
+            "C155AE",
+            "C155B2",
+            "C155B4",
+            "C155B8",
+            "C155BA",
+            "C155C0",
+            "C155C2",
+            "C155C6",
+            "C155C8",
+            "C155CE",
+            "C155D0",
+            "C155D4",
+            "C155D6",
+            "C155DC",
+            "C155DE",
+            "C155E2",
+            "C155E4",
+            "C155E8",
+            "C155EA",
+            "C155EE",
+            "C155F0",
+            "C155F2",
+            "C155F6",
+            "C155F8",
+            "C155FA",
+            "C15600",
+            "C15602",
+            "C15604",
+            "C15608",
+            "C1560A",
+            "C1560E",
+            "C15610",
+            "C15614",
+            "C15616",
+            "C15618",
+            "C1561E",
+            "C15620",
+            "C15622",
+            "C15626",
+            "C15628",
+            "C1562A",
+            "C15630",
+            "C15632",
+            "C1563A",
+            "C1567A"
+          ]
+        },
+        "C15688": {
+          "path": "build/recomp/record_control_actions_real_C15688.log",
+          "sha256": "7eadb2caa90171b07b2166c6c6f7602e1cd25fbfdf09f34f8187636ca890edf8",
+          "cases": 16384,
+          "owned_boundaries": 147,
+          "covered_boundaries": 108,
+          "uncovered_boundaries": [
+            "C156C4",
+            "C156C8",
+            "C156CA",
+            "C156CE",
+            "C156D0",
+            "C156D4",
+            "C156DA",
+            "C156E0",
+            "C156E6",
+            "C156EC",
+            "C156EE",
+            "C156F4",
+            "C156F8",
+            "C156FA",
+            "C156FC",
+            "C15702",
+            "C15706",
+            "C1570A",
+            "C1570C",
+            "C15712",
+            "C15718",
+            "C1571E",
+            "C15724",
+            "C15828",
+            "C1582E",
+            "C15834",
+            "C1583A",
+            "C1583C",
+            "C15842",
+            "C15848",
+            "C1584A",
+            "C15850",
+            "C15852",
+            "C15854",
+            "C15856",
+            "C1585A",
+            "C1585C",
+            "C15860",
+            "C15862"
+          ]
+        },
+        "C159AE": {
+          "path": "build/recomp/record_control_actions_real_C159AE.log",
+          "sha256": "2c3605525dc327b00166a1337d3fbeb50650cd8005792777692632535de42f91",
+          "cases": 16384,
+          "owned_boundaries": 80,
+          "covered_boundaries": 70,
+          "uncovered_boundaries": [
+            "C15A28",
+            "C15A2E",
+            "C15A32",
+            "C15A36",
+            "C15A38",
+            "C15A3E",
+            "C15A40",
+            "C15A44",
+            "C15A48",
+            "C15A4C"
+          ]
+        },
+        "C15AD4": {
+          "path": "build/recomp/record_control_actions_real_C15AD4.log",
+          "sha256": "5b6514282f89872d124fce05597100a09fdf14965fe1597bbd1e8bef60ea4607",
+          "cases": 16384,
+          "owned_boundaries": 72,
+          "covered_boundaries": 72,
+          "uncovered_boundaries": []
+        },
+        "C181A0": {
+          "path": "build/recomp/record_control_actions_real_C181A0.log",
+          "sha256": "523f321cd45ee65b619d1a3f13de1a392685a411fc1155789c1d6613ee0fc910",
+          "cases": 16384,
+          "owned_boundaries": 28,
+          "covered_boundaries": 5,
+          "uncovered_boundaries": [
+            "C181AC",
+            "C181AE",
+            "C181B0",
+            "C181B4",
+            "C181B6",
+            "C181BC",
+            "C181BE",
+            "C181C2",
+            "C181CA",
+            "C181CC",
+            "C181D0",
+            "C181D2",
+            "C181D8",
+            "C181DA",
+            "C181DE",
+            "C181E0",
+            "C181E4",
+            "C181E6",
+            "C181E8",
+            "C181EA",
+            "C181EC",
+            "C181EE",
+            "C181F2"
+          ]
+        },
+        "C15138": {
+          "path": "build/recomp/record_control_actions_real_C15138.log",
+          "sha256": "7f5dc573e92d844e42b9b41e29dd89bdf0bc6c5e8990ad02ba6765850377f350",
+          "cases": 16384,
+          "owned_boundaries": 25,
+          "covered_boundaries": 25,
+          "uncovered_boundaries": []
+        }
+      }
+    },
+    "independent_os_hardware_timing_proof": false,
+    "summary_evidence": {
+      "path": "build/recomp/record_control_actions_structural.log",
+      "sha256": "55c5e7d4c09d1db95dadc1e960b28eb81f9488d61f785b0a029f5b16bd25bbcb"
+    }
+  },
+  "dispatch": {
+    "cases": 4608,
+    "cases_per_entry_per_mode": 256,
+    "modes": [
+      "on",
+      "shadow",
+      "sandbox"
+    ],
+    "on_requires_native_continuation": true,
+    "reference_modes_require_exact_completed_match_or_hardware_classification": true,
+    "guards": [
+      "non-call",
+      "OFF",
+      "selection",
+      "source-write invalidation"
+    ],
+    "per_mode": {
+      "on": {
+        "C153FC": {
+          "path": "build/recomp/record_control_actions_dispatch_C153FC_on.log",
+          "sha256": "0b3ae8bdf01cfa5720624e6cdaaf113239f4f4f545ae907d1201bd44e757afb1",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 32
+        },
+        "C15688": {
+          "path": "build/recomp/record_control_actions_dispatch_C15688_on.log",
+          "sha256": "d43be4e7cf3185bd4f6dca03bf086a0cb1692fe286afc9b4dbb02f000497ea03",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 108
+        },
+        "C159AE": {
+          "path": "build/recomp/record_control_actions_dispatch_C159AE_on.log",
+          "sha256": "6bb42259863d140e09d912f3e5486c18be5f6ebea078cfe15009e35ffdd14a4e",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 70
+        },
+        "C15AD4": {
+          "path": "build/recomp/record_control_actions_dispatch_C15AD4_on.log",
+          "sha256": "34050bb570706e801de96054b01e4519b50ccaba5a20e624396808a978bcc9de",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 72
+        },
+        "C181A0": {
+          "path": "build/recomp/record_control_actions_dispatch_C181A0_on.log",
+          "sha256": "ca970ab60f21e08da0925b5c0fb973d50ee10f582951b9d09141be34cd4372c9",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 5
+        },
+        "C15138": {
+          "path": "build/recomp/record_control_actions_dispatch_C15138_on.log",
+          "sha256": "3f85e0e96a43716974228ef0ddc3e195e5d5c3523438c59b573b000ce7686ff1",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 25
+        }
+      },
+      "shadow": {
+        "C153FC": {
+          "path": "build/recomp/record_control_actions_dispatch_C153FC_shadow.log",
+          "sha256": "0b3ae8bdf01cfa5720624e6cdaaf113239f4f4f545ae907d1201bd44e757afb1",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 32
+        },
+        "C15688": {
+          "path": "build/recomp/record_control_actions_dispatch_C15688_shadow.log",
+          "sha256": "d43be4e7cf3185bd4f6dca03bf086a0cb1692fe286afc9b4dbb02f000497ea03",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 108
+        },
+        "C159AE": {
+          "path": "build/recomp/record_control_actions_dispatch_C159AE_shadow.log",
+          "sha256": "6bb42259863d140e09d912f3e5486c18be5f6ebea078cfe15009e35ffdd14a4e",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 70
+        },
+        "C15AD4": {
+          "path": "build/recomp/record_control_actions_dispatch_C15AD4_shadow.log",
+          "sha256": "34050bb570706e801de96054b01e4519b50ccaba5a20e624396808a978bcc9de",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 72
+        },
+        "C181A0": {
+          "path": "build/recomp/record_control_actions_dispatch_C181A0_shadow.log",
+          "sha256": "ca970ab60f21e08da0925b5c0fb973d50ee10f582951b9d09141be34cd4372c9",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 5
+        },
+        "C15138": {
+          "path": "build/recomp/record_control_actions_dispatch_C15138_shadow.log",
+          "sha256": "3f85e0e96a43716974228ef0ddc3e195e5d5c3523438c59b573b000ce7686ff1",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 25
+        }
+      },
+      "sandbox": {
+        "C153FC": {
+          "path": "build/recomp/record_control_actions_dispatch_C153FC_sandbox.log",
+          "sha256": "0b3ae8bdf01cfa5720624e6cdaaf113239f4f4f545ae907d1201bd44e757afb1",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 32
+        },
+        "C15688": {
+          "path": "build/recomp/record_control_actions_dispatch_C15688_sandbox.log",
+          "sha256": "d43be4e7cf3185bd4f6dca03bf086a0cb1692fe286afc9b4dbb02f000497ea03",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 108
+        },
+        "C159AE": {
+          "path": "build/recomp/record_control_actions_dispatch_C159AE_sandbox.log",
+          "sha256": "6bb42259863d140e09d912f3e5486c18be5f6ebea078cfe15009e35ffdd14a4e",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 70
+        },
+        "C15AD4": {
+          "path": "build/recomp/record_control_actions_dispatch_C15AD4_sandbox.log",
+          "sha256": "34050bb570706e801de96054b01e4519b50ccaba5a20e624396808a978bcc9de",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 72
+        },
+        "C181A0": {
+          "path": "build/recomp/record_control_actions_dispatch_C181A0_sandbox.log",
+          "sha256": "ca970ab60f21e08da0925b5c0fb973d50ee10f582951b9d09141be34cd4372c9",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 5
+        },
+        "C15138": {
+          "path": "build/recomp/record_control_actions_dispatch_C15138_sandbox.log",
+          "sha256": "3f85e0e96a43716974228ef0ddc3e195e5d5c3523438c59b573b000ce7686ff1",
+          "hardware_source_calls": 0,
+          "hardware_free_source_calls": 256,
+          "covered_boundaries": 25
+        }
+      }
+    },
+    "evidence": {
+      "path": "build/recomp/record_control_actions_dispatch.log",
+      "sha256": "fd5d85cc9b12a240cea1567e6df5b33d8e4ec2be2b765bfcfec5143885b4ebfa"
+    }
+  },
+  "recorded_normal_c": {
+    "totals": {
+      "shadow": {
+        "C153FC": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C15688": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C159AE": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C15AD4": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C181A0": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C15138": {
+          "calls": 12926,
+          "matched": 12907,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 19
+        }
+      },
+      "sandbox": {
+        "C153FC": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C15688": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C159AE": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C15AD4": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C181A0": {
+          "calls": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C15138": {
+          "calls": 12926,
+          "matched": 12926,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "reports": {
+      "whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_demo01_sandbox.json": {
+        "path": "build\\recomp\\whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_demo01_sandbox.json",
+        "sha256": "f07c0f7370d7073bdf5e81cf59cb0eb3d9cc8ae79fbbc3baeafcf00ddb2ca3c6",
+        "entries": {
+          "C153FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15688": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C159AE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15AD4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C181A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15138": {
+            "calls": 7990,
+            "matched": 7990,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_demo01_shadow.json": {
+        "path": "build\\recomp\\whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_demo01_shadow.json",
+        "sha256": "a50732a71b4657f5a9c3516f79312bddca8cad0fd1a51c4f8b3f73cf5397b38c",
+        "entries": {
+          "C153FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15688": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C159AE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15AD4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C181A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15138": {
+            "calls": 7990,
+            "matched": 7978,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 12
+          }
+        }
+      },
+      "whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_carrier_success_sandbox.json": {
+        "path": "build\\recomp\\whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_carrier_success_sandbox.json",
+        "sha256": "34ba143e878948635a48c11b33a39e61b184bc719ad9bec43111b9349c4ac934",
+        "entries": {
+          "C153FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15688": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C159AE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15AD4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C181A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15138": {
+            "calls": 4548,
+            "matched": 4548,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_carrier_success_shadow.json": {
+        "path": "build\\recomp\\whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_carrier_success_shadow.json",
+        "sha256": "28cbf65ea707f4bb88c95490a759fa75cf4899760f53453bcc3244e8b34e099f",
+        "entries": {
+          "C153FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15688": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C159AE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15AD4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C181A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15138": {
+            "calls": 4548,
+            "matched": 4541,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 7
+          }
+        }
+      },
+      "whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_fail_crashes_sandbox.json": {
+        "path": "build\\recomp\\whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_fail_crashes_sandbox.json",
+        "sha256": "0bac39ce29b42a83288fd17d0c26606227976e8f8dec0a128c1aa1095e209f80",
+        "entries": {
+          "C153FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15688": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C159AE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15AD4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C181A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15138": {
+            "calls": 388,
+            "matched": 388,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_fail_crashes_shadow.json": {
+        "path": "build\\recomp\\whole_call_C153FC_C15688_C159AE_C15AD4_C181A0_C15138_qual_fail_crashes_shadow.json",
+        "sha256": "0bac39ce29b42a83288fd17d0c26606227976e8f8dec0a128c1aa1095e209f80",
+        "entries": {
+          "C153FC": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15688": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C159AE": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15AD4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C181A0": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C15138": {
+            "calls": 388,
+            "matched": 388,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      }
+    },
+    "generic_checker_passed": false,
+    "generic_zero_comparison_rejection_retained": true,
+    "cold_entries": [
+      "C153FC",
+      "C15688",
+      "C159AE",
+      "C15AD4",
+      "C181A0"
+    ],
+    "hot_entry_checker_passed": true,
+    "hot_entry_evidence": {
+      "path": "build/recomp/record_control_actions_hot_whole_call.log",
+      "sha256": "c14657ccb743ba6409dd5912d0bce6356cd22fa77222064f5ac6f7377cb2b21b"
+    },
+    "step_disabled": true,
+    "ownership_start_end_busy_tail_retained": true,
+    "evidence": {
+      "path": "build/recomp/record_control_actions_whole_call.log",
+      "sha256": "e82b4800c6bf7759a9e9e282f0f9bc62fe46bb1b26aae631f3fe11c7e05119d3"
+    }
+  },
+  "timing": {
+    "local_instructions": 537,
+    "local_dma_cases": 17184,
+    "independently_tested_instruction_union": 18889,
+    "independently_tested_dma_cases": 604448,
+    "shared_with_previous_instruction_union": 0,
+    "fresh_combined_run_this_batch": false,
+    "last_fresh_combined_instructions": 16384,
+    "last_fresh_combined_dma_cases": 524288,
+    "shared_runtime_cpu_bus_math_instruction_fixtures_unchanged": true,
+    "older_generator_outputs_unchanged": 17,
+    "local_evidence": {
+      "path": "build/recomp/record_control_actions_dma.log",
+      "sha256": "421d703da699cad7943340937879807c566fac6ff1b6b3c780ad7bd0277153da"
+    },
+    "generator_compatibility": {
+      "path": "build/recomp/record_control_actions_generator_compatibility.log",
+      "sha256": "96a60bff90cf712ea7a9678b78a1a334713e6d0dd646c8797d2031080b9ff341"
+    }
+  },
+  "integration": {
+    "shadow_matches": 555565,
+    "sandbox_matches": 417331,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/record_control_actions_full_gate.log",
+      "sha256": "176160219f3c1a307887fb91b2f86b15645ab9ee62b5fb06c5e9357ba033b2b2"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "path": "build\\recomp\\ports_report_demo01.json",
+        "sha256": "75231f73826ccff3701bcbbe33b996521937b0c4e660bde359706f5dc2cb0867",
+        "matched": 304587,
+        "entries": {
+          "C153FC": {
+            "entry": "C153FC",
+            "name": "advance_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15688": {
+            "entry": "C15688",
+            "name": "initialise_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C159AE": {
+            "entry": "C159AE",
+            "name": "aim_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15AD4": {
+            "entry": "C15AD4",
+            "name": "publish_control_record_direction",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C181A0": {
+            "entry": "C181A0",
+            "name": "start_control_record_alert",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15138": {
+            "entry": "C15138",
+            "name": "attenuate_control_record_offset",
+            "calls": 3383,
+            "compared": 3383,
+            "matched": 3383,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 237,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_carrier_success.json": {
+        "path": "build\\recomp\\ports_report_qual_carrier_success.json",
+        "sha256": "6c91be91aa2819137a8244b185e08188e2c9a486ce37c81a4a54e69be671a56a",
+        "matched": 199992,
+        "entries": {
+          "C153FC": {
+            "entry": "C153FC",
+            "name": "advance_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15688": {
+            "entry": "C15688",
+            "name": "initialise_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C159AE": {
+            "entry": "C159AE",
+            "name": "aim_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15AD4": {
+            "entry": "C15AD4",
+            "name": "publish_control_record_direction",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C181A0": {
+            "entry": "C181A0",
+            "name": "start_control_record_alert",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15138": {
+            "entry": "C15138",
+            "name": "attenuate_control_record_offset",
+            "calls": 1827,
+            "compared": 1827,
+            "matched": 1827,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 228,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "path": "build\\recomp\\ports_report_qual_fail_crashes.json",
+        "sha256": "38a6c39f1f6865153d42f7da401b67c35a4ac17f305bd85f62908de3cdff9d0a",
+        "matched": 50986,
+        "entries": {
+          "C153FC": {
+            "entry": "C153FC",
+            "name": "advance_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15688": {
+            "entry": "C15688",
+            "name": "initialise_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C159AE": {
+            "entry": "C159AE",
+            "name": "aim_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15AD4": {
+            "entry": "C15AD4",
+            "name": "publish_control_record_direction",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C181A0": {
+            "entry": "C181A0",
+            "name": "start_control_record_alert",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15138": {
+            "entry": "C15138",
+            "name": "attenuate_control_record_offset",
+            "calls": 140,
+            "compared": 140,
+            "matched": 140,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 207,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_demo01.json": {
+        "path": "build\\recomp\\ports_report_sandbox_demo01.json",
+        "sha256": "906c90a821f6a2f59ec4a19877fad1ba95774151eeb6801db3a8a4393378664a",
+        "matched": 143656,
+        "entries": {
+          "C153FC": {
+            "entry": "C153FC",
+            "name": "advance_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15688": {
+            "entry": "C15688",
+            "name": "initialise_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C159AE": {
+            "entry": "C159AE",
+            "name": "aim_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15AD4": {
+            "entry": "C15AD4",
+            "name": "publish_control_record_direction",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C181A0": {
+            "entry": "C181A0",
+            "name": "start_control_record_alert",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15138": {
+            "entry": "C15138",
+            "name": "attenuate_control_record_offset",
+            "calls": 7,
+            "compared": 7,
+            "matched": 7,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 241,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "path": "build\\recomp\\ports_report_sandbox_qual_carrier_success.json",
+        "sha256": "ff133661b8b038121b088dd12264cbeace770d96d7355c2e93bbf1e4a5db1dab",
+        "matched": 231873,
+        "entries": {
+          "C153FC": {
+            "entry": "C153FC",
+            "name": "advance_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15688": {
+            "entry": "C15688",
+            "name": "initialise_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C159AE": {
+            "entry": "C159AE",
+            "name": "aim_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15AD4": {
+            "entry": "C15AD4",
+            "name": "publish_control_record_direction",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C181A0": {
+            "entry": "C181A0",
+            "name": "start_control_record_alert",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15138": {
+            "entry": "C15138",
+            "name": "attenuate_control_record_offset",
+            "calls": 7,
+            "compared": 7,
+            "matched": 7,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 216,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "path": "build\\recomp\\ports_report_sandbox_qual_fail_crashes.json",
+        "sha256": "635300af202b1165361b86f4585e92d91c8a56ac96869bd449c3f5af7aa54dfd",
+        "matched": 41802,
+        "entries": {
+          "C153FC": {
+            "entry": "C153FC",
+            "name": "advance_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15688": {
+            "entry": "C15688",
+            "name": "initialise_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C159AE": {
+            "entry": "C159AE",
+            "name": "aim_control_record_action",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15AD4": {
+            "entry": "C15AD4",
+            "name": "publish_control_record_direction",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C181A0": {
+            "entry": "C181A0",
+            "name": "start_control_record_alert",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C15138": {
+            "entry": "C15138",
+            "name": "attenuate_control_record_offset",
+            "calls": 3,
+            "compared": 3,
+            "matched": 3,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 198,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "live_evidence": {
+      "path": "build/recomp/record_control_actions_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe": {
+      "path": "build/recomp/record_control_actions_timing.log",
+      "sha256": "17a9fc3eddb35cdabfda2fd50464bd184b0e8e77ed4a267422a0c2ff2eb516ad"
+    },
+    "inactive_display_parent": "C1612C"
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/record_control_actions_gnu.log",
+      "sha256": "5326e4a54567f979f4509721f4327f99ced49359512a1727d9c55a8b444f4336"
+    },
+    "msvc_release": {
+      "path": "build/recomp/record_control_actions_msvc.log",
+      "sha256": "50c963cda689b5d77ca264f7325086940152a240a923cf12e3175ac5e9411373"
+    },
+    "artifacts_gib": 1.061
+  },
+  "next_original_scope": {
+    "manifest": "analysis/data/main_loop_flight_controls_scope_inventory.json",
+    "path": "analysis/data/main_loop_flight_controls_scope_inventory.json",
+    "sha256": "c49f978d47f1295e4346e846d0c9b1463c2b9ceb359c8999f941d27573e8bfdc",
+    "entries": [
+      "C149BE",
+      "C083E2",
+      "C25754",
+      "C23A7E",
+      "C24568",
+      "C2436A"
+    ],
+    "unique_instructions": 1416,
+    "shared_instructions": 0,
+    "implemented_by_inventory": false,
+    "os_service_replacement": false
+  }
+}

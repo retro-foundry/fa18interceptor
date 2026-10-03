@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 58cfe798); ignored gate logs may
+history (the preceding handoff is in commit 4a6f34c6); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -41,7 +41,8 @@ input-device callback/setup owners raise it to 480/624. Four gameport/text
 setup owners retain that count and extend source-only coverage to sixty-five.
 Complete main-loop timer/readout and setup-bounds owners now raise coverage
 to 481/624 and source-only coverage to sixty-six. Complete main-loop control
-records and message sequences now raise translated coverage to 483/624.
+records and message sequences raise translated coverage to 483/624. Complete
+control-record action and alert owners now raise it to 488/624.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -50,7 +51,44 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 483 of 624 translated entries plus sixty-six original source-only callable
+- 488 of 624 translated entries plus sixty-six original source-only callable
+  entries are registered: 554 rows and 370 source-timed entries (304 translated
+  plus sixty-six source-only). Complete C153FC/C15688/C159AE/C15AD4/C181A0 and
+  the upgraded C15138 cover 537 unique / zero shared boundaries and ten actual
+  child sites. The older offset adapter is removed; its caller-slot write,
+  original frame locals and complete CPU/SR/source timing are retained.
+  Full CPU/SR/all-RAM proof passes 147,456 complete cases without exclusions:
+  49,152 controlled-child and 98,304 real-child cases. Controlled cases cover
+  all 185/147/80/72/28/25 owned PCs and compare child-entry CPU/SR/RAM. Real
+  owner coverage is 33/185, 108/147, 70/80, 72/72, 5/28 and 25/25. Advance uses
+  the original expiry branch; alert uses the null guard. Launch/aim retain real
+  direction/projection children, with nested owned PCs counted separately.
+  No all-path real collision/render/sound-service completion is claimed.
+  Actual ON/shadow/sandbox dispatch passes 4,608 complete fixtures and guards;
+  all real fixtures require hardware-free completed classification.
+  Five new owners are cold in all six step-disabled recording reports; the
+  generic zero-comparison rejection for C153FC is retained unchanged. C15138
+  independently passes 12,907 shadow / 12,926 sandbox normal-C matches, with
+  19 shadow incompletes and no sandbox incompletes/hardware/mismatches. Its
+  separate unchanged generic checker passes. Local DMA passes 537 / 17,184;
+  the independently tested union is 18,889 / 604,448 with zero new overlap.
+  Last fresh combined remains 16,384 / 524,288; no fresh combined run this
+  batch. NEG.W memory and arithmetic-direction recipes are family-local;
+  all seventeen older generator outputs and shared runtime CPU/bus/math/
+  instruction fixtures remain unchanged. GNU/MSVC Release pass. The full
+  554-row gate passes 555,565 shadow / 417,331 sandbox matches, zero mismatches,
+  exact seals and identical poison frames. All 36,236 isolated live frames/
+  seals match; group exact through frame 600, ALL remains 416/361. Build/ is
+  1.061 GiB. C1612C remains inactive with frozen graphics-wait failure explicit.
+  See analysis/routines/native_c_record_control_actions.md and
+  analysis/figures/native_record_control_actions_checkpoint.json.
+  Next complete C149BE/C23A7E control/flight parents and upgrade existing
+  C083E2/C25754/C24568/C2436A: 1,416 unique / zero shared boundaries, sealed in
+  analysis/data/main_loop_flight_controls_scope_inventory.json. That inventory
+  implements none of these changes. Game-function porting remains incomplete;
+  retain the stopping point and defer Kickstart and standalone timing work.
+- At the preceding control/message checkpoint, 483 of 624 translated entries
+  plus sixty-six original source-only callable
   entries are registered: 549 rows and 364 source-timed entries (298 translated
   plus sixty-six source-only). Complete C1518C/C32CEE owners cover 503 unique /
   zero shared boundaries and fifteen actual child sites. The message owner's

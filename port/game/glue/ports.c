@@ -8,6 +8,11 @@
 
 const FA18Port fa18_ports[] = {
     /* Complete main-loop control and message sequence owners. */
+    {0xC153FC, glue_C153FC, "advance_control_record_action", 0, 0, glue_C153FC_step, 0xC15688, 0, 0, glue_C153FC_owns},
+    {0xC15688, glue_C15688, "initialise_control_record_action", 0, 0, glue_C15688_step, 0xC158D8, 0, 0, glue_C15688_owns},
+    {0xC159AE, glue_C159AE, "aim_control_record_action", 0, 0, glue_C159AE_step, 0xC15AD4, 0, 0, glue_C159AE_owns},
+    {0xC15AD4, glue_C15AD4, "publish_control_record_direction", 0, 0, glue_C15AD4_step, 0xC15BF6, 0, 0, glue_C15AD4_owns},
+    {0xC181A0, glue_C181A0, "start_control_record_alert", 0, 0, glue_C181A0_step, 0xC181FA, 0, 0, glue_C181A0_owns},
     {0xC1518C, glue_C1518C, "advance_main_loop_control_records", 0, 0, glue_C1518C_step, 0xC153FC, 0, 0, glue_C1518C_owns},
     {0xC32CEE, glue_C32CEE, "advance_main_loop_message_sequence", 0, 0, glue_C32CEE_step, 0xC330FE, 0, 0xC32BD2, glue_C32CEE_owns},
     /* Complete main-loop timer/readout and setup-bounds owners. */
@@ -213,7 +218,7 @@ const FA18Port fa18_ports[] = {
     /* notify.c */
     {0xC11B44, glue_C11B44, "tick_notification_cadence", 0, 0, glue_C11B44_step, 0xC11BB0},
     /* fixed_math.c */
-    {0xC15138, glue_C15138, "attenuate_offset", 150},
+    {0xC15138, glue_C15138, "attenuate_control_record_offset", 0, 0, glue_C15138_step, 0xC1518C, 0, 0, glue_C15138_owns},
     /* render_span.c */
     {0xC310E2, glue_C310E2, "bound_span", 80},
     /* control_records.c */
