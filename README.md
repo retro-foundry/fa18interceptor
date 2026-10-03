@@ -12,11 +12,30 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-514 translated game entries and sixty-six original source-only callable entries are
+526 translated game entries and sixty-six original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-Five complete grid, scene-label and record-marker functions pass 163,840 full
+Six complete stream/numeric/marker owners and two store upgrades pass 262,144
+whole CPU/PC/SR/RAM calls, ordered Custom writes and terminal hardware state.
+Both proof kinds cover all 100 source boundaries. All 36,236 isolated live
+frames and RAM seals match; five recorded owners pass 9,146 shadow / 9,278
+sandbox independent normal-C comparisons. Three cold owners retain strict
+recording rejections. Original marker fixtures keep their bounded vertical
+offsets and zero/one-plane limits explicit. Combined DMA passes 23,347
+boundaries / 747,104 cases. See [stream proof](analysis/routines/native_c_hud_stream.md).
+The next eight display parents have 595 unique / 63 shared sealed boundaries.
+Game-function porting remains incomplete; stop when only Kickstart services
+and timing remain, after reconciling cold and indirect owners.
+
+The preceding six projection/readout owners and four projection upgrades pass
+327,680 whole calls and 65,536 separate internal clamp segments. They have
+272 unique source boundaries and pass 491,520 actual dispatch fixtures.
+All 36,236 isolated live frames and RAM seals match. See
+[projection/readout proof](analysis/routines/native_c_projection_readouts.md).
+Other older projection parents still require complete original-child upgrades.
+
+The preceding five complete grid, scene-label and record-marker functions pass 163,840 full
 CPU/PC/SR/RAM calls, every controlled source boundary, and 30,720 dispatch
 fixtures; all 36,236 isolated live frames and RAM seals match. Independent
 normal C passes 20,090 shadow / 20,093 sandbox comparisons
@@ -24,9 +43,8 @@ for the two recorded parents; three cold children retain strict recording
 rejections and complete fixture proofs. The combined DMA proof passes 23,061
 boundaries / 737,952 cases. See
 [grid and marker proof](analysis/routines/native_c_flight_markers.md).
-The next six projection/readout owners have a sealed 264-unique / 85-shared
-boundary inventory. Game-function porting remains incomplete; stop when only
-Kickstart services and timing remain, after reconciling cold and indirect owners.
+Their projection/readout successors and the stream owners are now complete
+as described above.
 
 The preceding four complete history, zone-exit and candidate-geometry upgrades pass 131,072
 full CPU/PC/SR/RAM calls, all 1,015 controlled source boundaries, 3,072 dispatch
@@ -87,7 +105,7 @@ The immediate work is the next complete readable source batch. The user has
 deferred the minor one-frame Copper-fade delay; its evidence is retained in
 `CURRENT_PORT_HANDOFF.md` for later parity work.
 The gauge correction matches all recorded frames and sealed final RAM in
-isolation; 404 registered callable entries now have source timing. The complete
+isolation; 418 registered callable entries now have source timing. The complete
 registered demo still matches through frame 415. The targeted gauge checkpoint
 is complete, as are the placement-ordering parent and two workspace selector
 helpers. The complete C1D10C template-placement parent now passes independent

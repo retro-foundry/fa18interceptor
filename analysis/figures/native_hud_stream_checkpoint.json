@@ -1,0 +1,2977 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "64b46118",
+  "new_registered_owners": [
+    "C308D8",
+    "C308F4",
+    "C30F46",
+    "C31B76",
+    "C33AD6",
+    "C33B06"
+  ],
+  "upgraded_registered_owners": [
+    "C308E2",
+    "C30904"
+  ],
+  "registered_translated_entries": 526,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 592,
+  "registered_timing_entries": 418,
+  "registered_translated_timing_entries": 352,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/hud_stream_source_scope.json",
+      "sha256": "f27644b05253bbe69650b7c81d7417e64841601f4786beff177fec5fa02db2dd"
+    },
+    "unique_instructions": 100,
+    "shared_within_batch": 10,
+    "distinct_child_sites": 11,
+    "child_sites_by_owner": 11,
+    "actual_original_callability": {
+      "C308E2": [
+        {
+          "pc": "C308BA",
+          "return_pc": "C308BE",
+          "instruction": "bsr     $c308e2",
+          "bytes": "61000026"
+        }
+      ],
+      "C30904": [
+        {
+          "pc": "C307F8",
+          "return_pc": "C307FC",
+          "instruction": "bsr     $c30904",
+          "bytes": "6100010a"
+        }
+      ],
+      "C308D8": [
+        {
+          "pc": "C308C2",
+          "return_pc": "C308C6",
+          "instruction": "bsr     $c308d8",
+          "bytes": "61000014"
+        },
+        {
+          "pc": "C308CA",
+          "return_pc": "C308CE",
+          "instruction": "bsr     $c308d8",
+          "bytes": "6100000c"
+        },
+        {
+          "pc": "C308D2",
+          "return_pc": "C308D6",
+          "instruction": "bsr     $c308d8",
+          "bytes": "61000004"
+        }
+      ],
+      "C308F4": [
+        {
+          "pc": "C307FC",
+          "return_pc": "C30800",
+          "instruction": "bsr     $c308f4",
+          "bytes": "610000f6"
+        },
+        {
+          "pc": "C30800",
+          "return_pc": "C30804",
+          "instruction": "bsr     $c308f4",
+          "bytes": "610000f2"
+        },
+        {
+          "pc": "C30804",
+          "return_pc": "C30808",
+          "instruction": "bsr     $c308f4",
+          "bytes": "610000ee"
+        }
+      ],
+      "C30F46": [
+        {
+          "pc": "C30F3E",
+          "return_pc": "C30F42",
+          "instruction": "bsr     $c30f46",
+          "bytes": "61000006"
+        },
+        {
+          "pc": "C30F42",
+          "return_pc": "C30F46",
+          "instruction": "bsr     $c30f46",
+          "bytes": "61000002"
+        }
+      ],
+      "C31B76": [
+        {
+          "pc": "C0F3AC",
+          "return_pc": "C0F3B2",
+          "instruction": "jsr     $c31b76.l",
+          "bytes": "4eb900c31b76"
+        }
+      ],
+      "C33AD6": [
+        {
+          "pc": "C335B2",
+          "return_pc": "C335B6",
+          "instruction": "bsr     $c33ad6",
+          "bytes": "61000522"
+        }
+      ],
+      "C33B06": [
+        {
+          "pc": "C3378A",
+          "return_pc": "C3378E",
+          "instruction": "bsr     $c33b06",
+          "bytes": "6100037a"
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 262144,
+  "controlled_child_completed_calls": 131072,
+  "real_child_completed_calls": 131072,
+  "fixture_coverage": [
+    {
+      "owner": "C308E2",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C308E2.log",
+        "sha256": "5f66105322443246a59ab658695c0d0dc598d23b1c0277b1d754a2e927e807da"
+      }
+    },
+    {
+      "owner": "C30904",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C30904.log",
+        "sha256": "f461cd60d0ca1b97aa0e95652940abaa61d97f1705e5b2edfbddc45c79780ce6"
+      }
+    },
+    {
+      "owner": "C308D8",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C308D8.log",
+        "sha256": "3827d8ca97891cc9a2548a9588f5d9d9956e942689eb567d94858ccb91c37f36"
+      }
+    },
+    {
+      "owner": "C308F4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 11,
+      "observed_owner_pcs": 11,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C308F4.log",
+        "sha256": "86e20b6fcddcd0b25f8e91634b4c13ee52d0cffbc37429e3ee646594702feb93"
+      }
+    },
+    {
+      "owner": "C30F46",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C30F46.log",
+        "sha256": "b071cbeaf86fc6232badb4106c1a993e6b4d2f2e82bb53926e3f04a907c2e20d"
+      }
+    },
+    {
+      "owner": "C31B76",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C31B76.log",
+        "sha256": "7432552b81aa45c371e6942f1d94b85be587ee18a74a8768f655fe31a8132e02"
+      }
+    },
+    {
+      "owner": "C33AD6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C33AD6.log",
+        "sha256": "2aab9fd8d6198542c514ccd9b590d7171100fed05d02aa66d729777150f16f22"
+      }
+    },
+    {
+      "owner": "C33B06",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_contract_C33B06.log",
+        "sha256": "7190ca70b43017ea9d0bcb081b8157fc723421309a7be6c4f8637f71b0b44b48"
+      }
+    },
+    {
+      "owner": "C308E2",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C308E2.log",
+        "sha256": "a08c3c41c2539fadf8e9176786f5453f0c9eaa5b01b775c4a67c55e091c027ce"
+      }
+    },
+    {
+      "owner": "C30904",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C30904.log",
+        "sha256": "a1a6b28f3511f8b8a95ef9108128441e26e5255baa709135364a64a948757212"
+      }
+    },
+    {
+      "owner": "C308D8",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C308D8.log",
+        "sha256": "6517a1fb8c87c45cf089cc5865c34ffa72ef4b5cffb64bcbeceaa8aa802d3b0c"
+      }
+    },
+    {
+      "owner": "C308F4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 11,
+      "observed_owner_pcs": 11,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C308F4.log",
+        "sha256": "efeb9fc2abc1b7139a651697463ec781e22660f4123800faab8420d33286e636"
+      }
+    },
+    {
+      "owner": "C30F46",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 81920,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C30F46.log",
+        "sha256": "e4ee3a78ea63b3178266f990f0096789d226a097c4f5f2c099aa2a401b3967bb"
+      }
+    },
+    {
+      "owner": "C31B76",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C31B76.log",
+        "sha256": "1945fa5b029b1dbb26efb8420723c5d5e134241928150253ad76eb4437e6fe87"
+      }
+    },
+    {
+      "owner": "C33AD6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C33AD6.log",
+        "sha256": "19b858dcaf1ad71f5254a5de960882c1b9b58278b1ef01fd49260442091e10ad"
+      }
+    },
+    {
+      "owner": "C33B06",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_real_C33B06.log",
+        "sha256": "e549030d580adb1768dada62f98791acd002989c1c4cbb0861b671327c939b32"
+      }
+    }
+  ],
+  "controlled_union_pcs": 100,
+  "actual_dispatch_completed_calls": 393216,
+  "dispatch_fixtures": [
+    {
+      "owner": "C308E2",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308E2_on.log",
+        "sha256": "a098e76729c2ea95363c09ee2d22a89d808492b083edf7e59046e7b428464b89"
+      }
+    },
+    {
+      "owner": "C308E2",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308E2_shadow.log",
+        "sha256": "a098e76729c2ea95363c09ee2d22a89d808492b083edf7e59046e7b428464b89"
+      }
+    },
+    {
+      "owner": "C308E2",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308E2_sandbox.log",
+        "sha256": "a098e76729c2ea95363c09ee2d22a89d808492b083edf7e59046e7b428464b89"
+      }
+    },
+    {
+      "owner": "C30904",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C30904_on.log",
+        "sha256": "7fe7843358417f7b03d310bb68bb037583c322c715914498753fe6972341ba1f"
+      }
+    },
+    {
+      "owner": "C30904",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C30904_shadow.log",
+        "sha256": "7fe7843358417f7b03d310bb68bb037583c322c715914498753fe6972341ba1f"
+      }
+    },
+    {
+      "owner": "C30904",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 5,
+      "observed_owner_pcs": 5,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C30904_sandbox.log",
+        "sha256": "7fe7843358417f7b03d310bb68bb037583c322c715914498753fe6972341ba1f"
+      }
+    },
+    {
+      "owner": "C308D8",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308D8_on.log",
+        "sha256": "7c7a2b42013deac5115a937bf576a0e1f0109e1e8de5b8a80df03da79673c841"
+      }
+    },
+    {
+      "owner": "C308D8",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308D8_shadow.log",
+        "sha256": "7c7a2b42013deac5115a937bf576a0e1f0109e1e8de5b8a80df03da79673c841"
+      }
+    },
+    {
+      "owner": "C308D8",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308D8_sandbox.log",
+        "sha256": "7c7a2b42013deac5115a937bf576a0e1f0109e1e8de5b8a80df03da79673c841"
+      }
+    },
+    {
+      "owner": "C308F4",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 11,
+      "observed_owner_pcs": 11,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308F4_on.log",
+        "sha256": "2ec29c76a6e0e84657923f8937fc18d0c9ecff6de3b7164798dcedafe16e4303"
+      }
+    },
+    {
+      "owner": "C308F4",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 11,
+      "observed_owner_pcs": 11,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308F4_shadow.log",
+        "sha256": "2ec29c76a6e0e84657923f8937fc18d0c9ecff6de3b7164798dcedafe16e4303"
+      }
+    },
+    {
+      "owner": "C308F4",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 11,
+      "observed_owner_pcs": 11,
+      "ordered_custom_writes": 49152,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C308F4_sandbox.log",
+        "sha256": "2ec29c76a6e0e84657923f8937fc18d0c9ecff6de3b7164798dcedafe16e4303"
+      }
+    },
+    {
+      "owner": "C30F46",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 81920,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C30F46_on.log",
+        "sha256": "2ae6188ddee47119d161850f8ababd44cc7a224918d66f8f8033663a6a0aad80"
+      }
+    },
+    {
+      "owner": "C30F46",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 81920,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C30F46_shadow.log",
+        "sha256": "2ae6188ddee47119d161850f8ababd44cc7a224918d66f8f8033663a6a0aad80"
+      }
+    },
+    {
+      "owner": "C30F46",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 81920,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C30F46_sandbox.log",
+        "sha256": "2ae6188ddee47119d161850f8ababd44cc7a224918d66f8f8033663a6a0aad80"
+      }
+    },
+    {
+      "owner": "C31B76",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C31B76_on.log",
+        "sha256": "d6946dd689451222c8b91d8ab4fc9c0715756bb509f32631cdbe1f51accaf4d3"
+      }
+    },
+    {
+      "owner": "C31B76",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C31B76_shadow.log",
+        "sha256": "d6946dd689451222c8b91d8ab4fc9c0715756bb509f32631cdbe1f51accaf4d3"
+      }
+    },
+    {
+      "owner": "C31B76",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C31B76_sandbox.log",
+        "sha256": "d6946dd689451222c8b91d8ab4fc9c0715756bb509f32631cdbe1f51accaf4d3"
+      }
+    },
+    {
+      "owner": "C33AD6",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C33AD6_on.log",
+        "sha256": "30e04db4997b77f4b10523314609f4f36fb8d8bd0d5afd98c2eb8650755c430d"
+      }
+    },
+    {
+      "owner": "C33AD6",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C33AD6_shadow.log",
+        "sha256": "30e04db4997b77f4b10523314609f4f36fb8d8bd0d5afd98c2eb8650755c430d"
+      }
+    },
+    {
+      "owner": "C33AD6",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C33AD6_sandbox.log",
+        "sha256": "30e04db4997b77f4b10523314609f4f36fb8d8bd0d5afd98c2eb8650755c430d"
+      }
+    },
+    {
+      "owner": "C33B06",
+      "mode": "on",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C33B06_on.log",
+        "sha256": "37e7274e5421483db3edcce3b34552ab05e63fd228a2b86d7c44bb624068f0c6"
+      }
+    },
+    {
+      "owner": "C33B06",
+      "mode": "shadow",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C33B06_shadow.log",
+        "sha256": "37e7274e5421483db3edcce3b34552ab05e63fd228a2b86d7c44bb624068f0c6"
+      }
+    },
+    {
+      "owner": "C33B06",
+      "mode": "sandbox",
+      "completed_calls": 16384,
+      "hardware_bearing": 0,
+      "hardware_free": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "ordered_custom_writes": 42832,
+      "log": {
+        "path": "build/recomp/hud_stream_dispatch_C33B06_sandbox.log",
+        "sha256": "37e7274e5421483db3edcce3b34552ab05e63fd228a2b86d7c44bb624068f0c6"
+      }
+    }
+  ],
+  "hardware_proof": {
+    "ordered_register_value_packets_exact": true,
+    "whole_call_ordered_writes": 462496,
+    "actual_dispatch_ordered_writes": 1092576,
+    "terminal_custom_registers_exact": 256,
+    "effective_flags_exact": [
+      "dmacon",
+      "intena",
+      "intreq",
+      "adkcon"
+    ],
+    "counters_exact": [
+      "blits",
+      "line_blits"
+    ],
+    "private_terminal_exact": [
+      "bltaold",
+      "bltbold",
+      "bltbhold",
+      "bltddat",
+      "bltsize_issued",
+      "fa18_bltsize_at_draw_start",
+      "blit_pending",
+      "blit_zero"
+    ],
+    "production_machine_definition_only_renamed": true,
+    "machine_variant": {
+      "path": "build/recomp/hud_stream_original_machine.c",
+      "sha256": "7b3b3fb7e5eeccefb7252e334e065c9c572e371b079fba14c08a3b4e558d513c"
+    },
+    "production_machine_bus_blitter_unchanged": true,
+    "original_private_baseline_restored_before_each_side": true
+  },
+  "normal_c_recordings": {
+    "groups": [
+      {
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "totals": {
+          "shadow": {
+            "C308E2": {
+              "calls": 206,
+              "compared": 205,
+              "matched": 205,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1
+            },
+            "C30904": {
+              "calls": 522,
+              "compared": 521,
+              "matched": 521,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1
+            },
+            "C308D8": {
+              "calls": 618,
+              "compared": 601,
+              "matched": 601,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 17
+            },
+            "C308F4": {
+              "calls": 1549,
+              "compared": 1501,
+              "matched": 1501,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 48
+            },
+            "C30F46": {
+              "calls": 6369,
+              "compared": 6318,
+              "matched": 6318,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 51
+            },
+            "C31B76": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33AD6": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33B06": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C308E2": {
+              "calls": 212,
+              "compared": 212,
+              "matched": 212,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C30904": {
+              "calls": 523,
+              "compared": 523,
+              "matched": 523,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C308D8": {
+              "calls": 636,
+              "compared": 636,
+              "matched": 636,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C308F4": {
+              "calls": 1538,
+              "compared": 1538,
+              "matched": 1538,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C30F46": {
+              "calls": 6369,
+              "compared": 6369,
+              "matched": 6369,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C31B76": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33AD6": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33B06": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 9146,
+        "sandbox_matches": 9278
+      },
+      {
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46"
+        ],
+        "totals": {
+          "shadow": {
+            "C308E2": {
+              "calls": 206,
+              "compared": 205,
+              "matched": 205,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1
+            },
+            "C30904": {
+              "calls": 522,
+              "compared": 521,
+              "matched": 521,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 1
+            },
+            "C308D8": {
+              "calls": 618,
+              "compared": 601,
+              "matched": 601,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 17
+            },
+            "C308F4": {
+              "calls": 1549,
+              "compared": 1501,
+              "matched": 1501,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 48
+            },
+            "C30F46": {
+              "calls": 6369,
+              "compared": 6318,
+              "matched": 6318,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 51
+            }
+          },
+          "sandbox": {
+            "C308E2": {
+              "calls": 212,
+              "compared": 212,
+              "matched": 212,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C30904": {
+              "calls": 523,
+              "compared": 523,
+              "matched": 523,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C308D8": {
+              "calls": 636,
+              "compared": 636,
+              "matched": 636,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C308F4": {
+              "calls": 1538,
+              "compared": 1538,
+              "matched": 1538,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C30F46": {
+              "calls": 6369,
+              "compared": 6369,
+              "matched": 6369,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 9146,
+        "sandbox_matches": 9278
+      },
+      {
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "totals": {
+          "shadow": {
+            "C31B76": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33AD6": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33B06": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          },
+          "sandbox": {
+            "C31B76": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33AD6": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            },
+            "C33B06": {
+              "calls": 0,
+              "compared": 0,
+              "matched": 0,
+              "mismatched": 0,
+              "hardware": 0,
+              "incomplete": 0
+            }
+          }
+        },
+        "shadow_matches": 0,
+        "sandbox_matches": 0
+      }
+    ],
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 206,
+            "compared": 205,
+            "matched": 205,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 77,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 235,
+            "compared": 235,
+            "matched": 235,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1427,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 618,
+            "compared": 601,
+            "matched": 601,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 17,
+            "mean_cycles": 5129,
+            "busy_input_calls": 601,
+            "busy_input_reads": 65332
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 703,
+            "compared": 690,
+            "matched": 690,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 13,
+            "mean_cycles": 5550,
+            "busy_input_calls": 690,
+            "busy_input_reads": 58567
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 2379,
+            "compared": 2355,
+            "matched": 2355,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 24,
+            "mean_cycles": 2419,
+            "busy_input_calls": 2355,
+            "busy_input_reads": 77427
+          },
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_C31B76_C33AD6_C33B06_demo01_shadow.json",
+          "sha256": "b633e4b625f303830aae982b93cc746690da6a4729223cb26a94b05661578fc6"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 194,
+            "compared": 193,
+            "matched": 193,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 3559,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 572,
+            "compared": 560,
+            "matched": 560,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 12,
+            "mean_cycles": 6586,
+            "busy_input_calls": 560,
+            "busy_input_reads": 33228
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 3289,
+            "compared": 3273,
+            "matched": 3273,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 16,
+            "mean_cycles": 2811,
+            "busy_input_calls": 3273,
+            "busy_input_reads": 63498
+          },
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_C31B76_C33AD6_C33B06_qual_carrier_success_shadow.json",
+          "sha256": "ec7ee0edbeb1c571b9f452dfc6ce9f257815877d54f6bb91c461e7c5498c6eb9"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 93,
+            "compared": 93,
+            "matched": 93,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1464,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 274,
+            "compared": 251,
+            "matched": 251,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 23,
+            "mean_cycles": 6312,
+            "busy_input_calls": 251,
+            "busy_input_reads": 23876
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 701,
+            "compared": 690,
+            "matched": 690,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 11,
+            "mean_cycles": 2440,
+            "busy_input_calls": 690,
+            "busy_input_reads": 26038
+          },
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_C31B76_C33AD6_C33B06_qual_fail_crashes_shadow.json",
+          "sha256": "fc029ec26b9de53a5d4b6cc11eb88a7ed5ad3845b6445b080db5c69fecaae8c9"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 212,
+            "compared": 212,
+            "matched": 212,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 75,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 236,
+            "compared": 236,
+            "matched": 236,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 76,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 636,
+            "compared": 636,
+            "matched": 636,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5099,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 704,
+            "compared": 704,
+            "matched": 704,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5542,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 2378,
+            "compared": 2378,
+            "matched": 2378,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2162,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_C31B76_C33AD6_C33B06_demo01_sandbox.json",
+          "sha256": "167c4517c745714dd924756646229ada15a1781bdcc8d5ef567738a30ac95a71"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 194,
+            "compared": 194,
+            "matched": 194,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 76,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 568,
+            "compared": 568,
+            "matched": 568,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6430,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 3291,
+            "compared": 3291,
+            "matched": 3291,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2012,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_C31B76_C33AD6_C33B06_qual_carrier_success_sandbox.json",
+          "sha256": "b0f32492c4b33dff42255b507b160daa5dbf1f607c91afef55a872c9fdc04b4c"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 93,
+            "compared": 93,
+            "matched": 93,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 77,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 266,
+            "compared": 266,
+            "matched": 266,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6007,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 700,
+            "compared": 700,
+            "matched": 700,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2241,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_C31B76_C33AD6_C33B06_qual_fail_crashes_sandbox.json",
+          "sha256": "5676ff7b93edca4e91db99192892af62f091a7a5934aeb2f11e9929f3fdba737"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 206,
+            "compared": 205,
+            "matched": 205,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 77,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 235,
+            "compared": 235,
+            "matched": 235,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1427,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 618,
+            "compared": 601,
+            "matched": 601,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 17,
+            "mean_cycles": 5129,
+            "busy_input_calls": 601,
+            "busy_input_reads": 65332
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 703,
+            "compared": 690,
+            "matched": 690,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 13,
+            "mean_cycles": 5550,
+            "busy_input_calls": 690,
+            "busy_input_reads": 58567
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 2379,
+            "compared": 2355,
+            "matched": 2355,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 24,
+            "mean_cycles": 2419,
+            "busy_input_calls": 2355,
+            "busy_input_reads": 77427
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_demo01_shadow.json",
+          "sha256": "b633e4b625f303830aae982b93cc746690da6a4729223cb26a94b05661578fc6"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 194,
+            "compared": 193,
+            "matched": 193,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 3559,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 572,
+            "compared": 560,
+            "matched": 560,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 12,
+            "mean_cycles": 6586,
+            "busy_input_calls": 560,
+            "busy_input_reads": 33228
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 3289,
+            "compared": 3273,
+            "matched": 3273,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 16,
+            "mean_cycles": 2811,
+            "busy_input_calls": 3273,
+            "busy_input_reads": 63498
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_qual_carrier_success_shadow.json",
+          "sha256": "ec7ee0edbeb1c571b9f452dfc6ce9f257815877d54f6bb91c461e7c5498c6eb9"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 93,
+            "compared": 93,
+            "matched": 93,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1464,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 274,
+            "compared": 251,
+            "matched": 251,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 23,
+            "mean_cycles": 6312,
+            "busy_input_calls": 251,
+            "busy_input_reads": 23876
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 701,
+            "compared": 690,
+            "matched": 690,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 11,
+            "mean_cycles": 2440,
+            "busy_input_calls": 690,
+            "busy_input_reads": 26038
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_qual_fail_crashes_shadow.json",
+          "sha256": "fc029ec26b9de53a5d4b6cc11eb88a7ed5ad3845b6445b080db5c69fecaae8c9"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 212,
+            "compared": 212,
+            "matched": 212,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 75,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 236,
+            "compared": 236,
+            "matched": 236,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 76,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 636,
+            "compared": 636,
+            "matched": 636,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5099,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 704,
+            "compared": 704,
+            "matched": 704,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5542,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 2378,
+            "compared": 2378,
+            "matched": 2378,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2162,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_demo01_sandbox.json",
+          "sha256": "167c4517c745714dd924756646229ada15a1781bdcc8d5ef567738a30ac95a71"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 194,
+            "compared": 194,
+            "matched": 194,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 76,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 568,
+            "compared": 568,
+            "matched": 568,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6430,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 3291,
+            "compared": 3291,
+            "matched": 3291,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2012,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_qual_carrier_success_sandbox.json",
+          "sha256": "b0f32492c4b33dff42255b507b160daa5dbf1f607c91afef55a872c9fdc04b4c"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46"
+        ],
+        "rows": [
+          {
+            "entry": "C308E2",
+            "name": "store_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30904",
+            "name": "store_stream_ad",
+            "calls": 93,
+            "compared": 93,
+            "matched": 93,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 77,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308D8",
+            "name": "submit_next_stream_cd",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C308F4",
+            "name": "submit_table_stream_ad",
+            "calls": 266,
+            "compared": 266,
+            "matched": 266,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6007,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C30F46",
+            "name": "submit_other_stream_acd",
+            "calls": 700,
+            "compared": 700,
+            "matched": 700,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2241,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C308E2_C30904_C308D8_C308F4_C30F46_qual_fail_crashes_sandbox.json",
+          "sha256": "5676ff7b93edca4e91db99192892af62f091a7a5934aeb2f11e9929f3fdba737"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31B76_C33AD6_C33B06_demo01_shadow.json",
+          "sha256": "a11255b872b607268f707735cb028321be2b0a9a5072800a771f7c4745bcb30e"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31B76_C33AD6_C33B06_qual_carrier_success_shadow.json",
+          "sha256": "a11255b872b607268f707735cb028321be2b0a9a5072800a771f7c4745bcb30e"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31B76_C33AD6_C33B06_qual_fail_crashes_shadow.json",
+          "sha256": "a11255b872b607268f707735cb028321be2b0a9a5072800a771f7c4745bcb30e"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31B76_C33AD6_C33B06_demo01_sandbox.json",
+          "sha256": "a11255b872b607268f707735cb028321be2b0a9a5072800a771f7c4745bcb30e"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31B76_C33AD6_C33B06_qual_carrier_success_sandbox.json",
+          "sha256": "a11255b872b607268f707735cb028321be2b0a9a5072800a771f7c4745bcb30e"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "rows": [
+          {
+            "entry": "C31B76",
+            "name": "draw_stream_numeric_fields",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33AD6",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33B06",
+            "name": "draw_bounded_stream_marker",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31B76_C33AD6_C33B06_qual_fail_crashes_sandbox.json",
+          "sha256": "a11255b872b607268f707735cb028321be2b0a9a5072800a771f7c4745bcb30e"
+        }
+      }
+    ],
+    "generic_rejections": [
+      {
+        "selection": [
+          "C308E2",
+          "C30904",
+          "C308D8",
+          "C308F4",
+          "C30F46",
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "reason": "C31B76: no completed comparisons",
+        "log": {
+          "path": "build/recomp/hud_stream_whole_call_all.log",
+          "sha256": "bd5144520a428e87d7c58724ff7bd56c458ef649f98446260d8ea63337244a4a"
+        }
+      },
+      {
+        "selection": [
+          "C31B76",
+          "C33AD6",
+          "C33B06"
+        ],
+        "reason": "three cold owners have zero calls/comparisons with five store owners omitted",
+        "log": {
+          "path": "build/recomp/hud_stream_cold_whole_call.log",
+          "sha256": "4483df75d6b314e489f50dfc587db384b1482079c7a5af3109e2eebe6aacc93e"
+        }
+      }
+    ]
+  },
+  "instruction_dma": {
+    "local_instructions": 100,
+    "local_cases": 3200,
+    "previous_unique_instructions": 23247,
+    "overlap_instructions": 0,
+    "combined_unique_instructions": 23347,
+    "combined_cases": 747104,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 25,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    }
+  ],
+  "full_gate": {
+    "rows": 592,
+    "recordings": 3,
+    "shadow_matches": 568440,
+    "sandbox_matches": 439147,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308154,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "1847fc4918f52747232653b6cf04409385228cbbe42d2eb1fd462b862b64527f"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207384,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "282c87bdb7b09382760cad2e46f338acc99d043b668dbbab38e6a7e7b0e37465"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52902,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "9ec92622e9b449003926e6f4c963c5be6fb660a7216fda63dc29df1d8a473dbe"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150621,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "1aeb8f846b42904cf157fb155b9804e9b2126574ceb24c4da2e3c337925f0515"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 243277,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "2a5ae35313a5c16580791a8ad8cf6cc510d6ffb9034d19f05a6c8f541dad5094"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45249,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "7f95e938ed423e606897e06c7990ece0818c2440063fb6664f3f06d98d0298df"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1478091963,
+    "build_gib": 1.377
+  },
+  "limits": [
+    "Real marker fixtures bound vertical offsets and enable zero or one plane; controlled contracts retain all signed word edges. Original ROM exception and frozen-clock multi-plane waits remain outside this completed real-call domain.",
+    "Custom stores are hardware-free under the unchanged shared classifier; ordered writes are independently compared. Original wait/line children can be hardware-bearing and must receive exact HW classification.",
+    "Three numeric/marker owners are cold in sealed recordings, including with hot store owners omitted; strict generic checker rejections are retained.",
+    "Older drawing parents still require complete original-child/CPU upgrades. Complete original game-call/callback coverage, C2C392 computed transfer and C1612C graphics-wait integration remain open.",
+    "ALL frame416/361, deferred Copper fade and Kickstart service/exception paths remain debt."
+  ],
+  "next": {
+    "entries": [
+      "C30764",
+      "C309B6",
+      "C30B5C",
+      "C30D34",
+      "C30F78",
+      "C3112A",
+      "C31A64",
+      "C31ACC"
+    ],
+    "unique_instructions": 595,
+    "shared_instructions": 63,
+    "manifest": {
+      "path": "analysis/data/hud_parent_scope_inventory.json",
+      "sha256": "a489cd346679287d5b9116fcf73c1c4b3442885bab54691a7eae84593712447f"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/hud_stream.c",
+      "sha256": "2e280e7ddc4bfd896cf5f5fb857f6992e6149dd1f919c382d4357154238fcc40"
+    },
+    {
+      "path": "port/game/hud_stream.h",
+      "sha256": "3b06eb36a5b32bb3d9a6986d6bd02703dccd49fe5a03f16ab523819f9f8ea46b"
+    },
+    {
+      "path": "port/game/glue/glue_batch7.c",
+      "sha256": "1b4b13b6e489978f22d5c1b190f18358268be7673b724ac1f49da53c4a809772"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "d81d8448e764bbe216a067e54e0f6a0becc69a7463073737c9f6eb91de9f3128"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "5bd840324a7fd45d385b7262a9fdf54f5e82b0ac1b3191e6f5851caa688733fd"
+    },
+    {
+      "path": "port/game/glue/glue_hud_stream.c",
+      "sha256": "be72eace62fda01b0174d8d574884a92e90bb0ce001d6fcef6b7a09db08d5c2f"
+    },
+    {
+      "path": "port/game/glue/glue_hud_stream.h",
+      "sha256": "3aeb9a61fc4c0943a29d18ae954e498b5422989e8113c3f37667472426f0b0d5"
+    },
+    {
+      "path": "port/game/glue/glue_hud_stream_math.h",
+      "sha256": "aeb4952dacfe2155daffc69f32c50c162a86c056d08904c60379f0bcc4c05a0f"
+    },
+    {
+      "path": "port/game/glue/glue_hud_stream_step.c",
+      "sha256": "5daba40ab383409418b1629fed3ff5455852649a9c7e851ecec594561eda6dfe"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_hud_stream_scope.py",
+      "sha256": "72c745dd1bd34a45ccfb380e86f62ad0708c4096a8eb45f119dfaf95375385c7"
+    },
+    {
+      "path": "tools/recomp/audit_hud_stream_source.py",
+      "sha256": "0ca2b199c65c05b6c630c7f1ed75223f8eb33443756d767a32e36f1c10f5189d"
+    },
+    {
+      "path": "tools/recomp/check_hud_stream.py",
+      "sha256": "10835fddc189acddfa9158167a02ea22d725d0d212e766f2f464245db83f2809"
+    },
+    {
+      "path": "tools/recomp/check_hud_stream_dispatch.py",
+      "sha256": "bec9f92f5f1aabde493cd8d1dd5437818f0090a76f4730d5a10d0202ebfcbf97"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/hud_stream_bus_budget.c",
+      "sha256": "8c4d74cca21ac1dbb5393eb32ecc5204c26599442700f9b4e49bdd1ef4e14dab"
+    },
+    {
+      "path": "tools/recomp/hud_stream_contract_children.c",
+      "sha256": "722aa3860f13fb0f2ba0a5261b7d1e658413f9b0192c172b3579e9bf98960e78"
+    },
+    {
+      "path": "tools/recomp/hud_stream_contract_oracle.c",
+      "sha256": "616147c8c082949843f55a490543e088e5c1bc27cde15e188a51bfef65850b2b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_dispatch_oracle.c",
+      "sha256": "a33300b1e472640dba928dc2a8a26a45ec6de91188cb96fae73f60668541d193"
+    },
+    {
+      "path": "tools/recomp/hud_stream_fixture.h",
+      "sha256": "ce8b02c59070b1b5841d68b523e35903452f0e4b59c272d15ea79ee63a67cd80"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_oracle.c",
+      "sha256": "445097365b6bbab012ced66bd3c8165ac67192bdec6b3c4e4a5a6b59b195360b"
+    },
+    {
+      "path": "tools/recomp/audit_hud_parent_scope.py",
+      "sha256": "73eb5407a57d0655cb0e437112390a6dc3a43cbb88c7ff7c3b2df3143fbce3a5"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/hud_stream_contract_final.log",
+      "sha256": "366f9c677feb5741d4b3b9cb1b9ffe2a6c9b8ac633f5cb70ede834637a88ca57"
+    },
+    {
+      "path": "build/recomp/hud_stream_real_final.log",
+      "sha256": "b8467e8fd53b3732f1222a7e654ae649855639e0229300dfe2a82f5eb0b4330d"
+    },
+    {
+      "path": "build/recomp/hud_stream_dispatch_probe_final.log",
+      "sha256": "0fc6a7f315d2d0b4e6e731b746ac4e51872924e7267657d24a6ee8aea5f0310f"
+    },
+    {
+      "path": "build/recomp/hud_stream_dispatch_final.log",
+      "sha256": "1f5f8c8251fee91e7e04d3906c46d4db86e94cb44aaf7c0686646a96016a6411"
+    },
+    {
+      "path": "build/recomp/hud_stream_dma_local_final.log",
+      "sha256": "3a6d6afc1920d5625efaa7e406b2875903d27db9fd7b5bbad8d69a64ce5b4b9e"
+    },
+    {
+      "path": "build/recomp/hud_stream_dma_union.log",
+      "sha256": "125210a248b0bd76f32d8f1a7727186718ed0e371ef4b956a84e9bcf6bda7ab8"
+    },
+    {
+      "path": "build/recomp/hud_stream_compatibility_verified.log",
+      "sha256": "d1fd765561b9fa0d17eb4e6d80c756189da7d6c7b2477d6b56aeb4d21482474a"
+    },
+    {
+      "path": "build/recomp/hud_stream_normal_build.log",
+      "sha256": "4c847ad378abeb7d25f9a5ddc06992564e57c3c456d227314c5c660981ff6094"
+    },
+    {
+      "path": "build/recomp/hud_stream_msvc_final.log",
+      "sha256": "4fc11fdf8d776c08586eb42eb06ccd600124b35ce755e55eb8a6cc708440dc9c"
+    },
+    {
+      "path": "build/recomp/hud_stream_msvc_configure.log",
+      "sha256": "abe78f40cb4e351f258ce6e5060b480fb20b75562210216f75f3177e13c8fe2b"
+    },
+    {
+      "path": "build/recomp/hud_stream_ports_gate.log",
+      "sha256": "017d4b20a930496f53778340281c8bd90038d943d1bb69fa07f38e4952e7aebc"
+    },
+    {
+      "path": "build/recomp/hud_stream_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/hud_stream_timing.log",
+      "sha256": "65910768d97a7723cac43f0297950a365c934e1c501998930e3e2cefd40a919c"
+    },
+    {
+      "path": "build/recomp/hud_stream_whole_call_all.log",
+      "sha256": "bd5144520a428e87d7c58724ff7bd56c458ef649f98446260d8ea63337244a4a"
+    },
+    {
+      "path": "build/recomp/hud_stream_hot_whole_call.log",
+      "sha256": "961eb0052d392722c24ef003a83cb93ac8ac4377f1e6e43620a8e24f8ee598ea"
+    },
+    {
+      "path": "build/recomp/hud_stream_cold_whole_call.log",
+      "sha256": "4483df75d6b314e489f50dfc587db384b1482079c7a5af3109e2eebe6aacc93e"
+    }
+  ],
+  "retained_failed_logs": [
+    {
+      "path": "build/recomp/hud_stream_real_full.log",
+      "sha256": "51b6f94d13f096929b724127b2f1efbd9dc93c286a16feb16f6f7cb73bdef7e9"
+    },
+    {
+      "path": "build/recomp/hud_stream_real_probe.log",
+      "sha256": "d132631f098258ca928e79ce4d918bc01a0e861eb4b8c71a1b2aedd4677978e9"
+    },
+    {
+      "path": "build/recomp/hud_stream_marker_failed_fixture.log",
+      "sha256": "78b5ee434d1db3f97a8cf70460f37831cc17659c8e5e1882865f9f71dd716e45"
+    },
+    {
+      "path": "build/recomp/hud_stream_dispatch_probe.log",
+      "sha256": "05dd3134be7e3e321035a1dcb5a9a4d70a3bd513160ff18c3e5a2ce726e525ee"
+    },
+    {
+      "path": "build/recomp/hud_stream_dma_local.log",
+      "sha256": "8d823626d64fa53b3dbbb204ec7578fcfe42961a7fff20d038bca92ba7f3e268"
+    },
+    {
+      "path": "build/recomp/hud_stream_msvc.log",
+      "sha256": "9348405593b9591ebb152c746a3cc9cd3a2d8c0c7073fd6eb5f227fc0977f68e"
+    }
+  ]
+}

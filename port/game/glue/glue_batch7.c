@@ -39,16 +39,6 @@ int glue_C14876(void) {
     return glue_return();
 }
 
-int glue_C308E2(void) {
-    restart_blit_cd((uint16_t)D(2), D(4), (uint16_t)D(6));
-    return glue_return();
-}
-
-int glue_C30904(void) {
-    restart_blit_ad((uint16_t)D(2), D(0), D(4), (uint16_t)D(6));
-    return glue_return();
-}
-
 int glue_C2DEA2(void) {
     mark_record_pending(A(1));
     return glue_return();
