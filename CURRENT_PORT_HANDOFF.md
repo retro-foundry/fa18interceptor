@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 2e869f4d); ignored gate logs may
+history (the preceding handoff is in commit 2ff43ce3); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -37,8 +37,9 @@ menu/context completion owners now raise it to 474/624; thirteen complete
 postflight/reset/restart owners retain that translated count; sixteen complete
 postflight-message/text owners raise it to 476/624; the complete formatter
 and four game-side mode-file callers raise it to 477/624; eight complete
-input-device callback/setup owners now raise it to 480/624.
-Sixty-one original source-only callable entries are additionally recreated,
+input-device callback/setup owners raise it to 480/624. Four gameport/text
+setup owners retain that count and extend source-only coverage to sixty-five.
+Sixty-five original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
@@ -46,6 +47,58 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
+- 480 of 624 translated entries plus sixty-five source-only callable entries
+  are registered: 545 rows and 359 source-timed entries (294 translated plus
+  sixty-five source-only). Four complete gameport/text setup owners are added:
+  C16D4C/C16FF4/C17066/C1787A. Each has an actual original call site.
+  C1612C also has complete domain/CPU/step source but remains unregistered:
+  its original graphics wait cannot complete inside frozen-event comparisons.
+  The five implemented owners cover 388 unique / zero shared boundaries and
+  retain 49 actual child sites, return PCs, arguments and original reloads.
+  Full CPU/SR/all-RAM proof passes 73,728 complete cases without exclusions:
+  40,960 controlled-child cases cover all five owners/all 388 boundaries;
+  32,768 real-child cases cover C16D4C and C17066. The root's real fixture
+  visits 51/92 owned PCs and all 26/19 nested controller/trigger PCs; this is
+  partial root-path coverage, not complete real proof for error paths or the
+  standalone controller owner. Controlled contracts cover the remaining
+  paths, changed pointers, text descriptor reloads, palette/page/activity
+  mutations and preserved child-entry RAM/CPU. Original diagnostic-exit
+  children remain actual production calls; their test contracts returning
+  do not prove the real error-service behavior.
+  Actual ON/shadow/sandbox dispatch passes 1,536 fixtures for C16D4C/C17066,
+  requiring native ON and completed hardware-free reference comparisons.
+  Standalone C16FF4/C1612C fixtures exhaust an explicit test-only original
+  instruction budget at AF3C90/C02776; C1787A stops at FC0FF0. None is counted
+  as completed real or actual-dispatch proof. The budget wraps unchanged bus
+  code only in these fixture builds and exits with failure, never a service
+  result. Production runtime/OS/bus/liveness remain unchanged.
+  All four registered owners are cold; six raw step-disabled recording
+  reports and the generic C16D4C zero-comparison rejection remain retained.
+  Temporary C1612C registration passed all 36,236 native ON frames and RAM
+  seals; a separate 600-frame ON report proves 2,184 native calls. Its full
+  and normal-call frozen-reference runs grew write logs and failed. The last
+  live failing run was inspected (PPC FC5E90 -> PC C02776) and stopped; raw
+  failures/diagnostic and temporary registry/live proof are retained. No
+  recorded whole-call match is claimed for C1612C. Resolve that integration
+  boundary before activating it; do not fake a hardware read or service return.
+  Local DMA passes 388 / 12,416, including 80 inactive display PCs. The
+  independently tested union is 17,692 / 566,144, with no new overlap. No
+  fresh combined run this batch; last fresh combined is 16,384 / 524,288.
+  Shared CPU/bus/math and instruction fixtures are unchanged; all fourteen
+  older generator outputs are unchanged. Final GNU/MSVC Release builds and
+  the 545-row gate pass 554,068 shadow / 413,271 sandbox matches, zero
+  mismatches, exact seals and identical poison frames. All 36,236 isolated
+  frames/seals for the final four-entry registry group match; those entries
+  are cold, so this is integration evidence rather than executed body proof.
+  Group is exact through frame 600; ALL remains 416/361. Build/ is
+  0.947 GiB. See analysis/routines/native_c_input_display_setup.md
+  and analysis/figures/native_input_display_setup_checkpoint.json.
+  Next reconstruct five complete main-loop timer/control/message owners:
+  C2527C/C25312/C2548A/C1518C/C32CEE, 660 unique / zero shared boundaries,
+  sealed in analysis/data/main_loop_services_scope_inventory.json. That
+  inventory implements none of them and replaces no OS service. Original
+  game-function coverage remains incomplete; retain the user's stopping
+  criterion and the deferred Copper fade.
 - 480 of 624 translated entries plus sixty-one source-only callable entries
   are registered: 541 rows and 355 source-timed entries (294 translated plus
   sixty-one source-only). Eight complete input-device callback/setup owners
@@ -1105,12 +1158,15 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 480/624 translated plus sixty-one source-only callable entries; the
+   is 480/624 translated plus sixty-five source-only callable entries; the
    leading checkpoint above supersedes older batch-selection notes. Next
-   reconstruct complete C16D4C/C16FF4/C17066/C1787A/C1612C input/display
-   setup and synchronization owners from
-   analysis/data/input_display_setup_scope_inventory.json (388 unique / zero
-   shared boundaries). The inventory implements none of those owners.
+   reconstruct complete C2527C/C25312/C2548A/C1518C/C32CEE main-loop
+   timer/control/message owners from
+   analysis/data/main_loop_services_scope_inventory.json (660 unique / zero
+   shared boundaries). The inventory implements none of those owners. Keep
+   C1612C unregistered until its frozen-event graphics-wait comparison can
+   complete safely; its domain/CPU/step source, failed gates and successful
+   temporary native replay remain explicit integration evidence.
    Preserve complete parent behavior, actual children, local frames, changed
    child outputs, original partial-write order and exact source ownership.
    C16084/C160D6 bounded initialization slices are not independently callable

@@ -12,10 +12,10 @@ replacement or standalone timing fixes after game-function porting is complete.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | All 541 registered entries pass the three-recording shadow/sandbox/sealed-RAM/poison gate. Eight complete input-device owners pass 196,608 full CPU/SR/RAM cases; controlled and real-child layers both cover all 274 PCs. Actual dispatch passes 6,144 fixtures. Normal callback C completes 36,236 shadow matches; sandbox retains 36,385 hardware classifications. Seven cold setup/removal rows and the generic rejection remain explicit. Earlier file-service stops remain open. Archived UAE runs are historical evidence. |
+| Current proof | All 545 registered entries pass the three-recording shadow/sandbox/sealed-RAM/poison gate. Five input/display bodies pass 73,728 full CPU/SR/RAM cases: controlled children cover all 388 PCs; completing real calls cover two owners, with partial root-path coverage. Actual dispatch passes 1,536 fixtures. Four activated owners are cold; original service stops and the generic rejection remain explicit. C1612C is inactive after frozen-reference failures, despite exact temporary native replay. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 480/624 translated entries plus 61 original source-only callable entries: 541 rows. Full gate passes 554,068 shadow / 413,271 sandbox matches, zero mismatches and identical poison frames. Input-device callback/setup decisions are complete; original services, the remaining game graph and native backend remain open. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | 355 timing entries (294 translated plus 61 source-only). Local input-device timing passes 274 / 8,768. Independently tested union: 17,304 / 553,728, with no new overlap. No fresh combined run this batch; last fresh combined remains 16,384 / 524,288. All 36,236 isolated live frames and RAM seals match. ALL remains 416/361; Copper fade is deferred. See `analysis/routines/native_c_input_device_callbacks.md`. |
+| Recreated C source | 480/624 translated entries plus 65 original source-only callable entries: 545 rows. Four gameport/text setup owners are activated; the complete C1612C domain/CPU/step source remains unregistered pending its frozen-event graphics-wait integration. Full gate passes 554,068 shadow / 413,271 sandbox matches, zero mismatches and identical poison frames. Remaining game functions are open. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | 359 registered timing entries (294 translated plus 65 source-only). Local input/display proof passes 388 / 12,416, including 80 inactive C1612C PCs. Independently tested union: 17,692 / 566,144; last fresh combined remains 16,384 / 524,288. All 36,236 final isolated live frames/seals match, but the four activated entries are cold. Temporary C1612C native replay also matches all frames/seals and proves 2,184 calls over 600 frames; its frozen-reference integration remains open. ALL remains 416/361; fade is deferred. |
 | Kickstart replacement | 2,661,668 RAM-to-ROM transitions inventoried; the 2,157,736 observed `VBeamPos`, 21,331 `WaitBlit`, 16,526 `WaitBOVP`, 32,022 `OwnBlitter`/`DisownBlitter`, 81,120 Exec `Disable`/`Enable`, 37,669 Exec `GetMsg`, and 36,236 potgo.resource `WritePotgo` entries now use C with sealed RAM unchanged. Other OS calls and cold boot remain (`analysis/routines/fc5ece_vbeam_pos.md`, `analysis/routines/fc5a58_wait_blit.md`, `analysis/routines/fc5e58_wait_bovp.md`, `analysis/routines/fc64bc_fc64d4_blitter_ownership.md`, `analysis/routines/fc1428_fc1436_exec_interrupts.md`, `analysis/routines/fc1bea_exec_get_msg.md`, `analysis/routines/fe44f2_potgo_write.md`) |
 | Bus timing | Modelled (`port/machine/bus.c`): within ~0.1-0.5% of cycle-exact UAE per scene; residual 1-colour-clock errors still make long replays drift |
 
@@ -51,6 +51,10 @@ The complete formatter and four game-side file callers raise coverage to
 477/624 plus 56 source-only entries, with 533 rows and 347 timed entries.
 Eight complete input-device callback/setup owners now raise coverage to
 480/624 plus 61 source-only entries, with 541 rows and 355 timed entries.
+Four complete gameport/text setup owners retain that translated count and
+raise source-only coverage to 65, with 545 rows and 359 timed entries.
+C1612C has complete source but remains inactive after its frozen-reference
+graphics-wait failure; its successful temporary native proof remains separate.
 The visible checkpoint
 also confirms a
 fade reset and completion two machine frames late. The initializer correction

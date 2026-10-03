@@ -7,6 +7,14 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete gameport/text setup and outer display synchronization. */
+    {0xC16D4C, glue_C16D4C, "open_gameport_device", 0, 0, glue_C16D4C_step, 0xC16EAE, 0, 0, glue_C16D4C_owns},
+    {0xC16FF4, glue_C16FF4, "set_gameport_controller_type", 0, 0, glue_C16FF4_step, 0xC17066, 0, 0, glue_C16FF4_owns},
+    {0xC17066, glue_C17066, "configure_gameport_events", 0, 0, glue_C17066_step, 0xC170B2, 0, 0, glue_C17066_owns},
+    {0xC1787A, glue_C1787A, "load_setup_text_resources", 0, 0, glue_C1787A_step, 0xC17B08, 0, 0, glue_C1787A_owns},
+    /* C1612C has complete domain/CPU/step source and exact temporary ON
+     * replay, but is not activated: its original graphics wait cannot finish
+     * inside the frozen-event comparison. Keep that failure explicit. */
     /* Complete game input callback and setup owners. */
     {0xC1718E, glue_C1718E, "advance_input_device_callback", 0, 0, glue_C1718E_step, 0xC17456, 2, 0, glue_C1718E_owns},
     {0xC17456, glue_C17456, "install_input_device_callback", 0, 0, glue_C17456_step, 0xC1748C, 0, 0, glue_C17456_owns},

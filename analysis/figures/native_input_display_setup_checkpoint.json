@@ -1,0 +1,1213 @@
+{
+  "date": "2026-10-03",
+  "preceding_commit": "2ff43ce3",
+  "implemented_owners": [
+    "C16D4C",
+    "C16FF4",
+    "C17066",
+    "C1787A",
+    "C1612C"
+  ],
+  "activated_owners": [
+    "C16D4C",
+    "C16FF4",
+    "C17066",
+    "C1787A"
+  ],
+  "inactive_owner": [
+    "C1612C"
+  ],
+  "registered_translated_entries": 480,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 65,
+  "registered_total_entries": 545,
+  "registered_timing_entries": 359,
+  "registered_translated_timing_entries": 294,
+  "registered_source_only_timing_entries": 65,
+  "source": {
+    "manifest": "analysis/data/input_display_setup_source_scope.json",
+    "sha256": "d223d6372a06b0ab74920fe0fdf8417a6aa1965d7b58839a560e923cd3a251a7",
+    "unique_instructions": 388,
+    "shared_instructions_within_batch": 0,
+    "shared_with_previous_instruction_union": 0,
+    "independent_entry_evidence": {
+      "C16D4C": [
+        "C0F508: jsr     $c16d4c.l"
+      ],
+      "C16FF4": [
+        "C16E0A: bsr     $c16ff4"
+      ],
+      "C17066": [
+        "C16E3C: bsr     $c17066"
+      ],
+      "C1787A": [
+        "C0F514: jsr     $c1787a.l"
+      ]
+    },
+    "actual_child_sites": 49,
+    "text_source_strings": {
+      "C0823B": "df0:text/textegn",
+      "C0824C": "df0:text/textegn2",
+      "C0825E": "df0:text/texttre",
+      "C0826F": "df0:text/textger",
+      "C08280": "df0:text/textcpt",
+      "C08291": "df0:text/textwnd"
+    }
+  },
+  "structural": {
+    "total_completed_cases": 73728,
+    "controlled_child_cases": 40960,
+    "real_child_cases": 32768,
+    "all_registers_full_sr_all_ram": true,
+    "ram_or_register_exclusions": [],
+    "controlled_layer_covers_every_owned_boundary": true,
+    "real_layer_owners": [
+      "C16D4C",
+      "C17066"
+    ],
+    "real_layer_coverage_is_partial_for_root": true,
+    "real_service_stops": [
+      {
+        "entry": "C16FF4",
+        "returncode": 3,
+        "diagnostic": "input-display-setup original instruction budget exhausted at AF3C90; no completed proof",
+        "completed_real_proof": false
+      },
+      {
+        "entry": "C1787A",
+        "returncode": 1,
+        "diagnostic": "input-display-setup oracle: case 0 source did not return at FC0FF0",
+        "completed_real_proof": false
+      },
+      {
+        "entry": "C1612C",
+        "returncode": 3,
+        "diagnostic": "input-display-setup original instruction budget exhausted at C02776; no completed proof",
+        "completed_real_proof": false
+      }
+    ],
+    "real_service_stops_evidence": {
+      "path": "build/recomp/input_display_setup_service_stops.json",
+      "sha256": "eced8f9a89c611859fcf3fc8df2cf5bdee01328a5f618d26fe7d8b2f40270b81",
+      "summary": "]"
+    },
+    "fixture_instruction_budget": {
+      "limit": 100000,
+      "test_only": true,
+      "budget_exhaustion_exit_code": 3,
+      "never_counted_as_completed": true,
+      "production_bus_unchanged": true
+    },
+    "real_write_log_mode": 2,
+    "independent_os_hardware_timing_proof": false,
+    "layers": {
+      "real": {
+        "C16D4C": {
+          "path": "build/recomp/input_display_setup_real_C16D4C.log",
+          "sha256": "310839af10477d1f175676aa69d4937490a813cefe2eb7cd6703643fd15a7cc5",
+          "summary": "input-display-setup oracle C16D4C: 16384 complete calls matched all registers, PC, full SR and all RAM; 96 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 92,
+          "covered_owned_boundaries": 51,
+          "uncovered_owned_boundaries": [
+            "C16D72",
+            "C16D74",
+            "C16D76",
+            "C16D7C",
+            "C16D96",
+            "C16D9C",
+            "C16DA2",
+            "C16DA4",
+            "C16DA6",
+            "C16DA8",
+            "C16DAE",
+            "C16DD4",
+            "C16DDA",
+            "C16DE0",
+            "C16DE2",
+            "C16DE8",
+            "C16DEE",
+            "C16DF0",
+            "C16DF2",
+            "C16DF4",
+            "C16DFA",
+            "C16E14",
+            "C16E1A",
+            "C16E20",
+            "C16E22",
+            "C16E28",
+            "C16E2E",
+            "C16E30",
+            "C16E32",
+            "C16E34",
+            "C16E3A",
+            "C16E44",
+            "C16E4A",
+            "C16E50",
+            "C16E52",
+            "C16E58",
+            "C16E5E",
+            "C16E60",
+            "C16E62",
+            "C16E64",
+            "C16E6A"
+          ],
+          "additional_child_boundaries": [
+            "C16FF4",
+            "C16FF8",
+            "C16FFE",
+            "C17004",
+            "C17006",
+            "C1700C",
+            "C17010",
+            "C17016",
+            "C1701E",
+            "C17022",
+            "C17028",
+            "C1702A",
+            "C17030",
+            "C17036",
+            "C17038",
+            "C1703E",
+            "C17044",
+            "C17046",
+            "C1704C",
+            "C17052",
+            "C17054",
+            "C1705A",
+            "C1705E",
+            "C17060",
+            "C17062",
+            "C17064",
+            "C17066",
+            "C1706A",
+            "C17070",
+            "C17076",
+            "C17078",
+            "C1707E",
+            "C17082",
+            "C17086",
+            "C1708C",
+            "C17090",
+            "C17096",
+            "C1709A",
+            "C1709C",
+            "C170A0",
+            "C170A4",
+            "C170A6",
+            "C170AC",
+            "C170AE",
+            "C170B0"
+          ]
+        },
+        "C17066": {
+          "path": "build/recomp/input_display_setup_real_C17066.log",
+          "sha256": "11685a353d7f352472e6b6996797ee1df3afbe86f6b0624b58a995f63961e8ec",
+          "summary": "input-display-setup oracle C17066: 16384 complete calls matched all registers, PC, full SR and all RAM; 19 parent boundaries observed",
+          "cases": 16384,
+          "owned_boundaries": 19,
+          "covered_owned_boundaries": 19,
+          "uncovered_owned_boundaries": [],
+          "additional_child_boundaries": []
+        }
+      },
+      "contract": {
+        "C16D4C": {
+          "path": "build/recomp/input_display_setup_contract_C16D4C.log",
+          "sha256": "46a7fcc42a551dc6b0958b3f27f503148d70de595ddb33b965defa526939fa82",
+          "summary": "input-display-setup oracle C16D4C: 8192 complete calls matched all registers, PC, full SR and all RAM; 92 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 92,
+          "covered_owned_boundaries": 92,
+          "uncovered_owned_boundaries": [],
+          "additional_child_boundaries": []
+        },
+        "C16FF4": {
+          "path": "build/recomp/input_display_setup_contract_C16FF4.log",
+          "sha256": "fa593403569d732d835d894790b788e217707272c44e4779177460aa10160273",
+          "summary": "input-display-setup oracle C16FF4: 8192 complete calls matched all registers, PC, full SR and all RAM; 26 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 26,
+          "covered_owned_boundaries": 26,
+          "uncovered_owned_boundaries": [],
+          "additional_child_boundaries": []
+        },
+        "C17066": {
+          "path": "build/recomp/input_display_setup_contract_C17066.log",
+          "sha256": "c869edb1dc897e8da8e570209208f5769cbb33b90a5d1c6663533fcc22fdbddc",
+          "summary": "input-display-setup oracle C17066: 8192 complete calls matched all registers, PC, full SR and all RAM; 19 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 19,
+          "covered_owned_boundaries": 19,
+          "uncovered_owned_boundaries": [],
+          "additional_child_boundaries": []
+        },
+        "C1787A": {
+          "path": "build/recomp/input_display_setup_contract_C1787A.log",
+          "sha256": "b4f573167f8d72812e2b48dd4f756b0f1f56d565906a97f6ad0220f068938811",
+          "summary": "input-display-setup oracle C1787A: 8192 complete calls matched all registers, PC, full SR and all RAM; 171 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 171,
+          "covered_owned_boundaries": 171,
+          "uncovered_owned_boundaries": [],
+          "additional_child_boundaries": []
+        },
+        "C1612C": {
+          "path": "build/recomp/input_display_setup_contract_C1612C.log",
+          "sha256": "dbacf3cec38379e66b7f328fc42f849752e46f11116f470376a4f8d8cfd649f7",
+          "summary": "input-display-setup oracle C1612C: 8192 complete calls matched all registers, PC, full SR and all RAM; 80 parent boundaries observed",
+          "cases": 8192,
+          "owned_boundaries": 80,
+          "covered_owned_boundaries": 80,
+          "uncovered_owned_boundaries": [],
+          "additional_child_boundaries": []
+        }
+      }
+    }
+  },
+  "dispatch": {
+    "cases": 1536,
+    "cases_per_entry_per_mode": 256,
+    "entries": [
+      "C16D4C",
+      "C17066"
+    ],
+    "excluded_source_fixture_entries": [
+      "C1612C",
+      "C16FF4",
+      "C1787A"
+    ],
+    "modes": [
+      "on",
+      "shadow",
+      "sandbox"
+    ],
+    "full_cpu_sr_ram": true,
+    "ram_or_register_exclusions": [],
+    "on_requires_native_continuation": true,
+    "reference_modes_require_completed_matches": true,
+    "hardware_source_calls": 0,
+    "guards": [
+      "non-call entry",
+      "OFF mode",
+      "ports-only selection",
+      "source write invalidates entry dispatch"
+    ],
+    "evidence": {
+      "path": "build/recomp/input_display_setup_dispatch.log",
+      "sha256": "242d18b3f5cbe79419849e9cfe0b38e1d84f042fbf48171495749a0a7ee28c1e",
+      "summary": "input/display dispatch: 1536 complete CPU/RAM fixtures and entry/mode/selection/write guards passed"
+    },
+    "per_mode": {
+      "on": {
+        "C16D4C": {
+          "path": "build/recomp/input_display_setup_dispatch_C16D4C_on.log",
+          "sha256": "521ca6404f1bd6a70a57dcc1cd202e6aa44b0c4da81bd8d6e56ff04b51b9e7d1",
+          "summary": "visited: C16D4C C16D50 C16D5A C16D5C C16D5E C16D60 C16D66 C16D68 C16D6E C16D70 C16D7E C16D84 C16D8A C16D8C C16D92 C16D94 C16DB0 C16DB2 C16DB8 C16DBA C16DBC C16DC2 C16DC8 C16DCC C16DD0 C16DD2 C16DFC C16E06 C16E08 C16E0A C16E0E C16E10 C16E12 C16E3C C16E40 C16E42 C16E6C C16E72 C16E78 C16E7E C16E86 C16E88 C16E8E C16E92 C16E96 C16E9C C16EA0 C16EA2 C16EA8 C16EAA C16EAC C16FF4 C16FF8 C16FFE C17004 C17006 C1700C C17010 C17016 C1701E C17022 C17028 C1702A C17030 C17036 C17038 C1703E C17044 C17046 C1704C C17052 C17054 C1705A C1705E C17060 C17062 C17064 C17066 C1706A C17070 C17076 C17078 C1707E C17082 C17086 C1708C C17090 C17096 C1709A C1709C C170A0 C170A4 C170A6 C170AC C170AE C170B0",
+          "source_hardware_calls": 0,
+          "completed_reference_matches": null,
+          "covered_owned_boundaries": 51,
+          "uncovered_owned_boundaries": [
+            "C16D72",
+            "C16D74",
+            "C16D76",
+            "C16D7C",
+            "C16D96",
+            "C16D9C",
+            "C16DA2",
+            "C16DA4",
+            "C16DA6",
+            "C16DA8",
+            "C16DAE",
+            "C16DD4",
+            "C16DDA",
+            "C16DE0",
+            "C16DE2",
+            "C16DE8",
+            "C16DEE",
+            "C16DF0",
+            "C16DF2",
+            "C16DF4",
+            "C16DFA",
+            "C16E14",
+            "C16E1A",
+            "C16E20",
+            "C16E22",
+            "C16E28",
+            "C16E2E",
+            "C16E30",
+            "C16E32",
+            "C16E34",
+            "C16E3A",
+            "C16E44",
+            "C16E4A",
+            "C16E50",
+            "C16E52",
+            "C16E58",
+            "C16E5E",
+            "C16E60",
+            "C16E62",
+            "C16E64",
+            "C16E6A"
+          ]
+        },
+        "C17066": {
+          "path": "build/recomp/input_display_setup_dispatch_C17066_on.log",
+          "sha256": "4c77b3b6396f1d04bb634c03c9a2f516a47ab4bb97893b7fadbfdd69ce2e5486",
+          "summary": "visited: C17066 C1706A C17070 C17076 C17078 C1707E C17082 C17086 C1708C C17090 C17096 C1709A C1709C C170A0 C170A4 C170A6 C170AC C170AE C170B0",
+          "source_hardware_calls": 0,
+          "completed_reference_matches": null,
+          "covered_owned_boundaries": 19,
+          "uncovered_owned_boundaries": []
+        }
+      },
+      "shadow": {
+        "C16D4C": {
+          "path": "build/recomp/input_display_setup_dispatch_C16D4C_shadow.log",
+          "sha256": "521ca6404f1bd6a70a57dcc1cd202e6aa44b0c4da81bd8d6e56ff04b51b9e7d1",
+          "summary": "visited: C16D4C C16D50 C16D5A C16D5C C16D5E C16D60 C16D66 C16D68 C16D6E C16D70 C16D7E C16D84 C16D8A C16D8C C16D92 C16D94 C16DB0 C16DB2 C16DB8 C16DBA C16DBC C16DC2 C16DC8 C16DCC C16DD0 C16DD2 C16DFC C16E06 C16E08 C16E0A C16E0E C16E10 C16E12 C16E3C C16E40 C16E42 C16E6C C16E72 C16E78 C16E7E C16E86 C16E88 C16E8E C16E92 C16E96 C16E9C C16EA0 C16EA2 C16EA8 C16EAA C16EAC C16FF4 C16FF8 C16FFE C17004 C17006 C1700C C17010 C17016 C1701E C17022 C17028 C1702A C17030 C17036 C17038 C1703E C17044 C17046 C1704C C17052 C17054 C1705A C1705E C17060 C17062 C17064 C17066 C1706A C17070 C17076 C17078 C1707E C17082 C17086 C1708C C17090 C17096 C1709A C1709C C170A0 C170A4 C170A6 C170AC C170AE C170B0",
+          "source_hardware_calls": 0,
+          "completed_reference_matches": 256,
+          "covered_owned_boundaries": 51,
+          "uncovered_owned_boundaries": [
+            "C16D72",
+            "C16D74",
+            "C16D76",
+            "C16D7C",
+            "C16D96",
+            "C16D9C",
+            "C16DA2",
+            "C16DA4",
+            "C16DA6",
+            "C16DA8",
+            "C16DAE",
+            "C16DD4",
+            "C16DDA",
+            "C16DE0",
+            "C16DE2",
+            "C16DE8",
+            "C16DEE",
+            "C16DF0",
+            "C16DF2",
+            "C16DF4",
+            "C16DFA",
+            "C16E14",
+            "C16E1A",
+            "C16E20",
+            "C16E22",
+            "C16E28",
+            "C16E2E",
+            "C16E30",
+            "C16E32",
+            "C16E34",
+            "C16E3A",
+            "C16E44",
+            "C16E4A",
+            "C16E50",
+            "C16E52",
+            "C16E58",
+            "C16E5E",
+            "C16E60",
+            "C16E62",
+            "C16E64",
+            "C16E6A"
+          ]
+        },
+        "C17066": {
+          "path": "build/recomp/input_display_setup_dispatch_C17066_shadow.log",
+          "sha256": "4c77b3b6396f1d04bb634c03c9a2f516a47ab4bb97893b7fadbfdd69ce2e5486",
+          "summary": "visited: C17066 C1706A C17070 C17076 C17078 C1707E C17082 C17086 C1708C C17090 C17096 C1709A C1709C C170A0 C170A4 C170A6 C170AC C170AE C170B0",
+          "source_hardware_calls": 0,
+          "completed_reference_matches": 256,
+          "covered_owned_boundaries": 19,
+          "uncovered_owned_boundaries": []
+        }
+      },
+      "sandbox": {
+        "C16D4C": {
+          "path": "build/recomp/input_display_setup_dispatch_C16D4C_sandbox.log",
+          "sha256": "521ca6404f1bd6a70a57dcc1cd202e6aa44b0c4da81bd8d6e56ff04b51b9e7d1",
+          "summary": "visited: C16D4C C16D50 C16D5A C16D5C C16D5E C16D60 C16D66 C16D68 C16D6E C16D70 C16D7E C16D84 C16D8A C16D8C C16D92 C16D94 C16DB0 C16DB2 C16DB8 C16DBA C16DBC C16DC2 C16DC8 C16DCC C16DD0 C16DD2 C16DFC C16E06 C16E08 C16E0A C16E0E C16E10 C16E12 C16E3C C16E40 C16E42 C16E6C C16E72 C16E78 C16E7E C16E86 C16E88 C16E8E C16E92 C16E96 C16E9C C16EA0 C16EA2 C16EA8 C16EAA C16EAC C16FF4 C16FF8 C16FFE C17004 C17006 C1700C C17010 C17016 C1701E C17022 C17028 C1702A C17030 C17036 C17038 C1703E C17044 C17046 C1704C C17052 C17054 C1705A C1705E C17060 C17062 C17064 C17066 C1706A C17070 C17076 C17078 C1707E C17082 C17086 C1708C C17090 C17096 C1709A C1709C C170A0 C170A4 C170A6 C170AC C170AE C170B0",
+          "source_hardware_calls": 0,
+          "completed_reference_matches": 256,
+          "covered_owned_boundaries": 51,
+          "uncovered_owned_boundaries": [
+            "C16D72",
+            "C16D74",
+            "C16D76",
+            "C16D7C",
+            "C16D96",
+            "C16D9C",
+            "C16DA2",
+            "C16DA4",
+            "C16DA6",
+            "C16DA8",
+            "C16DAE",
+            "C16DD4",
+            "C16DDA",
+            "C16DE0",
+            "C16DE2",
+            "C16DE8",
+            "C16DEE",
+            "C16DF0",
+            "C16DF2",
+            "C16DF4",
+            "C16DFA",
+            "C16E14",
+            "C16E1A",
+            "C16E20",
+            "C16E22",
+            "C16E28",
+            "C16E2E",
+            "C16E30",
+            "C16E32",
+            "C16E34",
+            "C16E3A",
+            "C16E44",
+            "C16E4A",
+            "C16E50",
+            "C16E52",
+            "C16E58",
+            "C16E5E",
+            "C16E60",
+            "C16E62",
+            "C16E64",
+            "C16E6A"
+          ]
+        },
+        "C17066": {
+          "path": "build/recomp/input_display_setup_dispatch_C17066_sandbox.log",
+          "sha256": "4c77b3b6396f1d04bb634c03c9a2f516a47ab4bb97893b7fadbfdd69ce2e5486",
+          "summary": "visited: C17066 C1706A C17070 C17076 C17078 C1707E C17082 C17086 C1708C C17090 C17096 C1709A C1709C C170A0 C170A4 C170A6 C170AC C170AE C170B0",
+          "source_hardware_calls": 0,
+          "completed_reference_matches": 256,
+          "covered_owned_boundaries": 19,
+          "uncovered_owned_boundaries": []
+        }
+      }
+    }
+  },
+  "recorded_normal_c": {
+    "entries": [
+      "C16D4C",
+      "C16FF4",
+      "C17066",
+      "C1787A"
+    ],
+    "totals": {
+      "shadow": {
+        "calls": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      },
+      "sandbox": {
+        "calls": 0,
+        "matched": 0,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0
+      }
+    },
+    "cold_entries": [
+      "C16D4C",
+      "C16FF4",
+      "C17066",
+      "C1787A"
+    ],
+    "generic_cold_rejection": {
+      "path": "build/recomp/input_display_setup_whole_call.log",
+      "sha256": "89b0af17473536c73fe4c8bd68bb5937e7e118ca09e22b72b6c5ab153dd3ee19",
+      "summary": "RuntimeError: C16D4C: no completed comparisons"
+    },
+    "reports": {
+      "whole_call_C16D4C_C16FF4_C17066_C1787A_demo01_sandbox.json": {
+        "sha256": "97607a5474fff606bd751aacc1e2afb2a9979c8eee8e660c1fd0c84523e0ead8",
+        "entries": {
+          "C16D4C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16FF4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17066": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1787A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C16D4C_C16FF4_C17066_C1787A_demo01_shadow.json": {
+        "sha256": "97607a5474fff606bd751aacc1e2afb2a9979c8eee8e660c1fd0c84523e0ead8",
+        "entries": {
+          "C16D4C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16FF4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17066": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1787A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C16D4C_C16FF4_C17066_C1787A_qual_carrier_success_sandbox.json": {
+        "sha256": "97607a5474fff606bd751aacc1e2afb2a9979c8eee8e660c1fd0c84523e0ead8",
+        "entries": {
+          "C16D4C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16FF4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17066": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1787A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C16D4C_C16FF4_C17066_C1787A_qual_carrier_success_shadow.json": {
+        "sha256": "97607a5474fff606bd751aacc1e2afb2a9979c8eee8e660c1fd0c84523e0ead8",
+        "entries": {
+          "C16D4C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16FF4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17066": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1787A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C16D4C_C16FF4_C17066_C1787A_qual_fail_crashes_sandbox.json": {
+        "sha256": "97607a5474fff606bd751aacc1e2afb2a9979c8eee8e660c1fd0c84523e0ead8",
+        "entries": {
+          "C16D4C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16FF4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17066": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1787A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      },
+      "whole_call_C16D4C_C16FF4_C17066_C1787A_qual_fail_crashes_shadow.json": {
+        "sha256": "97607a5474fff606bd751aacc1e2afb2a9979c8eee8e660c1fd0c84523e0ead8",
+        "entries": {
+          "C16D4C": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C16FF4": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C17066": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          },
+          "C1787A": {
+            "calls": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0
+          }
+        }
+      }
+    }
+  },
+  "inactive_display_parent": {
+    "entry": "C1612C",
+    "normal_domain_and_cpu_adapter_implemented": true,
+    "controlled_cpu_cases": 8192,
+    "controlled_boundaries": 80,
+    "temporary_registered_live_frames": 36236,
+    "temporary_live_ram_seals_exact": true,
+    "temporary_live_evidence": {
+      "path": "build/recomp/input_display_setup_temporary_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384",
+      "summary": "demo01: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "temporary_registry": {
+      "path": "build/recomp/input_display_setup_temporary_registry.c",
+      "sha256": "652bb2e4b6a8206089fc278c162a4508204b3d9211b5289745378feef4b8b699",
+      "summary": "const int fa18_port_count = (int)(sizeof fa18_ports / sizeof fa18_ports[0]) - 1;"
+    },
+    "temporary_on_report": {
+      "path": "build/recomp/input_display_setup_temporary_on_report.json",
+      "sha256": "97621719491be0109a853a464e92c18ed2d4f5c45ff3feb1f71d35950643e073",
+      "summary": "]"
+    },
+    "temporary_native_calls_in_600_frames": 2184,
+    "temporary_on_evidence": {
+      "path": "build/recomp/input_display_setup_temporary_on.log",
+      "sha256": "0944f009342a2246bad050680d6321776ab46f7c8718589e2407b3298f1d8764",
+      "summary": "{\"frames\": 600, \"recomp\": 1, \"cpu_cycles\": 85261216, \"generated_cycles\": 35580904, \"generated_share\": 0.4173, \"dispatches\": 368890, \"interpreted_game_instructions\": 291804, \"code_writes\": 0, \"disabled_functions\": 0, \"blits\": 4815, \"line_blits\": 3527, \"nonblack_pixels\": 55905, \"pc\": \"FE5894\", \"iterations\": 2185}"
+    },
+    "failed_full_gate": {
+      "path": "build/recomp/input_display_setup_initial_full_gate_failure.log",
+      "sha256": "c81af9fd675e46f31f5e0fc8d1b5e418613fef51a03985a5a4c6d539f61ebd26",
+      "summary": "scripts/recomp_ports_check.sh: line 42:  4050 Segmentation fault      $EXE $args --rom $ROM --ports shadow --ports-report \"$OUT/ports_report_$run.json\" $rgb_args --ram-out \"$OUT/ram_shadow_$run.bin\" > /dev/null"
+    },
+    "failed_normal_call": {
+      "path": "build/recomp/input_display_setup_initial_whole_call_failure.log",
+      "sha256": "0d6514eef58d1f8849c78c94e3e9f6bd85b1e9d814d52ea5aef0c1668a6a7cdd",
+      "summary": "RuntimeError: demo01 shadow:"
+    },
+    "original_wait_ppc": "FC5E90",
+    "original_wait_pc": "C02776",
+    "frozen_reference_diagnostic": {
+      "path": "build/recomp/input_display_setup_frozen_reference_diagnostic.log",
+      "sha256": "0dab79c6f5eba58e40d09f724c7e08d43c632f0df17f85fd200242fbebef8e22",
+      "summary": "[Inferior 1 (process 13536) detached]"
+    },
+    "reason": "The original graphics wait cannot complete inside frozen-event comparisons. Write logs grew until runs failed; the remaining observed run was stopped after its exact guest PPC/PC were captured. The entry was removed from production registration. No return, hardware read or service behavior was replaced.",
+    "frozen_comparison_and_service_integration_remain_open": true,
+    "no_recorded_whole_call_match_claimed": true
+  },
+  "timing": {
+    "local_instructions": 388,
+    "local_dma_cases": 12416,
+    "includes_80_inactive_display_boundaries": true,
+    "independently_tested_instruction_union": 17692,
+    "independently_tested_dma_cases": 566144,
+    "fresh_combined_run_this_batch": false,
+    "last_fresh_combined_instructions": 16384,
+    "last_fresh_combined_dma_cases": 524288,
+    "reason": "Shared runtime CPU/bus/math and instruction fixtures are unchanged; all fourteen older generator outputs are unchanged. The fatal observation budget wraps production bus code only in this family real-service/dispatch fixture build.",
+    "local_evidence": {
+      "path": "build/recomp/input_display_setup_dma.log",
+      "sha256": "15ff6179ff0cbb95157891ad1a04e5da24132332d3f740abd36178e97c2af37a",
+      "summary": "input_display_setup step oracle (DMA bus): 388 instructions, 12416 cases matched registers, SR, PC, cycles and RAM"
+    },
+    "generator_compatibility": {
+      "path": "build/recomp/input_display_setup_generator_compatibility.log",
+      "sha256": "60364eedba250378e32f83b15ce077730a301f5fe09be54da7b86904bbf9405d",
+      "summary": "input_device_callbacks: generator output unchanged"
+    }
+  },
+  "integration": {
+    "registered_entries": [
+      "C16D4C",
+      "C16FF4",
+      "C17066",
+      "C1787A"
+    ],
+    "shadow_matches": 554068,
+    "sandbox_matches": 413271,
+    "mismatches": 0,
+    "sealed_ram_exact": true,
+    "poison_frames_identical": true,
+    "full_gate": {
+      "path": "build/recomp/input_display_setup_full_gate.log",
+      "sha256": "1077989e5e7464fe312d7f11d9bdefd0552189913e7e769553a677470840ba89",
+      "summary": "545 routines, 554068 matching calls over 3 recordings (+413271 in the sandbox pass); poison: frames identical"
+    },
+    "full_reports": {
+      "ports_report_demo01.json": {
+        "sha256": "156ac29105f23207aaafbc99ecf4b44f58ac9019c5bad1ddea4485d1d51c77f4",
+        "matched": 303814,
+        "mismatches": 0,
+        "input_display_entries": {
+          "C16D4C": {
+            "entry": "C16D4C",
+            "name": "open_gameport_device",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16FF4": {
+            "entry": "C16FF4",
+            "name": "set_gameport_controller_type",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17066": {
+            "entry": "C17066",
+            "name": "configure_gameport_events",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1787A": {
+            "entry": "C1787A",
+            "name": "load_setup_text_resources",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_carrier_success.json": {
+        "sha256": "04e4556311ca643c680bf9fff8afaa2ad60f3d2beed06b176c567ef69c7286e2",
+        "matched": 199187,
+        "mismatches": 0,
+        "input_display_entries": {
+          "C16D4C": {
+            "entry": "C16D4C",
+            "name": "open_gameport_device",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16FF4": {
+            "entry": "C16FF4",
+            "name": "set_gameport_controller_type",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17066": {
+            "entry": "C17066",
+            "name": "configure_gameport_events",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1787A": {
+            "entry": "C1787A",
+            "name": "load_setup_text_resources",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_qual_fail_crashes.json": {
+        "sha256": "51d43e1f50192ef768715d5bd59d145061b43e8d4880315c848dfdbb128e08a5",
+        "matched": 51067,
+        "mismatches": 0,
+        "input_display_entries": {
+          "C16D4C": {
+            "entry": "C16D4C",
+            "name": "open_gameport_device",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16FF4": {
+            "entry": "C16FF4",
+            "name": "set_gameport_controller_type",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17066": {
+            "entry": "C17066",
+            "name": "configure_gameport_events",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1787A": {
+            "entry": "C1787A",
+            "name": "load_setup_text_resources",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_demo01.json": {
+        "sha256": "76570b4dcac45c774296166de5ac300ed57586cc9d236cbb6348e9c9dad658bf",
+        "matched": 139459,
+        "mismatches": 0,
+        "input_display_entries": {
+          "C16D4C": {
+            "entry": "C16D4C",
+            "name": "open_gameport_device",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16FF4": {
+            "entry": "C16FF4",
+            "name": "set_gameport_controller_type",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17066": {
+            "entry": "C17066",
+            "name": "configure_gameport_events",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1787A": {
+            "entry": "C1787A",
+            "name": "load_setup_text_resources",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_carrier_success.json": {
+        "sha256": "238c14eb70702c3ca9e1b37ce0e39a25eb0eed2d7d595c3e89699e7aa10f183e",
+        "matched": 231111,
+        "mismatches": 0,
+        "input_display_entries": {
+          "C16D4C": {
+            "entry": "C16D4C",
+            "name": "open_gameport_device",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16FF4": {
+            "entry": "C16FF4",
+            "name": "set_gameport_controller_type",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17066": {
+            "entry": "C17066",
+            "name": "configure_gameport_events",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1787A": {
+            "entry": "C1787A",
+            "name": "load_setup_text_resources",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      },
+      "ports_report_sandbox_qual_fail_crashes.json": {
+        "sha256": "26954c32644a6f6a78f96674c210d9d363fc4f59320bb61509d7e386bb262165",
+        "matched": 42701,
+        "mismatches": 0,
+        "input_display_entries": {
+          "C16D4C": {
+            "entry": "C16D4C",
+            "name": "open_gameport_device",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C16FF4": {
+            "entry": "C16FF4",
+            "name": "set_gameport_controller_type",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C17066": {
+            "entry": "C17066",
+            "name": "configure_gameport_events",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          "C1787A": {
+            "entry": "C1787A",
+            "name": "load_setup_text_resources",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        }
+      }
+    },
+    "isolated_live_frames": 36236,
+    "isolated_live_ram_seals_exact": true,
+    "recorded_registered_entries_are_cold": true,
+    "live_evidence": {
+      "path": "build/recomp/input_display_setup_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384",
+      "summary": "demo01: live ON RGB444 frames match source OFF; final RAM matches seal"
+    },
+    "isolated_probe_exact_through_frame": 600,
+    "all_first_difference_frame": 416,
+    "all_first_difference_pixels": 361,
+    "probe": {
+      "path": "build/recomp/input_display_setup_probe.log",
+      "sha256": "55f55a03d9114e36aa4cb6b73984ec4cd2546be421aa728dc23b2b4324041a24",
+      "summary": "ALL: first difference frame 416, 361 pixels"
+    }
+  },
+  "build": {
+    "gnu": {
+      "path": "build/recomp/input_display_setup_gnu.log",
+      "sha256": "1d17675f3f581830b92b1215282c3938e2a5d60d1ef28d42e529792e80702e31",
+      "summary": "[2/2] gcc -O2 -w -Itools\\musashi -Iport/machine -Iport/recomp -Iport/recomp/generated -Iport/game -Iport/game/glue -Iport/os -o build/recomp/fa18_recomp.exe @build/recomp/fa18_recomp.exe.rsp"
+    },
+    "msvc_release": {
+      "path": "build/recomp/input_display_setup_msvc.log",
+      "sha256": "b559007919ea582dce47e01a55572101cee09a3fcd131fe3c4abe515e5eca48c",
+      "summary": "  fa18_recomp.vcxproj -> C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp-cmake\\Release\\fa18_recomp.exe"
+    },
+    "artifacts_gib": 0.947
+  },
+  "next_original_scope": {
+    "manifest": "analysis/data/main_loop_services_scope_inventory.json",
+    "sha256": "ac5385983bb8e148c7b1185f3b093f9244c45426ca7716a357be476d6d0ea6f0",
+    "entries": [
+      "C2527C",
+      "C25312",
+      "C2548A",
+      "C1518C",
+      "C32CEE"
+    ],
+    "unique_instructions": 660,
+    "shared_instructions": 0,
+    "implemented_by_inventory": false,
+    "os_service_replacement": false
+  }
+}
