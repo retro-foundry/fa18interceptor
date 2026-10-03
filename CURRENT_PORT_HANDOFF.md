@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit bff5d5df); ignored gate logs may
+history (the preceding handoff is in commit fb3ce50f); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -42,7 +42,8 @@ Complete main-loop timer/readout and setup-bounds owners now raise coverage
 to 481/624 and source-only coverage to sixty-six. Complete main-loop control
 records and message sequences raise translated coverage to 483/624. Complete
 control-record action and alert owners raise it to 488/624. Complete control/
-flight parents and four existing helper upgrades now raise it to 490/624.
+flight parents and four existing helper upgrades raised it to 490/624. Ten
+complete flight-record action/control-stream owners now raise it to 500/624.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -50,6 +51,56 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 500 of 624 translated entries plus sixty-six original source-only callable
+  entries are registered: 566 rows and 386 source-timed entries (320 translated
+  plus sixty-six source-only). Complete C230E8/C23116/C23186/C23228/C233AA/
+  C23578/C236AA/C23716/C2377E/C257EC cover 575 unique / 245 shared boundaries
+  and 30 per-owner / 20 distinct actual child sites. Every entry has sealed
+  original incoming JSR/BSR evidence. 327,680 completed all-CPU/PC/full-SR/
+  all-RAM calls pass: 163,840 controlled-child and 163,840 real-child.
+  Controlled owner coverage is 32/32, 25/25, 8/8, 177/199, 105/105, 43/43,
+  155/155, 115/142, 164/188 and 50/53. Real owner coverage is 22/32, 19/25,
+  8/8, 110/199, 59/105, 43/43, 122/155, 115/142, 164/188 and 50/53.
+  C23228's raw real 150 PCs include nested source; report its 110-PC owner
+  intersection. The controlled completed-owner union is 550/575.
+  No PC is removed from production ownership. The same-TST BNE/BEQ pair
+  makes the 22-PC recording arm unreachable from the sealed entry. Its
+  C23354 internal segment passes 1,024 cases / all 23 segment PCs.
+  Valid disjoint-record release fixtures publish class 49 and action fixtures
+  class 0/1: their 27/24 unobserved shared-tail PCs are separately covered by
+  completed manoeuvre contracts and 1,024 C2385A internal segments / all 130
+  tail PCs. Neither segment is a new callable owner. Zero scale retains the
+  write-21/fault-child/repeating loop; 1,024 complete CPU/SR/RAM first-child
+  boundary observations are not completed calls or replacement returns.
+  The nonreturning C257EA back edge has independent instruction proof.
+  Minimum-word scaling behavior and the actual divide-zero backend remain;
+  full normalizer Kickstart-handler return is unproven.
+  Actual ON/shadow/sandbox dispatch passes 7,680 completed hardware-free
+  fixtures and all guards. The C257EC guard uses actual entry label 2, not
+  its preceding fault label 0. Independent normal C passes 20,301 shadow /
+  20,394 sandbox comparisons for C230E8/C23116/C23228; 86/7 shadow incompletes
+  remain explicit, with no sandbox incompletes, hardware classifications or
+  mismatches. Seven other entries have zero calls in the separate cold
+  selection with those parents omitted. They retain fixture and original
+  callability proof. Both generic zero-comparison rejections are retained;
+  the unchanged hot-entry checker passes. Local DMA passes 575 / 18,400.
+  Fresh combined and independent union pass 20,259 / 648,288, counting 171
+  previous-overlap PCs once. Nineteen older generator outputs and shared
+  production runtime/memory/bus/math/proof files remain unchanged.
+  GNU/MSVC Release pass. The full 566-row gate passes 567,984 shadow /
+  417,363 sandbox matches, zero mismatches, exact seals and poison frames.
+  All 36,236 isolated live frames/seals match; family exact through frame
+  600, ALL still 416/361. build/ is 1.137 GiB. See
+  analysis/routines/native_c_flight_record_actions.md and
+  analysis/figures/native_flight_record_actions_checkpoint.json.
+  Next complete C25B66/C26322/C26352/C266AE/C26C72/C26CC0/C26D8A/C28996/C28B16:
+  1,537 unique / zero shared boundaries, sealed with original callability in
+  analysis/data/flight_dynamics_scope_inventory.json. Reproduce its audit
+  with tools/recomp/audit_flight_dynamics.py. Related C2C392 has actual call
+  C25C6A but needs computed-transfer evidence at C2C46E before complete
+  ownership can be sealed. The nine-owner inventory is not implementation.
+  Remaining game functions are open; the goal has not reached the stop point.
 
 - 490 of 624 translated entries plus sixty-six original source-only callable
   entries are registered: 556 rows and 376 source-timed entries (310 translated
@@ -88,7 +139,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   graphics-wait failure explicit. See
   analysis/routines/native_c_main_loop_flight_controls.md and
   analysis/figures/native_main_loop_flight_controls_checkpoint.json.
-  Next complete C230E8/C23116/C23186/C23228/C233AA/C23578/C236AA/C23716/C2377E/
+  Now completed in the leading checkpoint: C230E8/C23116/C23186/C23228/C233AA/C23578/C236AA/C23716/C2377E/
   C257EC: 575 unique / 245 shared boundaries, sealed in
   analysis/data/flight_record_actions_scope_inventory.json. Every owner has
   byte-backed original JSR/BSR evidence. This inventory implements none of
@@ -1315,11 +1366,12 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 481/624 translated plus sixty-six source-only callable entries; the
-   leading checkpoint above supersedes older batch-selection notes. Next
-   reconstruct complete C1518C/C32CEE main-loop control/message owners from
-   analysis/data/main_loop_control_messages_scope_inventory.json (503 unique /
-   zero shared boundaries). The inventory implements neither owner. Keep
+   is 500/624 translated plus sixty-six source-only callable entries. Next
+   reconstruct complete C25B66/C26322/C26352/C266AE/C26C72/C26CC0/C26D8A/
+   C28996/C28B16 from analysis/data/flight_dynamics_scope_inventory.json
+   (1,537 unique / zero shared boundaries, actual incoming calls sealed).
+   Reconcile related C2C392's computed transfer at C2C46E before assigning
+   its complete scope. This inventory implements none of the nine owners. Keep
    C1612C unregistered until its frozen-event graphics-wait comparison can
    complete safely; its domain/CPU/step source, failed gates and successful
    temporary native replay remain explicit integration evidence.

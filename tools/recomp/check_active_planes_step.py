@@ -25,12 +25,13 @@ def main():
     group_names += ("selector_origin", "update_sequence", "input_events", "command_dispatch")
     group_names += ("postflight_scheduler",)
     group_names += ("context_publication",)
-    group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion", "postflight_messages", "postflight_file_callers", "input_device_callbacks", "input_display_setup", "main_loop_timers", "main_loop_control_messages", "record_control_actions", "main_loop_flight_controls")
+    group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion", "postflight_messages", "postflight_file_callers", "input_device_callbacks", "input_display_setup", "main_loop_timers", "main_loop_control_messages", "record_control_actions", "main_loop_flight_controls", "flight_record_actions")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "flight_record_actions": ['C230E8', 'C23116', 'C23186', 'C23228', 'C233AA', 'C23578', 'C236AA', 'C23716', 'C2377E', 'C257EC'],
         "main_loop_flight_controls": ["C149BE","C083E2","C25754","C23A7E","C24568","C2436A"],
         "record_control_actions": ["C153FC","C15688","C159AE","C15AD4","C181A0","C15138"],
         "main_loop_control_messages": ["C1518C","C32CEE"],
@@ -129,6 +130,7 @@ def main():
     menu_owners.update(json.loads((ROOT / "analysis/data/main_loop_control_messages_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/record_control_actions_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/main_loop_flight_controls_source_scope.json").read_text())["owners"])
+    menu_owners.update(json.loads((ROOT / "analysis/data/flight_record_actions_source_scope.json").read_text())["owners"])
     for entry in entries:
         if entry in menu_owners:
             for pc in menu_owners[entry]["source_pcs"]: addresses.setdefault(pc,entry)

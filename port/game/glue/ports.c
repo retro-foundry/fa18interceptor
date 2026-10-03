@@ -7,6 +7,17 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete flight-record actions and control streams. */
+    {0xC230E8, glue_C230E8, "select_flight_record_action", 0, 0, glue_C230E8_step, 0xC23174, 0, 0, glue_C230E8_owns},
+    {0xC23116, glue_C23116, "select_flight_record_action", 0, 0, glue_C23116_step, 0xC23174, 0, 0, glue_C23116_owns},
+    {0xC23186, glue_C23186, "queue_flight_record_action_sound", 0, 0, glue_C23186_step, 0xC231A2, 0, 0, glue_C23186_owns},
+    {0xC23228, glue_C23228, "advance_flight_record_control", 0, 0, glue_C23228_step, 0xC23578, 0, 0, glue_C23228_owns},
+    {0xC233AA, glue_C233AA, "advance_flight_record_stream", 0, 0, glue_C233AA_step, 0xC23578, 0, 0, glue_C233AA_owns},
+    {0xC23578, glue_C23578, "select_next_flight_record_stream", 0, 0, glue_C23578_step, 0xC23622, 0, 0, glue_C23578_owns},
+    {0xC236AA, glue_C236AA, "initialise_flight_record_manoeuvre", 0, 0, glue_C236AA_step, 0xC23A26, 0, 0, glue_C236AA_owns},
+    {0xC23716, glue_C23716, "initialise_flight_record_release", 0, 0, glue_C23716_step, 0xC23A26, 0, 0, glue_C23716_owns},
+    {0xC2377E, glue_C2377E, "try_flight_record_action", 0, 0, glue_C2377E_step, 0xC23A26, 0, 0xC23744, glue_C2377E_owns},
+    {0xC257EC, glue_C257EC, "normalise_flight_record_direction", 0, 0, glue_C257EC_step, 0xC25864, 0, 0xC257DC, glue_C257EC_owns},
     /* Complete main-loop control, flight and message owners. */
     {0xC149BE, glue_C149BE, "advance_main_loop_flight_controls", 0, 0, glue_C149BE_step, 0xC15138, 0, 0, glue_C149BE_owns},
     {0xC23A7E, glue_C23A7E, "advance_main_loop_flight_record", 0, 0, glue_C23A7E_step, 0xC244E2, 0, 0xC23A7A, glue_C23A7E_owns},

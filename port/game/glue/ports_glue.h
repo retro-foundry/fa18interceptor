@@ -934,3 +934,5 @@ int glue_C1ECD4_step(void);
 int glue_C1ECFC_step(void);
 
 #endif
+
+#include "glue_flight_record_actions.h"
