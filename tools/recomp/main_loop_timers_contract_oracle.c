@@ -94,7 +94,7 @@ static void fixture(unsigned scenario) {
     wr_u8(0xc45888u,(uint8_t)((profile>>1u)&1u)); wr_u8(0xc45889u,bytes[(profile>>2u)%8u]);
     wr_u16(0xc458dau,(uint16_t)random_value()); wr_u8(0xc458beu,(uint8_t)(profile%8u));
     for(i=0;i<8;++i) wr_u16(0xc2502eu+2*i,(uint16_t)((profile&64u)?250:0));
-    
+
     REG_PPC=0xc10024u; REG_A[7]=0xc7ff00u; expected_sp=REG_A[7]+4; wr_u32(REG_A[7],0xc70000u);
     wr_u32(REG_A[7]+4,random_value());
     m68k_set_reg(M68K_REG_SR,0x2700u|(scenario&31u)); REG_PC=selected_entry;
