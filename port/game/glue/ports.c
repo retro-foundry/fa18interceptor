@@ -7,6 +7,9 @@
 #include "ports_glue.h"
 
 const FA18Port fa18_ports[] = {
+    /* Complete main-loop timer/readout and setup-bounds owners. */
+    {0xC2527C, glue_C2527C, "prepare_setup_bounds", 0, 0, glue_C2527C_step, 0xC25312, 0, 0xC2527A, glue_C2527C_owns},
+    {0xC25312, glue_C25312, "advance_main_loop_timers", 0, 0, glue_C25312_step, 0xC25482, 0, 0, glue_C25312_owns},
     /* Complete gameport/text setup and outer display synchronization. */
     {0xC16D4C, glue_C16D4C, "open_gameport_device", 0, 0, glue_C16D4C_step, 0xC16EAE, 0, 0, glue_C16D4C_owns},
     {0xC16FF4, glue_C16FF4, "set_gameport_controller_type", 0, 0, glue_C16FF4_step, 0xC17066, 0, 0, glue_C16FF4_owns},
@@ -300,7 +303,7 @@ const FA18Port fa18_ports[] = {
     {0xC13396, glue_C13396, "five_eighths", 80},
     {0xC50AB4, glue_C50AB4, "random_bit", 0, 0, glue_C50AB4_step, 0xC50B02},
     {0xC17B08, glue_C17B08, "free_voice", 0, 0, glue_C17B08_step, 0xC17B2C},
-    {0xC2548A, glue_C2548A, "update_readout", 250},
+    {0xC2548A, glue_C2548A, "update_readout", 0, 0, glue_C2548A_step, 0xC254E8, 0, 0, glue_C2548A_owns},
     {0xC0840E, glue_C0840E, "reset_mission_objects", 0, 0, glue_C0840E_step, 0xC08488},
     {0xC258C8, glue_C258C8, "pan_view_from_keys", 0, 0, glue_C258C8_step, 0xC25980},
     /* batch 10: decay, messages, lookups, cell steps, 2.8 matrix, cached display value */

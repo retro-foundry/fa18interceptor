@@ -66,26 +66,6 @@ int glue_C17B08(void) {
     return glue_return();
 }
 
-/* $C2548A: leaves the divisor in D1 and the DIVU result (remainder and
- * quotient, or the untouched dividend on overflow) or 9999 in D0. */
-int glue_C2548A(void) {
-    int valid = rd_s32(READOUT_SOURCE_VALID) >= 0;
-    uint32_t divisor = rd_u32(READOUT_DIVISOR);
-
-    update_readout();
-
-    if (valid) {
-        D(1) = divisor;
-        if ((int32_t)divisor > 0x7FFF) {
-            D(0) = 9999;
-        } else {
-            uint16_t d = (uint16_t)divisor;
-            uint32_t q = 800000u / d;
-            D(0) = q > 0xFFFF ? 800000u : ((800000u % d) << 16 | q);
-        }
-    }
-    return glue_return();
-}
 
 int glue_C0840E(void) {
     reset_mission_objects();

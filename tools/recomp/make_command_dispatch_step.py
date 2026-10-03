@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup","main_loop_timers"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -69,6 +69,16 @@ body["asr.l"]="step_asr_long(&D(reg),(opcode&0x20u)?D(destination):(destination?
 body["lsl.w"]="menu_lsl_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
 body["lsr.b"]="menu_lsr_byte(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
 body["abcd"]="value=cache_step_read_memory(A(reg)-=reg==7?2:1,1); address=(A(destination)-=destination==7?2:1); old=cache_step_read_memory(address,1); cache_step_write_memory(address,menu_decimal_flags((uint8_t)value,(uint8_t)old),1,0); break;"
+# These recipes are local to the timer family. Older generated outputs retain
+# their exact existing bodies; no shared arithmetic/runtime behavior changes.
+if family=="main_loop_timers":
+ body["mulu.w"]="timer_multiply_unsigned(&D(destination),(uint16_t)cache_step_read(mode,reg,2)); break;"
+ body["divs.w"]="renderer_divide(&D(destination),(int16_t)cache_step_read(mode,reg,2)); break;"
+ body["movem.w"]="mask=m68ki_read_imm_16(); address=cache_step_address(mode,reg,2); if(opcode&0x400u) renderer_load(address,mask,2,mode==3?(int)reg:-1); else renderer_store(address,mask,2,-1); break;"
+ body["exg"]="value=D(destination); D(destination)=D(reg); D(reg)=value; break;"
+ body["neg.w"]="renderer_negate(&D(reg),2); break;"
+ body["add.l"]="width=4; if(opcode&0x100u) { value=D(destination); operation='+'; goto arithmetic; } value=cache_step_read(mode,reg,4); mode=0; reg=destination; operation='+'; goto arithmetic;"
+ body["add.w"]="width=2; if(opcode&0x100u) { value=D(destination); operation='+'; goto arithmetic; } value=cache_step_read(mode,reg,2); mode=0; reg=destination; operation='+'; goto arithmetic;"
 missing=set(groups)-set(body)
 if missing: raise ValueError(f"unsupported owned source operations: {sorted(missing)}")
 if family=="menu_context_finish":
@@ -97,6 +107,8 @@ if family!="command_dispatch":
      "command_dispatch.c and its action modules", family+".c").replace(
      "make_command_dispatch_step.py.", "make_command_dispatch_step.py --family "+family+".").replace(
      '"glue_command_dispatch.h"','"glue_'+family+'.h"').replace("command_step",step_name)
+if family=="main_loop_timers":
+ out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_main_loop_timers_math.h"')
 if family=="menu_context_finish":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_menu_context_math.h"')
 for key,pcs in groups.items():

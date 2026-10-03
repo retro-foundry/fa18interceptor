@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-03. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 2ff43ce3); ignored gate logs may
+history (the preceding handoff is in commit aaf76818); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -39,7 +39,9 @@ postflight-message/text owners raise it to 476/624; the complete formatter
 and four game-side mode-file callers raise it to 477/624; eight complete
 input-device callback/setup owners raise it to 480/624. Four gameport/text
 setup owners retain that count and extend source-only coverage to sixty-five.
-Sixty-five original source-only callable entries are additionally recreated,
+Complete main-loop timer/readout and setup-bounds owners now raise coverage
+to 481/624 and source-only coverage to sixty-six.
+Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
@@ -47,8 +49,46 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
-- 480 of 624 translated entries plus sixty-five source-only callable entries
-  are registered: 545 rows and 359 source-timed entries (294 translated plus
+- 481 of 624 translated entries plus sixty-six original source-only callable
+  entries are registered: 547 rows and 362 source-timed entries (296 translated
+  plus sixty-six source-only). Complete C2527C/C25312/C2548A owners cover 157
+  unique / zero shared boundaries and six actual child sites. The bounds owner
+  is source-only; the timer adds a translated entry, and the existing readout
+  gains full CPU/SR/source timing. Its 9999 path skips min/max as the source does.
+  Full CPU/SR/all-RAM proof passes 73,728 complete cases without exclusions:
+  24,576 controlled-child and 49,152 real-child cases. Controlled cases cover
+  all 157 boundaries and compare child-entry CPU/SR/RAM. Real bounds/readout
+  proof covers all 52/19 PCs; the timer's real fixture uses the original negative
+  poll guard and covers 38/86 PCs. Its elapsed/poll loop is covered by controlled
+  cases, not a completed real-service polling-loop proof. Production clock,
+  countdown and normalization children retain original calls and return PCs.
+  Actual ON/shadow/sandbox dispatch passes 2,304 complete fixtures and guards.
+  Bounds/readout fixtures require hardware-free matches; timer fixtures actually
+  touch hardware and require exact hardware classification. A forced zero
+  divisor retains the original trap/ROM handler and exhausts a test-only
+  100,000-instruction bound at FC30C2, exit 3. It is not a completed proof.
+  Six raw step-disabled reports retain the cold C2527C row and generic zero-call
+  rejection. Timer recording calls are 3,937 hardware + 146 incomplete in shadow
+  and 4,230 hardware in sandbox, zero matches/mismatches. Readout body proof
+  passes 504 shadow / 505 sandbox matches, with one incomplete shadow call.
+  Local DMA passes 157 / 5,024; the independently tested union is 17,849 /
+  571,168 with no new overlap. Last fresh combined remains 16,384 / 524,288;
+  no fresh combined run this batch. New CPU recipes are family-local, all
+  fifteen older generator outputs are unchanged, and shared runtime CPU/bus/
+  math/instruction fixtures remain unchanged. GNU/MSVC Release pass. The full
+  547-row gate passes 552,046 shadow / 413,271 sandbox matches, zero mismatches,
+  exact seals and identical poison frames. All 36,236 isolated live frames/
+  seals match; group exact through frame 600, ALL remains 416/361. Build/ is
+  0.992 GiB. C1612C remains inactive with its prior failed frozen-reference
+  integration explicit. See analysis/routines/native_c_main_loop_timers.md
+  and analysis/figures/native_main_loop_timers_checkpoint.json.
+  Next complete C1518C/C32CEE, 503 unique / zero shared boundaries, sealed in
+  analysis/data/main_loop_control_messages_scope_inventory.json. That inventory
+  implements neither owner. Game-function porting remains incomplete; retain
+  the user's stopping point and defer Kickstart and standalone timing work.
+- At the preceding input/display checkpoint, 480 of 624 translated entries
+  plus sixty-five source-only callable entries were registered:
+  545 rows and 359 source-timed entries (294 translated plus
   sixty-five source-only). Four complete gameport/text setup owners are added:
   C16D4C/C16FF4/C17066/C1787A. Each has an actual original call site.
   C1612C also has complete domain/CPU/step source but remains unregistered:
@@ -1158,12 +1198,11 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 480/624 translated plus sixty-five source-only callable entries; the
+   is 481/624 translated plus sixty-six source-only callable entries; the
    leading checkpoint above supersedes older batch-selection notes. Next
-   reconstruct complete C2527C/C25312/C2548A/C1518C/C32CEE main-loop
-   timer/control/message owners from
-   analysis/data/main_loop_services_scope_inventory.json (660 unique / zero
-   shared boundaries). The inventory implements none of those owners. Keep
+   reconstruct complete C1518C/C32CEE main-loop control/message owners from
+   analysis/data/main_loop_control_messages_scope_inventory.json (503 unique /
+   zero shared boundaries). The inventory implements neither owner. Keep
    C1612C unregistered until its frozen-event graphics-wait comparison can
    complete safely; its domain/CPU/step source, failed gates and successful
    temporary native replay remain explicit integration evidence.
