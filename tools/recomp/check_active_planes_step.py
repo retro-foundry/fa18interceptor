@@ -27,12 +27,13 @@ def main():
     group_names += ("context_publication",)
     group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion", "postflight_messages", "postflight_file_callers", "input_device_callbacks", "input_display_setup", "main_loop_timers", "main_loop_control_messages", "record_control_actions", "main_loop_flight_controls", "flight_record_actions")
     group_names += ("flight_motion_helpers",)
-    group_names += ("flight_dynamics", "flight_geometry", "flight_markers", "projection_readouts", "hud_stream", "hud_parents","hud_readout_parents","hud_text_helpers","hud_projection_parents","hud_history_stream","render_parents","face_stream_parents","face_list_parents","hud_render_parents","render_leaf_helpers","render_entry_helpers","segment_projection","corner_view")
+    group_names += ("flight_dynamics", "flight_geometry", "flight_markers", "projection_readouts", "hud_stream", "hud_parents","hud_readout_parents","hud_text_helpers","hud_projection_parents","hud_history_stream","render_parents","face_stream_parents","face_list_parents","hud_render_parents","render_leaf_helpers","render_entry_helpers","segment_projection","corner_view","control_readouts")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "control_readouts": ['C12950', 'C131BE', 'C13176', 'C133B2', 'C13396', 'C52EC8'],
         "corner_view": ['C2E758', 'C2CE82', 'C2CCA0', 'C2CD28', 'C2CD94', 'C2D082', 'C2D3A4', 'C200F6', 'C203CC', 'C2058E', 'C20826', 'C22C70'],
         "segment_projection": ['C1FF9C', 'C1FFA4', 'C2ED70', 'C2EE4A', 'C2F0C6', 'C2F0F4', 'C2F128', 'C2F156', 'C2EA5A', 'C2EAD0', 'C2EB4C', 'C2EBC2'],
         "render_entry_helpers": ['C2F688', 'C2F63A', 'C2F64E', 'C301F6', 'C330FE', 'C2F826', 'C2F83A', 'C2F844', 'C2F84E', 'C2F858', 'C2F862', 'C2F86C', 'C2F876', 'C2F880', 'C2F88A', 'C2F894', 'C2F89E', 'C2F8A8', 'C2F8B2', 'C2F8BC', 'C2F8C6', 'C2F8D0', 'C2F8EA', 'C2F904', 'C2F91E', 'C2F938', 'C2F952', 'C2F96C', 'C2F986', 'C2F9A0', 'C2F9BA', 'C2F9D4', 'C2F9EE', 'C2FA08', 'C2FA22', 'C2FA3C', 'C2FA56'],
@@ -171,6 +172,7 @@ def main():
     menu_owners.update(json.loads((ROOT / "analysis/data/render_entry_helpers_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/segment_projection_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/corner_view_source_scope.json").read_text())["owners"])
+    menu_owners.update(json.loads((ROOT / "analysis/data/control_readouts_source_scope.json").read_text())["owners"])
     for entry in entries:
         if entry in menu_owners:
             for pc in menu_owners[entry]["source_pcs"]: addresses.setdefault(pc,entry)
@@ -182,7 +184,7 @@ def main():
             pc = line.split(":")[0]
             addresses.setdefault(pc, entry)
     header = "static const struct { uint32_t pc; int (*step)(void); } step_oracle_cases[] = {\n"
-    header += "".join(f"    {{0x{pc}u, glue_{entry}_{'complete_step' if entry in ('C28B34','C2651E','C28E28','C26EBE','C27456','C2EC90','C2EC94','C2EC9C','C2ECA4','C308E2','C30904','C30764','C309B6','C30B5C','C30D34','C30F78','C3112A','C31A64','C31ACC','C31F4C','C3201A','C3212A','C32178','C321D2','C32260','C31EB6','C31C60','C31D16','C31E6C','C31D64','C33F54','C328A8','C31C20','C3271A','C32726','C32736','C32794','C32AA4','C32AA6','C32AB4','C0DAEE','C0CFFA','C33CD2','C33B38','C332BC','C32662','C0D04C','C33370','C1FE24','C1FE46','C0CF98','C2D16C','C21500','C2122A','C20592','C2168A','C203D0','C201A6','C3019C','C1FB82','C1F99A','C2129C','C212B0','C211DC','C2131C','C20E4E','C20E40','C21490','C2139E','C21412','C20F10','C20EC4','C20D68','C20904','C21A20','C217EA','C2159E','C210E6','C1FF0A','C2005C','C20100','C21060','C20C38','C20C22','C20A52','C20A40','C20002','C2084A','C2082A','C219AE','C21C4C','C21C2E','C098C6','C09952','C099F6','C099AA','C332FE','C34146','C34066','C342D0','C347F2','C33DC8','C322EE','C3003A','C304FA','C345A0','C348B2','C2F5C0','C2F5D4','C2F5F4','C2F60A','C2F66E','C310E2','C301F0','C304B2','C32806','C2FA78','C2FA7E','C2FD8C') or entry in groups['render_entry_helpers'] or entry in groups['segment_projection'] or entry in groups['corner_view'] else 'step'}}},\n" for pc, entry in sorted(addresses.items()))
+    header += "".join(f"    {{0x{pc}u, glue_{entry}_{'complete_step' if entry in ('C28B34','C2651E','C28E28','C26EBE','C27456','C2EC90','C2EC94','C2EC9C','C2ECA4','C308E2','C30904','C30764','C309B6','C30B5C','C30D34','C30F78','C3112A','C31A64','C31ACC','C31F4C','C3201A','C3212A','C32178','C321D2','C32260','C31EB6','C31C60','C31D16','C31E6C','C31D64','C33F54','C328A8','C31C20','C3271A','C32726','C32736','C32794','C32AA4','C32AA6','C32AB4','C0DAEE','C0CFFA','C33CD2','C33B38','C332BC','C32662','C0D04C','C33370','C1FE24','C1FE46','C0CF98','C2D16C','C21500','C2122A','C20592','C2168A','C203D0','C201A6','C3019C','C1FB82','C1F99A','C2129C','C212B0','C211DC','C2131C','C20E4E','C20E40','C21490','C2139E','C21412','C20F10','C20EC4','C20D68','C20904','C21A20','C217EA','C2159E','C210E6','C1FF0A','C2005C','C20100','C21060','C20C38','C20C22','C20A52','C20A40','C20002','C2084A','C2082A','C219AE','C21C4C','C21C2E','C098C6','C09952','C099F6','C099AA','C332FE','C34146','C34066','C342D0','C347F2','C33DC8','C322EE','C3003A','C304FA','C345A0','C348B2','C2F5C0','C2F5D4','C2F5F4','C2F60A','C2F66E','C310E2','C301F0','C304B2','C32806','C2FA78','C2FA7E','C2FD8C') or entry in groups['render_entry_helpers'] or entry in groups['segment_projection'] or entry in groups['corner_view'] or entry in groups['control_readouts'] else 'step'}}},\n" for pc, entry in sorted(addresses.items()))
     header += "};\n"
     (ROOT / "build/recomp").mkdir(parents=True, exist_ok=True)
     header_path = ROOT / "build/recomp/step_oracle_cases.h"

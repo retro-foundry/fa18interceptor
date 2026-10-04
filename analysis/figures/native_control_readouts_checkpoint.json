@@ -1,0 +1,2796 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "ec0b509a",
+  "new_registered_owners": [
+    "C12950",
+    "C131BE"
+  ],
+  "upgraded_registered_owners": [
+    "C13176",
+    "C133B2",
+    "C13396",
+    "C52EC8"
+  ],
+  "registered_translated_entries": 539,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 73,
+  "registered_total_entries": 612,
+  "registered_timing_entries": 537,
+  "registered_translated_timing_entries": 464,
+  "registered_source_only_timing_entries": 73,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/control_readouts_source_scope.json",
+      "sha256": "7c3847b7f4267b766fef7f00990fedf0ccdb5b1d5bcf2b3c89ec06add07a324e"
+    },
+    "unique_instructions": 867,
+    "shared_within_batch": 0,
+    "distinct_child_sites": 43,
+    "child_sites_by_owner": 43,
+    "actual_original_static_incoming": {
+      "C12950": [
+        {
+          "pc": "C0F132",
+          "return_pc": "C0F138",
+          "kind": "jsr",
+          "instruction": "jsr     $c12950.l",
+          "bytes": "4eb900c12950"
+        },
+        {
+          "pc": "C0F370",
+          "return_pc": "C0F376",
+          "kind": "jsr",
+          "instruction": "jsr     $c12950.l",
+          "bytes": "4eb900c12950"
+        }
+      ],
+      "C131BE": [
+        {
+          "pc": "C12D3C",
+          "return_pc": "C12D40",
+          "kind": "bsr",
+          "instruction": "bsr     $c131be",
+          "bytes": "61000480"
+        }
+      ],
+      "C13176": [
+        {
+          "pc": "C12ECC",
+          "return_pc": "C12ED0",
+          "kind": "bsr",
+          "instruction": "bsr     $c13176",
+          "bytes": "610002a8"
+        },
+        {
+          "pc": "C13016",
+          "return_pc": "C1301A",
+          "kind": "bsr",
+          "instruction": "bsr     $c13176",
+          "bytes": "6100015e"
+        }
+      ],
+      "C133B2": [
+        {
+          "pc": "C13112",
+          "return_pc": "C13116",
+          "kind": "bsr",
+          "instruction": "bsr     $c133b2",
+          "bytes": "6100029e"
+        },
+        {
+          "pc": "C13124",
+          "return_pc": "C13128",
+          "kind": "bsr",
+          "instruction": "bsr     $c133b2",
+          "bytes": "6100028c"
+        }
+      ],
+      "C13396": [
+        {
+          "pc": "C13266",
+          "return_pc": "C1326A",
+          "kind": "bsr",
+          "instruction": "bsr     $c13396",
+          "bytes": "6100012e"
+        },
+        {
+          "pc": "C1327A",
+          "return_pc": "C1327E",
+          "kind": "bsr",
+          "instruction": "bsr     $c13396",
+          "bytes": "6100011a"
+        }
+      ],
+      "C52EC8": [
+        {
+          "pc": "C12E0A",
+          "return_pc": "C12E10",
+          "kind": "jsr",
+          "instruction": "jsr     $c52ec8.l",
+          "bytes": "4eb900c52ec8"
+        },
+        {
+          "pc": "C1331A",
+          "return_pc": "C13320",
+          "kind": "jsr",
+          "instruction": "jsr     $c52ec8.l",
+          "bytes": "4eb900c52ec8"
+        },
+        {
+          "pc": "C17DE4",
+          "return_pc": "C17DEA",
+          "kind": "jsr",
+          "instruction": "jsr     $c52ec8.l",
+          "bytes": "4eb900c52ec8"
+        },
+        {
+          "pc": "C17E1C",
+          "return_pc": "C17E22",
+          "kind": "jsr",
+          "instruction": "jsr     $c52ec8.l",
+          "bytes": "4eb900c52ec8"
+        },
+        {
+          "pc": "C17FC6",
+          "return_pc": "C17FCC",
+          "kind": "jsr",
+          "instruction": "jsr     $c52ec8.l",
+          "bytes": "4eb900c52ec8"
+        },
+        {
+          "pc": "C18146",
+          "return_pc": "C1814C",
+          "kind": "jsr",
+          "instruction": "jsr     $c52ec8.l",
+          "bytes": "4eb900c52ec8"
+        }
+      ]
+    },
+    "sealed_native_child_contracts": 43,
+    "sealed_oracle_ownership_arrays": 3,
+    "computed_jumps": {
+      "C13252": {
+        "targets": [
+          "C13256",
+          "C13258",
+          "C1325A",
+          "C1325C"
+        ],
+        "original_guard_and_stubs": [
+          {
+            "pc": "C13242",
+            "instruction": "move.w  (-$2,A6), D0",
+            "bytes": "302efffe"
+          },
+          {
+            "pc": "C13246",
+            "instruction": "ext.l   D0",
+            "bytes": "48c0"
+          },
+          {
+            "pc": "C13248",
+            "instruction": "cmpi.l  #$4, D0",
+            "bytes": "0c8000000004"
+          },
+          {
+            "pc": "C1324E",
+            "instruction": "bcc     $c1329c",
+            "bytes": "644c"
+          },
+          {
+            "pc": "C13250",
+            "instruction": "asl.l   #1, D0",
+            "bytes": "e380"
+          },
+          {
+            "pc": "C13252",
+            "instruction": "jmp     ($2,PC,D0.l)",
+            "bytes": "4efb0802"
+          },
+          {
+            "pc": "C13256",
+            "instruction": "bra     $c1325e",
+            "bytes": "6006"
+          },
+          {
+            "pc": "C13258",
+            "instruction": "bra     $c13272",
+            "bytes": "6018"
+          },
+          {
+            "pc": "C1325A",
+            "instruction": "bra     $c13286",
+            "bytes": "602a"
+          },
+          {
+            "pc": "C1325C",
+            "instruction": "bra     $c13292",
+            "bytes": "6034"
+          }
+        ],
+        "guard": "unsigned D0 < 4 before ASL.L #1",
+        "shared_frame_owner": "C131BE",
+        "standalone_callability": false
+      },
+      "C132BA": {
+        "targets": [
+          "C132BE",
+          "C132C0",
+          "C132C2",
+          "C132C4"
+        ],
+        "original_guard_and_stubs": [
+          {
+            "pc": "C1329C",
+            "instruction": "move.b  $c45785.l, D0",
+            "bytes": "103900c45785"
+          },
+          {
+            "pc": "C132A2",
+            "instruction": "ext.w   D0",
+            "bytes": "4880"
+          },
+          {
+            "pc": "C132A4",
+            "instruction": "ext.l   D0",
+            "bytes": "48c0"
+          },
+          {
+            "pc": "C132A6",
+            "instruction": "subi.l  #$1, D0",
+            "bytes": "048000000001"
+          },
+          {
+            "pc": "C132AC",
+            "instruction": "blt     $c13330",
+            "bytes": "6d000082"
+          },
+          {
+            "pc": "C132B0",
+            "instruction": "cmpi.l  #$4, D0",
+            "bytes": "0c8000000004"
+          },
+          {
+            "pc": "C132B6",
+            "instruction": "bge     $c13330",
+            "bytes": "6c78"
+          },
+          {
+            "pc": "C132B8",
+            "instruction": "asl.l   #1, D0",
+            "bytes": "e380"
+          },
+          {
+            "pc": "C132BA",
+            "instruction": "jmp     ($2,PC,D0.l)",
+            "bytes": "4efb0802"
+          },
+          {
+            "pc": "C132BE",
+            "instruction": "bra     $c132c6",
+            "bytes": "6006"
+          },
+          {
+            "pc": "C132C0",
+            "instruction": "bra     $c132d2",
+            "bytes": "6010"
+          },
+          {
+            "pc": "C132C2",
+            "instruction": "bra     $c132de",
+            "bytes": "601a"
+          },
+          {
+            "pc": "C132C4",
+            "instruction": "bra     $c132f2",
+            "bytes": "602c"
+          }
+        ],
+        "guard": "signed 0 <= D0 < 4 before ASL.L #1",
+        "shared_frame_owner": "C131BE",
+        "standalone_callability": false
+      }
+    }
+  },
+  "whole_entry_completed_calls": 196608,
+  "controlled_child_completed_calls": 98304,
+  "real_child_completed_calls": 98304,
+  "controlled_union_pcs": 866,
+  "real_child_union_pcs": 866,
+  "fixture_coverage": [
+    {
+      "owner": "C12950",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 627,
+      "observed_owner_pcs": 627,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_contract_C12950.log",
+        "sha256": "46ee09ca6658d570d4d749b445eb3546731dda2d1a520f969f9e10ba3d21202f"
+      }
+    },
+    {
+      "owner": "C131BE",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 145,
+      "observed_owner_pcs": 145,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_contract_C131BE.log",
+        "sha256": "48d38b7dfb927744fd7ceda6d15e41793bd6d378c370215c11b7c70d32edbdf2"
+      }
+    },
+    {
+      "owner": "C13176",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_contract_C13176.log",
+        "sha256": "401bcc39f609c6d53843452f8e6de202d691d44b77863ec025e4314d2fc05ca4"
+      }
+    },
+    {
+      "owner": "C133B2",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C133FA"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_contract_C133B2.log",
+        "sha256": "9a3696bfebe252704e33050d0a059228502eb1ce73c23b507c9a45e3e6de4307"
+      }
+    },
+    {
+      "owner": "C13396",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 10,
+      "observed_owner_pcs": 10,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_contract_C13396.log",
+        "sha256": "4362d1d548ee891bf9e620488b11098105ef0bcd02e8b3b626d70d79c56ee003"
+      }
+    },
+    {
+      "owner": "C52EC8",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_contract_C52EC8.log",
+        "sha256": "a8f6e03cb02c284236ba311b98a3c0341c300255f01a97a3be85cac29546e54d"
+      }
+    },
+    {
+      "owner": "C12950",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 627,
+      "observed_owner_pcs": 627,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 44320,
+      "log": {
+        "path": "build/recomp/control_readouts_real_C12950.log",
+        "sha256": "8b53750a5506da4460cef758f60ccc29a7e02a92a6d43d3b27bdbae9d10d414e"
+      }
+    },
+    {
+      "owner": "C131BE",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 145,
+      "observed_owner_pcs": 145,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_real_C131BE.log",
+        "sha256": "09d94705c24392672f3da8f2df29fad3b956a6e18a84cdb4d180f01e800a9379"
+      }
+    },
+    {
+      "owner": "C13176",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 40960,
+      "log": {
+        "path": "build/recomp/control_readouts_real_C13176.log",
+        "sha256": "a8b9082ef2dcd134d711b8807beaba3e0b48df0394d60726d97acf45582671a0"
+      }
+    },
+    {
+      "owner": "C133B2",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C133FA"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_real_C133B2.log",
+        "sha256": "37560299f582b61e31c092294a9d6e1fa3e6c6fc316326e8bfbb23f69467a042"
+      }
+    },
+    {
+      "owner": "C13396",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 10,
+      "observed_owner_pcs": 10,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_real_C13396.log",
+        "sha256": "731d8b49ab9b604515d96e1d3c1a17957eb07243e639dc848171a09cc057bc92"
+      }
+    },
+    {
+      "owner": "C52EC8",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_real_C52EC8.log",
+        "sha256": "0f1a5bd04291be68647c2eb4a1b55f9853cbc71e3733f947dd517a63bf25184a"
+      }
+    }
+  ],
+  "unreachable_entry_paths": {
+    "C133FA": {
+      "owner": "C133B2",
+      "exhaustive_word_inputs": 65536,
+      "possible_signed_results": [
+        -64,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "signed_upper_bound": 63,
+      "source_guard": [
+        {
+          "pc": "C133E0",
+          "length": 2,
+          "bytes": "4a40",
+          "opcode": "4A40",
+          "instruction": "tst.w   D0"
+        },
+        {
+          "pc": "C133E2",
+          "length": 2,
+          "bytes": "6a04",
+          "opcode": "6A04",
+          "instruction": "bpl     $c133e8"
+        },
+        {
+          "pc": "C133E4",
+          "length": 4,
+          "bytes": "446efffe",
+          "opcode": "446E",
+          "instruction": "neg.w   (-$2,A6)"
+        },
+        {
+          "pc": "C133E8",
+          "length": 2,
+          "bytes": "7009",
+          "opcode": "7009",
+          "instruction": "moveq   #$9, D0"
+        },
+        {
+          "pc": "C133EA",
+          "length": 4,
+          "bytes": "322efffe",
+          "opcode": "322E",
+          "instruction": "move.w  (-$2,A6), D1"
+        },
+        {
+          "pc": "C133EE",
+          "length": 2,
+          "bytes": "e061",
+          "opcode": "E061",
+          "instruction": "asr.w   D0, D1"
+        },
+        {
+          "pc": "C133F0",
+          "length": 4,
+          "bytes": "3d41fffe",
+          "opcode": "3D41",
+          "instruction": "move.w  D1, (-$2,A6)"
+        },
+        {
+          "pc": "C133F4",
+          "length": 4,
+          "bytes": "0c41003f",
+          "opcode": "0C41",
+          "instruction": "cmpi.w  #$3f, D1"
+        },
+        {
+          "pc": "C133F8",
+          "length": 2,
+          "bytes": "6f06",
+          "opcode": "6F06",
+          "instruction": "ble     $c13400"
+        },
+        {
+          "pc": "C133FA",
+          "length": 6,
+          "bytes": "3d7c003ffffe",
+          "opcode": "3D7C",
+          "instruction": "move.w  #$3f, (-$2,A6)"
+        }
+      ],
+      "reason": "Original NEG.W leaves -32768 negative. ASR.W #9 gives -64 or 0..63; CMP.W #63 / BLE always takes the branch. The source body and timing boundary remain implemented."
+    }
+  },
+  "actual_dispatch_completed_calls": 18432,
+  "dispatch_fixtures": [
+    {
+      "owner": "C12950",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 627,
+      "observed_owner_pcs": 435,
+      "unobserved_owner_pcs": [
+        "C129B8",
+        "C129BE",
+        "C129C0",
+        "C129C6",
+        "C129C8",
+        "C129CA",
+        "C129CC",
+        "C129D2",
+        "C129D4",
+        "C129D6",
+        "C129D8",
+        "C129DA",
+        "C129E0",
+        "C129E2",
+        "C129E8",
+        "C129EC",
+        "C129F2",
+        "C12CC8",
+        "C12CCE",
+        "C12CD0",
+        "C12CD2",
+        "C12CD4",
+        "C12CDA",
+        "C12CDC",
+        "C12CDE",
+        "C12CE0",
+        "C12CE2",
+        "C12CE8",
+        "C12E68",
+        "C12E6C",
+        "C12E6E",
+        "C12E74",
+        "C12E78",
+        "C12E7A",
+        "C12E7C",
+        "C12E7E",
+        "C12E84",
+        "C12E86",
+        "C12E92",
+        "C12E96",
+        "C12E98",
+        "C12E9E",
+        "C12EA2",
+        "C12EA4",
+        "C12EA6",
+        "C12EA8",
+        "C12EAE",
+        "C12EB0",
+        "C12EBC",
+        "C12EC0",
+        "C12EC2",
+        "C12EC6",
+        "C12EC8",
+        "C12ECA",
+        "C12ECC",
+        "C12ED0",
+        "C12ED2",
+        "C12EDE",
+        "C12EE2",
+        "C12EE4",
+        "C12EE8",
+        "C12EEC",
+        "C12EEE",
+        "C12EF4",
+        "C12EF8",
+        "C12EFA",
+        "C12F00",
+        "C12F04",
+        "C12F06",
+        "C12F08",
+        "C12F0A",
+        "C12F10",
+        "C12F12",
+        "C12F66",
+        "C12F6A",
+        "C12F6C",
+        "C12F70",
+        "C12F72",
+        "C12F74",
+        "C12F78",
+        "C12F7A",
+        "C12F7C",
+        "C12F7E",
+        "C12F84",
+        "C12F86",
+        "C12F8A",
+        "C12F8E",
+        "C12F90",
+        "C12F94",
+        "C12F96",
+        "C12F98",
+        "C12F9A",
+        "C12F9C",
+        "C12FA2",
+        "C12FA4",
+        "C12FB0",
+        "C12FB4",
+        "C12FB6",
+        "C12FBC",
+        "C12FC0",
+        "C12FC2",
+        "C12FC4",
+        "C12FC6",
+        "C12FC8",
+        "C12FCE",
+        "C12FD0",
+        "C12FDC",
+        "C12FE0",
+        "C12FE2",
+        "C12FE8",
+        "C12FEC",
+        "C12FEE",
+        "C12FF0",
+        "C12FF2",
+        "C12FF8",
+        "C12FFA",
+        "C13006",
+        "C1300A",
+        "C1300C",
+        "C13010",
+        "C13012",
+        "C13014",
+        "C13016",
+        "C1301A",
+        "C1301C",
+        "C13028",
+        "C1302C",
+        "C1302E",
+        "C13032",
+        "C13036",
+        "C13038",
+        "C1303E",
+        "C13042",
+        "C13044",
+        "C1304A",
+        "C1304E",
+        "C13050",
+        "C13052",
+        "C13054",
+        "C1305A",
+        "C1305C",
+        "C13068",
+        "C13070",
+        "C13072",
+        "C13076",
+        "C13078",
+        "C1307A",
+        "C1307C",
+        "C1307E",
+        "C13080",
+        "C13082",
+        "C13088",
+        "C1308C",
+        "C13090",
+        "C13094",
+        "C13096",
+        "C13098",
+        "C1309A",
+        "C1309C",
+        "C1309E",
+        "C130A0",
+        "C130A6",
+        "C130AA",
+        "C130BA",
+        "C130C2",
+        "C130E4",
+        "C130E8",
+        "C130EA",
+        "C130EE",
+        "C130F0",
+        "C130F4",
+        "C130F6",
+        "C130FA",
+        "C130FC",
+        "C130FE",
+        "C13100",
+        "C13102",
+        "C13104",
+        "C13106",
+        "C1310C",
+        "C13110",
+        "C13112",
+        "C13116",
+        "C13118",
+        "C1311A",
+        "C13120",
+        "C13122",
+        "C1315A",
+        "C1315E",
+        "C13160",
+        "C13164",
+        "C13166"
+      ],
+      "ordered_custom_writes": 2816,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C12950_on.log",
+        "sha256": "32436f183bbc022da1bb4fb036b3e5f511604847de17ae08ed65a8074af400d2"
+      }
+    },
+    {
+      "owner": "C12950",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 627,
+      "observed_owner_pcs": 435,
+      "unobserved_owner_pcs": [
+        "C129B8",
+        "C129BE",
+        "C129C0",
+        "C129C6",
+        "C129C8",
+        "C129CA",
+        "C129CC",
+        "C129D2",
+        "C129D4",
+        "C129D6",
+        "C129D8",
+        "C129DA",
+        "C129E0",
+        "C129E2",
+        "C129E8",
+        "C129EC",
+        "C129F2",
+        "C12CC8",
+        "C12CCE",
+        "C12CD0",
+        "C12CD2",
+        "C12CD4",
+        "C12CDA",
+        "C12CDC",
+        "C12CDE",
+        "C12CE0",
+        "C12CE2",
+        "C12CE8",
+        "C12E68",
+        "C12E6C",
+        "C12E6E",
+        "C12E74",
+        "C12E78",
+        "C12E7A",
+        "C12E7C",
+        "C12E7E",
+        "C12E84",
+        "C12E86",
+        "C12E92",
+        "C12E96",
+        "C12E98",
+        "C12E9E",
+        "C12EA2",
+        "C12EA4",
+        "C12EA6",
+        "C12EA8",
+        "C12EAE",
+        "C12EB0",
+        "C12EBC",
+        "C12EC0",
+        "C12EC2",
+        "C12EC6",
+        "C12EC8",
+        "C12ECA",
+        "C12ECC",
+        "C12ED0",
+        "C12ED2",
+        "C12EDE",
+        "C12EE2",
+        "C12EE4",
+        "C12EE8",
+        "C12EEC",
+        "C12EEE",
+        "C12EF4",
+        "C12EF8",
+        "C12EFA",
+        "C12F00",
+        "C12F04",
+        "C12F06",
+        "C12F08",
+        "C12F0A",
+        "C12F10",
+        "C12F12",
+        "C12F66",
+        "C12F6A",
+        "C12F6C",
+        "C12F70",
+        "C12F72",
+        "C12F74",
+        "C12F78",
+        "C12F7A",
+        "C12F7C",
+        "C12F7E",
+        "C12F84",
+        "C12F86",
+        "C12F8A",
+        "C12F8E",
+        "C12F90",
+        "C12F94",
+        "C12F96",
+        "C12F98",
+        "C12F9A",
+        "C12F9C",
+        "C12FA2",
+        "C12FA4",
+        "C12FB0",
+        "C12FB4",
+        "C12FB6",
+        "C12FBC",
+        "C12FC0",
+        "C12FC2",
+        "C12FC4",
+        "C12FC6",
+        "C12FC8",
+        "C12FCE",
+        "C12FD0",
+        "C12FDC",
+        "C12FE0",
+        "C12FE2",
+        "C12FE8",
+        "C12FEC",
+        "C12FEE",
+        "C12FF0",
+        "C12FF2",
+        "C12FF8",
+        "C12FFA",
+        "C13006",
+        "C1300A",
+        "C1300C",
+        "C13010",
+        "C13012",
+        "C13014",
+        "C13016",
+        "C1301A",
+        "C1301C",
+        "C13028",
+        "C1302C",
+        "C1302E",
+        "C13032",
+        "C13036",
+        "C13038",
+        "C1303E",
+        "C13042",
+        "C13044",
+        "C1304A",
+        "C1304E",
+        "C13050",
+        "C13052",
+        "C13054",
+        "C1305A",
+        "C1305C",
+        "C13068",
+        "C13070",
+        "C13072",
+        "C13076",
+        "C13078",
+        "C1307A",
+        "C1307C",
+        "C1307E",
+        "C13080",
+        "C13082",
+        "C13088",
+        "C1308C",
+        "C13090",
+        "C13094",
+        "C13096",
+        "C13098",
+        "C1309A",
+        "C1309C",
+        "C1309E",
+        "C130A0",
+        "C130A6",
+        "C130AA",
+        "C130BA",
+        "C130C2",
+        "C130E4",
+        "C130E8",
+        "C130EA",
+        "C130EE",
+        "C130F0",
+        "C130F4",
+        "C130F6",
+        "C130FA",
+        "C130FC",
+        "C130FE",
+        "C13100",
+        "C13102",
+        "C13104",
+        "C13106",
+        "C1310C",
+        "C13110",
+        "C13112",
+        "C13116",
+        "C13118",
+        "C1311A",
+        "C13120",
+        "C13122",
+        "C1315A",
+        "C1315E",
+        "C13160",
+        "C13164",
+        "C13166"
+      ],
+      "ordered_custom_writes": 2816,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C12950_shadow.log",
+        "sha256": "32436f183bbc022da1bb4fb036b3e5f511604847de17ae08ed65a8074af400d2"
+      }
+    },
+    {
+      "owner": "C12950",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 627,
+      "observed_owner_pcs": 435,
+      "unobserved_owner_pcs": [
+        "C129B8",
+        "C129BE",
+        "C129C0",
+        "C129C6",
+        "C129C8",
+        "C129CA",
+        "C129CC",
+        "C129D2",
+        "C129D4",
+        "C129D6",
+        "C129D8",
+        "C129DA",
+        "C129E0",
+        "C129E2",
+        "C129E8",
+        "C129EC",
+        "C129F2",
+        "C12CC8",
+        "C12CCE",
+        "C12CD0",
+        "C12CD2",
+        "C12CD4",
+        "C12CDA",
+        "C12CDC",
+        "C12CDE",
+        "C12CE0",
+        "C12CE2",
+        "C12CE8",
+        "C12E68",
+        "C12E6C",
+        "C12E6E",
+        "C12E74",
+        "C12E78",
+        "C12E7A",
+        "C12E7C",
+        "C12E7E",
+        "C12E84",
+        "C12E86",
+        "C12E92",
+        "C12E96",
+        "C12E98",
+        "C12E9E",
+        "C12EA2",
+        "C12EA4",
+        "C12EA6",
+        "C12EA8",
+        "C12EAE",
+        "C12EB0",
+        "C12EBC",
+        "C12EC0",
+        "C12EC2",
+        "C12EC6",
+        "C12EC8",
+        "C12ECA",
+        "C12ECC",
+        "C12ED0",
+        "C12ED2",
+        "C12EDE",
+        "C12EE2",
+        "C12EE4",
+        "C12EE8",
+        "C12EEC",
+        "C12EEE",
+        "C12EF4",
+        "C12EF8",
+        "C12EFA",
+        "C12F00",
+        "C12F04",
+        "C12F06",
+        "C12F08",
+        "C12F0A",
+        "C12F10",
+        "C12F12",
+        "C12F66",
+        "C12F6A",
+        "C12F6C",
+        "C12F70",
+        "C12F72",
+        "C12F74",
+        "C12F78",
+        "C12F7A",
+        "C12F7C",
+        "C12F7E",
+        "C12F84",
+        "C12F86",
+        "C12F8A",
+        "C12F8E",
+        "C12F90",
+        "C12F94",
+        "C12F96",
+        "C12F98",
+        "C12F9A",
+        "C12F9C",
+        "C12FA2",
+        "C12FA4",
+        "C12FB0",
+        "C12FB4",
+        "C12FB6",
+        "C12FBC",
+        "C12FC0",
+        "C12FC2",
+        "C12FC4",
+        "C12FC6",
+        "C12FC8",
+        "C12FCE",
+        "C12FD0",
+        "C12FDC",
+        "C12FE0",
+        "C12FE2",
+        "C12FE8",
+        "C12FEC",
+        "C12FEE",
+        "C12FF0",
+        "C12FF2",
+        "C12FF8",
+        "C12FFA",
+        "C13006",
+        "C1300A",
+        "C1300C",
+        "C13010",
+        "C13012",
+        "C13014",
+        "C13016",
+        "C1301A",
+        "C1301C",
+        "C13028",
+        "C1302C",
+        "C1302E",
+        "C13032",
+        "C13036",
+        "C13038",
+        "C1303E",
+        "C13042",
+        "C13044",
+        "C1304A",
+        "C1304E",
+        "C13050",
+        "C13052",
+        "C13054",
+        "C1305A",
+        "C1305C",
+        "C13068",
+        "C13070",
+        "C13072",
+        "C13076",
+        "C13078",
+        "C1307A",
+        "C1307C",
+        "C1307E",
+        "C13080",
+        "C13082",
+        "C13088",
+        "C1308C",
+        "C13090",
+        "C13094",
+        "C13096",
+        "C13098",
+        "C1309A",
+        "C1309C",
+        "C1309E",
+        "C130A0",
+        "C130A6",
+        "C130AA",
+        "C130BA",
+        "C130C2",
+        "C130E4",
+        "C130E8",
+        "C130EA",
+        "C130EE",
+        "C130F0",
+        "C130F4",
+        "C130F6",
+        "C130FA",
+        "C130FC",
+        "C130FE",
+        "C13100",
+        "C13102",
+        "C13104",
+        "C13106",
+        "C1310C",
+        "C13110",
+        "C13112",
+        "C13116",
+        "C13118",
+        "C1311A",
+        "C13120",
+        "C13122",
+        "C1315A",
+        "C1315E",
+        "C13160",
+        "C13164",
+        "C13166"
+      ],
+      "ordered_custom_writes": 2816,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C12950_sandbox.log",
+        "sha256": "32436f183bbc022da1bb4fb036b3e5f511604847de17ae08ed65a8074af400d2"
+      }
+    },
+    {
+      "owner": "C131BE",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 145,
+      "observed_owner_pcs": 140,
+      "unobserved_owner_pcs": [
+        "C1323E",
+        "C13364",
+        "C13368",
+        "C1336A",
+        "C1336E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C131BE_on.log",
+        "sha256": "fd141667a5760163b053c7b3f4f0a7686c18c2b0425fa9b5ecc8030423f42e61"
+      }
+    },
+    {
+      "owner": "C131BE",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 145,
+      "observed_owner_pcs": 140,
+      "unobserved_owner_pcs": [
+        "C1323E",
+        "C13364",
+        "C13368",
+        "C1336A",
+        "C1336E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C131BE_shadow.log",
+        "sha256": "fd141667a5760163b053c7b3f4f0a7686c18c2b0425fa9b5ecc8030423f42e61"
+      }
+    },
+    {
+      "owner": "C131BE",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 145,
+      "observed_owner_pcs": 140,
+      "unobserved_owner_pcs": [
+        "C1323E",
+        "C13364",
+        "C13368",
+        "C1336A",
+        "C1336E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C131BE_sandbox.log",
+        "sha256": "fd141667a5760163b053c7b3f4f0a7686c18c2b0425fa9b5ecc8030423f42e61"
+      }
+    },
+    {
+      "owner": "C13176",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 2560,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C13176_on.log",
+        "sha256": "ab87cc573f510586d8bf01463adff5af4f50ed5ac725bd735544b73b44c0e1a1"
+      }
+    },
+    {
+      "owner": "C13176",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 2560,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C13176_shadow.log",
+        "sha256": "ab87cc573f510586d8bf01463adff5af4f50ed5ac725bd735544b73b44c0e1a1"
+      }
+    },
+    {
+      "owner": "C13176",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 2560,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C13176_sandbox.log",
+        "sha256": "ab87cc573f510586d8bf01463adff5af4f50ed5ac725bd735544b73b44c0e1a1"
+      }
+    },
+    {
+      "owner": "C133B2",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C133FA"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C133B2_on.log",
+        "sha256": "aa8f484ad83e14b2815b8fbd7d8cbc153ff70df5701798c2e9cd9a6eb69b8bf8"
+      }
+    },
+    {
+      "owner": "C133B2",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C133FA"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C133B2_shadow.log",
+        "sha256": "aa8f484ad83e14b2815b8fbd7d8cbc153ff70df5701798c2e9cd9a6eb69b8bf8"
+      }
+    },
+    {
+      "owner": "C133B2",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 34,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C133FA"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C133B2_sandbox.log",
+        "sha256": "aa8f484ad83e14b2815b8fbd7d8cbc153ff70df5701798c2e9cd9a6eb69b8bf8"
+      }
+    },
+    {
+      "owner": "C13396",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 10,
+      "observed_owner_pcs": 10,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C13396_on.log",
+        "sha256": "935375ffc18ea0fb9bf093039a1d3ef376549f42b30a9e99e7baf44f400040b5"
+      }
+    },
+    {
+      "owner": "C13396",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 10,
+      "observed_owner_pcs": 10,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C13396_shadow.log",
+        "sha256": "935375ffc18ea0fb9bf093039a1d3ef376549f42b30a9e99e7baf44f400040b5"
+      }
+    },
+    {
+      "owner": "C13396",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 10,
+      "observed_owner_pcs": 10,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C13396_sandbox.log",
+        "sha256": "935375ffc18ea0fb9bf093039a1d3ef376549f42b30a9e99e7baf44f400040b5"
+      }
+    },
+    {
+      "owner": "C52EC8",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C52EC8_on.log",
+        "sha256": "a9b0b7005876e977e91635c33bcc45a7fbd5e77362dd4c32a60fd46395df84a4"
+      }
+    },
+    {
+      "owner": "C52EC8",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C52EC8_shadow.log",
+        "sha256": "a9b0b7005876e977e91635c33bcc45a7fbd5e77362dd4c32a60fd46395df84a4"
+      }
+    },
+    {
+      "owner": "C52EC8",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/control_readouts_dispatch_C52EC8_sandbox.log",
+        "sha256": "a9b0b7005876e977e91635c33bcc45a7fbd5e77362dd4c32a60fd46395df84a4"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C12950": {
+          "calls": 16010,
+          "compared": 15888,
+          "matched": 15888,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 122
+        },
+        "C131BE": {
+          "calls": 14,
+          "compared": 14,
+          "matched": 14,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C13176": {
+          "calls": 1,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1
+        },
+        "C133B2": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C13396": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C52EC8": {
+          "calls": 60,
+          "compared": 59,
+          "matched": 59,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1
+        }
+      },
+      "sandbox": {
+        "C12950": {
+          "calls": 16010,
+          "compared": 16010,
+          "matched": 16010,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C131BE": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C13176": {
+          "calls": 1,
+          "compared": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C133B2": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C13396": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C52EC8": {
+          "calls": 5,
+          "compared": 5,
+          "matched": 5,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C133B2",
+            "name": "record_6e_step",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13396",
+            "name": "five_eighths",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C52EC8",
+            "name": "long_divide",
+            "calls": 25,
+            "compared": 24,
+            "matched": 24,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 941,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12950",
+            "name": "update_control_record_readouts",
+            "calls": 4891,
+            "compared": 4825,
+            "matched": 4825,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 66,
+            "mean_cycles": 878,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C131BE",
+            "name": "scale_control_record_magnitude",
+            "calls": 7,
+            "compared": 7,
+            "matched": 7,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 453,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C12950_C131BE_C13176_C133B2_C13396_C52EC8_demo01_shadow.json",
+          "sha256": "f67b3135e605c12db4e5ac8b000d3f0b3e4cb49824eaf2ef7a2d34246415789f"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C133B2",
+            "name": "record_6e_step",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13396",
+            "name": "five_eighths",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C52EC8",
+            "name": "long_divide",
+            "calls": 22,
+            "compared": 22,
+            "matched": 22,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1762,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12950",
+            "name": "update_control_record_readouts",
+            "calls": 8037,
+            "compared": 8001,
+            "matched": 8001,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 36,
+            "mean_cycles": 607,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C131BE",
+            "name": "scale_control_record_magnitude",
+            "calls": 4,
+            "compared": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 252,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C12950_C131BE_C13176_C133B2_C13396_C52EC8_qual_carrier_success_shadow.json",
+          "sha256": "0ccf2374cebd8f863e937ad218f8d4a4c6d132c30f479b7b819a53fdbbe6ea62"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C133B2",
+            "name": "record_6e_step",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13396",
+            "name": "five_eighths",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C52EC8",
+            "name": "long_divide",
+            "calls": 13,
+            "compared": 13,
+            "matched": 13,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1672,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12950",
+            "name": "update_control_record_readouts",
+            "calls": 3082,
+            "compared": 3062,
+            "matched": 3062,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 20,
+            "mean_cycles": 423,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C131BE",
+            "name": "scale_control_record_magnitude",
+            "calls": 3,
+            "compared": 3,
+            "matched": 3,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 246,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C12950_C131BE_C13176_C133B2_C13396_C52EC8_qual_fail_crashes_shadow.json",
+          "sha256": "c3edbaca519db6450c824588d4625eb6493e58e9812049d32061cfd520c983c0"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C133B2",
+            "name": "record_6e_step",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13396",
+            "name": "five_eighths",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C52EC8",
+            "name": "long_divide",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12950",
+            "name": "update_control_record_readouts",
+            "calls": 4891,
+            "compared": 4891,
+            "matched": 4891,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 924,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C131BE",
+            "name": "scale_control_record_magnitude",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C12950_C131BE_C13176_C133B2_C13396_C52EC8_demo01_sandbox.json",
+          "sha256": "194bb8035cbd2b209944c607d7e242651479ea79f8a8276760c29598a74eb341"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C133B2",
+            "name": "record_6e_step",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13396",
+            "name": "five_eighths",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C52EC8",
+            "name": "long_divide",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12950",
+            "name": "update_control_record_readouts",
+            "calls": 8037,
+            "compared": 8037,
+            "matched": 8037,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 623,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C131BE",
+            "name": "scale_control_record_magnitude",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C12950_C131BE_C13176_C133B2_C13396_C52EC8_qual_carrier_success_sandbox.json",
+          "sha256": "66d4c0387db0dce39f94d3acb3acc5f05a810f88be16edc3602d9c8a37e9eb15"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C133B2",
+            "name": "record_6e_step",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C13396",
+            "name": "five_eighths",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C52EC8",
+            "name": "long_divide",
+            "calls": 5,
+            "compared": 5,
+            "matched": 5,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2115,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12950",
+            "name": "update_control_record_readouts",
+            "calls": 3082,
+            "compared": 3082,
+            "matched": 3082,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 444,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C131BE",
+            "name": "scale_control_record_magnitude",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C12950_C131BE_C13176_C133B2_C13396_C52EC8_qual_fail_crashes_sandbox.json",
+          "sha256": "fc33173bf2afb028a44dfed832cb76dd27360c4455e3fc03542a255f0aa4b613"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 1,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C13176_demo01_shadow.json",
+          "sha256": "1d995830b82be67972cf6e2e4bc01d17608d696620a4dedccc0e801c8975977a"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C13176_qual_carrier_success_shadow.json",
+          "sha256": "bf21319bb94b76b7fdc14a95830a5254fc855ea4626d0d0cbd8ee676ae656fe0"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C13176_qual_fail_crashes_shadow.json",
+          "sha256": "bf21319bb94b76b7fdc14a95830a5254fc855ea4626d0d0cbd8ee676ae656fe0"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5128,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C13176_demo01_sandbox.json",
+          "sha256": "97dbea983e0d6d83f5a8f1b64d19288b9a240138aa8019c1e31383f3f76b2d24"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C13176_qual_carrier_success_sandbox.json",
+          "sha256": "bf21319bb94b76b7fdc14a95830a5254fc855ea4626d0d0cbd8ee676ae656fe0"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C13176",
+            "name": "dispatch_event_sound",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C13176_qual_fail_crashes_sandbox.json",
+          "sha256": "bf21319bb94b76b7fdc14a95830a5254fc855ea4626d0d0cbd8ee676ae656fe0"
+        }
+      }
+    ],
+    "shadow_matches": 15961,
+    "sandbox_matches": 16016,
+    "owners_with_completed_recording_comparisons": [
+      "C12950",
+      "C131BE",
+      "C13176",
+      "C52EC8"
+    ],
+    "uncalled_owners_with_independent_whole_fixtures": [
+      "C133B2",
+      "C13396"
+    ],
+    "called_without_completed_recording_comparisons": [],
+    "unchanged_checker_rejections_remain_explicit": true
+  },
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "actual_clock_and_busy_reads": true,
+    "real_children_execute_original_bytes": true,
+    "actual_dispatch_uses_generated_child_continuations": true,
+    "shared_machine_observer_unchanged": true,
+    "classification_distinct_from_packet_observation": true
+  },
+  "instruction_dma": {
+    "local_instructions": 867,
+    "local_cases": 27744,
+    "previous_unique_instructions": 29300,
+    "overlap_instructions": 0,
+    "overlap_pcs": [],
+    "combined_unique_instructions": 30167,
+    "combined_cases": 965344,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 39,
+  "generator_compatibility": {
+    "baseline": "ec0b509a",
+    "unchanged_generator_outputs": [
+      "command_dispatch",
+      "postflight_scheduler",
+      "context_publication",
+      "menu_transition",
+      "menu_setup",
+      "menu_cold",
+      "menu_followup",
+      "menu_outcome",
+      "menu_return",
+      "menu_context_finish",
+      "postflight_completion",
+      "postflight_messages",
+      "postflight_file_callers",
+      "input_device_callbacks",
+      "input_display_setup",
+      "main_loop_timers",
+      "main_loop_control_messages",
+      "record_control_actions",
+      "main_loop_flight_controls",
+      "flight_record_actions",
+      "flight_motion_helpers",
+      "flight_dynamics",
+      "flight_geometry",
+      "flight_markers",
+      "projection_readouts",
+      "hud_stream",
+      "hud_parents",
+      "hud_readout_parents",
+      "hud_text_helpers",
+      "hud_projection_parents",
+      "hud_history_stream",
+      "render_parents",
+      "face_stream_parents",
+      "face_list_parents",
+      "hud_render_parents",
+      "render_leaf_helpers",
+      "render_entry_helpers",
+      "segment_projection",
+      "corner_view"
+    ],
+    "shared_files_unchanged": [
+      "analysis/data/corner_view_source_scope.json",
+      "analysis/data/render_entry_helpers_scope_inventory.json",
+      "analysis/data/render_leaf_helpers_scope_inventory.json",
+      "port/game/corner_view.c",
+      "port/game/corner_view.h",
+      "port/game/glue/glue.h",
+      "port/game/glue/glue_child_call.c",
+      "port/game/glue/glue_command_dispatch_step.c",
+      "port/game/glue/glue_corner_view.c",
+      "port/game/glue/glue_corner_view.h",
+      "port/game/glue/glue_corner_view_step.c",
+      "port/game/glue/glue_render_leaf_helpers_math.h",
+      "port/game/glue/glue_renderer_step_math.h",
+      "port/game/glue/glue_segment_projection.c",
+      "port/game/glue/glue_step.h",
+      "port/game/memory.h",
+      "port/game/segment_projection.c",
+      "port/machine/blitter.c",
+      "port/machine/bus.c",
+      "port/machine/machine.c",
+      "port/native_data_allowlist.txt",
+      "port/recomp/recomp_ports.c",
+      "port/recomp/recomp_runtime.c",
+      "scripts/check_native_build.py",
+      "scripts/native_frame_count.py",
+      "tools/recomp/active_planes_step_oracle.c",
+      "tools/recomp/audit_render_entry_helpers_scope.py",
+      "tools/recomp/audit_render_leaf_helpers_scope.py",
+      "tools/recomp/check_whole_call_glue.py",
+      "tools/recomp/hud_stream_blitter_state.c",
+      "tools/recomp/hud_stream_hardware_log.c",
+      "tools/recomp/hud_stream_machine_variant.py",
+      "tools/recomp/render_entry_helpers_bus_budget.c",
+      "tools/recomp/render_entry_helpers_child_call.c",
+      "tools/recomp/render_entry_helpers_hardware_log.c",
+      "tools/recomp/render_leaf_helpers_bus_budget.c",
+      "tools/recomp/render_leaf_helpers_child_call.c",
+      "tools/recomp/render_leaf_helpers_hardware_log.c",
+      "tools/recomp/structural_write_log.c"
+    ],
+    "comparison": "Before/after generator recipes, preserving exact preexisting committed outputs even when historically stale"
+  },
+  "shared_files_unchanged": [
+    {
+      "path": "analysis/data/render_entry_helpers_scope_inventory.json",
+      "sha256": "7f7d4a0747c69bceb4df1a2533df763ff17d38252084e2d1ca212db7bd09af50"
+    },
+    {
+      "path": "analysis/data/render_leaf_helpers_scope_inventory.json",
+      "sha256": "96d6f04483b40edc0393c09f65383b708bd0717d7c32a88fdbec3865f227f511"
+    },
+    {
+      "path": "port/game/corner_view.c",
+      "sha256": "06c72f11c68056fff9d6b77a189c9178aa973b03cb898c002a1bb0d790d08eb6"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "port/game/glue/glue_command_dispatch_step.c",
+      "sha256": "f79e324e37a96f2a3871f28a6f754b2660de879757fec534c670b2a71ce7ad70"
+    },
+    {
+      "path": "port/game/glue/glue_corner_view.c",
+      "sha256": "f9d1cefcafd53f3943708e1bed497b6fc8c53d5f20c1a5772f9f5de4164f93cc"
+    },
+    {
+      "path": "port/game/glue/glue_corner_view_step.c",
+      "sha256": "16a18a7662fc5422ad4c7d936fe292c8ba441d151614e3ccc8c5e99ec848ab7d"
+    },
+    {
+      "path": "port/game/glue/glue_render_leaf_helpers_math.h",
+      "sha256": "a36874936a741e02cda9eab077ef7118cd04e6fa568217e4304c3cb470a169ad"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_segment_projection.c",
+      "sha256": "a71d82d5f9a11a5d8b6aba6b1ce324d2b4e6109f2c003bcd951f1dfb1910a5cd"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/segment_projection.c",
+      "sha256": "f5de44976412e39c4e324b2b0b9380272830a7b7b0e4aa289e91c508e48e2065"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/audit_render_entry_helpers_scope.py",
+      "sha256": "2b61368f8565a38f58a0adf2ea378817e50feb318252286f7651e985d6d6f914"
+    },
+    {
+      "path": "tools/recomp/audit_render_leaf_helpers_scope.py",
+      "sha256": "8c151082a7ab5b4901d177a04c09cf81292ded22c3d608d27e9f5bfb572c3c46"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_bus_budget.c",
+      "sha256": "08d367ed7ac8485c1de820403edf362eeabe3e0b3089b108deca83bde146e30e"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_child_call.c",
+      "sha256": "24144fe3677ed47e7d5da543004ff439f30d385e42a6d60f510f2069fd2989df"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_hardware_log.c",
+      "sha256": "9a07710fa426f867b4d5277f14424e0f40d9d1e6073f8f0bde1812eaabc8b1fa"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_bus_budget.c",
+      "sha256": "291b65daf67fc6b2663c06fd9560d4f168da37a5fdc33cb02b16f1a292b4075a"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_child_call.c",
+      "sha256": "570889406cd1f5158564ebd468bbb6991ea883b7b0e811b90b547a233f5ef394"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_hardware_log.c",
+      "sha256": "4de438129c65ce5d75a89296ec2add9d4b45bc52d56219adf97564857fc543b8"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    }
+  ],
+  "full_gate": {
+    "rows": 612,
+    "recordings": 3,
+    "shadow_matches": 571427,
+    "sandbox_matches": 458087,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 309609,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "1a86948e26f5205d2569b86dd386f6177e6ecc403aac52eb302de857f2fe7e71"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 208647,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "e48dcd388b15c519b6bbb0fd32b14e5812992207dbd34381e3571e53ec98d7b3"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 53171,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "6e3966e32a414c205f1e61cda42ed0d408ec9723b287938e95668f08ec9454d1"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 154891,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "22a5ade2ada094dca973b9666555f7ac89419c437577d3a3518eb092f1f66c05"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 254965,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "944a38c0a98f98fc5484edd38d0b79b32ca81e1fef672a426443ddf1be73f4c1"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 48231,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "7e7d66c1f335ed517f56835447e22ef82bc718b736049b48b62305564d335003"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 424,
+    "all_different_pixels": 34144,
+    "deferred": true
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 2163424926,
+    "build_gib": 2.015
+  },
+  "limits": [
+    "Both whole-call unions cover 866/867. C133FA is proved unreachable over every original word input; its source instruction remains implemented and independently DMA-tested.",
+    "Four owners have completed normal-C recording comparisons. C133B2 and C13396 are uncalled, with independent whole proofs. The unchanged generic zero-call rejection remains explicit.",
+    "Initial C12950 full-call comparisons passed but branch coverage failed; independent valid input witnesses complete final coverage. Earlier logs are retained.",
+    "Older generator outputs are unchanged; historically stale committed command-dispatch output is retained exactly.",
+    "C2C392 producer-domain evidence, other larger parents and older partial adapters, C1612C graphics-wait integration and full original cold/indirect/callback reconciliation remain game work.",
+    "ALL424/34144, Copper fade and Kickstart services remain deferred."
+  ],
+  "next": {
+    "entries": [
+      "C2C392",
+      "C2CAA0",
+      "C2CA92",
+      "C2CA26",
+      "C2CB86",
+      "C2CB82",
+      "C2CBBC"
+    ],
+    "scope": "Original forty-pointer extent is read; all action-byte producers and computed target domain still require reconciliation before implementation. Two source-only pitch peers execute actual helpers.",
+    "implementation": false
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/control_readouts.c",
+      "sha256": "66afbb976684e920621b7b38b7e433d4451fd190b3c67bb0c366d08739a71c76"
+    },
+    {
+      "path": "port/game/control_readouts.h",
+      "sha256": "e0fbfefae229b6da58701268db83fb600bc0876ff1e1c62f4c0b303311c030f8"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "c3efbfa31515aa67c5f5d736f430b7a131ed74a245bf40e265310bf20feec0db"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "9d899c238289a144503fce8392f3b5c7facc5eeb1ad70c03d82933d0b6fd3bf5"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "52b3158056563055fe9aedc7f38e90b9c07dce93518797667dcd17efee80c48d"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "da87ecb6dccb2758b7efe35fc5cf2d0c1218b861e1824af42c4d9930f2b73807"
+    },
+    {
+      "path": "port/game/glue/glue_batch20.c",
+      "sha256": "67e1496623640bb5243f1ba3de44948ccb9633bd2691b0bc62d8a54bb2dcc7dd"
+    },
+    {
+      "path": "port/game/glue/glue_batch63.c",
+      "sha256": "6b21c34685b9ab4069760eff20f552d1f4a350135614cf22847a1207b0b58ae0"
+    },
+    {
+      "path": "port/game/glue/glue_batch9.c",
+      "sha256": "e568e958eec892a266cb362f59fd63e4dca068d4edbd9d72cb71ee4bc7fb48e2"
+    },
+    {
+      "path": "port/game/glue/glue_event_sound.c",
+      "sha256": "148af3c8d1fa7425d0ab61e739658f40b3701a943ecabccefed02c336874aab8"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts.c",
+      "sha256": "616f83e165cf96114cca8329b360d9278669a7077100c1ac1e693faf77ec00c5"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts.h",
+      "sha256": "fa892ec9e6e8aa23f64de827c7d9d58b3afab5a59a2c38e913cefc7d561e99ed"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts_math.h",
+      "sha256": "135f0b38b2bc57c112c244da834749039accf59b2cef0dc134cdb92ee86d7180"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts_step.c",
+      "sha256": "f515753aa5e50d302f1d39be729dd58488de7ce747b0890d6f1ccd3cd5d0f04b"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_control_readouts_source.py",
+      "sha256": "f72eed97a0c9611677d8ed08478b6a1f699659c6dc216a3f8f4e8bb5be879e9b"
+    },
+    {
+      "path": "tools/recomp/check_control_readouts.py",
+      "sha256": "7c2487e442fa7cd627804c65b3233c2dfcf5d54d591cdd0935fbdf48d7aba2b2"
+    },
+    {
+      "path": "tools/recomp/check_control_readouts_dispatch.py",
+      "sha256": "37acd1df2d266cf3aeb8981420a6220e2fe7430f634543879f653f2e2bc9768e"
+    },
+    {
+      "path": "tools/recomp/control_readouts_bus_budget.c",
+      "sha256": "84b2e0134d753b6344043b61aab0ebaec2e561e6c8bc1667d75de2c853648683"
+    },
+    {
+      "path": "tools/recomp/control_readouts_child_call.c",
+      "sha256": "3557472fb3dec5d94071a072a3787a51fdf2fb0b233e8541e55583a5449cdc39"
+    },
+    {
+      "path": "tools/recomp/control_readouts_contract_children.c",
+      "sha256": "84fe0e0bea5024051ebfe5e5dea8757640bb45fed150abe09e258a297daba210"
+    },
+    {
+      "path": "tools/recomp/control_readouts_contract_oracle.c",
+      "sha256": "6c5f040dd251cd5fa10e6166c1898fc43c0ad64d2e609dff9c2041260d38720c"
+    },
+    {
+      "path": "tools/recomp/control_readouts_dispatch_oracle.c",
+      "sha256": "2bcdb80b5c0344efc9c089efe4da1c7e8c7b55a09149f06ad070780527c5e745"
+    },
+    {
+      "path": "tools/recomp/control_readouts_fixture.h",
+      "sha256": "666ad914cfe0a61459978aef2f7b12331a7bc6f8aa09f8e1cdb98945d73cd008"
+    },
+    {
+      "path": "tools/recomp/control_readouts_hardware_log.c",
+      "sha256": "d3152e1c8061ed35ccf14dcd5955537dabbee6286fb645cb2093cfc09819fba3"
+    },
+    {
+      "path": "tools/recomp/control_readouts_oracle.c",
+      "sha256": "3c6ca6437e693f66963b9dd98965495a03736ff737fea9fbfcbd1fb46af030a0"
+    },
+    {
+      "path": "tools/recomp/verify_control_readouts_recordings.py",
+      "sha256": "e2893f41440a57a7135941099c856bdeb7d5b9f484bb9fcfd2cc4e1410308872"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/control_readouts_gnu.log",
+      "sha256": "9870641642312ca4fc63d94e0d9af9dcba9a859b1d3553817c26989a9ed970dc"
+    },
+    {
+      "path": "build/recomp/control_readouts_msvc_config.log",
+      "sha256": "e32982e655c902a438c77bb80c47a307fc8d5e473b72a65fefdad904d4a7b7a0"
+    },
+    {
+      "path": "build/recomp/control_readouts_msvc.log",
+      "sha256": "0e4792203db02089d6a35f11c1fa53514e8e22d93d2324e245b3dc38587d7b91"
+    },
+    {
+      "path": "build/recomp/control_readouts_full_gate.log",
+      "sha256": "ebcdcae84bc1c03315e5b5cd56814fb58b2a4404ac4273be48dde1d447bc98a3"
+    },
+    {
+      "path": "build/recomp/control_readouts_live.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/control_readouts_timing.log",
+      "sha256": "f370d13a2c557eed428ff6b2e6bda3e126599ecab2f025e2b3860f4449b3fc5d"
+    },
+    {
+      "path": "build/recomp/control_readouts_normal.log",
+      "sha256": "0cc7287e080e09db1e54726e3fe3a57993d9ded3710d0b8d05843746a3d5fc96"
+    },
+    {
+      "path": "build/recomp/control_readouts_dispatch_full.log",
+      "sha256": "8f231299c304e6055697a2755ac43fc26e6e2af830da5c51df7a14ab8188b0c4"
+    },
+    {
+      "path": "build/recomp/control_readouts_dma_local.log",
+      "sha256": "a3c88414e64a30b58e9f18197f673613e4e76a2199e91889512ccc8c89f02d75"
+    },
+    {
+      "path": "build/recomp/control_readouts_dma_union.log",
+      "sha256": "5a09ea13e35db2812239ecd56de06ffb6dacc47aad42932c5fc12832c3e76b2e"
+    },
+    {
+      "path": "build/recomp/control_readouts_compatibility.log",
+      "sha256": "f09b6c0938093015e34ef30904e054afe51063fa3cc91c8c28572d15838abd17"
+    },
+    {
+      "path": "build/recomp/control_readouts_contract_final.log",
+      "sha256": "30829e4720743b6a5049f3047b7bdce7820a8f9b93a579e76516406b7a528d7a"
+    },
+    {
+      "path": "build/recomp/control_readouts_whole_parent_final.log",
+      "sha256": "f8a71d2d31c8eb64a210d8257ca422ba2bbc3855eb1c93476db14c31a0c2f9ae"
+    }
+  ],
+  "retained_earlier_proofs": [
+    {
+      "path": "build/recomp/control_readouts_whole_full.log",
+      "sha256": "d9b70ee52eec7fda52185a170da7c361c28bf8906219930350a48abab0873e72"
+    }
+  ]
+}

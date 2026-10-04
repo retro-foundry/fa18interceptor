@@ -80,6 +80,8 @@ segment, projection and crossing upgrades retain registration and raise
 source-timed entries to 521. Twelve complete corner/view owners raise
 translated coverage to 537/624 and source-timed entries to 531; C200F6
 retains aggregate tail timing, with its resumable boundaries in C20100.
+Six complete control/readout owners raise translated coverage to 539/624
+and source-timed entries to 537.
 Seventy-three original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -87,6 +89,41 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- Six complete control/readout owners raise registration to 539 translated
+  plus 73 source-only entries: 612 rows, 537 source-timed (464 translated
+  plus 73 source-only). C12950/C131BE are newly registered; C13176/C133B2/
+  C13396/C52EC8 replace older adapters. Scope is 867 unique /0 shared PCs,
+  43 child contracts/sites, three sealed oracle arrays and both original
+  guarded computed target sets. Their eight branch stubs retain C131BE's
+  frame and are not standalone registrations. All 196,608 whole calls pass;
+  controlled and original unions each cover 866/867. C133FA is unreachable
+  for all 65,536 word inputs; its source body and DMA boundary remain.
+  Dispatch passes 18,432 calls; each mode has 6,144 hardware-free source
+  calls and 5,376 ordered Custom writes. Four owners pass normal C:
+  15,961 shadow /16,016 sandbox, with 124 incomplete shadow calls explicit.
+  C13176 has one completed isolated sandbox comparison. C133B2/C13396 are
+  uncalled with independent whole proofs; the unchanged generic checker
+  rejection remains. Initial C12950 CPU comparisons passed but branch
+  coverage failed; independent valid input witnesses complete final coverage.
+  Full 612-row gate passes 571,427/458,087, zero mismatches, exact seals
+  and poison frames. All 36,236 isolated live frames/seals match. Local DMA
+  passes 867/27,744; fresh combined DMA passes 30,167/965,344, independently
+  previous 29,300 plus 867 with zero overlap. All 39 older generator outputs,
+  shared core/observers, protected files and previous corner native code are
+  unchanged. GNU/MSVC Release pass; build/ is 2.015 GiB. Family exact through
+  600; ALL remains 424/34,144. See analysis/routines/native_c_control_readouts.md
+  and analysis/figures/native_control_readouts_checkpoint.json.
+  Next investigate complete C2C392 action ownership, four steering upgrades
+  and two source-only pitch peers C2CB82/C2CBBC. Forty contiguous original
+  pointer slots are read; all action-byte producers and the computed target
+  domain remain unresolved. The instruction decrements before sign-extending
+  the byte; preserve that order when auditing selector wrap. C241EE selects
+  packed parameter data at C2BB98 and C242D0 writes the action byte; follow
+  its table and C458A7 writers. No next production implementation exists.
+  Other larger parents, older partial adapters, C1612C graphics-wait
+  integration and full original cold/indirect/callback reconciliation remain
+  game work. Goal is not complete. Kickstart services and timing are deferred.
 
 - Twelve complete corner/view owners raise registration to 537 translated
   plus 73 source-only entries: 610 rows, 531 source-timed (458 translated
@@ -119,10 +156,9 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   pass; build/ is 1.974 GiB. Family exact through 600; ALL remains 424/34,144.
   See analysis/routines/native_c_corner_view.md and
   analysis/figures/native_corner_view_checkpoint.json.
-  Next complete C12950/C131BE control-record selectors and magnitude dispatch,
-  including both original guarded computed target sets and shared-frame tails.
-  Their source is read; no next implementation or registration decision yet.
-  C2C392 table extent is unresolved (at least twenty valid pointers, not eight).
+  Those C12950/C131BE control-record selectors and magnitude owners are
+  now complete above. C2C392 has forty contiguous original pointer slots;
+  its computed target producer domain remains unresolved.
   Other larger parents, older partial adapters, C1612C graphics-wait integration
   and full original cold/indirect/callback reconciliation remain game work.
   Goal is not complete. Kickstart services and timing remain deferred.

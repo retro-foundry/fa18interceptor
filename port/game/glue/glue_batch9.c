@@ -42,14 +42,7 @@ int glue_C13CDE(void) {
 }
 
 /* $C13396: five_eighths(short x): the result replaces x in its slot. */
-int glue_C13396(void) {
-    gaddr slot = A(7) + 6;
-    int16_t x = rd_s16(slot), r = five_eighths(x);
-    wr_s16(slot, r);
-    D(0) = (uint32_t)(int32_t)r;
-    SET_W(D(1), x >> 3);
-    return glue_return();
-}
+/* Complete C13396 is in glue_control_readouts.c. */
 
 /* $C50AB4: random_bit(); D0 = the bit. */
 int glue_C50AB4(void) {

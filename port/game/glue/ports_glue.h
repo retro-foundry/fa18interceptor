@@ -966,3 +966,5 @@ int glue_C1ECFC_step(void);
 #include "glue_segment_projection.h"
 
 #include "glue_corner_view.h"
+
+#include "glue_control_readouts.h"

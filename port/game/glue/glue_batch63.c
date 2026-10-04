@@ -34,17 +34,7 @@ int glue_C0833E(void) {
     return glue_return();
 }
 
-int glue_C133B2(void) {
-    gaddr record = rd_u32(CURRENT_RECORD);
-    int16_t value = rd_s16(record + 0x6E);
-    A(0) = record;
-    D(0) = (uint32_t)record_6e_step();
-    if ((rd_u8(record + 0x62) & 0xF0) != 0x30) {
-        if (value < 0) value = (int16_t)(0u - (uint16_t)value);
-        SET_W(D(1), (uint16_t)(value >> 9));
-    }
-    return glue_return();
-}
+/* Complete C133B2 is in glue_control_readouts.c. */
 
 
 

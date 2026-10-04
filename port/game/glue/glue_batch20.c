@@ -81,12 +81,7 @@ int glue_C0D384(void) {
 }
 
 /* $C52EC8: D0 / D1 -> D0 quotient, D1 remainder. */
-int glue_C52EC8(void) {
-    int32_t remainder, quotient = long_divide((int32_t)D(0), (int32_t)D(1), &remainder);
-    D(0) = (uint32_t)quotient;
-    D(1) = (uint32_t)remainder;
-    return glue_return();
-}
+/* Complete C52EC8 is in glue_control_readouts.c. */
 
 /* $C06132: A6 server data. D0 = A6 with MOVE.L's flags; X from the count's
  * ADDI. */

@@ -1,0 +1,221 @@
+/* Complete control/readouts proof, including cold internal paths and real children. */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "m68kcpu.h"
+#include "m68kops.h"
+#include "machine.h"
+#include "bus.h"
+#include "recomp_runtime.h"
+#include "recomp_ports.h"
+#include "memory.h"
+#include "ports_glue.h"
+#include "globals.h"
+
+extern int fa18_write_log_active,fa18_write_log_hardware;
+extern int fa18_structural_port_classified(uint32_t entry,int hardware);
+extern void fa18_structural_reset_write_log(void);
+extern void fa18_render_entry_helpers_fixture_begin(const char *phase);
+extern int fa18_structural_port_matched(uint32_t entry);
+extern int fa18_structural_port_unused(uint32_t entry);
+extern int fa18_ports_enter(int function,int label,int via_call);
+extern unsigned fa18_hud_hardware_count(void);
+extern void fa18_hud_hardware_begin(void);
+extern void fa18_render_entry_controlled_begin(uint32_t entry,unsigned scenario);
+extern void fa18_hud_hardware_reference(void);
+extern int fa18_hud_hardware_check(void);
+extern void fa18_render_entry_hardware_details(void);
+extern int64_t fa18_next_event;
+extern void fa18_render_entry_source_child(uint32_t ret,uint32_t sp);
+static uint32_t seed=0xc0f5f8u;
+static uint32_t random_value(void) {
+    seed^=seed<<13; seed^=seed>>17; seed^=seed<<5; return seed;
+}
+static uint8_t *read_file(const char *path,size_t *size) {
+    FILE *file=fopen(path,"rb"); long length; uint8_t *bytes;
+    if(!file) return NULL;
+    if(fseek(file,0,SEEK_END) || (length=ftell(file))<0 || fseek(file,0,SEEK_SET)) return NULL;
+    bytes=malloc((size_t)length);
+    if(!bytes || fread(bytes,1,(size_t)length,file)!=(size_t)length || fclose(file)) return NULL;
+    *size=(size_t)length; return bytes;
+}
+static uint32_t selected_entry=0xc12950u;
+static const uint32_t source_boundaries[]={0xC12950u,0xC12954u,0xC12958u,0xC1295Eu,0xC12960u,0xC12962u,0xC12964u,0xC12966u,0xC1296Cu,0xC1296Eu,0xC12974u,0xC1297Cu,0xC1297Eu,0xC12980u,0xC12986u,0xC1298Au,0xC1298Cu,0xC12990u,0xC12996u,0xC1299Cu,0xC1299Eu,0xC129A0u,0xC129A4u,0xC129AAu,0xC129AEu,0xC129B4u,0xC129B6u,0xC129B8u,0xC129BEu,0xC129C0u,0xC129C6u,0xC129C8u,0xC129CAu,0xC129CCu,0xC129D2u,0xC129D4u,0xC129D6u,0xC129D8u,0xC129DAu,0xC129E0u,0xC129E2u,0xC129E8u,0xC129ECu,0xC129F2u,0xC129F4u,0xC129FAu,0xC129FCu,0xC129FEu,0xC12A04u,0xC12A0Au,0xC12A10u,0xC12A14u,0xC12A1Au,0xC12A1Cu,0xC12A20u,0xC12A28u,0xC12A2Au,0xC12A2Cu,0xC12A2Eu,0xC12A30u,0xC12A32u,0xC12A34u,0xC12A36u,0xC12A38u,0xC12A3Au,0xC12A3Cu,0xC12A42u,0xC12A44u,0xC12A46u,0xC12A48u,0xC12A4Au,0xC12A50u,0xC12A56u,0xC12A5Au,0xC12A5Eu,0xC12A64u,0xC12A68u,0xC12A6Cu,0xC12A6Eu,0xC12A72u,0xC12A7Au,0xC12A7Cu,0xC12A7Eu,0xC12A80u,0xC12A82u,0xC12A84u,0xC12A86u,0xC12A88u,0xC12A8Au,0xC12A8Cu,0xC12A8Eu,0xC12A90u,0xC12A96u,0xC12A98u,0xC12A9Au,0xC12A9Cu,0xC12A9Eu,0xC12AA4u,0xC12AAAu,0xC12AAEu,0xC12AB2u,0xC12ABAu,0xC12ABCu,0xC12ABEu,0xC12AC0u,0xC12AC2u,0xC12AC4u,0xC12AC6u,0xC12AC8u,0xC12ACAu,0xC12ACCu,0xC12ACEu,0xC12AD4u,0xC12AD6u,0xC12AD8u,0xC12ADAu,0xC12ADCu,0xC12ADEu,0xC12AE0u,0xC12AE6u,0xC12AEAu,0xC12AF2u,0xC12AF6u,0xC12AFEu,0xC12B00u,0xC12B02u,0xC12B04u,0xC12B06u,0xC12B08u,0xC12B0Au,0xC12B0Cu,0xC12B0Eu,0xC12B10u,0xC12B16u,0xC12B18u,0xC12B1Au,0xC12B1Cu,0xC12B1Eu,0xC12B20u,0xC12B26u,0xC12B2Cu,0xC12B30u,0xC12B34u,0xC12B3Cu,0xC12B3Eu,0xC12B40u,0xC12B42u,0xC12B44u,0xC12B46u,0xC12B48u,0xC12B4Au,0xC12B4Cu,0xC12B4Eu,0xC12B50u,0xC12B56u,0xC12B58u,0xC12B5Au,0xC12B5Cu,0xC12B5Eu,0xC12B64u,0xC12B6Au,0xC12B6Eu,0xC12B72u,0xC12B7Au,0xC12B7Cu,0xC12B7Eu,0xC12B80u,0xC12B82u,0xC12B84u,0xC12B86u,0xC12B88u,0xC12B8Au,0xC12B8Cu,0xC12B8Eu,0xC12B90u,0xC12B96u,0xC12B98u,0xC12B9Au,0xC12B9Cu,0xC12B9Eu,0xC12BA0u,0xC12BA6u,0xC12BACu,0xC12BB0u,0xC12BB4u,0xC12BBCu,0xC12BBEu,0xC12BC0u,0xC12BC2u,0xC12BC4u,0xC12BC6u,0xC12BC8u,0xC12BCAu,0xC12BCCu,0xC12BCEu,0xC12BD4u,0xC12BD6u,0xC12BD8u,0xC12BDAu,0xC12BDCu,0xC12BE2u,0xC12BE8u,0xC12BECu,0xC12BF0u,0xC12BF8u,0xC12BFAu,0xC12BFCu,0xC12BFEu,0xC12C00u,0xC12C02u,0xC12C04u,0xC12C06u,0xC12C08u,0xC12C0Au,0xC12C0Cu,0xC12C12u,0xC12C14u,0xC12C16u,0xC12C18u,0xC12C1Au,0xC12C20u,0xC12C26u,0xC12C2Au,0xC12C2Cu,0xC12C34u,0xC12C36u,0xC12C38u,0xC12C3Au,0xC12C3Cu,0xC12C3Eu,0xC12C40u,0xC12C42u,0xC12C44u,0xC12C46u,0xC12C48u,0xC12C4Eu,0xC12C50u,0xC12C52u,0xC12C54u,0xC12C56u,0xC12C5Cu,0xC12C62u,0xC12C66u,0xC12C68u,0xC12C70u,0xC12C72u,0xC12C74u,0xC12C76u,0xC12C7Cu,0xC12C7Eu,0xC12C84u,0xC12C8Au,0xC12C8Cu,0xC12C92u,0xC12C94u,0xC12C9Au,0xC12C9Cu,0xC12C9Eu,0xC12CA4u,0xC12CA6u,0xC12CACu,0xC12CAEu,0xC12CB0u,0xC12CB6u,0xC12CB8u,0xC12CBAu,0xC12CBCu,0xC12CBEu,0xC12CC4u,0xC12CC6u,0xC12CC8u,0xC12CCEu,0xC12CD0u,0xC12CD2u,0xC12CD4u,0xC12CDAu,0xC12CDCu,0xC12CDEu,0xC12CE0u,0xC12CE2u,0xC12CE8u,0xC12CEAu,0xC12CF0u,0xC12CF4u,0xC12CF6u,0xC12CFCu,0xC12D00u,0xC12D02u,0xC12D06u,0xC12D0Cu,0xC12D10u,0xC12D14u,0xC12D18u,0xC12D1Cu,0xC12D20u,0xC12D22u,0xC12D26u,0xC12D28u,0xC12D2Au,0xC12D2Eu,0xC12D34u,0xC12D38u,0xC12D3Au,0xC12D3Cu,0xC12D40u,0xC12D42u,0xC12D46u,0xC12D48u,0xC12D4Cu,0xC12D52u,0xC12D56u,0xC12D58u,0xC12D5Cu,0xC12D5Eu,0xC12D60u,0xC12D64u,0xC12D6Au,0xC12D6Eu,0xC12D70u,0xC12D74u,0xC12D76u,0xC12D78u,0xC12D7Cu,0xC12D80u,0xC12D84u,0xC12D86u,0xC12D8Cu,0xC12D90u,0xC12D92u,0xC12D96u,0xC12D9Au,0xC12D9Eu,0xC12DA0u,0xC12DA4u,0xC12DA8u,0xC12DAAu,0xC12DAEu,0xC12DB2u,0xC12DB4u,0xC12DB8u,0xC12DBCu,0xC12DBEu,0xC12DC4u,0xC12DCAu,0xC12DCEu,0xC12DD4u,0xC12DD6u,0xC12DDAu,0xC12DDEu,0xC12DE0u,0xC12DE4u,0xC12DEAu,0xC12DECu,0xC12DEEu,0xC12DF4u,0xC12DF6u,0xC12DFAu,0xC12DFCu,0xC12DFEu,0xC12E04u,0xC12E06u,0xC12E0Au,0xC12E10u,0xC12E14u,0xC12E18u,0xC12E1Au,0xC12E20u,0xC12E24u,0xC12E26u,0xC12E2Au,0xC12E2Cu,0xC12E30u,0xC12E32u,0xC12E34u,0xC12E38u,0xC12E3Au,0xC12E3Cu,0xC12E40u,0xC12E46u,0xC12E48u,0xC12E4Au,0xC12E4Eu,0xC12E50u,0xC12E52u,0xC12E54u,0xC12E5Au,0xC12E5Cu,0xC12E60u,0xC12E66u,0xC12E68u,0xC12E6Cu,0xC12E6Eu,0xC12E74u,0xC12E78u,0xC12E7Au,0xC12E7Cu,0xC12E7Eu,0xC12E84u,0xC12E86u,0xC12E8Au,0xC12E90u,0xC12E92u,0xC12E96u,0xC12E98u,0xC12E9Eu,0xC12EA2u,0xC12EA4u,0xC12EA6u,0xC12EA8u,0xC12EAEu,0xC12EB0u,0xC12EB4u,0xC12EBAu,0xC12EBCu,0xC12EC0u,0xC12EC2u,0xC12EC6u,0xC12EC8u,0xC12ECAu,0xC12ECCu,0xC12ED0u,0xC12ED2u,0xC12ED6u,0xC12EDCu,0xC12EDEu,0xC12EE2u,0xC12EE4u,0xC12EE8u,0xC12EECu,0xC12EEEu,0xC12EF4u,0xC12EF8u,0xC12EFAu,0xC12F00u,0xC12F04u,0xC12F06u,0xC12F08u,0xC12F0Au,0xC12F10u,0xC12F12u,0xC12F16u,0xC12F1Au,0xC12F1Cu,0xC12F20u,0xC12F22u,0xC12F24u,0xC12F26u,0xC12F28u,0xC12F2Au,0xC12F30u,0xC12F34u,0xC12F38u,0xC12F3Eu,0xC12F40u,0xC12F46u,0xC12F4Au,0xC12F4Cu,0xC12F50u,0xC12F52u,0xC12F56u,0xC12F58u,0xC12F5Au,0xC12F5Eu,0xC12F64u,0xC12F66u,0xC12F6Au,0xC12F6Cu,0xC12F70u,0xC12F72u,0xC12F74u,0xC12F78u,0xC12F7Au,0xC12F7Cu,0xC12F7Eu,0xC12F84u,0xC12F86u,0xC12F8Au,0xC12F8Eu,0xC12F90u,0xC12F94u,0xC12F96u,0xC12F98u,0xC12F9Au,0xC12F9Cu,0xC12FA2u,0xC12FA4u,0xC12FA8u,0xC12FAEu,0xC12FB0u,0xC12FB4u,0xC12FB6u,0xC12FBCu,0xC12FC0u,0xC12FC2u,0xC12FC4u,0xC12FC6u,0xC12FC8u,0xC12FCEu,0xC12FD0u,0xC12FD4u,0xC12FDAu,0xC12FDCu,0xC12FE0u,0xC12FE2u,0xC12FE8u,0xC12FECu,0xC12FEEu,0xC12FF0u,0xC12FF2u,0xC12FF8u,0xC12FFAu,0xC12FFEu,0xC13004u,0xC13006u,0xC1300Au,0xC1300Cu,0xC13010u,0xC13012u,0xC13014u,0xC13016u,0xC1301Au,0xC1301Cu,0xC13020u,0xC13026u,0xC13028u,0xC1302Cu,0xC1302Eu,0xC13032u,0xC13036u,0xC13038u,0xC1303Eu,0xC13042u,0xC13044u,0xC1304Au,0xC1304Eu,0xC13050u,0xC13052u,0xC13054u,0xC1305Au,0xC1305Cu,0xC13060u,0xC13066u,0xC13068u,0xC13070u,0xC13072u,0xC13076u,0xC13078u,0xC1307Au,0xC1307Cu,0xC1307Eu,0xC13080u,0xC13082u,0xC13088u,0xC1308Cu,0xC13090u,0xC13094u,0xC13096u,0xC13098u,0xC1309Au,0xC1309Cu,0xC1309Eu,0xC130A0u,0xC130A6u,0xC130AAu,0xC130AEu,0xC130B2u,0xC130B4u,0xC130B8u,0xC130BAu,0xC130C2u,0xC130C4u,0xC130C8u,0xC130CAu,0xC130CEu,0xC130D0u,0xC130D2u,0xC130D4u,0xC130D6u,0xC130D8u,0xC130DEu,0xC130E2u,0xC130E4u,0xC130E8u,0xC130EAu,0xC130EEu,0xC130F0u,0xC130F4u,0xC130F6u,0xC130FAu,0xC130FCu,0xC130FEu,0xC13100u,0xC13102u,0xC13104u,0xC13106u,0xC1310Cu,0xC13110u,0xC13112u,0xC13116u,0xC13118u,0xC1311Au,0xC13120u,0xC13122u,0xC13124u,0xC13128u,0xC1312Au,0xC1312Cu,0xC13132u,0xC13134u,0xC1313Au,0xC13140u,0xC13142u,0xC13144u,0xC13146u,0xC1314Cu,0xC1314Eu,0xC13150u,0xC13156u,0xC13158u,0xC1315Au,0xC1315Eu,0xC13160u,0xC13164u,0xC13166u,0xC1316Eu,0xC13172u,0xC13174u,0xC13176u,0xC1317Au,0xC13182u,0xC13184u,0xC13188u,0xC1318Au,0xC1318Cu,0xC13192u,0xC13194u,0xC1319Au,0xC1319Cu,0xC131A0u,0xC131A2u,0xC131A8u,0xC131ACu,0xC131AEu,0xC131B0u,0xC131B2u,0xC131B8u,0xC131BAu,0xC131BCu,0xC131BEu,0xC131C2u,0xC131C6u,0xC131CAu,0xC131D0u,0xC131D2u,0xC131D8u,0xC131DAu,0xC131DEu,0xC131E2u,0xC131E4u,0xC131E6u,0xC131E8u,0xC131EAu,0xC131ECu,0xC131EEu,0xC131F2u,0xC131F4u,0xC131F6u,0xC131FAu,0xC131FCu,0xC131FEu,0xC13200u,0xC13204u,0xC1320Au,0xC1320Eu,0xC13212u,0xC13216u,0xC1321Cu,0xC13220u,0xC13226u,0xC13228u,0xC1322Cu,0xC13230u,0xC13232u,0xC13234u,0xC13236u,0xC1323Au,0xC1323Cu,0xC1323Eu,0xC13242u,0xC13246u,0xC13248u,0xC1324Eu,0xC13250u,0xC13252u,0xC13256u,0xC13258u,0xC1325Au,0xC1325Cu,0xC1325Eu,0xC13262u,0xC13264u,0xC13266u,0xC1326Au,0xC1326Cu,0xC13270u,0xC13272u,0xC13276u,0xC13278u,0xC1327Au,0xC1327Eu,0xC13280u,0xC13284u,0xC13286u,0xC1328Au,0xC1328Cu,0xC13290u,0xC13292u,0xC13296u,0xC13298u,0xC1329Cu,0xC132A2u,0xC132A4u,0xC132A6u,0xC132ACu,0xC132B0u,0xC132B6u,0xC132B8u,0xC132BAu,0xC132BEu,0xC132C0u,0xC132C2u,0xC132C4u,0xC132C6u,0xC132CAu,0xC132CCu,0xC132D0u,0xC132D2u,0xC132D6u,0xC132D8u,0xC132DCu,0xC132DEu,0xC132E2u,0xC132E4u,0xC132E6u,0xC132EAu,0xC132ECu,0xC132F0u,0xC132F2u,0xC132F6u,0xC132F8u,0xC132FCu,0xC132FEu,0xC13304u,0xC13306u,0xC1330Au,0xC1330Cu,0xC1330Eu,0xC13314u,0xC13316u,0xC1331Au,0xC13320u,0xC13324u,0xC13328u,0xC1332Au,0xC13330u,0xC13336u,0xC1333Au,0xC1333Eu,0xC13340u,0xC13344u,0xC13346u,0xC1334Au,0xC1334Eu,0xC13350u,0xC13356u,0xC13358u,0xC1335Eu,0xC13362u,0xC13364u,0xC13368u,0xC1336Au,0xC1336Eu,0xC13370u,0xC13376u,0xC1337Au,0xC1337Eu,0xC13380u,0xC13384u,0xC13386u,0xC1338Cu,0xC13390u,0xC13392u,0xC13394u,0xC13396u,0xC1339Au,0xC1339Eu,0xC133A0u,0xC133A4u,0xC133A6u,0xC133A8u,0xC133ACu,0xC133AEu,0xC133B0u,0xC133B2u,0xC133B6u,0xC133BCu,0xC133C0u,0xC133C4u,0xC133C8u,0xC133CAu,0xC133D0u,0xC133D2u,0xC133D8u,0xC133DCu,0xC133E0u,0xC133E2u,0xC133E4u,0xC133E8u,0xC133EAu,0xC133EEu,0xC133F0u,0xC133F4u,0xC133F8u,0xC133FAu,0xC13400u,0xC13406u,0xC13408u,0xC1340Au,0xC1340Eu,0xC13410u,0xC13414u,0xC13418u,0xC1341Au,0xC13420u,0xC13424u,0xC13426u,0xC13428u,0xC52EC8u,0xC52ECCu,0xC52ECEu,0xC52ED0u,0xC52ED2u,0xC52ED4u,0xC52ED6u,0xC52ED8u,0xC52EDAu,0xC52EDCu,0xC52EDEu,0xC52EE0u,0xC52EE2u,0xC52EE4u,0xC52EE6u,0xC52EE8u,0xC52EEAu,0xC52EECu,0xC52EF0u,0xC52EF2u,0xC52EF4u,0xC52EF6u,0xC52EF8u,0xC52EFAu,0xC52EFCu,0xC52EFEu,0xC52F00u,0xC52F02u,0xC52F04u,0xC52F08u};
+static unsigned char visited[FA18_SLOW_SIZE/2];
+static int source_owned(uint32_t pc) { unsigned i; for(i=0;i<sizeof source_boundaries/sizeof source_boundaries[0];++i) if(source_boundaries[i]==pc) return 1; return 0; }
+static unsigned source_slot(uint32_t pc) { return (pc-FA18_SLOW_BASE)/2; }
+static uint32_t source_pc(unsigned slot) { return FA18_SLOW_BASE+2*slot; }
+static int source_call(uint32_t ret,uint32_t sp) {
+    unsigned dispatch;
+    uint32_t child_ret=0,child_sp=0;
+    for(dispatch=0;dispatch<1000000;++dispatch) {
+        int lo=0,hi=fa18_recomp_entry_count,result;
+        if(REG_PC==ret && REG_A[7]==sp) return FA18_RET;
+        /* Match the runtime's instruction boundary, including actual due
+         * blitter completion. Whole-call oracles deliberately hold events. */
+        fa18_bus_finish(REG_PC);fa18_bus_instruction();
+        if(fa18_machine_service())return FA18_EXIT_INTERP;
+        fa18_bus_instruction();
+        if(source_owned(REG_PC)) {
+            uint32_t pc=REG_PC;
+            uint16_t opcode=m68k_read_memory_16(pc);
+            visited[source_slot(pc)]=1;
+            child_ret=0;
+            REG_PPC=pc; REG_IR=opcode; REG_PC=pc+2;
+            m68ki_instruction_jump_table[opcode](); USE_CYCLES(CYC_INSTRUCTION[opcode]);
+            /* Dispatch uses the production generated-child continuation on
+             * both sides. Independent whole-C proofs use original children. */
+            continue;
+        }
+        if(!child_ret) { child_ret=rd_u32(REG_A[7]); child_sp=REG_A[7]+4; }
+        while(lo<hi) {
+            int mid=lo+(hi-lo)/2;
+            if(fa18_recomp_entries[mid].pc<REG_PC) lo=mid+1; else hi=mid;
+        }
+        if(lo==fa18_recomp_entry_count || fa18_recomp_entries[lo].pc!=REG_PC)
+            result=fa18_recomp_resume(child_ret,child_sp);
+        else result=fa18_recomp_functions[fa18_recomp_entries[lo].function].fn((int)fa18_recomp_entries[lo].label);
+        /* Generated children yield at due hardware boundaries. Resume the
+         * same event handoff as fa18_recomp_resume; the fixture holds service
+         * at its next boundary while retaining the real device clock. */
+        if(result==FA18_EXIT_INTERP && !fa18_machine_event_due()) return result;
+    }
+    return FA18_EXIT_INTERP;
+}
+#define HP_ORIGINAL_CHILDREN 1
+#include "control_readouts_fixture.h"
+int main(int argc,char **argv) {
+    FA18PortMode tested_mode=argc>3?(FA18PortMode)strtoul(argv[3],NULL,10):FA18_PORTS_ON;
+    char selection[16];
+    if(tested_mode<FA18_PORTS_ON || tested_mode>FA18_PORTS_SANDBOX) return 1;
+    size_t state_size=0,rom_size=0;
+    uint8_t *state=read_file("captures/native/demo01/state.bin",&state_size);
+    uint8_t *rom=read_file("local/system/kick13.rom",&rom_size);
+    FA18Machine *m=calloc(1,sizeof *m),*base=malloc(sizeof *base),*before=malloc(sizeof *before);
+    uint8_t *reference=malloc(FA18_CHIP_SIZE+FA18_SLOW_SIZE);
+    void *cpu=malloc(m68k_context_size()); char error[256];
+    unsigned hardware_cases=0,matched_cases=0;
+    unsigned hardware_writes=0;
+    unsigned cases=argc>1?(unsigned)strtoul(argv[1],NULL,10):8192,scenario;
+    if(argc>2) selected_entry=(uint32_t)strtoul(argv[2],NULL,16);
+    if(!state || !rom || !m || !base || !before || !reference || !cpu || !cases) return 1;
+    if(!fa18_machine_load_state(m,state,state_size,rom,rom_size,error,sizeof error)) {
+        fprintf(stderr,"control/readouts dispatch oracle: %s\n",error); return 1;
+    }
+    free(state); free(rom); memcpy(base,m,sizeof *m);
+    fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF,NULL); fa18_bus_timing=0;
+    snprintf(selection,sizeof selection,"%06X",selected_entry);
+    for(scenario=0;scenario<cases;++scenario) {
+        uint32_t regs[16],sr; unsigned i; int saved_cycles,source_hardware;
+        fa18_ports_init(FA18_PORTS_OFF,NULL);
+        fa18_structural_reset_write_log();
+        memcpy(m,base,sizeof *m); fixture(scenario);
+        wr_u16(0xc70010u,0x4e71u);
+        memcpy(before,m,sizeof *m); m68k_get_context(cpu); fa18_render_entry_controlled_begin(selected_entry,scenario); saved_cycles=GET_CYCLES();
+        /* Sandbox references suppress Custom writes by design. Its baseline
+         * must use that same original write policy, especially for counted
+         * busy reads; physical blit execution is proven by the whole oracles. */
+        fa18_write_log_active=2;
+        fa18_render_entry_helpers_fixture_begin("original");
+        if(source_call(0xc70000u,expected_sp)!=FA18_RET) {
+            fprintf(stderr,"control/readouts dispatch oracle: case %u source did not return at %06X\n",scenario,REG_PC); return 1;
+        }
+        source_hardware=fa18_write_log_hardware!=0; hardware_cases+=source_hardware; matched_cases+=!source_hardware;
+        fa18_hud_hardware_reference(); hardware_writes+=fa18_hud_hardware_count();
+        memcpy(regs,REG_DA,sizeof regs); sr=m68k_get_reg(NULL,M68K_REG_SR);
+        memcpy(reference,m->chip,FA18_CHIP_SIZE);
+        memcpy(reference+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
+        memcpy(m,before,sizeof *m); m68k_set_context(cpu); fa18_render_entry_controlled_begin(selected_entry,scenario); SET_CYCLES(saved_cycles);
+        fa18_write_log_active=0;
+        fa18_ports_init(tested_mode,selection);
+        fa18_render_entry_helpers_fixture_begin("dispatch");
+        {
+            uint32_t previous=REG_PPC;
+            int result;
+            wr_u16(0xc70010u,0x4e71u); REG_PPC=0xc70010u;
+            if(fa18_ports_enter_source_only(0,&result)) { fputs("non-call source entry was accepted\n",stderr); return 1; }
+            REG_PPC=previous;
+            result=fa18_recomp_call_dynamic();
+            if(tested_mode==FA18_PORTS_ON && 1 && (result!=FA18_EXIT_DISPATCH || fa18_ports_active_steps()!=1)) {
+                fputs("control/readouts ON entry did not start its native continuation\n",stderr); return 1;
+            }
+            if(result==FA18_EXIT_DISPATCH) result=fa18_recomp_resume(0xc70000u,expected_sp);
+            if(result!=FA18_RET || fa18_ports_active_steps()) {
+                fprintf(stderr,"control/readouts dispatch case %u mode %u did not complete at %06X\n",scenario,tested_mode,REG_PC); return 1;
+            }
+            if(tested_mode!=FA18_PORTS_ON && !fa18_structural_port_classified(selected_entry,source_hardware)) {
+                fprintf(stderr,"control/readouts comparison case %u mode %u did not match\n",scenario,tested_mode);
+                fa18_ports_report("build/recomp/control_readouts_dispatch_failed_report.json"); return 1;
+            }
+        }
+        fa18_write_log_active=0;
+        if(!fa18_hud_hardware_check()) { fa18_render_entry_hardware_details();fprintf(stderr,"case %u ordered Custom writes/terminal hardware differ\n",scenario); return 1; }
+        for(i=0;i<16;++i) if(regs[i]!=REG_DA[i]) {
+            fprintf(stderr,"control/readouts dispatch oracle: case %u %c%u source %08X C %08X\n",
+                    scenario,i<8?'D':'A',i&7u,regs[i],REG_DA[i]); return 1;
+        }
+        if(REG_PC!=0xc70000u || sr!=m68k_get_reg(NULL,M68K_REG_SR)) {
+            fprintf(stderr,"control/readouts dispatch oracle: case %u PC/SR source %04X C %04X\n",
+                    scenario,sr,m68k_get_reg(NULL,M68K_REG_SR)); return 1;
+        }
+        for(i=0;i<FA18_CHIP_SIZE+FA18_SLOW_SIZE;++i) {
+            gaddr address=i<FA18_CHIP_SIZE?i:i-FA18_CHIP_SIZE+FA18_SLOW_BASE;
+            uint8_t got=i<FA18_CHIP_SIZE?m->chip[i]:m->slow[i-FA18_CHIP_SIZE];
+            if(got!=reference[i]) {
+                fprintf(stderr,"control/readouts dispatch oracle: case %u byte %06X source %02X C %02X\n",
+                        scenario,address,reference[i],got); return 1;
+            }
+        }
+    }
+    {
+        int result;
+        unsigned guard;
+        for(guard=0;guard<3;++guard) {
+            int function=-1,label=-1,i;
+            memcpy(m,base,sizeof *m); fixture(0);
+            wr_u16(0xc70010u,0x4e71u); REG_PPC=0xc70010u;
+            fa18_ports_init(guard==0?FA18_PORTS_OFF:tested_mode,guard==1?"FFFFFE":selection);
+            for(i=0;i<fa18_recomp_function_count;++i)
+                if(fa18_recomp_functions[i].entry==selected_entry) function=i;
+            for(i=0;i<fa18_recomp_entry_count;++i)
+                if(fa18_recomp_entries[i].pc==selected_entry) label=(int)fa18_recomp_entries[i].label;
+            if(function>=0) {
+                if(label<0) { fputs("missing translated entry label\n",stderr); return 1; }
+                result=guard==2?fa18_ports_enter(function,label,0):fa18_recomp_call_dynamic();
+                /* A generated child can leave its caller for runtime
+                 * completion. It must never start a native step here. */
+                if(result==FA18_EXIT_DISPATCH && !fa18_ports_active_steps())
+                    result=fa18_recomp_resume(0xc70000u,expected_sp);
+                /* A source guard may stop at an existing generated cold
+                 * boundary. This proves admission/counting, not a completed
+                 * source call; native continuation must still be absent. */
+                if((result!=FA18_RET && result!=FA18_EXIT_INTERP) || fa18_ports_active_steps()) {
+                    fprintf(stderr,"guarded translated entry result %d guard %u PC %06X active %u\n",result,guard,REG_PC,(unsigned)fa18_ports_active_steps()); return 1;
+                }
+            } else if(fa18_ports_enter_source_only(guard!=2,&result)) {
+                fputs("guarded source entry was accepted\n",stderr); return 1;
+            }
+            if(!fa18_structural_port_unused(selected_entry)) {
+                fputs("guarded entry counted a port call\n",stderr); return 1;
+            }
+        }
+        fa18_ports_init(tested_mode,selection);
+        REG_PC=selected_entry;
+        {
+            uint32_t sp=REG_A[7];
+            wr_u16(selected_entry,rd_u16(selected_entry));
+            result=fa18_recomp_call_dynamic();
+            if(result!=FA18_EXIT_DISPATCH || REG_PC!=selected_entry || REG_A[7]!=sp || fa18_ports_active_steps()) {
+                fputs("changed source still dispatched\n",stderr); return 1;
+            }
+        }
+    }
+    { unsigned i,count=0;
+      for(i=0;i<sizeof visited;++i) if(visited[i]) ++count;
+      printf("control/readouts dispatch oracle %06X: %u complete calls matched all registers, PC, full SR and all RAM; %u parent boundaries observed\n",selected_entry,cases,count);
+      printf("classification: %u hardware-bearing source calls, %u hardware-free source calls; reference modes require exact hardware or matched classification respectively\n",hardware_cases,matched_cases);
+      printf("hardware: %u ordered Custom writes validated; terminal registers, effective flags, blit counters and data latches matched\n",hardware_writes);
+      printf("visited:"); for(i=0;i<sizeof visited;++i) if(visited[i]) printf(" %06X",source_pc(i)); putchar('\n');
+    }
+    free(cpu); free(reference); free(before); free(base); free(m); return 0;
+}

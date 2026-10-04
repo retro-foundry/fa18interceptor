@@ -12,9 +12,20 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-537 translated game entries and seventy-three original source-only callable entries are
+539 translated game entries and seventy-three original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
+
+Six complete control/readout owners pass 196,608 whole CPU/PC/SR/RAM calls,
+covering 866/867 boundaries with both child providers; the remaining clamp
+is exhaustively proved unreachable and independently instruction-tested.
+Dispatch passes 18,432 calls; four owners pass normal C at 15,961 shadow /
+16,016 sandbox. The full 612-row gate, all 36,236 isolated live frames/seals
+and combined DMA at 30,167/965,344 pass. Source-timed entries rise to 537.
+See [control/readout proof](analysis/routines/native_c_control_readouts.md).
+Family exact through 600; ALL remains 424/34,144. The action dispatcher,
+older partial adapters and full original callback coverage remain open.
+Kickstart services and timing are deferred.
 
 Twelve complete corner/view owners pass 393,216 whole CPU/PC/SR/RAM calls,
 covering all 515 boundaries in controlled union. The original non-returning
@@ -24,7 +35,7 @@ independent whole proofs. C200F6 retains aggregate tail timing. All 36,236
 isolated live frames/seals match; combined DMA passes 29,300/937,600.
 Source-timed entries rise to 531. See
 [corner/view proof](analysis/routines/native_c_corner_view.md).
-Family exact through 600; ALL remains 424/34,144. Control-record selectors,
+Family exact through 600; ALL remains 424/34,144. Those control-record selectors are complete above;
 older partial adapters and full original callback coverage remain open.
 Kickstart services and timing are deferred.
 
