@@ -1,0 +1,85 @@
+{
+  "schema": "amiga.execution_contract.v1",
+  "entry_pc": 16517350,
+  "other_callers_skipped": 0,
+  "entry": {
+    "registers": {
+      "d0": 12630840,
+      "d1": 0,
+      "d2": 1073741824,
+      "d3": 310986582,
+      "d4": 221899,
+      "d5": 0,
+      "d6": 2147483648,
+      "d7": 3221225472,
+      "a0": 12595588,
+      "a1": 12595674,
+      "a2": 16645968,
+      "a3": 12599910,
+      "a4": 12600642,
+      "a5": 12583488,
+      "a6": 12583542,
+      "a7": 12599842,
+      "sr": 16,
+      "pc": 16517350
+    },
+    "cycle": 502193699,
+    "beam": "00000239",
+    "hardware_frame": 1,
+    "files": {
+      "entry_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+      "entry_slow.bin": "587a7a3189eef3ec83f19c82bb585555e7449f8f28f8fd6dd0c9f0f2060984a7",
+      "entry_state.bin": "f4624e8fb08c202ee6f664d74384207840e648722120cae5b393e70d6689e5f5"
+    }
+  },
+  "checkpoint": {
+    "registers": {
+      "d0": 12630840,
+      "d1": 0,
+      "d2": 1073741824,
+      "d3": 310986582,
+      "d4": 221899,
+      "d5": 0,
+      "d6": 2147483648,
+      "d7": 3221225472,
+      "a0": 12595588,
+      "a1": 12595674,
+      "a2": 16645968,
+      "a3": 12599910,
+      "a4": 12600642,
+      "a5": 12583488,
+      "a6": 12583542,
+      "a7": 13107194,
+      "sr": 8208,
+      "pc": 16517418
+    },
+    "cycle": 502193746,
+    "beam": "00000239",
+    "hardware_frame": 1,
+    "files": {
+      "checkpoint_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+      "checkpoint_slow.bin": "587a7a3189eef3ec83f19c82bb585555e7449f8f28f8fd6dd0c9f0f2060984a7",
+      "checkpoint_state.bin": "4d81b2a0761f0b122546bb5cef91fe2566e4f86a0c8e3b4c4c6a8beafa6a4f33"
+    }
+  },
+  "instructions": 4,
+  "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+  "hardware_window_requires_interval_filter": true,
+  "authority": {
+    "state_sha256": "3adc2c744786c1d729ecd88f1c474b5272bc0f22814b30492e7dc06093abaf92",
+    "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+    "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+  },
+  "trace_sha256": "04d2f99fdc3e22bb462d01519aaaee17259470a2004b59accb0f76d3c2a9f7a6",
+  "hardware_sha256": "3080b850f72954b6af4bdf0ed6bd9db279dd3a7a978b51450c74c29c473e0973",
+  "captured_ram_is_runtime_input": false,
+  "stop_pc": 16517418,
+  "evidence_directory": "build/amiga/exec-supervisor-entry-contract",
+  "completed_supervisor_call": false,
+  "scope": "original user-mode Supervisor entry through privilege exception and frame rewrite, before callback transfer",
+  "blocking_full_call_observation": {
+    "evidence_directory": "build/amiga/exec-supervisor-contract",
+    "complete": false,
+    "reason": "first caller switches tasks and reaches idle STOP; no return captured within instruction bound"
+  }
+}

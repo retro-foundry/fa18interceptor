@@ -14,6 +14,7 @@
 #include "exec_task_lookup.h"
 #include "exec_lists_adapter.h"
 #include "exec_task_services_adapter.h"
+#include "exec_supervisor.h"
 #include "graphics_glue.h"
 #include "graphics_wait_bovp.h"
 #include "graphics_blitter_ownership.h"
@@ -79,7 +80,11 @@ static void fixture(uint32_t pc,unsigned scenario) {
         REG_D[0]=(scenario/32)&1?tail:0;
     }
     if (pc==0xFC1C04u) REG_A[1]=tail;
-    m68k_set_reg(M68K_REG_SR,0x2700u|(scenario&31));
+    if (pc==0xFC090Eu || pc==0xFC0918u) {
+        static const uint32_t frame_calls[]={0xFC08E6,0xFC08F6,0,0xFFFFFFFF,0x80000000,1,0xFC08E5,0xFC08E7};
+        wr_u32(REG_A[7]+2,frame_calls[scenario/32%8]);
+    }
+    m68k_set_reg(M68K_REG_SR,(pc==0xFC08E6u && (scenario/32&1)?0x0700u:0x2700u)|(scenario&31));
     REG_PC=pc;
     SET_CYCLES(100000000);
     fa18_cycle_origin=100000000; fa18_next_event=INT64_MAX;

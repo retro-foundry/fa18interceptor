@@ -24,6 +24,7 @@ FAMILIES = [
     ("exec_task_services_adapter.c", "fa18_os_exec_messages_step"),
     ("exec_task_services_adapter.c", "fa18_os_exec_signals_step"),
     ("exec_task_services_adapter.c", "fa18_os_exec_task_protection_step"),
+    ("exec_supervisor.c", "fa18_os_exec_supervisor_step"),
 ]
 
 

@@ -46,7 +46,9 @@ ctest --test-dir build/amiga-compat -C Release --output-on-failure
   The caller supplies semantic phases and their verified field/value arguments;
   this layer has no ROM entry addresses or interpreter dependency. Guest calls,
   Supervisor, scheduler continuations, IRQ delivery and timing remain adapter
-  responsibilities. Blocking Wait and WaitPort need a working scheduler.
+  responsibilities. Verified Supervisor exception-frame comparisons/rewrites
+  and saved-status tests also live here; CPU privilege/stack-bank changes and
+  RTE remain in the CPU adapter. Blocking Wait and WaitPort need a scheduler.
 - `rom_audit.h`: optional reference observations of nested flow, CPU state,
   accesses and machine time. Its bounded table fails closed if exhausted. This
   is an inventory, not ordered entry/exit fixtures or complete game coverage.

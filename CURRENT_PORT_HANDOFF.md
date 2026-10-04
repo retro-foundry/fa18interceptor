@@ -166,10 +166,10 @@ Only hashes, addresses, and register metadata are committed in
 RAM stays under ignored `build/amiga` as oracle evidence.
 
 The seven existing service bridges, Exec FindTask/FindName, all seven list
-operations and message/signal/task-protection services now execute 417 C phases
+operations, message/signal/task protection and Supervisor now execute 432 C phases
 without reading ROM instruction or operand bytes.
 Nested calls preserve the original stack and vectors. The structural oracle
-passes 213,504 CPU/DMA fixtures with cleared
+passes 221,184 CPU/DMA fixtures with cleared
 ROM buffers, a strict access guard, full registers/SR/RAM, ordered memory and
 hardware accesses, and exact cycles. It corrected potgo's original low-word-
 first stack write. Blitter ownership's deeper helpers still execute ROM in the
@@ -199,14 +199,29 @@ Enqueue, Wait, Cause and Supervisor calls on the original machine timeline.
 ordered accesses and cycles with ROM/rtarea cleared and the guard active.
 Fixtures cover empty/nonempty message queues, all port actions, controlled
 guest callbacks, task wakeups, deferred rescheduling, pending Wait, bit
-exhaustion and nesting. Blocking switches, real Cause and Supervisor remain
-unproved dependencies; callback fixtures do not replace their implementations.
+exhaustion and nesting. Blocking switches and real Cause remain unproved
+dependencies; callback fixtures do not replace their implementations.
 Original Engine9000 contracts cover PutMsg, ReplyMsg, Signal, SetSignal,
 Permit and nonempty WaitPort. A blocking Wait observation enters idle STOP
 and did not return within its instruction bound. It is recorded as incomplete.
 See `analysis/routines/fc1b76_fc2046_exec_task_services.md` and
 `analysis/data/romfree_exec_task_contracts.json`. The reference runner enables
 the new signatures by default; `--no-os-task-services` retains the ROM oracle.
+
+Supervisor FC08E6, its privilege-frame handler FC090E–FC092A and the Permit
+callback FC1FBE–FC1FC6 now execute without ROM reads. Reusable frame operations
+remain in `amiga_compat`; the retained CPU owns privilege exceptions, stack-bank
+switches and RTE. 3,072 complete CPU/DMA calls prove user/supervisor paths,
+nested callbacks, both stack banks, full SR and supervisor-mode Permit/
+Reschedule callbacks. The true cold-entry checkpoint captures four original
+instructions /47 OCS colour clocks through privilege-frame rewriting, before
+callback transfer. The real callback proceeds into Switch and its complete
+return remains unobserved; those scheduler services are still unimplemented.
+The reference runner enables the verified signatures by default; use
+`--no-os-supervisor` for the ROM oracle. Both GNU and MSVC Release full service
+replay comparisons pass all 36,236 frames/seals. See
+`analysis/routines/fc08e6_fc092a_exec_supervisor.md` and
+`analysis/data/romfree_exec_supervisor_entry.json`.
 
 `analysis/data/romfree_startup_checkpoint.json` records original execution from
 C0DEB0 to C0E27E: 1,632 instructions /11,677 OCS colour clocks, 1,065 ROM/rtarea

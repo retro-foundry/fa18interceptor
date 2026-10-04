@@ -15,6 +15,13 @@ static void byte_compare(AmigaExecTaskState *s,uint8_t source,uint8_t dest) {
         (result&0x80?AMIGA_CCR_N:0)|((source^dest)&(result^dest)&0x80?AMIGA_CCR_V:0)|
         (dest<source?AMIGA_CCR_C:0));
 }
+static void long_compare(AmigaExecTaskState *s,uint32_t source,uint32_t dest) {
+    uint32_t result=dest-source;
+    s->ccr=(uint8_t)((s->ccr&AMIGA_CCR_X)|(!result?AMIGA_CCR_Z:0)|
+        (result&0x80000000u?AMIGA_CCR_N:0)|
+        ((source^dest)&(result^dest)&0x80000000u?AMIGA_CCR_V:0)|
+        (dest<source?AMIGA_CCR_C:0));
+}
 static void push_long(AmigaExecTaskState *s,const AmigaExecTaskBus *b,uint32_t value) {
     s->a[7]-=4;
     b->write16(b->context,s->a[7]+2,(uint16_t)value);
@@ -108,9 +115,8 @@ int amiga_exec_task_step(AmigaExecTaskPhase p,unsigned arg,AmigaExecTaskState *s
     case AMIGA_EXEC_EXEC_LIST: s->a[0]=s->a[6]+arg; break;
     case AMIGA_EXEC_TASK_STATE: b->write8(b->context,s->a[1]+AMIGA_TASK_STATE,(uint8_t)arg); flags(s,(uint8_t)arg,0x80); break;
     case AMIGA_EXEC_COMPARE_READY_HEAD:
-        old=s->a[1]; value=b->read32(b->context,s->a[6]+AMIGA_EXEC_TASK_READY); mask=old-value;
-        s->ccr=(uint8_t)((s->ccr&AMIGA_CCR_X)|(!mask?AMIGA_CCR_Z:0)|(mask&0x80000000u?AMIGA_CCR_N:0)|
-            ((value^old)&(mask^old)&0x80000000u?AMIGA_CCR_V:0)|(old<value?AMIGA_CCR_C:0)); break;
+        value=b->read32(b->context,s->a[6]+AMIGA_EXEC_TASK_READY);
+        long_compare(s,value,s->a[1]); break;
     case AMIGA_EXEC_EXCEPTION_PENDING:
         address=s->a[1]+AMIGA_TASK_FLAGS; byte=b->read8(b->context,address); zero_flag(s,!(byte&32)); b->write8(b->context,address,(uint8_t)(byte|32)); break;
     case AMIGA_EXEC_STORE_WAIT: b->write32(b->context,s->a[1]+AMIGA_TASK_SIGNALS_WAIT,s->d[0]); flags(s,s->d[0],0x80000000u); break;
@@ -142,6 +148,16 @@ int amiga_exec_task_step(AmigaExecTaskPhase p,unsigned arg,AmigaExecTaskState *s
     case AMIGA_EXEC_CLEAR_MASK: s->d[1]=UINT32_MAX; flags(s,s->d[1],0x80000000u); break;
     case AMIGA_EXEC_CLEAR_TASK_MASK:
         address=s->a[1]+arg; value=b->read32(b->context,address)&s->d[1]; b->write32(b->context,address,value); flags(s,value,0x80000000u); break;
+    case AMIGA_EXEC_PUSH_RETURN_PC:
+        s->a[7]-=4; b->write32(b->context,s->a[7],arg); break;
+    case AMIGA_EXEC_PUSH_SR:
+        s->a[7]-=2; b->write16(b->context,s->a[7],(uint16_t)arg); break;
+    case AMIGA_EXEC_COMPARE_EXCEPTION_CALL:
+        value=b->read32(b->context,s->a[7]+2); long_compare(s,arg,value); break;
+    case AMIGA_EXEC_SET_EXCEPTION_RETURN:
+        b->write32(b->context,s->a[7]+2,arg); flags(s,arg,0x80000000u); break;
+    case AMIGA_EXEC_TEST_SAVED_SUPERVISOR:
+        zero_flag(s,!(b->read8(b->context,s->a[7])&32)); break;
     default: return 0;
     }
     return 1;

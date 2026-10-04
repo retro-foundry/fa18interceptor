@@ -9,6 +9,7 @@
 #include "exec_task_lookup.h"
 #include "exec_lists_adapter.h"
 #include "exec_task_services_adapter.h"
+#include "exec_supervisor.h"
 #include "potgo_glue.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,6 +27,7 @@ ADAPTER(fa18_os_exec_lists_step)
 ADAPTER(fa18_os_exec_messages_step)
 ADAPTER(fa18_os_exec_signals_step)
 ADAPTER(fa18_os_exec_task_protection_step)
+ADAPTER(fa18_os_exec_supervisor_step)
 /* Pinned 1.3 ABI identifiers, isolated from the neutral dispatcher. Disabled
  * until the reference runner verifies the corresponding source signature.
  * A future clean-start profile can activate proven implementations directly. */
@@ -44,7 +46,10 @@ static AmigaService services[FA18_SERVICE_COUNT]={
     {0xFC1C18,0xFC1C5A,0xFC1C18,"exec.ReplyMsg/WaitPort",0,fa18_os_exec_messages_step_adapter,NULL},
     {0xFC1E54,0xFC1F74,0xFC1E54,"exec.signals",0,fa18_os_exec_signals_step_adapter,NULL},
     {0xFC1FCA,0xFC2048,0xFC1FCA,"exec.signal/trap_allocation",0,fa18_os_exec_signals_step_adapter,NULL},
-    {0xFC1F74,0xFC1FBE,0xFC1F74,"exec.task_protection",0,fa18_os_exec_task_protection_step_adapter,NULL}
+    {0xFC1F74,0xFC1FBE,0xFC1F74,"exec.task_protection",0,fa18_os_exec_task_protection_step_adapter,NULL},
+    {0xFC08E6,0xFC08F6,0xFC08E6,"exec.Supervisor",0,fa18_os_exec_supervisor_step_adapter,NULL},
+    {0xFC090E,0xFC092C,0xFC090E,"exec.Supervisor_privilege",0,fa18_os_exec_supervisor_step_adapter,NULL},
+    {0xFC1FBE,0xFC1FCA,0xFC1FBE,"exec.Permit_callback",0,fa18_os_exec_supervisor_step_adapter,NULL}
 };
 void fa18_services_reset(void) {
     for (unsigned i=0;i<FA18_SERVICE_COUNT;++i) services[i].enabled=0;
