@@ -1,0 +1,2400 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "8afa3c83",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C0D04C",
+    "C33370",
+    "C1FE24",
+    "C1FE46",
+    "C0CF98"
+  ],
+  "registered_translated_entries": 526,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 592,
+  "registered_timing_entries": 456,
+  "registered_translated_timing_entries": 390,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/hud_history_stream_source_scope.json",
+      "sha256": "c122c06015a80b63c449f4fc97ddd2d47afd21f1253b364c1d4edb254127646d"
+    },
+    "unique_instructions": 643,
+    "shared_within_batch": 0,
+    "distinct_child_sites": 48,
+    "child_sites_by_owner": 48,
+    "actual_original_callability": {
+      "C0D04C": [
+        {
+          "pc": "C1F8D8",
+          "return_pc": "C1F8DE",
+          "instruction": "jsr     $c0d04c.l",
+          "bytes": "4eb900c0d04c"
+        }
+      ],
+      "C33370": [
+        {
+          "pc": "C332F2",
+          "return_pc": "C332F6",
+          "instruction": "bsr     $c33370",
+          "bytes": "6100007c"
+        }
+      ],
+      "C1FE24": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0004",
+          "slot": "C1FCEC",
+          "bytes": "00c1fe24",
+          "target": "C1FE24",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C1FE24"
+            ]
+          ]
+        }
+      ],
+      "C1FE46": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00E8",
+          "slot": "C1FDD0",
+          "bytes": "00c1fe46",
+          "target": "C1FE46",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C1FE46"
+            ]
+          ]
+        }
+      ],
+      "C0CF98": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00F8",
+          "slot": "C1FDE0",
+          "bytes": "00c0cf98",
+          "target": "C0CF98",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C0CF98"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 163840,
+  "controlled_child_completed_calls": 81920,
+  "real_child_completed_calls": 81920,
+  "fixture_coverage": [
+    {
+      "owner": "C0D04C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 237,
+      "observed_owner_pcs": 237,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_contract_C0D04C.log",
+        "sha256": "00ea4043d92c549e42ae52438223b41f1dad9829b6901400c496e9a5e840b1f0"
+      }
+    },
+    {
+      "owner": "C33370",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 382,
+      "observed_owner_pcs": 382,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_contract_C33370.log",
+        "sha256": "46a9250dcd0da1626e7babb0408d30394fc1e1fdfd98582512b0c210c33ec579"
+      }
+    },
+    {
+      "owner": "C1FE24",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_contract_C1FE24.log",
+        "sha256": "ca00c7b63a1e70b705364dae617e28b07e39cd91be7b0bcecbc21fcb159a6ae1"
+      }
+    },
+    {
+      "owner": "C1FE46",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_contract_C1FE46.log",
+        "sha256": "cea4cb84103152c76f65272c8b099dd71efc9828ba9734ace4513495146d4f8e"
+      }
+    },
+    {
+      "owner": "C0CF98",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_contract_C0CF98.log",
+        "sha256": "4b7c96a8bd36fbeccae0de440e89ce44c149e12f3398863bd59a17a1e25bed52"
+      }
+    },
+    {
+      "owner": "C0D04C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 237,
+      "observed_owner_pcs": 232,
+      "unobserved_owner_pcs": [
+        "C0D09A",
+        "C0D0F6",
+        "C0D150",
+        "C0D156",
+        "C0D210"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_real_C0D04C.log",
+        "sha256": "b6de33dfce30037c31365868215ee1759b3e3e80addddf0274e111a441994065"
+      }
+    },
+    {
+      "owner": "C33370",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 382,
+      "observed_owner_pcs": 165,
+      "unobserved_owner_pcs": [
+        "C3339A",
+        "C333A0",
+        "C3341A",
+        "C3341E",
+        "C33420",
+        "C33422",
+        "C33428",
+        "C3342E",
+        "C33434",
+        "C33436",
+        "C3343A",
+        "C3343E",
+        "C33442",
+        "C33444",
+        "C33448",
+        "C3344A",
+        "C3344E",
+        "C33454",
+        "C33456",
+        "C3345C",
+        "C33466",
+        "C3346C",
+        "C33472",
+        "C33476",
+        "C33478",
+        "C3347E",
+        "C33484",
+        "C3348A",
+        "C33490",
+        "C33496",
+        "C3349C",
+        "C3349E",
+        "C334A2",
+        "C334A6",
+        "C334AC",
+        "C334AE",
+        "C334B2",
+        "C334B8",
+        "C334BE",
+        "C334C0",
+        "C334C2",
+        "C334C4",
+        "C334C8",
+        "C334CA",
+        "C334D0",
+        "C334D2",
+        "C334D4",
+        "C334D6",
+        "C334D8",
+        "C334DA",
+        "C334DC",
+        "C334DE",
+        "C334E4",
+        "C334E6",
+        "C334E8",
+        "C334EC",
+        "C334F6",
+        "C334F8",
+        "C334FA",
+        "C33500",
+        "C33502",
+        "C33504",
+        "C3350A",
+        "C33510",
+        "C33512",
+        "C33516",
+        "C33518",
+        "C3351A",
+        "C3351E",
+        "C33524",
+        "C33526",
+        "C33528",
+        "C3352E",
+        "C33534",
+        "C33538",
+        "C3353A",
+        "C3353C",
+        "C3353E",
+        "C33542",
+        "C33544",
+        "C33546",
+        "C33548",
+        "C3354A",
+        "C3354C",
+        "C33552",
+        "C33558",
+        "C3355C",
+        "C33562",
+        "C33568",
+        "C3356C",
+        "C33570",
+        "C33572",
+        "C33574",
+        "C33578",
+        "C3357E",
+        "C33580",
+        "C33582",
+        "C33588",
+        "C3358E",
+        "C33592",
+        "C33594",
+        "C33596",
+        "C33598",
+        "C3359C",
+        "C3359E",
+        "C335A0",
+        "C335A2",
+        "C335A6",
+        "C335AA",
+        "C335AE",
+        "C335B2",
+        "C33644",
+        "C33646",
+        "C3364A",
+        "C3364C",
+        "C3364E",
+        "C33654",
+        "C3365A",
+        "C33660",
+        "C33662",
+        "C33666",
+        "C3366A",
+        "C3366E",
+        "C33670",
+        "C33674",
+        "C33676",
+        "C3367A",
+        "C33680",
+        "C33682",
+        "C33688",
+        "C33692",
+        "C33698",
+        "C3369E",
+        "C336A2",
+        "C336A4",
+        "C336AA",
+        "C336B0",
+        "C336B6",
+        "C336BC",
+        "C336C2",
+        "C336C8",
+        "C336CA",
+        "C336CE",
+        "C336D0",
+        "C336D4",
+        "C336DA",
+        "C336E0",
+        "C336E2",
+        "C336E4",
+        "C336E6",
+        "C336E8",
+        "C336EA",
+        "C336EC",
+        "C336F2",
+        "C336F4",
+        "C336F8",
+        "C336FA",
+        "C33704",
+        "C3370A",
+        "C3370C",
+        "C33712",
+        "C33718",
+        "C3371A",
+        "C33720",
+        "C33726",
+        "C3372A",
+        "C3372C",
+        "C3372E",
+        "C33730",
+        "C33732",
+        "C33736",
+        "C33738",
+        "C3373A",
+        "C3373C",
+        "C33742",
+        "C33748",
+        "C3374C",
+        "C33752",
+        "C33758",
+        "C3375A",
+        "C33760",
+        "C33766",
+        "C3376A",
+        "C3376C",
+        "C3376E",
+        "C33770",
+        "C33772",
+        "C33776",
+        "C33778",
+        "C3377A",
+        "C3377E",
+        "C33782",
+        "C33786",
+        "C3378A",
+        "C3378E",
+        "C33792",
+        "C33798",
+        "C3379C",
+        "C3379E",
+        "C337A2",
+        "C337A4",
+        "C337A8",
+        "C337AE",
+        "C337B4",
+        "C337B8",
+        "C337BC",
+        "C337C2",
+        "C337C4",
+        "C337CA",
+        "C337CE",
+        "C337D4",
+        "C337D6",
+        "C337EC",
+        "C337EE",
+        "C337F4",
+        "C337F6",
+        "C338E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_real_C33370.log",
+        "sha256": "3d51800fc4af2e9c635bd03bb2f03a39cf4ffa7a000a005748e34ddaaee43fd5"
+      }
+    },
+    {
+      "owner": "C1FE24",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_real_C1FE24.log",
+        "sha256": "347a6c9e0cc007ad9407580968d39bd0f4f3a1bfcf535b8a0d32f11225df8f39"
+      }
+    },
+    {
+      "owner": "C1FE46",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_real_C1FE46.log",
+        "sha256": "ba1180ca83e183e294e1d5b990d95b4e84b31e49f321055322a32bde79b95cdb"
+      }
+    },
+    {
+      "owner": "C0CF98",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_real_C0CF98.log",
+        "sha256": "0fc702ed40edeb1f74cf01ef4709020c8bd1c44f763a839f9a192caaba526b93"
+      }
+    }
+  ],
+  "controlled_union_pcs": 643,
+  "actual_dispatch_completed_calls": 15360,
+  "dispatch_fixtures": [
+    {
+      "owner": "C0D04C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 237,
+      "observed_owner_pcs": 225,
+      "unobserved_owner_pcs": [
+        "C0D09A",
+        "C0D0F6",
+        "C0D10A",
+        "C0D150",
+        "C0D156",
+        "C0D210",
+        "C0D30E",
+        "C0D312",
+        "C0D318",
+        "C0D31A",
+        "C0D31E",
+        "C0D320"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C0D04C_on.log",
+        "sha256": "b93b63c85e3eb81db06c5e4e93b3149f30922f91920a32b05a3f94d1c6c6c199"
+      }
+    },
+    {
+      "owner": "C0D04C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 237,
+      "observed_owner_pcs": 225,
+      "unobserved_owner_pcs": [
+        "C0D09A",
+        "C0D0F6",
+        "C0D10A",
+        "C0D150",
+        "C0D156",
+        "C0D210",
+        "C0D30E",
+        "C0D312",
+        "C0D318",
+        "C0D31A",
+        "C0D31E",
+        "C0D320"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C0D04C_shadow.log",
+        "sha256": "b93b63c85e3eb81db06c5e4e93b3149f30922f91920a32b05a3f94d1c6c6c199"
+      }
+    },
+    {
+      "owner": "C0D04C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 237,
+      "observed_owner_pcs": 225,
+      "unobserved_owner_pcs": [
+        "C0D09A",
+        "C0D0F6",
+        "C0D10A",
+        "C0D150",
+        "C0D156",
+        "C0D210",
+        "C0D30E",
+        "C0D312",
+        "C0D318",
+        "C0D31A",
+        "C0D31E",
+        "C0D320"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C0D04C_sandbox.log",
+        "sha256": "b93b63c85e3eb81db06c5e4e93b3149f30922f91920a32b05a3f94d1c6c6c199"
+      }
+    },
+    {
+      "owner": "C33370",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 382,
+      "observed_owner_pcs": 165,
+      "unobserved_owner_pcs": [
+        "C3339A",
+        "C333A0",
+        "C3341A",
+        "C3341E",
+        "C33420",
+        "C33422",
+        "C33428",
+        "C3342E",
+        "C33434",
+        "C33436",
+        "C3343A",
+        "C3343E",
+        "C33442",
+        "C33444",
+        "C33448",
+        "C3344A",
+        "C3344E",
+        "C33454",
+        "C33456",
+        "C3345C",
+        "C33466",
+        "C3346C",
+        "C33472",
+        "C33476",
+        "C33478",
+        "C3347E",
+        "C33484",
+        "C3348A",
+        "C33490",
+        "C33496",
+        "C3349C",
+        "C3349E",
+        "C334A2",
+        "C334A6",
+        "C334AC",
+        "C334AE",
+        "C334B2",
+        "C334B8",
+        "C334BE",
+        "C334C0",
+        "C334C2",
+        "C334C4",
+        "C334C8",
+        "C334CA",
+        "C334D0",
+        "C334D2",
+        "C334D4",
+        "C334D6",
+        "C334D8",
+        "C334DA",
+        "C334DC",
+        "C334DE",
+        "C334E4",
+        "C334E6",
+        "C334E8",
+        "C334EC",
+        "C334F6",
+        "C334F8",
+        "C334FA",
+        "C33500",
+        "C33502",
+        "C33504",
+        "C3350A",
+        "C33510",
+        "C33512",
+        "C33516",
+        "C33518",
+        "C3351A",
+        "C3351E",
+        "C33524",
+        "C33526",
+        "C33528",
+        "C3352E",
+        "C33534",
+        "C33538",
+        "C3353A",
+        "C3353C",
+        "C3353E",
+        "C33542",
+        "C33544",
+        "C33546",
+        "C33548",
+        "C3354A",
+        "C3354C",
+        "C33552",
+        "C33558",
+        "C3355C",
+        "C33562",
+        "C33568",
+        "C3356C",
+        "C33570",
+        "C33572",
+        "C33574",
+        "C33578",
+        "C3357E",
+        "C33580",
+        "C33582",
+        "C33588",
+        "C3358E",
+        "C33592",
+        "C33594",
+        "C33596",
+        "C33598",
+        "C3359C",
+        "C3359E",
+        "C335A0",
+        "C335A2",
+        "C335A6",
+        "C335AA",
+        "C335AE",
+        "C335B2",
+        "C33644",
+        "C33646",
+        "C3364A",
+        "C3364C",
+        "C3364E",
+        "C33654",
+        "C3365A",
+        "C33660",
+        "C33662",
+        "C33666",
+        "C3366A",
+        "C3366E",
+        "C33670",
+        "C33674",
+        "C33676",
+        "C3367A",
+        "C33680",
+        "C33682",
+        "C33688",
+        "C33692",
+        "C33698",
+        "C3369E",
+        "C336A2",
+        "C336A4",
+        "C336AA",
+        "C336B0",
+        "C336B6",
+        "C336BC",
+        "C336C2",
+        "C336C8",
+        "C336CA",
+        "C336CE",
+        "C336D0",
+        "C336D4",
+        "C336DA",
+        "C336E0",
+        "C336E2",
+        "C336E4",
+        "C336E6",
+        "C336E8",
+        "C336EA",
+        "C336EC",
+        "C336F2",
+        "C336F4",
+        "C336F8",
+        "C336FA",
+        "C33704",
+        "C3370A",
+        "C3370C",
+        "C33712",
+        "C33718",
+        "C3371A",
+        "C33720",
+        "C33726",
+        "C3372A",
+        "C3372C",
+        "C3372E",
+        "C33730",
+        "C33732",
+        "C33736",
+        "C33738",
+        "C3373A",
+        "C3373C",
+        "C33742",
+        "C33748",
+        "C3374C",
+        "C33752",
+        "C33758",
+        "C3375A",
+        "C33760",
+        "C33766",
+        "C3376A",
+        "C3376C",
+        "C3376E",
+        "C33770",
+        "C33772",
+        "C33776",
+        "C33778",
+        "C3377A",
+        "C3377E",
+        "C33782",
+        "C33786",
+        "C3378A",
+        "C3378E",
+        "C33792",
+        "C33798",
+        "C3379C",
+        "C3379E",
+        "C337A2",
+        "C337A4",
+        "C337A8",
+        "C337AE",
+        "C337B4",
+        "C337B8",
+        "C337BC",
+        "C337C2",
+        "C337C4",
+        "C337CA",
+        "C337CE",
+        "C337D4",
+        "C337D6",
+        "C337EC",
+        "C337EE",
+        "C337F4",
+        "C337F6",
+        "C338E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C33370_on.log",
+        "sha256": "730374956db41724d01ce65a1a7fc1394022c3bed47c76b3e0d158007db62671"
+      }
+    },
+    {
+      "owner": "C33370",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 382,
+      "observed_owner_pcs": 165,
+      "unobserved_owner_pcs": [
+        "C3339A",
+        "C333A0",
+        "C3341A",
+        "C3341E",
+        "C33420",
+        "C33422",
+        "C33428",
+        "C3342E",
+        "C33434",
+        "C33436",
+        "C3343A",
+        "C3343E",
+        "C33442",
+        "C33444",
+        "C33448",
+        "C3344A",
+        "C3344E",
+        "C33454",
+        "C33456",
+        "C3345C",
+        "C33466",
+        "C3346C",
+        "C33472",
+        "C33476",
+        "C33478",
+        "C3347E",
+        "C33484",
+        "C3348A",
+        "C33490",
+        "C33496",
+        "C3349C",
+        "C3349E",
+        "C334A2",
+        "C334A6",
+        "C334AC",
+        "C334AE",
+        "C334B2",
+        "C334B8",
+        "C334BE",
+        "C334C0",
+        "C334C2",
+        "C334C4",
+        "C334C8",
+        "C334CA",
+        "C334D0",
+        "C334D2",
+        "C334D4",
+        "C334D6",
+        "C334D8",
+        "C334DA",
+        "C334DC",
+        "C334DE",
+        "C334E4",
+        "C334E6",
+        "C334E8",
+        "C334EC",
+        "C334F6",
+        "C334F8",
+        "C334FA",
+        "C33500",
+        "C33502",
+        "C33504",
+        "C3350A",
+        "C33510",
+        "C33512",
+        "C33516",
+        "C33518",
+        "C3351A",
+        "C3351E",
+        "C33524",
+        "C33526",
+        "C33528",
+        "C3352E",
+        "C33534",
+        "C33538",
+        "C3353A",
+        "C3353C",
+        "C3353E",
+        "C33542",
+        "C33544",
+        "C33546",
+        "C33548",
+        "C3354A",
+        "C3354C",
+        "C33552",
+        "C33558",
+        "C3355C",
+        "C33562",
+        "C33568",
+        "C3356C",
+        "C33570",
+        "C33572",
+        "C33574",
+        "C33578",
+        "C3357E",
+        "C33580",
+        "C33582",
+        "C33588",
+        "C3358E",
+        "C33592",
+        "C33594",
+        "C33596",
+        "C33598",
+        "C3359C",
+        "C3359E",
+        "C335A0",
+        "C335A2",
+        "C335A6",
+        "C335AA",
+        "C335AE",
+        "C335B2",
+        "C33644",
+        "C33646",
+        "C3364A",
+        "C3364C",
+        "C3364E",
+        "C33654",
+        "C3365A",
+        "C33660",
+        "C33662",
+        "C33666",
+        "C3366A",
+        "C3366E",
+        "C33670",
+        "C33674",
+        "C33676",
+        "C3367A",
+        "C33680",
+        "C33682",
+        "C33688",
+        "C33692",
+        "C33698",
+        "C3369E",
+        "C336A2",
+        "C336A4",
+        "C336AA",
+        "C336B0",
+        "C336B6",
+        "C336BC",
+        "C336C2",
+        "C336C8",
+        "C336CA",
+        "C336CE",
+        "C336D0",
+        "C336D4",
+        "C336DA",
+        "C336E0",
+        "C336E2",
+        "C336E4",
+        "C336E6",
+        "C336E8",
+        "C336EA",
+        "C336EC",
+        "C336F2",
+        "C336F4",
+        "C336F8",
+        "C336FA",
+        "C33704",
+        "C3370A",
+        "C3370C",
+        "C33712",
+        "C33718",
+        "C3371A",
+        "C33720",
+        "C33726",
+        "C3372A",
+        "C3372C",
+        "C3372E",
+        "C33730",
+        "C33732",
+        "C33736",
+        "C33738",
+        "C3373A",
+        "C3373C",
+        "C33742",
+        "C33748",
+        "C3374C",
+        "C33752",
+        "C33758",
+        "C3375A",
+        "C33760",
+        "C33766",
+        "C3376A",
+        "C3376C",
+        "C3376E",
+        "C33770",
+        "C33772",
+        "C33776",
+        "C33778",
+        "C3377A",
+        "C3377E",
+        "C33782",
+        "C33786",
+        "C3378A",
+        "C3378E",
+        "C33792",
+        "C33798",
+        "C3379C",
+        "C3379E",
+        "C337A2",
+        "C337A4",
+        "C337A8",
+        "C337AE",
+        "C337B4",
+        "C337B8",
+        "C337BC",
+        "C337C2",
+        "C337C4",
+        "C337CA",
+        "C337CE",
+        "C337D4",
+        "C337D6",
+        "C337EC",
+        "C337EE",
+        "C337F4",
+        "C337F6",
+        "C338E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C33370_shadow.log",
+        "sha256": "730374956db41724d01ce65a1a7fc1394022c3bed47c76b3e0d158007db62671"
+      }
+    },
+    {
+      "owner": "C33370",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 382,
+      "observed_owner_pcs": 165,
+      "unobserved_owner_pcs": [
+        "C3339A",
+        "C333A0",
+        "C3341A",
+        "C3341E",
+        "C33420",
+        "C33422",
+        "C33428",
+        "C3342E",
+        "C33434",
+        "C33436",
+        "C3343A",
+        "C3343E",
+        "C33442",
+        "C33444",
+        "C33448",
+        "C3344A",
+        "C3344E",
+        "C33454",
+        "C33456",
+        "C3345C",
+        "C33466",
+        "C3346C",
+        "C33472",
+        "C33476",
+        "C33478",
+        "C3347E",
+        "C33484",
+        "C3348A",
+        "C33490",
+        "C33496",
+        "C3349C",
+        "C3349E",
+        "C334A2",
+        "C334A6",
+        "C334AC",
+        "C334AE",
+        "C334B2",
+        "C334B8",
+        "C334BE",
+        "C334C0",
+        "C334C2",
+        "C334C4",
+        "C334C8",
+        "C334CA",
+        "C334D0",
+        "C334D2",
+        "C334D4",
+        "C334D6",
+        "C334D8",
+        "C334DA",
+        "C334DC",
+        "C334DE",
+        "C334E4",
+        "C334E6",
+        "C334E8",
+        "C334EC",
+        "C334F6",
+        "C334F8",
+        "C334FA",
+        "C33500",
+        "C33502",
+        "C33504",
+        "C3350A",
+        "C33510",
+        "C33512",
+        "C33516",
+        "C33518",
+        "C3351A",
+        "C3351E",
+        "C33524",
+        "C33526",
+        "C33528",
+        "C3352E",
+        "C33534",
+        "C33538",
+        "C3353A",
+        "C3353C",
+        "C3353E",
+        "C33542",
+        "C33544",
+        "C33546",
+        "C33548",
+        "C3354A",
+        "C3354C",
+        "C33552",
+        "C33558",
+        "C3355C",
+        "C33562",
+        "C33568",
+        "C3356C",
+        "C33570",
+        "C33572",
+        "C33574",
+        "C33578",
+        "C3357E",
+        "C33580",
+        "C33582",
+        "C33588",
+        "C3358E",
+        "C33592",
+        "C33594",
+        "C33596",
+        "C33598",
+        "C3359C",
+        "C3359E",
+        "C335A0",
+        "C335A2",
+        "C335A6",
+        "C335AA",
+        "C335AE",
+        "C335B2",
+        "C33644",
+        "C33646",
+        "C3364A",
+        "C3364C",
+        "C3364E",
+        "C33654",
+        "C3365A",
+        "C33660",
+        "C33662",
+        "C33666",
+        "C3366A",
+        "C3366E",
+        "C33670",
+        "C33674",
+        "C33676",
+        "C3367A",
+        "C33680",
+        "C33682",
+        "C33688",
+        "C33692",
+        "C33698",
+        "C3369E",
+        "C336A2",
+        "C336A4",
+        "C336AA",
+        "C336B0",
+        "C336B6",
+        "C336BC",
+        "C336C2",
+        "C336C8",
+        "C336CA",
+        "C336CE",
+        "C336D0",
+        "C336D4",
+        "C336DA",
+        "C336E0",
+        "C336E2",
+        "C336E4",
+        "C336E6",
+        "C336E8",
+        "C336EA",
+        "C336EC",
+        "C336F2",
+        "C336F4",
+        "C336F8",
+        "C336FA",
+        "C33704",
+        "C3370A",
+        "C3370C",
+        "C33712",
+        "C33718",
+        "C3371A",
+        "C33720",
+        "C33726",
+        "C3372A",
+        "C3372C",
+        "C3372E",
+        "C33730",
+        "C33732",
+        "C33736",
+        "C33738",
+        "C3373A",
+        "C3373C",
+        "C33742",
+        "C33748",
+        "C3374C",
+        "C33752",
+        "C33758",
+        "C3375A",
+        "C33760",
+        "C33766",
+        "C3376A",
+        "C3376C",
+        "C3376E",
+        "C33770",
+        "C33772",
+        "C33776",
+        "C33778",
+        "C3377A",
+        "C3377E",
+        "C33782",
+        "C33786",
+        "C3378A",
+        "C3378E",
+        "C33792",
+        "C33798",
+        "C3379C",
+        "C3379E",
+        "C337A2",
+        "C337A4",
+        "C337A8",
+        "C337AE",
+        "C337B4",
+        "C337B8",
+        "C337BC",
+        "C337C2",
+        "C337C4",
+        "C337CA",
+        "C337CE",
+        "C337D4",
+        "C337D6",
+        "C337EC",
+        "C337EE",
+        "C337F4",
+        "C337F6",
+        "C338E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C33370_sandbox.log",
+        "sha256": "730374956db41724d01ce65a1a7fc1394022c3bed47c76b3e0d158007db62671"
+      }
+    },
+    {
+      "owner": "C1FE24",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C1FE24_on.log",
+        "sha256": "aad7b12a660ab6c152f6961aef16fa3529aa60513bb213d30647943004c95c3b"
+      }
+    },
+    {
+      "owner": "C1FE24",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C1FE24_shadow.log",
+        "sha256": "aad7b12a660ab6c152f6961aef16fa3529aa60513bb213d30647943004c95c3b"
+      }
+    },
+    {
+      "owner": "C1FE24",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C1FE24_sandbox.log",
+        "sha256": "aad7b12a660ab6c152f6961aef16fa3529aa60513bb213d30647943004c95c3b"
+      }
+    },
+    {
+      "owner": "C1FE46",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C1FE46_on.log",
+        "sha256": "4052342d463e98a6214a7394b40fea8fe48c202b7964d04eea0ba8ac4d3bfe9a"
+      }
+    },
+    {
+      "owner": "C1FE46",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C1FE46_shadow.log",
+        "sha256": "4052342d463e98a6214a7394b40fea8fe48c202b7964d04eea0ba8ac4d3bfe9a"
+      }
+    },
+    {
+      "owner": "C1FE46",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C1FE46_sandbox.log",
+        "sha256": "4052342d463e98a6214a7394b40fea8fe48c202b7964d04eea0ba8ac4d3bfe9a"
+      }
+    },
+    {
+      "owner": "C0CF98",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C0CF98_on.log",
+        "sha256": "193a22de6ac3fd5f36d7c13a9d0bcba4ef8016d732f134c2b44d2d18d7440840"
+      }
+    },
+    {
+      "owner": "C0CF98",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C0CF98_shadow.log",
+        "sha256": "193a22de6ac3fd5f36d7c13a9d0bcba4ef8016d732f134c2b44d2d18d7440840"
+      }
+    },
+    {
+      "owner": "C0CF98",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 8,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_history_stream_dispatch_C0CF98_sandbox.log",
+        "sha256": "193a22de6ac3fd5f36d7c13a9d0bcba4ef8016d732f134c2b44d2d18d7440840"
+      }
+    }
+  ],
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "ordered_custom_writes": 0,
+    "original_children_use_no_draw_bounds": true,
+    "active_drawing_is_not_claimed_by_frozen_clock_fixtures": true,
+    "active_drawing_recording_checks_independent": true,
+    "shared_machine_observer_unchanged": true
+  },
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C0D04C": {
+          "calls": 2940,
+          "compared": 2910,
+          "matched": 2910,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 30
+        },
+        "C33370": {
+          "calls": 2465,
+          "compared": 1106,
+          "matched": 1106,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1359
+        },
+        "C1FE24": {
+          "calls": 935,
+          "compared": 928,
+          "matched": 928,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 7
+        },
+        "C1FE46": {
+          "calls": 134,
+          "compared": 134,
+          "matched": 134,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C0CF98": {
+          "calls": 845,
+          "compared": 823,
+          "matched": 823,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 22
+        }
+      },
+      "sandbox": {
+        "C0D04C": {
+          "calls": 3695,
+          "compared": 3695,
+          "matched": 3695,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C33370": {
+          "calls": 2464,
+          "compared": 2464,
+          "matched": 2464,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1FE24": {
+          "calls": 935,
+          "compared": 935,
+          "matched": 935,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1FE46": {
+          "calls": 134,
+          "compared": 134,
+          "matched": 134,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C0CF98": {
+          "calls": 845,
+          "compared": 845,
+          "matched": 845,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "shadow_matches": 5901,
+    "sandbox_matches": 8073,
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C1FE24",
+            "name": "draw_display_stream_point",
+            "calls": 935,
+            "compared": 928,
+            "matched": 928,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 7,
+            "mean_cycles": 1518,
+            "busy_input_calls": 928,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FE46",
+            "name": "draw_display_stream_point",
+            "calls": 134,
+            "compared": 134,
+            "matched": 134,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1387,
+            "busy_input_calls": 134,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0CF98",
+            "name": "draw_scaled_stream_circle",
+            "calls": 845,
+            "compared": 823,
+            "matched": 823,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 22,
+            "mean_cycles": 4143,
+            "busy_input_calls": 823,
+            "busy_input_reads": 5214
+          },
+          {
+            "entry": "C33370",
+            "name": "draw_postflight_tape",
+            "calls": 1328,
+            "compared": 748,
+            "matched": 748,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 580,
+            "mean_cycles": 58925,
+            "busy_input_calls": 748,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D04C",
+            "name": "draw_history_projection",
+            "calls": 1591,
+            "compared": 1562,
+            "matched": 1562,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 29,
+            "mean_cycles": 1881,
+            "busy_input_calls": 1562,
+            "busy_input_reads": 2356
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C0D04C_C33370_C1FE24_C1FE46_C0CF98_demo01_shadow.json",
+          "sha256": "778268587b1a875cbf42fa8ecd9fde02b00ffe7fc22700cf1c21bc79c8f75b66"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C1FE24",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FE46",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0CF98",
+            "name": "draw_scaled_stream_circle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33370",
+            "name": "draw_postflight_tape",
+            "calls": 812,
+            "compared": 250,
+            "matched": 250,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 562,
+            "mean_cycles": 89657,
+            "busy_input_calls": 250,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D04C",
+            "name": "draw_history_projection",
+            "calls": 989,
+            "compared": 988,
+            "matched": 988,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 66,
+            "busy_input_calls": 988,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C0D04C_C33370_C1FE24_C1FE46_C0CF98_qual_carrier_success_shadow.json",
+          "sha256": "2dac4e98b580baeffc8de48020b2580c532794159a226456a55c3167ed7e55b0"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C1FE24",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FE46",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0CF98",
+            "name": "draw_scaled_stream_circle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33370",
+            "name": "draw_postflight_tape",
+            "calls": 325,
+            "compared": 108,
+            "matched": 108,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 217,
+            "mean_cycles": 79397,
+            "busy_input_calls": 108,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D04C",
+            "name": "draw_history_projection",
+            "calls": 360,
+            "compared": 360,
+            "matched": 360,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 64,
+            "busy_input_calls": 360,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C0D04C_C33370_C1FE24_C1FE46_C0CF98_qual_fail_crashes_shadow.json",
+          "sha256": "331972e157221fc8f538782ff24d9c9509e3d9c23eefc2dcd648029dd1a04a63"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C1FE24",
+            "name": "draw_display_stream_point",
+            "calls": 935,
+            "compared": 935,
+            "matched": 935,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1518,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FE46",
+            "name": "draw_display_stream_point",
+            "calls": 134,
+            "compared": 134,
+            "matched": 134,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1379,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0CF98",
+            "name": "draw_scaled_stream_circle",
+            "calls": 845,
+            "compared": 845,
+            "matched": 845,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4113,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33370",
+            "name": "draw_postflight_tape",
+            "calls": 1328,
+            "compared": 1328,
+            "matched": 1328,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 66351,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D04C",
+            "name": "draw_history_projection",
+            "calls": 1591,
+            "compared": 1591,
+            "matched": 1591,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2607,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C0D04C_C33370_C1FE24_C1FE46_C0CF98_demo01_sandbox.json",
+          "sha256": "6ad6fc96ed7f2c649ff82769bdc323264b7f1b3398ec4597d5dd6b7f10856276"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C1FE24",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FE46",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0CF98",
+            "name": "draw_scaled_stream_circle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33370",
+            "name": "draw_postflight_tape",
+            "calls": 811,
+            "compared": 811,
+            "matched": 811,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 87130,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D04C",
+            "name": "draw_history_projection",
+            "calls": 1744,
+            "compared": 1744,
+            "matched": 1744,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 64,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C0D04C_C33370_C1FE24_C1FE46_C0CF98_qual_carrier_success_sandbox.json",
+          "sha256": "8ef5e2b4a55e4fdc126840d33f4ffb45e0c837f9e9cc80ea5fd5bc3090e9d22f"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C1FE24",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FE46",
+            "name": "draw_display_stream_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0CF98",
+            "name": "draw_scaled_stream_circle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33370",
+            "name": "draw_postflight_tape",
+            "calls": 325,
+            "compared": 325,
+            "matched": 325,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 78826,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C0D04C",
+            "name": "draw_history_projection",
+            "calls": 360,
+            "compared": 360,
+            "matched": 360,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 64,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C0D04C_C33370_C1FE24_C1FE46_C0CF98_qual_fail_crashes_sandbox.json",
+          "sha256": "c3a96c6bbffdc7a622e45212b9cf2c39c3c7ff40d6fde75bab535e6938df14b0"
+        }
+      }
+    ],
+    "each_owner_has_completed_comparisons": true
+  },
+  "instruction_dma": {
+    "local_instructions": 643,
+    "local_cases": 20576,
+    "previous_unique_instructions": 24703,
+    "overlap_instructions": 0,
+    "combined_unique_instructions": 25346,
+    "combined_cases": 811072,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 30,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_menu_context_math.h",
+      "sha256": "1bbc8394e94f2eaa3a8678bb56381bf3b143af05c9a84283ba034188a7978b4e"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "port/game/hud_projection_parents.c",
+      "sha256": "39d02a229e36d0bc370f6597542aa0f6e3e356d8590696431242f0dd519ee6e9"
+    },
+    {
+      "path": "port/game/hud_projection_parents.h",
+      "sha256": "4da55f5eeece8103522f7e93fda78d2b0ba435a88c7d71911f42e907a444293b"
+    },
+    {
+      "path": "port/game/hud_text_helpers.c",
+      "sha256": "f26adc5ba6cfa96edcdef2fcc48447c4ab9c79cbaaf7b982ebd985a9b61c8f68"
+    },
+    {
+      "path": "port/game/hud_text_helpers.h",
+      "sha256": "11c1b8f11d0dd0bc96360261bc192d73f921f22fc6f32a4f8d580604b8938493"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents.c",
+      "sha256": "3e49372a466d37b5af7431b104ee3d9a3632bd2dc61ca9d8e9e7bd07f6f76456"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents_math.h",
+      "sha256": "2ce71c38f5760e27a112dd6bcf81564b845a9cbce3e0036b0fea5992448c4113"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers.c",
+      "sha256": "6d82850c0d2ba62da9ac036b13d11cec3224c8b340d74a063af80b3e04e63290"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers_math.h",
+      "sha256": "6c5c6028b6934c94c0a01bf4ac201ab634575be14ba0e1b113f3147744463bac"
+    }
+  ],
+  "full_gate": {
+    "rows": 592,
+    "recordings": 3,
+    "shadow_matches": 568446,
+    "sandbox_matches": 443868,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308147,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "afafa8c76bbc33732821cdc7af05c9b19885ff3653d44020dde940125f2dfa91"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207396,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "1b5b856bcb670437ff1a8204eeac80bb2eda1b9e8dfed96ec1c43ce5f486180e"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52903,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "7fbc9511a8aefbc52e13112e732d518bc496b318d9f1ea29c764cd3af08e4830"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150619,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "0f4be8c54a8fd5560286618be8c24a5dbdd3eb399716260ca3c286cfc822c718"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 248003,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "d756b9d1bd609e66ca706549b3c9ce2cddc84b87067fec57312d450a80177603"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45246,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "1c75e4173cf982a027645382a5acead9c26ecffb2d29d3ce5693463e04a8d7b6"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1676657622,
+    "build_gib": 1.562
+  },
+  "limits": [
+    "Controlled contracts cover every owned boundary; complete child-entry CPU/SR/RAM is compared.",
+    "Original-child history uses original behind-view zero-XY projection and history-count bounds; display uses the original numeric record class and text column bounds. Analog tape paths are controlled-contract proofs. No active glyph/fault/DMA proof is claimed by frozen-clock fixtures.",
+    "Original stream entries retain the exact C1F942 indirect caller, table slot and observed C1F944 edge. No entire table extent or selector-domain claim is added.",
+    "Ten older render parents and the full original cold/indirect/callback graph remain game-function work.",
+    "C2C392 computed transfer, C1612C graphics-wait integration, ALL416/361, deferred Copper fade and Kickstart services remain open."
+  ],
+  "removed_old_glue": [
+    {
+      "path": "port/game/glue/glue_display_points.c",
+      "preceding_sha256": "9b84230c28d28d01b580b38efb8b6aa5c51516114f35ea0034b07b91daf566b9"
+    },
+    {
+      "path": "port/game/glue/glue_history_projection.c",
+      "preceding_sha256": "ef89dbc65746849d8f44d16bbaf00b1b6f0f1e01aea7ba695681cbadb481f509"
+    },
+    {
+      "path": "port/game/glue/glue_scaled_circle.c",
+      "preceding_sha256": "cdf060dac4a1494adf872030bc7a01afbc0508b2afd74a8cefdf9e056ca226e8"
+    }
+  ],
+  "next": {
+    "entries": [
+      "C2D16C",
+      "C21500",
+      "C2122A",
+      "C20592",
+      "C2168A",
+      "C203D0",
+      "C201A6",
+      "C3019C",
+      "C1FB82",
+      "C1F99A"
+    ],
+    "unique_instructions": 1101,
+    "shared_instructions": 0,
+    "manifest": {
+      "path": "analysis/data/legacy_render_parents_scope_inventory.json",
+      "sha256": "c23f30538dbdba81d8fe5846cce5df7353bacf442536971b33f3e3196cc30877"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/hud_history_stream.c",
+      "sha256": "0ed4005248c2505986f6414140b17f986007bee2c24f79739fa4358bf2c39146"
+    },
+    {
+      "path": "port/game/hud_history_stream.h",
+      "sha256": "d24936b40e4db6404ce6c1d0565180d737bbae0eddc2da7395420a164a9c0211"
+    },
+    {
+      "path": "port/game/glue/glue_postflight_hud.c",
+      "sha256": "525d34d907172d94a659f3357585a24e590db25ac90db6b12cf915960103c4dd"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "42f59f3fdf24bfd8f3e3c92b91ce716d14ab17fe0c4103e2d5b4fb2f9b312984"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "e7a00f97b2fdc0c45367bca55c6532766fd47b4355e0732853b7ae31769b04b8"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "57f5a55fea752eb5b52c5f3f9a8eca2f829d14627cce141b8da14df19c5396b0"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "cc2c98874cfd8caecd06e040976f06de9a8488166026c11c9f7e85f604afc0c5"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream.c",
+      "sha256": "a8547b097febb8baf72c0883bff9d876cd67569c1dfd05c89e57d1574dff3a35"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream.h",
+      "sha256": "52b96ad3c0bac69c4f3b7a48e16eb51284acdccfd4037514299621304049594c"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream_math.h",
+      "sha256": "5b13917cc0efd7913dc9d540544e80791269412bac89bcc9db293ea1c07a3f1e"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream_step.c",
+      "sha256": "de8058cba64a9f8c1598196dde04bc3ad9edc23cb13213b21e2deb31e36d2063"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_hud_history_stream_scope.py",
+      "sha256": "3c63e7f930745052ef2078b5f683f66266e201c723c19be15d8ada662f318877"
+    },
+    {
+      "path": "tools/recomp/audit_hud_history_stream_source.py",
+      "sha256": "daecdf05fc1e4537568a0dda32d5648be77d524c6be862f60fc31cea2a22c084"
+    },
+    {
+      "path": "tools/recomp/check_hud_history_stream.py",
+      "sha256": "5fb07343a352bc3ca186395ca8e429676bfda58e2fa551a79b11df909feb2698"
+    },
+    {
+      "path": "tools/recomp/check_hud_history_stream_dispatch.py",
+      "sha256": "5f6f6180e4124cc6ccc3b71bb708a7a5b5ca95c7ef5c755acccb3c3f6f0ba317"
+    },
+    {
+      "path": "tools/recomp/hud_history_stream_bus_budget.c",
+      "sha256": "9d2f00d2406c0625d7a8b56c4c40001f45cc1517f33f226bec7972de58c3896d"
+    },
+    {
+      "path": "tools/recomp/hud_history_stream_contract_children.c",
+      "sha256": "5f14a386c705a97eac69775d77a0fad269692d6f1f10fa5976a61a9265c6a396"
+    },
+    {
+      "path": "tools/recomp/hud_history_stream_contract_oracle.c",
+      "sha256": "fa110e97fdbe134de7cdde51db8c4006fa8b6b5a5b100cbf7b4eac4dbb24c38b"
+    },
+    {
+      "path": "tools/recomp/hud_history_stream_dispatch_oracle.c",
+      "sha256": "0ef635b28e3f6493ca24d8dae9773fdeb04ae188f47862fc04409cad1e5320ab"
+    },
+    {
+      "path": "tools/recomp/hud_history_stream_fixture.h",
+      "sha256": "5344546e55eabb5c7a7c72599ab7d444260b71af8be996b95b1a121f52ba10ac"
+    },
+    {
+      "path": "tools/recomp/hud_history_stream_oracle.c",
+      "sha256": "420d2f5931ff68cbe344c48f98e03f9e0c2ceb24c83bd17fd7497a2972ded155"
+    },
+    {
+      "path": "tools/recomp/audit_legacy_render_parents_scope.py",
+      "sha256": "e6a6ec9a13d21227c995932e79ca24c1d9d4aaea75cd57c68c0540ccab03933f"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/hud_history_stream_contract_full.log",
+      "sha256": "7dd2a9238e6e940b5fae4114b53e8f34178a819479ab9c09f34ee1466bb06a56"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_real_full.log",
+      "sha256": "c708facd48a7905ba550a8b80f02ed3306e9973341c4f0e9ecca3693dfb01291"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_dispatch_probe.log",
+      "sha256": "25c7a95ef3dd82883cdb0f6f98de098954b6502bbaf6a07a2765b2e3cbc0a936"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_dma_local.log",
+      "sha256": "6a5a0fdf76d716838cb63e38a0d44b94730c1ae8b21596ed3eeae6023b96fac3"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_dma_union.log",
+      "sha256": "ed757b5f59e36589380fef590b88c795dc49a03636e87383eb991a8d3a95692e"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_compatibility.log",
+      "sha256": "22397c5f55c49735ee65b0206b236758e637a5f71a732f2a3cbf15e2483806b6"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_normal_build.log",
+      "sha256": "dc8f74d819786c099e4c9119c8bde1be08165d6abcb018908523556f42361c6d"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_msvc.log",
+      "sha256": "cb25d745403908489d45a05294f7e9f29fb03dfad4b6551125666faae0d3a607"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_msvc_configure.log",
+      "sha256": "abe78f40cb4e351f258ce6e5060b480fb20b75562210216f75f3177e13c8fe2b"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_ports_gate.log",
+      "sha256": "0c86fee4dd3b165442252d3116353e6d28eab02356ea9f83c1db760668e8a370"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_timing.log",
+      "sha256": "a398f3bc2ee8033db78ef4a9e7111a3c383e4aef068f1ebb1852301687bd1e37"
+    },
+    {
+      "path": "build/recomp/hud_history_stream_whole_call.log",
+      "sha256": "9d52b76c97a1776a4b31b946a2c3df429a943e06b59a6e3016e46917d5bb37c9"
+    }
+  ],
+  "retained_build_failures": [
+    {
+      "path": "build/recomp/hud_history_stream_contract_probe.log",
+      "sha256": "126afbd63648619481d945c1cadefa344fde87f9c145888f36a3c035d21224a3"
+    }
+  ]
+}

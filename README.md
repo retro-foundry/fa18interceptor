@@ -16,6 +16,15 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+Five complete history/display and indirect stream upgrades pass 163,840
+full CPU/PC/SR/RAM calls, all 643 controlled source boundaries and 15,360
+bounded dispatch calls. Independent normal C passes all five: 5,901 shadow /
+8,073 sandbox. All 36,236 isolated live frames and seals match; combined
+DMA passes 25,346 / 811,072. Source-timed entries rise to 456. See
+[history and stream proof](analysis/routines/native_c_hud_history_stream.md).
+Ten older render parents have 1,101 sealed boundaries and original callers.
+Full original game-function and callback coverage remains open.
+
 Six complete projection, cue and conditional-text parent upgrades pass
 196,608 full CPU/PC/SR/RAM calls, all 279 controlled boundaries and 18,432
 bounded actual dispatch fixtures. Independent normal C passes all six:
@@ -23,8 +32,7 @@ bounded actual dispatch fixtures. Independent normal C passes all six:
 and seals match; fresh combined DMA passes 24,703 / 790,496. Source-timed
 entries rise to 451. See
 [projection-parent proof](analysis/routines/native_c_hud_projection_parents.md).
-The remaining history-projection and postflight-display parents have 619 sealed
-boundaries. Original game-call/callback coverage remains open.
+The history-projection and postflight-display parents are now complete above. Original game-call/callback coverage remains open.
 
 Eight complete HUD cache/text helper upgrades pass 262,144 full CPU/PC/SR/RAM
 calls, all 182 shared controlled boundaries and 24,576 bounded actual dispatch

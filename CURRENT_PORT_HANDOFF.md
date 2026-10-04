@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-04. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 6285fc15); ignored gate logs may
+history (the preceding handoff is in commit 8afa3c83); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -62,6 +62,8 @@ Eight complete HUD cache/text helper upgrades retain that translated count
 and raise source-timed entries to 447.
 Six complete projection, cue and conditional-text parent upgrades retain
 that translated count and raise source-timed entries to 451.
+Five complete history/display and indirect stream upgrades retain that
+translated count and raise source-timed entries to 456.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -69,6 +71,36 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 526 of 624 translated entries plus sixty-six source-only entries remain
+  registered: 592 rows, 456 source-timed (390 translated plus sixty-six
+  source-only). Complete C0D04C/C33370/C1FE24/C1FE46/C0CF98 upgrades own
+  643 unique / zero shared boundaries and 48 original child sites. Original
+  direct callers and three exact indirect C1F942 table/observed return edges
+  are sealed. All 163,840 whole CPU/PC/full-SR/all-RAM calls pass; controlled
+  contracts cover every owned boundary. Original-child coverage is 232/237,
+  165/382 and 8/8 for each stream owner, with original behind-view, numeric
+  record-class and text-column bounds. Analog paths are controlled-contract
+  proofs; frozen-clock fixtures make no active glyph/fault/DMA claim.
+  Ordered packets and terminal hardware match with zero fixture writes.
+  Actual dispatch passes 15,360 bounded calls, exact classification and all
+  guards, using the original indirect caller for stream entries. Independent
+  normal C passes all five: 5,901 shadow / 8,073 sandbox. All 36,236 isolated
+  live frames and RAM seals match. Shared runtime/CPU/bus/arithmetic/
+  classification/observer and earlier completed HUD domains are unchanged;
+  all 30 older generator families are byte-identical. Local DMA passes 643 /
+  20,576; fresh combined DMA and independent union pass 25,346 / 811,072
+  (previous 24,703 plus 643, no overlap). GNU/MSVC Release pass; build/
+  is 1.562 GiB. Full 592-row gate passes 568,446 shadow / 443,868 sandbox,
+  zero mismatches, exact seals and poison frames. Family exact through 600;
+  ALL remains 416/361. See analysis/routines/native_c_hud_history_stream.md
+  and analysis/figures/native_hud_history_stream_checkpoint.json for exact
+  hashes, classifications, coverage limits and retained fixture build failure.
+  Next ten older render parents have 1,101 unique / zero shared boundaries
+  and original direct/six indirect callers sealed in analysis/data/
+  legacy_render_parents_scope_inventory.json. C2C392 computed transfer,
+  C1612C graphics-wait integration and full original cold/indirect/callback
+  coverage remain open. No service or timing-only work is selected.
 
 - 526 of 624 translated entries plus sixty-six source-only callable entries
   remain registered: 592 rows and 451 source-timed entries (385 translated,

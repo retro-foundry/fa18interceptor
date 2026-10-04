@@ -273,14 +273,14 @@ const FA18Port fa18_ports[] = {
     {0xC33F70, glue_C33F70, "draw_speed_readout_tick", 0, 0, glue_C33F70_step, 0xC33FB2, 1, 0, glue_C33F70_owns},
     {0xC33F8A, glue_C33F8A, "draw_altitude_readout_tick", 0, 0, glue_C33F8A_step, 0xC33FB2, 1, 0, glue_C33F8A_owns},
     {0xC33FB4, glue_C33FB4, "draw_bounded_readout_sweep", 0, 0, glue_C33FB4_step, 0xC34066, 1, 0xC33FB2, glue_C33FB4_owns},
-    {0xC1FE24, glue_C1FE24, "draw_display_stream_point", 750},
-    {0xC1FE46, glue_C1FE46, "draw_display_stream_point", 750},
+    {0xC1FE24, glue_C1FE24, "draw_display_stream_point", 0, 0, glue_C1FE24_complete_step, 0xC1FE46, 1, 0, glue_C1FE24_owns},
+    {0xC1FE46, glue_C1FE46, "draw_display_stream_point", 0, 0, glue_C1FE46_complete_step, 0xC1FE68, 1, 0, glue_C1FE46_owns},
     {0xC0DAEE, glue_C0DAEE, "draw_fixed_matrix_mark", 0, 0, glue_C0DAEE_complete_step, 0xC0DB42, 1, 0, glue_C0DAEE_owns},
     {0xC17F8C, glue_C17F8C, "start_sound_6", 1100},
     {0xC18108, glue_C18108, "start_sound_12", 1050},
     {0xC1B906, glue_C1B906, "start_view_mode_zero", 0, 0, glue_C1B906_step, 0xC1C2B8},
     {0xC0CFFA, glue_C0CFFA, "draw_scaled_view_circle", 0, 0, glue_C0CFFA_complete_step, 0xC0D048, 1, 0, glue_C0CFFA_owns},
-    {0xC0CF98, glue_C0CF98, "draw_scaled_stream_circle", 1400},
+    {0xC0CF98, glue_C0CF98, "draw_scaled_stream_circle", 0, 0, glue_C0CF98_complete_step, 0xC0CFB6, 1, 0, glue_C0CF98_owns},
     {0xC13176, glue_C13176, "dispatch_event_sound", 650},
     {0xC12098, glue_C12098, "update_view_controls", 0, 0, glue_C12098_step, 0xC12242},
     {0xC1B27E, glue_C1B27E, "update_flight_input", 2400},
@@ -635,7 +635,7 @@ const FA18Port fa18_ports[] = {
     /* batch 63b */
     {0xC33B38, glue_C33B38, "draw_postflight_variant", 0, 0, glue_C33B38_complete_step, 0xC33CD2, 1, 0xC33B36, glue_C33B38_owns},
     /* batch 63c */
-    {0xC33370, glue_C33370, "draw_postflight_tape", 40000},
+    {0xC33370, glue_C33370, "draw_postflight_tape", 0, 0, glue_C33370_complete_step, 0xC3395E, 1, 0, glue_C33370_owns},
     /* batch 63d: HUD stage */
     {0xC332BC, glue_C332BC, "draw_postflight_hud", 0, 0, glue_C332BC_complete_step, 0xC332FC, 1, 0xC332B4, glue_C332BC_owns},
     /* polygon to row C7 */
@@ -722,7 +722,7 @@ const FA18Port fa18_ports[] = {
     {0xC13D84, glue_C13D84, "update_indexed_record", 18000},
     {0xC26EBE, glue_C26EBE, "update_candidate_record", 0, 0, glue_C26EBE_complete_step, 0xC279C8, 0, 0xC26EB8, glue_C26EBE_owns},
     {0xC23CA6, glue_C23CA6, "update_record_view", 0, 0, glue_C23CA6_step, 0xC24368},
-    {0xC0D04C, glue_C0D04C, "draw_history_projection", 25000},
+    {0xC0D04C, glue_C0D04C, "draw_history_projection", 0, 0, glue_C0D04C_complete_step, 0xC0D334, 1, 0xC0D048, glue_C0D04C_owns},
     /* selected projected segment */
     {0xC1FF9C, glue_C1FF9C, "draw_selected_segment", 3500},
     /* planar lane mask handlers */

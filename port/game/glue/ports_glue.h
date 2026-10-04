@@ -950,3 +950,5 @@ int glue_C1ECFC_step(void);
 #include "glue_hud_text_helpers.h"
 
 #include "glue_hud_projection_parents.h"
+
+#include "glue_hud_history_stream.h"
