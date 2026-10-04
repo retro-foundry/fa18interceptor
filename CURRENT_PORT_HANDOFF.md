@@ -165,10 +165,11 @@ Only hashes, addresses, and register metadata are committed in
 `analysis/data/romfree_hunk_layout.json` and `romfree_cold_entry.json`; captured
 RAM stays under ignored `build/amiga` as oracle evidence.
 
-The seven existing service bridges, Exec FindTask/FindName and all seven list
-operations now execute 208 C phases without reading ROM instruction or operand bytes.
+The seven existing service bridges, Exec FindTask/FindName, all seven list
+operations and message/signal/task-protection services now execute 417 C phases
+without reading ROM instruction or operand bytes.
 Nested calls preserve the original stack and vectors. The structural oracle
-passes 106,496 CPU/DMA fixtures with cleared
+passes 213,504 CPU/DMA fixtures with cleared
 ROM buffers, a strict access guard, full registers/SR/RAM, ordered memory and
 hardware accesses, and exact cycles. It corrected potgo's original low-word-
 first stack write. Blitter ownership's deeper helpers still execute ROM in the
@@ -189,6 +190,23 @@ register/SR/RAM/access/cycle parity, independent topology assertions and stable
 signed priority ordering. Original Engine9000 contracts cover Insert, RemHead
 and Enqueue; the four unobserved services have static/controlled proofs.
 See `analysis/routines/fc15e8_fc1694_exec_lists.md`.
+
+Reusable `exec_task_services.c` adds PutMsg, ReplyMsg, WaitPort, SetSignal,
+SetExcept, Signal, Wait, AllocSignal/FreeSignal, AllocTrap/FreeTrap, Forbid,
+Permit and Reschedule semantics. The pinned adapter preserves nested Signal,
+Enqueue, Wait, Cause and Supervisor calls on the original machine timeline.
+43,008 complete nonblocking CPU/DMA calls match all registers, full SR, RAM,
+ordered accesses and cycles with ROM/rtarea cleared and the guard active.
+Fixtures cover empty/nonempty message queues, all port actions, controlled
+guest callbacks, task wakeups, deferred rescheduling, pending Wait, bit
+exhaustion and nesting. Blocking switches, real Cause and Supervisor remain
+unproved dependencies; callback fixtures do not replace their implementations.
+Original Engine9000 contracts cover PutMsg, ReplyMsg, Signal, SetSignal,
+Permit and nonempty WaitPort. A blocking Wait observation enters idle STOP
+and did not return within its instruction bound. It is recorded as incomplete.
+See `analysis/routines/fc1b76_fc2046_exec_task_services.md` and
+`analysis/data/romfree_exec_task_contracts.json`. The reference runner enables
+the new signatures by default; `--no-os-task-services` retains the ROM oracle.
 
 `analysis/data/romfree_startup_checkpoint.json` records original execution from
 C0DEB0 to C0E27E: 1,632 instructions /11,677 OCS colour clocks, 1,065 ROM/rtarea

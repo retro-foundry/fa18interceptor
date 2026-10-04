@@ -13,6 +13,7 @@
 #include "exec_glue.h"
 #include "exec_task_lookup.h"
 #include "exec_lists_adapter.h"
+#include "exec_task_services_adapter.h"
 #include "graphics_glue.h"
 #include "graphics_wait_bovp.h"
 #include "graphics_blitter_ownership.h"

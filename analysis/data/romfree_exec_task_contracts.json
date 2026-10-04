@@ -1,0 +1,496 @@
+{
+  "schema": "amiga.exec_task_contract_inventory.v1",
+  "captured_ram_is_runtime_input": false,
+  "original_engine_contracts": [
+    {
+      "service": "putmsg",
+      "evidence_directory": "build/amiga/exec-putmsg-contract",
+      "schema": "amiga.service_contract.v1",
+      "entry_pc": 16522102,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 12606456,
+          "d1": 60000,
+          "d2": 208896,
+          "d3": 12288,
+          "d4": 12835583,
+          "d5": 7114,
+          "d6": 1310730,
+          "d7": 12779970,
+          "a0": 12606456,
+          "a1": 12606590,
+          "a2": 12594824,
+          "a3": 0,
+          "a4": 7562,
+          "a5": 16683866,
+          "a6": 12583542,
+          "a7": 13107140,
+          "sr": 8976,
+          "pc": 16522102
+        },
+        "cycle": 824527592,
+        "beam": "8001022e",
+        "hardware_frame": 5,
+        "files": {
+          "entry_chip.bin": "8d50a8bf9d415cc16156593981f382d7a7cfdce37f1ea4532996aee013b596aa",
+          "entry_slow.bin": "de22d69896295d387b0c734c621ef29ecf2201928a5b434b03723eaa5971bd24",
+          "entry_state.bin": "7a0e42345bb7c36045cf07c913e9e734e3ee9b2055726fd5e030fbf8a073e586"
+        }
+      },
+      "return": {
+        "registers": {
+          "d0": 0,
+          "d1": 5,
+          "d2": 208896,
+          "d3": 12288,
+          "d4": 12835583,
+          "d5": 7114,
+          "d6": 1310730,
+          "d7": 12779970,
+          "a0": 12583948,
+          "a1": 12606758,
+          "a2": 12594824,
+          "a3": 0,
+          "a4": 7562,
+          "a5": 16683866,
+          "a6": 12583542,
+          "a7": 13107144,
+          "sr": 8984,
+          "pc": 16684062
+        },
+        "cycle": 824528074,
+        "beam": "8001022e",
+        "hardware_frame": 5,
+        "files": {
+          "return_chip.bin": "8d50a8bf9d415cc16156593981f382d7a7cfdce37f1ea4532996aee013b596aa",
+          "return_slow.bin": "c9e501382dd3c8095b01f6aeb5d18a4634cfa0239a93cfe1aff73b62b750c537",
+          "return_state.bin": "f54aa51aa926cfdd90753e60803d60c24ab5d3cc60b97ca4ec2253cabc958ebb"
+        }
+      },
+      "instructions": 81,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "51a73627238fbbfbcbdec1352570ae575002b7d50a99fc9610dc8c1c7551b269",
+      "hardware_sha256": "17e19572cfff91cd9d9ec82f3004002fee4a2ed2855be808181ad46508b07178",
+      "captured_ram_is_runtime_input": false,
+      "return_pc": 16684062
+    },
+    {
+      "service": "replymsg",
+      "evidence_directory": "build/amiga/exec-replymsg-contract",
+      "schema": "amiga.service_contract.v1",
+      "entry_pc": 16522264,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 12599932,
+          "d1": 260000,
+          "d2": 0,
+          "d3": 0,
+          "d4": 0,
+          "d5": 0,
+          "d6": 0,
+          "d7": 0,
+          "a0": 12583542,
+          "a1": 12599932,
+          "a2": 12594824,
+          "a3": 0,
+          "a4": 12927016,
+          "a5": 16683866,
+          "a6": 12583542,
+          "a7": 13107140,
+          "sr": 8976,
+          "pc": 16522264
+        },
+        "cycle": 502186527,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "entry_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "entry_slow.bin": "a8dab0c94043b131fe2846990ec49781ad980f47a82f3fed891e939243ff1d59",
+          "entry_state.bin": "0af75a3411af6944bd78720789eb2a0c4600a7368fd5e9515c30d75677b48f49"
+        }
+      },
+      "return": {
+        "registers": {
+          "d0": 0,
+          "d1": 20,
+          "d2": 0,
+          "d3": 0,
+          "d4": 0,
+          "d5": 0,
+          "d6": 0,
+          "d7": 0,
+          "a0": 12583948,
+          "a1": 12595674,
+          "a2": 12594824,
+          "a3": 0,
+          "a4": 12927016,
+          "a5": 16683866,
+          "a6": 12583542,
+          "a7": 13107144,
+          "sr": 8984,
+          "pc": 16684062
+        },
+        "cycle": 502187054,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "return_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "return_slow.bin": "ee56cb749769291b29ac2a73533641f0818fb54e41d0eb2be48c18b267f064e7",
+          "return_state.bin": "d6c4878740763378437bc9ff94eb89a3b1b1c3f084fe151dcd0929dfaf4950fe"
+        }
+      },
+      "instructions": 84,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "3adc2c744786c1d729ecd88f1c474b5272bc0f22814b30492e7dc06093abaf92",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "7e0faa17bd444e7d9daea1866122f9ac60dbeaa93e70c8f48e84e271bec4da35",
+      "hardware_sha256": "a3915f23e93bf2ab36ec8d933076fbb77ad4f824bb2d03a3e48733dbfc934d8d",
+      "captured_ram_is_runtime_input": false,
+      "return_pc": 16684062
+    },
+    {
+      "service": "signal",
+      "evidence_directory": "build/amiga/exec-signal-contract",
+      "schema": "amiga.service_contract.v1",
+      "entry_pc": 16522884,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 1073741824,
+          "d1": 1073741824,
+          "d2": 0,
+          "d3": 0,
+          "d4": 0,
+          "d5": 0,
+          "d6": 0,
+          "d7": 0,
+          "a0": 12599896,
+          "a1": 12595674,
+          "a2": 12594824,
+          "a3": 0,
+          "a4": 12927016,
+          "a5": 16683866,
+          "a6": 12583542,
+          "a7": 13107136,
+          "sr": 8976,
+          "pc": 16522884
+        },
+        "cycle": 502186683,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "entry_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "entry_slow.bin": "86b042bb31bf5884e0df39dbf84d340fc9ba9c0c1d0506c76489da26e0ff3365",
+          "entry_state.bin": "495e679ce852aec6c39d80c6b783110390ae66e3b8e52271ccfad5b8193482cc"
+        }
+      },
+      "return": {
+        "registers": {
+          "d0": 0,
+          "d1": 20,
+          "d2": 0,
+          "d3": 0,
+          "d4": 0,
+          "d5": 0,
+          "d6": 0,
+          "d7": 0,
+          "a0": 12583948,
+          "a1": 12595674,
+          "a2": 12594824,
+          "a3": 0,
+          "a4": 12927016,
+          "a5": 16683866,
+          "a6": 12583542,
+          "a7": 13107140,
+          "sr": 8968,
+          "pc": 16522202
+        },
+        "cycle": 502187001,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "return_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "return_slow.bin": "650c8a42387052d0a0722b16c9b1810e2e168d9f3a3a47b54b6efb82bfc57808",
+          "return_state.bin": "047685a8fd89678643097723364e0afadbb5048d5d6b3c3f6b0dee7129bc7c3c"
+        }
+      },
+      "instructions": 51,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "3adc2c744786c1d729ecd88f1c474b5272bc0f22814b30492e7dc06093abaf92",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "52d0df6eb333c38a823ed0f2b2aaf73a4fd828d59428a130ec3d7c539cd20170",
+      "hardware_sha256": "73f85e9d4a35e1d23a1bd17363a03c9f5f791e78319427c544676c316b57453c",
+      "captured_ram_is_runtime_input": false,
+      "return_pc": 16522202
+    },
+    {
+      "service": "setsignal",
+      "evidence_directory": "build/amiga/exec-setsignal-contract",
+      "schema": "amiga.service_contract.v1",
+      "entry_pc": 16522846,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 0,
+          "d1": 256,
+          "d2": 12585884,
+          "d3": 650,
+          "d4": 310986673,
+          "d5": 86400,
+          "d6": 310986673,
+          "d7": 12585692,
+          "a0": 12585692,
+          "a1": 0,
+          "a2": 12584508,
+          "a3": 16763678,
+          "a4": 16729672,
+          "a5": 16728372,
+          "a6": 12583542,
+          "a7": 12586596,
+          "sr": 0,
+          "pc": 16522846
+        },
+        "cycle": 824752788,
+        "beam": "800101d7",
+        "hardware_frame": 8,
+        "files": {
+          "entry_chip.bin": "e03043653a71981f9da6b159d2f9c7cf929f1ddca3d65ded52c1fd26bef39a94",
+          "entry_slow.bin": "c528db7e467c544f56dd2d9a4999ab8a7bda11fe43124f583bb055e7541491de",
+          "entry_state.bin": "13a433a705a1f86b4a6b10df0b80af69ec94bf69cb97e15f4836d687eb201477"
+        }
+      },
+      "return": {
+        "registers": {
+          "d0": 0,
+          "d1": 0,
+          "d2": 12585884,
+          "d3": 650,
+          "d4": 310986673,
+          "d5": 86400,
+          "d6": 310986673,
+          "d7": 12585692,
+          "a0": 12585626,
+          "a1": 12585600,
+          "a2": 12584508,
+          "a3": 16763678,
+          "a4": 16729672,
+          "a5": 16728372,
+          "a6": 12583542,
+          "a7": 12586600,
+          "sr": 20,
+          "pc": 16729722
+        },
+        "cycle": 824752942,
+        "beam": "800101d7",
+        "hardware_frame": 8,
+        "files": {
+          "return_chip.bin": "e03043653a71981f9da6b159d2f9c7cf929f1ddca3d65ded52c1fd26bef39a94",
+          "return_slow.bin": "b5e69607528eeca661c931c29c7dbd996a19083e900b43c1012d855e795cc53e",
+          "return_state.bin": "56abe7aeb033d29a3ca38d2321c00c05d0f117ae56c45543f19213fee2d339a4"
+        }
+      },
+      "instructions": 22,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "289921f4cf7e88eebbf0af5173afcce1f069a0cdaf09d10fb3d60f492fe96948",
+      "hardware_sha256": "6deb54306162bfea94e216d9d692d97c247dc3d9ac648ded4e3701f963031275",
+      "captured_ram_is_runtime_input": false,
+      "return_pc": 16729722
+    },
+    {
+      "service": "permit",
+      "evidence_directory": "build/amiga/exec-permit-contract",
+      "schema": "amiga.service_contract.v1",
+      "entry_pc": 16523164,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 0,
+          "d1": 0,
+          "d2": 1073741824,
+          "d3": 310986582,
+          "d4": 221899,
+          "d5": 0,
+          "d6": 16615132,
+          "d7": 3221225472,
+          "a0": 12602396,
+          "a1": 12601372,
+          "a2": 12599910,
+          "a3": 12601372,
+          "a4": 12600642,
+          "a5": 12599826,
+          "a6": 12583542,
+          "a7": 12599706,
+          "sr": 0,
+          "pc": 16523164
+        },
+        "cycle": 502189613,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "entry_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "entry_slow.bin": "b43054eaae40be986d241a021a408ea226fb5a08887dad59b41ca718d91d5347",
+          "entry_state.bin": "4ce8bab9dbdd5522e22c94bab20fa55f1443386f23f9de6f8cdee41f057aacb9"
+        }
+      },
+      "return": {
+        "registers": {
+          "d0": 0,
+          "d1": 0,
+          "d2": 1073741824,
+          "d3": 310986582,
+          "d4": 221899,
+          "d5": 0,
+          "d6": 16615132,
+          "d7": 3221225472,
+          "a0": 12602396,
+          "a1": 12601372,
+          "a2": 12599910,
+          "a3": 12601372,
+          "a4": 12600642,
+          "a5": 12599826,
+          "a6": 12583542,
+          "a7": 12599710,
+          "sr": 28,
+          "pc": 16526910
+        },
+        "cycle": 502189661,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "return_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "return_slow.bin": "08528d12fa86a78b1032df4b844337dbe04d51f42d6f78fca9e653b55a73381c",
+          "return_state.bin": "845f594592601d3e65e288ceaf8c35de825c644fecd78badf55c247cd8f84761"
+        }
+      },
+      "instructions": 7,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "3adc2c744786c1d729ecd88f1c474b5272bc0f22814b30492e7dc06093abaf92",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "68f163918cbc53d3a94bf22cecef0409a5e1a7be73e7e00897f3dad97f8bd60c",
+      "hardware_sha256": "8b81850252dd403df6411a9848a64cdc4173b78397dbcb163dc03b0f9f52d38d",
+      "captured_ram_is_runtime_input": false,
+      "return_pc": 16526910
+    },
+    {
+      "service": "waitport",
+      "evidence_directory": "build/amiga/waitport-cold-contract",
+      "schema": "amiga.service_contract.v1",
+      "entry_pc": 16522290,
+      "return_pc": 12640342,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 12607800,
+          "d1": 12615560,
+          "d2": 0,
+          "d3": 0,
+          "d4": 0,
+          "d5": 0,
+          "d6": 0,
+          "d7": 0,
+          "a0": 12927108,
+          "a1": 12615560,
+          "a2": 0,
+          "a3": 0,
+          "a4": 12927016,
+          "a5": 12931292,
+          "a6": 12583542,
+          "a7": 12931232,
+          "sr": 16,
+          "pc": 16522290
+        },
+        "cycle": 502195259,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "entry_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "entry_slow.bin": "8602fa968f659963aa2200421d7cc6d94e23951f1ccb6350b17d34e57ae0b3ce",
+          "entry_state.bin": "f289828a7c82a46ca8a9c55f636e15f903a6e22e936dcb2fdccc0ff4b4cd1c4a"
+        }
+      },
+      "return": {
+        "registers": {
+          "d0": 12610466,
+          "d1": 12615560,
+          "d2": 0,
+          "d3": 0,
+          "d4": 0,
+          "d5": 0,
+          "d6": 0,
+          "d7": 0,
+          "a0": 12927108,
+          "a1": 12610466,
+          "a2": 0,
+          "a3": 0,
+          "a4": 12927016,
+          "a5": 12931292,
+          "a6": 12583542,
+          "a7": 12931236,
+          "sr": 16,
+          "pc": 12640342
+        },
+        "cycle": 502195291,
+        "beam": "00000239",
+        "hardware_frame": 1,
+        "files": {
+          "return_chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+          "return_slow.bin": "8602fa968f659963aa2200421d7cc6d94e23951f1ccb6350b17d34e57ae0b3ce",
+          "return_state.bin": "b62d6fdcf630d68c9a49fb6f75efd1dec45d9b4d4b8c05894e4ac6ced21ac45a"
+        }
+      },
+      "instructions": 5,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "3adc2c744786c1d729ecd88f1c474b5272bc0f22814b30492e7dc06093abaf92",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "91a54e65fa75621015e11d389bacd6b082603a5dcd5d2849f8e74d43b5ea7454",
+      "hardware_sha256": "2db51c81ac3231d34cdc1638efdbac1e871bfd397f75b27e231e81565fbe515b",
+      "captured_ram_is_runtime_input": false
+    }
+  ],
+  "unobserved_services_static_and_controlled": [
+    "SetExcept",
+    "AllocSignal",
+    "FreeSignal",
+    "AllocTrap",
+    "FreeTrap",
+    "Forbid",
+    "Reschedule"
+  ],
+  "blocking_wait_observation": {
+    "entry": "FC1F0C",
+    "evidence_directory": "build/amiga/exec-wait-contract",
+    "complete": false,
+    "reason": "100000 instructions enter idle STOP at FC0F90; no completed return captured"
+  },
+  "whole_game_rom_independent": false
+}

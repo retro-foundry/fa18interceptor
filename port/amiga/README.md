@@ -40,6 +40,13 @@ ctest --test-dir build/amiga-compat -C Release --output-on-failure
   and Enqueue semantics. Explicit guest register/CCR state and bus callbacks
   preserve sentinel links, insertion after equal priorities and access order.
   ABI addresses and CPU timing stay in the embedding machine adapter.
+- `exec_task_services.h`: resumable message queues, signals, signal/trap bit
+  allocation, interrupt/task nesting and reschedule requests. Explicit 68000
+  register/CCR state and byte/word/long bus callbacks retain access ordering.
+  The caller supplies semantic phases and their verified field/value arguments;
+  this layer has no ROM entry addresses or interpreter dependency. Guest calls,
+  Supervisor, scheduler continuations, IRQ delivery and timing remain adapter
+  responsibilities. Blocking Wait and WaitPort need a working scheduler.
 - `rom_audit.h`: optional reference observations of nested flow, CPU state,
   accesses and machine time. Its bounded table fails closed if exhausted. This
   is an inventory, not ordered entry/exit fixtures or complete game coverage.

@@ -21,6 +21,9 @@ FAMILIES = [
     ("exec_task_lookup.c", "fa18_os_exec_find_task_step"),
     ("exec_task_lookup.c", "fa18_os_exec_find_name_step"),
     ("exec_lists_adapter.c", "fa18_os_exec_lists_step"),
+    ("exec_task_services_adapter.c", "fa18_os_exec_messages_step"),
+    ("exec_task_services_adapter.c", "fa18_os_exec_signals_step"),
+    ("exec_task_services_adapter.c", "fa18_os_exec_task_protection_step"),
 ]
 
 

@@ -1,0 +1,60 @@
+#ifndef AMIGA_EXEC_TASK_SERVICES_H
+#define AMIGA_EXEC_TASK_SERVICES_H
+#include "exec_lists.h"
+/* Resumable Exec messaging/signalling semantics, independent of host pointers,
+ * CPU implementation, ROM contents, SDK headers and library entry addresses. */
+typedef struct { uint32_t d[8],a[8]; uint8_t ccr; } AmigaExecTaskState;
+typedef struct {
+    void *context;
+    uint8_t (*read8)(void *,uint32_t);
+    uint16_t (*read16)(void *,uint32_t);
+    uint32_t (*read32)(void *,uint32_t);
+    void (*write8)(void *,uint32_t,uint8_t);
+    void (*write16)(void *,uint32_t,uint16_t);
+    void (*write32)(void *,uint32_t,uint32_t);
+} AmigaExecTaskBus;
+typedef enum {
+    AMIGA_EXEC_FLOW, AMIGA_EXEC_EQ, AMIGA_EXEC_NE, AMIGA_EXEC_GE, AMIGA_EXEC_LT,
+    AMIGA_EXEC_RETURN, AMIGA_EXEC_LIST_PHASE,
+    AMIGA_EXEC_INTERRUPT_WORD, AMIGA_EXEC_REQUEST_RESCHEDULE_INTERRUPT,
+    AMIGA_EXEC_DEPTH_UP, AMIGA_EXEC_DEPTH_DOWN,
+    AMIGA_EXEC_CURRENT_TASK, AMIGA_EXEC_TASK_FIELD,
+    AMIGA_EXEC_PUSH_A, AMIGA_EXEC_POP_A, AMIGA_EXEC_PUSH_FIELD,
+    AMIGA_EXEC_POP_D0, AMIGA_EXEC_D0_FROM_A1, AMIGA_EXEC_D1_FROM_A0,
+    AMIGA_EXEC_A1_FROM_D0, AMIGA_EXEC_A1_FROM_D1, AMIGA_EXEC_A0_FROM_D1,
+    AMIGA_EXEC_A2_FROM_A0, AMIGA_EXEC_A0_FROM_A5, AMIGA_EXEC_A5_FROM_A0,
+    AMIGA_EXEC_PORT_LIST, AMIGA_EXEC_PORT_HEAD, AMIGA_EXEC_PORT_OWNER,
+    AMIGA_EXEC_PORT_FLAGS, AMIGA_EXEC_PORT_BIT_D0, AMIGA_EXEC_PORT_BIT_D1,
+    AMIGA_EXEC_PORT_ACTION_MASK, AMIGA_EXEC_PORT_ACTION_COMPARE,
+    AMIGA_EXEC_D0_ZERO, AMIGA_EXEC_D1_ZERO, AMIGA_EXEC_D0_FROM_D1,
+    AMIGA_EXEC_MASK_FROM_D0, AMIGA_EXEC_MASK_FROM_D1,
+    AMIGA_EXEC_REPLY_PORT, AMIGA_EXEC_MESSAGE_TYPE,
+    AMIGA_EXEC_LIST_HEAD_A1, AMIGA_EXEC_TEST_NODE,
+    AMIGA_EXEC_SIGNALS_MASK_INPUT, AMIGA_EXEC_INVERT_D1,
+    AMIGA_EXEC_MASK_OLD_FIELD, AMIGA_EXEC_MERGE_SIGNALS, AMIGA_EXEC_STORE_SIGNALS,
+    AMIGA_EXEC_LOAD_RECEIVED_D0, AMIGA_EXEC_OR_SIGNALS,
+    AMIGA_EXEC_LOAD_EXCEPT_D1, AMIGA_EXEC_INTERSECT_D1,
+    AMIGA_EXEC_COMPARE_TASK_STATE, AMIGA_EXEC_INTERSECT_WAIT_D0,
+    AMIGA_EXEC_EXEC_LIST, AMIGA_EXEC_TASK_STATE,
+    AMIGA_EXEC_COMPARE_READY_HEAD, AMIGA_EXEC_EXCEPTION_PENDING,
+    AMIGA_EXEC_STORE_WAIT, AMIGA_EXEC_LOAD_WAIT,
+    AMIGA_EXEC_LOAD_RECEIVED_D1, AMIGA_EXEC_CLEAR_RECEIVED,
+    AMIGA_EXEC_RESCHEDULE_PENDING, AMIGA_EXEC_PENDING_TO_D0,
+    AMIGA_EXEC_TEST_DEPTH, AMIGA_EXEC_TEST_D0_BYTE, AMIGA_EXEC_TEST_RESCHEDULE,
+    AMIGA_EXEC_LOAD_ALLOCATED_SIGNALS, AMIGA_EXEC_LOAD_ALLOCATED_TRAPS,
+    AMIGA_EXEC_COMPARE_ANY_BIT, AMIGA_EXEC_ALLOCATE_BIT,
+    AMIGA_EXEC_FREE_BIT, AMIGA_EXEC_FIRST_FREE_BIT, AMIGA_EXEC_NEXT_FREE_BIT,
+    AMIGA_EXEC_NO_FREE_BIT, AMIGA_EXEC_STORE_ALLOCATED_SIGNALS,
+    AMIGA_EXEC_STORE_ALLOCATED_TRAPS, AMIGA_EXEC_CLEAR_MASK,
+    AMIGA_EXEC_CLEAR_TASK_MASK, AMIGA_EXEC_TASK_PHASE_COUNT
+} AmigaExecTaskPhase;
+typedef struct {
+    int branch_taken,returned,bit_below16,scc_true,dbra_continues;
+    uint32_t return_pc;
+} AmigaExecTaskEffect;
+/* arg denotes an ABI field, list phase, byte/word value or register index as
+ * appropriate. The adapter supplies program/extension timing and guest calls.
+ * IRQs and task/callback continuations are processed by the embedding timeline. */
+int amiga_exec_task_step(AmigaExecTaskPhase phase,unsigned arg,AmigaExecTaskState *state,
+                         const AmigaExecTaskBus *bus,AmigaExecTaskEffect *effect);
+#endif

@@ -8,6 +8,7 @@
 #include "exec_glue.h"
 #include "exec_task_lookup.h"
 #include "exec_lists_adapter.h"
+#include "exec_task_services_adapter.h"
 #include "potgo_glue.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,6 +23,9 @@ ADAPTER(fa18_os_potgo_step)
 ADAPTER(fa18_os_exec_find_task_step)
 ADAPTER(fa18_os_exec_find_name_step)
 ADAPTER(fa18_os_exec_lists_step)
+ADAPTER(fa18_os_exec_messages_step)
+ADAPTER(fa18_os_exec_signals_step)
+ADAPTER(fa18_os_exec_task_protection_step)
 /* Pinned 1.3 ABI identifiers, isolated from the neutral dispatcher. Disabled
  * until the reference runner verifies the corresponding source signature.
  * A future clean-start profile can activate proven implementations directly. */
@@ -35,7 +39,12 @@ static AmigaService services[FA18_SERVICE_COUNT]={
     {0xFE44F2,0xFE4524,0xFE44F2,"potgo.WritePotgo",0,fa18_os_potgo_step_adapter,NULL},
     {0xFC1DB0,0xFC1E04,0xFC1DB0,"exec.FindTask",0,fa18_os_exec_find_task_step_adapter,NULL},
     {0xFC1696,0xFC16BE,0xFC1696,"exec.FindName",0,fa18_os_exec_find_name_step_adapter,NULL},
-    {0xFC15E8,0xFC1696,0xFC15E8,"exec.lists",0,fa18_os_exec_lists_step_adapter,NULL}
+    {0xFC15E8,0xFC1696,0xFC15E8,"exec.lists",0,fa18_os_exec_lists_step_adapter,NULL},
+    {0xFC1B76,0xFC1BEA,0xFC1B76,"exec.PutMsg",0,fa18_os_exec_messages_step_adapter,NULL},
+    {0xFC1C18,0xFC1C5A,0xFC1C18,"exec.ReplyMsg/WaitPort",0,fa18_os_exec_messages_step_adapter,NULL},
+    {0xFC1E54,0xFC1F74,0xFC1E54,"exec.signals",0,fa18_os_exec_signals_step_adapter,NULL},
+    {0xFC1FCA,0xFC2048,0xFC1FCA,"exec.signal/trap_allocation",0,fa18_os_exec_signals_step_adapter,NULL},
+    {0xFC1F74,0xFC1FBE,0xFC1F74,"exec.task_protection",0,fa18_os_exec_task_protection_step_adapter,NULL}
 };
 void fa18_services_reset(void) {
     for (unsigned i=0;i<FA18_SERVICE_COUNT;++i) services[i].enabled=0;
