@@ -87,7 +87,8 @@ int main(void) {
     uint32_t structs=amiga_host_alloc(c,256,0x10004),plane=amiga_host_alloc(c,8000,0x10002);
     assert(structs && plane); uint32_t view=structs,vp=view+18,ri=vp+40,bm=ri+12,cm=bm+40;
     uint8_t *v=amiga_guest_range(&c->memory,structs,256),*p=v+18,*r=p+40,*bitmap=r+12,*colors=bitmap+40;
-    amiga_store_be32(v,vp); word(v+12,16); word(v+14,129);
+    assert(amiga_host_init_view(c,view) && amiga_be16(v+12)==44 && amiga_be16(v+14)==129);
+    amiga_store_be32(v,vp); word(p+30,0xFFFE);
     amiga_store_be32(p+36,ri); amiga_store_be32(p+4,cm); word(p+24,320); word(p+26,200);
     amiga_store_be32(r+4,bm); word(bitmap,40); word(bitmap+2,200); bitmap[5]=1; amiga_store_be32(bitmap+8,plane);
     word(colors+2,2); amiga_store_be32(colors+4,cm+8); word(colors+8,0); word(colors+10,0xABC);

@@ -1,6 +1,9 @@
 #ifndef AMIGA_HOST_GRAPHICS_H
 #define AMIGA_HOST_GRAPHICS_H
 #include "host_compat.h"
+/* PAL View coordinates are absolute beam origins; viewport offsets are
+ * relative. Defaults match the reference graphics.library View. */
+int amiga_host_init_view(AmigaHostCompat *,uint32_t view);
 /* Packed OCS View/CopList construction. The embedding machine installs the
  * resulting hardware list. Semantic compatibility; exact OS layout/timing is
  * deferred. No captured Copper program or desktop state is used. */

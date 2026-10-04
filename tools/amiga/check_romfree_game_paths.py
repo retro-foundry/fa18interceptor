@@ -37,6 +37,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runner", type=Path, default=ROOT / "build/recomp/fa18_romfree.exe")
     parser.add_argument("--modes", action="store_true", help="also exercise menu and mission selections")
+    parser.add_argument("--outcomes", action="store_true", help="also replay qualification failure and persist its log")
     args = parser.parse_args()
     runner = args.runner.resolve()
     adf = ROOT / "local/media/fa18.adf"
@@ -46,7 +47,7 @@ def main():
         shutil.copy2(runner, work / "game.exe")
         shutil.copy2(adf, work / "original.adf")
 
-        def run(name, frames, events, saves):
+        def run(name, frames, events, saves, minimum_pixels=1001):
             replay = work / f"{name}.e9k"
             replay.write_text("E9K_INPUT_V1\n" + "".join(
                 f"F {frame} K {key} 0 0 {down}\n" for frame, key, down in events))
@@ -54,11 +55,11 @@ def main():
             result = subprocess.run([
                 str(work / "game.exe"), "--adf", "original.adf",
                 "--save-dir", saves, "--frames", str(frames), "--replay", str(replay),
-                "--ram-out", str(output)], cwd=work, capture_output=True, text=True)
+                "--ram-out", str(output), "--profile", f"{name}.calls.json"], cwd=work, capture_output=True, text=True)
             assert result.returncode == 0, (name, result.stderr, result.stdout)
             stats = [json.loads(line) for line in result.stdout.splitlines()]
             assert stats[-1] == ZERO_GUARD, (name, stats)
-            assert stats[0]["iterations"] > 0 and stats[0]["nonblack_pixels"] > 1000, (name, stats)
+            assert stats[0]["iterations"] > 0 and stats[0]["nonblack_pixels"] >= minimum_pixels, (name, stats)
             ram = output.read_bytes()
             assert len(ram) >= 0x100000
             print(f"{name}: {frames} frames, mode={ram[offset(0xC458A6)]}, zero ROM/fault counters", flush=True)
@@ -73,13 +74,54 @@ def main():
         run("reset-save", 3700, events, "saves")
         saved = (work / "saves/config").read_bytes()
         assert saved == bytes(78), (len(saved), saved.hex())
-        # Compare before advancing the credits/name-entry state. Later the
+        # Acknowledge the credits so the game actually reads the config, then
+        # compare at its loaded-record callback before name/tour entry. Later
         # original C11720 increments the tour count at record+4 and accepts
         # a callsign at +30, so a later whole-record comparison is invalid.
-        loaded, _ = run("reload", 1800, [], "saves")
+        loaded, _ = run("reload", 1810, keys((1800, 32)), "saves", minimum_pixels=0)
+        assert struct.unpack_from(">I", loaded, offset(0xC1820C))[0] == 0xC115BA
         assert record(loaded) == saved
         assert hashlib.sha256((work / "original.adf").read_bytes()).digest() == original_hash
         print("Original 78-byte reset/save/reload matches all bytes; ADF unchanged", flush=True)
+
+        if args.outcomes:
+            # Start a new tour using the reset record produced by the actual
+            # game above. Adapt the sealed failure recording's frontend-frame
+            # positions to this cold menu checkpoint, preserving its key order.
+            (work / "qualification").mkdir()
+            (work / "qualification/config").write_bytes(saved)
+            source = (ROOT / "tools/amiga/fixtures/qualification_failure.e9k").read_text().splitlines()
+            assert source[0] == "E9K_INPUT_V1"
+            events = []
+            for line in source[1:]:
+                fields = line.split()
+                if fields:
+                    assert len(fields) == 7 and fields[0] == "F" and fields[2] == "K", line
+                    events.append((int(fields[1]), int(fields[3]), int(fields[6])))
+            # Continue in this same process into flight-log update. Replaying
+            # the prefix in a second process can pick up the callsign save
+            # already written by the original first-tour flow.
+            failed, _ = run("qualification-failure", 6400, events, "qualification")
+            calls = json.loads((work / "qualification-failure.calls.json").read_text())
+            # These are real original restart/failure callbacks, not inferred
+            # from reaching a menu or from a nonzero generic outcome flag.
+            assert calls.get("C11788") == 3 and calls.get("C11830") == 2, calls
+            assert calls.get("C118A0", 0) > 0 and calls.get("C118E6", 0) > 0, calls
+            assert failed[offset(0xC458A6)] == 0
+            assert struct.unpack_from(">I", failed, offset(0xC1820C))[0] == 0xC0FCB4
+            log = record(failed)
+            assert log[:2] == bytes(2) and log[30:36] == b"PILOT\0"
+            assert struct.unpack_from(">H", log, 16)[0] == 3
+            assert struct.unpack_from(">H", log, 70)[0] == 3
+            saved_log = (work / "qualification/config").read_bytes()
+            assert len(saved_log) == 78 and saved_log[:2] == bytes(2)
+            assert saved_log[30:36] == b"PILOT\0"
+            assert struct.unpack_from(">H", saved_log, 16)[0] == 3
+            assert struct.unpack_from(">H", saved_log, 70)[0] == 3
+            loaded, _ = run("failure-log-reload", 1810, keys((1800, 32)), "qualification", minimum_pixels=0)
+            assert struct.unpack_from(">I", loaded, offset(0xC1820C))[0] == 0xC115BA
+            assert record(loaded) == saved_log
+            print("Qualification: three original reset passes, failure message path, main-menu return; full nonzero log save/reload matches", flush=True)
 
         if args.modes:
             for key, expected in ((2, 1), (3, 2), (4, 0x7D), (5, 9), (6, 0), (7, 6), (8, 0)):

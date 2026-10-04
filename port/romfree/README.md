@@ -36,6 +36,14 @@ bytes back into the original game record. The ADF remains unchanged; writes
 materialize a save-directory overlay only when needed. Reproduce this with
 `python tools/amiga/check_romfree_game_paths.py`; add `--modes` for menu,
 training, qualification, mission-selection and flight-to-menu checkpoints.
+Add `--outcomes` for a new tour, callsign entry, three reset passes through
+the original qualification-failure callbacks, flight-log update and a fresh
+reload of the resulting nonzero record. GNU and MSVC pass this sequence with
+zero ROM/fault counters. The saved qualification flag remains unset.
+The committed frontend recording is
+`../../tools/amiga/fixtures/qualification_failure.e9k`; it includes callsign
+entry and log update, with no injected RAM or OS state. The test obtains its
+new-tour seed from the game's actual reset/save commands.
 
 Complete mission outcomes, restart and game teardown still need coverage and
 any remaining services. Unknown operations continue to fail with their

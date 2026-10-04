@@ -3,6 +3,10 @@
 #include <string.h>
 static uint8_t *range(AmigaHostCompat *c,uint32_t a,uint32_t n) { return amiga_guest_range(&c->memory,a,n); }
 static void word(uint8_t *p,uint16_t v) { p[0]=(uint8_t)(v>>8); p[1]=(uint8_t)v; }
+int amiga_host_init_view(AmigaHostCompat *c,uint32_t view) {
+    uint8_t *v=range(c,view,18); if (!v) return 0;
+    memset(v,0,18); word(v+12,44); word(v+14,129); return 1;
+}
 int amiga_host_free_copper(AmigaHostCompat *c,uint32_t allocation) {
     if (!allocation) return 1;
     for (size_t i=0;i<c->used_count;++i) if (c->used[i].base==allocation)
@@ -24,7 +28,7 @@ int amiga_host_make_viewport(AmigaHostCompat *c,uint32_t view,uint32_t viewport)
     uint32_t descriptor=amiga_host_alloc(c,48+128*6,0x10004); if (!descriptor) return 0;
     uint8_t *cl=range(c,descriptor,48+128*6),*ins=cl+48; unsigned count=0;
     amiga_store_be32(cl+8,viewport); amiga_store_be32(cl+12,descriptor+48); word(cl+30,128);
-    int y=26+(int16_t)amiga_be16(v+12)+(int16_t)amiga_be16(vp+30);
+    int y=(int16_t)amiga_be16(v+12)+(int16_t)amiga_be16(vp+30);
     int x=(int16_t)amiga_be16(v+14)+(int16_t)amiga_be16(vp+28);
     unsigned fetch=width/16; if (!fetch) fetch=1;
     instruction(ins,&count,1,(uint16_t)(y>0?y-1:0),0);

@@ -314,7 +314,8 @@ static int graphics_call(AmigaHostCompat *c,unsigned offset) {
     case 198: memset(guest(c,REG_A[1],100),0,100); break;
     case 204: memset(guest(c,REG_A[0],40),0,40); break;
     case 360:
-        p=guest(c,REG_A[1],18); memset(p,0,18); word(p+12,16); word(p+14,129); break;
+        if (!amiga_host_init_view(c,REG_A[1])) return 0;
+        fa18_recomp_note_write(REG_A[1],18); break;
     case 390:
         p=guest(c,REG_A[0],40); memset(p,0,40);
         word(p,(uint16_t)((((uint16_t)REG_D[1]+15u)/16)*2)); word(p+2,(uint16_t)REG_D[2]); p[5]=(uint8_t)REG_D[0]; break;
