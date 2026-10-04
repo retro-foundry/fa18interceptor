@@ -114,10 +114,7 @@ static int small_text_loop(void) {
 }
 
 /* $C32794: the loop itself; A4 += D7 first. */
-int glue_C32794(void) {
-    A(4) += D(7);
-    return small_text_loop();
-}
+
 
 /* $C32662: draw only when no context runs or TEXT_ALWAYS is set. */
 int glue_C32662(void) {
@@ -155,30 +152,10 @@ static void small_hex(void) {
 }
 
 /* $C3271A: mode = the caller's D6.w, column 0, no row offset. */
-int glue_C3271A(void) {
-    D(6) = D(6) << 16;
-    D(7) = 0;
-    small_hex();
-    return small_text_loop();
-}
+
 
 /* $C32726: as $C3271A with the leading zeros kept (D4 = 1), the digit
  * count from the caller's D2 rather than D0. */
-int glue_C32726(void) {
-    int count = (int)(uint16_t)D(2) + 1;
-    D(6) = D(6) << 16;
-    D(7) = 0;
-    format_digits(A(0), count, 1, 1);
-    small_digits_registers(count, 1);
-    SET_W(D(2), 0xFFFF);
-    return small_text_loop();
-}
+
 
 /* $C32736: mode $F3A, column SPAN_ORIGIN, rows offset by REDRAW_STATE_LONG. */
-int glue_C32736(void) {
-    D(6) = 0x0F3Au << 16 | rd_u16(SPAN_ORIGIN);
-    D(7) = rd_u32(REDRAW_STATE_LONG);
-    small_hex();
-    A(4) += D(7);
-    return small_text_loop();
-}

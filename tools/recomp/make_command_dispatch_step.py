@@ -10,7 +10,7 @@ import json
 
 ROOT=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup","main_loop_timers","main_loop_control_messages","record_control_actions","main_loop_flight_controls","flight_record_actions","flight_motion_helpers","flight_dynamics","flight_geometry","flight_markers","projection_readouts","hud_stream","hud_parents","hud_readout_parents"),default="command_dispatch")
+parser.add_argument("--family",choices=("command_dispatch","postflight_scheduler","context_publication","menu_transition","menu_setup","menu_cold","menu_followup","menu_outcome","menu_return","menu_context_finish","postflight_completion","postflight_messages","postflight_file_callers","input_device_callbacks","input_display_setup","main_loop_timers","main_loop_control_messages","record_control_actions","main_loop_flight_controls","flight_record_actions","flight_motion_helpers","flight_dynamics","flight_geometry","flight_markers","projection_readouts","hud_stream","hud_parents","hud_readout_parents","hud_text_helpers"),default="command_dispatch")
 family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
@@ -85,7 +85,7 @@ if family=="main_loop_control_messages":
 if family=="record_control_actions":
  body["neg.w"]="address=cache_step_address(mode,reg,2); old=cache_step_read_memory(address,2); renderer_negate(&old,2); cache_step_write_memory(address,old,2,0); break;"
  body["add.l"]="width=4; if(opcode&0x100u) { value=D(destination); operation='+'; goto arithmetic; } value=cache_step_read(mode,reg,4); mode=0; reg=destination; operation='+'; goto arithmetic;"
-if family in ("main_loop_flight_controls","flight_record_actions","flight_motion_helpers","flight_dynamics","flight_geometry","flight_markers","projection_readouts","hud_stream","hud_parents","hud_readout_parents"):
+if family in ("main_loop_flight_controls","flight_record_actions","flight_motion_helpers","flight_dynamics","flight_geometry","flight_markers","projection_readouts","hud_stream","hud_parents","hud_readout_parents","hud_text_helpers"):
  body["neg.w"]="if(mode==0) renderer_negate(&D(reg),2); else { address=cache_step_address(mode,reg,2); old=cache_step_read_memory(address,2); renderer_negate(&old,2); cache_step_write_memory(address,old,2,0); } break;"
  body["neg.b"]="if(mode==0) renderer_negate(&D(reg),1); else { address=cache_step_address(mode,reg,1); old=cache_step_read_memory(address,1); renderer_negate(&old,1); cache_step_write_memory(address,old,1,0); } break;"
  body["movem.w"]="mask=m68ki_read_imm_16(); address=cache_step_address(mode,reg,2); if(opcode&0x400u) renderer_load(address,mask,2,mode==3?(int)reg:-1); else renderer_store(address,mask,2,-1); break;"
@@ -95,7 +95,7 @@ if family in ("main_loop_flight_controls","flight_record_actions","flight_motion
  for suffix,width in (("w",2),("l",4)):
   for mnemonic,operation in (("add","+"),("sub","-")):
    body[mnemonic+"."+suffix]=f"width={width}; if(opcode&0x100u) {{ value=D(destination); operation='{operation}'; goto arithmetic; }} value=cache_step_read(mode,reg,width); reg=destination; mode=0; operation='{operation}'; goto arithmetic;"
-if family in ("flight_record_actions","flight_motion_helpers","flight_dynamics","flight_geometry","flight_markers","projection_readouts","hud_stream","hud_parents","hud_readout_parents"):
+if family in ("flight_record_actions","flight_motion_helpers","flight_dynamics","flight_geometry","flight_markers","projection_readouts","hud_stream","hud_parents","hud_readout_parents","hud_text_helpers"):
  body["lsr.b"]="action_lsr_byte(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
  body["and.w"]="width=2; if(opcode&0x100u) { value=D(destination); operation='&'; goto immediate_logic; } value=cache_step_read(mode,reg,2)&D(destination); cache_step_write(0,destination,2,value); cache_step_logic(value,2); break;"
  body["cmpa.l"]="step_compare_long(cache_step_read(mode,reg,4),A(destination)); break;"
@@ -105,9 +105,9 @@ if family=="flight_motion_helpers":
 if family=="projection_readouts":
  body["divs.w"]="renderer_divide(&D(destination),(int16_t)cache_step_read(mode,reg,2)); break;"
  body["lsr.l"]="step_lsr_long(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
-if family in ("hud_stream","hud_parents","hud_readout_parents"):
+if family in ("hud_stream","hud_parents","hud_readout_parents","hud_text_helpers"):
  body["lea"]="A(destination)=(mode==7 && reg==0)?(uint32_t)(int32_t)(int16_t)m68ki_read_imm_16():cache_step_address(mode,reg,4); break;"
-if family in ("hud_parents","hud_readout_parents"):
+if family in ("hud_parents","hud_readout_parents","hud_text_helpers"):
  body["movem.w"]="mask=m68ki_read_imm_16(); if(!(opcode&0x400u) && mode==4) renderer_store(A(reg),mask,2,(int)reg); else { address=cache_step_address(mode,reg,2); if(opcode&0x400u) renderer_load(address,mask,2,mode==3?(int)reg:-1); else renderer_store(address,mask,2,-1); } break;"
  body["asr.b"]="hud_parent_asr_byte(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
  body["ror.w"]="hud_parent_ror_word(&D(reg),(opcode&0x20u)?D(destination):(destination?destination:8)); break;"
@@ -176,6 +176,8 @@ if family=="projection_readouts":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_projection_readouts_math.h"')
 if family=="hud_readout_parents":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_hud_readout_parents_math.h"')
+if family=="hud_text_helpers":
+ out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_hud_text_helpers_math.h"')
 for key,pcs in groups.items():
  for j in range(0,len(pcs),4): out+="    "+" ".join("case 0x"+pc+":" for pc in pcs[j:j+4])+"\n"
  out+="        "+body[key]+"\n"
@@ -234,7 +236,7 @@ if family=="flight_dynamics":
  out=out.replace('int glue_C28B34_step(void)','int glue_C28B34_complete_step(void)')
 if family=="flight_geometry":
  for entry in manifest["owners"]: out=out.replace(f'int glue_{entry}_step(void)',f'int glue_{entry}_complete_step(void)')
-if family in ("projection_readouts","hud_stream","hud_parents","hud_readout_parents"):
+if family in ("projection_readouts","hud_stream","hud_parents","hud_readout_parents","hud_text_helpers"):
  for entry in manifest["upgraded_registered_owners"]: out=out.replace(f'int glue_{entry}_step(void)',f'int glue_{entry}_complete_step(void)')
 path.write_text(out)
 print(f"{family} timing bridge: {len(manifest['instructions'])} unique original boundaries")

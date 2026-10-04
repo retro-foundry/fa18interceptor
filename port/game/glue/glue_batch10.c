@@ -141,12 +141,3 @@ void cached_value_registers(gaddr cache, int16_t value) {
     }
     flags_logic_w(D(0));
 }
-
-int glue_C31C20(void) {
-    gaddr cache = A(1);
-    int16_t value = (int16_t)D(0);
-
-    cached_value_registers(cache, value);
-    display_value_to_draw(cache, value);
-    return glue_return();
-}

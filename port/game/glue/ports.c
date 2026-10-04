@@ -348,7 +348,7 @@ const FA18Port fa18_ports[] = {
     {0xC1ECFC, glue_C1ECFC, "cell_step", 0, 0, glue_C1ECFC_step, 0xC1ED2A},
     {0xC1ECD4, glue_C1ECD4, "cell_step", 0, 0, glue_C1ECD4_step, 0xC1ECFC},
     {0xC2E346, glue_C2E346, "y_rotation_matrix8", 0, 0, glue_C2E346_step, 0xC2E370},
-    {0xC31C20, glue_C31C20, "display_value_to_draw", 80},
+    {0xC31C20, glue_C31C20, "display_value_to_draw", 0, 0, glue_C31C20_complete_step, 0xC31C5E, 1, 0, glue_C31C20_owns},
     /* batch 11: player setup, steering, random bits, channel stop, cockpit script */
     {0xC09620, glue_C09620, "prepare_player_record", 0, 0, glue_C09620_step, 0xC096AA},
     {0xC13BA0, glue_C13BA0, "steer_record_56", 220},
@@ -379,10 +379,10 @@ const FA18Port fa18_ports[] = {
      glue_C1D0B6_step, 0xC1D10C, 0, 0xC1D0A4},
     {0xC26428, glue_C26428, "update_record_76_78", 500},
     /* batch 16: small text */
-    {0xC32794, glue_C32794, "draw_small_text", 400},
+    {0xC32794, glue_C32794, "draw_small_text", 0, 0, glue_C32794_complete_step, 0xC32806, 1, 0, glue_C32794_owns},
     {0xC32662, glue_C32662, "draw_small_text", 420},
-    {0xC3271A, glue_C3271A, "format_small_hex", 600},
-    {0xC32736, glue_C32736, "format_small_hex", 620},
+    {0xC3271A, glue_C3271A, "format_small_hex", 0, 0, glue_C3271A_complete_step, 0xC32806, 1, 0, glue_C3271A_owns},
+    {0xC32736, glue_C32736, "format_small_hex", 0, 0, glue_C32736_complete_step, 0xC32806, 1, 0, glue_C32736_owns},
     /* batch 17: BCD unpack, sorted search, record 56/66 with alert */
     {0xC259C2, glue_C259C2, "unpack_display_value", 900},
     {0xC1D4E4, glue_C1D4E4, "find_sorted_word", 0, 0, glue_C1D4E4_step, 0xC1D722, 0, 0xC1D3F4},
@@ -579,10 +579,10 @@ const FA18Port fa18_ports[] = {
     {0xC2E758, glue_C2E758, "project_corner_edges", 0, 0, glue_C2E758_step, 0xC2EC68},
     /* batch 56: fixed-row line, text lines and digits */
     {0xC2FA78, glue_C2FA78, "draw_line_to_row", 0, 0, glue_C2FA78_step, 0xC2FD22, 0, 0xC2FA70},
-    {0xC32726, glue_C32726, "format_digits", 620},
-    {0xC32AB4, glue_C32AB4, "draw_text_in_view", 4000},
-    {0xC32AA6, glue_C32AA6, "print_bcd_in_view", 4500},
-    {0xC32AA4, glue_C32AA4, "print_bcd_in_view", 4500},
+    {0xC32726, glue_C32726, "format_digits", 0, 0, glue_C32726_complete_step, 0xC32806, 1, 0, glue_C32726_owns},
+    {0xC32AB4, glue_C32AB4, "draw_text_in_view", 0, 0, glue_C32AB4_complete_step, 0xC32BD2, 1, 0, glue_C32AB4_owns},
+    {0xC32AA6, glue_C32AA6, "print_bcd_in_view", 0, 0, glue_C32AA6_complete_step, 0xC32BD2, 1, 0, glue_C32AA6_owns},
+    {0xC32AA4, glue_C32AA4, "print_bcd_in_view", 0, 0, glue_C32AA4_complete_step, 0xC32BD2, 1, 0, glue_C32AA4_owns},
     /* batch 57-58: side face, quad list and strip, face grids and lattices */
     {0xC2159E, glue_C2159E, "draw_side_face", 30000},
     {0xC210E6, glue_C210E6, "draw_quad_strip", 60000},

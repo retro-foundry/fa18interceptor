@@ -76,12 +76,7 @@ void text_in_view_registers(void) {
     text_regs();
 }
 
-int glue_C32AB4(void) {
-    Text t = line_from_registers();
-    draw_text_in_view(&t);
-    text_in_view_registers();
-    return glue_return();
-}
+
 
 /* The digits ($C32AD0): D2.w count - 1, A0 the end; D4.b nonzero keeps
  * leading zeros. */
@@ -118,11 +113,4 @@ static int digits_glue(void) {
     print_bcd_in_view(A(0), (int)(uint16_t)D(2) + 1, (uint8_t)D(4) != 0, &t);
     bcd_text_registers();
     return glue_return();
-}
-
-int glue_C32AA6(void) { return digits_glue(); }
-
-int glue_C32AA4(void) {
-    D(4) = 0;
-    return digits_glue();
 }

@@ -946,3 +946,5 @@ int glue_C1ECFC_step(void);
 #include "glue_hud_parents.h"
 
 #include "glue_hud_readout_parents.h"
+
+#include "glue_hud_text_helpers.h"

@@ -16,7 +16,18 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-Thirteen complete HUD readout, cue and status upgrades pass 425,984 full
+Eight complete HUD cache/text helper upgrades pass 262,144 full CPU/PC/SR/RAM
+calls, all 182 shared controlled boundaries and 24,576 bounded actual dispatch
+fixtures. The fixed zero-mode entry retains its seven excluded leading-blank
+PCs explicitly; sibling formatters cover them. Independent normal C passes
+all eight: 30,815 shadow / 32,589 sandbox comparisons. All 36,236 isolated
+live frames and RAM seals match. Combined DMA passes 24,511 boundaries /
+784,352 cases; source-timed entries rise to 447. See
+[HUD text helper proof](analysis/routines/native_c_hud_text_helpers.md).
+The next eight projection and postflight HUD parents have 898 sealed boundaries.
+Original indirect/table/callback and game-function coverage remains open.
+
+The preceding thirteen complete HUD readout, cue and status upgrades pass 425,984 full
 CPU/PC/SR/RAM calls, all 606 controlled source boundaries and 39,936 bounded
 actual dispatch fixtures. Independent normal C passes every owner: 32,575
 shadow / 33,952 sandbox comparisons. All 36,236 isolated live frames and RAM
@@ -24,8 +35,7 @@ seals match. Frozen-clock original-child fixtures retain explicit clipping
 and context limits. Combined DMA passes 24,478 boundaries / 783,296 cases;
 source-timed entries rise to 439. See
 [readout parent proof](analysis/routines/native_c_hud_readout_parents.md).
-The next eight cache and text helpers have 182 unique / 141 shared sealed
-boundaries. Original game-function and callback coverage remains open.
+Their eight cache and text helper successors are complete as described above. Original game-function and callback coverage remains open.
 
 The preceding eight complete HUD display-parent upgrades pass 262,144 full CPU/PC/SR/RAM
 calls, all 595 controlled source boundaries and 6,144 bounded actual dispatch

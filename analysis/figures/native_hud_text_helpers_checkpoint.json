@@ -1,0 +1,2890 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "355c5bbd",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C31C20",
+    "C3271A",
+    "C32726",
+    "C32736",
+    "C32794",
+    "C32AA4",
+    "C32AA6",
+    "C32AB4"
+  ],
+  "registered_translated_entries": 526,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 592,
+  "registered_timing_entries": 447,
+  "registered_translated_timing_entries": 381,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/hud_text_helpers_source_scope.json",
+      "sha256": "e0d654142d0e183b7566b9f1c650a4f9790c92cdd68f1af059478561ed411a04"
+    },
+    "unique_instructions": 182,
+    "shared_within_batch": 141,
+    "distinct_child_sites": 6,
+    "child_sites_by_owner": 20,
+    "actual_original_callability": {
+      "C31C20": [
+        {
+          "pc": "C31F8C",
+          "return_pc": "C31F90",
+          "instruction": "bsr     $c31c20",
+          "bytes": "6100fc92"
+        },
+        {
+          "pc": "C32142",
+          "return_pc": "C32146",
+          "instruction": "bsr     $c31c20",
+          "bytes": "6100fadc"
+        },
+        {
+          "pc": "C3219C",
+          "return_pc": "C321A0",
+          "instruction": "bsr     $c31c20",
+          "bytes": "6100fa82"
+        }
+      ],
+      "C3271A": [
+        {
+          "pc": "C32006",
+          "return_pc": "C3200A",
+          "instruction": "bsr     $c3271a",
+          "bytes": "61000712"
+        },
+        {
+          "pc": "C32116",
+          "return_pc": "C3211A",
+          "instruction": "bsr     $c3271a",
+          "bytes": "61000602"
+        }
+      ],
+      "C32726": [
+        {
+          "pc": "C31F34",
+          "return_pc": "C31F38",
+          "instruction": "bsr     $c32726",
+          "bytes": "610007f0"
+        },
+        {
+          "pc": "C31F44",
+          "return_pc": "C31F48",
+          "instruction": "bsr     $c32726",
+          "bytes": "610007e0"
+        }
+      ],
+      "C32736": [
+        {
+          "pc": "C3224E",
+          "return_pc": "C32252",
+          "instruction": "bsr     $c32736",
+          "bytes": "610004e6"
+        },
+        {
+          "pc": "C322DC",
+          "return_pc": "C322E0",
+          "instruction": "bsr     $c32736",
+          "bytes": "61000458"
+        }
+      ],
+      "C32794": [
+        {
+          "pc": "C3297E",
+          "return_pc": "C32982",
+          "instruction": "bsr     $c32794",
+          "bytes": "6100fe14"
+        },
+        {
+          "pc": "C32A10",
+          "return_pc": "C32A14",
+          "instruction": "bsr     $c32794",
+          "bytes": "6100fd82"
+        }
+      ],
+      "C32AA4": [
+        {
+          "pc": "C31D10",
+          "return_pc": "C31D14",
+          "instruction": "bsr     $c32aa4",
+          "bytes": "61000d92"
+        },
+        {
+          "pc": "C31E58",
+          "return_pc": "C31E5C",
+          "instruction": "bsr     $c32aa4",
+          "bytes": "61000c4a"
+        },
+        {
+          "pc": "C333E8",
+          "return_pc": "C333EE",
+          "instruction": "jsr     $c32aa4.l",
+          "bytes": "4eb900c32aa4"
+        },
+        {
+          "pc": "C33612",
+          "return_pc": "C33618",
+          "instruction": "jsr     $c32aa4.l",
+          "bytes": "4eb900c32aa4"
+        }
+      ],
+      "C32AA6": [
+        {
+          "pc": "C31D5E",
+          "return_pc": "C31D62",
+          "instruction": "bsr     $c32aa6",
+          "bytes": "61000d46"
+        },
+        {
+          "pc": "C33FAA",
+          "return_pc": "C33FB0",
+          "instruction": "jsr     $c32aa6.l",
+          "bytes": "4eb900c32aa6"
+        }
+      ],
+      "C32AB4": [
+        {
+          "pc": "C31DC2",
+          "return_pc": "C31DC8",
+          "instruction": "jsr     $c32ab4.l",
+          "bytes": "4eb900c32ab4"
+        },
+        {
+          "pc": "C31EAE",
+          "return_pc": "C31EB2",
+          "instruction": "bsr     $c32ab4",
+          "bytes": "61000c04"
+        },
+        {
+          "pc": "C3340E",
+          "return_pc": "C33414",
+          "instruction": "jsr     $c32ab4.l",
+          "bytes": "4eb900c32ab4"
+        },
+        {
+          "pc": "C33638",
+          "return_pc": "C3363E",
+          "instruction": "jsr     $c32ab4.l",
+          "bytes": "4eb900c32ab4"
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 262144,
+  "controlled_child_completed_calls": 131072,
+  "real_child_completed_calls": 131072,
+  "fixture_coverage": [
+    {
+      "owner": "C31C20",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C31C20.log",
+        "sha256": "1dfefc437a9343a5e96d34e02ec44ad5bb0c4a37b8b29295322166e4a482671f"
+      }
+    },
+    {
+      "owner": "C3271A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 64,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C3271A.log",
+        "sha256": "adb78b6b94127a1e929b930e8eb8b9f4990f71c9b4abc73b9b21696368609c87"
+      }
+    },
+    {
+      "owner": "C32726",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 56,
+      "unobserved_owner_pcs": [
+        "C32776",
+        "C32778",
+        "C3277A",
+        "C3277E",
+        "C32780",
+        "C32786",
+        "C3278A"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C32726.log",
+        "sha256": "fed31dc416af4c571403aff3dcdc674ba98aa05caba20b9a8adc2213e3c81c90"
+      }
+    },
+    {
+      "owner": "C32736",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 65,
+      "observed_owner_pcs": 65,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C32736.log",
+        "sha256": "134ad0aba4e7c6d42d63c230eed1829d7b2c8245ae94e2ef8f0c8cec2f3aad10"
+      }
+    },
+    {
+      "owner": "C32794",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C32794.log",
+        "sha256": "18066960cf0b45bde312a994e109ec2ac509e89be77a7a7da7d2998858b2896f"
+      }
+    },
+    {
+      "owner": "C32AA4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C32AA4.log",
+        "sha256": "fdb937da8100055673c815231abf25c6744b8af6bec07c36f15b31dc87954c34"
+      }
+    },
+    {
+      "owner": "C32AA6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 82,
+      "observed_owner_pcs": 82,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C32AA6.log",
+        "sha256": "bc12e4c07fe6e708d9a5bc45db14842e966f8dc7b5f5546ea4f8aaea6dd77b60"
+      }
+    },
+    {
+      "owner": "C32AB4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 66,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_contract_C32AB4.log",
+        "sha256": "49efd2ebc6a9e2374931167155e690166078a8518f887663219b79933caf3e96"
+      }
+    },
+    {
+      "owner": "C31C20",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C31C20.log",
+        "sha256": "2691a9fb55ac2a922260ed2e2f70e3f17f9606d1d3905accc163f4541d9a7ddd"
+      }
+    },
+    {
+      "owner": "C3271A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C3271A.log",
+        "sha256": "55313f4faa5ce38b5ecc3e95c003441d113d0a114b50fcf003216077ac81e555"
+      }
+    },
+    {
+      "owner": "C32726",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C32776",
+        "C32778",
+        "C3277A",
+        "C3277E",
+        "C32780",
+        "C32786",
+        "C3278A",
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C32726.log",
+        "sha256": "9d8dcb8e63bb69466ab7634c34c09cfd1b9d3a59446af5791b56e6d46a0c0a1a"
+      }
+    },
+    {
+      "owner": "C32736",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 65,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C32736.log",
+        "sha256": "4311355276706820596d2e85c6b37be244308277276a94b73bc050902447254f"
+      }
+    },
+    {
+      "owner": "C32794",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C32794.log",
+        "sha256": "4fd1a32033c92fbcf04e668a0623df5d171a47e56552fe6f109abd627330355f"
+      }
+    },
+    {
+      "owner": "C32AA4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C32AA4.log",
+        "sha256": "da566fa2e661ec5939baa9cf1d908ffdd07619f231581eb7d8e27cfb73dda0bf"
+      }
+    },
+    {
+      "owner": "C32AA6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 82,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C32AA6.log",
+        "sha256": "c5c3fa1042add7884bf89571f5b549eb325b485acb47a12f212f3cbfbc178e7f"
+      }
+    },
+    {
+      "owner": "C32AB4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_real_C32AB4.log",
+        "sha256": "80cc7c2b2961b0c9a00d3c49129c57f4b39417a1659523ce15451230b4388ce2"
+      }
+    }
+  ],
+  "controlled_union_pcs": 182,
+  "actual_dispatch_completed_calls": 24576,
+  "dispatch_fixtures": [
+    {
+      "owner": "C31C20",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C31C20_on.log",
+        "sha256": "b0fd68bb3d92ebef5efcd0ee0d347b71fea8f3f3ca3f673ecf2f9775f81a679c"
+      }
+    },
+    {
+      "owner": "C31C20",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C31C20_shadow.log",
+        "sha256": "b0fd68bb3d92ebef5efcd0ee0d347b71fea8f3f3ca3f673ecf2f9775f81a679c"
+      }
+    },
+    {
+      "owner": "C31C20",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C31C20_sandbox.log",
+        "sha256": "b0fd68bb3d92ebef5efcd0ee0d347b71fea8f3f3ca3f673ecf2f9775f81a679c"
+      }
+    },
+    {
+      "owner": "C3271A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C3271A_on.log",
+        "sha256": "159af69453a407ed011e5f638e388155659636957430c15dc441b63bfb5f6127"
+      }
+    },
+    {
+      "owner": "C3271A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C3271A_shadow.log",
+        "sha256": "159af69453a407ed011e5f638e388155659636957430c15dc441b63bfb5f6127"
+      }
+    },
+    {
+      "owner": "C3271A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C3271A_sandbox.log",
+        "sha256": "159af69453a407ed011e5f638e388155659636957430c15dc441b63bfb5f6127"
+      }
+    },
+    {
+      "owner": "C32726",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C32776",
+        "C32778",
+        "C3277A",
+        "C3277E",
+        "C32780",
+        "C32786",
+        "C3278A",
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32726_on.log",
+        "sha256": "10eb88f9b6d565e63ca3b18cd5f08ce92a2857650d7c6d1e9cdd11571844c47a"
+      }
+    },
+    {
+      "owner": "C32726",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C32776",
+        "C32778",
+        "C3277A",
+        "C3277E",
+        "C32780",
+        "C32786",
+        "C3278A",
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32726_shadow.log",
+        "sha256": "10eb88f9b6d565e63ca3b18cd5f08ce92a2857650d7c6d1e9cdd11571844c47a"
+      }
+    },
+    {
+      "owner": "C32726",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [
+        "C32776",
+        "C32778",
+        "C3277A",
+        "C3277E",
+        "C32780",
+        "C32786",
+        "C3278A",
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32726_sandbox.log",
+        "sha256": "10eb88f9b6d565e63ca3b18cd5f08ce92a2857650d7c6d1e9cdd11571844c47a"
+      }
+    },
+    {
+      "owner": "C32736",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 65,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32736_on.log",
+        "sha256": "c49c895f5db76ade42a3ae9334bfbfbc5fd36ce45a7770d8a6ced8f2b696097f"
+      }
+    },
+    {
+      "owner": "C32736",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 65,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32736_shadow.log",
+        "sha256": "c49c895f5db76ade42a3ae9334bfbfbc5fd36ce45a7770d8a6ced8f2b696097f"
+      }
+    },
+    {
+      "owner": "C32736",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 65,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32736_sandbox.log",
+        "sha256": "c49c895f5db76ade42a3ae9334bfbfbc5fd36ce45a7770d8a6ced8f2b696097f"
+      }
+    },
+    {
+      "owner": "C32794",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32794_on.log",
+        "sha256": "57037cbdd9f70ea6d443eb27259567be578c7b632b5ae23056742dad3da90e62"
+      }
+    },
+    {
+      "owner": "C32794",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32794_shadow.log",
+        "sha256": "57037cbdd9f70ea6d443eb27259567be578c7b632b5ae23056742dad3da90e62"
+      }
+    },
+    {
+      "owner": "C32794",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32794_sandbox.log",
+        "sha256": "57037cbdd9f70ea6d443eb27259567be578c7b632b5ae23056742dad3da90e62"
+      }
+    },
+    {
+      "owner": "C32AA4",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AA4_on.log",
+        "sha256": "b33c9a94b4beeffabe310fce3da3d4c0a3dcc56341ccba0420715e78543bd238"
+      }
+    },
+    {
+      "owner": "C32AA4",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AA4_shadow.log",
+        "sha256": "b33c9a94b4beeffabe310fce3da3d4c0a3dcc56341ccba0420715e78543bd238"
+      }
+    },
+    {
+      "owner": "C32AA4",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AA4_sandbox.log",
+        "sha256": "b33c9a94b4beeffabe310fce3da3d4c0a3dcc56341ccba0420715e78543bd238"
+      }
+    },
+    {
+      "owner": "C32AA6",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 82,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AA6_on.log",
+        "sha256": "1e46e017626021bcf2bb5f50b0af5c86cd5a0e117c701549bd79e2ca6bd2b8a9"
+      }
+    },
+    {
+      "owner": "C32AA6",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 82,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AA6_shadow.log",
+        "sha256": "1e46e017626021bcf2bb5f50b0af5c86cd5a0e117c701549bd79e2ca6bd2b8a9"
+      }
+    },
+    {
+      "owner": "C32AA6",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 82,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AA6_sandbox.log",
+        "sha256": "1e46e017626021bcf2bb5f50b0af5c86cd5a0e117c701549bd79e2ca6bd2b8a9"
+      }
+    },
+    {
+      "owner": "C32AB4",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AB4_on.log",
+        "sha256": "7ef76154ca51dc8ce41dcb82bb6eae0cab6b69b9d3ddec2fc5043cc1ea37a51a"
+      }
+    },
+    {
+      "owner": "C32AB4",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AB4_shadow.log",
+        "sha256": "7ef76154ca51dc8ce41dcb82bb6eae0cab6b69b9d3ddec2fc5043cc1ea37a51a"
+      }
+    },
+    {
+      "owner": "C32AB4",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C32B32",
+        "C32B34",
+        "C32B36",
+        "C32B38",
+        "C32B3C",
+        "C32B40",
+        "C32B42",
+        "C32B48",
+        "C32B4C",
+        "C32B4E",
+        "C32B50",
+        "C32B52",
+        "C32B56",
+        "C32B58",
+        "C32B5A",
+        "C32B5E",
+        "C32B66",
+        "C32B68",
+        "C32B6C",
+        "C32B6E",
+        "C32B72",
+        "C32B76",
+        "C32B78",
+        "C32B7C",
+        "C32B84",
+        "C32B86",
+        "C32B8A",
+        "C32B8C",
+        "C32B90",
+        "C32B94",
+        "C32B96",
+        "C32B9A",
+        "C32BA2",
+        "C32BA4",
+        "C32BA8",
+        "C32BAA",
+        "C32BAE",
+        "C32BB2",
+        "C32BB4",
+        "C32BB8",
+        "C32BC0",
+        "C32BC2",
+        "C32BC6",
+        "C32BC8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_text_helpers_dispatch_C32AB4_sandbox.log",
+        "sha256": "7ef76154ca51dc8ce41dcb82bb6eae0cab6b69b9d3ddec2fc5043cc1ea37a51a"
+      }
+    }
+  ],
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "ordered_custom_writes": 0,
+    "original_children_use_no_draw_bounds": true,
+    "active_drawing_is_not_claimed_by_frozen_clock_fixtures": true,
+    "active_drawing_recording_checks_independent": true,
+    "shared_machine_observer_unchanged": true
+  },
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C31C20": {
+          "calls": 5333,
+          "compared": 5330,
+          "matched": 5330,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 3
+        },
+        "C3271A": {
+          "calls": 1448,
+          "compared": 1320,
+          "matched": 1320,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 128
+        },
+        "C32726": {
+          "calls": 1448,
+          "compared": 1355,
+          "matched": 1355,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 93
+        },
+        "C32736": {
+          "calls": 1328,
+          "compared": 1271,
+          "matched": 1271,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 57
+        },
+        "C32794": {
+          "calls": 672,
+          "compared": 651,
+          "matched": 651,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 21
+        },
+        "C32AA4": {
+          "calls": 8583,
+          "compared": 7874,
+          "matched": 7874,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 709
+        },
+        "C32AA6": {
+          "calls": 6287,
+          "compared": 5940,
+          "matched": 5940,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 347
+        },
+        "C32AB4": {
+          "calls": 7422,
+          "compared": 7074,
+          "matched": 7074,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 348
+        }
+      },
+      "sandbox": {
+        "C31C20": {
+          "calls": 5347,
+          "compared": 5347,
+          "matched": 5347,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C3271A": {
+          "calls": 1462,
+          "compared": 1462,
+          "matched": 1462,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C32726": {
+          "calls": 1462,
+          "compared": 1462,
+          "matched": 1462,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C32736": {
+          "calls": 1340,
+          "compared": 1340,
+          "matched": 1340,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C32794": {
+          "calls": 678,
+          "compared": 678,
+          "matched": 678,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C32AA4": {
+          "calls": 8586,
+          "compared": 8586,
+          "matched": 8586,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C32AA6": {
+          "calls": 6289,
+          "compared": 6289,
+          "matched": 6289,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C32AB4": {
+          "calls": 7425,
+          "compared": 7425,
+          "matched": 7425,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "shadow_matches": 30815,
+    "sandbox_matches": 32589,
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C31C20",
+            "name": "display_value_to_draw",
+            "calls": 2352,
+            "compared": 2351,
+            "matched": 2351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 94,
+            "busy_input_calls": 2351,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32794",
+            "name": "draw_small_text",
+            "calls": 368,
+            "compared": 358,
+            "matched": 358,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 10,
+            "mean_cycles": 2329,
+            "busy_input_calls": 358,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3271A",
+            "name": "format_small_hex",
+            "calls": 1448,
+            "compared": 1320,
+            "matched": 1320,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 128,
+            "mean_cycles": 11645,
+            "busy_input_calls": 1320,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32736",
+            "name": "format_small_hex",
+            "calls": 742,
+            "compared": 708,
+            "matched": 708,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 34,
+            "mean_cycles": 3724,
+            "busy_input_calls": 708,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32726",
+            "name": "format_digits",
+            "calls": 1448,
+            "compared": 1355,
+            "matched": 1355,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 93,
+            "mean_cycles": 8960,
+            "busy_input_calls": 1355,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AB4",
+            "name": "draw_text_in_view",
+            "calls": 4011,
+            "compared": 3855,
+            "matched": 3855,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 156,
+            "mean_cycles": 5499,
+            "busy_input_calls": 3855,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA6",
+            "name": "print_bcd_in_view",
+            "calls": 3250,
+            "compared": 3095,
+            "matched": 3095,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 155,
+            "mean_cycles": 7924,
+            "busy_input_calls": 3095,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA4",
+            "name": "print_bcd_in_view",
+            "calls": 5027,
+            "compared": 4655,
+            "matched": 4655,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 372,
+            "mean_cycles": 8903,
+            "busy_input_calls": 4655,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31C20_C3271A_C32726_C32736_C32794_C32AA4_C32AA6_C32AB4_demo01_shadow.json",
+          "sha256": "ff16713908924c95288669eb06d4ccd6b0c6ef47d32ce85ced53ccebda81a40d"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C31C20",
+            "name": "display_value_to_draw",
+            "calls": 2385,
+            "compared": 2384,
+            "matched": 2384,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 100,
+            "busy_input_calls": 2384,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32794",
+            "name": "draw_small_text",
+            "calls": 194,
+            "compared": 187,
+            "matched": 187,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 7,
+            "mean_cycles": 4241,
+            "busy_input_calls": 187,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3271A",
+            "name": "format_small_hex",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32736",
+            "name": "format_small_hex",
+            "calls": 400,
+            "compared": 381,
+            "matched": 381,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 19,
+            "mean_cycles": 6122,
+            "busy_input_calls": 381,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32726",
+            "name": "format_digits",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AB4",
+            "name": "draw_text_in_view",
+            "calls": 2436,
+            "compared": 2286,
+            "matched": 2286,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 150,
+            "mean_cycles": 7303,
+            "busy_input_calls": 2286,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA6",
+            "name": "print_bcd_in_view",
+            "calls": 2062,
+            "compared": 1963,
+            "matched": 1963,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 99,
+            "mean_cycles": 8912,
+            "busy_input_calls": 1963,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA4",
+            "name": "print_bcd_in_view",
+            "calls": 2436,
+            "compared": 2159,
+            "matched": 2159,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 277,
+            "mean_cycles": 12920,
+            "busy_input_calls": 2159,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31C20_C3271A_C32726_C32736_C32794_C32AA4_C32AA6_C32AB4_qual_carrier_success_shadow.json",
+          "sha256": "51089811b674c1219017dc46f7cae24aa79a2b5bf938eec2a38dcae983a7956d"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C31C20",
+            "name": "display_value_to_draw",
+            "calls": 596,
+            "compared": 595,
+            "matched": 595,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 90,
+            "busy_input_calls": 595,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32794",
+            "name": "draw_small_text",
+            "calls": 110,
+            "compared": 106,
+            "matched": 106,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 4,
+            "mean_cycles": 4333,
+            "busy_input_calls": 106,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3271A",
+            "name": "format_small_hex",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32736",
+            "name": "format_small_hex",
+            "calls": 186,
+            "compared": 182,
+            "matched": 182,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 4,
+            "mean_cycles": 6170,
+            "busy_input_calls": 182,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32726",
+            "name": "format_digits",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AB4",
+            "name": "draw_text_in_view",
+            "calls": 975,
+            "compared": 933,
+            "matched": 933,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 42,
+            "mean_cycles": 7279,
+            "busy_input_calls": 933,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA6",
+            "name": "print_bcd_in_view",
+            "calls": 975,
+            "compared": 882,
+            "matched": 882,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 93,
+            "mean_cycles": 8734,
+            "busy_input_calls": 882,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA4",
+            "name": "print_bcd_in_view",
+            "calls": 1120,
+            "compared": 1060,
+            "matched": 1060,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 60,
+            "mean_cycles": 10583,
+            "busy_input_calls": 1060,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31C20_C3271A_C32726_C32736_C32794_C32AA4_C32AA6_C32AB4_qual_fail_crashes_shadow.json",
+          "sha256": "0021d57877ffbdc6cb52becf10cca7379b6faa16e0387c46bcdbb9a6d892f592"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C31C20",
+            "name": "display_value_to_draw",
+            "calls": 2366,
+            "compared": 2366,
+            "matched": 2366,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 95,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32794",
+            "name": "draw_small_text",
+            "calls": 374,
+            "compared": 374,
+            "matched": 374,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2345,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3271A",
+            "name": "format_small_hex",
+            "calls": 1462,
+            "compared": 1462,
+            "matched": 1462,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 11578,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32736",
+            "name": "format_small_hex",
+            "calls": 754,
+            "compared": 754,
+            "matched": 754,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3752,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32726",
+            "name": "format_digits",
+            "calls": 1462,
+            "compared": 1462,
+            "matched": 1462,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8950,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AB4",
+            "name": "draw_text_in_view",
+            "calls": 4014,
+            "compared": 4014,
+            "matched": 4014,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5566,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA6",
+            "name": "print_bcd_in_view",
+            "calls": 3252,
+            "compared": 3252,
+            "matched": 3252,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 7989,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA4",
+            "name": "print_bcd_in_view",
+            "calls": 5030,
+            "compared": 5030,
+            "matched": 5030,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9134,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31C20_C3271A_C32726_C32736_C32794_C32AA4_C32AA6_C32AB4_demo01_sandbox.json",
+          "sha256": "1d970ba74020c9c5880fb5e17f02b6a6cdde3eed0b73f95d3ccd9e734e93cc23"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C31C20",
+            "name": "display_value_to_draw",
+            "calls": 2385,
+            "compared": 2385,
+            "matched": 2385,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 100,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32794",
+            "name": "draw_small_text",
+            "calls": 194,
+            "compared": 194,
+            "matched": 194,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4234,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3271A",
+            "name": "format_small_hex",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32736",
+            "name": "format_small_hex",
+            "calls": 400,
+            "compared": 400,
+            "matched": 400,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6110,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32726",
+            "name": "format_digits",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AB4",
+            "name": "draw_text_in_view",
+            "calls": 2436,
+            "compared": 2436,
+            "matched": 2436,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 7318,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA6",
+            "name": "print_bcd_in_view",
+            "calls": 2062,
+            "compared": 2062,
+            "matched": 2062,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8883,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA4",
+            "name": "print_bcd_in_view",
+            "calls": 2436,
+            "compared": 2436,
+            "matched": 2436,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 13231,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31C20_C3271A_C32726_C32736_C32794_C32AA4_C32AA6_C32AB4_qual_carrier_success_sandbox.json",
+          "sha256": "81700707bc05d5580d925d526f499aa8644dd0a47eb94c6cb29cf438298debff"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C31C20",
+            "name": "display_value_to_draw",
+            "calls": 596,
+            "compared": 596,
+            "matched": 596,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 90,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32794",
+            "name": "draw_small_text",
+            "calls": 110,
+            "compared": 110,
+            "matched": 110,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4322,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3271A",
+            "name": "format_small_hex",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32736",
+            "name": "format_small_hex",
+            "calls": 186,
+            "compared": 186,
+            "matched": 186,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6164,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32726",
+            "name": "format_digits",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AB4",
+            "name": "draw_text_in_view",
+            "calls": 975,
+            "compared": 975,
+            "matched": 975,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 7296,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA6",
+            "name": "print_bcd_in_view",
+            "calls": 975,
+            "compared": 975,
+            "matched": 975,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8695,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C32AA4",
+            "name": "print_bcd_in_view",
+            "calls": 1120,
+            "compared": 1120,
+            "matched": 1120,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 10603,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C31C20_C3271A_C32726_C32736_C32794_C32AA4_C32AA6_C32AB4_qual_fail_crashes_sandbox.json",
+          "sha256": "b5b7519d8bef0ab1f2e85d2c899211e500b3cdf243d7fb74b0fe1a4465d013fb"
+        }
+      }
+    ],
+    "each_owner_has_completed_comparisons": true
+  },
+  "instruction_dma": {
+    "local_instructions": 182,
+    "local_cases": 5824,
+    "previous_unique_instructions": 24478,
+    "overlap_instructions": 149,
+    "combined_unique_instructions": 24511,
+    "combined_cases": 784352,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 28,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_menu_context_math.h",
+      "sha256": "1bbc8394e94f2eaa3a8678bb56381bf3b143af05c9a84283ba034188a7978b4e"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    }
+  ],
+  "full_gate": {
+    "rows": 592,
+    "recordings": 3,
+    "shadow_matches": 568440,
+    "sandbox_matches": 443868,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308154,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "c8377e5dd3f64802894059781dcaddef99ff6d471d55147faa8280075de51412"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207384,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "ce241bd1da262bc587b5e86356f321d952132152bdabe51b3578dcdee26f01ae"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52902,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "e2f73e3faf3b5396b0f40dd83200e8e5eebdbeb60597412d39ae040e181e4377"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150619,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "0f4be8c54a8fd5560286618be8c24a5dbdd3eb399716260ca3c286cfc822c718"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 248003,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "d756b9d1bd609e66ca706549b3c9ce2cddc84b87067fec57312d450a80177603"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45246,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "1c75e4173cf982a027645382a5acead9c26ecffb2d29d3ce5693463e04a8d7b6"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1596846286,
+    "build_gib": 1.487
+  },
+  "limits": [
+    "C32726 forces keep-zero mode before shared formatting: seven static leading-blank PCs are excluded for that entry, and covered by sibling formatters. Controlled shared union is complete.",
+    "Original-child and dispatch frozen-clock text fixtures use original clipped columns/layouts and even destinations; they do not claim active glyph/fault/DMA coverage. Individual coverage is retained.",
+    "Controlled glyph/fault children retain the loop word while changing full registers, flags, valid cursors and RAM.",
+    "Older projection/HUD parents and original indirect/table/callback graph remain game-function work, including C1FE24/C1FE46/C0CF98 dispatch owners.",
+    "C2C392 computed transfer, C1612C graphics-wait integration, ALL416/361, deferred Copper fade and Kickstart services remain open."
+  ],
+  "next": {
+    "entries": [
+      "C0DAEE",
+      "C0CFFA",
+      "C0D04C",
+      "C33CD2",
+      "C33B38",
+      "C33370",
+      "C332BC",
+      "C32662"
+    ],
+    "unique_instructions": 898,
+    "shared_instructions": 0,
+    "manifest": {
+      "path": "analysis/data/legacy_hud_projection_scope_inventory.json",
+      "sha256": "4d5bdd645bec53b40cfe9aa9d4cda9925d5f5d78a5df0d7776486c246ad6444e"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/hud_text_helpers.c",
+      "sha256": "f26adc5ba6cfa96edcdef2fcc48447c4ab9c79cbaaf7b982ebd985a9b61c8f68"
+    },
+    {
+      "path": "port/game/hud_text_helpers.h",
+      "sha256": "11c1b8f11d0dd0bc96360261bc192d73f921f22fc6f32a4f8d580604b8938493"
+    },
+    {
+      "path": "port/game/glue/glue_batch10.c",
+      "sha256": "0feda21e94c23d25101f8e1419727763af540ebf76eebc32b922a7d7596e63a5"
+    },
+    {
+      "path": "port/game/glue/glue_batch16.c",
+      "sha256": "4069351c47d9bdc402e9983028b511a1d95677db124cfd9d5e350bd1ef882168"
+    },
+    {
+      "path": "port/game/glue/glue_batch56.c",
+      "sha256": "3564f2cbbf41a69bdde19412214ee4ed415ca617d2473ec64e1701ab5dc28079"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "747a8bfa2b6fc9f9de130d876b5671ca92eaf58a8e146099c96103ef3a853b94"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "15d384b3446353eb38a528edf9327a4ffc3092f553786821e26a4edb5edd0639"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers.c",
+      "sha256": "6d82850c0d2ba62da9ac036b13d11cec3224c8b340d74a063af80b3e04e63290"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers.h",
+      "sha256": "3c388ec81d7d60021bec7e1d59744274461e8826e4a260b400aab6ddfd1b4047"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers_math.h",
+      "sha256": "6c5c6028b6934c94c0a01bf4ac201ab634575be14ba0e1b113f3147744463bac"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers_step.c",
+      "sha256": "b513db5a7a422f6fd1583d5696a8bc38b34f2321b1d8fd0a81b721f251645b33"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_hud_text_helpers_source.py",
+      "sha256": "4fdd1c82df8239c5a125da61fb379b626848cfdcc917b0e81b5b032db1b2d778"
+    },
+    {
+      "path": "tools/recomp/check_hud_text_helpers.py",
+      "sha256": "6bb82fee036d3d6b1040205776d195a9797fa0cf3dab8e0fdcf93eec103a7c59"
+    },
+    {
+      "path": "tools/recomp/check_hud_text_helpers_dispatch.py",
+      "sha256": "eba2ffaf576f11d13fcd4455ce7a951aeaa0d3ee0558301b5184640821093725"
+    },
+    {
+      "path": "tools/recomp/hud_text_helpers_bus_budget.c",
+      "sha256": "fe3bc365efc67e25854ceec3e1cd8fbf97b49cbc4cd2f7bd308dc861a8316f88"
+    },
+    {
+      "path": "tools/recomp/hud_text_helpers_contract_children.c",
+      "sha256": "9c29f9e9d3ab258a1054459fe25a1c07e39186804ea9b31e7b25bda0244dee72"
+    },
+    {
+      "path": "tools/recomp/hud_text_helpers_contract_oracle.c",
+      "sha256": "b1f0799813c962f06e952d0c61ff09cd8af18f50c3987074505b6713d8c1eb46"
+    },
+    {
+      "path": "tools/recomp/hud_text_helpers_dispatch_oracle.c",
+      "sha256": "04532bac25cf145fb6c59d2795054b322bbeec46190cbb0476477c6e92cd25d7"
+    },
+    {
+      "path": "tools/recomp/hud_text_helpers_fixture.h",
+      "sha256": "ff108eaf587b454bc9b6d7636b02663f8ba993543676ab05eba06f98967c7579"
+    },
+    {
+      "path": "tools/recomp/hud_text_helpers_oracle.c",
+      "sha256": "763e06550aa9b3462713ff22e8f3933111cce732b6999e46aa7b0ac25c135b58"
+    },
+    {
+      "path": "tools/recomp/audit_legacy_hud_projection_scope.py",
+      "sha256": "8ba2a7ee3ff6055a4cf3a6c107f9b03eb3d76e95643a1801f0da7b18d49e4eb2"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/hud_text_helpers_contract_full.log",
+      "sha256": "2eb16bede716414b465717249c637a7df92a89ff8f7e6a75bc2f9569e60d4e91"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_real_full.log",
+      "sha256": "b37c4d83e21635002060cc37495e8f9a23e20b74c158b261322c04ee4b4b7e8d"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_dispatch_probe.log",
+      "sha256": "ebab8411125adefe7e5d5d0de82a33a1778185f1ecf8e3f0e3439e0fb3b7c972"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_dma_local.log",
+      "sha256": "9e5daa78dffeafeb31f5e9d79bbfa64acc1edabae65f9081c84e7fc079e26a2f"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_dma_union.log",
+      "sha256": "01d68cd20b0443f5154454ad0a465d0405fae4550d27fab42062b5b553236f39"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_compatibility.log",
+      "sha256": "9e0735e09ee2d5e2de936b8cca62dc376dfc08e997720ed35911a93d4f73b662"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_normal_build.log",
+      "sha256": "05c3311677ba6fe83abf33c2b354caf3bb873125181e5de02f1e96ec7e9f4d3f"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_msvc.log",
+      "sha256": "39c6fec3d711d5a1d492e3fed5942d74a4337413b542cb322bfa913629169e14"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_msvc_configure.log",
+      "sha256": "abe78f40cb4e351f258ce6e5060b480fb20b75562210216f75f3177e13c8fe2b"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_ports_gate.log",
+      "sha256": "83c7bf9804760677aa9ed2f5507e7a37bada7204c3e9745c20bbddac5b267bb7"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_timing.log",
+      "sha256": "19592fcac8c429b59a0d61658289afd6301e7676e5f1eb102a56015e2c6a5f4d"
+    },
+    {
+      "path": "build/recomp/hud_text_helpers_whole_call.log",
+      "sha256": "9c0e880b506df24b26a2a820b3ccab9bc350bb6aa30f5590792a3a7100c533db"
+    }
+  ],
+  "retained_build_failures": []
+}
