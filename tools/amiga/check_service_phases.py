@@ -26,6 +26,7 @@ FAMILIES = [
     ("exec_task_services_adapter.c", "fa18_os_exec_task_protection_step"),
     ("exec_supervisor.c", "fa18_os_exec_supervisor_step"),
     ("exec_memory_adapter.c", "fa18_os_exec_memory_step"),
+    ("exec_scheduler_adapter.c", "fa18_os_exec_scheduler_step"),
 ]
 
 

@@ -11,9 +11,11 @@ enum {
     FA18_SERVICE_EXEC_SUPERVISOR,FA18_SERVICE_EXEC_SUPERVISOR_EXCEPTION,
     FA18_SERVICE_EXEC_PERMIT_CALLBACK,
     FA18_SERVICE_EXEC_MEMORY,
+    FA18_SERVICE_EXEC_SCHEDULER,
     FA18_SERVICE_COUNT
 };
 void fa18_services_reset(void);
 void fa18_service_enable(unsigned service,int enabled);
 int fa18_services_step(void);
+int fa18_services_requires_outer_dispatch(void);
 #endif

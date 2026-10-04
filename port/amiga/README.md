@@ -56,6 +56,12 @@ ctest --test-dir build/amiga-compat -C Release --output-on-failure
   structures, memory banks, timing and Permit/Alert continuations. This never
   allocates from a host heap. Original boundary behavior, including zero-size
   AllocAbs self-linking at a chunk start, is retained by the verified ABI.
+- `exec_context.h` and `exec_scheduler.h`: ordered 68000 register contexts,
+  ready-list task selection, priorities, reschedule/quantum state, task identity,
+  nesting and switch/launch/exception callback state. Guest bus callbacks and
+  registers are explicit; the embedding CPU owns SR/USP/RTE/STOP and the machine
+  owns interrupt delivery and idle time. Memory services share the context
+  transfer implementation. No host scheduler or captured OS state is used.
 - `rom_audit.h`: optional reference observations of nested flow, CPU state,
   accesses and machine time. Its bounded table fails closed if exhausted. This
   is an inventory, not ordered entry/exit fixtures or complete game coverage.

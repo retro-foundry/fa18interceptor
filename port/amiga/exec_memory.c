@@ -1,4 +1,5 @@
 #include "exec_memory.h"
+#include "exec_context.h"
 #include "abi_13.h"
 #include <string.h>
 static void flags(AmigaExecTaskState *s,uint32_t v,uint32_t sign) {
@@ -34,18 +35,9 @@ int amiga_exec_memory_step(AmigaExecMemoryPhase p,unsigned arg,AmigaExecTaskStat
     case AMIGA_MEM_GE: e->branch_taken=((s->ccr&AMIGA_CCR_N)!=0)==((s->ccr&AMIGA_CCR_V)!=0); break;
     case AMIGA_MEM_GT: e->branch_taken=!(s->ccr&AMIGA_CCR_Z) && ((s->ccr&AMIGA_CCR_N)!=0)==((s->ccr&AMIGA_CCR_V)!=0); break;
     case AMIGA_MEM_SAVE_REGISTERS:
-        for (int i=15;i>=0;--i) if (arg&(1u<<i)) {
-            v=i<8?s->d[i]:s->a[i-8]; s->a[7]-=4;
-            b->write16(b->context,s->a[7]+2,(uint16_t)v);
-            b->write16(b->context,s->a[7],(uint16_t)(v>>16)); ++e->transferred_longs;
-        } break;
+        return amiga_exec_context_save(s,b,7,arg,&e->transferred_longs);
     case AMIGA_MEM_RESTORE_REGISTERS:
-        a=s->a[7];
-        for (unsigned i=0;i<16;++i) if (arg&(1u<<i)) {
-            v=b->read32(b->context,a); a+=4;
-            if (i<8) s->d[i]=v; else s->a[i-8]=v;
-            ++e->transferred_longs;
-        } s->a[7]=a; break;
+        return amiga_exec_context_restore(s,b,7,arg,1,&e->transferred_longs);
     case AMIGA_MEM_RETURN: e->return_pc=b->read32(b->context,s->a[7]); s->a[7]+=4; e->returned=1; break;
     case AMIGA_MEM_TEST_SIZE: flags(s,s->d[0],0x80000000u); break;
     case AMIGA_MEM_ROUND_ADD: s->d[0]=arithmetic(s,s->d[0],7,0,0); break;

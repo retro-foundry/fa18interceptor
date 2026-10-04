@@ -338,6 +338,9 @@ int m68k_cycles_run(void);              /* Number of cycles run so far */
 int m68k_cycles_remaining(void);        /* Number of cycles left */
 void m68k_modify_timeslice(int cycles); /* Modify cycles left */
 void m68k_end_timeslice(void);          /* End timeslice now */
+/* A host instruction hook may execute a resumable service including STOP.
+ * Return from that hook without fetching a further guest instruction. */
+void m68k_yield_from_instruction_hook(void);
 
 /* Set the IPL0-IPL2 pins on the CPU (IRQ).
  * A transition from < 7 to 7 will cause a non-maskable interrupt (NMI).

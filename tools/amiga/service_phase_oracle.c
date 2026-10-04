@@ -16,6 +16,7 @@
 #include "exec_task_services_adapter.h"
 #include "exec_supervisor.h"
 #include "exec_memory_adapter.h"
+#include "exec_scheduler_adapter.h"
 #include "graphics_glue.h"
 #include "graphics_wait_bovp.h"
 #include "graphics_blitter_ownership.h"
@@ -85,6 +86,12 @@ static void fixture(uint32_t pc,unsigned scenario) {
         static const uint32_t frame_calls[]={0xFC08E6,0xFC08F6,0,0xFFFFFFFF,0x80000000,1,0xFC08E5,0xFC08E7};
         wr_u32(REG_A[7]+2,frame_calls[scenario/32%8]);
     }
+    /* Context operations require both valid stack banks. RTE uses a real
+     * 68000 six-byte frame rather than a random instruction address. */
+    CPU_STOPPED=0; m68k_set_reg(M68K_REG_USP,0xC7F800);
+    if (pc==0xFC0EC0 || pc==0xFC0FF0 || pc==0xFC1074) {
+        wr_u16(REG_A[7],0x2000|(scenario&31)); wr_u32(REG_A[7]+2,0xC10000);
+    }
     m68k_set_reg(M68K_REG_SR,(pc==0xFC08E6u && (scenario/32&1)?0x0700u:0x2700u)|(scenario&31));
     REG_PC=pc;
     SET_CYCLES(100000000);
@@ -108,7 +115,7 @@ int main(int argc,char **argv) {
         for (unsigned k=0;k<sizeof service_phase_cases/sizeof service_phase_cases[0];++k) {
             uint32_t pc=service_phase_cases[k].pc;
             for (unsigned n=0;n<count;++n) {
-                uint32_t regs[16],want_pc,want_sr; int want_cycles;
+                uint32_t regs[16],want_pc,want_sr; int want_cycles; uint32_t want_usp,want_isp,want_stopped;
                 memcpy(m,base,sizeof *m); fixture(pc,n);
                 memcpy(before,m,sizeof *m); m68k_get_context(cpu);
                 uint16_t op=fa18_bus_read16(pc);
@@ -119,6 +126,7 @@ int main(int argc,char **argv) {
                 fa18_bus_finish(REG_PC);
                 memcpy(regs,REG_DA,sizeof regs); want_pc=REG_PC;
                 want_sr=m68k_get_reg(NULL,M68K_REG_SR); want_cycles=GET_CYCLES();
+                want_usp=m68k_get_reg(NULL,M68K_REG_USP); want_isp=m68k_get_reg(NULL,M68K_REG_ISP); want_stopped=CPU_STOPPED;
                 memcpy(ram,m->chip,FA18_CHIP_SIZE); memcpy(ram+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
                 amiga_phase_observe_reference();
                 memcpy(m,before,sizeof *m); m68k_set_context(cpu);
@@ -130,7 +138,8 @@ int main(int argc,char **argv) {
                 int handled=service_phase_cases[k].step();
                 fa18_bus_finish(REG_PC);
                 if (!handled || REG_IR!=op || want_pc!=REG_PC || want_sr!=m68k_get_reg(NULL,M68K_REG_SR) ||
-                    want_cycles!=GET_CYCLES() || memcmp(regs,REG_DA,sizeof regs) ||
+                    want_cycles!=GET_CYCLES() || want_stopped!=CPU_STOPPED ||
+                    want_usp!=m68k_get_reg(NULL,M68K_REG_USP) || want_isp!=m68k_get_reg(NULL,M68K_REG_ISP) || memcmp(regs,REG_DA,sizeof regs) ||
                     memcmp(ram,m->chip,FA18_CHIP_SIZE) || memcmp(ram+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE) ||
                     !amiga_phase_observe_compare()) {
                     fprintf(stderr,"service phase %s %06X fixture %u bus=%u source PC/SR/cycles=%06X/%04X/%d C=%06X/%04X/%d opcode=%04X/%04X\n",

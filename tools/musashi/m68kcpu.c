@@ -56,6 +56,7 @@ extern void m68ki_build_opcode_table(void);
 /* ======================================================================== */
 
 int  m68ki_initial_cycles;
+static int m68ki_hook_yield;
 int  m68ki_remaining_cycles = 0;                     /* Number of clocks remaining */
 uint m68ki_tracing = 0;
 uint m68ki_address_space;
@@ -992,7 +993,9 @@ int m68k_execute(int num_cycles)
 			m68ki_use_data_space(); /* auto-disable (see m68kcpu.h) */
 
 			/* Call external hook to peek at CPU */
+			m68ki_hook_yield = 0;
 			m68ki_instr_hook(REG_PC); /* auto-disable (see m68kcpu.h) */
+			if (CPU_STOPPED || m68ki_hook_yield) break;
 
 			/* Record previous program counter */
 			REG_PPC = REG_PC;
@@ -1044,6 +1047,11 @@ void m68k_end_timeslice(void)
 {
 	m68ki_initial_cycles -= GET_CYCLES();
 	SET_CYCLES(0);
+}
+
+void m68k_yield_from_instruction_hook(void)
+{
+	m68ki_hook_yield = 1;
 }
 
 

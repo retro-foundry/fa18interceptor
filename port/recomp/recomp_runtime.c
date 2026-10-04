@@ -273,6 +273,12 @@ void fa18_machine_instruction_hook(unsigned int pc) {
     for (;;) {
         int r;
         int64_t before;
+        /* A service STOP discards the slice. The chipset owns idle time and
+         * interrupt wakeup; the interpreter must not fetch its continuation.
+         * An immediately accepted IRQ may already have cleared CPU_STOPPED. */
+        if (CPU_STOPPED || (REG_IR==0x4E72 && GET_CYCLES()<=0)) {
+            m68k_yield_from_instruction_hook(); return;
+        }
         fa18_bus_finish(REG_PC);
         fa18_bus_instruction();
         if (fa18_machine_service()) break;
@@ -298,6 +304,10 @@ void fa18_machine_instruction_hook(unsigned int pc) {
          * unused execute budget. Measure elapsed timeline time, not budget. */
         fa18_recomp_stats.generated_cycles += (uint64_t)(fa18_cycle_origin - GET_CYCLES() - before);
         /* EXIT_INTERP at a due chipset event resumes after servicing. */
+        if (CPU_STOPPED || (REG_IR==0x4E72 && GET_CYCLES()<=0)) {
+            m68k_yield_from_instruction_hook(); return;
+        }
+        if (r==FA18_EXIT_INTERP && fa18_services_requires_outer_dispatch()) continue;
         if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) break;
     }
     fa18_machine_require_supported_target(REG_PPC,REG_PC);
@@ -331,12 +341,14 @@ int fa18_recomp_resume(uint32_t ret, uint32_t sp) {
         uint32_t pc;
         uint16_t op;
         int r;
+        if (CPU_STOPPED || (REG_IR==0x4E72 && GET_CYCLES()<=0)) return FA18_EXIT_INTERP;
         if ((REG_PC & 0xFFFFFF) == ret && REG_A[7] == sp) return FA18_RET;
         fa18_bus_finish(REG_PC);
         fa18_bus_instruction();
         if (fa18_machine_service()) return FA18_EXIT_INTERP;
         fa18_bus_instruction();
         if (fa18_ports_resume_step()) continue;
+        if (fa18_services_requires_outer_dispatch()) return FA18_EXIT_INTERP;
         if (fa18_services_step()) continue;
         if (!enabled_flag) return FA18_EXIT_INTERP;
         if ((e = lookup(REG_PC)) != NULL) {

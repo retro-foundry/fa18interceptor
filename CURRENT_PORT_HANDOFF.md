@@ -166,10 +166,10 @@ Only hashes, addresses, and register metadata are committed in
 RAM stays under ignored `build/amiga` as oracle evidence.
 
 The seven existing service bridges, Exec FindTask/FindName, all seven list
-operations, message/signal/task protection, Supervisor and memory now execute 669 C phases
+operations, message/signal/task protection, Supervisor, memory and scheduling now execute 817 C phases
 without reading ROM instruction or operand bytes.
 Nested calls preserve the original stack and vectors. The structural oracle
-passes 342,528 CPU/DMA fixtures with cleared
+passes 418,304 CPU/DMA fixtures with cleared
 ROM buffers, a strict access guard, full registers/SR/RAM, ordered memory and
 hardware accesses, and exact cycles. It corrected potgo's original low-word-
 first stack write. Blitter ownership's deeper helpers still execute ROM in the
@@ -199,8 +199,8 @@ Enqueue, Wait, Cause and Supervisor calls on the original machine timeline.
 ordered accesses and cycles with ROM/rtarea cleared and the guard active.
 Fixtures cover empty/nonempty message queues, all port actions, controlled
 guest callbacks, task wakeups, deferred rescheduling, pending Wait, bit
-exhaustion and nesting. Blocking switches and real Cause remain unproved
-dependencies; callback fixtures do not replace their implementations.
+exhaustion and nesting. Blocking switches are now proved in the scheduler batch
+below; real Cause remains pending. Controlled callbacks do not replace missing services.
 Original Engine9000 contracts cover PutMsg, ReplyMsg, Signal, SetSignal,
 Permit and nonempty WaitPort. A blocking Wait observation enters idle STOP
 and did not return within its instruction bound. It is recorded as incomplete.
@@ -215,8 +215,9 @@ switches and RTE. 3,072 complete CPU/DMA calls prove user/supervisor paths,
 nested callbacks, both stack banks, full SR and supervisor-mode Permit/
 Reschedule callbacks. The true cold-entry checkpoint captures four original
 instructions /47 OCS colour clocks through privilege-frame rewriting, before
-callback transfer. The real callback proceeds into Switch and its complete
-return remains unobserved; those scheduler services are still unimplemented.
+callback transfer. The real callback proceeds into Switch; its original
+captured complete return remains unobserved. Scheduler services and controlled complete returns are now
+proved in the batch below.
 The reference runner enables the verified signatures by default; use
 `--no-os-supervisor` for the ROM oracle. Both GNU and MSVC Release full service
 replay comparisons pass all 36,236 frames/seals. See
@@ -245,19 +246,41 @@ and the installed wrapper. TypeOfMem was not reached in 300 cold-start frames;
 TypeOfMem/AllocAbs have static source and controlled proofs. Captured wrapper
 RAM is evidence only, never runtime initialization input. See
 `analysis/routines/fc16d8_fc1958_exec_memory.md` and
-`analysis/data/romfree_exec_memory_contracts.json`. The dispatcher/scheduler,
-soft interrupts and generic exception paths are still required.
+`analysis/data/romfree_exec_memory_contracts.json`. Soft interrupts and generic exception paths are still required.
 
-Original scheduler evidence for the next batch is captured and hash-checked:
-warm demo Switch FC0F1C reaches its resume RTE at FC0FF0 in 45 instructions /
-425 OCS colour clocks; interrupt exit FC0E9C reaches RTE FC0EC0 in eight /
-82 clocks. These are checkpoints before RTE, not full blocked-Wait returns.
-Dispatch FC0EC2 and AllocEntry/FreeEntry were not reached in their 300-frame
-observations. The source for Dispatch, Switch, interrupt exit and task-exception
-callbacks spans FC0E9C onward and still needs implementation/controlled proofs.
-See `analysis/data/romfree_exec_scheduler_contracts.json`; the binaries stay
-ignored under the recorded evidence directories. No runtime implementation is
-claimed by this scheduler capture.
+The 68000 scheduler is now implemented in reusable `exec_scheduler.c` and
+`exec_context.c`, with pinned ABI/timing in `exec_scheduler_adapter.c`.
+All 148 scheduler phases and 8,192 complete CPU/DMA calls prove task selection,
+contexts, callbacks, interrupt exit and blocking Wait/WaitPort. Source/C
+registers, full SR, both stack banks, all RAM, ordered accesses and cycles match
+with ROM/rtarea cleared and forbidden-access counters zero. Memory services
+share the context-transfer implementation and retain their complete call proof.
+
+Original warm-demo Switch reaches FC0FF0 in 45 instructions /425 OCS clocks;
+interrupt exit reaches FC0EC0 in eight /82 clocks. Both real captured entries
+now replay with exact checkpoint registers/full SR/all RAM and exact native
+ROM/C bus accesses and cycles. Switch matches Engine9000 timing; interrupt exit
+has the inherited native-reference 73 versus Engine9000 82 clocks with bus timing
+disabled. The replacement introduces no difference. Captures stop before RTE;
+complete returns are covered by the controlled fixtures. Metadata and hashes
+remain in `analysis/data/romfree_exec_scheduler_contracts.json`; captured RAM
+is ignored oracle evidence and never runtime initialization input.
+
+Service STOP now yields through the real interpreter hook, preserving machine
+ownership of idle time. Another 1,024 complete CPU/DMA tests prove empty queues
+and IRQs accepted immediately during STOP, including no continuation/IRQ opcode
+fetch. `--no-os-scheduler` retains the ROM oracle. GNU/MSVC Release full replays
+match all 36,236 sealed frames, final RAM and CPU cycles. The fresh full 614-row
+gate retains 571,427 shadow /458,087 sandbox comparisons, all RAM seals and
+identical poison frames (`build/recomp/exec_scheduler_full_gate.log`). Routine
+resumes yield at context returns so the outer dispatcher preserves these original
+comparison totals. See
+`analysis/routines/fc0e9c_fc10c4_exec_scheduler.md` and the reports under
+`build/amiga/exec-scheduler-recordings{,-msvc}/full.json`. Soft interrupts/Cause,
+IRQ registration/handlers and generic traps/exceptions remain pending. The cold
+Exec vectors identify Cause FC135C, SetIntVector FC11CA, AddIntServer FC1210
+and RemIntServer FC1250 for the next foundation batch; capture original contracts
+and prove their complete nested dependencies before replacing them.
 
 `analysis/data/romfree_startup_checkpoint.json` records original execution from
 C0DEB0 to C0E27E: 1,632 instructions /11,677 OCS colour clocks, 1,065 ROM/rtarea
