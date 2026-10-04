@@ -38,7 +38,7 @@ whole-game acceptance remains:
 
 | Checkpoint | Verified state |
 | --- | --- |
-| Original ADF launch with no ROM or savestate | GNU/MSVC Release isolated ADF-only tests pass through splash, credits, keyboard/pilot-name entry and demo rendering |
+| Original ADF launch with no ROM or savestate | GNU/MSVC Release isolated ADF-only tests pass through splash, credits, keyboard input and main-menu access and demo rendering |
 | Menus and every reachable game mode from clean launch | Credits/input/demo smoke passes; complete menu/mode coverage pending |
 | Flight and postflight with original behavior and timing | Pending; existing ROM-backed recordings remain the oracle |
 | Save/load round trips using `--save-dir` | Portable ADF/host-overlay component round trips pass; game UI scenarios pending |

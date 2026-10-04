@@ -13,8 +13,13 @@ profile supplies checked Hunk addresses and explicit process/library ABI
 identifiers. No Kickstart ROM, UAE state, captured RAM or SDK is read at runtime.
 The save directory defaults to `local/saves`.
 
-The target now loads the splash and credits, accepts keyboard input and pilot
-name entry, and renders the demo from a clean ADF launch. GNU and MSVC Release
+Window presentation defaults to host pacing at 50 Hz with monitor vsync off.
+Use `--window --vsync on` to select monitor synchronization (which can reduce
+tearing but adds display waits). This changes presentation only: it does not
+increase the original game's 3D update rate or change gameplay timing.
+
+The target now loads the splash and credits, accepts keyboard input, reaches
+the main menu and renders the demo from a clean ADF launch. GNU and MSVC Release
 pass the isolated launch smoke test, with zero ROM reads, ROM instruction
 fetches and unsupported services. Run `python tools/amiga/check_romfree_launcher.py`
 to reproduce it. This is functional smoke coverage, not acceptance of every mode.
