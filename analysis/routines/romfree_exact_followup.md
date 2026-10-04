@@ -87,3 +87,16 @@ generated entries. ROM-free code ownership now excludes those functions,
 including wrappers inlined into generated routines. Only original non-BSS Hunk
 payloads can supply translation spans; dynamic/self-modified code can use the
 interpreter. This separation is required by both compatibility strategies.
+
+Exec Alert's original startup use is now covered at compatibility level.
+Original C0E034-C0E04C saves D7/A5-A6, passes alert 00030007 in D7, then
+continues to CRT cleanup with status 100. Host Alert acknowledges recoverable
+codes immediately and stops dead-end codes with status 100 rather than reboot.
+No original alert screen, user acknowledgement delay or instruction timing is
+reproduced; retain this as exact follow-up. GNU/MSVC isolated DOS and Intuition
+allocation-failure fixtures execute original cleanup through C0DFEA/C51E6C,
+restore D1-D6/A0-A6 and SP, and reach FF446E with zero ROM/fault counters. The
+Intuition case also receives/releases the original Workbench startup message;
+ReplyMsg with a null reply port sets NT_FREEMSG (6), as the existing original
+service bridge specifies. Normal flight exits and Chip-only starvation are not
+proved by these fixtures. Original main loop C15D96-C15DB2 is unconditional.

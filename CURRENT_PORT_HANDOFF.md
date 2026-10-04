@@ -50,7 +50,7 @@ whole-game acceptance remains:
 | Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all four currently available mission entries reach changing active flight. Modes 7/8 and complete outcomes/progression remain pending |
 | Flight and postflight with original behavior and timing | GNU/MSVC free-flight location/aircraft choices reach active cockpit with advancing original player coordinates and pixels. New-tour qualification controls execute three reset passes, original failure-message callbacks, menu return and log update. Carrier success and complete mission outcomes remain pending; exact timing deferred |
 | Save/load round trips using `--save-dir` | GNU/MSVC game UI reset/update writes original 78-byte config; fresh launch matches all 78 saved bytes. ADF hash unchanged |
-| Restart and clean exit | Active mission -> SHIFT-ESC -> main menu -> second active mission passes GNU/MSVC. Host close emits diagnostics and releases resources; original guest teardown remains pending |
+| Restart and clean exit | Active mission -> SHIFT-ESC -> main menu -> second active mission passes GNU/MSVC. Original DOS/Intuition startup errors restore registers/stack and return to host on GNU/MSVC; full active-flight teardown remains pending. Host close releases resources |
 | Zero ROM reads/fetches and unsupported services over all scenarios | Zero over startup/demo, menu/mission-start and flight-log persistence checkpoints; full outcomes/progression/exit pending |
 
 The loose host layer is in `port/amiga/host_compat.{h,c}` and
@@ -60,6 +60,19 @@ unknown commands fatal. No OS instruction bytes, captured RAM or SDK headers
 are used. The original game files and gameplay still supply behavior. LoadView
 publishes Copper lists for vertical blank; restarting the Copper on every
 main-loop call caused repeated text and has been corrected.
+
+Exec Alert (-108, D7 ABI) is now implemented after Fast-RAM starvation exposed
+an unsupported call in original startup. Recoverable alerts log/return; dead-end
+alerts terminate with status 100 instead of rebooting. Neutral adapter fixtures
+prove preserved guest state and zero ROM/fault counters. Isolated
+`check_romfree_startup_failure.py` passes GNU/MSVC: DOS allocation failure uses
+original Alert/CRT unwind, exit 100; preconstructed DOS permits Workbench message
+reception before Intuition allocation failure. Original ReplyMsg marks the
+host-owned no-reply-port message NT_FREEMSG, exit zero. Both restore D1-D6/A0-A6
+and original SP+4, reaching FF446E without rewriting guest bytes or PC.
+Original main loop C15D96-C15DB2 branches unconditionally; no normal menu-return
+exit has been established. Do not conflate startup cleanup with complete flight
+teardown. Chip-only starvation still faults and remains separately unproved.
 
 New neutral contracts cover allocation/reservations, libraries, short reads,
 seeks, file failures, save overlays, directory iteration, keyboard matrix/events

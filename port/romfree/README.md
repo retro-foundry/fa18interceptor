@@ -55,6 +55,17 @@ keyboard/gameport button requests and timer queries/waits. Existing C interrupt 
 wait services run guest callbacks on the chipset timeline. New services use a
 coarse execution charge. The original game startup and gameplay code still run.
 
+Exec Alert logs the original D7 alert code and acknowledges recoverable alerts
+so the original caller can finish cleanup. A dead-end alert terminates the
+hosted process with status 100 instead of rebooting. Exact alert UI/timing is
+deferred. `python tools/amiga/check_romfree_startup_failure.py` verifies DOS and
+Intuition allocation failures from isolated ADF-only startup: original register
+and stack restoration, Workbench message release when applicable, process return
+and zero ROM/fault counters. Build `fa18_romfree_startup_failure_test` first;
+GNU uses the standalone builder's `--main tools/amiga/romfree_startup_failure_test.c`
+and `--output build/recomp/romfree_startup_failure_test.exe`, then the check's
+`--fixture` option. These are startup-error paths, not full flight teardown.
+
 The flight-log reset/update commands now save the original 78-byte `config`
 through an existing-file handle. A fresh ADF-only launch loads all 78 saved
 bytes back into the original game record. The ADF remains unchanged; writes

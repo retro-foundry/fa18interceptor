@@ -23,6 +23,7 @@ typedef struct {
     AmigaHostFile files[64]; AmigaHostLock locks[64];
     char save_directory[512]; int32_t error;
     int exited; int32_t exit_code;
+    uint32_t last_alert; uint64_t alert_count;
     uint32_t input_handlers[16]; size_t input_handler_count;
     uint8_t keyboard_matrix[16],gameport_type[2],gameport_trigger[2][8];
     /* Packed InputEvents, separated by gameport unit. Host transition time is

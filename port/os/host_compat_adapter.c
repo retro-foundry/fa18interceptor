@@ -193,6 +193,20 @@ static int device_command(AmigaHostCompat *c,uint32_t request,int reply) {
 static int exec_call(AmigaHostCompat *c,unsigned offset) {
     char name[256];
     switch (offset) {
+    case 108:
+        /* Exec Alert uses D7, including the 1.3 ABI. Recoverable alerts
+         * acknowledge on the host so original callers can run their cleanup.
+         * Dead-end alerts terminate the hosted process rather than rebooting
+         * the machine. SDK constants consulted only as reference. */
+        c->last_alert=REG_D[7]; ++c->alert_count;
+        fprintf(stderr,"compat: %s alert=%08X caller=%06X time=%lld\n",
+            (REG_D[7]&0x80000000u)?"dead-end":"recoverable",REG_D[7],REG_PPC,(long long)fa18_machine_now());
+        if (REG_D[7]&0x80000000u) {
+            c->exited=1; c->exit_code=100;
+            CPU_STOPPED|=STOP_LEVEL_STOP; SET_CYCLES(0); m68k_yield_from_instruction_hook();
+            return 2;
+        }
+        break;
     case 300: {
         uint32_t task=REG_A[1]?REG_A[1]:read32(c,c->libraries[0]+AMIGA_EXEC_THIS_TASK);
         uint8_t *priority=guest(c,task+AMIGA_NODE_PRIORITY,1);
