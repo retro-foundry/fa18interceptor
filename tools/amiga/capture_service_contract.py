@@ -41,6 +41,8 @@ def main():
     parser.add_argument("--entry", type=lambda s: int(s, 0), required=True)
     parser.add_argument("--return-pc", type=lambda s: int(s, 0),
                         help="filter calls from other OS tasks sharing this service")
+    parser.add_argument("--stop-pc", type=lambda s: int(s, 0),
+                        help="capture execution to a checkpoint instead of the caller return")
     parser.add_argument("--instructions", type=int, default=100000)
     parser.add_argument("--frames", type=int, default=100)
     parser.add_argument("--output", type=Path, required=True)
@@ -50,6 +52,8 @@ def main():
         parser.error("binary oracle evidence must remain in build/ or local/")
     if not 0 <= args.entry <= 0xFFFFFF or args.instructions < 1 or args.frames < 1:
         parser.error("invalid entry or execution bound")
+    if args.stop_pc is not None and not 0 <= args.stop_pc <= 0xFFFFFF:
+        parser.error("invalid checkpoint")
     output.mkdir(parents=True, exist_ok=True)
     engine = Engine(args.config.resolve(), output)
     try:
@@ -88,11 +92,12 @@ def main():
             before = snapshot(engine, output, "entry")
             sp = before["registers"]["a7"]
             ret = int.from_bytes(engine.memory(sp, 4), "big")
+            target = ret if args.stop_pc is None else args.stop_pc
             trace = output / "instructions.jsonl"
             with trace.open("w", encoding="utf8") as out:
                 for count in range(args.instructions):
                     regs = engine.regs()
-                    if regs["pc"] == ret and regs["a7"] == sp + 4:
+                    if regs["pc"] == target and (args.stop_pc is not None or regs["a7"] == sp + 4):
                         break
                     row = {"before": regs, "cycle_before": engine.core.e9k_debug_read_cycle_count(),
                            "instruction_window": engine.memory(regs["pc"], 10).hex()}
@@ -102,8 +107,9 @@ def main():
                     row["cycle_after"] = engine.core.e9k_debug_read_cycle_count()
                     out.write(json.dumps(row, separators=(",", ":")) + "\n")
                 else:
-                    raise RuntimeError("service did not return within instruction bound")
-            after = snapshot(engine, output, "return")
+                    raise RuntimeError("execution did not reach its endpoint within instruction bound")
+            endpoint = "return" if args.stop_pc is None else "checkpoint"
+            after = snapshot(engine, output, endpoint)
             # Capture pending writes through an ordinary frame boundary. This
             # advances only the oracle after its return snapshot was sealed.
             engine.core.e9k_debug_resume()
@@ -113,9 +119,10 @@ def main():
         if any("error" in row for row in hardware_rows):
             raise RuntimeError("Engine9000 dropped hardware writes")
         manifest = {
-            "schema": "amiga.service_contract.v1", "entry_pc": args.entry, "return_pc": ret,
+            "schema": "amiga.service_contract.v1" if args.stop_pc is None else "amiga.execution_contract.v1",
+            "entry_pc": args.entry,
             "other_callers_skipped": skipped,
-            "entry": before, "return": after, "instructions": count,
+            "entry": before, endpoint: after, "instructions": count,
             "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
             "hardware_window_requires_interval_filter": True,
             "authority": {"state_sha256": sha(args.state), "config_sha256": sha(args.config),
@@ -123,8 +130,9 @@ def main():
             "trace_sha256": sha(trace), "hardware_sha256": sha(output / "hardware_window.jsonl"),
             "captured_ram_is_runtime_input": False,
         }
+        manifest["return_pc" if args.stop_pc is None else "stop_pc"] = target
         (output / "contract.json").write_text(json.dumps(manifest, indent=2) + "\n")
-        print(json.dumps({"entry": hex(args.entry), "return": hex(ret), "instructions": count,
+        print(json.dumps({"entry": hex(args.entry), endpoint: hex(target), "instructions": count,
                           "colour_clocks": after["cycle"] - before["cycle"]}), flush=True)
     finally:
         engine.custom_log = None

@@ -20,15 +20,12 @@ FAMILIES = [
     ("potgo_glue.c", "fa18_os_potgo_step"),
     ("exec_task_lookup.c", "fa18_os_exec_find_task_step"),
     ("exec_task_lookup.c", "fa18_os_exec_find_name_step"),
+    ("exec_lists_adapter.c", "fa18_os_exec_lists_step"),
 ]
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--cases", type=int, default=256)
-    args = parser.parse_args()
-    if args.cases < 256:
-        parser.error("use at least 256 to exercise all boundary/CCR combinations")
+def write_cases():
+    """Build the shared case registry even when a whole-call checker runs first."""
     rows = []
     for filename, function in FAMILIES:
         source = (ROOT / "port/os" / filename).read_text()
@@ -40,6 +37,15 @@ def main():
     (out / "service_phase_cases.h").write_text(
         "static const struct { uint32_t pc; int (*step)(void); const char *name; } "
         "service_phase_cases[]={\n" + "\n".join(rows) + "\n};\n")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--cases", type=int, default=256)
+    args = parser.parse_args()
+    if args.cases < 256:
+        parser.error("use at least 256 to exercise all boundary/CCR combinations")
+    write_cases()
     subprocess.run([
         "python", "scripts/build_recomp.py", "--main", "tools/amiga/service_phase_oracle.c",
         "--replace-source", "port/machine/machine.c=tools/amiga/service_phase_machine.c",

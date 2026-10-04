@@ -61,6 +61,7 @@ static void usage(void) {
             "                   [--no-os-getmsg] (use ROM Exec GetMsg)\n"
             "                   [--no-os-potgo] (use ROM potgo.resource WritePotgo)\n"
             "                   [--no-os-task-lookup] (use ROM Exec FindTask/FindName)\n"
+            "                   [--no-os-lists] (use ROM Exec list services)\n"
             "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n");
 }
 
@@ -180,6 +181,7 @@ int main(int argc, char **argv) {
     int os_getmsg = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_potgo = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_task_lookup = -1;
+    int os_lists = -1;
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
@@ -242,6 +244,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--no-os-potgo")) os_potgo = 0;
         else if (!strcmp(argv[i], "--os-task-lookup")) os_task_lookup = 1;
         else if (!strcmp(argv[i], "--no-os-task-lookup")) os_task_lookup = 0;
+        else if (!strcmp(argv[i], "--os-lists")) os_lists = 1;
+        else if (!strcmp(argv[i], "--no-os-lists")) os_lists = 0;
         else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--record") && i + 1 < argc) record_path = argv[++i];
@@ -266,6 +270,7 @@ int main(int argc, char **argv) {
     if (os_getmsg < 0) os_getmsg = use_recomp;
     if (os_potgo < 0) os_potgo = use_recomp;
     if (os_task_lookup < 0) os_task_lookup = use_recomp;
+    if (os_lists < 0) os_lists = use_recomp;
     fa18_recomp_init(use_recomp);
     if (os_vbeam) fa18_recomp_enable_vbeam_shim();
     if (os_waitblit) fa18_recomp_enable_wait_blit_shim();
@@ -275,6 +280,7 @@ int main(int argc, char **argv) {
     if (os_getmsg) fa18_recomp_enable_exec_get_msg_shim();
     if (os_potgo) fa18_recomp_enable_potgo_shim();
     if (os_task_lookup) fa18_recomp_enable_exec_task_lookup_shim();
+    if (os_lists) fa18_recomp_enable_exec_lists_shim();
     if (rom_transitions_path && !fa18_recomp_track_rom_transitions()) {
         fprintf(stderr, "cannot allocate ROM transition inventory\n");
         return 1;

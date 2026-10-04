@@ -14,6 +14,7 @@
 #include "graphics_blitter_ownership.h"
 #include "exec_glue.h"
 #include "exec_task_lookup.h"
+#include "exec_lists_adapter.h"
 #include "potgo_glue.h"
 #include "service_dispatch_adapter.h"
 
@@ -125,6 +126,12 @@ int fa18_recomp_enable_exec_task_lookup_shim(void) {
     int enabled=fa18_os_exec_task_lookup_signature_matches(fa18_machine->rom);
     fa18_service_enable(FA18_SERVICE_EXEC_FIND_TASK,enabled);
     fa18_service_enable(FA18_SERVICE_EXEC_FIND_NAME,enabled);
+    return enabled;
+}
+
+int fa18_recomp_enable_exec_lists_shim(void) {
+    int enabled=fa18_os_exec_lists_signature_matches(fa18_machine->rom);
+    fa18_service_enable(FA18_SERVICE_EXEC_LISTS,enabled);
     return enabled;
 }
 

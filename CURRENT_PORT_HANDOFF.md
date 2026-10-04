@@ -165,10 +165,10 @@ Only hashes, addresses, and register metadata are committed in
 `analysis/data/romfree_hunk_layout.json` and `romfree_cold_entry.json`; captured
 RAM stays under ignored `build/amiga` as oracle evidence.
 
-The seven existing service bridges and new Exec FindTask/FindName implementations
-now execute 145 C phases without reading ROM instruction or operand bytes.
+The seven existing service bridges, Exec FindTask/FindName and all seven list
+operations now execute 208 C phases without reading ROM instruction or operand bytes.
 Nested calls preserve the original stack and vectors. The structural oracle
-passes 74,240 CPU/DMA fixtures with cleared
+passes 106,496 CPU/DMA fixtures with cleared
 ROM buffers, a strict access guard, full registers/SR/RAM, ordered memory and
 hardware accesses, and exact cycles. It corrected potgo's original low-word-
 first stack write. Blitter ownership's deeper helpers still execute ROM in the
@@ -182,12 +182,26 @@ nested FindName path. The shared dispatcher runs before interpreter opcode
 fetching; strict ROM access enforcement is available but cannot yet be enabled
 for a whole-game run because other service dependencies remain.
 
+The reusable `port/amiga/exec_lists.c` implements Insert, AddHead, AddTail,
+Remove, RemHead, RemTail and Enqueue; ABI/timing remains in its machine adapter.
+All 63 list phases are covered by 21,504 complete CPU/DMA calls with exact full
+register/SR/RAM/access/cycle parity, independent topology assertions and stable
+signed priority ordering. Original Engine9000 contracts cover Insert, RemHead
+and Enqueue; the four unobserved services have static/controlled proofs.
+See `analysis/routines/fc15e8_fc1694_exec_lists.md`.
+
+`analysis/data/romfree_startup_checkpoint.json` records original execution from
+C0DEB0 to C0E27E: 1,632 instructions /11,677 OCS colour clocks, 1,065 ROM/rtarea
+instruction PCs and 74 ROM-boundary transitions. This includes IRQs and OS task
+execution, not just game-origin calls. It is one Workbench startup path and
+does not close the complete inventory or authorize captured-RAM initialization.
+
 The audit records nested ROM flow, CPU entry state, accesses, low-memory vector
 activity, and machine cycles. All three existing recording audits retain their
 final RAM seals; they are warm coverage, not proof of every game mode or clean
 startup. A separate 300-frame audit/non-audit comparison is byte-identical.
 
-`fa18_romfree` is not delivered yet. Exec foundations, interrupt/exception paths,
+`fa18_romfree` is not delivered yet. Remaining Exec foundations, interrupt/exception paths,
 graphics LoadView and helpers, devices, DOS persistence, evidence-backed OS
 initialization and shutdown remain. Whole-game zero-ROM acceptance is pending.
 The converted phases are integrated into the reference runner. GNU and MSVC

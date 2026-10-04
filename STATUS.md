@@ -13,7 +13,7 @@ Whole-game ROM independence is unfinished; see `CURRENT_PORT_HANDOFF.md`.
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | Fresh full 614-row gate passes 571,427 shadow /458,087 sandbox, exact seals and poison frames. Implemented C services versus original ROM services match all 36,236 sealed recording frames, RGB444, final RAM and CPU cycles. ROM-independent service phases pass 74,240 CPU/DMA fixtures; FindTask/FindName pass another 9,216 complete calls. |
+| Current proof | Fresh full 614-row gate with list services passes 571,427 shadow /458,087 sandbox, exact seals and poison frames. Implemented C services including lists versus original ROM services match all 36,236 sealed recording frames, RGB444, final RAM and CPU cycles. ROM-independent service phases pass 106,496 CPU/DMA fixtures; FindTask/FindName pass 9,216 complete calls and all seven list operations pass 21,504 complete calls. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
 | Recreated C source | 539/624 translated entries plus 75 source-only callable entries: 614 rows. Game-function reconciliation remains open, including C2C392 and C1612C. See `CURRENT_PORT_HANDOFF.md`. |
 | Live C timing | 543 registered timing entries. Combined DMA passes 30,239 instructions /967,648 fixtures. Display family exact through 600 frames; ALL retains the inherited frame-424 /34,144-pixel difference. |

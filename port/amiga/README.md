@@ -36,6 +36,10 @@ ctest --test-dir build/amiga-compat -C Release --output-on-failure
 - `abi_13.h`: a small set of verified guest ABI offsets, without SDK includes
   or host struct packing assumptions. SDK revisions after 1.3 are not assumed
   to describe the pinned kernel.
+- `exec_lists.h`: resumable Insert, AddHead, AddTail, Remove, RemHead, RemTail
+  and Enqueue semantics. Explicit guest register/CCR state and bus callbacks
+  preserve sentinel links, insertion after equal priorities and access order.
+  ABI addresses and CPU timing stay in the embedding machine adapter.
 - `rom_audit.h`: optional reference observations of nested flow, CPU state,
   accesses and machine time. Its bounded table fails closed if exhausted. This
   is an inventory, not ordered entry/exit fixtures or complete game coverage.

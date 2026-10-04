@@ -51,7 +51,7 @@ add_library(fa18_map_packet_core STATIC ${FA18_MAP_PACKET_CORE})
 target_include_directories(fa18_map_packet_core PRIVATE ../)
 add_executable(fa18_recomp
     recomp_main.c recomp_runtime.c recomp_ports.c
-    ../amiga/rom_audit.c ../amiga/runtime_guard.c ../amiga/service_dispatch.c
+    ../amiga/rom_audit.c ../amiga/runtime_guard.c ../amiga/service_dispatch.c ../amiga/exec_lists.c
     loop_input.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
     ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})
 target_include_directories(fa18_recomp PRIVATE . generated ../machine ../game ../game/glue ../os)
