@@ -1,0 +1,3319 @@
+{
+  "state": "captures/native/demo01/state.bin",
+  "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "scope": "static owner flow: follow jumps, stop at returns; calls are child boundaries",
+  "owners": {
+    "C0D74A": {
+      "instruction_count": 231,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C0D74A",
+        "C0D750",
+        "C0D758",
+        "C0D75A",
+        "C0D75E",
+        "C0D762",
+        "C0D768",
+        "C0D76C",
+        "C0D770",
+        "C0D772",
+        "C0D778",
+        "C0D77A",
+        "C0D77C",
+        "C0D77E",
+        "C0D780",
+        "C0D782",
+        "C0D784",
+        "C0D786",
+        "C0D788",
+        "C0D78A",
+        "C0D78C",
+        "C0D78E",
+        "C0D790",
+        "C0D792",
+        "C0D794",
+        "C0D796",
+        "C0D798",
+        "C0D79A",
+        "C0D79C",
+        "C0D79E",
+        "C0D7A0",
+        "C0D7A2",
+        "C0D7A4",
+        "C0D7A6",
+        "C0D7A8",
+        "C0D7AA",
+        "C0D7AC",
+        "C0D7AE",
+        "C0D7B0",
+        "C0D7B2",
+        "C0D7B4",
+        "C0D7B6",
+        "C0D7B8",
+        "C0D7BA",
+        "C0D7BC",
+        "C0D7BE",
+        "C0D7C0",
+        "C0D7C2",
+        "C0D7C4",
+        "C0D7C8",
+        "C0D7CA",
+        "C0D7CC",
+        "C0D7D2",
+        "C0D7D4",
+        "C0D7D6",
+        "C0D7D8",
+        "C0D7DA",
+        "C0D7E0",
+        "C0D7E6",
+        "C0D7EA",
+        "C0D7EC",
+        "C0D7F0",
+        "C0D7F2",
+        "C0D7F6",
+        "C0D7FA",
+        "C0D7FE",
+        "C0D802",
+        "C0D804",
+        "C0D808",
+        "C0D80C",
+        "C0D810",
+        "C0D814",
+        "C0D816",
+        "C0D81A",
+        "C0D81E",
+        "C0D822",
+        "C0D826",
+        "C0D82A",
+        "C0D82C",
+        "C0D830",
+        "C0D832",
+        "C0D836",
+        "C0D83A",
+        "C0D83E",
+        "C0D842",
+        "C0D844",
+        "C0D848",
+        "C0D84C",
+        "C0D850",
+        "C0D854",
+        "C0D858",
+        "C0D85C",
+        "C0D860",
+        "C0D862",
+        "C0D866",
+        "C0D86A",
+        "C0D86E",
+        "C0D872",
+        "C0D878",
+        "C0D87C",
+        "C0D882",
+        "C0D884",
+        "C0D88A",
+        "C0D88E",
+        "C0D890",
+        "C0D894",
+        "C0D898",
+        "C0D89C",
+        "C0D8A2",
+        "C0D8A6",
+        "C0D8AA",
+        "C0D8AE",
+        "C0D8B2",
+        "C0D8B6",
+        "C0D8BA",
+        "C0D8BE",
+        "C0D8C4",
+        "C0D8C8",
+        "C0D8CE",
+        "C0D8D2",
+        "C0D8D4",
+        "C0D8D8",
+        "C0D8DC",
+        "C0D8E0",
+        "C0D8E4",
+        "C0D8EA",
+        "C0D8EE",
+        "C0D8F0",
+        "C0D8F4",
+        "C0D8F8",
+        "C0D8FC",
+        "C0D900",
+        "C0D904",
+        "C0D908",
+        "C0D90C",
+        "C0D912",
+        "C0D916",
+        "C0D91C",
+        "C0D920",
+        "C0D922",
+        "C0D926",
+        "C0D92A",
+        "C0D92E",
+        "C0D932",
+        "C0D936",
+        "C0D93A",
+        "C0D93E",
+        "C0D942",
+        "C0D946",
+        "C0D94C",
+        "C0D950",
+        "C0D952",
+        "C0D956",
+        "C0D95A",
+        "C0D960",
+        "C0D964",
+        "C0D96A",
+        "C0D96E",
+        "C0D970",
+        "C0D974",
+        "C0D978",
+        "C0D97C",
+        "C0D980",
+        "C0D986",
+        "C0D98A",
+        "C0D98C",
+        "C0D990",
+        "C0D994",
+        "C0D998",
+        "C0D99C",
+        "C0D9A0",
+        "C0D9A4",
+        "C0D9A8",
+        "C0D9AE",
+        "C0D9B2",
+        "C0D9BA",
+        "C0D9BC",
+        "C0D9C0",
+        "C0D9C4",
+        "C0D9C8",
+        "C0D9CE",
+        "C0D9D2",
+        "C0D9D6",
+        "C0D9DA",
+        "C0D9DE",
+        "C0D9E2",
+        "C0D9E6",
+        "C0D9EA",
+        "C0D9F0",
+        "C0D9F4",
+        "C0D9FA",
+        "C0D9FE",
+        "C0DA00",
+        "C0DA04",
+        "C0DA08",
+        "C0DA0C",
+        "C0DA10",
+        "C0DA14",
+        "C0DA18",
+        "C0DA1C",
+        "C0DA20",
+        "C0DA24",
+        "C0DA2A",
+        "C0DA2E",
+        "C0DA30",
+        "C0DA34",
+        "C0DA38",
+        "C0DA3E",
+        "C0DA42",
+        "C0DA46",
+        "C0DA4A",
+        "C0DA4E",
+        "C0DA52",
+        "C0DA58",
+        "C0DA5A",
+        "C0DA60",
+        "C0DA62",
+        "C0DA68",
+        "C0DA6C",
+        "C0DA6E",
+        "C0DA70",
+        "C0DA78",
+        "C0DA80",
+        "C0DA86",
+        "C0DA8E",
+        "C0DA90",
+        "C0DA92",
+        "C0DA94",
+        "C0DA9A",
+        "C0DA9C",
+        "C0DA9E"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C0D7DA",
+          "target": "C2E758",
+          "return_pc": "C0D7E0"
+        },
+        {
+          "pc": "C0D890",
+          "target": "C0DAA0",
+          "return_pc": "C0D894"
+        },
+        {
+          "pc": "C0D894",
+          "target": "C0DADC",
+          "return_pc": "C0D898"
+        },
+        {
+          "pc": "C0D898",
+          "target": "C0DAE6",
+          "return_pc": "C0D89C"
+        },
+        {
+          "pc": "C0D8A2",
+          "target": "C0DAD4",
+          "return_pc": "C0D8A6"
+        },
+        {
+          "pc": "C0D8A6",
+          "target": "C0DAD0",
+          "return_pc": "C0D8AA"
+        },
+        {
+          "pc": "C0D8AE",
+          "target": "C0DAA0",
+          "return_pc": "C0D8B2"
+        },
+        {
+          "pc": "C0D8B2",
+          "target": "C0DADC",
+          "return_pc": "C0D8B6"
+        },
+        {
+          "pc": "C0D8B6",
+          "target": "C0DAE6",
+          "return_pc": "C0D8BA"
+        },
+        {
+          "pc": "C0D8D4",
+          "target": "C0DAA0",
+          "return_pc": "C0D8D8"
+        },
+        {
+          "pc": "C0D8D8",
+          "target": "C0DAD4",
+          "return_pc": "C0D8DC"
+        },
+        {
+          "pc": "C0D8DC",
+          "target": "C0DADC",
+          "return_pc": "C0D8E0"
+        },
+        {
+          "pc": "C0D8E0",
+          "target": "C0DAE6",
+          "return_pc": "C0D8E4"
+        },
+        {
+          "pc": "C0D8F0",
+          "target": "C0DAD0",
+          "return_pc": "C0D8F4"
+        },
+        {
+          "pc": "C0D8F8",
+          "target": "C0DAA0",
+          "return_pc": "C0D8FC"
+        },
+        {
+          "pc": "C0D8FC",
+          "target": "C0DAD4",
+          "return_pc": "C0D900"
+        },
+        {
+          "pc": "C0D900",
+          "target": "C0DADC",
+          "return_pc": "C0D904"
+        },
+        {
+          "pc": "C0D904",
+          "target": "C0DAE6",
+          "return_pc": "C0D908"
+        },
+        {
+          "pc": "C0D922",
+          "target": "C0DAA0",
+          "return_pc": "C0D926"
+        },
+        {
+          "pc": "C0D926",
+          "target": "C0DADC",
+          "return_pc": "C0D92A"
+        },
+        {
+          "pc": "C0D92A",
+          "target": "C0DAD4",
+          "return_pc": "C0D92E"
+        },
+        {
+          "pc": "C0D92E",
+          "target": "C0DAD0",
+          "return_pc": "C0D932"
+        },
+        {
+          "pc": "C0D936",
+          "target": "C0DAA0",
+          "return_pc": "C0D93A"
+        },
+        {
+          "pc": "C0D93A",
+          "target": "C0DADC",
+          "return_pc": "C0D93E"
+        },
+        {
+          "pc": "C0D93E",
+          "target": "C0DAD4",
+          "return_pc": "C0D942"
+        },
+        {
+          "pc": "C0D942",
+          "target": "C0DAD0",
+          "return_pc": "C0D946"
+        },
+        {
+          "pc": "C0D952",
+          "target": "C0DAE6",
+          "return_pc": "C0D956"
+        },
+        {
+          "pc": "C0D970",
+          "target": "C0DAA0",
+          "return_pc": "C0D974"
+        },
+        {
+          "pc": "C0D974",
+          "target": "C0DADC",
+          "return_pc": "C0D978"
+        },
+        {
+          "pc": "C0D978",
+          "target": "C0DAE6",
+          "return_pc": "C0D97C"
+        },
+        {
+          "pc": "C0D97C",
+          "target": "C0DAD0",
+          "return_pc": "C0D980"
+        },
+        {
+          "pc": "C0D98C",
+          "target": "C0DAD4",
+          "return_pc": "C0D990"
+        },
+        {
+          "pc": "C0D994",
+          "target": "C0DAA0",
+          "return_pc": "C0D998"
+        },
+        {
+          "pc": "C0D998",
+          "target": "C0DADC",
+          "return_pc": "C0D99C"
+        },
+        {
+          "pc": "C0D99C",
+          "target": "C0DAE6",
+          "return_pc": "C0D9A0"
+        },
+        {
+          "pc": "C0D9A0",
+          "target": "C0DAD0",
+          "return_pc": "C0D9A4"
+        },
+        {
+          "pc": "C0D9BC",
+          "target": "C0DAA0",
+          "return_pc": "C0D9C0"
+        },
+        {
+          "pc": "C0D9C0",
+          "target": "C0DAE6",
+          "return_pc": "C0D9C4"
+        },
+        {
+          "pc": "C0D9C4",
+          "target": "C0DAD0",
+          "return_pc": "C0D9C8"
+        },
+        {
+          "pc": "C0D9CE",
+          "target": "C0DADC",
+          "return_pc": "C0D9D2"
+        },
+        {
+          "pc": "C0D9D2",
+          "target": "C0DAD4",
+          "return_pc": "C0D9D6"
+        },
+        {
+          "pc": "C0D9DA",
+          "target": "C0DAA0",
+          "return_pc": "C0D9DE"
+        },
+        {
+          "pc": "C0D9DE",
+          "target": "C0DAE6",
+          "return_pc": "C0D9E2"
+        },
+        {
+          "pc": "C0D9E2",
+          "target": "C0DAD0",
+          "return_pc": "C0D9E6"
+        },
+        {
+          "pc": "C0DA00",
+          "target": "C0DAA0",
+          "return_pc": "C0DA04"
+        },
+        {
+          "pc": "C0DA04",
+          "target": "C0DAD4",
+          "return_pc": "C0DA08"
+        },
+        {
+          "pc": "C0DA08",
+          "target": "C0DAD0",
+          "return_pc": "C0DA0C"
+        },
+        {
+          "pc": "C0DA0C",
+          "target": "C0DAE6",
+          "return_pc": "C0DA10"
+        },
+        {
+          "pc": "C0DA14",
+          "target": "C0DAA0",
+          "return_pc": "C0DA18"
+        },
+        {
+          "pc": "C0DA18",
+          "target": "C0DAD4",
+          "return_pc": "C0DA1C"
+        },
+        {
+          "pc": "C0DA1C",
+          "target": "C0DAD0",
+          "return_pc": "C0DA20"
+        },
+        {
+          "pc": "C0DA20",
+          "target": "C0DAE6",
+          "return_pc": "C0DA24"
+        },
+        {
+          "pc": "C0DA30",
+          "target": "C0DADC",
+          "return_pc": "C0DA34"
+        },
+        {
+          "pc": "C0DA42",
+          "target": "C0DAD0",
+          "return_pc": "C0DA46"
+        },
+        {
+          "pc": "C0DA46",
+          "target": "C0DAD4",
+          "return_pc": "C0DA4A"
+        },
+        {
+          "pc": "C0DA4A",
+          "target": "C0DADC",
+          "return_pc": "C0DA4E"
+        },
+        {
+          "pc": "C0DA4E",
+          "target": "C0DAE6",
+          "return_pc": "C0DA52"
+        }
+      ]
+    },
+    "C0D752": {
+      "instruction_count": 230,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C0D752",
+        "C0D758",
+        "C0D75A",
+        "C0D75E",
+        "C0D762",
+        "C0D768",
+        "C0D76C",
+        "C0D770",
+        "C0D772",
+        "C0D778",
+        "C0D77A",
+        "C0D77C",
+        "C0D77E",
+        "C0D780",
+        "C0D782",
+        "C0D784",
+        "C0D786",
+        "C0D788",
+        "C0D78A",
+        "C0D78C",
+        "C0D78E",
+        "C0D790",
+        "C0D792",
+        "C0D794",
+        "C0D796",
+        "C0D798",
+        "C0D79A",
+        "C0D79C",
+        "C0D79E",
+        "C0D7A0",
+        "C0D7A2",
+        "C0D7A4",
+        "C0D7A6",
+        "C0D7A8",
+        "C0D7AA",
+        "C0D7AC",
+        "C0D7AE",
+        "C0D7B0",
+        "C0D7B2",
+        "C0D7B4",
+        "C0D7B6",
+        "C0D7B8",
+        "C0D7BA",
+        "C0D7BC",
+        "C0D7BE",
+        "C0D7C0",
+        "C0D7C2",
+        "C0D7C4",
+        "C0D7C8",
+        "C0D7CA",
+        "C0D7CC",
+        "C0D7D2",
+        "C0D7D4",
+        "C0D7D6",
+        "C0D7D8",
+        "C0D7DA",
+        "C0D7E0",
+        "C0D7E6",
+        "C0D7EA",
+        "C0D7EC",
+        "C0D7F0",
+        "C0D7F2",
+        "C0D7F6",
+        "C0D7FA",
+        "C0D7FE",
+        "C0D802",
+        "C0D804",
+        "C0D808",
+        "C0D80C",
+        "C0D810",
+        "C0D814",
+        "C0D816",
+        "C0D81A",
+        "C0D81E",
+        "C0D822",
+        "C0D826",
+        "C0D82A",
+        "C0D82C",
+        "C0D830",
+        "C0D832",
+        "C0D836",
+        "C0D83A",
+        "C0D83E",
+        "C0D842",
+        "C0D844",
+        "C0D848",
+        "C0D84C",
+        "C0D850",
+        "C0D854",
+        "C0D858",
+        "C0D85C",
+        "C0D860",
+        "C0D862",
+        "C0D866",
+        "C0D86A",
+        "C0D86E",
+        "C0D872",
+        "C0D878",
+        "C0D87C",
+        "C0D882",
+        "C0D884",
+        "C0D88A",
+        "C0D88E",
+        "C0D890",
+        "C0D894",
+        "C0D898",
+        "C0D89C",
+        "C0D8A2",
+        "C0D8A6",
+        "C0D8AA",
+        "C0D8AE",
+        "C0D8B2",
+        "C0D8B6",
+        "C0D8BA",
+        "C0D8BE",
+        "C0D8C4",
+        "C0D8C8",
+        "C0D8CE",
+        "C0D8D2",
+        "C0D8D4",
+        "C0D8D8",
+        "C0D8DC",
+        "C0D8E0",
+        "C0D8E4",
+        "C0D8EA",
+        "C0D8EE",
+        "C0D8F0",
+        "C0D8F4",
+        "C0D8F8",
+        "C0D8FC",
+        "C0D900",
+        "C0D904",
+        "C0D908",
+        "C0D90C",
+        "C0D912",
+        "C0D916",
+        "C0D91C",
+        "C0D920",
+        "C0D922",
+        "C0D926",
+        "C0D92A",
+        "C0D92E",
+        "C0D932",
+        "C0D936",
+        "C0D93A",
+        "C0D93E",
+        "C0D942",
+        "C0D946",
+        "C0D94C",
+        "C0D950",
+        "C0D952",
+        "C0D956",
+        "C0D95A",
+        "C0D960",
+        "C0D964",
+        "C0D96A",
+        "C0D96E",
+        "C0D970",
+        "C0D974",
+        "C0D978",
+        "C0D97C",
+        "C0D980",
+        "C0D986",
+        "C0D98A",
+        "C0D98C",
+        "C0D990",
+        "C0D994",
+        "C0D998",
+        "C0D99C",
+        "C0D9A0",
+        "C0D9A4",
+        "C0D9A8",
+        "C0D9AE",
+        "C0D9B2",
+        "C0D9BA",
+        "C0D9BC",
+        "C0D9C0",
+        "C0D9C4",
+        "C0D9C8",
+        "C0D9CE",
+        "C0D9D2",
+        "C0D9D6",
+        "C0D9DA",
+        "C0D9DE",
+        "C0D9E2",
+        "C0D9E6",
+        "C0D9EA",
+        "C0D9F0",
+        "C0D9F4",
+        "C0D9FA",
+        "C0D9FE",
+        "C0DA00",
+        "C0DA04",
+        "C0DA08",
+        "C0DA0C",
+        "C0DA10",
+        "C0DA14",
+        "C0DA18",
+        "C0DA1C",
+        "C0DA20",
+        "C0DA24",
+        "C0DA2A",
+        "C0DA2E",
+        "C0DA30",
+        "C0DA34",
+        "C0DA38",
+        "C0DA3E",
+        "C0DA42",
+        "C0DA46",
+        "C0DA4A",
+        "C0DA4E",
+        "C0DA52",
+        "C0DA58",
+        "C0DA5A",
+        "C0DA60",
+        "C0DA62",
+        "C0DA68",
+        "C0DA6C",
+        "C0DA6E",
+        "C0DA70",
+        "C0DA78",
+        "C0DA80",
+        "C0DA86",
+        "C0DA8E",
+        "C0DA90",
+        "C0DA92",
+        "C0DA94",
+        "C0DA9A",
+        "C0DA9C",
+        "C0DA9E"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C0D7DA",
+          "target": "C2E758",
+          "return_pc": "C0D7E0"
+        },
+        {
+          "pc": "C0D890",
+          "target": "C0DAA0",
+          "return_pc": "C0D894"
+        },
+        {
+          "pc": "C0D894",
+          "target": "C0DADC",
+          "return_pc": "C0D898"
+        },
+        {
+          "pc": "C0D898",
+          "target": "C0DAE6",
+          "return_pc": "C0D89C"
+        },
+        {
+          "pc": "C0D8A2",
+          "target": "C0DAD4",
+          "return_pc": "C0D8A6"
+        },
+        {
+          "pc": "C0D8A6",
+          "target": "C0DAD0",
+          "return_pc": "C0D8AA"
+        },
+        {
+          "pc": "C0D8AE",
+          "target": "C0DAA0",
+          "return_pc": "C0D8B2"
+        },
+        {
+          "pc": "C0D8B2",
+          "target": "C0DADC",
+          "return_pc": "C0D8B6"
+        },
+        {
+          "pc": "C0D8B6",
+          "target": "C0DAE6",
+          "return_pc": "C0D8BA"
+        },
+        {
+          "pc": "C0D8D4",
+          "target": "C0DAA0",
+          "return_pc": "C0D8D8"
+        },
+        {
+          "pc": "C0D8D8",
+          "target": "C0DAD4",
+          "return_pc": "C0D8DC"
+        },
+        {
+          "pc": "C0D8DC",
+          "target": "C0DADC",
+          "return_pc": "C0D8E0"
+        },
+        {
+          "pc": "C0D8E0",
+          "target": "C0DAE6",
+          "return_pc": "C0D8E4"
+        },
+        {
+          "pc": "C0D8F0",
+          "target": "C0DAD0",
+          "return_pc": "C0D8F4"
+        },
+        {
+          "pc": "C0D8F8",
+          "target": "C0DAA0",
+          "return_pc": "C0D8FC"
+        },
+        {
+          "pc": "C0D8FC",
+          "target": "C0DAD4",
+          "return_pc": "C0D900"
+        },
+        {
+          "pc": "C0D900",
+          "target": "C0DADC",
+          "return_pc": "C0D904"
+        },
+        {
+          "pc": "C0D904",
+          "target": "C0DAE6",
+          "return_pc": "C0D908"
+        },
+        {
+          "pc": "C0D922",
+          "target": "C0DAA0",
+          "return_pc": "C0D926"
+        },
+        {
+          "pc": "C0D926",
+          "target": "C0DADC",
+          "return_pc": "C0D92A"
+        },
+        {
+          "pc": "C0D92A",
+          "target": "C0DAD4",
+          "return_pc": "C0D92E"
+        },
+        {
+          "pc": "C0D92E",
+          "target": "C0DAD0",
+          "return_pc": "C0D932"
+        },
+        {
+          "pc": "C0D936",
+          "target": "C0DAA0",
+          "return_pc": "C0D93A"
+        },
+        {
+          "pc": "C0D93A",
+          "target": "C0DADC",
+          "return_pc": "C0D93E"
+        },
+        {
+          "pc": "C0D93E",
+          "target": "C0DAD4",
+          "return_pc": "C0D942"
+        },
+        {
+          "pc": "C0D942",
+          "target": "C0DAD0",
+          "return_pc": "C0D946"
+        },
+        {
+          "pc": "C0D952",
+          "target": "C0DAE6",
+          "return_pc": "C0D956"
+        },
+        {
+          "pc": "C0D970",
+          "target": "C0DAA0",
+          "return_pc": "C0D974"
+        },
+        {
+          "pc": "C0D974",
+          "target": "C0DADC",
+          "return_pc": "C0D978"
+        },
+        {
+          "pc": "C0D978",
+          "target": "C0DAE6",
+          "return_pc": "C0D97C"
+        },
+        {
+          "pc": "C0D97C",
+          "target": "C0DAD0",
+          "return_pc": "C0D980"
+        },
+        {
+          "pc": "C0D98C",
+          "target": "C0DAD4",
+          "return_pc": "C0D990"
+        },
+        {
+          "pc": "C0D994",
+          "target": "C0DAA0",
+          "return_pc": "C0D998"
+        },
+        {
+          "pc": "C0D998",
+          "target": "C0DADC",
+          "return_pc": "C0D99C"
+        },
+        {
+          "pc": "C0D99C",
+          "target": "C0DAE6",
+          "return_pc": "C0D9A0"
+        },
+        {
+          "pc": "C0D9A0",
+          "target": "C0DAD0",
+          "return_pc": "C0D9A4"
+        },
+        {
+          "pc": "C0D9BC",
+          "target": "C0DAA0",
+          "return_pc": "C0D9C0"
+        },
+        {
+          "pc": "C0D9C0",
+          "target": "C0DAE6",
+          "return_pc": "C0D9C4"
+        },
+        {
+          "pc": "C0D9C4",
+          "target": "C0DAD0",
+          "return_pc": "C0D9C8"
+        },
+        {
+          "pc": "C0D9CE",
+          "target": "C0DADC",
+          "return_pc": "C0D9D2"
+        },
+        {
+          "pc": "C0D9D2",
+          "target": "C0DAD4",
+          "return_pc": "C0D9D6"
+        },
+        {
+          "pc": "C0D9DA",
+          "target": "C0DAA0",
+          "return_pc": "C0D9DE"
+        },
+        {
+          "pc": "C0D9DE",
+          "target": "C0DAE6",
+          "return_pc": "C0D9E2"
+        },
+        {
+          "pc": "C0D9E2",
+          "target": "C0DAD0",
+          "return_pc": "C0D9E6"
+        },
+        {
+          "pc": "C0DA00",
+          "target": "C0DAA0",
+          "return_pc": "C0DA04"
+        },
+        {
+          "pc": "C0DA04",
+          "target": "C0DAD4",
+          "return_pc": "C0DA08"
+        },
+        {
+          "pc": "C0DA08",
+          "target": "C0DAD0",
+          "return_pc": "C0DA0C"
+        },
+        {
+          "pc": "C0DA0C",
+          "target": "C0DAE6",
+          "return_pc": "C0DA10"
+        },
+        {
+          "pc": "C0DA14",
+          "target": "C0DAA0",
+          "return_pc": "C0DA18"
+        },
+        {
+          "pc": "C0DA18",
+          "target": "C0DAD4",
+          "return_pc": "C0DA1C"
+        },
+        {
+          "pc": "C0DA1C",
+          "target": "C0DAD0",
+          "return_pc": "C0DA20"
+        },
+        {
+          "pc": "C0DA20",
+          "target": "C0DAE6",
+          "return_pc": "C0DA24"
+        },
+        {
+          "pc": "C0DA30",
+          "target": "C0DADC",
+          "return_pc": "C0DA34"
+        },
+        {
+          "pc": "C0DA42",
+          "target": "C0DAD0",
+          "return_pc": "C0DA46"
+        },
+        {
+          "pc": "C0DA46",
+          "target": "C0DAD4",
+          "return_pc": "C0DA4A"
+        },
+        {
+          "pc": "C0DA4A",
+          "target": "C0DADC",
+          "return_pc": "C0DA4E"
+        },
+        {
+          "pc": "C0DA4E",
+          "target": "C0DAE6",
+          "return_pc": "C0DA52"
+        }
+      ]
+    },
+    "C0DAA0": {
+      "instruction_count": 16,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C0DAA0",
+        "C0DAA2",
+        "C0DAA4",
+        "C0DAAA",
+        "C0DAAE",
+        "C0DAB0",
+        "C0DAB4",
+        "C0DAB8",
+        "C0DABA",
+        "C0DABE",
+        "C0DAC0",
+        "C0DAC2",
+        "C0DAC6",
+        "C0DACA",
+        "C0DACC",
+        "C0DACE"
+      ],
+      "child_call_sites": []
+    },
+    "C0DAD0": {
+      "instruction_count": 2,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C0DAD0",
+        "C0DAD2"
+      ],
+      "child_call_sites": []
+    },
+    "C0DAD4": {
+      "instruction_count": 3,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C0DAD4",
+        "C0DAD8",
+        "C0DADA"
+      ],
+      "child_call_sites": []
+    },
+    "C0DADC": {
+      "instruction_count": 3,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C0DADC",
+        "C0DAE0",
+        "C0DAE4"
+      ],
+      "child_call_sites": []
+    },
+    "C0DAE6": {
+      "instruction_count": 3,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C0DAE6",
+        "C0DAE8",
+        "C0DAEC"
+      ],
+      "child_call_sites": []
+    }
+  },
+  "unique_instruction_count": 259,
+  "shared_instruction_count": 229,
+  "owned_pc_and_source_bytes_sha256": "854e8a458eb23cf7b70cd393f1651bd380d7a73113a6ec90c85fde0315f61ac8",
+  "instructions": [
+    {
+      "pc": "C0D74A",
+      "length": 6,
+      "bytes": "45f900c45bea",
+      "opcode": "45F9",
+      "instruction": "lea     $c45bea.l, A2"
+    },
+    {
+      "pc": "C0D750",
+      "length": 2,
+      "bytes": "6006",
+      "opcode": "6006",
+      "instruction": "bra     $c0d758"
+    },
+    {
+      "pc": "C0D752",
+      "length": 6,
+      "bytes": "45f900c45bd8",
+      "opcode": "45F9",
+      "instruction": "lea     $c45bd8.l, A2"
+    },
+    {
+      "pc": "C0D758",
+      "length": 2,
+      "bytes": "49d2",
+      "opcode": "49D2",
+      "instruction": "lea     (A2), A4"
+    },
+    {
+      "pc": "C0D75A",
+      "length": 4,
+      "bytes": "4e56fffe",
+      "opcode": "4E56",
+      "instruction": "link    A6, #-$2"
+    },
+    {
+      "pc": "C0D75E",
+      "length": 4,
+      "bytes": "43faffc0",
+      "opcode": "43FA",
+      "instruction": "lea     (-$40,PC), A1; ($c0d720)"
+    },
+    {
+      "pc": "C0D762",
+      "length": 6,
+      "bytes": "47f900c4b390",
+      "opcode": "47F9",
+      "instruction": "lea     $c4b390.l, A3"
+    },
+    {
+      "pc": "C0D768",
+      "length": 4,
+      "bytes": "41eefffe",
+      "opcode": "41EE",
+      "instruction": "lea     (-$2,A6), A0"
+    },
+    {
+      "pc": "C0D76C",
+      "length": 4,
+      "bytes": "30bc0004",
+      "opcode": "30BC",
+      "instruction": "move.w  #$4, (A0)"
+    },
+    {
+      "pc": "C0D770",
+      "length": 2,
+      "bytes": "3419",
+      "opcode": "3419",
+      "instruction": "move.w  (A1)+, D2"
+    },
+    {
+      "pc": "C0D772",
+      "length": 6,
+      "bytes": "263900c45a66",
+      "opcode": "2639",
+      "instruction": "move.l  $c45a66.l, D3"
+    },
+    {
+      "pc": "C0D778",
+      "length": 2,
+      "bytes": "4843",
+      "opcode": "4843",
+      "instruction": "swap    D3"
+    },
+    {
+      "pc": "C0D77A",
+      "length": 2,
+      "bytes": "e443",
+      "opcode": "E443",
+      "instruction": "asr.w   #2, D3"
+    },
+    {
+      "pc": "C0D77C",
+      "length": 2,
+      "bytes": "3819",
+      "opcode": "3819",
+      "instruction": "move.w  (A1)+, D4"
+    },
+    {
+      "pc": "C0D77E",
+      "length": 2,
+      "bytes": "45d4",
+      "opcode": "45D4",
+      "instruction": "lea     (A4), A2"
+    },
+    {
+      "pc": "C0D780",
+      "length": 2,
+      "bytes": "3a02",
+      "opcode": "3A02",
+      "instruction": "move.w  D2, D5"
+    },
+    {
+      "pc": "C0D782",
+      "length": 2,
+      "bytes": "3c03",
+      "opcode": "3C03",
+      "instruction": "move.w  D3, D6"
+    },
+    {
+      "pc": "C0D784",
+      "length": 2,
+      "bytes": "3e04",
+      "opcode": "3E04",
+      "instruction": "move.w  D4, D7"
+    },
+    {
+      "pc": "C0D786",
+      "length": 2,
+      "bytes": "cbda",
+      "opcode": "CBDA",
+      "instruction": "muls.w  (A2)+, D5"
+    },
+    {
+      "pc": "C0D788",
+      "length": 2,
+      "bytes": "cdda",
+      "opcode": "CDDA",
+      "instruction": "muls.w  (A2)+, D6"
+    },
+    {
+      "pc": "C0D78A",
+      "length": 2,
+      "bytes": "cfda",
+      "opcode": "CFDA",
+      "instruction": "muls.w  (A2)+, D7"
+    },
+    {
+      "pc": "C0D78C",
+      "length": 2,
+      "bytes": "de86",
+      "opcode": "DE86",
+      "instruction": "add.l   D6, D7"
+    },
+    {
+      "pc": "C0D78E",
+      "length": 2,
+      "bytes": "de85",
+      "opcode": "DE85",
+      "instruction": "add.l   D5, D7"
+    },
+    {
+      "pc": "C0D790",
+      "length": 2,
+      "bytes": "e087",
+      "opcode": "E087",
+      "instruction": "asr.l   #8, D7"
+    },
+    {
+      "pc": "C0D792",
+      "length": 2,
+      "bytes": "6402",
+      "opcode": "6402",
+      "instruction": "bcc     $c0d796"
+    },
+    {
+      "pc": "C0D794",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C0D796",
+      "length": 2,
+      "bytes": "36c7",
+      "opcode": "36C7",
+      "instruction": "move.w  D7, (A3)+"
+    },
+    {
+      "pc": "C0D798",
+      "length": 2,
+      "bytes": "3a02",
+      "opcode": "3A02",
+      "instruction": "move.w  D2, D5"
+    },
+    {
+      "pc": "C0D79A",
+      "length": 2,
+      "bytes": "3c03",
+      "opcode": "3C03",
+      "instruction": "move.w  D3, D6"
+    },
+    {
+      "pc": "C0D79C",
+      "length": 2,
+      "bytes": "3e04",
+      "opcode": "3E04",
+      "instruction": "move.w  D4, D7"
+    },
+    {
+      "pc": "C0D79E",
+      "length": 2,
+      "bytes": "cbda",
+      "opcode": "CBDA",
+      "instruction": "muls.w  (A2)+, D5"
+    },
+    {
+      "pc": "C0D7A0",
+      "length": 2,
+      "bytes": "cdda",
+      "opcode": "CDDA",
+      "instruction": "muls.w  (A2)+, D6"
+    },
+    {
+      "pc": "C0D7A2",
+      "length": 2,
+      "bytes": "cfda",
+      "opcode": "CFDA",
+      "instruction": "muls.w  (A2)+, D7"
+    },
+    {
+      "pc": "C0D7A4",
+      "length": 2,
+      "bytes": "de86",
+      "opcode": "DE86",
+      "instruction": "add.l   D6, D7"
+    },
+    {
+      "pc": "C0D7A6",
+      "length": 2,
+      "bytes": "de85",
+      "opcode": "DE85",
+      "instruction": "add.l   D5, D7"
+    },
+    {
+      "pc": "C0D7A8",
+      "length": 2,
+      "bytes": "e087",
+      "opcode": "E087",
+      "instruction": "asr.l   #8, D7"
+    },
+    {
+      "pc": "C0D7AA",
+      "length": 2,
+      "bytes": "6402",
+      "opcode": "6402",
+      "instruction": "bcc     $c0d7ae"
+    },
+    {
+      "pc": "C0D7AC",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C0D7AE",
+      "length": 2,
+      "bytes": "36c7",
+      "opcode": "36C7",
+      "instruction": "move.w  D7, (A3)+"
+    },
+    {
+      "pc": "C0D7B0",
+      "length": 2,
+      "bytes": "c5da",
+      "opcode": "C5DA",
+      "instruction": "muls.w  (A2)+, D2"
+    },
+    {
+      "pc": "C0D7B2",
+      "length": 2,
+      "bytes": "c7da",
+      "opcode": "C7DA",
+      "instruction": "muls.w  (A2)+, D3"
+    },
+    {
+      "pc": "C0D7B4",
+      "length": 2,
+      "bytes": "c9da",
+      "opcode": "C9DA",
+      "instruction": "muls.w  (A2)+, D4"
+    },
+    {
+      "pc": "C0D7B6",
+      "length": 2,
+      "bytes": "d883",
+      "opcode": "D883",
+      "instruction": "add.l   D3, D4"
+    },
+    {
+      "pc": "C0D7B8",
+      "length": 2,
+      "bytes": "d882",
+      "opcode": "D882",
+      "instruction": "add.l   D2, D4"
+    },
+    {
+      "pc": "C0D7BA",
+      "length": 2,
+      "bytes": "e084",
+      "opcode": "E084",
+      "instruction": "asr.l   #8, D4"
+    },
+    {
+      "pc": "C0D7BC",
+      "length": 2,
+      "bytes": "6402",
+      "opcode": "6402",
+      "instruction": "bcc     $c0d7c0"
+    },
+    {
+      "pc": "C0D7BE",
+      "length": 2,
+      "bytes": "5244",
+      "opcode": "5244",
+      "instruction": "addq.w  #1, D4"
+    },
+    {
+      "pc": "C0D7C0",
+      "length": 2,
+      "bytes": "36c4",
+      "opcode": "36C4",
+      "instruction": "move.w  D4, (A3)+"
+    },
+    {
+      "pc": "C0D7C2",
+      "length": 2,
+      "bytes": "3604",
+      "opcode": "3604",
+      "instruction": "move.w  D4, D3"
+    },
+    {
+      "pc": "C0D7C4",
+      "length": 4,
+      "bytes": "d6fc001a",
+      "opcode": "D6FC",
+      "instruction": "adda.w  #$1a, A3"
+    },
+    {
+      "pc": "C0D7C8",
+      "length": 2,
+      "bytes": "5350",
+      "opcode": "5350",
+      "instruction": "subq.w  #1, (A0)"
+    },
+    {
+      "pc": "C0D7CA",
+      "length": 2,
+      "bytes": "6ea4",
+      "opcode": "6EA4",
+      "instruction": "bgt     $c0d770"
+    },
+    {
+      "pc": "C0D7CC",
+      "length": 6,
+      "bytes": "49f900c4e854",
+      "opcode": "49F9",
+      "instruction": "lea     $c4e854.l, A4"
+    },
+    {
+      "pc": "C0D7D2",
+      "length": 2,
+      "bytes": "429c",
+      "opcode": "429C",
+      "instruction": "clr.l   (A4)+"
+    },
+    {
+      "pc": "C0D7D4",
+      "length": 2,
+      "bytes": "429c",
+      "opcode": "429C",
+      "instruction": "clr.l   (A4)+"
+    },
+    {
+      "pc": "C0D7D6",
+      "length": 2,
+      "bytes": "429c",
+      "opcode": "429C",
+      "instruction": "clr.l   (A4)+"
+    },
+    {
+      "pc": "C0D7D8",
+      "length": 2,
+      "bytes": "4294",
+      "opcode": "4294",
+      "instruction": "clr.l   (A4)"
+    },
+    {
+      "pc": "C0D7DA",
+      "length": 6,
+      "bytes": "4eb900c2e758",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2e758.l"
+    },
+    {
+      "pc": "C0D7E0",
+      "length": 6,
+      "bytes": "43f900c4e854",
+      "opcode": "43F9",
+      "instruction": "lea     $c4e854.l, A1"
+    },
+    {
+      "pc": "C0D7E6",
+      "length": 4,
+      "bytes": "4a690002",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($2,A1)"
+    },
+    {
+      "pc": "C0D7EA",
+      "length": 2,
+      "bytes": "673a",
+      "opcode": "673A",
+      "instruction": "beq     $c0d826"
+    },
+    {
+      "pc": "C0D7EC",
+      "length": 4,
+      "bytes": "4a690006",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($6,A1)"
+    },
+    {
+      "pc": "C0D7F0",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c0d7fe"
+    },
+    {
+      "pc": "C0D7F2",
+      "length": 4,
+      "bytes": "3029000a",
+      "opcode": "3029",
+      "instruction": "move.w  ($a,A1), D0"
+    },
+    {
+      "pc": "C0D7F6",
+      "length": 4,
+      "bytes": "3229000e",
+      "opcode": "3229",
+      "instruction": "move.w  ($e,A1), D1"
+    },
+    {
+      "pc": "C0D7FA",
+      "length": 4,
+      "bytes": "60000076",
+      "opcode": "6000",
+      "instruction": "bra     $c0d872"
+    },
+    {
+      "pc": "C0D7FE",
+      "length": 4,
+      "bytes": "4a690000",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($0,A1)"
+    },
+    {
+      "pc": "C0D802",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c0d810"
+    },
+    {
+      "pc": "C0D804",
+      "length": 4,
+      "bytes": "3029000a",
+      "opcode": "3029",
+      "instruction": "move.w  ($a,A1), D0"
+    },
+    {
+      "pc": "C0D808",
+      "length": 4,
+      "bytes": "32290008",
+      "opcode": "3229",
+      "instruction": "move.w  ($8,A1), D1"
+    },
+    {
+      "pc": "C0D80C",
+      "length": 4,
+      "bytes": "600000b0",
+      "opcode": "6000",
+      "instruction": "bra     $c0d8be"
+    },
+    {
+      "pc": "C0D810",
+      "length": 4,
+      "bytes": "4a690004",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($4,A1)"
+    },
+    {
+      "pc": "C0D814",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c0d822"
+    },
+    {
+      "pc": "C0D816",
+      "length": 4,
+      "bytes": "3029000a",
+      "opcode": "3029",
+      "instruction": "move.w  ($a,A1), D0"
+    },
+    {
+      "pc": "C0D81A",
+      "length": 4,
+      "bytes": "3229000c",
+      "opcode": "3229",
+      "instruction": "move.w  ($c,A1), D1"
+    },
+    {
+      "pc": "C0D81E",
+      "length": 4,
+      "bytes": "600000ec",
+      "opcode": "6000",
+      "instruction": "bra     $c0d90c"
+    },
+    {
+      "pc": "C0D822",
+      "length": 4,
+      "bytes": "60000270",
+      "opcode": "6000",
+      "instruction": "bra     $c0da94"
+    },
+    {
+      "pc": "C0D826",
+      "length": 4,
+      "bytes": "4a690000",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($0,A1)"
+    },
+    {
+      "pc": "C0D82A",
+      "length": 2,
+      "bytes": "6728",
+      "opcode": "6728",
+      "instruction": "beq     $c0d854"
+    },
+    {
+      "pc": "C0D82C",
+      "length": 4,
+      "bytes": "4a690006",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($6,A1)"
+    },
+    {
+      "pc": "C0D830",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c0d83e"
+    },
+    {
+      "pc": "C0D832",
+      "length": 4,
+      "bytes": "30290008",
+      "opcode": "3029",
+      "instruction": "move.w  ($8,A1), D0"
+    },
+    {
+      "pc": "C0D836",
+      "length": 4,
+      "bytes": "3229000e",
+      "opcode": "3229",
+      "instruction": "move.w  ($e,A1), D1"
+    },
+    {
+      "pc": "C0D83A",
+      "length": 4,
+      "bytes": "6000011e",
+      "opcode": "6000",
+      "instruction": "bra     $c0d95a"
+    },
+    {
+      "pc": "C0D83E",
+      "length": 4,
+      "bytes": "4a690004",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($4,A1)"
+    },
+    {
+      "pc": "C0D842",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c0d850"
+    },
+    {
+      "pc": "C0D844",
+      "length": 4,
+      "bytes": "30290008",
+      "opcode": "3029",
+      "instruction": "move.w  ($8,A1), D0"
+    },
+    {
+      "pc": "C0D848",
+      "length": 4,
+      "bytes": "3229000c",
+      "opcode": "3229",
+      "instruction": "move.w  ($c,A1), D1"
+    },
+    {
+      "pc": "C0D84C",
+      "length": 4,
+      "bytes": "6000015a",
+      "opcode": "6000",
+      "instruction": "bra     $c0d9a8"
+    },
+    {
+      "pc": "C0D850",
+      "length": 4,
+      "bytes": "60000242",
+      "opcode": "6000",
+      "instruction": "bra     $c0da94"
+    },
+    {
+      "pc": "C0D854",
+      "length": 4,
+      "bytes": "4a690004",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($4,A1)"
+    },
+    {
+      "pc": "C0D858",
+      "length": 4,
+      "bytes": "670001de",
+      "opcode": "6700",
+      "instruction": "beq     $c0da38"
+    },
+    {
+      "pc": "C0D85C",
+      "length": 4,
+      "bytes": "4a690006",
+      "opcode": "4A69",
+      "instruction": "tst.w   ($6,A1)"
+    },
+    {
+      "pc": "C0D860",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c0d86e"
+    },
+    {
+      "pc": "C0D862",
+      "length": 4,
+      "bytes": "3029000c",
+      "opcode": "3029",
+      "instruction": "move.w  ($c,A1), D0"
+    },
+    {
+      "pc": "C0D866",
+      "length": 4,
+      "bytes": "3229000e",
+      "opcode": "3229",
+      "instruction": "move.w  ($e,A1), D1"
+    },
+    {
+      "pc": "C0D86A",
+      "length": 4,
+      "bytes": "6000017e",
+      "opcode": "6000",
+      "instruction": "bra     $c0d9ea"
+    },
+    {
+      "pc": "C0D86E",
+      "length": 4,
+      "bytes": "60000224",
+      "opcode": "6000",
+      "instruction": "bra     $c0da94"
+    },
+    {
+      "pc": "C0D872",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D878",
+      "length": 4,
+      "bytes": "32fc0004",
+      "opcode": "32FC",
+      "instruction": "move.w  #$4, (A1)+"
+    },
+    {
+      "pc": "C0D87C",
+      "length": 6,
+      "bytes": "4a3900c45785",
+      "opcode": "4A39",
+      "instruction": "tst.b   $c45785.l"
+    },
+    {
+      "pc": "C0D882",
+      "length": 2,
+      "bytes": "660c",
+      "opcode": "660C",
+      "instruction": "bne     $c0d890"
+    },
+    {
+      "pc": "C0D884",
+      "length": 6,
+      "bytes": "3c3900c458ca",
+      "opcode": "3C39",
+      "instruction": "move.w  $c458ca.l, D6"
+    },
+    {
+      "pc": "C0D88A",
+      "length": 4,
+      "bytes": "02460002",
+      "opcode": "0246",
+      "instruction": "andi.w  #$2, D6"
+    },
+    {
+      "pc": "C0D88E",
+      "length": 2,
+      "bytes": "661e",
+      "opcode": "661E",
+      "instruction": "bne     $c0d8ae"
+    },
+    {
+      "pc": "C0D890",
+      "length": 4,
+      "bytes": "6100020e",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D894",
+      "length": 4,
+      "bytes": "61000246",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D898",
+      "length": 4,
+      "bytes": "6100024c",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D89C",
+      "length": 6,
+      "bytes": "43f900c4b39a",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b39a.l, A1"
+    },
+    {
+      "pc": "C0D8A2",
+      "length": 4,
+      "bytes": "61000230",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0D8A6",
+      "length": 4,
+      "bytes": "61000228",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D8AA",
+      "length": 4,
+      "bytes": "600001c4",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D8AE",
+      "length": 4,
+      "bytes": "610001f0",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D8B2",
+      "length": 4,
+      "bytes": "61000228",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D8B6",
+      "length": 4,
+      "bytes": "6100022e",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D8BA",
+      "length": 4,
+      "bytes": "600001b4",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D8BE",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D8C4",
+      "length": 4,
+      "bytes": "32fc0005",
+      "opcode": "32FC",
+      "instruction": "move.w  #$5, (A1)+"
+    },
+    {
+      "pc": "C0D8C8",
+      "length": 6,
+      "bytes": "3c3900c458ca",
+      "opcode": "3C39",
+      "instruction": "move.w  $c458ca.l, D6"
+    },
+    {
+      "pc": "C0D8CE",
+      "length": 4,
+      "bytes": "02460002",
+      "opcode": "0246",
+      "instruction": "andi.w  #$2, D6"
+    },
+    {
+      "pc": "C0D8D2",
+      "length": 2,
+      "bytes": "6624",
+      "opcode": "6624",
+      "instruction": "bne     $c0d8f8"
+    },
+    {
+      "pc": "C0D8D4",
+      "length": 4,
+      "bytes": "610001ca",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D8D8",
+      "length": 4,
+      "bytes": "610001fa",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0D8DC",
+      "length": 4,
+      "bytes": "610001fe",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D8E0",
+      "length": 4,
+      "bytes": "61000204",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D8E4",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D8EA",
+      "length": 4,
+      "bytes": "32fc0003",
+      "opcode": "32FC",
+      "instruction": "move.w  #$3, (A1)+"
+    },
+    {
+      "pc": "C0D8EE",
+      "length": 2,
+      "bytes": "5049",
+      "opcode": "5049",
+      "instruction": "addq.w  #8, A1"
+    },
+    {
+      "pc": "C0D8F0",
+      "length": 4,
+      "bytes": "610001de",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D8F4",
+      "length": 4,
+      "bytes": "6000017a",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D8F8",
+      "length": 4,
+      "bytes": "610001a6",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D8FC",
+      "length": 4,
+      "bytes": "610001d6",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0D900",
+      "length": 4,
+      "bytes": "610001da",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D904",
+      "length": 4,
+      "bytes": "610001e0",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D908",
+      "length": 4,
+      "bytes": "60000166",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D90C",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D912",
+      "length": 4,
+      "bytes": "32fc0005",
+      "opcode": "32FC",
+      "instruction": "move.w  #$5, (A1)+"
+    },
+    {
+      "pc": "C0D916",
+      "length": 6,
+      "bytes": "3c3900c458ca",
+      "opcode": "3C39",
+      "instruction": "move.w  $c458ca.l, D6"
+    },
+    {
+      "pc": "C0D91C",
+      "length": 4,
+      "bytes": "02460002",
+      "opcode": "0246",
+      "instruction": "andi.w  #$2, D6"
+    },
+    {
+      "pc": "C0D920",
+      "length": 2,
+      "bytes": "6614",
+      "opcode": "6614",
+      "instruction": "bne     $c0d936"
+    },
+    {
+      "pc": "C0D922",
+      "length": 4,
+      "bytes": "6100017c",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D926",
+      "length": 4,
+      "bytes": "610001b4",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D92A",
+      "length": 4,
+      "bytes": "610001a8",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0D92E",
+      "length": 4,
+      "bytes": "610001a0",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D932",
+      "length": 4,
+      "bytes": "6000013c",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D936",
+      "length": 4,
+      "bytes": "61000168",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D93A",
+      "length": 4,
+      "bytes": "610001a0",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D93E",
+      "length": 4,
+      "bytes": "61000194",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0D942",
+      "length": 4,
+      "bytes": "6100018c",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D946",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D94C",
+      "length": 4,
+      "bytes": "32fc0003",
+      "opcode": "32FC",
+      "instruction": "move.w  #$3, (A1)+"
+    },
+    {
+      "pc": "C0D950",
+      "length": 2,
+      "bytes": "5049",
+      "opcode": "5049",
+      "instruction": "addq.w  #8, A1"
+    },
+    {
+      "pc": "C0D952",
+      "length": 4,
+      "bytes": "61000192",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D956",
+      "length": 4,
+      "bytes": "60000118",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D95A",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D960",
+      "length": 4,
+      "bytes": "32fc0005",
+      "opcode": "32FC",
+      "instruction": "move.w  #$5, (A1)+"
+    },
+    {
+      "pc": "C0D964",
+      "length": 6,
+      "bytes": "3c3900c458ca",
+      "opcode": "3C39",
+      "instruction": "move.w  $c458ca.l, D6"
+    },
+    {
+      "pc": "C0D96A",
+      "length": 4,
+      "bytes": "02460002",
+      "opcode": "0246",
+      "instruction": "andi.w  #$2, D6"
+    },
+    {
+      "pc": "C0D96E",
+      "length": 2,
+      "bytes": "6624",
+      "opcode": "6624",
+      "instruction": "bne     $c0d994"
+    },
+    {
+      "pc": "C0D970",
+      "length": 4,
+      "bytes": "6100012e",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D974",
+      "length": 4,
+      "bytes": "61000166",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D978",
+      "length": 4,
+      "bytes": "6100016c",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D97C",
+      "length": 4,
+      "bytes": "61000152",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D980",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D986",
+      "length": 4,
+      "bytes": "32fc0003",
+      "opcode": "32FC",
+      "instruction": "move.w  #$3, (A1)+"
+    },
+    {
+      "pc": "C0D98A",
+      "length": 2,
+      "bytes": "5049",
+      "opcode": "5049",
+      "instruction": "addq.w  #8, A1"
+    },
+    {
+      "pc": "C0D98C",
+      "length": 4,
+      "bytes": "61000146",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0D990",
+      "length": 4,
+      "bytes": "600000de",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D994",
+      "length": 4,
+      "bytes": "6100010a",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D998",
+      "length": 4,
+      "bytes": "61000142",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D99C",
+      "length": 4,
+      "bytes": "61000148",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D9A0",
+      "length": 4,
+      "bytes": "6100012e",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D9A4",
+      "length": 4,
+      "bytes": "600000ca",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D9A8",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D9AE",
+      "length": 4,
+      "bytes": "32fc0004",
+      "opcode": "32FC",
+      "instruction": "move.w  #$4, (A1)+"
+    },
+    {
+      "pc": "C0D9B2",
+      "length": 8,
+      "bytes": "0c79384000c45a92",
+      "opcode": "0C79",
+      "instruction": "cmpi.w  #$3840, $c45a92.l"
+    },
+    {
+      "pc": "C0D9BA",
+      "length": 2,
+      "bytes": "6c1e",
+      "opcode": "6C1E",
+      "instruction": "bge     $c0d9da"
+    },
+    {
+      "pc": "C0D9BC",
+      "length": 4,
+      "bytes": "610000e2",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D9C0",
+      "length": 4,
+      "bytes": "61000124",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D9C4",
+      "length": 4,
+      "bytes": "6100010a",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D9C8",
+      "length": 6,
+      "bytes": "43f900c4b39a",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b39a.l, A1"
+    },
+    {
+      "pc": "C0D9CE",
+      "length": 4,
+      "bytes": "6100010c",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0D9D2",
+      "length": 4,
+      "bytes": "61000100",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0D9D6",
+      "length": 4,
+      "bytes": "60000098",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D9DA",
+      "length": 4,
+      "bytes": "610000c4",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0D9DE",
+      "length": 4,
+      "bytes": "61000106",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0D9E2",
+      "length": 4,
+      "bytes": "610000ec",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0D9E6",
+      "length": 4,
+      "bytes": "60000088",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0D9EA",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0D9F0",
+      "length": 4,
+      "bytes": "32fc0005",
+      "opcode": "32FC",
+      "instruction": "move.w  #$5, (A1)+"
+    },
+    {
+      "pc": "C0D9F4",
+      "length": 6,
+      "bytes": "3c3900c458ca",
+      "opcode": "3C39",
+      "instruction": "move.w  $c458ca.l, D6"
+    },
+    {
+      "pc": "C0D9FA",
+      "length": 4,
+      "bytes": "02460002",
+      "opcode": "0246",
+      "instruction": "andi.w  #$2, D6"
+    },
+    {
+      "pc": "C0D9FE",
+      "length": 2,
+      "bytes": "6614",
+      "opcode": "6614",
+      "instruction": "bne     $c0da14"
+    },
+    {
+      "pc": "C0DA00",
+      "length": 4,
+      "bytes": "6100009e",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0DA04",
+      "length": 4,
+      "bytes": "610000ce",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0DA08",
+      "length": 4,
+      "bytes": "610000c6",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0DA0C",
+      "length": 4,
+      "bytes": "610000d8",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0DA10",
+      "length": 4,
+      "bytes": "6000005e",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0DA14",
+      "length": 4,
+      "bytes": "6100008a",
+      "opcode": "6100",
+      "instruction": "bsr     $c0daa0"
+    },
+    {
+      "pc": "C0DA18",
+      "length": 4,
+      "bytes": "610000ba",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0DA1C",
+      "length": 4,
+      "bytes": "610000b2",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0DA20",
+      "length": 4,
+      "bytes": "610000c4",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0DA24",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0DA2A",
+      "length": 4,
+      "bytes": "32fc0003",
+      "opcode": "32FC",
+      "instruction": "move.w  #$3, (A1)+"
+    },
+    {
+      "pc": "C0DA2E",
+      "length": 2,
+      "bytes": "5049",
+      "opcode": "5049",
+      "instruction": "addq.w  #8, A1"
+    },
+    {
+      "pc": "C0DA30",
+      "length": 4,
+      "bytes": "610000aa",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0DA34",
+      "length": 4,
+      "bytes": "6000003a",
+      "opcode": "6000",
+      "instruction": "bra     $c0da70"
+    },
+    {
+      "pc": "C0DA38",
+      "length": 6,
+      "bytes": "43f900c4b390",
+      "opcode": "43F9",
+      "instruction": "lea     $c4b390.l, A1"
+    },
+    {
+      "pc": "C0DA3E",
+      "length": 4,
+      "bytes": "32fc0004",
+      "opcode": "32FC",
+      "instruction": "move.w  #$4, (A1)+"
+    },
+    {
+      "pc": "C0DA42",
+      "length": 4,
+      "bytes": "6100008c",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad0"
+    },
+    {
+      "pc": "C0DA46",
+      "length": 4,
+      "bytes": "6100008c",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dad4"
+    },
+    {
+      "pc": "C0DA4A",
+      "length": 4,
+      "bytes": "61000090",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dadc"
+    },
+    {
+      "pc": "C0DA4E",
+      "length": 4,
+      "bytes": "61000096",
+      "opcode": "6100",
+      "instruction": "bsr     $c0dae6"
+    },
+    {
+      "pc": "C0DA52",
+      "length": 6,
+      "bytes": "4a3900c45785",
+      "opcode": "4A39",
+      "instruction": "tst.b   $c45785.l"
+    },
+    {
+      "pc": "C0DA58",
+      "length": 2,
+      "bytes": "6608",
+      "opcode": "6608",
+      "instruction": "bne     $c0da62"
+    },
+    {
+      "pc": "C0DA5A",
+      "length": 6,
+      "bytes": "303900c45a8a",
+      "opcode": "3039",
+      "instruction": "move.w  $c45a8a.l, D0"
+    },
+    {
+      "pc": "C0DA60",
+      "length": 2,
+      "bytes": "6006",
+      "opcode": "6006",
+      "instruction": "bra     $c0da68"
+    },
+    {
+      "pc": "C0DA62",
+      "length": 6,
+      "bytes": "303900c45a94",
+      "opcode": "3039",
+      "instruction": "move.w  $c45a94.l, D0"
+    },
+    {
+      "pc": "C0DA68",
+      "length": 4,
+      "bytes": "0c403840",
+      "opcode": "0C40",
+      "instruction": "cmpi.w  #$3840, D0"
+    },
+    {
+      "pc": "C0DA6C",
+      "length": 2,
+      "bytes": "6e02",
+      "opcode": "6E02",
+      "instruction": "bgt     $c0da70"
+    },
+    {
+      "pc": "C0DA6E",
+      "length": 2,
+      "bytes": "6024",
+      "opcode": "6024",
+      "instruction": "bra     $c0da94"
+    },
+    {
+      "pc": "C0DA70",
+      "length": 8,
+      "bytes": "33fc000100c456e6",
+      "opcode": "33FC",
+      "instruction": "move.w  #$1, $c456e6.l"
+    },
+    {
+      "pc": "C0DA78",
+      "length": 8,
+      "bytes": "33fc000100c456e8",
+      "opcode": "33FC",
+      "instruction": "move.w  #$1, $c456e8.l"
+    },
+    {
+      "pc": "C0DA80",
+      "length": 6,
+      "bytes": "42b900c456ea",
+      "opcode": "42B9",
+      "instruction": "clr.l   $c456ea.l"
+    },
+    {
+      "pc": "C0DA86",
+      "length": 8,
+      "bytes": "13fc000100c4589e",
+      "opcode": "13FC",
+      "instruction": "move.b  #$1, $c4589e.l"
+    },
+    {
+      "pc": "C0DA8E",
+      "length": 2,
+      "bytes": "7000",
+      "opcode": "7000",
+      "instruction": "moveq   #$0, D0"
+    },
+    {
+      "pc": "C0DA90",
+      "length": 2,
+      "bytes": "4e5e",
+      "opcode": "4E5E",
+      "instruction": "unlk    A6"
+    },
+    {
+      "pc": "C0DA92",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C0DA94",
+      "length": 6,
+      "bytes": "423900c4589e",
+      "opcode": "4239",
+      "instruction": "clr.b   $c4589e.l"
+    },
+    {
+      "pc": "C0DA9A",
+      "length": 2,
+      "bytes": "7001",
+      "opcode": "7001",
+      "instruction": "moveq   #$1, D0"
+    },
+    {
+      "pc": "C0DA9C",
+      "length": 2,
+      "bytes": "4e5e",
+      "opcode": "4E5E",
+      "instruction": "unlk    A6"
+    },
+    {
+      "pc": "C0DA9E",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C0DAA0",
+      "length": 2,
+      "bytes": "e740",
+      "opcode": "E740",
+      "instruction": "asl.w   #3, D0"
+    },
+    {
+      "pc": "C0DAA2",
+      "length": 2,
+      "bytes": "e741",
+      "opcode": "E741",
+      "instruction": "asl.w   #3, D1"
+    },
+    {
+      "pc": "C0DAA4",
+      "length": 6,
+      "bytes": "41f900c4b990",
+      "opcode": "41F9",
+      "instruction": "lea     $c4b990.l, A0"
+    },
+    {
+      "pc": "C0DAAA",
+      "length": 4,
+      "bytes": "343c013f",
+      "opcode": "343C",
+      "instruction": "move.w  #$13f, D2"
+    },
+    {
+      "pc": "C0DAAE",
+      "length": 2,
+      "bytes": "3802",
+      "opcode": "3802",
+      "instruction": "move.w  D2, D4"
+    },
+    {
+      "pc": "C0DAB0",
+      "length": 4,
+      "bytes": "94700000",
+      "opcode": "9470",
+      "instruction": "sub.w   (A0,D0.w), D2"
+    },
+    {
+      "pc": "C0DAB4",
+      "length": 4,
+      "bytes": "363c00b3",
+      "opcode": "363C",
+      "instruction": "move.w  #$b3, D3"
+    },
+    {
+      "pc": "C0DAB8",
+      "length": 2,
+      "bytes": "3a03",
+      "opcode": "3A03",
+      "instruction": "move.w  D3, D5"
+    },
+    {
+      "pc": "C0DABA",
+      "length": 4,
+      "bytes": "96700002",
+      "opcode": "9670",
+      "instruction": "sub.w   ($2,A0,D0.w), D3"
+    },
+    {
+      "pc": "C0DABE",
+      "length": 2,
+      "bytes": "32c2",
+      "opcode": "32C2",
+      "instruction": "move.w  D2, (A1)+"
+    },
+    {
+      "pc": "C0DAC0",
+      "length": 2,
+      "bytes": "32c3",
+      "opcode": "32C3",
+      "instruction": "move.w  D3, (A1)+"
+    },
+    {
+      "pc": "C0DAC2",
+      "length": 4,
+      "bytes": "98701000",
+      "opcode": "9870",
+      "instruction": "sub.w   (A0,D1.w), D4"
+    },
+    {
+      "pc": "C0DAC6",
+      "length": 4,
+      "bytes": "9a701002",
+      "opcode": "9A70",
+      "instruction": "sub.w   ($2,A0,D1.w), D5"
+    },
+    {
+      "pc": "C0DACA",
+      "length": 2,
+      "bytes": "32c4",
+      "opcode": "32C4",
+      "instruction": "move.w  D4, (A1)+"
+    },
+    {
+      "pc": "C0DACC",
+      "length": 2,
+      "bytes": "32c5",
+      "opcode": "32C5",
+      "instruction": "move.w  D5, (A1)+"
+    },
+    {
+      "pc": "C0DACE",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C0DAD0",
+      "length": 2,
+      "bytes": "4299",
+      "opcode": "4299",
+      "instruction": "clr.l   (A1)+"
+    },
+    {
+      "pc": "C0DAD2",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C0DAD4",
+      "length": 4,
+      "bytes": "32fc013f",
+      "opcode": "32FC",
+      "instruction": "move.w  #$13f, (A1)+"
+    },
+    {
+      "pc": "C0DAD8",
+      "length": 2,
+      "bytes": "4259",
+      "opcode": "4259",
+      "instruction": "clr.w   (A1)+"
+    },
+    {
+      "pc": "C0DADA",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C0DADC",
+      "length": 4,
+      "bytes": "32fc013f",
+      "opcode": "32FC",
+      "instruction": "move.w  #$13f, (A1)+"
+    },
+    {
+      "pc": "C0DAE0",
+      "length": 4,
+      "bytes": "32fc00b3",
+      "opcode": "32FC",
+      "instruction": "move.w  #$b3, (A1)+"
+    },
+    {
+      "pc": "C0DAE4",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C0DAE6",
+      "length": 2,
+      "bytes": "4259",
+      "opcode": "4259",
+      "instruction": "clr.w   (A1)+"
+    },
+    {
+      "pc": "C0DAE8",
+      "length": 4,
+      "bytes": "32fc00b3",
+      "opcode": "32FC",
+      "instruction": "move.w  #$b3, (A1)+"
+    },
+    {
+      "pc": "C0DAEC",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    }
+  ],
+  "original_static_incoming": {
+    "C0D74A": [
+      {
+        "pc": "C2FF1A",
+        "return_pc": "C2FF20",
+        "instruction": "jsr     $c0d74a.l",
+        "bytes": "4eb900c0d74a"
+      }
+    ],
+    "C0D752": [
+      {
+        "pc": "C2FEEC",
+        "return_pc": "C2FEF2",
+        "instruction": "jsr     $c0d752.l",
+        "bytes": "4eb900c0d752"
+      }
+    ],
+    "C0DAA0": [
+      {
+        "pc": "C0D890",
+        "return_pc": "C0D894",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "6100020e"
+      },
+      {
+        "pc": "C0D8AE",
+        "return_pc": "C0D8B2",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "610001f0"
+      },
+      {
+        "pc": "C0D8D4",
+        "return_pc": "C0D8D8",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "610001ca"
+      },
+      {
+        "pc": "C0D8F8",
+        "return_pc": "C0D8FC",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "610001a6"
+      },
+      {
+        "pc": "C0D922",
+        "return_pc": "C0D926",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "6100017c"
+      },
+      {
+        "pc": "C0D936",
+        "return_pc": "C0D93A",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "61000168"
+      },
+      {
+        "pc": "C0D970",
+        "return_pc": "C0D974",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "6100012e"
+      },
+      {
+        "pc": "C0D994",
+        "return_pc": "C0D998",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "6100010a"
+      },
+      {
+        "pc": "C0D9BC",
+        "return_pc": "C0D9C0",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "610000e2"
+      },
+      {
+        "pc": "C0D9DA",
+        "return_pc": "C0D9DE",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "610000c4"
+      },
+      {
+        "pc": "C0DA00",
+        "return_pc": "C0DA04",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "6100009e"
+      },
+      {
+        "pc": "C0DA14",
+        "return_pc": "C0DA18",
+        "instruction": "bsr     $c0daa0",
+        "bytes": "6100008a"
+      }
+    ],
+    "C0DAD0": [
+      {
+        "pc": "C0D8A6",
+        "return_pc": "C0D8AA",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "61000228"
+      },
+      {
+        "pc": "C0D8F0",
+        "return_pc": "C0D8F4",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "610001de"
+      },
+      {
+        "pc": "C0D92E",
+        "return_pc": "C0D932",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "610001a0"
+      },
+      {
+        "pc": "C0D942",
+        "return_pc": "C0D946",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "6100018c"
+      },
+      {
+        "pc": "C0D97C",
+        "return_pc": "C0D980",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "61000152"
+      },
+      {
+        "pc": "C0D9A0",
+        "return_pc": "C0D9A4",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "6100012e"
+      },
+      {
+        "pc": "C0D9C4",
+        "return_pc": "C0D9C8",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "6100010a"
+      },
+      {
+        "pc": "C0D9E2",
+        "return_pc": "C0D9E6",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "610000ec"
+      },
+      {
+        "pc": "C0DA08",
+        "return_pc": "C0DA0C",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "610000c6"
+      },
+      {
+        "pc": "C0DA1C",
+        "return_pc": "C0DA20",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "610000b2"
+      },
+      {
+        "pc": "C0DA42",
+        "return_pc": "C0DA46",
+        "instruction": "bsr     $c0dad0",
+        "bytes": "6100008c"
+      }
+    ],
+    "C0DAD4": [
+      {
+        "pc": "C0D8A2",
+        "return_pc": "C0D8A6",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "61000230"
+      },
+      {
+        "pc": "C0D8D8",
+        "return_pc": "C0D8DC",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "610001fa"
+      },
+      {
+        "pc": "C0D8FC",
+        "return_pc": "C0D900",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "610001d6"
+      },
+      {
+        "pc": "C0D92A",
+        "return_pc": "C0D92E",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "610001a8"
+      },
+      {
+        "pc": "C0D93E",
+        "return_pc": "C0D942",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "61000194"
+      },
+      {
+        "pc": "C0D98C",
+        "return_pc": "C0D990",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "61000146"
+      },
+      {
+        "pc": "C0D9D2",
+        "return_pc": "C0D9D6",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "61000100"
+      },
+      {
+        "pc": "C0DA04",
+        "return_pc": "C0DA08",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "610000ce"
+      },
+      {
+        "pc": "C0DA18",
+        "return_pc": "C0DA1C",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "610000ba"
+      },
+      {
+        "pc": "C0DA46",
+        "return_pc": "C0DA4A",
+        "instruction": "bsr     $c0dad4",
+        "bytes": "6100008c"
+      }
+    ],
+    "C0DADC": [
+      {
+        "pc": "C0D894",
+        "return_pc": "C0D898",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "61000246"
+      },
+      {
+        "pc": "C0D8B2",
+        "return_pc": "C0D8B6",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "61000228"
+      },
+      {
+        "pc": "C0D8DC",
+        "return_pc": "C0D8E0",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "610001fe"
+      },
+      {
+        "pc": "C0D900",
+        "return_pc": "C0D904",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "610001da"
+      },
+      {
+        "pc": "C0D926",
+        "return_pc": "C0D92A",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "610001b4"
+      },
+      {
+        "pc": "C0D93A",
+        "return_pc": "C0D93E",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "610001a0"
+      },
+      {
+        "pc": "C0D974",
+        "return_pc": "C0D978",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "61000166"
+      },
+      {
+        "pc": "C0D998",
+        "return_pc": "C0D99C",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "61000142"
+      },
+      {
+        "pc": "C0D9CE",
+        "return_pc": "C0D9D2",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "6100010c"
+      },
+      {
+        "pc": "C0DA30",
+        "return_pc": "C0DA34",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "610000aa"
+      },
+      {
+        "pc": "C0DA4A",
+        "return_pc": "C0DA4E",
+        "instruction": "bsr     $c0dadc",
+        "bytes": "61000090"
+      }
+    ],
+    "C0DAE6": [
+      {
+        "pc": "C0D898",
+        "return_pc": "C0D89C",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "6100024c"
+      },
+      {
+        "pc": "C0D8B6",
+        "return_pc": "C0D8BA",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "6100022e"
+      },
+      {
+        "pc": "C0D8E0",
+        "return_pc": "C0D8E4",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "61000204"
+      },
+      {
+        "pc": "C0D904",
+        "return_pc": "C0D908",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "610001e0"
+      },
+      {
+        "pc": "C0D952",
+        "return_pc": "C0D956",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "61000192"
+      },
+      {
+        "pc": "C0D978",
+        "return_pc": "C0D97C",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "6100016c"
+      },
+      {
+        "pc": "C0D99C",
+        "return_pc": "C0D9A0",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "61000148"
+      },
+      {
+        "pc": "C0D9C0",
+        "return_pc": "C0D9C4",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "61000124"
+      },
+      {
+        "pc": "C0D9DE",
+        "return_pc": "C0D9E2",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "61000106"
+      },
+      {
+        "pc": "C0DA0C",
+        "return_pc": "C0DA10",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "610000d8"
+      },
+      {
+        "pc": "C0DA20",
+        "return_pc": "C0DA24",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "610000c4"
+      },
+      {
+        "pc": "C0DA4E",
+        "return_pc": "C0DA52",
+        "instruction": "bsr     $c0dae6",
+        "bytes": "61000096"
+      }
+    ]
+  },
+  "upgraded_registered_owners": [
+    "C0D74A",
+    "C0D752",
+    "C0DAA0",
+    "C0DAD0",
+    "C0DAD4",
+    "C0DADC",
+    "C0DAE6"
+  ],
+  "candidate_inputs": {
+    "address": "C0D720",
+    "bytes": "2800dc00d500da00d800240026002b00",
+    "meaning": "Four original signed x/z candidate pairs; y is reloaded from C45A66 and shifted by two."
+  },
+  "shared_frame_exits": {
+    "C0DA38": "Shared selection arm reached by branches within each parent LINK frame, not a separate call registration.",
+    "C0DA90": "Original accepted UNLINK/RTS",
+    "C0DA9C": "Original rejected UNLINK/RTS"
+  },
+  "sealed_native_child_contracts": 57,
+  "sealed_oracle_ownership_arrays": 3
+}

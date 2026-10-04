@@ -90,6 +90,45 @@ The latest user instruction defers the minor Copper-fade difference: keep its fr
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
+## Current handoff: display selection integration pending
+
+Handoff requested 2026-10-04. The last fully gated baseline is 0639fdee,
+record steering, described below. The current commit includes the implemented
+display-selection batch and targeted proofs, with integration gates still
+pending. Registration remains 539 translated +75 source-only =614 total,
+543 source-timed. Do not infer full game completion from those counts.
+
+Seven owners C0D74A/C0D752/C0DAA0/C0DAD0/C0DAD4/C0DADC/C0DAE6 now use
+readable domain C, actual original child results and source continuations;
+the older enclosing register replay and five pair adapters are removed.
+Source scope: 259 unique /229 shared instructions, 57 child contracts and
+three sealed oracle arrays. All 229,376 whole calls pass registers, PC, full
+SR, all RAM, ordered Custom writes and terminal hardware state. Controlled
+union is 259/259; original union is 256/259, missing only three rounding
+increments covered by controlled calls and local DMA. Local DMA passes
+259/8,288; dispatch smoke passes 1,344 calls (64 per owner per mode).
+MSVC Release/GNU oracle builds and compatibility for 41 older generators pass.
+
+Resume the larger dispatch, normal-C recordings, combined DMA, full gate,
+isolated live and bounded timing validation before promoting this batch to
+the fully verified baseline. Exact commands, limitations and changed files
+are in analysis/routines/native_c_display_record_selection.md; sealed local
+proof and implementation hashes are in
+analysis/figures/native_display_record_selection_checkpoint.json.
+The recordings verifier is prepared but requires pending 1,024-case dispatch
+and normal-C reports. All completed proof processes were collected before
+commit. Ignored build/recomp install/prepare scripts are one-shot; do not
+rerun them. Use the committed checkers to reproduce proofs instead.
+
+C2C392 producer-domain evidence and the other game work listed below remain
+open. Read-only local notes additionally cover C0E78A/C2F49C/C500D8 in
+build/recomp/remaining_game_services_read.{json,log} and
+build/recomp/audio_registration_read.log; none is newly implemented.
+Do not treat data following C500C8 as decoded game code. C500D8 needs original
+callback installation/callability evidence. No OS or timing-only work was
+started. Stop only when game-function work is complete and Kickstart/timing
+are all that remain.
+
 ## Verified baseline
 
 - Six complete steering owners retain 539 translated entries and add two
@@ -119,7 +158,8 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   source instructions are read; each parent has 57 original child sites.
   Use actual C2E758 child results and preserve LINK/dead stack bytes/shared
   frame exits; remove the old corner register replay once these owners pass.
-  No next production implementation exists. C2C392 producer reconciliation
+  The display implementation now exists; its pending integration is recorded
+  in the current handoff above. C2C392 producer reconciliation
   remains open: eight original stream descriptors publish actions 35,11,39,
   14,17,20,23,26; bounded nonnegative C458A7 parameter selections publish
   2,5,9. Record copies and saved-state inputs still need tracing. Forty table
@@ -158,7 +198,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   domain remain unresolved. The instruction decrements before sign-extending
   the byte; preserve that order when auditing selector wrap. C241EE selects
   packed parameter data at C2BB98 and C242D0 writes the action byte; follow
-  its table and C458A7 writers. No next production implementation exists.
+  its table and C458A7 writers. Display-selection integration is pending above.
   Other larger parents, older partial adapters, C1612C graphics-wait
   integration and full original cold/indirect/callback reconciliation remain
   game work. Goal is not complete. Kickstart services and timing are deferred.

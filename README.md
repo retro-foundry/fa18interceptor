@@ -16,6 +16,12 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+The current display-selection handoff implements seven owners and passes
+229,376 whole-call comparisons, local DMA and dispatch smoke. Full integration
+validation remains pending; see
+[the current handoff](CURRENT_PORT_HANDOFF.md) and
+[display-selection proof status](analysis/routines/native_c_display_record_selection.md).
+
 Six complete record-steering owners pass 98,304 whole CPU/PC/SR/RAM calls,
 covering all 72 boundaries across the original roll and pitch entries.
 Dispatch passes 18,432 calls; four existing owners pass normal C at 162

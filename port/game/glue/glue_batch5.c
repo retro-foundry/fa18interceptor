@@ -87,33 +87,4 @@ int glue_C2DE96(void) {
     return glue_return();
 }
 
-/* $C0DAA0: D0.w/D1.w point indices, A1 cursor. Leaves both indices scaled
- * by 8, the four written words in D2-D5 and the table in A0. */
-int glue_C0DAA0(void) {
-    gaddr cursor = A(1);
-    int16_t first = (int16_t)D(0), second = (int16_t)D(1);
-
-    append_mirrored_points(&cursor, first, second);
-
-    SET_W(D(0), first << 3);
-    SET_W(D(1), second << 3);
-    SET_W(D(2), rd_u16(A(1)));
-    SET_W(D(3), rd_u16(A(1) + 2));
-    SET_W(D(4), rd_u16(A(1) + 4));
-    SET_W(D(5), rd_u16(A(1) + 6));
-    A(0) = FRAME_POINTS;
-    A(1) = cursor;
-    return glue_return();
-}
-
-static int corner(int16_t x, int16_t y) {
-    gaddr cursor = A(1);
-    append_point(&cursor, x, y);
-    A(1) = cursor;
-    return glue_return();
-}
-
-int glue_C0DAD0(void) { return corner(0, 0); }
-int glue_C0DAD4(void) { return corner(VIEW_RIGHT, 0); }
-int glue_C0DADC(void) { return corner(VIEW_RIGHT, VIEW_BOTTOM); }
-int glue_C0DAE6(void) { return corner(0, VIEW_BOTTOM); }
+/* Complete display pair writers are in glue_display_record_selection.c. */

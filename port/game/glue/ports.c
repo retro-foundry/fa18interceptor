@@ -239,11 +239,11 @@ const FA18Port fa18_ports[] = {
     {0xC230B0, glue_C230B0, "release_lost_selection", 0, 0, glue_C230B0_step, 0xC230E8},
     {0xC2DE96, glue_C2DE96, "settle_record", 50},
     /* screen_frame.c */
-    {0xC0DAA0, glue_C0DAA0, "append_mirrored_points", 0, 0, glue_C0DAA0_step, 0xC0DAEE, 0, 0xC0D74A},
-    {0xC0DAD0, glue_C0DAD0, "append_point", 0, 0, glue_C0DAD0_step, 0xC0DAEE, 0, 0xC0D74A},
-    {0xC0DAD4, glue_C0DAD4, "append_point", 0, 0, glue_C0DAD4_step, 0xC0DAEE, 0, 0xC0D74A},
-    {0xC0DADC, glue_C0DADC, "append_point", 0, 0, glue_C0DADC_step, 0xC0DAEE, 0, 0xC0D74A},
-    {0xC0DAE6, glue_C0DAE6, "append_point", 0, 0, glue_C0DAE6_step, 0xC0DAEE, 0, 0xC0D74A},
+    {0xC0DAA0, glue_C0DAA0, "append_mirrored_points", 0, 0, glue_C0DAA0_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0DAA0_owns},
+    {0xC0DAD0, glue_C0DAD0, "append_point", 0, 0, glue_C0DAD0_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0DAD0_owns},
+    {0xC0DAD4, glue_C0DAD4, "append_point", 0, 0, glue_C0DAD4_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0DAD4_owns},
+    {0xC0DADC, glue_C0DADC, "append_point", 0, 0, glue_C0DADC_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0DADC_owns},
+    {0xC0DAE6, glue_C0DAE6, "append_point", 0, 0, glue_C0DAE6_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0DAE6_owns},
     /* stages.c */
     {0xC25B1C, glue_empty_stage, "empty_stage", 16},
     {0xC25B1E, glue_empty_stage, "empty_stage", 16},
@@ -726,8 +726,8 @@ const FA18Port fa18_ports[] = {
     /* timer-gated post-input scene transition () */
     {0xC0FA04, glue_C0FA04, "finish_post_input_followup", 0, 0, glue_C0FA04_step, 0xC0FA4C},
     /* display-record candidate and selector siblings (/) */
-    {0xC0D74A, glue_C0D74A, "prepare_display_records_wide", 0, 0, glue_C0D74A_step, 0xC0DAEE},
-    {0xC0D752, glue_C0D752, "prepare_display_records", 0, 0, glue_C0D752_step, 0xC0DAEE, 0, 0xC0D74A},
+    {0xC0D74A, glue_C0D74A, "prepare_display_records_wide", 0, 0, glue_C0D74A_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0D74A_owns},
+    {0xC0D752, glue_C0D752, "prepare_display_records", 0, 0, glue_C0D752_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0D752_owns},
     /* signed matrix transform and three returned angles */
     {0xC2DEE0, glue_C2DEE0, "transform_record_matrix", 0, 0, glue_C2DEE0_step, 0xC2E346},
     /* active control-record matrix route */

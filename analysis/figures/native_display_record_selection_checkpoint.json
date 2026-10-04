@@ -1,0 +1,686 @@
+{
+  "date": "2026-10-04",
+  "status": "implementation and targeted proofs pass; integration validation pending",
+  "fully_gated_baseline": "0639fdee",
+  "registered_translated_entries": 539,
+  "registered_source_only_entries": 75,
+  "registered_total_entries": 614,
+  "registered_source_timed_entries": 543,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/display_record_selection_source_scope.json",
+      "sha256": "2fb9a727dde4f00375e8667c379298d06d03fb87528eddb33f7e380a07199f06"
+    },
+    "unique_instructions": 259,
+    "shared_instructions": 229,
+    "distinct_child_contracts": 57,
+    "sealed_oracle_ownership_arrays": 3
+  },
+  "whole_entry_completed_calls": 229376,
+  "whole_union_pcs": {
+    "contract": 259,
+    "real": 256
+  },
+  "fixture_coverage": [
+    {
+      "owner": "C0D74A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 231,
+      "observed_owner_pcs": 231,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_contract_C0D74A.log",
+        "sha256": "37baa124d91f4aaebc9665b5a17c15db7979bd3fbb7fe7f1c8e474f5d54cb40b"
+      }
+    },
+    {
+      "owner": "C0D752",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 230,
+      "observed_owner_pcs": 230,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_contract_C0D752.log",
+        "sha256": "74e2e02d3f1f5c2faf360279b1c296f1a8ee4c65e2bdfc4600d1d665df939425"
+      }
+    },
+    {
+      "owner": "C0DAA0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 16,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_contract_C0DAA0.log",
+        "sha256": "eb8de7a124cb59338b82ba6b67351a65d66a23151d503d72f0588132903bfbe2"
+      }
+    },
+    {
+      "owner": "C0DAD0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 2,
+      "observed_owner_pcs": 2,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_contract_C0DAD0.log",
+        "sha256": "153b25d58e952d7db2dc5b178729e725ad4f429033a19d1a9279e32a0ce9d1ee"
+      }
+    },
+    {
+      "owner": "C0DAD4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 3,
+      "observed_owner_pcs": 3,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_contract_C0DAD4.log",
+        "sha256": "3ec1edd3ea9f24af661ee2601b10c6568fa8bd58f27adebe5c78757b697dd796"
+      }
+    },
+    {
+      "owner": "C0DADC",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 3,
+      "observed_owner_pcs": 3,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_contract_C0DADC.log",
+        "sha256": "5d878f6cdc591792853baa29dd4cce5b10e31824c94be637564d7b293d803dbe"
+      }
+    },
+    {
+      "owner": "C0DAE6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 3,
+      "observed_owner_pcs": 3,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_contract_C0DAE6.log",
+        "sha256": "a01b6b5f049876bc28de219d35a609cbfb7a6b058ff8bfbb0caedfe2653ea584"
+      }
+    },
+    {
+      "owner": "C0D74A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 231,
+      "observed_owner_pcs": 228,
+      "unobserved_owner_pcs": [
+        "C0D794",
+        "C0D7AC",
+        "C0D7BE"
+      ],
+      "log": {
+        "path": "build/recomp/display_record_selection_real_C0D74A.log",
+        "sha256": "c5dffb095543e18b4fb0ac92304fa66dfaeb5872f9ecb7e687eaebc1e95ab042"
+      }
+    },
+    {
+      "owner": "C0D752",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 230,
+      "observed_owner_pcs": 227,
+      "unobserved_owner_pcs": [
+        "C0D794",
+        "C0D7AC",
+        "C0D7BE"
+      ],
+      "log": {
+        "path": "build/recomp/display_record_selection_real_C0D752.log",
+        "sha256": "a2a52f6bdd879249bb261da7a240a129210ee116f05e3f648aa2147fe9e1e11c"
+      }
+    },
+    {
+      "owner": "C0DAA0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 16,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_real_C0DAA0.log",
+        "sha256": "46f91acdc6b463fd7a871806cc803605cfdb9089d0302e7ac95e89fdfeea873b"
+      }
+    },
+    {
+      "owner": "C0DAD0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 2,
+      "observed_owner_pcs": 2,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_real_C0DAD0.log",
+        "sha256": "2f1c5032df49ce4932879756bb18eac0ed18bff738c5f2e0e8088e515f52c51d"
+      }
+    },
+    {
+      "owner": "C0DAD4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 3,
+      "observed_owner_pcs": 3,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_real_C0DAD4.log",
+        "sha256": "9d54f648c7995921beb5306a093e0d428c9040163ca7bf585659f6aa4bfb9a3c"
+      }
+    },
+    {
+      "owner": "C0DADC",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 3,
+      "observed_owner_pcs": 3,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_real_C0DADC.log",
+        "sha256": "be797da0f9b56cc2d9d6a25644881e491e65ce3195b287204a7305fd73319973"
+      }
+    },
+    {
+      "owner": "C0DAE6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 3,
+      "observed_owner_pcs": 3,
+      "unobserved_owner_pcs": [],
+      "log": {
+        "path": "build/recomp/display_record_selection_real_C0DAE6.log",
+        "sha256": "c43ade3ea4b2d3524ea88f789198cc9b76e1a95854e476cda7bbd1ef02a2d7e6"
+      }
+    }
+  ],
+  "dispatch_smoke_completed_calls": 1344,
+  "dispatch_fixtures": [
+    {
+      "owner": "C0D74A",
+      "mode": "on",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0D74A_on.log",
+        "sha256": "c506f9bc3c3f2758d431961b397bfe70f90df7b870f85717ed48908a7e70adee"
+      }
+    },
+    {
+      "owner": "C0D74A",
+      "mode": "shadow",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0D74A_shadow.log",
+        "sha256": "c506f9bc3c3f2758d431961b397bfe70f90df7b870f85717ed48908a7e70adee"
+      }
+    },
+    {
+      "owner": "C0D74A",
+      "mode": "sandbox",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0D74A_sandbox.log",
+        "sha256": "c506f9bc3c3f2758d431961b397bfe70f90df7b870f85717ed48908a7e70adee"
+      }
+    },
+    {
+      "owner": "C0D752",
+      "mode": "on",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0D752_on.log",
+        "sha256": "b2614b58931573e37e8c93ed8cedea1afeaf8b361314ee03694616ffa1d14986"
+      }
+    },
+    {
+      "owner": "C0D752",
+      "mode": "shadow",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0D752_shadow.log",
+        "sha256": "b2614b58931573e37e8c93ed8cedea1afeaf8b361314ee03694616ffa1d14986"
+      }
+    },
+    {
+      "owner": "C0D752",
+      "mode": "sandbox",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0D752_sandbox.log",
+        "sha256": "b2614b58931573e37e8c93ed8cedea1afeaf8b361314ee03694616ffa1d14986"
+      }
+    },
+    {
+      "owner": "C0DAA0",
+      "mode": "on",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAA0_on.log",
+        "sha256": "3b8e5384139378f6ac537c75e9b0ea0ff7e666972ce0c9be0b712c7b1c7354d9"
+      }
+    },
+    {
+      "owner": "C0DAA0",
+      "mode": "shadow",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAA0_shadow.log",
+        "sha256": "3b8e5384139378f6ac537c75e9b0ea0ff7e666972ce0c9be0b712c7b1c7354d9"
+      }
+    },
+    {
+      "owner": "C0DAA0",
+      "mode": "sandbox",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAA0_sandbox.log",
+        "sha256": "3b8e5384139378f6ac537c75e9b0ea0ff7e666972ce0c9be0b712c7b1c7354d9"
+      }
+    },
+    {
+      "owner": "C0DAD0",
+      "mode": "on",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAD0_on.log",
+        "sha256": "2b57fa30796164bfe60b73310887689fa5641fddd22a848562e4cc9e74c18157"
+      }
+    },
+    {
+      "owner": "C0DAD0",
+      "mode": "shadow",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAD0_shadow.log",
+        "sha256": "2b57fa30796164bfe60b73310887689fa5641fddd22a848562e4cc9e74c18157"
+      }
+    },
+    {
+      "owner": "C0DAD0",
+      "mode": "sandbox",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAD0_sandbox.log",
+        "sha256": "2b57fa30796164bfe60b73310887689fa5641fddd22a848562e4cc9e74c18157"
+      }
+    },
+    {
+      "owner": "C0DAD4",
+      "mode": "on",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAD4_on.log",
+        "sha256": "9c024d0d55c8a7183f56080cf09ed9267547f0f9c9fc7e671bd431df6c40bbae"
+      }
+    },
+    {
+      "owner": "C0DAD4",
+      "mode": "shadow",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAD4_shadow.log",
+        "sha256": "9c024d0d55c8a7183f56080cf09ed9267547f0f9c9fc7e671bd431df6c40bbae"
+      }
+    },
+    {
+      "owner": "C0DAD4",
+      "mode": "sandbox",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAD4_sandbox.log",
+        "sha256": "9c024d0d55c8a7183f56080cf09ed9267547f0f9c9fc7e671bd431df6c40bbae"
+      }
+    },
+    {
+      "owner": "C0DADC",
+      "mode": "on",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DADC_on.log",
+        "sha256": "0aae77c68c559ce0123dd2b171ceff8c5e993362eba963dde6313ffb8f9ce657"
+      }
+    },
+    {
+      "owner": "C0DADC",
+      "mode": "shadow",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DADC_shadow.log",
+        "sha256": "0aae77c68c559ce0123dd2b171ceff8c5e993362eba963dde6313ffb8f9ce657"
+      }
+    },
+    {
+      "owner": "C0DADC",
+      "mode": "sandbox",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DADC_sandbox.log",
+        "sha256": "0aae77c68c559ce0123dd2b171ceff8c5e993362eba963dde6313ffb8f9ce657"
+      }
+    },
+    {
+      "owner": "C0DAE6",
+      "mode": "on",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAE6_on.log",
+        "sha256": "5e7d85673b83b9db2fbeab2d24915453b81b6206a23b3c4c440d5a5c63dbb660"
+      }
+    },
+    {
+      "owner": "C0DAE6",
+      "mode": "shadow",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAE6_shadow.log",
+        "sha256": "5e7d85673b83b9db2fbeab2d24915453b81b6206a23b3c4c440d5a5c63dbb660"
+      }
+    },
+    {
+      "owner": "C0DAE6",
+      "mode": "sandbox",
+      "completed_calls": 64,
+      "hardware_bearing": 0,
+      "hardware_free": 64,
+      "log": {
+        "path": "build/recomp/display_record_selection_dispatch_C0DAE6_sandbox.log",
+        "sha256": "5e7d85673b83b9db2fbeab2d24915453b81b6206a23b3c4c440d5a5c63dbb660"
+      }
+    }
+  ],
+  "instruction_dma": {
+    "local_instructions": 259,
+    "local_cases": 8288,
+    "combined_run_pending": true
+  },
+  "generator_compatibility": {
+    "baseline": "0639fdee",
+    "unchanged_generator_outputs": [
+      "command_dispatch",
+      "postflight_scheduler",
+      "context_publication",
+      "menu_transition",
+      "menu_setup",
+      "menu_cold",
+      "menu_followup",
+      "menu_outcome",
+      "menu_return",
+      "menu_context_finish",
+      "postflight_completion",
+      "postflight_messages",
+      "postflight_file_callers",
+      "input_device_callbacks",
+      "input_display_setup",
+      "main_loop_timers",
+      "main_loop_control_messages",
+      "record_control_actions",
+      "main_loop_flight_controls",
+      "flight_record_actions",
+      "flight_motion_helpers",
+      "flight_dynamics",
+      "flight_geometry",
+      "flight_markers",
+      "projection_readouts",
+      "hud_stream",
+      "hud_parents",
+      "hud_readout_parents",
+      "hud_text_helpers",
+      "hud_projection_parents",
+      "hud_history_stream",
+      "render_parents",
+      "face_stream_parents",
+      "face_list_parents",
+      "hud_render_parents",
+      "render_leaf_helpers",
+      "render_entry_helpers",
+      "segment_projection",
+      "corner_view",
+      "control_readouts",
+      "record_steering"
+    ],
+    "shared_files_unchanged": [
+      "analysis/data/control_readouts_source_scope.json",
+      "analysis/data/record_steering_source_scope.json",
+      "analysis/data/render_entry_helpers_scope_inventory.json",
+      "analysis/data/render_leaf_helpers_scope_inventory.json",
+      "port/game/control_readouts.c",
+      "port/game/control_readouts.h",
+      "port/game/corner_view.c",
+      "port/game/glue/glue.h",
+      "port/game/glue/glue_child_call.c",
+      "port/game/glue/glue_command_dispatch_step.c",
+      "port/game/glue/glue_control_readouts.c",
+      "port/game/glue/glue_control_readouts.h",
+      "port/game/glue/glue_control_readouts_math.h",
+      "port/game/glue/glue_control_readouts_step.c",
+      "port/game/glue/glue_corner_view.c",
+      "port/game/glue/glue_corner_view_step.c",
+      "port/game/glue/glue_record_steering.c",
+      "port/game/glue/glue_record_steering.h",
+      "port/game/glue/glue_record_steering_step.c",
+      "port/game/glue/glue_render_leaf_helpers_math.h",
+      "port/game/glue/glue_renderer_step_math.h",
+      "port/game/glue/glue_segment_projection.c",
+      "port/game/glue/glue_step.h",
+      "port/game/memory.h",
+      "port/game/record_steering.c",
+      "port/game/record_steering.h",
+      "port/game/segment_projection.c",
+      "port/machine/blitter.c",
+      "port/machine/bus.c",
+      "port/machine/machine.c",
+      "port/native_data_allowlist.txt",
+      "port/recomp/recomp_ports.c",
+      "port/recomp/recomp_runtime.c",
+      "scripts/check_native_build.py",
+      "scripts/native_frame_count.py",
+      "tools/recomp/active_planes_step_oracle.c",
+      "tools/recomp/audit_render_entry_helpers_scope.py",
+      "tools/recomp/audit_render_leaf_helpers_scope.py",
+      "tools/recomp/check_whole_call_glue.py",
+      "tools/recomp/hud_stream_blitter_state.c",
+      "tools/recomp/hud_stream_hardware_log.c",
+      "tools/recomp/hud_stream_machine_variant.py",
+      "tools/recomp/render_entry_helpers_bus_budget.c",
+      "tools/recomp/render_entry_helpers_child_call.c",
+      "tools/recomp/render_entry_helpers_hardware_log.c",
+      "tools/recomp/render_leaf_helpers_bus_budget.c",
+      "tools/recomp/render_leaf_helpers_child_call.c",
+      "tools/recomp/render_leaf_helpers_hardware_log.c",
+      "tools/recomp/structural_write_log.c"
+    ],
+    "comparison": "Before/after generator recipes, preserving exact preexisting committed outputs even when historically stale"
+  },
+  "builds": {
+    "gnu_oracle_builds": "pass",
+    "msvc_release": "pass"
+  },
+  "pending": [
+    "1024-case actual dispatch",
+    "unchanged normal-C recording comparisons",
+    "fresh combined DMA",
+    "full shadow/sandbox/seals/poison gate",
+    "isolated full live frames",
+    "600-frame family and ALL timing probe"
+  ],
+  "game_function_porting_complete": false,
+  "implementation_files": [
+    {
+      "path": "port/game/display_record_selection.c",
+      "sha256": "94aaef98680ebfd5bf369495dc39c28a81901c9121c472cc66b97291b429ef88"
+    },
+    {
+      "path": "port/game/display_record_selection.h",
+      "sha256": "20448be0d18dbf80cff1bffbe64e9fb9ece6d26ca5c0619f73defc156f0e40df"
+    },
+    {
+      "path": "port/game/glue/glue_batch5.c",
+      "sha256": "8c113011c3dedad7bbaee3c264e2e919cc31c92c77a5b0406a404de64d2f94b9"
+    },
+    {
+      "path": "port/game/glue/glue_batch55.c",
+      "sha256": "1a7c6584446a6148953e40f435030177e853a0e34c0375c8e223884271d416ae"
+    },
+    {
+      "path": "port/game/glue/glue_display_records.c",
+      "sha256": "a75588ab01efb28a3e9753db5f3feb811c2bd6b569d724a22d95d64e5d4cc9de"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "c6b684bf6b2b30d5cb3b687738e6f1dc9264ff30f9f8691b94de39bdcbe23fd3"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "35fd3711c106a9962a8496dddab3e37680774b4bfa48b22c83251742049a0a0e"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "5c581ec06decf3aa0d73207976ad8f55ef9fe421e456038590314fba841b060d"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "262398e5a70515b1153cf40c16a43291d009402feb6ddce998c3c3fee5d6dcd5"
+    },
+    {
+      "path": "port/game/glue/glue_display_record_selection.c",
+      "sha256": "38170aa706dbedf7ec784b2c7589501794e692f81a4e51cf91fd706bace12e6a"
+    },
+    {
+      "path": "port/game/glue/glue_display_record_selection.h",
+      "sha256": "a5bc33585d50238c1b5c94203c065e53bb4790a317b73ff215dfcbdbc9ba015f"
+    },
+    {
+      "path": "port/game/glue/glue_display_record_selection_step.c",
+      "sha256": "cd3015ff82ac4334385432f690dad91b36ece203891bc09429287d7eba6c2338"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_display_record_selection_source.py",
+      "sha256": "8e2a8a63277cccaf2897bffbe97de0b89630889bdea23eaab66acb436cc731c5"
+    },
+    {
+      "path": "tools/recomp/check_display_record_selection.py",
+      "sha256": "c6637c1a8a0c7255c51cc681d554a7b7046228c6857ecb0f212579bdb353d6bc"
+    },
+    {
+      "path": "tools/recomp/check_display_record_selection_dispatch.py",
+      "sha256": "1b714d44a20b04527f9ad4a03d561485e9208bd4ed2e9095627b1249b9682537"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_bus_budget.c",
+      "sha256": "84b2e0134d753b6344043b61aab0ebaec2e561e6c8bc1667d75de2c853648683"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_child_call.c",
+      "sha256": "3557472fb3dec5d94071a072a3787a51fdf2fb0b233e8541e55583a5449cdc39"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_contract_children.c",
+      "sha256": "3e7294b3d92faff4330f457e6acaea03bf95a4d915d46639db2daf1bd14caeee"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_contract_oracle.c",
+      "sha256": "45b829196a047d74ddb931054280f2b79beb22146b3a8093e0a3b75fc0a52f3c"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_dispatch_oracle.c",
+      "sha256": "c4ecb1c7395986b6608e145f965da2b8cc4939e6c340caab7119490a39f5cef3"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_fixture.h",
+      "sha256": "031c379e6e7c83ab8af11c565e7ff76160c971f49fcfa9d91fb2da725c305466"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_hardware_log.c",
+      "sha256": "7990945dcbd190af613a5dace95c513559e7e46856fd5ec9be9199d96d902414"
+    },
+    {
+      "path": "tools/recomp/display_record_selection_oracle.c",
+      "sha256": "b780d625bf344edb5634427767e59a7408ffa2553aaa825ad9da7e3b7ec55075"
+    },
+    {
+      "path": "tools/recomp/verify_display_record_selection_recordings.py",
+      "sha256": "ecb70b5d1e449edfebd329cfbba2049ce789b184fbeb8f7cb8d7e575b9a36f06"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/display_record_selection_initial.log",
+      "sha256": "a6fe8131fe27f15d4685830bece6937609704a3f642c077d964b76dc6f5d2a7d"
+    },
+    {
+      "path": "build/recomp/display_record_selection_whole.log",
+      "sha256": "2bb38a868804706d6c501055bb8037bd3c9ef917c58ec61fa892c032c466f7ea"
+    },
+    {
+      "path": "build/recomp/display_record_selection_whole_final.log",
+      "sha256": "123843804327725df83e2965c384eb7b3cf083b89a537a1d45485586caabe57c"
+    },
+    {
+      "path": "build/recomp/display_record_selection_dispatch_smoke.log",
+      "sha256": "e366c0e72a23fb1d95a87a6d1a79d1674a1aaaf89940a2782e021dbfceb1865a"
+    },
+    {
+      "path": "build/recomp/display_record_selection_dma_local.log",
+      "sha256": "360b9e391695717c94c991549f676509e8f956f50bf94d2ab2c78b8f2876a62e"
+    },
+    {
+      "path": "build/recomp/display_record_selection_compatibility.log",
+      "sha256": "dcda1a43c08178fdd52b21707452e01833a439893bbe763842e379a032a23b50"
+    },
+    {
+      "path": "build/recomp/display_record_selection_msvc_config.log",
+      "sha256": "ba7f9bb3b556e6956ed2f49ec828ee05bb894074289e91a4df3f27e30cca30dd"
+    },
+    {
+      "path": "build/recomp/display_record_selection_msvc.log",
+      "sha256": "16e25c76cfd07002516b817f998a706cd3347854f0831e98d6b62a014779b1fd"
+    }
+  ]
+}
