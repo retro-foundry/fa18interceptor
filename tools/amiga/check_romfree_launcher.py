@@ -67,7 +67,7 @@ def main():
             if frames==2600: assert stats[0]["iterations"]>0,stats
             pixels=(work/f"frame-{frames}.ppm").read_bytes().split(b"\n",3)[-1]
             assert len(pixels)==320*256*3 and len(set(pixels))>3,(frames,len(pixels),len(set(pixels)))
-        for options,code in (([],2),(["--rom","missing.rom"],2),(["--state","missing.state"],2),
+        for options,code in (([],0),(["--rom","missing.rom"],2),(["--state","missing.state"],2),
                              (["--adf","missing.adf"],1),(["--help"],0)):
             result=subprocess.run([str(runner)]+options,cwd=work,env=env,capture_output=True,text=True)
             assert result.returncode==code,(options,result.returncode)

@@ -51,6 +51,7 @@ set(FA18_MAP_PACKET_CORE
 add_library(fa18_map_packet_core STATIC ${FA18_MAP_PACKET_CORE})
 target_include_directories(fa18_map_packet_core PRIVATE ../)
 add_library(fa18_runtime STATIC
+    ../romfree/media.c
     recomp_runtime.c recomp_ports.c
     loop_input.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
     ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})

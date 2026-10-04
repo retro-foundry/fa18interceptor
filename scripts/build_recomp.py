@@ -53,6 +53,8 @@ def source_files(main: Path) -> list[Path]:
         Path("port/amiga/exec_bootstrap.c"),
         Path("port/amiga/host_compat.c"),
         Path("port/amiga/host_graphics.c"),
+        Path("port/amiga/sha256.c"),
+        Path("port/romfree/media.c"),
         Path("port/amiga/guest_memory.c"),
         Path("port/amiga/hunk_loader.c"),
         Path("port/hunk.c"), Path("port/disk.c"),

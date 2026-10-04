@@ -115,6 +115,19 @@ int main(void) {
     assert(amiga_host_file_close(c,h));
     size_t original_size; uint8_t *original=amiga_ofs_read(&disk,"D/X",&original_size);
     assert(original && original_size==3 && !memcmp(original,"abc",3)); free(original);
+    const char *const protected[]={"d/"};
+    c->read_only_prefixes=protected; c->read_only_prefix_count=1;
+    for (int mode=1004;mode<=1005;++mode) {
+        h=amiga_host_open(c,"DF0:D/X",mode); assert(h);
+        assert(amiga_host_read(c,h,bytes,8)==3 && !memcmp(bytes,"abc",3));
+        assert(amiga_host_write(c,h,"!",1)==-1 && c->error==223);
+        assert(amiga_host_file_close(c,h));
+    }
+    assert(!amiga_host_open(c,"D/X",1006) && c->error==223);
+    c->read_only_prefix_count=0;
+    h=amiga_host_open(c,"D/X",1005); assert(h);
+    assert(amiga_host_read(c,h,bytes,8)==3 && !memcmp(bytes,"QZc",3));
+    assert(amiga_host_file_close(c,h));
     lock=amiga_host_lock(c,""); assert(lock && amiga_host_examine(c,lock,fib,260));
     int overlay=0; while (amiga_host_exnext(c,lock,fib,260)) overlay|=!strcmp((char *)fib+8,"pilot");
     assert(overlay && amiga_host_unlock(c,lock));

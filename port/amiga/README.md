@@ -17,6 +17,14 @@ ctest --test-dir build/amiga-compat -C Release --output-on-failure
   cycles fail. DOS return values, error codes, ExNext ordering, writable files
   and service cycles belong in a separately validated DOS adapter. The legacy
   disk API remains in `../disk.c`.
+- `sha256.h`: portable SHA-256 identities for host bytes, with empty, short,
+  padding-boundary and million-byte fixtures. Game-version policy lives in
+  `port/romfree/media.c`; neither assets nor game checksums live in this library.
+
+The host file overlay accepts optional profile-owned read-only path prefixes.
+Those resources read directly from OFS and reject writes/truncation with error
+223. With no prefixes configured the normal writable overlay behavior remains;
+game-specific path policy belongs to the embedding profile.
 - `guest_memory.h`: explicit 24-bit guest banks and big-endian stores. Host
   structures never stand in for packed Amiga structures.
 - `hunk.h` and `hunk_loader.h`: parse CODE/DATA/BSS and RELOC32, preserve

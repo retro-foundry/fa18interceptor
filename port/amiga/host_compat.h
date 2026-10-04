@@ -11,7 +11,7 @@ enum { AMIGA_HOST_EXEC,AMIGA_HOST_DOS,AMIGA_HOST_GRAPHICS,AMIGA_HOST_INTUITION,
        AMIGA_HOST_INPUT,AMIGA_HOST_GAMEPORT,AMIGA_HOST_KEYBOARD,AMIGA_HOST_AUDIO,
        AMIGA_HOST_LIBRARY_COUNT,AMIGA_HOST_SERVICE_BASE=0xEF0000 };
 typedef struct { uint32_t base,size,attributes; } AmigaHostRegion;
-typedef struct { uint8_t *data; size_t size,position; FILE *file; int active; char overlay_path[1024]; } AmigaHostFile;
+typedef struct { uint8_t *data; size_t size,position; FILE *file; int active,read_only; char overlay_path[1024]; } AmigaHostFile;
 typedef struct {
     char path[256]; int active,enumerated;
     AmigaOfsEntry *entries; size_t entry_count,entry_next;
@@ -22,6 +22,9 @@ typedef struct {
     uint32_t libraries[AMIGA_HOST_LIBRARY_COUNT],current_directory;
     AmigaHostFile files[64]; AmigaHostLock locks[64];
     char save_directory[512]; int32_t error;
+    /* Optional normalized ADF-only path prefixes, owned by the embedding
+     * profile for this context's lifetime. These ignore writable overlays. */
+    const char *const *read_only_prefixes; size_t read_only_prefix_count;
     int exited; int32_t exit_code;
     uint32_t last_alert; uint64_t alert_count;
     uint32_t input_handlers[16]; size_t input_handler_count;

@@ -20,6 +20,7 @@
 #include "../os/exec_interrupt_adapter.h"
 #ifdef FA18_ROMFREE_MAIN
 #include "../romfree/profile.h"
+#include "../romfree/media.h"
 #include "../os/host_compat_adapter.h"
 #endif
 
@@ -58,7 +59,9 @@ static int write_ppm(const char *path, const uint16_t *pixels) {
 static void usage(void) {
     fprintf(stderr,
 #ifdef FA18_ROMFREE_MAIN
-            "usage: fa18_romfree --adf PATH [--save-dir PATH] [--window [--scale N] [--vsync on|off]]\n"
+            "usage: fa18_romfree [--adf PATH] [--save-dir PATH] [--window [--scale N] [--vsync on|off]]\n"
+            "                     (without --adf: discover a supported ADF beside the executable)\n"
+            "                     [--identify-adf PATH] (print disk/executable SHA-256 and compatibility)\n"
             "                     [--frames N] [--ppm OUT.ppm] [--ppm-every DIR] [--rgb444 OUT.bin]\n"
             "                     [--record OUT.fa18in] [--input IN.fa18in [--to-end]]\n"
             "                     [--replay RUN.e9k --start-frame N] [--no-recomp] [--ram-out OUT.bin]\n"
@@ -264,7 +267,8 @@ window_cleanup:
 
 int main(int argc, char **argv) {
 #ifdef FA18_ROMFREE_MAIN
-    const char *adf_path=NULL,*save_directory="local/saves";
+    const char *adf_path=NULL,*identify_adf=NULL,*save_directory="local/saves";
+    char discovered_adf[4096];
     FA18RomFreeProfile clean_profile={0};
 #else
     const char *state_path = NULL, *rom_path = NULL;
@@ -329,6 +333,7 @@ int main(int argc, char **argv) {
     for (i = 1; i < argc; i++) {
 #ifdef FA18_ROMFREE_MAIN
         if (!strcmp(argv[i], "--adf") && i + 1 < argc) adf_path = argv[++i];
+        else if (!strcmp(argv[i], "--identify-adf") && i + 1 < argc) identify_adf = argv[++i];
         else if (!strcmp(argv[i], "--save-dir") && i + 1 < argc) save_directory = argv[++i];
 #else
         if (!strcmp(argv[i], "--state") && i + 1 < argc) state_path = argv[++i];
@@ -417,7 +422,20 @@ int main(int argc, char **argv) {
         fprintf(stderr,"--fast-forward requires --window and must be less than a finite --frames limit\n"); return 2;
     }
 #ifdef FA18_ROMFREE_MAIN
-    if (!adf_path || !*save_directory) { usage(); return 2; }
+    if (identify_adf) {
+        FA18MediaInfo info;
+        if (!fa18_media_probe(identify_adf,&info)) { fprintf(stderr,"cannot read ADF %s\n",identify_adf); return 1; }
+        printf("{\"disk_sha256\":\"%s\",\"executable_sha256\":\"%s\",\"version\":\"%s\",\"ofs\":%s,\"supported\":%s}\n",
+               info.disk_sha256,info.executable_sha256,info.version,info.ofs?"true":"false",info.supported?"true":"false");
+        return 0;
+    }
+    if (!*save_directory) { usage(); return 2; }
+    if (!adf_path) {
+        if (!fa18_media_discover(argv[0],discovered_adf,sizeof discovered_adf,error,sizeof error)) {
+            fprintf(stderr,"%s\n",error); return 1;
+        }
+        adf_path=discovered_adf;
+    }
     m=calloc(1,sizeof *m);
     if (!m || !fa18_romfree_load(&clean_profile,m,adf_path,save_directory,use_recomp,error,sizeof error)) {
         fprintf(stderr,"%s\n",m?error:"cannot allocate machine"); free(m); return 1;

@@ -39,6 +39,25 @@ Completion requires launch, menus, flight, postflight, persistence and exit,
 with zero ROM reads/fetches and zero unsupported services. A loader or service
 inventory alone does not satisfy that objective.
 
+ADF packaging now supports omitting `--adf`: the runner scans beside the actual
+executable, accepts renamed/case-varied `.adf` files, skips unsupported disks,
+accepts identical duplicates and rejects ambiguous distinct supported images.
+`--identify-adf PATH` reports disk/executable SHA-256 and known image identity.
+The read-only `D:/amiga` inventory recognizes all 22 images; `[cr A-Ha]` and
+`[cr]` have the verified executable and pass splash launches on GNU/MSVC.
+The other 20 remain unsupported, not alternate port profiles. Whole-image
+checksums identify disks; exact executable SHA-256 guards the placement and
+translations, permitting modified disks whose executable remains unchanged.
+Resources still load directly from OFS in the ADF, with no extracted asset
+folder and no ADF writes. See `analysis/adf_versions.json` and the media check.
+The checksum library is reusable host C, without SDK/ROM dependencies.
+The host file backend now accepts profile-owned read-only path prefixes;
+Interceptor selects `pix/` and `text/`. Reads ignore save-directory assets and
+writes return ERROR_WRITE_PROTECTED (223), while configuration saves retain
+their overlay behavior. Neutral fixtures cover both existing-file open modes,
+read bytes, denied writes/truncation and retained overlay contents. Media checks
+poison an external splash and require identical original RAM/CPU/pixels.
+
 Report progress against these acceptance checkpoints. The informal 25% and
 30% chat estimates had no measured denominator and should not be reused.
 Current reusable services and isolated startup/demo smoke tests pass. Further

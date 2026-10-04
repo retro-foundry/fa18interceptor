@@ -4,7 +4,8 @@ Build GNU headless with `python scripts/build_recomp.py --romfree`, or build
 the CMake `fa18_romfree` target in Release for SDL window support.
 
 ```
-fa18_romfree --adf path/to/original.adf --save-dir local/saves --window
+fa18_romfree --window --frames 0
+fa18_romfree --adf path/to/original.adf --save-dir local/saves --window --frames 0
 fa18_romfree --adf path/to/original.adf --frames 300
 ```
 
@@ -12,6 +13,32 @@ The ADF supplies executable bytes and relocations. The compiled Interceptor
 profile supplies checked Hunk addresses and explicit process/library ABI
 identifiers. No Kickstart ROM, UAE state, captured RAM or SDK is read at runtime.
 The save directory defaults to `local/saves`.
+
+Place a supported `.adf` beside the executable and omit `--adf` to discover it
+automatically. The search uses the executable's directory, even when launched
+from another working directory, and accepts any filename or extension case.
+Identical copies are harmless; distinct supported disks require `--adf PATH`
+so configuration/resource differences are not selected arbitrarily.
+Game executable, graphics and text stay in the ADF and are read through the
+read-only OFS backend. No extracted asset folder is required. Saves retain the
+existing writable overlay; the source ADF is never changed.
+This profile's `pix/` and `text/` namespaces are ADF-only: stale/extracted files
+in the save directory cannot override them, and writes fail as write-protected.
+
+`fa18_romfree --identify-adf PATH` prints JSON containing the disk SHA-256,
+executable SHA-256, recognized image name and compatibility. The current
+22-image inventory from `D:\amiga` is in `analysis/adf_versions.json`.
+`[cr A-Ha]` and `[cr]` contain the verified executable and pass direct ADF
+splash launches on GNU/MSVC; the other 20 images are recognized but unsupported.
+A modified/unlisted disk can load if its executable SHA-256 still matches.
+Disk identity alone does not establish executable compatibility, so the
+runtime validates the executable before installing translations.
+Regenerate checksum metadata only with `python scripts/inventory_adf_versions.py
+--directory D:\amiga`; this reads images without modifying or extracting them.
+`python tools/amiga/check_romfree_media.py` tests discovery, compatibility and
+complete auto/explicit-launch RAM/CPU/pixel identity from isolated directories.
+It also poisons an external splash copy and verifies identical ADF-rendered
+pixels and complete guest state.
 
 Window presentation defaults to host pacing at 50 Hz with monitor vsync off.
 Use `--window --vsync on` to select monitor synchronization (which can reduce

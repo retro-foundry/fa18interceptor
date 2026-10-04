@@ -3,6 +3,7 @@
  * The compiled manifest contains verified addresses/sizes/identifiers only. */
 #include "profile.h"
 #include "placement.h"
+#include "media.h"
 #include "../amiga/hunk_loader.h"
 #include "../amiga/exec_bootstrap.h"
 #include "../amiga/abi_13.h"
@@ -31,9 +32,10 @@ int fa18_romfree_load(FA18RomFreeProfile *p,FA18Machine *m,const char *adf_path,
     *p=(FA18RomFreeProfile){0};
     if (!amiga_ofs_open(&p->adf,adf_path)) return fail(error,error_size,"cannot open original OFS ADF");
     size_t size=0; uint8_t *exe=amiga_ofs_read(&p->adf,"F-18 Interceptor",&size);
-    uint32_t signature=2166136261u;
-    for (size_t i=0;exe && i<size;++i) signature=(signature^exe[i])*16777619u;
-    if (!exe || size!=331232 || signature!=0xE1811C45u) {
+    FA18MediaInfo media;
+    fa18_media_inspect(&p->adf,exe,size,&media);
+    fprintf(stderr,"ADF: %s\nSHA-256: %s\n",media.version,media.disk_sha256);
+    if (!media.supported) {
         free(exe); fa18_romfree_close(p); return fail(error,error_size,"ADF executable does not match the verified game version");
     }
     int parsed=amiga_hunks_parse(&p->image,exe,size); free(exe);
@@ -95,6 +97,11 @@ int fa18_romfree_load(FA18RomFreeProfile *p,FA18Machine *m,const char *adf_path,
         fa18_romfree_close(p); return fail(error,error_size,"cannot initialize host compatibility memory");
     }
     p->compat->libraries[AMIGA_HOST_EXEC]=process.exec_base;
+    /* Game resources are always supplied by the original disk; save-directory
+     * contents may override writable configuration, never graphics or text. */
+    static const char *const resources[]={"pix/","text/"};
+    p->compat->read_only_prefixes=resources;
+    p->compat->read_only_prefix_count=sizeof resources/sizeof resources[0];
     /* Non-CLI process handoff with one executable argument. The embedding
      * host owns this process, so no desktop reply port is required. */
     uint32_t message=amiga_host_alloc(p->compat,48,0x10004),argument=message+40;
