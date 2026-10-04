@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import tempfile
 import os
+import csv
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -34,8 +35,22 @@ def main():
             return stats
 
         for sync in ("off", "on"):
-            stats = run(sync, "game.exe", ["--window", "--vsync", sync, "--frames", "4"])
+            stats = run(sync, "game.exe", ["--window", "--vsync", sync, "--frames", "4",
+                "--frame-times", f"{sync}.csv"])
             assert stats[0]["frames"] == 4
+            with (work / f"{sync}.csv").open(newline="") as stream:
+                rows = list(csv.DictReader(stream))
+            assert len(rows) == 4
+            for frame, row in enumerate(rows, 1):
+                assert int(row["frame"]) == frame and row["screen_changed"] in ("0", "1")
+                stages = [float(row[key]) for key in
+                    ("input_us", "simulation_us", "convert_us", "present_us", "wait_us")]
+                assert all(value >= 0 for value in stages) and float(row["total_us"]) > 0
+                assert abs(sum(stages) - float(row["total_us"])) < 0.01
+            reference = run(f"{sync}-headless", "game.exe", ["--frames", "4"])
+            assert stats == reference
+            for suffix in ("ram", "ppm"):
+                assert (work / f"{sync}.{suffix}").read_bytes() == (work / f"{sync}-headless.{suffix}").read_bytes()
         stats = run("quit", "quit.exe", ["--window", "--frames", "100"])
         frames = stats[0]["frames"]
         assert 0 < frames < 100, frames
@@ -45,6 +60,15 @@ def main():
             assert (work / f"quit.{suffix}").read_bytes() == (work / f"headless.{suffix}").read_bytes()
         print(f"SDL close after {frames} live frames: complete RAM/CPU and pixels match headless; zero ROM/fault counters")
         print("Both vsync settings honor frame limits and emit final diagnostics")
+        print("Frame timing CSV has one complete row per frame; measured runs preserve full RAM/CPU and pixels")
+        rejected = subprocess.run([str(work / "game.exe"), "--adf", "original.adf",
+            "--frame-times", "invalid.csv"], cwd=work, env=env, capture_output=True, text=True)
+        assert rejected.returncode == 2 and "requires --window" in rejected.stderr
+        rejected = subprocess.run([str(work / "game.exe"), "--adf", "original.adf",
+            "--window", "--frame-times", "missing/invalid.csv", "--frames", "4"],
+            cwd=work, env=env, capture_output=True, text=True)
+        assert rejected.returncode == 1 and "cannot write" in rejected.stderr
+        assert json.loads(rejected.stdout.splitlines()[-1]) == dict(rom_reads=0, rom_instruction_fetches=0, unsupported_services=0)
 
 
 if __name__ == "__main__":

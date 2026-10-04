@@ -27,3 +27,36 @@ A deliberate faster simulation
 or renderer path may relax original CPU/bus timing, while preserving game rules,
 assets, input responsiveness and save formats. Do not claim smoother flight
 from startup smoke tests alone.
+
+2026-10-04: `--window --frame-times PATH.csv` now records each frame's input,
+combined CPU/chipset simulation, RGB conversion, SDL presentation, pacing wait,
+total duration and RGB444 screen-change flag. Window fixture tests verify all
+rows and durations, full RAM/CPU/pixel identity against equivalent headless
+execution, frame limits, close and file failures. Screen-change counts include
+UI/HUD activity and do not establish fresh 3D scene rates. Optional profiling
+includes its comparison/copy overhead in presentation cost; CSV writes occur
+after the timed interval. Real-monitor cadence still needs measurement.
+
+A 3,600-frame MSVC dummy-display capture selecting free flight at frame 2,200
+averaged 2.346 ms simulation and 0.586 ms presentation, with 19.991 ms total
+including pacing. Simulation maximum was 8.346 ms. The final 800 frames had
+no screen changes and callback C1075A, so this is a menu/launch-preparation
+measurement, not active-flight smoothness evidence. Raw ignored artifacts:
+`build/amiga/window-freeflight.{csv,ram}`. Do not interpret a selected mode
+byte or a high blit count alone as evidence of active 3D flight.
+
+Ordinary game dispatches previously scanned/validated all enabled OS services.
+The adapter now caches enabled service bounds whenever the registry changes;
+out-of-range PCs skip the scan. Neutral service execution and machine cycles
+are unchanged. Adapter fixtures cover arbitrary RAM services, range endpoints,
+replacement, failed replacement, enable/disable and reset. Three alternating
+GNU before/after runs over the same 3,600-frame frontend replay had medians
+6.441 s and 6.359 s (about 1.3% difference, within observed run variation).
+All final RAM/CPU, every RGB444 frame and diagnostic counters matched exactly.
+This removes unnecessary lookup work but does not demonstrate a meaningful
+speedup. Raw measurements: `build/amiga/dispatch-performance.json`.
+
+Next: record actual flight rather than its C1075A launch-preparation screen,
+then separate original scene-update cadence from host pacing. Select a faster
+simulation/rendering path based on those measurements, with exact service
+timing explicitly deferred. Do not simply accelerate gameplay timers.

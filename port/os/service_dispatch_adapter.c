@@ -66,10 +66,23 @@ static AmigaService services[FA18_SERVICE_COUNT+EXTRA_SERVICES]={
     {0xFC11CA,0xFC1298,0xFC11CA,"exec.interrupt_vectors/servers",0,fa18_os_exec_int_servers_step_adapter,NULL},
     {0xFC1338,0xFC1428,0xFC135C,"exec.server_dispatch/Cause/soft_interrupts",0,fa18_os_exec_soft_interrupts_step_adapter,NULL}
 };
+/* Most dispatches target ordinary game code. Bound the enabled service union
+ * when the registry changes, so that path avoids scanning every OS service.
+ * This affects host lookup cost only: callbacks, guest cycles and guard
+ * contexts are still owned by the neutral dispatcher. Extra RAM services
+ * participate in these bounds; no game-specific address shortcut is used. */
+static uint32_t service_low=0x1000000,service_high;
+static void service_bounds(void) {
+    service_low=0x1000000; service_high=0;
+    for (size_t i=0;i<FA18_SERVICE_COUNT+extra_count;++i) if (services[i].enabled) {
+        if (services[i].start<service_low) service_low=services[i].start;
+        if (services[i].end>service_high) service_high=services[i].end;
+    }
+}
 void fa18_services_reset(void) {
     for (unsigned i=0;i<FA18_SERVICE_COUNT;++i) services[i].enabled=0;
     for (unsigned i=0;i<EXTRA_SERVICES;++i) services[FA18_SERVICE_COUNT+i]=(AmigaService){0};
-    extra_count=0;
+    extra_count=0; service_bounds();
 }
 int fa18_services_install_extra(const AmigaService *entries,size_t count) {
     if ((!entries && count) || count>EXTRA_SERVICES) return 0;
@@ -84,13 +97,15 @@ int fa18_services_install_extra(const AmigaService *entries,size_t count) {
     }
     for (size_t i=0;i<count;++i) services[FA18_SERVICE_COUNT+i]=entries[i];
     for (size_t i=count;i<EXTRA_SERVICES;++i) services[FA18_SERVICE_COUNT+i]=(AmigaService){0};
-    extra_count=count; return 1;
+    extra_count=count; service_bounds(); return 1;
 }
 void fa18_service_enable(unsigned service,int enabled) {
     if (service>=FA18_SERVICE_COUNT) abort();
     services[service].enabled=enabled!=0;
+    service_bounds();
 }
 int fa18_services_step(void) {
+    if (REG_PC<service_low || REG_PC>=service_high) return 0;
     int result=amiga_services_step(services,FA18_SERVICE_COUNT+extra_count,REG_PC,REG_PPC,&fa18_machine->runtime_guard);
     if (result<0) {
         fprintf(stderr,"invalid service registry at PC=%06X cycle=%llu\n",REG_PC,

@@ -62,7 +62,7 @@ static void usage(void) {
             "                     [--record OUT.fa18in] [--input IN.fa18in [--to-end]]\n"
             "                     [--replay RUN.e9k --start-frame N] [--no-recomp] [--ram-out OUT.bin]\n"
             "                     [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
-            "                     [--profile OUT.json] [--edges OUT.json] [--poison]\n"
+            "                     [--profile OUT.json] [--edges OUT.json] [--poison] [--frame-times OUT.csv]\n"
             "                     [--rom-audit OUT.json] [--fallback-log OUT.json]\n"
             "ADF-only menu/demo and flight-log save/reload verified; full mission/teardown acceptance pending.\n"
 #else
@@ -71,7 +71,7 @@ static void usage(void) {
             "                   [--ram-out OUT.bin] [--replay RUN.e9k --start-frame N]\n"
             "                   [--window [--scale N] [--vsync on|off]]   (window: --frames 0 runs until closed)\n"
             "                   [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
-            "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n"
+            "                   [--profile OUT.json] [--edges OUT.json] [--poison] [--frame-times OUT.csv]\n"
             "                   [--rom-transitions OUT.json] (RAM-to-ROM entry inventory)\n"
             "                   [--rom-audit OUT.json] (ROM instructions, nested edges, data and vectors)\n"
             "                   [--no-os-vbeam] (use the ROM VBeamPos)\n"
@@ -114,13 +114,16 @@ static int restore_lead =
 /* Live 50 Hz window. Keys go to the Amiga keyboard; clicking the window
  * captures the mouse, F12 releases it. Recorded replay events still apply. */
 static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int frames, int scale, int vsync,
-                      int *completed_frames) {
+                      int *completed_frames,const char *frame_times_path) {
     SDL_Window *win;
     SDL_Renderer *ren;
     SDL_Texture *tex;
     static uint32_t argb[FA18_SCREEN_W * FA18_SCREEN_H];
     uint64_t deadline;
-    int running = 1, frame = 0, grabbed = 0;
+    int running = 1, frame = 0, grabbed = 0, result = 0;
+    FILE *timing=NULL;
+    double microseconds_per_tick=0;
+    static uint16_t previous_screen[FA18_SCREEN_W * FA18_SCREEN_H];
     *completed_frames=0;
     SDL_SetMainReady();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
@@ -140,6 +143,13 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
         return 1;
     }
     SDL_RenderSetLogicalSize(ren, FA18_SCREEN_W, FA18_SCREEN_H);
+    if (frame_times_path) {
+        timing=fopen(frame_times_path,"w");
+        if (!timing) { fprintf(stderr,"cannot write %s\n",frame_times_path); result=1; goto window_cleanup; }
+        microseconds_per_tick=1000000.0/(double)SDL_GetPerformanceFrequency();
+        memset(previous_screen,0,sizeof previous_screen);
+        fprintf(timing,"frame,input_us,simulation_us,convert_us,present_us,wait_us,total_us,screen_changed\n");
+    }
     deadline = SDL_GetTicks64();
     while (running && (frames <= 0 || frame < frames)
 #ifdef FA18_ROMFREE_MAIN
@@ -148,6 +158,8 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
     ) {
         SDL_Event e;
         int p;
+        uint64_t ticks[6]; int screen_changed=0;
+        if (timing) ticks[0]=SDL_GetPerformanceCounter();
         while (SDL_PollEvent(&e)) {
             switch (e.type) {
             case SDL_QUIT: running = 0; break;
@@ -181,29 +193,47 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
         }
         if (!running) break;
         fa18_replay_apply(replay, m, start_frame + frame + 1);
+        if (timing) ticks[1]=SDL_GetPerformanceCounter();
         if (frame == 0 && restore_lead) { fa18_machine_run_frame(m); fa18_loop_frame(); }
         fa18_machine_run_frame(m);
         fa18_loop_frame();
         frame++;
+        if (timing) ticks[2]=SDL_GetPerformanceCounter();
         for (p = 0; p < FA18_SCREEN_W * FA18_SCREEN_H; p++) {
             uint16_t v = m->last_screen[p];
             argb[p] = 0xFF000000u | (uint32_t)((v >> 8) & 15) * 0x110000u | (uint32_t)((v >> 4) & 15) * 0x1100u |
                       (uint32_t)(v & 15) * 0x11u;
         }
+        if (timing) {
+            ticks[3]=SDL_GetPerformanceCounter();
+            screen_changed=memcmp(previous_screen,m->last_screen,sizeof previous_screen)!=0;
+            memcpy(previous_screen,m->last_screen,sizeof previous_screen);
+        }
         SDL_UpdateTexture(tex, NULL, argb, FA18_SCREEN_W * (int)sizeof argb[0]);
         SDL_RenderClear(ren);
         SDL_RenderCopy(ren, tex, NULL, NULL);
         SDL_RenderPresent(ren);
+        if (timing) ticks[4]=SDL_GetPerformanceCounter();
         deadline += 20; /* 50 Hz PAL */
         while (SDL_GetTicks64() < deadline) SDL_Delay(1);
         if (SDL_GetTicks64() > deadline + 100) deadline = SDL_GetTicks64();
+        if (timing) {
+            ticks[5]=SDL_GetPerformanceCounter();
+            if (fprintf(timing,"%d,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%d\n",frame,
+                (ticks[1]-ticks[0])*microseconds_per_tick,(ticks[2]-ticks[1])*microseconds_per_tick,
+                (ticks[3]-ticks[2])*microseconds_per_tick,(ticks[4]-ticks[3])*microseconds_per_tick,
+                (ticks[5]-ticks[4])*microseconds_per_tick,(ticks[5]-ticks[0])*microseconds_per_tick,
+                screen_changed)<0) { fprintf(stderr,"cannot write %s\n",frame_times_path); result=1; break; }
+        }
     }
+window_cleanup:
+    if (timing && fclose(timing)) { fprintf(stderr,"cannot close %s\n",frame_times_path); result=1; }
     SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
     SDL_Quit();
     *completed_frames=frame;
-    return 0;
+    return result;
 }
 #endif
 
@@ -240,6 +270,7 @@ int main(int argc, char **argv) {
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     int run_result=0;
+    const char *frame_times_path=NULL;
     /* Host-paced presentation avoids coupling PAL frames to a second clock.
      * Keep the reference runner's presentation default for existing users. */
     int vsync =
@@ -304,6 +335,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--ports-only") && i + 1 < argc) ports_only = argv[++i];
         else if (!strcmp(argv[i], "--ports-report") && i + 1 < argc) ports_report = argv[++i];
         else if (!strcmp(argv[i], "--profile") && i + 1 < argc) profile_path = argv[++i];
+        else if (!strcmp(argv[i], "--frame-times") && i + 1 < argc) frame_times_path = argv[++i];
         else if (!strcmp(argv[i], "--edges") && i + 1 < argc) edges_path = argv[++i];
         else if (!strcmp(argv[i], "--rom-transitions") && i + 1 < argc) rom_transitions_path = argv[++i];
         else if (!strcmp(argv[i], "--rom-audit") && i + 1 < argc) rom_audit_path = argv[++i];
@@ -344,6 +376,9 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--to-end")) to_end = 1;
         else if (!strcmp(argv[i], "--help")) { usage(); return 0; }
         else { usage(); return 2; }
+    }
+    if (frame_times_path && !window) {
+        fprintf(stderr,"--frame-times requires --window\n"); return 2;
     }
 #ifdef FA18_ROMFREE_MAIN
     if (!adf_path || !*save_directory) { usage(); return 2; }
@@ -424,7 +459,7 @@ int main(int argc, char **argv) {
     }
     if (window) {
 #ifdef FA18_WITH_SDL
-        run_result = run_window(m, &replay, start_frame, frames, scale, vsync, &i);
+        run_result = run_window(m, &replay, start_frame, frames, scale, vsync, &i,frame_times_path);
 #else
         fprintf(stderr, "--window needs the CMake build (SDL2)\n");
         return 2;

@@ -18,6 +18,7 @@ static int call(unsigned lvo) {
     amiga_store_be32(fa18_machine->chip+STACK,RETURN); SET_CYCLES(1024);
     return fa18_services_step();
 }
+static int counted_service(void *context) { ++*(unsigned *)context; return 1; }
 int main(void) {
     FA18Machine *m=calloc(1,sizeof *m); AmigaHostCompat *c=calloc(1,sizeof *c);
     FA18MachineStartup startup={0}; char error[256];
@@ -60,6 +61,26 @@ int main(void) {
     REQUIRE(call(474)); REQUIRE(call(462) && c->pending_count==1);
     REQUIRE(call(480) && !c->pending_count && io[8]==7 && (int8_t)io[31]==-2);
     REQUIRE(call(474) && (int32_t)REG_D[0]==-2);
+    /* Registry bounds must follow arbitrary RAM services, replacements,
+     * failed installations and reset, not assume OS services live in ROM. */
+    unsigned calls=0;
+    AmigaService extra={0x100,0x104,0x100,"fixture.ram",1,counted_service,&calls};
+    REQUIRE(fa18_services_install_extra(&extra,1));
+    REG_PC=0x100; REQUIRE(fa18_services_step()==1 && calls==1);
+    REG_PC=0x102; REQUIRE(fa18_services_step()==1 && calls==2);
+    REG_PC=0x104; REQUIRE(!fa18_services_step() && calls==2);
+    extra.start=extra.entry=0xC00100; extra.end=0xC00104;
+    REQUIRE(fa18_services_install_extra(&extra,1));
+    REG_PC=0x100; REQUIRE(!fa18_services_step());
+    REG_PC=0xC00100; REQUIRE(fa18_services_step()==1 && calls==3);
+    extra.end=extra.start;
+    REQUIRE(!fa18_services_install_extra(&extra,1));
+    REQUIRE(fa18_services_step()==1 && calls==4); /* failed replacement is atomic */
+    fa18_service_enable(FA18_SERVICE_EXEC_LISTS,1);
+    REQUIRE(fa18_services_step()==1 && calls==5); /* enable/disable retains extra range */
+    fa18_service_enable(FA18_SERVICE_EXEC_LISTS,0);
+    REQUIRE(fa18_services_step()==1 && calls==6);
+    fa18_services_reset(); REQUIRE(!fa18_services_step());
     REQUIRE(!m->runtime_guard.rom_reads && !m->runtime_guard.rom_instruction_fetches && !m->runtime_guard.unsupported_services);
     fa18_os_host_compat_detach(); REQUIRE(amiga_host_close(c)); free(c); free(m);
     puts("Gameport SendIO/WaitIO, button edges, reply/signals, unit isolation and AbortIO pass; zero ROM/fault counters"); return 0;

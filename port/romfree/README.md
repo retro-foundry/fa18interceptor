@@ -18,6 +18,16 @@ Use `--window --vsync on` to select monitor synchronization (which can reduce
 tearing but adds display waits). This changes presentation only: it does not
 increase the original game's 3D update rate or change gameplay timing.
 
+For window profiling, add `--frame-times frames.csv`. Each presented frame
+records input, CPU/chipset simulation, RGB conversion, SDL presentation, pacing
+wait and total duration in microseconds, plus whether the RGB444 screen changed.
+Use this to distinguish missed host deadlines from unchanged game frames.
+Simulation currently combines game code and chipset work. Screen changes can
+include UI/HUD changes; they are not a count of newly rendered 3D scenes.
+Profiling adds counter reads, screen comparison/copy and buffered CSV writes;
+the screen comparison is included in presentation cost. No measurements are
+taken without this option. It requires `--window`.
+
 The target now loads the splash and credits, accepts keyboard input, reaches
 the main menu and renders the demo from a clean ADF launch. GNU and MSVC Release
 pass the isolated launch smoke test, with zero ROM reads, ROM instruction
@@ -26,7 +36,7 @@ to reproduce it. This is functional smoke coverage, not acceptance of every mode
 
 Host compatibility supplies libraries, reserved-region allocation, DOS files
 and directory enumeration, writable save overlays, View/Copper construction,
-keyboard requests and timer queries/waits. Existing C interrupt and graphics
+keyboard/gameport button requests and timer queries/waits. Existing C interrupt and graphics
 wait services run guest callbacks on the chipset timeline. New services use a
 coarse execution charge. The original game startup and gameplay code still run.
 

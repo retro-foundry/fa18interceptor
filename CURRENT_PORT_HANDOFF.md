@@ -39,7 +39,7 @@ whole-game acceptance remains:
 | Checkpoint | Verified state |
 | --- | --- |
 | Original ADF launch with no ROM or savestate | GNU/MSVC Release isolated ADF-only tests pass through splash, credits, keyboard input and main-menu access and demo rendering |
-| Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all selectable mission starts exercised. Complete outcomes/progression remain pending |
+| Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all selectable mission entry screens exercised. Active-flight coverage and complete outcomes/progression remain pending |
 | Flight and postflight with original behavior and timing | GNU/MSVC new-tour qualification controls execute three reset passes, original failure-message callbacks, menu return and log update. Carrier success and complete mission outcomes remain pending; exact timing deferred |
 | Save/load round trips using `--save-dir` | GNU/MSVC game UI reset/update writes original 78-byte config; fresh launch matches all 78 saved bytes. ADF hash unchanged |
 | Restart and clean exit | Host window close stops before another frame, produces diagnostics, releases host resources and reports save-close failures; original guest teardown/restart still pending |
@@ -59,6 +59,16 @@ and bitmap/palette Copper construction. Six neutral CTests pass GNU/MSVC Release
 the 406-file native gate and 100-frame C/ROM reference smoke for all three
 recordings also pass. Full exact service/recording gates were not rerun for this
 behavior-level batch. No performance speedup has yet been measured.
+
+Optional `--window --frame-times PATH.csv` now separates host input, combined
+CPU/chipset simulation, conversion, presentation and pacing waits, and records
+screen changes. SDL fixture checks preserve full RAM/CPU/pixels and verify
+frame rows and file errors. Cached service bounds remove OS-registry scans for
+ordinary game PCs. Three alternating GNU before/after runs preserve final
+RAM/CPU and every RGB444 frame; the 1.3% median difference is within measured
+run variation, not a demonstrated speedup. A dummy-display menu/free-flight
+selection capture remains at C1075A with an unchanged final screen; this does
+not establish active-flight cadence. See the performance follow-up for data.
 
 Next: verify mission outcomes/progression, restart and clean
 exit; complete only services reached by those paths, retaining reusable state

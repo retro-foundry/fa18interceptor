@@ -58,8 +58,9 @@ Concrete concessions in the first host compatibility batch:
 
 GNU/MSVC isolated ADF-only startup, credits and keyboard-to-demo rendering
 smoke passes with all three forbidden-access counters zero. Portable component
-save round trips pass; game-level save/load and complete mode/exit acceptance
-remain pending. This is compatibility progress, not a measured speedup.
+save round trips pass. Game UI reset/save and nonzero qualification-failure
+logs now reload all 78 bytes on GNU/MSVC. Complete mode/guest-exit acceptance
+remains pending. This is compatibility progress, not a measured speedup.
 
 The first clean launch found 42 captured OS RAM translations among the 624
 generated entries. ROM-free code ownership now excludes those functions,
