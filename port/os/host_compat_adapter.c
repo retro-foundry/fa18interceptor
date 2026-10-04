@@ -295,7 +295,8 @@ static int dos_call(AmigaHostCompat *c,unsigned offset) {
         REG_D[0]=amiga_host_lock(c,name); break;
     case 90: if (!amiga_host_unlock(c,REG_D[1])) return 0; break;
     case 102: REG_D[0]=amiga_host_examine(c,REG_D[1],guest(c,REG_D[2],260),260)?0xFFFFFFFFu:0; fa18_recomp_note_write(REG_D[2],260); break;
-    case 114: REG_D[0]=amiga_host_exnext(c,REG_D[1],guest(c,REG_D[2],260),260)?0xFFFFFFFFu:0; fa18_recomp_note_write(REG_D[2],260); break;
+    case 108: REG_D[0]=amiga_host_exnext(c,REG_D[1],guest(c,REG_D[2],260),260)?0xFFFFFFFFu:0; fa18_recomp_note_write(REG_D[2],260); break;
+    case 114: REG_D[0]=amiga_host_info(c,REG_D[1],guest(c,REG_D[2],36),36)?0xFFFFFFFFu:0; fa18_recomp_note_write(REG_D[2],36); break;
     case 126:
         handle=REG_D[1];
         if (handle && (handle>64 || !c->locks[handle-1].active)) { c->error=205; REG_D[0]=0; break; }

@@ -61,6 +61,10 @@ int main(void) {
     h=amiga_host_open(c,"PILOT",1005); assert(h && amiga_host_read(c,h,bytes,4)==4 && !memcmp(bytes,"save",4));
     assert(amiga_host_file_close(c,h));
     uint32_t lock=amiga_host_lock(c,"D"); assert(lock); uint8_t fib[260];
+    uint8_t disk_info[40]; memset(disk_info,0xA5,sizeof disk_info);
+    assert(amiga_host_info(c,lock,disk_info,sizeof disk_info));
+    assert(amiga_be32(disk_info+8)==82 && amiga_be32(disk_info+20)==512 && amiga_be32(disk_info+24)==0x444F5300);
+    assert(amiga_be32(disk_info+36)==0xA5A5A5A5 && !amiga_host_info(c,lock,disk_info,35));
     assert(amiga_host_examine(c,lock,fib,260) && amiga_be32(fib+4)==2);
     assert(amiga_host_exnext(c,lock,fib,260) && !strcmp((char *)fib+8,"x") && amiga_be32(fib+124)==3);
     assert(!amiga_host_exnext(c,lock,fib,260) && c->error==232);

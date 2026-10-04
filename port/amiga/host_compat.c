@@ -225,6 +225,24 @@ static void fill_fib(uint8_t *fib,const AmigaOfsEntry *entry) {
     amiga_store_be32(fib+132,entry->days); amiga_store_be32(fib+136,entry->minutes);
     amiga_store_be32(fib+140,entry->ticks); snprintf((char *)fib+144,80,"%s",entry->comment);
 }
+int amiga_host_info(AmigaHostCompat *c,uint32_t lock,uint8_t *info,size_t size) {
+    if (!info || (lock && (lock>64 || !c->locks[lock-1].active)) || size<36) { c->error=205; return 0; }
+    uint32_t blocks=(uint32_t)(c->disk->size/512),used=blocks;
+    if (blocks>=4) {
+        const uint8_t *root=c->disk->image+(blocks/2)*512;
+        uint32_t bitmap=amiga_be32(root+316);
+        if (bitmap<blocks && blocks<=4066 && bitmap) {
+            const uint8_t *bits=c->disk->image+bitmap*512;
+            for (uint32_t block=2;block<blocks;++block)
+                if (amiga_be32(bits+4+((block-2)/32)*4)&(1u<<((block-2)%32))) --used;
+        }
+    }
+    memset(info,0,36);
+    amiga_store_be32(info+8,82); /* Validated volume with a writable host overlay. */
+    amiga_store_be32(info+12,blocks); amiga_store_be32(info+16,used);
+    amiga_store_be32(info+20,512); amiga_store_be32(info+24,amiga_be32(c->disk->image));
+    amiga_store_be32(info+32,1); c->error=0; return 1;
+}
 static int add_directory_entry(void *context,const AmigaOfsEntry *entry) {
     AmigaHostLock *lock=context;
     for (size_t i=0;i<lock->entry_count;++i) if (!strcmp(lock->entries[i].name,entry->name)) {

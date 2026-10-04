@@ -52,6 +52,7 @@ uint32_t amiga_host_lock(AmigaHostCompat *,const char *path);
 int amiga_host_unlock(AmigaHostCompat *,uint32_t lock);
 int amiga_host_examine(AmigaHostCompat *,uint32_t lock,uint8_t *fib,size_t size);
 int amiga_host_exnext(AmigaHostCompat *,uint32_t lock,uint8_t *fib,size_t size);
+int amiga_host_info(AmigaHostCompat *,uint32_t lock,uint8_t *info,size_t size);
 int amiga_host_add_tail(AmigaHostCompat *,uint32_t list,uint32_t node);
 int amiga_host_remove(AmigaHostCompat *,uint32_t node);
 int amiga_host_queue_key(AmigaHostCompat *,unsigned rawkey,int down);
