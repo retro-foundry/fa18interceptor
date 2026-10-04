@@ -1,0 +1,3898 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "57a5c30b",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C1FF9C",
+    "C1FFA4",
+    "C2ED70",
+    "C2EE4A",
+    "C2F0C6",
+    "C2F0F4",
+    "C2F128",
+    "C2F156",
+    "C2EA5A",
+    "C2EAD0",
+    "C2EB4C",
+    "C2EBC2"
+  ],
+  "registered_translated_entries": 527,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 73,
+  "registered_total_entries": 600,
+  "registered_timing_entries": 521,
+  "registered_translated_timing_entries": 448,
+  "registered_source_only_timing_entries": 73,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/segment_projection_source_scope.json",
+      "sha256": "7a32523658382508c7697c5bd151b88324cd57117b5ada09032e2c79c708140c"
+    },
+    "unique_instructions": 663,
+    "shared_within_batch": 60,
+    "distinct_child_sites": 20,
+    "child_sites_by_owner": 20,
+    "actual_original_callability": {
+      "C1FF9C": [
+        {
+          "kind": "original table slot and observed indirect edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "slot": "C1FDA8",
+          "selector_offset": "00C0",
+          "target": "C1FF9C",
+          "bytes": "00c1ff9c",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C1FF9C"
+            ]
+          ]
+        }
+      ],
+      "C1FFA4": [
+        {
+          "kind": "original table slot and observed indirect edge",
+          "call_pc": "C0984A",
+          "return_pc": "C0984C",
+          "table": "C1FCE8",
+          "slot": "C1FE10",
+          "selector_offset": "0128",
+          "target": "C1FFA4",
+          "bytes": "00c1ffa4",
+          "caller_instructions": [
+            {
+              "pc": "C0983C",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C09840",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C09846",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C0984A",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C0984C",
+              "C1FFA4"
+            ]
+          ]
+        }
+      ],
+      "C2ED70": [
+        {
+          "pc": "C2CE4C",
+          "return_pc": "C2CE52",
+          "instruction": "jsr     $c2ed70.l",
+          "bytes": "4eb900c2ed70"
+        },
+        {
+          "kind": "original selected-segment indirect child",
+          "owner": "C1FF9C",
+          "target_setup_pc": "C1FF9C",
+          "setup_instruction": "lea     $c2ed70.l, A4",
+          "setup_bytes": "49f900c2ed70",
+          "call_pc": "C1FFF6",
+          "call_instruction": "jsr     (A4)",
+          "call_bytes": "4e94",
+          "target": "C2ED70",
+          "return_pc": "C1FFF8",
+          "selector_guard_added": false
+        }
+      ],
+      "C2EE4A": [
+        {
+          "pc": "C209C8",
+          "return_pc": "C209CE",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C20A26",
+          "return_pc": "C20A2C",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C20E1C",
+          "return_pc": "C20E22",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C2120E",
+          "return_pc": "C21214",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C2127C",
+          "return_pc": "C21282",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C21304",
+          "return_pc": "C2130A",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C21384",
+          "return_pc": "C2138A",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C2B5F6",
+          "return_pc": "C2B5FC",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "pc": "C2B6BC",
+          "return_pc": "C2B6C2",
+          "instruction": "jsr     $c2ee4a.l",
+          "bytes": "4eb900c2ee4a"
+        },
+        {
+          "kind": "original selected-segment indirect child",
+          "owner": "C1FFA4",
+          "target_setup_pc": "C1FFB4",
+          "setup_instruction": "lea     $c2ee4a.l, A4",
+          "setup_bytes": "49f900c2ee4a",
+          "call_pc": "C1FFF6",
+          "call_instruction": "jsr     (A4)",
+          "call_bytes": "4e94",
+          "target": "C2EE4A",
+          "return_pc": "C1FFF8",
+          "selector_guard_added": false
+        }
+      ],
+      "C2F0C6": [
+        {
+          "pc": "C2EE74",
+          "return_pc": "C2EE78",
+          "instruction": "bsr     $c2f0c6",
+          "bytes": "61000250"
+        },
+        {
+          "pc": "C2EEC2",
+          "return_pc": "C2EEC6",
+          "instruction": "bsr     $c2f0c6",
+          "bytes": "61000202"
+        },
+        {
+          "pc": "C2EFF0",
+          "return_pc": "C2EFF4",
+          "instruction": "bsr     $c2f0c6",
+          "bytes": "610000d4"
+        },
+        {
+          "pc": "C2F008",
+          "return_pc": "C2F00C",
+          "instruction": "bsr     $c2f0c6",
+          "bytes": "610000bc"
+        }
+      ],
+      "C2F0F4": [
+        {
+          "pc": "C2EE8A",
+          "return_pc": "C2EE8E",
+          "instruction": "bsr     $c2f0f4",
+          "bytes": "61000268"
+        },
+        {
+          "pc": "C2EEAC",
+          "return_pc": "C2EEB0",
+          "instruction": "bsr     $c2f0f4",
+          "bytes": "61000246"
+        },
+        {
+          "pc": "C2EFD8",
+          "return_pc": "C2EFDC",
+          "instruction": "bsr     $c2f0f4",
+          "bytes": "6100011a"
+        },
+        {
+          "pc": "C2F028",
+          "return_pc": "C2F02C",
+          "instruction": "bsr     $c2f0f4",
+          "bytes": "610000ca"
+        }
+      ],
+      "C2F128": [
+        {
+          "pc": "C2EF06",
+          "return_pc": "C2EF0A",
+          "instruction": "bsr     $c2f128",
+          "bytes": "61000220"
+        },
+        {
+          "pc": "C2EF26",
+          "return_pc": "C2EF2A",
+          "instruction": "bsr     $c2f128",
+          "bytes": "61000200"
+        },
+        {
+          "pc": "C2EF6A",
+          "return_pc": "C2EF6E",
+          "instruction": "bsr     $c2f128",
+          "bytes": "610001bc"
+        },
+        {
+          "pc": "C2EFB6",
+          "return_pc": "C2EFBA",
+          "instruction": "bsr     $c2f128",
+          "bytes": "61000170"
+        }
+      ],
+      "C2F156": [
+        {
+          "pc": "C2EEE8",
+          "return_pc": "C2EEEC",
+          "instruction": "bsr     $c2f156",
+          "bytes": "6100026c"
+        },
+        {
+          "pc": "C2EF4C",
+          "return_pc": "C2EF50",
+          "instruction": "bsr     $c2f156",
+          "bytes": "61000208"
+        },
+        {
+          "pc": "C2EF7E",
+          "return_pc": "C2EF82",
+          "instruction": "bsr     $c2f156",
+          "bytes": "610001d6"
+        },
+        {
+          "pc": "C2EFA2",
+          "return_pc": "C2EFA6",
+          "instruction": "bsr     $c2f156",
+          "bytes": "610001b2"
+        }
+      ],
+      "C2EA5A": [
+        {
+          "pc": "C2E7D0",
+          "return_pc": "C2E7D4",
+          "instruction": "bsr     $c2ea5a",
+          "bytes": "61000288"
+        },
+        {
+          "pc": "C2E82C",
+          "return_pc": "C2E830",
+          "instruction": "bsr     $c2ea5a",
+          "bytes": "6100022c"
+        },
+        {
+          "pc": "C2E980",
+          "return_pc": "C2E984",
+          "instruction": "bsr     $c2ea5a",
+          "bytes": "610000d8"
+        },
+        {
+          "pc": "C2E9A4",
+          "return_pc": "C2E9A8",
+          "instruction": "bsr     $c2ea5a",
+          "bytes": "610000b4"
+        }
+      ],
+      "C2EAD0": [
+        {
+          "pc": "C2E7E6",
+          "return_pc": "C2E7EA",
+          "instruction": "bsr     $c2ead0",
+          "bytes": "610002e8"
+        },
+        {
+          "pc": "C2E816",
+          "return_pc": "C2E81A",
+          "instruction": "bsr     $c2ead0",
+          "bytes": "610002b8"
+        },
+        {
+          "pc": "C2E968",
+          "return_pc": "C2E96C",
+          "instruction": "bsr     $c2ead0",
+          "bytes": "61000166"
+        },
+        {
+          "pc": "C2E9C4",
+          "return_pc": "C2E9C8",
+          "instruction": "bsr     $c2ead0",
+          "bytes": "6100010a"
+        }
+      ],
+      "C2EB4C": [
+        {
+          "pc": "C2E870",
+          "return_pc": "C2E874",
+          "instruction": "bsr     $c2eb4c",
+          "bytes": "610002da"
+        },
+        {
+          "pc": "C2E89C",
+          "return_pc": "C2E8A0",
+          "instruction": "bsr     $c2eb4c",
+          "bytes": "610002ae"
+        },
+        {
+          "pc": "C2E8EC",
+          "return_pc": "C2E8F0",
+          "instruction": "bsr     $c2eb4c",
+          "bytes": "6100025e"
+        },
+        {
+          "pc": "C2E944",
+          "return_pc": "C2E948",
+          "instruction": "bsr     $c2eb4c",
+          "bytes": "61000206"
+        }
+      ],
+      "C2EBC2": [
+        {
+          "pc": "C2E852",
+          "return_pc": "C2E856",
+          "instruction": "bsr     $c2ebc2",
+          "bytes": "6100036e"
+        },
+        {
+          "pc": "C2E8C2",
+          "return_pc": "C2E8C6",
+          "instruction": "bsr     $c2ebc2",
+          "bytes": "610002fe"
+        },
+        {
+          "pc": "C2E900",
+          "return_pc": "C2E904",
+          "instruction": "bsr     $c2ebc2",
+          "bytes": "610002c0"
+        },
+        {
+          "pc": "C2E930",
+          "return_pc": "C2E934",
+          "instruction": "bsr     $c2ebc2",
+          "bytes": "61000290"
+        }
+      ]
+    }
+  },
+  "whole_entry_completed_calls": 393216,
+  "controlled_child_completed_calls": 196608,
+  "real_child_completed_calls": 196608,
+  "controlled_union_pcs": 663,
+  "real_child_union_pcs": 610,
+  "fixture_coverage": [
+    {
+      "owner": "C1FF9C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 40960,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C1FF9C.log",
+        "sha256": "68ad500b6d13fe2dfec5226c0c515f12fe3127426ce4d44833ab94e68f08a88a"
+      }
+    },
+    {
+      "owner": "C1FFA4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 25,
+      "observed_owner_pcs": 25,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 40960,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C1FFA4.log",
+        "sha256": "a55298d6bd79fa368270ac9d5cfa4beb84d6d7911e67c37b0b99488042510570"
+      }
+    },
+    {
+      "owner": "C2ED70",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 84,
+      "observed_owner_pcs": 84,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 40960,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2ED70.log",
+        "sha256": "13ee6309e0156d1f352b5c8c87899ab363d507aae2f32b504452498d3af330aa"
+      }
+    },
+    {
+      "owner": "C2EE4A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 211,
+      "observed_owner_pcs": 211,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 40960,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2EE4A.log",
+        "sha256": "76ecbe170075b75023be8bcf027db883fe9266b7972ed27b631c07cdc364af91"
+      }
+    },
+    {
+      "owner": "C2F0C6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2F0C6.log",
+        "sha256": "9ea0811c5fb35ed4415fae35251cbea8bf1bc1706045ee2da87df574129be366"
+      }
+    },
+    {
+      "owner": "C2F0F4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2F0F4.log",
+        "sha256": "67182c195dd8076b732f0b9265fb84484d303d54c4b4bf890c0af459ec47a105"
+      }
+    },
+    {
+      "owner": "C2F128",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2F128.log",
+        "sha256": "d0edef8622fc32768710fdc3afe2ef6364cf720063c9f55056841c76df41e4a2"
+      }
+    },
+    {
+      "owner": "C2F156",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2F156.log",
+        "sha256": "386827e876484599aa89fee88517f810208ad877832dc147f5b9924920ea5595"
+      }
+    },
+    {
+      "owner": "C2EA5A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2EA5A.log",
+        "sha256": "81198ff19433496300f8ce7d5d8b2e8893522b1614fa16a5157b67b2dbb38830"
+      }
+    },
+    {
+      "owner": "C2EAD0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2EAD0.log",
+        "sha256": "11ea6365c9eff796b1dea1c33a201853bb8a142af5cad637bed7758ebc4c34c3"
+      }
+    },
+    {
+      "owner": "C2EB4C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2EB4C.log",
+        "sha256": "f17b78fe0cf3ba52cb33d20e99880a1511f575d3bc5d2b831478c9b29f75da14"
+      }
+    },
+    {
+      "owner": "C2EBC2",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 75,
+      "observed_owner_pcs": 75,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_contract_C2EBC2.log",
+        "sha256": "21e00db1c12b1ee8e3cadc70af7e5e0e727742ad3de91fd95bf65adbe4b92133"
+      }
+    },
+    {
+      "owner": "C1FF9C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 83602,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C1FF9C.log",
+        "sha256": "9ac32bf29e3af6f339f6a6d4fa304cc1c8381fe4bf22b59cb1cf4825813bb0a4"
+      }
+    },
+    {
+      "owner": "C1FFA4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 25,
+      "observed_owner_pcs": 25,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 181076,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C1FFA4.log",
+        "sha256": "b96590eb4a103dd7ce9982edd4fc750e28e130355a24aa9a3d23453b01a3732f"
+      }
+    },
+    {
+      "owner": "C2ED70",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 84,
+      "observed_owner_pcs": 84,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 46522,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2ED70.log",
+        "sha256": "ce3397b9ff41ad609ceab763c94f2e2c5036d8e4d55e422c151e41225eb47bc4"
+      }
+    },
+    {
+      "owner": "C2EE4A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 211,
+      "observed_owner_pcs": 158,
+      "unobserved_owner_pcs": [
+        "C2EEC2",
+        "C2EEC6",
+        "C2EEFE",
+        "C2EF00",
+        "C2EF02",
+        "C2EF06",
+        "C2EF0A",
+        "C2EF78",
+        "C2EF7A",
+        "C2EF7C",
+        "C2EF7E",
+        "C2EF82",
+        "C2EF84",
+        "C2EFB6",
+        "C2EFBA",
+        "C2EFCA",
+        "C2EFCE",
+        "C2EFD2",
+        "C2EFD4",
+        "C2EFD6",
+        "C2EFD8",
+        "C2EFDC",
+        "C2EFDE",
+        "C2EFE4",
+        "C2EFE6",
+        "C2EFE8",
+        "C2EFEA",
+        "C2EFEC",
+        "C2EFEE",
+        "C2EFF0",
+        "C2EFF4",
+        "C2EFFC",
+        "C2F000",
+        "C2F004",
+        "C2F006",
+        "C2F008",
+        "C2F00C",
+        "C2F00E",
+        "C2F014",
+        "C2F016",
+        "C2F018",
+        "C2F01A",
+        "C2F01C",
+        "C2F01E",
+        "C2F022",
+        "C2F024",
+        "C2F026",
+        "C2F028",
+        "C2F02C",
+        "C2F0B2",
+        "C2F0B4",
+        "C2F0B6",
+        "C2F0B8"
+      ],
+      "ordered_custom_writes": 84124,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2EE4A.log",
+        "sha256": "47ac1eea5a425ac3e219a1387bf667604e7e3264812b82bf9051cb9ebb2179b5"
+      }
+    },
+    {
+      "owner": "C2F0C6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2F0C6.log",
+        "sha256": "293cc1679a4ecb54c41a795779f0ae761cd8682db56074e5d880373843949190"
+      }
+    },
+    {
+      "owner": "C2F0F4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2F0F4.log",
+        "sha256": "291bff424e29ba6f04eb457db7ac7e61a9830b9ed6cbbf2628f300508af422a7"
+      }
+    },
+    {
+      "owner": "C2F128",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2F128.log",
+        "sha256": "40a04ce76ced21ab1b0ee8348ed2d9a8f9c7cecfe0d98ec341abc798af5d07c4"
+      }
+    },
+    {
+      "owner": "C2F156",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2F156.log",
+        "sha256": "c3b3b1321b89d29d172b8befcb0d499c4ddba629643673476292aff2c2fc0ff9"
+      }
+    },
+    {
+      "owner": "C2EA5A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2EA5A.log",
+        "sha256": "38a54c171b66ec517e749230d48d79a740462ef157e0b1aaeda55a784cfb13fa"
+      }
+    },
+    {
+      "owner": "C2EAD0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2EAD0.log",
+        "sha256": "08a6cca802499acfb6a3799f1e25059178d50cb045f1c319b899e1c9a371a736"
+      }
+    },
+    {
+      "owner": "C2EB4C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2EB4C.log",
+        "sha256": "ab8c73a4ddc10e7a31b1c862e7314f9899604aee7011a83cc29f57cc42759fee"
+      }
+    },
+    {
+      "owner": "C2EBC2",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 75,
+      "observed_owner_pcs": 75,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_real_C2EBC2.log",
+        "sha256": "f92340f50ed32afd41aba2ffebc8b5501767210c5839f1c0c040e2667dd7b178"
+      }
+    }
+  ],
+  "non_returning_source_loops": [
+    {
+      "owner": "C2F0C6",
+      "loop_pc": "C2F0DC",
+      "non_returning_observations": 16384,
+      "branches_per_observation": 64,
+      "observed_pcs": [
+        "C2F0C6",
+        "C2F0CA",
+        "C2F0D0",
+        "C2F0D2",
+        "C2F0D4",
+        "C2F0D6",
+        "C2F0D8",
+        "C2F0DA",
+        "C2F0DC"
+      ],
+      "log": {
+        "path": "build/recomp/segment_projection_parallel_C2F0C6.log",
+        "sha256": "4f52a36acbe9d5c95c79851415e440395b4c0c2e7c32ebd2b278e2d330cd59cb"
+      }
+    },
+    {
+      "owner": "C2F0F4",
+      "loop_pc": "C2F10E",
+      "non_returning_observations": 16384,
+      "branches_per_observation": 64,
+      "observed_pcs": [
+        "C2F0F4",
+        "C2F0F8",
+        "C2F0FE",
+        "C2F100",
+        "C2F102",
+        "C2F104",
+        "C2F106",
+        "C2F108",
+        "C2F10A",
+        "C2F10C",
+        "C2F10E"
+      ],
+      "log": {
+        "path": "build/recomp/segment_projection_parallel_C2F0F4.log",
+        "sha256": "d9bad187446f663217046b182dcb31ae5f07f93166563da33c9c94be62075a9b"
+      }
+    },
+    {
+      "owner": "C2F128",
+      "loop_pc": "C2F13E",
+      "non_returning_observations": 16384,
+      "branches_per_observation": 64,
+      "observed_pcs": [
+        "C2F128",
+        "C2F12C",
+        "C2F132",
+        "C2F134",
+        "C2F136",
+        "C2F138",
+        "C2F13A",
+        "C2F13C",
+        "C2F13E"
+      ],
+      "log": {
+        "path": "build/recomp/segment_projection_parallel_C2F128.log",
+        "sha256": "3a50e704274d5c9afead67a2fb38c5ee0dee489ee541ada303745d8a8efe3673"
+      }
+    },
+    {
+      "owner": "C2F156",
+      "loop_pc": "C2F170",
+      "non_returning_observations": 16384,
+      "branches_per_observation": 64,
+      "observed_pcs": [
+        "C2F156",
+        "C2F15A",
+        "C2F160",
+        "C2F162",
+        "C2F164",
+        "C2F166",
+        "C2F168",
+        "C2F16A",
+        "C2F16C",
+        "C2F16E",
+        "C2F170"
+      ],
+      "log": {
+        "path": "build/recomp/segment_projection_parallel_C2F156.log",
+        "sha256": "454078b1dad0fefbd47827a6e64099698ca4f8416798294fc5436a9a4cafe81e"
+      }
+    }
+  ],
+  "non_returning_observations": 65536,
+  "actual_dispatch_completed_calls": 36864,
+  "dispatch_fixtures": [
+    {
+      "owner": "C1FF9C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 20,
+      "unobserved_owner_pcs": [
+        "C1FFFE",
+        "C20000"
+      ],
+      "ordered_custom_writes": 8448,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C1FF9C_on.log",
+        "sha256": "5c26bf31194c9da24f8902d0b801c7ee194b593ed727ec305763484e84ed4909"
+      }
+    },
+    {
+      "owner": "C1FF9C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 20,
+      "unobserved_owner_pcs": [
+        "C1FFFE",
+        "C20000"
+      ],
+      "ordered_custom_writes": 8448,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C1FF9C_shadow.log",
+        "sha256": "5c26bf31194c9da24f8902d0b801c7ee194b593ed727ec305763484e84ed4909"
+      }
+    },
+    {
+      "owner": "C1FF9C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 20,
+      "unobserved_owner_pcs": [
+        "C1FFFE",
+        "C20000"
+      ],
+      "ordered_custom_writes": 8448,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C1FF9C_sandbox.log",
+        "sha256": "5c26bf31194c9da24f8902d0b801c7ee194b593ed727ec305763484e84ed4909"
+      }
+    },
+    {
+      "owner": "C1FFA4",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 25,
+      "observed_owner_pcs": 25,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 5872,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C1FFA4_on.log",
+        "sha256": "9edffe438323d87c2f83b9380e5a875f78e463e047456b2a46a020c753ba4cef"
+      }
+    },
+    {
+      "owner": "C1FFA4",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 25,
+      "observed_owner_pcs": 25,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 5872,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C1FFA4_shadow.log",
+        "sha256": "9edffe438323d87c2f83b9380e5a875f78e463e047456b2a46a020c753ba4cef"
+      }
+    },
+    {
+      "owner": "C1FFA4",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 25,
+      "observed_owner_pcs": 25,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 5872,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C1FFA4_sandbox.log",
+        "sha256": "9edffe438323d87c2f83b9380e5a875f78e463e047456b2a46a020c753ba4cef"
+      }
+    },
+    {
+      "owner": "C2ED70",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 84,
+      "observed_owner_pcs": 78,
+      "unobserved_owner_pcs": [
+        "C2EE02",
+        "C2EE04",
+        "C2EE0C",
+        "C2EE1C",
+        "C2EE1E",
+        "C2EE26"
+      ],
+      "ordered_custom_writes": 3328,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2ED70_on.log",
+        "sha256": "89755057cbe8109bcb3253eaa5e92b8ae39f08da6b7b8552f76b7d919f8e3842"
+      }
+    },
+    {
+      "owner": "C2ED70",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 84,
+      "observed_owner_pcs": 78,
+      "unobserved_owner_pcs": [
+        "C2EE02",
+        "C2EE04",
+        "C2EE0C",
+        "C2EE1C",
+        "C2EE1E",
+        "C2EE26"
+      ],
+      "ordered_custom_writes": 3328,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2ED70_shadow.log",
+        "sha256": "89755057cbe8109bcb3253eaa5e92b8ae39f08da6b7b8552f76b7d919f8e3842"
+      }
+    },
+    {
+      "owner": "C2ED70",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 84,
+      "observed_owner_pcs": 78,
+      "unobserved_owner_pcs": [
+        "C2EE02",
+        "C2EE04",
+        "C2EE0C",
+        "C2EE1C",
+        "C2EE1E",
+        "C2EE26"
+      ],
+      "ordered_custom_writes": 3328,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2ED70_sandbox.log",
+        "sha256": "89755057cbe8109bcb3253eaa5e92b8ae39f08da6b7b8552f76b7d919f8e3842"
+      }
+    },
+    {
+      "owner": "C2EE4A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 211,
+      "observed_owner_pcs": 141,
+      "unobserved_owner_pcs": [
+        "C2EE90",
+        "C2EEBC",
+        "C2EEBE",
+        "C2EEC0",
+        "C2EEC2",
+        "C2EEC6",
+        "C2EEFE",
+        "C2EF00",
+        "C2EF02",
+        "C2EF06",
+        "C2EF0A",
+        "C2EF36",
+        "C2EF38",
+        "C2EF3A",
+        "C2EF3C",
+        "C2EF40",
+        "C2EF44",
+        "C2EF46",
+        "C2EF48",
+        "C2EF4C",
+        "C2EF50",
+        "C2EF78",
+        "C2EF7A",
+        "C2EF7C",
+        "C2EF7E",
+        "C2EF82",
+        "C2EF84",
+        "C2EFB0",
+        "C2EFB2",
+        "C2EFB4",
+        "C2EFB6",
+        "C2EFBA",
+        "C2EFCA",
+        "C2EFCE",
+        "C2EFD2",
+        "C2EFD4",
+        "C2EFD6",
+        "C2EFD8",
+        "C2EFDC",
+        "C2EFDE",
+        "C2EFE4",
+        "C2EFE6",
+        "C2EFE8",
+        "C2EFEA",
+        "C2EFEC",
+        "C2EFEE",
+        "C2EFF0",
+        "C2EFF4",
+        "C2EFFC",
+        "C2F000",
+        "C2F004",
+        "C2F006",
+        "C2F008",
+        "C2F00C",
+        "C2F00E",
+        "C2F014",
+        "C2F016",
+        "C2F018",
+        "C2F01A",
+        "C2F01C",
+        "C2F01E",
+        "C2F022",
+        "C2F024",
+        "C2F026",
+        "C2F028",
+        "C2F02C",
+        "C2F0B2",
+        "C2F0B4",
+        "C2F0B6",
+        "C2F0B8"
+      ],
+      "ordered_custom_writes": 4204,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EE4A_on.log",
+        "sha256": "4146add19fcd06ee2cda7bf4b17ba3e549dc135c854155143c02cf9dcbd676b7"
+      }
+    },
+    {
+      "owner": "C2EE4A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 211,
+      "observed_owner_pcs": 141,
+      "unobserved_owner_pcs": [
+        "C2EE90",
+        "C2EEBC",
+        "C2EEBE",
+        "C2EEC0",
+        "C2EEC2",
+        "C2EEC6",
+        "C2EEFE",
+        "C2EF00",
+        "C2EF02",
+        "C2EF06",
+        "C2EF0A",
+        "C2EF36",
+        "C2EF38",
+        "C2EF3A",
+        "C2EF3C",
+        "C2EF40",
+        "C2EF44",
+        "C2EF46",
+        "C2EF48",
+        "C2EF4C",
+        "C2EF50",
+        "C2EF78",
+        "C2EF7A",
+        "C2EF7C",
+        "C2EF7E",
+        "C2EF82",
+        "C2EF84",
+        "C2EFB0",
+        "C2EFB2",
+        "C2EFB4",
+        "C2EFB6",
+        "C2EFBA",
+        "C2EFCA",
+        "C2EFCE",
+        "C2EFD2",
+        "C2EFD4",
+        "C2EFD6",
+        "C2EFD8",
+        "C2EFDC",
+        "C2EFDE",
+        "C2EFE4",
+        "C2EFE6",
+        "C2EFE8",
+        "C2EFEA",
+        "C2EFEC",
+        "C2EFEE",
+        "C2EFF0",
+        "C2EFF4",
+        "C2EFFC",
+        "C2F000",
+        "C2F004",
+        "C2F006",
+        "C2F008",
+        "C2F00C",
+        "C2F00E",
+        "C2F014",
+        "C2F016",
+        "C2F018",
+        "C2F01A",
+        "C2F01C",
+        "C2F01E",
+        "C2F022",
+        "C2F024",
+        "C2F026",
+        "C2F028",
+        "C2F02C",
+        "C2F0B2",
+        "C2F0B4",
+        "C2F0B6",
+        "C2F0B8"
+      ],
+      "ordered_custom_writes": 4204,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EE4A_shadow.log",
+        "sha256": "4146add19fcd06ee2cda7bf4b17ba3e549dc135c854155143c02cf9dcbd676b7"
+      }
+    },
+    {
+      "owner": "C2EE4A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 211,
+      "observed_owner_pcs": 141,
+      "unobserved_owner_pcs": [
+        "C2EE90",
+        "C2EEBC",
+        "C2EEBE",
+        "C2EEC0",
+        "C2EEC2",
+        "C2EEC6",
+        "C2EEFE",
+        "C2EF00",
+        "C2EF02",
+        "C2EF06",
+        "C2EF0A",
+        "C2EF36",
+        "C2EF38",
+        "C2EF3A",
+        "C2EF3C",
+        "C2EF40",
+        "C2EF44",
+        "C2EF46",
+        "C2EF48",
+        "C2EF4C",
+        "C2EF50",
+        "C2EF78",
+        "C2EF7A",
+        "C2EF7C",
+        "C2EF7E",
+        "C2EF82",
+        "C2EF84",
+        "C2EFB0",
+        "C2EFB2",
+        "C2EFB4",
+        "C2EFB6",
+        "C2EFBA",
+        "C2EFCA",
+        "C2EFCE",
+        "C2EFD2",
+        "C2EFD4",
+        "C2EFD6",
+        "C2EFD8",
+        "C2EFDC",
+        "C2EFDE",
+        "C2EFE4",
+        "C2EFE6",
+        "C2EFE8",
+        "C2EFEA",
+        "C2EFEC",
+        "C2EFEE",
+        "C2EFF0",
+        "C2EFF4",
+        "C2EFFC",
+        "C2F000",
+        "C2F004",
+        "C2F006",
+        "C2F008",
+        "C2F00C",
+        "C2F00E",
+        "C2F014",
+        "C2F016",
+        "C2F018",
+        "C2F01A",
+        "C2F01C",
+        "C2F01E",
+        "C2F022",
+        "C2F024",
+        "C2F026",
+        "C2F028",
+        "C2F02C",
+        "C2F0B2",
+        "C2F0B4",
+        "C2F0B6",
+        "C2F0B8"
+      ],
+      "ordered_custom_writes": 4204,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EE4A_sandbox.log",
+        "sha256": "4146add19fcd06ee2cda7bf4b17ba3e549dc135c854155143c02cf9dcbd676b7"
+      }
+    },
+    {
+      "owner": "C2F0C6",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F0C6_on.log",
+        "sha256": "6622d1d83a5fd27c2a5ec489f53c4fd9fd223fce719d8b307a20824d9d9230cf"
+      }
+    },
+    {
+      "owner": "C2F0C6",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F0C6_shadow.log",
+        "sha256": "6622d1d83a5fd27c2a5ec489f53c4fd9fd223fce719d8b307a20824d9d9230cf"
+      }
+    },
+    {
+      "owner": "C2F0C6",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F0C6_sandbox.log",
+        "sha256": "6622d1d83a5fd27c2a5ec489f53c4fd9fd223fce719d8b307a20824d9d9230cf"
+      }
+    },
+    {
+      "owner": "C2F0F4",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F0F4_on.log",
+        "sha256": "293a4593e329c6174096319a5208d8f013ba977bf9fc835f25c4e395cd05a8eb"
+      }
+    },
+    {
+      "owner": "C2F0F4",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F0F4_shadow.log",
+        "sha256": "293a4593e329c6174096319a5208d8f013ba977bf9fc835f25c4e395cd05a8eb"
+      }
+    },
+    {
+      "owner": "C2F0F4",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 42,
+      "observed_owner_pcs": 42,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F0F4_sandbox.log",
+        "sha256": "293a4593e329c6174096319a5208d8f013ba977bf9fc835f25c4e395cd05a8eb"
+      }
+    },
+    {
+      "owner": "C2F128",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F128_on.log",
+        "sha256": "90c83f3e2608f48f05d7e77ad1c65c0a103e90a11eb776376c70c1d656b9744b"
+      }
+    },
+    {
+      "owner": "C2F128",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F128_shadow.log",
+        "sha256": "90c83f3e2608f48f05d7e77ad1c65c0a103e90a11eb776376c70c1d656b9744b"
+      }
+    },
+    {
+      "owner": "C2F128",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F128_sandbox.log",
+        "sha256": "90c83f3e2608f48f05d7e77ad1c65c0a103e90a11eb776376c70c1d656b9744b"
+      }
+    },
+    {
+      "owner": "C2F156",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F156_on.log",
+        "sha256": "c059d30d567f01f296ebe694e58347e0f5202c52570da13435dcb350e58f339f"
+      }
+    },
+    {
+      "owner": "C2F156",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F156_shadow.log",
+        "sha256": "c059d30d567f01f296ebe694e58347e0f5202c52570da13435dcb350e58f339f"
+      }
+    },
+    {
+      "owner": "C2F156",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2F156_sandbox.log",
+        "sha256": "c059d30d567f01f296ebe694e58347e0f5202c52570da13435dcb350e58f339f"
+      }
+    },
+    {
+      "owner": "C2EA5A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EA5A_on.log",
+        "sha256": "3f3f43d9bdcf676f1cbaf9e394bd781e562766bd08dac0631c07b7ed1aba9094"
+      }
+    },
+    {
+      "owner": "C2EA5A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EA5A_shadow.log",
+        "sha256": "3f3f43d9bdcf676f1cbaf9e394bd781e562766bd08dac0631c07b7ed1aba9094"
+      }
+    },
+    {
+      "owner": "C2EA5A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EA5A_sandbox.log",
+        "sha256": "3f3f43d9bdcf676f1cbaf9e394bd781e562766bd08dac0631c07b7ed1aba9094"
+      }
+    },
+    {
+      "owner": "C2EAD0",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EAD0_on.log",
+        "sha256": "0c30f21b891c9d9efc94da4b7120bd63f9fe16de73cb53ce1c83e8da31105e06"
+      }
+    },
+    {
+      "owner": "C2EAD0",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EAD0_shadow.log",
+        "sha256": "0c30f21b891c9d9efc94da4b7120bd63f9fe16de73cb53ce1c83e8da31105e06"
+      }
+    },
+    {
+      "owner": "C2EAD0",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EAD0_sandbox.log",
+        "sha256": "0c30f21b891c9d9efc94da4b7120bd63f9fe16de73cb53ce1c83e8da31105e06"
+      }
+    },
+    {
+      "owner": "C2EB4C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EB4C_on.log",
+        "sha256": "09563cba4529e5bffbce74690d6a73c09a013e883c6abcb617a71c0cd01aac04"
+      }
+    },
+    {
+      "owner": "C2EB4C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EB4C_shadow.log",
+        "sha256": "09563cba4529e5bffbce74690d6a73c09a013e883c6abcb617a71c0cd01aac04"
+      }
+    },
+    {
+      "owner": "C2EB4C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 74,
+      "observed_owner_pcs": 74,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EB4C_sandbox.log",
+        "sha256": "09563cba4529e5bffbce74690d6a73c09a013e883c6abcb617a71c0cd01aac04"
+      }
+    },
+    {
+      "owner": "C2EBC2",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 75,
+      "observed_owner_pcs": 75,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EBC2_on.log",
+        "sha256": "369976a54bcfd9cb0f97fe88f91972474f09c52262bac8da242f5e78c1af1d26"
+      }
+    },
+    {
+      "owner": "C2EBC2",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 75,
+      "observed_owner_pcs": 75,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EBC2_shadow.log",
+        "sha256": "369976a54bcfd9cb0f97fe88f91972474f09c52262bac8da242f5e78c1af1d26"
+      }
+    },
+    {
+      "owner": "C2EBC2",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 75,
+      "observed_owner_pcs": 75,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/segment_projection_dispatch_C2EBC2_sandbox.log",
+        "sha256": "369976a54bcfd9cb0f97fe88f91972474f09c52262bac8da242f5e78c1af1d26"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C1FF9C": {
+          "calls": 1070,
+          "compared": 1048,
+          "matched": 1048,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 22
+        },
+        "C1FFA4": {
+          "calls": 559,
+          "compared": 539,
+          "matched": 539,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 20
+        },
+        "C2ED70": {
+          "calls": 1,
+          "compared": 1,
+          "matched": 1,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2EE4A": {
+          "calls": 79558,
+          "compared": 77793,
+          "matched": 77793,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1765
+        },
+        "C2F0C6": {
+          "calls": 7,
+          "compared": 7,
+          "matched": 7,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2F0F4": {
+          "calls": 15,
+          "compared": 15,
+          "matched": 15,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2F128": {
+          "calls": 2,
+          "compared": 2,
+          "matched": 2,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2F156": {
+          "calls": 7,
+          "compared": 7,
+          "matched": 7,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2EA5A": {
+          "calls": 14875,
+          "compared": 14674,
+          "matched": 14674,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 201
+        },
+        "C2EAD0": {
+          "calls": 9523,
+          "compared": 9419,
+          "matched": 9419,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 104
+        },
+        "C2EB4C": {
+          "calls": 1666,
+          "compared": 1643,
+          "matched": 1643,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 23
+        },
+        "C2EBC2": {
+          "calls": 1716,
+          "compared": 1690,
+          "matched": 1690,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 26
+        }
+      },
+      "sandbox": {
+        "C1FF9C": {
+          "calls": 1069,
+          "compared": 1069,
+          "matched": 1069,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1FFA4": {
+          "calls": 556,
+          "compared": 556,
+          "matched": 556,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2ED70": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2EE4A": {
+          "calls": 78238,
+          "compared": 78238,
+          "matched": 78238,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2F0C6": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2F0F4": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2F128": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2F156": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2EA5A": {
+          "calls": 21770,
+          "compared": 21770,
+          "matched": 21770,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2EAD0": {
+          "calls": 16730,
+          "compared": 16730,
+          "matched": 16730,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2EB4C": {
+          "calls": 3764,
+          "compared": 3764,
+          "matched": 3764,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2EBC2": {
+          "calls": 4001,
+          "compared": 4001,
+          "matched": 4001,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C2EA5A",
+            "name": "segment_crossing",
+            "calls": 6882,
+            "compared": 6738,
+            "matched": 6738,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 144,
+            "mean_cycles": 963,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EAD0",
+            "name": "segment_crossing",
+            "calls": 4029,
+            "compared": 3967,
+            "matched": 3967,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 62,
+            "mean_cycles": 1011,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0C6",
+            "name": "segment_crossing",
+            "calls": 7,
+            "compared": 7,
+            "matched": 7,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 724,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0F4",
+            "name": "segment_crossing",
+            "calls": 13,
+            "compared": 13,
+            "matched": 13,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 745,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EB4C",
+            "name": "segment_crossing",
+            "calls": 994,
+            "compared": 976,
+            "matched": 976,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 18,
+            "mean_cycles": 957,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EBC2",
+            "name": "segment_crossing",
+            "calls": 1139,
+            "compared": 1119,
+            "matched": 1119,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 20,
+            "mean_cycles": 922,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F156",
+            "name": "segment_crossing",
+            "calls": 4,
+            "compared": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 726,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ED70",
+            "name": "segment_projected",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2750,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F128",
+            "name": "segment_crossing",
+            "calls": 2,
+            "compared": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 734,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EE4A",
+            "name": "segment_clipped",
+            "calls": 54039,
+            "compared": 52755,
+            "matched": 52755,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1284,
+            "mean_cycles": 3011,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF9C",
+            "name": "segment_selected",
+            "calls": 1070,
+            "compared": 1048,
+            "matched": 1048,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 22,
+            "mean_cycles": 2981,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FFA4",
+            "name": "segment_selected",
+            "calls": 559,
+            "compared": 539,
+            "matched": 539,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 20,
+            "mean_cycles": 4512,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF9C_C1FFA4_C2ED70_C2EE4A_C2F0C6_C2F0F4_C2F128_C2F156_C2EA5A_C2EAD0_C2EB4C_C2EBC2_demo01_shadow.json",
+          "sha256": "71918b444d99f04a6110a5520356f1515e708afd61838227d57dd35e20f2eb60"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C2EA5A",
+            "name": "segment_crossing",
+            "calls": 6589,
+            "compared": 6537,
+            "matched": 6537,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 52,
+            "mean_cycles": 974,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EAD0",
+            "name": "segment_crossing",
+            "calls": 4090,
+            "compared": 4057,
+            "matched": 4057,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 33,
+            "mean_cycles": 1030,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0C6",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0F4",
+            "name": "segment_crossing",
+            "calls": 2,
+            "compared": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 746,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EB4C",
+            "name": "segment_crossing",
+            "calls": 672,
+            "compared": 667,
+            "matched": 667,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 5,
+            "mean_cycles": 1005,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EBC2",
+            "name": "segment_crossing",
+            "calls": 577,
+            "compared": 571,
+            "matched": 571,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 6,
+            "mean_cycles": 1037,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F156",
+            "name": "segment_crossing",
+            "calls": 2,
+            "compared": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 732,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ED70",
+            "name": "segment_projected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F128",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EE4A",
+            "name": "segment_clipped",
+            "calls": 20580,
+            "compared": 20154,
+            "matched": 20154,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 426,
+            "mean_cycles": 2739,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF9C",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FFA4",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF9C_C1FFA4_C2ED70_C2EE4A_C2F0C6_C2F0F4_C2F128_C2F156_C2EA5A_C2EAD0_C2EB4C_C2EBC2_qual_carrier_success_shadow.json",
+          "sha256": "4dc8432c5d4ee7aed9704ee00c1767ef756421a5c921d27f127a2a972a737a0d"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C2EA5A",
+            "name": "segment_crossing",
+            "calls": 1404,
+            "compared": 1399,
+            "matched": 1399,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 5,
+            "mean_cycles": 942,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EAD0",
+            "name": "segment_crossing",
+            "calls": 1404,
+            "compared": 1395,
+            "matched": 1395,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 9,
+            "mean_cycles": 1047,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0C6",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0F4",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EB4C",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EBC2",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F156",
+            "name": "segment_crossing",
+            "calls": 1,
+            "compared": 1,
+            "matched": 1,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 736,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ED70",
+            "name": "segment_projected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F128",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EE4A",
+            "name": "segment_clipped",
+            "calls": 4939,
+            "compared": 4884,
+            "matched": 4884,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 55,
+            "mean_cycles": 2995,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF9C",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FFA4",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF9C_C1FFA4_C2ED70_C2EE4A_C2F0C6_C2F0F4_C2F128_C2F156_C2EA5A_C2EAD0_C2EB4C_C2EBC2_qual_fail_crashes_shadow.json",
+          "sha256": "3c054c3e2b37c43f73becf5fc1a856932e603423fd5ef3d31c734adb96842447"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C2EA5A",
+            "name": "segment_crossing",
+            "calls": 6886,
+            "compared": 6886,
+            "matched": 6886,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 956,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EAD0",
+            "name": "segment_crossing",
+            "calls": 4033,
+            "compared": 4033,
+            "matched": 4033,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1003,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0C6",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0F4",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EB4C",
+            "name": "segment_crossing",
+            "calls": 994,
+            "compared": 994,
+            "matched": 994,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 951,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EBC2",
+            "name": "segment_crossing",
+            "calls": 1139,
+            "compared": 1139,
+            "matched": 1139,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 917,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F156",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ED70",
+            "name": "segment_projected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F128",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EE4A",
+            "name": "segment_clipped",
+            "calls": 54065,
+            "compared": 54065,
+            "matched": 54065,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2640,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF9C",
+            "name": "segment_selected",
+            "calls": 1069,
+            "compared": 1069,
+            "matched": 1069,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2931,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FFA4",
+            "name": "segment_selected",
+            "calls": 556,
+            "compared": 556,
+            "matched": 556,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2990,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF9C_C1FFA4_C2ED70_C2EE4A_C2F0C6_C2F0F4_C2F128_C2F156_C2EA5A_C2EAD0_C2EB4C_C2EBC2_demo01_sandbox.json",
+          "sha256": "5f69e680fc63abff6772cc1c9250c65a996d745980310eb610d2b11aa469fd16"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C2EA5A",
+            "name": "segment_crossing",
+            "calls": 13480,
+            "compared": 13480,
+            "matched": 13480,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 998,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EAD0",
+            "name": "segment_crossing",
+            "calls": 11293,
+            "compared": 11293,
+            "matched": 11293,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1064,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0C6",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0F4",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EB4C",
+            "name": "segment_crossing",
+            "calls": 2770,
+            "compared": 2770,
+            "matched": 2770,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 948,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EBC2",
+            "name": "segment_crossing",
+            "calls": 2862,
+            "compared": 2862,
+            "matched": 2862,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 968,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F156",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ED70",
+            "name": "segment_projected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F128",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EE4A",
+            "name": "segment_clipped",
+            "calls": 19234,
+            "compared": 19234,
+            "matched": 19234,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2221,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF9C",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FFA4",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF9C_C1FFA4_C2ED70_C2EE4A_C2F0C6_C2F0F4_C2F128_C2F156_C2EA5A_C2EAD0_C2EB4C_C2EBC2_qual_carrier_success_sandbox.json",
+          "sha256": "ec5ff1dd7c774e92f40e33b024b3cefa64a4c953a93e67978d10df84eec22805"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C2EA5A",
+            "name": "segment_crossing",
+            "calls": 1404,
+            "compared": 1404,
+            "matched": 1404,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 942,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EAD0",
+            "name": "segment_crossing",
+            "calls": 1404,
+            "compared": 1404,
+            "matched": 1404,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1044,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0C6",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F0F4",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EB4C",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EBC2",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F156",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2ED70",
+            "name": "segment_projected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2F128",
+            "name": "segment_crossing",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2EE4A",
+            "name": "segment_clipped",
+            "calls": 4939,
+            "compared": 4939,
+            "matched": 4939,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2546,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF9C",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FFA4",
+            "name": "segment_selected",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF9C_C1FFA4_C2ED70_C2EE4A_C2F0C6_C2F0F4_C2F128_C2F156_C2EA5A_C2EAD0_C2EB4C_C2EBC2_qual_fail_crashes_sandbox.json",
+          "sha256": "b18d11eec7b3d169896f3ddc270b1172ec9733371f32dad2a1e94d66507afe55"
+        }
+      }
+    ],
+    "shadow_matches": 106838,
+    "sandbox_matches": 126128,
+    "owners_with_completed_recording_comparisons": [
+      "C1FF9C",
+      "C1FFA4",
+      "C2ED70",
+      "C2EE4A",
+      "C2F0C6",
+      "C2F0F4",
+      "C2F128",
+      "C2F156",
+      "C2EA5A",
+      "C2EAD0",
+      "C2EB4C",
+      "C2EBC2"
+    ]
+  },
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "actual_clock_and_busy_reads": true,
+    "initial_fixture_writes_per_odd_case": 5,
+    "initial_fixture_blits_owners": [
+      "C1FF9C",
+      "C1FFA4",
+      "C2ED70",
+      "C2EE4A"
+    ],
+    "real_children_execute_original_bytes": true,
+    "actual_dispatch_uses_generated_child_continuations": true,
+    "shared_machine_observer_unchanged": true,
+    "classification_distinct_from_packet_observation": true
+  },
+  "instruction_dma": {
+    "local_instructions": 663,
+    "local_cases": 21216,
+    "previous_unique_instructions": 28931,
+    "overlap_instructions": 552,
+    "overlap_pcs": [
+      "C2EA5A",
+      "C2EA5E",
+      "C2EA64",
+      "C2EA66",
+      "C2EA68",
+      "C2EA6A",
+      "C2EA6C",
+      "C2EA6E",
+      "C2EA70",
+      "C2EA72",
+      "C2EA74",
+      "C2EA76",
+      "C2EA78",
+      "C2EA7A",
+      "C2EA7C",
+      "C2EA7E",
+      "C2EA80",
+      "C2EA82",
+      "C2EA84",
+      "C2EA86",
+      "C2EA88",
+      "C2EA8A",
+      "C2EA8C",
+      "C2EA8E",
+      "C2EA90",
+      "C2EA92",
+      "C2EA94",
+      "C2EA96",
+      "C2EA98",
+      "C2EA9A",
+      "C2EA9C",
+      "C2EA9E",
+      "C2EAA0",
+      "C2EAA2",
+      "C2EAA4",
+      "C2EAA6",
+      "C2EAA8",
+      "C2EAAA",
+      "C2EAAC",
+      "C2EAAE",
+      "C2EAB0",
+      "C2EAB2",
+      "C2EAB4",
+      "C2EAB6",
+      "C2EAB8",
+      "C2EABA",
+      "C2EABC",
+      "C2EABE",
+      "C2EAC0",
+      "C2EAC2",
+      "C2EAC4",
+      "C2EAC6",
+      "C2EAC8",
+      "C2EACC",
+      "C2EAD0",
+      "C2EAD4",
+      "C2EADA",
+      "C2EADC",
+      "C2EADE",
+      "C2EAE0",
+      "C2EAE2",
+      "C2EAE4",
+      "C2EAE6",
+      "C2EAE8",
+      "C2EAEA",
+      "C2EAEC",
+      "C2EAEE",
+      "C2EAF0",
+      "C2EAF2",
+      "C2EAF4",
+      "C2EAF6",
+      "C2EAF8",
+      "C2EAFA",
+      "C2EAFC",
+      "C2EAFE",
+      "C2EB00",
+      "C2EB02",
+      "C2EB04",
+      "C2EB06",
+      "C2EB08",
+      "C2EB0A",
+      "C2EB0C",
+      "C2EB0E",
+      "C2EB10",
+      "C2EB12",
+      "C2EB14",
+      "C2EB16",
+      "C2EB18",
+      "C2EB1A",
+      "C2EB1C",
+      "C2EB1E",
+      "C2EB20",
+      "C2EB22",
+      "C2EB24",
+      "C2EB26",
+      "C2EB28",
+      "C2EB2A",
+      "C2EB2C",
+      "C2EB2E",
+      "C2EB30",
+      "C2EB32",
+      "C2EB34",
+      "C2EB36",
+      "C2EB38",
+      "C2EB3A",
+      "C2EB3C",
+      "C2EB3E",
+      "C2EB40",
+      "C2EB42",
+      "C2EB44",
+      "C2EB48",
+      "C2EB4C",
+      "C2EB50",
+      "C2EB56",
+      "C2EB58",
+      "C2EB5A",
+      "C2EB5C",
+      "C2EB5E",
+      "C2EB60",
+      "C2EB62",
+      "C2EB64",
+      "C2EB66",
+      "C2EB68",
+      "C2EB6A",
+      "C2EB6C",
+      "C2EB6E",
+      "C2EB70",
+      "C2EB72",
+      "C2EB74",
+      "C2EB76",
+      "C2EB78",
+      "C2EB7A",
+      "C2EB7C",
+      "C2EB7E",
+      "C2EB80",
+      "C2EB82",
+      "C2EB84",
+      "C2EB86",
+      "C2EB88",
+      "C2EB8A",
+      "C2EB8C",
+      "C2EB8E",
+      "C2EB90",
+      "C2EB92",
+      "C2EB94",
+      "C2EB96",
+      "C2EB98",
+      "C2EB9A",
+      "C2EB9C",
+      "C2EB9E",
+      "C2EBA0",
+      "C2EBA2",
+      "C2EBA4",
+      "C2EBA6",
+      "C2EBA8",
+      "C2EBAA",
+      "C2EBAC",
+      "C2EBAE",
+      "C2EBB0",
+      "C2EBB2",
+      "C2EBB4",
+      "C2EBB6",
+      "C2EBB8",
+      "C2EBBA",
+      "C2EBBE",
+      "C2EBC2",
+      "C2EBC6",
+      "C2EBCC",
+      "C2EBCE",
+      "C2EBD0",
+      "C2EBD2",
+      "C2EBD4",
+      "C2EBD6",
+      "C2EBD8",
+      "C2EBDA",
+      "C2EBDC",
+      "C2EBDE",
+      "C2EBE0",
+      "C2EBE2",
+      "C2EBE4",
+      "C2EBE6",
+      "C2EBE8",
+      "C2EBEA",
+      "C2EBEC",
+      "C2EBEE",
+      "C2EBF0",
+      "C2EBF2",
+      "C2EBF4",
+      "C2EBF6",
+      "C2EBF8",
+      "C2EBFA",
+      "C2EBFC",
+      "C2EBFE",
+      "C2EC00",
+      "C2EC02",
+      "C2EC04",
+      "C2EC06",
+      "C2EC08",
+      "C2EC0A",
+      "C2EC0C",
+      "C2EC0E",
+      "C2EC10",
+      "C2EC12",
+      "C2EC14",
+      "C2EC16",
+      "C2EC18",
+      "C2EC1A",
+      "C2EC1C",
+      "C2EC1E",
+      "C2EC20",
+      "C2EC22",
+      "C2EC24",
+      "C2EC26",
+      "C2EC28",
+      "C2EC2A",
+      "C2EC2C",
+      "C2EC2E",
+      "C2EC30",
+      "C2EC32",
+      "C2EC34",
+      "C2EC36",
+      "C2EC3E",
+      "C2EC40",
+      "C2EC42",
+      "C2EC44",
+      "C2EC46",
+      "C2EC48",
+      "C2EC4A",
+      "C2EC4C",
+      "C2EC4E",
+      "C2EC50",
+      "C2EC52",
+      "C2EC54",
+      "C2EC56",
+      "C2EC58",
+      "C2EC5A",
+      "C2EC5E",
+      "C2EC60",
+      "C2EC62",
+      "C2EC66",
+      "C2EE44",
+      "C2EE46",
+      "C2EE48",
+      "C2EE4A",
+      "C2EE4E",
+      "C2EE54",
+      "C2EE5A",
+      "C2EE60",
+      "C2EE64",
+      "C2EE66",
+      "C2EE68",
+      "C2EE6C",
+      "C2EE70",
+      "C2EE72",
+      "C2EE74",
+      "C2EE78",
+      "C2EE7C",
+      "C2EE82",
+      "C2EE84",
+      "C2EE86",
+      "C2EE88",
+      "C2EE8A",
+      "C2EE8E",
+      "C2EE90",
+      "C2EE94",
+      "C2EE96",
+      "C2EE98",
+      "C2EE9A",
+      "C2EE9E",
+      "C2EEA2",
+      "C2EEA6",
+      "C2EEA8",
+      "C2EEAA",
+      "C2EEAC",
+      "C2EEB0",
+      "C2EEB4",
+      "C2EEBA",
+      "C2EEBC",
+      "C2EEBE",
+      "C2EEC0",
+      "C2EEC2",
+      "C2EEC6",
+      "C2EECA",
+      "C2EECC",
+      "C2EECE",
+      "C2EED0",
+      "C2EED2",
+      "C2EED4",
+      "C2EED8",
+      "C2EEDC",
+      "C2EEE0",
+      "C2EEE2",
+      "C2EEE4",
+      "C2EEE8",
+      "C2EEEC",
+      "C2EEEE",
+      "C2EEF4",
+      "C2EEF8",
+      "C2EEFA",
+      "C2EEFE",
+      "C2EF00",
+      "C2EF02",
+      "C2EF06",
+      "C2EF0A",
+      "C2EF0E",
+      "C2EF12",
+      "C2EF14",
+      "C2EF18",
+      "C2EF1C",
+      "C2EF20",
+      "C2EF22",
+      "C2EF26",
+      "C2EF2A",
+      "C2EF2C",
+      "C2EF32",
+      "C2EF36",
+      "C2EF38",
+      "C2EF3A",
+      "C2EF3C",
+      "C2EF40",
+      "C2EF44",
+      "C2EF46",
+      "C2EF48",
+      "C2EF4C",
+      "C2EF50",
+      "C2EF54",
+      "C2EF58",
+      "C2EF5A",
+      "C2EF5C",
+      "C2EF60",
+      "C2EF64",
+      "C2EF66",
+      "C2EF6A",
+      "C2EF6E",
+      "C2EF70",
+      "C2EF76",
+      "C2EF78",
+      "C2EF7A",
+      "C2EF7C",
+      "C2EF7E",
+      "C2EF82",
+      "C2EF84",
+      "C2EF88",
+      "C2EF8A",
+      "C2EF8C",
+      "C2EF8E",
+      "C2EF92",
+      "C2EF96",
+      "C2EF9A",
+      "C2EF9C",
+      "C2EF9E",
+      "C2EFA2",
+      "C2EFA6",
+      "C2EFA8",
+      "C2EFAE",
+      "C2EFB0",
+      "C2EFB2",
+      "C2EFB4",
+      "C2EFB6",
+      "C2EFBA",
+      "C2EFBE",
+      "C2EFC0",
+      "C2EFC2",
+      "C2EFC4",
+      "C2EFC6",
+      "C2EFC8",
+      "C2EFCA",
+      "C2EFCE",
+      "C2EFD2",
+      "C2EFD4",
+      "C2EFD6",
+      "C2EFD8",
+      "C2EFDC",
+      "C2EFDE",
+      "C2EFE4",
+      "C2EFE6",
+      "C2EFE8",
+      "C2EFEA",
+      "C2EFEC",
+      "C2EFEE",
+      "C2EFF0",
+      "C2EFF4",
+      "C2EFF6",
+      "C2EFF8",
+      "C2EFFA",
+      "C2EFFC",
+      "C2F000",
+      "C2F004",
+      "C2F006",
+      "C2F008",
+      "C2F00C",
+      "C2F00E",
+      "C2F014",
+      "C2F016",
+      "C2F018",
+      "C2F01A",
+      "C2F01C",
+      "C2F01E",
+      "C2F022",
+      "C2F024",
+      "C2F026",
+      "C2F028",
+      "C2F02C",
+      "C2F02E",
+      "C2F030",
+      "C2F032",
+      "C2F034",
+      "C2F036",
+      "C2F038",
+      "C2F03A",
+      "C2F042",
+      "C2F044",
+      "C2F046",
+      "C2F04A",
+      "C2F04C",
+      "C2F050",
+      "C2F052",
+      "C2F056",
+      "C2F058",
+      "C2F05C",
+      "C2F05E",
+      "C2F062",
+      "C2F064",
+      "C2F068",
+      "C2F06A",
+      "C2F06E",
+      "C2F070",
+      "C2F074",
+      "C2F076",
+      "C2F078",
+      "C2F07A",
+      "C2F07E",
+      "C2F080",
+      "C2F088",
+      "C2F08E",
+      "C2F090",
+      "C2F092",
+      "C2F094",
+      "C2F09C",
+      "C2F0A0",
+      "C2F0A4",
+      "C2F0A8",
+      "C2F0AE",
+      "C2F0B2",
+      "C2F0B4",
+      "C2F0B6",
+      "C2F0B8",
+      "C2F0BA",
+      "C2F0BE",
+      "C2F0C0",
+      "C2F0C4",
+      "C2F0C6",
+      "C2F0CA",
+      "C2F0D0",
+      "C2F0D2",
+      "C2F0D4",
+      "C2F0D6",
+      "C2F0D8",
+      "C2F0DA",
+      "C2F0DC",
+      "C2F0DE",
+      "C2F0E0",
+      "C2F0E2",
+      "C2F0E4",
+      "C2F0E6",
+      "C2F0E8",
+      "C2F0EA",
+      "C2F0EC",
+      "C2F0EE",
+      "C2F0F0",
+      "C2F0F4",
+      "C2F0F8",
+      "C2F0FE",
+      "C2F100",
+      "C2F102",
+      "C2F104",
+      "C2F106",
+      "C2F108",
+      "C2F10A",
+      "C2F10C",
+      "C2F10E",
+      "C2F110",
+      "C2F112",
+      "C2F114",
+      "C2F116",
+      "C2F118",
+      "C2F11A",
+      "C2F11C",
+      "C2F11E",
+      "C2F120",
+      "C2F122",
+      "C2F124",
+      "C2F128",
+      "C2F12C",
+      "C2F132",
+      "C2F134",
+      "C2F136",
+      "C2F138",
+      "C2F13A",
+      "C2F13C",
+      "C2F13E",
+      "C2F140",
+      "C2F142",
+      "C2F144",
+      "C2F146",
+      "C2F148",
+      "C2F14A",
+      "C2F14C",
+      "C2F14E",
+      "C2F150",
+      "C2F152",
+      "C2F156",
+      "C2F15A",
+      "C2F160",
+      "C2F162",
+      "C2F164",
+      "C2F166",
+      "C2F168",
+      "C2F16A",
+      "C2F16C",
+      "C2F16E",
+      "C2F170",
+      "C2F172",
+      "C2F174",
+      "C2F176",
+      "C2F178",
+      "C2F17A",
+      "C2F17C",
+      "C2F17E",
+      "C2F180",
+      "C2F182",
+      "C2F184",
+      "C2F186",
+      "C2F18E",
+      "C2F190",
+      "C2F192",
+      "C2F194",
+      "C2F196",
+      "C2F198",
+      "C2F19A",
+      "C2F19C",
+      "C2F19E",
+      "C2F1A0",
+      "C2F1A2",
+      "C2F1A4",
+      "C2F1A6",
+      "C2F1A8",
+      "C2F1AA",
+      "C2F1AE",
+      "C2F1B0",
+      "C2F1B2",
+      "C2F1B6"
+    ],
+    "combined_unique_instructions": 29042,
+    "combined_cases": 929344,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 37,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "tools/recomp/audit_render_leaf_helpers_scope.py",
+      "sha256": "8c151082a7ab5b4901d177a04c09cf81292ded22c3d608d27e9f5bfb572c3c46"
+    },
+    {
+      "path": "analysis/data/render_leaf_helpers_scope_inventory.json",
+      "sha256": "96d6f04483b40edc0393c09f65383b708bd0717d7c32a88fdbec3865f227f511"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_child_call.c",
+      "sha256": "570889406cd1f5158564ebd468bbb6991ea883b7b0e811b90b547a233f5ef394"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_bus_budget.c",
+      "sha256": "291b65daf67fc6b2663c06fd9560d4f168da37a5fdc33cb02b16f1a292b4075a"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_hardware_log.c",
+      "sha256": "4de438129c65ce5d75a89296ec2add9d4b45bc52d56219adf97564857fc543b8"
+    },
+    {
+      "path": "analysis/data/render_entry_helpers_scope_inventory.json",
+      "sha256": "7f7d4a0747c69bceb4df1a2533df763ff17d38252084e2d1ca212db7bd09af50"
+    },
+    {
+      "path": "tools/recomp/audit_render_entry_helpers_scope.py",
+      "sha256": "2b61368f8565a38f58a0adf2ea378817e50feb318252286f7651e985d6d6f914"
+    },
+    {
+      "path": "port/game/glue/glue_render_leaf_helpers_math.h",
+      "sha256": "a36874936a741e02cda9eab077ef7118cd04e6fa568217e4304c3cb470a169ad"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_child_call.c",
+      "sha256": "24144fe3677ed47e7d5da543004ff439f30d385e42a6d60f510f2069fd2989df"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_bus_budget.c",
+      "sha256": "08d367ed7ac8485c1de820403edf362eeabe3e0b3089b108deca83bde146e30e"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_hardware_log.c",
+      "sha256": "9a07710fa426f867b4d5277f14424e0f40d9d1e6073f8f0bde1812eaabc8b1fa"
+    }
+  ],
+  "full_gate": {
+    "rows": 600,
+    "recordings": 3,
+    "shadow_matches": 568446,
+    "sandbox_matches": 443870,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308147,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "b65e2d079ce3f633a86f107a7e6276e28e5c422ba17c53da727e1b8385a2993a"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207396,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "fd9fadc93a47d1cfd72f9e91c31abf40701e6484722a158c0c0063194ab77a35"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52903,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "5c668259020e0a8ac73c83e712dd076f9f89e6d60cbc46d5b0df5977be11c4c0"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150619,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "abd3b5ea514feb297c178e55c223aa5f4a70cafcb585c66017802f7779d4b1b1"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 248005,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "d0cec0d55f6911eb2f61e737928fdaec29e462dfbc1fd52feb86c5a7fd4b420a"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45246,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "1281152bb1e771a677cac93742631661d02a8b0f715df3d3a72c5aaa3f327b79"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 424,
+    "all_different_pixels": 34144,
+    "deferred": true
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 2063047604,
+    "build_gib": 1.921
+  },
+  "remaining_export_bodies_unchanged": {
+    "port/game/glue/glue_batch21.c:int glue_C1F2EE(void)": "b386bf40eef5db084b3c8af88d92b3a8c08859f1988c9772916725bf5f065b1e",
+    "port/game/glue/glue_batch51.c:int edge_end_registers(const int16_t p[3], const int16_t q[3], int rounded, int16_t last[3])": "b71dc015cbe5757ac09c0e2bcaddb5c9192226d54d9e29601045d472ae8804b4"
+  },
+  "limits": [
+    "Controlled whole calls cover all 663 source PCs; real-child calls cover 610 and retain every exact missing PC list.",
+    "Four unrounded parallel branches have 65536 independent non-returning observations. The test stops observation after 64 branches; it never supplies a game return or modifies the production loops.",
+    "An extreme original clipped input entered a real parallel loop and failed the returning proof budget. Its log is retained; completed original-child fixtures use a bounded returning domain.",
+    "Whole real-child fixtures execute original child bytes with service held. Dispatch separately uses actual production generated-child continuations. No production glue invokes opcode handlers.",
+    "Both actual selected-segment targets, LEA setups, original table slots and observed incoming edges are sealed. No complete selector-table domain or runtime guard is invented.",
+    "All twelve owners have positive completed normal-C recording comparisons. Child Z fixtures vary independently across successive calls, covering opposite-plane and other-axis decisions.",
+    "Larger corner/view owners, other older partial adapters, C2C392, C1612C graphics-wait integration and full original cold/indirect/callback reconciliation still prevent game-function completion.",
+    "ALL424/34144, Copper fade and Kickstart services remain deferred."
+  ],
+  "next": {
+    "entries": [
+      "C2E758",
+      "C2CE82",
+      "C2CCA0",
+      "C2CD28",
+      "C2CD94",
+      "C2D082",
+      "C2D3A4",
+      "C200F6",
+      "C203CC",
+      "C2058E",
+      "C20826",
+      "C22C70"
+    ],
+    "scope": "Audit complete corner/view-record construction and reject/return owners. C2E758 source and current adapter read; remaining original instruction reports retained for reading. No next implementation yet.",
+    "implementation": false
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/segment_projection.c",
+      "sha256": "f5de44976412e39c4e324b2b0b9380272830a7b7b0e4aa289e91c508e48e2065"
+    },
+    {
+      "path": "port/game/segment_projection.h",
+      "sha256": "f1d73a9ce7e67fa5a17a00631357405c9f3d537a9a57bee3220a3c616aec2c63"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "b0f8010e251308a696398ff3e62ecdb5c74d629dfe7ca45f96b7fa749351f253"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "82bdc7a0089ef53111d8d0d1b03e7f1086d8d5fefd0a92cbff94686c2c2b1b5a"
+    },
+    {
+      "path": "tools/recomp/audit_command_dispatch.py",
+      "sha256": "87b855bd663f26386483d23021c811d8aa4efc9acbe78131732bd4ea57fcab6d"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "011b37a4a7c25688c2c3209a6b6fcf16ed3caa90685d6bb93ddd9b2ccc702bf7"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "9a7a32e2e3b379400c5ecc181fc56efcf0fee12f7545263642c2ee199769b2cc"
+    },
+    {
+      "path": "port/game/glue/glue_batch21.c",
+      "sha256": "b6612c8f2df7c9f053338464ec121bb0c651a4394f0a86c512fa5739c93092e9"
+    },
+    {
+      "path": "port/game/glue/glue_batch49.c",
+      "sha256": "9793e04e60d20f032b262fbb8304c38436a34fd8f452f1830e858b0e746e5d4d"
+    },
+    {
+      "path": "port/game/glue/glue_batch51.c",
+      "sha256": "0eefa1fba98932002b60e5dd48ef4df71e7ff12b855e92339c687e56f118e46a"
+    },
+    {
+      "path": "port/game/glue/glue_selected_segment.c",
+      "sha256": "51d2cbb6cb66f04217638e05b109859204c892579efb5faf1b49eef036d6c89f"
+    },
+    {
+      "path": "port/game/glue/glue_segment_projection.c",
+      "sha256": "a71d82d5f9a11a5d8b6aba6b1ce324d2b4e6109f2c003bcd951f1dfb1910a5cd"
+    },
+    {
+      "path": "port/game/glue/glue_segment_projection.h",
+      "sha256": "b900b2fccc6860a9c075fc9ca3e682e0c6b576c2dfd484e8083cc369e55baba7"
+    },
+    {
+      "path": "port/game/glue/glue_segment_projection_step.c",
+      "sha256": "08ab423128c0d823742a1756bae143a0cc7db631f8bd073413f72278fbea4eb9"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_segment_projection_source.py",
+      "sha256": "7a68a1d861d1ef64a6238c1c743c0a3afde32fb50e745a4c48b6ad223e9eb3da"
+    },
+    {
+      "path": "tools/recomp/check_segment_projection.py",
+      "sha256": "a9a6993883a7d71727c358e98afc249dcb440a15c5a1d82dc3d1eb5ae307954d"
+    },
+    {
+      "path": "tools/recomp/check_segment_projection_dispatch.py",
+      "sha256": "fcb1b89a8f582e9264c7c6a8b36f7c3e55dc073386ebe071171886cf418444b7"
+    },
+    {
+      "path": "tools/recomp/check_segment_projection_parallel.py",
+      "sha256": "542f97a4eda4651626aeb987f1f47ff8b511cfe35f3964ecf855d12d56820e7e"
+    },
+    {
+      "path": "tools/recomp/segment_projection_bus_budget.c",
+      "sha256": "ee505931133aa56667fd6e89e217b152985d8d6c3b594f82aab13303327a405b"
+    },
+    {
+      "path": "tools/recomp/segment_projection_child_call.c",
+      "sha256": "8a4634f05eb2bc70406790e3ee3583c8e40d6031333e7e6cc69ce0210fc79b0a"
+    },
+    {
+      "path": "tools/recomp/segment_projection_contract_children.c",
+      "sha256": "2ec0cc4027a9bb3ce7f7dce5219ff4014c91617db018968271226bae5f980e56"
+    },
+    {
+      "path": "tools/recomp/segment_projection_contract_oracle.c",
+      "sha256": "26f59c9346c7b1d452a18067f9e3b3cac2b90620b73e767676c264faab8d0d28"
+    },
+    {
+      "path": "tools/recomp/segment_projection_dispatch_oracle.c",
+      "sha256": "b9f60ccd22d372c80594ce04b4c6ea0dc00cd9415385352c210920c44bb84eb2"
+    },
+    {
+      "path": "tools/recomp/segment_projection_fixture.h",
+      "sha256": "033bdd44c27bff53ed0d1a5c8780b1eed76b4664bdb7bd78585a163f316d63c6"
+    },
+    {
+      "path": "tools/recomp/segment_projection_hardware_log.c",
+      "sha256": "74efe6c7164c476ff3a7bc9a14e7ba7576803d3e9944b4aa31ad6fa592259575"
+    },
+    {
+      "path": "tools/recomp/segment_projection_oracle.c",
+      "sha256": "cd76b6130d1c55b0f2575ff95964fb01925eb477aa01d2e081ae793e6f02b9b8"
+    },
+    {
+      "path": "tools/recomp/segment_projection_parallel_adapter.c",
+      "sha256": "89e08f1ca4642324a351bec3fc8e32612b46b419ca4763fefc404e94d316a764"
+    },
+    {
+      "path": "tools/recomp/segment_projection_parallel_oracle.c",
+      "sha256": "69421cafcf05efb8132674a20576fbddbcc7433426c0a49a66dc98dd26d7b0d5"
+    },
+    {
+      "path": "tools/recomp/verify_segment_projection_recordings.py",
+      "sha256": "52b1873bc6e61a8df921d5fd1a7f4514c7e8215971af88fac3aa66400f3f7ff6"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/segment_projection_gnu.log",
+      "sha256": "77a115bb773bba94510f84f71a5cb9aa62af868c1e178c7663f20ed4e5d6bf75"
+    },
+    {
+      "path": "build/recomp/segment_projection_msvc.log",
+      "sha256": "e3474dd800ec276ab022b1fc02d4aa9c8ca067e25910679a4a12260aa79fb6e2"
+    },
+    {
+      "path": "build/recomp/segment_projection_full_gate.log",
+      "sha256": "85b0ba5670d3a91ad772985e4ff579c797ab5be035f234579d07832aae69efd3"
+    },
+    {
+      "path": "build/recomp/segment_projection_live.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/segment_projection_timing.log",
+      "sha256": "cbd4e2b63333e68d9e1928e46d207acf95f59aa8434043834e8f0be8b064a089"
+    },
+    {
+      "path": "build/recomp/segment_projection_normal.log",
+      "sha256": "421d746bd4a6d895a98561f2a39bd9c31b866f8fa389ce5e5dbf9959b1767b84"
+    },
+    {
+      "path": "build/recomp/segment_projection_dispatch_full.log",
+      "sha256": "a063fc64cd43465029cae0f3e36562212ac32bb9609ce1c167ff1161041e0b39"
+    },
+    {
+      "path": "build/recomp/segment_projection_dma_local.log",
+      "sha256": "154d2b498b2d24baf11018e5564f1d0d8de2e4c90ff30ef3739a1de160c6ce8b"
+    },
+    {
+      "path": "build/recomp/segment_projection_dma_union.log",
+      "sha256": "35babedae6b46b013d1999456b5920558bdee9eea92e106233031bbe3744e009"
+    },
+    {
+      "path": "build/recomp/segment_projection_compatibility.log",
+      "sha256": "c7606965aca8cc19234447a88c9c1c28c451ab58a9ef2dfc2fd470e78e8388c5"
+    },
+    {
+      "path": "build/recomp/segment_projection_whole2.log",
+      "sha256": "8999fce3011eb36fcd5453c9fc4e26be061a314e498aa0cf3b694b7013e7d065"
+    },
+    {
+      "path": "build/recomp/segment_projection_contract_final2.log",
+      "sha256": "b7ddfc6a3c1bc79162e38e5068926355928dc7885898c610234ced22cfff342a"
+    },
+    {
+      "path": "build/recomp/segment_projection_parallel_full.log",
+      "sha256": "9ba1a1c9b81a5dfb8f3145939b2102728315755316600b4598c6c0c795a37efe"
+    }
+  ],
+  "retained_earlier_proofs": [
+    {
+      "path": "build/recomp/segment_projection_initial_contract.log",
+      "sha256": "4d3fa1877de9d606eb895f75800b8a31030cd7724753c7d411ba176b3030ef1a"
+    },
+    {
+      "path": "build/recomp/segment_projection_initial_real.log",
+      "sha256": "70f403a7fb3d5780e20fc1e30199ae9082a73d1a87b7179a49784fe154f23eee"
+    },
+    {
+      "path": "build/recomp/segment_projection_whole.log",
+      "sha256": "318a8a5e893cafab26197af7a3d25bf4708e78ca92f7904074e9452346a37c1f"
+    },
+    {
+      "path": "build/recomp/segment_projection_parallel_initial.log",
+      "sha256": "bea709522c5061e70eb0adf1f7babf19f75b9610a16d84edf05caa484dffe394"
+    },
+    {
+      "path": "build/recomp/segment_projection_parallel_initial2.log",
+      "sha256": "d510c7412f4fbfc3a96c5a6cf30a5cdabcf551b601eeaab37e6899fc8cc13b41"
+    },
+    {
+      "path": "build/recomp/segment_projection_contract_final.log",
+      "sha256": "13f85b986002f83efc311672cb6fdc212d8ee8e9f23c48f1d50b029a2cd725e9"
+    }
+  ]
+}

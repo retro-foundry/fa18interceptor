@@ -75,7 +75,9 @@ translated count and raise source-timed entries to 509.
 Twelve complete renderer-helper upgrades retain that translated count and
 raise source-timed entries to 510. Thirty-seven complete renderer entries and
 writer callbacks now raise translated coverage to 527/624, source-only
-coverage to 73 and source-timed entries to 518.
+coverage to 73 and source-timed entries to 518. Twelve complete selected-
+segment, projection and crossing upgrades retain registration and raise
+source-timed entries to 521.
 Seventy-three original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -83,6 +85,38 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- Twelve complete selected-segment/projection/crossing upgrades retain
+  527 translated plus 73 source-only entries: 600 rows, now 521 source-timed
+  (448 translated plus 73 source-only). The scope is 663 unique /60 shared
+  PCs and twenty distinct child sites. Both selected A4 targets and their
+  original table slots/callers are sealed. All 393,216 whole CPU/PC/full-SR/
+  all-RAM calls pass; controlled coverage is 663/663, original-child union
+  610/663 with every missing PC explicit. C2EE4A covers all 211 boundaries
+  with independently varied child Z returns. All four original unrounded
+  parallel loops retain non-returning behavior: 65,536 independent observations
+  of 64 branches match full CPU/PC/SR/RAM. The retained initial returning
+  fixture entered an original loop and failed its budget; bounded returning
+  fixtures and non-returning proofs remain separate. Dispatch passes 36,864
+  calls; each mode has zero hardware-bearing /12,288 hardware-free classifications
+  and 21,852 actual Custom packets. All twelve owners pass normal C:
+  106,838 shadow /126,128 sandbox. Full 600-row gate passes
+  568,446/443,870, zero mismatches, exact seals and identical poison frames.
+  All 36,236 isolated live frames/seals match. Local DMA passes 663/21,216;
+  fresh combined DMA passes 29,042/929,344, previous 28,931 plus 663,
+  overlap 552. All thirty-seven older generators and shared core/observers
+  are unchanged. GNU/MSVC Release pass; build/ is 1.921 GiB.
+  Family matches through 600; ALL remains 424/34,144. See
+  analysis/routines/native_c_segment_projection.md and
+  analysis/figures/native_segment_projection_checkpoint.json.
+  Next audit complete C2E758 corner projection, C2CE82 and the view-record
+  construction owners C2CCA0/C2CD28/C2CD94/C2D082/C2D3A4, with original
+  reject/return peers C200F6/C203CC/C2058E/C20826/C22C70. C2E758's full
+  source/current adapter is read; remaining original instruction reports are
+  retained under build/recomp/segment_projection_next_corner.log for reading.
+  No next implementation yet. Larger parents, older partial adapters, C2C392,
+  C1612C graphics-wait integration and full original cold/indirect/callback
+  reconciliation still prevent game-function completion. Goal is not complete.
 
 - Thirty-seven complete renderer entries/writer callbacks raise registration
   to 527 translated plus 73 source-only entries: 600 rows, 518 source-timed
@@ -110,9 +144,7 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   Family frames match through 600; ALL remains 424/34,144. See
   analysis/routines/native_c_render_entry_helpers.md and
   analysis/figures/native_render_entry_helpers_checkpoint.json.
-  Next are C1FF9C/C1FFA4, C2ED70/C2EE4A and all eight rounded/truncated
-  crossing helpers. Original reading is complete; dynamic JSR contracts
-  still need sealing. Larger render parents, older partial adapters,
+  Those selected-segment/projection/crossing owners are now complete above. Larger render parents, older partial adapters,
   C2C392, C1612C graphics-wait integration and the full original cold/
   indirect/callback graph remain game-function work. Goal is not complete.
 
@@ -1972,10 +2004,12 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 526/624 translated plus sixty-six source-only callable entries. Next
-   reconstruct the thirty-seven renderer entry/writer helpers sealed in
-   analysis/data/render_entry_helpers_scope_inventory.json (550 unique /
-   235 shared boundaries). The fifteen ground/HUD parents and twelve renderer
+   is 527/624 translated plus seventy-three source-only callable entries,
+   600 rows and 521 source-timed. The thirty-seven renderer entry/writer
+   helpers and twelve selected-segment/projection/crossing upgrades are now
+   complete. Next audit complete corner projection and view-record construction
+   owners listed in the verified baseline; their original children and return
+   peers remain part of the scope. The fifteen ground/HUD parents and twelve renderer
    helpers are now complete. The fourteen tested/list/grid/lattice face and
    edge parents are now complete, including C21060. Continue
    preserving original shared tails and actual child return PCs. The six

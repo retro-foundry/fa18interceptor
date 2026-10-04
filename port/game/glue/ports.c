@@ -406,17 +406,17 @@ const FA18Port fa18_ports[] = {
     /* batch 20: play_sound */
     {0xC17B2C, glue_C17B2C, "play_sound", 0, 0, glue_C17B2C_step, 0xC17B96, 0, 0xC17B08},
     /* batch 21: side-plane clips, view transform */
-    {0xC2EA5A, glue_C2EA5A, "clip_to_side_plane", 0, 0, glue_C2EA5A_step, 0xC2EC68, 0, 0xC2E758},
-    {0xC2EAD0, glue_C2EAD0, "clip_to_side_plane", 0, 0, glue_C2EAD0_step, 0xC2EC68, 0, 0xC2E758},
-    {0xC2F0C6, glue_C2F0C6, "clip_to_side_plane", 0, 0, glue_C2F0C6_step, 0xC2F1B8, 0, 0xC2EE44},
-    {0xC2F0F4, glue_C2F0F4, "clip_to_side_plane", 0, 0, glue_C2F0F4_step, 0xC2F1B8, 0, 0xC2EE44},
+    {0xC2EA5A, glue_C2EA5A, "segment_crossing", 0, 0, glue_C2EA5A_complete_step, 0xC2EC68, 0, 0xC2EA5A, glue_C2EA5A_owns},
+    {0xC2EAD0, glue_C2EAD0, "segment_crossing", 0, 0, glue_C2EAD0_complete_step, 0xC2EC68, 0, 0xC2EAD0, glue_C2EAD0_owns},
+    {0xC2F0C6, glue_C2F0C6, "segment_crossing", 0, 0, glue_C2F0C6_complete_step, 0xC2F1B8, 0, 0xC2F0C6, glue_C2F0C6_owns},
+    {0xC2F0F4, glue_C2F0F4, "segment_crossing", 0, 0, glue_C2F0F4_complete_step, 0xC2F1B8, 0, 0xC2F0F4, glue_C2F0F4_owns},
     {0xC1F2EE, glue_C1F2EE, "view_transform", 560},
     /* batch 22: magnitude */
     {0xC1D974, glue_C1D974, "magnitude3", 0, 0, glue_C1D974_step, 0xC1D9D8},
     /* batch 23: y-plane clips, sound routines, record orientation */
-    {0xC2EB4C, glue_C2EB4C, "clip_to_view_plane", 0, 0, glue_C2EB4C_step, 0xC2EC68, 0, 0xC2E758},
-    {0xC2EBC2, glue_C2EBC2, "clip_to_view_plane", 0, 0, glue_C2EBC2_step, 0xC2EC68, 0, 0xC2E758},
-    {0xC2F156, glue_C2F156, "clip_to_view_plane", 0, 0, glue_C2F156_step, 0xC2F1B8, 0, 0xC2EE44},
+    {0xC2EB4C, glue_C2EB4C, "segment_crossing", 0, 0, glue_C2EB4C_complete_step, 0xC2EC68, 0, 0xC2EB4C, glue_C2EB4C_owns},
+    {0xC2EBC2, glue_C2EBC2, "segment_crossing", 0, 0, glue_C2EBC2_complete_step, 0xC2EC68, 0, 0xC2EBC2, glue_C2EBC2_owns},
+    {0xC2F156, glue_C2F156, "segment_crossing", 0, 0, glue_C2F156_complete_step, 0xC2F1B8, 0, 0xC2F156, glue_C2F156_owns},
     {0xC17CF6, glue_C17CF6, "play_engine", 0, 0, glue_C17CF6_step, 0xC17D6E},
     {0xC17DAA, glue_C17DAA, "slide_engine", 0, 0, glue_C17DAA_step, 0xC17E4A},
     {0xC17E4A, glue_C17E4A, "play_noise", 0, 0, glue_C17E4A_step, 0xC17EF2},
@@ -539,15 +539,15 @@ const FA18Port fa18_ports[] = {
     {0xC2CE82, glue_C2CE82, "rotate_by_view_matrix", 700},
     {0xC21C2E, glue_C21C2E, "split_record_and_stream_edges", 0, 0, glue_C21C2E_complete_step, 0xC21C86, 1, 0, glue_C21C2E_owns},
     /* batch 49: projected segment, top-plane crossing, in-sight flag, edge alignment */
-    {0xC2ED70, glue_C2ED70, "draw_projected_segment", 3000},
-    {0xC2F128, glue_C2F128, "clip_to_view_plane", 0, 0, glue_C2F128_step, 0xC2F1B8, 0, 0xC2EE44},
+    {0xC2ED70, glue_C2ED70, "segment_projected", 0, 0, glue_C2ED70_complete_step, 0xC2EE44, 0, 0xC2ED6C, glue_C2ED70_owns},
+    {0xC2F128, glue_C2F128, "segment_crossing", 0, 0, glue_C2F128_complete_step, 0xC2F1B8, 0, 0xC2F128, glue_C2F128_owns},
     {0xC2436A, glue_C2436A, "update_main_loop_record_sight", 0, 0, glue_C2436A_step, 0xC243F2, 0, 0xC24368, glue_C2436A_owns},
     {0xC2084A, glue_C2084A, "edge_alignment", 0, 0, glue_C2084A_complete_step, 0xC208D4, 1, 0, glue_C2084A_owns},
     {0xC2082A, glue_C2082A, "edge_alignment_test", 0, 0, glue_C2082A_complete_step, 0xC208D4, 1, 0xC20826, glue_C2082A_owns},
     /* batch 50: symbol plot */
     {0xC348B2, glue_C348B2, "plot_symbol", 0, 0, glue_C348B2_complete_step, 0xC3494A, 1, 0xC348B0, glue_C348B2_owns},
     /* batch 51-52: clipped segment, ground points, voices, messages, observer, stages, long table, alert, start position, typed code */
-    {0xC2EE4A, glue_C2EE4A, "draw_clipped_segment", 0, 0, glue_C2EE4A_step, 0xC2F1B8, 0, 0xC2EE44},
+    {0xC2EE4A, glue_C2EE4A, "segment_clipped", 0, 0, glue_C2EE4A_complete_step, 0xC2F0C6, 0, 0xC2EE44, glue_C2EE4A_owns},
     {0xC098C6, glue_C098C6, "transform_ground_points", 0, 0, glue_C098C6_complete_step, 0xC09952, 1, 0, glue_C098C6_owns},
     {0xC0F4A6, glue_C0F4A6, "free_all_voices", 0, 0, glue_C0F4A6_step, 0xC0F4D6},
     {0xC25704, glue_C25704, "post_message", 0, 0, glue_C25704_step, 0xC2574A},
@@ -724,7 +724,7 @@ const FA18Port fa18_ports[] = {
     {0xC23CA6, glue_C23CA6, "update_record_view", 0, 0, glue_C23CA6_step, 0xC24368},
     {0xC0D04C, glue_C0D04C, "draw_history_projection", 0, 0, glue_C0D04C_complete_step, 0xC0D334, 1, 0xC0D048, glue_C0D04C_owns},
     /* selected projected segment */
-    {0xC1FF9C, glue_C1FF9C, "draw_selected_segment", 3500},
+    {0xC1FF9C, glue_C1FF9C, "segment_selected", 0, 0, glue_C1FF9C_complete_step, 0xC20002, 0, 0xC1FF9C, glue_C1FF9C_owns},
     /* planar lane mask handlers */
     {0xC2F826, glue_C2F826, "apply_planar_lane_masks", 0, 0xC2F764, glue_C2F826_complete_step, 0xC2F830, 0, 0, glue_C2F826_owns},
     {0xC2F83A, glue_C2F83A, "apply_planar_lane_masks", 0, 0xC2F764, glue_C2F83A_complete_step, 0xC2F844, 0, 0, glue_C2F83A_owns},
@@ -752,7 +752,7 @@ const FA18Port fa18_ports[] = {
     {0xC2FA08, glue_C2FA08, "apply_planar_lane_masks", 0, 0xC2F764, glue_C2FA08_complete_step, 0xC2FA22, 0, 0, glue_C2FA08_owns},
     {0xC2FA22, glue_C2FA22, "apply_planar_lane_masks", 0, 0xC2F764, glue_C2FA22_complete_step, 0xC2FA3C, 0, 0, glue_C2FA22_owns},
     /* selected clipped segment sibling */
-    {0xC1FFA4, glue_C1FFA4, "draw_selected_segment_near", 5500},
+    {0xC1FFA4, glue_C1FFA4, "segment_selected", 0, 0, glue_C1FFA4_complete_step, 0xC20002, 0, 0xC1FFA4, glue_C1FFA4_owns},
     {0xC2FD8C, glue_C2FD8C, "submit_active_planes", 0, 0, glue_C2FD8C_complete_step, 0xC2FF46, 1, 0, glue_C2FD8C_owns},
     {0xC26322, glue_C26322, "project_record_motion", 0, 0, glue_C26322_step, 0xC26352, 0, 0xC26322, glue_C26322_owns},
     {0xC26352, glue_C26352, "publish_motion_slot", 0, 0, glue_C26352_step, 0xC2639C, 0, 0xC26352, glue_C26352_owns},

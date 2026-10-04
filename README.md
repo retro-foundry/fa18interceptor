@@ -16,6 +16,17 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+Twelve complete selected-segment/projection/crossing upgrades pass 393,216
+whole CPU/PC/SR/RAM calls, covering all 663 boundaries with controlled children.
+All four original parallel loops pass 65,536 non-returning observations.
+Dispatch passes 36,864 calls; every owner passes normal C:
+106,838 shadow /126,128 sandbox. All 36,236 isolated live frames/seals match;
+combined DMA passes 29,042/929,344. Source-timed entries rise to 521.
+See [segment projection proof](analysis/routines/native_c_segment_projection.md).
+Family exact through 600; ALL remains 424/34,144. Corner/view construction,
+older partial adapters and full original callback coverage remain open.
+Kickstart services and timing are deferred.
+
 Thirty-seven complete renderer entries and writer callbacks pass 1,212,416
 whole CPU/PC/SR/RAM calls and 65,536 independent cold-segment calls.
 Controlled whole calls cover 546/550 boundaries. Dispatch passes 113,664
@@ -25,9 +36,8 @@ separate fixture evidence and remain uncalled in recordings. All 36,236
 isolated live frames/seals match; combined DMA passes 28,931/925,792.
 Source-timed entries rise to 518. See
 [renderer entry proof](analysis/routines/native_c_render_entry_helpers.md).
-Family frames match through 600; ALL remains 424/34,144. Complete selected-
-segment and projection/clipping owners are next; original function and
-callback coverage remains open. Kickstart services and timing are deferred.
+Family frames match through 600; ALL remains 424/34,144. Those selected-segment and projection/clipping owners are now complete above;
+original function and callback coverage remains open. Kickstart services and timing are deferred.
 
 Twelve complete renderer-helper upgrades pass 393,216 whole CPU/PC/SR/RAM
 calls and 81,920 independent production-segment calls. Controlled whole

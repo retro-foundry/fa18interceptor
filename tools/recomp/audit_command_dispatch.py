@@ -29,9 +29,10 @@ def source_decoder():
         offset+=(length+3)&~3
     return state,Decoder((ROOT/"build/recomp/dasm_helper.dll").resolve(),regions)
 
-def audit(entries=ENTRIES, dynamic_targets=None, additional_cold_entries=()):
+def audit(entries=ENTRIES, dynamic_targets=None, additional_cold_entries=(), dynamic_calls=None):
     state,decoder=source_decoder()
     dynamic_targets=dynamic_targets or {}
+    dynamic_calls=dynamic_calls or {}
     rows={}
     owners={}
     for entry in entries:
@@ -54,6 +55,11 @@ def audit(entries=ENTRIES, dynamic_targets=None, additional_cold_entries=()):
             if kind=="interp": raise ValueError(f"{entry}: exceptional source exit {pc:06X}")
             if kind=="jmp" and target is None and pc in dynamic_targets:
                 pending.extend(dynamic_targets[pc]); continue
+            if kind=="jsr" and target is None and pc in dynamic_calls:
+                for child in dynamic_calls[pc]:
+                    calls.append({"pc":f"{pc:06X}","target":f"{child:06X}",
+                                  "return_pc":f"{pc+length:06X}"})
+                pending.append(pc+length); continue
             if kind in ("bra","jmp","bcc","dbcc","bsr","jsr") and target is None:
                 raise ValueError(f"{entry}: dynamic transfer needs further evidence at {pc:06X}")
             if kind in ("bra","jmp"): pending.append(target)

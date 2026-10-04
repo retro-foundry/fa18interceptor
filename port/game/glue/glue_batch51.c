@@ -1,9 +1,5 @@
-/* Glue for draw_clipped_segment $C2EE4A. Its callers read every data
- * register: D2 and D6 as the plane tests last loaded them, D3-D5 the
- * projected end (DIVS remainders in the upper words), D0-D2 the first point
- * from the exchange, and draw_line's registers. The decision chain is
- * replayed on the two points as they were before the C exchanged them,
- * with the crossings computed in hand rather than through CLIP_POINT. */
+/* Remaining edge register replay used by glue_batch55.c. The complete
+ * C2EE4A owner is in glue_segment_projection.c. */
 #include "glue.h"
 #include "ports_glue.h"
 
@@ -93,12 +89,6 @@ static int end_regs(Segment *s) {
     return pz >= 0 ? POINT : NONE;
 }
 
-static void divs_reg(int n, int16_t divisor) {
-    int32_t dividend = (int32_t)D(n), q = dividend / divisor;
-    if (q != (int16_t)q) return;
-    D(n) = ((uint32_t)(uint16_t)(dividend % divisor) << 16) | (uint16_t)q;
-}
-
 /* The decision chain's D2/D6 for an edge from `p` (registers D3-D5 as they
  * hold it) to `q`; `last` is the last crossing computed (read by the
  * behind-the-eye tests) and is updated. Returns 0 none, 1 the point, 2 a
@@ -116,69 +106,4 @@ int edge_end_registers(const int16_t p[3], const int16_t q[3], int rounded, int1
     end = end_regs(&s);
     for (k = 0; k < 3; k++) last[k] = s.cross[k];
     return end;
-}
-
-/* The registers $C2EE4A leaves for a segment from `p` to `q` (the points
- * as the call found them in SEGMENT_POINTS), without drawing: the
- * projected ends are kept in hand, not read back from POLY_VERTICES. */
-void clipped_segment_registers(const int16_t p[3], const int16_t q[3]);
-void clipped_segment_registers(const int16_t p[3], const int16_t q[3]) {
-    Segment s;
-    int16_t ends[4];
-    int pass, k;
-
-    for (k = 0; k < 3; k++) {
-        s.p[k] = p[k];
-        s.q[k] = q[k];
-        s.cross[k] = rd_s16(CLIP_POINT + (gaddr)(2 * k));
-    }
-    s.rounded = 0;
-    for (pass = 0; pass < 2; pass++) {
-        int end;
-        for (k = 0; k < 3; k++) D(3 + k) = SEXT(s.p[k]);
-        end = end_regs(&s);
-        if (end == NONE) break;
-        if (end == CROSSING)
-            for (k = 0; k < 3; k++) D(3 + k) = SEXT(s.cross[k]);
-        if (W(5) <= 0) break;
-        D(3) = (uint32_t)((int32_t)W(3) * 0xA0);
-        divs_reg(3, W(5));
-        w(3, (int16_t)(W(3) + 0xA0));
-        if (W(3) < 0) w(3, 0); else if (W(3) >= 0x140) w(3, 0x13F);
-        D(4) = (uint32_t)((int32_t)W(4) * 0x5A);
-        divs_reg(4, W(5));
-        w(4, (int16_t)(W(4) + 0x5A));
-        if (W(4) < 0) w(4, 0); else if (W(4) >= 0xB4) w(4, 0xB3);
-        w(3, (int16_t)(0x13F - W(3)));
-        w(4, (int16_t)(0xB3 - W(4)));
-        ends[2 * pass] = W(3);
-        ends[2 * pass + 1] = W(4);
-        if (pass) {
-            for (k = 0; k < 4; k++) D(k) = SEXT(ends[k]);
-            line_registers();
-            D(0) = 1;
-            flags_logic_l(1);
-            return;
-        }
-        for (k = 0; k < 3; k++) {
-            int16_t t = s.p[k];
-            D(k) = SEXT(t);
-            s.p[k] = s.q[k];
-            s.q[k] = t;
-        }
-    }
-    D(0) = 0;
-    flags_logic_l(0);
-}
-
-int glue_C2EE4A(void) {
-    int16_t p[3], q[3];
-    int k;
-    for (k = 0; k < 3; k++) {
-        p[k] = rd_s16(SEGMENT_POINTS + (gaddr)(2 * k));
-        q[k] = rd_s16(SEGMENT_POINTS + 6 + (gaddr)(2 * k));
-    }
-    draw_clipped_segment();
-    clipped_segment_registers(p, q);
-    return glue_return();
 }
