@@ -248,6 +248,17 @@ RAM is evidence only, never runtime initialization input. See
 `analysis/data/romfree_exec_memory_contracts.json`. The dispatcher/scheduler,
 soft interrupts and generic exception paths are still required.
 
+Original scheduler evidence for the next batch is captured and hash-checked:
+warm demo Switch FC0F1C reaches its resume RTE at FC0FF0 in 45 instructions /
+425 OCS colour clocks; interrupt exit FC0E9C reaches RTE FC0EC0 in eight /
+82 clocks. These are checkpoints before RTE, not full blocked-Wait returns.
+Dispatch FC0EC2 and AllocEntry/FreeEntry were not reached in their 300-frame
+observations. The source for Dispatch, Switch, interrupt exit and task-exception
+callbacks spans FC0E9C onward and still needs implementation/controlled proofs.
+See `analysis/data/romfree_exec_scheduler_contracts.json`; the binaries stay
+ignored under the recorded evidence directories. No runtime implementation is
+claimed by this scheduler capture.
+
 `analysis/data/romfree_startup_checkpoint.json` records original execution from
 C0DEB0 to C0E27E: 1,632 instructions /11,677 OCS colour clocks, 1,065 ROM/rtarea
 instruction PCs and 74 ROM-boundary transitions. This includes IRQs and OS task

@@ -1,0 +1,193 @@
+{
+  "schema": "amiga.exec_scheduler_contract_inventory.v1",
+  "captured_ram_is_runtime_input": false,
+  "original_engine_contracts": [
+    {
+      "path": "Switch/resume",
+      "evidence_directory": "build/amiga/exec-switch-resume-contract",
+      "schema": "amiga.execution_contract.v1",
+      "entry_pc": 16518940,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 384,
+          "d1": 12615360,
+          "d2": 208896,
+          "d3": 12288,
+          "d4": 12835583,
+          "d5": 7114,
+          "d6": 1310730,
+          "d7": 12779970,
+          "a0": 1056,
+          "a1": 14676352,
+          "a2": 12841980,
+          "a3": 12835068,
+          "a4": 7562,
+          "a5": 12867182,
+          "a6": 12593398,
+          "a7": 13107194,
+          "sr": 8192,
+          "pc": 16518940
+        },
+        "cycle": 824530252,
+        "beam": "8001022e",
+        "hardware_frame": 5,
+        "files": {
+          "entry_chip.bin": "8d50a8bf9d415cc16156593981f382d7a7cfdce37f1ea4532996aee013b596aa",
+          "entry_slow.bin": "2a6205d5a71b2e7a7f550a5fd4d9a63f6acd38a2fae7a33e738bd04d993f2244",
+          "entry_state.bin": "1f470f9306a49dcf5355dff2347483f7bb650490af75eec9090df544416fa2cf"
+        }
+      },
+      "checkpoint": {
+        "registers": {
+          "d0": 12585600,
+          "d1": 0,
+          "d2": 0,
+          "d3": 0,
+          "d4": 0,
+          "d5": 0,
+          "d6": 0,
+          "d7": 0,
+          "a0": 0,
+          "a1": 12606758,
+          "a2": 12606590,
+          "a3": 12606456,
+          "a4": 0,
+          "a5": 12583488,
+          "a6": 12583542,
+          "a7": 13107194,
+          "sr": 8192,
+          "pc": 16519152
+        },
+        "cycle": 824530677,
+        "beam": "8001022e",
+        "hardware_frame": 5,
+        "files": {
+          "checkpoint_chip.bin": "8d50a8bf9d415cc16156593981f382d7a7cfdce37f1ea4532996aee013b596aa",
+          "checkpoint_slow.bin": "bebe0c551b26f7908cc5a893f30d7961bef6aa6f36d861b4e7bfbeccc6a68293",
+          "checkpoint_state.bin": "b395cc48495493c363705424e6c0f906be41a3bca02dc9117fbc542b660624b8"
+        }
+      },
+      "instructions": 45,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "1e7788a71b87f9c6064297644621ba5e8c74af1e7d1213b16e6cd8df03def87f",
+      "hardware_sha256": "17e19572cfff91cd9d9ec82f3004002fee4a2ed2855be808181ad46508b07178",
+      "captured_ram_is_runtime_input": false,
+      "stop_pc": 16519152
+    },
+    {
+      "path": "Interrupt exit",
+      "evidence_directory": "build/amiga/exec-interrupt-exit-contract",
+      "schema": "amiga.execution_contract.v1",
+      "entry_pc": 16518812,
+      "other_callers_skipped": 0,
+      "entry": {
+        "registers": {
+          "d0": 0,
+          "d1": 2031616,
+          "d2": 208896,
+          "d3": 12288,
+          "d4": 12835583,
+          "d5": 7114,
+          "d6": 1310730,
+          "d7": 12779970,
+          "a0": 15761396,
+          "a1": 0,
+          "a2": 12841980,
+          "a3": 12835068,
+          "a4": 7562,
+          "a5": 12910936,
+          "a6": 12594268,
+          "a7": 13107170,
+          "sr": 8960,
+          "pc": 16518812
+        },
+        "cycle": 824244031,
+        "beam": "00000000",
+        "hardware_frame": 1,
+        "files": {
+          "entry_chip.bin": "8d50a8bf9d415cc16156593981f382d7a7cfdce37f1ea4532996aee013b596aa",
+          "entry_slow.bin": "01bde5b1d2cb978ca7f4fb81d3beed3184b993a7ad48193c83dca476d2186942",
+          "entry_state.bin": "fd9e2afb27ef4bf9c95d5c0004fcf198e4e12c4ca805c67643f172173154401d"
+        }
+      },
+      "checkpoint": {
+        "registers": {
+          "d0": 384,
+          "d1": 12615360,
+          "d2": 208896,
+          "d3": 12288,
+          "d4": 12835583,
+          "d5": 7114,
+          "d6": 1310730,
+          "d7": 12779970,
+          "a0": 1056,
+          "a1": 14676352,
+          "a2": 12841980,
+          "a3": 12835068,
+          "a4": 7562,
+          "a5": 12867182,
+          "a6": 12593398,
+          "a7": 13107194,
+          "sr": 8972,
+          "pc": 16518848
+        },
+        "cycle": 824244113,
+        "beam": "00000000",
+        "hardware_frame": 1,
+        "files": {
+          "checkpoint_chip.bin": "8d50a8bf9d415cc16156593981f382d7a7cfdce37f1ea4532996aee013b596aa",
+          "checkpoint_slow.bin": "01bde5b1d2cb978ca7f4fb81d3beed3184b993a7ad48193c83dca476d2186942",
+          "checkpoint_state.bin": "7d93a97e1df5e4e74095723dd59bfc2d2772fdf1c0633058e84cf3e1a86b222d"
+        }
+      },
+      "instructions": 8,
+      "clock_unit": "UAE get_cycles()/CYCLE_UNIT; OCS colour clocks in this A500 profile",
+      "hardware_window_requires_interval_filter": true,
+      "authority": {
+        "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1"
+      },
+      "trace_sha256": "cf468143d9dfb7e339d65d2cfea49bec9efe94413e580719d7225d5ccf87fdd0",
+      "hardware_sha256": "a63222c6830d31c2f40092f237f0fabfabbc5932a3dc249d91eaa261f01d3077",
+      "captured_ram_is_runtime_input": false,
+      "stop_pc": 16518848
+    }
+  ],
+  "dispatch_observation": {
+    "entry": "FC0EC2",
+    "frames": 300,
+    "reached": false,
+    "evidence_directory": "build/amiga/exec-dispatch-return-contract"
+  },
+  "allocation_entry_observations": [
+    {
+      "entry": "FC195A",
+      "frames": 300,
+      "reached": false,
+      "evidence_directory": "build/amiga/exec-allocentry-contract"
+    },
+    {
+      "entry": "FC19E8",
+      "frames": 300,
+      "reached": false,
+      "evidence_directory": "build/amiga/exec-freeentry-contract"
+    }
+  ],
+  "implementations_pending": [
+    "Switch",
+    "Dispatch",
+    "interrupt-exit path",
+    "task exception callbacks",
+    "AllocEntry",
+    "FreeEntry"
+  ],
+  "whole_game_rom_independent": false
+}
