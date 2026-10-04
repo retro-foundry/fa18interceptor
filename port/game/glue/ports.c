@@ -643,25 +643,25 @@ const FA18Port fa18_ports[] = {
     /* zone exit */
     {0xC28E28, glue_C28E28, "check_zone_exit", 0, 0, glue_C28E28_complete_step, 0xC28F16, 0, 0xC28E16, glue_C28E28_owns},
     /* shape */
-    {0xC2D16C, glue_C2D16C, "draw_shape", 20000},
+    {0xC2D16C, glue_C2D16C, "draw_shape", 0, 0, glue_C2D16C_complete_step, 0xC2D3A4, 1, 0, glue_C2D16C_owns},
     /* block face */
-    {0xC21500, glue_C21500, "draw_block_face", 8000},
+    {0xC21500, glue_C21500, "draw_block_face", 0, 0, glue_C21500_complete_step, 0xC2159E, 1, 0xC214FC, glue_C21500_owns},
     /* offset run */
-    {0xC2122A, glue_C2122A, "draw_offset_run", 6000},
+    {0xC2122A, glue_C2122A, "draw_offset_run", 0, 0, glue_C2122A_complete_step, 0xC2129C, 1, 0, glue_C2122A_owns},
     /* split square */
-    {0xC20592, glue_C20592, "draw_split_square", 8000},
+    {0xC20592, glue_C20592, "draw_split_square", 0, 0, glue_C20592_complete_step, 0xC20656, 1, 0xC2058E, glue_C20592_owns},
     /* side triangle */
-    {0xC2168A, glue_C2168A, "draw_side_triangle", 8000},
+    {0xC2168A, glue_C2168A, "draw_side_triangle", 0, 0, glue_C2168A_complete_step, 0xC217EA, 1, 0, glue_C2168A_owns},
     /* square faces */
-    {0xC203D0, glue_C203D0, "draw_square_faces", 16000},
+    {0xC203D0, glue_C203D0, "draw_square_faces", 0, 0, glue_C203D0_complete_step, 0xC2058E, 1, 0xC203CC, glue_C203D0_owns},
     /* shadow */
-    {0xC201A6, glue_C201A6, "draw_record_shadow", 30000},
+    {0xC201A6, glue_C201A6, "draw_record_shadow", 0, 0, glue_C201A6_complete_step, 0xC203CA, 1, 0xC201A2, glue_C201A6_owns},
     /* mark polygon */
-    {0xC3019C, glue_C3019C, "draw_mark_polygon", 9000},
+    {0xC3019C, glue_C3019C, "draw_mark_polygon", 0, 0, glue_C3019C_complete_step, 0xC301F0, 1, 0xC3019A, glue_C3019C_owns},
     /* face test dispatch */
-    {0xC1FB82, glue_C1FB82, "face_toward_eye", 0, 0, glue_C1FB82_step, 0xC1FCDE},
+    {0xC1FB82, glue_C1FB82, "face_toward_eye", 0, 0, glue_C1FB82_complete_step, 0xC1FCDE, 1, 0, glue_C1FB82_owns},
     /* bound points */
-    {0xC1F99A, glue_C1F99A, "transform_bound_points", 9000},
+    {0xC1F99A, glue_C1F99A, "transform_bound_points", 0, 0, glue_C1F99A_complete_step, 0xC1FB82, 1, 0, glue_C1F99A_owns},
     /* draw_stream.c */
     {0xC1FF0A, glue_C1FF0A, "test_stream_face", 240},
     /* draw_stream.c */

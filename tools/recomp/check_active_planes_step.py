@@ -27,12 +27,13 @@ def main():
     group_names += ("context_publication",)
     group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion", "postflight_messages", "postflight_file_callers", "input_device_callbacks", "input_display_setup", "main_loop_timers", "main_loop_control_messages", "record_control_actions", "main_loop_flight_controls", "flight_record_actions")
     group_names += ("flight_motion_helpers",)
-    group_names += ("flight_dynamics", "flight_geometry", "flight_markers", "projection_readouts", "hud_stream", "hud_parents","hud_readout_parents","hud_text_helpers","hud_projection_parents","hud_history_stream")
+    group_names += ("flight_dynamics", "flight_geometry", "flight_markers", "projection_readouts", "hud_stream", "hud_parents","hud_readout_parents","hud_text_helpers","hud_projection_parents","hud_history_stream","render_parents")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
         parser.error("--cases must be positive")
     groups = {
+        "render_parents": ["C2D16C", "C21500", "C2122A", "C20592", "C2168A", "C203D0", "C201A6", "C3019C", "C1FB82", "C1F99A"],
         "hud_history_stream": ["C0D04C", "C33370", "C1FE24", "C1FE46", "C0CF98"],
         "hud_projection_parents": ["C0DAEE", "C0CFFA", "C33CD2", "C33B38", "C332BC", "C32662"],
         "hud_text_helpers": ["C31C20", "C3271A", "C32726", "C32736", "C32794", "C32AA4", "C32AA6", "C32AB4"],
@@ -155,6 +156,7 @@ def main():
     menu_owners.update(json.loads((ROOT / "analysis/data/hud_text_helpers_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/hud_projection_parents_source_scope.json").read_text())["owners"])
     menu_owners.update(json.loads((ROOT / "analysis/data/hud_history_stream_source_scope.json").read_text())["owners"])
+    menu_owners.update(json.loads((ROOT / "analysis/data/render_parents_source_scope.json").read_text())["owners"])
     for entry in entries:
         if entry in menu_owners:
             for pc in menu_owners[entry]["source_pcs"]: addresses.setdefault(pc,entry)
@@ -166,7 +168,7 @@ def main():
             pc = line.split(":")[0]
             addresses.setdefault(pc, entry)
     header = "static const struct { uint32_t pc; int (*step)(void); } step_oracle_cases[] = {\n"
-    header += "".join(f"    {{0x{pc}u, glue_{entry}_{'complete_step' if entry in ('C28B34','C2651E','C28E28','C26EBE','C27456','C2EC90','C2EC94','C2EC9C','C2ECA4','C308E2','C30904','C30764','C309B6','C30B5C','C30D34','C30F78','C3112A','C31A64','C31ACC','C31F4C','C3201A','C3212A','C32178','C321D2','C32260','C31EB6','C31C60','C31D16','C31E6C','C31D64','C33F54','C328A8','C31C20','C3271A','C32726','C32736','C32794','C32AA4','C32AA6','C32AB4','C0DAEE','C0CFFA','C33CD2','C33B38','C332BC','C32662','C0D04C','C33370','C1FE24','C1FE46','C0CF98') else 'step'}}},\n" for pc, entry in sorted(addresses.items()))
+    header += "".join(f"    {{0x{pc}u, glue_{entry}_{'complete_step' if entry in ('C28B34','C2651E','C28E28','C26EBE','C27456','C2EC90','C2EC94','C2EC9C','C2ECA4','C308E2','C30904','C30764','C309B6','C30B5C','C30D34','C30F78','C3112A','C31A64','C31ACC','C31F4C','C3201A','C3212A','C32178','C321D2','C32260','C31EB6','C31C60','C31D16','C31E6C','C31D64','C33F54','C328A8','C31C20','C3271A','C32726','C32736','C32794','C32AA4','C32AA6','C32AB4','C0DAEE','C0CFFA','C33CD2','C33B38','C332BC','C32662','C0D04C','C33370','C1FE24','C1FE46','C0CF98','C2D16C','C21500','C2122A','C20592','C2168A','C203D0','C201A6','C3019C','C1FB82','C1F99A') else 'step'}}},\n" for pc, entry in sorted(addresses.items()))
     header += "};\n"
     (ROOT / "build/recomp").mkdir(parents=True, exist_ok=True)
     header_path = ROOT / "build/recomp/step_oracle_cases.h"

@@ -1,0 +1,2935 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "e4751c2c",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C2D16C",
+    "C21500",
+    "C2122A",
+    "C20592",
+    "C2168A",
+    "C203D0",
+    "C201A6",
+    "C3019C",
+    "C1FB82",
+    "C1F99A"
+  ],
+  "registered_translated_entries": 526,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 592,
+  "registered_timing_entries": 465,
+  "registered_translated_timing_entries": 399,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/render_parents_source_scope.json",
+      "sha256": "fcbd96aac70348de93bdcc0dfdc7bc43f0d5c89c233ac6406bfc88030ac07ffc"
+    },
+    "unique_instructions": 1101,
+    "shared_within_batch": 0,
+    "distinct_child_sites": 16,
+    "child_sites_by_owner": 16,
+    "actual_original_callability": {
+      "C2D16C": [
+        {
+          "pc": "C2D118",
+          "return_pc": "C2D11C",
+          "instruction": "bsr     $c2d16c",
+          "bytes": "61000052"
+        },
+        {
+          "pc": "C2D136",
+          "return_pc": "C2D13A",
+          "instruction": "bsr     $c2d16c",
+          "bytes": "61000034"
+        },
+        {
+          "pc": "C2D15C",
+          "return_pc": "C2D160",
+          "instruction": "bsr     $c2d16c",
+          "bytes": "6100000e"
+        }
+      ],
+      "C3019C": [
+        {
+          "pc": "C30104",
+          "return_pc": "C30108",
+          "instruction": "bsr     $c3019c",
+          "bytes": "61000096"
+        }
+      ],
+      "C1FB82": [
+        {
+          "pc": "C1FF36",
+          "return_pc": "C1FF3C",
+          "instruction": "jsr     $c1fb82.l",
+          "bytes": "4eb900c1fb82"
+        },
+        {
+          "pc": "C200B8",
+          "return_pc": "C200BE",
+          "instruction": "jsr     $c1fb82.l",
+          "bytes": "4eb900c1fb82"
+        },
+        {
+          "pc": "C20172",
+          "return_pc": "C20178",
+          "instruction": "jsr     $c1fb82.l",
+          "bytes": "4eb900c1fb82"
+        }
+      ],
+      "C1F99A": [
+        {
+          "pc": "C1F96C",
+          "return_pc": "C1F970",
+          "instruction": "bsr     $c1f99a",
+          "bytes": "6100002c"
+        }
+      ],
+      "C21500": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0028",
+          "slot": "C1FD10",
+          "bytes": "00c21500",
+          "target": "C21500",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C21500"
+            ]
+          ]
+        }
+      ],
+      "C2122A": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0030",
+          "slot": "C1FD18",
+          "bytes": "00c2122a",
+          "target": "C2122A",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C2122A"
+            ]
+          ]
+        }
+      ],
+      "C20592": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00A0",
+          "slot": "C1FD88",
+          "bytes": "00c20592",
+          "target": "C20592",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20592"
+            ]
+          ]
+        }
+      ],
+      "C2168A": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0020",
+          "slot": "C1FD08",
+          "bytes": "00c2168a",
+          "target": "C2168A",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C2168A"
+            ]
+          ]
+        }
+      ],
+      "C203D0": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "009C",
+          "slot": "C1FD84",
+          "bytes": "00c203d0",
+          "target": "C203D0",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C203D0"
+            ]
+          ]
+        }
+      ],
+      "C201A6": [
+        {
+          "kind": "original table and observed indirect return edge",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0010",
+          "slot": "C1FCF8",
+          "bytes": "00c201a6",
+          "target": "C201A6",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C201A6"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 327680,
+  "controlled_child_completed_calls": 163840,
+  "real_child_completed_calls": 163840,
+  "fixture_coverage": [
+    {
+      "owner": "C2D16C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 174,
+      "observed_owner_pcs": 174,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C2D16C.log",
+        "sha256": "218caf7558077abc899e257f983c7837eaa85893425df357f6636da300658205"
+      }
+    },
+    {
+      "owner": "C21500",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 55,
+      "observed_owner_pcs": 55,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C21500.log",
+        "sha256": "f8825cf0ceef6e21b7927e81aa182c1ddd39a36efd2a8ce2e1e97dc697f14e16"
+      }
+    },
+    {
+      "owner": "C2122A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C2122A.log",
+        "sha256": "ca27be13c635a38eca3ec3e52fe10aec3e9c9181a70eb4774649e88852da4700"
+      }
+    },
+    {
+      "owner": "C20592",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 64,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C20592.log",
+        "sha256": "57f12c5b11bda15555328d44f600b66c1fd7f2d8778d8f0db456e7c0c47beea3"
+      }
+    },
+    {
+      "owner": "C2168A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 121,
+      "observed_owner_pcs": 121,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C2168A.log",
+        "sha256": "71a72138ffb81fec3dc962e801174e33251232b4300ffa551b98e49e1310e757"
+      }
+    },
+    {
+      "owner": "C203D0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 132,
+      "observed_owner_pcs": 132,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C203D0.log",
+        "sha256": "2a3d09418dbe7cb62f3985140456a231bef14893cc6f5a1c3ff122449375c7bd"
+      }
+    },
+    {
+      "owner": "C201A6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 175,
+      "observed_owner_pcs": 175,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C201A6.log",
+        "sha256": "5da3feac4b6d5771bea6f7f3bd464f2ce6ee3c623f6f0e1e7ea3fd263981089f"
+      }
+    },
+    {
+      "owner": "C3019C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 27,
+      "observed_owner_pcs": 27,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C3019C.log",
+        "sha256": "46252c7c1bce0c826300e5f9ebea9ce5e9c21f1b55a1f3588d43c38579cd3b3a"
+      }
+    },
+    {
+      "owner": "C1FB82",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 123,
+      "observed_owner_pcs": 123,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C1FB82.log",
+        "sha256": "0109fdf25fb8af9e9d86f25ef5e29d4b02484c72e8ab706567f3bac1864ca006"
+      }
+    },
+    {
+      "owner": "C1F99A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 195,
+      "observed_owner_pcs": 195,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_contract_C1F99A.log",
+        "sha256": "695837ec5aaa67dc71838519321fa267c4c60aa9a1ea4181dadb0bd98b7f8756"
+      }
+    },
+    {
+      "owner": "C2D16C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 174,
+      "observed_owner_pcs": 116,
+      "unobserved_owner_pcs": [
+        "C2D2E2",
+        "C2D2E4",
+        "C2D2E6",
+        "C2D2E8",
+        "C2D2EA",
+        "C2D2EC",
+        "C2D2EE",
+        "C2D2F0",
+        "C2D2F2",
+        "C2D2F4",
+        "C2D2F6",
+        "C2D2F8",
+        "C2D2FA",
+        "C2D2FE",
+        "C2D300",
+        "C2D304",
+        "C2D306",
+        "C2D30A",
+        "C2D30C",
+        "C2D30E",
+        "C2D312",
+        "C2D314",
+        "C2D318",
+        "C2D31A",
+        "C2D31E",
+        "C2D320",
+        "C2D324",
+        "C2D326",
+        "C2D32A",
+        "C2D32C",
+        "C2D32E",
+        "C2D330",
+        "C2D336",
+        "C2D338",
+        "C2D33E",
+        "C2D342",
+        "C2D344",
+        "C2D35A",
+        "C2D35C",
+        "C2D35E",
+        "C2D360",
+        "C2D362",
+        "C2D366",
+        "C2D368",
+        "C2D36C",
+        "C2D36E",
+        "C2D372",
+        "C2D374",
+        "C2D376",
+        "C2D378",
+        "C2D380",
+        "C2D384",
+        "C2D38A",
+        "C2D38C",
+        "C2D392",
+        "C2D394",
+        "C2D39C",
+        "C2D3A2"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C2D16C.log",
+        "sha256": "12930b6c967ed2bf16c136c31229d2e03d7a1e7b49876eeb65fe53a07aa9699f"
+      }
+    },
+    {
+      "owner": "C21500",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 55,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [
+        "C21596",
+        "C2159A",
+        "C2159C"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C21500.log",
+        "sha256": "29722d3b7e0038e66b295e6d7bc3aa07fff615d51adebd4f74b6abf909af2b3a"
+      }
+    },
+    {
+      "owner": "C2122A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C2122A.log",
+        "sha256": "8b9c1aecc08d0ca4f1f5f3e06905724fc43caffed73ff51b5b76929140e3ed0c"
+      }
+    },
+    {
+      "owner": "C20592",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 62,
+      "unobserved_owner_pcs": [
+        "C2058E",
+        "C20590"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C20592.log",
+        "sha256": "2940158dc2cacebea709522cb29c01bbf4551486fb01e3a7862696ab2f4f4d43"
+      }
+    },
+    {
+      "owner": "C2168A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 121,
+      "observed_owner_pcs": 112,
+      "unobserved_owner_pcs": [
+        "C2172C",
+        "C2172E",
+        "C21730",
+        "C21732",
+        "C21736",
+        "C21738",
+        "C217E2",
+        "C217E6",
+        "C217E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C2168A.log",
+        "sha256": "7c7f1b1f67fe4951d61769f02fe2b063900a903d06aca83e02103dc4249e1c95"
+      }
+    },
+    {
+      "owner": "C203D0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 132,
+      "observed_owner_pcs": 130,
+      "unobserved_owner_pcs": [
+        "C203CC",
+        "C203CE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C203D0.log",
+        "sha256": "68b84e46fce0e2696c3eb01daf3a91b9f7098c22a90bfa715c0734bad687eaee"
+      }
+    },
+    {
+      "owner": "C201A6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 175,
+      "observed_owner_pcs": 175,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C201A6.log",
+        "sha256": "4023f03f1d0645034cb18f6f5b7f5ba72ca283bd397186d8d96ca36f0cb9b31a"
+      }
+    },
+    {
+      "owner": "C3019C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 27,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C301E2",
+        "C301E4",
+        "C301E6",
+        "C301EA",
+        "C301EE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C3019C.log",
+        "sha256": "6cad6da818829628ed7098edc2d9953c72a44129894e6c3c5597988a2cd26fe6"
+      }
+    },
+    {
+      "owner": "C1FB82",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 123,
+      "observed_owner_pcs": 123,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C1FB82.log",
+        "sha256": "91246720bbcf90bd010e2d71e8944a3cc40ef6942a35d47078517405e920afe0"
+      }
+    },
+    {
+      "owner": "C1F99A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 195,
+      "observed_owner_pcs": 195,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_real_C1F99A.log",
+        "sha256": "4f2239191b681bc67368fc4abe9aac99c3c648aeb49a9d8aa78fb178fcab58b1"
+      }
+    }
+  ],
+  "controlled_union_pcs": 1101,
+  "actual_dispatch_completed_calls": 30720,
+  "dispatch_fixtures": [
+    {
+      "owner": "C2D16C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 174,
+      "observed_owner_pcs": 116,
+      "unobserved_owner_pcs": [
+        "C2D2E2",
+        "C2D2E4",
+        "C2D2E6",
+        "C2D2E8",
+        "C2D2EA",
+        "C2D2EC",
+        "C2D2EE",
+        "C2D2F0",
+        "C2D2F2",
+        "C2D2F4",
+        "C2D2F6",
+        "C2D2F8",
+        "C2D2FA",
+        "C2D2FE",
+        "C2D300",
+        "C2D304",
+        "C2D306",
+        "C2D30A",
+        "C2D30C",
+        "C2D30E",
+        "C2D312",
+        "C2D314",
+        "C2D318",
+        "C2D31A",
+        "C2D31E",
+        "C2D320",
+        "C2D324",
+        "C2D326",
+        "C2D32A",
+        "C2D32C",
+        "C2D32E",
+        "C2D330",
+        "C2D336",
+        "C2D338",
+        "C2D33E",
+        "C2D342",
+        "C2D344",
+        "C2D35A",
+        "C2D35C",
+        "C2D35E",
+        "C2D360",
+        "C2D362",
+        "C2D366",
+        "C2D368",
+        "C2D36C",
+        "C2D36E",
+        "C2D372",
+        "C2D374",
+        "C2D376",
+        "C2D378",
+        "C2D380",
+        "C2D384",
+        "C2D38A",
+        "C2D38C",
+        "C2D392",
+        "C2D394",
+        "C2D39C",
+        "C2D3A2"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2D16C_on.log",
+        "sha256": "f6a11b52131bb8965cc2c8e979d79a32d3cf07820dad7111df0d179bb3987858"
+      }
+    },
+    {
+      "owner": "C2D16C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 174,
+      "observed_owner_pcs": 116,
+      "unobserved_owner_pcs": [
+        "C2D2E2",
+        "C2D2E4",
+        "C2D2E6",
+        "C2D2E8",
+        "C2D2EA",
+        "C2D2EC",
+        "C2D2EE",
+        "C2D2F0",
+        "C2D2F2",
+        "C2D2F4",
+        "C2D2F6",
+        "C2D2F8",
+        "C2D2FA",
+        "C2D2FE",
+        "C2D300",
+        "C2D304",
+        "C2D306",
+        "C2D30A",
+        "C2D30C",
+        "C2D30E",
+        "C2D312",
+        "C2D314",
+        "C2D318",
+        "C2D31A",
+        "C2D31E",
+        "C2D320",
+        "C2D324",
+        "C2D326",
+        "C2D32A",
+        "C2D32C",
+        "C2D32E",
+        "C2D330",
+        "C2D336",
+        "C2D338",
+        "C2D33E",
+        "C2D342",
+        "C2D344",
+        "C2D35A",
+        "C2D35C",
+        "C2D35E",
+        "C2D360",
+        "C2D362",
+        "C2D366",
+        "C2D368",
+        "C2D36C",
+        "C2D36E",
+        "C2D372",
+        "C2D374",
+        "C2D376",
+        "C2D378",
+        "C2D380",
+        "C2D384",
+        "C2D38A",
+        "C2D38C",
+        "C2D392",
+        "C2D394",
+        "C2D39C",
+        "C2D3A2"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2D16C_shadow.log",
+        "sha256": "f6a11b52131bb8965cc2c8e979d79a32d3cf07820dad7111df0d179bb3987858"
+      }
+    },
+    {
+      "owner": "C2D16C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 174,
+      "observed_owner_pcs": 116,
+      "unobserved_owner_pcs": [
+        "C2D2E2",
+        "C2D2E4",
+        "C2D2E6",
+        "C2D2E8",
+        "C2D2EA",
+        "C2D2EC",
+        "C2D2EE",
+        "C2D2F0",
+        "C2D2F2",
+        "C2D2F4",
+        "C2D2F6",
+        "C2D2F8",
+        "C2D2FA",
+        "C2D2FE",
+        "C2D300",
+        "C2D304",
+        "C2D306",
+        "C2D30A",
+        "C2D30C",
+        "C2D30E",
+        "C2D312",
+        "C2D314",
+        "C2D318",
+        "C2D31A",
+        "C2D31E",
+        "C2D320",
+        "C2D324",
+        "C2D326",
+        "C2D32A",
+        "C2D32C",
+        "C2D32E",
+        "C2D330",
+        "C2D336",
+        "C2D338",
+        "C2D33E",
+        "C2D342",
+        "C2D344",
+        "C2D35A",
+        "C2D35C",
+        "C2D35E",
+        "C2D360",
+        "C2D362",
+        "C2D366",
+        "C2D368",
+        "C2D36C",
+        "C2D36E",
+        "C2D372",
+        "C2D374",
+        "C2D376",
+        "C2D378",
+        "C2D380",
+        "C2D384",
+        "C2D38A",
+        "C2D38C",
+        "C2D392",
+        "C2D394",
+        "C2D39C",
+        "C2D3A2"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2D16C_sandbox.log",
+        "sha256": "f6a11b52131bb8965cc2c8e979d79a32d3cf07820dad7111df0d179bb3987858"
+      }
+    },
+    {
+      "owner": "C21500",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 55,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [
+        "C21596",
+        "C2159A",
+        "C2159C"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C21500_on.log",
+        "sha256": "06a12c5a658e0e01ffecbbf23b3e1d469fc5ba0cc75240f1dead23baf2f33dcf"
+      }
+    },
+    {
+      "owner": "C21500",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 55,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [
+        "C21596",
+        "C2159A",
+        "C2159C"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C21500_shadow.log",
+        "sha256": "06a12c5a658e0e01ffecbbf23b3e1d469fc5ba0cc75240f1dead23baf2f33dcf"
+      }
+    },
+    {
+      "owner": "C21500",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 55,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [
+        "C21596",
+        "C2159A",
+        "C2159C"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C21500_sandbox.log",
+        "sha256": "06a12c5a658e0e01ffecbbf23b3e1d469fc5ba0cc75240f1dead23baf2f33dcf"
+      }
+    },
+    {
+      "owner": "C2122A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2122A_on.log",
+        "sha256": "cda97e7c905ddc377d69b3f80f949305d09477d8933f1b302a7928a7ad35448a"
+      }
+    },
+    {
+      "owner": "C2122A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2122A_shadow.log",
+        "sha256": "cda97e7c905ddc377d69b3f80f949305d09477d8933f1b302a7928a7ad35448a"
+      }
+    },
+    {
+      "owner": "C2122A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2122A_sandbox.log",
+        "sha256": "cda97e7c905ddc377d69b3f80f949305d09477d8933f1b302a7928a7ad35448a"
+      }
+    },
+    {
+      "owner": "C20592",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 62,
+      "unobserved_owner_pcs": [
+        "C2058E",
+        "C20590"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C20592_on.log",
+        "sha256": "8bd8e5729b48239bb205fea8f927a2dac3f4b10a886dd93fe5e492ce99bb5c68"
+      }
+    },
+    {
+      "owner": "C20592",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 62,
+      "unobserved_owner_pcs": [
+        "C2058E",
+        "C20590"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C20592_shadow.log",
+        "sha256": "8bd8e5729b48239bb205fea8f927a2dac3f4b10a886dd93fe5e492ce99bb5c68"
+      }
+    },
+    {
+      "owner": "C20592",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 64,
+      "observed_owner_pcs": 62,
+      "unobserved_owner_pcs": [
+        "C2058E",
+        "C20590"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C20592_sandbox.log",
+        "sha256": "8bd8e5729b48239bb205fea8f927a2dac3f4b10a886dd93fe5e492ce99bb5c68"
+      }
+    },
+    {
+      "owner": "C2168A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 121,
+      "observed_owner_pcs": 112,
+      "unobserved_owner_pcs": [
+        "C2172C",
+        "C2172E",
+        "C21730",
+        "C21732",
+        "C21736",
+        "C21738",
+        "C217E2",
+        "C217E6",
+        "C217E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2168A_on.log",
+        "sha256": "60a5d222580663322bac9d3ef07f44d4ca9e38e6cb284eb0e80b7c1e6082df4b"
+      }
+    },
+    {
+      "owner": "C2168A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 121,
+      "observed_owner_pcs": 112,
+      "unobserved_owner_pcs": [
+        "C2172C",
+        "C2172E",
+        "C21730",
+        "C21732",
+        "C21736",
+        "C21738",
+        "C217E2",
+        "C217E6",
+        "C217E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2168A_shadow.log",
+        "sha256": "60a5d222580663322bac9d3ef07f44d4ca9e38e6cb284eb0e80b7c1e6082df4b"
+      }
+    },
+    {
+      "owner": "C2168A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 121,
+      "observed_owner_pcs": 112,
+      "unobserved_owner_pcs": [
+        "C2172C",
+        "C2172E",
+        "C21730",
+        "C21732",
+        "C21736",
+        "C21738",
+        "C217E2",
+        "C217E6",
+        "C217E8"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C2168A_sandbox.log",
+        "sha256": "60a5d222580663322bac9d3ef07f44d4ca9e38e6cb284eb0e80b7c1e6082df4b"
+      }
+    },
+    {
+      "owner": "C203D0",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 132,
+      "observed_owner_pcs": 130,
+      "unobserved_owner_pcs": [
+        "C203CC",
+        "C203CE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C203D0_on.log",
+        "sha256": "2e4f4b31cace606de6678fc06144cd345a535109eed601f447ed42b3ea3f10e9"
+      }
+    },
+    {
+      "owner": "C203D0",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 132,
+      "observed_owner_pcs": 130,
+      "unobserved_owner_pcs": [
+        "C203CC",
+        "C203CE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C203D0_shadow.log",
+        "sha256": "2e4f4b31cace606de6678fc06144cd345a535109eed601f447ed42b3ea3f10e9"
+      }
+    },
+    {
+      "owner": "C203D0",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 132,
+      "observed_owner_pcs": 130,
+      "unobserved_owner_pcs": [
+        "C203CC",
+        "C203CE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C203D0_sandbox.log",
+        "sha256": "2e4f4b31cace606de6678fc06144cd345a535109eed601f447ed42b3ea3f10e9"
+      }
+    },
+    {
+      "owner": "C201A6",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 175,
+      "observed_owner_pcs": 146,
+      "unobserved_owner_pcs": [
+        "C201A2",
+        "C201A4",
+        "C20224",
+        "C2022A",
+        "C20240",
+        "C20246",
+        "C20248",
+        "C20250",
+        "C20252",
+        "C20258",
+        "C2025A",
+        "C2029A",
+        "C2029E",
+        "C202A2",
+        "C202A6",
+        "C202A8",
+        "C202AA",
+        "C202AE",
+        "C202B0",
+        "C202FE",
+        "C20300",
+        "C20302",
+        "C20306",
+        "C20308",
+        "C20340",
+        "C20342",
+        "C20344",
+        "C20346",
+        "C20348"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C201A6_on.log",
+        "sha256": "c252c7ed159ef24cac1a6e605c4f47ce1e9c777e2235f22b34db553be31e7c97"
+      }
+    },
+    {
+      "owner": "C201A6",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 175,
+      "observed_owner_pcs": 146,
+      "unobserved_owner_pcs": [
+        "C201A2",
+        "C201A4",
+        "C20224",
+        "C2022A",
+        "C20240",
+        "C20246",
+        "C20248",
+        "C20250",
+        "C20252",
+        "C20258",
+        "C2025A",
+        "C2029A",
+        "C2029E",
+        "C202A2",
+        "C202A6",
+        "C202A8",
+        "C202AA",
+        "C202AE",
+        "C202B0",
+        "C202FE",
+        "C20300",
+        "C20302",
+        "C20306",
+        "C20308",
+        "C20340",
+        "C20342",
+        "C20344",
+        "C20346",
+        "C20348"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C201A6_shadow.log",
+        "sha256": "c252c7ed159ef24cac1a6e605c4f47ce1e9c777e2235f22b34db553be31e7c97"
+      }
+    },
+    {
+      "owner": "C201A6",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 175,
+      "observed_owner_pcs": 146,
+      "unobserved_owner_pcs": [
+        "C201A2",
+        "C201A4",
+        "C20224",
+        "C2022A",
+        "C20240",
+        "C20246",
+        "C20248",
+        "C20250",
+        "C20252",
+        "C20258",
+        "C2025A",
+        "C2029A",
+        "C2029E",
+        "C202A2",
+        "C202A6",
+        "C202A8",
+        "C202AA",
+        "C202AE",
+        "C202B0",
+        "C202FE",
+        "C20300",
+        "C20302",
+        "C20306",
+        "C20308",
+        "C20340",
+        "C20342",
+        "C20344",
+        "C20346",
+        "C20348"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C201A6_sandbox.log",
+        "sha256": "c252c7ed159ef24cac1a6e605c4f47ce1e9c777e2235f22b34db553be31e7c97"
+      }
+    },
+    {
+      "owner": "C3019C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 27,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C301E2",
+        "C301E4",
+        "C301E6",
+        "C301EA",
+        "C301EE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C3019C_on.log",
+        "sha256": "ed1d2214d96d28cfb8295a2d50bc9cf0be14f9c7e9083057e7a9108a28ec7a4c"
+      }
+    },
+    {
+      "owner": "C3019C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 27,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C301E2",
+        "C301E4",
+        "C301E6",
+        "C301EA",
+        "C301EE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C3019C_shadow.log",
+        "sha256": "ed1d2214d96d28cfb8295a2d50bc9cf0be14f9c7e9083057e7a9108a28ec7a4c"
+      }
+    },
+    {
+      "owner": "C3019C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 27,
+      "observed_owner_pcs": 22,
+      "unobserved_owner_pcs": [
+        "C301E2",
+        "C301E4",
+        "C301E6",
+        "C301EA",
+        "C301EE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C3019C_sandbox.log",
+        "sha256": "ed1d2214d96d28cfb8295a2d50bc9cf0be14f9c7e9083057e7a9108a28ec7a4c"
+      }
+    },
+    {
+      "owner": "C1FB82",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 123,
+      "observed_owner_pcs": 123,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C1FB82_on.log",
+        "sha256": "b7d99edcbffc3e0db5aad9346d70bcde01b4fffc77ade6c17b4d00a4b8b6568c"
+      }
+    },
+    {
+      "owner": "C1FB82",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 123,
+      "observed_owner_pcs": 123,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C1FB82_shadow.log",
+        "sha256": "b7d99edcbffc3e0db5aad9346d70bcde01b4fffc77ade6c17b4d00a4b8b6568c"
+      }
+    },
+    {
+      "owner": "C1FB82",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 123,
+      "observed_owner_pcs": 123,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C1FB82_sandbox.log",
+        "sha256": "b7d99edcbffc3e0db5aad9346d70bcde01b4fffc77ade6c17b4d00a4b8b6568c"
+      }
+    },
+    {
+      "owner": "C1F99A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 195,
+      "observed_owner_pcs": 195,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C1F99A_on.log",
+        "sha256": "c3920a9173bd39cbbf5aa6c577320e8b7735a381187edbdd79a67b36cc31166d"
+      }
+    },
+    {
+      "owner": "C1F99A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 195,
+      "observed_owner_pcs": 195,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C1F99A_shadow.log",
+        "sha256": "c3920a9173bd39cbbf5aa6c577320e8b7735a381187edbdd79a67b36cc31166d"
+      }
+    },
+    {
+      "owner": "C1F99A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 195,
+      "observed_owner_pcs": 195,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/render_parents_dispatch_C1F99A_sandbox.log",
+        "sha256": "c3920a9173bd39cbbf5aa6c577320e8b7735a381187edbdd79a67b36cc31166d"
+      }
+    }
+  ],
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "ordered_custom_writes": 0,
+    "original_children_use_no_draw_bounds": true,
+    "active_drawing_is_not_claimed_by_frozen_clock_fixtures": true,
+    "active_drawing_recording_checks_independent": true,
+    "shared_machine_observer_unchanged": true
+  },
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C2D16C": {
+          "calls": 30,
+          "compared": 20,
+          "matched": 20,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 10
+        },
+        "C21500": {
+          "calls": 193,
+          "compared": 190,
+          "matched": 190,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 3
+        },
+        "C2122A": {
+          "calls": 521,
+          "compared": 442,
+          "matched": 442,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 79
+        },
+        "C20592": {
+          "calls": 71,
+          "compared": 57,
+          "matched": 57,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 14
+        },
+        "C2168A": {
+          "calls": 254,
+          "compared": 235,
+          "matched": 235,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 19
+        },
+        "C203D0": {
+          "calls": 426,
+          "compared": 388,
+          "matched": 388,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 38
+        },
+        "C201A6": {
+          "calls": 909,
+          "compared": 682,
+          "matched": 682,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 227
+        },
+        "C3019C": {
+          "calls": 2999,
+          "compared": 2882,
+          "matched": 2882,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 117
+        },
+        "C1FB82": {
+          "calls": 48921,
+          "compared": 48654,
+          "matched": 48654,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 267
+        },
+        "C1F99A": {
+          "calls": 4254,
+          "compared": 4084,
+          "matched": 4084,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 170
+        }
+      },
+      "sandbox": {
+        "C2D16C": {
+          "calls": 30,
+          "compared": 30,
+          "matched": 30,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21500": {
+          "calls": 193,
+          "compared": 193,
+          "matched": 193,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2122A": {
+          "calls": 522,
+          "compared": 522,
+          "matched": 522,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20592": {
+          "calls": 71,
+          "compared": 71,
+          "matched": 71,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2168A": {
+          "calls": 254,
+          "compared": 254,
+          "matched": 254,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C203D0": {
+          "calls": 426,
+          "compared": 426,
+          "matched": 426,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C201A6": {
+          "calls": 1069,
+          "compared": 1069,
+          "matched": 1069,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C3019C": {
+          "calls": 4722,
+          "compared": 4722,
+          "matched": 4722,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1FB82": {
+          "calls": 49639,
+          "compared": 49639,
+          "matched": 49639,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C1F99A": {
+          "calls": 5967,
+          "compared": 5967,
+          "matched": 5967,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "shadow_matches": 57634,
+    "sandbox_matches": 62893,
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C2D16C",
+            "name": "draw_shape",
+            "calls": 30,
+            "compared": 20,
+            "matched": 20,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 10,
+            "mean_cycles": 38135,
+            "busy_input_calls": 20,
+            "busy_input_reads": 170
+          },
+          {
+            "entry": "C21500",
+            "name": "draw_block_face",
+            "calls": 193,
+            "compared": 190,
+            "matched": 190,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 870,
+            "busy_input_calls": 190,
+            "busy_input_reads": 30
+          },
+          {
+            "entry": "C2122A",
+            "name": "draw_offset_run",
+            "calls": 521,
+            "compared": 442,
+            "matched": 442,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 79,
+            "mean_cycles": 15653,
+            "busy_input_calls": 442,
+            "busy_input_reads": 11088
+          },
+          {
+            "entry": "C20592",
+            "name": "draw_split_square",
+            "calls": 71,
+            "compared": 57,
+            "matched": 57,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 14,
+            "mean_cycles": 11771,
+            "busy_input_calls": 57,
+            "busy_input_reads": 439
+          },
+          {
+            "entry": "C2168A",
+            "name": "draw_side_triangle",
+            "calls": 254,
+            "compared": 235,
+            "matched": 235,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 19,
+            "mean_cycles": 10701,
+            "busy_input_calls": 235,
+            "busy_input_reads": 1599
+          },
+          {
+            "entry": "C203D0",
+            "name": "draw_square_faces",
+            "calls": 426,
+            "compared": 388,
+            "matched": 388,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 38,
+            "mean_cycles": 12198,
+            "busy_input_calls": 388,
+            "busy_input_reads": 2845
+          },
+          {
+            "entry": "C201A6",
+            "name": "draw_record_shadow",
+            "calls": 900,
+            "compared": 679,
+            "matched": 679,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 221,
+            "mean_cycles": 15774,
+            "busy_input_calls": 679,
+            "busy_input_reads": 849
+          },
+          {
+            "entry": "C3019C",
+            "name": "draw_mark_polygon",
+            "calls": 1001,
+            "compared": 954,
+            "matched": 954,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 47,
+            "mean_cycles": 5639,
+            "busy_input_calls": 954,
+            "busy_input_reads": 6155
+          },
+          {
+            "entry": "C1FB82",
+            "name": "face_toward_eye",
+            "calls": 30340,
+            "compared": 30150,
+            "matched": 30150,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 190,
+            "mean_cycles": 729,
+            "busy_input_calls": 30150,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1F99A",
+            "name": "transform_bound_points",
+            "calls": 2329,
+            "compared": 2243,
+            "matched": 2243,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 86,
+            "mean_cycles": 5037,
+            "busy_input_calls": 2243,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2D16C_C21500_C2122A_C20592_C2168A_C203D0_C201A6_C3019C_C1FB82_C1F99A_demo01_shadow.json",
+          "sha256": "313e638f74ff924f4f92cc283423d4613f830e79c3a0847ae74c01830eb7f50a"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C2D16C",
+            "name": "draw_shape",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21500",
+            "name": "draw_block_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2122A",
+            "name": "draw_offset_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20592",
+            "name": "draw_split_square",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2168A",
+            "name": "draw_side_triangle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C203D0",
+            "name": "draw_square_faces",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C201A6",
+            "name": "draw_record_shadow",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3019C",
+            "name": "draw_mark_polygon",
+            "calls": 1647,
+            "compared": 1593,
+            "matched": 1593,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 54,
+            "mean_cycles": 5606,
+            "busy_input_calls": 1593,
+            "busy_input_reads": 9591
+          },
+          {
+            "entry": "C1FB82",
+            "name": "face_toward_eye",
+            "calls": 17112,
+            "compared": 17038,
+            "matched": 17038,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 74,
+            "mean_cycles": 719,
+            "busy_input_calls": 17038,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1F99A",
+            "name": "transform_bound_points",
+            "calls": 1223,
+            "compared": 1147,
+            "matched": 1147,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 76,
+            "mean_cycles": 7543,
+            "busy_input_calls": 1147,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2D16C_C21500_C2122A_C20592_C2168A_C203D0_C201A6_C3019C_C1FB82_C1F99A_qual_carrier_success_shadow.json",
+          "sha256": "4751035ac1920dfd9c67d826b133383b0abb0f81a65fb43c9efa18937ad1b77b"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C2D16C",
+            "name": "draw_shape",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21500",
+            "name": "draw_block_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2122A",
+            "name": "draw_offset_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20592",
+            "name": "draw_split_square",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2168A",
+            "name": "draw_side_triangle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C203D0",
+            "name": "draw_square_faces",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C201A6",
+            "name": "draw_record_shadow",
+            "calls": 9,
+            "compared": 3,
+            "matched": 3,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 6,
+            "mean_cycles": 59188,
+            "busy_input_calls": 3,
+            "busy_input_reads": 87
+          },
+          {
+            "entry": "C3019C",
+            "name": "draw_mark_polygon",
+            "calls": 351,
+            "compared": 335,
+            "matched": 335,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 16,
+            "mean_cycles": 5126,
+            "busy_input_calls": 335,
+            "busy_input_reads": 1770
+          },
+          {
+            "entry": "C1FB82",
+            "name": "face_toward_eye",
+            "calls": 1469,
+            "compared": 1466,
+            "matched": 1466,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 667,
+            "busy_input_calls": 1466,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1F99A",
+            "name": "transform_bound_points",
+            "calls": 702,
+            "compared": 694,
+            "matched": 694,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 8,
+            "mean_cycles": 3934,
+            "busy_input_calls": 694,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2D16C_C21500_C2122A_C20592_C2168A_C203D0_C201A6_C3019C_C1FB82_C1F99A_qual_fail_crashes_shadow.json",
+          "sha256": "be7938c8093c54394a707c7cff2673c249b6c042dad3466233bb2d31b92e21bd"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C2D16C",
+            "name": "draw_shape",
+            "calls": 30,
+            "compared": 30,
+            "matched": 30,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46646,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21500",
+            "name": "draw_block_face",
+            "calls": 193,
+            "compared": 193,
+            "matched": 193,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1060,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2122A",
+            "name": "draw_offset_run",
+            "calls": 522,
+            "compared": 522,
+            "matched": 522,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 15667,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20592",
+            "name": "draw_split_square",
+            "calls": 71,
+            "compared": 71,
+            "matched": 71,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 10563,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2168A",
+            "name": "draw_side_triangle",
+            "calls": 254,
+            "compared": 254,
+            "matched": 254,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8940,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C203D0",
+            "name": "draw_square_faces",
+            "calls": 426,
+            "compared": 426,
+            "matched": 426,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 11634,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C201A6",
+            "name": "draw_record_shadow",
+            "calls": 900,
+            "compared": 900,
+            "matched": 900,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 30304,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3019C",
+            "name": "draw_mark_polygon",
+            "calls": 1001,
+            "compared": 1001,
+            "matched": 1001,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5061,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FB82",
+            "name": "face_toward_eye",
+            "calls": 30340,
+            "compared": 30340,
+            "matched": 30340,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 729,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1F99A",
+            "name": "transform_bound_points",
+            "calls": 2329,
+            "compared": 2329,
+            "matched": 2329,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5149,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2D16C_C21500_C2122A_C20592_C2168A_C203D0_C201A6_C3019C_C1FB82_C1F99A_demo01_sandbox.json",
+          "sha256": "30ceab582f68387f1aaf008a22bceb09eecd7a441141580ce1bff1901e682e68"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C2D16C",
+            "name": "draw_shape",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21500",
+            "name": "draw_block_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2122A",
+            "name": "draw_offset_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20592",
+            "name": "draw_split_square",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2168A",
+            "name": "draw_side_triangle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C203D0",
+            "name": "draw_square_faces",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C201A6",
+            "name": "draw_record_shadow",
+            "calls": 160,
+            "compared": 160,
+            "matched": 160,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1097,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3019C",
+            "name": "draw_mark_polygon",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4749,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FB82",
+            "name": "face_toward_eye",
+            "calls": 17830,
+            "compared": 17830,
+            "matched": 17830,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 671,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1F99A",
+            "name": "transform_bound_points",
+            "calls": 2936,
+            "compared": 2936,
+            "matched": 2936,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3992,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2D16C_C21500_C2122A_C20592_C2168A_C203D0_C201A6_C3019C_C1FB82_C1F99A_qual_carrier_success_sandbox.json",
+          "sha256": "643a010d1a0ec885f1c85f1ac5d60a0ec14145842ac473eb82b5da12b05add01"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C2D16C",
+            "name": "draw_shape",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21500",
+            "name": "draw_block_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2122A",
+            "name": "draw_offset_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20592",
+            "name": "draw_split_square",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2168A",
+            "name": "draw_side_triangle",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C203D0",
+            "name": "draw_square_faces",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C201A6",
+            "name": "draw_record_shadow",
+            "calls": 9,
+            "compared": 9,
+            "matched": 9,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 49610,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3019C",
+            "name": "draw_mark_polygon",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4702,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FB82",
+            "name": "face_toward_eye",
+            "calls": 1469,
+            "compared": 1469,
+            "matched": 1469,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 667,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1F99A",
+            "name": "transform_bound_points",
+            "calls": 702,
+            "compared": 702,
+            "matched": 702,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3952,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2D16C_C21500_C2122A_C20592_C2168A_C203D0_C201A6_C3019C_C1FB82_C1F99A_qual_fail_crashes_sandbox.json",
+          "sha256": "b2714949350728e21b43ecee9d8393ad892569870fd366d112882a7b570e0cff"
+        }
+      }
+    ],
+    "each_owner_has_completed_comparisons": true
+  },
+  "instruction_dma": {
+    "local_instructions": 1101,
+    "local_cases": 35232,
+    "previous_unique_instructions": 25346,
+    "overlap_instructions": 123,
+    "combined_unique_instructions": 26324,
+    "combined_cases": 842368,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 31,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_menu_context_math.h",
+      "sha256": "1bbc8394e94f2eaa3a8678bb56381bf3b143af05c9a84283ba034188a7978b4e"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "port/game/hud_history_stream.c",
+      "sha256": "0ed4005248c2505986f6414140b17f986007bee2c24f79739fa4358bf2c39146"
+    },
+    {
+      "path": "port/game/hud_history_stream.h",
+      "sha256": "d24936b40e4db6404ce6c1d0565180d737bbae0eddc2da7395420a164a9c0211"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream.c",
+      "sha256": "a8547b097febb8baf72c0883bff9d876cd67569c1dfd05c89e57d1574dff3a35"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream_math.h",
+      "sha256": "5b13917cc0efd7913dc9d540544e80791269412bac89bcc9db293ea1c07a3f1e"
+    },
+    {
+      "path": "port/game/hud_projection_parents.c",
+      "sha256": "39d02a229e36d0bc370f6597542aa0f6e3e356d8590696431242f0dd519ee6e9"
+    },
+    {
+      "path": "port/game/hud_projection_parents.h",
+      "sha256": "4da55f5eeece8103522f7e93fda78d2b0ba435a88c7d71911f42e907a444293b"
+    },
+    {
+      "path": "port/game/hud_text_helpers.c",
+      "sha256": "f26adc5ba6cfa96edcdef2fcc48447c4ab9c79cbaaf7b982ebd985a9b61c8f68"
+    },
+    {
+      "path": "port/game/hud_text_helpers.h",
+      "sha256": "11c1b8f11d0dd0bc96360261bc192d73f921f22fc6f32a4f8d580604b8938493"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents.c",
+      "sha256": "3e49372a466d37b5af7431b104ee3d9a3632bd2dc61ca9d8e9e7bd07f6f76456"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents_math.h",
+      "sha256": "2ce71c38f5760e27a112dd6bcf81564b845a9cbce3e0036b0fea5992448c4113"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers.c",
+      "sha256": "6d82850c0d2ba62da9ac036b13d11cec3224c8b340d74a063af80b3e04e63290"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers_math.h",
+      "sha256": "6c5c6028b6934c94c0a01bf4ac201ab634575be14ba0e1b113f3147744463bac"
+    }
+  ],
+  "full_gate": {
+    "rows": 592,
+    "recordings": 3,
+    "shadow_matches": 568446,
+    "sandbox_matches": 443868,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308147,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "e813b77d9232857cd525356f27a847a86eb9262c122a1d21587aa82f39610db1"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207396,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "954d67ec07dacf866b1831e4904b5645656ab85e3051c0bbdb90ee8dbf746848"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52903,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "650c2fd2a54067b5c1cd9645d51f7fe71df09fc468c2c520f93c51414939e1ae"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150619,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "0f4be8c54a8fd5560286618be8c24a5dbdd3eb399716260ca3c286cfc822c718"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 248003,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "d756b9d1bd609e66ca706549b3c9ce2cddc84b87067fec57312d450a80177603"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45246,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "1c75e4173cf982a027645382a5acead9c26ecffb2d29d3ce5693463e04a8d7b6"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1717413761,
+    "build_gib": 1.599
+  },
+  "limits": [
+    "Controlled contracts cover every owned boundary and compare complete child-entry CPU/SR/RAM snapshots.",
+    "Original-child shape uses a zero view matrix; clip/segment inputs use original degenerate geometry; marker vertices and pre-existing tail vertices are beyond the original last-row bound. Active shape, mask/fill/outline and DMA are not claimed by frozen-clock fixtures.",
+    "Face-side, record-shadow and all three vertex paths also have complete original-child coverage. Exact missing PCs of the other owners remain explicit.",
+    "Original indirect callers and their exact table slots/observed return edges are sealed. No whole table extent or selector guard is invented.",
+    "Seventeen face/segment/grid/block stream parents and the full original cold/indirect/callback graph remain game-function work.",
+    "C2C392 computed transfer, C1612C graphics-wait integration, ALL416/361, Copper fade and deferred Kickstart services remain open."
+  ],
+  "removed_old_glue": [],
+  "next": {
+    "entries": [
+      "C2129C",
+      "C212B0",
+      "C211DC",
+      "C2131C",
+      "C20E4E",
+      "C20E40",
+      "C21490",
+      "C2139E",
+      "C21412",
+      "C20F10",
+      "C20EC4",
+      "C20D68",
+      "C20904",
+      "C21A20",
+      "C217EA",
+      "C2159E",
+      "C210E6"
+    ],
+    "unique_instructions": 773,
+    "shared_instructions": 99,
+    "manifest": {
+      "path": "analysis/data/face_stream_parents_scope_inventory.json",
+      "sha256": "6b11d7fc79a5377d7320fca504789e26b3d70ac74f6c2309d7ad7a7d8b94c60d"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/render_parents.c",
+      "sha256": "6e0cfacf58d8dd2a2cb2464e9b939aa9ae3ee85e70c3dec1c2831194a0338857"
+    },
+    {
+      "path": "port/game/render_parents.h",
+      "sha256": "ebda35faa6d5411682fa4feb0efda618130ce11966c12aebf898293200744cc7"
+    },
+    {
+      "path": "port/game/glue/glue_postflight_hud.c",
+      "sha256": "cff5fbda40c171a6b759918ab5c761d0b30021c7aa82b5b4d617eae4ab881e2d"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "b363077fbeeb9464d209df317884dddd83968be1f10d8cf40d92d220f9f87b51"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "7834e20b1c15650bd7cfd7040aaf081c69b2e9842d63f1edf2f181d301fa4bd3"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "c4f4e8b37982119bf6c27feea91c6b92aa54bbf75c9933efca80ae87376b1616"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "174b3712fc15b23d2a17d3b32f504d8c92b1b0feb4dcbf161aec020d01d2694f"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents.c",
+      "sha256": "60dbc5d45f603b4953ab2975f18d69f4e82a7a7d8fdefd7b67eaf51d1115aa88"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents.h",
+      "sha256": "abd25aaa18044eb0d639e1bb8d5c49bd6fa88cfa8ada68e81112cfadd91d66af"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents_math.h",
+      "sha256": "a56b8367cd08440e2579d280c77499794c475cf14370a2a5a904f60bc38ac151"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents_step.c",
+      "sha256": "ea3e30b04d739d995d178ace06800fbfae6351c2b1a441cb67d0d377a60bebcb"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_legacy_render_parents_scope.py",
+      "sha256": "e6a6ec9a13d21227c995932e79ca24c1d9d4aaea75cd57c68c0540ccab03933f"
+    },
+    {
+      "path": "tools/recomp/audit_render_parents_source.py",
+      "sha256": "76a093b497c83a8e6b24513d9a7d89122b3a9e0e7eb937f27382ecf1fa8d699f"
+    },
+    {
+      "path": "tools/recomp/check_render_parents.py",
+      "sha256": "be27edeec11a9fe311672ac25f97ac22dd38ace7aa9841375ab0fd49a447e384"
+    },
+    {
+      "path": "tools/recomp/check_render_parents_dispatch.py",
+      "sha256": "480ec6b988334660f767f13b0a6cd494aaeb94fcc7e851ca21c78d7a435b94cc"
+    },
+    {
+      "path": "tools/recomp/render_parents_bus_budget.c",
+      "sha256": "bcfbe5f2803b4c2059f4f2a14cff1c129b3dbb555fb7d6747a58642e77c0cee3"
+    },
+    {
+      "path": "tools/recomp/render_parents_contract_children.c",
+      "sha256": "864d8a374f32d3a1880b28074872700558306ed90b610b302f20a361f3a642bc"
+    },
+    {
+      "path": "tools/recomp/render_parents_contract_oracle.c",
+      "sha256": "a848136846c34d15d5058a4e343178b9f40714f15f71f30ef1ef64efeff6904a"
+    },
+    {
+      "path": "tools/recomp/render_parents_dispatch_oracle.c",
+      "sha256": "7c6fca22746096437df9173480fcc3cac3c9c5805721db65a102d7e11f5c1d48"
+    },
+    {
+      "path": "tools/recomp/render_parents_fixture.h",
+      "sha256": "66b022f4c87b2f2d686913687941ba34213bb7287f72bbf0b36a06a6d8c4c78d"
+    },
+    {
+      "path": "tools/recomp/render_parents_oracle.c",
+      "sha256": "95865a715d5e7fcdfc2cd0e9040e1746627596e560e581c7821c5d806f97105b"
+    },
+    {
+      "path": "tools/recomp/audit_face_stream_parents_scope.py",
+      "sha256": "1a87d96ffbe364fe1e22c7cf3ac9ee29842c76397ffd9779a23a3b9e19efdaf6"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/render_parents_contract_full.log",
+      "sha256": "2973e438455c9575892bf477df367ebd67a10d0da3107068b689b3cd1b189644"
+    },
+    {
+      "path": "build/recomp/render_parents_real_full.log",
+      "sha256": "1b6e77851d1876d3eaf93a3fa16f50a0fc9a20692be532c6f6aa56146b605b44"
+    },
+    {
+      "path": "build/recomp/render_parents_dispatch_probe.log",
+      "sha256": "396d0c1fc7a882f28f427c552a6432af074065af18b7dd0380e18441edbfd671"
+    },
+    {
+      "path": "build/recomp/render_parents_dma_local.log",
+      "sha256": "794b04a6597f8ed49574aa074a095d65eedc4ab0be86973f8dcacdddba45cf1e"
+    },
+    {
+      "path": "build/recomp/render_parents_dma_union.log",
+      "sha256": "fe5869adba0e8e2f0b1fdddf0ca2b1f08768609956b4fe06ab7c81bd4b494375"
+    },
+    {
+      "path": "build/recomp/render_parents_compatibility.log",
+      "sha256": "27421c26785d3a6883b92e6cef803a08f5b4a5bab581ca52e3d767f5a9138bbd"
+    },
+    {
+      "path": "build/recomp/render_parents_normal_build.log",
+      "sha256": "8cbadcf3c71ace490ae337e48fc269d0ca34696121abe1bd3550fc6bbcd8bfb2"
+    },
+    {
+      "path": "build/recomp/render_parents_cleanup_build.log",
+      "sha256": "fb06faa038fb7e285743f523e2e12bd861b2af3ea6202f21856b85e7cc5ceda2"
+    },
+    {
+      "path": "build/recomp/render_parents_cleanup_msvc.log",
+      "sha256": "3fb450eeac47c003a21fc8fc6d4f3914fb14b47cba5b94563ce254cc989ddf04"
+    },
+    {
+      "path": "build/recomp/render_parents_msvc.log",
+      "sha256": "220a3c5df2e3c68e281b7f99dc7138d68e57a981952c1e28a64711925e522ecc"
+    },
+    {
+      "path": "build/recomp/render_parents_msvc_configure2.log",
+      "sha256": "abe78f40cb4e351f258ce6e5060b480fb20b75562210216f75f3177e13c8fe2b"
+    },
+    {
+      "path": "build/recomp/render_parents_ports_gate.log",
+      "sha256": "0c86fee4dd3b165442252d3116353e6d28eab02356ea9f83c1db760668e8a370"
+    },
+    {
+      "path": "build/recomp/render_parents_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/render_parents_timing.log",
+      "sha256": "9b1f6be3a320739de1a27b37d7ea3124b97e566e4e8139fe85a861cade0d530f"
+    },
+    {
+      "path": "build/recomp/render_parents_whole_call.log",
+      "sha256": "33cd20de947f1745bae9dec5bf27c5574d1d59cf1602fcb3df048e22ec31c82b"
+    }
+  ],
+  "retained_build_failures": [
+    {
+      "path": "build/recomp/render_parents_contract_probe.log",
+      "sha256": "30bb59133abd2119d85aacc9d215238998369555d5cd800524dab2f6c0d8b078"
+    },
+    {
+      "path": "build/recomp/render_parents_real_probe.log",
+      "sha256": "b94a4f0f5ed243b43c1c7a61c3dbe55887df1af443d73382ac06fe903bef9001"
+    },
+    {
+      "path": "build/recomp/render_parents_msvc_configure.log",
+      "sha256": "c7d1fec2067cce04de07fb5c3bafa7ffd80ec71645fd92557ee490173f3ebb52"
+    }
+  ],
+  "unreachable_private_replay_removed": true,
+  "remaining_export_bodies_unchanged": {
+    "int glue_C28E28(void)": "fc95bd3040eb2e8a623db0c7dbaa4a7c84109930b770300b44392fe074e57738",
+    "void mark_polygon_registers(uint16_t last_size)": "1ae74e7d1a4ee63d5231015c4bd3a758b4f5e22d96d34605ff613d900c2a583b"
+  }
+}

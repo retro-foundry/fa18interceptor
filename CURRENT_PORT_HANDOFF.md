@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-04. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 8afa3c83); ignored gate logs may
+history (the preceding handoff is in commit e4751c2c); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -64,6 +64,8 @@ Six complete projection, cue and conditional-text parent upgrades retain
 that translated count and raise source-timed entries to 451.
 Five complete history/display and indirect stream upgrades retain that
 translated count and raise source-timed entries to 456.
+Ten complete older render-parent upgrades retain that translated count
+and raise source-timed entries to 465.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -71,6 +73,37 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 526 translated of the seeded 624 plus sixty-six source-only entries remain
+  registered: 592 rows, 465 source-timed (399 translated plus sixty-six
+  source-only). Ten complete older rendering-parent upgrades own 1,101
+  unique / zero shared boundaries and sixteen original child sites, with
+  direct and six indirect table/caller edges sealed. All 327,680 whole
+  CPU/PC/full-SR/all-RAM calls pass; controlled contracts cover every owned
+  boundary. Face-side, record-shadow and all vertex paths have complete
+  original-child coverage; other exact missing PCs and original zero-view,
+  degenerate-geometry and last-row bounds remain explicit. Frozen-clock
+  fixtures make no active shape/mask/fill/outline/DMA claim. Ordered packets
+  and terminal hardware match with zero fixture writes. Actual dispatch
+  passes 30,720 bounded calls, exact classification and all guards. Normal
+  C passes every owner: 57,634 shadow / 62,893 sandbox. All 36,236 isolated
+  live frames and RAM seals match. Shared runtime/CPU/bus/arithmetic/
+  classification/observer and earlier completed HUD domains are unchanged;
+  all 31 older generator families are byte-identical. Local DMA passes
+  1,101 / 35,232; fresh combined DMA and independent union pass 26,324 /
+  842,368 (previous 25,346 plus 1,101, overlap 123 from C1FB82). GNU/MSVC
+  Release pass; build/ is 1.599 GiB. Full 592-row gate passes 568,446
+  shadow / 443,868 sandbox, zero mismatches, exact seals and poison
+  frames. Family exact through 600; ALL remains 416/361. See analysis/
+  routines/native_c_render_parents.md and analysis/figures/
+  native_render_parents_checkpoint.json for exact hashes, classifications,
+  per-owner coverage limits and retained initial failures. Next seventeen
+  segment/face/grid/block stream parents have 773 unique / 99 shared
+  boundaries and original callers sealed in analysis/data/
+  face_stream_parents_scope_inventory.json. Other older adapters, C2C392
+  computed transfer, C1612C graphics-wait integration and full original
+  cold/indirect/callback coverage remain open. No service or timing-only
+  work is selected.
 
 - 526 of 624 translated entries plus sixty-six source-only entries remain
   registered: 592 rows, 456 source-timed (390 translated plus sixty-six

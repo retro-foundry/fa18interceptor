@@ -1,0 +1,201 @@
+/* Complete render parent proof, including cold internal paths and real children. */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "m68kcpu.h"
+#include "m68kops.h"
+#include "machine.h"
+#include "bus.h"
+#include "recomp_runtime.h"
+#include "recomp_ports.h"
+#include "memory.h"
+#include "ports_glue.h"
+#include "globals.h"
+
+extern int fa18_write_log_active,fa18_write_log_hardware;
+extern int fa18_structural_port_classified(uint32_t entry,int hardware);
+extern void fa18_structural_reset_write_log(void);
+extern void fa18_render_parents_fixture_begin(const char *phase);
+extern int fa18_structural_port_matched(uint32_t entry);
+extern int fa18_structural_port_unused(uint32_t entry);
+extern int fa18_ports_enter(int function,int label,int via_call);
+extern unsigned fa18_hud_hardware_count(void);
+extern void fa18_hud_hardware_begin(void);
+extern void fa18_hud_hardware_reference(void);
+extern int fa18_hud_hardware_check(void);
+extern int64_t fa18_next_event;
+static uint32_t seed=0xc0f5f8u;
+static uint32_t random_value(void) {
+    seed^=seed<<13; seed^=seed>>17; seed^=seed<<5; return seed;
+}
+static uint8_t *read_file(const char *path,size_t *size) {
+    FILE *file=fopen(path,"rb"); long length; uint8_t *bytes;
+    if(!file) return NULL;
+    if(fseek(file,0,SEEK_END) || (length=ftell(file))<0 || fseek(file,0,SEEK_SET)) return NULL;
+    bytes=malloc((size_t)length);
+    if(!bytes || fread(bytes,1,(size_t)length,file)!=(size_t)length || fclose(file)) return NULL;
+    *size=(size_t)length; return bytes;
+}
+static uint32_t selected_entry=0xc2d16cu;
+static const uint32_t source_boundaries[]={0xC1F99Au,0xC1F9A0u,0xC1F9A2u,0xC1F9A6u,0xC1F9ACu,0xC1F9B0u,0xC1F9B4u,0xC1F9B8u,0xC1F9BCu,0xC1F9C0u,0xC1F9C6u,0xC1F9C8u,0xC1F9CAu,0xC1F9D0u,0xC1F9D2u,0xC1F9DAu,0xC1F9DCu,0xC1F9DEu,0xC1F9E0u,0xC1F9E2u,0xC1F9E6u,0xC1F9E8u,0xC1F9EAu,0xC1F9ECu,0xC1F9EEu,0xC1F9F2u,0xC1F9F6u,0xC1F9F8u,0xC1F9FAu,0xC1F9FCu,0xC1F9FEu,0xC1FA00u,0xC1FA02u,0xC1FA04u,0xC1FA06u,0xC1FA08u,0xC1FA0Au,0xC1FA0Cu,0xC1FA0Eu,0xC1FA10u,0xC1FA12u,0xC1FA14u,0xC1FA16u,0xC1FA18u,0xC1FA1Au,0xC1FA1Cu,0xC1FA1Eu,0xC1FA20u,0xC1FA22u,0xC1FA24u,0xC1FA26u,0xC1FA28u,0xC1FA2Au,0xC1FA2Cu,0xC1FA2Eu,0xC1FA30u,0xC1FA36u,0xC1FA38u,0xC1FA3Cu,0xC1FA3Eu,0xC1FA40u,0xC1FA42u,0xC1FA44u,0xC1FA46u,0xC1FA48u,0xC1FA4Cu,0xC1FA4Eu,0xC1FA50u,0xC1FA52u,0xC1FA54u,0xC1FA56u,0xC1FA58u,0xC1FA5Au,0xC1FA5Cu,0xC1FA5Eu,0xC1FA60u,0xC1FA62u,0xC1FA64u,0xC1FA66u,0xC1FA68u,0xC1FA6Au,0xC1FA6Cu,0xC1FA6Eu,0xC1FA70u,0xC1FA72u,0xC1FA74u,0xC1FA76u,0xC1FA78u,0xC1FA7Au,0xC1FA7Cu,0xC1FA7Eu,0xC1FA80u,0xC1FA82u,0xC1FA86u,0xC1FA8Au,0xC1FA8Eu,0xC1FA90u,0xC1FA92u,0xC1FA96u,0xC1FA98u,0xC1FA9Eu,0xC1FAA0u,0xC1FAA6u,0xC1FAA8u,0xC1FAAEu,0xC1FAB4u,0xC1FAB6u,0xC1FABAu,0xC1FABCu,0xC1FABEu,0xC1FAC0u,0xC1FAC4u,0xC1FAC8u,0xC1FACAu,0xC1FACCu,0xC1FAD0u,0xC1FAD4u,0xC1FAD6u,0xC1FAD8u,0xC1FADAu,0xC1FADCu,0xC1FAE0u,0xC1FAE2u,0xC1FAE4u,0xC1FAE6u,0xC1FAE8u,0xC1FAEAu,0xC1FAECu,0xC1FAEEu,0xC1FAF0u,0xC1FAF2u,0xC1FAF4u,0xC1FAF6u,0xC1FAF8u,0xC1FAFAu,0xC1FAFCu,0xC1FAFEu,0xC1FB00u,0xC1FB02u,0xC1FB04u,0xC1FB06u,0xC1FB08u,0xC1FB0Au,0xC1FB0Cu,0xC1FB0Eu,0xC1FB10u,0xC1FB12u,0xC1FB14u,0xC1FB16u,0xC1FB18u,0xC1FB1Au,0xC1FB1Eu,0xC1FB20u,0xC1FB22u,0xC1FB24u,0xC1FB26u,0xC1FB28u,0xC1FB2Au,0xC1FB2Cu,0xC1FB32u,0xC1FB34u,0xC1FB36u,0xC1FB3Au,0xC1FB3Cu,0xC1FB3Eu,0xC1FB40u,0xC1FB42u,0xC1FB44u,0xC1FB46u,0xC1FB48u,0xC1FB4Au,0xC1FB4Cu,0xC1FB4Eu,0xC1FB50u,0xC1FB52u,0xC1FB54u,0xC1FB56u,0xC1FB58u,0xC1FB5Au,0xC1FB5Cu,0xC1FB5Eu,0xC1FB60u,0xC1FB62u,0xC1FB64u,0xC1FB66u,0xC1FB68u,0xC1FB6Au,0xC1FB6Eu,0xC1FB70u,0xC1FB72u,0xC1FB76u,0xC1FB78u,0xC1FB7Cu,0xC1FB7Eu,0xC1FB80u,0xC1FB82u,0xC1FB84u,0xC1FB88u,0xC1FB8Cu,0xC1FB90u,0xC1FB92u,0xC1FB96u,0xC1FB98u,0xC1FB9Cu,0xC1FBA2u,0xC1FBA4u,0xC1FBA6u,0xC1FBA8u,0xC1FBAEu,0xC1FBB4u,0xC1FBB8u,0xC1FBBCu,0xC1FBC0u,0xC1FBC2u,0xC1FBC4u,0xC1FBC6u,0xC1FBC8u,0xC1FBCAu,0xC1FBCCu,0xC1FBCEu,0xC1FBD0u,0xC1FBD2u,0xC1FBD4u,0xC1FBDAu,0xC1FBDEu,0xC1FBE0u,0xC1FBE2u,0xC1FBE4u,0xC1FBEAu,0xC1FBECu,0xC1FBEEu,0xC1FBF2u,0xC1FBF4u,0xC1FBF6u,0xC1FBF8u,0xC1FBFCu,0xC1FBFEu,0xC1FC00u,0xC1FC02u,0xC1FC04u,0xC1FC06u,0xC1FC08u,0xC1FC0Au,0xC1FC0Cu,0xC1FC0Eu,0xC1FC10u,0xC1FC12u,0xC1FC14u,0xC1FC16u,0xC1FC18u,0xC1FC1Au,0xC1FC1Cu,0xC1FC1Eu,0xC1FC20u,0xC1FC22u,0xC1FC24u,0xC1FC26u,0xC1FC28u,0xC1FC2Au,0xC1FC2Cu,0xC1FC2Eu,0xC1FC30u,0xC1FC32u,0xC1FC34u,0xC1FC36u,0xC1FC38u,0xC1FC3Au,0xC1FC3Eu,0xC1FC42u,0xC1FC48u,0xC1FC4Au,0xC1FC4Eu,0xC1FC50u,0xC1FC52u,0xC1FC54u,0xC1FC56u,0xC1FC58u,0xC1FC5Au,0xC1FC5Eu,0xC1FC62u,0xC1FC66u,0xC1FC68u,0xC1FC6Eu,0xC1FC70u,0xC1FC76u,0xC1FC7Cu,0xC1FC7Eu,0xC1FC80u,0xC1FC82u,0xC1FC84u,0xC1FC88u,0xC1FC8Cu,0xC1FC90u,0xC1FC92u,0xC1FC98u,0xC1FC9Au,0xC1FCA0u,0xC1FCA6u,0xC1FCA8u,0xC1FCAAu,0xC1FCACu,0xC1FCAEu,0xC1FCB2u,0xC1FCB6u,0xC1FCBAu,0xC1FCBCu,0xC1FCC2u,0xC1FCC4u,0xC1FCC6u,0xC1FCC8u,0xC1FCCAu,0xC1FCCEu,0xC1FCD0u,0xC1FCD4u,0xC1FCD6u,0xC1FCD8u,0xC1FCDAu,0xC1FCDCu,0xC201A2u,0xC201A4u,0xC201A6u,0xC201ACu,0xC201B2u,0xC201B8u,0xC201BCu,0xC201BEu,0xC201C2u,0xC201C4u,0xC201C8u,0xC201CAu,0xC201CEu,0xC201D0u,0xC201D4u,0xC201D6u,0xC201D8u,0xC201DAu,0xC201DCu,0xC201DEu,0xC201E0u,0xC201E6u,0xC201E8u,0xC201ECu,0xC201EEu,0xC201F4u,0xC201FAu,0xC201FCu,0xC20202u,0xC20204u,0xC2020Cu,0xC2020Eu,0xC20214u,0xC2021Au,0xC2021Cu,0xC20222u,0xC20224u,0xC2022Au,0xC2022Cu,0xC2022Eu,0xC20230u,0xC20236u,0xC20238u,0xC2023Eu,0xC20240u,0xC20246u,0xC20248u,0xC20250u,0xC20252u,0xC20258u,0xC2025Au,0xC2025Cu,0xC20260u,0xC20262u,0xC20264u,0xC20266u,0xC2026Au,0xC2026Eu,0xC20272u,0xC2027Au,0xC2027Cu,0xC2027Eu,0xC20280u,0xC20282u,0xC20284u,0xC20288u,0xC2028Au,0xC2028Cu,0xC20292u,0xC20298u,0xC2029Au,0xC2029Eu,0xC202A2u,0xC202A6u,0xC202A8u,0xC202AAu,0xC202AEu,0xC202B0u,0xC202B6u,0xC202BCu,0xC202C2u,0xC202C8u,0xC202CAu,0xC202CCu,0xC202CEu,0xC202D0u,0xC202D2u,0xC202D6u,0xC202D8u,0xC202DAu,0xC202DCu,0xC202E2u,0xC202EAu,0xC202F0u,0xC202F2u,0xC202F6u,0xC202F8u,0xC202FAu,0xC202FCu,0xC202FEu,0xC20300u,0xC20302u,0xC20306u,0xC20308u,0xC2030Au,0xC2030Eu,0xC20310u,0xC20316u,0xC2031Au,0xC2031Eu,0xC20320u,0xC20324u,0xC20326u,0xC2032Au,0xC2032Eu,0xC20330u,0xC20334u,0xC20336u,0xC20338u,0xC2033Au,0xC2033Cu,0xC2033Eu,0xC20340u,0xC20342u,0xC20344u,0xC20346u,0xC20348u,0xC2034Au,0xC2034Cu,0xC2034Eu,0xC20354u,0xC20356u,0xC2035Au,0xC2035Cu,0xC20360u,0xC20364u,0xC20366u,0xC2036Au,0xC2036Cu,0xC20370u,0xC20374u,0xC20378u,0xC2037Eu,0xC20380u,0xC20382u,0xC20384u,0xC20386u,0xC20388u,0xC2038Au,0xC2038Cu,0xC2038Eu,0xC20390u,0xC20392u,0xC20394u,0xC20396u,0xC20398u,0xC2039Au,0xC2039Cu,0xC2039Eu,0xC203A0u,0xC203A2u,0xC203A4u,0xC203A6u,0xC203A8u,0xC203AAu,0xC203ACu,0xC203AEu,0xC203B0u,0xC203B2u,0xC203B4u,0xC203B8u,0xC203BAu,0xC203BEu,0xC203C4u,0xC203C8u,0xC203CCu,0xC203CEu,0xC203D0u,0xC203D4u,0xC203D6u,0xC203DAu,0xC203E0u,0xC203E6u,0xC203E8u,0xC203EAu,0xC203ECu,0xC203EEu,0xC203F0u,0xC203F2u,0xC203F4u,0xC203F6u,0xC203F8u,0xC203FAu,0xC203FEu,0xC20404u,0xC2040Au,0xC20410u,0xC20416u,0xC20418u,0xC2041Au,0xC20420u,0xC20426u,0xC2042Cu,0xC2042Eu,0xC20430u,0xC20432u,0xC20434u,0xC20436u,0xC20438u,0xC2043Au,0xC2043Cu,0xC2043Eu,0xC20440u,0xC20446u,0xC2044Au,0xC2044Cu,0xC2044Eu,0xC20450u,0xC20452u,0xC20454u,0xC20456u,0xC20458u,0xC2045Au,0xC2045Cu,0xC20462u,0xC20466u,0xC2046Au,0xC2046Cu,0xC2046Eu,0xC20470u,0xC20472u,0xC20474u,0xC20476u,0xC2047Au,0xC2047Cu,0xC2047Eu,0xC20480u,0xC20486u,0xC20488u,0xC2048Au,0xC2048Cu,0xC20492u,0xC20498u,0xC2049Cu,0xC204A4u,0xC204AAu,0xC204AEu,0xC204B4u,0xC204BAu,0xC204C0u,0xC204C6u,0xC204CAu,0xC204CCu,0xC204CEu,0xC204D0u,0xC204D2u,0xC204D4u,0xC204D6u,0xC204D8u,0xC204DAu,0xC204DCu,0xC204E2u,0xC204E6u,0xC204EAu,0xC204EEu,0xC204F0u,0xC204F2u,0xC204F4u,0xC204FAu,0xC204FEu,0xC20502u,0xC20506u,0xC20508u,0xC2050Au,0xC2050Cu,0xC20510u,0xC20516u,0xC20518u,0xC2051Au,0xC2051Cu,0xC2051Eu,0xC20520u,0xC20522u,0xC20528u,0xC2052Eu,0xC20532u,0xC2053Au,0xC20540u,0xC20542u,0xC20548u,0xC2054Eu,0xC20552u,0xC20556u,0xC2055Cu,0xC20562u,0xC20568u,0xC2056Au,0xC2056Cu,0xC2056Eu,0xC20570u,0xC20572u,0xC20574u,0xC2057Au,0xC20580u,0xC20584u,0xC20588u,0xC2058Cu,0xC2058Eu,0xC20590u,0xC20592u,0xC20594u,0xC2059Au,0xC205A0u,0xC205A2u,0xC205A4u,0xC205A6u,0xC205A8u,0xC205AAu,0xC205ACu,0xC205AEu,0xC205B0u,0xC205B2u,0xC205B4u,0xC205BAu,0xC205C0u,0xC205C6u,0xC205CCu,0xC205CEu,0xC205D0u,0xC205D6u,0xC205DCu,0xC205E2u,0xC205E4u,0xC205E6u,0xC205E8u,0xC205EAu,0xC205ECu,0xC205EEu,0xC205F0u,0xC205F2u,0xC205F4u,0xC205F6u,0xC205F8u,0xC205FAu,0xC205FCu,0xC205FEu,0xC20600u,0xC20602u,0xC20604u,0xC20606u,0xC20608u,0xC2060Au,0xC2060Cu,0xC2060Eu,0xC20612u,0xC20616u,0xC2061Au,0xC2061Eu,0xC20622u,0xC20626u,0xC20628u,0xC2062Cu,0xC20630u,0xC20634u,0xC20638u,0xC2063Cu,0xC20640u,0xC20646u,0xC2064Au,0xC20650u,0xC20654u,0xC2122Au,0xC2122Cu,0xC2122Eu,0xC21232u,0xC21238u,0xC2123Au,0xC2123Eu,0xC21240u,0xC21246u,0xC2124Cu,0xC2124Eu,0xC21250u,0xC21252u,0xC21254u,0xC21256u,0xC2125Au,0xC2125Eu,0xC21262u,0xC21264u,0xC21266u,0xC21268u,0xC2126Au,0xC2126Cu,0xC2126Eu,0xC21276u,0xC21278u,0xC2127Cu,0xC21282u,0xC21286u,0xC2128Au,0xC2128Cu,0xC21290u,0xC21292u,0xC21296u,0xC2129Au,0xC214FCu,0xC214FEu,0xC21500u,0xC21506u,0xC2150Cu,0xC2150Eu,0xC21518u,0xC2151Au,0xC2151Eu,0xC21524u,0xC21526u,0xC2152Au,0xC2152Eu,0xC21530u,0xC21532u,0xC21534u,0xC21536u,0xC21538u,0xC2153Au,0xC21540u,0xC21542u,0xC21544u,0xC21546u,0xC21548u,0xC2154Au,0xC2154Cu,0xC2154Eu,0xC21550u,0xC21552u,0xC21554u,0xC2155Au,0xC2155Cu,0xC2155Eu,0xC21560u,0xC21562u,0xC21564u,0xC21566u,0xC21568u,0xC2156Au,0xC2156Cu,0xC2156Eu,0xC21570u,0xC21572u,0xC21574u,0xC21578u,0xC2157Cu,0xC21580u,0xC21584u,0xC21588u,0xC2158Au,0xC21590u,0xC21594u,0xC21596u,0xC2159Au,0xC2159Cu,0xC2168Au,0xC21690u,0xC21696u,0xC2169Au,0xC216A0u,0xC216A2u,0xC216A8u,0xC216AAu,0xC216ACu,0xC216AEu,0xC216B0u,0xC216B2u,0xC216B8u,0xC216BAu,0xC216BEu,0xC216C2u,0xC216C4u,0xC216C6u,0xC216C8u,0xC216CAu,0xC216CEu,0xC216D2u,0xC216D6u,0xC216DAu,0xC216DEu,0xC216E0u,0xC216E2u,0xC216E8u,0xC216EEu,0xC216F4u,0xC216F6u,0xC216F8u,0xC216FEu,0xC21704u,0xC21706u,0xC21708u,0xC2170Au,0xC2170Cu,0xC2170Eu,0xC21710u,0xC21716u,0xC21718u,0xC2171Au,0xC2171Cu,0xC2171Eu,0xC21720u,0xC21722u,0xC21724u,0xC21728u,0xC2172Au,0xC2172Cu,0xC2172Eu,0xC21730u,0xC21732u,0xC21736u,0xC21738u,0xC2173Au,0xC2173Cu,0xC2173Eu,0xC21742u,0xC21744u,0xC21746u,0xC21748u,0xC2174Eu,0xC21750u,0xC21752u,0xC21754u,0xC21756u,0xC21758u,0xC2175Au,0xC2175Cu,0xC21762u,0xC21764u,0xC21766u,0xC21768u,0xC2176Au,0xC2176Cu,0xC2176Eu,0xC21770u,0xC21774u,0xC21778u,0xC2177Cu,0xC2177Eu,0xC21784u,0xC21788u,0xC2178Au,0xC2178Eu,0xC21790u,0xC21792u,0xC21794u,0xC21796u,0xC21798u,0xC2179Au,0xC217A0u,0xC217A2u,0xC217A4u,0xC217A6u,0xC217A8u,0xC217AAu,0xC217ACu,0xC217AEu,0xC217B4u,0xC217B6u,0xC217B8u,0xC217BAu,0xC217BCu,0xC217BEu,0xC217C0u,0xC217C2u,0xC217C4u,0xC217C6u,0xC217C8u,0xC217CCu,0xC217D0u,0xC217D4u,0xC217D6u,0xC217DCu,0xC217E0u,0xC217E2u,0xC217E6u,0xC217E8u,0xC2D16Cu,0xC2D170u,0xC2D174u,0xC2D178u,0xC2D17Cu,0xC2D180u,0xC2D186u,0xC2D18Au,0xC2D190u,0xC2D198u,0xC2D19Au,0xC2D19Cu,0xC2D19Eu,0xC2D1A0u,0xC2D1A2u,0xC2D1A4u,0xC2D1A6u,0xC2D1A8u,0xC2D1B0u,0xC2D1B8u,0xC2D1BAu,0xC2D1C2u,0xC2D1CAu,0xC2D1CCu,0xC2D1D4u,0xC2D1DCu,0xC2D1E2u,0xC2D1E4u,0xC2D1ECu,0xC2D1F4u,0xC2D1F6u,0xC2D1FEu,0xC2D206u,0xC2D20Au,0xC2D20Eu,0xC2D210u,0xC2D212u,0xC2D214u,0xC2D216u,0xC2D218u,0xC2D21Cu,0xC2D220u,0xC2D222u,0xC2D224u,0xC2D226u,0xC2D22Au,0xC2D22Cu,0xC2D22Eu,0xC2D230u,0xC2D232u,0xC2D234u,0xC2D236u,0xC2D23Au,0xC2D23Eu,0xC2D242u,0xC2D244u,0xC2D246u,0xC2D248u,0xC2D24Cu,0xC2D250u,0xC2D254u,0xC2D256u,0xC2D258u,0xC2D25Cu,0xC2D25Eu,0xC2D262u,0xC2D266u,0xC2D26Au,0xC2D26Eu,0xC2D270u,0xC2D272u,0xC2D278u,0xC2D27Cu,0xC2D280u,0xC2D286u,0xC2D28Cu,0xC2D28Eu,0xC2D290u,0xC2D292u,0xC2D294u,0xC2D296u,0xC2D29Au,0xC2D29Cu,0xC2D29Eu,0xC2D2A2u,0xC2D2A6u,0xC2D2A8u,0xC2D2AAu,0xC2D2ACu,0xC2D2B2u,0xC2D2B6u,0xC2D2B8u,0xC2D2BAu,0xC2D2BCu,0xC2D2BEu,0xC2D2C0u,0xC2D2C2u,0xC2D2C4u,0xC2D2C8u,0xC2D2CAu,0xC2D2CCu,0xC2D2CEu,0xC2D2D0u,0xC2D2D2u,0xC2D2D4u,0xC2D2D6u,0xC2D2D8u,0xC2D2DAu,0xC2D2DCu,0xC2D2DEu,0xC2D2E0u,0xC2D2E2u,0xC2D2E4u,0xC2D2E6u,0xC2D2E8u,0xC2D2EAu,0xC2D2ECu,0xC2D2EEu,0xC2D2F0u,0xC2D2F2u,0xC2D2F4u,0xC2D2F6u,0xC2D2F8u,0xC2D2FAu,0xC2D2FEu,0xC2D300u,0xC2D304u,0xC2D306u,0xC2D30Au,0xC2D30Cu,0xC2D30Eu,0xC2D312u,0xC2D314u,0xC2D318u,0xC2D31Au,0xC2D31Eu,0xC2D320u,0xC2D324u,0xC2D326u,0xC2D32Au,0xC2D32Cu,0xC2D32Eu,0xC2D330u,0xC2D336u,0xC2D338u,0xC2D33Eu,0xC2D342u,0xC2D344u,0xC2D34Au,0xC2D34Eu,0xC2D352u,0xC2D356u,0xC2D358u,0xC2D35Au,0xC2D35Cu,0xC2D35Eu,0xC2D360u,0xC2D362u,0xC2D366u,0xC2D368u,0xC2D36Cu,0xC2D36Eu,0xC2D372u,0xC2D374u,0xC2D376u,0xC2D378u,0xC2D380u,0xC2D384u,0xC2D38Au,0xC2D38Cu,0xC2D392u,0xC2D394u,0xC2D39Cu,0xC2D3A2u,0xC3019Au,0xC3019Cu,0xC301A2u,0xC301A8u,0xC301AAu,0xC301ACu,0xC301AEu,0xC301B0u,0xC301B2u,0xC301B6u,0xC301B8u,0xC301BCu,0xC301C2u,0xC301C4u,0xC301C6u,0xC301CAu,0xC301CCu,0xC301D0u,0xC301D6u,0xC301D8u,0xC301DCu,0xC301E0u,0xC301E2u,0xC301E4u,0xC301E6u,0xC301EAu,0xC301EEu};
+static unsigned char visited[FA18_SLOW_SIZE/2];
+static int source_owned(uint32_t pc) { unsigned i; for(i=0;i<sizeof source_boundaries/sizeof source_boundaries[0];++i) if(source_boundaries[i]==pc) return 1; return 0; }
+static unsigned source_slot(uint32_t pc) { return (pc-FA18_SLOW_BASE)/2; }
+static uint32_t source_pc(unsigned slot) { return FA18_SLOW_BASE+2*slot; }
+static int source_call(uint32_t ret,uint32_t sp) {
+    unsigned dispatch;
+    uint32_t child_ret=0,child_sp=0;
+    for(dispatch=0;dispatch<1000000;++dispatch) {
+        int lo=0,hi=fa18_recomp_entry_count,result;
+        if(REG_PC==ret && REG_A[7]==sp) return FA18_RET;
+        if(source_owned(REG_PC)) {
+            uint32_t pc=REG_PC;
+            uint16_t opcode=m68k_read_memory_16(pc);
+            visited[source_slot(pc)]=1;
+            child_ret=0;
+            REG_PPC=pc; REG_IR=opcode; REG_PC=pc+2;
+            m68ki_instruction_jump_table[opcode](); USE_CYCLES(CYC_INSTRUCTION[opcode]);
+            continue;
+        }
+        if(!child_ret) { child_ret=rd_u32(REG_A[7]); child_sp=REG_A[7]+4; }
+        while(lo<hi) {
+            int mid=lo+(hi-lo)/2;
+            if(fa18_recomp_entries[mid].pc<REG_PC) lo=mid+1; else hi=mid;
+        }
+        if(lo==fa18_recomp_entry_count || fa18_recomp_entries[lo].pc!=REG_PC)
+            result=fa18_recomp_resume(child_ret,child_sp);
+        else result=fa18_recomp_functions[fa18_recomp_entries[lo].function].fn((int)fa18_recomp_entries[lo].label);
+        if(result==FA18_EXIT_INTERP) return result;
+    }
+    return FA18_EXIT_INTERP;
+}
+#define HP_ORIGINAL_CHILDREN 1
+#include "render_parents_fixture.h"
+int main(int argc,char **argv) {
+    FA18PortMode tested_mode=argc>3?(FA18PortMode)strtoul(argv[3],NULL,10):FA18_PORTS_ON;
+    char selection[16];
+    if(tested_mode<FA18_PORTS_ON || tested_mode>FA18_PORTS_SANDBOX) return 1;
+    size_t state_size=0,rom_size=0;
+    uint8_t *state=read_file("captures/native/demo01/state.bin",&state_size);
+    uint8_t *rom=read_file("local/system/kick13.rom",&rom_size);
+    FA18Machine *m=calloc(1,sizeof *m),*base=malloc(sizeof *base),*before=malloc(sizeof *before);
+    uint8_t *reference=malloc(FA18_CHIP_SIZE+FA18_SLOW_SIZE);
+    void *cpu=malloc(m68k_context_size()); char error[256];
+    unsigned hardware_cases=0,matched_cases=0;
+    unsigned hardware_writes=0;
+    unsigned cases=argc>1?(unsigned)strtoul(argv[1],NULL,10):8192,scenario;
+    if(argc>2) selected_entry=(uint32_t)strtoul(argv[2],NULL,16);
+    if(!state || !rom || !m || !base || !before || !reference || !cpu || !cases) return 1;
+    if(!fa18_machine_load_state(m,state,state_size,rom,rom_size,error,sizeof error)) {
+        fprintf(stderr,"render parent dispatch oracle: %s\n",error); return 1;
+    }
+    free(state); free(rom); memcpy(base,m,sizeof *m);
+    fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF,NULL); fa18_bus_timing=0;
+    snprintf(selection,sizeof selection,"%06X",selected_entry);
+    for(scenario=0;scenario<cases;++scenario) {
+        uint32_t regs[16],sr; unsigned i; int saved_cycles,source_hardware;
+        fa18_ports_init(FA18_PORTS_OFF,NULL);
+        fa18_structural_reset_write_log();
+        memcpy(m,base,sizeof *m); fixture(scenario);
+        wr_u16(0xc70010u,0x4e71u);
+        memcpy(before,m,sizeof *m); m68k_get_context(cpu); fa18_hud_hardware_begin(); saved_cycles=GET_CYCLES(); fa18_write_log_active=2;
+        fa18_render_parents_fixture_begin("original");
+        if(source_call(0xc70000u,expected_sp)!=FA18_RET) {
+            fprintf(stderr,"render parent dispatch oracle: case %u source did not return at %06X\n",scenario,REG_PC); return 1;
+        }
+        source_hardware=fa18_write_log_hardware!=0; hardware_cases+=source_hardware; matched_cases+=!source_hardware;
+        fa18_hud_hardware_reference(); hardware_writes+=fa18_hud_hardware_count();
+        memcpy(regs,REG_DA,sizeof regs); sr=m68k_get_reg(NULL,M68K_REG_SR);
+        memcpy(reference,m->chip,FA18_CHIP_SIZE);
+        memcpy(reference+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
+        memcpy(m,before,sizeof *m); m68k_set_context(cpu); fa18_hud_hardware_begin(); SET_CYCLES(saved_cycles);
+        fa18_write_log_active=0;
+        fa18_ports_init(tested_mode,selection);
+        fa18_render_parents_fixture_begin("dispatch");
+        {
+            uint32_t previous=REG_PPC;
+            int result;
+            wr_u16(0xc70010u,0x4e71u); REG_PPC=0xc70010u;
+            if(fa18_ports_enter_source_only(0,&result)) { fputs("non-call source entry was accepted\n",stderr); return 1; }
+            REG_PPC=previous;
+            result=fa18_recomp_call_dynamic();
+            if(tested_mode==FA18_PORTS_ON && (result!=FA18_EXIT_DISPATCH || fa18_ports_active_steps()!=1)) {
+                fputs("render parent ON entry did not start its native continuation\n",stderr); return 1;
+            }
+            if(result==FA18_EXIT_DISPATCH) result=fa18_recomp_resume(0xc70000u,expected_sp);
+            if(result!=FA18_RET || fa18_ports_active_steps()) {
+                fprintf(stderr,"render parent dispatch case %u mode %u did not complete at %06X\n",scenario,tested_mode,REG_PC); return 1;
+            }
+            if(tested_mode!=FA18_PORTS_ON && !fa18_structural_port_classified(selected_entry,source_hardware)) {
+                fprintf(stderr,"render parent comparison case %u mode %u did not match\n",scenario,tested_mode);
+                fa18_ports_report("build/recomp/render_parents_dispatch_failed_report.json"); return 1;
+            }
+        }
+        fa18_write_log_active=0;
+        if(!fa18_hud_hardware_check()) { fprintf(stderr,"case %u ordered Custom writes/terminal hardware differ\n",scenario); return 1; }
+        for(i=0;i<16;++i) if(regs[i]!=REG_DA[i]) {
+            fprintf(stderr,"render parent dispatch oracle: case %u %c%u source %08X C %08X\n",
+                    scenario,i<8?'D':'A',i&7u,regs[i],REG_DA[i]); return 1;
+        }
+        if(REG_PC!=0xc70000u || sr!=m68k_get_reg(NULL,M68K_REG_SR)) {
+            fprintf(stderr,"render parent dispatch oracle: case %u PC/SR source %04X C %04X\n",
+                    scenario,sr,m68k_get_reg(NULL,M68K_REG_SR)); return 1;
+        }
+        for(i=0;i<FA18_CHIP_SIZE+FA18_SLOW_SIZE;++i) {
+            gaddr address=i<FA18_CHIP_SIZE?i:i-FA18_CHIP_SIZE+FA18_SLOW_BASE;
+            uint8_t got=i<FA18_CHIP_SIZE?m->chip[i]:m->slow[i-FA18_CHIP_SIZE];
+            if(got!=reference[i]) {
+                fprintf(stderr,"render parent dispatch oracle: case %u byte %06X source %02X C %02X\n",
+                        scenario,address,reference[i],got); return 1;
+            }
+        }
+    }
+    {
+        int result;
+        unsigned guard;
+        for(guard=0;guard<3;++guard) {
+            int function=-1,label=-1,i;
+            memcpy(m,base,sizeof *m); fixture(0);
+            wr_u16(0xc70010u,0x4e71u); REG_PPC=0xc70010u;
+            fa18_ports_init(guard==0?FA18_PORTS_OFF:tested_mode,guard==1?"FFFFFE":selection);
+            for(i=0;i<fa18_recomp_function_count;++i)
+                if(fa18_recomp_functions[i].entry==selected_entry) function=i;
+            for(i=0;i<fa18_recomp_entry_count;++i)
+                if(fa18_recomp_entries[i].pc==selected_entry) label=(int)fa18_recomp_entries[i].label;
+            if(function>=0) {
+                if(label<0) { fputs("missing translated entry label\n",stderr); return 1; }
+                result=guard==2?fa18_ports_enter(function,label,0):fa18_recomp_call_dynamic();
+                /* A generated child can leave its caller for runtime
+                 * completion. It must never start a native step here. */
+                if(result==FA18_EXIT_DISPATCH && !fa18_ports_active_steps())
+                    result=fa18_recomp_resume(0xc70000u,expected_sp);
+                if(result!=FA18_RET || fa18_ports_active_steps()) {
+                    fputs("guarded translated entry started a native continuation\n",stderr); return 1;
+                }
+            } else if(fa18_ports_enter_source_only(guard!=2,&result)) {
+                fputs("guarded source entry was accepted\n",stderr); return 1;
+            }
+            if(!fa18_structural_port_unused(selected_entry)) {
+                fputs("guarded entry counted a port call\n",stderr); return 1;
+            }
+        }
+        fa18_ports_init(tested_mode,selection);
+        REG_PC=selected_entry;
+        {
+            uint32_t sp=REG_A[7];
+            wr_u16(selected_entry,rd_u16(selected_entry));
+            result=fa18_recomp_call_dynamic();
+            if(result!=FA18_EXIT_DISPATCH || REG_PC!=selected_entry || REG_A[7]!=sp || fa18_ports_active_steps()) {
+                fputs("changed source still dispatched\n",stderr); return 1;
+            }
+        }
+    }
+    { unsigned i,count=0;
+      for(i=0;i<sizeof visited;++i) if(visited[i]) ++count;
+      printf("render parent dispatch oracle %06X: %u complete calls matched all registers, PC, full SR and all RAM; %u parent boundaries observed\n",selected_entry,cases,count);
+      printf("classification: %u hardware-bearing source calls, %u hardware-free source calls; reference modes require exact hardware or matched classification respectively\n",hardware_cases,matched_cases);
+      printf("hardware: %u ordered Custom writes validated; terminal registers, effective flags, blit counters and data latches matched\n",hardware_writes);
+      printf("visited:"); for(i=0;i<sizeof visited;++i) if(visited[i]) printf(" %06X",source_pc(i)); putchar('\n');
+    }
+    free(cpu); free(reference); free(before); free(base); free(m); return 0;
+}
