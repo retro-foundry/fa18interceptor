@@ -12,6 +12,7 @@
 #include "exec_supervisor.h"
 #include "exec_memory_adapter.h"
 #include "exec_scheduler_adapter.h"
+#include "exec_interrupt_adapter.h"
 #include "potgo_glue.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,6 +33,9 @@ ADAPTER(fa18_os_exec_task_protection_step)
 ADAPTER(fa18_os_exec_supervisor_step)
 ADAPTER(fa18_os_exec_memory_step)
 ADAPTER(fa18_os_exec_scheduler_step)
+ADAPTER(fa18_os_exec_irq_roots_step)
+ADAPTER(fa18_os_exec_int_servers_step)
+ADAPTER(fa18_os_exec_soft_interrupts_step)
 /* Pinned 1.3 ABI identifiers, isolated from the neutral dispatcher. Disabled
  * until the reference runner verifies the corresponding source signature.
  * A future clean-start profile can activate proven implementations directly. */
@@ -55,7 +59,10 @@ static AmigaService services[FA18_SERVICE_COUNT]={
     {0xFC090E,0xFC092C,0xFC090E,"exec.Supervisor_privilege",0,fa18_os_exec_supervisor_step_adapter,NULL},
     {0xFC1FBE,0xFC1FCA,0xFC1FBE,"exec.Permit_callback",0,fa18_os_exec_supervisor_step_adapter,NULL},
     {0xFC16D8,0xFC195A,0xFC16D8,"exec.memory",0,fa18_os_exec_memory_step_adapter,NULL},
-    {0xFC0E9C,0xFC10C6,0xFC0EC2,"exec.scheduler",0,fa18_os_exec_scheduler_step_adapter,NULL}
+    {0xFC0E9C,0xFC10C6,0xFC0EC2,"exec.scheduler",0,fa18_os_exec_scheduler_step_adapter,NULL},
+    {0xFC0C88,0xFC0E9C,0xFC0D14,"exec.hardware_interrupts",0,fa18_os_exec_irq_roots_step_adapter,NULL},
+    {0xFC11CA,0xFC1298,0xFC11CA,"exec.interrupt_vectors/servers",0,fa18_os_exec_int_servers_step_adapter,NULL},
+    {0xFC1338,0xFC1428,0xFC135C,"exec.server_dispatch/Cause/soft_interrupts",0,fa18_os_exec_soft_interrupts_step_adapter,NULL}
 };
 void fa18_services_reset(void) {
     for (unsigned i=0;i<FA18_SERVICE_COUNT;++i) services[i].enabled=0;
@@ -74,6 +81,8 @@ int fa18_services_step(void) {
     return result;
 }
 int fa18_services_requires_outer_dispatch(void) {
-    return services[FA18_SERVICE_EXEC_SCHEDULER].enabled &&
-        fa18_os_exec_scheduler_requires_outer_dispatch(REG_PC);
+    return (services[FA18_SERVICE_EXEC_SCHEDULER].enabled &&
+        fa18_os_exec_scheduler_requires_outer_dispatch(REG_PC)) ||
+        (services[FA18_SERVICE_EXEC_IRQ_ROOTS].enabled &&
+        fa18_os_exec_irq_requires_outer_dispatch(REG_PC));
 }

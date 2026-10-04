@@ -17,6 +17,7 @@
 #include "exec_supervisor.h"
 #include "exec_memory_adapter.h"
 #include "exec_scheduler_adapter.h"
+#include "exec_interrupt_adapter.h"
 #include "graphics_glue.h"
 #include "graphics_wait_bovp.h"
 #include "graphics_blitter_ownership.h"
@@ -89,7 +90,7 @@ static void fixture(uint32_t pc,unsigned scenario) {
     /* Context operations require both valid stack banks. RTE uses a real
      * 68000 six-byte frame rather than a random instruction address. */
     CPU_STOPPED=0; m68k_set_reg(M68K_REG_USP,0xC7F800);
-    if (pc==0xFC0EC0 || pc==0xFC0FF0 || pc==0xFC1074) {
+    if (pc==0xFC0EC0 || pc==0xFC0FF0 || pc==0xFC1074 || pc==0xFC0C8C || pc==0xFC0E9A) {
         wr_u16(REG_A[7],0x2000|(scenario&31)); wr_u32(REG_A[7]+2,0xC10000);
     }
     m68k_set_reg(M68K_REG_SR,(pc==0xFC08E6u && (scenario/32&1)?0x0700u:0x2700u)|(scenario&31));

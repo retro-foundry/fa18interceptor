@@ -13,15 +13,22 @@ int amiga_exec_context_save(AmigaExecTaskState *s,const AmigaExecTaskBus *b,
     }
     s->a[base]=address; return 1;
 }
-int amiga_exec_context_restore(AmigaExecTaskState *s,const AmigaExecTaskBus *b,
-                               unsigned base,unsigned mask,int postincrement,
-                               unsigned *count) {
-    if (!s || !b || !b->read32 || !count || base>=8 || mask>0xFFFF) return 0;
-    uint32_t address=s->a[base]; *count=0;
+int amiga_exec_context_restore_at(AmigaExecTaskState *s,const AmigaExecTaskBus *b,
+                                  uint32_t address,unsigned mask,unsigned *count) {
+    if (!s || !b || !b->read32 || !count || mask>0xFFFF) return 0;
+    *count=0;
     for (unsigned i=0;i<16;++i) if (mask&(1u<<i)) {
         uint32_t value=b->read32(b->context,address); address+=4;
         if (i<8) s->d[i]=value; else s->a[i-8]=value; ++*count;
     }
-    if (postincrement) s->a[base]=address;
+    return 1;
+}
+int amiga_exec_context_restore(AmigaExecTaskState *s,const AmigaExecTaskBus *b,
+                               unsigned base,unsigned mask,int postincrement,
+                               unsigned *count) {
+    if (!s || base>=8) return 0;
+    uint32_t address=s->a[base];
+    if (!amiga_exec_context_restore_at(s,b,address,mask,count)) return 0;
+    if (postincrement) s->a[base]=address+4*(*count);
     return 1;
 }

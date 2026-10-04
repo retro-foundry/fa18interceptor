@@ -22,6 +22,20 @@ Completion requires launch, menus, flight, postflight, persistence and exit,
 with zero ROM reads/fetches and zero unsupported services. A loader or service
 inventory alone does not satisfy that objective.
 
+Report progress against these acceptance checkpoints. The informal 25% and
+30% chat estimates had no measured denominator and should not be reused.
+Current reusable services are tested component progress; none of the following
+whole-game ROM-free checkpoints has passed yet:
+
+| Checkpoint | Verified state |
+| --- | --- |
+| Original ADF launch with no ROM or savestate | Pending; no `fa18_romfree` executable yet |
+| Menus and every reachable game mode from clean launch | Pending |
+| Flight and postflight with original behavior and timing | Pending; existing ROM-backed recordings remain the oracle |
+| Save/load round trips using `--save-dir` | Pending |
+| Restart and clean exit | Pending |
+| Zero ROM reads/fetches and unsupported services over all scenarios | Proven for implemented service fixtures, pending for the whole game |
+
 ## Historical objective and order (superseded above)
 
 Recreate readable C for the whole game, proven against the original source and
@@ -166,10 +180,11 @@ Only hashes, addresses, and register metadata are committed in
 RAM stays under ignored `build/amiga` as oracle evidence.
 
 The seven existing service bridges, Exec FindTask/FindName, all seven list
-operations, message/signal/task protection, Supervisor, memory and scheduling now execute 817 C phases
+operations, message/signal/task protection, Supervisor, memory, scheduling and
+hardware/software interrupt services now execute 1,074 C phases
 without reading ROM instruction or operand bytes.
 Nested calls preserve the original stack and vectors. The structural oracle
-passes 418,304 CPU/DMA fixtures with cleared
+passes 549,888 CPU/DMA fixtures with cleared
 ROM buffers, a strict access guard, full registers/SR/RAM, ordered memory and
 hardware accesses, and exact cycles. It corrected potgo's original low-word-
 first stack write. Blitter ownership's deeper helpers still execute ROM in the
@@ -200,7 +215,8 @@ ordered accesses and cycles with ROM/rtarea cleared and the guard active.
 Fixtures cover empty/nonempty message queues, all port actions, controlled
 guest callbacks, task wakeups, deferred rescheduling, pending Wait, bit
 exhaustion and nesting. Blocking switches are now proved in the scheduler batch
-below; real Cause remains pending. Controlled callbacks do not replace missing services.
+below; real Cause and software interrupt dispatch are proved in the interrupt
+batch below. Controlled callbacks do not replace missing services.
 Original Engine9000 contracts cover PutMsg, ReplyMsg, Signal, SetSignal,
 Permit and nonempty WaitPort. A blocking Wait observation enters idle STOP
 and did not return within its instruction bound. It is recorded as incomplete.
@@ -246,7 +262,8 @@ and the installed wrapper. TypeOfMem was not reached in 300 cold-start frames;
 TypeOfMem/AllocAbs have static source and controlled proofs. Captured wrapper
 RAM is evidence only, never runtime initialization input. See
 `analysis/routines/fc16d8_fc1958_exec_memory.md` and
-`analysis/data/romfree_exec_memory_contracts.json`. Soft interrupts and generic exception paths are still required.
+`analysis/data/romfree_exec_memory_contracts.json`. Generic exception paths are
+still required; interrupt services are covered below.
 
 The 68000 scheduler is now implemented in reusable `exec_scheduler.c` and
 `exec_context.c`, with pinned ABI/timing in `exec_scheduler_adapter.c`.
@@ -276,11 +293,41 @@ identical poison frames (`build/recomp/exec_scheduler_full_gate.log`). Routine
 resumes yield at context returns so the outer dispatcher preserves these original
 comparison totals. See
 `analysis/routines/fc0e9c_fc10c4_exec_scheduler.md` and the reports under
-`build/amiga/exec-scheduler-recordings{,-msvc}/full.json`. Soft interrupts/Cause,
-IRQ registration/handlers and generic traps/exceptions remain pending. The cold
-Exec vectors identify Cause FC135C, SetIntVector FC11CA, AddIntServer FC1210
-and RemIntServer FC1250 for the next foundation batch; capture original contracts
-and prove their complete nested dependencies before replacing them.
+`build/amiga/exec-scheduler-recordings{,-msvc}/full.json`. Generic traps/exceptions
+remain pending; the interrupt family is now covered in the following batch.
+
+Reusable `exec_interrupt_services.c` now implements vector installation, server
+chains and priority/FIFO software interrupt queues. Its adapter preserves seven
+hardware IRQ roots, callback ordering, interrupt masks, audio rescans and RTE.
+All 257 new phases and 19,968 complete CPU/DMA calls match registers, full SR,
+stack banks, full RAM, ordered accesses and cycles with cleared ROM/rtarea and
+zero forbidden-access counters. Fixtures cover empty/nonempty queues, stable
+server priorities, claimed interrupts, Cause coalescing, callback requeueing,
+master masking, simultaneous requests and a real hardware IRQ nested inside a
+software callback. The original multiplied-bit empty-chain removal behavior is
+preserved and independently asserted.
+
+Five original Engine9000 contracts were captured before implementation. Three
+replay with exact registers/full SR/full RAM and native ROM/C accesses/cycles.
+Inherited native-reference cycle differences from Engine9000 remain explicit:
+SetIntVector 130 versus 132 OCS clocks, AddIntServer 288 versus 348, and the empty
+software handler 32 versus 32. The longer level-three IRQ and server-chain
+captures enter remaining graphics and device handlers, so their complete
+ROM-free capture replay still awaits those callback dependencies. Cause and
+RemIntServer were not observed in bounded captures; focused/static proofs are
+kept distinct from game coverage. OS boot interrupt-list initialization remains
+pending. Captured RAM is oracle evidence only.
+
+`--no-os-irq-services` keeps the separate ROM oracle. GNU/MSVC Release comparisons
+pass all three recordings /36,236 RGB444 frames, final RAM/seals, cycles, PC,
+iterations and blitter counters. Fresh full 614-row integration retains exactly
+571,427 shadow /458,087 sandbox comparisons and identical poison frames. The
+portable library and constructor gates pass both compilers; memory/scheduler
+regressions retain their proof. See
+`analysis/routines/fc0c88_fc1426_exec_interrupt_services.md`,
+`analysis/data/romfree_exec_interrupt_contracts.json`,
+`build/amiga/exec-interrupt-recordings{,-msvc}/full.json` and
+`build/recomp/exec_interrupt_full_gate.log`.
 
 `analysis/data/romfree_startup_checkpoint.json` records original execution from
 C0DEB0 to C0E27E: 1,632 instructions /11,677 OCS colour clocks, 1,065 ROM/rtarea

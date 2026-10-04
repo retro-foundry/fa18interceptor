@@ -8,4 +8,6 @@ int amiga_exec_context_save(AmigaExecTaskState *,const AmigaExecTaskBus *,
 int amiga_exec_context_restore(AmigaExecTaskState *,const AmigaExecTaskBus *,
                                unsigned base,unsigned mask,int postincrement,
                                unsigned *transferred);
+int amiga_exec_context_restore_at(AmigaExecTaskState *,const AmigaExecTaskBus *,
+                                  uint32_t address,unsigned mask,unsigned *transferred);
 #endif

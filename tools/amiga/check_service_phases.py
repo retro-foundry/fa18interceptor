@@ -27,6 +27,9 @@ FAMILIES = [
     ("exec_supervisor.c", "fa18_os_exec_supervisor_step"),
     ("exec_memory_adapter.c", "fa18_os_exec_memory_step"),
     ("exec_scheduler_adapter.c", "fa18_os_exec_scheduler_step"),
+    ("exec_interrupt_adapter.c", "fa18_os_exec_irq_roots_step"),
+    ("exec_interrupt_adapter.c", "fa18_os_exec_int_servers_step"),
+    ("exec_interrupt_adapter.c", "fa18_os_exec_soft_interrupts_step"),
 ]
 
 

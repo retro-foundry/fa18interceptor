@@ -65,6 +65,13 @@ ctest --test-dir build/amiga-compat -C Release --output-on-failure
 - `rom_audit.h`: optional reference observations of nested flow, CPU state,
   accesses and machine time. Its bounded table fails closed if exhausted. This
   is an inventory, not ordered entry/exit fixtures or complete game coverage.
+- `exec_interrupt_services.h`: resumable vector installation, server chains,
+  Cause coalescing and priority/FIFO software-interrupt queues. Guest callback
+  pairs, interrupt acknowledge/enable writes, claimed-server ordering and
+  callback requeueing are explicit. The CPU adapter owns seven interrupt-level
+  roots, privilege changes, nesting and exception-frame returns. Timing and
+  callback execution use the embedding machine timeline. The pinned empty-chain
+  removal behavior is preserved, including its multiplied interrupt-bit index.
 
 For another game, supply its disk resources, segment placements, OS ABI profile,
 CPU/bus adapter, service contracts and validation fixtures. Interceptor's

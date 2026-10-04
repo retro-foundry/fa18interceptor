@@ -17,20 +17,20 @@ int main(void) {
     unsigned matched=0;
     /* Preserve the routine-scoped resume boundary for all context returns.
      * The outer instruction hook must own the eventual C RTE/STOP execution. */
-    const uint32_t boundaries[]={0xFC0EC0,0xFC0FF0,0xFC1074,0xFC0F90};
+    const uint32_t boundaries[]={0xFC0EC0,0xFC0FF0,0xFC1074,0xFC0F90,0xFC0C8C,0xFC0E9A};
     for (unsigned k=0;k<sizeof boundaries/sizeof boundaries[0];++k) {
         memcpy(m,base,sizeof *m); scheduler_fixture(3,0);
         REG_PC=boundaries[k]; REG_IR=0;
         memset(m->rom,0,sizeof m->rom); memset(m->rtarea,0,sizeof m->rtarea);
         fa18_machine_require_romfree(m); fa18_services_reset();
-        fa18_service_enable(FA18_SERVICE_EXEC_SCHEDULER,1);
+        fa18_service_enable(k<4?FA18_SERVICE_EXEC_SCHEDULER:FA18_SERVICE_EXEC_IRQ_ROOTS,1);
         memcpy(before,m,sizeof *m); m68k_get_context(cpu_state);
         int cycles=GET_CYCLES();
         if (fa18_recomp_resume(RETURN,USER_SP)!=FA18_EXIT_INTERP || REG_PC!=boundaries[k] ||
             cycles!=GET_CYCLES() || memcmp(REG_DA,((m68ki_cpu_core *)cpu_state)->dar,sizeof REG_DA) ||
             memcmp(m->chip,before->chip,FA18_CHIP_SIZE) || memcmp(m->slow,before->slow,FA18_SLOW_SIZE) ||
             m->runtime_guard.rom_reads || m->runtime_guard.rom_instruction_fetches || m->runtime_guard.unsupported_services) {
-            fprintf(stderr,"routine resume crossed scheduler boundary %06X\n",boundaries[k]); return 1;
+            fprintf(stderr,"routine resume crossed service context boundary %06X\n",boundaries[k]); return 1;
         }
     }
     for (unsigned bus=0;bus<2;++bus) {
@@ -70,6 +70,6 @@ int main(void) {
             ++matched;
         }
     }
-    printf("Exec STOP: %u real instruction-hook CPU/DMA calls and four routine-resume context boundaries, idle queues and immediately accepted IRQs; exact CPU/RAM/access/cycle parity, zero ROM accesses and no continuation/IRQ opcode fetched\n",matched);
+    printf("Exec STOP: %u real instruction-hook CPU/DMA calls and six routine-resume context boundaries, idle queues and immediately accepted IRQs; exact CPU/RAM/access/cycle parity, zero ROM accesses and no continuation/IRQ opcode fetched\n",matched);
     free(cpu_state); free(ram); free(before); free(base); free(m); return 0;
 }

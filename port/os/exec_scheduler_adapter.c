@@ -3,7 +3,7 @@
 #include "exec_scheduler_adapter.h"
 #include "../amiga/exec_scheduler.h"
 #include "../amiga/abi_13.h"
-#include "service_phase.h"
+#include "exec_service_state.h"
 #include "service_dispatch_adapter.h"
 #include "machine.h"
 #include "m68kops.h"
@@ -19,46 +19,30 @@ int fa18_os_exec_scheduler_enable_reference(void) {
     int enabled=fa18_os_exec_scheduler_signature_matches(fa18_machine->rom);
     fa18_service_enable(FA18_SERVICE_EXEC_SCHEDULER,enabled); return enabled;
 }
-/* MOVE memory-to-memory fetches its destination extension after the source
- * data read. Keep that program phase between the two observable bus accesses. */
-static void trailing_extension(void *c) {
-    if (c && *(unsigned *)c) { unsigned n=*(unsigned *)c; *(unsigned *)c=0; fa18_service_extension_words(n); }
-}
-static uint8_t read8(void *c,uint32_t a) { uint8_t v=(uint8_t)m68k_read_memory_8(a); trailing_extension(c); return v; }
-static uint16_t read16(void *c,uint32_t a) { uint16_t v=(uint16_t)m68k_read_memory_16(a); trailing_extension(c); return v; }
-static uint32_t read32(void *c,uint32_t a) { uint32_t v=m68k_read_memory_32(a); trailing_extension(c); return v; }
-static void write8(void *c,uint32_t a,uint8_t v) { (void)c; m68k_write_memory_8(a,v); }
-static void write16(void *c,uint32_t a,uint16_t v) { (void)c; m68k_write_memory_16(a,v); }
-static void write32(void *c,uint32_t a,uint32_t v) { (void)c; m68k_write_memory_32(a,v); }
-static const AmigaExecTaskBus bus={NULL,read8,read16,read32,write8,write16,write32};
-static void load(AmigaExecTaskState *s) {
-    memcpy(s->d,REG_D,sizeof s->d); memcpy(s->a,REG_A,sizeof s->a); s->ccr=(uint8_t)m68ki_get_ccr();
-}
-static void store(const AmigaExecTaskState *s) {
-    memcpy(REG_D,s->d,sizeof s->d); memcpy(REG_A,s->a,sizeof s->a); m68ki_set_ccr(s->ccr);
-}
 static int semantic(uint32_t pc,uint16_t op,unsigned ext,AmigaExecSchedulerPhase p,unsigned arg) {
-    AmigaExecTaskState s; load(&s);
+    AmigaExecTaskState s; fa18_exec_service_load(&s);
     unsigned late=p==AMIGA_SCHED_INSTALL_SWITCH_RETURN || p==AMIGA_SCHED_SAVE_CALLER_A5 ||
         p==AMIGA_SCHED_RESET_QUANTUM || p==AMIGA_SCHED_RESTORE_NEST_COUNTS || p==AMIGA_SCHED_RESTORE_TASK_HEADER;
-    AmigaExecTaskBus ordered=bus; ordered.context=&late;
+    AmigaExecTaskBus ordered=fa18_exec_service_bus(&late);
     fa18_service_begin(pc,op); fa18_service_extension_words(ext-late);
-    if (!amiga_exec_scheduler_step(p,arg,&s,&ordered) || late) abort(); store(&s);
+    if (!amiga_exec_scheduler_step(p,arg,&s,&ordered) || late) abort(); fa18_exec_service_store(&s);
     USE_CYCLES(CYC_INSTRUCTION[op]); return 1;
 }
 static int task(uint32_t pc,uint16_t op,unsigned ext,AmigaExecTaskPhase p,unsigned arg) {
-    AmigaExecTaskState s; AmigaExecTaskEffect e; load(&s);
+    AmigaExecTaskBus bus=fa18_exec_service_bus(NULL);
+    AmigaExecTaskState s; AmigaExecTaskEffect e; fa18_exec_service_load(&s);
     fa18_service_begin(pc,op); fa18_service_extension_words(ext);
-    if (!amiga_exec_task_step(p,arg,&s,&bus,&e)) abort(); store(&s);
+    if (!amiga_exec_task_step(p,arg,&s,&bus,&e)) abort(); fa18_exec_service_store(&s);
     if (e.returned) REG_PC=e.return_pc;
     USE_CYCLES(CYC_INSTRUCTION[op]); return 1;
 }
 static int context(uint32_t pc,uint16_t op,unsigned base,unsigned mask,int save,int increment) {
-    AmigaExecTaskState s; unsigned count; load(&s);
+    AmigaExecTaskBus bus=fa18_exec_service_bus(NULL);
+    AmigaExecTaskState s; unsigned count; fa18_exec_service_load(&s);
     fa18_service_begin(pc,op); fa18_service_extension_words(1);
     int ok=save?amiga_exec_context_save(&s,&bus,base,mask,&count):
         amiga_exec_context_restore(&s,&bus,base,mask,increment,&count);
-    if (!ok) abort(); store(&s);
+    if (!ok) abort(); fa18_exec_service_store(&s);
     USE_CYCLES(count<<CYC_MOVEM_L); USE_CYCLES(CYC_INSTRUCTION[op]); return 1;
 }
 static int branch(uint32_t pc,uint16_t op,int taken,uint32_t target) {
