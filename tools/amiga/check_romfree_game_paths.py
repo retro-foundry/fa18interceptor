@@ -1,0 +1,103 @@
+"""Exercise original menus and flight-log persistence from isolated ADF launches.
+
+These are functional checkpoints, not landing/mission-outcome or timing parity
+proofs. No guest state is injected; only frontend keys drive the original game.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import struct
+import subprocess
+import tempfile
+
+ROOT = Path(__file__).resolve().parents[2]
+ZERO_GUARD = dict(rom_reads=0, rom_instruction_fetches=0, unsupported_services=0)
+
+
+def offset(address):
+    assert 0xC00000 <= address < 0xC80000
+    return address - 0xC00000 + 0x80000
+
+
+def record(ram):
+    address = struct.unpack_from(">I", ram, offset(0xC1AB74))[0]
+    return ram[offset(address):offset(address) + 78]
+
+
+def keys(*events):
+    result = []
+    for frame, key in events:
+        result.extend([(frame, key, 1), (frame + 2, key, 0)])
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--runner", type=Path, default=ROOT / "build/recomp/fa18_romfree.exe")
+    parser.add_argument("--modes", action="store_true", help="also exercise menu and mission selections")
+    args = parser.parse_args()
+    runner = args.runner.resolve()
+    adf = ROOT / "local/media/fa18.adf"
+    original_hash = hashlib.sha256(adf.read_bytes()).digest()
+    with tempfile.TemporaryDirectory(prefix="romfree-game-") as directory:
+        work = Path(directory)
+        shutil.copy2(runner, work / "game.exe")
+        shutil.copy2(adf, work / "original.adf")
+
+        def run(name, frames, events, saves):
+            replay = work / f"{name}.e9k"
+            replay.write_text("E9K_INPUT_V1\n" + "".join(
+                f"F {frame} K {key} 0 0 {down}\n" for frame, key, down in events))
+            output = work / f"{name}.ram"
+            result = subprocess.run([
+                str(work / "game.exe"), "--adf", "original.adf",
+                "--save-dir", saves, "--frames", str(frames), "--replay", str(replay),
+                "--ram-out", str(output)], cwd=work, capture_output=True, text=True)
+            assert result.returncode == 0, (name, result.stderr, result.stdout)
+            stats = [json.loads(line) for line in result.stdout.splitlines()]
+            assert stats[-1] == ZERO_GUARD, (name, stats)
+            assert stats[0]["iterations"] > 0 and stats[0]["nonblack_pixels"] > 1000, (name, stats)
+            ram = output.read_bytes()
+            assert len(ram) >= 0x100000
+            print(f"{name}: {frames} frames, mode={ram[offset(0xC458A6)]}, zero ROM/fault counters", flush=True)
+            return ram, stats[0]
+
+        # The flight-log screen labels 1 as update, SHIFT-2 as reset. The
+        # original C16406 clears all 39 words; C1643A writes those 78 bytes
+        # through an existing-file (1005) handle, leaving the ADF intact.
+        events = keys((1800, 32), (2200, 56))
+        events += [(2600, 304, 1), (2602, 50, 1), (2604, 50, 0), (2606, 304, 0)]
+        events += keys((3000, 49))
+        run("reset-save", 3700, events, "saves")
+        saved = (work / "saves/config").read_bytes()
+        assert saved == bytes(78), (len(saved), saved.hex())
+        # Compare before advancing the credits/name-entry state. Later the
+        # original C11720 increments the tour count at record+4 and accepts
+        # a callsign at +30, so a later whole-record comparison is invalid.
+        loaded, _ = run("reload", 1800, [], "saves")
+        assert record(loaded) == saved
+        assert hashlib.sha256((work / "original.adf").read_bytes()).digest() == original_hash
+        print("Original 78-byte reset/save/reload matches all bytes; ADF unchanged", flush=True)
+
+        if args.modes:
+            for key, expected in ((2, 1), (3, 2), (4, 0x7D), (5, 9), (6, 0), (7, 6), (8, 0)):
+                ram, stats = run(f"menu-{key}", 3600, keys((1800, 32), (2200, 48 + key)), f"mode-{key}")
+                assert ram[offset(0xC458A6)] == expected, (key, expected)
+                if expected:
+                    assert stats["blits"] > 1000
+            for index in range(1, 5):
+                ram, stats = run(f"mission-{index}", 4200,
+                    keys((1800, 32), (2200, 54), (2700, 281 + index)), f"mission-{index}")
+                assert ram[offset(0xC458A6)] == index + 2 and stats["blits"] > 1000
+            events = keys((1800, 32), (2200, 50))
+            events += [(3000, 304, 1), (3001, 27, 1), (3003, 27, 0), (3004, 304, 0)]
+            ram, _ = run("flight-return", 3800, events, "flight-return")
+            assert ram[offset(0xC458A6)] == 0
+            assert struct.unpack_from(">I", ram, offset(0xC1820C))[0] == 0xC0FCB4
+    assert hashlib.sha256(adf.read_bytes()).digest() == original_hash
+
+
+if __name__ == "__main__":
+    main()

@@ -11,7 +11,7 @@ enum { AMIGA_HOST_EXEC,AMIGA_HOST_DOS,AMIGA_HOST_GRAPHICS,AMIGA_HOST_INTUITION,
        AMIGA_HOST_INPUT,AMIGA_HOST_GAMEPORT,AMIGA_HOST_KEYBOARD,AMIGA_HOST_AUDIO,
        AMIGA_HOST_LIBRARY_COUNT,AMIGA_HOST_SERVICE_BASE=0xEF0000 };
 typedef struct { uint32_t base,size,attributes; } AmigaHostRegion;
-typedef struct { uint8_t *data; size_t size,position; FILE *file; int active; } AmigaHostFile;
+typedef struct { uint8_t *data; size_t size,position; FILE *file; int active; char overlay_path[1024]; } AmigaHostFile;
 typedef struct {
     char path[256]; int active,enumerated;
     AmigaOfsEntry *entries; size_t entry_count,entry_next;

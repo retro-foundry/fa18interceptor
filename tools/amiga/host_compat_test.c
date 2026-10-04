@@ -70,6 +70,15 @@ int main(void) {
     assert(!amiga_host_exnext(c,lock,fib,260) && c->error==232);
     assert(amiga_host_examine(c,lock,fib,260) && amiga_host_exnext(c,lock,fib,260));
     assert(amiga_host_unlock(c,lock));
+    h=amiga_host_open(c,"D/X",1005); assert(h);
+    assert(amiga_host_seek(c,h,1,-1)==0 && amiga_host_write(c,h,"Z",1)==1);
+    assert(amiga_host_file_close(c,h));
+    h=amiga_host_open(c,"d/x",1005); assert(h);
+    assert(amiga_host_read(c,h,bytes,8)==3 && !memcmp(bytes,"aZc",3));
+    assert(amiga_host_seek(c,h,0,-1)==3 && amiga_host_write(c,h,"Q",1)==1);
+    assert(amiga_host_file_close(c,h));
+    size_t original_size; uint8_t *original=amiga_ofs_read(&disk,"D/X",&original_size);
+    assert(original && original_size==3 && !memcmp(original,"abc",3)); free(original);
     lock=amiga_host_lock(c,""); assert(lock && amiga_host_examine(c,lock,fib,260));
     int overlay=0; while (amiga_host_exnext(c,lock,fib,260)) overlay|=!strcmp((char *)fib+8,"pilot");
     assert(overlay && amiga_host_unlock(c,lock));
@@ -92,6 +101,7 @@ int main(void) {
     word(colors+10,0x123); assert(amiga_host_load_rgb4(c,vp,cm+8,2)); assert(copper_value(hw,0x182)==0x123);
     assert(amiga_host_free_copper(c,cl) && amiga_host_free_copper(c,cp) && c->used_count==before);
     assert(remove("host-compat-test-saves/pilot")==0);
+    assert(remove("host-compat-test-saves/d/x")==0);
     amiga_host_close(c); free(c); free(chip); free(fast); amiga_ofs_close(&disk);
     puts("Host memory, libraries, ADF/overlay files, directory enumeration, keyboard and Copper contracts pass"); return 0;
 }

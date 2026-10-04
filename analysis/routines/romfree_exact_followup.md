@@ -18,6 +18,10 @@ postflight, save/load and exit work:
   original, including differences in OS-owned memory layout.
 - Compare DOS errors, metadata/directory iteration, short reads and persistence
   at established game checkpoints.
+  Existing-file (1005) handles must remain writable: the original C1643A log
+  writer uses that mode. Current writes copy ADF bytes into the host overlay
+  lazily, preserving file position and length. Revisit protection bits, disk
+  capacity accounting, concurrent handles and packet-level failures later.
 - Reconcile explicit process/library/device initialization against cold-entry
   evidence. Captured RAM must remain oracle input only.
 - Replay all original recordings and add clean-launch recordings covering every

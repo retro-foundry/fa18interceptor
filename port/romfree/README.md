@@ -30,9 +30,15 @@ keyboard requests and timer queries/waits. Existing C interrupt and graphics
 wait services run guest callbacks on the chipset timeline. New services use a
 coarse execution charge. The original game startup and gameplay code still run.
 
-Save/load through the game UI, all mission modes, restart and game teardown
-still need coverage and any remaining services. Host file round trips already
-pass portable component tests. Unknown operations continue to fail with their
+The flight-log reset/update commands now save the original 78-byte `config`
+through an existing-file handle. A fresh ADF-only launch loads all 78 saved
+bytes back into the original game record. The ADF remains unchanged; writes
+materialize a save-directory overlay only when needed. Reproduce this with
+`python tools/amiga/check_romfree_game_paths.py`; add `--modes` for menu,
+training, qualification, mission-selection and flight-to-menu checkpoints.
+
+Complete mission outcomes, restart and game teardown still need coverage and
+any remaining services. Unknown operations continue to fail with their
 caller, service, target and machine time. Faster flight simulation and smoother
 presentation remain performance work; no measured speedup is claimed here.
 

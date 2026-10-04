@@ -39,11 +39,11 @@ whole-game acceptance remains:
 | Checkpoint | Verified state |
 | --- | --- |
 | Original ADF launch with no ROM or savestate | GNU/MSVC Release isolated ADF-only tests pass through splash, credits, keyboard input and main-menu access and demo rendering |
-| Menus and every reachable game mode from clean launch | Credits/input/demo smoke passes; complete menu/mode coverage pending |
+| Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all selectable mission starts exercised. Complete outcomes/progression remain pending |
 | Flight and postflight with original behavior and timing | Pending; existing ROM-backed recordings remain the oracle |
-| Save/load round trips using `--save-dir` | Portable ADF/host-overlay component round trips pass; game UI scenarios pending |
+| Save/load round trips using `--save-dir` | GNU/MSVC game UI reset/update writes original 78-byte config; fresh launch matches all 78 saved bytes. ADF hash unchanged |
 | Restart and clean exit | Pending |
-| Zero ROM reads/fetches and unsupported services over all scenarios | Zero across isolated startup/credits/demo runs; remaining modes/persistence/exit pending |
+| Zero ROM reads/fetches and unsupported services over all scenarios | Zero over startup/demo, menu/mission-start and flight-log persistence checkpoints; full outcomes/progression/exit pending |
 
 The loose host layer is in `port/amiga/host_compat.{h,c}` and
 `host_graphics.{h,c}`; its CPU/chipset adapter is `port/os/host_compat_adapter.c`.
@@ -60,12 +60,23 @@ the 406-file native gate and 100-frame C/ROM reference smoke for all three
 recordings also pass. Full exact service/recording gates were not rerun for this
 behavior-level batch. No performance speedup has yet been measured.
 
-Next: exercise the actual menu selections, postflight, persistence, restart and
+Next: verify mission outcomes/progression, restart and clean
 exit; complete only services reached by those paths, retaining reusable state
 outside the game profile. Timer/keyboard reads can remain pending; the single
 process waits while chipset interrupts continue. Gameport event completion,
 additional device commands and library operations remain explicit unsupported
 paths where not implemented. Exact work is tracked in the follow-up note.
+
+The original flight-log update opens config with MODE_OLDFILE (1005) and
+writes 78 bytes. Treating that mode as read-only prevented saving; it now
+supports lazy ADF-to-overlay writes and in-place overlay updates. Neutral tests
+verify position, preserved trailing bytes, and unchanged source ADF. Run
+`python tools/amiga/check_romfree_game_paths.py` for isolated game reset/save/
+reload; `--modes` also drives menus, F1-F4 mission selections and SHIFT-ESC
+back to the main menu. These tests exercise original code through frontend
+input, without injecting guest state. The reset command writes an all-zero
+record; compare reload at frame 1800 before original name/tour entry changes
+record fields. Original C11720 increments record+4 on entering a new tour.
 
 ## Historical objective and order (superseded above)
 

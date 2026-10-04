@@ -165,9 +165,10 @@ uint32_t amiga_host_open(AmigaHostCompat *c,const char *input,int32_t mode) {
     if (index==64) { c->error=103; return 0; }
     if (mode!=1004 && mode!=1005 && mode!=1006) { c->error=115; return 0; }
     AmigaHostFile *f=&c->files[index]; memset(f,0,sizeof *f);
+    strcpy(f->overlay_path,host);
     if (mode==1006) { directories(host); f->file=fopen(host,"wb+"); }
     else {
-        f->file=fopen(host,mode==1004?"rb+":"rb");
+        f->file=fopen(host,"rb+");
         if (!f->file) f->data=amiga_ofs_read(c->disk,name,&f->size);
         if (mode==1004 && f->data) {
             directories(host); f->file=fopen(host,"wb+");
@@ -192,7 +193,22 @@ int32_t amiga_host_read(AmigaHostCompat *c,uint32_t h,void *buffer,int32_t lengt
     f->position+=n; return (int32_t)n;
 }
 int32_t amiga_host_write(AmigaHostCompat *c,uint32_t h,const void *buffer,int32_t length) {
-    AmigaHostFile *f=file_handle(c,h); if (!f || length<0 || !f->file) { c->error=209; return -1; }
+    AmigaHostFile *f=file_handle(c,h); if (!f || length<0) { c->error=209; return -1; }
+    if (!length) return 0;
+    /* MODE_OLDFILE means an existing file, not a read-only handle. The game
+     * opens its log with 1005 and writes it in place. Materialize ADF bytes
+     * only at the first write, keeping reads and the original disk untouched. */
+    if (!f->file && f->data) {
+        directories(f->overlay_path);
+        FILE *overlay=fopen(f->overlay_path,"wb+");
+        if (!overlay || fwrite(f->data,1,f->size,overlay)!=f->size ||
+            fseek(overlay,(long)f->position,SEEK_SET)) {
+            if (overlay) fclose(overlay);
+            c->error=209; return -1;
+        }
+        f->file=overlay; free(f->data); f->data=NULL;
+    }
+    if (!f->file || fseek(f->file,0,SEEK_CUR)) { c->error=209; return -1; }
     size_t n=fwrite(buffer,1,(size_t)length,f->file); if (ferror(f->file)) { c->error=209; return -1; } return (int32_t)n;
 }
 int32_t amiga_host_seek(AmigaHostCompat *c,uint32_t h,int32_t position,int32_t mode) {
