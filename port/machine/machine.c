@@ -602,6 +602,8 @@ void fa18_machine_button(FA18Machine *m, int button, int down) {
     if (button == 0) m->mouse_left = down;
     else if (button == 1) m->mouse_right = down;
     else m->joy_fire = down;
+    if (m->runtime_guard.enabled)
+        fa18_os_host_button(button<2?0:1,button<2?(unsigned)button:0,down,m->cycle);
 }
 
 void fa18_machine_joystick(FA18Machine *m, int up, int down, int left, int right) {

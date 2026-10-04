@@ -1,4 +1,7 @@
 #include "guest_memory.h"
+void amiga_store_be16(uint8_t *p,uint16_t value) {
+    p[0]=(uint8_t)(value>>8); p[1]=(uint8_t)value;
+}
 int amiga_guest_memory_valid(const AmigaGuestMemory *memory) {
     if (!memory || !memory->banks || !memory->count) return 0;
     for (size_t i=0; i<memory->count; ++i) {

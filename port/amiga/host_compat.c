@@ -358,3 +358,32 @@ int amiga_host_queue_key(AmigaHostCompat *c,unsigned rawkey,int down) {
     c->keys[c->key_tail]=(uint8_t)(rawkey|(down?0:128)); c->key_tail=next;
     return 1;
 }
+int amiga_host_gameport_button(AmigaHostCompat *c,unsigned unit,unsigned button,
+                               int down,uint32_t seconds,uint32_t microseconds) {
+    if (!c || unit>=2 || button>=3) return 0;
+    unsigned mask=1u<<button;
+    uint8_t previous=c->gameport_buttons[unit];
+    uint8_t buttons=(uint8_t)(down?(previous|mask):(previous&~mask));
+    if (buttons==previous) return 1;
+    /* gameport.h: positive controller types, GPTF_DOWNKEYS=1/UPKEYS=2.
+     * inputevent.h: RAWMOUSE=2, LBUTTON=68, RBUTTON=69, MBUTTON=6A.
+     * SDK consulted as reference only; no SDK headers or code are used. */
+    if ((int8_t)c->gameport_type[unit]<=0 ||
+        !(amiga_be16(c->gameport_trigger[unit])&(down?1:2))) {
+        c->gameport_buttons[unit]=buttons; return 1;
+    }
+    unsigned next=(c->gameport_tail[unit]+1)%128;
+    if (next==c->gameport_head[unit]) return 0;
+    uint8_t *event=c->gameport_events[unit][c->gameport_tail[unit]];
+    memset(event,0,22); event[4]=2;
+    amiga_store_be16(event+6,(uint16_t)(0x68+button+(down?0:0x80)));
+    amiga_store_be16(event+8,(uint16_t)(0x8000|((buttons&1)?0x4000:0)|
+                                      ((buttons&2)?0x2000:0)|((buttons&4)?0x1000:0)));
+    amiga_store_be32(event+14,seconds); amiga_store_be32(event+18,microseconds);
+    c->gameport_buttons[unit]=buttons; c->gameport_tail[unit]=next; return 1;
+}
+int amiga_host_gameport_read(AmigaHostCompat *c,unsigned unit,uint8_t *event,size_t size) {
+    if (!c || unit>=2 || !event || size<22 || c->gameport_head[unit]==c->gameport_tail[unit]) return 0;
+    memcpy(event,c->gameport_events[unit][c->gameport_head[unit]],22);
+    c->gameport_head[unit]=(c->gameport_head[unit]+1)%128; return 1;
+}

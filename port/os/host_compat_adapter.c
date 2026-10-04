@@ -87,6 +87,14 @@ int fa18_os_host_key(unsigned rawkey,int down) {
     }
     return 1;
 }
+void fa18_os_host_button(unsigned unit,unsigned button,int down,uint64_t cycle) {
+    if (!active) return;
+    if (!amiga_host_gameport_button(active,unit,button,down,
+        (uint32_t)(cycle/7093790),(uint32_t)((cycle%7093790)*1000000/7093790))) {
+        fprintf(stderr,"compat: gameport event queue is full or button is invalid (unit=%u button=%u)\n",unit,button);
+        fa18_machine_runtime_fault();
+    }
+}
 void fa18_os_host_tick(uint64_t cycle) {
     AmigaHostCompat *c=active; if (!c) return;
     for (size_t i=0;i<c->pending_count;) {
@@ -100,6 +108,16 @@ void fa18_os_host_tick(uint64_t cycle) {
             amiga_store_be32(event+14,(uint32_t)(cycle/7093790));
             amiga_store_be32(event+18,(uint32_t)((cycle%7093790)*1000000/7093790));
             write32(c,request+32,22);
+        } else if (device==AMIGA_HOST_GAMEPORT) {
+            uint8_t *io=guest(c,request,48);
+            unsigned unit=amiga_be32(io+24);
+            if (unit>=2 || amiga_be32(io+36)<22) {
+                fprintf(stderr,"compat: invalid gameport unit or event buffer\n"); fa18_machine_runtime_fault();
+            }
+            if (c->gameport_head[unit]==c->gameport_tail[unit]) { ++i; continue; }
+            uint32_t data=amiga_be32(io+40);
+            if (!amiga_host_gameport_read(c,unit,guest(c,data,22),22)) { ++i; continue; }
+            fa18_recomp_note_write(data,22); write32(c,request+32,22);
         } else if (device==AMIGA_HOST_TIMER) {
             if (cycle<c->pending[i].deadline) { ++i; continue; }
         } else { ++i; continue; }

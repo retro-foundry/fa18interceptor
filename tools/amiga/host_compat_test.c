@@ -23,6 +23,42 @@ static uint16_t copper_value(const uint8_t *list,unsigned reg) {
     }
     assert(!"missing Copper move"); return 0;
 }
+static void gameport_contracts(AmigaHostCompat *c) {
+    uint8_t event[24]; memset(event,0xA5,sizeof event);
+    assert(!amiga_host_gameport_read(c,1,event,sizeof event));
+    assert(!amiga_host_gameport_button(c,2,0,1,0,0));
+    assert(!amiga_host_gameport_button(c,1,3,1,0,0));
+    c->gameport_type[0]=1; c->gameport_type[1]=2;
+    amiga_store_be16(c->gameport_trigger[0],3); amiga_store_be16(c->gameport_trigger[1],3);
+    assert(amiga_host_gameport_button(c,1,0,1,2,123));
+    assert(amiga_host_gameport_button(c,1,0,1,2,124)); /* repeated state */
+    assert(amiga_host_gameport_button(c,0,1,1,2,125));
+    assert(amiga_host_gameport_button(c,1,0,0,3,456));
+    assert(!amiga_host_gameport_read(c,1,event,21)); /* does not consume */
+    assert(amiga_host_gameport_read(c,1,event,sizeof event));
+    assert(!amiga_be32(event) && event[4]==2 && !event[5]);
+    assert(amiga_be16(event+6)==0x68 && amiga_be16(event+8)==0xC000);
+    assert(!amiga_be32(event+10) && amiga_be32(event+14)==2 && amiga_be32(event+18)==123);
+    assert(event[22]==0xA5 && event[23]==0xA5);
+    assert(amiga_host_gameport_read(c,1,event,sizeof event) && amiga_be16(event+6)==0xE8 && amiga_be16(event+8)==0x8000);
+    assert(!amiga_host_gameport_read(c,1,event,sizeof event));
+    assert(amiga_host_gameport_read(c,0,event,sizeof event) && amiga_be16(event+6)==0x69 && amiga_be16(event+8)==0xA000);
+    amiga_store_be16(c->gameport_trigger[1],1); /* only down edges */
+    assert(amiga_host_gameport_button(c,1,0,1,0,0) && amiga_host_gameport_button(c,1,0,0,0,0));
+    assert(amiga_host_gameport_read(c,1,event,sizeof event) && !amiga_host_gameport_read(c,1,event,sizeof event));
+    amiga_store_be16(c->gameport_trigger[1],3);
+    for(unsigned i=0;i<127;++i) assert(amiga_host_gameport_button(c,1,0,!(i&1),0,i));
+    assert(!amiga_host_gameport_button(c,1,0,0,0,127) && c->gameport_buttons[1]==1);
+    assert(amiga_host_gameport_read(c,1,event,sizeof event));
+    assert(amiga_host_gameport_button(c,1,0,0,0,127)); /* wrap and retry */
+    for(unsigned i=1;i<128;++i) {
+        assert(amiga_host_gameport_read(c,1,event,sizeof event));
+        assert(amiga_be16(event+6)==((i&1)?0xE8:0x68) && amiga_be32(event+18)==i);
+    }
+    assert(!amiga_host_gameport_read(c,1,event,sizeof event));
+    c->gameport_type[1]=0;
+    assert(amiga_host_gameport_button(c,1,0,1,0,0) && !amiga_host_gameport_read(c,1,event,sizeof event));
+}
 int main(void) {
     AmigaOfs disk={calloc(8,512),8*512}; assert(disk.image);
     memcpy(disk.image,"DOS\0",4);
@@ -84,6 +120,7 @@ int main(void) {
     assert(overlay && amiga_host_unlock(c,lock));
     assert(amiga_host_queue_key(c,0x20,1) && (c->keyboard_matrix[4]&1));
     assert(amiga_host_queue_key(c,0x20,0) && !(c->keyboard_matrix[4]&1) && c->keys[0]==0x20 && c->keys[1]==0xA0);
+    gameport_contracts(c);
     uint32_t structs=amiga_host_alloc(c,256,0x10004),plane=amiga_host_alloc(c,8000,0x10002);
     assert(structs && plane); uint32_t view=structs,vp=view+18,ri=vp+40,bm=ri+12,cm=bm+40;
     uint8_t *v=amiga_guest_range(&c->memory,structs,256),*p=v+18,*r=p+40,*bitmap=r+12,*colors=bitmap+40;
@@ -113,5 +150,5 @@ int main(void) {
     assert(fread(bytes,1,8,closed)==8 && !memcmp(bytes,"shutdown",8)); assert(!fclose(closed));
     assert(!remove("host-compat-test-saves/shutdown") && amiga_host_close(c));
     free(c); free(chip); free(fast); amiga_ofs_close(&disk);
-    puts("Host memory, libraries, ADF/overlay files, directory enumeration, keyboard and Copper contracts pass"); return 0;
+    puts("Host memory, libraries, ADF/overlay files, directory enumeration, keyboard, gameport and Copper contracts pass"); return 0;
 }

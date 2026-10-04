@@ -63,7 +63,13 @@ behavior-level batch. No performance speedup has yet been measured.
 Next: verify mission outcomes/progression, restart and clean
 exit; complete only services reached by those paths, retaining reusable state
 outside the game profile. Timer/keyboard reads can remain pending; the single
-process waits while chipset interrupts continue. Gameport event completion,
+process waits while chipset interrupts continue. Gameport button-event completion
+now implements the C16EAE codes 68/E8 through reusable per-unit packed queues,
+trigger edge filtering, transition timestamps and normal IO replies/signals.
+GNU/MSVC adapter tests exercise SendIO/WaitIO, wakeup, isolation and AbortIO;
+neutral tests cover order, duplicate transitions, overflow retry and wraparound.
+The GNU/MSVC qualification/save/reload scenarios still pass with zero ROM/fault
+counters. Motion thresholds and timeout events remain deferred. Other
 additional device commands and library operations remain explicit unsupported
 paths where not implemented. Exact work is tracked in the follow-up note.
 

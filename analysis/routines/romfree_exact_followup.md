@@ -43,7 +43,12 @@ Concrete concessions in the first host compatibility batch:
   beam/blitter services or pending requests. Host file I/O costs no disk cycles.
 - A single guest process waits without captured idle-task state. Keyboard and
   timer completions are polled on the chipset line timeline. Exact device
-  task scheduling, input-handler chains and gameport/audio commands need work.
+  task scheduling, input-handler chains and additional gameport/audio commands need work.
+  Gameport button edges now complete READ_EVENT with packed codes 68/E8 as
+  consumed by original C16EAE. Trigger masks and timestamps are preserved;
+  completion occurs on the next chipset line, without original device task
+  scheduling. Motion delta thresholds, timeout events, controller-type event
+  differences and close/ownership lifecycle still need reference evidence.
 - Graphics builds its own CopList/cprlist layouts. LoadView publishes for the
   next vertical blank, retaining original guest palette and bitmap resources.
   Complex merging, interlace, clipping and extended modes are unproved.

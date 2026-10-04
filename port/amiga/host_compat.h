@@ -25,6 +25,10 @@ typedef struct {
     int exited; int32_t exit_code;
     uint32_t input_handlers[16]; size_t input_handler_count;
     uint8_t keyboard_matrix[16],gameport_type[2],gameport_trigger[2][8];
+    /* Packed InputEvents, separated by gameport unit. Host transition time is
+     * supplied by the adapter; this reusable layer knows no machine clock. */
+    uint8_t gameport_events[2][128][22],gameport_buttons[2];
+    unsigned gameport_head[2],gameport_tail[2];
     uint8_t sprite_allocated;
     struct { uint32_t request; uint64_t deadline; unsigned device; } pending[64];
     size_t pending_count;
@@ -58,4 +62,10 @@ int amiga_host_info(AmigaHostCompat *,uint32_t lock,uint8_t *info,size_t size);
 int amiga_host_add_tail(AmigaHostCompat *,uint32_t list,uint32_t node);
 int amiga_host_remove(AmigaHostCompat *,uint32_t node);
 int amiga_host_queue_key(AmigaHostCompat *,unsigned rawkey,int down);
+/* Buttons 0/1/2 correspond to left/fire, right, middle. Repeated states and
+ * unselected trigger edges succeed without adding an event. Overflow fails
+ * atomically. Motion thresholds and trigger timeouts are not implemented. */
+int amiga_host_gameport_button(AmigaHostCompat *,unsigned unit,unsigned button,
+                               int down,uint32_t seconds,uint32_t microseconds);
+int amiga_host_gameport_read(AmigaHostCompat *,unsigned unit,uint8_t *event,size_t size);
 #endif

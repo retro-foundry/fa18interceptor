@@ -12,4 +12,5 @@ typedef struct { AmigaGuestBank *banks; size_t count; } AmigaGuestMemory;
 int amiga_guest_memory_valid(const AmigaGuestMemory *);
 uint8_t *amiga_guest_range(const AmigaGuestMemory *, uint32_t, uint32_t);
 void amiga_store_be32(uint8_t *, uint32_t);
+void amiga_store_be16(uint8_t *, uint16_t);
 #endif

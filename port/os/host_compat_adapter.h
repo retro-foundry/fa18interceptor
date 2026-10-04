@@ -7,5 +7,6 @@ int fa18_os_host_compat_install(AmigaHostCompat *,const AmigaLibraryVector *,siz
 void fa18_os_host_compat_detach(void);
 int fa18_os_host_exited(void);
 int fa18_os_host_key(unsigned rawkey,int down);
+void fa18_os_host_button(unsigned unit,unsigned button,int down,uint64_t cycle);
 void fa18_os_host_tick(uint64_t cycle);
 #endif
