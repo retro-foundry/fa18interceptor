@@ -407,8 +407,13 @@ static int dispatch(void *context) {
     fa18_machine->runtime_guard.service.name=amiga_host_library_name(id);
     int traced=trace_left && !(id==AMIGA_HOST_DOS && offset==42) && !(id==AMIGA_HOST_EXEC && offset==36) &&
         !(id==AMIGA_HOST_GRAPHICS && (offset==384 || offset==228));
-    if (traced) { --trace_left; fprintf(stderr,"HOST %s -%u pc=%06X d0=%08X d1=%08X d2=%08X d3=%08X a0=%06X a1=%06X a6=%06X\n",
-        amiga_host_library_name(id),offset,REG_PPC,REG_D[0],REG_D[1],REG_D[2],REG_D[3],REG_A[0],REG_A[1],REG_A[6]); }
+    if (traced) {
+        const uint8_t *stack=amiga_guest_range(&c->memory,REG_A[7],4);
+        --trace_left;
+        fprintf(stderr,"HOST %s -%u pc=%06X d0=%08X d1=%08X d2=%08X d3=%08X a0=%06X a1=%06X a6=%06X sp=%06X return=%08X sr=%04X\n",
+            amiga_host_library_name(id),offset,REG_PPC,REG_D[0],REG_D[1],REG_D[2],REG_D[3],REG_A[0],REG_A[1],REG_A[6],
+            REG_A[7],stack?amiga_be32(stack):0,m68ki_get_sr());
+    }
     int result=id==AMIGA_HOST_EXEC?exec_call(c,offset):id==AMIGA_HOST_DOS?dos_call(c,offset):
         id==AMIGA_HOST_GRAPHICS?graphics_call(c,offset):0;
     if (id==AMIGA_HOST_INTUITION && offset==78) {
@@ -416,8 +421,9 @@ static int dispatch(void *context) {
         c->desktop_hidden=1; REG_D[0]=1; logic(1); result=1;
     }
     if (!result) return unsupported(id,offset);
-    if (traced && id==AMIGA_HOST_GRAPHICS && (offset==210 || offset==216))
-        fprintf(stderr,"HOST result=%u\n",REG_D[0]);
+    if (traced && ((id==AMIGA_HOST_GRAPHICS && (offset==210 || offset==216 || offset==492)) ||
+                   (id==AMIGA_HOST_EXEC && offset==198)))
+        fprintf(stderr,"HOST result=%08X sr=%04X\n",REG_D[0],m68ki_get_sr());
     return result==2?1:returned(pc);
 }
 static int exited(void *context) {

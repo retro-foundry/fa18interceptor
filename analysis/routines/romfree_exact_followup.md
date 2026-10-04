@@ -71,6 +71,16 @@ A cold Chip-memory starvation probe returns zero from allocations and later
 faults at an invalid PC. It does not prove graceful game teardown, and its
 source/oracle cause is still unproved. Existing neutral failure-return contracts
 remain valid; whole-game startup-error cleanup needs focused investigation.
+The optional `FA18_HOST_TRACE` now reports guest SP, return address and full SR,
+plus allocation results, using checked host RAM access without emulated bus
+transactions. The ignored `build/amiga/oom_probe.c` reserves available Chip RAM
+before original startup; `oom-probe.trace` shows AllocMem returning zero via
+C53B42 followed by InitBitMap at A0=0 (return C53F80) and zero plane allocations.
+This narrows the investigation but does not establish whether the original
+caller or compatibility semantics cause the subsequent invalid-PC fault.
+Do not treat this probe as a passing teardown test. Revisit failure cleanup
+after the playable/performance work; do not spend exact-service effort on it
+as a prerequisite for faster scene production.
 
 The first clean launch found 42 captured OS RAM translations among the 624
 generated entries. ROM-free code ownership now excludes those functions,
