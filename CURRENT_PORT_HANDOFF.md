@@ -40,7 +40,7 @@ whole-game acceptance remains:
 | --- | --- |
 | Original ADF launch with no ROM or savestate | GNU/MSVC Release isolated ADF-only tests pass through splash, credits, keyboard input and main-menu access and demo rendering |
 | Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all selectable mission entry screens exercised. Active-flight coverage and complete outcomes/progression remain pending |
-| Flight and postflight with original behavior and timing | GNU/MSVC new-tour qualification controls execute three reset passes, original failure-message callbacks, menu return and log update. Carrier success and complete mission outcomes remain pending; exact timing deferred |
+| Flight and postflight with original behavior and timing | GNU/MSVC free-flight location/aircraft choices reach active cockpit with advancing original player coordinates and pixels. New-tour qualification controls execute three reset passes, original failure-message callbacks, menu return and log update. Carrier success and complete mission outcomes remain pending; exact timing deferred |
 | Save/load round trips using `--save-dir` | GNU/MSVC game UI reset/update writes original 78-byte config; fresh launch matches all 78 saved bytes. ADF hash unchanged |
 | Restart and clean exit | Host window close stops before another frame, produces diagnostics, releases host resources and reports save-close failures; original guest teardown/restart still pending |
 | Zero ROM reads/fetches and unsupported services over all scenarios | Zero over startup/demo, menu/mission-start and flight-log persistence checkpoints; full outcomes/progression/exit pending |
@@ -69,6 +69,33 @@ RAM/CPU and every RGB444 frame; the 1.3% median difference is within measured
 run variation, not a demonstrated speedup. A dummy-display menu/free-flight
 selection capture remains at C1075A with an unchanged final screen; this does
 not establish active-flight cadence. See the performance follow-up for data.
+
+`--window --fast-forward N` executes initial frames and replay events without
+window presentation or host pacing, then opens the live window. Default zero.
+Final frame counts include these frames; timing CSV rows retain absolute frame
+numbers and cover only presented frames. Window tests verify full RAM/CPU/pixel
+identity, close and frame-limit behavior. With `--frames 0`, a count of 1,800
+skips real-time startup waits and opens at the credits. Game time still advances
+through every frame; subsequent simulation speed is unchanged.
+
+`check_romfree_game_paths.py --flight` uses the committed
+`tools/amiga/fixtures/freeflight_runway.e9k` to confirm, select starting location
+and aircraft, then increase throttle. C10DAE and CONTEXT_STARTED=1/PAUSE_A=0
+at frames 4,900 and 5,300 prove active flight; original player coordinates and
+cockpit pixels differ between checkpoints on GNU/MSVC. Earlier frame 4,500
+is still at C10C08, so it cannot prove active flight. The qualification fixture
+also displays active cockpit/airspeed/crash-warning snapshots at frames 2,800,
+3,500 and 4,600 (ignored images under build/amiga). These are functional
+checkpoints, not exact timing evidence.
+
+An active qualification window profile now skips the first 4,500 frames, then
+measures 150 presented frames: mean host simulation 3.550 ms, presentation
+0.552 ms, total including pacing 19.988 ms; 28 RGB444 screen changes. It retains
+C10DAE, active/unpaused state and zero ROM/fault counters. This dummy-display
+sample shows ample host budget; fresh game updates remain paced by guest code.
+Carrier replay now enters flight after adding the missing Return confirmation,
+but neither frame-shifted nor loop-shifted controls achieve success. Qualification
+success remains unproved; do not count these probes as carrier-landing coverage.
 
 Next: verify mission outcomes/progression, restart and clean
 exit; complete only services reached by those paths, retaining reusable state

@@ -60,3 +60,23 @@ Next: record actual flight rather than its C1075A launch-preparation screen,
 then separate original scene-update cadence from host pacing. Select a faster
 simulation/rendering path based on those measurements, with exact service
 timing explicitly deferred. Do not simply accelerate gameplay timers.
+
+Active flight now has a repeatable functional checkpoint. The original free-
+flight UI needs starting-location and aircraft selections after confirmation;
+the former mode-only probe omitted them. `check_romfree_game_paths.py --flight`
+verifies C10DAE, CONTEXT_STARTED=1 and PAUSE_A=0 at frames 4,900 and 5,300,
+with different original player coordinates and cockpit pixels on GNU/MSVC.
+
+`--fast-forward N` skips host pacing/presentation for the first N frames of a
+window run while executing every game/chipset frame and replay event. It makes
+startup and active-flight profiling quicker, without changing subsequent game
+speed. The window fixture verifies final CPU/RAM/pixels against headless, CSV
+frame numbering, frame limits, close and malformed arguments.
+
+MSVC dummy-display qualification profile, fast-forward 4,500 and end at 4,650:
+150 presented frames; mean simulation 3.550 ms (p95 6.758, max 13.458), mean
+presentation 0.552 ms, mean paced total 19.988 ms. The screen changed 28 times;
+final C10DAE/active/unpaused state and zero ROM/fault counters confirm flight.
+Raw ignored artifacts: `build/amiga/qualification-flight.{csv,ram}`. This is
+an active scene/cockpit sample, not real-monitor cadence or an improved 3D rate.
+The host has spare frame budget while guest frame timing still limits updates.

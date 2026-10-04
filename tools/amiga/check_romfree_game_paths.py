@@ -1,7 +1,8 @@
 """Exercise original menus and flight-log persistence from isolated ADF launches.
 
-These are functional checkpoints, not landing/mission-outcome or timing parity
-proofs. No guest state is injected; only frontend keys drive the original game.
+These include qualification failure and active free flight; carrier success,
+complete mission outcomes and exact timing remain unproved. No guest state is
+injected; only frontend keys drive the original game.
 """
 import argparse
 import hashlib
@@ -38,6 +39,7 @@ def main():
     parser.add_argument("--runner", type=Path, default=ROOT / "build/recomp/fa18_romfree.exe")
     parser.add_argument("--modes", action="store_true", help="also exercise menu and mission selections")
     parser.add_argument("--outcomes", action="store_true", help="also replay qualification failure and persist its log")
+    parser.add_argument("--flight", action="store_true", help="also verify free-flight startup and changing flight state/pixels")
     args = parser.parse_args()
     runner = args.runner.resolve()
     adf = ROOT / "local/media/fa18.adf"
@@ -55,7 +57,7 @@ def main():
             result = subprocess.run([
                 str(work / "game.exe"), "--adf", "original.adf",
                 "--save-dir", saves, "--frames", str(frames), "--replay", str(replay),
-                "--ram-out", str(output), "--profile", f"{name}.calls.json"], cwd=work, capture_output=True, text=True)
+                "--ram-out", str(output), "--ppm", f"{name}.ppm", "--profile", f"{name}.calls.json"], cwd=work, capture_output=True, text=True)
             assert result.returncode == 0, (name, result.stderr, result.stdout)
             stats = [json.loads(line) for line in result.stdout.splitlines()]
             assert stats[-1] == ZERO_GUARD, (name, stats)
@@ -83,6 +85,31 @@ def main():
         assert record(loaded) == saved
         assert hashlib.sha256((work / "original.adf").read_bytes()).digest() == original_hash
         print("Original 78-byte reset/save/reload matches all bytes; ADF unchanged", flush=True)
+
+        if args.flight:
+            source = (ROOT / "tools/amiga/fixtures/freeflight_runway.e9k").read_text().splitlines()
+            assert source[0] == "E9K_INPUT_V1"
+            events = [(int(row[1]), int(row[3]), int(row[6])) for line in source[1:] if (row := line.split())]
+            # Original UI: acknowledge credits, select free flight, confirm,
+            # choose runway location and aircraft, then increase throttle.
+            # C10DAE is the active post-input callback; C457B4/C457AD are
+            # CONTEXT_STARTED/PAUSE_A. The player's record is C46184; the
+            # original flight controls integrate its long coordinates +12,
+            # +16, +20 (and ground height +24). Do not use mode/blit counts
+            # alone as flight evidence: these also occur on menu maps.
+            checkpoints = []
+            for frame in (4900, 5300):
+                name = f"free-flight-{frame}"
+                ram, _ = run(name, frame, events, name)
+                assert ram[offset(0xC458A6)] == 1
+                assert ram[offset(0xC457B4)] == 1 and ram[offset(0xC457AD)] == 0
+                assert struct.unpack_from(">I", ram, offset(0xC1820C))[0] == 0xC10DAE
+                position = ram[offset(0xC46184 + 12):offset(0xC46184 + 24)]
+                pixels = (work / f"{name}.ppm").read_bytes()
+                checkpoints.append((position, pixels))
+            assert checkpoints[0][0] != checkpoints[1][0], "player coordinates did not advance"
+            assert checkpoints[0][1] != checkpoints[1][1], "flight image did not change"
+            print("Free-flight runway/aircraft selections reach active cockpit; original player coordinates and pixels advance", flush=True)
 
         if args.outcomes:
             # Start a new tour using the reset record produced by the actual

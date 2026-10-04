@@ -28,6 +28,16 @@ Profiling adds counter reads, screen comparison/copy and buffered CSV writes;
 the screen comparison is included in presentation cost. No measurements are
 taken without this option. It requires `--window`.
 
+Use `--window --fast-forward 1800 --frames 0` to run the initial 1,800 PAL
+frames without presentation or real-time waits, then open the window at the
+credits. All game code, chipset frames and replay events still execute. This
+shortens the startup wait; it does not accelerate the subsequent simulation.
+For profiling flight, fast-forward a known input recording to its active
+flight checkpoint, then measure the remaining presented frames. Frame limits
+and final diagnostics include the fast-forwarded frames; timing CSV rows cover
+only presented frames and retain their original frame numbers. A finite frame
+limit must exceed the fast-forward count. No fast-forward occurs by default.
+
 The target now loads the splash and credits, accepts keyboard input, reaches
 the main menu and renders the demo from a clean ADF launch. GNU and MSVC Release
 pass the isolated launch smoke test, with zero ROM reads, ROM instruction
@@ -54,6 +64,11 @@ The committed frontend recording is
 `../../tools/amiga/fixtures/qualification_failure.e9k`; it includes callsign
 entry and log update, with no injected RAM or OS state. The test obtains its
 new-tour seed from the game's actual reset/save commands.
+
+`check_romfree_game_paths.py --flight` completes the free-flight location and
+aircraft prompts and verifies active C10DAE/CONTEXT_STARTED state with pause
+cleared at two checkpoints. Original player coordinates and cockpit pixels
+advance. The frontend recording is `tools/amiga/fixtures/freeflight_runway.e9k`.
 
 Complete mission outcomes, restart and game teardown still need coverage and
 any remaining services. Unknown operations continue to fail with their

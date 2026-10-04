@@ -61,6 +61,23 @@ def main():
         print(f"SDL close after {frames} live frames: complete RAM/CPU and pixels match headless; zero ROM/fault counters")
         print("Both vsync settings honor frame limits and emit final diagnostics")
         print("Frame timing CSV has one complete row per frame; measured runs preserve full RAM/CPU and pixels")
+        stats = run("fast", "game.exe", ["--window", "--frames", "4", "--fast-forward", "2", "--frame-times", "fast.csv"])
+        reference = run("fast-headless", "game.exe", ["--frames", "4"])
+        assert stats == reference
+        for suffix in ("ram", "ppm"):
+            assert (work / f"fast.{suffix}").read_bytes() == (work / f"fast-headless.{suffix}").read_bytes()
+        with (work / "fast.csv").open(newline="") as stream:
+            assert [int(row["frame"]) for row in csv.DictReader(stream)] == [3, 4]
+        stats = run("fast-quit", "quit.exe", ["--window", "--frames", "100", "--fast-forward", "2"])
+        reference = run("fast-quit-headless", "game.exe", ["--frames", str(stats[0]["frames"])])
+        assert 2 < stats[0]["frames"] < 100 and stats == reference
+        for suffix in ("ram", "ppm"):
+            assert (work / f"fast-quit.{suffix}").read_bytes() == (work / f"fast-quit-headless.{suffix}").read_bytes()
+        for value in ("-1", "4", "hello", "2147483648"):
+            result = subprocess.run([str(work / "game.exe"), "--adf", "original.adf", "--window",
+                "--frames", "4", "--fast-forward", value], cwd=work, env=env, capture_output=True, text=True)
+            assert result.returncode == 2 and "--fast-forward requires" in result.stderr
+        print("Fast-forward executes all frames, preserves RAM/CPU/pixels, reports only presented frames and honors close")
         rejected = subprocess.run([str(work / "game.exe"), "--adf", "original.adf",
             "--frame-times", "invalid.csv"], cwd=work, env=env, capture_output=True, text=True)
         assert rejected.returncode == 2 and "requires --window" in rejected.stderr

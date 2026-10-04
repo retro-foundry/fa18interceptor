@@ -1,6 +1,7 @@
 /* Shared headless/window runner. The reference target restores a UAE state;
  * FA18_ROMFREE_MAIN loads the original ADF with an explicit process handoff. */
 #include <stdio.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -63,6 +64,7 @@ static void usage(void) {
             "                     [--replay RUN.e9k --start-frame N] [--no-recomp] [--ram-out OUT.bin]\n"
             "                     [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
             "                     [--profile OUT.json] [--edges OUT.json] [--poison] [--frame-times OUT.csv]\n"
+            "                     [--fast-forward N] (window: run initial frames without real-time waits)\n"
             "                     [--rom-audit OUT.json] [--fallback-log OUT.json]\n"
             "ADF-only menu/demo and flight-log save/reload verified; full mission/teardown acceptance pending.\n"
 #else
@@ -72,6 +74,7 @@ static void usage(void) {
             "                   [--window [--scale N] [--vsync on|off]]   (window: --frames 0 runs until closed)\n"
             "                   [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
             "                   [--profile OUT.json] [--edges OUT.json] [--poison] [--frame-times OUT.csv]\n"
+            "                   [--fast-forward N] (window: run initial frames without real-time waits)\n"
             "                   [--rom-transitions OUT.json] (RAM-to-ROM entry inventory)\n"
             "                   [--rom-audit OUT.json] (ROM instructions, nested edges, data and vectors)\n"
             "                   [--no-os-vbeam] (use the ROM VBeamPos)\n"
@@ -114,7 +117,7 @@ static int restore_lead =
 /* Live 50 Hz window. Keys go to the Amiga keyboard; clicking the window
  * captures the mouse, F12 releases it. Recorded replay events still apply. */
 static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int frames, int scale, int vsync,
-                      int *completed_frames,const char *frame_times_path) {
+                      int *completed_frames,const char *frame_times_path,int fast_forward) {
     SDL_Window *win;
     SDL_Renderer *ren;
     SDL_Texture *tex;
@@ -125,6 +128,18 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
     double microseconds_per_tick=0;
     static uint16_t previous_screen[FA18_SCREEN_W * FA18_SCREEN_H];
     *completed_frames=0;
+    /* Explicit host presentation option. Execute every original frame and
+     * replay event; only omit window presentation and host pacing here. */
+    for (;frame<fast_forward
+#ifdef FA18_ROMFREE_MAIN
+           && !fa18_os_host_exited()
+#endif
+         ;++frame) {
+        fa18_replay_apply(replay,m,start_frame+frame+1);
+        if (frame==0 && restore_lead) { fa18_machine_run_frame(m); fa18_loop_frame(); }
+        fa18_machine_run_frame(m); fa18_loop_frame();
+    }
+    *completed_frames=frame;
     SDL_SetMainReady();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
         fprintf(stderr, "SDL initialization failed: %s\n", SDL_GetError());
@@ -147,7 +162,7 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
         timing=fopen(frame_times_path,"w");
         if (!timing) { fprintf(stderr,"cannot write %s\n",frame_times_path); result=1; goto window_cleanup; }
         microseconds_per_tick=1000000.0/(double)SDL_GetPerformanceFrequency();
-        memset(previous_screen,0,sizeof previous_screen);
+        memcpy(previous_screen,m->last_screen,sizeof previous_screen);
         fprintf(timing,"frame,input_us,simulation_us,convert_us,present_us,wait_us,total_us,screen_changed\n");
     }
     deadline = SDL_GetTicks64();
@@ -270,6 +285,7 @@ int main(int argc, char **argv) {
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     int run_result=0;
+    int fast_forward=0;
     const char *frame_times_path=NULL;
     /* Host-paced presentation avoids coupling PAL frames to a second clock.
      * Keep the reference runner's presentation default for existing users. */
@@ -336,6 +352,13 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--ports-report") && i + 1 < argc) ports_report = argv[++i];
         else if (!strcmp(argv[i], "--profile") && i + 1 < argc) profile_path = argv[++i];
         else if (!strcmp(argv[i], "--frame-times") && i + 1 < argc) frame_times_path = argv[++i];
+        else if (!strcmp(argv[i], "--fast-forward") && i + 1 < argc) {
+            char *end; const char *value=argv[++i]; long count=strtol(value,&end,10);
+            if (!*value || *end || count<0 || count>INT_MAX) {
+                fprintf(stderr,"--fast-forward requires a nonnegative frame count\n"); return 2;
+            }
+            fast_forward=(int)count;
+        }
         else if (!strcmp(argv[i], "--edges") && i + 1 < argc) edges_path = argv[++i];
         else if (!strcmp(argv[i], "--rom-transitions") && i + 1 < argc) rom_transitions_path = argv[++i];
         else if (!strcmp(argv[i], "--rom-audit") && i + 1 < argc) rom_audit_path = argv[++i];
@@ -379,6 +402,9 @@ int main(int argc, char **argv) {
     }
     if (frame_times_path && !window) {
         fprintf(stderr,"--frame-times requires --window\n"); return 2;
+    }
+    if (fast_forward && (!window || (frames>0 && fast_forward>=frames))) {
+        fprintf(stderr,"--fast-forward requires --window and must be less than a finite --frames limit\n"); return 2;
     }
 #ifdef FA18_ROMFREE_MAIN
     if (!adf_path || !*save_directory) { usage(); return 2; }
@@ -459,7 +485,7 @@ int main(int argc, char **argv) {
     }
     if (window) {
 #ifdef FA18_WITH_SDL
-        run_result = run_window(m, &replay, start_frame, frames, scale, vsync, &i,frame_times_path);
+        run_result = run_window(m, &replay, start_frame, frames, scale, vsync, &i,frame_times_path,fast_forward);
 #else
         fprintf(stderr, "--window needs the CMake build (SDL2)\n");
         return 2;
