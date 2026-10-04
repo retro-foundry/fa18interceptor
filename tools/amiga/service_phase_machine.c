@@ -20,7 +20,8 @@ typedef struct {
     int64_t cycle;
     unsigned size,write;
 } Access;
-static Access accesses[128],expected[128];
+/* Full allocator clearing crosses the original 16-bit DBRA boundary. */
+static Access accesses[131072],expected[131072];
 static size_t access_count,expected_count;
 static int recording;
 static void record_access(uint32_t address,unsigned size,uint32_t value,unsigned write) {

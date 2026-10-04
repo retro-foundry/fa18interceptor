@@ -14,6 +14,7 @@
 #include "../os/rom_audit_adapter.h"
 #include "../os/exec_task_services_adapter.h"
 #include "../os/exec_supervisor.h"
+#include "../os/exec_memory_adapter.h"
 
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb");
@@ -66,6 +67,7 @@ static void usage(void) {
             "                   [--no-os-lists] (use ROM Exec list services)\n"
             "                   [--no-os-task-services] (use ROM Exec messages/signals/task protection)\n"
             "                   [--no-os-supervisor] (use ROM Exec Supervisor/privilege callback)\n"
+            "                   [--no-os-memory] (use ROM Exec memory-list services)\n"
             "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n");
 }
 
@@ -188,6 +190,7 @@ int main(int argc, char **argv) {
     int os_lists = -1;
     int os_task_services = -1;
     int os_supervisor = -1;
+    int os_memory = -1;
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
@@ -256,6 +259,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--no-os-task-services")) os_task_services = 0;
         else if (!strcmp(argv[i], "--os-supervisor")) os_supervisor = 1;
         else if (!strcmp(argv[i], "--no-os-supervisor")) os_supervisor = 0;
+        else if (!strcmp(argv[i], "--os-memory")) os_memory = 1;
+        else if (!strcmp(argv[i], "--no-os-memory")) os_memory = 0;
         else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--record") && i + 1 < argc) record_path = argv[++i];
@@ -283,6 +288,7 @@ int main(int argc, char **argv) {
     if (os_lists < 0) os_lists = use_recomp;
     if (os_task_services < 0) os_task_services = use_recomp;
     if (os_supervisor < 0) os_supervisor = use_recomp;
+    if (os_memory < 0) os_memory = use_recomp;
     fa18_recomp_init(use_recomp);
     if (os_vbeam) fa18_recomp_enable_vbeam_shim();
     if (os_waitblit) fa18_recomp_enable_wait_blit_shim();
@@ -295,6 +301,7 @@ int main(int argc, char **argv) {
     if (os_lists) fa18_recomp_enable_exec_lists_shim();
     if (os_task_services) fa18_os_exec_task_services_enable_reference();
     if (os_supervisor) fa18_os_exec_supervisor_enable_reference();
+    if (os_memory) fa18_os_exec_memory_enable_reference();
     if (rom_transitions_path && !fa18_recomp_track_rom_transitions()) {
         fprintf(stderr, "cannot allocate ROM transition inventory\n");
         return 1;

@@ -12,7 +12,7 @@ import subprocess
 
 ROOT=Path(__file__).resolve().parents[2]
 ROM_FLAGS=["--no-os-"+name for name in
-           ("vbeam","waitblit","waitbovp","blitter-owner","exec-interrupts","getmsg","potgo","task-lookup","lists","task-services","supervisor")]
+           ("vbeam","waitblit","waitbovp","blitter-owner","exec-interrupts","getmsg","potgo","task-lookup","lists","task-services","supervisor","memory")]
 
 
 def digest(path):

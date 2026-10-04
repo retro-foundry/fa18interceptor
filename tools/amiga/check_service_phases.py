@@ -25,13 +25,14 @@ FAMILIES = [
     ("exec_task_services_adapter.c", "fa18_os_exec_signals_step"),
     ("exec_task_services_adapter.c", "fa18_os_exec_task_protection_step"),
     ("exec_supervisor.c", "fa18_os_exec_supervisor_step"),
+    ("exec_memory_adapter.c", "fa18_os_exec_memory_step"),
 ]
 
 
-def write_cases():
+def write_cases(families=None):
     """Build the shared case registry even when a whole-call checker runs first."""
     rows = []
-    for filename, function in FAMILIES:
+    for filename, function in FAMILIES if families is None else families:
         source = (ROOT / "port/os" / filename).read_text()
         body = source.split(f"int {function}(void) {{", 1)[1].split("\nint ", 1)[0]
         pcs = sorted(set(re.findall(r"case (0x[0-9A-F]+)u:", body)))
@@ -46,10 +47,12 @@ def write_cases():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cases", type=int, default=256)
+    parser.add_argument("--family", action="append", choices=[function for _,function in FAMILIES],
+                        help="check selected families while developing; omit for the complete gate")
     args = parser.parse_args()
     if args.cases < 256:
         parser.error("use at least 256 to exercise all boundary/CCR combinations")
-    write_cases()
+    write_cases([row for row in FAMILIES if row[1] in args.family] if args.family else None)
     subprocess.run([
         "python", "scripts/build_recomp.py", "--main", "tools/amiga/service_phase_oracle.c",
         "--replace-source", "port/machine/machine.c=tools/amiga/service_phase_machine.c",

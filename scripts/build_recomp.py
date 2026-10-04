@@ -46,6 +46,7 @@ def source_files(main: Path) -> list[Path]:
         Path("port/amiga/service_dispatch.c"),
         Path("port/amiga/exec_lists.c"),
         Path("port/amiga/exec_task_services.c"),
+        Path("port/amiga/exec_memory.c"),
     ]
     globbed: list[Path] = []
     for pattern in ("port/recomp/generated/*.c", "port/game/*.c",

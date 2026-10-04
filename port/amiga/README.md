@@ -49,6 +49,13 @@ ctest --test-dir build/amiga-compat -C Release --output-on-failure
   responsibilities. Verified Supervisor exception-frame comparisons/rewrites
   and saved-status tests also live here; CPU privilege/stack-bank changes and
   RTE remain in the CPU adapter. Blocking Wait and WaitPort need a scheduler.
+- `exec_memory.h`: resumable Allocate/Deallocate, core AllocMem/FreeMem,
+  AllocAbs, TypeOfMem and AvailMem over guest MemHeader/MemChunk lists. Eight-byte
+  alignment, first-fit splitting, sorted coalescing, attribute filtering and
+  original clear-loop behavior are preserved. The caller supplies guest OS
+  structures, memory banks, timing and Permit/Alert continuations. This never
+  allocates from a host heap. Original boundary behavior, including zero-size
+  AllocAbs self-linking at a chunk start, is retained by the verified ABI.
 - `rom_audit.h`: optional reference observations of nested flow, CPU state,
   accesses and machine time. Its bounded table fails closed if exhausted. This
   is an inventory, not ordered entry/exit fixtures or complete game coverage.

@@ -166,10 +166,10 @@ Only hashes, addresses, and register metadata are committed in
 RAM stays under ignored `build/amiga` as oracle evidence.
 
 The seven existing service bridges, Exec FindTask/FindName, all seven list
-operations, message/signal/task protection and Supervisor now execute 432 C phases
+operations, message/signal/task protection, Supervisor and memory now execute 669 C phases
 without reading ROM instruction or operand bytes.
 Nested calls preserve the original stack and vectors. The structural oracle
-passes 221,184 CPU/DMA fixtures with cleared
+passes 342,528 CPU/DMA fixtures with cleared
 ROM buffers, a strict access guard, full registers/SR/RAM, ordered memory and
 hardware accesses, and exact cycles. It corrected potgo's original low-word-
 first stack write. Blitter ownership's deeper helpers still execute ROM in the
@@ -222,6 +222,31 @@ The reference runner enables the verified signatures by default; use
 replay comparisons pass all 36,236 frames/seals. See
 `analysis/routines/fc08e6_fc092a_exec_supervisor.md` and
 `analysis/data/romfree_exec_supervisor_entry.json`.
+
+Reusable `exec_memory.c` adds Allocate/Deallocate, core AllocMem/FreeMem,
+AllocAbs, TypeOfMem and AvailMem. All 237 memory phases pass CPU/DMA proof;
+21,568 complete calls and 2,048 original Alert-vector paths match registers,
+full SR, RAM, ordered accesses and cycles with ROM/rtarea cleared. Independent
+contracts check free-list topology/accounting, fragmentation, both coalescing
+directions, attribute filtering, zero/wrapping sizes, clearing and failures.
+The large clear fixture writes 65,537 longs and exercises the high-word loop.
+Original zero-size AllocAbs at a free-chunk start self-links that chunk; this
+is explicitly asserted, not replaced with invented behavior. AllocEntry,
+FreeEntry, complete Alert handling and the installed AllocMem retry wrapper
+remain pending. The reference runner enables the pinned memory signatures by
+default; `--no-os-memory` retains the ROM oracle. GNU/MSVC Release full replay
+comparisons still match all 36,236 frames/seals.
+
+The cold public AllocMem vector C001B0 points to RAM wrapper C06550, which
+uses common stack wrapper C06598 and private vector base C06522 to call ROM
+retry/scavenging code FE491E, then core AllocMem FC17D0. Engine9000 entry/exit
+contracts now cover Allocate, Deallocate, core AllocMem, FreeMem, AvailMem
+and the installed wrapper. TypeOfMem was not reached in 300 cold-start frames;
+TypeOfMem/AllocAbs have static source and controlled proofs. Captured wrapper
+RAM is evidence only, never runtime initialization input. See
+`analysis/routines/fc16d8_fc1958_exec_memory.md` and
+`analysis/data/romfree_exec_memory_contracts.json`. The dispatcher/scheduler,
+soft interrupts and generic exception paths are still required.
 
 `analysis/data/romfree_startup_checkpoint.json` records original execution from
 C0DEB0 to C0E27E: 1,632 instructions /11,677 OCS colour clocks, 1,065 ROM/rtarea
