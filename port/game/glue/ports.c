@@ -275,11 +275,11 @@ const FA18Port fa18_ports[] = {
     {0xC33FB4, glue_C33FB4, "draw_bounded_readout_sweep", 0, 0, glue_C33FB4_step, 0xC34066, 1, 0xC33FB2, glue_C33FB4_owns},
     {0xC1FE24, glue_C1FE24, "draw_display_stream_point", 750},
     {0xC1FE46, glue_C1FE46, "draw_display_stream_point", 750},
-    {0xC0DAEE, glue_C0DAEE, "draw_fixed_matrix_mark", 0, 0, glue_C0DAEE_step, 0xC0DB42},
+    {0xC0DAEE, glue_C0DAEE, "draw_fixed_matrix_mark", 0, 0, glue_C0DAEE_complete_step, 0xC0DB42, 1, 0, glue_C0DAEE_owns},
     {0xC17F8C, glue_C17F8C, "start_sound_6", 1100},
     {0xC18108, glue_C18108, "start_sound_12", 1050},
     {0xC1B906, glue_C1B906, "start_view_mode_zero", 0, 0, glue_C1B906_step, 0xC1C2B8},
-    {0xC0CFFA, glue_C0CFFA, "draw_scaled_view_circle", 1300},
+    {0xC0CFFA, glue_C0CFFA, "draw_scaled_view_circle", 0, 0, glue_C0CFFA_complete_step, 0xC0D048, 1, 0, glue_C0CFFA_owns},
     {0xC0CF98, glue_C0CF98, "draw_scaled_stream_circle", 1400},
     {0xC13176, glue_C13176, "dispatch_event_sound", 650},
     {0xC12098, glue_C12098, "update_view_controls", 0, 0, glue_C12098_step, 0xC12242},
@@ -380,7 +380,7 @@ const FA18Port fa18_ports[] = {
     {0xC26428, glue_C26428, "update_record_76_78", 500},
     /* batch 16: small text */
     {0xC32794, glue_C32794, "draw_small_text", 0, 0, glue_C32794_complete_step, 0xC32806, 1, 0, glue_C32794_owns},
-    {0xC32662, glue_C32662, "draw_small_text", 420},
+    {0xC32662, glue_C32662, "draw_small_text", 0, 0, glue_C32662_complete_step, 0xC32806, 1, 0, glue_C32662_owns},
     {0xC3271A, glue_C3271A, "format_small_hex", 0, 0, glue_C3271A_complete_step, 0xC32806, 1, 0, glue_C3271A_owns},
     {0xC32736, glue_C32736, "format_small_hex", 0, 0, glue_C32736_complete_step, 0xC32806, 1, 0, glue_C32736_owns},
     /* batch 17: BCD unpack, sorted search, record 56/66 with alert */
@@ -631,13 +631,13 @@ const FA18Port fa18_ports[] = {
     /* batch 62: message line, display list sort */
     {0xC322EE, glue_C322EE, "draw_message_line", 9000},
     /* batch 63: postflight HUD */
-    {0xC33CD2, glue_C33CD2, "transform_postflight_record", 1500},
+    {0xC33CD2, glue_C33CD2, "transform_postflight_record", 0, 0, glue_C33CD2_complete_step, 0xC33DA4, 1, 0, glue_C33CD2_owns},
     /* batch 63b */
-    {0xC33B38, glue_C33B38, "draw_postflight_variant", 20000},
+    {0xC33B38, glue_C33B38, "draw_postflight_variant", 0, 0, glue_C33B38_complete_step, 0xC33CD2, 1, 0xC33B36, glue_C33B38_owns},
     /* batch 63c */
     {0xC33370, glue_C33370, "draw_postflight_tape", 40000},
     /* batch 63d: HUD stage */
-    {0xC332BC, glue_C332BC, "draw_postflight_hud", 0, 0, glue_C332BC_step, 0xC332FC, 0, 0xC332B4},
+    {0xC332BC, glue_C332BC, "draw_postflight_hud", 0, 0, glue_C332BC_complete_step, 0xC332FC, 1, 0xC332B4, glue_C332BC_owns},
     /* polygon to row C7 */
     {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 0, 0, glue_C301F0_step, 0xC30466, 0, 0xC301F0},
     /* zone exit */

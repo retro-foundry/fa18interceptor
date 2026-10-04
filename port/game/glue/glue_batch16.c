@@ -117,11 +117,7 @@ static int small_text_loop(void) {
 
 
 /* $C32662: draw only when no context runs or TEXT_ALWAYS is set. */
-int glue_C32662(void) {
-    if (rd_u8(CONTEXT_SELECT) && !rd_u8(TEXT_ALWAYS)) return glue_return();
-    A(4) += D(7);
-    return small_text_loop();
-}
+
 
 /* Hex digits before the loop ($C32750): leaves D4 = 0, D1.w = the last digit
  * and A0 = where the zero scan stopped (A0 is reloaded by the loop). */

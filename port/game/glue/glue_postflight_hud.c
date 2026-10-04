@@ -97,102 +97,11 @@ static void transform_registers(const Vectors *v) {
     for (k = 0; k < 3; k++) D(3 + k) = current[k];
 }
 
-int glue_C33CD2(void) {
-    Vectors v;
-    save_vectors(&v);
-    transform_postflight_record();
-    transform_registers(&v);
-    return glue_return();
-}
+
 
 /* $C33B38: its steps' registers in order after the C, each plot with the
  * colour then in force. */
-int glue_C33B38(void) {
-    gaddr record = CONTROL_RECORDS + SEXT(rd_u16(VIEW_RECORD));
-    uint8_t kind = rd_u8(record + 0x63) & 0xF0, cue = rd_u8(SHOOT_CUE), flag = rd_u8(record + 4) & 1;
-    int16_t selected = rd_s16(SELECTED_RECORD), mx = rd_s16(SELECTION_MARKER), my = rd_s16(SELECTION_MARKER_Y);
-    int16_t px = rd_s16(POSTFLIGHT_MARK), py = rd_s16(POSTFLIGHT_MARK + 2), range = rd_s16(record + 0x4A);
-    int16_t rate = rd_s16(RANGE_RATE), last = rd_s16(POSTFLIGHT_RANGE_LAST);
-    uint16_t colour = rd_u16(CURRENT_COLOUR), final_colour;
-    int event = rd_u8(POST_INPUT_EVENT) != 0;
-    int32_t diff;
-    Vectors v;
 
-    if (rd_s16(ZOOM_SCALE) != 0x80) return glue_return();
-    save_vectors(&v);
-    draw_postflight_variant();
-    final_colour = rd_u16(CURRENT_COLOUR);
-    A(1) = record;
-    SET_B(D(5), kind);
-    if (kind != 0x10) {
-        if (selected < 0) goto transform;
-        SET_W(D(0), 0x9F);
-        SET_W(D(1), 0x5B);
-        if (mx <= 0) {
-            px = 0x9F;
-            py = 0x5B;
-        }
-        goto display;
-    }
-    SET_W(D(0), (uint16_t)mx);
-    if (mx <= 0) goto clear;
-    diff = (int32_t)mx - px;
-    SET_W(D(0), (uint16_t)diff);
-    if (diff < 0) SET_W(D(0), (uint16_t)-W(0));
-    if (W(0) > 8) goto clear;
-    SET_W(D(1), (uint16_t)my);
-    diff = (int32_t)my - py;
-    SET_W(D(1), (uint16_t)diff);
-    if (diff < 0) SET_W(D(1), (uint16_t)-W(1));
-    if (W(1) > 8) goto clear;
-    if (range > 0x900) goto clear;
-    if (!cue && selected < 0) goto clear;
-    colour = 13;
-    wr_u16(CURRENT_COLOUR, 13);
-    shoot_cue_registers();
-    goto dot;
-clear:
-dot:
-    D(0) = SEXT((uint16_t)px);
-    D(1) = SEXT((uint16_t)py);
-    if (px <= 0) goto transform;
-    wr_u16(CURRENT_COLOUR, colour);
-    plot_in_view_registers();
-display:
-    D(0) = SEXT((uint16_t)px);
-    D(1) = SEXT((uint16_t)py);
-    if (px <= 0) goto transform;
-    SET_W(D(1), (uint16_t)(W(1) + rd_s16(REDRAW_STATE_WORD)));
-    SET_W(D(2), 0x50);
-    A(0) = 0xC3494Cu;
-    wr_u16(CURRENT_COLOUR, 10);
-    ring_registers();
-    if (selected < 0) goto transform;
-    D(0) = SEXT((uint16_t)px);
-    D(1) = SEXT((uint16_t)py);
-    SET_W(D(1), (uint16_t)(W(1) + rd_s16(REDRAW_STATE_WORD)));
-    A(0) = record;
-    SET_W(D(2), (uint16_t)range);
-    D(2) = (uint32_t)(uint16_t)D(2) * 0x4Cu;
-    D(2) = (D(2) % 0x8CA0u) << 16 | (D(2) / 0x8CA0u);
-    A(0) = 0xC34976u;
-    wr_u16(CURRENT_COLOUR, 13);
-    ring_point_registers();
-    A(0) = record;
-    SET_W(D(0), (uint16_t)range);
-    if (range > 0x7F00) goto transform;
-    if (event || !flag) {
-        SET_W(D(0), (uint16_t)rate);
-    } else {
-        SET_W(D(1), (uint16_t)range);
-        SET_W(D(0), (uint16_t)(range - last));
-    }
-    signed_readout_registers();
-transform:
-    wr_u16(CURRENT_COLOUR, final_colour);
-    if (!event) transform_registers(&v);
-    return glue_return();
-}
 
 /* ABCD/SBCD of the three low bytes of `bcd` by `step` (X cleared first). */
 static uint32_t bcd_step(uint32_t bcd, uint32_t step, int add) {
@@ -336,23 +245,7 @@ static void call_port(int (*glue)(void), uint32_t return_to) {
 
 /* $C332BC: draw_postflight_hud's steps are each a recreated routine, so its
  * glue runs theirs in the same order (each with its own C and replay). */
-int glue_C332BC(void) {
-    wr_u32(LINE_STYLE, 0xFFFFF);
-    if (rd_u8(CONTEXT_SELECT)) {
-        wr_u8(SHOOT_CUE, 0);
-        return glue_return();
-    }
-    call_port(glue_C332FE, 0xC332D2);
-    call_port(glue_C34146, 0xC332D6);
-    call_port(glue_C342D0, 0xC332DA);
-    call_port(glue_C33DC8, 0xC332DE);
-    call_port(glue_C31C60, 0xC332E4);
-    if (!rd_u8(POST_INPUT_EXPIRED)) return glue_return();
-    call_port(glue_C31D64, 0xC332F2);
-    call_port(glue_C33370, 0xC332F6);
-    call_port(glue_C33B38, 0xC332FA);
-    return glue_return();
-}
+
 
 /* $C28E28's exit scan on A3: 1 when an exit matched. */
 static int zone_exit_registers(int16_t index) {

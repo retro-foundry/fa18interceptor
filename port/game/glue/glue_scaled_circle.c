@@ -55,11 +55,7 @@ project:
     projection_mode_registers(-4, 2);
 }
 
-int glue_C0CFFA(void) {
-    draw_scaled_view_circle(A(3), rd_s16(A(6) - 8), (int16_t)D(6));
-    scaled_circle_registers();
-    return glue_return();
-}
+
 
 int glue_C0CF98(void) {
     gaddr stream = A(2);
