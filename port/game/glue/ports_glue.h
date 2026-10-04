@@ -958,3 +958,5 @@ int glue_C1ECFC_step(void);
 #include "glue_face_stream_parents.h"
 
 #include "glue_face_list_parents.h"
+
+#include "glue_hud_render_parents.h"

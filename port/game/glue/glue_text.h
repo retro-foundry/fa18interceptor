@@ -52,16 +52,12 @@ void line_registers_to_row(int16_t last_row);
 void plot_registers(gaddr masks, gaddr writers);
 
 /* $C348B2's from D0/D1/D4 (glue_batch49.c) and $C31E6C's (glue_batch59.c). */
-void symbol_registers(void);
 void shoot_cue_registers(void);
 /* $C345A0's (glue_batch38.c), $C347F2's (glue_batch61.c) and $C31D16's
  * (glue_batch59.c), from their entry registers. */
-void ring_registers(void);
-void ring_point_registers(void);
 void signed_readout_registers(void);
 /* $C34066's from D1 (glue_batch61.c); the 8-pixel digits line's entry and
  * replay, as $C32AA4/$C32AA6 are reached (glue_batch59.c). */
-void tick_row_registers(void);
 void bcd_entry(gaddr layout, gaddr rows, int16_t x, int count, int digits, gaddr end, int keep_zeros);
 
 /* $C123FA's D1 and A0 (glue_batch41.c); x, y, z come back adjusted as the
@@ -79,9 +75,7 @@ void view_mode_zero_registers(void);
 void clear_render_buffers_registers(void);
 /* $C301F0, $C304FA, $C304B2, $C3019C: polygon work already drawn. */
 int prepare_polygon_to_row_registers(uint16_t last_size);
-void blit_lane_registers(void);
 void clear_mask_registers(void);
-void mark_polygon_registers(uint16_t last_size);
 /* $C091E0's transform products and result, from D3-D5 and the record. */
 void world_registers(gaddr record, gaddr matrix);
 

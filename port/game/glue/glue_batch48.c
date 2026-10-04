@@ -23,33 +23,7 @@ static void asr_word_reg(int n, int count) {
 
 static void muls(int dst, int src) { D(dst) = (uint32_t)((int32_t)W(dst) * W(src)); }
 
-int glue_C099AA(void) {
-    gaddr face = A(2);
-    int16_t count = rd_s16(face);
-    uint32_t copies = (uint32_t)(uint16_t)(count - 4) + 4, i;
-    uint16_t colour = rd_u16(face + 2);
-    ClipperSnapshot snapshot;
-    int drawn;
 
-    clipper_snapshot(&snapshot);
-    drawn = draw_coloured_face(&face);
-    A(0) = CLIP_INPUT + 4 + 6 * copies;
-    A(3) = WORKSPACES;
-    for (i = 0; i < copies; i++) {
-        uint16_t z = rd_u16(A(3) + 4);
-        SET_W(D(6), i ? (uint16_t)(D(6) & z) : z);
-        A(3) += 6;
-    }
-    SET_W(D(7), 0xFFFF); /* DBRA */
-    if ((int16_t)D(6) < 0) {
-        D(0) = 0;
-        flags_logic_l(0);
-    } else {
-        clipper_registers(&snapshot, colour, drawn);
-    }
-    A(2) = face;
-    return glue_return();
-}
 
 /* $C1FB9C: D0-D2 the point, D3-D5 the normal, the eye in the caller's frame
  * words -$26..-$22(A6); D7 = 1 or its low word 0, with those flags. */

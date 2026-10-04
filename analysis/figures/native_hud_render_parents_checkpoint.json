@@ -1,0 +1,4768 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "535f7805",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C098C6",
+    "C09952",
+    "C099F6",
+    "C099AA",
+    "C332FE",
+    "C34146",
+    "C34066",
+    "C342D0",
+    "C347F2",
+    "C33DC8",
+    "C322EE",
+    "C3003A",
+    "C304FA",
+    "C345A0",
+    "C348B2"
+  ],
+  "registered_translated_entries": 526,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 592,
+  "registered_timing_entries": 509,
+  "registered_translated_timing_entries": 443,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/hud_render_parents_source_scope.json",
+      "sha256": "1e3bf9213dbfd43f5922c1162dabb5cb6877990da29c2b79de188b88bc8e937b"
+    },
+    "unique_instructions": 1352,
+    "shared_within_batch": 0,
+    "distinct_child_sites": 60,
+    "child_sites_by_owner": 60,
+    "actual_original_callability": {
+      "C098C6": [
+        {
+          "pc": "C09898",
+          "return_pc": "C0989C",
+          "instruction": "bsr     $c098c6",
+          "bytes": "6100002c"
+        }
+      ],
+      "C09952": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0060",
+          "slot": "C1FD48",
+          "bytes": "00c09952",
+          "target": "C09952",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C099F6": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0068",
+          "slot": "C1FD50",
+          "bytes": "00c099f6",
+          "target": "C099F6",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C099AA": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0064",
+          "slot": "C1FD4C",
+          "bytes": "00c099aa",
+          "target": "C099AA",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C332FE": [
+        {
+          "pc": "C332CE",
+          "return_pc": "C332D2",
+          "instruction": "bsr     $c332fe",
+          "bytes": "6100002e"
+        }
+      ],
+      "C34146": [
+        {
+          "pc": "C332D2",
+          "return_pc": "C332D6",
+          "instruction": "bsr     $c34146",
+          "bytes": "61000e72"
+        }
+      ],
+      "C34066": [
+        {
+          "pc": "C33958",
+          "return_pc": "C3395C",
+          "instruction": "bsr     $c34066",
+          "bytes": "6100070c"
+        }
+      ],
+      "C342D0": [
+        {
+          "pc": "C332D6",
+          "return_pc": "C332DA",
+          "instruction": "bsr     $c342d0",
+          "bytes": "61000ff8"
+        }
+      ],
+      "C347F2": [
+        {
+          "pc": "C33C82",
+          "return_pc": "C33C86",
+          "instruction": "bsr     $c347f2",
+          "bytes": "61000b6e"
+        }
+      ],
+      "C33DC8": [
+        {
+          "pc": "C332DA",
+          "return_pc": "C332DE",
+          "instruction": "bsr     $c33dc8",
+          "bytes": "61000aec"
+        }
+      ],
+      "C322EE": [
+        {
+          "pc": "C0F280",
+          "return_pc": "C0F286",
+          "instruction": "jsr     $c322ee.l",
+          "bytes": "4eb900c322ee"
+        },
+        {
+          "pc": "C0F2D6",
+          "return_pc": "C0F2DC",
+          "instruction": "jsr     $c322ee.l",
+          "bytes": "4eb900c322ee"
+        }
+      ],
+      "C3003A": [
+        {
+          "pc": "C0F250",
+          "return_pc": "C0F256",
+          "instruction": "jsr     $c3003a.l",
+          "bytes": "4eb900c3003a"
+        }
+      ],
+      "C304FA": [
+        {
+          "pc": "C301E6",
+          "return_pc": "C301EA",
+          "instruction": "bsr     $c304fa",
+          "bytes": "61000312"
+        }
+      ],
+      "C345A0": [
+        {
+          "pc": "C33C3E",
+          "return_pc": "C33C42",
+          "instruction": "bsr     $c345a0",
+          "bytes": "61000960"
+        }
+      ],
+      "C348B2": [
+        {
+          "pc": "C33F40",
+          "return_pc": "C33F44",
+          "instruction": "bsr     $c348b2",
+          "bytes": "61000970"
+        }
+      ]
+    }
+  },
+  "whole_entry_completed_calls": 491520,
+  "controlled_child_completed_calls": 245760,
+  "real_child_completed_calls": 245760,
+  "controlled_union_pcs": 1350,
+  "real_child_union_pcs": 1337,
+  "fixture_coverage": [
+    {
+      "owner": "C098C6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C098C6.log",
+        "sha256": "3476752cbabb9dfe5412612be26708818fc4a4797554a69fb3bb052d8b0ce476"
+      }
+    },
+    {
+      "owner": "C09952",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C09952.log",
+        "sha256": "8304776e1bbec1c61d054c379270e467eb9b42c4398ff02af5ac0055504eeaf8"
+      }
+    },
+    {
+      "owner": "C099F6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C099F6.log",
+        "sha256": "421005a7fd9923fff81c8027c7a33c6be4c32d2d1d759b4eadbe804297a164da"
+      }
+    },
+    {
+      "owner": "C099AA",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 28,
+      "observed_owner_pcs": 28,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C099AA.log",
+        "sha256": "e07307ff3956993f959bb8768ebc48ebaf973886f414f3b3fd706d999aa03dbe"
+      }
+    },
+    {
+      "owner": "C332FE",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 29,
+      "observed_owner_pcs": 29,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C332FE.log",
+        "sha256": "144198093f0d61418f41e52bf27590468c3d1bf95e76516bf7e5575f9a7970ab"
+      }
+    },
+    {
+      "owner": "C34146",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 93,
+      "unobserved_owner_pcs": [
+        "C3429E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C34146.log",
+        "sha256": "5107fdfffd4a5824126aa11d59885da85de8151542c4729d66a5e3897c6ce4fe"
+      }
+    },
+    {
+      "owner": "C34066",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 59,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C34066.log",
+        "sha256": "b6431d5ed53a40fc255febd47faf1133f2e7e9d9d93bda6e1c2bc86499bec52c"
+      }
+    },
+    {
+      "owner": "C342D0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 196,
+      "observed_owner_pcs": 196,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C342D0.log",
+        "sha256": "4e43789a4e43e770c88d4e912935209c84e4f3114eb64d82b42366d3c94587e6"
+      }
+    },
+    {
+      "owner": "C347F2",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 63,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C347F2.log",
+        "sha256": "006b5ac9bb015bbd7c9c40a8d77c4f5d856ac8f101d5f116ca276d52734a2cee"
+      }
+    },
+    {
+      "owner": "C33DC8",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 94,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C33DC8.log",
+        "sha256": "944dc536c142040b416a7f82ff9b8cb38efad0ad8da7ef241d23a72890297121"
+      }
+    },
+    {
+      "owner": "C322EE",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 281,
+      "observed_owner_pcs": 280,
+      "unobserved_owner_pcs": [
+        "C32380"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C322EE.log",
+        "sha256": "854b84d7a1bb4afa985ce3ccae07ab6339855a6308fced43ce9fa7ae987af9c8"
+      }
+    },
+    {
+      "owner": "C3003A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 95,
+      "observed_owner_pcs": 95,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 116800,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C3003A.log",
+        "sha256": "d39c8d1f09948532bfbfabb998960cdf4516393b619ab432cb1a916be5dc7e4b"
+      }
+    },
+    {
+      "owner": "C304FA",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 47,
+      "observed_owner_pcs": 47,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 237568,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C304FA.log",
+        "sha256": "beca627d3f67607e0041e61f72ad978d7cfd134670ae79bedd0d8df893e5d8ba"
+      }
+    },
+    {
+      "owner": "C345A0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 198,
+      "observed_owner_pcs": 198,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C345A0.log",
+        "sha256": "262b8d0339ffaa2bc2d310f1bd4a5420c47515bf01274390c4c1ed9aaa52d0cb"
+      }
+    },
+    {
+      "owner": "C348B2",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 49,
+      "observed_owner_pcs": 49,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_contract_C348B2.log",
+        "sha256": "e650078126bb43cd04ffe3b3b4533cce0efdb7c868871d3badd65f9607ce4d53"
+      }
+    },
+    {
+      "owner": "C098C6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C098C6.log",
+        "sha256": "b216db5d202311ddb9099ba4908cdf3ac1c74480dc071d6ad1095fea306d644b"
+      }
+    },
+    {
+      "owner": "C09952",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C09952.log",
+        "sha256": "21ba7410f367f7dbde2d951bf88216b28447013487af12a52368c2a8f89aca5d"
+      }
+    },
+    {
+      "owner": "C099F6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C099F6.log",
+        "sha256": "5e44932318a885b16fa92cecb7cd62e14565726587afc88e34ba624619a6a603"
+      }
+    },
+    {
+      "owner": "C099AA",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 28,
+      "observed_owner_pcs": 28,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C099AA.log",
+        "sha256": "b9a46f68192bade26813a1b56a8dab8d7df4c59c59749bfc22f441e437d383f5"
+      }
+    },
+    {
+      "owner": "C332FE",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 29,
+      "observed_owner_pcs": 29,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C332FE.log",
+        "sha256": "02778a13c65e60bc2067122b155d4266687c6d683f8738a2fe3309184e9ad3e4"
+      }
+    },
+    {
+      "owner": "C34146",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 93,
+      "unobserved_owner_pcs": [
+        "C3429E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C34146.log",
+        "sha256": "4b951d6567a64a63baf40efd9eda91b7475bbe05646039690b52d167f9cf00ef"
+      }
+    },
+    {
+      "owner": "C34066",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 59,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C34066.log",
+        "sha256": "fcc943cd97f34625fe92ac3d21ce1eb42f1679854553134c98549996d5205725"
+      }
+    },
+    {
+      "owner": "C342D0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 196,
+      "observed_owner_pcs": 196,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C342D0.log",
+        "sha256": "66cec00702d2275d76b16aa63e7e1e334cd26543650f65be45f204b2b7e31fe8"
+      }
+    },
+    {
+      "owner": "C347F2",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 63,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C347F2.log",
+        "sha256": "68cf14eb5f41100c72bc1f1d6bec652754dee6e685ae98a76729a4e3df029756"
+      }
+    },
+    {
+      "owner": "C33DC8",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 94,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C33DC8.log",
+        "sha256": "faf478e1396e0b8c8b0deafb63a19b0e252cf5dd06198d339644d186cbdfdd98"
+      }
+    },
+    {
+      "owner": "C322EE",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 281,
+      "observed_owner_pcs": 277,
+      "unobserved_owner_pcs": [
+        "C32380",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C322EE.log",
+        "sha256": "44aea92125f13613a8e49117b62c63633c959e4220e3fdc5a821922558750b51"
+      }
+    },
+    {
+      "owner": "C3003A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 95,
+      "observed_owner_pcs": 88,
+      "unobserved_owner_pcs": [
+        "C30084",
+        "C30088",
+        "C30092",
+        "C30096",
+        "C300C8",
+        "C300CA",
+        "C300CC"
+      ],
+      "ordered_custom_writes": 151680,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C3003A.log",
+        "sha256": "7aa58046f235e60f552797709c050c3ae32725fcf7bb536f9e2b546b3e5b94ce"
+      }
+    },
+    {
+      "owner": "C304FA",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 47,
+      "observed_owner_pcs": 44,
+      "unobserved_owner_pcs": [
+        "C30570",
+        "C30572",
+        "C30574"
+      ],
+      "ordered_custom_writes": 196608,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C304FA.log",
+        "sha256": "e544e19679a1b1fd3f078449c5a89aa299cc0542286a9a398f4a68f4e2a3438d"
+      }
+    },
+    {
+      "owner": "C345A0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 198,
+      "observed_owner_pcs": 198,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C345A0.log",
+        "sha256": "427abf5223b56080a68570283902d46ededcfb845cba6bc108acca2d8e9142e8"
+      }
+    },
+    {
+      "owner": "C348B2",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 49,
+      "observed_owner_pcs": 49,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_real_C348B2.log",
+        "sha256": "2cab9ce2245bc3b42a06b335b187552b03d7da333b84023a91fc5dfc52a7a538"
+      }
+    }
+  ],
+  "cold_segments": {
+    "whole_entry_cold_pcs": [
+      "C32380",
+      "C3429E"
+    ],
+    "source_frame_xs": [
+      85,
+      85,
+      93,
+      225,
+      233,
+      233
+    ],
+    "origins_checked": 65536,
+    "whole_entry_coverage_not_claimed_for_cold_pcs": true,
+    "production_segments": [
+      {
+        "entry": "C34296",
+        "calls": 16384,
+        "source_pcs": [
+          "C34296",
+          "C3429C",
+          "C3429E",
+          "C342A0",
+          "C342A4",
+          "C342A6"
+        ],
+        "log": "build/recomp/hud_render_parents_clamp_full.log",
+        "sha256": "8898a5ade03d70fad92c0d79f9e2d95c8f5a49a1a325d3f757abf753a082af1f"
+      },
+      {
+        "entry": "C32376",
+        "calls": 16384,
+        "source_pcs": [
+          "C32376",
+          "C3237C",
+          "C32380"
+        ],
+        "log": "build/recomp/hud_render_parents_page_full.log",
+        "sha256": "362f25eb57ad5651c5b3831d1eab5dd578e450b16377f2a396a74330c8f30a12"
+      }
+    ]
+  },
+  "additional_production_segment_calls": 32768,
+  "actual_dispatch_completed_calls": 46080,
+  "dispatch_fixtures": [
+    {
+      "owner": "C098C6",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C098C6_on.log",
+        "sha256": "b1127190d070ff83dbf1ac3afa9c875b9c2c54e3170b21ce306845309eb06434"
+      }
+    },
+    {
+      "owner": "C098C6",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C098C6_shadow.log",
+        "sha256": "b1127190d070ff83dbf1ac3afa9c875b9c2c54e3170b21ce306845309eb06434"
+      }
+    },
+    {
+      "owner": "C098C6",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C098C6_sandbox.log",
+        "sha256": "b1127190d070ff83dbf1ac3afa9c875b9c2c54e3170b21ce306845309eb06434"
+      }
+    },
+    {
+      "owner": "C09952",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C09952_on.log",
+        "sha256": "8214156475efb817ef3802ce714a757e862ef3b502e628b8212e9053e4f895a9"
+      }
+    },
+    {
+      "owner": "C09952",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C09952_shadow.log",
+        "sha256": "8214156475efb817ef3802ce714a757e862ef3b502e628b8212e9053e4f895a9"
+      }
+    },
+    {
+      "owner": "C09952",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C09952_sandbox.log",
+        "sha256": "8214156475efb817ef3802ce714a757e862ef3b502e628b8212e9053e4f895a9"
+      }
+    },
+    {
+      "owner": "C099F6",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C099F6_on.log",
+        "sha256": "911654cd21455ace50a24d07b7b865cbff2d33968508c75a7003f31f9e6ee7e4"
+      }
+    },
+    {
+      "owner": "C099F6",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C099F6_shadow.log",
+        "sha256": "911654cd21455ace50a24d07b7b865cbff2d33968508c75a7003f31f9e6ee7e4"
+      }
+    },
+    {
+      "owner": "C099F6",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C099F6_sandbox.log",
+        "sha256": "911654cd21455ace50a24d07b7b865cbff2d33968508c75a7003f31f9e6ee7e4"
+      }
+    },
+    {
+      "owner": "C099AA",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 28,
+      "observed_owner_pcs": 28,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C099AA_on.log",
+        "sha256": "75d190f877b7a51c91c6f22b452fea52ba2b2025b162f21663f94bb2a2c79369"
+      }
+    },
+    {
+      "owner": "C099AA",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 28,
+      "observed_owner_pcs": 28,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C099AA_shadow.log",
+        "sha256": "75d190f877b7a51c91c6f22b452fea52ba2b2025b162f21663f94bb2a2c79369"
+      }
+    },
+    {
+      "owner": "C099AA",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 28,
+      "observed_owner_pcs": 28,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C099AA_sandbox.log",
+        "sha256": "75d190f877b7a51c91c6f22b452fea52ba2b2025b162f21663f94bb2a2c79369"
+      }
+    },
+    {
+      "owner": "C332FE",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 29,
+      "observed_owner_pcs": 29,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C332FE_on.log",
+        "sha256": "4589cdaf3aea178e026eb05fe251b6cff67d16d4009ea96de2f382a2ef693a4e"
+      }
+    },
+    {
+      "owner": "C332FE",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 29,
+      "observed_owner_pcs": 29,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C332FE_shadow.log",
+        "sha256": "4589cdaf3aea178e026eb05fe251b6cff67d16d4009ea96de2f382a2ef693a4e"
+      }
+    },
+    {
+      "owner": "C332FE",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 29,
+      "observed_owner_pcs": 29,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C332FE_sandbox.log",
+        "sha256": "4589cdaf3aea178e026eb05fe251b6cff67d16d4009ea96de2f382a2ef693a4e"
+      }
+    },
+    {
+      "owner": "C34146",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [
+        "C3429E",
+        "C342A6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C34146_on.log",
+        "sha256": "832cdc3f103f21631f1d70aea70977d6777feeaeb90830f1be7db8bdd4dd01ab"
+      }
+    },
+    {
+      "owner": "C34146",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [
+        "C3429E",
+        "C342A6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C34146_shadow.log",
+        "sha256": "832cdc3f103f21631f1d70aea70977d6777feeaeb90830f1be7db8bdd4dd01ab"
+      }
+    },
+    {
+      "owner": "C34146",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [
+        "C3429E",
+        "C342A6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C34146_sandbox.log",
+        "sha256": "832cdc3f103f21631f1d70aea70977d6777feeaeb90830f1be7db8bdd4dd01ab"
+      }
+    },
+    {
+      "owner": "C34066",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 45,
+      "unobserved_owner_pcs": [
+        "C3410C",
+        "C3410E",
+        "C34114",
+        "C34116",
+        "C3411C",
+        "C3411E",
+        "C34124",
+        "C34126",
+        "C3412C",
+        "C34130",
+        "C34132",
+        "C34138",
+        "C3413A",
+        "C3413E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C34066_on.log",
+        "sha256": "d5917525cfbd0677c273c4231564f4ac7f5b3cb95016965a026ed4dfcda63a95"
+      }
+    },
+    {
+      "owner": "C34066",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 45,
+      "unobserved_owner_pcs": [
+        "C3410C",
+        "C3410E",
+        "C34114",
+        "C34116",
+        "C3411C",
+        "C3411E",
+        "C34124",
+        "C34126",
+        "C3412C",
+        "C34130",
+        "C34132",
+        "C34138",
+        "C3413A",
+        "C3413E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C34066_shadow.log",
+        "sha256": "d5917525cfbd0677c273c4231564f4ac7f5b3cb95016965a026ed4dfcda63a95"
+      }
+    },
+    {
+      "owner": "C34066",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 45,
+      "unobserved_owner_pcs": [
+        "C3410C",
+        "C3410E",
+        "C34114",
+        "C34116",
+        "C3411C",
+        "C3411E",
+        "C34124",
+        "C34126",
+        "C3412C",
+        "C34130",
+        "C34132",
+        "C34138",
+        "C3413A",
+        "C3413E"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C34066_sandbox.log",
+        "sha256": "d5917525cfbd0677c273c4231564f4ac7f5b3cb95016965a026ed4dfcda63a95"
+      }
+    },
+    {
+      "owner": "C342D0",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 196,
+      "observed_owner_pcs": 124,
+      "unobserved_owner_pcs": [
+        "C34320",
+        "C34324",
+        "C34328",
+        "C3433A",
+        "C3433C",
+        "C3433E",
+        "C3434A",
+        "C3434E",
+        "C34350",
+        "C34352",
+        "C34356",
+        "C34358",
+        "C3435A",
+        "C3435C",
+        "C3435E",
+        "C34362",
+        "C34364",
+        "C34368",
+        "C3436A",
+        "C3436C",
+        "C3436E",
+        "C34372",
+        "C34374",
+        "C34376",
+        "C3438A",
+        "C34392",
+        "C34396",
+        "C34398",
+        "C3439A",
+        "C343A2",
+        "C343AC",
+        "C343B0",
+        "C343B2",
+        "C343B4",
+        "C343B8",
+        "C343BA",
+        "C343BC",
+        "C343BE",
+        "C343C0",
+        "C343C4",
+        "C343C6",
+        "C343CA",
+        "C343CC",
+        "C343CE",
+        "C343D0",
+        "C343D4",
+        "C343D6",
+        "C343D8",
+        "C343E0",
+        "C343E2",
+        "C343E6",
+        "C343E8",
+        "C343EA",
+        "C343F4",
+        "C343F8",
+        "C343FA",
+        "C343FC",
+        "C3441C",
+        "C34422",
+        "C34426",
+        "C3442C",
+        "C34430",
+        "C34464",
+        "C34476",
+        "C344CA",
+        "C344CC",
+        "C344CE",
+        "C344D0",
+        "C344D2",
+        "C344D8",
+        "C3450C",
+        "C34512"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C342D0_on.log",
+        "sha256": "ffa2e42d0ea27dcae6fe32385a4a9c58702b0bbde6c903ff7300b9bd68262123"
+      }
+    },
+    {
+      "owner": "C342D0",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 196,
+      "observed_owner_pcs": 124,
+      "unobserved_owner_pcs": [
+        "C34320",
+        "C34324",
+        "C34328",
+        "C3433A",
+        "C3433C",
+        "C3433E",
+        "C3434A",
+        "C3434E",
+        "C34350",
+        "C34352",
+        "C34356",
+        "C34358",
+        "C3435A",
+        "C3435C",
+        "C3435E",
+        "C34362",
+        "C34364",
+        "C34368",
+        "C3436A",
+        "C3436C",
+        "C3436E",
+        "C34372",
+        "C34374",
+        "C34376",
+        "C3438A",
+        "C34392",
+        "C34396",
+        "C34398",
+        "C3439A",
+        "C343A2",
+        "C343AC",
+        "C343B0",
+        "C343B2",
+        "C343B4",
+        "C343B8",
+        "C343BA",
+        "C343BC",
+        "C343BE",
+        "C343C0",
+        "C343C4",
+        "C343C6",
+        "C343CA",
+        "C343CC",
+        "C343CE",
+        "C343D0",
+        "C343D4",
+        "C343D6",
+        "C343D8",
+        "C343E0",
+        "C343E2",
+        "C343E6",
+        "C343E8",
+        "C343EA",
+        "C343F4",
+        "C343F8",
+        "C343FA",
+        "C343FC",
+        "C3441C",
+        "C34422",
+        "C34426",
+        "C3442C",
+        "C34430",
+        "C34464",
+        "C34476",
+        "C344CA",
+        "C344CC",
+        "C344CE",
+        "C344D0",
+        "C344D2",
+        "C344D8",
+        "C3450C",
+        "C34512"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C342D0_shadow.log",
+        "sha256": "ffa2e42d0ea27dcae6fe32385a4a9c58702b0bbde6c903ff7300b9bd68262123"
+      }
+    },
+    {
+      "owner": "C342D0",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 196,
+      "observed_owner_pcs": 124,
+      "unobserved_owner_pcs": [
+        "C34320",
+        "C34324",
+        "C34328",
+        "C3433A",
+        "C3433C",
+        "C3433E",
+        "C3434A",
+        "C3434E",
+        "C34350",
+        "C34352",
+        "C34356",
+        "C34358",
+        "C3435A",
+        "C3435C",
+        "C3435E",
+        "C34362",
+        "C34364",
+        "C34368",
+        "C3436A",
+        "C3436C",
+        "C3436E",
+        "C34372",
+        "C34374",
+        "C34376",
+        "C3438A",
+        "C34392",
+        "C34396",
+        "C34398",
+        "C3439A",
+        "C343A2",
+        "C343AC",
+        "C343B0",
+        "C343B2",
+        "C343B4",
+        "C343B8",
+        "C343BA",
+        "C343BC",
+        "C343BE",
+        "C343C0",
+        "C343C4",
+        "C343C6",
+        "C343CA",
+        "C343CC",
+        "C343CE",
+        "C343D0",
+        "C343D4",
+        "C343D6",
+        "C343D8",
+        "C343E0",
+        "C343E2",
+        "C343E6",
+        "C343E8",
+        "C343EA",
+        "C343F4",
+        "C343F8",
+        "C343FA",
+        "C343FC",
+        "C3441C",
+        "C34422",
+        "C34426",
+        "C3442C",
+        "C34430",
+        "C34464",
+        "C34476",
+        "C344CA",
+        "C344CC",
+        "C344CE",
+        "C344D0",
+        "C344D2",
+        "C344D8",
+        "C3450C",
+        "C34512"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C342D0_sandbox.log",
+        "sha256": "ffa2e42d0ea27dcae6fe32385a4a9c58702b0bbde6c903ff7300b9bd68262123"
+      }
+    },
+    {
+      "owner": "C347F2",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C348A0",
+        "C348A4",
+        "C348A6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C347F2_on.log",
+        "sha256": "39617289309d85dabbd3a10d29e76595459adefd99fd9c7019069266f33c307f"
+      }
+    },
+    {
+      "owner": "C347F2",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C348A0",
+        "C348A4",
+        "C348A6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C347F2_shadow.log",
+        "sha256": "39617289309d85dabbd3a10d29e76595459adefd99fd9c7019069266f33c307f"
+      }
+    },
+    {
+      "owner": "C347F2",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 63,
+      "observed_owner_pcs": 60,
+      "unobserved_owner_pcs": [
+        "C348A0",
+        "C348A4",
+        "C348A6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C347F2_sandbox.log",
+        "sha256": "39617289309d85dabbd3a10d29e76595459adefd99fd9c7019069266f33c307f"
+      }
+    },
+    {
+      "owner": "C33DC8",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [
+        "C33E3A",
+        "C33E3C",
+        "C33E46",
+        "C33E50",
+        "C33E54",
+        "C33E58",
+        "C33E5A",
+        "C33E5E",
+        "C33E62",
+        "C33E66",
+        "C33E6A",
+        "C33E6C",
+        "C33E72",
+        "C33E74",
+        "C33E7C",
+        "C33E7E",
+        "C33E86",
+        "C33E88",
+        "C33E8E",
+        "C33E92",
+        "C33E96",
+        "C33E98",
+        "C33E9C",
+        "C33EA6",
+        "C33EAE",
+        "C33EB2",
+        "C33EBA",
+        "C33EBC",
+        "C33EC6",
+        "C33ECE",
+        "C33ED0",
+        "C33ED6",
+        "C33ED8",
+        "C33EDC",
+        "C33EE2",
+        "C33EE4",
+        "C33F06",
+        "C33F0C",
+        "C33F10",
+        "C33F14",
+        "C33F16",
+        "C33F4C"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C33DC8_on.log",
+        "sha256": "658fcaa7f680ea96b02b04233c82a8cc916d7d6c60a215f0b7b07fed74846318"
+      }
+    },
+    {
+      "owner": "C33DC8",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [
+        "C33E3A",
+        "C33E3C",
+        "C33E46",
+        "C33E50",
+        "C33E54",
+        "C33E58",
+        "C33E5A",
+        "C33E5E",
+        "C33E62",
+        "C33E66",
+        "C33E6A",
+        "C33E6C",
+        "C33E72",
+        "C33E74",
+        "C33E7C",
+        "C33E7E",
+        "C33E86",
+        "C33E88",
+        "C33E8E",
+        "C33E92",
+        "C33E96",
+        "C33E98",
+        "C33E9C",
+        "C33EA6",
+        "C33EAE",
+        "C33EB2",
+        "C33EBA",
+        "C33EBC",
+        "C33EC6",
+        "C33ECE",
+        "C33ED0",
+        "C33ED6",
+        "C33ED8",
+        "C33EDC",
+        "C33EE2",
+        "C33EE4",
+        "C33F06",
+        "C33F0C",
+        "C33F10",
+        "C33F14",
+        "C33F16",
+        "C33F4C"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C33DC8_shadow.log",
+        "sha256": "658fcaa7f680ea96b02b04233c82a8cc916d7d6c60a215f0b7b07fed74846318"
+      }
+    },
+    {
+      "owner": "C33DC8",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 94,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [
+        "C33E3A",
+        "C33E3C",
+        "C33E46",
+        "C33E50",
+        "C33E54",
+        "C33E58",
+        "C33E5A",
+        "C33E5E",
+        "C33E62",
+        "C33E66",
+        "C33E6A",
+        "C33E6C",
+        "C33E72",
+        "C33E74",
+        "C33E7C",
+        "C33E7E",
+        "C33E86",
+        "C33E88",
+        "C33E8E",
+        "C33E92",
+        "C33E96",
+        "C33E98",
+        "C33E9C",
+        "C33EA6",
+        "C33EAE",
+        "C33EB2",
+        "C33EBA",
+        "C33EBC",
+        "C33EC6",
+        "C33ECE",
+        "C33ED0",
+        "C33ED6",
+        "C33ED8",
+        "C33EDC",
+        "C33EE2",
+        "C33EE4",
+        "C33F06",
+        "C33F0C",
+        "C33F10",
+        "C33F14",
+        "C33F16",
+        "C33F4C"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C33DC8_sandbox.log",
+        "sha256": "658fcaa7f680ea96b02b04233c82a8cc916d7d6c60a215f0b7b07fed74846318"
+      }
+    },
+    {
+      "owner": "C322EE",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 281,
+      "observed_owner_pcs": 185,
+      "unobserved_owner_pcs": [
+        "C32356",
+        "C32376",
+        "C3237C",
+        "C32380",
+        "C323D0",
+        "C323D4",
+        "C323D8",
+        "C323DA",
+        "C323E0",
+        "C323E4",
+        "C323E8",
+        "C323EA",
+        "C323F0",
+        "C323F2",
+        "C323F6",
+        "C323F8",
+        "C323FE",
+        "C32400",
+        "C32404",
+        "C32406",
+        "C3240C",
+        "C3240E",
+        "C32412",
+        "C32414",
+        "C3241A",
+        "C3241C",
+        "C32420",
+        "C32422",
+        "C32428",
+        "C32430",
+        "C32438",
+        "C3243A",
+        "C3243E",
+        "C32440",
+        "C32446",
+        "C3244E",
+        "C324D0",
+        "C324D2",
+        "C324D6",
+        "C324DC",
+        "C324DE",
+        "C324E0",
+        "C324E2",
+        "C324E4",
+        "C324E6",
+        "C324EC",
+        "C324EE",
+        "C324F2",
+        "C324F4",
+        "C324F6",
+        "C324F8",
+        "C324FC",
+        "C324FE",
+        "C32504",
+        "C32506",
+        "C32508",
+        "C3250C",
+        "C32596",
+        "C3259C",
+        "C325A0",
+        "C32622",
+        "C32628",
+        "C3262A",
+        "C3262E",
+        "C32632",
+        "C32636",
+        "C3263A",
+        "C3266C",
+        "C32672",
+        "C32674",
+        "C3278C",
+        "C3278E",
+        "C32792",
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C322EE_on.log",
+        "sha256": "5cf7af4ab7814b4c73aa0dc76d1e1729bb038788f5ff4da5287c83fe4b8f4ace"
+      }
+    },
+    {
+      "owner": "C322EE",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 281,
+      "observed_owner_pcs": 185,
+      "unobserved_owner_pcs": [
+        "C32356",
+        "C32376",
+        "C3237C",
+        "C32380",
+        "C323D0",
+        "C323D4",
+        "C323D8",
+        "C323DA",
+        "C323E0",
+        "C323E4",
+        "C323E8",
+        "C323EA",
+        "C323F0",
+        "C323F2",
+        "C323F6",
+        "C323F8",
+        "C323FE",
+        "C32400",
+        "C32404",
+        "C32406",
+        "C3240C",
+        "C3240E",
+        "C32412",
+        "C32414",
+        "C3241A",
+        "C3241C",
+        "C32420",
+        "C32422",
+        "C32428",
+        "C32430",
+        "C32438",
+        "C3243A",
+        "C3243E",
+        "C32440",
+        "C32446",
+        "C3244E",
+        "C324D0",
+        "C324D2",
+        "C324D6",
+        "C324DC",
+        "C324DE",
+        "C324E0",
+        "C324E2",
+        "C324E4",
+        "C324E6",
+        "C324EC",
+        "C324EE",
+        "C324F2",
+        "C324F4",
+        "C324F6",
+        "C324F8",
+        "C324FC",
+        "C324FE",
+        "C32504",
+        "C32506",
+        "C32508",
+        "C3250C",
+        "C32596",
+        "C3259C",
+        "C325A0",
+        "C32622",
+        "C32628",
+        "C3262A",
+        "C3262E",
+        "C32632",
+        "C32636",
+        "C3263A",
+        "C3266C",
+        "C32672",
+        "C32674",
+        "C3278C",
+        "C3278E",
+        "C32792",
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C322EE_shadow.log",
+        "sha256": "5cf7af4ab7814b4c73aa0dc76d1e1729bb038788f5ff4da5287c83fe4b8f4ace"
+      }
+    },
+    {
+      "owner": "C322EE",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 281,
+      "observed_owner_pcs": 185,
+      "unobserved_owner_pcs": [
+        "C32356",
+        "C32376",
+        "C3237C",
+        "C32380",
+        "C323D0",
+        "C323D4",
+        "C323D8",
+        "C323DA",
+        "C323E0",
+        "C323E4",
+        "C323E8",
+        "C323EA",
+        "C323F0",
+        "C323F2",
+        "C323F6",
+        "C323F8",
+        "C323FE",
+        "C32400",
+        "C32404",
+        "C32406",
+        "C3240C",
+        "C3240E",
+        "C32412",
+        "C32414",
+        "C3241A",
+        "C3241C",
+        "C32420",
+        "C32422",
+        "C32428",
+        "C32430",
+        "C32438",
+        "C3243A",
+        "C3243E",
+        "C32440",
+        "C32446",
+        "C3244E",
+        "C324D0",
+        "C324D2",
+        "C324D6",
+        "C324DC",
+        "C324DE",
+        "C324E0",
+        "C324E2",
+        "C324E4",
+        "C324E6",
+        "C324EC",
+        "C324EE",
+        "C324F2",
+        "C324F4",
+        "C324F6",
+        "C324F8",
+        "C324FC",
+        "C324FE",
+        "C32504",
+        "C32506",
+        "C32508",
+        "C3250C",
+        "C32596",
+        "C3259C",
+        "C325A0",
+        "C32622",
+        "C32628",
+        "C3262A",
+        "C3262E",
+        "C32632",
+        "C32636",
+        "C3263A",
+        "C3266C",
+        "C32672",
+        "C32674",
+        "C3278C",
+        "C3278E",
+        "C32792",
+        "C327BA",
+        "C327BC",
+        "C327BE",
+        "C327C0",
+        "C327C2",
+        "C327C6",
+        "C327CA",
+        "C327CC",
+        "C327D2",
+        "C327D6",
+        "C327D8",
+        "C327DA",
+        "C327DC",
+        "C327DE",
+        "C327E0",
+        "C327E4",
+        "C327E6",
+        "C327E8",
+        "C327EA",
+        "C327EE",
+        "C327F6",
+        "C327FE",
+        "C32804"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C322EE_sandbox.log",
+        "sha256": "5cf7af4ab7814b4c73aa0dc76d1e1729bb038788f5ff4da5287c83fe4b8f4ace"
+      }
+    },
+    {
+      "owner": "C3003A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 95,
+      "observed_owner_pcs": 88,
+      "unobserved_owner_pcs": [
+        "C30084",
+        "C30088",
+        "C30092",
+        "C30096",
+        "C300C8",
+        "C300CA",
+        "C300CC"
+      ],
+      "ordered_custom_writes": 10560,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C3003A_on.log",
+        "sha256": "627a215ac4460682a830b19de799444b5ce188aee0642e9a75e9c81f2dd8740f"
+      }
+    },
+    {
+      "owner": "C3003A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 95,
+      "observed_owner_pcs": 88,
+      "unobserved_owner_pcs": [
+        "C30084",
+        "C30088",
+        "C30092",
+        "C30096",
+        "C300C8",
+        "C300CA",
+        "C300CC"
+      ],
+      "ordered_custom_writes": 10560,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C3003A_shadow.log",
+        "sha256": "627a215ac4460682a830b19de799444b5ce188aee0642e9a75e9c81f2dd8740f"
+      }
+    },
+    {
+      "owner": "C3003A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 95,
+      "observed_owner_pcs": 88,
+      "unobserved_owner_pcs": [
+        "C30084",
+        "C30088",
+        "C30092",
+        "C30096",
+        "C300C8",
+        "C300CA",
+        "C300CC"
+      ],
+      "ordered_custom_writes": 10560,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C3003A_sandbox.log",
+        "sha256": "627a215ac4460682a830b19de799444b5ce188aee0642e9a75e9c81f2dd8740f"
+      }
+    },
+    {
+      "owner": "C304FA",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 47,
+      "observed_owner_pcs": 44,
+      "unobserved_owner_pcs": [
+        "C30570",
+        "C30572",
+        "C30574"
+      ],
+      "ordered_custom_writes": 12288,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C304FA_on.log",
+        "sha256": "002b5bc2ef0731598b8263660e106bf24a6c5b1cb12c44d70482bc4b0c4de2f8"
+      }
+    },
+    {
+      "owner": "C304FA",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 47,
+      "observed_owner_pcs": 44,
+      "unobserved_owner_pcs": [
+        "C30570",
+        "C30572",
+        "C30574"
+      ],
+      "ordered_custom_writes": 12288,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C304FA_shadow.log",
+        "sha256": "002b5bc2ef0731598b8263660e106bf24a6c5b1cb12c44d70482bc4b0c4de2f8"
+      }
+    },
+    {
+      "owner": "C304FA",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 47,
+      "observed_owner_pcs": 44,
+      "unobserved_owner_pcs": [
+        "C30570",
+        "C30572",
+        "C30574"
+      ],
+      "ordered_custom_writes": 12288,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C304FA_sandbox.log",
+        "sha256": "002b5bc2ef0731598b8263660e106bf24a6c5b1cb12c44d70482bc4b0c4de2f8"
+      }
+    },
+    {
+      "owner": "C345A0",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 198,
+      "observed_owner_pcs": 70,
+      "unobserved_owner_pcs": [
+        "C345B8",
+        "C345BC",
+        "C345C0",
+        "C345C4",
+        "C345CA",
+        "C345CC",
+        "C345D0",
+        "C345D4",
+        "C345DA",
+        "C345DC",
+        "C345E0",
+        "C345E4",
+        "C345E8",
+        "C345EC",
+        "C345F0",
+        "C345F2",
+        "C345F4",
+        "C345F6",
+        "C345F8",
+        "C345FA",
+        "C345FC",
+        "C34600",
+        "C34604",
+        "C34606",
+        "C3460C",
+        "C3460E",
+        "C34612",
+        "C34616",
+        "C34618",
+        "C3461A",
+        "C3461C",
+        "C3461E",
+        "C34620",
+        "C34622",
+        "C34624",
+        "C34626",
+        "C3462A",
+        "C3462E",
+        "C34630",
+        "C34636",
+        "C34638",
+        "C3463C",
+        "C3463E",
+        "C34640",
+        "C34642",
+        "C34644",
+        "C34646",
+        "C34648",
+        "C3464A",
+        "C3464C",
+        "C3464E",
+        "C34650",
+        "C34654",
+        "C34658",
+        "C3465A",
+        "C34660",
+        "C34662",
+        "C34666",
+        "C34668",
+        "C3466A",
+        "C3466C",
+        "C3466E",
+        "C34670",
+        "C34672",
+        "C34674",
+        "C34676",
+        "C34678",
+        "C3467A",
+        "C3467E",
+        "C34682",
+        "C34684",
+        "C3468A",
+        "C3468C",
+        "C34690",
+        "C34692",
+        "C34694",
+        "C346D8",
+        "C346DC",
+        "C346DE",
+        "C346E2",
+        "C346E4",
+        "C346E8",
+        "C346EA",
+        "C346EE",
+        "C346F0",
+        "C346F4",
+        "C346F6",
+        "C346F8",
+        "C346FE",
+        "C34724",
+        "C34728",
+        "C3472A",
+        "C3472E",
+        "C34730",
+        "C34734",
+        "C34736",
+        "C3473A",
+        "C3473C",
+        "C34740",
+        "C34742",
+        "C34744",
+        "C3474A",
+        "C34772",
+        "C34776",
+        "C34778",
+        "C3477C",
+        "C3477E",
+        "C34782",
+        "C34784",
+        "C34788",
+        "C3478A",
+        "C3478E",
+        "C34790",
+        "C34792",
+        "C34798",
+        "C347C0",
+        "C347C4",
+        "C347C6",
+        "C347CA",
+        "C347CC",
+        "C347D0",
+        "C347D2",
+        "C347D6",
+        "C347D8",
+        "C347DC",
+        "C347DE",
+        "C347E0",
+        "C347E6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C345A0_on.log",
+        "sha256": "192bb67d66acb9879a5d0260820a0061b1e3078222fa91f383050a30a642ebaa"
+      }
+    },
+    {
+      "owner": "C345A0",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 198,
+      "observed_owner_pcs": 70,
+      "unobserved_owner_pcs": [
+        "C345B8",
+        "C345BC",
+        "C345C0",
+        "C345C4",
+        "C345CA",
+        "C345CC",
+        "C345D0",
+        "C345D4",
+        "C345DA",
+        "C345DC",
+        "C345E0",
+        "C345E4",
+        "C345E8",
+        "C345EC",
+        "C345F0",
+        "C345F2",
+        "C345F4",
+        "C345F6",
+        "C345F8",
+        "C345FA",
+        "C345FC",
+        "C34600",
+        "C34604",
+        "C34606",
+        "C3460C",
+        "C3460E",
+        "C34612",
+        "C34616",
+        "C34618",
+        "C3461A",
+        "C3461C",
+        "C3461E",
+        "C34620",
+        "C34622",
+        "C34624",
+        "C34626",
+        "C3462A",
+        "C3462E",
+        "C34630",
+        "C34636",
+        "C34638",
+        "C3463C",
+        "C3463E",
+        "C34640",
+        "C34642",
+        "C34644",
+        "C34646",
+        "C34648",
+        "C3464A",
+        "C3464C",
+        "C3464E",
+        "C34650",
+        "C34654",
+        "C34658",
+        "C3465A",
+        "C34660",
+        "C34662",
+        "C34666",
+        "C34668",
+        "C3466A",
+        "C3466C",
+        "C3466E",
+        "C34670",
+        "C34672",
+        "C34674",
+        "C34676",
+        "C34678",
+        "C3467A",
+        "C3467E",
+        "C34682",
+        "C34684",
+        "C3468A",
+        "C3468C",
+        "C34690",
+        "C34692",
+        "C34694",
+        "C346D8",
+        "C346DC",
+        "C346DE",
+        "C346E2",
+        "C346E4",
+        "C346E8",
+        "C346EA",
+        "C346EE",
+        "C346F0",
+        "C346F4",
+        "C346F6",
+        "C346F8",
+        "C346FE",
+        "C34724",
+        "C34728",
+        "C3472A",
+        "C3472E",
+        "C34730",
+        "C34734",
+        "C34736",
+        "C3473A",
+        "C3473C",
+        "C34740",
+        "C34742",
+        "C34744",
+        "C3474A",
+        "C34772",
+        "C34776",
+        "C34778",
+        "C3477C",
+        "C3477E",
+        "C34782",
+        "C34784",
+        "C34788",
+        "C3478A",
+        "C3478E",
+        "C34790",
+        "C34792",
+        "C34798",
+        "C347C0",
+        "C347C4",
+        "C347C6",
+        "C347CA",
+        "C347CC",
+        "C347D0",
+        "C347D2",
+        "C347D6",
+        "C347D8",
+        "C347DC",
+        "C347DE",
+        "C347E0",
+        "C347E6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C345A0_shadow.log",
+        "sha256": "192bb67d66acb9879a5d0260820a0061b1e3078222fa91f383050a30a642ebaa"
+      }
+    },
+    {
+      "owner": "C345A0",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 198,
+      "observed_owner_pcs": 70,
+      "unobserved_owner_pcs": [
+        "C345B8",
+        "C345BC",
+        "C345C0",
+        "C345C4",
+        "C345CA",
+        "C345CC",
+        "C345D0",
+        "C345D4",
+        "C345DA",
+        "C345DC",
+        "C345E0",
+        "C345E4",
+        "C345E8",
+        "C345EC",
+        "C345F0",
+        "C345F2",
+        "C345F4",
+        "C345F6",
+        "C345F8",
+        "C345FA",
+        "C345FC",
+        "C34600",
+        "C34604",
+        "C34606",
+        "C3460C",
+        "C3460E",
+        "C34612",
+        "C34616",
+        "C34618",
+        "C3461A",
+        "C3461C",
+        "C3461E",
+        "C34620",
+        "C34622",
+        "C34624",
+        "C34626",
+        "C3462A",
+        "C3462E",
+        "C34630",
+        "C34636",
+        "C34638",
+        "C3463C",
+        "C3463E",
+        "C34640",
+        "C34642",
+        "C34644",
+        "C34646",
+        "C34648",
+        "C3464A",
+        "C3464C",
+        "C3464E",
+        "C34650",
+        "C34654",
+        "C34658",
+        "C3465A",
+        "C34660",
+        "C34662",
+        "C34666",
+        "C34668",
+        "C3466A",
+        "C3466C",
+        "C3466E",
+        "C34670",
+        "C34672",
+        "C34674",
+        "C34676",
+        "C34678",
+        "C3467A",
+        "C3467E",
+        "C34682",
+        "C34684",
+        "C3468A",
+        "C3468C",
+        "C34690",
+        "C34692",
+        "C34694",
+        "C346D8",
+        "C346DC",
+        "C346DE",
+        "C346E2",
+        "C346E4",
+        "C346E8",
+        "C346EA",
+        "C346EE",
+        "C346F0",
+        "C346F4",
+        "C346F6",
+        "C346F8",
+        "C346FE",
+        "C34724",
+        "C34728",
+        "C3472A",
+        "C3472E",
+        "C34730",
+        "C34734",
+        "C34736",
+        "C3473A",
+        "C3473C",
+        "C34740",
+        "C34742",
+        "C34744",
+        "C3474A",
+        "C34772",
+        "C34776",
+        "C34778",
+        "C3477C",
+        "C3477E",
+        "C34782",
+        "C34784",
+        "C34788",
+        "C3478A",
+        "C3478E",
+        "C34790",
+        "C34792",
+        "C34798",
+        "C347C0",
+        "C347C4",
+        "C347C6",
+        "C347CA",
+        "C347CC",
+        "C347D0",
+        "C347D2",
+        "C347D6",
+        "C347D8",
+        "C347DC",
+        "C347DE",
+        "C347E0",
+        "C347E6"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C345A0_sandbox.log",
+        "sha256": "192bb67d66acb9879a5d0260820a0061b1e3078222fa91f383050a30a642ebaa"
+      }
+    },
+    {
+      "owner": "C348B2",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 49,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [
+        "C348BC",
+        "C348C0",
+        "C348C2",
+        "C348C6",
+        "C348C8",
+        "C348CC",
+        "C348CE",
+        "C348D4",
+        "C348E2",
+        "C348E6",
+        "C348E8",
+        "C348EC",
+        "C348EE",
+        "C348F2",
+        "C348F4",
+        "C348F8",
+        "C348FA",
+        "C34900",
+        "C34906",
+        "C3490A",
+        "C3490C",
+        "C34910",
+        "C34912",
+        "C34918",
+        "C3491C",
+        "C34920",
+        "C34924",
+        "C34926",
+        "C34928",
+        "C3492A",
+        "C3492C",
+        "C3492E",
+        "C34930",
+        "C34932",
+        "C34936",
+        "C3493A",
+        "C3493C",
+        "C34942",
+        "C34944",
+        "C34946",
+        "C34948"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C348B2_on.log",
+        "sha256": "909113a7e7a5064977023e2c31f7bcacf07b8addc22d5d18d8fdbaf437afc3a1"
+      }
+    },
+    {
+      "owner": "C348B2",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 49,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [
+        "C348BC",
+        "C348C0",
+        "C348C2",
+        "C348C6",
+        "C348C8",
+        "C348CC",
+        "C348CE",
+        "C348D4",
+        "C348E2",
+        "C348E6",
+        "C348E8",
+        "C348EC",
+        "C348EE",
+        "C348F2",
+        "C348F4",
+        "C348F8",
+        "C348FA",
+        "C34900",
+        "C34906",
+        "C3490A",
+        "C3490C",
+        "C34910",
+        "C34912",
+        "C34918",
+        "C3491C",
+        "C34920",
+        "C34924",
+        "C34926",
+        "C34928",
+        "C3492A",
+        "C3492C",
+        "C3492E",
+        "C34930",
+        "C34932",
+        "C34936",
+        "C3493A",
+        "C3493C",
+        "C34942",
+        "C34944",
+        "C34946",
+        "C34948"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C348B2_shadow.log",
+        "sha256": "909113a7e7a5064977023e2c31f7bcacf07b8addc22d5d18d8fdbaf437afc3a1"
+      }
+    },
+    {
+      "owner": "C348B2",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 49,
+      "observed_owner_pcs": 8,
+      "unobserved_owner_pcs": [
+        "C348BC",
+        "C348C0",
+        "C348C2",
+        "C348C6",
+        "C348C8",
+        "C348CC",
+        "C348CE",
+        "C348D4",
+        "C348E2",
+        "C348E6",
+        "C348E8",
+        "C348EC",
+        "C348EE",
+        "C348F2",
+        "C348F4",
+        "C348F8",
+        "C348FA",
+        "C34900",
+        "C34906",
+        "C3490A",
+        "C3490C",
+        "C34910",
+        "C34912",
+        "C34918",
+        "C3491C",
+        "C34920",
+        "C34924",
+        "C34926",
+        "C34928",
+        "C3492A",
+        "C3492C",
+        "C3492E",
+        "C34930",
+        "C34932",
+        "C34936",
+        "C3493A",
+        "C3493C",
+        "C34942",
+        "C34944",
+        "C34946",
+        "C34948"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/hud_render_parents_dispatch_C348B2_sandbox.log",
+        "sha256": "909113a7e7a5064977023e2c31f7bcacf07b8addc22d5d18d8fdbaf437afc3a1"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C098C6": {
+          "calls": 1798,
+          "compared": 1758,
+          "matched": 1758,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 40
+        },
+        "C09952": {
+          "calls": 1798,
+          "compared": 1638,
+          "matched": 1638,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 160
+        },
+        "C099F6": {
+          "calls": 4699,
+          "compared": 4161,
+          "matched": 4161,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 538
+        },
+        "C099AA": {
+          "calls": 1030,
+          "compared": 939,
+          "matched": 939,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 91
+        },
+        "C332FE": {
+          "calls": 3354,
+          "compared": 3201,
+          "matched": 3201,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 153
+        },
+        "C34146": {
+          "calls": 3354,
+          "compared": 2652,
+          "matched": 2652,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 702
+        },
+        "C34066": {
+          "calls": 2465,
+          "compared": 2347,
+          "matched": 2347,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 118
+        },
+        "C342D0": {
+          "calls": 3354,
+          "compared": 3316,
+          "matched": 3316,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 38
+        },
+        "C347F2": {
+          "calls": 316,
+          "compared": 306,
+          "matched": 306,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 10
+        },
+        "C33DC8": {
+          "calls": 3354,
+          "compared": 3340,
+          "matched": 3340,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 14
+        },
+        "C322EE": {
+          "calls": 3451,
+          "compared": 3246,
+          "matched": 3246,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 205
+        },
+        "C3003A": {
+          "calls": 3451,
+          "compared": 3133,
+          "matched": 3133,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 318
+        },
+        "C304FA": {
+          "calls": 97,
+          "compared": 97,
+          "matched": 97,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C345A0": {
+          "calls": 321,
+          "compared": 157,
+          "matched": 157,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 164
+        },
+        "C348B2": {
+          "calls": 2,
+          "compared": 2,
+          "matched": 2,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      },
+      "sandbox": {
+        "C098C6": {
+          "calls": 1798,
+          "compared": 1798,
+          "matched": 1798,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C09952": {
+          "calls": 1798,
+          "compared": 1798,
+          "matched": 1798,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C099F6": {
+          "calls": 4922,
+          "compared": 4922,
+          "matched": 4922,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C099AA": {
+          "calls": 1029,
+          "compared": 1029,
+          "matched": 1029,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C332FE": {
+          "calls": 5077,
+          "compared": 5077,
+          "matched": 5077,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C34146": {
+          "calls": 4924,
+          "compared": 4924,
+          "matched": 4924,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C34066": {
+          "calls": 2465,
+          "compared": 2465,
+          "matched": 2465,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C342D0": {
+          "calls": 4533,
+          "compared": 4533,
+          "matched": 4533,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C347F2": {
+          "calls": 316,
+          "compared": 316,
+          "matched": 316,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C33DC8": {
+          "calls": 5059,
+          "compared": 5059,
+          "matched": 5059,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C322EE": {
+          "calls": 5174,
+          "compared": 5174,
+          "matched": 5174,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C3003A": {
+          "calls": 5174,
+          "compared": 5174,
+          "matched": 5174,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C304FA": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C345A0": {
+          "calls": 321,
+          "compared": 321,
+          "matched": 321,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C348B2": {
+          "calls": 11,
+          "compared": 11,
+          "matched": 11,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C304FA",
+            "name": "blit_lane",
+            "calls": 38,
+            "compared": 38,
+            "matched": 38,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 512,
+            "busy_input_calls": 38,
+            "busy_input_reads": 38
+          },
+          {
+            "entry": "C09952",
+            "name": "draw_indexed_face",
+            "calls": 1798,
+            "compared": 1638,
+            "matched": 1638,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 160,
+            "mean_cycles": 11678,
+            "busy_input_calls": 1638,
+            "busy_input_reads": 18835
+          },
+          {
+            "entry": "C099F6",
+            "name": "draw_outlined_face",
+            "calls": 3564,
+            "compared": 3125,
+            "matched": 3125,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 439,
+            "mean_cycles": 16472,
+            "busy_input_calls": 3125,
+            "busy_input_reads": 41553
+          },
+          {
+            "entry": "C332FE",
+            "name": "draw_view_marker",
+            "calls": 1356,
+            "compared": 1311,
+            "matched": 1311,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 45,
+            "mean_cycles": 4468,
+            "busy_input_calls": 1311,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C345A0",
+            "name": "plot_ring",
+            "calls": 316,
+            "compared": 153,
+            "matched": 153,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 163,
+            "mean_cycles": 57187,
+            "busy_input_calls": 153,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099AA",
+            "name": "draw_coloured_face",
+            "calls": 1030,
+            "compared": 939,
+            "matched": 939,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 91,
+            "mean_cycles": 14665,
+            "busy_input_calls": 939,
+            "busy_input_reads": 8697
+          },
+          {
+            "entry": "C348B2",
+            "name": "plot_symbol",
+            "calls": 2,
+            "compared": 2,
+            "matched": 2,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 62,
+            "busy_input_calls": 2,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C098C6",
+            "name": "transform_ground_points",
+            "calls": 1798,
+            "compared": 1758,
+            "matched": 1758,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 40,
+            "mean_cycles": 2209,
+            "busy_input_calls": 1758,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34146",
+            "name": "draw_hud_marks",
+            "calls": 1356,
+            "compared": 1078,
+            "matched": 1078,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 278,
+            "mean_cycles": 23705,
+            "busy_input_calls": 1078,
+            "busy_input_reads": 178226
+          },
+          {
+            "entry": "C34066",
+            "name": "draw_tick_row",
+            "calls": 1328,
+            "compared": 1276,
+            "matched": 1276,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 52,
+            "mean_cycles": 4816,
+            "busy_input_calls": 1276,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C342D0",
+            "name": "draw_target_box",
+            "calls": 1356,
+            "compared": 1324,
+            "matched": 1324,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 32,
+            "mean_cycles": 2688,
+            "busy_input_calls": 1324,
+            "busy_input_reads": 4891
+          },
+          {
+            "entry": "C347F2",
+            "name": "plot_ring_point",
+            "calls": 316,
+            "compared": 306,
+            "matched": 306,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 10,
+            "mean_cycles": 4172,
+            "busy_input_calls": 306,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33DC8",
+            "name": "update_missile_cue",
+            "calls": 1356,
+            "compared": 1343,
+            "matched": 1343,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 13,
+            "mean_cycles": 1082,
+            "busy_input_calls": 1343,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C322EE",
+            "name": "draw_message_line",
+            "calls": 1453,
+            "compared": 1343,
+            "matched": 1343,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 110,
+            "mean_cycles": 8615,
+            "busy_input_calls": 1343,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3003A",
+            "name": "draw_panel_mark",
+            "calls": 1453,
+            "compared": 1337,
+            "matched": 1337,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 116,
+            "mean_cycles": 9899,
+            "busy_input_calls": 1337,
+            "busy_input_reads": 10161
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C098C6_C09952_C099F6_C099AA_C332FE_C34146_C34066_C342D0_C347F2_C33DC8_C322EE_C3003A_C304FA_C345A0_C348B2_demo01_shadow.json",
+          "sha256": "76defba1f9672c9e3a1cfcb09adb28661dffe217ee9a29df112547e84021478b"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C304FA",
+            "name": "blit_lane",
+            "calls": 45,
+            "compared": 45,
+            "matched": 45,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 581,
+            "busy_input_calls": 45,
+            "busy_input_reads": 45
+          },
+          {
+            "entry": "C09952",
+            "name": "draw_indexed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099F6",
+            "name": "draw_outlined_face",
+            "calls": 1135,
+            "compared": 1036,
+            "matched": 1036,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 99,
+            "mean_cycles": 15480,
+            "busy_input_calls": 1036,
+            "busy_input_reads": 14376
+          },
+          {
+            "entry": "C332FE",
+            "name": "draw_view_marker",
+            "calls": 1647,
+            "compared": 1574,
+            "matched": 1574,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 73,
+            "mean_cycles": 5433,
+            "busy_input_calls": 1574,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C345A0",
+            "name": "plot_ring",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099AA",
+            "name": "draw_coloured_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C348B2",
+            "name": "plot_symbol",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C098C6",
+            "name": "transform_ground_points",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34146",
+            "name": "draw_hud_marks",
+            "calls": 1647,
+            "compared": 1303,
+            "matched": 1303,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 344,
+            "mean_cycles": 31272,
+            "busy_input_calls": 1303,
+            "busy_input_reads": 293139
+          },
+          {
+            "entry": "C34066",
+            "name": "draw_tick_row",
+            "calls": 812,
+            "compared": 772,
+            "matched": 772,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 40,
+            "mean_cycles": 5964,
+            "busy_input_calls": 772,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C342D0",
+            "name": "draw_target_box",
+            "calls": 1647,
+            "compared": 1641,
+            "matched": 1641,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 6,
+            "mean_cycles": 502,
+            "busy_input_calls": 1641,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C347F2",
+            "name": "plot_ring_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33DC8",
+            "name": "update_missile_cue",
+            "calls": 1647,
+            "compared": 1646,
+            "matched": 1646,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 126,
+            "busy_input_calls": 1646,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C322EE",
+            "name": "draw_message_line",
+            "calls": 1647,
+            "compared": 1588,
+            "matched": 1588,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 59,
+            "mean_cycles": 3669,
+            "busy_input_calls": 1588,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3003A",
+            "name": "draw_panel_mark",
+            "calls": 1647,
+            "compared": 1480,
+            "matched": 1480,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 167,
+            "mean_cycles": 14826,
+            "busy_input_calls": 1480,
+            "busy_input_reads": 16312
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C098C6_C09952_C099F6_C099AA_C332FE_C34146_C34066_C342D0_C347F2_C33DC8_C322EE_C3003A_C304FA_C345A0_C348B2_qual_carrier_success_shadow.json",
+          "sha256": "931cb329bc48a4f5c138f208b9e6772a25df06330047a09c14273d89e9fbe437"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C304FA",
+            "name": "blit_lane",
+            "calls": 14,
+            "compared": 14,
+            "matched": 14,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 457,
+            "busy_input_calls": 14,
+            "busy_input_reads": 14
+          },
+          {
+            "entry": "C09952",
+            "name": "draw_indexed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099F6",
+            "name": "draw_outlined_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C332FE",
+            "name": "draw_view_marker",
+            "calls": 351,
+            "compared": 316,
+            "matched": 316,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 35,
+            "mean_cycles": 5502,
+            "busy_input_calls": 316,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C345A0",
+            "name": "plot_ring",
+            "calls": 5,
+            "compared": 4,
+            "matched": 4,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 58222,
+            "busy_input_calls": 4,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099AA",
+            "name": "draw_coloured_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C348B2",
+            "name": "plot_symbol",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C098C6",
+            "name": "transform_ground_points",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34146",
+            "name": "draw_hud_marks",
+            "calls": 351,
+            "compared": 271,
+            "matched": 271,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 80,
+            "mean_cycles": 32407,
+            "busy_input_calls": 271,
+            "busy_input_reads": 61529
+          },
+          {
+            "entry": "C34066",
+            "name": "draw_tick_row",
+            "calls": 325,
+            "compared": 299,
+            "matched": 299,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 26,
+            "mean_cycles": 6114,
+            "busy_input_calls": 299,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C342D0",
+            "name": "draw_target_box",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 510,
+            "busy_input_calls": 351,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C347F2",
+            "name": "plot_ring_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33DC8",
+            "name": "update_missile_cue",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 127,
+            "busy_input_calls": 351,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C322EE",
+            "name": "draw_message_line",
+            "calls": 351,
+            "compared": 315,
+            "matched": 315,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 36,
+            "mean_cycles": 9428,
+            "busy_input_calls": 315,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3003A",
+            "name": "draw_panel_mark",
+            "calls": 351,
+            "compared": 316,
+            "matched": 316,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 35,
+            "mean_cycles": 14612,
+            "busy_input_calls": 316,
+            "busy_input_reads": 3260
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C098C6_C09952_C099F6_C099AA_C332FE_C34146_C34066_C342D0_C347F2_C33DC8_C322EE_C3003A_C304FA_C345A0_C348B2_qual_fail_crashes_shadow.json",
+          "sha256": "94b5bc614557f43b17a6a966c8b373fe72771a169ad388b9458d8882c91a6f48"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C304FA",
+            "name": "blit_lane",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C09952",
+            "name": "draw_indexed_face",
+            "calls": 1798,
+            "compared": 1798,
+            "matched": 1798,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9990,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099F6",
+            "name": "draw_outlined_face",
+            "calls": 3558,
+            "compared": 3558,
+            "matched": 3558,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 14497,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C332FE",
+            "name": "draw_view_marker",
+            "calls": 1356,
+            "compared": 1356,
+            "matched": 1356,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4491,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C345A0",
+            "name": "plot_ring",
+            "calls": 316,
+            "compared": 316,
+            "matched": 316,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 56037,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099AA",
+            "name": "draw_coloured_face",
+            "calls": 1029,
+            "compared": 1029,
+            "matched": 1029,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 13467,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C348B2",
+            "name": "plot_symbol",
+            "calls": 11,
+            "compared": 11,
+            "matched": 11,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 11541,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C098C6",
+            "name": "transform_ground_points",
+            "calls": 1798,
+            "compared": 1798,
+            "matched": 1798,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2342,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34146",
+            "name": "draw_hud_marks",
+            "calls": 1314,
+            "compared": 1314,
+            "matched": 1314,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 14674,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34066",
+            "name": "draw_tick_row",
+            "calls": 1328,
+            "compared": 1328,
+            "matched": 1328,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4860,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C342D0",
+            "name": "draw_target_box",
+            "calls": 1209,
+            "compared": 1209,
+            "matched": 1209,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2813,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C347F2",
+            "name": "plot_ring_point",
+            "calls": 316,
+            "compared": 316,
+            "matched": 316,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4203,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33DC8",
+            "name": "update_missile_cue",
+            "calls": 1338,
+            "compared": 1338,
+            "matched": 1338,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1155,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C322EE",
+            "name": "draw_message_line",
+            "calls": 1453,
+            "compared": 1453,
+            "matched": 1453,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 10675,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3003A",
+            "name": "draw_panel_mark",
+            "calls": 1453,
+            "compared": 1453,
+            "matched": 1453,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9587,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C098C6_C09952_C099F6_C099AA_C332FE_C34146_C34066_C342D0_C347F2_C33DC8_C322EE_C3003A_C304FA_C345A0_C348B2_demo01_sandbox.json",
+          "sha256": "b945df9ea40e9628c440d5c7968c49d651df48797d34c83e2c24fe31402b1697"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C304FA",
+            "name": "blit_lane",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C09952",
+            "name": "draw_indexed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099F6",
+            "name": "draw_outlined_face",
+            "calls": 1364,
+            "compared": 1364,
+            "matched": 1364,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 13753,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C332FE",
+            "name": "draw_view_marker",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5587,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C345A0",
+            "name": "plot_ring",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099AA",
+            "name": "draw_coloured_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C348B2",
+            "name": "plot_symbol",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C098C6",
+            "name": "transform_ground_points",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34146",
+            "name": "draw_hud_marks",
+            "calls": 3287,
+            "compared": 3287,
+            "matched": 3287,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 17976,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34066",
+            "name": "draw_tick_row",
+            "calls": 812,
+            "compared": 812,
+            "matched": 812,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5893,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C342D0",
+            "name": "draw_target_box",
+            "calls": 3042,
+            "compared": 3042,
+            "matched": 3042,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 494,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C347F2",
+            "name": "plot_ring_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33DC8",
+            "name": "update_missile_cue",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 125,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C322EE",
+            "name": "draw_message_line",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 10427,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3003A",
+            "name": "draw_panel_mark",
+            "calls": 3370,
+            "compared": 3370,
+            "matched": 3370,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 13416,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C098C6_C09952_C099F6_C099AA_C332FE_C34146_C34066_C342D0_C347F2_C33DC8_C322EE_C3003A_C304FA_C345A0_C348B2_qual_carrier_success_sandbox.json",
+          "sha256": "55e01579ec4a3de98c26defa56544b90918c6f8122f01b5d7f638c5e8c136d71"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C304FA",
+            "name": "blit_lane",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C09952",
+            "name": "draw_indexed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099F6",
+            "name": "draw_outlined_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C332FE",
+            "name": "draw_view_marker",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 5455,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C345A0",
+            "name": "plot_ring",
+            "calls": 5,
+            "compared": 5,
+            "matched": 5,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 58276,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C099AA",
+            "name": "draw_coloured_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C348B2",
+            "name": "plot_symbol",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C098C6",
+            "name": "transform_ground_points",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34146",
+            "name": "draw_hud_marks",
+            "calls": 323,
+            "compared": 323,
+            "matched": 323,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 18193,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C34066",
+            "name": "draw_tick_row",
+            "calls": 325,
+            "compared": 325,
+            "matched": 325,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6014,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C342D0",
+            "name": "draw_target_box",
+            "calls": 282,
+            "compared": 282,
+            "matched": 282,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 535,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C347F2",
+            "name": "plot_ring_point",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C33DC8",
+            "name": "update_missile_cue",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 125,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C322EE",
+            "name": "draw_message_line",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 13951,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C3003A",
+            "name": "draw_panel_mark",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 13640,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C098C6_C09952_C099F6_C099AA_C332FE_C34146_C34066_C342D0_C347F2_C33DC8_C322EE_C3003A_C304FA_C345A0_C348B2_qual_fail_crashes_sandbox.json",
+          "sha256": "3bfc8cc50cb85bfa2fece9f627235defe391ac47c8a2094c6e1e632f970b3494"
+        }
+      }
+    ],
+    "shadow_matches": 30293,
+    "sandbox_matches": 42601,
+    "each_owner_has_completed_comparisons": true
+  },
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "controlled_waits_use_actual_initial_blit": true,
+    "initial_fixture_writes_per_odd_case_per_direct_blit_owner": 5,
+    "initial_fixture_writes_per_full_controlled_direct_blit_owner": 40960,
+    "direct_blit_owners": [
+      "C3003A",
+      "C304FA"
+    ],
+    "original_children_use_source_rejection_bounds": true,
+    "active_child_multiplane_drawing_not_claimed_by_frozen_clock_fixtures": true,
+    "shared_machine_observer_unchanged": true
+  },
+  "instruction_dma": {
+    "local_instructions": 1352,
+    "local_cases": 43264,
+    "previous_unique_instructions": 27543,
+    "overlap_instructions": 46,
+    "overlap_pcs": [
+      "C322EC",
+      "C32662",
+      "C32668",
+      "C3266C",
+      "C32672",
+      "C32674",
+      "C32678",
+      "C32794",
+      "C32796",
+      "C3279A",
+      "C327A0",
+      "C327A4",
+      "C327A6",
+      "C327A8",
+      "C327AA",
+      "C327AC",
+      "C327AE",
+      "C327B0",
+      "C327B2",
+      "C327B4",
+      "C327B8",
+      "C327BA",
+      "C327BC",
+      "C327BE",
+      "C327C0",
+      "C327C2",
+      "C327C6",
+      "C327CA",
+      "C327CC",
+      "C327D2",
+      "C327D6",
+      "C327D8",
+      "C327DA",
+      "C327DC",
+      "C327DE",
+      "C327E0",
+      "C327E4",
+      "C327E6",
+      "C327E8",
+      "C327EA",
+      "C327EE",
+      "C327F0",
+      "C327F4",
+      "C327F6",
+      "C327FE",
+      "C32804"
+    ],
+    "combined_unique_instructions": 28849,
+    "combined_cases": 923168,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 34,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_menu_context_math.h",
+      "sha256": "1bbc8394e94f2eaa3a8678bb56381bf3b143af05c9a84283ba034188a7978b4e"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "port/game/face_list_parents.c",
+      "sha256": "bb1315ef387286dda4d3cfd1bb730571d1392ad18de21fa4538b64d3ee36270d"
+    },
+    {
+      "path": "port/game/face_list_parents.h",
+      "sha256": "781984b033b6b8ca686a0cd5459e17eb2ebfef6111ddf9d9554241b7c5d1e324"
+    },
+    {
+      "path": "port/game/glue/glue_face_list_parents.c",
+      "sha256": "79c930c281db724b7f3836d87b838af9632e3f4103de4e13ef4becd7516724e2"
+    },
+    {
+      "path": "port/game/glue/glue_face_list_parents_math.h",
+      "sha256": "ef1e9b2106e05343a50f77940125934b5b23b0c66fe8d6c828da8379b92700a5"
+    },
+    {
+      "path": "port/game/face_stream_parents.c",
+      "sha256": "915aea7c0c184578a562b33e1a0bb186cdcf452299ce9fe8047db8a1f935ad77"
+    },
+    {
+      "path": "port/game/face_stream_parents.h",
+      "sha256": "6a8dce7e88d38f307a3e663d9ac793afe6d03554aa54475c15bd64b908bd34a6"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents.c",
+      "sha256": "f88361881c4aee493435d349bbaafcdf533f8b386158b09d8dc790a6c134aefc"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents_math.h",
+      "sha256": "f7d7fcb2c3cef09614f0ea89464a9b59524e2f46f631d531df2dcbad21d5a21c"
+    },
+    {
+      "path": "port/game/render_parents.c",
+      "sha256": "6e0cfacf58d8dd2a2cb2464e9b939aa9ae3ee85e70c3dec1c2831194a0338857"
+    },
+    {
+      "path": "port/game/render_parents.h",
+      "sha256": "ebda35faa6d5411682fa4feb0efda618130ce11966c12aebf898293200744cc7"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents.c",
+      "sha256": "60dbc5d45f603b4953ab2975f18d69f4e82a7a7d8fdefd7b67eaf51d1115aa88"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents_math.h",
+      "sha256": "a56b8367cd08440e2579d280c77499794c475cf14370a2a5a904f60bc38ac151"
+    },
+    {
+      "path": "port/game/hud_history_stream.c",
+      "sha256": "0ed4005248c2505986f6414140b17f986007bee2c24f79739fa4358bf2c39146"
+    },
+    {
+      "path": "port/game/hud_history_stream.h",
+      "sha256": "d24936b40e4db6404ce6c1d0565180d737bbae0eddc2da7395420a164a9c0211"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream.c",
+      "sha256": "a8547b097febb8baf72c0883bff9d876cd67569c1dfd05c89e57d1574dff3a35"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream_math.h",
+      "sha256": "5b13917cc0efd7913dc9d540544e80791269412bac89bcc9db293ea1c07a3f1e"
+    },
+    {
+      "path": "port/game/hud_projection_parents.c",
+      "sha256": "39d02a229e36d0bc370f6597542aa0f6e3e356d8590696431242f0dd519ee6e9"
+    },
+    {
+      "path": "port/game/hud_projection_parents.h",
+      "sha256": "4da55f5eeece8103522f7e93fda78d2b0ba435a88c7d71911f42e907a444293b"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents.c",
+      "sha256": "3e49372a466d37b5af7431b104ee3d9a3632bd2dc61ca9d8e9e7bd07f6f76456"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents_math.h",
+      "sha256": "2ce71c38f5760e27a112dd6bcf81564b845a9cbce3e0036b0fea5992448c4113"
+    },
+    {
+      "path": "port/game/hud_text_helpers.c",
+      "sha256": "f26adc5ba6cfa96edcdef2fcc48447c4ab9c79cbaaf7b982ebd985a9b61c8f68"
+    },
+    {
+      "path": "port/game/hud_text_helpers.h",
+      "sha256": "11c1b8f11d0dd0bc96360261bc192d73f921f22fc6f32a4f8d580604b8938493"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers.c",
+      "sha256": "6d82850c0d2ba62da9ac036b13d11cec3224c8b340d74a063af80b3e04e63290"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers_math.h",
+      "sha256": "6c5c6028b6934c94c0a01bf4ac201ab634575be14ba0e1b113f3147744463bac"
+    }
+  ],
+  "full_gate": {
+    "rows": 592,
+    "recordings": 3,
+    "shadow_matches": 568446,
+    "sandbox_matches": 443870,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308147,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "bc9e9bc87e5fdecd616a685e712f13aa745754ffa3e3084ee1a993a9f217a875"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207396,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "61d1edfc4cfcd9b81d38b1b54acb39b3cda47a5c926568dd4016909107cfc1b1"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52903,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "3b5d763202c87b4dac582ee050a55b930053ce9bdab8dc539c8dcba01c040edd"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150619,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "2cc0907dff16f09be3d6c80c9e898d16d57d6c65f9c570d1f5fd93fc4e822e29"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 248005,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "2b631f655f25dccbabea811caca93856d0b1faea025257906aa6aae0f0a18763"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45246,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "3175c649be1339f7f0d2c7dec8503b498042a083b1ab350a311f5598a2d2cad3"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 424,
+    "all_different_pixels": 34144,
+    "previous_all_first_difference_frame": 416,
+    "previous_all_different_pixels": 361,
+    "deferred": true
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1868114704,
+    "build_gib": 1.74
+  },
+  "remaining_export_bodies_unchanged": {
+    "port/game/glue/glue_batch27.c:int glue_C1C2C8(void)": "772bf4593ac3af167da809d6830b9472a7bd9369da985329435615de64e1e29b",
+    "port/game/glue/glue_batch38.c:int glue_C30918(void)": "4b09502e052364d0cf6b520b72834b442d31f8cd3846377120293e477d3db07d",
+    "port/game/glue/glue_batch48.c:int glue_C1FB9C(void)": "4797b32b0e70b9a5195f1d201f0fb0e0e65c9c2e5e571e840dec8324bd75a8ba",
+    "port/game/glue/glue_batch48.c:int glue_C2CAA0(void)": "7374717f4088a562a4253dd0a3bac9527d65a3ea6a3161839a0785add8b0e45b",
+    "port/game/glue/glue_batch48.c:int glue_C2CA92(void)": "2231a3edb9576817d2ad10c7daa5c830f1c6c4d7fb6ea9340f3e2014ced65d14",
+    "port/game/glue/glue_batch48.c:int glue_C2CA26(void)": "f68dca28f21be9408a90afc681e3c07ead95a7c29f7dcc191ff9cd2cf3d0cfe0",
+    "port/game/glue/glue_batch48.c:int glue_C2CB86(void)": "f95af6379a0e8c01f173f24ec6dedd3b9b5cbe844c2ccbd53e1e74124d7567f7",
+    "port/game/glue/glue_batch48.c:int glue_C2CE82(void)": "214cd3824fb013d6d37bfc2e2e741bb1ea36dc2a986549066766eca5da84ee56",
+    "port/game/glue/glue_batch49.c:void projected_segment_registers(void)": "313f6c48e1d9f26a9fa26b6a24b17d25e78ce5b0d6316e1cfcb4c3f7676a0646",
+    "port/game/glue/glue_batch49.c:int glue_C2ED70(void)": "199bf56bdfa7b97985c6467ea49670eae4286e15a0d254040045d08059cd8268",
+    "port/game/glue/glue_batch52.c:int glue_C0F4A6(void)": "50bb2ae755d0c805a4cd0cfcc5a62c820ecd2ce85e549ee662c87d6b2036e8b0",
+    "port/game/glue/glue_batch52.c:int glue_C25704(void)": "86d9029c41443fa06504f066d05d4c516eace1a29c892ae7b71206f6ebcb535c",
+    "port/game/glue/glue_batch52.c:int glue_C0915A(void)": "63248ad81e5ba5cb04ec4d82269a1a9d3d675a99fdbc084e79534f73753efc26",
+    "port/game/glue/glue_batch52.c:int glue_C11ACC(void)": "b84057ace2a906185ee3ff347d4bafd54223880874138c2f62bab9b8004fd40e",
+    "port/game/glue/glue_batch52.c:int glue_C1803C(void)": "b16be231a9aa7c2f769734a1d84e589b166f2ce4652d0742496b3ae854c5e888",
+    "port/game/glue/glue_batch52.c:int glue_C0910C(void)": "d0d4e2653449ac650043593f08b7ce2b7162c66871cb7360e79ddd296e799743",
+    "port/game/glue/glue_batch52.c:int glue_C25246(void)": "9ba8e7541d69fcfad4c9f2c33abf57dae377ac81b7b61de9cdeb81d9c1634b48",
+    "port/game/glue/glue_batch61.c:void block_registers(void)": "60eba0370b9d66c9904aa7722eacfc52ce7e1154d2e0e6248b0af84c3ff976da",
+    "port/game/glue/glue_batch61.c:int glue_C2F66E(void)": "74e131bc9d15f9e8f7d8fcfe40fd178be30b75018f095482e8ee1c19aa46c511",
+    "port/game/glue/glue_batch62.c:int glue_C1E328(void)": "6a0c2e0bd3c49a64f0faf4904364622d7d3cab5977137143ecf6b0102ae012d9",
+    "port/game/glue/glue_batch67.c:void cell_template_outputs_begin(int16_t row, int16_t column, gaddr templates,\n                                 gaddr bitmap, gaddr lists, gaddr input_cursor,\n                                 CellTemplateOutputs *outputs)": "bd7e988f6955b95bd69a895baa78c2fc6692ccb97b54bccf300d4baeb2cb799e",
+    "port/game/glue/glue_batch67.c:void cell_template_outputs_end(const CellTemplateOutputs *outputs,\n                               const FilingState *state, int enabled)": "e8ccc4502b5cd0b9d43fcedaed22f39ad858c2609cd31b50bc7961016cf29dad",
+    "port/game/glue/glue_batch67.c:int glue_C1D3F4(void)": "4b5bab2135ea254531167c9ea63a6d6612c04ed53a575a7e9a3b174e8057e881",
+    "port/game/glue/glue_batch67.c:void aim_record_registers(int apply)": "15fb5765cdac65e9c446193a6eeaf21e9f5e32059754d14652583b0de1b9b521",
+    "port/game/glue/glue_batch67.c:int glue_C28800(void)": "1460aa3ab0aeb1fe387b6025138a5f5c43aaec6fc26683b93a5181aaa8f51c06",
+    "port/game/glue/glue_batch67.c:void scene_setup_registers(int8_t which)": "bfb576326fa488ed9cb718c132e5a71b214318139fe43d8757fc9890f47584f7",
+    "port/game/glue/glue_batch67.c:int glue_C092A0(void)": "6c0f90ed04f6b2fa9b723033d6d759a8c21309efdf68e298537225e3d37fd209",
+    "port/game/glue/glue_batch67.c:int glue_C09266(void)": "08c38c7f20fa438e7c685fc9e9df4ba30825aa7f37449855e516cced5fc5fbea",
+    "port/game/glue/glue_batch67.c:int glue_C0924A(void)": "2bcf2ef3b47bbfacdf8178b4e5904713404bd823e2e84e390a0252f7d3afc894",
+    "port/game/glue/glue_postflight_hud.c:int glue_C28E28(void)": "fc95bd3040eb2e8a623db0c7dbaa4a7c84109930b770300b44392fe074e57738"
+  },
+  "limits": [
+    "Whole-entry controlled coverage is 1350/1352; C3429E and C32380 are independently covered through actual production segments. Do not claim whole-entry coverage for these two PCs.",
+    "Real-child and dispatch coverage retains exact missing PCs and original source rejection limits in every row. Frozen-clock fixtures do not prove active child multiplane drawing.",
+    "Controlled direct-blit fixtures include five initial real hardware packets on odd scenarios; packet totals include fixture writes as well as parent writes. Busy decisions are actual hardware state, not canned reads.",
+    "Twelve renderer helpers, selected-segment indirect calls, older adapters, C2C392 computed transfer, C1612C graphics-wait integration and the complete original cold/indirect/callback graph remain game-function work.",
+    "ALL424/34144, Copper fade and Kickstart services remain deferred."
+  ],
+  "next": {
+    "entries": [
+      "C2F5C0",
+      "C2F5D4",
+      "C2F5F4",
+      "C2F60A",
+      "C2F66E",
+      "C310E2",
+      "C301F0",
+      "C304B2",
+      "C32806",
+      "C2FA78",
+      "C2FA7E",
+      "C2FD8C"
+    ],
+    "unique_instructions": 971,
+    "shared_instructions": 392,
+    "manifest": {
+      "path": "analysis/data/render_leaf_helpers_scope_inventory.json",
+      "sha256": "96d6f04483b40edc0393c09f65383b708bd0717d7c32a88fdbec3865f227f511"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/hud_render_parents.c",
+      "sha256": "dafe168d1d7a4241250cf67f84fbc5c3a676b4bfac5e4a118d8f8b10f662d849"
+    },
+    {
+      "path": "port/game/hud_render_parents.h",
+      "sha256": "7d3eb49e758a6d4efbd846efd41e0b2f0a087872a242b8d6a1bdb637d38f117b"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "054be92c1bdc7658d1fc8494377a47068e0dcdcf7198d6784d873b166b83539c"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "171d0f7057d688bf3600f0cf71febdde26b416e3416a1b599013bc47fcd6dc66"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "1e536f908956ff79764ee2e7f05d2d10b0253592107e279da5a05bf12ab9a289"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "19c6b1e665198359fab92a88dfae3b7a451f57189799836a015f7a9a273ef6c4"
+    },
+    {
+      "path": "port/game/glue/glue_hud_render_parents.c",
+      "sha256": "a4a958c7438e5a9dc8f9413db508d986432ecc918913db4dbe171afd4b2471bd"
+    },
+    {
+      "path": "port/game/glue/glue_hud_render_parents.h",
+      "sha256": "bd59d037f8f3e61854c08c92deceaa4a6743d263f14d1341bfbee019408e1918"
+    },
+    {
+      "path": "port/game/glue/glue_hud_render_parents_math.h",
+      "sha256": "8ebc8cfed32830d63899196fb9ea2e7e4c20b6c57f3f01997cb401bd70a2c47f"
+    },
+    {
+      "path": "port/game/glue/glue_hud_render_parents_step.c",
+      "sha256": "b7ce3c4cbaf6a4cdb512a8b6ef51b8ff6e6263e2711747dba98910010b2b7352"
+    },
+    {
+      "path": "port/game/glue/glue_batch27.c",
+      "sha256": "371a0538fc3656d9cff18e9bcc7052f71df3a80a45f84966559d7114bcfbac6e"
+    },
+    {
+      "path": "port/game/glue/glue_batch38.c",
+      "sha256": "371b978fd35bc377a41ec51751f4366b7d43a93d23ff768eb434c7a1247e1fba"
+    },
+    {
+      "path": "port/game/glue/glue_batch48.c",
+      "sha256": "8aecc52043c4c9d29bfc5ef907741efef8b3ffdcced6760451f8a8435742a0e9"
+    },
+    {
+      "path": "port/game/glue/glue_batch49.c",
+      "sha256": "51baa931ac51fe435cdd15a14e6967a185d58d5d829beb668f277bbfadabb3bd"
+    },
+    {
+      "path": "port/game/glue/glue_batch52.c",
+      "sha256": "ae2d2067d380f7f043e68a6fe87abc98422c75f90d3965a379adcb59d85150fb"
+    },
+    {
+      "path": "port/game/glue/glue_batch61.c",
+      "sha256": "b353d8e051d075c831f6858219eb4e4bb2cf657f4c026fe2b41006d015c80e47"
+    },
+    {
+      "path": "port/game/glue/glue_batch62.c",
+      "sha256": "c622fe74faa1420af2cca200aa9c2129c7927065928f4e0fd6fb3e3b2d723ddc"
+    },
+    {
+      "path": "port/game/glue/glue_batch67.c",
+      "sha256": "ad134f0b73f8f9f94dc6382caae0baafc66e34e50c7dbc809c0732ba16245c93"
+    },
+    {
+      "path": "port/game/glue/glue_postflight_hud.c",
+      "sha256": "b43926ae0056d129efbf3353b190d3844ec418f5bb151640a9cd8765796e7ca2"
+    },
+    {
+      "path": "port/game/glue/glue_text.h",
+      "sha256": "a9bca5e4797cf62a0110ba5b3c8dc1c81fa29cdb3947f58a97463e2765b09a0b"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_hud_render_parents_scope.py",
+      "sha256": "f8455e3db06c5fb7d106e52e6bb7ee5beb8b012a316cb67908c7432117cd82df"
+    },
+    {
+      "path": "tools/recomp/audit_hud_render_parents_source.py",
+      "sha256": "1a5531dc08982989b937d5b8e5b9ef300430d96039bfc0ea81644445d4b08a8a"
+    },
+    {
+      "path": "tools/recomp/check_hud_render_parents.py",
+      "sha256": "e062d52f125cecfb418bd5e6ee90cb54d8ddf1da70539857e3fb7003b12b88da"
+    },
+    {
+      "path": "tools/recomp/check_hud_render_parents_dispatch.py",
+      "sha256": "e653170ece66c367bb15e2c748d8d7ad2d0a2dbcd3b46bb3f11eacaee1f72028"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_bus_budget.c",
+      "sha256": "e7222d375f8a53b8f6b3b09a59904c73abc29ec6f6b5680a7cd5c3722cc135db"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_clamp_oracle.c",
+      "sha256": "a37e82787bb7bccb397110c5a4121048804364c6440bb3abcb439fa569d85b93"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_contract_children.c",
+      "sha256": "468afc079f2b0b7bc258d57fcb4c9b295971886d638f552f2b0d2460eaa3b81b"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_contract_oracle.c",
+      "sha256": "f31df02d91b07fa7600b1cf39845effa312eeb178531403d21feb4f80c4b43a1"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_dispatch_oracle.c",
+      "sha256": "c2f0d0f04fb0420720cdbd7c73e7317a079dc9d4fedcb9548e6a8e9ef7b3694d"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_fixture.h",
+      "sha256": "982f706bc2111cddc17932126a1ddb5f44a6a80e360dfa039de71e0e969d9adc"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_hardware_log.c",
+      "sha256": "1ff124daf90978279ff3db1e088b4f3e5cc2dd8dbf8a50343783ad877ee6082f"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_oracle.c",
+      "sha256": "ad4518086fce77ae908e14609c2aabbf56638ac98d0cd8596a323bef0c83b325"
+    },
+    {
+      "path": "tools/recomp/hud_render_parents_page_oracle.c",
+      "sha256": "4ca261e47da703ac75e8ce5c2ffeb429a2eafa1143065883e17ca7ec581cf998"
+    },
+    {
+      "path": "tools/recomp/verify_hud_render_cold_segments.py",
+      "sha256": "ea0b5d69caeeeb1c869cec042ddef3673baf83878db8e987c5ca2246b8c0e058"
+    },
+    {
+      "path": "tools/recomp/verify_hud_render_parents_recordings.py",
+      "sha256": "e04fdb5242adae012bfdf566270b73e56ef5743948350c3bcf3f2af7071da095"
+    },
+    {
+      "path": "tools/recomp/audit_render_leaf_helpers_scope.py",
+      "sha256": "8c151082a7ab5b4901d177a04c09cf81292ded22c3d608d27e9f5bfb572c3c46"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/hud_render_parents_normal_build.log",
+      "sha256": "b460778c50e4c2812a294cb6b52fa12d6704cfbf54ab4197948f9d67a6f81493"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_msvc_configure.log",
+      "sha256": "b1230b53b1ac2e7c2d8f2a4e8a96a1fa196d8c1eb352423aedfdc722fd76bf6a"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_msvc_final.log",
+      "sha256": "598d7ea112bfa3b13e2b58b37ce4ad58fef46b4800fb930d30e5a64a46f1e858"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_ports_gate.log",
+      "sha256": "03c1896b6df80a1ea156ecedeb1a535dd48117874e7853d1e3d8b8b7e6c8b3b3"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_timing.log",
+      "sha256": "609ee5e236552d04aa2b0767bd9fa289f518e6e94e686ee4899b26a671532fdf"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_whole_call_final.log",
+      "sha256": "96d176ca4c525d12713f4cdebfe4c1ca4b204d20891bb3da07b4c6cd2f4e2e2e"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_dispatch_full.log",
+      "sha256": "729e1cd64ea8e554a7866779df64570643878f00caa994f253bd3aab01ef45cb"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_dma_local2.log",
+      "sha256": "9fc6595b11896abd170574fa0ccfd2ddeb4425a86794d7bf54d19e567f94f9c0"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_dma_union.log",
+      "sha256": "8b078fffbdcb8aa76828d2019d6d2aba08c6310fff6919ab4eb7ca1a2b2f238d"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_compatibility.log",
+      "sha256": "1c4fa91147c965ec2128fe47e50f54fcbbbd8ab36664daaee76adf9b5cb520b0"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_recordings_verified.log",
+      "sha256": "62e6338231c0774f65c622822fa945d3c001ad259e3a51ef9645b3c22560dc10"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_target_contract_final.log",
+      "sha256": "c368f3c289c49f7bdb7799a34068affac1c9e7771c96a2c946cfb8e61909a588"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_target_real_final.log",
+      "sha256": "1ec24d445be8da15ce8b2dcee12a35939e63a377bbeeece428fcd46962472daa"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_clamp_full.log",
+      "sha256": "8898a5ade03d70fad92c0d79f9e2d95c8f5a49a1a325d3f757abf753a082af1f"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_page_full.log",
+      "sha256": "362f25eb57ad5651c5b3831d1eab5dd578e450b16377f2a396a74330c8f30a12"
+    }
+  ],
+  "retained_failed_proofs": [
+    {
+      "path": "build/recomp/hud_render_parents_whole_call_probe.log",
+      "sha256": "c3155c4f06a143969289aa2293c9717f2d8179e4a170cf139ff230ad0d996120"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_real_probe.log",
+      "sha256": "e20c0797c243af4876685c400984870452ee993b68847725139a53e50702ce35"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_real_probe2.log",
+      "sha256": "83cbce63f39cb329f3e58776c0d62f0d3a6e237d780080564672c3ab5fc7a2a7"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_contract_extended.log",
+      "sha256": "86ae8caaa6cf36582e032997e94e88caf8f3e6cb3d4f189a32b157c95b4d1c3c"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_contract_extended2.log",
+      "sha256": "4ad0085396facd5ab0b1615f5f15264599af7350e3bec06734a2d9b814e45d2e"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_contract_final_changed.log",
+      "sha256": "540a105def68cf2cf2efca5cab66a90b05e21a42b786b6fd8c845a1d0ca1f4dd"
+    },
+    {
+      "path": "build/recomp/hud_render_parents_dma_local.log",
+      "sha256": "9f43dc56db1ccd6266e5befbb97fd912662aa9b56dcf75da624f3614d57ee956"
+    }
+  ]
+}

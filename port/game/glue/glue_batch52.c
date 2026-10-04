@@ -22,44 +22,7 @@ void play_sound_registers(uint32_t sound, uint32_t channel); /* glue_batch20.c *
 /* $C098C6: D0.w the count, D7.w the point offset; the caller's frame holds
  * the shift at -8(A6), the offsets at -$86..-$74(A6), and the count at
  * -$A(A6), which is counted down there. */
-int glue_C098C6(void) {
-    gaddr f = A(6), src = rd_u32(BOUND_RECORD) + 6 + SEXT(D(7));
-    gaddr out = WORKSPACES + SEXT((uint16_t)((W(7) >> 1) + W(7)));
-    int16_t count = W(0), shift = rd_s16(f - 8), offset[6], x = 0, z = 0;
-    static const int16_t frame[6] = {-0x86, -0x84, -0x82, -0x78, -0x76, -0x74};
-    int k, bits = shift & 63, left;
 
-    for (k = 0; k < 6; k++) offset[k] = rd_s16(f + (gaddr)(int32_t)frame[k]);
-    transform_ground_points(src, count, shift, offset, out);
-    SET_W(D(0), (uint16_t)(offset[0] + rd_s16(BOUND_OFFSET_X)));
-    SET_W(D(1), (uint16_t)(offset[2] + rd_s16(BOUND_OFFSET_Z)));
-    D(3) = SEXT(offset[3]);
-    D(6) = SEXT(offset[4]);
-    left = count;
-    do {
-        x = rd_s16(src);
-        z = rd_s16(src + 2);
-        src += 4;
-        out += 6;
-    } while (--left > 0);
-    wr_s16(f - 0xA, (int16_t)left);
-    x = (int16_t)((bits >= 16 ? (x < 0 ? -1 : 0) : x >> bits) + W(0));
-    z = (int16_t)((bits >= 16 ? (z < 0 ? -1 : 0) : z >> bits) + W(1));
-    {
-        gaddr m = VIEW_ANGLE_MATRIX;
-        D(5) = (uint32_t)((int32_t)x * rd_s16(m + 6));
-        D(7) = (uint32_t)(((int32_t)(D(5) + (uint32_t)((int32_t)z * rd_s16(m + 10)))) >> 8);
-        SET_W(D(7), W(7) + W(6));
-        D(2) = (uint32_t)((int32_t)x * rd_s16(m + 12));
-        D(4) = (uint32_t)(((int32_t)(D(2) + (uint32_t)((int32_t)z * rd_s16(m + 16)))) >> 8);
-        SET_W(D(4), W(4) + offset[5]);
-        A(0) = m + 14;
-        A(4) = m;
-    }
-    A(1) = src;
-    A(3) = out;
-    return glue_return();
-}
 
 int glue_C0F4A6(void) {
     free_all_voices();

@@ -133,73 +133,7 @@ int glue_C1D3F4(void) {
 
 /* $C3003A: replay the panel blit, polygon, line and all the marker pixels in
  * order. Their last low-word writes preserve high words from earlier steps. */
-int glue_C3003A(void) {
-    int16_t origin = rd_s16(SPAN_ORIGIN), x = 0xCE, y = 0xA5;
-    int32_t across;
-    uint16_t final_colour;
-    int k;
 
-    draw_panel_mark();
-    final_colour = rd_u16(CURRENT_COLOUR);
-
-    SET_W(D(7), (uint16_t)(0x0C - origin));
-    if ((int16_t)D(7) < 0) return glue_return();
-    SET_W(D(7), (uint16_t)(6 - origin));
-    if ((int16_t)D(7) < 0) return glue_return();
-    D(1) = (uint32_t)(0x1990 + rd_s32(REDRAW_STATE_LONG));
-    A(4) = 2;
-    SET_W(D(6), 0x542);
-    A(5) = 0x25;
-    SET_W(D(7), 0x0C);
-    bound_span_registers();
-    if ((int16_t)D(5) < 0) return glue_return();
-
-    SET_W(D(3), (uint16_t)(D(5) ? 0xFFFF : 0xFFF0));
-    SET_W(D(0), (uint16_t)(D(7) ? 0xFFFF : 0x0FFF));
-    SET_W(D(5), (uint16_t)(D(5) + D(7)));
-    D(7) = 0x12A88u;
-    A(2) = rd_u32(PAGE_PLANE_TABLE);
-    D(4) = rd_u32(A(2) + 4) + D(1);
-    SET_W(D(6), (uint16_t)(D(6) - D(5)));
-    SET_W(D(5), (uint16_t)(D(5) * 2 + (int16_t)A(5)));
-    A(0) = 0xDFF000u;
-    SET_W(D(2), 0x0722);
-    mark_polygon_registers((uint16_t)D(6));
-
-    SET_W(D(0), (uint16_t)(0xCC + rd_s16(SPAN_ORIGIN_Y)));
-    SET_W(D(1), (uint16_t)(0xAC + rd_u16(REDRAW_STATE_WORD)));
-    SET_W(D(2), (uint16_t)(D(0) + 0x0A));
-    SET_W(D(3), (uint16_t)D(1));
-    line_registers_to_row(0xC7);
-
-    wr_u16(CURRENT_COLOUR, 2);
-    SET_W(D(0), 0xD1);
-    SET_W(D(1), 0xAB);
-    plot_in_view_registers();
-    SET_W(D(1), 0xAC);
-    plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
-    wr_u16(CURRENT_COLOUR, final_colour);
-
-    SET_W(D(0), 0xCE);
-    SET_W(D(1), 0xA5);
-    plot_in_view_registers();
-    across = (int32_t)x + rd_s16(SPAN_ORIGIN_Y);
-    x = (int16_t)across;
-    if (across >= 0 && (int16_t)across < 0x140) y = (int16_t)(y + rd_u16(REDRAW_STATE_WORD));
-    {
-        static const int8_t dx[8] = {0, -2, -1, -2, 0x11, 0, 0, -1};
-        static const int8_t dy[8] = {0, 1, 1, 3, 1, 1, 1, 2};
-        for (k = 1; k < 8; k++) {
-            x = (int16_t)(x + dx[k]);
-            y = (int16_t)(y + dy[k]);
-            SET_W(D(0), (uint16_t)x);
-            SET_W(D(1), (uint16_t)y);
-            restored_plot_registers();
-        }
-    }
-    A(5) = 0x25;
-    return glue_return();
-}
 
 /* $C28800: its two callees' registers now come from their replay helpers,
  * so the glue never repeats their work. Everything the body computes is

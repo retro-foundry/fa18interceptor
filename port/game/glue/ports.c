@@ -448,7 +448,7 @@ const FA18Port fa18_ports[] = {
     /* batch 27: target point, record range, lane blit */
     {0xC1C2C8, glue_C1C2C8, "update_target_point", 0, 0, glue_C1C2C8_step, 0xC1C40C},
     {0xC24568, glue_C24568, "classify_main_loop_record_range", 0, 0, glue_C24568_step, 0xC2467E, 0, 0xC24566, glue_C24568_owns},
-    {0xC304FA, glue_C304FA, "blit_lane", 400},
+    {0xC304FA, glue_C304FA, "blit_lane", 0, 0, glue_C304FA_complete_step, 0xC305AA, 1, 0, glue_C304FA_owns},
     /* batch 28: post-input expiry, projection seed, condition tables */
     {0xC10D8A, glue_C10D8A, "check_post_input_expiry", 0, 0, glue_C10D8A_step, 0xC10DAE, 0, 0, glue_C10D8A_owns},
     {0xC1C54E, glue_C1C54E, "seed_projection", 0, 0, glue_C1C54E_step, 0xC1C63E},
@@ -481,9 +481,9 @@ const FA18Port fa18_ports[] = {
     {0xC2469E, glue_C2469E, "clip_and_draw_polygon", 0, 0, glue_C2469E_step, 0xC24DA8, 0, 0xC24688},
     {0xC246A0, glue_C246A0, "clip_and_draw_polygon", 0, 0, glue_C246A0_step, 0xC24DA8, 0, 0xC24688},
     /* batch 38: faces and view marks */
-    {0xC09952, glue_C09952, "draw_indexed_face", 30000},
-    {0xC099F6, glue_C099F6, "draw_outlined_face", 30000},
-    {0xC332FE, glue_C332FE, "draw_view_marker", 3000},
+    {0xC09952, glue_C09952, "draw_indexed_face", 0, 0, glue_C09952_complete_step, 0xC099AA, 1, 0, glue_C09952_owns},
+    {0xC099F6, glue_C099F6, "draw_outlined_face", 0, 0, glue_C099F6_complete_step, 0xC09A78, 1, 0, glue_C099F6_owns},
+    {0xC332FE, glue_C332FE, "draw_view_marker", 0, 0, glue_C332FE_complete_step, 0xC33370, 1, 0xC332FC, glue_C332FE_owns},
     {0xC30918, glue_C30918, "draw_gauge_bar", 0, 0, glue_C30918_step, 0xC309A2, 0, 0xC30916},
     /* batch 39: cockpit messages */
     {0xC11BFC, glue_C11BFC, "update_message", 3000},
@@ -528,9 +528,9 @@ const FA18Port fa18_ports[] = {
     {0xC13C0A, glue_C13C0A, "ease_record_58", 400},
     {0xC21C4C, glue_C21C4C, "split_edge", 0, 0, glue_C21C4C_complete_step, 0xC21C86, 1, 0, glue_C21C4C_owns},
     {0xC1FED4, glue_C1FED4, "skip_word_for_mode_57", 50},
-    {0xC345A0, glue_C345A0, "plot_ring", 20000},
+    {0xC345A0, glue_C345A0, "plot_ring", 0, 0, glue_C345A0_complete_step, 0xC347F2, 1, 0, glue_C345A0_owns},
     /* batch 48: coloured face, stored-normal test, record steering, view rotation, edge split */
-    {0xC099AA, glue_C099AA, "draw_coloured_face", 30000},
+    {0xC099AA, glue_C099AA, "draw_coloured_face", 0, 0, glue_C099AA_complete_step, 0xC099F6, 1, 0, glue_C099AA_owns},
     {0xC1FB9C, glue_C1FB9C, "point_toward_eye", 0, 0, glue_C1FB9C_step, 0xC1FBD4},
     {0xC2CAA0, glue_C2CAA0, "steer_record_neutral", 60},
     {0xC2CA92, glue_C2CA92, "steer_record_roll", 80},
@@ -545,10 +545,10 @@ const FA18Port fa18_ports[] = {
     {0xC2084A, glue_C2084A, "edge_alignment", 0, 0, glue_C2084A_complete_step, 0xC208D4, 1, 0, glue_C2084A_owns},
     {0xC2082A, glue_C2082A, "edge_alignment_test", 0, 0, glue_C2082A_complete_step, 0xC208D4, 1, 0xC20826, glue_C2082A_owns},
     /* batch 50: symbol plot */
-    {0xC348B2, glue_C348B2, "plot_symbol", 4000},
+    {0xC348B2, glue_C348B2, "plot_symbol", 0, 0, glue_C348B2_complete_step, 0xC3494A, 1, 0xC348B0, glue_C348B2_owns},
     /* batch 51-52: clipped segment, ground points, voices, messages, observer, stages, long table, alert, start position, typed code */
     {0xC2EE4A, glue_C2EE4A, "draw_clipped_segment", 0, 0, glue_C2EE4A_step, 0xC2F1B8, 0, 0xC2EE44},
-    {0xC098C6, glue_C098C6, "transform_ground_points", 3000},
+    {0xC098C6, glue_C098C6, "transform_ground_points", 0, 0, glue_C098C6_complete_step, 0xC09952, 1, 0, glue_C098C6_owns},
     {0xC0F4A6, glue_C0F4A6, "free_all_voices", 0, 0, glue_C0F4A6_step, 0xC0F4D6},
     {0xC25704, glue_C25704, "post_message", 0, 0, glue_C25704_step, 0xC2574A},
     {0xC0915A, glue_C0915A, "set_observer_position", 0, 0, glue_C0915A_step, 0xC09192},
@@ -619,17 +619,17 @@ const FA18Port fa18_ports[] = {
     /* batch 60c: panel frame */
     {0xC30764, glue_C30764, "draw_counter_stream_display", 0, 0, glue_C30764_complete_step, 0xC308D8, 1, 0xC30762, glue_C30764_owns},
     /* batch 61: HUD marks */
-    {0xC34146, glue_C34146, "draw_hud_marks", 6000},
-    {0xC34066, glue_C34066, "draw_tick_row", 3000},
+    {0xC34146, glue_C34146, "draw_hud_marks", 0, 0, glue_C34146_complete_step, 0xC342D0, 1, 0, glue_C34146_owns},
+    {0xC34066, glue_C34066, "draw_tick_row", 0, 0, glue_C34066_complete_step, 0xC34144, 1, 0, glue_C34066_owns},
     /* batch 61b: target box */
-    {0xC342D0, glue_C342D0, "draw_target_box", 6000},
+    {0xC342D0, glue_C342D0, "draw_target_box", 0, 0, glue_C342D0_complete_step, 0xC34540, 1, 0, glue_C342D0_owns},
     /* batch 61d: ring point, pixel block */
     {0xC2F66E, glue_C2F66E, "plot_pixel_block", 0, 0, glue_C2F66E_step, 0xC2FA78, 0, 0xC2F5C0},
-    {0xC347F2, glue_C347F2, "plot_ring_point", 2500},
+    {0xC347F2, glue_C347F2, "plot_ring_point", 0, 0, glue_C347F2_complete_step, 0xC348B0, 1, 0, glue_C347F2_owns},
     /* batch 61e: missile cue */
-    {0xC33DC8, glue_C33DC8, "update_missile_cue", 5000},
+    {0xC33DC8, glue_C33DC8, "update_missile_cue", 0, 0, glue_C33DC8_complete_step, 0xC33F54, 1, 0xC33DA4, glue_C33DC8_owns},
     /* batch 62: message line, display list sort */
-    {0xC322EE, glue_C322EE, "draw_message_line", 9000},
+    {0xC322EE, glue_C322EE, "draw_message_line", 0, 0, glue_C322EE_complete_step, 0xC32806, 1, 0xC322EC, glue_C322EE_owns},
     /* batch 63: postflight HUD */
     {0xC33CD2, glue_C33CD2, "transform_postflight_record", 0, 0, glue_C33CD2_complete_step, 0xC33DA4, 1, 0, glue_C33CD2_owns},
     /* batch 63b */
@@ -688,7 +688,7 @@ const FA18Port fa18_ports[] = {
     {0xC11788, glue_C11788, "advance_postflight_reset", 0, 0, glue_C11788_step, 0xC11830, 0, 0, glue_C11788_owns},
     {0xC11830, glue_C11830, "restart_postflight_scene", 0, 0, glue_C11830_step, 0xC11872, 0, 0, glue_C11830_owns},
     /* panel mark drawing () */
-    {0xC3003A, glue_C3003A, "draw_panel_mark", 12000},
+    {0xC3003A, glue_C3003A, "draw_panel_mark", 0, 0, glue_C3003A_complete_step, 0xC3019A, 1, 0xC30038, glue_C3003A_owns},
     /* post-input heading formatter () */
     {0xC25070, glue_C25070, "refresh_post_input_heading", 0, 0, glue_C25070_step, 0xC25176, 0, 0xC2506C, glue_C25070_owns},
     /* scene record stream dispatch () */

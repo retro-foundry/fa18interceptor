@@ -16,6 +16,17 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+Fifteen complete ground/HUD rendering upgrades pass 491,520 whole CPU/PC/SR/
+RAM calls and 32,768 independent production-segment calls. Controlled whole
+entry coverage is 1,350/1,352; the two cold branches have separate evidence.
+Actual dispatch passes 46,080 calls; normal C passes every owner: 30,293
+shadow / 42,601 sandbox. All 36,236 isolated live frames and seals match;
+combined DMA passes 28,849 / 923,168. Source-timed entries rise to 509. See
+[ground/HUD proof](analysis/routines/native_c_hud_render_parents.md).
+Family timing matches through 600; ALL first differs at 424 / 34,144 pixels,
+retained as deferred timing evidence. Twelve renderer helpers are next.
+Original game-function and callback coverage remains open.
+
 Fourteen complete face-list/edge upgrades pass 458,752 full CPU/PC/SR/RAM
 calls, all 533 owned boundaries with both controlled and original children,
 and 43,008 dispatch calls. Independent normal C passes every owner: 70,334
@@ -23,7 +34,7 @@ shadow / 92,495 sandbox (including an isolated C21C4C check; the initial
 batch's zero-call rejection is retained). All 36,236 isolated live frames
 and seals match; combined DMA passes 27,543 / 881,376. Source-timed entries
 rise to 494. See [face-list/edge proof](analysis/routines/native_c_face_list_parents.md).
-Next fifteen ground/HUD mark/panel/blit parents have 1,352 unique boundaries.
+Those fifteen ground/HUD rendering parents are now complete as described above.
 Full original function and callback coverage remains open; Kickstart services
 and timing remain deferred.
 

@@ -70,6 +70,8 @@ Seventeen complete face/segment/grid/block stream-parent upgrades retain
 that translated count and raise source-timed entries to 481.
 Fourteen complete tested/list/grid/lattice face and edge upgrades retain
 that translated count and raise source-timed entries to 494.
+Fifteen complete ground/HUD mark/panel/blit parent upgrades retain that
+translated count and raise source-timed entries to 509.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -77,6 +79,37 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 526 translated plus sixty-six source-only entries remain registered:
+  592 rows, 509 source-timed (443 translated plus sixty-six source-only).
+  Fifteen complete ground/HUD rendering upgrades own 1,352 unique / zero
+  shared boundaries and sixty original child sites. All 491,520 whole CPU/
+  PC/full-SR/all-RAM calls pass. Controlled whole-entry coverage is 1,350/
+  1,352; actual production segments independently cover cold C3429E/C32380
+  in 32,768 additional calls. Original-child and dispatch missing PCs remain
+  explicit in the checkpoint. Ordered Custom packets and terminal hardware
+  match; controlled direct-blit waits use actual initial hardware blits,
+  including five fixture packets per odd scenario, not canned busy reads.
+  Actual dispatch passes 46,080 calls and all guards; each mode has zero
+  hardware-bearing / 15,360 hardware-free classifications and 22,848 writes.
+  Normal C passes every owner: 30,293 shadow / 42,601 sandbox; generic
+  contracts and positive-owner rejection remain unchanged. All 36,236 isolated
+  live frames and RAM seals match. Shared core/observer and earlier domains
+  are unchanged; all thirty-four older generators are byte-identical. Local
+  DMA passes 1,352 / 43,264; fresh combined DMA and independent union pass
+  28,849 / 923,168 (previous 27,543 plus 1,352, overlap 46). GNU/MSVC Release
+  pass; build/ is 1.74 GiB. Full 592-row gate passes 568,446 shadow /
+  443,870 sandbox, zero mismatches, exact seals and poison frames. Family
+  exact through 600; ALL now differs at 424 / 34,144 pixels, versus previous
+  416/361; retained as deferred timing evidence. Remaining older export bodies
+  are unchanged. See analysis/routines/native_c_hud_render_parents.md and
+  analysis/figures/native_hud_render_parents_checkpoint.json. Next twelve
+  renderer helpers have 971 unique / 392 shared boundaries, original callers
+  and both sixteen-entry pixel-writer tables sealed in
+  analysis/data/render_leaf_helpers_scope_inventory.json. Selected-segment
+  indirect calls, older adapters, C2C392 computed transfer, C1612C graphics-wait
+  integration and the full original cold/indirect/callback graph remain
+  game-function work. Goal is not complete.
 
 - 526 translated plus sixty-six source-only entries remain registered:
   592 rows, 494 source-timed (428 translated plus sixty-six source-only).
@@ -101,9 +134,8 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   C21060 is now complete; remaining exports in batches 25/47/48/49 are
   byte-identical. See analysis/routines/native_c_face_list_parents.md and
   analysis/figures/native_face_list_parents_checkpoint.json for exact seals.
-  Next fifteen ground/HUD mark/panel/blit parents have 1,352 unique / zero
-  shared boundaries and original callers sealed in
-  analysis/data/hud_render_parents_scope_inventory.json. Selected-segment
+  Those fifteen ground/HUD parents are now complete as described above.
+  Selected-segment
   indirect calls, older adapters, C2C392 computed transfer, C1612C graphics-
   wait integration and the full original cold/indirect/callback graph remain
   game-function work. Goal is not complete.
