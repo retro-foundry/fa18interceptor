@@ -1,0 +1,3034 @@
+{
+  "state": "captures/native/demo01/state.bin",
+  "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "meaning": "behavioral table/index formulas and identified producer stores; complete producer-domain proof remains absent",
+  "action_pointers": [
+    {
+      "action": 1,
+      "slot": "C2BAF8",
+      "target": "C2C48A"
+    },
+    {
+      "action": 2,
+      "slot": "C2BAFC",
+      "target": "C2C18E"
+    },
+    {
+      "action": 3,
+      "slot": "C2BB00",
+      "target": "C2C204"
+    },
+    {
+      "action": 4,
+      "slot": "C2BB04",
+      "target": "C2C208"
+    },
+    {
+      "action": 5,
+      "slot": "C2BB08",
+      "target": "C2C20C"
+    },
+    {
+      "action": 6,
+      "slot": "C2BB0C",
+      "target": "C2C310"
+    },
+    {
+      "action": 7,
+      "slot": "C2BB10",
+      "target": "C2C1E6"
+    },
+    {
+      "action": 8,
+      "slot": "C2BB14",
+      "target": "C2C48A"
+    },
+    {
+      "action": 9,
+      "slot": "C2BB18",
+      "target": "C2C216"
+    },
+    {
+      "action": 10,
+      "slot": "C2BB1C",
+      "target": "C2C28C"
+    },
+    {
+      "action": 11,
+      "slot": "C2BB20",
+      "target": "C2BD5A"
+    },
+    {
+      "action": 12,
+      "slot": "C2BB24",
+      "target": "C2BD72"
+    },
+    {
+      "action": 13,
+      "slot": "C2BB28",
+      "target": "C2BD88"
+    },
+    {
+      "action": 14,
+      "slot": "C2BB2C",
+      "target": "C2BDD8"
+    },
+    {
+      "action": 15,
+      "slot": "C2BB30",
+      "target": "C2BDF0"
+    },
+    {
+      "action": 16,
+      "slot": "C2BB34",
+      "target": "C2BE06"
+    },
+    {
+      "action": 17,
+      "slot": "C2BB38",
+      "target": "C2BE50"
+    },
+    {
+      "action": 18,
+      "slot": "C2BB3C",
+      "target": "C2BE74"
+    },
+    {
+      "action": 19,
+      "slot": "C2BB40",
+      "target": "C2BE8A"
+    },
+    {
+      "action": 20,
+      "slot": "C2BB44",
+      "target": "C2BEDC"
+    },
+    {
+      "action": 21,
+      "slot": "C2BB48",
+      "target": "C2BEEE"
+    },
+    {
+      "action": 22,
+      "slot": "C2BB4C",
+      "target": "C2BF04"
+    },
+    {
+      "action": 23,
+      "slot": "C2BB50",
+      "target": "C2BF42"
+    },
+    {
+      "action": 24,
+      "slot": "C2BB54",
+      "target": "C2BF5A"
+    },
+    {
+      "action": 25,
+      "slot": "C2BB58",
+      "target": "C2BF70"
+    },
+    {
+      "action": 26,
+      "slot": "C2BB5C",
+      "target": "C2BFCA"
+    },
+    {
+      "action": 27,
+      "slot": "C2BB60",
+      "target": "C2BFE2"
+    },
+    {
+      "action": 28,
+      "slot": "C2BB64",
+      "target": "C2BFF8"
+    },
+    {
+      "action": 29,
+      "slot": "C2BB68",
+      "target": "C2C03E"
+    },
+    {
+      "action": 30,
+      "slot": "C2BB6C",
+      "target": "C2C050"
+    },
+    {
+      "action": 31,
+      "slot": "C2BB70",
+      "target": "C2C066"
+    },
+    {
+      "action": 32,
+      "slot": "C2BB74",
+      "target": "C2C0D0"
+    },
+    {
+      "action": 33,
+      "slot": "C2BB78",
+      "target": "C2C0E2"
+    },
+    {
+      "action": 34,
+      "slot": "C2BB7C",
+      "target": "C2C0F8"
+    },
+    {
+      "action": 35,
+      "slot": "C2BB80",
+      "target": "C2BCC8"
+    },
+    {
+      "action": 36,
+      "slot": "C2BB84",
+      "target": "C2BCF8"
+    },
+    {
+      "action": 37,
+      "slot": "C2BB88",
+      "target": "C2BD0C"
+    },
+    {
+      "action": 38,
+      "slot": "C2BB8C",
+      "target": "C2BD4A"
+    },
+    {
+      "action": 39,
+      "slot": "C2BB90",
+      "target": "C2C16C"
+    },
+    {
+      "action": 40,
+      "slot": "C2BB94",
+      "target": "C2C178"
+    }
+  ],
+  "parameter_pairs": [
+    {
+      "slot": "C2BB98",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BB9C",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BBA0",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BBA4",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BBA8",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BBAC",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BBB0",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BBB4",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BBB8",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBBC",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBC0",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBC4",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBC8",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBCC",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBD0",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBD4",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBD8",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBDC",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBE0",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBE4",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBE8",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBEC",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBF0",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BBF4",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BBF8",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BBFC",
+      "countdown": 40,
+      "action": 2
+    },
+    {
+      "slot": "C2BC00",
+      "countdown": 40,
+      "action": 2
+    },
+    {
+      "slot": "C2BC04",
+      "countdown": 40,
+      "action": 2
+    },
+    {
+      "slot": "C2BC08",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BC0C",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BC10",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BC14",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BC18",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BC1C",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC20",
+      "countdown": 80,
+      "action": 2
+    },
+    {
+      "slot": "C2BC24",
+      "countdown": 80,
+      "action": 2
+    },
+    {
+      "slot": "C2BC28",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BC2C",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC30",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC34",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC38",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BC3C",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC40",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC44",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC48",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BC4C",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC50",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC54",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC58",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BC5C",
+      "countdown": 40,
+      "action": 2
+    },
+    {
+      "slot": "C2BC60",
+      "countdown": 40,
+      "action": 2
+    },
+    {
+      "slot": "C2BC64",
+      "countdown": 40,
+      "action": 2
+    },
+    {
+      "slot": "C2BC68",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BC6C",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BC70",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BC74",
+      "countdown": 40,
+      "action": 5
+    },
+    {
+      "slot": "C2BC78",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BC7C",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC80",
+      "countdown": 80,
+      "action": 2
+    },
+    {
+      "slot": "C2BC84",
+      "countdown": 80,
+      "action": 2
+    },
+    {
+      "slot": "C2BC88",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BC8C",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC90",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC94",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BC98",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BC9C",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BCA0",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BCA4",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BCA8",
+      "countdown": 80,
+      "action": 9
+    },
+    {
+      "slot": "C2BCAC",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BCB0",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BCB4",
+      "countdown": 80,
+      "action": 5
+    },
+    {
+      "slot": "C2BCB8",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BCBC",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BCC0",
+      "countdown": 40,
+      "action": 9
+    },
+    {
+      "slot": "C2BCC4",
+      "countdown": 40,
+      "action": 9
+    }
+  ],
+  "original_stream_descriptors": [
+    {
+      "slot": "C2366A",
+      "first_longword": "00000103",
+      "action_longword": "80000023",
+      "action_byte": 35
+    },
+    {
+      "slot": "C23672",
+      "first_longword": "00000103",
+      "action_longword": "8000000B",
+      "action_byte": 11
+    },
+    {
+      "slot": "C2367A",
+      "first_longword": "00000103",
+      "action_longword": "80000027",
+      "action_byte": 39
+    },
+    {
+      "slot": "C23682",
+      "first_longword": "00000103",
+      "action_longword": "8000000E",
+      "action_byte": 14
+    },
+    {
+      "slot": "C2368A",
+      "first_longword": "00000103",
+      "action_longword": "80000011",
+      "action_byte": 17
+    },
+    {
+      "slot": "C23692",
+      "first_longword": "00000103",
+      "action_longword": "80000014",
+      "action_byte": 20
+    },
+    {
+      "slot": "C2369A",
+      "first_longword": "00000103",
+      "action_longword": "80000017",
+      "action_byte": 23
+    },
+    {
+      "slot": "C236A2",
+      "first_longword": "00000101",
+      "action_longword": "8000001A",
+      "action_byte": 26
+    }
+  ],
+  "all_nonzero_byte_index_results": [
+    {
+      "action_byte": 1,
+      "signed_index_after_decrement_and_ext": 0,
+      "slot": "C2BAF8",
+      "original_longword": "00C2C48A",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 2,
+      "signed_index_after_decrement_and_ext": 1,
+      "slot": "C2BAFC",
+      "original_longword": "00C2C18E",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 3,
+      "signed_index_after_decrement_and_ext": 2,
+      "slot": "C2BB00",
+      "original_longword": "00C2C204",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 4,
+      "signed_index_after_decrement_and_ext": 3,
+      "slot": "C2BB04",
+      "original_longword": "00C2C208",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 5,
+      "signed_index_after_decrement_and_ext": 4,
+      "slot": "C2BB08",
+      "original_longword": "00C2C20C",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 6,
+      "signed_index_after_decrement_and_ext": 5,
+      "slot": "C2BB0C",
+      "original_longword": "00C2C310",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 7,
+      "signed_index_after_decrement_and_ext": 6,
+      "slot": "C2BB10",
+      "original_longword": "00C2C1E6",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 8,
+      "signed_index_after_decrement_and_ext": 7,
+      "slot": "C2BB14",
+      "original_longword": "00C2C48A",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 9,
+      "signed_index_after_decrement_and_ext": 8,
+      "slot": "C2BB18",
+      "original_longword": "00C2C216",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 10,
+      "signed_index_after_decrement_and_ext": 9,
+      "slot": "C2BB1C",
+      "original_longword": "00C2C28C",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 11,
+      "signed_index_after_decrement_and_ext": 10,
+      "slot": "C2BB20",
+      "original_longword": "00C2BD5A",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 12,
+      "signed_index_after_decrement_and_ext": 11,
+      "slot": "C2BB24",
+      "original_longword": "00C2BD72",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 13,
+      "signed_index_after_decrement_and_ext": 12,
+      "slot": "C2BB28",
+      "original_longword": "00C2BD88",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 14,
+      "signed_index_after_decrement_and_ext": 13,
+      "slot": "C2BB2C",
+      "original_longword": "00C2BDD8",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 15,
+      "signed_index_after_decrement_and_ext": 14,
+      "slot": "C2BB30",
+      "original_longword": "00C2BDF0",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 16,
+      "signed_index_after_decrement_and_ext": 15,
+      "slot": "C2BB34",
+      "original_longword": "00C2BE06",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 17,
+      "signed_index_after_decrement_and_ext": 16,
+      "slot": "C2BB38",
+      "original_longword": "00C2BE50",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 18,
+      "signed_index_after_decrement_and_ext": 17,
+      "slot": "C2BB3C",
+      "original_longword": "00C2BE74",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 19,
+      "signed_index_after_decrement_and_ext": 18,
+      "slot": "C2BB40",
+      "original_longword": "00C2BE8A",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 20,
+      "signed_index_after_decrement_and_ext": 19,
+      "slot": "C2BB44",
+      "original_longword": "00C2BEDC",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 21,
+      "signed_index_after_decrement_and_ext": 20,
+      "slot": "C2BB48",
+      "original_longword": "00C2BEEE",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 22,
+      "signed_index_after_decrement_and_ext": 21,
+      "slot": "C2BB4C",
+      "original_longword": "00C2BF04",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 23,
+      "signed_index_after_decrement_and_ext": 22,
+      "slot": "C2BB50",
+      "original_longword": "00C2BF42",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 24,
+      "signed_index_after_decrement_and_ext": 23,
+      "slot": "C2BB54",
+      "original_longword": "00C2BF5A",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 25,
+      "signed_index_after_decrement_and_ext": 24,
+      "slot": "C2BB58",
+      "original_longword": "00C2BF70",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 26,
+      "signed_index_after_decrement_and_ext": 25,
+      "slot": "C2BB5C",
+      "original_longword": "00C2BFCA",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 27,
+      "signed_index_after_decrement_and_ext": 26,
+      "slot": "C2BB60",
+      "original_longword": "00C2BFE2",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 28,
+      "signed_index_after_decrement_and_ext": 27,
+      "slot": "C2BB64",
+      "original_longword": "00C2BFF8",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 29,
+      "signed_index_after_decrement_and_ext": 28,
+      "slot": "C2BB68",
+      "original_longword": "00C2C03E",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 30,
+      "signed_index_after_decrement_and_ext": 29,
+      "slot": "C2BB6C",
+      "original_longword": "00C2C050",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 31,
+      "signed_index_after_decrement_and_ext": 30,
+      "slot": "C2BB70",
+      "original_longword": "00C2C066",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 32,
+      "signed_index_after_decrement_and_ext": 31,
+      "slot": "C2BB74",
+      "original_longword": "00C2C0D0",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 33,
+      "signed_index_after_decrement_and_ext": 32,
+      "slot": "C2BB78",
+      "original_longword": "00C2C0E2",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 34,
+      "signed_index_after_decrement_and_ext": 33,
+      "slot": "C2BB7C",
+      "original_longword": "00C2C0F8",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 35,
+      "signed_index_after_decrement_and_ext": 34,
+      "slot": "C2BB80",
+      "original_longword": "00C2BCC8",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 36,
+      "signed_index_after_decrement_and_ext": 35,
+      "slot": "C2BB84",
+      "original_longword": "00C2BCF8",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 37,
+      "signed_index_after_decrement_and_ext": 36,
+      "slot": "C2BB88",
+      "original_longword": "00C2BD0C",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 38,
+      "signed_index_after_decrement_and_ext": 37,
+      "slot": "C2BB8C",
+      "original_longword": "00C2BD4A",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 39,
+      "signed_index_after_decrement_and_ext": 38,
+      "slot": "C2BB90",
+      "original_longword": "00C2C16C",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 40,
+      "signed_index_after_decrement_and_ext": 39,
+      "slot": "C2BB94",
+      "original_longword": "00C2C178",
+      "within_declared_forty_pointer_table": true
+    },
+    {
+      "action_byte": 41,
+      "signed_index_after_decrement_and_ext": 40,
+      "slot": "C2BB98",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 42,
+      "signed_index_after_decrement_and_ext": 41,
+      "slot": "C2BB9C",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 43,
+      "signed_index_after_decrement_and_ext": 42,
+      "slot": "C2BBA0",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 44,
+      "signed_index_after_decrement_and_ext": 43,
+      "slot": "C2BBA4",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 45,
+      "signed_index_after_decrement_and_ext": 44,
+      "slot": "C2BBA8",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 46,
+      "signed_index_after_decrement_and_ext": 45,
+      "slot": "C2BBAC",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 47,
+      "signed_index_after_decrement_and_ext": 46,
+      "slot": "C2BBB0",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 48,
+      "signed_index_after_decrement_and_ext": 47,
+      "slot": "C2BBB4",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 49,
+      "signed_index_after_decrement_and_ext": 48,
+      "slot": "C2BBB8",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 50,
+      "signed_index_after_decrement_and_ext": 49,
+      "slot": "C2BBBC",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 51,
+      "signed_index_after_decrement_and_ext": 50,
+      "slot": "C2BBC0",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 52,
+      "signed_index_after_decrement_and_ext": 51,
+      "slot": "C2BBC4",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 53,
+      "signed_index_after_decrement_and_ext": 52,
+      "slot": "C2BBC8",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 54,
+      "signed_index_after_decrement_and_ext": 53,
+      "slot": "C2BBCC",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 55,
+      "signed_index_after_decrement_and_ext": 54,
+      "slot": "C2BBD0",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 56,
+      "signed_index_after_decrement_and_ext": 55,
+      "slot": "C2BBD4",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 57,
+      "signed_index_after_decrement_and_ext": 56,
+      "slot": "C2BBD8",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 58,
+      "signed_index_after_decrement_and_ext": 57,
+      "slot": "C2BBDC",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 59,
+      "signed_index_after_decrement_and_ext": 58,
+      "slot": "C2BBE0",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 60,
+      "signed_index_after_decrement_and_ext": 59,
+      "slot": "C2BBE4",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 61,
+      "signed_index_after_decrement_and_ext": 60,
+      "slot": "C2BBE8",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 62,
+      "signed_index_after_decrement_and_ext": 61,
+      "slot": "C2BBEC",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 63,
+      "signed_index_after_decrement_and_ext": 62,
+      "slot": "C2BBF0",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 64,
+      "signed_index_after_decrement_and_ext": 63,
+      "slot": "C2BBF4",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 65,
+      "signed_index_after_decrement_and_ext": 64,
+      "slot": "C2BBF8",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 66,
+      "signed_index_after_decrement_and_ext": 65,
+      "slot": "C2BBFC",
+      "original_longword": "00280002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 67,
+      "signed_index_after_decrement_and_ext": 66,
+      "slot": "C2BC00",
+      "original_longword": "00280002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 68,
+      "signed_index_after_decrement_and_ext": 67,
+      "slot": "C2BC04",
+      "original_longword": "00280002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 69,
+      "signed_index_after_decrement_and_ext": 68,
+      "slot": "C2BC08",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 70,
+      "signed_index_after_decrement_and_ext": 69,
+      "slot": "C2BC0C",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 71,
+      "signed_index_after_decrement_and_ext": 70,
+      "slot": "C2BC10",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 72,
+      "signed_index_after_decrement_and_ext": 71,
+      "slot": "C2BC14",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 73,
+      "signed_index_after_decrement_and_ext": 72,
+      "slot": "C2BC18",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 74,
+      "signed_index_after_decrement_and_ext": 73,
+      "slot": "C2BC1C",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 75,
+      "signed_index_after_decrement_and_ext": 74,
+      "slot": "C2BC20",
+      "original_longword": "00500002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 76,
+      "signed_index_after_decrement_and_ext": 75,
+      "slot": "C2BC24",
+      "original_longword": "00500002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 77,
+      "signed_index_after_decrement_and_ext": 76,
+      "slot": "C2BC28",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 78,
+      "signed_index_after_decrement_and_ext": 77,
+      "slot": "C2BC2C",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 79,
+      "signed_index_after_decrement_and_ext": 78,
+      "slot": "C2BC30",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 80,
+      "signed_index_after_decrement_and_ext": 79,
+      "slot": "C2BC34",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 81,
+      "signed_index_after_decrement_and_ext": 80,
+      "slot": "C2BC38",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 82,
+      "signed_index_after_decrement_and_ext": 81,
+      "slot": "C2BC3C",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 83,
+      "signed_index_after_decrement_and_ext": 82,
+      "slot": "C2BC40",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 84,
+      "signed_index_after_decrement_and_ext": 83,
+      "slot": "C2BC44",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 85,
+      "signed_index_after_decrement_and_ext": 84,
+      "slot": "C2BC48",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 86,
+      "signed_index_after_decrement_and_ext": 85,
+      "slot": "C2BC4C",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 87,
+      "signed_index_after_decrement_and_ext": 86,
+      "slot": "C2BC50",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 88,
+      "signed_index_after_decrement_and_ext": 87,
+      "slot": "C2BC54",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 89,
+      "signed_index_after_decrement_and_ext": 88,
+      "slot": "C2BC58",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 90,
+      "signed_index_after_decrement_and_ext": 89,
+      "slot": "C2BC5C",
+      "original_longword": "00280002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 91,
+      "signed_index_after_decrement_and_ext": 90,
+      "slot": "C2BC60",
+      "original_longword": "00280002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 92,
+      "signed_index_after_decrement_and_ext": 91,
+      "slot": "C2BC64",
+      "original_longword": "00280002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 93,
+      "signed_index_after_decrement_and_ext": 92,
+      "slot": "C2BC68",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 94,
+      "signed_index_after_decrement_and_ext": 93,
+      "slot": "C2BC6C",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 95,
+      "signed_index_after_decrement_and_ext": 94,
+      "slot": "C2BC70",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 96,
+      "signed_index_after_decrement_and_ext": 95,
+      "slot": "C2BC74",
+      "original_longword": "00280005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 97,
+      "signed_index_after_decrement_and_ext": 96,
+      "slot": "C2BC78",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 98,
+      "signed_index_after_decrement_and_ext": 97,
+      "slot": "C2BC7C",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 99,
+      "signed_index_after_decrement_and_ext": 98,
+      "slot": "C2BC80",
+      "original_longword": "00500002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 100,
+      "signed_index_after_decrement_and_ext": 99,
+      "slot": "C2BC84",
+      "original_longword": "00500002",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 101,
+      "signed_index_after_decrement_and_ext": 100,
+      "slot": "C2BC88",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 102,
+      "signed_index_after_decrement_and_ext": 101,
+      "slot": "C2BC8C",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 103,
+      "signed_index_after_decrement_and_ext": 102,
+      "slot": "C2BC90",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 104,
+      "signed_index_after_decrement_and_ext": 103,
+      "slot": "C2BC94",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 105,
+      "signed_index_after_decrement_and_ext": 104,
+      "slot": "C2BC98",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 106,
+      "signed_index_after_decrement_and_ext": 105,
+      "slot": "C2BC9C",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 107,
+      "signed_index_after_decrement_and_ext": 106,
+      "slot": "C2BCA0",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 108,
+      "signed_index_after_decrement_and_ext": 107,
+      "slot": "C2BCA4",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 109,
+      "signed_index_after_decrement_and_ext": 108,
+      "slot": "C2BCA8",
+      "original_longword": "00500009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 110,
+      "signed_index_after_decrement_and_ext": 109,
+      "slot": "C2BCAC",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 111,
+      "signed_index_after_decrement_and_ext": 110,
+      "slot": "C2BCB0",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 112,
+      "signed_index_after_decrement_and_ext": 111,
+      "slot": "C2BCB4",
+      "original_longword": "00500005",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 113,
+      "signed_index_after_decrement_and_ext": 112,
+      "slot": "C2BCB8",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 114,
+      "signed_index_after_decrement_and_ext": 113,
+      "slot": "C2BCBC",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 115,
+      "signed_index_after_decrement_and_ext": 114,
+      "slot": "C2BCC0",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 116,
+      "signed_index_after_decrement_and_ext": 115,
+      "slot": "C2BCC4",
+      "original_longword": "00280009",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 117,
+      "signed_index_after_decrement_and_ext": 116,
+      "slot": "C2BCC8",
+      "original_longword": "0C290060",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 118,
+      "signed_index_after_decrement_and_ext": 117,
+      "slot": "C2BCCC",
+      "original_longword": "002B6C08",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 119,
+      "signed_index_after_decrement_and_ext": 118,
+      "slot": "C2BCD0",
+      "original_longword": "00290001",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 120,
+      "signed_index_after_decrement_and_ext": 119,
+      "slot": "C2BCD4",
+      "original_longword": "00656006",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 121,
+      "signed_index_after_decrement_and_ext": 120,
+      "slot": "C2BCD8",
+      "original_longword": "022900FC",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 122,
+      "signed_index_after_decrement_and_ext": 121,
+      "slot": "C2BCDC",
+      "original_longword": "00650C69",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 123,
+      "signed_index_after_decrement_and_ext": 122,
+      "slot": "C2BCE0",
+      "original_longword": "0840006E",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 124,
+      "signed_index_after_decrement_and_ext": 123,
+      "slot": "C2BCE4",
+      "original_longword": "6D000F3A",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 125,
+      "signed_index_after_decrement_and_ext": 124,
+      "slot": "C2BCE8",
+      "original_longword": "137C0024",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 126,
+      "signed_index_after_decrement_and_ext": 125,
+      "slot": "C2BCEC",
+      "original_longword": "0005337C",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 127,
+      "signed_index_after_decrement_and_ext": 126,
+      "slot": "C2BCF0",
+      "original_longword": "003C004C",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 128,
+      "signed_index_after_decrement_and_ext": 127,
+      "slot": "C2BCF4",
+      "original_longword": "60000F2A",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 129,
+      "signed_index_after_decrement_and_ext": -128,
+      "slot": "C2B8F8",
+      "original_longword": "FDFD01FE",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 130,
+      "signed_index_after_decrement_and_ext": -127,
+      "slot": "C2B8FC",
+      "original_longword": "FE02FFFE",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 131,
+      "signed_index_after_decrement_and_ext": -126,
+      "slot": "C2B900",
+      "original_longword": "0500FF03",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 132,
+      "signed_index_after_decrement_and_ext": -125,
+      "slot": "C2B904",
+      "original_longword": "01FF0202",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 133,
+      "signed_index_after_decrement_and_ext": -124,
+      "slot": "C2B908",
+      "original_longword": "FF0180FD",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 134,
+      "signed_index_after_decrement_and_ext": -123,
+      "slot": "C2B90C",
+      "original_longword": "FE01FEFE",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 135,
+      "signed_index_after_decrement_and_ext": -122,
+      "slot": "C2B910",
+      "original_longword": "02FFFF03",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 136,
+      "signed_index_after_decrement_and_ext": -121,
+      "slot": "C2B914",
+      "original_longword": "00FF0401",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 137,
+      "signed_index_after_decrement_and_ext": -120,
+      "slot": "C2B918",
+      "original_longword": "FE0302FE",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 138,
+      "signed_index_after_decrement_and_ext": -119,
+      "slot": "C2B91C",
+      "original_longword": "0180FF01",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 139,
+      "signed_index_after_decrement_and_ext": -118,
+      "slot": "C2B920",
+      "original_longword": "0100FB0B",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 140,
+      "signed_index_after_decrement_and_ext": -117,
+      "slot": "C2B924",
+      "original_longword": "01FC0980",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 141,
+      "signed_index_after_decrement_and_ext": -116,
+      "slot": "C2B928",
+      "original_longword": "4A3900C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 142,
+      "signed_index_after_decrement_and_ext": -115,
+      "slot": "C2B92C",
+      "original_longword": "58576D20",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 143,
+      "signed_index_after_decrement_and_ext": -114,
+      "slot": "C2B930",
+      "original_longword": "4CB90007",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 144,
+      "signed_index_after_decrement_and_ext": -113,
+      "slot": "C2B934",
+      "original_longword": "00C4C592",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 145,
+      "signed_index_after_decrement_and_ext": -112,
+      "slot": "C2B938",
+      "original_longword": "4EB900C2",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 146,
+      "signed_index_after_decrement_and_ext": -111,
+      "slot": "C2B93C",
+      "original_longword": "EC906D10",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 147,
+      "signed_index_after_decrement_and_ext": -110,
+      "slot": "C2B940",
+      "original_longword": "33FC0003",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 148,
+      "signed_index_after_decrement_and_ext": -109,
+      "slot": "C2B944",
+      "original_longword": "00C45954",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 149,
+      "signed_index_after_decrement_and_ext": -108,
+      "slot": "C2B948",
+      "original_longword": "43FAFFD4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 150,
+      "signed_index_after_decrement_and_ext": -107,
+      "slot": "C2B94C",
+      "original_longword": "6000015A",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 151,
+      "signed_index_after_decrement_and_ext": -106,
+      "slot": "C2B950",
+      "original_longword": "4E754CB9",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 152,
+      "signed_index_after_decrement_and_ext": -105,
+      "slot": "C2B954",
+      "original_longword": "000700C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 153,
+      "signed_index_after_decrement_and_ext": -104,
+      "slot": "C2B958",
+      "original_longword": "C5922428",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 154,
+      "signed_index_after_decrement_and_ext": -103,
+      "slot": "C2B95C",
+      "original_longword": "00142828",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 155,
+      "signed_index_after_decrement_and_ext": -102,
+      "slot": "C2B960",
+      "original_longword": "001C4842",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 156,
+      "signed_index_after_decrement_and_ext": -101,
+      "slot": "C2B964",
+      "original_longword": "362EFFFE",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 157,
+      "signed_index_after_decrement_and_ext": -100,
+      "slot": "C2B968",
+      "original_longword": "48444EB9",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 158,
+      "signed_index_after_decrement_and_ext": -99,
+      "slot": "C2B96C",
+      "original_longword": "00C2AFFA",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 159,
+      "signed_index_after_decrement_and_ext": -98,
+      "slot": "C2B970",
+      "original_longword": "4CB90007",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 160,
+      "signed_index_after_decrement_and_ext": -97,
+      "slot": "C2B974",
+      "original_longword": "00C4C592",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 161,
+      "signed_index_after_decrement_and_ext": -96,
+      "slot": "C2B978",
+      "original_longword": "4EB900C2",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 162,
+      "signed_index_after_decrement_and_ext": -95,
+      "slot": "C2B97C",
+      "original_longword": "EC906C08",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 163,
+      "signed_index_after_decrement_and_ext": -94,
+      "slot": "C2B980",
+      "original_longword": "423900C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 164,
+      "signed_index_after_decrement_and_ext": -93,
+      "slot": "C2B984",
+      "original_longword": "58AF60C8",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 165,
+      "signed_index_after_decrement_and_ext": -92,
+      "slot": "C2B988",
+      "original_longword": "2E080487",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 166,
+      "signed_index_after_decrement_and_ext": -91,
+      "slot": "C2B98C",
+      "original_longword": "00C46184",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 167,
+      "signed_index_after_decrement_and_ext": -90,
+      "slot": "C2B990",
+      "original_longword": "BE7900C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 168,
+      "signed_index_after_decrement_and_ext": -89,
+      "slot": "C2B994",
+      "original_longword": "59BA6628",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 169,
+      "signed_index_after_decrement_and_ext": -88,
+      "slot": "C2B998",
+      "original_longword": "4A3900C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 170,
+      "signed_index_after_decrement_and_ext": -87,
+      "slot": "C2B99C",
+      "original_longword": "58AF6D18",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 171,
+      "signed_index_after_decrement_and_ext": -86,
+      "slot": "C2B9A0",
+      "original_longword": "0C400014",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 172,
+      "signed_index_after_decrement_and_ext": -85,
+      "slot": "C2B9A4",
+      "original_longword": "6D1A0C40",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 173,
+      "signed_index_after_decrement_and_ext": -84,
+      "slot": "C2B9A8",
+      "original_longword": "012C6E14",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 174,
+      "signed_index_after_decrement_and_ext": -83,
+      "slot": "C2B9AC",
+      "original_longword": "0C41000E",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 175,
+      "signed_index_after_decrement_and_ext": -82,
+      "slot": "C2B9B0",
+      "original_longword": "6D0E0C41",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 176,
+      "signed_index_after_decrement_and_ext": -81,
+      "slot": "C2B9B4",
+      "original_longword": "00BA6E08",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 177,
+      "signed_index_after_decrement_and_ext": -80,
+      "slot": "C2B9B8",
+      "original_longword": "13FC0001",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 178,
+      "signed_index_after_decrement_and_ext": -79,
+      "slot": "C2B9BC",
+      "original_longword": "00C458AF",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 179,
+      "signed_index_after_decrement_and_ext": -78,
+      "slot": "C2B9C0",
+      "original_longword": "4A3900C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 180,
+      "signed_index_after_decrement_and_ext": -77,
+      "slot": "C2B9C4",
+      "original_longword": "57B56600",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 181,
+      "signed_index_after_decrement_and_ext": -76,
+      "slot": "C2B9C8",
+      "original_longword": "00863E39",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 182,
+      "signed_index_after_decrement_and_ext": -75,
+      "slot": "C2B9CC",
+      "original_longword": "00C458DA",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 183,
+      "signed_index_after_decrement_and_ext": -74,
+      "slot": "C2B9D0",
+      "original_longword": "1C3900C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 184,
+      "signed_index_after_decrement_and_ext": -73,
+      "slot": "C2B9D4",
+      "original_longword": "58576D00",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 185,
+      "signed_index_after_decrement_and_ext": -72,
+      "slot": "C2B9D8",
+      "original_longword": "FF786708",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 186,
+      "signed_index_after_decrement_and_ext": -71,
+      "slot": "C2B9DC",
+      "original_longword": "4886CE46",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 187,
+      "signed_index_after_decrement_and_ext": -70,
+      "slot": "C2B9E0",
+      "original_longword": "6700006C",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 188,
+      "signed_index_after_decrement_and_ext": -69,
+      "slot": "C2B9E4",
+      "original_longword": "4A280071",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 189,
+      "signed_index_after_decrement_and_ext": -68,
+      "slot": "C2B9E8",
+      "original_longword": "6D000064",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 190,
+      "signed_index_after_decrement_and_ext": -67,
+      "slot": "C2B9EC",
+      "original_longword": "7E001E28",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 191,
+      "signed_index_after_decrement_and_ext": -66,
+      "slot": "C2B9F0",
+      "original_longword": "00701C07",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 192,
+      "signed_index_after_decrement_and_ext": -65,
+      "slot": "C2B9F4",
+      "original_longword": "E80E0207",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 193,
+      "signed_index_after_decrement_and_ext": -64,
+      "slot": "C2B9F8",
+      "original_longword": "000F1400",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 194,
+      "signed_index_after_decrement_and_ext": -63,
+      "slot": "C2B9FC",
+      "original_longword": "0202000F",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 195,
+      "signed_index_after_decrement_and_ext": -62,
+      "slot": "C2BA00",
+      "original_longword": "94066C0C",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 196,
+      "signed_index_after_decrement_and_ext": -61,
+      "slot": "C2BA04",
+      "original_longword": "0C0200F8",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 197,
+      "signed_index_after_decrement_and_ext": -60,
+      "slot": "C2BA08",
+      "original_longword": "6E100602",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 198,
+      "signed_index_after_decrement_and_ext": -59,
+      "slot": "C2BA0C",
+      "original_longword": "0010600A",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 199,
+      "signed_index_after_decrement_and_ext": -58,
+      "slot": "C2BA10",
+      "original_longword": "0C020008",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 200,
+      "signed_index_after_decrement_and_ext": -57,
+      "slot": "C2BA14",
+      "original_longword": "6D040402",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 201,
+      "signed_index_after_decrement_and_ext": -56,
+      "slot": "C2BA18",
+      "original_longword": "00104402",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 202,
+      "signed_index_after_decrement_and_ext": -55,
+      "slot": "C2BA1C",
+      "original_longword": "4882D042",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 203,
+      "signed_index_after_decrement_and_ext": -54,
+      "slot": "C2BA20",
+      "original_longword": "16010203",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 204,
+      "signed_index_after_decrement_and_ext": -53,
+      "slot": "C2BA24",
+      "original_longword": "000F9607",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 205,
+      "signed_index_after_decrement_and_ext": -52,
+      "slot": "C2BA28",
+      "original_longword": "6C0C0C03",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 206,
+      "signed_index_after_decrement_and_ext": -51,
+      "slot": "C2BA2C",
+      "original_longword": "00F86E10",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 207,
+      "signed_index_after_decrement_and_ext": -50,
+      "slot": "C2BA30",
+      "original_longword": "06030010",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 208,
+      "signed_index_after_decrement_and_ext": -49,
+      "slot": "C2BA34",
+      "original_longword": "600A0C03",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 209,
+      "signed_index_after_decrement_and_ext": -48,
+      "slot": "C2BA38",
+      "original_longword": "00086D04",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 210,
+      "signed_index_after_decrement_and_ext": -47,
+      "slot": "C2BA3C",
+      "original_longword": "04030010",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 211,
+      "signed_index_after_decrement_and_ext": -46,
+      "slot": "C2BA40",
+      "original_longword": "44034883",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 212,
+      "signed_index_after_decrement_and_ext": -45,
+      "slot": "C2BA44",
+      "original_longword": "D2431828",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 213,
+      "signed_index_after_decrement_and_ext": -44,
+      "slot": "C2BA48",
+      "original_longword": "00716000",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 214,
+      "signed_index_after_decrement_and_ext": -43,
+      "slot": "C2BA4C",
+      "original_longword": "004E3E28",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 215,
+      "signed_index_after_decrement_and_ext": -42,
+      "slot": "C2BA50",
+      "original_longword": "00683C3C",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 216,
+      "signed_index_after_decrement_and_ext": -41,
+      "slot": "C2BA54",
+      "original_longword": "03847800",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 217,
+      "signed_index_after_decrement_and_ext": -40,
+      "slot": "C2BA58",
+      "original_longword": "9E466D14",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 218,
+      "signed_index_after_decrement_and_ext": -39,
+      "slot": "C2BA5C",
+      "original_longword": "3C3C0708",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 219,
+      "signed_index_after_decrement_and_ext": -38,
+      "slot": "C2BA60",
+      "original_longword": "52040C04",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 220,
+      "signed_index_after_decrement_and_ext": -37,
+      "slot": "C2BA64",
+      "original_longword": "000F6E06",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 221,
+      "signed_index_after_decrement_and_ext": -36,
+      "slot": "C2BA68",
+      "original_longword": "9E466CF4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 222,
+      "signed_index_after_decrement_and_ext": -35,
+      "slot": "C2BA6C",
+      "original_longword": "60027800",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 223,
+      "signed_index_after_decrement_and_ext": -34,
+      "slot": "C2BA70",
+      "original_longword": "11440071",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 224,
+      "signed_index_after_decrement_and_ext": -33,
+      "slot": "C2BA74",
+      "original_longword": "3C003E01",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 225,
+      "signed_index_after_decrement_and_ext": -32,
+      "slot": "C2BA78",
+      "original_longword": "0206000F",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 226,
+      "signed_index_after_decrement_and_ext": -31,
+      "slot": "C2BA7C",
+      "original_longword": "0207000F",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 227,
+      "signed_index_after_decrement_and_ext": -30,
+      "slot": "C2BA80",
+      "original_longword": "E9068E06",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 228,
+      "signed_index_after_decrement_and_ext": -29,
+      "slot": "C2BA84",
+      "original_longword": "11470070",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 229,
+      "signed_index_after_decrement_and_ext": -28,
+      "slot": "C2BA88",
+      "original_longword": "4A3900C4",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 230,
+      "signed_index_after_decrement_and_ext": -27,
+      "slot": "C2BA8C",
+      "original_longword": "57B5675E",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 231,
+      "signed_index_after_decrement_and_ext": -26,
+      "slot": "C2BA90",
+      "original_longword": "08390000",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 232,
+      "signed_index_after_decrement_and_ext": -25,
+      "slot": "C2BA94",
+      "original_longword": "00C458DB",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 233,
+      "signed_index_after_decrement_and_ext": -24,
+      "slot": "C2BA98",
+      "original_longword": "67544884",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 234,
+      "signed_index_after_decrement_and_ext": -23,
+      "slot": "C2BA9C",
+      "original_longword": "D84443FA",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 235,
+      "signed_index_after_decrement_and_ext": -22,
+      "slot": "C2BAA0",
+      "original_longword": "FD443A31",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 236,
+      "signed_index_after_decrement_and_ext": -21,
+      "slot": "C2BAA4",
+      "original_longword": "4000D2C5",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 237,
+      "signed_index_after_decrement_and_ext": -20,
+      "slot": "C2BAA8",
+      "original_longword": "1A190C05",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 238,
+      "signed_index_after_decrement_and_ext": -19,
+      "slot": "C2BAAC",
+      "original_longword": "0080673E",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 239,
+      "signed_index_after_decrement_and_ext": -18,
+      "slot": "C2BAB0",
+      "original_longword": "1C191E19",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 240,
+      "signed_index_after_decrement_and_ext": -17,
+      "slot": "C2BAB4",
+      "original_longword": "53074885",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 241,
+      "signed_index_after_decrement_and_ext": -16,
+      "slot": "C2BAB8",
+      "original_longword": "48864887",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 242,
+      "signed_index_after_decrement_and_ext": -15,
+      "slot": "C2BABC",
+      "original_longword": "3F003F01",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 243,
+      "signed_index_after_decrement_and_ext": -14,
+      "slot": "C2BAC0",
+      "original_longword": "34003601",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 244,
+      "signed_index_after_decrement_and_ext": -13,
+      "slot": "C2BAC4",
+      "original_longword": "D2456D20",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 245,
+      "signed_index_after_decrement_and_ext": -12,
+      "slot": "C2BAC8",
+      "original_longword": "0C4100B3",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 246,
+      "signed_index_after_decrement_and_ext": -11,
+      "slot": "C2BACC",
+      "original_longword": "6E1AD645",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 247,
+      "signed_index_after_decrement_and_ext": -10,
+      "slot": "C2BAD0",
+      "original_longword": "D0466D14",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 248,
+      "signed_index_after_decrement_and_ext": -9,
+      "slot": "C2BAD4",
+      "original_longword": "D446D447",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 249,
+      "signed_index_after_decrement_and_ext": -8,
+      "slot": "C2BAD8",
+      "original_longword": "0C42013F",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 250,
+      "signed_index_after_decrement_and_ext": -7,
+      "slot": "C2BADC",
+      "original_longword": "6E0A2F09",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 251,
+      "signed_index_after_decrement_and_ext": -6,
+      "slot": "C2BAE0",
+      "original_longword": "4EB900C2",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 252,
+      "signed_index_after_decrement_and_ext": -5,
+      "slot": "C2BAE4",
+      "original_longword": "FA7E225F",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 253,
+      "signed_index_after_decrement_and_ext": -4,
+      "slot": "C2BAE8",
+      "original_longword": "321F301F",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 254,
+      "signed_index_after_decrement_and_ext": -3,
+      "slot": "C2BAEC",
+      "original_longword": "60BA4E75",
+      "within_declared_forty_pointer_table": false
+    },
+    {
+      "action_byte": 255,
+      "signed_index_after_decrement_and_ext": -2,
+      "slot": "C2BAF0",
+      "original_longword": "000011A8",
+      "within_declared_forty_pointer_table": false
+    }
+  ],
+  "original_source_windows": {
+    "consumer_index": [
+      {
+        "pc": "C2C45E",
+        "instruction": "subq.w  #1, D0",
+        "bytes": "5340"
+      },
+      {
+        "pc": "C2C460",
+        "instruction": "ext.w   D0",
+        "bytes": "4880"
+      },
+      {
+        "pc": "C2C462",
+        "instruction": "add.w   D0, D0",
+        "bytes": "d040"
+      },
+      {
+        "pc": "C2C464",
+        "instruction": "add.w   D0, D0",
+        "bytes": "d040"
+      },
+      {
+        "pc": "C2C466",
+        "instruction": "lea     (-$970,PC), A0; ($c2baf8)",
+        "bytes": "41faf690"
+      },
+      {
+        "pc": "C2C46A",
+        "instruction": "movea.l (A0,D0.w), A0",
+        "bytes": "20700000"
+      },
+      {
+        "pc": "C2C46E",
+        "instruction": "jmp     (A0)",
+        "bytes": "4ed0"
+      }
+    ],
+    "parameter_selection": [
+      {
+        "pc": "C241B4",
+        "instruction": "move.b  ($5,A1), D0",
+        "bytes": "10290005"
+      },
+      {
+        "pc": "C241B8",
+        "instruction": "beq     $c241e4",
+        "bytes": "672a"
+      },
+      {
+        "pc": "C241BA",
+        "instruction": "cmpi.b  #$1, D0",
+        "bytes": "0c000001"
+      },
+      {
+        "pc": "C241BE",
+        "instruction": "beq     $c241e4",
+        "bytes": "6724"
+      },
+      {
+        "pc": "C241C0",
+        "instruction": "cmpi.b  #$6, D0",
+        "bytes": "0c000006"
+      },
+      {
+        "pc": "C241C4",
+        "instruction": "beq     $c242d4",
+        "bytes": "6700010e"
+      },
+      {
+        "pc": "C241C8",
+        "instruction": "cmpi.b  #$8, D0",
+        "bytes": "0c000008"
+      },
+      {
+        "pc": "C241CC",
+        "instruction": "bne     $c241e4",
+        "bytes": "6616"
+      },
+      {
+        "pc": "C241CE",
+        "instruction": "cmpi.b  #$5, $c458a6.l",
+        "bytes": "0c39000500c458a6"
+      },
+      {
+        "pc": "C241D6",
+        "instruction": "bne     $c242d4",
+        "bytes": "660000fc"
+      },
+      {
+        "pc": "C241DA",
+        "instruction": "tst.b   $c457b7.l",
+        "bytes": "4a3900c457b7"
+      },
+      {
+        "pc": "C241E0",
+        "instruction": "beq     $c242d4",
+        "bytes": "670000f2"
+      },
+      {
+        "pc": "C241E4",
+        "instruction": "btst    #$5, ($4,A1)",
+        "bytes": "082900050004"
+      },
+      {
+        "pc": "C241EA",
+        "instruction": "beq     $c242d4",
+        "bytes": "670000e8"
+      },
+      {
+        "pc": "C241EE",
+        "instruction": "lea     $c2bb98.l, A4",
+        "bytes": "49f900c2bb98"
+      },
+      {
+        "pc": "C241F4",
+        "instruction": "move.w  $c458c6.l, D0",
+        "bytes": "303900c458c6"
+      },
+      {
+        "pc": "C241FA",
+        "instruction": "moveq   #$0, D2",
+        "bytes": "7400"
+      },
+      {
+        "pc": "C241FC",
+        "instruction": "cmpi.w  #$300, ($4a,A3)",
+        "bytes": "0c6b0300004a"
+      },
+      {
+        "pc": "C24202",
+        "instruction": "bgt     $c24230",
+        "bytes": "6e2c"
+      },
+      {
+        "pc": "C24204",
+        "instruction": "move.w  ($6c,A1), D1",
+        "bytes": "3229006c"
+      },
+      {
+        "pc": "C24208",
+        "instruction": "sub.w   ($6c,A3), D1",
+        "bytes": "926b006c"
+      },
+      {
+        "pc": "C2420C",
+        "instruction": "bge     $c24212",
+        "bytes": "6c04"
+      },
+      {
+        "pc": "C2420E",
+        "instruction": "neg.w   D1",
+        "bytes": "4441"
+      },
+      {
+        "pc": "C24210",
+        "instruction": "moveq   #$1, D2",
+        "bytes": "7401"
+      },
+      {
+        "pc": "C24212",
+        "instruction": "cmpi.w  #$c0, D1",
+        "bytes": "0c4100c0"
+      },
+      {
+        "pc": "C24216",
+        "instruction": "blt     $c24224",
+        "bytes": "6d0c"
+      },
+      {
+        "pc": "C24218",
+        "instruction": "adda.w  #$20, A4",
+        "bytes": "d8fc0020"
+      },
+      {
+        "pc": "C2421C",
+        "instruction": "tst.b   D2",
+        "bytes": "4a02"
+      },
+      {
+        "pc": "C2421E",
+        "instruction": "bne     $c24224",
+        "bytes": "6604"
+      },
+      {
+        "pc": "C24220",
+        "instruction": "adda.w  #$20, A4",
+        "bytes": "d8fc0020"
+      },
+      {
+        "pc": "C24224",
+        "instruction": "andi.w  #$8, D0",
+        "bytes": "02400008"
+      },
+      {
+        "pc": "C24228",
+        "instruction": "bra     $c24290",
+        "bytes": "6066"
+      },
+      {
+        "pc": "C2422A",
+        "instruction": "adda.w  #$10, A4",
+        "bytes": "d8fc0010"
+      },
+      {
+        "pc": "C2422E",
+        "instruction": "bra     $c24290",
+        "bytes": "6060"
+      },
+      {
+        "pc": "C24230",
+        "instruction": "adda.w  #$60, A4",
+        "bytes": "d8fc0060"
+      },
+      {
+        "pc": "C24234",
+        "instruction": "cmpi.w  #$c00, ($4a,A3)",
+        "bytes": "0c6b0c00004a"
+      },
+      {
+        "pc": "C2423A",
+        "instruction": "ble     $c2424e",
+        "bytes": "6f12"
+      },
+      {
+        "pc": "C2423C",
+        "instruction": "adda.w  #$60, A4",
+        "bytes": "d8fc0060"
+      },
+      {
+        "pc": "C24240",
+        "instruction": "cmpi.w  #$1e00, ($4a,A3)",
+        "bytes": "0c6b1e00004a"
+      },
+      {
+        "pc": "C24246",
+        "instruction": "ble     $c2424e",
+        "bytes": "6f06"
+      },
+      {
+        "pc": "C24248",
+        "instruction": "adda.w  #$60, A4",
+        "bytes": "d8fc0060"
+      },
+      {
+        "pc": "C2424C",
+        "instruction": "bra     $c24290",
+        "bytes": "6042"
+      },
+      {
+        "pc": "C2424E",
+        "instruction": "move.w  ($6c,A1), D1",
+        "bytes": "3229006c"
+      },
+      {
+        "pc": "C24252",
+        "instruction": "sub.w   ($6c,A3), D1",
+        "bytes": "926b006c"
+      },
+      {
+        "pc": "C24256",
+        "instruction": "bge     $c2425c",
+        "bytes": "6c04"
+      },
+      {
+        "pc": "C24258",
+        "instruction": "neg.w   D1",
+        "bytes": "4441"
+      },
+      {
+        "pc": "C2425A",
+        "instruction": "moveq   #$1, D2",
+        "bytes": "7401"
+      },
+      {
+        "pc": "C2425C",
+        "instruction": "cmpi.w  #$c0, D1",
+        "bytes": "0c4100c0"
+      },
+      {
+        "pc": "C24260",
+        "instruction": "blt     $c2426e",
+        "bytes": "6d0c"
+      },
+      {
+        "pc": "C24262",
+        "instruction": "adda.w  #$20, A4",
+        "bytes": "d8fc0020"
+      },
+      {
+        "pc": "C24266",
+        "instruction": "tst.b   D2",
+        "bytes": "4a02"
+      },
+      {
+        "pc": "C24268",
+        "instruction": "bne     $c2426e",
+        "bytes": "6604"
+      },
+      {
+        "pc": "C2426A",
+        "instruction": "adda.w  #$20, A4",
+        "bytes": "d8fc0020"
+      },
+      {
+        "pc": "C2426E",
+        "instruction": "move.w  $c459c0.l, D0",
+        "bytes": "303900c459c0"
+      },
+      {
+        "pc": "C24274",
+        "instruction": "blt     $c24290",
+        "bytes": "6d1a"
+      },
+      {
+        "pc": "C24276",
+        "instruction": "cmp.w   $c459b6.l, D0",
+        "bytes": "b07900c459b6"
+      },
+      {
+        "pc": "C2427C",
+        "instruction": "bne     $c24290",
+        "bytes": "6612"
+      },
+      {
+        "pc": "C2427E",
+        "instruction": "tst.b   $c457b7.l",
+        "bytes": "4a3900c457b7"
+      },
+      {
+        "pc": "C24284",
+        "instruction": "beq     $c24290",
+        "bytes": "670a"
+      },
+      {
+        "pc": "C24286",
+        "instruction": "clr.b   $c457b7.l",
+        "bytes": "423900c457b7"
+      },
+      {
+        "pc": "C2428C",
+        "instruction": "adda.w  #$10, A4",
+        "bytes": "d8fc0010"
+      },
+      {
+        "pc": "C24290",
+        "instruction": "move.b  $c458a7.l, D1",
+        "bytes": "123900c458a7"
+      },
+      {
+        "pc": "C24296",
+        "instruction": "ext.w   D1",
+        "bytes": "4881"
+      },
+      {
+        "pc": "C24298",
+        "instruction": "cmpi.w  #$3, D1",
+        "bytes": "0c410003"
+      },
+      {
+        "pc": "C2429C",
+        "instruction": "ble     $c242a0",
+        "bytes": "6f02"
+      },
+      {
+        "pc": "C2429E",
+        "instruction": "moveq   #$3, D1",
+        "bytes": "7203"
+      },
+      {
+        "pc": "C242A0",
+        "instruction": "add.w   D1, D1",
+        "bytes": "d241"
+      },
+      {
+        "pc": "C242A2",
+        "instruction": "add.w   D1, D1",
+        "bytes": "d241"
+      },
+      {
+        "pc": "C242A4",
+        "instruction": "move.w  (A4,D1.w), ($4c,A1)",
+        "bytes": "33741000004c"
+      },
+      {
+        "pc": "C242AA",
+        "instruction": "move.w  ($2,A4,D1.w), D0",
+        "bytes": "30341002"
+      },
+      {
+        "pc": "C242AE",
+        "instruction": "cmpi.b  #$8, ($5,A1)",
+        "bytes": "0c2900080005"
+      },
+      {
+        "pc": "C242B4",
+        "instruction": "bne     $c242d0",
+        "bytes": "661a"
+      },
+      {
+        "pc": "C242B6",
+        "instruction": "btst    #$3, ($1,A1)",
+        "bytes": "082900030001"
+      },
+      {
+        "pc": "C242BC",
+        "instruction": "beq     $c242d0",
+        "bytes": "6712"
+      },
+      {
+        "pc": "C242BE",
+        "instruction": "bclr    #$3, ($1,A1)",
+        "bytes": "08a900030001"
+      },
+      {
+        "pc": "C242C4",
+        "instruction": "addq.b  #1, $c458a9.l",
+        "bytes": "523900c458a9"
+      },
+      {
+        "pc": "C242CA",
+        "instruction": "addq.b  #1, $c458aa.l",
+        "bytes": "523900c458aa"
+      },
+      {
+        "pc": "C242D0",
+        "instruction": "move.b  D0, ($5,A1)",
+        "bytes": "13400005"
+      }
+    ],
+    "negative_stream_publication": [
+      {
+        "pc": "C2354C",
+        "instruction": "tst.w   $c4fda2.l",
+        "bytes": "4a7900c4fda2"
+      },
+      {
+        "pc": "C23552",
+        "instruction": "beq     $c23564",
+        "bytes": "6710"
+      },
+      {
+        "pc": "C23554",
+        "instruction": "tst.b   ($5,A1)",
+        "bytes": "4a290005"
+      },
+      {
+        "pc": "C23558",
+        "instruction": "bne     $c2354a",
+        "bytes": "66f0"
+      },
+      {
+        "pc": "C2355A",
+        "instruction": "andi.b  #$c3, ($65,A1)",
+        "bytes": "022900c30065"
+      },
+      {
+        "pc": "C23560",
+        "instruction": "bra     $c2349c",
+        "bytes": "6000ff3a"
+      },
+      {
+        "pc": "C23564",
+        "instruction": "bclr    #$3, ($2,A1)",
+        "bytes": "08a900030002"
+      },
+      {
+        "pc": "C2356A",
+        "instruction": "move.b  D0, ($5,A1)",
+        "bytes": "13400005"
+      },
+      {
+        "pc": "C2356E",
+        "instruction": "move.w  #$1, $c4fda2.l",
+        "bytes": "33fc000100c4fda2"
+      },
+      {
+        "pc": "C23576",
+        "instruction": "rts",
+        "bytes": "4e75"
+      }
+    ],
+    "saved_state_read": [
+      {
+        "pc": "C08EB8",
+        "instruction": "movea.l $c1ab74.l, A0",
+        "bytes": "207900c1ab74"
+      },
+      {
+        "pc": "C08EBE",
+        "instruction": "move.w  ($2,A0), D0",
+        "bytes": "30280002"
+      },
+      {
+        "pc": "C08EC2",
+        "instruction": "move.b  D0, $c458a7.l",
+        "bytes": "13c000c458a7"
+      },
+      {
+        "pc": "C08EC8",
+        "instruction": "move.b  D0, $c458a8.l",
+        "bytes": "13c000c458a8"
+      },
+      {
+        "pc": "C08ECE",
+        "instruction": "rts",
+        "bytes": "4e75"
+      }
+    ],
+    "saved_state_write": [
+      {
+        "pc": "C08ED0",
+        "instruction": "movea.l $c1ab74.l, A0",
+        "bytes": "207900c1ab74"
+      },
+      {
+        "pc": "C08ED6",
+        "instruction": "move.b  $c458a7.l, D0",
+        "bytes": "103900c458a7"
+      },
+      {
+        "pc": "C08EDC",
+        "instruction": "ext.w   D0",
+        "bytes": "4880"
+      },
+      {
+        "pc": "C08EDE",
+        "instruction": "move.w  D0, ($2,A0)",
+        "bytes": "31400002"
+      },
+      {
+        "pc": "C08EE2",
+        "instruction": "rts",
+        "bytes": "4e75"
+      }
+    ],
+    "restore_scene_limit": [
+      {
+        "pc": "C08F2E",
+        "instruction": "move.b  $c458a8.l, $c458a7.l",
+        "bytes": "13f900c458a800c458a7"
+      }
+    ],
+    "clear_scene_limit": [
+      {
+        "pc": "C0FAA4",
+        "instruction": "move.b  $c458a7.l, $c458a8.l",
+        "bytes": "13f900c458a700c458a8"
+      },
+      {
+        "pc": "C0FAAE",
+        "instruction": "moveq   #$0, D0",
+        "bytes": "7000"
+      },
+      {
+        "pc": "C0FAB0",
+        "instruction": "move.b  D0, $c458a7.l",
+        "bytes": "13c000c458a7"
+      }
+    ],
+    "increment_scene_limit": [
+      {
+        "pc": "C113A6",
+        "instruction": "move.b  $c458a7.l, D0",
+        "bytes": "103900c458a7"
+      },
+      {
+        "pc": "C113AC",
+        "instruction": "addq.b  #1, D0",
+        "bytes": "5200"
+      },
+      {
+        "pc": "C113AE",
+        "instruction": "move.b  D0, $c458a7.l",
+        "bytes": "13c000c458a7"
+      },
+      {
+        "pc": "C113B4",
+        "instruction": "cmpi.b  #$3, D0",
+        "bytes": "0c000003"
+      },
+      {
+        "pc": "C113B8",
+        "instruction": "ble     $c113c2",
+        "bytes": "6f08"
+      },
+      {
+        "pc": "C113BA",
+        "instruction": "move.b  #$3, $c458a7.l",
+        "bytes": "13fc000300c458a7"
+      }
+    ]
+  },
+  "facts": [
+    "The original consumer has no general bounds check; SUBQ.W precedes EXT.W of the low byte.",
+    "Forty contiguous pointers end at C2BB98. The following 76 countdown/action pairs end at C2BCC8.",
+    "Eight original negative stream descriptors publish actions 35,11,39,14,17,20,23,26.",
+    "Parameter selection sign-extends C458A7, clamps its signed upper bound to 3, and supplies no lower clamp.",
+    "For nonnegative bounded scene-limit inputs, parameter actions are 2,5,9."
+  ],
+  "open": [
+    "Reconcile every actor-record bulk copy and overlapping word/long store with the action byte.",
+    "Reconcile allocation, saved-state load/write and all C458A7/C458A8 producers before asserting nonnegative scene limits.",
+    "Complete C2C392 native parent, including every valid computed arm, actual children and original non-returning/fault behavior."
+  ],
+  "implementation": false,
+  "runtime_guard_added": false,
+  "whole_parent_complete": false
+}

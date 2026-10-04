@@ -82,13 +82,51 @@ translated coverage to 537/624 and source-timed entries to 531; C200F6
 retains aggregate tail timing, with its resumable boundaries in C20100.
 Six complete control/readout owners raise translated coverage to 539/624
 and source-timed entries to 537.
-Seventy-three original source-only callable entries are additionally recreated,
+Six complete steering owners retain translated coverage, raise source-only
+coverage to seventy-five and source-timed entries to 543.
+Seventy-five original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- Six complete steering owners retain 539 translated entries and add two
+  source-only peers: 75 source-only, 614 rows, 543 source-timed (468 translated
+  plus 75 source-only). Four older adapters are replaced. Scope is 72 unique
+  /34 shared instructions, zero child sites, original BSR callers and two
+  sealed oracle arrays. All 98,304 whole calls pass; union coverage is 72/72.
+  Original zero/minus-one D1 prefixes prove which mask arm each pitch entry
+  skips for all 256 control bytes; the counterpart covers each skipped arm.
+  Dispatch passes 18,432 calls; each mode has 6,144 hardware-free source
+  calls and zero Custom packets. C2CBBC's initial ON range failure is retained;
+  registration now includes its backward shared C2CB86 body. Shared runtime
+  is unchanged. Four existing owners pass normal C: 162 shadow /162 sandbox.
+  Two source-only peers are uncalled with independent whole proofs; the
+  unchanged generic rejection C2CB82: no completed comparisons is retained.
+  Full 614-row gate passes 571,427/458,087, zero mismatches, exact seals and
+  poison frames. All 36,236 isolated live frames/seals match. Local DMA passes
+  72/2,304; fresh combined DMA passes 30,239/967,648, independently previous
+  30,167 plus 72 with zero overlap. All 40 older generator outputs, shared
+  core/observers, protected files, previous control/readout code and unrelated
+  batch48 exports are unchanged. GNU/MSVC Release pass; build/ is 2.041 GiB.
+  Family exact through
+  600; ALL remains 424/34,144. See analysis/routines/native_c_record_steering.md
+  and analysis/figures/native_record_steering_checkpoint.json.
+  Next complete C0D74A/C0D752 enclosing display-record owners and five pair
+  writers C0DAA0/C0DAD0/C0DAD4/C0DADC/C0DAE6. All 259 unique /229 shared
+  source instructions are read; each parent has 57 original child sites.
+  Use actual C2E758 child results and preserve LINK/dead stack bytes/shared
+  frame exits; remove the old corner register replay once these owners pass.
+  No next production implementation exists. C2C392 producer reconciliation
+  remains open: eight original stream descriptors publish actions 35,11,39,
+  14,17,20,23,26; bounded nonnegative C458A7 parameter selections publish
+  2,5,9. Record copies and saved-state inputs still need tracing. Forty table
+  pointers do not independently establish all producer bounds.
+  Other larger parents, older partial adapters, C1612C graphics-wait
+  integration and full original cold/indirect/callback reconciliation remain
+  game work. Goal is not complete. Kickstart services and timing are deferred.
 
 - Six complete control/readout owners raise registration to 539 translated
   plus 73 source-only entries: 612 rows, 537 source-timed (464 translated
@@ -114,8 +152,8 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   unchanged. GNU/MSVC Release pass; build/ is 2.015 GiB. Family exact through
   600; ALL remains 424/34,144. See analysis/routines/native_c_control_readouts.md
   and analysis/figures/native_control_readouts_checkpoint.json.
-  Next investigate complete C2C392 action ownership, four steering upgrades
-  and two source-only pitch peers C2CB82/C2CBBC. Forty contiguous original
+  Those four steering upgrades and two source-only pitch peers are now
+  complete above. C2C392 remains open. Forty contiguous original
   pointer slots are read; all action-byte producers and the computed target
   domain remain unresolved. The instruction decrements before sign-extending
   the byte; preserve that order when auditing selector wrap. C241EE selects

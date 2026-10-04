@@ -1,0 +1,1886 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "3fea7ce3",
+  "new_source_only_owners": [
+    "C2CB82",
+    "C2CBBC"
+  ],
+  "upgraded_registered_owners": [
+    "C2CA26",
+    "C2CA92",
+    "C2CAA0",
+    "C2CB86"
+  ],
+  "registered_translated_entries": 539,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 75,
+  "registered_total_entries": 614,
+  "registered_timing_entries": 543,
+  "registered_translated_timing_entries": 468,
+  "registered_source_only_timing_entries": 75,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/record_steering_source_scope.json",
+      "sha256": "0e6707b339e40b03eba8b702de63bc49ad3f8cfd7640d8d00d4d9ffbcb0fa86b"
+    },
+    "unique_instructions": 72,
+    "shared_within_batch": 34,
+    "child_sites": 0,
+    "actual_original_static_incoming": {
+      "C2CA26": [
+        {
+          "pc": "C2C9EA",
+          "return_pc": "C2C9EE",
+          "instruction": "bsr     $c2ca26",
+          "bytes": "6100003a"
+        }
+      ],
+      "C2CA92": [
+        {
+          "pc": "C2C260",
+          "return_pc": "C2C264",
+          "instruction": "bsr     $c2ca92",
+          "bytes": "61000830"
+        }
+      ],
+      "C2CAA0": [
+        {
+          "pc": "C2C268",
+          "return_pc": "C2C26C",
+          "instruction": "bsr     $c2caa0",
+          "bytes": "61000836"
+        }
+      ],
+      "C2CB86": [
+        {
+          "pc": "C2CB5E",
+          "return_pc": "C2CB62",
+          "instruction": "bsr     $c2cb86",
+          "bytes": "61000026"
+        }
+      ],
+      "C2CB82": [
+        {
+          "pc": "C2BFC2",
+          "return_pc": "C2BFC6",
+          "instruction": "bsr     $c2cb82",
+          "bytes": "61000bbe"
+        }
+      ],
+      "C2CBBC": [
+        {
+          "pc": "C2BD32",
+          "return_pc": "C2BD36",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000e88"
+        },
+        {
+          "pc": "C2BD3C",
+          "return_pc": "C2BD40",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000e7e"
+        },
+        {
+          "pc": "C2BE48",
+          "return_pc": "C2BE4C",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000d72"
+        },
+        {
+          "pc": "C2BF3A",
+          "return_pc": "C2BF3E",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000c80"
+        },
+        {
+          "pc": "C2C0BE",
+          "return_pc": "C2C0C2",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000afc"
+        },
+        {
+          "pc": "C2C0C8",
+          "return_pc": "C2C0CC",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000af2"
+        },
+        {
+          "pc": "C2C14E",
+          "return_pc": "C2C152",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000a6c"
+        },
+        {
+          "pc": "C2C158",
+          "return_pc": "C2C15C",
+          "instruction": "bsr     $c2cbbc",
+          "bytes": "61000a62"
+        }
+      ]
+    },
+    "sealed_oracle_ownership_arrays": 2,
+    "source_only_prefixes": {
+      "C2CB82": [
+        {
+          "pc": "C2CB82",
+          "length": 2,
+          "bytes": "72ff",
+          "opcode": "72FF",
+          "instruction": "moveq   #-$1, D1"
+        },
+        {
+          "pc": "C2CB84",
+          "length": 2,
+          "bytes": "6002",
+          "opcode": "6002",
+          "instruction": "bra     $c2cb88"
+        }
+      ],
+      "C2CBBC": [
+        {
+          "pc": "C2CBBC",
+          "length": 2,
+          "bytes": "60c8",
+          "opcode": "60C8",
+          "instruction": "bra     $c2cb86"
+        }
+      ]
+    }
+  },
+  "whole_entry_completed_calls": 98304,
+  "whole_union_pcs": 72,
+  "fixture_coverage": [
+    {
+      "owner": "C2CA26",
+      "completed_calls": 16384,
+      "owner_pcs": 48,
+      "observed_owner_pcs": 48,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_whole_C2CA26.log",
+        "sha256": "b34caee6a8ef8c51f1162eeb89d86c46cbc2634936a333c338280fc8f9134ecf"
+      }
+    },
+    {
+      "owner": "C2CA92",
+      "completed_calls": 16384,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_whole_C2CA92.log",
+        "sha256": "1c4f7bee0cb6840216abddbdb6b6fc72e078626762b5efaefe7ddf0231f75416"
+      }
+    },
+    {
+      "owner": "C2CAA0",
+      "completed_calls": 16384,
+      "owner_pcs": 6,
+      "observed_owner_pcs": 6,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_whole_C2CAA0.log",
+        "sha256": "11361b9a4d1c266ab65a3052ecb946b21a0da3be5ca9b12335ec95dfc1c266a9"
+      }
+    },
+    {
+      "owner": "C2CB86",
+      "completed_calls": 16384,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 19,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_whole_C2CB86.log",
+        "sha256": "aa645faa0f472c0235eee192b149801ed63857dae741b797ac22d413d9105d3a"
+      }
+    },
+    {
+      "owner": "C2CB82",
+      "completed_calls": 16384,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [
+        "C2CBB0"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_whole_C2CB82.log",
+        "sha256": "ea6c1bd2d27ccf7b3015d0044e5c83d7f2b942c061161998f29c36eaab73c1ff"
+      }
+    },
+    {
+      "owner": "C2CBBC",
+      "completed_calls": 16384,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 20,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_whole_C2CBBC.log",
+        "sha256": "f77bb72528f2ff92dc2e268f6ddae9de4257982e844c6b6953278b013f8b0e3f"
+      }
+    }
+  ],
+  "unreachable_per_owner": {
+    "C2CB86": [
+      "C2CBAA",
+      "C2CBAE"
+    ],
+    "C2CBBC": [
+      "C2CBAA",
+      "C2CBAE"
+    ],
+    "C2CB82": [
+      "C2CBB0"
+    ]
+  },
+  "mask_branch_evidence": {
+    "exhaustive_control_bytes": 256,
+    "source_guard": [
+      {
+        "pc": "C2CB82",
+        "length": 2,
+        "bytes": "72ff",
+        "opcode": "72FF",
+        "instruction": "moveq   #-$1, D1"
+      },
+      {
+        "pc": "C2CB86",
+        "length": 2,
+        "bytes": "7200",
+        "opcode": "7200",
+        "instruction": "moveq   #$0, D1"
+      },
+      {
+        "pc": "C2CBA2",
+        "length": 4,
+        "bytes": "12290065",
+        "opcode": "1229",
+        "instruction": "move.b  ($65,A1), D1"
+      },
+      {
+        "pc": "C2CBA6",
+        "length": 2,
+        "bytes": "4a41",
+        "opcode": "4A41",
+        "instruction": "tst.w   D1"
+      },
+      {
+        "pc": "C2CBA8",
+        "length": 2,
+        "bytes": "6c06",
+        "opcode": "6C06",
+        "instruction": "bge     $c2cbb0"
+      },
+      {
+        "pc": "C2CBAA",
+        "length": 4,
+        "bytes": "020100cf",
+        "opcode": "0201",
+        "instruction": "andi.b  #$cf, D1"
+      },
+      {
+        "pc": "C2CBAE",
+        "length": 2,
+        "bytes": "6004",
+        "opcode": "6004",
+        "instruction": "bra     $c2cbb4"
+      },
+      {
+        "pc": "C2CBB0",
+        "length": 4,
+        "bytes": "02010003",
+        "opcode": "0201",
+        "instruction": "andi.b  #$3, D1"
+      },
+      {
+        "pc": "C2CBBC",
+        "length": 2,
+        "bytes": "60c8",
+        "opcode": "60C8",
+        "instruction": "bra     $c2cb86"
+      }
+    ],
+    "reason": "Original MOVEQ sets D1 to zero or minus one before replacing its low byte. All 256 controls retain a nonnegative or negative low word respectively. Each skipped mask arm is covered by the other original owner."
+  },
+  "actual_dispatch_completed_calls": 18432,
+  "dispatch_fixtures": [
+    {
+      "owner": "C2CA26",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 48,
+      "observed_owner_pcs": 19,
+      "unobserved_owner_pcs": [
+        "C2CA34",
+        "C2CA36",
+        "C2CA38",
+        "C2CA3A",
+        "C2CA3E",
+        "C2CA40",
+        "C2CA44",
+        "C2CA46",
+        "C2CA4A",
+        "C2CA4C",
+        "C2CA50",
+        "C2CA54",
+        "C2CA58",
+        "C2CA5A",
+        "C2CA5E",
+        "C2CA60",
+        "C2CA64",
+        "C2CA66",
+        "C2CA6A",
+        "C2CA6C",
+        "C2CA70",
+        "C2CA7A",
+        "C2CA7E",
+        "C2CA82",
+        "C2CA84",
+        "C2CA88",
+        "C2CA8A",
+        "C2CA8C",
+        "C2CA90"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CA26_on.log",
+        "sha256": "2bd1d155a5903bc039cacde4c3419285f1df06a50eb3a67ff57e8ebd4c3ddcd1"
+      }
+    },
+    {
+      "owner": "C2CA26",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 48,
+      "observed_owner_pcs": 19,
+      "unobserved_owner_pcs": [
+        "C2CA34",
+        "C2CA36",
+        "C2CA38",
+        "C2CA3A",
+        "C2CA3E",
+        "C2CA40",
+        "C2CA44",
+        "C2CA46",
+        "C2CA4A",
+        "C2CA4C",
+        "C2CA50",
+        "C2CA54",
+        "C2CA58",
+        "C2CA5A",
+        "C2CA5E",
+        "C2CA60",
+        "C2CA64",
+        "C2CA66",
+        "C2CA6A",
+        "C2CA6C",
+        "C2CA70",
+        "C2CA7A",
+        "C2CA7E",
+        "C2CA82",
+        "C2CA84",
+        "C2CA88",
+        "C2CA8A",
+        "C2CA8C",
+        "C2CA90"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CA26_shadow.log",
+        "sha256": "2bd1d155a5903bc039cacde4c3419285f1df06a50eb3a67ff57e8ebd4c3ddcd1"
+      }
+    },
+    {
+      "owner": "C2CA26",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 48,
+      "observed_owner_pcs": 19,
+      "unobserved_owner_pcs": [
+        "C2CA34",
+        "C2CA36",
+        "C2CA38",
+        "C2CA3A",
+        "C2CA3E",
+        "C2CA40",
+        "C2CA44",
+        "C2CA46",
+        "C2CA4A",
+        "C2CA4C",
+        "C2CA50",
+        "C2CA54",
+        "C2CA58",
+        "C2CA5A",
+        "C2CA5E",
+        "C2CA60",
+        "C2CA64",
+        "C2CA66",
+        "C2CA6A",
+        "C2CA6C",
+        "C2CA70",
+        "C2CA7A",
+        "C2CA7E",
+        "C2CA82",
+        "C2CA84",
+        "C2CA88",
+        "C2CA8A",
+        "C2CA8C",
+        "C2CA90"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CA26_sandbox.log",
+        "sha256": "2bd1d155a5903bc039cacde4c3419285f1df06a50eb3a67ff57e8ebd4c3ddcd1"
+      }
+    },
+    {
+      "owner": "C2CA92",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CA92_on.log",
+        "sha256": "f2051bfde306c330238199ee14853b929e47c38908c5397b66c652e26049b69e"
+      }
+    },
+    {
+      "owner": "C2CA92",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CA92_shadow.log",
+        "sha256": "f2051bfde306c330238199ee14853b929e47c38908c5397b66c652e26049b69e"
+      }
+    },
+    {
+      "owner": "C2CA92",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 13,
+      "observed_owner_pcs": 13,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CA92_sandbox.log",
+        "sha256": "f2051bfde306c330238199ee14853b929e47c38908c5397b66c652e26049b69e"
+      }
+    },
+    {
+      "owner": "C2CAA0",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 6,
+      "observed_owner_pcs": 6,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CAA0_on.log",
+        "sha256": "1f827bf44501238ab42336a8e5807b0266d5bf3ebdccdf2b04ac6793fc9691fb"
+      }
+    },
+    {
+      "owner": "C2CAA0",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 6,
+      "observed_owner_pcs": 6,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CAA0_shadow.log",
+        "sha256": "1f827bf44501238ab42336a8e5807b0266d5bf3ebdccdf2b04ac6793fc9691fb"
+      }
+    },
+    {
+      "owner": "C2CAA0",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 6,
+      "observed_owner_pcs": 6,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CAA0_sandbox.log",
+        "sha256": "1f827bf44501238ab42336a8e5807b0266d5bf3ebdccdf2b04ac6793fc9691fb"
+      }
+    },
+    {
+      "owner": "C2CB86",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 19,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CB86_on.log",
+        "sha256": "1534de3e8efad3b14b328c2b23fbabe96a0406d48678e66b522cc83c607772c1"
+      }
+    },
+    {
+      "owner": "C2CB86",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 19,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CB86_shadow.log",
+        "sha256": "1534de3e8efad3b14b328c2b23fbabe96a0406d48678e66b522cc83c607772c1"
+      }
+    },
+    {
+      "owner": "C2CB86",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 19,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CB86_sandbox.log",
+        "sha256": "1534de3e8efad3b14b328c2b23fbabe96a0406d48678e66b522cc83c607772c1"
+      }
+    },
+    {
+      "owner": "C2CB82",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [
+        "C2CBB0"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CB82_on.log",
+        "sha256": "4523f258fd240e2b8bcb68c0d43ab8cd0f1d006afc42c86c345e43bc2d8291ad"
+      }
+    },
+    {
+      "owner": "C2CB82",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [
+        "C2CBB0"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CB82_shadow.log",
+        "sha256": "4523f258fd240e2b8bcb68c0d43ab8cd0f1d006afc42c86c345e43bc2d8291ad"
+      }
+    },
+    {
+      "owner": "C2CB82",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [
+        "C2CBB0"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CB82_sandbox.log",
+        "sha256": "4523f258fd240e2b8bcb68c0d43ab8cd0f1d006afc42c86c345e43bc2d8291ad"
+      }
+    },
+    {
+      "owner": "C2CBBC",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 20,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CBBC_on.log",
+        "sha256": "e63c2017eda86d78b24b8a94132c3a2cdb91acf799824e6b7a598e5ea7747912"
+      }
+    },
+    {
+      "owner": "C2CBBC",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 20,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CBBC_shadow.log",
+        "sha256": "e63c2017eda86d78b24b8a94132c3a2cdb91acf799824e6b7a598e5ea7747912"
+      }
+    },
+    {
+      "owner": "C2CBBC",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 22,
+      "observed_owner_pcs": 20,
+      "unobserved_owner_pcs": [
+        "C2CBAA",
+        "C2CBAE"
+      ],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/record_steering_dispatch_C2CBBC_sandbox.log",
+        "sha256": "e63c2017eda86d78b24b8a94132c3a2cdb91acf799824e6b7a598e5ea7747912"
+      }
+    }
+  ],
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C2CA26": {
+          "calls": 7,
+          "compared": 7,
+          "matched": 7,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CA92": {
+          "calls": 6,
+          "compared": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CAA0": {
+          "calls": 72,
+          "compared": 72,
+          "matched": 72,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CB86": {
+          "calls": 77,
+          "compared": 77,
+          "matched": 77,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CB82": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CBBC": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      },
+      "sandbox": {
+        "C2CA26": {
+          "calls": 7,
+          "compared": 7,
+          "matched": 7,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CA92": {
+          "calls": 6,
+          "compared": 6,
+          "matched": 6,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CAA0": {
+          "calls": 72,
+          "compared": 72,
+          "matched": 72,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CB86": {
+          "calls": 77,
+          "compared": 77,
+          "matched": 77,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CB82": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2CBBC": {
+          "calls": 0,
+          "compared": 0,
+          "matched": 0,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C2CB82",
+            "name": "select_record_pitch_preserving_controls",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CBBC",
+            "name": "select_record_pitch_branch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CAA0",
+            "name": "select_record_neutral",
+            "calls": 72,
+            "compared": 72,
+            "matched": 72,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 62,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA92",
+            "name": "select_record_roll",
+            "calls": 6,
+            "compared": 6,
+            "matched": 6,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 88,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA26",
+            "name": "select_record_turn",
+            "calls": 7,
+            "compared": 7,
+            "matched": 7,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 165,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CB86",
+            "name": "select_record_pitch",
+            "calls": 77,
+            "compared": 77,
+            "matched": 77,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 125,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2CA26_C2CA92_C2CAA0_C2CB86_C2CB82_C2CBBC_demo01_shadow.json",
+          "sha256": "b8fa95b12ddbe631841f3e8724203cfdb34ba4619c2c1cf751d894d3e1e97f18"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C2CB82",
+            "name": "select_record_pitch_preserving_controls",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CBBC",
+            "name": "select_record_pitch_branch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CAA0",
+            "name": "select_record_neutral",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA92",
+            "name": "select_record_roll",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA26",
+            "name": "select_record_turn",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CB86",
+            "name": "select_record_pitch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2CA26_C2CA92_C2CAA0_C2CB86_C2CB82_C2CBBC_qual_carrier_success_shadow.json",
+          "sha256": "23326af80aeee53dcac259f48024255209fc4683ed9b8002ad806f0b3cc0b16a"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C2CB82",
+            "name": "select_record_pitch_preserving_controls",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CBBC",
+            "name": "select_record_pitch_branch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CAA0",
+            "name": "select_record_neutral",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA92",
+            "name": "select_record_roll",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA26",
+            "name": "select_record_turn",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CB86",
+            "name": "select_record_pitch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2CA26_C2CA92_C2CAA0_C2CB86_C2CB82_C2CBBC_qual_fail_crashes_shadow.json",
+          "sha256": "23326af80aeee53dcac259f48024255209fc4683ed9b8002ad806f0b3cc0b16a"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "rows": [
+          {
+            "entry": "C2CB82",
+            "name": "select_record_pitch_preserving_controls",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CBBC",
+            "name": "select_record_pitch_branch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CAA0",
+            "name": "select_record_neutral",
+            "calls": 72,
+            "compared": 72,
+            "matched": 72,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 62,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA92",
+            "name": "select_record_roll",
+            "calls": 6,
+            "compared": 6,
+            "matched": 6,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 88,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA26",
+            "name": "select_record_turn",
+            "calls": 7,
+            "compared": 7,
+            "matched": 7,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 163,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CB86",
+            "name": "select_record_pitch",
+            "calls": 77,
+            "compared": 77,
+            "matched": 77,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 125,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2CA26_C2CA92_C2CAA0_C2CB86_C2CB82_C2CBBC_demo01_sandbox.json",
+          "sha256": "6c12de6d03e4ae3dcfacf8874f0ab631a2e34c9fbbb62eb305a453e9123e314f"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "rows": [
+          {
+            "entry": "C2CB82",
+            "name": "select_record_pitch_preserving_controls",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CBBC",
+            "name": "select_record_pitch_branch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CAA0",
+            "name": "select_record_neutral",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA92",
+            "name": "select_record_roll",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA26",
+            "name": "select_record_turn",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CB86",
+            "name": "select_record_pitch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2CA26_C2CA92_C2CAA0_C2CB86_C2CB82_C2CBBC_qual_carrier_success_sandbox.json",
+          "sha256": "23326af80aeee53dcac259f48024255209fc4683ed9b8002ad806f0b3cc0b16a"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "rows": [
+          {
+            "entry": "C2CB82",
+            "name": "select_record_pitch_preserving_controls",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CBBC",
+            "name": "select_record_pitch_branch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CAA0",
+            "name": "select_record_neutral",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA92",
+            "name": "select_record_roll",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CA26",
+            "name": "select_record_turn",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2CB86",
+            "name": "select_record_pitch",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2CA26_C2CA92_C2CAA0_C2CB86_C2CB82_C2CBBC_qual_fail_crashes_sandbox.json",
+          "sha256": "23326af80aeee53dcac259f48024255209fc4683ed9b8002ad806f0b3cc0b16a"
+        }
+      }
+    ],
+    "shadow_matches": 162,
+    "sandbox_matches": 162,
+    "owners_with_completed_recording_comparisons": [
+      "C2CA26",
+      "C2CA92",
+      "C2CAA0",
+      "C2CB86"
+    ],
+    "uncalled_owners_with_independent_whole_fixtures": [
+      "C2CB82",
+      "C2CBBC"
+    ],
+    "called_without_completed_recording_comparisons": [],
+    "unchanged_checker_rejections_remain_explicit": true
+  },
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "actual_clock_and_busy_reads": true,
+    "shared_machine_observer_unchanged": true,
+    "classification_distinct_from_packet_observation": true
+  },
+  "instruction_dma": {
+    "local_instructions": 72,
+    "local_cases": 2304,
+    "previous_unique_instructions": 30167,
+    "overlap_instructions": 0,
+    "overlap_pcs": [],
+    "combined_unique_instructions": 30239,
+    "combined_cases": 967648,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 40,
+  "generator_compatibility": {
+    "baseline": "3fea7ce3",
+    "unchanged_generator_outputs": [
+      "command_dispatch",
+      "postflight_scheduler",
+      "context_publication",
+      "menu_transition",
+      "menu_setup",
+      "menu_cold",
+      "menu_followup",
+      "menu_outcome",
+      "menu_return",
+      "menu_context_finish",
+      "postflight_completion",
+      "postflight_messages",
+      "postflight_file_callers",
+      "input_device_callbacks",
+      "input_display_setup",
+      "main_loop_timers",
+      "main_loop_control_messages",
+      "record_control_actions",
+      "main_loop_flight_controls",
+      "flight_record_actions",
+      "flight_motion_helpers",
+      "flight_dynamics",
+      "flight_geometry",
+      "flight_markers",
+      "projection_readouts",
+      "hud_stream",
+      "hud_parents",
+      "hud_readout_parents",
+      "hud_text_helpers",
+      "hud_projection_parents",
+      "hud_history_stream",
+      "render_parents",
+      "face_stream_parents",
+      "face_list_parents",
+      "hud_render_parents",
+      "render_leaf_helpers",
+      "render_entry_helpers",
+      "segment_projection",
+      "corner_view",
+      "control_readouts"
+    ],
+    "shared_files_unchanged": [
+      "analysis/data/control_readouts_source_scope.json",
+      "analysis/data/render_entry_helpers_scope_inventory.json",
+      "analysis/data/render_leaf_helpers_scope_inventory.json",
+      "port/game/control_readouts.c",
+      "port/game/control_readouts.h",
+      "port/game/corner_view.c",
+      "port/game/glue/glue.h",
+      "port/game/glue/glue_child_call.c",
+      "port/game/glue/glue_command_dispatch_step.c",
+      "port/game/glue/glue_control_readouts.c",
+      "port/game/glue/glue_control_readouts.h",
+      "port/game/glue/glue_control_readouts_math.h",
+      "port/game/glue/glue_control_readouts_step.c",
+      "port/game/glue/glue_corner_view.c",
+      "port/game/glue/glue_corner_view_step.c",
+      "port/game/glue/glue_render_leaf_helpers_math.h",
+      "port/game/glue/glue_renderer_step_math.h",
+      "port/game/glue/glue_segment_projection.c",
+      "port/game/glue/glue_step.h",
+      "port/game/memory.h",
+      "port/game/segment_projection.c",
+      "port/machine/blitter.c",
+      "port/machine/bus.c",
+      "port/machine/machine.c",
+      "port/native_data_allowlist.txt",
+      "port/recomp/recomp_ports.c",
+      "port/recomp/recomp_runtime.c",
+      "scripts/check_native_build.py",
+      "scripts/native_frame_count.py",
+      "tools/recomp/active_planes_step_oracle.c",
+      "tools/recomp/audit_render_entry_helpers_scope.py",
+      "tools/recomp/audit_render_leaf_helpers_scope.py",
+      "tools/recomp/check_whole_call_glue.py",
+      "tools/recomp/hud_stream_blitter_state.c",
+      "tools/recomp/hud_stream_hardware_log.c",
+      "tools/recomp/hud_stream_machine_variant.py",
+      "tools/recomp/render_entry_helpers_bus_budget.c",
+      "tools/recomp/render_entry_helpers_child_call.c",
+      "tools/recomp/render_entry_helpers_hardware_log.c",
+      "tools/recomp/render_leaf_helpers_bus_budget.c",
+      "tools/recomp/render_leaf_helpers_child_call.c",
+      "tools/recomp/render_leaf_helpers_hardware_log.c",
+      "tools/recomp/structural_write_log.c"
+    ],
+    "comparison": "Before/after generator recipes, preserving exact preexisting committed outputs even when historically stale"
+  },
+  "shared_files_unchanged": [
+    {
+      "path": "analysis/data/control_readouts_source_scope.json",
+      "sha256": "7c3847b7f4267b766fef7f00990fedf0ccdb5b1d5bcf2b3c89ec06add07a324e"
+    },
+    {
+      "path": "analysis/data/render_entry_helpers_scope_inventory.json",
+      "sha256": "7f7d4a0747c69bceb4df1a2533df763ff17d38252084e2d1ca212db7bd09af50"
+    },
+    {
+      "path": "analysis/data/render_leaf_helpers_scope_inventory.json",
+      "sha256": "96d6f04483b40edc0393c09f65383b708bd0717d7c32a88fdbec3865f227f511"
+    },
+    {
+      "path": "port/game/control_readouts.c",
+      "sha256": "66afbb976684e920621b7b38b7e433d4451fd190b3c67bb0c366d08739a71c76"
+    },
+    {
+      "path": "port/game/control_readouts.h",
+      "sha256": "e0fbfefae229b6da58701268db83fb600bc0876ff1e1c62f4c0b303311c030f8"
+    },
+    {
+      "path": "port/game/corner_view.c",
+      "sha256": "06c72f11c68056fff9d6b77a189c9178aa973b03cb898c002a1bb0d790d08eb6"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "port/game/glue/glue_command_dispatch_step.c",
+      "sha256": "f79e324e37a96f2a3871f28a6f754b2660de879757fec534c670b2a71ce7ad70"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts.c",
+      "sha256": "616f83e165cf96114cca8329b360d9278669a7077100c1ac1e693faf77ec00c5"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts.h",
+      "sha256": "fa892ec9e6e8aa23f64de827c7d9d58b3afab5a59a2c38e913cefc7d561e99ed"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts_math.h",
+      "sha256": "135f0b38b2bc57c112c244da834749039accf59b2cef0dc134cdb92ee86d7180"
+    },
+    {
+      "path": "port/game/glue/glue_control_readouts_step.c",
+      "sha256": "f515753aa5e50d302f1d39be729dd58488de7ce747b0890d6f1ccd3cd5d0f04b"
+    },
+    {
+      "path": "port/game/glue/glue_corner_view.c",
+      "sha256": "f9d1cefcafd53f3943708e1bed497b6fc8c53d5f20c1a5772f9f5de4164f93cc"
+    },
+    {
+      "path": "port/game/glue/glue_corner_view_step.c",
+      "sha256": "16a18a7662fc5422ad4c7d936fe292c8ba441d151614e3ccc8c5e99ec848ab7d"
+    },
+    {
+      "path": "port/game/glue/glue_render_leaf_helpers_math.h",
+      "sha256": "a36874936a741e02cda9eab077ef7118cd04e6fa568217e4304c3cb470a169ad"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_segment_projection.c",
+      "sha256": "a71d82d5f9a11a5d8b6aba6b1ce324d2b4e6109f2c003bcd951f1dfb1910a5cd"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/segment_projection.c",
+      "sha256": "f5de44976412e39c4e324b2b0b9380272830a7b7b0e4aa289e91c508e48e2065"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/audit_render_entry_helpers_scope.py",
+      "sha256": "2b61368f8565a38f58a0adf2ea378817e50feb318252286f7651e985d6d6f914"
+    },
+    {
+      "path": "tools/recomp/audit_render_leaf_helpers_scope.py",
+      "sha256": "8c151082a7ab5b4901d177a04c09cf81292ded22c3d608d27e9f5bfb572c3c46"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_bus_budget.c",
+      "sha256": "08d367ed7ac8485c1de820403edf362eeabe3e0b3089b108deca83bde146e30e"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_child_call.c",
+      "sha256": "24144fe3677ed47e7d5da543004ff439f30d385e42a6d60f510f2069fd2989df"
+    },
+    {
+      "path": "tools/recomp/render_entry_helpers_hardware_log.c",
+      "sha256": "9a07710fa426f867b4d5277f14424e0f40d9d1e6073f8f0bde1812eaabc8b1fa"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_bus_budget.c",
+      "sha256": "291b65daf67fc6b2663c06fd9560d4f168da37a5fdc33cb02b16f1a292b4075a"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_child_call.c",
+      "sha256": "570889406cd1f5158564ebd468bbb6991ea883b7b0e811b90b547a233f5ef394"
+    },
+    {
+      "path": "tools/recomp/render_leaf_helpers_hardware_log.c",
+      "sha256": "4de438129c65ce5d75a89296ec2add9d4b45bc52d56219adf97564857fc543b8"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    }
+  ],
+  "remaining_batch48_exports_unchanged": [
+    "glue_C1FB9C"
+  ],
+  "full_gate": {
+    "rows": 614,
+    "recordings": 3,
+    "shadow_matches": 571427,
+    "sandbox_matches": 458087,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 309609,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "8ba59556028fe170e2082f910bfe9b7729d10781d27fe37b45cd477ba74f6eec"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 208647,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "36dd88f07ae19cf3a30ad66f8459fdc3704cda3accbc192648515fbca566d260"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 53171,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "2697f034503577f802d5bee0657d734d5f8cde8ed129a038ac6f350bad03f59b"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 154891,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "3805bbdbc9188fade336e615e6186da66488f0e42d8fbdfe73237820e6aaba6b"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 254965,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "e5e55fa86fd465fd702fde5bc38aaab29ec3fe6c152959978be256de6cdb0468"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 48231,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "99dd78a83b3f890d4850679fa0b741e5ce1893d9979d1702ca0b455158a83c7a"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 424,
+    "all_different_pixels": 34144,
+    "deferred": true
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 2191887146,
+    "build_gib": 2.041
+  },
+  "limits": [
+    "Whole-call union covers 72/72; each pitch mask arm is skipped by one original entry and covered by its counterpart, with all 256 control-byte sign cases proved.",
+    "Four owners have positive normal-C recording comparisons. Two source-only peers are genuinely uncalled and have separate whole proofs; the unchanged generic checker rejection remains explicit.",
+    "Initial standalone dispatch missed C2CBBC backward shared ownership. Registration now includes C2CB86 through C2CBBC; shared runtime remains unchanged. Earlier failed log is retained.",
+    "Older generator outputs are unchanged; historically stale committed command-dispatch output is retained exactly.",
+    "Complete display-record parents, C2C392 producer-domain evidence, other larger parents and older partial adapters, C1612C graphics-wait integration and full original cold/indirect/callback reconciliation remain game work.",
+    "ALL424/34144, Copper fade and Kickstart services remain deferred."
+  ],
+  "next": {
+    "entries": [
+      "C0D74A",
+      "C0D752",
+      "C0DAA0",
+      "C0DAD0",
+      "C0DAD4",
+      "C0DADC",
+      "C0DAE6"
+    ],
+    "scope": "259 unique /229 shared source instructions read, 57 child sites in each enclosing owner. Replace whole display-record parents and pair helpers, preserving actual corner child results and shared frame exits. C2C392 domain reconciliation remains open.",
+    "implementation": false
+  },
+  "separate_action_producer_read": {
+    "path": "analysis/data/action_dispatch_producer_read.json",
+    "sha256": "8286be67093314ec22eec6ddd88b2d153f1cb8919e84b2432d0cefc6324163bd"
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/record_steering.c",
+      "sha256": "bd0ddc96db7ae9cd3a1dfcdbc91634c67a5d60d72f6a10d3f3e62c8f84df929e"
+    },
+    {
+      "path": "port/game/record_steering.h",
+      "sha256": "08e673da9d5cf2c14aa4407dc4c03a0d25b0a89ae23e6f2b94f27d2a364414ec"
+    },
+    {
+      "path": "port/game/glue/glue_batch48.c",
+      "sha256": "a1ddcde816ca2e5511bc6cadc46ed451a98d942d0a3371cdf3e5d8adf57d3277"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "80261ef97e605a49fc8772161b598b25e08720c139946ba342d808939301655f"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "78b88b53b416a0ff889022d6f7823dad34ea55cde3fd83274aa56038a9437f68"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "457bbaad5e997f5b86db7cb9e820c974b636533a1d178b2e4a2fcaf89ef24c82"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "bb9f371f353b3fa01dd654a014371f2c6a237a9174f5f43fc9e237a44e1b5696"
+    },
+    {
+      "path": "port/game/glue/glue_record_steering.c",
+      "sha256": "0ff05f50764e96b43ab0a5724a06d3ce7d1a16acccbcd4fb47e2f1ad2c69381d"
+    },
+    {
+      "path": "port/game/glue/glue_record_steering.h",
+      "sha256": "5fc3db007863eef43612ed87a30d126919fb1f340601fc58ea20343a99c8b2cc"
+    },
+    {
+      "path": "port/game/glue/glue_record_steering_step.c",
+      "sha256": "8a5ea574614073f9b7cb19b39d7b70cd19811158e9fa5f34d91a6f36def425a1"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_record_steering_source.py",
+      "sha256": "fb9514011dd358714e63b85eda96355be5da9e7f688049a366e859ad01cc3856"
+    },
+    {
+      "path": "tools/recomp/check_record_steering.py",
+      "sha256": "2723e1f3ab4e0fd001f47c7c4190859aa0402e45fe497f4461f28cb6d27e8e94"
+    },
+    {
+      "path": "tools/recomp/check_record_steering_dispatch.py",
+      "sha256": "38c819b23a75cd72e6d8a80b12edfd624aa1ca438dd62265d373cf634ca6091b"
+    },
+    {
+      "path": "tools/recomp/record_steering_dispatch_oracle.c",
+      "sha256": "6c7f09526b7e6345b4d70730622e391c2a5cf1b35eba9614228886ee03164d76"
+    },
+    {
+      "path": "tools/recomp/record_steering_fixture.h",
+      "sha256": "a2f09f1a027ce3a46ecc59618d15fa41e02ac4383194ef9e34a44757812662bd"
+    },
+    {
+      "path": "tools/recomp/record_steering_hardware_log.c",
+      "sha256": "d3152e1c8061ed35ccf14dcd5955537dabbee6286fb645cb2093cfc09819fba3"
+    },
+    {
+      "path": "tools/recomp/record_steering_oracle.c",
+      "sha256": "2cf64152e2b34e95c0163f735e5d10d49fb6351043e274429d2b7f3e02eacacf"
+    },
+    {
+      "path": "tools/recomp/verify_record_steering_recordings.py",
+      "sha256": "072da0d2e247f9c4dbd1058b95f8c54a670f61a95ef8bb9a3fbf81d5d2d64d1b"
+    },
+    {
+      "path": "tools/recomp/read_action_dispatch_producers.py",
+      "sha256": "51d9aeda7da6a34823687d6705c2397f31b1b5d1abd134c27f909777c38c7650"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/record_steering_gnu.log",
+      "sha256": "34335e6d9d7aaf17f1c5c7cfacf7ce93e7138cae778da40fa0d08ee386dea33c"
+    },
+    {
+      "path": "build/recomp/record_steering_msvc_config.log",
+      "sha256": "54588cc2d5df345e92fc75420618f1582dc8dcf39c63bb08011e00d679c19394"
+    },
+    {
+      "path": "build/recomp/record_steering_msvc.log",
+      "sha256": "984ca9d8920c3f20b035e768c1ce461ac043d5daa580f73b0c91f983201a7ccb"
+    },
+    {
+      "path": "build/recomp/record_steering_full_gate.log",
+      "sha256": "d68ef6c813ac4c5f1c7cd8f69affc7778c50ece60d08a07e00df734110746058"
+    },
+    {
+      "path": "build/recomp/record_steering_live.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/record_steering_timing.log",
+      "sha256": "994bc93e36c4d8e5a28d3998844702b218134c26b22c6276bf687486fba656dd"
+    },
+    {
+      "path": "build/recomp/record_steering_normal.log",
+      "sha256": "9698158cde77f147bc5d217b7ae790d76da31692df4dc99fe95b3ca3e91187f4"
+    },
+    {
+      "path": "build/recomp/record_steering_dispatch_final.log",
+      "sha256": "423ec249047c39f3c593843b90b195b7506deebdf6769303866915265753f004"
+    },
+    {
+      "path": "build/recomp/record_steering_dma_local.log",
+      "sha256": "2e58aad73c2bcc9a2aa3fb7d916f1e4332acbac9fe6361f28991a17e396d530c"
+    },
+    {
+      "path": "build/recomp/record_steering_dma_union.log",
+      "sha256": "5aa6fce08301cfda4b93a402958fc437970a533354946205426bec3af9b936ca"
+    },
+    {
+      "path": "build/recomp/record_steering_compatibility.log",
+      "sha256": "1b4faf615b0bda700366d06de79ce60ad784916066def69f942ab54b11cb2543"
+    },
+    {
+      "path": "build/recomp/record_steering_whole_full.log",
+      "sha256": "0fb3f2e487fe40f3fdb07b1ee98c3ef38a999739dabe182decd4f804e5fd60f4"
+    }
+  ],
+  "retained_earlier_proofs": [
+    {
+      "path": "build/recomp/record_steering_initial.log",
+      "sha256": "e1c9769e7a4b150706cf1d5b003ebbdbfb5148160177c20e0bb5a394b0d67a65"
+    },
+    {
+      "path": "build/recomp/record_steering_dispatch_full.log",
+      "sha256": "c3e5cfa3688718539b41a950aa7258ad320a607ea296ca4f5a431951ad14820f"
+    }
+  ]
+}

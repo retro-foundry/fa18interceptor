@@ -56,62 +56,6 @@ int glue_C1FB9C(void) {
     return glue_return();
 }
 
-/* ---- steering: D1 the stored byte, D2 the value ------------------------- */
-
-static void controls_regs(void) { SET_B(D(1), rd_u8(A(1) + 0x65)); }
-
-int glue_C2CAA0(void) {
-    steer_record_neutral(A(1));
-    D(2) = 0;
-    controls_regs();
-    return glue_return();
-}
-
-static void roll_regs(int16_t turn) { D(2) = turn == 0 ? 0 : turn < 0 ? 4 : 8; }
-
-int glue_C2CA92(void) {
-    int16_t turn = W(3);
-    steer_record_roll(A(1), turn);
-    roll_regs(turn);
-    controls_regs();
-    return glue_return();
-}
-
-int glue_C2CA26(void) {
-    gaddr r = A(1);
-    int16_t turn = W(3), heading = rd_s16(r + 0x6A);
-    uint8_t flags = rd_u8(r + 0x64);
-
-    steer_record_turn(r, turn);
-    SET_B(D(2), flags & 0x60);
-    if ((flags & 0x60) == 0x60) {
-        if (turn == 0 || (turn > 0 ? turn <= rd_s16(r + 0x58) : turn >= rd_s16(r + 0x58))) D(2) = 0;
-        else {
-            SET_B(D(2), turn > 0 ? 0x80 : 0x40);
-            SET_W(D(3), (uint16_t)heading);
-            if (heading > 0x3840) { if (heading <= 0x7030) SET_B(D(2), (uint8_t)D(2) | 8); }
-            else if (heading > 0x50) SET_B(D(2), (uint8_t)D(2) | 4);
-        }
-    } else {
-        int roll = 1;
-        if (flags & 0x80) {
-            SET_W(D(2), (uint16_t)heading);
-            if (heading > 0x3840) { if (heading <= 0x6EF0) { D(2) = 8; roll = 0; } }
-            else if (heading >= 0x190) { D(2) = 4; roll = 0; }
-        }
-        if (roll) roll_regs(turn);
-    }
-    controls_regs();
-    return glue_return();
-}
-
-int glue_C2CB86(void) {
-    gaddr r = A(1);
-    int16_t climb = W(3), limit = rd_s16(r + 0x56);
-    steer_record_pitch(r, climb);
-    D(2) = (climb >= 0 ? climb > limit : climb < limit) ? (climb >= 0 ? 0x10 : 0x20) : 0;
-    D(1) = rd_u8(r + 0x65);
-    return glue_return();
-}
+/* Complete record steering owners are in glue_record_steering.c. */
 
 /* $C21C2E: A2 stream. The second split's registers, then D0 = 0 (MOVEQ). */

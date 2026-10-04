@@ -968,3 +968,5 @@ int glue_C1ECFC_step(void);
 #include "glue_corner_view.h"
 
 #include "glue_control_readouts.h"
+
+#include "glue_record_steering.h"

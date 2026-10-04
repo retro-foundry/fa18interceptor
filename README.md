@@ -12,9 +12,20 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-539 translated game entries and seventy-three original source-only callable entries are
+539 translated game entries and seventy-five original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
+
+Six complete record-steering owners pass 98,304 whole CPU/PC/SR/RAM calls,
+covering all 72 boundaries across the original roll and pitch entries.
+Dispatch passes 18,432 calls; four existing owners pass normal C at 162
+shadow /162 sandbox, and two cold peers have separate whole-call proofs.
+The full 614-row gate, all 36,236 isolated live frames/seals and combined
+DMA at 30,239/967,648 pass. Source-timed entries rise to 543. See
+[record-steering proof](analysis/routines/native_c_record_steering.md).
+Whole display-record parents, the action dispatcher, older partial adapters
+and full original callback coverage remain game work. Kickstart services
+and timing remain deferred.
 
 Six complete control/readout owners pass 196,608 whole CPU/PC/SR/RAM calls,
 covering 866/867 boundaries with both child providers; the remaining clamp
