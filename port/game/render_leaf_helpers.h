@@ -8,7 +8,7 @@ typedef struct {
     gaddr registers,table,stream,descriptor,screen,modulo,frame,stack;
     int less,zero;
 } RenderLeafState;
-enum RenderLeafChild { RL_CALL_C2F5EA,RL_CALL_C2F616,RL_CALL_C2F61E,RL_CALL_C3028A,RL_CALL_C302B6,RL_CALL_C302CE,RL_CALL_C302D6,RL_CALL_C30324,RL_CALL_C3033C,RL_CALL_C2FEEC,RL_CALL_C2FEF4,RL_CALL_C2FF08,RL_CALL_C2FF1A };
+enum RenderLeafChild { RL_CALL_C2F5EA,RL_CALL_C2F616,RL_CALL_C2F61E,RL_CALL_C3028A,RL_CALL_C302B6,RL_CALL_C302CE,RL_CALL_C302D6,RL_CALL_C30324,RL_CALL_C3033C,RL_CALL_C2FEEC,RL_CALL_C2FEF4,RL_CALL_C2FF08,RL_CALL_C2FF1A,RL_CALL_C2F664 };
 enum RenderLeafPhase {
     RL_WORD,RL_BYTE,RL_LONG,RL_POINTER,RL_ADD_WORD,RL_SUB_WORD,RL_ADD_LONG,RL_SUB_LONG,RL_NEG_WORD,
     RL_SWAP,RL_EXT_WORD,RL_EXT_LONG,RL_ASL_WORD,RL_LSL_WORD,RL_ASR_WORD,RL_ASR_BYTE,RL_LSR_LONG,RL_ROR_WORD,
@@ -36,4 +36,10 @@ void render_leaf_line(RenderLeafState w,const RenderLeafHooks *h);
 void render_leaf_submit_planes(RenderLeafState w,const RenderLeafHooks *h);
 RenderLeafState render_leaf_polygon_x_extent(RenderLeafState w,const RenderLeafHooks *h);
 RenderLeafState render_leaf_polygon_y_extent(RenderLeafState w,const RenderLeafHooks *h);
+/* C2F688 callers supply one of the two original immutable writer tables. */
+void render_leaf_pixel_shared(RenderLeafState w,const RenderLeafHooks *h,unsigned rows);
+void render_leaf_square(RenderLeafState w,const RenderLeafHooks *h);
+void render_leaf_square_in_view(RenderLeafState w,const RenderLeafHooks *h);
+void render_leaf_polygon(RenderLeafState w,const RenderLeafHooks *h);
+void render_leaf_glyph8(RenderLeafState w,const RenderLeafHooks *h);
 #endif

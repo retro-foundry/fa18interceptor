@@ -12,9 +12,22 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-526 translated game entries and sixty-six original source-only callable entries are
+527 translated game entries and seventy-three original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
+
+Thirty-seven complete renderer entries and writer callbacks pass 1,212,416
+whole CPU/PC/SR/RAM calls and 65,536 independent cold-segment calls.
+Controlled whole calls cover 546/550 boundaries. Dispatch passes 113,664
+calls; thirty seeded owners pass normal C: 537,534 shadow /
+571,393 sandbox. Seven cold source-only writers have
+separate fixture evidence and remain uncalled in recordings. All 36,236
+isolated live frames/seals match; combined DMA passes 28,931/925,792.
+Source-timed entries rise to 518. See
+[renderer entry proof](analysis/routines/native_c_render_entry_helpers.md).
+Family frames match through 600; ALL remains 424/34,144. Complete selected-
+segment and projection/clipping owners are next; original function and
+callback coverage remains open. Kickstart services and timing are deferred.
 
 Twelve complete renderer-helper upgrades pass 393,216 whole CPU/PC/SR/RAM
 calls and 81,920 independent production-segment calls. Controlled whole
@@ -24,8 +37,8 @@ shadow / 530,198 sandbox. All 36,236 isolated live frames and seals match;
 combined DMA passes 28,931 / 925,792. Source-timed entries rise to 510.
 See [renderer-helper proof](analysis/routines/native_c_render_leaf_helpers.md).
 Family timing matches through 600; ALL remains 424 / 34,144 pixels.
-Thirty-seven renderer entries and writer callbacks are next; full original
-game-function and callback coverage remains open.
+Those thirty-seven renderer entries and callbacks are now complete above.
+Full original game-function and callback coverage remains open.
 
 Fifteen complete ground/HUD rendering upgrades pass 491,520 whole CPU/PC/SR/
 RAM calls and 32,768 independent production-segment calls. Controlled whole

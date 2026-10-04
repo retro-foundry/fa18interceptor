@@ -163,12 +163,7 @@ fill:
     return done(0);
 }
 
-int glue_C301F6(void) {
-    uint16_t last_size = custom_written(BLTSIZE);
-    (void)prepare_polygon();
-    (void)prepare_registers(last_size, rd_s16(LINE_LAST_ROW));
-    return glue_return();
-}
+
 
 int prepare_polygon_to_row_registers(uint16_t last_size) {
     return prepare_registers(last_size, 0xC7);

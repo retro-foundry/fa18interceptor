@@ -72,13 +72,49 @@ Fourteen complete tested/list/grid/lattice face and edge upgrades retain
 that translated count and raise source-timed entries to 494.
 Fifteen complete ground/HUD mark/panel/blit parent upgrades retain that
 translated count and raise source-timed entries to 509.
-Sixty-six original source-only callable entries are additionally recreated,
+Twelve complete renderer-helper upgrades retain that translated count and
+raise source-timed entries to 510. Thirty-seven complete renderer entries and
+writer callbacks now raise translated coverage to 527/624, source-only
+coverage to 73 and source-timed entries to 518.
+Seventy-three original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- Thirty-seven complete renderer entries/writer callbacks raise registration
+  to 527 translated plus 73 source-only entries: 600 rows, 518 source-timed
+  (445 translated plus 73 source-only). Twenty-nine existing owners are
+  upgraded, C2F688 is newly seeded and seven original table callbacks are
+  source-only. The scope is 550 unique /235 shared PCs, seven distinct /
+  eight per-owner child sites. All 1,212,416 whole CPU/PC/full-SR/RAM calls
+  pass; controlled coverage is 546/550, original-child union
+  546/550. Four cold NEG PCs have 65,536 separate
+  production-segment calls. Dispatch passes 113,664 calls; each mode has
+  zero hardware-bearing /37,888 hardware-free classifications and 6,912
+  actual Custom packets. Generated children resume hardware-event yields;
+  the retained initial harness failure confused that yield with failure.
+  Thirty seeded owners pass normal C: 537,534 shadow /
+  571,393 sandbox. Seven cold source-only callbacks have
+  zero recording calls and retain the unchanged generic rejection; their
+  complete-call/dispatch fixture proofs are separate. All twelve older
+  helpers pass normal-C regression at 423,745/530,198.
+  Full 600-row gate passes 568,446/443,870,
+  zero mismatches, exact seals and identical poison frames. All 36,236
+  isolated live frames/seals match. Local DMA passes 550/17,600; fresh
+  combined DMA passes 28,931/925,792, with all 550 PCs in the previous
+  union. All thirty-six older generators and shared core/observers are
+  unchanged. GNU/MSVC Release pass; build/ is 1.87 GiB.
+  Family frames match through 600; ALL remains 424/34,144. See
+  analysis/routines/native_c_render_entry_helpers.md and
+  analysis/figures/native_render_entry_helpers_checkpoint.json.
+  Next are C1FF9C/C1FFA4, C2ED70/C2EE4A and all eight rounded/truncated
+  crossing helpers. Original reading is complete; dynamic JSR contracts
+  still need sealing. Larger render parents, older partial adapters,
+  C2C392, C1612C graphics-wait integration and the full original cold/
+  indirect/callback graph remain game-function work. Goal is not complete.
 
 - Twelve complete renderer-helper upgrades retain 526 translated plus
   sixty-six source-only entries: 592 rows, now 510 source-timed (444

@@ -116,11 +116,7 @@ void square_registers(void) {
     flags_logic_w(D(0));
 }
 
-int glue_C2F64E(void) {
-    plot_square((int16_t)D(0), (int16_t)D(1));
-    square_registers();
-    return glue_return();
-}
+
 
 /* $C2F63A: moved by the view's origin first; a column outside 0..318
  * returns D2 = -1. */
@@ -134,10 +130,4 @@ void square_in_view_registers(void) {
     }
     SET_W(D(1), (uint16_t)(D(1) + rd_u16(REDRAW_STATE_WORD)));
     square_registers();
-}
-
-int glue_C2F63A(void) {
-    plot_square_in_view((int16_t)D(0), (int16_t)D(1));
-    square_in_view_registers();
-    return glue_return();
 }

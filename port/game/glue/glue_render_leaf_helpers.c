@@ -4,9 +4,10 @@
 #include "render_leaf_helpers.h"
 #include "hardware.h"
 #include "glue_unsigned_division_step.h"
-static RenderLeafState working(void) {
+RenderLeafState glue_render_leaf_state(void) {
     RenderLeafState w={D(0),D(1),D(2),D(3),D(4),D(5),D(6),D(7),A(0),A(1),A(2),A(3),A(4),A(5),A(6),A(7),COND_LT(),COND_EQ()}; return w;
 }
+#define working glue_render_leaf_state
 static RenderLeafState consume(void *context,enum RenderLeafChild child) {
     static const struct { uint32_t entry,ret; } sites[]={
         {0xc2f688,0xc2f5ee},
@@ -105,6 +106,7 @@ static void outputs(void *context,enum RenderLeafPhase phase,enum RenderLeafFiel
 }
 static RenderLeafState restored(void *context) { (void)context; return working(); }
 static const RenderLeafHooks hooks={consume,outputs,restored,NULL};
+const RenderLeafHooks *glue_render_leaf_hooks(void) { return &hooks; }
 int glue_C2F5C0(void) { render_leaf_pixel_in_view(working(),&hooks);return glue_return(); }
 int glue_C2F5D4(void) { render_leaf_pixel_restored(working(),&hooks);return glue_return(); }
 int glue_C2F5F4(void) { render_leaf_pixel(working(),&hooks);return glue_return(); }

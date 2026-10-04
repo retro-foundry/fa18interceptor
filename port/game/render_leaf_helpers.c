@@ -255,9 +255,9 @@ RenderLeafState render_leaf_polygon_y_extent(RenderLeafState w,const RenderLeafH
  int sum;W(offset,RL_OFFSET,w.secondary);sum=S16(w.offset)-S16(w.base);SW(offset,RL_OFFSET,w.base);if(sum<0)NEG(offset,RL_OFFSET);return w;
 }
 /* C301F0: complete polygon preparation, including tiny shapes and fill setup. */
-void render_leaf_polygon_to_row(RenderLeafState w,const RenderLeafHooks *h) {
+static void polygon_body(RenderLeafState w,const RenderLeafHooks *h) {
  int count,sum;
- P(screen,RL_SCREEN,199);P(registers,RL_REGISTERS,0xc4b390);W(size,RL_SIZE,rd_u16(w.registers));P(registers,RL_REGISTERS,w.registers+2);SW(size,RL_SIZE,3);
+ P(registers,RL_REGISTERS,0xc4b390);W(size,RL_SIZE,rd_u16(w.registers));P(registers,RL_REGISTERS,w.registers+2);SW(size,RL_SIZE,3);
  w=load_words(w,h,w.registers,0x3f);P(registers,RL_REGISTERS,w.registers+12);
  CW(w.value,w.control);if(S16(w.control)<S16(w.value))w=exchange(w,h,RL_VALUE,RL_CONTROL);
  CW(w.value,w.source);if(S16(w.source)<S16(w.value))W(value,RL_VALUE,w.source);else {CW(w.control,w.source);if(S16(w.source)>S16(w.control))W(control,RL_CONTROL,w.source);}
@@ -335,4 +335,43 @@ void render_leaf_submit_planes(RenderLeafState w,const RenderLeafHooks *h) {
  for(plane=0;plane<5;++plane){longword(h,w.screen,rd_u32(w.registers));P(registers,RL_REGISTERS,w.registers+4);P(screen,RL_SCREEN,w.screen+4);}return;
 drop_record:
  word(h,0xc4b432,0);
+}
+
+void render_leaf_polygon_to_row(RenderLeafState w,const RenderLeafHooks *h) {P(screen,RL_SCREEN,199);polygon_body(w,h);}
+void render_leaf_polygon(RenderLeafState w,const RenderLeafHooks *h) {P(screen,RL_SCREEN,SADDR(rd_u16(0xc45984)));polygon_body(w,h);}
+void render_leaf_pixel_shared(RenderLeafState w,const RenderLeafHooks *h,unsigned rows) {pixel_body(w,h,rows);}
+
+/* C2F64E: actual two-row child, preserving each original word stack slot. */
+void render_leaf_square(RenderLeafState w,const RenderLeafHooks *h) {
+ w=push_word(w,h,(uint16_t)w.value);w=push_word(w,h,(uint16_t)w.base);
+ P(table,RL_TABLE,rd_u32(0xc456b6));P(descriptor,RL_DESCRIPTOR,0xc2f7c6);P(screen,RL_SCREEN,0xc2f7e6);
+ w=consume(h,RL_CALL_C2F664);w=pop_word(w,h,RL_BASE);w=pop_word(w,h,RL_VALUE);
+}
+/* C2F63A: ADD's signed overflow condition precedes the 319-column bound. */
+void render_leaf_square_in_view(RenderLeafState w,const RenderLeafHooks *h) {
+ int sum=S16(w.value)+rd_s16(0xc45988);AW(value,RL_VALUE,rd_u16(0xc45988));
+ if(sum<0){L(control,RL_CONTROL,0xffffffffu);return;}
+ CW(319,w.value);if(S16(w.value)>=319){L(control,RL_CONTROL,0xffffffffu);return;}
+ AW(base,RL_BASE,rd_u16(0xc458d8));render_leaf_square(w,h);
+}
+
+/* C330FE: eight-pixel glyph, individual long saves and original DBRA count. */
+void render_leaf_glyph8(RenderLeafState w,const RenderLeafHooks *h) {
+ unsigned mode,n;uint16_t b;
+ w=push_long(w,h,w.value);w=push_long(w,h,w.size);
+ SWAP(control,RL_CONTROL);W(control,RL_CONTROL,w.secondary);SWAP(control,RL_CONTROL);
+ W(size,RL_SIZE,w.offset);P(registers,RL_REGISTERS,w.source);P(descriptor,RL_DESCRIPTOR,w.base);
+ w.size=low_word(w.size,(uint16_t)w.size>>6);observe(h,RL_LSR_WORD,RL_SIZE,6,0);SW(size,RL_SIZE,1);W(value,RL_VALUE,w.control);
+ b=(uint16_t)w.control;w.control=low_word(w.control,(uint16_t)((b<<4)|(b>>12)));observe(h,RL_ROL_WORD,RL_CONTROL,4,0);
+ ANDW(control,RL_CONTROL,15);ANDW(value,RL_VALUE,0xf0);mode=(uint16_t)w.value;
+ do {
+  L(value,RL_VALUE,0);B(value,RL_VALUE,rd_u8(w.registers));ASL(value,RL_VALUE,8);SWAP(value,RL_VALUE);
+  L(secondary,RL_SECONDARY,rd_u32(w.descriptor));n=(unsigned)w.control&63u;
+  w.value=n<32?w.value>>n:0;observe(h,RL_LSR_LONG,RL_VALUE,n,0);
+  L(value,RL_VALUE,~w.value);ANDL(secondary,RL_SECONDARY,w.value);
+  if(mode){L(value,RL_VALUE,~w.value);L(secondary,RL_SECONDARY,w.secondary|w.value);}
+  longword(h,w.descriptor,w.secondary);P(registers,RL_REGISTERS,w.registers+1);P(descriptor,RL_DESCRIPTOR,w.descriptor+40);
+ }while(dbra(&w.size,h,RL_SIZE));
+ SWAP(control,RL_CONTROL);W(secondary,RL_SECONDARY,w.control);SWAP(size,RL_SIZE);
+ observe(h,RL_POP_LONG,RL_SIZE,0,0);w=restored(h);observe(h,RL_POP_LONG,RL_VALUE,0,0);
 }

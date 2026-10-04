@@ -1,5 +1,8 @@
 #ifndef FA18_GLUE_RENDER_LEAF_HELPERS_H
 #define FA18_GLUE_RENDER_LEAF_HELPERS_H
+#include "render_leaf_helpers.h"
+RenderLeafState glue_render_leaf_state(void);
+const RenderLeafHooks *glue_render_leaf_hooks(void);
 int glue_C2F5C0(void);
 int glue_C2F5C0_complete_step(void);
 int glue_C2F5C0_owns(uint32_t pc);
